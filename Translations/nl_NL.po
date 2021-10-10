@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2021-10-10 09:29\n"
+"PO-Revision-Date: 2021-10-10 09:37\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -151,58 +151,58 @@ msgid "Resize Canvas"
 msgstr "Canvas formaat aanpassen"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Afbeelding centreren"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Afbeelding draaien"
 
 msgid "Clear"
-msgstr ""
+msgstr "Wissen"
 
 msgid "Invert"
-msgstr ""
+msgstr "Omkeren"
 
 msgid "Flip"
-msgstr ""
+msgstr "Spiegelen"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Horizontaal spiegelen"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Verticaal spiegelen"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Instellingen"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Tegelmodus"
 
 msgid "Window Transparency"
-msgstr ""
+msgstr "Vensterdoorzichtigheid"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Paneelindeling"
 
 msgid "Auto"
-msgstr ""
+msgstr "Automatisch"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Breedbeeld"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Verticaal beeld"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Canvas spiegelen"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Rooster tonen"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Pixelrooster tonen"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Linialen tonen"
 
 msgid "Show Guides"
 msgstr ""
