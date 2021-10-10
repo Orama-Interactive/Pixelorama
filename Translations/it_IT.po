@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-10-10 18:49\n"
+"PO-Revision-Date: 2021-10-10 21:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -624,7 +624,7 @@ msgid "Issue Tracker"
 msgstr "Tracker dei Problemi"
 
 msgid "Open Logs Folder"
-msgstr ""
+msgstr "Apri Cartella Log"
 
 msgid "Changelog"
 msgstr "Novità"
