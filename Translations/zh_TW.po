@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2021-09-29 15:04\n"
+"PO-Revision-Date: 2021-10-10 18:48\n"
 
 msgid "OK"
 msgstr "確定"
@@ -621,6 +621,9 @@ msgstr "線上文件"
 
 msgid "Issue Tracker"
 msgstr "回報問題"
+
+msgid "Open Logs Folder"
+msgstr ""
 
 msgid "Changelog"
 msgstr "更新紀錄"
