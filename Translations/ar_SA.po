@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2021-09-30 00:37\n"
+"PO-Revision-Date: 2021-10-10 18:49\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -622,6 +622,9 @@ msgstr "التعليمات عبر الانترنت"
 
 msgid "Issue Tracker"
 msgstr "متعقب المشاكل"
+
+msgid "Open Logs Folder"
+msgstr ""
 
 msgid "Changelog"
 msgstr "سِجل التغييرات"
