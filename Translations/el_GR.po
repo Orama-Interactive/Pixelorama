@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-09-29 15:05\n"
+"PO-Revision-Date: 2021-10-10 18:49\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -622,6 +622,9 @@ msgstr "Ηλεκτρονική τεκμηρίωση"
 
 msgid "Issue Tracker"
 msgstr "Καταγραφές προβλημάτων"
+
+msgid "Open Logs Folder"
+msgstr ""
 
 msgid "Changelog"
 msgstr "Καταγραφές αλλαγών"
