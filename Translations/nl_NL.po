@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2021-09-29 15:04\n"
+"PO-Revision-Date: 2021-10-10 09:29\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -28,10 +28,10 @@ msgid "Please Confirm..."
 msgstr "Bevestig..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Bestandsnaam:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Projectnaam:"
 
 msgid "Image Size"
 msgstr "Afbeeldingsgrootte"
@@ -40,10 +40,10 @@ msgid "Canvas Size"
 msgstr "Canvas grootte"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Kaderomvang"
 
 msgid "Size:"
-msgstr ""
+msgstr "Omvang:"
 
 msgid "Width:"
 msgstr "Breedte:"
@@ -52,7 +52,7 @@ msgid "Height:"
 msgstr "Hoogte:"
 
 msgid "Center"
-msgstr ""
+msgstr "Centreren"
 
 msgid "File"
 msgstr "Bestand"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Wijzigen"
 
 msgid "Select"
-msgstr ""
+msgstr "Selecteren"
 
 msgid "View"
 msgstr "Tonen"
@@ -91,7 +91,7 @@ msgid "Save as..."
 msgstr "Opslaan als..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "ZSTD-compressie gebruiken"
 
 msgid "Import"
 msgstr "Importeren"
@@ -124,7 +124,7 @@ msgid "Copy"
 msgstr "Kopiëren"
 
 msgid "Cut"
-msgstr ""
+msgstr "Knippen"
 
 msgid "Paste"
 msgstr "Plakken"
@@ -133,16 +133,16 @@ msgid "Delete"
 msgstr "Verwijderen"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Nieuwe kwast"
 
 msgid "Scale Image"
 msgstr "Afbeelding schalen"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pixels"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Percentage"
 
 msgid "Crop Image"
 msgstr "Afbeelding bijsnijden"
