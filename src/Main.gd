@@ -401,3 +401,7 @@ func _on_BackupConfirmation_delete(project_paths : Array, backup_paths : Array) 
 	# Reopen last project
 	if Global.open_last_project:
 		load_last_project()
+
+
+func _on_BackupConfirmation_popup_hide() -> void:
+	OpenSave.autosave_timer.start()
