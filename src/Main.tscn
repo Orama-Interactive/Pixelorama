@@ -108,6 +108,7 @@ rect_min_size = Vector2( 250, 87.5 )
 popup_exclusive = true
 dialog_text = "Autosaved backup for %s was found.
 Do you want to reload it?"
+dialog_autowrap = true
 
 [node name="FrameProperties" parent="Dialogs" instance=ExtResource( 9 )]
 
