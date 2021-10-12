@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-10-10 18:48\n"
+"PO-Revision-Date: 2021-10-12 16:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -624,7 +624,7 @@ msgid "Issue Tracker"
 msgstr "課題管理"
 
 msgid "Open Logs Folder"
-msgstr ""
+msgstr "ログフォルダーを開く"
 
 msgid "Changelog"
 msgstr "更新履歴"
