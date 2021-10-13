@@ -10,6 +10,7 @@ Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar 
 
 ### Added
 - Pixelorama is now available on the [Open Store](https://open-store.io/app/pixelorama.orama-interactive) for Ubuntu Touch. [#517](https://github.com/Orama-Interactive/Pixelorama/pull/517)
+- Added an opacity option in the Eraser's tool options, which lets the user change the strength of the tool.
 - A timer has been added in the HSV and Rotation image effect dialogs that let the user change the delay between the preview refresh, in order to prevent performance issues. [#531](https://github.com/Orama-Interactive/Pixelorama/pull/531)
 - New left and right arrows on the splash screen to switch between the different artworks. [#538](https://github.com/Orama-Interactive/Pixelorama/pull/538)
 - New setting in the Preferences that lets the user change the idle FPS. [#543](https://github.com/Orama-Interactive/Pixelorama/pull/543)
@@ -22,6 +23,8 @@ Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar 
 - Fixed issue with copying and pasting content between projects of different sizes.
 - Fixed issues with guides and notifications not working properly when the UI is scaled.
 - A bug was fixed where when the user has another application as their focus and reenters Pixelorama with the mouse but not focusing it and then exiting with the mouse, the target FPS would be set to the standard. [#543](https://github.com/Orama-Interactive/Pixelorama/pull/543)
+- Fixed issue with the backup confirmation dialog extending horizontally infinitely, which made the buttons disappear.
+- Pressing X on the backup confirmation dialog should start the backup autosave timer.
 
 ## [v0.9] - 2021-09-18
 This update has been brought to you by the contributions of:
