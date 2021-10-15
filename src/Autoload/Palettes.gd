@@ -54,6 +54,7 @@ func does_palette_exist(palette_name: String) -> bool:
 func select_palette(palette_path: String) -> void:
 	current_palette = palettes.get(palette_path)
 	clear_selected_colors()
+	Global.config_cache.set_value("data", "last_palette", current_palette.name)
 
 
 func is_any_palette_selected() -> bool:
@@ -304,6 +305,7 @@ func load_palettes() -> void:
 	# get overwritten by those of the same name in user files
 	search_locations.invert()
 	priority_ordered_files.invert()
+	var default_palette_name = Global.config_cache.get_value("data", "last_palette", DEFAULT_PALETTE_NAME)
 	for i in range(len(search_locations)):
 		# If palette is not in palettes write path - make it's copy in the write path
 		var make_copy := false
@@ -324,7 +326,7 @@ func load_palettes() -> void:
 				palettes[palette.resource_path] = palette
 
 				# Store index of the default palette
-				if palette.name == DEFAULT_PALETTE_NAME:
+				if palette.name == default_palette_name:
 					select_palette(palette.resource_path)
 
 	if not current_palette && palettes.size() > 0:
