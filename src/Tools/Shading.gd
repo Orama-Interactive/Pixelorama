@@ -253,3 +253,8 @@ func _draw_brush_image(image : Image, src_rect: Rect2, dst: Vector2) -> void:
 				var pos := Vector2(xx, yy) + dst - src_rect.position
 				_set_pixel(pos, true)
 	image.unlock()
+
+
+func update_brush() -> void:
+	.update_brush()
+	$ColorInterpolation.visible = false
