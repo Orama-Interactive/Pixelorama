@@ -98,5 +98,5 @@ func _on_Opacity_value_changed(value: float) -> void:
 
 func update_config() -> void:
 	.update_config()
-	$OpacitySpinBox.value = _strength * 255
-	$OpacitySlider.value = _strength * 255
+	$Opacity/OpacitySpinBox.value = _strength * 255
+	$Opacity/OpacitySlider.value = _strength * 255
