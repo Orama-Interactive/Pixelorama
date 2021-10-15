@@ -611,6 +611,9 @@ msgstr ""
 msgid "Issue Tracker"
 msgstr ""
 
+msgid "Open Logs Folder"
+msgstr ""
+
 msgid "Changelog"
 msgstr ""
 
