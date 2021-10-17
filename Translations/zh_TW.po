@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2021-10-10 18:48\n"
+"PO-Revision-Date: 2021-10-17 04:57\n"
 
 msgid "OK"
 msgstr "確定"
@@ -184,7 +184,7 @@ msgid "Panel Layout"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
+msgstr "自動"
 
 msgid "Widescreen"
 msgstr ""
@@ -503,7 +503,7 @@ msgid "Purple"
 msgstr "紫色"
 
 msgid "Theme"
-msgstr ""
+msgstr "主題"
 
 msgid "Icon color from:"
 msgstr ""
@@ -515,10 +515,10 @@ msgid "Tool button size:"
 msgstr ""
 
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 msgid "Big"
-msgstr ""
+msgstr "大"
 
 msgid "Only affect selection"
 msgstr "只處理選取區塊"
@@ -1626,7 +1626,7 @@ msgid "Select By Color"
 msgstr ""
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "魔術棒"
 
 msgid "Lasso / Free Select Tool"
 msgstr ""
@@ -1656,10 +1656,10 @@ msgid "Shading Tool"
 msgstr ""
 
 msgid "Line Tool"
-msgstr ""
+msgstr "直線工具"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "矩形工具"
 
 msgid "Ellipse Tool"
 msgstr ""
