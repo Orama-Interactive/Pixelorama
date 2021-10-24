@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-10-10 18:48\n"
+"PO-Revision-Date: 2021-10-24 23:59\n"
 
 msgid "OK"
 msgstr "예"
@@ -624,7 +624,7 @@ msgid "Issue Tracker"
 msgstr "이슈 트래커"
 
 msgid "Open Logs Folder"
-msgstr ""
+msgstr "로그 폴더 열기"
 
 msgid "Changelog"
 msgstr "변경 사항"
@@ -1124,7 +1124,7 @@ msgid "Sets the limit of the application's frames per second. The lower the numb
 msgstr "프로그램의 FPS를 제한합니다. 숫자가 낮을수록, CPU 사용량은 낮아지지만 프로그램의 속도가 느려지고, 거칠어지고 응답하지 않습니다. 0은 제한이 없음을 의미합니다"
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "이 옵션을 켜면 프로그램 창의 관심이 없을때 프로그램의 FPS 제한이 1로 설정됩니다. 이렇게 하면 프로그램을 안 쓰고 있을때 CPU 사용량을 줄일 수 있습니다. 마우스가 프로그램의 창에 들어갈 때 FPS 제한이 재설정 됩니다"
 
 msgid "Brush:"
 msgstr "브러시:"
@@ -1846,7 +1846,7 @@ msgid "Position:"
 msgstr "위치:"
 
 msgid "Set idle FPS:"
-msgstr ""
+msgstr "무관심 창의 FPS 제한:"
 
 msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
 msgstr ""
