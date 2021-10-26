@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-10-26 00:41\n"
+"PO-Revision-Date: 2021-10-26 05:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1768,7 +1768,8 @@ msgstr "Ștergere"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "Au fost găsite proiecte salvate automat de la o sesiune căzută.\n"
+"Dorești să recuperezi datele?"
 
 msgid "Backup reloaded"
 msgstr "Copie de rezervă reîncărcată"
