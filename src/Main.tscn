@@ -102,12 +102,12 @@ window_title = "Error"
 dialog_text = "This is an error message!"
 
 [node name="BackupConfirmation" type="ConfirmationDialog" parent="Dialogs"]
-margin_right = 349.0
+margin_right = 200.0
 margin_bottom = 88.0
-rect_min_size = Vector2( 250, 87.5 )
 popup_exclusive = true
-dialog_text = "Autosaved backup for %s was found.
-Do you want to reload it?"
+resizable = true
+dialog_text = "Autosaved project(s) from a crashed session were found.
+Do you want to recover the data?"
 dialog_autowrap = true
 
 [node name="FrameProperties" parent="Dialogs" instance=ExtResource( 9 )]

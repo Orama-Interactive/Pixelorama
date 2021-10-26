@@ -262,7 +262,6 @@ func handle_backup() -> void:
 				backup_paths.append(Global.config_cache.get_value("backups", p_path))
 			# Temporatily stop autosave until user confirms backup
 			OpenSave.autosave_timer.stop()
-			backup_confirmation.dialog_text = tr(backup_confirmation.dialog_text) % project_paths
 			backup_confirmation.connect("confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths, backup_paths])
 			backup_confirmation.get_cancel().connect("pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths])
 			backup_confirmation.popup_centered()

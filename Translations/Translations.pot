@@ -1697,8 +1697,8 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
 msgstr ""
 
 msgid "Backup reloaded"
