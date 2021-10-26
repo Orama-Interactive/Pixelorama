@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-10-26 00:41\n"
+"PO-Revision-Date: 2021-10-26 06:51\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1768,7 +1768,8 @@ msgstr "删除"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "从崩溃的会话中找到了自动保存的项目。\n"
+"您要恢复数据吗？"
 
 msgid "Backup reloaded"
 msgstr "重新加载备份"
