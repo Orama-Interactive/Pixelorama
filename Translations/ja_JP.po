@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-10-26 00:40\n"
+"PO-Revision-Date: 2021-10-26 03:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1768,7 +1768,8 @@ msgstr "削除"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "クラッシュしたセッションから自動保存されたプロジェクトが見つかりました。\n"
+"データを復元しますか？"
 
 msgid "Backup reloaded"
 msgstr "バックアップを再読み込みしました"
