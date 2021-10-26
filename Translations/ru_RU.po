@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-10-26 00:40\n"
+"PO-Revision-Date: 2021-10-26 01:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1768,7 +1768,8 @@ msgstr "Удалить"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "Найдены автоматически сохранённые проекты (проект) из аварийно завершённой сессии.\n"
+"Восстановить данные?"
 
 msgid "Backup reloaded"
 msgstr "Резервная копия восстановлена"
