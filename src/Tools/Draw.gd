@@ -106,6 +106,7 @@ func update_brush() -> void:
 	_polylines = _create_polylines(_indicator)
 	$Brush/Type/Texture.texture = _brush_texture
 	$ColorInterpolation.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
+	clear_cache()
 
 
 func update_random_image() -> void:
@@ -144,6 +145,7 @@ func update_line_polylines(start : Vector2, end : Vector2) -> void:
 
 func prepare_undo() -> void:
 	_undo_data = _get_undo_data()
+	clear_cache()
 
 
 func commit_undo(action : String) -> void:
@@ -331,8 +333,21 @@ func draw_indicator_at(position : Vector2, offset : Vector2, color : Color) -> v
 			canvas.draw_polyline(pool, color)
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
+var cache = {}
+
+func cache_pixel(position : Vector2) -> void:
+	cache[position] = true
+
+func clear_cache() -> void:
+	cache = {}
+
+func is_cached(position : Vector2) -> bool:
+	return cache.get(position, false)
 
 func _set_pixel(position : Vector2, ignore_mirroring := false) -> void:
+	if is_cached(position):
+		return
+
 	var project : Project = Global.current_project
 	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
@@ -350,6 +365,7 @@ func _set_pixel(position : Vector2, ignore_mirroring := false) -> void:
 	else:
 		for image in images:
 			_drawer.set_pixel(image, position, tool_slot.color, ignore_mirroring)
+	cache_pixel(position)
 
 
 func _draw_brush_image(_image : Image, _src_rect: Rect2, _dst: Vector2) -> void:
