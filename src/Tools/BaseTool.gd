@@ -148,3 +148,32 @@ func _add_polylines_segment(lines : Array, start : Vector2, end : Vector2) -> vo
 			line.append(start)
 			return
 	lines.append([start, end])
+
+
+class Cache:
+	var cache = {}
+	
+	func clear():
+		self.cache = {}
+	
+	func store(position: Vector2):
+		self.cache[position] = true
+	
+	func is_cached(position: Vector2) -> bool:
+		return self.cache.get(position, false)
+
+
+var cache = Cache.new()
+
+
+func draw_start(_position : Vector2) -> void:
+	pass
+	
+	
+func draw_move(_position : Vector2) -> void:
+	pass
+	
+	
+func draw_end(_position : Vector2) -> void:
+	cache.clear()
+

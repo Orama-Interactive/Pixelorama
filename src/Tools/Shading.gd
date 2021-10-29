@@ -200,6 +200,7 @@ func update_strength() -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	.draw_start(position)
 	Global.canvas.selection.transform_content_confirm()
 	update_mask(false)
 	_changed = false
@@ -221,6 +222,7 @@ func draw_start(position : Vector2) -> void:
 
 
 func draw_move(position : Vector2) -> void:
+	.draw_move(position)
 	if _draw_line:
 		var d = _line_angle_constraint(_line_start, position)
 		_line_end = d.position
@@ -233,7 +235,8 @@ func draw_move(position : Vector2) -> void:
 		Global.canvas.sprite_changed_this_frame = true
 
 
-func draw_end(_position : Vector2) -> void:
+func draw_end(position : Vector2) -> void:
+	.draw_end(position)
 	if _draw_line:
 		draw_tool(_line_start)
 		draw_fill_gap(_line_start, _line_end)

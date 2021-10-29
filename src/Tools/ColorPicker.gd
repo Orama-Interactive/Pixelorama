@@ -25,15 +25,13 @@ func update_config() -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	.draw_start(position)
 	_pick_color(position)
 
 
 func draw_move(position : Vector2) -> void:
+	.draw_move(position)
 	_pick_color(position)
-
-
-func draw_end(_position : Vector2) -> void:
-	pass
 
 
 func _pick_color(position : Vector2) -> void:

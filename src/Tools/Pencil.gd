@@ -55,6 +55,7 @@ func update_config() -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	.draw_start(position)
 	Global.canvas.selection.transform_content_confirm()
 	update_mask()
 	_changed = false
@@ -80,6 +81,7 @@ func draw_start(position : Vector2) -> void:
 
 
 func draw_move(position : Vector2) -> void:
+	.draw_move(position)
 	if _draw_line:
 		var d = _line_angle_constraint(_line_start, position)
 		_line_end = d.position
@@ -94,14 +96,15 @@ func draw_move(position : Vector2) -> void:
 			_draw_points.append(position)
 
 
-func draw_end(_position : Vector2) -> void:
+func draw_end(position : Vector2) -> void:
+	.draw_end(position)
 	if _draw_line:
 		draw_tool(_line_start)
 		draw_fill_gap(_line_start, _line_end)
 		_draw_line = false
 	else:
 		if _fill_inside:
-			_draw_points.append(_position)
+			_draw_points.append(position)
 			if _draw_points.size() > 3:
 				var v = Vector2()
 				var image_size = Global.current_project.size

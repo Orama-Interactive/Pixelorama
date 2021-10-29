@@ -84,6 +84,7 @@ func _input(event : InputEvent) -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	.draw_start(position)
 	Global.canvas.selection.transform_content_confirm()
 	update_mask()
 
@@ -94,6 +95,7 @@ func draw_start(position : Vector2) -> void:
 
 
 func draw_move(position : Vector2) -> void:
+	.draw_move(position)
 	if _drawing:
 		if _displace_origin:
 			_start += position - _offset
@@ -103,6 +105,7 @@ func draw_move(position : Vector2) -> void:
 
 
 func draw_end(position : Vector2) -> void:
+	.draw_end(position)
 	if _drawing:
 		_draw_shape(_start, position)
 

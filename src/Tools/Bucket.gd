@@ -94,6 +94,7 @@ func update_pattern() -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	.draw_start(position)
 	Global.canvas.selection.transform_content_confirm()
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn() or !Global.current_project.tile_mode_rects[Global.TileMode.NONE].has_point(position):
 		return
@@ -105,14 +106,6 @@ func draw_start(position : Vector2) -> void:
 	else:
 		fill_in_color(position)
 	commit_undo("Draw", undo_data)
-
-
-func draw_move(_position : Vector2) -> void:
-	pass
-
-
-func draw_end(_position : Vector2) -> void:
-	pass
 
 
 func fill_in_color(position : Vector2) -> void:

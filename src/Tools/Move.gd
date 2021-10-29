@@ -28,6 +28,7 @@ func _input(event : InputEvent) -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	.draw_start(position)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	_start_pos = position
@@ -39,6 +40,7 @@ func draw_start(position : Vector2) -> void:
 
 
 func draw_move(position : Vector2) -> void:
+	.draw_move(position)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	# This is true if content transformation has been confirmed (pressed Enter for example)
@@ -63,6 +65,7 @@ func draw_move(position : Vector2) -> void:
 
 
 func draw_end(position : Vector2) -> void:
+	.draw_end(position)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	if _start_pos != Vector2.INF and _content_transformation_check == selection_node.is_moving_content:

@@ -27,6 +27,7 @@ func _input(event : InputEvent) -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	.draw_start(position)
 	if !$DoubleClickTimer.is_stopped():
 		return
 	.draw_start(position)
@@ -37,12 +38,14 @@ func draw_start(position : Vector2) -> void:
 
 
 func draw_move(position : Vector2) -> void:
+	.draw_move(position)
 	if selection_node.arrow_key_move:
 		return
 	.draw_move(position)
 
 
 func draw_end(position : Vector2) -> void:
+	.draw_end(position)
 	if selection_node.arrow_key_move:
 		return
 	if !_move and _draw_points:
