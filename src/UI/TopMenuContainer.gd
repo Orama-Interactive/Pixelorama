@@ -91,6 +91,7 @@ func setup_edit_menu() -> void:
 		edit_menu.add_item(item, i, edit_menu_items[item])
 		i += 1
 
+	edit_menu.set_item_disabled(6, true)
 	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
 
 
