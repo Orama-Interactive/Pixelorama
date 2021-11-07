@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-11-07 17:58\n"
+"PO-Revision-Date: 2021-11-07 18:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1117,7 +1117,7 @@ msgid "Set application FPS limit:"
 msgstr "Sett prorgammets grense for bilder per sekund:"
 
 msgid "Limit FPS to the idle FPS when app loses focus"
-msgstr "Begrens til ett bilde per sekund når programmet mister fokus"
+msgstr "Begrens BPS til inaktiv BPS når programmet mister fokus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Setter grensen for hvor mange bilder per sekund programmet kan ha. Lavere tall bruker mindre prosessorkraft, men programmet går saktere, mer hakkete og kan slutte å svare. 0 betyr at det ikke er noen grense."
@@ -1764,7 +1764,8 @@ msgstr "Slett"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "Fant prosjekt(er) som ble automatisk lagret før en programfeil oppsto.\n"
+"Vil du gjenoprette?"
 
 msgid "Backup reloaded"
 msgstr "Sikkerhetskopien lastet inn"
@@ -1845,5 +1846,5 @@ msgid "Set idle FPS:"
 msgstr "Sett inaktiv BPS:"
 
 msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
-msgstr ""
+msgstr "Angir hvor mange BPS Pixelorama bruker når det ligger i bakgrunnen. Færre BPS gir bedre ytelse."
 
