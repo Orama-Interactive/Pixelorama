@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-10-26 00:41\n"
+"PO-Revision-Date: 2021-11-07 00:48\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1119,13 +1119,13 @@ msgid "Set application FPS limit:"
 msgstr "Ορισμός ορίου FPS εφαρμογής:"
 
 msgid "Limit FPS to the idle FPS when app loses focus"
-msgstr ""
+msgstr "Περιορισμός FPS (καρέ ανά δευτερόλεπτο) στα αδρανή FPS όταν η εφαρμογή χάνει την εστίαση"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Ορίζει το όριο των καρέ της εφαρμογής ανά δευτερόλεπτο. Όσο μικρότερος είναι ο αριθμός, τόσο χαμηλότερη είναι η χρήση της CPU, αλλά η εφαρμογή γίνεται πιο αργή, ασταθής και λιγότερο ανταποκρινόμενη. 0 σημαίνει ότι δεν υπάρχει όριο."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Αν είναι ενεργοποιημένο, όταν το παράθυρο της εφαρμογής χάνει την εστίαση του, το όριο FPS της εφαρμογής ορίζεται στα αδρανή FPS. Αυτό βοηθά στη μείωση της χρήσης του CPU όταν είναι αδρανής. Το όριο FPS επαναφέρεται όταν το ποντίκι εισέρχεται στο παράθυρο της εφαρμογής."
 
 msgid "Brush:"
 msgstr "Πινέλο:"
@@ -1768,7 +1768,8 @@ msgstr "Διαγραφή"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "Βρέθηκαν αυτόματα αποθηκευμένα έργα από μια συνεδρία που είχε καταρρεύσει.\n"
+"Θέλετε να ανακτήσετε τα δεδομένα;"
 
 msgid "Backup reloaded"
 msgstr "Το αντίγραφο ασφαλείας επαναφορτώθηκε"
@@ -1846,8 +1847,8 @@ msgid "Position:"
 msgstr "Θέση:"
 
 msgid "Set idle FPS:"
-msgstr ""
+msgstr "Ορισμός FPS σε αδράνεια:"
 
 msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
-msgstr ""
+msgstr "Ορίζει πόσα καρέ ανά δευτερόλεπτο (FPS) χρησιμοποιεί το Pixelorama όταν είναι εκτός εστίασης. Όσο λιγότερα, τόσο καλύτερη είναι η απόδοση."
 
