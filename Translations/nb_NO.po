@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-11-07 18:09\n"
+"PO-Revision-Date: 2021-11-07 18:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1114,7 +1114,7 @@ msgid "Only custom preset can be modified"
 msgstr "Bare egendefinerte forhåndsinnstillinger kan endres"
 
 msgid "Set application FPS limit:"
-msgstr "Sett prorgammets grense for bilder per sekund:"
+msgstr "Sett prorgammets grense for Bilder Per Sekund, BPS:"
 
 msgid "Limit FPS to the idle FPS when app loses focus"
 msgstr "Begrens BPS til inaktiv BPS når programmet mister fokus"
@@ -1123,7 +1123,7 @@ msgid "Sets the limit of the application's frames per second. The lower the numb
 msgstr "Setter grensen for hvor mange bilder per sekund programmet kan ha. Lavere tall bruker mindre prosessorkraft, men programmet går saktere, mer hakkete og kan slutte å svare. 0 betyr at det ikke er noen grense."
 
 msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr ""
+msgstr "Hvis denne er påslått og programmet mister fokus vil programmet blir begrenset til inaktiv BPS. Dette gjør så programmet bruker mindre prosessorkraft ved inaktivitet. Programmet vil gå tilbake til normalt når musepekeren går inn i programmets vindu."
 
 msgid "Brush:"
 msgstr "Børste:"
