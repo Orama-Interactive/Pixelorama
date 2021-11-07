@@ -12,10 +12,13 @@ Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar 
 - Pixelorama is now available on the [Open Store](https://open-store.io/app/pixelorama.orama-interactive) for Ubuntu Touch. [#517](https://github.com/Orama-Interactive/Pixelorama/pull/517)
 - Added an opacity option in the Eraser's tool options, which lets the user change the strength of the tool.
 - A timer has been added in the HSV and Rotation image effect dialogs that let the user change the delay between the preview refresh, in order to prevent performance issues. [#531](https://github.com/Orama-Interactive/Pixelorama/pull/531)
+- The zoom tool behavior has been enhanced, clicking and dragging to the left now zooms out, and clicking and dragging to the right zooms in. [#540](https://github.com/Orama-Interactive/Pixelorama/discussions/540)
 - New left and right arrows on the splash screen to switch between the different artworks. [#538](https://github.com/Orama-Interactive/Pixelorama/pull/538)
 - New setting in the Preferences that lets the user change the idle FPS. [#543](https://github.com/Orama-Interactive/Pixelorama/pull/543)
 - Added a README file for the macOS version that provides more information regarding the Gatekeeper. [#545](https://github.com/Orama-Interactive/Pixelorama/pull/545)
 - Added an "Open Logs Folder" option in the Help menu. [#546](https://github.com/Orama-Interactive/Pixelorama/pull/546)
+- The step of the UI scale slider has been changed to 0.25 from 0.1.
+- "New Brush" in the Edit menu is now disabled when there is no active selection.
 
 ### Fixed
 - Removing a project tab that is on the left of the currently active tab will no longer result in a crash when attempting to save.
@@ -23,8 +26,10 @@ Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar 
 - Fixed issue with copying and pasting content between projects of different sizes.
 - Fixed issues with guides and notifications not working properly when the UI is scaled.
 - A bug was fixed where when the user has another application as their focus and reenters Pixelorama with the mouse but not focusing it and then exiting with the mouse, the target FPS would be set to the standard. [#543](https://github.com/Orama-Interactive/Pixelorama/pull/543)
-- Fixed issue with the backup confirmation dialog extending horizontally infinitely, which made the buttons disappear.
+- Fixed issue with the backup confirmation dialog extending horizontally infinitely, which made the buttons disappear. Its text has also been changed.
 - Pressing X on the backup confirmation dialog should start the backup autosave timer.
+- The "Brush color from" tool option no longer appears in the Shading tool's options.
+- Fixed Alt-Tab causing the cursor to get stuck. [#552](https://github.com/Orama-Interactive/Pixelorama/issues/552)
 
 ## [v0.9] - 2021-09-18
 This update has been brought to you by the contributions of:
