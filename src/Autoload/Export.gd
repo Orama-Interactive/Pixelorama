@@ -185,7 +185,7 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 	else:
 		for i in range(processed_images.size()):
 			if OS.get_name() == "HTML5":
-				Html5FileExchange.save_image(processed_images[i], export_paths[i].get_file())
+				JavaScript.download_buffer(processed_images[i].save_png_to_buffer(), export_paths[i].get_file(), "image/png")
 			else:
 				var err = processed_images[i].save_png(export_paths[i])
 				if err != OK:
@@ -228,7 +228,7 @@ func export_gif(args: Dictionary) -> void:
 				write_frame_to_gif(processed_images[i], Global.current_project.frames[i].duration * (1 / Global.current_project.fps), exporter, args["export_dialog"])
 
 	if OS.get_name() == "HTML5":
-		Html5FileExchange.save_gif(exporter.export_file_data(), args["export_paths"][0])
+		JavaScript.download_buffer(exporter.export_file_data(), args["export_paths"][0], "image/gif")
 
 	else:
 		var file: File = File.new()
