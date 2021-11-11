@@ -2,7 +2,7 @@ extends BaseTool
 
 
 var _relative : Vector2
-var _prev_zoom_mode := 0
+var _prev_mode := 0
 var _zoom_mode := 0
 
 
@@ -11,12 +11,12 @@ func _input(event: InputEvent) -> void:
 		_relative = event.relative
 
 	if event.is_action_pressed("ctrl"):
-		_prev_zoom_mode = $ModeOptions.selected
+		_prev_mode = $ModeOptions.selected
 	if event.is_action("ctrl"):
-		$ModeOptions.selected = _prev_zoom_mode ^ 1
+		$ModeOptions.selected = _prev_mode ^ 1
 		_zoom_mode = $ModeOptions.selected
 	if event.is_action_released("ctrl"):
-		$ModeOptions.selected = _prev_zoom_mode
+		$ModeOptions.selected = _prev_mode
 		_zoom_mode = $ModeOptions.selected
 
 
