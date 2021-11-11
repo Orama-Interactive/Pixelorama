@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-07-31 13:49\n"
+"PO-Revision-Date: 2021-09-04 18:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -658,6 +658,9 @@ msgstr "Spender"
 msgid "Translators"
 msgstr "Übersetzungen"
 
+msgid "Licenses"
+msgstr "Lizenzen"
+
 msgid "English"
 msgstr "Englisch"
 
@@ -672,6 +675,9 @@ msgstr "Deutsch"
 
 msgid "Polish"
 msgstr "Polnisch"
+
+msgid "Portuguese"
+msgstr "Portugiesisch"
 
 msgid "Brazilian Portuguese"
 msgstr "Brasilianisches Portugiesisch"

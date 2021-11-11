@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/AboutDialog.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/icons/icon.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/Roboto-Italic.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/graphics/splash_screen/orama_64x64.png" type="Texture" id=4]
 [ext_resource path="res://assets/fonts/Roboto-Small.tres" type="DynamicFont" id=5]
+
+[sub_resource type="ButtonGroup" id=1]
 
 [node name="AboutDialog" type="WindowDialog"]
 margin_right = 600.0
@@ -96,13 +98,14 @@ margin_bottom = 345.0
 size_flags_vertical = 3
 
 [node name="Groups" type="Tree" parent="AboutUI/Credits"]
-margin_right = 120.0
+margin_right = 576.0
 margin_bottom = 269.0
 rect_min_size = Vector2( 120, 120 )
 custom_constants/item_margin = -2
 hide_root = true
 
 [node name="Developers" type="VBoxContainer" parent="AboutUI/Credits"]
+visible = false
 margin_left = 132.0
 margin_right = 576.0
 margin_bottom = 269.0
@@ -182,6 +185,67 @@ size_flags_vertical = 3
 custom_constants/item_margin = -2
 hide_root = true
 
+[node name="Licenses" type="VBoxContainer" parent="AboutUI/Credits"]
+visible = false
+margin_left = 132.0
+margin_right = 576.0
+margin_bottom = 269.0
+size_flags_horizontal = 3
+
+[node name="LicenseText" type="TextEdit" parent="AboutUI/Credits/Licenses"]
+margin_right = 444.0
+margin_bottom = 241.0
+size_flags_vertical = 3
+text = "MIT License
+
+Copyright (c) 2019-present Orama Interactive and contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+readonly = true
+wrap_enabled = true
+
+[node name="LicenseButtonsContainer" type="GridContainer" parent="AboutUI/Credits/Licenses"]
+margin_top = 245.0
+margin_right = 444.0
+margin_bottom = 269.0
+columns = 4
+
+[node name="PixeloramaLicense" type="CheckBox" parent="AboutUI/Credits/Licenses/LicenseButtonsContainer"]
+margin_right = 99.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+pressed = true
+group = SubResource( 1 )
+text = "Pixelorama"
+
+[node name="GodotLicense" type="CheckBox" parent="AboutUI/Credits/Licenses/LicenseButtonsContainer"]
+margin_left = 103.0
+margin_right = 170.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+group = SubResource( 1 )
+text = "Godot Engine"
+
+[node name="FreeTypeLicense" type="CheckBox" parent="AboutUI/Credits/Licenses/LicenseButtonsContainer"]
+margin_left = 174.0
+margin_right = 260.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+group = SubResource( 1 )
+text = "FreeType"
+
+[node name="godot-gdgifexporterLicense" type="CheckBox" parent="AboutUI/Credits/Licenses/LicenseButtonsContainer"]
+margin_left = 264.0
+margin_right = 417.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+group = SubResource( 1 )
+text = "godot-gdgifexporter"
+
 [node name="HSeparator2" type="HSeparator" parent="AboutUI"]
 margin_top = 349.0
 margin_right = 576.0
@@ -201,6 +265,7 @@ margin_bottom = 388.0
 custom_fonts/font = ExtResource( 5 )
 text = "©2019-present by Orama Interactive and contributors"
 align = 1
+
 [connection signal="about_to_show" from="." to="." method="_on_AboutDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_AboutDialog_popup_hide"]
 [connection signal="pressed" from="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons/Website" to="." method="_on_Website_pressed"]

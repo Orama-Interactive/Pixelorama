@@ -9,12 +9,12 @@ var _changed := false
 class EraseOp extends Drawer.ColorOp:
 	var changed := false
 
-
-	func process(_src: Color, _dst: Color) -> Color:
+	func process(_src: Color, dst: Color) -> Color:
 		changed = true
-#		dst.a -= src.a * strength
-#		return dst
-		return Color(0, 0, 0, 0)
+		dst.a -= strength
+		if dst.a <= 0:
+			dst = Color(0, 0, 0, 0)
+		return dst
 
 
 func _init() -> void:
@@ -23,9 +23,20 @@ func _init() -> void:
 	_clear_image.fill(Color(0, 0, 0, 0))
 
 
+func get_config() -> Dictionary:
+	var config := .get_config()
+	config["strength"] = _strength
+	return config
+
+
+func set_config(config : Dictionary) -> void:
+	.set_config(config)
+	_strength = config.get("strength", _strength)
+
+
 func draw_start(position : Vector2) -> void:
 	Global.canvas.selection.transform_content_confirm()
-	update_mask()
+	update_mask(_strength == 1)
 	_changed = false
 	_drawer.color_op.changed = false
 
@@ -77,3 +88,15 @@ func _draw_brush_image(image : Image, src_rect: Rect2, dst: Vector2) -> void:
 	var images := _get_selected_draw_images()
 	for draw_image in images:
 		draw_image.blit_rect_mask(_clear_image, image, src_rect, dst)
+
+
+func _on_Opacity_value_changed(value: float) -> void:
+	_strength = value / 255
+	update_config()
+	save_config()
+
+
+func update_config() -> void:
+	.update_config()
+	$Opacity/OpacitySpinBox.value = _strength * 255
+	$Opacity/OpacitySlider.value = _strength * 255

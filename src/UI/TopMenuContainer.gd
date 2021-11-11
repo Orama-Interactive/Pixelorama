@@ -6,14 +6,14 @@ enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES}
 enum ViewMenuId {TILE_MODE, WINDOW_TRANSPARENCY, PANEL_LAYOUT, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
 enum ImageMenuId {SCALE_IMAGE, CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
 enum SelectMenuId {SELECT_ALL, CLEAR_SELECTION, INVERT}
-enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, CHANGELOG, ABOUT_PIXELORAMA}
+enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, OPEN_LOGS_FOLDER, CHANGELOG, ABOUT_PIXELORAMA}
 
-var file_menu_button : MenuButton
-var edit_menu_button : MenuButton
-var view_menu_button : MenuButton
-var image_menu_button : MenuButton
-var select_menu_button : MenuButton
-var help_menu_button : MenuButton
+onready var file_menu_button : MenuButton = find_node("FileMenu")
+onready var edit_menu_button : MenuButton = find_node("EditMenu")
+onready var view_menu_button : MenuButton = find_node("ViewMenu")
+onready var image_menu_button : MenuButton = find_node("ImageMenu")
+onready var select_menu_button : MenuButton = find_node("SelectMenu")
+onready var help_menu_button : MenuButton = find_node("HelpMenu")
 
 var file_menu : PopupMenu
 var view_menu : PopupMenu
@@ -21,13 +21,6 @@ var zen_mode := false
 
 
 func _ready() -> void:
-	file_menu_button = find_node("FileMenu")
-	edit_menu_button = find_node("EditMenu")
-	view_menu_button = find_node("ViewMenu")
-	image_menu_button = find_node("ImageMenu")
-	select_menu_button = find_node("SelectMenu")
-	help_menu_button = find_node("HelpMenu")
-
 	setup_file_menu()
 	setup_edit_menu()
 	setup_view_menu()
@@ -91,6 +84,7 @@ func setup_edit_menu() -> void:
 		edit_menu.add_item(item, i, edit_menu_items[item])
 		i += 1
 
+	edit_menu.set_item_disabled(6, true)
 	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
 
 
@@ -196,6 +190,7 @@ func setup_help_menu() -> void:
 		"View Splash Screen" : 0,
 		"Online Docs" : InputMap.get_action_list("open_docs")[0].get_scancode_with_modifiers(),
 		"Issue Tracker" : 0,
+		"Open Logs Folder" :0,
 		"Changelog" : 0,
 		"About Pixelorama" : 0
 		}
@@ -367,8 +362,8 @@ func window_transparency(value :float) -> void:
 		get_node("../../AlternateTransparentBackground").visible = false
 	else:
 		get_node("../../AlternateTransparentBackground").visible = true
-	var checker :ColorRect = get_parent().get_node("UI/ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport/TransparentChecker")
-	var color :Color = Global.control.theme.get_stylebox("panel", "PanelContainer").bg_color
+	var checker :ColorRect = Global.transparent_checker
+	var color :Color = Global.default_clear_color
 	color.a = value
 	get_node("../../AlternateTransparentBackground").color = color
 	checker.transparency(value)
@@ -532,8 +527,12 @@ func help_menu_id_pressed(id : int) -> void:
 			OS.shell_open("https://orama-interactive.github.io/Pixelorama-Docs/")
 		HelpMenuId.ISSUE_TRACKER:
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
+		HelpMenuId.OPEN_LOGS_FOLDER:
+			var dir = Directory.new()
+			dir.make_dir_recursive("user://logs") #incase someone deleted it
+			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		HelpMenuId.CHANGELOG:
-			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v083---2021-05-04")
+			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v09---2021-09-18")
 		HelpMenuId.ABOUT_PIXELORAMA:
 			Global.control.get_node("Dialogs/AboutDialog").popup_centered()
 			Global.dialog_open(true)

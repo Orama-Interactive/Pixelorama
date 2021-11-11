@@ -136,9 +136,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 script = ExtResource( 1 )
 
-[node name="RectSelect" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="RectSelect" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
@@ -189,9 +187,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EllipseSelect" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="EllipseSelect" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 28.0
 margin_right = 24.0
 margin_bottom = 52.0
@@ -243,9 +239,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PolygonSelect" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="PolygonSelect" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 56.0
 margin_right = 24.0
 margin_bottom = 80.0
@@ -297,9 +291,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorSelect" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="ColorSelect" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 84.0
 margin_right = 24.0
 margin_bottom = 108.0
@@ -351,9 +343,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MagicWand" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="MagicWand" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 112.0
 margin_right = 24.0
 margin_bottom = 136.0
@@ -405,9 +395,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Lasso" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="Lasso" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 140.0
 margin_right = 24.0
 margin_bottom = 164.0
@@ -459,9 +447,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Move" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="Move" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 168.0
 margin_right = 24.0
 margin_bottom = 192.0
@@ -513,9 +499,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Zoom" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="Zoom" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 196.0
 margin_right = 24.0
 margin_bottom = 220.0
@@ -567,9 +551,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Pan" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="Pan" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 224.0
 margin_right = 24.0
 margin_bottom = 248.0
@@ -621,9 +603,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorPicker" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="ColorPicker" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 252.0
 margin_right = 24.0
 margin_bottom = 276.0
@@ -675,9 +655,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Pencil" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="Pencil" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 280.0
 margin_right = 24.0
 margin_bottom = 304.0
@@ -728,9 +706,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Eraser" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="Eraser" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 308.0
 margin_right = 24.0
 margin_bottom = 332.0
@@ -781,9 +757,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bucket" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="Bucket" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 336.0
 margin_right = 24.0
 margin_bottom = 360.0
@@ -835,9 +809,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Shading" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="Shading" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 364.0
 margin_right = 24.0
 margin_bottom = 388.0
@@ -889,9 +861,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LineTool" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="LineTool" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 392.0
 margin_right = 24.0
 margin_bottom = 416.0
@@ -943,9 +913,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RectangleTool" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="RectangleTool" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 420.0
 margin_right = 24.0
 margin_bottom = 444.0
@@ -997,9 +965,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EllipseTool" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=[
-"UIButtons",
-]]
+[node name="EllipseTool" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
 margin_top = 448.0
 margin_right = 24.0
 margin_bottom = 472.0
@@ -1076,7 +1042,7 @@ margin_top = 7.0
 margin_right = 889.0
 margin_bottom = 31.0
 tab_align = 0
-tab_close_display_policy = 1
+tab_close_display_policy = 2
 drag_to_rearrange_enabled = true
 script = ExtResource( 3 )
 

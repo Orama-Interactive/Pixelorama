@@ -32,6 +32,7 @@ var has_selection := false
 # For every camera (currently there are 3)
 var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)] # Array of Vector2
 var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO] # Array of Vector2
+var cameras_zoom_max := [Vector2.ONE, Vector2.ONE, Vector2.ONE] # Array of Vector2
 
 # Export directory path and export file name
 var directory_path := ""
@@ -104,6 +105,7 @@ func selection_bitmap_changed() -> void:
 		image = bitmap_to_image(selection_bitmap)
 		image_texture.create_from_image(image, 0)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
+	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
 
 
 func _selection_offset_changed(value : Vector2) -> void:
@@ -225,9 +227,18 @@ func change_project() -> void:
 	Global.canvas.selection.big_bounding_rectangle = get_selection_rectangle()
 	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
 	Global.canvas.selection.update()
+	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
 
 	var i := 0
 	for camera in [Global.camera, Global.camera2, Global.camera_preview]:
+		camera.zoom_max = cameras_zoom_max[i]
+		if camera == Global.camera_preview:
+			Global.preview_zoom_slider.disconnect("value_changed", Global.canvas_preview_container, "_on_PreviewZoomSlider_value_changed")
+			Global.preview_zoom_slider.min_value = -camera.zoom_max.x
+			Global.preview_zoom_slider.connect("value_changed", Global.canvas_preview_container, "_on_PreviewZoomSlider_value_changed")
+
+		if camera == Global.camera:
+			Global.zoom_level_spinbox.min_value = 100.0/camera.zoom_max.x
 		camera.zoom = cameras_zoom[i]
 		camera.offset = cameras_offset[i]
 		camera.zoom_changed()
@@ -317,6 +328,7 @@ func deserialize(dict : Dictionary) -> void:
 		size.x = dict.size_x
 		size.y = dict.size_y
 		update_tile_mode_rects()
+		selection_bitmap = resize_bitmap(selection_bitmap, size)
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
 	if dict.has("frames"):

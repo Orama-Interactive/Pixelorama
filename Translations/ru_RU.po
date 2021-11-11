@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-07-31 08:29\n"
+"PO-Revision-Date: 2021-09-04 16:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -659,6 +659,9 @@ msgstr "Спонсоры"
 msgid "Translators"
 msgstr "Переводчики"
 
+msgid "Licenses"
+msgstr "Лицензии"
+
 msgid "English"
 msgstr "Английский"
 
@@ -673,6 +676,9 @@ msgstr "Немецкий"
 
 msgid "Polish"
 msgstr "Польский"
+
+msgid "Portuguese"
+msgstr "Португальский"
 
 msgid "Brazilian Portuguese"
 msgstr "Бразильский португальский"

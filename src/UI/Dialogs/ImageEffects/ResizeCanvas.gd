@@ -12,7 +12,7 @@ onready var width_spinbox : SpinBox = $VBoxContainer/OptionsContainer/WidthValue
 onready var height_spinbox : SpinBox = $VBoxContainer/OptionsContainer/HeightValue
 onready var x_spinbox : SpinBox = $VBoxContainer/OptionsContainer/XSpinBox
 onready var y_spinbox : SpinBox = $VBoxContainer/OptionsContainer/YSpinBox
-onready var preview_rect : TextureRect = $VBoxContainer/Preview
+onready var preview_rect : TextureRect = $VBoxContainer/AspectRatioContainer/Preview
 
 
 func _on_ResizeCanvas_about_to_show() -> void:

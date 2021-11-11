@@ -5,6 +5,7 @@ enum ShadingMode {SIMPLE, HUE_SHIFTING}
 enum LightenDarken {LIGHTEN, DARKEN}
 
 
+var _prev_mode := 0
 var _last_position := Vector2.INF
 var _changed := false
 var _shading_mode : int = ShadingMode.SIMPLE
@@ -35,10 +36,10 @@ class LightenDarkenOp extends Drawer.ColorOp:
 		if dst.a == 0:
 			return dst
 		if shading_mode == ShadingMode.SIMPLE:
-			if strength > 0:
+			if lighten_or_darken == LightenDarken.LIGHTEN:
 				dst = dst.lightened(strength)
-			elif strength < 0:
-				dst = dst.darkened(-strength)
+			else:
+				dst = dst.darkened(strength)
 		else:
 			var hue_shift := hue_amount / 360.0
 			var sat_shift := sat_amount / 100.0
@@ -110,6 +111,21 @@ class LightenDarkenOp extends Drawer.ColorOp:
 
 func _init() -> void:
 	_drawer.color_op = LightenDarkenOp.new()
+
+
+func _input(event: InputEvent) -> void:
+	var options : OptionButton = $LightenDarken
+
+	if event.is_action_pressed("ctrl"):
+		_prev_mode = options.selected
+	if event.is_action("ctrl"):
+		options.selected = _prev_mode ^ 1
+		_mode = options.selected
+		_drawer.color_op.lighten_or_darken = _mode
+	if event.is_action_released("ctrl"):
+		options.selected = _prev_mode
+		_mode = options.selected
+		_drawer.color_op.lighten_or_darken = _mode
 
 
 func _on_ShadingMode_item_selected(id : int) -> void:
@@ -191,8 +207,7 @@ func update_config() -> void:
 
 
 func update_strength() -> void:
-	var factor = 1 if _mode == 0 else -1
-	_strength = _amount * factor / 100.0
+	_strength = _amount / 100.0
 
 	_drawer.color_op.hue_amount = _hue_amount
 	_drawer.color_op.sat_amount = _sat_amount
@@ -253,3 +268,8 @@ func _draw_brush_image(image : Image, src_rect: Rect2, dst: Vector2) -> void:
 				var pos := Vector2(xx, yy) + dst - src_rect.position
 				_set_pixel(pos, true)
 	image.unlock()
+
+
+func update_brush() -> void:
+	.update_brush()
+	$ColorInterpolation.visible = false

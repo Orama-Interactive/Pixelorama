@@ -25,7 +25,7 @@ func _ready() -> void:
 	Global.zoom_level_spinbox.get_child(0).connect("focus_exited", self, "zoom_focus_exited")
 
 
-func zoom_label_clicked(event :InputEvent):
+func zoom_label_clicked(event :InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 		if event.doubleclick:
 			Global.zoom_level_label.visible = false
@@ -35,12 +35,12 @@ func zoom_label_clicked(event :InputEvent):
 			Global.zoom_level_spinbox.get_child(0).grab_focus() #since the actual lineedit is the first child of spinbox
 
 
-func zoom_value_changed(value):
+func zoom_value_changed(value) -> void:
 	if name == "Camera2D":
 		zoom_camera_percent(value)
 
 
-func zoom_focus_exited():
+func zoom_focus_exited() -> void:
 	if Global.zoom_level_spinbox.value != round(100 / zoom.x): #If user pressed enter while editing
 		if name == "Camera2D":
 			zoom_camera_percent(Global.zoom_level_spinbox.value)
@@ -168,6 +168,8 @@ func _input(event : InputEvent) -> void:
 			else:
 				zoom_camera(-1)
 		elif event is InputEventPanGesture: # Pan Gesture on a Latop touchpad
+			if OS.get_name() == "Android":
+				return
 			offset = offset + event.delta * zoom * 7 # for moving the canvas
 		elif event is InputEventMouseMotion && drag:
 			offset = offset - event.relative * zoom
@@ -205,7 +207,8 @@ func zoom_camera(dir : int) -> void:
 		offset = offset + (-0.5 * viewport_size + mouse_pos) * (prev_zoom - zoom)
 		zoom_changed()
 
-func zoom_camera_percent(value :float):
+
+func zoom_camera_percent(value : float) -> void:
 	var percent :float = (100.0 / value)
 	var new_zoom = Vector2(percent, percent)
 	if Global.smooth_zoom:
@@ -214,6 +217,7 @@ func zoom_camera_percent(value :float):
 	else:
 		zoom = new_zoom
 	zoom_changed()
+
 
 func zoom_changed() -> void:
 	update_transparent_checker_offset()
@@ -273,9 +277,12 @@ func save_values_to_project() -> void:
 	if name == "Camera2D":
 		Global.current_project.cameras_zoom[0] = zoom
 		Global.current_project.cameras_offset[0] = offset
+		Global.current_project.cameras_zoom_max[0] = zoom_max
 	elif name == "Camera2D2":
 		Global.current_project.cameras_zoom[1] = zoom
 		Global.current_project.cameras_offset[1] = offset
+		Global.current_project.cameras_zoom_max[1] = zoom_max
 	elif name == "CameraPreview":
 		Global.current_project.cameras_zoom[2] = zoom
 		Global.current_project.cameras_offset[2] = offset
+		Global.current_project.cameras_zoom_max[2] = zoom_max

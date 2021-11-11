@@ -5,3 +5,50 @@
 
 [node name="ToolOptions" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="Opacity" type="VBoxContainer" parent="." index="4"]
+margin_top = 102.0
+margin_right = 116.0
+margin_bottom = 164.0
+
+[node name="OpacityLabel" type="Label" parent="Opacity" index="0"]
+margin_right = 116.0
+margin_bottom = 14.0
+text = "Opacity:"
+align = 1
+
+[node name="OpacitySpinBox" type="SpinBox" parent="Opacity" index="1"]
+margin_left = 21.0
+margin_top = 18.0
+margin_right = 95.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+max_value = 255.0
+value = 255.0
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpacitySlider" type="HSlider" parent="Opacity" index="2"]
+margin_left = 12.0
+margin_top = 46.0
+margin_right = 104.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 92, 0 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+max_value = 255.0
+value = 255.0
+
+[node name="EmptySpacer" parent="." index="6"]
+margin_top = 168.0
+margin_bottom = 180.0
+
+[node name="Mirror" parent="." index="7"]
+margin_top = 184.0
+margin_bottom = 201.0
+
+[connection signal="value_changed" from="Opacity/OpacitySpinBox" to="." method="_on_Opacity_value_changed"]
+[connection signal="value_changed" from="Opacity/OpacitySlider" to="." method="_on_Opacity_value_changed"]

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-07-31 08:29\n"
+"PO-Revision-Date: 2021-09-06 06:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -659,6 +659,9 @@ msgstr "Donors"
 msgid "Translators"
 msgstr "翻訳者"
 
+msgid "Licenses"
+msgstr "ライセンス"
+
 msgid "English"
 msgstr "英語"
 
@@ -673,6 +676,9 @@ msgstr "ドイツ語"
 
 msgid "Polish"
 msgstr "ポーランド語"
+
+msgid "Portuguese"
+msgstr "ポルトガル語"
 
 msgid "Brazilian Portuguese"
 msgstr "ポルトガル語 (ブラジル)"

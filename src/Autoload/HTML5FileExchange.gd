@@ -90,14 +90,6 @@ func _define_js() -> void:
 			}
 		  });
 	}
-	function download(fileName, byte, type) {
-		var buffer = Uint8Array.from(byte);
-		var blob = new Blob([buffer], { type: type});
-		var link = document.createElement('a');
-		link.href = window.URL.createObjectURL(blob);
-		link.download = fileName;
-		link.click();
-	};
 	""", true)
 
 
@@ -191,21 +183,6 @@ func load_palette() -> void:
 			var invalid_type:
 				print("Invalid type: " + invalid_type)
 				return
-
-
-func save_image(image : Image, file_name : String = "export") -> void:
-	if OS.get_name() != "HTML5" or !OS.has_feature('JavaScript'):
-		return
-
-	var png_data = Array(image.save_png_to_buffer())
-	JavaScript.eval("download('%s', %s, 'image/png');" % [file_name, str(png_data)], true)
-
-
-func save_gif(data, file_name : String = "export") -> void:
-	if OS.get_name() != "HTML5" or !OS.has_feature('JavaScript'):
-		return
-
-	JavaScript.eval("download('%s', %s, 'image/gif');" % [file_name, str(Array(data))], true)
 
 
 func load_shader() -> void:

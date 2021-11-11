@@ -14,5 +14,11 @@ mono_crash.*.json
 .directory
 *~
 
-#Visual Studio Code ignores
+# Visual Studio Code ignores
 .vscode/
+
+# macOS ignores
+.DS_Store
+
+# Android ignores
+android/

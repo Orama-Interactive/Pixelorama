@@ -1,0 +1,31 @@
+{
+  "clickable_minimum_required": "6.17.1",
+  "kill": "pixelorama",
+  "builder": "custom",
+  "build": "${ROOT}/build-ubports.sh",
+  "build_dir": "${ROOT}/build",
+  "dependencies_host": [
+    "wget",
+    "libgles2"
+  ],
+  "dependencies_target": [
+    "libvpx3",
+    "libsdl2-2.0-0",
+    "libasound2",
+    "libglib2.0-0",
+    "libpng16-16",
+    "libfreetype6"
+  ],
+  "install_data": {
+    "${BUILD_DIR}/godot": "${INSTALL_DIR}",
+    "${ROOT}/click/*": "${INSTALL_DIR}",
+    "${ROOT}/pixelorama_data/*": "${INSTALL_DIR}/pixelorama_data",
+    "${ROOT}/*.pck": "${INSTALL_DIR}"
+  },
+  "install_lib": [
+    "/usr/lib/${ARCH_TRIPLET}/libvpx.so.3*",
+    "/usr/lib/${ARCH_TRIPLET}/libsndio.so.6.1",
+    "/usr/lib/${ARCH_TRIPLET}/libvorbis.so.0*",
+    "/usr/lib/${ARCH_TRIPLET}/libSDL2-2.0.so*"
+  ]
+}

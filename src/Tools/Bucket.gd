@@ -1,6 +1,7 @@
 extends BaseTool
 
 
+var _prev_mode := 0
 var _pattern : Patterns.Pattern
 var _fill_area := 0
 var _fill_with := 0
@@ -10,6 +11,19 @@ var _offset_y := 0
 
 func _ready() -> void:
 	update_pattern()
+
+
+func _input(event: InputEvent) -> void:
+	var options : OptionButton = $FillAreaOptions
+
+	if event.is_action_pressed("ctrl"):
+		_prev_mode = options.selected
+	if event.is_action("ctrl"):
+		options.selected = _prev_mode ^ 1
+		_fill_area = options.selected
+	if event.is_action_released("ctrl"):
+		options.selected = _prev_mode
+		_fill_area = options.selected
 
 
 func _on_FillAreaOptions_item_selected(index : int) -> void:
