@@ -314,11 +314,11 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 
 	file.close()
 
-	if OS.get_name() == "HTML5" and !autosave:
+	if OS.get_name() == "HTML5" and OS.has_feature('JavaScript') and !autosave:
 		err = file.open(path, File.READ)
 		if !err:
 			var file_data = Array(file.get_buffer(file.get_len()))
-			JavaScript.eval("download('%s', %s, '');" % [path.get_file(), str(file_data)], true)
+			JavaScript.download_buffer(file_data, path.get_file())
 		file.close()
 		# Remove the .pxo file from memory, as we don't need it anymore
 		var dir = Directory.new()

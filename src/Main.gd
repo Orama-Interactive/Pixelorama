@@ -262,7 +262,6 @@ func handle_backup() -> void:
 				backup_paths.append(Global.config_cache.get_value("backups", p_path))
 			# Temporatily stop autosave until user confirms backup
 			OpenSave.autosave_timer.stop()
-			backup_confirmation.dialog_text = tr(backup_confirmation.dialog_text) % project_paths
 			backup_confirmation.connect("confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths, backup_paths])
 			backup_confirmation.get_cancel().connect("pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths])
 			backup_confirmation.popup_centered()
@@ -290,6 +289,11 @@ func _notification(what : int) -> void:
 		MainLoop.NOTIFICATION_WM_MOUSE_EXIT: # if the mouse exits the window and another application has the focus set the fps to the idle fps
 			if !OS.is_window_focused() and Global.fps_limit_focus:
 				Engine.set_target_fps(Global.idle_fps)
+		MainLoop.NOTIFICATION_WM_FOCUS_IN:
+			var mouse_pos := get_global_mouse_position()
+			var viewport_rect := Rect2(Global.main_viewport.rect_global_position, Global.main_viewport.rect_size)
+			if viewport_rect.has_point(mouse_pos):
+				Global.has_focus = true
 
 
 func _on_files_dropped(_files : PoolStringArray, _screen : int) -> void:

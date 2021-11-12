@@ -8,12 +8,12 @@ enum ImageMenuId {SCALE_IMAGE, CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP
 enum SelectMenuId {SELECT_ALL, CLEAR_SELECTION, INVERT}
 enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, OPEN_LOGS_FOLDER, CHANGELOG, ABOUT_PIXELORAMA}
 
-var file_menu_button : MenuButton
-var edit_menu_button : MenuButton
-var view_menu_button : MenuButton
-var image_menu_button : MenuButton
-var select_menu_button : MenuButton
-var help_menu_button : MenuButton
+onready var file_menu_button : MenuButton = find_node("FileMenu")
+onready var edit_menu_button : MenuButton = find_node("EditMenu")
+onready var view_menu_button : MenuButton = find_node("ViewMenu")
+onready var image_menu_button : MenuButton = find_node("ImageMenu")
+onready var select_menu_button : MenuButton = find_node("SelectMenu")
+onready var help_menu_button : MenuButton = find_node("HelpMenu")
 
 var file_menu : PopupMenu
 var view_menu : PopupMenu
@@ -21,13 +21,6 @@ var zen_mode := false
 
 
 func _ready() -> void:
-	file_menu_button = find_node("FileMenu")
-	edit_menu_button = find_node("EditMenu")
-	view_menu_button = find_node("ViewMenu")
-	image_menu_button = find_node("ImageMenu")
-	select_menu_button = find_node("SelectMenu")
-	help_menu_button = find_node("HelpMenu")
-
 	setup_file_menu()
 	setup_edit_menu()
 	setup_view_menu()
@@ -91,6 +84,7 @@ func setup_edit_menu() -> void:
 		edit_menu.add_item(item, i, edit_menu_items[item])
 		i += 1
 
+	edit_menu.set_item_disabled(6, true)
 	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
 
 

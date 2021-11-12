@@ -105,6 +105,7 @@ func selection_bitmap_changed() -> void:
 		image = bitmap_to_image(selection_bitmap)
 		image_texture.create_from_image(image, 0)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
+	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
 
 
 func _selection_offset_changed(value : Vector2) -> void:
@@ -226,6 +227,7 @@ func change_project() -> void:
 	Global.canvas.selection.big_bounding_rectangle = get_selection_rectangle()
 	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
 	Global.canvas.selection.update()
+	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
 
 	var i := 0
 	for camera in [Global.camera, Global.camera2, Global.camera_preview]:

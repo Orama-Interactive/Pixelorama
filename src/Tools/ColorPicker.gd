@@ -1,7 +1,21 @@
 extends BaseTool
 
 
+var _prev_mode := 0
 var _color_slot := 0
+
+
+func _input(event: InputEvent) -> void:
+	var options : OptionButton = $ColorPicker/Options
+
+	if event.is_action_pressed("ctrl"):
+		_prev_mode = options.selected
+	if event.is_action("ctrl"):
+		options.selected = _prev_mode ^ 1
+		_color_slot = options.selected
+	if event.is_action_released("ctrl"):
+		options.selected = _prev_mode
+		_color_slot = options.selected
 
 
 func _on_Options_item_selected(id : int) -> void:

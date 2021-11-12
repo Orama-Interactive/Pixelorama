@@ -1,7 +1,23 @@
 extends BaseTool
 
 
+var _relative : Vector2
+var _prev_mode := 0
 var _zoom_mode := 0
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		_relative = event.relative
+
+	if event.is_action_pressed("ctrl"):
+		_prev_mode = $ModeOptions.selected
+	if event.is_action("ctrl"):
+		$ModeOptions.selected = _prev_mode ^ 1
+		_zoom_mode = $ModeOptions.selected
+	if event.is_action_released("ctrl"):
+		$ModeOptions.selected = _prev_mode
+		_zoom_mode = $ModeOptions.selected
 
 
 func _on_ModeOptions_item_selected(id : int) -> void:
@@ -44,7 +60,7 @@ func draw_start(_position : Vector2) -> void:
 
 
 func draw_move(_position : Vector2) -> void:
-	pass
+	Global.camera.zoom_camera(-_relative.x / 3)
 
 
 func draw_end(_position : Vector2) -> void:

@@ -5,10 +5,10 @@ on:
     branches: [ release ]
 
 env:
-  GODOT_VERSION: 3.3
-  GODOT_VERSION_MAC: 3.3
+  GODOT_VERSION: 3.4
+  GODOT_VERSION_MAC: 3.4
   EXPORT_NAME: Pixelorama
-  TAG: v0.9
+  TAG: v0.9.1
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.3
+      image: docker://barichello/godot-ci:3.4
     steps:
       - name: Setup WINE, rcedit and NSIS 🍷
         run: |
@@ -88,7 +88,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.3
+      image: docker://barichello/godot-ci:3.4
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v1
@@ -142,7 +142,7 @@ jobs:
     name: Create Pixelorama pack data for Clickable
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.3
+      image: docker://barichello/godot-ci:3.4
     steps:
       - name: Clone source
         uses: actions/checkout@v2
@@ -214,7 +214,7 @@ jobs:
           submodules: true
       - name: Setup environment 🔧
         run: |
-          export GODOT_VERSION=3.3
+          export GODOT_VERSION=3.4
           export EXPORT_NAME=Pixelorama
       - name: Download and extract export templates 💾
         run: |
@@ -224,15 +224,15 @@ jobs:
           mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION_MAC}.stable
       - name: Download Godot headless binary 🤖
         run: |
-          wget https://github.com/huskeee/godot-headless-mac/releases/download/3.3-stable/Godot_v3.3-stable_mac_headless.64.zip
+          wget https://github.com/huskeee/godot-headless-mac/releases/download/3.4-stable/Godot_v3.4-stable_mac_headless.64.zip
           unzip -a Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip
       - name: Setup 💻
         run: mkdir -v -p ./build/mac
       - name: Mac Build 🔧
         run: |
-          chown runner ./Godot
-          chmod +x ./Godot
-          ./Godot -v --export "Mac OSX" ./build/mac/Pixelorama.zip
+          chown runner ./bin/Godot
+          chmod +x ./bin/Godot
+          ./bin/Godot -v --export "Mac OSX" ./build/mac/Pixelorama.zip
       - name: Make application executable 🔧
         run: |
           unzip -a ./build/mac/Pixelorama.zip -d ./build/mac
@@ -245,7 +245,7 @@ jobs:
           cp -R ./pixelorama_data ./build/mac/Pixelorama.app/Contents/MacOS
           rm ./build/mac/Pixelorama.app/Contents/MacOS/pixelorama_data/.gdignore
       - name: Create DMG archive 🔧
-        run: hdiutil create -srcfolder ./build/mac -volname Pixelorama ./build/mac/Pixelorama.dmg
+        run: hdiutil create -srcfolder ./build/mac -fs HFS+ -volname Pixelorama ./build/mac/Pixelorama.dmg
       - name: Upload Release Asset 🚀
         uses: svenstaro/upload-release-action@v2
         with:
@@ -265,7 +265,7 @@ jobs:
     name: Web Export 🌐
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.3
+      image: docker://barichello/godot-ci:3.4
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v1

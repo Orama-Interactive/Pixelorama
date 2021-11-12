@@ -1,6 +1,7 @@
 extends "res://src/Tools/Draw.gd"
 
 
+var _prev_mode := false
 var _last_position := Vector2.INF
 var _changed := false
 var _overwrite := false
@@ -33,6 +34,19 @@ func _on_FillInside_toggled(button_pressed):
 	_fill_inside = button_pressed
 	update_config()
 	save_config()
+
+
+func _input(event: InputEvent) -> void:
+	var overwrite_button : CheckBox = $Overwrite
+
+	if event.is_action_pressed("ctrl"):
+		_prev_mode = overwrite_button.pressed
+	if event.is_action("ctrl"):
+		overwrite_button.pressed = !_prev_mode
+		_overwrite = overwrite_button.pressed
+	if event.is_action_released("ctrl"):
+		overwrite_button.pressed = _prev_mode
+		_overwrite = overwrite_button.pressed
 
 
 func get_config() -> Dictionary:
