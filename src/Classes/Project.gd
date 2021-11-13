@@ -30,6 +30,7 @@ var selection_offset := Vector2.ZERO setget _selection_offset_changed
 var has_selection := false
 
 # For every camera (currently there are 3)
+var cameras_rotation := [0.0, 0.0, 0.0] # Array of float
 var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)] # Array of Vector2
 var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO] # Array of Vector2
 var cameras_zoom_max := [Vector2.ONE, Vector2.ONE, Vector2.ONE] # Array of Vector2
@@ -239,8 +240,10 @@ func change_project() -> void:
 
 		if camera == Global.camera:
 			Global.zoom_level_spinbox.min_value = 100.0/camera.zoom_max.x
+		camera.rotation = cameras_rotation[i]
 		camera.zoom = cameras_zoom[i]
 		camera.offset = cameras_offset[i]
+		camera.rotation_changed()
 		camera.zoom_changed()
 		i += 1
 

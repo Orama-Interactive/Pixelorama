@@ -134,9 +134,11 @@ var horizontal_ruler : BaseButton
 var vertical_ruler : BaseButton
 var transparent_checker : ColorRect
 
-var cursor_position_label : Label
-var zoom_level_label : Label
+var rotation_level_button : Button
+var rotation_level_spinbox : SpinBox
+var zoom_level_button : Button
 var zoom_level_spinbox : SpinBox
+var cursor_position_label : Label
 
 var tool_panel : Panel
 var right_panel : Panel
@@ -234,9 +236,11 @@ func _ready() -> void:
 	vertical_ruler = control.find_node("VerticalRuler")
 	transparent_checker = control.find_node("TransparentChecker")
 
-	cursor_position_label = control.find_node("CursorPosition")
-	zoom_level_label = control.find_node("ZoomLevel")
+	rotation_level_button = control.find_node("RotationLevel")
+	rotation_level_spinbox = control.find_node("RotationSpinbox")
+	zoom_level_button = control.find_node("ZoomLevel")
 	zoom_level_spinbox = control.find_node("ZoomSpinbox")
+	cursor_position_label = control.find_node("CursorPosition")
 
 	tool_panel = control.find_node("ToolPanel")
 	right_panel = control.find_node("RightPanel")
