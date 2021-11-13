@@ -77,34 +77,62 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ZoomStats" type="HBoxContainer" parent="TopLabels"]
+[node name="RotationStats" type="CenterContainer" parent="TopLabels"]
 margin_right = 60.0
 margin_bottom = 28.0
-alignment = 1
 
-[node name="ZoomLevel" type="Label" parent="TopLabels/ZoomStats"]
-margin_top = 7.0
+[node name="RotationLevel" type="Button" parent="TopLabels/RotationStats"]
+margin_top = 4.0
 margin_right = 60.0
-margin_bottom = 21.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 60, 0 )
 mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "0 °"
+align = 2
+
+[node name="RotationSpinbox" type="SpinBox" parent="TopLabels/RotationStats"]
+visible = false
+margin_left = -7.0
+margin_top = 2.0
+margin_right = 67.0
+margin_bottom = 26.0
+min_value = -1e+07
+max_value = 1e+07
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+
+[node name="ZoomStats" type="CenterContainer" parent="TopLabels"]
+margin_left = 80.0
+margin_right = 140.0
+margin_bottom = 28.0
+
+[node name="ZoomLevel" type="Button" parent="TopLabels/ZoomStats"]
+margin_top = 4.0
+margin_right = 60.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 60, 0 )
+mouse_filter = 1
+mouse_default_cursor_shape = 2
 text = "781 %"
 align = 2
 
 [node name="ZoomSpinbox" type="SpinBox" parent="TopLabels/ZoomStats"]
 visible = false
-margin_left = 64.0
-margin_right = 138.0
-margin_bottom = 28.0
+margin_left = -7.0
+margin_top = 2.0
+margin_right = 67.0
+margin_bottom = 26.0
 min_value = 100.0
 max_value = 2000.0
 value = 100.0
 suffix = "%"
 
 [node name="CursorPosition" type="Label" parent="TopLabels"]
-margin_left = 80.0
+margin_left = 160.0
 margin_top = 7.0
-margin_right = 128.0
+margin_right = 208.0
 margin_bottom = 21.0
 text = "[64×64]"
 align = 2

@@ -184,7 +184,7 @@ func move_with_arrow_keys(event : InputEvent) -> void:
 			var step := Vector2.ONE
 			if Input.is_key_pressed(KEY_CONTROL):
 				step = Vector2(Global.grid_width, Global.grid_height)
-			move_content(Vector2(int(event.is_action("ui_right")) - int(event.is_action("ui_left")), int(event.is_action("ui_down")) - int(event.is_action("ui_up"))) * step)
+			move_content(Vector2(int(event.is_action("ui_right")) - int(event.is_action("ui_left")), int(event.is_action("ui_down")) - int(event.is_action("ui_up"))).rotated(stepify(Global.camera.rotation, PI / 2)) * step)
 
 
 # Check if an event is a ui_up/down/left/right event-press
