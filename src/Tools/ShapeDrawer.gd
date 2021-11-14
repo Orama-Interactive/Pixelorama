@@ -84,6 +84,12 @@ func _input(event : InputEvent) -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	if Input.is_action_pressed("alt"):
+		_picking_color = true
+		_pick_color(position)
+		return
+	_picking_color = false
+
 	Global.canvas.selection.transform_content_confirm()
 	update_mask()
 
@@ -94,6 +100,11 @@ func draw_start(position : Vector2) -> void:
 
 
 func draw_move(position : Vector2) -> void:
+	if _picking_color: # Still return even if we released Alt
+		if Input.is_action_pressed("alt"):
+			_pick_color(position)
+		return
+
 	if _drawing:
 		if _displace_origin:
 			_start += position - _offset
@@ -103,6 +114,9 @@ func draw_move(position : Vector2) -> void:
 
 
 func draw_end(position : Vector2) -> void:
+	if _picking_color:
+		return
+
 	if _drawing:
 		_draw_shape(_start, position)
 
