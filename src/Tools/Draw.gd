@@ -7,6 +7,7 @@ var _brush_interpolate := 0
 var _brush_image := Image.new()
 var _brush_texture := ImageTexture.new()
 var _strength := 1.0
+var _picking_color := false
 
 var _undo_data := {}
 var _drawer := Drawer.new()
@@ -526,3 +527,23 @@ func _get_undo_data() -> Dictionary:
 		data[image] = image.data
 		image.lock()
 	return data
+
+
+func _pick_color(position : Vector2) -> void:
+	var project : Project = Global.current_project
+	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
+		position = position.posmodv(project.size)
+
+	if position.x < 0 or position.y < 0:
+		return
+
+	var image := Image.new()
+	image.copy_from(_get_draw_image())
+	if position.x > image.get_width() - 1 or position.y > image.get_height() - 1:
+		return
+
+	image.lock()
+	var color := image.get_pixelv(position)
+	image.unlock()
+	var button := BUTTON_LEFT if Tools._slots[BUTTON_LEFT].tool_node == self else BUTTON_RIGHT
+	Tools.assign_color(color, button, false)

@@ -215,6 +215,12 @@ func update_strength() -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	if Input.is_action_pressed("alt"):
+		_picking_color = true
+		_pick_color(position)
+		return
+	_picking_color = false
+
 	Global.canvas.selection.transform_content_confirm()
 	update_mask(false)
 	_changed = false
@@ -236,6 +242,11 @@ func draw_start(position : Vector2) -> void:
 
 
 func draw_move(position : Vector2) -> void:
+	if _picking_color: # Still return even if we released Alt
+		if Input.is_action_pressed("alt"):
+			_pick_color(position)
+		return
+
 	if _draw_line:
 		var d = _line_angle_constraint(_line_start, position)
 		_line_end = d.position
@@ -249,6 +260,9 @@ func draw_move(position : Vector2) -> void:
 
 
 func draw_end(_position : Vector2) -> void:
+	if _picking_color:
+		return
+
 	if _draw_line:
 		draw_tool(_line_start)
 		draw_fill_gap(_line_start, _line_end)
