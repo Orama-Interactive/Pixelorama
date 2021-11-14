@@ -95,13 +95,22 @@ func draw_end(_position : Vector2) -> void:
 
 func _draw_brush_image(image : Image, src_rect: Rect2, dst: Vector2) -> void:
 	_changed = true
-	var size := image.get_size()
-	if _clear_image.get_size() != size:
-		_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+	if _strength == 1:
+		var size := image.get_size()
+		if _clear_image.get_size() != size:
+			_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
 
-	var images := _get_selected_draw_images()
-	for draw_image in images:
-		draw_image.blit_rect_mask(_clear_image, image, src_rect, dst)
+		var images := _get_selected_draw_images()
+		for draw_image in images:
+			draw_image.blit_rect_mask(_clear_image, image, src_rect, dst)
+	else:
+		image.lock()
+		for xx in image.get_size().x:
+			for yy in image.get_size().y:
+				if image.get_pixel(xx, yy).a > 0:
+					var pos := Vector2(xx, yy) + dst - src_rect.position
+					_set_pixel(pos, true)
+		image.unlock()
 
 
 func _on_Opacity_value_changed(value: float) -> void:
