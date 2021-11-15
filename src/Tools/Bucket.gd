@@ -108,6 +108,10 @@ func update_pattern() -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	if Input.is_action_pressed("alt"):
+		_pick_color(position)
+		return
+
 	Global.canvas.selection.transform_content_confirm()
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn() or !Global.current_project.tile_mode_rects[Global.TileMode.NONE].has_point(position):
 		return
@@ -247,3 +251,23 @@ func _get_undo_data() -> Dictionary:
 		data[image] = image.data
 		image.lock()
 	return data
+
+
+func _pick_color(position : Vector2) -> void:
+	var project : Project = Global.current_project
+	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
+		position = position.posmodv(project.size)
+
+	if position.x < 0 or position.y < 0:
+		return
+
+	var image := Image.new()
+	image.copy_from(_get_draw_image())
+	if position.x > image.get_width() - 1 or position.y > image.get_height() - 1:
+		return
+
+	image.lock()
+	var color := image.get_pixelv(position)
+	image.unlock()
+	var button := BUTTON_LEFT if Tools._slots[BUTTON_LEFT].tool_node == self else BUTTON_RIGHT
+	Tools.assign_color(color, button, false)

@@ -35,6 +35,12 @@ func set_config(config : Dictionary) -> void:
 
 
 func draw_start(position : Vector2) -> void:
+	if Input.is_action_pressed("alt"):
+		_picking_color = true
+		_pick_color(position)
+		return
+	_picking_color = false
+
 	Global.canvas.selection.transform_content_confirm()
 	update_mask(_strength == 1)
 	_changed = false
@@ -56,6 +62,11 @@ func draw_start(position : Vector2) -> void:
 
 
 func draw_move(position : Vector2) -> void:
+	if _picking_color: # Still return even if we released Alt
+		if Input.is_action_pressed("alt"):
+			_pick_color(position)
+		return
+
 	if _draw_line:
 		var d = _line_angle_constraint(_line_start, position)
 		_line_end = d.position
@@ -69,6 +80,9 @@ func draw_move(position : Vector2) -> void:
 
 
 func draw_end(_position : Vector2) -> void:
+	if _picking_color:
+		return
+
 	if _draw_line:
 		draw_tool(_line_start)
 		draw_fill_gap(_line_start, _line_end)
@@ -81,13 +95,22 @@ func draw_end(_position : Vector2) -> void:
 
 func _draw_brush_image(image : Image, src_rect: Rect2, dst: Vector2) -> void:
 	_changed = true
-	var size := image.get_size()
-	if _clear_image.get_size() != size:
-		_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+	if _strength == 1:
+		var size := image.get_size()
+		if _clear_image.get_size() != size:
+			_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
 
-	var images := _get_selected_draw_images()
-	for draw_image in images:
-		draw_image.blit_rect_mask(_clear_image, image, src_rect, dst)
+		var images := _get_selected_draw_images()
+		for draw_image in images:
+			draw_image.blit_rect_mask(_clear_image, image, src_rect, dst)
+	else:
+		image.lock()
+		for xx in image.get_size().x:
+			for yy in image.get_size().y:
+				if image.get_pixel(xx, yy).a > 0:
+					var pos := Vector2(xx, yy) + dst - src_rect.position
+					_set_pixel(pos, true)
+		image.unlock()
 
 
 func _on_Opacity_value_changed(value: float) -> void:
@@ -100,3 +123,8 @@ func update_config() -> void:
 	.update_config()
 	$Opacity/OpacitySpinBox.value = _strength * 255
 	$Opacity/OpacitySlider.value = _strength * 255
+
+
+func update_brush() -> void:
+	.update_brush()
+	$ColorInterpolation.visible = false
