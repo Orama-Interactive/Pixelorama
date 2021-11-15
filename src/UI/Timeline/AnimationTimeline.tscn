@@ -158,9 +158,7 @@ margin_bottom = 25.0
 size_flags_vertical = 0
 custom_constants/separation = 9
 
-[node name="AddLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="AddLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_right = 22.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
@@ -184,9 +182,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RemoveLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="RemoveLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 31.0
 margin_right = 53.0
 margin_bottom = 22.0
@@ -212,9 +208,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveUpLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="MoveUpLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 62.0
 margin_right = 84.0
 margin_bottom = 22.0
@@ -240,9 +234,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveDownLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="MoveDownLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 93.0
 margin_right = 115.0
 margin_bottom = 22.0
@@ -268,9 +260,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CloneLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="CloneLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 124.0
 margin_right = 146.0
 margin_bottom = 22.0
@@ -295,9 +285,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MergeDownLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="MergeDownLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 155.0
 margin_right = 177.0
 margin_bottom = 22.0
@@ -348,9 +336,7 @@ alignment = 2
 margin_right = 140.0
 margin_bottom = 24.0
 
-[node name="AddFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
-"UIButtons",
-]]
+[node name="AddFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_top = 2.0
 margin_right = 20.0
 margin_bottom = 22.0
@@ -375,9 +361,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DeleteFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
-"UIButtons",
-]]
+[node name="DeleteFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 24.0
 margin_top = 2.0
 margin_right = 44.0
@@ -405,9 +389,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CopyFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
-"UIButtons",
-]]
+[node name="CopyFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 48.0
 margin_top = 2.0
 margin_right = 68.0
@@ -433,9 +415,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FrameTagButton" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
-"UIButtons",
-]]
+[node name="FrameTagButton" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 72.0
 margin_top = 2.0
 margin_right = 92.0
@@ -461,9 +441,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveLeft" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
-"UIButtons",
-]]
+[node name="MoveLeft" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 96.0
 margin_top = 2.0
 margin_right = 116.0
@@ -490,9 +468,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveRight" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
-"UIButtons",
-]]
+[node name="MoveRight" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 120.0
 margin_top = 2.0
 margin_right = 140.0
@@ -523,9 +499,7 @@ margin_left = 180.0
 margin_right = 320.0
 margin_bottom = 24.0
 
-[node name="FirstFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
+[node name="FirstFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_top = 2.0
 margin_right = 20.0
 margin_bottom = 22.0
@@ -551,9 +525,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PreviousFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
+[node name="PreviousFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 24.0
 margin_top = 2.0
 margin_right = 44.0
@@ -580,9 +552,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayBackwards" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
+[node name="PlayBackwards" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 48.0
 margin_top = 2.0
 margin_right = 68.0
@@ -610,9 +580,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayForward" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
+[node name="PlayForward" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 72.0
 margin_top = 2.0
 margin_right = 92.0
@@ -641,9 +609,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NextFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
+[node name="NextFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 96.0
 margin_top = 2.0
 margin_right = 116.0
@@ -670,9 +636,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LastFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
+[node name="LastFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 120.0
 margin_top = 2.0
 margin_right = 140.0
@@ -704,9 +668,7 @@ margin_left = 360.0
 margin_right = 498.0
 margin_bottom = 24.0
 
-[node name="OnionSkinningSettings" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=[
-"UIButtons",
-]]
+[node name="OnionSkinningSettings" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
 margin_top = 2.0
 margin_right = 12.0
 margin_bottom = 22.0
@@ -732,9 +694,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OnionSkinning" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=[
-"UIButtons",
-]]
+[node name="OnionSkinning" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
 margin_left = 16.0
 margin_top = 2.0
 margin_right = 36.0
@@ -761,9 +721,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LoopAnim" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=[
-"UIButtons",
-]]
+[node name="LoopAnim" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
 margin_left = 40.0
 margin_top = 2.0
 margin_right = 60.0
@@ -859,6 +817,7 @@ margin_left = 219.0
 margin_right = 902.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
+mouse_filter = 2
 size_flags_horizontal = 3
 theme = SubResource( 20 )
 scroll_vertical_enabled = false
