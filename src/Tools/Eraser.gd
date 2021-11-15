@@ -123,3 +123,8 @@ func update_config() -> void:
 	.update_config()
 	$Opacity/OpacitySpinBox.value = _strength * 255
 	$Opacity/OpacitySlider.value = _strength * 255
+
+
+func update_brush() -> void:
+	.update_brush()
+	$ColorInterpolation.visible = false
