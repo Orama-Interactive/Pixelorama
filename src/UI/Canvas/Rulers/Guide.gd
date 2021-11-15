@@ -68,7 +68,7 @@ func _draw() -> void:
 		var x_offset := 5
 		var y_offset := -7 # Only used where the string is above the guide
 
-		# Draw the string where the guide intersects with the viewport poly 
+		# Draw the string where the guide intersects with the viewport poly
 		# Priority is top edge, then left, then right
 		var intersection = Geometry.segment_intersects_segment_2d(points[0], points[1], viewport_poly[0], viewport_poly[1])
 		if intersection:

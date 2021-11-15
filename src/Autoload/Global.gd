@@ -10,11 +10,6 @@ enum PanelLayout {AUTO, WIDESCREEN, TALLSCREEN}
 enum IconColorFrom {THEME, CUSTOM}
 enum ButtonSize {SMALL, BIG}
 
-# Stuff for arrowkey-based canvas movements nyaa ^.^
-const low_speed_move_rate := 150.0
-const medium_speed_move_rate := 750.0
-const high_speed_move_rate := 3750.0
-
 var root_directory := "."
 var window_title := "" setget title_changed # Why doesn't Godot have get_window_title()?
 var config_cache := ConfigFile.new()
@@ -117,86 +112,89 @@ var onion_skinning_blue_red := false
 var palettes := {}
 
 # Nodes
-var control : Node
-var top_menu_container : Panel
-var left_cursor : Sprite
-var right_cursor : Sprite
-var canvas : Canvas
-var tabs : Tabs
-var main_viewport : ViewportContainer
-var second_viewport : ViewportContainer
-var small_preview_viewport : ViewportContainer
-var canvas_preview_container : Container
-var camera : Camera2D
-var camera2 : Camera2D
-var camera_preview : Camera2D
-var horizontal_ruler : BaseButton
-var vertical_ruler : BaseButton
-var transparent_checker : ColorRect
-
-var rotation_level_button : Button
-var rotation_level_spinbox : SpinBox
-var zoom_level_button : Button
-var zoom_level_spinbox : SpinBox
-var cursor_position_label : Label
-
-var tool_panel : Panel
-var right_panel : Panel
-var tabs_container : PanelContainer
-
-var recent_projects_submenu : PopupMenu
-var tile_mode_submenu : PopupMenu
-var window_transparency_submenu : PopupMenu
-var panel_layout_submenu : PopupMenu
-
-var new_image_dialog : ConfirmationDialog
-var open_sprites_dialog : FileDialog
-var save_sprites_dialog : FileDialog
-var save_sprites_html5_dialog : ConfirmationDialog
-var export_dialog : AcceptDialog
-var preferences_dialog : AcceptDialog
-var unsaved_changes_dialog : ConfirmationDialog
-
-var color_switch_button : BaseButton
-
-var brushes_popup : Popup
-var patterns_popup : Popup
-
-var animation_timeline : Panel
-
-var animation_timer : Timer
-var frame_properties : ConfirmationDialog
-var frame_ids : HBoxContainer
-var current_frame_mark_label : Label
-var onion_skinning_button : BaseButton
-var loop_animation_button : BaseButton
-var play_forward : BaseButton
-var play_backwards : BaseButton
-var layers_container : VBoxContainer
-var frames_container : VBoxContainer
-var tag_container : Control
-var tag_dialog : AcceptDialog
-
-var remove_frame_button : BaseButton
-var move_left_frame_button : BaseButton
-var move_right_frame_button : BaseButton
-
-var remove_layer_button : BaseButton
-var move_up_layer_button : BaseButton
-var move_down_layer_button : BaseButton
-var merge_down_layer_button : BaseButton
-var layer_opacity_slider : HSlider
-var layer_opacity_spinbox : SpinBox
-
-var preview_zoom_slider : VSlider
-var palette_panel : PalettePanel
-
-var error_dialog : AcceptDialog
-var quit_dialog : ConfirmationDialog
-var quit_and_save_dialog : ConfirmationDialog
 var notification_label_node = preload("res://src/UI/NotificationLabel.tscn")
 
+onready var root : Node = get_tree().get_root()
+onready var control : Node = root.get_node("Control")
+onready var top_menu_container : Panel = control.find_node("TopMenuContainer")
+onready var left_cursor : Sprite = control.find_node("LeftCursor")
+onready var right_cursor : Sprite = control.find_node("RightCursor")
+onready var canvas : Canvas = control.find_node("Canvas")
+onready var tabs : Tabs = control.find_node("Tabs")
+onready var main_viewport : ViewportContainer = control.find_node("ViewportContainer")
+onready var second_viewport : ViewportContainer = control.find_node("ViewportContainer2")
+onready var canvas_preview_container : Container = control.find_node("CanvasPreviewContainer")
+onready var small_preview_viewport : ViewportContainer = canvas_preview_container.find_node("PreviewViewportContainer")
+onready var camera : Camera2D = main_viewport.find_node("Camera2D")
+onready var camera2 : Camera2D = control.find_node("Camera2D2")
+onready var camera_preview : Camera2D = control.find_node("CameraPreview")
+onready var horizontal_ruler : BaseButton = control.find_node("HorizontalRuler")
+onready var vertical_ruler : BaseButton = control.find_node("VerticalRuler")
+onready var transparent_checker : ColorRect = control.find_node("TransparentChecker")
+
+onready var rotation_level_button : Button = control.find_node("RotationLevel")
+onready var rotation_level_spinbox : SpinBox = control.find_node("RotationSpinbox")
+onready var zoom_level_button : Button = control.find_node("ZoomLevel")
+onready var zoom_level_spinbox : SpinBox = control.find_node("ZoomSpinbox")
+onready var cursor_position_label : Label = control.find_node("CursorPosition")
+
+onready var tool_panel : Panel = control.find_node("ToolPanel")
+onready var right_panel : Panel = control.find_node("RightPanel")
+onready var tabs_container : PanelContainer = control.find_node("TabsContainer")
+
+onready var recent_projects_submenu : PopupMenu = PopupMenu.new()
+onready var tile_mode_submenu : PopupMenu = PopupMenu.new()
+onready var window_transparency_submenu : PopupMenu = PopupMenu.new()
+onready var panel_layout_submenu : PopupMenu = PopupMenu.new()
+
+onready var new_image_dialog : ConfirmationDialog = control.find_node("CreateNewImage")
+onready var open_sprites_dialog : FileDialog = control.find_node("OpenSprite")
+onready var save_sprites_dialog : FileDialog = control.find_node("SaveSprite")
+onready var save_sprites_html5_dialog : ConfirmationDialog = control.find_node("SaveSpriteHTML5")
+onready var export_dialog : AcceptDialog = control.find_node("ExportDialog")
+onready var preferences_dialog : AcceptDialog = control.find_node("PreferencesDialog")
+onready var unsaved_changes_dialog : ConfirmationDialog = control.find_node("UnsavedCanvasDialog")
+
+onready var color_switch_button : BaseButton = control.find_node("ColorSwitch")
+
+onready var brushes_popup : Popup = control.find_node("BrushesPopup")
+onready var patterns_popup : Popup = control.find_node("PatternsPopup")
+
+onready var animation_timeline : Panel = control.find_node("AnimationTimeline")
+
+onready var animation_timer : Timer = animation_timeline.find_node("AnimationTimer")
+onready var frame_properties : ConfirmationDialog = control.find_node("FrameProperties")
+onready var frame_ids : HBoxContainer = animation_timeline.find_node("FrameIDs")
+onready var current_frame_mark_label : Label = control.find_node("CurrentFrameMark")
+onready var onion_skinning_button : BaseButton = animation_timeline.find_node("OnionSkinning")
+onready var loop_animation_button : BaseButton = animation_timeline.find_node("LoopAnim")
+onready var play_forward : BaseButton = animation_timeline.find_node("PlayForward")
+onready var play_backwards : BaseButton = animation_timeline.find_node("PlayBackwards")
+onready var layers_container : VBoxContainer = animation_timeline.find_node("LayersContainer")
+onready var frames_container : VBoxContainer = animation_timeline.find_node("FramesContainer")
+onready var tag_container : Control = animation_timeline.find_node("TagContainer")
+onready var tag_dialog : AcceptDialog = animation_timeline.find_node("FrameTagDialog")
+
+onready var remove_frame_button : BaseButton = animation_timeline.find_node("DeleteFrame")
+onready var move_left_frame_button : BaseButton = animation_timeline.find_node("MoveLeft")
+onready var move_right_frame_button : BaseButton = animation_timeline.find_node("MoveRight")
+
+onready var remove_layer_button : BaseButton = animation_timeline.find_node("RemoveLayer")
+onready var move_up_layer_button : BaseButton = animation_timeline.find_node("MoveUpLayer")
+onready var move_down_layer_button : BaseButton = animation_timeline.find_node("MoveDownLayer")
+onready var merge_down_layer_button : BaseButton = animation_timeline.find_node("MergeDownLayer")
+onready var layer_opacity_slider : HSlider = animation_timeline.find_node("OpacitySlider")
+onready var layer_opacity_spinbox : SpinBox = animation_timeline.find_node("OpacitySpinBox")
+
+onready var preview_zoom_slider : VSlider = control.find_node("PreviewZoomSlider")
+onready var palette_panel : PalettePanel = control.find_node("PalettePanel")
+
+onready var error_dialog : AcceptDialog = control.find_node("ErrorDialog")
+onready var quit_dialog : ConfirmationDialog = control.find_node("QuitDialog")
+onready var quit_and_save_dialog : ConfirmationDialog = control.find_node("QuitAndSaveDialog")
+
 onready var current_version : String = ProjectSettings.get_setting("application/config/Version")
+
 
 func _ready() -> void:
 	randomize()
@@ -216,40 +214,8 @@ func _ready() -> void:
 	image_clipboard = Image.new()
 	Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 
-	var root : Node = get_tree().get_root()
-	control = root.get_node("Control")
-
-	top_menu_container = control.find_node("TopMenuContainer")
-	left_cursor = control.find_node("LeftCursor")
-	right_cursor = control.find_node("RightCursor")
-	canvas = control.find_node("Canvas")
-
-	tabs = control.find_node("Tabs")
-	main_viewport = control.find_node("ViewportContainer")
-	second_viewport = control.find_node("ViewportContainer2")
-	canvas_preview_container = control.find_node("CanvasPreviewContainer")
-	small_preview_viewport = canvas_preview_container.find_node("PreviewViewportContainer")
-	camera = main_viewport.find_node("Camera2D")
-	camera2 = control.find_node("Camera2D2")
-	camera_preview = control.find_node("CameraPreview")
-	horizontal_ruler = control.find_node("HorizontalRuler")
-	vertical_ruler = control.find_node("VerticalRuler")
-	transparent_checker = control.find_node("TransparentChecker")
-
-	rotation_level_button = control.find_node("RotationLevel")
-	rotation_level_spinbox = control.find_node("RotationSpinbox")
-	zoom_level_button = control.find_node("ZoomLevel")
-	zoom_level_spinbox = control.find_node("ZoomSpinbox")
-	cursor_position_label = control.find_node("CursorPosition")
-
-	tool_panel = control.find_node("ToolPanel")
-	right_panel = control.find_node("RightPanel")
-	tabs_container = control.find_node("TabsContainer")
-
-	recent_projects_submenu = PopupMenu.new()
 	recent_projects_submenu.set_name("recent_projects_submenu")
 
-	tile_mode_submenu = PopupMenu.new()
 	tile_mode_submenu.set_name("tile_mode_submenu")
 	tile_mode_submenu.add_radio_check_item("None", TileMode.NONE)
 	tile_mode_submenu.set_item_checked(TileMode.NONE, true)
@@ -258,7 +224,6 @@ func _ready() -> void:
 	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", TileMode.Y_AXIS)
 	tile_mode_submenu.hide_on_checkable_item_selection = false
 
-	window_transparency_submenu = PopupMenu.new()
 	window_transparency_submenu.set_name("set value")
 	window_transparency_submenu.add_radio_check_item("100%")
 	window_transparency_submenu.add_radio_check_item("90%")
@@ -274,61 +239,12 @@ func _ready() -> void:
 	window_transparency_submenu.set_item_checked(10, true)
 	window_transparency_submenu.hide_on_checkable_item_selection = false
 
-	panel_layout_submenu = PopupMenu.new()
 	panel_layout_submenu.set_name("panel_layout_submenu")
 	panel_layout_submenu.add_radio_check_item("Auto", PanelLayout.AUTO)
 	panel_layout_submenu.add_radio_check_item("Widescreen", PanelLayout.WIDESCREEN)
 	panel_layout_submenu.add_radio_check_item("Tallscreen", PanelLayout.TALLSCREEN)
 	panel_layout_submenu.hide_on_checkable_item_selection = false
 	panel_layout_submenu.set_item_checked(panel_layout, true)
-
-	new_image_dialog = control.find_node("CreateNewImage")
-	open_sprites_dialog = control.find_node("OpenSprite")
-	save_sprites_dialog = control.find_node("SaveSprite")
-	save_sprites_html5_dialog = control.find_node("SaveSpriteHTML5")
-	export_dialog = control.find_node("ExportDialog")
-	preferences_dialog = control.find_node("PreferencesDialog")
-	unsaved_changes_dialog = control.find_node("UnsavedCanvasDialog")
-
-	color_switch_button = control.find_node("ColorSwitch")
-
-	brushes_popup = control.find_node("BrushesPopup")
-	patterns_popup = control.find_node("PatternsPopup")
-
-	animation_timeline = control.find_node("AnimationTimeline")
-	frame_properties = control.find_node("FrameProperties")
-
-	layers_container = animation_timeline.find_node("LayersContainer")
-	frames_container = animation_timeline.find_node("FramesContainer")
-	animation_timer = animation_timeline.find_node("AnimationTimer")
-	frame_ids = animation_timeline.find_node("FrameIDs")
-	current_frame_mark_label = control.find_node("CurrentFrameMark")
-	onion_skinning_button = animation_timeline.find_node("OnionSkinning")
-	loop_animation_button = animation_timeline.find_node("LoopAnim")
-	play_forward = animation_timeline.find_node("PlayForward")
-	play_backwards = animation_timeline.find_node("PlayBackwards")
-	tag_container = animation_timeline.find_node("TagContainer")
-	tag_dialog = animation_timeline.find_node("FrameTagDialog")
-
-	remove_frame_button = animation_timeline.find_node("DeleteFrame")
-	move_left_frame_button = animation_timeline.find_node("MoveLeft")
-	move_right_frame_button = animation_timeline.find_node("MoveRight")
-
-	remove_layer_button = animation_timeline.find_node("RemoveLayer")
-	move_up_layer_button = animation_timeline.find_node("MoveUpLayer")
-	move_down_layer_button = animation_timeline.find_node("MoveDownLayer")
-	merge_down_layer_button = animation_timeline.find_node("MergeDownLayer")
-
-	layer_opacity_slider = animation_timeline.find_node("OpacitySlider")
-	layer_opacity_spinbox = animation_timeline.find_node("OpacitySpinBox")
-
-	preview_zoom_slider = control.find_node("PreviewZoomSlider")
-
-	palette_panel = control.find_node("PalettePanel")
-
-	error_dialog = control.find_node("ErrorDialog")
-	quit_dialog = control.find_node("QuitDialog")
-	quit_and_save_dialog = control.find_node("QuitAndSaveDialog")
 
 	projects.append(Project.new())
 	projects[0].layers.append(Layer.new())

@@ -1,6 +1,10 @@
 extends Camera2D
 
 
+const low_speed_move_rate := 150.0
+const medium_speed_move_rate := 750.0
+const high_speed_move_rate := 3750.0
+
 var tween : Tween
 var zoom_min := Vector2(0.005, 0.005)
 var zoom_max := Vector2.ONE
@@ -87,13 +91,13 @@ func dir_move_zoom_multiplier(press_time : float) -> float:
 	if press_time < 0:
 		return 0.0
 	if Input.is_key_pressed(KEY_SHIFT) and Input.is_key_pressed(KEY_CONTROL) :
-		return Global.high_speed_move_rate
+		return high_speed_move_rate
 	elif Input.is_key_pressed(KEY_SHIFT):
-		return Global.medium_speed_move_rate
+		return medium_speed_move_rate
 	elif !Input.is_key_pressed(KEY_CONTROL):
 		# control + right/left is used to move frames so
 		# we do this check to ensure that there is no conflict
-		return Global.low_speed_move_rate
+		return low_speed_move_rate
 	else:
 		return 0.0
 
@@ -216,7 +220,7 @@ func rotate_camera_around_point(degrees: float, point: Vector2) -> void:
 	rotation_changed()
 
 func set_camera_rotation_degrees(degrees: float) -> void:
-	var difference :=  degrees - rotation_degrees 
+	var difference :=  degrees - rotation_degrees
 	var canvas_center := Global.current_project.size / 2
 	offset = (offset - canvas_center).rotated(deg2rad(difference)) + canvas_center
 	rotation_degrees = wrapf(degrees, -180, 180)
