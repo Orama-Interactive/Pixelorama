@@ -65,7 +65,6 @@ func _on_AddTag_pressed() -> void:
 	current_tag_id = Global.current_project.animation_tags.size()
 	options_dialog.get_node("GridContainer/FromSpinBox").value = Global.current_project.current_frame + 1
 	options_dialog.get_node("GridContainer/ToSpinBox").value = Global.current_project.current_frame + 1
-	randomize()
 	options_dialog.get_node("GridContainer/ColorPickerButton").color = Color(randf(),randf(),randf())
 
 
