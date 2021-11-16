@@ -82,7 +82,7 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	if OS.get_name() == "HTML5":
 		directory_path = "user://"
 	else:
-		directory_path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
+		directory_path = Global.config_cache.get_value("data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP))
 
 
 func commit_undo() -> void:

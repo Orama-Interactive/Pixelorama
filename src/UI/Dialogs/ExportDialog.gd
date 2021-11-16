@@ -229,7 +229,7 @@ func _on_ExportDialog_about_to_show() -> void:
 		Export.directory_path = "user://"
 
 	if Export.directory_path.empty():
-		Export.directory_path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
+		Export.directory_path = Global.config_cache.get_value("data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP))
 
 	# If export already occured - sets gui to show previous settings
 	options_resize.value = Export.resize
