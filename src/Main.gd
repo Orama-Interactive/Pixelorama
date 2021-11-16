@@ -46,8 +46,8 @@ func _ready() -> void:
 	Global.quit_and_save_dialog.add_button("Save & Exit", false, "Save")
 	Global.quit_and_save_dialog.get_ok().text = "Exit without saving"
 
-	Global.open_sprites_dialog.current_dir = Global.config_cache.get_value("data", "file_dialog_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP))
-	Global.save_sprites_dialog.current_dir = Global.config_cache.get_value("data", "file_dialog_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP))
+	Global.open_sprites_dialog.current_dir = Global.config_cache.get_value("data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP))
+	Global.save_sprites_dialog.current_dir = Global.config_cache.get_value("data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP))
 
 	# FIXME: OS.get_system_dir does not grab the correct directory for Ubuntu Touch.
 	# Additionally, AppArmor policies prevent the app from writing to the /home
@@ -316,7 +316,7 @@ func load_last_project() -> void:
 			# Sync file dialogs
 			Global.save_sprites_dialog.current_dir = file_path.get_base_dir()
 			Global.open_sprites_dialog.current_dir = file_path.get_base_dir()
-			Global.config_cache.set_value("data", "file_dialog_dir", file_path.get_base_dir())
+			Global.config_cache.set_value("data", "current_dir", file_path.get_base_dir())
 		else:
 			# If file doesn't exist on disk then warn user about this
 			Global.error_dialog.set_text("Cannot find last project file.")
@@ -335,7 +335,7 @@ func load_recent_project_file(path : String) -> void:
 		# Sync file dialogs
 		Global.save_sprites_dialog.current_dir = path.get_base_dir()
 		Global.open_sprites_dialog.current_dir = path.get_base_dir()
-		Global.config_cache.set_value("data", "file_dialog_dir", path.get_base_dir())
+		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 	else:
 		# If file doesn't exist on disk then warn user about this
 		Global.error_dialog.set_text("Cannot find project file.")
@@ -346,14 +346,14 @@ func load_recent_project_file(path : String) -> void:
 func _on_OpenSprite_file_selected(path : String) -> void:
 	OpenSave.handle_loading_files([path])
 	Global.save_sprites_dialog.current_dir = path.get_base_dir()
-	Global.config_cache.set_value("data", "file_dialog_dir", path.get_base_dir())
+	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 
 
 func _on_SaveSprite_file_selected(path : String) -> void:
 	var zstd = Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").pressed
 	OpenSave.save_pxo_file(path, false, zstd)
 	Global.open_sprites_dialog.current_dir = path.get_base_dir()
-	Global.config_cache.set_value("data", "file_dialog_dir", path.get_base_dir())
+	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 
 	if is_quitting_on_save:
 		_on_QuitDialog_confirmed()
