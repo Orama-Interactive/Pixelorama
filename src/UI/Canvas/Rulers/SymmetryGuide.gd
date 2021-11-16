@@ -11,8 +11,8 @@ func _ready() -> void:
 	texture_mode = Line2D.LINE_TEXTURE_TILE
 	width = Global.camera.zoom.x * 4
 	yield(get_tree().create_timer(0.01), "timeout")
-#	default_color = Global.guide_color.darkened(0.2)
-	default_color = Global.guide_color * Global.guide_color
+	# Add a subtle difference to the normal guide color by mixing in some blue
+	default_color = Global.guide_color.linear_interpolate(Color(0.2 , 0.2, .65), .6)
 
 
 func _input(_event : InputEvent) -> void:

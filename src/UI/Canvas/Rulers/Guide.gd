@@ -13,6 +13,8 @@ func _ready() -> void:
 	width = Global.camera.zoom.x * 2
 	default_color = Global.guide_color
 	project.guides.append(self)
+	if outside_canvas():
+		modulate.a = 0.5
 
 
 func _input(_event : InputEvent):
@@ -45,6 +47,10 @@ func _input(_event : InputEvent):
 				var xx = stepify(mouse_pos.x, 0.5)
 				points[0].x = xx
 				points[1].x = xx
+			if outside_canvas():
+				modulate.a = 0.5
+			else:
+				modulate.a = 1
 		if Input.is_action_just_released("left_mouse"):
 			Global.has_focus = true
 			has_focus = false
@@ -67,7 +73,7 @@ func _draw() -> void:
 			viewport_poly[p] = viewport_poly[p].rotated(Global.camera.rotation) * zoom + Vector2(Global.camera.offset.x - (viewport_size.rotated(Global.camera.rotation).x / 2) * zoom.x, Global.camera.offset.y - (viewport_size.rotated(Global.camera.rotation).y / 2) * zoom.y)
 
 		var string := "%spx" % str(stepify(mouse_pos.y if type == Types.HORIZONTAL else mouse_pos.x, 0.5))
-		var color := Color.red if outside_canvas() else Global.control.theme.get_color("font_color", "Label")
+		var color: Color = Global.control.theme.get_color("font_color", "Label")
 		# X and Y offsets for nicer looking spacing
 		var x_offset := 5
 		var y_offset := -7 # Only used where the string is above the guide
