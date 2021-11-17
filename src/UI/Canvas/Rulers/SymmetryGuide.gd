@@ -11,25 +11,23 @@ func _ready() -> void:
 	texture_mode = Line2D.LINE_TEXTURE_TILE
 	width = Global.camera.zoom.x * 4
 	yield(get_tree().create_timer(0.01), "timeout")
-	modulate = Global.guide_color
+	# Add a subtle difference to the normal guide color by mixing in some blue
+	default_color = Global.guide_color.linear_interpolate(Color(0.2 , 0.2, .65), .6)
 
 
 func _input(_event : InputEvent) -> void:
 	._input(_event)
 	if type == Types.HORIZONTAL:
 		project.y_symmetry_point = points[0].y * 2 - 1
+		points[0].y = clamp(points[0].y, 0, Global.current_project.size.y)
+		points[1].y = clamp(points[1].y, 0, Global.current_project.size.y)
 	elif type == Types.VERTICAL:
+		points[0].x = clamp(points[0].x, 0, Global.current_project.size.x)
+		points[1].x = clamp(points[1].x, 0, Global.current_project.size.x)
 		project.x_symmetry_point = points[0].x * 2 - 1
 
 	yield(get_tree().create_timer(0.01), "timeout")
 
 
 func outside_canvas() -> bool:
-	if type == Types.HORIZONTAL:
-		points[0].y = clamp(points[0].y, 0, Global.current_project.size.y)
-		points[1].y = clamp(points[1].y, 0, Global.current_project.size.y)
-	elif type == Types.VERTICAL:
-		points[0].x = clamp(points[0].x, 0, Global.current_project.size.x)
-		points[1].x = clamp(points[1].x, 0, Global.current_project.size.x)
-
 	return false

@@ -82,7 +82,7 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	if OS.get_name() == "HTML5":
 		directory_path = "user://"
 	else:
-		directory_path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
+		directory_path = Global.config_cache.get_value("data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP))
 
 
 func commit_undo() -> void:
@@ -579,7 +579,7 @@ func animation_tags_changed(value : Array) -> void:
 		child.queue_free()
 
 	for tag in animation_tags:
-		var tag_base_size = Global.animation_timeline.cel_size + 3
+		var tag_base_size = Global.animation_timeline.cel_size + 4
 		var tag_c : Container = animation_tag_node.instance()
 		Global.tag_container.add_child(tag_c)
 		tag_c.tag = tag
@@ -589,9 +589,10 @@ func animation_tags_changed(value : Array) -> void:
 		tag_c.get_node("Label").modulate = tag.color
 		tag_c.get_node("Line2D").default_color = tag.color
 
-		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + tag.from
+		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + 1 # Added 1 to answer to get starting position of next cel
 		var tag_size : int = tag.to - tag.from
-		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size
+		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 4 # We dont need the 4 pixels at the end of last cel
+		tag_c.rect_position.y = 1 # To make top line of tag visible
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
 

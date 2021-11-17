@@ -156,7 +156,10 @@ func preference_update(prop : String) -> void:
 
 	if prop in ["guide_color"]:
 		for guide in Global.canvas.get_children():
-			if guide is Guide:
+			if guide is SymmetryGuide:
+				# Add a subtle difference to the normal guide color by mixing in some blue
+				guide.default_color = Global.guide_color.linear_interpolate(Color(0.2 , 0.2, .65), .6)
+			elif guide is Guide:
 				guide.default_color = Global.guide_color
 
 	if prop in ["fps_limit"]:

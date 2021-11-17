@@ -56,12 +56,12 @@ func cel_size_changed(value : int) -> void:
 		frame_id.rect_size.x = cel_size
 
 	for tag_c in Global.tag_container.get_children():
-		var tag_base_size = cel_size + 3
+		var tag_base_size = cel_size + 4
 		var tag : AnimationTag = tag_c.tag
-		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + tag.from
+		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + 1 # Added 1 to answer to get starting position of next cel
 		var tag_size : int = tag.to - tag.from
-		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size
-		tag_c.rect_size.x = (tag_size + 1) * tag_base_size
+		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 4 # We dont need the 4 pixels at the end of last cel
+		tag_c.rect_size.x = (tag_size + 1) * tag_base_size - 4 # We dont need the 4 pixels at the end of last cel
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
 
