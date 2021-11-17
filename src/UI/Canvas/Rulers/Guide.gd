@@ -17,13 +17,11 @@ func _ready() -> void:
 		modulate.a = 0.5
 
 
-func _input(_event : InputEvent):
+func _input(_event : InputEvent) -> void:
 	var tmp_transform = get_canvas_transform().affine_inverse()
 	var tmp_position = Global.main_viewport.get_local_mouse_position()
 	mouse_pos = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
 
-	if points.size() < 2:
-		return
 	var point0 := points[0]
 	var point1 := points[1]
 	if type == Types.HORIZONTAL:

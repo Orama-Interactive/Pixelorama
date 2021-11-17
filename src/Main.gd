@@ -21,7 +21,7 @@ onready var scroll_container := $MenuAndUI/UI/RightPanel/MarginContainer/Preview
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var alternate_transparent_background = ColorRect.new()
+	var alternate_transparent_background := ColorRect.new()
 	add_child(alternate_transparent_background)
 	move_child(alternate_transparent_background,0)
 	alternate_transparent_background.visible = false
@@ -66,10 +66,6 @@ func _ready() -> void:
 	zstd_checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	Global.save_sprites_dialog.get_vbox().add_child(zstd_checkbox)
 
-	if not Global.config_cache.has_section_key("preferences", "startup"):
-		Global.config_cache.set_value("preferences", "startup", true)
-	show_splash_screen()
-
 	handle_backup()
 
 	# If the user wants to run Pixelorama with arguments in terminal mode
@@ -80,6 +76,8 @@ func _ready() -> void:
 
 	if OS.get_name() == "Android":
 		OS.request_permissions()
+
+	show_splash_screen()
 
 
 func handle_resize() -> void:
@@ -240,9 +238,14 @@ func setup_application_window_size() -> void:
 
 
 func show_splash_screen() -> void:
-	# Wait for the window to adjust itself, so the popup is correctly centered
-	yield(get_tree().create_timer(0.2), "timeout")
+	if not Global.config_cache.has_section_key("preferences", "startup"):
+		Global.config_cache.set_value("preferences", "startup", true)
+
 	if Global.config_cache.get_value("preferences", "startup"):
+		if OS.window_size != Vector2(1280, 720):
+			# Wait for the window to adjust itself, so the popup is correctly centered
+			yield(get_tree(), "screen_resized")
+
 		$Dialogs/SplashDialog.popup_centered() # Splash screen
 		modulate = Color(0.5, 0.5, 0.5)
 	else:

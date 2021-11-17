@@ -71,27 +71,28 @@ var alt := false
 
 func _ready() -> void:
 	_tool_buttons = Global.control.find_node("ToolButtons")
-	yield(get_tree(), "idle_frame")
 	_slots[BUTTON_LEFT] = Slot.new("Left tool")
 	_slots[BUTTON_RIGHT] = Slot.new("Right tool")
 	_panels[BUTTON_LEFT] = Global.control.find_node("LeftPanelContainer", true, false)
 	_panels[BUTTON_RIGHT] = Global.control.find_node("RightPanelContainer", true, false)
 
-	var value = Global.config_cache.get_value(_slots[BUTTON_LEFT].kname, "tool", "Pencil")
-	if not value in _tools:
-		value = "Pencil"
-	set_tool(value, BUTTON_LEFT)
-	value = Global.config_cache.get_value(_slots[BUTTON_RIGHT].kname, "tool", "Eraser")
-	if not value in _tools:
-		value = "Eraser"
-	set_tool(value, BUTTON_RIGHT)
-	value = Global.config_cache.get_value(_slots[BUTTON_LEFT].kname, "color", Color.black)
-	assign_color(value, BUTTON_LEFT, false)
-	value = Global.config_cache.get_value(_slots[BUTTON_RIGHT].kname, "color", Color.white)
-	assign_color(value, BUTTON_RIGHT, false)
+	var tool_name : String = Global.config_cache.get_value(_slots[BUTTON_LEFT].kname, "tool", "Pencil")
+	if not tool_name in _tools:
+		tool_name = "Pencil"
+	set_tool(tool_name, BUTTON_LEFT)
+	tool_name = Global.config_cache.get_value(_slots[BUTTON_RIGHT].kname, "tool", "Eraser")
+	if not tool_name in _tools:
+		tool_name = "Eraser"
+	set_tool(tool_name, BUTTON_RIGHT)
 
 	update_tool_buttons()
 	update_tool_cursors()
+
+	yield(get_tree(), "idle_frame") # Necessary for the color picker nodes to update their color values
+	var color_value : Color = Global.config_cache.get_value(_slots[BUTTON_LEFT].kname, "color", Color.black)
+	assign_color(color_value, BUTTON_LEFT, false)
+	color_value = Global.config_cache.get_value(_slots[BUTTON_RIGHT].kname, "color", Color.white)
+	assign_color(color_value, BUTTON_RIGHT, false)
 
 
 func set_tool(name : String, button : int) -> void:

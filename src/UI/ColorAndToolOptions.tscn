@@ -45,9 +45,7 @@ margin_top = 6.0
 margin_right = 25.0
 margin_bottom = 13.0
 
-[node name="ColorSwitch" type="TextureButton" parent="ColorPickersHorizontal/ColorButtonsVertical/ColorSwitchCenter" groups=[
-"UIButtons",
-]]
+[node name="ColorSwitch" type="TextureButton" parent="ColorPickersHorizontal/ColorButtonsVertical/ColorSwitchCenter" groups=["UIButtons"]]
 margin_right = 25.0
 margin_bottom = 7.0
 mouse_default_cursor_shape = 2

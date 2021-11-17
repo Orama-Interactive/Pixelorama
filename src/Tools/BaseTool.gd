@@ -12,7 +12,6 @@ func _ready() -> void:
 	kname = name.replace(" ", "_").to_lower()
 	$Label.text = tool_slot.name
 
-	yield(get_tree(), "idle_frame")
 	load_config()
 	$PixelPerfect.pressed = tool_slot.pixel_perfect
 	$Mirror/Horizontal.pressed = tool_slot.horizontal_mirror

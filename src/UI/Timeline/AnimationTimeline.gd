@@ -20,7 +20,6 @@ func _ready() -> void:
 	tag_scroll_container = find_node("TagScroll")
 	fps_spinbox = find_node("FPSValue")
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
-	yield(get_tree(), "idle_frame")
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
 
