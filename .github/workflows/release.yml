@@ -96,16 +96,22 @@ jobs:
           submodules: true
       - name: Setup 💻
         run: |
-          mkdir -v -p build/linux-64bit build/linux-32bit ~/.local/share/godot/templates
+          mkdir -v -p build/linux-64bit build/linux-32bit build/linux-rpi4 ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Download Unofficial Godot Raspberry Pi 4 Builds 🍇
+        run: |
+          wget https://github.com/hiulit/Unofficial-Godot-Engine-Raspberry-Pi/releases/download/v1.7.0/godot_${GODOT_VERSION}-stable_rpi4.zip
+          unzip -a godot_${GODOT_VERSION}-stable_rpi4.zip
       - name: Linux Build 🔧
         run: |
           godot -v --export "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
           godot -v --export "Linux/X11 32-bit" ./build/linux-32bit/$EXPORT_NAME.x86
+          godot -v --export "Raspberry Pi 4" ./build/linux-rpi4/$EXPORT_NAME.rpi4
       - name: Give execute permission ☑️
         run: |
           chmod +x ./build/linux-64bit/$EXPORT_NAME.x86_64
           chmod +x ./build/linux-32bit/$EXPORT_NAME.x86
+          chmod +x ./build/linux-rpi4/$EXPORT_NAME.rpi4
       - name: Copy pixelorama_data folder 📁
         run: |
           cp -R ./pixelorama_data ./build/linux-64bit
@@ -117,6 +123,7 @@ jobs:
           cd build
           tar zcvf linux-64bit.tar.gz linux-64bit
           tar zcvf linux-32bit.tar.gz linux-32bit
+          tar zcvf linux-rpi4.tar.gz linux-rpi4
       - name: Upload 64-bit Release Asset 🚀
         uses: svenstaro/upload-release-action@v2
         with:
@@ -133,10 +140,19 @@ jobs:
           asset_name: ${{env.EXPORT_NAME}}[Linux-32bit].tar.gz
           tag: ${{env.TAG}}
           overwrite: true
+      - name: Upload Raspberry Pi 4 Release Asset
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./build/linux-rpi4.tar.gz
+          asset_name: ${{env.EXPORT_NAME}}[Linux-RPI4].tar.gz
+          tag: ${{env.TAG}}
+          overwrite: true
       - name: Upload Release Assets to itch.io 🎮
         run: |
           butler push ./build/linux-64bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-64 --userversion ${{env.TAG}}
           butler push ./build/linux-32bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-32 --userversion ${{env.TAG}}
+          butler push ./build/linux-rpi4.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-rpi4 --userversion ${{env.TAG}}
 
   build_pck:
     name: Create Pixelorama pack data for Clickable
@@ -214,7 +230,7 @@ jobs:
           submodules: true
       - name: Setup environment 🔧
         run: |
-          export GODOT_VERSION=3.4
+          export GODOT_VERSION=${GODOT_VERSION_MAC}
           export EXPORT_NAME=Pixelorama
       - name: Download and extract export templates 💾
         run: |
@@ -224,7 +240,7 @@ jobs:
           mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION_MAC}.stable
       - name: Download Godot headless binary 🤖
         run: |
-          wget https://github.com/huskeee/godot-headless-mac/releases/download/3.4-stable/Godot_v3.4-stable_mac_headless.64.zip
+          wget https://github.com/huskeee/godot-headless-mac/releases/download/${GODOT_VERSION_MAC}-stable/Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip
           unzip -a Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip
       - name: Setup 💻
         run: mkdir -v -p ./build/mac
