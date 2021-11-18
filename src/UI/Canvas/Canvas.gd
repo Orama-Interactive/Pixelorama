@@ -23,7 +23,7 @@ onready var previews = $Previews
 func _ready() -> void:
 	var frame : Frame = new_empty_frame(true)
 	Global.current_project.frames.append(frame)
-	yield(get_tree().create_timer(0.2), "timeout")
+	yield(get_tree(), "idle_frame")
 	camera_zoom()
 
 

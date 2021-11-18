@@ -10,7 +10,6 @@ func _ready() -> void:
 	texture = _texture
 	texture_mode = Line2D.LINE_TEXTURE_TILE
 	width = Global.camera.zoom.x * 4
-	yield(get_tree().create_timer(0.01), "timeout")
 	# Add a subtle difference to the normal guide color by mixing in some blue
 	default_color = Global.guide_color.linear_interpolate(Color(0.2 , 0.2, .65), .6)
 
@@ -25,8 +24,6 @@ func _input(_event : InputEvent) -> void:
 		points[0].x = clamp(points[0].x, 0, Global.current_project.size.x)
 		points[1].x = clamp(points[1].x, 0, Global.current_project.size.x)
 		project.x_symmetry_point = points[0].x * 2 - 1
-
-	yield(get_tree().create_timer(0.01), "timeout")
 
 
 func outside_canvas() -> bool:
