@@ -249,7 +249,7 @@ func show_splash_screen() -> void:
 		Global.config_cache.set_value("preferences", "startup", true)
 
 	if Global.config_cache.get_value("preferences", "startup"):
-		if OS.window_size != Vector2(1280, 720):
+		if OS.get_name() != "HTML5" and OS.window_size != Vector2(1280, 720):
 			# Wait for the window to adjust itself, so the popup is correctly centered
 			yield(get_tree(), "screen_resized")
 
