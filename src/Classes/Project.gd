@@ -231,7 +231,7 @@ func change_project() -> void:
 	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
 
 	var i := 0
-	for camera in [Global.camera, Global.camera2, Global.camera_preview]:
+	for camera in Global.cameras:
 		camera.zoom_max = cameras_zoom_max[i]
 		if camera == Global.camera_preview:
 			Global.preview_zoom_slider.disconnect("value_changed", Global.canvas_preview_container, "_on_PreviewZoomSlider_value_changed")

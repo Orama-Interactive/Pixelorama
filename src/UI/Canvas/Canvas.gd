@@ -51,7 +51,8 @@ func _draw() -> void:
 		onion_skinning()
 	currently_visible_frame.size = Global.current_project.size
 	current_frame_drawer.update()
-	tile_mode.update()
+	if Global.current_project.tile_mode != Global.TileMode.NONE:
+		tile_mode.update()
 	draw_set_transform(position, rotation, scale)
 
 
@@ -87,8 +88,8 @@ func camera_zoom() -> void:
 	# Set camera zoom based on the sprite size
 	var bigger_canvas_axis = max(Global.current_project.size.x, Global.current_project.size.y)
 	var zoom_max := Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.01
-	var cameras = [Global.camera, Global.camera2, Global.camera_preview]
-	for camera in cameras:
+
+	for camera in Global.cameras:
 		if zoom_max > Vector2.ONE:
 			camera.zoom_max = zoom_max
 		else:

@@ -1,15 +1,14 @@
 extends Control
 
+
 var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
-
 var tallscreen_is_active = false
-
 var alternate_transparent_background := ColorRect.new()
+
 onready var ui := $MenuAndUI/UI
 onready var tools_and_canvas : HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas
-
 onready var tallscreen_hsplit_container : HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas/CanvasAndTimeline/TallscreenHSplitContainer
 onready var bottom_panel : VSplitContainer = tallscreen_hsplit_container.get_node("BottomPanel")
 onready var right_panel := $MenuAndUI/UI/RightPanel
@@ -61,6 +60,11 @@ func _ready() -> void:
 	if OS.has_feature("clickable"):
 		Global.open_sprites_dialog.current_dir = OS.get_user_data_dir()
 		Global.save_sprites_dialog.current_dir = OS.get_user_data_dir()
+
+	var i := 0
+	for camera in Global.cameras:
+		camera.index = i
+		i += 1
 
 	var zstd_checkbox := CheckBox.new()
 	zstd_checkbox.name = "ZSTDCompression"

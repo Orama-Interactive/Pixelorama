@@ -15,6 +15,8 @@ func _ready() -> void:
 
 
 func _input(_event : InputEvent) -> void:
+	if !visible:
+		return
 	._input(_event)
 	if type == Types.HORIZONTAL:
 		project.y_symmetry_point = points[0].y * 2 - 1

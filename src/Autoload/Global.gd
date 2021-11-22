@@ -127,6 +127,7 @@ onready var small_preview_viewport : ViewportContainer = canvas_preview_containe
 onready var camera : Camera2D = main_viewport.find_node("Camera2D")
 onready var camera2 : Camera2D = control.find_node("Camera2D2")
 onready var camera_preview : Camera2D = control.find_node("CameraPreview")
+onready var cameras = [Global.camera, Global.camera2, Global.camera_preview]
 onready var horizontal_ruler : BaseButton = control.find_node("HorizontalRuler")
 onready var vertical_ruler : BaseButton = control.find_node("VerticalRuler")
 onready var transparent_checker : ColorRect = control.find_node("TransparentChecker")
