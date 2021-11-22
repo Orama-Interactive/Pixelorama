@@ -36,7 +36,7 @@ var cursor_image = preload("res://assets/graphics/cursor.png")
 var left_cursor_tool_texture := StreamTexture.new()
 var right_cursor_tool_texture := StreamTexture.new()
 
-var image_clipboard : Image
+var image_clipboard := Image.new()
 var play_only_tags := true
 var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
@@ -143,8 +143,6 @@ onready var right_panel : Panel = control.find_node("RightPanel")
 onready var tabs_container : PanelContainer = control.find_node("TabsContainer")
 
 onready var recent_projects_submenu : PopupMenu = PopupMenu.new()
-onready var tile_mode_submenu : PopupMenu = PopupMenu.new()
-onready var panel_layout_submenu : PopupMenu = PopupMenu.new()
 
 onready var new_image_dialog : ConfirmationDialog = control.find_node("CreateNewImage")
 onready var open_sprites_dialog : FileDialog = control.find_node("OpenSprite")
@@ -207,28 +205,9 @@ func _ready() -> void:
 	recent_projects = config_cache.get_value("data", "recent_projects", [])
 	panel_layout = config_cache.get_value("window", "panel_layout", PanelLayout.AUTO)
 
-	# The fact that root_dir is set earlier than this is important
-	# XDGDataDirs depends on it nyaa
+	# root_directory must be set earlier than this is because XDGDataDirs depends on it
 	directory_module = XDGDataPaths.new()
-	image_clipboard = Image.new()
 	Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
-
-	recent_projects_submenu.set_name("recent_projects_submenu")
-
-	tile_mode_submenu.set_name("tile_mode_submenu")
-	tile_mode_submenu.add_radio_check_item("None", TileMode.NONE)
-	tile_mode_submenu.set_item_checked(TileMode.NONE, true)
-	tile_mode_submenu.add_radio_check_item("Tiled In Both Axis", TileMode.BOTH)
-	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", TileMode.X_AXIS)
-	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", TileMode.Y_AXIS)
-	tile_mode_submenu.hide_on_checkable_item_selection = false
-
-	panel_layout_submenu.set_name("panel_layout_submenu")
-	panel_layout_submenu.add_radio_check_item("Auto", PanelLayout.AUTO)
-	panel_layout_submenu.add_radio_check_item("Widescreen", PanelLayout.WIDESCREEN)
-	panel_layout_submenu.add_radio_check_item("Tallscreen", PanelLayout.TALLSCREEN)
-	panel_layout_submenu.hide_on_checkable_item_selection = false
-	panel_layout_submenu.set_item_checked(panel_layout, true)
 
 	projects.append(Project.new())
 	projects[0].layers.append(Layer.new())

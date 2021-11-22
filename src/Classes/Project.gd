@@ -220,7 +220,7 @@ func change_project() -> void:
 		Global.top_menu_container.file_menu.set_item_text(6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
 
 	for j in Global.TileMode.values():
-		Global.tile_mode_submenu.set_item_checked(j, j == tile_mode)
+		Global.top_menu_container.tile_mode_submenu.set_item_checked(j, j == tile_mode)
 
 	# Change selection effect & bounding rectangle
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset

@@ -15,6 +15,8 @@ onready var image_menu_button : MenuButton = find_node("ImageMenu")
 onready var select_menu_button : MenuButton = find_node("SelectMenu")
 onready var help_menu_button : MenuButton = find_node("HelpMenu")
 onready var window_opacity_dialog : AcceptDialog = Global.control.find_node("WindowOpacityDialog")
+onready var tile_mode_submenu : PopupMenu = PopupMenu.new()
+onready var panel_layout_submenu : PopupMenu = PopupMenu.new()
 
 var file_menu : PopupMenu
 var view_menu : PopupMenu
@@ -126,15 +128,30 @@ func setup_view_menu() -> void:
 
 
 func setup_tile_mode_submenu(item : String):
-	Global.tile_mode_submenu.connect("id_pressed", self, "tile_mode_submenu_id_pressed")
-	view_menu.add_child(Global.tile_mode_submenu)
-	view_menu.add_submenu_item(item, Global.tile_mode_submenu.get_name())
+	tile_mode_submenu.set_name("tile_mode_submenu")
+	tile_mode_submenu.add_radio_check_item("None", Global.TileMode.NONE)
+	tile_mode_submenu.set_item_checked(Global.TileMode.NONE, true)
+	tile_mode_submenu.add_radio_check_item("Tiled In Both Axis", Global.TileMode.BOTH)
+	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", Global.TileMode.X_AXIS)
+	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", Global.TileMode.Y_AXIS)
+	tile_mode_submenu.hide_on_checkable_item_selection = false
+
+	tile_mode_submenu.connect("id_pressed", self, "tile_mode_submenu_id_pressed")
+	view_menu.add_child(tile_mode_submenu)
+	view_menu.add_submenu_item(item, tile_mode_submenu.get_name())
 
 
 func setup_panel_layout_submenu(item : String):
-	Global.panel_layout_submenu.connect("id_pressed", self, "panel_layout_submenu_id_pressed")
-	view_menu.add_child(Global.panel_layout_submenu)
-	view_menu.add_submenu_item(item, Global.panel_layout_submenu.get_name())
+	panel_layout_submenu.set_name("panel_layout_submenu")
+	panel_layout_submenu.add_radio_check_item("Auto", Global.PanelLayout.AUTO)
+	panel_layout_submenu.add_radio_check_item("Widescreen", Global.PanelLayout.WIDESCREEN)
+	panel_layout_submenu.add_radio_check_item("Tallscreen", Global.PanelLayout.TALLSCREEN)
+	panel_layout_submenu.hide_on_checkable_item_selection = false
+	panel_layout_submenu.set_item_checked(Global.panel_layout, true)
+
+	panel_layout_submenu.connect("id_pressed", self, "panel_layout_submenu_id_pressed")
+	view_menu.add_child(panel_layout_submenu)
+	view_menu.add_submenu_item(item, panel_layout_submenu.get_name())
 
 
 func setup_image_menu() -> void:
@@ -331,7 +348,7 @@ func tile_mode_submenu_id_pressed(id : int) -> void:
 	Global.current_project.tile_mode = id
 	Global.transparent_checker.fit_rect(Global.current_project.get_tile_mode_rect())
 	for i in Global.TileMode.values():
-		Global.tile_mode_submenu.set_item_checked(i, i == id)
+		tile_mode_submenu.set_item_checked(i, i == id)
 	Global.canvas.tile_mode.update()
 	Global.canvas.pixel_grid.update()
 	Global.canvas.grid.update()
@@ -340,7 +357,7 @@ func tile_mode_submenu_id_pressed(id : int) -> void:
 func panel_layout_submenu_id_pressed(id : int) -> void:
 	Global.panel_layout = id
 	for i in Global.PanelLayout.values():
-		Global.panel_layout_submenu.set_item_checked(i, i == id)
+		panel_layout_submenu.set_item_checked(i, i == id)
 	get_tree().get_root().get_node("Control").handle_resize()
 
 
