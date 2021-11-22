@@ -20,7 +20,6 @@ var projects := [] # Array of Projects
 var current_project : Project
 var current_project_index := 0 setget project_changed
 
-var recent_projects := []
 var panel_layout = PanelLayout.AUTO
 
 # Indices are as in the Direction enum
@@ -194,20 +193,15 @@ onready var current_version : String = ProjectSettings.get_setting("application/
 
 
 func _ready() -> void:
-	randomize()
-	if OS.get_name() == "OSX":
-		use_osx_shortcuts()
 	if OS.has_feature("standalone"):
 		root_directory = OS.get_executable_path().get_base_dir()
+	# root_directory must be set earlier than this is because XDGDataDirs depends on it
+	directory_module = XDGDataPaths.new()
+
 	# Load settings from the config file
 	config_cache.load("user://cache.ini")
 
-	recent_projects = config_cache.get_value("data", "recent_projects", [])
 	panel_layout = config_cache.get_value("window", "panel_layout", PanelLayout.AUTO)
-
-	# root_directory must be set earlier than this is because XDGDataDirs depends on it
-	directory_module = XDGDataPaths.new()
-	Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 
 	projects.append(Project.new())
 	projects[0].layers.append(Layer.new())
@@ -510,54 +504,3 @@ Hold %s to displace the shape's origin""") % [InputMap.get_action_list("left_ell
 
 func is_cjk(locale : String) -> bool:
 	return "zh" in locale or "ko" in locale or "ja" in locale
-
-
-func _exit_tree() -> void:
-	config_cache.set_value("window", "panel_layout", panel_layout)
-	config_cache.set_value("window", "screen", OS.current_screen)
-	config_cache.set_value("window", "maximized", OS.window_maximized || OS.window_fullscreen)
-	config_cache.set_value("window", "position", OS.window_position)
-	config_cache.set_value("window", "size", OS.window_size)
-	config_cache.save("user://cache.ini")
-
-	var i := 0
-	for project in projects:
-		project.undo_redo.free()
-		OpenSave.remove_backup(i)
-		i += 1
-
-
-func save_project_to_recent_list(path : String) -> void:
-	if path.get_file().substr(0, 7) == "backup-" or path == "":
-		return
-
-	if recent_projects.has(path):
-		return
-
-	if recent_projects.size() >= 5:
-		recent_projects.pop_front()
-	recent_projects.push_back(path)
-
-	config_cache.set_value("data", "recent_projects", recent_projects)
-
-	recent_projects_submenu.clear()
-	update_recent_projects_submenu()
-
-
-func update_recent_projects_submenu() -> void:
-	for project in recent_projects:
-		recent_projects_submenu.add_item(project.get_file())
-
-
-func use_osx_shortcuts() -> void:
-	var inputmap := InputMap
-
-	for action in inputmap.get_actions():
-		var event : InputEvent = inputmap.get_action_list(action)[0]
-
-		if event.is_action("show_pixel_grid"):
-			event.shift = true
-
-		if event.control:
-			event.control = false
-			event.command = true

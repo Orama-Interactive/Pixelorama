@@ -21,6 +21,7 @@ onready var panel_layout_submenu : PopupMenu = PopupMenu.new()
 var file_menu : PopupMenu
 var view_menu : PopupMenu
 var zen_mode := false
+var recent_projects := []
 
 
 func _ready() -> void:
@@ -62,11 +63,17 @@ func setup_file_menu() -> void:
 
 
 func setup_recent_projects_submenu(item : String) -> void:
+	recent_projects = Global.config_cache.get_value("data", "recent_projects", [])
 	Global.recent_projects_submenu.connect("id_pressed", self, "on_recent_projects_submenu_id_pressed")
-	Global.update_recent_projects_submenu()
+	update_recent_projects_submenu()
 
 	file_menu.add_child(Global.recent_projects_submenu)
 	file_menu.add_submenu_item(item, Global.recent_projects_submenu.get_name())
+
+
+func update_recent_projects_submenu() -> void:
+	for project in recent_projects:
+		Global.recent_projects_submenu.add_item(project.get_file())
 
 
 func setup_edit_menu() -> void:
@@ -296,7 +303,7 @@ func export_file() -> void:
 
 
 func on_recent_projects_submenu_id_pressed(id : int) -> void:
-	Global.control.load_recent_project_file(Global.recent_projects[id])
+	Global.control.load_recent_project_file(recent_projects[id])
 
 
 func edit_menu_id_pressed(id : int) -> void:

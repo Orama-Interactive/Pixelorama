@@ -21,6 +21,7 @@ onready var scroll_container := $MenuAndUI/UI/RightPanel/MarginContainer/Preview
 
 
 func _ready() -> void:
+	randomize()
 	add_child(alternate_transparent_background)
 	move_child(alternate_transparent_background,0)
 	alternate_transparent_background.visible = false
@@ -34,6 +35,10 @@ func _ready() -> void:
 	handle_resize()
 	get_tree().get_root().connect("size_changed", self, "handle_resize")
 
+	if OS.get_name() == "OSX":
+		use_osx_shortcuts()
+
+	Input.set_custom_mouse_cursor(Global.cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
 	Global.current_project.layers[0].name = tr("Layer") + " 0"
@@ -422,3 +427,32 @@ func _on_BackupConfirmation_delete(project_paths : Array, backup_paths : Array) 
 
 func _on_BackupConfirmation_popup_hide() -> void:
 	OpenSave.autosave_timer.start()
+
+
+func use_osx_shortcuts() -> void:
+	var inputmap := InputMap
+
+	for action in inputmap.get_actions():
+		var event : InputEvent = inputmap.get_action_list(action)[0]
+
+		if event.is_action("show_pixel_grid"):
+			event.shift = true
+
+		if event.control:
+			event.control = false
+			event.command = true
+
+
+func _exit_tree() -> void:
+	Global.config_cache.set_value("window", "panel_layout", Global.panel_layout)
+	Global.config_cache.set_value("window", "screen", OS.current_screen)
+	Global.config_cache.set_value("window", "maximized", OS.window_maximized || OS.window_fullscreen)
+	Global.config_cache.set_value("window", "position", OS.window_position)
+	Global.config_cache.set_value("window", "size", OS.window_size)
+	Global.config_cache.save("user://cache.ini")
+
+	var i := 0
+	for project in Global.projects:
+		project.undo_redo.free()
+		OpenSave.remove_backup(i)
+		i += 1

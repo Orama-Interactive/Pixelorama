@@ -124,7 +124,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false, replace_empty 
 		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
 		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 
-	Global.save_project_to_recent_list(path)
+	save_project_to_recent_list(path)
 
 
 # For pxo files older than v0.8
@@ -343,7 +343,7 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 		project.was_exported = false
 		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
 
-	Global.save_project_to_recent_list(path)
+	save_project_to_recent_list(path)
 
 
 func open_image_as_new_tab(path : String, image : Image) -> void:
@@ -615,3 +615,21 @@ func reload_backup_file(project_paths : Array, backup_paths : Array) -> void:
 			Global.current_project.has_changed = true
 
 	Global.notification_label("Backup reloaded")
+
+
+func save_project_to_recent_list(path : String) -> void:
+	var top_menu_container : Panel = Global.top_menu_container
+	if path.get_file().substr(0, 7) == "backup-" or path == "":
+		return
+
+	if top_menu_container.recent_projects.has(path):
+		return
+
+	if top_menu_container.recent_projects.size() >= 5:
+		top_menu_container.recent_projects.pop_front()
+	top_menu_container.recent_projects.push_back(path)
+
+	Global.config_cache.set_value("data", "recent_projects", top_menu_container.recent_projects)
+
+	Global.recent_projects_submenu.clear()
+	top_menu_container.update_recent_projects_submenu()
