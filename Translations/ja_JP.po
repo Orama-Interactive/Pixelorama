@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-11-22 02:50\n"
+"PO-Revision-Date: 2021-11-22 02:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -178,7 +178,7 @@ msgid "Tile Mode"
 msgstr "タイルモード"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "ウィンドウ不透明度"
 
 msgid "Panel Layout"
 msgstr "パネルのレイアウト"
