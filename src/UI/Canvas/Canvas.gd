@@ -5,7 +5,6 @@ extends Node2D
 var fill_color := Color(0, 0, 0, 0)
 var current_pixel := Vector2.ZERO
 var can_undo := true
-var cursor_image_has_changed := false
 var sprite_changed_this_frame := false # for optimization purposes
 var move_preview_location := Vector2.ZERO
 
@@ -77,19 +76,6 @@ func _input(event : InputEvent) -> void:
 		update()
 
 	sprite_changed_this_frame = false
-
-	if Global.has_focus:
-		if !cursor_image_has_changed:
-			cursor_image_has_changed = true
-			if Global.show_left_tool_icon:
-				Global.left_cursor.visible = true
-			if Global.show_right_tool_icon:
-				Global.right_cursor.visible = true
-	else:
-		if cursor_image_has_changed:
-			cursor_image_has_changed = false
-			Global.left_cursor.visible = false
-			Global.right_cursor.visible = false
 
 	Tools.handle_draw(current_pixel.floor(), event)
 
