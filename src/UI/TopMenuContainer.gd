@@ -3,7 +3,7 @@ extends Panel
 
 enum FileMenuId {NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT}
 enum EditMenuId {UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES}
-enum ViewMenuId {TILE_MODE, WINDOW_TRANSPARENCY, PANEL_LAYOUT, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
+enum ViewMenuId {TILE_MODE, WINDOW_OPACITY, PANEL_LAYOUT, MIRROR_VIEW, SHOW_GRID, SHOW_PIXEL_GRID, SHOW_RULERS, SHOW_GUIDES, SHOW_ANIMATION_TIMELINE, ZEN_MODE, FULLSCREEN_MODE}
 enum ImageMenuId {SCALE_IMAGE, CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP, ROTATE, INVERT_COLORS, DESATURATION, OUTLINE, HSV, GRADIENT, SHADER}
 enum SelectMenuId {SELECT_ALL, CLEAR_SELECTION, INVERT}
 enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, OPEN_LOGS_FOLDER, CHANGELOG, ABOUT_PIXELORAMA}
@@ -14,6 +14,7 @@ onready var view_menu_button : MenuButton = find_node("ViewMenu")
 onready var image_menu_button : MenuButton = find_node("ImageMenu")
 onready var select_menu_button : MenuButton = find_node("SelectMenu")
 onready var help_menu_button : MenuButton = find_node("HelpMenu")
+onready var window_opacity_dialog : AcceptDialog = Global.control.find_node("WindowOpacityDialog")
 
 var file_menu : PopupMenu
 var view_menu : PopupMenu
@@ -91,7 +92,7 @@ func setup_edit_menu() -> void:
 func setup_view_menu() -> void:
 	var view_menu_items := { # order as in ViewMenuId enum
 		"Tile Mode" : 0,
-		"Window Transparency" : 0,
+		"Window Opacity" : 0,
 		"Panel Layout" : 0,
 		"Mirror View" : InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid" : InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
@@ -108,8 +109,8 @@ func setup_view_menu() -> void:
 	for item in view_menu_items.keys():
 		if item == "Tile Mode":
 			setup_tile_mode_submenu(item)
-		elif item == "Window Transparency":
-			setup_window_transparency_submenu(item)
+		elif item == "Window Opacity":
+			view_menu.add_item(item, i, view_menu_items[item])
 		elif item == "Panel Layout":
 			setup_panel_layout_submenu(item)
 		else:
@@ -120,20 +121,14 @@ func setup_view_menu() -> void:
 	view_menu.set_item_checked(ViewMenuId.SHOW_ANIMATION_TIMELINE, true)
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
-	if !ProjectSettings.get_setting("display/window/per_pixel_transparency/allowed"):
-		view_menu.set_item_disabled(ViewMenuId.WINDOW_TRANSPARENCY, true)
+	# Disable window opacity item if per pixel transparency is not allowed
+	view_menu.set_item_disabled(ViewMenuId.WINDOW_OPACITY, !ProjectSettings.get_setting("display/window/per_pixel_transparency/allowed"))
 
 
 func setup_tile_mode_submenu(item : String):
 	Global.tile_mode_submenu.connect("id_pressed", self, "tile_mode_submenu_id_pressed")
 	view_menu.add_child(Global.tile_mode_submenu)
 	view_menu.add_submenu_item(item, Global.tile_mode_submenu.get_name())
-
-
-func setup_window_transparency_submenu(item : String):
-	Global.window_transparency_submenu.connect("id_pressed", self, "window_transparency_submenu_id_pressed")
-	view_menu.add_child(Global.window_transparency_submenu)
-	view_menu.add_submenu_item(item, Global.window_transparency_submenu.get_name())
 
 
 func setup_panel_layout_submenu(item : String):
@@ -310,6 +305,9 @@ func edit_menu_id_pressed(id : int) -> void:
 
 func view_menu_id_pressed(id : int) -> void:
 	match id:
+		ViewMenuId.WINDOW_OPACITY:
+			window_opacity_dialog.popup_centered()
+			Global.dialog_open(true)
 		ViewMenuId.MIRROR_VIEW:
 			toggle_mirror_view()
 		ViewMenuId.SHOW_GRID:
@@ -339,34 +337,11 @@ func tile_mode_submenu_id_pressed(id : int) -> void:
 	Global.canvas.grid.update()
 
 
-func window_transparency_submenu_id_pressed(id : float) -> void:
-	if OS.window_fullscreen:
-		for i in 11:
-			Global.window_transparency_submenu.set_item_checked(i, i == 10)
-		window_transparency(1)
-	else:
-		for i in 11:
-			Global.window_transparency_submenu.set_item_checked(i, i == id)
-		window_transparency(id/10)
-
-
 func panel_layout_submenu_id_pressed(id : int) -> void:
 	Global.panel_layout = id
 	for i in Global.PanelLayout.values():
 		Global.panel_layout_submenu.set_item_checked(i, i == id)
 	get_tree().get_root().get_node("Control").handle_resize()
-
-
-func window_transparency(value :float) -> void:
-	if value == 1:
-		get_node("../../AlternateTransparentBackground").visible = false
-	else:
-		get_node("../../AlternateTransparentBackground").visible = true
-	var checker :ColorRect = Global.transparent_checker
-	var color :Color = Global.default_clear_color
-	color.a = value
-	get_node("../../AlternateTransparentBackground").color = color
-	checker.transparency(value)
 
 
 func toggle_mirror_view() -> void:
@@ -434,9 +409,8 @@ func toggle_zen_mode() -> void:
 func toggle_fullscreen() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
 	view_menu.set_item_checked(ViewMenuId.FULLSCREEN_MODE, OS.window_fullscreen)
-	# if window is fullscreen then reset transparency
-	if OS.window_fullscreen:
-		window_transparency_submenu_id_pressed(10)
+	if OS.window_fullscreen: # If window is fullscreen then reset transparency
+		window_opacity_dialog._on_value_changed(1.0)
 
 
 func image_menu_id_pressed(id : int) -> void:

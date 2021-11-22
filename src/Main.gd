@@ -6,6 +6,7 @@ var is_quitting_on_save := false
 
 var tallscreen_is_active = false
 
+var alternate_transparent_background := ColorRect.new()
 onready var ui := $MenuAndUI/UI
 onready var tools_and_canvas : HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas
 
@@ -19,13 +20,10 @@ onready var tool_panel := $MenuAndUI/UI/ToolsAndCanvas/ToolPanel
 onready var scroll_container := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var alternate_transparent_background := ColorRect.new()
 	add_child(alternate_transparent_background)
 	move_child(alternate_transparent_background,0)
 	alternate_transparent_background.visible = false
-	alternate_transparent_background.name = "AlternateTransparentBackground"
 	alternate_transparent_background.anchor_left = ANCHOR_BEGIN
 	alternate_transparent_background.anchor_top = ANCHOR_BEGIN
 	alternate_transparent_background.anchor_right = ANCHOR_END

@@ -144,7 +144,6 @@ onready var tabs_container : PanelContainer = control.find_node("TabsContainer")
 
 onready var recent_projects_submenu : PopupMenu = PopupMenu.new()
 onready var tile_mode_submenu : PopupMenu = PopupMenu.new()
-onready var window_transparency_submenu : PopupMenu = PopupMenu.new()
 onready var panel_layout_submenu : PopupMenu = PopupMenu.new()
 
 onready var new_image_dialog : ConfirmationDialog = control.find_node("CreateNewImage")
@@ -223,21 +222,6 @@ func _ready() -> void:
 	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", TileMode.X_AXIS)
 	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", TileMode.Y_AXIS)
 	tile_mode_submenu.hide_on_checkable_item_selection = false
-
-	window_transparency_submenu.set_name("set value")
-	window_transparency_submenu.add_radio_check_item("100%")
-	window_transparency_submenu.add_radio_check_item("90%")
-	window_transparency_submenu.add_radio_check_item("80%")
-	window_transparency_submenu.add_radio_check_item("70%")
-	window_transparency_submenu.add_radio_check_item("60%")
-	window_transparency_submenu.add_radio_check_item("50%")
-	window_transparency_submenu.add_radio_check_item("40%")
-	window_transparency_submenu.add_radio_check_item("30%")
-	window_transparency_submenu.add_radio_check_item("20%")
-	window_transparency_submenu.add_radio_check_item("10%")
-	window_transparency_submenu.add_radio_check_item("0%")
-	window_transparency_submenu.set_item_checked(10, true)
-	window_transparency_submenu.hide_on_checkable_item_selection = false
 
 	panel_layout_submenu.set_name("panel_layout_submenu")
 	panel_layout_submenu.add_radio_check_item("Auto", PanelLayout.AUTO)
