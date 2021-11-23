@@ -2,11 +2,15 @@ extends Camera2D
 
 
 enum Cameras {MAIN, SECOND, SMALL}
+enum Direction {UP, DOWN, LEFT, RIGHT}
 
 const low_speed_move_rate := 150.0
 const medium_speed_move_rate := 750.0
 const high_speed_move_rate := 3750.0
 
+# Indices are as in the Direction enum
+# This is the total time the key for that direction has been pressed.
+var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
 var tween : Tween
 var zoom_min := Vector2(0.005, 0.005)
 var zoom_max := Vector2.ONE
@@ -106,7 +110,7 @@ func dir_move_zoom_multiplier(press_time : float) -> float:
 
 
 func reset_dir_move_time(direction) -> void:
-	Global.key_move_press_time[direction] = 0.0
+	key_move_press_time[direction] = 0.0
 
 
 const key_move_action_names := ["ui_up", "ui_down", "ui_left", "ui_right"]
@@ -137,18 +141,18 @@ func is_action_direction_released(event: InputEvent) -> bool:
 # if not a direction event return null
 func get_action_direction(event: InputEvent):  # -> Optional[Direction]
 	if event.is_action("ui_up"):
-		return Global.Direction.UP
+		return Direction.UP
 	elif event.is_action("ui_down"):
-		return Global.Direction.DOWN
+		return Direction.DOWN
 	elif event.is_action("ui_left"):
-		return Global.Direction.LEFT
+		return Direction.LEFT
 	elif event.is_action("ui_right"):
-		return Global.Direction.RIGHT
+		return Direction.RIGHT
 	return null
 
 
 # Holds sign multipliers for the given directions nyaa
-# (per the indices in Global.gd defined by Direction)
+# (per the indices defined by Direction)
 # UP, DOWN, LEFT, RIGHT in that order
 const directional_sign_multipliers := [
 	Vector2(0.0, -1.0),
@@ -166,8 +170,8 @@ func process_direction_action_pressed(event: InputEvent) -> void:
 		return
 	var increment := get_process_delta_time()
 	# Count the total time we've been doing this ^.^
-	Global.key_move_press_time[dir] += increment
-	var this_direction_press_time : float = Global.key_move_press_time[dir]
+	key_move_press_time[dir] += increment
+	var this_direction_press_time : float = key_move_press_time[dir]
 	var move_speed := dir_move_zoom_multiplier(this_direction_press_time)
 	offset = offset + move_speed * increment * directional_sign_multipliers[dir].rotated(rotation) * zoom
 	update_rulers()

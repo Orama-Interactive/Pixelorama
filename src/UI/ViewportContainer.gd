@@ -8,8 +8,8 @@ func _ready() -> void:
 
 func _on_ViewportContainer_mouse_entered() -> void:
 	Global.has_focus = true
-	Global.left_cursor.visible = true
-	Global.right_cursor.visible = true
+	Global.left_cursor.visible = Global.show_left_tool_icon
+	Global.right_cursor.visible = Global.show_right_tool_icon
 
 
 func _on_ViewportContainer_mouse_exited() -> void:

@@ -631,5 +631,5 @@ func save_project_to_recent_list(path : String) -> void:
 
 	Global.config_cache.set_value("data", "recent_projects", top_menu_container.recent_projects)
 
-	Global.recent_projects_submenu.clear()
+	Global.top_menu_container.recent_projects_submenu.clear()
 	top_menu_container.update_recent_projects_submenu()

@@ -3,7 +3,6 @@ extends Node
 
 enum GridTypes {CARTESIAN, ISOMETRIC, ALL}
 enum PressureSensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
-enum Direction {UP, DOWN, LEFT, RIGHT}
 enum ThemeTypes {DARK, BLUE, CARAMEL, LIGHT}
 enum TileMode {NONE, BOTH, X_AXIS, Y_AXIS}
 enum PanelLayout {AUTO, WIDESCREEN, TALLSCREEN}
@@ -22,11 +21,6 @@ var current_project_index := 0 setget project_changed
 
 var panel_layout = PanelLayout.AUTO
 
-# Indices are as in the Direction enum
-# This is the total time the key for
-# that direction has been pressed.
-var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
-
 # Canvas related stuff
 var layers_changed_skip := false
 var can_draw := false
@@ -35,7 +29,6 @@ var cursor_image = preload("res://assets/graphics/cursor.png")
 var left_cursor_tool_texture := StreamTexture.new()
 var right_cursor_tool_texture := StreamTexture.new()
 
-var image_clipboard := Image.new()
 var play_only_tags := true
 var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
@@ -115,7 +108,7 @@ var notification_label_node = preload("res://src/UI/NotificationLabel.tscn")
 
 onready var root : Node = get_tree().get_root()
 onready var control : Node = root.get_node("Control")
-onready var top_menu_container : Panel = control.find_node("TopMenuContainer")
+
 onready var left_cursor : Sprite = control.find_node("LeftCursor")
 onready var right_cursor : Sprite = control.find_node("RightCursor")
 onready var canvas : Canvas = control.find_node("Canvas")
@@ -131,46 +124,36 @@ onready var cameras = [Global.camera, Global.camera2, Global.camera_preview]
 onready var horizontal_ruler : BaseButton = control.find_node("HorizontalRuler")
 onready var vertical_ruler : BaseButton = control.find_node("VerticalRuler")
 onready var transparent_checker : ColorRect = control.find_node("TransparentChecker")
+onready var preview_zoom_slider : VSlider = control.find_node("PreviewZoomSlider")
 
+onready var tool_panel : Panel = control.find_node("ToolPanel")
+onready var right_panel : Panel = control.find_node("RightPanel")
+onready var brushes_popup : Popup = control.find_node("BrushesPopup")
+onready var patterns_popup : Popup = control.find_node("PatternsPopup")
+onready var palette_panel : PalettePanel = control.find_node("PalettePanel")
+
+onready var top_menu_container : Panel = control.find_node("TopMenuContainer")
 onready var rotation_level_button : Button = control.find_node("RotationLevel")
 onready var rotation_level_spinbox : SpinBox = control.find_node("RotationSpinbox")
 onready var zoom_level_button : Button = control.find_node("ZoomLevel")
 onready var zoom_level_spinbox : SpinBox = control.find_node("ZoomSpinbox")
 onready var cursor_position_label : Label = control.find_node("CursorPosition")
+onready var current_frame_mark_label : Label = control.find_node("CurrentFrameMark")
 
-onready var tool_panel : Panel = control.find_node("ToolPanel")
-onready var right_panel : Panel = control.find_node("RightPanel")
-onready var tabs_container : PanelContainer = control.find_node("TabsContainer")
-
-onready var recent_projects_submenu : PopupMenu = PopupMenu.new()
-
-onready var new_image_dialog : ConfirmationDialog = control.find_node("CreateNewImage")
 onready var open_sprites_dialog : FileDialog = control.find_node("OpenSprite")
 onready var save_sprites_dialog : FileDialog = control.find_node("SaveSprite")
 onready var save_sprites_html5_dialog : ConfirmationDialog = control.find_node("SaveSpriteHTML5")
 onready var export_dialog : AcceptDialog = control.find_node("ExportDialog")
 onready var preferences_dialog : AcceptDialog = control.find_node("PreferencesDialog")
-onready var unsaved_changes_dialog : ConfirmationDialog = control.find_node("UnsavedCanvasDialog")
-
-onready var color_switch_button : BaseButton = control.find_node("ColorSwitch")
-
-onready var brushes_popup : Popup = control.find_node("BrushesPopup")
-onready var patterns_popup : Popup = control.find_node("PatternsPopup")
 
 onready var animation_timeline : Panel = control.find_node("AnimationTimeline")
-
 onready var animation_timer : Timer = animation_timeline.find_node("AnimationTimer")
-onready var frame_properties : ConfirmationDialog = control.find_node("FrameProperties")
 onready var frame_ids : HBoxContainer = animation_timeline.find_node("FrameIDs")
-onready var current_frame_mark_label : Label = control.find_node("CurrentFrameMark")
-onready var onion_skinning_button : BaseButton = animation_timeline.find_node("OnionSkinning")
-onready var loop_animation_button : BaseButton = animation_timeline.find_node("LoopAnim")
 onready var play_forward : BaseButton = animation_timeline.find_node("PlayForward")
 onready var play_backwards : BaseButton = animation_timeline.find_node("PlayBackwards")
 onready var layers_container : VBoxContainer = animation_timeline.find_node("LayersContainer")
 onready var frames_container : VBoxContainer = animation_timeline.find_node("FramesContainer")
 onready var tag_container : Control = animation_timeline.find_node("TagContainer")
-onready var tag_dialog : AcceptDialog = animation_timeline.find_node("FrameTagDialog")
 
 onready var remove_frame_button : BaseButton = animation_timeline.find_node("DeleteFrame")
 onready var move_left_frame_button : BaseButton = animation_timeline.find_node("MoveLeft")
@@ -183,11 +166,7 @@ onready var merge_down_layer_button : BaseButton = animation_timeline.find_node(
 onready var layer_opacity_slider : HSlider = animation_timeline.find_node("OpacitySlider")
 onready var layer_opacity_spinbox : SpinBox = animation_timeline.find_node("OpacitySpinBox")
 
-onready var preview_zoom_slider : VSlider = control.find_node("PreviewZoomSlider")
-onready var palette_panel : PalettePanel = control.find_node("PalettePanel")
-
 onready var error_dialog : AcceptDialog = control.find_node("ErrorDialog")
-onready var quit_dialog : ConfirmationDialog = control.find_node("QuitDialog")
 onready var quit_and_save_dialog : ConfirmationDialog = control.find_node("QuitAndSaveDialog")
 
 onready var current_version : String = ProjectSettings.get_setting("application/config/Version")

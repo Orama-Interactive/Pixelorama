@@ -99,7 +99,7 @@ func set_action_shortcut(action : String, old_input : InputEventKey, new_input :
 	Global.update_hint_tooltips()
 	# Set shortcut to switch colors button
 	if action == "switch_colors":
-		Global.color_switch_button.shortcut.shortcut = InputMap.get_action_list("switch_colors")[0]
+		Global.control.find_node("ColorSwitch").shortcut.shortcut = InputMap.get_action_list("switch_colors")[0]
 
 
 func _on_Shortcut_button_pressed(button : Button) -> void:

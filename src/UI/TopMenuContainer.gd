@@ -8,20 +8,23 @@ enum ImageMenuId {SCALE_IMAGE, CENTRALIZE_IMAGE, CROP_IMAGE, RESIZE_CANVAS, FLIP
 enum SelectMenuId {SELECT_ALL, CLEAR_SELECTION, INVERT}
 enum HelpMenuId {VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, OPEN_LOGS_FOLDER, CHANGELOG, ABOUT_PIXELORAMA}
 
+var file_menu : PopupMenu
+var view_menu : PopupMenu
+var zen_mode := false
+var recent_projects := []
+
 onready var file_menu_button : MenuButton = find_node("FileMenu")
 onready var edit_menu_button : MenuButton = find_node("EditMenu")
 onready var view_menu_button : MenuButton = find_node("ViewMenu")
 onready var image_menu_button : MenuButton = find_node("ImageMenu")
 onready var select_menu_button : MenuButton = find_node("SelectMenu")
 onready var help_menu_button : MenuButton = find_node("HelpMenu")
-onready var window_opacity_dialog : AcceptDialog = Global.control.find_node("WindowOpacityDialog")
-onready var tile_mode_submenu : PopupMenu = PopupMenu.new()
-onready var panel_layout_submenu : PopupMenu = PopupMenu.new()
 
-var file_menu : PopupMenu
-var view_menu : PopupMenu
-var zen_mode := false
-var recent_projects := []
+onready var new_image_dialog : ConfirmationDialog = Global.control.find_node("CreateNewImage")
+onready var window_opacity_dialog : AcceptDialog = Global.control.find_node("WindowOpacityDialog")
+onready var tile_mode_submenu := PopupMenu.new()
+onready var panel_layout_submenu := PopupMenu.new()
+onready var recent_projects_submenu := PopupMenu.new()
 
 
 func _ready() -> void:
@@ -64,16 +67,16 @@ func setup_file_menu() -> void:
 
 func setup_recent_projects_submenu(item : String) -> void:
 	recent_projects = Global.config_cache.get_value("data", "recent_projects", [])
-	Global.recent_projects_submenu.connect("id_pressed", self, "on_recent_projects_submenu_id_pressed")
+	recent_projects_submenu.connect("id_pressed", self, "on_recent_projects_submenu_id_pressed")
 	update_recent_projects_submenu()
 
-	file_menu.add_child(Global.recent_projects_submenu)
-	file_menu.add_submenu_item(item, Global.recent_projects_submenu.get_name())
+	file_menu.add_child(recent_projects_submenu)
+	file_menu.add_submenu_item(item, recent_projects_submenu.get_name())
 
 
 func update_recent_projects_submenu() -> void:
 	for project in recent_projects:
-		Global.recent_projects_submenu.add_item(project.get_file())
+		recent_projects_submenu.add_item(project.get_file())
 
 
 func setup_edit_menu() -> void:
@@ -245,7 +248,7 @@ func file_menu_id_pressed(id : int) -> void:
 
 
 func on_new_project_file_menu_option_pressed() -> void:
-	Global.new_image_dialog.popup_centered()
+	new_image_dialog.popup_centered()
 	Global.dialog_open(true)
 
 
@@ -424,7 +427,7 @@ func toggle_zen_mode() -> void:
 		Global.animation_timeline.visible = zen_mode
 	Global.tool_panel.visible = zen_mode
 	Global.right_panel.visible = zen_mode
-	Global.tabs_container.visible = zen_mode
+	Global.control.find_node("TabsContainer").visible = zen_mode
 	Global.control.tallscreen_hsplit_container.visible = zen_mode
 	zen_mode = !zen_mode
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)

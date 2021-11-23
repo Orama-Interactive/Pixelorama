@@ -17,6 +17,7 @@ onready var color_and_tool_options := $MenuAndUI/UI/RightPanel/MarginContainer/P
 onready var canvas_preview_container := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/CanvasPreviewContainer
 onready var tool_panel := $MenuAndUI/UI/ToolsAndCanvas/ToolPanel
 onready var scroll_container := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
+onready var quit_dialog : ConfirmationDialog = find_node("QuitDialog")
 
 
 func _ready() -> void:
@@ -386,9 +387,9 @@ func _can_draw_true() -> void:
 
 
 func show_quit_dialog() -> void:
-	if !Global.quit_dialog.visible:
+	if !quit_dialog.visible:
 		if !Global.current_project.has_changed:
-			Global.quit_dialog.call_deferred("popup_centered")
+			quit_dialog.call_deferred("popup_centered")
 		else:
 			Global.quit_and_save_dialog.call_deferred("popup_centered")
 
@@ -399,7 +400,7 @@ func _on_QuitAndSaveDialog_custom_action(action : String) -> void:
 	if action == "Save":
 		is_quitting_on_save = true
 		Global.save_sprites_dialog.popup_centered()
-		Global.quit_dialog.hide()
+		quit_dialog.hide()
 		Global.dialog_open(true)
 
 
