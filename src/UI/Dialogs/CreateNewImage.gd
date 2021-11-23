@@ -1,15 +1,5 @@
 extends ConfirmationDialog
 
-
-class Template:
-	var resolution: Vector2
-	var name: String
-
-	func _init(_resolution: Vector2, _name := "") -> void:
-		resolution = _resolution
-		name = _name
-
-
 var aspect_ratio := 1.0
 var templates := [
 	# Basic
@@ -62,6 +52,14 @@ onready var height_value = find_node("HeightValue")
 onready var portrait_button = find_node("PortraitButton")
 onready var landscape_button = find_node("LandscapeButton")
 onready var fill_color_node = find_node("FillColor")
+
+class Template:
+	var resolution: Vector2
+	var name: String
+
+	func _init(_resolution: Vector2, _name := "") -> void:
+		resolution = _resolution
+		name = _name
 
 
 func _ready() -> void:

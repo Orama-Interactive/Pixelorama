@@ -93,8 +93,8 @@ func _on_CelButton_pressed() -> void:
 		pressed = !pressed
 
 
-func _on_PopupMenu_id_pressed(ID: int) -> void:
-	match ID:
+func _on_PopupMenu_id_pressed(id: int) -> void:
+	match id:
 		MenuOptions.DELETE:
 			delete_cel_contents()
 

@@ -31,12 +31,12 @@ func _draw() -> void:
 
 	var current_cels: Array = Global.current_project.frames[Global.current_project.current_frame].cels
 	var current_layer: int = Global.current_project.current_layer
-	var _position := position
-	var _scale := scale
+	var position_tmp := position
+	var scale_tmp := scale
 	if Global.mirror_view:
-		_position.x = _position.x + Global.current_project.size.x
-		_scale.x = -1
-	draw_set_transform(_position, rotation, _scale)
+		position_tmp.x = position_tmp.x + Global.current_project.size.x
+		scale_tmp.x = -1
+	draw_set_transform(position_tmp, rotation, scale_tmp)
 	# Draw current frame layers
 	for i in range(Global.current_project.layers.size()):
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)

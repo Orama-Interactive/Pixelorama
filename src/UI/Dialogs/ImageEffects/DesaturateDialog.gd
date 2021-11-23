@@ -5,14 +5,14 @@ var green := true
 var blue := true
 var alpha := false
 
-var shaderPath: String = "res://src/Shaders/Desaturate.shader"
+var shader_path: String = "res://src/Shaders/Desaturate.shader"
 
 var confirmed: bool = false
 
 
 func _about_to_show():
 	var sm: ShaderMaterial = ShaderMaterial.new()
-	sm.shader = load(shaderPath)
+	sm.shader = load(shader_path)
 	preview.set_material(sm)
 	._about_to_show()
 
@@ -52,7 +52,7 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 			"has_selection": _project.has_selection
 		}
 		var gen: ShaderImageEffect = ShaderImageEffect.new()
-		gen.generate_image(_cel, shaderPath, params, _project.size)
+		gen.generate_image(_cel, shader_path, params, _project.size)
 		yield(gen, "done")
 
 

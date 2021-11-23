@@ -1,5 +1,7 @@
-class_name SelectionTool extends BaseTool
+class_name SelectionTool
+extends BaseTool
 
+var undo_data: Dictionary
 var _move := false
 var _move_content := true
 var _start_pos := Vector2.ZERO
@@ -16,7 +18,6 @@ var _snap_to_grid := false  # Mouse Click + Ctrl
 # Used to check if the state of content transformation has been changed
 # while draw_move() is being called. For example, pressing Enter while still moving content
 var _content_transformation_check := false
-var undo_data: Dictionary
 
 onready var selection_node: Node2D = Global.canvas.selection
 onready var xspinbox: SpinBox = find_node("XSpinBox")
@@ -91,7 +92,9 @@ func draw_start(position: Vector2) -> void:
 		# Move current selection
 		_move = true
 		if Tools.alt:  # Move selection without content
-			if Tools.control:  # Move the selection without cutting it from the original position / makes a quick copy of it
+			if Tools.control:
+				# Move the selection without cutting it from the original position
+				# (makes a quick copy of it)
 				_move_content = true
 				if selection_node.is_moving_content:
 					for image in _get_selected_draw_images():

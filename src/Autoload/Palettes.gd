@@ -1,21 +1,19 @@
 extends Node
 
-const DEFAULT_PALETTE_NAME = "Default"
-
 # Presets for creating a new palette
 enum NewPalettePresetType {
-	Empty = 0,
-	FromCurrentPalette = 1,
-	FromCurrentSprite = 2,
-	FromCurrentSelection = 3
+	EMPTY = 0,
+	FROM_CURRENT_PALETTE = 1,
+	FROM_CURRENT_SPRITE = 2,
+	FROM_CURRENT_SELECTION = 3
 }
 
 # Color options when user creates a new palette from current sprite or selection
-enum GetColorsFrom { CurrentFrame = 0, CurrentCel = 1, AllFrames = 2 }
+enum GetColorsFrom { CURRENT_FRAME = 0, CURRENT_CEL = 1, ALL_FRAMES = 2 }
 
+const DEFAULT_PALETTE_NAME = "Default"
 # All available palettes
 var palettes := {}
-
 # Currently displayed palette
 var current_palette = null
 
@@ -27,7 +25,6 @@ var right_selected_color := -1
 
 func _ready() -> void:
 	load_palettes()
-	pass
 
 
 func get_palettes() -> Dictionary:
@@ -99,15 +96,15 @@ func create_new_palette(
 ) -> void:
 	check_palette_settings_values(name, width, height)
 	match preset:
-		NewPalettePresetType.Empty:
+		NewPalettePresetType.EMPTY:
 			create_new_empty_palette(name, comment, width, height)
-		NewPalettePresetType.FromCurrentPalette:
+		NewPalettePresetType.FROM_CURRENT_PALETTE:
 			create_new_palette_from_current_palette(name, comment)
-		NewPalettePresetType.FromCurrentSprite:
+		NewPalettePresetType.FROM_CURRENT_SPRITE:
 			create_new_palette_from_current_sprite(
 				name, comment, width, height, add_alpha_colors, get_colors_from
 			)
-		NewPalettePresetType.FromCurrentSelection:
+		NewPalettePresetType.FROM_CURRENT_SELECTION:
 			create_new_palette_from_current_selection(
 				name, comment, width, height, add_alpha_colors, get_colors_from
 			)
@@ -172,14 +169,14 @@ func fill_new_palette_with_colors(
 	var current_project = Global.current_project
 	var cels := []
 	match get_colors_from:
-		GetColorsFrom.CurrentCel:
+		GetColorsFrom.CURRENT_CEL:
 			for cel_index in current_project.selected_cels:
 				var cel: Cel = current_project.frames[cel_index[0]].cels[cel_index[1]]
 				cels.append(cel)
-		GetColorsFrom.CurrentFrame:
+		GetColorsFrom.CURRENT_FRAME:
 			for cel in current_project.frames[current_project.current_frame].cels:
 				cels.append(cel)
-		GetColorsFrom.AllFrames:
+		GetColorsFrom.ALL_FRAMES:
 			for frame in current_project.frames:
 				for cel in frame.cels:
 					cels.append(cel)

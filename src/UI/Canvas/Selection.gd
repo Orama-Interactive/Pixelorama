@@ -1,6 +1,38 @@
 extends Node2D
 
 
+enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
+
+const KEY_MOVE_ACTION_NAMES := ["ui_up", "ui_down", "ui_left", "ui_right"]
+
+var clipboard := Clipboard.new()
+var is_moving_content := false
+var arrow_key_move := false
+var is_pasting := false
+var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
+
+var temp_rect := Rect2()
+var temp_bitmap := BitMap.new()
+var rect_aspect_ratio := 0.0
+var temp_rect_size := Vector2.ZERO
+var temp_rect_pivot := Vector2.ZERO
+
+var original_big_bounding_rectangle := Rect2()
+var original_preview_image := Image.new()
+var original_bitmap := BitMap.new()
+var original_offset := Vector2.ZERO
+
+var preview_image := Image.new()
+var preview_image_texture := ImageTexture.new()
+var undo_data: Dictionary
+var gizmos := []  # Array of Gizmos
+var dragged_gizmo: Gizmo = null
+var prev_angle := 0
+var mouse_pos_on_gizmo_drag := Vector2.ZERO
+var clear_in_selected_cels := true
+
+onready var marching_ants_outline: Sprite = $MarchingAntsOutline
+
 class Clipboard:
 	var image := Image.new()
 	var selection_bitmap := BitMap.new()
@@ -34,38 +66,6 @@ class Gizmo:
 		return cursor
 
 
-enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
-
-const KEY_MOVE_ACTION_NAMES := ["ui_up", "ui_down", "ui_left", "ui_right"]
-
-var clipboard := Clipboard.new()
-var is_moving_content := false
-var arrow_key_move := false
-var is_pasting := false
-var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
-
-var temp_rect := Rect2()
-var temp_bitmap := BitMap.new()
-var rect_aspect_ratio := 0.0
-var temp_rect_size := Vector2.ZERO
-var temp_rect_pivot := Vector2.ZERO
-
-var original_big_bounding_rectangle := Rect2()
-var original_preview_image := Image.new()
-var original_bitmap := BitMap.new()
-var original_offset := Vector2.ZERO
-
-var preview_image := Image.new()
-var preview_image_texture := ImageTexture.new()
-var undo_data: Dictionary
-var gizmos := []  # Array of Gizmos
-var dragged_gizmo: Gizmo = null
-var prev_angle := 0
-var mouse_pos_on_gizmo_drag := Vector2.ZERO
-var clear_in_selected_cels := true
-
-onready var marching_ants_outline: Sprite = $MarchingAntsOutline
-
 
 func _ready() -> void:
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, -1)))  # Top left
@@ -76,7 +76,6 @@ func _ready() -> void:
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(0, 1)))  # Center bottom
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, 1)))  # Bottom left
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, 0)))  # Center left
-
 
 #	gizmos.append(Gizmo.new(Gizmo.Type.ROTATE)) # Rotation gizmo (temp)
 
@@ -225,12 +224,12 @@ func is_action_direction_released(event: InputEvent) -> bool:
 
 
 func _draw() -> void:
-	var _position := position
-	var _scale := scale
+	var position_tmp := position
+	var scale_tmp := scale
 	if Global.mirror_view:
-		_position.x = _position.x + Global.current_project.size.x
-		_scale.x = -1
-	draw_set_transform(_position, rotation, _scale)
+		position_tmp.x = position_tmp.x + Global.current_project.size.x
+		scale_tmp.x = -1
+	draw_set_transform(position_tmp, rotation, scale_tmp)
 	if big_bounding_rectangle.size != Vector2.ZERO:
 		for gizmo in gizmos:  # Draw gizmos
 			draw_rect(gizmo.rect, Global.selection_border_color_2)
@@ -256,7 +255,7 @@ func _big_bounding_rectangle_changed(value: Rect2) -> void:
 func update_gizmos() -> void:
 	var rect_pos: Vector2 = big_bounding_rectangle.position
 	var rect_end: Vector2 = big_bounding_rectangle.end
-	var size := Vector2.ONE * Global.camera.zoom * 10
+	var size: Vector2 = Vector2.ONE * Global.camera.zoom * 10
 	# Clockwise, starting from top-left corner
 	gizmos[0].rect = Rect2(rect_pos - size, size)
 	gizmos[1].rect = Rect2(
@@ -376,7 +375,7 @@ func resize_rect(pos: Vector2, dir: Vector2) -> void:
 
 
 func gizmo_rotate() -> void:  # Does not work properly yet
-	var angle := Global.canvas.current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
+	var angle: float = Global.canvas.current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
 	angle = deg2rad(floor(rad2deg(angle)))
 	if angle == prev_angle:
 		return
@@ -460,7 +459,7 @@ func move_borders(move: Vector2) -> void:
 
 
 func move_borders_end() -> void:
-	var selected_bitmap_copy := Global.current_project.selection_bitmap.duplicate()
+	var selected_bitmap_copy: BitMap = Global.current_project.selection_bitmap.duplicate()
 	Global.current_project.move_bitmap_values(selected_bitmap_copy)
 
 	Global.current_project.selection_bitmap = selected_bitmap_copy
@@ -564,12 +563,12 @@ func transform_content_cancel() -> void:
 	update()
 
 
-func commit_undo(action: String, _undo_data: Dictionary) -> void:
-	if !_undo_data:
+func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
+	if !undo_data_tmp:
 		print("No undo data found!")
 		return
-	var redo_data = _get_undo_data(_undo_data["undo_image"])
-	var project := Global.current_project
+	var redo_data = _get_undo_data(undo_data_tmp["undo_image"])
+	var project: Project = Global.current_project
 
 	project.undos += 1
 	project.undo_redo.create_action(action)
@@ -579,22 +578,22 @@ func commit_undo(action: String, _undo_data: Dictionary) -> void:
 	)
 	project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])
 
-	project.undo_redo.add_undo_property(project, "selection_bitmap", _undo_data["selection_bitmap"])
+	project.undo_redo.add_undo_property(project, "selection_bitmap", undo_data_tmp["selection_bitmap"])
 	project.undo_redo.add_undo_property(
-		self, "big_bounding_rectangle", _undo_data["big_bounding_rectangle"]
+		self, "big_bounding_rectangle", undo_data_tmp["big_bounding_rectangle"]
 	)
-	project.undo_redo.add_undo_property(project, "selection_offset", _undo_data["outline_offset"])
+	project.undo_redo.add_undo_property(project, "selection_offset", undo_data_tmp["outline_offset"])
 
-	if _undo_data["undo_image"]:
+	if undo_data_tmp["undo_image"]:
 		for image in redo_data:
 			if not image is Image:
 				continue
 			project.undo_redo.add_do_property(image, "data", redo_data[image])
 			image.unlock()
-		for image in _undo_data:
+		for image in undo_data_tmp:
 			if not image is Image:
 				continue
-			project.undo_redo.add_undo_property(image, "data", _undo_data[image])
+			project.undo_redo.add_undo_property(image, "data", undo_data_tmp[image])
 	project.undo_redo.add_do_method(Global, "redo")
 	project.undo_redo.add_do_method(project, "selection_bitmap_changed")
 	project.undo_redo.add_undo_method(Global, "undo")
@@ -606,7 +605,7 @@ func commit_undo(action: String, _undo_data: Dictionary) -> void:
 
 func _get_undo_data(undo_image: bool) -> Dictionary:
 	var data := {}
-	var project := Global.current_project
+	var project: Project = Global.current_project
 	data["selection_bitmap"] = project.selection_bitmap
 	data["big_bounding_rectangle"] = big_bounding_rectangle
 	data["outline_offset"] = Global.current_project.selection_offset
@@ -637,7 +636,7 @@ func cut() -> void:
 
 
 func copy() -> void:
-	var project := Global.current_project
+	var project: Project = Global.current_project
 	if !project.has_selection:
 		return
 	var image: Image = project.frames[project.current_frame].cels[project.current_layer].image
@@ -673,7 +672,7 @@ func paste() -> void:
 		return
 	clear_selection()
 	undo_data = _get_undo_data(true)
-	var project := Global.current_project
+	var project: Project = Global.current_project
 
 	original_bitmap = project.selection_bitmap.duplicate()
 	original_big_bounding_rectangle = big_bounding_rectangle
@@ -701,7 +700,7 @@ func paste() -> void:
 
 
 func delete() -> void:
-	var project := Global.current_project
+	var project: Project = Global.current_project
 	if !project.has_selection:
 		return
 	if is_moving_content:
@@ -714,18 +713,18 @@ func delete() -> void:
 		commit_undo("Draw", undo_data)
 		return
 
-	var _undo_data := _get_undo_data(true)
+	var undo_data_tmp := _get_undo_data(true)
 	var image: Image = project.frames[project.current_frame].cels[project.current_layer].image
 	for x in big_bounding_rectangle.size.x:
 		for y in big_bounding_rectangle.size.y:
 			var pos := Vector2(x, y) + big_bounding_rectangle.position
 			if project.can_pixel_get_drawn(pos):
 				image.set_pixelv(pos, Color(0))
-	commit_undo("Draw", _undo_data)
+	commit_undo("Draw", undo_data_tmp)
 
 
 func new_brush() -> void:
-	var project := Global.current_project
+	var project: Project = Global.current_project
 	if !project.has_selection:
 		return
 
@@ -759,18 +758,18 @@ func new_brush() -> void:
 
 
 func select_all() -> void:
-	var project := Global.current_project
-	var _undo_data = _get_undo_data(false)
+	var project: Project = Global.current_project
+	var undo_data_tmp = _get_undo_data(false)
 	clear_selection()
 	var full_rect = Rect2(Vector2.ZERO, project.size)
 	select_rect(full_rect)
-	commit_undo("Rectangle Select", _undo_data)
+	commit_undo("Rectangle Select", undo_data_tmp)
 
 
 func invert() -> void:
 	transform_content_confirm()
-	var project := Global.current_project
-	var _undo_data = _get_undo_data(false)
+	var project: Project = Global.current_project
+	var undo_data_tmp = _get_undo_data(false)
 	var selection_bitmap_copy: BitMap = project.selection_bitmap.duplicate()
 	selection_bitmap_copy = project.resize_bitmap(selection_bitmap_copy, project.size)
 	project.invert_bitmap(selection_bitmap_copy)
@@ -778,15 +777,15 @@ func invert() -> void:
 	project.selection_bitmap_changed()
 	self.big_bounding_rectangle = project.get_selection_rectangle(selection_bitmap_copy)
 	project.selection_offset = Vector2.ZERO
-	commit_undo("Rectangle Select", _undo_data)
+	commit_undo("Rectangle Select", undo_data_tmp)
 
 
 func clear_selection(use_undo := false) -> void:
-	var project := Global.current_project
+	var project: Project = Global.current_project
 	if !project.has_selection:
 		return
 	transform_content_confirm()
-	var _undo_data = _get_undo_data(false)
+	var undo_data_tmp = _get_undo_data(false)
 	var selection_bitmap_copy: BitMap = project.selection_bitmap.duplicate()
 	selection_bitmap_copy = project.resize_bitmap(selection_bitmap_copy, project.size)
 	var full_rect = Rect2(Vector2.ZERO, selection_bitmap_copy.get_size())
@@ -797,7 +796,7 @@ func clear_selection(use_undo := false) -> void:
 	project.selection_offset = Vector2.ZERO
 	update()
 	if use_undo:
-		commit_undo("Clear Selection", _undo_data)
+		commit_undo("Clear Selection", undo_data_tmp)
 
 
 func get_preview_image() -> void:

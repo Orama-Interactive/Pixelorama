@@ -2,7 +2,7 @@ extends Node
 # Code taken and modified from https://github.com/Pukkah/HTML5-File-Exchange-for-Godot
 # Thanks to Pukkah from GitHub for providing the original code
 
-signal InFocus
+signal in_focus
 
 
 func _ready() -> void:
@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _notification(notification: int) -> void:
 	if notification == MainLoop.NOTIFICATION_WM_FOCUS_IN:
-		emit_signal("InFocus")
+		emit_signal("in_focus")
 
 
 func _define_js() -> void:
@@ -42,7 +42,7 @@ func _define_js() -> void:
 					fileData = evt.target.result;
 				}
 			}
-		  });
+		});
 	}
 	function upload_palette() {
 		canceled = true;
@@ -68,7 +68,7 @@ func _define_js() -> void:
 					fileData = evt.target.result;
 				}
 			}
-		  });
+		});
 	}
 	function upload_shader() {
 		canceled = true;
@@ -89,7 +89,7 @@ func _define_js() -> void:
 					fileData = evt.target.result;
 				}
 			}
-		  });
+		});
 	}
 	""",
 		true
@@ -103,7 +103,7 @@ func load_image() -> void:
 	# Execute JS function
 	JavaScript.eval("upload_image();", true)  # Opens prompt for choosing file
 
-	yield(self, "InFocus")  # Wait until JS prompt is closed
+	yield(self, "in_focus")  # Wait until JS prompt is closed
 
 	yield(get_tree().create_timer(0.5), "timeout")  # Give some time for async JS data load
 
@@ -147,7 +147,7 @@ func load_palette() -> void:
 	# Execute JS function
 	JavaScript.eval("upload_palette();", true)  # Opens prompt for choosing file
 
-	yield(self, "InFocus")  # Wait until JS prompt is closed
+	yield(self, "in_focus")  # Wait until JS prompt is closed
 
 	yield(get_tree().create_timer(0.5), "timeout")  # Give some time for async JS data load
 
@@ -195,7 +195,7 @@ func load_shader() -> void:
 	# Execute JS function
 	JavaScript.eval("upload_shader();", true)  # Opens prompt for choosing file
 
-	yield(self, "InFocus")  # Wait until JS prompt is closed
+	yield(self, "in_focus")  # Wait until JS prompt is closed
 
 	yield(get_tree().create_timer(0.5), "timeout")  # Give some time for async JS data load
 

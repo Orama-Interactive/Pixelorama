@@ -2,7 +2,7 @@ extends SelectionTool
 
 var _last_position := Vector2.INF
 var _draw_points := []
-var ready_to_apply := false
+var _ready_to_apply := false
 
 
 func _input(event: InputEvent) -> void:
@@ -15,13 +15,13 @@ func _input(event: InputEvent) -> void:
 		if event.doubleclick and event.button_index == tool_slot.button and _draw_points:
 			$DoubleClickTimer.start()
 			append_gap(_draw_points[-1], _draw_points[0], _draw_points)
-			ready_to_apply = true
+			_ready_to_apply = true
 			apply_selection(Vector2.ZERO)  # Argument doesn't matter
 	elif event is InputEventKey:
 		if event.is_action_pressed("escape") and _ongoing_selection:
 			_ongoing_selection = false
 			_draw_points.clear()
-			ready_to_apply = false
+			_ready_to_apply = false
 			Global.canvas.previews.update()
 
 
@@ -47,7 +47,7 @@ func draw_end(position: Vector2) -> void:
 	if !_move and _draw_points:
 		append_gap(_draw_points[-1], position, _draw_points)
 		if position == _draw_points[0] and _draw_points.size() > 1:
-			ready_to_apply = true
+			_ready_to_apply = true
 
 	.draw_end(position)
 
@@ -55,22 +55,22 @@ func draw_end(position: Vector2) -> void:
 func draw_preview() -> void:
 	if _ongoing_selection and !_move:
 		var canvas: Node2D = Global.canvas.previews
-		var _position := canvas.position
-		var _scale := canvas.scale
+		var position := canvas.position
+		var scale := canvas.scale
 		if Global.mirror_view:
-			_position.x = _position.x + Global.current_project.size.x
-			_scale.x = -1
+			position.x = position.x + Global.current_project.size.x
+			scale.x = -1
 
 		var preview_draw_points := _draw_points.duplicate()
 		append_gap(_draw_points[-1], _last_position, preview_draw_points)
 
-		canvas.draw_set_transform(_position, canvas.rotation, _scale)
+		canvas.draw_set_transform(position, canvas.rotation, scale)
 		var indicator := _fill_bitmap_with_points(preview_draw_points, Global.current_project.size)
 
 		for line in _create_polylines(indicator):
 			canvas.draw_polyline(PoolVector2Array(line), Color.black)
 
-		var circle_radius := Global.camera.zoom * 10
+		var circle_radius: Vector2 = Global.camera.zoom * 10
 		circle_radius.x = clamp(circle_radius.x, 2, circle_radius.x)
 		circle_radius.y = clamp(circle_radius.y, 2, circle_radius.y)
 
@@ -106,7 +106,7 @@ func draw_preview() -> void:
 
 
 func apply_selection(_position) -> void:
-	if !ready_to_apply:
+	if !_ready_to_apply:
 		return
 	var project: Project = Global.current_project
 	var cleared := false
@@ -139,7 +139,7 @@ func apply_selection(_position) -> void:
 	Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
 	_ongoing_selection = false
 	_draw_points.clear()
-	ready_to_apply = false
+	_ready_to_apply = false
 	Global.canvas.previews.update()
 
 
@@ -205,7 +205,7 @@ func _fill_bitmap_with_points(points: Array, size: Vector2) -> BitMap:
 
 func mirror_array(array: Array, h: bool, v: bool) -> Array:
 	var new_array := []
-	var project := Global.current_project
+	var project: Project = Global.current_project
 	for point in array:
 		if h and v:
 			new_array.append(
@@ -219,7 +219,8 @@ func mirror_array(array: Array, h: bool, v: bool) -> Array:
 	return new_array
 
 
-# Thanks to https://www.reddit.com/r/godot/comments/3ktq39/drawing_empty_circles_and_curves/cv0f4eo/?utm_source=reddit&utm_medium=web2x&context=3
+# Thanks to
+# https://www.reddit.com/r/godot/comments/3ktq39/drawing_empty_circles_and_curves/cv0f4eo/
 func draw_empty_circle(
 	canvas: CanvasItem, circle_center: Vector2, circle_radius: Vector2, color: Color
 ) -> void:

@@ -1,5 +1,10 @@
 extends ImageEffect
 
+var shader_path: String = "res://src/Shaders/HSV.shader"
+
+var live_preview: bool = true
+var confirmed: bool = false
+
 onready var hue_slider = $VBoxContainer/HBoxContainer/Sliders/Hue
 onready var sat_slider = $VBoxContainer/HBoxContainer/Sliders/Saturation
 onready var val_slider = $VBoxContainer/HBoxContainer/Sliders/Value
@@ -10,16 +15,11 @@ onready var val_spinbox = $VBoxContainer/HBoxContainer/TextBoxes/Value
 onready var wait_apply_timer = $WaitApply
 onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
 
-var shaderPath: String = "res://src/Shaders/HSV.shader"
 
-var live_preview: bool = true
-var confirmed: bool = false
-
-
-func _about_to_show():
+func _about_to_show() -> void:
 	reset()
 	var sm: ShaderMaterial = ShaderMaterial.new()
-	sm.shader = load(shaderPath)
+	sm.shader = load(shader_path)
 	preview.set_material(sm)
 	._about_to_show()
 
@@ -58,7 +58,7 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 			"has_selection": _project.has_selection
 		}
 		var gen: ShaderImageEffect = ShaderImageEffect.new()
-		gen.generate_image(_cel, shaderPath, params, _project.size)
+		gen.generate_image(_cel, shader_path, params, _project.size)
 		yield(gen, "done")
 
 

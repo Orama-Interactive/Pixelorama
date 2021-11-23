@@ -33,12 +33,12 @@ func draw_end(position: Vector2) -> void:
 func draw_preview() -> void:
 	if _last_position != Vector2.INF and !_move:
 		var canvas: Node2D = Global.canvas.previews
-		var _position := canvas.position
-		var _scale := canvas.scale
+		var position := canvas.position
+		var scale := canvas.scale
 		if Global.mirror_view:
-			_position.x = _position.x + Global.current_project.size.x
-			_scale.x = -1
-		canvas.draw_set_transform(_position, canvas.rotation, _scale)
+			position.x = position.x + Global.current_project.size.x
+			scale.x = -1
+		canvas.draw_set_transform(position, canvas.rotation, scale)
 		var indicator := _fill_bitmap_with_points(_draw_points, Global.current_project.size)
 
 		for line in _create_polylines(indicator):
@@ -166,7 +166,7 @@ func _fill_bitmap_with_points(points: Array, size: Vector2) -> BitMap:
 
 func mirror_array(array: Array, h: bool, v: bool) -> Array:
 	var new_array := []
-	var project := Global.current_project
+	var project: Project = Global.current_project
 	for point in array:
 		if h and v:
 			new_array.append(

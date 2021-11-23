@@ -1,5 +1,18 @@
 class_name Drawer
 
+var pixel_perfect := false setget set_pixel_perfect
+var horizontal_mirror := false
+var vertical_mirror := false
+var color_op := ColorOp.new()
+
+var simple_drawer := SimpleDrawer.new()
+var pixel_perfect_drawers = [
+	PixelPerfectDrawer.new(),
+	PixelPerfectDrawer.new(),
+	PixelPerfectDrawer.new(),
+	PixelPerfectDrawer.new()
+]
+var drawers = [simple_drawer, simple_drawer, simple_drawer, simple_drawer]
 
 class ColorOp:
 	var strength := 1.0
@@ -17,8 +30,8 @@ class SimpleDrawer:
 
 
 class PixelPerfectDrawer:
-	const neighbours = [Vector2(0, 1), Vector2(1, 0), Vector2(-1, 0), Vector2(0, -1)]
-	const corners = [Vector2(1, 1), Vector2(-1, -1), Vector2(-1, 1), Vector2(1, -1)]
+	const NEIGHBOURS = [Vector2(0, 1), Vector2(1, 0), Vector2(-1, 0), Vector2(0, -1)]
+	const CORNERS = [Vector2(1, 1), Vector2(-1, -1), Vector2(-1, 1), Vector2(1, -1)]
 	var last_pixels = [null, null]
 
 	func reset() -> void:
@@ -35,24 +48,9 @@ class PixelPerfectDrawer:
 		if corner == null or neighbour == null:
 			return
 
-		if position - corner[0] in corners and position - neighbour[0] in neighbours:
+		if position - corner[0] in CORNERS and position - neighbour[0] in NEIGHBOURS:
 			image.set_pixel(neighbour[0].x, neighbour[0].y, neighbour[1])
 			last_pixels[0] = corner
-
-
-var pixel_perfect := false setget set_pixel_perfect
-var horizontal_mirror := false
-var vertical_mirror := false
-var color_op := ColorOp.new()
-
-var simple_drawer := SimpleDrawer.new()
-var pixel_perfect_drawers = [
-	PixelPerfectDrawer.new(),
-	PixelPerfectDrawer.new(),
-	PixelPerfectDrawer.new(),
-	PixelPerfectDrawer.new()
-]
-var drawers = [simple_drawer, simple_drawer, simple_drawer, simple_drawer]
 
 
 func reset() -> void:

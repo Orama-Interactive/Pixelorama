@@ -159,9 +159,11 @@ func _draw_shape(origin: Vector2, dest: Vector2) -> void:
 	commit_undo("Draw Shape")
 
 
-# Given an origin point and destination point, returns a rect representing where the shape will be drawn and what it's size
+# Given an origin point and destination point, returns a rect representing
+# where the shape will be drawn and what is its size
 func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
-	# WARNING: Don't replace Input.is_action_pressed for Tools.control, it makes the preview jittery on windows
+	# WARNING: Don't replace Input.is_action_pressed for Tools.control,
+	# it makes the preview jittery on Windows
 	var rect := Rect2(Vector2.ZERO, Vector2.ZERO)
 
 	# Center the rect on the mouse
@@ -169,8 +171,8 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 		var new_size := (dest - origin).floor()
 		# Make rect 1:1 while centering it on the mouse
 		if Input.is_action_pressed("shift"):
-			var _square_size := max(abs(new_size.x), abs(new_size.y))
-			new_size = Vector2(_square_size, _square_size)
+			var square_size := max(abs(new_size.x), abs(new_size.y))
+			new_size = Vector2(square_size, square_size)
 
 		origin -= new_size
 		dest = origin + 2 * new_size

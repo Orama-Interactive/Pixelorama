@@ -1,4 +1,5 @@
-class_name BaseTool extends VBoxContainer
+class_name BaseTool
+extends VBoxContainer
 
 var kname: String
 var tool_slot: Tools.Slot = null

@@ -1,6 +1,6 @@
 extends Node
 
-const languages_dict := {
+const LANGUAGES_DICT := {
 	"en_US": ["English", "English"],
 	"cs_CZ": ["Czech", "Czech"],
 	"de_DE": ["Deutsch", "German"],
@@ -39,12 +39,12 @@ func _ready() -> void:
 
 	# Create radiobuttons for each language
 	for locale in loaded_locales:
-		if !locale in languages_dict:
+		if !locale in LANGUAGES_DICT:
 			continue
 		var button = CheckBox.new()
-		button.text = languages_dict[locale][0] + " [%s]" % [locale]
-		button.name = languages_dict[locale][1]
-		button.hint_tooltip = languages_dict[locale][1]
+		button.text = LANGUAGES_DICT[locale][0] + " [%s]" % [locale]
+		button.name = LANGUAGES_DICT[locale][1]
+		button.hint_tooltip = LANGUAGES_DICT[locale][1]
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		button.group = button_group
 		if Global.is_cjk(locale):

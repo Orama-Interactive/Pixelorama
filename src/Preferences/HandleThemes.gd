@@ -56,22 +56,22 @@ func _on_Theme_pressed(index: int) -> void:
 	Global.config_cache.save("user://cache.ini")
 
 
-func change_theme(ID: int) -> void:
+func change_theme(id: int) -> void:
 	var font = Global.control.theme.default_font
-	theme_index = ID
-	var main_theme: Theme = themes[ID][0]
+	theme_index = id
+	var main_theme: Theme = themes[id][0]
 
-	if ID == 0 or ID == 1 or ID == 5:  # Dark, Gray or Purple Theme
+	if id == 0 or id == 1 or id == 5:  # Dark, Gray or Purple Theme
 		Global.theme_type = Global.ThemeTypes.DARK
-	elif ID == 2:  # Godot's Theme
+	elif id == 2:  # Godot's Theme
 		Global.theme_type = Global.ThemeTypes.BLUE
-	elif ID == 3:  # Caramel Theme
+	elif id == 3:  # Caramel Theme
 		Global.theme_type = Global.ThemeTypes.CARAMEL
-	elif ID == 4:  # Light Theme
+	elif id == 4:  # Light Theme
 		Global.theme_type = Global.ThemeTypes.LIGHT
 
 	if Global.icon_color_from == Global.IconColorFrom.THEME:
-		Global.modulate_icon_color = themes[ID][2]
+		Global.modulate_icon_color = themes[id][2]
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font

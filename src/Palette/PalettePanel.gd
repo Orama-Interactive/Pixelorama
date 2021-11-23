@@ -1,5 +1,5 @@
-extends PanelContainer
 class_name PalettePanel
+extends PanelContainer
 
 var palettes_path_id := {}
 var palettes_id_path := {}

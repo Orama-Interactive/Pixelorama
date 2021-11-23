@@ -21,12 +21,12 @@ onready var enter_name_warning := $VBoxContainer/EnterNameWarning
 
 # Opens dialog
 func open(opened_current_palette: Palette) -> void:
-	# Only to fill dialog when preset is FromCurrentPalette
+	# Only to fill dialog when preset is FROM_CURRENT_PALETTE
 	current_palette = opened_current_palette
 
 	set_default_values()
-	preset_input.selected = Palettes.NewPalettePresetType.Empty
-	# Colors settings are only available for FromCurrentSprite and FromCurrentSelection presets
+	preset_input.selected = Palettes.NewPalettePresetType.EMPTY
+	# Colors settings are only available for FROM_CURRENT_SPRITE and FROM_CURRENT_SELECTION presets
 	colors_settings.hide()
 
 	# Hide warning
@@ -49,7 +49,7 @@ func set_default_values() -> void:
 	width_input.value = Palette.DEFAULT_WIDTH
 	height_input.value = Palette.DEFAULT_HEIGHT
 	alpha_colors_input.pressed = true
-	get_colors_from_input.selected = Palettes.GetColorsFrom.CurrentFrame
+	get_colors_from_input.selected = Palettes.GetColorsFrom.CURRENT_FRAME
 
 
 # Shows/hides a warning when palette already exists
@@ -90,10 +90,10 @@ func _on_Preset_item_selected(index: int) -> void:
 	toggle_ok_button_disability(true)
 
 	match index:
-		Palettes.NewPalettePresetType.Empty:
+		Palettes.NewPalettePresetType.EMPTY:
 			colors_settings.hide()
 			set_default_values()
-		Palettes.NewPalettePresetType.FromCurrentPalette:
+		Palettes.NewPalettePresetType.FROM_CURRENT_PALETTE:
 			colors_settings.hide()
 			# If any palette was selected copy it's settings to dialog
 			if current_palette:
@@ -105,7 +105,7 @@ func _on_Preset_item_selected(index: int) -> void:
 				# Copying palette presets grid size
 				width_input.editable = false
 				height_input.editable = false
-		Palettes.NewPalettePresetType.FromCurrentSprite, Palettes.NewPalettePresetType.FromCurrentSelection:
+		Palettes.NewPalettePresetType.FROM_CURRENT_SPRITE, Palettes.NewPalettePresetType.FROM_CURRENT_SELECTION:
 			colors_settings.show()
 			set_default_values()
 

@@ -1,30 +1,29 @@
 extends Node
 
+enum ExportTab { FRAME = 0, SPRITESHEET = 1, ANIMATION = 2 }
+enum Orientation { ROWS = 0, COLUMNS = 1 }
+enum AnimationType { MULTIPLE_FILES = 0, ANIMATED = 1 }
+enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
+enum FileFormat { PNG = 0, GIF = 1 }
+
 # Gif exporter
 const GIFExporter = preload("res://addons/gdgifexporter/exporter.gd")
 const MedianCutQuantization = preload("res://addons/gdgifexporter/quantization/median_cut.gd")
 
-enum ExportTab { FRAME = 0, SPRITESHEET = 1, ANIMATION = 2 }
 var current_tab: int = ExportTab.FRAME
-
 # Frame options
 var frame_number := 0
-
 # All frames and their layers processed/blended into images
 var processed_images = []  # Image[]
 
 # Spritesheet options
 var frame_current_tag := 0  # Export only current frame tag
 var number_of_frames := 1
-enum Orientation { ROWS = 0, COLUMNS = 1 }
 var orientation: int = Orientation.ROWS
-# How many rows/columns before new line is added
-var lines_count := 1
 
-# Animation options
-enum AnimationType { MULTIPLE_FILES = 0, ANIMATED = 1 }
+var lines_count := 1 # How many rows/columns before new line is added
+
 var animation_type: int = AnimationType.MULTIPLE_FILES
-enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
 var direction: int = AnimationDirection.FORWARD
 
 # Options
@@ -36,7 +35,6 @@ var new_dir_for_each_frame_tag: bool = true  # you don't need to store this afte
 var directory_path := ""
 var file_name := "untitled"
 var file_format: int = FileFormat.PNG
-enum FileFormat { PNG = 0, GIF = 1 }
 
 var was_exported: bool = false
 
@@ -175,8 +173,8 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 				frame_tag_directory.open(directory_path)
 				frame_tag_directory.make_dir(export_path.get_base_dir().get_file())
 		# Check if the file already exists
-		var fileCheck = File.new()
-		if fileCheck.file_exists(export_path):
+		var file_check: File = File.new()
+		if file_check.file_exists(export_path):
 			# Ask user if he want's to overwrite the file
 			if not was_exported or (was_exported and not ignore_overwrites):
 				# Overwrite existing file?

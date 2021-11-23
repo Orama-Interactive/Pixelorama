@@ -1,4 +1,5 @@
-class_name ImageEffect extends AcceptDialog
+class_name ImageEffect
+extends AcceptDialog
 # Parent class for all image effects
 # Methods that have "pass" are meant to be replaced by the inherited Scripts
 
@@ -44,7 +45,7 @@ func _about_to_show() -> void:
 
 
 func _confirmed() -> void:
-	var project := Global.current_project
+	var project: Project = Global.current_project
 	if affect == CEL:
 		if !project.layers[project.current_layer].can_layer_get_drawn():  # No changes if the layer is locked or invisible
 			return

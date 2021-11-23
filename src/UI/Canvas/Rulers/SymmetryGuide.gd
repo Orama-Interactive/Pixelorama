@@ -1,4 +1,5 @@
-class_name SymmetryGuide extends Guide
+class_name SymmetryGuide
+extends Guide
 
 var _texture = preload("res://assets/graphics/dotted_line.png")
 

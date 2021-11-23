@@ -1,5 +1,5 @@
-extends GridContainer
 class_name PaletteGrid
+extends GridContainer
 
 signal swatch_pressed(mouse_button, index)
 signal swatch_double_clicked(mouse_button, index, position)

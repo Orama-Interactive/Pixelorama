@@ -1,6 +1,38 @@
 extends Node
 
 
+signal color_changed(color, button)
+
+var pen_pressure := 1.0
+var control := false
+var shift := false
+var alt := false
+
+var _tools = {
+	"RectSelect": "res://src/Tools/SelectionTools/RectSelect.tscn",
+	"EllipseSelect": "res://src/Tools/SelectionTools/EllipseSelect.tscn",
+	"PolygonSelect": "res://src/Tools/SelectionTools/PolygonSelect.tscn",
+	"ColorSelect": "res://src/Tools/SelectionTools/ColorSelect.tscn",
+	"MagicWand": "res://src/Tools/SelectionTools/MagicWand.tscn",
+	"Lasso": "res://src/Tools/SelectionTools/Lasso.tscn",
+	"Move": "res://src/Tools/Move.tscn",
+	"Zoom": "res://src/Tools/Zoom.tscn",
+	"Pan": "res://src/Tools/Pan.tscn",
+	"ColorPicker": "res://src/Tools/ColorPicker.tscn",
+	"Pencil": "res://src/Tools/Pencil.tscn",
+	"Eraser": "res://src/Tools/Eraser.tscn",
+	"Bucket": "res://src/Tools/Bucket.tscn",
+	"Shading": "res://src/Tools/Shading.tscn",
+	"LineTool": "res://src/Tools/LineTool.tscn",
+	"RectangleTool": "res://src/Tools/RectangleTool.tscn",
+	"EllipseTool": "res://src/Tools/EllipseTool.tscn",
+}
+var _slots = {}
+var _panels = {}
+var _tool_buttons: Node
+var _active_button := -1
+var _last_position := Vector2.INF
+
 class Slot:
 	var name: String
 	var kname: String
@@ -32,38 +64,6 @@ class Slot:
 		vertical_mirror = config.get("vertical_mirror", vertical_mirror)
 
 
-signal color_changed(color, button)
-
-var _tools = {
-	"RectSelect": "res://src/Tools/SelectionTools/RectSelect.tscn",
-	"EllipseSelect": "res://src/Tools/SelectionTools/EllipseSelect.tscn",
-	"PolygonSelect": "res://src/Tools/SelectionTools/PolygonSelect.tscn",
-	"ColorSelect": "res://src/Tools/SelectionTools/ColorSelect.tscn",
-	"MagicWand": "res://src/Tools/SelectionTools/MagicWand.tscn",
-	"Lasso": "res://src/Tools/SelectionTools/Lasso.tscn",
-	"Move": "res://src/Tools/Move.tscn",
-	"Zoom": "res://src/Tools/Zoom.tscn",
-	"Pan": "res://src/Tools/Pan.tscn",
-	"ColorPicker": "res://src/Tools/ColorPicker.tscn",
-	"Pencil": "res://src/Tools/Pencil.tscn",
-	"Eraser": "res://src/Tools/Eraser.tscn",
-	"Bucket": "res://src/Tools/Bucket.tscn",
-	"Shading": "res://src/Tools/Shading.tscn",
-	"LineTool": "res://src/Tools/LineTool.tscn",
-	"RectangleTool": "res://src/Tools/RectangleTool.tscn",
-	"EllipseTool": "res://src/Tools/EllipseTool.tscn",
-}
-var _slots = {}
-var _panels = {}
-var _tool_buttons: Node
-var _active_button := -1
-var _last_position := Vector2.INF
-
-var pen_pressure := 1.0
-var control := false
-var shift := false
-var alt := false
-
 
 func _ready() -> void:
 	_tool_buttons = Global.control.find_node("ToolButtons")
@@ -86,7 +86,8 @@ func _ready() -> void:
 	update_tool_buttons()
 	update_tool_cursors()
 
-	yield(get_tree(), "idle_frame")  # Necessary for the color picker nodes to update their color values
+	# Yield is necessary for the color picker nodes to update their color values
+	yield(get_tree(), "idle_frame")
 	var color_value: Color = Global.config_cache.get_value(
 		_slots[BUTTON_LEFT].kname, "color", Color.black
 	)

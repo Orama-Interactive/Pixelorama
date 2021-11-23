@@ -98,7 +98,7 @@ func _on_NewBtn_pressed() -> void:
 	Global.top_menu_container.file_menu_id_pressed(0)
 
 
-func _on_OpenBtn__pressed() -> void:
+func _on_OpenBtn_pressed() -> void:
 	visible = false
 	Global.top_menu_container.file_menu_id_pressed(1)
 

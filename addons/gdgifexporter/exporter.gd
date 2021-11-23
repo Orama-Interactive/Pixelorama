@@ -241,8 +241,6 @@ func add_image_descriptor(pos: Vector2, size: Vector2, l_color_table_size: int) 
 	var image_separator: int = 0x2c
 	var packed_fields: int = 0b10000000 | (0b111 & l_color_table_size)
 
-	var little_endian = preload("./little_endian.gd").new()
-
 	data.append(image_separator)
 	data += little_endian.int_to_2bytes(int(pos.x))  # left pos
 	data += little_endian.int_to_2bytes(int(pos.y))  # top pos

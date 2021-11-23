@@ -49,16 +49,16 @@ func draw_end(position: Vector2) -> void:
 func draw_preview() -> void:
 	if !_move && !_rect.has_no_area():
 		var canvas: Node2D = Global.canvas.previews
-		var _position := canvas.position
-		var _scale := canvas.scale
+		var position := canvas.position
+		var scale := canvas.scale
 		if Global.mirror_view:
-			_position.x = _position.x + Global.current_project.size.x
-			_scale.x = -1
+			position.x = position.x + Global.current_project.size.x
+			scale.x = -1
 
 		var border := _get_shape_points_filled(_rect.size)
 		var indicator := _fill_bitmap_with_points(border, _rect.size)
 
-		canvas.draw_set_transform(_rect.position, canvas.rotation, _scale)
+		canvas.draw_set_transform(_rect.position, canvas.rotation, scale)
 		for line in _create_polylines(indicator):
 			canvas.draw_polyline(PoolVector2Array(line), Color.black)
 
@@ -129,7 +129,8 @@ func set_ellipse(bitmap: BitMap, position: Vector2) -> void:
 			bitmap.set_bit(pos, !_subtract)
 
 
-# Given an origin point and destination point, returns a rect representing where the shape will be drawn and what it's size
+# Given an origin point and destination point, returns a rect representing
+# where the shape will be drawn and what is its size
 func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 	var rect := Rect2(Vector2.ZERO, Vector2.ZERO)
 
@@ -138,8 +139,8 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 		var new_size := (dest - origin).floor()
 		# Make rect 1:1 while centering it on the mouse
 		if _square:
-			var _square_size := max(abs(new_size.x), abs(new_size.y))
-			new_size = Vector2(_square_size, _square_size)
+			var square_size := max(abs(new_size.x), abs(new_size.y))
+			new_size = Vector2(square_size, square_size)
 
 		origin -= new_size
 		dest = origin + 2 * new_size

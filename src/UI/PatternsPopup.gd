@@ -1,15 +1,13 @@
-extends PopupPanel
 class_name Patterns
-
-
-class Pattern:
-	var image: Image
-	var index: int
-
+extends PopupPanel
 
 signal pattern_selected(pattern)
 
 var default_pattern: Pattern = null
+
+class Pattern:
+	var image: Image
+	var index: int
 
 
 func select_pattern(pattern: Pattern) -> void:

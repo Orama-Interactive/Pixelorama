@@ -5,6 +5,7 @@ signal resume_export_function
 
 var animated_preview_current_frame := 0
 var animated_preview_frames = []
+var pingpong_direction = Export.AnimationDirection.FORWARD
 
 onready var tabs = $VBoxContainer/Tabs
 onready var popups = $Popups
@@ -361,9 +362,6 @@ func _on_FileExistsAlert_custom_action(action: String) -> void:
 		Export.stop_export = true
 		emit_signal("resume_export_function")
 		file_exists_alert_popup.hide()
-
-
-var pingpong_direction = Export.AnimationDirection.FORWARD
 
 
 func _on_FrameTimer_timeout() -> void:

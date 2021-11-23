@@ -1,12 +1,11 @@
 extends ImageEffect
 
+var live_preview: bool = true
 onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
 onready var angle_hslider: HSlider = $VBoxContainer/AngleOptions/AngleHSlider
 onready var angle_spinbox: SpinBox = $VBoxContainer/AngleOptions/AngleSpinBox
 onready var wait_apply_timer = $WaitApply
 onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
-
-var live_preview: bool = true
 
 
 func _ready() -> void:

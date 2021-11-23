@@ -1,7 +1,7 @@
 extends Reference
 
 
-class LSB_LZWBitPacker:
+class LSBLZWBitPacker:
 	var bit_index: int = 0
 	var stream: int = 0
 

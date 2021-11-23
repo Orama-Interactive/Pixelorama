@@ -3,7 +3,7 @@ extends Node
 enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
 
 
-func scale3X(sprite: Image, tol: float = 50) -> Image:
+func scale_3x(sprite: Image, tol: float = 50) -> Image:
 	var scaled := Image.new()
 	scaled.create(sprite.get_width() * 3, sprite.get_height() * 3, false, Image.FORMAT_RGBA8)
 	scaled.lock()
@@ -33,14 +33,14 @@ func scale3X(sprite: Image, tol: float = 50) -> Image:
 			h = sprite.get_pixel(x, y + 1)
 			i = sprite.get_pixel(x + 1, y + 1)
 
-			var db: bool = similarColors(d, b, tol)
-			var dh: bool = similarColors(d, h, tol)
-			var bf: bool = similarColors(f, b, tol)
-			var ec: bool = similarColors(e, c, tol)
-			var ea: bool = similarColors(e, a, tol)
-			var fh: bool = similarColors(f, h, tol)
-			var eg: bool = similarColors(e, g, tol)
-			var ei: bool = similarColors(e, i, tol)
+			var db: bool = similar_colors(d, b, tol)
+			var dh: bool = similar_colors(d, h, tol)
+			var bf: bool = similar_colors(f, b, tol)
+			var ec: bool = similar_colors(e, c, tol)
+			var ea: bool = similar_colors(e, a, tol)
+			var fh: bool = similar_colors(f, h, tol)
+			var eg: bool = similar_colors(e, g, tol)
+			var ei: bool = similar_colors(e, i, tol)
 
 			scaled.set_pixel(xs - 1, ys - 1, d if (db and !dh and !bf) else e)
 			scaled.set_pixel(
@@ -142,7 +142,7 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 					0:
 						p = (
 							d
-							if (similarColors(d, b) && !similarColors(d, h) && !similarColors(b, f))
+							if (similar_colors(d, b) && !similar_colors(d, h) && !similar_colors(b, f))
 							else e
 						)
 					1:
@@ -150,16 +150,16 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 							b
 							if (
 								(
-									similarColors(d, b)
-									&& !similarColors(d, h)
-									&& !similarColors(b, f)
-									&& !similarColors(e, c)
+									similar_colors(d, b)
+									&& !similar_colors(d, h)
+									&& !similar_colors(b, f)
+									&& !similar_colors(e, c)
 								)
 								|| (
-									similarColors(b, f)
-									&& !similarColors(d, b)
-									&& !similarColors(f, h)
-									&& !similarColors(e, a)
+									similar_colors(b, f)
+									&& !similar_colors(d, b)
+									&& !similar_colors(f, h)
+									&& !similar_colors(e, a)
 								)
 							)
 							else e
@@ -167,7 +167,7 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 					2:
 						p = (
 							f
-							if (similarColors(b, f) && !similarColors(d, b) && !similarColors(f, h))
+							if (similar_colors(b, f) && !similar_colors(d, b) && !similar_colors(f, h))
 							else e
 						)
 					3:
@@ -175,16 +175,16 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 							d
 							if (
 								(
-									similarColors(d, h)
-									&& !similarColors(f, h)
-									&& !similarColors(d, b)
-									&& !similarColors(e, a)
+									similar_colors(d, h)
+									&& !similar_colors(f, h)
+									&& !similar_colors(d, b)
+									&& !similar_colors(e, a)
 								)
 								|| (
-									similarColors(d, b)
-									&& !similarColors(d, h)
-									&& !similarColors(b, f)
-									&& !similarColors(e, g)
+									similar_colors(d, b)
+									&& !similar_colors(d, h)
+									&& !similar_colors(b, f)
+									&& !similar_colors(e, g)
 								)
 							)
 							else e
@@ -196,16 +196,16 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 							f
 							if (
 								(
-									similarColors(b, f)
-									&& !similarColors(d, b)
-									&& !similarColors(f, h)
-									&& !similarColors(e, i)
+									similar_colors(b, f)
+									&& !similar_colors(d, b)
+									&& !similar_colors(f, h)
+									&& !similar_colors(e, i)
 								)
 								|| (
-									similarColors(f, h)
-									&& !similarColors(b, f)
-									&& !similarColors(d, h)
-									&& !similarColors(e, c)
+									similar_colors(f, h)
+									&& !similar_colors(b, f)
+									&& !similar_colors(d, h)
+									&& !similar_colors(e, c)
 								)
 							)
 							else e
@@ -213,7 +213,7 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 					6:
 						p = (
 							d
-							if (similarColors(d, h) && !similarColors(f, h) && !similarColors(d, b))
+							if (similar_colors(d, h) && !similar_colors(f, h) && !similar_colors(d, b))
 							else e
 						)
 					7:
@@ -221,16 +221,16 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 							h
 							if (
 								(
-									similarColors(f, h)
-									&& !similarColors(f, b)
-									&& !similarColors(d, h)
-									&& !similarColors(e, g)
+									similar_colors(f, h)
+									&& !similar_colors(f, b)
+									&& !similar_colors(d, h)
+									&& !similar_colors(e, g)
 								)
 								|| (
-									similarColors(d, h)
-									&& !similarColors(f, h)
-									&& !similarColors(d, b)
-									&& !similarColors(e, i)
+									similar_colors(d, h)
+									&& !similar_colors(f, h)
+									&& !similar_colors(d, b)
+									&& !similar_colors(e, i)
 								)
 							)
 							else e
@@ -238,7 +238,7 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 					8:
 						p = (
 							f
-							if (similarColors(f, h) && !similarColors(f, b) && !similarColors(d, h))
+							if (similar_colors(f, h) && !similar_colors(f, b) && !similar_colors(d, h))
 							else e
 						)
 			sprite.set_pixel(x, y, p)
@@ -249,7 +249,7 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 func fake_rotsprite(sprite: Image, angle: float, pivot: Vector2) -> void:
 	var selected_sprite := Image.new()
 	selected_sprite.copy_from(sprite)
-	selected_sprite.copy_from(scale3X(selected_sprite))
+	selected_sprite.copy_from(scale_3x(selected_sprite))
 	nn_rotate(selected_sprite, angle, pivot * 3)
 # warning-ignore:integer_division
 # warning-ignore:integer_division
@@ -276,12 +276,12 @@ func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
 	aux.unlock()
 
 
-func similarColors(c1: Color, c2: Color, tol: float = 100) -> bool:
-	var dist = colorDistance(c1, c2)
+func similar_colors(c1: Color, c2: Color, tol: float = 100) -> bool:
+	var dist = color_distance(c1, c2)
 	return dist <= tol
 
 
-func colorDistance(c1: Color, c2: Color) -> float:
+func color_distance(c1: Color, c2: Color) -> float:
 	return sqrt(
 		(
 			pow((c1.r - c2.r) * 255, 2)
@@ -302,14 +302,14 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 		for i in range(f.cels.size() - 1, -1, -1):
 			var sprite := Image.new()
 			sprite.copy_from(f.cels[i].image)
-			# Different method for scale3x
+			# Different method for scale_3x
 			if interpolation == 5:
 				var times: Vector2 = Vector2(
 					ceil(width / (3.0 * sprite.get_width())),
 					ceil(height / (3.0 * sprite.get_height()))
 				)
 				for _j in range(max(times.x, times.y)):
-					sprite.copy_from(scale3X(sprite))
+					sprite.copy_from(scale_3x(sprite))
 				sprite.resize(width, height, 0)
 			else:
 				sprite.resize(width, height, interpolation)
@@ -450,48 +450,6 @@ func general_undo_centralize() -> void:
 	project.undo_redo.add_undo_method(Global, "undo")
 	project.undo_redo.add_do_method(Global, "redo")
 	project.undo_redo.commit_action()
-
-
-# TO BE REMOVED
-# func invert_image_colors(image : Image, affect_selection : bool, project : Project, red := true, green := true, blue := true, alpha := false) -> void:
-# 	image.lock()
-# 	for x in project.size.x:
-# 		for y in project.size.y:
-# 			var pos := Vector2(x, y)
-# 			if affect_selection and !project.can_pixel_get_drawn(pos):
-# 				continue
-# 			var px_color := image.get_pixelv(pos)
-# 			# Manually invert each color channel
-# 			if red:
-# 				px_color.r = 1.0 - px_color.r
-# 			if green:
-# 				px_color.g = 1.0 - px_color.g
-# 			if blue:
-# 				px_color.b = 1.0 - px_color.b
-# 			if alpha:
-# 				px_color.a = 1.0 - px_color.a
-# 			image.set_pixelv(pos, px_color)
-
-# TO BE REMOVED
-# func desaturate_image(image : Image, affect_selection : bool, project : Project, red := true, green := true, blue := true, alpha := false) -> void:
-# 	image.lock()
-# 	for x in project.size.x:
-# 		for y in project.size.y:
-# 			var pos := Vector2(x, y)
-# 			if affect_selection and !project.can_pixel_get_drawn(pos):
-# 				continue
-# 			var px_color := image.get_pixelv(pos)
-# 			var gray = px_color.v
-# 			if red:
-# 				px_color.r = gray
-# 			if green:
-# 				px_color.g = gray
-# 			if blue:
-# 				px_color.b = gray
-# 			if alpha:
-# 				px_color.a = gray
-
-# 			image.set_pixelv(pos, px_color)
 
 
 func generate_outline(
@@ -666,44 +624,6 @@ func generate_outline(
 	image.unlock()
 	new_image.unlock()
 	image.copy_from(new_image)
-
-
-# TO BE REMOVED
-# func adjust_hsv(img: Image, delta_h : float, delta_s : float, delta_v : float, affect_selection : bool, project : Project) -> void:
-# 	img.lock()
-# 	for x in project.size.x:
-# 		for y in project.size.y:
-# 			var pos := Vector2(x, y)
-# 			if affect_selection and !project.can_pixel_get_drawn(pos):
-# 				continue
-# 			var c : Color = img.get_pixelv(pos)
-# 			# Hue
-# 			var hue = range_lerp(c.h,0,1,-180,180)
-# 			hue = hue + delta_h
-
-# 			while(hue >= 180):
-# 				hue -= 360
-# 			while(hue < -180):
-# 				hue += 360
-
-# 			# Saturation
-# 			var sat = c.s
-# 			if delta_s > 0:
-# 				sat = range_lerp(delta_s,0,100,c.s,1)
-# 			elif delta_s < 0:
-# 				sat = range_lerp(delta_s,-100,0,0,c.s)
-
-# 			# Value
-# 			var val = c.v
-# 			if delta_v > 0:
-# 				val = range_lerp(delta_v,0,100,c.v,1)
-# 			elif delta_v < 0:
-# 				val = range_lerp(delta_v,-100,0,0,c.v)
-
-# 			c.h = range_lerp(hue,-180,180,0,1)
-# 			c.s = sat
-# 			c.v = val
-# 			img.set_pixelv(pos, c)
 
 
 func generate_gradient(

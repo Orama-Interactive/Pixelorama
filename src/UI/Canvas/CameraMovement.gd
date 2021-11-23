@@ -3,9 +3,16 @@ extends Camera2D
 enum Cameras { MAIN, SECOND, SMALL }
 enum Direction { UP, DOWN, LEFT, RIGHT }
 
-const low_speed_move_rate := 150.0
-const medium_speed_move_rate := 750.0
-const high_speed_move_rate := 3750.0
+const LOW_SPEED_MOVE_RATE := 150.0
+const MEDIUM_SPEED_MOVE_RATE := 750.0
+const HIGH_SPEED_MOVE_RATE := 3750.0
+const KEY_MOVE_ACTION_NAMES := ["ui_up", "ui_down", "ui_left", "ui_right"]
+# Holds sign multipliers for the given directions nyaa
+# (per the indices defined by Direction)
+# UP, DOWN, LEFT, RIGHT in that order
+const DIRECTIONAL_SIGN_MULTIPLIERS := [
+	Vector2(0.0, -1.0), Vector2(0.0, 1.0), Vector2(-1.0, 0.0), Vector2(1.0, 0.0)
+]
 
 # Indices are as in the Direction enum
 # This is the total time the key for that direction has been pressed.
@@ -102,13 +109,13 @@ func dir_move_zoom_multiplier(press_time: float) -> float:
 	if press_time < 0:
 		return 0.0
 	if Input.is_key_pressed(KEY_SHIFT) and Input.is_key_pressed(KEY_CONTROL):
-		return high_speed_move_rate
+		return HIGH_SPEED_MOVE_RATE
 	elif Input.is_key_pressed(KEY_SHIFT):
-		return medium_speed_move_rate
+		return MEDIUM_SPEED_MOVE_RATE
 	elif !Input.is_key_pressed(KEY_CONTROL):
 		# control + right/left is used to move frames so
 		# we do this check to ensure that there is no conflict
-		return low_speed_move_rate
+		return LOW_SPEED_MOVE_RATE
 	else:
 		return 0.0
 
@@ -117,15 +124,12 @@ func reset_dir_move_time(direction) -> void:
 	key_move_press_time[direction] = 0.0
 
 
-const key_move_action_names := ["ui_up", "ui_down", "ui_left", "ui_right"]
-
-
 # Check if an event is a ui_up/down/left/right event-press :)
 func is_action_direction_pressed(event: InputEvent, allow_echo: bool = true) -> bool:
 	for slot in Tools._slots.values():
 		if slot.tool_node is SelectionTool:
 			return false
-	for action in key_move_action_names:
+	for action in KEY_MOVE_ACTION_NAMES:
 		if event.is_action_pressed(action, allow_echo):
 			return true
 	return false
@@ -136,7 +140,7 @@ func is_action_direction_released(event: InputEvent) -> bool:
 	for slot in Tools._slots.values():
 		if slot.tool_node is SelectionTool:
 			return false
-	for action in key_move_action_names:
+	for action in KEY_MOVE_ACTION_NAMES:
 		if event.is_action_released(action):
 			return true
 	return false
@@ -156,14 +160,6 @@ func get_action_direction(event: InputEvent):  # -> Optional[Direction]
 	return null
 
 
-# Holds sign multipliers for the given directions nyaa
-# (per the indices defined by Direction)
-# UP, DOWN, LEFT, RIGHT in that order
-const directional_sign_multipliers := [
-	Vector2(0.0, -1.0), Vector2(0.0, 1.0), Vector2(-1.0, 0.0), Vector2(1.0, 0.0)
-]
-
-
 # Process an action event for a pressed direction
 # action
 func process_direction_action_pressed(event: InputEvent) -> void:
@@ -177,7 +173,7 @@ func process_direction_action_pressed(event: InputEvent) -> void:
 	var move_speed := dir_move_zoom_multiplier(this_direction_press_time)
 	offset = (
 		offset
-		+ move_speed * increment * directional_sign_multipliers[dir].rotated(rotation) * zoom
+		+ move_speed * increment * DIRECTIONAL_SIGN_MULTIPLIERS[dir].rotated(rotation) * zoom
 	)
 	update_rulers()
 	update_transparent_checker_offset()
@@ -238,7 +234,7 @@ func rotate_camera_around_point(degrees: float, point: Vector2) -> void:
 
 func set_camera_rotation_degrees(degrees: float) -> void:
 	var difference := degrees - rotation_degrees
-	var canvas_center := Global.current_project.size / 2
+	var canvas_center: Vector2 = Global.current_project.size / 2
 	offset = (offset - canvas_center).rotated(deg2rad(difference)) + canvas_center
 	rotation_degrees = wrapf(degrees, -180, 180)
 	rotation_changed()
