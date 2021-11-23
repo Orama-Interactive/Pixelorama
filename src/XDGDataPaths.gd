@@ -1,12 +1,12 @@
 extends Reference
 
 # These are *with* the config subdirectory name
-var xdg_data_home : String
-var xdg_data_dirs : Array
+var xdg_data_home: String
+var xdg_data_dirs: Array
 
 # These are *without* the config subdirectory name
-var raw_xdg_data_home : String
-var raw_xdg_data_dirs : Array
+var raw_xdg_data_home: String
+var raw_xdg_data_dirs: Array
 
 # Default location for xdg_data_home relative to $HOME
 const default_xdg_data_home_rel := ".local/share"
@@ -32,20 +32,14 @@ func _init() -> void:
 	if use_xdg_standard():
 		print("Detected system where we should use XDG basedir standard (currently Linux or BSD)")
 		var home := OS.get_environment("HOME")
-		raw_xdg_data_home = home.plus_file(
-			default_xdg_data_home_rel
-		)
-		xdg_data_home = raw_xdg_data_home.plus_file(
-			xdg_config_subdir_name
-		)
+		raw_xdg_data_home = home.plus_file(default_xdg_data_home_rel)
+		xdg_data_home = raw_xdg_data_home.plus_file(xdg_config_subdir_name)
 
 		# Create defaults
 		xdg_data_dirs = []
 		raw_xdg_data_dirs = default_xdg_data_dirs
 		for default_loc in raw_xdg_data_dirs:
-			xdg_data_dirs.append(
-				default_loc.plus_file(xdg_config_subdir_name)
-			)
+			xdg_data_dirs.append(default_loc.plus_file(xdg_config_subdir_name))
 
 		# Now check the XDG environment variables and if
 		# present, replace the defaults with them!
@@ -119,7 +113,7 @@ func get_patterns_write_path() -> String:
 
 # Ensure the user xdg directories exist:
 func ensure_xdg_user_dirs_exist() -> void:
-	if !OS.has_feature("standalone"): # Don't execute if we're in the editor
+	if !OS.has_feature("standalone"):  # Don't execute if we're in the editor
 		return
 
 	var base_dir := Directory.new()

@@ -14,7 +14,7 @@ func _ready() -> void:
 	material.set_shader_param("follow_scale", Global.checker_follow_scale)
 
 
-func update_offset(offset : Vector2, scale : Vector2) -> void:
+func update_offset(offset: Vector2, scale: Vector2) -> void:
 	material.set_shader_param("offset", offset)
 	material.set_shader_param("scale", scale)
 
@@ -23,12 +23,12 @@ func _on_TransparentChecker_resized() -> void:
 	material.set_shader_param("rect_size", rect_size)
 
 
-func fit_rect(rect : Rect2) -> void:
+func fit_rect(rect: Rect2) -> void:
 	rect_position = rect.position
 	rect_size = rect.size
 
 
-func transparency(value :float) -> void:
+func transparency(value: float) -> void:
 	# first make viewport transparent then background and then viewport
 	if value == 1.0:
 		get_parent().transparent_bg = false
@@ -40,4 +40,4 @@ func transparency(value :float) -> void:
 
 	# this controls opacity 0 for transparent, 1 or a greater value than 1 is opaque
 	# i have set a minimum amount for the fade (We would'nt want the canvas to dissapear now would we?)
-	material.set("shader_param/alpha",clamp(value,0.1,1))
+	material.set("shader_param/alpha", clamp(value, 0.1, 1))

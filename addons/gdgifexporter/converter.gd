@@ -1,6 +1,5 @@
 extends Reference
 
-
 var _shader: Shader
 
 
@@ -29,7 +28,9 @@ func _convert(image: Image, colors: Array) -> PoolByteArray:
 	VisualServer.canvas_item_set_parent(ci_rid, canvas)
 	var texture = ImageTexture.new()
 	texture.create_from_image(image)
-	VisualServer.canvas_item_add_texture_rect(ci_rid, Rect2(Vector2(0, 0), image.get_size()), texture)
+	VisualServer.canvas_item_add_texture_rect(
+		ci_rid, Rect2(Vector2(0, 0), image.get_size()), texture
+	)
 
 	var mat_rid = VisualServer.material_create()
 	VisualServer.material_set_shader(mat_rid, _shader.get_rid())

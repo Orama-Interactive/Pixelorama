@@ -1,8 +1,7 @@
 extends ImageEffect
 
-
-onready var flip_h : CheckBox = $VBoxContainer/OptionsContainer/FlipHorizontal
-onready var flip_v : CheckBox = $VBoxContainer/OptionsContainer/FlipVertical
+onready var flip_h: CheckBox = $VBoxContainer/OptionsContainer/FlipHorizontal
+onready var flip_v: CheckBox = $VBoxContainer/OptionsContainer/FlipVertical
 
 
 func set_nodes() -> void:
@@ -11,19 +10,19 @@ func set_nodes() -> void:
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 
 
-func commit_action(_cel : Image, project : Project = Global.current_project) -> void:
+func commit_action(_cel: Image, project: Project = Global.current_project) -> void:
 	flip_image(_cel, selection_checkbox.pressed, project)
 
 
-func _on_FlipHorizontal_toggled(_button_pressed : bool) -> void:
+func _on_FlipHorizontal_toggled(_button_pressed: bool) -> void:
 	update_preview()
 
 
-func _on_FlipVertical_toggled(_button_pressed : bool) -> void:
+func _on_FlipVertical_toggled(_button_pressed: bool) -> void:
 	update_preview()
 
 
-func flip_image(image : Image, affect_selection : bool, project : Project = Global.current_project) -> void:
+func flip_image(image: Image, affect_selection: bool, project: Project = Global.current_project) -> void:
 	if !(affect_selection and project.has_selection):
 		if flip_h.pressed:
 			image.flip_x()
@@ -39,7 +38,7 @@ func flip_image(image : Image, affect_selection : bool, project : Project = Glob
 			for y in image.get_width():
 				var pos := Vector2(x, y)
 				if project.can_pixel_get_drawn(pos):
-					var color : Color = image.get_pixelv(pos)
+					var color: Color = image.get_pixelv(pos)
 					selected_image.set_pixelv(pos, color)
 					image.set_pixelv(pos, Color(0, 0, 0, 0))
 
@@ -48,5 +47,10 @@ func flip_image(image : Image, affect_selection : bool, project : Project = Glob
 		if flip_v.pressed:
 			selected_image.flip_y()
 		selected_image.unlock()
-		image.blit_rect_mask(selected_image, selected_image, Rect2(Vector2.ZERO, selected_image.get_size()), Vector2.ZERO)
+		image.blit_rect_mask(
+			selected_image,
+			selected_image,
+			Rect2(Vector2.ZERO, selected_image.get_size()),
+			Vector2.ZERO
+		)
 		image.unlock()

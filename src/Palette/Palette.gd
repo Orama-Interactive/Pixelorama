@@ -19,7 +19,12 @@ export var colors: Dictionary = {}
 export var colors_max := 0
 
 
-func _init(init_name: String = "Custom Palette", init_width: int = DEFAULT_WIDTH, init_height: int = DEFAULT_HEIGHT, init_comment: String = "") -> void:
+func _init(
+	init_name: String = "Custom Palette",
+	init_width: int = DEFAULT_WIDTH,
+	init_height: int = DEFAULT_HEIGHT,
+	init_comment: String = ""
+) -> void:
 	name = init_name
 	comment = init_comment
 	width = init_width
@@ -34,7 +39,6 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 	height = new_height
 	name = new_name
 	comment = new_comment
-
 
 	var old_colors_max = colors_max
 	colors_max = width * height
@@ -79,7 +83,7 @@ func reindex_colors_on_width_increase(old_width: int) -> void:
 	var new_colors = {}
 	for old_index in sorted_colors_indexes:
 		var new_index: int = old_index + (width - old_width) * (old_index / old_width)
-		new_colors[new_index ] = colors[old_index]
+		new_colors[new_index] = colors[old_index]
 
 	colors = new_colors
 

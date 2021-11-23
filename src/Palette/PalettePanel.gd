@@ -20,6 +20,7 @@ onready var create_palette_dialog := $CreatePaletteDialog
 # Color picker button itself is hidden but it's popup is used to edit color swatches
 onready var hidden_color_picker := $HiddenColorPickerButton
 
+
 func _ready() -> void:
 	Tools.connect("color_changed", self, "_color_changed")
 
@@ -109,7 +110,11 @@ func _on_PaletteSelect_item_selected(index: int) -> void:
 
 func _on_AddColor_gui_input(event: InputEvent) -> void:
 	if Palettes.is_any_palette_selected():
-		if event is InputEventMouseButton and event.pressed and (event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT):
+		if (
+			event is InputEventMouseButton
+			and event.pressed
+			and (event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT)
+		):
 			# Gets the grid index that corresponds to the top left of current grid window
 			# Color will be added at the start of the currently scrolled part of palette - not the absolute beginning of palette
 			var start_index = palette_grid.convert_grid_index_to_palette_index(0)
@@ -121,7 +126,9 @@ func _on_AddColor_gui_input(event: InputEvent) -> void:
 func _on_DeleteColor_gui_input(event: InputEvent) -> void:
 	if Palettes.is_any_palette_selected():
 		if event is InputEventMouseButton and event.pressed:
-			var selected_color_index = Palettes.current_palette_get_selected_color_index(event.button_index)
+			var selected_color_index = Palettes.current_palette_get_selected_color_index(
+				event.button_index
+			)
 
 			if selected_color_index != -1:
 				Palettes.current_palette_delete_color(selected_color_index)
@@ -129,7 +136,15 @@ func _on_DeleteColor_gui_input(event: InputEvent) -> void:
 				toggle_add_delete_buttons()
 
 
-func _on_CreatePaletteDialog_saved(preset: int, name: String, comment: String, width: int, height: int, add_alpha_colors: bool, colors_from: int) -> void:
+func _on_CreatePaletteDialog_saved(
+	preset: int,
+	name: String,
+	comment: String,
+	width: int,
+	height: int,
+	add_alpha_colors: bool,
+	colors_from: int
+) -> void:
 	Palettes.create_new_palette(preset, name, comment, width, height, add_alpha_colors, colors_from)
 	setup_palettes_selector()
 	redraw_current_palette()

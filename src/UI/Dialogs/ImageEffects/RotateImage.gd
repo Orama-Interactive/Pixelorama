@@ -1,13 +1,13 @@
 extends ImageEffect
 
-
-onready var type_option_button : OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
-onready var angle_hslider : HSlider = $VBoxContainer/AngleOptions/AngleHSlider
-onready var angle_spinbox : SpinBox = $VBoxContainer/AngleOptions/AngleSpinBox
+onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
+onready var angle_hslider: HSlider = $VBoxContainer/AngleOptions/AngleHSlider
+onready var angle_spinbox: SpinBox = $VBoxContainer/AngleOptions/AngleSpinBox
 onready var wait_apply_timer = $WaitApply
 onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
 
-var live_preview :bool = true
+var live_preview: bool = true
+
 
 func _ready() -> void:
 	type_option_button.add_item("Rotxel")
@@ -23,20 +23,23 @@ func set_nodes() -> void:
 
 func _about_to_show() -> void:
 	._about_to_show()
-	wait_apply_timer.wait_time = wait_time_spinbox.value/1000.0
+	wait_apply_timer.wait_time = wait_time_spinbox.value / 1000.0
 	angle_hslider.value = 0
 
 
-func commit_action(_cel : Image, _project : Project = Global.current_project) -> void:
-	var angle : float = deg2rad(angle_hslider.value)
+func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
+	var angle: float = deg2rad(angle_hslider.value)
 # warning-ignore:integer_division
 # warning-ignore:integer_division
 	var pivot = Vector2(_cel.get_width() / 2, _cel.get_height() / 2)
 	var image := Image.new()
 	image.copy_from(_cel)
 	if _project.has_selection and selection_checkbox.pressed:
-		var selection_rectangle : Rect2 = _project.get_selection_rectangle()
-		pivot = selection_rectangle.position + ((selection_rectangle.end - selection_rectangle.position) / 2)
+		var selection_rectangle: Rect2 = _project.get_selection_rectangle()
+		pivot = (
+			selection_rectangle.position
+			+ ((selection_rectangle.end - selection_rectangle.position) / 2)
+		)
 		image.lock()
 		_cel.lock()
 		for x in _project.size.x:
@@ -66,7 +69,7 @@ func _confirmed() -> void:
 	angle_hslider.value = 0
 
 
-func _on_HSlider_value_changed(_value : float) -> void:
+func _on_HSlider_value_changed(_value: float) -> void:
 	angle_spinbox.value = angle_hslider.value
 	if live_preview:
 		update_preview()
@@ -74,11 +77,11 @@ func _on_HSlider_value_changed(_value : float) -> void:
 		wait_apply_timer.start()
 
 
-func _on_SpinBox_value_changed(_value : float) -> void:
+func _on_SpinBox_value_changed(_value: float) -> void:
 	angle_hslider.value = angle_spinbox.value
 
 
-func _on_TypeOptionButton_item_selected(_id : int) -> void:
+func _on_TypeOptionButton_item_selected(_id: int) -> void:
 	update_preview()
 
 
@@ -87,7 +90,7 @@ func _on_WaitApply_timeout() -> void:
 
 
 func _on_WaitTime_value_changed(value: float) -> void:
-	wait_apply_timer.wait_time = value/1000.0
+	wait_apply_timer.wait_time = value / 1000.0
 
 
 func _on_LiveCheckbox_toggled(button_pressed: bool) -> void:

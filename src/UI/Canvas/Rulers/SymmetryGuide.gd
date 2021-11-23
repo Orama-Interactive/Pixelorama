@@ -1,6 +1,5 @@
 class_name SymmetryGuide extends Guide
 
-
 var _texture = preload("res://assets/graphics/dotted_line.png")
 
 
@@ -11,10 +10,10 @@ func _ready() -> void:
 	texture_mode = Line2D.LINE_TEXTURE_TILE
 	width = Global.camera.zoom.x * 4
 	# Add a subtle difference to the normal guide color by mixing in some blue
-	default_color = Global.guide_color.linear_interpolate(Color(0.2 , 0.2, .65), .6)
+	default_color = Global.guide_color.linear_interpolate(Color(0.2, 0.2, .65), .6)
 
 
-func _input(_event : InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if !visible:
 		return
 	._input(_event)

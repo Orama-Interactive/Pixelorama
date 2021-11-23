@@ -2,24 +2,25 @@ class_name ImageEffect extends AcceptDialog
 # Parent class for all image effects
 # Methods that have "pass" are meant to be replaced by the inherited Scripts
 
+enum { CEL, FRAME, ALL_FRAMES, ALL_PROJECTS }
 
-enum {CEL, FRAME, ALL_FRAMES, ALL_PROJECTS}
-
-var affect : int = CEL
-var current_cel : Image
-var current_frame : Image
-var preview_image : Image
-var preview_texture : ImageTexture
-var preview : TextureRect
-var selection_checkbox : CheckBox
-var affect_option_button : OptionButton
+var affect: int = CEL
+var current_cel: Image
+var current_frame: Image
+var preview_image: Image
+var preview_texture: ImageTexture
+var preview: TextureRect
+var selection_checkbox: CheckBox
+var affect_option_button: OptionButton
 
 
 func _ready() -> void:
 	set_nodes()
 	current_cel = Image.new()
 	current_frame = Image.new()
-	current_frame.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
+	current_frame.create(
+		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
+	)
 	preview_image = Image.new()
 	preview_texture = ImageTexture.new()
 	connect("about_to_show", self, "_about_to_show")
@@ -45,7 +46,7 @@ func _about_to_show() -> void:
 func _confirmed() -> void:
 	var project := Global.current_project
 	if affect == CEL:
-		if !project.layers[project.current_layer].can_layer_get_drawn(): # No changes if the layer is locked or invisible
+		if !project.layers[project.current_layer].can_layer_get_drawn():  # No changes if the layer is locked or invisible
 			return
 		if project.selected_cels.size() == 1:
 			Global.canvas.handle_undo("Draw")
@@ -54,8 +55,8 @@ func _confirmed() -> void:
 		else:
 			Global.canvas.handle_undo("Draw", project, -1, -1)
 			for cel_index in project.selected_cels:
-				var cel : Cel = project.frames[cel_index[0]].cels[cel_index[1]]
-				var cel_image : Image = cel.image
+				var cel: Cel = project.frames[cel_index[0]].cels[cel_index[1]]
+				var cel_image: Image = cel.image
 				commit_action(cel_image)
 			Global.canvas.handle_redo("Draw", project, -1, -1)
 	elif affect == FRAME:
@@ -89,7 +90,7 @@ func _confirmed() -> void:
 			Global.canvas.handle_redo("Draw", _project, -1, -1)
 
 
-func commit_action(_cel : Image, _project : Project = Global.current_project) -> void:
+func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
 	pass
 
 
@@ -97,11 +98,11 @@ func set_nodes() -> void:
 	pass
 
 
-func _on_SelectionCheckBox_toggled(_button_pressed : bool) -> void:
+func _on_SelectionCheckBox_toggled(_button_pressed: bool) -> void:
 	update_preview()
 
 
-func _on_AffectOptionButton_item_selected(index : int) -> void:
+func _on_AffectOptionButton_item_selected(index: int) -> void:
 	affect = index
 	update_preview()
 

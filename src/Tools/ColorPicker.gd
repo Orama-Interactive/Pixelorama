@@ -1,12 +1,11 @@
 extends BaseTool
 
-
 var _prev_mode := 0
 var _color_slot := 0
 
 
 func _input(event: InputEvent) -> void:
-	var options : OptionButton = $ColorPicker/Options
+	var options: OptionButton = $ColorPicker/Options
 
 	if event.is_action_pressed("ctrl"):
 		_prev_mode = options.selected
@@ -18,7 +17,7 @@ func _input(event: InputEvent) -> void:
 		_color_slot = options.selected
 
 
-func _on_Options_item_selected(id : int) -> void:
+func _on_Options_item_selected(id: int) -> void:
 	_color_slot = id
 	update_config()
 	save_config()
@@ -26,11 +25,11 @@ func _on_Options_item_selected(id : int) -> void:
 
 func get_config() -> Dictionary:
 	return {
-		"color_slot" : _color_slot,
+		"color_slot": _color_slot,
 	}
 
 
-func set_config(config : Dictionary) -> void:
+func set_config(config: Dictionary) -> void:
 	_color_slot = config.get("color_slot", _color_slot)
 
 
@@ -38,20 +37,20 @@ func update_config() -> void:
 	$ColorPicker/Options.selected = _color_slot
 
 
-func draw_start(position : Vector2) -> void:
+func draw_start(position: Vector2) -> void:
 	_pick_color(position)
 
 
-func draw_move(position : Vector2) -> void:
+func draw_move(position: Vector2) -> void:
 	_pick_color(position)
 
 
-func draw_end(_position : Vector2) -> void:
+func draw_end(_position: Vector2) -> void:
 	pass
 
 
-func _pick_color(position : Vector2) -> void:
-	var project : Project = Global.current_project
+func _pick_color(position: Vector2) -> void:
+	var project: Project = Global.current_project
 	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
 

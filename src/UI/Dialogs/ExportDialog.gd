@@ -1,7 +1,7 @@
 extends AcceptDialog
 
 # called when user resumes export after filename collision
-signal resume_export_function()
+signal resume_export_function
 
 var animated_preview_current_frame := 0
 var animated_preview_frames = []
@@ -31,7 +31,6 @@ onready var animation_options = $VBoxContainer/AnimationOptions
 onready var animation_options_animation_type = $VBoxContainer/AnimationOptions/AnimationType
 onready var animation_options_animation_options = $VBoxContainer/AnimationOptions/AnimatedOptions
 onready var animation_options_direction = $VBoxContainer/AnimationOptions/AnimatedOptions/Direction
-
 
 onready var options_resize = $VBoxContainer/Options/Resize
 onready var options_interpolation = $VBoxContainer/Options/Interpolation
@@ -132,7 +131,11 @@ func add_image_preview(image: Image, canvas_number: int = -1) -> void:
 
 
 func add_animated_preview() -> void:
-	animated_preview_current_frame = Export.processed_images.size() - 1 if Export.direction == Export.AnimationDirection.BACKWARDS else 0
+	animated_preview_current_frame = (
+		Export.processed_images.size() - 1
+		if Export.direction == Export.AnimationDirection.BACKWARDS
+		else 0
+	)
 	animated_preview_frames = []
 
 	for processed_image in Export.processed_images:
@@ -148,8 +151,11 @@ func add_animated_preview() -> void:
 	container.add_child(preview)
 
 	previews.add_child(container)
-	frame_timer.set_one_shot(true) #The wait_time it can't change correctly if it is playing
-	frame_timer.wait_time = Global.current_project.frames[animated_preview_current_frame].duration * (1 / Global.current_project.fps)
+	frame_timer.set_one_shot(true)  #The wait_time it can't change correctly if it is playing
+	frame_timer.wait_time = (
+		Global.current_project.frames[animated_preview_current_frame].duration
+		* (1 / Global.current_project.fps)
+	)
 	frame_timer.start()
 
 
@@ -194,7 +200,7 @@ func set_file_format_selector() -> void:
 func create_frame_tag_list() -> void:
 	# Clear existing tag list from entry if it exists
 	spritesheet_options_frames.clear()
-	spritesheet_options_frames.add_item("All Frames", 0) # Re-add removed 'All Frames' item
+	spritesheet_options_frames.add_item("All Frames", 0)  # Re-add removed 'All Frames' item
 
 	# Repopulate list with current tag list
 	for item in Global.current_project.animation_tags:
@@ -229,7 +235,9 @@ func _on_ExportDialog_about_to_show() -> void:
 		Export.directory_path = "user://"
 
 	if Export.directory_path.empty():
-		Export.directory_path = Global.config_cache.get_value("data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP))
+		Export.directory_path = Global.config_cache.get_value(
+			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
+		)
 
 	# If export already occured - sets gui to show previous settings
 	options_resize.value = Export.resize
@@ -240,16 +248,17 @@ func _on_ExportDialog_about_to_show() -> void:
 	file_file_format.selected = Export.file_format
 	show_tab()
 
-	for child in popups.get_children(): # Set the theme for the popups
+	for child in popups.get_children():  # Set the theme for the popups
 		child.theme = Global.control.theme
 
-	Export.file_exists_alert = tr("File %s already exists. Overwrite?") # Update translation
+	Export.file_exists_alert = tr("File %s already exists. Overwrite?")  # Update translation
 
 	# Set the size of the preview checker
 	var checker = $VBoxContainer/PreviewPanel/TransparentChecker
 	checker.rect_size = checker.get_parent().rect_size
 
-func _on_Tabs_tab_clicked(tab : int) -> void:
+
+func _on_Tabs_tab_clicked(tab: int) -> void:
 	Export.current_tab = tab
 	show_tab()
 
@@ -260,7 +269,7 @@ func _on_Frame_value_changed(value: float) -> void:
 	set_preview()
 
 
-func _on_Orientation_item_selected(id : int) -> void:
+func _on_Orientation_item_selected(id: int) -> void:
 	Export.orientation = id
 	if Export.orientation == Export.Orientation.ROWS:
 		spritesheet_options_lines_count_label.text = "Columns:"
@@ -271,19 +280,19 @@ func _on_Orientation_item_selected(id : int) -> void:
 	set_preview()
 
 
-func _on_LinesCount_value_changed(value : float) -> void:
+func _on_LinesCount_value_changed(value: float) -> void:
 	Export.lines_count = value
 	Export.process_spritesheet()
 	set_preview()
 
 
-func _on_AnimationType_item_selected(id : int) -> void:
+func _on_AnimationType_item_selected(id: int) -> void:
 	Export.animation_type = id
 	set_file_format_selector()
 	set_preview()
 
 
-func _on_Direction_item_selected(id : int) -> void:
+func _on_Direction_item_selected(id: int) -> void:
 	Export.direction = id
 	match id:
 		Export.AnimationDirection.FORWARD:
@@ -295,7 +304,7 @@ func _on_Direction_item_selected(id : int) -> void:
 			pingpong_direction = Export.AnimationDirection.FORWARD
 
 
-func _on_Resize_value_changed(value : float) -> void:
+func _on_Resize_value_changed(value: float) -> void:
 	Export.resize = value
 
 
@@ -308,7 +317,7 @@ func _on_ExportDialog_confirmed() -> void:
 		hide()
 
 
-func _on_ExportDialog_custom_action(action : String) -> void:
+func _on_ExportDialog_custom_action(action: String) -> void:
 	if action == "cancel":
 		hide()
 
@@ -317,23 +326,23 @@ func _on_PathButton_pressed() -> void:
 	path_dialog_popup.popup_centered()
 
 
-func _on_PathLineEdit_text_changed(new_text : String) -> void:
+func _on_PathLineEdit_text_changed(new_text: String) -> void:
 	Global.current_project.directory_path = new_text
 	Export.directory_path = new_text
 
 
-func _on_FileLineEdit_text_changed(new_text : String) -> void:
+func _on_FileLineEdit_text_changed(new_text: String) -> void:
 	Global.current_project.file_name = new_text
 	Export.file_name = new_text
 
 
-func _on_FileDialog_dir_selected(dir : String) -> void:
+func _on_FileDialog_dir_selected(dir: String) -> void:
 	path_line_edit.text = dir
 	Global.current_project.directory_path = dir
 	Export.directory_path = dir
 
 
-func _on_FileFormat_item_selected(id : int) -> void:
+func _on_FileFormat_item_selected(id: int) -> void:
 	Global.current_project.file_format = id
 	Export.file_format = id
 
@@ -345,7 +354,7 @@ func _on_FileExistsAlert_confirmed() -> void:
 	emit_signal("resume_export_function")
 
 
-func _on_FileExistsAlert_custom_action(action : String) -> void:
+func _on_FileExistsAlert_custom_action(action: String) -> void:
 	if action == "cancel":
 		# Cancel export
 		file_exists_alert_popup.dialog_text = Export.file_exists_alert
@@ -355,6 +364,8 @@ func _on_FileExistsAlert_custom_action(action : String) -> void:
 
 
 var pingpong_direction = Export.AnimationDirection.FORWARD
+
+
 func _on_FrameTimer_timeout() -> void:
 	$VBoxContainer/PreviewPanel/PreviewScroll/Previews/PreviewContainer/Preview.texture = animated_preview_frames[animated_preview_current_frame]
 
@@ -364,14 +375,26 @@ func _on_FrameTimer_timeout() -> void:
 				animated_preview_current_frame = 0
 			else:
 				animated_preview_current_frame += 1
-			frame_timer.wait_time = Global.current_project.frames[(animated_preview_current_frame - 1) % (animated_preview_frames.size())].duration * (1 / Global.current_project.fps)
+			frame_timer.wait_time = (
+				Global.current_project.frames[(
+					(animated_preview_current_frame - 1)
+					% (animated_preview_frames.size())
+				)].duration
+				* (1 / Global.current_project.fps)
+			)
 			frame_timer.start()
 		Export.AnimationDirection.BACKWARDS:
 			if animated_preview_current_frame == 0:
 				animated_preview_current_frame = Export.processed_images.size() - 1
 			else:
 				animated_preview_current_frame -= 1
-			frame_timer.wait_time = Global.current_project.frames[(animated_preview_current_frame + 1) % (animated_preview_frames.size())].duration * (1 / Global.current_project.fps)
+			frame_timer.wait_time = (
+				Global.current_project.frames[(
+					(animated_preview_current_frame + 1)
+					% (animated_preview_frames.size())
+				)].duration
+				* (1 / Global.current_project.fps)
+			)
 			frame_timer.start()
 		Export.AnimationDirection.PING_PONG:
 			match pingpong_direction:
@@ -383,7 +406,13 @@ func _on_FrameTimer_timeout() -> void:
 							animated_preview_current_frame = 0
 					else:
 						animated_preview_current_frame += 1
-					frame_timer.wait_time = Global.current_project.frames[(animated_preview_current_frame - 1) % (animated_preview_frames.size())].duration * (1 / Global.current_project.fps)
+					frame_timer.wait_time = (
+						Global.current_project.frames[(
+							(animated_preview_current_frame - 1)
+							% (animated_preview_frames.size())
+						)].duration
+						* (1 / Global.current_project.fps)
+					)
 					frame_timer.start()
 				Export.AnimationDirection.BACKWARDS:
 					if animated_preview_current_frame == 0:
@@ -393,20 +422,25 @@ func _on_FrameTimer_timeout() -> void:
 						pingpong_direction = Export.AnimationDirection.FORWARD
 					else:
 						animated_preview_current_frame -= 1
-					frame_timer.wait_time = Global.current_project.frames[(animated_preview_current_frame + 1) % (animated_preview_frames.size())].duration * (1 / Global.current_project.fps)
+					frame_timer.wait_time = (
+						Global.current_project.frames[(
+							(animated_preview_current_frame + 1)
+							% (animated_preview_frames.size())
+						)].duration
+						* (1 / Global.current_project.fps)
+					)
 					frame_timer.start()
-
 
 
 func _on_ExportDialog_popup_hide() -> void:
 	frame_timer.stop()
 
 
-func _on_MultipleAnimationsDirectories_toggled(button_pressed : bool) -> void:
+func _on_MultipleAnimationsDirectories_toggled(button_pressed: bool) -> void:
 	Export.new_dir_for_each_frame_tag = button_pressed
 
 
-func _on_Frames_item_selected(id : int) -> void:
+func _on_Frames_item_selected(id: int) -> void:
 	Export.frame_current_tag = id
 	Export.process_spritesheet()
 	set_preview()

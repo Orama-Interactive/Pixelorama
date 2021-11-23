@@ -1,6 +1,6 @@
 class_name Guide extends Line2D
 
-enum Types {HORIZONTAL, VERTICAL}
+enum Types { HORIZONTAL, VERTICAL }
 
 var font := preload("res://assets/fonts/Roboto-Regular.tres")
 var has_focus := true
@@ -17,7 +17,7 @@ func _ready() -> void:
 		modulate.a = 0.5
 
 
-func _input(_event : InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if !visible:
 		return
 	var tmp_transform = get_canvas_transform().affine_inverse()
@@ -32,7 +32,12 @@ func _input(_event : InputEvent) -> void:
 	else:
 		point0.x -= width * 3
 		point1.x += width * 3
-	if Global.can_draw and Global.has_focus and point_in_rectangle(mouse_pos, point0, point1) and Input.is_action_just_pressed("left_mouse"):
+	if (
+		Global.can_draw
+		and Global.has_focus
+		and point_in_rectangle(mouse_pos, point0, point1)
+		and Input.is_action_just_pressed("left_mouse")
+	):
 		if !point_in_rectangle(Global.canvas.current_pixel, Vector2.ZERO, project.size):
 			has_focus = true
 			Global.has_focus = false
@@ -67,42 +72,89 @@ func _draw() -> void:
 		var zoom: Vector2 = Global.camera.zoom
 
 		# viewport_poly is an array of the points that make up the corners of the viewport
-		var viewport_poly:= [Vector2.ZERO, Vector2(viewport_size.x, 0), viewport_size, Vector2(0, viewport_size.y)]
+		var viewport_poly := [
+			Vector2.ZERO, Vector2(viewport_size.x, 0), viewport_size, Vector2(0, viewport_size.y)
+		]
 		# Adjusting viewport_poly to take into account the camera offset, zoom, and rotation
 		for p in range(viewport_poly.size()):
-			viewport_poly[p] = viewport_poly[p].rotated(Global.camera.rotation) * zoom + Vector2(Global.camera.offset.x - (viewport_size.rotated(Global.camera.rotation).x / 2) * zoom.x, Global.camera.offset.y - (viewport_size.rotated(Global.camera.rotation).y / 2) * zoom.y)
+			viewport_poly[p] = (
+				viewport_poly[p].rotated(Global.camera.rotation) * zoom
+				+ Vector2(
+					(
+						Global.camera.offset.x
+						- (viewport_size.rotated(Global.camera.rotation).x / 2) * zoom.x
+					),
+					(
+						Global.camera.offset.y
+						- (viewport_size.rotated(Global.camera.rotation).y / 2) * zoom.y
+					)
+				)
+			)
 
-		var string := "%spx" % str(stepify(mouse_pos.y if type == Types.HORIZONTAL else mouse_pos.x, 0.5))
+		var string := (
+			"%spx"
+			% str(stepify(mouse_pos.y if type == Types.HORIZONTAL else mouse_pos.x, 0.5))
+		)
 		var color: Color = Global.control.theme.get_color("font_color", "Label")
 		# X and Y offsets for nicer looking spacing
 		var x_offset := 5
-		var y_offset := -7 # Only used where the string is above the guide
+		var y_offset := -7  # Only used where the string is above the guide
 
 		# Draw the string where the guide intersects with the viewport poly
 		# Priority is top edge, then left, then right
-		var intersection = Geometry.segment_intersects_segment_2d(points[0], points[1], viewport_poly[0], viewport_poly[1])
+		var intersection = Geometry.segment_intersects_segment_2d(
+			points[0], points[1], viewport_poly[0], viewport_poly[1]
+		)
 		if intersection:
 			draw_set_transform(intersection, Global.camera.rotation, zoom * 2)
-			if intersection.distance_squared_to(viewport_poly[0]) < intersection.distance_squared_to(viewport_poly[1]):
+			if (
+				intersection.distance_squared_to(viewport_poly[0])
+				< intersection.distance_squared_to(viewport_poly[1])
+			):
 				draw_string(font, Vector2(x_offset, font.get_height()), string, color)
 			else:
-				draw_string(font, Vector2(-font.get_string_size(string).x - x_offset, font.get_height()), string, color)
+				draw_string(
+					font,
+					Vector2(-font.get_string_size(string).x - x_offset, font.get_height()),
+					string,
+					color
+				)
 			return
-		intersection = Geometry.segment_intersects_segment_2d(points[0], points[1], viewport_poly[3], viewport_poly[0])
+		intersection = Geometry.segment_intersects_segment_2d(
+			points[0], points[1], viewport_poly[3], viewport_poly[0]
+		)
 		if intersection:
 			draw_set_transform(intersection, Global.camera.rotation, zoom * 2)
-			if intersection.distance_squared_to(viewport_poly[3]) < intersection.distance_squared_to(viewport_poly[0]):
+			if (
+				intersection.distance_squared_to(viewport_poly[3])
+				< intersection.distance_squared_to(viewport_poly[0])
+			):
 				draw_string(font, Vector2(x_offset, y_offset), string, color)
 			else:
 				draw_string(font, Vector2(x_offset, font.get_height()), string, color)
 			return
-		intersection = Geometry.segment_intersects_segment_2d(points[0], points[1], viewport_poly[1], viewport_poly[2])
+		intersection = Geometry.segment_intersects_segment_2d(
+			points[0], points[1], viewport_poly[1], viewport_poly[2]
+		)
 		if intersection:
 			draw_set_transform(intersection, Global.camera.rotation, zoom * 2)
-			if intersection.distance_squared_to(viewport_poly[1]) < intersection.distance_squared_to(viewport_poly[2]):
-				draw_string(font, Vector2(-font.get_string_size(string).x - x_offset, font.get_height()), string, color)
+			if (
+				intersection.distance_squared_to(viewport_poly[1])
+				< intersection.distance_squared_to(viewport_poly[2])
+			):
+				draw_string(
+					font,
+					Vector2(-font.get_string_size(string).x - x_offset, font.get_height()),
+					string,
+					color
+				)
 			else:
-				draw_string(font, Vector2(-font.get_string_size(string).x - x_offset, y_offset), string, color)
+				draw_string(
+					font,
+					Vector2(-font.get_string_size(string).x - x_offset, y_offset),
+					string,
+					color
+				)
 			return
 
 		# If there's no intersection with a viewport edge, show string in top left corner
@@ -117,5 +169,5 @@ func outside_canvas() -> bool:
 		return points[0].x < 0 || points[0].x > project.size.x
 
 
-func point_in_rectangle(p : Vector2, coord1 : Vector2, coord2 : Vector2) -> bool:
+func point_in_rectangle(p: Vector2, coord1: Vector2, coord2: Vector2) -> bool:
 	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y

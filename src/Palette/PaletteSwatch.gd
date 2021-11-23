@@ -35,7 +35,12 @@ func _draw() -> void:
 		# Display inner border highlight
 		var margin := SWATCH_SIZE / 4
 		draw_rect(Rect2(margin, SWATCH_SIZE - margin * 2), Color.black, false, 1)
-		draw_rect(Rect2(margin - Vector2.ONE, SWATCH_SIZE - margin * 2 + Vector2(2, 2)), Color.white, false, 1)
+		draw_rect(
+			Rect2(margin - Vector2.ONE, SWATCH_SIZE - margin * 2 + Vector2(2, 2)),
+			Color.white,
+			false,
+			1
+		)
 
 
 # Enables drawing of highlights which indicate selected swatches

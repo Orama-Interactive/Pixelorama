@@ -2,7 +2,13 @@ class_name ShaderImageEffect extends Reference
 # Helper class to generate image effects using shaders
 signal done
 
-func generate_image(_img : Image,_shaderpath: String, _params : Dictionary , size : Vector2 = Global.current_project.size):
+
+func generate_image(
+	_img: Image,
+	_shaderpath: String,
+	_params: Dictionary,
+	size: Vector2 = Global.current_project.size
+):
 	var shader = load(_shaderpath)
 	_img.unlock()
 	var viewport_texture := Image.new()

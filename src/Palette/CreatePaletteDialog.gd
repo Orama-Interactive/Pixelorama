@@ -18,6 +18,7 @@ onready var colors_settings := $VBoxContainer/ColorsSettings
 onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
 onready var enter_name_warning := $VBoxContainer/EnterNameWarning
 
+
 # Opens dialog
 func open(opened_current_palette: Palette) -> void:
 	# Only to fill dialog when preset is FromCurrentPalette
@@ -69,7 +70,16 @@ func _on_CreatePaletteDialog_popup_hide() -> void:
 
 
 func _on_CreatePaletteDialog_confirmed() -> void:
-	emit_signal("saved", preset_input.selected, name_input.text, comment_input.text, width_input.value, height_input.value, alpha_colors_input.pressed, get_colors_from_input.selected)
+	emit_signal(
+		"saved",
+		preset_input.selected,
+		name_input.text,
+		comment_input.text,
+		width_input.value,
+		height_input.value,
+		alpha_colors_input.pressed,
+		get_colors_from_input.selected
+	)
 
 
 func _on_Preset_item_selected(index: int) -> void:

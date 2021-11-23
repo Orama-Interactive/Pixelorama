@@ -48,12 +48,15 @@ func _get_shape_points(size: Vector2) -> PoolVector2Array:
 
 	# Adapted scanline algorithm to fill between 2 ellipses, to create a thicker ellipse
 	var res_array := []
-	var border_ellipses :=  _get_ellipse_points(Vector2.ZERO, new_size) + _get_ellipse_points(size_offset, inner_ellipse_size) # Outer and inner ellipses
+	var border_ellipses := (
+		_get_ellipse_points(Vector2.ZERO, new_size)
+		+ _get_ellipse_points(size_offset, inner_ellipse_size)
+	)  # Outer and inner ellipses
 	var bitmap := _fill_bitmap_with_points(border_ellipses, new_size)
-	var smallest_side := min (new_size.x, new_size.y)
-	var largest_side := max (new_size.x, new_size.y)
-	var scan_dir := Vector2(0, 1) if smallest_side == new_size.x else Vector2(1,0)
-	var iscan_dir := Vector2(1, 0) if smallest_side == new_size.x else Vector2(0,1)
+	var smallest_side := min(new_size.x, new_size.y)
+	var largest_side := max(new_size.x, new_size.y)
+	var scan_dir := Vector2(0, 1) if smallest_side == new_size.x else Vector2(1, 0)
+	var iscan_dir := Vector2(1, 0) if smallest_side == new_size.x else Vector2(0, 1)
 	var ie_relevant_offset_side = size_offset.x if smallest_side == new_size.x else size_offset.y
 	var h_ls_c := ceil(largest_side / 2)
 
@@ -74,7 +77,7 @@ func _get_shape_points(size: Vector2) -> PoolVector2Array:
 		else:
 			# Find outer ellipse
 			var l_o := 0
-			for l in range (h_ls_c):
+			for l in range(h_ls_c):
 				var pos := scan_dir * l + iscan_dir * s
 				if bitmap.get_bit(pos):
 					l_o = l
@@ -100,7 +103,7 @@ func _get_shape_points(size: Vector2) -> PoolVector2Array:
 
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
-func _get_ellipse_points (pos: Vector2, size: Vector2) -> Array:
+func _get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
 	var array := []
 	var x0 := int(pos.x)
 	var x1 := pos.x + int(size.x - 1)
@@ -109,9 +112,9 @@ func _get_ellipse_points (pos: Vector2, size: Vector2) -> Array:
 	var a := int(abs(x1 - x0))
 	var b := int(abs(y1 - x0))
 	var b1 := b & 1
-	var dx := 4*(1-a)*b*b
-	var dy := 4*(b1+1)*a*a
-	var err := dx+dy+b1*a*a
+	var dx := 4 * (1 - a) * b * b
+	var dy := 4 * (b1 + 1) * a * a
+	var err := dx + dy + b1 * a * a
 	var e2 := 0
 
 	if x0 > x1:
@@ -122,10 +125,10 @@ func _get_ellipse_points (pos: Vector2, size: Vector2) -> Array:
 		y0 = y1
 
 # warning-ignore:integer_division
-	y0 += (b+1) / 2
-	y1 = y0-b1
-	a *= 8*a
-	b1 = 8*b*b
+	y0 += (b + 1) / 2
+	y1 = y0 - b1
+	a *= 8 * a
+	b1 = 8 * b * b
 
 	while x0 <= x1:
 		var v1 := Vector2(x1, y0)
@@ -137,7 +140,7 @@ func _get_ellipse_points (pos: Vector2, size: Vector2) -> Array:
 		array.append(v3)
 		array.append(v4)
 
-		e2 = 2*err;
+		e2 = 2 * err
 
 		if e2 <= dy:
 			y0 += 1
@@ -145,23 +148,23 @@ func _get_ellipse_points (pos: Vector2, size: Vector2) -> Array:
 			dy += a
 			err += dy
 
-		if e2 >= dx || 2*err > dy:
-			x0+=1
-			x1-=1
+		if e2 >= dx || 2 * err > dy:
+			x0 += 1
+			x1 -= 1
 			dx += b1
 			err += dx
 
-	while y0-y1 < b:
-		var v1 := Vector2(x0-1, y0)
-		var v2 := Vector2(x1+1, y0)
-		var v3 := Vector2(x0-1, y1)
-		var v4 := Vector2(x1+1, y1)
+	while y0 - y1 < b:
+		var v1 := Vector2(x0 - 1, y0)
+		var v2 := Vector2(x1 + 1, y0)
+		var v3 := Vector2(x0 - 1, y1)
+		var v4 := Vector2(x1 + 1, y1)
 		array.append(v1)
 		array.append(v2)
 		array.append(v3)
 		array.append(v4)
-		y0+=1
-		y1-=1
+		y0 += 1
+		y1 -= 1
 
 	return array
 

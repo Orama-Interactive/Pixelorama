@@ -4,13 +4,12 @@ class_name Drawer
 class ColorOp:
 	var strength := 1.0
 
-
 	func process(src: Color, _dst: Color) -> Color:
 		return src
 
 
 class SimpleDrawer:
-	func set_pixel(image: Image, position: Vector2, color: Color, op : ColorOp) -> void:
+	func set_pixel(image: Image, position: Vector2, color: Color, op: ColorOp) -> void:
 		var color_old := image.get_pixelv(position)
 		var color_new := op.process(color, color_old)
 		if not color_new.is_equal_approx(color_old):
@@ -22,12 +21,10 @@ class PixelPerfectDrawer:
 	const corners = [Vector2(1, 1), Vector2(-1, -1), Vector2(-1, 1), Vector2(1, -1)]
 	var last_pixels = [null, null]
 
-
 	func reset() -> void:
 		last_pixels = [null, null]
 
-
-	func set_pixel(image: Image, position: Vector2, color: Color, op : ColorOp) -> void:
+	func set_pixel(image: Image, position: Vector2, color: Color, op: ColorOp) -> void:
 		var color_old = image.get_pixelv(position)
 		last_pixels.push_back([position, color_old])
 		image.set_pixelv(position, op.process(color, color_old))
@@ -49,7 +46,12 @@ var vertical_mirror := false
 var color_op := ColorOp.new()
 
 var simple_drawer := SimpleDrawer.new()
-var pixel_perfect_drawers = [PixelPerfectDrawer.new(), PixelPerfectDrawer.new(), PixelPerfectDrawer.new(), PixelPerfectDrawer.new()]
+var pixel_perfect_drawers = [
+	PixelPerfectDrawer.new(),
+	PixelPerfectDrawer.new(),
+	PixelPerfectDrawer.new(),
+	PixelPerfectDrawer.new()
+]
 var drawers = [simple_drawer, simple_drawer, simple_drawer, simple_drawer]
 
 
@@ -67,7 +69,7 @@ func set_pixel_perfect(value: bool) -> void:
 
 
 func set_pixel(image: Image, position: Vector2, color: Color, ignore_mirroring := false) -> void:
-	var project : Project = Global.current_project
+	var project: Project = Global.current_project
 	drawers[0].set_pixel(image, position, color, color_op)
 	if ignore_mirroring:
 		return

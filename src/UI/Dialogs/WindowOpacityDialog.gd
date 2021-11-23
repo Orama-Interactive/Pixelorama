@@ -1,9 +1,8 @@
 extends AcceptDialog
 
-
-onready var hslider : HSlider = $HBoxContainer2/HSlider
-onready var spinbox : SpinBox = $HBoxContainer2/SpinBox
-onready var alternate_transparent_background : ColorRect = Global.control.alternate_transparent_background
+onready var hslider: HSlider = $HBoxContainer2/HSlider
+onready var spinbox: SpinBox = $HBoxContainer2/SpinBox
+onready var alternate_transparent_background: ColorRect = Global.control.alternate_transparent_background
 
 
 func _on_WindowOpacityDialog_about_to_show() -> void:

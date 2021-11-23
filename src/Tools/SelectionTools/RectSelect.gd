@@ -1,14 +1,13 @@
 extends SelectionTool
 
-
 var _rect := Rect2(0, 0, 0, 0)
 
-var _square := false # Mouse Click + Shift
-var _expand_from_center := false # Mouse Click + Ctrl
-var _displace_origin = false # Mouse Click + Alt
+var _square := false  # Mouse Click + Shift
+var _expand_from_center := false  # Mouse Click + Ctrl
+var _displace_origin = false  # Mouse Click + Alt
 
 
-func _input(event : InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	._input(event)
 	if !_move and !_rect.has_no_area():
 		if event.is_action_pressed("shift"):
@@ -25,7 +24,7 @@ func _input(event : InputEvent) -> void:
 			_displace_origin = false
 
 
-func draw_move(position : Vector2) -> void:
+func draw_move(position: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
 	.draw_move(position)
@@ -37,7 +36,7 @@ func draw_move(position : Vector2) -> void:
 		_offset = position
 
 
-func draw_end(position : Vector2) -> void:
+func draw_end(position: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
 	.draw_end(position)
@@ -49,7 +48,7 @@ func draw_end(position : Vector2) -> void:
 
 func draw_preview() -> void:
 	if !_move:
-		var canvas : Node2D = Global.canvas.previews
+		var canvas: Node2D = Global.canvas.previews
 		var _position := canvas.position
 		var _scale := canvas.scale
 		if Global.mirror_view:
@@ -61,17 +60,29 @@ func draw_preview() -> void:
 		# Handle mirroring
 		if tool_slot.horizontal_mirror:
 			var mirror_x_rect := _rect
-			mirror_x_rect.position.x = Global.current_project.x_symmetry_point - _rect.position.x + 1
+			mirror_x_rect.position.x = (
+				Global.current_project.x_symmetry_point
+				- _rect.position.x
+				+ 1
+			)
 			mirror_x_rect.end.x = Global.current_project.x_symmetry_point - _rect.end.x + 1
 			canvas.draw_rect(mirror_x_rect, Color.black, false)
 			if tool_slot.vertical_mirror:
 				var mirror_xy_rect := mirror_x_rect
-				mirror_xy_rect.position.y = Global.current_project.y_symmetry_point - _rect.position.y + 1
+				mirror_xy_rect.position.y = (
+					Global.current_project.y_symmetry_point
+					- _rect.position.y
+					+ 1
+				)
 				mirror_xy_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 				canvas.draw_rect(mirror_xy_rect, Color.black, false)
 		if tool_slot.vertical_mirror:
 			var mirror_y_rect := _rect
-			mirror_y_rect.position.y = Global.current_project.y_symmetry_point - _rect.position.y + 1
+			mirror_y_rect.position.y = (
+				Global.current_project.y_symmetry_point
+				- _rect.position.y
+				+ 1
+			)
 			mirror_y_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 			canvas.draw_rect(mirror_y_rect, Color.black, false)
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
@@ -93,17 +104,29 @@ func apply_selection(_position) -> void:
 		# Handle mirroring
 		if tool_slot.horizontal_mirror:
 			var mirror_x_rect := _rect
-			mirror_x_rect.position.x = Global.current_project.x_symmetry_point - _rect.position.x + 1
+			mirror_x_rect.position.x = (
+				Global.current_project.x_symmetry_point
+				- _rect.position.x
+				+ 1
+			)
 			mirror_x_rect.end.x = Global.current_project.x_symmetry_point - _rect.end.x + 1
 			Global.canvas.selection.select_rect(mirror_x_rect.abs(), operation)
 			if tool_slot.vertical_mirror:
 				var mirror_xy_rect := mirror_x_rect
-				mirror_xy_rect.position.y = Global.current_project.y_symmetry_point - _rect.position.y + 1
+				mirror_xy_rect.position.y = (
+					Global.current_project.y_symmetry_point
+					- _rect.position.y
+					+ 1
+				)
 				mirror_xy_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 				Global.canvas.selection.select_rect(mirror_xy_rect.abs(), operation)
 		if tool_slot.vertical_mirror:
 			var mirror_y_rect := _rect
-			mirror_y_rect.position.y = Global.current_project.y_symmetry_point - _rect.position.y + 1
+			mirror_y_rect.position.y = (
+				Global.current_project.y_symmetry_point
+				- _rect.position.y
+				+ 1
+			)
 			mirror_y_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 			Global.canvas.selection.select_rect(mirror_y_rect.abs(), operation)
 

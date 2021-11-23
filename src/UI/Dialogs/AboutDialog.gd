@@ -1,8 +1,7 @@
 extends WindowDialog
 
-
 const LICENSES := [
-"""MIT License
+	"""MIT License
 
 Copyright (c) 2019-present Orama Interactive and contributors
 
@@ -12,8 +11,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """,
-
-"""This software uses Godot Engine, available under the following license:
+	"""This software uses Godot Engine, available under the following license:
 
 Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur.
 Copyright (c) 2014-2021 Godot Engine contributors.
@@ -24,10 +22,8 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """,
-
-"Portions of this software are copyright © 2021 The FreeType Project (www.freetype.org). All rights reserved.",
-
-"""MIT License
+	"Portions of this software are copyright © 2021 The FreeType Project (www.freetype.org). All rights reserved.",
+	"""MIT License
 
 Copyright (c) 2020 Igor Santarek
 
@@ -40,22 +36,22 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ]
 
 onready var credits = $AboutUI/Credits
-onready var groups : Tree = $AboutUI/Credits/Groups
+onready var groups: Tree = $AboutUI/Credits/Groups
 onready var developer_container = $AboutUI/Credits/Developers
 onready var contributors_container = $AboutUI/Credits/Contributors
 onready var donors_container = $AboutUI/Credits/Donors
 onready var translators_container = $AboutUI/Credits/Translators
 onready var licenses_container = $AboutUI/Credits/Licenses
 
-onready var developers : Tree = $AboutUI/Credits/Developers/DeveloperTree
-onready var contributors : Tree = $AboutUI/Credits/Contributors/ContributorTree
-onready var donors : Tree = $AboutUI/Credits/Donors/DonorTree
-onready var translators : Tree = $AboutUI/Credits/Translators/TranslatorTree
+onready var developers: Tree = $AboutUI/Credits/Developers/DeveloperTree
+onready var contributors: Tree = $AboutUI/Credits/Contributors/ContributorTree
+onready var donors: Tree = $AboutUI/Credits/Donors/DonorTree
+onready var translators: Tree = $AboutUI/Credits/Translators/TranslatorTree
 
-onready var license_text : TextEdit = $AboutUI/Credits/Licenses/LicenseText
+onready var license_text: TextEdit = $AboutUI/Credits/Licenses/LicenseText
 
-onready var slogan_label : Label = $AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/PixeloramaSlogan
-onready var copyright_label : Label = $AboutUI/Copyright
+onready var slogan_label: Label = $AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/PixeloramaSlogan
+onready var copyright_label: Label = $AboutUI/Copyright
 
 onready var latin_font_italic = preload("res://assets/fonts/Roboto-Italic.tres")
 onready var cjk_font = preload("res://assets/fonts/CJK/DroidSansFallback-Regular.tres")
@@ -88,17 +84,17 @@ func _on_AboutDialog_about_to_show() -> void:
 	var translators_button := groups.create_item(groups_root)
 	var licenses_button := groups.create_item(groups_root)
 
-	developers_button.set_text(0,  "  " + tr("Developers"))
+	developers_button.set_text(0, "  " + tr("Developers"))
 	# We use metadata to avoid being affected by translations
 	developers_button.set_metadata(0, "Developers")
 	developers_button.select(0)
-	contributors_button.set_text(0,  "  " + tr("Contributors"))
+	contributors_button.set_text(0, "  " + tr("Contributors"))
 	contributors_button.set_metadata(0, "Contributors")
-	donors_button.set_text(0,  "  " + tr("Donors"))
+	donors_button.set_text(0, "  " + tr("Donors"))
 	donors_button.set_metadata(0, "Donors")
-	translators_button.set_text(0,  "  " + tr("Translators"))
+	translators_button.set_text(0, "  " + tr("Translators"))
 	translators_button.set_metadata(0, "Translators")
-	licenses_button.set_text(0,  "  " + tr("Licenses"))
+	licenses_button.set_text(0, "  " + tr("Licenses"))
 	licenses_button.set_metadata(0, "Licenses")
 
 	create_developers()
@@ -116,7 +112,7 @@ func _on_Groups_item_selected() -> void:
 		if child != groups:
 			child.visible = false
 
-	var selected : String = groups.get_selected().get_metadata(0)
+	var selected: String = groups.get_selected().get_metadata(0)
 	if "Developers" in selected:
 		developer_container.visible = true
 	elif "Contributors" in selected:
@@ -141,13 +137,15 @@ func _on_Donate_pressed() -> void:
 	OS.shell_open("https://www.patreon.com/OramaInteractive")
 
 
-func _on_LicenseButton_pressed(index : int) -> void:
+func _on_LicenseButton_pressed(index: int) -> void:
 	license_text.text = LICENSES[index]
 
 
 func create_developers() -> void:
 	var dev_root := developers.create_item()
-	developers.create_item(dev_root).set_text(0, "  Manolis Papadeas (Overloaded) - " + tr("Lead Programmer"))
+	developers.create_item(dev_root).set_text(
+		0, "  Manolis Papadeas (Overloaded) - " + tr("Lead Programmer")
+	)
 	developers.create_item(dev_root).set_text(0, "  John Nikitakis (Erevos) - " + tr("UI Designer"))
 
 
@@ -208,61 +206,135 @@ func create_contributors() -> void:
 
 func create_translators() -> void:
 	var translators_root := translators.create_item()
-	translators.create_item(translators_root).set_text(0, "  Manolis Papadeas (Overloaded) - " + tr("Greek"))
-	translators.create_item(translators_root).set_text(0, "  Xenofon Konitsas (huskee) - " + tr("Greek"))
-	translators.create_item(translators_root).set_text(0, "  Lena Louloudaki (Soliscital) - " + tr("Greek"))
-	translators.create_item(translators_root).set_text(0, "  Hugo Locurcio (Calinou) - " + tr("French"))
+	translators.create_item(translators_root).set_text(
+		0, "  Manolis Papadeas (Overloaded) - " + tr("Greek")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Xenofon Konitsas (huskee) - " + tr("Greek")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Lena Louloudaki (Soliscital) - " + tr("Greek")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Hugo Locurcio (Calinou) - " + tr("French")
+	)
 	translators.create_item(translators_root).set_text(0, "  blackjoker77777 - " + tr("French"))
 	translators.create_item(translators_root).set_text(0, "  Yoshiip (myoshipro) - " + tr("French"))
 	translators.create_item(translators_root).set_text(0, "  Iorvethe - " + tr("French"))
-	translators.create_item(translators_root).set_text(0, "  Paul Coral (lepaincestbon) - " + tr("French"))
+	translators.create_item(translators_root).set_text(
+		0, "  Paul Coral (lepaincestbon) - " + tr("French")
+	)
 	translators.create_item(translators_root).set_text(0, "  RED (REDOOO) - " + tr("French"))
-	translators.create_item(translators_root).set_text(0, "  Aidan Olsen (PossiblyAShrub) - " + tr("French"))
-	translators.create_item(translators_root).set_text(0, "  Jean-Loup Macarit (leyk973) - " + tr("French"))
-	translators.create_item(translators_root).set_text(0, "  Lulullia (lulullia902) - " + tr("French"))
+	translators.create_item(translators_root).set_text(
+		0, "  Aidan Olsen (PossiblyAShrub) - " + tr("French")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Jean-Loup Macarit (leyk973) - " + tr("French")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Lulullia (lulullia902) - " + tr("French")
+	)
 	translators.create_item(translators_root).set_text(0, "  Nicolas.C (nico57c) - " + tr("French"))
 	translators.create_item(translators_root).set_text(0, "  Schweini07 - " + tr("German"))
-	translators.create_item(translators_root).set_text(0, "  Martin Zabinski (Martin1991zab) - " + tr("German"))
-	translators.create_item(translators_root).set_text(0, "  Dawid Niedźwiedzki (tiritto) - " + tr("Polish"))
-	translators.create_item(translators_root).set_text(0, "  Serhiy Dmytryshyn (dies) - " + tr("Polish"))
-	translators.create_item(translators_root).set_text(0, "  Igor Santarek (jegor377) - " + tr("Polish"))
+	translators.create_item(translators_root).set_text(
+		0, "  Martin Zabinski (Martin1991zab) - " + tr("German")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Dawid Niedźwiedzki (tiritto) - " + tr("Polish")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Serhiy Dmytryshyn (dies) - " + tr("Polish")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Igor Santarek (jegor377) - " + tr("Polish")
+	)
 	translators.create_item(translators_root).set_text(0, "  RainbowP - " + tr("Polish"))
-	translators.create_item(translators_root).set_text(0, "  Michael Alexsander (YeldhamDev) - " + tr("Brazilian Portuguese"))
-	translators.create_item(translators_root).set_text(0, "  Cedulio Cezar (ceduliocezar) - " + tr("Brazilian Portuguese"))
-	translators.create_item(translators_root).set_text(0, "  Alexandre Oliveira (rockytvbr) - " + tr("Brazilian Portuguese"))
-	translators.create_item(translators_root).set_text(0, "  IagoAndrade - " + tr("Brazilian Portuguese"))
-	translators.create_item(translators_root).set_text(0, "  chacal_exodius - " + tr("Brazilian Portuguese"))
-	translators.create_item(translators_root).set_text(0, "  Lucas Santiago (lu.santi.oli) - " + tr("Brazilian Portuguese"))
-	translators.create_item(translators_root).set_text(0, "  TheNoobPro44 - " + tr("Brazilian Portuguese"))
-	translators.create_item(translators_root).set_text(0, "  DippoZz - " + tr("Brazilian Portuguese"))
+	translators.create_item(translators_root).set_text(
+		0, "  Michael Alexsander (YeldhamDev) - " + tr("Brazilian Portuguese")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Cedulio Cezar (ceduliocezar) - " + tr("Brazilian Portuguese")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Alexandre Oliveira (rockytvbr) - " + tr("Brazilian Portuguese")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  IagoAndrade - " + tr("Brazilian Portuguese")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  chacal_exodius - " + tr("Brazilian Portuguese")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Lucas Santiago (lu.santi.oli) - " + tr("Brazilian Portuguese")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  TheNoobPro44 - " + tr("Brazilian Portuguese")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  DippoZz - " + tr("Brazilian Portuguese")
+	)
 	translators.create_item(translators_root).set_text(0, "  Andreev Andrei - " + tr("Russian"))
 	translators.create_item(translators_root).set_text(0, "  ax trifonov (ax34) - " + tr("Russian"))
-	translators.create_item(translators_root).set_text(0, "  Artem (blinovartem) - " + tr("Russian"))
-	translators.create_item(translators_root).set_text(0, "  stomleny_cmok - " + tr("Russian") + " " + tr("and") + " " + tr("Ukrainian"))
-	translators.create_item(translators_root).set_text(0, "  Bohdan Matviiv (BodaMat) - " + tr("Ukrainian"))
-	translators.create_item(translators_root).set_text(0, "  JunYouIntrovert - " + tr("Chinese Traditional"))
-	translators.create_item(translators_root).set_text(0, "  Kinwailo - " + tr("Chinese Traditional"))
-	translators.create_item(translators_root).set_text(0, "  Chenxu Wang - " + tr("Chinese Simplified"))
-	translators.create_item(translators_root).set_text(0, "  Catherine Yang (qzcyyw13) - " + tr("Chinese Simplified"))
-	translators.create_item(translators_root).set_text(0, "  Marco Galli (Gaarco) - " + tr("Italian"))
+	translators.create_item(translators_root).set_text(
+		0, "  Artem (blinovartem) - " + tr("Russian")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  stomleny_cmok - " + tr("Russian") + " " + tr("and") + " " + tr("Ukrainian")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Bohdan Matviiv (BodaMat) - " + tr("Ukrainian")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  JunYouIntrovert - " + tr("Chinese Traditional")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Kinwailo - " + tr("Chinese Traditional")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Chenxu Wang - " + tr("Chinese Simplified")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Catherine Yang (qzcyyw13) - " + tr("Chinese Simplified")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Marco Galli (Gaarco) - " + tr("Italian")
+	)
 	translators.create_item(translators_root).set_text(0, "  StarFang208 - " + tr("Italian"))
-	translators.create_item(translators_root).set_text(0, "  Azagaya VJ (azagaya.games) - " + tr("Spanish"))
-	translators.create_item(translators_root).set_text(0, "  Lilly And (KatieAnd) - " + tr("Spanish"))
+	translators.create_item(translators_root).set_text(
+		0, "  Azagaya VJ (azagaya.games) - " + tr("Spanish")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Lilly And (KatieAnd) - " + tr("Spanish")
+	)
 	translators.create_item(translators_root).set_text(0, "  UncleFangs - " + tr("Spanish"))
-	translators.create_item(translators_root).set_text(0, "  Jaime Arancibia Soto - " + tr("Spanish") + " " + tr("and") + " " + tr("Catalan"))
+	translators.create_item(translators_root).set_text(
+		0, "  Jaime Arancibia Soto - " + tr("Spanish") + " " + tr("and") + " " + tr("Catalan")
+	)
 	translators.create_item(translators_root).set_text(0, "  foralistico - " + tr("Spanish"))
-	translators.create_item(translators_root).set_text(0, "  Jose Callejas (satorikeiko) - " + tr("Spanish"))
-	translators.create_item(translators_root).set_text(0, "  Agnis Aldiņš (NeZvers) - " + tr("Latvian"))
-	translators.create_item(translators_root).set_text(0, "  Edgars Korns (Eddy11) - " + tr("Latvian"))
+	translators.create_item(translators_root).set_text(
+		0, "  Jose Callejas (satorikeiko) - " + tr("Spanish")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Agnis Aldiņš (NeZvers) - " + tr("Latvian")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Edgars Korns (Eddy11) - " + tr("Latvian")
+	)
 	translators.create_item(translators_root).set_text(0, "  Teashrock - " + tr("Esperanto"))
 	translators.create_item(translators_root).set_text(0, "  Blend_Smile - " + tr("Indonesian"))
-	translators.create_item(translators_root).set_text(0, "  Martin Novák (novhack) - " + tr("Czech"))
+	translators.create_item(translators_root).set_text(
+		0, "  Martin Novák (novhack) - " + tr("Czech")
+	)
 	translators.create_item(translators_root).set_text(0, "  Lullius - " + tr("Norwegian Bokmål"))
 	translators.create_item(translators_root).set_text(0, "  Aninuscsalas - " + tr("Hungarian"))
 	translators.create_item(translators_root).set_text(0, "  jaehyeon1090 - " + tr("Korean"))
 	translators.create_item(translators_root).set_text(0, "  sfun_G - " + tr("Korean"))
-	translators.create_item(translators_root).set_text(0, "  KripC2160 - " + tr("Korean") + " " + tr("and") + " " + tr("Japanese"))
-	translators.create_item(translators_root).set_text(0, "  daisuke osada (barlog) - " + tr("Japanese"))
+	translators.create_item(translators_root).set_text(
+		0, "  KripC2160 - " + tr("Korean") + " " + tr("and") + " " + tr("Japanese")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  daisuke osada (barlog) - " + tr("Japanese")
+	)
 	translators.create_item(translators_root).set_text(0, "  Motomo.exe - " + tr("Japanese"))
 	translators.create_item(translators_root).set_text(0, "  hebekeg - " + tr("Japanese"))
 	translators.create_item(translators_root).set_text(0, "  Sorenwds - " + tr("Japanese"))
@@ -271,5 +343,7 @@ func create_translators() -> void:
 	translators.create_item(translators_root).set_text(0, "  kmsecer - " + tr("Turkish"))
 	translators.create_item(translators_root).set_text(0, "  Rıdvan SAYLAR - " + tr("Turkish"))
 	translators.create_item(translators_root).set_text(0, "  latbat58 - " + tr("Turkish"))
-	translators.create_item(translators_root).set_text(0, "  M Buhari Horoz (Sorian01) - " + tr("Turkish"))
+	translators.create_item(translators_root).set_text(
+		0, "  M Buhari Horoz (Sorian01) - " + tr("Turkish")
+	)
 	translators.create_item(translators_root).set_text(0, "  br.bahrampour - " + tr("Turkish"))

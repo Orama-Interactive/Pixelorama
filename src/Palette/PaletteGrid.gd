@@ -10,7 +10,7 @@ const PaletteSwatchScene := preload("res://src/Palette/PaletteSwatch.tscn")
 # Must be integer values
 const MAX_GRID_SIZE = Vector2(8, 8)
 
-var swatches := [] # PaletteSwatch
+var swatches := []  # PaletteSwatch
 
 var displayed_palette = null
 var grid_window_origin := Vector2.ZERO
@@ -54,10 +54,16 @@ func display_palette(palette: Palette) -> void:
 		init_swatches()
 
 	if palette.width < MAX_GRID_SIZE.x or palette.height < MAX_GRID_SIZE.y:
-		grid_size = Vector2(min(palette.width, MAX_GRID_SIZE.x), min(palette.height, MAX_GRID_SIZE.y))
+		grid_size = Vector2(
+			min(palette.width, MAX_GRID_SIZE.x), min(palette.height, MAX_GRID_SIZE.y)
+		)
 		clear_swatches()
 		init_swatches()
-	elif palette.width >= MAX_GRID_SIZE.x and palette.height >= MAX_GRID_SIZE.y and grid_size != MAX_GRID_SIZE:
+	elif (
+		palette.width >= MAX_GRID_SIZE.x
+		and palette.height >= MAX_GRID_SIZE.y
+		and grid_size != MAX_GRID_SIZE
+	):
 		grid_size = MAX_GRID_SIZE
 		clear_swatches()
 		init_swatches()
@@ -147,7 +153,10 @@ func _on_PaletteSwatch_dropped(source_index: int, target_index: int) -> void:
 
 # Grid index adds grid window origin
 func convert_grid_index_to_palette_index(index: int) -> int:
-	return int(index / grid_size.x + grid_window_origin.y) * displayed_palette.width + (index % int(grid_size.x) + grid_window_origin.x)
+	return (
+		int(index / grid_size.x + grid_window_origin.y) * displayed_palette.width
+		+ (index % int(grid_size.x) + grid_window_origin.x)
+	)
 
 
 func convert_palette_index_to_grid_index(palette_index: int) -> int:

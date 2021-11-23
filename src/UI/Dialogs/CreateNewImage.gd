@@ -2,11 +2,10 @@ extends ConfirmationDialog
 
 
 class Template:
-	var resolution : Vector2
-	var name : String
+	var resolution: Vector2
+	var name: String
 
-
-	func _init(_resolution : Vector2, _name := "") -> void:
+	func _init(_resolution: Vector2, _name := "") -> void:
 		resolution = _resolution
 		name = _name
 
@@ -18,7 +17,6 @@ var templates := [
 	Template.new(Vector2(32, 32)),
 	Template.new(Vector2(64, 64)),
 	Template.new(Vector2(128, 128)),
-
 	# Nintendo
 	Template.new(Vector2(160, 144), "GB"),
 	Template.new(Vector2(240, 160), "GBA"),
@@ -28,17 +26,14 @@ var templates := [
 	Template.new(Vector2(512, 480), "SNES (PAL)"),
 	Template.new(Vector2(646, 486), "N64 (NTSC)"),
 	Template.new(Vector2(786, 576), "N64 (PAL)"),
-
 	# Sega
 	Template.new(Vector2(256, 192), "SMS (NTSC)"),
 	Template.new(Vector2(256, 224), "SMS (PAL)"),
 	Template.new(Vector2(160, 144), "GG"),
 	Template.new(Vector2(320, 224), "MD (NTSC)"),
 	Template.new(Vector2(320, 240), "MD (PAL)"),
-
 	# NEC
-	Template.new(Vector2(256, 239), "PC Engine"),	#256×224 to 512×242 (mostly 256×239)
-
+	Template.new(Vector2(256, 239), "PC Engine"),  #256×224 to 512×242 (mostly 256×239)
 	# DOS
 	Template.new(Vector2(320, 200), "DOS EGA"),
 	Template.new(Vector2(320, 200), "DOS VGA"),
@@ -47,7 +42,6 @@ var templates := [
 	Template.new(Vector2(320, 200), "DOS CGA (4-Colour)"),
 	Template.new(Vector2(160, 240), "DOS CGA (Composite)"),
 	Template.new(Vector2(160, 240), "Tandy"),
-
 	# Commodore
 	Template.new(Vector2(320, 200), "Amiga OCS LowRes (NTSC)"),
 	Template.new(Vector2(320, 256), "Amiga OCS LowRes (PAL)"),
@@ -57,7 +51,6 @@ var templates := [
 	Template.new(Vector2(1280, 256), "Amiga ECS SuperHiRes  (PAL)"),
 	Template.new(Vector2(640, 480), "Amiga ECS Multiscan"),
 	Template.new(Vector2(320, 200), "C64"),
-
 	# Sinclair
 	Template.new(Vector2(256, 192), "ZX Spectrum"),
 ]
@@ -85,22 +78,36 @@ func _create_option_list() -> void:
 	var i := 1
 	for template in templates:
 		if template.name != "":
-			templates_options.add_item("{width}x{height} - {name}".format({"width":template.resolution.x, "height":template.resolution.y, "name":template.name}), i)
+			templates_options.add_item(
+				"{width}x{height} - {name}".format(
+					{
+						"width": template.resolution.x,
+						"height": template.resolution.y,
+						"name": template.name
+					}
+				),
+				i
+			)
 		else:
-			templates_options.add_item("{width}x{height}".format({"width":template.resolution.x, "height":template.resolution.y}), i)
+			templates_options.add_item(
+				"{width}x{height}".format(
+					{"width": template.resolution.x, "height": template.resolution.y}
+				),
+				i
+			)
 
 		i += 1
 
 
 func _on_CreateNewImage_confirmed() -> void:
-	var width : int = width_value.value
-	var height : int = height_value.value
-	var fill_color : Color = fill_color_node.color
+	var width: int = width_value.value
+	var height: int = height_value.value
+	var fill_color: Color = fill_color_node.color
 	Global.canvas.fill_color = fill_color
 
-	var frame : Frame = Global.canvas.new_empty_frame(false, true, Vector2(width, height))
-	var new_project : Project
-	var proj_name :String = $VBoxContainer/ProjectName/NameInput.text
+	var frame: Frame = Global.canvas.new_empty_frame(false, true, Vector2(width, height))
+	var new_project: Project
+	var proj_name: String = $VBoxContainer/ProjectName/NameInput.text
 	if proj_name.is_valid_filename():
 		new_project = Project.new([frame], tr(proj_name), Vector2(width, height).floor())
 	else:
@@ -112,7 +119,7 @@ func _on_CreateNewImage_confirmed() -> void:
 	Global.canvas.camera_zoom()
 
 
-func _on_AspectRatioButton_toggled(_button_pressed : bool) -> void:
+func _on_AspectRatioButton_toggled(_button_pressed: bool) -> void:
 	aspect_ratio = width_value.value / height_value.value
 
 
@@ -136,7 +143,7 @@ func toggle_size_buttons() -> void:
 	landscape_button.connect("toggled", self, "_on_LandscapeButton_toggled")
 
 
-func _on_TemplatesOptions_item_selected(id : int) -> void:
+func _on_TemplatesOptions_item_selected(id: int) -> void:
 	#if a template is chosen while "ratio button" is pressed then temporarily release it
 	var temporary_release = false
 	if ratio_box.pressed:
@@ -154,14 +161,14 @@ func _on_TemplatesOptions_item_selected(id : int) -> void:
 		ratio_box.pressed = true
 
 
-func _on_PortraitButton_toggled(button_pressed : bool) -> void:
+func _on_PortraitButton_toggled(button_pressed: bool) -> void:
 	if !button_pressed or height_value.value > width_value.value:
 		toggle_size_buttons()
 		return
 	switch_width_height()
 
 
-func _on_LandscapeButton_toggled(button_pressed : bool) -> void:
+func _on_LandscapeButton_toggled(button_pressed: bool) -> void:
 	if !button_pressed or width_value.value > height_value.value:
 		toggle_size_buttons()
 		return

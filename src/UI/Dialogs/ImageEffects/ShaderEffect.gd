@@ -1,13 +1,12 @@
 extends ConfirmationDialog
 
+var current_cel: Image
+var shader: Shader
+var params := []  # String[]
 
-var current_cel : Image
-var shader : Shader
-var params := [] # String[]
-
-onready var preview : TextureRect = $VBoxContainer/Preview
-onready var shader_loaded_label : Label = $VBoxContainer/ShaderLoadedLabel
-onready var shader_params : BoxContainer = $VBoxContainer/ShaderParams
+onready var preview: TextureRect = $VBoxContainer/Preview
+onready var shader_loaded_label: Label = $VBoxContainer/ShaderLoadedLabel
+onready var shader_params: BoxContainer = $VBoxContainer/ShaderParams
 
 
 func _on_ShaderEffect_about_to_show() -> void:
@@ -25,7 +24,7 @@ func _on_ShaderEffect_confirmed() -> void:
 		return
 	current_cel.unlock()
 	var viewport_texture := Image.new()
-	var size : Vector2 = Global.current_project.size
+	var size: Vector2 = Global.current_project.size
 	var vp = VisualServer.viewport_create()
 	var canvas = VisualServer.canvas_create()
 	VisualServer.viewport_attach_canvas(vp, canvas)
@@ -76,14 +75,14 @@ func _on_ChooseShader_pressed() -> void:
 		$FileDialog.popup_centered(Vector2(300, 340))
 
 
-func _on_FileDialog_file_selected(path : String) -> void:
+func _on_FileDialog_file_selected(path: String) -> void:
 	var _shader = load(path)
 	if !_shader is Shader:
 		return
 	change_shader(_shader, path.get_file().get_basename())
 
 
-func change_shader(_shader : Shader, name : String) -> void:
+func change_shader(_shader: Shader, name: String) -> void:
 	shader = _shader
 	preview.material.shader = _shader
 	shader_loaded_label.text = tr("Shader loaded:") + " " + name
@@ -144,6 +143,7 @@ func change_shader(_shader : Shader, name : String) -> void:
 			hbox.add_child(spinbox)
 			shader_params.add_child(hbox)
 
+
 #		print("---")
 #		print(uniform_split)
 #		print(u_type)
@@ -153,5 +153,5 @@ func change_shader(_shader : Shader, name : String) -> void:
 #		print("--")
 
 
-func set_shader_param(value, param : String) -> void:
+func set_shader_param(value, param: String) -> void:
 	preview.material.set_shader_param(param, value)

@@ -6,18 +6,19 @@ signal InFocus
 
 
 func _ready() -> void:
-	if OS.get_name() == "HTML5" and OS.has_feature('JavaScript'):
+	if OS.get_name() == "HTML5" and OS.has_feature("JavaScript"):
 		_define_js()
 
 
-func _notification(notification:int) -> void:
+func _notification(notification: int) -> void:
 	if notification == MainLoop.NOTIFICATION_WM_FOCUS_IN:
 		emit_signal("InFocus")
 
 
 func _define_js() -> void:
 	# Define JS script
-	JavaScript.eval("""
+	JavaScript.eval(
+		"""
 	var fileData;
 	var fileType;
 	var fileName;
@@ -90,21 +91,23 @@ func _define_js() -> void:
 			}
 		  });
 	}
-	""", true)
+	""",
+		true
+	)
 
 
 func load_image() -> void:
-	if OS.get_name() != "HTML5" or !OS.has_feature('JavaScript'):
+	if OS.get_name() != "HTML5" or !OS.has_feature("JavaScript"):
 		return
 
 	# Execute JS function
-	JavaScript.eval("upload_image();", true) # Opens prompt for choosing file
+	JavaScript.eval("upload_image();", true)  # Opens prompt for choosing file
 
-	yield(self, "InFocus") # Wait until JS prompt is closed
+	yield(self, "InFocus")  # Wait until JS prompt is closed
 
-	yield(get_tree().create_timer(0.5), "timeout") # Give some time for async JS data load
+	yield(get_tree().create_timer(0.5), "timeout")  # Give some time for async JS data load
 
-	if JavaScript.eval("canceled;", true): # If File Dialog closed w/o file
+	if JavaScript.eval("canceled;", true):  # If File Dialog closed w/o file
 		return
 
 	# Use data from png data
@@ -113,7 +116,7 @@ func load_image() -> void:
 		image_data = JavaScript.eval("fileData;", true)
 		if image_data != null:
 			break
-		yield(get_tree().create_timer(1.0), "timeout") # Need more time to load data
+		yield(get_tree().create_timer(1.0), "timeout")  # Need more time to load data
 
 	var image_type = JavaScript.eval("fileType;", true)
 	var image_name = JavaScript.eval("fileName;", true)
@@ -138,17 +141,17 @@ func load_image() -> void:
 
 
 func load_palette() -> void:
-	if OS.get_name() != "HTML5" or !OS.has_feature('JavaScript'):
+	if OS.get_name() != "HTML5" or !OS.has_feature("JavaScript"):
 		return
 
 	# Execute JS function
-	JavaScript.eval("upload_palette();", true) # Opens prompt for choosing file
+	JavaScript.eval("upload_palette();", true)  # Opens prompt for choosing file
 
-	yield(self, "InFocus") # Wait until JS prompt is closed
+	yield(self, "InFocus")  # Wait until JS prompt is closed
 
-	yield(get_tree().create_timer(0.5), "timeout") # Give some time for async JS data load
+	yield(get_tree().create_timer(0.5), "timeout")  # Give some time for async JS data load
 
-	if JavaScript.eval("canceled;", true): # If File Dialog closed w/o file
+	if JavaScript.eval("canceled;", true):  # If File Dialog closed w/o file
 		return
 
 	# Use data from palette file data
@@ -157,7 +160,7 @@ func load_palette() -> void:
 		palette_data = JavaScript.eval("fileData;", true)
 		if palette_data != null:
 			break
-		yield(get_tree().create_timer(1.0), "timeout") # Need more time to load data
+		yield(get_tree().create_timer(1.0), "timeout")  # Need more time to load data
 
 	var file_type = JavaScript.eval("fileType;", true)
 	var file_name = JavaScript.eval("fileName;", true)
@@ -177,7 +180,7 @@ func load_palette() -> void:
 				if !err:
 					Global.palette_container.import_image_palette(file_name, image)
 			"application/json":
-				var palette : Palette = Palette.new().deserialize(palette_data)
+				var palette: Palette = Palette.new().deserialize(palette_data)
 				palette.source_path = file_name
 				Global.palette_container.attempt_to_import_palette(palette)
 			var invalid_type:
@@ -186,17 +189,17 @@ func load_palette() -> void:
 
 
 func load_shader() -> void:
-	if OS.get_name() != "HTML5" or !OS.has_feature('JavaScript'):
+	if OS.get_name() != "HTML5" or !OS.has_feature("JavaScript"):
 		return
 
 	# Execute JS function
-	JavaScript.eval("upload_shader();", true) # Opens prompt for choosing file
+	JavaScript.eval("upload_shader();", true)  # Opens prompt for choosing file
 
-	yield(self, "InFocus") # Wait until JS prompt is closed
+	yield(self, "InFocus")  # Wait until JS prompt is closed
 
-	yield(get_tree().create_timer(0.5), "timeout") # Give some time for async JS data load
+	yield(get_tree().create_timer(0.5), "timeout")  # Give some time for async JS data load
 
-	if JavaScript.eval("canceled;", true): # If File Dialog closed w/o file
+	if JavaScript.eval("canceled;", true):  # If File Dialog closed w/o file
 		return
 
 	# Use data from png data
@@ -205,7 +208,7 @@ func load_shader() -> void:
 		file_data = JavaScript.eval("fileData;", true)
 		if file_data != null:
 			break
-		yield(get_tree().create_timer(1.0), "timeout") # Need more time to load data
+		yield(get_tree().create_timer(1.0), "timeout")  # Need more time to load data
 
 #	var file_type = JavaScript.eval("fileType;", true)
 	var file_name = JavaScript.eval("fileName;", true)
@@ -215,4 +218,3 @@ func load_shader() -> void:
 
 	var shader_effect_dialog = Global.control.get_node("Dialogs/ImageEffects/ShaderEffect")
 	shader_effect_dialog.change_shader(shader, file_name.get_basename())
-
