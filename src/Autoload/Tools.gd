@@ -183,9 +183,9 @@ func update_tool_buttons() -> void:
 
 func update_tool_cursors() -> void:
 	var left_image = load("res://assets/graphics/tools/cursors/%s.png" % _slots[BUTTON_LEFT].tool_node.name.to_lower())
-	Global.left_cursor_tool_texture = left_image
+	Global.left_cursor.texture = left_image
 	var right_image = load("res://assets/graphics/tools/cursors/%s.png" % _slots[BUTTON_RIGHT].tool_node.name.to_lower())
-	Global.right_cursor_tool_texture = right_image
+	Global.right_cursor.texture = right_image
 
 
 func draw_indicator() -> void:

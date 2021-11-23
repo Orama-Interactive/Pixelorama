@@ -6,6 +6,7 @@ var redone := false
 var is_quitting_on_save := false
 var tallscreen_is_active = false
 var alternate_transparent_background := ColorRect.new()
+var cursor_image = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI
 onready var tools_and_canvas : HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas
@@ -38,7 +39,7 @@ func _ready() -> void:
 	if OS.get_name() == "OSX":
 		use_osx_shortcuts()
 
-	Input.set_custom_mouse_cursor(Global.cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
+	Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
 	Global.current_project.layers[0].name = tr("Layer") + " 0"
@@ -196,9 +197,7 @@ func reparent_node_to(node : Node, dest : Node, pos : int) -> bool:
 
 func _input(event : InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
-	Global.left_cursor.texture = Global.left_cursor_tool_texture
 	Global.right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
-	Global.right_cursor.texture = Global.right_cursor_tool_texture
 
 	if event is InputEventKey and (event.scancode == KEY_ENTER or event.scancode == KEY_KP_ENTER):
 		if get_focus_owner() is LineEdit:

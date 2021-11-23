@@ -25,9 +25,6 @@ var panel_layout = PanelLayout.AUTO
 var layers_changed_skip := false
 var can_draw := false
 var has_focus := false
-var cursor_image = preload("res://assets/graphics/cursor.png")
-var left_cursor_tool_texture := StreamTexture.new()
-var right_cursor_tool_texture := StreamTexture.new()
 
 var play_only_tags := true
 var show_x_symmetry_axis := false
@@ -140,12 +137,6 @@ onready var zoom_level_spinbox : SpinBox = control.find_node("ZoomSpinbox")
 onready var cursor_position_label : Label = control.find_node("CursorPosition")
 onready var current_frame_mark_label : Label = control.find_node("CurrentFrameMark")
 
-onready var open_sprites_dialog : FileDialog = control.find_node("OpenSprite")
-onready var save_sprites_dialog : FileDialog = control.find_node("SaveSprite")
-onready var save_sprites_html5_dialog : ConfirmationDialog = control.find_node("SaveSpriteHTML5")
-onready var export_dialog : AcceptDialog = control.find_node("ExportDialog")
-onready var preferences_dialog : AcceptDialog = control.find_node("PreferencesDialog")
-
 onready var animation_timeline : Panel = control.find_node("AnimationTimeline")
 onready var animation_timer : Timer = animation_timeline.find_node("AnimationTimer")
 onready var frame_ids : HBoxContainer = animation_timeline.find_node("FrameIDs")
@@ -154,11 +145,9 @@ onready var play_backwards : BaseButton = animation_timeline.find_node("PlayBack
 onready var layers_container : VBoxContainer = animation_timeline.find_node("LayersContainer")
 onready var frames_container : VBoxContainer = animation_timeline.find_node("FramesContainer")
 onready var tag_container : Control = animation_timeline.find_node("TagContainer")
-
 onready var remove_frame_button : BaseButton = animation_timeline.find_node("DeleteFrame")
 onready var move_left_frame_button : BaseButton = animation_timeline.find_node("MoveLeft")
 onready var move_right_frame_button : BaseButton = animation_timeline.find_node("MoveRight")
-
 onready var remove_layer_button : BaseButton = animation_timeline.find_node("RemoveLayer")
 onready var move_up_layer_button : BaseButton = animation_timeline.find_node("MoveUpLayer")
 onready var move_down_layer_button : BaseButton = animation_timeline.find_node("MoveDownLayer")
@@ -166,6 +155,11 @@ onready var merge_down_layer_button : BaseButton = animation_timeline.find_node(
 onready var layer_opacity_slider : HSlider = animation_timeline.find_node("OpacitySlider")
 onready var layer_opacity_spinbox : SpinBox = animation_timeline.find_node("OpacitySpinBox")
 
+onready var open_sprites_dialog : FileDialog = control.find_node("OpenSprite")
+onready var save_sprites_dialog : FileDialog = control.find_node("SaveSprite")
+onready var save_sprites_html5_dialog : ConfirmationDialog = control.find_node("SaveSpriteHTML5")
+onready var export_dialog : AcceptDialog = control.find_node("ExportDialog")
+onready var preferences_dialog : AcceptDialog = control.find_node("PreferencesDialog")
 onready var error_dialog : AcceptDialog = control.find_node("ErrorDialog")
 onready var quit_and_save_dialog : ConfirmationDialog = control.find_node("QuitAndSaveDialog")
 
