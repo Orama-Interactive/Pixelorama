@@ -1,6 +1,5 @@
 extends Reference
 
-
 # Default location for xdg_data_home relative to $HOME
 const DEFAULT_XDG_DATA_HOME_REL := ".local/share"
 const DEFAULT_XDG_DATA_DIRS := ["/usr/local/share", "/usr/share"]

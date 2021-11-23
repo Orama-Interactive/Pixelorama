@@ -14,6 +14,7 @@ var pixel_perfect_drawers = [
 ]
 var drawers = [simple_drawer, simple_drawer, simple_drawer, simple_drawer]
 
+
 class ColorOp:
 	var strength := 1.0
 

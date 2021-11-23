@@ -21,7 +21,7 @@ var frame_current_tag := 0  # Export only current frame tag
 var number_of_frames := 1
 var orientation: int = Orientation.ROWS
 
-var lines_count := 1 # How many rows/columns before new line is added
+var lines_count := 1  # How many rows/columns before new line is added
 
 var animation_type: int = AnimationType.MULTIPLE_FILES
 var direction: int = AnimationDirection.FORWARD

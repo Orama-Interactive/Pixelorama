@@ -53,6 +53,7 @@ onready var portrait_button = find_node("PortraitButton")
 onready var landscape_button = find_node("LandscapeButton")
 onready var fill_color_node = find_node("FillColor")
 
+
 class Template:
 	var resolution: Vector2
 	var name: String

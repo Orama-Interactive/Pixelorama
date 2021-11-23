@@ -1,6 +1,5 @@
 extends Node
 
-
 signal color_changed(color, button)
 
 var pen_pressure := 1.0
@@ -33,6 +32,7 @@ var _tool_buttons: Node
 var _active_button := -1
 var _last_position := Vector2.INF
 
+
 class Slot:
 	var name: String
 	var kname: String
@@ -62,7 +62,6 @@ class Slot:
 		pixel_perfect = config.get("pixel_perfect", pixel_perfect)
 		horizontal_mirror = config.get("horizontal_mirror", horizontal_mirror)
 		vertical_mirror = config.get("vertical_mirror", vertical_mirror)
-
 
 
 func _ready() -> void:

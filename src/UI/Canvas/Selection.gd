@@ -1,6 +1,5 @@
 extends Node2D
 
-
 enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
 
 const KEY_MOVE_ACTION_NAMES := ["ui_up", "ui_down", "ui_left", "ui_right"]
@@ -32,6 +31,7 @@ var mouse_pos_on_gizmo_drag := Vector2.ZERO
 var clear_in_selected_cels := true
 
 onready var marching_ants_outline: Sprite = $MarchingAntsOutline
+
 
 class Clipboard:
 	var image := Image.new()
@@ -66,7 +66,6 @@ class Gizmo:
 		return cursor
 
 
-
 func _ready() -> void:
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, -1)))  # Top left
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(0, -1)))  # Center top
@@ -76,6 +75,7 @@ func _ready() -> void:
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(0, 1)))  # Center bottom
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, 1)))  # Bottom left
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, 0)))  # Center left
+
 
 #	gizmos.append(Gizmo.new(Gizmo.Type.ROTATE)) # Rotation gizmo (temp)
 
@@ -578,11 +578,15 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 	)
 	project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])
 
-	project.undo_redo.add_undo_property(project, "selection_bitmap", undo_data_tmp["selection_bitmap"])
+	project.undo_redo.add_undo_property(
+		project, "selection_bitmap", undo_data_tmp["selection_bitmap"]
+	)
 	project.undo_redo.add_undo_property(
 		self, "big_bounding_rectangle", undo_data_tmp["big_bounding_rectangle"]
 	)
-	project.undo_redo.add_undo_property(project, "selection_offset", undo_data_tmp["outline_offset"])
+	project.undo_redo.add_undo_property(
+		project, "selection_offset", undo_data_tmp["outline_offset"]
+	)
 
 	if undo_data_tmp["undo_image"]:
 		for image in redo_data:

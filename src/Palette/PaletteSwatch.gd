@@ -1,13 +1,11 @@
 class_name PaletteSwatch
 extends ColorRect
 
-
 signal pressed(mouse_button)
 signal double_clicked(mouse_button, position)
 signal dropped(source_index, new_index)
 
-
-const SWATCH_SIZE := Vector2(26, 26) # Required by grid sliders
+const SWATCH_SIZE := Vector2(26, 26)  # Required by grid sliders
 const DEFAULT_COLOR := Color(0.0, 0.0, 0.0, 0.0)
 
 var index := -1

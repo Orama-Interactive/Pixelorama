@@ -5,6 +5,7 @@ signal pattern_selected(pattern)
 
 var default_pattern: Pattern = null
 
+
 class Pattern:
 	var image: Image
 	var index: int

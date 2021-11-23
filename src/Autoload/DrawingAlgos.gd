@@ -142,7 +142,11 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 					0:
 						p = (
 							d
-							if (similar_colors(d, b) && !similar_colors(d, h) && !similar_colors(b, f))
+							if (
+								similar_colors(d, b)
+								&& !similar_colors(d, h)
+								&& !similar_colors(b, f)
+							)
 							else e
 						)
 					1:
@@ -167,7 +171,11 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 					2:
 						p = (
 							f
-							if (similar_colors(b, f) && !similar_colors(d, b) && !similar_colors(f, h))
+							if (
+								similar_colors(b, f)
+								&& !similar_colors(d, b)
+								&& !similar_colors(f, h)
+							)
 							else e
 						)
 					3:
@@ -213,7 +221,11 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 					6:
 						p = (
 							d
-							if (similar_colors(d, h) && !similar_colors(f, h) && !similar_colors(d, b))
+							if (
+								similar_colors(d, h)
+								&& !similar_colors(f, h)
+								&& !similar_colors(d, b)
+							)
 							else e
 						)
 					7:
@@ -238,7 +250,11 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 					8:
 						p = (
 							f
-							if (similar_colors(f, h) && !similar_colors(f, b) && !similar_colors(d, h))
+							if (
+								similar_colors(f, h)
+								&& !similar_colors(f, b)
+								&& !similar_colors(d, h)
+							)
 							else e
 						)
 			sprite.set_pixel(x, y, p)

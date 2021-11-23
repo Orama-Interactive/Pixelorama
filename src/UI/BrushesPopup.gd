@@ -9,6 +9,7 @@ var pixel_image = preload("res://assets/graphics/pixel_image.png")
 var circle_image = preload("res://assets/graphics/circle_9x9.png")
 var circle_filled_image = preload("res://assets/graphics/circle_filled_9x9.png")
 
+
 class Brush:
 	var type: int
 	var image: Image
