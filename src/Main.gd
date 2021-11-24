@@ -9,13 +9,21 @@ var cursor_image = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI
 onready var tools_and_canvas: HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas
-onready var tallscreen_hsplit: HSplitContainer = tools_and_canvas.get_node("CanvasAndTimeline/TallscreenHSplitContainer")
+onready var tallscreen_hsplit: HSplitContainer = tools_and_canvas.get_node(
+	"CanvasAndTimeline/TallscreenHSplitContainer"
+)
 onready var bottom_panel: VSplitContainer = tallscreen_hsplit.get_node("BottomPanel")
 onready var right_panel := $MenuAndUI/UI/RightPanel
-onready var canvas_preview_container := right_panel.get_node("MarginContainer/PreviewAndPalettes/CanvasPreviewContainer")
-onready var tool_and_palette_vsplit := right_panel.get_node("MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit")
+onready var canvas_preview_container := right_panel.get_node(
+	"MarginContainer/PreviewAndPalettes/CanvasPreviewContainer"
+)
+onready var tool_and_palette_vsplit := right_panel.get_node(
+	"MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit"
+)
 onready var color_and_tool_options := tool_and_palette_vsplit.get_node("ColorAndToolOptions")
-onready var scroll_container := tool_and_palette_vsplit.get_node("ColorAndToolOptions/ScrollContainer")
+onready var scroll_container := tool_and_palette_vsplit.get_node(
+	"ColorAndToolOptions/ScrollContainer"
+)
 onready var tool_panel := $MenuAndUI/UI/ToolsAndCanvas/ToolPanel
 onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
 
@@ -119,9 +127,7 @@ func change_ui_layout(mode: String) -> void:
 		if !Global.top_menu_container.zen_mode:
 			tallscreen_hsplit.visible = true
 		tallscreen_hsplit.split_offset = tools_and_canvas.split_offset
-		reparent_node_to(
-			Global.animation_timeline, tallscreen_hsplit.get_node("BottomPanel"), 0
-		)
+		reparent_node_to(Global.animation_timeline, tallscreen_hsplit.get_node("BottomPanel"), 0)
 		reparent_node_to(right_panel, bottom_panel, 0)
 		right_panel.rect_min_size.y = 322
 		reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)

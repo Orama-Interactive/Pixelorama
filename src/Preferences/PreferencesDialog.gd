@@ -170,10 +170,14 @@ var restore_default_button_tcsn = preload("res://src/Preferences/RestoreDefaultB
 
 onready var list: ItemList = $HSplitContainer/List
 onready var right_side: VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
-onready var autosave_interval: SpinBox = right_side.get_node("Backup/AutosaveContainer/AutosaveInterval")
+onready var autosave_interval: SpinBox = right_side.get_node(
+	"Backup/AutosaveContainer/AutosaveInterval"
+)
 onready var shrink_label: Label = right_side.get_node("Interface/ShrinkContainer/ShrinkLabel")
 onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
-onready var idle_fps_spinbox: SpinBox = right_side.get_node("Performance/PerformanceContainer/IdleFPS")
+onready var idle_fps_spinbox: SpinBox = right_side.get_node(
+	"Performance/PerformanceContainer/IdleFPS"
+)
 
 
 func _ready() -> void:

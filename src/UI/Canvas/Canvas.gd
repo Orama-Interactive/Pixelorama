@@ -234,10 +234,9 @@ func update_selected_cels_textures(project: Project = Global.current_project) ->
 			current_cel.image_texture.create_from_image(current_cel.image, 0)
 
 			if project == Global.current_project:
-				var frame_button = project.layers[layer_index].frame_container.get_child(frame_index)
-				var frame_texture_rect: TextureRect
-				frame_texture_rect = frame_button.find_node("CelTexture")
-				frame_texture_rect.texture = current_cel.image_texture
+				var cel_button = project.layers[layer_index].frame_container.get_child(frame_index)
+				var cel_texture_rect: TextureRect = cel_button.find_node("CelTexture")
+				cel_texture_rect.texture = current_cel.image_texture
 
 
 func onion_skinning() -> void:

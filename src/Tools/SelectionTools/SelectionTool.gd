@@ -38,9 +38,7 @@ func _input(event: InputEvent) -> void:
 			var grid_size := Vector2(Global.grid_width, Global.grid_height)
 			_offset = _offset.snapped(grid_size)
 			var prev_pos = selection_node.big_bounding_rectangle.position
-			selection_node.big_bounding_rectangle.position = prev_pos.snapped(
-				grid_size
-			)
+			selection_node.big_bounding_rectangle.position = prev_pos.snapped(grid_size)
 			selection_node.marching_ants_outline.offset += (
 				selection_node.big_bounding_rectangle.position
 				- prev_pos
