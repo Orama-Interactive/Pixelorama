@@ -9,14 +9,14 @@ var cursor_image = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI
 onready var tools_and_canvas: HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas
-onready var tallscreen_hsplit_container: HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas/CanvasAndTimeline/TallscreenHSplitContainer
-onready var bottom_panel: VSplitContainer = tallscreen_hsplit_container.get_node("BottomPanel")
+onready var tallscreen_hsplit: HSplitContainer = tools_and_canvas.get_node("CanvasAndTimeline/TallscreenHSplitContainer")
+onready var bottom_panel: VSplitContainer = tallscreen_hsplit.get_node("BottomPanel")
 onready var right_panel := $MenuAndUI/UI/RightPanel
-onready var tool_and_palette_vsplit := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit
-onready var color_and_tool_options := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions
-onready var canvas_preview_container := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/CanvasPreviewContainer
+onready var canvas_preview_container := right_panel.get_node("MarginContainer/PreviewAndPalettes/CanvasPreviewContainer")
+onready var tool_and_palette_vsplit := right_panel.get_node("MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit")
+onready var color_and_tool_options := tool_and_palette_vsplit.get_node("ColorAndToolOptions")
+onready var scroll_container := tool_and_palette_vsplit.get_node("ColorAndToolOptions/ScrollContainer")
 onready var tool_panel := $MenuAndUI/UI/ToolsAndCanvas/ToolPanel
-onready var scroll_container := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
 onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
 
 
@@ -117,10 +117,10 @@ func change_ui_layout(mode: String) -> void:
 		tallscreen_is_active = true
 		# changing visibility and re-parenting of nodes for tall screen
 		if !Global.top_menu_container.zen_mode:
-			tallscreen_hsplit_container.visible = true
-		tallscreen_hsplit_container.split_offset = tools_and_canvas.split_offset
+			tallscreen_hsplit.visible = true
+		tallscreen_hsplit.split_offset = tools_and_canvas.split_offset
 		reparent_node_to(
-			Global.animation_timeline, tallscreen_hsplit_container.get_node("BottomPanel"), 0
+			Global.animation_timeline, tallscreen_hsplit.get_node("BottomPanel"), 0
 		)
 		reparent_node_to(right_panel, bottom_panel, 0)
 		right_panel.rect_min_size.y = 322
@@ -128,7 +128,7 @@ func change_ui_layout(mode: String) -> void:
 		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, HBoxContainer.new())
 		tool_and_palette_vsplit.set("custom_constants/separation", 8)
 		color_and_tool_options.rect_min_size.x = 280
-		reparent_node_to(tool_panel, tallscreen_hsplit_container, 0)
+		reparent_node_to(tool_panel, tallscreen_hsplit, 0)
 
 		var right_panel_margin: MarginContainer = right_panel.find_node(
 			"MarginContainer", true, false
@@ -144,8 +144,8 @@ func change_ui_layout(mode: String) -> void:
 		reparent_node_to(
 			Global.animation_timeline, ui.get_node("ToolsAndCanvas/CanvasAndTimeline"), 1
 		)
-		tallscreen_hsplit_container.visible = false
-		tools_and_canvas.split_offset = tallscreen_hsplit_container.split_offset
+		tallscreen_hsplit.visible = false
+		tools_and_canvas.split_offset = tallscreen_hsplit.split_offset
 		reparent_node_to(right_panel, ui, -1)
 		right_panel.rect_min_size.y = 0
 		reparent_node_to(canvas_preview_container, right_panel.find_node("PreviewAndPalettes"), 0)
@@ -187,7 +187,8 @@ func change_ui_layout(mode: String) -> void:
 
 
 # helper function (change_ui_layout)
-# warning: this doesn't really copy any sort of attributes, except a few that were needed in my particular case
+# warning: this doesn't really copy any sort of attributes, except a few that
+# were needed in my particular case
 func replace_node_with(old: Node, new: Node) -> Node:
 	var tempname = old.name
 	old.name = "old"
@@ -227,12 +228,13 @@ func _input(event: InputEvent) -> void:
 		if get_focus_owner() is LineEdit:
 			get_focus_owner().release_focus()
 
-	# The section of code below is reserved for Undo and Redo! Do not place code for Input below, but above.
+	# The section of code below is reserved for Undo and Redo!
+	# Do not place code for Input below, but above.
 	if !event.is_echo():  # Checks if the action is pressed down
 		if event.is_action_pressed("redo_secondary"):
 			# Done, so that "redo_secondary" hasn't a slight delay before it starts.
 			# The "redo" and "undo" action don't have a slight delay,
-			# because they get called as an accelerator once pressed (TopMenuContainer.gd / Line 152).
+			# because they get called as an accelerator once pressed (TopMenuContainer.gd, Line 152)
 			Global.current_project.commit_redo()
 		return
 
@@ -243,7 +245,8 @@ func _input(event: InputEvent) -> void:
 		Global.current_project.commit_redo()
 
 	if event.is_action("undo") and !event.shift:  # Ctrl + Z and check if shift isn't pressed
-		Global.current_project.commit_undo()  # so "undo" isn't accidentaly triggered while using "redo_secondary"
+		# so "undo" isn't accidentaly triggered while using "redo_secondary"
+		Global.current_project.commit_undo()
 
 
 func setup_application_window_size() -> void:
@@ -324,11 +327,14 @@ func _notification(what: int) -> void:
 		MainLoop.NOTIFICATION_WM_FOCUS_OUT:  # Called when another program is currently focused
 			Global.has_focus = false
 			if Global.fps_limit_focus:
-				Engine.set_target_fps(Global.idle_fps)  # then set the fps to the idle fps (by default 1) to facilitate the cpu
+				# then set the fps to the idle fps (by default 1) to facilitate the CPU
+				Engine.set_target_fps(Global.idle_fps)
 		MainLoop.NOTIFICATION_WM_MOUSE_ENTER:  # Opposite of the above
 			if Global.fps_limit_focus:
 				Engine.set_target_fps(Global.fps_limit)  # 0 stands for maximum fps
-		MainLoop.NOTIFICATION_WM_MOUSE_EXIT:  # if the mouse exits the window and another application has the focus set the fps to the idle fps
+		# If the mouse exits the window and another application has the focus,
+		# set the fps to the idle fps
+		MainLoop.NOTIFICATION_WM_MOUSE_EXIT:
 			if !OS.is_window_focused() and Global.fps_limit_focus:
 				Engine.set_target_fps(Global.idle_fps)
 		MainLoop.NOTIFICATION_WM_FOCUS_IN:

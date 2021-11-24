@@ -312,8 +312,10 @@ func save_project_file() -> void:
 	var path = OpenSave.current_save_paths[Global.current_project_index]
 	if path == "":
 		if OS.get_name() == "HTML5":
-			Global.save_sprites_html5_dialog.popup_centered()
-			Global.save_sprites_html5_dialog.get_node("FileNameContainer/FileNameLineEdit").text = Global.current_project.name
+			var save_dialog: ConfirmationDialog = Global.save_sprites_html5_dialog
+			var save_filename = save_dialog.get_node("FileNameContainer/FileNameLineEdit")
+			save_dialog.popup_centered()
+			save_filename.text = Global.current_project.name
 		else:
 			Global.save_sprites_dialog.popup_centered()
 			Global.save_sprites_dialog.current_file = Global.current_project.name
@@ -325,8 +327,10 @@ func save_project_file() -> void:
 func save_project_file_as() -> void:
 	Global.control.is_quitting_on_save = false
 	if OS.get_name() == "HTML5":
-		Global.save_sprites_html5_dialog.popup_centered()
-		Global.save_sprites_html5_dialog.get_node("FileNameContainer/FileNameLineEdit").text = Global.current_project.name
+		var save_dialog: ConfirmationDialog = Global.save_sprites_html5_dialog
+		var save_filename = save_dialog.get_node("FileNameContainer/FileNameLineEdit")
+		save_dialog.popup_centered()
+		save_filename.text = Global.current_project.name
 	else:
 		Global.save_sprites_dialog.popup_centered()
 		Global.save_sprites_dialog.current_file = Global.current_project.name
@@ -409,10 +413,11 @@ func panel_layout_submenu_id_pressed(id: int) -> void:
 
 func toggle_mirror_view() -> void:
 	Global.mirror_view = !Global.mirror_view
-	Global.canvas.selection.marching_ants_outline.scale.x = -Global.canvas.selection.marching_ants_outline.scale.x
+	var marching_ants_outline: Sprite = Global.canvas.selection.marching_ants_outline
+	marching_ants_outline.scale.x = -marching_ants_outline.scale.x
 	if Global.mirror_view:
-		Global.canvas.selection.marching_ants_outline.position.x = (
-			Global.canvas.selection.marching_ants_outline.position.x
+		marching_ants_outline.position.x = (
+			marching_ants_outline.position.x
 			+ Global.current_project.size.x
 		)
 	else:
@@ -467,7 +472,7 @@ func toggle_zen_mode() -> void:
 	Global.tool_panel.visible = zen_mode
 	Global.right_panel.visible = zen_mode
 	Global.control.find_node("TabsContainer").visible = zen_mode
-	Global.control.tallscreen_hsplit_container.visible = zen_mode
+	Global.control.tallscreen_hsplit.visible = zen_mode
 	zen_mode = !zen_mode
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)
 

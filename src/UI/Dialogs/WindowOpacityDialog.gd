@@ -2,7 +2,6 @@ extends AcceptDialog
 
 onready var hslider: HSlider = $HBoxContainer2/HSlider
 onready var spinbox: SpinBox = $HBoxContainer2/SpinBox
-onready var alternate_transparent_background: ColorRect = Global.control.alternate_transparent_background
 
 
 func _on_WindowOpacityDialog_about_to_show() -> void:
@@ -17,10 +16,10 @@ func _on_value_changed(value: float) -> void:
 	spinbox.value = value
 
 	value = value / 100.0
-	alternate_transparent_background.visible = value < 1.0
+	Global.control.alternate_transparent_background.visible = value < 1.0
 
 	Global.default_clear_color.a = value
-	alternate_transparent_background.color = Global.default_clear_color
+	Global.control.alternate_transparent_background.color = Global.default_clear_color
 	Global.transparent_checker.transparency(value)
 
 

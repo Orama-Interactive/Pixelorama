@@ -151,7 +151,7 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 			# map for this directory
 			var randomised_brush_subdirectory_map: Dictionary = available_brush_file_information[1]
 			# Map for subdirectories to non-randomised-brush files nyaa
-			var nonrandomised_brush_subdirectory_map: Dictionary = available_brush_file_information[2]
+			var nonrandomised_brush_subdir_map: Dictionary = available_brush_file_information[2]
 
 			# Iterate over components and do stuff with them! nyaa
 			# first for the main directory path...
@@ -180,14 +180,14 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 					# and mark that we are done in the overall map ^.^
 					randomised_brush_subdirectories[randomised_subdir] = true
 			# Now to iterate over the nonrandom brush files inside directories
-			for nonrandomised_subdir in nonrandomised_brush_subdirectory_map:
+			for nonrandomised_subdir in nonrandomised_brush_subdir_map:
 				# initialise the set-map for this one if not already present :)
 				if not (nonrandomised_subdir in processed_subdir_paths):
 					processed_subdir_paths[nonrandomised_subdir] = {}
 				# Get the paths within this subdirectory to check if they are
 				# processed or not and if not, then process them.
-				var relpaths_of_contained_nonrandom_brushes: Array = nonrandomised_brush_subdirectory_map[nonrandomised_subdir]
-				for relative_path in relpaths_of_contained_nonrandom_brushes:
+				var relpaths_of_nonrandom_brushes: Array = nonrandomised_brush_subdir_map[nonrandomised_subdir]
+				for relative_path in relpaths_of_nonrandom_brushes:
 					if not (relative_path in processed_subdir_paths[nonrandomised_subdir]):
 						# We are not yet processed
 						var full_path: String = current_main_directory.plus_file(nonrandomised_subdir).plus_file(

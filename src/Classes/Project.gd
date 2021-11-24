@@ -26,15 +26,16 @@ var x_symmetry_axis: SymmetryGuide
 var y_symmetry_axis: SymmetryGuide
 
 var selection_bitmap := BitMap.new()
-# This is useful for when the selection is outside of the canvas boundaries, on the left and/or above (negative coords)
+# This is useful for when the selection is outside of the canvas boundaries,
+# on the left and/or above (negative coords)
 var selection_offset := Vector2.ZERO setget _selection_offset_changed
 var has_selection := false
 
 # For every camera (currently there are 3)
 var cameras_rotation := [0.0, 0.0, 0.0]  # Array of float
-var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)]  # Array of Vector2
-var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]  # Array of Vector2
-var cameras_zoom_max := [Vector2.ONE, Vector2.ONE, Vector2.ONE]  # Array of Vector2
+var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)]
+var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
+var cameras_zoom_max := [Vector2.ONE, Vector2.ONE, Vector2.ONE]
 
 # Export directory path and export file name
 var directory_path := ""
@@ -376,8 +377,9 @@ func deserialize(dict: Dictionary) -> void:
 				var linked_cels := []
 				for linked_cel_number in saved_layer.linked_cels:
 					linked_cels.append(frames[linked_cel_number])
-					frames[linked_cel_number].cels[layer_i].image = linked_cels[0].cels[layer_i].image
-					frames[linked_cel_number].cels[layer_i].image_texture = linked_cels[0].cels[layer_i].image_texture
+					var linked_cel: Cel = frames[linked_cel_number].cels[layer_i]
+					linked_cel.image = linked_cels[0].cels[layer_i].image
+					linked_cel.image_texture = linked_cels[0].cels[layer_i].image_texture
 				var layer := Layer.new(
 					saved_layer.name,
 					saved_layer.visible,
@@ -532,15 +534,16 @@ func frame_changed(value: int) -> void:
 		selected_cels.append([current_frame, current_layer])
 	# Select the new frame
 	for cel in selected_cels:
-		var _current_frame: int = cel[0]
-		var _current_layer: int = cel[1]
-		if _current_frame < Global.frame_ids.get_child_count():
-			Global.frame_ids.get_child(_current_frame).add_color_override(
+		var current_frame_tmp: int = cel[0]
+		var current_layer_tmp: int = cel[1]
+		if current_frame_tmp < Global.frame_ids.get_child_count():
+			Global.frame_ids.get_child(current_frame_tmp).add_color_override(
 				"font_color", Global.control.theme.get_color("Selected Color", "Label")
 			)
 		if layers:
-			if _current_frame < layers[_current_layer].frame_container.get_child_count():
-				layers[_current_layer].frame_container.get_child(_current_frame).pressed = true
+			if current_frame_tmp < layers[current_layer_tmp].frame_container.get_child_count():
+				var fbutton = layers[current_layer_tmp].frame_container.get_child(current_frame_tmp)
+				fbutton.pressed = true
 
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
 	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
@@ -549,8 +552,9 @@ func frame_changed(value: int) -> void:
 	)
 
 	if current_frame < frames.size():
-		Global.layer_opacity_slider.value = frames[current_frame].cels[current_layer].opacity * 100
-		Global.layer_opacity_spinbox.value = frames[current_frame].cels[current_layer].opacity * 100
+		var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
+		Global.layer_opacity_slider.value = cel_opacity * 100
+		Global.layer_opacity_spinbox.value = cel_opacity * 100
 
 	Global.canvas.update()
 	Global.transparent_checker._ready()  # To update the rect size
@@ -568,10 +572,10 @@ func layer_changed(value: int) -> void:
 		layer_button.pressed = false
 
 	for cel in selected_cels:
-		var _current_layer: int = cel[1]
-		if _current_layer < Global.layers_container.get_child_count():
+		var current_layer_tmp: int = cel[1]
+		if current_layer_tmp < Global.layers_container.get_child_count():
 			var layer_button = Global.layers_container.get_child(
-				Global.layers_container.get_child_count() - 1 - _current_layer
+				Global.layers_container.get_child_count() - 1 - current_layer_tmp
 			)
 			layer_button.pressed = true
 
@@ -628,9 +632,11 @@ func animation_tags_changed(value: Array) -> void:
 		tag_c.get_node("Label").modulate = tag.color
 		tag_c.get_node("Line2D").default_color = tag.color
 
-		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + 1  # Added 1 to answer to get starting position of next cel
+		# Added 1 to answer to get starting position of next cel
+		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + 1
 		var tag_size: int = tag.to - tag.from
-		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 4  # We dont need the 4 pixels at the end of last cel
+		# We dont need the 4 pixels at the end of last cel
+		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 4
 		tag_c.rect_position.y = 1  # To make top line of tag visible
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
@@ -705,7 +711,8 @@ func invert_bitmap(bitmap: BitMap) -> void:
 			bitmap.set_bit(pos, !bitmap.get_bit(pos))
 
 
-# Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L605
+# Unexposed BitMap class function
+# https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L605
 func resize_bitmap(bitmap: BitMap, new_size: Vector2) -> BitMap:
 	if new_size == bitmap.get_size():
 		return bitmap
@@ -720,7 +727,8 @@ func resize_bitmap(bitmap: BitMap, new_size: Vector2) -> BitMap:
 	return new_bitmap
 
 
-# Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L622
+# Unexposed BitMap class function
+# https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L622
 func bitmap_to_image(bitmap: BitMap, square := true) -> Image:
 	var image := Image.new()
 	var width := bitmap.get_size().x
@@ -740,7 +748,8 @@ func bitmap_to_image(bitmap: BitMap, square := true) -> Image:
 	return image
 
 
-# Algorithm taken from Image.get_used_rect() -  https://github.com/godotengine/godot/blob/master/core/io/image.cpp
+# Algorithm taken from Image.get_used_rect()
+# https://github.com/godotengine/godot/blob/master/core/io/image.cpp
 func get_selection_rectangle(bitmap: BitMap = selection_bitmap) -> Rect2:
 	if bitmap.get_true_bit_count() == 0:
 		return Rect2()

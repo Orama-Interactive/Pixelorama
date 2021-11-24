@@ -57,7 +57,8 @@ func rotation_button_pressed() -> void:
 	Global.rotation_level_spinbox.value = str2var(
 		Global.rotation_level_button.text.replace("°", "")
 	)
-	Global.rotation_level_spinbox.get_child(0).grab_focus()  #since the actual lineedit is the first child of spinbox
+	# Since the actual LineEdit is the first child of SpinBox
+	Global.rotation_level_spinbox.get_child(0).grab_focus()
 
 
 func rotation_value_changed(value) -> void:
@@ -66,9 +67,10 @@ func rotation_value_changed(value) -> void:
 
 
 func rotation_focus_exited() -> void:
-	if Global.rotation_level_spinbox.value != rotation:  #If user pressed enter while editing
+	if Global.rotation_level_spinbox.value != rotation:  # If user pressed enter while editing
 		if index == Cameras.MAIN:
-			set_camera_rotation_degrees(-Global.rotation_level_spinbox.value)  # Negative makes going up rotate clockwise
+			# Negative makes going up rotate clockwise
+			set_camera_rotation_degrees(-Global.rotation_level_spinbox.value)
 	Global.rotation_level_button.visible = true
 	Global.rotation_level_spinbox.visible = false
 	Global.rotation_level_spinbox.editable = false
@@ -79,7 +81,8 @@ func zoom_button_pressed() -> void:
 	Global.zoom_level_spinbox.visible = true
 	Global.zoom_level_spinbox.editable = true
 	Global.zoom_level_spinbox.value = str2var(Global.zoom_level_button.text.replace("%", ""))
-	Global.zoom_level_spinbox.get_child(0).grab_focus()  #since the actual lineedit is the first child of spinbox
+	# Since the actual LineEdit is the first child of SpinBox
+	Global.zoom_level_spinbox.get_child(0).grab_focus()
 
 
 func zoom_value_changed(value) -> void:
@@ -88,7 +91,7 @@ func zoom_value_changed(value) -> void:
 
 
 func zoom_focus_exited() -> void:
-	if Global.zoom_level_spinbox.value != round(100 / zoom.x):  #If user pressed enter while editing
+	if Global.zoom_level_spinbox.value != round(100 / zoom.x):  # If user pressed enter while editing
 		if index == Cameras.MAIN:
 			zoom_camera_percent(Global.zoom_level_spinbox.value)
 	Global.zoom_level_button.visible = true
@@ -210,7 +213,8 @@ func _input(event: InputEvent) -> void:
 			zoom_camera(1)
 		else:
 			zoom_camera(-1)
-	elif event is InputEventPanGesture and OS.get_name() != "Android":  # Pan Gesture on a Latop touchpad
+	elif event is InputEventPanGesture and OS.get_name() != "Android":
+		# Pan Gesture on a Latop touchpad
 		offset = offset + event.delta.rotated(rotation) * zoom * 7  # for moving the canvas
 	elif event is InputEventMouseMotion && drag:
 		offset = offset - event.relative.rotated(rotation) * zoom

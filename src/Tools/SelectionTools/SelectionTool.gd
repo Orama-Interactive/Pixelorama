@@ -38,7 +38,7 @@ func _input(event: InputEvent) -> void:
 			var grid_size := Vector2(Global.grid_width, Global.grid_height)
 			_offset = _offset.snapped(grid_size)
 			var prev_pos = selection_node.big_bounding_rectangle.position
-			selection_node.big_bounding_rectangle.position = selection_node.big_bounding_rectangle.position.snapped(
+			selection_node.big_bounding_rectangle.position = prev_pos.snapped(
 				grid_size
 			)
 			selection_node.marching_ants_outline.offset += (
@@ -66,7 +66,7 @@ func draw_start(position: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
 	var project: Project = Global.current_project
-	undo_data = selection_node._get_undo_data(false)
+	undo_data = selection_node.get_undo_data(false)
 	_intersect = Tools.shift && Tools.control
 	_add = Tools.shift && !_intersect
 	_subtract = Tools.control && !_intersect
@@ -110,7 +110,7 @@ func draw_start(position: Vector2) -> void:
 
 					project.selection_bitmap = selected_bitmap_copy
 					selection_node.commit_undo("Move Selection", selection_node.undo_data)
-					selection_node.undo_data = selection_node._get_undo_data(true)
+					selection_node.undo_data = selection_node.get_undo_data(true)
 				else:
 					selection_node.transform_content_start()
 					selection_node.clear_in_selected_cels = false
@@ -193,7 +193,7 @@ func _on_XSpinBox_value_changed(value: float) -> void:
 	if !project.has_selection or selection_node.big_bounding_rectangle.position.x == value:
 		return
 	if timer.is_stopped():
-		undo_data = selection_node._get_undo_data(false)
+		undo_data = selection_node.get_undo_data(false)
 	timer.start()
 	selection_node.big_bounding_rectangle.position.x = value
 
@@ -208,7 +208,7 @@ func _on_YSpinBox_value_changed(value: float) -> void:
 	if !project.has_selection or selection_node.big_bounding_rectangle.position.y == value:
 		return
 	if timer.is_stopped():
-		undo_data = selection_node._get_undo_data(false)
+		undo_data = selection_node.get_undo_data(false)
 	timer.start()
 	selection_node.big_bounding_rectangle.position.y = value
 
@@ -227,7 +227,7 @@ func _on_WSpinBox_value_changed(value: float) -> void:
 	):
 		return
 	if timer.is_stopped():
-		undo_data = selection_node._get_undo_data(false)
+		undo_data = selection_node.get_undo_data(false)
 	timer.start()
 	selection_node.big_bounding_rectangle.size.x = value
 	resize_selection()
@@ -242,7 +242,7 @@ func _on_HSpinBox_value_changed(value: float) -> void:
 	):
 		return
 	if timer.is_stopped():
-		undo_data = selection_node._get_undo_data(false)
+		undo_data = selection_node.get_undo_data(false)
 	timer.start()
 	selection_node.big_bounding_rectangle.size.y = value
 	resize_selection()

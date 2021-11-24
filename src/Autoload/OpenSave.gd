@@ -3,6 +3,7 @@ extends Node
 var current_save_paths := []  # Array of strings
 # Stores a filename of a backup file in user:// until user saves manually
 var backup_save_paths := []  # Array of strings
+var preview_dialog_tscn = preload("res://src/UI/Dialogs/PreviewDialog.tscn")
 
 onready var autosave_timer: Timer
 
@@ -22,7 +23,7 @@ func handle_loading_files(files: PoolStringArray) -> void:
 		var file_ext: String = file.get_extension().to_lower()
 		if file_ext == "pxo":  # Pixelorama project file
 			open_pxo_file(file)
-		elif file_ext == "tres" or file_ext == "gpl" or file_ext == "pal" or file_ext == "json":  # Palettes
+		elif file_ext == "tres" or file_ext == "gpl" or file_ext == "pal" or file_ext == "json":
 			Palettes.import_palette(file)
 		else:  # Image files
 			var image := Image.new()
@@ -39,7 +40,7 @@ func handle_loading_files(files: PoolStringArray) -> void:
 
 
 func handle_loading_image(file: String, image: Image) -> void:
-	var preview_dialog: ConfirmationDialog = preload("res://src/UI/Dialogs/PreviewDialog.tscn").instance()
+	var preview_dialog: ConfirmationDialog = preview_dialog_tscn.instance()
 	preview_dialog.path = file
 	preview_dialog.image = image
 	Global.control.add_child(preview_dialog)
@@ -143,12 +144,9 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 	var file_major_version = int(file_ver_splitted_numbers[0].replace("v", ""))
 	var file_minor_version = int(file_ver_splitted_numbers[1])
 	var file_patch_version := 0
-	var _file_status_version: String
 
 	if file_ver_splitted_numbers.size() > 2:
 		file_patch_version = int(file_ver_splitted_numbers[2])
-	if file_ver_splitted.size() > 1:
-		_file_status_version = file_ver_splitted[1]
 
 	if file_major_version == 0 and file_minor_version < 5:
 		Global.notification_label(
@@ -206,9 +204,10 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 			frame_class.cels.append(Cel.new(image, cel_opacity))
 			if file_major_version >= 0 and file_minor_version >= 7:
 				if frame in linked_cels[layer_i]:
+					var linked_cel: Cel = new_project.layers[layer_i].linked_cels[0].cels[layer_i]
 					new_project.layers[layer_i].linked_cels.append(frame_class)
-					frame_class.cels[layer_i].image = new_project.layers[layer_i].linked_cels[0].cels[layer_i].image
-					frame_class.cels[layer_i].image_texture = new_project.layers[layer_i].linked_cels[0].cels[layer_i].image_texture
+					frame_class.cels[layer_i].image = linked_cel.image
+					frame_class.cels[layer_i].image_texture = linked_cel.image_texture
 
 			layer_i += 1
 			layer_line = file.get_line()
@@ -573,7 +572,8 @@ func set_new_tab(project: Project, path: String) -> void:
 
 func update_autosave() -> void:
 	autosave_timer.stop()
-	autosave_timer.wait_time = Global.autosave_interval * 60  # Interval parameter is in minutes, wait_time is seconds
+	# Interval parameter is in minutes, wait_time is seconds
+	autosave_timer.wait_time = Global.autosave_interval * 60
 	if Global.enable_autosave:
 		autosave_timer.start()
 

@@ -20,7 +20,7 @@ func _input(event: InputEvent) -> void:
 			_offset = _offset.snapped(grid_size)
 			if Global.current_project.has_selection:
 				var prev_pos = selection_node.big_bounding_rectangle.position
-				selection_node.big_bounding_rectangle.position = selection_node.big_bounding_rectangle.position.snapped(
+				selection_node.big_bounding_rectangle.position = prev_pos.snapped(
 					grid_size
 				)
 				selection_node.marching_ants_outline.offset += (

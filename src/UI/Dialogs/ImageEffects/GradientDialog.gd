@@ -1,9 +1,10 @@
 extends ImageEffect
 
-onready var color1: ColorPickerButton = $VBoxContainer/OptionsContainer/ColorsContainer/ColorPickerButton
-onready var color2: ColorPickerButton = $VBoxContainer/OptionsContainer/ColorsContainer/ColorPickerButton2
-onready var steps: SpinBox = $VBoxContainer/OptionsContainer/StepSpinBox
-onready var direction: OptionButton = $VBoxContainer/OptionsContainer/DirectionOptionButton
+onready var options_cont = $VBoxContainer/OptionsContainer
+onready var color1: ColorPickerButton = options_cont.get_node("ColorsContainer/ColorPickerButton")
+onready var color2: ColorPickerButton = options_cont.get_node("ColorsContainer/ColorPickerButton2")
+onready var steps: SpinBox = options_cont.get_node("StepSpinBox")
+onready var direction: OptionButton = options_cont.get_node("DirectionOptionButton")
 
 
 func _ready() -> void:

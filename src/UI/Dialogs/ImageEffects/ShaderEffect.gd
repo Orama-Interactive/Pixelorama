@@ -10,7 +10,8 @@ onready var shader_params: BoxContainer = $VBoxContainer/ShaderParams
 
 
 func _on_ShaderEffect_about_to_show() -> void:
-	current_cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
+	var current_frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
+	current_cel = current_frame.cels[Global.current_project.current_layer].image
 
 	var preview_image := Image.new()
 	preview_image.copy_from(current_cel)

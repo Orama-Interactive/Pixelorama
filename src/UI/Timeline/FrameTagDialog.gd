@@ -78,10 +78,11 @@ func _on_AddTag_pressed() -> void:
 func _on_EditButton_pressed(_tag_id: int) -> void:
 	options_dialog.popup_centered()
 	current_tag_id = _tag_id
-	options_dialog.get_node("GridContainer/NameLineEdit").text = Global.current_project.animation_tags[_tag_id].name
-	options_dialog.get_node("GridContainer/ColorPickerButton").color = Global.current_project.animation_tags[_tag_id].color
-	options_dialog.get_node("GridContainer/FromSpinBox").value = Global.current_project.animation_tags[_tag_id].from
-	options_dialog.get_node("GridContainer/ToSpinBox").value = Global.current_project.animation_tags[_tag_id].to
+	var animation_tag: AnimationTag = Global.current_project.animation_tags[_tag_id]
+	options_dialog.get_node("GridContainer/NameLineEdit").text = animation_tag.name
+	options_dialog.get_node("GridContainer/ColorPickerButton").color = animation_tag.color
+	options_dialog.get_node("GridContainer/FromSpinBox").value = animation_tag.from
+	options_dialog.get_node("GridContainer/ToSpinBox").value = animation_tag.to
 	if !delete_tag_button:
 		delete_tag_button = options_dialog.add_button("Delete", true, "delete_tag")
 	else:

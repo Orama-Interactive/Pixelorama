@@ -134,7 +134,8 @@ func update_mask(can_skip := true) -> void:
 	if can_skip and Global.pressure_sensitivity_mode == Global.PressureSensitivity.NONE:
 		return
 	var size: Vector2 = Global.current_project.size
-	# Faster than zeroing PoolByteArray directly. See: https://github.com/Orama-Interactive/Pixelorama/pull/439
+	# Faster than zeroing PoolByteArray directly.
+	# See: https://github.com/Orama-Interactive/Pixelorama/pull/439
 	var nulled_array := []
 	nulled_array.resize(size.x * size.y)
 	_mask = PoolByteArray(nulled_array)

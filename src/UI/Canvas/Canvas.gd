@@ -210,19 +210,18 @@ func handle_redo(
 	project.undo_redo.commit_action()
 
 
-func update_texture(layer_index: int, frame_index := -1, project: Project = Global.current_project) -> void:
-	if frame_index == -1:
-		frame_index = project.current_frame
+func update_texture(layer_i: int, frame_i := -1, project: Project = Global.current_project) -> void:
+	if frame_i == -1:
+		frame_i = project.current_frame
 
-	if frame_index < project.frames.size() and layer_index < project.layers.size():
-		var current_cel: Cel = project.frames[frame_index].cels[layer_index]
+	if frame_i < project.frames.size() and layer_i < project.layers.size():
+		var current_cel: Cel = project.frames[frame_i].cels[layer_i]
 		current_cel.image_texture.create_from_image(current_cel.image, 0)
 
 		if project == Global.current_project:
+			var frame_button = project.layers[layer_i].frame_container.get_child(frame_i)
 			var frame_texture_rect: TextureRect
-			frame_texture_rect = project.layers[layer_index].frame_container.get_child(frame_index).find_node(
-				"CelTexture"
-			)
+			frame_texture_rect = frame_button.find_node("CelTexture")
 			frame_texture_rect.texture = current_cel.image_texture
 
 
@@ -235,16 +234,14 @@ func update_selected_cels_textures(project: Project = Global.current_project) ->
 			current_cel.image_texture.create_from_image(current_cel.image, 0)
 
 			if project == Global.current_project:
+				var frame_button = project.layers[layer_index].frame_container.get_child(frame_index)
 				var frame_texture_rect: TextureRect
-				frame_texture_rect = project.layers[layer_index].frame_container.get_child(frame_index).find_node(
-					"CelTexture"
-				)
+				frame_texture_rect = frame_button.find_node("CelTexture")
 				frame_texture_rect.texture = current_cel.image_texture
 
 
 func onion_skinning() -> void:
-	# Past
-	if Global.onion_skinning_past_rate > 0:
+	if Global.onion_skinning_past_rate > 0:  # Past
 		var color: Color
 		if Global.onion_skinning_blue_red:
 			color = Color.blue
@@ -262,8 +259,7 @@ func onion_skinning() -> void:
 						draw_texture(layer.image_texture, Vector2.ZERO, color)
 					layer_i += 1
 
-	# Future
-	if Global.onion_skinning_future_rate > 0:
+	if Global.onion_skinning_future_rate > 0:  # Future
 		var color: Color
 		if Global.onion_skinning_blue_red:
 			color = Color.red

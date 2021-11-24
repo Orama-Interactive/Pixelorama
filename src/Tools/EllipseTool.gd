@@ -42,7 +42,8 @@ func _get_shape_points(size: Vector2) -> PoolVector2Array:
 	var new_size := size + size_offset
 	var inner_ellipse_size = new_size - 2 * size_offset
 
-	# The inner ellipse is to small to create a gap in the middle of the ellipse, just return a filled ellipse
+	# The inner ellipse is to small to create a gap in the middle of the ellipse,
+	# just return a filled ellipse
 	if inner_ellipse_size.x <= 2 and inner_ellipse_size.y <= 2:
 		return _get_shape_points_filled(size)
 

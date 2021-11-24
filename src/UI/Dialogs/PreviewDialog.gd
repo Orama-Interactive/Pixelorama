@@ -156,7 +156,8 @@ func _on_ImportOption_item_selected(id: int) -> void:
 		frame_size_label.visible = true
 		spritesheet_tab_options.visible = true
 		spritesheet_layer_options.visible = true
-		spritesheet_layer_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
+		var n_of_frames: int = Global.current_project.frames.size()
+		spritesheet_layer_options.get_node("AtFrameSpinbox").max_value = n_of_frames
 		texture_rect.get_child(0).visible = true
 		texture_rect.get_child(1).visible = true
 		rect_size.x = spritesheet_layer_options.rect_size.x
@@ -174,7 +175,8 @@ func _on_ImportOption_item_selected(id: int) -> void:
 			Global.current_project.layers.size()
 			- 1
 		)
-		replace_frame_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
+		var at_frame_spinbox: SpinBox = replace_frame_options.get_node("AtFrameSpinbox")
+		at_frame_spinbox.max_value = Global.current_project.frames.size()
 
 	elif id == ImageImportOptions.NEW_LAYER:
 		new_layer_options.visible = true

@@ -49,7 +49,8 @@ func edit(new_name: String, new_width: int, new_height: int, new_comment: String
 
 	if old_width < new_width and colors_max > old_colors_max:
 		# If width increases colors have to be reindexed so they keep same grid positions
-		# unless the height has become smaller and we have to re-position the colors so that they won't get erased
+		# unless the height has become smaller and we have to re-position the colors
+		# so that they won't get erased
 		reindex_colors_on_width_increase(old_width)
 
 
@@ -136,7 +137,8 @@ func insert_color(index: int, new_color: Color) -> void:
 
 # Recursive function that moves every color to right until one of them is moved to empty swatch
 func move_right(index: int) -> void:
-	# Moving colors to right would overflow the size of the palette so increase it's height automatically
+	# Moving colors to right would overflow the size of the palette
+	# so increase its height automatically
 	if index + 1 == colors_max:
 		height += 1
 		colors_max = width * height

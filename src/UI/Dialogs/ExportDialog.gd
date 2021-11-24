@@ -3,8 +3,8 @@ extends AcceptDialog
 # called when user resumes export after filename collision
 signal resume_export_function
 
-var animated_preview_current_frame := 0
-var animated_preview_frames = []
+var preview_current_frame := 0
+var preview_frames := []
 var pingpong_direction = Export.AnimationDirection.FORWARD
 
 onready var tabs = $VBoxContainer/Tabs
@@ -15,7 +15,7 @@ onready var path_dialog_popup = $Popups/PathDialog
 onready var export_progress_popup = $Popups/ExportProgressBar
 onready var export_progress_bar = $Popups/ExportProgressBar/MarginContainer/ProgressBar
 
-onready var animation_options_multiple_animations_directories = $VBoxContainer/AnimationOptions/MultipleAnimationsDirectories
+onready var multiple_animations_directories = find_node("MultipleAnimationsDirectories")
 onready var previews = $VBoxContainer/PreviewPanel/PreviewScroll/Previews
 onready var frame_timer = $FrameTimer
 
@@ -23,10 +23,10 @@ onready var frame_options = $VBoxContainer/FrameOptions
 onready var frame_options_frame_number = $VBoxContainer/FrameOptions/FrameNumber/FrameNumber
 
 onready var spritesheet_options = $VBoxContainer/SpritesheetOptions
-onready var spritesheet_options_frames = $VBoxContainer/SpritesheetOptions/Frames/Frames
-onready var spritesheet_options_orientation = $VBoxContainer/SpritesheetOptions/Orientation/Orientation
-onready var spritesheet_options_lines_count = $VBoxContainer/SpritesheetOptions/Orientation/LinesCount
-onready var spritesheet_options_lines_count_label = $VBoxContainer/SpritesheetOptions/Orientation/LinesCountLabel
+onready var spritesheet_frames = $VBoxContainer/SpritesheetOptions/Frames/Frames
+onready var spritesheet_orientation = $VBoxContainer/SpritesheetOptions/Orientation/Orientation
+onready var spritesheet_lines_count = $VBoxContainer/SpritesheetOptions/Orientation/LinesCount
+onready var spritesheet_lines_count_label = spritesheet_options.find_node("LinesCountLabel")
 
 onready var animation_options = $VBoxContainer/AnimationOptions
 onready var animation_options_animation_type = $VBoxContainer/AnimationOptions/AnimationType
@@ -82,12 +82,12 @@ func show_tab() -> void:
 				Export.lines_count = int(ceil(sqrt(Export.number_of_frames)))
 			Export.process_spritesheet()
 			file_file_format.selected = Export.FileFormat.PNG
-			spritesheet_options_frames.select(Export.frame_current_tag)
+			spritesheet_frames.select(Export.frame_current_tag)
 			frame_timer.stop()
-			spritesheet_options_orientation.selected = Export.orientation
-			spritesheet_options_lines_count.max_value = Export.number_of_frames
-			spritesheet_options_lines_count.value = Export.lines_count
-			spritesheet_options_lines_count_label.text = "Columns:"
+			spritesheet_orientation.selected = Export.orientation
+			spritesheet_lines_count.max_value = Export.number_of_frames
+			spritesheet_lines_count.value = Export.lines_count
+			spritesheet_lines_count_label.text = "Columns:"
 			spritesheet_options.show()
 		Export.ExportTab.ANIMATION:
 			set_file_format_selector()
@@ -132,29 +132,29 @@ func add_image_preview(image: Image, canvas_number: int = -1) -> void:
 
 
 func add_animated_preview() -> void:
-	animated_preview_current_frame = (
+	preview_current_frame = (
 		Export.processed_images.size() - 1
 		if Export.direction == Export.AnimationDirection.BACKWARDS
 		else 0
 	)
-	animated_preview_frames = []
+	preview_frames = []
 
 	for processed_image in Export.processed_images:
 		var texture = ImageTexture.new()
 		texture.create_from_image(processed_image, 0)
-		animated_preview_frames.push_back(texture)
+		preview_frames.push_back(texture)
 
 	var container = create_preview_container()
 	container.name = "PreviewContainer"
 	var preview = create_preview_rect()
 	preview.name = "Preview"
-	preview.texture = animated_preview_frames[animated_preview_current_frame]
+	preview.texture = preview_frames[preview_current_frame]
 	container.add_child(preview)
 
 	previews.add_child(container)
 	frame_timer.set_one_shot(true)  #The wait_time it can't change correctly if it is playing
 	frame_timer.wait_time = (
-		Global.current_project.frames[animated_preview_current_frame].duration
+		Global.current_project.frames[preview_current_frame].duration
 		* (1 / Global.current_project.fps)
 	)
 	frame_timer.start()
@@ -183,15 +183,15 @@ func remove_previews() -> void:
 
 
 func set_file_format_selector() -> void:
-	animation_options_multiple_animations_directories.visible = false
+	multiple_animations_directories.visible = false
 	match Export.animation_type:
 		Export.AnimationType.MULTIPLE_FILES:
 			Export.file_format = Export.FileFormat.PNG
 			file_file_format.selected = Export.FileFormat.PNG
 			frame_timer.stop()
 			animation_options_animation_options.hide()
-			animation_options_multiple_animations_directories.pressed = Export.new_dir_for_each_frame_tag
-			animation_options_multiple_animations_directories.visible = true
+			multiple_animations_directories.pressed = Export.new_dir_for_each_frame_tag
+			multiple_animations_directories.visible = true
 		Export.AnimationType.ANIMATED:
 			Export.file_format = Export.FileFormat.GIF
 			file_file_format.selected = Export.FileFormat.GIF
@@ -200,12 +200,12 @@ func set_file_format_selector() -> void:
 
 func create_frame_tag_list() -> void:
 	# Clear existing tag list from entry if it exists
-	spritesheet_options_frames.clear()
-	spritesheet_options_frames.add_item("All Frames", 0)  # Re-add removed 'All Frames' item
+	spritesheet_frames.clear()
+	spritesheet_frames.add_item("All Frames", 0)  # Re-add removed 'All Frames' item
 
 	# Repopulate list with current tag list
 	for item in Global.current_project.animation_tags:
-		spritesheet_options_frames.add_item(item.name)
+		spritesheet_frames.add_item(item.name)
 
 
 func open_path_validation_alert_popup() -> void:
@@ -273,10 +273,10 @@ func _on_Frame_value_changed(value: float) -> void:
 func _on_Orientation_item_selected(id: int) -> void:
 	Export.orientation = id
 	if Export.orientation == Export.Orientation.ROWS:
-		spritesheet_options_lines_count_label.text = "Columns:"
+		spritesheet_lines_count_label.text = "Columns:"
 	else:
-		spritesheet_options_lines_count_label.text = "Rows:"
-	spritesheet_options_lines_count.value = Export.frames_divided_by_spritesheet_lines()
+		spritesheet_lines_count_label.text = "Rows:"
+	spritesheet_lines_count.value = Export.frames_divided_by_spritesheet_lines()
 	Export.process_spritesheet()
 	set_preview()
 
@@ -297,11 +297,11 @@ func _on_Direction_item_selected(id: int) -> void:
 	Export.direction = id
 	match id:
 		Export.AnimationDirection.FORWARD:
-			animated_preview_current_frame = 0
+			preview_current_frame = 0
 		Export.AnimationDirection.BACKWARDS:
-			animated_preview_current_frame = Export.processed_images.size() - 1
+			preview_current_frame = Export.processed_images.size() - 1
 		Export.AnimationDirection.PING_PONG:
-			animated_preview_current_frame = 0
+			preview_current_frame = 0
 			pingpong_direction = Export.AnimationDirection.FORWARD
 
 
@@ -365,31 +365,31 @@ func _on_FileExistsAlert_custom_action(action: String) -> void:
 
 
 func _on_FrameTimer_timeout() -> void:
-	$VBoxContainer/PreviewPanel/PreviewScroll/Previews/PreviewContainer/Preview.texture = animated_preview_frames[animated_preview_current_frame]
+	previews.get_node("PreviewContainer/Preview").texture = preview_frames[preview_current_frame]
 
 	match Export.direction:
 		Export.AnimationDirection.FORWARD:
-			if animated_preview_current_frame == animated_preview_frames.size() - 1:
-				animated_preview_current_frame = 0
+			if preview_current_frame == preview_frames.size() - 1:
+				preview_current_frame = 0
 			else:
-				animated_preview_current_frame += 1
+				preview_current_frame += 1
 			frame_timer.wait_time = (
 				Global.current_project.frames[(
-					(animated_preview_current_frame - 1)
-					% (animated_preview_frames.size())
+					(preview_current_frame - 1)
+					% (preview_frames.size())
 				)].duration
 				* (1 / Global.current_project.fps)
 			)
 			frame_timer.start()
 		Export.AnimationDirection.BACKWARDS:
-			if animated_preview_current_frame == 0:
-				animated_preview_current_frame = Export.processed_images.size() - 1
+			if preview_current_frame == 0:
+				preview_current_frame = Export.processed_images.size() - 1
 			else:
-				animated_preview_current_frame -= 1
+				preview_current_frame -= 1
 			frame_timer.wait_time = (
 				Global.current_project.frames[(
-					(animated_preview_current_frame + 1)
-					% (animated_preview_frames.size())
+					(preview_current_frame + 1)
+					% (preview_frames.size())
 				)].duration
 				* (1 / Global.current_project.fps)
 			)
@@ -397,33 +397,33 @@ func _on_FrameTimer_timeout() -> void:
 		Export.AnimationDirection.PING_PONG:
 			match pingpong_direction:
 				Export.AnimationDirection.FORWARD:
-					if animated_preview_current_frame == animated_preview_frames.size() - 1:
+					if preview_current_frame == preview_frames.size() - 1:
 						pingpong_direction = Export.AnimationDirection.BACKWARDS
-						animated_preview_current_frame -= 1
-						if animated_preview_current_frame <= 0:
-							animated_preview_current_frame = 0
+						preview_current_frame -= 1
+						if preview_current_frame <= 0:
+							preview_current_frame = 0
 					else:
-						animated_preview_current_frame += 1
+						preview_current_frame += 1
 					frame_timer.wait_time = (
 						Global.current_project.frames[(
-							(animated_preview_current_frame - 1)
-							% (animated_preview_frames.size())
+							(preview_current_frame - 1)
+							% (preview_frames.size())
 						)].duration
 						* (1 / Global.current_project.fps)
 					)
 					frame_timer.start()
 				Export.AnimationDirection.BACKWARDS:
-					if animated_preview_current_frame == 0:
-						animated_preview_current_frame += 1
-						if animated_preview_current_frame >= animated_preview_frames.size() - 1:
-							animated_preview_current_frame = 0
+					if preview_current_frame == 0:
+						preview_current_frame += 1
+						if preview_current_frame >= preview_frames.size() - 1:
+							preview_current_frame = 0
 						pingpong_direction = Export.AnimationDirection.FORWARD
 					else:
-						animated_preview_current_frame -= 1
+						preview_current_frame -= 1
 					frame_timer.wait_time = (
 						Global.current_project.frames[(
-							(animated_preview_current_frame + 1)
-							% (animated_preview_frames.size())
+							(preview_current_frame + 1)
+							% (preview_frames.size())
 						)].duration
 						* (1 / Global.current_project.fps)
 					)
@@ -442,5 +442,5 @@ func _on_Frames_item_selected(id: int) -> void:
 	Export.frame_current_tag = id
 	Export.process_spritesheet()
 	set_preview()
-	spritesheet_options_lines_count.max_value = Export.number_of_frames
-	spritesheet_options_lines_count.value = Export.lines_count
+	spritesheet_lines_count.max_value = Export.number_of_frames
+	spritesheet_lines_count.value = Export.lines_count

@@ -50,7 +50,7 @@ onready var translators: Tree = $AboutUI/Credits/Translators/TranslatorTree
 
 onready var license_text: TextEdit = $AboutUI/Credits/Licenses/LicenseText
 
-onready var slogan_label: Label = $AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/PixeloramaSlogan
+onready var slogan: Label = $AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/PixeloramaSlogan
 onready var copyright_label: Label = $AboutUI/Copyright
 
 onready var latin_font_italic = preload("res://assets/fonts/Roboto-Italic.tres")
@@ -71,10 +71,10 @@ func _on_AboutDialog_about_to_show() -> void:
 	window_title = tr("About Pixelorama") + " " + Global.current_version
 
 	if Global.is_cjk(TranslationServer.get_locale()):
-		slogan_label.add_font_override("font", cjk_font)
+		slogan.add_font_override("font", cjk_font)
 		copyright_label.add_font_override("font", cjk_font_small)
 	else:
-		slogan_label.add_font_override("font", latin_font_italic)
+		slogan.add_font_override("font", latin_font_italic)
 		copyright_label.add_font_override("font", latin_font_small)
 
 	var groups_root := groups.create_item()

@@ -77,12 +77,13 @@ func change_theme(id: int) -> void:
 	Global.control.theme.default_font = font
 	Global.default_clear_color = main_theme.get_stylebox("panel", "PanelContainer").bg_color
 	VisualServer.set_default_clear_color(Color(Global.default_clear_color))
-	if Global.control.alternate_transparent_background:  # Also change color of alternate_transparent_background
+	if Global.control.alternate_transparent_background:
+		# Also change color of alternate_transparent_background
 		var new_color = Global.default_clear_color
 		new_color.a = Global.control.alternate_transparent_background.color.a
 		Global.control.alternate_transparent_background.color = new_color
 
-	(Global.animation_timeline.get_stylebox("panel", "Panel") as StyleBoxFlat).bg_color = main_theme.get_stylebox(
+	Global.animation_timeline.get_stylebox("panel", "Panel").bg_color = main_theme.get_stylebox(
 		"panel", "Panel"
 	).bg_color
 	var fake_vsplit_grabber: TextureRect = Global.animation_timeline.find_node(
@@ -93,14 +94,15 @@ func change_theme(id: int) -> void:
 	# Theming for left tools panel
 	var fake_hsplit_grabber: TextureRect = Global.tool_panel.get_node("FakeHSplitGrabber")
 	fake_hsplit_grabber.texture = main_theme.get_icon("grabber", "HSplitContainer")
-	(Global.tool_panel.get_stylebox("panel", "Panel") as StyleBoxFlat).bg_color = main_theme.get_stylebox(
+	Global.tool_panel.get_stylebox("panel", "Panel").bg_color = main_theme.get_stylebox(
 		"panel", "Panel"
 	).bg_color
 
-	var layer_button_panel_container: PanelContainer = Global.animation_timeline.find_node(
+	var layer_button_pcont: PanelContainer = Global.animation_timeline.find_node(
 		"LayerButtonPanelContainer"
 	)
-	(layer_button_panel_container.get_stylebox("panel", "PanelContainer") as StyleBoxFlat).bg_color = Global.default_clear_color
+	var lbpc_stylebox: StyleBoxFlat = layer_button_pcont.get_stylebox("panel", "PanelContainer")
+	lbpc_stylebox.bg_color = Global.default_clear_color
 
 	var top_menu_style = main_theme.get_stylebox("TopMenu", "Panel")
 	var ruler_style = main_theme.get_stylebox("Ruler", "Button")

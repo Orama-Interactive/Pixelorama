@@ -8,7 +8,7 @@ var old_input_event: InputEventKey
 var new_input_event: InputEventKey
 
 onready var shortcut_selector_popup = Global.preferences_dialog.get_node("Popups/ShortcutSelector")
-onready var theme_font_color: Color = Global.preferences_dialog.get_node("Popups/ShortcutSelector/EnteredShortcut").get_color(
+onready var theme_font_color: Color = shortcut_selector_popup.get_node("EnteredShortcut").get_color(
 	"font_color"
 )
 

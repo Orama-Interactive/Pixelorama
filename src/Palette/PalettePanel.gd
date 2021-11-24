@@ -116,7 +116,8 @@ func _on_AddColor_gui_input(event: InputEvent) -> void:
 			and (event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT)
 		):
 			# Gets the grid index that corresponds to the top left of current grid window
-			# Color will be added at the start of the currently scrolled part of palette - not the absolute beginning of palette
+			# Color will be added at the start of the currently scrolled part of palette
+			# - not the absolute beginning of palette
 			var start_index = palette_grid.convert_grid_index_to_palette_index(0)
 			Palettes.current_palette_add_color(event.button_index, start_index)
 			redraw_current_palette()
@@ -156,7 +157,7 @@ func _on_EditPaletteDialog_saved(name: String, comment: String, width: int, heig
 	redraw_current_palette()
 
 
-func _on_PaletteGrid_swatch_double_clicked(_mouse_button: int, index: int, click_position: Vector2) -> void:
+func _on_PaletteGrid_swatch_double_clicked(_mb: int, index: int, click_position: Vector2) -> void:
 	var color = Palettes.current_palette_get_color(index)
 	edited_swatch_index = index
 	hidden_color_picker.color = color

@@ -166,18 +166,18 @@ var preferences = [
 ]
 
 var selected_item := 0
+var restore_default_button_tcsn = preload("res://src/Preferences/RestoreDefaultButton.tscn")
 
 onready var list: ItemList = $HSplitContainer/List
 onready var right_side: VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
-onready var autosave_interval: SpinBox = $HSplitContainer/ScrollContainer/VBoxContainer/Backup/AutosaveContainer/AutosaveInterval
-onready var restore_default_button_scene = preload("res://src/Preferences/RestoreDefaultButton.tscn")
-onready var shrink_label: Label = $HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer/ShrinkLabel
-onready var themes: BoxContainer = $"HSplitContainer/ScrollContainer/VBoxContainer/Interface/Themes"
-onready var idle_fps_spinbox: SpinBox = $HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer/IdleFPS
+onready var autosave_interval: SpinBox = right_side.get_node("Backup/AutosaveContainer/AutosaveInterval")
+onready var shrink_label: Label = right_side.get_node("Interface/ShrinkContainer/ShrinkLabel")
+onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
+onready var idle_fps_spinbox: SpinBox = right_side.get_node("Performance/PerformanceContainer/IdleFPS")
 
 
 func _ready() -> void:
-	# Replace OK with Close since preference changes are being applied immediately, not after OK confirmation
+	# Replace OK since preference changes are being applied immediately, not after OK confirmation
 	get_ok().text = tr("Close")
 
 	if OS.get_name() == "HTML5":
@@ -189,7 +189,7 @@ func _ready() -> void:
 		var node = right_side.get_node(pref[1])
 		var node_position = node.get_index()
 
-		var restore_default_button: BaseButton = restore_default_button_scene.instance()
+		var restore_default_button: BaseButton = restore_default_button_tcsn.instance()
 		restore_default_button.setting_name = pref[0]
 		restore_default_button.value_type = pref[2]
 		restore_default_button.default_value = pref[3]

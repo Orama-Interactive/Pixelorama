@@ -66,10 +66,13 @@ func cel_size_changed(value: int) -> void:
 	for tag_c in Global.tag_container.get_children():
 		var tag_base_size = cel_size + 4
 		var tag: AnimationTag = tag_c.tag
-		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + 1  # Added 1 to answer to get starting position of next cel
+		# Added 1 to answer to get starting position of next cel
+		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + 1
 		var tag_size: int = tag.to - tag.from
-		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 4  # We dont need the 4 pixels at the end of last cel
-		tag_c.rect_size.x = (tag_size + 1) * tag_base_size - 4  # We dont need the 4 pixels at the end of last cel
+		# We dont need the 4 pixels at the end of last cel
+		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 4
+		# We dont need the 4 pixels at the end of last cel
+		tag_c.rect_size.x = (tag_size + 1) * tag_base_size - 4
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
 
@@ -378,7 +381,7 @@ func _on_AnimationTimer_timeout() -> void:
 				Global.current_project.frames[Global.current_project.current_frame].duration
 				* (1 / fps)
 			)
-			Global.animation_timer.start()  # Change the frame, change the wait time and start a cycle, this is the best way to do it
+			Global.animation_timer.start()  # Change the frame, change the wait time and start a cycle
 		else:
 			match animation_loop:
 				0:  # No loop
@@ -458,7 +461,7 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 		Global.play_forward.connect("toggled", self, "_on_PlayForward_toggled")
 
 	if play:
-		Global.animation_timer.set_one_shot(true)  # The wait_time can't change correctly if it is playing
+		Global.animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
 		var duration: float = Global.current_project.frames[Global.current_project.current_frame].duration
 		var fps = Global.current_project.fps
 		Global.animation_timer.wait_time = duration * (1 / fps)
@@ -725,7 +728,8 @@ func _on_MergeDownLayer_pressed() -> void:
 
 
 func _on_OpacitySlider_value_changed(value) -> void:
-	var cel: Cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer]
+	var current_frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
+	var cel: Cel = current_frame.cels[Global.current_project.current_layer]
 	cel.opacity = value / 100
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_spinbox.value = value

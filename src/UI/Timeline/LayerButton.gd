@@ -109,16 +109,14 @@ func _on_LockButton_pressed() -> void:
 
 func _on_LinkButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
-	Global.current_project.layers[layer].new_cels_linked = !Global.current_project.layers[layer].new_cels_linked
-	if (
-		Global.current_project.layers[layer].new_cels_linked
-		&& !Global.current_project.layers[layer].linked_cels
-	):
+	var layer_class: Layer = Global.current_project.layers[layer]
+	layer_class.new_cels_linked = !layer_class.new_cels_linked
+	if layer_class.new_cels_linked && !layer_class.linked_cels:
 		# If button is pressed and there are no linked cels in the layer
-		Global.current_project.layers[layer].linked_cels.append(
+		layer_class.linked_cels.append(
 			Global.current_project.frames[Global.current_project.current_frame]
 		)
-		Global.current_project.layers[layer].frame_container.get_child(Global.current_project.current_frame)._ready()
+		layer_class.frame_container.get_child(Global.current_project.current_frame)._ready()
 
 
 func get_drag_data(_position) -> Array:

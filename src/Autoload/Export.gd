@@ -166,7 +166,8 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 			else false
 		)
 		var export_path = create_export_path(multiple_files, i + 1)
-		# If user want to create new directory for each animation tag then check if directories exist and create them if not
+		# If user want to create new directory for each animation tag then check
+		# if directories exist and create them if not
 		if multiple_files and new_dir_for_each_frame_tag:
 			var frame_tag_directory := Directory.new()
 			if not frame_tag_directory.dir_exists(export_path.get_base_dir()):
@@ -231,7 +232,8 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 
 func export_gif(args: Dictionary) -> void:
 	# Export progress popup
-	export_progress_fraction = 100 / processed_images.size()  # one fraction per each frame, one fraction for write to disk
+	# One fraction per each frame, one fraction for write to disk
+	export_progress_fraction = 100 / processed_images.size()
 	export_progress = 0.0
 	args["export_dialog"].set_export_progress_bar(export_progress)
 	args["export_dialog"].toggle_export_progress_popup(true)
@@ -288,9 +290,9 @@ func export_gif(args: Dictionary) -> void:
 	Global.notification_label("File(s) exported")
 
 
-func write_frame_to_gif(image: Image, wait_time: float, exporter: Reference, export_dialog: Node) -> void:
+func write_frame_to_gif(image: Image, wait_time: float, exporter: Reference, dialog: Node) -> void:
 	exporter.add_frame(image, wait_time, MedianCutQuantization)
-	increase_export_progress(export_dialog)
+	increase_export_progress(dialog)
 
 
 func increase_export_progress(export_dialog: Node) -> void:

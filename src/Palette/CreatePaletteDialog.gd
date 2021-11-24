@@ -105,7 +105,10 @@ func _on_Preset_item_selected(index: int) -> void:
 				# Copying palette presets grid size
 				width_input.editable = false
 				height_input.editable = false
-		Palettes.NewPalettePresetType.FROM_CURRENT_SPRITE, Palettes.NewPalettePresetType.FROM_CURRENT_SELECTION:
+		Palettes.NewPalettePresetType.FROM_CURRENT_SPRITE:
+			colors_settings.show()
+			set_default_values()
+		Palettes.NewPalettePresetType.FROM_CURRENT_SELECTION:
 			colors_settings.show()
 			set_default_values()
 
