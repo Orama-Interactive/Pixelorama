@@ -400,7 +400,11 @@ func _on_OpenSprite_file_selected(path: String) -> void:
 
 
 func _on_SaveSprite_file_selected(path: String) -> void:
-	var zstd = Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").pressed
+	save_project(path)
+
+
+func save_project(path: String) -> void:
+	var zstd: bool = Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").pressed
 	OpenSave.save_pxo_file(path, false, zstd)
 	Global.open_sprites_dialog.current_dir = path.get_base_dir()
 	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())

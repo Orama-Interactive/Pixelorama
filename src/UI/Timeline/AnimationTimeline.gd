@@ -125,6 +125,10 @@ func add_frame() -> void:
 
 
 func _on_DeleteFrame_pressed(frame := -1) -> void:
+	delete_frame(frame)
+
+
+func delete_frame(frame := -1) -> void:
 	if Global.current_project.frames.size() == 1:
 		return
 	if frame == -1:
@@ -212,6 +216,10 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 
 
 func _on_CopyFrame_pressed(frame := -1) -> void:
+	copy_frame(frame)
+
+
+func copy_frame(frame := -1) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	if frame == -1:
 		frame = Global.current_project.current_frame

@@ -94,11 +94,15 @@ func _draw() -> void:
 
 
 func _on_HorizontalRuler_pressed() -> void:
+	create_guide()
+
+
+func create_guide() -> void:
 	if !Global.show_guides:
 		return
 	var mouse_pos := get_local_mouse_position()
 	if mouse_pos.x < RULER_WIDTH:  # For double guides
-		Global.vertical_ruler._on_VerticalRuler_pressed()
+		Global.vertical_ruler.create_guide()
 	var guide := Guide.new()
 	if abs(Global.camera.rotation_degrees) < 45 or abs(Global.camera.rotation_degrees) > 135:
 		guide.type = guide.Types.HORIZONTAL

@@ -93,5 +93,5 @@ func _on_Language_pressed(index: int) -> void:
 
 	# Update Translations
 	Global.update_hint_tooltips()
-	Global.preferences_dialog._on_PreferencesDialog_popup_hide()
-	Global.preferences_dialog._on_PreferencesDialog_about_to_show(true)
+	Global.preferences_dialog.list.clear()
+	Global.preferences_dialog.add_tabs(true)

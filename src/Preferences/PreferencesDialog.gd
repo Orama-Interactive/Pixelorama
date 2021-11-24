@@ -322,7 +322,7 @@ func preference_update(prop: String) -> void:
 			"checker_follow_scale"
 		]
 	):
-		Global.transparent_checker._ready()
+		Global.transparent_checker.update_rect()
 
 	if prop in ["guide_color"]:
 		for guide in Global.canvas.get_children():
@@ -378,7 +378,11 @@ func disable_restore_default_button(button: BaseButton, disable: bool) -> void:
 		button.hint_tooltip = "Restore default value"
 
 
-func _on_PreferencesDialog_about_to_show(changed_language := false) -> void:
+func _on_PreferencesDialog_about_to_show() -> void:
+	add_tabs(false)
+
+
+func add_tabs(changed_language := false) -> void:
 	if OS.get_name() != "HTML5":
 		list.add_item("  " + tr("Startup"))
 	list.add_item("  " + tr("Language"))

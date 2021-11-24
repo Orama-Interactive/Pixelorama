@@ -116,7 +116,9 @@ func _on_LinkButton_pressed() -> void:
 		layer_class.linked_cels.append(
 			Global.current_project.frames[Global.current_project.current_frame]
 		)
-		layer_class.frame_container.get_child(Global.current_project.current_frame)._ready()
+		layer_class.frame_container.get_child(Global.current_project.current_frame).button_setup()
+
+	Global.current_project.layers = Global.current_project.layers # Call the setter
 
 
 func get_drag_data(_position) -> Array:

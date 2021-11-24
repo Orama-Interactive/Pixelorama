@@ -101,7 +101,7 @@ func camera_zoom() -> void:
 		camera.fit_to_frame(Global.current_project.size)
 		camera.save_values_to_project()
 
-	Global.transparent_checker._ready()  # To update the rect size
+	Global.transparent_checker.update_rect()
 
 
 func new_empty_frame(

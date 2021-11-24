@@ -298,10 +298,9 @@ func open_project_file() -> void:
 
 
 func on_open_last_project_file_menu_option_pressed() -> void:
-	# Check if last project path is set and if yes then open
 	if Global.config_cache.has_section_key("preferences", "last_project_path"):
 		Global.control.load_last_project()
-	else:  # if not then warn user that he didn't edit any project yet
+	else:
 		Global.error_dialog.set_text("You haven't saved or opened any project in Pixelorama yet!")
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
@@ -321,7 +320,7 @@ func save_project_file() -> void:
 			Global.save_sprites_dialog.current_file = Global.current_project.name
 		Global.dialog_open(true)
 	else:
-		Global.control._on_SaveSprite_file_selected(path)
+		Global.control.save_project(path)
 
 
 func save_project_file_as() -> void:
@@ -481,7 +480,7 @@ func toggle_fullscreen() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
 	view_menu.set_item_checked(ViewMenuId.FULLSCREEN_MODE, OS.window_fullscreen)
 	if OS.window_fullscreen:  # If window is fullscreen then reset transparency
-		window_opacity_dialog._on_value_changed(1.0)
+		window_opacity_dialog.set_window_opacity(1.0)
 
 
 func image_menu_id_pressed(id: int) -> void:

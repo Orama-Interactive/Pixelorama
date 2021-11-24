@@ -201,7 +201,7 @@ func change_project() -> void:
 
 	Global.canvas.update()
 	Global.canvas.grid.update()
-	Global.transparent_checker._ready()
+	Global.transparent_checker.update_rect()
 	Global.animation_timeline.fps_spinbox.value = fps
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
@@ -557,7 +557,7 @@ func frame_changed(value: int) -> void:
 		Global.layer_opacity_spinbox.value = cel_opacity * 100
 
 	Global.canvas.update()
-	Global.transparent_checker._ready()  # To update the rect size
+	Global.transparent_checker.update_rect()
 
 
 func layer_changed(value: int) -> void:

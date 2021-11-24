@@ -2,11 +2,15 @@ extends ColorRect
 
 
 func _ready() -> void:
+	update_rect()
+
+
+func update_rect() -> void:
 	rect_size = Global.current_project.size
 	if self == Global.transparent_checker:
 		fit_rect(Global.current_project.get_tile_mode_rect())
-		Global.second_viewport.get_node("Viewport/TransparentChecker")._ready()
-		Global.small_preview_viewport.get_node("Viewport/TransparentChecker")._ready()
+		Global.second_viewport.get_node("Viewport/TransparentChecker").update_rect()
+		Global.small_preview_viewport.get_node("Viewport/TransparentChecker").update_rect()
 	material.set_shader_param("size", Global.checker_size)
 	material.set_shader_param("color1", Global.checker_color_1)
 	material.set_shader_param("color2", Global.checker_color_2)

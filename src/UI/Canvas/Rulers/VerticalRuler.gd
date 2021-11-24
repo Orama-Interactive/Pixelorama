@@ -91,6 +91,10 @@ func _draw() -> void:
 
 
 func _on_VerticalRuler_pressed() -> void:
+	create_guide()
+
+
+func create_guide() -> void:
 	if !Global.show_guides:
 		return
 	var guide := Guide.new()

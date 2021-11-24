@@ -10,6 +10,10 @@ func _on_WindowOpacityDialog_about_to_show() -> void:
 
 
 func _on_value_changed(value: float) -> void:
+	set_window_opacity(value)
+
+
+func set_window_opacity(value: float) -> void:
 	if OS.window_fullscreen:
 		value = 100.0
 	hslider.value = value

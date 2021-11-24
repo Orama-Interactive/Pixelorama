@@ -11,6 +11,10 @@ onready var popup_menu: PopupMenu = $PopupMenu
 
 
 func _ready() -> void:
+	button_setup()
+
+
+func button_setup() -> void:
 	rect_min_size.x = Global.animation_timeline.cel_size
 	rect_min_size.y = Global.animation_timeline.cel_size
 
