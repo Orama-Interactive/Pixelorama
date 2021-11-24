@@ -166,7 +166,7 @@ msgstr ""
 msgid "Tile Mode"
 msgstr ""
 
-msgid "Window Transparency"
+msgid "Window Opacity"
 msgstr ""
 
 msgid "Panel Layout"

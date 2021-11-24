@@ -30,7 +30,7 @@ func fit_rect(rect : Rect2) -> void:
 
 func transparency(value :float) -> void:
 	# first make viewport transparent then background and then viewport
-	if value == 1:
+	if value == 1.0:
 		get_parent().transparent_bg = false
 		get_tree().get_root().set_transparent_background(false)
 	else:

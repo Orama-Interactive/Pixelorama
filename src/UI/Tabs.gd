@@ -1,6 +1,9 @@
 extends Tabs
 
 
+onready var unsaved_changes_dialog : ConfirmationDialog = Global.control.find_node("UnsavedCanvasDialog")
+
+
 func _on_Tabs_tab_changed(tab : int) -> void:
 	Global.current_project_index = tab
 
@@ -10,9 +13,9 @@ func _on_Tabs_tab_close(tab : int) -> void:
 		return
 
 	if Global.projects[tab].has_changed:
-		if !Global.unsaved_changes_dialog.is_connected("confirmed", self, "delete_tab"):
-			Global.unsaved_changes_dialog.connect("confirmed", self, "delete_tab", [tab])
-		Global.unsaved_changes_dialog.popup_centered()
+		if !unsaved_changes_dialog.is_connected("confirmed", self, "delete_tab"):
+			unsaved_changes_dialog.connect("confirmed", self, "delete_tab", [tab])
+		unsaved_changes_dialog.popup_centered()
 		Global.dialog_open(true)
 	else:
 		delete_tab(tab)
@@ -47,5 +50,5 @@ func delete_tab(tab : int) -> void:
 	else:
 		if tab < Global.current_project_index:
 			Global.current_project_index -= 1
-	if Global.unsaved_changes_dialog.is_connected("confirmed", self, "delete_tab"):
-		Global.unsaved_changes_dialog.disconnect("confirmed", self, "delete_tab")
+	if unsaved_changes_dialog.is_connected("confirmed", self, "delete_tab"):
+		unsaved_changes_dialog.disconnect("confirmed", self, "delete_tab")

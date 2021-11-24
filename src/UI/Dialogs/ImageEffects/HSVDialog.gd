@@ -15,7 +15,7 @@ var shaderPath : String = "res://src/Shaders/HSV.shader"
 
 var live_preview :bool = true
 var confirmed: bool = false
- 
+
 func _about_to_show():
 	reset()
 	var sm : ShaderMaterial = ShaderMaterial.new()

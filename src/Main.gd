@@ -1,14 +1,15 @@
 extends Control
 
+
 var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
-
 var tallscreen_is_active = false
+var alternate_transparent_background := ColorRect.new()
+var cursor_image = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI
 onready var tools_and_canvas : HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas
-
 onready var tallscreen_hsplit_container : HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas/CanvasAndTimeline/TallscreenHSplitContainer
 onready var bottom_panel : VSplitContainer = tallscreen_hsplit_container.get_node("BottomPanel")
 onready var right_panel := $MenuAndUI/UI/RightPanel
@@ -17,15 +18,14 @@ onready var color_and_tool_options := $MenuAndUI/UI/RightPanel/MarginContainer/P
 onready var canvas_preview_container := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/CanvasPreviewContainer
 onready var tool_panel := $MenuAndUI/UI/ToolsAndCanvas/ToolPanel
 onready var scroll_container := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
+onready var quit_dialog : ConfirmationDialog = find_node("QuitDialog")
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var alternate_transparent_background := ColorRect.new()
+	randomize()
 	add_child(alternate_transparent_background)
 	move_child(alternate_transparent_background,0)
 	alternate_transparent_background.visible = false
-	alternate_transparent_background.name = "AlternateTransparentBackground"
 	alternate_transparent_background.anchor_left = ANCHOR_BEGIN
 	alternate_transparent_background.anchor_top = ANCHOR_BEGIN
 	alternate_transparent_background.anchor_right = ANCHOR_END
@@ -36,6 +36,10 @@ func _ready() -> void:
 	handle_resize()
 	get_tree().get_root().connect("size_changed", self, "handle_resize")
 
+	if OS.get_name() == "OSX":
+		use_osx_shortcuts()
+
+	Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
 	Global.current_project.layers[0].name = tr("Layer") + " 0"
@@ -58,6 +62,11 @@ func _ready() -> void:
 	if OS.has_feature("clickable"):
 		Global.open_sprites_dialog.current_dir = OS.get_user_data_dir()
 		Global.save_sprites_dialog.current_dir = OS.get_user_data_dir()
+
+	var i := 0
+	for camera in Global.cameras:
+		camera.index = i
+		i += 1
 
 	var zstd_checkbox := CheckBox.new()
 	zstd_checkbox.name = "ZSTDCompression"
@@ -188,9 +197,7 @@ func reparent_node_to(node : Node, dest : Node, pos : int) -> bool:
 
 func _input(event : InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
-	Global.left_cursor.texture = Global.left_cursor_tool_texture
 	Global.right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
-	Global.right_cursor.texture = Global.right_cursor_tool_texture
 
 	if event is InputEventKey and (event.scancode == KEY_ENTER or event.scancode == KEY_KP_ENTER):
 		if get_focus_owner() is LineEdit:
@@ -242,7 +249,7 @@ func show_splash_screen() -> void:
 		Global.config_cache.set_value("preferences", "startup", true)
 
 	if Global.config_cache.get_value("preferences", "startup"):
-		if OS.window_size != Vector2(1280, 720):
+		if OS.get_name() != "HTML5" and OS.window_size != Vector2(1280, 720):
 			# Wait for the window to adjust itself, so the popup is correctly centered
 			yield(get_tree(), "screen_resized")
 
@@ -379,9 +386,9 @@ func _can_draw_true() -> void:
 
 
 func show_quit_dialog() -> void:
-	if !Global.quit_dialog.visible:
+	if !quit_dialog.visible:
 		if !Global.current_project.has_changed:
-			Global.quit_dialog.call_deferred("popup_centered")
+			quit_dialog.call_deferred("popup_centered")
 		else:
 			Global.quit_and_save_dialog.call_deferred("popup_centered")
 
@@ -392,7 +399,7 @@ func _on_QuitAndSaveDialog_custom_action(action : String) -> void:
 	if action == "Save":
 		is_quitting_on_save = true
 		Global.save_sprites_dialog.popup_centered()
-		Global.quit_dialog.hide()
+		quit_dialog.hide()
 		Global.dialog_open(true)
 
 
@@ -424,3 +431,32 @@ func _on_BackupConfirmation_delete(project_paths : Array, backup_paths : Array) 
 
 func _on_BackupConfirmation_popup_hide() -> void:
 	OpenSave.autosave_timer.start()
+
+
+func use_osx_shortcuts() -> void:
+	var inputmap := InputMap
+
+	for action in inputmap.get_actions():
+		var event : InputEvent = inputmap.get_action_list(action)[0]
+
+		if event.is_action("show_pixel_grid"):
+			event.shift = true
+
+		if event.control:
+			event.control = false
+			event.command = true
+
+
+func _exit_tree() -> void:
+	Global.config_cache.set_value("window", "panel_layout", Global.panel_layout)
+	Global.config_cache.set_value("window", "screen", OS.current_screen)
+	Global.config_cache.set_value("window", "maximized", OS.window_maximized || OS.window_fullscreen)
+	Global.config_cache.set_value("window", "position", OS.window_position)
+	Global.config_cache.set_value("window", "size", OS.window_size)
+	Global.config_cache.save("user://cache.ini")
+
+	var i := 0
+	for project in Global.projects:
+		project.undo_redo.free()
+		OpenSave.remove_backup(i)
+		i += 1

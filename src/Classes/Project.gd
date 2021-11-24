@@ -220,7 +220,7 @@ func change_project() -> void:
 		Global.top_menu_container.file_menu.set_item_text(6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
 
 	for j in Global.TileMode.values():
-		Global.tile_mode_submenu.set_item_checked(j, j == tile_mode)
+		Global.top_menu_container.tile_mode_submenu.set_item_checked(j, j == tile_mode)
 
 	# Change selection effect & bounding rectangle
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset
@@ -231,7 +231,7 @@ func change_project() -> void:
 	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
 
 	var i := 0
-	for camera in [Global.camera, Global.camera2, Global.camera_preview]:
+	for camera in Global.cameras:
 		camera.zoom_max = cameras_zoom_max[i]
 		if camera == Global.camera_preview:
 			Global.preview_zoom_slider.disconnect("value_changed", Global.canvas_preview_container, "_on_PreviewZoomSlider_value_changed")

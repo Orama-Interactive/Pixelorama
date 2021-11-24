@@ -4,6 +4,7 @@ extends Button
 var frame := 0
 
 onready var popup_menu : PopupMenu = $PopupMenu
+onready var frame_properties : ConfirmationDialog = Global.control.find_node("FrameProperties")
 
 
 func _ready() -> void:
@@ -67,10 +68,10 @@ func _on_PopupMenu_id_pressed(id : int) -> void:
 		3: # Move Right
 			change_frame_order(1)
 		4: # Frame Properties
-			Global.frame_properties.popup_centered()
+			frame_properties.popup_centered()
 			Global.dialog_open(true)
-			Global.frame_properties.set_frame_label(frame)
-			Global.frame_properties.set_frame_dur(Global.current_project.frames[frame].duration)
+			frame_properties.set_frame_label(frame)
+			frame_properties.set_frame_dur(Global.current_project.frames[frame].duration)
 
 
 func change_frame_order(rate : int) -> void:

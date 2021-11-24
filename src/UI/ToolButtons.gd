@@ -32,11 +32,12 @@ func _ready() -> void:
 
 
 func _input(event : InputEvent) -> void:
-	if not Global.has_focus:
+	if not Global.has_focus or not event is InputEventKey:
 		return
 	for action in ["undo", "redo", "redo_secondary"]:
 		if event.is_action_pressed(action):
 			return
+
 	for t in tools: # Handle tool shortcuts
 		if event.is_action_pressed("right_" + t[1] + "_tool") and !event.control: # Shortcut for right button (with Alt)
 			Tools.assign_tool(t[0].name, BUTTON_RIGHT)

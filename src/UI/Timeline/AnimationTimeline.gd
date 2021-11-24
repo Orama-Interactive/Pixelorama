@@ -1,5 +1,6 @@
 extends Panel
 
+
 var is_animation_running := false
 var animation_loop := 1 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
@@ -13,6 +14,9 @@ var max_cel_size := 144
 var timeline_scroll : ScrollContainer
 var tag_scroll_container : ScrollContainer
 var fps_spinbox : SpinBox
+
+onready var onion_skinning_button : BaseButton = find_node("OnionSkinning")
+onready var loop_animation_button : BaseButton = find_node("LoopAnim")
 
 
 func _ready() -> void:
@@ -218,7 +222,7 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 
 
 func _on_FrameTagButton_pressed() -> void:
-	Global.tag_dialog.popup_centered()
+	find_node("FrameTagDialog").popup_centered()
 
 
 func _on_MoveLeft_pressed() -> void:
@@ -238,7 +242,7 @@ func _on_MoveRight_pressed() -> void:
 func _on_OnionSkinning_pressed() -> void:
 	Global.onion_skinning = !Global.onion_skinning
 	Global.canvas.update()
-	var texture_button : TextureRect = Global.onion_skinning_button.get_child(0)
+	var texture_button : TextureRect = onion_skinning_button.get_child(0)
 	if Global.onion_skinning:
 		Global.change_button_texturerect(texture_button, "onion_skinning.png")
 	else:
@@ -246,24 +250,24 @@ func _on_OnionSkinning_pressed() -> void:
 
 
 func _on_OnionSkinningSettings_pressed() -> void:
-	$OnionSkinningSettings.popup(Rect2(Global.onion_skinning_button.rect_global_position.x - $OnionSkinningSettings.rect_size.x - 16, Global.onion_skinning_button.rect_global_position.y - 106, 136, 126))
+	$OnionSkinningSettings.popup(Rect2(onion_skinning_button.rect_global_position.x - $OnionSkinningSettings.rect_size.x - 16, onion_skinning_button.rect_global_position.y - 106, 136, 126))
 
 
 func _on_LoopAnim_pressed() -> void:
-	var texture_button : TextureRect = Global.loop_animation_button.get_child(0)
+	var texture_button : TextureRect = loop_animation_button.get_child(0)
 	match animation_loop:
 		0: # Make it loop
 			animation_loop = 1
 			Global.change_button_texturerect(texture_button, "loop.png")
-			Global.loop_animation_button.hint_tooltip = "Cycle loop"
+			loop_animation_button.hint_tooltip = "Cycle loop"
 		1: # Make it ping-pong
 			animation_loop = 2
 			Global.change_button_texturerect(texture_button, "loop_pingpong.png")
-			Global.loop_animation_button.hint_tooltip = "Ping-pong loop"
+			loop_animation_button.hint_tooltip = "Ping-pong loop"
 		2: # Make it stop
 			animation_loop = 0
 			Global.change_button_texturerect(texture_button, "loop_none.png")
-			Global.loop_animation_button.hint_tooltip = "No loop"
+			loop_animation_button.hint_tooltip = "No loop"
 
 
 func _on_PlayForward_toggled(button_pressed : bool) -> void:
@@ -563,7 +567,6 @@ func _on_MergeDownLayer_pressed() -> void:
 func _on_OpacitySlider_value_changed(value) -> void:
 	var cel : Cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer]
 	cel.opacity = value / 100
-	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_spinbox.value = value
 	Global.canvas.update()

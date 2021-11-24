@@ -1,10 +1,16 @@
 extends Camera2D
 
 
+enum Cameras {MAIN, SECOND, SMALL}
+enum Direction {UP, DOWN, LEFT, RIGHT}
+
 const low_speed_move_rate := 150.0
 const medium_speed_move_rate := 750.0
 const high_speed_move_rate := 3750.0
 
+# Indices are as in the Direction enum
+# This is the total time the key for that direction has been pressed.
+var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
 var tween : Tween
 var zoom_min := Vector2(0.005, 0.005)
 var zoom_max := Vector2.ONE
@@ -12,6 +18,7 @@ var viewport_container : ViewportContainer
 var transparent_checker : ColorRect
 var mouse_pos := Vector2.ZERO
 var drag := false
+var index := 0
 
 
 func _ready() -> void:
@@ -44,13 +51,13 @@ func rotation_button_pressed() -> void:
 
 
 func rotation_value_changed(value) -> void:
-	if name == "Camera2D":
+	if index == Cameras.MAIN:
 		set_camera_rotation_degrees(-value) # Negative makes going up rotate clockwise
 
 
 func rotation_focus_exited() -> void:
 	if Global.rotation_level_spinbox.value != rotation: #If user pressed enter while editing
-		if name == "Camera2D":
+		if index == Cameras.MAIN:
 			set_camera_rotation_degrees(-Global.rotation_level_spinbox.value) # Negative makes going up rotate clockwise
 	Global.rotation_level_button.visible = true
 	Global.rotation_level_spinbox.visible = false
@@ -66,13 +73,13 @@ func zoom_button_pressed() -> void:
 
 
 func zoom_value_changed(value) -> void:
-	if name == "Camera2D":
+	if index == Cameras.MAIN:
 		zoom_camera_percent(value)
 
 
 func zoom_focus_exited() -> void:
 	if Global.zoom_level_spinbox.value != round(100 / zoom.x): #If user pressed enter while editing
-		if name == "Camera2D":
+		if index == Cameras.MAIN:
 			zoom_camera_percent(Global.zoom_level_spinbox.value)
 	Global.zoom_level_button.visible = true
 	Global.zoom_level_spinbox.visible = false
@@ -103,7 +110,7 @@ func dir_move_zoom_multiplier(press_time : float) -> float:
 
 
 func reset_dir_move_time(direction) -> void:
-	Global.key_move_press_time[direction] = 0.0
+	key_move_press_time[direction] = 0.0
 
 
 const key_move_action_names := ["ui_up", "ui_down", "ui_left", "ui_right"]
@@ -134,18 +141,18 @@ func is_action_direction_released(event: InputEvent) -> bool:
 # if not a direction event return null
 func get_action_direction(event: InputEvent):  # -> Optional[Direction]
 	if event.is_action("ui_up"):
-		return Global.Direction.UP
+		return Direction.UP
 	elif event.is_action("ui_down"):
-		return Global.Direction.DOWN
+		return Direction.DOWN
 	elif event.is_action("ui_left"):
-		return Global.Direction.LEFT
+		return Direction.LEFT
 	elif event.is_action("ui_right"):
-		return Global.Direction.RIGHT
+		return Direction.RIGHT
 	return null
 
 
 # Holds sign multipliers for the given directions nyaa
-# (per the indices in Global.gd defined by Direction)
+# (per the indices defined by Direction)
 # UP, DOWN, LEFT, RIGHT in that order
 const directional_sign_multipliers := [
 	Vector2(0.0, -1.0),
@@ -163,8 +170,8 @@ func process_direction_action_pressed(event: InputEvent) -> void:
 		return
 	var increment := get_process_delta_time()
 	# Count the total time we've been doing this ^.^
-	Global.key_move_press_time[dir] += increment
-	var this_direction_press_time : float = Global.key_move_press_time[dir]
+	key_move_press_time[dir] += increment
+	var this_direction_press_time : float = key_move_press_time[dir]
 	var move_speed := dir_move_zoom_multiplier(this_direction_press_time)
 	offset = offset + move_speed * increment * directional_sign_multipliers[dir].rotated(rotation) * zoom
 	update_rulers()
@@ -180,44 +187,49 @@ func process_direction_action_released(event: InputEvent) -> void:
 
 
 func _input(event : InputEvent) -> void:
+	if !Global.can_draw:
+		drag = false
+		return
 	mouse_pos = viewport_container.get_local_mouse_position()
 	var viewport_size := viewport_container.rect_size
+	if !Rect2(Vector2.ZERO, viewport_size).has_point(mouse_pos):
+		drag = false
+		return
+
 	if event.is_action_pressed("middle_mouse") || event.is_action_pressed("space"):
 		drag = true
 	elif event.is_action_released("middle_mouse") || event.is_action_released("space"):
 		drag = false
-
-	if Global.can_draw && Rect2(Vector2.ZERO, viewport_size).has_point(mouse_pos):
-		if event.is_action_pressed("zoom_in"): # Wheel Up Event
-			zoom_camera(-1)
-		elif event.is_action_pressed("zoom_out"): # Wheel Down Event
+	elif event.is_action_pressed("zoom_in"): # Wheel Up Event
+		zoom_camera(-1)
+	elif event.is_action_pressed("zoom_out"): # Wheel Down Event
+		zoom_camera(1)
+	elif event is InputEventMagnifyGesture: # Zoom Gesture on a Laptop touchpad
+		if event.factor < 1:
 			zoom_camera(1)
-		elif event is InputEventMagnifyGesture: # Zoom Gesture on a Laptop touchpad
-			if event.factor < 1:
-				zoom_camera(1)
-			else:
-				zoom_camera(-1)
-		elif event is InputEventPanGesture: # Pan Gesture on a Latop touchpad
-			offset = offset + event.delta.rotated(rotation) * zoom * 7 # for moving the canvas
-			if OS.get_name() == "Android":
-				return
-			offset = offset + event.delta * zoom * 7 # for moving the canvas
-		elif event is InputEventMouseMotion && drag:
-			offset = offset - event.relative.rotated(rotation) * zoom
-			update_transparent_checker_offset()
-			update_rulers()
-		elif is_action_direction_pressed(event):
+		else:
+			zoom_camera(-1)
+	elif event is InputEventPanGesture and OS.get_name() != "Android": # Pan Gesture on a Latop touchpad
+		offset = offset + event.delta.rotated(rotation) * zoom * 7 # for moving the canvas
+	elif event is InputEventMouseMotion && drag:
+		offset = offset - event.relative.rotated(rotation) * zoom
+		update_transparent_checker_offset()
+		update_rulers()
+	elif event is InputEventKey:
+		if is_action_direction_pressed(event):
 			process_direction_action_pressed(event)
 		elif is_action_direction_released(event):
 			process_direction_action_released(event)
 
-		save_values_to_project()
+	save_values_to_project()
+
 
 # Rotate Camera
 func rotate_camera_around_point(degrees: float, point: Vector2) -> void:
 	offset = (offset - point).rotated(deg2rad(degrees)) + point
 	rotation_degrees = wrapf(rotation_degrees + degrees, -180, 180)
 	rotation_changed()
+
 
 func set_camera_rotation_degrees(degrees: float) -> void:
 	var difference :=  degrees - rotation_degrees
@@ -226,8 +238,9 @@ func set_camera_rotation_degrees(degrees: float) -> void:
 	rotation_degrees = wrapf(degrees, -180, 180)
 	rotation_changed()
 
+
 func rotation_changed() -> void:
-	if name == "Camera2D":
+	if index == Cameras.MAIN:
 		# Negative to make going up in value clockwise, and match the spinbox which does the same
 		Global.rotation_level_button.text = str(wrapi(round(-rotation_degrees), -180, 180)) + " °"
 		update_rulers()
@@ -271,7 +284,7 @@ func zoom_camera_percent(value : float) -> void:
 
 func zoom_changed() -> void:
 	update_transparent_checker_offset()
-	if name == "Camera2D":
+	if index == Cameras.MAIN:
 		Global.zoom_level_button.text = str(round(100 / zoom.x)) + " %"
 		Global.canvas.pixel_grid.update()
 		update_rulers()
@@ -280,7 +293,7 @@ func zoom_changed() -> void:
 
 		Global.canvas.selection.update_on_zoom(zoom.x)
 
-	elif name == "CameraPreview":
+	elif index == Cameras.SMALL:
 		Global.preview_zoom_slider.value = -zoom.x
 
 
@@ -291,7 +304,6 @@ func update_rulers() -> void:
 
 func _on_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
 	zoom_changed()
-
 
 
 func zoom_100() -> void:
@@ -323,11 +335,11 @@ func fit_to_frame(size : Vector2) -> void:
 		ratio = 0.1 # Set it to a non-zero value just in case
 		# If the ratio is 0, it means that the viewport container is hidden
 		# in that case, use the other viewport to get the ratio
-		if name == "Camera2D":
+		if index == Cameras.MAIN:
 			h_ratio = Global.second_viewport.rect_size.x / size.x
 			v_ratio = Global.second_viewport.rect_size.y / size.y
 			ratio = min(h_ratio, v_ratio)
-		elif name == "Camera2D2":
+		elif index == Cameras.SECOND:
 			h_ratio = Global.main_viewport.rect_size.x / size.x
 			v_ratio = Global.main_viewport.rect_size.y / size.y
 			ratio = min(h_ratio, v_ratio)
@@ -338,18 +350,7 @@ func fit_to_frame(size : Vector2) -> void:
 
 
 func save_values_to_project() -> void:
-	if name == "Camera2D":
-		Global.current_project.cameras_rotation[0] = rotation
-		Global.current_project.cameras_zoom[0] = zoom
-		Global.current_project.cameras_offset[0] = offset
-		Global.current_project.cameras_zoom_max[0] = zoom_max
-	elif name == "Camera2D2":
-		Global.current_project.cameras_rotation[1] = rotation
-		Global.current_project.cameras_zoom[1] = zoom
-		Global.current_project.cameras_offset[1] = offset
-		Global.current_project.cameras_zoom_max[1] = zoom_max
-	elif name == "CameraPreview":
-		Global.current_project.cameras_rotation[2] = rotation
-		Global.current_project.cameras_zoom[2] = zoom
-		Global.current_project.cameras_offset[2] = offset
-		Global.current_project.cameras_zoom_max[2] = zoom_max
+	Global.current_project.cameras_rotation[index] = rotation
+	Global.current_project.cameras_zoom[index] = zoom
+	Global.current_project.cameras_offset[index] = offset
+	Global.current_project.cameras_zoom_max[index] = zoom_max
