@@ -95,8 +95,8 @@ func _on_PresetOptionButton_item_selected(id: int) -> void:
 
 func apply_shortcuts_preset(preset) -> void:
 	for action in preset:
-		var old_input_event: InputEventKey = InputMap.get_action_list(action)[0]
-		set_action_shortcut(action, old_input_event, preset[action])
+		var preset_old_input_event: InputEventKey = InputMap.get_action_list(action)[0]
+		set_action_shortcut(action, preset_old_input_event, preset[action])
 		get_node("Shortcuts/" + action).text = OS.get_scancode_string(
 			preset[action].get_scancode_with_modifiers()
 		)
@@ -112,15 +112,14 @@ func toggle_shortcut_buttons(enabled: bool) -> void:
 				shortcut_grid_item.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
-func set_action_shortcut(action: String, old_input: InputEventKey, new_input: InputEventKey) -> void:
-	InputMap.action_erase_event(action, old_input)
-	InputMap.action_add_event(action, new_input)
+func set_action_shortcut(action: String, oldinput: InputEventKey, newinput: InputEventKey) -> void:
+	InputMap.action_erase_event(action, oldinput)
+	InputMap.action_add_event(action, newinput)
 	Global.update_hint_tooltips()
+	var color_switch: BaseButton = Global.control.find_node("ColorSwitch")
 	# Set shortcut to switch colors button
 	if action == "switch_colors":
-		Global.control.find_node("ColorSwitch").shortcut.shortcut = InputMap.get_action_list(
-			"switch_colors"
-		)[0]
+		color_switch.shortcut.shortcut = InputMap.get_action_list("switch_colors")[0]
 
 
 func _on_Shortcut_button_pressed(button: Button) -> void:

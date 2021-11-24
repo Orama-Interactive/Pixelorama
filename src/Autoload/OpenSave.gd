@@ -381,16 +381,16 @@ func open_image_as_new_tab(path: String, image: Image) -> void:
 	set_new_tab(project, path)
 
 
-func open_image_as_spritesheet_tab(path: String, image: Image, horizontal: int, vertical: int) -> void:
+func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert: int) -> void:
 	var project = Project.new([], path.get_file())
 	project.layers.append(Layer.new())
 	Global.projects.append(project)
-	horizontal = min(horizontal, image.get_size().x)
-	vertical = min(vertical, image.get_size().y)
-	var frame_width := image.get_size().x / horizontal
-	var frame_height := image.get_size().y / vertical
-	for yy in range(vertical):
-		for xx in range(horizontal):
+	horiz = min(horiz, image.get_size().x)
+	vert = min(vert, image.get_size().y)
+	var frame_width := image.get_size().x / horiz
+	var frame_height := image.get_size().y / vert
+	for yy in range(vert):
+		for xx in range(horiz):
 			var frame := Frame.new()
 			var cropped_image := Image.new()
 			cropped_image = image.get_rect(
