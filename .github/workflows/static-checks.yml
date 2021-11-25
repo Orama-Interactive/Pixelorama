@@ -6,8 +6,8 @@ on:
       - l10n_master
   pull_request:
     paths:
-      - "addons/*"
-      - "src/*"
+      - "addons/**"
+      - "src/**"
 
 jobs:
   format:
