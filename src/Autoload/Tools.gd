@@ -8,23 +8,23 @@ var shift := false
 var alt := false
 
 var _tools = {
-	"RectSelect": "res://src/Tools/SelectionTools/RectSelect.tscn",
-	"EllipseSelect": "res://src/Tools/SelectionTools/EllipseSelect.tscn",
-	"PolygonSelect": "res://src/Tools/SelectionTools/PolygonSelect.tscn",
-	"ColorSelect": "res://src/Tools/SelectionTools/ColorSelect.tscn",
-	"MagicWand": "res://src/Tools/SelectionTools/MagicWand.tscn",
-	"Lasso": "res://src/Tools/SelectionTools/Lasso.tscn",
-	"Move": "res://src/Tools/Move.tscn",
-	"Zoom": "res://src/Tools/Zoom.tscn",
-	"Pan": "res://src/Tools/Pan.tscn",
-	"ColorPicker": "res://src/Tools/ColorPicker.tscn",
-	"Pencil": "res://src/Tools/Pencil.tscn",
-	"Eraser": "res://src/Tools/Eraser.tscn",
-	"Bucket": "res://src/Tools/Bucket.tscn",
-	"Shading": "res://src/Tools/Shading.tscn",
-	"LineTool": "res://src/Tools/LineTool.tscn",
-	"RectangleTool": "res://src/Tools/RectangleTool.tscn",
-	"EllipseTool": "res://src/Tools/EllipseTool.tscn",
+	"RectSelect": preload("res://src/Tools/SelectionTools/RectSelect.tscn"),
+	"EllipseSelect": preload("res://src/Tools/SelectionTools/EllipseSelect.tscn"),
+	"PolygonSelect": preload("res://src/Tools/SelectionTools/PolygonSelect.tscn"),
+	"ColorSelect": preload("res://src/Tools/SelectionTools/ColorSelect.tscn"),
+	"MagicWand": preload("res://src/Tools/SelectionTools/MagicWand.tscn"),
+	"Lasso": preload("res://src/Tools/SelectionTools/Lasso.tscn"),
+	"Move": preload("res://src/Tools/Move.tscn"),
+	"Zoom": preload("res://src/Tools/Zoom.tscn"),
+	"Pan": preload("res://src/Tools/Pan.tscn"),
+	"ColorPicker": preload("res://src/Tools/ColorPicker.tscn"),
+	"Pencil": preload("res://src/Tools/Pencil.tscn"),
+	"Eraser": preload("res://src/Tools/Eraser.tscn"),
+	"Bucket": preload("res://src/Tools/Bucket.tscn"),
+	"Shading": preload("res://src/Tools/Shading.tscn"),
+	"LineTool": preload("res://src/Tools/LineTool.tscn"),
+	"RectangleTool": preload("res://src/Tools/RectangleTool.tscn"),
+	"EllipseTool": preload("res://src/Tools/EllipseTool.tscn"),
 }
 var _slots = {}
 var _panels = {}
@@ -98,7 +98,7 @@ func _ready() -> void:
 func set_tool(name: String, button: int) -> void:
 	var slot = _slots[button]
 	var panel: Node = _panels[button]
-	var node: Node = load(_tools[name]).instance()
+	var node: Node = _tools[name].instance()
 	node.name = name
 	node.tool_slot = slot
 	slot.tool_node = node
