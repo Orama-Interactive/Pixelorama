@@ -1,13 +1,11 @@
-extends ColorRect
 class_name PaletteSwatch
-
-# Required by grid sliders
-const SWATCH_SIZE := Vector2(26, 26)
+extends ColorRect
 
 signal pressed(mouse_button)
 signal double_clicked(mouse_button, position)
 signal dropped(source_index, new_index)
 
+const SWATCH_SIZE := Vector2(26, 26)  # Required by grid sliders
 const DEFAULT_COLOR := Color(0.0, 0.0, 0.0, 0.0)
 
 var index := -1
@@ -16,7 +14,7 @@ var show_right_highlight := false
 var empty := true setget set_empty
 
 
-func _ready():
+func _ready() -> void:
 	rect_min_size = SWATCH_SIZE
 	rect_size = SWATCH_SIZE
 
@@ -35,7 +33,12 @@ func _draw() -> void:
 		# Display inner border highlight
 		var margin := SWATCH_SIZE / 4
 		draw_rect(Rect2(margin, SWATCH_SIZE - margin * 2), Color.black, false, 1)
-		draw_rect(Rect2(margin - Vector2.ONE, SWATCH_SIZE - margin * 2 + Vector2(2, 2)), Color.white, false, 1)
+		draw_rect(
+			Rect2(margin - Vector2.ONE, SWATCH_SIZE - margin * 2 + Vector2(2, 2)),
+			Color.white,
+			false,
+			1
+		)
 
 
 # Enables drawing of highlights which indicate selected swatches

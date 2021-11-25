@@ -53,9 +53,7 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
-[node name="ChangeArtBtnLeft" type="Button" parent="Contents/SplashArt" groups=[
-"UIButtons",
-]]
+[node name="ChangeArtBtnLeft" type="Button" parent="Contents/SplashArt" groups=["UIButtons"]]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 5.0
@@ -87,9 +85,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ChangeArtBtnRight" type="Button" parent="Contents/SplashArt" groups=[
-"UIButtons",
-]]
+[node name="ChangeArtBtnRight" type="Button" parent="Contents/SplashArt" groups=["UIButtons"]]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -308,7 +304,7 @@ __meta__ = {
 [connection signal="pressed" from="Contents/SplashArt/ChangeArtBtnRight" to="." method="_on_ChangeArtBtnRight_pressed"]
 [connection signal="pressed" from="Contents/ArtBy/ArtistName" to="." method="_on_ArtCredits_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/NewBtn" to="." method="_on_NewBtn_pressed"]
-[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenBtn" to="." method="_on_OpenBtn__pressed"]
+[connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenBtn" to="." method="_on_OpenBtn_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn" to="." method="_on_OpenLastBtn_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/GithubButton" to="." method="_on_GithubButton_pressed"]
 [connection signal="pressed" from="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links/DiscordButton" to="." method="_on_DiscordButton_pressed"]

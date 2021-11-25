@@ -1,6 +1,5 @@
 extends BaseButton
 
-
 var brush = Global.brushes_popup.Brush.new()
 
 

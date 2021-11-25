@@ -1,12 +1,12 @@
 extends SelectionTool
 
 
-func apply_selection(position : Vector2) -> void:
-	var project : Project = Global.current_project
+func apply_selection(position: Vector2) -> void:
+	var project: Project = Global.current_project
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()
 
-	var selection_bitmap_copy : BitMap = project.selection_bitmap.duplicate()
+	var selection_bitmap_copy: BitMap = project.selection_bitmap.duplicate()
 	if _intersect:
 		var full_rect = Rect2(Vector2.ZERO, selection_bitmap_copy.get_size())
 		selection_bitmap_copy.set_bit_rect(full_rect, false)
@@ -31,12 +31,14 @@ func apply_selection(position : Vector2) -> void:
 		flood_fill(mirror_y, cel_image, selection_bitmap_copy)
 	cel_image.unlock()
 	project.selection_bitmap = selection_bitmap_copy
-	Global.canvas.selection.big_bounding_rectangle = project.get_selection_rectangle(project.selection_bitmap)
+	Global.canvas.selection.big_bounding_rectangle = project.get_selection_rectangle(
+		project.selection_bitmap
+	)
 	Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
 
 
-func flood_fill(position : Vector2, image : Image, bitmap : BitMap) -> void:
-	var project : Project = Global.current_project
+func flood_fill(position: Vector2, image: Image, bitmap: BitMap) -> void:
+	var project: Project = Global.current_project
 	if position.x < 0 or position.y < 0:
 		return
 	if position.x > project.size.x - 1 or position.y > project.size.y - 1:
@@ -50,8 +52,8 @@ func flood_fill(position : Vector2, image : Image, bitmap : BitMap) -> void:
 	for n in q:
 		if processed.get_bit(n):
 			continue
-		var west : Vector2 = n
-		var east : Vector2 = n
+		var west: Vector2 = n
+		var east: Vector2 = n
 		while west.x >= 0 && image.get_pixelv(west).is_equal_approx(color):
 			west += Vector2.LEFT
 		while east.x < project.size.x && image.get_pixelv(east).is_equal_approx(color):

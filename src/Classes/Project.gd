@@ -1,44 +1,46 @@
-class_name Project extends Reference
+class_name Project
+extends Reference
 # A class for project properties.
 
 var name := "" setget name_changed
-var size : Vector2 setget size_changed
-var undo_redo : UndoRedo
-var tile_mode : int = Global.TileMode.NONE
-var tile_mode_rects := [] # Cached to avoid recalculation
-var undos := 0 # The number of times we added undo properties
+var size: Vector2 setget size_changed
+var undo_redo: UndoRedo
+var tile_mode: int = Global.TileMode.NONE
+var tile_mode_rects := []  # Cached to avoid recalculation
+var undos := 0  # The number of times we added undo properties
 var has_changed := false setget has_changed_changed
-var frames := [] setget frames_changed # Array of Frames (that contain Cels)
-var layers := [] setget layers_changed # Array of Layers
+var frames := [] setget frames_changed  # Array of Frames (that contain Cels)
+var layers := [] setget layers_changed  # Array of Layers
 var current_frame := 0 setget frame_changed
 var current_layer := 0 setget layer_changed
-var selected_cels := [[0, 0]] # Array of Arrays of 2 integers (frame & layer)
+var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
 
-var animation_tags := [] setget animation_tags_changed # Array of AnimationTags
-var guides := [] # Array of Guides
-var brushes := [] # Array of Images
+var animation_tags := [] setget animation_tags_changed  # Array of AnimationTags
+var guides := []  # Array of Guides
+var brushes := []  # Array of Images
 var fps := 6.0
 
 var x_symmetry_point
 var y_symmetry_point
-var x_symmetry_axis : SymmetryGuide
-var y_symmetry_axis : SymmetryGuide
+var x_symmetry_axis: SymmetryGuide
+var y_symmetry_axis: SymmetryGuide
 
 var selection_bitmap := BitMap.new()
-# This is useful for when the selection is outside of the canvas boundaries, on the left and/or above (negative coords)
+# This is useful for when the selection is outside of the canvas boundaries,
+# on the left and/or above (negative coords)
 var selection_offset := Vector2.ZERO setget _selection_offset_changed
 var has_selection := false
 
 # For every camera (currently there are 3)
-var cameras_rotation := [0.0, 0.0, 0.0] # Array of float
-var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)] # Array of Vector2
-var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO] # Array of Vector2
-var cameras_zoom_max := [Vector2.ONE, Vector2.ONE, Vector2.ONE] # Array of Vector2
+var cameras_rotation := [0.0, 0.0, 0.0]  # Array of float
+var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)]
+var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
+var cameras_zoom_max := [Vector2.ONE, Vector2.ONE, Vector2.ONE]
 
 # Export directory path and export file name
 var directory_path := ""
 var file_name := "untitled"
-var file_format : int = Export.FileFormat.PNG
+var file_format: int = Export.FileFormat.PNG
 var was_exported := false
 
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
@@ -82,7 +84,9 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	if OS.get_name() == "HTML5":
 		directory_path = "user://"
 	else:
-		directory_path = Global.config_cache.get_value("data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP))
+		directory_path = Global.config_cache.get_value(
+			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
+		)
 
 
 func commit_undo() -> void:
@@ -109,7 +113,7 @@ func selection_bitmap_changed() -> void:
 	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
 
 
-func _selection_offset_changed(value : Vector2) -> void:
+func _selection_offset_changed(value: Vector2) -> void:
 	selection_offset = value
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset
 	Global.canvas.selection.update_on_zoom(Global.camera.zoom.x)
@@ -139,7 +143,7 @@ func change_project() -> void:
 		layer_container.line_edit.text = layers[i].name
 
 		Global.frames_container.add_child(layers[i].frame_container)
-		for j in range(frames.size()): # Create Cel buttons
+		for j in range(frames.size()):  # Create Cel buttons
 			var cel_button = cel_button_node.instance()
 			cel_button.frame = j
 			cel_button.layer = i
@@ -149,23 +153,29 @@ func change_project() -> void:
 
 			layers[i].frame_container.add_child(cel_button)
 
-	for j in range(frames.size()): # Create frame ID labels
-		var button : Button = frame_button_node.instance()
+	for j in range(frames.size()):  # Create frame ID labels
+		var button: Button = frame_button_node.instance()
 		button.frame = j
 		button.rect_min_size.x = Global.animation_timeline.cel_size
 		button.text = str(j + 1)
 		if j == current_frame:
-			button.add_color_override("font_color", Global.control.theme.get_color("Selected Color", "Label"))
+			button.add_color_override(
+				"font_color", Global.control.theme.get_color("Selected Color", "Label")
+			)
 		Global.frame_ids.add_child(button)
 
-	var layer_button = Global.layers_container.get_child(Global.layers_container.get_child_count() - 1 - current_layer)
+	var layer_button = Global.layers_container.get_child(
+		Global.layers_container.get_child_count() - 1 - current_layer
+	)
 	layer_button.pressed = true
 
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
 	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
-	Global.disable_button(Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1)
+	Global.disable_button(
+		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
+	)
 	toggle_layer_buttons_layers()
 	toggle_layer_buttons_current_layer()
 
@@ -191,7 +201,7 @@ func change_project() -> void:
 
 	Global.canvas.update()
 	Global.canvas.grid.update()
-	Global.transparent_checker._ready()
+	Global.transparent_checker.update_rect()
 	Global.animation_timeline.fps_spinbox.value = fps
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
@@ -205,7 +215,9 @@ func change_project() -> void:
 	if save_path != "":
 		Global.open_sprites_dialog.current_path = save_path
 		Global.save_sprites_dialog.current_path = save_path
-		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % save_path.get_file())
+		Global.top_menu_container.file_menu.set_item_text(
+			4, tr("Save") + " %s" % save_path.get_file()
+		)
 	else:
 		Global.top_menu_container.file_menu.set_item_text(4, tr("Save"))
 
@@ -217,7 +229,9 @@ func change_project() -> void:
 	if !was_exported:
 		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 	else:
-		Global.top_menu_container.file_menu.set_item_text(6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
+		Global.top_menu_container.file_menu.set_item_text(
+			6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format))
+		)
 
 	for j in Global.TileMode.values():
 		Global.top_menu_container.tile_mode_submenu.set_item_checked(j, j == tile_mode)
@@ -234,12 +248,20 @@ func change_project() -> void:
 	for camera in Global.cameras:
 		camera.zoom_max = cameras_zoom_max[i]
 		if camera == Global.camera_preview:
-			Global.preview_zoom_slider.disconnect("value_changed", Global.canvas_preview_container, "_on_PreviewZoomSlider_value_changed")
+			Global.preview_zoom_slider.disconnect(
+				"value_changed",
+				Global.canvas_preview_container,
+				"_on_PreviewZoomSlider_value_changed"
+			)
 			Global.preview_zoom_slider.min_value = -camera.zoom_max.x
-			Global.preview_zoom_slider.connect("value_changed", Global.canvas_preview_container, "_on_PreviewZoomSlider_value_changed")
+			Global.preview_zoom_slider.connect(
+				"value_changed",
+				Global.canvas_preview_container,
+				"_on_PreviewZoomSlider_value_changed"
+			)
 
 		if camera == Global.camera:
-			Global.zoom_level_spinbox.min_value = 100.0/camera.zoom_max.x
+			Global.zoom_level_spinbox.min_value = 100.0 / camera.zoom_max.x
 		camera.rotation = cameras_rotation[i]
 		camera.zoom = cameras_zoom[i]
 		camera.offset = cameras_offset[i]
@@ -255,22 +277,26 @@ func serialize() -> Dictionary:
 		for cel in layer.linked_cels:
 			linked_cels.append(frames.find(cel))
 
-		layer_data.append({
-			"name" : layer.name,
-			"visible" : layer.visible,
-			"locked" : layer.locked,
-			"new_cels_linked" : layer.new_cels_linked,
-			"linked_cels" : linked_cels,
-		})
+		layer_data.append(
+			{
+				"name": layer.name,
+				"visible": layer.visible,
+				"locked": layer.locked,
+				"new_cels_linked": layer.new_cels_linked,
+				"linked_cels": linked_cels,
+			}
+		)
 
 	var tag_data := []
 	for tag in animation_tags:
-		tag_data.append({
-			"name" : tag.name,
-			"color" : tag.color.to_html(),
-			"from" : tag.from,
-			"to" : tag.to,
-		})
+		tag_data.append(
+			{
+				"name": tag.name,
+				"color": tag.color.to_html(),
+				"from": tag.from,
+				"to": tag.to,
+			}
+		)
 
 	var guide_data := []
 	for guide in guides:
@@ -282,49 +308,45 @@ func serialize() -> Dictionary:
 		if guide.type == Guide.Types.HORIZONTAL:
 			coords = guide.points[0].y
 
-		guide_data.append({"type" : guide.type, "pos" : coords})
+		guide_data.append({"type": guide.type, "pos": coords})
 
 	var frame_data := []
 	for frame in frames:
 		var cel_data := []
 		for cel in frame.cels:
-			cel_data.append({
-				"opacity" : cel.opacity,
-#				"image_data" : cel.image.get_data()
-			})
-		frame_data.append({
-			"cels" : cel_data,
-			"duration" : frame.duration
-		})
+			cel_data.append(
+				{
+					"opacity": cel.opacity,
+					#				"image_data" : cel.image.get_data()
+				}
+			)
+		frame_data.append({"cels": cel_data, "duration": frame.duration})
 	var brush_data := []
 	for brush in brushes:
-		brush_data.append({
-			"size_x" : brush.get_size().x,
-			"size_y" : brush.get_size().y
-		})
+		brush_data.append({"size_x": brush.get_size().x, "size_y": brush.get_size().y})
 
 	var project_data := {
-		"pixelorama_version" : Global.current_version,
-		"name" : name,
-		"size_x" : size.x,
-		"size_y" : size.y,
-		"save_path" : OpenSave.current_save_paths[Global.projects.find(self)],
-		"layers" : layer_data,
-		"tags" : tag_data,
-		"guides" : guide_data,
-		"symmetry_points" : [x_symmetry_point, y_symmetry_point],
-		"frames" : frame_data,
-		"brushes" : brush_data,
-		"export_directory_path" : directory_path,
-		"export_file_name" : file_name,
-		"export_file_format" : file_format,
-		"fps" : fps
+		"pixelorama_version": Global.current_version,
+		"name": name,
+		"size_x": size.x,
+		"size_y": size.y,
+		"save_path": OpenSave.current_save_paths[Global.projects.find(self)],
+		"layers": layer_data,
+		"tags": tag_data,
+		"guides": guide_data,
+		"symmetry_points": [x_symmetry_point, y_symmetry_point],
+		"frames": frame_data,
+		"brushes": brush_data,
+		"export_directory_path": directory_path,
+		"export_file_name": file_name,
+		"export_file_format": file_format,
+		"fps": fps
 	}
 
 	return project_data
 
 
-func deserialize(dict : Dictionary) -> void:
+func deserialize(dict: Dictionary) -> void:
 	if dict.has("name"):
 		name = dict.name
 	if dict.has("size_x") and dict.has("size_y"):
@@ -350,14 +372,22 @@ func deserialize(dict : Dictionary) -> void:
 			frame_i += 1
 
 		if dict.has("layers"):
-			var layer_i :=  0
+			var layer_i := 0
 			for saved_layer in dict.layers:
 				var linked_cels := []
 				for linked_cel_number in saved_layer.linked_cels:
 					linked_cels.append(frames[linked_cel_number])
-					frames[linked_cel_number].cels[layer_i].image = linked_cels[0].cels[layer_i].image
-					frames[linked_cel_number].cels[layer_i].image_texture = linked_cels[0].cels[layer_i].image_texture
-				var layer := Layer.new(saved_layer.name, saved_layer.visible, saved_layer.locked, HBoxContainer.new(), saved_layer.new_cels_linked, linked_cels)
+					var linked_cel: Cel = frames[linked_cel_number].cels[layer_i]
+					linked_cel.image = linked_cels[0].cels[layer_i].image
+					linked_cel.image_texture = linked_cels[0].cels[layer_i].image_texture
+				var layer := Layer.new(
+					saved_layer.name,
+					saved_layer.visible,
+					saved_layer.locked,
+					HBoxContainer.new(),
+					saved_layer.new_cels_linked,
+					linked_cels
+				)
 				layers.append(layer)
 				layer_i += 1
 	if dict.has("tags"):
@@ -394,17 +424,17 @@ func deserialize(dict : Dictionary) -> void:
 		fps = dict.fps
 
 
-func name_changed(value : String) -> void:
+func name_changed(value: String) -> void:
 	name = value
 	Global.tabs.set_tab_title(Global.tabs.current_tab, name)
 
 
-func size_changed(value : Vector2) -> void:
+func size_changed(value: Vector2) -> void:
 	size = value
 	update_tile_mode_rects()
 
 
-func frames_changed(value : Array) -> void:
+func frames_changed(value: Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	frames = value
 	selected_cels.clear()
@@ -418,7 +448,7 @@ func frames_changed(value : Array) -> void:
 		Global.frames_container.add_child(layers[i].frame_container)
 
 	for j in range(frames.size()):
-		var button : Button = frame_button_node.instance()
+		var button: Button = frame_button_node.instance()
 		button.frame = j
 		button.rect_min_size.x = Global.animation_timeline.cel_size
 		button.text = str(j + 1)
@@ -435,7 +465,7 @@ func frames_changed(value : Array) -> void:
 	set_timeline_first_and_last_frames()
 
 
-func layers_changed(value : Array) -> void:
+func layers_changed(value: Array) -> void:
 	layers = value
 	if Global.layers_changed_skip:
 		Global.layers_changed_skip = false
@@ -467,9 +497,11 @@ func layers_changed(value : Array) -> void:
 
 			layers[i].frame_container.add_child(cel_button)
 
-	var layer_button = Global.layers_container.get_child(Global.layers_container.get_child_count() - 1 - current_layer)
+	var layer_button = Global.layers_container.get_child(
+		Global.layers_container.get_child_count() - 1 - current_layer
+	)
 	layer_button.pressed = true
-	self.current_frame = current_frame # Call frame_changed to update UI
+	self.current_frame = current_frame  # Call frame_changed to update UI
 	toggle_layer_buttons_layers()
 
 
@@ -481,17 +513,20 @@ func remove_cel_buttons() -> void:
 		Global.frames_container.remove_child(container)
 
 
-func frame_changed(value : int) -> void:
+func frame_changed(value: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	current_frame = value
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
 	for i in frames.size():
 		var text_color := Color.white
-		if Global.theme_type == Global.ThemeTypes.CARAMEL || Global.theme_type == Global.ThemeTypes.LIGHT:
+		if (
+			Global.theme_type == Global.ThemeTypes.CARAMEL
+			|| Global.theme_type == Global.ThemeTypes.LIGHT
+		):
 			text_color = Color.black
 		Global.frame_ids.get_child(i).add_color_override("font_color", text_color)
-		for layer in layers: # De-select all the other frames
+		for layer in layers:  # De-select all the other frames
 			if i < layer.frame_container.get_child_count():
 				layer.frame_container.get_child(i).pressed = false
 
@@ -499,41 +534,49 @@ func frame_changed(value : int) -> void:
 		selected_cels.append([current_frame, current_layer])
 	# Select the new frame
 	for cel in selected_cels:
-		var _current_frame : int = cel[0]
-		var _current_layer : int = cel[1]
-		if _current_frame < Global.frame_ids.get_child_count():
-			Global.frame_ids.get_child(_current_frame).add_color_override("font_color", Global.control.theme.get_color("Selected Color", "Label"))
+		var current_frame_tmp: int = cel[0]
+		var current_layer_tmp: int = cel[1]
+		if current_frame_tmp < Global.frame_ids.get_child_count():
+			Global.frame_ids.get_child(current_frame_tmp).add_color_override(
+				"font_color", Global.control.theme.get_color("Selected Color", "Label")
+			)
 		if layers:
-			if _current_frame < layers[_current_layer].frame_container.get_child_count():
-				layers[_current_layer].frame_container.get_child(_current_frame).pressed = true
+			if current_frame_tmp < layers[current_layer_tmp].frame_container.get_child_count():
+				var fbutton = layers[current_layer_tmp].frame_container.get_child(current_frame_tmp)
+				fbutton.pressed = true
 
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
 	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
-	Global.disable_button(Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1)
+	Global.disable_button(
+		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
+	)
 
 	if current_frame < frames.size():
-		Global.layer_opacity_slider.value = frames[current_frame].cels[current_layer].opacity * 100
-		Global.layer_opacity_spinbox.value = frames[current_frame].cels[current_layer].opacity * 100
+		var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
+		Global.layer_opacity_slider.value = cel_opacity * 100
+		Global.layer_opacity_spinbox.value = cel_opacity * 100
 
 	Global.canvas.update()
-	Global.transparent_checker._ready() # To update the rect size
+	Global.transparent_checker.update_rect()
 
 
-func layer_changed(value : int) -> void:
+func layer_changed(value: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	current_layer = value
 
 	toggle_layer_buttons_current_layer()
 
 	yield(Global.get_tree().create_timer(0.01), "timeout")
-	self.current_frame = current_frame # Call frame_changed to update UI
+	self.current_frame = current_frame  # Call frame_changed to update UI
 	for layer_button in Global.layers_container.get_children():
 		layer_button.pressed = false
 
 	for cel in selected_cels:
-		var _current_layer : int = cel[1]
-		if _current_layer < Global.layers_container.get_child_count():
-			var layer_button = Global.layers_container.get_child(Global.layers_container.get_child_count() - 1 - _current_layer)
+		var current_layer_tmp: int = cel[1]
+		if current_layer_tmp < Global.layers_container.get_child_count():
+			var layer_button = Global.layers_container.get_child(
+				Global.layers_container.get_child_count() - 1 - current_layer_tmp
+			)
 			layer_button.pressed = true
 
 
@@ -573,26 +616,28 @@ func toggle_layer_buttons_current_layer() -> void:
 				Global.disable_button(Global.remove_layer_button, false)
 
 
-func animation_tags_changed(value : Array) -> void:
+func animation_tags_changed(value: Array) -> void:
 	animation_tags = value
 	for child in Global.tag_container.get_children():
 		child.queue_free()
 
 	for tag in animation_tags:
 		var tag_base_size = Global.animation_timeline.cel_size + 4
-		var tag_c : Container = animation_tag_node.instance()
+		var tag_c: Container = animation_tag_node.instance()
 		Global.tag_container.add_child(tag_c)
 		tag_c.tag = tag
-		var tag_position : int = Global.tag_container.get_child_count() - 1
+		var tag_position: int = Global.tag_container.get_child_count() - 1
 		Global.tag_container.move_child(tag_c, tag_position)
 		tag_c.get_node("Label").text = tag.name
 		tag_c.get_node("Label").modulate = tag.color
 		tag_c.get_node("Line2D").default_color = tag.color
 
-		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + 1 # Added 1 to answer to get starting position of next cel
-		var tag_size : int = tag.to - tag.from
-		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 4 # We dont need the 4 pixels at the end of last cel
-		tag_c.rect_position.y = 1 # To make top line of tag visible
+		# Added 1 to answer to get starting position of next cel
+		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + 1
+		var tag_size: int = tag.to - tag.from
+		# We dont need the 4 pixels at the end of last cel
+		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 4
+		tag_c.rect_position.y = 1  # To make top line of tag visible
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
 
@@ -612,7 +657,7 @@ func set_timeline_first_and_last_frames() -> void:
 				Global.animation_timeline.last_frame = min(frames.size() - 1, tag.to - 1)
 
 
-func has_changed_changed(value : bool) -> void:
+func has_changed_changed(value: bool) -> void:
 	has_changed = value
 	if value:
 		Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
@@ -633,10 +678,19 @@ func update_tile_mode_rects() -> void:
 
 
 func is_empty() -> bool:
-	return frames.size() == 1 and layers.size() == 1 and frames[0].cels[0].image.is_invisible() and animation_tags.size() == 0
+	return (
+		frames.size() == 1
+		and layers.size() == 1
+		and frames[0].cels[0].image.is_invisible()
+		and animation_tags.size() == 0
+	)
 
 
-func can_pixel_get_drawn(pixel : Vector2, bitmap : BitMap = selection_bitmap, selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position) -> bool:
+func can_pixel_get_drawn(
+	pixel: Vector2,
+	bitmap: BitMap = selection_bitmap,
+	selection_position: Vector2 = Global.canvas.selection.big_bounding_rectangle.position
+) -> bool:
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
 		return false
 
@@ -650,15 +704,16 @@ func can_pixel_get_drawn(pixel : Vector2, bitmap : BitMap = selection_bitmap, se
 		return true
 
 
-func invert_bitmap(bitmap : BitMap) -> void:
+func invert_bitmap(bitmap: BitMap) -> void:
 	for x in bitmap.get_size().x:
 		for y in bitmap.get_size().y:
 			var pos := Vector2(x, y)
 			bitmap.set_bit(pos, !bitmap.get_bit(pos))
 
 
-# Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L605
-func resize_bitmap(bitmap : BitMap, new_size : Vector2) -> BitMap:
+# Unexposed BitMap class function
+# https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L605
+func resize_bitmap(bitmap: BitMap, new_size: Vector2) -> BitMap:
 	if new_size == bitmap.get_size():
 		return bitmap
 	var new_bitmap := BitMap.new()
@@ -672,8 +727,9 @@ func resize_bitmap(bitmap : BitMap, new_size : Vector2) -> BitMap:
 	return new_bitmap
 
 
-# Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L622
-func bitmap_to_image(bitmap : BitMap, square := true) -> Image:
+# Unexposed BitMap class function
+# https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L622
+func bitmap_to_image(bitmap: BitMap, square := true) -> Image:
 	var image := Image.new()
 	var width := bitmap.get_size().x
 	var height := bitmap.get_size().y
@@ -692,8 +748,9 @@ func bitmap_to_image(bitmap : BitMap, square := true) -> Image:
 	return image
 
 
-# Algorithm taken from Image.get_used_rect() -  https://github.com/godotengine/godot/blob/master/core/io/image.cpp
-func get_selection_rectangle(bitmap : BitMap = selection_bitmap) -> Rect2:
+# Algorithm taken from Image.get_used_rect()
+# https://github.com/godotengine/godot/blob/master/core/io/image.cpp
+func get_selection_rectangle(bitmap: BitMap = selection_bitmap) -> Rect2:
 	if bitmap.get_true_bit_count() == 0:
 		return Rect2()
 
@@ -720,12 +777,12 @@ func get_selection_rectangle(bitmap : BitMap = selection_bitmap) -> Rect2:
 		return Rect2(minx, miny, maxx - minx + 1, maxy - miny + 1)
 
 
-func move_bitmap_values(bitmap : BitMap, move_offset := true) -> void:
+func move_bitmap_values(bitmap: BitMap, move_offset := true) -> void:
 	var selection_node = Global.canvas.selection
-	var selection_position : Vector2 = selection_node.big_bounding_rectangle.position
-	var selection_end : Vector2 = selection_node.big_bounding_rectangle.end
+	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position
+	var selection_end: Vector2 = selection_node.big_bounding_rectangle.end
 
-	var image : Image = bitmap_to_image(bitmap)
+	var image: Image = bitmap_to_image(bitmap)
 	var selection_rect := image.get_used_rect()
 	var smaller_image := image.get_rect(selection_rect)
 	image.fill(Color(0))
@@ -762,15 +819,15 @@ func move_bitmap_values(bitmap : BitMap, move_offset := true) -> void:
 	bitmap.create_from_image_alpha(image)
 
 
-func resize_bitmap_values(bitmap : BitMap, new_size : Vector2, flip_x : bool, flip_y : bool) -> BitMap:
+func resize_bitmap_values(bitmap: BitMap, new_size: Vector2, flip_x: bool, flip_y: bool) -> BitMap:
 	var selection_node = Global.canvas.selection
-	var selection_position : Vector2 = selection_node.big_bounding_rectangle.position
+	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position
 	var dst := selection_position
 	var new_bitmap_size := size
 	new_bitmap_size.x = max(size.x, abs(selection_position.x) + new_size.x)
 	new_bitmap_size.y = max(size.y, abs(selection_position.y) + new_size.y)
 	var new_bitmap := BitMap.new()
-	var image : Image = bitmap_to_image(bitmap)
+	var image: Image = bitmap_to_image(bitmap)
 	var selection_rect := image.get_used_rect()
 	var smaller_image := image.get_rect(selection_rect)
 	if selection_position.x <= 0:

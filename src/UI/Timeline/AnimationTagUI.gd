@@ -1,4 +1,3 @@
 extends VBoxContainer
 
-
-var tag : AnimationTag
+var tag: AnimationTag

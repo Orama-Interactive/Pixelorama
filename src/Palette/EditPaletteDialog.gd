@@ -2,7 +2,7 @@ extends ConfirmationDialog
 
 # Emitted when user confirms his changes
 signal saved(name, comment, width, height)
-signal deleted()
+signal deleted
 
 const DELETE_ACTION := "delete"
 
@@ -20,6 +20,7 @@ onready var path_input := $VBoxContainer/PaletteMetadata/Path
 
 onready var size_reduced_warning := $VBoxContainer/SizeReducedWarning
 onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
+
 
 func _ready() -> void:
 	# Add delete button to edit palette dialog
@@ -83,7 +84,10 @@ func _on_EditPaletteDialog_custom_action(action: String) -> void:
 
 func _on_size_value_changed(_value):
 	# Toggle resize warning label if palette size was reduced
-	var size_decreased: bool = height_input.value < origin_height or width_input.value < origin_width
+	var size_decreased: bool = (
+		height_input.value < origin_height
+		or width_input.value < origin_width
+	)
 	toggle_size_reduced_warning(size_decreased)
 
 

@@ -1,23 +1,23 @@
-extends PopupPanel
 class_name Patterns
-
-
-class Pattern:
-	var image : Image
-	var index : int
+extends PopupPanel
 
 signal pattern_selected(pattern)
 
-var default_pattern : Pattern = null
+var default_pattern: Pattern = null
 
 
-func select_pattern(pattern : Pattern) -> void:
+class Pattern:
+	var image: Image
+	var index: int
+
+
+func select_pattern(pattern: Pattern) -> void:
 	emit_signal("pattern_selected", pattern)
 	hide()
 
 
-static func create_button(image : Image) -> Node:
-	var button : BaseButton = preload("res://src/UI/PatternButton.tscn").instance()
+static func create_button(image: Image) -> Node:
+	var button: BaseButton = preload("res://src/UI/PatternButton.tscn").instance()
 	var tex := ImageTexture.new()
 	tex.create_from_image(image, 0)
 	button.get_child(0).texture = tex
@@ -25,7 +25,7 @@ static func create_button(image : Image) -> Node:
 	return button
 
 
-static func add(image : Image, hint := "") -> void:
+static func add(image: Image, hint := "") -> void:
 	var button = create_button(image)
 	button.pattern.image = image
 	button.hint_tooltip = hint
@@ -37,7 +37,7 @@ static func add(image : Image, hint := "") -> void:
 		Global.patterns_popup.default_pattern = button.pattern
 
 
-func get_pattern(index : int) -> Pattern:
+func get_pattern(index: int) -> Pattern:
 	var container = Global.patterns_popup.get_node("ScrollContainer/PatternContainer")
 	var pattern = default_pattern
 	if index < container.get_child_count():

@@ -1,17 +1,17 @@
 extends ConfirmationDialog
 
+var current_cel: Image
+var shader: Shader
+var params := []  # String[]
 
-var current_cel : Image
-var shader : Shader
-var params := [] # String[]
-
-onready var preview : TextureRect = $VBoxContainer/Preview
-onready var shader_loaded_label : Label = $VBoxContainer/ShaderLoadedLabel
-onready var shader_params : BoxContainer = $VBoxContainer/ShaderParams
+onready var preview: TextureRect = $VBoxContainer/Preview
+onready var shader_loaded_label: Label = $VBoxContainer/ShaderLoadedLabel
+onready var shader_params: BoxContainer = $VBoxContainer/ShaderParams
 
 
 func _on_ShaderEffect_about_to_show() -> void:
-	current_cel = Global.current_project.frames[Global.current_project.current_frame].cels[Global.current_project.current_layer].image
+	var current_frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
+	current_cel = current_frame.cels[Global.current_project.current_layer].image
 
 	var preview_image := Image.new()
 	preview_image.copy_from(current_cel)
@@ -25,7 +25,7 @@ func _on_ShaderEffect_confirmed() -> void:
 		return
 	current_cel.unlock()
 	var viewport_texture := Image.new()
-	var size : Vector2 = Global.current_project.size
+	var size: Vector2 = Global.current_project.size
 	var vp = VisualServer.viewport_create()
 	var canvas = VisualServer.canvas_create()
 	VisualServer.viewport_attach_canvas(vp, canvas)
@@ -76,14 +76,14 @@ func _on_ChooseShader_pressed() -> void:
 		$FileDialog.popup_centered(Vector2(300, 340))
 
 
-func _on_FileDialog_file_selected(path : String) -> void:
+func _on_FileDialog_file_selected(path: String) -> void:
 	var _shader = load(path)
 	if !_shader is Shader:
 		return
 	change_shader(_shader, path.get_file().get_basename())
 
 
-func change_shader(_shader : Shader, name : String) -> void:
+func change_shader(_shader: Shader, name: String) -> void:
 	shader = _shader
 	preview.material.shader = _shader
 	shader_loaded_label.text = tr("Shader loaded:") + " " + name
@@ -106,9 +106,9 @@ func change_shader(_shader : Shader, name : String) -> void:
 			u_value = uniform_split[1].replace(";", "").strip_edges()
 
 		var u_left_side = uniform_split[0].split(":")
-		var _u_hint := ""
+		var u_hint := ""
 		if u_left_side.size() > 1:
-			_u_hint = u_left_side[1].strip_edges()
+			u_hint = u_left_side[1].strip_edges()
 
 		var u_init = u_left_side[0].split(" ")
 		var u_type = u_init[1]
@@ -144,6 +144,7 @@ func change_shader(_shader : Shader, name : String) -> void:
 			hbox.add_child(spinbox)
 			shader_params.add_child(hbox)
 
+
 #		print("---")
 #		print(uniform_split)
 #		print(u_type)
@@ -153,5 +154,5 @@ func change_shader(_shader : Shader, name : String) -> void:
 #		print("--")
 
 
-func set_shader_param(value, param : String) -> void:
+func set_shader_param(value, param: String) -> void:
 	preview.material.set_shader_param(param, value)

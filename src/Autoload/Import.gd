@@ -21,14 +21,14 @@ extends Node
 #
 # Returns null if the directory gave an error opening.
 #
-func get_brush_files_from_directory(directory: String): # -> Array
+func get_brush_files_from_directory(directory: String):  # -> Array
 	var base_png_files := []  # list of files in the base directory
 	var subdirectories := []  # list of subdirectories to process.
 
-	var randomised_subdir_files_map : Dictionary = {}
-	var nonrandomised_subdir_files_map : Dictionary = {}
+	var randomised_subdir_files_map: Dictionary = {}
+	var nonrandomised_subdir_files_map: Dictionary = {}
 
-	var main_directory : Directory = Directory.new()
+	var main_directory: Directory = Directory.new()
 	var err := main_directory.open(directory)
 	if err != OK:
 		return null
@@ -36,11 +36,11 @@ func get_brush_files_from_directory(directory: String): # -> Array
 	# Build first the list of base png files and all subdirectories to
 	# scan later (skip navigational . and ..)
 	main_directory.list_dir_begin(true)
-	var fname : String = main_directory.get_next()
+	var fname: String = main_directory.get_next()
 	while fname != "":
 		if main_directory.current_is_dir():
 			subdirectories.append(fname)
-		else: # Filter for pngs
+		else:  # Filter for pngs
 			if fname.get_extension().to_lower() == "png":
 				base_png_files.append(fname)
 
@@ -50,7 +50,7 @@ func get_brush_files_from_directory(directory: String): # -> Array
 
 	# Now we iterate over subdirectories!
 	for subdirectory in subdirectories:
-		var the_directory : Directory = Directory.new()
+		var the_directory: Directory = Directory.new()
 
 		# Holds names of files that make this
 		# a component of a randomised brush ^.^
@@ -89,9 +89,9 @@ func get_brush_files_from_directory(directory: String): # -> Array
 # The tooltip name is what shows up on the tooltip
 # and is probably in this case the name of the containing
 # randomised directory.
-func add_randomised_brush(fpaths : Array, tooltip_name : String) -> void:
+func add_randomised_brush(fpaths: Array, tooltip_name: String) -> void:
 	# Attempt to load the images from the file paths.
-	var loaded_images : Array = []
+	var loaded_images: Array = []
 	for filen in fpaths:
 		var image := Image.new()
 		var err := image.load(filen)
@@ -106,6 +106,7 @@ func add_randomised_brush(fpaths : Array, tooltip_name : String) -> void:
 	if len(loaded_images) > 0:  # actually have images
 		# to use.
 		Brushes.add_file_brush(loaded_images, tooltip_name)
+
 
 # Add a plain brush from the given path to the list of brushes.
 # Taken, again, from find_brushes
@@ -127,14 +128,14 @@ func add_plain_brush(path: String, tooltip_name: String) -> void:
 # is on a file-by-file basis nyaaaa ^.^
 func import_brushes(priority_ordered_search_path: Array) -> void:
 	# Maps for files in the base directory (name : true)
-	var processed_basedir_paths : Dictionary = {}
-	var randomised_brush_subdirectories : Dictionary = {}
+	var processed_basedir_paths: Dictionary = {}
+	var randomised_brush_subdirectories: Dictionary = {}
 	# Map from a subdirectory to a map similar to processed_basedir_files
 	# i.e. once a filename has been dealt with, set it to true.
-	var processed_subdir_paths : Dictionary = {}
+	var processed_subdir_paths: Dictionary = {}
 
 	# Sets of results of get_brush_files_from_directory
-	var all_available_paths : Array = []
+	var all_available_paths: Array = []
 	for directory in priority_ordered_search_path:
 		all_available_paths.append(get_brush_files_from_directory(directory))
 
@@ -145,20 +146,19 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 		var current_main_directory: String = priority_ordered_search_path[i]
 		if available_brush_file_information != null:
 			# The brush files in the main directory
-			var main_directory_file_paths : Array = available_brush_file_information[0]
+			var main_directory_file_paths: Array = available_brush_file_information[0]
 			# The subdirectory/list-of-randomised-brush-files
 			# map for this directory
-			var randomised_brush_subdirectory_map : Dictionary = available_brush_file_information[1]
+			var randomised_brush_subdirectory_map: Dictionary = available_brush_file_information[1]
 			# Map for subdirectories to non-randomised-brush files nyaa
-			var nonrandomised_brush_subdirectory_map : Dictionary = available_brush_file_information[2]
+			var nonrandomised_brush_subdir_map: Dictionary = available_brush_file_information[2]
 
 			# Iterate over components and do stuff with them! nyaa
 			# first for the main directory path...
 			for subfile in main_directory_file_paths:
 				if not (subfile in processed_basedir_paths):
 					add_plain_brush(
-						current_main_directory.plus_file(subfile),
-						subfile.get_basename()
+						current_main_directory.plus_file(subfile), subfile.get_basename()
 					)
 					processed_basedir_paths[subfile] = true
 
@@ -170,35 +170,33 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 					# random brush directory data system, so they can be
 					# opened nya
 					for non_extended_path in randomised_brush_subdirectory_map[randomised_subdir]:
-						full_paths.append(current_main_directory.plus_file(
-							randomised_subdir
-						).plus_file(
-							non_extended_path
-						))
+						full_paths.append(
+							current_main_directory.plus_file(randomised_subdir).plus_file(
+								non_extended_path
+							)
+						)
 					# Now load!
 					add_randomised_brush(full_paths, randomised_subdir)
 					# and mark that we are done in the overall map ^.^
 					randomised_brush_subdirectories[randomised_subdir] = true
 			# Now to iterate over the nonrandom brush files inside directories
-			for nonrandomised_subdir in nonrandomised_brush_subdirectory_map:
+			for nonrandomised_subdir in nonrandomised_brush_subdir_map:
 				# initialise the set-map for this one if not already present :)
 				if not (nonrandomised_subdir in processed_subdir_paths):
 					processed_subdir_paths[nonrandomised_subdir] = {}
 				# Get the paths within this subdirectory to check if they are
 				# processed or not and if not, then process them.
-				var relpaths_of_contained_nonrandom_brushes : Array = nonrandomised_brush_subdirectory_map[nonrandomised_subdir]
-				for relative_path in relpaths_of_contained_nonrandom_brushes:
+				var relpaths_of_nonrandom_brushes: Array = nonrandomised_brush_subdir_map[nonrandomised_subdir]
+				for relative_path in relpaths_of_nonrandom_brushes:
 					if not (relative_path in processed_subdir_paths[nonrandomised_subdir]):
 						# We are not yet processed
-						var full_path : String = current_main_directory.plus_file(
-							nonrandomised_subdir
-						).plus_file(
+						var full_path: String = current_main_directory.plus_file(nonrandomised_subdir).plus_file(
 							relative_path
 						)
 						# Add the path with the tooltip including the directory
-						add_plain_brush(full_path, nonrandomised_subdir.plus_file(
-							relative_path
-						).get_basename())
+						add_plain_brush(
+							full_path, nonrandomised_subdir.plus_file(relative_path).get_basename()
+						)
 						# Mark this as a processed relpath
 						processed_subdir_paths[nonrandomised_subdir][relative_path] = true
 

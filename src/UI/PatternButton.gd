@@ -1,6 +1,5 @@
 extends BaseButton
 
-
 var pattern = Global.patterns_popup.Pattern.new()
 
 

@@ -1,19 +1,21 @@
 extends ImageEffect
 
-
 var red := true
 var green := true
 var blue := true
 var alpha := false
 
-var shaderPath : String = "res://src/Shaders/Invert.shader"
+var shader_path: String = "res://src/Shaders/Invert.shader"
 
 var confirmed: bool = false
-func _about_to_show():
-	var sm : ShaderMaterial = ShaderMaterial.new()
-	sm.shader = load(shaderPath)
+
+
+func _about_to_show() -> void:
+	var sm: ShaderMaterial = ShaderMaterial.new()
+	sm.shader = load(shader_path)
 	preview.set_material(sm)
 	._about_to_show()
+
 
 func set_nodes() -> void:
 	preview = $VBoxContainer/AspectRatioContainer/Preview
@@ -25,7 +27,8 @@ func _confirmed() -> void:
 	confirmed = true
 	._confirmed()
 
-func commit_action(_cel : Image, _project : Project = Global.current_project) -> void:
+
+func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
 	var selection = _project.bitmap_to_image(_project.selection_bitmap, false)
 	var selection_tex = ImageTexture.new()
 	selection_tex.create_from_image(selection)
@@ -49,25 +52,25 @@ func commit_action(_cel : Image, _project : Project = Global.current_project) ->
 			"has_selection": _project.has_selection
 		}
 		var gen: ShaderImageEffect = ShaderImageEffect.new()
-		gen.generate_image(_cel, shaderPath, params, _project.size)
+		gen.generate_image(_cel, shader_path, params, _project.size)
 		yield(gen, "done")
 
 
-func _on_RButton_toggled(button_pressed : bool) -> void:
+func _on_RButton_toggled(button_pressed: bool) -> void:
 	red = button_pressed
 	update_preview()
 
 
-func _on_GButton_toggled(button_pressed : bool) -> void:
+func _on_GButton_toggled(button_pressed: bool) -> void:
 	green = button_pressed
 	update_preview()
 
 
-func _on_BButton_toggled(button_pressed : bool) -> void:
+func _on_BButton_toggled(button_pressed: bool) -> void:
 	blue = button_pressed
 	update_preview()
 
 
-func _on_AButton_toggled(button_pressed : bool) -> void:
+func _on_AButton_toggled(button_pressed: bool) -> void:
 	alpha = button_pressed
 	update_preview()

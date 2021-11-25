@@ -6,8 +6,8 @@ var font := preload("res://assets/fonts/Roboto-Small.tres")
 var major_subdivision := 2
 var minor_subdivision := 4
 
-var first : Vector2
-var last : Vector2
+var first: Vector2
+var last: Vector2
 
 
 func _ready() -> void:
@@ -24,37 +24,50 @@ func _draw() -> void:
 	transform.y = Vector2(zoom, zoom)
 
 	# This tracks the "true" top left corner of the drawing:
-	transform.origin = Global.main_viewport.rect_size / 2 + Global.camera.offset.rotated(-Global.camera.rotation) * -zoom
+	transform.origin = (
+		Global.main_viewport.rect_size / 2
+		+ Global.camera.offset.rotated(-Global.camera.rotation) * -zoom
+	)
 
 	var proj_size := Global.current_project.size
 
 	# Calculating the rotated corners of the image, use min to find the top one
-	var a := Vector2.ZERO # Top left
-	var b := Vector2(proj_size.x, 0).rotated(-Global.camera.rotation) # Top right
-	var c := Vector2(0, proj_size.y).rotated(-Global.camera.rotation) # Bottom left
-	var d := Vector2(proj_size.x, proj_size.y).rotated(-Global.camera.rotation) # Bottom right
+	var a := Vector2.ZERO  # Top left
+	var b := Vector2(proj_size.x, 0).rotated(-Global.camera.rotation)  # Top right
+	var c := Vector2(0, proj_size.y).rotated(-Global.camera.rotation)  # Bottom left
+	var d := Vector2(proj_size.x, proj_size.y).rotated(-Global.camera.rotation)  # Bottom right
 	transform.origin.y += min(min(a.y, b.y), min(c.y, d.y)) * zoom
 
 	var basic_rule := 100.0
 	var i := 0
-	while(basic_rule * zoom > 100):
+	while basic_rule * zoom > 100:
 		basic_rule /= 5.0 if i % 2 else 2.0
 		i += 1
 	i = 0
-	while(basic_rule * zoom < 100):
+	while basic_rule * zoom < 100:
 		basic_rule *= 2.0 if i % 2 else 5.0
 		i += 1
 
 	ruler_transform = ruler_transform.scaled(Vector2(basic_rule, basic_rule))
 
-	major_subdivide = major_subdivide.scaled(Vector2(1.0 / major_subdivision, 1.0 / major_subdivision))
-	minor_subdivide = minor_subdivide.scaled(Vector2(1.0 / minor_subdivision, 1.0 / minor_subdivision))
+	major_subdivide = major_subdivide.scaled(
+		Vector2(1.0 / major_subdivision, 1.0 / major_subdivision)
+	)
+	minor_subdivide = minor_subdivide.scaled(
+		Vector2(1.0 / minor_subdivision, 1.0 / minor_subdivision)
+	)
 
-	first = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(Vector2.ZERO)
-	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(Global.main_viewport.rect_size)
+	first = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(
+		Vector2.ZERO
+	)
+	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(
+		Global.main_viewport.rect_size
+	)
 
 	for j in range(ceil(first.y), ceil(last.y)):
-		var position : Vector2 = (transform * ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(0, j))
+		var position: Vector2 = (transform * ruler_transform * major_subdivide * minor_subdivide).xform(
+			Vector2(0, j)
+		)
 		if j % (major_subdivision * minor_subdivision) == 0:
 			draw_line(Vector2(0, position.y), Vector2(RULER_WIDTH, position.y), Color.white)
 			var text_xform = Transform2D(-PI / 2, Vector2(font.get_height() - 4, position.y - 2))
@@ -64,12 +77,24 @@ func _draw() -> void:
 			draw_set_transform_matrix(get_transform())
 		else:
 			if j % minor_subdivision == 0:
-				draw_line(Vector2(RULER_WIDTH * 0.33, position.y), Vector2(RULER_WIDTH, position.y), Color.white)
+				draw_line(
+					Vector2(RULER_WIDTH * 0.33, position.y),
+					Vector2(RULER_WIDTH, position.y),
+					Color.white
+				)
 			else:
-				draw_line(Vector2(RULER_WIDTH * 0.66, position.y), Vector2(RULER_WIDTH, position.y), Color.white)
+				draw_line(
+					Vector2(RULER_WIDTH * 0.66, position.y),
+					Vector2(RULER_WIDTH, position.y),
+					Color.white
+				)
 
 
 func _on_VerticalRuler_pressed() -> void:
+	create_guide()
+
+
+func create_guide() -> void:
 	if !Global.show_guides:
 		return
 	var guide := Guide.new()

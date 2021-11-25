@@ -1,6 +1,5 @@
 extends "res://src/Tools/Draw.gd"
 
-
 var _start := Vector2.ZERO
 var _offset := Vector2.ZERO
 var _dest := Vector2.ZERO
@@ -75,7 +74,7 @@ func _get_shape_points_filled(_size: Vector2) -> PoolVector2Array:
 	return PoolVector2Array()
 
 
-func _input(event : InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if _drawing:
 		if event.is_action_pressed("alt"):
 			_displace_origin = true
@@ -83,7 +82,7 @@ func _input(event : InputEvent) -> void:
 			_displace_origin = false
 
 
-func draw_start(position : Vector2) -> void:
+func draw_start(position: Vector2) -> void:
 	if Input.is_action_pressed("alt"):
 		_picking_color = true
 		_pick_color(position)
@@ -99,8 +98,8 @@ func draw_start(position : Vector2) -> void:
 	_drawing = true
 
 
-func draw_move(position : Vector2) -> void:
-	if _picking_color: # Still return even if we released Alt
+func draw_move(position: Vector2) -> void:
+	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("alt"):
 			_pick_color(position)
 		return
@@ -113,7 +112,7 @@ func draw_move(position : Vector2) -> void:
 		_set_cursor_text(_get_result_rect(_start, position))
 
 
-func draw_end(position : Vector2) -> void:
+func draw_end(position: Vector2) -> void:
 	if _picking_color:
 		return
 
@@ -129,7 +128,7 @@ func draw_end(position : Vector2) -> void:
 
 func draw_preview() -> void:
 	if _drawing:
-		var canvas : CanvasItem = Global.canvas.previews
+		var canvas: CanvasItem = Global.canvas.previews
 		var indicator := BitMap.new()
 		var rect := _get_result_rect(_start, _dest)
 		var points := _get_points(rect.size)
@@ -160,9 +159,11 @@ func _draw_shape(origin: Vector2, dest: Vector2) -> void:
 	commit_undo("Draw Shape")
 
 
-# Given an origin point and destination point, returns a rect representing where the shape will be drawn and what it's size
+# Given an origin point and destination point, returns a rect representing
+# where the shape will be drawn and what is its size
 func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
-	# WARNING: Don't replace Input.is_action_pressed for Tools.control, it makes the preview jittery on windows
+	# WARNING: Don't replace Input.is_action_pressed for Tools.control,
+	# it makes the preview jittery on Windows
 	var rect := Rect2(Vector2.ZERO, Vector2.ZERO)
 
 	# Center the rect on the mouse
@@ -170,8 +171,8 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 		var new_size := (dest - origin).floor()
 		# Make rect 1:1 while centering it on the mouse
 		if Input.is_action_pressed("shift"):
-			var _square_size := max(abs(new_size.x), abs(new_size.y))
-			new_size = Vector2(_square_size, _square_size)
+			var square_size := max(abs(new_size.x), abs(new_size.y))
+			new_size = Vector2(square_size, square_size)
 
 		origin -= new_size
 		dest = origin + 2 * new_size
@@ -197,22 +198,19 @@ func _get_points(size: Vector2) -> PoolVector2Array:
 
 
 func _outline_point(p: Vector2, thickness: int = 1, include_p: bool = true) -> Array:
-		var array := []
+	var array := []
 
-		if thickness != 1:
-			var t_of = thickness - 1
-			for x in range (-t_of, thickness):
-				for y in range (-t_of, thickness):
-					if x == 0 and y == 0 and not include_p:
-						continue
-
-					array.append(p + Vector2(x,y))
-
-		return array
+	if thickness != 1:
+		var t_of = thickness - 1
+		for x in range(-t_of, thickness):
+			for y in range(-t_of, thickness):
+				if x == 0 and y == 0 and not include_p:
+					continue
+				array.append(p + Vector2(x, y))
+	return array
 
 
-func _set_cursor_text(rect : Rect2) -> void:
+func _set_cursor_text(rect: Rect2) -> void:
 	cursor_text = "%s, %s" % [rect.position.x, rect.position.y]
 	cursor_text += " -> %s, %s" % [rect.end.x - 1, rect.end.y - 1]
 	cursor_text += " (%s, %s)" % [rect.size.x, rect.size.y]
-

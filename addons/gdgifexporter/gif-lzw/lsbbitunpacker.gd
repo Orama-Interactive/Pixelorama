@@ -1,7 +1,7 @@
 extends Reference
 
 
-class LSB_LZWBitUnpacker:
+class LSBLZWBitUnpacker:
 	var chunk_stream: PoolByteArray
 	var bit_index: int = 0
 	var byte: int

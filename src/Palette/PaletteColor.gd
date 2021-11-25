@@ -3,7 +3,7 @@ extends Resource
 
 const UNSET_INDEX := -1
 
-export var color : Color = Color.transparent
+export var color: Color = Color.transparent
 export var index := UNSET_INDEX
 
 

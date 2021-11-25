@@ -50,7 +50,10 @@ func _on_PaletteGrid_gui_input(event) -> void:
 		if event.button_index == BUTTON_MIDDLE and event.pressed:
 			drag_started = true
 			# Keeps position where the dragging started
-			drag_start_position = event.position + Vector2(h_slider.value, v_slider.value) * PaletteSwatch.SWATCH_SIZE
+			drag_start_position = (
+				event.position
+				+ Vector2(h_slider.value, v_slider.value) * PaletteSwatch.SWATCH_SIZE
+			)
 
 	if event is InputEventMouseMotion and drag_started:
 		h_slider.value = (drag_start_position.x - event.position.x) / PaletteSwatch.SWATCH_SIZE.x

@@ -4,11 +4,13 @@ var default_shortcuts_preset := {}
 var custom_shortcuts_preset := {}
 var action_being_edited := ""
 var shortcut_already_assigned = false
-var old_input_event : InputEventKey
-var new_input_event : InputEventKey
+var old_input_event: InputEventKey
+var new_input_event: InputEventKey
 
 onready var shortcut_selector_popup = Global.preferences_dialog.get_node("Popups/ShortcutSelector")
-onready var theme_font_color : Color = Global.preferences_dialog.get_node("Popups/ShortcutSelector/EnteredShortcut").get_color("font_color")
+onready var theme_font_color: Color = shortcut_selector_popup.get_node("EnteredShortcut").get_color(
+	"font_color"
+)
 
 
 func _ready() -> void:
@@ -21,9 +23,13 @@ func _ready() -> void:
 		if shortcut_grid_item is Button:
 			var input_events = InputMap.get_action_list(shortcut_grid_item.name)
 			if input_events.size() > 1:
-				printerr("Every shortcut action should have just one input event assigned in input map")
+				printerr(
+					"Every shortcut action should have just one input event assigned in input map"
+				)
 			shortcut_grid_item.text = (input_events[0] as InputEventKey).as_text()
-			shortcut_grid_item.connect("pressed", self, "_on_Shortcut_button_pressed", [shortcut_grid_item])
+			shortcut_grid_item.connect(
+				"pressed", self, "_on_Shortcut_button_pressed", [shortcut_grid_item]
+			)
 			default_shortcuts_preset[shortcut_grid_item.name] = input_events[0]
 
 	# Load custom shortcuts from the config file
@@ -38,7 +44,7 @@ func _ready() -> void:
 	_on_PresetOptionButton_item_selected(shortcuts_preset)
 
 
-func _input(event : InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed:
 			if event.scancode == KEY_ESCAPE:
@@ -48,9 +54,16 @@ func _input(event : InputEvent) -> void:
 				for action in InputMap.get_actions():
 					for input_event in InputMap.get_action_list(action):
 						if input_event is InputEventKey:
-							if OS.get_scancode_string(input_event.get_scancode_with_modifiers()) == OS.get_scancode_string(event.get_scancode_with_modifiers()):
-								shortcut_selector_popup.get_node("EnteredShortcut").text = tr("Already assigned")
-								shortcut_selector_popup.get_node("EnteredShortcut").add_color_override("font_color", Color.crimson)
+							if (
+								OS.get_scancode_string(input_event.get_scancode_with_modifiers())
+								== OS.get_scancode_string(event.get_scancode_with_modifiers())
+							):
+								shortcut_selector_popup.get_node("EnteredShortcut").text = tr(
+									"Already assigned"
+								)
+								shortcut_selector_popup.get_node("EnteredShortcut").add_color_override(
+									"font_color", Color.crimson
+								)
 								get_tree().set_input_as_handled()
 								shortcut_already_assigned = true
 								return
@@ -59,12 +72,16 @@ func _input(event : InputEvent) -> void:
 				shortcut_already_assigned = false
 				old_input_event = InputMap.get_action_list(action_being_edited)[0]
 				new_input_event = event
-				shortcut_selector_popup.get_node("EnteredShortcut").text = OS.get_scancode_string(event.get_scancode_with_modifiers())
-				shortcut_selector_popup.get_node("EnteredShortcut").add_color_override("font_color", theme_font_color)
+				shortcut_selector_popup.get_node("EnteredShortcut").text = OS.get_scancode_string(
+					event.get_scancode_with_modifiers()
+				)
+				shortcut_selector_popup.get_node("EnteredShortcut").add_color_override(
+					"font_color", theme_font_color
+				)
 			get_tree().set_input_as_handled()
 
 
-func _on_PresetOptionButton_item_selected(id : int) -> void:
+func _on_PresetOptionButton_item_selected(id: int) -> void:
 	# Only custom preset which is modifiable
 	toggle_shortcut_buttons(true if id == 1 else false)
 	match id:
@@ -78,12 +95,14 @@ func _on_PresetOptionButton_item_selected(id : int) -> void:
 
 func apply_shortcuts_preset(preset) -> void:
 	for action in preset:
-		var _old_input_event : InputEventKey = InputMap.get_action_list(action)[0]
-		set_action_shortcut(action, _old_input_event, preset[action])
-		get_node("Shortcuts/" + action).text = OS.get_scancode_string(preset[action].get_scancode_with_modifiers())
+		var preset_old_input_event: InputEventKey = InputMap.get_action_list(action)[0]
+		set_action_shortcut(action, preset_old_input_event, preset[action])
+		get_node("Shortcuts/" + action).text = OS.get_scancode_string(
+			preset[action].get_scancode_with_modifiers()
+		)
 
 
-func toggle_shortcut_buttons(enabled : bool) -> void:
+func toggle_shortcut_buttons(enabled: bool) -> void:
 	for shortcut_grid_item in get_node("Shortcuts").get_children():
 		if shortcut_grid_item is Button:
 			shortcut_grid_item.disabled = not enabled
@@ -93,16 +112,17 @@ func toggle_shortcut_buttons(enabled : bool) -> void:
 				shortcut_grid_item.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
-func set_action_shortcut(action : String, old_input : InputEventKey, new_input : InputEventKey) -> void:
-	InputMap.action_erase_event(action, old_input)
-	InputMap.action_add_event(action, new_input)
-	Global.update_hint_tooltips()
+func set_action_shortcut(action: String, oldinput: InputEventKey, newinput: InputEventKey) -> void:
+	InputMap.action_erase_event(action, oldinput)
+	InputMap.action_add_event(action, newinput)
+	var color_switch: BaseButton = Global.control.find_node("ColorSwitch")
 	# Set shortcut to switch colors button
 	if action == "switch_colors":
-		Global.control.find_node("ColorSwitch").shortcut.shortcut = InputMap.get_action_list("switch_colors")[0]
+		color_switch.shortcut.shortcut = InputMap.get_action_list("switch_colors")[0]
+	Global.update_hint_tooltips()
 
 
-func _on_Shortcut_button_pressed(button : Button) -> void:
+func _on_Shortcut_button_pressed(button: Button) -> void:
 	set_process_input(true)
 	action_being_edited = button.name
 	new_input_event = InputMap.get_action_list(button.name)[0]
@@ -121,5 +141,7 @@ func _on_ShortcutSelector_confirmed() -> void:
 		custom_shortcuts_preset[action_being_edited] = new_input_event
 		Global.config_cache.set_value("shortcuts", action_being_edited, new_input_event)
 		Global.config_cache.save("user://cache.ini")
-		get_node("Shortcuts/" + action_being_edited).text = OS.get_scancode_string(new_input_event.get_scancode_with_modifiers())
+		get_node("Shortcuts/" + action_being_edited).text = OS.get_scancode_string(
+			new_input_event.get_scancode_with_modifiers()
+		)
 		shortcut_selector_popup.hide()
