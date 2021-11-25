@@ -529,7 +529,7 @@ func _on_BlueRedMode_toggled(button_pressed: bool) -> void:
 
 func _on_PastPlacement_item_selected(index):
 	Global.past_above_canvas = (index == 0)
-	Global.canvas.get_node("OnionPast").set("show_behind_parent", !Global.past_above_canvas) 
+	Global.canvas.get_node("OnionPast").set("show_behind_parent", !Global.past_above_canvas)
 
 
 func _on_FuturePlacement_item_selected(index):
@@ -538,6 +538,8 @@ func _on_FuturePlacement_item_selected(index):
 
 
 # Layer buttons
+
+
 func add_layer(is_new := true) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var new_layers: Array = Global.current_project.layers.duplicate()
