@@ -115,11 +115,11 @@ func toggle_shortcut_buttons(enabled: bool) -> void:
 func set_action_shortcut(action: String, oldinput: InputEventKey, newinput: InputEventKey) -> void:
 	InputMap.action_erase_event(action, oldinput)
 	InputMap.action_add_event(action, newinput)
-	Global.update_hint_tooltips()
 	var color_switch: BaseButton = Global.control.find_node("ColorSwitch")
 	# Set shortcut to switch colors button
 	if action == "switch_colors":
 		color_switch.shortcut.shortcut = InputMap.get_action_list("switch_colors")[0]
+	Global.update_hint_tooltips()
 
 
 func _on_Shortcut_button_pressed(button: Button) -> void:
