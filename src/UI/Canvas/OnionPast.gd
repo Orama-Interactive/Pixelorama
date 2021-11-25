@@ -4,7 +4,7 @@ extends Node2D
 func _draw() -> void:
 	if Global.onion_skinning:
 		if Global.onion_skinning_past_rate > 0:
-			var color : Color
+			var color: Color
 			if Global.onion_skinning_blue_red:
 				color = Color.blue
 			else:
