@@ -504,7 +504,8 @@ margin_top = 2.0
 margin_right = 20.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
-hint_tooltip = "FIRSTFRAME_HT"
+hint_tooltip = "Jump to the first frame
+(%s)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
@@ -531,7 +532,8 @@ margin_top = 2.0
 margin_right = 44.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
-hint_tooltip = "PREVIOUSFRAME_HT"
+hint_tooltip = "Go to the previous frame
+(%s)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
@@ -558,7 +560,8 @@ margin_top = 2.0
 margin_right = 68.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
-hint_tooltip = "PLAYBACKWARDS_HT"
+hint_tooltip = "Play the animation backwards (from end to beginning)
+(%s)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
@@ -586,7 +589,8 @@ margin_top = 2.0
 margin_right = 92.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
-hint_tooltip = "PLAYFORWARD_HT"
+hint_tooltip = "Play the animation forward (from beginning to end)
+(%s)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
@@ -615,7 +619,8 @@ margin_top = 2.0
 margin_right = 116.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
-hint_tooltip = "NEXTFRAME_HT"
+hint_tooltip = "Go to the next frame
+(%s)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
@@ -642,7 +647,8 @@ margin_top = 2.0
 margin_right = 140.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
-hint_tooltip = "LASTFRAME_HT"
+hint_tooltip = "Jump to the last frame
+(%s)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4

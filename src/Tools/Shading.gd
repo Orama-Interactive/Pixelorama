@@ -1,35 +1,33 @@
 extends "res://src/Tools/Draw.gd"
 
-
-enum ShadingMode {SIMPLE, HUE_SHIFTING}
-enum LightenDarken {LIGHTEN, DARKEN}
-
+enum ShadingMode { SIMPLE, HUE_SHIFTING }
+enum LightenDarken { LIGHTEN, DARKEN }
 
 var _prev_mode := 0
 var _last_position := Vector2.INF
 var _changed := false
-var _shading_mode : int = ShadingMode.SIMPLE
-var _mode : int = LightenDarken.LIGHTEN
+var _shading_mode: int = ShadingMode.SIMPLE
+var _mode: int = LightenDarken.LIGHTEN
 var _amount := 10
 var _hue_amount := 10
 var _sat_amount := 10
 var _value_amount := 10
 
 
-class LightenDarkenOp extends Drawer.ColorOp:
+class LightenDarkenOp:
+	extends Drawer.ColorOp
 	var changed := false
-	var shading_mode : int = ShadingMode.SIMPLE
-	var lighten_or_darken : int = LightenDarken.LIGHTEN
+	var shading_mode: int = ShadingMode.SIMPLE
+	var lighten_or_darken: int = LightenDarken.LIGHTEN
 	var hue_amount := 10.0
 	var sat_amount := 10.0
 	var value_amount := 10.0
 
-	var hue_lighten_limit := 60.0 / 360.0 # A yellow color
-	var hue_darken_limit := 240.0 / 360.0 # A blue color
+	var hue_lighten_limit := 60.0 / 360.0  # A yellow color
+	var hue_darken_limit := 240.0 / 360.0  # A blue color
 
 	var sat_lighten_limit := 10.0 / 100.0
 	var value_darken_limit := 10.0 / 100.0
-
 
 	func process(_src: Color, dst: Color) -> Color:
 		changed = true
@@ -66,14 +64,12 @@ class LightenDarkenOp extends Drawer.ColorOp:
 
 		return dst
 
-
 	# Returns true if the colors are roughly between yellow, green and blue
 	# False when the colors are roughly between red-orange-yellow, or blue-purple-red
-	func hue_range(hue : float) -> bool:
+	func hue_range(hue: float) -> bool:
 		return hue > hue_lighten_limit and hue < hue_darken_limit
 
-
-	func hue_limit_lighten(hue : float, hue_shift : float) -> float:
+	func hue_limit_lighten(hue: float, hue_shift: float) -> float:
 		# Colors between red-orange-yellow and blue-purple-red
 		if hue_shift > 0:
 			# Just colors between red-orange-yellow
@@ -82,7 +78,7 @@ class LightenDarkenOp extends Drawer.ColorOp:
 					hue_shift = hue_lighten_limit - hue
 			# Just blue-purple-red
 			else:
-				if hue + hue_shift >= hue_lighten_limit + 1: # +1 looping around the color wheel
+				if hue + hue_shift >= hue_lighten_limit + 1:  # +1 looping around the color wheel
 					hue_shift = hue_lighten_limit - hue
 
 		# Colors between yellow-green-blue
@@ -90,13 +86,12 @@ class LightenDarkenOp extends Drawer.ColorOp:
 			hue_shift = hue_lighten_limit - hue
 		return hue_shift
 
-
-	func hue_limit_darken(hue : float, hue_shift : float) -> float:
+	func hue_limit_darken(hue: float, hue_shift: float) -> float:
 		# Colors between red-orange-yellow and blue-purple-red
 		if hue_shift > 0:
 			# Just colors between red-orange-yellow
 			if hue < hue_darken_limit:
-				if hue - hue_shift <= hue_darken_limit - 1: # -1 looping backwards around the color wheel
+				if hue - hue_shift <= hue_darken_limit - 1:  # -1 looping backwards around the color wheel
 					hue_shift = hue - hue_darken_limit
 			# Just blue-purple-red
 			else:
@@ -114,7 +109,7 @@ func _init() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	var options : OptionButton = $LightenDarken
+	var options: OptionButton = $LightenDarken
 
 	if event.is_action_pressed("ctrl"):
 		_prev_mode = options.selected
@@ -128,39 +123,39 @@ func _input(event: InputEvent) -> void:
 		_drawer.color_op.lighten_or_darken = _mode
 
 
-func _on_ShadingMode_item_selected(id : int) -> void:
+func _on_ShadingMode_item_selected(id: int) -> void:
 	_shading_mode = id
 	_drawer.color_op.shading_mode = id
 	update_config()
 	save_config()
 
 
-func _on_LightenDarken_item_selected(id : int) -> void:
+func _on_LightenDarken_item_selected(id: int) -> void:
 	_mode = id
 	_drawer.color_op.lighten_or_darken = id
 	update_config()
 	save_config()
 
 
-func _on_LightenDarken_value_changed(value : float) -> void:
+func _on_LightenDarken_value_changed(value: float) -> void:
 	_amount = int(value)
 	update_config()
 	save_config()
 
 
-func _on_LightenDarken_hue_value_changed(value : float) -> void:
+func _on_LightenDarken_hue_value_changed(value: float) -> void:
 	_hue_amount = int(value)
 	update_config()
 	save_config()
 
 
-func _on_LightenDarken_sat_value_changed(value : float) -> void:
+func _on_LightenDarken_sat_value_changed(value: float) -> void:
 	_sat_amount = int(value)
 	update_config()
 	save_config()
 
 
-func _on_LightenDarken_value_value_changed(value : float) -> void:
+func _on_LightenDarken_value_value_changed(value: float) -> void:
 	_value_amount = int(value)
 	update_config()
 	save_config()
@@ -177,7 +172,7 @@ func get_config() -> Dictionary:
 	return config
 
 
-func set_config(config : Dictionary) -> void:
+func set_config(config: Dictionary) -> void:
 	.set_config(config)
 	_shading_mode = config.get("shading_mode", _shading_mode)
 	_drawer.color_op.shading_mode = _shading_mode
@@ -214,7 +209,7 @@ func update_strength() -> void:
 	_drawer.color_op.value_amount = _value_amount
 
 
-func draw_start(position : Vector2) -> void:
+func draw_start(position: Vector2) -> void:
 	if Input.is_action_pressed("alt"):
 		_picking_color = true
 		_pick_color(position)
@@ -241,8 +236,8 @@ func draw_start(position : Vector2) -> void:
 	cursor_text = ""
 
 
-func draw_move(position : Vector2) -> void:
-	if _picking_color: # Still return even if we released Alt
+func draw_move(position: Vector2) -> void:
+	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("alt"):
 			_pick_color(position)
 		return
@@ -259,7 +254,7 @@ func draw_move(position : Vector2) -> void:
 		Global.canvas.sprite_changed_this_frame = true
 
 
-func draw_end(_position : Vector2) -> void:
+func draw_end(_position: Vector2) -> void:
 	if _picking_color:
 		return
 
@@ -273,7 +268,7 @@ func draw_end(_position : Vector2) -> void:
 	update_random_image()
 
 
-func _draw_brush_image(image : Image, src_rect: Rect2, dst: Vector2) -> void:
+func _draw_brush_image(image: Image, src_rect: Rect2, dst: Vector2) -> void:
 	_changed = true
 	image.lock()
 	for xx in image.get_size().x:

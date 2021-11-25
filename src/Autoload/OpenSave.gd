@@ -1,11 +1,11 @@
 extends Node
 
-
-var current_save_paths := [] # Array of strings
+var current_save_paths := []  # Array of strings
 # Stores a filename of a backup file in user:// until user saves manually
-var backup_save_paths := [] # Array of strings
+var backup_save_paths := []  # Array of strings
+var preview_dialog_tscn = preload("res://src/UI/Dialogs/PreviewDialog.tscn")
 
-onready var autosave_timer : Timer
+onready var autosave_timer: Timer
 
 
 func _ready() -> void:
@@ -17,28 +17,30 @@ func _ready() -> void:
 	update_autosave()
 
 
-func handle_loading_files(files : PoolStringArray) -> void:
+func handle_loading_files(files: PoolStringArray) -> void:
 	for file in files:
 		file = file.replace("\\", "/")
-		var file_ext : String = file.get_extension().to_lower()
-		if file_ext == "pxo": # Pixelorama project file
+		var file_ext: String = file.get_extension().to_lower()
+		if file_ext == "pxo":  # Pixelorama project file
 			open_pxo_file(file)
-		elif file_ext == "tres" or file_ext == "gpl" or file_ext == "pal" or file_ext == "json": # Palettes
+		elif file_ext == "tres" or file_ext == "gpl" or file_ext == "pal" or file_ext == "json":
 			Palettes.import_palette(file)
-		else: # Image files
+		else:  # Image files
 			var image := Image.new()
 			var err := image.load(file)
-			if err != OK: # An error occured
-				var file_name : String = file.get_file()
-				Global.error_dialog.set_text(tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)])
+			if err != OK:  # An error occured
+				var file_name: String = file.get_file()
+				Global.error_dialog.set_text(
+					tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)]
+				)
 				Global.error_dialog.popup_centered()
 				Global.dialog_open(true)
 				continue
 			handle_loading_image(file, image)
 
 
-func handle_loading_image(file : String, image : Image) -> void:
-	var preview_dialog : ConfirmationDialog = preload("res://src/UI/Dialogs/PreviewDialog.tscn").instance()
+func handle_loading_image(file: String, image: Image) -> void:
+	var preview_dialog: ConfirmationDialog = preview_dialog_tscn.instance()
 	preview_dialog.path = file
 	preview_dialog.image = image
 	Global.control.add_child(preview_dialog)
@@ -46,11 +48,11 @@ func handle_loading_image(file : String, image : Image) -> void:
 	Global.dialog_open(true)
 
 
-func open_pxo_file(path : String, untitled_backup : bool = false, replace_empty : bool = true) -> void:
+func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: bool = true) -> void:
 	var file := File.new()
 	var err := file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
 	if err == ERR_FILE_UNRECOGNIZED:
-		err = file.open(path, File.READ) # If the file is not compressed open it raw (pre-v0.7)
+		err = file.open(path, File.READ)  # If the file is not compressed open it raw (pre-v0.7)
 
 	if err != OK:
 		Global.error_dialog.set_text(tr("File failed to open. Error code %s") % err)
@@ -59,8 +61,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false, replace_empty 
 		file.close()
 		return
 
-	var empty_project : bool = Global.current_project.is_empty() and replace_empty
-	var new_project : Project
+	var empty_project: bool = Global.current_project.is_empty() and replace_empty
+	var new_project: Project
 	if empty_project:
 		new_project = Global.current_project
 		new_project.frames = []
@@ -84,8 +86,10 @@ func open_pxo_file(path : String, untitled_backup : bool = false, replace_empty 
 		for frame in new_project.frames:
 			for cel in frame.cels:
 				var buffer := file.get_buffer(new_project.size.x * new_project.size.y * 4)
-				cel.image.create_from_data(new_project.size.x, new_project.size.y, false, Image.FORMAT_RGBA8, buffer)
-				cel.image = cel.image # Just to call image_changed
+				cel.image.create_from_data(
+					new_project.size.x, new_project.size.y, false, Image.FORMAT_RGBA8, buffer
+				)
+				cel.image = cel.image  # Just to call image_changed
 
 		if dict.result.has("brushes"):
 			for brush in dict.result.brushes:
@@ -104,8 +108,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false, replace_empty 
 	else:
 		if dict.error == OK and dict.result.has("fps"):
 			Global.animation_timeline.fps_spinbox.value = dict.result.fps
-		new_project.frames = new_project.frames # Just to call frames_changed
-		new_project.layers = new_project.layers # Just to call layers_changed
+		new_project.frames = new_project.frames  # Just to call frames_changed
+		new_project.layers = new_project.layers  # Just to call layers_changed
 	Global.canvas.camera_zoom()
 
 	if not untitled_backup:
@@ -128,7 +132,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false, replace_empty 
 
 
 # For pxo files older than v0.8
-func open_old_pxo_file(file : File, new_project : Project, first_line : String) -> void:
+func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> void:
 #	var file_version := file.get_line() # Example, "v0.7.10-beta"
 	var file_version := first_line
 	var file_ver_splitted := file_version.split("-")
@@ -140,15 +144,14 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 	var file_major_version = int(file_ver_splitted_numbers[0].replace("v", ""))
 	var file_minor_version = int(file_ver_splitted_numbers[1])
 	var file_patch_version := 0
-	var _file_status_version : String
 
 	if file_ver_splitted_numbers.size() > 2:
 		file_patch_version = int(file_ver_splitted_numbers[2])
-	if file_ver_splitted.size() > 1:
-		_file_status_version = file_ver_splitted[1]
 
 	if file_major_version == 0 and file_minor_version < 5:
-		Global.notification_label("File is from an older version of Pixelorama, as such it might not work properly")
+		Global.notification_label(
+			"File is from an older version of Pixelorama, as such it might not work properly"
+		)
 
 	var new_guides := true
 	if file_major_version == 0:
@@ -167,19 +170,26 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 			var layer_new_cels_linked := file.get_8()
 			linked_cels.append(file.get_var())
 
-			var l := Layer.new(layer_name, layer_visibility, layer_lock, HBoxContainer.new(), layer_new_cels_linked, [])
+			var l := Layer.new(
+				layer_name,
+				layer_visibility,
+				layer_lock,
+				HBoxContainer.new(),
+				layer_new_cels_linked,
+				[]
+			)
 			new_project.layers.append(l)
 			global_layer_line = file.get_line()
 
 	var frame_line := file.get_line()
-	while frame_line == "--": # Load frames
+	while frame_line == "--":  # Load frames
 		var frame_class := Frame.new()
 		var width := file.get_16()
 		var height := file.get_16()
 
 		var layer_i := 0
 		var layer_line := file.get_line()
-		while layer_line == "-": # Load layers
+		while layer_line == "-":  # Load layers
 			var buffer := file.get_buffer(width * height * 4)
 			if file_major_version == 0 and file_minor_version < 7:
 				var layer_name_old_version = file.get_line()
@@ -194,16 +204,17 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 			frame_class.cels.append(Cel.new(image, cel_opacity))
 			if file_major_version >= 0 and file_minor_version >= 7:
 				if frame in linked_cels[layer_i]:
+					var linked_cel: Cel = new_project.layers[layer_i].linked_cels[0].cels[layer_i]
 					new_project.layers[layer_i].linked_cels.append(frame_class)
-					frame_class.cels[layer_i].image = new_project.layers[layer_i].linked_cels[0].cels[layer_i].image
-					frame_class.cels[layer_i].image_texture = new_project.layers[layer_i].linked_cels[0].cels[layer_i].image_texture
+					frame_class.cels[layer_i].image = linked_cel.image
+					frame_class.cels[layer_i].image_texture = linked_cel.image_texture
 
 			layer_i += 1
 			layer_line = file.get_line()
 
 		if !new_guides:
-			var guide_line := file.get_line() # "guideline" no pun intended
-			while guide_line == "|": # Load guides
+			var guide_line := file.get_line()  # "guideline" no pun intended
+			while guide_line == "|":  # Load guides
 				var guide := Guide.new()
 				guide.type = file.get_8()
 				if guide.type == guide.Types.HORIZONTAL:
@@ -223,8 +234,8 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 		frame += 1
 
 	if new_guides:
-		var guide_line := file.get_line() # "guideline" no pun intended
-		while guide_line == "|": # Load guides
+		var guide_line := file.get_line()  # "guideline" no pun intended
+		while guide_line == "|":  # Load guides
 			var guide := Guide.new()
 			guide.type = file.get_8()
 			if guide.type == guide.Types.HORIZONTAL:
@@ -263,31 +274,42 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 		var tag_line := file.get_line()
 		while tag_line == ".T/":
 			var tag_name := file.get_line()
-			var tag_color : Color = file.get_var()
+			var tag_color: Color = file.get_var()
 			var tag_from := file.get_8()
 			var tag_to := file.get_8()
-			new_project.animation_tags.append(AnimationTag.new(tag_name, tag_color, tag_from, tag_to))
-			new_project.animation_tags = new_project.animation_tags # To execute animation_tags_changed()
+			new_project.animation_tags.append(
+				AnimationTag.new(tag_name, tag_color, tag_from, tag_to)
+			)
+			new_project.animation_tags = new_project.animation_tags  # To execute animation_tags_changed()
 			tag_line = file.get_line()
 
 
-func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true, project : Project = Global.current_project) -> void:
+func save_pxo_file(
+	path: String,
+	autosave: bool,
+	use_zstd_compression := true,
+	project: Project = Global.current_project
+) -> void:
 	if !autosave:
 		project.name = path.get_file()
 	var serialized_data = project.serialize()
 	if !serialized_data:
-		Global.error_dialog.set_text(tr("File failed to save. Converting project data to dictionary failed."))
+		Global.error_dialog.set_text(
+			tr("File failed to save. Converting project data to dictionary failed.")
+		)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
 		return
 	var to_save = JSON.print(serialized_data)
 	if !to_save:
-		Global.error_dialog.set_text(tr("File failed to save. Converting dictionary to JSON failed."))
+		Global.error_dialog.set_text(
+			tr("File failed to save. Converting dictionary to JSON failed.")
+		)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
 		return
 
-	var file : File = File.new()
+	var file: File = File.new()
 	var err
 	if use_zstd_compression:
 		err = file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
@@ -314,7 +336,7 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 
 	file.close()
 
-	if OS.get_name() == "HTML5" and OS.has_feature('JavaScript') and !autosave:
+	if OS.get_name() == "HTML5" and OS.has_feature("JavaScript") and !autosave:
 		err = file.open(path, File.READ)
 		if !err:
 			var file_data = Array(file.get_buffer(file.get_len()))
@@ -346,7 +368,7 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 	save_project_to_recent_list(path)
 
 
-func open_image_as_new_tab(path : String, image : Image) -> void:
+func open_image_as_new_tab(path: String, image: Image) -> void:
 	var project = Project.new([], path.get_file(), image.get_size())
 	project.layers.append(Layer.new())
 	Global.projects.append(project)
@@ -359,19 +381,21 @@ func open_image_as_new_tab(path : String, image : Image) -> void:
 	set_new_tab(project, path)
 
 
-func open_image_as_spritesheet_tab(path : String, image : Image, horizontal : int, vertical : int) -> void:
+func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert: int) -> void:
 	var project = Project.new([], path.get_file())
 	project.layers.append(Layer.new())
 	Global.projects.append(project)
-	horizontal = min(horizontal, image.get_size().x)
-	vertical = min(vertical, image.get_size().y)
-	var frame_width := image.get_size().x / horizontal
-	var frame_height := image.get_size().y / vertical
-	for yy in range(vertical):
-		for xx in range(horizontal):
+	horiz = min(horiz, image.get_size().x)
+	vert = min(vert, image.get_size().y)
+	var frame_width := image.get_size().x / horiz
+	var frame_height := image.get_size().y / vert
+	for yy in range(vert):
+		for xx in range(horiz):
 			var frame := Frame.new()
 			var cropped_image := Image.new()
-			cropped_image = image.get_rect(Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height))
+			cropped_image = image.get_rect(
+				Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height)
+			)
 			project.size = cropped_image.get_size()
 			cropped_image.convert(Image.FORMAT_RGBA8)
 			frame.cels.append(Cel.new(cropped_image, 1))
@@ -387,7 +411,9 @@ func open_image_as_spritesheet_tab(path : String, image : Image, horizontal : in
 	set_new_tab(project, path)
 
 
-func open_image_as_spritesheet_layer(_path : String, image : Image, file_name : String, horizontal : int, vertical : int, start_frame : int) -> void:
+func open_image_as_spritesheet_layer(
+	_path: String, image: Image, file_name: String, horizontal: int, vertical: int, start_frame: int
+) -> void:
 	# data needed to slice images
 	horizontal = min(horizontal, image.get_size().x)
 	vertical = min(vertical, image.get_size().y)
@@ -395,36 +421,42 @@ func open_image_as_spritesheet_layer(_path : String, image : Image, file_name : 
 	var frame_height := image.get_size().y / vertical
 
 	# resize canvas to if "frame_width" or "frame_height" is too large
-	var project_width :int = max(frame_width, Global.current_project.size.x)
-	var project_height :int = max(frame_height, Global.current_project.size.y)
-	DrawingAlgos.resize_canvas(project_width, project_height,0 ,0)
+	var project_width: int = max(frame_width, Global.current_project.size.x)
+	var project_height: int = max(frame_height, Global.current_project.size.y)
+	DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 
 	# slice images
-	var image_no :int = 0
+	var image_no: int = 0
 	for yy in range(vertical):
 		for xx in range(horizontal):
 			var cropped_image := Image.new()
-			cropped_image = image.get_rect(Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height))
+			cropped_image = image.get_rect(
+				Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height)
+			)
 			if (start_frame + (image_no)) < Global.current_project.frames.size():
 				# if frames are already present then fill those first
 				if image_no == 0:
 					open_image_as_new_layer(cropped_image, file_name, start_frame + image_no)
 				else:
-					open_image_at_frame(cropped_image, Global.current_project.layers.size() - 1, start_frame + image_no)
+					open_image_at_frame(
+						cropped_image,
+						Global.current_project.layers.size() - 1,
+						start_frame + image_no
+					)
 			else:
 				# if no more frames are present then start making new frames
 				open_image_as_new_frame(cropped_image, Global.current_project.layers.size() - 1)
 			image_no += 1
 
 
-func open_image_at_frame(image : Image, layer_index := 0, frame_index := 0) -> void:
+func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> void:
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 
 	project.undos += 1
 	project.undo_redo.create_action("Replaced Frame")
 
-	var frames :Array = []
+	var frames: Array = []
 	# create a duplicate of "project.frames"
 	for i in project.frames.size():
 		var frame := Frame.new()
@@ -449,10 +481,10 @@ func open_image_at_frame(image : Image, layer_index := 0, frame_index := 0) -> v
 	project.undo_redo.commit_action()
 
 
-func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
+func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
-	var new_frames : Array = project.frames.duplicate()
+	var new_frames: Array = project.frames.duplicate()
 
 	var frame := Frame.new()
 	for i in project.layers.size():
@@ -481,16 +513,16 @@ func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
 	project.undo_redo.commit_action()
 
 
-func open_image_as_new_layer(image : Image, file_name : String, frame_index := 0) -> void:
+func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) -> void:
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
-	var new_layers : Array = Global.current_project.layers.duplicate()
+	var new_layers: Array = Global.current_project.layers.duplicate()
 	var layer := Layer.new(file_name)
 
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Add Layer")
 	for i in project.frames.size():
-		var new_cels : Array = project.frames[i].cels.duplicate(true)
+		var new_cels: Array = project.frames[i].cels.duplicate(true)
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
 			new_cels.append(Cel.new(image, 1))
@@ -501,7 +533,6 @@ func open_image_as_new_layer(image : Image, file_name : String, frame_index := 0
 
 		project.undo_redo.add_do_property(project.frames[i], "cels", new_cels)
 		project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
-
 
 	new_layers.append(layer)
 
@@ -518,11 +549,17 @@ func open_image_as_new_layer(image : Image, file_name : String, frame_index := 0
 	project.undo_redo.commit_action()
 
 
-func set_new_tab(project : Project, path : String) -> void:
+func set_new_tab(project: Project, path: String) -> void:
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
 
-	Global.window_title = path.get_file() + " (" + tr("imported") + ") - Pixelorama " + Global.current_version
+	Global.window_title = (
+		path.get_file()
+		+ " ("
+		+ tr("imported")
+		+ ") - Pixelorama "
+		+ Global.current_version
+	)
 	if project.has_changed:
 		Global.window_title = Global.window_title + "(*)"
 	var file_name := path.get_basename().get_file()
@@ -535,7 +572,8 @@ func set_new_tab(project : Project, path : String) -> void:
 
 func update_autosave() -> void:
 	autosave_timer.stop()
-	autosave_timer.wait_time = Global.autosave_interval * 60 # Interval parameter is in minutes, wait_time is seconds
+	# Interval parameter is in minutes, wait_time is seconds
+	autosave_timer.wait_time = Global.autosave_interval * 60
 	if Global.enable_autosave:
 		autosave_timer.start()
 
@@ -553,7 +591,7 @@ func _on_Autosave_timeout() -> void:
 # Backup paths are stored in two ways:
 # 1) User already manually saved and defined a save path -> {current_save_path, backup_save_path}
 # 2) User didn't manually saved, "untitled" backup is stored -> {backup_save_path, backup_save_path}
-func store_backup_path(i : int) -> void:
+func store_backup_path(i: int) -> void:
 	if current_save_paths[i] != "":
 		# Remove "untitled" backup if it existed on this project instance
 		if Global.config_cache.has_section_key("backups", backup_save_paths[i]):
@@ -566,7 +604,7 @@ func store_backup_path(i : int) -> void:
 	Global.config_cache.save("user://cache.ini")
 
 
-func remove_backup(i : int) -> void:
+func remove_backup(i: int) -> void:
 	# Remove backup file
 	if backup_save_paths[i] != "":
 		if current_save_paths[i] != "":
@@ -577,7 +615,7 @@ func remove_backup(i : int) -> void:
 		backup_save_paths[i] = ""
 
 
-func remove_backup_by_path(project_path : String, backup_path : String) -> void:
+func remove_backup_by_path(project_path: String, backup_path: String) -> void:
 	Directory.new().remove(backup_path)
 	if Global.config_cache.has_section_key("backups", project_path):
 		Global.config_cache.erase_section_key("backups", project_path)
@@ -586,7 +624,7 @@ func remove_backup_by_path(project_path : String, backup_path : String) -> void:
 	Global.config_cache.save("user://cache.ini")
 
 
-func reload_backup_file(project_paths : Array, backup_paths : Array) -> void:
+func reload_backup_file(project_paths: Array, backup_paths: Array) -> void:
 	assert(project_paths.size() == backup_paths.size())
 	# Clear non-existant backups
 	var existing_backups_count := 0
@@ -609,16 +647,20 @@ func reload_backup_file(project_paths : Array, backup_paths : Array) -> void:
 		backup_save_paths[i] = backup_paths[i]
 
 		# If project path is the same as backup save path -> the backup was untitled
-		if project_paths[i] != backup_paths[i]: # If the user has saved
+		if project_paths[i] != backup_paths[i]:  # If the user has saved
 			current_save_paths[i] = project_paths[i]
-			Global.window_title = project_paths[i].get_file() + " - Pixelorama(*) " + Global.current_version
+			Global.window_title = (
+				project_paths[i].get_file()
+				+ " - Pixelorama(*) "
+				+ Global.current_version
+			)
 			Global.current_project.has_changed = true
 
 	Global.notification_label("Backup reloaded")
 
 
-func save_project_to_recent_list(path : String) -> void:
-	var top_menu_container : Panel = Global.top_menu_container
+func save_project_to_recent_list(path: String) -> void:
+	var top_menu_container: Panel = Global.top_menu_container
 	if path.get_file().substr(0, 7) == "backup-" or path == "":
 		return
 

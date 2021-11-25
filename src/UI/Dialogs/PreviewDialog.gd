@@ -1,19 +1,28 @@
 extends ConfirmationDialog
 
+enum ImageImportOptions {
+	NEW_TAB,
+	SPRITESHEET_TAB,
+	SPRITESHEET_LAYER,
+	NEW_FRAME,
+	REPLACE_FRAME,
+	NEW_LAYER,
+	PALETTE,
+	BRUSH,
+	PATTERN
+}
+enum BrushTypes { FILE, PROJECT, RANDOM }
 
-enum ImageImportOptions {NEW_TAB, SPRITESHEET_TAB, SPRITESHEET_LAYER, NEW_FRAME, REPLACE_FRAME, NEW_LAYER, PALETTE, BRUSH, PATTERN}
-enum BrushTypes {FILE, PROJECT, RANDOM}
-
-var path : String
-var image : Image
-var current_import_option : int = ImageImportOptions.NEW_TAB
+var path: String
+var image: Image
+var current_import_option: int = ImageImportOptions.NEW_TAB
 var spritesheet_horizontal := 1
 var spritesheet_vertical := 1
-var brush_type : int = BrushTypes.FILE
+var brush_type: int = BrushTypes.FILE
 
-onready var texture_rect : TextureRect = $VBoxContainer/CenterContainer/TextureRect
-onready var image_size_label : Label = $VBoxContainer/SizeContainer/ImageSizeLabel
-onready var frame_size_label : Label = $VBoxContainer/SizeContainer/FrameSizeLabel
+onready var texture_rect: TextureRect = $VBoxContainer/CenterContainer/TextureRect
+onready var image_size_label: Label = $VBoxContainer/SizeContainer/ImageSizeLabel
+onready var frame_size_label: Label = $VBoxContainer/SizeContainer/FrameSizeLabel
 onready var spritesheet_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions
 onready var spritesheet_layer_options = $VBoxContainer/HBoxContainer/SpritesheetLayerOptions
 onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
@@ -24,7 +33,7 @@ onready var new_brush_name = $VBoxContainer/HBoxContainer/NewBrushOptions/BrushN
 
 
 func _on_PreviewDialog_about_to_show() -> void:
-	var import_options :OptionButton= get_node("VBoxContainer/HBoxContainer/ImportOption")
+	var import_options: OptionButton = get_node("VBoxContainer/HBoxContainer/ImportOption")
 
 	# # order as in ImageImportOptions enum
 	import_options.add_item("New tab")
@@ -40,10 +49,26 @@ func _on_PreviewDialog_about_to_show() -> void:
 	var img_texture := ImageTexture.new()
 	img_texture.create_from_image(image, 0)
 	texture_rect.texture = img_texture
-	spritesheet_tab_options.get_node("HorizontalFrames").max_value = min(spritesheet_tab_options.get_node("HorizontalFrames").max_value, image.get_size().x)
-	spritesheet_tab_options.get_node("VerticalFrames").max_value = min(spritesheet_tab_options.get_node("VerticalFrames").max_value, image.get_size().y)
-	image_size_label.text = tr("Image Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
-	frame_size_label.text = tr("Frame Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
+	spritesheet_tab_options.get_node("HorizontalFrames").max_value = min(
+		spritesheet_tab_options.get_node("HorizontalFrames").max_value, image.get_size().x
+	)
+	spritesheet_tab_options.get_node("VerticalFrames").max_value = min(
+		spritesheet_tab_options.get_node("VerticalFrames").max_value, image.get_size().y
+	)
+	image_size_label.text = (
+		tr("Image Size")
+		+ ": "
+		+ str(image.get_size().x)
+		+ "×"
+		+ str(image.get_size().y)
+	)
+	frame_size_label.text = (
+		tr("Frame Size")
+		+ ": "
+		+ str(image.get_size().x)
+		+ "×"
+		+ str(image.get_size().y)
+	)
 
 
 func _on_PreviewDialog_popup_hide() -> void:
@@ -60,23 +85,32 @@ func _on_PreviewDialog_confirmed() -> void:
 		OpenSave.open_image_as_new_tab(path, image)
 
 	elif current_import_option == ImageImportOptions.SPRITESHEET_TAB:
-		OpenSave.open_image_as_spritesheet_tab(path, image, spritesheet_horizontal, spritesheet_vertical)
+		OpenSave.open_image_as_spritesheet_tab(
+			path, image, spritesheet_horizontal, spritesheet_vertical
+		)
 
 	elif current_import_option == ImageImportOptions.SPRITESHEET_LAYER:
-		var frame_index : int = spritesheet_layer_options.get_node("AtFrameSpinbox").value - 1
-		OpenSave.open_image_as_spritesheet_layer(path, image, path.get_basename().get_file(), spritesheet_horizontal, spritesheet_vertical, frame_index)
+		var frame_index: int = spritesheet_layer_options.get_node("AtFrameSpinbox").value - 1
+		OpenSave.open_image_as_spritesheet_layer(
+			path,
+			image,
+			path.get_basename().get_file(),
+			spritesheet_horizontal,
+			spritesheet_vertical,
+			frame_index
+		)
 
 	elif current_import_option == ImageImportOptions.NEW_FRAME:
-		var layer_index : int = new_frame_options.get_node("AtLayerSpinbox").value
+		var layer_index: int = new_frame_options.get_node("AtLayerSpinbox").value
 		OpenSave.open_image_as_new_frame(image, layer_index)
 
 	elif current_import_option == ImageImportOptions.REPLACE_FRAME:
-		var layer_index : int = replace_frame_options.get_node("AtLayerSpinbox").value
-		var frame_index : int = replace_frame_options.get_node("AtFrameSpinbox").value - 1
+		var layer_index: int = replace_frame_options.get_node("AtLayerSpinbox").value
+		var frame_index: int = replace_frame_options.get_node("AtFrameSpinbox").value - 1
 		OpenSave.open_image_at_frame(image, layer_index, frame_index)
 
 	elif current_import_option == ImageImportOptions.NEW_LAYER:
-		var frame_index : int = new_layer_options.get_node("AtFrameSpinbox").value - 1
+		var frame_index: int = new_layer_options.get_node("AtFrameSpinbox").value - 1
 		OpenSave.open_image_as_new_layer(image, path.get_basename().get_file(), frame_index)
 
 	elif current_import_option == ImageImportOptions.PALETTE:
@@ -86,9 +120,9 @@ func _on_PreviewDialog_confirmed() -> void:
 		add_brush()
 
 	elif current_import_option == ImageImportOptions.PATTERN:
-		var file_name_ext : String = path.get_file()
+		var file_name_ext: String = path.get_file()
 		file_name_ext = file_name_replace(file_name_ext, "Patterns")
-		var file_name : String = file_name_ext.get_basename()
+		var file_name: String = file_name_ext.get_basename()
 		image.convert(Image.FORMAT_RGBA8)
 		Global.patterns_popup.add(image, file_name)
 
@@ -98,7 +132,7 @@ func _on_PreviewDialog_confirmed() -> void:
 		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
 
 
-func _on_ImportOption_item_selected(id : int) -> void:
+func _on_ImportOption_item_selected(id: int) -> void:
 	current_import_option = id
 	frame_size_label.visible = false
 	spritesheet_tab_options.visible = false
@@ -122,19 +156,27 @@ func _on_ImportOption_item_selected(id : int) -> void:
 		frame_size_label.visible = true
 		spritesheet_tab_options.visible = true
 		spritesheet_layer_options.visible = true
-		spritesheet_layer_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
+		var n_of_frames: int = Global.current_project.frames.size()
+		spritesheet_layer_options.get_node("AtFrameSpinbox").max_value = n_of_frames
 		texture_rect.get_child(0).visible = true
 		texture_rect.get_child(1).visible = true
 		rect_size.x = spritesheet_layer_options.rect_size.x
 
 	elif id == ImageImportOptions.NEW_FRAME:
 		new_frame_options.visible = true
-		new_frame_options.get_node("AtLayerSpinbox").max_value = Global.current_project.layers.size() - 1
+		new_frame_options.get_node("AtLayerSpinbox").max_value = (
+			Global.current_project.layers.size()
+			- 1
+		)
 
 	elif id == ImageImportOptions.REPLACE_FRAME:
 		replace_frame_options.visible = true
-		replace_frame_options.get_node("AtLayerSpinbox").max_value = Global.current_project.layers.size() - 1
-		replace_frame_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
+		replace_frame_options.get_node("AtLayerSpinbox").max_value = (
+			Global.current_project.layers.size()
+			- 1
+		)
+		var at_frame_spinbox: SpinBox = replace_frame_options.get_node("AtFrameSpinbox")
+		at_frame_spinbox.max_value = Global.current_project.frames.size()
 
 	elif id == ImageImportOptions.NEW_LAYER:
 		new_layer_options.visible = true
@@ -144,7 +186,7 @@ func _on_ImportOption_item_selected(id : int) -> void:
 		new_brush_options.visible = true
 
 
-func _on_HorizontalFrames_value_changed(value : int) -> void:
+func _on_HorizontalFrames_value_changed(value: int) -> void:
 	spritesheet_horizontal = value
 	for child in texture_rect.get_node("HorizLines").get_children():
 		child.queue_free()
@@ -152,7 +194,7 @@ func _on_HorizontalFrames_value_changed(value : int) -> void:
 	spritesheet_frame_value_changed(value, false)
 
 
-func _on_VerticalFrames_value_changed(value : int) -> void:
+func _on_VerticalFrames_value_changed(value: int) -> void:
 	spritesheet_vertical = value
 	for child in texture_rect.get_node("VerticalLines").get_children():
 		child.queue_free()
@@ -160,7 +202,7 @@ func _on_VerticalFrames_value_changed(value : int) -> void:
 	spritesheet_frame_value_changed(value, true)
 
 
-func spritesheet_frame_value_changed(value : int, vertical : bool) -> void:
+func spritesheet_frame_value_changed(value: int, vertical: bool) -> void:
 	var image_size_y = texture_rect.rect_size.y
 	var image_size_x = texture_rect.rect_size.x
 	if image.get_size().x > image.get_size().y:
@@ -198,7 +240,7 @@ func spritesheet_frame_value_changed(value : int, vertical : bool) -> void:
 	frame_size_label.text = tr("Frame Size") + ": " + str(frame_width) + "×" + str(frame_height)
 
 
-func _on_BrushTypeOption_item_selected(index : int) -> void:
+func _on_BrushTypeOption_item_selected(index: int) -> void:
 	brush_type = index
 	new_brush_name.visible = false
 	if brush_type == BrushTypes.RANDOM:
@@ -208,9 +250,9 @@ func _on_BrushTypeOption_item_selected(index : int) -> void:
 func add_brush() -> void:
 	image.convert(Image.FORMAT_RGBA8)
 	if brush_type == BrushTypes.FILE:
-		var file_name_ext : String = path.get_file()
+		var file_name_ext: String = path.get_file()
 		file_name_ext = file_name_replace(file_name_ext, "Brushes")
-		var file_name : String = file_name_ext.get_basename()
+		var file_name: String = file_name_ext.get_basename()
 
 		Brushes.add_file_brush([image], file_name)
 
@@ -220,7 +262,7 @@ func add_brush() -> void:
 		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
 
 	elif brush_type == BrushTypes.PROJECT:
-		var file_name : String =  path.get_file().get_basename()
+		var file_name: String = path.get_file().get_basename()
 		Global.current_project.brushes.append(image)
 		Brushes.add_project_brush(image, file_name)
 
@@ -243,8 +285,8 @@ func add_brush() -> void:
 			curr_file = dir.get_next()
 		dir.list_dir_end()
 
-		var file_ext : String = path.get_file().get_extension()
-		var index : int = random_brushes.size() + 1
+		var file_ext: String = path.get_file().get_extension()
+		var index: int = random_brushes.size() + 1
 		var file_name = "~" + brush_name + str(index) + "." + file_ext
 		var location := "Brushes".plus_file(brush_name).plus_file(file_name)
 		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
@@ -253,7 +295,7 @@ func add_brush() -> void:
 # Checks if the file already exists
 # If it does, add a number to its name, for example
 # "Brush_Name" will become "Brush_Name (2)", "Brush_Name (3)", etc.
-func file_name_replace(name : String, folder : String) -> String:
+func file_name_replace(name: String, folder: String) -> String:
 	var i := 1
 	var file_ext = name.get_extension()
 	var temp_name := name
