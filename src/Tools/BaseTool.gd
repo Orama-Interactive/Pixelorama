@@ -2,7 +2,7 @@ class_name BaseTool
 extends VBoxContainer
 
 var kname: String
-var tool_slot = null # Tools.Slot, can't have static typing due to cyclic errors
+var tool_slot = null  # Tools.Slot, can't have static typing due to cyclic errors
 var cursor_text := ""
 
 var _cursor := Vector2.INF

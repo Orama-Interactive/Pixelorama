@@ -297,7 +297,7 @@ func show_splash_screen() -> void:
 
 
 func handle_backup() -> void:
-	# If backup file exists then Pixelorama was not closed properly (probably crashed) - reopen backup
+	# If backup file exists, Pixelorama was not closed properly (probably crashed) - reopen backup
 	var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
 	backup_confirmation.get_cancel().text = tr("Delete")
 	if Global.config_cache.has_section("backups"):

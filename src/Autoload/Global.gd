@@ -312,29 +312,17 @@ func project_changed(value: int) -> void:
 
 
 func dialog_open(open: bool) -> void:
+	var dim_color := Color.white
 	if open:
 		can_draw = false
 		if dim_on_popup:
-			control.get_node("ModulateTween").interpolate_property(
-				control,
-				"modulate",
-				control.modulate,
-				Color(0.5, 0.5, 0.5),
-				0.1,
-				Tween.TRANS_LINEAR,
-				Tween.EASE_OUT
-			)
+			dim_color = Color(0.5, 0.5, 0.5)
 	else:
 		can_draw = true
-		control.get_node("ModulateTween").interpolate_property(
-			control,
-			"modulate",
-			control.modulate,
-			Color.white,
-			0.1,
-			Tween.TRANS_LINEAR,
-			Tween.EASE_OUT
-		)
+
+	control.get_node("ModulateTween").interpolate_property(
+		control, "modulate", control.modulate, dim_color, 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT
+	)
 
 	control.get_node("ModulateTween").start()
 
