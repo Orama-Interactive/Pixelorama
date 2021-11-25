@@ -100,6 +100,7 @@ func apply_shortcuts_preset(preset) -> void:
 		get_node("Shortcuts/" + action).text = OS.get_scancode_string(
 			preset[action].get_scancode_with_modifiers()
 		)
+	Global.update_hint_tooltips()
 
 
 func toggle_shortcut_buttons(enabled: bool) -> void:
@@ -119,7 +120,6 @@ func set_action_shortcut(action: String, oldinput: InputEventKey, newinput: Inpu
 	# Set shortcut to switch colors button
 	if action == "switch_colors":
 		color_switch.shortcut.shortcut = InputMap.get_action_list("switch_colors")[0]
-	Global.update_hint_tooltips()
 
 
 func _on_Shortcut_button_pressed(button: Button) -> void:
@@ -138,6 +138,7 @@ func _on_ShortcutSelector_popup_hide() -> void:
 func _on_ShortcutSelector_confirmed() -> void:
 	if not shortcut_already_assigned:
 		set_action_shortcut(action_being_edited, old_input_event, new_input_event)
+		Global.update_hint_tooltips()
 		custom_shortcuts_preset[action_being_edited] = new_input_event
 		Global.config_cache.set_value("shortcuts", action_being_edited, new_input_event)
 		Global.config_cache.save("user://cache.ini")
