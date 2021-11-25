@@ -538,8 +538,6 @@ func _on_FuturePlacement_item_selected(index):
 
 
 # Layer buttons
-
-
 func add_layer(is_new := true) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var new_layers: Array = Global.current_project.layers.duplicate()
