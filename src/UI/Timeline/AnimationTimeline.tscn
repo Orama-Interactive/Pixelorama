@@ -950,11 +950,11 @@ margin_bottom = 140.0
 alignment = 2
 
 [node name="Label" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons/PastPlace"]
-margin_left = 30.0
+margin_left = 34.0
 margin_top = 3.0
 margin_right = 171.0
 margin_bottom = 17.0
-text = "Past Skin Placement : "
+text = "Past Skin Placement: "
 align = 2
 valign = 1
 
@@ -962,6 +962,7 @@ valign = 1
 margin_left = 175.0
 margin_right = 292.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 text = "Above Canvas"
 items = [ "Above Canvas", null, false, 0, null, "Below Canvas", null, false, 1, null ]
 selected = 0
@@ -976,11 +977,11 @@ margin_bottom = 164.0
 alignment = 2
 
 [node name="Label" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons/FuturePlace"]
-margin_left = 16.0
+margin_left = 20.0
 margin_top = 3.0
 margin_right = 171.0
 margin_bottom = 17.0
-text = "Future Skin Placement : "
+text = "Future Skin Placement: "
 align = 2
 valign = 1
 
@@ -988,6 +989,7 @@ valign = 1
 margin_left = 175.0
 margin_right = 292.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 text = "Above Canvas"
 items = [ "Above Canvas", null, false, 0, null, "Below Canvas", null, false, 1, null ]
 selected = 0
@@ -998,7 +1000,7 @@ margin_right = 292.0
 margin_bottom = 233.0
 custom_colors/font_color = Color( 0.333333, 0.901961, 0.462745, 1 )
 text = "Note:
-If you want a layer to ignore Onion-skinning simply add \"ignore_onion\" in its name
+If you want a layer to ignore onion skinning simply add \"ignore_onion\" in its name
 (it is case-insensitive)"
 align = 1
 valign = 1

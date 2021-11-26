@@ -19,6 +19,10 @@ onready var previews = $Previews
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$OnionPast.type = $OnionPast.PAST
+	$OnionPast.blue_red_color = Color.blue
+	$OnionFuture.type = $OnionFuture.FUTURE
+	$OnionFuture.blue_red_color = Color.red
 	var frame: Frame = new_empty_frame(true)
 	Global.current_project.frames.append(frame)
 	yield(get_tree(), "idle_frame")

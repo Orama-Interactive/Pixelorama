@@ -9,6 +9,8 @@ var is_mouse_hover := false
 var cel_size := 36 setget cel_size_changed
 var min_cel_size := 36
 var max_cel_size := 144
+var past_above_canvas := true
+var future_above_canvas := true
 
 var timeline_scroll: ScrollContainer
 var tag_scroll_container: ScrollContainer
@@ -528,13 +530,13 @@ func _on_BlueRedMode_toggled(button_pressed: bool) -> void:
 
 
 func _on_PastPlacement_item_selected(index):
-	Global.past_above_canvas = (index == 0)
-	Global.canvas.get_node("OnionPast").set("show_behind_parent", !Global.past_above_canvas)
+	past_above_canvas = (index == 0)
+	Global.canvas.get_node("OnionPast").set("show_behind_parent", !past_above_canvas)
 
 
 func _on_FuturePlacement_item_selected(index):
-	Global.future_above_canvas = (index == 0)
-	Global.canvas.get_node("OnionFuture").set("show_behind_parent", !Global.future_above_canvas)
+	future_above_canvas = (index == 0)
+	Global.canvas.get_node("OnionFuture").set("show_behind_parent", !future_above_canvas)
 
 
 # Layer buttons
