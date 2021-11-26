@@ -892,7 +892,7 @@ margin_bottom = 24.0
 [node name="OnionSkinningSettings" type="WindowDialog" parent="."]
 margin_right = 220.0
 margin_bottom = 140.0
-rect_min_size = Vector2( 220, 140 )
+rect_min_size = Vector2( 300, 320 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -901,22 +901,22 @@ __meta__ = {
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 5.0
-margin_top = -65.0
-margin_right = -5.0
-margin_bottom = 65.0
+margin_left = 4.0
+margin_top = -153.0
+margin_right = -4.0
+margin_bottom = 161.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="OnionSkinningPast" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
-margin_right = 210.0
+margin_right = 292.0
 margin_bottom = 14.0
 text = "Past Frames"
 
 [node name="PastOnionSkinning" type="SpinBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 18.0
-margin_right = 210.0
+margin_right = 292.0
 margin_bottom = 42.0
 mouse_default_cursor_shape = 2
 value = 1.0
@@ -924,13 +924,13 @@ align = 1
 
 [node name="OnionSkinningFuture" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 46.0
-margin_right = 210.0
+margin_right = 292.0
 margin_bottom = 60.0
 text = "Future Frames"
 
 [node name="FutureOnionSkinning" type="SpinBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 64.0
-margin_right = 210.0
+margin_right = 292.0
 margin_bottom = 88.0
 mouse_default_cursor_shape = 2
 value = 1.0
@@ -938,10 +938,71 @@ align = 1
 
 [node name="BlueRedMode" type="CheckBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 92.0
-margin_right = 210.0
+margin_right = 292.0
 margin_bottom = 116.0
 mouse_default_cursor_shape = 2
 text = "Blue-Red Mode"
+
+[node name="PastPlace" type="HBoxContainer" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 120.0
+margin_right = 292.0
+margin_bottom = 140.0
+alignment = 2
+
+[node name="Label" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons/PastPlace"]
+margin_left = 30.0
+margin_top = 3.0
+margin_right = 171.0
+margin_bottom = 17.0
+text = "Past Skin Placement : "
+align = 2
+valign = 1
+
+[node name="PastPlacement" type="OptionButton" parent="OnionSkinningSettings/OnionSkinningButtons/PastPlace"]
+margin_left = 175.0
+margin_right = 292.0
+margin_bottom = 20.0
+text = "Above Canvas"
+items = [ "Above Canvas", null, false, 0, null, "Below Canvas", null, false, 1, null ]
+selected = 0
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="FuturePlace" type="HBoxContainer" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 144.0
+margin_right = 292.0
+margin_bottom = 164.0
+alignment = 2
+
+[node name="Label" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons/FuturePlace"]
+margin_left = 16.0
+margin_top = 3.0
+margin_right = 171.0
+margin_bottom = 17.0
+text = "Future Skin Placement : "
+align = 2
+valign = 1
+
+[node name="FuturePlacement" type="OptionButton" parent="OnionSkinningSettings/OnionSkinningButtons/FuturePlace"]
+margin_left = 175.0
+margin_right = 292.0
+margin_bottom = 20.0
+text = "Above Canvas"
+items = [ "Above Canvas", null, false, 0, null, "Below Canvas", null, false, 1, null ]
+selected = 0
+
+[node name="Label" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 168.0
+margin_right = 292.0
+margin_bottom = 233.0
+custom_colors/font_color = Color( 0.333333, 0.901961, 0.462745, 1 )
+text = "Note:
+If you want a layer to ignore Onion-skinning simply add \"ignore_onion\" in its name
+(it is case-insensitive)"
+align = 1
+valign = 1
+autowrap = true
 
 [node name="FrameTagDialog" parent="." instance=ExtResource( 42 )]
 
@@ -986,3 +1047,5 @@ __meta__ = {
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
 [connection signal="toggled" from="OnionSkinningSettings/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
+[connection signal="item_selected" from="OnionSkinningSettings/OnionSkinningButtons/PastPlace/PastPlacement" to="." method="_on_PastPlacement_item_selected"]
+[connection signal="item_selected" from="OnionSkinningSettings/OnionSkinningButtons/FuturePlace/FuturePlacement" to="." method="_on_FuturePlacement_item_selected"]

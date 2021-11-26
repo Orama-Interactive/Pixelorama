@@ -96,6 +96,8 @@ var onion_skinning := false
 var onion_skinning_past_rate := 1.0
 var onion_skinning_future_rate := 1.0
 var onion_skinning_blue_red := false
+var past_above_canvas := true
+var future_above_canvas := true
 
 # Palettes
 var palettes := {}
