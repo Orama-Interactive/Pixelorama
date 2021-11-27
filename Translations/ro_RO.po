@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-11-27 19:20\n"
+"PO-Revision-Date: 2021-11-27 19:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1340,10 +1340,10 @@ msgid "Animation plays only on frames of the same tag"
 msgstr "Animația rulează doar pe cadrele din aceeași etichetă"
 
 msgid "Tag %s (Frame %s)"
-msgstr "Eticheta %s (Cadrul %s)"
+msgstr "Eticheta %s (cadrul %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr "Eticheta %s (Cadrele %s – %s)"
+msgstr "Eticheta %s (cadrele %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1420,7 +1420,7 @@ msgid "Lock/unlock layer"
 msgstr "Blochează/deblochează stratul"
 
 msgid "Frame: %s, Layer: %s"
-msgstr "Cadru: %s, Strat: %s"
+msgstr "Cadru: %s, strat: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
