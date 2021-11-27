@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-11-22 05:41\n"
+"PO-Revision-Date: 2021-11-27 19:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -181,7 +181,7 @@ msgid "Window Opacity"
 msgstr "Opacitatea ferestrei"
 
 msgid "Panel Layout"
-msgstr "Dispunere panou"
+msgstr "Dispunerea panoului"
 
 msgid "Auto"
 msgstr "Auto"
