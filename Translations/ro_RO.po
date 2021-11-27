@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-11-27 19:10\n"
+"PO-Revision-Date: 2021-11-27 19:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1301,7 +1301,7 @@ msgstr "Câte cadre pe secundă ar trebui să aibă previzualizarea animației?\
 "Cu cât numărul de cadre pe secundă este mai mare, cu atât animația rulează mai repede."
 
 msgid "No loop"
-msgstr "Fără buclu"
+msgstr "Fără buclă"
 
 msgid "Cycle loop"
 msgstr "Buclă ciclică"
