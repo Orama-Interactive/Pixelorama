@@ -9,14 +9,14 @@ enum IconColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
 var root_directory := "."
-var window_title := "" setget title_changed  # Why doesn't Godot have get_window_title()?
+var window_title := "" setget _title_changed  # Why doesn't Godot have get_window_title()?
 var config_cache := ConfigFile.new()
 var XDGDataPaths = preload("res://src/XDGDataPaths.gd")
 var directory_module: Reference
 
 var projects := []  # Array of Projects
 var current_project: Project
-var current_project_index := 0 setget project_changed
+var current_project_index := 0 setget _project_changed
 
 var panel_layout = PanelLayout.AUTO
 var ui_tooltips := {}
@@ -299,12 +299,12 @@ func redo(_frame_index := -1, _layer_index := -1, project: Project = current_pro
 			self.window_title = window_title + "(*)"
 
 
-func title_changed(value: String) -> void:
+func _title_changed(value: String) -> void:
 	window_title = value
 	OS.set_window_title(value)
 
 
-func project_changed(value: int) -> void:
+func _project_changed(value: int) -> void:
 	canvas.selection.transform_content_confirm()
 	current_project_index = value
 	current_project = projects[value]

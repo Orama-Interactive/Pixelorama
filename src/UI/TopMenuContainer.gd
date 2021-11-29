@@ -59,15 +59,15 @@ onready var recent_projects_submenu := PopupMenu.new()
 
 
 func _ready() -> void:
-	setup_file_menu()
-	setup_edit_menu()
-	setup_view_menu()
-	setup_image_menu()
-	setup_select_menu()
-	setup_help_menu()
+	_setup_file_menu()
+	_setup_edit_menu()
+	_setup_view_menu()
+	_setup_image_menu()
+	_setup_select_menu()
+	_setup_help_menu()
 
 
-func setup_file_menu() -> void:
+func _setup_file_menu() -> void:
 	var file_menu_items := {  # order as in FileMenuId enum
 		"New...": InputMap.get_action_list("new_file")[0].get_scancode_with_modifiers(),
 		"Open...": InputMap.get_action_list("open_file")[0].get_scancode_with_modifiers(),
@@ -84,7 +84,7 @@ func setup_file_menu() -> void:
 
 	for item in file_menu_items.keys():
 		if item == "Recent projects":
-			setup_recent_projects_submenu(item)
+			_setup_recent_projects_submenu(item)
 		else:
 			file_menu.add_item(item, i, file_menu_items[item])
 			i += 1
@@ -96,9 +96,9 @@ func setup_file_menu() -> void:
 		file_menu.set_item_disabled(FileMenuId.SAVE, true)
 
 
-func setup_recent_projects_submenu(item: String) -> void:
+func _setup_recent_projects_submenu(item: String) -> void:
 	recent_projects = Global.config_cache.get_value("data", "recent_projects", [])
-	recent_projects_submenu.connect("id_pressed", self, "on_recent_projects_submenu_id_pressed")
+	recent_projects_submenu.connect("id_pressed", self, "_on_recent_projects_submenu_id_pressed")
 	update_recent_projects_submenu()
 
 	file_menu.add_child(recent_projects_submenu)
@@ -110,7 +110,7 @@ func update_recent_projects_submenu() -> void:
 		recent_projects_submenu.add_item(project.get_file())
 
 
-func setup_edit_menu() -> void:
+func _setup_edit_menu() -> void:
 	var edit_menu_items := {  # order as in EditMenuId enum
 		"Undo": InputMap.get_action_list("undo")[0].get_scancode_with_modifiers(),
 		"Redo": InputMap.get_action_list("redo")[0].get_scancode_with_modifiers(),
@@ -132,7 +132,7 @@ func setup_edit_menu() -> void:
 	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
 
 
-func setup_view_menu() -> void:
+func _setup_view_menu() -> void:
 	var view_menu_items := {  # order as in ViewMenuId enum
 		"Tile Mode": 0,
 		"Window Opacity": 0,
@@ -153,11 +153,11 @@ func setup_view_menu() -> void:
 	var i := 0
 	for item in view_menu_items.keys():
 		if item == "Tile Mode":
-			setup_tile_mode_submenu(item)
+			_setup_tile_mode_submenu(item)
 		elif item == "Window Opacity":
 			view_menu.add_item(item, i, view_menu_items[item])
 		elif item == "Panel Layout":
-			setup_panel_layout_submenu(item)
+			_setup_panel_layout_submenu(item)
 		else:
 			view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
@@ -173,7 +173,7 @@ func setup_view_menu() -> void:
 	)
 
 
-func setup_tile_mode_submenu(item: String):
+func _setup_tile_mode_submenu(item: String) -> void:
 	tile_mode_submenu.set_name("tile_mode_submenu")
 	tile_mode_submenu.add_radio_check_item("None", Global.TileMode.NONE)
 	tile_mode_submenu.set_item_checked(Global.TileMode.NONE, true)
@@ -182,12 +182,12 @@ func setup_tile_mode_submenu(item: String):
 	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", Global.TileMode.Y_AXIS)
 	tile_mode_submenu.hide_on_checkable_item_selection = false
 
-	tile_mode_submenu.connect("id_pressed", self, "tile_mode_submenu_id_pressed")
+	tile_mode_submenu.connect("id_pressed", self, "_tile_mode_submenu_id_pressed")
 	view_menu.add_child(tile_mode_submenu)
 	view_menu.add_submenu_item(item, tile_mode_submenu.get_name())
 
 
-func setup_panel_layout_submenu(item: String):
+func _setup_panel_layout_submenu(item: String) -> void:
 	panel_layout_submenu.set_name("panel_layout_submenu")
 	panel_layout_submenu.add_radio_check_item("Auto", Global.PanelLayout.AUTO)
 	panel_layout_submenu.add_radio_check_item("Widescreen", Global.PanelLayout.WIDESCREEN)
@@ -195,12 +195,12 @@ func setup_panel_layout_submenu(item: String):
 	panel_layout_submenu.hide_on_checkable_item_selection = false
 	panel_layout_submenu.set_item_checked(Global.panel_layout, true)
 
-	panel_layout_submenu.connect("id_pressed", self, "panel_layout_submenu_id_pressed")
+	panel_layout_submenu.connect("id_pressed", self, "_panel_layout_submenu_id_pressed")
 	view_menu.add_child(panel_layout_submenu)
 	view_menu.add_submenu_item(item, panel_layout_submenu.get_name())
 
 
-func setup_image_menu() -> void:
+func _setup_image_menu() -> void:
 	var image_menu_items := {  # order as in ImageMenuId enum
 		"Scale Image": 0,
 		"Centralize Image": 0,
@@ -227,7 +227,7 @@ func setup_image_menu() -> void:
 	image_menu.connect("id_pressed", self, "image_menu_id_pressed")
 
 
-func setup_select_menu() -> void:
+func _setup_select_menu() -> void:
 	var select_menu_items := {  # order as in EditMenuId enum
 		"All": InputMap.get_action_list("select_all")[0].get_scancode_with_modifiers(),
 		"Clear": InputMap.get_action_list("clear_selection")[0].get_scancode_with_modifiers(),
@@ -243,7 +243,7 @@ func setup_select_menu() -> void:
 	select_menu.connect("id_pressed", self, "select_menu_id_pressed")
 
 
-func setup_help_menu() -> void:
+func _setup_help_menu() -> void:
 	var help_menu_items := {  # order as in HelpMenuId enum
 		"View Splash Screen": 0,
 		"Online Docs": InputMap.get_action_list("open_docs")[0].get_scancode_with_modifiers(),
@@ -265,17 +265,17 @@ func setup_help_menu() -> void:
 func file_menu_id_pressed(id: int) -> void:
 	match id:
 		FileMenuId.NEW:
-			on_new_project_file_menu_option_pressed()
+			_on_new_project_file_menu_option_pressed()
 		FileMenuId.OPEN:
-			open_project_file()
+			_open_project_file()
 		FileMenuId.OPEN_LAST_PROJECT:
-			on_open_last_project_file_menu_option_pressed()
+			_on_open_last_project_file_menu_option_pressed()
 		FileMenuId.SAVE:
-			save_project_file()
+			_save_project_file()
 		FileMenuId.SAVE_AS:
-			save_project_file_as()
+			_save_project_file_as()
 		FileMenuId.EXPORT:
-			export_file()
+			_export_file()
 		FileMenuId.EXPORT_AS:
 			Global.export_dialog.popup_centered()
 			Global.dialog_open(true)
@@ -283,12 +283,12 @@ func file_menu_id_pressed(id: int) -> void:
 			Global.control.show_quit_dialog()
 
 
-func on_new_project_file_menu_option_pressed() -> void:
+func _on_new_project_file_menu_option_pressed() -> void:
 	new_image_dialog.popup_centered()
 	Global.dialog_open(true)
 
 
-func open_project_file() -> void:
+func _open_project_file() -> void:
 	if OS.get_name() == "HTML5":
 		Html5FileExchange.load_image()
 	else:
@@ -297,7 +297,7 @@ func open_project_file() -> void:
 		Global.control.opensprite_file_selected = false
 
 
-func on_open_last_project_file_menu_option_pressed() -> void:
+func _on_open_last_project_file_menu_option_pressed() -> void:
 	if Global.config_cache.has_section_key("preferences", "last_project_path"):
 		Global.control.load_last_project()
 	else:
@@ -306,7 +306,7 @@ func on_open_last_project_file_menu_option_pressed() -> void:
 		Global.dialog_open(true)
 
 
-func save_project_file() -> void:
+func _save_project_file() -> void:
 	Global.control.is_quitting_on_save = false
 	var path = OpenSave.current_save_paths[Global.current_project_index]
 	if path == "":
@@ -323,7 +323,7 @@ func save_project_file() -> void:
 		Global.control.save_project(path)
 
 
-func save_project_file_as() -> void:
+func _save_project_file_as() -> void:
 	Global.control.is_quitting_on_save = false
 	if OS.get_name() == "HTML5":
 		var save_dialog: ConfirmationDialog = Global.save_sprites_html5_dialog
@@ -336,7 +336,7 @@ func save_project_file_as() -> void:
 	Global.dialog_open(true)
 
 
-func export_file() -> void:
+func _export_file() -> void:
 	if Export.was_exported == false:
 		Global.export_dialog.popup_centered()
 		Global.dialog_open(true)
@@ -344,7 +344,7 @@ func export_file() -> void:
 		Export.external_export()
 
 
-func on_recent_projects_submenu_id_pressed(id: int) -> void:
+func _on_recent_projects_submenu_id_pressed(id: int) -> void:
 	Global.control.load_recent_project_file(recent_projects[id])
 
 
@@ -375,25 +375,25 @@ func view_menu_id_pressed(id: int) -> void:
 			window_opacity_dialog.popup_centered()
 			Global.dialog_open(true)
 		ViewMenuId.MIRROR_VIEW:
-			toggle_mirror_view()
+			_toggle_mirror_view()
 		ViewMenuId.SHOW_GRID:
-			toggle_show_grid()
+			_toggle_show_grid()
 		ViewMenuId.SHOW_PIXEL_GRID:
-			toggle_show_pixel_grid()
+			_toggle_show_pixel_grid()
 		ViewMenuId.SHOW_RULERS:
-			toggle_show_rulers()
+			_toggle_show_rulers()
 		ViewMenuId.SHOW_GUIDES:
-			toggle_show_guides()
+			_toggle_show_guides()
 		ViewMenuId.SHOW_ANIMATION_TIMELINE:
-			toggle_show_anim_timeline()
+			_toggle_show_anim_timeline()
 		ViewMenuId.ZEN_MODE:
-			toggle_zen_mode()
+			_toggle_zen_mode()
 		ViewMenuId.FULLSCREEN_MODE:
-			toggle_fullscreen()
+			_toggle_fullscreen()
 	Global.canvas.update()
 
 
-func tile_mode_submenu_id_pressed(id: int) -> void:
+func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.current_project.tile_mode = id
 	Global.transparent_checker.fit_rect(Global.current_project.get_tile_mode_rect())
 	for i in Global.TileMode.values():
@@ -403,14 +403,14 @@ func tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.canvas.grid.update()
 
 
-func panel_layout_submenu_id_pressed(id: int) -> void:
+func _panel_layout_submenu_id_pressed(id: int) -> void:
 	Global.panel_layout = id
 	for i in Global.PanelLayout.values():
 		panel_layout_submenu.set_item_checked(i, i == id)
 	get_tree().get_root().get_node("Control").handle_resize()
 
 
-func toggle_mirror_view() -> void:
+func _toggle_mirror_view() -> void:
 	Global.mirror_view = !Global.mirror_view
 	var marching_ants_outline: Sprite = Global.canvas.selection.marching_ants_outline
 	marching_ants_outline.scale.x = -marching_ants_outline.scale.x
@@ -425,26 +425,26 @@ func toggle_mirror_view() -> void:
 	view_menu.set_item_checked(ViewMenuId.MIRROR_VIEW, Global.mirror_view)
 
 
-func toggle_show_grid() -> void:
+func _toggle_show_grid() -> void:
 	Global.draw_grid = !Global.draw_grid
 	view_menu.set_item_checked(ViewMenuId.SHOW_GRID, Global.draw_grid)
 	Global.canvas.grid.update()
 
 
-func toggle_show_pixel_grid() -> void:
+func _toggle_show_pixel_grid() -> void:
 	Global.draw_pixel_grid = !Global.draw_pixel_grid
 	view_menu.set_item_checked(ViewMenuId.SHOW_PIXEL_GRID, Global.draw_pixel_grid)
 	Global.canvas.pixel_grid.update()
 
 
-func toggle_show_rulers() -> void:
+func _toggle_show_rulers() -> void:
 	Global.show_rulers = !Global.show_rulers
 	view_menu.set_item_checked(ViewMenuId.SHOW_RULERS, Global.show_rulers)
 	Global.horizontal_ruler.visible = Global.show_rulers
 	Global.vertical_ruler.visible = Global.show_rulers
 
 
-func toggle_show_guides() -> void:
+func _toggle_show_guides() -> void:
 	Global.show_guides = !Global.show_guides
 	view_menu.set_item_checked(ViewMenuId.SHOW_GUIDES, Global.show_guides)
 	for guide in Global.canvas.get_children():
@@ -457,7 +457,7 @@ func toggle_show_guides() -> void:
 					guide.visible = Global.show_y_symmetry_axis and Global.show_guides
 
 
-func toggle_show_anim_timeline() -> void:
+func _toggle_show_anim_timeline() -> void:
 	if zen_mode:
 		return
 	Global.show_animation_timeline = !Global.show_animation_timeline
@@ -465,7 +465,7 @@ func toggle_show_anim_timeline() -> void:
 	Global.animation_timeline.visible = Global.show_animation_timeline
 
 
-func toggle_zen_mode() -> void:
+func _toggle_zen_mode() -> void:
 	if Global.show_animation_timeline:
 		Global.animation_timeline.visible = zen_mode
 	Global.tool_panel.visible = zen_mode
@@ -476,7 +476,7 @@ func toggle_zen_mode() -> void:
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)
 
 
-func toggle_fullscreen() -> void:
+func _toggle_fullscreen() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
 	view_menu.set_item_checked(ViewMenuId.FULLSCREEN_MODE, OS.window_fullscreen)
 	if OS.window_fullscreen:  # If window is fullscreen then reset transparency
@@ -486,7 +486,7 @@ func toggle_fullscreen() -> void:
 func image_menu_id_pressed(id: int) -> void:
 	match id:
 		ImageMenuId.SCALE_IMAGE:
-			show_scale_image_popup()
+			_show_scale_image_popup()
 
 		ImageMenuId.CENTRALIZE_IMAGE:
 			DrawingAlgos.centralize()
@@ -495,14 +495,14 @@ func image_menu_id_pressed(id: int) -> void:
 			DrawingAlgos.crop_image()
 
 		ImageMenuId.RESIZE_CANVAS:
-			show_resize_canvas_popup()
+			_show_resize_canvas_popup()
 
 		ImageMenuId.FLIP:
 			Global.control.get_node("Dialogs/ImageEffects/FlipImageDialog").popup_centered()
 			Global.dialog_open(true)
 
 		ImageMenuId.ROTATE:
-			show_rotate_image_popup()
+			_show_rotate_image_popup()
 
 		ImageMenuId.INVERT_COLORS:
 			Global.control.get_node("Dialogs/ImageEffects/InvertColorsDialog").popup_centered()
@@ -513,10 +513,10 @@ func image_menu_id_pressed(id: int) -> void:
 			Global.dialog_open(true)
 
 		ImageMenuId.OUTLINE:
-			show_add_outline_popup()
+			_show_add_outline_popup()
 
 		ImageMenuId.HSV:
-			show_hsv_configuration_popup()
+			_show_hsv_configuration_popup()
 
 		ImageMenuId.GRADIENT:
 			Global.control.get_node("Dialogs/ImageEffects/GradientDialog").popup_centered()
@@ -527,27 +527,27 @@ func image_menu_id_pressed(id: int) -> void:
 			Global.dialog_open(true)
 
 
-func show_scale_image_popup() -> void:
+func _show_scale_image_popup() -> void:
 	Global.control.get_node("Dialogs/ImageEffects/ScaleImage").popup_centered()
 	Global.dialog_open(true)
 
 
-func show_resize_canvas_popup() -> void:
+func _show_resize_canvas_popup() -> void:
 	Global.control.get_node("Dialogs/ImageEffects/ResizeCanvas").popup_centered()
 	Global.dialog_open(true)
 
 
-func show_rotate_image_popup() -> void:
+func _show_rotate_image_popup() -> void:
 	Global.control.get_node("Dialogs/ImageEffects/RotateImage").popup_centered()
 	Global.dialog_open(true)
 
 
-func show_add_outline_popup() -> void:
+func _show_add_outline_popup() -> void:
 	Global.control.get_node("Dialogs/ImageEffects/OutlineDialog").popup_centered()
 	Global.dialog_open(true)
 
 
-func show_hsv_configuration_popup() -> void:
+func _show_hsv_configuration_popup() -> void:
 	Global.control.get_node("Dialogs/ImageEffects/HSVDialog").popup_centered()
 	Global.dialog_open(true)
 

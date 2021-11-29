@@ -2,20 +2,20 @@ class_name Project
 extends Reference
 # A class for project properties.
 
-var name := "" setget name_changed
-var size: Vector2 setget size_changed
+var name := "" setget _name_changed
+var size: Vector2 setget _size_changed
 var undo_redo: UndoRedo
 var tile_mode: int = Global.TileMode.NONE
 var tile_mode_rects := []  # Cached to avoid recalculation
 var undos := 0  # The number of times we added undo properties
-var has_changed := false setget has_changed_changed
-var frames := [] setget frames_changed  # Array of Frames (that contain Cels)
-var layers := [] setget layers_changed  # Array of Layers
-var current_frame := 0 setget frame_changed
-var current_layer := 0 setget layer_changed
+var has_changed := false setget _has_changed_changed
+var frames := [] setget _frames_changed  # Array of Frames (that contain Cels)
+var layers := [] setget _layers_changed  # Array of Layers
+var current_frame := 0 setget _frame_changed
+var current_layer := 0 setget _layer_changed
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
 
-var animation_tags := [] setget animation_tags_changed  # Array of AnimationTags
+var animation_tags := [] setget _animation_tags_changed  # Array of AnimationTags
 var guides := []  # Array of Guides
 var brushes := []  # Array of Images
 var fps := 6.0
@@ -54,7 +54,7 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	name = _name
 	size = _size
 	selection_bitmap.create(size)
-	update_tile_mode_rects()
+	_update_tile_mode_rects()
 
 	undo_redo = UndoRedo.new()
 
@@ -124,7 +124,7 @@ func change_project() -> void:
 	for container in Global.layers_container.get_children():
 		container.queue_free()
 
-	remove_cel_buttons()
+	_remove_cel_buttons()
 
 	for frame_id in Global.frame_ids.get_children():
 		Global.frame_ids.remove_child(frame_id)
@@ -176,8 +176,8 @@ func change_project() -> void:
 	Global.disable_button(
 		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
 	)
-	toggle_layer_buttons_layers()
-	toggle_layer_buttons_current_layer()
+	_toggle_layer_buttons_layers()
+	_toggle_layer_buttons_current_layer()
 
 	self.animation_tags = animation_tags
 
@@ -352,7 +352,7 @@ func deserialize(dict: Dictionary) -> void:
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
 		size.y = dict.size_y
-		update_tile_mode_rects()
+		_update_tile_mode_rects()
 		selection_bitmap = resize_bitmap(selection_bitmap, size)
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
@@ -424,21 +424,21 @@ func deserialize(dict: Dictionary) -> void:
 		fps = dict.fps
 
 
-func name_changed(value: String) -> void:
+func _name_changed(value: String) -> void:
 	name = value
 	Global.tabs.set_tab_title(Global.tabs.current_tab, name)
 
 
-func size_changed(value: Vector2) -> void:
+func _size_changed(value: Vector2) -> void:
 	size = value
-	update_tile_mode_rects()
+	_update_tile_mode_rects()
 
 
-func frames_changed(value: Array) -> void:
+func _frames_changed(value: Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	frames = value
 	selected_cels.clear()
-	remove_cel_buttons()
+	_remove_cel_buttons()
 
 	for frame_id in Global.frame_ids.get_children():
 		Global.frame_ids.remove_child(frame_id)
@@ -462,10 +462,10 @@ func frames_changed(value: Array) -> void:
 
 			layers[i].frame_container.add_child(cel_button)
 
-	set_timeline_first_and_last_frames()
+	_set_timeline_first_and_last_frames()
 
 
-func layers_changed(value: Array) -> void:
+func _layers_changed(value: Array) -> void:
 	layers = value
 	if Global.layers_changed_skip:
 		Global.layers_changed_skip = false
@@ -476,7 +476,7 @@ func layers_changed(value: Array) -> void:
 	for container in Global.layers_container.get_children():
 		container.queue_free()
 
-	remove_cel_buttons()
+	_remove_cel_buttons()
 
 	for i in range(layers.size() - 1, -1, -1):
 		var layer_container = layer_button_node.instance()
@@ -502,10 +502,10 @@ func layers_changed(value: Array) -> void:
 	)
 	layer_button.pressed = true
 	self.current_frame = current_frame  # Call frame_changed to update UI
-	toggle_layer_buttons_layers()
+	_toggle_layer_buttons_layers()
 
 
-func remove_cel_buttons() -> void:
+func _remove_cel_buttons() -> void:
 	for container in Global.frames_container.get_children():
 		for button in container.get_children():
 			container.remove_child(button)
@@ -513,7 +513,7 @@ func remove_cel_buttons() -> void:
 		Global.frames_container.remove_child(container)
 
 
-func frame_changed(value: int) -> void:
+func _frame_changed(value: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	current_frame = value
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
@@ -560,11 +560,11 @@ func frame_changed(value: int) -> void:
 	Global.transparent_checker.update_rect()
 
 
-func layer_changed(value: int) -> void:
+func _layer_changed(value: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	current_layer = value
 
-	toggle_layer_buttons_current_layer()
+	_toggle_layer_buttons_current_layer()
 
 	yield(Global.get_tree().create_timer(0.01), "timeout")
 	self.current_frame = current_frame  # Call frame_changed to update UI
@@ -580,7 +580,7 @@ func layer_changed(value: int) -> void:
 			layer_button.pressed = true
 
 
-func toggle_layer_buttons_layers() -> void:
+func _toggle_layer_buttons_layers() -> void:
 	if !layers:
 		return
 	if layers[current_layer].locked:
@@ -595,7 +595,7 @@ func toggle_layer_buttons_layers() -> void:
 		Global.disable_button(Global.remove_layer_button, false)
 
 
-func toggle_layer_buttons_current_layer() -> void:
+func _toggle_layer_buttons_current_layer() -> void:
 	if current_layer < layers.size() - 1:
 		Global.disable_button(Global.move_up_layer_button, false)
 	else:
@@ -616,7 +616,7 @@ func toggle_layer_buttons_current_layer() -> void:
 				Global.disable_button(Global.remove_layer_button, false)
 
 
-func animation_tags_changed(value: Array) -> void:
+func _animation_tags_changed(value: Array) -> void:
 	animation_tags = value
 	for child in Global.tag_container.get_children():
 		child.queue_free()
@@ -641,10 +641,10 @@ func animation_tags_changed(value: Array) -> void:
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
 
-	set_timeline_first_and_last_frames()
+	_set_timeline_first_and_last_frames()
 
 
-func set_timeline_first_and_last_frames() -> void:
+func _set_timeline_first_and_last_frames() -> void:
 	# This is useful in case tags get modified DURING the animation is playing
 	# otherwise, this code is useless in this context, since these values are being set
 	# when the play buttons get pressed anyway
@@ -657,7 +657,7 @@ func set_timeline_first_and_last_frames() -> void:
 				Global.animation_timeline.last_frame = min(frames.size() - 1, tag.to - 1)
 
 
-func has_changed_changed(value: bool) -> void:
+func _has_changed_changed(value: bool) -> void:
 	has_changed = value
 	if value:
 		Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
@@ -669,7 +669,7 @@ func get_tile_mode_rect() -> Rect2:
 	return tile_mode_rects[tile_mode]
 
 
-func update_tile_mode_rects() -> void:
+func _update_tile_mode_rects() -> void:
 	tile_mode_rects.resize(Global.TileMode.size())
 	tile_mode_rects[Global.TileMode.NONE] = Rect2(Vector2.ZERO, size)
 	tile_mode_rects[Global.TileMode.BOTH] = Rect2(Vector2(-1, -1) * size, Vector2(3, 3) * size)

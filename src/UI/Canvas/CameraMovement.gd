@@ -37,20 +37,20 @@ func _ready() -> void:
 	update_transparent_checker_offset()
 
 	# signals regarding rotation stats
-	Global.rotation_level_button.connect("pressed", self, "rotation_button_pressed")
-	Global.rotation_level_spinbox.connect("value_changed", self, "rotation_value_changed")
+	Global.rotation_level_button.connect("pressed", self, "_rotation_button_pressed")
+	Global.rotation_level_spinbox.connect("value_changed", self, "_rotation_value_changed")
 	Global.rotation_level_spinbox.get_child(0).connect(
-		"focus_exited", self, "rotation_focus_exited"
+		"focus_exited", self, "_rotation_focus_exited"
 	)
 
 	# signals regarding zoom stats
-	Global.zoom_level_button.connect("pressed", self, "zoom_button_pressed")
-	Global.zoom_level_spinbox.connect("value_changed", self, "zoom_value_changed")
+	Global.zoom_level_button.connect("pressed", self, "_zoom_button_pressed")
+	Global.zoom_level_spinbox.connect("value_changed", self, "_zoom_value_changed")
 	Global.zoom_level_spinbox.max_value = 100.0 / zoom_min.x
-	Global.zoom_level_spinbox.get_child(0).connect("focus_exited", self, "zoom_focus_exited")
+	Global.zoom_level_spinbox.get_child(0).connect("focus_exited", self, "_zoom_focus_exited")
 
 
-func rotation_button_pressed() -> void:
+func _rotation_button_pressed() -> void:
 	Global.rotation_level_button.visible = false
 	Global.rotation_level_spinbox.visible = true
 	Global.rotation_level_spinbox.editable = true
@@ -61,22 +61,22 @@ func rotation_button_pressed() -> void:
 	Global.rotation_level_spinbox.get_child(0).grab_focus()
 
 
-func rotation_value_changed(value) -> void:
+func _rotation_value_changed(value) -> void:
 	if index == Cameras.MAIN:
-		set_camera_rotation_degrees(-value)  # Negative makes going up rotate clockwise
+		_set_camera_rotation_degrees(-value)  # Negative makes going up rotate clockwise
 
 
-func rotation_focus_exited() -> void:
+func _rotation_focus_exited() -> void:
 	if Global.rotation_level_spinbox.value != rotation:  # If user pressed enter while editing
 		if index == Cameras.MAIN:
 			# Negative makes going up rotate clockwise
-			set_camera_rotation_degrees(-Global.rotation_level_spinbox.value)
+			_set_camera_rotation_degrees(-Global.rotation_level_spinbox.value)
 	Global.rotation_level_button.visible = true
 	Global.rotation_level_spinbox.visible = false
 	Global.rotation_level_spinbox.editable = false
 
 
-func zoom_button_pressed() -> void:
+func _zoom_button_pressed() -> void:
 	Global.zoom_level_button.visible = false
 	Global.zoom_level_spinbox.visible = true
 	Global.zoom_level_spinbox.editable = true
@@ -85,12 +85,12 @@ func zoom_button_pressed() -> void:
 	Global.zoom_level_spinbox.get_child(0).grab_focus()
 
 
-func zoom_value_changed(value) -> void:
+func _zoom_value_changed(value) -> void:
 	if index == Cameras.MAIN:
 		zoom_camera_percent(value)
 
 
-func zoom_focus_exited() -> void:
+func _zoom_focus_exited() -> void:
 	if Global.zoom_level_spinbox.value != round(100 / zoom.x):  # If user pressed enter while editing
 		if index == Cameras.MAIN:
 			zoom_camera_percent(Global.zoom_level_spinbox.value)
@@ -108,7 +108,7 @@ func update_transparent_checker_offset() -> void:
 
 # Get the speed multiplier for when you've pressed
 # a movement key for the given amount of time
-func dir_move_zoom_multiplier(press_time: float) -> float:
+func _dir_move_zoom_multiplier(press_time: float) -> float:
 	if press_time < 0:
 		return 0.0
 	if Input.is_key_pressed(KEY_SHIFT) and Input.is_key_pressed(KEY_CONTROL):
@@ -123,12 +123,12 @@ func dir_move_zoom_multiplier(press_time: float) -> float:
 		return 0.0
 
 
-func reset_dir_move_time(direction) -> void:
+func _reset_dir_move_time(direction) -> void:
 	key_move_press_time[direction] = 0.0
 
 
 # Check if an event is a ui_up/down/left/right event-press :)
-func is_action_direction_pressed(event: InputEvent, allow_echo: bool = true) -> bool:
+func _is_action_direction_pressed(event: InputEvent, allow_echo: bool = true) -> bool:
 	for slot in Tools._slots.values():
 		if slot.tool_node is SelectionTool:
 			return false
@@ -139,7 +139,7 @@ func is_action_direction_pressed(event: InputEvent, allow_echo: bool = true) -> 
 
 
 # Check if an event is a ui_up/down/left/right event release nya
-func is_action_direction_released(event: InputEvent) -> bool:
+func _is_action_direction_released(event: InputEvent) -> bool:
 	for slot in Tools._slots.values():
 		if slot.tool_node is SelectionTool:
 			return false
@@ -151,7 +151,7 @@ func is_action_direction_released(event: InputEvent) -> bool:
 
 # get the Direction associated with the event.
 # if not a direction event return null
-func get_action_direction(event: InputEvent):  # -> Optional[Direction]
+func _get_action_direction(event: InputEvent):  # -> Optional[Direction]
 	if event.is_action("ui_up"):
 		return Direction.UP
 	elif event.is_action("ui_down"):
@@ -165,29 +165,29 @@ func get_action_direction(event: InputEvent):  # -> Optional[Direction]
 
 # Process an action event for a pressed direction
 # action
-func process_direction_action_pressed(event: InputEvent) -> void:
-	var dir = get_action_direction(event)
+func _process_direction_action_pressed(event: InputEvent) -> void:
+	var dir = _get_action_direction(event)
 	if dir == null:
 		return
 	var increment := get_process_delta_time()
 	# Count the total time we've been doing this ^.^
 	key_move_press_time[dir] += increment
 	var this_direction_press_time: float = key_move_press_time[dir]
-	var move_speed := dir_move_zoom_multiplier(this_direction_press_time)
+	var move_speed := _dir_move_zoom_multiplier(this_direction_press_time)
 	offset = (
 		offset
 		+ move_speed * increment * DIRECTIONAL_SIGN_MULTIPLIERS[dir].rotated(rotation) * zoom
 	)
-	update_rulers()
+	_update_rulers()
 	update_transparent_checker_offset()
 
 
 # Process an action for a release direction action
-func process_direction_action_released(event: InputEvent) -> void:
-	var dir = get_action_direction(event)
+func _process_direction_action_released(event: InputEvent) -> void:
+	var dir = _get_action_direction(event)
 	if dir == null:
 		return
-	reset_dir_move_time(dir)
+	_reset_dir_move_time(dir)
 
 
 func _input(event: InputEvent) -> void:
@@ -219,24 +219,24 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventMouseMotion && drag:
 		offset = offset - event.relative.rotated(rotation) * zoom
 		update_transparent_checker_offset()
-		update_rulers()
+		_update_rulers()
 	elif event is InputEventKey:
-		if is_action_direction_pressed(event):
-			process_direction_action_pressed(event)
-		elif is_action_direction_released(event):
-			process_direction_action_released(event)
+		if _is_action_direction_pressed(event):
+			_process_direction_action_pressed(event)
+		elif _is_action_direction_released(event):
+			_process_direction_action_released(event)
 
 	save_values_to_project()
 
 
 # Rotate Camera
-func rotate_camera_around_point(degrees: float, point: Vector2) -> void:
+func _rotate_camera_around_point(degrees: float, point: Vector2) -> void:
 	offset = (offset - point).rotated(deg2rad(degrees)) + point
 	rotation_degrees = wrapf(rotation_degrees + degrees, -180, 180)
 	rotation_changed()
 
 
-func set_camera_rotation_degrees(degrees: float) -> void:
+func _set_camera_rotation_degrees(degrees: float) -> void:
 	var difference := degrees - rotation_degrees
 	var canvas_center: Vector2 = Global.current_project.size / 2
 	offset = (offset - canvas_center).rotated(deg2rad(difference)) + canvas_center
@@ -248,7 +248,7 @@ func rotation_changed() -> void:
 	if index == Cameras.MAIN:
 		# Negative to make going up in value clockwise, and match the spinbox which does the same
 		Global.rotation_level_button.text = str(wrapi(round(-rotation_degrees), -180, 180)) + " °"
-		update_rulers()
+		_update_rulers()
 
 
 # Zoom Camera
@@ -301,7 +301,7 @@ func zoom_changed() -> void:
 	if index == Cameras.MAIN:
 		Global.zoom_level_button.text = str(round(100 / zoom.x)) + " %"
 		Global.canvas.pixel_grid.update()
-		update_rulers()
+		_update_rulers()
 		for guide in Global.current_project.guides:
 			guide.width = zoom.x * 2
 
@@ -311,7 +311,7 @@ func zoom_changed() -> void:
 		Global.preview_zoom_slider.value = -zoom.x
 
 
-func update_rulers() -> void:
+func _update_rulers() -> void:
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
 

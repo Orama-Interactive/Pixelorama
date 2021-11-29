@@ -35,13 +35,13 @@ func _ready() -> void:
 
 	# Make sure locales are always sorted, in the same order
 	loaded_locales.sort()
-	var button_group = get_child(0).group
+	var button_group: ButtonGroup = get_child(0).group
 
 	# Create radiobuttons for each language
 	for locale in loaded_locales:
 		if !locale in LANGUAGES_DICT:
 			continue
-		var button = CheckBox.new()
+		var button := CheckBox.new()
 		button.text = LANGUAGES_DICT[locale][0] + " [%s]" % [locale]
 		button.name = LANGUAGES_DICT[locale][1]
 		button.hint_tooltip = LANGUAGES_DICT[locale][1]

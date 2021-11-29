@@ -39,12 +39,12 @@ func _ready() -> void:
 	alternate_transparent_background.anchor_bottom = ANCHOR_END
 
 	get_tree().set_auto_accept_quit(false)
-	setup_application_window_size()
+	_setup_application_window_size()
 	handle_resize()
 	get_tree().get_root().connect("size_changed", self, "handle_resize")
 
 	if OS.get_name() == "OSX":
-		use_osx_shortcuts()
+		_use_osx_shortcuts()
 
 	Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
@@ -86,7 +86,7 @@ func _ready() -> void:
 	zstd_checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	Global.save_sprites_dialog.get_vbox().add_child(zstd_checkbox)
 
-	handle_backup()
+	_handle_backup()
 
 	# If the user wants to run Pixelorama with arguments in terminal mode
 	# or open files with Pixelorama directly, then handle that
@@ -97,7 +97,7 @@ func _ready() -> void:
 	if OS.get_name() == "Android":
 		OS.request_permissions()
 
-	show_splash_screen()
+	_show_splash_screen()
 
 
 func handle_resize() -> void:
@@ -109,12 +109,12 @@ func handle_resize() -> void:
 		(aspect_ratio <= 3.0 / 4.0 and Global.panel_layout != Global.PanelLayout.WIDESCREEN)
 		or Global.panel_layout == Global.PanelLayout.TALLSCREEN
 	):
-		change_ui_layout("tallscreen")
+		_change_ui_layout("tallscreen")
 	else:
-		change_ui_layout("widescreen")
+		_change_ui_layout("widescreen")
 
 
-func change_ui_layout(mode: String) -> void:
+func _change_ui_layout(mode: String) -> void:
 	var colorpicker_is_switched = (
 		true
 		if tool_and_palette_vsplit.has_node("ScrollContainer")
@@ -127,14 +127,14 @@ func change_ui_layout(mode: String) -> void:
 		if !Global.top_menu_container.zen_mode:
 			tallscreen_hsplit.visible = true
 		tallscreen_hsplit.split_offset = tools_and_canvas.split_offset
-		reparent_node_to(Global.animation_timeline, tallscreen_hsplit.get_node("BottomPanel"), 0)
-		reparent_node_to(right_panel, bottom_panel, 0)
+		_reparent_node_to(Global.animation_timeline, tallscreen_hsplit.get_node("BottomPanel"), 0)
+		_reparent_node_to(right_panel, bottom_panel, 0)
 		right_panel.rect_min_size.y = 322
-		reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
-		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, HBoxContainer.new())
+		_reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
+		tool_and_palette_vsplit = _replace_node_with(tool_and_palette_vsplit, HBoxContainer.new())
 		tool_and_palette_vsplit.set("custom_constants/separation", 8)
 		color_and_tool_options.rect_min_size.x = 280
-		reparent_node_to(tool_panel, tallscreen_hsplit, 0)
+		_reparent_node_to(tool_panel, tallscreen_hsplit, 0)
 
 		var right_panel_margin: MarginContainer = right_panel.find_node(
 			"MarginContainer", true, false
@@ -147,18 +147,18 @@ func change_ui_layout(mode: String) -> void:
 	elif mode == "widescreen" and tallscreen_is_active:
 		tallscreen_is_active = false
 		# Reparenting and hiding nodes to adjust wide-screen
-		reparent_node_to(
+		_reparent_node_to(
 			Global.animation_timeline, ui.get_node("ToolsAndCanvas/CanvasAndTimeline"), 1
 		)
 		tallscreen_hsplit.visible = false
 		tools_and_canvas.split_offset = tallscreen_hsplit.split_offset
-		reparent_node_to(right_panel, ui, -1)
+		_reparent_node_to(right_panel, ui, -1)
 		right_panel.rect_min_size.y = 0
-		reparent_node_to(canvas_preview_container, right_panel.find_node("PreviewAndPalettes"), 0)
-		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, VSplitContainer.new())
+		_reparent_node_to(canvas_preview_container, right_panel.find_node("PreviewAndPalettes"), 0)
+		tool_and_palette_vsplit = _replace_node_with(tool_and_palette_vsplit, VSplitContainer.new())
 		color_and_tool_options.rect_min_size.x = 0
 		canvas_preview_container.visible = true
-		reparent_node_to(tool_panel, ui.find_node("ToolsAndCanvas"), 0)
+		_reparent_node_to(tool_panel, ui.find_node("ToolsAndCanvas"), 0)
 
 		var right_panel_margin: MarginContainer = right_panel.find_node(
 			"MarginContainer", true, false
@@ -174,28 +174,28 @@ func change_ui_layout(mode: String) -> void:
 		canvas_preview_container.visible = true
 
 	if not colorpicker_is_switched and canvas_preview_container.visible and mode == "tallscreen":
-		reparent_node_to(scroll_container, tool_and_palette_vsplit, 0)
+		_reparent_node_to(scroll_container, tool_and_palette_vsplit, 0)
 		scroll_container.rect_min_size = Vector2(268, 196)
 		color_and_tool_options.set("custom_constants/separation", 20)
-		reparent_node_to(canvas_preview_container, color_and_tool_options, -1)
+		_reparent_node_to(canvas_preview_container, color_and_tool_options, -1)
 	elif colorpicker_is_switched and (not canvas_preview_container.visible or mode != "tallscreen"):
-		reparent_node_to(scroll_container, color_and_tool_options, -1)
+		_reparent_node_to(scroll_container, color_and_tool_options, -1)
 		scroll_container.rect_min_size = Vector2(0, 0)
 		color_and_tool_options.set("custom_constants/separation", 8)
 		if mode == "widescreen":
-			reparent_node_to(
+			_reparent_node_to(
 				canvas_preview_container,
 				right_panel.find_node("PreviewAndPalettes", true, false),
 				0
 			)
 		else:
-			reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
+			_reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
 
 
-# helper function (change_ui_layout)
+# helper function (_change_ui_layout)
 # warning: this doesn't really copy any sort of attributes, except a few that
 # were needed in my particular case
-func replace_node_with(old: Node, new: Node) -> Node:
+func _replace_node_with(old: Node, new: Node) -> Node:
 	var tempname = old.name
 	old.name = "old"
 	new.name = tempname
@@ -207,14 +207,14 @@ func replace_node_with(old: Node, new: Node) -> Node:
 		new.set("custom_constants/separation", 20)
 	old.get_parent().add_child(new)
 	for n in old.get_children():
-		reparent_node_to(n, new, -1)
+		_reparent_node_to(n, new, -1)
 	old.get_parent().remove_child(old)
 	old.queue_free()
 	return new
 
 
-# helper function (change_ui_layout)
-func reparent_node_to(node: Node, dest: Node, pos: int) -> bool:
+# helper function (_change_ui_layout)
+func _reparent_node_to(node: Node, dest: Node, pos: int) -> bool:
 	if dest is Node and node is Node:
 		node.get_parent().remove_child(node)
 		dest.add_child(node)
@@ -255,7 +255,7 @@ func _input(event: InputEvent) -> void:
 		Global.current_project.commit_undo()
 
 
-func setup_application_window_size() -> void:
+func _setup_application_window_size() -> void:
 	if OS.get_name() == "HTML5":
 		return
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
@@ -281,7 +281,7 @@ func setup_application_window_size() -> void:
 			OS.window_size = Global.config_cache.get_value("window", "size")
 
 
-func show_splash_screen() -> void:
+func _show_splash_screen() -> void:
 	if not Global.config_cache.has_section_key("preferences", "startup"):
 		Global.config_cache.set_value("preferences", "startup", true)
 
@@ -296,7 +296,7 @@ func show_splash_screen() -> void:
 		Global.can_draw = true
 
 
-func handle_backup() -> void:
+func _handle_backup() -> void:
 	# If backup file exists, Pixelorama was not closed properly (probably crashed) - reopen backup
 	var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
 	backup_confirmation.get_cancel().text = tr("Delete")
@@ -487,7 +487,7 @@ func _on_BackupConfirmation_popup_hide() -> void:
 	OpenSave.autosave_timer.start()
 
 
-func use_osx_shortcuts() -> void:
+func _use_osx_shortcuts() -> void:
 	var inputmap := InputMap
 
 	for action in inputmap.get_actions():

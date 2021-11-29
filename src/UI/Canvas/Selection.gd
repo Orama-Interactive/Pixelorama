@@ -88,7 +88,7 @@ func _input(event: InputEvent) -> void:
 			elif Input.is_action_just_pressed("escape"):
 				transform_content_cancel()
 
-		move_with_arrow_keys(event)
+		_move_with_arrow_keys(event)
 
 	elif event is InputEventMouse:
 		var gizmo: Gizmo
@@ -157,12 +157,12 @@ func _input(event: InputEvent) -> void:
 
 		if dragged_gizmo:
 			if dragged_gizmo.type == Gizmo.Type.SCALE:
-				gizmo_resize()
+				_gizmo_resize()
 			else:
-				gizmo_rotate()
+				_gizmo_rotate()
 
 
-func move_with_arrow_keys(event: InputEvent) -> void:
+func _move_with_arrow_keys(event: InputEvent) -> void:
 	var selection_tool_selected := false
 	for slot in Tools._slots.values():
 		if slot.tool_node is SelectionTool:
@@ -174,18 +174,18 @@ func move_with_arrow_keys(event: InputEvent) -> void:
 	if Global.current_project.has_selection:
 		if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 			return
-		if is_action_direction_pressed(event) and !arrow_key_move:
+		if _is_action_direction_pressed(event) and !arrow_key_move:
 			arrow_key_move = true
 			if Input.is_key_pressed(KEY_ALT):
 				transform_content_confirm()
 				move_borders_start()
 			else:
 				transform_content_start()
-		if is_action_direction_released(event) and arrow_key_move:
+		if _is_action_direction_released(event) and arrow_key_move:
 			arrow_key_move = false
 			move_borders_end()
 
-		if is_action_direction(event) and arrow_key_move:
+		if _is_action_direction(event) and arrow_key_move:
 			var step := Vector2.ONE
 			if Input.is_key_pressed(KEY_CONTROL):
 				step = Vector2(Global.grid_width, Global.grid_height)
@@ -196,7 +196,7 @@ func move_with_arrow_keys(event: InputEvent) -> void:
 
 
 # Check if an event is a ui_up/down/left/right event-press
-func is_action_direction_pressed(event: InputEvent) -> bool:
+func _is_action_direction_pressed(event: InputEvent) -> bool:
 	for action in KEY_MOVE_ACTION_NAMES:
 		if event.is_action_pressed(action):
 			return true
@@ -204,7 +204,7 @@ func is_action_direction_pressed(event: InputEvent) -> bool:
 
 
 # Check if an event is a ui_up/down/left/right event release
-func is_action_direction(event: InputEvent) -> bool:
+func _is_action_direction(event: InputEvent) -> bool:
 	for action in KEY_MOVE_ACTION_NAMES:
 		if event.is_action(action):
 			return true
@@ -212,7 +212,7 @@ func is_action_direction(event: InputEvent) -> bool:
 
 
 # Check if an event is a ui_up/down/left/right event release
-func is_action_direction_released(event: InputEvent) -> bool:
+func _is_action_direction_released(event: InputEvent) -> bool:
 	for action in KEY_MOVE_ACTION_NAMES:
 		if event.is_action_released(action):
 			return true
@@ -245,10 +245,10 @@ func _big_bounding_rectangle_changed(value: Rect2) -> void:
 	for slot in Tools._slots.values():
 		if slot.tool_node is SelectionTool:
 			slot.tool_node.set_spinbox_values()
-	update_gizmos()
+	_update_gizmos()
 
 
-func update_gizmos() -> void:
+func _update_gizmos() -> void:
 	var rect_pos: Vector2 = big_bounding_rectangle.position
 	var rect_end: Vector2 = big_bounding_rectangle.end
 	var size: Vector2 = Vector2.ONE * Global.camera.zoom * 10
@@ -283,10 +283,10 @@ func update_on_zoom(zoom: float) -> void:
 	for gizmo in gizmos:
 		if gizmo.rect.size == Vector2.ZERO:
 			return
-	update_gizmos()
+	_update_gizmos()
 
 
-func gizmo_resize() -> void:
+func _gizmo_resize() -> void:
 	var dir := dragged_gizmo.direction
 
 	if Input.is_action_pressed("ctrl"):
@@ -300,7 +300,7 @@ func gizmo_resize() -> void:
 		temp_rect = Rect2(-1.0 * temp_rect.size / 2 + temp_rect_pivot, temp_rect.size)
 
 	else:
-		resize_rect(Global.canvas.current_pixel, dir)
+		_resize_rect(Global.canvas.current_pixel, dir)
 
 	if Input.is_action_pressed("shift"):  # Maintain aspect ratio
 		var end_y = temp_rect.end.y
@@ -354,7 +354,7 @@ func gizmo_resize() -> void:
 	update()
 
 
-func resize_rect(pos: Vector2, dir: Vector2) -> void:
+func _resize_rect(pos: Vector2, dir: Vector2) -> void:
 	if dir.x > 0:
 		temp_rect.size.x = pos.x - temp_rect.position.x
 	elif dir.x < 0:
@@ -374,7 +374,7 @@ func resize_rect(pos: Vector2, dir: Vector2) -> void:
 		temp_rect.size.y = temp_rect_size.y
 
 
-func gizmo_rotate() -> void:  # Does not work properly yet
+func _gizmo_rotate() -> void:  # Does not work properly yet
 	var angle: float = Global.canvas.current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
 	angle = deg2rad(floor(rad2deg(angle)))
 	if angle == prev_angle:
@@ -477,7 +477,7 @@ func transform_content_start() -> void:
 		undo_data = get_undo_data(true)
 		temp_rect = big_bounding_rectangle
 		temp_bitmap = Global.current_project.selection_bitmap
-		get_preview_image()
+		_get_preview_image()
 		if original_preview_image.is_empty():
 			undo_data = get_undo_data(false)
 			return
@@ -507,7 +507,7 @@ func transform_content_confirm() -> void:
 					not is_pasting
 					and not (frame == project.current_frame and layer == project.current_layer)
 				):
-					src = get_selected_image(cel_image, clear_in_selected_cels)
+					src = _get_selected_image(cel_image, clear_in_selected_cels)
 					src.resize(
 						big_bounding_rectangle.size.x,
 						big_bounding_rectangle.size.y,
@@ -805,7 +805,7 @@ func clear_selection(use_undo := false) -> void:
 		commit_undo("Clear Selection", undo_data_tmp)
 
 
-func get_preview_image() -> void:
+func _get_preview_image() -> void:
 	var project: Project = Global.current_project
 	var cel_image: Image = project.frames[project.current_frame].cels[project.current_layer].image
 	if original_preview_image.is_empty():
@@ -842,7 +842,7 @@ func get_preview_image() -> void:
 	Global.canvas.update_texture(project.current_layer)
 
 
-func get_selected_image(cel_image: Image, clear := true) -> Image:
+func _get_selected_image(cel_image: Image, clear := true) -> Image:
 	var project: Project = Global.current_project
 	var image := Image.new()
 	image = cel_image.get_rect(original_big_bounding_rectangle)
