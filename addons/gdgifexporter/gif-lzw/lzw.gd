@@ -147,6 +147,7 @@ func compress_lzw(image: PoolByteArray, colors: PoolByteArray) -> Array:
 	return [binary_code_stream.pack(), min_code_size]
 
 
+# gdlint: ignore=max-line-length
 func decompress_lzw(code_stream_data: PoolByteArray, min_code_size: int, colors: PoolByteArray) -> PoolByteArray:
 	var code_table: CodeTable = initialize_color_code_table(colors)
 	var index_stream: PoolByteArray = PoolByteArray([])

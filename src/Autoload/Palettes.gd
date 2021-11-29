@@ -443,26 +443,26 @@ func import_palette(path: String) -> void:
 				file.open(path, File.READ)
 				var text = file.get_as_text()
 				file.close()
-				palette = import_gpl(path, text)
+				palette = _import_gpl(path, text)
 		"pal":
 			var file = File.new()
 			if file.file_exists(path):
 				file.open(path, File.READ)
 				var text = file.get_as_text()
 				file.close()
-				palette = import_pal_palette(path, text)
+				palette = _import_pal_palette(path, text)
 		"png", "bmp", "hdr", "jpg", "jpeg", "svg", "tga", "webp":
 			var image := Image.new()
 			var err := image.load(path)
 			if !err:
-				palette = import_image_palette(path, image)
+				palette = _import_image_palette(path, image)
 		"json":
 			var file = File.new()
 			if file.file_exists(path):
 				file.open(path, File.READ)
 				var text = file.get_as_text()
 				file.close()
-				palette = import_json_palette(text)
+				palette = _import_json_palette(text)
 
 	if palette:
 		var palette_path := _save_palette(palette)
@@ -472,7 +472,7 @@ func import_palette(path: String) -> void:
 		Global.palette_panel.select_palette(palette_path)
 
 
-func import_gpl(path: String, text: String) -> Palette:
+func _import_gpl(path: String, text: String) -> Palette:
 	# Refer to app/core/gimppalette-load.c of the GIMP for the "living spec"
 	var result: Palette = null
 	var lines = text.split("\n")
@@ -522,7 +522,7 @@ func import_gpl(path: String, text: String) -> Palette:
 	return result
 
 
-func import_pal_palette(path: String, text: String) -> Palette:
+func _import_pal_palette(path: String, text: String) -> Palette:
 	var result: Palette = null
 	var colors := PoolColorArray()
 	var lines = text.split("\n")
@@ -548,7 +548,7 @@ func import_pal_palette(path: String, text: String) -> Palette:
 	return result
 
 
-func import_image_palette(path: String, image: Image) -> Palette:
+func _import_image_palette(path: String, image: Image) -> Palette:
 	var colors := []
 	var height: int = image.get_height()
 	var width: int = image.get_width()
@@ -571,7 +571,7 @@ func import_image_palette(path: String, image: Image) -> Palette:
 
 
 # Import of deprecated older json palette format
-func import_json_palette(text: String):
+func _import_json_palette(text: String) -> Palette:
 	var result: Palette = Palette.new()
 	var result_json = JSON.parse(text)
 

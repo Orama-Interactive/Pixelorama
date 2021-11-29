@@ -89,24 +89,24 @@ func find_transparency_color_index(color_table: Dictionary) -> int:
 	return -1
 
 
-func change_colors_to_codes(image: Image, color_palette: Dictionary, transparency_color_index: int) -> PoolByteArray:
-	image.lock()
-	var image_data: PoolByteArray = image.get_data()
+func colors_to_codes(img: Image, col_palette: Dictionary, transp_color_index: int) -> PoolByteArray:
+	img.lock()
+	var image_data: PoolByteArray = img.get_data()
 	var result: PoolByteArray = PoolByteArray([])
 
 	for i in range(0, image_data.size(), 4):
 		var color: Array = [image_data[i], image_data[i + 1], image_data[i + 2], image_data[i + 3]]
 
-		if color in color_palette:
-			if color[3] == 0 and transparency_color_index != -1:
-				result.append(transparency_color_index)
+		if color in col_palette:
+			if color[3] == 0 and transp_color_index != -1:
+				result.append(transp_color_index)
 			else:
-				result.append(color_palette[color])
+				result.append(col_palette[color])
 		else:
 			result.append(0)
-			push_warning("change_colors_to_codes: color not found! [%d, %d, %d, %d]" % color)
+			push_warning("colors_to_codes: color not found! [%d, %d, %d, %d]" % color)
 
-	image.unlock()
+	img.unlock()
 	return result
 
 
@@ -152,7 +152,7 @@ func add_frame(image: Image, frame_delay: float, quantizator: Script) -> int:
 		if transparency_color_index == -1 and found_color_table.size() <= 255:
 			found_color_table[[0, 0, 0, 0]] = found_color_table.size()
 			transparency_color_index = found_color_table.size() - 1
-		image_converted_to_codes = change_colors_to_codes(
+		image_converted_to_codes = colors_to_codes(
 			image, found_color_table, transparency_color_index
 		)
 		color_table = make_proper_size(found_color_table.keys())
