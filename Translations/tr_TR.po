@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-11-30 19:49\n"
+"PO-Revision-Date: 2021-11-30 20:08\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -190,7 +190,7 @@ msgid "Widescreen"
 msgstr "Geniş ekran"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Dikey"
 
 msgid "Mirror View"
 msgstr "Yansima"
@@ -639,7 +639,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive Tarafından Geliştirilmiştir"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-Orama Interactive ve destekçileri tarafından"
 
 msgid "Website"
 msgstr "İnternet sitesi"
