@@ -45,7 +45,5 @@ func generate_image(
 	VisualServer.free_rid(ci_rid)
 	VisualServer.free_rid(mat_rid)
 	viewport_texture.convert(Image.FORMAT_RGBA8)
-	#Global.canvas.handle_undo("Draw")
 	_img.copy_from(viewport_texture)
-	#Global.canvas.handle_redo("Draw")
 	emit_signal("done")

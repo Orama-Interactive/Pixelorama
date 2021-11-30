@@ -47,49 +47,44 @@ func _about_to_show() -> void:
 func _confirmed() -> void:
 	var project: Project = Global.current_project
 	if affect == CEL:
-		# No changes if the layer is locked or invisible
-		if !project.layers[project.current_layer].can_layer_get_drawn():
-			return
-		if project.selected_cels.size() == 1:
-			Global.canvas.handle_undo("Draw")
-			commit_action(current_cel)
-			Global.canvas.handle_redo("Draw")
-		else:
-			Global.canvas.handle_undo("Draw", project, -1, -1)
-			for cel_index in project.selected_cels:
-				var cel: Cel = project.frames[cel_index[0]].cels[cel_index[1]]
-				var cel_image: Image = cel.image
-				commit_action(cel_image)
-			Global.canvas.handle_redo("Draw", project, -1, -1)
+		var undo_data := _get_undo_data(project)
+		for cel_index in project.selected_cels:
+			if !project.layers[cel_index[1]].can_layer_get_drawn():
+				continue
+			var cel: Cel = project.frames[cel_index[0]].cels[cel_index[1]]
+			var cel_image: Image = cel.image
+			commit_action(cel_image)
+		_commit_undo("Draw", undo_data, project)
+
 	elif affect == FRAME:
-		Global.canvas.handle_undo("Draw", project, -1)
+		var undo_data := _get_undo_data(project)
 		var i := 0
 		for cel in project.frames[project.current_frame].cels:
 			if project.layers[i].can_layer_get_drawn():
 				commit_action(cel.image)
 			i += 1
-		Global.canvas.handle_redo("Draw", project, -1)
+		_commit_undo("Draw", undo_data, project)
 
 	elif affect == ALL_FRAMES:
-		Global.canvas.handle_undo("Draw", project, -1, -1)
+		var undo_data := _get_undo_data(project)
 		for frame in project.frames:
 			var i := 0
 			for cel in frame.cels:
 				if project.layers[i].can_layer_get_drawn():
 					commit_action(cel.image)
 				i += 1
-		Global.canvas.handle_redo("Draw", project, -1, -1)
+		_commit_undo("Draw", undo_data, project)
 
 	elif affect == ALL_PROJECTS:
 		for _project in Global.projects:
-			Global.canvas.handle_undo("Draw", _project, -1, -1)
+			var undo_data := _get_undo_data(_project)
 			for frame in _project.frames:
 				var i := 0
 				for cel in frame.cels:
 					if _project.layers[i].can_layer_get_drawn():
 						commit_action(cel.image, _project)
 					i += 1
-			Global.canvas.handle_redo("Draw", _project, -1, -1)
+			_commit_undo("Draw", undo_data, _project)
 
 
 func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
@@ -98,6 +93,42 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 
 func set_nodes() -> void:
 	pass
+
+
+func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
+	var redo_data := _get_undo_data(project)
+
+	project.undos += 1
+	project.undo_redo.create_action(action)
+	for image in redo_data:
+		project.undo_redo.add_do_property(image, "data", redo_data[image])
+	for image in undo_data:
+		project.undo_redo.add_undo_property(image, "data", undo_data[image])
+	project.undo_redo.add_do_method(Global, "redo", -1, -1, project)
+	project.undo_redo.add_undo_method(Global, "undo", -1, -1, project)
+	project.undo_redo.commit_action()
+
+
+func _get_undo_data(project: Project) -> Dictionary:
+	var data := {}
+	var images := _get_selected_draw_images(project)
+	for image in images:
+		image.unlock()
+		data[image] = image.data
+	return data
+
+
+func _get_selected_draw_images(project: Project) -> Array:  # Array of Images
+	var images := []
+	if affect == CEL:
+		for cel_index in project.selected_cels:
+			var cel: Cel = project.frames[cel_index[0]].cels[cel_index[1]]
+			images.append(cel.image)
+	else:
+		for frame in project.frames:
+			for cel in frame.cels:
+				images.append(cel.image)
+	return images
 
 
 func _on_SelectionCheckBox_toggled(_button_pressed: bool) -> void:
@@ -124,8 +155,8 @@ func update_preview() -> void:
 func update_transparent_background_size() -> void:
 	if !preview:
 		return
-	var image_size_y = preview.rect_size.y
-	var image_size_x = preview.rect_size.x
+	var image_size_y := preview.rect_size.y
+	var image_size_x := preview.rect_size.x
 	if preview_image.get_size().x > preview_image.get_size().y:
 		var scale_ratio = preview_image.get_size().x / image_size_x
 		image_size_y = preview_image.get_size().y / scale_ratio
