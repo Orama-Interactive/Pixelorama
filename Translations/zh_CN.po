@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-12-01 00:30\n"
+"PO-Revision-Date: 2021-12-01 02:31\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1354,19 +1354,19 @@ msgid "Blue-Red Mode"
 msgstr "蓝红模式"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "显示过去的帧："
 
 msgid "Show future frames:"
-msgstr ""
+msgstr "显示未来的帧："
 
 msgid "Above canvas"
-msgstr ""
+msgstr "画布上方"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "画布下方"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "如果您希望图层忽略洋葱皮，只需在其名称中添加“_io”后缀即可。"
 
 msgid "Add a new frame"
 msgstr "添加一个新的帧"
