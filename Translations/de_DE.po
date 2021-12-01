@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-11-22 06:10\n"
+"PO-Revision-Date: 2021-12-01 00:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1351,6 +1351,21 @@ msgstr "Wenn diese Option ausgewählt ist, wird die Animation nur auf den Frames
 
 msgid "Blue-Red Mode"
 msgstr "Blau-Rot Modus"
+
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
 
 msgid "Add a new frame"
 msgstr "Füge einen neuen Frame hinzu"
