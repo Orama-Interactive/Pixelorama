@@ -890,9 +890,10 @@ margin_bottom = 24.0
 [node name="AnimationTimer" type="Timer" parent="."]
 
 [node name="OnionSkinningSettings" type="WindowDialog" parent="."]
-margin_right = 220.0
-margin_bottom = 140.0
-rect_min_size = Vector2( 300, 320 )
+margin_right = 300.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 300, 240 )
+resizable = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -902,9 +903,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_left = 4.0
-margin_top = -153.0
+margin_top = -113.0
 margin_right = -4.0
-margin_bottom = 161.0
+margin_bottom = 86.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -938,71 +939,63 @@ align = 1
 
 [node name="BlueRedMode" type="CheckBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 92.0
-margin_right = 292.0
+margin_right = 126.0
 margin_bottom = 116.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
 text = "Blue-Red Mode"
 
-[node name="PastPlace" type="HBoxContainer" parent="OnionSkinningSettings/OnionSkinningButtons"]
+[node name="GridContainer" type="GridContainer" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 120.0
 margin_right = 292.0
-margin_bottom = 140.0
-alignment = 2
+margin_bottom = 164.0
+custom_constants/hseparation = 8
+columns = 2
 
-[node name="Label" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons/PastPlace"]
-margin_left = 34.0
+[node name="PastPlacementLabel" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons/GridContainer"]
 margin_top = 3.0
-margin_right = 171.0
+margin_right = 127.0
 margin_bottom = 17.0
-text = "Past Skin Placement: "
-align = 2
+text = "Show past frames:"
 valign = 1
 
-[node name="PastPlacement" type="OptionButton" parent="OnionSkinningSettings/OnionSkinningButtons/PastPlace"]
-margin_left = 175.0
+[node name="PastPlacement" type="OptionButton" parent="OnionSkinningSettings/OnionSkinningButtons/GridContainer"]
+margin_left = 135.0
 margin_right = 292.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-text = "Above Canvas"
-items = [ "Above Canvas", null, false, 0, null, "Below Canvas", null, false, 1, null ]
+size_flags_horizontal = 3
+text = "Above canvas"
+items = [ "Above canvas", null, false, 0, null, "Below canvas", null, false, 1, null ]
 selected = 0
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="FuturePlace" type="HBoxContainer" parent="OnionSkinningSettings/OnionSkinningButtons"]
-margin_top = 144.0
-margin_right = 292.0
-margin_bottom = 164.0
-alignment = 2
-
-[node name="Label" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons/FuturePlace"]
-margin_left = 20.0
-margin_top = 3.0
-margin_right = 171.0
-margin_bottom = 17.0
-text = "Future Skin Placement: "
+[node name="FuturePlacementLabel" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons/GridContainer"]
+margin_top = 27.0
+margin_right = 127.0
+margin_bottom = 41.0
+text = "Show future frames:"
 align = 2
 valign = 1
 
-[node name="FuturePlacement" type="OptionButton" parent="OnionSkinningSettings/OnionSkinningButtons/FuturePlace"]
-margin_left = 175.0
+[node name="FuturePlacement" type="OptionButton" parent="OnionSkinningSettings/OnionSkinningButtons/GridContainer"]
+margin_left = 135.0
+margin_top = 24.0
 margin_right = 292.0
-margin_bottom = 20.0
+margin_bottom = 44.0
 mouse_default_cursor_shape = 2
-text = "Above Canvas"
-items = [ "Above Canvas", null, false, 0, null, "Below Canvas", null, false, 1, null ]
+text = "Above canvas"
+items = [ "Above canvas", null, false, 0, null, "Below canvas", null, false, 1, null ]
 selected = 0
 
 [node name="Label" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 168.0
 margin_right = 292.0
-margin_bottom = 233.0
+margin_bottom = 199.0
 custom_colors/font_color = Color( 0.333333, 0.901961, 0.462745, 1 )
-text = "Note:
-If you want a layer to ignore onion skinning simply add \"ignore_onion\" in its name
-(it is case-insensitive)"
-align = 1
+text = "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
 valign = 1
 autowrap = true
 
@@ -1049,5 +1042,5 @@ __meta__ = {
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
 [connection signal="toggled" from="OnionSkinningSettings/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
-[connection signal="item_selected" from="OnionSkinningSettings/OnionSkinningButtons/PastPlace/PastPlacement" to="." method="_on_PastPlacement_item_selected"]
-[connection signal="item_selected" from="OnionSkinningSettings/OnionSkinningButtons/FuturePlace/FuturePlacement" to="." method="_on_FuturePlacement_item_selected"]
+[connection signal="item_selected" from="OnionSkinningSettings/OnionSkinningButtons/GridContainer/PastPlacement" to="." method="_on_PastPlacement_item_selected"]
+[connection signal="item_selected" from="OnionSkinningSettings/OnionSkinningButtons/GridContainer/FuturePlacement" to="." method="_on_FuturePlacement_item_selected"]

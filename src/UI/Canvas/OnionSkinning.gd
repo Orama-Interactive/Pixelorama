@@ -19,20 +19,18 @@ func _draw() -> void:
 		else:
 			color = Color.white
 		for i in range(1, rate + 1):
-			var change = Global.current_project.current_frame
+			var change: int = Global.current_project.current_frame
 			if type == PAST:
 				change -= i
 			else:
 				change += i
 			if change == clamp(change, 0, Global.current_project.frames.size() - 1):
 				var layer_i := 0
-				for layer in Global.current_project.frames[change].cels:
-					if Global.current_project.layers[layer_i].visible:
-						# Ignore layer if it has "onion_ignore" in its name (case in-sensitive)
-						if not (
-							"ignore_onion"
-							in Global.current_project.layers[layer_i].name.to_lower()
-						):
+				for cel in Global.current_project.frames[change].cels:
+					var layer: Layer = Global.current_project.layers[layer_i]
+					if layer.visible:
+						# Ignore layer if it has the "_io" suffix in its name (case in-sensitive)
+						if not (layer.name.to_lower().ends_with("_io")):
 							color.a = 0.6 / i
-							draw_texture(layer.image_texture, Vector2.ZERO, color)
+							draw_texture(cel.image_texture, Vector2.ZERO, color)
 					layer_i += 1

@@ -529,12 +529,12 @@ func _on_BlueRedMode_toggled(button_pressed: bool) -> void:
 	Global.canvas.update()
 
 
-func _on_PastPlacement_item_selected(index):
+func _on_PastPlacement_item_selected(index: int) -> void:
 	past_above_canvas = (index == 0)
 	Global.canvas.get_node("OnionPast").set("show_behind_parent", !past_above_canvas)
 
 
-func _on_FuturePlacement_item_selected(index):
+func _on_FuturePlacement_item_selected(index: int) -> void:
 	future_above_canvas = (index == 0)
 	Global.canvas.get_node("OnionFuture").set("show_behind_parent", !future_above_canvas)
 

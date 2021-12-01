@@ -23,10 +23,12 @@ __meta__ = {
 }
 
 [node name="HSlider" type="HSlider" parent="HBoxContainer2"]
+margin_top = 4.0
 margin_right = 146.0
-margin_bottom = 16.0
+margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 value = 100.0
 
 [node name="SpinBox" type="SpinBox" parent="HBoxContainer2"]

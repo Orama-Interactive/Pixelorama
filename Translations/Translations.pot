@@ -1285,6 +1285,21 @@ msgstr ""
 msgid "Blue-Red Mode"
 msgstr ""
 
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
+
 msgid "Add a new frame"
 msgstr ""
 
