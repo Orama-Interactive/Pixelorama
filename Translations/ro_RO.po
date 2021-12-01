@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-11-27 19:29\n"
+"PO-Revision-Date: 2021-12-01 00:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1352,6 +1352,21 @@ msgstr "Dacă opțiunea este selectată, animația va rula doar pe cadrele cu ac
 
 msgid "Blue-Red Mode"
 msgstr "Mod albastru-roșu"
+
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
 
 msgid "Add a new frame"
 msgstr "Adaugă un cadru nou"
