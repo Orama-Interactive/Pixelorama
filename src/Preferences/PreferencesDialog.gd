@@ -70,18 +70,8 @@ var preferences = [
 		"pressed",
 		Global.enable_autosave
 	],
-	[
-		"default_image_width",
-		"Image/ImageOptions/ImageDefaultWidth",
-		"value",
-		Global.default_image_width
-	],
-	[
-		"default_image_height",
-		"Image/ImageOptions/ImageDefaultHeight",
-		"value",
-		Global.default_image_height
-	],
+	["default_width", "Image/ImageOptions/ImageDefaultWidth", "value", Global.default_width],
+	["default_height", "Image/ImageOptions/ImageDefaultHeight", "value", Global.default_height],
 	[
 		"default_fill_color",
 		"Image/ImageOptions/DefaultFillColor",

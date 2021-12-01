@@ -81,7 +81,7 @@ func cel_size_changed(value: int) -> void:
 
 func add_frame() -> void:
 	var project: Project = Global.current_project
-	var frame: Frame = Global.canvas.new_empty_frame(project.fill_color, project.size)
+	var frame: Frame = project.new_empty_frame()
 	var new_frames: Array = project.frames.duplicate()
 	var new_layers: Array = project.layers.duplicate()
 	new_frames.insert(project.current_frame + 1, frame)

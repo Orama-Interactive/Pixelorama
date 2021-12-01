@@ -44,8 +44,8 @@ var icon_color_from: int = IconColorFrom.THEME
 var custom_icon_color := Color.gray
 var tool_button_size: int = ButtonSize.SMALL
 
-var default_image_width := 64
-var default_image_height := 64
+var default_width := 64
+var default_height := 64
 var default_fill_color := Color(0, 0, 0, 0)
 var grid_type = GridTypes.CARTESIAN
 var grid_width := 2
@@ -179,20 +179,19 @@ func _ready() -> void:
 
 	panel_layout = config_cache.get_value("window", "panel_layout", PanelLayout.AUTO)
 
-	default_image_width = config_cache.get_value(
-		"preferences", "default_image_width", default_image_width
-	)
-	default_image_height = config_cache.get_value(
-		"preferences", "default_image_height", default_image_height
-	)
+	default_width = config_cache.get_value("preferences", "default_width", default_width)
+	default_height = config_cache.get_value("preferences", "default_height", default_height)
 	default_fill_color = config_cache.get_value(
 		"preferences", "default_fill_color", default_fill_color
 	)
-	var proj_size := Vector2(default_image_width, default_image_height)
+	var proj_size := Vector2(default_width, default_height)
 	projects.append(Project.new([], tr("untitled"), proj_size))
-	projects[0].layers.append(Layer.new())
-	projects[0].fill_color = default_fill_color
 	current_project = projects[0]
+	current_project.layers.append(Layer.new())
+	current_project.fill_color = default_fill_color
+	var frame: Frame = current_project.new_empty_frame()
+	current_project.frames.append(frame)
+
 	for node in get_tree().get_nodes_in_group("UIButtons"):
 		var tooltip: String = node.hint_tooltip
 		if !tooltip.empty() and node.shortcut:

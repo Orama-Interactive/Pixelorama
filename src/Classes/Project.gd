@@ -101,6 +101,20 @@ func commit_redo() -> void:
 	Global.control.redone = false
 
 
+func new_empty_frame() -> Frame:
+	var frame := Frame.new()
+	var bottom_layer := true
+	for l in layers:  # Create as many cels as there are layers
+		var image := Image.new()
+		image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+		if bottom_layer:
+			image.fill(fill_color)
+		frame.cels.append(Cel.new(image, 1))
+		bottom_layer = false
+
+	return frame
+
+
 func selection_bitmap_changed() -> void:
 	var image := Image.new()
 	var image_texture := ImageTexture.new()

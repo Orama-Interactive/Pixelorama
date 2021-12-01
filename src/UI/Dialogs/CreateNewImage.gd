@@ -64,8 +64,8 @@ class Template:
 
 
 func _ready() -> void:
-	width_value.value = Global.default_image_width
-	height_value.value = Global.default_image_height
+	width_value.value = Global.default_width
+	height_value.value = Global.default_height
 	aspect_ratio = width_value.value / height_value.value
 	fill_color_node.color = Global.default_fill_color
 	fill_color_node.get_picker().presets_visible = false
@@ -103,16 +103,15 @@ func _on_CreateNewImage_confirmed() -> void:
 	var height: int = height_value.value
 	var fill_color: Color = fill_color_node.color
 
-	var frame: Frame = Global.canvas.new_empty_frame(fill_color, Vector2(width, height), true)
-	var new_project: Project
 	var proj_name: String = $VBoxContainer/ProjectName/NameInput.text
-	if proj_name.is_valid_filename():
-		new_project = Project.new([frame], tr(proj_name), Vector2(width, height).floor())
-	else:
-		# an empty field or non valid name...
-		new_project = Project.new([frame], tr("untitled"), Vector2(width, height).floor())
+	if !proj_name.is_valid_filename():
+		proj_name = tr("untitled")
+
+	var new_project := Project.new([], proj_name, Vector2(width, height).floor())
 	new_project.layers.append(Layer.new())
 	new_project.fill_color = fill_color
+	var frame: Frame = new_project.new_empty_frame()
+	new_project.frames.append(frame)
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
@@ -153,8 +152,8 @@ func _on_TemplatesOptions_item_selected(id: int) -> void:
 		width_value.value = templates[id - 1].resolution.x
 		height_value.value = templates[id - 1].resolution.y
 	else:
-		width_value.value = Global.default_image_width
-		height_value.value = Global.default_image_height
+		width_value.value = Global.default_width
+		height_value.value = Global.default_height
 
 	if temporary_release:
 		ratio_box.pressed = true

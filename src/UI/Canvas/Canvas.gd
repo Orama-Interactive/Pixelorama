@@ -20,9 +20,6 @@ func _ready() -> void:
 	$OnionPast.blue_red_color = Color.blue
 	$OnionFuture.type = $OnionFuture.FUTURE
 	$OnionFuture.blue_red_color = Color.red
-	var project: Project = Global.current_project
-	var frame: Frame = new_empty_frame(project.fill_color, project.size)
-	project.frames.append(frame)
 	yield(get_tree(), "idle_frame")
 	camera_zoom()
 
@@ -104,21 +101,6 @@ func camera_zoom() -> void:
 		camera.save_values_to_project()
 
 	Global.transparent_checker.update_rect()
-
-
-func new_empty_frame(fill_color: Color, size: Vector2, single_layer := false) -> Frame:
-	var frame := Frame.new()
-	for l in Global.current_project.layers:  # Create as many cels as there are layers
-		# The sprite itself
-		var sprite := Image.new()
-		sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-		sprite.fill(fill_color)
-		frame.cels.append(Cel.new(sprite, 1))
-
-		if single_layer:
-			break
-
-	return frame
 
 
 func update_texture(layer_i: int, frame_i := -1, project: Project = Global.current_project) -> void:
