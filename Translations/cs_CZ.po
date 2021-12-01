@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-11-22 02:50\n"
+"PO-Revision-Date: 2021-12-01 00:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1352,6 +1352,21 @@ msgstr "Pokud je vybráno, animace se přehrává pouze na snímcích, které ma
 
 msgid "Blue-Red Mode"
 msgstr "Modro-červený režim"
+
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
 
 msgid "Add a new frame"
 msgstr "Přidat nový snímek"
