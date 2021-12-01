@@ -1,72 +1,34 @@
-extends ConfirmationDialog
+extends ImageEffect
 
-var current_cel: Image
 var shader: Shader
-var params := []  # String[]
+var param_names := []  # String[]
 
-onready var preview: TextureRect = $VBoxContainer/Preview
 onready var shader_loaded_label: Label = $VBoxContainer/ShaderLoadedLabel
 onready var shader_params: BoxContainer = $VBoxContainer/ShaderParams
 
 
-func _on_ShaderEffect_about_to_show() -> void:
-	var current_frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
-	current_cel = current_frame.cels[Global.current_project.current_layer].image
+func _about_to_show() -> void:
+	Global.canvas.selection.transform_content_confirm()
+	var frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
+	current_cel = frame.cels[Global.current_project.current_layer].image
 
-	var preview_image := Image.new()
 	preview_image.copy_from(current_cel)
-	var preview_texture = ImageTexture.new()
 	preview_texture.create_from_image(preview_image, 0)
 	preview.texture = preview_texture
 
 
-func _on_ShaderEffect_confirmed() -> void:
+func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	if !shader:
 		return
-	current_cel.unlock()
-	var viewport_texture := Image.new()
-	var size: Vector2 = Global.current_project.size
-	var vp = VisualServer.viewport_create()
-	var canvas = VisualServer.canvas_create()
-	VisualServer.viewport_attach_canvas(vp, canvas)
-	VisualServer.viewport_set_size(vp, size.x, size.y)
-	VisualServer.viewport_set_disable_3d(vp, true)
-	VisualServer.viewport_set_usage(vp, VisualServer.VIEWPORT_USAGE_2D)
-	VisualServer.viewport_set_hdr(vp, true)
-	VisualServer.viewport_set_active(vp, true)
-	VisualServer.viewport_set_transparent_background(vp, true)
 
-	var ci_rid = VisualServer.canvas_item_create()
-	VisualServer.viewport_set_canvas_transform(vp, canvas, Transform())
-	VisualServer.canvas_item_set_parent(ci_rid, canvas)
-	var texture = ImageTexture.new()
-	texture.create_from_image(current_cel)
-	VisualServer.canvas_item_add_texture_rect(ci_rid, Rect2(Vector2(0, 0), size), texture)
-
-	var mat_rid = VisualServer.material_create()
-	VisualServer.material_set_shader(mat_rid, shader.get_rid())
-	VisualServer.canvas_item_set_material(ci_rid, mat_rid)
-	for param in params:
+	var params := {}
+	for param in param_names:
 		var param_data = preview.material.get_shader_param(param)
-		VisualServer.material_set_param(mat_rid, param, param_data)
-
-	VisualServer.viewport_set_update_mode(vp, VisualServer.VIEWPORT_UPDATE_ONCE)
-	VisualServer.viewport_set_vflip(vp, true)
-	VisualServer.force_draw(false)
-	viewport_texture = VisualServer.texture_get_data(VisualServer.viewport_get_texture(vp))
-	VisualServer.free_rid(vp)
-	VisualServer.free_rid(canvas)
-	VisualServer.free_rid(ci_rid)
-	VisualServer.free_rid(mat_rid)
-	print(viewport_texture.data)
-	viewport_texture.convert(Image.FORMAT_RGBA8)
-	Global.canvas.handle_undo("Draw")
-	current_cel.copy_from(viewport_texture)
-	Global.canvas.handle_redo("Draw")
-
-
-func _on_ShaderEffect_popup_hide() -> void:
-	Global.dialog_open(false)
+		params[param] = param_data
+	var gen := ShaderImageEffect.new()
+	gen.generate_image(cel, shader, params, project.size)
+	current_cel.unlock()
+	yield(gen, "done")
 
 
 func _on_ChooseShader_pressed() -> void:
@@ -77,17 +39,21 @@ func _on_ChooseShader_pressed() -> void:
 
 
 func _on_FileDialog_file_selected(path: String) -> void:
-	var _shader = load(path)
-	if !_shader is Shader:
+	var shader_tmp = load(path)
+	if !shader_tmp is Shader:
 		return
-	change_shader(_shader, path.get_file().get_basename())
+	change_shader(shader_tmp, path.get_file().get_basename())
 
 
-func change_shader(_shader: Shader, name: String) -> void:
-	shader = _shader
-	preview.material.shader = _shader
+func set_nodes() -> void:
+	preview = $VBoxContainer/Preview
+
+
+func change_shader(shader_tmp: Shader, name: String) -> void:
+	shader = shader_tmp
+	preview.material.shader = shader_tmp
 	shader_loaded_label.text = tr("Shader loaded:") + " " + name
-	params.clear()
+	param_names.clear()
 	for child in shader_params.get_children():
 		child.queue_free()
 
@@ -106,14 +72,14 @@ func change_shader(_shader: Shader, name: String) -> void:
 			u_value = uniform_split[1].replace(";", "").strip_edges()
 
 		var u_left_side = uniform_split[0].split(":")
-		var u_hint := ""
-		if u_left_side.size() > 1:
-			u_hint = u_left_side[1].strip_edges()
+#		var u_hint := ""
+#		if u_left_side.size() > 1:
+#			u_hint = u_left_side[1].strip_edges()
 
 		var u_init = u_left_side[0].split(" ")
 		var u_type = u_init[1]
 		var u_name = u_init[2]
-		params.append(u_name)
+		param_names.append(u_name)
 
 		if u_type == "float":
 			var label := Label.new()

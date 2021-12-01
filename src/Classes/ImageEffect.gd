@@ -6,10 +6,10 @@ extends AcceptDialog
 enum { CEL, FRAME, ALL_FRAMES, ALL_PROJECTS }
 
 var affect: int = CEL
-var current_cel: Image
-var current_frame: Image
-var preview_image: Image
-var preview_texture: ImageTexture
+var current_cel := Image.new()
+var current_frame := Image.new()
+var preview_image := Image.new()
+var preview_texture := ImageTexture.new()
 var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
@@ -17,13 +17,9 @@ var affect_option_button: OptionButton
 
 func _ready() -> void:
 	set_nodes()
-	current_cel = Image.new()
-	current_frame = Image.new()
 	current_frame.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
-	preview_image = Image.new()
-	preview_texture = ImageTexture.new()
 	connect("about_to_show", self, "_about_to_show")
 	connect("popup_hide", self, "_popup_hide")
 	connect("confirmed", self, "_confirmed")
