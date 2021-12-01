@@ -172,9 +172,17 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 func delete_cel_contents() -> void:
 	if image.is_invisible():
 		return
-	Global.canvas.handle_undo("Draw", Global.current_project, layer, frame)
+	var project = Global.current_project
+	image.unlock()
+	var data := image.data
+	project.undos += 1
+	project.undo_redo.create_action("Draw")
+	project.undo_redo.add_undo_property(image, "data", data)
+	project.undo_redo.add_undo_method(Global, "undo", frame, layer, project)
 	image.fill(0)
-	Global.canvas.handle_redo("Draw", Global.current_project, layer, frame)
+	project.undo_redo.add_do_property(image, "data", image.data)
+	project.undo_redo.add_do_method(Global, "redo", frame, layer, project)
+	project.undo_redo.commit_action()
 
 
 func get_drag_data(_position) -> Array:

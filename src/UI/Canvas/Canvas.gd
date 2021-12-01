@@ -3,8 +3,7 @@ extends Node2D
 
 var fill_color := Color(0, 0, 0, 0)
 var current_pixel := Vector2.ZERO
-var can_undo := true
-var sprite_changed_this_frame := false  # for optimization purposes
+var sprite_changed_this_frame := false  # For optimization purposes
 var move_preview_location := Vector2.ZERO
 
 onready var currently_visible_frame: Viewport = $CurrentlyVisibleFrame
@@ -17,7 +16,6 @@ onready var indicators = $Indicators
 onready var previews = $Previews
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$OnionPast.type = $OnionPast.PAST
 	$OnionPast.blue_red_color = Color.blue
@@ -134,84 +132,6 @@ func new_empty_frame(
 			break
 
 	return frame
-
-
-func handle_undo(
-	action: String, project: Project = Global.current_project, layer_index := -2, frame_index := -2
-) -> void:
-	if !can_undo:
-		return
-
-	if layer_index <= -2:
-		layer_index = project.current_layer
-	if frame_index <= -2:
-		frame_index = project.current_frame
-
-	var cels := []
-	var frames := []
-	var layers := []
-	if frame_index == -1:
-		frames = project.frames
-	else:
-		frames.append(project.frames[frame_index])
-
-	if layer_index == -1:
-		layers = project.layers
-	else:
-		layers.append(project.layers[layer_index])
-
-	for f in frames:
-		for l in layers:
-			var index = project.layers.find(l)
-			cels.append(f.cels[index])
-
-	project.undos += 1
-	project.undo_redo.create_action(action)
-	for cel in cels:
-		# If we don't unlock the image, it doesn't work properly
-		cel.image.unlock()
-		var data = cel.image.data
-		cel.image.lock()
-		project.undo_redo.add_undo_property(cel.image, "data", data)
-	project.undo_redo.add_undo_method(Global, "undo", frame_index, layer_index, project)
-
-	can_undo = false
-
-
-func handle_redo(
-	_action: String, project: Project = Global.current_project, layer_index := -2, frame_index := -2
-) -> void:
-	can_undo = true
-	if project.undos < project.undo_redo.get_version():
-		return
-
-	if layer_index <= -2:
-		layer_index = project.current_layer
-	if frame_index <= -2:
-		frame_index = project.current_frame
-
-	var cels := []
-	var frames := []
-	var layers := []
-	if frame_index == -1:
-		frames = project.frames
-	else:
-		frames.append(project.frames[frame_index])
-
-	if layer_index == -1:
-		layers = project.layers
-	else:
-		layers.append(project.layers[layer_index])
-
-	for f in frames:
-		for l in layers:
-			var index = project.layers.find(l)
-			cels.append(f.cels[index])
-
-	for cel in cels:
-		project.undo_redo.add_do_property(cel.image, "data", cel.image.data)
-	project.undo_redo.add_do_method(Global, "redo", frame_index, layer_index, project)
-	project.undo_redo.commit_action()
 
 
 func update_texture(layer_i: int, frame_i := -1, project: Project = Global.current_project) -> void:
