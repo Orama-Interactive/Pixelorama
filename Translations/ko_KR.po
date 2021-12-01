@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-12-01 00:30\n"
+"PO-Revision-Date: 2021-12-01 01:53\n"
 
 msgid "OK"
 msgstr "예"
@@ -178,7 +178,7 @@ msgid "Tile Mode"
 msgstr "타일 모드"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "창 불투명도"
 
 msgid "Panel Layout"
 msgstr "파넬 배치"
@@ -1359,13 +1359,13 @@ msgid "Show future frames:"
 msgstr ""
 
 msgid "Above canvas"
-msgstr ""
+msgstr "캔버스 위"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "캔버스 아래"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "만약 레이어가 어니언 스키닝을 무시하게 하고 싶으면 \"_io\"를 이름 뒤에 붙이세요"
 
 msgid "Add a new frame"
 msgstr "새 프레임 추가"
