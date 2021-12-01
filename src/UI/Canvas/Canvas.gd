@@ -1,7 +1,6 @@
 class_name Canvas
 extends Node2D
 
-var fill_color := Color(0, 0, 0, 0)
 var current_pixel := Vector2.ZERO
 var sprite_changed_this_frame := false  # For optimization purposes
 var move_preview_location := Vector2.ZERO
@@ -21,8 +20,9 @@ func _ready() -> void:
 	$OnionPast.blue_red_color = Color.blue
 	$OnionFuture.type = $OnionFuture.FUTURE
 	$OnionFuture.blue_red_color = Color.red
-	var frame: Frame = new_empty_frame(true)
-	Global.current_project.frames.append(frame)
+	var project: Project = Global.current_project
+	var frame: Frame = new_empty_frame(project.fill_color, project.size)
+	project.frames.append(frame)
 	yield(get_tree(), "idle_frame")
 	camera_zoom()
 
@@ -106,24 +106,11 @@ func camera_zoom() -> void:
 	Global.transparent_checker.update_rect()
 
 
-func new_empty_frame(
-	first_time := false, single_layer := false, size := Global.current_project.size
-) -> Frame:
+func new_empty_frame(fill_color: Color, size: Vector2, single_layer := false) -> Frame:
 	var frame := Frame.new()
 	for l in Global.current_project.layers:  # Create as many cels as there are layers
 		# The sprite itself
 		var sprite := Image.new()
-		if first_time:
-			if Global.config_cache.has_section_key("preferences", "default_image_width"):
-				Global.current_project.size.x = Global.config_cache.get_value(
-					"preferences", "default_image_width"
-				)
-			if Global.config_cache.has_section_key("preferences", "default_image_height"):
-				Global.current_project.size.y = Global.config_cache.get_value(
-					"preferences", "default_image_height"
-				)
-			if Global.config_cache.has_section_key("preferences", "default_fill_color"):
-				fill_color = Global.config_cache.get_value("preferences", "default_fill_color")
 		sprite.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 		sprite.fill(fill_color)
 		frame.cels.append(Cel.new(sprite, 1))

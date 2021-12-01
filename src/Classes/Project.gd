@@ -4,10 +4,11 @@ extends Reference
 
 var name := "" setget _name_changed
 var size: Vector2 setget _size_changed
-var undo_redo: UndoRedo
+var undo_redo := UndoRedo.new()
 var tile_mode: int = Global.TileMode.NONE
 var tile_mode_rects := []  # Cached to avoid recalculation
 var undos := 0  # The number of times we added undo properties
+var fill_color := Color(0)
 var has_changed := false setget _has_changed_changed
 var frames := [] setget _frames_changed  # Array of Frames (that contain Cels)
 var layers := [] setget _layers_changed  # Array of Layers
@@ -55,8 +56,6 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	size = _size
 	selection_bitmap.create(size)
 	_update_tile_mode_rects()
-
-	undo_redo = UndoRedo.new()
 
 	Global.tabs.add_tab(name)
 	OpenSave.current_save_paths.append("")

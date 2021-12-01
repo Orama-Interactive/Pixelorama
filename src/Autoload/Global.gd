@@ -119,7 +119,7 @@ onready var small_preview_viewport: ViewportContainer = canvas_preview_container
 onready var camera: Camera2D = main_viewport.find_node("Camera2D")
 onready var camera2: Camera2D = control.find_node("Camera2D2")
 onready var camera_preview: Camera2D = control.find_node("CameraPreview")
-onready var cameras = [Global.camera, Global.camera2, Global.camera_preview]
+onready var cameras = [camera, camera2, camera_preview]
 onready var horizontal_ruler: BaseButton = control.find_node("HorizontalRuler")
 onready var vertical_ruler: BaseButton = control.find_node("VerticalRuler")
 onready var transparent_checker: ColorRect = control.find_node("TransparentChecker")
@@ -179,8 +179,19 @@ func _ready() -> void:
 
 	panel_layout = config_cache.get_value("window", "panel_layout", PanelLayout.AUTO)
 
-	projects.append(Project.new())
+	default_image_width = config_cache.get_value(
+		"preferences", "default_image_width", default_image_width
+	)
+	default_image_height = config_cache.get_value(
+		"preferences", "default_image_height", default_image_height
+	)
+	default_fill_color = config_cache.get_value(
+		"preferences", "default_fill_color", default_fill_color
+	)
+	var proj_size := Vector2(default_image_width, default_image_height)
+	projects.append(Project.new([], tr("untitled"), proj_size))
 	projects[0].layers.append(Layer.new())
+	projects[0].fill_color = default_fill_color
 	current_project = projects[0]
 	for node in get_tree().get_nodes_in_group("UIButtons"):
 		var tooltip: String = node.hint_tooltip

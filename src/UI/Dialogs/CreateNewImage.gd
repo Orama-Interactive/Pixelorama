@@ -102,9 +102,8 @@ func _on_CreateNewImage_confirmed() -> void:
 	var width: int = width_value.value
 	var height: int = height_value.value
 	var fill_color: Color = fill_color_node.color
-	Global.canvas.fill_color = fill_color
 
-	var frame: Frame = Global.canvas.new_empty_frame(false, true, Vector2(width, height))
+	var frame: Frame = Global.canvas.new_empty_frame(fill_color, Vector2(width, height), true)
 	var new_project: Project
 	var proj_name: String = $VBoxContainer/ProjectName/NameInput.text
 	if proj_name.is_valid_filename():
@@ -113,6 +112,7 @@ func _on_CreateNewImage_confirmed() -> void:
 		# an empty field or non valid name...
 		new_project = Project.new([frame], tr("untitled"), Vector2(width, height).floor())
 	new_project.layers.append(Layer.new())
+	new_project.fill_color = fill_color
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()

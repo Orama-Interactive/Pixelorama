@@ -80,10 +80,11 @@ func cel_size_changed(value: int) -> void:
 
 
 func add_frame() -> void:
-	var frame: Frame = Global.canvas.new_empty_frame()
-	var new_frames: Array = Global.current_project.frames.duplicate()
-	var new_layers: Array = Global.current_project.layers.duplicate()
-	new_frames.insert(Global.current_project.current_frame + 1, frame)
+	var project: Project = Global.current_project
+	var frame: Frame = Global.canvas.new_empty_frame(project.fill_color, project.size)
+	var new_frames: Array = project.frames.duplicate()
+	var new_layers: Array = project.layers.duplicate()
+	new_frames.insert(project.current_frame + 1, frame)
 	# Loop through the array to create new classes for each element, so that they
 	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
 	for i in new_layers.size():
@@ -103,27 +104,19 @@ func add_frame() -> void:
 			frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
 			frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
 
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Add Frame")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	project.undos += 1
+	project.undo_redo.create_action("Add Frame")
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.add_undo_method(Global, "undo")
 
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "current_frame", Global.current_project.current_frame + 1
-	)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
+	project.undo_redo.add_do_property(project, "frames", new_frames)
+	project.undo_redo.add_do_property(project, "current_frame", project.current_frame + 1)
+	project.undo_redo.add_do_property(project, "layers", new_layers)
 
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "frames", Global.current_project.frames
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_frame", Global.current_project.current_frame
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "layers", Global.current_project.layers
-	)
-	Global.current_project.undo_redo.commit_action()
+	project.undo_redo.add_undo_property(project, "frames", project.frames)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.commit_action()
 
 
 func _on_DeleteFrame_pressed(frame := -1) -> void:
