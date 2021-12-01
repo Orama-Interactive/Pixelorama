@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-12-01 00:30\n"
+"PO-Revision-Date: 2021-12-01 00:42\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1354,19 +1354,19 @@ msgid "Blue-Red Mode"
 msgstr "Μπλε-Κόκκινη λειτουργία"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "Εμφάνιση προηγούμενων καρέ:"
 
 msgid "Show future frames:"
-msgstr ""
+msgstr "Εμφάνιση επόμενων καρέ:"
 
 msgid "Above canvas"
-msgstr ""
+msgstr "Πάνω από καμβά"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "Κάτω από καμβά"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Αν θέλετε ένα στρώμα να αγνοήσει το onion skinning απλά προσθέστε το επίθημα \"_io\" στο όνομά του."
 
 msgid "Add a new frame"
 msgstr "Προσθήκη νέου καρέ"
