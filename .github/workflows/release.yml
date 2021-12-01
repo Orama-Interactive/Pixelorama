@@ -258,8 +258,10 @@ jobs:
         run: sips -s format icns ./build/mac/Pixelorama.app/Contents/Resources/icon.icns --out ./build/mac/Pixelorama.app/Contents/Resources/icon.icns
       - name: Copy pixelorama_data folder 📁
         run: |
-          cp -R ./pixelorama_data ./build/mac/Pixelorama.app/Contents/MacOS
-          rm ./build/mac/Pixelorama.app/Contents/MacOS/pixelorama_data/.gdignore
+          cp -R ./pixelorama_data ./build/mac/Pixelorama.app/Contents/Resources
+          rm ./build/mac/Pixelorama.app/Contents/Resources/pixelorama_data/.gdignore
+      - name: Ad-hoc signing ✍️
+        run: codesign -s - --force --deep ./build/mac/Pixelorama.app
       - name: Create DMG archive 🔧
         run: hdiutil create -srcfolder ./build/mac -fs HFS+ -volname Pixelorama ./build/mac/Pixelorama.dmg
       - name: Upload Release Asset 🚀
