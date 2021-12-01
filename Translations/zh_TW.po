@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2021-11-22 02:50\n"
+"PO-Revision-Date: 2021-12-01 00:30\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1316,6 +1316,21 @@ msgstr "如選定, 動畫只播放相同標籤的影格, 否則會播放所有�
 
 msgid "Blue-Red Mode"
 msgstr "Blue-Red 模式"
+
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
 
 msgid "Add a new frame"
 msgstr "新增影格"
