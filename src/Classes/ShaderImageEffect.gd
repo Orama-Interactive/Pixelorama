@@ -4,14 +4,8 @@ extends Reference
 signal done
 
 
-func generate_image(
-	_img: Image,
-	_shaderpath: String,
-	_params: Dictionary,
-	size: Vector2 = Global.current_project.size
-):
-	var shader = load(_shaderpath)
-	_img.unlock()
+func generate_image(img: Image, shader: Shader, params: Dictionary, size: Vector2) -> void:
+	img.unlock()
 	var viewport_texture := Image.new()
 	var vp = VisualServer.viewport_create()
 	var canvas = VisualServer.canvas_create()
@@ -27,14 +21,14 @@ func generate_image(
 	VisualServer.viewport_set_canvas_transform(vp, canvas, Transform())
 	VisualServer.canvas_item_set_parent(ci_rid, canvas)
 	var texture = ImageTexture.new()
-	texture.create_from_image(_img)
+	texture.create_from_image(img)
 	VisualServer.canvas_item_add_texture_rect(ci_rid, Rect2(Vector2(0, 0), size), texture)
 
 	var mat_rid = VisualServer.material_create()
 	VisualServer.material_set_shader(mat_rid, shader.get_rid())
 	VisualServer.canvas_item_set_material(ci_rid, mat_rid)
-	for key in _params:
-		VisualServer.material_set_param(mat_rid, key, _params[key])
+	for key in params:
+		VisualServer.material_set_param(mat_rid, key, params[key])
 
 	VisualServer.viewport_set_update_mode(vp, VisualServer.VIEWPORT_UPDATE_ONCE)
 	VisualServer.viewport_set_vflip(vp, true)
@@ -45,5 +39,5 @@ func generate_image(
 	VisualServer.free_rid(ci_rid)
 	VisualServer.free_rid(mat_rid)
 	viewport_texture.convert(Image.FORMAT_RGBA8)
-	_img.copy_from(viewport_texture)
+	img.copy_from(viewport_texture)
 	emit_signal("done")

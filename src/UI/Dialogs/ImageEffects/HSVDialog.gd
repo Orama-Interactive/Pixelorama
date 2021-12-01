@@ -1,6 +1,6 @@
 extends ImageEffect
 
-var shader_path: String = "res://src/Shaders/HSV.shader"
+var shader: Shader = preload("res://src/Shaders/HSV.shader")
 
 var live_preview: bool = true
 var confirmed: bool = false
@@ -18,8 +18,8 @@ onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
 
 func _about_to_show() -> void:
 	reset()
-	var sm: ShaderMaterial = ShaderMaterial.new()
-	sm.shader = load(shader_path)
+	var sm := ShaderMaterial.new()
+	sm.shader = shader
 	preview.set_material(sm)
 	._about_to_show()
 
@@ -36,9 +36,9 @@ func _confirmed() -> void:
 	reset()
 
 
-func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
-	var selection = _project.bitmap_to_image(_project.selection_bitmap, false)
-	var selection_tex = ImageTexture.new()
+func commit_action(cel: Image, project: Project = Global.current_project) -> void:
+	var selection: Image = project.bitmap_to_image(project.selection_bitmap, false)
+	var selection_tex := ImageTexture.new()
 	selection_tex.create_from_image(selection)
 
 	if !confirmed:
@@ -47,18 +47,18 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 		preview.material.set_shader_param("val_shift_amount", val_slider.value / 100)
 		preview.material.set_shader_param("selection", selection_tex)
 		preview.material.set_shader_param("affect_selection", selection_checkbox.pressed)
-		preview.material.set_shader_param("has_selection", _project.has_selection)
+		preview.material.set_shader_param("has_selection", project.has_selection)
 	else:
-		var params = {
+		var params := {
 			"hue_shift_amount": hue_slider.value / 360,
 			"sat_shift_amount": sat_slider.value / 100,
 			"val_shift_amount": val_slider.value / 100,
 			"selection": selection_tex,
 			"affect_selection": selection_checkbox.pressed,
-			"has_selection": _project.has_selection
+			"has_selection": project.has_selection
 		}
-		var gen: ShaderImageEffect = ShaderImageEffect.new()
-		gen.generate_image(_cel, shader_path, params, _project.size)
+		var gen := ShaderImageEffect.new()
+		gen.generate_image(cel, shader, params, project.size)
 		yield(gen, "done")
 
 
