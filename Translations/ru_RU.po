@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-12-01 00:30\n"
+"PO-Revision-Date: 2021-12-01 14:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1354,16 +1354,16 @@ msgid "Blue-Red Mode"
 msgstr "Сине-красный режим"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "Показывать прошлые кадры:"
 
 msgid "Show future frames:"
-msgstr ""
+msgstr "Показывать следующие кадры:"
 
 msgid "Above canvas"
-msgstr ""
+msgstr "Над холстом"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "Под холстом"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
 msgstr ""
