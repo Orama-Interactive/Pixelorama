@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-12-02 11:33\n"
+"PO-Revision-Date: 2021-12-02 11:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1464,10 +1464,10 @@ msgid "Redo: Draw"
 msgstr "Refacere: desenare"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Anulare: selectare"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Refacere: selectare"
 
 msgid "Undo: Scale"
 msgstr "Anulare: scalare"
