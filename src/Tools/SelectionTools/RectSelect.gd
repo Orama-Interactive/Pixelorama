@@ -92,7 +92,7 @@ func apply_selection(_position) -> void:
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()
 		if _rect.size == Vector2.ZERO and Global.current_project.has_selection:
-			Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
+			Global.canvas.selection.commit_undo("Select", undo_data)
 	if _rect.size != Vector2.ZERO:
 		var operation := 0
 		if _subtract:
@@ -130,7 +130,7 @@ func apply_selection(_position) -> void:
 			mirror_y_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 			Global.canvas.selection.select_rect(mirror_y_rect.abs(), operation)
 
-		Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
+		Global.canvas.selection.commit_undo("Select", undo_data)
 
 
 # Given an origin point and destination point, returns a rect representing

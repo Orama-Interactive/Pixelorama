@@ -153,7 +153,7 @@ func _input(event: InputEvent) -> void:
 				Global.has_focus = true
 				dragged_gizmo = null
 				if !is_moving_content:
-					commit_undo("Rectangle Select", undo_data)
+					commit_undo("Select", undo_data)
 
 		if dragged_gizmo:
 			if dragged_gizmo.type == Gizmo.Type.SCALE:
@@ -466,7 +466,7 @@ func move_borders_end() -> void:
 
 	Global.current_project.selection_bitmap = selected_bitmap_copy
 	if !is_moving_content:
-		commit_undo("Rectangle Select", undo_data)
+		commit_undo("Select", undo_data)
 	else:
 		Global.current_project.selection_bitmap_changed()
 	update()
@@ -769,7 +769,7 @@ func select_all() -> void:
 	clear_selection()
 	var full_rect = Rect2(Vector2.ZERO, project.size)
 	select_rect(full_rect)
-	commit_undo("Rectangle Select", undo_data_tmp)
+	commit_undo("Select", undo_data_tmp)
 
 
 func invert() -> void:
@@ -783,7 +783,7 @@ func invert() -> void:
 	project.selection_bitmap_changed()
 	self.big_bounding_rectangle = project.get_selection_rectangle(selection_bitmap_copy)
 	project.selection_offset = Vector2.ZERO
-	commit_undo("Rectangle Select", undo_data_tmp)
+	commit_undo("Select", undo_data_tmp)
 
 
 func clear_selection(use_undo := false) -> void:

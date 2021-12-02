@@ -34,7 +34,7 @@ func apply_selection(position: Vector2) -> void:
 	Global.canvas.selection.big_bounding_rectangle = project.get_selection_rectangle(
 		project.selection_bitmap
 	)
-	Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
+	Global.canvas.selection.commit_undo("Select", undo_data)
 
 
 func flood_fill(position: Vector2, image: Image, bitmap: BitMap) -> void:

@@ -70,7 +70,7 @@ func apply_selection(_position: Vector2) -> void:
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()
 		if _rect.size == Vector2.ZERO and Global.current_project.has_selection:
-			Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
+			Global.canvas.selection.commit_undo("Select", undo_data)
 
 	if _rect.size != Vector2.ZERO:
 		var selection_bitmap_copy: BitMap = project.selection_bitmap.duplicate()
@@ -109,7 +109,7 @@ func apply_selection(_position: Vector2) -> void:
 		Global.canvas.selection.big_bounding_rectangle = project.get_selection_rectangle(
 			project.selection_bitmap
 		)
-		Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
+		Global.canvas.selection.commit_undo("Select", undo_data)
 
 
 func set_ellipse(bitmap: BitMap, position: Vector2) -> void:

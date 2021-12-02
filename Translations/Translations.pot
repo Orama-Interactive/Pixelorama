@@ -1394,10 +1394,10 @@ msgstr ""
 msgid "Redo: Draw"
 msgstr ""
 
-msgid "Undo: Rectangle Select"
+msgid "Undo: Select"
 msgstr ""
 
-msgid "Redo: Rectangle Select"
+msgid "Redo: Select"
 msgstr ""
 
 msgid "Undo: Scale"

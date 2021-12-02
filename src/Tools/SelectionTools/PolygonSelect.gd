@@ -136,7 +136,7 @@ func apply_selection(_position) -> void:
 		if !cleared:
 			Global.canvas.selection.clear_selection()
 
-	Global.canvas.selection.commit_undo("Rectangle Select", undo_data)
+	Global.canvas.selection.commit_undo("Select", undo_data)
 	_ongoing_selection = false
 	_draw_points.clear()
 	_ready_to_apply = false

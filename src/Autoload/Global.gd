@@ -233,7 +233,7 @@ func undo_or_redo(
 		in [
 			"Draw",
 			"Draw Shape",
-			"Rectangle Select",
+			"Select",
 			"Move Selection",
 			"Scale",
 			"Centralize",
@@ -311,10 +311,7 @@ func disable_button(button: BaseButton, disable: bool) -> void:
 	if button is Button:
 		for c in button.get_children():
 			if c is TextureRect:
-				if disable:
-					c.modulate.a = 0.5
-				else:
-					c.modulate.a = 1
+				c.modulate.a = 0.5 if disable else 1.0
 				break
 
 
