@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-12-02 11:33\n"
+"PO-Revision-Date: 2021-12-02 21:21\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1464,10 +1464,10 @@ msgid "Redo: Draw"
 msgstr "Ακύρωση αναίρεσης: Ζωγραφική"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Αναίρεση: Επιλογή"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Ακύρωση αναίρεσης: Επιλογή"
 
 msgid "Undo: Scale"
 msgstr "Αναίρεση: Κλιμάκωση"
