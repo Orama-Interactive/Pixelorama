@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-12-02 11:33\n"
+"PO-Revision-Date: 2021-12-02 12:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1463,10 +1463,10 @@ msgid "Redo: Draw"
 msgstr "Wiederherstellen: Zeichnen"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Rückgängig: Auswahl"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Wiederholen: Auswahl"
 
 msgid "Undo: Scale"
 msgstr "Rückgängig: Skalieren"
