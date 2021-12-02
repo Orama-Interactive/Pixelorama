@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-12-02 11:33\n"
+"PO-Revision-Date: 2021-12-02 14:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1464,10 +1464,10 @@ msgid "Redo: Draw"
 msgstr "Refazer: Desenhar"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Desfazer: Selecionar"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Refazer: Selecionar"
 
 msgid "Undo: Scale"
 msgstr "Desfazer: Redimensionar"
