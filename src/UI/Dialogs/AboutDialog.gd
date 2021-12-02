@@ -170,6 +170,7 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  mrtripie")
 	contributors.create_item(contributor_root).set_text(0, "  Jeremy Behreandt (behreajj)")
 	contributors.create_item(contributor_root).set_text(0, "  Marquis Kurt (alicerunsonfedora)")
+	contributors.create_item(contributor_root).set_text(0, "  Silent Orb (silentorb)")
 
 
 func create_translators() -> void:
@@ -241,6 +242,9 @@ func create_translators() -> void:
 	translators.create_item(translators_root).set_text(
 		0, "  DippoZz - " + tr("Brazilian Portuguese")
 	)
+	translators.create_item(translators_root).set_text(
+		0, "  Luciano Salomoni (LucianoSalomoni) - " + tr("Brazilian Portuguese")
+	)
 	translators.create_item(translators_root).set_text(0, "  Andreev Andrei - " + tr("Russian"))
 	translators.create_item(translators_root).set_text(0, "  ax trifonov (ax34) - " + tr("Russian"))
 	translators.create_item(translators_root).set_text(
@@ -259,10 +263,16 @@ func create_translators() -> void:
 		0, "  Kinwailo - " + tr("Chinese Traditional")
 	)
 	translators.create_item(translators_root).set_text(
+		0, "  曹恩逢 (SiderealArt) - " + tr("Chinese Traditional")
+	)
+	translators.create_item(translators_root).set_text(
 		0, "  Chenxu Wang - " + tr("Chinese Simplified")
 	)
 	translators.create_item(translators_root).set_text(
 		0, "  Catherine Yang (qzcyyw13) - " + tr("Chinese Simplified")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  王晨旭 (wcxu21) - " + tr("Chinese Simplified")
 	)
 	translators.create_item(translators_root).set_text(
 		0, "  Marco Galli (Gaarco) - " + tr("Italian")
@@ -282,6 +292,13 @@ func create_translators() -> void:
 	translators.create_item(translators_root).set_text(
 		0, "  Jose Callejas (satorikeiko) - " + tr("Spanish")
 	)
+	translators.create_item(translators_root).set_text(
+		0, "  Javier Ocampos (Leedeo) - " + tr("Spanish")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Art Leeman (artleeman) - " + tr("Spanish")
+	)
+	translators.create_item(translators_root).set_text(0, "  Seifer23 - " + tr("Catalan"))
 	translators.create_item(translators_root).set_text(
 		0, "  Agnis Aldiņš (NeZvers) - " + tr("Latvian")
 	)
@@ -315,3 +332,5 @@ func create_translators() -> void:
 		0, "  M Buhari Horoz (Sorian01) - " + tr("Turkish")
 	)
 	translators.create_item(translators_root).set_text(0, "  br.bahrampour - " + tr("Turkish"))
+	translators.create_item(translators_root).set_text(0, "  gegekyz - " + tr("Turkish"))
+	translators.create_item(translators_root).set_text(0, "  Vancat - " + tr("Turkish"))
