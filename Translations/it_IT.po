@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2021-12-02 11:33\n"
+"PO-Revision-Date: 2021-12-02 12:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1464,10 +1464,10 @@ msgid "Redo: Draw"
 msgstr "Ripeti: Disegno"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Annulla: Seleziona"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Ripeti: Seleziona"
 
 msgid "Undo: Scale"
 msgstr "Annulla: Scala"
