@@ -106,8 +106,8 @@ func add_frame() -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
-	project.undo_redo.add_do_method(Global, "redo")
-	project.undo_redo.add_undo_method(Global, "undo")
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 
 	project.undo_redo.add_do_property(project, "frames", new_frames)
 	project.undo_redo.add_do_property(project, "current_frame", project.current_frame + 1)
@@ -205,8 +205,8 @@ func delete_frame(frame := -1) -> void:
 		Global.current_project, "layers", Global.current_project.layers
 	)
 
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	Global.current_project.undo_redo.commit_action()
 
 
@@ -268,8 +268,8 @@ func copy_frame(frame := -1) -> void:
 
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Add Frame")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
 	Global.current_project.undo_redo.add_do_property(
@@ -579,8 +579,8 @@ func add_layer(is_new := true) -> void:
 		Global.current_project, "layers", Global.current_project.layers
 	)
 
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	Global.current_project.undo_redo.commit_action()
 
 
@@ -613,8 +613,8 @@ func _on_RemoveLayer_pressed() -> void:
 	Global.current_project.undo_redo.add_undo_property(
 		Global.current_project, "layers", Global.current_project.layers
 	)
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
+	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	Global.current_project.undo_redo.commit_action()
 
 
@@ -645,8 +645,8 @@ func change_layer_order(rate: int) -> void:
 		Global.current_project, "current_layer", Global.current_project.current_layer
 	)
 
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	Global.current_project.undo_redo.commit_action()
 
 
@@ -735,8 +735,8 @@ func _on_MergeDownLayer_pressed() -> void:
 		Global.current_project, "current_layer", Global.current_project.current_layer
 	)
 
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	Global.current_project.undo_redo.commit_action()
 
 

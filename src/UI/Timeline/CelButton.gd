@@ -143,8 +143,8 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				)
 				Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
 
-				Global.current_project.undo_redo.add_undo_method(Global, "undo")
-				Global.current_project.undo_redo.add_do_method(Global, "redo")
+				Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+				Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 				Global.current_project.undo_redo.commit_action()
 
 			elif popup_menu.get_item_metadata(MenuOptions.LINK) == "Link Cel":
@@ -164,8 +164,8 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				Global.current_project.undo_redo.add_undo_property(
 					Global.current_project, "layers", Global.current_project.layers
 				)
-				Global.current_project.undo_redo.add_undo_method(Global, "undo")
-				Global.current_project.undo_redo.add_do_method(Global, "redo")
+				Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+				Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 				Global.current_project.undo_redo.commit_action()
 
 
@@ -178,10 +178,10 @@ func delete_cel_contents() -> void:
 	project.undos += 1
 	project.undo_redo.create_action("Draw")
 	project.undo_redo.add_undo_property(image, "data", data)
-	project.undo_redo.add_undo_method(Global, "undo", frame, layer, project)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, frame, layer, project)
 	image.fill(0)
 	project.undo_redo.add_do_property(image, "data", image.data)
-	project.undo_redo.add_do_method(Global, "redo", frame, layer, project)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer, project)
 	project.undo_redo.commit_action()
 
 
@@ -267,6 +267,6 @@ func drop_data(_pos, data) -> void:
 		Global.current_project.frames[frame], "cels", Global.current_project.frames[frame].cels
 	)
 
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	Global.current_project.undo_redo.commit_action()

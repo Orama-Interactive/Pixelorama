@@ -476,8 +476,8 @@ func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> vo
 	project.undo_redo.add_undo_property(project, "frames", project.frames)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 
-	project.undo_redo.add_do_method(Global, "redo")
-	project.undo_redo.add_undo_method(Global, "undo")
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
 
@@ -500,8 +500,8 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
-	project.undo_redo.add_do_method(Global, "redo")
-	project.undo_redo.add_undo_method(Global, "undo")
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 
 	project.undo_redo.add_do_property(project, "frames", new_frames)
 	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
@@ -544,8 +544,8 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	project.undo_redo.add_undo_property(project, "layers", project.layers)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 
-	project.undo_redo.add_undo_method(Global, "undo")
-	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
 
 

@@ -118,8 +118,8 @@ func commit_undo(action: String) -> void:
 		image.unlock()
 	for image in _undo_data:
 		project.undo_redo.add_undo_property(image, "data", _undo_data[image])
-	project.undo_redo.add_do_method(Global, "redo", frame, layer)
-	project.undo_redo.add_undo_method(Global, "undo", frame, layer)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, frame, layer)
 	project.undo_redo.commit_action()
 
 	_undo_data.clear()

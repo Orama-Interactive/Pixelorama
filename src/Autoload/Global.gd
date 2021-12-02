@@ -220,22 +220,30 @@ func general_redo(project: Project = current_project) -> void:
 		notification_label("Redo: %s" % action_name)
 
 
-func undo(_frame_index := -1, _layer_index := -1, project: Project = current_project) -> void:
-	general_undo(project)
+func undo_or_redo(
+	undo: bool, frame_index := -1, layer_index := -1, project: Project = current_project
+) -> void:
+	if undo:
+		general_undo(project)
+	else:
+		general_redo(project)
 	var action_name: String = project.undo_redo.get_current_action_name()
 	if (
-		action_name == "Draw"
-		or action_name == "Draw Shape"
-		or action_name == "Rectangle Select"
-		or action_name == "Move Selection"
-		or action_name == "Scale"
-		or action_name == "Centralize"
-		or action_name == "Merge Layer"
-		or action_name == "Link Cel"
-		or action_name == "Unlink Cel"
+		action_name
+		in [
+			"Draw",
+			"Draw Shape",
+			"Rectangle Select",
+			"Move Selection",
+			"Scale",
+			"Centralize",
+			"Merge Layer",
+			"Link Cel",
+			"Unlink Cel"
+		]
 	):
-		if _layer_index > -1 and _frame_index > -1:
-			canvas.update_texture(_layer_index, _frame_index, project)
+		if layer_index > -1 and frame_index > -1:
+			canvas.update_texture(layer_index, frame_index, project)
 		else:
 			for i in project.frames.size():
 				for j in project.layers.size():
@@ -250,51 +258,7 @@ func undo(_frame_index := -1, _layer_index := -1, project: Project = current_pro
 
 	elif "Frame" in action_name:
 		# This actually means that frames.size is one, but it hasn't been updated yet
-		if project.frames.size() == 2:  # Stop animating
-			play_forward.pressed = false
-			play_backwards.pressed = false
-			animation_timer.stop()
-
-	elif "Move Cels" == action_name:
-		project.frames = project.frames  # to call frames_changed
-
-	canvas.update()
-	if !project.has_changed:
-		project.has_changed = true
-		if project == current_project:
-			self.window_title = window_title + "(*)"
-
-
-func redo(_frame_index := -1, _layer_index := -1, project: Project = current_project) -> void:
-	general_redo(project)
-	var action_name: String = project.undo_redo.get_current_action_name()
-	if (
-		action_name == "Draw"
-		or action_name == "Draw Shape"
-		or action_name == "Rectangle Select"
-		or action_name == "Move Selection"
-		or action_name == "Scale"
-		or action_name == "Centralize"
-		or action_name == "Merge Layer"
-		or action_name == "Link Cel"
-		or action_name == "Unlink Cel"
-	):
-		if _layer_index > -1 and _frame_index > -1:
-			canvas.update_texture(_layer_index, _frame_index, project)
-		else:
-			for i in project.frames.size():
-				for j in project.layers.size():
-					canvas.update_texture(j, i, project)
-
-		canvas.selection.update()
-		if action_name == "Scale":
-			canvas.camera_zoom()
-			canvas.grid.update()
-			canvas.pixel_grid.update()
-			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
-
-	elif "Frame" in action_name:
-		if project.frames.size() == 1:  # Stop animating
+		if (undo and project.frames.size() == 2) or project.frames.size() == 1:  # Stop animating
 			play_forward.pressed = false
 			play_backwards.pressed = false
 			animation_timer.stop()

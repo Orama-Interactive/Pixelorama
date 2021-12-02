@@ -450,8 +450,8 @@ func general_undo_scale() -> void:
 	project.undo_redo.add_undo_property(
 		project.y_symmetry_axis, "points", project.y_symmetry_axis.points
 	)
-	project.undo_redo.add_undo_method(Global, "undo")
-	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
 
 
@@ -463,8 +463,8 @@ func general_do_centralize() -> void:
 
 func general_undo_centralize() -> void:
 	var project: Project = Global.current_project
-	project.undo_redo.add_undo_method(Global, "undo")
-	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
 
 
