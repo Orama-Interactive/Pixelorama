@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2021-12-02 11:33\n"
+"PO-Revision-Date: 2021-12-02 16:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1464,10 +1464,10 @@ msgid "Redo: Draw"
 msgstr "やり直し: 描画"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "元に戻す: 選択"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "やり直し: 選択"
 
 msgid "Undo: Scale"
 msgstr "元に戻す: スケール"
