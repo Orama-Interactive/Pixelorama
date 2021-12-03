@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-12-02 11:33\n"
+"PO-Revision-Date: 2021-12-03 01:11\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1464,10 +1464,10 @@ msgid "Redo: Draw"
 msgstr "重做: 绘图"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "撤销：选择"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "重做：选择"
 
 msgid "Undo: Scale"
 msgstr "撤消: 缩放"
