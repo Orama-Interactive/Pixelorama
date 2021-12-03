@@ -26,8 +26,6 @@ const LANGUAGES_DICT := {
 }
 
 var loaded_locales: Array
-onready var latin_font = preload("res://assets/fonts/Roboto-Regular.tres")
-onready var cjk_font = preload("res://assets/fonts/CJK/DroidSansFallback-Regular.tres")
 
 
 func _ready() -> void:
@@ -47,10 +45,6 @@ func _ready() -> void:
 		button.hint_tooltip = LANGUAGES_DICT[locale][1]
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		button.group = button_group
-		if Global.is_cjk(locale):
-			button.add_font_override("font", cjk_font)
-		else:
-			button.add_font_override("font", latin_font)
 		add_child(button)
 
 	# Load language
@@ -65,11 +59,6 @@ func _ready() -> void:
 	else:  # If the user doesn't have a language preference, set it to their OS' locale
 		TranslationServer.set_locale(OS.get_locale())
 
-	if Global.is_cjk(TranslationServer.get_locale()):
-		Global.control.theme.default_font = cjk_font
-	else:
-		Global.control.theme.default_font = latin_font
-
 	for child in get_children():
 		if child is Button:
 			child.connect("pressed", self, "_on_Language_pressed", [child.get_index()])
@@ -82,11 +71,6 @@ func _on_Language_pressed(index: int) -> void:
 		TranslationServer.set_locale(OS.get_locale())
 	else:
 		TranslationServer.set_locale(loaded_locales[index - 1])
-
-	if Global.is_cjk(TranslationServer.get_locale()):
-		Global.control.theme.default_font = cjk_font
-	else:
-		Global.control.theme.default_font = latin_font
 
 	Global.config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
 	Global.config_cache.save("user://cache.ini")

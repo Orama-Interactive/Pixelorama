@@ -23,15 +23,11 @@ var chosen_artwork: int
 var splash_art_texturerect: TextureRect
 var art_by_label: Button
 
-onready var latin_font = preload("res://assets/fonts/Roboto-Small.tres")
-onready var cjk_font = preload("res://assets/fonts/CJK/DroidSansFallback-Small.tres")
-
 
 func _on_SplashDialog_about_to_show() -> void:
 	splash_art_texturerect = find_node("SplashArt")
 	art_by_label = find_node("ArtistName")
 	var show_on_startup_button: CheckBox = find_node("ShowOnStartup")
-	var copyright_label: Label = find_node("CopyrightLabel")
 
 	if Global.config_cache.has_section_key("preferences", "startup"):
 		show_on_startup_button.pressed = !Global.config_cache.get_value("preferences", "startup")
@@ -39,13 +35,6 @@ func _on_SplashDialog_about_to_show() -> void:
 
 	chosen_artwork = randi() % artworks.size()
 	change_artwork(0)
-
-	if Global.is_cjk(TranslationServer.get_locale()):
-		show_on_startup_button.add_font_override("font", cjk_font)
-		copyright_label.add_font_override("font", cjk_font)
-	else:
-		show_on_startup_button.add_font_override("font", latin_font)
-		copyright_label.add_font_override("font", latin_font)
 
 	get_stylebox("panel", "WindowDialog").bg_color = Global.control.theme.get_stylebox(
 		"panel", "WindowDialog"

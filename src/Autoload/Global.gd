@@ -327,7 +327,3 @@ func update_hint_tooltips() -> void:
 
 	for tip in ui_tooltips:
 		tip.hint_tooltip = tr(ui_tooltips[tip]) % tip.shortcut.get_as_text()
-
-
-func is_cjk(locale: String) -> bool:
-	return "zh" in locale or "ko" in locale or "ja" in locale
