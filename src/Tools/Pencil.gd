@@ -141,7 +141,7 @@ func draw_end(_position: Vector2) -> void:
 						if Geometry.is_point_in_polygon(v, _draw_points):
 							draw_tool(v)
 	if _changed or _drawer.color_op.changed:
-		commit_undo("Draw")
+		commit_undo()
 	cursor_text = ""
 	update_random_image()
 

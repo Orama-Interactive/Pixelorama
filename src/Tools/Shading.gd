@@ -263,7 +263,7 @@ func draw_end(_position: Vector2) -> void:
 		draw_fill_gap(_line_start, _line_end)
 		_draw_line = false
 	if _changed or _drawer.color_op.changed:
-		commit_undo("Draw")
+		commit_undo()
 	cursor_text = ""
 	update_random_image()
 

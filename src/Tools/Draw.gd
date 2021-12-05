@@ -152,7 +152,7 @@ func prepare_undo(action: String) -> void:
 	project.undo_redo.create_action(action)
 
 
-func commit_undo(action: String) -> void:
+func commit_undo() -> void:
 	var redo_data := _get_undo_data()
 	var project: Project = Global.current_project
 	var frame := -1

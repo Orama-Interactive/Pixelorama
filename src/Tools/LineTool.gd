@@ -155,7 +155,7 @@ func _draw_shape() -> void:
 		# Draw each point offseted based on the shape's thickness
 		draw_tool(point)
 
-	commit_undo("Draw Shape")
+	commit_undo()
 
 
 func _get_points() -> PoolVector2Array:

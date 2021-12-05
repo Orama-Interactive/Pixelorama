@@ -156,7 +156,7 @@ func _draw_shape(origin: Vector2, dest: Vector2) -> void:
 		# Draw each point offseted based on the shape's thickness
 		draw_tool(rect.position + point - Vector2.ONE * (_thickness - 1))
 
-	commit_undo("Draw Shape")
+	commit_undo()
 
 
 # Given an origin point and destination point, returns a rect representing
