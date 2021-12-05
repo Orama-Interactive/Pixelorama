@@ -148,7 +148,7 @@ func draw_preview() -> void:
 func _draw_shape() -> void:
 #	var rect := _get_result_rect(origin, dest)
 	var points := _get_points()
-	prepare_undo()
+	prepare_undo("Draw Shape")
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()

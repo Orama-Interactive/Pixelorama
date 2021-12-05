@@ -83,7 +83,7 @@ func draw_start(position: Vector2) -> void:
 	_drawer.color_op.overwrite = _overwrite
 	_draw_points = Array()
 
-	prepare_undo()
+	prepare_undo("Draw")
 	_drawer.reset()
 
 	_draw_line = Tools.shift
