@@ -672,6 +672,14 @@ func copy() -> void:
 	clipboard.big_bounding_rectangle = big_bounding_rectangle
 	clipboard.selection_offset = project.selection_offset
 
+	if !to_copy.is_empty():
+		var pattern: Patterns.Pattern = Global.patterns_popup.get_pattern(0)
+		pattern.image = to_copy
+		var tex := ImageTexture.new()
+		tex.create_from_image(to_copy, 0)
+		var container = Global.patterns_popup.get_node("ScrollContainer/PatternContainer")
+		container.get_child(0).get_child(0).texture = tex
+
 
 func paste() -> void:
 	if clipboard.image.is_empty():

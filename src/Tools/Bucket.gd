@@ -37,11 +37,11 @@ func _on_FillWithOptions_item_selected(index: int) -> void:
 	save_config()
 
 
-func _on_PatternType_pressed():
-	Global.patterns_popup.connect(
-		"pattern_selected", self, "_on_Pattern_selected", [], CONNECT_ONESHOT
-	)
-	Global.patterns_popup.popup(Rect2($FillPattern/Type.rect_global_position, Vector2(226, 72)))
+func _on_PatternType_pressed() -> void:
+	var popup: Popup = Global.patterns_popup
+	if !popup.is_connected("pattern_selected", self, "_on_Pattern_selected"):
+		popup.connect("pattern_selected", self, "_on_Pattern_selected", [], CONNECT_ONESHOT)
+	popup.popup(Rect2($FillPattern/Type.rect_global_position, Vector2(226, 72)))
 
 
 func _on_Pattern_selected(pattern: Patterns.Pattern) -> void:
@@ -101,7 +101,8 @@ func update_pattern() -> void:
 		else:
 			_pattern = Global.patterns_popup.default_pattern
 	var tex := ImageTexture.new()
-	tex.create_from_image(_pattern.image, 0)
+	if !_pattern.image.is_empty():
+		tex.create_from_image(_pattern.image, 0)
 	$FillPattern/Type/Texture.texture = tex
 	var size := _pattern.image.get_size()
 	$FillPattern/XOffset/OffsetX.max_value = size.x - 1
@@ -232,8 +233,10 @@ func _set_pixel(image: Image, x: int, y: int, color: Color) -> void:
 	if _fill_with == 0 or _pattern == null:
 		image.set_pixel(x, y, color)
 	else:
-		_pattern.image.lock()
 		var size := _pattern.image.get_size()
+		if size.x == 0 or size.y == 0:
+			return
+		_pattern.image.lock()
 		var px := int(x + _offset_x) % int(size.x)
 		var py := int(y + _offset_y) % int(size.y)
 		var pc := _pattern.image.get_pixel(px, py)
