@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
 This update has been brought to you by the contributions of:
-Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Marquis Kurt ([@alicerunsonfedora](https://github.com/alicerunsonfedora)), Xenofon Konitsas ([@huskeee](https://github.com/huskeee)), Jeremy Behreandt ([@behreajj](https://github.com/behreajj)), [@mrtripie](https://github.com/mrtripie)
+Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Marquis Kurt ([@alicerunsonfedora](https://github.com/alicerunsonfedora)), Xenofon Konitsas ([@huskeee](https://github.com/huskeee)), Silent Orb ([@silentorb](https://github.com/silentorb)), Jeremy Behreandt ([@behreajj](https://github.com/behreajj)), [@mrtripie](https://github.com/mrtripie)
 
 ### Added
 - Pixelorama is now available on the [Open Store](https://open-store.io/app/pixelorama.orama-interactive) for Ubuntu Touch. [#517](https://github.com/Orama-Interactive/Pixelorama/pull/517)
@@ -26,14 +26,18 @@ Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar 
 - Options to place the onion skinning previews above or below the canvas are now available. [#600](https://github.com/Orama-Interactive/Pixelorama/pull/600)
 
 ### Changed
+- Flipping the image's selected content now works as expected. The selection gets flipped with the content as well.
 - Cache Save/Open Sprite Dialog's directory, and keep dialogs synced. [#559](https://github.com/Orama-Interactive/Pixelorama/pull/559)
 - The color pickers now display the previous color and allow selecting it back - because of the update to Godot 3.4.
 - The desaturation effect now uses luminance. [#557](https://github.com/Orama-Interactive/Pixelorama/pull/557)
 - A random color now appears when creating a new animation tag, along with other various improvements and fixes. [#560](https://github.com/Orama-Interactive/Pixelorama/pull/560)
 - The guides now become transparent when they out of canvas bounds, along with other various improvements and fixes. [#561](https://github.com/Orama-Interactive/Pixelorama/pull/561)
-- Moved window opacity settings to a dedicated dialog with a slider and a spinbox
+- Moved window opacity settings to a dedicated dialog with a slider and a spinbox.
+- The fill color of a projects now only gets applied to the cels of the bottom-most layer.
+- The undo/redo notification text for selection has been renamed to "Select" from "Rectangle Select".
 
 ### Fixed
+- The "Pixelorama.app is damaged" error in macOS should no longer appear. macOS builds are now ad-hoc signed. [#602](https://github.com/Orama-Interactive/Pixelorama/pull/602)
 - Removing a project tab that is on the left of the currently active tab will no longer result in a crash when attempting to save.
 - Merging layers with less than 100% opacity no longer crashes the application. [#541](https://github.com/Orama-Interactive/Pixelorama/issues/541)
 - Fixed issue with copying and pasting content between projects of different sizes.
@@ -44,6 +48,7 @@ Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar 
 - The "Brush color from" tool option no longer appears in the Eraser and Shading tool's options.
 - Fixed Alt-Tab causing the cursor to get stuck. [#552](https://github.com/Orama-Interactive/Pixelorama/issues/552)
 - Some optimizations have been made, which should result in Pixelorama opening a bit faster, and input event handling is also using less CPU usage.
+- Fixed project not having the correct size if the default image size has been changed in the Preferences.
 
 ## [v0.9] - 2021-09-18
 This update has been brought to you by the contributions of:
