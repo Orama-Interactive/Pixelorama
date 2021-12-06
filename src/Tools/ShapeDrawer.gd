@@ -149,14 +149,14 @@ func draw_preview() -> void:
 func _draw_shape(origin: Vector2, dest: Vector2) -> void:
 	var rect := _get_result_rect(origin, dest)
 	var points := _get_points(rect.size)
-	prepare_undo()
+	prepare_undo("Draw Shape")
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
 		# Draw each point offseted based on the shape's thickness
 		draw_tool(rect.position + point - Vector2.ONE * (_thickness - 1))
 
-	commit_undo("Draw Shape")
+	commit_undo()
 
 
 # Given an origin point and destination point, returns a rect representing

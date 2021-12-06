@@ -146,11 +146,13 @@ func update_line_polylines(start: Vector2, end: Vector2) -> void:
 	_line_polylines = _create_polylines(indicator)
 
 
-func prepare_undo() -> void:
+func prepare_undo(action: String) -> void:
+	var project: Project = Global.current_project
 	_undo_data = _get_undo_data()
+	project.undo_redo.create_action(action)
 
 
-func commit_undo(action: String) -> void:
+func commit_undo() -> void:
 	var redo_data := _get_undo_data()
 	var project: Project = Global.current_project
 	var frame := -1
@@ -160,7 +162,6 @@ func commit_undo(action: String) -> void:
 		layer = project.current_layer
 
 	project.undos += 1
-	project.undo_redo.create_action(action)
 	for image in redo_data:
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
 		image.unlock()
