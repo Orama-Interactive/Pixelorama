@@ -1,5 +1,7 @@
 extends BaseTool
 
+const single_color_change_shader := preload("res://src/Shaders/SingleColorChange.shader")
+
 var _prev_mode := 0
 var _pattern: Patterns.Pattern
 var _fill_area := 0
@@ -150,13 +152,19 @@ func fill_in_color(position: Vector2) -> void:
 			if tool_slot.color.is_equal_approx(color):
 				return
 
-		for x in Global.current_project.size.x:
-			for y in Global.current_project.size.y:
-				var pos := Vector2(x, y)
-				if project.has_selection and not project.can_pixel_get_drawn(pos):
-					continue
-				if image.get_pixelv(pos).is_equal_approx(color):
-					_set_pixel(image, x, y, tool_slot.color)
+		var selection: Image = project.bitmap_to_image(project.selection_bitmap, false)
+		var selection_tex := ImageTexture.new()
+		selection_tex.create_from_image(selection)
+
+		var params := {
+			"old_color": color,
+			"new_color": tool_slot.color,
+			"selection": selection_tex,
+			"has_selection": project.has_selection
+		}
+		var gen := ShaderImageEffect.new()
+		gen.generate_image(image, single_color_change_shader, params, project.size)
+		yield(gen, "done")
 
 
 func fill_in_area(position: Vector2) -> void:
