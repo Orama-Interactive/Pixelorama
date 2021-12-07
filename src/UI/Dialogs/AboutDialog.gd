@@ -115,6 +115,7 @@ func create_donors() -> void:
 	donors.create_item(donors_root).set_text(0, "  Ryan C. Gordon (icculus)")
 	donors.create_item(donors_root).set_text(0, "  Benedikt")
 	donors.create_item(donors_root).set_text(0, "  David Maziarka")
+	donors.create_item(donors_root).set_text(0, "  Jonas Rudlang")
 
 
 func create_contributors() -> void:
@@ -159,6 +160,7 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Jeremy Behreandt (behreajj)")
 	contributors.create_item(contributor_root).set_text(0, "  Marquis Kurt (alicerunsonfedora)")
 	contributors.create_item(contributor_root).set_text(0, "  Silent Orb (silentorb)")
+	contributors.create_item(contributor_root).set_text(0, "  JumpJetAvocado")
 
 
 func create_translators() -> void:
