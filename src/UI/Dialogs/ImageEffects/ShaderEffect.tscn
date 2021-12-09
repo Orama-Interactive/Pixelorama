@@ -70,10 +70,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*shader" )
-current_dir = "/Users/manos/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama"
-current_path = "/Users/manos/Dropbox/Orama Founding Members/εταιρικα αρχεια/Godot Projects/Pixelorama/"
-[connection signal="about_to_show" from="." to="." method="_on_ShaderEffect_about_to_show"]
-[connection signal="confirmed" from="." to="." method="_on_ShaderEffect_confirmed"]
-[connection signal="popup_hide" from="." to="." method="_on_ShaderEffect_popup_hide"]
+current_dir = "/"
+current_path = "/"
+
 [connection signal="pressed" from="VBoxContainer/ChooseShader" to="." method="_on_ChooseShader_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

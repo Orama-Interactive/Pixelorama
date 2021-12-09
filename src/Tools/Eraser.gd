@@ -1,12 +1,12 @@
 extends "res://src/Tools/Draw.gd"
 
-
 var _last_position := Vector2.INF
 var _clear_image := Image.new()
 var _changed := false
 
 
-class EraseOp extends Drawer.ColorOp:
+class EraseOp:
+	extends Drawer.ColorOp
 	var changed := false
 
 	func process(_src: Color, dst: Color) -> Color:
@@ -29,12 +29,12 @@ func get_config() -> Dictionary:
 	return config
 
 
-func set_config(config : Dictionary) -> void:
+func set_config(config: Dictionary) -> void:
 	.set_config(config)
 	_strength = config.get("strength", _strength)
 
 
-func draw_start(position : Vector2) -> void:
+func draw_start(position: Vector2) -> void:
 	if Input.is_action_pressed("alt"):
 		_picking_color = true
 		_pick_color(position)
@@ -46,7 +46,7 @@ func draw_start(position : Vector2) -> void:
 	_changed = false
 	_drawer.color_op.changed = false
 
-	prepare_undo()
+	prepare_undo("Draw")
 	_drawer.reset()
 
 	_draw_line = Tools.shift
@@ -61,8 +61,8 @@ func draw_start(position : Vector2) -> void:
 	cursor_text = ""
 
 
-func draw_move(position : Vector2) -> void:
-	if _picking_color: # Still return even if we released Alt
+func draw_move(position: Vector2) -> void:
+	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("alt"):
 			_pick_color(position)
 		return
@@ -79,7 +79,7 @@ func draw_move(position : Vector2) -> void:
 		Global.canvas.sprite_changed_this_frame = true
 
 
-func draw_end(_position : Vector2) -> void:
+func draw_end(_position: Vector2) -> void:
 	if _picking_color:
 		return
 
@@ -88,12 +88,12 @@ func draw_end(_position : Vector2) -> void:
 		draw_fill_gap(_line_start, _line_end)
 		_draw_line = false
 	if _changed or _drawer.color_op.changed:
-		commit_undo("Draw")
+		commit_undo()
 	cursor_text = ""
 	update_random_image()
 
 
-func _draw_brush_image(image : Image, src_rect: Rect2, dst: Vector2) -> void:
+func _draw_brush_image(image: Image, src_rect: Rect2, dst: Vector2) -> void:
 	_changed = true
 	if _strength == 1:
 		var size := image.get_size()
@@ -123,3 +123,8 @@ func update_config() -> void:
 	.update_config()
 	$Opacity/OpacitySpinBox.value = _strength * 255
 	$Opacity/OpacitySlider.value = _strength * 255
+
+
+func update_brush() -> void:
+	.update_brush()
+	$ColorInterpolation.visible = false

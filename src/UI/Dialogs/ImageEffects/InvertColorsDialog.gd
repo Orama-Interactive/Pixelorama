@@ -1,19 +1,21 @@
 extends ImageEffect
 
-
 var red := true
 var green := true
 var blue := true
 var alpha := false
 
-var shaderPath : String = "res://src/Shaders/Invert.shader"
+var shader: Shader = preload("res://src/Shaders/Invert.shader")
 
 var confirmed: bool = false
-func _about_to_show():
-	var sm : ShaderMaterial = ShaderMaterial.new()
-	sm.shader = load(shaderPath)
+
+
+func _about_to_show() -> void:
+	var sm := ShaderMaterial.new()
+	sm.shader = shader
 	preview.set_material(sm)
 	._about_to_show()
+
 
 func set_nodes() -> void:
 	preview = $VBoxContainer/AspectRatioContainer/Preview
@@ -25,9 +27,10 @@ func _confirmed() -> void:
 	confirmed = true
 	._confirmed()
 
-func commit_action(_cel : Image, _project : Project = Global.current_project) -> void:
-	var selection = _project.bitmap_to_image(_project.selection_bitmap, false)
-	var selection_tex = ImageTexture.new()
+
+func commit_action(cel: Image, project: Project = Global.current_project) -> void:
+	var selection: Image = project.bitmap_to_image(project.selection_bitmap, false)
+	var selection_tex := ImageTexture.new()
 	selection_tex.create_from_image(selection)
 
 	if !confirmed:
@@ -37,37 +40,37 @@ func commit_action(_cel : Image, _project : Project = Global.current_project) ->
 		preview.material.set_shader_param("alpha", alpha)
 		preview.material.set_shader_param("selection", selection_tex)
 		preview.material.set_shader_param("affect_selection", selection_checkbox.pressed)
-		preview.material.set_shader_param("has_selection", _project.has_selection)
+		preview.material.set_shader_param("has_selection", project.has_selection)
 	else:
-		var params = {
+		var params := {
 			"red": red,
 			"blue": blue,
 			"green": green,
 			"alpha": alpha,
 			"selection": selection_tex,
 			"affect_selection": selection_checkbox.pressed,
-			"has_selection": _project.has_selection
+			"has_selection": project.has_selection
 		}
-		var gen: ShaderImageEffect = ShaderImageEffect.new()
-		gen.generate_image(_cel, shaderPath, params, _project.size)
+		var gen := ShaderImageEffect.new()
+		gen.generate_image(cel, shader, params, project.size)
 		yield(gen, "done")
 
 
-func _on_RButton_toggled(button_pressed : bool) -> void:
+func _on_RButton_toggled(button_pressed: bool) -> void:
 	red = button_pressed
 	update_preview()
 
 
-func _on_GButton_toggled(button_pressed : bool) -> void:
+func _on_GButton_toggled(button_pressed: bool) -> void:
 	green = button_pressed
 	update_preview()
 
 
-func _on_BButton_toggled(button_pressed : bool) -> void:
+func _on_BButton_toggled(button_pressed: bool) -> void:
 	blue = button_pressed
 	update_preview()
 
 
-func _on_AButton_toggled(button_pressed : bool) -> void:
+func _on_AButton_toggled(button_pressed: bool) -> void:
 	alpha = button_pressed
 	update_preview()

@@ -158,9 +158,7 @@ margin_bottom = 25.0
 size_flags_vertical = 0
 custom_constants/separation = 9
 
-[node name="AddLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="AddLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_right = 22.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
@@ -184,9 +182,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RemoveLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="RemoveLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 31.0
 margin_right = 53.0
 margin_bottom = 22.0
@@ -212,9 +208,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveUpLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="MoveUpLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 62.0
 margin_right = 84.0
 margin_bottom = 22.0
@@ -240,9 +234,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveDownLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="MoveDownLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 93.0
 margin_right = 115.0
 margin_bottom = 22.0
@@ -268,9 +260,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CloneLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="CloneLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 124.0
 margin_right = 146.0
 margin_bottom = 22.0
@@ -295,9 +285,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MergeDownLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="MergeDownLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 155.0
 margin_right = 177.0
 margin_bottom = 22.0
@@ -348,9 +336,7 @@ alignment = 2
 margin_right = 140.0
 margin_bottom = 24.0
 
-[node name="AddFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
-"UIButtons",
-]]
+[node name="AddFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_top = 2.0
 margin_right = 20.0
 margin_bottom = 22.0
@@ -375,9 +361,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DeleteFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
-"UIButtons",
-]]
+[node name="DeleteFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 24.0
 margin_top = 2.0
 margin_right = 44.0
@@ -405,9 +389,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CopyFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
-"UIButtons",
-]]
+[node name="CopyFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 48.0
 margin_top = 2.0
 margin_right = 68.0
@@ -433,9 +415,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FrameTagButton" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
-"UIButtons",
-]]
+[node name="FrameTagButton" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 72.0
 margin_top = 2.0
 margin_right = 92.0
@@ -461,9 +441,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveLeft" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
-"UIButtons",
-]]
+[node name="MoveLeft" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 96.0
 margin_top = 2.0
 margin_right = 116.0
@@ -490,9 +468,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveRight" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=[
-"UIButtons",
-]]
+[node name="MoveRight" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 120.0
 margin_top = 2.0
 margin_right = 140.0
@@ -523,14 +499,13 @@ margin_left = 180.0
 margin_right = 320.0
 margin_bottom = 24.0
 
-[node name="FirstFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
+[node name="FirstFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_top = 2.0
 margin_right = 20.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
-hint_tooltip = "FIRSTFRAME_HT"
+hint_tooltip = "Jump to the first frame
+(%s)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
@@ -551,15 +526,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PreviousFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
+[node name="PreviousFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 24.0
 margin_top = 2.0
 margin_right = 44.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
-hint_tooltip = "PREVIOUSFRAME_HT"
+hint_tooltip = "Go to the previous frame
+(%s)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
@@ -580,15 +554,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayBackwards" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
+[node name="PlayBackwards" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 48.0
 margin_top = 2.0
 margin_right = 68.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
-hint_tooltip = "PLAYBACKWARDS_HT"
+hint_tooltip = "Play the animation backwards (from end to beginning)
+(%s)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
@@ -610,15 +583,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayForward" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
+[node name="PlayForward" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 72.0
 margin_top = 2.0
 margin_right = 92.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
-hint_tooltip = "PLAYFORWARD_HT"
+hint_tooltip = "Play the animation forward (from beginning to end)
+(%s)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
@@ -641,15 +613,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NextFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
+[node name="NextFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 96.0
 margin_top = 2.0
 margin_right = 116.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
-hint_tooltip = "NEXTFRAME_HT"
+hint_tooltip = "Go to the next frame
+(%s)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
@@ -670,15 +641,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LastFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=[
-"UIButtons",
-]]
+[node name="LastFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 120.0
 margin_top = 2.0
 margin_right = 140.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
-hint_tooltip = "LASTFRAME_HT"
+hint_tooltip = "Jump to the last frame
+(%s)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
@@ -704,9 +674,7 @@ margin_left = 360.0
 margin_right = 498.0
 margin_bottom = 24.0
 
-[node name="OnionSkinningSettings" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=[
-"UIButtons",
-]]
+[node name="OnionSkinningSettings" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
 margin_top = 2.0
 margin_right = 12.0
 margin_bottom = 22.0
@@ -732,9 +700,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OnionSkinning" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=[
-"UIButtons",
-]]
+[node name="OnionSkinning" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
 margin_left = 16.0
 margin_top = 2.0
 margin_right = 36.0
@@ -761,9 +727,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LoopAnim" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=[
-"UIButtons",
-]]
+[node name="LoopAnim" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
 margin_left = 40.0
 margin_top = 2.0
 margin_right = 60.0
@@ -859,6 +823,7 @@ margin_left = 219.0
 margin_right = 902.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
+mouse_filter = 2
 size_flags_horizontal = 3
 theme = SubResource( 20 )
 scroll_vertical_enabled = false
@@ -925,9 +890,10 @@ margin_bottom = 24.0
 [node name="AnimationTimer" type="Timer" parent="."]
 
 [node name="OnionSkinningSettings" type="WindowDialog" parent="."]
-margin_right = 220.0
-margin_bottom = 140.0
-rect_min_size = Vector2( 220, 140 )
+margin_right = 300.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 300, 240 )
+resizable = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -936,22 +902,22 @@ __meta__ = {
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 5.0
-margin_top = -65.0
-margin_right = -5.0
-margin_bottom = 65.0
+margin_left = 4.0
+margin_top = -113.0
+margin_right = -4.0
+margin_bottom = 86.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="OnionSkinningPast" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
-margin_right = 210.0
+margin_right = 292.0
 margin_bottom = 14.0
 text = "Past Frames"
 
 [node name="PastOnionSkinning" type="SpinBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 18.0
-margin_right = 210.0
+margin_right = 292.0
 margin_bottom = 42.0
 mouse_default_cursor_shape = 2
 value = 1.0
@@ -959,13 +925,13 @@ align = 1
 
 [node name="OnionSkinningFuture" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 46.0
-margin_right = 210.0
+margin_right = 292.0
 margin_bottom = 60.0
 text = "Future Frames"
 
 [node name="FutureOnionSkinning" type="SpinBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 64.0
-margin_right = 210.0
+margin_right = 292.0
 margin_bottom = 88.0
 mouse_default_cursor_shape = 2
 value = 1.0
@@ -973,10 +939,65 @@ align = 1
 
 [node name="BlueRedMode" type="CheckBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 92.0
-margin_right = 210.0
+margin_right = 126.0
 margin_bottom = 116.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
 text = "Blue-Red Mode"
+
+[node name="GridContainer" type="GridContainer" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 120.0
+margin_right = 292.0
+margin_bottom = 164.0
+custom_constants/hseparation = 8
+columns = 2
+
+[node name="PastPlacementLabel" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons/GridContainer"]
+margin_top = 3.0
+margin_right = 127.0
+margin_bottom = 17.0
+text = "Show past frames:"
+valign = 1
+
+[node name="PastPlacement" type="OptionButton" parent="OnionSkinningSettings/OnionSkinningButtons/GridContainer"]
+margin_left = 135.0
+margin_right = 292.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "Above canvas"
+items = [ "Above canvas", null, false, 0, null, "Below canvas", null, false, 1, null ]
+selected = 0
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="FuturePlacementLabel" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons/GridContainer"]
+margin_top = 27.0
+margin_right = 127.0
+margin_bottom = 41.0
+text = "Show future frames:"
+align = 2
+valign = 1
+
+[node name="FuturePlacement" type="OptionButton" parent="OnionSkinningSettings/OnionSkinningButtons/GridContainer"]
+margin_left = 135.0
+margin_top = 24.0
+margin_right = 292.0
+margin_bottom = 44.0
+mouse_default_cursor_shape = 2
+text = "Above canvas"
+items = [ "Above canvas", null, false, 0, null, "Below canvas", null, false, 1, null ]
+selected = 0
+
+[node name="Label" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
+margin_top = 168.0
+margin_right = 292.0
+margin_bottom = 199.0
+custom_colors/font_color = Color( 0.333333, 0.901961, 0.462745, 1 )
+text = "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+valign = 1
+autowrap = true
 
 [node name="FrameTagDialog" parent="." instance=ExtResource( 42 )]
 
@@ -1021,3 +1042,5 @@ __meta__ = {
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
 [connection signal="toggled" from="OnionSkinningSettings/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]
+[connection signal="item_selected" from="OnionSkinningSettings/OnionSkinningButtons/GridContainer/PastPlacement" to="." method="_on_PastPlacement_item_selected"]
+[connection signal="item_selected" from="OnionSkinningSettings/OnionSkinningButtons/GridContainer/FuturePlacement" to="." method="_on_FuturePlacement_item_selected"]

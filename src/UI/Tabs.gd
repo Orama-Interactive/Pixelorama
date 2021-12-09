@@ -1,24 +1,28 @@
 extends Tabs
 
+onready var unsaved_changes_dialog: ConfirmationDialog = Global.control.find_node(
+	"UnsavedCanvasDialog"
+)
 
-func _on_Tabs_tab_changed(tab : int) -> void:
+
+func _on_Tabs_tab_changed(tab: int) -> void:
 	Global.current_project_index = tab
 
 
-func _on_Tabs_tab_close(tab : int) -> void:
+func _on_Tabs_tab_close(tab: int) -> void:
 	if Global.projects.size() == 1:
 		return
 
 	if Global.projects[tab].has_changed:
-		if !Global.unsaved_changes_dialog.is_connected("confirmed", self, "delete_tab"):
-			Global.unsaved_changes_dialog.connect("confirmed", self, "delete_tab", [tab])
-		Global.unsaved_changes_dialog.popup_centered()
+		if !unsaved_changes_dialog.is_connected("confirmed", self, "delete_tab"):
+			unsaved_changes_dialog.connect("confirmed", self, "delete_tab", [tab])
+		unsaved_changes_dialog.popup_centered()
 		Global.dialog_open(true)
 	else:
 		delete_tab(tab)
 
 
-func _on_Tabs_reposition_active_tab_request(idx_to : int) -> void:
+func _on_Tabs_reposition_active_tab_request(idx_to: int) -> void:
 	var temp = Global.projects[Global.current_project_index]
 	Global.projects.erase(temp)
 	Global.projects.insert(idx_to, temp)
@@ -32,7 +36,7 @@ func _on_Tabs_reposition_active_tab_request(idx_to : int) -> void:
 	OpenSave.backup_save_paths[idx_to] = temp_backup_path
 
 
-func delete_tab(tab : int) -> void:
+func delete_tab(tab: int) -> void:
 	remove_tab(tab)
 	Global.projects[tab].undo_redo.free()
 	OpenSave.remove_backup(tab)
@@ -47,5 +51,5 @@ func delete_tab(tab : int) -> void:
 	else:
 		if tab < Global.current_project_index:
 			Global.current_project_index -= 1
-	if Global.unsaved_changes_dialog.is_connected("confirmed", self, "delete_tab"):
-		Global.unsaved_changes_dialog.disconnect("confirmed", self, "delete_tab")
+	if unsaved_changes_dialog.is_connected("confirmed", self, "delete_tab"):
+		unsaved_changes_dialog.disconnect("confirmed", self, "delete_tab")

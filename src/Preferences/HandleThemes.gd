@@ -1,6 +1,5 @@
 extends Node
 
-
 var theme_index := 0
 
 onready var themes := [
@@ -12,8 +11,8 @@ onready var themes := [
 	[preload("res://assets/themes/purple/theme.tres"), "Purple", Color.gray],
 ]
 
-onready var buttons_container : BoxContainer = $ThemeButtons
-onready var colors_container : BoxContainer = $ThemeColorsSpacer/ThemeColors
+onready var buttons_container: BoxContainer = $ThemeButtons
+onready var colors_container: BoxContainer = $ThemeColorsSpacer/ThemeColors
 onready var theme_color_preview_scene = preload("res://src/Preferences/ThemeColorPreview.tscn")
 
 
@@ -28,7 +27,7 @@ func _ready() -> void:
 		buttons_container.add_child(button)
 		button.connect("pressed", self, "_on_Theme_pressed", [button.get_index()])
 
-		var theme_color_preview : ColorRect = theme_color_preview_scene.instance()
+		var theme_color_preview: ColorRect = theme_color_preview_scene.instance()
 		var color1 = theme[0].get_stylebox("panel", "Panel").bg_color
 		var color2 = theme[0].get_stylebox("panel", "PanelContainer").bg_color
 		theme_color_preview.get_child(0).color = color1
@@ -46,7 +45,7 @@ func _ready() -> void:
 		buttons_container.get_child(0).pressed = true
 
 
-func _on_Theme_pressed(index : int) -> void:
+func _on_Theme_pressed(index: int) -> void:
 	buttons_container.get_child(index).pressed = true
 	change_theme(index)
 
@@ -57,43 +56,53 @@ func _on_Theme_pressed(index : int) -> void:
 	Global.config_cache.save("user://cache.ini")
 
 
-func change_theme(ID : int) -> void:
+func change_theme(id: int) -> void:
 	var font = Global.control.theme.default_font
-	theme_index = ID
-	var main_theme : Theme = themes[ID][0]
+	theme_index = id
+	var main_theme: Theme = themes[id][0]
 
-	if ID == 0 or ID == 1 or ID == 5: # Dark, Gray or Purple Theme
+	if id == 0 or id == 1 or id == 5:  # Dark, Gray or Purple Theme
 		Global.theme_type = Global.ThemeTypes.DARK
-	elif ID == 2: # Godot's Theme
+	elif id == 2:  # Godot's Theme
 		Global.theme_type = Global.ThemeTypes.BLUE
-	elif ID == 3: # Caramel Theme
+	elif id == 3:  # Caramel Theme
 		Global.theme_type = Global.ThemeTypes.CARAMEL
-	elif ID == 4: # Light Theme
+	elif id == 4:  # Light Theme
 		Global.theme_type = Global.ThemeTypes.LIGHT
 
 	if Global.icon_color_from == Global.IconColorFrom.THEME:
-		Global.modulate_icon_color = themes[ID][2]
+		Global.modulate_icon_color = themes[id][2]
 
 	Global.control.theme = main_theme
 	Global.control.theme.default_font = font
 	Global.default_clear_color = main_theme.get_stylebox("panel", "PanelContainer").bg_color
 	VisualServer.set_default_clear_color(Color(Global.default_clear_color))
-	if Global.control.get_node_or_null("AlternateTransparentBackground"): #also change color of AlternateTransparentBackground as well "if it exists"
+	if Global.control.alternate_transparent_background:
+		# Also change color of alternate_transparent_background
 		var new_color = Global.default_clear_color
-		new_color.a = Global.control.get_node("AlternateTransparentBackground").color.a
-		Global.control.get_node("AlternateTransparentBackground").color = new_color
+		new_color.a = Global.control.alternate_transparent_background.color.a
+		Global.control.alternate_transparent_background.color = new_color
 
-	(Global.animation_timeline.get_stylebox("panel", "Panel") as StyleBoxFlat).bg_color = main_theme.get_stylebox("panel", "Panel").bg_color
-	var fake_vsplit_grabber : TextureRect = Global.animation_timeline.find_node("FakeVSplitContainerGrabber")
+	Global.animation_timeline.get_stylebox("panel", "Panel").bg_color = main_theme.get_stylebox(
+		"panel", "Panel"
+	).bg_color
+	var fake_vsplit_grabber: TextureRect = Global.animation_timeline.find_node(
+		"FakeVSplitContainerGrabber"
+	)
 	fake_vsplit_grabber.texture = main_theme.get_icon("grabber", "VSplitContainer")
 
 	# Theming for left tools panel
-	var fake_hsplit_grabber : TextureRect = Global.tool_panel.get_node("FakeHSplitGrabber")
+	var fake_hsplit_grabber: TextureRect = Global.tool_panel.get_node("FakeHSplitGrabber")
 	fake_hsplit_grabber.texture = main_theme.get_icon("grabber", "HSplitContainer")
-	(Global.tool_panel.get_stylebox("panel", "Panel") as StyleBoxFlat).bg_color = main_theme.get_stylebox("panel", "Panel").bg_color
+	Global.tool_panel.get_stylebox("panel", "Panel").bg_color = main_theme.get_stylebox(
+		"panel", "Panel"
+	).bg_color
 
-	var layer_button_panel_container : PanelContainer = Global.animation_timeline.find_node("LayerButtonPanelContainer")
-	(layer_button_panel_container.get_stylebox("panel", "PanelContainer") as StyleBoxFlat).bg_color = Global.default_clear_color
+	var layer_button_pcont: PanelContainer = Global.animation_timeline.find_node(
+		"LayerButtonPanelContainer"
+	)
+	var lbpc_stylebox: StyleBoxFlat = layer_button_pcont.get_stylebox("panel", "PanelContainer")
+	lbpc_stylebox.bg_color = Global.default_clear_color
 
 	var top_menu_style = main_theme.get_stylebox("TopMenu", "Panel")
 	var ruler_style = main_theme.get_stylebox("Ruler", "Button")
@@ -122,7 +131,7 @@ func change_icon_colors() -> void:
 			if node.disabled and not ("RestoreDefaultButton" in node.name):
 				node.modulate.a = 0.5
 		elif node is Button:
-			var texture : TextureRect
+			var texture: TextureRect
 			for child in node.get_children():
 				if child is TextureRect and child.name != "Background":
 					texture = child

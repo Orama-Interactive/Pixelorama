@@ -1,0 +1,24 @@
+name: Static Checks 📊
+on:
+  push:
+    branches-ignore:
+      - gh-pages
+      - l10n_master
+  pull_request:
+    paths:
+      - "addons/**"
+      - "src/**"
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: pip3 install gdtoolkit
+      - run: gdformat --diff .
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: pip3 install gdtoolkit
+      - run: gdlint .

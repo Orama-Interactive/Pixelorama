@@ -1,10 +1,9 @@
 extends TextureButton
 
-
-var setting_name : String
-var value_type : String
+var setting_name: String
+var value_type: String
 var default_value
-var node : Node
+var node: Node
 
 
 func _ready() -> void:

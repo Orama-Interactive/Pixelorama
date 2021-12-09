@@ -1,14 +1,13 @@
 class_name LayerButton
 extends Button
 
-
 var layer := 0
 
-onready var visibility_button : BaseButton = find_node("VisibilityButton")
-onready var lock_button : BaseButton = find_node("LockButton")
-onready var linked_button : BaseButton = find_node("LinkButton")
-onready var label : Label = find_node("Label")
-onready var line_edit : LineEdit = find_node("LineEdit")
+onready var visibility_button: BaseButton = find_node("VisibilityButton")
+onready var lock_button: BaseButton = find_node("LockButton")
+onready var linked_button: BaseButton = find_node("LinkButton")
+onready var label: Label = find_node("Label")
+onready var line_edit: LineEdit = find_node("LineEdit")
 
 
 func _ready() -> void:
@@ -34,23 +33,27 @@ func _ready() -> void:
 	else:
 		Global.change_button_texturerect(lock_button.get_child(0), "unlock.png")
 
-	if Global.current_project.layers[layer].new_cels_linked: # If new layers will be linked
+	if Global.current_project.layers[layer].new_cels_linked:  # If new layers will be linked
 		Global.change_button_texturerect(linked_button.get_child(0), "linked_layer.png")
 	else:
 		Global.change_button_texturerect(linked_button.get_child(0), "unlinked_layer.png")
 
 
-func _input(event : InputEvent) -> void:
-	if (event.is_action_released("ui_accept") or event.is_action_released("ui_cancel")) and line_edit.visible and event.scancode != KEY_SPACE:
+func _input(event: InputEvent) -> void:
+	if (
+		(event.is_action_released("ui_accept") or event.is_action_released("ui_cancel"))
+		and line_edit.visible
+		and event.scancode != KEY_SPACE
+	):
 		save_layer_name(line_edit.text)
 
 
-func _on_LayerContainer_gui_input(event : InputEvent) -> void:
+func _on_LayerContainer_gui_input(event: InputEvent) -> void:
 	var project = Global.current_project
 
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 		Global.canvas.selection.transform_content_confirm()
-		var prev_curr_layer : int = project.current_layer
+		var prev_curr_layer: int = project.current_layer
 		if Input.is_action_pressed("shift"):
 			var layer_diff_sign = sign(layer - prev_curr_layer)
 			if layer_diff_sign == 0:
@@ -65,7 +68,7 @@ func _on_LayerContainer_gui_input(event : InputEvent) -> void:
 				var frame_layer := [i, layer]
 				if !project.selected_cels.has(frame_layer):
 					project.selected_cels.append(frame_layer)
-		else: # If the button is pressed without Shift or Control
+		else:  # If the button is pressed without Shift or Control
 			project.selected_cels.clear()
 			var frame_layer := [project.current_frame, layer]
 			if !project.selected_cels.has(frame_layer):
@@ -84,7 +87,7 @@ func _on_LineEdit_focus_exited() -> void:
 	save_layer_name(line_edit.text)
 
 
-func save_layer_name(new_name : String) -> void:
+func save_layer_name(new_name: String) -> void:
 	label.visible = true
 	line_edit.visible = false
 	line_edit.editable = false
@@ -106,11 +109,16 @@ func _on_LockButton_pressed() -> void:
 
 func _on_LinkButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
-	Global.current_project.layers[layer].new_cels_linked = !Global.current_project.layers[layer].new_cels_linked
-	if Global.current_project.layers[layer].new_cels_linked && !Global.current_project.layers[layer].linked_cels:
+	var layer_class: Layer = Global.current_project.layers[layer]
+	layer_class.new_cels_linked = !layer_class.new_cels_linked
+	if layer_class.new_cels_linked && !layer_class.linked_cels:
 		# If button is pressed and there are no linked cels in the layer
-		Global.current_project.layers[layer].linked_cels.append(Global.current_project.frames[Global.current_project.current_frame])
-		Global.current_project.layers[layer].frame_container.get_child(Global.current_project.current_frame)._ready()
+		layer_class.linked_cels.append(
+			Global.current_project.frames[Global.current_project.current_frame]
+		)
+		layer_class.frame_container.get_child(Global.current_project.current_frame).button_setup()
+
+	Global.current_project.layers = Global.current_project.layers  # Call the setter
 
 
 func get_drag_data(_position) -> Array:
@@ -135,14 +143,14 @@ func drop_data(_pos, data) -> void:
 	if layer == new_layer:
 		return
 
-	var new_layers : Array = Global.current_project.layers.duplicate()
+	var new_layers: Array = Global.current_project.layers.duplicate()
 	var temp = new_layers[layer]
 	new_layers[layer] = new_layers[new_layer]
 	new_layers[new_layer] = temp
 
 	Global.current_project.undo_redo.create_action("Change Layer Order")
 	for f in Global.current_project.frames:
-		var new_cels : Array = f.cels.duplicate()
+		var new_cels: Array = f.cels.duplicate()
 		var temp_canvas = new_cels[layer]
 		new_cels[layer] = new_cels[new_layer]
 		new_cels[new_layer] = temp_canvas
@@ -150,11 +158,17 @@ func drop_data(_pos, data) -> void:
 		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
 
 	if Global.current_project.current_layer == layer:
-		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_layer", new_layer)
-		Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_layer", Global.current_project.current_layer)
+		Global.current_project.undo_redo.add_do_property(
+			Global.current_project, "current_layer", new_layer
+		)
+		Global.current_project.undo_redo.add_undo_property(
+			Global.current_project, "current_layer", Global.current_project.current_layer
+		)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "layers", Global.current_project.layers)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.current_project, "layers", Global.current_project.layers
+	)
 
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	Global.current_project.undo_redo.commit_action()

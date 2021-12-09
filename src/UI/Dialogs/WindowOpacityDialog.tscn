@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/Dialogs/WindowOpacityDialog.gd" type="Script" id=1]
+
+[node name="WindowOpacityDialog" type="AcceptDialog"]
+margin_right = 204.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 240, 0 )
+window_title = "Window Opacity"
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 232.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer2"]
+margin_top = 4.0
+margin_right = 146.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+
+[node name="SpinBox" type="SpinBox" parent="HBoxContainer2"]
+margin_left = 150.0
+margin_right = 224.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+value = 100.0
+
+[connection signal="about_to_show" from="." to="." method="_on_WindowOpacityDialog_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_WindowOpacityDialog_popup_hide"]
+[connection signal="value_changed" from="HBoxContainer2/HSlider" to="." method="_on_value_changed"]
+[connection signal="value_changed" from="HBoxContainer2/SpinBox" to="." method="_on_value_changed"]

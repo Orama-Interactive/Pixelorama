@@ -1,6 +1,5 @@
 extends "res://src/Tools/Draw.gd"
 
-
 var _prev_mode := false
 var _last_position := Vector2.INF
 var _changed := false
@@ -9,7 +8,8 @@ var _fill_inside := false
 var _draw_points := Array()
 
 
-class PencilOp extends Drawer.ColorOp:
+class PencilOp:
+	extends Drawer.ColorOp
 	var changed := false
 	var overwrite := false
 
@@ -25,7 +25,7 @@ func _init() -> void:
 	_drawer.color_op = PencilOp.new()
 
 
-func _on_Overwrite_toggled(button_pressed : bool):
+func _on_Overwrite_toggled(button_pressed: bool):
 	_overwrite = button_pressed
 	update_config()
 	save_config()
@@ -38,7 +38,7 @@ func _on_FillInside_toggled(button_pressed):
 
 
 func _input(event: InputEvent) -> void:
-	var overwrite_button : CheckBox = $Overwrite
+	var overwrite_button: CheckBox = $Overwrite
 
 	if event.is_action_pressed("ctrl"):
 		_prev_mode = overwrite_button.pressed
@@ -57,7 +57,7 @@ func get_config() -> Dictionary:
 	return config
 
 
-func set_config(config : Dictionary) -> void:
+func set_config(config: Dictionary) -> void:
 	.set_config(config)
 	_overwrite = config.get("overwrite", _overwrite)
 	_fill_inside = config.get("fill_inside", _fill_inside)
@@ -69,7 +69,7 @@ func update_config() -> void:
 	$FillInside.pressed = _fill_inside
 
 
-func draw_start(position : Vector2) -> void:
+func draw_start(position: Vector2) -> void:
 	if Input.is_action_pressed("alt"):
 		_picking_color = true
 		_pick_color(position)
@@ -83,7 +83,7 @@ func draw_start(position : Vector2) -> void:
 	_drawer.color_op.overwrite = _overwrite
 	_draw_points = Array()
 
-	prepare_undo()
+	prepare_undo("Draw")
 	_drawer.reset()
 
 	_draw_line = Tools.shift
@@ -100,8 +100,8 @@ func draw_start(position : Vector2) -> void:
 	cursor_text = ""
 
 
-func draw_move(position : Vector2) -> void:
-	if _picking_color: # Still return even if we released Alt
+func draw_move(position: Vector2) -> void:
+	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("alt"):
 			_pick_color(position)
 		return
@@ -120,7 +120,7 @@ func draw_move(position : Vector2) -> void:
 			_draw_points.append(position)
 
 
-func draw_end(_position : Vector2) -> void:
+func draw_end(_position: Vector2) -> void:
 	if _picking_color:
 		return
 
@@ -141,12 +141,12 @@ func draw_end(_position : Vector2) -> void:
 						if Geometry.is_point_in_polygon(v, _draw_points):
 							draw_tool(v)
 	if _changed or _drawer.color_op.changed:
-		commit_undo("Draw")
+		commit_undo()
 	cursor_text = ""
 	update_random_image()
 
 
-func _draw_brush_image(image : Image, src_rect: Rect2, dst: Vector2) -> void:
+func _draw_brush_image(image: Image, src_rect: Rect2, dst: Vector2) -> void:
 	_changed = true
 	var images := _get_selected_draw_images()
 	if _overwrite:

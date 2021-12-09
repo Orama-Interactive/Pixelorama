@@ -1,6 +1,5 @@
 extends BaseTool
 
-
 var _brush := Brushes.get_default_brush()
 var _brush_size := 1
 var _brush_interpolate := 0
@@ -22,6 +21,7 @@ var _indicator := BitMap.new()
 var _polylines := []
 var _line_polylines := []
 
+
 func _ready() -> void:
 	Tools.connect("color_changed", self, "_on_Color_changed")
 	Global.brushes_popup.connect("brush_removed", self, "_on_Brush_removed")
@@ -29,33 +29,35 @@ func _ready() -> void:
 
 func _on_BrushType_pressed() -> void:
 	if not Global.brushes_popup.is_connected("brush_selected", self, "_on_Brush_selected"):
-		Global.brushes_popup.connect("brush_selected", self, "_on_Brush_selected", [], CONNECT_ONESHOT)
+		Global.brushes_popup.connect(
+			"brush_selected", self, "_on_Brush_selected", [], CONNECT_ONESHOT
+		)
 	Global.brushes_popup.popup(Rect2($Brush/Type.rect_global_position, Vector2(226, 72)))
 
 
-func _on_Brush_selected(brush : Brushes.Brush) -> void:
+func _on_Brush_selected(brush: Brushes.Brush) -> void:
 	_brush = brush
 	update_brush()
 	save_config()
 
 
-func _on_BrushSize_value_changed(value : float) -> void:
+func _on_BrushSize_value_changed(value: float) -> void:
 	_brush_size = int(value)
 	update_config()
 	save_config()
 
 
-func _on_InterpolateFactor_value_changed(value : float) -> void:
+func _on_InterpolateFactor_value_changed(value: float) -> void:
 	_brush_interpolate = int(value)
 	update_config()
 	save_config()
 
 
-func _on_Color_changed(_color : Color, _button : int) -> void:
+func _on_Color_changed(_color: Color, _button: int) -> void:
 	update_brush()
 
 
-func _on_Brush_removed(brush : Brushes.Brush) -> void:
+func _on_Brush_removed(brush: Brushes.Brush) -> void:
 	if brush == _brush:
 		_brush = Brushes.get_default_brush()
 		update_brush()
@@ -64,14 +66,14 @@ func _on_Brush_removed(brush : Brushes.Brush) -> void:
 
 func get_config() -> Dictionary:
 	return {
-		"brush_type" : _brush.type,
-		"brush_index" : _brush.index,
-		"brush_size" : _brush_size,
-		"brush_interpolate" : _brush_interpolate,
+		"brush_type": _brush.type,
+		"brush_index": _brush.index,
+		"brush_size": _brush_size,
+		"brush_interpolate": _brush_interpolate,
 	}
 
 
-func set_config(config : Dictionary) -> void:
+func set_config(config: Dictionary) -> void:
 	var type = config.get("brush_type", _brush.type)
 	var index = config.get("brush_index", _brush.index)
 	_brush = Global.brushes_popup.get_brush(type, index)
@@ -131,25 +133,28 @@ func update_mirror_brush() -> void:
 func update_mask(can_skip := true) -> void:
 	if can_skip and Global.pressure_sensitivity_mode == Global.PressureSensitivity.NONE:
 		return
-	var size : Vector2 = Global.current_project.size
-	# Faster than zeroing PoolByteArray directly. See: https://github.com/Orama-Interactive/Pixelorama/pull/439
+	var size: Vector2 = Global.current_project.size
+	# Faster than zeroing PoolByteArray directly.
+	# See: https://github.com/Orama-Interactive/Pixelorama/pull/439
 	var nulled_array := []
 	nulled_array.resize(size.x * size.y)
 	_mask = PoolByteArray(nulled_array)
 
 
-func update_line_polylines(start : Vector2, end : Vector2) -> void:
+func update_line_polylines(start: Vector2, end: Vector2) -> void:
 	var indicator := _create_line_indicator(_indicator, start, end)
 	_line_polylines = _create_polylines(indicator)
 
 
-func prepare_undo() -> void:
+func prepare_undo(action: String) -> void:
+	var project: Project = Global.current_project
 	_undo_data = _get_undo_data()
+	project.undo_redo.create_action(action)
 
 
-func commit_undo(action : String) -> void:
+func commit_undo() -> void:
 	var redo_data := _get_undo_data()
-	var project : Project = Global.current_project
+	var project: Project = Global.current_project
 	var frame := -1
 	var layer := -1
 	if Global.animation_timer.is_stopped() and project.selected_cels.size() == 1:
@@ -157,20 +162,19 @@ func commit_undo(action : String) -> void:
 		layer = project.current_layer
 
 	project.undos += 1
-	project.undo_redo.create_action(action)
 	for image in redo_data:
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
 		image.unlock()
 	for image in _undo_data:
 		project.undo_redo.add_undo_property(image, "data", _undo_data[image])
-	project.undo_redo.add_do_method(Global, "redo", frame, layer)
-	project.undo_redo.add_undo_method(Global, "undo", frame, layer)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, frame, layer)
 	project.undo_redo.commit_action()
 
 	_undo_data.clear()
 
 
-func draw_tool(position : Vector2) -> void:
+func draw_tool(position: Vector2) -> void:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	var strength := _strength
@@ -195,7 +199,7 @@ func draw_tool(position : Vector2) -> void:
 
 # Bresenham's Algorithm
 # Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
-func draw_fill_gap(start : Vector2, end : Vector2) -> void:
+func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 	var dx := int(abs(end.x - start.x))
 	var dy := int(-abs(end.y - start.y))
 	var err := dx + dy
@@ -215,7 +219,7 @@ func draw_fill_gap(start : Vector2, end : Vector2) -> void:
 		draw_tool(Vector2(x, y))
 
 
-func draw_tool_pixel(position : Vector2) -> void:
+func draw_tool_pixel(position: Vector2) -> void:
 	var start := position - Vector2.ONE * (_brush_size >> 1)
 	var end := start + Vector2.ONE * _brush_size
 	for y in range(start.y, end.y):
@@ -224,7 +228,7 @@ func draw_tool_pixel(position : Vector2) -> void:
 
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
-func draw_tool_circle(position : Vector2, fill := false) -> void:
+func draw_tool_circle(position: Vector2, fill := false) -> void:
 	var r := _brush_size
 	var x := -r
 	var y := 0
@@ -250,8 +254,8 @@ func draw_tool_circle(position : Vector2, fill := false) -> void:
 			err += x * 2 + 1
 
 
-func draw_tool_brush(position : Vector2) -> void:
-	var project : Project = Global.current_project
+func draw_tool_brush(position: Vector2) -> void:
+	var project: Project = Global.current_project
 
 	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
@@ -265,7 +269,7 @@ func draw_tool_brush(position : Vector2) -> void:
 		return
 	var src_rect := Rect2(dst_rect.position - dst, dst_rect.size)
 	dst = dst_rect.position
-	var brush_image : Image = remove_unselected_parts_of_brush(_brush_image, dst)
+	var brush_image: Image = remove_unselected_parts_of_brush(_brush_image, dst)
 	_draw_brush_image(brush_image, src_rect, dst)
 
 	# Handle Mirroring
@@ -274,20 +278,22 @@ func draw_tool_brush(position : Vector2) -> void:
 
 	if tool_slot.horizontal_mirror:
 		var x_dst := Vector2(mirror_x, dst.y)
-		var mirror_brush_x : Image = remove_unselected_parts_of_brush(_mirror_brushes.x, x_dst)
+		var mirror_brush_x: Image = remove_unselected_parts_of_brush(_mirror_brushes.x, x_dst)
 		_draw_brush_image(mirror_brush_x, _flip_rect(src_rect, size, true, false), x_dst)
 		if tool_slot.vertical_mirror:
 			var xy_dst := Vector2(mirror_x, mirror_y)
-			var mirror_brush_xy : Image = remove_unselected_parts_of_brush(_mirror_brushes.xy, xy_dst)
+			var mirror_brush_xy: Image = remove_unselected_parts_of_brush(
+				_mirror_brushes.xy, xy_dst
+			)
 			_draw_brush_image(mirror_brush_xy, _flip_rect(src_rect, size, true, true), xy_dst)
 	if tool_slot.vertical_mirror:
 		var y_dst := Vector2(dst.x, mirror_y)
-		var mirror_brush_y : Image = remove_unselected_parts_of_brush(_mirror_brushes.y, y_dst)
+		var mirror_brush_y: Image = remove_unselected_parts_of_brush(_mirror_brushes.y, y_dst)
 		_draw_brush_image(mirror_brush_y, _flip_rect(src_rect, size, false, true), y_dst)
 
 
-func remove_unselected_parts_of_brush(brush : Image, dst : Vector2) -> Image:
-	var project : Project = Global.current_project
+func remove_unselected_parts_of_brush(brush: Image, dst: Vector2) -> Image:
+	var project: Project = Global.current_project
 	if !project.has_selection:
 		return brush
 	var size := brush.get_size()
@@ -306,14 +312,17 @@ func remove_unselected_parts_of_brush(brush : Image, dst : Vector2) -> Image:
 
 func draw_indicator() -> void:
 	draw_indicator_at(_cursor, Vector2.ZERO, Color.blue)
-	if Global.current_project.tile_mode and Global.current_project.get_tile_mode_rect().has_point(_cursor):
+	if (
+		Global.current_project.tile_mode
+		and Global.current_project.get_tile_mode_rect().has_point(_cursor)
+	):
 		var tile := _line_start if _draw_line else _cursor
 		if not Global.current_project.tile_mode_rects[Global.TileMode.NONE].has_point(tile):
 			var offset := tile - tile.posmodv(Global.current_project.size)
 			draw_indicator_at(_cursor, offset, Color.green)
 
 
-func draw_indicator_at(position : Vector2, offset : Vector2, color : Color) -> void:
+func draw_indicator_at(position: Vector2, offset: Vector2, color: Color) -> void:
 	var canvas = Global.canvas.indicators
 	if _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM] and not _draw_line:
 		position -= (_brush_image.get_size() / 2).floor()
@@ -333,8 +342,8 @@ func draw_indicator_at(position : Vector2, offset : Vector2, color : Color) -> v
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
-func _set_pixel(position : Vector2, ignore_mirroring := false) -> void:
-	var project : Project = Global.current_project
+func _set_pixel(position: Vector2, ignore_mirroring := false) -> void:
+	var project: Project = Global.current_project
 	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
 
@@ -353,11 +362,11 @@ func _set_pixel(position : Vector2, ignore_mirroring := false) -> void:
 			_drawer.set_pixel(image, position, tool_slot.color, ignore_mirroring)
 
 
-func _draw_brush_image(_image : Image, _src_rect: Rect2, _dst: Vector2) -> void:
+func _draw_brush_image(_image: Image, _src_rect: Rect2, _dst: Vector2) -> void:
 	pass
 
 
-func _create_blended_brush_image(image : Image) -> Image:
+func _create_blended_brush_image(image: Image) -> Image:
 	var size := image.get_size() * _brush_size
 	var brush := Image.new()
 	brush.copy_from(image)
@@ -366,7 +375,7 @@ func _create_blended_brush_image(image : Image) -> Image:
 	return brush
 
 
-func _blend_image(image : Image, color : Color, factor : float) -> Image:
+func _blend_image(image: Image, color: Color, factor: float) -> Image:
 	var size := image.get_size()
 	image.lock()
 	for y in size.y:
@@ -392,20 +401,20 @@ func _create_brush_indicator() -> BitMap:
 			return _create_image_indicator(_brush_image)
 
 
-func _create_image_indicator(image : Image) -> BitMap:
+func _create_image_indicator(image: Image) -> BitMap:
 	var bitmap := BitMap.new()
 	bitmap.create_from_image_alpha(image, 0.0)
 	return bitmap
 
 
-func _create_pixel_indicator(size : int) -> BitMap:
+func _create_pixel_indicator(size: int) -> BitMap:
 	var bitmap := BitMap.new()
 	bitmap.create(Vector2.ONE * size)
 	bitmap.set_bit_rect(Rect2(Vector2.ZERO, Vector2.ONE * size), true)
 	return bitmap
 
 
-func _create_circle_indicator(size : int, fill := false) -> BitMap:
+func _create_circle_indicator(size: int, fill := false) -> BitMap:
 	var bitmap := BitMap.new()
 	bitmap.create(Vector2.ONE * (size * 2 + 1))
 	var position := Vector2(size, size)
@@ -436,7 +445,7 @@ func _create_circle_indicator(size : int, fill := false) -> BitMap:
 	return bitmap
 
 
-func _create_line_indicator(indicator : BitMap, start : Vector2, end : Vector2) -> BitMap:
+func _create_line_indicator(indicator: BitMap, start: Vector2, end: Vector2) -> BitMap:
 	var bitmap := BitMap.new()
 	var size := (end - start).abs() + indicator.get_size()
 	bitmap.create(size)
@@ -471,7 +480,7 @@ func _create_line_indicator(indicator : BitMap, start : Vector2, end : Vector2) 
 	return bitmap
 
 
-func _blit_indicator(dst : BitMap, indicator : BitMap, position : Vector2) -> void:
+func _blit_indicator(dst: BitMap, indicator: BitMap, position: Vector2) -> void:
 	var rect := Rect2(Vector2.ZERO, dst.get_size())
 	var size := indicator.get_size()
 	position -= (size / 2).floor()
@@ -484,7 +493,7 @@ func _blit_indicator(dst : BitMap, indicator : BitMap, position : Vector2) -> vo
 				dst.set_bit(pos, bit)
 
 
-func _line_angle_constraint(start : Vector2, end : Vector2) -> Dictionary:
+func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 	var result := {}
 	var angle := rad2deg(end.angle_to_point(start))
 	var distance := start.distance_to(end)
@@ -493,7 +502,7 @@ func _line_angle_constraint(start : Vector2, end : Vector2) -> Dictionary:
 			angle = stepify(angle, 22.5)
 			if step_decimals(angle) != 0:
 				var diff := end - start
-				var v := Vector2(2 , 1) if abs(diff.x) > abs(diff.y) else Vector2(1 , 2)
+				var v := Vector2(2, 1) if abs(diff.x) > abs(diff.y) else Vector2(1, 2)
 				var p := diff.project(diff.sign() * v).abs().round()
 				var f := p.y if abs(diff.x) > abs(diff.y) else p.x
 				end = start + diff.sign() * v * f - diff.sign()
@@ -512,25 +521,25 @@ func _line_angle_constraint(start : Vector2, end : Vector2) -> Dictionary:
 
 func _get_undo_data() -> Dictionary:
 	var data := {}
-	var project : Project = Global.current_project
-	var cels := [] # Array of Cels
+	var project: Project = Global.current_project
+	var cels := []  # Array of Cels
 	if Global.animation_timer.is_stopped():
 		for cel_index in project.selected_cels:
 			cels.append(project.frames[cel_index[0]].cels[cel_index[1]])
 	else:
 		for frame in project.frames:
-			var cel : Cel = frame.cels[project.current_layer]
+			var cel: Cel = frame.cels[project.current_layer]
 			cels.append(cel)
 	for cel in cels:
-		var image : Image = cel.image
+		var image: Image = cel.image
 		image.unlock()
 		data[image] = image.data
 		image.lock()
 	return data
 
 
-func _pick_color(position : Vector2) -> void:
-	var project : Project = Global.current_project
+func _pick_color(position: Vector2) -> void:
+	var project: Project = Global.current_project
 	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
 

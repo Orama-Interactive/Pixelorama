@@ -166,7 +166,7 @@ msgstr ""
 msgid "Tile Mode"
 msgstr ""
 
-msgid "Window Transparency"
+msgid "Window Opacity"
 msgstr ""
 
 msgid "Panel Layout"
@@ -1285,6 +1285,21 @@ msgstr ""
 msgid "Blue-Red Mode"
 msgstr ""
 
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
+
 msgid "Add a new frame"
 msgstr ""
 
@@ -1379,10 +1394,10 @@ msgstr ""
 msgid "Redo: Draw"
 msgstr ""
 
-msgid "Undo: Rectangle Select"
+msgid "Undo: Select"
 msgstr ""
 
-msgid "Redo: Rectangle Select"
+msgid "Redo: Select"
 msgstr ""
 
 msgid "Undo: Scale"

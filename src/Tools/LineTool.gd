@@ -1,6 +1,5 @@
 extends "res://src/Tools/Draw.gd"
 
-
 var _original_pos := Vector2.ZERO
 var _start := Vector2.ZERO
 var _offset := Vector2.ZERO
@@ -60,7 +59,7 @@ func _get_shape_points_filled(_size: Vector2) -> PoolVector2Array:
 	return PoolVector2Array()
 
 
-func _input(event : InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if _drawing:
 		if event.is_action_pressed("alt"):
 			_displace_origin = true
@@ -68,7 +67,7 @@ func _input(event : InputEvent) -> void:
 			_displace_origin = false
 
 
-func draw_start(position : Vector2) -> void:
+func draw_start(position: Vector2) -> void:
 	if Input.is_action_pressed("alt"):
 		_picking_color = true
 		_pick_color(position)
@@ -85,8 +84,8 @@ func draw_start(position : Vector2) -> void:
 	_drawing = true
 
 
-func draw_move(position : Vector2) -> void:
-	if _picking_color: # Still return even if we released Alt
+func draw_move(position: Vector2) -> void:
+	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("alt"):
 			_pick_color(position)
 		return
@@ -104,7 +103,7 @@ func draw_move(position : Vector2) -> void:
 		_offset = position
 
 
-func draw_end(_position : Vector2) -> void:
+func draw_end(_position: Vector2) -> void:
 	if _picking_color:
 		return
 
@@ -121,7 +120,7 @@ func draw_end(_position : Vector2) -> void:
 
 func draw_preview() -> void:
 	if _drawing:
-		var canvas : CanvasItem = Global.canvas.previews
+		var canvas: CanvasItem = Global.canvas.previews
 		var indicator := BitMap.new()
 		var start := _start
 		if _start.x > _dest.x:
@@ -135,7 +134,7 @@ func draw_preview() -> void:
 		indicator.create((_dest - _start).abs() + t_offsetv * 2 + Vector2.ONE)
 
 		for point in points:
-			var p : Vector2 = point - start + t_offsetv
+			var p: Vector2 = point - start + t_offsetv
 			indicator.set_bit(p, 1)
 
 		canvas.draw_set_transform(start - t_offsetv, canvas.rotation, canvas.scale)
@@ -149,14 +148,14 @@ func draw_preview() -> void:
 func _draw_shape() -> void:
 #	var rect := _get_result_rect(origin, dest)
 	var points := _get_points()
-	prepare_undo()
+	prepare_undo("Draw Shape")
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
 		# Draw each point offseted based on the shape's thickness
 		draw_tool(point)
 
-	commit_undo("Draw Shape")
+	commit_undo()
 
 
 func _get_points() -> PoolVector2Array:
@@ -195,7 +194,7 @@ func _get_points() -> PoolVector2Array:
 	return PoolVector2Array(array)
 
 
-func _line_angle_constraint(start : Vector2, end : Vector2) -> Dictionary:
+func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 	var result := {}
 	var angle := rad2deg(end.angle_to_point(start))
 	var distance := start.distance_to(end)
@@ -203,7 +202,7 @@ func _line_angle_constraint(start : Vector2, end : Vector2) -> Dictionary:
 		angle = stepify(angle, 22.5)
 		if step_decimals(angle) != 0:
 			var diff := end - start
-			var v := Vector2(2 , 1) if abs(diff.x) > abs(diff.y) else Vector2(1 , 2)
+			var v := Vector2(2, 1) if abs(diff.x) > abs(diff.y) else Vector2(1, 2)
 			var p := diff.project(diff.sign() * v).abs().round()
 			var f := p.y if abs(diff.x) > abs(diff.y) else p.x
 			end = start + diff.sign() * v * f - diff.sign()

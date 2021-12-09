@@ -1,9 +1,9 @@
 extends Button
 
-
 var frame := 0
 
-onready var popup_menu : PopupMenu = $PopupMenu
+onready var popup_menu: PopupMenu = $PopupMenu
+onready var frame_properties: ConfirmationDialog = Global.control.find_node("FrameProperties")
 
 
 func _ready() -> void:
@@ -13,7 +13,7 @@ func _ready() -> void:
 func _button_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
 		Global.canvas.selection.transform_content_confirm()
-		var prev_curr_frame : int = Global.current_project.current_frame
+		var prev_curr_frame: int = Global.current_project.current_frame
 		if Input.is_action_pressed("shift"):
 			var frame_diff_sign = sign(frame - prev_curr_frame)
 			if frame_diff_sign == 0:
@@ -28,7 +28,7 @@ func _button_pressed() -> void:
 				var frame_layer := [frame, j]
 				if !Global.current_project.selected_cels.has(frame_layer):
 					Global.current_project.selected_cels.append(frame_layer)
-		else: # If the button is pressed without Shift or Control
+		else:  # If the button is pressed without Shift or Control
 			Global.current_project.selected_cels.clear()
 			var frame_layer := [frame, Global.current_project.current_layer]
 			if !Global.current_project.selected_cels.has(frame_layer):
@@ -51,48 +51,56 @@ func _button_pressed() -> void:
 		pressed = !pressed
 	elif Input.is_action_just_released("middle_mouse"):
 		pressed = !pressed
-		Global.animation_timeline._on_DeleteFrame_pressed(frame)
-	else: # An example of this would be Space
+		Global.animation_timeline.delete_frame(frame)
+	else:  # An example of this would be Space
 		pressed = !pressed
 
 
-func _on_PopupMenu_id_pressed(id : int) -> void:
+func _on_PopupMenu_id_pressed(id: int) -> void:
 	match id:
-		0: # Remove Frame
-			Global.animation_timeline._on_DeleteFrame_pressed(frame)
-		1: # Clone Frame
-			Global.animation_timeline._on_CopyFrame_pressed(frame)
-		2: # Move Left
+		0:  # Remove Frame
+			Global.animation_timeline.delete_frame(frame)
+		1:  # Clone Frame
+			Global.animation_timeline.copy_frame(frame)
+		2:  # Move Left
 			change_frame_order(-1)
-		3: # Move Right
+		3:  # Move Right
 			change_frame_order(1)
-		4: # Frame Properties
-			Global.frame_properties.popup_centered()
+		4:  # Frame Properties
+			frame_properties.popup_centered()
 			Global.dialog_open(true)
-			Global.frame_properties.set_frame_label(frame)
-			Global.frame_properties.set_frame_dur(Global.current_project.frames[frame].duration)
+			frame_properties.set_frame_label(frame)
+			frame_properties.set_frame_dur(Global.current_project.frames[frame].duration)
 
 
-func change_frame_order(rate : int) -> void:
+func change_frame_order(rate: int) -> void:
 	var change = frame + rate
-	var new_frames : Array = Global.current_project.frames.duplicate()
+	var new_frames: Array = Global.current_project.frames.duplicate()
 	var temp = new_frames[frame]
 	new_frames[frame] = new_frames[change]
 	new_frames[change] = temp
 
 	Global.current_project.undo_redo.create_action("Change Frame Order")
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.current_project, "frames", Global.current_project.frames
+	)
 
 	if Global.current_project.current_frame == frame:
-		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", change)
+		Global.current_project.undo_redo.add_do_property(
+			Global.current_project, "current_frame", change
+		)
 	else:
-		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", Global.current_project.current_frame)
+		Global.current_project.undo_redo.add_do_property(
+			Global.current_project, "current_frame", Global.current_project.current_frame
+		)
 
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.current_project, "current_frame", Global.current_project.current_frame
+	)
 
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	Global.current_project.undo_redo.commit_action()
 
 
@@ -118,23 +126,30 @@ func drop_data(_pos, data) -> void:
 	if frame == new_frame:
 		return
 
-	var new_frames : Array = Global.current_project.frames.duplicate()
+	var new_frames: Array = Global.current_project.frames.duplicate()
 	var temp = new_frames[frame]
 	new_frames[frame] = new_frames[new_frame]
 	new_frames[new_frame] = temp
 
 	Global.current_project.undo_redo.create_action("Change Frame Order")
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.current_project, "frames", Global.current_project.frames
+	)
 
 	if Global.current_project.current_frame == new_frame:
-		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", frame)
+		Global.current_project.undo_redo.add_do_property(
+			Global.current_project, "current_frame", frame
+		)
 	else:
-		Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", Global.current_project.current_frame)
+		Global.current_project.undo_redo.add_do_property(
+			Global.current_project, "current_frame", Global.current_project.current_frame
+		)
 
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.current_project, "current_frame", Global.current_project.current_frame
+	)
 
-
-	Global.current_project.undo_redo.add_undo_method(Global, "undo")
-	Global.current_project.undo_redo.add_do_method(Global, "redo")
+	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	Global.current_project.undo_redo.commit_action()

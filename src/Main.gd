@@ -3,39 +3,50 @@ extends Control
 var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
-
 var tallscreen_is_active = false
+var alternate_transparent_background := ColorRect.new()
+var cursor_image = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI
-onready var tools_and_canvas : HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas
-
-onready var tallscreen_hsplit_container : HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas/CanvasAndTimeline/TallscreenHSplitContainer
-onready var bottom_panel : VSplitContainer = tallscreen_hsplit_container.get_node("BottomPanel")
+onready var tools_and_canvas: HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas
+onready var tallscreen_hsplit: HSplitContainer = tools_and_canvas.get_node(
+	"CanvasAndTimeline/TallscreenHSplitContainer"
+)
+onready var bottom_panel: VSplitContainer = tallscreen_hsplit.get_node("BottomPanel")
 onready var right_panel := $MenuAndUI/UI/RightPanel
-onready var tool_and_palette_vsplit := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit
-onready var color_and_tool_options := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions
-onready var canvas_preview_container := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/CanvasPreviewContainer
+onready var canvas_preview_container := right_panel.get_node(
+	"MarginContainer/PreviewAndPalettes/CanvasPreviewContainer"
+)
+onready var tool_and_palette_vsplit := right_panel.get_node(
+	"MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit"
+)
+onready var color_and_tool_options := tool_and_palette_vsplit.get_node("ColorAndToolOptions")
+onready var scroll_container := tool_and_palette_vsplit.get_node(
+	"ColorAndToolOptions/ScrollContainer"
+)
 onready var tool_panel := $MenuAndUI/UI/ToolsAndCanvas/ToolPanel
-onready var scroll_container := $MenuAndUI/UI/RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit/ColorAndToolOptions/ScrollContainer
+onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var alternate_transparent_background = ColorRect.new()
+	randomize()
 	add_child(alternate_transparent_background)
-	move_child(alternate_transparent_background,0)
+	move_child(alternate_transparent_background, 0)
 	alternate_transparent_background.visible = false
-	alternate_transparent_background.name = "AlternateTransparentBackground"
 	alternate_transparent_background.anchor_left = ANCHOR_BEGIN
 	alternate_transparent_background.anchor_top = ANCHOR_BEGIN
 	alternate_transparent_background.anchor_right = ANCHOR_END
 	alternate_transparent_background.anchor_bottom = ANCHOR_END
 
 	get_tree().set_auto_accept_quit(false)
-	setup_application_window_size()
+	_setup_application_window_size()
 	handle_resize()
 	get_tree().get_root().connect("size_changed", self, "handle_resize")
 
+	if OS.get_name() == "OSX":
+		_use_osx_shortcuts()
+
+	Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
 	Global.current_project.layers[0].name = tr("Layer") + " 0"
@@ -46,8 +57,12 @@ func _ready() -> void:
 	Global.quit_and_save_dialog.add_button("Save & Exit", false, "Save")
 	Global.quit_and_save_dialog.get_ok().text = "Exit without saving"
 
-	Global.open_sprites_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
-	Global.save_sprites_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
+	Global.open_sprites_dialog.current_dir = Global.config_cache.get_value(
+		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
+	)
+	Global.save_sprites_dialog.current_dir = Global.config_cache.get_value(
+		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
+	)
 
 	# FIXME: OS.get_system_dir does not grab the correct directory for Ubuntu Touch.
 	# Additionally, AppArmor policies prevent the app from writing to the /home
@@ -59,6 +74,11 @@ func _ready() -> void:
 		Global.open_sprites_dialog.current_dir = OS.get_user_data_dir()
 		Global.save_sprites_dialog.current_dir = OS.get_user_data_dir()
 
+	var i := 0
+	for camera in Global.cameras:
+		camera.index = i
+		i += 1
+
 	var zstd_checkbox := CheckBox.new()
 	zstd_checkbox.name = "ZSTDCompression"
 	zstd_checkbox.pressed = true
@@ -66,11 +86,7 @@ func _ready() -> void:
 	zstd_checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	Global.save_sprites_dialog.get_vbox().add_child(zstd_checkbox)
 
-	if not Global.config_cache.has_section_key("preferences", "startup"):
-		Global.config_cache.set_value("preferences", "startup", true)
-	show_splash_screen()
-
-	handle_backup()
+	_handle_backup()
 
 	# If the user wants to run Pixelorama with arguments in terminal mode
 	# or open files with Pixelorama directly, then handle that
@@ -81,35 +97,48 @@ func _ready() -> void:
 	if OS.get_name() == "Android":
 		OS.request_permissions()
 
+	_show_splash_screen()
+
 
 func handle_resize() -> void:
-	var aspect_ratio = get_viewport_rect().size.x/(0.00001 if get_viewport_rect().size.y == 0 else get_viewport_rect().size.y)
-	if (  (aspect_ratio <= 3.0/4.0 and Global.panel_layout != Global.PanelLayout.WIDESCREEN)
-		or Global.panel_layout == Global.PanelLayout.TALLSCREEN):
-		change_ui_layout("tallscreen")
+	var aspect_ratio = (
+		get_viewport_rect().size.x
+		/ (0.00001 if get_viewport_rect().size.y == 0 else get_viewport_rect().size.y)
+	)
+	if (
+		(aspect_ratio <= 3.0 / 4.0 and Global.panel_layout != Global.PanelLayout.WIDESCREEN)
+		or Global.panel_layout == Global.PanelLayout.TALLSCREEN
+	):
+		_change_ui_layout("tallscreen")
 	else:
-		change_ui_layout("widescreen")
+		_change_ui_layout("widescreen")
 
 
-func change_ui_layout(mode : String) -> void:
-	var colorpicker_is_switched = true if tool_and_palette_vsplit.has_node("ScrollContainer") else false
+func _change_ui_layout(mode: String) -> void:
+	var colorpicker_is_switched = (
+		true
+		if tool_and_palette_vsplit.has_node("ScrollContainer")
+		else false
+	)
 
 	if mode == "tallscreen" and not tallscreen_is_active:
 		tallscreen_is_active = true
 		# changing visibility and re-parenting of nodes for tall screen
 		if !Global.top_menu_container.zen_mode:
-			tallscreen_hsplit_container.visible = true
-		tallscreen_hsplit_container.split_offset = tools_and_canvas.split_offset
-		reparent_node_to(Global.animation_timeline, tallscreen_hsplit_container.get_node("BottomPanel"), 0)
-		reparent_node_to(right_panel, bottom_panel, 0)
+			tallscreen_hsplit.visible = true
+		tallscreen_hsplit.split_offset = tools_and_canvas.split_offset
+		_reparent_node_to(Global.animation_timeline, tallscreen_hsplit.get_node("BottomPanel"), 0)
+		_reparent_node_to(right_panel, bottom_panel, 0)
 		right_panel.rect_min_size.y = 322
-		reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
-		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, HBoxContainer.new())
+		_reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
+		tool_and_palette_vsplit = _replace_node_with(tool_and_palette_vsplit, HBoxContainer.new())
 		tool_and_palette_vsplit.set("custom_constants/separation", 8)
 		color_and_tool_options.rect_min_size.x = 280
-		reparent_node_to(tool_panel, tallscreen_hsplit_container, 0)
+		_reparent_node_to(tool_panel, tallscreen_hsplit, 0)
 
-		var right_panel_margin : MarginContainer = right_panel.find_node("MarginContainer", true, false)
+		var right_panel_margin: MarginContainer = right_panel.find_node(
+			"MarginContainer", true, false
+		)
 		right_panel_margin.set("custom_constants/margin_top", 8)
 		right_panel_margin.set("custom_constants/margin_left", 0)
 		right_panel_margin.set("custom_constants/margin_right", 0)
@@ -118,18 +147,22 @@ func change_ui_layout(mode : String) -> void:
 	elif mode == "widescreen" and tallscreen_is_active:
 		tallscreen_is_active = false
 		# Reparenting and hiding nodes to adjust wide-screen
-		reparent_node_to(Global.animation_timeline, ui.get_node("ToolsAndCanvas/CanvasAndTimeline"), 1)
-		tallscreen_hsplit_container.visible = false
-		tools_and_canvas.split_offset = tallscreen_hsplit_container.split_offset
-		reparent_node_to(right_panel, ui, -1)
+		_reparent_node_to(
+			Global.animation_timeline, ui.get_node("ToolsAndCanvas/CanvasAndTimeline"), 1
+		)
+		tallscreen_hsplit.visible = false
+		tools_and_canvas.split_offset = tallscreen_hsplit.split_offset
+		_reparent_node_to(right_panel, ui, -1)
 		right_panel.rect_min_size.y = 0
-		reparent_node_to(canvas_preview_container, right_panel.find_node("PreviewAndPalettes"), 0)
-		tool_and_palette_vsplit = replace_node_with(tool_and_palette_vsplit, VSplitContainer.new())
+		_reparent_node_to(canvas_preview_container, right_panel.find_node("PreviewAndPalettes"), 0)
+		tool_and_palette_vsplit = _replace_node_with(tool_and_palette_vsplit, VSplitContainer.new())
 		color_and_tool_options.rect_min_size.x = 0
 		canvas_preview_container.visible = true
-		reparent_node_to(tool_panel, ui.find_node("ToolsAndCanvas"), 0)
+		_reparent_node_to(tool_panel, ui.find_node("ToolsAndCanvas"), 0)
 
-		var right_panel_margin : MarginContainer = right_panel.find_node("MarginContainer", true, false)
+		var right_panel_margin: MarginContainer = right_panel.find_node(
+			"MarginContainer", true, false
+		)
 		right_panel_margin.set("custom_constants/margin_top", 0)
 		right_panel_margin.set("custom_constants/margin_left", 8)
 		right_panel_margin.set("custom_constants/margin_right", 8)
@@ -141,23 +174,28 @@ func change_ui_layout(mode : String) -> void:
 		canvas_preview_container.visible = true
 
 	if not colorpicker_is_switched and canvas_preview_container.visible and mode == "tallscreen":
-		reparent_node_to(scroll_container, tool_and_palette_vsplit, 0)
+		_reparent_node_to(scroll_container, tool_and_palette_vsplit, 0)
 		scroll_container.rect_min_size = Vector2(268, 196)
 		color_and_tool_options.set("custom_constants/separation", 20)
-		reparent_node_to(canvas_preview_container, color_and_tool_options, -1)
+		_reparent_node_to(canvas_preview_container, color_and_tool_options, -1)
 	elif colorpicker_is_switched and (not canvas_preview_container.visible or mode != "tallscreen"):
-		reparent_node_to(scroll_container, color_and_tool_options, -1)
+		_reparent_node_to(scroll_container, color_and_tool_options, -1)
 		scroll_container.rect_min_size = Vector2(0, 0)
 		color_and_tool_options.set("custom_constants/separation", 8)
 		if mode == "widescreen":
-			reparent_node_to(canvas_preview_container, right_panel.find_node("PreviewAndPalettes",  true, false), 0)
+			_reparent_node_to(
+				canvas_preview_container,
+				right_panel.find_node("PreviewAndPalettes", true, false),
+				0
+			)
 		else:
-			reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
+			_reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
 
 
-# helper function (change_ui_layout)
-# warning: this doesn't really copy any sort of attributes, except a few that were needed in my particular case
-func replace_node_with(old : Node, new : Node) -> Node:
+# helper function (_change_ui_layout)
+# warning: this doesn't really copy any sort of attributes, except a few that
+# were needed in my particular case
+func _replace_node_with(old: Node, new: Node) -> Node:
 	var tempname = old.name
 	old.name = "old"
 	new.name = tempname
@@ -169,14 +207,14 @@ func replace_node_with(old : Node, new : Node) -> Node:
 		new.set("custom_constants/separation", 20)
 	old.get_parent().add_child(new)
 	for n in old.get_children():
-		reparent_node_to(n, new, -1)
+		_reparent_node_to(n, new, -1)
 	old.get_parent().remove_child(old)
 	old.queue_free()
 	return new
 
 
-# helper function (change_ui_layout)
-func reparent_node_to(node : Node, dest : Node, pos : int) -> bool:
+# helper function (_change_ui_layout)
+func _reparent_node_to(node: Node, dest: Node, pos: int) -> bool:
 	if dest is Node and node is Node:
 		node.get_parent().remove_child(node)
 		dest.add_child(node)
@@ -188,43 +226,47 @@ func reparent_node_to(node : Node, dest : Node, pos : int) -> bool:
 		return false
 
 
-func _input(event : InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
-	Global.left_cursor.texture = Global.left_cursor_tool_texture
 	Global.right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
-	Global.right_cursor.texture = Global.right_cursor_tool_texture
 
 	if event is InputEventKey and (event.scancode == KEY_ENTER or event.scancode == KEY_KP_ENTER):
 		if get_focus_owner() is LineEdit:
 			get_focus_owner().release_focus()
 
-	# The section of code below is reserved for Undo and Redo! Do not place code for Input below, but above.
-	if !event.is_echo(): # Checks if the action is pressed down
+	# The section of code below is reserved for Undo and Redo!
+	# Do not place code for Input below, but above.
+	if !event.is_echo():  # Checks if the action is pressed down
 		if event.is_action_pressed("redo_secondary"):
 			# Done, so that "redo_secondary" hasn't a slight delay before it starts.
 			# The "redo" and "undo" action don't have a slight delay,
-			# because they get called as an accelerator once pressed (TopMenuContainer.gd / Line 152).
+			# because they get called as an accelerator once pressed (TopMenuContainer.gd, Line 152)
 			Global.current_project.commit_redo()
 		return
 
-	if event.is_action("redo"): # Ctrl + Y
+	if event.is_action("redo"):  # Ctrl + Y
 		Global.current_project.commit_redo()
 
-	if event.is_action("redo_secondary"): # Shift + Ctrl + Z
+	if event.is_action("redo_secondary"):  # Shift + Ctrl + Z
 		Global.current_project.commit_redo()
 
-	if event.is_action("undo") and !event.shift: # Ctrl + Z and check if shift isn't pressed
-		Global.current_project.commit_undo() # so "undo" isn't accidentaly triggered while using "redo_secondary"
+	if event.is_action("undo") and !event.shift:  # Ctrl + Z and check if shift isn't pressed
+		# so "undo" isn't accidentaly triggered while using "redo_secondary"
+		Global.current_project.commit_undo()
 
 
-func setup_application_window_size() -> void:
+func _setup_application_window_size() -> void:
 	if OS.get_name() == "HTML5":
 		return
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	OS.min_window_size = Vector2(1024, 576)
 
-	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,
-		SceneTree.STRETCH_ASPECT_IGNORE, Vector2(1024,576), Global.shrink)
+	get_tree().set_screen_stretch(
+		SceneTree.STRETCH_MODE_DISABLED,
+		SceneTree.STRETCH_ASPECT_IGNORE,
+		Vector2(1024, 576),
+		Global.shrink
+	)
 
 	# Restore the window position/size if values are present in the configuration cache
 	if Global.config_cache.has_section_key("window", "screen"):
@@ -239,19 +281,24 @@ func setup_application_window_size() -> void:
 			OS.window_size = Global.config_cache.get_value("window", "size")
 
 
-func show_splash_screen() -> void:
-	# Wait for the window to adjust itself, so the popup is correctly centered
-	yield(get_tree().create_timer(0.2), "timeout")
+func _show_splash_screen() -> void:
+	if not Global.config_cache.has_section_key("preferences", "startup"):
+		Global.config_cache.set_value("preferences", "startup", true)
+
 	if Global.config_cache.get_value("preferences", "startup"):
-		$Dialogs/SplashDialog.popup_centered() # Splash screen
+		if OS.get_name() != "HTML5" and OS.window_size != Vector2(1280, 720):
+			# Wait for the window to adjust itself, so the popup is correctly centered
+			yield(get_tree(), "screen_resized")
+
+		$Dialogs/SplashDialog.popup_centered()  # Splash screen
 		modulate = Color(0.5, 0.5, 0.5)
 	else:
 		Global.can_draw = true
 
 
-func handle_backup() -> void:
-	# If backup file exists then Pixelorama was not closed properly (probably crashed) - reopen backup
-	var backup_confirmation : ConfirmationDialog = $Dialogs/BackupConfirmation
+func _handle_backup() -> void:
+	# If backup file exists, Pixelorama was not closed properly (probably crashed) - reopen backup
+	var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
 	backup_confirmation.get_cancel().text = tr("Delete")
 	if Global.config_cache.has_section("backups"):
 		var project_paths = Global.config_cache.get_section_keys("backups")
@@ -262,8 +309,12 @@ func handle_backup() -> void:
 				backup_paths.append(Global.config_cache.get_value("backups", p_path))
 			# Temporatily stop autosave until user confirms backup
 			OpenSave.autosave_timer.stop()
-			backup_confirmation.connect("confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths, backup_paths])
-			backup_confirmation.get_cancel().connect("pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths])
+			backup_confirmation.connect(
+				"confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths, backup_paths]
+			)
+			backup_confirmation.get_cancel().connect(
+				"pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths]
+			)
 			backup_confirmation.popup_centered()
 			Global.can_draw = false
 			modulate = Color(0.5, 0.5, 0.5)
@@ -275,28 +326,33 @@ func handle_backup() -> void:
 			load_last_project()
 
 
-func _notification(what : int) -> void:
+func _notification(what: int) -> void:
 	match what:
-		MainLoop.NOTIFICATION_WM_QUIT_REQUEST: # Handle exit
+		MainLoop.NOTIFICATION_WM_QUIT_REQUEST:  # Handle exit
 			show_quit_dialog()
-		MainLoop.NOTIFICATION_WM_FOCUS_OUT: # Called when another program is currently focused
+		MainLoop.NOTIFICATION_WM_FOCUS_OUT:  # Called when another program is currently focused
 			Global.has_focus = false
 			if Global.fps_limit_focus:
-				Engine.set_target_fps(Global.idle_fps) # then set the fps to the idle fps (by default 1) to facilitate the cpu
-		MainLoop.NOTIFICATION_WM_MOUSE_ENTER: # Opposite of the above
+				# then set the fps to the idle fps (by default 1) to facilitate the CPU
+				Engine.set_target_fps(Global.idle_fps)
+		MainLoop.NOTIFICATION_WM_MOUSE_ENTER:  # Opposite of the above
 			if Global.fps_limit_focus:
-				Engine.set_target_fps(Global.fps_limit) # 0 stands for maximum fps
-		MainLoop.NOTIFICATION_WM_MOUSE_EXIT: # if the mouse exits the window and another application has the focus set the fps to the idle fps
+				Engine.set_target_fps(Global.fps_limit)  # 0 stands for maximum fps
+		# If the mouse exits the window and another application has the focus,
+		# set the fps to the idle fps
+		MainLoop.NOTIFICATION_WM_MOUSE_EXIT:
 			if !OS.is_window_focused() and Global.fps_limit_focus:
 				Engine.set_target_fps(Global.idle_fps)
 		MainLoop.NOTIFICATION_WM_FOCUS_IN:
 			var mouse_pos := get_global_mouse_position()
-			var viewport_rect := Rect2(Global.main_viewport.rect_global_position, Global.main_viewport.rect_size)
+			var viewport_rect := Rect2(
+				Global.main_viewport.rect_global_position, Global.main_viewport.rect_size
+			)
 			if viewport_rect.has_point(mouse_pos):
 				Global.has_focus = true
 
 
-func _on_files_dropped(_files : PoolStringArray, _screen : int) -> void:
+func _on_files_dropped(_files: PoolStringArray, _screen: int) -> void:
 	OpenSave.handle_loading_files(_files)
 	var splash_dialog = Global.control.get_node("Dialogs/SplashDialog")
 	if splash_dialog.visible:
@@ -311,8 +367,12 @@ func load_last_project() -> void:
 		# Check if file still exists on disk
 		var file_path = Global.config_cache.get_value("preferences", "last_project_path")
 		var file_check := File.new()
-		if file_check.file_exists(file_path): # If yes then load the file
+		if file_check.file_exists(file_path):  # If yes then load the file
 			OpenSave.open_pxo_file(file_path)
+			# Sync file dialogs
+			Global.save_sprites_dialog.current_dir = file_path.get_base_dir()
+			Global.open_sprites_dialog.current_dir = file_path.get_base_dir()
+			Global.config_cache.set_value("data", "current_dir", file_path.get_base_dir())
 		else:
 			# If file doesn't exist on disk then warn user about this
 			Global.error_dialog.set_text("Cannot find last project file.")
@@ -320,14 +380,18 @@ func load_last_project() -> void:
 			Global.dialog_open(true)
 
 
-func load_recent_project_file(path : String) -> void:
+func load_recent_project_file(path: String) -> void:
 	if OS.get_name() == "HTML5":
 		return
 
 	# Check if file still exists on disk
 	var file_check := File.new()
-	if file_check.file_exists(path): # If yes then load the file
+	if file_check.file_exists(path):  # If yes then load the file
 		OpenSave.handle_loading_files([path])
+		# Sync file dialogs
+		Global.save_sprites_dialog.current_dir = path.get_base_dir()
+		Global.open_sprites_dialog.current_dir = path.get_base_dir()
+		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 	else:
 		# If file doesn't exist on disk then warn user about this
 		Global.error_dialog.set_text("Cannot find project file.")
@@ -335,20 +399,30 @@ func load_recent_project_file(path : String) -> void:
 		Global.dialog_open(true)
 
 
-func _on_OpenSprite_file_selected(path : String) -> void:
+func _on_OpenSprite_file_selected(path: String) -> void:
 	OpenSave.handle_loading_files([path])
+	Global.save_sprites_dialog.current_dir = path.get_base_dir()
+	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 
 
-func _on_SaveSprite_file_selected(path : String) -> void:
-	var zstd = Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").pressed
+func _on_SaveSprite_file_selected(path: String) -> void:
+	save_project(path)
+
+
+func save_project(path: String) -> void:
+	var zstd: bool = Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").pressed
 	OpenSave.save_pxo_file(path, false, zstd)
+	Global.open_sprites_dialog.current_dir = path.get_base_dir()
+	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 
 	if is_quitting_on_save:
 		_on_QuitDialog_confirmed()
 
 
 func _on_SaveSpriteHTML5_confirmed() -> void:
-	var file_name = Global.save_sprites_html5_dialog.get_node("FileNameContainer/FileNameLineEdit").text
+	var file_name = Global.save_sprites_html5_dialog.get_node(
+		"FileNameContainer/FileNameLineEdit"
+	).text
 	file_name += ".pxo"
 	var path = "user://".plus_file(file_name)
 	OpenSave.save_pxo_file(path, false, false)
@@ -364,20 +438,20 @@ func _can_draw_true() -> void:
 
 
 func show_quit_dialog() -> void:
-	if !Global.quit_dialog.visible:
+	if !quit_dialog.visible:
 		if !Global.current_project.has_changed:
-			Global.quit_dialog.call_deferred("popup_centered")
+			quit_dialog.call_deferred("popup_centered")
 		else:
 			Global.quit_and_save_dialog.call_deferred("popup_centered")
 
 	Global.dialog_open(true)
 
 
-func _on_QuitAndSaveDialog_custom_action(action : String) -> void:
+func _on_QuitAndSaveDialog_custom_action(action: String) -> void:
 	if action == "Save":
 		is_quitting_on_save = true
 		Global.save_sprites_dialog.popup_centered()
-		Global.quit_dialog.hide()
+		quit_dialog.hide()
 		Global.dialog_open(true)
 
 
@@ -388,17 +462,19 @@ func _on_QuitDialog_confirmed() -> void:
 	get_tree().quit()
 
 
-func _on_BackupConfirmation_confirmed(project_paths : Array, backup_paths : Array) -> void:
+func _on_BackupConfirmation_confirmed(project_paths: Array, backup_paths: Array) -> void:
 	OpenSave.reload_backup_file(project_paths, backup_paths)
 	OpenSave.autosave_timer.start()
 	Export.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
 	Export.directory_path = OpenSave.current_save_paths[0].get_base_dir()
 	Export.was_exported = false
-	Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file())
+	Global.top_menu_container.file_menu.set_item_text(
+		4, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file()
+	)
 	Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 
 
-func _on_BackupConfirmation_delete(project_paths : Array, backup_paths : Array) -> void:
+func _on_BackupConfirmation_delete(project_paths: Array, backup_paths: Array) -> void:
 	for i in range(project_paths.size()):
 		OpenSave.remove_backup_by_path(project_paths[i], backup_paths[i])
 	OpenSave.autosave_timer.start()
@@ -409,3 +485,34 @@ func _on_BackupConfirmation_delete(project_paths : Array, backup_paths : Array) 
 
 func _on_BackupConfirmation_popup_hide() -> void:
 	OpenSave.autosave_timer.start()
+
+
+func _use_osx_shortcuts() -> void:
+	var inputmap := InputMap
+
+	for action in inputmap.get_actions():
+		var event: InputEvent = inputmap.get_action_list(action)[0]
+
+		if event.is_action("show_pixel_grid"):
+			event.shift = true
+
+		if event.control:
+			event.control = false
+			event.command = true
+
+
+func _exit_tree() -> void:
+	Global.config_cache.set_value("window", "panel_layout", Global.panel_layout)
+	Global.config_cache.set_value("window", "screen", OS.current_screen)
+	Global.config_cache.set_value(
+		"window", "maximized", OS.window_maximized || OS.window_fullscreen
+	)
+	Global.config_cache.set_value("window", "position", OS.window_position)
+	Global.config_cache.set_value("window", "size", OS.window_size)
+	Global.config_cache.save("user://cache.ini")
+
+	var i := 0
+	for project in Global.projects:
+		project.undo_redo.free()
+		OpenSave.remove_backup(i)
+		i += 1

@@ -1,8 +1,7 @@
 extends ImageEffect
 
-
-onready var flip_h : CheckBox = $VBoxContainer/OptionsContainer/FlipHorizontal
-onready var flip_v : CheckBox = $VBoxContainer/OptionsContainer/FlipVertical
+onready var flip_h: CheckBox = $VBoxContainer/OptionsContainer/FlipHorizontal
+onready var flip_v: CheckBox = $VBoxContainer/OptionsContainer/FlipVertical
 
 
 func set_nodes() -> void:
@@ -11,42 +10,110 @@ func set_nodes() -> void:
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 
 
-func commit_action(_cel : Image, project : Project = Global.current_project) -> void:
-	flip_image(_cel, selection_checkbox.pressed, project)
+func commit_action(cel: Image, project: Project = Global.current_project) -> void:
+	_flip_image(cel, selection_checkbox.pressed, project)
 
 
-func _on_FlipHorizontal_toggled(_button_pressed : bool) -> void:
+func _on_FlipHorizontal_toggled(_button_pressed: bool) -> void:
 	update_preview()
 
 
-func _on_FlipVertical_toggled(_button_pressed : bool) -> void:
+func _on_FlipVertical_toggled(_button_pressed: bool) -> void:
 	update_preview()
 
 
-func flip_image(image : Image, affect_selection : bool, project : Project = Global.current_project) -> void:
+func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 	if !(affect_selection and project.has_selection):
 		if flip_h.pressed:
-			image.flip_x()
+			cel.flip_x()
 		if flip_v.pressed:
-			image.flip_y()
+			cel.flip_y()
 	else:
 		# Create a temporary image that only has the selected pixels in it
-		var selected_image := Image.new()
-		selected_image.create(image.get_width(), image.get_height(), false, Image.FORMAT_RGBA8)
-		selected_image.lock()
-		image.lock()
-		for x in image.get_width():
-			for y in image.get_width():
+		var selected := Image.new()
+		var rectangle: Rect2 = Global.canvas.selection.big_bounding_rectangle
+		if project != Global.current_project:
+			rectangle = project.get_selection_rectangle()
+		selected = cel.get_rect(rectangle)
+		selected.lock()
+		cel.lock()
+		for x in selected.get_width():
+			for y in selected.get_height():
 				var pos := Vector2(x, y)
-				if project.can_pixel_get_drawn(pos):
-					var color : Color = image.get_pixelv(pos)
-					selected_image.set_pixelv(pos, color)
-					image.set_pixelv(pos, Color(0, 0, 0, 0))
+				var cel_pos := pos + rectangle.position
+				if project.can_pixel_get_drawn(cel_pos):
+					cel.set_pixelv(cel_pos, Color(0, 0, 0, 0))
+				else:
+					selected.set_pixelv(pos, Color(0, 0, 0, 0))
 
+		selected.unlock()
+		cel.unlock()
 		if flip_h.pressed:
-			selected_image.flip_x()
+			selected.flip_x()
 		if flip_v.pressed:
-			selected_image.flip_y()
-		selected_image.unlock()
-		image.blit_rect_mask(selected_image, selected_image, Rect2(Vector2.ZERO, selected_image.get_size()), Vector2.ZERO)
+			selected.flip_y()
+		cel.blend_rect(selected, Rect2(Vector2.ZERO, selected.get_size()), rectangle.position)
+
+
+func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
+	_flip_selection(project)
+
+	var redo_data := _get_undo_data(project)
+	project.undos += 1
+	project.undo_redo.create_action(action)
+	project.undo_redo.add_do_property(project, "selection_bitmap", redo_data["selection_bitmap"])
+	project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])
+	project.undo_redo.add_undo_property(project, "selection_bitmap", undo_data["selection_bitmap"])
+	project.undo_redo.add_undo_property(project, "selection_offset", undo_data["outline_offset"])
+
+	for image in redo_data:
+		if not image is Image:
+			continue
+		project.undo_redo.add_do_property(image, "data", redo_data[image])
 		image.unlock()
+	for image in undo_data:
+		if not image is Image:
+			continue
+		project.undo_redo.add_undo_property(image, "data", undo_data[image])
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false, -1, -1, project)
+	project.undo_redo.add_do_method(project, "selection_bitmap_changed")
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, -1, -1, project)
+	project.undo_redo.add_undo_method(project, "selection_bitmap_changed")
+	project.undo_redo.commit_action()
+
+
+func _get_undo_data(project: Project) -> Dictionary:
+	var data := {}
+	data["selection_bitmap"] = project.selection_bitmap.duplicate()
+	data["outline_offset"] = project.selection_offset
+
+	var images := _get_selected_draw_images(project)
+	for image in images:
+		image.unlock()
+		data[image] = image.data
+
+	return data
+
+
+func _flip_selection(project: Project = Global.current_project) -> void:
+	if !(selection_checkbox.pressed and project.has_selection):
+		return
+
+	var bitmap_image: Image = project.bitmap_to_image(project.selection_bitmap)
+	var selection_rect := bitmap_image.get_used_rect()
+	var smaller_bitmap_image := bitmap_image.get_rect(selection_rect)
+
+	if flip_h.pressed:
+		smaller_bitmap_image.flip_x()
+	if flip_v.pressed:
+		smaller_bitmap_image.flip_y()
+
+	bitmap_image.fill(Color(0, 0, 0, 0))
+	bitmap_image.blend_rect(
+		smaller_bitmap_image,
+		Rect2(Vector2.ZERO, smaller_bitmap_image.get_size()),
+		selection_rect.position
+	)
+	var bitmap_copy: BitMap = project.selection_bitmap.duplicate()
+	bitmap_copy.create_from_image_alpha(bitmap_image)
+	project.selection_bitmap = bitmap_copy
