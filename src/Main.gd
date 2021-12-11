@@ -328,22 +328,22 @@ func _handle_backup() -> void:
 
 func _notification(what: int) -> void:
 	match what:
-		MainLoop.NOTIFICATION_WM_QUIT_REQUEST:  # Handle exit
+		MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 			show_quit_dialog()
-		MainLoop.NOTIFICATION_WM_FOCUS_OUT:  # Called when another program is currently focused
-			Global.has_focus = false
-			if Global.fps_limit_focus:
-				# then set the fps to the idle fps (by default 1) to facilitate the CPU
-				Engine.set_target_fps(Global.idle_fps)
-		MainLoop.NOTIFICATION_WM_MOUSE_ENTER:  # Opposite of the above
-			if Global.fps_limit_focus:
-				Engine.set_target_fps(Global.fps_limit)  # 0 stands for maximum fps
 		# If the mouse exits the window and another application has the focus,
-		# set the fps to the idle fps
+		# pause the application
+		MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+			Global.has_focus = false
+			if Global.pause_when_unfocused:
+				get_tree().paused = true
 		MainLoop.NOTIFICATION_WM_MOUSE_EXIT:
-			if !OS.is_window_focused() and Global.fps_limit_focus:
-				Engine.set_target_fps(Global.idle_fps)
+			if !OS.is_window_focused() and Global.pause_when_unfocused:
+				get_tree().paused = true
+		# Unpause it when the mouse enters the window or when it gains focus
+		MainLoop.NOTIFICATION_WM_MOUSE_ENTER:
+			get_tree().paused = false
 		MainLoop.NOTIFICATION_WM_FOCUS_IN:
+			get_tree().paused = false
 			var mouse_pos := get_global_mouse_position()
 			var viewport_rect := Rect2(
 				Global.main_viewport.rect_global_position, Global.main_viewport.rect_size
