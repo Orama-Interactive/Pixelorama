@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-12-11 18:24\n"
+"PO-Revision-Date: 2021-12-11 18:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1044,10 +1044,10 @@ msgid "Sets grid's y offset from the canvas origin (top left corner of the image
 msgstr "Définit le décalage y depuis l'origine du canevas (en haut à gauche de l'image)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Afficher par dessus le mode tuile:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Si désactivé, la grille ne sera affichée que au dessus de l'image originale"
 
 msgid "Grid color:"
 msgstr "Couleur de la grille:"
@@ -1104,13 +1104,13 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Le damier transparent suit le niveau de zoom du canevas"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Bords de sélection animés"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Couleur du bord 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Couleur du bord 2:"
 
 msgid "Only custom preset can be modified"
 msgstr "Seul le préréglage personnalisé peut être modifié"
@@ -1119,13 +1119,13 @@ msgid "Set application FPS limit:"
 msgstr "Définir la limite FPS de l'application :"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Suspend l'application quand elle perd le focus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Définit la limite d'images par seconde de l'application. Plus le nombre est bas, plus l'utilisation du processeur est faible, mais l'application devient plus lente, saccadée et non réactive. 0 signifie qu'il n'y a pas de limite."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr ""
+msgstr "Si c'est activé, quand l'application perd le focus, elle est suspendue. Cela aide à réduire l'usage du processeur en période d'inactivité. Elle est ensuite actualisée quand la souris entre dans la fenêtre."
 
 msgid "Brush:"
 msgstr "Brosse :"
