@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-12-03 15:32\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1118,14 +1118,14 @@ msgstr "Только пользовательские предустановки
 msgid "Set application FPS limit:"
 msgstr "Ограничение кадров в секунду:"
 
-msgid "Limit FPS to the idle FPS when app loses focus"
-msgstr "Ограничить кадры в секунду, когда приложение в фоне"
+msgid "Pause application when it loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Устанавливает лимит на количество кадров в секунду для программы. Чем ниже это число, тем меньше используется процессор, но приложение становится медленнее, дольше реагирует на действия, а движения будут менее плавными. 0 значит отсутствие лимита."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Если этот параметр включён, при потере фокуса количество кадров в секунду будет установлено равным количеству кадров при бездействии. Это позволяет снизить нагрузку на процессор при бездействии. Лимит количества кадров сбрасывается при движении мыши в окне приложения."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Кисть:"
@@ -1860,10 +1860,4 @@ msgstr "Уменьшение размера палитры сбросит поз
 
 msgid "Position:"
 msgstr "Положение:"
-
-msgid "Set idle FPS:"
-msgstr "Ограничение кадров при бездействии:"
-
-msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
-msgstr "Устанавливает, сколько кадров в секунду Pixelorama обрабатывает, когда у приложения нет фокуса. Чем меньше, тем лучше для производительности."
 
