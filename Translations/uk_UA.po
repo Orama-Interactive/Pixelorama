@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-12-02 15:25\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1118,14 +1118,14 @@ msgstr "Можна міняти тільки користувацький наб
 msgid "Set application FPS limit:"
 msgstr "Встановити обмеження FPS додатку:"
 
-msgid "Limit FPS to the idle FPS when app loses focus"
-msgstr "Обмежити FPS до FPS бездіяльності, коли програма не в фокусі"
+msgid "Pause application when it loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Встановлює обмеження кадрів в секунду. Чим нижче значення, ти менше додаток використовує CPU, але програма починає працювати повільніше, стає менш стабільною і може не реагувати. 0 означає, що немає ніяких обмежень."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Якщо цей параметр увімкнено, під час втрати фокусу програмою FPS (кількість кадрів в секунду) буде обмежено вказаною FPS бездіяльності. Це дозволяє ощадити використання процесора, коли програма не активна. Ліміт FPS буде забиратися, коли миш повертається в вікно програми."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Пензель:"
@@ -1860,10 +1860,4 @@ msgstr "Зміна розміру палітри призведе до пере�
 
 msgid "Position:"
 msgstr "Позиція:"
-
-msgid "Set idle FPS:"
-msgstr "Встановити FPS бездіяльності:"
-
-msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
-msgstr "Вказує, скільки кадрів в секунду (FPS) Pixelorama буде використовувати, коли програма не в фокусі. Чим менше, тим більше ресурсів економиться."
 
