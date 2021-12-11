@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-12-02 11:33\n"
+"PO-Revision-Date: 2021-12-11 17:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Nom du fichier :"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Nom du projet:"
 
 msgid "Image Size"
 msgstr "Taille de l'image"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Taille de la frame"
 
 msgid "Size:"
-msgstr ""
+msgstr "Taille:"
 
 msgid "Width:"
 msgstr "Largeur :"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Édition"
 
 msgid "Select"
-msgstr ""
+msgstr "Sélectionner"
 
 msgid "View"
 msgstr "Affichage"
@@ -133,7 +133,7 @@ msgid "Delete"
 msgstr "Supprimer"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Nouveau pinceau"
 
 msgid "Scale Image"
 msgstr "Redimensionner l'image"
@@ -151,16 +151,16 @@ msgid "Resize Canvas"
 msgstr "Redimensionner le canevas"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Centrer l'image"
 
 msgid "Rotate Image"
 msgstr "Pivoter l'image"
 
 msgid "Clear"
-msgstr ""
+msgstr "Effacer"
 
 msgid "Invert"
-msgstr ""
+msgstr "Inverser"
 
 msgid "Flip"
 msgstr "Retourner"
@@ -178,13 +178,13 @@ msgid "Tile Mode"
 msgstr "Mode tuile"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Opacité de la fenêtre"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Disposition des sections"
 
 msgid "Auto"
-msgstr ""
+msgstr "Automatique"
 
 msgid "Widescreen"
 msgstr ""
