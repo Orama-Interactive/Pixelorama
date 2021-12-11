@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-12-11 18:14\n"
+"PO-Revision-Date: 2021-12-11 18:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1011,37 +1011,37 @@ msgid "Rectangular grid width:"
 msgstr "Largeur de la grille rectangulaire:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Définit de quelle distance sont séparées les lignes verticales de la grille rectangulaire"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Hauteur de la grille rectangulaire:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Définit de quelle distance sont séparées les lignes horizontales de la grille rectangulaire"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Largeur des cellules isométriques:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Définit la largeur des axes des cellules isométriques"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Hauteur des cellules isométriques:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Définit la hauteur des axes des cellules isométriques"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Décalage x de la grille:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Définit le décalage x depuis l'origine du canevas (en haut à gauche de l'image)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Décalage y de la grille:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Définit le décalage y depuis l'origine du canevas (en haut à gauche de l'image)"
 
 msgid "Draw over Tile Mode:"
 msgstr ""
