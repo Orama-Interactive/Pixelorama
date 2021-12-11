@@ -513,6 +513,6 @@ func _exit_tree() -> void:
 
 	var i := 0
 	for project in Global.projects:
-		project.undo_redo.free()
+		project.remove()
 		OpenSave.remove_backup(i)
 		i += 1
