@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-12-11 17:44\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -187,10 +187,10 @@ msgid "Auto"
 msgstr "Automatique"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "En largeur"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "En hauteur"
 
 msgid "Mirror View"
 msgstr "Vue Miroir"
@@ -241,13 +241,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nouvel onglet)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Grille de sprite (nouvelle couche)"
 
 msgid "New frame"
 msgstr "Nouvelle frame"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Remplacer la frame"
 
 msgid "New layer"
 msgstr "Nouveau calque"
@@ -268,13 +268,13 @@ msgid "Vertical frames:"
 msgstr "Frames verticaux :"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Frame de début:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "À la frame:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "À la couche:"
 
 msgid "Brush type:"
 msgstr "Type de pinceau :"
@@ -435,7 +435,7 @@ msgid "Canvas"
 msgstr "Canevas"
 
 msgid "Selection"
-msgstr ""
+msgstr "Sélection"
 
 msgid "Shortcuts"
 msgstr "Raccourcis"
@@ -483,7 +483,7 @@ msgid "Display Scale"
 msgstr "Échelle d'affichage"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Assombrir l'arrière-plan derrière une boite de dialogue"
 
 msgid "Dark"
 msgstr "Sombre"
@@ -504,28 +504,28 @@ msgid "Purple"
 msgstr "Violet"
 
 msgid "Theme"
-msgstr ""
+msgstr "Thème"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Couleur de l'icône depuis:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Couleur de l'icône:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Taille des outils:"
 
 msgid "Small"
-msgstr ""
+msgstr "Petit"
 
 msgid "Big"
-msgstr ""
+msgstr "Grand"
 
 msgid "Only affect selection"
 msgstr "Affecter uniquement la sélection"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Cellule sélectionnée"
 
 msgid "Current cel"
 msgstr "Cellule actuelle"
@@ -624,7 +624,7 @@ msgid "Issue Tracker"
 msgstr "Suivi des problèmes"
 
 msgid "Open Logs Folder"
-msgstr ""
+msgstr "Ouvrir le dossier des journaux système"
 
 msgid "Changelog"
 msgstr "Journal des modifications"
@@ -663,7 +663,7 @@ msgid "Translators"
 msgstr "Traducteurs"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Licences"
 
 msgid "English"
 msgstr "Anglais"
@@ -681,7 +681,7 @@ msgid "Polish"
 msgstr "Polonais"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugais"
 
 msgid "Brazilian Portuguese"
 msgstr "Portugais du Brésil"
@@ -723,7 +723,7 @@ msgid "Turkish"
 msgstr "Turc"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Norvégien Bokmål"
 
 msgid "Korean"
 msgstr "Coréen"
@@ -738,7 +738,7 @@ msgid "Japanese"
 msgstr "Japonais"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrainien"
 
 msgid "Development Team"
 msgstr "Équipe de développement"
@@ -788,38 +788,53 @@ msgstr "Quitter sans enregistrer"
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Selection rectangulaire\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Sélection elliptique\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Polygonal Selection\n"
 "Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Sélection polygonale\n"
+"Double-cliquer pour fermer le tracer\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Sélectionner par couleur\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Magic Wand\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Baguette magique\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Lasso / Free Select Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Lasso / Outil de sélection à main levée\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Déplacer\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
@@ -872,7 +887,9 @@ msgstr "Seau de remplissage\n\n"
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Outil d'ombrage\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
@@ -1086,13 +1103,13 @@ msgstr "Seul le préréglage personnalisé peut être modifié"
 msgid "Set application FPS limit:"
 msgstr "Définir la limite FPS de l'application :"
 
-msgid "Limit FPS to the idle FPS when app loses focus"
+msgid "Pause application when it loses focus"
 msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Définit la limite d'images par seconde de l'application. Plus le nombre est bas, plus l'utilisation du processeur est faible, mais l'application devient plus lente, saccadée et non réactive. 0 signifie qu'il n'y a pas de limite."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
 msgid "Brush:"
@@ -1826,11 +1843,5 @@ msgid "Reducing palette size will reset positions of colors. Colors that don't f
 msgstr ""
 
 msgid "Position:"
-msgstr ""
-
-msgid "Set idle FPS:"
-msgstr ""
-
-msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
 msgstr ""
 
