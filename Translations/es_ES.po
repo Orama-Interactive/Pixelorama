@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-12-02 11:33\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1118,14 +1118,14 @@ msgstr "Sólo se puede modificar el ajuste preestablecido"
 msgid "Set application FPS limit:"
 msgstr "Establecer el límite de FPS de la aplicación:"
 
-msgid "Limit FPS to the idle FPS when app loses focus"
-msgstr "Limitar los FPS a los de reposo cuando la aplicación pierde el foco"
+msgid "Pause application when it loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Establece el límite de fotogramas por segundo de la aplicación. Cuanto menor sea el número, menor será el uso de la CPU, pero la aplicación se vuelve más lenta, entrecortada y sin respuesta. 0 significa que no hay límite."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Si está activado, cuando la ventana de la aplicación pierde el foco, el límite de FPS de la aplicación se establece a los FPS en reposo. Esto ayuda a reducir el uso de la CPU cuando está inactivo. El límite de FPS se restablece cuando el ratón entra en la ventana de la aplicación."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -1860,10 +1860,4 @@ msgstr "Reducir el tamaño de la paleta restablecerá las posiciones de colores.
 
 msgid "Position:"
 msgstr "Posición:"
-
-msgid "Set idle FPS:"
-msgstr "Establecer FPS en reposo:"
-
-msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
-msgstr "Establece cuántos FPS utiliza Pixelorama cuando no tiene el foco. Cuanto menos sea, mejor será el rendimiento."
 
