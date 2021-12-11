@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-12-11 19:10\n"
+"PO-Revision-Date: 2021-12-11 19:25\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1125,7 +1125,7 @@ msgid "Sets the limit of the application's frames per second. The lower the numb
 msgstr "Ορίζει το όριο των καρέ της εφαρμογής ανά δευτερόλεπτο. Όσο μικρότερος είναι ο αριθμός, τόσο χαμηλότερη είναι η χρήση της CPU, αλλά η εφαρμογή γίνεται πιο αργή, ασταθής και λιγότερο ανταποκρινόμενη. 0 σημαίνει ότι δεν υπάρχει όριο."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr ""
+msgstr "Αν είναι ενεργοποιημένο, όταν το παράθυρο της εφαρμογής χάνει την εστίαση του, γίνεται παύση της εφαρμογής. Αυτό βοηθά στη μείωση της χρήσης του επεξεργαστή (CPU) όταν βρίσκεται σε αδράνεια. Η εφαρμογή συνεχίζεται όταν το ποντίκι εισέρχεται στο παράθυρο της."
 
 msgid "Brush:"
 msgstr "Πινέλο:"
