@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2021-12-11 18:05\n"
+"PO-Revision-Date: 2021-12-11 20:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1118,7 +1118,7 @@ msgid "Set application FPS limit:"
 msgstr "FPS Limit festlegen:"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Anwendung pausieren, wenn der Fokus verloren geht"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Legt die Grenze der Frames pro Sekunde fest. Je niedriger die Anzahl, desto niedriger die CPU-Auslastung, aber die Anwendung wird langsamer und reagier langsamer. 0 bedeutet, dass es keine Grenze gibt."
