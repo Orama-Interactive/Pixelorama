@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-12-02 11:49\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1118,14 +1118,14 @@ msgstr "Doar presetarea personalizată poate fi modificată"
 msgid "Set application FPS limit:"
 msgstr "Setare limită de cadre pe secundă pentru aplicație:"
 
-msgid "Limit FPS to the idle FPS when app loses focus"
-msgstr "Limitare cadre pe secunde la CPS inactiv când aplicația pierde focalizarea"
+msgid "Pause application when it loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Setează limita de cadre pe secundă a aplicației. Cu cât numărul este mai mic, cu atât utilizarea procesorului este mai redusă, însă aplicația devine mai lentă, variabilă și nereceptivă. 0 înseamnă că nu există limite."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Dacă această opțiune este activată, limita de cadre pe secundă a aplicației este setată la CPS inactiv în momentul în care fereastra aplicației pierde focalizarea. Acest lucru ajută la reducerea utilizării procesorului pe durata perioadei de inactivitate. Limita CPS se resetează când mausul intră în fereastra aplicației."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Pensulă:"
@@ -1860,10 +1860,4 @@ msgstr "Reducerea dimensiunii paletei va reseta pozițiile culorilor. Culorile c
 
 msgid "Position:"
 msgstr "Poziție:"
-
-msgid "Set idle FPS:"
-msgstr "Setare CPS inactiv:"
-
-msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
-msgstr "Setează câte cadre pe secunde folosește Pixelorama atunci când nu focalizează. Cu cât valoarea este mai mică, cu atât performanța este mai mare."
 
