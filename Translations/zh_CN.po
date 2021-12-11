@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-12-03 01:11\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1118,14 +1118,14 @@ msgstr "仅修改自定义预设"
 msgid "Set application FPS limit:"
 msgstr "设置应用程序 FPS 限制："
 
-msgid "Limit FPS to the idle FPS when app loses focus"
-msgstr "当应用失去焦点时将 FPS 限制为空闲 FPS"
+msgid "Pause application when it loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "设置应用程序帧每秒的限制。 数字越低，CPU 使用率越低，但应用程序变慢，限制且反应不灵。0 表示没有限制。"
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to the idle FPS. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "如果启用此功能，当应用程序的窗口失去焦点时，应用程序的 FPS 限制将设置为空闲 FPS。 这有助于在空闲时降低 CPU 使用率。 当鼠标进入应用程序的窗口时，正在重置 FPS 限制。"
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "画笔:"
@@ -1860,10 +1860,4 @@ msgstr "减小调色板尺寸将重置颜色的位置。不适合新调色板尺
 
 msgid "Position:"
 msgstr "位置："
-
-msgid "Set idle FPS:"
-msgstr "设置空闲 FPS："
-
-msgid "Sets how many FPS Pixelorama uses when out of focus. The less the better the performance."
-msgstr "设置失焦时 Pixelorama 使用的 FPS 数。 越少性能越好。"
 
