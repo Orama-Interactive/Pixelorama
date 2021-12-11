@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-12-11 18:05\n"
+"PO-Revision-Date: 2021-12-11 22:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1119,7 +1119,7 @@ msgid "Set application FPS limit:"
 msgstr "Ограничение кадров в секунду:"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Приостановить приложение при потере фокуса"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Устанавливает лимит на количество кадров в секунду для программы. Чем ниже это число, тем меньше используется процессор, но приложение становится медленнее, дольше реагирует на действия, а движения будут менее плавными. 0 значит отсутствие лимита."
