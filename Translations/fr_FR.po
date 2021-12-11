@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-12-11 18:32\n"
+"PO-Revision-Date: 2021-12-11 18:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1158,16 +1158,16 @@ msgid "Pixel Perfect"
 msgstr "Pixel Parfait"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Remplir à l’intérieur"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Rend les lignes lisses en supprimant les pixels supplémentaires sur les bords"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Forme de remplissage"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Remplit la forme avec de la couleur au lieu de ne dessiner que le contour"
 
 msgid "Brush color from"
 msgstr "Couleur de la brosse depuis"
@@ -1354,16 +1354,16 @@ msgid "Blue-Red Mode"
 msgstr "Mode rouge-bleu"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "Afficher les frames précédentes:"
 
 msgid "Show future frames:"
-msgstr ""
+msgstr "Afficher les frames suivantes:"
 
 msgid "Above canvas"
-msgstr ""
+msgstr "Au dessus du canevas"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "En dessous du canevas"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
 msgstr ""
