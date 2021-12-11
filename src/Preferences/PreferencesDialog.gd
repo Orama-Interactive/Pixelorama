@@ -147,12 +147,11 @@ var preferences = [
 	],
 	["fps_limit", "Performance/PerformanceContainer/SetFPSLimit", "value", Global.fps_limit],
 	[
-		"fps_limit_focus",
-		"Performance/PerformanceContainer/EnableLimitFPSFocus",
+		"pause_when_unfocused",
+		"Performance/PerformanceContainer/PauseAppFocus",
 		"pressed",
-		Global.fps_limit_focus
+		Global.pause_when_unfocused
 	],
-	["idle_fps", "Performance/PerformanceContainer/IdleFPS", "value", Global.idle_fps]
 ]
 
 var selected_item := 0
@@ -165,9 +164,6 @@ onready var autosave_interval: SpinBox = right_side.get_node(
 )
 onready var shrink_label: Label = right_side.get_node("Interface/ShrinkContainer/ShrinkLabel")
 onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
-onready var idle_fps_spinbox: SpinBox = right_side.get_node(
-	"Performance/PerformanceContainer/IdleFPS"
-)
 
 
 func _ready() -> void:
@@ -330,9 +326,6 @@ func preference_update(prop: String) -> void:
 
 	if prop in ["fps_limit"]:
 		Engine.set_target_fps(Global.fps_limit)
-
-	if prop in ["fps_limit_focus"]:
-		idle_fps_spinbox.editable = !idle_fps_spinbox.editable
 
 	if (
 		prop

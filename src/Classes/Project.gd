@@ -23,8 +23,8 @@ var fps := 6.0
 
 var x_symmetry_point
 var y_symmetry_point
-var x_symmetry_axis: SymmetryGuide
-var y_symmetry_axis: SymmetryGuide
+var x_symmetry_axis := SymmetryGuide.new()
+var y_symmetry_axis := SymmetryGuide.new()
 
 var selection_bitmap := BitMap.new()
 # This is useful for when the selection is outside of the canvas boundaries,
@@ -64,21 +64,17 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	x_symmetry_point = size.x / 2
 	y_symmetry_point = size.y / 2
 
-	if !x_symmetry_axis:
-		x_symmetry_axis = SymmetryGuide.new()
-		x_symmetry_axis.type = x_symmetry_axis.Types.HORIZONTAL
-		x_symmetry_axis.project = self
-		x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point))
-		x_symmetry_axis.add_point(Vector2(19999, y_symmetry_point))
-		Global.canvas.add_child(x_symmetry_axis)
+	x_symmetry_axis.type = x_symmetry_axis.Types.HORIZONTAL
+	x_symmetry_axis.project = self
+	x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point))
+	x_symmetry_axis.add_point(Vector2(19999, y_symmetry_point))
+	Global.canvas.add_child(x_symmetry_axis)
 
-	if !y_symmetry_axis:
-		y_symmetry_axis = SymmetryGuide.new()
-		y_symmetry_axis.type = y_symmetry_axis.Types.VERTICAL
-		y_symmetry_axis.project = self
-		y_symmetry_axis.add_point(Vector2(x_symmetry_point, -19999))
-		y_symmetry_axis.add_point(Vector2(x_symmetry_point, 19999))
-		Global.canvas.add_child(y_symmetry_axis)
+	y_symmetry_axis.type = y_symmetry_axis.Types.VERTICAL
+	y_symmetry_axis.project = self
+	y_symmetry_axis.add_point(Vector2(x_symmetry_point, -19999))
+	y_symmetry_axis.add_point(Vector2(x_symmetry_point, 19999))
+	Global.canvas.add_child(y_symmetry_axis)
 
 	if OS.get_name() == "HTML5":
 		directory_path = "user://"
@@ -86,6 +82,15 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 		directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
+
+
+func remove() -> void:
+	for layer in layers:
+		layer.frame_container.queue_free()
+	undo_redo.free()
+	for guide in guides:
+		guide.queue_free()
+	Global.projects.erase(self)
 
 
 func commit_undo() -> void:

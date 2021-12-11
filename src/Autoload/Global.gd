@@ -70,9 +70,8 @@ var selection_animated_borders := true
 var selection_border_color_1 := Color.white
 var selection_border_color_2 := Color.black
 
-var fps_limit_focus := true
+var pause_when_unfocused := true
 var fps_limit := 0
-var idle_fps := 1
 
 var autosave_interval := 1.0
 var enable_autosave := true
