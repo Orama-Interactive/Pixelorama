@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-12-12 15:31\n"
+"PO-Revision-Date: 2021-12-12 17:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1125,7 +1125,7 @@ msgstr "Nastaví limit snímků za vteřinu aplikace. Čím nižší číslo, t�
 "ale může dojít ke snížení odezvy a zasekávání aplikace. 0 značí žádný limit."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr ""
+msgstr "Pokud je tato možnost vybrána, tak je aplikace pozastavena, když je okno aplikace v pozadí. Dojde tak ke snížení využití procesoru při nečinnosti. Aplikace se automaticky obnoví, když kurzor myši vstoupí zpět do okna aplikace."
 
 msgid "Brush:"
 msgstr "Štětec:"
@@ -1354,10 +1354,10 @@ msgid "Blue-Red Mode"
 msgstr "Modro-červený režim"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "Zobrazit předchozí snímky:"
 
 msgid "Show future frames:"
-msgstr ""
+msgstr "Zobrazit následující snímky:"
 
 msgid "Above canvas"
 msgstr "Nad plátnem"
@@ -1366,7 +1366,7 @@ msgid "Below canvas"
 msgstr "Pod plátnem"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Pokud chcete, aby byla vrstva ignorována v onion skinningu, tak přidejte \"_io\" koncovku do jména vrstvy."
 
 msgid "Add a new frame"
 msgstr "Přidat nový snímek"
