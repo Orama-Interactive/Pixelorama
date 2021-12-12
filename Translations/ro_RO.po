@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-12-11 18:05\n"
+"PO-Revision-Date: 2021-12-12 09:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1119,7 +1119,7 @@ msgid "Set application FPS limit:"
 msgstr "Setare limită de cadre pe secundă pentru aplicație:"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Întrerupe aplicația atunci când pierde focalizarea"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Setează limita de cadre pe secundă a aplicației. Cu cât numărul este mai mic, cu atât utilizarea procesorului este mai redusă, însă aplicația devine mai lentă, variabilă și nereceptivă. 0 înseamnă că nu există limite."
