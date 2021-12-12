@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "اسم الملف:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "اسم المشروع:"
 
 msgid "Image Size"
 msgstr "حجم الصورة"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "حجم الإطار"
 
 msgid "Size:"
-msgstr ""
+msgstr "الحجم:"
 
 msgid "Width:"
 msgstr "العرض:"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "تعديل"
 
 msgid "Select"
-msgstr ""
+msgstr "تحديد"
 
 msgid "View"
 msgstr "عرض"
@@ -133,7 +133,7 @@ msgid "Delete"
 msgstr "حذف"
 
 msgid "New Brush"
-msgstr ""
+msgstr "فرشاة جديدة"
 
 msgid "Scale Image"
 msgstr "تغيير مقياس الصورة"
@@ -142,7 +142,7 @@ msgid "Pixels"
 msgstr ""
 
 msgid "Percentage"
-msgstr ""
+msgstr "نسبة"
 
 msgid "Crop Image"
 msgstr "تقطيع الصورة"
@@ -157,10 +157,10 @@ msgid "Rotate Image"
 msgstr "تدوير الصورة"
 
 msgid "Clear"
-msgstr ""
+msgstr "مسح"
 
 msgid "Invert"
-msgstr ""
+msgstr "عكس"
 
 msgid "Flip"
 msgstr "لف"
@@ -177,17 +177,17 @@ msgstr "خيارات"
 msgid "Tile Mode"
 msgstr "وضع البلاط"
 
-msgid "Window Transparency"
+msgid "Window Opacity"
 msgstr ""
 
 msgid "Panel Layout"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
+msgstr "تلقائي"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "شاشة عريضة"
 
 msgid "Tallscreen"
 msgstr ""
@@ -199,7 +199,7 @@ msgid "Show Grid"
 msgstr "إظهار الشبكة"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "إظهار شبكة بكسل"
 
 msgid "Show Rulers"
 msgstr "إظهار المسطرة"
@@ -622,6 +622,9 @@ msgstr "التعليمات عبر الانترنت"
 
 msgid "Issue Tracker"
 msgstr "متعقب المشاكل"
+
+msgid "Open Logs Folder"
+msgstr ""
 
 msgid "Changelog"
 msgstr "سِجل التغييرات"
@@ -1081,13 +1084,13 @@ msgstr ""
 msgid "Set application FPS limit:"
 msgstr ""
 
-msgid "Limit FPS to 1 when app loses focus"
+msgid "Pause application when it loses focus"
 msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr ""
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
 msgid "Brush:"
@@ -1308,6 +1311,21 @@ msgstr ""
 msgid "Blue-Red Mode"
 msgstr ""
 
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
+
 msgid "Add a new frame"
 msgstr ""
 
@@ -1402,10 +1420,10 @@ msgstr ""
 msgid "Redo: Draw"
 msgstr ""
 
-msgid "Undo: Rectangle Select"
+msgid "Undo: Select"
 msgstr ""
 
-msgid "Redo: Rectangle Select"
+msgid "Redo: Select"
 msgstr ""
 
 msgid "Undo: Scale"
@@ -1720,8 +1738,8 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
 msgstr ""
 
 msgid "Backup reloaded"

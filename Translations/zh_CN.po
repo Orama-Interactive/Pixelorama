@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-09-06 00:37\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "确定"
@@ -177,8 +177,8 @@ msgstr "首选项"
 msgid "Tile Mode"
 msgstr "平铺模式"
 
-msgid "Window Transparency"
-msgstr "窗口透明"
+msgid "Window Opacity"
+msgstr "窗口不透明度"
 
 msgid "Panel Layout"
 msgstr "面板布局"
@@ -622,6 +622,9 @@ msgstr "在线文档"
 
 msgid "Issue Tracker"
 msgstr "问题追踪器"
+
+msgid "Open Logs Folder"
+msgstr "打开日志文件夹"
 
 msgid "Changelog"
 msgstr "更新日志"
@@ -1115,14 +1118,14 @@ msgstr "仅修改自定义预设"
 msgid "Set application FPS limit:"
 msgstr "设置应用程序 FPS 限制："
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "当应用程序失去焦点时 FPS 限制为 1。"
+msgid "Pause application when it loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "设置应用程序帧每秒的限制。 数字越低，CPU 使用率越低，但应用程序变慢，限制且反应不灵。0 表示没有限制。"
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "如果启用此选项，则当应用程序的窗口失去焦点时，应用程序的 FPS 限制将设置为 1。这有助于降低空闲状态下的 CPU 使用率。当鼠标进入应用程序窗口时将重置 FPS 限制。"
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "画笔:"
@@ -1350,6 +1353,21 @@ msgstr "如果选中，动画仅在具有相同标签的帧上播放。\n"
 msgid "Blue-Red Mode"
 msgstr "蓝红模式"
 
+msgid "Show past frames:"
+msgstr "显示过去的帧："
+
+msgid "Show future frames:"
+msgstr "显示未来的帧："
+
+msgid "Above canvas"
+msgstr "画布上方"
+
+msgid "Below canvas"
+msgstr "画布下方"
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr "如果您希望图层忽略洋葱皮，只需在其名称中添加“_io”后缀即可。"
+
 msgid "Add a new frame"
 msgstr "添加一个新的帧"
 
@@ -1445,11 +1463,11 @@ msgstr "撤消: 绘图"
 msgid "Redo: Draw"
 msgstr "重做: 绘图"
 
-msgid "Undo: Rectangle Select"
-msgstr "撤消: 矩形选择"
+msgid "Undo: Select"
+msgstr "撤销：选择"
 
-msgid "Redo: Rectangle Select"
-msgstr "重做: 矩形选择"
+msgid "Redo: Select"
+msgstr "重做：选择"
 
 msgid "Undo: Scale"
 msgstr "撤消: 缩放"
@@ -1763,9 +1781,10 @@ msgstr "关闭"
 msgid "Delete"
 msgstr "删除"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
-msgstr "找到了 %s 的自动备份。你想要重新加载吗？"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
+msgstr "从崩溃的会话中找到了自动保存的项目。\n"
+"您要恢复数据吗？"
 
 msgid "Backup reloaded"
 msgstr "重新加载备份"

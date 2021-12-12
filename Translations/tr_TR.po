@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Dosya Adı:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Proje Adı:"
 
 msgid "Image Size"
 msgstr "Resim Boyutu"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Çerçeve Boyutu"
 
 msgid "Size:"
-msgstr ""
+msgstr "Boyut:"
 
 msgid "Width:"
 msgstr "Genişlik:"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Düzenle"
 
 msgid "Select"
-msgstr ""
+msgstr "Seçiniz"
 
 msgid "View"
 msgstr "Görüntü"
@@ -133,16 +133,16 @@ msgid "Delete"
 msgstr "Sil"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Yeni Fırça"
 
 msgid "Scale Image"
 msgstr "Resmi Ölçüle"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pikseller"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Yüzde"
 
 msgid "Crop Image"
 msgstr "Resmi Kes"
@@ -157,10 +157,10 @@ msgid "Rotate Image"
 msgstr "Resmi Döndür"
 
 msgid "Clear"
-msgstr ""
+msgstr "Temizle"
 
 msgid "Invert"
-msgstr ""
+msgstr "Ters Çevir"
 
 msgid "Flip"
 msgstr "Döndür"
@@ -177,20 +177,20 @@ msgstr "Tercihler"
 msgid "Tile Mode"
 msgstr "Karo Modu"
 
-msgid "Window Transparency"
-msgstr ""
+msgid "Window Opacity"
+msgstr "Pencere Şeffaflığı"
 
 msgid "Panel Layout"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
+msgstr "Otomatik"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Geniş ekran"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Dikey"
 
 msgid "Mirror View"
 msgstr "Yansima"
@@ -435,7 +435,7 @@ msgid "Canvas"
 msgstr "Tuval"
 
 msgid "Selection"
-msgstr ""
+msgstr "Seçim"
 
 msgid "Shortcuts"
 msgstr "Kısayollar"
@@ -444,7 +444,7 @@ msgid "Backup"
 msgstr "Yedekleme"
 
 msgid "Performance"
-msgstr ""
+msgstr "Performans"
 
 msgid "Indicators"
 msgstr "Göstergeler"
@@ -504,22 +504,22 @@ msgid "Purple"
 msgstr "Mor"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Simge rengi:"
 
 msgid "Tool button size:"
 msgstr ""
 
 msgid "Small"
-msgstr ""
+msgstr "Küçük"
 
 msgid "Big"
-msgstr ""
+msgstr "Büyük"
 
 msgid "Only affect selection"
 msgstr "Sadece seçilene uygula"
@@ -623,6 +623,9 @@ msgstr "Çevrimiçi Dökümanlar"
 msgid "Issue Tracker"
 msgstr "Sorun İzleyici"
 
+msgid "Open Logs Folder"
+msgstr "Kayıt Klasörünü Aç"
+
 msgid "Changelog"
 msgstr "Değişiklikler"
 
@@ -636,7 +639,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive Tarafından Geliştirilmiştir"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-Orama Interactive ve destekçileri tarafından"
 
 msgid "Website"
 msgstr "İnternet sitesi"
@@ -660,7 +663,7 @@ msgid "Translators"
 msgstr "Çevirmenler"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Lisanslar"
 
 msgid "English"
 msgstr "İngilizce"
@@ -678,7 +681,7 @@ msgid "Polish"
 msgstr "Lehçe"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portekizce"
 
 msgid "Brazilian Portuguese"
 msgstr "Brezilya Portekizcesi"
@@ -720,7 +723,7 @@ msgid "Turkish"
 msgstr "Türkçe"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Bokmal Norveççesi"
 
 msgid "Korean"
 msgstr "Korece"
@@ -735,7 +738,7 @@ msgid "Japanese"
 msgstr "Japonca"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukraynaca"
 
 msgid "Development Team"
 msgstr "Geliştirici Takımı"
@@ -785,12 +788,16 @@ msgstr "Kaydetmeden çık"
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Dikdörtgensel Seçim\n\n"
+"Sol tık için %s\n"
+"Sağ tık için %s"
 
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Eliptik Seçim\n\n"
+"Sol tık için %s\n"
+"Sağ tık için %s"
 
 msgid "Polygonal Selection\n"
 "Double-click to connect the last point to the starting point\n\n"
@@ -893,10 +900,10 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Dikdörtgen"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Elips"
 
 msgid "Choose a color for the left tool"
 msgstr "Sol araç için bir renk seç"
@@ -1080,13 +1087,13 @@ msgstr "Sadece özel yapılmış seçenekler değiştirilebilir"
 msgid "Set application FPS limit:"
 msgstr ""
 
-msgid "Limit FPS to 1 when app loses focus"
+msgid "Pause application when it loses focus"
 msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr ""
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
 msgid "Brush:"
@@ -1311,6 +1318,21 @@ msgstr "Eğer seçili ise animasyon sadece aynı etikete sahip karelerde oynatı
 msgid "Blue-Red Mode"
 msgstr "Mavi-Kırmızı Modu"
 
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
+
 msgid "Add a new frame"
 msgstr "Yeni bir kare ekle"
 
@@ -1406,11 +1428,11 @@ msgstr "Geri Al: Çizim"
 msgid "Redo: Draw"
 msgstr "İleri: Çizim"
 
-msgid "Undo: Rectangle Select"
-msgstr "Geri al: Dikdörtgen Seçim"
+msgid "Undo: Select"
+msgstr ""
 
-msgid "Redo: Rectangle Select"
-msgstr "Yeniden Uygula: Dikdörtgen Seçim"
+msgid "Redo: Select"
+msgstr ""
 
 msgid "Undo: Scale"
 msgstr "Geri al: Ölçülendirme"
@@ -1724,9 +1746,9 @@ msgstr "Kapat"
 msgid "Delete"
 msgstr "Sil"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
-msgstr "%s için yedek bulundu. Geri yüklemek ister misin?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
+msgstr ""
 
 msgid "Backup reloaded"
 msgstr "Yedek yüklendi"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-12-11 18:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Nom du fichier :"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Nom du projet:"
 
 msgid "Image Size"
 msgstr "Taille de l'image"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Taille de la frame"
 
 msgid "Size:"
-msgstr ""
+msgstr "Taille:"
 
 msgid "Width:"
 msgstr "Largeur :"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Édition"
 
 msgid "Select"
-msgstr ""
+msgstr "Sélectionner"
 
 msgid "View"
 msgstr "Affichage"
@@ -133,7 +133,7 @@ msgid "Delete"
 msgstr "Supprimer"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Nouveau pinceau"
 
 msgid "Scale Image"
 msgstr "Redimensionner l'image"
@@ -151,16 +151,16 @@ msgid "Resize Canvas"
 msgstr "Redimensionner le canevas"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Centrer l'image"
 
 msgid "Rotate Image"
 msgstr "Pivoter l'image"
 
 msgid "Clear"
-msgstr ""
+msgstr "Effacer"
 
 msgid "Invert"
-msgstr ""
+msgstr "Inverser"
 
 msgid "Flip"
 msgstr "Retourner"
@@ -177,20 +177,20 @@ msgstr "Préférences"
 msgid "Tile Mode"
 msgstr "Mode tuile"
 
-msgid "Window Transparency"
-msgstr "Transparence de fenêtre"
+msgid "Window Opacity"
+msgstr "Opacité de la fenêtre"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Disposition des sections"
 
 msgid "Auto"
-msgstr ""
+msgstr "Automatique"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "En largeur"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "En hauteur"
 
 msgid "Mirror View"
 msgstr "Vue Miroir"
@@ -241,13 +241,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Spritesheet (nouvel onglet)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Grille de sprite (nouvelle couche)"
 
 msgid "New frame"
 msgstr "Nouvelle frame"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Remplacer la frame"
 
 msgid "New layer"
 msgstr "Nouveau calque"
@@ -268,13 +268,13 @@ msgid "Vertical frames:"
 msgstr "Frames verticaux :"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Frame de début:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "À la frame:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "À la couche:"
 
 msgid "Brush type:"
 msgstr "Type de pinceau :"
@@ -435,7 +435,7 @@ msgid "Canvas"
 msgstr "Canevas"
 
 msgid "Selection"
-msgstr ""
+msgstr "Sélection"
 
 msgid "Shortcuts"
 msgstr "Raccourcis"
@@ -483,7 +483,7 @@ msgid "Display Scale"
 msgstr "Échelle d'affichage"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Assombrir l'arrière-plan derrière une boite de dialogue"
 
 msgid "Dark"
 msgstr "Sombre"
@@ -504,28 +504,28 @@ msgid "Purple"
 msgstr "Violet"
 
 msgid "Theme"
-msgstr ""
+msgstr "Thème"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Couleur de l'icône depuis:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Couleur de l'icône:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Taille des outils:"
 
 msgid "Small"
-msgstr ""
+msgstr "Petit"
 
 msgid "Big"
-msgstr ""
+msgstr "Grand"
 
 msgid "Only affect selection"
 msgstr "Affecter uniquement la sélection"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Cellule sélectionnée"
 
 msgid "Current cel"
 msgstr "Cellule actuelle"
@@ -623,6 +623,9 @@ msgstr "Documentation en ligne"
 msgid "Issue Tracker"
 msgstr "Suivi des problèmes"
 
+msgid "Open Logs Folder"
+msgstr "Ouvrir le dossier des journaux système"
+
 msgid "Changelog"
 msgstr "Journal des modifications"
 
@@ -660,7 +663,7 @@ msgid "Translators"
 msgstr "Traducteurs"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Licences"
 
 msgid "English"
 msgstr "Anglais"
@@ -678,7 +681,7 @@ msgid "Polish"
 msgstr "Polonais"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugais"
 
 msgid "Brazilian Portuguese"
 msgstr "Portugais du Brésil"
@@ -720,7 +723,7 @@ msgid "Turkish"
 msgstr "Turc"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Norvégien Bokmål"
 
 msgid "Korean"
 msgstr "Coréen"
@@ -735,7 +738,7 @@ msgid "Japanese"
 msgstr "Japonais"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrainien"
 
 msgid "Development Team"
 msgstr "Équipe de développement"
@@ -785,38 +788,53 @@ msgstr "Quitter sans enregistrer"
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Selection rectangulaire\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Sélection elliptique\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Polygonal Selection\n"
 "Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Sélection polygonale\n"
+"Double-cliquer pour fermer le tracer\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Sélectionner par couleur\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Magic Wand\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Baguette magique\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Lasso / Free Select Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Lasso / Outil de sélection à main levée\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Déplacer\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
@@ -869,7 +887,9 @@ msgstr "Seau de remplissage\n\n"
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Outil d'ombrage\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
@@ -877,7 +897,12 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Outil de ligne\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit\n\n"
+"Maintenir %s pour contraindre l'angle du trait\n"
+"Maintenir %s pour centrer le trait sur l'origine du clic\n"
+"Maintenir %s pour déplacer le début du trait"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -885,7 +910,12 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Outil rectangle\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit\n\n"
+"Maintenir %s pour contraindre le ratio à 1:1\n"
+"Maintenir %s pour centrer la forme sur l'origine du clic\n"
+"Maintenir %s pour déplacer la forme"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -893,13 +923,18 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Outil ellipse\n\n"
+"%s pour le clic gauche\n"
+"%s pour le clic droit\n\n"
+"Maintenir %s pour contraindre le ratio à 1:1\n"
+"Maintenir %s pour centrer la forme sur l'origine du clic\n"
+"Maintenir %s pour déplacer la forme"
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Rectangle"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Ellipse"
 
 msgid "Choose a color for the left tool"
 msgstr "Choisissez une couleur pour l'outil gauche"
@@ -973,46 +1008,46 @@ msgid "All"
 msgstr "Tous"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Largeur de la grille rectangulaire:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Définit de quelle distance sont séparées les lignes verticales de la grille rectangulaire"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Hauteur de la grille rectangulaire:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Définit de quelle distance sont séparées les lignes horizontales de la grille rectangulaire"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Largeur des cellules isométriques:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Définit la largeur des axes des cellules isométriques"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Hauteur des cellules isométriques:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Définit la hauteur des axes des cellules isométriques"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Décalage x de la grille:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Définit le décalage x depuis l'origine du canevas (en haut à gauche de l'image)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Décalage y de la grille:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Définit le décalage y depuis l'origine du canevas (en haut à gauche de l'image)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Afficher par dessus le mode tuile:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Si désactivé, la grille ne sera affichée que au dessus de l'image originale"
 
 msgid "Grid color:"
 msgstr "Couleur de la grille:"
@@ -1069,13 +1104,13 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Le damier transparent suit le niveau de zoom du canevas"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Bords de sélection animés"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Couleur du bord 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Couleur du bord 2:"
 
 msgid "Only custom preset can be modified"
 msgstr "Seul le préréglage personnalisé peut être modifié"
@@ -1083,14 +1118,14 @@ msgstr "Seul le préréglage personnalisé peut être modifié"
 msgid "Set application FPS limit:"
 msgstr "Définir la limite FPS de l'application :"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "Limiter le FPS à 1 lorsque l'application perd le focus"
+msgid "Pause application when it loses focus"
+msgstr "Suspend l'application quand elle perd le focus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Définit la limite d'images par seconde de l'application. Plus le nombre est bas, plus l'utilisation du processeur est faible, mais l'application devient plus lente, saccadée et non réactive. 0 signifie qu'il n'y a pas de limite."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Si cette option est activée, lorsque la fenêtre de l'application perd le focus, la limite FPS de l'application est définie à 1. Cela aide à réduire l'utilisation du processeur en cas d'inactivité. La limite FPS est réinitialisée lorsque la souris entre dans la fenêtre de l'application."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr "Si c'est activé, quand l'application perd le focus, elle est suspendue. Cela aide à réduire l'usage du processeur en période d'inactivité. Elle est ensuite actualisée quand la souris entre dans la fenêtre."
 
 msgid "Brush:"
 msgstr "Brosse :"
@@ -1123,16 +1158,16 @@ msgid "Pixel Perfect"
 msgstr "Pixel Parfait"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Remplir à l’intérieur"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "Rend les lignes lisses en supprimant les pixels supplémentaires sur les bords"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Forme de remplissage"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Remplit la forme avec de la couleur au lieu de ne dessiner que le contour"
 
 msgid "Brush color from"
 msgstr "Couleur de la brosse depuis"
@@ -1318,6 +1353,21 @@ msgstr "Si sélectionné, l'animation ne joue que sur les frames partageant le m
 msgid "Blue-Red Mode"
 msgstr "Mode rouge-bleu"
 
+msgid "Show past frames:"
+msgstr "Afficher les frames précédentes:"
+
+msgid "Show future frames:"
+msgstr "Afficher les frames suivantes:"
+
+msgid "Above canvas"
+msgstr "Au dessus du canevas"
+
+msgid "Below canvas"
+msgstr "En dessous du canevas"
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
+
 msgid "Add a new frame"
 msgstr "Ajouter une frame"
 
@@ -1413,11 +1463,11 @@ msgstr "Annuler : Dessin"
 msgid "Redo: Draw"
 msgstr "Refaire : Dessin"
 
-msgid "Undo: Rectangle Select"
-msgstr "Annuler : Sélection par rectangle"
+msgid "Undo: Select"
+msgstr ""
 
-msgid "Redo: Rectangle Select"
-msgstr "Refaire : Sélection par rectangle"
+msgid "Redo: Select"
+msgstr ""
 
 msgid "Undo: Scale"
 msgstr "Annuler : Redimensionner l'image"
@@ -1731,10 +1781,9 @@ msgstr "Fermer"
 msgid "Delete"
 msgstr "Supprimer"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
-msgstr "La sauvegarde automatique pour %s a été trouvée.\n"
-"Voulez-vous la recharger ?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
+msgstr ""
 
 msgid "Backup reloaded"
 msgstr "Sauvegarde rechargée"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Nom del fitxer:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Nom del Projecte:"
 
 msgid "Image Size"
 msgstr "Mida de l'imatge"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Mida del marc"
 
 msgid "Size:"
-msgstr ""
+msgstr "Mida:"
 
 msgid "Width:"
 msgstr "Amplada:"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Editar"
 
 msgid "Select"
-msgstr ""
+msgstr "Selecciona"
 
 msgid "View"
 msgstr "Veure"
@@ -124,7 +124,7 @@ msgid "Copy"
 msgstr "Copiar"
 
 msgid "Cut"
-msgstr ""
+msgstr "Retalla"
 
 msgid "Paste"
 msgstr "Enganxar"
@@ -133,16 +133,16 @@ msgid "Delete"
 msgstr "Eliminar"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Nou pinzell"
 
 msgid "Scale Image"
 msgstr "Escalar l'imatge"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Píxels"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Percentatge"
 
 msgid "Crop Image"
 msgstr "Retallar l'imatge"
@@ -151,19 +151,19 @@ msgid "Resize Canvas"
 msgstr "Redimensionar llenç"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Centrar Imatge"
 
 msgid "Rotate Image"
 msgstr "Rotar l'imatge"
 
 msgid "Clear"
-msgstr ""
+msgstr "Neteja"
 
 msgid "Invert"
-msgstr ""
+msgstr "Invertir"
 
 msgid "Flip"
-msgstr ""
+msgstr "Girar"
 
 msgid "Flip Horizontal"
 msgstr "Voltejar horitzontalment"
@@ -177,29 +177,29 @@ msgstr "Preferències"
 msgid "Tile Mode"
 msgstr "Mode Tile"
 
-msgid "Window Transparency"
+msgid "Window Opacity"
 msgstr ""
 
 msgid "Panel Layout"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Pantalla horitzontal"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Pantalla Vertical"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Vista Mirall"
 
 msgid "Show Grid"
 msgstr "Mostrar la quadrícula"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Mostrar quadrícula de Píxels"
 
 msgid "Show Rulers"
 msgstr "Mostrar regles"
@@ -232,7 +232,7 @@ msgid "Import as:"
 msgstr "Importar com a:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Darrers projectes"
 
 msgid "New tab"
 msgstr "Pestanya nova"
@@ -537,7 +537,7 @@ msgid "All frames"
 msgstr ""
 
 msgid "All projects"
-msgstr ""
+msgstr "Totes els projectes"
 
 msgid "Invert Colors"
 msgstr "Invertir colors"
@@ -623,6 +623,9 @@ msgstr "Documentació en línia"
 msgid "Issue Tracker"
 msgstr "Rastrejador d'incidències"
 
+msgid "Open Logs Folder"
+msgstr ""
+
 msgid "Changelog"
 msgstr "Registre de canvis"
 
@@ -702,7 +705,7 @@ msgid "Spanish"
 msgstr "Espanyol (Castellá)"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Català"
 
 msgid "Esperanto"
 msgstr "Esperanto"
@@ -720,22 +723,22 @@ msgid "Turkish"
 msgstr "Turc"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Noruec Bokmål"
 
 msgid "Korean"
 msgstr "Coreà"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Hongarès"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Romanès"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japonès"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ucraïnès"
 
 msgid "Development Team"
 msgstr "Equip desenvolupador"
@@ -750,7 +753,7 @@ msgid "GitHub Contributors"
 msgstr "Col·laboradors de Github"
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Fet per: %s"
 
 msgid "untitled"
 msgstr "sense títol"
@@ -785,43 +788,60 @@ msgstr "Sortir sense desar"
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Selecció Rectangular\n\n"
+"%s pel click esquerre del ratolí\n"
+"%s pel click dret del ratolí"
 
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Selecció El·líptica\n\n"
+"%s pel click esquerre del ratolí\n"
+"%s pel click dret del ratolí"
 
 msgid "Polygonal Selection\n"
 "Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Selecció Poligonal\n"
+"Doble Click per connectar l'últim punt amb el primer\n\n"
+"%s pel click esquerre del ratolí\n"
+"%s pel click dret del ratolí"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Selecció per Color\n\n"
+"%s pel click esquerre del ratolí\n"
+"%s pel click dret del ratolí"
 
 msgid "Magic Wand\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Vareta Màgica\n\n"
+"%s pel click esquerre del ratolí\n"
+"%s pel click dret del ratolí"
 
 msgid "Lasso / Free Select Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Llaç / Eina de Selecció Lliure\n\n"
+"%s pel click esquerre del ratolí\n"
+"%s pel click dret del ratolí"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Moure\n\n"
+"%s pel click esquerre del ratolí\n"
+"%s pel click dret del ratolí"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Zoom\n\n"
+"%s pel click esquerre del ratolí\n"
+"%s pel click dret del ratolí"
 
 msgid "Pan\n\n"
 "%s for left mouse button\n"
@@ -892,10 +912,10 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Rectangle"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "El·lipse"
 
 msgid "Choose a color for the left tool"
 msgstr "Triar un color per l'eina esquerra"
@@ -959,7 +979,7 @@ msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Rectangular"
 
 msgid "Isometric"
 msgstr ""
@@ -1078,13 +1098,13 @@ msgstr ""
 msgid "Set application FPS limit:"
 msgstr ""
 
-msgid "Limit FPS to 1 when app loses focus"
+msgid "Pause application when it loses focus"
 msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr ""
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
 msgid "Brush:"
@@ -1310,6 +1330,21 @@ msgstr ""
 msgid "Blue-Red Mode"
 msgstr "Mode Blau-Vermell"
 
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
+
 msgid "Add a new frame"
 msgstr "Afegir un nou fotograma"
 
@@ -1404,11 +1439,11 @@ msgstr "Desfer: Dibuixar"
 msgid "Redo: Draw"
 msgstr "Refer: Dibuixar"
 
-msgid "Undo: Rectangle Select"
-msgstr "Desfer: Selecció de rectangle"
+msgid "Undo: Select"
+msgstr ""
 
-msgid "Redo: Rectangle Select"
-msgstr "Refer: Selecció de rectangle"
+msgid "Redo: Select"
+msgstr ""
 
 msgid "Undo: Scale"
 msgstr ""
@@ -1722,8 +1757,8 @@ msgstr "Tancar"
 msgid "Delete"
 msgstr "Eliminar"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
 msgstr ""
 
 msgid "Backup reloaded"

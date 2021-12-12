@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-09-04 16:48\n"
+"PO-Revision-Date: 2021-12-11 22:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -177,8 +177,8 @@ msgstr "Настройки"
 msgid "Tile Mode"
 msgstr "Бесшовный режим"
 
-msgid "Window Transparency"
-msgstr "Прозрачность окна"
+msgid "Window Opacity"
+msgstr "Непрозрачность окна"
 
 msgid "Panel Layout"
 msgstr "Расположение панелей"
@@ -622,6 +622,9 @@ msgstr "Онлайн-документация"
 
 msgid "Issue Tracker"
 msgstr "Баг-трекер"
+
+msgid "Open Logs Folder"
+msgstr "Открыть папку журналов"
 
 msgid "Changelog"
 msgstr "Список изменений"
@@ -1115,14 +1118,14 @@ msgstr "Только пользовательские предустановки
 msgid "Set application FPS limit:"
 msgstr "Ограничение кадров в секунду:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "Ограничить до 1 кадра в секунду, когда приложение в фоне"
+msgid "Pause application when it loses focus"
+msgstr "Приостановить приложение при потере фокуса"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Устанавливает лимит на количество кадров в секунду для программы. Чем ниже это число, тем меньше используется процессор, но приложение становится медленнее, дольше реагирует на действия, а движения будут менее плавными. 0 значит отсутствие лимита."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Если этот параметр включён, при потере фокуса количество кадров в секунду будет установлено равным 1. Это позволяет снизить нагрузку на процессор при бездействии. Лимит количества кадров сбрасывается при движении мыши в окне приложения."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Кисть:"
@@ -1350,6 +1353,21 @@ msgstr "Если этот параметр включён, при анимаци
 msgid "Blue-Red Mode"
 msgstr "Сине-красный режим"
 
+msgid "Show past frames:"
+msgstr "Показывать прошлые кадры:"
+
+msgid "Show future frames:"
+msgstr "Показывать следующие кадры:"
+
+msgid "Above canvas"
+msgstr "Над холстом"
+
+msgid "Below canvas"
+msgstr "Под холстом"
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
+
 msgid "Add a new frame"
 msgstr "Добавить новый кадр"
 
@@ -1445,11 +1463,11 @@ msgstr "Отменить: Рисование"
 msgid "Redo: Draw"
 msgstr "Повторить: Рисование"
 
-msgid "Undo: Rectangle Select"
-msgstr "Отменить: Прямоугольное выделение"
+msgid "Undo: Select"
+msgstr "Отменить: Выбрать"
 
-msgid "Redo: Rectangle Select"
-msgstr "Повторить: Прямоугольное выделение"
+msgid "Redo: Select"
+msgstr "Повторить: Выбрать"
 
 msgid "Undo: Scale"
 msgstr "Отменить: Масштабирование"
@@ -1763,10 +1781,10 @@ msgstr "Закрыть"
 msgid "Delete"
 msgstr "Удалить"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
-msgstr "Найдена автосохраненная резервная копия для %s.\n"
-"Хотите загрузить ее?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
+msgstr "Найдены автоматически сохранённые проекты (проект) из аварийно завершённой сессии.\n"
+"Восстановить данные?"
 
 msgid "Backup reloaded"
 msgstr "Резервная копия восстановлена"

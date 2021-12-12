@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "確定"
@@ -177,14 +177,14 @@ msgstr "偏好設定"
 msgid "Tile Mode"
 msgstr "拼圖模式"
 
-msgid "Window Transparency"
+msgid "Window Opacity"
 msgstr ""
 
 msgid "Panel Layout"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
+msgstr "自動"
 
 msgid "Widescreen"
 msgstr ""
@@ -503,7 +503,7 @@ msgid "Purple"
 msgstr "紫色"
 
 msgid "Theme"
-msgstr ""
+msgstr "主題"
 
 msgid "Icon color from:"
 msgstr ""
@@ -515,10 +515,10 @@ msgid "Tool button size:"
 msgstr ""
 
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 msgid "Big"
-msgstr ""
+msgstr "大"
 
 msgid "Only affect selection"
 msgstr "只處理選取區塊"
@@ -621,6 +621,9 @@ msgstr "線上文件"
 
 msgid "Issue Tracker"
 msgstr "回報問題"
+
+msgid "Open Logs Folder"
+msgstr ""
 
 msgid "Changelog"
 msgstr "更新紀錄"
@@ -1080,13 +1083,13 @@ msgstr "只能修改自訂配置"
 msgid "Set application FPS limit:"
 msgstr ""
 
-msgid "Limit FPS to 1 when app loses focus"
+msgid "Pause application when it loses focus"
 msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr ""
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
 msgid "Brush:"
@@ -1314,6 +1317,21 @@ msgstr "如選定, 動畫只播放相同標籤的影格, 否則會播放所有�
 msgid "Blue-Red Mode"
 msgstr "Blue-Red 模式"
 
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
+
 msgid "Add a new frame"
 msgstr "新增影格"
 
@@ -1409,11 +1427,11 @@ msgstr "取消 繪畫"
 msgid "Redo: Draw"
 msgstr "復原 繪畫"
 
-msgid "Undo: Rectangle Select"
-msgstr "取消 長方形選取"
+msgid "Undo: Select"
+msgstr ""
 
-msgid "Redo: Rectangle Select"
-msgstr "復原 長方形選取"
+msgid "Redo: Select"
+msgstr ""
 
 msgid "Undo: Scale"
 msgstr "取消 尺寸調整"
@@ -1623,7 +1641,7 @@ msgid "Select By Color"
 msgstr ""
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "魔術棒"
 
 msgid "Lasso / Free Select Tool"
 msgstr ""
@@ -1653,10 +1671,10 @@ msgid "Shading Tool"
 msgstr ""
 
 msgid "Line Tool"
-msgstr ""
+msgstr "直線工具"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "矩形工具"
 
 msgid "Ellipse Tool"
 msgstr ""
@@ -1727,10 +1745,9 @@ msgstr "關閉"
 msgid "Delete"
 msgstr "刪除"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
-msgstr "你有%s自動儲存的備份。\n"
-"要打開嗎?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
+msgstr ""
 
 msgid "Backup reloaded"
 msgstr "開啟備份"

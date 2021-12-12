@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -40,7 +40,7 @@ msgid "Canvas Size"
 msgstr "Tamaño del lienzo"
 
 msgid "Frame Size"
-msgstr "Tamaño del marco"
+msgstr "Tamaño de los Fotogramas"
 
 msgid "Size:"
 msgstr "Tamaño:"
@@ -177,20 +177,20 @@ msgstr "Preferencias"
 msgid "Tile Mode"
 msgstr "Modo mosaico"
 
-msgid "Window Transparency"
-msgstr "Transparencia de ventana"
+msgid "Window Opacity"
+msgstr ""
 
 msgid "Panel Layout"
-msgstr "Diseño del panel"
+msgstr "Diseño del Panel"
 
 msgid "Auto"
 msgstr "Auto"
 
 msgid "Widescreen"
-msgstr "Pantalla ancha"
+msgstr "Widescreen"
 
 msgid "Tallscreen"
-msgstr "Pantalla alta"
+msgstr "Tallscreen"
 
 msgid "Mirror View"
 msgstr "Vista de espejo"
@@ -247,7 +247,7 @@ msgid "New frame"
 msgstr "Nuevo fotograma"
 
 msgid "Replace frame"
-msgstr "Reemplazar marco"
+msgstr "Reemplazar fotograma"
 
 msgid "New layer"
 msgstr "Nueva capa"
@@ -271,7 +271,7 @@ msgid "Start frame:"
 msgstr "Fotograma inicial:"
 
 msgid "At frame:"
-msgstr "En el cuadro:"
+msgstr "En el fotograma:"
 
 msgid "At layer:"
 msgstr "En la capa:"
@@ -623,6 +623,9 @@ msgstr "Documentación en línea"
 msgid "Issue Tracker"
 msgstr "Gestor de Problemas"
 
+msgid "Open Logs Folder"
+msgstr "Abrir Carpeta de Registros"
+
 msgid "Changelog"
 msgstr "Registro de cambios"
 
@@ -660,7 +663,7 @@ msgid "Translators"
 msgstr "Traductores"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Licencias"
 
 msgid "English"
 msgstr "Inglés"
@@ -678,7 +681,7 @@ msgid "Polish"
 msgstr "Polaco"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugués"
 
 msgid "Brazilian Portuguese"
 msgstr "Portugués brasileño"
@@ -720,7 +723,7 @@ msgid "Turkish"
 msgstr "Turco"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Bokmål noruego"
 
 msgid "Korean"
 msgstr "Coreano"
@@ -786,15 +789,15 @@ msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Cubo de pintura\n\n"
-"%s para botón izquierdo del ratón\n"
-"%s para botón derecho del ratón"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse"
 
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Cubo de pintura\n\n"
-"%s para botón izquierdo del ratón\n"
-"%s para botón derecho del ratón"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse"
 
 msgid "Polygonal Selection\n"
 "Double-click to connect the last point to the starting point\n\n"
@@ -802,40 +805,50 @@ msgid "Polygonal Selection\n"
 "%s for right mouse button"
 msgstr "Selección poligonal\n"
 "Haga doble clic para conectar el último punto al punto de partida\n\n"
-"%s para el botón izquierdo del ratón\n"
-"%s para el botón derecho del ratón"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Seleccionar Por Color\n\n"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse"
 
 msgid "Magic Wand\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Varita mágica\n\n"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse"
 
 msgid "Lasso / Free Select Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Lazo / Herramienta de Selección Libre\n\n"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Mover\n\n"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Zoom\n\n"
-"%s para el botón izquierdo del ratón\n"
-"%s para el botón derecho del ratón"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse"
 
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Vista\n\n"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse"
 
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
@@ -843,16 +856,16 @@ msgid "Color Picker\n"
 "%s for right mouse button"
 msgstr "Selector de color\n"
 "Seleccione un color de un píxel del sprite\n\n"
-"%s para el botón izquierdo del ratón\n"
-"%s para el botón derecho del ratón"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
 msgstr "Lápiz\n\n"
-"%s para el botón izquierdo del ratón\n"
-"%s para el botón derecho del ratón\n\n"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse\n\n"
 "Mantén pulsado %s para crear una línea"
 
 msgid "Eraser\n\n"
@@ -860,21 +873,23 @@ msgid "Eraser\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
 msgstr "Borrador\n\n"
-"%s para el botón izquierdo del ratón\n"
-"%s para el botón derecho del ratón\n\n"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse\n\n"
 "Mantén pulsado %s para crear una línea"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Cubo de pintura\n\n"
-"%s para botón izquierdo del ratón\n"
-"%s para botón derecho del ratón"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse"
 
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Herramienta de Sombreado\n\n"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
@@ -882,7 +897,12 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Herramienta de Línea\n\n"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse\n\n"
+"Mantén %s para ajustar el ángulo de la línea\n"
+"Mantén %s para centrar la forma en el origen del clic\n"
+"Mantén %s para desplazar el origen de la forma"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -890,7 +910,12 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Herramienta Rectángulo\n\n"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse\n\n"
+"Mantén %s para crear una forma 1:1\n"
+"Mantén %s para centrar la forma en el origen del clic\n"
+"Mantén %s para desplazar el origen de la forma"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -898,13 +923,18 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Herramienta Elipse\n\n"
+"%s para el botón izquierdo del mouse\n"
+"%s para el botón derecho del mouse\n\n"
+"Mantén %s para crear una forma 1:1\n"
+"Mantén %s para centrar la forma en el origen del clic\n"
+"Mantén %s para desplazar el origen de la forma"
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Rectángulo"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Elipse"
 
 msgid "Choose a color for the left tool"
 msgstr "Elegir un color para la herramienta izquierda"
@@ -978,46 +1008,46 @@ msgid "All"
 msgstr "Todo"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Ancho de la cuadrícula rectangular:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Establece la distancia entre las líneas verticales de la cuadrícula rectangular"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Altura de la cuadrícula rectangular:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Establece la distancia entre las líneas horizontales de la cuadrícula rectangular"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Ancho de los límites de la celda isométrica:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Establece el ancho de la caja delimitadora alineada con el eje de la celda isométrica"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Altura de los límites de la celda isométrica:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Establece la altura del recuadro delimitador alineado con los ejes de la celda isométrica"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Desplazamiento de cuadrícula en x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Establece el desplazamiento en x de la cuadrícula desde el origen del lienzo (esquina superior izquierda de la imagen)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Desplazamiento de cuadrícula en y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Establece el desplazamiento en y de la cuadrícula desde el origen del lienzo (esquina superior izquierda de la imagen)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Dibujar en el Modo Mosaico:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Si está desactivado, la cuadrícula se dibujará sólo sobre la imagen original"
 
 msgid "Grid color:"
 msgstr "Color de cuadrícula:"
@@ -1026,19 +1056,19 @@ msgid "A color of the grid"
 msgstr "Un color de la cuadrícula"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Cuadrícula de Píxeles"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Mostrar con zoom:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Establece el zoom mínimo con el que se mostrará la cuadrícula de píxeles"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Color de la cuadrícula de píxeles:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Un color de la cuadrícula de píxeles"
 
 msgid "Transparency"
 msgstr "Transparencia"
@@ -1074,27 +1104,27 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr "El verificador transparente sigue el nivel de zoom del lienzo"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Bordes de selección animados"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Color del borde 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Color del borde 2:"
 
 msgid "Only custom preset can be modified"
 msgstr "Sólo se puede modificar el ajuste preestablecido"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Establecer el límite de FPS de la aplicación:"
 
-msgid "Limit FPS to 1 when app loses focus"
+msgid "Pause application when it loses focus"
 msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "Establece el límite de fotogramas por segundo de la aplicación. Cuanto menor sea el número, menor será el uso de la CPU, pero la aplicación se vuelve más lenta, entrecortada y sin respuesta. 0 significa que no hay límite."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
 msgid "Brush:"
@@ -1104,13 +1134,13 @@ msgid "Select a brush"
 msgstr "Seleccionar un pincel"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "Pincel de píxeles"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "Pincel circular"
 
 msgid "Filled circle brush"
-msgstr ""
+msgstr "Pincel de círculos con relleno"
 
 msgid "Custom brush"
 msgstr "Pincel Personalizado"
@@ -1119,25 +1149,25 @@ msgid "Brush size:"
 msgstr "Tamaño del pincel:"
 
 msgid "Overwrite Color"
-msgstr ""
+msgstr "Sobrescribir color"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr ""
+msgstr "Sobrescribe el color en lugar de mezclarlo. Esta opción solo es relevante con colores que no son totalmente opacos"
 
 msgid "Pixel Perfect"
 msgstr "Pixelado perfecto"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Rellenar el interior"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Hace que las líneas sean suaves eliminando los píxeles sobrantes en los bordes"
 
 msgid "Fill Shape"
 msgstr "Rellena forma"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Rellena de color la forma dibujada, en lugar de dibujar una forma hueca"
 
 msgid "Brush color from"
 msgstr "Color de pincel de"
@@ -1167,10 +1197,10 @@ msgid "Offset"
 msgstr "Desplazamiento"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Sombreado Simple"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Cambio de Tonalidad"
 
 msgid "Lighten"
 msgstr "Aclarar"
@@ -1260,10 +1290,10 @@ msgstr "Saltar al último fotograma\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr "Opciones de piel de cebolla"
+msgstr "Opciones de Piel de Cebolla"
 
 msgid "Enable/disable Onion Skinning"
-msgstr "Activar/desactivar piel de cebolla"
+msgstr "Activar/desactivar Piel de Cebolla"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -1283,37 +1313,37 @@ msgid "Onion Skinning:"
 msgstr "Piel de cebolla:"
 
 msgid "Past Frames"
-msgstr "Fotogramas pasados"
+msgstr "Fotogramas Anteriores"
 
 msgid "Future Frames"
-msgstr "Fotogramas futuros"
+msgstr "Fotogramas Posteriores"
 
 msgid "Manage frame tags"
 msgstr "Administrar etiquetas de fotogramas"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "Propiedades de las Etiquetas de los Fotogramas"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "Añadir nueva etiqueta de fotograma"
 
 msgid "Name:"
-msgstr ""
+msgstr "Nombre:"
 
 msgid "From:"
-msgstr ""
+msgstr "Desde:"
 
 msgid "To:"
-msgstr ""
+msgstr "Hasta:"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr "La animación sólo se reproduce en fotogramas de la misma etiqueta"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Etiqueta %s (Fotograma %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Etiqueta %s (Fotogramas %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1323,6 +1353,21 @@ msgstr "Si se selecciona, la animación se reproduce sólo en los marcos que tie
 msgid "Blue-Red Mode"
 msgstr "Modo Rojo-Azul"
 
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
+
 msgid "Add a new frame"
 msgstr "Añadir un nuevo fotograma"
 
@@ -1330,7 +1375,7 @@ msgid "Remove Frame"
 msgstr "Eliminar fotograma"
 
 msgid "Clone Frame"
-msgstr "Clonar fotograma"
+msgstr "Clonar Fotograma"
 
 msgid "Move Left"
 msgstr "Mover a la izquierda"
@@ -1348,10 +1393,10 @@ msgid "Unlink Cel"
 msgstr "Desvincular celda"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Propiedades de los Fotogramas"
 
 msgid "Frame properties"
-msgstr ""
+msgstr "Propiedades de los fotogramas"
 
 msgid "Layer"
 msgstr "Capa"
@@ -1381,7 +1426,7 @@ msgid "Opacity:"
 msgstr "Opacidad:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Opacidad del modo mosaico:"
 
 msgid "Toggle layer's visibility"
 msgstr "Alternar visibilidad de capa(s)"
@@ -1390,7 +1435,7 @@ msgid "Lock/unlock layer"
 msgstr "Bloquear/desbloquear capa"
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "Fotograma: %s, Capa: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1418,11 +1463,11 @@ msgstr "Deshacer: Dibujar"
 msgid "Redo: Draw"
 msgstr "Rehacer: Dibujar"
 
-msgid "Undo: Rectangle Select"
-msgstr "Deshacer: selección rectangular"
+msgid "Undo: Select"
+msgstr ""
 
-msgid "Redo: Rectangle Select"
-msgstr "Rehacer: selección rectangular"
+msgid "Redo: Select"
+msgstr ""
 
 msgid "Undo: Scale"
 msgstr "Deshacer: Escalar"
@@ -1491,10 +1536,10 @@ msgid "Redo: Delete Frame Tag"
 msgstr "Rehacer: Eliminar la etiqueta del fotograma"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Deshacer: Cambiar la duración de los fotogramas"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Rehacer: Cambiar la duración de los fotogramas"
 
 msgid "Move Guide"
 msgstr "Mover Guía"
@@ -1506,10 +1551,10 @@ msgid "File autosaved"
 msgstr "Archivo guardado automáticamente"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "No se pudo abrir el archivo. Código de error %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "No se pudo guardar el archivo. Código de error %s"
 
 msgid "File exported"
 msgstr "Archivo exportado"
@@ -1536,7 +1581,7 @@ msgid "Create a new empty palette?"
 msgstr "¿Crear una nueva paleta vacía?"
 
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 msgid "Error: Palette must have a valid name."
 msgstr "Error: La paleta debe contener un nombre válido."
@@ -1548,13 +1593,13 @@ msgid "Edit Palette"
 msgstr "Editar Paleta"
 
 msgid "Create colors with alpha component"
-msgstr ""
+msgstr "Crear colores con componente alfa"
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Tomar colores sólo de la selección"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Obtener colores de"
 
 msgid "Patrons:"
 msgstr "Patrons:"
@@ -1596,13 +1641,13 @@ msgid "A default background color of a new image"
 msgstr "Un color de fondo predeterminado de una nueva imagen"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Bloquear relación de aspecto"
 
 msgid "Portrait"
-msgstr ""
+msgstr "Retrato"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Paisaje"
 
 msgid "Templates:"
 msgstr "Plantillas:"
@@ -1623,28 +1668,28 @@ msgid "Rectangular Selection"
 msgstr "Selección rectangular"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "Selección Elíptica"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "Selección Poligonal"
 
 msgid "Select By Color"
-msgstr ""
+msgstr "Seleccionar Por Color"
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "Varita Mágica"
 
 msgid "Lasso / Free Select Tool"
-msgstr ""
+msgstr "Lazo / Herramienta de Selección Libre"
 
 msgid "Move"
-msgstr ""
+msgstr "Mover"
 
 msgid "Zoom"
 msgstr "Zoom"
 
 msgid "Pan"
-msgstr ""
+msgstr "Vista"
 
 msgid "Color Picker"
 msgstr "Selector de color"
@@ -1659,16 +1704,16 @@ msgid "Bucket"
 msgstr "Cubo de pintura"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Herramienta de Sombreado"
 
 msgid "Line Tool"
-msgstr ""
+msgstr "Herramienta de Línea"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "Herramienta de Rectángulo"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "Herramienta de Elipse"
 
 msgid "Switch Colors"
 msgstr "Cambiar colores"
@@ -1686,19 +1731,19 @@ msgid "Left Tool:"
 msgstr "Herramienta izquierda:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr "Una herramienta asignada al botón izquierdo del ratón"
+msgstr "Una herramienta asignada al botón izquierdo del mouse"
 
 msgid "Right Tool:"
 msgstr "Herramienta derecha:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr "Una herramienta asignada al botón derecho del ratón"
+msgstr "Una herramienta asignada al botón derecho del mouse"
 
 msgid "Cannot find last project file."
 msgstr "No se pudo encontrar el último archivo de proyecto."
 
 msgid "Cannot find project file."
-msgstr ""
+msgstr "No se puede encontrar el archivo del proyecto."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "¡No has guardado o abierto ningún proyecto en Pixelorama aún!"
@@ -1736,10 +1781,10 @@ msgstr "Cerrar"
 msgid "Delete"
 msgstr "Borrar"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
-msgstr "Se ha encontrado la copia de seguridad guardada para %s.\n"
-"¿Desea cargarla?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
+msgstr "Se ha encontrado uno o varios proyectos autoguardados de una sesión interrumpida.\n"
+"¿Deseas recuperar los datos?"
 
 msgid "Backup reloaded"
 msgstr "Copia de seguridad cargada"
@@ -1748,7 +1793,7 @@ msgid "Remove currently selected palette"
 msgstr "Eliminar la paleta seleccionada"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr ""
+msgstr "¿Estás seguro que quieres eliminar esta paleta? (No se puede deshacer)"
 
 msgid "You can't remove more palettes!"
 msgstr "¡No puedes eliminar más paletas!"
@@ -1763,56 +1808,56 @@ msgid "and"
 msgstr "y"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Mueve el marco seleccionado hacia la izquierda."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Mueve el marco seleccionado hacia la derecha."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Duración de los fotogramas"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Mosaico en Ambos Ejes"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Mosaico en el Eje X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Mosaico en el Eje Y"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Crear una nueva paleta"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Comentario:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Vacío"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Desde la Paleta actual"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Desde el Sprite Actual"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Desde la Selección Actual"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Añadir nuevo color"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Eliminar un color seleccionado"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "¡Ya existe una paleta con el mismo nombre y ruta!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "¡El nombre de la paleta es requerido!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
 msgstr "Reducir el tamaño de la paleta restablecerá las posiciones de colores. ¡Los colores que no caben en el tamaño de la nueva paleta se perderán!"
 
 msgid "Position:"
-msgstr ""
+msgstr "Posición:"
 
