@@ -1,6 +1,6 @@
 extends BaseTool
 
-const single_color_change_shader := preload("res://src/Shaders/SingleColorChange.shader")
+const ColorReplaceShader := preload("res://src/Shaders/ColorReplace.shader")
 
 var _prev_mode := 0
 var _pattern: Patterns.Pattern
@@ -152,18 +152,34 @@ func fill_in_color(position: Vector2) -> void:
 			if tool_slot.color.is_equal_approx(color):
 				return
 
-		var selection: Image = project.bitmap_to_image(project.selection_bitmap, false)
+		var selection: Image
 		var selection_tex := ImageTexture.new()
+		if project.has_selection:
+			selection = project.bitmap_to_image(project.selection_bitmap, false)
+		else:
+			selection = Image.new()
+			selection.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			selection.fill(Color(1, 1, 1, 1))
+
 		selection_tex.create_from_image(selection)
 
+		var pattern_tex := ImageTexture.new()
+		if _pattern:
+			pattern_tex.create_from_image(_pattern.image)
+
 		var params := {
+			"size": project.size,
 			"old_color": color,
 			"new_color": tool_slot.color,
 			"selection": selection_tex,
-			"has_selection": project.has_selection
+			"pattern": pattern_tex,
+			"pattern_size": pattern_tex.get_size(),
+			# pixel offset converted to pattern uv offset
+			"pattern_uv_offset": Vector2.ONE / pattern_tex.get_size() * Vector2(_offset_x, _offset_y),
+			"has_pattern": true if _fill_with == 1 else false
 		}
 		var gen := ShaderImageEffect.new()
-		gen.generate_image(image, single_color_change_shader, params, project.size)
+		gen.generate_image(image, ColorReplaceShader, params, project.size)
 		yield(gen, "done")
 
 
