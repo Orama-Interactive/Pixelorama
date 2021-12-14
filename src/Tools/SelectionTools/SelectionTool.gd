@@ -61,6 +61,7 @@ func set_spinbox_values() -> void:
 
 
 func draw_start(position: Vector2) -> void:
+	.draw_start(position)
 	if selection_node.arrow_key_move:
 		return
 	var project: Project = Global.current_project
@@ -136,6 +137,7 @@ func draw_start(position: Vector2) -> void:
 
 
 func draw_move(position: Vector2) -> void:
+	.draw_move(position)
 	if selection_node.arrow_key_move:
 		return
 	# This is true if content transformation has been confirmed (pressed Enter for example)
@@ -162,14 +164,15 @@ func draw_move(position: Vector2) -> void:
 		_set_cursor_text(selection_node.big_bounding_rectangle)
 
 
-func draw_end(_position: Vector2) -> void:
+func draw_end(position: Vector2) -> void:
+	.draw_end(position)
 	if selection_node.arrow_key_move:
 		return
 	if _content_transformation_check == selection_node.is_moving_content:
 		if _move:
 			selection_node.move_borders_end()
 		else:
-			apply_selection(_position)
+			apply_selection(position)
 
 	_move = false
 	_snap_to_grid = false

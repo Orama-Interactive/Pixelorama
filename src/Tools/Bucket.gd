@@ -110,6 +110,7 @@ func update_pattern() -> void:
 
 
 func draw_start(position: Vector2) -> void:
+	.draw_start(position)
 	if Input.is_action_pressed("alt"):
 		_pick_color(position)
 		return
@@ -133,12 +134,12 @@ func draw_start(position: Vector2) -> void:
 	commit_undo("Draw", undo_data)
 
 
-func draw_move(_position: Vector2) -> void:
-	pass
+func draw_move(position: Vector2) -> void:
+	.draw_move(position)
 
 
-func draw_end(_position: Vector2) -> void:
-	pass
+func draw_end(position: Vector2) -> void:
+	.draw_end(position)
 
 
 func fill_in_color(position: Vector2) -> void:

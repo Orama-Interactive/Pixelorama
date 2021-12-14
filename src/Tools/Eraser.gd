@@ -35,6 +35,7 @@ func set_config(config: Dictionary) -> void:
 
 
 func draw_start(position: Vector2) -> void:
+	.draw_start(position)
 	if Input.is_action_pressed("alt"):
 		_picking_color = true
 		_pick_color(position)
@@ -62,6 +63,7 @@ func draw_start(position: Vector2) -> void:
 
 
 func draw_move(position: Vector2) -> void:
+	.draw_move(position)
 	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("alt"):
 			_pick_color(position)
@@ -79,7 +81,8 @@ func draw_move(position: Vector2) -> void:
 		Global.canvas.sprite_changed_this_frame = true
 
 
-func draw_end(_position: Vector2) -> void:
+func draw_end(position: Vector2) -> void:
+	.draw_end(position)
 	if _picking_color:
 		return
 
