@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-12-14 05:21\n"
+"PO-Revision-Date: 2021-12-14 05:30\n"
 
 msgid "OK"
 msgstr "예"
@@ -1782,7 +1782,7 @@ msgstr "삭제"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "충돌한 세션에서 자동 저장된 프로젝트가 발견되었습니다. 데이터를 복구하시겠습니까?"
 
 msgid "Backup reloaded"
 msgstr "백업본을 다시 불러오는 중"
