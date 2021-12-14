@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-12-11 18:05\n"
+"PO-Revision-Date: 2021-12-14 05:10\n"
 
 msgid "OK"
 msgstr "예"
@@ -1463,10 +1463,10 @@ msgid "Redo: Draw"
 msgstr "다시 실행: 그리기"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "실행 취소: 선택"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "다시 실행: 선택"
 
 msgid "Undo: Scale"
 msgstr "실행 취소: 크기 설정"
