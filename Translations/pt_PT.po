@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -177,8 +177,8 @@ msgstr "Preferencias"
 msgid "Tile Mode"
 msgstr "Modo de Azuleijo"
 
-msgid "Window Transparency"
-msgstr "Transparência de Janela"
+msgid "Window Opacity"
+msgstr ""
 
 msgid "Panel Layout"
 msgstr "Esquema de Painel"
@@ -623,6 +623,9 @@ msgstr "Documentação Online"
 msgid "Issue Tracker"
 msgstr "Tracker de Problemas"
 
+msgid "Open Logs Folder"
+msgstr ""
+
 msgid "Changelog"
 msgstr "Atualizações"
 
@@ -660,7 +663,7 @@ msgid "Translators"
 msgstr "Tradutores"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Licenças"
 
 msgid "English"
 msgstr "Inglês"
@@ -678,7 +681,7 @@ msgid "Polish"
 msgstr "Polaco"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "português"
 
 msgid "Brazilian Portuguese"
 msgstr "Português do Brazil"
@@ -1108,14 +1111,14 @@ msgstr "Apenas presets personalizados podem ser modificados"
 msgid "Set application FPS limit:"
 msgstr "Define o limite de FPS da applicação:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "Limita os FPS para 1 quando a app perde o foco"
+msgid "Pause application when it loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Define o limite de frames por segundo da aplicação. Quanto mais baixo, mais baixo o uso do CPU, mas a aplicação fica mais lenta, com cortes, e ineresponsiva. 0 significa que não tem limite."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Quando ligado, quando a janela da aplicação sai do foco, o limite de FPS da aplicação passa para 1. Isto ajuda a baixar a utilização do CPU quando em inatividade. O limite de FPS é restaurado quando a janela da aplicação ganha o foco."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -1341,6 +1344,21 @@ msgstr "Quando selecionado, a animação reporduz apenas as frames com a mesma e
 msgid "Blue-Red Mode"
 msgstr "Modo Azul-Vermelho"
 
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
+
 msgid "Add a new frame"
 msgstr "Adicionar uma nova frame"
 
@@ -1436,11 +1454,11 @@ msgstr "Desfazer: Desenhar"
 msgid "Redo: Draw"
 msgstr "Refazer: Desenhar"
 
-msgid "Undo: Rectangle Select"
-msgstr "Desfazer: Seleção Retangular"
+msgid "Undo: Select"
+msgstr ""
 
-msgid "Redo: Rectangle Select"
-msgstr "Refazer: Seleção Retangular"
+msgid "Redo: Select"
+msgstr ""
 
 msgid "Undo: Scale"
 msgstr "Desfazer: Redimensionar"
@@ -1754,10 +1772,9 @@ msgstr "Fechar"
 msgid "Delete"
 msgstr "Apagar"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
-msgstr "Uma cópia de segurança automática foi encontrada.\n"
-"Pretende carregá-la?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
+msgstr ""
 
 msgid "Backup reloaded"
 msgstr "Cópia de segurança carregada"

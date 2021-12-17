@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-12-12 10:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Editar"
 
 msgid "Select"
-msgstr ""
+msgstr "Selecionar"
 
 msgid "View"
 msgstr "Ver"
@@ -177,8 +177,8 @@ msgstr "Preferências"
 msgid "Tile Mode"
 msgstr "Modo de Tile"
 
-msgid "Window Transparency"
-msgstr "Transparência da Janela"
+msgid "Window Opacity"
+msgstr "Opacidade da Janela"
 
 msgid "Panel Layout"
 msgstr "Layout do Painel"
@@ -504,28 +504,28 @@ msgid "Purple"
 msgstr "Roxo"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Cor do ícone de:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Cor do ícone:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Tamanho do botão de ferramenta:"
 
 msgid "Small"
-msgstr ""
+msgstr "Pequeno"
 
 msgid "Big"
-msgstr ""
+msgstr "Grande"
 
 msgid "Only affect selection"
 msgstr "Apenas afetar a seleção"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Células selecionadas"
 
 msgid "Current cel"
 msgstr "Parte Atual"
@@ -623,6 +623,9 @@ msgstr "Documentação Online"
 msgid "Issue Tracker"
 msgstr "Rastreador de problemas"
 
+msgid "Open Logs Folder"
+msgstr "Abrir Pasta de Logs"
+
 msgid "Changelog"
 msgstr "Mudanças"
 
@@ -660,7 +663,7 @@ msgid "Translators"
 msgstr "Tradutores"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Licenças"
 
 msgid "English"
 msgstr "Inglês"
@@ -678,7 +681,7 @@ msgid "Polish"
 msgstr "Polonês"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Português"
 
 msgid "Brazilian Portuguese"
 msgstr "Português (Brasil)"
@@ -720,7 +723,7 @@ msgid "Turkish"
 msgstr "Turco"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Norueguês Bokmahl"
 
 msgid "Korean"
 msgstr "Coreano"
@@ -735,7 +738,7 @@ msgid "Japanese"
 msgstr "Japonês"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ucraniano"
 
 msgid "Development Team"
 msgstr "Time de Desenvolvimento"
@@ -785,38 +788,53 @@ msgstr "Saia sem salvar"
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Seleção Retangular\n\n"
+"%s para botão esquerdo do mouse\n"
+"%s para botão direito do mouse"
 
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Seleção Elíptica\n\n"
+"%s para botão esquerdo do mouse\n"
+"%s para botão direito do mouse"
 
 msgid "Polygonal Selection\n"
 "Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Seleção Poligonal\n"
+"Clique duplo conecta o último ao primeiro ponto\n\n"
+"%s para o botão esquerdo do mouse\n"
+"%s para o botão direito do mouse"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Seleção por Cor\n\n"
+"%s para botão esquerdo do mouse\n"
+"%s para botão direito do mouse"
 
 msgid "Magic Wand\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Varinha Mágica\n\n"
+"%s para botão esquerdo do mouse\n"
+"%s para botão direito do mouse"
 
 msgid "Lasso / Free Select Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Ferramenta de Seleção Livre / Laço\n\n"
+"%s para botão esquerdo do mouse\n"
+"%s para botão direito do mouse"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Mover\n\n"
+"%s para botão esquerdo do mouse\n"
+"%s para botão direito do mouse"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
@@ -879,7 +897,12 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Ferramenta Linha\n\n"
+"%s para botão esquerdo do mouse\n"
+"%s para botão direito do mouse\n\n"
+"Segure %s para snap no ângulo da linha\n"
+"Segure %s para centralizar a forma no clique de origem\n"
+"Segure %s para deslocar a origem da forma"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -887,7 +910,12 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Ferramenta Retângulo\n\n"
+"%s para botão esquerdo do mouse\n"
+"%s para botão direito do mouse\n\n"
+"Segure %s para criar formas 1:1\n"
+"Segure %s para centralizar a forma no clique de origem\n"
+"Segure %s para deslocar a origem da forma"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -895,7 +923,12 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Ferramenta Elipse\n\n"
+"%s para botão esquerdo do mouse\n"
+"%s para botão direito do mouse\n\n"
+"Segure %s para criar formas 1:1\n"
+"Segure %s para centralizar a forma no clique de origem\n"
+"Segure %s para deslocar a origem da forma"
 
 msgid "Rectangle"
 msgstr "Retângulo"
@@ -990,28 +1023,28 @@ msgid "Isometric cell bounds width:"
 msgstr "Largura das células isométricas:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Define a largura do eixo da célula isométrica alinhado à caixa delimitadora"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Altura dos limites da célula isométrica:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Define a altura do eixo da célula isométrica alinhado à caixa delimitadora"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Deslocamento da grade X:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Define o deslocamento X da grade à partir da origem da tela (canto superior esquerdo da imagem)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Deslocamento da grade Y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Define o deslocamento Y da grade à partir da origem da tela (canto superior esquerdo da imagem)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Desenhar sobre o Modo de Ladrilho:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
 msgstr "Se desativado, a grade será desenhada somente sobre a imagem original"
@@ -1085,14 +1118,14 @@ msgstr "Apenas predefinição personalizada pode ser modificada"
 msgid "Set application FPS limit:"
 msgstr "Definir o limite de FPS do aplicativo:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "Limitar a 1 FPS quando o app perder o foco"
+msgid "Pause application when it loses focus"
+msgstr "Pausar aplicativo quando perder o foco"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Define o limite dos quadros do aplicativo por segundo. Quanto menor o número, menor o uso da CPU, mas o aplicativo fica mais lento, com qualidade ruim e sem resposta. 0 significa que não há limite."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Se esta opção for ativada, quando a janela do aplicativo perder o foco, o limite de FPS do aplicativo é definido como 1. Isso ajuda a diminuir o uso da CPU quando estiver inativo. O limite de FPS está sendo redefinido quando o mouse entra na janela do aplicativo."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr "Se isto for ativado, quando a janela do aplicativo perder o foco, ele é pausado. Isso ajuda a reduzir o uso da CPU quando o aplicativo estiver ocioso. Ele volta à atividade quando o mouse entra em sua janela."
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -1320,6 +1353,21 @@ msgstr "Se selecionado, a animação é reproduzida apenas nos quadros que possu
 msgid "Blue-Red Mode"
 msgstr "Modo Azul-Vermelho"
 
+msgid "Show past frames:"
+msgstr "Mostrar frames anteriores:"
+
+msgid "Show future frames:"
+msgstr "Mostrar frames futuros:"
+
+msgid "Above canvas"
+msgstr "Acima da tela de desenho"
+
+msgid "Below canvas"
+msgstr "Abaixo da tela de desenho"
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr "Se você deseja que uma camada ignore o onion skinning simplesmente adicione o sufixo \"_io\" em seu nome."
+
 msgid "Add a new frame"
 msgstr "Adicionar um novo quadro"
 
@@ -1378,7 +1426,7 @@ msgid "Opacity:"
 msgstr "Opacidade:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Opacidade do modo ladrilho:"
 
 msgid "Toggle layer's visibility"
 msgstr "Mudar visibilidade da camada"
@@ -1415,11 +1463,11 @@ msgstr "Desfazer: Desenhar"
 msgid "Redo: Draw"
 msgstr "Refazer: Desenhar"
 
-msgid "Undo: Rectangle Select"
-msgstr "Desfazer: Seleção Retangular"
+msgid "Undo: Select"
+msgstr "Desfazer: Selecionar"
 
-msgid "Redo: Rectangle Select"
-msgstr "Refazer: Seleção Retangular"
+msgid "Redo: Select"
+msgstr "Refazer: Selecionar"
 
 msgid "Undo: Scale"
 msgstr "Desfazer: Redimensionar"
@@ -1593,7 +1641,7 @@ msgid "A default background color of a new image"
 msgstr "Cor de fundo padrão de uma nova imagem"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Fixar proporção"
 
 msgid "Portrait"
 msgstr "Retrato"
@@ -1620,22 +1668,22 @@ msgid "Rectangular Selection"
 msgstr "Seleção Retangular"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "Seleção Elíptica"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "Seleção Poligonal"
 
 msgid "Select By Color"
-msgstr ""
+msgstr "Seleção por Cor"
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "Varinha Mágica"
 
 msgid "Lasso / Free Select Tool"
-msgstr ""
+msgstr "Ferramenta de Seleção Livre / Laço"
 
 msgid "Move"
-msgstr ""
+msgstr "Mover"
 
 msgid "Zoom"
 msgstr "Zoom"
@@ -1659,13 +1707,13 @@ msgid "Shading Tool"
 msgstr "Ferramenta de sombreamento"
 
 msgid "Line Tool"
-msgstr ""
+msgstr "Ferramenta Linha"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "Ferramenta Retângulo"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "Ferramenta Elipse"
 
 msgid "Switch Colors"
 msgstr "Trocar Cores"
@@ -1733,10 +1781,10 @@ msgstr "Fechar"
 msgid "Delete"
 msgstr "Deletar"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
-msgstr "Foi encontrado um backup salvo automaticamente em %s.\n"
-"Você deseja recarregá-lo?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
+msgstr "Projeto(s) salvos automaticamente antes de um encerramento inesperado foram encontrados.\n"
+"Você deseja recuperar os dados?"
 
 msgid "Backup reloaded"
 msgstr "Backup recarregado"
@@ -1769,13 +1817,13 @@ msgid "Frame duration"
 msgstr "Duração do quadro"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Ladrilho em Ambos os Eixos"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Ladrilho no Eixo X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Ladrilho no Eixo Y"
 
 msgid "Create a new palette"
 msgstr "Criar uma nova paleta"
@@ -1811,5 +1859,5 @@ msgid "Reducing palette size will reset positions of colors. Colors that don't f
 msgstr "Reduzir o tamanho da paleta irá redefinir as posições de cores. Cores que não se encaixam em novo tamanho da paleta serão perdidas!"
 
 msgid "Position:"
-msgstr ""
+msgstr "Posição:"
 

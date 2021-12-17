@@ -464,7 +464,6 @@ func _on_QuitDialog_confirmed() -> void:
 
 func _on_BackupConfirmation_confirmed(project_paths: Array, backup_paths: Array) -> void:
 	OpenSave.reload_backup_file(project_paths, backup_paths)
-	OpenSave.autosave_timer.start()
 	Export.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
 	Export.directory_path = OpenSave.current_save_paths[0].get_base_dir()
 	Export.was_exported = false
@@ -477,14 +476,14 @@ func _on_BackupConfirmation_confirmed(project_paths: Array, backup_paths: Array)
 func _on_BackupConfirmation_delete(project_paths: Array, backup_paths: Array) -> void:
 	for i in range(project_paths.size()):
 		OpenSave.remove_backup_by_path(project_paths[i], backup_paths[i])
-	OpenSave.autosave_timer.start()
 	# Reopen last project
 	if Global.open_last_project:
 		load_last_project()
 
 
 func _on_BackupConfirmation_popup_hide() -> void:
-	OpenSave.autosave_timer.start()
+	if Global.enable_autosave:
+		OpenSave.autosave_timer.start()
 
 
 func _use_osx_shortcuts() -> void:

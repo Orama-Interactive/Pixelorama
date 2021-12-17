@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-09-04 14:29\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -177,8 +177,8 @@ msgstr "Beállítások"
 msgid "Tile Mode"
 msgstr "Csempe mód"
 
-msgid "Window Transparency"
-msgstr "Ablak átlátszóság"
+msgid "Window Opacity"
+msgstr ""
 
 msgid "Panel Layout"
 msgstr "Lap elrendezés"
@@ -622,6 +622,9 @@ msgstr "Online dokumentumok"
 
 msgid "Issue Tracker"
 msgstr "Hibakövető"
+
+msgid "Open Logs Folder"
+msgstr ""
 
 msgid "Changelog"
 msgstr "Változtatások"
@@ -1081,13 +1084,13 @@ msgstr "Csak az egyedi beállítások módosíthatók"
 msgid "Set application FPS limit:"
 msgstr "Applikáció FPS limitjének beállítása:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "FPS 1-re limitálása amikor az alkalmazás a háttérbe kerül"
+msgid "Pause application when it loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr ""
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
 msgid "Brush:"
@@ -1316,6 +1319,21 @@ msgstr "Ha ez ki van választva, akkor az animáció csak az azonos címkével e
 msgid "Blue-Red Mode"
 msgstr "Kék-Piros Mód"
 
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
+
 msgid "Add a new frame"
 msgstr "Új képkocka hozzáadása"
 
@@ -1411,11 +1429,11 @@ msgstr "Visszavonás: Rajz"
 msgid "Redo: Draw"
 msgstr "Újra: Rajz"
 
-msgid "Undo: Rectangle Select"
-msgstr "Visszavonás: Téglalap alakú kijelölés"
+msgid "Undo: Select"
+msgstr ""
 
-msgid "Redo: Rectangle Select"
-msgstr "Újra: Téglalap alakú kijelölés"
+msgid "Redo: Select"
+msgstr ""
 
 msgid "Undo: Scale"
 msgstr "Visszavonás: Méret"
@@ -1729,10 +1747,9 @@ msgstr "Bezárás"
 msgid "Delete"
 msgstr "Törlés"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
-msgstr "Automatikus biztonsági mentés találva a %s -hoz.\n"
-"Szeretné újra betölteni?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
+msgstr ""
 
 msgid "Backup reloaded"
 msgstr "Biztonsági mentés újratöltve"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-09-04 14:29\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -177,8 +177,8 @@ msgstr "Preferanser"
 msgid "Tile Mode"
 msgstr "Flismodus"
 
-msgid "Window Transparency"
-msgstr "Vindusgjennomsiktighet"
+msgid "Window Opacity"
+msgstr ""
 
 msgid "Panel Layout"
 msgstr "Paneloppsett"
@@ -622,6 +622,9 @@ msgstr "Online Bruksanvisning"
 msgid "Issue Tracker"
 msgstr "Problemsporer"
 
+msgid "Open Logs Folder"
+msgstr "Åpne loggmappe"
+
 msgid "Changelog"
 msgstr "Endringslogg"
 
@@ -659,7 +662,7 @@ msgid "Translators"
 msgstr "Oversettere"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Lisenser"
 
 msgid "English"
 msgstr "Engelsk"
@@ -1111,16 +1114,16 @@ msgid "Only custom preset can be modified"
 msgstr "Bare egendefinerte forhåndsinnstillinger kan endres"
 
 msgid "Set application FPS limit:"
-msgstr "Sett prorgammets grense for bilder per sekund:"
+msgstr "Sett prorgammets grense for Bilder Per Sekund, BPS:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "Begrens til ett bilde per sekund når programmet ikke har fokus"
+msgid "Pause application when it loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Setter grensen for hvor mange bilder per sekund programmet kan ha. Lavere tall bruker mindre prosessorkraft, men programmet går saktere, mer hakkete og kan slutte å svare. 0 betyr at det ikke er noen grense."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Hvis denne er påslått og programmet mister fokus vil programmet kun oppdateres i ett bilde per sekund. Dette gjør så programmet bruker mindre prosessorkraft ved inaktivitet. Programmet vil gå tilbake til normalt når musen går inn i programmets vindu."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Børste:"
@@ -1346,6 +1349,21 @@ msgstr "Hvis valgt, spiller animasjonen bare på bildene som har samme merkelapp
 msgid "Blue-Red Mode"
 msgstr "Blå-Rød-Modus"
 
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
+
 msgid "Add a new frame"
 msgstr "Legg til nytt bilde"
 
@@ -1441,11 +1459,11 @@ msgstr "Angre: Tegne"
 msgid "Redo: Draw"
 msgstr "Gjør om: Tegne"
 
-msgid "Undo: Rectangle Select"
-msgstr "Angre: Velg Rektangel"
+msgid "Undo: Select"
+msgstr ""
 
-msgid "Redo: Rectangle Select"
-msgstr "Gjør om: Velg Rektangel"
+msgid "Redo: Select"
+msgstr ""
 
 msgid "Undo: Scale"
 msgstr "Angre: Skalér"
@@ -1759,10 +1777,10 @@ msgstr "Lukk"
 msgid "Delete"
 msgstr "Slett"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
-msgstr "En sikkerhetskopi av %s ble funnet.\n"
-"Vil du laste den på nytt?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
+msgstr "Fant prosjekt(er) som ble automatisk lagret før en programfeil oppsto.\n"
+"Vil du gjenoprette?"
 
 msgid "Backup reloaded"
 msgstr "Sikkerhetskopien lastet inn"

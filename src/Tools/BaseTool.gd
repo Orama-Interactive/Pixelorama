@@ -1,6 +1,7 @@
 class_name BaseTool
 extends VBoxContainer
 
+var is_moving = false
 var kname: String
 var tool_slot = null  # Tools.Slot, can't have static typing due to cyclic errors
 var cursor_text := ""
@@ -86,6 +87,21 @@ func update_config() -> void:
 	pass
 
 
+func draw_start(_position: Vector2) -> void:
+	is_moving = true
+
+
+func draw_move(position: Vector2) -> void:
+	# This can happen if the user switches between tools with a shortcut
+	# while using another tool
+	if !is_moving:
+		draw_start(position)
+
+
+func draw_end(_position: Vector2) -> void:
+	is_moving = false
+
+
 func cursor_move(position: Vector2) -> void:
 	_cursor = position
 
@@ -165,3 +181,8 @@ func _add_polylines_segment(lines: Array, start: Vector2, end: Vector2) -> void:
 			line.append(start)
 			return
 	lines.append([start, end])
+
+
+func _exit_tree() -> void:
+	if is_moving:
+		draw_end(Global.canvas.current_pixel.floor())

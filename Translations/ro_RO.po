@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2021-09-04 15:09\n"
+"PO-Revision-Date: 2021-12-12 09:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -177,11 +177,11 @@ msgstr "Preferințe"
 msgid "Tile Mode"
 msgstr "Mod mozaic"
 
-msgid "Window Transparency"
-msgstr "Transparența ferestrei"
+msgid "Window Opacity"
+msgstr "Opacitatea ferestrei"
 
 msgid "Panel Layout"
-msgstr "Dispunere panou"
+msgstr "Dispunerea panoului"
 
 msgid "Auto"
 msgstr "Auto"
@@ -623,6 +623,9 @@ msgstr "Documentație virtuală"
 msgid "Issue Tracker"
 msgstr "Monitor de probleme"
 
+msgid "Open Logs Folder"
+msgstr "Deschide dosarul cu jurnale"
+
 msgid "Changelog"
 msgstr "Jurnal de modificări"
 
@@ -762,7 +765,7 @@ msgid "copy"
 msgstr "copie"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr "Ești sigur că dorești să ieși din Pixelorama?"
+msgstr "Sigur dorești să ieși din Pixelorama?"
 
 msgid "Unsaved Image"
 msgstr "Imagine nesalvată"
@@ -1002,7 +1005,7 @@ msgid "Isometric"
 msgstr "Izometrică"
 
 msgid "All"
-msgstr "Ambele"
+msgstr "Toate"
 
 msgid "Rectangular grid width:"
 msgstr "Lățimea grilei dreptunghiulare:"
@@ -1113,16 +1116,16 @@ msgid "Only custom preset can be modified"
 msgstr "Doar presetarea personalizată poate fi modificată"
 
 msgid "Set application FPS limit:"
-msgstr "Setează limita CPS a aplicației:"
+msgstr "Setare limită de cadre pe secundă pentru aplicație:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "Limitează CPS la 1 când aplicația pierde focalizarea"
+msgid "Pause application when it loses focus"
+msgstr "Întrerupe aplicația atunci când pierde focalizarea"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Setează limita de cadre pe secundă a aplicației. Cu cât numărul este mai mic, cu atât utilizarea procesorului este mai redusă, însă aplicația devine mai lentă, variabilă și nereceptivă. 0 înseamnă că nu există limite."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Dacă această opțiune este activată, limita CPS a aplicației este setată la 1 în momentul în care fereastra aplicației pierde focalizarea. Acest lucru ajută la reducerea utilizării procesorului pe durata perioadei de inactivitate. Limita CPS se resetează când mausul intră în fereastra aplicației."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr "Dacă această opțiune este activată, în momentul în care fereastra aplicației pierde focalizarea, aceasta este întreruptă. Acest lucru ajută la reducerea utilizării procesorului pe durata perioadei de inactivitate. Aplicația își reia activitatea atunci când mausul intră în fereastra aplicației."
 
 msgid "Brush:"
 msgstr "Pensulă:"
@@ -1164,7 +1167,7 @@ msgid "Fill Shape"
 msgstr "Umplere formă"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr "Umple cu culoare forma desenată, în loc să deseneze o formă goală"
+msgstr "În locul desenării unei forme goale, forma desenată este umplută cu culoare"
 
 msgid "Brush color from"
 msgstr "Culoarea pensulei de la"
@@ -1295,10 +1298,10 @@ msgstr "Activează/dezactivează cadrele multiple simultane"
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
 msgstr "Câte cadre pe secundă ar trebui să aibă previzualizarea animației?\n"
-"Cu cât mai multe cadre, cu atât mai repede rulează animația."
+"Cu cât numărul de cadre pe secundă este mai mare, cu atât animația rulează mai repede."
 
 msgid "No loop"
-msgstr "Fără buclu"
+msgstr "Fără buclă"
 
 msgid "Cycle loop"
 msgstr "Buclă ciclică"
@@ -1337,10 +1340,10 @@ msgid "Animation plays only on frames of the same tag"
 msgstr "Animația rulează doar pe cadrele din aceeași etichetă"
 
 msgid "Tag %s (Frame %s)"
-msgstr "Eticheta %s (Cadrul %s)"
+msgstr "Eticheta %s (cadrul %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr "Eticheta %s (Cadrele %s – %s)"
+msgstr "Eticheta %s (cadrele %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1349,6 +1352,21 @@ msgstr "Dacă opțiunea este selectată, animația va rula doar pe cadrele cu ac
 
 msgid "Blue-Red Mode"
 msgstr "Mod albastru-roșu"
+
+msgid "Show past frames:"
+msgstr "Arată cadrele trecute:"
+
+msgid "Show future frames:"
+msgstr "Arată cadrele viitoare:"
+
+msgid "Above canvas"
+msgstr "Deasupra pânzei"
+
+msgid "Below canvas"
+msgstr "Sub pânză"
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr "Dacă vrei ca un strat să ignore opțiunea pentru cadre multiple simultane, adaugă sufixul „_io” în numele acestuia."
 
 msgid "Add a new frame"
 msgstr "Adaugă un cadru nou"
@@ -1417,7 +1435,7 @@ msgid "Lock/unlock layer"
 msgstr "Blochează/deblochează stratul"
 
 msgid "Frame: %s, Layer: %s"
-msgstr "Cadru: %s, Strat: %s"
+msgstr "Cadru: %s, strat: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1445,11 +1463,11 @@ msgstr "Anulare: desenare"
 msgid "Redo: Draw"
 msgstr "Refacere: desenare"
 
-msgid "Undo: Rectangle Select"
-msgstr "Anulare: selectare dreptunghi"
+msgid "Undo: Select"
+msgstr "Anulare: selectare"
 
-msgid "Redo: Rectangle Select"
-msgstr "Refacere: selectare dreptunghi"
+msgid "Redo: Select"
+msgstr "Refacere: selectare"
 
 msgid "Undo: Scale"
 msgstr "Anulare: scalare"
@@ -1647,7 +1665,7 @@ msgid "Custom"
 msgstr "Personalizată"
 
 msgid "Rectangular Selection"
-msgstr "Selecție dreptunghiulară"
+msgstr "Selectare dreptunghiulară"
 
 msgid "Elliptical Selection"
 msgstr "Selectare eliptică"
@@ -1763,10 +1781,10 @@ msgstr "Închide"
 msgid "Delete"
 msgstr "Ștergere"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
-msgstr "A fost găsită copia de rezervă pentru %s.\n"
-"Dorești să o reîncarci?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
+msgstr "Au fost găsite proiecte salvate automat de la o sesiune căzută.\n"
+"Dorești să recuperezi datele?"
 
 msgid "Backup reloaded"
 msgstr "Copie de rezervă reîncărcată"

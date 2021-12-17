@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2021-09-04 22:38\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -118,7 +118,7 @@ msgid "Undo"
 msgstr "Скасувати"
 
 msgid "Redo"
-msgstr "Повторити"
+msgstr "Відновити"
 
 msgid "Copy"
 msgstr "Копіювати"
@@ -177,8 +177,8 @@ msgstr "Налаштування"
 msgid "Tile Mode"
 msgstr "Безшовний режим"
 
-msgid "Window Transparency"
-msgstr "Прозорість вікна"
+msgid "Window Opacity"
+msgstr "Непрозорість вікна"
 
 msgid "Panel Layout"
 msgstr "Позиція панелей"
@@ -438,7 +438,7 @@ msgid "Selection"
 msgstr "Виділення"
 
 msgid "Shortcuts"
-msgstr "Ярлики"
+msgstr "Комбінації клавіш"
 
 msgid "Backup"
 msgstr "Резервна копія"
@@ -456,7 +456,7 @@ msgid "Restore default value"
 msgstr "Відновити значення за замовчуванням"
 
 msgid "Smooth Zoom"
-msgstr "М'яке маштабування"
+msgstr "М'яке масштабування"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr "Додає більш плавний перехід при масштабуванні"
@@ -623,6 +623,9 @@ msgstr "Онлайн документація"
 msgid "Issue Tracker"
 msgstr "Трекер помилок"
 
+msgid "Open Logs Folder"
+msgstr "Відкрити директорію логів"
+
 msgid "Changelog"
 msgstr "Список змін"
 
@@ -630,7 +633,7 @@ msgid "About Pixelorama"
 msgstr "Про Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr "Пікселорама - пікселізуйте свої мрії!"
+msgstr "Pixelorama - пікселізуйте свої мрії!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Розроблено Orama Interactive"
@@ -1115,14 +1118,14 @@ msgstr "Можна міняти тільки користувацький наб
 msgid "Set application FPS limit:"
 msgstr "Встановити обмеження FPS додатку:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "Обмежити FPS до 1, коли змінити фокус програми"
+msgid "Pause application when it loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Встановлює обмеження кадрів в секунду. Чим нижче значення, ти менше додаток використовує CPU, але програма починає працювати повільніше, стає менш стабільною і може не реагувати. 0 означає, що немає ніяких обмежень."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Якщо цей параметр увімкнено, то коли вікно додатку втратить фокус, обмеження FPS буде змінено на 1. Це допомагає знизити навантаження на процесор, при простої. Ліміт FPS скидається, коли навести мишку на вікно застосунку."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Пензель:"
@@ -1350,6 +1353,21 @@ msgstr "Якщо вибрано цю опцію, анімація буде пр�
 msgid "Blue-Red Mode"
 msgstr "Синьо-червоний режим"
 
+msgid "Show past frames:"
+msgstr "Показ минулих кадрів:"
+
+msgid "Show future frames:"
+msgstr "Показ майбутніх кадрів:"
+
+msgid "Above canvas"
+msgstr "Над полотном"
+
+msgid "Below canvas"
+msgstr "Під полотном"
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr "Якщо ви хочете, щоб шар ігнорував шлейф сусідніх кадрів, просто додайте до назви суфікс «_io» латиницею."
+
 msgid "Add a new frame"
 msgstr "Додати новий кадр"
 
@@ -1445,11 +1463,11 @@ msgstr "Скасувати: малювання"
 msgid "Redo: Draw"
 msgstr "Повторити: малювання"
 
-msgid "Undo: Rectangle Select"
-msgstr "Скасувати: прямокутне виділення"
+msgid "Undo: Select"
+msgstr "Скасувати: виділення"
 
-msgid "Redo: Rectangle Select"
-msgstr "Повторити: прямокутне виділення"
+msgid "Redo: Select"
+msgstr "Повторити: виділення"
 
 msgid "Undo: Scale"
 msgstr "Скасувати: масштабування"
@@ -1599,7 +1617,7 @@ msgid "Become a Patron"
 msgstr "Стати меценатом"
 
 msgid "Don't show again"
-msgstr "Не показувати знов"
+msgstr "Не показувати знову"
 
 msgid "Image Options"
 msgstr "Опції зображення"
@@ -1763,10 +1781,10 @@ msgstr "Закрити"
 msgid "Delete"
 msgstr "Видалити"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
-msgstr "Знайдено автозбережену резервну копію для %s.\n"
-"Бажаєте її відкрити?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
+msgstr "Знайдено автоматично записаний проєкт/проєкти з аварійно закінченої сесії.\n"
+"Відновити дані?"
 
 msgid "Backup reloaded"
 msgstr "Завантажено резервну копію"
@@ -1832,7 +1850,7 @@ msgid "Remove a selected color"
 msgstr "Видалити вибраний колір"
 
 msgid "Palette with the same name and path already exists!"
-msgstr "Палітра з такими ж назвою та шляхом вже існує!"
+msgstr "Палітра з такою назвою та шляхом вже існує!"
 
 msgid "Palette name is required!"
 msgstr "Назва палітри обов’язкова!"

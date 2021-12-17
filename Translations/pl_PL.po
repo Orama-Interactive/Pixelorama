@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-09-04 14:28\n"
+"PO-Revision-Date: 2021-12-11 18:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -177,8 +177,8 @@ msgstr "Ustawienia"
 msgid "Tile Mode"
 msgstr "Tryb kafelkowy"
 
-msgid "Window Transparency"
-msgstr "Przezroczystość okna"
+msgid "Window Opacity"
+msgstr ""
 
 msgid "Panel Layout"
 msgstr "Układ panelu"
@@ -524,7 +524,7 @@ msgid "Only affect selection"
 msgstr "Wpływ tylko na zaznaczenie"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Wybrane komórki"
 
 msgid "Current cel"
 msgstr "Bieżąca komórka"
@@ -622,6 +622,9 @@ msgstr "Dokumentacja Online"
 msgid "Issue Tracker"
 msgstr "Zgłaszanie problemów"
 
+msgid "Open Logs Folder"
+msgstr ""
+
 msgid "Changelog"
 msgstr "Lista zmian"
 
@@ -659,7 +662,7 @@ msgid "Translators"
 msgstr "Tłumacze"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Licencje"
 
 msgid "English"
 msgstr "Angielski"
@@ -677,7 +680,7 @@ msgid "Polish"
 msgstr "Polski"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugalski"
 
 msgid "Brazilian Portuguese"
 msgstr "Portugalski - Brazylijski"
@@ -906,7 +909,12 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Prostokąt\n\n"
+"%s na lewy przycisk myszy\n"
+"%s na prawy przycisk myszy\n\n"
+"Przytrzymaj %s aby stworzyć kształt 1:1\n"
+"Przytrzymaj %s aby wyśrodkować kształt na miejscu kliknięcia\n"
+"Przytrzymaj %s aby przemieścić pozycję źródłową kształtu"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -914,7 +922,12 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Elipsa\n\n"
+"%s na lewy przycisk myszy\n"
+"%s na prawy przycisk myszy\n\n"
+"Przytrzymaj %s aby stworzyć kształt 1:1\n"
+"Przytrzymaj %s aby wyśrodkować kształt na miejscu kliknięcia\n"
+"Przytrzymaj %s aby przemieścić pozycję źródłową kształtu"
 
 msgid "Rectangle"
 msgstr "Prostokąt"
@@ -1104,14 +1117,14 @@ msgstr "Tylko niestandardowe ustawienia mogą być modyfikowane"
 msgid "Set application FPS limit:"
 msgstr "Ustaw limit FPS dla aplikacji:"
 
-msgid "Limit FPS to 1 when app loses focus"
-msgstr "Ogranicz limit FPS do 1, kiedy okno aplikacji straci skupienie"
+msgid "Pause application when it loses focus"
+msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Ustawia limit klatek aplikacji na sekundę. Im niższa liczba, tym niższe zużycie procesora, ale aplikacja staje się wolniejsza. 0 oznacza, że nie ma limitu."
 
-msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
-msgstr "Jeśli ta opcja jest włączona i okno aplikacji straci skupienie, to limit FPS aplikacji jest ustawiony na 1. To pomaga obniżyć zużycie procesora podczas bezczynności. Limit FPS zostanie przywrócony, gdy kursor myszy wróci na okno aplikacji."
+msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
 
 msgid "Brush:"
 msgstr "Pędzel:"
@@ -1339,6 +1352,21 @@ msgstr "Jeśli jest zaznaczone, animacja odtwarza się tylko na klatkach z tym s
 msgid "Blue-Red Mode"
 msgstr "Niebiesko-czerwone prześwity"
 
+msgid "Show past frames:"
+msgstr ""
+
+msgid "Show future frames:"
+msgstr ""
+
+msgid "Above canvas"
+msgstr ""
+
+msgid "Below canvas"
+msgstr ""
+
+msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+msgstr ""
+
 msgid "Add a new frame"
 msgstr "Dodaj nową klatkę"
 
@@ -1434,11 +1462,11 @@ msgstr "Cofnij: Rysowanie"
 msgid "Redo: Draw"
 msgstr "Przywróć: Rysowanie"
 
-msgid "Undo: Rectangle Select"
-msgstr "Cofnij: Zaznaczenie prostokątne"
+msgid "Undo: Select"
+msgstr ""
 
-msgid "Redo: Rectangle Select"
-msgstr "Przywróć: Zaznaczenie prostokątne"
+msgid "Redo: Select"
+msgstr ""
 
 msgid "Undo: Scale"
 msgstr "Cofnij: Skalowanie"
@@ -1639,22 +1667,22 @@ msgid "Rectangular Selection"
 msgstr "Zaznaczenie prostokątne"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "Zaznaczenie eliptyczne"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "Zaznaczenie poligonalne"
 
 msgid "Select By Color"
-msgstr ""
+msgstr "Wybierz według koloru"
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "Magiczna Różdżka"
 
 msgid "Lasso / Free Select Tool"
-msgstr ""
+msgstr "Lasso / Narzędzie wolnego zaznacznia"
 
 msgid "Move"
-msgstr ""
+msgstr "Przenieś"
 
 msgid "Zoom"
 msgstr "Przybliżenie"
@@ -1678,13 +1706,13 @@ msgid "Shading Tool"
 msgstr "Narzędzie cieniowania"
 
 msgid "Line Tool"
-msgstr ""
+msgstr "Linia"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "Prostokąt"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "Elipsa"
 
 msgid "Switch Colors"
 msgstr "Zmień kolory"
@@ -1752,10 +1780,9 @@ msgstr "Zamknij"
 msgid "Delete"
 msgstr "Usuń"
 
-msgid "Autosaved backup for %s was found.\n"
-"Do you want to reload it?"
-msgstr "Znaleziono automatyczną kopię zapasową dla %s.\n"
-"Czy chcesz ją wczytać?"
+msgid "Autosaved project(s) from a crashed session were found.\n"
+"Do you want to recover the data?"
+msgstr ""
 
 msgid "Backup reloaded"
 msgstr "Wczytano ponownię kopię zapasową"
@@ -1830,5 +1857,5 @@ msgid "Reducing palette size will reset positions of colors. Colors that don't f
 msgstr "Zmniejszenie rozmiaru palety zresetuje pozycje kolorów. Kolory, które nie mieszczą się w nowym rozmiarze palety zostaną utracone!"
 
 msgid "Position:"
-msgstr ""
+msgstr "Pozycja:"
 

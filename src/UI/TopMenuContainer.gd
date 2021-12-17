@@ -471,7 +471,8 @@ func _toggle_zen_mode() -> void:
 	Global.tool_panel.visible = zen_mode
 	Global.right_panel.visible = zen_mode
 	Global.control.find_node("TabsContainer").visible = zen_mode
-	Global.control.tallscreen_hsplit.visible = zen_mode
+	if Global.panel_layout == Global.PanelLayout.TALLSCREEN:
+		Global.control.tallscreen_hsplit.visible = zen_mode
 	zen_mode = !zen_mode
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)
 
@@ -573,7 +574,7 @@ func help_menu_id_pressed(id: int) -> void:
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		HelpMenuId.OPEN_LOGS_FOLDER:
 			var dir = Directory.new()
-			dir.make_dir_recursive("user://logs")  #incase someone deleted it
+			dir.make_dir_recursive("user://logs")  # In case someone deleted it
 			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		HelpMenuId.CHANGELOG:
 			OS.shell_open(

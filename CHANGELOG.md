@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## Unreleased
+## [v0.9.1] - Unreleased
 This update has been brought to you by the contributions of:
-Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Marquis Kurt ([@alicerunsonfedora](https://github.com/alicerunsonfedora)), Xenofon Konitsas ([@huskeee](https://github.com/huskeee)), Silent Orb ([@silentorb](https://github.com/silentorb)), Jeremy Behreandt ([@behreajj](https://github.com/behreajj)), [@mrtripie](https://github.com/mrtripie, [JumpJetAvocado](https://github.com/JumpJetAvocado)
+Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Marquis Kurt ([@alicerunsonfedora](https://github.com/alicerunsonfedora)), Xenofon Konitsas ([@huskeee](https://github.com/huskeee)), Silent Orb ([@silentorb](https://github.com/silentorb)), Jeremy Behreandt ([@behreajj](https://github.com/behreajj)), [@mrtripie](https://github.com/mrtripie), [@JumpJetAvocado](https://github.com/JumpJetAvocado)
 
 ### Added
 - Pixelorama is now available on the [Open Store](https://open-store.io/app/pixelorama.orama-interactive) for Ubuntu Touch. [#517](https://github.com/Orama-Interactive/Pixelorama/pull/517)
@@ -21,7 +21,6 @@ Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar 
 - New setting in the Preferences that lets the user change the idle FPS. [#543](https://github.com/Orama-Interactive/Pixelorama/pull/543)
 - Added a README file for the macOS version that provides more information regarding the Gatekeeper. [#545](https://github.com/Orama-Interactive/Pixelorama/pull/545)
 - Added an "Open Logs Folder" option in the Help menu. [#546](https://github.com/Orama-Interactive/Pixelorama/pull/546)
-- The step of the UI scale slider has been changed to 0.25 from 0.1.
 - Options to place the onion skinning previews above or below the canvas are now available. [#600](https://github.com/Orama-Interactive/Pixelorama/pull/600)
 - Added a clipboard pattern button. This lets the users fill patterns taken from the application's clipboard (copying selected content).
 
@@ -34,14 +33,18 @@ Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar 
 - The guides now become transparent when they out of canvas bounds, along with other various improvements and fixes. [#561](https://github.com/Orama-Interactive/Pixelorama/pull/561)
 - Moved window opacity settings to a dedicated dialog with a slider and a spinbox.
 - The fill color of a projects now only gets applied to the cels of the bottom-most layer.
+- The step of the UI scale slider has been changed to 0.25 from 0.1.
 - "New Brush" in the Edit menu is now disabled when there is no active selection.
+- The application now pauses when it loses focus instead of limiting its FPS. Of course, this behavior remains toggleable by the user.
 - The undo/redo notification text for selection has been renamed to "Select" from "Rectangle Select".
 
 ### Fixed
 - The "Pixelorama.app is damaged" error in macOS should no longer appear. macOS builds are now ad-hoc signed. [#602](https://github.com/Orama-Interactive/Pixelorama/pull/602)
 - Removing a project tab that is on the left of the currently active tab will no longer result in a crash when attempting to save.
 - Merging layers with less than 100% opacity no longer crashes the application. [#541](https://github.com/Orama-Interactive/Pixelorama/issues/541)
+- Fixed crash when drawing and switching tools using shortcuts. [#618](https://github.com/Orama-Interactive/Pixelorama/issues/618)
 - Fixed issue with copying and pasting content between projects of different sizes.
+- Project data no longer remain in memory after the user has removed their tab.
 - Fixed issues with guides and notifications not working properly when the UI is scaled.
 - A bug was fixed where when the user has another application as their focus and reenters Pixelorama with the mouse but not focusing it and then exiting with the mouse, the target FPS would be set to the standard. [#543](https://github.com/Orama-Interactive/Pixelorama/pull/543)
 - Fixed issue with the backup confirmation dialog extending horizontally infinitely, which made the buttons disappear. Its text has also been changed.
@@ -51,6 +54,7 @@ Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar 
 - Fixed Alt-Tab causing the cursor to get stuck. [#552](https://github.com/Orama-Interactive/Pixelorama/issues/552)
 - Some optimizations have been made, which should result in Pixelorama opening a bit faster, and input event handling is also using less CPU usage.
 - Fixed project not having the correct size if the default image size has been changed in the Preferences.
+- Fix issue where the timeline would be unresponsive if zen mode was toggled off and on.
 
 ## [v0.9] - 2021-09-18
 This update has been brought to you by the contributions of:
