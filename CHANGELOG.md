@@ -21,7 +21,6 @@ Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar 
 - New setting in the Preferences that lets the user change the idle FPS. [#543](https://github.com/Orama-Interactive/Pixelorama/pull/543)
 - Added a README file for the macOS version that provides more information regarding the Gatekeeper. [#545](https://github.com/Orama-Interactive/Pixelorama/pull/545)
 - Added an "Open Logs Folder" option in the Help menu. [#546](https://github.com/Orama-Interactive/Pixelorama/pull/546)
-- The step of the UI scale slider has been changed to 0.25 from 0.1.
 - Options to place the onion skinning previews above or below the canvas are now available. [#600](https://github.com/Orama-Interactive/Pixelorama/pull/600)
 - Added a clipboard pattern button. This lets the users fill patterns taken from the application's clipboard (copying selected content).
 
@@ -34,6 +33,7 @@ Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar 
 - The guides now become transparent when they out of canvas bounds, along with other various improvements and fixes. [#561](https://github.com/Orama-Interactive/Pixelorama/pull/561)
 - Moved window opacity settings to a dedicated dialog with a slider and a spinbox.
 - The fill color of a projects now only gets applied to the cels of the bottom-most layer.
+- The step of the UI scale slider has been changed to 0.25 from 0.1.
 - "New Brush" in the Edit menu is now disabled when there is no active selection.
 - The application now pauses when it loses focus instead of limiting its FPS. Of course, this behavior remains toggleable by the user.
 - The undo/redo notification text for selection has been renamed to "Select" from "Rectangle Select".
@@ -42,6 +42,7 @@ Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar 
 - The "Pixelorama.app is damaged" error in macOS should no longer appear. macOS builds are now ad-hoc signed. [#602](https://github.com/Orama-Interactive/Pixelorama/pull/602)
 - Removing a project tab that is on the left of the currently active tab will no longer result in a crash when attempting to save.
 - Merging layers with less than 100% opacity no longer crashes the application. [#541](https://github.com/Orama-Interactive/Pixelorama/issues/541)
+- Fixed crash when drawing and switching tools using shortcuts. [#618](https://github.com/Orama-Interactive/Pixelorama/issues/618)
 - Fixed issue with copying and pasting content between projects of different sizes.
 - Project data no longer remain in memory after the user has removed their tab.
 - Fixed issues with guides and notifications not working properly when the UI is scaled.
