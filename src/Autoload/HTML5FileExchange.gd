@@ -44,32 +44,6 @@ func _define_js() -> void:
 			}
 		});
 	}
-	function upload_palette() {
-		canceled = true;
-		var input = document.createElement('INPUT');
-		input.setAttribute("type", "file");
-		input.setAttribute("accept", "application/json, .gpl, .pal, image/png, image/jpeg, image/webp");
-		input.click();
-		input.addEventListener('change', event => {
-			if (event.target.files.length > 0){
-				canceled = false;}
-			var file = event.target.files[0];
-			var reader = new FileReader();
-			fileType = file.type;
-			fileName = file.name;
-			if (fileType == "image/png" || fileType == "image/jpeg" || fileType == "image/webp"){
-				reader.readAsArrayBuffer(file);
-			}
-			else {
-				reader.readAsText(file);
-			}
-			reader.onloadend = function (evt) {
-				if (evt.target.readyState == FileReader.DONE) {
-					fileData = evt.target.result;
-				}
-			}
-		});
-	}
 	function upload_shader() {
 		canceled = true;
 		var input = document.createElement('INPUT');
@@ -138,54 +112,6 @@ func load_image() -> void:
 		return
 	else:
 		OpenSave.handle_loading_image(image_name, image)
-
-
-func load_palette() -> void:
-	if OS.get_name() != "HTML5" or !OS.has_feature("JavaScript"):
-		return
-
-	# Execute JS function
-	JavaScript.eval("upload_palette();", true)  # Opens prompt for choosing file
-
-	yield(self, "in_focus")  # Wait until JS prompt is closed
-
-	yield(get_tree().create_timer(0.5), "timeout")  # Give some time for async JS data load
-
-	if JavaScript.eval("canceled;", true):  # If File Dialog closed w/o file
-		return
-
-	# Use data from palette file data
-	var palette_data
-	while true:
-		palette_data = JavaScript.eval("fileData;", true)
-		if palette_data != null:
-			break
-		yield(get_tree().create_timer(1.0), "timeout")  # Need more time to load data
-
-	var file_type = JavaScript.eval("fileType;", true)
-	var file_name = JavaScript.eval("fileName;", true)
-	if file_name.ends_with(".gpl"):
-		var palette := Palette.new()
-		palette = Import.import_gpl(file_name, palette_data)
-		Global.palette_container.attempt_to_import_palette(palette)
-	elif file_name.ends_with(".pal"):
-		var palette := Palette.new()
-		palette = Import.import_pal_palette(file_name, palette_data)
-		Global.palette_container.attempt_to_import_palette(palette)
-	else:
-		match file_type:
-			"image/png":
-				var image := Image.new()
-				var err = image.load_png_from_buffer(palette_data)
-				if !err:
-					Global.palette_container.import_image_palette(file_name, image)
-			"application/json":
-				var palette: Palette = Palette.new().deserialize(palette_data)
-				palette.source_path = file_name
-				Global.palette_container.attempt_to_import_palette(palette)
-			var invalid_type:
-				print("Invalid type: " + invalid_type)
-				return
 
 
 func load_shader() -> void:
