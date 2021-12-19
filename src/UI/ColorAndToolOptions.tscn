@@ -6,24 +6,33 @@
 
 [sub_resource type="ShortCut" id=1]
 
-[node name="ColorAndToolOptions" type="VBoxContainer"]
-margin_right = 300.0
+[node name="ColorAndToolOptions" type="Panel"]
+margin_right = 318.0
 margin_bottom = 255.0
+rect_min_size = Vector2( 0, 255 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_right = 2.0
 rect_min_size = Vector2( 318, 0 )
-size_flags_vertical = 3
 custom_constants/separation = 8
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorPickersHorizontal" type="HBoxContainer" parent="."]
+[node name="ColorPickersHorizontal" type="HBoxContainer" parent="HBoxContainer"]
 margin_right = 318.0
 margin_bottom = 32.0
 custom_constants/separation = 13
 alignment = 1
 
-[node name="LeftColorPickerButton" type="ColorPickerButton" parent="ColorPickersHorizontal"]
+[node name="LeftColorPickerButton" type="ColorPickerButton" parent="HBoxContainer/ColorPickersHorizontal"]
 margin_left = 69.0
 margin_right = 133.0
 margin_bottom = 32.0
@@ -33,19 +42,19 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="ColorButtonsVertical" type="VBoxContainer" parent="ColorPickersHorizontal"]
+[node name="ColorButtonsVertical" type="VBoxContainer" parent="HBoxContainer/ColorPickersHorizontal"]
 margin_left = 146.0
 margin_right = 171.0
 margin_bottom = 32.0
 custom_constants/separation = 2
 alignment = 1
 
-[node name="ColorSwitchCenter" type="CenterContainer" parent="ColorPickersHorizontal/ColorButtonsVertical"]
+[node name="ColorSwitchCenter" type="CenterContainer" parent="HBoxContainer/ColorPickersHorizontal/ColorButtonsVertical"]
 margin_top = 6.0
 margin_right = 25.0
 margin_bottom = 13.0
 
-[node name="ColorSwitch" type="TextureButton" parent="ColorPickersHorizontal/ColorButtonsVertical/ColorSwitchCenter" groups=["UIButtons"]]
+[node name="ColorSwitch" type="TextureButton" parent="HBoxContainer/ColorPickersHorizontal/ColorButtonsVertical/ColorSwitchCenter" groups=["UIButtons"]]
 margin_right = 25.0
 margin_bottom = 7.0
 hint_tooltip = "Switch left and right colors
@@ -55,25 +64,25 @@ shortcut_in_tooltip = false
 shortcut = SubResource( 1 )
 texture_normal = ExtResource( 1 )
 
-[node name="ColorPickersCenter" type="CenterContainer" parent="ColorPickersHorizontal/ColorButtonsVertical"]
+[node name="ColorPickersCenter" type="CenterContainer" parent="HBoxContainer/ColorPickersHorizontal/ColorButtonsVertical"]
 margin_top = 15.0
 margin_right = 25.0
 margin_bottom = 15.0
 
-[node name="ColorDefaultsCenter" type="CenterContainer" parent="ColorPickersHorizontal/ColorButtonsVertical"]
+[node name="ColorDefaultsCenter" type="CenterContainer" parent="HBoxContainer/ColorPickersHorizontal/ColorButtonsVertical"]
 margin_top = 17.0
 margin_right = 25.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 
-[node name="ColorDefaults" type="TextureButton" parent="ColorPickersHorizontal/ColorButtonsVertical/ColorDefaultsCenter"]
+[node name="ColorDefaults" type="TextureButton" parent="HBoxContainer/ColorPickersHorizontal/ColorButtonsVertical/ColorDefaultsCenter"]
 margin_right = 25.0
 margin_bottom = 8.0
 hint_tooltip = "Reset the colors to their default state (black for left, white for right)"
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 2 )
 
-[node name="RightColorPickerButton" type="ColorPickerButton" parent="ColorPickersHorizontal"]
+[node name="RightColorPickerButton" type="ColorPickerButton" parent="HBoxContainer/ColorPickersHorizontal"]
 margin_left = 184.0
 margin_right = 248.0
 margin_bottom = 32.0
@@ -84,37 +93,37 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 color = Color( 1, 1, 1, 1 )
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
 margin_top = 40.0
 margin_right = 318.0
 margin_bottom = 255.0
 size_flags_vertical = 3
 
-[node name="ToolOptions" type="HBoxContainer" parent="ScrollContainer"]
+[node name="ToolOptions" type="HBoxContainer" parent="HBoxContainer/ScrollContainer"]
 margin_right = 318.0
 margin_bottom = 215.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 8
 
-[node name="LeftPanelContainer" type="PanelContainer" parent="ScrollContainer/ToolOptions"]
+[node name="LeftPanelContainer" type="PanelContainer" parent="HBoxContainer/ScrollContainer/ToolOptions"]
 margin_right = 155.0
 margin_bottom = 215.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 
-[node name="RightPanelContainer" type="PanelContainer" parent="ScrollContainer/ToolOptions"]
+[node name="RightPanelContainer" type="PanelContainer" parent="HBoxContainer/ScrollContainer/ToolOptions"]
 margin_left = 163.0
 margin_right = 318.0
 margin_bottom = 215.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 
-[connection signal="color_changed" from="ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_ColorPickerButton_color_changed" binds= [ false ]]
-[connection signal="popup_closed" from="ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_ColorPickerButton_popup_closed"]
-[connection signal="pressed" from="ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_ColorPickerButton_pressed"]
-[connection signal="pressed" from="ColorPickersHorizontal/ColorButtonsVertical/ColorSwitchCenter/ColorSwitch" to="." method="_on_ColorSwitch_pressed"]
-[connection signal="pressed" from="ColorPickersHorizontal/ColorButtonsVertical/ColorDefaultsCenter/ColorDefaults" to="." method="_on_ColorDefaults_pressed"]
-[connection signal="color_changed" from="ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_ColorPickerButton_color_changed" binds= [ true ]]
-[connection signal="popup_closed" from="ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_ColorPickerButton_popup_closed"]
-[connection signal="pressed" from="ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_ColorPickerButton_pressed"]
+[connection signal="color_changed" from="HBoxContainer/ColorPickersHorizontal/LeftColorPickerButton" to="HBoxContainer" method="_on_ColorPickerButton_color_changed" binds= [ false ]]
+[connection signal="popup_closed" from="HBoxContainer/ColorPickersHorizontal/LeftColorPickerButton" to="HBoxContainer" method="_on_ColorPickerButton_popup_closed"]
+[connection signal="pressed" from="HBoxContainer/ColorPickersHorizontal/LeftColorPickerButton" to="HBoxContainer" method="_on_ColorPickerButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/ColorPickersHorizontal/ColorButtonsVertical/ColorSwitchCenter/ColorSwitch" to="HBoxContainer" method="_on_ColorSwitch_pressed"]
+[connection signal="pressed" from="HBoxContainer/ColorPickersHorizontal/ColorButtonsVertical/ColorDefaultsCenter/ColorDefaults" to="HBoxContainer" method="_on_ColorDefaults_pressed"]
+[connection signal="color_changed" from="HBoxContainer/ColorPickersHorizontal/RightColorPickerButton" to="HBoxContainer" method="_on_ColorPickerButton_color_changed" binds= [ true ]]
+[connection signal="popup_closed" from="HBoxContainer/ColorPickersHorizontal/RightColorPickerButton" to="HBoxContainer" method="_on_ColorPickerButton_popup_closed"]
+[connection signal="pressed" from="HBoxContainer/ColorPickersHorizontal/RightColorPickerButton" to="HBoxContainer" method="_on_ColorPickerButton_pressed"]

@@ -125,7 +125,7 @@ onready var vertical_ruler: BaseButton = control.find_node("VerticalRuler")
 onready var transparent_checker: ColorRect = control.find_node("TransparentChecker")
 onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider")
 
-onready var tool_panel: Panel = control.find_node("ToolPanel")
+onready var tool_panel: Panel = control.find_node("Tools")
 onready var right_panel: Panel = control.find_node("RightPanel")
 onready var brushes_popup: Popup = control.find_node("BrushesPopup")
 onready var patterns_popup: Popup = control.find_node("PatternsPopup")

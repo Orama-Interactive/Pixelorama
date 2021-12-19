@@ -58,12 +58,18 @@ __meta__ = {
 [node name="CreateNewImage" parent="Dialogs" instance=ExtResource( 28 )]
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource( 12 )]
+show_hidden_files = true
+current_dir = "/home/overloaded/Documents/Orama/Pixelorama"
+current_path = "/home/overloaded/Documents/Orama/Pixelorama/"
 
 [node name="SaveSprite" parent="Dialogs" instance=ExtResource( 11 )]
 margin_left = 108.0
 margin_top = 40.0
 margin_right = 623.0
 margin_bottom = 388.0
+show_hidden_files = true
+current_dir = "/home/overloaded/Documents/Orama/Pixelorama"
+current_path = "/home/overloaded/Documents/Orama/Pixelorama/untitled"
 
 [node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource( 8 )]
 

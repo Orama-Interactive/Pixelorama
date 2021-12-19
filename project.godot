@@ -183,6 +183,10 @@ window/per_pixel_transparency/enabled.HTML5=false
 window/per_pixel_transparency/allowed.Android=false
 window/per_pixel_transparency/enabled.Android=false
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/dockable_container/plugin.cfg" )
+
 [gui]
 
 theme/use_hidpi.clickable=true
