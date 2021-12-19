@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-12-11 18:05\n"
+"PO-Revision-Date: 2021-12-12 17:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -178,7 +178,7 @@ msgid "Tile Mode"
 msgstr "Dlaždicový režim"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Průhlednost okna"
 
 msgid "Panel Layout"
 msgstr "Rozložení panelů"
@@ -624,7 +624,7 @@ msgid "Issue Tracker"
 msgstr "Nahlásit potíže"
 
 msgid "Open Logs Folder"
-msgstr ""
+msgstr "Otevřít složku s logy"
 
 msgid "Changelog"
 msgstr "Seznam změn"
@@ -1118,14 +1118,14 @@ msgid "Set application FPS limit:"
 msgstr "Limit snímků za vteřinu:"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Pozastavit aplikaci, když je okno v pozadí"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Nastaví limit snímků za vteřinu aplikace. Čím nižší číslo, tím menší bude zatížení procesoru,\n"
 "ale může dojít ke snížení odezvy a zasekávání aplikace. 0 značí žádný limit."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr ""
+msgstr "Pokud je tato možnost vybrána, tak je aplikace pozastavena, když je okno aplikace v pozadí. Dojde tak ke snížení využití procesoru při nečinnosti. Aplikace se automaticky obnoví, když kurzor myši vstoupí zpět do okna aplikace."
 
 msgid "Brush:"
 msgstr "Štětec:"
@@ -1354,19 +1354,19 @@ msgid "Blue-Red Mode"
 msgstr "Modro-červený režim"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "Zobrazit předchozí snímky:"
 
 msgid "Show future frames:"
-msgstr ""
+msgstr "Zobrazit následující snímky:"
 
 msgid "Above canvas"
-msgstr ""
+msgstr "Nad plátnem"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "Pod plátnem"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Pokud chcete, aby byla vrstva ignorována v onion skinningu, tak přidejte \"_io\" koncovku do jména vrstvy."
 
 msgid "Add a new frame"
 msgstr "Přidat nový snímek"
@@ -1464,10 +1464,10 @@ msgid "Redo: Draw"
 msgstr "Znovu: Nakreslit"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Zpět: Výběr"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Znovu: Výběr"
 
 msgid "Undo: Scale"
 msgstr "Zpět: Škálování"
@@ -1783,7 +1783,8 @@ msgstr "Smazat"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "Byly nalezeny automaticky uložené projekt(y) z havarované relace.\n"
+"Přejete si obnovit data?"
 
 msgid "Backup reloaded"
 msgstr "Záloha znovu načtena"
