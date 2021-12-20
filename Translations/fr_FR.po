@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-12-20 15:07\n"
+"PO-Revision-Date: 2021-12-20 15:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1366,7 +1366,7 @@ msgid "Below canvas"
 msgstr "En dessous du canevas"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Si vous voulez qu'un calque ignore la peau d'oignon, ajoutez simplement le suffixe « _io » dans son nom."
 
 msgid "Add a new frame"
 msgstr "Ajouter une frame"
@@ -1680,7 +1680,7 @@ msgid "Magic Wand"
 msgstr "Baguette magique"
 
 msgid "Lasso / Free Select Tool"
-msgstr ""
+msgstr "Lasso / Outil de sélection libre"
 
 msgid "Move"
 msgstr "Déplacer"
@@ -1783,7 +1783,8 @@ msgstr "Supprimer"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "Un ou plusieurs projet(s) enregistré(s) automatiquement à partir d'une session qui a plantée ont été trouvés.\n"
+"Voulez-vous récupérer les données ?"
 
 msgid "Backup reloaded"
 msgstr "Sauvegarde rechargée"
@@ -1834,19 +1835,19 @@ msgid "Empty"
 msgstr "Vide"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "À partir de la palette actuelle"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "À partir du sprite actuel"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "À partir de la sélection actuelle"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Ajouter une nouvelle couleur"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Supprimer une couleur sélectionnée"
 
 msgid "Palette with the same name and path already exists!"
 msgstr ""
