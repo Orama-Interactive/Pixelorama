@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v0.9.1] - Unreleased
+## [v0.9.1] - 2021-12-20
 This update has been brought to you by the contributions of:
 Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Marquis Kurt ([@alicerunsonfedora](https://github.com/alicerunsonfedora)), Xenofon Konitsas ([@huskeee](https://github.com/huskeee)), Silent Orb ([@silentorb](https://github.com/silentorb)), Jeremy Behreandt ([@behreajj](https://github.com/behreajj)), [@mrtripie](https://github.com/mrtripie), [@JumpJetAvocado](https://github.com/JumpJetAvocado)
 
