@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-12-11 18:39\n"
+"PO-Revision-Date: 2021-12-20 15:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1464,10 +1464,10 @@ msgid "Redo: Draw"
 msgstr "Refaire : Dessin"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Annuler : Sélectionner"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Rétablir : Sélectionner"
 
 msgid "Undo: Scale"
 msgstr "Annuler : Redimensionner l'image"
@@ -1668,22 +1668,22 @@ msgid "Rectangular Selection"
 msgstr "Sélection rectangulaire"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "Sélection elliptique"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "Sélection polygonale"
 
 msgid "Select By Color"
-msgstr ""
+msgstr "Sélectionner par couleur"
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "Baguette magique"
 
 msgid "Lasso / Free Select Tool"
 msgstr ""
 
 msgid "Move"
-msgstr ""
+msgstr "Déplacer"
 
 msgid "Zoom"
 msgstr "Zoom"
@@ -1704,16 +1704,16 @@ msgid "Bucket"
 msgstr "Seau de remplissage"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Outil d'ombrage"
 
 msgid "Line Tool"
-msgstr ""
+msgstr "Outil ligne"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "Outil rectangle"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "Outil ellipse"
 
 msgid "Switch Colors"
 msgstr "Changer les couleurs"
@@ -1825,13 +1825,13 @@ msgid "Tiled In Y Axis"
 msgstr "Mode Tuile sur l'Axe Y"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Créer une nouvelle palette"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Commentaire :"
 
 msgid "Empty"
-msgstr ""
+msgstr "Vide"
 
 msgid "From Current Palette"
 msgstr ""
