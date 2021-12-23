@@ -11,6 +11,7 @@ enum ViewMenuId {
 	SHOW_RULERS,
 	SHOW_GUIDES,
 	SHOW_ANIMATION_TIMELINE,
+	EDIT_MODE,
 	ZEN_MODE,
 	FULLSCREEN_MODE
 }
@@ -142,6 +143,7 @@ func _setup_view_menu() -> void:
 		"Show Rulers": InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
 		"Show Guides": InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
 		"Show Animation Timeline": 0,
+		"Edit Mode": InputMap.get_action_list("edit_mode")[0].get_scancode_with_modifiers(),
 		"Zen Mode": InputMap.get_action_list("zen_mode")[0].get_scancode_with_modifiers(),
 		"Fullscreen Mode":
 		InputMap.get_action_list("toggle_fullscreen")[0].get_scancode_with_modifiers(),
@@ -369,6 +371,8 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_guides()
 		ViewMenuId.SHOW_ANIMATION_TIMELINE:
 			_toggle_show_anim_timeline()
+		ViewMenuId.EDIT_MODE:
+			Global.control.ui.tabs_visible = !Global.control.ui.tabs_visible
 		ViewMenuId.ZEN_MODE:
 			_toggle_zen_mode()
 		ViewMenuId.FULLSCREEN_MODE:
