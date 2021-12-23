@@ -18,7 +18,7 @@ onready var color_and_tool_options := ui.find_node("ColorAndToolOptions")
 onready var scroll_container := ui.find_node(
 	"ColorAndToolOptions/ScrollContainer"
 )
-onready var tool_panel := $MenuAndUI/UI/Tools
+onready var tool_panel := $MenuAndUI/UI/DockableContainer/Tools
 onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
 
 
@@ -34,7 +34,6 @@ func _ready() -> void:
 
 	get_tree().set_auto_accept_quit(false)
 	_setup_application_window_size()
-	get_tree().get_root().connect("size_changed", self, "handle_resize")
 
 	if OS.get_name() == "OSX":
 		_use_osx_shortcuts()

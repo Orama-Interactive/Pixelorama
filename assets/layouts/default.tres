@@ -26,7 +26,7 @@ current_tab = 0
 resource_name = "Split"
 script = ExtResource( 1 )
 direction = 1
-percent = 0.894531
+percent = 0.90625
 first = SubResource( 8 )
 second = SubResource( 9 )
 
