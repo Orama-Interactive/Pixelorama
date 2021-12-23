@@ -3,22 +3,17 @@ extends Control
 var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
-var tallscreen_is_active = false
 var alternate_transparent_background := ColorRect.new()
 var cursor_image = preload("res://assets/graphics/cursor.png")
 
-onready var ui := $MenuAndUI/UI
-onready var canvas_preview_container := ui.find_node(
-	"CanvasPreviewContainer"
-)
+onready var ui := $MenuAndUI/UI/DockableContainer
+onready var canvas_preview_container := ui.find_node("CanvasPreviewContainer")
 onready var tool_and_palette_vsplit := ui.find_node(
 	"MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit"
 )
 onready var color_and_tool_options := ui.find_node("ColorAndToolOptions")
-onready var scroll_container := ui.find_node(
-	"ColorAndToolOptions/ScrollContainer"
-)
-onready var tool_panel := $MenuAndUI/UI/DockableContainer/Tools
+onready var scroll_container := ui.find_node("ColorAndToolOptions/ScrollContainer")
+onready var tool_panel := ui.find_node("Tools")
 onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
 
 
@@ -376,7 +371,6 @@ func _use_osx_shortcuts() -> void:
 
 
 func _exit_tree() -> void:
-	Global.config_cache.set_value("window", "panel_layout", Global.panel_layout)
 	Global.config_cache.set_value("window", "screen", OS.current_screen)
 	Global.config_cache.set_value(
 		"window", "maximized", OS.window_maximized || OS.window_fullscreen

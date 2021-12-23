@@ -5,7 +5,6 @@ enum EditMenuId { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
 enum ViewMenuId {
 	TILE_MODE,
 	WINDOW_OPACITY,
-	PANEL_LAYOUT,
 	MIRROR_VIEW,
 	SHOW_GRID,
 	SHOW_PIXEL_GRID,
@@ -136,7 +135,6 @@ func _setup_view_menu() -> void:
 	var view_menu_items := {  # order as in ViewMenuId enum
 		"Tile Mode": 0,
 		"Window Opacity": 0,
-		"Panel Layout": 0,
 		"Mirror View": InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid": InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Pixel Grid":
@@ -156,8 +154,6 @@ func _setup_view_menu() -> void:
 			_setup_tile_mode_submenu(item)
 		elif item == "Window Opacity":
 			view_menu.add_item(item, i, view_menu_items[item])
-		elif item == "Panel Layout":
-			_setup_panel_layout_submenu(item)
 		else:
 			view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
@@ -185,19 +181,6 @@ func _setup_tile_mode_submenu(item: String) -> void:
 	tile_mode_submenu.connect("id_pressed", self, "_tile_mode_submenu_id_pressed")
 	view_menu.add_child(tile_mode_submenu)
 	view_menu.add_submenu_item(item, tile_mode_submenu.get_name())
-
-
-func _setup_panel_layout_submenu(item: String) -> void:
-	panel_layout_submenu.set_name("panel_layout_submenu")
-	panel_layout_submenu.add_radio_check_item("Auto", Global.PanelLayout.AUTO)
-	panel_layout_submenu.add_radio_check_item("Widescreen", Global.PanelLayout.WIDESCREEN)
-	panel_layout_submenu.add_radio_check_item("Tallscreen", Global.PanelLayout.TALLSCREEN)
-	panel_layout_submenu.hide_on_checkable_item_selection = false
-	panel_layout_submenu.set_item_checked(Global.panel_layout, true)
-
-	panel_layout_submenu.connect("id_pressed", self, "_panel_layout_submenu_id_pressed")
-	view_menu.add_child(panel_layout_submenu)
-	view_menu.add_submenu_item(item, panel_layout_submenu.get_name())
 
 
 func _setup_image_menu() -> void:
@@ -403,13 +386,6 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.canvas.grid.update()
 
 
-func _panel_layout_submenu_id_pressed(id: int) -> void:
-	Global.panel_layout = id
-	for i in Global.PanelLayout.values():
-		panel_layout_submenu.set_item_checked(i, i == id)
-	get_tree().get_root().get_node("Control").handle_resize()
-
-
 func _toggle_mirror_view() -> void:
 	Global.mirror_view = !Global.mirror_view
 	var marching_ants_outline: Sprite = Global.canvas.selection.marching_ants_outline
@@ -471,8 +447,6 @@ func _toggle_zen_mode() -> void:
 	Global.tool_panel.visible = zen_mode
 	Global.right_panel.visible = zen_mode
 	Global.control.find_node("TabsContainer").visible = zen_mode
-	if Global.panel_layout == Global.PanelLayout.TALLSCREEN:
-		Global.control.tallscreen_hsplit.visible = zen_mode
 	zen_mode = !zen_mode
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)
 

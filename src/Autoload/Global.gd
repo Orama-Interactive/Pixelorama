@@ -4,7 +4,6 @@ enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
 enum ThemeTypes { DARK, BLUE, CARAMEL, LIGHT }
 enum TileMode { NONE, BOTH, X_AXIS, Y_AXIS }
-enum PanelLayout { AUTO, WIDESCREEN, TALLSCREEN }
 enum IconColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
@@ -18,7 +17,6 @@ var projects := []  # Array of Projects
 var current_project: Project
 var current_project_index := 0 setget _project_changed
 
-var panel_layout = PanelLayout.AUTO
 var ui_tooltips := {}
 
 # Canvas related stuff
@@ -176,8 +174,6 @@ func _ready() -> void:
 
 	# Load settings from the config file
 	config_cache.load("user://cache.ini")
-
-	panel_layout = config_cache.get_value("window", "panel_layout", PanelLayout.AUTO)
 
 	default_width = config_cache.get_value("preferences", "default_width", default_width)
 	default_height = config_cache.get_value("preferences", "default_height", default_height)
