@@ -54,8 +54,8 @@ func cel_size_changed(value: int) -> void:
 	for layer_button in Global.layers_container.get_children():
 		layer_button.rect_min_size.y = cel_size
 		layer_button.rect_size.y = cel_size
-	for layer in Global.current_project.layers:
-		for cel_button in layer.frame_container.get_children():
+	for container in Global.frames_container.get_children():
+		for cel_button in container.get_children():
 			cel_button.rect_min_size.x = cel_size
 			cel_button.rect_min_size.y = cel_size
 			cel_button.rect_size.x = cel_size
@@ -83,20 +83,8 @@ func add_frame() -> void:
 	var project: Project = Global.current_project
 	var frame: Frame = project.new_empty_frame()
 	var new_frames: Array = project.frames.duplicate()
-	var new_layers: Array = project.layers.duplicate()
+	var new_layers: Array = project.duplicate_layers()
 	new_frames.insert(project.current_frame + 1, frame)
-	# Loop through the array to create new classes for each element, so that they
-	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
-	for i in new_layers.size():
-		var new_linked_cels = new_layers[i].linked_cels.duplicate()
-		new_layers[i] = Layer.new(
-			new_layers[i].name,
-			new_layers[i].visible,
-			new_layers[i].locked,
-			new_layers[i].frame_container,
-			new_layers[i].new_cels_linked,
-			new_linked_cels
-		)
 
 	for l_i in range(new_layers.size()):
 		if new_layers[l_i].new_cels_linked:  # If the link button is pressed
@@ -161,19 +149,7 @@ func delete_frame(frame := -1) -> void:
 	# Check if one of the cels of the frame is linked
 	# if they are, unlink them too
 	# this prevents removed cels being kept in linked memory
-	var new_layers: Array = Global.current_project.layers.duplicate()
-	# Loop through the array to create new classes for each element, so that they
-	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
-	for i in new_layers.size():
-		var new_linked_cels = new_layers[i].linked_cels.duplicate()
-		new_layers[i] = Layer.new(
-			new_layers[i].name,
-			new_layers[i].visible,
-			new_layers[i].locked,
-			new_layers[i].frame_container,
-			new_layers[i].new_cels_linked,
-			new_linked_cels
-		)
+	var new_layers: Array = Global.current_project.duplicate_layers()
 
 	for layer in new_layers:
 		for linked in layer.linked_cels:
@@ -221,7 +197,7 @@ func copy_frame(frame := -1) -> void:
 
 	var new_frame := Frame.new()
 	var new_frames := Global.current_project.frames.duplicate()
-	var new_layers: Array = Global.current_project.layers.duplicate()
+	var new_layers: Array = Global.current_project.duplicate_layers()
 	new_frames.insert(frame + 1, new_frame)
 
 	for cel in Global.current_project.frames[frame].cels:  # Copy every cel
@@ -230,19 +206,6 @@ func copy_frame(frame := -1) -> void:
 		var sprite_texture := ImageTexture.new()
 		sprite_texture.create_from_image(sprite, 0)
 		new_frame.cels.append(Cel.new(sprite, cel.opacity, sprite_texture))
-
-	# Loop through the array to create new classes for each element, so that they
-	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
-	for i in new_layers.size():
-		var new_linked_cels = new_layers[i].linked_cels.duplicate()
-		new_layers[i] = Layer.new(
-			new_layers[i].name,
-			new_layers[i].visible,
-			new_layers[i].locked,
-			new_layers[i].frame_container,
-			new_layers[i].new_cels_linked,
-			new_linked_cels
-		)
 
 	for l_i in range(new_layers.size()):
 		if new_layers[l_i].new_cels_linked:  # If the link button is pressed
@@ -651,19 +614,7 @@ func change_layer_order(rate: int) -> void:
 
 
 func _on_MergeDownLayer_pressed() -> void:
-	var new_layers: Array = Global.current_project.layers.duplicate()
-	# Loop through the array to create new classes for each element, so that they
-	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
-	for i in new_layers.size():
-		var new_linked_cels = new_layers[i].linked_cels.duplicate()
-		new_layers[i] = Layer.new(
-			new_layers[i].name,
-			new_layers[i].visible,
-			new_layers[i].locked,
-			new_layers[i].frame_container,
-			new_layers[i].new_cels_linked,
-			new_linked_cels
-		)
+	var new_layers: Array = Global.current_project.duplicate_layers()
 
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Merge Layer")

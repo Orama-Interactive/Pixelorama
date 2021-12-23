@@ -105,19 +105,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 		MenuOptions.LINK:
 			var f: Frame = Global.current_project.frames[frame]
 			var cel_index: int = Global.current_project.layers[layer].linked_cels.find(f)
-			var new_layers: Array = Global.current_project.layers.duplicate()
-			# Loop through the array to create new classes for each element, so that they
-			# won't be the same as the original array's classes. Needed for undo/redo to work properly.
-			for i in new_layers.size():
-				var new_linked_cels: Array = new_layers[i].linked_cels.duplicate()
-				new_layers[i] = Layer.new(
-					new_layers[i].name,
-					new_layers[i].visible,
-					new_layers[i].locked,
-					new_layers[i].frame_container,
-					new_layers[i].new_cels_linked,
-					new_linked_cels
-				)
+			var new_layers: Array = Global.current_project.duplicate_layers()
 			var new_cels: Array = f.cels.duplicate()
 			for i in new_cels.size():
 				new_cels[i] = Cel.new(

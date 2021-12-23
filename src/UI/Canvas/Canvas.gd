@@ -112,10 +112,12 @@ func update_texture(layer_i: int, frame_i := -1, project: Project = Global.curre
 		current_cel.image_texture.create_from_image(current_cel.image, 0)
 
 		if project == Global.current_project:
-			var frame_button = project.layers[layer_i].frame_container.get_child(frame_i)
-			var frame_texture_rect: TextureRect
-			frame_texture_rect = frame_button.find_node("CelTexture")
-			frame_texture_rect.texture = current_cel.image_texture
+			var container_index = Global.frames_container.get_child_count() - 1 - layer_i
+			var layer_cel_container = Global.frames_container.get_child(container_index)
+			var cel_button = layer_cel_container.get_child(frame_i)
+			var cel_texture_rect: TextureRect
+			cel_texture_rect = cel_button.find_node("CelTexture")
+			cel_texture_rect.texture = current_cel.image_texture
 
 
 func update_selected_cels_textures(project: Project = Global.current_project) -> void:
@@ -127,7 +129,9 @@ func update_selected_cels_textures(project: Project = Global.current_project) ->
 			current_cel.image_texture.create_from_image(current_cel.image, 0)
 
 			if project == Global.current_project:
-				var cel_button = project.layers[layer_index].frame_container.get_child(frame_index)
+				var container_index = Global.frames_container.get_child_count() - 1 - layer_index
+				var layer_cel_container = Global.frames_container.get_child(container_index)
+				var cel_button = layer_cel_container.get_child(frame_index)
 				var cel_texture_rect: TextureRect = cel_button.find_node("CelTexture")
 				cel_texture_rect.texture = current_cel.image_texture
 

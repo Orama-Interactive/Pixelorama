@@ -170,14 +170,7 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 			var layer_new_cels_linked := file.get_8()
 			linked_cels.append(file.get_var())
 
-			var l := Layer.new(
-				layer_name,
-				layer_visibility,
-				layer_lock,
-				HBoxContainer.new(),
-				layer_new_cels_linked,
-				[]
-			)
+			var l := Layer.new(layer_name, layer_visibility, layer_lock, layer_new_cels_linked, [])
 			new_project.layers.append(l)
 			global_layer_line = file.get_line()
 

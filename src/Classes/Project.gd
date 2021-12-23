@@ -85,8 +85,6 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 
 
 func remove() -> void:
-	for layer in layers:
-		layer.frame_container.queue_free()
 	undo_redo.free()
 	for guide in guides:
 		guide.queue_free()
@@ -160,7 +158,8 @@ func change_project() -> void:
 		layer_container.label.text = layers[i].name
 		layer_container.line_edit.text = layers[i].name
 
-		Global.frames_container.add_child(layers[i].frame_container)
+		var layer_cel_container := HBoxContainer.new()
+		Global.frames_container.add_child(layer_cel_container)
 		for j in range(frames.size()):  # Create Cel buttons
 			var cel_button = cel_button_node.instance()
 			cel_button.frame = j
@@ -169,7 +168,7 @@ func change_project() -> void:
 			if j == current_frame and i == current_layer:
 				cel_button.pressed = true
 
-			layers[i].frame_container.add_child(cel_button)
+			layer_cel_container.add_child(cel_button)
 
 	for j in range(frames.size()):  # Create frame ID labels
 		var button: Button = frame_button_node.instance()
@@ -335,7 +334,6 @@ func serialize() -> Dictionary:
 			cel_data.append(
 				{
 					"opacity": cel.opacity,
-					#				"image_data" : cel.image.get_data()
 				}
 			)
 		frame_data.append({"cels": cel_data, "duration": frame.duration})
@@ -402,7 +400,6 @@ func deserialize(dict: Dictionary) -> void:
 					saved_layer.name,
 					saved_layer.visible,
 					saved_layer.locked,
-					HBoxContainer.new(),
 					saved_layer.new_cels_linked,
 					linked_cels
 				)
@@ -463,7 +460,15 @@ func _frames_changed(value: Array) -> void:
 		frame_id.queue_free()
 
 	for i in range(layers.size() - 1, -1, -1):
-		Global.frames_container.add_child(layers[i].frame_container)
+		var layer_cel_container := HBoxContainer.new()
+		layer_cel_container.name = "FRAMESS " + str(i)
+		Global.frames_container.add_child(layer_cel_container)
+		for j in range(frames.size()):
+			var cel_button = cel_button_node.instance()
+			cel_button.frame = j
+			cel_button.layer = i
+			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
+			layer_cel_container.add_child(cel_button)
 
 	for j in range(frames.size()):
 		var button: Button = frame_button_node.instance()
@@ -471,14 +476,6 @@ func _frames_changed(value: Array) -> void:
 		button.rect_min_size.x = Global.animation_timeline.cel_size
 		button.text = str(j + 1)
 		Global.frame_ids.add_child(button)
-
-		for i in range(layers.size() - 1, -1, -1):
-			var cel_button = cel_button_node.instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-
-			layers[i].frame_container.add_child(cel_button)
 
 	_set_timeline_first_and_last_frames()
 
@@ -497,23 +494,24 @@ func _layers_changed(value: Array) -> void:
 	_remove_cel_buttons()
 
 	for i in range(layers.size() - 1, -1, -1):
-		var layer_container = layer_button_node.instance()
-		layer_container.layer = i
+		var layer_button: LayerButton = layer_button_node.instance()
+		layer_button.layer = i
 		if layers[i].name == "":
 			layers[i].name = tr("Layer") + " %s" % i
 
-		Global.layers_container.add_child(layer_container)
-		layer_container.label.text = layers[i].name
-		layer_container.line_edit.text = layers[i].name
+		Global.layers_container.add_child(layer_button)
+		layer_button.label.text = layers[i].name
+		layer_button.line_edit.text = layers[i].name
 
-		Global.frames_container.add_child(layers[i].frame_container)
+		var layer_cel_container := HBoxContainer.new()
+		layer_cel_container.name = "LAYERSSS " + str(i)
+		Global.frames_container.add_child(layer_cel_container)
 		for j in range(frames.size()):
 			var cel_button = cel_button_node.instance()
 			cel_button.frame = j
 			cel_button.layer = i
 			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-
-			layers[i].frame_container.add_child(cel_button)
+			layer_cel_container.add_child(cel_button)
 
 	var layer_button = Global.layers_container.get_child(
 		Global.layers_container.get_child_count() - 1 - current_layer
@@ -525,10 +523,8 @@ func _layers_changed(value: Array) -> void:
 
 func _remove_cel_buttons() -> void:
 	for container in Global.frames_container.get_children():
-		for button in container.get_children():
-			container.remove_child(button)
-			button.queue_free()
 		Global.frames_container.remove_child(container)
+		container.queue_free()
 
 
 func _frame_changed(value: int) -> void:
@@ -544,9 +540,9 @@ func _frame_changed(value: int) -> void:
 		):
 			text_color = Color.black
 		Global.frame_ids.get_child(i).add_color_override("font_color", text_color)
-		for layer in layers:  # De-select all the other frames
-			if i < layer.frame_container.get_child_count():
-				layer.frame_container.get_child(i).pressed = false
+		for container in Global.frames_container.get_children():  # De-select all the other frames
+			if i < container.get_child_count():
+				container.get_child(i).pressed = false
 
 	if selected_cels.empty():
 		selected_cels.append([current_frame, current_layer])
@@ -558,9 +554,13 @@ func _frame_changed(value: int) -> void:
 			Global.frame_ids.get_child(current_frame_tmp).add_color_override(
 				"font_color", Global.control.theme.get_color("Selected Color", "Label")
 			)
-		if layers:
-			if current_frame_tmp < layers[current_layer_tmp].frame_container.get_child_count():
-				var fbutton = layers[current_layer_tmp].frame_container.get_child(current_frame_tmp)
+		var container_child_count: int = Global.frames_container.get_child_count()
+		if current_layer_tmp < container_child_count:
+			var container = Global.frames_container.get_child(
+				container_child_count - 1 - current_layer_tmp
+			)
+			if current_frame_tmp < container.get_child_count():
+				var fbutton = container.get_child(current_frame_tmp)
 				fbutton.pressed = true
 
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
@@ -702,6 +702,23 @@ func is_empty() -> bool:
 		and frames[0].cels[0].image.is_invisible()
 		and animation_tags.size() == 0
 	)
+
+
+func duplicate_layers() -> Array:
+	var new_layers: Array = layers.duplicate()
+	# Loop through the array to create new classes for each element, so that they
+	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
+	for i in new_layers.size():
+		var new_linked_cels = new_layers[i].linked_cels.duplicate()
+		new_layers[i] = Layer.new(
+			new_layers[i].name,
+			new_layers[i].visible,
+			new_layers[i].locked,
+			new_layers[i].new_cels_linked,
+			new_linked_cels
+		)
+
+	return new_layers
 
 
 func can_pixel_get_drawn(
