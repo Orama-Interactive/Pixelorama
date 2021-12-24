@@ -3,7 +3,6 @@
 [ext_resource path="res://src/UI/Timeline/FrameTagDialog.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/timeline/new_frame.png" type="Texture" id=2]
 
-
 [node name="FrameTagDialog" type="AcceptDialog"]
 margin_right = 83.0
 margin_bottom = 58.0
@@ -48,9 +47,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AddTag" type="Button" parent="VBoxContainer/ScrollContainer/VBoxTagContainer" groups=[
-"UIButtons",
-]]
+[node name="AddTag" type="Button" parent="VBoxContainer/ScrollContainer/VBoxTagContainer" groups=["UIButtons"]]
 margin_top = 8.0
 margin_right = 20.0
 margin_bottom = 28.0
@@ -161,7 +158,8 @@ margin_bottom = 56.0
 mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
-allow_greater = true 
+allow_greater = true
+
 [connection signal="about_to_show" from="." to="." method="_on_FrameTagDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_FrameTagDialog_popup_hide"]
 [connection signal="pressed" from="VBoxContainer/ScrollContainer/VBoxTagContainer/AddTag" to="." method="_on_AddTag_pressed"]

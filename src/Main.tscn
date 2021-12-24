@@ -70,7 +70,6 @@ margin_bottom = 388.0
 [node name="ExportDialog" parent="Dialogs" instance=ExtResource( 39 )]
 
 [node name="PreferencesDialog" parent="Dialogs" instance=ExtResource( 32 )]
-margin_right = 617.0
 
 [node name="AboutDialog" parent="Dialogs" instance=ExtResource( 34 )]
 
