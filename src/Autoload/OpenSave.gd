@@ -445,7 +445,7 @@ func open_image_as_spritesheet_layer(
 			Image.FORMAT_RGBA8
 		)
 		f.cels.append(Cel.new(new_layer, 1))
-	
+
 	# slice spritesheet
 	var image_no: int = 0
 	for yy in range(vertical):
@@ -453,7 +453,7 @@ func open_image_as_spritesheet_layer(
 			var cropped_image := Image.new()
 			cropped_image = image.get_rect(
 				Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height)
-			) 
+			)
 			cropped_image.crop(project.size.x, project.size.y)
 			var layer_index = new_layers.size() - 1
 			var frame_index = start_frame + image_no
@@ -463,7 +463,7 @@ func open_image_as_spritesheet_layer(
 					cropped_image.convert(Image.FORMAT_RGBA8)
 					new_frames[i].cels[layer_index] = (Cel.new(cropped_image, 1))
 			image_no += 1
-	
+
 	project.undo_redo.add_do_property(
 		project, "current_frame", new_frames.size() - 1
 	)
