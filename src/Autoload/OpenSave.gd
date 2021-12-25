@@ -427,7 +427,7 @@ func open_image_as_spritesheet_layer(
 	var new_frames: Array = project.frames.duplicate()
 
 	#Create new frames (if needed)
-	var new_frames_size = (start_frame + (vertical * horizontal))
+	var new_frames_size = start_frame + (vertical * horizontal)
 	if new_frames_size > project.frames.size():
 		var required_frames = new_frames_size - project.frames.size()
 		for i in required_frames:
@@ -438,12 +438,7 @@ func open_image_as_spritesheet_layer(
 	new_layers.append(layer)
 	for f in new_frames:
 		var new_layer := Image.new()
-		new_layer.create(
-			project.size.x,
-			project.size.y,
-			false,
-			Image.FORMAT_RGBA8
-		)
+		new_layer.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 		f.cels.append(Cel.new(new_layer, 1))
 
 	# slice spritesheet
@@ -464,26 +459,14 @@ func open_image_as_spritesheet_layer(
 					new_frames[i].cels[layer_index] = (Cel.new(cropped_image, 1))
 			image_no += 1
 
-	project.undo_redo.add_do_property(
-		project, "current_frame", new_frames.size() - 1
-	)
-	project.undo_redo.add_do_property(
-		project, "current_layer", project.layers.size()
-	)
+	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
+	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
 	project.undo_redo.add_do_property(project, "layers", new_layers)
 	project.undo_redo.add_do_property(project, "frames", new_frames)
-	project.undo_redo.add_undo_property(
-		project, "current_layer", project.current_layer
-	)
-	project.undo_redo.add_undo_property(
-		project, "current_frame", project.current_frame
-	)
-	project.undo_redo.add_undo_property(
-		project, "layers", project.layers
-	)
-	project.undo_redo.add_undo_property(
-		project, "frames", project.frames
-	)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.add_undo_property(project, "frames", project.frames)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
