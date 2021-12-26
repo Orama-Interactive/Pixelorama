@@ -11,6 +11,7 @@ var confirmed: bool = false
 
 
 func _about_to_show() -> void:
+	confirmed = false
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
 	preview.set_material(sm)
