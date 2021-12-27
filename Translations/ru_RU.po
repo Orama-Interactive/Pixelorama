@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-12-11 22:29\n"
+"PO-Revision-Date: 2021-12-27 15:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1366,7 +1366,7 @@ msgid "Below canvas"
 msgstr "Под холстом"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Если вы хотите, чтобы слой игнорировал скин лука, просто добавьте суффикс \"_io\" в его имя."
 
 msgid "Add a new frame"
 msgstr "Добавить новый кадр"
