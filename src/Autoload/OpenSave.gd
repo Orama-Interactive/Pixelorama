@@ -414,11 +414,34 @@ func open_image_as_spritesheet_layer(
 	var frame_height := image.get_size().y / vertical
 
 	# resize canvas to if "frame_width" or "frame_height" is too large
-	var project_width: int = max(frame_width, Global.current_project.size.x)
-	var project_height: int = max(frame_height, Global.current_project.size.y)
-	DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
+	var project: Project = Global.current_project
+	var project_width: int = max(frame_width, project.size.x)
+	var project_height: int = max(frame_height, project.size.y)
+	if project.size < Vector2(project_width, project_height):
+		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 
-	# slice images
+	#initialize undo mechanism
+	project.undos += 1
+	project.undo_redo.create_action("Add Spritesheet Layer")
+	var new_layers: Array = project.layers.duplicate()
+	var new_frames: Array = project.frames.duplicate()
+
+	#Create new frames (if needed)
+	var new_frames_size = start_frame + (vertical * horizontal)
+	if new_frames_size > project.frames.size():
+		var required_frames = new_frames_size - project.frames.size()
+		for i in required_frames:
+			var frame: Frame = project.new_empty_frame()
+			new_frames.insert(project.current_frame + 1, frame)
+	#Create new layer for spritesheet
+	var layer := Layer.new(file_name)
+	new_layers.append(layer)
+	for f in new_frames:
+		var new_layer := Image.new()
+		new_layer.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		f.cels.append(Cel.new(new_layer, 1))
+
+	# slice spritesheet
 	var image_no: int = 0
 	for yy in range(vertical):
 		for xx in range(horizontal):
@@ -426,20 +449,27 @@ func open_image_as_spritesheet_layer(
 			cropped_image = image.get_rect(
 				Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
-			if (start_frame + (image_no)) < Global.current_project.frames.size():
-				# if frames are already present then fill those first
-				if image_no == 0:
-					open_image_as_new_layer(cropped_image, file_name, start_frame + image_no)
-				else:
-					open_image_at_frame(
-						cropped_image,
-						Global.current_project.layers.size() - 1,
-						start_frame + image_no
-					)
-			else:
-				# if no more frames are present then start making new frames
-				open_image_as_new_frame(cropped_image, Global.current_project.layers.size() - 1)
+			cropped_image.crop(project.size.x, project.size.y)
+			var layer_index = new_layers.size() - 1
+			var frame_index = start_frame + image_no
+
+			for i in new_frames.size():
+				if i == frame_index:
+					cropped_image.convert(Image.FORMAT_RGBA8)
+					new_frames[i].cels[layer_index] = (Cel.new(cropped_image, 1))
 			image_no += 1
+
+	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
+	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_do_property(project, "frames", new_frames)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.add_undo_property(project, "frames", project.frames)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.commit_action()
 
 
 func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> void:
