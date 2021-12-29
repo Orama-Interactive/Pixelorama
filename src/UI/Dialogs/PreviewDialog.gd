@@ -31,9 +31,10 @@ onready var new_layer_options = $VBoxContainer/HBoxContainer/NewLayerOptions
 onready var new_brush_options = $VBoxContainer/HBoxContainer/NewBrushOptions
 onready var new_brush_name = $VBoxContainer/HBoxContainer/NewBrushOptions/BrushName
 
+onready var import_options: OptionButton = $VBoxContainer/HBoxContainer/ImportOption
+
 
 func _on_PreviewDialog_about_to_show() -> void:
-	var import_options: OptionButton = get_node("VBoxContainer/HBoxContainer/ImportOption")
 
 	# # order as in ImageImportOptions enum
 	import_options.add_item("New tab")
@@ -72,6 +73,7 @@ func _on_PreviewDialog_about_to_show() -> void:
 
 
 func _on_PreviewDialog_popup_hide() -> void:
+	OpenSave.preview_dialogs.erase(self)
 	queue_free()
 	# Call Global.dialog_open() only if it's the only preview dialog opened
 	for child in Global.control.get_children():
@@ -130,6 +132,49 @@ func _on_PreviewDialog_confirmed() -> void:
 		var location := "Patterns".plus_file(file_name_ext)
 		var dir = Directory.new()
 		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+
+
+func _on_SyncButton_pressed() -> void:
+	for dialog in OpenSave.preview_dialogs:
+		var id = current_import_option
+		dialog.import_options.select(id)
+		dialog._on_ImportOption_item_selected(id)
+
+		#sync data for properties (if any)
+		if id == ImageImportOptions.SPRITESHEET_TAB or id == ImageImportOptions.SPRITESHEET_LAYER:
+			dialog.spritesheet_tab_options.get_node("HorizontalFrames").value = min(
+				spritesheet_tab_options.get_node("HorizontalFrames").value, image.get_size().x
+			)
+			dialog.spritesheet_tab_options.get_node("VerticalFrames").value = min(
+				spritesheet_tab_options.get_node("VerticalFrames").value, image.get_size().y
+			)
+			if id == ImageImportOptions.SPRITESHEET_LAYER:
+				dialog.spritesheet_layer_options.get_node("AtFrameSpinbox").value = (
+					spritesheet_layer_options.get_node("AtFrameSpinbox").value
+				)
+
+		elif id == ImageImportOptions.NEW_FRAME:
+			dialog.new_frame_options.get_node("AtLayerSpinbox").value = (
+				new_frame_options.get_node("AtLayerSpinbox").value
+			)
+
+		elif id == ImageImportOptions.REPLACE_FRAME:
+			dialog.replace_frame_options.get_node("AtLayerSpinbox").value = (
+				replace_frame_options.get_node("AtLayerSpinbox").value
+			)
+			dialog.replace_frame_options.get_node("AtFrameSpinbox").value = (
+				replace_frame_options.get_node("AtFrameSpinbox").value
+			)
+
+		elif id == ImageImportOptions.NEW_LAYER:
+			dialog.new_layer_options.get_node("AtFrameSpinbox").value = (
+				new_layer_options.get_node("AtFrameSpinbox").value
+			)
+
+		elif id == ImageImportOptions.BRUSH:
+			var type = new_brush_options.get_node("BrushTypeOption").selected
+			dialog.new_brush_options.get_node("BrushTypeOption").select(type)
+			dialog._on_BrushTypeOption_item_selected(type)
 
 
 func _on_ImportOption_item_selected(id: int) -> void:
