@@ -52,6 +52,7 @@ __meta__ = {
 [node name="VerticalLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
 
 [node name="SyncButton" type="Button" parent="VBoxContainer"]
+visible = false
 margin_top = 304.0
 margin_right = 534.0
 margin_bottom = 324.0
