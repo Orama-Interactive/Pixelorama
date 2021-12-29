@@ -148,8 +148,6 @@ func update_line_polylines(start: Vector2, end: Vector2) -> void:
 
 func prepare_undo(action: String) -> void:
 	var project: Project = Global.current_project
-	if !project.layers[project.current_layer].can_layer_get_drawn():
-		return
 	_undo_data = _get_undo_data()
 	project.undo_redo.create_action(action)
 
