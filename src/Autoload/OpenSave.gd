@@ -4,7 +4,7 @@ var current_save_paths := []  # Array of strings
 # Stores a filename of a backup file in user:// until user saves manually
 var backup_save_paths := []  # Array of strings
 var preview_dialog_tscn = preload("res://src/UI/Dialogs/PreviewDialog.tscn")
-var preview_dialogs := [] # Array of preview dialogs
+var preview_dialogs := []  # Array of preview dialogs
 
 onready var autosave_timer: Timer
 
