@@ -24,7 +24,7 @@ onready var texture_rect: TextureRect = $VBoxContainer/CenterContainer/TextureRe
 onready var image_size_label: Label = $VBoxContainer/SizeContainer/ImageSizeLabel
 onready var frame_size_label: Label = $VBoxContainer/SizeContainer/FrameSizeLabel
 onready var spritesheet_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions
-onready var spritesheet_layer_options = $VBoxContainer/HBoxContainer/SpritesheetLayerOptions
+onready var spritesheet_lay_opt = $VBoxContainer/HBoxContainer/SpritesheetLayerOptions
 onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
 onready var replace_frame_options = $VBoxContainer/HBoxContainer/ReplaceFrameOptions
 onready var new_layer_options = $VBoxContainer/HBoxContainer/NewLayerOptions
@@ -93,7 +93,7 @@ func _on_PreviewDialog_confirmed() -> void:
 		)
 
 	elif current_import_option == ImageImportOptions.SPRITESHEET_LAYER:
-		var frame_index: int = spritesheet_layer_options.get_node("AtFrameSpinbox").value - 1
+		var frame_index: int = spritesheet_lay_opt.get_node("AtFrameSpinbox").value - 1
 		OpenSave.open_image_as_spritesheet_layer(
 			path,
 			image,
@@ -150,9 +150,8 @@ func _on_SyncButton_pressed() -> void:
 				spritesheet_tab_options.get_node("VerticalFrames").value, image.get_size().y
 			)
 			if id == ImageImportOptions.SPRITESHEET_LAYER:
-				dialog.spritesheet_layer_options.get_node("AtFrameSpinbox").value = (
-					spritesheet_layer_options.get_node(
-						"AtFrameSpinbox"
+				dialog.spritesheet_lay_opt.get_node("AtFrameSpinbox").value = (spritesheet_lay_opt.get_node(
+					"AtFrameSpinbox"
 				).value)
 
 		elif id == ImageImportOptions.NEW_FRAME:
@@ -183,7 +182,7 @@ func _on_ImportOption_item_selected(id: int) -> void:
 	current_import_option = id
 	frame_size_label.visible = false
 	spritesheet_tab_options.visible = false
-	spritesheet_layer_options.visible = false
+	spritesheet_lay_opt.visible = false
 	new_frame_options.visible = false
 	replace_frame_options.visible = false
 	new_layer_options.visible = false
@@ -202,10 +201,10 @@ func _on_ImportOption_item_selected(id: int) -> void:
 	elif id == ImageImportOptions.SPRITESHEET_LAYER:
 		frame_size_label.visible = true
 		spritesheet_tab_options.visible = true
-		spritesheet_layer_options.visible = true
+		spritesheet_lay_opt.visible = true
 		texture_rect.get_child(0).visible = true
 		texture_rect.get_child(1).visible = true
-		rect_size.x = spritesheet_layer_options.rect_size.x
+		rect_size.x = spritesheet_lay_opt.rect_size.x
 
 	elif id == ImageImportOptions.NEW_FRAME:
 		new_frame_options.visible = true
