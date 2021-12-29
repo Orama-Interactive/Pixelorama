@@ -150,8 +150,9 @@ func _on_SyncButton_pressed() -> void:
 				spritesheet_tab_options.get_node("VerticalFrames").value, image.get_size().y
 			)
 			if id == ImageImportOptions.SPRITESHEET_LAYER:
-				dialog.spritesheet_layer_options.get_node("AtFrameSpinbox").value = (spritesheet_layer_options.get_node(
-					"AtFrameSpinbox"
+				dialog.spritesheet_layer_options.get_node("AtFrameSpinbox").value = (
+					spritesheet_layer_options.get_node(
+						"AtFrameSpinbox"
 				).value)
 
 		elif id == ImageImportOptions.NEW_FRAME:
