@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://src/UI/ToolButtons.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -16,7 +16,7 @@
 [ext_resource path="res://addons/dockable_container/layout.gd" type="Script" id=14]
 [ext_resource path="res://assets/graphics/tools/ellipseselect.png" type="Texture" id=15]
 [ext_resource path="res://src/UI/CanvasPreviewContainer.tscn" type="PackedScene" id=16]
-[ext_resource path="res://src/UI/ColorAndToolOptions.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/UI/ColorPickers.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/UI/Canvas/Canvas.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Palette/PalettePanel.tscn" type="PackedScene" id=20]
@@ -69,11 +69,39 @@ script = ExtResource( 36 )
 names = PoolStringArray( "CanvasPreviewContainer" )
 current_tab = 0
 
-[sub_resource type="Resource" id=12]
+[sub_resource type="Resource" id=20]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "ColorAndToolOptions" )
+names = PoolStringArray( "ColorPickers" )
 current_tab = 0
+
+[sub_resource type="Resource" id=21]
+resource_name = "Split"
+script = ExtResource( 27 )
+direction = 1
+percent = 0.25
+first = SubResource( 11 )
+second = SubResource( 20 )
+
+[sub_resource type="Resource" id=22]
+resource_name = "Tabs"
+script = ExtResource( 36 )
+names = PoolStringArray( "LeftToolOptionsScroll" )
+current_tab = 0
+
+[sub_resource type="Resource" id=23]
+resource_name = "Tabs"
+script = ExtResource( 36 )
+names = PoolStringArray( "RightToolOptionsScroll" )
+current_tab = 0
+
+[sub_resource type="Resource" id=24]
+resource_name = "Split"
+script = ExtResource( 27 )
+direction = 0
+percent = 0.5
+first = SubResource( 22 )
+second = SubResource( 23 )
 
 [sub_resource type="Resource" id=13]
 resource_name = "Tabs"
@@ -85,23 +113,23 @@ current_tab = 0
 resource_name = "Split"
 script = ExtResource( 27 )
 direction = 1
-percent = 0.5
-first = SubResource( 12 )
+percent = 0.754808
+first = SubResource( 24 )
 second = SubResource( 13 )
 
 [sub_resource type="Resource" id=15]
 resource_name = "Split"
 script = ExtResource( 27 )
 direction = 1
-percent = 0.212766
-first = SubResource( 11 )
+percent = 0.332031
+first = SubResource( 21 )
 second = SubResource( 14 )
 
 [sub_resource type="Resource" id=16]
 resource_name = "Split"
 script = ExtResource( 27 )
 direction = 0
-percent = 1.0
+percent = 0.962785
 first = SubResource( 10 )
 second = SubResource( 15 )
 
@@ -1198,20 +1226,20 @@ __meta__ = {
 [node name="ViewportAndRulers" type="VBoxContainer" parent="DockableContainer"]
 margin_left = 66.0
 margin_top = 32.0
-margin_right = 928.0
+margin_right = 938.0
 margin_bottom = 508.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="TabsContainer" type="PanelContainer" parent="DockableContainer/ViewportAndRulers"]
-margin_right = 862.0
+margin_right = 872.0
 margin_bottom = 38.0
 
 [node name="Tabs" type="Tabs" parent="DockableContainer/ViewportAndRulers/TabsContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 855.0
+margin_right = 865.0
 margin_bottom = 31.0
 tab_align = 0
 tab_close_display_policy = 2
@@ -1220,7 +1248,7 @@ script = ExtResource( 3 )
 
 [node name="HorizontalRuler" type="Button" parent="DockableContainer/ViewportAndRulers"]
 margin_top = 38.0
-margin_right = 862.0
+margin_right = 872.0
 margin_bottom = 58.0
 rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
@@ -1230,13 +1258,13 @@ script = ExtResource( 6 )
 
 [node name="HSplitContainer" type="HSplitContainer" parent="DockableContainer/ViewportAndRulers"]
 margin_top = 58.0
-margin_right = 862.0
+margin_right = 872.0
 margin_bottom = 476.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="DockableContainer/ViewportAndRulers/HSplitContainer"]
-margin_right = 850.0
+margin_right = 860.0
 margin_bottom = 418.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1255,7 +1283,7 @@ script = ExtResource( 4 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_left = 16.0
-margin_right = 850.0
+margin_right = 860.0
 margin_bottom = 418.0
 focus_mode = 2
 mouse_default_cursor_shape = 3
@@ -1265,7 +1293,7 @@ stretch = true
 script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 834, 418 )
+size = Vector2( 844, 418 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
@@ -1281,8 +1309,8 @@ zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 7 )
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="DockableContainer/ViewportAndRulers/HSplitContainer"]
-margin_left = 862.0
-margin_right = 862.0
+margin_left = 872.0
+margin_right = 872.0
 margin_bottom = 418.0
 size_flags_vertical = 3
 stretch = true
@@ -1306,33 +1334,50 @@ script = ExtResource( 7 )
 [node name="AnimationTimeline" parent="DockableContainer" instance=ExtResource( 18 )]
 margin_left = 66.0
 margin_top = 556.0
-margin_right = 928.0
+margin_right = 938.0
 margin_bottom = 716.0
 custom_styles/panel = SubResource( 4 )
 
 [node name="CanvasPreviewContainer" parent="DockableContainer" instance=ExtResource( 16 )]
-margin_left = 948.0
+margin_left = 958.0
 margin_top = 32.0
 margin_right = 1276.0
-margin_bottom = 206.0
+margin_bottom = 122.0
 
-[node name="ColorAndToolOptions" parent="DockableContainer" instance=ExtResource( 17 )]
-margin_left = 948.0
-margin_top = 254.0
+[node name="ColorPickers" parent="DockableContainer" instance=ExtResource( 17 )]
+
+[node name="LeftToolOptionsScroll" type="ScrollContainer" parent="DockableContainer"]
+margin_left = 958.0
+margin_top = 277.062
+margin_right = 1107.0
+margin_bottom = 550.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftPanelContainer" type="PanelContainer" parent="DockableContainer/LeftToolOptionsScroll"]
+margin_right = 149.0
+margin_bottom = 272.938
+rect_min_size = Vector2( 130, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RightToolOptionsScroll" type="ScrollContainer" parent="DockableContainer"]
+margin_left = 1127.0
+margin_top = 277.062
 margin_right = 1276.0
-margin_bottom = 509.0
-hint_tooltip = "Ellipse Tool
+margin_bottom = 550.0
 
-%s for left mouse button
-%s for right mouse button
-
-Hold %s to create a 1:1 shape
-Hold %s to center the shape on the click origin
-Hold %s to displace the shape's origin"
+[node name="RightPanelContainer" type="PanelContainer" parent="DockableContainer/RightToolOptionsScroll"]
+margin_right = 149.0
+margin_bottom = 272.938
+rect_min_size = Vector2( 130, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="PalettePanel" parent="DockableContainer" instance=ExtResource( 20 )]
-margin_left = 948.0
-margin_top = 557.0
+margin_left = 958.0
+margin_top = 598.0
 margin_right = 1276.0
 margin_bottom = 716.0
 
