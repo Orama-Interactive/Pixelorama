@@ -78,11 +78,6 @@ func change_theme(id: int) -> void:
 	Global.default_clear_color = main_theme.get_stylebox("panel", "PanelContainer").bg_color
 	VisualServer.set_default_clear_color(Color(Global.default_clear_color))
 
-	# Theming for left tools panel
-	Global.tool_panel.get_stylebox("panel", "Panel").bg_color = main_theme.get_stylebox(
-		"panel", "Panel"
-	).bg_color
-
 	var layer_button_pcont: PanelContainer = Global.animation_timeline.find_node(
 		"LayerButtonPanelContainer"
 	)
