@@ -106,6 +106,7 @@ HScrollBar/styles/scroll_focus = SubResource( 19 )
 margin_right = 902.0
 margin_bottom = 160.0
 rect_min_size = Vector2( 0, 160 )
+rect_clip_content = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
