@@ -3,7 +3,6 @@ extends Control
 var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
-var alternate_transparent_background := ColorRect.new()
 var cursor_image = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI/DockableContainer
@@ -19,14 +18,6 @@ onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
 
 func _ready() -> void:
 	randomize()
-	add_child(alternate_transparent_background)
-	move_child(alternate_transparent_background, 0)
-	alternate_transparent_background.visible = false
-	alternate_transparent_background.anchor_left = ANCHOR_BEGIN
-	alternate_transparent_background.anchor_top = ANCHOR_BEGIN
-	alternate_transparent_background.anchor_right = ANCHOR_END
-	alternate_transparent_background.anchor_bottom = ANCHOR_END
-
 	get_tree().set_auto_accept_quit(false)
 	_setup_application_window_size()
 

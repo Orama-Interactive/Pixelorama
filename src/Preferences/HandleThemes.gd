@@ -77,11 +77,6 @@ func change_theme(id: int) -> void:
 	Global.control.theme.default_font = font
 	Global.default_clear_color = main_theme.get_stylebox("panel", "PanelContainer").bg_color
 	VisualServer.set_default_clear_color(Color(Global.default_clear_color))
-	if Global.control.alternate_transparent_background:
-		# Also change color of alternate_transparent_background
-		var new_color = Global.default_clear_color
-		new_color.a = Global.control.alternate_transparent_background.color.a
-		Global.control.alternate_transparent_background.color = new_color
 
 	# Theming for left tools panel
 	Global.tool_panel.get_stylebox("panel", "Panel").bg_color = main_theme.get_stylebox(
