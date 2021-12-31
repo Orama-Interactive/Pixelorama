@@ -30,7 +30,7 @@ func _ready() -> void:
 		tooltips.append(t[0].hint_tooltip)
 
 	# Resize tools panel when window gets resized
-	get_tree().get_root().connect("size_changed", self, "_on_ToolsAndCanvas_dragged")
+	get_tree().get_root().connect("size_changed", self, "_on_Tools_resized")
 
 
 func update_hintooltips() -> void:
@@ -68,8 +68,8 @@ func _on_Tool_pressed(tool_pressed: BaseButton) -> void:
 		Tools.assign_tool(tool_pressed.name, button)
 
 
-func _on_ToolsAndCanvas_dragged(_offset: int = 0) -> void:
-	var tool_panel_size: Vector2 = get_parent().get_parent().get_parent().rect_size
+func _on_Tools_resized() -> void:
+	var tool_panel_size: Vector2 = get_parent().get_parent().rect_size
 	if Global.tool_button_size == Global.ButtonSize.SMALL:
 		columns = tool_panel_size.x / 28.5
 	else:
