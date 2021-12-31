@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2021-12-11 18:05\n"
+"PO-Revision-Date: 2021-12-31 00:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -178,7 +178,7 @@ msgid "Tile Mode"
 msgstr "Tryb kafelkowy"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Przezroczystość okna"
 
 msgid "Panel Layout"
 msgstr "Układ panelu"
@@ -623,7 +623,7 @@ msgid "Issue Tracker"
 msgstr "Zgłaszanie problemów"
 
 msgid "Open Logs Folder"
-msgstr ""
+msgstr "Otwórz folder logów"
 
 msgid "Changelog"
 msgstr "Lista zmian"
@@ -1118,13 +1118,13 @@ msgid "Set application FPS limit:"
 msgstr "Ustaw limit FPS dla aplikacji:"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Zapauzuj aplikację, gdy straci skupienie"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Ustawia limit klatek aplikacji na sekundę. Im niższa liczba, tym niższe zużycie procesora, ale aplikacja staje się wolniejsza. 0 oznacza, że nie ma limitu."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr ""
+msgstr "Jeśli ta opcja jest włączona i okno aplikacji traci skupienie, to program zostanie zapauzowany. To pomaga zmniejszyć użycie procesora, kiedy aplikacja działa w tle. Aplikacja zostaje odpauzowana, kiedy myszka pojawi się na oknie aplikacji."
 
 msgid "Brush:"
 msgstr "Pędzel:"
@@ -1353,19 +1353,19 @@ msgid "Blue-Red Mode"
 msgstr "Niebiesko-czerwone prześwity"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "Pokaż poprzednie klatki:"
 
 msgid "Show future frames:"
-msgstr ""
+msgstr "Pokaż przyszłe klatki:"
 
 msgid "Above canvas"
-msgstr ""
+msgstr "Nad płótnem"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "Pod płótnem"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Jeśli chcesz, aby onion skinning był ignorowany na warstwie, po prostu dodaj sufiks \"_io\" w jego nazwie."
 
 msgid "Add a new frame"
 msgstr "Dodaj nową klatkę"
@@ -1463,10 +1463,10 @@ msgid "Redo: Draw"
 msgstr "Przywróć: Rysowanie"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Cofnij: Zaznacz"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Przywróć: Zaznacz"
 
 msgid "Undo: Scale"
 msgstr "Cofnij: Skalowanie"
@@ -1782,7 +1782,8 @@ msgstr "Usuń"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "Znaleziono automatycznie wybrane projekty z uszkodzonej sesji.\n"
+"Czy chcesz odzyskać dane?"
 
 msgid "Backup reloaded"
 msgstr "Wczytano ponownię kopię zapasową"
