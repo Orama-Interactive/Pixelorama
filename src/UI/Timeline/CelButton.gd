@@ -92,7 +92,7 @@ func _on_CelButton_pressed() -> void:
 		pressed = !pressed
 	elif Input.is_action_just_released("middle_mouse"):
 		pressed = !pressed
-		delete_cel_contents()
+		_delete_cel_content()
 	else:  # An example of this would be Space
 		pressed = !pressed
 
@@ -100,7 +100,7 @@ func _on_CelButton_pressed() -> void:
 func _on_PopupMenu_id_pressed(id: int) -> void:
 	match id:
 		MenuOptions.DELETE:
-			delete_cel_contents()
+			_delete_cel_content()
 
 		MenuOptions.LINK:
 			var f: Frame = Global.current_project.frames[frame]
@@ -157,8 +157,11 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				Global.current_project.undo_redo.commit_action()
 
 
-func delete_cel_contents() -> void:
+func _delete_cel_content() -> void:
 	if image.is_invisible():
+		return
+	var curr_layer: Layer = Global.current_project.layers[layer]
+	if !curr_layer.can_layer_get_drawn():
 		return
 	var project = Global.current_project
 	image.unlock()
