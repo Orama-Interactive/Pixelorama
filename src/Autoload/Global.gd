@@ -124,7 +124,6 @@ onready var transparent_checker: ColorRect = control.find_node("TransparentCheck
 onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider")
 
 onready var tool_panel: Panel = control.find_node("Tools")
-onready var right_panel: Panel = control.find_node("RightPanel")
 onready var brushes_popup: Popup = control.find_node("BrushesPopup")
 onready var patterns_popup: Popup = control.find_node("PatternsPopup")
 onready var palette_panel: PalettePanel = control.find_node("PalettePanel")

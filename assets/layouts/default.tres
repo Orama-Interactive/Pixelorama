@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=15 format=2]
+[gd_resource type="Resource" load_steps=19 format=2]
 
 [ext_resource path="res://addons/dockable_container/layout_split.gd" type="Script" id=1]
 [ext_resource path="res://addons/dockable_container/layout_panel.gd" type="Script" id=2]
@@ -36,11 +36,39 @@ script = ExtResource( 2 )
 names = PoolStringArray( "CanvasPreviewContainer" )
 current_tab = 0
 
-[sub_resource type="Resource" id=12]
+[sub_resource type="Resource" id=20]
 resource_name = "Tabs"
 script = ExtResource( 2 )
-names = PoolStringArray( "ColorAndToolOptions" )
+names = PoolStringArray( "ColorPickers" )
 current_tab = 0
+
+[sub_resource type="Resource" id=21]
+resource_name = "Split"
+script = ExtResource( 1 )
+direction = 1
+percent = 0.713235
+first = SubResource( 11 )
+second = SubResource( 20 )
+
+[sub_resource type="Resource" id=22]
+resource_name = "Tabs"
+script = ExtResource( 2 )
+names = PoolStringArray( "LeftToolOptionsScroll" )
+current_tab = 0
+
+[sub_resource type="Resource" id=23]
+resource_name = "Tabs"
+script = ExtResource( 2 )
+names = PoolStringArray( "RightToolOptionsScroll" )
+current_tab = 0
+
+[sub_resource type="Resource" id=24]
+resource_name = "Split"
+script = ExtResource( 1 )
+direction = 0
+percent = 0.5
+first = SubResource( 22 )
+second = SubResource( 23 )
 
 [sub_resource type="Resource" id=13]
 resource_name = "Tabs"
@@ -52,23 +80,23 @@ current_tab = 0
 resource_name = "Split"
 script = ExtResource( 1 )
 direction = 1
-percent = 0.5
-first = SubResource( 12 )
+percent = 0.754808
+first = SubResource( 24 )
 second = SubResource( 13 )
 
 [sub_resource type="Resource" id=15]
 resource_name = "Split"
 script = ExtResource( 1 )
 direction = 1
-percent = 0.212766
-first = SubResource( 11 )
+percent = 0.332031
+first = SubResource( 21 )
 second = SubResource( 14 )
 
 [sub_resource type="Resource" id=16]
 resource_name = "Split"
 script = ExtResource( 1 )
 direction = 0
-percent = 1.0
+percent = 0.962785
 first = SubResource( 10 )
 second = SubResource( 15 )
 

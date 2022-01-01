@@ -449,7 +449,6 @@ func _toggle_zen_mode() -> void:
 	if Global.show_animation_timeline:
 		Global.animation_timeline.visible = zen_mode
 	Global.tool_panel.visible = zen_mode
-	Global.right_panel.visible = zen_mode
 	Global.control.find_node("TabsContainer").visible = zen_mode
 	zen_mode = !zen_mode
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)

@@ -7,12 +7,7 @@ var cursor_image = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI/DockableContainer
 onready var canvas_preview_container := ui.find_node("CanvasPreviewContainer")
-onready var tool_and_palette_vsplit := ui.find_node(
-	"MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit"
-)
-onready var color_and_tool_options := ui.find_node("ColorAndToolOptions")
 onready var scroll_container := ui.find_node("ColorAndToolOptions/ScrollContainer")
-onready var tool_panel := ui.find_node("Tools")
 onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
 
 

@@ -79,7 +79,7 @@ current_tab = 0
 resource_name = "Split"
 script = ExtResource( 27 )
 direction = 1
-percent = 0.25
+percent = 0.713235
 first = SubResource( 11 )
 second = SubResource( 20 )
 
@@ -141,7 +141,7 @@ percent = 0.0
 first = SubResource( 1 )
 second = SubResource( 16 )
 
-[sub_resource type="Resource" id=17]
+[sub_resource type="Resource" id=25]
 resource_name = "Layout"
 script = ExtResource( 14 )
 root = SubResource( 5 )
@@ -191,8 +191,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 tabs_visible = true
-use_hidden_tabs_for_min_size = true
-layout = SubResource( 17 )
+layout = SubResource( 25 )
 
 [node name="Tools" type="Panel" parent="DockableContainer"]
 margin_left = 4.0
@@ -1306,9 +1305,10 @@ margin_bottom = 716.0
 margin_left = 958.0
 margin_top = 32.0
 margin_right = 1276.0
-margin_bottom = 122.0
+margin_bottom = 149.062
 
 [node name="ColorPickers" parent="DockableContainer" instance=ExtResource( 17 )]
+margin_top = 197.062
 
 [node name="LeftToolOptionsScroll" type="ScrollContainer" parent="DockableContainer"]
 margin_left = 958.0
