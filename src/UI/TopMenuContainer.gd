@@ -440,15 +440,20 @@ func _toggle_show_guides() -> void:
 func _toggle_show_anim_timeline() -> void:
 	if zen_mode:
 		return
+	Global.control.ui.set_control_hidden(Global.animation_timeline, Global.show_animation_timeline)
 	Global.show_animation_timeline = !Global.show_animation_timeline
 	view_menu.set_item_checked(ViewMenuId.SHOW_ANIMATION_TIMELINE, Global.show_animation_timeline)
-	Global.animation_timeline.visible = Global.show_animation_timeline
 
 
 func _toggle_zen_mode() -> void:
 	if Global.show_animation_timeline:
-		Global.animation_timeline.visible = zen_mode
-	Global.tool_panel.visible = zen_mode
+		Global.control.ui.set_control_hidden(Global.animation_timeline, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.tool_panel, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.canvas_preview_container, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.color_pickers, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.left_tool_options_scroll, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.right_tool_options_scroll, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.palette_panel, !zen_mode)
 	Global.control.find_node("TabsContainer").visible = zen_mode
 	zen_mode = !zen_mode
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)

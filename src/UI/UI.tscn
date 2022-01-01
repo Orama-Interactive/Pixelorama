@@ -86,13 +86,13 @@ second = SubResource( 20 )
 [sub_resource type="Resource" id=22]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "LeftToolOptionsScroll" )
+names = PoolStringArray( "Left tool options" )
 current_tab = 0
 
 [sub_resource type="Resource" id=23]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "RightToolOptionsScroll" )
+names = PoolStringArray( "Right tool options" )
 current_tab = 0
 
 [sub_resource type="Resource" id=24]
@@ -1310,7 +1310,7 @@ margin_bottom = 149.062
 [node name="ColorPickers" parent="DockableContainer" instance=ExtResource( 17 )]
 margin_top = 197.062
 
-[node name="LeftToolOptionsScroll" type="ScrollContainer" parent="DockableContainer"]
+[node name="Left tool options" type="ScrollContainer" parent="DockableContainer"]
 margin_left = 958.0
 margin_top = 277.062
 margin_right = 1107.0
@@ -1319,20 +1319,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LeftPanelContainer" type="PanelContainer" parent="DockableContainer/LeftToolOptionsScroll"]
+[node name="LeftPanelContainer" type="PanelContainer" parent="DockableContainer/Left tool options"]
 margin_right = 149.0
 margin_bottom = 272.938
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="RightToolOptionsScroll" type="ScrollContainer" parent="DockableContainer"]
+[node name="Right tool options" type="ScrollContainer" parent="DockableContainer"]
 margin_left = 1127.0
 margin_top = 277.062
 margin_right = 1276.0
 margin_bottom = 550.0
 
-[node name="RightPanelContainer" type="PanelContainer" parent="DockableContainer/RightToolOptionsScroll"]
+[node name="RightPanelContainer" type="PanelContainer" parent="DockableContainer/Right tool options"]
 margin_right = 149.0
 margin_bottom = 272.938
 rect_min_size = Vector2( 130, 0 )

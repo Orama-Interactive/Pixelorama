@@ -117,13 +117,16 @@ onready var small_preview_viewport: ViewportContainer = canvas_preview_container
 onready var camera: Camera2D = main_viewport.find_node("Camera2D")
 onready var camera2: Camera2D = control.find_node("Camera2D2")
 onready var camera_preview: Camera2D = control.find_node("CameraPreview")
-onready var cameras = [camera, camera2, camera_preview]
+onready var cameras := [camera, camera2, camera_preview]
 onready var horizontal_ruler: BaseButton = control.find_node("HorizontalRuler")
 onready var vertical_ruler: BaseButton = control.find_node("VerticalRuler")
 onready var transparent_checker: ColorRect = control.find_node("TransparentChecker")
 onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider")
 
 onready var tool_panel: Panel = control.find_node("Tools")
+onready var color_pickers: Container = control.find_node("ColorPickers")
+onready var left_tool_options_scroll: ScrollContainer = control.find_node("Left tool options")
+onready var right_tool_options_scroll: ScrollContainer = control.find_node("Right tool options")
 onready var brushes_popup: Popup = control.find_node("BrushesPopup")
 onready var patterns_popup: Popup = control.find_node("PatternsPopup")
 onready var palette_panel: PalettePanel = control.find_node("PalettePanel")

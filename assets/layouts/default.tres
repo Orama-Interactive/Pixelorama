@@ -53,13 +53,13 @@ second = SubResource( 20 )
 [sub_resource type="Resource" id=22]
 resource_name = "Tabs"
 script = ExtResource( 2 )
-names = PoolStringArray( "LeftToolOptionsScroll" )
+names = PoolStringArray( "Left tool options" )
 current_tab = 0
 
 [sub_resource type="Resource" id=23]
 resource_name = "Tabs"
 script = ExtResource( 2 )
-names = PoolStringArray( "RightToolOptionsScroll" )
+names = PoolStringArray( "Right tool options" )
 current_tab = 0
 
 [sub_resource type="Resource" id=24]
