@@ -11,8 +11,8 @@ on:
     - "installer/po/*"
 
 env:
-  GODOT_VERSION: 3.4
-  GODOT_VERSION_MAC: 3.4
+  GODOT_VERSION: 3.4.2
+  GODOT_VERSION_MAC: 3.4.2
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.4
+      image: docker://barichello/godot-ci:3.4.2
     steps:
       - name: Setup WINE and rcedit 🍷
         run: |
@@ -57,7 +57,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.4
+      image: docker://barichello/godot-ci:3.4.2
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
@@ -69,7 +69,7 @@ jobs:
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Download Unofficial Godot Raspberry Pi 4 Builds 🍇
         run: |
-          wget https://github.com/hiulit/Unofficial-Godot-Engine-Raspberry-Pi/releases/download/v1.7.0/godot_${GODOT_VERSION}-stable_rpi4.zip
+          wget https://github.com/hiulit/Unofficial-Godot-Engine-Raspberry-Pi/releases/download/v1.9.0/godot_${GODOT_VERSION}-stable_rpi4.zip
           unzip -a godot_${GODOT_VERSION}-stable_rpi4.zip
       - name: Linux Build 🔧
         run: |
