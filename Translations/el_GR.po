@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-12-11 19:25\n"
+"PO-Revision-Date: 2022-01-04 07:11\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -28,7 +28,7 @@ msgid "Please Confirm..."
 msgstr "Παρακαλώ επιβεβαιώστε..."
 
 msgid "File Name:"
-msgstr "Όνομα αρχείου:"
+msgstr "gamer boy 80"
 
 msgid "Project Name:"
 msgstr "Όνομα έργου:"
