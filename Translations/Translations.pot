@@ -1691,6 +1691,9 @@ msgstr ""
 msgid "Opens last opened project on startup"
 msgstr ""
 
+msgid "Quit confirmation"
+msgstr ""
+
 msgid "Enable autosave"
 msgstr ""
 

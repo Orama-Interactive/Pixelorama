@@ -200,13 +200,15 @@ func copy_frame(frame := -1) -> void:
 	var new_layers: Array = Global.current_project.duplicate_layers()
 	new_frames.insert(frame + 1, new_frame)
 
-	for cel in Global.current_project.frames[frame].cels:  # Copy every cel
+	var prev_frame: Frame = Global.current_project.frames[frame]
+	for cel in prev_frame.cels:  # Copy every cel
 		var sprite := Image.new()
 		sprite.copy_from(cel.image)
 		var sprite_texture := ImageTexture.new()
 		sprite_texture.create_from_image(sprite, 0)
 		new_frame.cels.append(Cel.new(sprite, cel.opacity, sprite_texture))
 
+	new_frame.duration = prev_frame.duration
 	for l_i in range(new_layers.size()):
 		if new_layers[l_i].new_cels_linked:  # If the link button is pressed
 			new_layers[l_i].linked_cels.append(new_frame)

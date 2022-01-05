@@ -3,10 +3,12 @@ extends Line2D
 
 enum Types { HORIZONTAL, VERTICAL }
 
+const INPUT_WIDTH := 4
+
 var font := preload("res://assets/fonts/Roboto-Regular.tres")
 var has_focus := true
 var mouse_pos := Vector2.ZERO
-var type = Types.HORIZONTAL
+var type: int = Types.HORIZONTAL
 var project = Global.current_project
 
 
@@ -28,11 +30,11 @@ func _input(_event: InputEvent) -> void:
 	var point0 := points[0]
 	var point1 := points[1]
 	if type == Types.HORIZONTAL:
-		point0.y -= width * 3
-		point1.y += width * 3
+		point0.y -= width * INPUT_WIDTH
+		point1.y += width * INPUT_WIDTH
 	else:
-		point0.x -= width * 3
-		point1.x += width * 3
+		point0.x -= width * INPUT_WIDTH
+		point1.x += width * INPUT_WIDTH
 	if (
 		Global.can_draw
 		and Global.has_focus

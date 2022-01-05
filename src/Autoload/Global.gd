@@ -34,6 +34,7 @@ var default_clear_color := Color.gray
 # Preferences
 var pressure_sensitivity_mode = PressureSensitivity.NONE
 var open_last_project := false
+var quit_confirmation := false
 var smooth_zoom := true
 
 var shrink := 1.0

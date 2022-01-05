@@ -180,8 +180,6 @@ window/per_pixel_transparency/allowed=true
 window/per_pixel_transparency/enabled=true
 window/per_pixel_transparency/allowed.HTML5=false
 window/per_pixel_transparency/enabled.HTML5=false
-window/per_pixel_transparency/allowed.OSX=false
-window/per_pixel_transparency/enabled.OSX=false
 window/per_pixel_transparency/allowed.Android=false
 window/per_pixel_transparency/enabled.Android=false
 
