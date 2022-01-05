@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-01-05 00:44\n"
+"PO-Revision-Date: 2022-01-05 17:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1761,7 +1761,7 @@ msgid "Opens last opened project on startup"
 msgstr "Deschide ultimul proiect deschis la pornire"
 
 msgid "Quit confirmation"
-msgstr ""
+msgstr "Confirmare ieșire"
 
 msgid "Enable autosave"
 msgstr "Activare autosalvare"
