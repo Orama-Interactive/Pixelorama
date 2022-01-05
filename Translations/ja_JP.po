@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-01-05 00:44\n"
+"PO-Revision-Date: 2022-01-05 19:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1761,7 +1761,7 @@ msgid "Opens last opened project on startup"
 msgstr "起動時に最後に開いたプロジェクトを開く"
 
 msgid "Quit confirmation"
-msgstr ""
+msgstr "終了の確認"
 
 msgid "Enable autosave"
 msgstr "自動保存を有効化"
