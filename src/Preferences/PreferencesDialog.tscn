@@ -51,18 +51,19 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer"]
 margin_right = 498.0
-margin_bottom = 24.0
+margin_bottom = 52.0
 size_flags_horizontal = 3
 
 [node name="Startup" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 margin_right = 498.0
-margin_bottom = 24.0
+margin_bottom = 52.0
 
-[node name="StartupContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup"]
+[node name="StartupContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup"]
 margin_right = 498.0
-margin_bottom = 24.0
+margin_bottom = 52.0
+columns = 3
 
-[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
+[node name="OpenLastProjectLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
 margin_top = 5.0
 margin_right = 180.0
 margin_bottom = 19.0
@@ -73,6 +74,20 @@ margin_left = 184.0
 margin_right = 231.0
 margin_bottom = 24.0
 hint_tooltip = "Opens last opened project on startup"
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="QuitConfirmationLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
+margin_left = 235.0
+margin_top = 5.0
+margin_right = 348.0
+margin_bottom = 19.0
+text = "Quit confirmation"
+
+[node name="QuitConfirmation" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
+margin_top = 28.0
+margin_right = 180.0
+margin_bottom = 52.0
 mouse_default_cursor_shape = 2
 text = "On"
 
