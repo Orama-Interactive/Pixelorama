@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2021-12-11 18:05\n"
+"PO-Revision-Date: 2022-01-05 00:43\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -1720,6 +1720,9 @@ msgid "Open last project on startup"
 msgstr ""
 
 msgid "Opens last opened project on startup"
+msgstr ""
+
+msgid "Quit confirmation"
 msgstr ""
 
 msgid "Enable autosave"
