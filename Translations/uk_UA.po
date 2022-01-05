@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-01-05 00:43\n"
+"PO-Revision-Date: 2022-01-05 00:51\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1761,7 +1761,7 @@ msgid "Opens last opened project on startup"
 msgstr "Відкривати проєкт, який було останнім відкрито, при запуску програми"
 
 msgid "Quit confirmation"
-msgstr ""
+msgstr "Підтвердження виходу"
 
 msgid "Enable autosave"
 msgstr "Увімкнути автозбереження"
