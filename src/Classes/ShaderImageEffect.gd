@@ -6,7 +6,8 @@ signal done
 
 func generate_image(img: Image, shader: Shader, params: Dictionary, size: Vector2) -> void:
 	img.unlock()
-	shader = shader.duplicate() # duplicate shader before modifying code to avoid affecting original resource
+	# duplicate shader before modifying code to avoid affecting original resource
+	shader = shader.duplicate()
 	shader.code = shader.code.replace("unshaded", "unshaded, blend_premul_alpha")
 	var vp := VisualServer.viewport_create()
 	var canvas := VisualServer.canvas_create()
