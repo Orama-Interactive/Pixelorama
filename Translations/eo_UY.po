@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2021-12-11 18:05\n"
+"PO-Revision-Date: 2022-01-05 00:44\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -1702,6 +1702,9 @@ msgstr "Malfermi lastan projekton dum startigo"
 
 msgid "Opens last opened project on startup"
 msgstr "Malfermas lastan apertigitan projekton dum startigo"
+
+msgid "Quit confirmation"
+msgstr ""
 
 msgid "Enable autosave"
 msgstr "Ŝalti aŭtokonservadon"

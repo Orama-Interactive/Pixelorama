@@ -92,7 +92,7 @@ func _on_CelButton_pressed() -> void:
 		pressed = !pressed
 	elif Input.is_action_just_released("middle_mouse"):
 		pressed = !pressed
-		delete_cel_contents()
+		_delete_cel_content()
 	else:  # An example of this would be Space
 		pressed = !pressed
 
@@ -100,24 +100,12 @@ func _on_CelButton_pressed() -> void:
 func _on_PopupMenu_id_pressed(id: int) -> void:
 	match id:
 		MenuOptions.DELETE:
-			delete_cel_contents()
+			_delete_cel_content()
 
 		MenuOptions.LINK:
 			var f: Frame = Global.current_project.frames[frame]
 			var cel_index: int = Global.current_project.layers[layer].linked_cels.find(f)
-			var new_layers: Array = Global.current_project.layers.duplicate()
-			# Loop through the array to create new classes for each element, so that they
-			# won't be the same as the original array's classes. Needed for undo/redo to work properly.
-			for i in new_layers.size():
-				var new_linked_cels: Array = new_layers[i].linked_cels.duplicate()
-				new_layers[i] = Layer.new(
-					new_layers[i].name,
-					new_layers[i].visible,
-					new_layers[i].locked,
-					new_layers[i].frame_container,
-					new_layers[i].new_cels_linked,
-					new_linked_cels
-				)
+			var new_layers: Array = Global.current_project.duplicate_layers()
 			var new_cels: Array = f.cels.duplicate()
 			for i in new_cels.size():
 				new_cels[i] = Cel.new(
@@ -169,8 +157,11 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				Global.current_project.undo_redo.commit_action()
 
 
-func delete_cel_contents() -> void:
+func _delete_cel_content() -> void:
 	if image.is_invisible():
+		return
+	var curr_layer: Layer = Global.current_project.layers[layer]
+	if !curr_layer.can_layer_get_drawn():
 		return
 	var project = Global.current_project
 	image.unlock()

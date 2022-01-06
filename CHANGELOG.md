@@ -4,7 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v0.9.1] - Unreleased
+## [v0.9.2] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Darshan Phaldesai ([@luiq54](https://github.com/luiq54))
+
+### Changed
+- The spritesheet importing as layer workflow has been improved. [#623](https://github.com/Orama-Interactive/Pixelorama/pull/623)
+- The duration of a frame also gets copied when that frame is being cloned.
+- The user can no longer delete the content of a cel that belongs to a locked or invisible layer.
+
+### Fixed
+- Massively improved memory management by fixing a memory leak. Previously, every time the user made a change, memory kept going up and never coming down. Now, data that can never be recovered, like undo data that have been rewritten in history, are also removed from memory. [4832690](https://github.com/Orama-Interactive/Pixelorama/commit/48326900d9d9f0b32fd435e56fd5a39bbf13fa36)
+- Fixed application being unresponsive if the user draws outside of the canvas, or on a locked or invisible layer.
+- Fixed issue with some of the image effects unintentionally affecting the colors of the image. [#625](https://github.com/Orama-Interactive/Pixelorama/pull/625)
+
+## [v0.9.1] - 2021-12-20
 This update has been brought to you by the contributions of:
 Laurenz Reinthaler ([@Schweini07](https://github.com/Schweini07)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Marquis Kurt ([@alicerunsonfedora](https://github.com/alicerunsonfedora)), Xenofon Konitsas ([@huskeee](https://github.com/huskeee)), Silent Orb ([@silentorb](https://github.com/silentorb)), Jeremy Behreandt ([@behreajj](https://github.com/behreajj)), [@mrtripie](https://github.com/mrtripie), [@JumpJetAvocado](https://github.com/JumpJetAvocado)
 

@@ -66,9 +66,7 @@ size_flags_horizontal = 4
 text = "-"
 align = 1
 
-[node name="PlayButton" type="Button" parent="HBoxContainer/VBoxContainer" groups=[
-"UIButtons",
-]]
+[node name="PlayButton" type="Button" parent="HBoxContainer/VBoxContainer" groups=["UIButtons"]]
 margin_top = 140.0
 margin_right = 20.0
 margin_bottom = 160.0
@@ -96,6 +94,9 @@ margin_left = 24.0
 margin_right = 314.0
 margin_bottom = 160.0
 rect_min_size = Vector2( 290, 160 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
 
 [node name="Viewport" type="Viewport" parent="HBoxContainer/PreviewViewportContainer"]
 size = Vector2( 290, 160 )

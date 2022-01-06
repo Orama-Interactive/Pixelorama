@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2021-12-11 18:05\n"
+"PO-Revision-Date: 2022-01-05 00:43\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -1724,6 +1724,9 @@ msgstr "Başlangıçta son projeyi aç"
 
 msgid "Opens last opened project on startup"
 msgstr "Başlangıçta son projeyi açar"
+
+msgid "Quit confirmation"
+msgstr ""
 
 msgid "Enable autosave"
 msgstr "Otomatik kaydetmeyi etkinleştir"

@@ -49,9 +49,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 clip_text = true
 
-[node name="EditPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=[
-"UIButtons",
-]]
+[node name="EditPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
 margin_left = 256.0
 margin_right = 278.0
 margin_bottom = 22.0
@@ -78,9 +76,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AddPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=[
-"UIButtons",
-]]
+[node name="AddPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
 margin_left = 282.0
 margin_right = 304.0
 margin_bottom = 22.0

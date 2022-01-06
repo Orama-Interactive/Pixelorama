@@ -5,8 +5,8 @@ on:
     branches: [ release ]
 
 env:
-  GODOT_VERSION: 3.4
-  GODOT_VERSION_MAC: 3.4
+  GODOT_VERSION: 3.4.2
+  GODOT_VERSION_MAC: 3.4.2
   EXPORT_NAME: Pixelorama
   TAG: v0.9.1
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
@@ -16,7 +16,7 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.4
+      image: docker://barichello/godot-ci:3.4.2
     steps:
       - name: Setup WINE, rcedit and NSIS 🍷
         run: |
@@ -29,7 +29,7 @@ jobs:
           echo 'export/windows/wine = "/usr/bin/wine"' >> ~/.config/godot/editor_settings-3.tres
           echo 'export/windows/rcedit = "/github/home/.local/share/rcedit/rcedit-x64.exe"' >> ~/.config/godot/editor_settings-3.tres
       - name: Checkout 🛎️
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           submodules: true
       - name: Setup 💻
@@ -55,43 +55,28 @@ jobs:
           makensis ./installer/pixelorama_loc.nsi
           mkdir ./build/installer
           mv ./installer/${EXPORT_NAME}_${TAG}_setup.exe ./build/installer
-      - name: Upload 64-bit Release Asset 🚀
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./build/windows-64bit.zip
-          asset_name: ${{env.EXPORT_NAME}}[Windows-64bit].zip
-          tag: ${{env.TAG}}
-          overwrite: true
-      - name: Upload 32-bit Release Asset 🚀
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./build/windows-32bit.zip
-          asset_name: ${{env.EXPORT_NAME}}[Windows-32bit].zip
-          tag: ${{env.TAG}}
-          overwrite: true
-      - name: Upload installer Release Asset 🚀
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./build/installer/${{env.EXPORT_NAME}}_${{env.TAG}}_setup.exe
-          tag: ${{env.TAG}}
-          overwrite: true
       - name: Upload Release Assets to itch.io 🎮
         run: |
           butler push ./build/windows-64bit ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-64 --userversion ${{env.TAG}}
           butler push ./build/windows-32bit ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-32 --userversion ${{env.TAG}}
           butler push ./build/installer ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:windows-installer --userversion ${{env.TAG}}
+      - name: Upload Release Asset 🚀
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./build/*
+          tag: ${{env.TAG}}
+          overwrite: true
+          file_glob: true
 
   export-linux:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.4
+      image: docker://barichello/godot-ci:3.4.2
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           submodules: true
       - name: Setup 💻
@@ -100,7 +85,7 @@ jobs:
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Download Unofficial Godot Raspberry Pi 4 Builds 🍇
         run: |
-          wget https://github.com/hiulit/Unofficial-Godot-Engine-Raspberry-Pi/releases/download/v1.7.0/godot_${GODOT_VERSION}-stable_rpi4.zip
+          wget https://github.com/hiulit/Unofficial-Godot-Engine-Raspberry-Pi/releases/download/v1.9.0/godot_${GODOT_VERSION}-stable_rpi4.zip
           unzip -a godot_${GODOT_VERSION}-stable_rpi4.zip
       - name: Linux Build 🔧
         run: |
@@ -124,41 +109,25 @@ jobs:
           tar zcvf linux-64bit.tar.gz linux-64bit
           tar zcvf linux-32bit.tar.gz linux-32bit
           tar zcvf linux-rpi4.tar.gz linux-rpi4
-      - name: Upload 64-bit Release Asset 🚀
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./build/linux-64bit.tar.gz
-          asset_name: ${{env.EXPORT_NAME}}[Linux-64bit].tar.gz
-          tag: ${{env.TAG}}
-          overwrite: true
-      - name: Upload 32-bit Release Asset 🚀
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./build/linux-32bit.tar.gz
-          asset_name: ${{env.EXPORT_NAME}}[Linux-32bit].tar.gz
-          tag: ${{env.TAG}}
-          overwrite: true
-      - name: Upload Raspberry Pi 4 Release Asset
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./build/linux-rpi4.tar.gz
-          asset_name: ${{env.EXPORT_NAME}}[Linux-RPI4].tar.gz
-          tag: ${{env.TAG}}
-          overwrite: true
       - name: Upload Release Assets to itch.io 🎮
         run: |
           butler push ./build/linux-64bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-64 --userversion ${{env.TAG}}
           butler push ./build/linux-32bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-32 --userversion ${{env.TAG}}
           butler push ./build/linux-rpi4.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-rpi4 --userversion ${{env.TAG}}
+      - name: Upload Release Asset 🚀
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./build/linux-*.tar.gz
+          tag: ${{env.TAG}}
+          overwrite: true
+          file_glob: true
 
   build_pck:
     name: Create Pixelorama pack data for Clickable
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.4
+      image: docker://barichello/godot-ci:3.4.2
     steps:
       - name: Clone source
         uses: actions/checkout@v2
@@ -225,7 +194,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           submodules: true
       - name: Setup environment 🔧
@@ -264,6 +233,12 @@ jobs:
         run: codesign -s - --force --deep ./build/mac/Pixelorama.app
       - name: Create DMG archive 🔧
         run: hdiutil create -srcfolder ./build/mac -fs HFS+ -volname Pixelorama ./build/mac/Pixelorama.dmg
+      - name: Upload Release Assets to itch.io 🎮
+        run: |
+          curl -L -o butler.zip https://broth.itch.ovh/butler/darwin-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          ./butler push ./build/mac/Pixelorama.dmg ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:mac --userversion ${{env.TAG}}
       - name: Upload Release Asset 🚀
         uses: svenstaro/upload-release-action@v2
         with:
@@ -272,21 +247,15 @@ jobs:
           asset_name: ${{env.EXPORT_NAME}}[Mac].dmg
           tag: ${{env.TAG}}
           overwrite: true
-      - name: Upload Release Assets to itch.io 🎮
-        run: |
-          curl -L -o butler.zip https://broth.itch.ovh/butler/darwin-amd64/LATEST/archive/default
-          unzip butler.zip
-          chmod +x butler
-          ./butler push ./build/mac/Pixelorama.dmg ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:mac --userversion ${{env.TAG}}
     
   export-web:
     name: Web Export 🌐
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.4
+      image: docker://barichello/godot-ci:3.4.2
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           submodules: true
       - name: Setup 💻

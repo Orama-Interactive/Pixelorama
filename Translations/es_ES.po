@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-12-11 18:05\n"
+"PO-Revision-Date: 2022-01-05 00:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1759,6 +1759,9 @@ msgstr "Abrir el último proyecto al iniciar"
 
 msgid "Opens last opened project on startup"
 msgstr "Abre el último proyecto abierto al iniciar"
+
+msgid "Quit confirmation"
+msgstr ""
 
 msgid "Enable autosave"
 msgstr "Activar guardado automático"

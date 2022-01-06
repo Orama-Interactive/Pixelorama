@@ -297,6 +297,7 @@ func create_translators() -> void:
 	)
 	translators.create_item(translators_root).set_text(0, "  Teashrock - " + tr("Esperanto"))
 	translators.create_item(translators_root).set_text(0, "  Blend_Smile - " + tr("Indonesian"))
+	translators.create_item(translators_root).set_text(0, "  NoahParaduck - " + tr("Indonesian"))
 	translators.create_item(translators_root).set_text(
 		0, "  Martin Novák (novhack) - " + tr("Czech")
 	)

@@ -36,9 +36,7 @@ margin_right = 90.0
 margin_bottom = 36.0
 custom_constants/separation = 10
 
-[node name="VisibilityButton" type="Button" parent="HBoxContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="VisibilityButton" type="Button" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
 margin_top = 7.0
 margin_right = 22.0
 margin_bottom = 29.0
@@ -65,9 +63,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LockButton" type="Button" parent="HBoxContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="LockButton" type="Button" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 32.0
 margin_top = 7.0
 margin_right = 54.0
@@ -95,9 +91,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LinkButton" type="Button" parent="HBoxContainer/LayerButtons" groups=[
-"UIButtons",
-]]
+[node name="LinkButton" type="Button" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 64.0
 margin_top = 7.0
 margin_right = 86.0

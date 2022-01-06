@@ -28,6 +28,7 @@ __meta__ = {
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_right = 534.0
 margin_bottom = 300.0
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -44,6 +45,9 @@ __meta__ = {
 }
 
 [node name="HorizLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VerticalLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
 
@@ -249,6 +253,7 @@ text = "Brush name:"
 margin_left = 85.0
 margin_right = 143.0
 margin_bottom = 24.0
+
 [connection signal="about_to_show" from="." to="." method="_on_PreviewDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_PreviewDialog_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_PreviewDialog_popup_hide"]

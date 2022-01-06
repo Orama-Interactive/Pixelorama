@@ -8,6 +8,12 @@ var preferences = [
 		"pressed",
 		Global.open_last_project
 	],
+	[
+		"quit_confirmation",
+		"Startup/StartupContainer/QuitConfirmation",
+		"pressed",
+		Global.quit_confirmation
+	],
 	["shrink", "Interface/ShrinkContainer/ShrinkHSlider", "value", Global.shrink],
 	["dim_on_popup", "Interface/DimPopup/CheckBox", "pressed", Global.dim_on_popup],
 	[

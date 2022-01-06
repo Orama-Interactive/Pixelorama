@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2021-12-11 18:05\n"
+"PO-Revision-Date: 2022-01-05 00:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1755,6 +1755,9 @@ msgstr "Åpne siste prosjekt ved oppstart"
 
 msgid "Opens last opened project on startup"
 msgstr "Åpne sist åpnede prosjekt ved oppstart"
+
+msgid "Quit confirmation"
+msgstr ""
 
 msgid "Enable autosave"
 msgstr "Aktivér automatisk lagring"
