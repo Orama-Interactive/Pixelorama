@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-01-06 18:25\n"
+"PO-Revision-Date: 2022-01-06 18:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1345,10 +1345,10 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr ""
 
 msgid "Blue-Red Mode"
-msgstr ""
+msgstr "Blå-Rød Tilstand"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "Vis tidligere rammer:"
 
 msgid "Show future frames:"
 msgstr ""
@@ -1433,7 +1433,8 @@ msgstr ""
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr ""
+msgstr "Aktivér/deaktivér celleforbinding\n\n"
+"Forbundne celler bliver delt på flere rammer"
 
 msgid "Palette"
 msgstr ""
