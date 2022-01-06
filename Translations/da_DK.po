@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-01-05 00:44\n"
+"PO-Revision-Date: 2022-01-06 18:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -178,7 +178,7 @@ msgid "Tile Mode"
 msgstr "Felt-tilstand"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Vindue Opacitet"
 
 msgid "Panel Layout"
 msgstr "Sidelayout"
@@ -624,7 +624,7 @@ msgid "Issue Tracker"
 msgstr "Problem-Tracker"
 
 msgid "Open Logs Folder"
-msgstr ""
+msgstr "Åbn Logmappe"
 
 msgid "Changelog"
 msgstr "Ændringslog"
@@ -663,7 +663,7 @@ msgid "Translators"
 msgstr "Oversættere"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Licenser"
 
 msgid "English"
 msgstr "Engelsk"
@@ -681,7 +681,7 @@ msgid "Polish"
 msgstr "Polsk"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugisisk"
 
 msgid "Brazilian Portuguese"
 msgstr "Brasiliansk-Portugisisk"
@@ -1143,7 +1143,7 @@ msgid "Filled circle brush"
 msgstr ""
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Brugerdefineret pensel"
 
 msgid "Brush size:"
 msgstr "Penselstørrelse:"
@@ -1179,7 +1179,7 @@ msgid "Fill area:"
 msgstr "Udfyld område:"
 
 msgid "Same color area"
-msgstr ""
+msgstr "Samme farveområde"
 
 msgid "Same color pixels"
 msgstr ""
@@ -1194,7 +1194,7 @@ msgid "Pattern"
 msgstr "Mønster"
 
 msgid "Offset"
-msgstr ""
+msgstr "Forskydning"
 
 msgid "Simple Shading"
 msgstr ""
