@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-01-06 18:00\n"
+"PO-Revision-Date: 2022-01-06 18:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -525,10 +525,10 @@ msgid "Only affect selection"
 msgstr "Påvirk kun det markerede"
 
 msgid "Selected cels"
-msgstr "Markerede cels"
+msgstr "Markerede celler"
 
 msgid "Current cel"
-msgstr "Nuværende cel"
+msgstr "Nuværende celle"
 
 msgid "Current frame"
 msgstr "Nuværende ramme"
@@ -1074,34 +1074,34 @@ msgid "Transparency"
 msgstr "Transparens"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Tern-størrelse:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Størrelse af den gennemsigtige tern-baggrund"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Tern-farve 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Første farve på den gennemsigtige tern-baggrund"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Tern-farve 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Anden farve på den gennemsigtige tern-baggrund"
 
 msgid "Follow Canvas Movement"
 msgstr ""
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Den gennemsigtige tern-baggrund følger lærredets bevægelser"
 
 msgid "Follow Canvas Zoom Level"
 msgstr ""
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "Den gennemsigtige tern-baggrund følger lærredets zoom-niveau"
 
 msgid "Animated selection borders"
 msgstr ""
@@ -1179,10 +1179,10 @@ msgid "Fill area:"
 msgstr "Udfyld område:"
 
 msgid "Same color area"
-msgstr "Samme farveområde"
+msgstr "Område med samme farve"
 
 msgid "Same color pixels"
-msgstr ""
+msgstr "Pixels med samme farve"
 
 msgid "Fill with:"
 msgstr "Udfyld med:"
@@ -1197,10 +1197,10 @@ msgid "Offset"
 msgstr "Forskydning"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Simpel Skygge"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Farvetoneskiftning"
 
 msgid "Lighten"
 msgstr "Lysne"
@@ -1215,7 +1215,7 @@ msgid "Lighten/Darken amount"
 msgstr "Lysne/Mørkne mængde"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Vælg for:"
 
 msgid "Left Color"
 msgstr "Venstre Farve"
@@ -1363,13 +1363,13 @@ msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffi
 msgstr ""
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "Tilføj en ny ramme"
 
 msgid "Remove Frame"
 msgstr ""
 
 msgid "Clone Frame"
-msgstr ""
+msgstr "Klon Ramme"
 
 msgid "Move Left"
 msgstr "Flyt til Venstre"
@@ -1381,10 +1381,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr ""
+msgstr "Forbind Celler"
 
 msgid "Unlink Cel"
-msgstr ""
+msgstr "Adskil Celler"
 
 msgid "Frame Properties"
 msgstr ""
