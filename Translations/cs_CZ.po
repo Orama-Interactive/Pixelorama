@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2021-12-12 17:13\n"
+"PO-Revision-Date: 2022-01-05 00:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1759,6 +1759,9 @@ msgstr "Po spuštění otevřít poslední projekt"
 
 msgid "Opens last opened project on startup"
 msgstr "Otevřít po spuštění naposledy otevřený projekt"
+
+msgid "Quit confirmation"
+msgstr ""
 
 msgid "Enable autosave"
 msgstr "Povolit automatické ukládání"

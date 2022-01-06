@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2021-12-14 05:30\n"
+"PO-Revision-Date: 2022-01-05 03:20\n"
 
 msgid "OK"
 msgstr "예"
@@ -1758,6 +1758,9 @@ msgstr "프로그램을 시작할 때 최근 프로젝트 열기"
 
 msgid "Opens last opened project on startup"
 msgstr "프로그램을 시작할 때 마지막으로 열었던 프로젝트 열기"
+
+msgid "Quit confirmation"
+msgstr "종료 확인"
 
 msgid "Enable autosave"
 msgstr "자동 저장 켜기"

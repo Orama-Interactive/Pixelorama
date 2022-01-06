@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2021-12-14 05:42\n"
+"PO-Revision-Date: 2022-01-06 01:13\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -133,16 +133,16 @@ msgid "Delete"
 msgstr "Hapus"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Kuas baru"
 
 msgid "Scale Image"
 msgstr "Perbesar/perkecil gambar"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Piksel"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Persentase"
 
 msgid "Crop Image"
 msgstr "Potong Gambar"
@@ -151,16 +151,16 @@ msgid "Resize Canvas"
 msgstr "Ubah Ukuran Kanvas"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Gambar terpusat"
 
 msgid "Rotate Image"
 msgstr "Putar Gambar"
 
 msgid "Clear"
-msgstr ""
+msgstr "Hapus"
 
 msgid "Invert"
-msgstr ""
+msgstr "Balikkan"
 
 msgid "Flip"
 msgstr "Balik"
@@ -178,13 +178,13 @@ msgid "Tile Mode"
 msgstr "Mode Gambar Berulang"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Jendela Opasitas"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Panel tata letak"
 
 msgid "Auto"
-msgstr ""
+msgstr "Otomatis"
 
 msgid "Widescreen"
 msgstr ""
@@ -681,7 +681,7 @@ msgid "Polish"
 msgstr "Polski"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugis"
 
 msgid "Brazilian Portuguese"
 msgstr "Portugis (Brasil)"
@@ -738,7 +738,7 @@ msgid "Japanese"
 msgstr ""
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrainia"
 
 msgid "Development Team"
 msgstr "Tim Developer"
@@ -1723,6 +1723,9 @@ msgstr "Buka proyek terakhir saat mulai"
 
 msgid "Opens last opened project on startup"
 msgstr "Buka proyek yang terakhir kali di buka saat pertama mulai"
+
+msgid "Quit confirmation"
+msgstr ""
 
 msgid "Enable autosave"
 msgstr "Aktifkan autosave (simpan otomatis)"

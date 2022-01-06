@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2021-12-11 18:39\n"
+"PO-Revision-Date: 2022-01-05 00:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1366,7 +1366,7 @@ msgid "Below canvas"
 msgstr "En dessous du canevas"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Si vous voulez qu'un calque ignore la peau d'oignon, ajoutez simplement le suffixe « _io » dans son nom."
 
 msgid "Add a new frame"
 msgstr "Ajouter une frame"
@@ -1464,10 +1464,10 @@ msgid "Redo: Draw"
 msgstr "Refaire : Dessin"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Annuler : Sélectionner"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Rétablir : Sélectionner"
 
 msgid "Undo: Scale"
 msgstr "Annuler : Redimensionner l'image"
@@ -1668,22 +1668,22 @@ msgid "Rectangular Selection"
 msgstr "Sélection rectangulaire"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "Sélection elliptique"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "Sélection polygonale"
 
 msgid "Select By Color"
-msgstr ""
+msgstr "Sélectionner par couleur"
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "Baguette magique"
 
 msgid "Lasso / Free Select Tool"
-msgstr ""
+msgstr "Lasso / Outil de sélection libre"
 
 msgid "Move"
-msgstr ""
+msgstr "Déplacer"
 
 msgid "Zoom"
 msgstr "Zoom"
@@ -1704,16 +1704,16 @@ msgid "Bucket"
 msgstr "Seau de remplissage"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Outil d'ombrage"
 
 msgid "Line Tool"
-msgstr ""
+msgstr "Outil ligne"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "Outil rectangle"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "Outil ellipse"
 
 msgid "Switch Colors"
 msgstr "Changer les couleurs"
@@ -1760,6 +1760,9 @@ msgstr "Charger le dernier projet au démarrage"
 msgid "Opens last opened project on startup"
 msgstr "Charger le dernier projet au démarrage"
 
+msgid "Quit confirmation"
+msgstr ""
+
 msgid "Enable autosave"
 msgstr "Activer la sauvegarde automatique"
 
@@ -1783,7 +1786,8 @@ msgstr "Supprimer"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "Un ou plusieurs projet(s) enregistré(s) automatiquement à partir d'une session qui a plantée ont été trouvés.\n"
+"Voulez-vous récupérer les données ?"
 
 msgid "Backup reloaded"
 msgstr "Sauvegarde rechargée"
@@ -1825,38 +1829,38 @@ msgid "Tiled In Y Axis"
 msgstr "Mode Tuile sur l'Axe Y"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Créer une nouvelle palette"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Commentaire :"
 
 msgid "Empty"
-msgstr ""
+msgstr "Vide"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "À partir de la palette actuelle"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "À partir du sprite actuel"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "À partir de la sélection actuelle"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Ajouter une nouvelle couleur"
 
 msgid "Remove a selected color"
-msgstr ""
+msgstr "Supprimer une couleur sélectionnée"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Une palette avec le même nom et le même chemin existe déjà !"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Le nom de la palette est obligatoire !"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "La réduction de la taille de la palette réinitialisera la position des couleurs. Les couleurs qui ne rentrent pas dans la nouvelle taille de la palette seront perdues !"
 
 msgid "Position:"
-msgstr ""
+msgstr "Position :"
 

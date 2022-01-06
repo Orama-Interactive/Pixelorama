@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2021-12-11 19:25\n"
+"PO-Revision-Date: 2022-01-05 16:10\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1759,6 +1759,9 @@ msgstr "Άνοιγμα τελευταίου έργου κατά την εκκί�
 
 msgid "Opens last opened project on startup"
 msgstr "Ανοίγει το τελευταίο έργο κατά την εκκίνηση"
+
+msgid "Quit confirmation"
+msgstr "Επιβεβαίωση εξόδου"
 
 msgid "Enable autosave"
 msgstr "Ενεργοποίηση αυτόματης αποθήκευσης"
