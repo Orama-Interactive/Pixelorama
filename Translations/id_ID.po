@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-01-06 00:59\n"
+"PO-Revision-Date: 2022-01-06 01:13\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -181,7 +181,7 @@ msgid "Window Opacity"
 msgstr "Jendela Opasitas"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Panel tata letak"
 
 msgid "Auto"
 msgstr "Otomatis"
@@ -681,7 +681,7 @@ msgid "Polish"
 msgstr "Polski"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugis"
 
 msgid "Brazilian Portuguese"
 msgstr "Portugis (Brasil)"
@@ -738,7 +738,7 @@ msgid "Japanese"
 msgstr ""
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrainia"
 
 msgid "Development Team"
 msgstr "Tim Developer"
