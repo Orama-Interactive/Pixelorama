@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-01-06 00:53\n"
+"PO-Revision-Date: 2022-01-06 00:59\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -157,10 +157,10 @@ msgid "Rotate Image"
 msgstr "Putar Gambar"
 
 msgid "Clear"
-msgstr ""
+msgstr "Hapus"
 
 msgid "Invert"
-msgstr ""
+msgstr "Balikkan"
 
 msgid "Flip"
 msgstr "Balik"
@@ -178,13 +178,13 @@ msgid "Tile Mode"
 msgstr "Mode Gambar Berulang"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Jendela Opasitas"
 
 msgid "Panel Layout"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
+msgstr "Otomatis"
 
 msgid "Widescreen"
 msgstr ""
