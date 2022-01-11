@@ -193,6 +193,9 @@ func create_translators() -> void:
 	translators.create_item(translators_root).set_text(
 		0, "  Lulullia (lulullia902) - " + tr("French")
 	)
+	translators.create_item(translators_root).set_text(
+		0, "  Anne Onyme 017 (Anne17) - " + tr("French")
+	)
 	translators.create_item(translators_root).set_text(0, "  Nicolas.C (nico57c) - " + tr("French"))
 	translators.create_item(translators_root).set_text(0, "  Schweini07 - " + tr("German"))
 	translators.create_item(translators_root).set_text(
@@ -239,6 +242,9 @@ func create_translators() -> void:
 	translators.create_item(translators_root).set_text(0, "  ax trifonov (ax34) - " + tr("Russian"))
 	translators.create_item(translators_root).set_text(
 		0, "  Artem (blinovartem) - " + tr("Russian")
+	)
+	translators.create_item(translators_root).set_text(
+		0, "  Иван Соколов (SokoL1337) - " + tr("Russian")
 	)
 	translators.create_item(translators_root).set_text(
 		0, "  stomleny_cmok - " + tr("Russian") + " " + tr("and") + " " + tr("Ukrainian")
@@ -298,6 +304,7 @@ func create_translators() -> void:
 	translators.create_item(translators_root).set_text(0, "  Teashrock - " + tr("Esperanto"))
 	translators.create_item(translators_root).set_text(0, "  Blend_Smile - " + tr("Indonesian"))
 	translators.create_item(translators_root).set_text(0, "  NoahParaduck - " + tr("Indonesian"))
+	translators.create_item(translators_root).set_text(0, "  Channeling - " + tr("Indonesian"))
 	translators.create_item(translators_root).set_text(
 		0, "  Martin Novák (novhack) - " + tr("Czech")
 	)
@@ -313,7 +320,6 @@ func create_translators() -> void:
 	)
 	translators.create_item(translators_root).set_text(0, "  Motomo.exe - " + tr("Japanese"))
 	translators.create_item(translators_root).set_text(0, "  hebekeg - " + tr("Japanese"))
-	translators.create_item(translators_root).set_text(0, "  Sorenwds - " + tr("Japanese"))
 	translators.create_item(translators_root).set_text(0, "  M. Gabriel Lup - " + tr("Romanian"))
 	translators.create_item(translators_root).set_text(0, "  ANormalKnife - " + tr("Turkish"))
 	translators.create_item(translators_root).set_text(0, "  kmsecer - " + tr("Turkish"))
