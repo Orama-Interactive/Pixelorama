@@ -71,6 +71,7 @@ func _ready() -> void:
 		OS.request_permissions()
 
 	_show_splash_screen()
+	ui.tabs_visible = false
 
 
 func _input(event: InputEvent) -> void:

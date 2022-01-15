@@ -383,6 +383,7 @@ func _get_panel(idx: int) -> DockablePanel:
 	var panel = DockablePanel.new()
 	panel.tab_align = _tab_align
 	panel.use_hidden_tabs_for_min_size = _use_hidden_tabs_for_min_size
+	panel.tabs_visible = _tabs_visible
 	panel.set_tabs_rearrange_group(max(0, rearrange_group))
 	_panel_container.add_child(panel)
 	panel.connect("tab_layout_changed", self, "_on_panel_tab_layout_changed", [panel])

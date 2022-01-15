@@ -373,6 +373,7 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_anim_timeline()
 		ViewMenuId.EDIT_MODE:
 			Global.control.ui.tabs_visible = !Global.control.ui.tabs_visible
+			view_menu.set_item_checked(ViewMenuId.EDIT_MODE, Global.control.ui.tabs_visible)
 		ViewMenuId.ZEN_MODE:
 			_toggle_zen_mode()
 		ViewMenuId.FULLSCREEN_MODE:
