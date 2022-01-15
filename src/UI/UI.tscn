@@ -190,12 +190,11 @@ script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-tabs_visible = true
+tabs_visible = false
 layout = SubResource( 25 )
 
 [node name="Tools" type="Panel" parent="DockableContainer"]
 margin_left = 4.0
-margin_top = 32.0
 margin_right = 46.0
 margin_bottom = 716.0
 rect_min_size = Vector2( 42, 0 )
@@ -1189,9 +1188,8 @@ __meta__ = {
 
 [node name="ViewportAndRulers" type="VBoxContainer" parent="DockableContainer"]
 margin_left = 66.0
-margin_top = 32.0
 margin_right = 938.0
-margin_bottom = 508.0
+margin_bottom = 532.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -1223,20 +1221,20 @@ script = ExtResource( 6 )
 [node name="HSplitContainer" type="HSplitContainer" parent="DockableContainer/ViewportAndRulers"]
 margin_top = 58.0
 margin_right = 872.0
-margin_bottom = 476.0
+margin_bottom = 532.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="DockableContainer/ViewportAndRulers/HSplitContainer"]
 margin_right = 860.0
-margin_bottom = 418.0
+margin_bottom = 474.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="VerticalRuler" type="Button" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_right = 16.0
-margin_bottom = 418.0
+margin_bottom = 474.0
 rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
 mouse_default_cursor_shape = 15
@@ -1248,7 +1246,7 @@ script = ExtResource( 4 )
 [node name="ViewportContainer" type="ViewportContainer" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
 margin_left = 16.0
 margin_right = 860.0
-margin_bottom = 418.0
+margin_bottom = 474.0
 focus_mode = 2
 mouse_default_cursor_shape = 3
 size_flags_horizontal = 3
@@ -1257,7 +1255,7 @@ stretch = true
 script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 844, 418 )
+size = Vector2( 844, 474 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
@@ -1275,13 +1273,13 @@ script = ExtResource( 7 )
 [node name="ViewportContainer2" type="ViewportContainer" parent="DockableContainer/ViewportAndRulers/HSplitContainer"]
 margin_left = 872.0
 margin_right = 872.0
-margin_bottom = 418.0
+margin_bottom = 474.0
 size_flags_vertical = 3
 stretch = true
 script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2"]
-size = Vector2( 0, 418 )
+size = Vector2( 0, 474 )
 handle_input_locally = false
 render_target_update_mode = 3
 
@@ -1297,51 +1295,50 @@ script = ExtResource( 7 )
 
 [node name="AnimationTimeline" parent="DockableContainer" instance=ExtResource( 18 )]
 margin_left = 66.0
-margin_top = 556.0
+margin_top = 548.0
 margin_right = 938.0
 margin_bottom = 716.0
 
 [node name="CanvasPreviewContainer" parent="DockableContainer" instance=ExtResource( 16 )]
 margin_left = 958.0
-margin_top = 32.0
 margin_right = 1276.0
-margin_bottom = 149.062
+margin_bottom = 156.228
 
 [node name="ColorPickers" parent="DockableContainer" instance=ExtResource( 17 )]
-margin_top = 197.062
+margin_top = 172.228
 
 [node name="Left tool options" type="ScrollContainer" parent="DockableContainer"]
 margin_left = 958.0
-margin_top = 277.062
+margin_top = 245.062
 margin_right = 1107.0
-margin_bottom = 550.0
+margin_bottom = 574.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LeftPanelContainer" type="PanelContainer" parent="DockableContainer/Left tool options"]
 margin_right = 149.0
-margin_bottom = 272.938
+margin_bottom = 328.938
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Right tool options" type="ScrollContainer" parent="DockableContainer"]
 margin_left = 1127.0
-margin_top = 277.062
+margin_top = 245.062
 margin_right = 1276.0
-margin_bottom = 550.0
+margin_bottom = 574.0
 
 [node name="RightPanelContainer" type="PanelContainer" parent="DockableContainer/Right tool options"]
 margin_right = 149.0
-margin_bottom = 272.938
+margin_bottom = 328.938
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PalettePanel" parent="DockableContainer" instance=ExtResource( 20 )]
 margin_left = 958.0
-margin_top = 598.0
+margin_top = 590.0
 margin_right = 1276.0
 margin_bottom = 716.0
 
