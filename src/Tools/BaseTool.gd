@@ -132,7 +132,8 @@ func _get_selected_draw_images() -> Array:  # Array of Images
 	var project: Project = Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: Cel = project.frames[cel_index[0]].cels[cel_index[1]]
-		images.append(cel.image)
+		if project.layers[cel_index[1]].can_layer_get_drawn():
+			images.append(cel.image)
 	return images
 
 
