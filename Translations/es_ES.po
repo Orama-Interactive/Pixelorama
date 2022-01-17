@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-01-05 00:44\n"
+"PO-Revision-Date: 2022-01-17 06:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -178,7 +178,7 @@ msgid "Tile Mode"
 msgstr "Modo mosaico"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Opacidad de Ventana"
 
 msgid "Panel Layout"
 msgstr "Diseño del Panel"
@@ -1119,7 +1119,7 @@ msgid "Set application FPS limit:"
 msgstr "Establecer el límite de FPS de la aplicación:"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Pausar la aplicación cuando pierde el enfoque"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Establece el límite de fotogramas por segundo de la aplicación. Cuanto menor sea el número, menor será el uso de la CPU, pero la aplicación se vuelve más lenta, entrecortada y sin respuesta. 0 significa que no hay límite."
