@@ -201,6 +201,7 @@ func create_translators() -> void:
 	translators.create_item(translators_root).set_text(
 		0, "  Martin Zabinski (Martin1991zab) - " + tr("German")
 	)
+	translators.create_item(translators_root).set_text(0, "  Manuel (DrMoebyus) - " + tr("German"))
 	translators.create_item(translators_root).set_text(
 		0, "  Dawid Niedźwiedzki (tiritto) - " + tr("Polish")
 	)
