@@ -1,5 +1,84 @@
 extends WindowDialog
 
+const TRANSLATORS_DICTIONARY := {
+	"Emmanouil Papadeas (Overloaded)": ["Greek"],
+	"Xenofon Konitsas (huskee)": ["Greek"],
+	"Lena Louloudaki (Soliscital)": ["Greek"],
+	"Hugo Locurcio (Calinou)": ["French"],
+	"blackjoker77777": ["French"],
+	"Yoshiip (myoshipro)": ["French"],
+	"Iorvethe": ["French"],
+	"Paul Coral (lepaincestbon)": ["French"],
+	"RED (REDOOO)": ["French"],
+	"Aidan Olsen (PossiblyAShrub)": ["French"],
+	"Jean-Loup Macarit (leyk973)": ["French"],
+	"Lulullia (lulullia902)": ["French"],
+	"Anne Onyme 017 (Anne17)": ["French"],
+	"Nicolas.C (nico57c)": ["French"],
+	"Schweini07": ["German"],
+	"Martin Zabinski (Martin1991zab)": ["German"],
+	"Manuel (DrMoebyus)": ["German"],
+	"Dawid Niedźwiedzki (tiritto) ": ["Polish"],
+	"Serhiy Dmytryshyn (dies)": ["Polish"],
+	"Igor Santarek (jegor377)": ["Polish"],
+	"RainbowP": ["Polish"],
+	"Michael Alexsander (YeldhamDev)": ["Brazilian Portuguese"],
+	"Cedulio Cezar (ceduliocezar)": ["Brazilian Portuguese"],
+	"Alexandre Oliveira (rockytvbr)": ["Brazilian Portuguese"],
+	"IagoAndrade": ["Brazilian Portuguese"],
+	"chacal_exodius": ["Brazilian Portuguese"],
+	"Lucas Santiago (lu.santi.oli)": ["Brazilian Portuguese"],
+	"TheNoobPro44": ["Brazilian Portuguese"],
+	"DippoZz": ["Brazilian Portuguese"],
+	"Luciano Salomoni (LucianoSalomoni)": ["Brazilian Portuguese"],
+	"Andreev Andrei": ["Russian"],
+	"ax trifonov (ax34)": ["Russian"],
+	"Artem (blinovartem)": ["Russian"],
+	"Иван Соколов (SokoL1337)": ["Russian"],
+	"stomleny_cmok": ["Russian", "Ukrainian"],
+	"Bohdan Matviiv (BodaMat)": ["Ukrainian"],
+	"Kinwailo": ["Chinese Traditional"],
+	"曹恩逢 (SiderealArt)": ["Chinese Traditional"],
+	"Chenxu Wang": ["Chinese Simplified"],
+	"Catherine Yang (qzcyyw13)": ["Chinese Simplified"],
+	"王晨旭 (wcxu21)": ["Chinese Simplified"],
+	"Marco Galli (Gaarco)": ["Italian"],
+	"StarFang208": ["Italian"],
+	"Azagaya VJ (azagaya.games)": ["Spanish"],
+	"Lilly And (KatieAnd)": ["Spanish"],
+	"UncleFangs": ["Spanish"],
+	"foralistico": ["Spanish"],
+	"Jaime Arancibia Soto": ["Spanish", "Catalan"],
+	"Jose Callejas (satorikeiko)": ["Spanish"],
+	"Javier Ocampos (Leedeo)": ["Spanish"],
+	"Art Leeman (artleeman)": ["Spanish"],
+	"Seifer23": ["Catalan"],
+	"Agnis Aldiņš (NeZvers)": ["Latvian"],
+	"Edgars Korns (Eddy11)": ["Latvian"],
+	"Teashrock": ["Esperanto"],
+	"Blend_Smile": ["Indonesian"],
+	"NoahParaduck": ["Indonesian"],
+	"Channeling": ["Indonesian"],
+	"Martin Novák (novhack)": ["Czech"],
+	"Lullius": ["Norwegian Bokmål"],
+	"Aninuscsalas": ["Hungarian"],
+	"jaehyeon1090": ["Korean"],
+	"sfun_G": ["Korean"],
+	"KripC2160": ["Korean", "Japanese"],
+	"daisuke osada (barlog)": ["Japanese"],
+	"Motomo.exe": ["Japanese"],
+	"hebekeg": ["Japanese"],
+	"M. Gabriel Lup": ["Romanian"],
+	"ANormalKnife": ["Turkish"],
+	"kmsecer": ["Turkish"],
+	"Rıdvan SAYLAR": ["Turkish"],
+	"latbat58": ["Turkish"],
+	"M Buhari Horoz (Sorian01)": ["Turkish"],
+	"br.bahrampour": ["Turkish"],
+	"gegekyz": ["Turkish"],
+	"Vancat": ["Turkish"],
+}
+
 export(Array, String, MULTILINE) var licenses: Array
 
 onready var credits = $AboutUI/Credits
@@ -100,7 +179,7 @@ func _on_LicenseButton_pressed(index: int) -> void:
 func create_developers() -> void:
 	var dev_root := developers.create_item()
 	developers.create_item(dev_root).set_text(
-		0, "  Manolis Papadeas (Overloaded) - " + tr("Lead Programmer")
+		0, "  Emmanouil Papadeas (Overloaded) - " + tr("Lead Programmer")
 	)
 	developers.create_item(dev_root).set_text(0, "  John Nikitakis (Erevos) - " + tr("UI Designer"))
 
@@ -165,170 +244,11 @@ func create_contributors() -> void:
 
 func create_translators() -> void:
 	var translators_root := translators.create_item()
-	translators.create_item(translators_root).set_text(
-		0, "  Manolis Papadeas (Overloaded) - " + tr("Greek")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Xenofon Konitsas (huskee) - " + tr("Greek")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Lena Louloudaki (Soliscital) - " + tr("Greek")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Hugo Locurcio (Calinou) - " + tr("French")
-	)
-	translators.create_item(translators_root).set_text(0, "  blackjoker77777 - " + tr("French"))
-	translators.create_item(translators_root).set_text(0, "  Yoshiip (myoshipro) - " + tr("French"))
-	translators.create_item(translators_root).set_text(0, "  Iorvethe - " + tr("French"))
-	translators.create_item(translators_root).set_text(
-		0, "  Paul Coral (lepaincestbon) - " + tr("French")
-	)
-	translators.create_item(translators_root).set_text(0, "  RED (REDOOO) - " + tr("French"))
-	translators.create_item(translators_root).set_text(
-		0, "  Aidan Olsen (PossiblyAShrub) - " + tr("French")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Jean-Loup Macarit (leyk973) - " + tr("French")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Lulullia (lulullia902) - " + tr("French")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Anne Onyme 017 (Anne17) - " + tr("French")
-	)
-	translators.create_item(translators_root).set_text(0, "  Nicolas.C (nico57c) - " + tr("French"))
-	translators.create_item(translators_root).set_text(0, "  Schweini07 - " + tr("German"))
-	translators.create_item(translators_root).set_text(
-		0, "  Martin Zabinski (Martin1991zab) - " + tr("German")
-	)
-	translators.create_item(translators_root).set_text(0, "  Manuel (DrMoebyus) - " + tr("German"))
-	translators.create_item(translators_root).set_text(
-		0, "  Dawid Niedźwiedzki (tiritto) - " + tr("Polish")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Serhiy Dmytryshyn (dies) - " + tr("Polish")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Igor Santarek (jegor377) - " + tr("Polish")
-	)
-	translators.create_item(translators_root).set_text(0, "  RainbowP - " + tr("Polish"))
-	translators.create_item(translators_root).set_text(
-		0, "  Michael Alexsander (YeldhamDev) - " + tr("Brazilian Portuguese")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Cedulio Cezar (ceduliocezar) - " + tr("Brazilian Portuguese")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Alexandre Oliveira (rockytvbr) - " + tr("Brazilian Portuguese")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  IagoAndrade - " + tr("Brazilian Portuguese")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  chacal_exodius - " + tr("Brazilian Portuguese")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Lucas Santiago (lu.santi.oli) - " + tr("Brazilian Portuguese")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  TheNoobPro44 - " + tr("Brazilian Portuguese")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  DippoZz - " + tr("Brazilian Portuguese")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Luciano Salomoni (LucianoSalomoni) - " + tr("Brazilian Portuguese")
-	)
-	translators.create_item(translators_root).set_text(0, "  Andreev Andrei - " + tr("Russian"))
-	translators.create_item(translators_root).set_text(0, "  ax trifonov (ax34) - " + tr("Russian"))
-	translators.create_item(translators_root).set_text(
-		0, "  Artem (blinovartem) - " + tr("Russian")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Иван Соколов (SokoL1337) - " + tr("Russian")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  stomleny_cmok - " + tr("Russian") + " " + tr("and") + " " + tr("Ukrainian")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Bohdan Matviiv (BodaMat) - " + tr("Ukrainian")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  JunYouIntrovert - " + tr("Chinese Traditional")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Kinwailo - " + tr("Chinese Traditional")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  曹恩逢 (SiderealArt) - " + tr("Chinese Traditional")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Chenxu Wang - " + tr("Chinese Simplified")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Catherine Yang (qzcyyw13) - " + tr("Chinese Simplified")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  王晨旭 (wcxu21) - " + tr("Chinese Simplified")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Marco Galli (Gaarco) - " + tr("Italian")
-	)
-	translators.create_item(translators_root).set_text(0, "  StarFang208 - " + tr("Italian"))
-	translators.create_item(translators_root).set_text(
-		0, "  Azagaya VJ (azagaya.games) - " + tr("Spanish")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Lilly And (KatieAnd) - " + tr("Spanish")
-	)
-	translators.create_item(translators_root).set_text(0, "  UncleFangs - " + tr("Spanish"))
-	translators.create_item(translators_root).set_text(
-		0, "  Jaime Arancibia Soto - " + tr("Spanish") + " " + tr("and") + " " + tr("Catalan")
-	)
-	translators.create_item(translators_root).set_text(0, "  foralistico - " + tr("Spanish"))
-	translators.create_item(translators_root).set_text(
-		0, "  Jose Callejas (satorikeiko) - " + tr("Spanish")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Javier Ocampos (Leedeo) - " + tr("Spanish")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Art Leeman (artleeman) - " + tr("Spanish")
-	)
-	translators.create_item(translators_root).set_text(0, "  Seifer23 - " + tr("Catalan"))
-	translators.create_item(translators_root).set_text(
-		0, "  Agnis Aldiņš (NeZvers) - " + tr("Latvian")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  Edgars Korns (Eddy11) - " + tr("Latvian")
-	)
-	translators.create_item(translators_root).set_text(0, "  Teashrock - " + tr("Esperanto"))
-	translators.create_item(translators_root).set_text(0, "  Blend_Smile - " + tr("Indonesian"))
-	translators.create_item(translators_root).set_text(0, "  NoahParaduck - " + tr("Indonesian"))
-	translators.create_item(translators_root).set_text(0, "  Channeling - " + tr("Indonesian"))
-	translators.create_item(translators_root).set_text(
-		0, "  Martin Novák (novhack) - " + tr("Czech")
-	)
-	translators.create_item(translators_root).set_text(0, "  Lullius - " + tr("Norwegian Bokmål"))
-	translators.create_item(translators_root).set_text(0, "  Aninuscsalas - " + tr("Hungarian"))
-	translators.create_item(translators_root).set_text(0, "  jaehyeon1090 - " + tr("Korean"))
-	translators.create_item(translators_root).set_text(0, "  sfun_G - " + tr("Korean"))
-	translators.create_item(translators_root).set_text(
-		0, "  KripC2160 - " + tr("Korean") + " " + tr("and") + " " + tr("Japanese")
-	)
-	translators.create_item(translators_root).set_text(
-		0, "  daisuke osada (barlog) - " + tr("Japanese")
-	)
-	translators.create_item(translators_root).set_text(0, "  Motomo.exe - " + tr("Japanese"))
-	translators.create_item(translators_root).set_text(0, "  hebekeg - " + tr("Japanese"))
-	translators.create_item(translators_root).set_text(0, "  M. Gabriel Lup - " + tr("Romanian"))
-	translators.create_item(translators_root).set_text(0, "  ANormalKnife - " + tr("Turkish"))
-	translators.create_item(translators_root).set_text(0, "  kmsecer - " + tr("Turkish"))
-	translators.create_item(translators_root).set_text(0, "  Rıdvan SAYLAR - " + tr("Turkish"))
-	translators.create_item(translators_root).set_text(0, "  latbat58 - " + tr("Turkish"))
-	translators.create_item(translators_root).set_text(
-		0, "  M Buhari Horoz (Sorian01) - " + tr("Turkish")
-	)
-	translators.create_item(translators_root).set_text(0, "  br.bahrampour - " + tr("Turkish"))
-	translators.create_item(translators_root).set_text(0, "  gegekyz - " + tr("Turkish"))
-	translators.create_item(translators_root).set_text(0, "  Vancat - " + tr("Turkish"))
+	var translator_list := TRANSLATORS_DICTIONARY.keys()
+	for translator in translator_list:
+		var languages: Array = TRANSLATORS_DICTIONARY[translator]
+		var language_string: String = tr(languages[0])
+		if languages.size() == 2:
+			language_string += " %s %s" % [tr("and"), tr(languages[1])]
+		var text := "  %s - %s" % [translator, language_string]
+		translators.create_item(translators_root).set_text(0, text)
