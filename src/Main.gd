@@ -438,8 +438,14 @@ func _can_draw_true() -> void:
 
 
 func show_quit_dialog() -> void:
+	var changed_project := false
+	for project in Global.projects:
+		if project.has_changed:
+			changed_project = true
+			break
+
 	if !quit_dialog.visible:
-		if !Global.current_project.has_changed:
+		if !changed_project:
 			if Global.quit_confirmation:
 				quit_dialog.call_deferred("popup_centered")
 			else:

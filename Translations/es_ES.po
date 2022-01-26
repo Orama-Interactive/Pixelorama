@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2021-12-11 18:05\n"
+"PO-Revision-Date: 2022-01-17 06:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -178,7 +178,7 @@ msgid "Tile Mode"
 msgstr "Modo mosaico"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Opacidad de Ventana"
 
 msgid "Panel Layout"
 msgstr "Diseño del Panel"
@@ -1119,13 +1119,13 @@ msgid "Set application FPS limit:"
 msgstr "Establecer el límite de FPS de la aplicación:"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Pausar la aplicación cuando pierde el enfoque"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Establece el límite de fotogramas por segundo de la aplicación. Cuanto menor sea el número, menor será el uso de la CPU, pero la aplicación se vuelve más lenta, entrecortada y sin respuesta. 0 significa que no hay límite."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr ""
+msgstr "Si se activa esta opción, cuando la ventana de la aplicación pierde el enfoque, se detiene. Esto ayuda a reducir el uso de la CPU cuando está inactiva. La aplicación no se detiene cuando el ratón entra en la ventana de la aplicación."
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -1354,19 +1354,19 @@ msgid "Blue-Red Mode"
 msgstr "Modo Rojo-Azul"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "Mostrar fotogramas pasados:"
 
 msgid "Show future frames:"
-msgstr ""
+msgstr "Mostrar fotogramas futuros:"
 
 msgid "Above canvas"
-msgstr ""
+msgstr "Encima del lienzo"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "Debajo del lienzo"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Si desea que una capa ignore multiples capas al mismo tiempo simplemente añada \"_io\" en el final del nombre de la capa."
 
 msgid "Add a new frame"
 msgstr "Añadir un nuevo fotograma"
@@ -1464,10 +1464,10 @@ msgid "Redo: Draw"
 msgstr "Rehacer: Dibujar"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Deshacer: selección"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Rehacer: Selección"
 
 msgid "Undo: Scale"
 msgstr "Deshacer: Escalar"
@@ -1759,6 +1759,9 @@ msgstr "Abrir el último proyecto al iniciar"
 
 msgid "Opens last opened project on startup"
 msgstr "Abre el último proyecto abierto al iniciar"
+
+msgid "Quit confirmation"
+msgstr "Confirmación de salida"
 
 msgid "Enable autosave"
 msgstr "Activar guardado automático"

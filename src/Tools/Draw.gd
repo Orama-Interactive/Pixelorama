@@ -132,6 +132,8 @@ func update_mirror_brush() -> void:
 
 func update_mask(can_skip := true) -> void:
 	if can_skip and Global.pressure_sensitivity_mode == Global.PressureSensitivity.NONE:
+		if _mask:
+			_mask = PoolByteArray()
 		return
 	var size: Vector2 = Global.current_project.size
 	# Faster than zeroing PoolByteArray directly.

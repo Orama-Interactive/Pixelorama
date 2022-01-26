@@ -78,7 +78,10 @@ func draw_start(position: Vector2) -> void:
 	_picking_color = false
 
 	Global.canvas.selection.transform_content_confirm()
-	update_mask()
+	var can_skip_mask := true
+	if tool_slot.color.a < 1 and !_overwrite:
+		can_skip_mask = false
+	update_mask(can_skip_mask)
 	_changed = false
 	_drawer.color_op.changed = false
 	_drawer.color_op.overwrite = _overwrite

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2021-12-11 18:05\n"
+"PO-Revision-Date: 2022-01-05 00:44\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -1725,6 +1725,9 @@ msgstr "Utolsó projekt megnyitása indításkor"
 
 msgid "Opens last opened project on startup"
 msgstr "Utolsó projektet megnyissa indításkor"
+
+msgid "Quit confirmation"
+msgstr ""
 
 msgid "Enable autosave"
 msgstr "Automatikus mentés bekapcsolása"

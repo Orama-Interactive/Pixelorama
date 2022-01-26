@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2021-12-13 09:29\n"
+"PO-Revision-Date: 2022-01-06 00:39\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1759,6 +1759,9 @@ msgstr "在启动时打开最后一个项目"
 
 msgid "Opens last opened project on startup"
 msgstr "在启动时打开最后打开的项目"
+
+msgid "Quit confirmation"
+msgstr "退出确认"
 
 msgid "Enable autosave"
 msgstr "启用自动保存"

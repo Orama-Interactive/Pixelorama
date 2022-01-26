@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2021-12-11 22:29\n"
+"PO-Revision-Date: 2022-01-05 15:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1125,7 +1125,7 @@ msgid "Sets the limit of the application's frames per second. The lower the numb
 msgstr "Устанавливает лимит на количество кадров в секунду для программы. Чем ниже это число, тем меньше используется процессор, но приложение становится медленнее, дольше реагирует на действия, а движения будут менее плавными. 0 значит отсутствие лимита."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr ""
+msgstr "Если этот параметр включен, то, когда окно приложения теряет фокус, оно приостанавливается. Это помогает снизить загрузку процессора в режиме бездействие. Приложение продолжит работать, когда мышь попадет в окно приложения."
 
 msgid "Brush:"
 msgstr "Кисть:"
@@ -1366,7 +1366,7 @@ msgid "Below canvas"
 msgstr "Под холстом"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Если вы хотите, чтобы слой игнорировал скин лука, просто добавьте суффикс \"_io\" в его имя."
 
 msgid "Add a new frame"
 msgstr "Добавить новый кадр"
@@ -1759,6 +1759,9 @@ msgstr "Открывать последний проект при запуске
 
 msgid "Opens last opened project on startup"
 msgstr "Открывает последний открытый проект при запуске"
+
+msgid "Quit confirmation"
+msgstr "Подтверждение выхода"
 
 msgid "Enable autosave"
 msgstr "Включить автосохранение"
