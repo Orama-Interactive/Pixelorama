@@ -21,6 +21,8 @@ func set_window_opacity(value: float) -> void:
 
 	value = value / 100.0
 	Global.control.ui.get_parent().self_modulate.a = value
+	for container in Global.control.ui._panel_container.get_children():
+		container.self_modulate.a = value
 	Global.transparent_checker.transparency(value)
 
 
