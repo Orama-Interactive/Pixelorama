@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2022-01-17 14:13\n"
+"PO-Revision-Date: 2022-01-27 19:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -681,7 +681,7 @@ msgid "Polish"
 msgstr "Polaco"
 
 msgid "Portuguese"
-msgstr "português"
+msgstr "Português"
 
 msgid "Brazilian Portuguese"
 msgstr "Português do Brazil"
