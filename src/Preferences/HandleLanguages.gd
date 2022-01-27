@@ -13,6 +13,7 @@ const LANGUAGES_DICT := {
 	"lv_LV": ["Latvian", "Latvian"],
 	"pl_PL": ["Polski", "Polish"],
 	"pt_BR": ["Português Brasileiro", "Brazilian Portuguese"],
+	"pt_PT": ["Português", "Portuguese"],
 	"ru_RU": ["Русский", "Russian"],
 	"zh_CN": ["简体中文", "Chinese Simplified"],
 	"zh_TW": ["繁體中文", "Chinese Traditional"],
