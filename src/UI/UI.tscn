@@ -46,13 +46,13 @@ current_tab = 0
 [sub_resource type="Resource" id=8]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "ViewportAndRulers" )
+names = PoolStringArray( "Main Canvas" )
 current_tab = 0
 
 [sub_resource type="Resource" id=9]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "AnimationTimeline" )
+names = PoolStringArray( "Animation Timeline" )
 current_tab = 0
 
 [sub_resource type="Resource" id=10]
@@ -66,13 +66,13 @@ second = SubResource( 9 )
 [sub_resource type="Resource" id=11]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "CanvasPreviewContainer" )
+names = PoolStringArray( "Canvas Preview" )
 current_tab = 0
 
 [sub_resource type="Resource" id=20]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "ColorPickers" )
+names = PoolStringArray( "Color Pickers" )
 current_tab = 0
 
 [sub_resource type="Resource" id=21]
@@ -106,7 +106,7 @@ second = SubResource( 23 )
 [sub_resource type="Resource" id=13]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "PalettePanel" )
+names = PoolStringArray( "Palette Panel" )
 current_tab = 0
 
 [sub_resource type="Resource" id=14]
@@ -1188,7 +1188,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ViewportAndRulers" type="VBoxContainer" parent="DockableContainer"]
+[node name="Main Canvas" type="VBoxContainer" parent="DockableContainer"]
 margin_left = 66.0
 margin_top = 8.0
 margin_right = 938.0
@@ -1197,11 +1197,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="TabsContainer" type="PanelContainer" parent="DockableContainer/ViewportAndRulers"]
+[node name="TabsContainer" type="PanelContainer" parent="DockableContainer/Main Canvas"]
 margin_right = 872.0
 margin_bottom = 38.0
 
-[node name="Tabs" type="Tabs" parent="DockableContainer/ViewportAndRulers/TabsContainer"]
+[node name="Tabs" type="Tabs" parent="DockableContainer/Main Canvas/TabsContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 865.0
@@ -1211,7 +1211,7 @@ tab_close_display_policy = 2
 drag_to_rearrange_enabled = true
 script = ExtResource( 3 )
 
-[node name="HorizontalRuler" type="Button" parent="DockableContainer/ViewportAndRulers"]
+[node name="HorizontalRuler" type="Button" parent="DockableContainer/Main Canvas"]
 margin_top = 38.0
 margin_right = 872.0
 margin_bottom = 58.0
@@ -1221,21 +1221,21 @@ mouse_default_cursor_shape = 14
 action_mode = 0
 script = ExtResource( 6 )
 
-[node name="HSplitContainer" type="HSplitContainer" parent="DockableContainer/ViewportAndRulers"]
+[node name="HSplitContainer" type="HSplitContainer" parent="DockableContainer/Main Canvas"]
 margin_top = 58.0
 margin_right = 872.0
 margin_bottom = 524.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
-[node name="ViewportandVerticalRuler" type="HBoxContainer" parent="DockableContainer/ViewportAndRulers/HSplitContainer"]
+[node name="ViewportandVerticalRuler" type="HBoxContainer" parent="DockableContainer/Main Canvas/HSplitContainer"]
 margin_right = 860.0
 margin_bottom = 466.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="VerticalRuler" type="Button" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
+[node name="VerticalRuler" type="Button" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler"]
 margin_right = 16.0
 margin_bottom = 466.0
 rect_min_size = Vector2( 16, 0 )
@@ -1246,7 +1246,7 @@ size_flags_vertical = 3
 action_mode = 0
 script = ExtResource( 4 )
 
-[node name="ViewportContainer" type="ViewportContainer" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
+[node name="ViewportContainer" type="ViewportContainer" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler"]
 margin_left = 16.0
 margin_right = 860.0
 margin_bottom = 466.0
@@ -1257,23 +1257,23 @@ size_flags_vertical = 3
 stretch = true
 script = ExtResource( 23 )
 
-[node name="Viewport" type="Viewport" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
+[node name="Viewport" type="Viewport" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
 size = Vector2( 844, 466 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
 
-[node name="TransparentChecker" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 5 )]
+[node name="TransparentChecker" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 5 )]
 material = SubResource( 2 )
 
-[node name="Canvas" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 19 )]
+[node name="Canvas" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 19 )]
 
-[node name="Camera2D" type="Camera2D" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
+[node name="Camera2D" type="Camera2D" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 7 )
 
-[node name="ViewportContainer2" type="ViewportContainer" parent="DockableContainer/ViewportAndRulers/HSplitContainer"]
+[node name="ViewportContainer2" type="ViewportContainer" parent="DockableContainer/Main Canvas/HSplitContainer"]
 margin_left = 872.0
 margin_right = 872.0
 margin_bottom = 466.0
@@ -1281,34 +1281,34 @@ size_flags_vertical = 3
 stretch = true
 script = ExtResource( 23 )
 
-[node name="Viewport" type="Viewport" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2"]
+[node name="Viewport" type="Viewport" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2"]
 size = Vector2( 0, 466 )
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="TransparentChecker" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport" instance=ExtResource( 5 )]
+[node name="TransparentChecker" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2/Viewport" instance=ExtResource( 5 )]
 material = SubResource( 3 )
 
-[node name="CanvasPreview" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport" instance=ExtResource( 2 )]
+[node name="CanvasPreview" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2/Viewport" instance=ExtResource( 2 )]
 
-[node name="Camera2D2" type="Camera2D" parent="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport"]
+[node name="Camera2D2" type="Camera2D" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 7 )
 
-[node name="AnimationTimeline" parent="DockableContainer" instance=ExtResource( 18 )]
+[node name="Animation Timeline" parent="DockableContainer" instance=ExtResource( 18 )]
 margin_left = 66.0
 margin_top = 556.0
 margin_right = 938.0
 margin_bottom = 716.0
 
-[node name="CanvasPreviewContainer" parent="DockableContainer" instance=ExtResource( 16 )]
+[node name="Canvas Preview" parent="DockableContainer" instance=ExtResource( 16 )]
 margin_left = 958.0
 margin_top = 8.0
 margin_right = 1276.0
 margin_bottom = 173.062
 
-[node name="ColorPickers" parent="DockableContainer" instance=ExtResource( 17 )]
+[node name="Color Pickers" parent="DockableContainer" instance=ExtResource( 17 )]
 margin_top = 197.062
 
 [node name="Left tool options" type="ScrollContainer" parent="DockableContainer"]
@@ -1340,20 +1340,20 @@ rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PalettePanel" parent="DockableContainer" instance=ExtResource( 20 )]
+[node name="Palette Panel" parent="DockableContainer" instance=ExtResource( 20 )]
 margin_left = 958.0
 margin_top = 598.0
 margin_right = 1276.0
 margin_bottom = 716.0
 
 [connection signal="resized" from="DockableContainer/Tools" to="DockableContainer/Tools/PanelContainer/ToolButtons" method="_on_Tools_resized"]
-[connection signal="reposition_active_tab_request" from="DockableContainer/ViewportAndRulers/TabsContainer/Tabs" to="DockableContainer/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_reposition_active_tab_request"]
-[connection signal="tab_changed" from="DockableContainer/ViewportAndRulers/TabsContainer/Tabs" to="DockableContainer/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_tab_changed"]
-[connection signal="tab_close" from="DockableContainer/ViewportAndRulers/TabsContainer/Tabs" to="DockableContainer/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_tab_close"]
-[connection signal="mouse_entered" from="DockableContainer/ViewportAndRulers/HorizontalRuler" to="DockableContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
-[connection signal="pressed" from="DockableContainer/ViewportAndRulers/HorizontalRuler" to="DockableContainer/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
-[connection signal="pressed" from="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" to="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]
-[connection signal="mouse_entered" from="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" method="_on_ViewportContainer_mouse_exited"]
-[connection signal="mouse_entered" from="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="DockableContainer/ViewportAndRulers/HSplitContainer/ViewportContainer2" method="_on_ViewportContainer_mouse_exited"]
+[connection signal="reposition_active_tab_request" from="DockableContainer/Main Canvas/TabsContainer/Tabs" to="DockableContainer/Main Canvas/TabsContainer/Tabs" method="_on_Tabs_reposition_active_tab_request"]
+[connection signal="tab_changed" from="DockableContainer/Main Canvas/TabsContainer/Tabs" to="DockableContainer/Main Canvas/TabsContainer/Tabs" method="_on_Tabs_tab_changed"]
+[connection signal="tab_close" from="DockableContainer/Main Canvas/TabsContainer/Tabs" to="DockableContainer/Main Canvas/TabsContainer/Tabs" method="_on_Tabs_tab_close"]
+[connection signal="mouse_entered" from="DockableContainer/Main Canvas/HorizontalRuler" to="DockableContainer/Main Canvas/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
+[connection signal="pressed" from="DockableContainer/Main Canvas/HorizontalRuler" to="DockableContainer/Main Canvas/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
+[connection signal="pressed" from="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" to="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]
+[connection signal="mouse_entered" from="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" method="_on_ViewportContainer_mouse_exited"]
+[connection signal="mouse_entered" from="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2" to="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2" method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2" to="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2" method="_on_ViewportContainer_mouse_exited"]

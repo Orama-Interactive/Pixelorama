@@ -110,7 +110,7 @@ onready var canvas: Canvas = control.find_node("Canvas")
 onready var tabs: Tabs = control.find_node("Tabs")
 onready var main_viewport: ViewportContainer = control.find_node("ViewportContainer")
 onready var second_viewport: ViewportContainer = control.find_node("ViewportContainer2")
-onready var canvas_preview_container: Container = control.find_node("CanvasPreviewContainer")
+onready var canvas_preview_container: Container = control.find_node("Canvas Preview")
 onready var small_preview_viewport: ViewportContainer = canvas_preview_container.find_node(
 	"PreviewViewportContainer"
 )
@@ -124,12 +124,12 @@ onready var transparent_checker: ColorRect = control.find_node("TransparentCheck
 onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider")
 
 onready var tool_panel: Panel = control.find_node("Tools")
-onready var color_pickers: Container = control.find_node("ColorPickers")
+onready var color_pickers: Container = control.find_node("Color Pickers")
 onready var left_tool_options_scroll: ScrollContainer = control.find_node("Left tool options")
 onready var right_tool_options_scroll: ScrollContainer = control.find_node("Right tool options")
 onready var brushes_popup: Popup = control.find_node("BrushesPopup")
 onready var patterns_popup: Popup = control.find_node("PatternsPopup")
-onready var palette_panel: PalettePanel = control.find_node("PalettePanel")
+onready var palette_panel: PalettePanel = control.find_node("Palette Panel")
 
 onready var top_menu_container: Panel = control.find_node("TopMenuContainer")
 onready var rotation_level_button: Button = control.find_node("RotationLevel")
@@ -139,7 +139,7 @@ onready var zoom_level_spinbox: SpinBox = control.find_node("ZoomSpinbox")
 onready var cursor_position_label: Label = control.find_node("CursorPosition")
 onready var current_frame_mark_label: Label = control.find_node("CurrentFrameMark")
 
-onready var animation_timeline: Panel = control.find_node("AnimationTimeline")
+onready var animation_timeline: Panel = control.find_node("Animation Timeline")
 onready var animation_timer: Timer = animation_timeline.find_node("AnimationTimer")
 onready var frame_ids: HBoxContainer = animation_timeline.find_node("FrameIDs")
 onready var play_forward: BaseButton = animation_timeline.find_node("PlayForward")
