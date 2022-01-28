@@ -38,7 +38,6 @@ func transparency(value: float) -> void:
 		get_parent().transparent_bg = false
 		get_tree().get_root().set_transparent_background(false)
 	else:
-		OS.window_per_pixel_transparency_enabled = true
 		get_parent().transparent_bg = true
 		get_tree().get_root().set_transparent_background(true)
 

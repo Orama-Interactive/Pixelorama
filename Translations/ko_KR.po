@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-01-05 03:20\n"
+"PO-Revision-Date: 2022-01-07 14:06\n"
 
 msgid "OK"
 msgstr "예"
@@ -187,10 +187,10 @@ msgid "Auto"
 msgstr "자동"
 
 msgid "Widescreen"
-msgstr "와이드스크린"
+msgstr "와이드 스크린"
 
 msgid "Tallscreen"
-msgstr "톨스크린"
+msgstr "톨 스크린"
 
 msgid "Mirror View"
 msgstr "미러뷰"
