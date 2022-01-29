@@ -87,7 +87,6 @@ var draw_grid := false
 var draw_pixel_grid := false
 var show_rulers := true
 var show_guides := true
-var show_animation_timeline := true
 
 # Onion skinning options
 var onion_skinning := false
