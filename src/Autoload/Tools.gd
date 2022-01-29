@@ -153,7 +153,6 @@ func set_button_size(button_size: int) -> void:
 	if button_size == Global.ButtonSize.SMALL:
 		for t in _tool_buttons.get_children():
 			t.rect_min_size = Vector2(24, 24)
-			t.get_node("ToolIcon").rect_position = Vector2.ONE
 			t.get_node("BackgroundLeft").rect_size.x = 12
 			t.get_node("BackgroundRight").rect_size.x = 12
 			t.get_node("BackgroundRight").rect_position = Vector2(24, 24)
@@ -161,7 +160,6 @@ func set_button_size(button_size: int) -> void:
 	else:
 		for t in _tool_buttons.get_children():
 			t.rect_min_size = Vector2(32, 32)
-			t.get_node("ToolIcon").rect_position = Vector2.ONE * 5
 			t.get_node("BackgroundLeft").rect_size.x = 16
 			t.get_node("BackgroundRight").rect_size.x = 16
 			t.get_node("BackgroundRight").rect_position = Vector2(32, 32)

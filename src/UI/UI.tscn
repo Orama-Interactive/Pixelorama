@@ -267,10 +267,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/RectSelect"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 29 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -323,10 +327,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/EllipseSelect"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -380,10 +388,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/PolygonSelect"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 30 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -436,10 +448,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/ColorSelect"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -492,10 +508,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/MagicWand"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 33 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -548,10 +568,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/Lasso"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -604,10 +628,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/Move"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 28 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -660,10 +688,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/Zoom"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 31 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -716,10 +748,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/Pan"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 22 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -773,10 +809,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/ColorPicker"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -830,10 +870,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/Pencil"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 24 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -887,10 +931,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/Eraser"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 32 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -943,10 +991,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/Bucket"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 25 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -999,10 +1051,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/Shading"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1059,10 +1115,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/LineTool"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1119,10 +1179,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/RectangleTool"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1179,10 +1243,14 @@ __meta__ = {
 }
 
 [node name="ToolIcon" type="TextureRect" parent="DockableContainer/Tools/PanelContainer/ToolButtons/EllipseTool"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
 texture = ExtResource( 26 )
 __meta__ = {
 "_edit_use_anchors_": false
