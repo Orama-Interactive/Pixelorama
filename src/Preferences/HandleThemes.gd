@@ -27,12 +27,15 @@ func _ready() -> void:
 		buttons_container.add_child(button)
 		button.connect("pressed", self, "_on_Theme_pressed", [button.get_index()])
 
-		var theme_color_preview: ColorRect = theme_color_preview_scene.instance()
-		var color1 = theme[0].get_stylebox("panel", "Panel").bg_color
-		var color2 = theme[0].get_stylebox("panel", "PanelContainer").bg_color
-		theme_color_preview.get_child(0).color = color1
-		theme_color_preview.get_child(1).color = color2
-		colors_container.add_child(theme_color_preview)
+		var panel_stylebox: StyleBox = theme[0].get_stylebox("panel", "Panel")
+		var panel_container_stylebox: StyleBox = theme[0].get_stylebox("panel", "PanelContainer")
+		if panel_stylebox is StyleBoxFlat and panel_container_stylebox is StyleBoxFlat:
+			var theme_color_preview: ColorRect = theme_color_preview_scene.instance()
+			var color1 = panel_stylebox.bg_color
+			var color2 = panel_container_stylebox.bg_color
+			theme_color_preview.get_child(0).color = color1
+			theme_color_preview.get_child(1).color = color2
+			colors_container.add_child(theme_color_preview)
 
 	if Global.config_cache.has_section_key("preferences", "theme"):
 		var theme_id = Global.config_cache.get_value("preferences", "theme")
@@ -57,7 +60,6 @@ func _on_Theme_pressed(index: int) -> void:
 
 
 func change_theme(id: int) -> void:
-	var font = Global.control.theme.default_font
 	theme_index = id
 	var main_theme: Theme = themes[id][0]
 
@@ -74,35 +76,13 @@ func change_theme(id: int) -> void:
 		Global.modulate_icon_color = themes[id][2]
 
 	Global.control.theme = main_theme
-	Global.control.theme.default_font = font
-	Global.default_clear_color = main_theme.get_stylebox("panel", "PanelContainer").bg_color
+
+	var panel_stylebox: StyleBox = main_theme.get_stylebox("panel", "PanelContainer")
+	if panel_stylebox is StyleBoxFlat:
+		Global.default_clear_color = panel_stylebox.bg_color
+	else:
+		Global.default_clear_color = themes[id][2]
 	VisualServer.set_default_clear_color(Color(Global.default_clear_color))
-	if Global.control.alternate_transparent_background:
-		# Also change color of alternate_transparent_background
-		var new_color = Global.default_clear_color
-		new_color.a = Global.control.alternate_transparent_background.color.a
-		Global.control.alternate_transparent_background.color = new_color
-
-	Global.animation_timeline.get_stylebox("panel", "Panel").bg_color = main_theme.get_stylebox(
-		"panel", "Panel"
-	).bg_color
-	var fake_vsplit_grabber: TextureRect = Global.animation_timeline.find_node(
-		"FakeVSplitContainerGrabber"
-	)
-	fake_vsplit_grabber.texture = main_theme.get_icon("grabber", "VSplitContainer")
-
-	# Theming for left tools panel
-	var fake_hsplit_grabber: TextureRect = Global.tool_panel.get_node("FakeHSplitGrabber")
-	fake_hsplit_grabber.texture = main_theme.get_icon("grabber", "HSplitContainer")
-	Global.tool_panel.get_stylebox("panel", "Panel").bg_color = main_theme.get_stylebox(
-		"panel", "Panel"
-	).bg_color
-
-	var layer_button_pcont: PanelContainer = Global.animation_timeline.find_node(
-		"LayerButtonPanelContainer"
-	)
-	var lbpc_stylebox: StyleBoxFlat = layer_button_pcont.get_stylebox("panel", "PanelContainer")
-	lbpc_stylebox.bg_color = Global.default_clear_color
 
 	var top_menu_style = main_theme.get_stylebox("TopMenu", "Panel")
 	var ruler_style = main_theme.get_stylebox("Ruler", "Button")

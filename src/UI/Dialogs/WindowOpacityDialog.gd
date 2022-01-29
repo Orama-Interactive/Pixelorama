@@ -20,10 +20,9 @@ func set_window_opacity(value: float) -> void:
 	spinbox.value = value
 
 	value = value / 100.0
-	Global.control.alternate_transparent_background.visible = value < 1.0
-
-	Global.default_clear_color.a = value
-	Global.control.alternate_transparent_background.color = Global.default_clear_color
+	Global.control.ui.get_parent().self_modulate.a = value
+	for container in Global.control.ui._panel_container.get_children():
+		container.self_modulate.a = value
 	Global.transparent_checker.transparency(value)
 
 
