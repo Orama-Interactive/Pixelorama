@@ -124,8 +124,8 @@ onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider"
 
 onready var tool_panel: Panel = control.find_node("Tools")
 onready var color_pickers: Container = control.find_node("Color Pickers")
-onready var left_tool_options_scroll: ScrollContainer = control.find_node("Left tool options")
-onready var right_tool_options_scroll: ScrollContainer = control.find_node("Right tool options")
+onready var left_tool_options_scroll: ScrollContainer = control.find_node("Left Tool Options")
+onready var right_tool_options_scroll: ScrollContainer = control.find_node("Right Tool Options")
 onready var brushes_popup: Popup = control.find_node("BrushesPopup")
 onready var patterns_popup: Popup = control.find_node("PatternsPopup")
 onready var palette_panel: PalettePanel = control.find_node("Palette Panel")
