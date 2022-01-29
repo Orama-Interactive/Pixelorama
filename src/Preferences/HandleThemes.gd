@@ -27,12 +27,15 @@ func _ready() -> void:
 		buttons_container.add_child(button)
 		button.connect("pressed", self, "_on_Theme_pressed", [button.get_index()])
 
-		var theme_color_preview: ColorRect = theme_color_preview_scene.instance()
-		var color1 = theme[0].get_stylebox("panel", "Panel").bg_color
-		var color2 = theme[0].get_stylebox("panel", "PanelContainer").bg_color
-		theme_color_preview.get_child(0).color = color1
-		theme_color_preview.get_child(1).color = color2
-		colors_container.add_child(theme_color_preview)
+		var panel_stylebox: StyleBox = theme[0].get_stylebox("panel", "Panel")
+		var panel_container_stylebox: StyleBox = theme[0].get_stylebox("panel", "PanelContainer")
+		if panel_stylebox is StyleBoxFlat and panel_container_stylebox is StyleBoxFlat:
+			var theme_color_preview: ColorRect = theme_color_preview_scene.instance()
+			var color1 = panel_stylebox.bg_color
+			var color2 = panel_container_stylebox.bg_color
+			theme_color_preview.get_child(0).color = color1
+			theme_color_preview.get_child(1).color = color2
+			colors_container.add_child(theme_color_preview)
 
 	if Global.config_cache.has_section_key("preferences", "theme"):
 		var theme_id = Global.config_cache.get_value("preferences", "theme")
@@ -57,7 +60,6 @@ func _on_Theme_pressed(index: int) -> void:
 
 
 func change_theme(id: int) -> void:
-	var font = Global.control.theme.default_font
 	theme_index = id
 	var main_theme: Theme = themes[id][0]
 
@@ -74,8 +76,12 @@ func change_theme(id: int) -> void:
 		Global.modulate_icon_color = themes[id][2]
 
 	Global.control.theme = main_theme
-	Global.control.theme.default_font = font
-	Global.default_clear_color = main_theme.get_stylebox("panel", "PanelContainer").bg_color
+
+	var panel_stylebox: StyleBox = main_theme.get_stylebox("panel", "PanelContainer")
+	if panel_stylebox is StyleBoxFlat:
+		Global.default_clear_color = panel_stylebox.bg_color
+	else:
+		Global.default_clear_color = themes[id][2]
 	VisualServer.set_default_clear_color(Color(Global.default_clear_color))
 
 	var layer_button_pcont: PanelContainer = Global.animation_timeline.find_node(
