@@ -35,11 +35,11 @@ func _ready() -> void:
 
 	# Visualize how deep into the hierarchy the layer is
 	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
-	hierarchy_spacer.rect_min_size.x = hierarchy_depth * 10
+	hierarchy_spacer.rect_min_size.x = hierarchy_depth * 8
 	if Global.control.theme.get_color("font_color", "Button").v > 0.5: # Light text should be dark theme
 		self_modulate.v += hierarchy_depth * 0.2
 	else: # Dark text should be light theme
-		self_modulate.v -= hierarchy_depth * 0.1
+		self_modulate.v -= hierarchy_depth * 0.075
 
 	if is_instance_valid(Global.current_project.layers[layer].parent):
 		if not Global.current_project.layers[layer].parent.is_expanded_in_hierarchy():
