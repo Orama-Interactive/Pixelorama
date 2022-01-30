@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/layers/new.png" type="Texture" id=2]
@@ -25,10 +25,6 @@
 [ext_resource path="res://assets/graphics/timeline/expandable.png" type="Texture" id=30]
 [ext_resource path="res://assets/graphics/timeline/loop.png" type="Texture" id=31]
 [ext_resource path="res://src/UI/Timeline/FrameTagDialog.tscn" type="PackedScene" id=42]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
-expand_margin_top = 6.0
 
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 4.5
@@ -108,50 +104,40 @@ HScrollBar/styles/scroll = SubResource( 18 )
 HScrollBar/styles/scroll_focus = SubResource( 19 )
 
 [node name="AnimationTimeline" type="Panel"]
-margin_top = 438.0
 margin_right = 902.0
-margin_bottom = 638.0
+margin_bottom = 160.0
 rect_min_size = Vector2( 0, 160 )
-size_flags_horizontal = 3
-custom_styles/panel = SubResource( 1 )
+rect_clip_content = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="AnimationContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_top = 2
-custom_constants/margin_bottom = 8
+margin_right = -10.0
+margin_bottom = -8.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationContainer" type="HBoxContainer" parent="MarginContainer"]
-margin_top = 2.0
-margin_right = 902.0
-margin_bottom = 192.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TimelineContainer" type="VBoxContainer" parent="MarginContainer/AnimationContainer"]
-margin_right = 902.0
-margin_bottom = 190.0
+[node name="TimelineContainer" type="VBoxContainer" parent="AnimationContainer"]
+margin_right = 892.0
+margin_bottom = 152.0
 size_flags_horizontal = 3
 
-[node name="TimelineButtons" type="HBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer"]
-margin_right = 902.0
+[node name="TimelineButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer"]
+margin_right = 892.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 
-[node name="LayerButtonPanelContainer" type="PanelContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons"]
+[node name="LayerButtonPanelContainer" type="PanelContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons"]
 margin_right = 217.0
 margin_bottom = 38.0
 custom_styles/panel = SubResource( 2 )
 
-[node name="LayerButtons" type="HBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer"]
+[node name="LayerButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer"]
 margin_left = 4.5
 margin_top = 3.0
 margin_right = 212.5
@@ -159,7 +145,7 @@ margin_bottom = 25.0
 size_flags_vertical = 0
 custom_constants/separation = 9
 
-[node name="AddLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
+[node name="AddLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_right = 22.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
@@ -167,7 +153,7 @@ hint_tooltip = "Create a new layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddLayer"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddLayer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -183,7 +169,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AddGroup" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
+[node name="AddGroupLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 31.0
 margin_right = 53.0
 margin_bottom = 22.0
@@ -191,7 +177,7 @@ rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Create a new group layer"
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroup"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroupLayer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -207,17 +193,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RemoveLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
+[node name="RemoveLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 62.0
 margin_right = 84.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
-hint_tooltip = "Remove current layer"
-focus_mode = 0
-mouse_default_cursor_shape = 8
-disabled = true
+hint_tooltip = "Create a new group layer"
+mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/RemoveLayer"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/RemoveLayer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -233,7 +217,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveUpLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
+[node name="MoveUpLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 93.0
 margin_right = 115.0
 margin_bottom = 22.0
@@ -243,7 +227,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveUpLayer"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveUpLayer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -259,7 +243,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveDownLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
+[node name="MoveDownLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 124.0
 margin_right = 146.0
 margin_bottom = 22.0
@@ -269,7 +253,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveDownLayer"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveDownLayer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -285,7 +269,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CloneLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
+[node name="CloneLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 155.0
 margin_right = 177.0
 margin_bottom = 22.0
@@ -294,7 +278,7 @@ hint_tooltip = "Clone current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/CloneLayer"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/CloneLayer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -310,7 +294,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MergeDownLayer" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
+[node name="MergeDownLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 186.0
 margin_right = 208.0
 margin_bottom = 22.0
@@ -320,7 +304,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MergeDownLayer"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MergeDownLayer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -336,18 +320,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="Control" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons"]
+[node name="Control" type="Control" parent="AnimationContainer/TimelineContainer/TimelineButtons"]
 margin_left = 221.0
-margin_right = 386.0
+margin_right = 376.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons"]
-margin_left = 390.0
-margin_right = 902.0
+[node name="PanelContainer" type="PanelContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons"]
+margin_left = 380.0
+margin_right = 892.0
 margin_bottom = 38.0
 
-[node name="AnimationButtons" type="HBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer"]
+[node name="AnimationButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 505.0
@@ -357,11 +341,11 @@ size_flags_horizontal = 3
 custom_constants/separation = 40
 alignment = 2
 
-[node name="FrameButtons" type="HBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons"]
+[node name="FrameButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons"]
 margin_right = 140.0
 margin_bottom = 24.0
 
-[node name="AddFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
+[node name="AddFrame" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_top = 2.0
 margin_right = 20.0
 margin_bottom = 22.0
@@ -372,7 +356,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/AddFrame"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/AddFrame"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -386,7 +370,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DeleteFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
+[node name="DeleteFrame" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 24.0
 margin_top = 2.0
 margin_right = 44.0
@@ -398,7 +382,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/DeleteFrame"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/DeleteFrame"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -414,7 +398,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CopyFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
+[node name="CopyFrame" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 48.0
 margin_top = 2.0
 margin_right = 68.0
@@ -426,7 +410,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/CopyFrame"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/CopyFrame"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -440,7 +424,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FrameTagButton" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
+[node name="FrameTagButton" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 72.0
 margin_top = 2.0
 margin_right = 92.0
@@ -452,7 +436,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/FrameTagButton"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/FrameTagButton"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -466,7 +450,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveLeft" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
+[node name="MoveLeft" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 96.0
 margin_top = 2.0
 margin_right = 116.0
@@ -478,7 +462,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/MoveLeft"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/MoveLeft"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -493,7 +477,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveRight" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
+[node name="MoveRight" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 120.0
 margin_top = 2.0
 margin_right = 140.0
@@ -505,7 +489,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/MoveRight"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/MoveRight"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -519,12 +503,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlaybackButtons" type="HBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons"]
+[node name="PlaybackButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons"]
 margin_left = 180.0
 margin_right = 320.0
 margin_bottom = 24.0
 
-[node name="FirstFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
+[node name="FirstFrame" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_top = 2.0
 margin_right = 20.0
 margin_bottom = 22.0
@@ -537,7 +521,7 @@ size_flags_vertical = 4
 shortcut_in_tooltip = false
 shortcut = SubResource( 4 )
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/FirstFrame"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/FirstFrame"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -551,7 +535,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PreviousFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
+[node name="PreviousFrame" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 24.0
 margin_top = 2.0
 margin_right = 44.0
@@ -565,7 +549,7 @@ size_flags_vertical = 4
 shortcut_in_tooltip = false
 shortcut = SubResource( 6 )
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PreviousFrame"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PreviousFrame"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -579,7 +563,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayBackwards" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
+[node name="PlayBackwards" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 48.0
 margin_top = 2.0
 margin_right = 68.0
@@ -594,7 +578,7 @@ toggle_mode = true
 shortcut_in_tooltip = false
 shortcut = SubResource( 8 )
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PlayBackwards"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PlayBackwards"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -608,7 +592,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayForward" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
+[node name="PlayForward" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 72.0
 margin_top = 2.0
 margin_right = 92.0
@@ -624,7 +608,7 @@ toggle_mode = true
 shortcut_in_tooltip = false
 shortcut = SubResource( 10 )
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PlayForward"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PlayForward"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -638,7 +622,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NextFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
+[node name="NextFrame" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 96.0
 margin_top = 2.0
 margin_right = 116.0
@@ -652,7 +636,7 @@ size_flags_vertical = 4
 shortcut_in_tooltip = false
 shortcut = SubResource( 12 )
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/NextFrame"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/NextFrame"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -666,7 +650,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LastFrame" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
+[node name="LastFrame" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 margin_left = 120.0
 margin_top = 2.0
 margin_right = 140.0
@@ -680,7 +664,7 @@ size_flags_vertical = 4
 shortcut_in_tooltip = false
 shortcut = SubResource( 14 )
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/LastFrame"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/LastFrame"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -694,12 +678,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LoopButtons" type="HBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons"]
+[node name="LoopButtons" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons"]
 margin_left = 360.0
 margin_right = 498.0
 margin_bottom = 24.0
 
-[node name="OnionSkinningSettings" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
+[node name="OnionSkinningSettings" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
 margin_top = 2.0
 margin_right = 12.0
 margin_bottom = 22.0
@@ -709,7 +693,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/OnionSkinningSettings"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/OnionSkinningSettings"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -725,7 +709,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OnionSkinning" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
+[node name="OnionSkinning" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
 margin_left = 16.0
 margin_top = 2.0
 margin_right = 36.0
@@ -736,7 +720,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/OnionSkinning"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/OnionSkinning"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -752,7 +736,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LoopAnim" type="Button" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
+[node name="LoopAnim" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
 margin_left = 40.0
 margin_top = 2.0
 margin_right = 60.0
@@ -763,7 +747,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/LoopAnim"]
+[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/LoopAnim"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -777,7 +761,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FPSValue" type="SpinBox" parent="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons"]
+[node name="FPSValue" type="SpinBox" parent="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons"]
 margin_left = 64.0
 margin_right = 138.0
 margin_bottom = 24.0
@@ -791,24 +775,24 @@ value = 6.0
 align = 1
 suffix = "FPS"
 
-[node name="OpacityAndTagContainer" type="HBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer"]
+[node name="OpacityAndTagContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer"]
 margin_top = 42.0
-margin_right = 902.0
+margin_right = 892.0
 margin_bottom = 74.0
 custom_constants/separation = 2
 
-[node name="SpacerControl" type="Control" parent="MarginContainer/AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+[node name="SpacerControl" type="Control" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
 margin_right = 4.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 4, 0 )
 
-[node name="OpacityContainer" type="HBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+[node name="OpacityContainer" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
 margin_left = 6.0
 margin_right = 186.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 180, 0 )
 
-[node name="OpacityLabel" type="Label" parent="MarginContainer/AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+[node name="OpacityLabel" type="Label" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
 margin_right = 53.0
 margin_bottom = 14.0
 size_flags_horizontal = 0
@@ -816,7 +800,7 @@ size_flags_vertical = 0
 text = "Opacity:"
 valign = 1
 
-[node name="OpacitySlider" type="HSlider" parent="MarginContainer/AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+[node name="OpacitySlider" type="HSlider" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
 margin_left = 57.0
 margin_right = 102.0
 margin_bottom = 32.0
@@ -827,7 +811,7 @@ size_flags_vertical = 1
 value = 100.0
 ticks_on_borders = true
 
-[node name="OpacitySpinBox" type="SpinBox" parent="MarginContainer/AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+[node name="OpacitySpinBox" type="SpinBox" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
 margin_left = 106.0
 margin_top = 4.0
 margin_right = 180.0
@@ -837,15 +821,15 @@ size_flags_vertical = 4
 value = 100.0
 align = 1
 
-[node name="SpacerControl2" type="Control" parent="MarginContainer/AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+[node name="SpacerControl2" type="Control" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
 margin_left = 188.0
 margin_right = 217.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 29, 0 )
 
-[node name="TagScroll" type="ScrollContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
+[node name="TagScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer"]
 margin_left = 219.0
-margin_right = 902.0
+margin_right = 892.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 mouse_filter = 2
@@ -853,31 +837,30 @@ size_flags_horizontal = 3
 theme = SubResource( 20 )
 scroll_vertical_enabled = false
 
-[node name="TagContainer" type="Control" parent="MarginContainer/AnimationContainer/TimelineContainer/OpacityAndTagContainer/TagScroll"]
+[node name="TagContainer" type="Control" parent="AnimationContainer/TimelineContainer/OpacityAndTagContainer/TagScroll"]
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/AnimationContainer/TimelineContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="AnimationContainer/TimelineContainer"]
 margin_top = 78.0
-margin_right = 902.0
-margin_bottom = 190.0
+margin_right = 892.0
+margin_bottom = 152.0
 size_flags_vertical = 3
 
-[node name="TimelineScroll" type="ScrollContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/PanelContainer"]
+[node name="TimelineScroll" type="ScrollContainer" parent="AnimationContainer/TimelineContainer/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 895.0
-margin_bottom = 105.0
-size_flags_vertical = 3
+margin_right = 885.0
+margin_bottom = 67.0
 
-[node name="LayersAndFrames" type="HBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll"]
+[node name="LayersAndFrames" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll"]
 margin_right = 276.0
-margin_bottom = 98.0
+margin_bottom = 60.0
 size_flags_vertical = 3
 
-[node name="LayerVBoxCont" type="VBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames"]
+[node name="LayerVBoxCont" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames"]
 margin_right = 236.0
-margin_bottom = 98.0
+margin_bottom = 60.0
 
-[node name="LayerLabel" type="Label" parent="MarginContainer/AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
+[node name="LayerLabel" type="Label" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
 margin_right = 236.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
@@ -885,28 +868,28 @@ text = "Layers"
 align = 1
 valign = 1
 
-[node name="LayersContainer" type="VBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
+[node name="LayersContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
 margin_top = 20.0
 margin_right = 236.0
 margin_bottom = 56.0
 
-[node name="LayerContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont/LayersContainer" instance=ExtResource( 18 )]
+[node name="LayerContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont/LayersContainer" instance=ExtResource( 18 )]
 
-[node name="FrameButtonsAndIds" type="VBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames"]
+[node name="FrameButtonsAndIds" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames"]
 margin_left = 240.0
 margin_right = 276.0
-margin_bottom = 98.0
+margin_bottom = 60.0
 
-[node name="FrameIDs" type="HBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
+[node name="FrameIDs" type="HBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
 margin_right = 36.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 16 )
 
-[node name="FrameButton" parent="MarginContainer/AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds/FrameIDs" instance=ExtResource( 9 )]
+[node name="FrameButton" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds/FrameIDs" instance=ExtResource( 9 )]
 margin_right = 36.0
 rect_min_size = Vector2( 36, 0 )
 
-[node name="FramesContainer" type="VBoxContainer" parent="MarginContainer/AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
+[node name="FramesContainer" type="VBoxContainer" parent="AnimationContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
 margin_top = 24.0
 margin_right = 36.0
 margin_bottom = 24.0
@@ -1025,43 +1008,31 @@ autowrap = true
 
 [node name="FrameTagDialog" parent="." instance=ExtResource( 42 )]
 
-[node name="FakeVSplitContainerGrabber" type="TextureRect" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -24.0
-margin_top = -6.0
-margin_right = 24.0
-margin_bottom = -4.76837e-07
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroup" to="." method="add_group_layer"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/AddFrame" to="." method="add_frame"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/CopyFrame" to="." method="_on_CopyFrame_pressed"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/FrameTagButton" to="." method="_on_FrameTagButton_pressed"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/MoveLeft" to="." method="_on_MoveLeft_pressed"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/MoveRight" to="." method="_on_MoveRight_pressed"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PreviousFrame" to="." method="_on_PreviousFrame_pressed"]
-[connection signal="toggled" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
-[connection signal="toggled" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PlayForward" to="." method="_on_PlayForward_toggled"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/NextFrame" to="." method="_on_NextFrame_pressed"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/LastFrame" to="." method="_on_LastFrame_pressed"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/OnionSkinningSettings" to="." method="_on_OnionSkinningSettings_pressed"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/OnionSkinning" to="." method="_on_OnionSkinning_pressed"]
-[connection signal="pressed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
-[connection signal="value_changed" from="MarginContainer/AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
-[connection signal="value_changed" from="MarginContainer/AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroupLayer" to="." method="add_group_layer" binds= [ true ]]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/AddFrame" to="." method="add_frame"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/CopyFrame" to="." method="_on_CopyFrame_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/FrameTagButton" to="." method="_on_FrameTagButton_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/MoveLeft" to="." method="_on_MoveLeft_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/MoveRight" to="." method="_on_MoveRight_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/FirstFrame" to="." method="_on_FirstFrame_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PreviousFrame" to="." method="_on_PreviousFrame_pressed"]
+[connection signal="toggled" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PlayBackwards" to="." method="_on_PlayBackwards_toggled"]
+[connection signal="toggled" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/PlayForward" to="." method="_on_PlayForward_toggled"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/NextFrame" to="." method="_on_NextFrame_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/PlaybackButtons/LastFrame" to="." method="_on_LastFrame_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/OnionSkinningSettings" to="." method="_on_OnionSkinningSettings_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/OnionSkinning" to="." method="_on_OnionSkinning_pressed"]
+[connection signal="pressed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
+[connection signal="value_changed" from="AnimationContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
+[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="value_changed" from="AnimationContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
 [connection signal="popup_hide" from="OnionSkinningSettings" to="." method="_on_OnionSkinningSettings_popup_hide"]
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]

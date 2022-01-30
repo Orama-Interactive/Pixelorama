@@ -40,6 +40,11 @@ __meta__ = {
 [node name="TopMenuContainer" parent="MenuAndUI" instance=ExtResource( 3 )]
 
 [node name="UI" parent="MenuAndUI" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 28.0
+margin_right = 1280.0
+margin_bottom = 720.0
 
 [node name="Dialogs" type="Control" parent="."]
 mouse_filter = 2

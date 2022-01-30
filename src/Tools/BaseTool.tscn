@@ -50,9 +50,7 @@ margin_bottom = 79.0
 custom_constants/separation = 44
 alignment = 1
 
-[node name="Horizontal" type="TextureButton" parent="Mirror" groups=[
-"UIButtons",
-]]
+[node name="Horizontal" type="TextureButton" parent="Mirror" groups=["UIButtons"]]
 margin_left = 20.0
 margin_right = 35.0
 margin_bottom = 17.0
@@ -62,9 +60,7 @@ toggle_mode = true
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 2 )
 
-[node name="Vertical" type="TextureButton" parent="Mirror" groups=[
-"UIButtons",
-]]
+[node name="Vertical" type="TextureButton" parent="Mirror" groups=["UIButtons"]]
 margin_left = 79.0
 margin_right = 96.0
 margin_bottom = 17.0
