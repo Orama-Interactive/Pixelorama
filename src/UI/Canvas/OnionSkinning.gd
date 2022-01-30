@@ -27,7 +27,7 @@ func _draw() -> void:
 			if change == clamp(change, 0, Global.current_project.frames.size() - 1):
 				var layer_i := 0
 				for cel in Global.current_project.frames[change].cels:
-					var layer: Layer = Global.current_project.layers[layer_i]
+					var layer: PixelLayer = Global.current_project.layers[layer_i]
 					if layer.visible:
 						# Ignore layer if it has the "_io" suffix in its name (case in-sensitive)
 						if not (layer.name.to_lower().ends_with("_io")):

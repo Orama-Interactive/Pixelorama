@@ -503,7 +503,7 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 func add_layer(is_new := true) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var new_layers: Array = Global.current_project.layers.duplicate()
-	var l := Layer.new()
+	var l := PixelLayer.new()
 	if !is_new:  # Clone layer
 		l.name = (
 			Global.current_project.layers[Global.current_project.current_layer].name

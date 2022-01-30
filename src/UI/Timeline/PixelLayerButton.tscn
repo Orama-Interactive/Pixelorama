@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/UI/Timeline/LayerButton.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Timeline/PixelLayerButton.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/layers/layer_visible.png" type="Texture" id=2]
 [ext_resource path="res://assets/graphics/layers/unlock.png" type="Texture" id=3]
 [ext_resource path="res://assets/graphics/layers/unlinked_layer.png" type="Texture" id=4]
 
-[node name="LayerContainer" type="Button"]
+[node name="PixelLayerContainer" type="Button"]
 margin_right = 236.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 236, 36 )

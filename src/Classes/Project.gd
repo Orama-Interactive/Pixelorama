@@ -45,7 +45,7 @@ var file_format: int = Export.FileFormat.PNG
 var was_exported := false
 
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
-var layer_button_node = preload("res://src/UI/Timeline/LayerButton.tscn")
+var layer_button_node = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
 var group_layer_button_node = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
 var cel_button_node = preload("res://src/UI/Timeline/CelButton.tscn")
 var animation_tag_node = preload("res://src/UI/Timeline/AnimationTagUI.tscn")
@@ -151,7 +151,7 @@ func change_project() -> void:
 	for i in range(layers.size() - 1, -1, -1):
 		# Create layer buttons
 		var layer_container: BaseLayerButton
-		if layers[i] is Layer:
+		if layers[i] is PixelLayer:
 			layer_container = layer_button_node.instance()
 		elif layers[i] is GroupLayer:
 			layer_container = group_layer_button_node.instance()
@@ -401,7 +401,7 @@ func deserialize(dict: Dictionary) -> void:
 					var linked_cel: Cel = frames[linked_cel_number].cels[layer_i]
 					linked_cel.image = linked_cels[0].cels[layer_i].image
 					linked_cel.image_texture = linked_cels[0].cels[layer_i].image_texture
-				var layer := Layer.new(
+				var layer := PixelLayer.new(
 					saved_layer.name,
 					saved_layer.visible,
 					saved_layer.locked,
@@ -500,7 +500,7 @@ func _layers_changed(value: Array) -> void:
 
 	for i in range(layers.size() - 1, -1, -1):
 		var layer_button: BaseLayerButton
-		if layers[i] is Layer:
+		if layers[i] is PixelLayer:
 			layer_button = layer_button_node.instance()
 		elif layers[i] is GroupLayer:
 			layer_button = group_layer_button_node.instance()
@@ -721,7 +721,7 @@ func duplicate_layers() -> Array:
 	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
 	for i in new_layers.size():
 		var new_linked_cels = new_layers[i].linked_cels.duplicate()
-		new_layers[i] = Layer.new(
+		new_layers[i] = PixelLayer.new(
 			new_layers[i].name,
 			new_layers[i].visible,
 			new_layers[i].locked,

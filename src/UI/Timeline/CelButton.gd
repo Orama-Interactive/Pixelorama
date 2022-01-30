@@ -160,7 +160,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 func _delete_cel_content() -> void:
 	if image.is_invisible():
 		return
-	var curr_layer: Layer = Global.current_project.layers[layer]
+	var curr_layer: PixelLayer = Global.current_project.layers[layer]
 	if !curr_layer.can_layer_get_drawn():
 		return
 	var project = Global.current_project

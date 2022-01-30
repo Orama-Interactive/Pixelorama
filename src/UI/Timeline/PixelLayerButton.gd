@@ -1,4 +1,4 @@
-class_name LayerButton
+class_name PixelLayerButton
 extends BaseLayerButton
 
 onready var linked_button: BaseButton = find_node("LinkButton")
@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _on_LinkButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
-	var layer_class: Layer = Global.current_project.layers[layer]
+	var layer_class: PixelLayer = Global.current_project.layers[layer]
 	layer_class.new_cels_linked = !layer_class.new_cels_linked
 	if layer_class.new_cels_linked && !layer_class.linked_cels:
 		# If button is pressed and there are no linked cels in the layer

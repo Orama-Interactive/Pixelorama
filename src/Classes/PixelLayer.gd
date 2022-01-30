@@ -1,6 +1,6 @@
-class_name Layer
+class_name PixelLayer
 extends BaseLayer
-# A class for standard layer properties.
+# A class for standard pixel layer properties.
 
 var new_cels_linked := false
 var linked_cels := []  # Array of Frames
