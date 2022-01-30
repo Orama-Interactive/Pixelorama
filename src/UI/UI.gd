@@ -1,6 +1,5 @@
 extends Panel
 
-
 onready var main_canvas_container = Global.main_canvas_container
 
 
@@ -22,4 +21,3 @@ func update_transparent_shader():
 	material.set("shader_param/screen_resolution", get_viewport().size)
 	material.set("shader_param/position", main_canvas_container.rect_global_position)
 	material.set("shader_param/size", main_canvas_container.rect_size)
-
