@@ -549,6 +549,55 @@ func add_layer(is_new := true) -> void:
 	Global.current_project.undo_redo.commit_action()
 
 
+func add_group_layer(is_new := true) -> void:
+	Global.canvas.selection.transform_content_confirm()
+	var new_layers: Array = Global.current_project.layers.duplicate()
+	var l := GroupLayer.new()
+#	if !is_new:  # Clone layer
+#		l.name = (
+#			Global.current_project.layers[Global.current_project.current_layer].name
+#			+ " ("
+#			+ tr("copy")
+#			+ ")"
+#		)
+	new_layers.append(l)
+
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Add Layer")
+
+#	for f in Global.current_project.frames:
+#		var new_layer := Image.new()
+#		if is_new:
+#			new_layer.create(
+#				Global.current_project.size.x,
+#				Global.current_project.size.y,
+#				false,
+#				Image.FORMAT_RGBA8
+#			)
+#		else:  # Clone layer
+#			new_layer.copy_from(f.cels[Global.current_project.current_layer].image)
+#
+#		var new_cels: Array = f.cels.duplicate()
+#		new_cels.append(Cel.new(new_layer, 1))
+#		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
+#		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+
+	Global.current_project.undo_redo.add_do_property(
+		Global.current_project, "current_layer", Global.current_project.layers.size()
+	)
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.current_project, "current_layer", Global.current_project.current_layer
+	)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.current_project, "layers", Global.current_project.layers
+	)
+
+	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	Global.current_project.undo_redo.commit_action()
+
+
 func _on_RemoveLayer_pressed() -> void:
 	if Global.current_project.layers.size() == 1:
 		return

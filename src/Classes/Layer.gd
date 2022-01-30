@@ -1,10 +1,7 @@
 class_name Layer
-extends Reference
-# A class for layer properties.
+extends BaseLayer
+# A class for standard layer properties.
 
-var name := ""
-var visible := true
-var locked := false
 var new_cels_linked := false
 var linked_cels := []  # Array of Frames
 
@@ -20,4 +17,4 @@ func _init(
 
 
 func can_layer_get_drawn() -> bool:
-	return visible && !locked
+	return is_visible_in_hierarchy() && !is_locked_in_hierarchy()

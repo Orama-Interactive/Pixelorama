@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/UI/Timeline/LayerButton.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Timeline/GroupLayerButton.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/layers/layer_visible.png" type="Texture" id=2]
 [ext_resource path="res://assets/graphics/layers/unlock.png" type="Texture" id=3]
-[ext_resource path="res://assets/graphics/layers/unlinked_layer.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/layers/group_expanded.png" type="Texture" id=4]
 
-[node name="LayerContainer" type="Button"]
+[node name="GroupLayerContainer" type="Button"]
 margin_right = 236.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 236, 36 )
@@ -27,21 +27,45 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Spacer" type="Control" parent="HBoxContainer"]
-margin_right = 32.0
+[node name="EmptySpacer" type="Control" parent="HBoxContainer"]
 margin_bottom = 36.0
-rect_min_size = Vector2( 32, 0 )
-mouse_filter = 2
 
 [node name="LayerButtons" type="HBoxContainer" parent="HBoxContainer"]
-margin_left = 36.0
-margin_right = 122.0
+margin_left = 4.0
+margin_right = 90.0
 margin_bottom = 36.0
 custom_constants/separation = 10
 
-[node name="VisibilityButton" type="Button" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
+[node name="ExpandButton" type="Button" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
 margin_top = 7.0
 margin_right = 22.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 22, 22 )
+hint_tooltip = "Expand/collapse group"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/LayerButtons/ExpandButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VisibilityButton" type="Button" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
+margin_left = 32.0
+margin_top = 7.0
+margin_right = 54.0
 margin_bottom = 29.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Toggle layer's visibility"
@@ -67,9 +91,9 @@ __meta__ = {
 }
 
 [node name="LockButton" type="Button" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 32.0
+margin_left = 64.0
 margin_top = 7.0
-margin_right = 54.0
+margin_right = 86.0
 margin_bottom = 29.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Lock/unlock layer"
@@ -94,35 +118,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LinkButton" type="Button" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 64.0
-margin_top = 7.0
-margin_right = 86.0
-margin_bottom = 29.0
-rect_min_size = Vector2( 22, 22 )
-hint_tooltip = "Enable/disable cel linking
-
-Linked cels are being shared across multiple frames"
-focus_mode = 0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/LayerButtons/LinkButton"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -11.0
-margin_top = -11.0
-margin_right = 11.0
-margin_bottom = 11.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Spacer" type="Control" parent="HBoxContainer"]
+margin_left = 94.0
+margin_right = 122.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 28, 0 )
+mouse_filter = 2
 
 [node name="LayerName" type="HBoxContainer" parent="HBoxContainer"]
 margin_left = 126.0
@@ -163,7 +164,7 @@ caret_blink = true
 caret_blink_speed = 0.5
 
 [connection signal="gui_input" from="." to="." method="_on_LayerContainer_gui_input"]
+[connection signal="pressed" from="HBoxContainer/LayerButtons/ExpandButton" to="." method="_on_ExpandButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/VisibilityButton" to="." method="_on_VisibilityButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LayerButtons/LockButton" to="." method="_on_LockButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/LayerButtons/LinkButton" to="." method="_on_LinkButton_pressed"]
 [connection signal="focus_exited" from="HBoxContainer/LayerName/LineEdit" to="." method="_on_LineEdit_focus_exited"]

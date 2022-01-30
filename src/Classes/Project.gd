@@ -46,6 +46,7 @@ var was_exported := false
 
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
 var layer_button_node = preload("res://src/UI/Timeline/LayerButton.tscn")
+var group_layer_button_node = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
 var cel_button_node = preload("res://src/UI/Timeline/CelButton.tscn")
 var animation_tag_node = preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
@@ -149,7 +150,11 @@ func change_project() -> void:
 	# Create new ones
 	for i in range(layers.size() - 1, -1, -1):
 		# Create layer buttons
-		var layer_container = layer_button_node.instance()
+		var layer_container: BaseLayerButton
+		if layers[i] is Layer:
+			layer_container = layer_button_node.instance()
+		elif layers[i] is GroupLayer:
+			layer_container = group_layer_button_node.instance()
 		layer_container.layer = i
 		if layers[i].name == "":
 			layers[i].name = tr("Layer") + " %s" % i
@@ -494,7 +499,11 @@ func _layers_changed(value: Array) -> void:
 	_remove_cel_buttons()
 
 	for i in range(layers.size() - 1, -1, -1):
-		var layer_button: LayerButton = layer_button_node.instance()
+		var layer_button: BaseLayerButton
+		if layers[i] is Layer:
+			layer_button = layer_button_node.instance()
+		elif layers[i] is GroupLayer:
+			layer_button = group_layer_button_node.instance()
 		layer_button.layer = i
 		if layers[i].name == "":
 			layers[i].name = tr("Layer") + " %s" % i
@@ -506,12 +515,14 @@ func _layers_changed(value: Array) -> void:
 		var layer_cel_container := HBoxContainer.new()
 		layer_cel_container.name = "LAYERSSS " + str(i)
 		Global.frames_container.add_child(layer_cel_container)
-		for j in range(frames.size()):
-			var cel_button = cel_button_node.instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-			layer_cel_container.add_child(cel_button)
+		# TODO: FIGURE OUT FRAMES WITH GROUP LAYERS!
+		if not layers[i] is GroupLayer:
+			for j in range(frames.size()):
+				var cel_button = cel_button_node.instance()
+				cel_button.frame = j
+				cel_button.layer = i
+				cel_button.get_child(0).texture = frames[j].cels[i].image_texture
+				layer_cel_container.add_child(cel_button)
 
 	var layer_button = Global.layers_container.get_child(
 		Global.layers_container.get_child_count() - 1 - current_layer
