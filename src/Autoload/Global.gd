@@ -109,6 +109,7 @@ onready var canvas: Canvas = control.find_node("Canvas")
 onready var tabs: Tabs = control.find_node("Tabs")
 onready var main_viewport: ViewportContainer = control.find_node("ViewportContainer")
 onready var second_viewport: ViewportContainer = control.find_node("ViewportContainer2")
+onready var main_canvas_container: Container = control.find_node("Main Canvas")
 onready var canvas_preview_container: Container = control.find_node("Canvas Preview")
 onready var small_preview_viewport: ViewportContainer = canvas_preview_container.find_node(
 	"PreviewViewportContainer"
