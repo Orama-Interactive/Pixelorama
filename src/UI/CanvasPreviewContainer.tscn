@@ -22,7 +22,6 @@ shader_param/follow_scale = false
 [node name="CanvasPreviewContainer" type="PanelContainer"]
 margin_right = 328.0
 margin_bottom = 174.0
-rect_min_size = Vector2( 318, 0 )
 size_flags_vertical = 0
 script = ExtResource( 3 )
 __meta__ = {
@@ -93,7 +92,6 @@ __meta__ = {
 margin_left = 24.0
 margin_right = 314.0
 margin_bottom = 160.0
-rect_min_size = Vector2( 290, 160 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true

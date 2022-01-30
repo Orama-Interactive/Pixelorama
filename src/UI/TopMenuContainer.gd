@@ -5,13 +5,13 @@ enum EditMenuId { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
 enum ViewMenuId {
 	TILE_MODE,
 	WINDOW_OPACITY,
-	PANEL_LAYOUT,
 	MIRROR_VIEW,
 	SHOW_GRID,
 	SHOW_PIXEL_GRID,
 	SHOW_RULERS,
 	SHOW_GUIDES,
-	SHOW_ANIMATION_TIMELINE,
+	DOCKERS,
+	EDIT_MODE,
 	ZEN_MODE,
 	FULLSCREEN_MODE
 }
@@ -44,6 +44,7 @@ var view_menu: PopupMenu
 var zen_mode := false
 var recent_projects := []
 
+onready var ui_elements: Array = Global.control.find_node("DockableContainer").get_children()
 onready var file_menu_button: MenuButton = find_node("FileMenu")
 onready var edit_menu_button: MenuButton = find_node("EditMenu")
 onready var view_menu_button: MenuButton = find_node("ViewMenu")
@@ -54,6 +55,7 @@ onready var help_menu_button: MenuButton = find_node("HelpMenu")
 onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("CreateNewImage")
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
 onready var tile_mode_submenu := PopupMenu.new()
+onready var dockers_submenu := PopupMenu.new()
 onready var panel_layout_submenu := PopupMenu.new()
 onready var recent_projects_submenu := PopupMenu.new()
 
@@ -136,14 +138,14 @@ func _setup_view_menu() -> void:
 	var view_menu_items := {  # order as in ViewMenuId enum
 		"Tile Mode": 0,
 		"Window Opacity": 0,
-		"Panel Layout": 0,
 		"Mirror View": InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid": InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Pixel Grid":
 		InputMap.get_action_list("show_pixel_grid")[0].get_scancode_with_modifiers(),
 		"Show Rulers": InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
 		"Show Guides": InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
-		"Show Animation Timeline": 0,
+		"Dockers": 0,
+		"Edit Mode": InputMap.get_action_list("edit_mode")[0].get_scancode_with_modifiers(),
 		"Zen Mode": InputMap.get_action_list("zen_mode")[0].get_scancode_with_modifiers(),
 		"Fullscreen Mode":
 		InputMap.get_action_list("toggle_fullscreen")[0].get_scancode_with_modifiers(),
@@ -154,16 +156,15 @@ func _setup_view_menu() -> void:
 	for item in view_menu_items.keys():
 		if item == "Tile Mode":
 			_setup_tile_mode_submenu(item)
+		elif item == "Dockers":
+			_setup_dockers_submenu(item)
 		elif item == "Window Opacity":
 			view_menu.add_item(item, i, view_menu_items[item])
-		elif item == "Panel Layout":
-			_setup_panel_layout_submenu(item)
 		else:
 			view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
 	view_menu.set_item_checked(ViewMenuId.SHOW_RULERS, true)
 	view_menu.set_item_checked(ViewMenuId.SHOW_GUIDES, true)
-	view_menu.set_item_checked(ViewMenuId.SHOW_ANIMATION_TIMELINE, true)
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
 	# Disable window opacity item if per pixel transparency is not allowed
@@ -187,17 +188,16 @@ func _setup_tile_mode_submenu(item: String) -> void:
 	view_menu.add_submenu_item(item, tile_mode_submenu.get_name())
 
 
-func _setup_panel_layout_submenu(item: String) -> void:
-	panel_layout_submenu.set_name("panel_layout_submenu")
-	panel_layout_submenu.add_radio_check_item("Auto", Global.PanelLayout.AUTO)
-	panel_layout_submenu.add_radio_check_item("Widescreen", Global.PanelLayout.WIDESCREEN)
-	panel_layout_submenu.add_radio_check_item("Tallscreen", Global.PanelLayout.TALLSCREEN)
-	panel_layout_submenu.hide_on_checkable_item_selection = false
-	panel_layout_submenu.set_item_checked(Global.panel_layout, true)
+func _setup_dockers_submenu(item: String) -> void:
+	dockers_submenu.set_name("dockers_submenu")
+	dockers_submenu.hide_on_checkable_item_selection = false
+	for element in ui_elements:
+		dockers_submenu.add_check_item(element.name)
+		dockers_submenu.set_item_checked(ui_elements.find(element), true)
 
-	panel_layout_submenu.connect("id_pressed", self, "_panel_layout_submenu_id_pressed")
-	view_menu.add_child(panel_layout_submenu)
-	view_menu.add_submenu_item(item, panel_layout_submenu.get_name())
+	dockers_submenu.connect("id_pressed", self, "_dockers_submenu_id_pressed")
+	view_menu.add_child(dockers_submenu)
+	view_menu.add_submenu_item(item, dockers_submenu.get_name())
 
 
 func _setup_image_menu() -> void:
@@ -384,8 +384,9 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_rulers()
 		ViewMenuId.SHOW_GUIDES:
 			_toggle_show_guides()
-		ViewMenuId.SHOW_ANIMATION_TIMELINE:
-			_toggle_show_anim_timeline()
+		ViewMenuId.EDIT_MODE:
+			Global.control.ui.tabs_visible = !Global.control.ui.tabs_visible
+			view_menu.set_item_checked(ViewMenuId.EDIT_MODE, Global.control.ui.tabs_visible)
 		ViewMenuId.ZEN_MODE:
 			_toggle_zen_mode()
 		ViewMenuId.FULLSCREEN_MODE:
@@ -403,11 +404,12 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.canvas.grid.update()
 
 
-func _panel_layout_submenu_id_pressed(id: int) -> void:
-	Global.panel_layout = id
-	for i in Global.PanelLayout.values():
-		panel_layout_submenu.set_item_checked(i, i == id)
-	get_tree().get_root().get_node("Control").handle_resize()
+func _dockers_submenu_id_pressed(id: int) -> void:
+	if zen_mode:
+		return
+	var element_visible = dockers_submenu.is_item_checked(id)
+	Global.control.ui.set_control_hidden(ui_elements[id], element_visible)
+	dockers_submenu.set_item_checked(id, !element_visible)
 
 
 func _toggle_mirror_view() -> void:
@@ -457,22 +459,15 @@ func _toggle_show_guides() -> void:
 					guide.visible = Global.show_y_symmetry_axis and Global.show_guides
 
 
-func _toggle_show_anim_timeline() -> void:
-	if zen_mode:
-		return
-	Global.show_animation_timeline = !Global.show_animation_timeline
-	view_menu.set_item_checked(ViewMenuId.SHOW_ANIMATION_TIMELINE, Global.show_animation_timeline)
-	Global.animation_timeline.visible = Global.show_animation_timeline
-
-
 func _toggle_zen_mode() -> void:
-	if Global.show_animation_timeline:
-		Global.animation_timeline.visible = zen_mode
-	Global.tool_panel.visible = zen_mode
-	Global.right_panel.visible = zen_mode
+	Global.control.ui.set_control_hidden(Global.animation_timeline, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.tool_panel, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.canvas_preview_container, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.color_pickers, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.left_tool_options_scroll, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.right_tool_options_scroll, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.palette_panel, !zen_mode)
 	Global.control.find_node("TabsContainer").visible = zen_mode
-	if Global.panel_layout == Global.PanelLayout.TALLSCREEN:
-		Global.control.tallscreen_hsplit.visible = zen_mode
 	zen_mode = !zen_mode
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)
 
