@@ -45,7 +45,7 @@ var file_format: int = Export.FileFormat.PNG
 var was_exported := false
 
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
-var layer_button_node = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
+var pixel_layer_button_node = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
 var group_layer_button_node = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
 var cel_button_node = preload("res://src/UI/Timeline/CelButton.tscn")
 var animation_tag_node = preload("res://src/UI/Timeline/AnimationTagUI.tscn")
@@ -152,7 +152,7 @@ func change_project() -> void:
 		# Create layer buttons
 		var layer_container: BaseLayerButton
 		if layers[i] is PixelLayer:
-			layer_container = layer_button_node.instance()
+			layer_container = pixel_layer_button_node.instance()
 		elif layers[i] is GroupLayer:
 			layer_container = group_layer_button_node.instance()
 		layer_container.layer = i
@@ -501,7 +501,7 @@ func _layers_changed(value: Array) -> void:
 	for i in range(layers.size() - 1, -1, -1):
 		var layer_button: BaseLayerButton
 		if layers[i] is PixelLayer:
-			layer_button = layer_button_node.instance()
+			layer_button = pixel_layer_button_node.instance()
 		elif layers[i] is GroupLayer:
 			layer_button = group_layer_button_node.instance()
 		layer_button.layer = i
