@@ -295,19 +295,20 @@ func change_project() -> void:
 func serialize() -> Dictionary:
 	var layer_data := []
 	for layer in layers:
-		var linked_cels := []
-		for cel in layer.linked_cels:
-			linked_cels.append(frames.find(cel))
-
-		layer_data.append(
-			{
-				"name": layer.name,
-				"visible": layer.visible,
-				"locked": layer.locked,
-				"new_cels_linked": layer.new_cels_linked,
-				"linked_cels": linked_cels,
-			}
-		)
+#		var linked_cels := []
+#		for cel in layer.linked_cels:
+#			linked_cels.append(frames.find(cel))
+#
+#		layer_data.append(
+#			{
+#				"name": layer.name,
+#				"visible": layer.visible,
+#				"locked": layer.locked,
+#				"new_cels_linked": layer.new_cels_linked,
+#				"linked_cels": linked_cels,
+#			}
+#		)
+		layer_data.append(layer.serialize())
 
 	var tag_data := []
 	for tag in animation_tags:
@@ -393,23 +394,16 @@ func deserialize(dict: Dictionary) -> void:
 			frame_i += 1
 
 		if dict.has("layers"):
-			var layer_i := 0
 			for saved_layer in dict.layers:
-				var linked_cels := []
-				for linked_cel_number in saved_layer.linked_cels:
-					linked_cels.append(frames[linked_cel_number])
-					var linked_cel: Cel = frames[linked_cel_number].cels[layer_i]
-					linked_cel.image = linked_cels[0].cels[layer_i].image
-					linked_cel.image_texture = linked_cels[0].cels[layer_i].image_texture
-				var layer := PixelLayer.new(
-					saved_layer.name,
-					saved_layer.visible,
-					saved_layer.locked,
-					saved_layer.new_cels_linked,
-					linked_cels
-				)
-				layers.append(layer)
-				layer_i += 1
+				match saved_layer.get("type", "pixel"):
+					"pixel":
+						layers.append(PixelLayer.new())
+					"group":
+						layers.append(GroupLayer.new())
+			# Parent references to other layers are created when deserializing
+			# a layer, so loop again after creating them.
+			for layer_i in range(dict.layers.size()):
+				layers[layer_i].deserialize(dict.layers[layer_i])
 	if dict.has("tags"):
 		for tag in dict.tags:
 			animation_tags.append(AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to))
@@ -505,6 +499,7 @@ func _layers_changed(value: Array) -> void:
 		elif layers[i] is GroupLayer:
 			layer_button = group_layer_button_node.instance()
 		layer_button.layer = i
+		layers[i].project = self
 		if layers[i].name == "":
 			layers[i].name = tr("Layer") + " %s" % i
 
@@ -722,14 +717,15 @@ func duplicate_layers() -> Array:
 	# Loop through the array to create new classes for each element, so that they
 	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
 	for i in new_layers.size():
-		var new_linked_cels = new_layers[i].linked_cels.duplicate()
-		new_layers[i] = PixelLayer.new(
-			new_layers[i].name,
-			new_layers[i].visible,
-			new_layers[i].locked,
-			new_layers[i].new_cels_linked,
-			new_linked_cels
-		)
+		var layer_dict: Dictionary = new_layers[i].serialize()
+		#layer_dict.linked_cels = new_layers[i].linked_cels.duplicate()
+		match layer_dict.type:
+			"pixel":
+				new_layers[i] = PixelLayer.new()
+			"group":
+				new_layers[i] = GroupLayer.new()
+		new_layers[i].project = self
+		new_layers[i].deserialize(layer_dict)
 
 	return new_layers
 

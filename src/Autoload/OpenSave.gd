@@ -164,13 +164,16 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 	if file_major_version >= 0 and file_minor_version > 6:
 		var global_layer_line := file.get_line()
 		while global_layer_line == ".":
-			var layer_name := file.get_line()
-			var layer_visibility := file.get_8()
-			var layer_lock := file.get_8()
-			var layer_new_cels_linked := file.get_8()
+			var layer_dict:= {
+				"name": file.get_line(),
+				"visible": file.get_8(),
+				"locked": file.get_8(),
+				"new_cels_linked": file.get_8(),
+				"linked_cels": []
+			}
 			linked_cels.append(file.get_var())
-
-			var l := PixelLayer.new(layer_name, layer_visibility, layer_lock, layer_new_cels_linked, [])
+			var l := PixelLayer.new()
+			l.deserialize(layer_dict)
 			new_project.layers.append(l)
 			global_layer_line = file.get_line()
 

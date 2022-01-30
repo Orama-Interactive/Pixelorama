@@ -2,22 +2,39 @@ class_name BaseLayer
 extends Reference
 # Base class for layer properties. Different layer types extend from this class.
 
+var project
 var name := ""
 var visible := true
 var locked := false
 var parent: BaseLayer
 
 
-func _init(_name := "", _visible := true, _locked := false) -> void:
+func _init(_name := "") -> void:
 	name = _name
-	visible = _visible
-	locked = _locked
+
+
+func serialize() -> Dictionary:
+	return {
+		"name": name,
+		"visible": visible,
+		"locked": locked,
+		"parent": project.layers.find(parent) if is_instance_valid(parent) else -1
+	}
+
+
+func deserialize(dict: Dictionary) -> void:
+	name = dict.name
+	visible = dict.visible
+	locked = dict.locked
+	if dict.get("parent", -1) != -1:
+		parent = project.layers[dict.parent]
 
 
 func can_layer_get_drawn() -> bool:
 	return false
 
 
+# TODO: Search for layer visbility/locked checks that should be changed to the hierarchy ones:
 func is_visible_in_hierarchy() -> bool:
 	if is_instance_valid(parent) and visible:
 		return parent.is_visible_in_hierarchy()
