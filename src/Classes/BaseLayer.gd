@@ -19,12 +19,18 @@ func can_layer_get_drawn() -> bool:
 
 
 func is_visible_in_hierarchy() -> bool:
-	if visible and is_instance_valid(parent):
+	if is_instance_valid(parent) and visible:
 		return parent.is_visible_in_hierarchy()
 	return visible
 
 
 func is_locked_in_hierarchy() -> bool:
-	if locked and is_instance_valid(parent):
+	if is_instance_valid(parent) and not locked:
 		return parent.is_locked_in_hierarchy()
 	return locked
+
+
+func get_hierarchy_depth() -> int:
+	if is_instance_valid(parent):
+		return parent.get_hierarchy_depth() + 1
+	return 0

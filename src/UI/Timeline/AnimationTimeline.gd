@@ -561,6 +561,8 @@ func add_group_layer(is_new := true) -> void:
 #			+ ")"
 #		)
 	new_layers.append(l)
+	# Add current layer to this group
+	Global.current_project.layers[Global.current_project.current_layer].parent = l
 
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Add Layer")

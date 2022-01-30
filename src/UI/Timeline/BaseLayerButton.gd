@@ -7,6 +7,7 @@ onready var visibility_button: BaseButton = find_node("VisibilityButton")
 onready var lock_button: BaseButton = find_node("LockButton")
 onready var label: Label = find_node("Label")
 onready var line_edit: LineEdit = find_node("LineEdit")
+onready var hierarchy_spacer: Control = find_node("HierarchySpacer")
 
 
 func _ready() -> void:
@@ -31,6 +32,22 @@ func _ready() -> void:
 		Global.change_button_texturerect(lock_button.get_child(0), "lock.png")
 	else:
 		Global.change_button_texturerect(lock_button.get_child(0), "unlock.png")
+
+	# Visualize how deep into the hierarchy the layer is
+	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
+	hierarchy_spacer.rect_min_size.x = hierarchy_depth * 10
+	if Global.control.theme.get_color("font_color", "Button").v > 0.5: # Light text should be dark theme
+		self_modulate.v += hierarchy_depth * 0.2
+	else: # Dark text should be light theme
+		self_modulate.v -= hierarchy_depth * 0.1
+
+	if is_instance_valid(Global.current_project.layers[layer].parent):
+		if not Global.current_project.layers[layer].parent.is_expanded_in_hierarchy():
+			visible = false
+		if not Global.current_project.layers[layer].parent.is_visible_in_hierarchy():
+			visibility_button.modulate.a = 0.33
+		if Global.current_project.layers[layer].parent.is_locked_in_hierarchy():
+			lock_button.modulate.a = 0.33
 
 
 func _input(event: InputEvent) -> void:
