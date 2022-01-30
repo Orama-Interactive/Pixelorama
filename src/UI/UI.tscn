@@ -1426,8 +1426,8 @@ margin_right = 1276.0
 margin_bottom = 716.0
 
 [connection signal="resized" from="DockableContainer/Tools" to="DockableContainer/Tools/PanelContainer/ToolButtons" method="_on_Tools_resized"]
-[connection signal="item_rect_changed" from="DockableContainer/Main Canvas" to="." method="_on_Main_Canvas_item_rect_changed"]
-[connection signal="visibility_changed" from="DockableContainer/Main Canvas" to="." method="_on_Main_Canvas_visibility_changed"]
+[connection signal="item_rect_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_item_rect_changed"]
+[connection signal="visibility_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_visibility_changed"]
 [connection signal="reposition_active_tab_request" from="DockableContainer/Main Canvas/TabsContainer/Tabs" to="DockableContainer/Main Canvas/TabsContainer/Tabs" method="_on_Tabs_reposition_active_tab_request"]
 [connection signal="tab_changed" from="DockableContainer/Main Canvas/TabsContainer/Tabs" to="DockableContainer/Main Canvas/TabsContainer/Tabs" method="_on_Tabs_tab_changed"]
 [connection signal="tab_close" from="DockableContainer/Main Canvas/TabsContainer/Tabs" to="DockableContainer/Main Canvas/TabsContainer/Tabs" method="_on_Tabs_tab_close"]
