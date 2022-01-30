@@ -38,6 +38,9 @@ func _draw() -> void:
 	draw_set_transform(position_tmp, rotation, scale_tmp)
 	# Draw current frame layers
 	for i in range(Global.current_project.layers.size()):
+		# TODO Make this work with groups:
+		if Global.current_project.layers[i] is GroupLayer:
+			continue
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
 		if Global.current_project.layers[i].visible:  # if it's visible
 			if i == current_layer:

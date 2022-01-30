@@ -580,10 +580,12 @@ func _frame_changed(value: int) -> void:
 		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
 	)
 
-	if current_frame < frames.size():
-		var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
-		Global.layer_opacity_slider.value = cel_opacity * 100
-		Global.layer_opacity_spinbox.value = cel_opacity * 100
+	# TODO: Make this work with groups:
+	if not layers[current_layer] is GroupLayer:
+		if current_frame < frames.size():
+			var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
+			Global.layer_opacity_slider.value = cel_opacity * 100
+			Global.layer_opacity_spinbox.value = cel_opacity * 100
 
 	Global.canvas.update()
 	Global.transparent_checker.update_rect()
