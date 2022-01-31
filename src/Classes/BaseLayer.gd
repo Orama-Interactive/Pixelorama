@@ -9,10 +9,6 @@ var locked := false
 var parent: BaseLayer
 
 
-func _init(_name := "") -> void:
-	name = _name
-
-
 func serialize() -> Dictionary:
 	return {
 		"name": name,
