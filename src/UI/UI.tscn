@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://src/UI/ToolButtons.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -36,6 +36,15 @@
 [ext_resource path="res://assets/graphics/tools/tool_background.png" type="Texture" id=34]
 [ext_resource path="res://addons/dockable_container/dockable_container.gd" type="Script" id=35]
 [ext_resource path="res://addons/dockable_container/layout_panel.gd" type="Script" id=36]
+[ext_resource path="res://src/UI/UI.gd" type="Script" id=37]
+[ext_resource path="res://src/Shaders/UITransparency.gdshader" type="Shader" id=38]
+
+[sub_resource type="ShaderMaterial" id=26]
+shader = ExtResource( 38 )
+shader_param/alpha = 0.0
+shader_param/screen_resolution = Vector2( 1280, 720 )
+shader_param/position = Vector2( 100, 100 )
+shader_param/size = Vector2( 100, 100 )
 
 [sub_resource type="Resource" id=1]
 resource_name = "Tabs"
@@ -173,10 +182,12 @@ shader_param/follow_movement = false
 shader_param/follow_scale = false
 
 [node name="UI" type="Panel"]
+material = SubResource( 26 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 37 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1415,6 +1426,8 @@ margin_right = 1276.0
 margin_bottom = 716.0
 
 [connection signal="resized" from="DockableContainer/Tools" to="DockableContainer/Tools/PanelContainer/ToolButtons" method="_on_Tools_resized"]
+[connection signal="item_rect_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_item_rect_changed"]
+[connection signal="visibility_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_visibility_changed"]
 [connection signal="reposition_active_tab_request" from="DockableContainer/Main Canvas/TabsContainer/Tabs" to="DockableContainer/Main Canvas/TabsContainer/Tabs" method="_on_Tabs_reposition_active_tab_request"]
 [connection signal="tab_changed" from="DockableContainer/Main Canvas/TabsContainer/Tabs" to="DockableContainer/Main Canvas/TabsContainer/Tabs" method="_on_Tabs_tab_changed"]
 [connection signal="tab_close" from="DockableContainer/Main Canvas/TabsContainer/Tabs" to="DockableContainer/Main Canvas/TabsContainer/Tabs" method="_on_Tabs_tab_close"]
