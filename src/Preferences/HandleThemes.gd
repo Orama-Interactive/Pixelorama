@@ -84,6 +84,13 @@ func change_theme(id: int) -> void:
 		Global.default_clear_color = themes[id][2]
 	VisualServer.set_default_clear_color(Color(Global.default_clear_color))
 
+	# Temporary code
+	var layer_button_pcont: PanelContainer = Global.animation_timeline.find_node(
+		"LayerButtonPanelContainer"
+	)
+	var lbpc_stylebox: StyleBoxFlat = layer_button_pcont.get_stylebox("panel", "PanelContainer")
+	lbpc_stylebox.bg_color = Global.default_clear_color
+
 	var top_menu_style = main_theme.get_stylebox("TopMenu", "Panel")
 	var ruler_style = main_theme.get_stylebox("Ruler", "Button")
 	Global.top_menu_container.add_stylebox_override("panel", top_menu_style)
