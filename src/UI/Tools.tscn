@@ -20,22 +20,19 @@
 [ext_resource path="res://assets/graphics/tools/zoom.png" type="Texture" id=18]
 [ext_resource path="res://assets/graphics/tools/tool_background.png" type="Texture" id=19]
 
-[node name="Tools" type="Panel"]
-margin_left = 4.0
-margin_top = 8.0
-margin_right = 46.0
-margin_bottom = 716.0
-rect_min_size = Vector2( 42, 32 )
-rect_clip_content = true
+[node name="Tools" type="ScrollContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 42, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-margin_left = 9.0
-margin_top = 5.0
-margin_right = 47.0
-margin_bottom = 491.0
+margin_right = 38.0
+margin_bottom = 486.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 __meta__ = {

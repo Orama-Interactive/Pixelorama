@@ -74,6 +74,3 @@ func _on_Tools_resized() -> void:
 		columns = tool_panel_size.x / 28.5
 	else:
 		columns = tool_panel_size.x / 36.5
-
-	# It doesn't actually set the size to zero, it just resets it
-	get_parent().rect_size = Vector2.ZERO

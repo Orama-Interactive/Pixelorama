@@ -187,6 +187,10 @@ tabs_visible = false
 layout = SubResource( 25 )
 
 [node name="Tools" parent="DockableContainer" instance=ExtResource( 1 )]
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -1234.0
+margin_bottom = -4.0
 
 [node name="Main Canvas" type="VBoxContainer" parent="DockableContainer"]
 margin_left = 66.0
