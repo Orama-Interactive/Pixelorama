@@ -33,7 +33,7 @@ func _on_FrameTagDialog_about_to_show() -> void:
 		var edit_button := Button.new()
 		edit_button.text = "Edit"
 		edit_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		edit_button.connect("pressed", self, "_on_EditButton_pressed", [i])
+		edit_button.connect("pressed", self, "_on_EditButton_pressed", [i, edit_button])
 		hbox_cont.add_child(edit_button)
 		vbox_cont.add_child(hbox_cont)
 
@@ -60,14 +60,23 @@ func _on_FrameTagDialog_popup_hide() -> void:
 
 
 func _on_AddTag_pressed() -> void:
-	options_dialog.popup_centered()
+	print(Global.current_project.selected_cels)
+	var x_pos = add_tag_button.rect_global_position.x
+	var y_pos = add_tag_button.rect_global_position.y + 2*add_tag_button.rect_size.y
+	options_dialog.popup(Rect2(Vector2(x_pos,y_pos), options_dialog.rect_size))
 	current_tag_id = Global.current_project.animation_tags.size()
+	# Determine tag values (Array sort method)...
+	var frames := []
+	for cel in Global.current_project.selected_cels:
+		frames.append(cel[0])
+	frames.sort()
+
 	options_dialog.get_node("GridContainer/FromSpinBox").value = (
-		Global.current_project.current_frame
+		frames[0] # First element
 		+ 1
 	)
 	options_dialog.get_node("GridContainer/ToSpinBox").value = (
-		Global.current_project.current_frame
+		frames[-1] # Last element
 		+ 1
 	)
 	options_dialog.get_node("GridContainer/ColorPickerButton").color = Color(
@@ -75,8 +84,10 @@ func _on_AddTag_pressed() -> void:
 	)
 
 
-func _on_EditButton_pressed(_tag_id: int) -> void:
-	options_dialog.popup_centered()
+func _on_EditButton_pressed(_tag_id: int, edit_button: Button) -> void:
+	var x_pos = edit_button.rect_global_position.x
+	var y_pos = edit_button.rect_global_position.y + 2*edit_button.rect_size.y
+	options_dialog.popup(Rect2(Vector2(x_pos,y_pos), options_dialog.rect_size))
 	current_tag_id = _tag_id
 	var animation_tag: AnimationTag = Global.current_project.animation_tags[_tag_id]
 	options_dialog.get_node("GridContainer/NameLineEdit").text = animation_tag.name
