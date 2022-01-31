@@ -2,19 +2,20 @@ class_name BaseLayer
 extends Reference
 # Base class for layer properties. Different layer types extend from this class.
 
-var project
 var name := ""
 var visible := true
 var locked := false
 var parent: BaseLayer
-
+var project
+var index: int
 
 func serialize() -> Dictionary:
+	assert(index == project.layers.find(self)) # TODO: remove once sure index is synced properly
 	return {
 		"name": name,
 		"visible": visible,
 		"locked": locked,
-		"parent": project.layers.find(parent) if is_instance_valid(parent) else -1
+		"parent": parent.index if is_instance_valid(parent) else -1
 	}
 
 

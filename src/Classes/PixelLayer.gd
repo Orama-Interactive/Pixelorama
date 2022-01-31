@@ -23,12 +23,11 @@ func deserialize(dict: Dictionary) -> void:
 	.deserialize(dict)
 	new_cels_linked = dict.new_cels_linked
 
-	var layer_i: int = project.layers.find(self)
 	for linked_cel_number in dict.linked_cels:
 		linked_cels.append(project.frames[linked_cel_number])
-		var linked_cel: Cel = project.frames[linked_cel_number].cels[layer_i]
-		linked_cel.image = linked_cels[0].cels[layer_i].image
-		linked_cel.image_texture = linked_cels[0].cels[layer_i].image_texture
+		var linked_cel: Cel = project.frames[linked_cel_number].cels[index]
+		linked_cel.image = linked_cels[0].cels[index].image
+		linked_cel.image_texture = linked_cels[0].cels[index].image_texture
 
 
 func can_layer_get_drawn() -> bool:

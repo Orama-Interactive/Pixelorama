@@ -391,6 +391,7 @@ func deserialize(dict: Dictionary) -> void:
 			# a layer, so loop again after creating them.
 			for layer_i in range(dict.layers.size()):
 				layers[layer_i].project = self
+				layers[layer_i].index = layer_i
 				layers[layer_i].deserialize(dict.layers[layer_i])
 	if dict.has("tags"):
 		for tag in dict.tags:
@@ -487,6 +488,7 @@ func _layers_changed(value: Array) -> void:
 		elif layers[i] is GroupLayer:
 			layer_button = group_layer_button_node.instance()
 		layer_button.layer = i
+		layers[i].index = i
 		layers[i].project = self
 		if layers[i].name == "":
 			layers[i].name = tr("Layer") + " %s" % i
@@ -712,6 +714,7 @@ func duplicate_layers() -> Array:
 				new_layers[i] = PixelLayer.new()
 			"group":
 				new_layers[i] = GroupLayer.new()
+		new_layers[i].index = i
 		new_layers[i].project = self
 		new_layers[i].deserialize(layer_dict)
 

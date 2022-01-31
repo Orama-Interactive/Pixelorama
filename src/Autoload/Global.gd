@@ -185,7 +185,7 @@ func _ready() -> void:
 	var proj_size := Vector2(default_width, default_height)
 	projects.append(Project.new([], tr("untitled"), proj_size))
 	current_project = projects[0]
-	current_project.layers.append(Layer.new())
+	current_project.layers.append(PixelLayer.new())
 	current_project.fill_color = default_fill_color
 	var frame: Frame = current_project.new_empty_frame()
 	current_project.frames.append(frame)
