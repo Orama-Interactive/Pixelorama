@@ -295,19 +295,6 @@ func change_project() -> void:
 func serialize() -> Dictionary:
 	var layer_data := []
 	for layer in layers:
-#		var linked_cels := []
-#		for cel in layer.linked_cels:
-#			linked_cels.append(frames.find(cel))
-#
-#		layer_data.append(
-#			{
-#				"name": layer.name,
-#				"visible": layer.visible,
-#				"locked": layer.locked,
-#				"new_cels_linked": layer.new_cels_linked,
-#				"linked_cels": linked_cels,
-#			}
-#		)
 		layer_data.append(layer.serialize())
 
 	var tag_data := []
