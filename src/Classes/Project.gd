@@ -403,6 +403,7 @@ func deserialize(dict: Dictionary) -> void:
 			# Parent references to other layers are created when deserializing
 			# a layer, so loop again after creating them.
 			for layer_i in range(dict.layers.size()):
+				layers[layer_i].project = self
 				layers[layer_i].deserialize(dict.layers[layer_i])
 	if dict.has("tags"):
 		for tag in dict.tags:
