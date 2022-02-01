@@ -11,6 +11,7 @@ enum ViewMenuId {
 	SHOW_RULERS,
 	SHOW_GUIDES,
 	DOCKERS,
+	LAYOUTS,
 	EDIT_MODE,
 	ZEN_MODE,
 	FULLSCREEN_MODE
@@ -41,8 +42,12 @@ enum HelpMenuId {
 
 var file_menu: PopupMenu
 var view_menu: PopupMenu
-var zen_mode := false
 var recent_projects := []
+var layouts := [
+	["Default", preload("res://assets/layouts/default.tres")],
+	["Tallscreen", preload("res://assets/layouts/tallscreen.tres")],
+]
+var zen_mode := false
 
 onready var ui_elements: Array = Global.control.find_node("DockableContainer").get_children()
 onready var file_menu_button: MenuButton = find_node("FileMenu")
@@ -56,6 +61,7 @@ onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("Cre
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
 onready var tile_mode_submenu := PopupMenu.new()
 onready var dockers_submenu := PopupMenu.new()
+onready var layouts_submenu := PopupMenu.new()
 onready var panel_layout_submenu := PopupMenu.new()
 onready var recent_projects_submenu := PopupMenu.new()
 
@@ -145,6 +151,7 @@ func _setup_view_menu() -> void:
 		"Show Rulers": InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
 		"Show Guides": InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
 		"Dockers": 0,
+		"Layouts": 0,
 		"Edit Mode": InputMap.get_action_list("edit_mode")[0].get_scancode_with_modifiers(),
 		"Zen Mode": InputMap.get_action_list("zen_mode")[0].get_scancode_with_modifiers(),
 		"Fullscreen Mode":
@@ -158,6 +165,8 @@ func _setup_view_menu() -> void:
 			_setup_tile_mode_submenu(item)
 		elif item == "Dockers":
 			_setup_dockers_submenu(item)
+		elif item == "Layouts":
+			_setup_layouts_submenu(item)
 		elif item == "Window Opacity":
 			view_menu.add_item(item, i, view_menu_items[item])
 		else:
@@ -198,6 +207,19 @@ func _setup_dockers_submenu(item: String) -> void:
 	dockers_submenu.connect("id_pressed", self, "_dockers_submenu_id_pressed")
 	view_menu.add_child(dockers_submenu)
 	view_menu.add_submenu_item(item, dockers_submenu.get_name())
+
+
+func _setup_layouts_submenu(item: String) -> void:
+	layouts_submenu.set_name("layouts_submenu")
+	layouts_submenu.hide_on_checkable_item_selection = false
+	for layout in layouts:
+		layouts_submenu.add_radio_check_item(layout[0])
+
+	layouts_submenu.set_item_checked(0, true)
+
+	layouts_submenu.connect("id_pressed", self, "_layouts_submenu_id_pressed")
+	view_menu.add_child(layouts_submenu)
+	view_menu.add_submenu_item(item, layouts_submenu.get_name())
 
 
 func _setup_image_menu() -> void:
@@ -410,6 +432,15 @@ func _dockers_submenu_id_pressed(id: int) -> void:
 	var element_visible = dockers_submenu.is_item_checked(id)
 	Global.control.ui.set_control_hidden(ui_elements[id], element_visible)
 	dockers_submenu.set_item_checked(id, !element_visible)
+
+
+func _layouts_submenu_id_pressed(id: int) -> void:
+	Global.control.ui.layout = layouts[id][1].clone()
+	for i in layouts.size():
+		layouts_submenu.set_item_checked(i, i == id)
+
+	for i in ui_elements.size():
+		dockers_submenu.set_item_checked(i, true)
 
 
 func _toggle_mirror_view() -> void:
