@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-01-05 00:43\n"
+"PO-Revision-Date: 2022-02-01 22:19\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -151,7 +151,7 @@ msgid "Resize Canvas"
 msgstr "Tuvali yeniden boyutlandır"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Resmi Ortala"
 
 msgid "Rotate Image"
 msgstr "Resmi Döndür"
@@ -181,7 +181,7 @@ msgid "Window Opacity"
 msgstr "Pencere Şeffaflığı"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Panel Düzeni"
 
 msgid "Auto"
 msgstr "Otomatik"
@@ -199,7 +199,7 @@ msgid "Show Grid"
 msgstr "Kılavuz çizgilerini göster"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Piksel Izgarayı Göster"
 
 msgid "Show Rulers"
 msgstr "Cetveli Göster"
@@ -241,13 +241,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Hareketli sayfa (yeni sekme)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Resim Sayfası (yeni katman)"
 
 msgid "New frame"
 msgstr "Yeni çerçeve"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Çerçeveyi değiştir"
 
 msgid "New layer"
 msgstr "Yeni katman"
@@ -268,13 +268,13 @@ msgid "Vertical frames:"
 msgstr "Dikey çerçeveler:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Çerçeveyi oluştur:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "Çerçevede:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "Katmanda:"
 
 msgid "Brush type:"
 msgstr "Fırça tipi:"
@@ -483,7 +483,7 @@ msgid "Display Scale"
 msgstr "Görüntü Ölçeği"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Diyalog penceresinde arayüzü karart"
 
 msgid "Dark"
 msgstr "Koyu"
@@ -507,13 +507,13 @@ msgid "Theme"
 msgstr "Tema"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Simge rengi:"
 
 msgid "Icon color:"
 msgstr "Simge rengi:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Araç gereç butonu büyüklüğü:"
 
 msgid "Small"
 msgstr "Küçük"
@@ -525,7 +525,7 @@ msgid "Only affect selection"
 msgstr "Sadece seçilene uygula"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Seçilen hücreler"
 
 msgid "Current cel"
 msgstr "Aktif kare"
@@ -803,7 +803,8 @@ msgid "Polygonal Selection\n"
 "Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Sol fare butonu için %s \n"
+"Sağ fare butonu için %s"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
