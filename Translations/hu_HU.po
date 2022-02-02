@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2022-01-05 00:44\n"
+"PO-Revision-Date: 2022-02-02 16:15\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -1783,6 +1783,9 @@ msgstr "Mozgassa a kijelölt keretet jobbra."
 
 msgid "Frame duration"
 msgstr "Képkocka időtartalma"
+
+msgid "Duration"
+msgstr ""
 
 msgid "Tiled In Both Axis"
 msgstr ""
