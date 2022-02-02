@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-02-02 16:14\n"
+"PO-Revision-Date: 2022-02-02 17:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1820,7 +1820,7 @@ msgid "Frame duration"
 msgstr "Длительность кадра"
 
 msgid "Duration"
-msgstr ""
+msgstr "Длительность"
 
 msgid "Tiled In Both Axis"
 msgstr "Повторять по обеим осям"
