@@ -8,6 +8,16 @@ onready var frame_properties: ConfirmationDialog = Global.control.find_node("Fra
 
 func _ready() -> void:
 	connect("pressed", self, "_button_pressed")
+	connect("mouse_entered", self, "_update_tooltip")
+
+
+func _update_tooltip() -> void:
+	var duration: float = Global.current_project.frames[frame].duration
+	var duration_sec: float = duration * (1.0 / Global.current_project.fps)
+	var duration_str := str(duration_sec)
+	if "." in duration_str:  # If its a decimal value
+		duration_str = "%.2f" % duration_sec  # Up to 2 decimal places
+	hint_tooltip = "%s: %sx (%s sec)" % [tr("Duration"), str(duration), duration_str]
 
 
 func _button_pressed() -> void:
