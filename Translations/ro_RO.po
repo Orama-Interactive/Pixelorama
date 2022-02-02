@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-02-02 16:15\n"
+"PO-Revision-Date: 2022-02-02 17:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1820,7 +1820,7 @@ msgid "Frame duration"
 msgstr "Durata cadrului"
 
 msgid "Duration"
-msgstr ""
+msgstr "Durată"
 
 msgid "Tiled In Both Axis"
 msgstr "Mozaicat pe ambele axe"
