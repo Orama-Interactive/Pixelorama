@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-02-02 16:15\n"
+"PO-Revision-Date: 2022-02-02 17:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1820,7 +1820,7 @@ msgid "Frame duration"
 msgstr "Durata del frame"
 
 msgid "Duration"
-msgstr ""
+msgstr "Durata"
 
 msgid "Tiled In Both Axis"
 msgstr "Piastrellato In Entrambi Gli Assi"
