@@ -435,12 +435,17 @@ func _dockers_submenu_id_pressed(id: int) -> void:
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:
+	# Clone is needed so that the premade layouts do not get modified
 	Global.control.ui.layout = layouts[id][1].clone()
 	for i in layouts.size():
 		layouts_submenu.set_item_checked(i, i == id)
 
 	for i in ui_elements.size():
 		dockers_submenu.set_item_checked(i, true)
+
+	Global.control.find_node("TabsContainer").visible = true
+	zen_mode = false
+	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, false)
 
 
 func _toggle_mirror_view() -> void:
