@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-01-05 00:44\n"
+"PO-Revision-Date: 2022-02-02 16:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1817,6 +1817,9 @@ msgstr "Przenieś zaznaczoną klatkę w prawo."
 
 msgid "Frame duration"
 msgstr "Czas trwania klatki"
+
+msgid "Duration"
+msgstr ""
 
 msgid "Tiled In Both Axis"
 msgstr "Kafelkowanie na obu osiach"
