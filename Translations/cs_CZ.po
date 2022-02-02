@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2022-01-05 00:44\n"
+"PO-Revision-Date: 2022-02-02 16:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1818,6 +1818,9 @@ msgstr "Přesunout vybraný snímek doprava."
 
 msgid "Frame duration"
 msgstr "Délka snímku"
+
+msgid "Duration"
+msgstr ""
 
 msgid "Tiled In Both Axis"
 msgstr "Obě osy"
