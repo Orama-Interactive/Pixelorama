@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-01-21 18:01\n"
+"PO-Revision-Date: 2022-02-02 16:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1818,6 +1818,9 @@ msgstr "Déplacer la frame sélectionnée vers la droite."
 
 msgid "Frame duration"
 msgstr "Durée de la frame"
+
+msgid "Duration"
+msgstr ""
 
 msgid "Tiled In Both Axis"
 msgstr "Mode Tuile sur les Deux Axes"
