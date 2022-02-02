@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2022-01-05 00:43\n"
+"PO-Revision-Date: 2022-02-02 16:14\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1781,6 +1781,9 @@ msgstr "移動所選影格到右邊。"
 
 msgid "Frame duration"
 msgstr "影格持續時間"
+
+msgid "Duration"
+msgstr ""
 
 msgid "Tiled In Both Axis"
 msgstr ""
