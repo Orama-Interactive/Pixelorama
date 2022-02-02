@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-01-17 06:19\n"
+"PO-Revision-Date: 2022-02-02 16:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1818,6 +1818,9 @@ msgstr "Mueve el marco seleccionado hacia la derecha."
 
 msgid "Frame duration"
 msgstr "Duración de los fotogramas"
+
+msgid "Duration"
+msgstr ""
 
 msgid "Tiled In Both Axis"
 msgstr "Mosaico en Ambos Ejes"
