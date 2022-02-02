@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-02-02 16:14\n"
+"PO-Revision-Date: 2022-02-02 17:33\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1820,7 +1820,7 @@ msgid "Frame duration"
 msgstr "Тривалість кадру"
 
 msgid "Duration"
-msgstr ""
+msgstr "Тривалість"
 
 msgid "Tiled In Both Axis"
 msgstr "Повтори по обидвох осях"
