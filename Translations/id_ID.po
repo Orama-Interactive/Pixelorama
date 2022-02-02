@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-01-06 01:13\n"
+"PO-Revision-Date: 2022-02-02 16:15\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1781,6 +1781,9 @@ msgstr "Pindahkan frame terpilih ke kanan."
 
 msgid "Frame duration"
 msgstr "Durasi gambar"
+
+msgid "Duration"
+msgstr ""
 
 msgid "Tiled In Both Axis"
 msgstr ""
