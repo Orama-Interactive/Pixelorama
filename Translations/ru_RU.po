@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-01-05 15:16\n"
+"PO-Revision-Date: 2022-02-02 16:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1818,6 +1818,9 @@ msgstr "Переместить выделенный кадр вправо."
 
 msgid "Frame duration"
 msgstr "Длительность кадра"
+
+msgid "Duration"
+msgstr ""
 
 msgid "Tiled In Both Axis"
 msgstr "Повторять по обеим осям"
