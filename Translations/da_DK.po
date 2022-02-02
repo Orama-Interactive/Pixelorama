@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-01-06 18:32\n"
+"PO-Revision-Date: 2022-02-02 16:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1810,6 +1810,9 @@ msgid "Move the selected frame to the right."
 msgstr ""
 
 msgid "Frame duration"
+msgstr ""
+
+msgid "Duration"
 msgstr ""
 
 msgid "Tiled In Both Axis"
