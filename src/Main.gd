@@ -72,12 +72,6 @@ func _ready() -> void:
 
 	_show_splash_screen()
 
-	# Hacky way to update the panel's size... Unsure why this happens.
-	yield(get_tree(), "idle_frame")
-	ui.set_control_hidden(Global.palette_panel, true)
-	yield(get_tree(), "idle_frame")
-	ui.set_control_hidden(Global.palette_panel, false)
-
 
 func _input(event: InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
