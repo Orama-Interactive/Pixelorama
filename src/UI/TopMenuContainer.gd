@@ -62,7 +62,6 @@ onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("Wind
 onready var tile_mode_submenu := PopupMenu.new()
 onready var dockers_submenu := PopupMenu.new()
 onready var layouts_submenu := PopupMenu.new()
-onready var panel_layout_submenu := PopupMenu.new()
 onready var recent_projects_submenu := PopupMenu.new()
 
 
