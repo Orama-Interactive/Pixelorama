@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-02-02 16:14\n"
+"PO-Revision-Date: 2022-02-03 11:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1820,7 +1820,7 @@ msgid "Frame duration"
 msgstr "Duração do quadro"
 
 msgid "Duration"
-msgstr ""
+msgstr "Duração"
 
 msgid "Tiled In Both Axis"
 msgstr "Ladrilho em Ambos os Eixos"
