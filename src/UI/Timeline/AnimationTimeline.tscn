@@ -764,21 +764,22 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 180, 0 )
 
 [node name="OpacityLabel" type="Label" parent="TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
+margin_top = 9.0
 margin_right = 53.0
-margin_bottom = 14.0
+margin_bottom = 23.0
 size_flags_horizontal = 0
-size_flags_vertical = 0
 text = "Opacity:"
 valign = 1
 
 [node name="OpacitySlider" type="HSlider" parent="TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
 margin_left = 57.0
+margin_top = 8.0
 margin_right = 102.0
-margin_bottom = 32.0
+margin_bottom = 24.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
+size_flags_vertical = 4
 value = 100.0
 ticks_on_borders = true
 
