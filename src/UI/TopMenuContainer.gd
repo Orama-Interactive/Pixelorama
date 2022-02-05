@@ -447,13 +447,12 @@ func _view_mode_submenu_id_pressed(id: int) -> void:
 		view_mode_submenu.set_item_checked(i, i == id)
 
 	var mat := ShaderMaterial.new()
-
+	Global.shader_vision.visible = true
 	match id:
 		Global.ViewMode.NORMAL:
 			Global.shader_vision.visible = false
 		Global.ViewMode.GREY_SCALE:
 			mat.shader = preload("res://src/Shaders/Greyscale.gdshader")
-			Global.shader_vision.visible = true
 
 	Global.shader_vision.material = mat
 
