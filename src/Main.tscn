@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://src/UI/Dialogs/WindowOpacityDialog.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/UI/Dialogs/SaveSprite.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/Dialogs/OpenSprite.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/UI/Dialogs/ManageLayouts.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.tscn" type="PackedScene" id=27]
 [ext_resource path="res://src/UI/Dialogs/CreateNewImage.tscn" type="PackedScene" id=28]
 [ext_resource path="res://src/Preferences/PreferencesDialog.tscn" type="PackedScene" id=32]
@@ -75,6 +76,8 @@ margin_bottom = 388.0
 [node name="ExportDialog" parent="Dialogs" instance=ExtResource( 39 )]
 
 [node name="PreferencesDialog" parent="Dialogs" instance=ExtResource( 32 )]
+
+[node name="ManageLayouts" parent="Dialogs" instance=ExtResource( 13 )]
 
 [node name="AboutDialog" parent="Dialogs" instance=ExtResource( 34 )]
 

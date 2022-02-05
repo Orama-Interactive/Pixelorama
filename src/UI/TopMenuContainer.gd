@@ -66,6 +66,8 @@ onready var recent_projects_submenu := PopupMenu.new()
 
 
 func _ready() -> void:
+	var dir := Directory.new()
+	dir.make_dir("user://layouts")
 	_setup_file_menu()
 	_setup_edit_menu()
 	_setup_view_menu()
@@ -209,16 +211,33 @@ func _setup_dockers_submenu(item: String) -> void:
 
 
 func _setup_layouts_submenu(item: String) -> void:
+	var dir := Directory.new()
+	var path := "user://layouts"
+	if dir.open(path) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir():
+				var file_name_no_tres: String = file_name.get_basename()
+				layouts.append([file_name_no_tres, ResourceLoader.load(path.plus_file(file_name))])
+			file_name = dir.get_next()
+
 	layouts_submenu.set_name("layouts_submenu")
 	layouts_submenu.hide_on_checkable_item_selection = false
-	for layout in layouts:
-		layouts_submenu.add_radio_check_item(layout[0])
-
+	populate_layouts_submenu()
 	layouts_submenu.set_item_checked(0, true)
 
 	layouts_submenu.connect("id_pressed", self, "_layouts_submenu_id_pressed")
 	view_menu.add_child(layouts_submenu)
 	view_menu.add_submenu_item(item, layouts_submenu.get_name())
+
+
+func populate_layouts_submenu() -> void:
+	layouts_submenu.clear()  # Does not do anything if it's called for the first time
+	for layout in layouts:
+		layouts_submenu.add_radio_check_item(layout[0])
+
+	layouts_submenu.add_item("Manage Layouts")
 
 
 func _setup_image_menu() -> void:
@@ -434,6 +453,14 @@ func _dockers_submenu_id_pressed(id: int) -> void:
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:
+	if id < layouts.size():
+		set_layout(id)
+	else:
+		Global.control.get_node("Dialogs/ManageLayouts").popup_centered()
+		Global.dialog_open(true)
+
+
+func set_layout(id: int) -> void:
 	# Clone is needed so that the premade layouts do not get modified
 	Global.control.ui.layout = layouts[id][1].clone()
 	for i in layouts.size():

@@ -1,0 +1,76 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/Dialogs/ManageLayouts.gd" type="Script" id=1]
+
+[node name="ManageLayouts" type="AcceptDialog"]
+margin_right = 191.0
+margin_bottom = 217.0
+window_title = "Manage Layouts"
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 175.0
+margin_bottom = 14.0
+text = "Layouts"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SavedLayouts" type="ItemList" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 175.0
+margin_bottom = 121.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_vertical = 3
+
+[node name="DeleteLayout" type="Button" parent="VBoxContainer"]
+margin_top = 125.0
+margin_right = 55.0
+margin_bottom = 145.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+disabled = true
+text = "Delete"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 149.0
+margin_right = 175.0
+margin_bottom = 173.0
+
+[node name="LayoutName" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+margin_right = 130.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "Insert name"
+
+[node name="SaveLayout" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 134.0
+margin_right = 175.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+disabled = true
+text = "Save"
+
+[connection signal="about_to_show" from="." to="." method="_on_ManageLayouts_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_ManageLayouts_popup_hide"]
+[connection signal="item_activated" from="VBoxContainer/SavedLayouts" to="." method="_on_SavedLayouts_item_activated"]
+[connection signal="item_selected" from="VBoxContainer/SavedLayouts" to="." method="_on_SavedLayouts_item_selected"]
+[connection signal="nothing_selected" from="VBoxContainer/SavedLayouts" to="." method="_on_SavedLayouts_nothing_selected"]
+[connection signal="pressed" from="VBoxContainer/DeleteLayout" to="." method="_on_DeleteLayout_pressed"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/LayoutName" to="." method="_on_LayoutName_text_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/SaveLayout" to="." method="_on_SaveLayout_pressed"]
