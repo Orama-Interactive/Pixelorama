@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-02-02 16:14\n"
+"PO-Revision-Date: 2022-02-05 13:18\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1820,7 +1820,7 @@ msgid "Frame duration"
 msgstr "帧持续时间"
 
 msgid "Duration"
-msgstr ""
+msgstr "持续时间"
 
 msgid "Tiled In Both Axis"
 msgstr "在两个轴上平移"
