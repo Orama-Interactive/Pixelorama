@@ -277,6 +277,13 @@ current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 7 )
 
+[node name="CanvasLayer" type="CanvasLayer" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
+
+[node name="ShaderVision" type="ColorRect" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport/CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+
 [node name="ViewportContainer2" type="ViewportContainer" parent="DockableContainer/Main Canvas/HSplitContainer"]
 margin_left = 872.0
 margin_right = 872.0

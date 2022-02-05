@@ -4,6 +4,7 @@ enum FileMenuId { NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS
 enum EditMenuId { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
 enum ViewMenuId {
 	TILE_MODE,
+	VIEW_MODE,
 	WINDOW_OPACITY,
 	MIRROR_VIEW,
 	SHOW_GRID,
@@ -60,6 +61,7 @@ onready var help_menu_button: MenuButton = find_node("HelpMenu")
 onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("CreateNewImage")
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
 onready var tile_mode_submenu := PopupMenu.new()
+onready var view_mode_submenu := PopupMenu.new()
 onready var dockers_submenu := PopupMenu.new()
 onready var layouts_submenu := PopupMenu.new()
 onready var recent_projects_submenu := PopupMenu.new()
@@ -142,6 +144,7 @@ func _setup_edit_menu() -> void:
 func _setup_view_menu() -> void:
 	var view_menu_items := {  # order as in ViewMenuId enum
 		"Tile Mode": 0,
+		"View Mode": 0,
 		"Window Opacity": 0,
 		"Mirror View": InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid": InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
@@ -162,6 +165,8 @@ func _setup_view_menu() -> void:
 	for item in view_menu_items.keys():
 		if item == "Tile Mode":
 			_setup_tile_mode_submenu(item)
+		elif item == "View Mode":
+			_setup_view_mode_submenu(item)
 		elif item == "Dockers":
 			_setup_dockers_submenu(item)
 		elif item == "Layouts":
@@ -194,6 +199,18 @@ func _setup_tile_mode_submenu(item: String) -> void:
 	tile_mode_submenu.connect("id_pressed", self, "_tile_mode_submenu_id_pressed")
 	view_menu.add_child(tile_mode_submenu)
 	view_menu.add_submenu_item(item, tile_mode_submenu.get_name())
+
+
+func _setup_view_mode_submenu(item: String) -> void:
+	view_mode_submenu.set_name("view_mode_submenu")
+	view_mode_submenu.add_radio_check_item("Normal (Default)", Global.ViewMode.NORMAL)
+	view_mode_submenu.set_item_checked(Global.ViewMode.NORMAL, true)
+	view_mode_submenu.add_radio_check_item("Greyscale", Global.ViewMode.GREY_SCALE)
+	view_mode_submenu.hide_on_checkable_item_selection = false
+
+	view_mode_submenu.connect("id_pressed", self, "_view_mode_submenu_id_pressed")
+	view_menu.add_child(view_mode_submenu)
+	view_menu.add_submenu_item(item, view_mode_submenu.get_name())
 
 
 func _setup_dockers_submenu(item: String) -> void:
@@ -423,6 +440,22 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.canvas.tile_mode.update()
 	Global.canvas.pixel_grid.update()
 	Global.canvas.grid.update()
+
+
+func _view_mode_submenu_id_pressed(id: int) -> void:
+	for i in Global.ViewMode.values():
+		view_mode_submenu.set_item_checked(i, i == id)
+
+	var mat := ShaderMaterial.new()
+
+	match id:
+		Global.ViewMode.NORMAL:
+			Global.shader_vision.visible = false
+		Global.ViewMode.GREY_SCALE:
+			mat.shader = preload("res://src/Shaders/Greyscale.gdshader")
+			Global.shader_vision.visible = true
+
+	Global.shader_vision.material = mat
 
 
 func _dockers_submenu_id_pressed(id: int) -> void:
