@@ -4,7 +4,6 @@ enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
 enum ThemeTypes { DARK, BLUE, CARAMEL, LIGHT }
 enum TileMode { NONE, BOTH, X_AXIS, Y_AXIS }
-enum ViewMode { NORMAL, GREY_SCALE }
 enum IconColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
@@ -83,6 +82,7 @@ var left_square_indicator_visible := true
 var right_square_indicator_visible := false
 
 # View menu options
+var greyscale_view := false
 var mirror_view := false
 var draw_grid := false
 var draw_pixel_grid := false
@@ -122,7 +122,7 @@ onready var cameras := [camera, camera2, camera_preview]
 onready var horizontal_ruler: BaseButton = control.find_node("HorizontalRuler")
 onready var vertical_ruler: BaseButton = control.find_node("VerticalRuler")
 onready var transparent_checker: ColorRect = control.find_node("TransparentChecker")
-onready var shader_vision: ColorRect = control.find_node("ShaderVision")
+onready var greyscale_vision: ColorRect = control.find_node("GreyscaleVision")
 onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider")
 
 onready var tool_panel: ScrollContainer = control.find_node("Tools")
