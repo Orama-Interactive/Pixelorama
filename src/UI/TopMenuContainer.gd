@@ -4,8 +4,8 @@ enum FileMenuId { NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS
 enum EditMenuId { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
 enum ViewMenuId {
 	TILE_MODE,
-	VIEW_MODE,
 	WINDOW_OPACITY,
+	GREYSCALE_VIEW,
 	MIRROR_VIEW,
 	SHOW_GRID,
 	SHOW_PIXEL_GRID,
@@ -146,8 +146,8 @@ func _setup_edit_menu() -> void:
 func _setup_view_menu() -> void:
 	var view_menu_items := {  # order as in ViewMenuId enum
 		"Tile Mode": 0,
-		"View Mode": 0,
 		"Window Opacity": 0,
+		"Greyscale View": 0,
 		"Mirror View": InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid": InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Pixel Grid":
@@ -167,8 +167,6 @@ func _setup_view_menu() -> void:
 	for item in view_menu_items.keys():
 		if item == "Tile Mode":
 			_setup_tile_mode_submenu(item)
-		elif item == "View Mode":
-			_setup_view_mode_submenu(item)
 		elif item == "Dockers":
 			_setup_dockers_submenu(item)
 		elif item == "Layouts":
@@ -431,6 +429,8 @@ func view_menu_id_pressed(id: int) -> void:
 		ViewMenuId.WINDOW_OPACITY:
 			window_opacity_dialog.popup_centered()
 			Global.dialog_open(true)
+		ViewMenuId.GREYSCALE_VIEW:
+			_toggle_greyscale_view()
 		ViewMenuId.MIRROR_VIEW:
 			_toggle_mirror_view()
 		ViewMenuId.SHOW_GRID:
@@ -461,21 +461,6 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.canvas.grid.update()
 
 
-func _view_mode_submenu_id_pressed(id: int) -> void:
-	for i in Global.ViewMode.values():
-		view_mode_submenu.set_item_checked(i, i == id)
-
-	var mat := ShaderMaterial.new()
-	Global.shader_vision.visible = true
-	match id:
-		Global.ViewMode.NORMAL:
-			Global.shader_vision.visible = false
-		Global.ViewMode.GREY_SCALE:
-			mat.shader = preload("res://src/Shaders/Greyscale.gdshader")
-
-	Global.shader_vision.material = mat
-
-
 func _dockers_submenu_id_pressed(id: int) -> void:
 	if zen_mode:
 		return
@@ -504,6 +489,12 @@ func set_layout(id: int) -> void:
 	Global.control.find_node("TabsContainer").visible = true
 	zen_mode = false
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, false)
+
+
+func _toggle_greyscale_view() -> void:
+	Global.greyscale_view = !Global.greyscale_view
+	Global.greyscale_vision.visible = Global.greyscale_view
+	view_menu.set_item_checked(ViewMenuId.GREYSCALE_VIEW, Global.mirror_view)
 
 
 func _toggle_mirror_view() -> void:

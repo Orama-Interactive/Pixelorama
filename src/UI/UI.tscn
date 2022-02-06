@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://src/UI/Tools.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/Canvas/Rulers/HorizontalRuler.gd" type="Script" id=6]
 [ext_resource path="res://src/UI/Canvas/CameraMovement.gd" type="Script" id=7]
+[ext_resource path="res://src/Shaders/Greyscale.gdshader" type="Shader" id=8]
 [ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=9]
 [ext_resource path="res://addons/dockable_container/layout.gd" type="Script" id=14]
 [ext_resource path="res://src/UI/CanvasPreviewContainer.tscn" type="PackedScene" id=16]
@@ -151,6 +152,9 @@ shader_param/rect_size = Vector2( 0, 0 )
 shader_param/follow_movement = false
 shader_param/follow_scale = false
 
+[sub_resource type="ShaderMaterial" id=27]
+shader = ExtResource( 8 )
+
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 9 )
 shader_param/size = 10.0
@@ -279,7 +283,8 @@ script = ExtResource( 7 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 
-[node name="ShaderVision" type="ColorRect" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport/CanvasLayer"]
+[node name="GreyscaleVision" type="ColorRect" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport/CanvasLayer"]
+material = SubResource( 27 )
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
