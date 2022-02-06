@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Sinhala\n"
 "Language: si_LK\n"
-"PO-Revision-Date: 2022-02-02 16:15\n"
+"PO-Revision-Date: 2022-02-06 23:30\n"
 
 msgid "OK"
 msgstr "හරි"
@@ -181,6 +181,15 @@ msgid "Window Opacity"
 msgstr ""
 
 msgid "Panel Layout"
+msgstr ""
+
+msgid "Panels"
+msgstr ""
+
+msgid "Layouts"
+msgstr ""
+
+msgid "Manage Layouts"
 msgstr ""
 
 msgid "Auto"
