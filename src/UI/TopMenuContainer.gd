@@ -481,7 +481,7 @@ func set_layout(id: int) -> void:
 func _toggle_greyscale_view() -> void:
 	Global.greyscale_view = !Global.greyscale_view
 	Global.greyscale_vision.visible = Global.greyscale_view
-	view_menu.set_item_checked(ViewMenuId.GREYSCALE_VIEW, Global.mirror_view)
+	view_menu.set_item_checked(ViewMenuId.GREYSCALE_VIEW, Global.greyscale_view)
 
 
 func _toggle_mirror_view() -> void:
