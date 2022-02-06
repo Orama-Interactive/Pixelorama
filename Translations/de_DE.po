@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-02-02 19:11\n"
+"PO-Revision-Date: 2022-02-06 23:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -182,6 +182,15 @@ msgstr "Fenstertransparenz"
 
 msgid "Panel Layout"
 msgstr "Panel-Layout"
+
+msgid "Panels"
+msgstr ""
+
+msgid "Layouts"
+msgstr ""
+
+msgid "Manage Layouts"
+msgstr ""
 
 msgid "Auto"
 msgstr "Auto"
