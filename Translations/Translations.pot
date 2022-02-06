@@ -172,6 +172,15 @@ msgstr ""
 msgid "Panel Layout"
 msgstr ""
 
+msgid "Panels"
+msgstr ""
+
+msgid "Layouts"
+msgstr ""
+
+msgid "Manage Layouts"
+msgstr ""
+
 msgid "Auto"
 msgstr ""
 
