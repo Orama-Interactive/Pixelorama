@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-02-02 16:15\n"
+"PO-Revision-Date: 2022-02-06 23:30\n"
 
 msgid "OK"
 msgstr "예"
@@ -182,6 +182,15 @@ msgstr "창 불투명도"
 
 msgid "Panel Layout"
 msgstr "파넬 배치"
+
+msgid "Panels"
+msgstr ""
+
+msgid "Layouts"
+msgstr ""
+
+msgid "Manage Layouts"
+msgstr ""
 
 msgid "Auto"
 msgstr "자동"
