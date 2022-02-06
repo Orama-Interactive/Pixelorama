@@ -61,7 +61,6 @@ onready var help_menu_button: MenuButton = find_node("HelpMenu")
 onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("CreateNewImage")
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
 onready var tile_mode_submenu := PopupMenu.new()
-onready var view_mode_submenu := PopupMenu.new()
 onready var dockers_submenu := PopupMenu.new()
 onready var layouts_submenu := PopupMenu.new()
 onready var recent_projects_submenu := PopupMenu.new()
@@ -199,18 +198,6 @@ func _setup_tile_mode_submenu(item: String) -> void:
 	tile_mode_submenu.connect("id_pressed", self, "_tile_mode_submenu_id_pressed")
 	view_menu.add_child(tile_mode_submenu)
 	view_menu.add_submenu_item(item, tile_mode_submenu.get_name())
-
-
-func _setup_view_mode_submenu(item: String) -> void:
-	view_mode_submenu.set_name("view_mode_submenu")
-	view_mode_submenu.add_radio_check_item("Normal (Default)", Global.ViewMode.NORMAL)
-	view_mode_submenu.set_item_checked(Global.ViewMode.NORMAL, true)
-	view_mode_submenu.add_radio_check_item("Greyscale", Global.ViewMode.GREY_SCALE)
-	view_mode_submenu.hide_on_checkable_item_selection = false
-
-	view_mode_submenu.connect("id_pressed", self, "_view_mode_submenu_id_pressed")
-	view_menu.add_child(view_mode_submenu)
-	view_menu.add_submenu_item(item, view_mode_submenu.get_name())
 
 
 func _setup_dockers_submenu(item: String) -> void:
