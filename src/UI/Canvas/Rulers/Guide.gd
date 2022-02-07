@@ -43,7 +43,7 @@ func _input(_event: InputEvent) -> void:
 	):
 		if (
 		!point_in_rectangle(Global.canvas.current_pixel, Vector2.ZERO, project.size)
-		or Global.move_guides_on_canvas # In case you want to proceed anyway
+		or Global.move_guides_on_canvas
 		):
 			has_focus = true
 			Global.has_focus = false
