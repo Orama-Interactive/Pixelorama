@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-02-06 23:31\n"
+"PO-Revision-Date: 2022-02-07 07:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -184,13 +184,13 @@ msgid "Panel Layout"
 msgstr "パネルのレイアウト"
 
 msgid "Panels"
-msgstr ""
+msgstr "パネル"
 
 msgid "Layouts"
-msgstr ""
+msgstr "レイアウト"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "レイアウト管理"
 
 msgid "Auto"
 msgstr "オート"
