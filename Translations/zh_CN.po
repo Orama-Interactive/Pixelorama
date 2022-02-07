@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-02-06 23:30\n"
+"PO-Revision-Date: 2022-02-07 13:05\n"
 
 msgid "OK"
 msgstr "确定"
@@ -184,13 +184,13 @@ msgid "Panel Layout"
 msgstr "面板布局"
 
 msgid "Panels"
-msgstr ""
+msgstr "面板"
 
 msgid "Layouts"
-msgstr ""
+msgstr "布局"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "管理布局"
 
 msgid "Auto"
 msgstr "自动"
