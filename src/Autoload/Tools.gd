@@ -99,6 +99,11 @@ func set_tool(name: String, button: int) -> void:
 	var slot = _slots[button]
 	var panel: Node = _panels[button]
 	var node: Node = _tools[name].instance()
+	if button == BUTTON_LEFT: # As guides are only moved with left mouse
+		if name == "Pan": # tool you want to give more access at guides
+			Global.move_guides_on_canvas = true
+		else:
+			Global.move_guides_on_canvas = false
 	node.name = name
 	node.tool_slot = slot
 	slot.tool_node = node
