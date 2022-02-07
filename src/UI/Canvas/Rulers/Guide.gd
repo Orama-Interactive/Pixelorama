@@ -41,7 +41,10 @@ func _input(_event: InputEvent) -> void:
 		and point_in_rectangle(mouse_pos, point0, point1)
 		and Input.is_action_just_pressed("left_mouse")
 	):
-		if !point_in_rectangle(Global.canvas.current_pixel, Vector2.ZERO, project.size):
+		if (
+		!point_in_rectangle(Global.canvas.current_pixel, Vector2.ZERO, project.size)
+		or Global.move_guides_on_canvas # In case you want to proceed anyway
+		):
 			has_focus = true
 			Global.has_focus = false
 			update()
