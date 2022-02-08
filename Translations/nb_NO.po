@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-02-06 23:31\n"
+"PO-Revision-Date: 2022-02-08 12:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -178,19 +178,19 @@ msgid "Tile Mode"
 msgstr "Flismodus"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Gjennomsiktighet på vindu"
 
 msgid "Panel Layout"
 msgstr "Paneloppsett"
 
 msgid "Panels"
-msgstr ""
+msgstr "Paneler"
 
 msgid "Layouts"
-msgstr ""
+msgstr "Oppsett"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Gjør om på oppstett"
 
 msgid "Auto"
 msgstr "Automatisk"
@@ -1126,13 +1126,13 @@ msgid "Set application FPS limit:"
 msgstr "Sett prorgammets grense for Bilder Per Sekund, BPS:"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Sett programmet på pause når det mister fokus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Setter grensen for hvor mange bilder per sekund programmet kan ha. Lavere tall bruker mindre prosessorkraft, men programmet går saktere, mer hakkete og kan slutte å svare. 0 betyr at det ikke er noen grense."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr ""
+msgstr "Hvis denne er påslått og programmet mister fokus vil programmet settes på pause. Dette gjør så programmet bruker mindre prosessorkraft ved inaktivitet. Programmet vil gå tilbake til normalt når musen går inn i programmets vindu."
 
 msgid "Brush:"
 msgstr "Børste:"
@@ -1359,19 +1359,19 @@ msgid "Blue-Red Mode"
 msgstr "Blå-Rød-Modus"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "Vis tidligere bilder:"
 
 msgid "Show future frames:"
-msgstr ""
+msgstr "Vis fremtidige bilder:"
 
 msgid "Above canvas"
-msgstr ""
+msgstr "Over lerretet"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "Under lerretet"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Hvis du ønsker at et lag skal ignorere \"Onion Skinning\" legger du bare til \"_io\" på slutten av lagets navn."
 
 msgid "Add a new frame"
 msgstr "Legg til nytt bilde"
@@ -1469,10 +1469,10 @@ msgid "Redo: Draw"
 msgstr "Gjør om: Tegne"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Angre: Markér"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Gjør om: Markér"
 
 msgid "Undo: Scale"
 msgstr "Angre: Skalér"
@@ -1766,7 +1766,7 @@ msgid "Opens last opened project on startup"
 msgstr "Åpne sist åpnede prosjekt ved oppstart"
 
 msgid "Quit confirmation"
-msgstr ""
+msgstr "Avslutningsbekreftelse"
 
 msgid "Enable autosave"
 msgstr "Aktivér automatisk lagring"
@@ -1825,7 +1825,7 @@ msgid "Frame duration"
 msgstr "Bildevarighet"
 
 msgid "Duration"
-msgstr ""
+msgstr "Varighet"
 
 msgid "Tiled In Both Axis"
 msgstr "Flislagt i begge Akser"
