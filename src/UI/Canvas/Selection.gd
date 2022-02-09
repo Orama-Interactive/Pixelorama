@@ -192,7 +192,14 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 			var input := Vector2()
 			input.x = int(event.is_action("ui_right")) - int(event.is_action("ui_left"))
 			input.y = int(event.is_action("ui_down")) - int(event.is_action("ui_up"))
-			move_content(input.rotated(stepify(Global.camera.rotation, PI / 2)) * step)
+			var move := input.rotated(stepify(Global.camera.rotation, PI / 2))
+			# These checks are needed to fix a bug where the selection boundaries
+			# got stuck to the canvas boundaries when they were 1px away from them
+			if is_equal_approx(abs(move.x), 0):
+				move.x = 0
+			if is_equal_approx(abs(move.y), 0):
+				move.y = 0
+			move_content(move * step)
 
 
 # Check if an event is a ui_up/down/left/right event-press
