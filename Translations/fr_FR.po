@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-02-06 23:30\n"
+"PO-Revision-Date: 2022-02-10 20:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -454,6 +454,9 @@ msgstr "Sauvegarde"
 
 msgid "Performance"
 msgstr "Performance"
+
+msgid "Cursors"
+msgstr ""
 
 msgid "Indicators"
 msgstr "Indicateurs"
@@ -988,6 +991,12 @@ msgstr "Afficher l'icône de l'outil de droite"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Affiche une icône de l'outil de droite sélectionné à côté du curseur sur le canevas"
+
+msgid "Use native mouse cursors"
+msgstr ""
+
+msgid "Use cross cursor for the canvas"
+msgstr ""
 
 msgid "Guides"
 msgstr "Guides"
