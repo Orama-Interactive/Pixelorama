@@ -123,7 +123,7 @@ func delete_frames(frames := []) -> void:
 	var new_frames: Array = Global.current_project.frames.duplicate()
 	var current_frame := Global.current_project.current_frame
 	var new_layers: Array = Global.current_project.duplicate_layers()
-	var frame_correction := 0  # Needed for tag adjustment
+	var frame_correction := 0  # Only needed for tag adjustment
 
 	var new_animation_tags := Global.current_project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
@@ -144,27 +144,29 @@ func delete_frames(frames := []) -> void:
 		if current_frame > 0 && current_frame == new_frames.size():  # If it's the last frame
 			current_frame -= 1
 
+		# Check if one of the cels of the frame is linked
+		# if they are, unlink them too
+		# this prevents removed cels being kept in linked memory
+		for layer in new_layers:
+			for linked in layer.linked_cels:
+				if linked == Global.current_project.frames[frame]:
+					layer.linked_cels.erase(linked)
+
 		# Loop through the tags to see if the frame is in one
-		frame -= frame_correction  # Erasing made frames indexes 1 step ahed than intended
-		for tag in new_animation_tags:
+		frame -= frame_correction  # Erasing made frames indexes 1 step ahed their intended tags
+		var tag_correction := 0  # needed when tag is erased
+		for tag_ind in new_animation_tags.size():
+			var tag = new_animation_tags[tag_ind - tag_correction]
 			if frame + 1 >= tag.from && frame + 1 <= tag.to:
 				if tag.from == tag.to:  # If we're deleting the only frame in the tag
 					new_animation_tags.erase(tag)
+					tag_correction += 1
 				else:
 					tag.to -= 1
 			elif frame + 1 < tag.from:
 				tag.from -= 1
 				tag.to -= 1
 		frame_correction += 1  # Compensation for the next batch
-
-		# Check if one of the cels of the frame is linked
-		# if they are, unlink them too
-		# this prevents removed cels being kept in linked memory
-
-		for layer in new_layers:
-			for linked in layer.linked_cels:
-				if linked == Global.current_project.frames[frame]:
-					layer.linked_cels.erase(linked)
 
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Remove Frame")
@@ -228,7 +230,6 @@ func copy_frames(frames := []) -> void:
 
 	for frm in frames.size():
 		var frame = frames[(frames.size() - 1) - frm]
-
 		var new_frame := Frame.new()
 		new_frames.insert(frames[-1] + 1, new_frame)
 
