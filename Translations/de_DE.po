@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-02-10 20:51\n"
+"PO-Revision-Date: 2022-02-10 23:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -455,7 +455,7 @@ msgid "Performance"
 msgstr "Leistung"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Mauszeiger"
 
 msgid "Indicators"
 msgstr "Indikatoren"
