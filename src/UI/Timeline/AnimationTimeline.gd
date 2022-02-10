@@ -137,7 +137,7 @@ func delete_frames(frames := []) -> void:
 		)
 
 	for frame in frames:
-		if new_frames.size() == 1: # If only 1 frame
+		if new_frames.size() == 1:  # If only 1 frame
 			break
 		var frame_to_delete: Frame = Global.current_project.frames[frame]
 		new_frames.erase(frame_to_delete)
@@ -227,7 +227,7 @@ func copy_frames(frames := []) -> void:
 		)
 
 	for frm in frames.size():
-		var frame = frames[(frames.size() -1) - frm]
+		var frame = frames[(frames.size() - 1) - frm]
 
 		var new_frame := Frame.new()
 		new_frames.insert(frames[-1] + 1, new_frame)
@@ -246,7 +246,6 @@ func copy_frames(frames := []) -> void:
 				new_layers[l_i].linked_cels.append(new_frame)
 				new_frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
 				new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
-
 
 		# Loop through the tags to see if the frame is in one
 		for tag in new_animation_tags:
