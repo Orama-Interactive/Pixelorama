@@ -145,8 +145,8 @@ func delete_frames(frames := []) -> void:
 			current_frame -= 1
 
 		# Loop through the tags to see if the frame is in one
+		frame -= frame_correction  # Erasing made frames indexes 1 step ahed than intended
 		for tag in new_animation_tags:
-			frame -= frame_correction  # Erasing made frames indexes 1 step ahed than intended
 			if frame + 1 >= tag.from && frame + 1 <= tag.to:
 				if tag.from == tag.to:  # If we're deleting the only frame in the tag
 					new_animation_tags.erase(tag)
