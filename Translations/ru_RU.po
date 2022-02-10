@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-02-10 20:51\n"
+"PO-Revision-Date: 2022-02-10 23:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -456,7 +456,7 @@ msgid "Performance"
 msgstr "Производительность"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Курсоры"
 
 msgid "Indicators"
 msgstr "Индикатор"
@@ -996,7 +996,7 @@ msgid "Use native mouse cursors"
 msgstr ""
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Использовать курсор перекрестия для холста"
 
 msgid "Guides"
 msgstr "Направляющие"
