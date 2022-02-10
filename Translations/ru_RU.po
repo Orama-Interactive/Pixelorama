@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-02-06 23:39\n"
+"PO-Revision-Date: 2022-02-10 20:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -454,6 +454,9 @@ msgstr "Резервная копия"
 
 msgid "Performance"
 msgstr "Производительность"
+
+msgid "Cursors"
+msgstr ""
 
 msgid "Indicators"
 msgstr "Индикатор"
@@ -988,6 +991,12 @@ msgstr "Показать правый значок инструмента"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Отображает значок выбранного правого инструмента рядом с курсором на холсте"
+
+msgid "Use native mouse cursors"
+msgstr ""
+
+msgid "Use cross cursor for the canvas"
+msgstr ""
 
 msgid "Guides"
 msgstr "Направляющие"
