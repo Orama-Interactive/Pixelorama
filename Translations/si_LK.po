@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Sinhala\n"
 "Language: si_LK\n"
-"PO-Revision-Date: 2022-02-06 23:30\n"
+"PO-Revision-Date: 2022-02-10 20:51\n"
 
 msgid "OK"
 msgstr "හරි"
@@ -452,6 +452,9 @@ msgid "Backup"
 msgstr "උපස්ථය"
 
 msgid "Performance"
+msgstr ""
+
+msgid "Cursors"
 msgstr ""
 
 msgid "Indicators"
@@ -938,6 +941,12 @@ msgid "Show right tool icon"
 msgstr ""
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
+msgstr ""
+
+msgid "Use native mouse cursors"
+msgstr ""
+
+msgid "Use cross cursor for the canvas"
 msgstr ""
 
 msgid "Guides"
