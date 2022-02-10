@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-02-07 13:05\n"
+"PO-Revision-Date: 2022-02-10 20:51\n"
 
 msgid "OK"
 msgstr "确定"
@@ -454,6 +454,9 @@ msgstr "备份"
 
 msgid "Performance"
 msgstr "性能"
+
+msgid "Cursors"
+msgstr ""
 
 msgid "Indicators"
 msgstr "指示"
@@ -988,6 +991,12 @@ msgstr "显示右侧工具图标"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "在画布上的光标旁边显示所选右侧工具的图标"
+
+msgid "Use native mouse cursors"
+msgstr ""
+
+msgid "Use cross cursor for the canvas"
+msgstr ""
 
 msgid "Guides"
 msgstr "参考线"
