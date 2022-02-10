@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-02-06 23:31\n"
+"PO-Revision-Date: 2022-02-10 20:51\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -454,6 +454,9 @@ msgstr "Αντίγραφο ασφαλείας"
 
 msgid "Performance"
 msgstr "Επίδοση"
+
+msgid "Cursors"
+msgstr ""
 
 msgid "Indicators"
 msgstr "Δείκτες"
@@ -988,6 +991,12 @@ msgstr "Εμφάνιση δεξιού εικονιδίου εργαλείου"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Εμφανίζει ένα εικονίδιο του επιλεγμένου δεξιού εργαλείου δίπλα στο κέρσορα στον καμβά"
+
+msgid "Use native mouse cursors"
+msgstr ""
+
+msgid "Use cross cursor for the canvas"
+msgstr ""
 
 msgid "Guides"
 msgstr "Οδηγοί"
