@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-02-10 20:51\n"
+"PO-Revision-Date: 2022-02-10 21:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -456,7 +456,7 @@ msgid "Performance"
 msgstr "Prestazioni"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Puntatori"
 
 msgid "Indicators"
 msgstr "Indicatori"
@@ -993,10 +993,10 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Visualizza un'icona dello strumento destro selezionato accanto al cursore sulla tela"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Usa puntatori nativi del mouse"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Usa il cursore incrociato per la superficie"
 
 msgid "Guides"
 msgstr "Guide"
