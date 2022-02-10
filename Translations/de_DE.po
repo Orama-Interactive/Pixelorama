@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-02-10 23:00\n"
+"PO-Revision-Date: 2022-02-10 23:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -992,10 +992,10 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Zeigt ein Symbol des ausgewählten rechten Werkzeugs neben dem Cursor auf dem Canvas an"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Native Mousezeiger verwenden"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Kreuz-Mauszeiger für den Canvas benutzen"
 
 msgid "Guides"
 msgstr "Guides"
