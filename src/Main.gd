@@ -19,7 +19,8 @@ func _ready() -> void:
 	if OS.get_name() == "OSX":
 		_use_osx_shortcuts()
 
-	Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
+	if !Global.native_cursors:
+		Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
 	Global.current_project.layers[0].name = tr("Layer") + " 0"

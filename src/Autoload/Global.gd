@@ -80,6 +80,8 @@ var show_left_tool_icon := true
 var show_right_tool_icon := true
 var left_square_indicator_visible := true
 var right_square_indicator_visible := false
+var native_cursors := false
+var cross_cursor := true
 
 # View menu options
 var mirror_view := false
