@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2022-02-06 23:30\n"
+"PO-Revision-Date: 2022-02-10 20:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -454,6 +454,9 @@ msgstr "Zálohování"
 
 msgid "Performance"
 msgstr "Výkon"
+
+msgid "Cursors"
+msgstr ""
 
 msgid "Indicators"
 msgstr "Indikátory"
@@ -987,6 +990,12 @@ msgstr "Zobrazit ikonu pravého nástroje"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Zobrazí ikonu vybraného pravého nástroje vedle kurzoru na plátně"
+
+msgid "Use native mouse cursors"
+msgstr ""
+
+msgid "Use cross cursor for the canvas"
+msgstr ""
 
 msgid "Guides"
 msgstr "Vodítka"
