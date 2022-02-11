@@ -22,6 +22,7 @@ var ui_tooltips := {}
 # Canvas related stuff
 var layers_changed_skip := false
 var can_draw := false
+var move_guides_on_canvas := false
 var has_focus := false
 
 var play_only_tags := true
