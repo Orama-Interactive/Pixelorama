@@ -77,10 +77,11 @@ func cel_size_changed(value: int) -> void:
 
 func add_frame() -> void:
 	var project: Project = Global.current_project
+	var frame_add_index := project.current_frame + 1
 	var frame: Frame = project.new_empty_frame()
 	var new_frames: Array = project.frames.duplicate()
 	var new_layers: Array = project.duplicate_layers()
-	new_frames.insert(project.current_frame + 1, frame)
+	new_frames.insert(frame_add_index, frame)
 
 	for l_i in range(new_layers.size()):
 		if new_layers[l_i].new_cels_linked:  # If the link button is pressed
@@ -101,7 +102,9 @@ func add_frame() -> void:
 		)
 	# Loop through the tags to see if the frame is in one
 	for tag in new_animation_tags:
-		if (project.current_frame + 1) < tag.from:
+		if frame_add_index >= tag.from && frame_add_index <= tag.to:
+				tag.to += 1
+		elif (frame_add_index) < tag.from:
 			tag.from += 1
 			tag.to += 1
 
@@ -321,7 +324,7 @@ func _on_MoveLeft_pressed() -> void:
 
 func _on_MoveRight_pressed() -> void:
 	var frame: int = Global.current_project.current_frame
-	if frame == last_frame:
+	if frame == Global.current_project.frames.size() - 1:  # using last_frame caused problems
 		return
 	Global.frame_ids.get_child(frame).change_frame_order(1)
 

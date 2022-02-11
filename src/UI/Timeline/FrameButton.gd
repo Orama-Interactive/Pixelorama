@@ -86,9 +86,59 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 func change_frame_order(rate: int) -> void:
 	var change = frame + rate
 	var new_frames: Array = Global.current_project.frames.duplicate()
-	var temp = new_frames[frame]
-	new_frames[frame] = new_frames[change]
-	new_frames[change] = temp
+	var should_change := true
+
+	# check if the frame moved is in the vicinity of a tag
+	var new_animation_tags = Global.current_project.animation_tags.duplicate()
+	# Loop through the tags to create new classes for them, so that they won't be the same
+	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
+	for i in new_animation_tags.size():
+		new_animation_tags[i] = AnimationTag.new(
+			new_animation_tags[i].name,
+			new_animation_tags[i].color,
+			new_animation_tags[i].from,
+			new_animation_tags[i].to
+		)
+	var corner_tags = []  # frame part of their boundary
+	var boundary_tags = []  # frame touching their boundary
+	for tag in new_animation_tags:
+		if change > frame:  # Moving ahead
+			if frame + 1 == tag.to:  # Last frame of tag
+				corner_tags.append(tag)
+			elif frame + 2 == tag.from:  # About to enter another tag
+				boundary_tags.append(tag)
+		if change < frame:  # Moving back
+			if frame + 1 == tag.from:  # Last frame of tag
+				corner_tags.append(tag)
+			elif frame == tag.to:  # About to enter another tag
+				boundary_tags.append(tag)
+	# Now we use the filtered tags we stored
+	if corner_tags.size() != 0:  # frame is just leaving the corners of a tag
+		should_change = false  # frames don't need to be changed now
+		for tag in corner_tags:
+			if change > frame:  # Protocol for Moving ahead
+				if tag.from == tag.to:
+					new_animation_tags.erase(tag)
+				else:
+					tag.to -= 1
+			if change < frame:  # Protocol for Moving behind
+				if tag.from == tag.to:
+					new_animation_tags.erase(tag)
+				else:
+					tag.from += 1
+	# frame is about to enter another tag and NOT just left another tag
+	elif corner_tags.size() == 0 and boundary_tags.size() != 0:
+		should_change = false  # frames don't need to be changed now
+		for tag in boundary_tags:
+			if change > frame:  # Protocol for Moving ahead
+				tag.from -= 1
+			if change < frame:  # Protocol for Moving behind
+				tag.to += 1
+
+	if should_change:
+		var temp = new_frames[frame]
+		new_frames[frame] = new_frames[change]
+		new_frames[change] = temp
 
 	Global.current_project.undo_redo.create_action("Change Frame Order")
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
@@ -96,7 +146,7 @@ func change_frame_order(rate: int) -> void:
 		Global.current_project, "frames", Global.current_project.frames
 	)
 
-	if Global.current_project.current_frame == frame:
+	if Global.current_project.current_frame == frame and should_change:
 		Global.current_project.undo_redo.add_do_property(
 			Global.current_project, "current_frame", change
 		)
@@ -104,6 +154,13 @@ func change_frame_order(rate: int) -> void:
 		Global.current_project.undo_redo.add_do_property(
 			Global.current_project, "current_frame", Global.current_project.current_frame
 		)
+
+	Global.current_project.undo_redo.add_do_property(
+		Global.current_project, "animation_tags", new_animation_tags
+	)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.current_project, "animation_tags", Global.current_project.animation_tags
+	)
 
 	Global.current_project.undo_redo.add_undo_property(
 		Global.current_project, "current_frame", Global.current_project.current_frame
