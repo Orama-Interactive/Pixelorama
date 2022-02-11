@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-02-10 20:51\n"
+"PO-Revision-Date: 2022-02-11 08:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -456,7 +456,7 @@ msgid "Performance"
 msgstr "Performanță"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Cursoare"
 
 msgid "Indicators"
 msgstr "Indicatori"
@@ -993,7 +993,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Afișează o pictogramă a instrumentului selectat din dreapta de lângă cursorul de pe pânză"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Folosește cursoarele native ale mausului"
 
 msgid "Use cross cursor for the canvas"
 msgstr ""
