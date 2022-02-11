@@ -103,7 +103,7 @@ func add_frame() -> void:
 	# Loop through the tags to see if the frame is in one
 	for tag in new_animation_tags:
 		if frame_add_index >= tag.from && frame_add_index <= tag.to:
-				tag.to += 1
+			tag.to += 1
 		elif (frame_add_index) < tag.from:
 			tag.from += 1
 			tag.to += 1
