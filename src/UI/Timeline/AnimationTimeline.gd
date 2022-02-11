@@ -12,18 +12,14 @@ var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
 
-var timeline_scroll: ScrollContainer
-var tag_scroll_container: ScrollContainer
-var fps_spinbox: SpinBox
-
+onready var timeline_scroll: ScrollContainer = find_node("TimelineScroll")
+onready var tag_scroll_container: ScrollContainer = find_node("TagScroll")
+onready var fps_spinbox: SpinBox = find_node("FPSValue")
 onready var onion_skinning_button: BaseButton = find_node("OnionSkinning")
 onready var loop_animation_button: BaseButton = find_node("LoopAnim")
 
 
 func _ready() -> void:
-	timeline_scroll = find_node("TimelineScroll")
-	tag_scroll_container = find_node("TagScroll")
-	fps_spinbox = find_node("FPSValue")
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps

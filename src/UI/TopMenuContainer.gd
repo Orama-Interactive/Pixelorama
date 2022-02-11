@@ -6,13 +6,13 @@ enum ViewMenuId {
 	TILE_MODE,
 	WINDOW_OPACITY,
 	GREYSCALE_VIEW,
+	PANELS,
+	LAYOUTS,
 	MIRROR_VIEW,
 	SHOW_GRID,
 	SHOW_PIXEL_GRID,
 	SHOW_RULERS,
 	SHOW_GUIDES,
-	DOCKERS,
-	LAYOUTS,
 	EDIT_MODE,
 	ZEN_MODE,
 	FULLSCREEN_MODE
@@ -61,7 +61,7 @@ onready var help_menu_button: MenuButton = find_node("HelpMenu")
 onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("CreateNewImage")
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
 onready var tile_mode_submenu := PopupMenu.new()
-onready var dockers_submenu := PopupMenu.new()
+onready var panels_submenu := PopupMenu.new()
 onready var layouts_submenu := PopupMenu.new()
 onready var recent_projects_submenu := PopupMenu.new()
 
@@ -147,14 +147,14 @@ func _setup_view_menu() -> void:
 		"Tile Mode": 0,
 		"Window Opacity": 0,
 		"Greyscale View": 0,
+		"Panels": 0,
+		"Layouts": 0,
 		"Mirror View": InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid": InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Pixel Grid":
 		InputMap.get_action_list("show_pixel_grid")[0].get_scancode_with_modifiers(),
 		"Show Rulers": InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
 		"Show Guides": InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
-		"Dockers": 0,
-		"Layouts": 0,
 		"Edit Mode": InputMap.get_action_list("edit_mode")[0].get_scancode_with_modifiers(),
 		"Zen Mode": InputMap.get_action_list("zen_mode")[0].get_scancode_with_modifiers(),
 		"Fullscreen Mode":
@@ -166,8 +166,8 @@ func _setup_view_menu() -> void:
 	for item in view_menu_items.keys():
 		if item == "Tile Mode":
 			_setup_tile_mode_submenu(item)
-		elif item == "Dockers":
-			_setup_dockers_submenu(item)
+		elif item == "Panels":
+			_setup_panels_submenu(item)
 		elif item == "Layouts":
 			_setup_layouts_submenu(item)
 		elif item == "Window Opacity":
@@ -200,16 +200,16 @@ func _setup_tile_mode_submenu(item: String) -> void:
 	view_menu.add_submenu_item(item, tile_mode_submenu.get_name())
 
 
-func _setup_dockers_submenu(item: String) -> void:
-	dockers_submenu.set_name("dockers_submenu")
-	dockers_submenu.hide_on_checkable_item_selection = false
+func _setup_panels_submenu(item: String) -> void:
+	panels_submenu.set_name("panels_submenu")
+	panels_submenu.hide_on_checkable_item_selection = false
 	for element in ui_elements:
-		dockers_submenu.add_check_item(element.name)
-		dockers_submenu.set_item_checked(ui_elements.find(element), true)
+		panels_submenu.add_check_item(element.name)
+		panels_submenu.set_item_checked(ui_elements.find(element), true)
 
-	dockers_submenu.connect("id_pressed", self, "_dockers_submenu_id_pressed")
-	view_menu.add_child(dockers_submenu)
-	view_menu.add_submenu_item(item, dockers_submenu.get_name())
+	panels_submenu.connect("id_pressed", self, "_panels_submenu_id_pressed")
+	view_menu.add_child(panels_submenu)
+	view_menu.add_submenu_item(item, panels_submenu.get_name())
 
 
 func _setup_layouts_submenu(item: String) -> void:
@@ -448,12 +448,12 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.canvas.grid.update()
 
 
-func _dockers_submenu_id_pressed(id: int) -> void:
+func _panels_submenu_id_pressed(id: int) -> void:
 	if zen_mode:
 		return
-	var element_visible = dockers_submenu.is_item_checked(id)
+	var element_visible = panels_submenu.is_item_checked(id)
 	Global.control.ui.set_control_hidden(ui_elements[id], element_visible)
-	dockers_submenu.set_item_checked(id, !element_visible)
+	panels_submenu.set_item_checked(id, !element_visible)
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:
@@ -471,7 +471,7 @@ func set_layout(id: int) -> void:
 		layouts_submenu.set_item_checked(i, i == id)
 
 	for i in ui_elements.size():
-		dockers_submenu.set_item_checked(i, true)
+		panels_submenu.set_item_checked(i, true)
 
 	Global.control.find_node("TabsContainer").visible = true
 	zen_mode = false
