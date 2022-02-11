@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-02-10 20:51\n"
+"PO-Revision-Date: 2022-02-11 00:31\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -456,7 +456,7 @@ msgid "Performance"
 msgstr "Продуктивність"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Курсори"
 
 msgid "Indicators"
 msgstr "Індикатори"
@@ -993,10 +993,10 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Показує значок вибраного правого інструмента поруч з курсором на полотні"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Використовувати системні курсори миші"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Використовувати перехресний курсор на полотні"
 
 msgid "Guides"
 msgstr "Напрямні лінії"
