@@ -22,6 +22,7 @@ var ui_tooltips := {}
 # Canvas related stuff
 var layers_changed_skip := false
 var can_draw := false
+var move_guides_on_canvas := false
 var has_focus := false
 
 var play_only_tags := true
@@ -80,6 +81,8 @@ var show_left_tool_icon := true
 var show_right_tool_icon := true
 var left_square_indicator_visible := true
 var right_square_indicator_visible := false
+var native_cursors := false
+var cross_cursor := true
 
 # View menu options
 var mirror_view := false
