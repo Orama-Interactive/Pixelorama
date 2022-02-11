@@ -88,6 +88,23 @@ func add_frame() -> void:
 			frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
 			frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
 
+	# Code to PUSH AHEAD tags starting after the frame
+	var new_animation_tags := Global.current_project.animation_tags.duplicate()
+	# Loop through the tags to create new classes for them, so that they won't be the same
+	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
+	for i in new_animation_tags.size():
+		new_animation_tags[i] = AnimationTag.new(
+			new_animation_tags[i].name,
+			new_animation_tags[i].color,
+			new_animation_tags[i].from,
+			new_animation_tags[i].to
+		)
+	# Loop through the tags to see if the frame is in one
+	for tag in new_animation_tags:
+		if (project.current_frame + 1) < tag.from:
+			tag.from += 1
+			tag.to += 1
+
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
@@ -95,10 +112,16 @@ func add_frame() -> void:
 
 	project.undo_redo.add_do_property(project, "frames", new_frames)
 	project.undo_redo.add_do_property(project, "current_frame", project.current_frame + 1)
+	Global.current_project.undo_redo.add_do_property(
+		Global.current_project, "animation_tags", new_animation_tags
+	)
 	project.undo_redo.add_do_property(project, "layers", new_layers)
 
 	project.undo_redo.add_undo_property(project, "frames", project.frames)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.current_project, "animation_tags", Global.current_project.animation_tags
+	)
 	project.undo_redo.add_undo_property(project, "layers", project.layers)
 	project.undo_redo.commit_action()
 
@@ -153,7 +176,7 @@ func delete_frames(frames := []) -> void:
 					layer.linked_cels.erase(linked)
 
 		# Loop through the tags to see if the frame is in one
-		frame -= frame_correction  # Erasing made frames indexes 1 step ahed their intended tags
+		frame -= frame_correction  # Erasing made frames indexes 1 step ahead their intended tags
 		var tag_correction := 0  # needed when tag is erased
 		for tag_ind in new_animation_tags.size():
 			var tag = new_animation_tags[tag_ind - tag_correction]
@@ -251,6 +274,9 @@ func copy_frames(frames := []) -> void:
 		# Loop through the tags to see if the frame is in one
 		for tag in new_animation_tags:
 			if frames[-1] + 1 >= tag.from && frames[-1] + 1 <= tag.to:
+				tag.to += 1
+			elif frames[-1] + 1 < tag.from:
+				tag.from += 1
 				tag.to += 1
 
 	Global.current_project.undos += 1
