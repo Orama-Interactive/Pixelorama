@@ -176,7 +176,8 @@ func fill_in_color(position: Vector2) -> void:
 			"pattern": pattern_tex,
 			"pattern_size": pattern_tex.get_size(),
 			# pixel offset converted to pattern uv offset
-			"pattern_uv_offset": Vector2.ONE / pattern_tex.get_size() * Vector2(_offset_x, _offset_y),
+			"pattern_uv_offset":
+			Vector2.ONE / pattern_tex.get_size() * Vector2(_offset_x, _offset_y),
 			"has_pattern": true if _fill_with == 1 else false
 		}
 		var gen := ShaderImageEffect.new()
