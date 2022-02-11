@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-02-11 08:14\n"
+"PO-Revision-Date: 2022-02-11 08:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -996,7 +996,7 @@ msgid "Use native mouse cursors"
 msgstr "Folosește cursoarele native ale mausului"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Folosește cursorul încrucișat pentru pânză"
 
 msgid "Guides"
 msgstr "Ghidaje"
