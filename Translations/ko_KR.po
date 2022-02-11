@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-02-10 20:51\n"
+"PO-Revision-Date: 2022-02-11 00:11\n"
 
 msgid "OK"
 msgstr "예"
@@ -456,7 +456,7 @@ msgid "Performance"
 msgstr "성능"
 
 msgid "Cursors"
-msgstr ""
+msgstr "마우스 커서"
 
 msgid "Indicators"
 msgstr "표기 아이콘"
@@ -992,10 +992,10 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "커서 옆에 선택된 오른쪽 툴의 아이콘을 캔버스에 표시하기"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "기본 마우스 커서 사용"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "십자 마우스 커서 사용"
 
 msgid "Guides"
 msgstr "안내선"
