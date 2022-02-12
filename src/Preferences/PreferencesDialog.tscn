@@ -1443,29 +1443,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Indicators" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+[node name="Cursors" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
-margin_top = 54.0
-margin_right = 498.0
-margin_bottom = 180.0
+margin_top = 56.0
+margin_right = 525.0
+margin_bottom = 164.0
 
-[node name="IndicatorsContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Indicators"]
-margin_top = 18.0
-margin_right = 498.0
-margin_bottom = 126.0
+[node name="CursorsContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors"]
+margin_right = 525.0
+margin_bottom = 108.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
-[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Indicators/IndicatorsContainer"]
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsContainer"]
 margin_top = 5.0
-margin_right = 127.0
+margin_right = 126.0
 margin_bottom = 19.0
 text = "Left pixel indicator"
 
-[node name="LeftIndicatorCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Indicators/IndicatorsContainer"]
-margin_left = 131.0
-margin_right = 498.0
+[node name="LeftIndicatorCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsContainer"]
+margin_left = 130.0
+margin_right = 354.0
 margin_bottom = 24.0
 hint_tooltip = "Show left mouse pixel indicator or brush on the canvas when drawing"
 mouse_default_cursor_shape = 2
@@ -1473,53 +1472,84 @@ size_flags_horizontal = 3
 pressed = true
 text = "On"
 
-[node name="Label2" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Indicators/IndicatorsContainer"]
-margin_top = 33.0
-margin_right = 127.0
-margin_bottom = 47.0
+[node name="Label2" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsContainer"]
+margin_left = 358.0
+margin_top = 5.0
+margin_right = 525.0
+margin_bottom = 19.0
 text = "Right pixel indicator"
 
-[node name="RightIndicatorCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Indicators/IndicatorsContainer"]
-margin_left = 131.0
+[node name="RightIndicatorCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsContainer"]
 margin_top = 28.0
-margin_right = 498.0
+margin_right = 126.0
 margin_bottom = 52.0
 hint_tooltip = "Show right mouse pixel indicator or brush on the canvas when drawing"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "On"
 
-[node name="Label3" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Indicators/IndicatorsContainer"]
-margin_top = 61.0
-margin_right = 127.0
-margin_bottom = 75.0
+[node name="Label3" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsContainer"]
+margin_left = 130.0
+margin_top = 33.0
+margin_right = 354.0
+margin_bottom = 47.0
 text = "Show left tool icon"
 
-[node name="LeftToolIconCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Indicators/IndicatorsContainer"]
-margin_left = 131.0
-margin_top = 56.0
-margin_right = 498.0
-margin_bottom = 80.0
+[node name="LeftToolIconCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsContainer"]
+margin_left = 358.0
+margin_top = 28.0
+margin_right = 525.0
+margin_bottom = 52.0
 hint_tooltip = "Displays an icon of the selected left tool next to the cursor on the canvas"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 pressed = true
 text = "On"
 
-[node name="Label4" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Indicators/IndicatorsContainer"]
-margin_top = 89.0
-margin_right = 127.0
-margin_bottom = 103.0
+[node name="Label4" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsContainer"]
+margin_top = 61.0
+margin_right = 126.0
+margin_bottom = 75.0
 text = "Show right tool icon"
 
-[node name="RightToolIconCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Indicators/IndicatorsContainer"]
-margin_left = 131.0
-margin_top = 84.0
-margin_right = 498.0
-margin_bottom = 108.0
+[node name="RightToolIconCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsContainer"]
+margin_left = 130.0
+margin_top = 56.0
+margin_right = 354.0
+margin_bottom = 80.0
 hint_tooltip = "Displays an icon of the selected right tool next to the cursor on the canvas"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
+pressed = true
+text = "On"
+
+[node name="Label5" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsContainer"]
+margin_left = 358.0
+margin_top = 61.0
+margin_right = 525.0
+margin_bottom = 75.0
+text = "Use native mouse cursors"
+
+[node name="NativeCursorsCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsContainer"]
+margin_top = 84.0
+margin_right = 126.0
+margin_bottom = 108.0
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="Label6" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsContainer"]
+margin_left = 130.0
+margin_top = 89.0
+margin_right = 354.0
+margin_bottom = 103.0
+text = "Use cross cursor for the canvas"
+
+[node name="CrossCursorCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsContainer"]
+margin_left = 358.0
+margin_top = 84.0
+margin_right = 525.0
+margin_bottom = 108.0
+mouse_default_cursor_shape = 2
 pressed = true
 text = "On"
 

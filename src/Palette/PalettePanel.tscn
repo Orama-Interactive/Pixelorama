@@ -9,8 +9,8 @@
 [ext_resource path="res://src/Palette/PalettePanel.gd" type="Script" id=8]
 
 [node name="PalettePanel" type="PanelContainer"]
-margin_right = 300.0
-margin_bottom = 319.0
+margin_right = 318.0
+margin_bottom = 118.0
 rect_min_size = Vector2( 318, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -23,7 +23,7 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 311.0
-margin_bottom = 312.0
+margin_bottom = 111.0
 size_flags_horizontal = 3
 
 [node name="PalettesLabel" type="Label" parent="PaletteVBoxContainer"]

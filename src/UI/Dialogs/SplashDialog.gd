@@ -36,12 +36,6 @@ func _on_SplashDialog_about_to_show() -> void:
 	chosen_artwork = randi() % artworks.size()
 	change_artwork(0)
 
-	get_stylebox("panel", "WindowDialog").bg_color = Global.control.theme.get_stylebox(
-		"panel", "WindowDialog"
-	).bg_color
-	get_stylebox("panel", "WindowDialog").border_color = Global.control.theme.get_stylebox(
-		"panel", "WindowDialog"
-	).border_color
 	if OS.get_name() == "HTML5":
 		$Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn.visible = false
 

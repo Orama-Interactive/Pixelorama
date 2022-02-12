@@ -1,41 +1,144 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=42 format=2]
 
-[ext_resource path="res://src/UI/ToolButtons.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Tools.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/Tabs.gd" type="Script" id=3]
 [ext_resource path="res://src/UI/Canvas/Rulers/VerticalRuler.gd" type="Script" id=4]
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/Canvas/Rulers/HorizontalRuler.gd" type="Script" id=6]
 [ext_resource path="res://src/UI/Canvas/CameraMovement.gd" type="Script" id=7]
-[ext_resource path="res://assets/graphics/tools/lasso.png" type="Texture" id=8]
+[ext_resource path="res://src/Shaders/Greyscale.gdshader" type="Shader" id=8]
 [ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=9]
-[ext_resource path="res://assets/graphics/tools/colorpicker.png" type="Texture" id=10]
-[ext_resource path="res://assets/graphics/tools/shading.png" type="Texture" id=11]
-[ext_resource path="res://assets/graphics/tools/linetool.png" type="Texture" id=12]
-[ext_resource path="res://assets/graphics/tools/rectangletool.png" type="Texture" id=13]
-[ext_resource path="res://assets/graphics/tools/ellipseselect.png" type="Texture" id=15]
+[ext_resource path="res://addons/dockable_container/layout.gd" type="Script" id=14]
 [ext_resource path="res://src/UI/CanvasPreviewContainer.tscn" type="PackedScene" id=16]
-[ext_resource path="res://src/UI/ColorAndToolOptions.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/UI/ColorPickers.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/UI/Canvas/Canvas.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Palette/PalettePanel.tscn" type="PackedScene" id=20]
-[ext_resource path="res://assets/graphics/tools/colorselect.png" type="Texture" id=21]
-[ext_resource path="res://assets/graphics/tools/pan.png" type="Texture" id=22]
 [ext_resource path="res://src/UI/ViewportContainer.gd" type="Script" id=23]
-[ext_resource path="res://assets/graphics/tools/pencil.png" type="Texture" id=24]
-[ext_resource path="res://assets/graphics/tools/bucket.png" type="Texture" id=25]
-[ext_resource path="res://assets/graphics/tools/ellipsetool.png" type="Texture" id=26]
-[ext_resource path="res://assets/graphics/tools/move.png" type="Texture" id=28]
-[ext_resource path="res://assets/graphics/tools/rectselect.png" type="Texture" id=29]
-[ext_resource path="res://assets/graphics/tools/polygonselect.png" type="Texture" id=30]
-[ext_resource path="res://assets/graphics/tools/zoom.png" type="Texture" id=31]
-[ext_resource path="res://assets/graphics/tools/eraser.png" type="Texture" id=32]
-[ext_resource path="res://assets/graphics/tools/magicwand.png" type="Texture" id=33]
-[ext_resource path="res://assets/graphics/tools/tool_background.png" type="Texture" id=34]
+[ext_resource path="res://addons/dockable_container/layout_split.gd" type="Script" id=27]
+[ext_resource path="res://addons/dockable_container/dockable_container.gd" type="Script" id=35]
+[ext_resource path="res://addons/dockable_container/layout_panel.gd" type="Script" id=36]
+[ext_resource path="res://src/UI/UI.gd" type="Script" id=37]
+[ext_resource path="res://src/Shaders/UITransparency.gdshader" type="Shader" id=38]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
-expand_margin_right = 20.0
+[sub_resource type="ShaderMaterial" id=26]
+shader = ExtResource( 38 )
+shader_param/alpha = 0.0
+shader_param/screen_resolution = Vector2( 1280, 720 )
+shader_param/position = Vector2( 100, 100 )
+shader_param/size = Vector2( 100, 100 )
+
+[sub_resource type="Resource" id=1]
+resource_name = "Tabs"
+script = ExtResource( 36 )
+names = PoolStringArray( "Tools" )
+current_tab = 0
+
+[sub_resource type="Resource" id=8]
+resource_name = "Tabs"
+script = ExtResource( 36 )
+names = PoolStringArray( "Main Canvas" )
+current_tab = 0
+
+[sub_resource type="Resource" id=9]
+resource_name = "Tabs"
+script = ExtResource( 36 )
+names = PoolStringArray( "Animation Timeline" )
+current_tab = 0
+
+[sub_resource type="Resource" id=10]
+resource_name = "Split"
+script = ExtResource( 27 )
+direction = 1
+percent = 0.90625
+first = SubResource( 8 )
+second = SubResource( 9 )
+
+[sub_resource type="Resource" id=11]
+resource_name = "Tabs"
+script = ExtResource( 36 )
+names = PoolStringArray( "Canvas Preview" )
+current_tab = 0
+
+[sub_resource type="Resource" id=20]
+resource_name = "Tabs"
+script = ExtResource( 36 )
+names = PoolStringArray( "Color Pickers" )
+current_tab = 0
+
+[sub_resource type="Resource" id=21]
+resource_name = "Split"
+script = ExtResource( 27 )
+direction = 1
+percent = 0.911765
+first = SubResource( 11 )
+second = SubResource( 20 )
+
+[sub_resource type="Resource" id=22]
+resource_name = "Tabs"
+script = ExtResource( 36 )
+names = PoolStringArray( "Left Tool Options" )
+current_tab = 0
+
+[sub_resource type="Resource" id=23]
+resource_name = "Tabs"
+script = ExtResource( 36 )
+names = PoolStringArray( "Right Tool Options" )
+current_tab = 0
+
+[sub_resource type="Resource" id=24]
+resource_name = "Split"
+script = ExtResource( 27 )
+direction = 0
+percent = 0.5
+first = SubResource( 22 )
+second = SubResource( 23 )
+
+[sub_resource type="Resource" id=13]
+resource_name = "Tabs"
+script = ExtResource( 36 )
+names = PoolStringArray( "Palette Panel" )
+current_tab = 0
+
+[sub_resource type="Resource" id=14]
+resource_name = "Split"
+script = ExtResource( 27 )
+direction = 1
+percent = 0.754808
+first = SubResource( 24 )
+second = SubResource( 13 )
+
+[sub_resource type="Resource" id=15]
+resource_name = "Split"
+script = ExtResource( 27 )
+direction = 1
+percent = 0.332031
+first = SubResource( 21 )
+second = SubResource( 14 )
+
+[sub_resource type="Resource" id=16]
+resource_name = "Split"
+script = ExtResource( 27 )
+direction = 0
+percent = 0.962785
+first = SubResource( 10 )
+second = SubResource( 15 )
+
+[sub_resource type="Resource" id=5]
+resource_name = "Split"
+script = ExtResource( 27 )
+direction = 0
+percent = 0.0
+first = SubResource( 1 )
+second = SubResource( 16 )
+
+[sub_resource type="Resource" id=25]
+resource_name = "Layout"
+script = ExtResource( 14 )
+root = SubResource( 5 )
+hidden_tabs = {
+}
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 9 )
@@ -49,6 +152,9 @@ shader_param/rect_size = Vector2( 0, 0 )
 shader_param/follow_movement = false
 shader_param/follow_scale = false
 
+[sub_resource type="ShaderMaterial" id=27]
+shader = ExtResource( 8 )
+
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 9 )
 shader_param/size = 10.0
@@ -61,1080 +167,61 @@ shader_param/rect_size = Vector2( 0, 0 )
 shader_param/follow_movement = false
 shader_param/follow_scale = false
 
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
-expand_margin_top = 6.0
-
-[node name="UI" type="HBoxContainer"]
-margin_top = 28.0
-margin_right = 1280.0
-margin_bottom = 720.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false,
-"_edit_vertical_guides_": [  ]
-}
-
-[node name="ToolsAndCanvas" type="HSplitContainer" parent="."]
-margin_right = 946.0
-margin_bottom = 692.0
-size_flags_horizontal = 3
-custom_constants/autohide = 0
-custom_constants/separation = 8
-
-[node name="ToolPanel" type="Panel" parent="ToolsAndCanvas"]
-margin_right = 42.0
-margin_bottom = 692.0
-rect_min_size = Vector2( 42, 0 )
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 1 )
-
-[node name="FakeHSplitGrabber" type="TextureRect" parent="ToolsAndCanvas/ToolPanel"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -1.0
-margin_top = -24.0
-margin_right = 5.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 0, 48 )
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MarginContainer" type="MarginContainer" parent="ToolsAndCanvas/ToolPanel"]
+[node name="UI" type="Panel"]
+material = SubResource( 26 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 5.0
-margin_top = 5.0
-custom_constants/margin_left = 4
-custom_constants/margin_bottom = 8
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 37 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="ToolsAndCanvas/ToolPanel/MarginContainer"]
+[node name="DockableContainer" type="Container" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 35 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+tabs_visible = false
+layout = SubResource( 25 )
+
+[node name="Tools" parent="DockableContainer" instance=ExtResource( 1 )]
 margin_left = 4.0
-margin_right = 42.0
-margin_bottom = 486.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolButtons" type="GridContainer" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 31.0
-margin_bottom = 479.0
-size_flags_horizontal = 4
-size_flags_vertical = 0
-script = ExtResource( 1 )
-
-[node name="RectSelect" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_right = 24.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Rectangular Selection
-
-%s for left mouse button
-%s for right mouse button"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/RectSelect"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/RectSelect"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/RectSelect"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 29 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="EllipseSelect" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 28.0
-margin_right = 24.0
-margin_bottom = 52.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Elliptical Selection
-
-%s for left mouse button
-%s for right mouse button"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/EllipseSelect"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/EllipseSelect"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/EllipseSelect"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 15 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PolygonSelect" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 56.0
-margin_right = 24.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Polygonal Selection
-Double-click to connect the last point to the starting point
-
-%s for left mouse button
-%s for right mouse button"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/PolygonSelect"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/PolygonSelect"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/PolygonSelect"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 30 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorSelect" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 84.0
-margin_right = 24.0
-margin_bottom = 108.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Select By Color
-
-%s for left mouse button
-%s for right mouse button"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/ColorSelect"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/ColorSelect"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/ColorSelect"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 21 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MagicWand" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 112.0
-margin_right = 24.0
-margin_bottom = 136.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Magic Wand
-
-%s for left mouse button
-%s for right mouse button"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/MagicWand"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/MagicWand"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/MagicWand"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 33 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Lasso" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 140.0
-margin_right = 24.0
-margin_bottom = 164.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Lasso / Free Select Tool
-
-%s for left mouse button
-%s for right mouse button"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Lasso"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Lasso"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Lasso"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Move" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 168.0
-margin_right = 24.0
-margin_bottom = 192.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Move
-
-%s for left mouse button
-%s for right mouse button"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Move"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Move"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Move"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 28 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Zoom" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 196.0
-margin_right = 24.0
-margin_bottom = 220.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Zoom
-
-%s for left mouse button
-%s for right mouse button"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Zoom"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Zoom"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Zoom"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 31 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Pan" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 224.0
-margin_right = 24.0
-margin_bottom = 248.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Pan
-
-%s for left mouse button
-%s for right mouse button"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Pan"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Pan"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Pan"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 22 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorPicker" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 252.0
-margin_right = 24.0
-margin_bottom = 276.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Color Picker
-Select a color from a pixel of the sprite
-
-%s for left mouse button
-%s for right mouse button"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/ColorPicker"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/ColorPicker"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/ColorPicker"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Pencil" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 280.0
-margin_right = 24.0
-margin_bottom = 304.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Pencil
-
-%s for left mouse button
-%s for right mouse button
-
-Hold %s to make a line"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Pencil"]
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Pencil"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Pencil"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Eraser" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 308.0
-margin_right = 24.0
-margin_bottom = 332.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Eraser
-
-%s for left mouse button
-%s for right mouse button
-
-Hold %s to make a line"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Eraser"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Eraser"]
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Eraser"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 32 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Bucket" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 336.0
-margin_right = 24.0
-margin_bottom = 360.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Bucket
-
-%s for left mouse button
-%s for right mouse button"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Bucket"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Bucket"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Bucket"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 25 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Shading" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 364.0
-margin_right = 24.0
-margin_bottom = 388.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Shading Tool
-
-%s for left mouse button
-%s for right mouse button"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Shading"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Shading"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/Shading"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LineTool" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 392.0
-margin_right = 24.0
-margin_bottom = 416.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Line Tool
-
-%s for left mouse button
-%s for right mouse button
-
-Hold %s to snap the angle of the line
-Hold %s to center the shape on the click origin
-Hold %s to displace the shape's origin"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/LineTool"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/LineTool"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/LineTool"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RectangleTool" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 420.0
-margin_right = 24.0
-margin_bottom = 444.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Rectangle Tool
-
-%s for left mouse button
-%s for right mouse button
-
-Hold %s to create a 1:1 shape
-Hold %s to center the shape on the click origin
-Hold %s to displace the shape's origin"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/RectangleTool"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/RectangleTool"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/RectangleTool"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 13 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="EllipseTool" type="Button" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" groups=["UIButtons"]]
-margin_top = 448.0
-margin_right = 24.0
-margin_bottom = 472.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Ellipse Tool
-
-%s for left mouse button
-%s for right mouse button
-
-Hold %s to create a 1:1 shape
-Hold %s to center the shape on the click origin
-Hold %s to displace the shape's origin"
-mouse_default_cursor_shape = 2
-button_mask = 3
-
-[node name="BackgroundLeft" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/EllipseTool"]
-visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
-anchor_bottom = 1.0
-margin_right = 12.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRight" type="NinePatchRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/EllipseTool"]
-visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
-rect_rotation = 180.0
-texture = ExtResource( 34 )
-region_rect = Rect2( 0, 0, 11, 24 )
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 10
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToolIcon" type="TextureRect" parent="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons/EllipseTool"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 23.0
-margin_bottom = 23.0
-texture = ExtResource( 26 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CanvasAndTimeline" type="VSplitContainer" parent="ToolsAndCanvas"]
-margin_left = 50.0
-margin_right = 946.0
-margin_bottom = 692.0
-rect_min_size = Vector2( 100, 0 )
-size_flags_horizontal = 3
-custom_constants/autohide = 0
-
-[node name="ViewportAndRulers" type="VBoxContainer" parent="ToolsAndCanvas/CanvasAndTimeline"]
-margin_right = 896.0
-margin_bottom = 520.0
+margin_top = 8.0
+margin_right = -1234.0
+margin_bottom = -4.0
+
+[node name="Main Canvas" type="VBoxContainer" parent="DockableContainer"]
+margin_left = 66.0
+margin_top = 8.0
+margin_right = 938.0
+margin_bottom = 532.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="TabsContainer" type="PanelContainer" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers"]
-margin_right = 896.0
+[node name="TabsContainer" type="PanelContainer" parent="DockableContainer/Main Canvas"]
+margin_right = 872.0
 margin_bottom = 38.0
 
-[node name="Tabs" type="Tabs" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/TabsContainer"]
+[node name="Tabs" type="Tabs" parent="DockableContainer/Main Canvas/TabsContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 889.0
+margin_right = 865.0
 margin_bottom = 31.0
 tab_align = 0
 tab_close_display_policy = 2
 drag_to_rearrange_enabled = true
 script = ExtResource( 3 )
 
-[node name="HorizontalRuler" type="Button" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers"]
+[node name="HorizontalRuler" type="Button" parent="DockableContainer/Main Canvas"]
 margin_top = 38.0
-margin_right = 896.0
+margin_right = 872.0
 margin_bottom = 58.0
 rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
@@ -1142,23 +229,23 @@ mouse_default_cursor_shape = 14
 action_mode = 0
 script = ExtResource( 6 )
 
-[node name="HSplitContainer" type="HSplitContainer" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers"]
+[node name="HSplitContainer" type="HSplitContainer" parent="DockableContainer/Main Canvas"]
 margin_top = 58.0
-margin_right = 896.0
-margin_bottom = 520.0
+margin_right = 872.0
+margin_bottom = 524.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
-[node name="ViewportandVerticalRuler" type="HBoxContainer" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer"]
-margin_right = 884.0
-margin_bottom = 462.0
+[node name="ViewportandVerticalRuler" type="HBoxContainer" parent="DockableContainer/Main Canvas/HSplitContainer"]
+margin_right = 860.0
+margin_bottom = 466.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="VerticalRuler" type="Button" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
+[node name="VerticalRuler" type="Button" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler"]
 margin_right = 16.0
-margin_bottom = 462.0
+margin_bottom = 466.0
 rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
 mouse_default_cursor_shape = 15
@@ -1167,10 +254,10 @@ size_flags_vertical = 3
 action_mode = 0
 script = ExtResource( 4 )
 
-[node name="ViewportContainer" type="ViewportContainer" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler"]
+[node name="ViewportContainer" type="ViewportContainer" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler"]
 margin_left = 16.0
-margin_right = 884.0
-margin_bottom = 462.0
+margin_right = 860.0
+margin_bottom = 466.0
 focus_mode = 2
 mouse_default_cursor_shape = 3
 size_flags_horizontal = 3
@@ -1178,126 +265,112 @@ size_flags_vertical = 3
 stretch = true
 script = ExtResource( 23 )
 
-[node name="Viewport" type="Viewport" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 868, 462 )
+[node name="Viewport" type="Viewport" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer"]
+size = Vector2( 844, 466 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
 
-[node name="TransparentChecker" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 5 )]
+[node name="TransparentChecker" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 5 )]
 material = SubResource( 2 )
 
-[node name="Canvas" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 19 )]
+[node name="Canvas" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 19 )]
 
-[node name="Camera2D" type="Camera2D" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
+[node name="Camera2D" type="Camera2D" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 7 )
 
-[node name="ViewportContainer2" type="ViewportContainer" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer"]
-margin_left = 896.0
-margin_right = 896.0
-margin_bottom = 462.0
+[node name="CanvasLayer" type="CanvasLayer" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport"]
+
+[node name="GreyscaleVision" type="ColorRect" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer/Viewport/CanvasLayer"]
+material = SubResource( 27 )
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+
+[node name="ViewportContainer2" type="ViewportContainer" parent="DockableContainer/Main Canvas/HSplitContainer"]
+margin_left = 872.0
+margin_right = 872.0
+margin_bottom = 466.0
 size_flags_vertical = 3
 stretch = true
 script = ExtResource( 23 )
 
-[node name="Viewport" type="Viewport" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2"]
-size = Vector2( 0, 462 )
+[node name="Viewport" type="Viewport" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2"]
+size = Vector2( 0, 466 )
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="TransparentChecker" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport" instance=ExtResource( 5 )]
+[node name="TransparentChecker" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2/Viewport" instance=ExtResource( 5 )]
 material = SubResource( 3 )
 
-[node name="CanvasPreview" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport" instance=ExtResource( 2 )]
+[node name="CanvasPreview" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2/Viewport" instance=ExtResource( 2 )]
 
-[node name="Camera2D2" type="Camera2D" parent="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2/Viewport"]
+[node name="Camera2D2" type="Camera2D" parent="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2/Viewport"]
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 7 )
 
-[node name="AnimationTimeline" parent="ToolsAndCanvas/CanvasAndTimeline" instance=ExtResource( 18 )]
-margin_top = 532.0
-margin_right = 896.0
-margin_bottom = 692.0
-custom_styles/panel = SubResource( 4 )
+[node name="Animation Timeline" parent="DockableContainer" instance=ExtResource( 18 )]
+margin_left = 66.0
+margin_top = 556.0
+margin_right = 938.0
+margin_bottom = 716.0
 
-[node name="TallscreenHSplitContainer" type="HSplitContainer" parent="ToolsAndCanvas/CanvasAndTimeline"]
-visible = false
-margin_top = 492.0
-margin_right = 902.0
-margin_bottom = 692.0
-size_flags_horizontal = 3
+[node name="Canvas Preview" parent="DockableContainer" instance=ExtResource( 16 )]
+margin_left = 958.0
+margin_top = 8.0
+margin_right = 1276.0
+margin_bottom = 173.062
 
-[node name="BottomPanel" type="VSplitContainer" parent="ToolsAndCanvas/CanvasAndTimeline/TallscreenHSplitContainer"]
-margin_right = 902.0
-margin_bottom = 200.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/autohide = 0
+[node name="Color Pickers" parent="DockableContainer" instance=ExtResource( 17 )]
+margin_top = 197.062
 
-[node name="RightPanel" type="Panel" parent="."]
-margin_left = 946.0
-margin_right = 1280.0
-margin_bottom = 692.0
-rect_min_size = Vector2( 334, 0 )
-
-[node name="MarginContainer" type="MarginContainer" parent="RightPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_right = 8
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
+[node name="Left Tool Options" type="ScrollContainer" parent="DockableContainer"]
+margin_left = 958.0
+margin_top = 253.062
+margin_right = 1107.0
+margin_bottom = 574.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PreviewAndPalettes" type="VBoxContainer" parent="RightPanel/MarginContainer"]
-margin_left = 8.0
-margin_right = 336.0
-margin_bottom = 684.0
-custom_constants/separation = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CanvasPreviewContainer" parent="RightPanel/MarginContainer/PreviewAndPalettes" instance=ExtResource( 16 )]
-
-[node name="ToolAndPaletteVSplit" type="VSplitContainer" parent="RightPanel/MarginContainer/PreviewAndPalettes"]
-margin_top = 182.0
-margin_right = 328.0
-margin_bottom = 684.0
+[node name="LeftPanelContainer" type="PanelContainer" parent="DockableContainer/Left Tool Options"]
+margin_right = 149.0
+margin_bottom = 320.938
+rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/autohide = 0
 
-[node name="ColorAndToolOptions" parent="RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 17 )]
-margin_right = 328.0
-margin_bottom = 372.0
-hint_tooltip = "Ellipse Tool
+[node name="Right Tool Options" type="ScrollContainer" parent="DockableContainer"]
+margin_left = 1127.0
+margin_top = 253.062
+margin_right = 1276.0
+margin_bottom = 574.0
 
-%s for left mouse button
-%s for right mouse button
+[node name="RightPanelContainer" type="PanelContainer" parent="DockableContainer/Right Tool Options"]
+margin_right = 149.0
+margin_bottom = 320.938
+rect_min_size = Vector2( 130, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-Hold %s to create a 1:1 shape
-Hold %s to center the shape on the click origin
-Hold %s to displace the shape's origin"
+[node name="Palette Panel" parent="DockableContainer" instance=ExtResource( 20 )]
+margin_left = 958.0
+margin_top = 598.0
+margin_right = 1276.0
+margin_bottom = 716.0
 
-[node name="PalettePanel" parent="RightPanel/MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit" instance=ExtResource( 20 )]
-margin_top = 384.0
-margin_right = 328.0
-margin_bottom = 502.0
-
-[connection signal="dragged" from="ToolsAndCanvas" to="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" method="_on_ToolsAndCanvas_dragged"]
-[connection signal="reposition_active_tab_request" from="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_reposition_active_tab_request"]
-[connection signal="tab_changed" from="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_tab_changed"]
-[connection signal="tab_close" from="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" to="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/TabsContainer/Tabs" method="_on_Tabs_tab_close"]
-[connection signal="mouse_entered" from="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HorizontalRuler" to="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
-[connection signal="pressed" from="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HorizontalRuler" to="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
-[connection signal="pressed" from="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" to="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]
-[connection signal="mouse_entered" from="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" method="_on_ViewportContainer_mouse_exited"]
-[connection signal="mouse_entered" from="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2" method="_on_ViewportContainer_mouse_entered"]
-[connection signal="mouse_exited" from="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2" to="ToolsAndCanvas/CanvasAndTimeline/ViewportAndRulers/HSplitContainer/ViewportContainer2" method="_on_ViewportContainer_mouse_exited"]
-[connection signal="dragged" from="ToolsAndCanvas/CanvasAndTimeline/TallscreenHSplitContainer" to="ToolsAndCanvas/ToolPanel/MarginContainer/PanelContainer/ToolButtons" method="_on_ToolsAndCanvas_dragged"]
+[connection signal="item_rect_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_item_rect_changed"]
+[connection signal="visibility_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_visibility_changed"]
+[connection signal="reposition_active_tab_request" from="DockableContainer/Main Canvas/TabsContainer/Tabs" to="DockableContainer/Main Canvas/TabsContainer/Tabs" method="_on_Tabs_reposition_active_tab_request"]
+[connection signal="tab_changed" from="DockableContainer/Main Canvas/TabsContainer/Tabs" to="DockableContainer/Main Canvas/TabsContainer/Tabs" method="_on_Tabs_tab_changed"]
+[connection signal="tab_close" from="DockableContainer/Main Canvas/TabsContainer/Tabs" to="DockableContainer/Main Canvas/TabsContainer/Tabs" method="_on_Tabs_tab_close"]
+[connection signal="mouse_entered" from="DockableContainer/Main Canvas/HorizontalRuler" to="DockableContainer/Main Canvas/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
+[connection signal="pressed" from="DockableContainer/Main Canvas/HorizontalRuler" to="DockableContainer/Main Canvas/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
+[connection signal="pressed" from="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" to="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]
+[connection signal="mouse_entered" from="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" to="DockableContainer/Main Canvas/HSplitContainer/ViewportandVerticalRuler/ViewportContainer" method="_on_ViewportContainer_mouse_exited"]
+[connection signal="mouse_entered" from="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2" to="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2" method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2" to="DockableContainer/Main Canvas/HSplitContainer/ViewportContainer2" method="_on_ViewportContainer_mouse_exited"]

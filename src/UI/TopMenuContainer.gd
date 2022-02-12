@@ -5,13 +5,15 @@ enum EditMenuId { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
 enum ViewMenuId {
 	TILE_MODE,
 	WINDOW_OPACITY,
-	PANEL_LAYOUT,
+	GREYSCALE_VIEW,
+	PANELS,
+	LAYOUTS,
 	MIRROR_VIEW,
 	SHOW_GRID,
 	SHOW_PIXEL_GRID,
 	SHOW_RULERS,
 	SHOW_GUIDES,
-	SHOW_ANIMATION_TIMELINE,
+	EDIT_MODE,
 	ZEN_MODE,
 	FULLSCREEN_MODE
 }
@@ -41,9 +43,14 @@ enum HelpMenuId {
 
 var file_menu: PopupMenu
 var view_menu: PopupMenu
-var zen_mode := false
 var recent_projects := []
+var layouts := [
+	["Default", preload("res://assets/layouts/default.tres")],
+	["Tallscreen", preload("res://assets/layouts/tallscreen.tres")],
+]
+var zen_mode := false
 
+onready var ui_elements: Array = Global.control.find_node("DockableContainer").get_children()
 onready var file_menu_button: MenuButton = find_node("FileMenu")
 onready var edit_menu_button: MenuButton = find_node("EditMenu")
 onready var view_menu_button: MenuButton = find_node("ViewMenu")
@@ -54,11 +61,14 @@ onready var help_menu_button: MenuButton = find_node("HelpMenu")
 onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("CreateNewImage")
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
 onready var tile_mode_submenu := PopupMenu.new()
-onready var panel_layout_submenu := PopupMenu.new()
+onready var panels_submenu := PopupMenu.new()
+onready var layouts_submenu := PopupMenu.new()
 onready var recent_projects_submenu := PopupMenu.new()
 
 
 func _ready() -> void:
+	var dir := Directory.new()
+	dir.make_dir("user://layouts")
 	_setup_file_menu()
 	_setup_edit_menu()
 	_setup_view_menu()
@@ -136,14 +146,16 @@ func _setup_view_menu() -> void:
 	var view_menu_items := {  # order as in ViewMenuId enum
 		"Tile Mode": 0,
 		"Window Opacity": 0,
-		"Panel Layout": 0,
+		"Greyscale View": 0,
+		"Panels": 0,
+		"Layouts": 0,
 		"Mirror View": InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid": InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Pixel Grid":
 		InputMap.get_action_list("show_pixel_grid")[0].get_scancode_with_modifiers(),
 		"Show Rulers": InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
 		"Show Guides": InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
-		"Show Animation Timeline": 0,
+		"Edit Mode": InputMap.get_action_list("edit_mode")[0].get_scancode_with_modifiers(),
 		"Zen Mode": InputMap.get_action_list("zen_mode")[0].get_scancode_with_modifiers(),
 		"Fullscreen Mode":
 		InputMap.get_action_list("toggle_fullscreen")[0].get_scancode_with_modifiers(),
@@ -154,16 +166,17 @@ func _setup_view_menu() -> void:
 	for item in view_menu_items.keys():
 		if item == "Tile Mode":
 			_setup_tile_mode_submenu(item)
+		elif item == "Panels":
+			_setup_panels_submenu(item)
+		elif item == "Layouts":
+			_setup_layouts_submenu(item)
 		elif item == "Window Opacity":
 			view_menu.add_item(item, i, view_menu_items[item])
-		elif item == "Panel Layout":
-			_setup_panel_layout_submenu(item)
 		else:
 			view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
 	view_menu.set_item_checked(ViewMenuId.SHOW_RULERS, true)
 	view_menu.set_item_checked(ViewMenuId.SHOW_GUIDES, true)
-	view_menu.set_item_checked(ViewMenuId.SHOW_ANIMATION_TIMELINE, true)
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
 	# Disable window opacity item if per pixel transparency is not allowed
@@ -187,17 +200,46 @@ func _setup_tile_mode_submenu(item: String) -> void:
 	view_menu.add_submenu_item(item, tile_mode_submenu.get_name())
 
 
-func _setup_panel_layout_submenu(item: String) -> void:
-	panel_layout_submenu.set_name("panel_layout_submenu")
-	panel_layout_submenu.add_radio_check_item("Auto", Global.PanelLayout.AUTO)
-	panel_layout_submenu.add_radio_check_item("Widescreen", Global.PanelLayout.WIDESCREEN)
-	panel_layout_submenu.add_radio_check_item("Tallscreen", Global.PanelLayout.TALLSCREEN)
-	panel_layout_submenu.hide_on_checkable_item_selection = false
-	panel_layout_submenu.set_item_checked(Global.panel_layout, true)
+func _setup_panels_submenu(item: String) -> void:
+	panels_submenu.set_name("panels_submenu")
+	panels_submenu.hide_on_checkable_item_selection = false
+	for element in ui_elements:
+		panels_submenu.add_check_item(element.name)
+		panels_submenu.set_item_checked(ui_elements.find(element), true)
 
-	panel_layout_submenu.connect("id_pressed", self, "_panel_layout_submenu_id_pressed")
-	view_menu.add_child(panel_layout_submenu)
-	view_menu.add_submenu_item(item, panel_layout_submenu.get_name())
+	panels_submenu.connect("id_pressed", self, "_panels_submenu_id_pressed")
+	view_menu.add_child(panels_submenu)
+	view_menu.add_submenu_item(item, panels_submenu.get_name())
+
+
+func _setup_layouts_submenu(item: String) -> void:
+	var dir := Directory.new()
+	var path := "user://layouts"
+	if dir.open(path) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir():
+				var file_name_no_tres: String = file_name.get_basename()
+				layouts.append([file_name_no_tres, ResourceLoader.load(path.plus_file(file_name))])
+			file_name = dir.get_next()
+
+	layouts_submenu.set_name("layouts_submenu")
+	layouts_submenu.hide_on_checkable_item_selection = false
+	populate_layouts_submenu()
+	layouts_submenu.set_item_checked(0, true)
+
+	layouts_submenu.connect("id_pressed", self, "_layouts_submenu_id_pressed")
+	view_menu.add_child(layouts_submenu)
+	view_menu.add_submenu_item(item, layouts_submenu.get_name())
+
+
+func populate_layouts_submenu() -> void:
+	layouts_submenu.clear()  # Does not do anything if it's called for the first time
+	for layout in layouts:
+		layouts_submenu.add_radio_check_item(layout[0])
+
+	layouts_submenu.add_item("Manage Layouts")
 
 
 func _setup_image_menu() -> void:
@@ -374,6 +416,8 @@ func view_menu_id_pressed(id: int) -> void:
 		ViewMenuId.WINDOW_OPACITY:
 			window_opacity_dialog.popup_centered()
 			Global.dialog_open(true)
+		ViewMenuId.GREYSCALE_VIEW:
+			_toggle_greyscale_view()
 		ViewMenuId.MIRROR_VIEW:
 			_toggle_mirror_view()
 		ViewMenuId.SHOW_GRID:
@@ -384,8 +428,9 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_rulers()
 		ViewMenuId.SHOW_GUIDES:
 			_toggle_show_guides()
-		ViewMenuId.SHOW_ANIMATION_TIMELINE:
-			_toggle_show_anim_timeline()
+		ViewMenuId.EDIT_MODE:
+			Global.control.ui.tabs_visible = !Global.control.ui.tabs_visible
+			view_menu.set_item_checked(ViewMenuId.EDIT_MODE, Global.control.ui.tabs_visible)
 		ViewMenuId.ZEN_MODE:
 			_toggle_zen_mode()
 		ViewMenuId.FULLSCREEN_MODE:
@@ -403,11 +448,40 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.canvas.grid.update()
 
 
-func _panel_layout_submenu_id_pressed(id: int) -> void:
-	Global.panel_layout = id
-	for i in Global.PanelLayout.values():
-		panel_layout_submenu.set_item_checked(i, i == id)
-	get_tree().get_root().get_node("Control").handle_resize()
+func _panels_submenu_id_pressed(id: int) -> void:
+	if zen_mode:
+		return
+	var element_visible = panels_submenu.is_item_checked(id)
+	Global.control.ui.set_control_hidden(ui_elements[id], element_visible)
+	panels_submenu.set_item_checked(id, !element_visible)
+
+
+func _layouts_submenu_id_pressed(id: int) -> void:
+	if id < layouts.size():
+		set_layout(id)
+	else:
+		Global.control.get_node("Dialogs/ManageLayouts").popup_centered()
+		Global.dialog_open(true)
+
+
+func set_layout(id: int) -> void:
+	# Clone is needed so that the premade layouts do not get modified
+	Global.control.ui.layout = layouts[id][1].clone()
+	for i in layouts.size():
+		layouts_submenu.set_item_checked(i, i == id)
+
+	for i in ui_elements.size():
+		panels_submenu.set_item_checked(i, true)
+
+	Global.control.find_node("TabsContainer").visible = true
+	zen_mode = false
+	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, false)
+
+
+func _toggle_greyscale_view() -> void:
+	Global.greyscale_view = !Global.greyscale_view
+	Global.greyscale_vision.visible = Global.greyscale_view
+	view_menu.set_item_checked(ViewMenuId.GREYSCALE_VIEW, Global.greyscale_view)
 
 
 func _toggle_mirror_view() -> void:
@@ -457,22 +531,15 @@ func _toggle_show_guides() -> void:
 					guide.visible = Global.show_y_symmetry_axis and Global.show_guides
 
 
-func _toggle_show_anim_timeline() -> void:
-	if zen_mode:
-		return
-	Global.show_animation_timeline = !Global.show_animation_timeline
-	view_menu.set_item_checked(ViewMenuId.SHOW_ANIMATION_TIMELINE, Global.show_animation_timeline)
-	Global.animation_timeline.visible = Global.show_animation_timeline
-
-
 func _toggle_zen_mode() -> void:
-	if Global.show_animation_timeline:
-		Global.animation_timeline.visible = zen_mode
-	Global.tool_panel.visible = zen_mode
-	Global.right_panel.visible = zen_mode
+	Global.control.ui.set_control_hidden(Global.animation_timeline, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.tool_panel, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.canvas_preview_container, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.color_pickers, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.left_tool_options_scroll, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.right_tool_options_scroll, !zen_mode)
+	Global.control.ui.set_control_hidden(Global.palette_panel, !zen_mode)
 	Global.control.find_node("TabsContainer").visible = zen_mode
-	if Global.panel_layout == Global.PanelLayout.TALLSCREEN:
-		Global.control.tallscreen_hsplit.visible = zen_mode
 	zen_mode = !zen_mode
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)
 

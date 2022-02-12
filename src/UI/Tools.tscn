@@ -1,0 +1,1086 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://assets/graphics/tools/linetool.png" type="Texture" id=1]
+[ext_resource path="res://assets/graphics/tools/shading.png" type="Texture" id=2]
+[ext_resource path="res://src/UI/ToolButtons.gd" type="Script" id=3]
+[ext_resource path="res://assets/graphics/tools/colorpicker.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/tools/lasso.png" type="Texture" id=5]
+[ext_resource path="res://assets/graphics/tools/rectangletool.png" type="Texture" id=6]
+[ext_resource path="res://assets/graphics/tools/ellipseselect.png" type="Texture" id=7]
+[ext_resource path="res://assets/graphics/tools/bucket.png" type="Texture" id=8]
+[ext_resource path="res://assets/graphics/tools/ellipsetool.png" type="Texture" id=9]
+[ext_resource path="res://assets/graphics/tools/pencil.png" type="Texture" id=10]
+[ext_resource path="res://assets/graphics/tools/colorselect.png" type="Texture" id=11]
+[ext_resource path="res://assets/graphics/tools/pan.png" type="Texture" id=12]
+[ext_resource path="res://assets/graphics/tools/rectselect.png" type="Texture" id=13]
+[ext_resource path="res://assets/graphics/tools/move.png" type="Texture" id=14]
+[ext_resource path="res://assets/graphics/tools/polygonselect.png" type="Texture" id=15]
+[ext_resource path="res://assets/graphics/tools/magicwand.png" type="Texture" id=16]
+[ext_resource path="res://assets/graphics/tools/eraser.png" type="Texture" id=17]
+[ext_resource path="res://assets/graphics/tools/zoom.png" type="Texture" id=18]
+[ext_resource path="res://assets/graphics/tools/tool_background.png" type="Texture" id=19]
+
+[node name="Tools" type="ScrollContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 42, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_right = 38.0
+margin_bottom = 486.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolButtons" type="GridContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 31.0
+margin_bottom = 479.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+script = ExtResource( 3 )
+
+[node name="RectSelect" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Rectangular Selection
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/RectSelect"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/RectSelect"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/RectSelect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EllipseSelect" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 28.0
+margin_right = 24.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Elliptical Selection
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/EllipseSelect"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/EllipseSelect"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/EllipseSelect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PolygonSelect" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 56.0
+margin_right = 24.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Polygonal Selection
+Double-click to connect the last point to the starting point
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/PolygonSelect"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/PolygonSelect"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/PolygonSelect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorSelect" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 84.0
+margin_right = 24.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Select By Color
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/ColorSelect"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/ColorSelect"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/ColorSelect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MagicWand" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 112.0
+margin_right = 24.0
+margin_bottom = 136.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Magic Wand
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/MagicWand"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/MagicWand"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/MagicWand"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lasso" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 140.0
+margin_right = 24.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Lasso / Free Select Tool
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/Lasso"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/Lasso"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/Lasso"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 168.0
+margin_right = 24.0
+margin_bottom = 192.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Move
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/Move"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/Move"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/Move"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Zoom" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 196.0
+margin_right = 24.0
+margin_bottom = 220.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Zoom
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/Zoom"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/Zoom"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/Zoom"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pan" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 224.0
+margin_right = 24.0
+margin_bottom = 248.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Pan
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/Pan"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/Pan"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/Pan"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorPicker" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 252.0
+margin_right = 24.0
+margin_bottom = 276.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Color Picker
+Select a color from a pixel of the sprite
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/ColorPicker"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/ColorPicker"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/ColorPicker"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pencil" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 280.0
+margin_right = 24.0
+margin_bottom = 304.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Pencil
+
+%s for left mouse button
+%s for right mouse button
+
+Hold %s to make a line"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/Pencil"]
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/Pencil"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/Pencil"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Eraser" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 308.0
+margin_right = 24.0
+margin_bottom = 332.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Eraser
+
+%s for left mouse button
+%s for right mouse button
+
+Hold %s to make a line"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/Eraser"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/Eraser"]
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/Eraser"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bucket" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 336.0
+margin_right = 24.0
+margin_bottom = 360.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Bucket
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/Bucket"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/Bucket"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/Bucket"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shading" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 364.0
+margin_right = 24.0
+margin_bottom = 388.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Shading Tool
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/Shading"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/Shading"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/Shading"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineTool" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 392.0
+margin_right = 24.0
+margin_bottom = 416.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Line Tool
+
+%s for left mouse button
+%s for right mouse button
+
+Hold %s to snap the angle of the line
+Hold %s to center the shape on the click origin
+Hold %s to displace the shape's origin"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/LineTool"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/LineTool"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/LineTool"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RectangleTool" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 420.0
+margin_right = 24.0
+margin_bottom = 444.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Rectangle Tool
+
+%s for left mouse button
+%s for right mouse button
+
+Hold %s to create a 1:1 shape
+Hold %s to center the shape on the click origin
+Hold %s to displace the shape's origin"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/RectangleTool"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/RectangleTool"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/RectangleTool"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EllipseTool" type="Button" parent="PanelContainer/ToolButtons" groups=["UIButtons"]]
+margin_top = 448.0
+margin_right = 24.0
+margin_bottom = 472.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Ellipse Tool
+
+%s for left mouse button
+%s for right mouse button
+
+Hold %s to create a 1:1 shape
+Hold %s to center the shape on the click origin
+Hold %s to displace the shape's origin"
+mouse_default_cursor_shape = 2
+button_mask = 3
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="PanelContainer/ToolButtons/EllipseTool"]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="PanelContainer/ToolButtons/EllipseTool"]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 19 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="PanelContainer/ToolButtons/EllipseTool"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="resized" from="." to="PanelContainer/ToolButtons" method="_on_Tools_resized"]

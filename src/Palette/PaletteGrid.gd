@@ -94,6 +94,7 @@ func scroll_palette(origin: Vector2) -> void:
 func clear_swatches() -> void:
 	swatches.clear()
 	for swatch in get_children():
+		remove_child(swatch)  # To remove the child immediately and not at the end of the frame
 		swatch.queue_free()
 
 

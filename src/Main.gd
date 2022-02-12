@@ -3,50 +3,24 @@ extends Control
 var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
-var tallscreen_is_active = false
-var alternate_transparent_background := ColorRect.new()
 var cursor_image = preload("res://assets/graphics/cursor.png")
 
-onready var ui := $MenuAndUI/UI
-onready var tools_and_canvas: HSplitContainer = $MenuAndUI/UI/ToolsAndCanvas
-onready var tallscreen_hsplit: HSplitContainer = tools_and_canvas.get_node(
-	"CanvasAndTimeline/TallscreenHSplitContainer"
-)
-onready var bottom_panel: VSplitContainer = tallscreen_hsplit.get_node("BottomPanel")
-onready var right_panel := $MenuAndUI/UI/RightPanel
-onready var canvas_preview_container := right_panel.get_node(
-	"MarginContainer/PreviewAndPalettes/CanvasPreviewContainer"
-)
-onready var tool_and_palette_vsplit := right_panel.get_node(
-	"MarginContainer/PreviewAndPalettes/ToolAndPaletteVSplit"
-)
-onready var color_and_tool_options := tool_and_palette_vsplit.get_node("ColorAndToolOptions")
-onready var scroll_container := tool_and_palette_vsplit.get_node(
-	"ColorAndToolOptions/ScrollContainer"
-)
-onready var tool_panel := $MenuAndUI/UI/ToolsAndCanvas/ToolPanel
+onready var ui := $MenuAndUI/UI/DockableContainer
+onready var canvas_preview_container := ui.find_node("CanvasPreviewContainer")
+onready var scroll_container := ui.find_node("ColorAndToolOptions/ScrollContainer")
 onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
 
 
 func _ready() -> void:
 	randomize()
-	add_child(alternate_transparent_background)
-	move_child(alternate_transparent_background, 0)
-	alternate_transparent_background.visible = false
-	alternate_transparent_background.anchor_left = ANCHOR_BEGIN
-	alternate_transparent_background.anchor_top = ANCHOR_BEGIN
-	alternate_transparent_background.anchor_right = ANCHOR_END
-	alternate_transparent_background.anchor_bottom = ANCHOR_END
-
 	get_tree().set_auto_accept_quit(false)
 	_setup_application_window_size()
-	handle_resize()
-	get_tree().get_root().connect("size_changed", self, "handle_resize")
 
 	if OS.get_name() == "OSX":
 		_use_osx_shortcuts()
 
-	Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
+	if !Global.native_cursors:
+		Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
 	Global.current_project.layers[0].name = tr("Layer") + " 0"
@@ -98,132 +72,6 @@ func _ready() -> void:
 		OS.request_permissions()
 
 	_show_splash_screen()
-
-
-func handle_resize() -> void:
-	var aspect_ratio = (
-		get_viewport_rect().size.x
-		/ (0.00001 if get_viewport_rect().size.y == 0 else get_viewport_rect().size.y)
-	)
-	if (
-		(aspect_ratio <= 3.0 / 4.0 and Global.panel_layout != Global.PanelLayout.WIDESCREEN)
-		or Global.panel_layout == Global.PanelLayout.TALLSCREEN
-	):
-		_change_ui_layout("tallscreen")
-	else:
-		_change_ui_layout("widescreen")
-
-
-func _change_ui_layout(mode: String) -> void:
-	var colorpicker_is_switched = (
-		true
-		if tool_and_palette_vsplit.has_node("ScrollContainer")
-		else false
-	)
-
-	if mode == "tallscreen" and not tallscreen_is_active:
-		tallscreen_is_active = true
-		# changing visibility and re-parenting of nodes for tall screen
-		if !Global.top_menu_container.zen_mode:
-			tallscreen_hsplit.visible = true
-		tallscreen_hsplit.split_offset = tools_and_canvas.split_offset
-		_reparent_node_to(Global.animation_timeline, tallscreen_hsplit.get_node("BottomPanel"), 0)
-		_reparent_node_to(right_panel, bottom_panel, 0)
-		right_panel.rect_min_size.y = 322
-		_reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
-		tool_and_palette_vsplit = _replace_node_with(tool_and_palette_vsplit, HBoxContainer.new())
-		tool_and_palette_vsplit.set("custom_constants/separation", 8)
-		color_and_tool_options.rect_min_size.x = 280
-		_reparent_node_to(tool_panel, tallscreen_hsplit, 0)
-
-		var right_panel_margin: MarginContainer = right_panel.find_node(
-			"MarginContainer", true, false
-		)
-		right_panel_margin.set("custom_constants/margin_top", 8)
-		right_panel_margin.set("custom_constants/margin_left", 0)
-		right_panel_margin.set("custom_constants/margin_right", 0)
-		right_panel.find_node("PalettePanel", true, false).size_flags_horizontal = SIZE_FILL
-
-	elif mode == "widescreen" and tallscreen_is_active:
-		tallscreen_is_active = false
-		# Reparenting and hiding nodes to adjust wide-screen
-		_reparent_node_to(
-			Global.animation_timeline, ui.get_node("ToolsAndCanvas/CanvasAndTimeline"), 1
-		)
-		tallscreen_hsplit.visible = false
-		tools_and_canvas.split_offset = tallscreen_hsplit.split_offset
-		_reparent_node_to(right_panel, ui, -1)
-		right_panel.rect_min_size.y = 0
-		_reparent_node_to(canvas_preview_container, right_panel.find_node("PreviewAndPalettes"), 0)
-		tool_and_palette_vsplit = _replace_node_with(tool_and_palette_vsplit, VSplitContainer.new())
-		color_and_tool_options.rect_min_size.x = 0
-		canvas_preview_container.visible = true
-		_reparent_node_to(tool_panel, ui.find_node("ToolsAndCanvas"), 0)
-
-		var right_panel_margin: MarginContainer = right_panel.find_node(
-			"MarginContainer", true, false
-		)
-		right_panel_margin.set("custom_constants/margin_top", 0)
-		right_panel_margin.set("custom_constants/margin_left", 8)
-		right_panel_margin.set("custom_constants/margin_right", 8)
-		right_panel.find_node("PalettePanel", true, false).size_flags_horizontal = SIZE_EXPAND_FILL
-
-	if get_viewport_rect().size.x < 908 and mode == "tallscreen":
-		canvas_preview_container.visible = false
-	else:
-		canvas_preview_container.visible = true
-
-	if not colorpicker_is_switched and canvas_preview_container.visible and mode == "tallscreen":
-		_reparent_node_to(scroll_container, tool_and_palette_vsplit, 0)
-		scroll_container.rect_min_size = Vector2(268, 196)
-		color_and_tool_options.set("custom_constants/separation", 20)
-		_reparent_node_to(canvas_preview_container, color_and_tool_options, -1)
-	elif colorpicker_is_switched and (not canvas_preview_container.visible or mode != "tallscreen"):
-		_reparent_node_to(scroll_container, color_and_tool_options, -1)
-		scroll_container.rect_min_size = Vector2(0, 0)
-		color_and_tool_options.set("custom_constants/separation", 8)
-		if mode == "widescreen":
-			_reparent_node_to(
-				canvas_preview_container,
-				right_panel.find_node("PreviewAndPalettes", true, false),
-				0
-			)
-		else:
-			_reparent_node_to(canvas_preview_container, tool_and_palette_vsplit, 1)
-
-
-# helper function (_change_ui_layout)
-# warning: this doesn't really copy any sort of attributes, except a few that
-# were needed in my particular case
-func _replace_node_with(old: Node, new: Node) -> Node:
-	var tempname = old.name
-	old.name = "old"
-	new.name = tempname
-	new.size_flags_vertical = old.size_flags_horizontal
-	new.size_flags_vertical = old.size_flags_vertical
-	# new.set("custom_constants/autohide", old.get("custom_constants/autohide"))
-	if new is HBoxContainer:
-		new.set_alignment(HBoxContainer.ALIGN_CENTER)
-		new.set("custom_constants/separation", 20)
-	old.get_parent().add_child(new)
-	for n in old.get_children():
-		_reparent_node_to(n, new, -1)
-	old.get_parent().remove_child(old)
-	old.queue_free()
-	return new
-
-
-# helper function (_change_ui_layout)
-func _reparent_node_to(node: Node, dest: Node, pos: int) -> bool:
-	if dest is Node and node is Node:
-		node.get_parent().remove_child(node)
-		dest.add_child(node)
-		node.set_owner(dest)
-		if pos >= 0:
-			dest.move_child(node, pos)
-		return true
-	else:
-		return false
 
 
 func _input(event: InputEvent) -> void:
@@ -510,7 +358,6 @@ func _use_osx_shortcuts() -> void:
 
 
 func _exit_tree() -> void:
-	Global.config_cache.set_value("window", "panel_layout", Global.panel_layout)
 	Global.config_cache.set_value("window", "screen", OS.current_screen)
 	Global.config_cache.set_value(
 		"window", "maximized", OS.window_maximized || OS.window_fullscreen

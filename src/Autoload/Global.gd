@@ -4,7 +4,6 @@ enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
 enum ThemeTypes { DARK, BLUE, CARAMEL, LIGHT }
 enum TileMode { NONE, BOTH, X_AXIS, Y_AXIS }
-enum PanelLayout { AUTO, WIDESCREEN, TALLSCREEN }
 enum IconColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
@@ -18,12 +17,12 @@ var projects := []  # Array of Projects
 var current_project: Project
 var current_project_index := 0 setget _project_changed
 
-var panel_layout = PanelLayout.AUTO
 var ui_tooltips := {}
 
 # Canvas related stuff
 var layers_changed_skip := false
 var can_draw := false
+var move_guides_on_canvas := false
 var has_focus := false
 
 var play_only_tags := true
@@ -82,14 +81,16 @@ var show_left_tool_icon := true
 var show_right_tool_icon := true
 var left_square_indicator_visible := true
 var right_square_indicator_visible := false
+var native_cursors := false
+var cross_cursor := true
 
 # View menu options
+var greyscale_view := false
 var mirror_view := false
 var draw_grid := false
 var draw_pixel_grid := false
 var show_rulers := true
 var show_guides := true
-var show_animation_timeline := true
 
 # Onion skinning options
 var onion_skinning := false
@@ -112,24 +113,28 @@ onready var canvas: Canvas = control.find_node("Canvas")
 onready var tabs: Tabs = control.find_node("Tabs")
 onready var main_viewport: ViewportContainer = control.find_node("ViewportContainer")
 onready var second_viewport: ViewportContainer = control.find_node("ViewportContainer2")
-onready var canvas_preview_container: Container = control.find_node("CanvasPreviewContainer")
+onready var main_canvas_container: Container = control.find_node("Main Canvas")
+onready var canvas_preview_container: Container = control.find_node("Canvas Preview")
 onready var small_preview_viewport: ViewportContainer = canvas_preview_container.find_node(
 	"PreviewViewportContainer"
 )
 onready var camera: Camera2D = main_viewport.find_node("Camera2D")
 onready var camera2: Camera2D = control.find_node("Camera2D2")
 onready var camera_preview: Camera2D = control.find_node("CameraPreview")
-onready var cameras = [camera, camera2, camera_preview]
+onready var cameras := [camera, camera2, camera_preview]
 onready var horizontal_ruler: BaseButton = control.find_node("HorizontalRuler")
 onready var vertical_ruler: BaseButton = control.find_node("VerticalRuler")
 onready var transparent_checker: ColorRect = control.find_node("TransparentChecker")
+onready var greyscale_vision: ColorRect = control.find_node("GreyscaleVision")
 onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider")
 
-onready var tool_panel: Panel = control.find_node("ToolPanel")
-onready var right_panel: Panel = control.find_node("RightPanel")
+onready var tool_panel: ScrollContainer = control.find_node("Tools")
+onready var color_pickers: Container = control.find_node("Color Pickers")
+onready var left_tool_options_scroll: ScrollContainer = control.find_node("Left Tool Options")
+onready var right_tool_options_scroll: ScrollContainer = control.find_node("Right Tool Options")
 onready var brushes_popup: Popup = control.find_node("BrushesPopup")
 onready var patterns_popup: Popup = control.find_node("PatternsPopup")
-onready var palette_panel: PalettePanel = control.find_node("PalettePanel")
+onready var palette_panel: PalettePanel = control.find_node("Palette Panel")
 
 onready var top_menu_container: Panel = control.find_node("TopMenuContainer")
 onready var rotation_level_button: Button = control.find_node("RotationLevel")
@@ -139,7 +144,7 @@ onready var zoom_level_spinbox: SpinBox = control.find_node("ZoomSpinbox")
 onready var cursor_position_label: Label = control.find_node("CursorPosition")
 onready var current_frame_mark_label: Label = control.find_node("CurrentFrameMark")
 
-onready var animation_timeline: Panel = control.find_node("AnimationTimeline")
+onready var animation_timeline: Panel = control.find_node("Animation Timeline")
 onready var animation_timer: Timer = animation_timeline.find_node("AnimationTimer")
 onready var frame_ids: HBoxContainer = animation_timeline.find_node("FrameIDs")
 onready var play_forward: BaseButton = animation_timeline.find_node("PlayForward")
@@ -176,8 +181,6 @@ func _ready() -> void:
 
 	# Load settings from the config file
 	config_cache.load("user://cache.ini")
-
-	panel_layout = config_cache.get_value("window", "panel_layout", PanelLayout.AUTO)
 
 	default_width = config_cache.get_value("preferences", "default_width", default_width)
 	default_height = config_cache.get_value("preferences", "default_height", default_height)

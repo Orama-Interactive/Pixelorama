@@ -99,6 +99,11 @@ func set_tool(name: String, button: int) -> void:
 	var slot = _slots[button]
 	var panel: Node = _panels[button]
 	var node: Node = _tools[name].instance()
+	if button == BUTTON_LEFT:  # As guides are only moved with left mouse
+		if name == "Pan":  # tool you want to give more access at guides
+			Global.move_guides_on_canvas = true
+		else:
+			Global.move_guides_on_canvas = false
 	node.name = name
 	node.tool_slot = slot
 	slot.tool_node = node
@@ -153,7 +158,6 @@ func set_button_size(button_size: int) -> void:
 	if button_size == Global.ButtonSize.SMALL:
 		for t in _tool_buttons.get_children():
 			t.rect_min_size = Vector2(24, 24)
-			t.get_node("ToolIcon").rect_position = Vector2.ONE
 			t.get_node("BackgroundLeft").rect_size.x = 12
 			t.get_node("BackgroundRight").rect_size.x = 12
 			t.get_node("BackgroundRight").rect_position = Vector2(24, 24)
@@ -161,7 +165,6 @@ func set_button_size(button_size: int) -> void:
 	else:
 		for t in _tool_buttons.get_children():
 			t.rect_min_size = Vector2(32, 32)
-			t.get_node("ToolIcon").rect_position = Vector2.ONE * 5
 			t.get_node("BackgroundLeft").rect_size.x = 16
 			t.get_node("BackgroundRight").rect_size.x = 16
 			t.get_node("BackgroundRight").rect_position = Vector2(32, 32)
@@ -169,8 +172,6 @@ func set_button_size(button_size: int) -> void:
 
 	# It doesn't actually set the size to zero, it just resets it
 	_tool_buttons.get_parent().rect_size = Vector2.ZERO
-	_tool_buttons.columns = 1
-	_tool_buttons.get_parent().get_parent().get_parent().get_parent().split_offset = 0
 
 
 func update_tool_buttons() -> void:

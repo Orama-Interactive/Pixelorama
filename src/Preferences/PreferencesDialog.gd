@@ -42,27 +42,39 @@ var preferences = [
 	],
 	[
 		"show_left_tool_icon",
-		"Indicators/IndicatorsContainer/LeftToolIconCheckbox",
+		"Cursors/CursorsContainer/LeftToolIconCheckbox",
 		"pressed",
 		Global.show_left_tool_icon
 	],
 	[
 		"show_right_tool_icon",
-		"Indicators/IndicatorsContainer/RightToolIconCheckbox",
+		"Cursors/CursorsContainer/RightToolIconCheckbox",
 		"pressed",
 		Global.show_right_tool_icon
 	],
 	[
 		"left_square_indicator_visible",
-		"Indicators/IndicatorsContainer/LeftIndicatorCheckbox",
+		"Cursors/CursorsContainer/LeftIndicatorCheckbox",
 		"pressed",
 		Global.left_square_indicator_visible
 	],
 	[
 		"right_square_indicator_visible",
-		"Indicators/IndicatorsContainer/RightIndicatorCheckbox",
+		"Cursors/CursorsContainer/RightIndicatorCheckbox",
 		"pressed",
 		Global.right_square_indicator_visible
+	],
+	[
+		"native_cursors",
+		"Cursors/CursorsContainer/NativeCursorsCheckbox",
+		"pressed",
+		Global.native_cursors
+	],
+	[
+		"cross_cursor",
+		"Cursors/CursorsContainer/CrossCursorCheckbox",
+		"pressed",
+		Global.cross_cursor
 	],
 	[
 		"autosave_interval",
@@ -358,6 +370,20 @@ func preference_update(prop: String) -> void:
 	if prop == "tool_button_size":
 		Tools.set_button_size(Global.tool_button_size)
 
+	if prop == "native_cursors":
+		var image
+		if Global.native_cursors:
+			image = null
+		else:
+			image = Global.control.cursor_image
+		Input.set_custom_mouse_cursor(image, Input.CURSOR_CROSS, Vector2(15, 15))
+
+	if prop == "cross_cursor":
+		if Global.cross_cursor:
+			Global.main_viewport.mouse_default_cursor_shape = Control.CURSOR_CROSS
+		else:
+			Global.main_viewport.mouse_default_cursor_shape = Control.CURSOR_ARROW
+
 	Global.config_cache.save("user://cache.ini")
 
 
@@ -386,7 +412,7 @@ func add_tabs(changed_language := false) -> void:
 	list.add_item("  " + tr("Shortcuts"))
 	list.add_item("  " + tr("Backup"))
 	list.add_item("  " + tr("Performance"))
-	list.add_item("  " + tr("Indicators"))
+	list.add_item("  " + tr("Cursors"))
 
 	list.select(1 if changed_language else selected_item)
 	autosave_interval.suffix = tr("minute(s)")
@@ -409,7 +435,7 @@ func _on_List_item_selected(index: int) -> void:
 			"Shortcuts",
 			"Backup",
 			"Performance",
-			"Indicators"
+			"Cursors"
 		]
 		if OS.get_name() == "HTML5":
 			content_list.erase("Startup")

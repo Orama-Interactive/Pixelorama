@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=171 format=2]
+[gd_resource type="Theme" load_steps=172 format=2]
+
+[ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.204595, 0.1247, 0.29, 1 )
@@ -1457,6 +1459,7 @@ shadow_color = Color( 0, 0, 0, 0.3 )
 shadow_size = 4
 
 [resource]
+default_font = ExtResource( 1 )
 BoxContainer/constants/separation = 4
 Button/colors/font_color = Color( 0.79902, 0.780392, 0.820588, 1 )
 Button/colors/font_color_disabled = Color( 1, 1, 1, 0.3 )

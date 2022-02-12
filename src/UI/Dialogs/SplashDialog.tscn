@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/splash_screen/artworks/wishdream.png" type="Texture" id=2]
@@ -7,12 +7,6 @@
 [ext_resource path="res://assets/graphics/splash_screen/discord.png" type="Texture" id=9]
 [ext_resource path="res://assets/graphics/splash_screen/github_32px.png" type="Texture" id=10]
 [ext_resource path="res://assets/graphics/splash_screen/patreon_mark_white.png" type="Texture" id=11]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
-border_width_top = 20
-border_color = Color( 0.403922, 0.403922, 0.403922, 1 )
-expand_margin_top = 20.0
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -30,7 +24,6 @@ bg_color = Color( 0.6, 0.6, 0.6, 0 )
 margin_right = 640.0
 margin_bottom = 583.0
 rect_min_size = Vector2( 640, 583 )
-custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -216,6 +209,15 @@ autowrap = true
 margin_top = 18.0
 margin_right = 284.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 230, 0 )
+size_flags_vertical = 8
+text = "MysteryStudio"
+autowrap = true
+
+[node name="PatronsLabel3" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
+margin_top = 36.0
+margin_right = 284.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 230, 0 )
 size_flags_vertical = 8
 text = "Hugo Locurcio"

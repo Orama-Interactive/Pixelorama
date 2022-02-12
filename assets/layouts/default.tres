@@ -1,0 +1,116 @@
+[gd_resource type="Resource" load_steps=19 format=2]
+
+[ext_resource path="res://addons/dockable_container/layout_panel.gd" type="Script" id=1]
+[ext_resource path="res://addons/dockable_container/layout_split.gd" type="Script" id=2]
+[ext_resource path="res://addons/dockable_container/layout.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=1]
+resource_name = "Tabs"
+script = ExtResource( 1 )
+names = PoolStringArray( "Tools" )
+current_tab = 0
+
+[sub_resource type="Resource" id=8]
+resource_name = "Tabs"
+script = ExtResource( 1 )
+names = PoolStringArray( "Main Canvas" )
+current_tab = 0
+
+[sub_resource type="Resource" id=9]
+resource_name = "Tabs"
+script = ExtResource( 1 )
+names = PoolStringArray( "Animation Timeline" )
+current_tab = 0
+
+[sub_resource type="Resource" id=10]
+resource_name = "Split"
+script = ExtResource( 2 )
+direction = 1
+percent = 0.882812
+first = SubResource( 8 )
+second = SubResource( 9 )
+
+[sub_resource type="Resource" id=11]
+resource_name = "Tabs"
+script = ExtResource( 1 )
+names = PoolStringArray( "Canvas Preview" )
+current_tab = 0
+
+[sub_resource type="Resource" id=23]
+resource_name = "Tabs"
+script = ExtResource( 1 )
+names = PoolStringArray( "Color Pickers" )
+current_tab = 0
+
+[sub_resource type="Resource" id=24]
+resource_name = "Split"
+script = ExtResource( 2 )
+direction = 1
+percent = 0.0
+first = SubResource( 11 )
+second = SubResource( 23 )
+
+[sub_resource type="Resource" id=25]
+resource_name = "Tabs"
+script = ExtResource( 1 )
+names = PoolStringArray( "Left Tool Options" )
+current_tab = 0
+
+[sub_resource type="Resource" id=26]
+resource_name = "Tabs"
+script = ExtResource( 1 )
+names = PoolStringArray( "Right Tool Options" )
+current_tab = 0
+
+[sub_resource type="Resource" id=27]
+resource_name = "Split"
+script = ExtResource( 2 )
+direction = 0
+percent = 0.5
+first = SubResource( 25 )
+second = SubResource( 26 )
+
+[sub_resource type="Resource" id=21]
+resource_name = "Split"
+script = ExtResource( 2 )
+direction = 1
+percent = 0.182692
+first = SubResource( 24 )
+second = SubResource( 27 )
+
+[sub_resource type="Resource" id=13]
+resource_name = "Tabs"
+script = ExtResource( 1 )
+names = PoolStringArray( "Palette Panel" )
+current_tab = 0
+
+[sub_resource type="Resource" id=15]
+resource_name = "Split"
+script = ExtResource( 2 )
+direction = 1
+percent = 1.0
+first = SubResource( 21 )
+second = SubResource( 13 )
+
+[sub_resource type="Resource" id=16]
+resource_name = "Split"
+script = ExtResource( 2 )
+direction = 0
+percent = 0.972488
+first = SubResource( 10 )
+second = SubResource( 15 )
+
+[sub_resource type="Resource" id=5]
+resource_name = "Split"
+script = ExtResource( 2 )
+direction = 0
+percent = 0.00695249
+first = SubResource( 1 )
+second = SubResource( 16 )
+
+[resource]
+resource_name = "Layout"
+script = ExtResource( 3 )
+root = SubResource( 5 )
+hidden_tabs = {
+}
