@@ -7,6 +7,13 @@ onready var main_canvas_container = Global.main_canvas_container
 func _ready() -> void:
 	update_transparent_shader()
 
+	#Set anchors for ShaderVision
+	Global.greyscale_vision.visible = false
+	Global.greyscale_vision.anchor_left = ANCHOR_BEGIN
+	Global.greyscale_vision.anchor_top = ANCHOR_BEGIN
+	Global.greyscale_vision.anchor_right = ANCHOR_END
+	Global.greyscale_vision.anchor_bottom = ANCHOR_END
+
 
 func _on_main_canvas_item_rect_changed() -> void:
 	update_transparent_shader()

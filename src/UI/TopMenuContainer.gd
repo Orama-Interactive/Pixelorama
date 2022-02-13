@@ -5,6 +5,7 @@ enum EditMenuId { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
 enum ViewMenuId {
 	TILE_MODE,
 	WINDOW_OPACITY,
+	GREYSCALE_VIEW,
 	PANELS,
 	LAYOUTS,
 	MIRROR_VIEW,
@@ -145,6 +146,7 @@ func _setup_view_menu() -> void:
 	var view_menu_items := {  # order as in ViewMenuId enum
 		"Tile Mode": 0,
 		"Window Opacity": 0,
+		"Greyscale View": 0,
 		"Panels": 0,
 		"Layouts": 0,
 		"Mirror View": InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
@@ -414,6 +416,8 @@ func view_menu_id_pressed(id: int) -> void:
 		ViewMenuId.WINDOW_OPACITY:
 			window_opacity_dialog.popup_centered()
 			Global.dialog_open(true)
+		ViewMenuId.GREYSCALE_VIEW:
+			_toggle_greyscale_view()
 		ViewMenuId.MIRROR_VIEW:
 			_toggle_mirror_view()
 		ViewMenuId.SHOW_GRID:
@@ -472,6 +476,12 @@ func set_layout(id: int) -> void:
 	Global.control.find_node("TabsContainer").visible = true
 	zen_mode = false
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, false)
+
+
+func _toggle_greyscale_view() -> void:
+	Global.greyscale_view = !Global.greyscale_view
+	Global.greyscale_vision.visible = Global.greyscale_view
+	view_menu.set_item_checked(ViewMenuId.GREYSCALE_VIEW, Global.greyscale_view)
 
 
 func _toggle_mirror_view() -> void:
