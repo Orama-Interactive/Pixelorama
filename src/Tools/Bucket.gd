@@ -81,11 +81,7 @@ func _on_PatternOffsetY_value_changed(value: float) -> void:
 
 func get_config() -> Dictionary:
 	if !_pattern:
-		return {
-		"fill_area": _fill_area,
-		"fill_with": _fill_with,
-		"similarity": _similarity
-		}
+		return {"fill_area": _fill_area, "fill_with": _fill_with, "similarity": _similarity}
 	return {
 		"pattern_index": _pattern.index,
 		"fill_area": _fill_area,
