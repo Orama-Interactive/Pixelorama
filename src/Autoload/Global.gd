@@ -112,14 +112,14 @@ onready var right_cursor: Sprite = control.find_node("RightCursor")
 onready var canvas: Canvas = control.find_node("Canvas")
 onready var tabs: Tabs = control.find_node("Tabs")
 onready var main_viewport: ViewportContainer = control.find_node("ViewportContainer")
-onready var second_viewport: ViewportContainer = control.find_node("ViewportContainer2")
+onready var second_viewport: ViewportContainer = control.find_node("Second Canvas")
 onready var main_canvas_container: Container = control.find_node("Main Canvas")
 onready var canvas_preview_container: Container = control.find_node("Canvas Preview")
 onready var small_preview_viewport: ViewportContainer = canvas_preview_container.find_node(
 	"PreviewViewportContainer"
 )
 onready var camera: Camera2D = main_viewport.find_node("Camera2D")
-onready var camera2: Camera2D = control.find_node("Camera2D2")
+onready var camera2: Camera2D = second_viewport.find_node("Camera2D2")
 onready var camera_preview: Camera2D = control.find_node("CameraPreview")
 onready var cameras := [camera, camera2, camera_preview]
 onready var horizontal_ruler: BaseButton = control.find_node("HorizontalRuler")

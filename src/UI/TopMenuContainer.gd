@@ -58,6 +58,7 @@ onready var image_menu_button: MenuButton = find_node("ImageMenu")
 onready var select_menu_button: MenuButton = find_node("SelectMenu")
 onready var help_menu_button: MenuButton = find_node("HelpMenu")
 
+onready var ui: Container = Global.control.find_node("DockableContainer")
 onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("CreateNewImage")
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
 onready var tile_mode_submenu := PopupMenu.new()
@@ -205,7 +206,8 @@ func _setup_panels_submenu(item: String) -> void:
 	panels_submenu.hide_on_checkable_item_selection = false
 	for element in ui_elements:
 		panels_submenu.add_check_item(element.name)
-		panels_submenu.set_item_checked(ui_elements.find(element), true)
+		var is_hidden: bool = ui.is_control_hidden(element)
+		panels_submenu.set_item_checked(ui_elements.find(element), !is_hidden)
 
 	panels_submenu.connect("id_pressed", self, "_panels_submenu_id_pressed")
 	view_menu.add_child(panels_submenu)
@@ -429,8 +431,8 @@ func view_menu_id_pressed(id: int) -> void:
 		ViewMenuId.SHOW_GUIDES:
 			_toggle_show_guides()
 		ViewMenuId.EDIT_MODE:
-			Global.control.ui.tabs_visible = !Global.control.ui.tabs_visible
-			view_menu.set_item_checked(ViewMenuId.EDIT_MODE, Global.control.ui.tabs_visible)
+			ui.tabs_visible = !ui.tabs_visible
+			view_menu.set_item_checked(ViewMenuId.EDIT_MODE, ui.tabs_visible)
 		ViewMenuId.ZEN_MODE:
 			_toggle_zen_mode()
 		ViewMenuId.FULLSCREEN_MODE:
@@ -452,7 +454,7 @@ func _panels_submenu_id_pressed(id: int) -> void:
 	if zen_mode:
 		return
 	var element_visible = panels_submenu.is_item_checked(id)
-	Global.control.ui.set_control_hidden(ui_elements[id], element_visible)
+	ui.set_control_hidden(ui_elements[id], element_visible)
 	panels_submenu.set_item_checked(id, !element_visible)
 
 
@@ -466,12 +468,13 @@ func _layouts_submenu_id_pressed(id: int) -> void:
 
 func set_layout(id: int) -> void:
 	# Clone is needed so that the premade layouts do not get modified
-	Global.control.ui.layout = layouts[id][1].clone()
+	ui.layout = layouts[id][1].clone()
 	for i in layouts.size():
 		layouts_submenu.set_item_checked(i, i == id)
 
 	for i in ui_elements.size():
-		panels_submenu.set_item_checked(i, true)
+		var is_hidden: bool = ui.is_control_hidden(ui_elements[i])
+		panels_submenu.set_item_checked(i, !is_hidden)
 
 	Global.control.find_node("TabsContainer").visible = true
 	zen_mode = false
@@ -532,13 +535,13 @@ func _toggle_show_guides() -> void:
 
 
 func _toggle_zen_mode() -> void:
-	Global.control.ui.set_control_hidden(Global.animation_timeline, !zen_mode)
-	Global.control.ui.set_control_hidden(Global.tool_panel, !zen_mode)
-	Global.control.ui.set_control_hidden(Global.canvas_preview_container, !zen_mode)
-	Global.control.ui.set_control_hidden(Global.color_pickers, !zen_mode)
-	Global.control.ui.set_control_hidden(Global.left_tool_options_scroll, !zen_mode)
-	Global.control.ui.set_control_hidden(Global.right_tool_options_scroll, !zen_mode)
-	Global.control.ui.set_control_hidden(Global.palette_panel, !zen_mode)
+	ui.set_control_hidden(Global.animation_timeline, !zen_mode)
+	ui.set_control_hidden(Global.tool_panel, !zen_mode)
+	ui.set_control_hidden(Global.canvas_preview_container, !zen_mode)
+	ui.set_control_hidden(Global.color_pickers, !zen_mode)
+	ui.set_control_hidden(Global.left_tool_options_scroll, !zen_mode)
+	ui.set_control_hidden(Global.right_tool_options_scroll, !zen_mode)
+	ui.set_control_hidden(Global.palette_panel, !zen_mode)
 	Global.control.find_node("TabsContainer").visible = zen_mode
 	zen_mode = !zen_mode
 	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)
