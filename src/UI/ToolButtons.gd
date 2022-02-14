@@ -70,7 +70,10 @@ func _on_Tool_pressed(tool_pressed: BaseButton) -> void:
 
 func _on_Tools_resized() -> void:
 	var tool_panel_size: Vector2 = get_parent().get_parent().rect_size
-	if Global.tool_button_size == Global.ButtonSize.SMALL:
-		columns = tool_panel_size.x / 28.5
-	else:
-		columns = tool_panel_size.x / 36.5
+	var column_n = tool_panel_size.x / 28.5
+	if Global.tool_button_size == Global.ButtonSize.BIG:
+		column_n = tool_panel_size.x / 36.5
+
+	if column_n < 1:
+		column_n = 1
+	columns = column_n
