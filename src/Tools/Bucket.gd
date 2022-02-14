@@ -23,9 +23,11 @@ func _input(event: InputEvent) -> void:
 	if event.is_action("ctrl"):
 		options.selected = _prev_mode ^ 1
 		_fill_area = options.selected
+		$Similarity.visible = (_fill_area == 1)
 	if event.is_action_released("ctrl"):
 		options.selected = _prev_mode
 		_fill_area = options.selected
+		$Similarity.visible = (_fill_area == 1)
 
 
 func _on_FillAreaOptions_item_selected(index: int) -> void:
