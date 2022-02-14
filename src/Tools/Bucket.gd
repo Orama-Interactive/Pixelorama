@@ -4,6 +4,7 @@ const ColorReplaceShader := preload("res://src/Shaders/ColorReplace.shader")
 
 var _prev_mode := 0
 var _pattern: Patterns.Pattern
+var _similarity := 100
 var _fill_area := 0
 var _fill_with := 0
 var _offset_x := 0
@@ -35,6 +36,20 @@ func _on_FillAreaOptions_item_selected(index: int) -> void:
 
 func _on_FillWithOptions_item_selected(index: int) -> void:
 	_fill_with = index
+	$Similarity/Value.value = _similarity
+	update_config()
+	save_config()
+
+
+func _on_Value_value_changed(value: float) -> void:
+	_similarity = value
+	$Similarity/Slider.value = _similarity
+	update_config()
+	save_config()
+
+
+func _on_Slider_value_changed(value: float) -> void:
+	_similarity = value
 	update_config()
 	save_config()
 
@@ -66,11 +81,16 @@ func _on_PatternOffsetY_value_changed(value: float) -> void:
 
 func get_config() -> Dictionary:
 	if !_pattern:
-		return {}
+		return {
+		"fill_area": _fill_area,
+		"fill_with": _fill_with,
+		"similarity": _similarity
+		}
 	return {
 		"pattern_index": _pattern.index,
 		"fill_area": _fill_area,
 		"fill_with": _fill_with,
+		"similarity": _similarity,
 		"offset_x": _offset_x,
 		"offset_y": _offset_y,
 	}
@@ -82,6 +102,7 @@ func set_config(config: Dictionary) -> void:
 		_pattern = Global.patterns_popup.get_pattern(index)
 	_fill_area = config.get("fill_area", _fill_area)
 	_fill_with = config.get("fill_with", _fill_with)
+	_similarity = config.get("similarity", _similarity)
 	_offset_x = config.get("offset_x", _offset_x)
 	_offset_y = config.get("offset_y", _offset_y)
 	update_pattern()
@@ -90,6 +111,9 @@ func set_config(config: Dictionary) -> void:
 func update_config() -> void:
 	$FillAreaOptions.selected = _fill_area
 	$FillWithOptions.selected = _fill_with
+	$Similarity.visible = (_fill_area == 1)
+	$Similarity/Value.value = _similarity
+	$Similarity/Slider.value = _similarity
 	$Mirror.visible = _fill_area == 0
 	$FillPattern.visible = _fill_with == 1
 	$FillPattern/XOffset/OffsetX.value = _offset_x
@@ -172,6 +196,7 @@ func fill_in_color(position: Vector2) -> void:
 			"size": project.size,
 			"old_color": color,
 			"new_color": tool_slot.color,
+			"similarity_percent": _similarity,
 			"selection": selection_tex,
 			"pattern": pattern_tex,
 			"pattern_size": pattern_tex.get_size(),
