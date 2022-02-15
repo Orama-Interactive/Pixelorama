@@ -1,7 +1,10 @@
 extends BaseTool
 
+const ColorReplaceShader := preload("res://src/Shaders/ColorReplace.shader")
+
 var _prev_mode := 0
 var _pattern: Patterns.Pattern
+var _similarity := 100
 var _fill_area := 0
 var _fill_with := 0
 var _offset_x := 0
@@ -20,9 +23,11 @@ func _input(event: InputEvent) -> void:
 	if event.is_action("ctrl"):
 		options.selected = _prev_mode ^ 1
 		_fill_area = options.selected
+		$Similarity.visible = (_fill_area == 1)
 	if event.is_action_released("ctrl"):
 		options.selected = _prev_mode
 		_fill_area = options.selected
+		$Similarity.visible = (_fill_area == 1)
 
 
 func _on_FillAreaOptions_item_selected(index: int) -> void:
@@ -33,6 +38,20 @@ func _on_FillAreaOptions_item_selected(index: int) -> void:
 
 func _on_FillWithOptions_item_selected(index: int) -> void:
 	_fill_with = index
+	$Similarity/Value.value = _similarity
+	update_config()
+	save_config()
+
+
+func _on_Value_value_changed(value: float) -> void:
+	_similarity = value
+	$Similarity/Slider.value = _similarity
+	update_config()
+	save_config()
+
+
+func _on_Slider_value_changed(value: float) -> void:
+	_similarity = value
 	update_config()
 	save_config()
 
@@ -64,11 +83,12 @@ func _on_PatternOffsetY_value_changed(value: float) -> void:
 
 func get_config() -> Dictionary:
 	if !_pattern:
-		return {}
+		return {"fill_area": _fill_area, "fill_with": _fill_with, "similarity": _similarity}
 	return {
 		"pattern_index": _pattern.index,
 		"fill_area": _fill_area,
 		"fill_with": _fill_with,
+		"similarity": _similarity,
 		"offset_x": _offset_x,
 		"offset_y": _offset_y,
 	}
@@ -80,6 +100,7 @@ func set_config(config: Dictionary) -> void:
 		_pattern = Global.patterns_popup.get_pattern(index)
 	_fill_area = config.get("fill_area", _fill_area)
 	_fill_with = config.get("fill_with", _fill_with)
+	_similarity = config.get("similarity", _similarity)
 	_offset_x = config.get("offset_x", _offset_x)
 	_offset_y = config.get("offset_y", _offset_y)
 	update_pattern()
@@ -88,6 +109,9 @@ func set_config(config: Dictionary) -> void:
 func update_config() -> void:
 	$FillAreaOptions.selected = _fill_area
 	$FillWithOptions.selected = _fill_with
+	$Similarity.visible = (_fill_area == 1)
+	$Similarity/Value.value = _similarity
+	$Similarity/Slider.value = _similarity
 	$Mirror.visible = _fill_area == 0
 	$FillPattern.visible = _fill_with == 1
 	$FillPattern/XOffset/OffsetX.value = _offset_x
@@ -151,13 +175,37 @@ func fill_in_color(position: Vector2) -> void:
 			if tool_slot.color.is_equal_approx(color):
 				return
 
-		for x in Global.current_project.size.x:
-			for y in Global.current_project.size.y:
-				var pos := Vector2(x, y)
-				if project.has_selection and not project.can_pixel_get_drawn(pos):
-					continue
-				if image.get_pixelv(pos).is_equal_approx(color):
-					_set_pixel(image, x, y, tool_slot.color)
+		var selection: Image
+		var selection_tex := ImageTexture.new()
+		if project.has_selection:
+			selection = project.bitmap_to_image(project.selection_bitmap, false)
+		else:
+			selection = Image.new()
+			selection.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			selection.fill(Color(1, 1, 1, 1))
+
+		selection_tex.create_from_image(selection)
+
+		var pattern_tex := ImageTexture.new()
+		if _pattern:
+			pattern_tex.create_from_image(_pattern.image)
+
+		var params := {
+			"size": project.size,
+			"old_color": color,
+			"new_color": tool_slot.color,
+			"similarity_percent": _similarity,
+			"selection": selection_tex,
+			"pattern": pattern_tex,
+			"pattern_size": pattern_tex.get_size(),
+			# pixel offset converted to pattern uv offset
+			"pattern_uv_offset":
+			Vector2.ONE / pattern_tex.get_size() * Vector2(_offset_x, _offset_y),
+			"has_pattern": true if _fill_with == 1 else false
+		}
+		var gen := ShaderImageEffect.new()
+		gen.generate_image(image, ColorReplaceShader, params, project.size)
+		yield(gen, "done")
 
 
 func fill_in_area(position: Vector2) -> void:
