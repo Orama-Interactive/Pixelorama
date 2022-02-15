@@ -345,7 +345,7 @@ func fit_to_frame(size: Vector2) -> void:
 	var h_ratio := viewport_container.rect_size.x / size.x
 	var v_ratio := viewport_container.rect_size.y / size.y
 	var ratio := min(h_ratio, v_ratio)
-	if ratio == 0:
+	if ratio == 0 or !viewport_container.visible:
 		ratio = 0.1  # Set it to a non-zero value just in case
 		# If the ratio is 0, it means that the viewport container is hidden
 		# in that case, use the other viewport to get the ratio
