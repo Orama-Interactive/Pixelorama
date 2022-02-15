@@ -5,6 +5,7 @@ uniform vec2 size;
 
 uniform vec4 old_color;  //Our description
 uniform vec4 new_color;
+uniform float similarity_percent : hint_range(0.0, 100.0);
 
 // Must be the same size as image
 // Selected pixels are 1,1,1,1 and unselected 0,0,0,0
@@ -22,8 +23,10 @@ void fragment() { // applies on each pixel seperately
 	vec4 col = original_color;  // Innocent till proven Guilty
 
 	float max_diff = distance(original_color, old_color);  // How much this pixel matches our description 
+	
+	float similarity = abs(2.0 - ((similarity_percent/100.0) * 2.0));
 
-	if (max_diff < 0.001)  // We found our match and pixel is proven Guilty (small is precise)
+	if (max_diff <= similarity)  // We found our match and pixel is proven Guilty (small is precise)
 		if (has_pattern)
 			col = textureLod(pattern, UV * (size / pattern_size) + pattern_uv_offset, 0.0);
 		else
