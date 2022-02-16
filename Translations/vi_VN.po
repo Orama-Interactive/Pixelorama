@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Vietnamese\n"
 "Language: vi_VN\n"
-"PO-Revision-Date: 2022-02-16 16:27\n"
+"PO-Revision-Date: 2022-02-16 22:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -65,6 +65,9 @@ msgstr ""
 
 msgid "View"
 msgstr "Xem"
+
+msgid "Window"
+msgstr ""
 
 msgid "Image"
 msgstr "Hình ảnh"
