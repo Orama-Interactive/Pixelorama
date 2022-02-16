@@ -55,6 +55,9 @@ msgstr ""
 msgid "View"
 msgstr ""
 
+msgid "Window"
+msgstr ""
+
 msgid "Image"
 msgstr ""
 

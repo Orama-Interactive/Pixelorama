@@ -4,19 +4,14 @@ enum FileMenuId { NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS
 enum EditMenuId { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
 enum ViewMenuId {
 	TILE_MODE,
-	WINDOW_OPACITY,
 	GREYSCALE_VIEW,
-	PANELS,
-	LAYOUTS,
 	MIRROR_VIEW,
 	SHOW_GRID,
 	SHOW_PIXEL_GRID,
 	SHOW_RULERS,
 	SHOW_GUIDES,
-	EDIT_MODE,
-	ZEN_MODE,
-	FULLSCREEN_MODE
 }
+enum WindowMenuId { WINDOW_OPACITY, PANELS, LAYOUTS, EDIT_MODE, ZEN_MODE, FULLSCREEN_MODE }
 enum ImageMenuId {
 	SCALE_IMAGE,
 	CENTRALIZE_IMAGE,
@@ -43,6 +38,7 @@ enum HelpMenuId {
 
 var file_menu: PopupMenu
 var view_menu: PopupMenu
+var window_menu: PopupMenu
 var recent_projects := []
 var layouts := [
 	["Default", preload("res://assets/layouts/default.tres")],
@@ -54,6 +50,7 @@ onready var ui_elements: Array = Global.control.find_node("DockableContainer").g
 onready var file_menu_button: MenuButton = find_node("FileMenu")
 onready var edit_menu_button: MenuButton = find_node("EditMenu")
 onready var view_menu_button: MenuButton = find_node("ViewMenu")
+onready var window_menu_button: MenuButton = find_node("WindowMenu")
 onready var image_menu_button: MenuButton = find_node("ImageMenu")
 onready var select_menu_button: MenuButton = find_node("SelectMenu")
 onready var help_menu_button: MenuButton = find_node("HelpMenu")
@@ -73,6 +70,7 @@ func _ready() -> void:
 	_setup_file_menu()
 	_setup_edit_menu()
 	_setup_view_menu()
+	_setup_window_menu()
 	_setup_image_menu()
 	_setup_select_menu()
 	_setup_help_menu()
@@ -146,20 +144,13 @@ func _setup_edit_menu() -> void:
 func _setup_view_menu() -> void:
 	var view_menu_items := {  # order as in ViewMenuId enum
 		"Tile Mode": 0,
-		"Window Opacity": 0,
 		"Greyscale View": 0,
-		"Panels": 0,
-		"Layouts": 0,
 		"Mirror View": InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
 		"Show Grid": InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
 		"Show Pixel Grid":
 		InputMap.get_action_list("show_pixel_grid")[0].get_scancode_with_modifiers(),
 		"Show Rulers": InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
 		"Show Guides": InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
-		"Edit Mode": InputMap.get_action_list("edit_mode")[0].get_scancode_with_modifiers(),
-		"Zen Mode": InputMap.get_action_list("zen_mode")[0].get_scancode_with_modifiers(),
-		"Fullscreen Mode":
-		InputMap.get_action_list("toggle_fullscreen")[0].get_scancode_with_modifiers(),
 	}
 	view_menu = view_menu_button.get_popup()
 
@@ -167,12 +158,6 @@ func _setup_view_menu() -> void:
 	for item in view_menu_items.keys():
 		if item == "Tile Mode":
 			_setup_tile_mode_submenu(item)
-		elif item == "Panels":
-			_setup_panels_submenu(item)
-		elif item == "Layouts":
-			_setup_layouts_submenu(item)
-		elif item == "Window Opacity":
-			view_menu.add_item(item, i, view_menu_items[item])
 		else:
 			view_menu.add_check_item(item, i, view_menu_items[item])
 		i += 1
@@ -180,11 +165,6 @@ func _setup_view_menu() -> void:
 	view_menu.set_item_checked(ViewMenuId.SHOW_GUIDES, true)
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
-	# Disable window opacity item if per pixel transparency is not allowed
-	view_menu.set_item_disabled(
-		ViewMenuId.WINDOW_OPACITY,
-		!ProjectSettings.get_setting("display/window/per_pixel_transparency/allowed")
-	)
 
 
 func _setup_tile_mode_submenu(item: String) -> void:
@@ -201,6 +181,38 @@ func _setup_tile_mode_submenu(item: String) -> void:
 	view_menu.add_submenu_item(item, tile_mode_submenu.get_name())
 
 
+func _setup_window_menu() -> void:
+	var window_menu_items := {  # order as in WindowMenuId enum
+		"Window Opacity": 0,
+		"Panels": 0,
+		"Layouts": 0,
+		"Edit Mode": InputMap.get_action_list("edit_mode")[0].get_scancode_with_modifiers(),
+		"Zen Mode": InputMap.get_action_list("zen_mode")[0].get_scancode_with_modifiers(),
+		"Fullscreen Mode":
+		InputMap.get_action_list("toggle_fullscreen")[0].get_scancode_with_modifiers(),
+	}
+	window_menu = window_menu_button.get_popup()
+
+	var i := 0
+	for item in window_menu_items.keys():
+		if item == "Panels":
+			_setup_panels_submenu(item)
+		elif item == "Layouts":
+			_setup_layouts_submenu(item)
+		elif item == "Window Opacity":
+			window_menu.add_item(item, i, window_menu_items[item])
+		else:
+			window_menu.add_check_item(item, i, window_menu_items[item])
+		i += 1
+	window_menu.hide_on_checkable_item_selection = false
+	window_menu.connect("id_pressed", self, "window_menu_id_pressed")
+	# Disable window opacity item if per pixel transparency is not allowed
+	window_menu.set_item_disabled(
+		WindowMenuId.WINDOW_OPACITY,
+		!ProjectSettings.get_setting("display/window/per_pixel_transparency/allowed")
+	)
+
+
 func _setup_panels_submenu(item: String) -> void:
 	panels_submenu.set_name("panels_submenu")
 	panels_submenu.hide_on_checkable_item_selection = false
@@ -210,8 +222,8 @@ func _setup_panels_submenu(item: String) -> void:
 		panels_submenu.set_item_checked(ui_elements.find(element), !is_hidden)
 
 	panels_submenu.connect("id_pressed", self, "_panels_submenu_id_pressed")
-	view_menu.add_child(panels_submenu)
-	view_menu.add_submenu_item(item, panels_submenu.get_name())
+	window_menu.add_child(panels_submenu)
+	window_menu.add_submenu_item(item, panels_submenu.get_name())
 
 
 func _setup_layouts_submenu(item: String) -> void:
@@ -232,8 +244,8 @@ func _setup_layouts_submenu(item: String) -> void:
 	layouts_submenu.set_item_checked(0, true)
 
 	layouts_submenu.connect("id_pressed", self, "_layouts_submenu_id_pressed")
-	view_menu.add_child(layouts_submenu)
-	view_menu.add_submenu_item(item, layouts_submenu.get_name())
+	window_menu.add_child(layouts_submenu)
+	window_menu.add_submenu_item(item, layouts_submenu.get_name())
 
 
 func populate_layouts_submenu() -> void:
@@ -415,9 +427,6 @@ func edit_menu_id_pressed(id: int) -> void:
 
 func view_menu_id_pressed(id: int) -> void:
 	match id:
-		ViewMenuId.WINDOW_OPACITY:
-			window_opacity_dialog.popup_centered()
-			Global.dialog_open(true)
 		ViewMenuId.GREYSCALE_VIEW:
 			_toggle_greyscale_view()
 		ViewMenuId.MIRROR_VIEW:
@@ -430,13 +439,6 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_rulers()
 		ViewMenuId.SHOW_GUIDES:
 			_toggle_show_guides()
-		ViewMenuId.EDIT_MODE:
-			ui.tabs_visible = !ui.tabs_visible
-			view_menu.set_item_checked(ViewMenuId.EDIT_MODE, ui.tabs_visible)
-		ViewMenuId.ZEN_MODE:
-			_toggle_zen_mode()
-		ViewMenuId.FULLSCREEN_MODE:
-			_toggle_fullscreen()
 	Global.canvas.update()
 
 
@@ -448,6 +450,20 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.canvas.tile_mode.update()
 	Global.canvas.pixel_grid.update()
 	Global.canvas.grid.update()
+
+
+func window_menu_id_pressed(id: int) -> void:
+	match id:
+		WindowMenuId.WINDOW_OPACITY:
+			window_opacity_dialog.popup_centered()
+			Global.dialog_open(true)
+		WindowMenuId.EDIT_MODE:
+			ui.tabs_visible = !ui.tabs_visible
+			window_menu.set_item_checked(WindowMenuId.EDIT_MODE, ui.tabs_visible)
+		WindowMenuId.ZEN_MODE:
+			_toggle_zen_mode()
+		WindowMenuId.FULLSCREEN_MODE:
+			_toggle_fullscreen()
 
 
 func _panels_submenu_id_pressed(id: int) -> void:
@@ -478,7 +494,7 @@ func set_layout(id: int) -> void:
 
 	Global.control.find_node("TabsContainer").visible = true
 	zen_mode = false
-	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, false)
+	window_menu.set_item_checked(WindowMenuId.ZEN_MODE, false)
 
 
 func _toggle_greyscale_view() -> void:
@@ -544,12 +560,12 @@ func _toggle_zen_mode() -> void:
 	ui.set_control_hidden(Global.palette_panel, !zen_mode)
 	Global.control.find_node("TabsContainer").visible = zen_mode
 	zen_mode = !zen_mode
-	view_menu.set_item_checked(ViewMenuId.ZEN_MODE, zen_mode)
+	window_menu.set_item_checked(WindowMenuId.ZEN_MODE, zen_mode)
 
 
 func _toggle_fullscreen() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
-	view_menu.set_item_checked(ViewMenuId.FULLSCREEN_MODE, OS.window_fullscreen)
+	window_menu.set_item_checked(WindowMenuId.FULLSCREEN_MODE, OS.window_fullscreen)
 	if OS.window_fullscreen:  # If window is fullscreen then reset transparency
 		window_opacity_dialog.set_window_opacity(1.0)
 
