@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-02-16 22:59\n"
+"PO-Revision-Date: 2022-02-16 23:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Vista"
 
 msgid "Window"
-msgstr ""
+msgstr "Finestra"
 
 msgid "Image"
 msgstr "Immagine"
