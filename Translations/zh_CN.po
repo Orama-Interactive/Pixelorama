@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-02-11 03:29\n"
+"PO-Revision-Date: 2022-02-16 16:27\n"
 
 msgid "OK"
 msgstr "确定"
@@ -318,10 +318,17 @@ msgstr "目录路径或文件名无效！"
 msgid "Exporting in progress..."
 msgstr "正在导出..."
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "无法加载文件 '%s'。\n"
 "错误代码： %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr ""
 
 msgid "Frame"
 msgstr "帧"
