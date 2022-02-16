@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-02-11 00:11\n"
+"PO-Revision-Date: 2022-02-16 16:27\n"
 
 msgid "OK"
 msgstr "예"
@@ -318,10 +318,17 @@ msgstr "디렉토리 경로나 파일 이름이 유효하지 않습니다!"
 msgid "Exporting in progress..."
 msgstr "내보내는 중..."
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "파일 '%s'을(를) 불러올 수 없습니다.\n"
 "오류 코드: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr ""
 
 msgid "Frame"
 msgstr "프레임"
