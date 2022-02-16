@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-02-10 20:51\n"
+"PO-Revision-Date: 2022-02-16 16:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -318,9 +318,16 @@ msgstr "Banen eller filnavnet er ikke gyldig!"
 msgid "Exporting in progress..."
 msgstr "Eksport pågår..."
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Kan ikke laste fil '%s'. Feilkode: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr ""
 
 msgid "Frame"
 msgstr "Bilde"
