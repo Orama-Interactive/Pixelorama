@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-02-16 16:27\n"
+"PO-Revision-Date: 2022-02-16 19:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -319,7 +319,7 @@ msgid "Exporting in progress..."
 msgstr "Export läuft..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Kann Datei '%s ' nicht laden."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -327,7 +327,8 @@ msgstr "Kann Datei nicht laden '%s'. Error code: %s"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Datei '%s' kann nicht geladen werden.\n"
+"Dies ist keine gültige Palettendatei."
 
 msgid "Frame"
 msgstr "Frame"
