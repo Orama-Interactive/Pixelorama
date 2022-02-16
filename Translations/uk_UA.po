@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-02-11 00:31\n"
+"PO-Revision-Date: 2022-02-16 16:27\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -318,10 +318,17 @@ msgstr "Шлях до каталогу або ім'я файлу недійсн�
 msgid "Exporting in progress..."
 msgstr "Виконується експорт..."
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Не вдалося завантажити файл '%s.\n"
 "Код помилки: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr ""
 
 msgid "Frame"
 msgstr "Кадр"
