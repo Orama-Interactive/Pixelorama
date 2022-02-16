@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-02-16 16:27\n"
+"PO-Revision-Date: 2022-02-16 18:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -319,7 +319,7 @@ msgid "Exporting in progress..."
 msgstr "Выполняется экспорт..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Не удается загрузить файл '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
