@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2022-02-10 20:51\n"
+"PO-Revision-Date: 2022-02-16 16:27\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -318,8 +318,15 @@ msgstr ""
 msgid "Exporting in progress..."
 msgstr ""
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
+msgstr ""
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
 msgstr ""
 
 msgid "Frame"
