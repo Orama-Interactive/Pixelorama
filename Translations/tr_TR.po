@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-02-10 20:51\n"
+"PO-Revision-Date: 2022-02-16 16:27\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -318,10 +318,17 @@ msgstr "Dosya yolu ve dosya adı geçerli değil!"
 msgid "Exporting in progress..."
 msgstr "Dışa aktarma işlemi devam ediyor..."
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "'%s' dosyası yüklenemedi.\n"
 "Hata kodu: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr ""
 
 msgid "Frame"
 msgstr "Kare"
