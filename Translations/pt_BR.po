@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-02-16 21:12\n"
+"PO-Revision-Date: 2022-02-16 22:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -65,6 +65,9 @@ msgstr "Selecionar"
 
 msgid "View"
 msgstr "Ver"
+
+msgid "Window"
+msgstr ""
 
 msgid "Image"
 msgstr "Imagem"
