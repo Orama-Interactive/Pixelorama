@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-02-16 16:27\n"
+"PO-Revision-Date: 2022-02-16 17:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -319,7 +319,7 @@ msgid "Exporting in progress..."
 msgstr "エクスポート中..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "ファイル '%s' を読み込めません。"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -328,7 +328,8 @@ msgstr "ファイル '%s' を読み込むことができません。\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "ファイル '%s' を読み込めません。\n"
+"これは有効なパレットファイルではありません。"
 
 msgid "Frame"
 msgstr "フレーム"
