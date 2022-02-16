@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-02-16 16:27\n"
+"PO-Revision-Date: 2022-02-16 17:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -319,7 +319,7 @@ msgid "Exporting in progress..."
 msgstr "Exportare în desfășurare..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Fișierul „%s” nu poate fi încărcat."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -328,7 +328,8 @@ msgstr "Nu se poate încărca fișierul '%s'.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Fișierul „%s” nu poate fi încărcat.\n"
+"Acesta nu este un fișier de paletă valid."
 
 msgid "Frame"
 msgstr "Cadru"
