@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-02-10 20:51\n"
+"PO-Revision-Date: 2022-02-16 16:27\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -318,10 +318,17 @@ msgstr "Η διαδρομή του φακέλου ή το όνομα αρχεί�
 msgid "Exporting in progress..."
 msgstr "Εξαγωγή σε εξέλιξη..."
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Δεν είναι δυνατή η φόρτωση του αρχείου '%s'.\n"
 "Κωδικός σφάλματος: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr ""
 
 msgid "Frame"
 msgstr "Καρέ"
