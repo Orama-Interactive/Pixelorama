@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-02-16 21:01\n"
+"PO-Revision-Date: 2022-02-16 21:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -328,7 +328,8 @@ msgstr "Impossível carregar o arquivo '%s'.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Não é possível carregar o arquivo '%s'.\n"
+"Este não é um arquivo de paleta válido."
 
 msgid "Frame"
 msgstr "Quadro"
