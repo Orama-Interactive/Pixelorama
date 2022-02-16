@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2022-02-10 20:51\n"
+"PO-Revision-Date: 2022-02-16 16:28\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -318,10 +318,17 @@ msgstr "A könyvtár elérési útja vagy a fájlnév nem érvényes!"
 msgid "Exporting in progress..."
 msgstr "Exportálás folyamatban..."
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Nem lehet megnyitni %s fájlt\n"
 "Error kód: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr ""
 
 msgid "Frame"
 msgstr "Képkocka"
