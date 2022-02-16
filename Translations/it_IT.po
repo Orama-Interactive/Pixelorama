@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-02-16 16:28\n"
+"PO-Revision-Date: 2022-02-16 17:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -319,7 +319,7 @@ msgid "Exporting in progress..."
 msgstr "Esportazione in corso..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Impossibile caricare il file '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -328,7 +328,8 @@ msgstr "Impossibile caricare il file '%s'.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Impossibile caricare il file '%s'.\n"
+"Questo non è un file di tavolozza valido."
 
 msgid "Frame"
 msgstr "Frame"
