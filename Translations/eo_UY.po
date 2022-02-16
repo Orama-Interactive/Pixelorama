@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2022-02-10 20:51\n"
+"PO-Revision-Date: 2022-02-16 16:27\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -318,10 +318,17 @@ msgstr "Dosieruja vojo aŭ dosiera nomo estas malĝusta!"
 msgid "Exporting in progress..."
 msgstr ""
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Ne povas ŝarĝi dosieron '%s'.\n"
 "Kodo de eraro: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr ""
 
 msgid "Frame"
 msgstr "Kadro"
