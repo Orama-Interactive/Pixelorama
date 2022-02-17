@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-02-16 22:59\n"
+"PO-Revision-Date: 2022-02-17 02:58\n"
 
 msgid "OK"
 msgstr "确定"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "视图"
 
 msgid "Window"
-msgstr ""
+msgstr "窗口"
 
 msgid "Image"
 msgstr "图像"
@@ -322,7 +322,7 @@ msgid "Exporting in progress..."
 msgstr "正在导出..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "无法加载 '%s' 文件。"
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -331,7 +331,8 @@ msgstr "无法加载文件 '%s'。\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "无法加载 '%s' 文件。\n"
+"这不是一个有效的调色板文件。"
 
 msgid "Frame"
 msgstr "帧"
