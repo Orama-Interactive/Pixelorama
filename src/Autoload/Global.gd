@@ -2,7 +2,6 @@ extends Node
 
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
-enum ThemeTypes { DARK, BLUE, CARAMEL, LIGHT }
 enum TileMode { NONE, BOTH, X_AXIS, Y_AXIS }
 enum IconColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
@@ -38,7 +37,6 @@ var smooth_zoom := true
 
 var shrink := 1.0
 var dim_on_popup := true
-var theme_type: int = ThemeTypes.DARK
 var modulate_icon_color := Color.gray
 var icon_color_from: int = IconColorFrom.THEME
 var custom_icon_color := Color.gray

@@ -533,14 +533,9 @@ func _frame_changed(value: int) -> void:
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
 	for i in frames.size():
-		var text_color := Color.white
-		if (
-			Global.theme_type == Global.ThemeTypes.CARAMEL
-			|| Global.theme_type == Global.ThemeTypes.LIGHT
-		):
-			text_color = Color.black
-		Global.frame_ids.get_child(i).add_color_override("font_color", text_color)
-		for container in Global.frames_container.get_children():  # De-select all the other frames
+		var frame_button: BaseButton = Global.frame_ids.get_child(i)
+		frame_button.pressed = false
+		for container in Global.frames_container.get_children():  # De-select all the other cels
 			if i < container.get_child_count():
 				container.get_child(i).pressed = false
 
@@ -551,9 +546,9 @@ func _frame_changed(value: int) -> void:
 		var current_frame_tmp: int = cel[0]
 		var current_layer_tmp: int = cel[1]
 		if current_frame_tmp < Global.frame_ids.get_child_count():
-			Global.frame_ids.get_child(current_frame_tmp).add_color_override(
-				"font_color", Global.control.theme.get_color("Selected Color", "Label")
-			)
+			var frame_button: BaseButton = Global.frame_ids.get_child(current_frame_tmp)
+			frame_button.pressed = true
+
 		var container_child_count: int = Global.frames_container.get_child_count()
 		if current_layer_tmp < container_child_count:
 			var container = Global.frames_container.get_child(

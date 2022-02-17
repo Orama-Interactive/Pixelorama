@@ -1505,6 +1505,7 @@ shadow_color = Color( 0, 0, 0, 0.3 )
 shadow_size = 4
 
 [resource]
+resource_name = "Dark"
 default_font = ExtResource( 1 )
 BoxContainer/constants/separation = 4
 Button/colors/font_color = Color( 0.77832, 0.77832, 0.77832, 1 )
@@ -1650,6 +1651,7 @@ HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 8
 HSplitContainer/icons/grabber = SubResource( 90 )
 HSplitContainer/styles/bg = SubResource( 91 )
+Icons/colors/modulate_color = Color( 0.74902, 0.74902, 0.74902, 1 )
 ItemList/colors/font_color = Color( 0.77832, 0.77832, 0.77832, 1 )
 ItemList/colors/font_color_selected = Color( 1, 1, 1, 1 )
 ItemList/colors/guide_color = Color( 1, 1, 1, 0.05 )

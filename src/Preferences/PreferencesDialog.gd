@@ -362,7 +362,8 @@ func preference_update(prop: String) -> void:
 
 	if prop in ["icon_color_from", "custom_icon_color"]:
 		if Global.icon_color_from == Global.IconColorFrom.THEME:
-			Global.modulate_icon_color = themes.themes[themes.theme_index][2]
+			var current_theme: Theme = themes.themes[themes.theme_index]
+			Global.modulate_icon_color = current_theme.get_color("modulate_color", "Icons")
 		else:
 			Global.modulate_icon_color = Global.custom_icon_color
 		themes.change_icon_colors()
