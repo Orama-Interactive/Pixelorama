@@ -111,14 +111,14 @@ text = "Affect Brush's Alpha"
 items = [ "None", null, false, 0, null, "Affect Brush's Alpha", null, false, 1, null ]
 selected = 1
 
-[node name="Languages" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+[node name="Language" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
 margin_top = 184.0
 margin_right = 506.0
 margin_bottom = 632.0
 script = ExtResource( 4 )
 
-[node name="System Language" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Languages"]
+[node name="System Language" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Language"]
 margin_right = 506.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
