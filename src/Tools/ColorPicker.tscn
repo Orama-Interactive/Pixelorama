@@ -40,8 +40,4 @@ visible = false
 margin_top = 60.0
 margin_bottom = 72.0
 
-[node name="Mirror" parent="." index="4"]
-visible = false
-margin_top = 60.0
-margin_bottom = 77.0
 [connection signal="item_selected" from="ColorPicker/Options" to="." method="_on_Options_item_selected"]

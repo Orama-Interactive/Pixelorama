@@ -75,10 +75,6 @@ text = "Fill Shape"
 margin_top = 94.0
 margin_bottom = 106.0
 
-[node name="Mirror" parent="." index="9"]
-margin_top = 110.0
-margin_bottom = 127.0
-
 [connection signal="value_changed" from="ShapeThickness/ThicknessSpinbox" to="." method="_on_Thickness_value_changed"]
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]
 [connection signal="toggled" from="FillCheckbox" to="." method="_on_FillCheckbox_toggled"]

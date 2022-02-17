@@ -6,6 +6,6 @@
 [node name="ToolOptions" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="DoubleClickTimer" type="Timer" parent="." index="11"]
+[node name="DoubleClickTimer" type="Timer" parent="." index="10"]
 wait_time = 0.1
 one_shot = true

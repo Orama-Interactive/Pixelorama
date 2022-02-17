@@ -196,20 +196,6 @@ margin_top = 212.0
 margin_right = 131.0
 margin_bottom = 224.0
 
-[node name="Mirror" parent="." index="9"]
-visible = false
-margin_top = 212.0
-margin_right = 131.0
-margin_bottom = 229.0
-
-[node name="Horizontal" parent="Mirror" index="0"]
-margin_left = 27.0
-margin_right = 42.0
-
-[node name="Vertical" parent="Mirror" index="1"]
-margin_left = 86.0
-margin_right = 103.0
-
 [connection signal="item_selected" from="FillAreaOptions" to="." method="_on_FillAreaOptions_item_selected"]
 [connection signal="value_changed" from="Similarity/Value" to="." method="_on_Value_value_changed"]
 [connection signal="value_changed" from="Similarity/Slider" to="." method="_on_Slider_value_changed"]
