@@ -112,7 +112,6 @@ func update_config() -> void:
 	$Similarity.visible = (_fill_area == 1)
 	$Similarity/Value.value = _similarity
 	$Similarity/Slider.value = _similarity
-	$Mirror.visible = _fill_area == 0
 	$FillPattern.visible = _fill_with == 1
 	$FillPattern/XOffset/OffsetX.value = _offset_x
 	$FillPattern/YOffset/OffsetY.value = _offset_y
@@ -221,11 +220,11 @@ func fill_in_area(position: Vector2) -> void:
 	mirror_x_inside = project.can_pixel_get_drawn(Vector2(mirror_x, position.y))
 	mirror_y_inside = project.can_pixel_get_drawn(Vector2(position.x, mirror_y))
 
-	if tool_slot.horizontal_mirror and mirror_x_inside:
+	if Tools.horizontal_mirror and mirror_x_inside:
 		_flood_fill(Vector2(mirror_x, position.y))
-		if tool_slot.vertical_mirror and mirror_y_inside:
+		if Tools.vertical_mirror and mirror_y_inside:
 			_flood_fill(Vector2(mirror_x, mirror_y))
-	if tool_slot.vertical_mirror and mirror_y_inside:
+	if Tools.vertical_mirror and mirror_y_inside:
 		_flood_fill(Vector2(position.x, mirror_y))
 
 

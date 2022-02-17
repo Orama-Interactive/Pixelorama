@@ -3,6 +3,8 @@ extends Node
 signal color_changed(color, button)
 
 var pen_pressure := 1.0
+var horizontal_mirror := false
+var vertical_mirror := false
 var control := false
 var shift := false
 var alt := false
@@ -41,8 +43,6 @@ class Slot:
 	var color: Color
 
 	var pixel_perfect := false
-	var horizontal_mirror := false
-	var vertical_mirror := false
 
 	func _init(slot_name: String) -> void:
 		name = slot_name
@@ -52,16 +52,12 @@ class Slot:
 	func save_config() -> void:
 		var config := {
 			"pixel_perfect": pixel_perfect,
-			"horizontal_mirror": horizontal_mirror,
-			"vertical_mirror": vertical_mirror,
 		}
 		Global.config_cache.set_value(kname, "slot", config)
 
 	func load_config() -> void:
 		var config = Global.config_cache.get_value(kname, "slot", {})
 		pixel_perfect = config.get("pixel_perfect", pixel_perfect)
-		horizontal_mirror = config.get("horizontal_mirror", horizontal_mirror)
-		vertical_mirror = config.get("vertical_mirror", vertical_mirror)
 
 
 func _ready() -> void:
@@ -84,6 +80,9 @@ func _ready() -> void:
 
 	update_tool_buttons()
 	update_tool_cursors()
+
+	horizontal_mirror = Global.config_cache.get_value("preferences", "horizontal_mirror", false)
+	vertical_mirror = Global.config_cache.get_value("preferences", "vertical_mirror", false)
 
 	# Yield is necessary for the color picker nodes to update their color values
 	yield(get_tree(), "idle_frame")
