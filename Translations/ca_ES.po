@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-02-16 22:59\n"
+"PO-Revision-Date: 2022-02-19 01:32\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -463,6 +463,9 @@ msgid "Backup"
 msgstr ""
 
 msgid "Performance"
+msgstr ""
+
+msgid "Extensions"
 msgstr ""
 
 msgid "Cursors"
@@ -1133,6 +1136,21 @@ msgid "Sets the limit of the application's frames per second. The lower the numb
 msgstr ""
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
+
+msgid "Add Extension"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "Open Folder"
 msgstr ""
 
 msgid "Brush:"
