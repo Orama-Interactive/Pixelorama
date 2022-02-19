@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-02-19 01:32\n"
+"PO-Revision-Date: 2022-02-19 10:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -467,7 +467,7 @@ msgid "Performance"
 msgstr "Prestazioni"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Estensioni"
 
 msgid "Cursors"
 msgstr "Puntatori"
@@ -1160,19 +1160,19 @@ msgid "If this is toggled on, when the application's window loses focus, it gets
 msgstr "Se questa opzione viene attivata, quando la finestra dell'applicazione perde il fuoco, viene messa in pausa Questo aiuta a ridurre l'utilizzo della CPU quando è inattivo. L'applicazione viene rimossa quando il mouse entra nella finestra dell'applicazione."
 
 msgid "Add Extension"
-msgstr ""
+msgstr "Aggiungi estensione"
 
 msgid "Enable"
-msgstr ""
+msgstr "Attiva"
 
 msgid "Disable"
-msgstr ""
+msgstr "Disattiva"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Disinstalla"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Apri Cartella"
 
 msgid "Brush:"
 msgstr "Pennello:"
