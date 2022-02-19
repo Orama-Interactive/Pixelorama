@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-02-16 22:59\n"
+"PO-Revision-Date: 2022-02-19 01:32\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -464,6 +464,9 @@ msgstr "Αντίγραφο ασφαλείας"
 
 msgid "Performance"
 msgstr "Επίδοση"
+
+msgid "Extensions"
+msgstr ""
 
 msgid "Cursors"
 msgstr ""
@@ -1154,6 +1157,21 @@ msgstr "Ορίζει το όριο των καρέ της εφαρμογής α�
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Αν είναι ενεργοποιημένο, όταν το παράθυρο της εφαρμογής χάνει την εστίαση του, γίνεται παύση της εφαρμογής. Αυτό βοηθά στη μείωση της χρήσης του επεξεργαστή (CPU) όταν βρίσκεται σε αδράνεια. Η εφαρμογή συνεχίζεται όταν το ποντίκι εισέρχεται στο παράθυρο της."
+
+msgid "Add Extension"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "Open Folder"
+msgstr ""
 
 msgid "Brush:"
 msgstr "Πινέλο:"
