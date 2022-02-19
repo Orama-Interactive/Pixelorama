@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-02-19 01:32\n"
+"PO-Revision-Date: 2022-02-19 02:07\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -467,7 +467,7 @@ msgid "Performance"
 msgstr "Продуктивність"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Розширення"
 
 msgid "Cursors"
 msgstr "Курсори"
@@ -1160,19 +1160,19 @@ msgid "If this is toggled on, when the application's window loses focus, it gets
 msgstr "Якщо вибрано цей параметр, коли вікно програми губитиме фокус, програма призупинятиметься. Це допомагає не використовувати процесор дарма. Програма буде знов активована, коли курсор миші буде рухатися в вікні програми."
 
 msgid "Add Extension"
-msgstr ""
+msgstr "Додати розширення"
 
 msgid "Enable"
-msgstr ""
+msgstr "Увімкнути"
 
 msgid "Disable"
-msgstr ""
+msgstr "Вимкнути"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Видалити"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Відкрити директорію"
 
 msgid "Brush:"
 msgstr "Пензель:"
