@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-02-19 01:32\n"
+"PO-Revision-Date: 2022-02-19 10:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -467,7 +467,7 @@ msgid "Performance"
 msgstr "Desempenho"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Extensões"
 
 msgid "Cursors"
 msgstr "Cursores"
@@ -1160,19 +1160,19 @@ msgid "If this is toggled on, when the application's window loses focus, it gets
 msgstr "Se isto for ativado, quando a janela do aplicativo perder o foco, ele é pausado. Isso ajuda a reduzir o uso da CPU quando o aplicativo estiver ocioso. Ele volta à atividade quando o mouse entra em sua janela."
 
 msgid "Add Extension"
-msgstr ""
+msgstr "Adicionar Extensão"
 
 msgid "Enable"
-msgstr ""
+msgstr "Habilitar"
 
 msgid "Disable"
-msgstr ""
+msgstr "Desabilitar"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Desinstalar"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Abrir Pasta"
 
 msgid "Brush:"
 msgstr "Pincel:"
