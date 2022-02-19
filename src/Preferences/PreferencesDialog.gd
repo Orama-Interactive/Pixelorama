@@ -87,6 +87,7 @@ onready var autosave_container: Container = right_side.get_node("Backup/Autosave
 onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
 onready var shrink_label: Label = right_side.get_node("Interface/ShrinkContainer/ShrinkLabel")
 onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
+onready var extensions: BoxContainer = right_side.get_node("Extensions")
 
 
 class Preference:

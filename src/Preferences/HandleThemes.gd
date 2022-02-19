@@ -57,6 +57,17 @@ func add_theme(theme: Theme) -> void:
 		colors_container.add_child(theme_color_preview)
 
 
+func remove_theme(theme: Theme) -> void:
+	var index: int = themes.find(theme)
+	var theme_button = buttons_container.get_child(index)
+	var color_previews = colors_container.get_child(index)
+	buttons_container.remove_child(theme_button)
+	theme_button.queue_free()
+	colors_container.remove_child(color_previews)
+	color_previews.queue_free()
+	themes.erase(theme)
+
+
 func change_theme(id: int) -> void:
 	theme_index = id
 	var theme: Theme = themes[id]
@@ -96,7 +107,8 @@ func change_theme(id: int) -> void:
 
 	change_icon_colors()
 
-	Global.preferences_dialog.get_node("Popups/ShortcutSelector").theme = theme
+	for child in Global.preferences_dialog.get_node("Popups").get_children():
+		child.theme = theme
 
 	# Sets disabled theme color on palette swatches
 	Global.palette_panel.reset_empty_palette_swatches_color()

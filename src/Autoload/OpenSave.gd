@@ -37,6 +37,9 @@ func handle_loading_files(files: PoolStringArray) -> void:
 		elif file_ext == "gpl" or file_ext == "pal" or file_ext == "json":
 			Palettes.import_palette_from_path(file)
 
+		elif file_ext in ["pck", "zip"]:  # Godot resource pack file
+			Global.preferences_dialog.extensions.install_extension(file)
+
 		else:  # Image files
 			var image := Image.new()
 			var err := image.load(file)
