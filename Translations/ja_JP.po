@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-02-19 01:32\n"
+"PO-Revision-Date: 2022-02-19 07:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -467,7 +467,7 @@ msgid "Performance"
 msgstr "パフォーマンス"
 
 msgid "Extensions"
-msgstr ""
+msgstr "拡張機能"
 
 msgid "Cursors"
 msgstr "カーソル"
@@ -1160,19 +1160,19 @@ msgid "If this is toggled on, when the application's window loses focus, it gets
 msgstr "これをオンにすると、アプリケーションのウィンドウがフォーカスを失ったときに一時停止します。 これはアイドル時のCPU使用率を低下させるのに役立ちます。マウスがアプリケーションのウィンドウに入ったとき、アプリケーションは一時停止を解除します。"
 
 msgid "Add Extension"
-msgstr ""
+msgstr "拡張機能を追加"
 
 msgid "Enable"
-msgstr ""
+msgstr "有効"
 
 msgid "Disable"
-msgstr ""
+msgstr "無効"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "アンインストール"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "フォルダーを開く"
 
 msgid "Brush:"
 msgstr "ブラシ："
