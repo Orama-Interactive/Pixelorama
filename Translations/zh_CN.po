@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-02-19 01:32\n"
+"PO-Revision-Date: 2022-02-19 06:28\n"
 
 msgid "OK"
 msgstr "确定"
@@ -467,7 +467,7 @@ msgid "Performance"
 msgstr "性能"
 
 msgid "Extensions"
-msgstr ""
+msgstr "扩展"
 
 msgid "Cursors"
 msgstr "光标"
@@ -1160,19 +1160,19 @@ msgid "If this is toggled on, when the application's window loses focus, it gets
 msgstr "如果打开此选项，当应用程序的窗口失去焦点时，它会暂停。 这有助于在空闲时降低 CPU 使用率。 当鼠标进入应用程序的窗口时，应用程序被取消暂停。"
 
 msgid "Add Extension"
-msgstr ""
+msgstr "添加扩展"
 
 msgid "Enable"
-msgstr ""
+msgstr "启用"
 
 msgid "Disable"
-msgstr ""
+msgstr "禁用"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "卸载"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "打开文件夹"
 
 msgid "Brush:"
 msgstr "画笔:"
