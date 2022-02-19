@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-02-19 01:32\n"
+"PO-Revision-Date: 2022-02-19 08:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -467,7 +467,7 @@ msgid "Performance"
 msgstr "Performanță"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Extensii"
 
 msgid "Cursors"
 msgstr "Cursoare"
@@ -1160,19 +1160,19 @@ msgid "If this is toggled on, when the application's window loses focus, it gets
 msgstr "Dacă această opțiune este activată, în momentul în care fereastra aplicației pierde focalizarea, aceasta este întreruptă. Acest lucru ajută la reducerea utilizării procesorului pe durata perioadei de inactivitate. Aplicația își reia activitatea atunci când mausul intră în fereastra aplicației."
 
 msgid "Add Extension"
-msgstr ""
+msgstr "Adăugare extensie"
 
 msgid "Enable"
-msgstr ""
+msgstr "Activare"
 
 msgid "Disable"
-msgstr ""
+msgstr "Dezactivare"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Dezinstalare"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Deschidere dosar"
 
 msgid "Brush:"
 msgstr "Pensulă:"
