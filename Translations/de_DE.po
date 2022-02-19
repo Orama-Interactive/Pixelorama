@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-02-17 17:04\n"
+"PO-Revision-Date: 2022-02-19 01:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -464,6 +464,9 @@ msgstr "Sicherung"
 
 msgid "Performance"
 msgstr "Leistung"
+
+msgid "Extensions"
+msgstr ""
 
 msgid "Cursors"
 msgstr "Mauszeiger"
@@ -1154,6 +1157,21 @@ msgstr "Legt die Grenze der Frames pro Sekunde fest. Je niedriger die Anzahl, de
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Wenn dies eingeschaltet ist und das Fenster der Anwendung den Fokus verliert, wird die Anwendung pausiert. Dies reduziert die CPU-Auslastung im Hintergrund. Pixelorama wird entpaust, wenn die Maus in das Fenster der Anwendung eintritt."
+
+msgid "Add Extension"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "Open Folder"
+msgstr ""
 
 msgid "Brush:"
 msgstr "Pinsel:"
