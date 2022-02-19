@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-02-17 23:00\n"
+"PO-Revision-Date: 2022-02-19 01:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -464,6 +464,9 @@ msgstr "Резервная копия"
 
 msgid "Performance"
 msgstr "Производительность"
+
+msgid "Extensions"
+msgstr ""
 
 msgid "Cursors"
 msgstr "Курсоры"
@@ -1154,6 +1157,21 @@ msgstr "Устанавливает лимит на количество кадр
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Если этот параметр включен, то, когда окно приложения теряет фокус, оно приостанавливается. Это помогает снизить загрузку процессора в режиме бездействие. Приложение продолжит работать, когда мышь попадет в окно приложения."
+
+msgid "Add Extension"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "Open Folder"
+msgstr ""
 
 msgid "Brush:"
 msgstr "Кисть:"
