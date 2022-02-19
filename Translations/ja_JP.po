@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-02-17 08:21\n"
+"PO-Revision-Date: 2022-02-19 01:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -465,6 +465,9 @@ msgstr "バックアップ"
 
 msgid "Performance"
 msgstr "パフォーマンス"
+
+msgid "Extensions"
+msgstr ""
 
 msgid "Cursors"
 msgstr "カーソル"
@@ -1155,6 +1158,21 @@ msgstr "アプリケーションのフレーム/秒の制限を設定します�
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "これをオンにすると、アプリケーションのウィンドウがフォーカスを失ったときに一時停止します。 これはアイドル時のCPU使用率を低下させるのに役立ちます。マウスがアプリケーションのウィンドウに入ったとき、アプリケーションは一時停止を解除します。"
+
+msgid "Add Extension"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "Open Folder"
+msgstr ""
 
 msgid "Brush:"
 msgstr "ブラシ："
