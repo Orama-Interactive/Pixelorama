@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/graphics/tools/tool_background.png" type="Texture" id=1]
+[ext_resource path="res://assets/graphics/tools/rectselect.png" type="Texture" id=2]
+
+[node name="Tool" type="Button" groups=["UIButtons"]]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Rectangular Selection
+
+%s for left mouse button
+%s for right mouse button"
+mouse_default_cursor_shape = 2
+button_mask = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundLeft" type="NinePatchRect" parent="."]
+visible = false
+modulate = Color( 0, 0.52549, 0.811765, 1 )
+anchor_bottom = 1.0
+margin_right = 12.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRight" type="NinePatchRect" parent="."]
+visible = false
+modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 180.0
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 11, 24 )
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolIcon" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

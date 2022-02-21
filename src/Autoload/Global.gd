@@ -323,8 +323,7 @@ func change_button_texturerect(texture_button: TextureRect, new_file_name: Strin
 
 
 func update_hint_tooltips() -> void:
-	var tool_buttons: Container = control.find_node("ToolButtons")
-	tool_buttons.update_hintooltips()
+	Tools.update_hint_tooltips()
 
 	for tip in ui_tooltips:
 		tip.hint_tooltip = tr(ui_tooltips[tip]) % tip.shortcut.get_as_text()
