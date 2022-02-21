@@ -71,14 +71,7 @@ func install_extension(path: String) -> void:
 
 func _add_extension(file_name: String) -> void:
 	if extensions.has(file_name):
-		var extension: Extension = extensions[file_name]
-		if extension.enabled:  # Reload the extension if it's enabled
-			extension.enabled = false
-			_enable_extension(extension, false)
-			extension.enabled = true
-			_enable_extension(extension, false)
 		return
-
 	var file_name_no_ext: String = file_name.get_basename()
 	var file_path: String = EXTENSIONS_PATH.plus_file(file_name)
 	var success := ProjectSettings.load_resource_pack(file_path)
