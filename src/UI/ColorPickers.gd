@@ -1,15 +1,15 @@
-extends BoxContainer
+extends Container
 
-onready var left_picker := $ColorPickersHorizontal/LeftColorPickerButton
-onready var right_picker := $ColorPickersHorizontal/RightColorPickerButton
+onready var left_picker := $VBoxContainer/ColorPickersHorizontal/LeftColorPickerButton
+onready var right_picker := $VBoxContainer/ColorPickersHorizontal/RightColorPickerButton
 
 
 func _ready() -> void:
 	Tools.connect("color_changed", self, "update_color")
 	left_picker.get_picker().presets_visible = false
 	right_picker.get_picker().presets_visible = false
-	$Mirror/Horizontal.pressed = Tools.horizontal_mirror
-	$Mirror/Vertical.pressed = Tools.vertical_mirror
+	$VBoxContainer/Mirror/Horizontal.pressed = Tools.horizontal_mirror
+	$VBoxContainer/Mirror/Vertical.pressed = Tools.vertical_mirror
 
 
 func _on_ColorSwitch_pressed() -> void:
@@ -51,6 +51,12 @@ func _on_Horizontal_toggled(button_pressed: bool) -> void:
 		and Global.show_guides
 	)
 
+	var texture_button: TextureRect = $VBoxContainer/Mirror/Horizontal/TextureRect
+	var file_name := "horizontal_mirror_on.png"
+	if !button_pressed:
+		file_name = "horizontal_mirror_off.png"
+	Global.change_button_texturerect(texture_button, file_name)
+
 
 func _on_Vertical_toggled(button_pressed: bool) -> void:
 	Tools.vertical_mirror = button_pressed
@@ -61,3 +67,9 @@ func _on_Vertical_toggled(button_pressed: bool) -> void:
 		Global.show_x_symmetry_axis
 		and Global.show_guides
 	)
+
+	var texture_button: TextureRect = $VBoxContainer/Mirror/Vertical/TextureRect
+	var file_name := "vertical_mirror_on.png"
+	if !button_pressed:
+		file_name = "vertical_mirror_off.png"
+	Global.change_button_texturerect(texture_button, file_name)
