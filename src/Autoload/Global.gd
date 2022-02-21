@@ -27,7 +27,6 @@ var has_focus := false
 var play_only_tags := true
 var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
-var default_clear_color := Color.gray
 
 # Preferences
 var pressure_sensitivity_mode = PressureSensitivity.NONE

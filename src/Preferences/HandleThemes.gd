@@ -78,19 +78,21 @@ func change_theme(id: int) -> void:
 
 	Global.control.theme = theme
 
-	var panel_stylebox: StyleBox = theme.get_stylebox("panel", "PanelContainer")
-	if panel_stylebox is StyleBoxFlat:
-		Global.default_clear_color = panel_stylebox.bg_color
-	else:
-		Global.default_clear_color = icon_color
-	VisualServer.set_default_clear_color(Global.default_clear_color)
+	var clear_color: Color = theme.get_color("clear_color", "Misc")
+	if !clear_color:
+		var panel_stylebox: StyleBox = theme.get_stylebox("panel", "PanelContainer")
+		if panel_stylebox is StyleBoxFlat:
+			clear_color = panel_stylebox.bg_color
+		else:
+			clear_color = Color.gray
+	VisualServer.set_default_clear_color(clear_color)
 
 	# Temporary code
 	var layer_button_pcont: PanelContainer = Global.animation_timeline.find_node(
 		"LayerButtonPanelContainer"
 	)
 	var lbpc_stylebox: StyleBoxFlat = layer_button_pcont.get_stylebox("panel", "PanelContainer")
-	lbpc_stylebox.bg_color = Global.default_clear_color
+	lbpc_stylebox.bg_color = clear_color
 
 	# Will no longer be needed when Godot 3.5 is out
 	var top_menu_style: StyleBox = theme.get_stylebox("TopMenu", "Panel")
