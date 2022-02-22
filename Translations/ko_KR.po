@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-02-21 16:04\n"
+"PO-Revision-Date: 2022-02-22 13:34\n"
 
 msgid "OK"
 msgstr "예"
@@ -322,7 +322,7 @@ msgid "Exporting in progress..."
 msgstr "내보내는 중..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "파일 '%s'을(를) 불러올 수 없습니다."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -331,7 +331,8 @@ msgstr "파일 '%s'을(를) 불러올 수 없습니다.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "파일 '%s'을(를) 불러올 수 없습니다.\n"
+"이 파일은 유효한 팔레트 파일이 아닙니다."
 
 msgid "Frame"
 msgstr "프레임"
@@ -466,7 +467,7 @@ msgid "Performance"
 msgstr "성능"
 
 msgid "Extensions"
-msgstr ""
+msgstr "확장"
 
 msgid "Cursors"
 msgstr "마우스 커서"
@@ -828,7 +829,9 @@ msgid "Polygonal Selection\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "다각형 선택\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -876,7 +879,9 @@ msgid "Color Picker\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "색상 선택기\n"
+"%s 은(는) 왼쪽 마우스 버튼\n"
+"%s 은(는) 오른쪽 마우스 버튼"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1153,19 +1158,19 @@ msgid "If this is toggled on, when the application's window loses focus, it gets
 msgstr "이 옵션을 켜면 프로그램 창의 관심이 없을때 정지하게 됩니다. 이 옵션은 프로그램을 안 쓰고 있을때 CPU 사용량을 줄일 수 있습니다. 마우스가 프로그램의 창에 들어갈때 정지를 해제 합니다"
 
 msgid "Add Extension"
-msgstr ""
+msgstr "확장 추가"
 
 msgid "Enable"
-msgstr ""
+msgstr "활성화"
 
 msgid "Disable"
-msgstr ""
+msgstr "비활성화"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "삭제"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "폴더 열기"
 
 msgid "Brush:"
 msgstr "브러시:"
