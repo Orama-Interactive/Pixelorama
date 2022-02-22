@@ -3,34 +3,123 @@ extends Node
 signal color_changed(color, button)
 
 var pen_pressure := 1.0
+var horizontal_mirror := false
+var vertical_mirror := false
 var control := false
 var shift := false
 var alt := false
 
-var _tools = {
-	"RectSelect": preload("res://src/Tools/SelectionTools/RectSelect.tscn"),
-	"EllipseSelect": preload("res://src/Tools/SelectionTools/EllipseSelect.tscn"),
-	"PolygonSelect": preload("res://src/Tools/SelectionTools/PolygonSelect.tscn"),
-	"ColorSelect": preload("res://src/Tools/SelectionTools/ColorSelect.tscn"),
-	"MagicWand": preload("res://src/Tools/SelectionTools/MagicWand.tscn"),
-	"Lasso": preload("res://src/Tools/SelectionTools/Lasso.tscn"),
-	"Move": preload("res://src/Tools/Move.tscn"),
-	"Zoom": preload("res://src/Tools/Zoom.tscn"),
-	"Pan": preload("res://src/Tools/Pan.tscn"),
-	"ColorPicker": preload("res://src/Tools/ColorPicker.tscn"),
-	"Pencil": preload("res://src/Tools/Pencil.tscn"),
-	"Eraser": preload("res://src/Tools/Eraser.tscn"),
-	"Bucket": preload("res://src/Tools/Bucket.tscn"),
-	"Shading": preload("res://src/Tools/Shading.tscn"),
-	"LineTool": preload("res://src/Tools/LineTool.tscn"),
-	"RectangleTool": preload("res://src/Tools/RectangleTool.tscn"),
-	"EllipseTool": preload("res://src/Tools/EllipseTool.tscn"),
+var tools := {
+	"RectSelect":
+	Tool.new(
+		"RectSelect", "Rectangular Selection", "rectangle_select", "", [], "Tools/SelectionTools"
+	),
+	"EllipseSelect":
+	Tool.new(
+		"EllipseSelect", "Elliptical Selection", "ellipse_select", "", [], "Tools/SelectionTools"
+	),
+	"PolygonSelect":
+	Tool.new(
+		"PolygonSelect",
+		"Polygonal Selection",
+		"polygon_select",
+		"Double-click to connect the last point to the starting point",
+		[],
+		"Tools/SelectionTools"
+	),
+	"ColorSelect":
+	Tool.new("ColorSelect", "Select By Color", "color_select", "", [], "Tools/SelectionTools"),
+	"MagicWand": Tool.new("MagicWand", "Magic Wand", "magic_wand", "", [], "Tools/SelectionTools"),
+	"Lasso": Tool.new("Lasso", "Lasso / Free Select Tool", "lasso", "", [], "Tools/SelectionTools"),
+	"Move": Tool.new("Move", "Move", "move"),
+	"Zoom": Tool.new("Zoom", "Zoom", "zoom"),
+	"Pan": Tool.new("Pan", "Pan", "pan"),
+	"ColorPicker":
+	Tool.new(
+		"ColorPicker", "Color Picker", "colorpicker", "Select a color from a pixel of the sprite"
+	),
+	"Pencil": Tool.new("Pencil", "Pencil", "pencil", "Hold %s to make a line", ["Shift"]),
+	"Eraser": Tool.new("Eraser", "Eraser", "eraser", "Hold %s to make a line", ["Shift"]),
+	"Bucket": Tool.new("Bucket", "Bucket", "fill"),
+	"Shading": Tool.new("Shading", "Shading Tool", "shading"),
+	"LineTool":
+	Tool.new(
+		"LineTool",
+		"Line Tool",
+		"linetool",
+		"""Hold %s to snap the angle of the line
+Hold %s to center the shape on the click origin
+Hold %s to displace the shape's origin""",
+		["Shift", "Ctrl", "Alt"]
+	),
+	"RectangleTool":
+	Tool.new(
+		"RectangleTool",
+		"Rectangle Tool",
+		"rectangletool",
+		"""Hold %s to create a 1:1 shape
+Hold %s to center the shape on the click origin
+Hold %s to displace the shape's origin""",
+		["Shift", "Ctrl", "Alt"]
+	),
+	"EllipseTool":
+	Tool.new(
+		"EllipseTool",
+		"Ellipse Tool",
+		"ellipsetool",
+		"""Hold %s to create a 1:1 shape
+Hold %s to center the shape on the click origin
+Hold %s to displace the shape's origin""",
+		["Shift", "Ctrl", "Alt"]
+	),
 }
-var _slots = {}
-var _panels = {}
+
+var _tool_button_scene: PackedScene = preload("res://src/Tools/ToolButton.tscn")
+var _slots := {}
+var _panels := {}
 var _tool_buttons: Node
 var _active_button := -1
 var _last_position := Vector2.INF
+
+
+class Tool:
+	var name := ""
+	var display_name := ""
+	var scene: PackedScene
+	var icon: Texture
+	var shortcut := ""
+	var extra_hint := ""
+	var extra_shortcuts := []  # Array of String(s)
+	var button_node: BaseButton
+
+	func _init(
+		_name: String,
+		_display_name: String,
+		_shortcut: String,
+		_extra_hint := "",
+		_extra_shortucts := [],
+		subdir := "Tools"
+	) -> void:
+		name = _name
+		display_name = _display_name
+		shortcut = _shortcut
+		extra_hint = _extra_hint
+		extra_shortcuts = _extra_shortucts
+		icon = load("res://assets/graphics/tools/%s.png" % name.to_lower())
+		scene = load("res://src/%s/%s.tscn" % [subdir, name])
+
+	func generate_hint_tooltip() -> String:
+		var left_shortcut: String = InputMap.get_action_list("left_" + shortcut + "_tool")[0].as_text()
+		var right_shortcut: String = InputMap.get_action_list("right_" + shortcut + "_tool")[0].as_text()
+		var hint := display_name
+		hint += "\n\n%s for left mouse button\n%s for right mouse button"
+		if !extra_hint.empty():
+			hint += "\n\n" + extra_hint
+
+		var shortcuts := [left_shortcut, right_shortcut]
+		shortcuts.append_array(extra_shortcuts)
+		hint = tr(hint) % shortcuts
+		return hint
 
 
 class Slot:
@@ -41,8 +130,6 @@ class Slot:
 	var color: Color
 
 	var pixel_perfect := false
-	var horizontal_mirror := false
-	var vertical_mirror := false
 
 	func _init(slot_name: String) -> void:
 		name = slot_name
@@ -52,20 +139,18 @@ class Slot:
 	func save_config() -> void:
 		var config := {
 			"pixel_perfect": pixel_perfect,
-			"horizontal_mirror": horizontal_mirror,
-			"vertical_mirror": vertical_mirror,
 		}
 		Global.config_cache.set_value(kname, "slot", config)
 
 	func load_config() -> void:
 		var config = Global.config_cache.get_value(kname, "slot", {})
 		pixel_perfect = config.get("pixel_perfect", pixel_perfect)
-		horizontal_mirror = config.get("horizontal_mirror", horizontal_mirror)
-		vertical_mirror = config.get("vertical_mirror", vertical_mirror)
 
 
 func _ready() -> void:
 	_tool_buttons = Global.control.find_node("ToolButtons")
+	for t in tools:
+		add_tool_button(tools[t])
 	_slots[BUTTON_LEFT] = Slot.new("Left tool")
 	_slots[BUTTON_RIGHT] = Slot.new("Right tool")
 	_panels[BUTTON_LEFT] = Global.control.find_node("LeftPanelContainer", true, false)
@@ -74,16 +159,19 @@ func _ready() -> void:
 	var tool_name: String = Global.config_cache.get_value(
 		_slots[BUTTON_LEFT].kname, "tool", "Pencil"
 	)
-	if not tool_name in _tools:
+	if not tool_name in tools:
 		tool_name = "Pencil"
 	set_tool(tool_name, BUTTON_LEFT)
 	tool_name = Global.config_cache.get_value(_slots[BUTTON_RIGHT].kname, "tool", "Eraser")
-	if not tool_name in _tools:
+	if not tool_name in tools:
 		tool_name = "Eraser"
 	set_tool(tool_name, BUTTON_RIGHT)
 
 	update_tool_buttons()
 	update_tool_cursors()
+
+	horizontal_mirror = Global.config_cache.get_value("preferences", "horizontal_mirror", false)
+	vertical_mirror = Global.config_cache.get_value("preferences", "vertical_mirror", false)
 
 	# Yield is necessary for the color picker nodes to update their color values
 	yield(get_tree(), "idle_frame")
@@ -95,10 +183,24 @@ func _ready() -> void:
 	assign_color(color_value, BUTTON_RIGHT, false)
 
 
+func add_tool_button(t: Tool) -> void:
+	var tool_button: BaseButton = _tool_button_scene.instance()
+	tool_button.name = t.name
+	tool_button.get_node("ToolIcon").texture = t.icon
+	t.button_node = tool_button
+	_tool_buttons.add_child(tool_button)
+	tool_button.connect("pressed", _tool_buttons, "_on_Tool_pressed", [tool_button])
+
+
+func remove_tool(t: Tool) -> void:
+	t.button_node.queue_free()
+	tools.erase(t.name)
+
+
 func set_tool(name: String, button: int) -> void:
 	var slot = _slots[button]
 	var panel: Node = _panels[button]
-	var node: Node = _tools[name].instance()
+	var node: Node = tools[name].scene.instance()
 	if button == BUTTON_LEFT:  # As guides are only moved with left mouse
 		if name == "Pan":  # tool you want to give more access at guides
 			Global.move_guides_on_canvas = true
@@ -161,17 +263,12 @@ func set_button_size(button_size: int) -> void:
 			t.get_node("BackgroundLeft").rect_size.x = 12
 			t.get_node("BackgroundRight").rect_size.x = 12
 			t.get_node("BackgroundRight").rect_position = Vector2(24, 24)
-		_tool_buttons.get_parent().rect_position.x = 9
 	else:
 		for t in _tool_buttons.get_children():
 			t.rect_min_size = Vector2(32, 32)
 			t.get_node("BackgroundLeft").rect_size.x = 16
 			t.get_node("BackgroundRight").rect_size.x = 16
 			t.get_node("BackgroundRight").rect_position = Vector2(32, 32)
-		_tool_buttons.get_parent().rect_position.x = 6
-
-	# It doesn't actually set the size to zero, it just resets it
-	_tool_buttons.get_parent().rect_size = Vector2.ZERO
 
 
 func update_tool_buttons() -> void:
@@ -180,6 +277,12 @@ func update_tool_buttons() -> void:
 		var right_background: NinePatchRect = child.get_node("BackgroundRight")
 		left_background.visible = _slots[BUTTON_LEFT].tool_node.name == child.name
 		right_background.visible = _slots[BUTTON_RIGHT].tool_node.name == child.name
+
+
+func update_hint_tooltips() -> void:
+	for tool_name in tools:
+		var t: Tool = tools[tool_name]
+		t.button_node.hint_tooltip = t.generate_hint_tooltip()
 
 
 func update_tool_cursors() -> void:

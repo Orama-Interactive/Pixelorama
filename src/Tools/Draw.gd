@@ -184,8 +184,8 @@ func draw_tool(position: Vector2) -> void:
 		strength *= Tools.pen_pressure
 
 	_drawer.pixel_perfect = tool_slot.pixel_perfect if _brush_size == 1 else false
-	_drawer.horizontal_mirror = tool_slot.horizontal_mirror
-	_drawer.vertical_mirror = tool_slot.vertical_mirror
+	_drawer.horizontal_mirror = Tools.horizontal_mirror
+	_drawer.vertical_mirror = Tools.vertical_mirror
 	_drawer.color_op.strength = strength
 
 	match _brush.type:
@@ -278,17 +278,17 @@ func draw_tool_brush(position: Vector2) -> void:
 	var mirror_x = (project.x_symmetry_point + 1) - dst.x - src_rect.size.x
 	var mirror_y = (project.y_symmetry_point + 1) - dst.y - src_rect.size.y
 
-	if tool_slot.horizontal_mirror:
+	if Tools.horizontal_mirror:
 		var x_dst := Vector2(mirror_x, dst.y)
 		var mirror_brush_x: Image = remove_unselected_parts_of_brush(_mirror_brushes.x, x_dst)
 		_draw_brush_image(mirror_brush_x, _flip_rect(src_rect, size, true, false), x_dst)
-		if tool_slot.vertical_mirror:
+		if Tools.vertical_mirror:
 			var xy_dst := Vector2(mirror_x, mirror_y)
 			var mirror_brush_xy: Image = remove_unselected_parts_of_brush(
 				_mirror_brushes.xy, xy_dst
 			)
 			_draw_brush_image(mirror_brush_xy, _flip_rect(src_rect, size, true, true), xy_dst)
-	if tool_slot.vertical_mirror:
+	if Tools.vertical_mirror:
 		var y_dst := Vector2(dst.x, mirror_y)
 		var mirror_brush_y: Image = remove_unselected_parts_of_brush(_mirror_brushes.y, y_dst)
 		_draw_brush_image(mirror_brush_y, _flip_rect(src_rect, size, false, true), y_dst)

@@ -58,9 +58,18 @@ mouse_default_cursor_shape = 2
 text = "View"
 switch_on_hover = true
 
-[node name="HelpMenu" type="MenuButton" parent="MenuItems"]
+[node name="WindowMenu" type="MenuButton" parent="MenuItems"]
 margin_left = 236.0
-margin_right = 278.0
+margin_right = 299.0
+margin_bottom = 20.0
+focus_mode = 2
+mouse_default_cursor_shape = 2
+text = "Window"
+switch_on_hover = true
+
+[node name="HelpMenu" type="MenuButton" parent="MenuItems"]
+margin_left = 303.0
+margin_right = 345.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "Help"

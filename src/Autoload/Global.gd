@@ -2,7 +2,6 @@ extends Node
 
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
-enum ThemeTypes { DARK, BLUE, CARAMEL, LIGHT }
 enum TileMode { NONE, BOTH, X_AXIS, Y_AXIS }
 enum IconColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
@@ -28,7 +27,6 @@ var has_focus := false
 var play_only_tags := true
 var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
-var default_clear_color := Color.gray
 
 # Preferences
 var pressure_sensitivity_mode = PressureSensitivity.NONE
@@ -38,7 +36,6 @@ var smooth_zoom := true
 
 var shrink := 1.0
 var dim_on_popup := true
-var theme_type: int = ThemeTypes.DARK
 var modulate_icon_color := Color.gray
 var icon_color_from: int = IconColorFrom.THEME
 var custom_icon_color := Color.gray
@@ -112,14 +109,14 @@ onready var right_cursor: Sprite = control.find_node("RightCursor")
 onready var canvas: Canvas = control.find_node("Canvas")
 onready var tabs: Tabs = control.find_node("Tabs")
 onready var main_viewport: ViewportContainer = control.find_node("ViewportContainer")
-onready var second_viewport: ViewportContainer = control.find_node("ViewportContainer2")
+onready var second_viewport: ViewportContainer = control.find_node("Second Canvas")
 onready var main_canvas_container: Container = control.find_node("Main Canvas")
 onready var canvas_preview_container: Container = control.find_node("Canvas Preview")
 onready var small_preview_viewport: ViewportContainer = canvas_preview_container.find_node(
 	"PreviewViewportContainer"
 )
 onready var camera: Camera2D = main_viewport.find_node("Camera2D")
-onready var camera2: Camera2D = control.find_node("Camera2D2")
+onready var camera2: Camera2D = second_viewport.find_node("Camera2D2")
 onready var camera_preview: Camera2D = control.find_node("CameraPreview")
 onready var cameras := [camera, camera2, camera_preview]
 onready var horizontal_ruler: BaseButton = control.find_node("HorizontalRuler")
@@ -325,8 +322,7 @@ func change_button_texturerect(texture_button: TextureRect, new_file_name: Strin
 
 
 func update_hint_tooltips() -> void:
-	var tool_buttons: Container = control.find_node("ToolButtons")
-	tool_buttons.update_hintooltips()
+	Tools.update_hint_tooltips()
 
 	for tip in ui_tooltips:
 		tip.hint_tooltip = tr(ui_tooltips[tip]) % tip.shortcut.get_as_text()

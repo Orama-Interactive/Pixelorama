@@ -24,8 +24,23 @@ func handle_loading_files(files: PoolStringArray) -> void:
 		var file_ext: String = file.get_extension().to_lower()
 		if file_ext == "pxo":  # Pixelorama project file
 			open_pxo_file(file)
-		elif file_ext == "tres" or file_ext == "gpl" or file_ext == "pal" or file_ext == "json":
-			Palettes.import_palette(file)
+
+		elif file_ext == "tres":  # Godot resource file
+			var resource = load(file)
+			if resource is Palette:
+				Palettes.import_palette(resource, file.get_file())
+			else:
+				var file_name: String = file.get_file()
+				Global.error_dialog.set_text(tr("Can't load file '%s'.") % [file_name])
+				Global.error_dialog.popup_centered()
+				Global.dialog_open(true)
+
+		elif file_ext == "gpl" or file_ext == "pal" or file_ext == "json":
+			Palettes.import_palette_from_path(file)
+
+		elif file_ext in ["pck", "zip"]:  # Godot resource pack file
+			Global.preferences_dialog.extensions.install_extension(file)
+
 		else:  # Image files
 			var image := Image.new()
 			var err := image.load(file)
