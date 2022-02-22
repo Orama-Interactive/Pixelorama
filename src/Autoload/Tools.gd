@@ -12,41 +12,85 @@ var alt := false
 var tools := {
 	"RectSelect":
 	Tool.new(
-		"RectSelect", "Rectangular Selection", "rectangle_select", "", [], "Tools/SelectionTools"
+		"RectSelect",
+		"Rectangular Selection",
+		"rectangle_select",
+		preload("res://src/Tools/SelectionTools/RectSelect.tscn")
 	),
 	"EllipseSelect":
 	Tool.new(
-		"EllipseSelect", "Elliptical Selection", "ellipse_select", "", [], "Tools/SelectionTools"
+		"EllipseSelect",
+		"Elliptical Selection",
+		"ellipse_select",
+		preload("res://src/Tools/SelectionTools/EllipseSelect.tscn")
 	),
 	"PolygonSelect":
 	Tool.new(
 		"PolygonSelect",
 		"Polygonal Selection",
 		"polygon_select",
-		"Double-click to connect the last point to the starting point",
-		[],
-		"Tools/SelectionTools"
+		preload("res://src/Tools/SelectionTools/PolygonSelect.tscn"),
+		"Double-click to connect the last point to the starting point"
 	),
 	"ColorSelect":
-	Tool.new("ColorSelect", "Select By Color", "color_select", "", [], "Tools/SelectionTools"),
-	"MagicWand": Tool.new("MagicWand", "Magic Wand", "magic_wand", "", [], "Tools/SelectionTools"),
-	"Lasso": Tool.new("Lasso", "Lasso / Free Select Tool", "lasso", "", [], "Tools/SelectionTools"),
-	"Move": Tool.new("Move", "Move", "move"),
-	"Zoom": Tool.new("Zoom", "Zoom", "zoom"),
-	"Pan": Tool.new("Pan", "Pan", "pan"),
+	Tool.new(
+		"ColorSelect",
+		"Select By Color",
+		"color_select",
+		preload("res://src/Tools/SelectionTools/ColorSelect.tscn")
+	),
+	"MagicWand":
+	Tool.new(
+		"MagicWand",
+		"Magic Wand",
+		"magic_wand",
+		preload("res://src/Tools/SelectionTools/MagicWand.tscn")
+	),
+	"Lasso":
+	Tool.new(
+		"Lasso",
+		"Lasso / Free Select Tool",
+		"lasso",
+		preload("res://src/Tools/SelectionTools/Lasso.tscn")
+	),
+	"Move": Tool.new("Move", "Move", "move", preload("res://src/Tools/Move.tscn")),
+	"Zoom": Tool.new("Zoom", "Zoom", "zoom", preload("res://src/Tools/Zoom.tscn")),
+	"Pan": Tool.new("Pan", "Pan", "pan", preload("res://src/Tools/Pan.tscn")),
 	"ColorPicker":
 	Tool.new(
-		"ColorPicker", "Color Picker", "colorpicker", "Select a color from a pixel of the sprite"
+		"ColorPicker",
+		"Color Picker",
+		"colorpicker",
+		preload("res://src/Tools/ColorPicker.tscn"),
+		"Select a color from a pixel of the sprite"
 	),
-	"Pencil": Tool.new("Pencil", "Pencil", "pencil", "Hold %s to make a line", ["Shift"]),
-	"Eraser": Tool.new("Eraser", "Eraser", "eraser", "Hold %s to make a line", ["Shift"]),
-	"Bucket": Tool.new("Bucket", "Bucket", "fill"),
-	"Shading": Tool.new("Shading", "Shading Tool", "shading"),
+	"Pencil":
+	Tool.new(
+		"Pencil",
+		"Pencil",
+		"pencil",
+		preload("res://src/Tools/Pencil.tscn"),
+		"Hold %s to make a line",
+		["Shift"]
+	),
+	"Eraser":
+	Tool.new(
+		"Eraser",
+		"Eraser",
+		"eraser",
+		preload("res://src/Tools/Eraser.tscn"),
+		"Hold %s to make a line",
+		["Shift"]
+	),
+	"Bucket": Tool.new("Bucket", "Bucket", "fill", preload("res://src/Tools/Bucket.tscn")),
+	"Shading":
+	Tool.new("Shading", "Shading Tool", "shading", preload("res://src/Tools/Shading.tscn")),
 	"LineTool":
 	Tool.new(
 		"LineTool",
 		"Line Tool",
 		"linetool",
+		preload("res://src/Tools/LineTool.tscn"),
 		"""Hold %s to snap the angle of the line
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
@@ -57,6 +101,7 @@ Hold %s to displace the shape's origin""",
 		"RectangleTool",
 		"Rectangle Tool",
 		"rectangletool",
+		preload("res://src/Tools/RectangleTool.tscn"),
 		"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
@@ -67,6 +112,7 @@ Hold %s to displace the shape's origin""",
 		"EllipseTool",
 		"Ellipse Tool",
 		"ellipsetool",
+		preload("res://src/Tools/EllipseTool.tscn"),
 		"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
@@ -87,6 +133,7 @@ class Tool:
 	var display_name := ""
 	var scene: PackedScene
 	var icon: Texture
+	var cursor_icon: Texture
 	var shortcut := ""
 	var extra_hint := ""
 	var extra_shortcuts := []  # Array of String(s)
@@ -96,17 +143,18 @@ class Tool:
 		_name: String,
 		_display_name: String,
 		_shortcut: String,
+		_scene: PackedScene,
 		_extra_hint := "",
-		_extra_shortucts := [],
-		subdir := "Tools"
+		_extra_shortucts := []
 	) -> void:
 		name = _name
 		display_name = _display_name
 		shortcut = _shortcut
+		scene = _scene
 		extra_hint = _extra_hint
 		extra_shortcuts = _extra_shortucts
 		icon = load("res://assets/graphics/tools/%s.png" % name.to_lower())
-		scene = load("res://src/%s/%s.tscn" % [subdir, name])
+		cursor_icon = load("res://assets/graphics/tools/cursors/%s.png" % name.to_lower())
 
 	func generate_hint_tooltip() -> String:
 		var hint := display_name
@@ -301,17 +349,10 @@ func update_hint_tooltips() -> void:
 
 
 func update_tool_cursors() -> void:
-	var left_image = load(
-		"res://assets/graphics/tools/cursors/%s.png" % _slots[BUTTON_LEFT].tool_node.name.to_lower()
-	)
-	Global.left_cursor.texture = left_image
-	var right_image = load(
-		(
-			"res://assets/graphics/tools/cursors/%s.png"
-			% _slots[BUTTON_RIGHT].tool_node.name.to_lower()
-		)
-	)
-	Global.right_cursor.texture = right_image
+	var left_tool: Tool = tools[_slots[BUTTON_LEFT].tool_node.name]
+	Global.left_cursor.texture = left_tool.cursor_icon
+	var right_tool: Tool = tools[_slots[BUTTON_RIGHT].tool_node.name]
+	Global.right_cursor.texture = right_tool.cursor_icon
 
 
 func draw_indicator() -> void:
