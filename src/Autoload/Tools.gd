@@ -11,9 +11,13 @@ var alt := false
 
 var tools := {
 	"RectSelect":
-	Tool.new("RectSelect", "Rectangular Selection", "rectangle_select", "", [], "SelectionTools"),
+	Tool.new(
+		"RectSelect", "Rectangular Selection", "rectangle_select", "", [], "Tools/SelectionTools"
+	),
 	"EllipseSelect":
-	Tool.new("EllipseSelect", "Elliptical Selection", "ellipse_select", "", [], "SelectionTools"),
+	Tool.new(
+		"EllipseSelect", "Elliptical Selection", "ellipse_select", "", [], "Tools/SelectionTools"
+	),
 	"PolygonSelect":
 	Tool.new(
 		"PolygonSelect",
@@ -21,12 +25,12 @@ var tools := {
 		"polygon_select",
 		"Double-click to connect the last point to the starting point",
 		[],
-		"SelectionTools"
+		"Tools/SelectionTools"
 	),
 	"ColorSelect":
-	Tool.new("ColorSelect", "Select By Color", "color_select", "", [], "SelectionTools"),
-	"MagicWand": Tool.new("MagicWand", "Magic Wand", "magic_wand", "", [], "SelectionTools"),
-	"Lasso": Tool.new("Lasso", "Lasso / Free Select Tool", "lasso", "", [], "SelectionTools"),
+	Tool.new("ColorSelect", "Select By Color", "color_select", "", [], "Tools/SelectionTools"),
+	"MagicWand": Tool.new("MagicWand", "Magic Wand", "magic_wand", "", [], "Tools/SelectionTools"),
+	"Lasso": Tool.new("Lasso", "Lasso / Free Select Tool", "lasso", "", [], "Tools/SelectionTools"),
 	"Move": Tool.new("Move", "Move", "move"),
 	"Zoom": Tool.new("Zoom", "Zoom", "zoom"),
 	"Pan": Tool.new("Pan", "Pan", "pan"),
@@ -94,7 +98,7 @@ class Tool:
 		_shortcut: String,
 		_extra_hint := "",
 		_extra_shortucts := [],
-		subdir := ""
+		subdir := "Tools"
 	) -> void:
 		name = _name
 		display_name = _display_name
@@ -102,10 +106,7 @@ class Tool:
 		extra_hint = _extra_hint
 		extra_shortcuts = _extra_shortucts
 		icon = load("res://assets/graphics/tools/%s.png" % name.to_lower())
-		if subdir.empty():
-			scene = load("res://src/Tools/%s.tscn" % name)
-		else:
-			scene = load("res://src/Tools/%s/%s.tscn" % [subdir, name])
+		scene = load("res://src/%s/%s.tscn" % [subdir, name])
 
 	func generate_hint_tooltip() -> String:
 		var left_shortcut: String = InputMap.get_action_list("left_" + shortcut + "_tool")[0].as_text()
@@ -189,6 +190,11 @@ func add_tool_button(t: Tool) -> void:
 	t.button_node = tool_button
 	_tool_buttons.add_child(tool_button)
 	tool_button.connect("pressed", _tool_buttons, "_on_Tool_pressed", [tool_button])
+
+
+func remove_tool(t: Tool) -> void:
+	t.button_node.queue_free()
+	tools.erase(t.name)
 
 
 func set_tool(name: String, button: int) -> void:
