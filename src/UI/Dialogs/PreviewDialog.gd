@@ -184,7 +184,10 @@ func synchronize() -> void:
 			dialog.import_options.emit_signal("item_selected", id)
 
 			#sync properties (if any)
-			if id == ImageImportOptions.SPRITESHEET_TAB or id == ImageImportOptions.SPRITESHEET_LAYER:
+			if (
+				id == ImageImportOptions.SPRITESHEET_TAB
+				or id == ImageImportOptions.SPRITESHEET_LAYER
+			):
 				dialog.spritesheet_tab_options.get_node("HorizontalFrames").value = min(
 					spritesheet_tab_options.get_node("HorizontalFrames").value, image.get_size().x
 				)
@@ -217,7 +220,9 @@ func synchronize() -> void:
 			elif id == ImageImportOptions.BRUSH:
 				var type = new_brush_options.get_node("BrushTypeOption").selected
 				dialog.new_brush_options.get_node("BrushTypeOption").select(type)
-				dialog.new_brush_options.get_node("BrushTypeOption").emit_signal("item_selected", type)
+				dialog.new_brush_options.get_node("BrushTypeOption").emit_signal(
+					"item_selected", type
+				)
 
 
 func _on_ImportOption_item_selected(id: int) -> void:
