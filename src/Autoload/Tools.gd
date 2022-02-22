@@ -109,16 +109,30 @@ class Tool:
 		scene = load("res://src/%s/%s.tscn" % [subdir, name])
 
 	func generate_hint_tooltip() -> String:
-		var left_shortcut: String = InputMap.get_action_list("left_" + shortcut + "_tool")[0].as_text()
-		var right_shortcut: String = InputMap.get_action_list("right_" + shortcut + "_tool")[0].as_text()
 		var hint := display_name
-		hint += "\n\n%s for left mouse button\n%s for right mouse button"
+		var shortcuts := []
+		var left_text := ""
+		var right_text := ""
+		if InputMap.has_action("left_" + shortcut + "_tool"):
+			var left_shortcut: String = InputMap.get_action_list("left_" + shortcut + "_tool")[0].as_text()
+			shortcuts.append(left_shortcut)
+			left_text = "\n%s for left mouse button"
+		if InputMap.has_action("right_" + shortcut + "_tool"):
+			var right_shortcut: String = InputMap.get_action_list("right_" + shortcut + "_tool")[0].as_text()
+			shortcuts.append(right_shortcut)
+			right_text = "\n%s for right mouse button"
+
+		if !shortcuts.empty():
+			hint += "\n" + left_text + right_text
+
 		if !extra_hint.empty():
 			hint += "\n\n" + extra_hint
 
-		var shortcuts := [left_shortcut, right_shortcut]
 		shortcuts.append_array(extra_shortcuts)
-		hint = tr(hint) % shortcuts
+		if shortcuts.empty():
+			hint = tr(hint)
+		else:
+			hint = tr(hint) % shortcuts
 		return hint
 
 
@@ -187,6 +201,7 @@ func add_tool_button(t: Tool) -> void:
 	var tool_button: BaseButton = _tool_button_scene.instance()
 	tool_button.name = t.name
 	tool_button.get_node("ToolIcon").texture = t.icon
+	tool_button.hint_tooltip = t.generate_hint_tooltip()
 	t.button_node = tool_button
 	_tool_buttons.add_child(tool_button)
 	tool_button.connect("pressed", _tool_buttons, "_on_Tool_pressed", [tool_button])

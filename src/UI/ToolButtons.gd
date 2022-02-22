@@ -15,12 +15,16 @@ func _input(event: InputEvent) -> void:
 
 	for tool_name in Tools.tools:  # Handle tool shortcuts
 		var t: Tools.Tool = Tools.tools[tool_name]
-		if event.is_action_pressed("right_" + t.shortcut + "_tool") and !event.control:
-			# Shortcut for right button (with Alt)
-			Tools.assign_tool(t.name, BUTTON_RIGHT)
-		elif event.is_action_pressed("left_" + t.shortcut + "_tool") and !event.control:
-			# Shortcut for left button
-			Tools.assign_tool(t.name, BUTTON_LEFT)
+		if InputMap.has_action("right_" + t.shortcut + "_tool"):
+			if event.is_action_pressed("right_" + t.shortcut + "_tool") and !event.control:
+				# Shortcut for right button (with Alt)
+				Tools.assign_tool(t.name, BUTTON_RIGHT)
+				return
+		if InputMap.has_action("left_" + t.shortcut + "_tool"):
+			if event.is_action_pressed("left_" + t.shortcut + "_tool") and !event.control:
+				# Shortcut for left button
+				Tools.assign_tool(t.name, BUTTON_LEFT)
+				return
 
 
 func _on_Tool_pressed(tool_pressed: BaseButton) -> void:
