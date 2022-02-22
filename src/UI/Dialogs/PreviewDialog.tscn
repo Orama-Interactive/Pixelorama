@@ -51,12 +51,12 @@ __meta__ = {
 
 [node name="VerticalLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
 
-[node name="SyncButton" type="Button" parent="VBoxContainer"]
+[node name="ApplyAll" type="CheckBox" parent="VBoxContainer"]
 visible = false
 margin_top = 304.0
 margin_right = 534.0
 margin_bottom = 324.0
-text = "Synchronize Dialogs"
+text = "Apply to all ?"
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 328.0
@@ -264,7 +264,7 @@ margin_bottom = 24.0
 [connection signal="about_to_show" from="." to="." method="_on_PreviewDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_PreviewDialog_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_PreviewDialog_popup_hide"]
-[connection signal="pressed" from="VBoxContainer/SyncButton" to="." method="_on_SyncButton_pressed"]
+[connection signal="toggled" from="VBoxContainer/ApplyAll" to="." method="_on_ApplyAll_toggled"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/ImportOption" to="." method="_on_ImportOption_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]
