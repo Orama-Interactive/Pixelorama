@@ -230,19 +230,6 @@ margin_top = 216.0
 margin_right = 126.0
 margin_bottom = 228.0
 
-[node name="Mirror" parent="." index="10"]
-margin_top = 232.0
-margin_right = 126.0
-margin_bottom = 249.0
-
-[node name="Horizontal" parent="Mirror" index="0"]
-margin_left = 25.0
-margin_right = 40.0
-
-[node name="Vertical" parent="Mirror" index="1"]
-margin_left = 84.0
-margin_right = 101.0
-
 [connection signal="item_selected" from="ShadingMode" to="." method="_on_ShadingMode_item_selected"]
 [connection signal="item_selected" from="LightenDarken" to="." method="_on_LightenDarken_item_selected"]
 [connection signal="value_changed" from="Amount/Spinbox" to="." method="_on_LightenDarken_value_changed"]

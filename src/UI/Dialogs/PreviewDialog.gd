@@ -114,7 +114,7 @@ func _on_PreviewDialog_confirmed() -> void:
 		OpenSave.open_image_as_new_layer(image, path.get_basename().get_file(), frame_index)
 
 	elif current_import_option == ImageImportOptions.PALETTE:
-		Palettes.import_palette(path)
+		Palettes.import_palette_from_path(path)
 
 	elif current_import_option == ImageImportOptions.BRUSH:
 		add_brush()

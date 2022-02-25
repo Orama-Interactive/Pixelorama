@@ -17,15 +17,15 @@ func apply_selection(position: Vector2) -> void:
 	flood_fill(position, cel_image, selection_bitmap_copy)
 
 	# Handle mirroring
-	if tool_slot.horizontal_mirror:
+	if Tools.horizontal_mirror:
 		var mirror_x := position
 		mirror_x.x = Global.current_project.x_symmetry_point - position.x
 		flood_fill(mirror_x, cel_image, selection_bitmap_copy)
-		if tool_slot.vertical_mirror:
+		if Tools.vertical_mirror:
 			var mirror_xy := mirror_x
 			mirror_xy.y = Global.current_project.y_symmetry_point - position.y
 			flood_fill(mirror_xy, cel_image, selection_bitmap_copy)
-	if tool_slot.vertical_mirror:
+	if Tools.vertical_mirror:
 		var mirror_y := position
 		mirror_y.y = Global.current_project.y_symmetry_point - position.y
 		flood_fill(mirror_y, cel_image, selection_bitmap_copy)

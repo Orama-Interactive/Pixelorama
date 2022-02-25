@@ -122,6 +122,11 @@ dialog_autowrap = true
 
 [node name="WindowOpacityDialog" parent="Dialogs" instance=ExtResource( 10 )]
 
+[node name="Extensions" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="LeftCursor" type="Sprite" parent="."]
 visible = false
 

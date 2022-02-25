@@ -77,7 +77,7 @@ func apply_selection(_position: Vector2) -> void:
 		set_ellipse(selection_bitmap_copy, _rect.position)
 
 		# Handle mirroring
-		if tool_slot.horizontal_mirror:
+		if Tools.horizontal_mirror:
 			var mirror_x_rect := _rect
 			mirror_x_rect.position.x = (
 				Global.current_project.x_symmetry_point
@@ -86,7 +86,7 @@ func apply_selection(_position: Vector2) -> void:
 			)
 			mirror_x_rect.end.x = Global.current_project.x_symmetry_point - _rect.end.x + 1
 			set_ellipse(selection_bitmap_copy, mirror_x_rect.abs().position)
-			if tool_slot.vertical_mirror:
+			if Tools.vertical_mirror:
 				var mirror_xy_rect := mirror_x_rect
 				mirror_xy_rect.position.y = (
 					Global.current_project.y_symmetry_point
@@ -95,7 +95,7 @@ func apply_selection(_position: Vector2) -> void:
 				)
 				mirror_xy_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 				set_ellipse(selection_bitmap_copy, mirror_xy_rect.abs().position)
-		if tool_slot.vertical_mirror:
+		if Tools.vertical_mirror:
 			var mirror_y_rect := _rect
 			mirror_y_rect.position.y = (
 				Global.current_project.y_symmetry_point

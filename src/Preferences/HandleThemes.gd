@@ -1,14 +1,15 @@
 extends Node
 
 var theme_index := 0
+var theme_button_group := ButtonGroup.new()
 
 onready var themes := [
-	[preload("res://assets/themes/dark/theme.tres"), "Dark", Color.gray],
-	[preload("res://assets/themes/gray/theme.tres"), "Gray", Color.gray],
-	[preload("res://assets/themes/blue/theme.tres"), "Blue", Color.gray],
-	[preload("res://assets/themes/caramel/theme.tres"), "Caramel", Color(0.2, 0.2, 0.2)],
-	[preload("res://assets/themes/light/theme.tres"), "Light", Color(0.2, 0.2, 0.2)],
-	[preload("res://assets/themes/purple/theme.tres"), "Purple", Color.gray],
+	preload("res://assets/themes/dark/theme.tres"),
+	preload("res://assets/themes/gray/theme.tres"),
+	preload("res://assets/themes/blue/theme.tres"),
+	preload("res://assets/themes/caramel/theme.tres"),
+	preload("res://assets/themes/light/theme.tres"),
+	preload("res://assets/themes/purple/theme.tres"),
 ]
 
 onready var buttons_container: BoxContainer = $ThemeButtons
@@ -17,82 +18,85 @@ onready var theme_color_preview_scene = preload("res://src/Preferences/ThemeColo
 
 
 func _ready() -> void:
-	var button_group = ButtonGroup.new()
 	for theme in themes:
-		var button := CheckBox.new()
-		button.name = theme[1]
-		button.text = theme[1]
-		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		button.group = button_group
-		buttons_container.add_child(button)
-		button.connect("pressed", self, "_on_Theme_pressed", [button.get_index()])
+		add_theme(theme)
 
-		var panel_stylebox: StyleBox = theme[0].get_stylebox("panel", "Panel")
-		var panel_container_stylebox: StyleBox = theme[0].get_stylebox("panel", "PanelContainer")
-		if panel_stylebox is StyleBoxFlat and panel_container_stylebox is StyleBoxFlat:
-			var theme_color_preview: ColorRect = theme_color_preview_scene.instance()
-			var color1 = panel_stylebox.bg_color
-			var color2 = panel_container_stylebox.bg_color
-			theme_color_preview.get_child(0).color = color1
-			theme_color_preview.get_child(1).color = color2
-			colors_container.add_child(theme_color_preview)
-
-	if Global.config_cache.has_section_key("preferences", "theme"):
-		var theme_id = Global.config_cache.get_value("preferences", "theme")
-		if theme_id >= themes.size():
-			theme_id = 0
-		change_theme(theme_id)
-		buttons_container.get_child(theme_id).pressed = true
-	else:
-		change_theme(0)
-		buttons_container.get_child(0).pressed = true
+	var theme_id: int = Global.config_cache.get_value("preferences", "theme", 0)
+	if theme_id >= themes.size():
+		theme_id = 0
+	change_theme(theme_id)
+	buttons_container.get_child(theme_id).pressed = true
 
 
 func _on_Theme_pressed(index: int) -> void:
 	buttons_container.get_child(index).pressed = true
 	change_theme(index)
 
-	# Make sure the frame text gets updated
-	Global.current_project.current_frame = Global.current_project.current_frame
-
 	Global.config_cache.set_value("preferences", "theme", index)
 	Global.config_cache.save("user://cache.ini")
 
 
+func add_theme(theme: Theme) -> void:
+	var button := CheckBox.new()
+	var theme_name: String = theme.resource_name
+	button.name = theme_name
+	button.text = theme_name
+	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	button.group = theme_button_group
+	buttons_container.add_child(button)
+	button.connect("pressed", self, "_on_Theme_pressed", [button.get_index()])
+
+	var panel_stylebox: StyleBox = theme.get_stylebox("panel", "Panel")
+	var panel_container_stylebox: StyleBox = theme.get_stylebox("panel", "PanelContainer")
+	if panel_stylebox is StyleBoxFlat and panel_container_stylebox is StyleBoxFlat:
+		var theme_color_preview: ColorRect = theme_color_preview_scene.instance()
+		var color1: Color = panel_stylebox.bg_color
+		var color2: Color = panel_container_stylebox.bg_color
+		theme_color_preview.get_child(0).color = color1
+		theme_color_preview.get_child(1).color = color2
+		colors_container.add_child(theme_color_preview)
+
+
+func remove_theme(theme: Theme) -> void:
+	var index: int = themes.find(theme)
+	var theme_button = buttons_container.get_child(index)
+	var color_previews = colors_container.get_child(index)
+	buttons_container.remove_child(theme_button)
+	theme_button.queue_free()
+	colors_container.remove_child(color_previews)
+	color_previews.queue_free()
+	themes.erase(theme)
+
+
 func change_theme(id: int) -> void:
 	theme_index = id
-	var main_theme: Theme = themes[id][0]
-
-	if id == 0 or id == 1 or id == 5:  # Dark, Gray or Purple Theme
-		Global.theme_type = Global.ThemeTypes.DARK
-	elif id == 2:  # Godot's Theme
-		Global.theme_type = Global.ThemeTypes.BLUE
-	elif id == 3:  # Caramel Theme
-		Global.theme_type = Global.ThemeTypes.CARAMEL
-	elif id == 4:  # Light Theme
-		Global.theme_type = Global.ThemeTypes.LIGHT
+	var theme: Theme = themes[id]
+	var icon_color: Color = theme.get_color("modulate_color", "Icons")
 
 	if Global.icon_color_from == Global.IconColorFrom.THEME:
-		Global.modulate_icon_color = themes[id][2]
+		Global.modulate_icon_color = icon_color
 
-	Global.control.theme = main_theme
+	Global.control.theme = theme
 
-	var panel_stylebox: StyleBox = main_theme.get_stylebox("panel", "PanelContainer")
-	if panel_stylebox is StyleBoxFlat:
-		Global.default_clear_color = panel_stylebox.bg_color
-	else:
-		Global.default_clear_color = themes[id][2]
-	VisualServer.set_default_clear_color(Color(Global.default_clear_color))
+	var clear_color: Color = theme.get_color("clear_color", "Misc")
+	if !clear_color:
+		var panel_stylebox: StyleBox = theme.get_stylebox("panel", "PanelContainer")
+		if panel_stylebox is StyleBoxFlat:
+			clear_color = panel_stylebox.bg_color
+		else:
+			clear_color = Color.gray
+	VisualServer.set_default_clear_color(clear_color)
 
 	# Temporary code
 	var layer_button_pcont: PanelContainer = Global.animation_timeline.find_node(
 		"LayerButtonPanelContainer"
 	)
 	var lbpc_stylebox: StyleBoxFlat = layer_button_pcont.get_stylebox("panel", "PanelContainer")
-	lbpc_stylebox.bg_color = Global.default_clear_color
+	lbpc_stylebox.bg_color = clear_color
 
-	var top_menu_style = main_theme.get_stylebox("TopMenu", "Panel")
-	var ruler_style = main_theme.get_stylebox("Ruler", "Button")
+	# Will no longer be needed when Godot 3.5 is out
+	var top_menu_style: StyleBox = theme.get_stylebox("TopMenu", "Panel")
+	var ruler_style: StyleBox = theme.get_stylebox("Ruler", "Button")
 	Global.top_menu_container.add_stylebox_override("panel", top_menu_style)
 	Global.horizontal_ruler.add_stylebox_override("normal", ruler_style)
 	Global.horizontal_ruler.add_stylebox_override("pressed", ruler_style)
@@ -105,7 +109,8 @@ func change_theme(id: int) -> void:
 
 	change_icon_colors()
 
-	Global.preferences_dialog.get_node("Popups/ShortcutSelector").theme = main_theme
+	for child in Global.preferences_dialog.get_node("Popups").get_children():
+		child.theme = theme
 
 	# Sets disabled theme color on palette swatches
 	Global.palette_panel.reset_empty_palette_swatches_color()

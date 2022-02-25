@@ -46,9 +46,5 @@ value = 255.0
 margin_top = 168.0
 margin_bottom = 180.0
 
-[node name="Mirror" parent="." index="7"]
-margin_top = 184.0
-margin_bottom = 201.0
-
 [connection signal="value_changed" from="Opacity/OpacitySpinBox" to="." method="_on_Opacity_value_changed"]
 [connection signal="value_changed" from="Opacity/OpacitySlider" to="." method="_on_Opacity_value_changed"]

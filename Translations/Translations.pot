@@ -55,6 +55,9 @@ msgstr ""
 msgid "View"
 msgstr ""
 
+msgid "Window"
+msgstr ""
+
 msgid "Image"
 msgstr ""
 
@@ -307,8 +310,15 @@ msgstr ""
 msgid "Exporting in progress..."
 msgstr ""
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
+msgstr ""
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
 msgstr ""
 
 msgid "Frame"
@@ -441,6 +451,9 @@ msgid "Backup"
 msgstr ""
 
 msgid "Performance"
+msgstr ""
+
+msgid "Extensions"
 msgstr ""
 
 msgid "Cursors"
@@ -796,9 +809,9 @@ msgid "Elliptical Selection\n\n"
 msgstr ""
 
 msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
 msgstr ""
 
 msgid "Select By Color\n\n"
@@ -832,9 +845,9 @@ msgid "Pan\n\n"
 msgstr ""
 
 msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
 msgstr ""
 
 msgid "Pencil\n\n"
@@ -1083,6 +1096,21 @@ msgid "Sets the limit of the application's frames per second. The lower the numb
 msgstr ""
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+msgstr ""
+
+msgid "Add Extension"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "Open Folder"
 msgstr ""
 
 msgid "Brush:"

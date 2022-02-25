@@ -9,7 +9,9 @@ onready var direction: OptionButton = options_cont.get_node("DirectionOptionButt
 
 func _ready() -> void:
 	color1.get_picker().presets_visible = false
+	color1.get_picker().deferred_mode = true
 	color2.get_picker().presets_visible = false
+	color2.get_picker().deferred_mode = true
 
 
 func set_nodes() -> void:
