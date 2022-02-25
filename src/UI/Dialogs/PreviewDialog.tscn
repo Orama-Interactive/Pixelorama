@@ -3,8 +3,8 @@
 [ext_resource path="res://src/UI/Dialogs/PreviewDialog.gd" type="Script" id=1]
 
 [node name="PreviewDialog" type="ConfirmationDialog"]
-margin_right = 200.0
-margin_bottom = 70.0
+margin_right = 550.0
+margin_bottom = 410.0
 rect_min_size = Vector2( 550, 70 )
 popup_exclusive = true
 window_title = "Import Options"
@@ -51,10 +51,17 @@ __meta__ = {
 
 [node name="VerticalLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
 
-[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ApplyAll" type="CheckBox" parent="VBoxContainer"]
+visible = false
 margin_top = 304.0
 margin_right = 534.0
-margin_bottom = 318.0
+margin_bottom = 324.0
+text = "Apply to all ?"
+
+[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 328.0
+margin_right = 534.0
+margin_bottom = 342.0
 custom_constants/separation = 32
 
 [node name="ImageSizeLabel" type="Label" parent="VBoxContainer/SizeContainer"]
@@ -70,9 +77,9 @@ margin_bottom = 14.0
 text = "Frame size: 64×64"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 322.0
+margin_top = 346.0
 margin_right = 534.0
-margin_bottom = 342.0
+margin_bottom = 366.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_top = 3.0
@@ -257,6 +264,7 @@ margin_bottom = 24.0
 [connection signal="about_to_show" from="." to="." method="_on_PreviewDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_PreviewDialog_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_PreviewDialog_popup_hide"]
+[connection signal="toggled" from="VBoxContainer/ApplyAll" to="." method="_on_ApplyAll_toggled"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/ImportOption" to="." method="_on_ImportOption_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]
