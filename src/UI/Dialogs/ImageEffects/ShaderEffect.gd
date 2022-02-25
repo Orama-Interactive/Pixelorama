@@ -57,7 +57,7 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 	for child in shader_params.get_children():
 		child.queue_free()
 
-	var code = shader.code.split("\n")
+	var code := shader.code.split("\n")
 	var uniforms := []
 	for line in code:
 		if line.begins_with("uniform"):
@@ -66,44 +66,68 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 	for uniform in uniforms:
 		# Example uniform:
 		# uniform float parameter_name : hint_range(0, 255) = 100.0;
-		var uniform_split = uniform.split("=")
+		var uniform_split: PoolStringArray = uniform.split("=")
 		var u_value := ""
 		if uniform_split.size() > 1:
 			u_value = uniform_split[1].replace(";", "").strip_edges()
 
-		var u_left_side = uniform_split[0].split(":")
-#		var u_hint := ""
-#		if u_left_side.size() > 1:
-#			u_hint = u_left_side[1].strip_edges()
+		var u_left_side: PoolStringArray = uniform_split[0].split(":")
+		var u_hint := ""
+		if u_left_side.size() > 1:
+			u_hint = u_left_side[1].strip_edges()
+			u_hint = u_hint.replace(";", "")
 
-		var u_init = u_left_side[0].split(" ")
-		var u_type = u_init[1]
-		var u_name = u_init[2]
+		var u_init: PoolStringArray = u_left_side[0].split(" ")
+		var u_type: String = u_init[1]
+		var u_name: String = u_init[2]
 		param_names.append(u_name)
 
-		if u_type == "float":
+		if u_type == "float" or u_type == "int":
 			var label := Label.new()
 			label.text = u_name
 			var spinbox := SpinBox.new()
-			spinbox.min_value = 0.01
-			spinbox.max_value = 255
-			spinbox.step = 0.01
-			if u_value != "":
-				spinbox.value = float(u_value)
-			spinbox.connect("value_changed", self, "set_shader_param", [u_name])
-			var hbox := HBoxContainer.new()
-			hbox.add_child(label)
-			hbox.add_child(spinbox)
-			shader_params.add_child(hbox)
-		elif u_type == "int":
-			var label := Label.new()
-			label.text = u_name
-			var spinbox := SpinBox.new()
-			spinbox.min_value = 0
-			spinbox.max_value = 255
-			spinbox.step = 1
-			if u_value != "":
-				spinbox.value = int(u_value)
+			var min_value := 0.0
+			var max_value := 255.0
+			var step := 1.0
+			var range_values_array: PoolStringArray
+			if "hint_range" in u_hint:
+				var range_values: String = u_hint.replace("hint_range(", "")
+				range_values = range_values.replace(")", "").strip_edges()
+				range_values_array = range_values.split(",")
+
+			if u_type == "float":
+				if range_values_array.size() >= 1:
+					min_value = float(range_values_array[0])
+				else:
+					min_value = 0.01
+
+				if range_values_array.size() >= 2:
+					max_value = float(range_values_array[1])
+				else:
+					max_value = 255
+
+				if range_values_array.size() >= 3:
+					step = float(range_values_array[2])
+				else:
+					step = 0.01
+
+				if u_value != "":
+					spinbox.value = float(u_value)
+			else:
+				if range_values_array.size() >= 1:
+					min_value = int(range_values_array[0])
+
+				if range_values_array.size() >= 2:
+					max_value = int(range_values_array[1])
+
+				if range_values_array.size() >= 3:
+					step = int(range_values_array[2])
+
+				if u_value != "":
+					spinbox.value = int(u_value)
+			spinbox.min_value = min_value
+			spinbox.max_value = max_value
+			spinbox.step = step
 			spinbox.connect("value_changed", self, "set_shader_param", [u_name])
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
