@@ -111,6 +111,12 @@ func _add_extension(file_name: String) -> void:
 
 func _enable_extension(extension: Extension, save_to_config := true) -> void:
 	var extension_path: String = "res://src/Extensions/%s/" % extension.file_name
+
+	# A unique id for the extension (currently set to file_name). More parameters (version etc.)
+	# can be easily added using the str() function. for example
+	# var id: String = str(extension.file_name, extension.version)
+	var id: String = extension.file_name
+
 	if extension.enabled:
 		for node in extension.nodes:
 			var scene_path: String = extension_path.plus_file(node)
@@ -118,10 +124,10 @@ func _enable_extension(extension: Extension, save_to_config := true) -> void:
 			if extension_scene:
 				var extension_node: Node = extension_scene.instance()
 				extension_parent.add_child(extension_node)
+				extension_node.add_to_group(id)  # Keep track of what to remove later
 	else:
-		for node in extension.nodes:
-			var ext_node = extension_parent.get_node(node.get_basename())
-			if ext_node:
+		for ext_node in extension_parent.get_children():
+			if ext_node.is_in_group(id):  # Node for extention found
 				extension_parent.remove_child(ext_node)
 				ext_node.queue_free()
 
