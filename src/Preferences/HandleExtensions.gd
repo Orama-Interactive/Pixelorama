@@ -114,8 +114,8 @@ func _enable_extension(extension: Extension, save_to_config := true) -> void:
 
 	# A unique id for the extension (currently set to file_name). More parameters (version etc.)
 	# can be easily added using the str() function. for example
-	# var id :String = str(extension.file_name, extension.version)
-	var id :String = extension.file_name
+	# var id: String = str(extension.file_name, extension.version)
+	var id: String = extension.file_name
 
 	if extension.enabled:
 		for node in extension.nodes:
