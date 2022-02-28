@@ -84,7 +84,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 
 ## Uncoment this function and comment the function below this (of the same name)
-## if you want to remove tag functionality (pull #)
+## if you want to remove tag functionality (made on pull #655)
 #func change_frame_order(rate: int) -> void:
 #	var change = frame + rate
 #	var new_frames: Array = Global.current_project.frames.duplicate()
