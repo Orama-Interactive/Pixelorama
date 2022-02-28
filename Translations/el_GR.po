@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-02-28 17:34\n"
+"PO-Revision-Date: 2022-02-28 18:29\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Προβολή"
 
 msgid "Window"
-msgstr ""
+msgstr "Παράθυρο"
 
 msgid "Image"
 msgstr "Εικόνα"
@@ -187,13 +187,13 @@ msgid "Panel Layout"
 msgstr "Διάταξη Πλαισίου"
 
 msgid "Panels"
-msgstr ""
+msgstr "Πλαίσια"
 
 msgid "Layouts"
-msgstr ""
+msgstr "Διατάξεις"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Διαχείριση διατάξεων"
 
 msgid "Auto"
 msgstr "Αυτόματο"
@@ -322,7 +322,7 @@ msgid "Exporting in progress..."
 msgstr "Εξαγωγή σε εξέλιξη..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Αδυναμία φόρτωσης του αρχείου '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -331,7 +331,8 @@ msgstr "Δεν είναι δυνατή η φόρτωση του αρχείου '
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Αδυναμία φόρτωσης του αρχείου '%s'.\n"
+"Αυτό δεν είναι έγκυρο αρχείο παλέτας."
 
 msgid "Frame"
 msgstr "Καρέ"
@@ -469,7 +470,7 @@ msgid "Extensions"
 msgstr ""
 
 msgid "Cursors"
-msgstr ""
+msgstr "Κέρσορας"
 
 msgid "Indicators"
 msgstr "Δείκτες"
@@ -828,7 +829,10 @@ msgid "Polygonal Selection\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "Πολυγωνική επιλογή\n"
+"%s για αριστερό πλήκτρο του ποντικιού\n"
+"%s για δεξί πλήκτρο του ποντικιού\n\n"
+"Διπλό κλικ για σύνδεση του τελευταίου σημείου στο σημείο εκκίνησης"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -876,7 +880,10 @@ msgid "Color Picker\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "Επιλογέας χρωμάτων\n"
+"%s για αριστερό πλήκτρο του ποντικιού\n"
+"%s για δεξί πλήκτρο του ποντικιού\n\n"
+"Επιλέξτε ένα χρώμα από ένα εικονοστοιχείο του αντικειμένου"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1003,7 +1010,7 @@ msgid "Use native mouse cursors"
 msgstr ""
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Χρήση σταυρού κέρσορα για τον καμβά"
 
 msgid "Guides"
 msgstr "Οδηγοί"
@@ -1156,16 +1163,16 @@ msgid "Add Extension"
 msgstr ""
 
 msgid "Enable"
-msgstr ""
+msgstr "Ενεργοποίηση"
 
 msgid "Disable"
-msgstr ""
+msgstr "Απενεργοποίηση"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Απεγκατάσταση"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Άνοιγμα φακέλου"
 
 msgid "Brush:"
 msgstr "Πινέλο:"
@@ -1202,7 +1209,8 @@ msgstr "Εσωτερικό γέμισμα"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Pixel Perfect\n"
+"Κάνει τις γραμμές ομαλές αφαιρώντας τα επιπλέον εικονοστοιχεία στα άκρα"
 
 msgid "Fill Shape"
 msgstr "Γέμισμα Σχήματος"
@@ -1861,7 +1869,7 @@ msgid "Frame duration"
 msgstr "Διάρκεια καρέ"
 
 msgid "Duration"
-msgstr ""
+msgstr "Διάρκεια"
 
 msgid "Tiled In Both Axis"
 msgstr "Επανάληψη και στους 2 άξονες"
