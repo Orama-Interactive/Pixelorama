@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-02-28 17:34\n"
+"PO-Revision-Date: 2022-02-28 18:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1209,7 +1209,8 @@ msgstr "Riempi all'interno"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Pixel Perfect\n"
+"Rende le linee lisce rimuovendo i pixel aggiuntivi sui bordi"
 
 msgid "Fill Shape"
 msgstr "Riempi Forma"
