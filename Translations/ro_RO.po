@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-02-28 17:34\n"
+"PO-Revision-Date: 2022-02-28 18:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1209,7 +1209,8 @@ msgstr "Umplere pe interior"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Pixel Perfect\n"
+"Netezește liniile prin eliminarea pixelilor suplimentari de pe margini"
 
 msgid "Fill Shape"
 msgstr "Umplere formă"
