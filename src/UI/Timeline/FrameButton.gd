@@ -61,7 +61,7 @@ func _button_pressed() -> void:
 		pressed = !pressed
 	elif Input.is_action_just_released("middle_mouse"):
 		pressed = !pressed
-		Global.animation_timeline.delete_frame(frame)
+		Global.animation_timeline.delete_frames([frame])
 	else:  # An example of this would be Space
 		pressed = !pressed
 
@@ -69,9 +69,9 @@ func _button_pressed() -> void:
 func _on_PopupMenu_id_pressed(id: int) -> void:
 	match id:
 		0:  # Remove Frame
-			Global.animation_timeline.delete_frame(frame)
+			Global.animation_timeline.delete_frames([frame])
 		1:  # Clone Frame
-			Global.animation_timeline.copy_frame(frame)
+			Global.animation_timeline.copy_frames([frame])
 		2:  # Move Left
 			change_frame_order(-1)
 		3:  # Move Right
