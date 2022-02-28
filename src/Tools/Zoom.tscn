@@ -56,16 +56,6 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "100% Zoom"
 
-[node name="PixelPerfect" parent="." index="6"]
-visible = false
-margin_top = 126.0
-margin_bottom = 150.0
-
-[node name="EmptySpacer" parent="." index="7"]
-visible = false
-margin_top = 126.0
-margin_bottom = 138.0
-
 [connection signal="item_selected" from="ModeOptions" to="." method="_on_ModeOptions_item_selected"]
 [connection signal="pressed" from="FitToFrame" to="." method="_on_FitToFrame_pressed"]
 [connection signal="pressed" from="100%" to="." method="_on_100_pressed"]

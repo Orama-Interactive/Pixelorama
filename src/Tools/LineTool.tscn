@@ -52,18 +52,9 @@ visible = false
 margin_top = 18.0
 margin_bottom = 34.0
 
-[node name="PixelPerfect" parent="." index="5"]
-visible = false
-margin_top = 66.0
-margin_bottom = 90.0
-
-[node name="ColorInterpolation" parent="." index="6"]
+[node name="ColorInterpolation" parent="." index="5"]
 margin_top = 66.0
 margin_bottom = 128.0
-
-[node name="EmptySpacer" parent="." index="7"]
-margin_top = 66.0
-margin_bottom = 78.0
 
 [connection signal="value_changed" from="ShapeThickness/ThicknessSpinbox" to="." method="_on_Thickness_value_changed"]
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]

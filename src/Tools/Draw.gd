@@ -183,7 +183,7 @@ func draw_tool(position: Vector2) -> void:
 	if Global.pressure_sensitivity_mode == Global.PressureSensitivity.ALPHA:
 		strength *= Tools.pen_pressure
 
-	_drawer.pixel_perfect = tool_slot.pixel_perfect if _brush_size == 1 else false
+	_drawer.pixel_perfect = Tools.pixel_perfect if _brush_size == 1 else false
 	_drawer.horizontal_mirror = Tools.horizontal_mirror
 	_drawer.vertical_mirror = Tools.vertical_mirror
 	_drawer.color_op.strength = strength
@@ -500,7 +500,7 @@ func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 	var angle := rad2deg(end.angle_to_point(start))
 	var distance := start.distance_to(end)
 	if Tools.control:
-		if tool_slot.pixel_perfect:
+		if Tools.pixel_perfect:
 			angle = stepify(angle, 22.5)
 			if step_decimals(angle) != 0:
 				var diff := end - start

@@ -9,9 +9,6 @@ margin_right = 123.0
 margin_bottom = 65.0
 size_flags_horizontal = 3
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="."]
 margin_right = 116.0
@@ -19,24 +16,3 @@ margin_bottom = 14.0
 text = "Tool"
 align = 1
 autowrap = true
-
-[node name="PixelPerfect" type="CheckBox" parent="."]
-margin_left = 4.0
-margin_top = 18.0
-margin_right = 112.0
-margin_bottom = 42.0
-grow_horizontal = 2
-grow_vertical = 2
-hint_tooltip = "Makes lines smooth by removing the extra pixels on the edges"
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 4
-text = "Pixel Perfect"
-align = 1
-
-[node name="EmptySpacer" type="Control" parent="."]
-margin_top = 46.0
-margin_right = 116.0
-margin_bottom = 58.0
-rect_min_size = Vector2( 0, 12 )
-
-[connection signal="toggled" from="PixelPerfect" to="." method="_on_PixelPerfect_toggled"]

@@ -14,12 +14,6 @@ func _ready() -> void:
 	$Label.text = tool_slot.name
 
 	load_config()
-	$PixelPerfect.pressed = tool_slot.pixel_perfect
-
-
-func _on_PixelPerfect_toggled(button_pressed: bool) -> void:
-	tool_slot.pixel_perfect = button_pressed
-	tool_slot.save_config()
 
 
 func save_config() -> void:

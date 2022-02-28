@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/graphics/misc/horizontal_mirror_off.png" type="Texture" id=1]
 [ext_resource path="res://assets/graphics/misc/vertical_mirror_off.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/GlobalToolOptions.gd" type="Script" id=3]
+[ext_resource path="res://assets/graphics/misc/pixel_perfect_off.png" type="Texture" id=4]
 
 [node name="Global Tool Options" type="PanelContainer"]
 margin_left = 958.0
@@ -19,7 +20,7 @@ margin_right = 311.0
 margin_bottom = 39.0
 
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
-margin_right = 68.0
+margin_right = 104.0
 margin_bottom = 32.0
 columns = 3
 
@@ -68,6 +69,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="PixelPerfect" type="Button" parent="ScrollContainer/GridContainer" groups=["UIButtons"]]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Pixel Perfect
+Makes lines smooth by removing the extra pixels on the edges"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/GridContainer/PixelPerfect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 4 )
+
 [connection signal="resized" from="." to="." method="_on_resized"]
 [connection signal="toggled" from="ScrollContainer/GridContainer/Horizontal" to="." method="_on_Horizontal_toggled"]
 [connection signal="toggled" from="ScrollContainer/GridContainer/Vertical" to="." method="_on_Vertical_toggled"]
+[connection signal="toggled" from="ScrollContainer/GridContainer/PixelPerfect" to="." method="_on_PixelPerfect_toggled"]

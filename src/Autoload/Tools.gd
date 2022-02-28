@@ -5,6 +5,7 @@ signal color_changed(color, button)
 var pen_pressure := 1.0
 var horizontal_mirror := false
 var vertical_mirror := false
+var pixel_perfect := false
 var control := false
 var shift := false
 var alt := false
@@ -191,22 +192,9 @@ class Slot:
 	var button: int
 	var color: Color
 
-	var pixel_perfect := false
-
 	func _init(slot_name: String) -> void:
 		name = slot_name
 		kname = name.replace(" ", "_").to_lower()
-		load_config()
-
-	func save_config() -> void:
-		var config := {
-			"pixel_perfect": pixel_perfect,
-		}
-		Global.config_cache.set_value(kname, "slot", config)
-
-	func load_config() -> void:
-		var config = Global.config_cache.get_value(kname, "slot", {})
-		pixel_perfect = config.get("pixel_perfect", pixel_perfect)
 
 
 func _ready() -> void:
@@ -234,6 +222,7 @@ func _ready() -> void:
 
 	horizontal_mirror = Global.config_cache.get_value("preferences", "horizontal_mirror", false)
 	vertical_mirror = Global.config_cache.get_value("preferences", "vertical_mirror", false)
+	pixel_perfect = Global.config_cache.get_value("preferences", "pixel_perfect", false)
 
 	# Yield is necessary for the color picker nodes to update their color values
 	yield(get_tree(), "idle_frame")
