@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-02-21 16:04\n"
+"PO-Revision-Date: 2022-02-28 17:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1200,7 +1200,8 @@ msgstr "Pixel Perfect"
 msgid "Fill inside"
 msgstr "Udfyld indersiden"
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Fill Shape"
