@@ -83,6 +83,39 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			frame_properties.set_frame_dur(Global.current_project.frames[frame].duration)
 
 
+## Uncoment this function and comment the function below this (of the same name)
+## if you want to remove tag functionality (pull #)
+#func change_frame_order(rate: int) -> void:
+#	var change = frame + rate
+#	var new_frames: Array = Global.current_project.frames.duplicate()
+#	var temp = new_frames[frame]
+#	new_frames[frame] = new_frames[change]
+#	new_frames[change] = temp
+#
+#	Global.current_project.undo_redo.create_action("Change Frame Order")
+#	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
+#	Global.current_project.undo_redo.add_undo_property(
+#		Global.current_project, "frames", Global.current_project.frames
+#	)
+#
+#	if Global.current_project.current_frame == frame:
+#		Global.current_project.undo_redo.add_do_property(
+#			Global.current_project, "current_frame", change
+#		)
+#	else:
+#		Global.current_project.undo_redo.add_do_property(
+#			Global.current_project, "current_frame", Global.current_project.current_frame
+#		)
+#
+#	Global.current_project.undo_redo.add_undo_property(
+#		Global.current_project, "current_frame", Global.current_project.current_frame
+#	)
+#
+#	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+#	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+#	Global.current_project.undo_redo.commit_action()
+
+
 func change_frame_order(rate: int) -> void:
 	var change = frame + rate
 	var new_frames: Array = Global.current_project.frames.duplicate()
