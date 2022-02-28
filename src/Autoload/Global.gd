@@ -126,7 +126,6 @@ onready var greyscale_vision: ColorRect = control.find_node("GreyscaleVision")
 onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider")
 
 onready var tool_panel: ScrollContainer = control.find_node("Tools")
-onready var color_pickers: Container = control.find_node("Color Pickers")
 onready var left_tool_options_scroll: ScrollContainer = control.find_node("Left Tool Options")
 onready var right_tool_options_scroll: ScrollContainer = control.find_node("Right Tool Options")
 onready var brushes_popup: Popup = control.find_node("BrushesPopup")

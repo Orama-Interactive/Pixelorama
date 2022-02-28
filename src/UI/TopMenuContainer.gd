@@ -551,10 +551,13 @@ func _toggle_show_guides() -> void:
 
 
 func _toggle_zen_mode() -> void:
+	var color_pickers: Container = Global.control.find_node("Color Pickers")
+	var global_tool_options: Container = Global.control.find_node("Global Tool Options")
 	ui.set_control_hidden(Global.animation_timeline, !zen_mode)
 	ui.set_control_hidden(Global.tool_panel, !zen_mode)
 	ui.set_control_hidden(Global.canvas_preview_container, !zen_mode)
-	ui.set_control_hidden(Global.color_pickers, !zen_mode)
+	ui.set_control_hidden(color_pickers, !zen_mode)
+	ui.set_control_hidden(global_tool_options, !zen_mode)
 	ui.set_control_hidden(Global.left_tool_options_scroll, !zen_mode)
 	ui.set_control_hidden(Global.right_tool_options_scroll, !zen_mode)
 	ui.set_control_hidden(Global.palette_panel, !zen_mode)

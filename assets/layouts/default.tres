@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=21 format=2]
+[gd_resource type="Resource" load_steps=23 format=2]
 
 [ext_resource path="res://addons/dockable_container/layout_panel.gd" type="Script" id=1]
 [ext_resource path="res://addons/dockable_container/layout_split.gd" type="Script" id=2]
@@ -56,13 +56,27 @@ script = ExtResource( 1 )
 names = PoolStringArray( "Color Pickers" )
 current_tab = 0
 
+[sub_resource type="Resource" id=30]
+resource_name = "Tabs"
+script = ExtResource( 1 )
+names = PoolStringArray( "Global Tool Options" )
+current_tab = 0
+
+[sub_resource type="Resource" id=31]
+resource_name = "Split"
+script = ExtResource( 2 )
+direction = 1
+percent = 0.5
+first = SubResource( 20 )
+second = SubResource( 30 )
+
 [sub_resource type="Resource" id=21]
 resource_name = "Split"
 script = ExtResource( 2 )
 direction = 1
 percent = 0.911765
 first = SubResource( 11 )
-second = SubResource( 20 )
+second = SubResource( 31 )
 
 [sub_resource type="Resource" id=22]
 resource_name = "Tabs"
@@ -118,7 +132,7 @@ second = SubResource( 15 )
 resource_name = "Split"
 script = ExtResource( 2 )
 direction = 0
-percent = 0.0134804
+percent = 0.0
 first = SubResource( 1 )
 second = SubResource( 16 )
 
