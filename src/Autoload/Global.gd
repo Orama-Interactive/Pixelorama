@@ -315,6 +315,8 @@ func disable_button(button: BaseButton, disable: bool) -> void:
 
 
 func change_button_texturerect(texture_button: TextureRect, new_file_name: String) -> void:
+	if !texture_button.texture:
+		return
 	var file_name := texture_button.texture.resource_path.get_basename().get_file()
 	var directory_path := texture_button.texture.resource_path.get_basename().replace(file_name, "")
 	texture_button.texture = load(directory_path.plus_file(new_file_name))
