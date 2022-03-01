@@ -8,6 +8,9 @@ var cursor_text := ""
 
 var _cursor := Vector2.INF
 
+var _draw_cache: PoolVector2Array = []  # for storing already drawn pixels
+var _cache_limit :int = 2000  #To prevent memory bloating
+
 
 func _ready() -> void:
 	kname = name.replace(" ", "_").to_lower()
@@ -40,6 +43,7 @@ func update_config() -> void:
 
 
 func draw_start(_position: Vector2) -> void:
+	_draw_cache = []
 	is_moving = true
 
 
