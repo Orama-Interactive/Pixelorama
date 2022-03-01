@@ -551,16 +551,12 @@ func _toggle_show_guides() -> void:
 
 
 func _toggle_zen_mode() -> void:
-	var color_pickers: Container = Global.control.find_node("Color Pickers")
-	var global_tool_options: Container = Global.control.find_node("Global Tool Options")
-	ui.set_control_hidden(Global.animation_timeline, !zen_mode)
-	ui.set_control_hidden(Global.tool_panel, !zen_mode)
-	ui.set_control_hidden(Global.canvas_preview_container, !zen_mode)
-	ui.set_control_hidden(color_pickers, !zen_mode)
-	ui.set_control_hidden(global_tool_options, !zen_mode)
-	ui.set_control_hidden(Global.left_tool_options_scroll, !zen_mode)
-	ui.set_control_hidden(Global.right_tool_options_scroll, !zen_mode)
-	ui.set_control_hidden(Global.palette_panel, !zen_mode)
+	for i in ui_elements.size():
+		if ui_elements[i].name == "Main Canvas":
+			continue
+		if !panels_submenu.is_item_checked(i):
+			continue
+		ui.set_control_hidden(ui_elements[i], !zen_mode)
 	Global.control.find_node("TabsContainer").visible = zen_mode
 	zen_mode = !zen_mode
 	window_menu.set_item_checked(WindowMenuId.ZEN_MODE, zen_mode)
