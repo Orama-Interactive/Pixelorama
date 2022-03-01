@@ -20,6 +20,8 @@ var _line_end := Vector2.ZERO
 var _indicator := BitMap.new()
 var _polylines := []
 var _line_polylines := []
+var _draw_cache: PoolVector2Array = []
+var _can_cache: bool = false
 
 
 func _ready() -> void:
@@ -202,6 +204,7 @@ func draw_tool(position: Vector2) -> void:
 # Bresenham's Algorithm
 # Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
 func draw_fill_gap(start: Vector2, end: Vector2) -> void:
+	_draw_cache = []  # Clear cache (cause new points have arrived)
 	var dx := int(abs(end.x - start.x))
 	var dy := int(-abs(end.y - start.y))
 	var err := dx + dy
@@ -218,7 +221,9 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 		if e2 <= dx:
 			err += dx
 			y += sy
+		_can_cache = true  # Used to make sure that _set_pixel() is comming straight from THIS function
 		draw_tool(Vector2(x, y))
+		_can_cache = false
 
 
 func draw_tool_pixel(position: Vector2) -> void:
@@ -345,6 +350,11 @@ func draw_indicator_at(position: Vector2, offset: Vector2, color: Color) -> void
 
 
 func _set_pixel(position: Vector2, ignore_mirroring := false) -> void:
+	if _can_cache:  # Means that the points are comming from "draw_fill_gap()" function
+		if position in _draw_cache:
+			return
+		_draw_cache.append(position)  # Store the position of pixel
+
 	var project: Project = Global.current_project
 	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
