@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-02-28 17:33\n"
+"PO-Revision-Date: 2022-03-01 12:17\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1207,7 +1207,8 @@ msgstr "Заливка всередині"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Піксельна точність\n"
+"Робить лініі плавними, забираючи зайві пікселі по краях"
 
 msgid "Fill Shape"
 msgstr "Залити фігуру"
