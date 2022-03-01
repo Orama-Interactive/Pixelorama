@@ -359,6 +359,7 @@ margin_left = 958.0
 margin_top = 266.0
 margin_right = 1107.0
 margin_bottom = 574.0
+rect_min_size = Vector2( 72, 72 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -375,6 +376,7 @@ margin_left = 1127.0
 margin_top = 266.0
 margin_right = 1276.0
 margin_bottom = 574.0
+rect_min_size = Vector2( 72, 72 )
 
 [node name="RightPanelContainer" type="PanelContainer" parent="DockableContainer/Right Tool Options"]
 margin_right = 149.0
