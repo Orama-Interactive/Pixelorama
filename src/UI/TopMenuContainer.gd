@@ -44,6 +44,7 @@ var layouts := [
 	["Default", preload("res://assets/layouts/default.tres")],
 	["Tallscreen", preload("res://assets/layouts/tallscreen.tres")],
 ]
+var selected_layout := 0
 var zen_mode := false
 
 onready var ui_elements: Array = Global.control.find_node("DockableContainer").get_children()
@@ -246,6 +247,9 @@ func _setup_layouts_submenu(item: String) -> void:
 	layouts_submenu.connect("id_pressed", self, "_layouts_submenu_id_pressed")
 	window_menu.add_child(layouts_submenu)
 	window_menu.add_submenu_item(item, layouts_submenu.get_name())
+
+	var saved_layout = Global.config_cache.get_value("window", "layout", 0)
+	set_layout(saved_layout)
 
 
 func populate_layouts_submenu() -> void:
@@ -483,8 +487,10 @@ func _layouts_submenu_id_pressed(id: int) -> void:
 
 
 func set_layout(id: int) -> void:
-	# Clone is needed so that the premade layouts do not get modified
-	ui.layout = layouts[id][1].clone()
+	if id >= layouts.size():
+		id = 0
+	selected_layout = id
+	ui.layout = layouts[id][1].clone()  # Clone is needed to avoid modifying premade layouts
 	for i in layouts.size():
 		layouts_submenu.set_item_checked(i, i == id)
 
@@ -492,9 +498,11 @@ func set_layout(id: int) -> void:
 		var is_hidden: bool = ui.is_control_hidden(ui_elements[i])
 		panels_submenu.set_item_checked(i, !is_hidden)
 
-	Global.control.find_node("TabsContainer").visible = true
-	zen_mode = false
-	window_menu.set_item_checked(WindowMenuId.ZEN_MODE, false)
+	# Turn zen mode off
+	if zen_mode:
+		Global.control.find_node("TabsContainer").visible = true
+		zen_mode = false
+		window_menu.set_item_checked(WindowMenuId.ZEN_MODE, false)
 
 
 func _toggle_greyscale_view() -> void:
