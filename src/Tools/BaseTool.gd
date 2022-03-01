@@ -56,6 +56,7 @@ func draw_move(position: Vector2) -> void:
 
 func draw_end(_position: Vector2) -> void:
 	is_moving = false
+	_draw_cache = []
 
 
 func cursor_move(position: Vector2) -> void:
