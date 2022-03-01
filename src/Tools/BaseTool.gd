@@ -9,6 +9,7 @@ var cursor_text := ""
 var _cursor := Vector2.INF
 
 var _draw_cache: PoolVector2Array = []  # for storing already drawn pixels
+var _for_frame := 0  # cache for which frame?
 
 
 func _ready() -> void:

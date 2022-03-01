@@ -345,11 +345,18 @@ func draw_indicator_at(position: Vector2, offset: Vector2, color: Color) -> void
 
 
 func _set_pixel(position: Vector2, ignore_mirroring := false) -> void:
-	if position in _draw_cache:
+	if (
+		position in _draw_cache
+		and _for_frame == Global.current_project.current_frame
+	):
 		return
 	var cache_limit: int = (_brush_size * _brush_size) * 3  # This equation seems the best match
-	if _draw_cache.size() > cache_limit:
+	if (
+		_draw_cache.size() > cache_limit
+		or _for_frame != Global.current_project.current_frame
+		):
 		_draw_cache = []
+		_for_frame = Global.current_project.current_frame
 	_draw_cache.append(position)  # Store the position of pixel
 
 	var project: Project = Global.current_project
