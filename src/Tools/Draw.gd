@@ -347,7 +347,8 @@ func draw_indicator_at(position: Vector2, offset: Vector2, color: Color) -> void
 func _set_pixel(position: Vector2, ignore_mirroring := false) -> void:
 	if position in _draw_cache:
 		return
-	if _draw_cache.size() > _cache_limit:
+	var cache_limit: int = (_brush_size * _brush_size) * 3  # This equation seems the best match
+	if _draw_cache.size() > cache_limit:
 		_draw_cache = []
 	_draw_cache.append(position)  # Store the position of pixel
 
