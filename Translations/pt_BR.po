@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-02-28 17:33\n"
+"PO-Revision-Date: 2022-03-01 11:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1206,7 +1206,8 @@ msgstr "Preenchimento interno"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Pixel Perfect\n"
+"Torna as linhas suaves removendo pixels extras nas bordas"
 
 msgid "Fill Shape"
 msgstr "Preencher Forma"
