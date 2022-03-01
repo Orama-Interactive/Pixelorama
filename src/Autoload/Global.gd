@@ -126,7 +126,6 @@ onready var greyscale_vision: ColorRect = control.find_node("GreyscaleVision")
 onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider")
 
 onready var tool_panel: ScrollContainer = control.find_node("Tools")
-onready var color_pickers: Container = control.find_node("Color Pickers")
 onready var left_tool_options_scroll: ScrollContainer = control.find_node("Left Tool Options")
 onready var right_tool_options_scroll: ScrollContainer = control.find_node("Right Tool Options")
 onready var brushes_popup: Popup = control.find_node("BrushesPopup")
@@ -316,6 +315,8 @@ func disable_button(button: BaseButton, disable: bool) -> void:
 
 
 func change_button_texturerect(texture_button: TextureRect, new_file_name: String) -> void:
+	if !texture_button.texture:
+		return
 	var file_name := texture_button.texture.resource_path.get_basename().get_file()
 	var directory_path := texture_button.texture.resource_path.get_basename().replace(file_name, "")
 	texture_button.texture = load(directory_path.plus_file(new_file_name))

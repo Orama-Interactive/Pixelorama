@@ -79,11 +79,7 @@ value = 1.0
 allow_greater = true
 ticks_on_borders = true
 
-[node name="PixelPerfect" parent="." index="3"]
-margin_top = 74.0
-margin_bottom = 98.0
-
-[node name="ColorInterpolation" type="VBoxContainer" parent="." index="4"]
+[node name="ColorInterpolation" type="VBoxContainer" parent="." index="3"]
 visible = false
 margin_top = 102.0
 margin_right = 116.0
@@ -121,10 +117,6 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
 ticks_on_borders = true
-
-[node name="EmptySpacer" parent="." index="5"]
-margin_top = 102.0
-margin_bottom = 114.0
 
 [connection signal="pressed" from="Brush/Type" to="." method="_on_BrushType_pressed"]
 [connection signal="value_changed" from="Brush/Size" to="." method="_on_BrushSize_value_changed"]

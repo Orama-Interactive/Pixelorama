@@ -187,15 +187,6 @@ margin_right = 85.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 
-[node name="PixelPerfect" parent="." index="7"]
-visible = false
-
-[node name="EmptySpacer" parent="." index="8"]
-visible = false
-margin_top = 212.0
-margin_right = 131.0
-margin_bottom = 224.0
-
 [connection signal="item_selected" from="FillAreaOptions" to="." method="_on_FillAreaOptions_item_selected"]
 [connection signal="value_changed" from="Similarity/Value" to="." method="_on_Value_value_changed"]
 [connection signal="value_changed" from="Similarity/Slider" to="." method="_on_Slider_value_changed"]

@@ -1,0 +1,105 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/graphics/misc/horizontal_mirror_off.png" type="Texture" id=1]
+[ext_resource path="res://assets/graphics/misc/vertical_mirror_off.png" type="Texture" id=2]
+[ext_resource path="res://src/UI/GlobalToolOptions.gd" type="Script" id=3]
+[ext_resource path="res://assets/graphics/misc/pixel_perfect_off.png" type="Texture" id=4]
+
+[node name="Global Tool Options" type="PanelContainer"]
+margin_left = 1.0
+margin_right = 195.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 36 )
+script = ExtResource( 3 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 187.0
+margin_bottom = 43.0
+rect_min_size = Vector2( 36, 36 )
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer"]
+margin_right = 180.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer/CenterContainer"]
+margin_left = 38.0
+margin_top = 2.0
+margin_right = 142.0
+margin_bottom = 34.0
+size_flags_vertical = 0
+columns = 3
+
+[node name="Horizontal" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Enable horizontal mirrored drawing"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Horizontal"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vertical" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Enable vertical mirrored drawing"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Vertical"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PixelPerfect" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Pixel Perfect
+Makes lines smooth by removing the extra pixels on the edges"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/PixelPerfect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 4 )
+
+[connection signal="resized" from="." to="." method="_on_resized"]
+[connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Horizontal" to="." method="_on_Horizontal_toggled"]
+[connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Vertical" to="." method="_on_Vertical_toggled"]
+[connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/PixelPerfect" to="." method="_on_PixelPerfect_toggled"]

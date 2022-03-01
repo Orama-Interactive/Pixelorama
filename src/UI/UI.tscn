@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://src/UI/Tools.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/UI/Canvas/CameraMovement.gd" type="Script" id=7]
 [ext_resource path="res://src/Shaders/Greyscale.gdshader" type="Shader" id=8]
 [ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=9]
+[ext_resource path="res://src/UI/GlobalToolOptions.tscn" type="PackedScene" id=10]
 [ext_resource path="res://addons/dockable_container/layout.gd" type="Script" id=14]
 [ext_resource path="res://src/UI/CanvasPreviewContainer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/UI/ColorPickers.tscn" type="PackedScene" id=17]
@@ -81,13 +82,27 @@ script = ExtResource( 36 )
 names = PoolStringArray( "Color Pickers" )
 current_tab = 0
 
+[sub_resource type="Resource" id=30]
+resource_name = "Tabs"
+script = ExtResource( 36 )
+names = PoolStringArray( "Global Tool Options" )
+current_tab = 0
+
+[sub_resource type="Resource" id=31]
+resource_name = "Split"
+script = ExtResource( 27 )
+direction = 1
+percent = 0.5
+first = SubResource( 20 )
+second = SubResource( 30 )
+
 [sub_resource type="Resource" id=21]
 resource_name = "Split"
 script = ExtResource( 27 )
 direction = 1
 percent = 0.911765
 first = SubResource( 11 )
-second = SubResource( 20 )
+second = SubResource( 31 )
 
 [sub_resource type="Resource" id=22]
 resource_name = "Tabs"
@@ -143,11 +158,11 @@ second = SubResource( 15 )
 resource_name = "Split"
 script = ExtResource( 27 )
 direction = 0
-percent = 0.0134804
+percent = 0.0
 first = SubResource( 1 )
 second = SubResource( 16 )
 
-[sub_resource type="Resource" id=30]
+[sub_resource type="Resource" id=32]
 resource_name = "Layout"
 script = ExtResource( 14 )
 root = SubResource( 5 )
@@ -189,9 +204,6 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 37 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DockableContainer" type="Container" parent="."]
 anchor_right = 1.0
@@ -199,11 +211,8 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 35 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 tabs_visible = false
-layout = SubResource( 30 )
+layout = SubResource( 32 )
 
 [node name="Tools" parent="DockableContainer" instance=ExtResource( 1 )]
 margin_left = 4.0
@@ -333,14 +342,21 @@ margin_bottom = 716.0
 margin_left = 958.0
 margin_top = 8.0
 margin_right = 1276.0
-margin_bottom = 173.062
+margin_bottom = 98.0
 
 [node name="Color Pickers" parent="DockableContainer" instance=ExtResource( 17 )]
-margin_top = 197.062
+margin_top = 122.0
+margin_bottom = 168.0
+
+[node name="Global Tool Options" parent="DockableContainer" instance=ExtResource( 10 )]
+margin_left = 958.0
+margin_top = 192.0
+margin_right = 1276.0
+margin_bottom = 242.0
 
 [node name="Left Tool Options" type="ScrollContainer" parent="DockableContainer"]
 margin_left = 958.0
-margin_top = 253.062
+margin_top = 266.0
 margin_right = 1107.0
 margin_bottom = 574.0
 __meta__ = {
@@ -349,20 +365,20 @@ __meta__ = {
 
 [node name="LeftPanelContainer" type="PanelContainer" parent="DockableContainer/Left Tool Options"]
 margin_right = 149.0
-margin_bottom = 320.938
+margin_bottom = 308.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Right Tool Options" type="ScrollContainer" parent="DockableContainer"]
 margin_left = 1127.0
-margin_top = 253.062
+margin_top = 266.0
 margin_right = 1276.0
 margin_bottom = 574.0
 
 [node name="RightPanelContainer" type="PanelContainer" parent="DockableContainer/Right Tool Options"]
 margin_right = 149.0
-margin_bottom = 320.938
+margin_bottom = 308.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
