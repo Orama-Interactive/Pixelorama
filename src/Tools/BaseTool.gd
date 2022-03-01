@@ -9,7 +9,7 @@ var cursor_text := ""
 var _cursor := Vector2.INF
 
 var _draw_cache: PoolVector2Array = []  # for storing already drawn pixels
-var _cache_limit :int = 2000  #To prevent memory bloating
+var _cache_limit: int = 2000  #To prevent memory bloating
 
 
 func _ready() -> void:
