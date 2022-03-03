@@ -2,6 +2,7 @@ extends BaseTool
 
 var _brush := Brushes.get_default_brush()
 var _brush_size := 1
+var _cache_limit: int = 3
 var _brush_interpolate := 0
 var _brush_image := Image.new()
 var _brush_texture := ImageTexture.new()
@@ -43,6 +44,7 @@ func _on_Brush_selected(brush: Brushes.Brush) -> void:
 
 func _on_BrushSize_value_changed(value: float) -> void:
 	_brush_size = int(value)
+	_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
 	update_config()
 	save_config()
 
@@ -347,8 +349,7 @@ func draw_indicator_at(position: Vector2, offset: Vector2, color: Color) -> void
 func _set_pixel(position: Vector2, ignore_mirroring := false) -> void:
 	if position in _draw_cache and _for_frame == Global.current_project.current_frame:
 		return
-	var cache_limit: int = (_brush_size * _brush_size) * 3  # This equation seems the best match
-	if _draw_cache.size() > cache_limit or _for_frame != Global.current_project.current_frame:
+	if _draw_cache.size() > _cache_limit or _for_frame != Global.current_project.current_frame:
 		_draw_cache = []
 		_for_frame = Global.current_project.current_frame
 	_draw_cache.append(position)  # Store the position of pixel
