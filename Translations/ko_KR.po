@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-02-28 17:34\n"
+"PO-Revision-Date: 2022-03-03 14:37\n"
 
 msgid "OK"
 msgstr "예"
@@ -1207,7 +1207,8 @@ msgstr "안에 채우기"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "픽셀 퍼펙트\n"
+"모서리의 불필요한 픽셀을 제거해서 선을 부드럽게 만듭니다"
 
 msgid "Fill Shape"
 msgstr "도형 채우기"
