@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-03-04 01:13\n"
+"PO-Revision-Date: 2022-03-04 01:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -466,10 +466,10 @@ msgid "Performance"
 msgstr "Rendimiento"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Extensiones"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Cursores"
 
 msgid "Indicators"
 msgstr "Indicadores"
@@ -1153,19 +1153,19 @@ msgid "If this is toggled on, when the application's window loses focus, it gets
 msgstr "Si se activa esta opción, cuando la ventana de la aplicación pierde el enfoque, se detiene. Esto ayuda a reducir el uso de la CPU cuando está inactiva. La aplicación no se detiene cuando el ratón entra en la ventana de la aplicación."
 
 msgid "Add Extension"
-msgstr ""
+msgstr "Agregar Extensión"
 
 msgid "Enable"
-msgstr ""
+msgstr "Habilitar"
 
 msgid "Disable"
-msgstr ""
+msgstr "Deshabilitar"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Desinstalar"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Abrir Carpeta"
 
 msgid "Brush:"
 msgstr "Pincel:"
