@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2022-02-28 17:33\n"
+"PO-Revision-Date: 2022-03-05 20:40\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Име фајла:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Назив пројекта:"
 
 msgid "Image Size"
 msgstr "Величина слике"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Величина фрејма"
 
 msgid "Size:"
-msgstr ""
+msgstr "Величина:"
 
 msgid "Width:"
 msgstr "Ширина:"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Уреди"
 
 msgid "Select"
-msgstr ""
+msgstr "Изабери"
 
 msgid "View"
 msgstr "Преглед"
@@ -145,7 +145,7 @@ msgid "Pixels"
 msgstr ""
 
 msgid "Percentage"
-msgstr ""
+msgstr "Посто"
 
 msgid "Crop Image"
 msgstr "Исеци слику"
@@ -160,7 +160,7 @@ msgid "Rotate Image"
 msgstr "Ротирај слику"
 
 msgid "Clear"
-msgstr ""
+msgstr "Брисати"
 
 msgid "Invert"
 msgstr ""
