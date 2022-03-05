@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2022-03-05 20:58\n"
+"PO-Revision-Date: 2022-03-05 21:08\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -283,10 +283,10 @@ msgid "Start frame:"
 msgstr "Почетни фреjм:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "У фреjму:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "На слоју:"
 
 msgid "Brush type:"
 msgstr ""
@@ -298,7 +298,7 @@ msgid "Project brush"
 msgstr ""
 
 msgid "Random brush"
-msgstr ""
+msgstr "Случаjна четка"
 
 msgid "Save Sprite as .pxo"
 msgstr ""
@@ -333,13 +333,13 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
-msgstr ""
+msgstr "Фрејм"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Фрејмови:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Сви фрејмови"
 
 msgid "Spritesheet"
 msgstr ""
