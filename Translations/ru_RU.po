@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-02-28 20:57\n"
+"PO-Revision-Date: 2022-03-05 20:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -331,7 +331,8 @@ msgstr "Не удалось загрузить файл '%s'.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Невозможно загрузить файл '%s'.\n"
+"Не допустимый файл палитры."
 
 msgid "Frame"
 msgstr "Кадр"
@@ -1006,7 +1007,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Отображает значок выбранного правого инструмента рядом с курсором на холсте"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Использовать нативные курсоры мыши"
 
 msgid "Use cross cursor for the canvas"
 msgstr "Использовать курсор перекрестия для холста"
