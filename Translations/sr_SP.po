@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2022-03-05 20:48\n"
+"PO-Revision-Date: 2022-03-05 20:58\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Преглед"
 
 msgid "Window"
-msgstr ""
+msgstr "Прозор"
 
 msgid "Image"
 msgstr "Слика"
@@ -136,7 +136,7 @@ msgid "Delete"
 msgstr "Обриши"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Нова четка"
 
 msgid "Scale Image"
 msgstr "Скалирај слику"
@@ -181,7 +181,7 @@ msgid "Tile Mode"
 msgstr ""
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Непрозирност прозора"
 
 msgid "Panel Layout"
 msgstr ""
@@ -280,7 +280,7 @@ msgid "Vertical frames:"
 msgstr "Вертикални фрејмови:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Почетни фреjм:"
 
 msgid "At frame:"
 msgstr ""
@@ -351,7 +351,7 @@ msgid "Preview:"
 msgstr ""
 
 msgid "Frame:"
-msgstr ""
+msgstr "Фрејм:"
 
 msgid "Orientation:"
 msgstr ""
