@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2022-03-05 21:08\n"
+"PO-Revision-Date: 2022-03-05 21:19\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -289,13 +289,13 @@ msgid "At layer:"
 msgstr "На слоју:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Тип четке:"
 
 msgid "File brush"
 msgstr ""
 
 msgid "Project brush"
-msgstr ""
+msgstr "Четка проjекта"
 
 msgid "Random brush"
 msgstr "Случаjна четка"
