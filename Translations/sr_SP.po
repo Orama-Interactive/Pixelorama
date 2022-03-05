@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2022-03-05 21:39\n"
+"PO-Revision-Date: 2022-03-05 22:18\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -540,10 +540,10 @@ msgid "Tool button size:"
 msgstr ""
 
 msgid "Small"
-msgstr ""
+msgstr "Мало"
 
 msgid "Big"
-msgstr ""
+msgstr "Велико"
 
 msgid "Only affect selection"
 msgstr ""
@@ -594,16 +594,16 @@ msgid "Adjust HSV"
 msgstr ""
 
 msgid "Type:"
-msgstr ""
+msgstr "Тип:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Угао:"
 
 msgid "Hue:"
 msgstr ""
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Засићење:"
 
 msgid "Value:"
 msgstr ""
@@ -621,7 +621,7 @@ msgid "Thickness:"
 msgstr ""
 
 msgid "Colors:"
-msgstr ""
+msgstr "Боја:"
 
 msgid "Steps:"
 msgstr ""
@@ -666,7 +666,7 @@ msgid "©2019-present by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
-msgstr ""
+msgstr "Веб сајт"
 
 msgid "GitHub Repo"
 msgstr ""
@@ -908,7 +908,7 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Правоугаоник"
 
 msgid "Ellipse"
 msgstr ""
@@ -987,7 +987,7 @@ msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "Сви"
 
 msgid "Rectangular grid width:"
 msgstr ""
