@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2022-03-05 22:18\n"
+"PO-Revision-Date: 2022-03-05 22:29\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -1186,7 +1186,7 @@ msgid "Fill with:"
 msgstr ""
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Изабрана боја"
 
 msgid "Pattern"
 msgstr ""
@@ -1207,13 +1207,13 @@ msgid "Darken"
 msgstr ""
 
 msgid "Amount:"
-msgstr ""
+msgstr "Броj:"
 
 msgid "Lighten/Darken amount"
 msgstr ""
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Изаберите за:"
 
 msgid "Left Color"
 msgstr ""
