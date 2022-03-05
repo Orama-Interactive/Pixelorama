@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2022-03-05 21:29\n"
+"PO-Revision-Date: 2022-03-05 21:39\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -178,7 +178,7 @@ msgid "Preferences"
 msgstr "Подешавања"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Бешавни режим"
 
 msgid "Window Opacity"
 msgstr "Непрозирност прозора"
@@ -196,7 +196,7 @@ msgid "Manage Layouts"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
+msgstr "Аутоматски"
 
 msgid "Widescreen"
 msgstr ""
