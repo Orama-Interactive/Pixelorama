@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2022-03-05 21:19\n"
+"PO-Revision-Date: 2022-03-05 21:29\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -253,13 +253,13 @@ msgid "Spritesheet (new tab)"
 msgstr ""
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Табла спраjтов (нови слоj)"
 
 msgid "New frame"
 msgstr "Нови фрејм"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Заменити фреjм"
 
 msgid "New layer"
 msgstr "Нови слој"
@@ -292,7 +292,7 @@ msgid "Brush type:"
 msgstr "Тип четке:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Фаjл четке"
 
 msgid "Project brush"
 msgstr "Четка проjекта"
@@ -301,7 +301,7 @@ msgid "Random brush"
 msgstr "Случаjна четка"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Сачувати спраjт као .pxo"
 
 msgid "Export Sprite as .png"
 msgstr ""
