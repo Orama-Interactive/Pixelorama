@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2022-02-28 17:33\n"
+"PO-Revision-Date: 2022-03-06 18:41\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Visa"
 
 msgid "Window"
-msgstr ""
+msgstr "Fönster"
 
 msgid "Image"
 msgstr "Bild"
@@ -118,7 +118,7 @@ msgid "Quit"
 msgstr ""
 
 msgid "Undo"
-msgstr ""
+msgstr "Ångra"
 
 msgid "Redo"
 msgstr ""
@@ -133,7 +133,7 @@ msgid "Paste"
 msgstr ""
 
 msgid "Delete"
-msgstr ""
+msgstr "Radera"
 
 msgid "New Brush"
 msgstr ""
@@ -142,7 +142,7 @@ msgid "Scale Image"
 msgstr ""
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pixlar"
 
 msgid "Percentage"
 msgstr ""
@@ -157,13 +157,13 @@ msgid "Centralize Image"
 msgstr ""
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Rotera bild"
 
 msgid "Clear"
-msgstr ""
+msgstr "Rensa"
 
 msgid "Invert"
-msgstr ""
+msgstr "Invertera"
 
 msgid "Flip"
 msgstr ""
@@ -196,7 +196,7 @@ msgid "Manage Layouts"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 msgid "Widescreen"
 msgstr ""
@@ -235,19 +235,19 @@ msgid "Open a File"
 msgstr ""
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Öppna fil(er)"
 
 msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importera som:"
 
 msgid "Recent projects"
 msgstr ""
 
 msgid "New tab"
-msgstr ""
+msgstr "Ny flik"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
@@ -262,10 +262,10 @@ msgid "Replace frame"
 msgstr ""
 
 msgid "New layer"
-msgstr ""
+msgstr "Nytt lager"
 
 msgid "New palette"
-msgstr ""
+msgstr "Ny palett"
 
 msgid "New brush"
 msgstr ""
@@ -357,7 +357,7 @@ msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
-msgstr ""
+msgstr "Bläddra"
 
 msgid "Resize:"
 msgstr ""
@@ -381,7 +381,7 @@ msgid "All frames as a single file animation"
 msgstr ""
 
 msgid "Background:"
-msgstr ""
+msgstr "Bakgrund:"
 
 msgid "Direction:"
 msgstr ""
@@ -396,16 +396,16 @@ msgid "Ping-Pong"
 msgstr ""
 
 msgid "Columns"
-msgstr ""
+msgstr "Kolumner"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Kolumner:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Rader"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Rader:"
 
 msgid "Path:"
 msgstr ""
@@ -414,10 +414,10 @@ msgid "Directories & Files:"
 msgstr ""
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Skapa mapp"
 
 msgid "File:"
-msgstr ""
+msgstr "Fil:"
 
 msgid "Interpolation:"
 msgstr ""
@@ -441,13 +441,13 @@ msgid "Startup"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
 msgid "Interface"
-msgstr ""
+msgstr "Gränssnitt"
 
 msgid "Themes"
-msgstr ""
+msgstr "Teman"
 
 msgid "Canvas"
 msgstr ""
@@ -489,13 +489,13 @@ msgid "Tablet pressure sensitivity:"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "Färg:"
 
 msgid "Guide color:"
 msgstr ""
@@ -510,37 +510,37 @@ msgid "Dim interface on dialog popup"
 msgstr ""
 
 msgid "Dark"
-msgstr ""
+msgstr "Mörk"
 
 msgid "Gray"
-msgstr ""
+msgstr "Grå"
 
 msgid "Blue"
-msgstr ""
+msgstr "Blå"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Karamell"
 
 msgid "Light"
 msgstr ""
 
 msgid "Purple"
-msgstr ""
+msgstr "Lila"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Ikonfärg:"
 
 msgid "Tool button size:"
 msgstr ""
 
 msgid "Small"
-msgstr ""
+msgstr "Liten"
 
 msgid "Big"
 msgstr ""
@@ -561,7 +561,7 @@ msgid "All frames"
 msgstr ""
 
 msgid "All projects"
-msgstr ""
+msgstr "Alla projekt"
 
 msgid "Invert Colors"
 msgstr ""
@@ -594,7 +594,7 @@ msgid "Adjust HSV"
 msgstr ""
 
 msgid "Type:"
-msgstr ""
+msgstr "Typ:"
 
 msgid "Angle:"
 msgstr ""
@@ -606,7 +606,7 @@ msgid "Saturation:"
 msgstr ""
 
 msgid "Value:"
-msgstr ""
+msgstr "Värde:"
 
 msgid "Apply"
 msgstr ""
@@ -618,13 +618,13 @@ msgid "Place inside image"
 msgstr ""
 
 msgid "Thickness:"
-msgstr ""
+msgstr "Tjocklek:"
 
 msgid "Colors:"
-msgstr ""
+msgstr "Färger:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Steg:"
 
 msgid "Top to Bottom"
 msgstr ""
@@ -666,16 +666,16 @@ msgid "©2019-present by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
-msgstr ""
+msgstr "Webbplats"
 
 msgid "GitHub Repo"
 msgstr ""
 
 msgid "Donate"
-msgstr ""
+msgstr "Donera"
 
 msgid "Developers"
-msgstr ""
+msgstr "Utvecklare"
 
 msgid "Contributors"
 msgstr ""
@@ -690,19 +690,19 @@ msgid "Licenses"
 msgstr ""
 
 msgid "English"
-msgstr ""
+msgstr "Engelska"
 
 msgid "Greek"
 msgstr ""
 
 msgid "French"
-msgstr ""
+msgstr "Franska"
 
 msgid "German"
-msgstr ""
+msgstr "Tyska"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polska"
 
 msgid "Portuguese"
 msgstr ""
@@ -711,7 +711,7 @@ msgid "Brazilian Portuguese"
 msgstr ""
 
 msgid "Russian"
-msgstr ""
+msgstr "Ryska"
 
 msgid "Chinese Simplified"
 msgstr ""
@@ -720,13 +720,13 @@ msgid "Chinese Traditional"
 msgstr ""
 
 msgid "Italian"
-msgstr ""
+msgstr "Italienska"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Lettiska"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spanska"
 
 msgid "Catalan"
 msgstr ""
@@ -741,19 +741,19 @@ msgid "Czech"
 msgstr ""
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arabiska"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turkiska"
 
 msgid "Norwegian Bokmål"
 msgstr ""
 
 msgid "Korean"
-msgstr ""
+msgstr "Koreanska"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Ungerska"
 
 msgid "Romanian"
 msgstr ""
@@ -762,7 +762,7 @@ msgid "Japanese"
 msgstr ""
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrainska"
 
 msgid "Development Team"
 msgstr ""
@@ -783,10 +783,10 @@ msgid "untitled"
 msgstr ""
 
 msgid "imported"
-msgstr ""
+msgstr "importerad"
 
 msgid "copy"
-msgstr ""
+msgstr "kopiera"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr ""
@@ -908,7 +908,7 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Rektangel"
 
 msgid "Ellipse"
 msgstr ""
@@ -981,13 +981,13 @@ msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Rektangulär"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Isometrisk"
 
 msgid "All"
-msgstr ""
+msgstr "Alla"
 
 msgid "Rectangular grid width:"
 msgstr ""
@@ -1053,7 +1053,7 @@ msgid "A color of the pixel grid"
 msgstr ""
 
 msgid "Transparency"
-msgstr ""
+msgstr "Genomskinlighet"
 
 msgid "Checker size:"
 msgstr ""
@@ -1119,10 +1119,10 @@ msgid "Disable"
 msgstr ""
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Avinstallera"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Öppna mapp"
 
 msgid "Brush:"
 msgstr ""
@@ -1183,7 +1183,7 @@ msgid "Same color pixels"
 msgstr ""
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Fyll med:"
 
 msgid "Selected Color"
 msgstr ""
@@ -1222,16 +1222,16 @@ msgid "Right Color"
 msgstr ""
 
 msgid "Mode:"
-msgstr ""
+msgstr "Läge:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Zooma in"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Zooma ut"
 
 msgid "Options:"
-msgstr ""
+msgstr "Alternativ:"
 
 msgid "Fit to frame"
 msgstr ""
@@ -1243,7 +1243,7 @@ msgid "Mirroring"
 msgstr ""
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Horisontell"
 
 msgid "Enable horizontal mirrored drawing"
 msgstr ""
@@ -1252,7 +1252,7 @@ msgid "Enable vertical mirrored drawing"
 msgstr ""
 
 msgid "Vertical"
-msgstr ""
+msgstr "Vertikal"
 
 msgid "Current frame:"
 msgstr ""
@@ -1319,13 +1319,13 @@ msgid "Add a new frame tag"
 msgstr ""
 
 msgid "Name:"
-msgstr ""
+msgstr "Namn:"
 
 msgid "From:"
-msgstr ""
+msgstr "Från:"
 
 msgid "To:"
-msgstr ""
+msgstr "Till:"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr ""
@@ -1371,7 +1371,7 @@ msgid "Move Left"
 msgstr ""
 
 msgid "Move Right"
-msgstr ""
+msgstr "Flytta höger"
 
 msgid "Add Frame Tag"
 msgstr ""
@@ -1389,10 +1389,10 @@ msgid "Frame properties"
 msgstr ""
 
 msgid "Layer"
-msgstr ""
+msgstr "Lager"
 
 msgid "Layers"
-msgstr ""
+msgstr "Lager"
 
 msgid "Create a new layer"
 msgstr ""
@@ -1413,7 +1413,7 @@ msgid "Merge current layer with the one below"
 msgstr ""
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Opacitet:"
 
 msgid "Tile mode opacity:"
 msgstr ""
@@ -1432,10 +1432,10 @@ msgid "Enable/disable cel linking\n\n"
 msgstr ""
 
 msgid "Palette"
-msgstr ""
+msgstr "Palett"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Paletter"
 
 msgid "Add a new palette"
 msgstr ""
@@ -1534,7 +1534,7 @@ msgid "Move Guide"
 msgstr ""
 
 msgid "File saved"
-msgstr ""
+msgstr "Fil sparad"
 
 msgid "File autosaved"
 msgstr ""
@@ -1570,7 +1570,7 @@ msgid "Create a new empty palette?"
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "Fel"
 
 msgid "Error: Palette must have a valid name."
 msgstr ""
@@ -1579,7 +1579,7 @@ msgid "Invalid Palette file!"
 msgstr ""
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Redigera palett"
 
 msgid "Create colors with alpha component"
 msgstr ""
@@ -1636,10 +1636,10 @@ msgid "Portrait"
 msgstr ""
 
 msgid "Landscape"
-msgstr ""
+msgstr "Landskap"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Mallar:"
 
 msgid "Preset"
 msgstr ""
@@ -1672,7 +1672,7 @@ msgid "Lasso / Free Select Tool"
 msgstr ""
 
 msgid "Move"
-msgstr ""
+msgstr "Flytta"
 
 msgid "Zoom"
 msgstr ""
@@ -1684,7 +1684,7 @@ msgid "Color Picker"
 msgstr ""
 
 msgid "Pencil"
-msgstr ""
+msgstr "Penna"
 
 msgid "Eraser"
 msgstr ""
@@ -1759,7 +1759,7 @@ msgid "Autosave interval:"
 msgstr ""
 
 msgid "minute(s)"
-msgstr ""
+msgstr "minut(er)"
 
 msgid "Create new directory for each frame tag"
 msgstr ""
@@ -1768,10 +1768,10 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Stäng"
 
 msgid "Delete"
-msgstr ""
+msgstr "Radera"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
@@ -1796,7 +1796,7 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 
 msgid "and"
-msgstr ""
+msgstr "och"
 
 msgid "Move the selected frame to the left."
 msgstr ""
@@ -1826,7 +1826,7 @@ msgid "Comment:"
 msgstr ""
 
 msgid "Empty"
-msgstr ""
+msgstr "Tom"
 
 msgid "From Current Palette"
 msgstr ""
