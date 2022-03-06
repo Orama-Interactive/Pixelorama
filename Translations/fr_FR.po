@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-03-06 16:48\n"
+"PO-Revision-Date: 2022-03-06 16:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -190,10 +190,10 @@ msgid "Panels"
 msgstr "Panneaux"
 
 msgid "Layouts"
-msgstr ""
+msgstr "Dispositions"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Gérer les dispositions"
 
 msgid "Auto"
 msgstr "Automatique"
@@ -322,7 +322,7 @@ msgid "Exporting in progress..."
 msgstr "Export en cours..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Impossible de charger le fichier '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -331,7 +331,8 @@ msgstr "Impossible de charger le fichier '%s'.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Impossible de charger le fichier '%s'.\n"
+"Ce n'est pas un fichier de palette valide."
 
 msgid "Frame"
 msgstr "Frame"
@@ -466,10 +467,10 @@ msgid "Performance"
 msgstr "Performance"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Extensions"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Curseurs"
 
 msgid "Indicators"
 msgstr "Indicateurs"
@@ -1000,10 +1001,10 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Affiche une icône de l'outil de droite sélectionné à côté du curseur sur le canevas"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Utiliser des curseurs de souris natifs"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Utiliser le curseur croisé pour la toile"
 
 msgid "Guides"
 msgstr "Guides"
@@ -1153,7 +1154,7 @@ msgid "If this is toggled on, when the application's window loses focus, it gets
 msgstr "Si c'est activé, quand l'application perd le focus, elle est suspendue. Cela aide à réduire l'usage du processeur en période d'inactivité. Elle est ensuite actualisée quand la souris entre dans la fenêtre."
 
 msgid "Add Extension"
-msgstr ""
+msgstr "Ajouter l’extension"
 
 msgid "Enable"
 msgstr "Activer"
@@ -1862,7 +1863,7 @@ msgid "Frame duration"
 msgstr "Durée de la frame"
 
 msgid "Duration"
-msgstr ""
+msgstr "Durée"
 
 msgid "Tiled In Both Axis"
 msgstr "Mode Tuile sur les Deux Axes"
