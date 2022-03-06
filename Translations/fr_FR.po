@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-02-28 17:34\n"
+"PO-Revision-Date: 2022-03-06 16:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Affichage"
 
 msgid "Window"
-msgstr ""
+msgstr "Fenêtre"
 
 msgid "Image"
 msgstr "Image"
@@ -187,7 +187,7 @@ msgid "Panel Layout"
 msgstr "Disposition des sections"
 
 msgid "Panels"
-msgstr ""
+msgstr "Panneaux"
 
 msgid "Layouts"
 msgstr ""
@@ -1156,16 +1156,16 @@ msgid "Add Extension"
 msgstr ""
 
 msgid "Enable"
-msgstr ""
+msgstr "Activer"
 
 msgid "Disable"
-msgstr ""
+msgstr "Désactiver"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Désinstaller"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Ouvrir le dossier"
 
 msgid "Brush:"
 msgstr "Brosse :"
@@ -1202,7 +1202,8 @@ msgstr "Remplir à l’intérieur"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Pixel Perfect\n"
+"Rend les lignes lisses en supprimant les pixels supplémentaires sur les bords"
 
 msgid "Fill Shape"
 msgstr "Forme de remplissage"
