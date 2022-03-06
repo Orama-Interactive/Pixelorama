@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2022-02-28 17:33\n"
+"PO-Revision-Date: 2022-03-06 17:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Vista"
 
 msgid "Window"
-msgstr ""
+msgstr "Janela"
 
 msgid "Image"
 msgstr "Imagem"
@@ -181,16 +181,16 @@ msgid "Tile Mode"
 msgstr "Modo de Azuleijo"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Opacidade da janela"
 
 msgid "Panel Layout"
 msgstr "Esquema de Painel"
 
 msgid "Panels"
-msgstr ""
+msgstr "Painéis"
 
 msgid "Layouts"
-msgstr ""
+msgstr "Layouts"
 
 msgid "Manage Layouts"
 msgstr ""
@@ -1498,10 +1498,10 @@ msgid "Redo: Draw"
 msgstr "Refazer: Desenhar"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Desfazer: Selecionar"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Refazer: Selecionar"
 
 msgid "Undo: Scale"
 msgstr "Desfazer: Redimensionar"
@@ -1795,7 +1795,7 @@ msgid "Opens last opened project on startup"
 msgstr "Abre o último projeto aberto na inicialização"
 
 msgid "Quit confirmation"
-msgstr ""
+msgstr "Confirmação de saída"
 
 msgid "Enable autosave"
 msgstr "Ativar gravação automática"
@@ -1820,7 +1820,8 @@ msgstr "Apagar"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "Projeto(s) salvos automaticamente antes de um encerramento inesperado foram encontrados.\n"
+"Você deseja recuperar os dados?"
 
 msgid "Backup reloaded"
 msgstr "Cópia de segurança carregada"
@@ -1853,7 +1854,7 @@ msgid "Frame duration"
 msgstr "Duração de frame"
 
 msgid "Duration"
-msgstr ""
+msgstr "Duração"
 
 msgid "Tiled In Both Axis"
 msgstr "Tiled nos dois Eixos"
