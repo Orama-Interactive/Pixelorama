@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-02-28 17:34\n"
+"PO-Revision-Date: 2022-03-08 18:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Vis"
 
 msgid "Window"
-msgstr ""
+msgstr "Vindu"
 
 msgid "Image"
 msgstr "Bilde"
@@ -322,7 +322,7 @@ msgid "Exporting in progress..."
 msgstr "Eksport pågår..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Kan ikke laste fil '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -330,7 +330,8 @@ msgstr "Kan ikke laste fil '%s'. Feilkode: %s"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Kan ikke laste fil '%s'.\n"
+"Dette er ikke en gyldig palettfil."
 
 msgid "Frame"
 msgstr "Bilde"
@@ -465,10 +466,10 @@ msgid "Performance"
 msgstr "Ytelse"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Utvidelser"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Markører"
 
 msgid "Indicators"
 msgstr "Indikatorer"
@@ -1155,16 +1156,16 @@ msgid "Add Extension"
 msgstr ""
 
 msgid "Enable"
-msgstr ""
+msgstr "Aktiver"
 
 msgid "Disable"
-msgstr ""
+msgstr "Deaktiver"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Avinstaller"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Åpne Mappe"
 
 msgid "Brush:"
 msgstr "Børste:"
