@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-03-08 18:11\n"
+"PO-Revision-Date: 2022-03-08 18:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -828,7 +828,9 @@ msgid "Polygonal Selection\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "Polygonal Markering\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -876,7 +878,10 @@ msgid "Color Picker\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "Fargevelger\n"
+"%s for venstre museknapp\n"
+"%s for høyre museknapp\n\n"
+"Velg en farge fra en piksel på figuren"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1000,10 +1005,10 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Viser ikonet til det valgte høyreverktøyet ved siden av markøren på lerretet"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Bruk vanlige musepekere"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Bruk kryssmarkør for lerretet"
 
 msgid "Guides"
 msgstr "Guider"
@@ -1153,7 +1158,7 @@ msgid "If this is toggled on, when the application's window loses focus, it gets
 msgstr "Hvis denne er påslått og programmet mister fokus vil programmet settes på pause. Dette gjør så programmet bruker mindre prosessorkraft ved inaktivitet. Programmet vil gå tilbake til normalt når musen går inn i programmets vindu."
 
 msgid "Add Extension"
-msgstr ""
+msgstr "Legg til utvidelse"
 
 msgid "Enable"
 msgstr "Aktiver"
@@ -1202,7 +1207,8 @@ msgstr "Fyll inn"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Pikselperfekt\n"
+"Gjør linjer glatte ved å fjerne de ekstra pikslene på kantene"
 
 msgid "Fill Shape"
 msgstr "Fyll Form"
