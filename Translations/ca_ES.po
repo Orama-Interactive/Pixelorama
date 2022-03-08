@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-01-05 00:44\n"
+"PO-Revision-Date: 2022-02-28 17:34\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -65,6 +65,9 @@ msgstr "Selecciona"
 
 msgid "View"
 msgstr "Veure"
+
+msgid "Window"
+msgstr ""
 
 msgid "Image"
 msgstr "Imatge"
@@ -181,6 +184,15 @@ msgid "Window Opacity"
 msgstr ""
 
 msgid "Panel Layout"
+msgstr ""
+
+msgid "Panels"
+msgstr ""
+
+msgid "Layouts"
+msgstr ""
+
+msgid "Manage Layouts"
 msgstr ""
 
 msgid "Auto"
@@ -309,10 +321,17 @@ msgstr "La ruta o directori de l'arxiu no existeix!"
 msgid "Exporting in progress..."
 msgstr ""
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "No es pot carregar el fitxer '%s'.\n"
 "Codi d'error: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr ""
 
 msgid "Frame"
 msgstr "Fotograma"
@@ -444,6 +463,12 @@ msgid "Backup"
 msgstr ""
 
 msgid "Performance"
+msgstr ""
+
+msgid "Extensions"
+msgstr ""
+
+msgid "Cursors"
 msgstr ""
 
 msgid "Indicators"
@@ -800,13 +825,10 @@ msgstr "Selecció El·líptica\n\n"
 "%s pel click dret del ratolí"
 
 msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "Selecció Poligonal\n"
-"Doble Click per connectar l'últim punt amb el primer\n\n"
-"%s pel click esquerre del ratolí\n"
-"%s pel click dret del ratolí"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
+msgstr ""
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -849,13 +871,10 @@ msgid "Pan\n\n"
 msgstr ""
 
 msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "Selector de Color\n"
-"Triar un color de un pixel del sprite\n\n"
-"%s pel botó esquerre del ratolí\n"
-"%s pel botó dret del ratolí"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -958,6 +977,12 @@ msgid "Show right tool icon"
 msgstr "Mostrar icona de la eina dreta"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
+msgstr ""
+
+msgid "Use native mouse cursors"
+msgstr ""
+
+msgid "Use cross cursor for the canvas"
 msgstr ""
 
 msgid "Guides"
@@ -1107,6 +1132,21 @@ msgstr ""
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
+msgid "Add Extension"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "Open Folder"
+msgstr ""
+
 msgid "Brush:"
 msgstr "Pinzell:"
 
@@ -1140,7 +1180,8 @@ msgstr "Pixel Perfect"
 msgid "Fill inside"
 msgstr ""
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Fill Shape"
@@ -1792,6 +1833,9 @@ msgid "Move the selected frame to the right."
 msgstr ""
 
 msgid "Frame duration"
+msgstr ""
+
+msgid "Duration"
 msgstr ""
 
 msgid "Tiled In Both Axis"

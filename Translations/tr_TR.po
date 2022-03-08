@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-01-05 00:43\n"
+"PO-Revision-Date: 2022-02-28 17:34\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -65,6 +65,9 @@ msgstr "Seçiniz"
 
 msgid "View"
 msgstr "Görüntü"
+
+msgid "Window"
+msgstr ""
 
 msgid "Image"
 msgstr "Resim"
@@ -151,7 +154,7 @@ msgid "Resize Canvas"
 msgstr "Tuvali yeniden boyutlandır"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Resmi Ortala"
 
 msgid "Rotate Image"
 msgstr "Resmi Döndür"
@@ -181,6 +184,15 @@ msgid "Window Opacity"
 msgstr "Pencere Şeffaflığı"
 
 msgid "Panel Layout"
+msgstr "Panel Düzeni"
+
+msgid "Panels"
+msgstr ""
+
+msgid "Layouts"
+msgstr ""
+
+msgid "Manage Layouts"
 msgstr ""
 
 msgid "Auto"
@@ -199,7 +211,7 @@ msgid "Show Grid"
 msgstr "Kılavuz çizgilerini göster"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Piksel Izgarayı Göster"
 
 msgid "Show Rulers"
 msgstr "Cetveli Göster"
@@ -241,13 +253,13 @@ msgid "Spritesheet (new tab)"
 msgstr "Hareketli sayfa (yeni sekme)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Resim Sayfası (yeni katman)"
 
 msgid "New frame"
 msgstr "Yeni çerçeve"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Çerçeveyi değiştir"
 
 msgid "New layer"
 msgstr "Yeni katman"
@@ -268,13 +280,13 @@ msgid "Vertical frames:"
 msgstr "Dikey çerçeveler:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Çerçeveyi oluştur:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "Çerçevede:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "Katmanda:"
 
 msgid "Brush type:"
 msgstr "Fırça tipi:"
@@ -309,10 +321,17 @@ msgstr "Dosya yolu ve dosya adı geçerli değil!"
 msgid "Exporting in progress..."
 msgstr "Dışa aktarma işlemi devam ediyor..."
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "'%s' dosyası yüklenemedi.\n"
 "Hata kodu: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr ""
 
 msgid "Frame"
 msgstr "Kare"
@@ -446,6 +465,12 @@ msgstr "Yedekleme"
 msgid "Performance"
 msgstr "Performans"
 
+msgid "Extensions"
+msgstr ""
+
+msgid "Cursors"
+msgstr ""
+
 msgid "Indicators"
 msgstr "Göstergeler"
 
@@ -483,7 +508,7 @@ msgid "Display Scale"
 msgstr "Görüntü Ölçeği"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Diyalog penceresinde arayüzü karart"
 
 msgid "Dark"
 msgstr "Koyu"
@@ -507,13 +532,13 @@ msgid "Theme"
 msgstr "Tema"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Simge rengi:"
 
 msgid "Icon color:"
 msgstr "Simge rengi:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Araç gereç butonu büyüklüğü:"
 
 msgid "Small"
 msgstr "Küçük"
@@ -525,7 +550,7 @@ msgid "Only affect selection"
 msgstr "Sadece seçilene uygula"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Seçilen hücreler"
 
 msgid "Current cel"
 msgstr "Aktif kare"
@@ -800,9 +825,9 @@ msgstr "Eliptik Seçim\n\n"
 "Sağ tık için %s"
 
 msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
 msgstr ""
 
 msgid "Select By Color\n\n"
@@ -837,13 +862,10 @@ msgid "Pan\n\n"
 msgstr ""
 
 msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "Damlalık\n\n"
-"Sprite pikselinden bir renk seç\n\n"
-"%s için sol tıkla\n"
-"%s için sağ tıkla"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -948,6 +970,12 @@ msgstr "Sağ araç ikonunu göster"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Tuval üzerinde ki göstergenin yanında seçilen sağ araç ikonunu göster"
+
+msgid "Use native mouse cursors"
+msgstr ""
+
+msgid "Use cross cursor for the canvas"
+msgstr ""
 
 msgid "Guides"
 msgstr "Kılavuzlar"
@@ -1096,6 +1124,21 @@ msgstr ""
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
+msgid "Add Extension"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "Open Folder"
+msgstr ""
+
 msgid "Brush:"
 msgstr "Fırça:"
 
@@ -1129,8 +1172,9 @@ msgstr "Mükemmel Piksel"
 msgid "Fill inside"
 msgstr ""
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Çizgileri kenarlardaki fazla pikselleri silerek yumuşatır"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr ""
 
 msgid "Fill Shape"
 msgstr ""
@@ -1782,6 +1826,9 @@ msgstr "Seçili kareyi sağa taşı."
 
 msgid "Frame duration"
 msgstr "Kare beklemesi"
+
+msgid "Duration"
+msgstr ""
 
 msgid "Tiled In Both Axis"
 msgstr "2 Yörüngedede Döşendi"

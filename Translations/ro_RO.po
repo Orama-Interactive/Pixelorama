@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-01-05 17:13\n"
+"PO-Revision-Date: 2022-02-28 18:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -65,6 +65,9 @@ msgstr "Selectare"
 
 msgid "View"
 msgstr "Vizualizare"
+
+msgid "Window"
+msgstr "Fereastră"
 
 msgid "Image"
 msgstr "Imagine"
@@ -182,6 +185,15 @@ msgstr "Opacitatea ferestrei"
 
 msgid "Panel Layout"
 msgstr "Dispunerea panoului"
+
+msgid "Panels"
+msgstr "Panouri"
+
+msgid "Layouts"
+msgstr "Dispuneri"
+
+msgid "Manage Layouts"
+msgstr "Gestionare dispuneri"
 
 msgid "Auto"
 msgstr "Auto"
@@ -309,10 +321,18 @@ msgstr "Calea directorului sau numele fișierului nu este valid!"
 msgid "Exporting in progress..."
 msgstr "Exportare în desfășurare..."
 
+msgid "Can't load file '%s'."
+msgstr "Fișierul „%s” nu poate fi încărcat."
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Nu se poate încărca fișierul '%s'.\n"
 "Cod de eroare: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr "Fișierul „%s” nu poate fi încărcat.\n"
+"Acesta nu este un fișier de paletă valid."
 
 msgid "Frame"
 msgstr "Cadru"
@@ -445,6 +465,12 @@ msgstr "Copie de rezervă"
 
 msgid "Performance"
 msgstr "Performanță"
+
+msgid "Extensions"
+msgstr "Extensii"
+
+msgid "Cursors"
+msgstr "Cursoare"
 
 msgid "Indicators"
 msgstr "Indicatori"
@@ -800,13 +826,13 @@ msgstr "Selectare eliptică\n\n"
 "%s pentru butonul din dreapta al mausului"
 
 msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
 msgstr "Selectare poligonală\n"
-"Dublu clic pentru a conecta ultimul punct la punctul de pornire\n\n"
 "%s pentru butonul din stânga al mausului\n"
-"%s pentru butonul din dreapta al mausului"
+"%s pentru butonul din dreapta al mausului\n\n"
+"Dublu-clic pentru a conecta ultimul punct la punctul de pornire"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -851,13 +877,13 @@ msgstr "Panoramare\n\n"
 "%s pentru butonul din dreapta al mausului"
 
 msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
 msgstr "Selector de culoare\n"
-"Selectează o culoare dintr-un pixel al graficului bidimensional\n\n"
 "%s pentru butonul din stânga al mausului\n"
-"%s pentru butonul din dreapta al mausului"
+"%s pentru butonul din dreapta al mausului\n\n"
+"Selectează o culoare dintr-un pixel al graficului bidimensional"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -979,6 +1005,12 @@ msgstr "Arată pictograma instrumentului din dreapta"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Afișează o pictogramă a instrumentului selectat din dreapta de lângă cursorul de pe pânză"
+
+msgid "Use native mouse cursors"
+msgstr "Folosește cursoarele native ale mausului"
+
+msgid "Use cross cursor for the canvas"
+msgstr "Folosește cursorul încrucișat pentru pânză"
 
 msgid "Guides"
 msgstr "Ghidaje"
@@ -1127,6 +1159,21 @@ msgstr "Setează limita de cadre pe secundă a aplicației. Cu cât numărul est
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Dacă această opțiune este activată, în momentul în care fereastra aplicației pierde focalizarea, aceasta este întreruptă. Acest lucru ajută la reducerea utilizării procesorului pe durata perioadei de inactivitate. Aplicația își reia activitatea atunci când mausul intră în fereastra aplicației."
 
+msgid "Add Extension"
+msgstr "Adăugare extensie"
+
+msgid "Enable"
+msgstr "Activare"
+
+msgid "Disable"
+msgstr "Dezactivare"
+
+msgid "Uninstall"
+msgstr "Dezinstalare"
+
+msgid "Open Folder"
+msgstr "Deschidere dosar"
+
 msgid "Brush:"
 msgstr "Pensulă:"
 
@@ -1160,8 +1207,10 @@ msgstr "Pixel Perfect"
 msgid "Fill inside"
 msgstr "Umplere pe interior"
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Netezește liniile prin eliminarea pixelilor suplimentari de pe margini"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Pixel Perfect\n"
+"Netezește liniile prin eliminarea pixelilor suplimentari de pe margini"
 
 msgid "Fill Shape"
 msgstr "Umplere formă"
@@ -1818,6 +1867,9 @@ msgstr "Deplasează cadrul selectat la dreapta."
 
 msgid "Frame duration"
 msgstr "Durata cadrului"
+
+msgid "Duration"
+msgstr "Durată"
 
 msgid "Tiled In Both Axis"
 msgstr "Mozaicat pe ambele axe"

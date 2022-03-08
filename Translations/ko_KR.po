@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-01-07 14:06\n"
+"PO-Revision-Date: 2022-03-03 14:37\n"
 
 msgid "OK"
 msgstr "예"
@@ -65,6 +65,9 @@ msgstr "선택"
 
 msgid "View"
 msgstr "보기"
+
+msgid "Window"
+msgstr "창"
 
 msgid "Image"
 msgstr "이미지"
@@ -182,6 +185,15 @@ msgstr "창 불투명도"
 
 msgid "Panel Layout"
 msgstr "파넬 배치"
+
+msgid "Panels"
+msgstr "패널"
+
+msgid "Layouts"
+msgstr "배치"
+
+msgid "Manage Layouts"
+msgstr "배치 관리"
 
 msgid "Auto"
 msgstr "자동"
@@ -309,10 +321,18 @@ msgstr "디렉토리 경로나 파일 이름이 유효하지 않습니다!"
 msgid "Exporting in progress..."
 msgstr "내보내는 중..."
 
+msgid "Can't load file '%s'."
+msgstr "파일 '%s'을(를) 불러올 수 없습니다."
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "파일 '%s'을(를) 불러올 수 없습니다.\n"
 "오류 코드: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr "파일 '%s'을(를) 불러올 수 없습니다.\n"
+"이 파일은 유효한 팔레트 파일이 아닙니다."
 
 msgid "Frame"
 msgstr "프레임"
@@ -445,6 +465,12 @@ msgstr "백업"
 
 msgid "Performance"
 msgstr "성능"
+
+msgid "Extensions"
+msgstr "확장"
+
+msgid "Cursors"
+msgstr "마우스 커서"
 
 msgid "Indicators"
 msgstr "표기 아이콘"
@@ -800,10 +826,10 @@ msgstr "원형 선택\n\n"
 "%s 은(는) 오른쪽 마우스 버튼"
 
 msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "다각형 선택\n\n"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
+msgstr "다각형 선택\n"
 "%s 은(는) 왼쪽 마우스 버튼\n"
 "%s 은(는) 오른쪽 마우스 버튼"
 
@@ -850,11 +876,10 @@ msgstr "팬\n\n"
 "%s 은(는) 오른쪽 마우스 버튼"
 
 msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
 msgstr "색상 선택기\n"
-"스프라이트에 있는 픽셀의 색상을 선택\n\n"
 "%s 은(는) 왼쪽 마우스 버튼\n"
 "%s 은(는) 오른쪽 마우스 버튼"
 
@@ -978,6 +1003,12 @@ msgstr "오른쪽 툴 아이콘 표시하기"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "커서 옆에 선택된 오른쪽 툴의 아이콘을 캔버스에 표시하기"
+
+msgid "Use native mouse cursors"
+msgstr "기본 마우스 커서 사용"
+
+msgid "Use cross cursor for the canvas"
+msgstr "십자 마우스 커서 사용"
 
 msgid "Guides"
 msgstr "안내선"
@@ -1126,6 +1157,21 @@ msgstr "프로그램의 FPS를 제한합니다. 숫자가 낮을수록, CPU 사�
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "이 옵션을 켜면 프로그램 창의 관심이 없을때 정지하게 됩니다. 이 옵션은 프로그램을 안 쓰고 있을때 CPU 사용량을 줄일 수 있습니다. 마우스가 프로그램의 창에 들어갈때 정지를 해제 합니다"
 
+msgid "Add Extension"
+msgstr "확장 추가"
+
+msgid "Enable"
+msgstr "활성화"
+
+msgid "Disable"
+msgstr "비활성화"
+
+msgid "Uninstall"
+msgstr "삭제"
+
+msgid "Open Folder"
+msgstr "폴더 열기"
+
 msgid "Brush:"
 msgstr "브러시:"
 
@@ -1159,8 +1205,10 @@ msgstr "픽셀 퍼펙트"
 msgid "Fill inside"
 msgstr "안에 채우기"
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "가장자리의 픽셀을 제거하여 선을 부드럽게 만듭니다"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "픽셀 퍼펙트\n"
+"모서리의 불필요한 픽셀을 제거해서 선을 부드럽게 만듭니다"
 
 msgid "Fill Shape"
 msgstr "도형 채우기"
@@ -1816,6 +1864,9 @@ msgstr "선택한 프레임을 오른쪽으로 움직여주세요"
 
 msgid "Frame duration"
 msgstr "프레임 기간"
+
+msgid "Duration"
+msgstr "기간"
 
 msgid "Tiled In Both Axis"
 msgstr "양 축으로 타일을 두르기"
