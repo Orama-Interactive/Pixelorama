@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-02-28 17:33\n"
+"PO-Revision-Date: 2022-03-10 17:23\n"
 
 msgid "OK"
 msgstr "确定"
@@ -825,14 +825,11 @@ msgstr "椭圆选区\n\n"
 "%s 用于鼠标左键\n"
 "%s 用于鼠标右键"
 
-msgid "Polygonal Selection\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr "多边形选择\n"
-"%s 鼠标左键\n"
-"%s 鼠标右键\n\n"
-"双击将最后一个点连接到起点"
+msgstr ""
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -876,14 +873,11 @@ msgstr "平移\n\n"
 "%s 为鼠标左键\n"
 "%s 为鼠标右键"
 
-msgid "Color Picker\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr "拾色器\n"
-"%s 鼠标左键\n"
-"%s 鼠标右键\n\n"
-"从画面的像素中选择一种颜色"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1914,4 +1908,31 @@ msgstr "减小调色板尺寸将重置颜色的位置。不适合新调色板尺
 
 msgid "Position:"
 msgstr "位置："
+
+msgid "Tools"
+msgstr ""
+
+msgid "Main Canvas"
+msgstr ""
+
+msgid "Second Canvas"
+msgstr ""
+
+msgid "Animation Timeline"
+msgstr ""
+
+msgid "Canvas Preview"
+msgstr ""
+
+msgid "Color Pickers"
+msgstr ""
+
+msgid "Global Tool Options"
+msgstr ""
+
+msgid "Left Tool Options"
+msgstr ""
+
+msgid "Right Tool Options"
+msgstr ""
 
