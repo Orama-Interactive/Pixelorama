@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-03-01 12:17\n"
+"PO-Revision-Date: 2022-03-10 17:23\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -825,13 +825,11 @@ msgstr "Еліптичне виділення\n\n"
 "%s для лівої кнопки миші\n"
 "%s для правої кнопки миші"
 
-msgid "Polygonal Selection\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr "Полігональне виділення\n\n"
-"%s для лівої кнопки миші\n"
-"%s для правої кнопки миші"
+msgstr ""
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -875,13 +873,11 @@ msgstr "Пересування\n\n"
 "%s для лівої кнопки миші\n"
 "%s для правої кнопки миші"
 
-msgid "Color Picker\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr "Піпетка\n\n"
-"%s для лівої кнопки миші\n"
-"%s для правої кнопки миші"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1913,4 +1909,31 @@ msgstr "Зміна розміру палітри призведе до пере�
 
 msgid "Position:"
 msgstr "Позиція:"
+
+msgid "Tools"
+msgstr ""
+
+msgid "Main Canvas"
+msgstr ""
+
+msgid "Second Canvas"
+msgstr ""
+
+msgid "Animation Timeline"
+msgstr ""
+
+msgid "Canvas Preview"
+msgstr ""
+
+msgid "Color Pickers"
+msgstr ""
+
+msgid "Global Tool Options"
+msgstr ""
+
+msgid "Left Tool Options"
+msgstr ""
+
+msgid "Right Tool Options"
+msgstr ""
 
