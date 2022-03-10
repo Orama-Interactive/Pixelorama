@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-03-06 17:29\n"
+"PO-Revision-Date: 2022-03-10 17:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -825,14 +825,11 @@ msgstr "Sélection elliptique\n\n"
 "%s pour le clic gauche\n"
 "%s pour le clic droit"
 
-msgid "Polygonal Selection\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr "Sélection Polygonale\n"
-"%s pour bouton gauche de la souris\n"
-"%s pour bouton droit de la souris\n\n"
-"Double-cliquez pour relier le dernier point au point de départ"
+msgstr ""
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -876,14 +873,11 @@ msgstr "Déplacer\n\n"
 "%s pour le bouton gauche de la souris\n"
 "%s pour le bouton droit de la souris"
 
-msgid "Color Picker\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr "Pipette\n"
-"%s pour bouton gauche de la souris\n"
-"%s pour bouton droit de la souris\n\n"
-"Sélectionner une couleur dans un pixel du sprite"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1915,4 +1909,31 @@ msgstr "La réduction de la taille de la palette réinitialisera la position des
 
 msgid "Position:"
 msgstr "Position :"
+
+msgid "Tools"
+msgstr ""
+
+msgid "Main Canvas"
+msgstr ""
+
+msgid "Second Canvas"
+msgstr ""
+
+msgid "Animation Timeline"
+msgstr ""
+
+msgid "Canvas Preview"
+msgstr ""
+
+msgid "Color Pickers"
+msgstr ""
+
+msgid "Global Tool Options"
+msgstr ""
+
+msgid "Left Tool Options"
+msgstr ""
+
+msgid "Right Tool Options"
+msgstr ""
 
