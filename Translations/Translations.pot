@@ -753,6 +753,18 @@ msgstr ""
 msgid "Ukrainian"
 msgstr ""
 
+msgid "Danish"
+msgstr ""
+
+msgid "Swedish"
+msgstr ""
+
+msgid "Serbian (Cyrillic)"
+msgstr ""
+
+msgid "Dutch"
+msgstr ""
+
 msgid "Development Team"
 msgstr ""
 
