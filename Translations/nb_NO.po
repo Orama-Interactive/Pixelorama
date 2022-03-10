@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-03-08 18:21\n"
+"PO-Revision-Date: 2022-03-10 17:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -824,13 +824,11 @@ msgstr "Elliptisk Markering\n\n"
 "%s for venstre museknapp\n"
 "%s for høyre museknapp"
 
-msgid "Polygonal Selection\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr "Polygonal Markering\n"
-"%s for venstre museknapp\n"
-"%s for høyre museknapp"
+msgstr ""
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -874,14 +872,11 @@ msgstr "Panorer\n\n"
 "%s for venstre museknapp\n"
 "%s for høyre museknapp"
 
-msgid "Color Picker\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr "Fargevelger\n"
-"%s for venstre museknapp\n"
-"%s for høyre museknapp\n\n"
-"Velg en farge fra en piksel på figuren"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1911,4 +1906,31 @@ msgstr "Redusering av palettstørrelse vil nullstille fargenes lagrede posisjon.
 
 msgid "Position:"
 msgstr "Posisjon:"
+
+msgid "Tools"
+msgstr ""
+
+msgid "Main Canvas"
+msgstr ""
+
+msgid "Second Canvas"
+msgstr ""
+
+msgid "Animation Timeline"
+msgstr ""
+
+msgid "Canvas Preview"
+msgstr ""
+
+msgid "Color Pickers"
+msgstr ""
+
+msgid "Global Tool Options"
+msgstr ""
+
+msgid "Left Tool Options"
+msgstr ""
+
+msgid "Right Tool Options"
+msgstr ""
 
