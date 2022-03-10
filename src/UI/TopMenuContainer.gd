@@ -57,6 +57,7 @@ onready var select_menu_button: MenuButton = find_node("SelectMenu")
 onready var help_menu_button: MenuButton = find_node("HelpMenu")
 
 onready var ui: Container = Global.control.find_node("DockableContainer")
+onready var greyscale_vision: ColorRect = ui.find_node("GreyscaleVision")
 onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("CreateNewImage")
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
 onready var tile_mode_submenu := PopupMenu.new()
@@ -498,8 +499,7 @@ func set_layout(id: int) -> void:
 		var is_hidden: bool = ui.is_control_hidden(ui_elements[i])
 		panels_submenu.set_item_checked(i, !is_hidden)
 
-	# Turn zen mode off
-	if zen_mode:
+	if zen_mode:  # Turn zen mode off
 		Global.control.find_node("TabsContainer").visible = true
 		zen_mode = false
 		window_menu.set_item_checked(WindowMenuId.ZEN_MODE, false)
@@ -507,7 +507,7 @@ func set_layout(id: int) -> void:
 
 func _toggle_greyscale_view() -> void:
 	Global.greyscale_view = !Global.greyscale_view
-	Global.greyscale_vision.visible = Global.greyscale_view
+	greyscale_vision.visible = Global.greyscale_view
 	view_menu.set_item_checked(ViewMenuId.GREYSCALE_VIEW, Global.greyscale_view)
 
 

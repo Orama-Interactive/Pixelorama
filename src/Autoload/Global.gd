@@ -122,7 +122,6 @@ onready var cameras := [camera, camera2, camera_preview]
 onready var horizontal_ruler: BaseButton = control.find_node("HorizontalRuler")
 onready var vertical_ruler: BaseButton = control.find_node("VerticalRuler")
 onready var transparent_checker: ColorRect = control.find_node("TransparentChecker")
-onready var greyscale_vision: ColorRect = control.find_node("GreyscaleVision")
 onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider")
 
 onready var tool_panel: ScrollContainer = control.find_node("Tools")

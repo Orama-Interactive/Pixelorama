@@ -302,7 +302,10 @@ script = ExtResource( 7 )
 [node name="CanvasLayer" type="CanvasLayer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 
 [node name="GreyscaleVision" type="ColorRect" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/ViewportContainer/Viewport/CanvasLayer"]
+visible = false
 material = SubResource( 27 )
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
