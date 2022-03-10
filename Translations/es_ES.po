@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-03-04 01:38\n"
+"PO-Revision-Date: 2022-03-10 17:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -825,14 +825,11 @@ msgstr "Cubo de pintura\n\n"
 "%s para el botón izquierdo del mouse\n"
 "%s para el botón derecho del mouse"
 
-msgid "Polygonal Selection\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr "Selección Poligonal\n"
-"%s para el botón izquierdo del ratón\n"
-"%s para el botón derecho del ratón\n\n"
-"Haga doble clic para conectar el último punto al punto de inicio"
+msgstr ""
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -876,14 +873,11 @@ msgstr "Vista\n\n"
 "%s para el botón izquierdo del mouse\n"
 "%s para el botón derecho del mouse"
 
-msgid "Color Picker\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr "Selector de color\n"
-"%s para el botón izquierdo del ratón\n"
-"%s para el botón derecho del ratón\n\n"
-"Seleccione un color de un píxel del sprite"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1914,4 +1908,31 @@ msgstr "Reducir el tamaño de la paleta restablecerá las posiciones de colores.
 
 msgid "Position:"
 msgstr "Posición:"
+
+msgid "Tools"
+msgstr ""
+
+msgid "Main Canvas"
+msgstr ""
+
+msgid "Second Canvas"
+msgstr ""
+
+msgid "Animation Timeline"
+msgstr ""
+
+msgid "Canvas Preview"
+msgstr ""
+
+msgid "Color Pickers"
+msgstr ""
+
+msgid "Global Tool Options"
+msgstr ""
+
+msgid "Left Tool Options"
+msgstr ""
+
+msgid "Right Tool Options"
+msgstr ""
 
