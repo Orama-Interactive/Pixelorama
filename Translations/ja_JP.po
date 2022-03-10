@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-02-28 17:51\n"
+"PO-Revision-Date: 2022-03-10 17:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -825,14 +825,11 @@ msgstr "楕円形選択\n\n"
 "%sでマウスの左ボタンを 楕円形選択 に変更\n"
 "%sでマウスの右ボタンを 楕円形選択 に変更"
 
-msgid "Polygonal Selection\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr "多角形選択\n\n"
-"%sでマウスの左ボタンを 多角形選択 に変更\n"
-"%sでマウスの右ボタンを 多角形選択 に変更\n\n"
-"ダブルクリックで始点と終点を接続します"
+msgstr ""
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -876,14 +873,11 @@ msgstr "パン\n\n"
 "%sでマウスの左ボタンを パン に変更\n"
 "%sでマウスの右ボタンを パン に変更"
 
-msgid "Color Picker\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr "色選択\n\n"
-"%sでマウスの左ボタンを 色選択 に変更\n"
-"%sでマウスの右ボタンを 色選択 に変更\n\n"
-"画像のピクセルから色を選択します"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1915,4 +1909,31 @@ msgstr "パレットサイズを小さくすると、色の位置がリセット
 
 msgid "Position:"
 msgstr "ポジション:"
+
+msgid "Tools"
+msgstr ""
+
+msgid "Main Canvas"
+msgstr ""
+
+msgid "Second Canvas"
+msgstr ""
+
+msgid "Animation Timeline"
+msgstr ""
+
+msgid "Canvas Preview"
+msgstr ""
+
+msgid "Color Pickers"
+msgstr ""
+
+msgid "Global Tool Options"
+msgstr ""
+
+msgid "Left Tool Options"
+msgstr ""
+
+msgid "Right Tool Options"
+msgstr ""
 
