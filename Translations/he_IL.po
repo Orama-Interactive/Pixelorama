@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2022-03-10 17:23\n"
+"PO-Revision-Date: 2022-03-10 22:49\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -762,6 +762,18 @@ msgid "Japanese"
 msgstr ""
 
 msgid "Ukrainian"
+msgstr ""
+
+msgid "Danish"
+msgstr ""
+
+msgid "Swedish"
+msgstr ""
+
+msgid "Serbian (Cyrillic)"
+msgstr ""
+
+msgid "Dutch"
 msgstr ""
 
 msgid "Development Team"
