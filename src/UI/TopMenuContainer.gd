@@ -274,7 +274,7 @@ func _setup_image_menu() -> void:
 		"Outline": 0,
 		"Adjust Hue/Saturation/Value": 0,
 		"Gradient": 0,
-		# "Shader" : 0
+		# "Shader": 0
 	}
 	var image_menu: PopupMenu = image_menu_button.get_popup()
 
@@ -323,6 +323,15 @@ func _setup_help_menu() -> void:
 	help_menu.connect("id_pressed", self, "help_menu_id_pressed")
 
 
+func _handle_metadata(id: int, menu_button: MenuButton) -> void:
+	# Used for extensions that want to add extra menu items
+	var metadata = menu_button.get_popup().get_item_metadata(id)
+	if metadata:
+		if metadata is Object:
+			if metadata.has_method("menu_item_clicked"):
+				metadata.call("menu_item_clicked")
+
+
 func file_menu_id_pressed(id: int) -> void:
 	match id:
 		FileMenuId.NEW:
@@ -342,6 +351,8 @@ func file_menu_id_pressed(id: int) -> void:
 			Global.dialog_open(true)
 		FileMenuId.QUIT:
 			Global.control.show_quit_dialog()
+		_:
+			_handle_metadata(id, file_menu_button)
 
 
 func _on_new_project_file_menu_option_pressed() -> void:
@@ -428,6 +439,8 @@ func edit_menu_id_pressed(id: int) -> void:
 		EditMenuId.PREFERENCES:
 			Global.preferences_dialog.popup_centered(Vector2(400, 280))
 			Global.dialog_open(true)
+		_:
+			_handle_metadata(id, edit_menu_button)
 
 
 func view_menu_id_pressed(id: int) -> void:
@@ -444,6 +457,9 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_rulers()
 		ViewMenuId.SHOW_GUIDES:
 			_toggle_show_guides()
+		_:
+			_handle_metadata(id, view_menu_button)
+
 	Global.canvas.update()
 
 
@@ -469,6 +485,8 @@ func window_menu_id_pressed(id: int) -> void:
 			_toggle_zen_mode()
 		WindowMenuId.FULLSCREEN_MODE:
 			_toggle_fullscreen()
+		_:
+			_handle_metadata(id, window_menu_button)
 
 
 func _panels_submenu_id_pressed(id: int) -> void:
@@ -616,9 +634,12 @@ func image_menu_id_pressed(id: int) -> void:
 			Global.control.get_node("Dialogs/ImageEffects/GradientDialog").popup_centered()
 			Global.dialog_open(true)
 
-		ImageMenuId.SHADER:
-			Global.control.get_node("Dialogs/ImageEffects/ShaderEffect").popup_centered()
-			Global.dialog_open(true)
+#		ImageMenuId.SHADER:
+#			Global.control.get_node("Dialogs/ImageEffects/ShaderEffect").popup_centered()
+#			Global.dialog_open(true)
+
+		_:
+			_handle_metadata(id, image_menu_button)
 
 
 func _show_scale_image_popup() -> void:
@@ -654,6 +675,8 @@ func select_menu_id_pressed(id: int) -> void:
 			Global.canvas.selection.clear_selection(true)
 		SelectMenuId.INVERT:
 			Global.canvas.selection.invert()
+		_:
+			_handle_metadata(id, select_menu_button)
 
 
 func help_menu_id_pressed(id: int) -> void:
@@ -676,3 +699,5 @@ func help_menu_id_pressed(id: int) -> void:
 		HelpMenuId.ABOUT_PIXELORAMA:
 			Global.control.get_node("Dialogs/AboutDialog").popup_centered()
 			Global.dialog_open(true)
+		_:
+			_handle_metadata(id, help_menu_button)
