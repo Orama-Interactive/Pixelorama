@@ -130,7 +130,7 @@ onready var left_tool_options_scroll: ScrollContainer = control.find_node("Left 
 onready var right_tool_options_scroll: ScrollContainer = control.find_node("Right Tool Options")
 onready var brushes_popup: Popup = control.find_node("BrushesPopup")
 onready var patterns_popup: Popup = control.find_node("PatternsPopup")
-onready var palette_panel: PalettePanel = control.find_node("Palette Panel")
+onready var palette_panel: PalettePanel = control.find_node("Palettes")
 
 onready var top_menu_container: Panel = control.find_node("TopMenuContainer")
 onready var rotation_level_button: Button = control.find_node("RotationLevel")
