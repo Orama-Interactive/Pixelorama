@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-02-28 18:29\n"
+"PO-Revision-Date: 2022-03-10 17:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -825,14 +825,11 @@ msgstr "Selectare eliptică\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului"
 
-msgid "Polygonal Selection\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr "Selectare poligonală\n"
-"%s pentru butonul din stânga al mausului\n"
-"%s pentru butonul din dreapta al mausului\n\n"
-"Dublu-clic pentru a conecta ultimul punct la punctul de pornire"
+msgstr ""
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -876,14 +873,11 @@ msgstr "Panoramare\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului"
 
-msgid "Color Picker\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr "Selector de culoare\n"
-"%s pentru butonul din stânga al mausului\n"
-"%s pentru butonul din dreapta al mausului\n\n"
-"Selectează o culoare dintr-un pixel al graficului bidimensional"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1915,4 +1909,31 @@ msgstr "Reducerea dimensiunii paletei va reseta pozițiile culorilor. Culorile c
 
 msgid "Position:"
 msgstr "Poziție:"
+
+msgid "Tools"
+msgstr ""
+
+msgid "Main Canvas"
+msgstr ""
+
+msgid "Second Canvas"
+msgstr ""
+
+msgid "Animation Timeline"
+msgstr ""
+
+msgid "Canvas Preview"
+msgstr ""
+
+msgid "Color Pickers"
+msgstr ""
+
+msgid "Global Tool Options"
+msgstr ""
+
+msgid "Left Tool Options"
+msgstr ""
+
+msgid "Right Tool Options"
+msgstr ""
 
