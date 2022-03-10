@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-02-28 17:34\n"
+"PO-Revision-Date: 2022-03-10 17:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -823,7 +823,7 @@ msgstr "Zaznaczenie eliptyczne \n\n"
 "%s na lewy przycisk myszy\n"
 "%s na prawy przycisk myszy"
 
-msgid "Polygonal Selection\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
@@ -871,7 +871,7 @@ msgstr "Przesuń\n\n"
 "%s dla lewego przycisku myszy\n"
 "%s dla prawego przycisku myszy"
 
-msgid "Color Picker\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
@@ -1906,4 +1906,31 @@ msgstr "Zmniejszenie rozmiaru palety zresetuje pozycje kolorów. Kolory, które 
 
 msgid "Position:"
 msgstr "Pozycja:"
+
+msgid "Tools"
+msgstr ""
+
+msgid "Main Canvas"
+msgstr ""
+
+msgid "Second Canvas"
+msgstr ""
+
+msgid "Animation Timeline"
+msgstr ""
+
+msgid "Canvas Preview"
+msgstr ""
+
+msgid "Color Pickers"
+msgstr ""
+
+msgid "Global Tool Options"
+msgstr ""
+
+msgid "Left Tool Options"
+msgstr ""
+
+msgid "Right Tool Options"
+msgstr ""
 
