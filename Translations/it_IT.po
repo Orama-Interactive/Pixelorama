@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-02-28 18:39\n"
+"PO-Revision-Date: 2022-03-10 17:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -825,14 +825,11 @@ msgstr "Selezione ellittica\n\n"
 "%s per il pulsante sinistro del mouse\n"
 "%s per il tasto destro del mouse"
 
-msgid "Polygonal Selection\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr "Selezione poligonale\n"
-"%s per il pulsante sinistro del mouse\n"
-"%s per il pulsante destro del mouse\n\n"
-"Doppio clic per collegare l'ultimo punto al punto di partenza"
+msgstr ""
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -876,14 +873,11 @@ msgstr "Pan\n\n"
 "%s per il pulsante sinistro del mouse\n"
 "%s per il pulsante destro del mouse"
 
-msgid "Color Picker\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr "Selettore colore\n"
-"%s per il tasto sinistro del mouse\n"
-"%s per il tasto destro del mouse\n\n"
-"Seleziona un colore da un pixel dello sprite"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1915,4 +1909,31 @@ msgstr "Ridurre la dimensione della tavolozza ripristinerà le posizioni dei col
 
 msgid "Position:"
 msgstr "Posizione:"
+
+msgid "Tools"
+msgstr ""
+
+msgid "Main Canvas"
+msgstr ""
+
+msgid "Second Canvas"
+msgstr ""
+
+msgid "Animation Timeline"
+msgstr ""
+
+msgid "Canvas Preview"
+msgstr ""
+
+msgid "Color Pickers"
+msgstr ""
+
+msgid "Global Tool Options"
+msgstr ""
+
+msgid "Left Tool Options"
+msgstr ""
+
+msgid "Right Tool Options"
+msgstr ""
 
