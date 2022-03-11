@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-03-10 22:49\n"
+"PO-Revision-Date: 2022-03-11 14:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -767,13 +767,13 @@ msgid "Ukrainian"
 msgstr "Украинский"
 
 msgid "Danish"
-msgstr ""
+msgstr "Датский"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Шведский"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Сербский (кириллица)"
 
 msgid "Dutch"
 msgstr ""
