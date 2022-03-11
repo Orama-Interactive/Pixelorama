@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 # [v0.10] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Martin Novák ([@novhack](https://github.com/novhack))
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Martin Novák ([@novhack](https://github.com/novhack)), Lili Zoey ([@sayaks](https://github.com/sayaks))
 
 ### Added
 - A new Window menu has been added that has the new UI system options, as well as Zen mode and Fullscreen mode that were previously under the View menu.
@@ -28,7 +28,8 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Martin Novák (
 - The documentation keyboard shortcut has been changed from F12 to F1.
 
 ### Fixed
-- The "same color pixels" mode of the bucket tool has become a lot faster because it now uses a shader. [#649](https://github.com/Orama-Interactive/Pixelorama/pull/649)
+- Drawing with big brush sizes has been optimized. [#657](https://github.com/Orama-Interactive/Pixelorama/pull/657) - which was based on [#554](https://github.com/Orama-Interactive/Pixelorama/pull/554)
+- The "same color pixels" mode of the bucket tool has become a lot faster because it now uses a shader. [#649](https://github.com/Orama-Interactive/Pixelorama/pull/649) - which was based on [#613](https://github.com/Orama-Interactive/Pixelorama/pull/613)
 - Fixed crash when importing non-palette .tres files.
 - Deferred mode for the color pickers of gradients has been enabled, so that the gradient preview color only changes on mouse release. Addressed a part of [#645](https://github.com/Orama-Interactive/Pixelorama/issues/645).
 - Fixed a bug where the selection got stuck to the canvas boundaries when they were 1px away from them.

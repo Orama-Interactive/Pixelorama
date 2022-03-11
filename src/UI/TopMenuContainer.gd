@@ -44,6 +44,7 @@ var layouts := [
 	["Default", preload("res://assets/layouts/default.tres")],
 	["Tallscreen", preload("res://assets/layouts/tallscreen.tres")],
 ]
+var selected_layout := 0
 var zen_mode := false
 
 onready var ui_elements: Array = Global.control.find_node("DockableContainer").get_children()
@@ -56,6 +57,7 @@ onready var select_menu_button: MenuButton = find_node("SelectMenu")
 onready var help_menu_button: MenuButton = find_node("HelpMenu")
 
 onready var ui: Container = Global.control.find_node("DockableContainer")
+onready var greyscale_vision: ColorRect = ui.find_node("GreyscaleVision")
 onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("CreateNewImage")
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
 onready var tile_mode_submenu := PopupMenu.new()
@@ -247,6 +249,9 @@ func _setup_layouts_submenu(item: String) -> void:
 	window_menu.add_child(layouts_submenu)
 	window_menu.add_submenu_item(item, layouts_submenu.get_name())
 
+	var saved_layout = Global.config_cache.get_value("window", "layout", 0)
+	set_layout(saved_layout)
+
 
 func populate_layouts_submenu() -> void:
 	layouts_submenu.clear()  # Does not do anything if it's called for the first time
@@ -269,7 +274,7 @@ func _setup_image_menu() -> void:
 		"Outline": 0,
 		"Adjust Hue/Saturation/Value": 0,
 		"Gradient": 0,
-		# "Shader" : 0
+		# "Shader": 0
 	}
 	var image_menu: PopupMenu = image_menu_button.get_popup()
 
@@ -318,6 +323,15 @@ func _setup_help_menu() -> void:
 	help_menu.connect("id_pressed", self, "help_menu_id_pressed")
 
 
+func _handle_metadata(id: int, menu_button: MenuButton) -> void:
+	# Used for extensions that want to add extra menu items
+	var metadata = menu_button.get_popup().get_item_metadata(id)
+	if metadata:
+		if metadata is Object:
+			if metadata.has_method("menu_item_clicked"):
+				metadata.call("menu_item_clicked")
+
+
 func file_menu_id_pressed(id: int) -> void:
 	match id:
 		FileMenuId.NEW:
@@ -337,6 +351,8 @@ func file_menu_id_pressed(id: int) -> void:
 			Global.dialog_open(true)
 		FileMenuId.QUIT:
 			Global.control.show_quit_dialog()
+		_:
+			_handle_metadata(id, file_menu_button)
 
 
 func _on_new_project_file_menu_option_pressed() -> void:
@@ -423,6 +439,8 @@ func edit_menu_id_pressed(id: int) -> void:
 		EditMenuId.PREFERENCES:
 			Global.preferences_dialog.popup_centered(Vector2(400, 280))
 			Global.dialog_open(true)
+		_:
+			_handle_metadata(id, edit_menu_button)
 
 
 func view_menu_id_pressed(id: int) -> void:
@@ -439,6 +457,9 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_rulers()
 		ViewMenuId.SHOW_GUIDES:
 			_toggle_show_guides()
+		_:
+			_handle_metadata(id, view_menu_button)
+
 	Global.canvas.update()
 
 
@@ -464,6 +485,8 @@ func window_menu_id_pressed(id: int) -> void:
 			_toggle_zen_mode()
 		WindowMenuId.FULLSCREEN_MODE:
 			_toggle_fullscreen()
+		_:
+			_handle_metadata(id, window_menu_button)
 
 
 func _panels_submenu_id_pressed(id: int) -> void:
@@ -483,8 +506,10 @@ func _layouts_submenu_id_pressed(id: int) -> void:
 
 
 func set_layout(id: int) -> void:
-	# Clone is needed so that the premade layouts do not get modified
-	ui.layout = layouts[id][1].clone()
+	if id >= layouts.size():
+		id = 0
+	selected_layout = id
+	ui.layout = layouts[id][1].clone()  # Clone is needed to avoid modifying premade layouts
 	for i in layouts.size():
 		layouts_submenu.set_item_checked(i, i == id)
 
@@ -492,14 +517,15 @@ func set_layout(id: int) -> void:
 		var is_hidden: bool = ui.is_control_hidden(ui_elements[i])
 		panels_submenu.set_item_checked(i, !is_hidden)
 
-	Global.control.find_node("TabsContainer").visible = true
-	zen_mode = false
-	window_menu.set_item_checked(WindowMenuId.ZEN_MODE, false)
+	if zen_mode:  # Turn zen mode off
+		Global.control.find_node("TabsContainer").visible = true
+		zen_mode = false
+		window_menu.set_item_checked(WindowMenuId.ZEN_MODE, false)
 
 
 func _toggle_greyscale_view() -> void:
 	Global.greyscale_view = !Global.greyscale_view
-	Global.greyscale_vision.visible = Global.greyscale_view
+	greyscale_vision.visible = Global.greyscale_view
 	view_menu.set_item_checked(ViewMenuId.GREYSCALE_VIEW, Global.greyscale_view)
 
 
@@ -551,16 +577,12 @@ func _toggle_show_guides() -> void:
 
 
 func _toggle_zen_mode() -> void:
-	var color_pickers: Container = Global.control.find_node("Color Pickers")
-	var global_tool_options: Container = Global.control.find_node("Global Tool Options")
-	ui.set_control_hidden(Global.animation_timeline, !zen_mode)
-	ui.set_control_hidden(Global.tool_panel, !zen_mode)
-	ui.set_control_hidden(Global.canvas_preview_container, !zen_mode)
-	ui.set_control_hidden(color_pickers, !zen_mode)
-	ui.set_control_hidden(global_tool_options, !zen_mode)
-	ui.set_control_hidden(Global.left_tool_options_scroll, !zen_mode)
-	ui.set_control_hidden(Global.right_tool_options_scroll, !zen_mode)
-	ui.set_control_hidden(Global.palette_panel, !zen_mode)
+	for i in ui_elements.size():
+		if ui_elements[i].name == "Main Canvas":
+			continue
+		if !panels_submenu.is_item_checked(i):
+			continue
+		ui.set_control_hidden(ui_elements[i], !zen_mode)
 	Global.control.find_node("TabsContainer").visible = zen_mode
 	zen_mode = !zen_mode
 	window_menu.set_item_checked(WindowMenuId.ZEN_MODE, zen_mode)
@@ -612,9 +634,12 @@ func image_menu_id_pressed(id: int) -> void:
 			Global.control.get_node("Dialogs/ImageEffects/GradientDialog").popup_centered()
 			Global.dialog_open(true)
 
-		ImageMenuId.SHADER:
-			Global.control.get_node("Dialogs/ImageEffects/ShaderEffect").popup_centered()
-			Global.dialog_open(true)
+#		ImageMenuId.SHADER:
+#			Global.control.get_node("Dialogs/ImageEffects/ShaderEffect").popup_centered()
+#			Global.dialog_open(true)
+
+		_:
+			_handle_metadata(id, image_menu_button)
 
 
 func _show_scale_image_popup() -> void:
@@ -650,6 +675,8 @@ func select_menu_id_pressed(id: int) -> void:
 			Global.canvas.selection.clear_selection(true)
 		SelectMenuId.INVERT:
 			Global.canvas.selection.invert()
+		_:
+			_handle_metadata(id, select_menu_button)
 
 
 func help_menu_id_pressed(id: int) -> void:
@@ -672,3 +699,5 @@ func help_menu_id_pressed(id: int) -> void:
 		HelpMenuId.ABOUT_PIXELORAMA:
 			Global.control.get_node("Dialogs/AboutDialog").popup_centered()
 			Global.dialog_open(true)
+		_:
+			_handle_metadata(id, help_menu_button)

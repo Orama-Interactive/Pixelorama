@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-01-05 15:16\n"
+"PO-Revision-Date: 2022-03-05 20:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -65,6 +65,9 @@ msgstr "Выделить"
 
 msgid "View"
 msgstr "Просмотр"
+
+msgid "Window"
+msgstr "Окно"
 
 msgid "Image"
 msgstr "Изображение"
@@ -182,6 +185,15 @@ msgstr "Непрозрачность окна"
 
 msgid "Panel Layout"
 msgstr "Расположение панелей"
+
+msgid "Panels"
+msgstr "Панели"
+
+msgid "Layouts"
+msgstr "Слои"
+
+msgid "Manage Layouts"
+msgstr "Управление слоями"
 
 msgid "Auto"
 msgstr "Автоматически"
@@ -309,10 +321,18 @@ msgstr "Недопустимый путь к папке или имя файла
 msgid "Exporting in progress..."
 msgstr "Выполняется экспорт..."
 
+msgid "Can't load file '%s'."
+msgstr "Не удается загрузить файл '%s'."
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Не удалось загрузить файл '%s'.\n"
 "Код ошибки: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr "Невозможно загрузить файл '%s'.\n"
+"Не допустимый файл палитры."
 
 msgid "Frame"
 msgstr "Кадр"
@@ -445,6 +465,12 @@ msgstr "Резервная копия"
 
 msgid "Performance"
 msgstr "Производительность"
+
+msgid "Extensions"
+msgstr "Расширения"
+
+msgid "Cursors"
+msgstr "Курсоры"
 
 msgid "Indicators"
 msgstr "Индикатор"
@@ -800,13 +826,13 @@ msgstr "Эллиптическое выделение\n\n"
 "%s для правой кнопки мыши"
 
 msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "Многоугольное выделение\n"
-"Дважды щёлкните по последней точке, чтобы соединить её с начальной\n\n"
-"%s левой кнопкой мыши\n"
-"%s для правой кнопки мыши"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
+msgstr "Выделение многоугольником\n"
+"%s для левой кнопки мыши\n"
+"%s для правой кнопкой мыши\n\n"
+"Двойной клик для соединения последней точки с первой"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -851,13 +877,13 @@ msgstr "Сдвиг\n\n"
 "%s для правой кнопки мыши"
 
 msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "Выбор цвета\n"
-"Выбрать цвет из пикселя спрайта\n\n"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
+msgstr "Пипетка\n"
 "%s для левой кнопки мыши\n"
-"%s для правой кнопки мыши"
+"%s для правой кнопки мыши\n\n"
+"Выбирает цвет из пикселя спрайта"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -979,6 +1005,12 @@ msgstr "Показать правый значок инструмента"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Отображает значок выбранного правого инструмента рядом с курсором на холсте"
+
+msgid "Use native mouse cursors"
+msgstr "Использовать нативные курсоры мыши"
+
+msgid "Use cross cursor for the canvas"
+msgstr "Использовать курсор перекрестия для холста"
 
 msgid "Guides"
 msgstr "Направляющие"
@@ -1127,6 +1159,21 @@ msgstr "Устанавливает лимит на количество кадр
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Если этот параметр включен, то, когда окно приложения теряет фокус, оно приостанавливается. Это помогает снизить загрузку процессора в режиме бездействие. Приложение продолжит работать, когда мышь попадет в окно приложения."
 
+msgid "Add Extension"
+msgstr "Добавить расширение"
+
+msgid "Enable"
+msgstr "Включить"
+
+msgid "Disable"
+msgstr "Отключить"
+
+msgid "Uninstall"
+msgstr "Удалить"
+
+msgid "Open Folder"
+msgstr "Открыть папку"
+
 msgid "Brush:"
 msgstr "Кисть:"
 
@@ -1160,8 +1207,10 @@ msgstr "Пиксельная точность"
 msgid "Fill inside"
 msgstr "Залить внутри"
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Делает линии плавными, удаляя лишние пиксели на краях"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "\"С точностью до пикселя\"\n"
+"Делает линии плавными, удаляя лишние пиксели по краям"
 
 msgid "Fill Shape"
 msgstr "Заполнить фигуру"
@@ -1818,6 +1867,9 @@ msgstr "Переместить выделенный кадр вправо."
 
 msgid "Frame duration"
 msgstr "Длительность кадра"
+
+msgid "Duration"
+msgstr "Длительность"
 
 msgid "Tiled In Both Axis"
 msgstr "Повторять по обеим осям"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-01-05 11:25\n"
+"PO-Revision-Date: 2022-02-28 18:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -65,6 +65,9 @@ msgstr "Auswählen"
 
 msgid "View"
 msgstr "Ansicht"
+
+msgid "Window"
+msgstr "Fenster"
 
 msgid "Image"
 msgstr "Bild"
@@ -182,6 +185,15 @@ msgstr "Fenstertransparenz"
 
 msgid "Panel Layout"
 msgstr "Panel-Layout"
+
+msgid "Panels"
+msgstr "Panels"
+
+msgid "Layouts"
+msgstr "Layouts"
+
+msgid "Manage Layouts"
+msgstr "Layouts verwalten"
 
 msgid "Auto"
 msgstr "Auto"
@@ -309,9 +321,17 @@ msgstr "Verzeichnispfad oder Dateiname ist ungültig!"
 msgid "Exporting in progress..."
 msgstr "Export läuft..."
 
+msgid "Can't load file '%s'."
+msgstr "Kann Datei '%s ' nicht laden."
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Kann Datei nicht laden '%s'. Error code: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr "Datei '%s' kann nicht geladen werden.\n"
+"Dies ist keine gültige Palettendatei."
 
 msgid "Frame"
 msgstr "Frame"
@@ -444,6 +464,12 @@ msgstr "Sicherung"
 
 msgid "Performance"
 msgstr "Leistung"
+
+msgid "Extensions"
+msgstr "Erweiterungen"
+
+msgid "Cursors"
+msgstr "Mauszeiger"
 
 msgid "Indicators"
 msgstr "Indikatoren"
@@ -799,13 +825,13 @@ msgstr "Elliptische Auswahl\n\n"
 "%s für die rechte Maustaste"
 
 msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
 msgstr "Polygonale Auswahl\n"
-"Doppelklick um den letzten Punkt mit dem Startpunkt zu verbinden\n\n"
 "%s für die linke Maustaste\n"
-"%s für die rechte Maustaste"
+"%s für die rechte Maustaste\n\n"
+"Doppelklick, um den letzten Punkt mit dem Startpunkt zu verbinden"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -850,13 +876,13 @@ msgstr "Schwenk\n\n"
 "%s für rechte Maustaste"
 
 msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
 msgstr "Farbauswahl\n"
-"Wähle eine Farbe von einem Pixel des Sprites\n\n"
 "%s für die linke Maustaste\n"
-"%s für die rechte Maustaste"
+"%s für die rechte Maustaste\n\n"
+"Wählen Sie eine Farbe aus einem Pixel des Sprites"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -978,6 +1004,12 @@ msgstr "Rechtes Werkzeugsymbol anzeigen"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Zeigt ein Symbol des ausgewählten rechten Werkzeugs neben dem Cursor auf dem Canvas an"
+
+msgid "Use native mouse cursors"
+msgstr "Native Mousezeiger verwenden"
+
+msgid "Use cross cursor for the canvas"
+msgstr "Kreuz-Mauszeiger für den Canvas benutzen"
 
 msgid "Guides"
 msgstr "Guides"
@@ -1126,6 +1158,21 @@ msgstr "Legt die Grenze der Frames pro Sekunde fest. Je niedriger die Anzahl, de
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Wenn dies eingeschaltet ist und das Fenster der Anwendung den Fokus verliert, wird die Anwendung pausiert. Dies reduziert die CPU-Auslastung im Hintergrund. Pixelorama wird entpaust, wenn die Maus in das Fenster der Anwendung eintritt."
 
+msgid "Add Extension"
+msgstr "Erweiterung hinzufügen"
+
+msgid "Enable"
+msgstr "Aktivieren"
+
+msgid "Disable"
+msgstr "Deaktivieren"
+
+msgid "Uninstall"
+msgstr "Deinstallieren"
+
+msgid "Open Folder"
+msgstr "Ordner öffnen"
+
 msgid "Brush:"
 msgstr "Pinsel:"
 
@@ -1159,8 +1206,10 @@ msgstr "Perfekte Pixel"
 msgid "Fill inside"
 msgstr "Einfüllen"
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Macht Linien glatt, indem die zusätzlichen Pixel an den Kanten entfernt werden"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Pixel Perfekt\n"
+"macht Linien glatt, indem die zusätzlichen Pixel an den Kanten entfernt werden"
 
 msgid "Fill Shape"
 msgstr "Füllform"
@@ -1816,6 +1865,9 @@ msgstr "Verschiebe den ausgewählten Frame nach rechts."
 
 msgid "Frame duration"
 msgstr "Frame-Dauer"
+
+msgid "Duration"
+msgstr "Dauer"
 
 msgid "Tiled In Both Axis"
 msgstr "In beiden Achsen gekachelt"

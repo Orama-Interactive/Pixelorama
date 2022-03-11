@@ -7,7 +7,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1242.0
 margin_bottom = -230.0
-rect_min_size = Vector2( 36, 0 )
+rect_min_size = Vector2( 36, 36 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 

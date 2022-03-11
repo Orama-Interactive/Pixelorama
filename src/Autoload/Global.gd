@@ -122,7 +122,6 @@ onready var cameras := [camera, camera2, camera_preview]
 onready var horizontal_ruler: BaseButton = control.find_node("HorizontalRuler")
 onready var vertical_ruler: BaseButton = control.find_node("VerticalRuler")
 onready var transparent_checker: ColorRect = control.find_node("TransparentChecker")
-onready var greyscale_vision: ColorRect = control.find_node("GreyscaleVision")
 onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider")
 
 onready var tool_panel: ScrollContainer = control.find_node("Tools")
@@ -130,7 +129,7 @@ onready var left_tool_options_scroll: ScrollContainer = control.find_node("Left 
 onready var right_tool_options_scroll: ScrollContainer = control.find_node("Right Tool Options")
 onready var brushes_popup: Popup = control.find_node("BrushesPopup")
 onready var patterns_popup: Popup = control.find_node("PatternsPopup")
-onready var palette_panel: PalettePanel = control.find_node("Palette Panel")
+onready var palette_panel: PalettePanel = control.find_node("Palettes")
 
 onready var top_menu_container: Panel = control.find_node("TopMenuContainer")
 onready var rotation_level_button: Button = control.find_node("RotationLevel")

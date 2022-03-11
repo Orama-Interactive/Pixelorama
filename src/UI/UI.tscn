@@ -127,7 +127,7 @@ second = SubResource( 23 )
 [sub_resource type="Resource" id=13]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "Palette Panel" )
+names = PoolStringArray( "Palettes" )
 current_tab = 0
 
 [sub_resource type="Resource" id=14]
@@ -302,7 +302,10 @@ script = ExtResource( 7 )
 [node name="CanvasLayer" type="CanvasLayer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 
 [node name="GreyscaleVision" type="ColorRect" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/ViewportContainer/Viewport/CanvasLayer"]
+visible = false
 material = SubResource( 27 )
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
@@ -359,6 +362,7 @@ margin_left = 958.0
 margin_top = 266.0
 margin_right = 1107.0
 margin_bottom = 574.0
+rect_min_size = Vector2( 72, 72 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -375,6 +379,7 @@ margin_left = 1127.0
 margin_top = 266.0
 margin_right = 1276.0
 margin_bottom = 574.0
+rect_min_size = Vector2( 72, 72 )
 
 [node name="RightPanelContainer" type="PanelContainer" parent="DockableContainer/Right Tool Options"]
 margin_right = 149.0
@@ -383,7 +388,7 @@ rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Palette Panel" parent="DockableContainer" instance=ExtResource( 20 )]
+[node name="Palettes" parent="DockableContainer" instance=ExtResource( 20 )]
 margin_left = 958.0
 margin_top = 598.0
 margin_right = 1276.0

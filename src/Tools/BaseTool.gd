@@ -8,6 +8,9 @@ var cursor_text := ""
 
 var _cursor := Vector2.INF
 
+var _draw_cache: PoolVector2Array = []  # for storing already drawn pixels
+var _for_frame := 0  # cache for which frame?
+
 
 func _ready() -> void:
 	kname = name.replace(" ", "_").to_lower()
@@ -40,6 +43,7 @@ func update_config() -> void:
 
 
 func draw_start(_position: Vector2) -> void:
+	_draw_cache = []
 	is_moving = true
 
 
@@ -52,6 +56,7 @@ func draw_move(position: Vector2) -> void:
 
 func draw_end(_position: Vector2) -> void:
 	is_moving = false
+	_draw_cache = []
 
 
 func cursor_move(position: Vector2) -> void:

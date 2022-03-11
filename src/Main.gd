@@ -357,6 +357,7 @@ func _use_osx_shortcuts() -> void:
 
 
 func _exit_tree() -> void:
+	Global.config_cache.set_value("window", "layout", Global.top_menu_container.selected_layout)
 	Global.config_cache.set_value("window", "screen", OS.current_screen)
 	Global.config_cache.set_value(
 		"window", "maximized", OS.window_maximized || OS.window_fullscreen

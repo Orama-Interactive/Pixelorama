@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2022-01-05 00:43\n"
+"PO-Revision-Date: 2022-03-05 22:29\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Име фајла:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Назив пројекта:"
 
 msgid "Image Size"
 msgstr "Величина слике"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Величина фрејма"
 
 msgid "Size:"
-msgstr ""
+msgstr "Величина:"
 
 msgid "Width:"
 msgstr "Ширина:"
@@ -61,10 +61,13 @@ msgid "Edit"
 msgstr "Уреди"
 
 msgid "Select"
-msgstr ""
+msgstr "Изабери"
 
 msgid "View"
 msgstr "Преглед"
+
+msgid "Window"
+msgstr "Прозор"
 
 msgid "Image"
 msgstr "Слика"
@@ -133,7 +136,7 @@ msgid "Delete"
 msgstr "Обриши"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Нова четка"
 
 msgid "Scale Image"
 msgstr "Скалирај слику"
@@ -142,7 +145,7 @@ msgid "Pixels"
 msgstr ""
 
 msgid "Percentage"
-msgstr ""
+msgstr "Посто"
 
 msgid "Crop Image"
 msgstr "Исеци слику"
@@ -157,10 +160,10 @@ msgid "Rotate Image"
 msgstr "Ротирај слику"
 
 msgid "Clear"
-msgstr ""
+msgstr "Брисати"
 
 msgid "Invert"
-msgstr ""
+msgstr "Обрнути"
 
 msgid "Flip"
 msgstr "Обрни"
@@ -175,16 +178,25 @@ msgid "Preferences"
 msgstr "Подешавања"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Бешавни режим"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Непрозирност прозора"
 
 msgid "Panel Layout"
 msgstr ""
 
-msgid "Auto"
+msgid "Panels"
 msgstr ""
+
+msgid "Layouts"
+msgstr ""
+
+msgid "Manage Layouts"
+msgstr ""
+
+msgid "Auto"
+msgstr "Аутоматски"
 
 msgid "Widescreen"
 msgstr ""
@@ -241,13 +253,13 @@ msgid "Spritesheet (new tab)"
 msgstr ""
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Табла спраjтов (нови слоj)"
 
 msgid "New frame"
 msgstr "Нови фрејм"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Заменити фреjм"
 
 msgid "New layer"
 msgstr "Нови слој"
@@ -268,28 +280,28 @@ msgid "Vertical frames:"
 msgstr "Вертикални фрејмови:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Почетни фреjм:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "У фреjму:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "На слоју:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Тип четке:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Фаjл четке"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Четка проjекта"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Случаjна четка"
 
 msgid "Save Sprite as .pxo"
-msgstr ""
+msgstr "Сачувати спраjт као .pxo"
 
 msgid "Export Sprite as .png"
 msgstr ""
@@ -309,18 +321,25 @@ msgstr ""
 msgid "Exporting in progress..."
 msgstr ""
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr ""
 
-msgid "Frame"
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
 msgstr ""
+
+msgid "Frame"
+msgstr "Фрејм"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Фрејмови:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Сви фрејмови"
 
 msgid "Spritesheet"
 msgstr ""
@@ -332,7 +351,7 @@ msgid "Preview:"
 msgstr ""
 
 msgid "Frame:"
-msgstr ""
+msgstr "Фрејм:"
 
 msgid "Orientation:"
 msgstr ""
@@ -445,6 +464,12 @@ msgstr "Резервна копија"
 msgid "Performance"
 msgstr "Перформансе"
 
+msgid "Extensions"
+msgstr ""
+
+msgid "Cursors"
+msgstr ""
+
 msgid "Indicators"
 msgstr "Индикатори"
 
@@ -515,10 +540,10 @@ msgid "Tool button size:"
 msgstr ""
 
 msgid "Small"
-msgstr ""
+msgstr "Мало"
 
 msgid "Big"
-msgstr ""
+msgstr "Велико"
 
 msgid "Only affect selection"
 msgstr ""
@@ -569,16 +594,16 @@ msgid "Adjust HSV"
 msgstr ""
 
 msgid "Type:"
-msgstr ""
+msgstr "Тип:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Угао:"
 
 msgid "Hue:"
 msgstr ""
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Засићење:"
 
 msgid "Value:"
 msgstr ""
@@ -596,7 +621,7 @@ msgid "Thickness:"
 msgstr ""
 
 msgid "Colors:"
-msgstr ""
+msgstr "Боја:"
 
 msgid "Steps:"
 msgstr ""
@@ -641,7 +666,7 @@ msgid "©2019-present by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
-msgstr ""
+msgstr "Веб сајт"
 
 msgid "GitHub Repo"
 msgstr ""
@@ -795,9 +820,9 @@ msgid "Elliptical Selection\n\n"
 msgstr ""
 
 msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
 msgstr ""
 
 msgid "Select By Color\n\n"
@@ -831,9 +856,9 @@ msgid "Pan\n\n"
 msgstr ""
 
 msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
 msgstr ""
 
 msgid "Pencil\n\n"
@@ -883,7 +908,7 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Правоугаоник"
 
 msgid "Ellipse"
 msgstr ""
@@ -931,6 +956,12 @@ msgstr ""
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr ""
 
+msgid "Use native mouse cursors"
+msgstr ""
+
+msgid "Use cross cursor for the canvas"
+msgstr ""
+
 msgid "Guides"
 msgstr ""
 
@@ -956,7 +987,7 @@ msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "Сви"
 
 msgid "Rectangular grid width:"
 msgstr ""
@@ -1078,6 +1109,21 @@ msgstr ""
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
+msgid "Add Extension"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "Open Folder"
+msgstr ""
+
 msgid "Brush:"
 msgstr ""
 
@@ -1111,7 +1157,8 @@ msgstr ""
 msgid "Fill inside"
 msgstr ""
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Fill Shape"
@@ -1139,7 +1186,7 @@ msgid "Fill with:"
 msgstr ""
 
 msgid "Selected Color"
-msgstr ""
+msgstr "Изабрана боја"
 
 msgid "Pattern"
 msgstr ""
@@ -1160,13 +1207,13 @@ msgid "Darken"
 msgstr ""
 
 msgid "Amount:"
-msgstr ""
+msgstr "Броj:"
 
 msgid "Lighten/Darken amount"
 msgstr ""
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Изаберите за:"
 
 msgid "Left Color"
 msgstr ""
@@ -1758,6 +1805,9 @@ msgid "Move the selected frame to the right."
 msgstr ""
 
 msgid "Frame duration"
+msgstr ""
+
+msgid "Duration"
 msgstr ""
 
 msgid "Tiled In Both Axis"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-01-05 09:32\n"
+"PO-Revision-Date: 2022-02-28 18:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -65,6 +65,9 @@ msgstr "Selezione"
 
 msgid "View"
 msgstr "Vista"
+
+msgid "Window"
+msgstr "Finestra"
 
 msgid "Image"
 msgstr "Immagine"
@@ -182,6 +185,15 @@ msgstr "Opacità Finestra"
 
 msgid "Panel Layout"
 msgstr "Layout Pannello"
+
+msgid "Panels"
+msgstr "Pannelli"
+
+msgid "Layouts"
+msgstr "Livelli"
+
+msgid "Manage Layouts"
+msgstr "Gestione dei livelli"
 
 msgid "Auto"
 msgstr "Auto"
@@ -309,10 +321,18 @@ msgstr "Il percorso o il nome della cartella non sono validi!"
 msgid "Exporting in progress..."
 msgstr "Esportazione in corso..."
 
+msgid "Can't load file '%s'."
+msgstr "Impossibile caricare il file '%s'."
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Impossibile caricare il file '%s'.\n"
 "Codice di errore: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr "Impossibile caricare il file '%s'.\n"
+"Questo non è un file di tavolozza valido."
 
 msgid "Frame"
 msgstr "Frame"
@@ -445,6 +465,12 @@ msgstr "Backup"
 
 msgid "Performance"
 msgstr "Prestazioni"
+
+msgid "Extensions"
+msgstr "Estensioni"
+
+msgid "Cursors"
+msgstr "Puntatori"
 
 msgid "Indicators"
 msgstr "Indicatori"
@@ -800,13 +826,13 @@ msgstr "Selezione ellittica\n\n"
 "%s per il tasto destro del mouse"
 
 msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
 msgstr "Selezione poligonale\n"
-"Doppio clic per collegare l'ultimo punto al punto di partenza\n\n"
-"%s per il tasto sinistro del mouse\n"
-"%s per il pulsante destro del mouse"
+"%s per il pulsante sinistro del mouse\n"
+"%s per il pulsante destro del mouse\n\n"
+"Doppio clic per collegare l'ultimo punto al punto di partenza"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -851,13 +877,13 @@ msgstr "Pan\n\n"
 "%s per il pulsante destro del mouse"
 
 msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
 msgstr "Selettore colore\n"
-"Seleziona un colore da un pixel dello sprite\n\n"
 "%s per il tasto sinistro del mouse\n"
-"%s per il tasto destro del mouse"
+"%s per il tasto destro del mouse\n\n"
+"Seleziona un colore da un pixel dello sprite"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -979,6 +1005,12 @@ msgstr "Mostra l'icona dello strumento destra"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Visualizza un'icona dello strumento destro selezionato accanto al cursore sulla tela"
+
+msgid "Use native mouse cursors"
+msgstr "Usa puntatori nativi del mouse"
+
+msgid "Use cross cursor for the canvas"
+msgstr "Usa il cursore incrociato per la superficie"
 
 msgid "Guides"
 msgstr "Guide"
@@ -1127,6 +1159,21 @@ msgstr "Imposta il limite dei quadri dell'applicazione al secondo. Più basso è
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Se questa opzione viene attivata, quando la finestra dell'applicazione perde il fuoco, viene messa in pausa Questo aiuta a ridurre l'utilizzo della CPU quando è inattivo. L'applicazione viene rimossa quando il mouse entra nella finestra dell'applicazione."
 
+msgid "Add Extension"
+msgstr "Aggiungi estensione"
+
+msgid "Enable"
+msgstr "Attiva"
+
+msgid "Disable"
+msgstr "Disattiva"
+
+msgid "Uninstall"
+msgstr "Disinstalla"
+
+msgid "Open Folder"
+msgstr "Apri Cartella"
+
 msgid "Brush:"
 msgstr "Pennello:"
 
@@ -1160,8 +1207,10 @@ msgstr "Pixel Perfect"
 msgid "Fill inside"
 msgstr "Riempi all'interno"
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Rende le linee lisce rimuovendo i pixel aggiuntivi sui bordi"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Pixel Perfect\n"
+"Rende le linee lisce rimuovendo i pixel aggiuntivi sui bordi"
 
 msgid "Fill Shape"
 msgstr "Riempi Forma"
@@ -1818,6 +1867,9 @@ msgstr "Sposta il riquadro selezionato a destra."
 
 msgid "Frame duration"
 msgstr "Durata del frame"
+
+msgid "Duration"
+msgstr "Durata"
 
 msgid "Tiled In Both Axis"
 msgstr "Piastrellato In Entrambi Gli Assi"
