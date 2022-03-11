@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-03-10 22:49\n"
+"PO-Revision-Date: 2022-03-11 07:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -767,16 +767,16 @@ msgid "Ukrainian"
 msgstr "Ucraineană"
 
 msgid "Danish"
-msgstr ""
+msgstr "Daneză"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Suedeză"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Sârbă (alfabet chirilic)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Neerlandeză"
 
 msgid "Development Team"
 msgstr "Echipa de dezvoltare"
