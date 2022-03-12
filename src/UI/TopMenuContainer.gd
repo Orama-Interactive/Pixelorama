@@ -522,6 +522,12 @@ func set_layout(id: int) -> void:
 		zen_mode = false
 		window_menu.set_item_checked(WindowMenuId.ZEN_MODE, false)
 
+	# Hacky but without 2 idle frames it doesn't work properly. Should be replaced eventually
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	# Call set_tabs_visible to keep tabs visible if there are 2 or more in the same panel
+	ui.tabs_visible = ui.tabs_visible
+
 
 func _toggle_greyscale_view() -> void:
 	Global.greyscale_view = !Global.greyscale_view
