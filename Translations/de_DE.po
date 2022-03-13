@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-03-10 22:49\n"
+"PO-Revision-Date: 2022-03-13 10:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -766,16 +766,16 @@ msgid "Ukrainian"
 msgstr "Ukrainisch"
 
 msgid "Danish"
-msgstr ""
+msgstr "Dänisch"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Schwedisch"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Serbisch (Kyrillisch)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Niederländisch"
 
 msgid "Development Team"
 msgstr "Entwicklerteam"
@@ -840,7 +840,10 @@ msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "Polygonale Auswahl\n\n"
+"%s für die linke Maustaste\n"
+"%s für die rechte Maustaste\n\n"
+"Doppelklick, um den letzten Punkt mit dem Startpunkt zu verbinden"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -888,7 +891,10 @@ msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "Farbauswahl\n\n"
+"%s für die linke Maustaste\n"
+"%s für die rechte Maustaste\n\n"
+"Wählen Sie eine Farbe aus einem Pixel des Sprites"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1420,7 +1426,7 @@ msgid "Below canvas"
 msgstr "Unter dem Canvas"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Wenn Sie möchten, dass eine Ebene Onion Skinning ignoriert, fügen Sie einfach das \"_io\"-Suffix in seinen Namen ein."
 
 msgid "Add a new frame"
 msgstr "Füge einen neuen Frame hinzu"
@@ -1921,29 +1927,29 @@ msgid "Position:"
 msgstr "Position:"
 
 msgid "Tools"
-msgstr ""
+msgstr "Werkzeuge"
 
 msgid "Main Canvas"
-msgstr ""
+msgstr "Haupt-Canvas"
 
 msgid "Second Canvas"
-msgstr ""
+msgstr "Zweiter Canvas"
 
 msgid "Animation Timeline"
-msgstr ""
+msgstr "Animations-Zeitleiste"
 
 msgid "Canvas Preview"
-msgstr ""
+msgstr "Canvas Vorschau"
 
 msgid "Color Pickers"
-msgstr ""
+msgstr "Farbauswähler"
 
 msgid "Global Tool Options"
-msgstr ""
+msgstr "Globale Werkzeugoptionen"
 
 msgid "Left Tool Options"
-msgstr ""
+msgstr "Optionen des linken Werkzeugs"
 
 msgid "Right Tool Options"
-msgstr ""
+msgstr "Optionen des rechten Werkzeugs"
 
