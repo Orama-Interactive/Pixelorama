@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-03-10 22:49\n"
+"PO-Revision-Date: 2022-03-13 05:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -766,16 +766,16 @@ msgid "Ukrainian"
 msgstr "Ukrainsk"
 
 msgid "Danish"
-msgstr ""
+msgstr "Dansk"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Svensk"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Serbisk (kyrillisk)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Nederlandsk"
 
 msgid "Development Team"
 msgstr "Utviklingsteam"
@@ -1920,29 +1920,29 @@ msgid "Position:"
 msgstr "Posisjon:"
 
 msgid "Tools"
-msgstr ""
+msgstr "Verktøy"
 
 msgid "Main Canvas"
-msgstr ""
+msgstr "Hovedlerret"
 
 msgid "Second Canvas"
-msgstr ""
+msgstr "Andre Lerret"
 
 msgid "Animation Timeline"
-msgstr ""
+msgstr "Animasjonstidslinje"
 
 msgid "Canvas Preview"
-msgstr ""
+msgstr "Forhåndsvisning av Lerret"
 
 msgid "Color Pickers"
-msgstr ""
+msgstr "Fargevelgere"
 
 msgid "Global Tool Options"
-msgstr ""
+msgstr "Innstillinger for Alle Verktøy"
 
 msgid "Left Tool Options"
-msgstr ""
+msgstr "Innstillinger for Venstre Verktøy"
 
 msgid "Right Tool Options"
-msgstr ""
+msgstr "Innstillinger for Høyre Verktøy"
 
