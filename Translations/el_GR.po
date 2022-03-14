@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-03-10 22:49\n"
+"PO-Revision-Date: 2022-03-14 18:22\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -767,16 +767,16 @@ msgid "Ukrainian"
 msgstr "Ουκρανικά"
 
 msgid "Danish"
-msgstr ""
+msgstr "Δανικά"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Σουηδικά"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Σερβικά (Κυριλλικά)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Ολλανδικά"
 
 msgid "Development Team"
 msgstr "Ομάδα Ανάπτυξης"
