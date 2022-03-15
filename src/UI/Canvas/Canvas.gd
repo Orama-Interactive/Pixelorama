@@ -109,7 +109,7 @@ func update_texture(layer_i: int, frame_i := -1, project: Project = Global.curre
 
 	if frame_i < project.frames.size() and layer_i < project.layers.size():
 		var current_cel: Cel = project.frames[frame_i].cels[layer_i]
-		current_cel.image_texture.create_from_image(current_cel.image, 0)
+		current_cel.image_texture.set_data(current_cel.image)
 
 		if project == Global.current_project:
 			var container_index = Global.frames_container.get_child_count() - 1 - layer_i
