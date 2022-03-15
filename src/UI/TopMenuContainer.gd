@@ -11,7 +11,7 @@ enum ViewMenuId {
 	SHOW_RULERS,
 	SHOW_GUIDES,
 }
-enum WindowMenuId { WINDOW_OPACITY, PANELS, LAYOUTS, EDIT_MODE, ZEN_MODE, FULLSCREEN_MODE }
+enum WindowMenuId { WINDOW_OPACITY, PANELS, LAYOUTS, ZEN_MODE, FULLSCREEN_MODE }
 enum ImageMenuId {
 	SCALE_IMAGE,
 	CENTRALIZE_IMAGE,
@@ -188,7 +188,6 @@ func _setup_window_menu() -> void:
 		"Window Opacity": 0,
 		"Panels": 0,
 		"Layouts": 0,
-		"Edit Mode": InputMap.get_action_list("edit_mode")[0].get_scancode_with_modifiers(),
 		"Zen Mode": InputMap.get_action_list("zen_mode")[0].get_scancode_with_modifiers(),
 		"Fullscreen Mode":
 		InputMap.get_action_list("toggle_fullscreen")[0].get_scancode_with_modifiers(),
@@ -243,7 +242,6 @@ func _setup_layouts_submenu(item: String) -> void:
 	layouts_submenu.set_name("layouts_submenu")
 	layouts_submenu.hide_on_checkable_item_selection = false
 	populate_layouts_submenu()
-	layouts_submenu.set_item_checked(0, true)
 
 	layouts_submenu.connect("id_pressed", self, "_layouts_submenu_id_pressed")
 	window_menu.add_child(layouts_submenu)
@@ -255,10 +253,12 @@ func _setup_layouts_submenu(item: String) -> void:
 
 func populate_layouts_submenu() -> void:
 	layouts_submenu.clear()  # Does not do anything if it's called for the first time
+	layouts_submenu.add_check_item(
+		"Moveable Panels", 0, InputMap.get_action_list("edit_mode")[0].get_scancode_with_modifiers()
+	)
+	layouts_submenu.add_item("Manage Layouts", 1)
 	for layout in layouts:
 		layouts_submenu.add_radio_check_item(layout[0])
-
-	layouts_submenu.add_item("Manage Layouts")
 
 
 func _setup_image_menu() -> void:
@@ -478,9 +478,6 @@ func window_menu_id_pressed(id: int) -> void:
 		WindowMenuId.WINDOW_OPACITY:
 			window_opacity_dialog.popup_centered()
 			Global.dialog_open(true)
-		WindowMenuId.EDIT_MODE:
-			ui.tabs_visible = !ui.tabs_visible
-			window_menu.set_item_checked(WindowMenuId.EDIT_MODE, ui.tabs_visible)
 		WindowMenuId.ZEN_MODE:
 			_toggle_zen_mode()
 		WindowMenuId.FULLSCREEN_MODE:
@@ -498,11 +495,14 @@ func _panels_submenu_id_pressed(id: int) -> void:
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:
-	if id < layouts.size():
-		set_layout(id)
-	else:
+	if id == 0:
+		ui.tabs_visible = !ui.tabs_visible
+		layouts_submenu.set_item_checked(0, ui.tabs_visible)
+	elif id == 1:
 		Global.control.get_node("Dialogs/ManageLayouts").popup_centered()
 		Global.dialog_open(true)
+	else:
+		set_layout(id - 2)
 
 
 func set_layout(id: int) -> void:
@@ -511,7 +511,8 @@ func set_layout(id: int) -> void:
 	selected_layout = id
 	ui.layout = layouts[id][1].clone()  # Clone is needed to avoid modifying premade layouts
 	for i in layouts.size():
-		layouts_submenu.set_item_checked(i, i == id)
+		var offset: int = i + 2
+		layouts_submenu.set_item_checked(offset, offset == (id + 2))
 
 	for i in ui_elements.size():
 		var is_hidden: bool = ui.is_control_hidden(ui_elements[i])
