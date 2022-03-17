@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-03-13 06:08\n"
+"PO-Revision-Date: 2022-03-17 22:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -192,8 +192,20 @@ msgstr "Paneler"
 msgid "Layouts"
 msgstr "Oppsett"
 
+msgid "Moveable Panels"
+msgstr ""
+
 msgid "Manage Layouts"
 msgstr "Gjør om på oppstett"
+
+msgid "Add"
+msgstr ""
+
+msgid "Add Layout"
+msgstr ""
+
+msgid "Edit Layout"
+msgstr ""
 
 msgid "Auto"
 msgstr "Automatisk"
