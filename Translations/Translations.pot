@@ -181,7 +181,19 @@ msgstr ""
 msgid "Layouts"
 msgstr ""
 
+msgid "Moveable Panels"
+msgstr ""
+
 msgid "Manage Layouts"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Add Layout"
+msgstr ""
+
+msgid "Edit Layout"
 msgstr ""
 
 msgid "Auto"
