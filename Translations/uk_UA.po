@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-03-17 22:21\n"
+"PO-Revision-Date: 2022-03-17 23:02\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -193,19 +193,19 @@ msgid "Layouts"
 msgstr "Розміщення"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Рухомі панелі"
 
 msgid "Manage Layouts"
 msgstr "Керування розміщеннями"
 
 msgid "Add"
-msgstr ""
+msgstr "Додати"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Додати розміщення"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Редагувати розміщення"
 
 msgid "Auto"
 msgstr "Автоматична"
