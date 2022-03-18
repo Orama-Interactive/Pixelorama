@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-03-17 22:22\n"
+"PO-Revision-Date: 2022-03-18 00:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -193,19 +193,19 @@ msgid "Layouts"
 msgstr "Livelli"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Pannelli Movibili"
 
 msgid "Manage Layouts"
 msgstr "Gestione dei livelli"
 
 msgid "Add"
-msgstr ""
+msgstr "Aggiungi"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Aggiungi Layout"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Modifica layout"
 
 msgid "Auto"
 msgstr "Auto"
