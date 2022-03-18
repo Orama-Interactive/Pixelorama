@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-03-18 02:33\n"
+"PO-Revision-Date: 2022-03-18 09:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -193,22 +193,22 @@ msgid "Layouts"
 msgstr "Layouts"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Bewegliche Panels"
 
 msgid "Manage Layouts"
 msgstr "Layouts verwalten"
 
 msgid "Add"
-msgstr ""
+msgstr "Hinzufügen"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Layout hinzufügen"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Layout bearbeiten"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Sind Sie sicher, dass Sie dieses Layout löschen möchten?"
 
 msgid "Auto"
 msgstr "Auto"
