@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-03-18 02:32\n"
+"PO-Revision-Date: 2022-03-18 16:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -199,7 +199,7 @@ msgid "Manage Layouts"
 msgstr "Управление слоями"
 
 msgid "Add"
-msgstr ""
+msgstr "Добавить"
 
 msgid "Add Layout"
 msgstr ""
