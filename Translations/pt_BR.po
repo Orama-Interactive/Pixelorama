@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-03-18 02:33\n"
+"PO-Revision-Date: 2022-03-18 11:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -193,19 +193,19 @@ msgid "Layouts"
 msgstr "Layouts"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Painéis Móveis"
 
 msgid "Manage Layouts"
 msgstr "Gerenciar Layouts"
 
 msgid "Add"
-msgstr ""
+msgstr "Adicionar"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Adicionar Layout"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Editar Layout"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr ""
