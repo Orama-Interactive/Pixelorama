@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-03-17 23:02\n"
+"PO-Revision-Date: 2022-03-18 02:33\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -206,6 +206,9 @@ msgstr "Додати розміщення"
 
 msgid "Edit Layout"
 msgstr "Редагувати розміщення"
+
+msgid "Are you sure you want to delete this layout?"
+msgstr ""
 
 msgid "Auto"
 msgstr "Автоматична"
