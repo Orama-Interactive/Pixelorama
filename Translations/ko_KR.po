@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-03-18 14:01\n"
+"PO-Revision-Date: 2022-03-18 14:12\n"
 
 msgid "OK"
 msgstr "예"
@@ -1959,7 +1959,7 @@ msgid "Color Pickers"
 msgstr "색상 선택기"
 
 msgid "Global Tool Options"
-msgstr ""
+msgstr "전체적 툴 설정"
 
 msgid "Left Tool Options"
 msgstr "왼쪽 툴 설정"
