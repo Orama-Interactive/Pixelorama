@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-03-18 02:33\n"
+"PO-Revision-Date: 2022-03-18 13:51\n"
 
 msgid "OK"
 msgstr "예"
@@ -199,7 +199,7 @@ msgid "Manage Layouts"
 msgstr "배치 관리"
 
 msgid "Add"
-msgstr ""
+msgstr "추가"
 
 msgid "Add Layout"
 msgstr ""
@@ -782,16 +782,16 @@ msgid "Ukrainian"
 msgstr "우크라이나어"
 
 msgid "Danish"
-msgstr ""
+msgstr "덴마크어"
 
 msgid "Swedish"
-msgstr ""
+msgstr "스웨덴어"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "세르비아어 (키릴 문자)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "네덜란드어"
 
 msgid "Development Team"
 msgstr "개발팀"
@@ -1937,7 +1937,7 @@ msgid "Position:"
 msgstr "위치:"
 
 msgid "Tools"
-msgstr ""
+msgstr "도구"
 
 msgid "Main Canvas"
 msgstr ""
