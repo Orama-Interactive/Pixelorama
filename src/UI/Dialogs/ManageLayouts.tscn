@@ -83,6 +83,11 @@ margin_bottom = 50.5
 size_flags_horizontal = 3
 placeholder_text = "Insert name"
 
+[node name="DeleteConfirmation" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+dialog_text = "Are you sure you want to delete this layout?"
+
 [connection signal="about_to_show" from="." to="." method="_on_ManageLayouts_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_ManageLayouts_popup_hide"]
 [connection signal="item_activated" from="VBoxContainer/SavedLayouts" to="." method="_on_SavedLayouts_item_activated"]
@@ -92,3 +97,4 @@ placeholder_text = "Insert name"
 [connection signal="pressed" from="VBoxContainer/ButtonsContainer/EditLayout" to="." method="_on_EditLayout_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonsContainer/DeleteLayout" to="." method="_on_DeleteLayout_pressed"]
 [connection signal="confirmed" from="LayoutSettings" to="." method="_on_LayoutSettings_confirmed"]
+[connection signal="confirmed" from="DeleteConfirmation" to="." method="_on_DeleteConfirmation_confirmed"]

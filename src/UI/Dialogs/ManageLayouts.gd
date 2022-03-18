@@ -8,6 +8,7 @@ onready var edit_layout: Button = find_node("EditLayout")
 onready var delete_layout: Button = find_node("DeleteLayout")
 onready var layout_settings: ConfirmationDialog = $LayoutSettings
 onready var layout_name: LineEdit = $LayoutSettings/LayoutName
+onready var delete_confirmation: ConfirmationDialog = $DeleteConfirmation
 
 
 func _on_ManageLayouts_about_to_show() -> void:
@@ -50,13 +51,7 @@ func _on_EditLayout_pressed() -> void:
 
 
 func _on_DeleteLayout_pressed() -> void:
-	delete_layout_file(layout_list.get_item_text(layout_selected) + ".tres")
-	Global.top_menu_container.layouts.remove(layout_selected)
-	layout_list.remove_item(layout_selected)
-	Global.top_menu_container.populate_layouts_submenu()
-	layout_selected = -1
-	edit_layout.disabled = true
-	delete_layout.disabled = true
+	delete_confirmation.popup_centered()
 
 
 func _on_LayoutSettings_confirmed() -> void:
@@ -88,3 +83,13 @@ func _on_LayoutSettings_confirmed() -> void:
 func delete_layout_file(file_name: String) -> void:
 	var dir := Directory.new()
 	dir.remove("user://layouts/".plus_file(file_name))
+
+
+func _on_DeleteConfirmation_confirmed() -> void:
+	delete_layout_file(layout_list.get_item_text(layout_selected) + ".tres")
+	Global.top_menu_container.layouts.remove(layout_selected)
+	layout_list.remove_item(layout_selected)
+	Global.top_menu_container.populate_layouts_submenu()
+	layout_selected = -1
+	edit_layout.disabled = true
+	delete_layout.disabled = true
