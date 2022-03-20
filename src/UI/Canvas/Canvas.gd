@@ -126,7 +126,7 @@ func update_selected_cels_textures(project: Project = Global.current_project) ->
 		var layer_index: int = cel_index[1]
 		if frame_index < project.frames.size() and layer_index < project.layers.size():
 			var current_cel: Cel = project.frames[frame_index].cels[layer_index]
-			current_cel.image_texture.create_from_image(current_cel.image, 0)
+			current_cel.image_texture.set_data(current_cel.image)
 
 			if project == Global.current_project:
 				var container_index = Global.frames_container.get_child_count() - 1 - layer_index

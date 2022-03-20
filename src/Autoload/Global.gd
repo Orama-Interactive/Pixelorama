@@ -249,6 +249,10 @@ func undo_or_redo(
 
 		canvas.selection.update()
 		if action_name == "Scale":
+			for i in project.frames.size():
+				for j in project.layers.size():
+					var current_cel: Cel = project.frames[i].cels[j]
+					current_cel.image_texture.create_from_image(current_cel.image, 0)
 			canvas.camera_zoom()
 			canvas.grid.update()
 			canvas.pixel_grid.update()
