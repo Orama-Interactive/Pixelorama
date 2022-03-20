@@ -35,6 +35,9 @@ func open(opened_current_palette: Palette) -> void:
 	# Disable ok button until user enters name
 	toggle_ok_button_disability(true)
 
+	# Disable create "From Current Palette" if there's no palette
+	preset_input.set_item_disabled(1, !current_palette)
+
 	# Stop all inputs in the rest of the app
 	Global.dialog_open(true)
 	popup_centered()

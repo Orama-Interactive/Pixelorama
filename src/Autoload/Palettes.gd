@@ -119,6 +119,8 @@ func _create_new_empty_palette(name: String, comment: String, width: int, height
 
 
 func _create_new_palette_from_current_palette(name: String, comment: String) -> void:
+	if !current_palette:
+		return
 	var new_palette: Palette = current_palette.duplicate()
 	new_palette.name = name
 	new_palette.comment = comment
