@@ -11,13 +11,15 @@ onready var scroll_container := ui.find_node("ColorAndToolOptions/ScrollContaine
 onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
 
 
+func _init() -> void:
+	if OS.get_name() == "OSX":
+		_use_osx_shortcuts()
+
+
 func _ready() -> void:
 	randomize()
 	get_tree().set_auto_accept_quit(false)
 	_setup_application_window_size()
-
-	if OS.get_name() == "OSX":
-		_use_osx_shortcuts()
 
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
