@@ -394,7 +394,7 @@ func open_image_as_new_tab(path: String, image: Image) -> void:
 	frame.cels.append(Cel.new(image, 1))
 
 	project.frames.append(frame)
-	set_new_tab(project, path)
+	set_new_imported_tab(project, path)
 
 
 func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert: int) -> void:
@@ -424,7 +424,7 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 
 			project.frames.append(frame)
 
-	set_new_tab(project, path)
+	set_new_imported_tab(project, path)
 
 
 func open_image_as_spritesheet_layer(
@@ -595,7 +595,9 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	project.undo_redo.commit_action()
 
 
-func set_new_tab(project: Project, path: String) -> void:
+func set_new_imported_tab(project: Project, path: String) -> void:
+	var prev_project_empty: bool = Global.current_project.is_empty()
+	var prev_project_pos: int = Global.current_project_index
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
 
@@ -614,6 +616,9 @@ func set_new_tab(project: Project, path: String) -> void:
 	project.file_name = file_name
 	Export.directory_path = directory_path
 	Export.file_name = file_name
+
+	if prev_project_empty:
+		Global.tabs.delete_tab(prev_project_pos)
 
 
 func update_autosave() -> void:
