@@ -27,8 +27,8 @@ func _on_SavedLayouts_item_activated(index: int) -> void:
 
 func _on_SavedLayouts_item_selected(index: int) -> void:
 	layout_selected = index
-	edit_layout.disabled = index < 2
-	delete_layout.disabled = index < 2
+	edit_layout.disabled = index < Global.top_menu_container.default_layout_size
+	delete_layout.disabled = index < Global.top_menu_container.default_layout_size
 
 
 func _on_SavedLayouts_nothing_selected() -> void:
@@ -70,14 +70,14 @@ func _on_LayoutSettings_confirmed() -> void:
 			Global.top_menu_container.layouts[layout_selected][1] = layout
 			layout_list.set_item_text(layout_selected, layout_name.text)
 			Global.top_menu_container.layouts_submenu.set_item_text(
-				layout_selected + 2, layout_name.text
+				layout_selected + 1, layout_name.text
 			)
 		else:
 			Global.top_menu_container.layouts.append([layout_name.text, layout])
 			layout_list.add_item(layout_name.text)
 			Global.top_menu_container.populate_layouts_submenu()
 			var n: int = Global.top_menu_container.layouts_submenu.get_item_count()
-			Global.top_menu_container.layouts_submenu.set_item_checked(n - 2, true)
+			Global.top_menu_container.layouts_submenu.set_item_checked(n - 1, true)
 
 
 func delete_layout_file(file_name: String) -> void:

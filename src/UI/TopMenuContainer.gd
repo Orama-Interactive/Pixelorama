@@ -44,6 +44,7 @@ var layouts := [
 	["Default", preload("res://assets/layouts/default.tres")],
 	["Tallscreen", preload("res://assets/layouts/tallscreen.tres")],
 ]
+var default_layout_size := layouts.size()
 var selected_layout := 0
 var zen_mode := false
 
@@ -217,10 +218,13 @@ func _setup_window_menu() -> void:
 func _setup_panels_submenu(item: String) -> void:
 	panels_submenu.set_name("panels_submenu")
 	panels_submenu.hide_on_checkable_item_selection = false
+	panels_submenu.add_check_item(
+		"Moveable Panels", 0, InputMap.get_action_list("edit_mode")[0].get_scancode_with_modifiers()
+	)
 	for element in ui_elements:
 		panels_submenu.add_check_item(element.name)
 		var is_hidden: bool = ui.is_control_hidden(element)
-		panels_submenu.set_item_checked(ui_elements.find(element), !is_hidden)
+		panels_submenu.set_item_checked(ui_elements.find(element) + 1, !is_hidden)
 
 	panels_submenu.connect("id_pressed", self, "_panels_submenu_id_pressed")
 	window_menu.add_child(panels_submenu)
@@ -253,10 +257,7 @@ func _setup_layouts_submenu(item: String) -> void:
 
 func populate_layouts_submenu() -> void:
 	layouts_submenu.clear()  # Does not do anything if it's called for the first time
-	layouts_submenu.add_check_item(
-		"Moveable Panels", 0, InputMap.get_action_list("edit_mode")[0].get_scancode_with_modifiers()
-	)
-	layouts_submenu.add_item("Manage Layouts", 1)
+	layouts_submenu.add_item("Manage Layouts", 0)
 	for layout in layouts:
 		layouts_submenu.add_radio_check_item(layout[0])
 
@@ -487,22 +488,23 @@ func window_menu_id_pressed(id: int) -> void:
 
 
 func _panels_submenu_id_pressed(id: int) -> void:
-	if zen_mode:
+	if id == 0:
+		ui.tabs_visible = !ui.tabs_visible
+		panels_submenu.set_item_checked(0, ui.tabs_visible)
+	if zen_mode or id == 0:
 		return
+
 	var element_visible = panels_submenu.is_item_checked(id)
-	ui.set_control_hidden(ui_elements[id], element_visible)
+	ui.set_control_hidden(ui_elements[id - 1], element_visible)
 	panels_submenu.set_item_checked(id, !element_visible)
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:
 	if id == 0:
-		ui.tabs_visible = !ui.tabs_visible
-		layouts_submenu.set_item_checked(0, ui.tabs_visible)
-	elif id == 1:
 		Global.control.get_node("Dialogs/ManageLayouts").popup_centered()
 		Global.dialog_open(true)
 	else:
-		set_layout(id - 2)
+		set_layout(id - 1)
 
 
 func set_layout(id: int) -> void:
@@ -511,12 +513,12 @@ func set_layout(id: int) -> void:
 	selected_layout = id
 	ui.layout = layouts[id][1].clone()  # Clone is needed to avoid modifying premade layouts
 	for i in layouts.size():
-		var offset: int = i + 2
-		layouts_submenu.set_item_checked(offset, offset == (id + 2))
+		var offset: int = i + 1
+		layouts_submenu.set_item_checked(offset, offset == (id + 1))
 
 	for i in ui_elements.size():
 		var is_hidden: bool = ui.is_control_hidden(ui_elements[i])
-		panels_submenu.set_item_checked(i, !is_hidden)
+		panels_submenu.set_item_checked(i + 1, !is_hidden)
 
 	if zen_mode:  # Turn zen mode off
 		Global.control.find_node("TabsContainer").visible = true
@@ -587,7 +589,7 @@ func _toggle_zen_mode() -> void:
 	for i in ui_elements.size():
 		if ui_elements[i].name == "Main Canvas":
 			continue
-		if !panels_submenu.is_item_checked(i):
+		if !panels_submenu.is_item_checked(i + 1):
 			continue
 		ui.set_control_hidden(ui_elements[i], !zen_mode)
 	Global.control.find_node("TabsContainer").visible = zen_mode
