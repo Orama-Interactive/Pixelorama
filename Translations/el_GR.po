@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-03-18 02:33\n"
+"PO-Revision-Date: 2022-03-21 16:17\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -193,22 +193,22 @@ msgid "Layouts"
 msgstr "Διατάξεις"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Κινητά πλαίσια"
 
 msgid "Manage Layouts"
 msgstr "Διαχείριση διατάξεων"
 
 msgid "Add"
-msgstr ""
+msgstr "Προσθήκη"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Προσθήκη διάταξης"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Επεξεργασία διάταξης"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν τη διάταξη;"
 
 msgid "Auto"
 msgstr "Αυτόματο"
