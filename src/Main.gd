@@ -3,7 +3,7 @@ extends Control
 var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
-var cursor_image = preload("res://assets/graphics/cursor.png")
+var cursor_image: Texture = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI/DockableContainer
 onready var canvas_preview_container := ui.find_node("CanvasPreviewContainer")
@@ -19,8 +19,6 @@ func _ready() -> void:
 	if OS.get_name() == "OSX":
 		_use_osx_shortcuts()
 
-	if !Global.native_cursors:
-		Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
 	Global.current_project.layers[0].name = tr("Layer") + " 0"
@@ -104,17 +102,18 @@ func _input(event: InputEvent) -> void:
 
 
 func _setup_application_window_size() -> void:
-	if OS.get_name() == "HTML5":
-		return
-	# Set a minimum window size to prevent UI elements from collapsing on each other.
-	OS.min_window_size = Vector2(1024, 576)
-
 	get_tree().set_screen_stretch(
 		SceneTree.STRETCH_MODE_DISABLED,
 		SceneTree.STRETCH_ASPECT_IGNORE,
 		Vector2(1024, 576),
 		Global.shrink
 	)
+	set_custom_cursor()
+
+	if OS.get_name() == "HTML5":
+		return
+	# Set a minimum window size to prevent UI elements from collapsing on each other.
+	OS.min_window_size = Vector2(1024, 576)
 
 	# Restore the window position/size if values are present in the configuration cache
 	if Global.config_cache.has_section_key("window", "screen"):
@@ -127,6 +126,24 @@ func _setup_application_window_size() -> void:
 			OS.window_position = Global.config_cache.get_value("window", "position")
 		if Global.config_cache.has_section_key("window", "size"):
 			OS.window_size = Global.config_cache.get_value("window", "size")
+
+
+func set_custom_cursor() -> void:
+	if Global.native_cursors:
+		return
+
+	if Global.shrink == 1.0:
+		Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
+	else:
+		var cursor_data := cursor_image.get_data()
+		cursor_data.resize(
+			cursor_data.get_width() * Global.shrink, cursor_data.get_height() * Global.shrink, 0
+		)
+		var new_cursor_tex := ImageTexture.new()
+		new_cursor_tex.create_from_image(cursor_data, 0)
+		Input.set_custom_mouse_cursor(
+			new_cursor_tex, Input.CURSOR_CROSS, Vector2(15, 15) * Global.shrink
+		)
 
 
 func _show_splash_screen() -> void:
