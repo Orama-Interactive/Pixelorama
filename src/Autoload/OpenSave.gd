@@ -376,10 +376,9 @@ func save_pxo_file(
 		# Set last opened project path and save
 		Global.config_cache.set_value("preferences", "last_project_path", path)
 		Global.config_cache.save("user://cache.ini")
-		Export.file_name = path.get_file().trim_suffix(".pxo")
-		Export.directory_path = path.get_base_dir()
-		Export.was_exported = false
-		project.was_exported = false
+		if !project.was_exported:
+			Export.file_name = path.get_file().trim_suffix(".pxo")
+			Export.directory_path = path.get_base_dir()
 		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
 
 	save_project_to_recent_list(path)

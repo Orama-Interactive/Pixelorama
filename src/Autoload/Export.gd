@@ -176,11 +176,11 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 		# Check if the file already exists
 		var file_check: File = File.new()
 		if file_check.file_exists(export_path):
-			# Ask user if he want's to overwrite the file
+			# Ask user if they want to overwrite the file
 			if not was_exported or (was_exported and not ignore_overwrites):
 				# Overwrite existing file?
 				export_dialog.open_file_exists_alert_popup(file_exists_alert % export_path)
-				# Stops the function until the user decides if he want's to overwrite
+				# Stops the function until the user decides if they want to overwrite
 				yield(export_dialog, "resume_export_function")
 				if stop_export:
 					# User decided to stop export
