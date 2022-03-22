@@ -56,7 +56,7 @@ void fragment() {
 
 	vec3 output;
 	if(affect_selection && has_selection) {
-		output = mix(original_color.rgb, stdPrime, selection_color.a);
+		output = mix(original_color.rgb, stdPrime, selection_color.r);
 	} else {
 		output = stdPrime;
 	}

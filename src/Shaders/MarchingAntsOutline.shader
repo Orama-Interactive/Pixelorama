@@ -21,7 +21,7 @@ bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
 	vec2 xy1 = uv + texture_pixel_size * vec2(x1, y1);
 	vec2 xy2 = uv + texture_pixel_size * vec2(x2, y2);
 	
-	if (xy1 != clamp(xy1, vec2(0.0), vec2(1.0)) || texture(texture, xy1).a == 0.0 || xy2 != clamp(xy2, vec2(0.0), vec2(1.0)) || texture(texture, xy2).a == 0.0) {
+	if (xy1 != clamp(xy1, vec2(0.0), vec2(1.0)) || texture(texture, xy1).r == 0.0 || xy2 != clamp(xy2, vec2(0.0), vec2(1.0)) || texture(texture, xy2).r == 0.0) {
 		return true;
 	}
 	
@@ -32,7 +32,7 @@ void fragment() {
 	vec2 uv = UV;
 	COLOR = texture(TEXTURE, uv);
 	
-	if ((COLOR.a > 0.0) == true && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, TEXTURE)) {
+	if ((COLOR.r > 0.0) == true && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, TEXTURE)) {
 		vec4 final_color = first_color;
 		// Generate diagonal stripes
 		if(animated)

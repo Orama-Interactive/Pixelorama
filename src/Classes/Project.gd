@@ -765,14 +765,14 @@ func bitmap_to_image(bitmap: BitMap, square := true) -> Image:
 	var height := bitmap.get_size().y
 	if square:
 		var square_size = max(width, height)
-		image.create(square_size, square_size, false, Image.FORMAT_LA8)
+		image.create(square_size, square_size, false, Image.FORMAT_L8)
 	else:
-		image.create(width, height, false, Image.FORMAT_LA8)
+		image.create(width, height, false, Image.FORMAT_L8)
 	image.lock()
 	for x in width:
 		for y in height:
 			var pos := Vector2(x, y)
-			var color = Color(1, 1, 1, 1) if bitmap.get_bit(pos) else Color(0, 0, 0, 0)
+			var color = Color(1, 1, 1) if bitmap.get_bit(pos) else Color(0, 0, 0)
 			image.set_pixelv(pos, color)
 	image.unlock()
 	return image

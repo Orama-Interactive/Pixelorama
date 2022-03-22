@@ -26,7 +26,7 @@ void fragment() {
 
 	vec4 output;
 	if(affect_selection && has_selection)
-		output = mix(original_color.rgba, col, selection_color.a);
+		output = mix(original_color.rgba, col, selection_color.r);
 	else
 		output = col;
 
