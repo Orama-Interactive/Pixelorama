@@ -33,5 +33,5 @@ void fragment() { // applies on each pixel seperately
 			col = new_color;
 
 	// Mix selects original color if there is selection or col if there is none
-	COLOR = mix(original_color, col, selection_color.r);
+	COLOR = mix(original_color, col, selection_color.a);
 }

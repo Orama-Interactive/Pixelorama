@@ -63,7 +63,7 @@ void fragment() {
 	col = hsb2rgb(hsb);
 	vec3 output;
 	if(affect_selection && has_selection)
-		output = mix(original_color.rgb, col, selection_color.r);
+		output = mix(original_color.rgb, col, selection_color.a);
 	else
 		output = col;
 	COLOR = vec4(output.rgb, original_color.a);
