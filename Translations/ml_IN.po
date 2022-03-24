@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malayalam\n"
 "Language: ml_IN\n"
-"PO-Revision-Date: 2022-03-18 02:33\n"
+"PO-Revision-Date: 2022-03-24 18:08\n"
 
 msgid "OK"
 msgstr ""
@@ -165,7 +165,7 @@ msgstr ""
 msgid "Invert"
 msgstr ""
 
-msgid "Flip"
+msgid "Mirror Image"
 msgstr ""
 
 msgid "Flip Horizontal"
