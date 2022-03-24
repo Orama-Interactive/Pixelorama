@@ -268,7 +268,7 @@ func _setup_image_menu() -> void:
 		"Centralize Image": 0,
 		"Crop Image": 0,
 		"Resize Canvas": 0,
-		"Flip": 0,
+		"Mirror Image": 0,
 		"Rotate Image": 0,
 		"Invert Colors": 0,
 		"Desaturation": 0,
