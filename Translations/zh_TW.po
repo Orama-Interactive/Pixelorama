@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2022-03-24 18:08\n"
+"PO-Revision-Date: 2022-03-25 00:03\n"
 
 msgid "OK"
 msgstr "確定"
@@ -101,6 +101,9 @@ msgstr "匯入"
 
 msgid "Export"
 msgstr "輸出"
+
+msgid "Overwrite"
+msgstr ""
 
 msgid "Export..."
 msgstr "輸出..."
