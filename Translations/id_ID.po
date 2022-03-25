@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-24 18:08\n"
+"PO-Revision-Date: 2022-03-25 00:03\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -101,6 +101,9 @@ msgstr "Impor"
 
 msgid "Export"
 msgstr "Ekspor"
+
+msgid "Overwrite"
+msgstr ""
 
 msgid "Export..."
 msgstr "Ekspor..."
