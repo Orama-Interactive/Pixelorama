@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-03-25 01:10\n"
+"PO-Revision-Date: 2022-03-25 02:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,7 +169,7 @@ msgid "Invert"
 msgstr "Inverti"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Immagine A Specchio"
 
 msgid "Flip Horizontal"
 msgstr "Rifletti orizzontalmente"
