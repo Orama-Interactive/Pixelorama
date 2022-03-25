@@ -43,6 +43,7 @@ var directory_path := ""
 var file_name := "untitled"
 var file_format: int = Export.FileFormat.PNG
 var was_exported := false
+var export_overwrite := false
 
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
 var layer_button_node = preload("res://src/UI/Timeline/LayerButton.tscn")
@@ -246,9 +247,14 @@ func change_project() -> void:
 	if !was_exported:
 		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 	else:
-		Global.top_menu_container.file_menu.set_item_text(
-			6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format))
-		)
+		if export_overwrite:
+			Global.top_menu_container.file_menu.set_item_text(
+				6, tr("Overwrite") + " %s" % (file_name + Export.file_format_string(file_format))
+			)
+		else:
+			Global.top_menu_container.file_menu.set_item_text(
+				6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format))
+			)
 
 	for j in Global.TileMode.values():
 		Global.top_menu_container.tile_mode_submenu.set_item_checked(j, j == tile_mode)

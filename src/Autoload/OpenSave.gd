@@ -598,8 +598,6 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 func set_new_imported_tab(project: Project, path: String) -> void:
 	var prev_project_empty: bool = Global.current_project.is_empty()
 	var prev_project_pos: int = Global.current_project_index
-	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
 
 	Global.window_title = (
 		path.get_file()
@@ -614,8 +612,15 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 	var directory_path := path.get_basename().replace(file_name, "")
 	project.directory_path = directory_path
 	project.file_name = file_name
+	project.was_exported = true
+	if path.get_extension().to_lower() == "png":
+		project.export_overwrite = true
 	Export.directory_path = directory_path
 	Export.file_name = file_name
+	Export.was_exported = true
+
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
 
 	if prev_project_empty:
 		Global.tabs.delete_tab(prev_project_pos)

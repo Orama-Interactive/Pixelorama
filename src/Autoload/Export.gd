@@ -220,9 +220,14 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 	# Store settings for quick export and when the dialog is opened again
 	was_exported = true
 	Global.current_project.was_exported = true
-	Global.top_menu_container.file_menu.set_item_text(
-		6, tr("Export") + " %s" % (file_name + file_format_string(file_format))
-	)
+	if Global.current_project.export_overwrite:
+		Global.top_menu_container.file_menu.set_item_text(
+			6, tr("Overwrite") + " %s" % (file_name + Export.file_format_string(file_format))
+		)
+	else:
+		Global.top_menu_container.file_menu.set_item_text(
+			6, tr("Export") + " %s" % (file_name + file_format_string(file_format))
+		)
 
 	# Only show when not exporting gif - gif export finishes in thread
 	if not (current_tab == ExportTab.ANIMATION and animation_type == AnimationType.ANIMATED):

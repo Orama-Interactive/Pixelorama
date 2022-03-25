@@ -314,6 +314,7 @@ func _on_Interpolation_item_selected(id: int) -> void:
 
 
 func _on_ExportDialog_confirmed() -> void:
+	Global.current_project.export_overwrite = false
 	if Export.export_processed_images(false, self):
 		hide()
 

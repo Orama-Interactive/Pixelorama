@@ -91,6 +91,9 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
+msgid "Overwrite"
+msgstr ""
+
 msgid "Export..."
 msgstr ""
 
