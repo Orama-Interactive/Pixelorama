@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-03-24 18:08\n"
+"PO-Revision-Date: 2022-03-25 00:03\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -101,6 +101,9 @@ msgstr "İçe aktar"
 
 msgid "Export"
 msgstr "Dışa aktar"
+
+msgid "Overwrite"
+msgstr ""
 
 msgid "Export..."
 msgstr "Dışa aktar..."
