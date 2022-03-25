@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-03-25 00:03\n"
+"PO-Revision-Date: 2022-03-25 10:13\n"
 
 msgid "OK"
 msgstr "예"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "내보내기"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "덮어쓰기"
 
 msgid "Export..."
 msgstr "내보내기..."
@@ -169,7 +169,7 @@ msgid "Invert"
 msgstr "반전"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "미러 이미지"
 
 msgid "Flip Horizontal"
 msgstr "좌우 대칭"
