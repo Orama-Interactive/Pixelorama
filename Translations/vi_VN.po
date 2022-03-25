@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Vietnamese\n"
 "Language: vi_VN\n"
-"PO-Revision-Date: 2022-03-24 18:08\n"
+"PO-Revision-Date: 2022-03-25 00:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -100,6 +100,9 @@ msgid "Import"
 msgstr ""
 
 msgid "Export"
+msgstr ""
+
+msgid "Overwrite"
 msgstr ""
 
 msgid "Export..."
