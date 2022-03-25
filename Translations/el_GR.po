@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-03-24 18:08\n"
+"PO-Revision-Date: 2022-03-25 00:03\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -102,6 +102,9 @@ msgstr "Εισαγωγή"
 msgid "Export"
 msgstr "Εξαγωγή"
 
+msgid "Overwrite"
+msgstr ""
+
 msgid "Export..."
 msgstr "Εξαγωγή..."
 
@@ -166,7 +169,7 @@ msgid "Invert"
 msgstr "Αντιστροφή"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Αναστροφή Εικόνας"
 
 msgid "Flip Horizontal"
 msgstr "Οριζόντια αναστροφή"
