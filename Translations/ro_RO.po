@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-03-25 00:03\n"
+"PO-Revision-Date: 2022-03-25 06:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Exportare"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Suprascriere"
 
 msgid "Export..."
 msgstr "Exportare..."
@@ -169,7 +169,7 @@ msgid "Invert"
 msgstr "Inversare"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Oglindire imagine"
 
 msgid "Flip Horizontal"
 msgstr "Răsturnare orizontală"
@@ -211,7 +211,7 @@ msgid "Edit Layout"
 msgstr "Editare dispunere"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Sigur vrei să ștergi această dispunere?"
 
 msgid "Auto"
 msgstr "Auto"
