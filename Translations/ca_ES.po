@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-03-24 18:08\n"
+"PO-Revision-Date: 2022-03-25 00:03\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -101,6 +101,9 @@ msgstr "Importar"
 
 msgid "Export"
 msgstr "Exportar"
+
+msgid "Overwrite"
+msgstr ""
 
 msgid "Export..."
 msgstr "Exportar..."
