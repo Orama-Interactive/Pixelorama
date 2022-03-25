@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-03-25 00:03\n"
+"PO-Revision-Date: 2022-03-25 14:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Экспорт"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Перезаписать"
 
 msgid "Export..."
 msgstr "Экспортировать..."
