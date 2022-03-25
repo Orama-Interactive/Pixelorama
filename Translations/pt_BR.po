@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-03-24 21:11\n"
+"PO-Revision-Date: 2022-03-25 00:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -101,6 +101,9 @@ msgstr "Importar"
 
 msgid "Export"
 msgstr "Exportar"
+
+msgid "Overwrite"
+msgstr ""
 
 msgid "Export..."
 msgstr "Exportar..."
