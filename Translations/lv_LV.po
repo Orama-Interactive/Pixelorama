@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2022-03-24 18:08\n"
+"PO-Revision-Date: 2022-03-25 00:03\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -101,6 +101,9 @@ msgstr ""
 
 msgid "Export"
 msgstr "Eksportēt"
+
+msgid "Overwrite"
+msgstr ""
 
 msgid "Export..."
 msgstr "Eksportēt..."
