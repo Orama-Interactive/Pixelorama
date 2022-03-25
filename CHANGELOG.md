@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-# [v0.10] - Unreleased
+## [v0.10] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Martin Novák ([@novhack](https://github.com/novhack)), Lili Zoey ([@sayaks](https://github.com/sayaks))
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Martin Novák ([@novhack](https://github.com/novhack)), Lili Zoey ([@sayaks](https://github.com/sayaks)), [@ArthyChaux](https://github.com/ArthyChaux)
 
 ### Added
 - A new Window menu has been added that has the new UI system options, as well as Zen mode and Fullscreen mode that were previously under the View menu.
@@ -23,8 +23,14 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Martin Novák (
 - The secondary canvas is hidden from view by default, but it can become visible by going to the Window > Panels.
 - The mirroring and pixel perfect options are now global tool options and affect both left and right tools.
 - Various timeline improvements, like deleting and cloning multiple selected frames and when creating new frames, tags that are in front of them are being pushed. If the currently selected frames are inside a tag, creating new frames makes the tag bigger. [#648](https://github.com/Orama-Interactive/Pixelorama/pull/648)
+- The custom mouse cursor now scales with the UI. [#642](https://github.com/Orama-Interactive/Pixelorama/issues/642)
+- Importing an image will replace the previous project, if that project is empty.
+- Clicking on a layer toggle button (lock, visible & cel linking) now selects that layer.
+- Resize Canvas will always display the current size of the project.
+- Imported images can now be immediately exported, and for imported png images "Overwrite" is being displayed instead of "Export", until the user uses "Export as...".
 - The toolbar and the animation timeline now have a scrollbar.
 - You can now move guides with the pan tool. [#647](https://github.com/Orama-Interactive/Pixelorama/pull/647)
+- "Flip" has been renamed to "Mirror Image".
 - The documentation keyboard shortcut has been changed from F12 to F1.
 
 ### Fixed
@@ -32,8 +38,12 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Martin Novák (
 - The "same color pixels" mode of the bucket tool has become a lot faster because it now uses a shader. [#649](https://github.com/Orama-Interactive/Pixelorama/pull/649) - which was based on [#613](https://github.com/Orama-Interactive/Pixelorama/pull/613)
 - Fixed crash when importing non-palette .tres files.
 - Deferred mode for the color pickers of gradients has been enabled, so that the gradient preview color only changes on mouse release. Addressed a part of [#645](https://github.com/Orama-Interactive/Pixelorama/issues/645).
+- "From Current Palette" preset option is now disabled when creating a new palette, if there is no current palette, which fixes [#659](https://github.com/Orama-Interactive/Pixelorama/issues/659)
+- macOS shortcuts have been fixed, only Command is needed again instead of Command + Control.
 - Fixed a bug where the selection got stuck to the canvas boundaries when they were 1px away from them.
+- The export status of a project no longer resets when saving it as a pxo.
 - Fixed a rare issue where the splash screen never appears and the program is unresponsive.
+- Canvas texture updating has been slightly optimized. [#661](https://github.com/Orama-Interactive/Pixelorama/pull/661)
 
 ### Removed
 - The Panel Layout menu option with Widescreen and Tallscreen panel layouts have been removed in favor of the new UI system.
