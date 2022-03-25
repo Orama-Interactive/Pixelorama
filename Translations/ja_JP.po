@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-03-25 00:03\n"
+"PO-Revision-Date: 2022-03-25 05:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "エクスポート"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "上書き"
 
 msgid "Export..."
 msgstr "エクスポート..."
