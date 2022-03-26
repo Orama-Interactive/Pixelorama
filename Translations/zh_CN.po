@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-03-25 00:03\n"
+"PO-Revision-Date: 2022-03-26 09:30\n"
 
 msgid "OK"
 msgstr "确定"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "导出"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "覆盖"
 
 msgid "Export..."
 msgstr "导出..."
@@ -169,7 +169,7 @@ msgid "Invert"
 msgstr "反向"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "镜像图像"
 
 msgid "Flip Horizontal"
 msgstr "水平翻转"
