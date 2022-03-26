@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-03-25 00:03\n"
+"PO-Revision-Date: 2022-03-26 10:48\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Експортувати"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Перезапис"
 
 msgid "Export..."
 msgstr "Експортувати..."
@@ -169,7 +169,7 @@ msgid "Invert"
 msgstr "Інвертувати"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Віддзеркалити зображення"
 
 msgid "Flip Horizontal"
 msgstr "Віддзеркалити по горизонталі"
