@@ -12,7 +12,7 @@ const MedianCutQuantization = preload("res://addons/gdgifexporter/quantization/m
 
 var current_tab: int = ExportTab.FRAME
 # Frame options
-var frame_number := 0
+var frame_number := 1
 # All frames and their layers processed/blended into images
 var processed_images = []  # Image[]
 
