@@ -6,9 +6,9 @@ var is_quitting_on_save := false
 var cursor_image: Texture = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI/DockableContainer
-onready var canvas_preview_container := ui.find_node("CanvasPreviewContainer")
 onready var scroll_container := ui.find_node("ColorAndToolOptions/ScrollContainer")
 onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
+onready var quit_and_save_dialog: ConfirmationDialog = find_node("QuitAndSaveDialog")
 
 
 func _init() -> void:
@@ -28,8 +28,8 @@ func _ready() -> void:
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
 	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
 
-	Global.quit_and_save_dialog.add_button("Save & Exit", false, "Save")
-	Global.quit_and_save_dialog.get_ok().text = "Exit without saving"
+	quit_and_save_dialog.add_button("Save & Exit", false, "Save")
+	quit_and_save_dialog.get_ok().text = "Exit without saving"
 
 	Global.open_sprites_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
@@ -317,7 +317,7 @@ func show_quit_dialog() -> void:
 			else:
 				_on_QuitDialog_confirmed()
 		else:
-			Global.quit_and_save_dialog.call_deferred("popup_centered")
+			quit_and_save_dialog.call_deferred("popup_centered")
 
 	Global.dialog_open(true)
 

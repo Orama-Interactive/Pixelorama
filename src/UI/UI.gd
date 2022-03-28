@@ -1,9 +1,8 @@
 extends Panel
 
-onready var main_canvas_container = Global.main_canvas_container
+onready var main_canvas_container: Container = find_node("Main Canvas")
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	update_transparent_shader()
 

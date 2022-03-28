@@ -1,5 +1,7 @@
 extends Node
 
+signal project_changed
+
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
 enum TileMode { NONE, BOTH, X_AXIS, Y_AXIS }
@@ -99,7 +101,7 @@ var onion_skinning_blue_red := false
 var palettes := {}
 
 # Nodes
-var notification_label_node = preload("res://src/UI/NotificationLabel.tscn")
+var notification_label_node: PackedScene = preload("res://src/UI/NotificationLabel.tscn")
 
 onready var root: Node = get_tree().get_root()
 onready var control: Node = root.get_node("Control")
@@ -110,7 +112,6 @@ onready var canvas: Canvas = control.find_node("Canvas")
 onready var tabs: Tabs = control.find_node("Tabs")
 onready var main_viewport: ViewportContainer = control.find_node("ViewportContainer")
 onready var second_viewport: ViewportContainer = control.find_node("Second Canvas")
-onready var main_canvas_container: Container = control.find_node("Main Canvas")
 onready var canvas_preview_container: Container = control.find_node("Canvas Preview")
 onready var small_preview_viewport: ViewportContainer = canvas_preview_container.find_node(
 	"PreviewViewportContainer"
@@ -124,9 +125,6 @@ onready var vertical_ruler: BaseButton = control.find_node("VerticalRuler")
 onready var transparent_checker: ColorRect = control.find_node("TransparentChecker")
 onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider")
 
-onready var tool_panel: ScrollContainer = control.find_node("Tools")
-onready var left_tool_options_scroll: ScrollContainer = control.find_node("Left Tool Options")
-onready var right_tool_options_scroll: ScrollContainer = control.find_node("Right Tool Options")
 onready var brushes_popup: Popup = control.find_node("BrushesPopup")
 onready var patterns_popup: Popup = control.find_node("PatternsPopup")
 onready var palette_panel: PalettePanel = control.find_node("Palettes")
@@ -163,7 +161,6 @@ onready var save_sprites_html5_dialog: ConfirmationDialog = control.find_node("S
 onready var export_dialog: AcceptDialog = control.find_node("ExportDialog")
 onready var preferences_dialog: AcceptDialog = control.find_node("PreferencesDialog")
 onready var error_dialog: AcceptDialog = control.find_node("ErrorDialog")
-onready var quit_and_save_dialog: ConfirmationDialog = control.find_node("QuitAndSaveDialog")
 
 onready var current_version: String = ProjectSettings.get_setting("application/config/Version")
 
@@ -200,8 +197,7 @@ func notification_label(text: String) -> void:
 	var notification: Label = notification_label_node.instance()
 	notification.text = tr(text)
 	notification.rect_position = Vector2(70, animation_timeline.rect_position.y)
-	notification.theme = control.theme
-	get_tree().get_root().add_child(notification)
+	control.add_child(notification)
 
 
 func general_undo(project: Project = current_project) -> void:
@@ -284,7 +280,9 @@ func _project_changed(value: int) -> void:
 	canvas.selection.transform_content_confirm()
 	current_project_index = value
 	current_project = projects[value]
-	current_project.change_project()
+	connect("project_changed", current_project, "change_project")
+	emit_signal("project_changed")
+	disconnect("project_changed", current_project, "change_project")
 
 
 func dialog_open(open: bool) -> void:

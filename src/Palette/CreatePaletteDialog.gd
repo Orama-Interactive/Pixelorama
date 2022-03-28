@@ -1,6 +1,6 @@
 extends ConfirmationDialog
 
-# Emitted when user confirms his changes
+# Emitted when user confirms their changes
 signal saved(preset, name, comment, width, height, add_alpha_colors, colors_from)
 
 # Reference to current palette stored when dialog opens
