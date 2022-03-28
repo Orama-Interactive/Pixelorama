@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-03-25 00:03\n"
+"PO-Revision-Date: 2022-03-28 16:36\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Görüntü"
 
 msgid "Window"
-msgstr ""
+msgstr "Pencere"
 
 msgid "Image"
 msgstr "Resim"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Dışa aktar"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Üzerine Yaz"
 
 msgid "Export..."
 msgstr "Dışa aktar..."
@@ -169,7 +169,7 @@ msgid "Invert"
 msgstr "Ters Çevir"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Ayna Görüntüsü"
 
 msgid "Flip Horizontal"
 msgstr "Yatay Döndür"
@@ -190,13 +190,13 @@ msgid "Panel Layout"
 msgstr "Panel Düzeni"
 
 msgid "Panels"
-msgstr ""
+msgstr "Paneller"
 
 msgid "Layouts"
-msgstr ""
+msgstr "Düzenler"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Taşınır Paneller"
 
 msgid "Manage Layouts"
 msgstr ""
