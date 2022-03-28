@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-03-28 16:36\n"
+"PO-Revision-Date: 2022-03-28 16:45\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -199,19 +199,19 @@ msgid "Moveable Panels"
 msgstr "Taşınır Paneller"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Panelleri Yönet"
 
 msgid "Add"
-msgstr ""
+msgstr "Ekle"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Düzen Ekle"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Düzeni Düzenle"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Bu düzeni silmek istediğinize emin misiniz?"
 
 msgid "Auto"
 msgstr "Otomatik"
@@ -340,7 +340,7 @@ msgid "Exporting in progress..."
 msgstr "Dışa aktarma işlemi devam ediyor..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "'%s' dosyası yüklenemedi."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -484,10 +484,10 @@ msgid "Performance"
 msgstr "Performans"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Eklentiler"
 
 msgid "Cursors"
-msgstr ""
+msgstr "İmleçler"
 
 msgid "Indicators"
 msgstr "Göstergeler"
