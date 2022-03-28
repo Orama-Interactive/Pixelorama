@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-03-01 12:17\n"
+"PO-Revision-Date: 2022-03-26 10:48\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -102,6 +102,9 @@ msgstr "Імпортувати"
 msgid "Export"
 msgstr "Експортувати"
 
+msgid "Overwrite"
+msgstr "Перезапис"
+
 msgid "Export..."
 msgstr "Експортувати..."
 
@@ -165,8 +168,8 @@ msgstr "Очистити"
 msgid "Invert"
 msgstr "Інвертувати"
 
-msgid "Flip"
-msgstr "Віддзеркалити"
+msgid "Mirror Image"
+msgstr "Віддзеркалити зображення"
 
 msgid "Flip Horizontal"
 msgstr "Віддзеркалити по горизонталі"
@@ -192,8 +195,23 @@ msgstr "Панелі"
 msgid "Layouts"
 msgstr "Розміщення"
 
+msgid "Moveable Panels"
+msgstr "Рухомі панелі"
+
 msgid "Manage Layouts"
 msgstr "Керування розміщеннями"
+
+msgid "Add"
+msgstr "Додати"
+
+msgid "Add Layout"
+msgstr "Додати розміщення"
+
+msgid "Edit Layout"
+msgstr "Редагувати розміщення"
+
+msgid "Are you sure you want to delete this layout?"
+msgstr "Ви дійсно бажаєте видалити це розміщення?"
 
 msgid "Auto"
 msgstr "Автоматична"
@@ -766,6 +784,18 @@ msgstr "Японська"
 msgid "Ukrainian"
 msgstr "Українська"
 
+msgid "Danish"
+msgstr "Датська"
+
+msgid "Swedish"
+msgstr "Шведська"
+
+msgid "Serbian (Cyrillic)"
+msgstr "Сербська (кирилиця)"
+
+msgid "Dutch"
+msgstr "Голландська"
+
 msgid "Development Team"
 msgstr "Команда розробників"
 
@@ -825,13 +855,14 @@ msgstr "Еліптичне виділення\n\n"
 "%s для лівої кнопки миші\n"
 "%s для правої кнопки миші"
 
-msgid "Polygonal Selection\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
 msgstr "Полігональне виділення\n\n"
 "%s для лівої кнопки миші\n"
-"%s для правої кнопки миші"
+"%s для правої кнопки миші\n\n"
+"Двійне натиснення з'єднує останню точку з першою"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -875,13 +906,14 @@ msgstr "Пересування\n\n"
 "%s для лівої кнопки миші\n"
 "%s для правої кнопки миші"
 
-msgid "Color Picker\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
 msgstr "Піпетка\n\n"
 "%s для лівої кнопки миші\n"
-"%s для правої кнопки миші"
+"%s для правої кнопки миші\n\n"
+"Вибрати колір пікселя зі спрайта"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1913,4 +1945,31 @@ msgstr "Зміна розміру палітри призведе до пере�
 
 msgid "Position:"
 msgstr "Позиція:"
+
+msgid "Tools"
+msgstr "Інструменти"
+
+msgid "Main Canvas"
+msgstr "Основне полотно"
+
+msgid "Second Canvas"
+msgstr "Друге полотно"
+
+msgid "Animation Timeline"
+msgstr "Шкала часу анімацій"
+
+msgid "Canvas Preview"
+msgstr "Попередній перегляд полотна"
+
+msgid "Color Pickers"
+msgstr "Піпетки"
+
+msgid "Global Tool Options"
+msgstr "Глобальні параметри інструментів"
+
+msgid "Left Tool Options"
+msgstr "Параметри лівого інструмента"
+
+msgid "Right Tool Options"
+msgstr "Параметри правого інструмента"
 

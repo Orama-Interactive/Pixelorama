@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-02-28 17:34\n"
+"PO-Revision-Date: 2022-03-25 00:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -102,6 +102,9 @@ msgstr "Importér"
 msgid "Export"
 msgstr "Eksportér"
 
+msgid "Overwrite"
+msgstr ""
+
 msgid "Export..."
 msgstr "Eksportér..."
 
@@ -165,8 +168,8 @@ msgstr "Ryd"
 msgid "Invert"
 msgstr "Invertér"
 
-msgid "Flip"
-msgstr "Spejlvend"
+msgid "Mirror Image"
+msgstr ""
 
 msgid "Flip Horizontal"
 msgstr "Spejlvend Horisontalt"
@@ -192,7 +195,22 @@ msgstr ""
 msgid "Layouts"
 msgstr ""
 
+msgid "Moveable Panels"
+msgstr ""
+
 msgid "Manage Layouts"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Add Layout"
+msgstr ""
+
+msgid "Edit Layout"
+msgstr ""
+
+msgid "Are you sure you want to delete this layout?"
 msgstr ""
 
 msgid "Auto"
@@ -765,6 +783,18 @@ msgstr "Japansk"
 msgid "Ukrainian"
 msgstr "Ukrainsk"
 
+msgid "Danish"
+msgstr ""
+
+msgid "Swedish"
+msgstr ""
+
+msgid "Serbian (Cyrillic)"
+msgstr ""
+
+msgid "Dutch"
+msgstr ""
+
 msgid "Development Team"
 msgstr "Udviklingsteam"
 
@@ -824,7 +854,7 @@ msgstr "Elliptisk Markering\n\n"
 "%s for venstre museknap\n"
 "%s for højre museknap"
 
-msgid "Polygonal Selection\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
@@ -872,7 +902,7 @@ msgstr "Panorér\n\n"
 "%s for venstre museknap\n"
 "%s for højre museknap"
 
-msgid "Color Picker\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
@@ -1899,5 +1929,32 @@ msgid "Reducing palette size will reset positions of colors. Colors that don't f
 msgstr ""
 
 msgid "Position:"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+msgid "Main Canvas"
+msgstr ""
+
+msgid "Second Canvas"
+msgstr ""
+
+msgid "Animation Timeline"
+msgstr ""
+
+msgid "Canvas Preview"
+msgstr ""
+
+msgid "Color Pickers"
+msgstr ""
+
+msgid "Global Tool Options"
+msgstr ""
+
+msgid "Left Tool Options"
+msgstr ""
+
+msgid "Right Tool Options"
 msgstr ""
 
