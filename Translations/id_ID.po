@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 04:10\n"
+"PO-Revision-Date: 2022-03-29 04:23\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -211,25 +211,25 @@ msgid "Edit Layout"
 msgstr "Sunting Tata Letak"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Apa kamu yakin ingin menghapus tata letak ini?"
 
 msgid "Auto"
 msgstr "Otomatis"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Layar lebar"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Layar tinggi"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Cerminkan Tampilan"
 
 msgid "Show Grid"
 msgstr "Tampilkan garis"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Tampilkan Kisi Piksel"
 
 msgid "Show Rulers"
 msgstr "Pakai Penggaris"
@@ -262,7 +262,7 @@ msgid "Import as:"
 msgstr "Impor Sebagai:"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Proyek yang tadi"
 
 msgid "New tab"
 msgstr "Tab baru"
