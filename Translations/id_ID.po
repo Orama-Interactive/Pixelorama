@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 08:15\n"
+"PO-Revision-Date: 2022-03-29 08:39\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -710,67 +710,67 @@ msgid "Licenses"
 msgstr "Lisensi"
 
 msgid "English"
-msgstr "Inggris"
+msgstr "Bhs. Inggris"
 
 msgid "Greek"
-msgstr "Yunani"
+msgstr "Bhs. Yunani"
 
 msgid "French"
-msgstr "Prancis"
+msgstr "Bhs. Prancis"
 
 msgid "German"
-msgstr "Jerman"
+msgstr "Bhs. Jerman"
 
 msgid "Polish"
-msgstr "Polski"
+msgstr "Bhs. Polski"
 
 msgid "Portuguese"
-msgstr "Portugis"
+msgstr "Bhs. Portugis"
 
 msgid "Brazilian Portuguese"
-msgstr "Portugis (Brasil)"
+msgstr "Bhs. Portugis (Brasil)"
 
 msgid "Russian"
-msgstr "Rusia"
+msgstr "Bhs. Rusia"
 
 msgid "Chinese Simplified"
-msgstr "Cina (Huruf Sederhana)"
+msgstr "China (Simpel)"
 
 msgid "Chinese Traditional"
-msgstr "Cina (Huruf Tradisional)"
+msgstr "Bhs. Cina (Tradisional)"
 
 msgid "Italian"
 msgstr "Italia"
 
 msgid "Latvian"
-msgstr "Latvia"
+msgstr "Bhs. Latvia"
 
 msgid "Spanish"
 msgstr "Spanyol"
 
 msgid "Catalan"
-msgstr "Katalonia"
+msgstr "Bhs. Katalonia"
 
 msgid "Esperanto"
 msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr "Indonesia"
+msgstr "Bhs. Indonesia"
 
 msgid "Czech"
-msgstr "Ceko"
+msgstr "Bhs. Ceko"
 
 msgid "Arabic"
 msgstr "Bhs. Arab"
 
 msgid "Turkish"
-msgstr "Turki"
+msgstr "Bhs. Turki"
 
 msgid "Norwegian Bokmål"
 msgstr "Bhs. Bokmål Norwegia"
 
 msgid "Korean"
-msgstr "Bahasa Korea"
+msgstr "Bhs. Korea"
 
 msgid "Hungarian"
 msgstr "Bhs. Hungaria"
@@ -797,16 +797,16 @@ msgid "Dutch"
 msgstr "Bhs. Belanda"
 
 msgid "Development Team"
-msgstr "Tim Developer"
+msgstr "Regu Pengembangan"
 
 msgid "Lead Programmer"
-msgstr "Pemimpin Pemograman"
+msgstr "Pemrogram Utama"
 
 msgid "UI Designer"
-msgstr "Desainer UI"
+msgstr "Perancang UI"
 
 msgid "GitHub Contributors"
-msgstr "Kontribusi Github"
+msgstr "Kontributor Github"
 
 msgid "Art by: %s"
 msgstr "Seni oleh %s"
@@ -818,10 +818,10 @@ msgid "imported"
 msgstr "telah diimpor"
 
 msgid "copy"
-msgstr "salin"
+msgstr "salinan"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr "Yakin ingin keluar?"
+msgstr "Apa kamu yakin ingin keluar?"
 
 msgid "Unsaved Image"
 msgstr "Gambar belum disimpan"
@@ -833,7 +833,7 @@ msgid "Save before exiting?"
 msgstr "Simpan sebelum keluar?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr "Perubahan belum tersimpan. Lanjutkan?"
+msgstr "Perubahan belum disimpan. Ingin lanjut bagaimana?"
 
 msgid "Save & Exit"
 msgstr "Simpan & Keluar"
@@ -884,9 +884,9 @@ msgstr ""
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Zoom\n\n"
-"%s untuk mouse kiri\n"
-"%s untuk mouse kanan "
+msgstr "Keker\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan"
 
 msgid "Pan\n\n"
 "%s for left mouse button\n"
