@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 16:57\n"
+"PO-Revision-Date: 2022-03-29 18:15\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -25,10 +25,10 @@ msgid "Save"
 msgstr "Simpan"
 
 msgid "Please Confirm..."
-msgstr "Konfirmasi..."
+msgstr "Mohon Konfirmasi..."
 
 msgid "File Name:"
-msgstr "Nama File:"
+msgstr "Nama Berkas:"
 
 msgid "Project Name:"
 msgstr "Nama Proyek:"
@@ -1089,7 +1089,7 @@ msgid "A color of the grid"
 msgstr "Warna dari kisi"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Kisi Piksel"
 
 msgid "Show at zoom:"
 msgstr "Muncul saat dikeker:"
@@ -1098,10 +1098,10 @@ msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr "Menetapkan minimal dapat dikeker saat kisi piksel muncul"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Warna kisi piksel:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Warna dari kisi piksel"
 
 msgid "Transparency"
 msgstr "Transparansi"
@@ -1131,19 +1131,19 @@ msgid "The transparent checker follow the movement of canvas"
 msgstr "Pola catur transparan mengikuti pergerakan kanvas"
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Ikuti Tingkat Kekeran Kanvas"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "Pola catur transparan mengikuti tingkat kekeran kanvas"
 
 msgid "Animated selection borders"
 msgstr ""
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Warna tepian 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Warna tepian 2:"
 
 msgid "Only custom preset can be modified"
 msgstr "Hanya praatur khusus yang dapat disunting"
@@ -1152,7 +1152,7 @@ msgid "Set application FPS limit:"
 msgstr "Penetapan batas FPS aplikasi:"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Jedakan aplikasi ketika kurang fokus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Menetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah angkanya, penggunaan CPU juga berkurang; tapi aplikasi akan lambat, patah-patah dan kurang tanggap. 0 berarti tidak ada batas."
@@ -1939,8 +1939,8 @@ msgid "Global Tool Options"
 msgstr "Pengaturan Alat Global"
 
 msgid "Left Tool Options"
-msgstr ""
+msgstr "Opsi Alat Di Kiri"
 
 msgid "Right Tool Options"
-msgstr ""
+msgstr "Opsi Alat Di Kanan"
 
