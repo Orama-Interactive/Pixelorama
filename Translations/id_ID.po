@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 16:33\n"
+"PO-Revision-Date: 2022-03-29 16:57\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1077,7 +1077,7 @@ msgid "Sets grid's y offset from the canvas origin (top left corner of the image
 msgstr ""
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Gambar di atas Mode Ubin:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
@@ -1347,7 +1347,7 @@ msgstr "Mampukan/lumpuhkan Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "Ingin berapa banyak bingkai animasinya diputar setiap detiknya?\n"
+msgstr "Ingin berapa banyak bingkai animasi diputar setiap detiknya?\n"
 "Semakin banyak FPS, semakin cepat animasinya."
 
 msgid "No loop"
