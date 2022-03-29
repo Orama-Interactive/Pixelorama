@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 04:35\n"
+"PO-Revision-Date: 2022-03-29 04:41\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -301,10 +301,10 @@ msgid "Start frame:"
 msgstr "Bingkai awal:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "Di bingkai:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "Di lapisan:"
 
 msgid "Brush type:"
 msgstr "Tipe kuas:"
@@ -340,7 +340,7 @@ msgid "Exporting in progress..."
 msgstr "Ekspor sedang berlangsung..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Tak dapat memuat '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -349,7 +349,8 @@ msgstr "Error saat membaca file '%s'.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Tak dapat memuat '%s'.\n"
+"Ini bukan berkas palet yang absah."
 
 msgid "Frame"
 msgstr "Frame"
@@ -463,7 +464,7 @@ msgid "Language"
 msgstr "Bahasa"
 
 msgid "Interface"
-msgstr ""
+msgstr "Antarmuka"
 
 msgid "Themes"
 msgstr "Tema"
