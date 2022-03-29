@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 08:54\n"
+"PO-Revision-Date: 2022-03-29 09:59\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1103,22 +1103,22 @@ msgid "Transparency"
 msgstr "Transparansi"
 
 msgid "Checker size:"
-msgstr "Besar pola catur:"
+msgstr "Ukuran pola catur:"
 
 msgid "Size of the transparent checker background"
-msgstr "Besar dari pola catur yang ada di latar"
+msgstr "Ukuran latar belakang pola catur transparan"
 
 msgid "Checker color 1:"
 msgstr "Warna pola catur 1:"
 
 msgid "First color of the transparent checker background"
-msgstr "Warna pertama dari pola catur yang ada di latar"
+msgstr "Warna pertama latar belakang pola catur transparan"
 
 msgid "Checker color 2:"
 msgstr "Warna pola catur 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr "Warna kedua dari pola catur yang ada di latar"
+msgstr "Warna kedua latar belakang pola catur transparan"
 
 msgid "Follow Canvas Movement"
 msgstr "Ikuti Gerakan Kanvas"
@@ -1142,7 +1142,7 @@ msgid "Border color 2:"
 msgstr ""
 
 msgid "Only custom preset can be modified"
-msgstr "Hanya preset kustom yang bisa di edit"
+msgstr "Hanya praatur khusus yang dapat disunting"
 
 msgid "Set application FPS limit:"
 msgstr "Tetapkan batas FPS aplikasi:"
@@ -1151,7 +1151,7 @@ msgid "Pause application when it loses focus"
 msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr "Tetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah angkanya, penggunaan CPU juga berkurang; tapi aplikasi akan lambat, patah-patah dan kurang tanggap. 0 berarti tidak ada batas."
+msgstr "Menetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah angkanya, penggunaan CPU juga berkurang; tapi aplikasi akan lambat, patah-patah dan kurang tanggap. 0 berarti tidak ada batas."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
@@ -1178,7 +1178,7 @@ msgid "Select a brush"
 msgstr "Pilih satu kuas"
 
 msgid "Pixel brush"
-msgstr "Kuas pixel"
+msgstr "Kuas piksel"
 
 msgid "Circle brush"
 msgstr "Kuas lingkaran"
@@ -1187,7 +1187,7 @@ msgid "Filled circle brush"
 msgstr "Kuas lingkaran berisi"
 
 msgid "Custom brush"
-msgstr "Kuas kostum"
+msgstr "Kuas khusus"
 
 msgid "Brush size:"
 msgstr "Ukuran kuas:"
@@ -1700,10 +1700,10 @@ msgid "Templates:"
 msgstr "Templet/Sampul:"
 
 msgid "Preset"
-msgstr "Preset"
+msgstr "Praatur"
 
 msgid "Preset:"
-msgstr "Preset:"
+msgstr "Praatur:"
 
 msgid "Default"
 msgstr "Default"
