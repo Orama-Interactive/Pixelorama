@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 05:41\n"
+"PO-Revision-Date: 2022-03-29 05:56\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1243,10 +1243,10 @@ msgid "Offset"
 msgstr "Offset"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Pembayangan Sederhana"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Pergeseran Rona"
 
 msgid "Lighten"
 msgstr "Terangkan"
@@ -1365,10 +1365,10 @@ msgid "Manage frame tags"
 msgstr "Ganti tanda frame (frame tags)"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "Rincian Sifat Tag Bingkai"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "Tambah tag bingkai baru"
 
 msgid "Name:"
 msgstr "Nama:"
@@ -1383,10 +1383,10 @@ msgid "Animation plays only on frames of the same tag"
 msgstr "Animasi dimainkan hanya jika frame memiliki tanda yang sama"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Tag %s (Bingkai %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Tag %s (Bingkai %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
@@ -1397,19 +1397,19 @@ msgid "Blue-Red Mode"
 msgstr "Mode Biru-Merah"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "Tampilkan bingkai sebelumnya:"
 
 msgid "Show future frames:"
-msgstr ""
+msgstr "Tampilkan bingkai selanjutnya:"
 
 msgid "Above canvas"
-msgstr ""
+msgstr "Di atas kanvas"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "Di bawah kanvas"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Jika ingin lapisannya mengabaikan skin onion, tulis saja \"_io\" di ujung namanya."
 
 msgid "Add a new frame"
 msgstr "Tambah frame baru"
@@ -1436,10 +1436,10 @@ msgid "Unlink Cel"
 msgstr "Putuskan/Unlink Cel"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Rincian Sifat Bingkai"
 
 msgid "Frame properties"
-msgstr ""
+msgstr "Rincian Sifat Bingkai"
 
 msgid "Layer"
 msgstr "Lapisan/Layer"
