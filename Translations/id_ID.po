@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 07:57\n"
+"PO-Revision-Date: 2022-03-29 08:15\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -605,13 +605,13 @@ msgid "Outline"
 msgstr "Garis luar"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr "Ganti Hue/Saturation/Value"
+msgstr "Sesuaikan Rona/Saturasi/Nilai"
 
 msgid "Gradient"
 msgstr "Gradien"
 
 msgid "Adjust HSV"
-msgstr "Atur HSV"
+msgstr "Sesuaikan HSV"
 
 msgid "Type:"
 msgstr "Tipe:"
@@ -620,7 +620,7 @@ msgid "Angle:"
 msgstr "Sudut:"
 
 msgid "Hue:"
-msgstr "Warna:"
+msgstr "Rona:"
 
 msgid "Saturation:"
 msgstr "Saturasi:"
@@ -662,16 +662,16 @@ msgid "View Splash Screen"
 msgstr "Tampilkan \"Splash Screen\""
 
 msgid "Online Docs"
-msgstr "Dokumen Online"
+msgstr "Dokumen Daring"
 
 msgid "Issue Tracker"
-msgstr "Issue Tracker"
+msgstr "Pelacak Isu"
 
 msgid "Open Logs Folder"
 msgstr "Buka Folder \"Logs\""
 
 msgid "Changelog"
-msgstr "Perubahan"
+msgstr "Catatan ubah"
 
 msgid "About Pixelorama"
 msgstr "Tentang Pixelorama"
@@ -680,7 +680,7 @@ msgid "Pixelorama - Pixelate your dreams!"
 msgstr "Pixelorama - Pikselasikan mimpimu!"
 
 msgid "Developed by Orama Interactive"
-msgstr "Dibuat oleh Orama Interactive"
+msgstr "Dikembangkan oleh Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
 msgstr "©2019-dipersembahkan oleh Orama Interactive dan penyumbang"
@@ -692,10 +692,10 @@ msgid "GitHub Repo"
 msgstr "Repositori GitHub"
 
 msgid "Donate"
-msgstr "Donasi"
+msgstr "Derma (Donate)"
 
 msgid "Developers"
-msgstr "Developer"
+msgstr "Pengembang"
 
 msgid "Contributors"
 msgstr "Kontributor"
@@ -734,22 +734,22 @@ msgid "Russian"
 msgstr "Rusia"
 
 msgid "Chinese Simplified"
-msgstr "China (Simpel)"
+msgstr "Cina (Huruf Sederhana)"
 
 msgid "Chinese Traditional"
-msgstr "China (Tradisional)"
+msgstr "Cina (Huruf Tradisional)"
 
 msgid "Italian"
 msgstr "Italia"
 
 msgid "Latvian"
-msgstr "Latvi"
+msgstr "Latvia"
 
 msgid "Spanish"
 msgstr "Spanyol"
 
 msgid "Catalan"
-msgstr "Bahasa Katalonia"
+msgstr "Katalonia"
 
 msgid "Esperanto"
 msgstr "Esperanto"
@@ -761,28 +761,28 @@ msgid "Czech"
 msgstr "Ceko"
 
 msgid "Arabic"
-msgstr "Bahasa Arab"
+msgstr "Bhs. Arab"
 
 msgid "Turkish"
-msgstr "Bahasa Turki"
+msgstr "Turki"
 
 msgid "Norwegian Bokmål"
-msgstr "Bokmål Norwegia"
+msgstr "Bhs. Bokmål Norwegia"
 
 msgid "Korean"
 msgstr "Bahasa Korea"
 
 msgid "Hungarian"
-msgstr "Bahasa Hungaria"
+msgstr "Bhs. Hungaria"
 
 msgid "Romanian"
-msgstr "Bahasa Romania"
+msgstr "Bhs. Rumania"
 
 msgid "Japanese"
 msgstr "Bhs. Jepang"
 
 msgid "Ukrainian"
-msgstr "Ukrainia"
+msgstr "Bhs. Ukraina"
 
 msgid "Danish"
 msgstr "Bhs. Denmark"
