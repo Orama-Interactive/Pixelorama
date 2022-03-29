@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-25 00:03\n"
+"PO-Revision-Date: 2022-03-29 04:10\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Tampilan"
 
 msgid "Window"
-msgstr ""
+msgstr "Jendela"
 
 msgid "Image"
 msgstr "Gambar"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Ekspor"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Timpa"
 
 msgid "Export..."
 msgstr "Ekspor..."
@@ -169,7 +169,7 @@ msgid "Invert"
 msgstr "Balikkan"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Cerminkan Gambar"
 
 msgid "Flip Horizontal"
 msgstr "Balikkan Horizontal"
@@ -190,25 +190,25 @@ msgid "Panel Layout"
 msgstr "Panel tata letak"
 
 msgid "Panels"
-msgstr ""
+msgstr "Panel"
 
 msgid "Layouts"
-msgstr ""
+msgstr "Tata letak"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Panel Dapat Dipindah"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Atur Tata Letak"
 
 msgid "Add"
-msgstr ""
+msgstr "Tambah"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Tambah Tata Letak"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Sunting Tata Letak"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr ""
