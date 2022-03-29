@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 05:56\n"
+"PO-Revision-Date: 2022-03-29 06:03\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1469,7 +1469,7 @@ msgid "Opacity:"
 msgstr "Kegelapan:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Kegelapan mode ubin:"
 
 msgid "Toggle layer's visibility"
 msgstr "Sembunyikan/Perlihatkan lapisan/layer"
@@ -1478,7 +1478,7 @@ msgid "Lock/unlock layer"
 msgstr "Kunci lapisan/layer"
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "Bingkai: %s, Lapisan: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
@@ -1507,10 +1507,10 @@ msgid "Redo: Draw"
 msgstr "Redo: gambar"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Urungkan: Pilih"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Ulangi: Pilih"
 
 msgid "Undo: Scale"
 msgstr "Undo: Besar"
@@ -1579,10 +1579,10 @@ msgid "Redo: Delete Frame Tag"
 msgstr "Redo: Hapus tanda dari frame"
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Urungkan: Ubah durasi bingkai"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Ulangi: Ubah durasi bingkai"
 
 msgid "Move Guide"
 msgstr "Gerakkan panduan"
@@ -1609,7 +1609,7 @@ msgid "Import Palette"
 msgstr "Impor palet"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Buat warna palet dari sprite saat ini"
 
 msgid "Palette Name:"
 msgstr "Nama palet:"
@@ -1685,7 +1685,7 @@ msgstr "Warna latar belakang gambar default\n"
 " "
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "Kuncikan nisbah aspek"
 
 msgid "Portrait"
 msgstr ""
