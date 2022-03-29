@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 07:36\n"
+"PO-Revision-Date: 2022-03-29 07:44\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -280,13 +280,13 @@ msgid "Replace frame"
 msgstr "Gantikan bingkai"
 
 msgid "New layer"
-msgstr "Layer baru"
+msgstr "Lapisan baru"
 
 msgid "New palette"
 msgstr "Palet baru"
 
 msgid "New brush"
-msgstr "Brush baru"
+msgstr "Kuas baru"
 
 msgid "New pattern"
 msgstr "Pola baru"
@@ -310,7 +310,7 @@ msgid "Brush type:"
 msgstr "Tipe kuas:"
 
 msgid "File brush"
-msgstr "Kuas file"
+msgstr "Kuas berkas"
 
 msgid "Project brush"
 msgstr "Kuas proyek"
@@ -319,7 +319,7 @@ msgid "Random brush"
 msgstr "Kuas acak"
 
 msgid "Save Sprite as .pxo"
-msgstr "Simpan \"sprite\" dengan .pxo"
+msgstr "Simpan \"sprite\" sebagai .pxo"
 
 msgid "Export Sprite as .png"
 msgstr "Ekspor \"sprite\" sebagai .png"
@@ -328,13 +328,13 @@ msgid "Export Sprite"
 msgstr "Ekspor \"sprite\""
 
 msgid "File Exists, Overwrite?"
-msgstr "Folder ini mengandung nama yang sama, Lanjutkan?"
+msgstr "Ada berkasnya, timpa saja?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr "Folder %s sudah ada. Lanjutkan?"
+msgstr "Berkas %s sudah ada. Timpa saja?"
 
 msgid "Directory path or file name is not valid!"
-msgstr "Folder tidak valid"
+msgstr "Jalur direktori atau nama berkas tidak absah!"
 
 msgid "Exporting in progress..."
 msgstr "Ekspor sedang berlangsung..."
@@ -344,8 +344,8 @@ msgstr "Tak dapat memuat '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr "Error saat membaca file '%s'.\n"
-"Kode Error: %s"
+msgstr "Tak dapat memuat '%s'.\n"
+"Kode galat: %s"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
@@ -362,13 +362,13 @@ msgid "All Frames"
 msgstr "Semua Bingkai"
 
 msgid "Spritesheet"
-msgstr "Spritesheet"
+msgstr "Lembar sprite"
 
 msgid "Animation"
 msgstr "Animasi"
 
 msgid "Preview:"
-msgstr "Preview:"
+msgstr "Pratinjau:"
 
 msgid "Frame:"
 msgstr "Bingkai:"
@@ -377,19 +377,19 @@ msgid "Orientation:"
 msgstr "Orientasi:"
 
 msgid "Browse"
-msgstr "Telusuri"
+msgstr "Telusur"
 
 msgid "Resize:"
 msgstr "Ubah ukuran:"
 
 msgid "Cancel Export"
-msgstr "Batalkan Mengekspor"
+msgstr "Batalkan Ekspor"
 
 msgid "Alert!"
 msgstr "Peringatan!"
 
 msgid "Select Current Folder"
-msgstr "Pindah dalam folder saat ini"
+msgstr "Pilih Folder Saat Ini"
 
 msgid "Open a Directory"
 msgstr "Buka direktori"
