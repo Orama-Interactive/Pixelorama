@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 18:15\n"
+"PO-Revision-Date: 2022-03-29 18:22\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1137,7 +1137,7 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Pola catur transparan mengikuti tingkat kekeran kanvas"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Tepian seleksi dianimasikan"
 
 msgid "Border color 1:"
 msgstr "Warna tepian 1:"
