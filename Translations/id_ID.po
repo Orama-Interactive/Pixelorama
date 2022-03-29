@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 16:18\n"
+"PO-Revision-Date: 2022-03-29 16:33\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1050,7 +1050,7 @@ msgid "Rectangular grid height:"
 msgstr "Tinggi kisi persegi panjang:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Tetapkan seberapa jauh garis mendatar kisi persegi panjang"
 
 msgid "Isometric cell bounds width:"
 msgstr ""
