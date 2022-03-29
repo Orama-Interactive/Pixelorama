@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 07:02\n"
+"PO-Revision-Date: 2022-03-29 07:13\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1393,8 +1393,8 @@ msgstr "Tag %s (Bingkai %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr "Jika diseleksi, Animasi hanya main jika frame memiliki tanda/tag yang sama\n"
-"Jika tidak, maka animasi akan main untuk semua frame."
+msgstr "Jika dipilih, animasi akan diputar hanya pada bingkai yang memiliki tag sama.\n"
+"Jika tidak, maka animasi akan diputar untuk semua bingkai."
 
 msgid "Blue-Red Mode"
 msgstr "Mode Biru-Merah"
@@ -1415,13 +1415,13 @@ msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffi
 msgstr "Jika ingin lapisannya mengabaikan skin onion, tulis saja \"_io\" di ujung namanya."
 
 msgid "Add a new frame"
-msgstr "Tambah frame baru"
+msgstr "Tambah bingkai baru"
 
 msgid "Remove Frame"
-msgstr "Hapus frame"
+msgstr "Hapus Bingkai"
 
 msgid "Clone Frame"
-msgstr "Duplikasikan Frame"
+msgstr "Duplikatkan Bingkai"
 
 msgid "Move Left"
 msgstr "Geser ke kiri"
@@ -1485,8 +1485,8 @@ msgstr "Bingkai: %s, Lapisan: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Aktifkan cel linking\n"
-"Cel yang terhubung/linked di bagikan untuk beberapa frame"
+msgstr "Mampukan/lumpuhkan penautan cel\n\n"
+"Cel yang tertaut dibagikan ke banyak bingkai agar digambar sama"
 
 msgid "Palette"
 msgstr "Palet"
@@ -1570,16 +1570,16 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Redo: Hapus kuas kostum"
 
 msgid "Undo: Modify Frame Tag"
-msgstr "Undo: Tanda pada frame"
+msgstr "Urungkan: Ubah Tag Bingkai"
 
 msgid "Redo: Modify Frame Tag"
-msgstr "Redo: Tanda pada frame"
+msgstr "Ulangi: Ubah Tag Bingkai"
 
 msgid "Undo: Delete Frame Tag"
-msgstr "Undo: Hapus tanda dari frame"
+msgstr "Urungkan: Hapus Tag Bingkai"
 
 msgid "Redo: Delete Frame Tag"
-msgstr "Redo: Hapus tanda dari frame"
+msgstr "Ulangi: Hapus Tag Bingkai"
 
 msgid "Undo: Change frame duration"
 msgstr "Urungkan: Ubah durasi bingkai"
