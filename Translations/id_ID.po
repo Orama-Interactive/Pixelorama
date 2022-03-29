@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 07:44\n"
+"PO-Revision-Date: 2022-03-29 07:57\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -428,16 +428,16 @@ msgid "Rows:"
 msgstr "Baris:"
 
 msgid "Path:"
-msgstr "Path:"
+msgstr "Jalur:"
 
 msgid "Directories & Files:"
-msgstr "Direktori & File:"
+msgstr "Direktori & Berkas:"
 
 msgid "Create Folder"
 msgstr "Buat Folder"
 
 msgid "File:"
-msgstr "Berkas/File:"
+msgstr "Berkas:"
 
 msgid "Interpolation:"
 msgstr "Interpolasi:"
@@ -500,25 +500,25 @@ msgid "Restore default value"
 msgstr "Kembalikan nilai awal"
 
 msgid "Smooth Zoom"
-msgstr "Zoom Halus"
+msgstr "Keker Mulus"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr "Memperhalus gerakan saat memperbesar atau memperkecil"
+msgstr "Memperhalus gerakan saat mengeker dekat atau jauh"
 
 msgid "Tablet pressure sensitivity:"
-msgstr "Tablet pressure sensitifitas:"
+msgstr "Kepekaan tekanan tablet:"
 
 msgid "None"
-msgstr "Tak satupun"
+msgstr "Tak ada"
 
 msgid "Affect Brush's Alpha"
-msgstr "Memberi efek pada brush alpha"
+msgstr "Efek \"alpha\" pada kuas"
 
 msgid "Color:"
 msgstr "Warna:"
 
 msgid "Guide color:"
-msgstr "Warna Panduan:"
+msgstr "Warna panduan:"
 
 msgid "System Language"
 msgstr "Bahasa Sistem"
@@ -566,13 +566,13 @@ msgid "Big"
 msgstr "Besar"
 
 msgid "Only affect selection"
-msgstr "Hanya mempengaruhi pilihan"
+msgstr "Hanya mempengaruhi seleksi"
 
 msgid "Selected cels"
-msgstr "Sel yang dipilih"
+msgstr "Cel yang dipilih"
 
 msgid "Current cel"
-msgstr "Sel terpilih"
+msgstr "Cel saat ini"
 
 msgid "Current frame"
 msgstr "Bingkai saat ini"
@@ -584,19 +584,19 @@ msgid "All projects"
 msgstr "Semua proyek"
 
 msgid "Invert Colors"
-msgstr "Balikkan warna"
+msgstr "Terbalikkan warna"
 
 msgid "Modify Red Channel"
-msgstr "Ubah Channel Merah"
+msgstr "Ubah Saluran Merah"
 
 msgid "Modify Green Channel"
-msgstr "Ubah Channel Hijau"
+msgstr "Ubah Saluran Hijau"
 
 msgid "Modify Blue Channel"
-msgstr "Ubah Channel Biru"
+msgstr "Ubah Saluran Biru"
 
 msgid "Modify Alpha Channel"
-msgstr "Ubah Channel Alfa"
+msgstr "Ubah Saluran Alpha"
 
 msgid "Desaturation"
 msgstr "Desaturasi"
