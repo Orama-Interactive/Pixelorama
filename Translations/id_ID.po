@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 10:21\n"
+"PO-Revision-Date: 2022-03-29 10:44\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1022,7 +1022,7 @@ msgid "Grid"
 msgstr ""
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Tipe kisi:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
@@ -1088,10 +1088,10 @@ msgid "Pixel Grid"
 msgstr ""
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Muncul saat dikeker:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Menetapkan minimal dapat dikeker saat kisi piksel muncul"
 
 msgid "Pixel grid color:"
 msgstr ""
@@ -1145,7 +1145,7 @@ msgid "Only custom preset can be modified"
 msgstr "Hanya praatur khusus yang dapat disunting"
 
 msgid "Set application FPS limit:"
-msgstr "Tetapkan batas FPS aplikasi:"
+msgstr "Penetapan batas FPS aplikasi:"
 
 msgid "Pause application when it loses focus"
 msgstr ""
@@ -1356,7 +1356,7 @@ msgid "Ping-pong loop"
 msgstr "Perulangan \"Ping Pong\""
 
 msgid "Onion Skinning:"
-msgstr "Onion Skinning:"
+msgstr "\"Onion Skinning\":"
 
 msgid "Past Frames"
 msgstr "Bingkai sebelum"
@@ -1400,10 +1400,10 @@ msgid "Blue-Red Mode"
 msgstr "Mode Biru-Merah"
 
 msgid "Show past frames:"
-msgstr "Tampilkan bingkai sebelum:"
+msgstr "Muncul bingkai sebelum:"
 
 msgid "Show future frames:"
-msgstr "Tampilkan bingkai setelah:"
+msgstr "Muncul bingkai setelah:"
 
 msgid "Above canvas"
 msgstr "Di atas kanvas"
@@ -1433,10 +1433,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr "Sambungkan/Link Cel"
+msgstr "Tautkan Cel"
 
 msgid "Unlink Cel"
-msgstr "Putuskan/Unlink Cel"
+msgstr "Putuskan Cel"
 
 msgid "Frame Properties"
 msgstr "Rincian Sifat Bingkai"
@@ -1445,37 +1445,37 @@ msgid "Frame properties"
 msgstr "Rincian sifat bingkai"
 
 msgid "Layer"
-msgstr "Lapisan/Layer"
+msgstr "Lapisan"
 
 msgid "Layers"
-msgstr "Lapisan/Layers"
+msgstr "Lapisan"
 
 msgid "Create a new layer"
-msgstr "Tambah lapisan/layer baru"
+msgstr "Tambah lapisan baru"
 
 msgid "Remove current layer"
-msgstr "Hapus lapisan/layer"
+msgstr "Hapus lapisan saat ini"
 
 msgid "Move up the current layer"
-msgstr "Geser ke atas lapisan/layer ini"
+msgstr "Geser ke atas lapisan ini"
 
 msgid "Move down the current layer"
-msgstr "Geser ke bawah lapisan/layer ini"
+msgstr "Geser ke bawah lapisan ini"
 
 msgid "Clone current layer"
-msgstr "Duplikat lapisan/layer ini"
+msgstr "Duplikatkan lapisan ini"
 
 msgid "Merge current layer with the one below"
-msgstr "Satukan lapisan/layer ini dengan yang dibawah"
+msgstr "Satukan lapisan ini dengan yang di bawah"
 
 msgid "Opacity:"
 msgstr "Kelegapan:"
 
 msgid "Tile mode opacity:"
-msgstr "Kegelapan mode ubin:"
+msgstr "Kelegapan mode ubin:"
 
 msgid "Toggle layer's visibility"
-msgstr "Sembunyikan/Perlihatkan lapisan/layer"
+msgstr "Cetik keterlihatan lapisan"
 
 msgid "Lock/unlock layer"
 msgstr "Kunci lapisan/layer"
@@ -1651,7 +1651,7 @@ msgid "Patrons:"
 msgstr "Patrons:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr "Ingin nama atau perusahaan di tampilkan pada layar?"
+msgstr "Ingin nama atau perusahaan ditampilkan pada layar splash?"
 
 msgid "Become a Platinum Sponsor"
 msgstr "Menjadi Sponsor Platinum"
@@ -1663,7 +1663,7 @@ msgid "Become a Patron"
 msgstr "Menjadi Pelanggan"
 
 msgid "Don't show again"
-msgstr "Jangan perlihatkan lagi"
+msgstr "Jangan tampilkan lagi"
 
 msgid "Image Options"
 msgstr "Opsi Menggambar"
@@ -1823,7 +1823,7 @@ msgid "Create new directory for each frame tag"
 msgstr "Buat direktori baru untuk masing-masing tag bingkai"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Membuat banyak berkas tapi setiap berkas ditampung di direktori berbeda sesuai dengan tag bingkainya"
+msgstr "Membuat banyak berkas, tapi setiap berkas ditampung di direktori berbeda sesuai dengan tag bingkainya"
 
 msgid "Close"
 msgstr "Tutup"
