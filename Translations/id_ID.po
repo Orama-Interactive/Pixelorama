@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 05:04\n"
+"PO-Revision-Date: 2022-03-29 05:12\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -683,13 +683,13 @@ msgid "Developed by Orama Interactive"
 msgstr "Dibuat oleh Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-dipersembahkan oleh Orama Interactive dan penyumbang"
 
 msgid "Website"
 msgstr "Situs web"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "Repositori GitHub"
 
 msgid "Donate"
 msgstr "Donasi"
@@ -707,7 +707,7 @@ msgid "Translators"
 msgstr "Penerjemah"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Lisensi"
 
 msgid "English"
 msgstr "Inggris"
@@ -767,7 +767,7 @@ msgid "Turkish"
 msgstr "Bahasa Turki"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Bokmål Norwegia"
 
 msgid "Korean"
 msgstr "Bahasa Korea"
@@ -779,22 +779,22 @@ msgid "Romanian"
 msgstr "Bahasa Romania"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Bhs. Jepang"
 
 msgid "Ukrainian"
 msgstr "Ukrainia"
 
 msgid "Danish"
-msgstr ""
+msgstr "Bhs. Denmark"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Bhs. Swedia"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Bhs. Serbia (Kiril)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Bhs. Belanda"
 
 msgid "Development Team"
 msgstr "Tim Developer"
