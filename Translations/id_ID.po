@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 11:25\n"
+"PO-Revision-Date: 2022-03-29 11:55\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1567,7 +1567,7 @@ msgid "Undo: Delete Custom Brush"
 msgstr "Urungkan: Hapus kuas khusus"
 
 msgid "Redo: Delete Custom Brush"
-msgstr "Redo: Hapus kuas kostum"
+msgstr "Ulangi: Hapus kuas khusus"
 
 msgid "Undo: Modify Frame Tag"
 msgstr "Urungkan: Ubah Tag Bingkai"
@@ -1588,25 +1588,25 @@ msgid "Redo: Change frame duration"
 msgstr "Ulangi: Ubah durasi bingkai"
 
 msgid "Move Guide"
-msgstr "Gerakkan panduan"
+msgstr "Geser panduan"
 
 msgid "File saved"
-msgstr "File Tersimpan"
+msgstr "Berkas tersimpan"
 
 msgid "File autosaved"
-msgstr "File tersimpan"
+msgstr "Berkas disimpan otomatis"
 
 msgid "File failed to open. Error code %s"
-msgstr "Berkas gagal dibuka. Kode gagal %s"
+msgstr "Berkas gagal dibuka. Kode galat %s"
 
 msgid "File failed to save. Error code %s"
-msgstr "Berkas gagal di simpan. Kode gagal %s"
+msgstr "Berkas gagal disimpan. Kode galat %s"
 
 msgid "File exported"
-msgstr "File sudah terekspor"
+msgstr "Berkas terekspor"
 
 msgid "New Empty Palette"
-msgstr "Palet kosong baru"
+msgstr "Palet Kosong Baru"
 
 msgid "Import Palette"
 msgstr "Impor palet"
@@ -1621,22 +1621,22 @@ msgid "Color Name:"
 msgstr "Nama warna:"
 
 msgid "Use current left & right colors"
-msgstr "Gunakan warna yang di kanan dan kiri"
+msgstr "Gunakan warna yang di kanan & kiri"
 
 msgid "Create a new empty palette?"
-msgstr "Buat palet kosong baru?"
+msgstr "Buat palet kosong yang baru?"
 
 msgid "Error"
-msgstr "Kesalahan"
+msgstr "Galat"
 
 msgid "Error: Palette must have a valid name."
-msgstr "Error: nama palet tidak valid."
+msgstr "Galat: Nama palet harus yang valid."
 
 msgid "Invalid Palette file!"
 msgstr "File palet tidak valid"
 
 msgid "Edit Palette"
-msgstr "Edit Palet"
+msgstr "Sunting Palet"
 
 msgid "Create colors with alpha component"
 msgstr "Buat warna dengan komponen alfa"
@@ -1654,38 +1654,37 @@ msgid "Want your name or your company to be shown on the splash screen?"
 msgstr "Ingin nama atau perusahaan ditampilkan pada layar splash?"
 
 msgid "Become a Platinum Sponsor"
-msgstr "Menjadi Sponsor Platinum"
+msgstr "Jadi Sponsor Platinum"
 
 msgid "Become a Gold Sponsor"
-msgstr "Menjadi Sponsor Emas"
+msgstr "Jadi Sponsor Emas"
 
 msgid "Become a Patron"
-msgstr "Menjadi Pelanggan"
+msgstr "Jadi Patron"
 
 msgid "Don't show again"
 msgstr "Jangan tampilkan lagi"
 
 msgid "Image Options"
-msgstr "Opsi Menggambar"
+msgstr "Opsi Gambar"
 
 msgid "Default width:"
-msgstr "Panjang default:"
+msgstr "Lebar bawaan:"
 
 msgid "A default width of a new image"
-msgstr "Panjang default untuk gambar baru"
+msgstr "Lebar bawaan untuk gambar baru"
 
 msgid "Default height:"
-msgstr "Lebar default:"
+msgstr "Tinggi bawaan:"
 
 msgid "A default height of a new image"
-msgstr "Lebar default untuk gambar baru"
+msgstr "Tinggi bawaan untuk gambar baru"
 
 msgid "Default fill color:"
-msgstr "Warna \"fill\" default:"
+msgstr "Warna isian bawaan:"
 
 msgid "A default background color of a new image"
-msgstr "Warna latar belakang gambar default\n"
-" "
+msgstr "Warna latar belakang bawaan gambar baru"
 
 msgid "Lock aspect ratio"
 msgstr "Kuncikan nisbah aspek"
@@ -1697,7 +1696,7 @@ msgid "Landscape"
 msgstr "Mendatar"
 
 msgid "Templates:"
-msgstr "Templet/Sampul:"
+msgstr "Templat:"
 
 msgid "Preset"
 msgstr "Praatur"
@@ -1706,13 +1705,13 @@ msgid "Preset:"
 msgstr "Praatur:"
 
 msgid "Default"
-msgstr "Default"
+msgstr "Bawaan"
 
 msgid "Custom"
-msgstr "Kustom"
+msgstr "Ubah suai"
 
 msgid "Rectangular Selection"
-msgstr "Seleksi petak"
+msgstr "Seleksi Persegi Panjang"
 
 msgid "Elliptical Selection"
 msgstr "Seleksi Elips"
@@ -1730,7 +1729,7 @@ msgid "Lasso / Free Select Tool"
 msgstr "Lasso / Alat Pemangkas"
 
 msgid "Move"
-msgstr "Pindahi"
+msgstr "Pindah"
 
 msgid "Zoom"
 msgstr "Perbesar"
@@ -1739,7 +1738,7 @@ msgid "Pan"
 msgstr "Geser"
 
 msgid "Color Picker"
-msgstr "\"Color Picker\""
+msgstr "Pengambil Warna"
 
 msgid "Pencil"
 msgstr "Pensil"
@@ -1748,7 +1747,7 @@ msgid "Eraser"
 msgstr "Penghapus"
 
 msgid "Bucket"
-msgstr "\"Bucket\""
+msgstr "Ember"
 
 msgid "Shading Tool"
 msgstr "Alat Pembayang"
@@ -1763,40 +1762,40 @@ msgid "Ellipse Tool"
 msgstr "Alat Elips"
 
 msgid "Switch Colors"
-msgstr "Ganti warna"
+msgstr "Ganti Warna"
 
 msgid "Set the shortcut"
 msgstr "Pilih pintasan"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr "Tekan huruf di keyboard sebagai pintasan (bisa dikombinasikan)"
+msgstr "Tekan tombol atau gabungan tombol untuk dijadikan pintasan"
 
 msgid "Already assigned"
-msgstr "Sudah dipilih, Pilih yang lain!"
+msgstr "Sudah ditetapkan"
 
 msgid "Left Tool:"
-msgstr "Alat Kiri:"
+msgstr "Alat Di Kiri:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr "Alat ditetapkan untuk mouse kiri"
+msgstr "Alat ditetapkan untuk tetikus kiri"
 
 msgid "Right Tool:"
-msgstr "Alat Kanan:"
+msgstr "Alat Di Kanan:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr "Alat ditetapkan untuk mouse kanan"
+msgstr "Alat ditetapkan untuk tetikus kanan"
 
 msgid "Cannot find last project file."
-msgstr "Tidak bisa menemukan proyek terakhir"
+msgstr "Tidak dapat menemukan proyek terakhir."
 
 msgid "Cannot find project file."
-msgstr "Berkas projek tidak ditemukan."
+msgstr "Berkas proyek tidak ditemukan."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr "Kamu belum menyimpan atau membuka suatu proyek di Pixelorama!"
+msgstr "Kamu belum menyimpan atau membuka proyek apa pun di Pixelorama!"
 
 msgid "Open Last Project"
-msgstr "Buka proyek terakhir"
+msgstr "Buka Proyek Terakhir"
 
 msgid "Open last project..."
 msgstr "Buka proyek terakhir..."
@@ -1805,22 +1804,22 @@ msgid "Open last project on startup"
 msgstr "Buka proyek terakhir saat mulai"
 
 msgid "Opens last opened project on startup"
-msgstr "Buka proyek yang terakhir kali di buka saat pertama mulai"
+msgstr "Membuka proyek yang terakhir dibuka saat mulai"
 
 msgid "Quit confirmation"
 msgstr "Ditanya saat keluar"
 
 msgid "Enable autosave"
-msgstr "Aktifkan autosave (simpan otomatis)"
+msgstr "Aktifkan simpan otomatis"
 
 msgid "Autosave interval:"
-msgstr "Selang waktu menyimpan otomatis:"
+msgstr "Selang waktu simpan otomatis:"
 
 msgid "minute(s)"
 msgstr "menit"
 
 msgid "Create new directory for each frame tag"
-msgstr "Buat direktori baru untuk masing-masing tag bingkai"
+msgstr "Buat direktori baru untuk setiap frame tag"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
 msgstr "Membuat banyak berkas, tapi setiap berkas ditampung di direktori berbeda sesuai dengan tag bingkainya"
