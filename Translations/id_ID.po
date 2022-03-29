@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 04:50\n"
+"PO-Revision-Date: 2022-03-29 05:04\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -524,10 +524,10 @@ msgid "System Language"
 msgstr "Bahasa Sistem"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "Skala Tampilan"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Redupkan antarmuka pada sembulan dialog"
 
 msgid "Dark"
 msgstr "Gelap"
@@ -548,28 +548,28 @@ msgid "Purple"
 msgstr "Ungu"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Warna ikon dari:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Warna ikon:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Ukuran tombol alat:"
 
 msgid "Small"
-msgstr ""
+msgstr "Kecil"
 
 msgid "Big"
-msgstr ""
+msgstr "Besar"
 
 msgid "Only affect selection"
 msgstr "Hanya mempengaruhi pilihan"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Sel yang dipilih"
 
 msgid "Current cel"
 msgstr "Sel terpilih"
@@ -668,7 +668,7 @@ msgid "Issue Tracker"
 msgstr "Issue Tracker"
 
 msgid "Open Logs Folder"
-msgstr ""
+msgstr "Buka Folder \"Logs\""
 
 msgid "Changelog"
 msgstr "Perubahan"
