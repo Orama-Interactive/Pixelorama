@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 10:44\n"
+"PO-Revision-Date: 2022-03-29 11:13\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1478,7 +1478,7 @@ msgid "Toggle layer's visibility"
 msgstr "Cetik keterlihatan lapisan"
 
 msgid "Lock/unlock layer"
-msgstr "Kunci lapisan/layer"
+msgstr "Mengunci/buka lapisan"
 
 msgid "Frame: %s, Layer: %s"
 msgstr "Bingkai: %s, Lapisan: %s"
@@ -1486,7 +1486,7 @@ msgstr "Bingkai: %s, Lapisan: %s"
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Mampukan/lumpuhkan penautan cel\n\n"
-"Cel yang tertaut dibagikan ke banyak bingkai agar digambar sama"
+"Cel tertaut akan dibagikan ke bingkai lain agar digambar bersamaan"
 
 msgid "Palette"
 msgstr "Palet"
@@ -1495,19 +1495,19 @@ msgid "Palettes"
 msgstr "Palet"
 
 msgid "Add a new palette"
-msgstr "Tambahkan palet yang baru"
+msgstr "Tambah palet baru"
 
 msgid "Edit currently selected palette"
-msgstr "Edit palet yang sedang di pilih"
+msgstr "Sunting palet yang sedang dipilih"
 
 msgid "Choose a palette"
 msgstr "Pilih satu palet"
 
 msgid "Undo: Draw"
-msgstr "Undo: gambar"
+msgstr "Urungkan: Menggambar"
 
 msgid "Redo: Draw"
-msgstr "Redo: gambar"
+msgstr "Ulangi: Menggambar"
 
 msgid "Undo: Select"
 msgstr "Urungkan: Pilih"
@@ -1516,34 +1516,34 @@ msgid "Redo: Select"
 msgstr "Ulangi: Pilih"
 
 msgid "Undo: Scale"
-msgstr "Undo: Besar"
+msgstr "Urungkan: Ubah besar"
 
 msgid "Redo: Scale"
-msgstr "Redo: Besar"
+msgstr "Ulangi: Ubah besar"
 
 msgid "Undo: Add Layer"
-msgstr "Undo: tambahkan lapisan/layer"
+msgstr "Urungkan: Tambah lapisan"
 
 msgid "Redo: Add Layer"
-msgstr "Redo: tambahkan lapisan/layer"
+msgstr "Ulangi: Tambah lapisan"
 
 msgid "Undo: Remove Layer"
-msgstr "Undo: Hapus lapisan/layer"
+msgstr "Urungkan: Hapus lapisan"
 
 msgid "Redo: Remove Layer"
-msgstr "Redo: Hapus lapisan/layer"
+msgstr "Ulangi: Hapus lapisan"
 
 msgid "Undo: Merge Layer"
-msgstr "Undo: satukan lapisan/layer"
+msgstr "Urungkan: Satukan lapisan"
 
 msgid "Redo: Merge Layer"
-msgstr "Redo: satukan lapisan/layer"
+msgstr "Ulangi: Satukan lapisan"
 
 msgid "Undo: Change Layer Order"
-msgstr "Undo: Perubahan pada urutan lapisan/layer"
+msgstr "Urungkan: Perubahan urutan lapisan"
 
 msgid "Redo: Change Layer Order"
-msgstr "Redo: Perubahan pada urutan lapisan/layer"
+msgstr "Ulangi: Perubahan urutan lapisan"
 
 msgid "Undo: Add Frame"
 msgstr "Urungkan: Tambah Bingkai"
