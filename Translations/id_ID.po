@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 06:03\n"
+"PO-Revision-Date: 2022-03-29 06:12\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1688,10 +1688,10 @@ msgid "Lock aspect ratio"
 msgstr "Kuncikan nisbah aspek"
 
 msgid "Portrait"
-msgstr ""
+msgstr "Menegak"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Mendatar"
 
 msgid "Templates:"
 msgstr "Templet/Sampul:"
@@ -1712,28 +1712,28 @@ msgid "Rectangular Selection"
 msgstr "Seleksi petak"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "Seleksi Elips"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "Seleksi Poligon"
 
 msgid "Select By Color"
-msgstr ""
+msgstr "Pilih mengikuti warna"
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "Tongkat Ajaib"
 
 msgid "Lasso / Free Select Tool"
-msgstr ""
+msgstr "Lasso / Alat Pemangkas"
 
 msgid "Move"
-msgstr ""
+msgstr "Pindahi"
 
 msgid "Zoom"
 msgstr "Perbesar"
 
 msgid "Pan"
-msgstr ""
+msgstr "Geser"
 
 msgid "Color Picker"
 msgstr "\"Color Picker\""
@@ -1748,16 +1748,16 @@ msgid "Bucket"
 msgstr "\"Bucket\""
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Alat Pembayang"
 
 msgid "Line Tool"
-msgstr ""
+msgstr "Alat Garis"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "Alat Persegi Panjang"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "Alat Elips"
 
 msgid "Switch Colors"
 msgstr "Ganti warna"
