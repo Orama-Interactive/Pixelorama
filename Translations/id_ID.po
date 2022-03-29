@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 12:08\n"
+"PO-Revision-Date: 2022-03-29 15:45\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -954,10 +954,10 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Persegi Panjang"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Elips"
 
 msgid "Choose a color for the left tool"
 msgstr "Pilih warna untuk alat di sebelah kiri"
@@ -1004,10 +1004,10 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Menampilkan ikon alat di kanan yang dipakai di sebelah kursor di kanvas"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Gunakan kursor tetikus biasa"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Gunakan kursor silang untuk kanvas"
 
 msgid "Guides"
 msgstr "Panduan"
@@ -1019,13 +1019,13 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "Warna dari penggaris yang ditunjukkan di kanvas"
 
 msgid "Grid"
-msgstr ""
+msgstr "Kisi"
 
 msgid "Grid type:"
 msgstr "Tipe kisi:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Tetapkan tipe kisi antara persegi panjang, isometrik atau keduanya"
 
 msgid "Rectangular"
 msgstr "Persegi Panjang"
@@ -1896,7 +1896,7 @@ msgid "From Current Selection"
 msgstr ""
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Tambah warna baru"
 
 msgid "Remove a selected color"
 msgstr ""
