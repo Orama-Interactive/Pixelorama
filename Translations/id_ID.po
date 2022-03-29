@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 05:22\n"
+"PO-Revision-Date: 2022-03-29 05:33\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -851,7 +851,9 @@ msgstr "Seleksi Persegi Panjang\n\n"
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Seleksi Elips\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan"
 
 msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
@@ -1164,10 +1166,10 @@ msgid "Disable"
 msgstr ""
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Copot"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Buka Folder"
 
 msgid "Brush:"
 msgstr "Kuas:"
@@ -1197,17 +1199,18 @@ msgid "Overwrites color instead of blending it. This option is only relevant wit
 msgstr "Timpar warna ketimbang campur. Opsi ini hanya relevan bagi warna yang tidak sepenuhnya buram"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Pas Sesuai Piksel"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Warnai dalamnya"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Pas Sesuai Piksel\n"
+"Membuat garis terlihat mulus dengan menghapus piksel tambahan di tepinya"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Warnai Bentuk"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr ""
