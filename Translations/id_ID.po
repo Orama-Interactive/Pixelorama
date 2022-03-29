@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 15:58\n"
+"PO-Revision-Date: 2022-03-29 16:09\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1161,13 +1161,13 @@ msgid "If this is toggled on, when the application's window loses focus, it gets
 msgstr ""
 
 msgid "Add Extension"
-msgstr ""
+msgstr "Tambah Ekstensi"
 
 msgid "Enable"
-msgstr ""
+msgstr "Mampukan"
 
 msgid "Disable"
-msgstr ""
+msgstr "Lumpuhkan"
 
 msgid "Uninstall"
 msgstr "Copot"
@@ -1891,13 +1891,13 @@ msgid "Empty"
 msgstr "Kosongkan"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Dari Palet Saat Ini"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Dari Sprite Saat Ini"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Dari Seleksi Saat Ini"
 
 msgid "Add a new color"
 msgstr "Tambah warna baru"
@@ -1906,37 +1906,37 @@ msgid "Remove a selected color"
 msgstr "Hapus warna yang dipilih"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Palet dengan nama dan jalur yang sama sudah ada!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Palet perlu dinamakan!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-msgstr ""
+msgstr "Mengurangi ukuran palet akan mengatur ulang posisi warna. Ingat, warna yang tidak pas di ukuran palet baru akan hilang!"
 
 msgid "Position:"
-msgstr ""
+msgstr "Posisi:"
 
 msgid "Tools"
-msgstr ""
+msgstr "Peralatan"
 
 msgid "Main Canvas"
-msgstr ""
+msgstr "Kanvas Utama"
 
 msgid "Second Canvas"
-msgstr ""
+msgstr "Kanvas Kedua"
 
 msgid "Animation Timeline"
-msgstr ""
+msgstr "Garis Waktu Animasi"
 
 msgid "Canvas Preview"
-msgstr ""
+msgstr "Pratinjau Kanvas"
 
 msgid "Color Pickers"
-msgstr ""
+msgstr "Pengambil Warna"
 
 msgid "Global Tool Options"
-msgstr ""
+msgstr "Pengaturan Alat Global"
 
 msgid "Left Tool Options"
 msgstr ""
