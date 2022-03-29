@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 04:23\n"
+"PO-Revision-Date: 2022-03-29 04:35\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -268,16 +268,16 @@ msgid "New tab"
 msgstr "Tab baru"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Lembar sprite (tab baru)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Lembar sprite (lapisan baru)"
 
 msgid "New frame"
 msgstr "Frame Baru"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Gantikan bingkai"
 
 msgid "New layer"
 msgstr "Layer baru"
@@ -298,7 +298,7 @@ msgid "Vertical frames:"
 msgstr "Frame vertikal:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Bingkai awal:"
 
 msgid "At frame:"
 msgstr ""
