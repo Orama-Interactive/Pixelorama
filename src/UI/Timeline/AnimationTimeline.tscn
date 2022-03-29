@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/layers/new.png" type="Texture" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://assets/graphics/layers/clone.png" type="Texture" id=7]
 [ext_resource path="res://assets/graphics/timeline/move_arrow.png" type="Texture" id=8]
 [ext_resource path="res://src/UI/Timeline/FrameButton.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/UI/Timeline/LayerButton.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/graphics/timeline/new_frame.png" type="Texture" id=19]
 [ext_resource path="res://assets/graphics/timeline/remove_frame.png" type="Texture" id=20]
 [ext_resource path="res://assets/graphics/timeline/go_to_first_frame.png" type="Texture" id=21]
@@ -832,16 +831,16 @@ margin_right = 895.0
 margin_bottom = 75.0
 
 [node name="LayersAndFrames" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll"]
-margin_right = 252.0
+margin_right = 81.0
 margin_bottom = 68.0
 size_flags_vertical = 3
 
 [node name="LayerVBoxCont" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames"]
-margin_right = 212.0
+margin_right = 41.0
 margin_bottom = 68.0
 
 [node name="LayerLabel" type="Label" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
-margin_right = 212.0
+margin_right = 41.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 text = "Layers"
@@ -850,15 +849,12 @@ valign = 1
 
 [node name="LayersContainer" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
 margin_top = 20.0
-margin_right = 212.0
-margin_bottom = 56.0
-
-[node name="LayerContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont/LayersContainer" instance=ExtResource( 18 )]
-margin_right = 212.0
+margin_right = 41.0
+margin_bottom = 20.0
 
 [node name="FrameButtonsAndIds" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames"]
-margin_left = 216.0
-margin_right = 252.0
+margin_left = 45.0
+margin_right = 81.0
 margin_bottom = 68.0
 
 [node name="FrameIDs" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]

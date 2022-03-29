@@ -45,7 +45,7 @@ func _input(event: InputEvent) -> void:
 		and line_edit.visible
 		and event.scancode != KEY_SPACE
 	):
-		save_layer_name(line_edit.text)
+		_save_layer_name(line_edit.text)
 
 
 func _on_LayerContainer_gui_input(event: InputEvent) -> void:
@@ -81,10 +81,10 @@ func _on_LayerContainer_gui_input(event: InputEvent) -> void:
 
 
 func _on_LineEdit_focus_exited() -> void:
-	save_layer_name(line_edit.text)
+	_save_layer_name(line_edit.text)
 
 
-func save_layer_name(new_name: String) -> void:
+func _save_layer_name(new_name: String) -> void:
 	label.visible = true
 	line_edit.visible = false
 	line_edit.editable = false

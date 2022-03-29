@@ -103,8 +103,7 @@ var palettes := {}
 # Nodes
 var notification_label_node: PackedScene = preload("res://src/UI/NotificationLabel.tscn")
 
-onready var root: Node = get_tree().get_root()
-onready var control: Node = root.get_node("Control")
+onready var control: Node = get_tree().get_root().get_node("Control")
 
 onready var left_cursor: Sprite = control.find_node("LeftCursor")
 onready var right_cursor: Sprite = control.find_node("RightCursor")
@@ -182,10 +181,7 @@ func _ready() -> void:
 	var proj_size := Vector2(default_width, default_height)
 	projects.append(Project.new([], tr("untitled"), proj_size))
 	current_project = projects[0]
-	current_project.layers.append(Layer.new())
 	current_project.fill_color = default_fill_color
-	var frame: Frame = current_project.new_empty_frame()
-	current_project.frames.append(frame)
 
 	for node in get_tree().get_nodes_in_group("UIButtons"):
 		var tooltip: String = node.hint_tooltip
