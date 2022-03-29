@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 06:12\n"
+"PO-Revision-Date: 2022-03-29 06:25\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -121,10 +121,10 @@ msgid "Quit"
 msgstr "Keluar"
 
 msgid "Undo"
-msgstr "Undo"
+msgstr "Urungkan"
 
 msgid "Redo"
-msgstr "Redo"
+msgstr "Ulangi"
 
 msgid "Copy"
 msgstr "Salin"
@@ -1805,7 +1805,7 @@ msgid "Opens last opened project on startup"
 msgstr "Buka proyek yang terakhir kali di buka saat pertama mulai"
 
 msgid "Quit confirmation"
-msgstr ""
+msgstr "Ditanya saat keluar"
 
 msgid "Enable autosave"
 msgstr "Aktifkan autosave (simpan otomatis)"
@@ -1830,7 +1830,8 @@ msgstr "Hapus"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "Ditemukan proyek yang langsung disimpan dari sesi kena mogok.\n"
+"Apa kamu ingin memulihkan datanya?"
 
 msgid "Backup reloaded"
 msgstr "Backup dimuat ulang"
@@ -1863,25 +1864,25 @@ msgid "Frame duration"
 msgstr "Durasi gambar"
 
 msgid "Duration"
-msgstr ""
+msgstr "Durasi"
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Diubinkan Di Kedua Sumbu"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Diubinkan Di Sumbu X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Diubinkan Di Sumbu Y"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Buat palet baru"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Komentar:"
 
 msgid "Empty"
-msgstr ""
+msgstr "Kosong"
 
 msgid "From Current Palette"
 msgstr ""
