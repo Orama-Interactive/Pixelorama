@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 05:33\n"
+"PO-Revision-Date: 2022-03-29 05:41\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1213,7 +1213,7 @@ msgid "Fill Shape"
 msgstr "Warnai Bentuk"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Mewarnai isi bentuk yang digambar dan tidak menggambar bentuk berongga"
 
 msgid "Brush color from"
 msgstr "Warna dari"
