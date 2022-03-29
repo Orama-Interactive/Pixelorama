@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 10:10\n"
+"PO-Revision-Date: 2022-03-29 10:21\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1288,19 +1288,19 @@ msgid "100% Zoom"
 msgstr "Perbesar 100%"
 
 msgid "Mirroring"
-msgstr "Mirroring"
+msgstr "Pencerminan"
 
 msgid "Horizontal"
-msgstr "Horizontal"
+msgstr "Mendatar"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr "Aktifkan \"mirror\" horizontal saat menggambar"
+msgstr "Aktifkan gambar dicerminkan mendatar"
 
 msgid "Enable vertical mirrored drawing"
-msgstr "Aktifkan \"mirror\" vertikal saat menggambar"
+msgstr "Aktifkan gambar dicerminkan menegak"
 
 msgid "Vertical"
-msgstr "Vertikal"
+msgstr "Menegak"
 
 msgid "Current frame:"
 msgstr "Bingkai saat ini:"
@@ -1317,12 +1317,12 @@ msgstr "Ke bingkai sebelumnya\n"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr "Mainkan animasi secara mundur (dari akhir sampai awal) \n"
+msgstr "Putar animasi secara mundur (dari akhir sampai awal) \n"
 "(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr "Mainkan animasi secara normal (dari awal sampai akhir)\n"
+msgstr "Putar animasi secara normal (dari awal sampai akhir)\n"
 "(%s)"
 
 msgid "Go to the next frame\n"
@@ -1336,10 +1336,10 @@ msgstr "Lompat ke bingkai terakhir\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr "Settingan \"Onion Skinning\""
+msgstr "Pengaturan Onion Skinning"
 
 msgid "Enable/disable Onion Skinning"
-msgstr "Aktifkan/Matikan \"Onion Skinning\""
+msgstr "Mampukan/lumpuhkan Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -1347,16 +1347,16 @@ msgstr "Ingin berapa banyak bingkai animasinya diputar setiap detiknya?\n"
 "Semakin banyak FPS, semakin cepat animasinya."
 
 msgid "No loop"
-msgstr "Tidak ada perulangan"
+msgstr "Tanpa perulangan"
 
 msgid "Cycle loop"
-msgstr "Perulangan \"Cycle\""
+msgstr "Perulangan Daur"
 
 msgid "Ping-pong loop"
 msgstr "Perulangan \"Ping Pong\""
 
 msgid "Onion Skinning:"
-msgstr "\"Onion Skinning\":"
+msgstr "Onion Skinning:"
 
 msgid "Past Frames"
 msgstr "Bingkai sebelum"
@@ -1412,7 +1412,7 @@ msgid "Below canvas"
 msgstr "Di bawah kanvas"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr "Jika ingin lapisannya mengabaikan skin onion, tulis saja \"_io\" di ujung namanya."
+msgstr "Jika ingin lapisannya tidak usah onion skinning, tulis saja \"_io\" di ujung namanya."
 
 msgid "Add a new frame"
 msgstr "Tambah bingkai baru"
