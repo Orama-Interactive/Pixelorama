@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 07:28\n"
+"PO-Revision-Date: 2022-03-29 07:36\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1145,7 +1145,7 @@ msgid "Only custom preset can be modified"
 msgstr "Hanya preset kustom yang bisa di edit"
 
 msgid "Set application FPS limit:"
-msgstr "Atur batas FPS aplikasi:"
+msgstr "Tetapkan batas FPS aplikasi:"
 
 msgid "Pause application when it loses focus"
 msgstr ""
@@ -1555,13 +1555,13 @@ msgid "Undo: Remove Frame"
 msgstr "Urungkan: Hapus Bingkai"
 
 msgid "Redo: Remove Frame"
-msgstr "Redo: Hapus lapisan/layer"
+msgstr "Ulangi: Hapus Bingkai"
 
 msgid "Undo: Change Frame Order"
-msgstr "Undo: Perubahan pada urutan lapisan/layer"
+msgstr "Urungkan: Ubah Urutan Bingkai"
 
 msgid "Redo: Change Frame Order"
-msgstr "Redo: Perubahan pada urutan lapisan/layer"
+msgstr "Ulangi: Ubah Urutan Bingkai"
 
 msgid "Undo: Delete Custom Brush"
 msgstr "Undo: Hapus kuas kostum"
