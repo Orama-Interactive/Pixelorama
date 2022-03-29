@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 06:53\n"
+"PO-Revision-Date: 2022-03-29 07:02\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1151,7 +1151,7 @@ msgid "Pause application when it loses focus"
 msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "Tetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah angkanya, penggunaan CPU juga berkurang; tapi aplikasi akan lambat, patah-patah dan kurang tanggap. 0 berarti tidak ada batas."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
@@ -1343,8 +1343,8 @@ msgstr "Aktifkan/Matikan \"Onion Skinning\""
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "Seberapa banyak frame setiap detik saat animasinya dimainkan?\n"
-"Semakin banyak FPS-nya, semakin cepat animasinya."
+msgstr "Ingin berapa banyak bingkai animasinya diputar setiap detiknya?\n"
+"Semakin banyak FPS, semakin cepat animasinya."
 
 msgid "No loop"
 msgstr "Tidak ada perulangan"
@@ -1359,13 +1359,13 @@ msgid "Onion Skinning:"
 msgstr "\"Onion Skinning\":"
 
 msgid "Past Frames"
-msgstr "Frame sebelum"
+msgstr "Bingkai sebelum"
 
 msgid "Future Frames"
-msgstr "Frame setelah"
+msgstr "Bingkai setelah"
 
 msgid "Manage frame tags"
-msgstr "Ganti tanda frame (frame tags)"
+msgstr "Atur tag bingkai"
 
 msgid "Frame Tag Properties"
 msgstr "Rincian Sifat Tag Bingkai"
@@ -1383,7 +1383,7 @@ msgid "To:"
 msgstr "Ke:"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr "Animasi dimainkan hanya jika frame memiliki tanda yang sama"
+msgstr "Animasi diputar hanya pada bingkai yang memiliki tag sama"
 
 msgid "Tag %s (Frame %s)"
 msgstr "Tag %s (Bingkai %s)"
@@ -1400,10 +1400,10 @@ msgid "Blue-Red Mode"
 msgstr "Mode Biru-Merah"
 
 msgid "Show past frames:"
-msgstr "Tampilkan bingkai sebelumnya:"
+msgstr "Tampilkan bingkai sebelum:"
 
 msgid "Show future frames:"
-msgstr "Tampilkan bingkai selanjutnya:"
+msgstr "Tampilkan bingkai setelah:"
 
 msgid "Above canvas"
 msgstr "Di atas kanvas"
