@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 06:25\n"
+"PO-Revision-Date: 2022-03-29 06:35\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -142,7 +142,7 @@ msgid "New Brush"
 msgstr "Kuas baru"
 
 msgid "Scale Image"
-msgstr "Perbesar/perkecil gambar"
+msgstr "Besar/kecilkan gambar"
 
 msgid "Pixels"
 msgstr "Piksel"
@@ -157,13 +157,13 @@ msgid "Resize Canvas"
 msgstr "Ubah Ukuran Kanvas"
 
 msgid "Centralize Image"
-msgstr "Gambar terpusat"
+msgstr "Tengahkan Gambar"
 
 msgid "Rotate Image"
 msgstr "Putar Gambar"
 
 msgid "Clear"
-msgstr "Hapus"
+msgstr "Kosongkan"
 
 msgid "Invert"
 msgstr "Balikkan"
@@ -172,10 +172,10 @@ msgid "Mirror Image"
 msgstr "Cerminkan Gambar"
 
 msgid "Flip Horizontal"
-msgstr "Balikkan Horizontal"
+msgstr "Balikkan Mendatar"
 
 msgid "Flip Vertical"
-msgstr "Balikkan Vertikal"
+msgstr "Balikkan Menegak"
 
 msgid "Preferences"
 msgstr "Preferensi"
