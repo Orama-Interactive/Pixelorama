@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 04:41\n"
+"PO-Revision-Date: 2022-03-29 04:50\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -473,7 +473,7 @@ msgid "Canvas"
 msgstr "Kanvas"
 
 msgid "Selection"
-msgstr ""
+msgstr "Seleksi"
 
 msgid "Shortcuts"
 msgstr "Pintasan"
@@ -482,13 +482,13 @@ msgid "Backup"
 msgstr "Cadangan"
 
 msgid "Performance"
-msgstr ""
+msgstr "Kinerja"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Ekstensi"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Kursor"
 
 msgid "Indicators"
 msgstr "Indikator"
