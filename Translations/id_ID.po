@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 07:13\n"
+"PO-Revision-Date: 2022-03-29 07:28\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1442,7 +1442,7 @@ msgid "Frame Properties"
 msgstr "Rincian Sifat Bingkai"
 
 msgid "Frame properties"
-msgstr "Rincian Sifat Bingkai"
+msgstr "Rincian sifat bingkai"
 
 msgid "Layer"
 msgstr "Lapisan/Layer"
@@ -1546,13 +1546,13 @@ msgid "Redo: Change Layer Order"
 msgstr "Redo: Perubahan pada urutan lapisan/layer"
 
 msgid "Undo: Add Frame"
-msgstr "Undo: tambahkan lapisan/layer"
+msgstr "Urungkan: Tambah Bingkai"
 
 msgid "Redo: Add Frame"
-msgstr "Redo: tambahkan lapisan/layer"
+msgstr "Ulangi: Tambah Bingkai"
 
 msgid "Undo: Remove Frame"
-msgstr "Undo: Hapus lapisan/layer"
+msgstr "Urungkan: Hapus Bingkai"
 
 msgid "Redo: Remove Frame"
 msgstr "Redo: Hapus lapisan/layer"
@@ -1820,10 +1820,10 @@ msgid "minute(s)"
 msgstr "menit"
 
 msgid "Create new directory for each frame tag"
-msgstr "Buat direktori baru untuk setiap frame tag"
+msgstr "Buat direktori baru untuk masing-masing tag bingkai"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Buat banyak file tetapi setiap file disimpan di direktori berbeda yang sesuai dengan tag frame-nya"
+msgstr "Membuat banyak berkas tapi setiap berkas ditampung di direktori berbeda sesuai dengan tag bingkainya"
 
 msgid "Close"
 msgstr "Tutup"
@@ -1858,13 +1858,13 @@ msgid "and"
 msgstr "dan"
 
 msgid "Move the selected frame to the left."
-msgstr "Pindahkan gambar terpilih ke kiri."
+msgstr "Pindahkan bingkai terpilih ke kiri."
 
 msgid "Move the selected frame to the right."
-msgstr "Pindahkan frame terpilih ke kanan."
+msgstr "Pindahkan bingkai terpilih ke kanan."
 
 msgid "Frame duration"
-msgstr "Durasi gambar"
+msgstr "Durasi bingkai"
 
 msgid "Duration"
 msgstr "Durasi"
