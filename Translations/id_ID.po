@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 06:35\n"
+"PO-Revision-Date: 2022-03-29 06:46\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -181,13 +181,13 @@ msgid "Preferences"
 msgstr "Preferensi"
 
 msgid "Tile Mode"
-msgstr "Mode Gambar Berulang"
+msgstr "Mode Urutan Ubin"
 
 msgid "Window Opacity"
-msgstr "Jendela Opasitas"
+msgstr "Kelegapan Jendela"
 
 msgid "Panel Layout"
-msgstr "Panel tata letak"
+msgstr "Tata Letak Panel"
 
 msgid "Panels"
 msgstr "Panel"
@@ -226,7 +226,7 @@ msgid "Mirror View"
 msgstr "Cerminkan Tampilan"
 
 msgid "Show Grid"
-msgstr "Tampilkan garis"
+msgstr "Tampilkan Kisi"
 
 msgid "Show Pixel Grid"
 msgstr "Tampilkan Kisi Piksel"
@@ -235,10 +235,10 @@ msgid "Show Rulers"
 msgstr "Pakai Penggaris"
 
 msgid "Show Guides"
-msgstr "Tampilkan Petunjuk"
+msgstr "Tampilkan Panduan"
 
 msgid "Show Animation Timeline"
-msgstr "Tampilkan Frame Animasi"
+msgstr "Tampilkan Bingkai Animasi"
 
 msgid "Zen Mode"
 msgstr "Mode Zen"
@@ -250,13 +250,13 @@ msgid "Fill with color:"
 msgstr "Isi dengan warna:"
 
 msgid "Open a File"
-msgstr "Buka file"
+msgstr "Buka berkas"
 
 msgid "Open File(s)"
-msgstr "Buka file (lebih dari satu)"
+msgstr "Buka berkas-berkas"
 
 msgid "Import Options"
-msgstr "Piliha Impor"
+msgstr "Impor Pengaturan"
 
 msgid "Import as:"
 msgstr "Impor Sebagai:"
@@ -274,7 +274,7 @@ msgid "Spritesheet (new layer)"
 msgstr "Lembar sprite (lapisan baru)"
 
 msgid "New frame"
-msgstr "Frame Baru"
+msgstr "Bingkai Baru"
 
 msgid "Replace frame"
 msgstr "Gantikan bingkai"
@@ -292,10 +292,10 @@ msgid "New pattern"
 msgstr "Pola baru"
 
 msgid "Horizontal frames:"
-msgstr "Frame horisontal:"
+msgstr "Bingkai mendatar:"
 
 msgid "Vertical frames:"
-msgstr "Frame vertikal:"
+msgstr "Bingkai menegak:"
 
 msgid "Start frame:"
 msgstr "Bingkai awal:"
@@ -353,13 +353,13 @@ msgstr "Tak dapat memuat '%s'.\n"
 "Ini bukan berkas palet yang absah."
 
 msgid "Frame"
-msgstr "Frame"
+msgstr "Bingkai"
 
 msgid "Frames:"
-msgstr "Frame:"
+msgstr "Bingkai:"
 
 msgid "All Frames"
-msgstr "Semua Frame"
+msgstr "Semua Bingkai"
 
 msgid "Spritesheet"
 msgstr "Spritesheet"
@@ -371,7 +371,7 @@ msgid "Preview:"
 msgstr "Preview:"
 
 msgid "Frame:"
-msgstr "Frame:"
+msgstr "Bingkai:"
 
 msgid "Orientation:"
 msgstr "Orientasi:"
@@ -395,10 +395,10 @@ msgid "Open a Directory"
 msgstr "Buka direktori"
 
 msgid "All frames as multiple files"
-msgstr "Semua frame sebagai banyak file"
+msgstr "Semua bingkai sebagai banyak berkas"
 
 msgid "All frames as a single file animation"
-msgstr "Semua frames sebagai satu animasi"
+msgstr "Semua bingkai sebagai satu animasi"
 
 msgid "Background:"
 msgstr "Latar belakang:"
@@ -1145,7 +1145,7 @@ msgid "Only custom preset can be modified"
 msgstr "Hanya preset kustom yang bisa di edit"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Atur batas FPS aplikasi:"
 
 msgid "Pause application when it loses focus"
 msgstr ""
