@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-30 08:24\n"
+"PO-Revision-Date: 2022-03-30 08:51\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -566,7 +566,7 @@ msgid "Big"
 msgstr "Besar"
 
 msgid "Only affect selection"
-msgstr "Hanya mempengaruhi seleksi"
+msgstr "Hanya memengaruhi seleksi"
 
 msgid "Selected cels"
 msgstr "Cel yang dipilih"
@@ -683,7 +683,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Dikembangkan oleh Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "©2019-dipersembahkan oleh Orama Interactive dan penyumbang"
+msgstr "©2019-dipersembahkan oleh Orama Interactive dan penyumbangsih"
 
 msgid "Website"
 msgstr "Situs web"
