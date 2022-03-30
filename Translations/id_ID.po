@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-30 09:32\n"
+"PO-Revision-Date: 2022-03-30 09:49\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1085,31 +1085,31 @@ msgid "Isometric cell bounds width:"
 msgstr "Lebar batas sel isometik:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Menetapkan lebar kotak pembatas yang disejajarkan sumbu sel isometrik"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Tinggi batas sel isometik:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Menetapkan tinggi kotak pembatas yang disejajarkan sumbu sel isometrik"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Offset kisi X:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Menetapkan offset kisi X dari kanvas aslinya (Di pojok kiri atas gambar)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Offset kisi Y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Menetapkan offset kisi Y dari kanvas aslinya (Di pojok kiri atas gambar)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Gambar di atas Mode Ubin:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Jika dilumpuhkan, kisi hanya akan ditaruh di atas gambar aslinya"
 
 msgid "Grid color:"
 msgstr "Warna Kisi:"
