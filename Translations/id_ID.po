@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-30 10:03\n"
+"PO-Revision-Date: 2022-03-30 10:10\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1229,7 +1229,7 @@ msgid "Overwrite Color"
 msgstr "Timpa warna"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr "Menimpa warna daripada dicampur. Opsi ini hanya relevan bagi warna yang tidak sepenuhnya legap (opaque)"
+msgstr "Warnanya ditimpa dan tak dicampur. Opsi ini hanya relevan bagi warna yang tidak sepenuhnya legap (opaque)"
 
 msgid "Pixel Perfect"
 msgstr "Pas Sesuai Piksel"
@@ -1291,7 +1291,7 @@ msgid "Amount:"
 msgstr "Jumlah:"
 
 msgid "Lighten/Darken amount"
-msgstr "Jumlah Penerang/Penggelap"
+msgstr "Jumlah Terang/Gelap"
 
 msgid "Pick for:"
 msgstr "Ambil untuk:"
