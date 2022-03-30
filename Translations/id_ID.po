@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-30 18:27\n"
+"PO-Revision-Date: 2022-03-30 18:38\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1798,25 +1798,25 @@ msgid "Switch Colors"
 msgstr "Ganti Warna"
 
 msgid "Set the shortcut"
-msgstr "Pilih pintasan"
+msgstr "Atur pintasan"
 
 msgid "Press a key or a key combination to set the shortcut"
 msgstr "Tekan tombol atau gabungan tombol untuk dijadikan pintasan"
 
 msgid "Already assigned"
-msgstr "Sudah ditetapkan"
+msgstr "Pernah ditetapkan"
 
 msgid "Left Tool:"
 msgstr "Alat Di Kiri:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr "Alat yang ditetapkan di tetikus kiri"
+msgstr "Alat yang ditetapkan di tombol tetikus kiri"
 
 msgid "Right Tool:"
 msgstr "Alat Di Kanan:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr "Alat yang ditetapkan di tetikus kanan"
+msgstr "Alat yang ditetapkan di tombol tetikus kanan"
 
 msgid "Cannot find last project file."
 msgstr "Tidak dapat menemukan proyek terakhir."
