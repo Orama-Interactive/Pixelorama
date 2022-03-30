@@ -27,7 +27,7 @@ __meta__ = {
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_right = 534.0
-margin_bottom = 300.0
+margin_bottom = 324.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -35,8 +35,9 @@ __meta__ = {
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer"]
 margin_left = 117.0
+margin_top = 12.0
 margin_right = 417.0
-margin_bottom = 300.0
+margin_bottom = 312.0
 rect_min_size = Vector2( 300, 300 )
 expand = true
 stretch_mode = 6
@@ -56,7 +57,7 @@ visible = false
 margin_top = 304.0
 margin_right = 534.0
 margin_bottom = 324.0
-text = "Apply to all ?"
+text = "Apply to all"
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 328.0
