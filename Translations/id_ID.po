@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-30 07:03\n"
+"PO-Revision-Date: 2022-03-30 07:13\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -256,7 +256,7 @@ msgid "Open File(s)"
 msgstr "Buka berkas-berkas"
 
 msgid "Import Options"
-msgstr "Impor Pengaturan"
+msgstr "Pengaturan Impor"
 
 msgid "Import as:"
 msgstr "Impor Sebagai:"
@@ -328,7 +328,7 @@ msgid "Export Sprite"
 msgstr "Ekspor \"sprite\""
 
 msgid "File Exists, Overwrite?"
-msgstr "Ada berkasnya, timpa saja?"
+msgstr "Ada berkasnya. Timpa saja?"
 
 msgid "File %s already exists. Overwrite?"
 msgstr "Berkas %s sudah ada. Timpa saja?"
@@ -1634,10 +1634,10 @@ msgid "Error"
 msgstr "Galat"
 
 msgid "Error: Palette must have a valid name."
-msgstr "Galat: Nama palet harus yang valid."
+msgstr "Galat: Nama palet harus yang absah."
 
 msgid "Invalid Palette file!"
-msgstr "File palet tidak valid"
+msgstr "Berkas palet tidak absah!"
 
 msgid "Edit Palette"
 msgstr "Sunting Palet"
