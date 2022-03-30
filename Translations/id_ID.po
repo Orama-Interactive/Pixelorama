@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-30 08:13\n"
+"PO-Revision-Date: 2022-03-30 08:24\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -458,7 +458,7 @@ msgid "General"
 msgstr "Umum"
 
 msgid "Startup"
-msgstr "Memulai"
+msgstr "Saat Mulai"
 
 msgid "Language"
 msgstr "Bahasa"
@@ -1753,7 +1753,7 @@ msgid "Move"
 msgstr "Pindah"
 
 msgid "Zoom"
-msgstr "Perbesar"
+msgstr "Keker"
 
 msgid "Pan"
 msgstr "Geser"
