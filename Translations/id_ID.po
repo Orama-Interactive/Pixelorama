@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-30 18:15\n"
+"PO-Revision-Date: 2022-03-30 18:27\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1684,7 +1684,7 @@ msgid "Patrons:"
 msgstr "Patrons:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr "Ingin nama atau perusahaan ditampilkan pada layar splash?"
+msgstr "Ingin ada nama atau perusahaan ditampilkan pada layar splash?"
 
 msgid "Become a Platinum Sponsor"
 msgstr "Jadi Sponsor Platinum"
@@ -1714,10 +1714,10 @@ msgid "A default height of a new image"
 msgstr "Tinggi bawaan untuk gambar baru"
 
 msgid "Default fill color:"
-msgstr "Warna isian bawaan:"
+msgstr "Warna isi bawaan:"
 
 msgid "A default background color of a new image"
-msgstr "Warna latar belakang bawaan gambar baru"
+msgstr "Warna latar belakang bawaan pada gambar baru"
 
 msgid "Lock aspect ratio"
 msgstr "Kuncikan nisbah aspek"
@@ -1741,7 +1741,7 @@ msgid "Default"
 msgstr "Bawaan"
 
 msgid "Custom"
-msgstr "Ubah suai"
+msgstr "Kustom"
 
 msgid "Rectangular Selection"
 msgstr "Seleksi Persegi Panjang"
