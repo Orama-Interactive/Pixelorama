@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-30 07:32\n"
+"PO-Revision-Date: 2022-03-30 07:42\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -989,13 +989,13 @@ msgid "Left pixel indicator"
 msgstr "Indikator piksel kiri"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr "Perlihatkan indikator piksel tetikus kiri atau kuas di kanvas saat menggambar"
+msgstr "Tampilkan indikator piksel tetikus kiri atau kuas di kanvas saat menggambar"
 
 msgid "Right pixel indicator"
 msgstr "Indikator piksel kanan"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr "Perlihatkan indikator piksel tetikus kanan atau kuas di kanvas saat menggambar"
+msgstr "Tampilkan indikator piksel tetikus kanan atau kuas di kanvas saat menggambar"
 
 msgid "Show left tool icon"
 msgstr "Tampilkan ikon alat di kiri"
