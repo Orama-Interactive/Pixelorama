@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2022-03-25 00:04\n"
+"PO-Revision-Date: 2022-03-30 23:32\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -260,6 +260,9 @@ msgstr "Importálás beállításai"
 
 msgid "Import as:"
 msgstr "Importálás másként:"
+
+msgid "Apply to all"
+msgstr ""
 
 msgid "Recent projects"
 msgstr "Utoljára megnyitott projektek"
