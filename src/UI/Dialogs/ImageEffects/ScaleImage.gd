@@ -52,4 +52,4 @@ func _on_HeightValuePerc_value_changed(value: float) -> void:
 
 func _on_AspectRatioButton_toggled(button_pressed: bool) -> void:
 	if button_pressed:
-		height_value.value = width_value.value / aspect_ratio
+		aspect_ratio = width_value.value / height_value.value
