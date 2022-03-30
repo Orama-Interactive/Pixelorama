@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-29 18:22\n"
+"PO-Revision-Date: 2022-03-30 06:53\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -46,25 +46,25 @@ msgid "Size:"
 msgstr "Ukuran:"
 
 msgid "Width:"
-msgstr "Panjang:"
+msgstr "Lebar:"
 
 msgid "Height:"
-msgstr "Lebar:"
+msgstr "Tinggi:"
 
 msgid "Center"
 msgstr "Tengah"
 
 msgid "File"
-msgstr "Berkas/File"
+msgstr "Berkas"
 
 msgid "Edit"
-msgstr "Edit"
+msgstr "Sunting"
 
 msgid "Select"
 msgstr "Seleksi"
 
 msgid "View"
-msgstr "Tampilan"
+msgstr "Lihat"
 
 msgid "Window"
 msgstr "Jendela"
@@ -94,7 +94,7 @@ msgid "Save as..."
 msgstr "Simpan sebagai..."
 
 msgid "Use ZSTD Compression"
-msgstr "Gunakan kompresi ZSTD"
+msgstr "Gunakan pampatan ZSTD"
 
 msgid "Import"
 msgstr "Impor"
