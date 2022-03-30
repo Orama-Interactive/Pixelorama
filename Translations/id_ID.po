@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-30 09:49\n"
+"PO-Revision-Date: 2022-03-30 10:03\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1178,16 +1178,16 @@ msgid "Only custom preset can be modified"
 msgstr "Hanya praatur khusus yang dapat disunting"
 
 msgid "Set application FPS limit:"
-msgstr "Penetapan batas FPS aplikasi:"
+msgstr "Batas FPS aplikasi:"
 
 msgid "Pause application when it loses focus"
-msgstr "Jedakan aplikasi ketika kurang fokus"
+msgstr "Jedakan aplikasi ketika hilang fokus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Menetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah angkanya, penggunaan CPU juga berkurang; tapi aplikasi akan lambat, patah-patah dan kurang tanggap. 0 berarti tidak ada batas."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr ""
+msgstr "Jika dinyalakan, ketika jendela aplikasi hilang fokus nanti akan dijedakan. Ini membantu mengurangi penggunaan CPU saat terbiar. Aplikasi akan tidak dijeda ketika tetikus ada pada jendela aplikasi."
 
 msgid "Add Extension"
 msgstr "Tambah Ekstensi"
@@ -1208,7 +1208,7 @@ msgid "Brush:"
 msgstr "Kuas:"
 
 msgid "Select a brush"
-msgstr "Pilih satu kuas"
+msgstr "Pilih kuas"
 
 msgid "Pixel brush"
 msgstr "Kuas piksel"
