@@ -150,13 +150,10 @@ func draw_start(position: Vector2) -> void:
 	):
 		return
 	var undo_data = _get_undo_data()
-	var start_time = OS.get_ticks_msec ()
 	if _fill_area == 0:
 		fill_in_area(position)
 	else:
 		fill_in_color(position)
-	var end_time = OS.get_ticks_msec ()
-	print("elapsed ",  end_time- start_time)
 	commit_undo("Draw", undo_data)
 
 
