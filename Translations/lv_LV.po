@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2022-03-25 00:03\n"
+"PO-Revision-Date: 2022-03-30 23:31\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -260,6 +260,9 @@ msgstr ""
 
 msgid "Import as:"
 msgstr "Importēt kā:"
+
+msgid "Apply to all"
+msgstr ""
 
 msgid "Recent projects"
 msgstr "Pēdējie Projekti"
