@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-30 06:53\n"
+"PO-Revision-Date: 2022-03-30 07:03\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -166,16 +166,16 @@ msgid "Clear"
 msgstr "Kosongkan"
 
 msgid "Invert"
-msgstr "Balikkan"
+msgstr "Terbalikkan"
 
 msgid "Mirror Image"
 msgstr "Cerminkan Gambar"
 
 msgid "Flip Horizontal"
-msgstr "Balikkan Mendatar"
+msgstr "Dibalik Mendatar"
 
 msgid "Flip Vertical"
-msgstr "Balikkan Menegak"
+msgstr "Dibalik Menegak"
 
 msgid "Preferences"
 msgstr "Preferensi"
