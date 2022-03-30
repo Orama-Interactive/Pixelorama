@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-03-26 09:30\n"
+"PO-Revision-Date: 2022-03-30 23:31\n"
 
 msgid "OK"
 msgstr "确定"
@@ -260,6 +260,9 @@ msgstr "导入选项"
 
 msgid "Import as:"
 msgstr "导入为："
+
+msgid "Apply to all"
+msgstr ""
 
 msgid "Recent projects"
 msgstr "最近项目"
