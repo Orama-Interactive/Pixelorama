@@ -376,10 +376,9 @@ func save_pxo_file(
 		# Set last opened project path and save
 		Global.config_cache.set_value("preferences", "last_project_path", path)
 		Global.config_cache.save("user://cache.ini")
-		Export.file_name = path.get_file().trim_suffix(".pxo")
-		Export.directory_path = path.get_base_dir()
-		Export.was_exported = false
-		project.was_exported = false
+		if !project.was_exported:
+			Export.file_name = path.get_file().trim_suffix(".pxo")
+			Export.directory_path = path.get_base_dir()
 		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
 
 	save_project_to_recent_list(path)
@@ -395,7 +394,7 @@ func open_image_as_new_tab(path: String, image: Image) -> void:
 	frame.cels.append(Cel.new(image, 1))
 
 	project.frames.append(frame)
-	set_new_tab(project, path)
+	set_new_imported_tab(project, path)
 
 
 func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert: int) -> void:
@@ -425,7 +424,7 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 
 			project.frames.append(frame)
 
-	set_new_tab(project, path)
+	set_new_imported_tab(project, path)
 
 
 func open_image_as_spritesheet_layer(
@@ -596,9 +595,9 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	project.undo_redo.commit_action()
 
 
-func set_new_tab(project: Project, path: String) -> void:
-	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
+func set_new_imported_tab(project: Project, path: String) -> void:
+	var prev_project_empty: bool = Global.current_project.is_empty()
+	var prev_project_pos: int = Global.current_project_index
 
 	Global.window_title = (
 		path.get_file()
@@ -613,8 +612,18 @@ func set_new_tab(project: Project, path: String) -> void:
 	var directory_path := path.get_basename().replace(file_name, "")
 	project.directory_path = directory_path
 	project.file_name = file_name
+	project.was_exported = true
+	if path.get_extension().to_lower() == "png":
+		project.export_overwrite = true
 	Export.directory_path = directory_path
 	Export.file_name = file_name
+	Export.was_exported = true
+
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
+
+	if prev_project_empty:
+		Global.tabs.delete_tab(prev_project_pos)
 
 
 func update_autosave() -> void:

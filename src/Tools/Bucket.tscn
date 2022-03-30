@@ -45,7 +45,7 @@ margin_bottom = 56.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Same color area"
-items = [ "Same color area", null, false, 0, null, "Similar color pixels", null, false, 1, null ]
+items = [ "Same color area", null, false, 0, null, "Same color pixels", null, false, 1, null ]
 selected = 0
 
 [node name="Similarity" type="VBoxContainer" parent="." index="3"]

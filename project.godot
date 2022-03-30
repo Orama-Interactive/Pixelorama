@@ -143,14 +143,16 @@ _global_script_class_icons={
 config/name="Pixelorama"
 config/description="A free & open-source 2D sprite editor"
 run/main_scene="res://src/Main.tscn"
+config/use_custom_user_dir=true
 run/low_processor_mode=true
 boot_splash/image="res://assets/graphics/splash.png"
 boot_splash/bg_color=Color( 0.145098, 0.145098, 0.164706, 1 )
 config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
-config/Version="v0.10-dev"
+config/custom_user_dir_name.X11="pixelorama"
 run/low_processor_mode.Android=false
+config/Version="v0.10-rc1"
 
 [audio]
 

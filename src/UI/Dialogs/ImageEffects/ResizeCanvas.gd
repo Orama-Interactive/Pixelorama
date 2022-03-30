@@ -5,7 +5,6 @@ var height := 64
 var offset_x := 0
 var offset_y := 0
 var image: Image
-var first_time := true
 
 onready var width_spinbox: SpinBox = $VBoxContainer/OptionsContainer/WidthValue
 onready var height_spinbox: SpinBox = $VBoxContainer/OptionsContainer/HeightValue
@@ -20,7 +19,7 @@ func _on_ResizeCanvas_about_to_show() -> void:
 	image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
-	image.lock()
+
 	var layer_i := 0
 	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
 		if Global.current_project.layers[layer_i].visible:
@@ -40,17 +39,14 @@ func _on_ResizeCanvas_about_to_show() -> void:
 				cel_image, Rect2(Vector2.ZERO, Global.current_project.size), Vector2.ZERO
 			)
 		layer_i += 1
-	image.unlock()
 
-	if first_time:
-		width_spinbox.value = Global.current_project.size.x
-		height_spinbox.value = Global.current_project.size.y
+	width_spinbox.value = Global.current_project.size.x
+	height_spinbox.value = Global.current_project.size.y
 	update_preview()
 
 
 func _on_ResizeCanvas_confirmed() -> void:
 	DrawingAlgos.resize_canvas(width, height, offset_x, offset_y)
-	first_time = false
 
 
 func _on_WidthValue_value_changed(value: int) -> void:

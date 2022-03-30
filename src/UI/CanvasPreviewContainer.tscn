@@ -24,9 +24,6 @@ margin_right = 328.0
 margin_bottom = 174.0
 size_flags_vertical = 0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0

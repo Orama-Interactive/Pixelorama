@@ -178,7 +178,11 @@ func set_tabs_visible(value: bool) -> void:
 	_tabs_visible = value
 	for i in range(1, _panel_container.get_child_count()):
 		var panel = _panel_container.get_child(i)
-		panel.tabs_visible = value
+		if panel.get_tab_count() >= 2:
+			panel.tabs_visible = true
+		else:
+			panel.tabs_visible = value
+	queue_sort()
 
 
 func get_tabs_visible() -> bool:

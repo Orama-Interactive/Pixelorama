@@ -285,7 +285,6 @@ script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/ViewportContainer"]
 size = Vector2( 862, 466 )
-handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
 
@@ -361,7 +360,7 @@ margin_bottom = 242.0
 margin_left = 958.0
 margin_top = 266.0
 margin_right = 1107.0
-margin_bottom = 574.0
+margin_bottom = 592.0
 rect_min_size = Vector2( 72, 72 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -369,7 +368,7 @@ __meta__ = {
 
 [node name="LeftPanelContainer" type="PanelContainer" parent="DockableContainer/Left Tool Options"]
 margin_right = 149.0
-margin_bottom = 308.0
+margin_bottom = 326.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -378,19 +377,19 @@ size_flags_vertical = 3
 margin_left = 1127.0
 margin_top = 266.0
 margin_right = 1276.0
-margin_bottom = 574.0
+margin_bottom = 592.0
 rect_min_size = Vector2( 72, 72 )
 
 [node name="RightPanelContainer" type="PanelContainer" parent="DockableContainer/Right Tool Options"]
 margin_right = 149.0
-margin_bottom = 308.0
+margin_bottom = 326.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Palettes" parent="DockableContainer" instance=ExtResource( 20 )]
 margin_left = 958.0
-margin_top = 598.0
+margin_top = 616.0
 margin_right = 1276.0
 margin_bottom = 716.0
 

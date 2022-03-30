@@ -38,13 +38,11 @@
  
 [![Pixelorama's UI](https://img.itch.zone/aW1hZ2UvNDcwMzY3LzcwMTE1NzUucG5n/original/7Ykr%2Fj.png)](https://youtu.be/sM1v5uaBSrM)
 
-Make sure to visit our website for more information! https://www.orama-interactive.com
-
 Join our Discord community server​ where we can discuss about Pixelorama and all our other projects! https://discord.gg/GTMtr8s
 
 If you like, consider helping us by sponsoring this project! It would enable us to focus more on Pixelorama, and make more projects in the future!
 
-Support us on: [![Become a Patron!](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://patreon.com/OramaInteractive)
+[![Become a Patron!](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://patreon.com/OramaInteractive)
 
 ## Download
 Stable versions:
@@ -53,7 +51,7 @@ Stable versions:
 - [GitHub Pages (Web)](https://orama-interactive.github.io/Pixelorama/)
 - [Flathub (Linux)](https://flathub.org/apps/details/com.orama_interactive.Pixelorama)
 - [Snap Store (Linux)](https://snapcraft.io/pixelorama)
-- [OpenStore (Linux)](https://open-store.io/app/pixelorama.orama-interactive)
+- [OpenStore (Ubuntu Touch)](https://open-store.io/app/pixelorama.orama-interactive)
 
 You can also find early access builds in the [GitHub Actions page](https://github.com/Orama-Interactive/Pixelorama/actions). There's also a [Web version available](https://orama-interactive.github.io/Pixelorama/early_access/).
 Keep in mind that these versions will have bugs and are unstable. Unless you're interested in testing the main branch of Pixelorama, it's recommended that you stick to a stable version.
@@ -89,7 +87,8 @@ As of right now, most of the code is written using GDScript, so the mono version
 
 ## Special thanks to
 - All [Godot](https://github.com/godotengine/godot) contributors! Without Godot, Pixelorama would not exist.
+- https://github.com/gilzoide/godot-dockable-container - the plugin Pixelorama's UI system uses for dockable containers.
 - https://github.com/jegor377/godot-gdgifexporter - the gif exporter Pixelorama uses.
 - https://github.com/Pukkah/HTML5-File-Exchange-for-Godot - responsible for file exchange in Pixelorama's HTML5 (Web) version.
-- https://github.com/aBARICHELLO/godot-ci - for creating a Godot Docker image that lets us export Pixelorama automatically using GitHub Actions.
+- https://github.com/aBARICHELLO/godot-ci - for creating a Godot Docker image that lets us export Pixelorama automatically using GitHub Actions, as well as https://github.com/huskeee/godot-headless-mac for automated macOS exporting and https://github.com/hiulit/Unofficial-Godot-Engine-Raspberry-Pi for automated Raspberry Pi 4 exporting.
 - The entire Pixelorama community! Contributors, donors, translators, users, you all have a special place in our hearts! <3

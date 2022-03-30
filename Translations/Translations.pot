@@ -91,6 +91,9 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
+msgid "Overwrite"
+msgstr ""
+
 msgid "Export..."
 msgstr ""
 
@@ -154,7 +157,7 @@ msgstr ""
 msgid "Invert"
 msgstr ""
 
-msgid "Flip"
+msgid "Mirror Image"
 msgstr ""
 
 msgid "Flip Horizontal"
@@ -181,7 +184,22 @@ msgstr ""
 msgid "Layouts"
 msgstr ""
 
+msgid "Moveable Panels"
+msgstr ""
+
 msgid "Manage Layouts"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Add Layout"
+msgstr ""
+
+msgid "Edit Layout"
+msgstr ""
+
+msgid "Are you sure you want to delete this layout?"
 msgstr ""
 
 msgid "Auto"

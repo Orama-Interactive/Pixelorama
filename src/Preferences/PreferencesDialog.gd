@@ -263,12 +263,10 @@ func preference_update(prop: String) -> void:
 		Tools.set_button_size(Global.tool_button_size)
 
 	if prop == "native_cursors":
-		var image
 		if Global.native_cursors:
-			image = null
+			Input.set_custom_mouse_cursor(null, Input.CURSOR_CROSS, Vector2(15, 15))
 		else:
-			image = Global.control.cursor_image
-		Input.set_custom_mouse_cursor(image, Input.CURSOR_CROSS, Vector2(15, 15))
+			Global.control.set_custom_cursor()
 
 	if prop == "cross_cursor":
 		if Global.cross_cursor:
@@ -323,6 +321,7 @@ func _on_ShrinkApplyButton_pressed() -> void:
 		Vector2(1024, 576),
 		Global.shrink
 	)
+	Global.control.set_custom_cursor()
 	hide()
 	popup_centered(Vector2(400, 280))
 	Global.dialog_open(true)
