@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-30 18:38\n"
+"PO-Revision-Date: 2022-03-30 18:46\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -340,16 +340,16 @@ msgid "Exporting in progress..."
 msgstr "Ekspor sedang berlangsung..."
 
 msgid "Can't load file '%s'."
-msgstr "Tak dapat memuat '%s'."
+msgstr "Tak bisa memuat '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr "Tak dapat memuat '%s'.\n"
+msgstr "Tak bisa memuat '%s'.\n"
 "Kode galat: %s"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr "Tak dapat memuat '%s'.\n"
+msgstr "Tak bisa memuat '%s'.\n"
 "Ini bukan berkas palet yang absah."
 
 msgid "Frame"
@@ -1124,7 +1124,7 @@ msgid "Show at zoom:"
 msgstr "Muncul saat dikeker:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr "Menetapkan minimal dapat dikeker saat kisi piksel muncul"
+msgstr "Menetapkan minimal bisa dikeker saat kisi piksel muncul"
 
 msgid "Pixel grid color:"
 msgstr "Warna kisi piksel:"
@@ -1175,7 +1175,7 @@ msgid "Border color 2:"
 msgstr "Warna tepian 2:"
 
 msgid "Only custom preset can be modified"
-msgstr "Hanya praatur khusus yang dapat disunting"
+msgstr "Hanya praatur khusus yang bisa disunting"
 
 msgid "Set application FPS limit:"
 msgstr "Batas FPS aplikasi:"
@@ -1881,7 +1881,7 @@ msgid "You can't remove more palettes!"
 msgstr "Kamu tidak bisa menghapus palet lagi!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr "Tidak bisa menghapus palet, karena tidak ada!"
+msgstr "Tak bisa menghapus palet, karena palet tidak ada!"
 
 msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Terjadi kegalatan ketika menghapus palet! Kode galat: %s"
