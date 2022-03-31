@@ -9,6 +9,10 @@ var _fill_area := 0
 var _fill_with := 0
 var _offset_x := 0
 var _offset_y := 0
+# working array used as buffer for segments while flooding
+var _allegro_flood_segments : Array
+# results array per image while flooding
+var _allegro_image_segments : Array
 
 
 func _ready() -> void:
@@ -228,12 +232,6 @@ func fill_in_area(position: Vector2) -> void:
 		_flood_fill(Vector2(position.x, mirror_y))
 
 
-# working array
-var _allegro_flood_segments : Array
-# results array per image
-var _allegro_image_segments : Array
-
-
 # Add a new segment to the array
 func _add_new_segment(y: int = 0) -> void:
 	var segment = {}
@@ -254,22 +252,22 @@ func _flood_line_around_point(
 	position: Vector2,
 	project: Project,
 	image: Image,
-	srcColor: Color
+	src_color: Color
 ) -> int:
 	# this method is called by `_my_flood_fill` after the required data structures
 	# have been initialized
-	if not image.get_pixelv(position).is_equal_approx(srcColor):
+	if not image.get_pixelv(position).is_equal_approx(src_color):
 		return int(position.x) + 1
 	var west: Vector2 = position
 	var east: Vector2 = position
 	while (
 		project.can_pixel_get_drawn(west)
-		&& image.get_pixelv(west).is_equal_approx(srcColor)
+		&& image.get_pixelv(west).is_equal_approx(src_color)
 	):
 		west += Vector2.LEFT
 	while (
 		project.can_pixel_get_drawn(east)
-		&& image.get_pixelv(east).is_equal_approx(srcColor)
+		&& image.get_pixelv(east).is_equal_approx(src_color)
 	):
 		east += Vector2.RIGHT
 	# Make a note of the stuff we processed
@@ -307,7 +305,7 @@ func _check_flooded_segment(
 	right: int,
 	project: Project,
 	image: Image,
-	srcColor: Color
+	src_color: Color
 ) -> bool:
 	var ret = false
 	var c : int = 0
@@ -320,7 +318,7 @@ func _check_flooded_segment(
 				break
 			c = segment.next
 			if c == 0: # couldn't find a valid segment, so we draw a new one
-				left = _flood_line_around_point(Vector2(left, y), project, image, srcColor)
+				left = _flood_line_around_point(Vector2(left, y), project, image, src_color)
 				ret = true
 				break
 	return ret
@@ -331,9 +329,9 @@ func _flood_fill(position: Vector2) -> void:
 	var project: Project = Global.current_project
 	var images := _get_selected_draw_images()
 	for image in images:
-		var srcColor: Color = image.get_pixelv(position)
+		var color: Color = image.get_pixelv(position)
 		if _fill_with == 0 or _pattern == null:
-			if tool_slot.color.is_equal_approx(srcColor):
+			if tool_slot.color.is_equal_approx(color):
 				return
 		# init flood data structures
 		_allegro_flood_segments = []
@@ -342,7 +340,7 @@ func _flood_fill(position: Vector2) -> void:
 		for j in image.get_height():
 			_add_new_segment(position.y)
 		# start flood algorithm
-		_flood_line_around_point(position, project, image, srcColor)
+		_flood_line_around_point(position, project, image, color)
 		# test all segments while also discovering more
 		var done = false
 		while not done:
@@ -351,17 +349,19 @@ func _flood_fill(position: Vector2) -> void:
 				var p = _allegro_flood_segments[c]
 				if p.todo_below: # check below the segment?
 					p.todo_below = false
-					if _check_flooded_segment(p.y+1, p.left_position, p.right_position, project, image, srcColor):
+					if _check_flooded_segment(
+							p.y + 1, p.left_position, p.right_position, project, image, color):
 						done = false
 				if p.todo_above: # check above the segment?
 					p.todo_above = false
-					if _check_flooded_segment(p.y-1, p.left_position, p.right_position, project, image, srcColor):
+					if _check_flooded_segment(
+							p.y - 1, p.left_position, p.right_position, project, image, color):
 						done = false
 		# now actually color the image
 		for c in _allegro_image_segments.size():
 			var p = _allegro_image_segments[c]
 			if p.flooding: # sanity check: should always be true
-				for px in range(p.left_position, p.right_position+1):
+				for px in range(p.left_position, p.right_position + 1):
 					_set_pixel(image, px, p.y, tool_slot.color)
 
 
