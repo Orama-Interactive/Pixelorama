@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-31 03:50\n"
+"PO-Revision-Date: 2022-03-31 04:03\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1896,7 +1896,7 @@ msgid "Move the selected frame to the left."
 msgstr "Pindahkan bingkai terpilih ke kiri."
 
 msgid "Move the selected frame to the right."
-msgstr "Pindahkan frame terpilih ke kanan."
+msgstr "Pindahkan bingkai terpilih ke kanan."
 
 msgid "Frame duration"
 msgstr "Durasi bingkai"
@@ -1920,7 +1920,7 @@ msgid "Comment:"
 msgstr "Komentar:"
 
 msgid "Empty"
-msgstr "Kosongkan"
+msgstr "Kosong"
 
 msgid "From Current Palette"
 msgstr "Dari Palet Saat Ini"
