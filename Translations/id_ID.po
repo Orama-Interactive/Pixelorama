@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-03-31 03:41\n"
+"PO-Revision-Date: 2022-03-31 03:50\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1875,7 +1875,7 @@ msgid "Backup reloaded"
 msgstr "Pencadangan dimuat ulang"
 
 msgid "Remove currently selected palette"
-msgstr "Hapus palet yang dipilih"
+msgstr "Hapus palet yang sedang dipilih"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
 msgstr "Kamu yakin ingin menghapus palet ini? (Tak bisa dikembalikan)"
@@ -1896,7 +1896,7 @@ msgid "Move the selected frame to the left."
 msgstr "Pindahkan bingkai terpilih ke kiri."
 
 msgid "Move the selected frame to the right."
-msgstr "Pindahkan bingkai terpilih ke kanan."
+msgstr "Pindahkan frame terpilih ke kanan."
 
 msgid "Frame duration"
 msgstr "Durasi bingkai"
