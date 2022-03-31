@@ -250,7 +250,12 @@ func _add_new_segment(y: int = 0) -> void:
 # fill an horizontal segment around the specifid position, and adds it to the
 # list of segments filled. Returns the first x coordinate after the part of the
 # line that has been filled.
-func _flood_line_around_point(position: Vector2, project: Project, image: Image, srcColor: Color) -> int:
+func _flood_line_around_point(
+	position: Vector2,
+	project: Project,
+	image: Image,
+	srcColor: Color
+) -> int:
 	# this method is called by `_my_flood_fill` after the required data structures
 	# have been initialized
 	if not image.get_pixelv(position).is_equal_approx(srcColor):
@@ -296,7 +301,14 @@ func _flood_line_around_point(position: Vector2, project: Project, image: Image,
 	# processed, else it would be part of this segment
 	return int(east.x) + 1
 
-func _check_flooded_segment(y: int, left: int, right: int, project: Project, image: Image, srcColor: Color) -> bool:
+func _check_flooded_segment(
+	y: int,
+	left: int,
+	right: int,
+	project: Project,
+	image: Image,
+	srcColor: Color
+) -> bool:
 	var ret = false
 	var c : int = 0
 	while left <= right:
@@ -338,7 +350,7 @@ func _flood_fill(position: Vector2) -> void:
 			for c in _allegro_flood_segments.size():
 				var p = _allegro_flood_segments[c]
 				if p.todo_below: # check below the segment?
-					p.todo_below = false					
+					p.todo_below = false
 					if _check_flooded_segment(p.y+1, p.left_position, p.right_position, project, image, srcColor):
 						done = false
 				if p.todo_above: # check above the segment?
