@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-03-30 23:32\n"
+"PO-Revision-Date: 2022-03-31 01:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -262,7 +262,7 @@ msgid "Import as:"
 msgstr "形式を指定してインポート"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "すべてに適用"
 
 msgid "Recent projects"
 msgstr "最近のプロジェクト"
