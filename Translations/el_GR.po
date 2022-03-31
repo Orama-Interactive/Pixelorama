@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-03-30 23:32\n"
+"PO-Revision-Date: 2022-03-31 13:50\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -262,7 +262,7 @@ msgid "Import as:"
 msgstr "Εισαγωγή ως:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "Εφαρμογή σε όλα"
 
 msgid "Recent projects"
 msgstr "Πρόσφατα έργα"
@@ -491,7 +491,7 @@ msgid "Extensions"
 msgstr "Επεκτάσεις"
 
 msgid "Cursors"
-msgstr "Κέρσορας"
+msgstr "Κέρσορες"
 
 msgid "Indicators"
 msgstr "Δείκτες"
