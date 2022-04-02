@@ -248,7 +248,9 @@ func _add_new_segment(y: int = 0) -> void:
 # fill an horizontal segment around the specifid position, and adds it to the
 # list of segments filled. Returns the first x coordinate after the part of the
 # line that has been filled.
-func _flood_line_around_point(position: Vector2, project: Project, image: Image, src_color: Color) -> int:
+func _flood_line_around_point(
+	position: Vector2, project: Project, image: Image, src_color: Color
+) -> int:
 	# this method is called by `_my_flood_fill` after the required data structures
 	# have been initialized
 	if not image.get_pixelv(position).is_equal_approx(src_color):
@@ -308,6 +310,7 @@ func _check_flooded_segment(
 				break
 	return ret
 
+
 func _flood_fill(position: Vector2) -> void:
 	# implements the floodfill routine by Shawn Hargreaves
 	# from https://www1.udel.edu/CIS/software/dist/allegro-4.2.1/src/flood.c
@@ -335,13 +338,13 @@ func _flood_fill(position: Vector2) -> void:
 				if p.todo_below:  # check below the segment?
 					p.todo_below = false
 					if _check_flooded_segment(
-							p.y + 1, p.left_position, p.right_position, project, image, color
+						p.y + 1, p.left_position, p.right_position, project, image, color
 					):
 						done = false
 				if p.todo_above:  # check above the segment?
 					p.todo_above = false
 					if _check_flooded_segment(
-							p.y - 1, p.left_position, p.right_position, project, image, color
+						p.y - 1, p.left_position, p.right_position, project, image, color
 					):
 						done = false
 		# now actually color the image
