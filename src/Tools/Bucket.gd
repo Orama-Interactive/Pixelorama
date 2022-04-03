@@ -248,9 +248,8 @@ func _add_new_segment(y: int = 0) -> void:
 # fill an horizontal segment around the specifid position, and adds it to the
 # list of segments filled. Returns the first x coordinate after the part of the
 # line that has been filled.
-func _flood_line_around_point(
-	position: Vector2, project: Project, image: Image, src_color: Color
-) -> int:
+# gdlint: ignore=max-line-length
+func _flood_line_around_point(position: Vector2, project: Project, image: Image, src_color: Color) -> int:
 	# this method is called by `_my_flood_fill` after the required data structures
 	# have been initialized
 	if not image.get_pixelv(position).is_equal_approx(src_color):
