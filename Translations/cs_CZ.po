@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2022-03-30 23:31\n"
+"PO-Revision-Date: 2022-04-04 14:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Zobrazení"
 
 msgid "Window"
-msgstr ""
+msgstr "Okno"
 
 msgid "Image"
 msgstr "Obrázek"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Exportovat"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Přepsat"
 
 msgid "Export..."
 msgstr "Exportovat..."
@@ -787,16 +787,16 @@ msgid "Ukrainian"
 msgstr "Ukrajinština"
 
 msgid "Danish"
-msgstr ""
+msgstr "Dánština"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Švědština"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Srbština (Cyrilice)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Nizozemština"
 
 msgid "Development Team"
 msgstr "Vývojářský tým"
