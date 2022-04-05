@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-03-26 10:48\n"
+"PO-Revision-Date: 2022-03-31 23:51\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -260,6 +260,9 @@ msgstr "Параметри імпорту"
 
 msgid "Import as:"
 msgstr "Імпортувати як:"
+
+msgid "Apply to all"
+msgstr "Застосувати до всіх"
 
 msgid "Recent projects"
 msgstr "Нещодавні проєкти"

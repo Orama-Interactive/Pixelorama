@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2022-03-25 00:03\n"
+"PO-Revision-Date: 2022-03-30 23:31\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -260,6 +260,9 @@ msgstr "Importopties"
 
 msgid "Import as:"
 msgstr "Importeer als:"
+
+msgid "Apply to all"
+msgstr ""
 
 msgid "Recent projects"
 msgstr "Recente projecten"

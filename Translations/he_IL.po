@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2022-03-25 00:03\n"
+"PO-Revision-Date: 2022-03-30 23:32\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -259,6 +259,9 @@ msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
+msgstr ""
+
+msgid "Apply to all"
 msgstr ""
 
 msgid "Recent projects"

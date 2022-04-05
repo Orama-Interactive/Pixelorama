@@ -649,6 +649,9 @@ func _get_selected_draw_images() -> Array:  # Array of Images
 
 
 func cut() -> void:
+	var project: Project = Global.current_project
+	if !project.layers[project.current_layer].can_layer_get_drawn():
+		return
 	copy()
 	delete()
 

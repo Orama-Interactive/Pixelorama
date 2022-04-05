@@ -250,6 +250,9 @@ msgstr ""
 msgid "Import as:"
 msgstr ""
 
+msgid "Apply to all"
+msgstr ""
+
 msgid "Recent projects"
 msgstr ""
 

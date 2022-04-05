@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-03-25 10:13\n"
+"PO-Revision-Date: 2022-03-30 23:31\n"
 
 msgid "OK"
 msgstr "예"
@@ -260,6 +260,9 @@ msgstr "불러오기 옵션"
 
 msgid "Import as:"
 msgstr "다음으로 가져오기:"
+
+msgid "Apply to all"
+msgstr ""
 
 msgid "Recent projects"
 msgstr "최근 프로잭트"

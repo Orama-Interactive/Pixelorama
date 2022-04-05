@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2022-03-25 00:03\n"
+"PO-Revision-Date: 2022-03-30 23:31\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -260,6 +260,9 @@ msgstr ""
 
 msgid "Import as:"
 msgstr "Importera som:"
+
+msgid "Apply to all"
+msgstr ""
 
 msgid "Recent projects"
 msgstr ""

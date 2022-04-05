@@ -254,6 +254,7 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Marquis Kurt (alicerunsonfedora)")
 	contributors.create_item(contributor_root).set_text(0, "  Silent Orb (silentorb)")
 	contributors.create_item(contributor_root).set_text(0, "  JumpJetAvocado")
+	contributors.create_item(contributor_root).set_text(0, "  ArthyChaux")
 
 
 func create_translators() -> void:

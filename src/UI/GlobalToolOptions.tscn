@@ -46,10 +46,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -11.0
-margin_top = -11.0
-margin_right = 11.0
-margin_bottom = 11.0
+margin_left = -10.0
+margin_top = -10.5
+margin_right = 10.0
+margin_bottom = 10.5
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -69,10 +69,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -11.0
-margin_top = -11.0
-margin_right = 11.0
-margin_bottom = 11.0
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 10.0
+margin_bottom = 10.0
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -94,9 +94,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -11.0
-margin_top = -11.0
+margin_top = -10.0
 margin_right = 11.0
-margin_bottom = 11.0
+margin_bottom = 10.0
 texture = ExtResource( 4 )
 
 [connection signal="resized" from="." to="." method="_on_resized"]
