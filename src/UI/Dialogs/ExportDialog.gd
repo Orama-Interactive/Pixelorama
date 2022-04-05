@@ -214,6 +214,9 @@ func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
 		path_validation_alert_popup.dialog_text = "Directory path is not valid!"
 	elif path_or_name == 1:
 		path_validation_alert_popup.dialog_text = "File name is not valid!"
+	else:
+		path_validation_alert_popup.dialog_text = "Directory path and file name are not valid!"
+
 	path_validation_alert_popup.popup_centered()
 
 
