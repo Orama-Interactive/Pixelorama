@@ -345,8 +345,8 @@ window_title = "Open a Directory"
 resizable = true
 mode = 2
 access = 2
-current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-master"
-current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-master/"
+current_dir = "/Users"
+current_path = "/Users/"
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
 margin_left = 8.0
@@ -411,7 +411,6 @@ __meta__ = {
 __meta__ = {
 "_editor_description_": "Timer to advance animation frames in animation preview."
 }
-
 [connection signal="about_to_show" from="." to="." method="_on_ExportDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ExportDialog_confirmed"]
 [connection signal="custom_action" from="." to="." method="_on_ExportDialog_custom_action"]
