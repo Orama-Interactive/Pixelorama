@@ -208,7 +208,12 @@ func create_frame_tag_list() -> void:
 		spritesheet_frames.add_item(item.name)
 
 
-func open_path_validation_alert_popup() -> void:
+func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
+	# 0 is invalid path, 1 is invalid name
+	if path_or_name == 0:
+		path_validation_alert_popup.dialog_text = "Directory path is not valid!"
+	elif path_or_name == 1:
+		path_validation_alert_popup.dialog_text = "File name is not valid!"
 	path_validation_alert_popup.popup_centered()
 
 
