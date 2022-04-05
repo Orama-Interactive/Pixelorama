@@ -12,7 +12,7 @@ const MedianCutQuantization = preload("res://addons/gdgifexporter/quantization/m
 
 var current_tab: int = ExportTab.FRAME
 # Frame options
-var frame_number := 1
+var frame_number := 0
 # All frames and their layers processed/blended into images
 var processed_images = []  # Image[]
 
@@ -150,7 +150,12 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 	# Stop export if directory path or file name are not valid
 	var dir = Directory.new()
 	if not dir.dir_exists(directory_path) or not file_name.is_valid_filename():
-		export_dialog.open_path_validation_alert_popup()
+		if not dir.dir_exists(directory_path) and file_name.is_valid_filename():
+			export_dialog.open_path_validation_alert_popup(0)
+		elif not file_name.is_valid_filename() and dir.dir_exists(directory_path):
+			export_dialog.open_path_validation_alert_popup(1)
+		else:
+			export_dialog.open_path_validation_alert_popup()
 		return false
 
 	# Check export paths
