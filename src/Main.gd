@@ -6,7 +6,6 @@ var is_quitting_on_save := false
 var cursor_image: Texture = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI/DockableContainer
-onready var scroll_container := ui.find_node("ColorAndToolOptions/ScrollContainer")
 onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
 onready var quit_and_save_dialog: ConfirmationDialog = find_node("QuitAndSaveDialog")
 
