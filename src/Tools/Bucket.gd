@@ -280,8 +280,16 @@ func _flood_line_around_point(position: Vector2, project: Project, image: Image,
 	segment.y = position.y
 	segment.next = 0
 	# Should we process segments above or below this one?
-	segment.todo_above = project.can_pixel_get_drawn(position + Vector2.UP)
-	segment.todo_below = project.can_pixel_get_drawn(position + Vector2.DOWN)
+	if project.has_selection:
+		# when there is a selected area, the pixels above and below the one we started creating this
+		# segment from may be outside it. It's easier to assume we should be checking for segments
+		# above and below this one than to specifically check every single pixel in it, because that
+		# test will be performed later anyway.
+		segment.todo_above = position.y > 0
+		segment.todo_below = position.y < project.size.y - 1
+	else:
+		segment.todo_above = project.can_pixel_get_drawn(position + Vector2.UP)
+		segment.todo_below = project.can_pixel_get_drawn(position + Vector2.DOWN)
 	# this is an actual segment we should be coloring, so we add it to the results for the
 	# current image
 	_allegro_image_segments.append(segment)
@@ -325,7 +333,7 @@ func _flood_fill(position: Vector2) -> void:
 		_allegro_image_segments = []
 		# initially allocate at least 1 segment per line of image
 		for j in image.get_height():
-			_add_new_segment(position.y)
+			_add_new_segment(j)
 		# start flood algorithm
 		_flood_line_around_point(position, project, image, color)
 		# test all segments while also discovering more
