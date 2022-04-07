@@ -133,6 +133,19 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			hbox.add_child(label)
 			hbox.add_child(spinbox)
 			shader_params.add_child(hbox)
+		elif u_type == "vec4":
+			if "hint_color" in u_hint:
+				var label := Label.new()
+				label.text = u_name
+				var color = vec4str_to_color(u_value)
+				var color_button := ColorPickerButton.new()
+				color_button.rect_min_size = Vector2(20, 20)
+				color_button.color = color
+				color_button.connect("color_changed", self, "set_shader_param", [u_name])
+				var hbox := HBoxContainer.new()
+				hbox.add_child(label)
+				hbox.add_child(color_button)
+				shader_params.add_child(hbox)
 
 
 #		print("---")
@@ -146,3 +159,24 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 
 func set_shader_param(value, param: String) -> void:
 	preview.material.set_shader_param(param, value)
+
+
+func vec4str_to_color(vec4: String) -> Color:
+	vec4 = vec4.replace("vec4(", "")
+	vec4 = vec4.replace(")", "")
+	var rgba_values: PoolStringArray = vec4.split(",")
+	var red := float(rgba_values[0])
+
+	var green := float(rgba_values[0])
+	if rgba_values.size() >= 2:
+		green = float(rgba_values[1])
+
+	var blue := float(rgba_values[0])
+	if rgba_values.size() >= 3:
+		blue = float(rgba_values[2])
+
+	var alpha := float(rgba_values[0])
+	if rgba_values.size() == 4:
+		alpha = float(rgba_values[3])
+	var color: Color = Color(red, green, blue, alpha)
+	return color
