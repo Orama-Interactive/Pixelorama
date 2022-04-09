@@ -70,6 +70,8 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 		var u_value := ""
 		if uniform_split.size() > 1:
 			u_value = uniform_split[1].replace(";", "").strip_edges()
+		else:
+			uniform_split[0] = uniform_split[0].replace(";", "").strip_edges()
 
 		var u_left_side: PoolStringArray = uniform_split[0].split(":")
 		var u_hint := ""
@@ -137,7 +139,7 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			if "hint_color" in u_hint:
 				var label := Label.new()
 				label.text = u_name
-				var color = vec4str_to_color(u_value)
+				var color = _vec4str_to_color(u_value)
 				var color_button := ColorPickerButton.new()
 				color_button.rect_min_size = Vector2(20, 20)
 				color_button.color = color
@@ -146,6 +148,24 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 				hbox.add_child(label)
 				hbox.add_child(color_button)
 				shader_params.add_child(hbox)
+		elif u_type == "sampler2D":
+			var label := Label.new()
+			label.text = u_name
+			var file_dialog := FileDialog.new()
+			file_dialog.mode = FileDialog.MODE_OPEN_FILE
+			file_dialog.access = FileDialog.ACCESS_FILESYSTEM
+			file_dialog.resizable = true
+			file_dialog.rect_min_size = Vector2(200, 70)
+			file_dialog.rect_size = Vector2(384, 281)
+			file_dialog.connect("file_selected", self, "_load_texture", [u_name])
+			var button := Button.new()
+			button.text = "Load texture"
+			button.connect("pressed", file_dialog, "popup_centered")
+			var hbox := HBoxContainer.new()
+			hbox.add_child(label)
+			hbox.add_child(button)
+			shader_params.add_child(hbox)
+			shader_params.add_child(file_dialog)
 
 
 #		print("---")
@@ -161,7 +181,19 @@ func set_shader_param(value, param: String) -> void:
 	preview.material.set_shader_param(param, value)
 
 
-func vec4str_to_color(vec4: String) -> Color:
+func _load_texture(path: String, param: String) -> void:
+	var image := Image.new()
+	image.load(path)
+	if !image:
+		print("Error loading texture")
+		return
+	var image_tex := ImageTexture.new()
+	image_tex.create_from_image(image, 0)
+	image_tex.flags = ImageTexture.FLAG_REPEAT
+	set_shader_param(image_tex, param)
+
+
+func _vec4str_to_color(vec4: String) -> Color:
 	vec4 = vec4.replace("vec4(", "")
 	vec4 = vec4.replace(")", "")
 	var rgba_values: PoolStringArray = vec4.split(",")
