@@ -105,8 +105,6 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 
 				if range_values_array.size() >= 2:
 					max_value = float(range_values_array[1])
-				else:
-					max_value = 255
 
 				if range_values_array.size() >= 3:
 					step = float(range_values_array[2])
@@ -181,6 +179,18 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			hbox.add_child(button)
 			shader_params.add_child(hbox)
 			shader_params.add_child(file_dialog)
+		elif u_type == "bool":
+			var label := Label.new()
+			label.text = u_name
+			var checkbox := CheckBox.new()
+			checkbox.text = "On"
+			if u_value == "true":
+				checkbox.pressed = true
+			checkbox.connect("toggled", self, "set_shader_param", [u_name])
+			var hbox := HBoxContainer.new()
+			hbox.add_child(label)
+			hbox.add_child(checkbox)
+			shader_params.add_child(hbox)
 
 
 #		print("---")
