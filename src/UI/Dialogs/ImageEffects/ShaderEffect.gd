@@ -135,11 +135,26 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			hbox.add_child(label)
 			hbox.add_child(spinbox)
 			shader_params.add_child(hbox)
+		elif u_type == "vec2":
+			var label := Label.new()
+			label.text = u_name
+			var vector2 := _vec2str_to_vector2(u_value)
+			var spinbox1 := SpinBox.new()
+			spinbox1.value = vector2.x
+			spinbox1.connect("value_changed", self, "_set_vector2_shader_param", [u_name, true])
+			var spinbox2 := SpinBox.new()
+			spinbox2.value = vector2.y
+			spinbox2.connect("value_changed", self, "_set_vector2_shader_param", [u_name, false])
+			var hbox := HBoxContainer.new()
+			hbox.add_child(label)
+			hbox.add_child(spinbox1)
+			hbox.add_child(spinbox2)
+			shader_params.add_child(hbox)
 		elif u_type == "vec4":
 			if "hint_color" in u_hint:
 				var label := Label.new()
 				label.text = u_name
-				var color = _vec4str_to_color(u_value)
+				var color := _vec4str_to_color(u_value)
 				var color_button := ColorPickerButton.new()
 				color_button.rect_min_size = Vector2(20, 20)
 				color_button.color = color
@@ -178,19 +193,31 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 
 
 func set_shader_param(value, param: String) -> void:
-	preview.material.set_shader_param(param, value)
+	var mat: ShaderMaterial = preview.material
+	mat.set_shader_param(param, value)
 
 
-func _load_texture(path: String, param: String) -> void:
-	var image := Image.new()
-	image.load(path)
-	if !image:
-		print("Error loading texture")
-		return
-	var image_tex := ImageTexture.new()
-	image_tex.create_from_image(image, 0)
-	image_tex.flags = ImageTexture.FLAG_REPEAT
-	set_shader_param(image_tex, param)
+func _set_vector2_shader_param(value: float, param: String, x: bool) -> void:
+	var mat: ShaderMaterial = preview.material
+	var vector2: Vector2 = mat.get_shader_param(param)
+	if x:
+		vector2.x = value
+	else:
+		vector2.y = value
+	set_shader_param(vector2, param)
+
+
+func _vec2str_to_vector2(vec2: String) -> Vector2:
+	vec2 = vec2.replace("vec2(", "")
+	vec2 = vec2.replace(")", "")
+	var vec_values: PoolStringArray = vec2.split(",")
+	if vec_values.size() == 0:
+		return Vector2.ZERO
+	var y := float(vec_values[0])
+	if vec_values.size() == 2:
+		y = float(vec_values[1])
+	var vector2 := Vector2(float(vec_values[0]), y)
+	return vector2
 
 
 func _vec4str_to_color(vec4: String) -> Color:
@@ -212,3 +239,15 @@ func _vec4str_to_color(vec4: String) -> Color:
 		alpha = float(rgba_values[3])
 	var color: Color = Color(red, green, blue, alpha)
 	return color
+
+
+func _load_texture(path: String, param: String) -> void:
+	var image := Image.new()
+	image.load(path)
+	if !image:
+		print("Error loading texture")
+		return
+	var image_tex := ImageTexture.new()
+	image_tex.create_from_image(image, 0)
+	image_tex.flags = ImageTexture.FLAG_REPEAT
+	set_shader_param(image_tex, param)
