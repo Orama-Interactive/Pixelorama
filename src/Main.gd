@@ -157,6 +157,7 @@ func _show_splash_screen() -> void:
 	if Global.config_cache.get_value("preferences", "startup"):
 		# Wait for the window to adjust itself, so the popup is correctly centered
 		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
 
 		$Dialogs/SplashDialog.popup_centered()  # Splash screen
 		modulate = Color(0.5, 0.5, 0.5)
