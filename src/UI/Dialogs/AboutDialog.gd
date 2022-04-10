@@ -61,6 +61,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Blend_Smile": ["Indonesian"],
 	"NoahParaduck": ["Indonesian"],
 	"Channeling": ["Indonesian"],
+	"heydootdoot": ["Indonesian"],
 	"Martin Novák (novhack)": ["Czech"],
 	"Lullius": ["Norwegian Bokmål"],
 	"Aninuscsalas": ["Hungarian"],
@@ -80,6 +81,7 @@ const TRANSLATORS_DICTIONARY := {
 	"gegekyz": ["Turkish"],
 	"Vancat": ["Turkish"],
 	"Ferhat Geçdoğan (ferhatgec)": ["Turkish"],
+	"designy": ["Turkish"],
 	"GGIEnrike":
 	[
 		"Romanian",
