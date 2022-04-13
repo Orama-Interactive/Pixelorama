@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/kamilayza.png-90757c16a9bd6291dcf6fd5dce2db930.stex"
+path="res://.import/roroto_111.png-78f4ba4e65c1bdc57609ff6cd21f08ef.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/splash_screen/artworks/kamilayza.png"
-dest_files=[ "res://.import/kamilayza.png-90757c16a9bd6291dcf6fd5dce2db930.stex" ]
+source_file="res://assets/graphics/splash_screen/artworks/roroto/roroto_111.png"
+dest_files=[ "res://.import/roroto_111.png-78f4ba4e65c1bdc57609ff6cd21f08ef.stex" ]
 
 [params]
 
