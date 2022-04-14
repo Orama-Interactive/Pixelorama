@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-03-30 23:32\n"
+"PO-Revision-Date: 2022-04-14 16:20\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -262,7 +262,7 @@ msgid "Import as:"
 msgstr "İçe farklı aktar:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "Hepsine uygula"
 
 msgid "Recent projects"
 msgstr "Son Projeleriniz"
@@ -787,10 +787,10 @@ msgid "Ukrainian"
 msgstr "Ukraynaca"
 
 msgid "Danish"
-msgstr ""
+msgstr "Danca"
 
 msgid "Swedish"
-msgstr ""
+msgstr "İsveççe"
 
 msgid "Serbian (Cyrillic)"
 msgstr ""
