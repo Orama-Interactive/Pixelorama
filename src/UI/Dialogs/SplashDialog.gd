@@ -7,8 +7,18 @@ var artworks := [
 		"https://linktr.ee/Roroto_Sic",
 		Color.black
 	],
-	["Kalpar", preload("res://assets/graphics/splash_screen/artworks/kalpar.png"), "", Color.white],
-	["Uch", preload("res://assets/graphics/splash_screen/artworks/uch.png"), "", Color.black],
+	[
+		"Kalpar",
+		preload("res://assets/graphics/splash_screen/artworks/kalpar.png"),
+		"https://resite.link/Kalpar",
+		Color.white
+	],
+	[
+		"Uch",
+		preload("res://assets/graphics/splash_screen/artworks/uch.png"),
+		"https://www.instagram.com/vs.pxl/",
+		Color.black
+	],
 	[
 		"Wishdream",
 		preload("res://assets/graphics/splash_screen/artworks/wishdream.png"),
