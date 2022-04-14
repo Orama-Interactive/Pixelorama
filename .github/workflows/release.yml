@@ -8,7 +8,7 @@ env:
   GODOT_VERSION: 3.4.2
   GODOT_VERSION_MAC: 3.4.2
   EXPORT_NAME: Pixelorama
-  TAG: v0.9.2
+  TAG: v0.10
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 jobs:
