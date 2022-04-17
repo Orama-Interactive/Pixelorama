@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v0.10] - Unreleased
+## [v0.10] - 2022-04-15
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Martin Novák ([@novhack](https://github.com/novhack)), Lili Zoey ([@sayaks](https://github.com/sayaks)), [@ArthyChaux](https://github.com/ArthyChaux)
 
@@ -29,6 +29,7 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Martin Novák (
 - Resize Canvas will always display the current size of the project.
 - Imported images can now be immediately exported, and for imported png images "Overwrite" is being displayed instead of "Export", until the user uses "Export as...".
 - The toolbar and the animation timeline now have a scrollbar.
+- Cut no longer works in invisible/locked layers.
 - You can now move guides with the pan tool. [#647](https://github.com/Orama-Interactive/Pixelorama/pull/647)
 - "Flip" has been renamed to "Mirror Image".
 - The documentation keyboard shortcut has been changed from F12 to F1.
@@ -39,6 +40,7 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Martin Novák (
 - Fixed crash when importing non-palette .tres files.
 - Deferred mode for the color pickers of gradients has been enabled, so that the gradient preview color only changes on mouse release. Addressed a part of [#645](https://github.com/Orama-Interactive/Pixelorama/issues/645).
 - "From Current Palette" preset option is now disabled when creating a new palette, if there is no current palette, which fixes [#659](https://github.com/Orama-Interactive/Pixelorama/issues/659)
+- Aspect ratio in scale image no longer sets width and height to have the same value, but it works as expected like it does in the create new image dialog.
 - macOS shortcuts have been fixed, only Command is needed again instead of Command + Control.
 - Fixed a bug where the selection got stuck to the canvas boundaries when they were 1px away from them.
 - The export status of a project no longer resets when saving it as a pxo.
