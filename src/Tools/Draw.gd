@@ -34,14 +34,14 @@ func _on_BrushType_pressed() -> void:
 			"brush_selected", self, "_on_Brush_selected", [], CONNECT_ONESHOT
 		)
 	# Now we set position and tab allignment considering certain conditions
-	var _size :=  Vector2(226, 72)
+	var _size := Vector2(226, 72)
 	var _popup_position: Vector2 = $Brush/Type.rect_global_position
 	var _end_point: float = Global.shrink * (_popup_position.x + _size.x) - OS.get_screen_size().x
 	if _end_point <= 72 and _end_point > 0:  # Some space left "Leftward"
-		_popup_position -= Vector2(_size.x/2.0 - 48, -32)
+		_popup_position -= Vector2(_size.x / 2.0 - 48, -32)
 		Global.brushes_popup.get_node("TabContainer").tab_align = TabContainer.ALIGN_CENTER
-	elif _end_point >= 72: # No space left "Leftward"
-		_popup_position -= Vector2(_size.x/2.0 + 16, -32)
+	elif _end_point >= 72:  # No space left "Leftward"
+		_popup_position -= Vector2(_size.x / 2.0 + 16, -32)
 		Global.brushes_popup.get_node("TabContainer").tab_align = TabContainer.ALIGN_RIGHT
 	else:
 		_popup_position -= Vector2(0, -32)  # Plenty of space left "Leftward"
@@ -105,7 +105,7 @@ func update_config() -> void:
 
 
 func update_brush() -> void:
-	$Brush/Size.suffix = "px" # Assume we are using default brushes
+	$Brush/Size.suffix = "px"  # Assume we are using default brushes
 	match _brush.type:
 		Brushes.PIXEL:
 			_brush_texture.create_from_image(load("res://assets/graphics/pixel_image.png"), 0)
@@ -114,7 +114,7 @@ func update_brush() -> void:
 		Brushes.FILLED_CIRCLE:
 			_brush_texture.create_from_image(load("res://assets/graphics/circle_filled_9x9.png"), 0)
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
-			$Brush/Size.suffix = "00 %" # It's an image so a different size convention is used
+			$Brush/Size.suffix = "00 %"  # It's an image so a different size convention is used
 			if _brush.random.size() <= 1:
 				_brush_image = _create_blended_brush_image(_brush.image)
 			else:
