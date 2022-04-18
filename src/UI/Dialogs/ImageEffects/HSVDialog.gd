@@ -37,7 +37,7 @@ func _confirmed() -> void:
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	var selection: Image = project.bitmap_to_image(project.selection_bitmap, false)
+	var selection: Image = project.bitmap_to_image(project.selection_bitmap)
 	var selection_tex := ImageTexture.new()
 	selection_tex.create_from_image(selection)
 
