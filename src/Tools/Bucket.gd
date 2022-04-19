@@ -154,10 +154,13 @@ func draw_start(position: Vector2) -> void:
 	):
 		return
 	var undo_data = _get_undo_data()
+	var start_time = OS.get_ticks_msec ()
 	if _fill_area == 0:
 		fill_in_area(position)
 	else:
 		fill_in_color(position)
+	var end_time = OS.get_ticks_msec ()
+	print("elapsed ",  end_time- start_time)
 	commit_undo("Draw", undo_data)
 
 
@@ -257,9 +260,13 @@ func _flood_line_around_point(position: Vector2, project: Project, image: Image,
 	var west: Vector2 = position
 	var east: Vector2 = position
 	if project.has_selection:
-		while project.can_pixel_get_drawn(west) && image.get_pixelv(west).is_equal_approx(src_color):
+		while (
+			project.can_pixel_get_drawn(west) && image.get_pixelv(west).is_equal_approx(src_color)
+		):
 			west += Vector2.LEFT
-		while project.can_pixel_get_drawn(east) && image.get_pixelv(east).is_equal_approx(src_color):
+		while (
+			project.can_pixel_get_drawn(east) && image.get_pixelv(east).is_equal_approx(src_color)
+		):
 			east += Vector2.RIGHT
 	else:
 		while west.x >= 0 && image.get_pixelv(west).is_equal_approx(src_color):
