@@ -256,10 +256,16 @@ func _flood_line_around_point(position: Vector2, project: Project, image: Image,
 		return int(position.x) + 1
 	var west: Vector2 = position
 	var east: Vector2 = position
-	while project.can_pixel_get_drawn(west) && image.get_pixelv(west).is_equal_approx(src_color):
-		west += Vector2.LEFT
-	while project.can_pixel_get_drawn(east) && image.get_pixelv(east).is_equal_approx(src_color):
-		east += Vector2.RIGHT
+	if project.has_selection:
+		while project.can_pixel_get_drawn(west) && image.get_pixelv(west).is_equal_approx(src_color):
+			west += Vector2.LEFT
+		while project.can_pixel_get_drawn(east) && image.get_pixelv(east).is_equal_approx(src_color):
+			east += Vector2.RIGHT
+	else:
+		while west.x >= 0 && image.get_pixelv(west).is_equal_approx(src_color):
+			west += Vector2.LEFT
+		while east.x < project.size.x && image.get_pixelv(east).is_equal_approx(src_color):
+			east += Vector2.RIGHT
 	# Make a note of the stuff we processed
 	var c = int(position.y)
 	var segment = _allegro_flood_segments[c]
@@ -280,16 +286,14 @@ func _flood_line_around_point(position: Vector2, project: Project, image: Image,
 	segment.y = position.y
 	segment.next = 0
 	# Should we process segments above or below this one?
-	if project.has_selection:
-		# when there is a selected area, the pixels above and below the one we started creating this
-		# segment from may be outside it. It's easier to assume we should be checking for segments
-		# above and below this one than to specifically check every single pixel in it, because that
-		# test will be performed later anyway.
-		segment.todo_above = position.y > 0
-		segment.todo_below = position.y < project.size.y - 1
-	else:
-		segment.todo_above = project.can_pixel_get_drawn(position + Vector2.UP)
-		segment.todo_below = project.can_pixel_get_drawn(position + Vector2.DOWN)
+	# when there is a selected area, the pixels above and below the one we started creating this
+	# segment from may be outside it. It's easier to assume we should be checking for segments
+	# above and below this one than to specifically check every single pixel in it, because that
+	# test will be performed later anyway.
+	# On the other hand, this test we described is the same `project.can_pixel_get_drawn` does if
+	# there is no selection, so we don't need branching here.
+	segment.todo_above = position.y > 0
+	segment.todo_below = position.y < project.size.y - 1
 	# this is an actual segment we should be coloring, so we add it to the results for the
 	# current image
 	_allegro_image_segments.append(segment)
