@@ -261,11 +261,13 @@ func _flood_line_around_point(position: Vector2, project: Project, image: Image,
 	var east: Vector2 = position
 	if project.has_selection:
 		while (
-			project.can_pixel_get_drawn(west) && image.get_pixelv(west).is_equal_approx(src_color)
+			project.can_pixel_get_drawn(west)
+			&& image.get_pixelv(west).is_equal_approx(src_color)
 		):
 			west += Vector2.LEFT
 		while (
-			project.can_pixel_get_drawn(east) && image.get_pixelv(east).is_equal_approx(src_color)
+			project.can_pixel_get_drawn(east)
+			&& image.get_pixelv(east).is_equal_approx(src_color)
 		):
 			east += Vector2.RIGHT
 	else:
