@@ -358,19 +358,30 @@ func _flood_fill(position: Vector2) -> void:
 						p.y - 1, p.left_position, p.right_position, project, image, color
 					):
 						done = false
-		# now actually color the image
-		for c in _allegro_image_segments.size():
-			var p = _allegro_image_segments[c]
-			if p.flooding:  # sanity check: should always be true
+		# now actually color the image: since we have already checked a few things for the points
+		# we'll process here, we're going to skip a bunch of safety checks to speed things up.
+		if _fill_with == 0 or _pattern == null:
+			# short circuit for flat colors
+			for c in _allegro_image_segments.size():
+				var p = _allegro_image_segments[c]
 				for px in range(p.left_position, p.right_position + 1):
-					_set_pixel(image, px, p.y, tool_slot.color)
+					image.set_pixel(px, p.y, tool_slot.color)
+		else:
+			for c in _allegro_image_segments.size():
+				var p = _allegro_image_segments[c]
+				for px in range(p.left_position, p.right_position + 1):
+					_inner_set_pixel(image, px, p.y, tool_slot.color)
 
 
 func _set_pixel(image: Image, x: int, y: int, color: Color) -> void:
 	var project: Project = Global.current_project
 	if !project.can_pixel_get_drawn(Vector2(x, y)):
 		return
+	_inner_set_pixel(image, x, y, color)
 
+
+# "unsafe" internal workings of _set_pixel, to get around re-validating every pixel
+func _inner_set_pixel(image: Image, x: int, y: int, color: Color) -> void:
 	if _fill_with == 0 or _pattern == null:
 		image.set_pixel(x, y, color)
 	else:
