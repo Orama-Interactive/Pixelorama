@@ -330,7 +330,13 @@ func _flood_fill(position: Vector2) -> void:
 	for image in images:
 		var color: Color = image.get_pixelv(position)
 		if _fill_with == 0 or _pattern == null:
+			# end early if we are filling with the same color
 			if tool_slot.color.is_equal_approx(color):
+				return
+		else:
+			# end early if we are filling with an empty pattern
+			var pattern_size = _pattern.image.get_size()
+			if pattern_size.x == 0 or pattern_size.y == 0:
 				return
 		# init flood data structures
 		_allegro_flood_segments = []
@@ -365,35 +371,26 @@ func _flood_fill(position: Vector2) -> void:
 			for c in _allegro_image_segments.size():
 				var p = _allegro_image_segments[c]
 				for px in range(p.left_position, p.right_position + 1):
+					# We don't have to check again whether the point being processed is within the bounds
 					image.set_pixel(px, p.y, tool_slot.color)
 		else:
+			# shortcircuit tests for patternfills
+			var pattern_size = _pattern.image.get_size()
+			# we know the pattern had a valid size when we began flooding, so we can skip testing that
+			# again for every point in the pattern.
 			for c in _allegro_image_segments.size():
 				var p = _allegro_image_segments[c]
 				for px in range(p.left_position, p.right_position + 1):
-					_inner_set_pixel(image, px, p.y, tool_slot.color)
+					_set_pixel_pattern(image, px, p.y, pattern_size)
 
 
-func _set_pixel(image: Image, x: int, y: int, color: Color) -> void:
-	var project: Project = Global.current_project
-	if !project.can_pixel_get_drawn(Vector2(x, y)):
-		return
-	_inner_set_pixel(image, x, y, color)
-
-
-# "unsafe" internal workings of _set_pixel, to get around re-validating every pixel
-func _inner_set_pixel(image: Image, x: int, y: int, color: Color) -> void:
-	if _fill_with == 0 or _pattern == null:
-		image.set_pixel(x, y, color)
-	else:
-		var size := _pattern.image.get_size()
-		if size.x == 0 or size.y == 0:
-			return
-		_pattern.image.lock()
-		var px := int(x + _offset_x) % int(size.x)
-		var py := int(y + _offset_y) % int(size.y)
-		var pc := _pattern.image.get_pixel(px, py)
-		_pattern.image.unlock()
-		image.set_pixel(x, y, pc)
+func _set_pixel_pattern(image: Image, x: int, y: int, pattern_size: Vector2) -> void:
+	_pattern.image.lock()
+	var px := int(x + _offset_x) % int(pattern_size.x)
+	var py := int(y + _offset_y) % int(pattern_size.y)
+	var pc := _pattern.image.get_pixel(px, py)
+	_pattern.image.unlock()
+	image.set_pixel(x, y, pc)
 
 
 func commit_undo(action: String, undo_data: Dictionary) -> void:
