@@ -609,7 +609,7 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 	if project.has_changed:
 		Global.window_title = Global.window_title + "(*)"
 	var file_name := path.get_basename().get_file()
-	var directory_path := path.get_basename().replace(file_name, "")
+	var directory_path := path.get_base_dir()
 	project.directory_path = directory_path
 	project.file_name = file_name
 	project.was_exported = true
