@@ -209,7 +209,7 @@ func update_ui_shortcuts(action: String):
 		update_menu_option(help_menu, "Online Docs", action)
 
 
-func update_menu_option(menu :PopupMenu, name :String, action):
+func update_menu_option(menu: PopupMenu, name: String, action):
 	for idx in menu.get_item_count():
 		if menu.get_item_text(idx) == name:
 			var accel: int = InputMap.get_action_list(action)[0].get_scancode_with_modifiers()

@@ -49,16 +49,13 @@ margin_right = 604.0
 margin_bottom = 406.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
-scroll_vertical = 234
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer"]
-margin_top = -234.0
 margin_right = 498.0
-margin_bottom = 780.0
+margin_bottom = 52.0
 size_flags_horizontal = 3
 
 [node name="Startup" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-visible = false
 margin_right = 498.0
 margin_bottom = 52.0
 
@@ -823,8 +820,10 @@ rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
 
 [node name="Shortcuts" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+visible = false
+margin_top = 56.0
 margin_right = 486.0
-margin_bottom = 640.0
+margin_bottom = 1268.0
 script = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
@@ -857,7 +856,7 @@ margin_bottom = 28.0
 [node name="Shortcuts" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
 margin_top = 32.0
 margin_right = 486.0
-margin_bottom = 640.0
+margin_bottom = 1212.0
 custom_constants/vseparation = 2
 custom_constants/hseparation = 5
 columns = 3
@@ -1438,484 +1437,484 @@ margin_bottom = 608.0
 text = "Menu Shortcuts:"
 
 [node name="Empty14" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 323.0
-margin_top = 566.0
-margin_right = 485.0
-margin_bottom = 586.0
+margin_left = 156.0
+margin_top = 594.0
+margin_right = 318.0
+margin_bottom = 608.0
 
 [node name="Empty15" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 594.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 608.0
 
 [node name="New File" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 613.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 627.0
 text = "New File"
 
 [node name="new_file" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 610.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 630.0
 
 [node name="Empty16" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 610.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 630.0
 
 [node name="Open File" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 635.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 649.0
 text = "Open File"
 
 [node name="open_file" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 632.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 652.0
 
 [node name="Empty17" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 632.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 652.0
 
 [node name="Save File" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 657.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 671.0
 text = "Save File"
 
 [node name="save_file" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 654.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 674.0
 
 [node name="Empty18" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 654.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 674.0
 
 [node name="Save File As" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 679.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 693.0
 text = "Save File As"
 
 [node name="save_file_as" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 676.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 696.0
 
 [node name="Empty19" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 676.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 696.0
 
 [node name="Export File" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 701.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 715.0
 text = "Export File"
 
 [node name="export_file" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 698.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 718.0
 
 [node name="Empty20" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 698.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 718.0
 
 [node name="Export File As" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 723.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 737.0
 text = "Export File As"
 
 [node name="export_file_as" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 720.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 740.0
 
 [node name="Empty21" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 720.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 740.0
 
 [node name="Quit" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 745.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 759.0
 text = "Quit"
 
 [node name="quit" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 742.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 762.0
 
 [node name="Empty22" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 742.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 762.0
 
 [node name="Undo" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 767.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 781.0
 text = "Undo"
 
 [node name="undo" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 764.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 784.0
 
 [node name="Empty23" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 764.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 784.0
 
 [node name="Redo" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 789.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 803.0
 text = "Redo"
 
 [node name="redo" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 786.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 806.0
 
 [node name="redo_secondary" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_left = 156.0
-margin_top = 566.0
-margin_right = 318.0
-margin_bottom = 586.0
+margin_left = 323.0
+margin_top = 786.0
+margin_right = 485.0
+margin_bottom = 806.0
 
 [node name="Copy" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 811.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 825.0
 text = "Copy"
 
 [node name="copy" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 808.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 828.0
 
 [node name="Empty24" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 808.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 828.0
 
 [node name="Cut" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 833.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 847.0
 text = "Cut"
 
 [node name="cut" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 830.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 850.0
 
 [node name="Empty25" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 830.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 850.0
 
 [node name="Paste" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 855.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 869.0
 text = "Paste"
 
 [node name="paste" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 852.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 872.0
 
 [node name="Empty26" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 852.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 872.0
 
 [node name="Delete" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 877.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 891.0
 text = "Delete"
 
 [node name="delete" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 874.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 894.0
 
 [node name="Empty27" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 874.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 894.0
 
 [node name="New Brush" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 899.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 913.0
 text = "New Brush"
 
 [node name="new_brush" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 896.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 916.0
 
 [node name="Empty28" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 896.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 916.0
 
 [node name="Select All" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 921.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 935.0
 text = "Select All"
 
 [node name="select_all" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 918.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 938.0
 
 [node name="Empty29" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 918.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 938.0
 
 [node name="Clear Selection" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 943.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 957.0
 text = "Clear Selection"
 
 [node name="clear_selection" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 940.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 960.0
 
 [node name="Empty30" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 940.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 960.0
 
 [node name="Invert Selection" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 965.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 979.0
 text = "Invert Selection"
 
 [node name="invert_selection" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 962.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 982.0
 
 [node name="Empty31" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 962.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 982.0
 
 [node name="Mirror View" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 987.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 1001.0
 text = "Mirror View"
 
 [node name="mirror_view" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 984.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 1004.0
 
 [node name="Empty32" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 984.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 1004.0
 
 [node name="Show Grid" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 1009.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 1023.0
 text = "Show Grid"
 
 [node name="show_grid" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 1006.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 1026.0
 
 [node name="Empty33" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 1006.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 1026.0
 
 [node name="Show Pixel Grid" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 1031.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 1045.0
 text = "Show Pixel Grid"
 
 [node name="show_pixel_grid" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 1028.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 1048.0
 
 [node name="Empty34" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 1028.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 1048.0
 
 [node name="Show Rulers" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 1053.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 1067.0
 text = "Show Rulers"
 
 [node name="show_rulers" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 1050.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 1070.0
 
 [node name="Empty35" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 1050.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 1070.0
 
 [node name="Show Guides" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 1075.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 1089.0
 text = "Show Guides"
 
 [node name="show_guides" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 1072.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 1092.0
 
 [node name="Empty36" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 1072.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 1092.0
 
 [node name="Edit Mode" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 1097.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 1111.0
 text = "Edit Mode"
 
 [node name="edit_mode" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 1094.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 1114.0
 
 [node name="Empty37" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 1094.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 1114.0
 
 [node name="Zen Mode" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 1119.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 1133.0
 text = "Zen Mode"
 
 [node name="zen_mode" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 1116.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 1136.0
 
 [node name="Empty38" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 1116.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 1136.0
 
 [node name="Fullscreen Mode" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 1141.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 1155.0
 text = "Fullscreen Mode"
 
 [node name="toggle_fullscreen" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 1138.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 1158.0
 
 [node name="Empty39" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 1138.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 1158.0
 
 [node name="Online Docs" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
-margin_top = 569.0
+margin_top = 1163.0
 margin_right = 151.0
-margin_bottom = 583.0
+margin_bottom = 1177.0
 text = "Online Documentation"
 
 [node name="open_docs" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
-margin_top = 566.0
+margin_top = 1160.0
 margin_right = 318.0
-margin_bottom = 586.0
+margin_bottom = 1180.0
 
 [node name="Empty40" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 323.0
-margin_top = 566.0
+margin_top = 1160.0
 margin_right = 485.0
-margin_bottom = 586.0
+margin_bottom = 1180.0
 
 [node name="Backup" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
