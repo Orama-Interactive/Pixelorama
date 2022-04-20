@@ -357,7 +357,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 window_title = "Alarm!"
 resizable = true
-dialog_text = "Directory path or file name is not valid!"
+dialog_text = "Directory path and file name are not valid!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
