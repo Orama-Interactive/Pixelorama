@@ -188,13 +188,13 @@ class Tool:
 		var configurable_shift: String = OS.get_scancode_string(code_shift)
 		var configurable_ctrl: String = OS.get_scancode_string(code_ctrl)
 		var configurable_alt: String = OS.get_scancode_string(code_alt)
-		for shortcut in extra_shortcuts.size():
-			if extra_shortcuts_order[shortcut] == "configurable_shift":
-				extra_shortcuts[shortcut] = configurable_shift
-			if extra_shortcuts_order[shortcut] == "configurable_ctrl":
-				extra_shortcuts[shortcut] = configurable_ctrl
-			if extra_shortcuts_order[shortcut] == "configurable_alt":
-				extra_shortcuts[shortcut] = configurable_alt
+		for shortcut_idx in extra_shortcuts.size():
+			if extra_shortcuts_order[shortcut_idx] == "configurable_shift":
+				extra_shortcuts[shortcut_idx] = configurable_shift
+			if extra_shortcuts_order[shortcut_idx] == "configurable_ctrl":
+				extra_shortcuts[shortcut_idx] = configurable_ctrl
+			if extra_shortcuts_order[shortcut_idx] == "configurable_alt":
+				extra_shortcuts[shortcut_idx] = configurable_alt
 		shortcuts.append_array(extra_shortcuts)
 
 		if shortcuts.empty():
