@@ -97,7 +97,8 @@ func draw_move(position: Vector2) -> void:
 			_original_pos += position - _offset
 		var d = _line_angle_constraint(_original_pos, position)
 		_dest = d.position
-		if Input.is_action_pressed("ctrl"):  # Didn't use (Tools.control) to make more consistent with shape tools
+		# Didn't use (Tools.control) to make more consistent with shape tools
+		if Input.is_action_pressed("ctrl"):
 			_start = _original_pos - (_dest - _original_pos)
 		else:
 			_start = _original_pos
