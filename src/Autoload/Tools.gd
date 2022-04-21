@@ -10,7 +10,6 @@ var control := false
 var shift := false
 var alt := false
 
-
 var tools := {
 	"RectSelect":
 	Tool.new(
@@ -139,7 +138,7 @@ class Tool:
 	var shortcut := ""
 	var extra_hint := ""
 	var extra_shortcuts := []  # Array of String(s)
-	var extra_shortcuts_order := []  #Array to keep shift, ctrl, alt in order
+	var extra_shortcuts_order := []  # Array to keep shift, ctrl, alt in order
 	var button_node: BaseButton
 
 	func _init(
