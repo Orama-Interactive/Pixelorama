@@ -124,27 +124,20 @@ func update_ui_shortcuts(action: String):
 	# Updates UI elements according to InputMap (Tool shortcuts are updated from a seperate function)
 	# Set shortcut to switch colors button
 	if action == "switch_colors":
-		var color_switch: BaseButton = Global.control.find_node("ColorSwitch")
-		color_switch.shortcut.shortcut = InputMap.get_action_list(action)[0]
+		update_ui_shortcut("ColorSwitch", action)
 	# Set timeline shortcuts
 	if action == "go_to_first_frame":
-		var first_frame: BaseButton = Global.control.find_node("FirstFrame")
-		first_frame.shortcut.shortcut = InputMap.get_action_list(action)[0]
+		update_ui_shortcut("FirstFrame", action)
 	if action == "go_to_previous_frame":
-		var previous_frame: BaseButton = Global.control.find_node("PreviousFrame")
-		previous_frame.shortcut.shortcut = InputMap.get_action_list(action)[0]
+		update_ui_shortcut("PreviousFrame", action)
 	if action == "play_backwards":
-		var play_backwards: BaseButton = Global.control.find_node("PlayBackwards")
-		play_backwards.shortcut.shortcut = InputMap.get_action_list(action)[0]
+		update_ui_shortcut("PlayBackwards", action)
 	if action == "play_forward":
-		var play_forward: BaseButton = Global.control.find_node("PlayForward")
-		play_forward.shortcut.shortcut = InputMap.get_action_list(action)[0]
+		update_ui_shortcut("PlayForward", action)
 	if action == "go_to_next_frame":
-		var next_frame: BaseButton = Global.control.find_node("NextFrame")
-		next_frame.shortcut.shortcut = InputMap.get_action_list(action)[0]
+		update_ui_shortcut("NextFrame", action)
 	if action == "go_to_last_frame":
-		var last_frame: BaseButton = Global.control.find_node("LastFrame")
-		last_frame.shortcut.shortcut = InputMap.get_action_list(action)[0]
+		update_ui_shortcut("LastFrame", action)
 	# Set shortcuts for Menu Options
 	var top_menu: Panel = Global.control.find_node("TopMenuContainer")
 	var file_menu: PopupMenu = top_menu.file_menu_button.get_popup()
@@ -209,7 +202,12 @@ func update_ui_shortcuts(action: String):
 		update_menu_option(help_menu, "Online Docs", action)
 
 
-func update_menu_option(menu: PopupMenu, name: String, action):
+func update_ui_shortcut(name: String, action: String):
+	var ui_button: BaseButton = Global.control.find_node(name)
+	ui_button.shortcut.shortcut = InputMap.get_action_list(action)[0]
+
+
+func update_menu_option(menu: PopupMenu, name: String, action: String):
 	for idx in menu.get_item_count():
 		if menu.get_item_text(idx) == name:
 			var accel: int = InputMap.get_action_list(action)[0].get_scancode_with_modifiers()

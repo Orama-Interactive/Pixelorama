@@ -1916,6 +1916,97 @@ margin_top = 1160.0
 margin_right = 485.0
 margin_bottom = 1180.0
 
+[node name="HSeparator10" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 588.0
+margin_right = 151.0
+margin_bottom = 592.0
+
+[node name="HSeparator11" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 588.0
+margin_right = 318.0
+margin_bottom = 592.0
+
+[node name="HSeparator12" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 323.0
+margin_top = 588.0
+margin_right = 485.0
+margin_bottom = 592.0
+
+[node name="TitleBehaviour" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 594.0
+margin_right = 151.0
+margin_bottom = 608.0
+text = "Special Behaviour:"
+
+[node name="Empty41" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 594.0
+margin_right = 318.0
+margin_bottom = 608.0
+
+[node name="Empty42" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 323.0
+margin_top = 594.0
+margin_right = 485.0
+margin_bottom = 608.0
+
+[node name="Shift" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 613.0
+margin_right = 151.0
+margin_bottom = 627.0
+text = "Hold to create a 1:1 shape"
+
+[node name="shift" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 610.0
+margin_right = 318.0
+margin_bottom = 630.0
+
+[node name="Empty43" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 323.0
+margin_top = 610.0
+margin_right = 485.0
+margin_bottom = 630.0
+
+[node name="Ctrl" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 613.0
+margin_right = 151.0
+margin_bottom = 627.0
+text = "Hold to center the shape on
+click origin"
+
+[node name="ctrl" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 610.0
+margin_right = 318.0
+margin_bottom = 630.0
+
+[node name="Empty44" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 323.0
+margin_top = 610.0
+margin_right = 485.0
+margin_bottom = 630.0
+
+[node name="Alt" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 613.0
+margin_right = 151.0
+margin_bottom = 627.0
+text = "Quick Color Picker /
+Hold to displace the shape's origin"
+
+[node name="alt" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 156.0
+margin_top = 610.0
+margin_right = 318.0
+margin_bottom = 630.0
+
+[node name="Empty45" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 323.0
+margin_top = 610.0
+margin_right = 485.0
+margin_bottom = 630.0
+
 [node name="Backup" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
 margin_top = 184.0
