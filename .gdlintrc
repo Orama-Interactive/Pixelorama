@@ -1,0 +1,3 @@
+disable:
+  - no-elif-return
+  - no-else-return
