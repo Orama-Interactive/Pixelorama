@@ -6,8 +6,6 @@ uniform bool blue;
 uniform bool green;
 uniform bool alpha;
 uniform sampler2D selection;
-uniform bool affect_selection;
-uniform bool has_selection;
 
 float stolChannel(float x) {
 	return (x < 0.04045) ? (x / 12.92) : pow((x + 0.055) / 1.055, 2.4);	
@@ -54,12 +52,7 @@ void fragment() {
 		blue ? lum : lin.b);
 	vec3 stdPrime = linearToStandard(des);
 
-	vec3 output;
-	if(affect_selection && has_selection) {
-		output = mix(original_color.rgb, stdPrime, selection_color.a);
-	} else {
-		output = stdPrime;
-	}
+	vec3 output = mix(original_color.rgb, stdPrime, selection_color.a);
 
     if (alpha) {
 	    COLOR = vec4(output.rgb, ltosChannel(lum));
