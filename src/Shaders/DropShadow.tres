@@ -1,0 +1,20 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform vec2 shadow_offset; // Offset, in pixel coordinate [0, 1, 2, and so on]
+uniform vec4 shadow_color;
+uniform sampler2D selection;
+
+
+void fragment() {
+	vec2 offset = shadow_offset * TEXTURE_PIXEL_SIZE; // Normalize shadow_offset to [0..1]
+	vec4 original = texture(TEXTURE, UV); // Original texture
+	float shadow = texture(TEXTURE, UV - offset).a; // Shadow, alpha only
+	shadow *= shadow_color.a; // Multiply this mask by shadow alpha
+	shadow = mix(0.0, shadow, texture(selection, UV).a); // Clip shadow by selection mask
+	
+	COLOR.rgb = mix(shadow_color.rgb, original.rgb, original.a); // Set background color
+	COLOR.a = mix(original.a, 1.0, shadow); // Combine alpha
+}"
