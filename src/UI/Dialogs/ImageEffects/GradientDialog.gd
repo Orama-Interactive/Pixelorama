@@ -3,12 +3,19 @@ extends ImageEffect
 enum {LINEAR, RADIAL, STEP, RADIAL_STEP, DITHERING, RADIAL_DITHERING}
 enum {BAYER_2, BAYER_4, BAYER_8, BAYER_16}
 
+var shader_linear: Shader = preload("res://src/Shaders/Gradients/Linear.gdshader")
+var shader_radial: Shader = preload("res://src/Shaders/Gradients/Radial.gdshader")
+var shader_step: Shader
+var shader_radial_step: Shader
+var shader_dithering: Shader
+var shader_radial_dithering: Shader
+
 var confirmed := false
-var shader: Shader = preload("res://src/Shaders/Gradients/Linear.gdshader")
-#var shader_type: int = LINEAR;
+var shader: Shader = shader_linear
 var dither_texture: Texture = preload("res://assets/bayer-matrices/bayer2.png")
 
-onready var options_cont = $VBoxContainer/OptionsContainer
+onready var options_cont: Container = $VBoxContainer/OptionsContainer
+onready var type_option_button: OptionButton = options_cont.get_node("TypeOptionButton")
 onready var color1: ColorPickerButton = options_cont.get_node("ColorsContainer/ColorPickerButton")
 onready var color2: ColorPickerButton = options_cont.get_node("ColorsContainer/ColorPickerButton2")
 onready var position: SpinBox = options_cont.get_node("PositionSpinBox")
@@ -22,6 +29,15 @@ onready var steps: SpinBox = options_cont.get_node("StepSpinBox")
 
 
 func _ready() -> void:
+	if OS.get_name() == "HTML5" and OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2:
+		for i in range(2, 6):
+			type_option_button.set_item_disabled(i, true)
+	else:
+		shader_step = load("res://src/Shaders/Gradients/Step.gdshader")
+		shader_radial_step = load("res://src/Shaders/Gradients/RadialStep.gdshader")
+		shader_dithering = load("res://src/Shaders/Gradients/Dithering.gdshader")
+		shader_radial_dithering = load("res://src/Shaders/Gradients/RadialDithering.gdshader")
+
 	color1.get_picker().presets_visible = false
 	color1.get_picker().deferred_mode = true
 	color2.get_picker().presets_visible = false
@@ -81,29 +97,28 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 
 
 func _on_TypeOptionButton_item_selected(index: int) -> void:
-#	shader_type = index
 	for child in options_cont.get_children():
 		if not child.is_in_group("gradient_common"):
 			child.visible = false
 
 	match index:
 		LINEAR:
-			shader = preload("res://src/Shaders/Gradients/Linear.gdshader")
+			shader = shader_linear
 			get_tree().set_group("gradient_linear", "visible", true)
 		RADIAL:
-			shader = preload("res://src/Shaders/Gradients/Radial.gdshader")
+			shader = shader_radial
 			get_tree().set_group("gradient_radial", "visible", true)
 		STEP:
-			shader = preload("res://src/Shaders/Gradients/Step.gdshader")
+			shader = shader_step
 			get_tree().set_group("gradient_step", "visible", true)
 		RADIAL_STEP:
-			shader = preload("res://src/Shaders/Gradients/RadialStep.gdshader")
+			shader = shader_radial_step
 			get_tree().set_group("gradient_radial_step", "visible", true)
 		DITHERING:
-			shader = preload("res://src/Shaders/Gradients/Dithering.gdshader")
+			shader = shader_dithering
 			get_tree().set_group("gradient_dithering", "visible", true)
 		RADIAL_DITHERING:
-			shader = preload("res://src/Shaders/Gradients/RadialDithering.gdshader")
+			shader = shader_radial_dithering
 			get_tree().set_group("gradient_radial_dithering", "visible", true)
 	update_preview()
 
