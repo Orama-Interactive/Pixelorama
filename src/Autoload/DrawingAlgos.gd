@@ -28,10 +28,16 @@ func scale_3x(sprite: Image, tol: float = 50) -> Image:
 			c = sprite.get_pixel(min(x + 1, sprite.get_width() - 1), max(y - 1, 0))
 			d = sprite.get_pixel(max(x - 1, 0), min(y, sprite.get_height() - 1))
 			e = sprite.get_pixel(min(x, sprite.get_width() - 1), min(y, sprite.get_height() - 1))
-			f = sprite.get_pixel(min(x + 1, sprite.get_width() - 1), min(y, sprite.get_height() - 1))
+			f = sprite.get_pixel(
+				min(x + 1, sprite.get_width() - 1), min(y, sprite.get_height() - 1)
+			)
 			g = sprite.get_pixel(max(x - 1, 0), min(y + 1, sprite.get_height() - 1))
-			h = sprite.get_pixel(min(x, sprite.get_width() - 1), min(y + 1, sprite.get_height() - 1))
-			i = sprite.get_pixel(min(x + 1, sprite.get_width() - 1), min(y + 1, sprite.get_height() - 1))
+			h = sprite.get_pixel(
+				min(x, sprite.get_width() - 1), min(y + 1, sprite.get_height() - 1)
+			)
+			i = sprite.get_pixel(
+				min(x + 1, sprite.get_width() - 1), min(y + 1, sprite.get_height() - 1)
+			)
 
 			var db: bool = similar_colors(d, b, tol)
 			var dh: bool = similar_colors(d, h, tol)
@@ -44,7 +50,9 @@ func scale_3x(sprite: Image, tol: float = 50) -> Image:
 
 			scaled.set_pixel(max(xs - 1, 0), max(ys - 1, 0), d if (db and !dh and !bf) else e)
 			scaled.set_pixel(
-				xs, max(ys - 1, 0), b if (db and !dh and !bf and !ec) or (bf and !db and !fh and !ea) else e
+				xs,
+				max(ys - 1, 0),
+				b if (db and !dh and !bf and !ec) or (bf and !db and !fh and !ea) else e
 			)
 			scaled.set_pixel(xs + 1, max(ys - 1, 0), f if (bf and !db and !fh) else e)
 			scaled.set_pixel(
@@ -52,7 +60,9 @@ func scale_3x(sprite: Image, tol: float = 50) -> Image:
 			)
 			scaled.set_pixel(xs, ys, e)
 			scaled.set_pixel(
-				xs + 1, ys, f if (bf and !db and !fh and !ei) or (fh and !bf and !dh and !ec) else e
+				xs + 1,
+				ys,
+				f if (bf and !db and !fh and !ei) or (fh and !bf and !dh and !ec) else e
 			)
 			scaled.set_pixel(max(xs - 1, 0), ys + 1, d if (dh and !fh and !db) else e)
 			scaled.set_pixel(
