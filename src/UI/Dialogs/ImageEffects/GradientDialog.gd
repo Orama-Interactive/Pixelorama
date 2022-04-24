@@ -69,15 +69,6 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"dither_steps": dither_size.x * dither_size.y + 1,
 		"pixel_size": dither_size.x,
 	}
-#	if shader_type == LINEAR or shader_type == STEP or shader_type == DITHERING:
-#		params["position"] = position.value
-#		params["angle"] = angle.value
-#		params["size"] = size.value
-#	else:
-#		if shader_type == RADIAL:
-#			params["size"] = size.value
-#	if shader_type == STEP or shader_type == RADIAL_STEP:
-#		params["steps"] = steps.value
 
 	if !confirmed:
 		preview.material.shader = shader
