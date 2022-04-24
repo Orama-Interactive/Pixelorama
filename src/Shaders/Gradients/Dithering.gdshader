@@ -1,6 +1,8 @@
 shader_type canvas_item;
+render_mode unshaded;
 
 uniform sampler2D dither_texture;
+uniform sampler2D selection;
 uniform vec4 first_color : hint_color = vec4(1.0);
 uniform vec4 second_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform vec2 image_size = vec2(64.0);
@@ -12,6 +14,10 @@ uniform int pixel_size : hint_range(2, 16) = 2;
 
 
 void fragment() {
+	vec4 original_color = texture(TEXTURE, UV);
+	vec4 selection_color = texture(selection, UV);
+	vec4 output = vec4(0.0);
+
 	float pivot = (position / size) + 0.5;
 	vec2 uv = UV - 0.5;
 	float angle_cos = cos(radians(angle));
@@ -19,7 +25,6 @@ void fragment() {
 	float rotated = uv.x * angle_cos - uv.y * angle_sin; 
 	rotated /= abs(angle_cos) + abs(angle_sin);
 	rotated /= size;
-	COLOR = vec4(0.0);
 	vec4 dither_value = texture(dither_texture, uv * (image_size / float(pixel_size)));
 
 	for(int i = -1; i <= dither_steps; i++) {
@@ -37,6 +42,8 @@ void fragment() {
 			pos = step(percentage, rotated);
 		}
 		vec4 grad_color = first_color * (dithered) + second_color * (1.0 - dithered);
-		COLOR += grad_color * pos;
+		output += grad_color * pos;
 	}
+	
+	COLOR = mix(original_color, output, selection_color.a);
 }

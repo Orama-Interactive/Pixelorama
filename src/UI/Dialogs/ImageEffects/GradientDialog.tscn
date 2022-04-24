@@ -4,9 +4,9 @@
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="GradientDialog" type="ConfirmationDialog"]
-margin_right = 200.0
-margin_bottom = 196.0
-rect_min_size = Vector2( 172, 60.2 )
+margin_right = 294.0
+margin_bottom = 444.0
+rect_min_size = Vector2( 290, 444 )
 window_title = "Gradient"
 resizable = true
 script = ExtResource( 1 )
@@ -26,14 +26,14 @@ __meta__ = {
 }
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_right = 316.0
-margin_bottom = 308.0
+margin_right = 278.0
+margin_bottom = 240.0
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 4.0
-margin_right = 312.0
-margin_bottom = 308.0
+margin_left = 19.0
+margin_right = 259.0
+margin_bottom = 240.0
 rect_min_size = Vector2( 200, 200 )
 size_flags_horizontal = 5
 size_flags_vertical = 3
@@ -48,9 +48,9 @@ margin_right = 0.0
 margin_bottom = 0.0
 
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
-margin_top = 312.0
-margin_right = 316.0
-margin_bottom = 468.0
+margin_top = 244.0
+margin_right = 278.0
+margin_bottom = 400.0
 columns = 2
 
 [node name="TypeLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
@@ -81,17 +81,19 @@ margin_right = 278.0
 margin_bottom = 44.0
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer/ColorsContainer"]
-margin_right = 20.0
+margin_right = 55.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 0 )
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 
 [node name="ColorPickerButton2" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer/ColorsContainer"]
-margin_left = 24.0
-margin_right = 44.0
+margin_left = 59.0
+margin_right = 114.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 0 )
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 color = Color( 1, 1, 1, 1 )
 
 [node name="PositionLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear", "gradient_step"]]

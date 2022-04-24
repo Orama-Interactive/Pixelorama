@@ -1,5 +1,7 @@
 shader_type canvas_item;
+render_mode unshaded;
 
+uniform sampler2D selection;
 uniform vec4 first_color : hint_color = vec4(1.0);
 uniform vec4 second_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform float position : hint_range(-0.5, 0.5) = 0.0;
@@ -9,8 +11,12 @@ uniform int steps : hint_range(2, 100) = 2;
 
 
 void fragment() {
-	COLOR = vec4(0.0);
-	float pivot = (position / size) + 0.5;
+	vec4 original_color = texture(TEXTURE, UV);
+	vec4 selection_color = texture(selection, UV);
+	vec4 output = vec4(0.0);
+
+	float fixed_pos = position - (1.0 / 20.0);
+	float pivot = (fixed_pos / size) + 0.5;
 	vec2 uv = UV - 0.5;
 	float angle_cos = cos(radians(angle));
 	float angle_sin = sin(radians(angle));
@@ -31,6 +37,7 @@ void fragment() {
 		else if (i == steps) {
 			pos = step(percentage, rotated);
 		}
-		COLOR += grad_color * pos;
+		output += grad_color * pos;
 	}
+	COLOR = mix(original_color, output, selection_color.a);
 }
