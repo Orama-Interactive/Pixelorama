@@ -64,10 +64,14 @@ func set_nodes() -> void:
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
+	var selection: Image
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
-		var selection: Image = project.bitmap_to_image(project.selection_bitmap)
-		selection_tex.create_from_image(selection, 0)
+		selection = project.bitmap_to_image(project.selection_bitmap)
+	else:  # This is needed to prevent a weird bug with the dithering shaders and GLES2
+		selection = Image.new()
+		selection.create(project.size.x, project.size.y, false, Image.FORMAT_L8)
+	selection_tex.create_from_image(selection, 0)
 
 	var dither_size: Vector2 = dither_texture.get_size()
 	var params := {
