@@ -56,13 +56,13 @@ func scale_3x(sprite: Image, tol: float = 50) -> Image:
 			)
 			scaled.set_pixel(xs + 1, max(ys - 1, 0), f if (bf and !db and !fh) else e)
 			scaled.set_pixel(
-				max(xs - 1, 0), ys, d if (dh and !fh and !db and !ea) or (db and !dh and !bf and !eg) else e
+				max(xs - 1, 0),
+				ys,
+				d if (dh and !fh and !db and !ea) or (db and !dh and !bf and !eg) else e
 			)
 			scaled.set_pixel(xs, ys, e)
 			scaled.set_pixel(
-				xs + 1,
-				ys,
-				f if (bf and !db and !fh and !ei) or (fh and !bf and !dh and !ec) else e
+				xs + 1, ys, f if (bf and !db and !fh and !ei) or (fh and !bf and !dh and !ec) else e
 			)
 			scaled.set_pixel(max(xs - 1, 0), ys + 1, d if (dh and !fh and !db) else e)
 			scaled.set_pixel(
