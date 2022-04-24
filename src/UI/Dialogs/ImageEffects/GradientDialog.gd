@@ -1,7 +1,7 @@
 extends ImageEffect
 
-enum {LINEAR, RADIAL, STEP, RADIAL_STEP, DITHERING, RADIAL_DITHERING}
-enum {BAYER_2, BAYER_4, BAYER_8, BAYER_16}
+enum { LINEAR, RADIAL, STEP, RADIAL_STEP, DITHERING, RADIAL_DITHERING }
+enum { BAYER_2, BAYER_4, BAYER_8, BAYER_16 }
 
 var shader_linear: Shader = preload("res://src/Shaders/Gradients/Linear.gdshader")
 var shader_radial: Shader = preload("res://src/Shaders/Gradients/Radial.gdshader")
@@ -12,7 +12,11 @@ var shader_radial_dithering: Shader
 
 var confirmed := false
 var shader: Shader = shader_linear
-var dither_texture: Texture = preload("res://assets/bayer-matrices/bayer2.png")
+var dither_texture_2: Texture = preload("res://assets/bayer-matrices/bayer2.png")
+var dither_texture_4: Texture = preload("res://assets/bayer-matrices/bayer4.png")
+var dither_texture_8: Texture = preload("res://assets/bayer-matrices/bayer8.png")
+var dither_texture_16: Texture = preload("res://assets/bayer-matrices/bayer16.png")
+var dither_texture: Texture = dither_texture_2
 
 onready var options_cont: Container = $VBoxContainer/OptionsContainer
 onready var type_option_button: OptionButton = options_cont.get_node("TypeOptionButton")
@@ -138,11 +142,11 @@ func _value_changed(_value: float) -> void:
 func _on_DitheringOptionButton_item_selected(index: int) -> void:
 	match index:
 		BAYER_2:
-			dither_texture = preload("res://assets/bayer-matrices/bayer2.png")
+			dither_texture = dither_texture_2
 		BAYER_4:
-			dither_texture = preload("res://assets/bayer-matrices/bayer4.png")
+			dither_texture = dither_texture_4
 		BAYER_8:
-			dither_texture = preload("res://assets/bayer-matrices/bayer8.png")
+			dither_texture = dither_texture_8
 		BAYER_16:
-			dither_texture = preload("res://assets/bayer-matrices/bayer16.png")
+			dither_texture = dither_texture_16
 	update_preview()
