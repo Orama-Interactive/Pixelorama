@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-04-26 11:42\n"
+"PO-Revision-Date: 2022-04-26 11:54\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1073,22 +1073,22 @@ msgid "All"
 msgstr "Totes"
 
 msgid "Rectangular grid width:"
-msgstr "Amplada rectangular de la graella:"
+msgstr "Amplada de la graella rectangular:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
 msgstr "Estableix com estan de separades les línies verticals de la graella rectangular"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Alçada de la graella rectangular:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Estableix com estan de separades les línies horitzontals de la graella rectangular"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "Amplada del límit de les cel·les isomètriques:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Estableix l'amplada del quadre delimitador de les cel·les isomètriques alineat a l'eix"
 
 msgid "Isometric cell bounds height:"
 msgstr "Alçada del límit de cel·les isomètriques:"
@@ -1157,55 +1157,55 @@ msgid "Second color of the transparent checker background"
 msgstr "Segon color del patró de quadres transparent"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Moviment de seguiment del llenç"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "El patró de quadres transparent segueix el moviment del llenç"
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Segueix el nivell de zoom del llenç"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "El patró de quadres transparent segueix el nivell de zoom del llenç"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Vores de selecció animades"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Color de la vora 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Color de la vora 2:"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Només es poden modificar els presets personalitzats"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Estableix el límit d'FPS de l'aplicació:"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Pausa l'aplicació en perdre el focus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "Estableix el límit de fotogrames per segon de l'aplicació. Com més baix, menys càrrega rep la CPU, però l'aplicació s'alenteix i pot no respondre correctament. 0 vol dir que no hi ha cap límit."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr ""
+msgstr "Si això està activat quan l'aplicació perd el focus, es posa en pausa. Això ajuda a reduir l'ús de la CPU mentre no estàs actiu. L'aplicació es resumeix quan el ratolí entra a la finestra de l'aplicació."
 
 msgid "Add Extension"
-msgstr ""
+msgstr "Afegeix una extensió"
 
 msgid "Enable"
-msgstr ""
+msgstr "Activa"
 
 msgid "Disable"
-msgstr ""
+msgstr "Desactiva"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Desinstal·la"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Obre la carpeta"
 
 msgid "Brush:"
 msgstr "Pinzell:"
@@ -1214,13 +1214,13 @@ msgid "Select a brush"
 msgstr "Triar un pinzell"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "Pinzell de píxels"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "Pinzell de cercles"
 
 msgid "Filled circle brush"
-msgstr ""
+msgstr "Pinzell de cercle omplert"
 
 msgid "Custom brush"
 msgstr "Pinzell personalitzat"
@@ -1229,32 +1229,33 @@ msgid "Brush size:"
 msgstr "Mida del pinzell:"
 
 msgid "Overwrite Color"
-msgstr ""
+msgstr "Sobreescriure el color"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr ""
+msgstr "Sobreescriu el color en comptes de barrejar-lo. Aquesta opció només és rellevant amb colors que no són completament opacs"
 
 msgid "Pixel Perfect"
 msgstr "Pixel Perfect"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Omple l'interior"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Píxels Perfectes\n"
+"Suavitza les línies esborrant píxels addicionals de les vores"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Omple la forma"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Omple la forma dibuixada amb un color, en comptes de dibuixar una forma buida"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "Color del pinzell de"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Color del mateix pinzell, 100: El color seleccionat"
 
 msgid "Fill area:"
 msgstr "Omplir area:"
@@ -1278,7 +1279,7 @@ msgid "Offset"
 msgstr "Desfasament"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Ombreig simple"
 
 msgid "Hue Shifting"
 msgstr ""
