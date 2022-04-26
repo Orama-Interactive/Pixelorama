@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-04-26 12:29\n"
+"PO-Revision-Date: 2022-04-26 12:38\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1447,7 +1447,7 @@ msgid "Below canvas"
 msgstr "Sota el llenç"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Si vols que una capa ignori l'onion skinning, simplement afegeix el sufix \"_io\" al seu nom."
 
 msgid "Add a new frame"
 msgstr "Afegir un nou fotograma"
@@ -1474,10 +1474,10 @@ msgid "Unlink Cel"
 msgstr "Desvincular Cel·la"
 
 msgid "Frame Properties"
-msgstr ""
+msgstr "Propietats del fotograma"
 
 msgid "Frame properties"
-msgstr ""
+msgstr "Propietats del fotograma"
 
 msgid "Layer"
 msgstr "Capa"
