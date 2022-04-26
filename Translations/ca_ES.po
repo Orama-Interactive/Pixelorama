@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-03-30 23:32\n"
+"PO-Revision-Date: 2022-04-26 11:24\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Veure"
 
 msgid "Window"
-msgstr ""
+msgstr "Finestra"
 
 msgid "Image"
 msgstr "Imatge"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Exportar"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Sobreescriure"
 
 msgid "Export..."
 msgstr "Exportar..."
@@ -169,7 +169,7 @@ msgid "Invert"
 msgstr "Invertir"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Inverteix la imatge"
 
 msgid "Flip Horizontal"
 msgstr "Voltejar horitzontalment"
@@ -184,34 +184,34 @@ msgid "Tile Mode"
 msgstr "Mode Tile"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Opacitat de la finestra"
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Disposició dels panells"
 
 msgid "Panels"
-msgstr ""
+msgstr "Panells"
 
 msgid "Layouts"
-msgstr ""
+msgstr "Disposicions"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Panells mòbils"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Administra les disposicions"
 
 msgid "Add"
-msgstr ""
+msgstr "Afegeix"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Afegeix disposició"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Edita la disposició"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Segur que vols esborrar aquesta disposició?"
 
 msgid "Auto"
 msgstr "Auto"
@@ -262,7 +262,7 @@ msgid "Import as:"
 msgstr "Importar com a:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "Aplica a tots"
 
 msgid "Recent projects"
 msgstr "Darrers projectes"
@@ -271,16 +271,16 @@ msgid "New tab"
 msgstr "Pestanya nova"
 
 msgid "Spritesheet (new tab)"
-msgstr ""
+msgstr "Full de sprites (nova pestanya)"
 
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Full de sprites (nova capa)"
 
 msgid "New frame"
 msgstr "Nou fotograma"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Reemplaça el fotograma"
 
 msgid "New layer"
 msgstr "Nova capa"
@@ -301,13 +301,13 @@ msgid "Vertical frames:"
 msgstr "Fotogrames verticales:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Fotograma d'inici:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "Al fotograma:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "A la capa:"
 
 msgid "Brush type:"
 msgstr "Tipus de pinzell:"
@@ -340,10 +340,10 @@ msgid "Directory path or file name is not valid!"
 msgstr "La ruta o directori de l'arxiu no existeix!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "S'està exportant..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "No es pot carregar l'arxiu '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -352,7 +352,8 @@ msgstr "No es pot carregar el fitxer '%s'.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "No es pot carregar l'arxiu '%s'.\n"
+"Aquest no és un arxiu de paleta vàlid."
 
 msgid "Frame"
 msgstr "Fotograma"
@@ -364,7 +365,7 @@ msgid "All Frames"
 msgstr "Tots els fotogrames"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Full de sprites"
 
 msgid "Animation"
 msgstr "Animació"
@@ -460,13 +461,13 @@ msgid "General"
 msgstr "General"
 
 msgid "Startup"
-msgstr ""
+msgstr "Inici"
 
 msgid "Language"
 msgstr "Llenguatge"
 
 msgid "Interface"
-msgstr ""
+msgstr "Interfície"
 
 msgid "Themes"
 msgstr "Temes"
@@ -475,31 +476,31 @@ msgid "Canvas"
 msgstr "Llenç"
 
 msgid "Selection"
-msgstr ""
+msgstr "Selecció"
 
 msgid "Shortcuts"
 msgstr "Accesos directos"
 
 msgid "Backup"
-msgstr ""
+msgstr "Còpia de seguretat"
 
 msgid "Performance"
-msgstr ""
+msgstr "Rendiment"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Extensions"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Cursors"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indicadors"
 
 msgid "On"
-msgstr ""
+msgstr "Encès"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Restaura els valors per defecte"
 
 msgid "Smooth Zoom"
 msgstr "Zoom suavitzat"
@@ -526,10 +527,10 @@ msgid "System Language"
 msgstr "Idioma del sistema"
 
 msgid "Display Scale"
-msgstr ""
+msgstr "Escala de visualització"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Atenua la interfície amb finestres emergents"
 
 msgid "Dark"
 msgstr "Fosc"
@@ -547,40 +548,40 @@ msgid "Light"
 msgstr "Llum"
 
 msgid "Purple"
-msgstr ""
+msgstr "Porpra"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Color d'icona de:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Color d'icona:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Mida dels botons d'eines:"
 
 msgid "Small"
-msgstr ""
+msgstr "Petita"
 
 msgid "Big"
-msgstr ""
+msgstr "Grossa"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Canvia només la selecció"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Cels seleccionats"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Cel actual"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Fotograma actual"
 
 msgid "All frames"
-msgstr ""
+msgstr "Tots els fotogrames"
 
 msgid "All projects"
 msgstr "Totes els projectes"
@@ -589,10 +590,10 @@ msgid "Invert Colors"
 msgstr "Invertir colors"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Modifica el canal vermell"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Modifica el canal verd"
 
 msgid "Modify Blue Channel"
 msgstr ""
@@ -1064,28 +1065,28 @@ msgid "Sets the width of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "Alçada del límit de cel·les isomètriques:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "Estableix l'alçada del quadre delimitador de les cel·les isomètriques alineat a l'eix"
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Desplaçament de la graella en la x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Estableix el desplaçament de la graella en l'eix x des de l'origen del llenç (cantonada superior esquerra de la imatge)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Desplaçament de la graella en la y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Estableix el desplaçament de la graella en l'eix y des de l'origen del llenç (cantonada superior esquerra de la imatge)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Mode dibuix amb caselles:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Si està desactivat, la graella només es dibuixarà per sobre de la imatge original"
 
 msgid "Grid color:"
 msgstr "Color de la quadrícula:"
@@ -1094,10 +1095,10 @@ msgid "A color of the grid"
 msgstr "Un color de la quadrícula"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Graella de píxels"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Mostra al zoom:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr ""
