@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-04-26 12:15\n"
+"PO-Revision-Date: 2022-04-26 12:29\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1372,10 +1372,10 @@ msgstr "Anar al últim fotograma\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
-msgstr ""
+msgstr "Opcions d'Onion Skinning (paper de ceba)"
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Activa/desactiva l'Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -1392,59 +1392,59 @@ msgid "Ping-pong loop"
 msgstr "Bucle Ping-Pong"
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Onion Skinning:"
 
 msgid "Past Frames"
-msgstr ""
+msgstr "Fotogrames passats"
 
 msgid "Future Frames"
-msgstr ""
+msgstr "Fotogrames futurs"
 
 msgid "Manage frame tags"
 msgstr "Gestiona etiquetes de fotogrames"
 
 msgid "Frame Tag Properties"
-msgstr ""
+msgstr "Propietats de l'etiqueta del fotograma"
 
 msgid "Add a new frame tag"
-msgstr ""
+msgstr "Afegeix una nova etiqueta de fotograma"
 
 msgid "Name:"
-msgstr ""
+msgstr "Nom:"
 
 msgid "From:"
-msgstr ""
+msgstr "De:"
 
 msgid "To:"
-msgstr ""
+msgstr "A:"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr ""
+msgstr "L'animació es reprodueix només en els fotogrames amb la mateixa etiqueta"
 
 msgid "Tag %s (Frame %s)"
-msgstr ""
+msgstr "Etiqueta %s (Fotograma %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr ""
+msgstr "Etiqueta %s (Fotogrames %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr ""
+msgstr "Si està seleccionat, l'animació només es reprodueix en els fotogrames amb la mateixa etiqueta. Si no, l'animació es reproduirà en tots els fotogrames, ignorant etiquetes."
 
 msgid "Blue-Red Mode"
 msgstr "Mode Blau-Vermell"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "Mostra els fotogrames passats:"
 
 msgid "Show future frames:"
-msgstr ""
+msgstr "Mostra els fotogrames futurs:"
 
 msgid "Above canvas"
-msgstr ""
+msgstr "Damunt el llenç"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "Sota el llenç"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
 msgstr ""
