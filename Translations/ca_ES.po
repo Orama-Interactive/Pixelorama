@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-04-26 11:54\n"
+"PO-Revision-Date: 2022-04-26 12:15\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1282,22 +1282,22 @@ msgid "Simple Shading"
 msgstr "Ombreig simple"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Canvi de to"
 
 msgid "Lighten"
-msgstr ""
+msgstr "Aclareix"
 
 msgid "Darken"
-msgstr ""
+msgstr "Enfosqueix"
 
 msgid "Amount:"
 msgstr "Quantitat:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Quantitat de claror/foscor"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Escull per:"
 
 msgid "Left Color"
 msgstr "Color esquerre"
@@ -1309,10 +1309,10 @@ msgid "Mode:"
 msgstr "Mode:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Amplia"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Allunya"
 
 msgid "Options:"
 msgstr "Opcions:"
@@ -1321,7 +1321,7 @@ msgid "Fit to frame"
 msgstr "Ajustar al fotograma"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "100% de Zoom"
 
 msgid "Mirroring"
 msgstr "Reflex"
@@ -1330,10 +1330,10 @@ msgid "Horizontal"
 msgstr "Horitzontal"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr ""
+msgstr "Activa el dibuix emmirallat horitzontalment"
 
 msgid "Enable vertical mirrored drawing"
-msgstr ""
+msgstr "Activa el dibuix emmirallat verticalment"
 
 msgid "Vertical"
 msgstr "Vertical"
@@ -1353,11 +1353,13 @@ msgstr "Anar al fotograma anterior\n"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "Reprodueix l'animació del revés (del final cap al principi)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "Reprodueix l'animació del dret (del principi cap al final)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
