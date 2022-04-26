@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-04-26 11:24\n"
+"PO-Revision-Date: 2022-04-26 11:42\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -596,10 +596,10 @@ msgid "Modify Green Channel"
 msgstr "Modifica el canal verd"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Modifica el canal blau"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Modifica el canal alfa"
 
 msgid "Desaturation"
 msgstr "Desaturació"
@@ -608,13 +608,13 @@ msgid "Outline"
 msgstr "Contorn"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Ajusta la Tonalitat/Saturació/Lluminositat"
 
 msgid "Gradient"
 msgstr "Degradat"
 
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Ajusta l'HSV"
 
 msgid "Type:"
 msgstr "Tipus:"
@@ -623,13 +623,13 @@ msgid "Angle:"
 msgstr "Angle:"
 
 msgid "Hue:"
-msgstr ""
+msgstr "Tonalitat:"
 
 msgid "Saturation:"
-msgstr ""
+msgstr "Saturació:"
 
 msgid "Value:"
-msgstr ""
+msgstr "Lluminositat:"
 
 msgid "Apply"
 msgstr "Aplicar"
@@ -638,7 +638,7 @@ msgid "Diagonal"
 msgstr "Diagonal"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Col·loca dins l'imatge"
 
 msgid "Thickness:"
 msgstr "Gruix:"
@@ -650,16 +650,16 @@ msgid "Steps:"
 msgstr "Passos:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "D'amunt avall"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "D'avall amunt"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "D'esquerra a dreta"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "De dreta a esquerra"
 
 msgid "View Splash Screen"
 msgstr "Mostrar pantalla de benvinguda"
@@ -671,7 +671,7 @@ msgid "Issue Tracker"
 msgstr "Rastrejador d'incidències"
 
 msgid "Open Logs Folder"
-msgstr ""
+msgstr "Obre la carpeta dels registres"
 
 msgid "Changelog"
 msgstr "Registre de canvis"
@@ -680,19 +680,19 @@ msgid "About Pixelorama"
 msgstr "Sobre Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - Pixela els teus somnis!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Desenvolupat per Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-present per Orama Interactive i col·laboradors"
 
 msgid "Website"
 msgstr "Lloc web"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "Repositori de GitHub"
 
 msgid "Donate"
 msgstr "Feu una donació"
@@ -710,7 +710,7 @@ msgid "Translators"
 msgstr "Traductors"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Llicències"
 
 msgid "English"
 msgstr "Anglès"
@@ -728,7 +728,7 @@ msgid "Polish"
 msgstr "Polonès"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portuguès"
 
 msgid "Brazilian Portuguese"
 msgstr "Portuguès de Brasil"
@@ -788,16 +788,16 @@ msgid "Ukrainian"
 msgstr "Ucraïnès"
 
 msgid "Danish"
-msgstr ""
+msgstr "Danès"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Suec"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Serbi (ciríl·lic)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Neerlandès"
 
 msgid "Development Team"
 msgstr "Equip desenvolupador"
@@ -862,7 +862,10 @@ msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "Selecció poligonal\n\n"
+"%s pel botó esquerre del ratolí\n"
+"%s pel botó dret del ratolí\n\n"
+"Doble clic per connectar el darrer punt al punt d'inici"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -902,13 +905,18 @@ msgstr "Zoom\n\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Desplaçar-se per la pantalla\n\n"
+"%s pel botó esquerre del ratolí\n"
+"%s pel botó dret del ratolí"
 
 msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "Selector de colors\n\n"
+"%s pel botó esquerre del ratolí\n"
+"%s pel botó dret del ratolí\n\n"
+"Selecciona el color d'un pixel de l'sprite"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -938,7 +946,9 @@ msgstr "Cubeta\n\n"
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Eina d'ombreig\n\n"
+"%s pel botó esquerre del ratolí\n"
+"%s pel botó dret del ratolí"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
@@ -946,7 +956,12 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Eina de línia\n\n"
+"%s pel botó esquerre del ratolí\n"
+"%s pel botó dret del ratolí\n\n"
+"Mantén %s per encaixar l'angle de la línia\n"
+"Mantén %s per centrar la forma en el clic d'origen\n"
+"Mantén %s per desplaçar l'origen de la forma"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -954,7 +969,12 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Eina de rectangle\n\n"
+"%s pel botó esquerre del ratolí\n"
+"%s pel botó dret del ratolí\n\n"
+"Mantén %s per crear una forma 1:1\n"
+"Mantén %s per centrar la forma al clic d'origen\n"
+"Mantén %s per desplaçar l'origen de la forma"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -962,7 +982,12 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Eina d'el·lipsi\n\n"
+"%s pel botó esquerre del ratolí\n"
+"%s pel botó dret del ratolí\n\n"
+"Mantén %s per crear una forma 1:1\n"
+"Mantén %s per centrar la forma al clic d'origen\n"
+"Mantén %s per desplaçar l'origen de la forma"
 
 msgid "Rectangle"
 msgstr "Rectangle"
@@ -978,10 +1003,11 @@ msgstr "Triar un color per l'eina dreta"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr ""
+msgstr "Canvia els colors esquerre i dret\n"
+"(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Restaura els colors al seu estat per defecte (negre per l'esquerre, blanc pel dret)"
 
 msgid "Left tool"
 msgstr "Eina esquerra"
@@ -993,64 +1019,64 @@ msgid "Left pixel indicator"
 msgstr "Indicador de píxel esquerre"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Mostra l'indicador del botó esquerre o del pinzell al llenç mentre dibuixes"
 
 msgid "Right pixel indicator"
 msgstr "Indicador de píxel dret"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Mostra l'indicador del botó dret o del pinzell al llenç mentre dibuixes"
 
 msgid "Show left tool icon"
 msgstr "Mostrar icona de la eina esquerra"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Mostra una icona de l'eina seleccionada a l'esquerra del cursor al llenç"
 
 msgid "Show right tool icon"
 msgstr "Mostrar icona de la eina dreta"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Mostra una icona de l'eina seleccionada a la dreta del cursor al llenç"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Fes servir els cursors nadius pel ratolí"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Fes servir un cursor en forma de creu al llenç"
 
 msgid "Guides"
-msgstr ""
+msgstr "Guies"
 
 msgid "Guides color:"
 msgstr "Color de la guia:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Un color de les guies de regla que es mostren al llenç"
 
 msgid "Grid"
-msgstr ""
+msgstr "Graella"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Tipus de graella:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Estableix el tipus de la graella entre rectangular, isomètrica o ambdues"
 
 msgid "Rectangular"
 msgstr "Rectangular"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Isomètrica"
 
 msgid "All"
-msgstr ""
+msgstr "Totes"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Amplada rectangular de la graella:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Estableix com estan de separades les línies verticals de la graella rectangular"
 
 msgid "Rectangular grid height:"
 msgstr ""
@@ -1101,34 +1127,34 @@ msgid "Show at zoom:"
 msgstr "Mostra al zoom:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Estableix el nivell mínim de zoom a partir del qual es mostra la graella de píxels"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Color de la graella de píxels:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Un color de la graella de píxels"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Transparència"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Mida del patró de quadres:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Mida del patró de quadres transparent del fons"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Color de quadre 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Primer color del patró de quadres transparent"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Color de quadre 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Segon color del patró de quadres transparent"
 
 msgid "Follow Canvas Movement"
 msgstr ""
