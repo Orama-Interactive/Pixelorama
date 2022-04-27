@@ -8,8 +8,8 @@ uniform vec2 size = vec2(100.0, 100.0);
 
 
 void fragment(){
-	float error_x = ((876.0 - size.x) * 0.00001);  // Margin of error during division
-	float error_y = ((522.0 - size.y) * 0.00007);  // Margin of error during division
+	float error_x = ((876.0 - size.x) * 0.000001);  // Margin of error during division
+	float error_y = ((522.0 - size.y) * 0.00007);   // Margin of error during division
 	if (
 	UV.x >= (position.x)/(screen_resolution.x) && UV.y >= (position.y)/(screen_resolution.y)
 		&& 
