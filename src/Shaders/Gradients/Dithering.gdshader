@@ -33,7 +33,7 @@ void fragment() {
 		float pos = step(percentage, rotated) - step(percentage + unit_perc, rotated);
 		float dithered = step(percentage, dither_value.r - pivot);
 		if (i == dither_steps - 1) {
-			dithered = 0.0;
+			dithered = 0.0; // Ensure that the final step has no dithering, is a single color
 		}
 		else if (i == -1) {
 			pos = 1.0 - step(percentage + unit_perc, rotated);

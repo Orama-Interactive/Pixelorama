@@ -12,8 +12,6 @@ uniform vec2 ratio = vec2(1.0);
 uniform int dither_steps : hint_range(2, 100) = 5;
 uniform int pixel_size : hint_range(2, 16) = 2;
 
-const float PI = 3.1415926535;
-
 void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
@@ -22,12 +20,12 @@ void fragment() {
 	uv -= (center * 2.0) - vec2(1.0);
 	uv *= radius;
 	uv /= ratio;
-	vec2 polar_uv = vec2(atan(uv.x, uv.y), length(uv));
+	float polar_uv = length(uv);
 	vec4 dither_value = texture(dither_texture, UV * (image_size / float(pixel_size)));
 
 	for(int i = 0; i < dither_steps; i++) {
 		float percentage = float(i) / float(dither_steps);
-		float pos = step(percentage, polar_uv.y) - step(percentage + (1.0 / float(dither_steps)), polar_uv.y);
+		float pos = step(percentage, polar_uv) - step(percentage + (1.0 / float(dither_steps)), polar_uv);
 		float dithered = step(percentage, dither_value.r);
 		if (i == dither_steps - 1) {
 			dithered = 0.0;
