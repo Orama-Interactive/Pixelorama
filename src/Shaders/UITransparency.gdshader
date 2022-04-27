@@ -13,7 +13,7 @@ void fragment(){
 	if (
 	UV.x >= (position.x)/(screen_resolution.x) && UV.y >= (position.y)/(screen_resolution.y)
 		&& 
-	UV.x <= ((position.x + size.x)/(screen_resolution.x) - error_x) && UV.y <= ((position.y + size.y - error_y)/(screen_resolution.y) - error_y)
+	UV.x <= ((position.x + size.x)/(screen_resolution.x) - error_x) && UV.y <= ((position.y + size.y)/(screen_resolution.y) - error_y)
 	){
 		COLOR.a = alpha;
 	}
