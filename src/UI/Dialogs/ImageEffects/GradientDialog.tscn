@@ -263,7 +263,6 @@ margin_right = 316.0
 margin_bottom = 236.0
 mouse_default_cursor_shape = 2
 text = "Bayer 2x2"
-items = [ "Bayer 2x2", null, false, 0, null, "Bayer 4x4", null, false, 1, null, "Bayer 8x8", null, false, 2, null, "Bayer 16x16", null, false, 3, null ]
 selected = 0
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]

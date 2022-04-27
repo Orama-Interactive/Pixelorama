@@ -12,10 +12,10 @@ var shader_radial_dithering: Shader
 var confirmed := false
 var shader: Shader = shader_linear
 var dither_matrices := [
-	DitherMatrix.new(preload("res://assets/dither-matrices/bayer2.png")),
-	DitherMatrix.new(preload("res://assets/dither-matrices/bayer4.png"), 16),
-	DitherMatrix.new(preload("res://assets/dither-matrices/bayer8.png"), 64),
-	DitherMatrix.new(preload("res://assets/dither-matrices/bayer16.png"), 256),
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer2.png"), "Bayer 2x2"),
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer4.png"), "Bayer 4x4", 16),
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer8.png"), "Bayer 8x8", 64),
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer16.png"), "Bayer 16x16", 256),
 ]
 var selected_dither_matrix: DitherMatrix = dither_matrices[0]
 
@@ -31,14 +31,17 @@ onready var radius_x: SpinBox = options_cont.get_node("RadiusContainer/RadiusXSp
 onready var radius_y: SpinBox = options_cont.get_node("RadiusContainer/RadiusYSpinBox")
 onready var size: SpinBox = options_cont.get_node("SizeSpinBox")
 onready var steps: SpinBox = options_cont.get_node("StepSpinBox")
+onready var dithering_option_button: OptionButton = options_cont.get_node("DitheringOptionButton")
 
 
 class DitherMatrix:
 	var texture: Texture
+	var name: String
 	var n_of_colors: int
 
-	func _init(_texture: Texture, _n_of_colors := 4) -> void:
+	func _init(_texture: Texture, _name: String, _n_of_colors := 4) -> void:
 		texture = _texture
+		name = _name
 		n_of_colors = _n_of_colors
 
 
@@ -57,6 +60,9 @@ func _ready() -> void:
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
 	preview.set_material(sm)
+
+	for matrix in dither_matrices:
+		dithering_option_button.add_item(matrix.name)
 
 
 func _about_to_show() -> void:
