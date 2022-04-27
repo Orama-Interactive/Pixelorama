@@ -16,7 +16,7 @@ void fragment() {
 	vec4 selection_color = texture(selection, UV);
 	vec4 output = vec4(0.0);
 	vec2 uv = UV * 2.0 - 1.0;
-	uv -= center - vec2(0.5);
+	uv -= (center * 2.0) - vec2(1.0);
 	uv *= radius;
 	uv /= ratio;
 	vec2 polar_uv = vec2(atan(uv.x, uv.y), length(uv));
