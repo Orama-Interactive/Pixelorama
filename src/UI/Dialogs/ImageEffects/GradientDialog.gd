@@ -5,9 +5,9 @@ enum { LINEAR, RADIAL, STEP, RADIAL_STEP, DITHERING, RADIAL_DITHERING }
 var shader_linear: Shader = preload("res://src/Shaders/Gradients/Linear.gdshader")
 var shader_radial: Shader = preload("res://src/Shaders/Gradients/Radial.gdshader")
 var shader_step: Shader = preload("res://src/Shaders/Gradients/Step.gdshader")
-var shader_radial_step: Shader
-var shader_dithering: Shader
-var shader_radial_dithering: Shader
+var shader_radial_step: Shader = preload("res://src/Shaders/Gradients/RadialStep.gdshader")
+var shader_dither: Shader = preload("res://src/Shaders/Gradients/Dithering.gdshader")
+var shader_radial_dither: Shader = preload("res://src/Shaders/Gradients/RadialDithering.gdshader")
 
 var confirmed := false
 var shader: Shader = shader_linear
@@ -46,14 +46,6 @@ class DitherMatrix:
 
 
 func _ready() -> void:
-	if OS.get_name() == "HTML5" and OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2:
-		for i in range(3, 6):
-			type_option_button.set_item_disabled(i, true)
-	else:
-		shader_radial_step = load("res://src/Shaders/Gradients/RadialStep.gdshader")
-		shader_dithering = load("res://src/Shaders/Gradients/Dithering.gdshader")
-		shader_radial_dithering = load("res://src/Shaders/Gradients/RadialDithering.gdshader")
-
 	color1.get_picker().presets_visible = false
 	color2.get_picker().presets_visible = false
 	var sm := ShaderMaterial.new()
@@ -138,10 +130,10 @@ func _on_TypeOptionButton_item_selected(index: int) -> void:
 			shader = shader_radial_step
 			get_tree().set_group("gradient_radial_step", "visible", true)
 		DITHERING:
-			shader = shader_dithering
+			shader = shader_dither
 			get_tree().set_group("gradient_dithering", "visible", true)
 		RADIAL_DITHERING:
-			shader = shader_radial_dithering
+			shader = shader_radial_dither
 			get_tree().set_group("gradient_radial_dithering", "visible", true)
 	update_preview()
 

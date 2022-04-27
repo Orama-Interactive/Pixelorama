@@ -15,24 +15,21 @@ uniform int pixel_size : hint_range(2, 16) = 2;
 void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
-	vec4 output = vec4(0.0);
+	vec4 output = texture(TEXTURE, UV);
+
 	vec2 uv = UV * 2.0 - 1.0;
 	uv -= (center * 2.0) - vec2(1.0);
 	uv *= radius;
 	uv /= ratio;
-	float polar_uv = length(uv);
 	vec4 dither_value = texture(dither_texture, UV * (image_size / float(pixel_size)));
 
-	for(int i = 0; i < dither_steps; i++) {
-		float percentage = float(i) / float(dither_steps);
-		float pos = step(percentage, polar_uv) - step(percentage + (1.0 / float(dither_steps)), polar_uv);
-		float dithered = step(percentage, dither_value.r);
-		if (i == dither_steps - 1) {
-			dithered = 0.0;
-		}
-		vec4 grad_color = first_color * (dithered) + second_color * (1.0 - dithered);
-		output += grad_color * pos;
-	}
+	float polar_uv = length(uv);
+	float step_v = 1.0 / float(dither_steps);
+	float step_v_m = 1.0 / float(dither_steps - 1);
+	float uv_stepped = floor(polar_uv / step_v) * step_v_m;  // Similar to GDScript's stepify
+	float dithered = step(uv_stepped, dither_value.r);
+	vec4 grad_color = first_color * dithered + second_color * (1.0 - dithered);
+	output = grad_color;
 	
 	COLOR = mix(original_color, output, selection_color.a);
 }

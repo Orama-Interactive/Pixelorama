@@ -16,34 +16,24 @@ uniform int pixel_size : hint_range(2, 16) = 2;
 void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
-	vec4 output = vec4(0.0);
+	vec4 output = texture(TEXTURE, UV);
 
-	float pivot = (position / size) + 0.5;
+	float pivot = position / size;
 	vec2 uv = UV - 0.5;
 	float angle_cos = cos(radians(angle));
 	float angle_sin = sin(radians(angle));
 	float rotated = uv.x * angle_cos - uv.y * angle_sin; 
 	rotated /= abs(angle_cos) + abs(angle_sin);
 	rotated /= size;
+	rotated -= pivot - 0.5;
 	vec4 dither_value = texture(dither_texture, uv * (image_size / float(pixel_size)));
 
-	for(int i = -1; i <= dither_steps; i++) {
-		float percentage = float(i) / float(dither_steps) - pivot;
-		float unit_perc = (1.0 / float(dither_steps));
-		float pos = step(percentage, rotated) - step(percentage + unit_perc, rotated);
-		float dithered = step(percentage, dither_value.r - pivot);
-		if (i == dither_steps - 1) {
-			dithered = 0.0; // Ensure that the final step has no dithering, is a single color
-		}
-		else if (i == -1) {
-			pos = 1.0 - step(percentage + unit_perc, rotated);
-		}
-		else if (i == dither_steps) {
-			pos = step(percentage, rotated);
-		}
-		vec4 grad_color = first_color * (dithered) + second_color * (1.0 - dithered);
-		output += grad_color * pos;
-	}
+	float step_v = 1.0 / float(dither_steps);
+	float step_v_m = 1.0 / float(dither_steps - 1);
+	float rotated_stepped = floor(rotated / step_v) * step_v_m;  // Similar to GDScript's stepify
+	float dithered = step(rotated_stepped, dither_value.r);
+	vec4 grad_color = first_color * dithered + second_color * (1.0 - dithered);
+	output = grad_color;
 	
 	COLOR = mix(original_color, output, selection_color.a);
 }

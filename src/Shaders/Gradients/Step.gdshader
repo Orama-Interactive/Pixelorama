@@ -15,7 +15,7 @@ void fragment() {
 	vec4 selection_color = texture(selection, UV);
 	vec4 output = texture(TEXTURE, UV);
 
-	float pivot = (position / size);
+	float pivot = position / size;
 	vec2 uv = UV - 0.5;
 	float angle_cos = cos(radians(angle));
 	float angle_sin = sin(radians(angle));
