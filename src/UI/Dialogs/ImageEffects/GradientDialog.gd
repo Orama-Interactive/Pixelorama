@@ -1,7 +1,6 @@
 extends ImageEffect
 
 enum { LINEAR, RADIAL, STEP, RADIAL_STEP, DITHERING, RADIAL_DITHERING }
-enum { BAYER_2, BAYER_4, BAYER_8, BAYER_16 }
 
 var shader_linear: Shader = preload("res://src/Shaders/Gradients/Linear.gdshader")
 var shader_radial: Shader = preload("res://src/Shaders/Gradients/Radial.gdshader")
@@ -12,11 +11,13 @@ var shader_radial_dithering: Shader
 
 var confirmed := false
 var shader: Shader = shader_linear
-var dither_texture_b2: Texture = preload("res://assets/dither-matrices/bayer2.png")
-var dither_texture_b4: Texture = preload("res://assets/dither-matrices/bayer4.png")
-var dither_texture_b8: Texture = preload("res://assets/dither-matrices/bayer8.png")
-var dither_texture_b16: Texture = preload("res://assets/dither-matrices/bayer16.png")
-var dither_texture: Texture = dither_texture_b2
+var dither_matrices := [
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer2.png")),
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer4.png"), 16),
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer8.png"), 64),
+	DitherMatrix.new(preload("res://assets/dither-matrices/bayer16.png"), 256),
+]
+var selected_dither_matrix: DitherMatrix = dither_matrices[0]
 
 onready var options_cont: Container = $VBoxContainer/OptionsContainer
 onready var type_option_button: OptionButton = options_cont.get_node("TypeOptionButton")
@@ -30,6 +31,15 @@ onready var radius_x: SpinBox = options_cont.get_node("RadiusContainer/RadiusXSp
 onready var radius_y: SpinBox = options_cont.get_node("RadiusContainer/RadiusYSpinBox")
 onready var size: SpinBox = options_cont.get_node("SizeSpinBox")
 onready var steps: SpinBox = options_cont.get_node("StepSpinBox")
+
+
+class DitherMatrix:
+	var texture: Texture
+	var n_of_colors: int
+
+	func _init(_texture: Texture, _n_of_colors := 4) -> void:
+		texture = _texture
+		n_of_colors = _n_of_colors
 
 
 func _ready() -> void:
@@ -75,7 +85,9 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		selection.create(project.size.x, project.size.y, false, Image.FORMAT_L8)
 	selection_tex.create_from_image(selection, 0)
 
-	var dither_size: Vector2 = dither_texture.get_size()
+	var dither_texture: Texture = selected_dither_matrix.texture
+	var dither_steps: int = selected_dither_matrix.n_of_colors + 1
+	var pixel_size: int = dither_texture.get_width()
 	var params := {
 		"first_color": color1.color,
 		"second_color": color2.color,
@@ -88,8 +100,8 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"steps": steps.value,
 		"dither_texture": dither_texture,
 		"image_size": project.size,
-		"dither_steps": dither_size.x * dither_size.y + 1,
-		"pixel_size": dither_size.x,
+		"dither_steps": dither_steps,
+		"pixel_size": pixel_size,
 	}
 
 	if !confirmed:
@@ -138,13 +150,5 @@ func _value_changed(_value: float) -> void:
 
 
 func _on_DitheringOptionButton_item_selected(index: int) -> void:
-	match index:
-		BAYER_2:
-			dither_texture = dither_texture_b2
-		BAYER_4:
-			dither_texture = dither_texture_b4
-		BAYER_8:
-			dither_texture = dither_texture_b8
-		BAYER_16:
-			dither_texture = dither_texture_b16
+	selected_dither_matrix = dither_matrices[index]
 	update_preview()
