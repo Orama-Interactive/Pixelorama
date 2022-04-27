@@ -4,7 +4,7 @@ enum { LINEAR, RADIAL, STEP, RADIAL_STEP, DITHERING, RADIAL_DITHERING }
 
 var shader_linear: Shader = preload("res://src/Shaders/Gradients/Linear.gdshader")
 var shader_radial: Shader = preload("res://src/Shaders/Gradients/Radial.gdshader")
-var shader_step: Shader
+var shader_step: Shader = preload("res://src/Shaders/Gradients/Step.gdshader")
 var shader_radial_step: Shader
 var shader_dithering: Shader
 var shader_radial_dithering: Shader
@@ -47,10 +47,9 @@ class DitherMatrix:
 
 func _ready() -> void:
 	if OS.get_name() == "HTML5" and OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2:
-		for i in range(2, 6):
+		for i in range(3, 6):
 			type_option_button.set_item_disabled(i, true)
 	else:
-		shader_step = load("res://src/Shaders/Gradients/Step.gdshader")
 		shader_radial_step = load("res://src/Shaders/Gradients/RadialStep.gdshader")
 		shader_dithering = load("res://src/Shaders/Gradients/Dithering.gdshader")
 		shader_radial_dithering = load("res://src/Shaders/Gradients/RadialDithering.gdshader")

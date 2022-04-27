@@ -13,30 +13,22 @@ uniform int steps : hint_range(2, 100) = 2;
 void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
-	vec4 output = vec4(0.0);
+	vec4 output = texture(TEXTURE, UV);
 
-	float pivot = (position / size) + 0.5;
+	float pivot = (position / size);
 	vec2 uv = UV - 0.5;
 	float angle_cos = cos(radians(angle));
 	float angle_sin = sin(radians(angle));
 	float rotated = uv.x * angle_cos - uv.y * angle_sin; 
 	rotated /= abs(angle_cos) + abs(angle_sin);
 	rotated /= size;
-	for(int i = -1; i <= steps; i++)
-	{
-		float percentage = float(i) / float(steps) - pivot;
-		float color_percentage = float(i) / float(steps - 1);
-		color_percentage = clamp(color_percentage, 0.0, 1.0);
-		vec4 grad_color = mix(first_color, second_color, color_percentage);
-		float unit_perc = (1.0 / float(steps));
-		float pos = step(percentage, rotated) - step(percentage + unit_perc, rotated);
-		if (i == -1) {
-			pos = 1.0 - step(percentage + unit_perc, rotated);
-		}
-		else if (i == steps) {
-			pos = step(percentage, rotated);
-		}
-		output += grad_color * pos;
-	}
+	rotated -= pivot - 0.5;
+	float step_v = 1.0 / float(steps);
+	float step_v_m = 1.0 / float(steps - 1);
+	float rotated_stepped = floor(rotated / step_v) * step_v_m;  // Similar to GDScript's stepify
+	rotated_stepped = clamp(rotated_stepped, 0.0, 1.0);
+	vec4 grad_color = mix(first_color, second_color, rotated_stepped);
+	output = grad_color;
+
 	COLOR = mix(original_color, output, selection_color.a);
 }
