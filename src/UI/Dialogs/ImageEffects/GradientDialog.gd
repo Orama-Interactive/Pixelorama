@@ -43,9 +43,7 @@ func _ready() -> void:
 		shader_radial_dithering = load("res://src/Shaders/Gradients/RadialDithering.gdshader")
 
 	color1.get_picker().presets_visible = false
-	color1.get_picker().deferred_mode = true
 	color2.get_picker().presets_visible = false
-	color2.get_picker().deferred_mode = true
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
 	preview.set_material(sm)
@@ -84,7 +82,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"selection": selection_tex,
 		"position": position.value,
 		"angle": angle.value,
-		"center": Vector2(center_x.value, center_y.value),
+		"center": Vector2(center_x.value / 100.0, center_y.value / 100.0),
 		"radius": Vector2(radius_x.value, radius_y.value),
 		"size": size.value,
 		"steps": steps.value,

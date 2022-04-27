@@ -4,9 +4,9 @@
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="GradientDialog" type="ConfirmationDialog"]
-margin_right = 294.0
+margin_right = 334.0
 margin_bottom = 444.0
-rect_min_size = Vector2( 290, 444 )
+rect_min_size = Vector2( 334, 444 )
 window_title = "Gradient"
 resizable = true
 script = ExtResource( 1 )
@@ -125,6 +125,7 @@ margin_right = 278.0
 margin_bottom = 100.0
 mouse_default_cursor_shape = 2
 max_value = 360.0
+suffix = "°"
 
 [node name="SizeLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear", "gradient_radial", "gradient_step"]]
 margin_top = 109.0
@@ -169,27 +170,38 @@ text = "Center:"
 
 [node name="CenterContainer" type="HBoxContainer" parent="VBoxContainer/OptionsContainer" groups=["gradient_radial", "gradient_radial_dithering", "gradient_radial_step"]]
 visible = false
-margin_left = 164.0
-margin_top = 160.0
-margin_right = 316.0
-margin_bottom = 184.0
+margin_top = 132.0
+margin_right = 183.0
+margin_bottom = 156.0
+
+[node name="XLabel" type="Label" parent="VBoxContainer/OptionsContainer/CenterContainer"]
+margin_top = 5.0
+margin_right = 12.0
+margin_bottom = 19.0
+text = "X:"
 
 [node name="CenterXSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer/CenterContainer"]
-margin_right = 74.0
+margin_left = 16.0
+margin_right = 90.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
-max_value = 1.0
-step = 0.01
-value = 0.5
+value = 50.0
+suffix = "%"
+
+[node name="YLabel" type="Label" parent="VBoxContainer/OptionsContainer/CenterContainer"]
+margin_left = 94.0
+margin_top = 5.0
+margin_right = 105.0
+margin_bottom = 19.0
+text = "Y:"
 
 [node name="CenterYSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer/CenterContainer"]
-margin_left = 78.0
-margin_right = 152.0
+margin_left = 109.0
+margin_right = 183.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
-max_value = 1.0
-step = 0.01
-value = 0.5
+value = 50.0
+suffix = "%"
 
 [node name="RadiusLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_radial", "gradient_radial_dithering", "gradient_radial_step"]]
 visible = false
@@ -205,6 +217,13 @@ margin_top = 188.0
 margin_right = 316.0
 margin_bottom = 212.0
 
+[node name="XLabel" type="Label" parent="VBoxContainer/OptionsContainer/RadiusContainer"]
+margin_left = -164.0
+margin_top = -51.0
+margin_right = -152.0
+margin_bottom = -37.0
+text = "X:"
+
 [node name="RadiusXSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer/RadiusContainer"]
 margin_right = 74.0
 margin_bottom = 24.0
@@ -212,6 +231,13 @@ mouse_default_cursor_shape = 2
 min_value = 0.6
 step = 0.01
 value = 1.0
+
+[node name="YLabel" type="Label" parent="VBoxContainer/OptionsContainer/RadiusContainer"]
+margin_left = -70.0
+margin_top = -51.0
+margin_right = -59.0
+margin_bottom = -37.0
+text = "Y:"
 
 [node name="RadiusYSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer/RadiusContainer"]
 margin_left = 78.0
