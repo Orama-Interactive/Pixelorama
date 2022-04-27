@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform float alpha = 0.0;
 
-uniform vec2 screen_resolution = vec2(1280, 720);
+uniform vec2 screen_resolution = vec2(1280, 720);  // Taken from (project settings > window)
 uniform vec2 position = vec2(100.0, 100.0);
 uniform vec2 size = vec2(100.0, 100.0);
 
