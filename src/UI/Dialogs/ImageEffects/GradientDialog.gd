@@ -12,11 +12,11 @@ var shader_radial_dithering: Shader
 
 var confirmed := false
 var shader: Shader = shader_linear
-var dither_texture_2: Texture = preload("res://assets/bayer-matrices/bayer2.png")
-var dither_texture_4: Texture = preload("res://assets/bayer-matrices/bayer4.png")
-var dither_texture_8: Texture = preload("res://assets/bayer-matrices/bayer8.png")
-var dither_texture_16: Texture = preload("res://assets/bayer-matrices/bayer16.png")
-var dither_texture: Texture = dither_texture_2
+var dither_texture_b2: Texture = preload("res://assets/dither-matrices/bayer2.png")
+var dither_texture_b4: Texture = preload("res://assets/dither-matrices/bayer4.png")
+var dither_texture_b8: Texture = preload("res://assets/dither-matrices/bayer8.png")
+var dither_texture_b16: Texture = preload("res://assets/dither-matrices/bayer16.png")
+var dither_texture: Texture = dither_texture_b2
 
 onready var options_cont: Container = $VBoxContainer/OptionsContainer
 onready var type_option_button: OptionButton = options_cont.get_node("TypeOptionButton")
@@ -140,11 +140,11 @@ func _value_changed(_value: float) -> void:
 func _on_DitheringOptionButton_item_selected(index: int) -> void:
 	match index:
 		BAYER_2:
-			dither_texture = dither_texture_2
+			dither_texture = dither_texture_b2
 		BAYER_4:
-			dither_texture = dither_texture_4
+			dither_texture = dither_texture_b4
 		BAYER_8:
-			dither_texture = dither_texture_8
+			dither_texture = dither_texture_b8
 		BAYER_16:
-			dither_texture = dither_texture_16
+			dither_texture = dither_texture_b16
 	update_preview()
