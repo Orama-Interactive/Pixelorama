@@ -14,7 +14,9 @@ void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
 
-	vec2 uv = UV * 2.0 - 1.0;
+	vec2 tex_size = 1.0 / TEXTURE_PIXEL_SIZE;
+	vec2 uv = floor(UV * tex_size) / (tex_size - 1.0);
+	uv = uv * 2.0 - 1.0;
 	uv -= (center * 2.0) - vec2(1.0);
 	uv *= radius;
 	uv /= ratio;

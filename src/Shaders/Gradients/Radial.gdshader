@@ -13,7 +13,9 @@ void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
 
-	vec2 uv = (UV / ratio) * radius;
+	vec2 tex_size = 1.0 / TEXTURE_PIXEL_SIZE;
+	vec2 uv = floor(UV * tex_size) / (tex_size - 1.0);
+	uv = (uv / ratio) * radius;
 	float fixed_size = (size / 2.0) + 0.5;
 	float smooth_dist = smoothstep(1.0 - fixed_size, fixed_size, distance(uv, center * radius));
 	vec4 output = second_color * smooth_dist + (1.0 - smooth_dist) * first_color;
