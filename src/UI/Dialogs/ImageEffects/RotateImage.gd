@@ -1,6 +1,9 @@
 extends ImageEffect
 
 var live_preview: bool = true
+var confirmed := false
+var shader: Shader = preload("res://src/Shaders/Rotation.shader")
+
 onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
 onready var angle_hslider: HSlider = $VBoxContainer/AngleOptions/AngleHSlider
 onready var angle_spinbox: SpinBox = $VBoxContainer/AngleOptions/AngleSpinBox
@@ -12,6 +15,7 @@ func _ready() -> void:
 	type_option_button.add_item("Rotxel")
 	type_option_button.add_item("Upscale, Rotate and Downscale")
 	type_option_button.add_item("Nearest neighbour")
+	type_option_button.add_item("Shader")
 
 
 func set_nodes() -> void:
@@ -21,6 +25,7 @@ func set_nodes() -> void:
 
 
 func _about_to_show() -> void:
+	confirmed = false
 	._about_to_show()
 	wait_apply_timer.wait_time = wait_time_spinbox.value / 1000.0
 	angle_hslider.value = 0
@@ -57,6 +62,16 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 			DrawingAlgos.nn_rotate(image, angle, pivot)
 		"Upscale, Rotate and Downscale":
 			DrawingAlgos.fake_rotsprite(image, angle, pivot)
+		"Shader":
+			if !confirmed:
+				preview.material.set_shader_param("angle", angle)
+			else:
+				var params = {"angle": angle}
+				
+				var gen := ShaderImageEffect.new()
+				gen.generate_image(_cel, shader, params, _project.size)
+				yield(gen, "done")
+
 	if _project.has_selection and selection_checkbox.pressed:
 		_cel.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 	else:
@@ -64,6 +79,7 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 
 
 func _confirmed() -> void:
+	confirmed = true
 	._confirmed()
 	angle_hslider.value = 0
 
@@ -80,7 +96,13 @@ func _on_SpinBox_value_changed(_value: float) -> void:
 	angle_hslider.value = angle_spinbox.value
 
 
-func _on_TypeOptionButton_item_selected(_id: int) -> void:
+func _on_TypeOptionButton_item_selected(id: int) -> void:
+	if id == 3: # If shader
+		var sm = ShaderMaterial.new()
+		sm.shader = shader
+		preview.set_material(sm)
+	else:
+		preview.set_material(null)
 	update_preview()
 
 
