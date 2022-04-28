@@ -368,7 +368,6 @@ func _compute_segments_for_image(
 	while not done:
 		done = true
 		var max_index = _allegro_flood_segments.size()
-		#print(max_index)
 		for c in max_index:
 			var p = _allegro_flood_segments[c]
 			if p.todo_below:  # check below the segment?
