@@ -15,7 +15,7 @@ func _ready() -> void:
 	type_option_button.add_item("Rotxel")
 	type_option_button.add_item("Upscale, Rotate and Downscale")
 	type_option_button.add_item("Nearest neighbour")
-	type_option_button.add_item("Shader")
+	type_option_button.add_item("Nearest neighbour (Shader)")
 
 
 func set_nodes() -> void:
@@ -52,7 +52,7 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 		var selection: Image = _project.bitmap_to_image(_project.selection_bitmap)
 		selection_tex.create_from_image(selection, 0)
 		
-		if type_option_button.text != "Shader":
+		if type_option_button.text != "Nearest neighbour (Shader)":
 			image.lock()
 			_cel.lock()
 			for x in _project.size.x:
@@ -71,7 +71,7 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 			DrawingAlgos.nn_rotate(image, angle, pivot)
 		"Upscale, Rotate and Downscale":
 			DrawingAlgos.fake_rotsprite(image, angle, pivot)
-		"Shader":
+		"Nearest neighbour (Shader)":
 			if !confirmed:
 				preview.material.set_shader_param("angle", angle)
 				preview.material.set_shader_param("selection_tex", selection_tex)
@@ -113,7 +113,7 @@ func _on_SpinBox_value_changed(_value: float) -> void:
 
 
 func _on_TypeOptionButton_item_selected(_id: int) -> void:
-	if type_option_button.text == "Shader":
+	if type_option_button.text == "Nearest neighbour (Shader)":
 		var sm = ShaderMaterial.new()
 		sm.shader = shader
 		preview.set_material(sm)
