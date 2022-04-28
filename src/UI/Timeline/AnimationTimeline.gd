@@ -12,7 +12,13 @@ var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
 
+onready var old_scroll: int = 0  # The previous scroll state of $ScrollContainer
+onready var tag_spacer = find_node("TagSpacer")
+onready var start_spacer = find_node("StartSpacer")
+
 onready var timeline_scroll: ScrollContainer = find_node("TimelineScroll")
+onready var main_scroll: ScrollContainer = find_node("ScrollContainer")
+onready var timeline_container: VBoxContainer = find_node("TimelineContainer")
 onready var tag_scroll_container: ScrollContainer = find_node("TagScroll")
 onready var fps_spinbox: SpinBox = find_node("FPSValue")
 onready var onion_skinning_button: BaseButton = find_node("OnionSkinning")
@@ -23,6 +29,11 @@ func _ready() -> void:
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
+
+	# Set important size_flags (intentionally set at runtime)
+	# Otherwise you yont be able to see "TimelineScroll" in editor
+	find_node("EndSpacer").size_flags_horizontal = SIZE_EXPAND_FILL
+	timeline_scroll.size_flags_horizontal = SIZE_FILL
 
 
 func _input(event: InputEvent) -> void:
@@ -39,10 +50,43 @@ func _input(event: InputEvent) -> void:
 func _h_scroll_changed(value: float) -> void:
 	# Let the main timeline ScrollContainer affect the tag ScrollContainer too
 	tag_scroll_container.get_child(0).rect_min_size.x = (
-		timeline_scroll.get_child(0).rect_size.x
-		- 212
+		timeline_scroll.scroll_horizontal
+		+ tag_scroll_container.rect_size.x * 3
 	)
-	tag_scroll_container.scroll_horizontal = value
+	old_scroll = value  # Needed for (_on_TimelineContainer_item_rect_changed)
+	var diff = start_spacer.rect_min_size.x - value
+	var a = main_scroll.scroll_horizontal
+	var b = timeline_scroll.scroll_horizontal
+	if a > b:
+		tag_scroll_container.scroll_horizontal = 0
+		tag_spacer.rect_min_size.x = diff
+	else:
+		tag_spacer.rect_min_size.x = 0
+		tag_scroll_container.scroll_horizontal = -diff
+
+
+# the below two signals control scrolling functionality
+func _on_AnimationTimeline_item_rect_changed() -> void:
+	# Timeline size
+	timeline_scroll.rect_min_size.x = rect_size.x
+
+
+func _on_TimelineContainer_item_rect_changed() -> void:
+	# Layer movement
+	var limit = timeline_container.rect_size.x - main_scroll.rect_size.x
+	var amount = main_scroll.scroll_horizontal
+	start_spacer.rect_min_size.x = min(amount, max(0, limit - 1))
+
+	# Tag movement
+	var diff = start_spacer.rect_min_size.x - old_scroll
+	var a = main_scroll.scroll_horizontal
+	var b = timeline_scroll.scroll_horizontal
+	if a > b:
+		tag_spacer.rect_min_size.x = diff
+		tag_scroll_container.scroll_horizontal = 0
+	else:
+		tag_spacer.rect_min_size.x = 0
+		tag_scroll_container.scroll_horizontal = -diff
 
 
 func cel_size_changed(value: int) -> void:
