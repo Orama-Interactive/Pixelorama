@@ -6,7 +6,6 @@ uniform vec4 first_color : hint_color = vec4(1.0);
 uniform vec4 second_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform vec2 center = vec2(0.5);
 uniform vec2 radius = vec2(1.0);
-uniform vec2 ratio = vec2(1.0);
 uniform float size : hint_range(0.01, 2) = 1.0;
 uniform int steps : hint_range(2, 257) = 2;
 
@@ -18,8 +17,7 @@ void fragment() {
 	vec2 uv = floor(UV * tex_size) / (tex_size - 1.0);
 	uv = uv * 2.0 - 1.0;
 	uv -= (center * 2.0) - vec2(1.0);
-	uv *= radius;
-	uv /= ratio;
+	uv /= radius;
 	float polar_uv = length(uv);
 	float step_v = 1.0 / float(steps);
 	float step_v_m = 1.0 / float(steps - 1);

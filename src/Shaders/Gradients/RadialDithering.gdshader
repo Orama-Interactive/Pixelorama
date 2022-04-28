@@ -8,7 +8,6 @@ uniform vec4 second_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform vec2 image_size = vec2(64.0);
 uniform vec2 center = vec2(0.5);
 uniform vec2 radius = vec2(1.0);
-uniform vec2 ratio = vec2(1.0);
 uniform float size : hint_range(0.01, 2) = 1.0;
 uniform int dither_steps : hint_range(2, 100) = 5;
 uniform int pixel_size : hint_range(2, 16) = 2;
@@ -19,8 +18,7 @@ void fragment() {
 
 	vec2 uv = UV * 2.0 - 1.0;
 	uv -= (center * 2.0) - vec2(1.0);
-	uv *= radius;
-	uv /= ratio;
+	uv /= radius;
 	vec4 dither_value = texture(dither_texture, UV * (image_size / float(pixel_size)));
 
 	float polar_uv = length(uv);
