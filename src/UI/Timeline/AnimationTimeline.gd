@@ -12,7 +12,7 @@ var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
 
-onready var old_scroll :int = 0  # The previous scroll state of $ScrollContainer
+onready var old_scroll: int = 0  # The previous scroll state of $ScrollContainer
 onready var tag_spacer = find_node("TagSpacer")
 onready var start_spacer = find_node("StartSpacer")
 
@@ -56,8 +56,8 @@ func _h_scroll_changed(value: float) -> void:
 
 	old_scroll = value  # Needed for (_on_TimelineContainer_item_rect_changed)
 	var diff = start_spacer.rect_min_size.x - value
-	var a  = main_scroll.scroll_horizontal
-	var b  = timeline_scroll.scroll_horizontal
+	var a = main_scroll.scroll_horizontal
+	var b = timeline_scroll.scroll_horizontal
 	if a > b:
 		tag_scroll_container.scroll_horizontal = 0
 		tag_spacer.rect_min_size.x = diff
@@ -80,15 +80,14 @@ func _on_TimelineContainer_item_rect_changed() -> void:
 
 	# Tag movement
 	var diff = start_spacer.rect_min_size.x - old_scroll
-	var a  = main_scroll.scroll_horizontal
-	var b  = timeline_scroll.scroll_horizontal
+	var a = main_scroll.scroll_horizontal
+	var b = timeline_scroll.scroll_horizontal
 	if a > b:
 		tag_spacer.rect_min_size.x = diff
 		tag_scroll_container.scroll_horizontal = 0
 	else:
 		tag_spacer.rect_min_size.x = 0
 		tag_scroll_container.scroll_horizontal = -diff
-
 
 
 func cel_size_changed(value: int) -> void:
@@ -801,5 +800,3 @@ func _on_OpacitySlider_value_changed(value) -> void:
 
 func _on_OnionSkinningSettings_popup_hide() -> void:
 	Global.can_draw = true
-
-
