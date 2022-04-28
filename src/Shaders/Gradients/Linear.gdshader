@@ -16,7 +16,7 @@ void fragment() {
 	vec2 uv = UV - pivot;
 	float rotated = uv.x * cos(radians(angle)) - uv.y * sin(radians(angle)); 
 	float fixed_size = (size / 2.0) + 0.5;
-	float pos = smoothstep(position + fixed_size, (1.0 - fixed_size) - 0.0001 + position, rotated + pivot);
+	float pos = smoothstep((1.0 - fixed_size) + position, fixed_size + 0.0001 + position, rotated + pivot);
 	vec4 output = mix(first_color, second_color, pos); 
 	COLOR = mix(original_color, output, selection_color.a);
 }
