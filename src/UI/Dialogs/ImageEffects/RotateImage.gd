@@ -36,6 +36,9 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 # warning-ignore:integer_division
 # warning-ignore:integer_division
 	var pivot = Vector2(_cel.get_width() / 2, _cel.get_height() / 2)
+	var selection_size := _cel.get_size()
+	var selection_tex := ImageTexture.new()
+	
 	var image := Image.new()
 	image.copy_from(_cel)
 	if _project.has_selection and selection_checkbox.pressed:
@@ -44,17 +47,23 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 			selection_rectangle.position
 			+ ((selection_rectangle.end - selection_rectangle.position) / 2)
 		)
-		image.lock()
-		_cel.lock()
-		for x in _project.size.x:
-			for y in _project.size.y:
-				var pos := Vector2(x, y)
-				if !_project.can_pixel_get_drawn(pos):
-					image.set_pixelv(pos, Color(0, 0, 0, 0))
-				else:
-					_cel.set_pixelv(pos, Color(0, 0, 0, 0))
-		image.unlock()
-		_cel.unlock()
+		selection_size = selection_rectangle.size
+		
+		var selection: Image = _project.bitmap_to_image(_project.selection_bitmap)
+		selection_tex.create_from_image(selection, 0)
+		
+		if type_option_button.text != "Shader":
+			image.lock()
+			_cel.lock()
+			for x in _project.size.x:
+				for y in _project.size.y:
+					var pos := Vector2(x, y)
+					if !_project.can_pixel_get_drawn(pos):
+						image.set_pixelv(pos, Color(0, 0, 0, 0))
+					else:
+						_cel.set_pixelv(pos, Color(0, 0, 0, 0))
+			image.unlock()
+			_cel.unlock()
 	match type_option_button.text:
 		"Rotxel":
 			DrawingAlgos.rotxel(image, angle, pivot)
@@ -65,9 +74,16 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 		"Shader":
 			if !confirmed:
 				preview.material.set_shader_param("angle", angle)
+				preview.material.set_shader_param("selection_tex", selection_tex)
+				preview.material.set_shader_param("selection_pivot", pivot)
+				preview.material.set_shader_param("selection_size", selection_size)
 			else:
-				var params = {"angle": angle}
-				
+				var params = {
+					"angle": angle,
+					"selection_tex": selection_tex,
+					"selection_pivot": pivot,
+					"selection_size": selection_size
+				}
 				var gen := ShaderImageEffect.new()
 				gen.generate_image(_cel, shader, params, _project.size)
 				yield(gen, "done")
@@ -96,8 +112,8 @@ func _on_SpinBox_value_changed(_value: float) -> void:
 	angle_hslider.value = angle_spinbox.value
 
 
-func _on_TypeOptionButton_item_selected(id: int) -> void:
-	if id == 3: # If shader
+func _on_TypeOptionButton_item_selected(_id: int) -> void:
+	if type_option_button.text == "Shader":
 		var sm = ShaderMaterial.new()
 		sm.shader = shader
 		preview.set_material(sm)
