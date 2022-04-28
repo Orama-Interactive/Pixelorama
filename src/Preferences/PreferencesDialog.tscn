@@ -1974,7 +1974,7 @@ margin_top = 613.0
 margin_right = 151.0
 margin_bottom = 627.0
 text = "Hold to center the shape on
-click origin"
+click origin / Snap selection to grid"
 
 [node name="ctrl" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_left = 156.0
@@ -2377,8 +2377,8 @@ mode = 1
 access = 2
 filters = PoolStringArray( "*.pck ; Godot Resource Pack File", "*.zip ;" )
 show_hidden_files = true
-current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-master"
-current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-master/"
+current_dir = ""
+current_path = ""
 
 [connection signal="about_to_show" from="." to="." method="_on_PreferencesDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_PreferencesDialog_popup_hide"]
