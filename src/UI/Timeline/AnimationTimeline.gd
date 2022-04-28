@@ -47,14 +47,22 @@ func _input(event: InputEvent) -> void:
 			)
 
 
+func set_tag_scroll_min_size():
+	tag_scroll_container.get_child(0).rect_min_size.x = (
+		(timeline_scroll.scroll_horizontal
+		+ tag_scroll_container.rect_size.x)
+		+ 50 # error compensation
+	)
+
+
 func _h_scroll_changed(value: float) -> void:
 	# Let the main timeline ScrollContainer affect the tag ScrollContainer too
 	tag_scroll_container.get_child(0).rect_min_size.x = (
 		(timeline_scroll.scroll_horizontal
 		+ tag_scroll_container.rect_size.x)
-		* 2 # error compensation
+		* 3 # error compensation if slider moved too fast
 	)
-
+	print(tag_scroll_container.get_child(0).rect_min_size.x)
 	old_scroll = value  # Needed for (_on_TimelineContainer_item_rect_changed)
 	var diff = start_spacer.rect_min_size.x - value
 	var a = main_scroll.scroll_horizontal
