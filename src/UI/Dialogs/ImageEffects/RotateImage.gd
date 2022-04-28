@@ -36,17 +36,17 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 # warning-ignore:integer_division
 # warning-ignore:integer_division
 	var pivot = Vector2(_cel.get_width() / 2, _cel.get_height() / 2)
-	
+
 	# Pivot correction in case of even size
 	if type_option_button.text != "Nearest neighbour (Shader)":
 		if _cel.get_width() % 2 == 0:
 			pivot.x -= 0.5
 		if _cel.get_height() % 2 == 0:
 			pivot.y -= 0.5
-	
+
 	var selection_size := _cel.get_size()
 	var selection_tex := ImageTexture.new()
-	
+
 	var image := Image.new()
 	image.copy_from(_cel)
 	if _project.has_selection and selection_checkbox.pressed:
@@ -56,10 +56,10 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 			+ ((selection_rectangle.end - selection_rectangle.position) / 2)
 		)
 		selection_size = selection_rectangle.size
-		
+
 		var selection: Image = _project.bitmap_to_image(_project.selection_bitmap)
 		selection_tex.create_from_image(selection, 0)
-		
+
 		if type_option_button.text != "Nearest neighbour (Shader)":
 			# Pivot correction in case of even size
 			if int(selection_rectangle.end.x - selection_rectangle.position.x) % 2 == 0:
