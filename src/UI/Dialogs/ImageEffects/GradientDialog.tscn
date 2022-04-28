@@ -127,13 +127,13 @@ mouse_default_cursor_shape = 2
 max_value = 360.0
 suffix = "°"
 
-[node name="SizeLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear", "gradient_radial", "gradient_step"]]
+[node name="SizeLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
 margin_top = 109.0
 margin_right = 160.0
 margin_bottom = 123.0
 text = "Size:"
 
-[node name="SizeSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear", "gradient_radial", "gradient_step"]]
+[node name="SizeSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
 margin_left = 164.0
 margin_top = 104.0
 margin_right = 278.0
@@ -263,7 +263,6 @@ margin_right = 316.0
 margin_bottom = 236.0
 mouse_default_cursor_shape = 2
 text = "Bayer 2x2"
-selected = 0
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
 margin_top = 132.0
