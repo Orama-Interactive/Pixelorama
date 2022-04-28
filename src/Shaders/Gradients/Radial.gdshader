@@ -12,11 +12,10 @@ uniform float size : hint_range(0.01, 2.0) = 1.0;
 void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
-	vec4 output = texture(TEXTURE, UV);
 
 	vec2 uv = (UV / ratio) * radius;
-	float fixed_size = size + 0.5;
+	float fixed_size = (size / 2.0) + 0.5;
 	float smooth_dist = smoothstep(1.0 - fixed_size, fixed_size, distance(uv, center * radius));
-	output = second_color * smooth_dist + (1.0 - smooth_dist) * first_color;
+	vec4 output = second_color * smooth_dist + (1.0 - smooth_dist) * first_color;
 	COLOR = mix(original_color, output, selection_color.a);
 }

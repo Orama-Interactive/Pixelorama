@@ -16,7 +16,6 @@ uniform int pixel_size : hint_range(2, 16) = 2;
 void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
-	vec4 output = texture(TEXTURE, UV);
 
 	float pivot = position / size;
 	vec2 uv = UV - 0.5;
@@ -32,8 +31,7 @@ void fragment() {
 	float step_v_m = 1.0 / float(dither_steps - 1);
 	float rotated_stepped = floor(rotated / step_v) * step_v_m;  // Similar to GDScript's stepify
 	float dithered = step(rotated_stepped, dither_value.r);
-	vec4 grad_color = first_color * dithered + second_color * (1.0 - dithered);
-	output = grad_color;
+	vec4 output = first_color * dithered + second_color * (1.0 - dithered);
 	
 	COLOR = mix(original_color, output, selection_color.a);
 }

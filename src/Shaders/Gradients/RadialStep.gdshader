@@ -12,7 +12,6 @@ uniform int steps : hint_range(2, 257) = 2;
 void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
-	vec4 output = texture(TEXTURE, UV);
 
 	vec2 uv = UV * 2.0 - 1.0;
 	uv -= (center * 2.0) - vec2(1.0);
@@ -23,8 +22,7 @@ void fragment() {
 	float step_v_m = 1.0 / float(steps - 1);
 	float uv_stepped = floor(polar_uv / step_v) * step_v_m;  // Similar to GDScript's stepify
 	uv_stepped = clamp(uv_stepped, 0.0, 1.0);
-	vec4 grad_color = mix(first_color, second_color, uv_stepped);
-	output = grad_color;
+	vec4 output = mix(first_color, second_color, uv_stepped);
 	
 	COLOR = mix(original_color, output, selection_color.a);
 }

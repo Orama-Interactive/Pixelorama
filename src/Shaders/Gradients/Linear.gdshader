@@ -11,13 +11,12 @@ uniform float angle : hint_range(0.0, 360.0) = 0.0;
 void fragment() {
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 selection_color = texture(selection, UV);
-	vec4 output = texture(TEXTURE, UV);
 
 	float pivot = position + 0.5;
 	vec2 uv = UV - pivot;
 	float rotated = uv.x * cos(radians(angle)) - uv.y * sin(radians(angle)); 
-	float fixed_size = size + 0.5;
-	float pos = smoothstep((1.0 - fixed_size) + position, fixed_size + 0.0001 + position, rotated + pivot);
-	output = mix(first_color, second_color, pos); 
+	float fixed_size = (size / 2.0) + 0.5;
+	float pos = smoothstep(position + fixed_size, (1.0 - fixed_size) - 0.0001 + position, rotated + pivot);
+	vec4 output = mix(first_color, second_color, pos); 
 	COLOR = mix(original_color, output, selection_color.a);
 }
