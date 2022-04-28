@@ -655,7 +655,7 @@ func _animation_tags_changed(value: Array) -> void:
 		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + 1
 		var tag_size: int = tag.to - tag.from
 		# We dont need the 4 pixels at the end of last cel
-		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 4
+		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 8
 		tag_c.rect_position.y = 1  # To make top line of tag visible
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
