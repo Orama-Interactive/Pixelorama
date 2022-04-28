@@ -51,7 +51,7 @@ func _h_scroll_changed(value: float) -> void:
 	# Let the main timeline ScrollContainer affect the tag ScrollContainer too
 	tag_scroll_container.get_child(0).rect_min_size.x = (
 		timeline_scroll.scroll_horizontal
-		+ tag_scroll_container.rect_size.x * 3  # error compensation if slider moved too fast
+		+ tag_scroll_container.rect_size.x * 3
 	)
 	print(tag_scroll_container.get_child(0).rect_min_size.x)
 	old_scroll = value  # Needed for (_on_TimelineContainer_item_rect_changed)
