@@ -26,13 +26,13 @@ __meta__ = {
 }
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_right = 278.0
+margin_right = 318.0
 margin_bottom = 240.0
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 19.0
-margin_right = 259.0
+margin_left = 39.0
+margin_right = 279.0
 margin_bottom = 240.0
 rect_min_size = Vector2( 200, 200 )
 size_flags_horizontal = 5
@@ -49,7 +49,7 @@ margin_bottom = 0.0
 
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
 margin_top = 244.0
-margin_right = 278.0
+margin_right = 318.0
 margin_bottom = 400.0
 columns = 2
 
@@ -139,10 +139,10 @@ margin_top = 104.0
 margin_right = 278.0
 margin_bottom = 128.0
 mouse_default_cursor_shape = 2
-min_value = 0.01
-max_value = 2.0
-step = 0.01
-value = 1.0
+min_value = 1.0
+max_value = 200.0
+value = 100.0
+suffix = "%"
 
 [node name="StepsLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_radial_step", "gradient_step"]]
 visible = false
@@ -253,7 +253,7 @@ visible = false
 margin_top = 219.0
 margin_right = 160.0
 margin_bottom = 233.0
-text = "Dithering matrix:"
+text = "Dithering pattern:"
 
 [node name="DitheringOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_radial_dithering"]]
 visible = false

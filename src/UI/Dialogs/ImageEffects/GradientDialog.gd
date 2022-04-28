@@ -93,7 +93,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"angle": angle.value,
 		"center": Vector2(center_x.value / 100.0, center_y.value / 100.0),
 		"radius": Vector2(radius_x.value, radius_y.value),
-		"size": size.value,
+		"size": size.value / 100.0,
 		"steps": steps.value,
 		"dither_texture": dither_texture,
 		"image_size": project.size,
