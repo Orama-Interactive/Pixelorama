@@ -50,8 +50,9 @@ func _input(event: InputEvent) -> void:
 func _h_scroll_changed(value: float) -> void:
 	# Let the main timeline ScrollContainer affect the tag ScrollContainer too
 	tag_scroll_container.get_child(0).rect_min_size.x = (
-		timeline_scroll.get_child(0).rect_size.x
-		- 212
+		(timeline_scroll.scroll_horizontal
+		+ tag_scroll_container.rect_size.x)
+		* 2 # error compensation
 	)
 
 	old_scroll = value  # Needed for (_on_TimelineContainer_item_rect_changed)
@@ -70,6 +71,7 @@ func _h_scroll_changed(value: float) -> void:
 func _on_AnimationTimeline_item_rect_changed() -> void:
 	# Timeline size
 	timeline_scroll.rect_min_size.x = rect_size.x
+	print("changed")
 
 
 func _on_TimelineContainer_item_rect_changed() -> void:
