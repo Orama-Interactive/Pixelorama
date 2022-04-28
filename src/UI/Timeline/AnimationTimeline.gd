@@ -53,7 +53,6 @@ func _h_scroll_changed(value: float) -> void:
 		timeline_scroll.scroll_horizontal
 		+ tag_scroll_container.rect_size.x * 3
 	)
-	print(tag_scroll_container.get_child(0).rect_min_size.x)
 	old_scroll = value  # Needed for (_on_TimelineContainer_item_rect_changed)
 	var diff = start_spacer.rect_min_size.x - value
 	var a = main_scroll.scroll_horizontal
@@ -70,7 +69,6 @@ func _h_scroll_changed(value: float) -> void:
 func _on_AnimationTimeline_item_rect_changed() -> void:
 	# Timeline size
 	timeline_scroll.rect_min_size.x = rect_size.x
-	print("changed")
 
 
 func _on_TimelineContainer_item_rect_changed() -> void:
