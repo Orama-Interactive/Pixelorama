@@ -251,7 +251,7 @@ func _add_new_segment(y: int = 0) -> void:
 func _flood_line_around_point(
 	position: Vector2, project: Project, image: Image, src_color: Color
 ) -> int:
-	# this method is called by `_my_flood_fill` after the required data structures
+	# this method is called by `_flood_fill` after the required data structures
 	# have been initialized
 	if not image.get_pixelv(position).is_equal_approx(src_color):
 		return int(position.x) + 1
@@ -303,7 +303,8 @@ func _flood_line_around_point(
 	segment.todo_below = position.y < project.size.y - 1
 	# this is an actual segment we should be coloring, so we add it to the results for the
 	# current image
-	_allegro_image_segments.append(segment)
+	if segment.right_position > segment.left_position:
+		_allegro_image_segments.append(segment)
 	# we know the point just east of the segment is not part of a segment that should be
 	# processed, else it would be part of this segment
 	return int(east.x) + 1
@@ -348,47 +349,58 @@ func _flood_fill(position: Vector2) -> void:
 		# init flood data structures
 		_allegro_flood_segments = []
 		_allegro_image_segments = []
-		# initially allocate at least 1 segment per line of image
-		for j in image.get_height():
-			_add_new_segment(j)
-		# start flood algorithm
-		_flood_line_around_point(position, project, image, color)
-		# test all segments while also discovering more
-		var done = false
-		while not done:
-			done = true
-			for c in _allegro_flood_segments.size():
-				var p = _allegro_flood_segments[c]
-				if p.todo_below:  # check below the segment?
-					p.todo_below = false
-					if _check_flooded_segment(
-						p.y + 1, p.left_position, p.right_position, project, image, color
-					):
-						done = false
-				if p.todo_above:  # check above the segment?
-					p.todo_above = false
-					if _check_flooded_segment(
-						p.y - 1, p.left_position, p.right_position, project, image, color
-					):
-						done = false
+		_compute_segments_for_image(position, project, image, color)
 		# now actually color the image: since we have already checked a few things for the points
 		# we'll process here, we're going to skip a bunch of safety checks to speed things up.
-		if _fill_with == 0 or _pattern == null:
-			# short circuit for flat colors
-			for c in _allegro_image_segments.size():
-				var p = _allegro_image_segments[c]
-				for px in range(p.left_position, p.right_position + 1):
-					# We don't have to check again whether the point being processed is within the bounds
-					image.set_pixel(px, p.y, tool_slot.color)
-		else:
-			# shortcircuit tests for patternfills
-			var pattern_size = _pattern.image.get_size()
-			# we know the pattern had a valid size when we began flooding, so we can skip testing that
-			# again for every point in the pattern.
-			for c in _allegro_image_segments.size():
-				var p = _allegro_image_segments[c]
-				for px in range(p.left_position, p.right_position + 1):
-					_set_pixel_pattern(image, px, p.y, pattern_size)
+		_color_segments(image)
+
+
+func _compute_segments_for_image(
+	position: Vector2, project: Project, image: Image, src_color: Color
+) -> void:
+	# initially allocate at least 1 segment per line of image
+	for j in image.get_height():
+		_add_new_segment(j)
+	# start flood algorithm
+	_flood_line_around_point(position, project, image, src_color)
+	# test all segments while also discovering more
+	var done = false
+	while not done:
+		done = true
+		var max_index = _allegro_flood_segments.size()
+		for c in max_index:
+			var p = _allegro_flood_segments[c]
+			if p.todo_below:  # check below the segment?
+				p.todo_below = false
+				if _check_flooded_segment(
+					p.y + 1, p.left_position, p.right_position, project, image, src_color
+				):
+					done = false
+			if p.todo_above:  # check above the segment?
+				p.todo_above = false
+				if _check_flooded_segment(
+					p.y - 1, p.left_position, p.right_position, project, image, src_color
+				):
+					done = false
+
+
+func _color_segments(image: Image) -> void:
+	if _fill_with == 0 or _pattern == null:
+		# short circuit for flat colors
+		for c in _allegro_image_segments.size():
+			var p = _allegro_image_segments[c]
+			for px in range(p.left_position, p.right_position + 1):
+				# We don't have to check again whether the point being processed is within the bounds
+				image.set_pixel(px, p.y, tool_slot.color)
+	else:
+		# shortcircuit tests for patternfills
+		var pattern_size = _pattern.image.get_size()
+		# we know the pattern had a valid size when we began flooding, so we can skip testing that
+		# again for every point in the pattern.
+		for c in _allegro_image_segments.size():
+			var p = _allegro_image_segments[c]
+			for px in range(p.left_position, p.right_position + 1):
+				_set_pixel_pattern(image, px, p.y, pattern_size)
 
 
 func _set_pixel_pattern(image: Image, x: int, y: int, pattern_size: Vector2) -> void:
