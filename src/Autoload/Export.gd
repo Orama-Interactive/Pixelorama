@@ -384,14 +384,13 @@ func blend_layers(image: Image, frame: Frame, origin: Vector2 = Vector2(0, 0)) -
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.image)
 			cel_image.lock()
-			if cel.opacity < 1:  # If we have cel transparency
-				for xx in cel_image.get_size().x:
-					for yy in cel_image.get_size().y:
-						var pixel_color := cel_image.get_pixel(xx, yy)
-						var alpha: float = pixel_color.a * cel.opacity
-						cel_image.set_pixel(
-							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-						)
+
+			var gen = ShaderImageEffect.new()
+			var params = {}
+			for i in Global.current_project.layers.size():
+				params["tex%s" % i] = frame.cels[i].image_texture
+				params["tex%s_opacity" % i] = frame.cels[i].opacity
+			gen.generate_image(cel_image, Global.canvas.material.shader, params, Global.current_project.size)
 			image.blend_rect(cel_image, Rect2(Vector2.ZERO, Global.current_project.size), origin)
 			cel_image.unlock()
 		layer_i += 1

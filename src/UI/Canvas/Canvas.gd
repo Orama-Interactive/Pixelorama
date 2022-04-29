@@ -51,18 +51,13 @@ func _draw() -> void:
 		position_tmp.x = position_tmp.x + Global.current_project.size.x
 		scale_tmp.x = -1
 	draw_set_transform(position_tmp, rotation, scale_tmp)
-	# Draw current frame layers
-	for i in range(Global.current_project.layers.size()):
-		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
-		if Global.current_project.layers[i].visible:  # if it's visible
-			if i == current_layer:
-				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
-			else:
-				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
+	draw_texture(current_cels[0].image_texture, Vector2.ZERO) # Placeholder so we can have a material here
 
+	# Draw current frame layers
 	for i in range(Global.current_project.layers.size()):
 		if Global.current_project.layers[i].visible:  # if it's visible
 			material.set_shader_param("tex%s" % i, current_cels[i].image_texture)
+			material.set_shader_param("tex%s_opacity" % i, current_cels[i].opacity)
 	material.set_shader_param("current_layer", current_layer)
 	material.set_shader_param("move_prev_pos", move_preview_location)
 
@@ -125,7 +120,6 @@ func camera_zoom() -> void:
 
 
 func generate_shader() -> void:
-#	var current_cels: Array = Global.current_project.frames[Global.current_project.current_frame].cels
 	var current_layers: Array = Global.current_project.layers
 
 	var uniforms := ""
@@ -133,41 +127,43 @@ func generate_shader() -> void:
 	uniforms += "uniform int current_layer;"
 	uniforms += "uniform vec2 move_prev_pos;"
 	for i in range(Global.current_project.layers.size()):
-#		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
 		if Global.current_project.layers[i].visible:  # if it's visible
 			uniforms += "uniform sampler2D tex%s;" % i
+			uniforms += "uniform float tex%s_opacity;" % i
 			
-			var tex := "texture(tex%s, UV - cur_layer_pos * float(current_layer - %s == 0))" % [i, i]
-			var normal := "mix(col.rgb, {tex}.rgb, {tex}.a).rgb".format({"tex": tex})
-			var blend := ""
+			var tex := "texture(tex{i}, UV - cur_layer_pos * float(current_layer - {i} == 0))".format({"i": i}) # Layer, move uv if it's the selected
+			var tex_a := "texture(tex{i}, UV - cur_layer_pos * float(current_layer - {i} == 0)).a * tex{i}_opacity".format({"i": i}) # Layer, move uv if it's the selected
+			var normal := "mix(col.rgb, {tex}.rgb, {tex}.a).rgb".format({"tex": tex}) # Normal blending, used for outside area
+			var blend := "" # Blending formula
 			match current_layers[i].blend_mode:
 				BlendMode.NORMAL:
-					blend = "mix(col.rgb, {tex}.rgb, {tex}.a)"
+					blend = "mix(col.rgb, {tex}.rgb, {tex.a})"
 				BlendMode.ADD:
-					blend = "mix(col.rgb, clamp(col.rgb + {tex}.rgb, 0.0, 1.0).rgb, {tex}.a).rgb"
+					blend = "mix(col.rgb, clamp(col.rgb + {tex}.rgb, 0.0, 1.0).rgb, {tex.a}).rgb"
 				BlendMode.SUB:
-					blend = "mix(col.rgb, clamp(col.rgb - {tex}.rgb, 0.0, 1.0).rgb, {tex}.a).rgb"
+					blend = "mix(col.rgb, clamp(col.rgb - {tex}.rgb, 0.0, 1.0).rgb, {tex.a}).rgb"
 				BlendMode.MUL:
-					blend = "mix(col.rgb, clamp(col.rgb * {tex}.rgb, 0.0, 1.0).rgb, {tex}.a).rgb"
+					blend = "mix(col.rgb, clamp(col.rgb * {tex}.rgb, 0.0, 1.0).rgb, {tex.a}).rgb"
 				BlendMode.SCREEN:
-					blend = "mix(col.rgb, clamp(mix(col.rgb, 1.0 - (1.0 - col.rgb) * (1.0 - {tex}.rgb), {tex}.a), 0.0, 1.0).rgb, {tex}.a).rgb"
+					blend = "mix(col.rgb, clamp(mix(col.rgb, 1.0 - (1.0 - col.rgb) * (1.0 - {tex}.rgb), {tex.a}), 0.0, 1.0).rgb, {tex.a}).rgb"
 				BlendMode.DIFFERENCE:
-					blend = "mix(col.rgb, clamp(abs(col.rgb - {tex}.rgb), 0.0, 1.0).rgb, {tex}.a).rgb"
+					blend = "mix(col.rgb, clamp(abs(col.rgb - {tex}.rgb), 0.0, 1.0).rgb, {tex.a}).rgb"
 				BlendMode.BURN:
-					blend = "mix(col.rgb, clamp(1.0 - (1.0 - col.rgb) / {tex}.rgb, 0.0, 1.0).rgb, {tex}.a).rgb"
+					blend = "mix(col.rgb, clamp(1.0 - (1.0 - col.rgb) / {tex}.rgb, 0.0, 1.0).rgb, {tex.a}).rgb"
 				BlendMode.DODGE:
-					blend = "mix(col.rgb, clamp(col.rgb / (1.0 - {tex}.rgb), 0.0, 1.0).rgb, {tex}.a).rgb"
+					blend = "mix(col.rgb, clamp(col.rgb / (1.0 - {tex}.rgb), 0.0, 1.0).rgb, {tex.a}).rgb"
 				BlendMode.OVERLAY:
-					blend = "mix(col.rgb, clamp(mix(2.0 * col.rgb * {tex}.rgb, 1.0 - 2.0 * (1.0 - {tex}.rgb) * (1.0 - col.rgb), round(col.rgb)), 0.0, 1.0).rgb, {tex}.a).rgb"
+					blend = "mix(col.rgb, clamp(mix(2.0 * col.rgb * {tex}.rgb, 1.0 - 2.0 * (1.0 - {tex}.rgb) * (1.0 - col.rgb), round(col.rgb)), 0.0, 1.0).rgb, {tex.a}).rgb"
 				BlendMode.SOFT_LIGHT:
-					blend = "mix(col.rgb, clamp(mix(2.0 * col.rgb * {tex}.rgb + col.rgb * col.rgb * (1.0 - 2.0 * {tex}.rgb), sqrt(col.rgb) * (2.0 * {tex}.rgb - 1.0) + (2.0 * col.rgb) * (1.0 - {tex}.rgb), round(col.rgb)), 0.0, 1.0).rgb, {tex}.a).rgb"
+					blend = "mix(col.rgb, clamp(mix(2.0 * col.rgb * {tex}.rgb + col.rgb * col.rgb * (1.0 - 2.0 * {tex}.rgb), sqrt(col.rgb) * (2.0 * {tex}.rgb - 1.0) + (2.0 * col.rgb) * (1.0 - {tex}.rgb), round(col.rgb)), 0.0, 1.0).rgb, {tex.a}).rgb"
 				BlendMode.HARD_LIGHT:
-					blend = "mix(col.rgb, clamp(mix(2.0 * {tex}.rgb * col.rgb, 1.0 - 2.0 * (1.0 - col.rgb) * (1.0 - {tex}.rgb), round(col.rgb)), 0.0, 1.0).rgb, {tex}.a).rgb"
+					blend = "mix(col.rgb, clamp(mix(2.0 * {tex}.rgb * col.rgb, 1.0 - 2.0 * (1.0 - col.rgb) * (1.0 - {tex}.rgb), round(col.rgb)), 0.0, 1.0).rgb, {tex.a}).rgb"
 
-			blend = blend.format({"tex": tex})
-			draws += "col.rgb = mix({normal}, {blend}, col.a);".format({"normal": normal, "blend": blend})
-			draws += "col.a = mix(col.a, 1.0, {tex}.a);".format({"tex": tex})
+			blend = blend.format({"tex": tex, "tex.a": tex_a})
+			draws += "col.rgb = mix({normal}, {blend}, col.a);".format({"normal": normal, "blend": blend, "i": i})
+			draws += "col.a = mix(col.a, 1.0, {tex}.a * tex{i}_opacity * mix(1.0, border, float(current_layer - {i} == 0)));".format({"tex": tex, "i": i})
 
+	# Generate code
 	var code : String = """
 shader_type canvas_item;
 
@@ -176,6 +172,8 @@ shader_type canvas_item;
 void fragment() {
 	vec4 col;
 	vec2 cur_layer_pos = move_prev_pos * TEXTURE_PIXEL_SIZE;
+	vec2 border_uv = abs((UV - cur_layer_pos - 0.5) * 2.0);
+	float border = 1.0 - clamp(floor(max(border_uv.x, border_uv.y)), 0.0, 1.0);
 	{draws}
 	COLOR = col;
 }"""
