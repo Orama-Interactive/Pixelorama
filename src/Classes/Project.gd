@@ -528,7 +528,7 @@ func _layers_changed(value: Array) -> void:
 	self.current_frame = current_frame  # Call frame_changed to update UI
 	_toggle_layer_buttons_layers()
 
-	Global.canvas.generate_shader()
+	Global.canvas.generate_shader(layers)
 
 
 func _remove_cel_buttons() -> void:

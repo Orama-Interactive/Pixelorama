@@ -36,8 +36,11 @@ func _ready() -> void:
 	$OnionFuture.blue_red_color = Color.red
 	yield(get_tree(), "idle_frame")
 	camera_zoom()
-	
-	generate_shader()
+
+	generate_shader(Global.current_project.layers)
+	Global.canvas_preview_container.canvas_preview.material = material
+	Global.second_viewport.get_node("Viewport/CanvasPreview").material = material
+	tile_mode.material = material
 
 
 func _draw() -> void:
@@ -120,23 +123,21 @@ func camera_zoom() -> void:
 	Global.transparent_checker.update_rect()
 
 
-func generate_shader() -> void:
-	var current_layers: Array = Global.current_project.layers
-
+func generate_shader(layers : Array): # Optionally returns the generated code
 	var uniforms := ""
 	var draws := ""
 	uniforms += "uniform int current_layer;"
 	uniforms += "uniform vec2 move_prev_pos;"
-	for i in range(Global.current_project.layers.size()):
-		if Global.current_project.layers[i].visible:  # if it's visible
+	for i in range(layers.size()):
+		if layers[i].visible:  # if it's visible
 			uniforms += "uniform sampler2D tex%s;" % i
 			uniforms += "uniform float tex%s_opacity;" % i
-			
+	
 			var tex := "texture(tex{i}, UV - cur_layer_pos * float(current_layer - {i} == 0))".format({"i": i}) # Layer, move uv if it's the selected
 			var tex_a := "texture(tex{i}, UV - cur_layer_pos * float(current_layer - {i} == 0)).a * tex{i}_opacity".format({"i": i}) # Layer, move uv if it's the selected
 			var normal := "mix(col.rgb, {tex}.rgb, {tex}.a).rgb".format({"tex": tex}) # Normal blending, used for outside area
 			var blend := "" # Blending formula
-			match current_layers[i].blend_mode:
+			match layers[i].blend_mode:
 				BlendMode.NORMAL:
 					blend = "mix(col.rgb, {tex}.rgb, {tex.a})"
 				BlendMode.ADD:
@@ -167,6 +168,7 @@ func generate_shader() -> void:
 	# Generate code
 	var code : String = """
 shader_type canvas_item;
+render_mode unshaded;
 
 {uniforms}
 
@@ -176,10 +178,13 @@ void fragment() {
 	vec2 border_uv = abs((UV - cur_layer_pos - 0.5) * 2.0);
 	float border = 1.0 - clamp(floor(max(border_uv.x, border_uv.y)), 0.0, 1.0);
 	{draws}
-	COLOR = col;
+	vec3 col_fix = col.rgb/col.a;
+	COLOR = vec4(col_fix, col.a);
 }"""
 	code = code.format({"uniforms": uniforms, "draws": draws})
 	material.shader.code = code
+	
+	return code
 
 
 func update_texture(layer_i: int, frame_i := -1, project: Project = Global.current_project) -> void:

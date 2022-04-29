@@ -732,53 +732,48 @@ func _on_MergeDownLayer_pressed() -> void:
 		var new_cels: Array = f.cels.duplicate()
 		for i in new_cels.size():
 			new_cels[i] = Cel.new(new_cels[i].image, new_cels[i].opacity)
-		var selected_layer := Image.new()
-		selected_layer.copy_from(new_cels[Global.current_project.current_layer].image)
+		var selected_layer : Layer = new_layers[Global.current_project.current_layer]
+		var new_layer : Layer = new_layers[Global.current_project.current_layer - 1]
+		var selected_layer_idx : int = Global.current_project.current_layer
+		var new_layer_idx : int = Global.current_project.current_layer - 1
+		var merged_image := Image.new()
+		merged_image.copy_from(f.cels[new_layer_idx].image)
 
-		selected_layer.lock()
-		if f.cels[Global.current_project.current_layer].opacity < 1:  # If we have layer transparency
-			for xx in selected_layer.get_size().x:
-				for yy in selected_layer.get_size().y:
-					var pixel_color: Color = selected_layer.get_pixel(xx, yy)
-					var alpha: float = (
-						pixel_color.a
-						* f.cels[Global.current_project.current_layer].opacity
-					)
-					selected_layer.set_pixel(
-						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-					)
-		selected_layer.unlock()
+		var gen = ShaderImageEffect.new()
+		var params = {
+			"tex0" : f.cels[new_layer_idx].image_texture,
+			"tex0_opacity" : f.cels[new_layer_idx].opacity,
+			"tex1" : f.cels[selected_layer_idx].image_texture,
+			"tex1_opacity" : f.cels[selected_layer_idx].opacity
+		}
 
-		var new_layer := Image.new()
-		new_layer.copy_from(f.cels[Global.current_project.current_layer - 1].image)
-		new_layer.blend_rect(
-			selected_layer, Rect2(Vector2.ZERO, Global.current_project.size), Vector2.ZERO
-		)
-		new_cels.remove(Global.current_project.current_layer)
+		var shader = Shader.new()
+		shader.code = Global.canvas.generate_shader([	Global.current_project.layers[new_layer_idx], 
+														Global.current_project.layers[selected_layer_idx]])
+		gen.generate_image(merged_image, shader, params, Global.current_project.size)
+
+		new_cels.remove(selected_layer_idx)
 		if (
-			!selected_layer.is_invisible()
+			!new_cels[new_layer_idx].image.is_invisible()
 			and (
-				Global.current_project.layers[Global.current_project.current_layer - 1].linked_cels.size()
+				new_layer.linked_cels.size()
 				> 1
 			)
 			and (
 				f
-				in Global.current_project.layers[(
-					Global.current_project.current_layer
-					- 1
-				)].linked_cels
+				in new_layer.linked_cels
 			)
 		):
-			new_layers[Global.current_project.current_layer - 1].linked_cels.erase(f)
-			new_cels[Global.current_project.current_layer - 1].image = new_layer
+			new_layer.linked_cels.erase(f)
+			new_cels[new_layer_idx].image = merged_image
 		else:
 			Global.current_project.undo_redo.add_do_property(
-				f.cels[Global.current_project.current_layer - 1].image, "data", new_layer.data
+				f.cels[new_layer_idx].image, "data", merged_image.data
 			)
 			Global.current_project.undo_redo.add_undo_property(
-				f.cels[Global.current_project.current_layer - 1].image,
+				f.cels[new_layer_idx].image,
 				"data",
-				f.cels[Global.current_project.current_layer - 1].image.data
+				f.cels[new_layer_idx].image.data
 			)
 
 		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
@@ -815,7 +810,8 @@ func _on_OnionSkinningSettings_popup_hide() -> void:
 
 
 func _on_BlendModeOption_item_selected(index) -> void:
-	var current_layer: Layer = Global.current_project.layers[Global.current_project.current_layer]
+	var current_layers: Array = Global.current_project.layers
+	var current_layer: Layer = current_layers[Global.current_project.current_layer]
 	current_layer.blend_mode = index
+	Global.canvas.generate_shader(current_layers)
 	Global.canvas.update()
-	Global.canvas.generate_shader()
