@@ -59,11 +59,12 @@ func _draw() -> void:
 				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
 			else:
 				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
-#move_preview_location,
 
 	for i in range(Global.current_project.layers.size()):
 		if Global.current_project.layers[i].visible:  # if it's visible
 			material.set_shader_param("tex%s" % i, current_cels[i].image_texture)
+	material.set_shader_param("current_layer", current_layer)
+	material.set_shader_param("move_prev_pos", move_preview_location)
 
 	if Global.onion_skinning:
 		refresh_onion()
@@ -129,12 +130,14 @@ func generate_shader() -> void:
 
 	var uniforms := ""
 	var draws := ""
+	uniforms += "uniform int current_layer;"
+	uniforms += "uniform vec2 move_prev_pos;"
 	for i in range(Global.current_project.layers.size()):
 #		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
 		if Global.current_project.layers[i].visible:  # if it's visible
 			uniforms += "uniform sampler2D tex%s;" % i
 			
-			var tex := "texture(tex%s, UV)" % i
+			var tex := "texture(tex%s, UV - cur_layer_pos * float(current_layer - %s == 0))" % [i, i]
 			var normal := "mix(col.rgb, {tex}.rgb, {tex}.a).rgb".format({"tex": tex})
 			var blend := ""
 			match current_layers[i].blend_mode:
@@ -172,6 +175,7 @@ shader_type canvas_item;
 
 void fragment() {
 	vec4 col;
+	vec2 cur_layer_pos = move_prev_pos * TEXTURE_PIXEL_SIZE;
 	{draws}
 	COLOR = col;
 }"""
