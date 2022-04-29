@@ -1,18 +1,19 @@
 class_name Canvas
 extends Node2D
 
-enum BlendMode {NORMAL, 
-				ADD,
-				SUB,
-				MUL,
-				SCREEN,
-				DIFFERENCE,
-				BURN,
-				DODGE,
-				OVERLAY,
-				SOFT_LIGHT,
-				HARD_LIGHT,
-				}
+enum BlendMode {
+	NORMAL, 
+	ADD,
+	SUB,
+	MUL,
+	SCREEN,
+	DIFFERENCE,
+	BURN,
+	DODGE,
+	OVERLAY,
+	SOFT_LIGHT,
+	HARD_LIGHT,
+}
 
 var current_pixel := Vector2.ZERO
 var sprite_changed_this_frame := false  # For optimization purposes
