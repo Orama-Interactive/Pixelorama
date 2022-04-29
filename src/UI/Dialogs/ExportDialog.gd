@@ -213,7 +213,7 @@ func update_dimensions_label():
 	var dimension_label: Label = $VBoxContainer/Dimensions/DimensionLabel
 	dimension_label.text = "Export Dimensions : "
 	if Export.processed_images.size() > 0:
-		var new_size: Vector2 = Export.processed_images[0].get_size() * (Export.resize/100.0)
+		var new_size: Vector2 = Export.processed_images[0].get_size() * (Export.resize / 100.0)
 		dimension_label.text += str(new_size.x, "x",new_size.y)
 
 
