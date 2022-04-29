@@ -72,7 +72,7 @@ func create_project_blend_shader_code(project) -> void:
 
 	project.layer_blend_shader.code = "shader_type canvas_item;render_mode blend_premul_alpha;\n" + uniforms + "\n" + BLEND_MODES.alpha + fragment
 #	project.layer_blend_shader.code = "shader_type canvas_item;\n" + uniforms + "\n" + BLEND_MODES.alpha + fragment
-	print(project.layer_blend_shader.code)
+#	print(project.layer_blend_shader.code)
 
 # It may be best if it creates the code for the group, sets shader.code,
 # and returns just the string for the blending part of the code to be reused

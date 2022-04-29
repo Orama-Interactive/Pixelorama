@@ -309,7 +309,7 @@ func copy_frames(frames := []) -> void:
 			sprite.copy_from(cel.image)
 			var sprite_texture := ImageTexture.new()
 			sprite_texture.create_from_image(sprite, 0)
-			new_frame.cels.append(Cel.new(sprite, cel.opacity, sprite_texture))
+			new_frame.cels.append(PixelCel.new(sprite, cel.opacity, sprite_texture))
 
 		new_frame.duration = prev_frame.duration
 		for l_i in range(new_layers.size()):

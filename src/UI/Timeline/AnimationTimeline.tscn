@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/layers/new.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/graphics/layers/clone.png" type="Texture" id=7]
 [ext_resource path="res://assets/graphics/timeline/move_arrow.png" type="Texture" id=8]
 [ext_resource path="res://src/UI/Timeline/FrameButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/graphics/layers/group_new.png" type="Texture" id=10]
 [ext_resource path="res://assets/graphics/timeline/new_frame.png" type="Texture" id=19]
 [ext_resource path="res://assets/graphics/timeline/remove_frame.png" type="Texture" id=20]
 [ext_resource path="res://assets/graphics/timeline/go_to_first_frame.png" type="Texture" id=21]
@@ -107,6 +108,9 @@ margin_bottom = 160.0
 rect_min_size = Vector2( 36, 160 )
 rect_clip_content = true
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 anchor_right = 1.0
@@ -127,7 +131,7 @@ margin_bottom = 38.0
 size_flags_horizontal = 3
 
 [node name="LayerButtonPanelContainer" type="PanelContainer" parent="ScrollContainer/TimelineContainer/TimelineButtons"]
-margin_right = 186.0
+margin_right = 217.0
 margin_bottom = 38.0
 custom_styles/panel = SubResource( 2 )
 
@@ -163,7 +167,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RemoveLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
+[node name="AddGroup" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 31.0
 margin_right = 53.0
 margin_bottom = 22.0
@@ -171,7 +175,7 @@ rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Create a new group layer"
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroupLayer"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroup"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -187,13 +191,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RemoveLayer" type="Button" parent="AnimationContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
+[node name="RemoveLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
 margin_left = 62.0
 margin_right = 84.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
-hint_tooltip = "Create a new group layer"
-mouse_default_cursor_shape = 2
+hint_tooltip = "Remove current layer"
+focus_mode = 0
+mouse_default_cursor_shape = 8
+disabled = true
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/RemoveLayer"]
 anchor_left = 0.5
@@ -212,8 +218,8 @@ __meta__ = {
 }
 
 [node name="MoveUpLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 62.0
-margin_right = 84.0
+margin_left = 93.0
+margin_right = 115.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Move up the current layer"
@@ -238,8 +244,8 @@ __meta__ = {
 }
 
 [node name="MoveDownLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 93.0
-margin_right = 115.0
+margin_left = 124.0
+margin_right = 146.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Move down the current layer"
@@ -264,8 +270,8 @@ __meta__ = {
 }
 
 [node name="CloneLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 124.0
-margin_right = 146.0
+margin_left = 155.0
+margin_right = 177.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Clone current layer"
@@ -289,8 +295,8 @@ __meta__ = {
 }
 
 [node name="MergeDownLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 155.0
-margin_right = 177.0
+margin_left = 186.0
+margin_right = 208.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Merge current layer with the one below"
@@ -315,7 +321,7 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="ScrollContainer/TimelineContainer/TimelineButtons"]
-margin_left = 190.0
+margin_left = 221.0
 margin_right = 386.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
@@ -1029,6 +1035,7 @@ autowrap = true
 [connection signal="item_rect_changed" from="." to="." method="_on_AnimationTimeline_item_rect_changed"]
 [connection signal="item_rect_changed" from="ScrollContainer/TimelineContainer" to="." method="_on_TimelineContainer_item_rect_changed"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
+[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroup" to="." method="add_group_layer" binds= [ true ]]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
