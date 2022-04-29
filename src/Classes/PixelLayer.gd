@@ -25,7 +25,7 @@ func deserialize(dict: Dictionary) -> void:
 
 	for linked_cel_number in dict.linked_cels:
 		linked_cels.append(project.frames[linked_cel_number])
-		var linked_cel: Cel = project.frames[linked_cel_number].cels[index]
+		var linked_cel: PixelCel = project.frames[linked_cel_number].cels[index]
 		linked_cel.image = linked_cels[0].cels[index].image
 		linked_cel.image_texture = linked_cels[0].cels[index].image_texture
 

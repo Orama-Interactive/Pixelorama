@@ -5,6 +5,7 @@ extends Reference
 var name := ""
 var visible := true
 var locked := false
+var blend_mode := "alpha"
 var parent: BaseLayer
 var project
 var index: int
@@ -15,6 +16,7 @@ func serialize() -> Dictionary:
 		"name": name,
 		"visible": visible,
 		"locked": locked,
+		"blend_mode": blend_mode,
 		"parent": parent.index if is_instance_valid(parent) else -1
 	}
 
@@ -23,6 +25,7 @@ func deserialize(dict: Dictionary) -> void:
 	name = dict.name
 	visible = dict.visible
 	locked = dict.locked
+	blend_mode = dict.get("blend_mode", "alpha")
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
 

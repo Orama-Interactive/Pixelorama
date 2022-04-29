@@ -28,7 +28,7 @@ func _draw() -> void:
 				var layer_i := 0
 				for cel in Global.current_project.frames[change].cels:
 					var layer: PixelLayer = Global.current_project.layers[layer_i]
-					if layer.visible:
+					if layer.is_visible_in_hierarchy():
 						# Ignore layer if it has the "_io" suffix in its name (case in-sensitive)
 						if not (layer.name.to_lower().ends_with("_io")):
 							color.a = 0.6 / i

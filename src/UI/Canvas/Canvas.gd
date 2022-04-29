@@ -5,8 +5,8 @@ var current_pixel := Vector2.ZERO
 var sprite_changed_this_frame := false  # For optimization purposes
 var move_preview_location := Vector2.ZERO
 
-onready var currently_visible_frame: Viewport = $CurrentlyVisibleFrame
-onready var current_frame_drawer = $CurrentlyVisibleFrame/CurrentFrameDrawer
+#onready var currently_visible_frame: Viewport = $CurrentlyVisibleFrame
+onready var current_frame_drawer = $ViewportContainer/Viewport/CurrentFrameDrawer
 onready var tile_mode = $TileMode
 onready var pixel_grid = $PixelGrid
 onready var grid = $Grid
@@ -20,6 +20,8 @@ func _ready() -> void:
 	$OnionPast.blue_red_color = Color.blue
 	$OnionFuture.type = $OnionFuture.FUTURE
 	$OnionFuture.blue_red_color = Color.red
+#	current_frame.rect_size = Global.current_project.size
+#	current_frame.material = Global.current_project.layer_blend_material
 	yield(get_tree(), "idle_frame")
 	camera_zoom()
 
@@ -37,21 +39,21 @@ func _draw() -> void:
 		scale_tmp.x = -1
 	draw_set_transform(position_tmp, rotation, scale_tmp)
 	# Draw current frame layers
-	for i in range(Global.current_project.layers.size()):
-		# TODO Make this work with groups:
-		if Global.current_project.layers[i] is GroupLayer:
-			continue
-		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
-		if Global.current_project.layers[i].visible:  # if it's visible
-			if i == current_layer:
-				draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
-			else:
-				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
+#	for i in range(Global.current_project.layers.size()):
+#		# TODO Make this work with groups:
+#		if Global.current_project.layers[i] is GroupLayer:
+#			continue
+#		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
+#		if Global.current_project.layers[i].visible:  # if it's visible
+#			if i == current_layer:
+#				draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
+#			else:
+#				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
 
 	if Global.onion_skinning:
 		refresh_onion()
-	currently_visible_frame.size = Global.current_project.size
-	current_frame_drawer.update()
+	#currently_visible_frame.size = Global.current_project.size
+#	current_frame_drawer.update()
 	if Global.current_project.tile_mode != Global.TileMode.NONE:
 		tile_mode.update()
 	draw_set_transform(position, rotation, scale)
@@ -111,7 +113,7 @@ func update_texture(layer_i: int, frame_i := -1, project: Project = Global.curre
 		frame_i = project.current_frame
 
 	if frame_i < project.frames.size() and layer_i < project.layers.size():
-		var current_cel: Cel = project.frames[frame_i].cels[layer_i]
+		var current_cel: PixelCel = project.frames[frame_i].cels[layer_i]
 		current_cel.image_texture.create_from_image(current_cel.image, 0)
 
 		if project == Global.current_project:
@@ -128,7 +130,7 @@ func update_selected_cels_textures(project: Project = Global.current_project) ->
 		var frame_index: int = cel_index[0]
 		var layer_index: int = cel_index[1]
 		if frame_index < project.frames.size() and layer_index < project.layers.size():
-			var current_cel: Cel = project.frames[frame_index].cels[layer_index]
+			var current_cel: PixelCel = project.frames[frame_index].cels[layer_index]
 			current_cel.image_texture.create_from_image(current_cel.image, 0)
 
 			if project == Global.current_project:

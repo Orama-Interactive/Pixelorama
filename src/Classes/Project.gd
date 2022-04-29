@@ -16,6 +16,9 @@ var current_frame := 0 setget _frame_changed
 var current_layer := 0 setget _layer_changed
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
 
+var layer_blend_shader := Shader.new()
+var layer_blend_material := ShaderMaterial.new()
+
 var animation_tags := [] setget _animation_tags_changed  # Array of AnimationTags
 var guides := []  # Array of Guides
 var brushes := []  # Array of Images
@@ -47,7 +50,8 @@ var was_exported := false
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
 var pixel_layer_button_node = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
 var group_layer_button_node = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
-var cel_button_node = preload("res://src/UI/Timeline/CelButton.tscn")
+var pixel_cel_button_node = preload("res://src/UI/Timeline/PixelCelButton.tscn")
+var group_cel_button_node = preload("res://src/UI/Timeline/GroupCelButton.tscn")
 var animation_tag_node = preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
 
@@ -61,6 +65,8 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	Global.tabs.add_tab(name)
 	OpenSave.current_save_paths.append("")
 	OpenSave.backup_save_paths.append("")
+
+	layer_blend_material.shader = layer_blend_shader
 
 	x_symmetry_point = size.x / 2
 	y_symmetry_point = size.y / 2
@@ -113,7 +119,7 @@ func new_empty_frame() -> Frame:
 		image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 		if bottom_layer:
 			image.fill(fill_color)
-		frame.cels.append(Cel.new(image, 1))
+		frame.cels.append(PixelCel.new(image, 1))
 		bottom_layer = false
 
 	return frame
@@ -166,7 +172,7 @@ func change_project() -> void:
 		var layer_cel_container := HBoxContainer.new()
 		Global.frames_container.add_child(layer_cel_container)
 		for j in range(frames.size()):  # Create Cel buttons
-			var cel_button = cel_button_node.instance()
+			var cel_button = pixel_cel_button_node.instance()
 			cel_button.frame = j
 			cel_button.layer = i
 			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
@@ -222,6 +228,8 @@ func change_project() -> void:
 		Brushes.add_project_brush(brush)
 
 	Global.canvas.update()
+	Global.canvas.current_frame_drawer.material = layer_blend_material
+	Global.canvas.current_frame_drawer.rect_size = size
 	Global.canvas.grid.update()
 	Global.transparent_checker.update_rect()
 	Global.animation_timeline.fps_spinbox.value = fps
@@ -290,6 +298,9 @@ func change_project() -> void:
 		camera.rotation_changed()
 		camera.zoom_changed()
 		i += 1
+
+	if layer_blend_shader.code.empty():
+		_update_layer_blend_shaders()
 
 
 func serialize() -> Dictionary:
@@ -361,6 +372,7 @@ func deserialize(dict: Dictionary) -> void:
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
 		size.y = dict.size_y
+		Global.canvas.current_frame_drawer.rect_size = size
 		_update_tile_mode_rects()
 		selection_bitmap = resize_bitmap(selection_bitmap, size)
 	if dict.has("save_path"):
@@ -370,7 +382,7 @@ func deserialize(dict: Dictionary) -> void:
 		for frame in dict.frames:
 			var cels := []
 			for cel in frame.cels:
-				cels.append(Cel.new(Image.new(), cel.opacity))
+				cels.append(PixelCel.new(Image.new(), cel.opacity))
 			var duration := 1.0
 			if frame.has("duration"):
 				duration = frame.duration
@@ -434,6 +446,7 @@ func _name_changed(value: String) -> void:
 
 func _size_changed(value: Vector2) -> void:
 	size = value
+	Global.canvas.current_frame_drawer.rect_size = size
 	_update_tile_mode_rects()
 
 
@@ -452,11 +465,15 @@ func _frames_changed(value: Array) -> void:
 		layer_cel_container.name = "FRAMESS " + str(i)
 		Global.frames_container.add_child(layer_cel_container)
 		for j in range(frames.size()):
-			var cel_button = cel_button_node.instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-			layer_cel_container.add_child(cel_button)
+			if layers[j] is PixelLayer:
+				var cel_button = pixel_cel_button_node.instance()
+				cel_button.frame = j
+				cel_button.layer = i
+				cel_button.get_child(0).texture = frames[j].cels[i].image_texture
+				layer_cel_container.add_child(cel_button)
+			elif layers[j] is GroupLayer:
+				# TODO: Make GroupLayers work here
+				pass
 
 	for j in range(frames.size()):
 		var button: Button = frame_button_node.instance()
@@ -501,12 +518,15 @@ func _layers_changed(value: Array) -> void:
 		layer_cel_container.name = "LAYERSSS " + str(i)
 		Global.frames_container.add_child(layer_cel_container)
 		# TODO: FIGURE OUT FRAMES WITH GROUP LAYERS!
-		if not layers[i] is GroupLayer:
-			for j in range(frames.size()):
-				var cel_button = cel_button_node.instance()
+		for j in range(frames.size()):
+			if layers[i] is PixelLayer:
+				var cel_button = pixel_cel_button_node.instance()
 				cel_button.frame = j
 				cel_button.layer = i
 				cel_button.get_child(0).texture = frames[j].cels[i].image_texture
+				layer_cel_container.add_child(cel_button)
+			elif layers[i] is GroupLayer:
+				var cel_button = group_cel_button_node.instance()
 				layer_cel_container.add_child(cel_button)
 
 	var layer_button = Global.layers_container.get_child(
@@ -515,6 +535,8 @@ func _layers_changed(value: Array) -> void:
 	layer_button.pressed = true
 	self.current_frame = current_frame  # Call frame_changed to update UI
 	_toggle_layer_buttons_layers()
+
+	_update_layer_blend_shaders()
 
 
 func _remove_cel_buttons() -> void:
@@ -565,9 +587,10 @@ func _frame_changed(value: int) -> void:
 		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
 	)
 
-	# TODO: Make this work with groups:
-	if not layers[current_layer] is GroupLayer:
-		if current_frame < frames.size():
+
+	if current_frame < frames.size():
+		# TODO: Make this work with groups:
+		if not layers[current_layer] is GroupLayer:
 			var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
 			Global.layer_opacity_slider.value = cel_opacity * 100
 			Global.layer_opacity_spinbox.value = cel_opacity * 100
@@ -595,11 +618,26 @@ func _layer_changed(value: int) -> void:
 			)
 			layer_button.pressed = true
 
+# Called when making changes to layers: add/remove/move, blend modes, visibility
+func _update_layer_blend_shaders() -> void:
+	LayerBlendShaderFactory.new().create_project_blend_shader_code(self)
+	_update_layer_blend_materials()
+
+# Called when updating the shaders, changing frame, or opacity
+func _update_layer_blend_materials() -> void:
+	if frames.empty():
+		return
+	var current_cels: Array = frames[current_frame].cels
+	for i in range(layers.size()):
+		if layers[i] is PixelLayer:
+			layer_blend_material.set_shader_param("t" + str(i), current_cels[i].image_texture)
+		layer_blend_material.set_shader_param("o" + str(i), current_cels[i].opacity)
+
 
 func _toggle_layer_buttons_layers() -> void:
 	if !layers:
 		return
-	if layers[current_layer].locked:
+	if layers[current_layer].is_locked_in_hierarchy():
 		Global.disable_button(Global.remove_layer_button, true)
 
 	if layers.size() == 1:
@@ -607,7 +645,7 @@ func _toggle_layer_buttons_layers() -> void:
 		Global.disable_button(Global.move_up_layer_button, true)
 		Global.disable_button(Global.move_down_layer_button, true)
 		Global.disable_button(Global.merge_down_layer_button, true)
-	elif !layers[current_layer].locked:
+	elif !layers[current_layer].is_locked_in_hierarchy():
 		Global.disable_button(Global.remove_layer_button, false)
 
 
@@ -625,7 +663,7 @@ func _toggle_layer_buttons_current_layer() -> void:
 		Global.disable_button(Global.merge_down_layer_button, true)
 
 	if current_layer < layers.size():
-		if layers[current_layer].locked:
+		if layers[current_layer].is_locked_in_hierarchy():
 			Global.disable_button(Global.remove_layer_button, true)
 		else:
 			if layers.size() > 1:
@@ -697,6 +735,7 @@ func is_empty() -> bool:
 	return (
 		frames.size() == 1
 		and layers.size() == 1
+		and layers[0] is PixelLayer
 		and frames[0].cels[0].image.is_invisible()
 		and animation_tags.size() == 0
 	)

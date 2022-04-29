@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/UI/Timeline/CelButton.gd" type="Script" id=1]
+[ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=1]
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=3]
+[ext_resource path="res://src/UI/Timeline/CelButton.gd" type="Script" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 3 )
+shader = ExtResource( 1 )
 shader_param/size = 10.0
 shader_param/alpha = 1.0
 shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
@@ -26,7 +26,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 toggle_mode = true
 button_mask = 7
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

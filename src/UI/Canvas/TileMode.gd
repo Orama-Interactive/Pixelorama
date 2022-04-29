@@ -16,9 +16,15 @@ func _draw() -> void:
 	var modulate_color := Color(
 		tilemode_opacity, tilemode_opacity, tilemode_opacity, tilemode_opacity
 	)  # premultiply alpha blending is applied
+
+	# TODO: Make this all work with the new system...
+	# One option would be to give a viewport again, another would be to attach
+	# the material to this as well.
+	return
 	var current_frame_texture: Texture = Global.canvas.currently_visible_frame.get_texture()
 	for pos in positions:
 		draw_texture(current_frame_texture, pos, modulate_color)
+#		draw_rect()
 
 	draw_set_transform(position, rotation, scale)
 
