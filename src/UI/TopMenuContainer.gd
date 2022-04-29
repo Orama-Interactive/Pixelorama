@@ -22,6 +22,7 @@ enum ImageMenuId {
 	INVERT_COLORS,
 	DESATURATION,
 	OUTLINE,
+	DROP_SHADOW,
 	HSV,
 	GRADIENT,
 	SHADER
@@ -273,6 +274,7 @@ func _setup_image_menu() -> void:
 		"Invert Colors": 0,
 		"Desaturation": 0,
 		"Outline": 0,
+		"Drop Shadow": 0,
 		"Adjust Hue/Saturation/Value": 0,
 		"Gradient": 0,
 		# "Shader": 0
@@ -636,6 +638,9 @@ func image_menu_id_pressed(id: int) -> void:
 		ImageMenuId.OUTLINE:
 			_show_add_outline_popup()
 
+		ImageMenuId.DROP_SHADOW:
+			_show_drop_shadow_popup()
+
 		ImageMenuId.HSV:
 			_show_hsv_configuration_popup()
 
@@ -668,6 +673,11 @@ func _show_rotate_image_popup() -> void:
 
 func _show_add_outline_popup() -> void:
 	Global.control.get_node("Dialogs/ImageEffects/OutlineDialog").popup_centered()
+	Global.dialog_open(true)
+
+
+func _show_drop_shadow_popup() -> void:
+	Global.control.get_node("Dialogs/ImageEffects/DropShadowDialog").popup_centered()
 	Global.dialog_open(true)
 
 

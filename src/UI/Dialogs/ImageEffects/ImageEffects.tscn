@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/FlipImageDialog.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/InvertColorsDialog.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/DesaturateDialog.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/DropShadowDialog.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/ResizeCanvas.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/RotateImage.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/ShaderEffect.tscn" type="PackedScene" id=10]
@@ -33,8 +34,11 @@ margin_bottom = 392.0
 [node name="DesaturateDialog" parent="." instance=ExtResource( 3 )]
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 13 )]
+visible = false
 margin_right = 217.0
 margin_bottom = 106.0
+
+[node name="DropShadowDialog" parent="." instance=ExtResource( 4 )]
 
 [node name="HSVDialog" parent="." instance=ExtResource( 11 )]
 

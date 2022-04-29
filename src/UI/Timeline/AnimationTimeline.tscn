@@ -111,9 +111,6 @@ script = ExtResource( 1 )
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TimelineContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 902.0
@@ -398,9 +395,6 @@ margin_top = -7.0
 margin_right = 5.0
 margin_bottom = 7.0
 texture = ExtResource( 27 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="FrameTagButton" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 72.0
@@ -477,9 +471,6 @@ margin_top = -5.5
 margin_right = 7.5
 margin_bottom = 5.5
 texture = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons"]
 margin_left = 180.0
@@ -816,7 +807,20 @@ size_flags_horizontal = 3
 theme = SubResource( 20 )
 scroll_vertical_enabled = false
 
-[node name="TagContainer" type="Control" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/TagScroll"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/TagScroll"]
+margin_right = 683.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="TagSpacer" type="Control" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/TagScroll/HBoxContainer"]
+margin_bottom = 32.0
+
+[node name="TagContainer" type="Control" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/TagScroll/HBoxContainer"]
+margin_right = 683.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/TimelineContainer"]
 margin_top = 78.0
@@ -824,22 +828,32 @@ margin_right = 902.0
 margin_bottom = 160.0
 size_flags_vertical = 3
 
-[node name="TimelineScroll" type="ScrollContainer" parent="ScrollContainer/TimelineContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 895.0
 margin_bottom = 75.0
+custom_constants/separation = -2
 
-[node name="LayersAndFrames" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll"]
+[node name="StartSpacer" type="Control" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer"]
+margin_bottom = 68.0
+
+[node name="TimelineScroll" type="ScrollContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer"]
+margin_left = -2.0
+margin_right = 890.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="LayersAndFrames" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll"]
 margin_right = 81.0
 margin_bottom = 68.0
 size_flags_vertical = 3
 
-[node name="LayerVBoxCont" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames"]
+[node name="LayerVBoxCont" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames"]
 margin_right = 41.0
 margin_bottom = 68.0
 
-[node name="LayerLabel" type="Label" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
+[node name="LayerLabel" type="Label" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
 margin_right = 41.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
@@ -847,29 +861,34 @@ text = "Layers"
 align = 1
 valign = 1
 
-[node name="LayersContainer" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
+[node name="LayersContainer" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
 margin_top = 20.0
 margin_right = 41.0
 margin_bottom = 20.0
 
-[node name="FrameButtonsAndIds" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames"]
+[node name="FrameButtonsAndIds" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames"]
 margin_left = 45.0
 margin_right = 81.0
 margin_bottom = 68.0
 
-[node name="FrameIDs" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
+[node name="FrameIDs" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
 margin_right = 36.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 16 )
 
-[node name="FrameButton" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds/FrameIDs" instance=ExtResource( 9 )]
+[node name="FrameButton" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds/FrameIDs" instance=ExtResource( 9 )]
 margin_right = 36.0
 rect_min_size = Vector2( 36, 0 )
 
-[node name="FramesContainer" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
+[node name="FramesContainer" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
 margin_top = 24.0
 margin_right = 36.0
 margin_bottom = 24.0
+
+[node name="EndSpacer" type="Control" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer"]
+margin_left = 888.0
+margin_right = 888.0
+margin_bottom = 68.0
 
 [node name="AnimationTimer" type="Timer" parent="."]
 
@@ -985,6 +1004,8 @@ autowrap = true
 
 [node name="FrameTagDialog" parent="." instance=ExtResource( 42 )]
 
+[connection signal="item_rect_changed" from="." to="." method="_on_AnimationTimeline_item_rect_changed"]
+[connection signal="item_rect_changed" from="ScrollContainer/TimelineContainer" to="." method="_on_TimelineContainer_item_rect_changed"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
