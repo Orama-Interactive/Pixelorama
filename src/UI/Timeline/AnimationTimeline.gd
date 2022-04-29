@@ -23,12 +23,25 @@ onready var tag_scroll_container: ScrollContainer = find_node("TagScroll")
 onready var fps_spinbox: SpinBox = find_node("FPSValue")
 onready var onion_skinning_button: BaseButton = find_node("OnionSkinning")
 onready var loop_animation_button: BaseButton = find_node("LoopAnim")
+onready var blendmode_option: OptionButton = find_node("BlendModeOption")
 
 
 func _ready() -> void:
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
+
+	blendmode_option.add_item("Normal")
+	blendmode_option.add_item("Add")
+	blendmode_option.add_item("Subtract")
+	blendmode_option.add_item("Multiply")
+	blendmode_option.add_item("Screen")
+	blendmode_option.add_item("Difference")
+	blendmode_option.add_item("Burn")
+	blendmode_option.add_item("Dodge")
+	blendmode_option.add_item("Overlay")
+	blendmode_option.add_item("Soft Light")
+	blendmode_option.add_item("Hard Light")
 
 	# Set important size_flags (intentionally set at runtime)
 	# Otherwise you yont be able to see "TimelineScroll" in editor
@@ -799,3 +812,10 @@ func _on_OpacitySlider_value_changed(value) -> void:
 
 func _on_OnionSkinningSettings_popup_hide() -> void:
 	Global.can_draw = true
+
+
+func _on_BlendModeOption_item_selected(index) -> void:
+	var current_layer: Layer = Global.current_project.layers[Global.current_project.current_layer]
+	current_layer.blend_mode = index
+	Global.canvas.update()
+	Global.canvas.generate_shader()

@@ -7,15 +7,17 @@ var visible := true
 var locked := false
 var new_cels_linked := false
 var linked_cels := []  # Array of Frames
+var blend_mode := 0
 
 
 func _init(
-	_name := "", _visible := true, _locked := false, _new_cels_linked := false, _linked_cels := []
+	_name := "", _visible := true, _locked := false, _new_cels_linked := false, _blend_mode := 0, _linked_cels := []
 ) -> void:
 	name = _name
 	visible = _visible
 	locked = _locked
 	new_cels_linked = _new_cels_linked
+	blend_mode = _blend_mode
 	linked_cels = _linked_cels
 
 

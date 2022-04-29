@@ -153,6 +153,7 @@ onready var move_down_layer_button: BaseButton = animation_timeline.find_node("M
 onready var merge_down_layer_button: BaseButton = animation_timeline.find_node("MergeDownLayer")
 onready var layer_opacity_slider: HSlider = animation_timeline.find_node("OpacitySlider")
 onready var layer_opacity_spinbox: SpinBox = animation_timeline.find_node("OpacitySpinBox")
+onready var layer_blend_mode_option: OptionButton = animation_timeline.find_node("BlendModeOption")
 
 onready var open_sprites_dialog: FileDialog = control.find_node("OpenSprite")
 onready var save_sprites_dialog: FileDialog = control.find_node("SaveSprite")

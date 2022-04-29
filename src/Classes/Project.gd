@@ -306,6 +306,7 @@ func serialize() -> Dictionary:
 				"visible": layer.visible,
 				"locked": layer.locked,
 				"new_cels_linked": layer.new_cels_linked,
+				"blend_mode": layer.blend_mode,
 				"linked_cels": linked_cels,
 			}
 		)
@@ -407,6 +408,7 @@ func deserialize(dict: Dictionary) -> void:
 					saved_layer.visible,
 					saved_layer.locked,
 					saved_layer.new_cels_linked,
+					saved_layer.blend_mode,
 					linked_cels
 				)
 				layers.append(layer)
@@ -526,6 +528,8 @@ func _layers_changed(value: Array) -> void:
 	self.current_frame = current_frame  # Call frame_changed to update UI
 	_toggle_layer_buttons_layers()
 
+	Global.canvas.generate_shader()
+
 
 func _remove_cel_buttons() -> void:
 	for container in Global.frames_container.get_children():
@@ -597,6 +601,10 @@ func _layer_changed(value: int) -> void:
 				Global.layers_container.get_child_count() - 1 - current_layer_tmp
 			)
 			layer_button.pressed = true
+	
+	var layer_blend_mode: int = Global.current_project.layers[value].blend_mode
+	Global.layer_blend_mode_option.selected = layer_blend_mode
+
 
 
 func _toggle_layer_buttons_layers() -> void:
@@ -716,6 +724,7 @@ func duplicate_layers() -> Array:
 			new_layers[i].visible,
 			new_layers[i].locked,
 			new_layers[i].new_cels_linked,
+			new_layers[i].blend_mode,
 			new_linked_cels
 		)
 

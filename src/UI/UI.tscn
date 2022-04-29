@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://src/UI/Tools.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -182,6 +182,16 @@ shader_param/rect_size = Vector2( 0, 0 )
 shader_param/follow_movement = false
 shader_param/follow_scale = false
 
+[sub_resource type="Shader" id=33]
+code = "shader_type canvas_item;
+
+void fragment() {
+	COLOR.rgb = vec3(0.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=34]
+shader = SubResource( 33 )
+
 [sub_resource type="ShaderMaterial" id=27]
 shader = ExtResource( 8 )
 
@@ -285,6 +295,7 @@ script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/ViewportContainer"]
 size = Vector2( 862, 466 )
+handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
 
@@ -292,6 +303,7 @@ render_target_update_mode = 3
 material = SubResource( 2 )
 
 [node name="Canvas" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/ViewportContainer/Viewport" instance=ExtResource( 19 )]
+material = SubResource( 34 )
 
 [node name="Camera2D" type="Camera2D" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/ViewportContainer/Viewport"]
 current = true

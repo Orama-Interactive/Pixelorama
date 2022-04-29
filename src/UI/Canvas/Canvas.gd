@@ -1,6 +1,19 @@
 class_name Canvas
 extends Node2D
 
+enum BlendMode {NORMAL, 
+				ADD,
+				SUB,
+				MUL,
+				SCREEN,
+				DIFFERENCE,
+				BURN,
+				DODGE,
+				OVERLAY,
+				SOFT_LIGHT,
+				HARD_LIGHT,
+				}
+
 var current_pixel := Vector2.ZERO
 var sprite_changed_this_frame := false  # For optimization purposes
 var move_preview_location := Vector2.ZERO
@@ -22,6 +35,8 @@ func _ready() -> void:
 	$OnionFuture.blue_red_color = Color.red
 	yield(get_tree(), "idle_frame")
 	camera_zoom()
+	
+	generate_shader()
 
 
 func _draw() -> void:
@@ -41,9 +56,14 @@ func _draw() -> void:
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
 		if Global.current_project.layers[i].visible:  # if it's visible
 			if i == current_layer:
-				draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
+				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
 			else:
 				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
+#move_preview_location,
+
+	for i in range(Global.current_project.layers.size()):
+		if Global.current_project.layers[i].visible:  # if it's visible
+			material.set_shader_param("tex%s" % i, current_cels[i].image_texture)
 
 	if Global.onion_skinning:
 		refresh_onion()
@@ -101,6 +121,62 @@ func camera_zoom() -> void:
 		camera.save_values_to_project()
 
 	Global.transparent_checker.update_rect()
+
+
+func generate_shader() -> void:
+#	var current_cels: Array = Global.current_project.frames[Global.current_project.current_frame].cels
+	var current_layers: Array = Global.current_project.layers
+
+	var uniforms := ""
+	var draws := ""
+	for i in range(Global.current_project.layers.size()):
+#		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
+		if Global.current_project.layers[i].visible:  # if it's visible
+			uniforms += "uniform sampler2D tex%s;" % i
+			
+			var tex := "texture(tex%s, UV)" % i
+			var normal := "mix(col.rgb, {tex}.rgb, {tex}.a).rgb".format({"tex": tex})
+			var blend := ""
+			match current_layers[i].blend_mode:
+				BlendMode.NORMAL:
+					blend = "mix(col.rgb, {tex}.rgb, {tex}.a)"
+				BlendMode.ADD:
+					blend = "mix(col.rgb, clamp(col.rgb + {tex}.rgb, 0.0, 1.0).rgb, {tex}.a).rgb"
+				BlendMode.SUB:
+					blend = "mix(col.rgb, clamp(col.rgb - {tex}.rgb, 0.0, 1.0).rgb, {tex}.a).rgb"
+				BlendMode.MUL:
+					blend = "mix(col.rgb, clamp(col.rgb * {tex}.rgb, 0.0, 1.0).rgb, {tex}.a).rgb"
+				BlendMode.SCREEN:
+					blend = "mix(col.rgb, clamp(mix(col.rgb, 1.0 - (1.0 - col.rgb) * (1.0 - {tex}.rgb), {tex}.a), 0.0, 1.0).rgb, {tex}.a).rgb"
+				BlendMode.DIFFERENCE:
+					blend = "mix(col.rgb, clamp(abs(col.rgb - {tex}.rgb), 0.0, 1.0).rgb, {tex}.a).rgb"
+				BlendMode.BURN:
+					blend = "mix(col.rgb, clamp(1.0 - (1.0 - col.rgb) / {tex}.rgb, 0.0, 1.0).rgb, {tex}.a).rgb"
+				BlendMode.DODGE:
+					blend = "mix(col.rgb, clamp(col.rgb / (1.0 - {tex}.rgb), 0.0, 1.0).rgb, {tex}.a).rgb"
+				BlendMode.OVERLAY:
+					blend = "mix(col.rgb, clamp(mix(2.0 * col.rgb * {tex}.rgb, 1.0 - 2.0 * (1.0 - {tex}.rgb) * (1.0 - col.rgb), round(col.rgb)), 0.0, 1.0).rgb, {tex}.a).rgb"
+				BlendMode.SOFT_LIGHT:
+					blend = "mix(col.rgb, clamp(mix(2.0 * col.rgb * {tex}.rgb + col.rgb * col.rgb * (1.0 - 2.0 * {tex}.rgb), sqrt(col.rgb) * (2.0 * {tex}.rgb - 1.0) + (2.0 * col.rgb) * (1.0 - {tex}.rgb), round(col.rgb)), 0.0, 1.0).rgb, {tex}.a).rgb"
+				BlendMode.HARD_LIGHT:
+					blend = "mix(col.rgb, clamp(mix(2.0 * {tex}.rgb * col.rgb, 1.0 - 2.0 * (1.0 - col.rgb) * (1.0 - {tex}.rgb), round(col.rgb)), 0.0, 1.0).rgb, {tex}.a).rgb"
+
+			blend = blend.format({"tex": tex})
+			draws += "col.rgb = mix({normal}, {blend}, col.a);".format({"normal": normal, "blend": blend})
+			draws += "col.a = mix(col.a, 1.0, {tex}.a);".format({"tex": tex})
+
+	var code : String = """
+shader_type canvas_item;
+
+{uniforms}
+
+void fragment() {
+	vec4 col;
+	{draws}
+	COLOR = col;
+}"""
+	code = code.format({"uniforms": uniforms, "draws": draws})
+	material.shader.code = code
 
 
 func update_texture(layer_i: int, frame_i := -1, project: Project = Global.current_project) -> void:

@@ -34,7 +34,7 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-expand_margin_bottom = 32.0
+expand_margin_bottom = 64.0
 
 [sub_resource type="InputEventKey" id=3]
 control = true
@@ -288,9 +288,6 @@ margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Control" type="Control" parent="ScrollContainer/TimelineContainer/TimelineButtons"]
 margin_left = 190.0
@@ -744,10 +741,42 @@ value = 6.0
 align = 1
 suffix = "FPS"
 
-[node name="OpacityAndTagContainer" type="HBoxContainer" parent="ScrollContainer/TimelineContainer"]
+[node name="LayerBlendMode" type="HBoxContainer" parent="ScrollContainer/TimelineContainer"]
 margin_top = 42.0
 margin_right = 902.0
-margin_bottom = 74.0
+margin_bottom = 62.0
+custom_constants/separation = 2
+
+[node name="SpacerControl" type="Control" parent="ScrollContainer/TimelineContainer/LayerBlendMode"]
+margin_right = 4.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 4, 0 )
+
+[node name="BlendLabel" type="Label" parent="ScrollContainer/TimelineContainer/LayerBlendMode"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 83.0
+margin_bottom = 17.0
+text = "Blend Mode"
+
+[node name="BlendModeOption" type="OptionButton" parent="ScrollContainer/TimelineContainer/LayerBlendMode"]
+margin_left = 85.0
+margin_right = 186.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 101, 0 )
+align = 1
+
+[node name="SpacerControl2" type="Control" parent="ScrollContainer/TimelineContainer/LayerBlendMode"]
+margin_left = 188.0
+margin_right = 902.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 4, 0 )
+size_flags_horizontal = 3
+
+[node name="OpacityAndTagContainer" type="HBoxContainer" parent="ScrollContainer/TimelineContainer"]
+margin_top = 66.0
+margin_right = 902.0
+margin_bottom = 98.0
 custom_constants/separation = 2
 
 [node name="SpacerControl" type="Control" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer"]
@@ -823,7 +852,7 @@ margin_bottom = 32.0
 size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/TimelineContainer"]
-margin_top = 78.0
+margin_top = 102.0
 margin_right = 902.0
 margin_bottom = 160.0
 size_flags_vertical = 3
@@ -832,26 +861,26 @@ size_flags_vertical = 3
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 895.0
-margin_bottom = 75.0
+margin_bottom = 51.0
 custom_constants/separation = -2
 
 [node name="StartSpacer" type="Control" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer"]
-margin_bottom = 68.0
+margin_bottom = 44.0
 
 [node name="TimelineScroll" type="ScrollContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer"]
 margin_left = -2.0
 margin_right = 890.0
-margin_bottom = 68.0
+margin_bottom = 44.0
 size_flags_horizontal = 3
 
 [node name="LayersAndFrames" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll"]
 margin_right = 81.0
-margin_bottom = 68.0
+margin_bottom = 44.0
 size_flags_vertical = 3
 
 [node name="LayerVBoxCont" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames"]
 margin_right = 41.0
-margin_bottom = 68.0
+margin_bottom = 44.0
 
 [node name="LayerLabel" type="Label" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames/LayerVBoxCont"]
 margin_right = 41.0
@@ -869,7 +898,7 @@ margin_bottom = 20.0
 [node name="FrameButtonsAndIds" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames"]
 margin_left = 45.0
 margin_right = 81.0
-margin_bottom = 68.0
+margin_bottom = 44.0
 
 [node name="FrameIDs" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
 margin_right = 36.0
@@ -888,7 +917,7 @@ margin_bottom = 24.0
 [node name="EndSpacer" type="Control" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer"]
 margin_left = 888.0
 margin_right = 888.0
-margin_bottom = 68.0
+margin_bottom = 44.0
 
 [node name="AnimationTimer" type="Timer" parent="."]
 
@@ -1028,6 +1057,7 @@ autowrap = true
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/OnionSkinning" to="." method="_on_OnionSkinning_pressed"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="value_changed" from="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
+[connection signal="item_selected" from="ScrollContainer/TimelineContainer/LayerBlendMode/BlendModeOption" to="." method="_on_BlendModeOption_item_selected"]
 [connection signal="value_changed" from="ScrollContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="value_changed" from="ScrollContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
