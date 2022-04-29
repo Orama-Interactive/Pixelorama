@@ -35,6 +35,7 @@ const TRANSLATORS_DICTIONARY := {
 	"ax trifonov (ax34)": ["Russian"],
 	"Artem (blinovartem)": ["Russian"],
 	"Иван Соколов (SokoL1337)": ["Russian"],
+	"Daniil Belyakov (ermegil)": ["Russian"],
 	"stomleny_cmok": ["Russian", "Ukrainian"],
 	"Bohdan Matviiv (BodaMat)": ["Ukrainian"],
 	"Kinwailo": ["Chinese Traditional"],
@@ -52,6 +53,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Jose Callejas (satorikeiko)": ["Spanish"],
 	"Javier Ocampos (Leedeo)": ["Spanish"],
 	"Art Leeman (artleeman)": ["Spanish"],
+	"DevCentu": ["Spanish"],
 	"Seifer23": ["Catalan"],
 	"Agnis Aldiņš (NeZvers)": ["Latvian"],
 	"Edgars Korns (Eddy11)": ["Latvian"],
@@ -59,6 +61,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Blend_Smile": ["Indonesian"],
 	"NoahParaduck": ["Indonesian"],
 	"Channeling": ["Indonesian"],
+	"heydootdoot": ["Indonesian"],
 	"Martin Novák (novhack)": ["Czech"],
 	"Lullius": ["Norwegian Bokmål"],
 	"Aninuscsalas": ["Hungarian"],
@@ -77,6 +80,18 @@ const TRANSLATORS_DICTIONARY := {
 	"br.bahrampour": ["Turkish"],
 	"gegekyz": ["Turkish"],
 	"Vancat": ["Turkish"],
+	"Ferhat Geçdoğan (ferhatgec)": ["Turkish"],
+	"designy": ["Turkish"],
+	"GGIEnrike":
+	[
+		"Romanian",
+		"French",
+		"German",
+		"Italian",
+		"Portuguese",
+		"Serbian (Cyrillic)",
+		"Brazilian Portuguese"
+	],
 }
 
 export(Array, String, MULTILINE) var licenses: Array
@@ -195,6 +210,7 @@ func create_donors() -> void:
 	donors.create_item(donors_root).set_text(0, "  Benedikt")
 	donors.create_item(donors_root).set_text(0, "  David Maziarka")
 	donors.create_item(donors_root).set_text(0, "  Jonas Rudlang")
+	donors.create_item(donors_root).set_text(0, "  ShikadiGum")
 
 
 func create_contributors() -> void:
@@ -240,6 +256,7 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Marquis Kurt (alicerunsonfedora)")
 	contributors.create_item(contributor_root).set_text(0, "  Silent Orb (silentorb)")
 	contributors.create_item(contributor_root).set_text(0, "  JumpJetAvocado")
+	contributors.create_item(contributor_root).set_text(0, "  ArthyChaux")
 
 
 func create_translators() -> void:
@@ -248,7 +265,11 @@ func create_translators() -> void:
 	for translator in translator_list:
 		var languages: Array = TRANSLATORS_DICTIONARY[translator]
 		var language_string: String = tr(languages[0])
-		if languages.size() == 2:
-			language_string += " %s %s" % [tr("and"), tr(languages[1])]
+		for i in range(1, languages.size()):
+			if i == languages.size() - 1:
+				language_string += " %s %s" % [tr("and"), tr(languages[i])]
+			else:
+				language_string += ", %s" % [tr(languages[i])]
+
 		var text := "  %s - %s" % [translator, language_string]
 		translators.create_item(translators_root).set_text(0, text)

@@ -1,0 +1,120 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/DropShadowDialog.gd" type="Script" id=2]
+
+[node name="DropShadowDialog" type="ConfirmationDialog"]
+margin_right = 294.0
+margin_bottom = 352.0
+rect_min_size = Vector2( 172, 60.2 )
+window_title = "Drop Shadow"
+resizable = true
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 286.0
+margin_bottom = 316.0
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
+margin_right = 278.0
+margin_bottom = 200.0
+size_flags_vertical = 3
+
+[node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
+margin_left = 39.0
+margin_right = 239.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+expand = true
+stretch_mode = 5
+
+[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 1 )]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
+margin_top = 204.0
+margin_right = 278.0
+margin_bottom = 308.0
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+margin_top = 5.0
+margin_right = 160.0
+margin_bottom = 19.0
+text = "Offset X:"
+
+[node name="XSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+margin_left = 164.0
+margin_right = 278.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+max_value = 5.0
+value = 5.0
+allow_greater = true
+allow_lesser = true
+suffix = "px"
+
+[node name="YLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+margin_top = 33.0
+margin_right = 160.0
+margin_bottom = 47.0
+text = "Offset Y:"
+
+[node name="YSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+margin_left = 164.0
+margin_top = 28.0
+margin_right = 278.0
+margin_bottom = 52.0
+mouse_default_cursor_shape = 2
+max_value = 5.0
+value = 5.0
+allow_greater = true
+allow_lesser = true
+suffix = "px"
+
+[node name="ShadowColorLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+margin_top = 59.0
+margin_right = 160.0
+margin_bottom = 73.0
+text = "Shadow Color"
+
+[node name="ShadowColor" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer"]
+margin_left = 164.0
+margin_top = 56.0
+margin_right = 278.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 64, 20 )
+color = Color( 0.0823529, 0.0823529, 0.0823529, 0.627451 )
+
+[node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
+margin_top = 80.0
+margin_right = 160.0
+margin_bottom = 104.0
+mouse_default_cursor_shape = 2
+pressed = true
+text = "Only affect selection"
+
+[node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
+margin_left = 164.0
+margin_top = 80.0
+margin_right = 278.0
+margin_bottom = 104.0
+mouse_default_cursor_shape = 2
+text = "Selected cels"
+items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
+selected = 0
+
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/XSpinBox" to="." method="_on_XSpinBox_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/YSpinBox" to="." method="_on_YSpinBox_value_changed"]
+[connection signal="color_changed" from="VBoxContainer/OptionsContainer/ShadowColor" to="." method="_on_OutlineColor_color_changed"]

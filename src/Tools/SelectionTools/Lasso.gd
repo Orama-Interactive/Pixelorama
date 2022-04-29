@@ -45,21 +45,21 @@ func draw_preview() -> void:
 			canvas.draw_polyline(PoolVector2Array(line), Color.black)
 
 		# Handle mirroring
-		if tool_slot.horizontal_mirror:
+		if Tools.horizontal_mirror:
 			for line in _create_polylines(
 				_fill_bitmap_with_points(
 					mirror_array(_draw_points, true, false), Global.current_project.size
 				)
 			):
 				canvas.draw_polyline(PoolVector2Array(line), Color.black)
-			if tool_slot.vertical_mirror:
+			if Tools.vertical_mirror:
 				for line in _create_polylines(
 					_fill_bitmap_with_points(
 						mirror_array(_draw_points, true, true), Global.current_project.size
 					)
 				):
 					canvas.draw_polyline(PoolVector2Array(line), Color.black)
-		if tool_slot.vertical_mirror:
+		if Tools.vertical_mirror:
 			for line in _create_polylines(
 				_fill_bitmap_with_points(
 					mirror_array(_draw_points, false, true), Global.current_project.size
@@ -84,11 +84,11 @@ func apply_selection(_position) -> void:
 		lasso_selection(selection_bitmap_copy, _draw_points)
 
 		# Handle mirroring
-		if tool_slot.horizontal_mirror:
+		if Tools.horizontal_mirror:
 			lasso_selection(selection_bitmap_copy, mirror_array(_draw_points, true, false))
-			if tool_slot.vertical_mirror:
+			if Tools.vertical_mirror:
 				lasso_selection(selection_bitmap_copy, mirror_array(_draw_points, true, true))
-		if tool_slot.vertical_mirror:
+		if Tools.vertical_mirror:
 			lasso_selection(selection_bitmap_copy, mirror_array(_draw_points, false, true))
 
 		project.selection_bitmap = selection_bitmap_copy

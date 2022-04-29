@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-01-05 00:44\n"
+"PO-Revision-Date: 2022-03-30 23:32\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -66,6 +66,9 @@ msgstr "Selecciona"
 msgid "View"
 msgstr "Veure"
 
+msgid "Window"
+msgstr ""
+
 msgid "Image"
 msgstr "Imatge"
 
@@ -98,6 +101,9 @@ msgstr "Importar"
 
 msgid "Export"
 msgstr "Exportar"
+
+msgid "Overwrite"
+msgstr ""
 
 msgid "Export..."
 msgstr "Exportar..."
@@ -162,8 +168,8 @@ msgstr "Neteja"
 msgid "Invert"
 msgstr "Invertir"
 
-msgid "Flip"
-msgstr "Girar"
+msgid "Mirror Image"
+msgstr ""
 
 msgid "Flip Horizontal"
 msgstr "Voltejar horitzontalment"
@@ -181,6 +187,30 @@ msgid "Window Opacity"
 msgstr ""
 
 msgid "Panel Layout"
+msgstr ""
+
+msgid "Panels"
+msgstr ""
+
+msgid "Layouts"
+msgstr ""
+
+msgid "Moveable Panels"
+msgstr ""
+
+msgid "Manage Layouts"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Add Layout"
+msgstr ""
+
+msgid "Edit Layout"
+msgstr ""
+
+msgid "Are you sure you want to delete this layout?"
 msgstr ""
 
 msgid "Auto"
@@ -230,6 +260,9 @@ msgstr "Opcions d'importació"
 
 msgid "Import as:"
 msgstr "Importar com a:"
+
+msgid "Apply to all"
+msgstr ""
 
 msgid "Recent projects"
 msgstr "Darrers projectes"
@@ -309,10 +342,17 @@ msgstr "La ruta o directori de l'arxiu no existeix!"
 msgid "Exporting in progress..."
 msgstr ""
 
+msgid "Can't load file '%s'."
+msgstr ""
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "No es pot carregar el fitxer '%s'.\n"
 "Codi d'error: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr ""
 
 msgid "Frame"
 msgstr "Fotograma"
@@ -444,6 +484,12 @@ msgid "Backup"
 msgstr ""
 
 msgid "Performance"
+msgstr ""
+
+msgid "Extensions"
+msgstr ""
+
+msgid "Cursors"
 msgstr ""
 
 msgid "Indicators"
@@ -740,6 +786,18 @@ msgstr "Japonès"
 msgid "Ukrainian"
 msgstr "Ucraïnès"
 
+msgid "Danish"
+msgstr ""
+
+msgid "Swedish"
+msgstr ""
+
+msgid "Serbian (Cyrillic)"
+msgstr ""
+
+msgid "Dutch"
+msgstr ""
+
 msgid "Development Team"
 msgstr "Equip desenvolupador"
 
@@ -799,14 +857,11 @@ msgstr "Selecció El·líptica\n\n"
 "%s pel click esquerre del ratolí\n"
 "%s pel click dret del ratolí"
 
-msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "Selecció Poligonal\n"
-"Doble Click per connectar l'últim punt amb el primer\n\n"
-"%s pel click esquerre del ratolí\n"
-"%s pel click dret del ratolí"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
+msgstr ""
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -848,14 +903,11 @@ msgid "Pan\n\n"
 "%s for right mouse button"
 msgstr ""
 
-msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "Selector de Color\n"
-"Triar un color de un pixel del sprite\n\n"
-"%s pel botó esquerre del ratolí\n"
-"%s pel botó dret del ratolí"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -958,6 +1010,12 @@ msgid "Show right tool icon"
 msgstr "Mostrar icona de la eina dreta"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
+msgstr ""
+
+msgid "Use native mouse cursors"
+msgstr ""
+
+msgid "Use cross cursor for the canvas"
 msgstr ""
 
 msgid "Guides"
@@ -1107,6 +1165,21 @@ msgstr ""
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
+msgid "Add Extension"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "Open Folder"
+msgstr ""
+
 msgid "Brush:"
 msgstr "Pinzell:"
 
@@ -1140,7 +1213,8 @@ msgstr "Pixel Perfect"
 msgid "Fill inside"
 msgstr ""
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Fill Shape"
@@ -1794,6 +1868,9 @@ msgstr ""
 msgid "Frame duration"
 msgstr ""
 
+msgid "Duration"
+msgstr ""
+
 msgid "Tiled In Both Axis"
 msgstr ""
 
@@ -1837,5 +1914,32 @@ msgid "Reducing palette size will reset positions of colors. Colors that don't f
 msgstr ""
 
 msgid "Position:"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+msgid "Main Canvas"
+msgstr ""
+
+msgid "Second Canvas"
+msgstr ""
+
+msgid "Animation Timeline"
+msgstr ""
+
+msgid "Canvas Preview"
+msgstr ""
+
+msgid "Color Pickers"
+msgstr ""
+
+msgid "Global Tool Options"
+msgstr ""
+
+msgid "Left Tool Options"
+msgstr ""
+
+msgid "Right Tool Options"
 msgstr ""
 

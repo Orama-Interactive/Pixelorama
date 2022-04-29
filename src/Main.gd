@@ -3,12 +3,16 @@ extends Control
 var opensprite_file_selected := false
 var redone := false
 var is_quitting_on_save := false
-var cursor_image = preload("res://assets/graphics/cursor.png")
+var cursor_image: Texture = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI/DockableContainer
-onready var canvas_preview_container := ui.find_node("CanvasPreviewContainer")
-onready var scroll_container := ui.find_node("ColorAndToolOptions/ScrollContainer")
 onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
+onready var quit_and_save_dialog: ConfirmationDialog = find_node("QuitAndSaveDialog")
+
+
+func _init() -> void:
+	if OS.get_name() == "OSX":
+		_use_osx_shortcuts()
 
 
 func _ready() -> void:
@@ -16,19 +20,18 @@ func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 	_setup_application_window_size()
 
-	if OS.get_name() == "OSX":
-		_use_osx_shortcuts()
-
-	Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
-	Global.current_project.layers[0].name = tr("Layer") + " 0"
+	Global.current_project.layers.append(Layer.new())
+	var frame: Frame = Global.current_project.new_empty_frame()
+	Global.current_project.frames.append(frame)
+	Global.current_project.layers = Global.current_project.layers
 
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
 	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
 
-	Global.quit_and_save_dialog.add_button("Save & Exit", false, "Save")
-	Global.quit_and_save_dialog.get_ok().text = "Exit without saving"
+	quit_and_save_dialog.add_button("Save & Exit", false, "Save")
+	quit_and_save_dialog.get_ok().text = "Exit without saving"
 
 	Global.open_sprites_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
@@ -72,12 +75,6 @@ func _ready() -> void:
 
 	_show_splash_screen()
 
-	# Hacky way to update the panel's size... Unsure why this happens.
-	yield(get_tree(), "idle_frame")
-	ui.set_control_hidden(Global.palette_panel, true)
-	yield(get_tree(), "idle_frame")
-	ui.set_control_hidden(Global.palette_panel, false)
-
 
 func _input(event: InputEvent) -> void:
 	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
@@ -109,17 +106,18 @@ func _input(event: InputEvent) -> void:
 
 
 func _setup_application_window_size() -> void:
-	if OS.get_name() == "HTML5":
-		return
-	# Set a minimum window size to prevent UI elements from collapsing on each other.
-	OS.min_window_size = Vector2(1024, 576)
-
 	get_tree().set_screen_stretch(
 		SceneTree.STRETCH_MODE_DISABLED,
 		SceneTree.STRETCH_ASPECT_IGNORE,
 		Vector2(1024, 576),
 		Global.shrink
 	)
+	set_custom_cursor()
+
+	if OS.get_name() == "HTML5":
+		return
+	# Set a minimum window size to prevent UI elements from collapsing on each other.
+	OS.min_window_size = Vector2(1024, 576)
 
 	# Restore the window position/size if values are present in the configuration cache
 	if Global.config_cache.has_section_key("window", "screen"):
@@ -134,14 +132,32 @@ func _setup_application_window_size() -> void:
 			OS.window_size = Global.config_cache.get_value("window", "size")
 
 
+func set_custom_cursor() -> void:
+	if Global.native_cursors:
+		return
+
+	if Global.shrink == 1.0:
+		Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
+	else:
+		var cursor_data := cursor_image.get_data()
+		cursor_data.resize(
+			cursor_data.get_width() * Global.shrink, cursor_data.get_height() * Global.shrink, 0
+		)
+		var new_cursor_tex := ImageTexture.new()
+		new_cursor_tex.create_from_image(cursor_data, 0)
+		Input.set_custom_mouse_cursor(
+			new_cursor_tex, Input.CURSOR_CROSS, Vector2(15, 15) * Global.shrink
+		)
+
+
 func _show_splash_screen() -> void:
 	if not Global.config_cache.has_section_key("preferences", "startup"):
 		Global.config_cache.set_value("preferences", "startup", true)
 
 	if Global.config_cache.get_value("preferences", "startup"):
-		if OS.get_name() != "HTML5" and OS.window_size != Vector2(1280, 720):
-			# Wait for the window to adjust itself, so the popup is correctly centered
-			yield(get_tree(), "screen_resized")
+		# Wait for the window to adjust itself, so the popup is correctly centered
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
 
 		$Dialogs/SplashDialog.popup_centered()  # Splash screen
 		modulate = Color(0.5, 0.5, 0.5)
@@ -304,7 +320,7 @@ func show_quit_dialog() -> void:
 			else:
 				_on_QuitDialog_confirmed()
 		else:
-			Global.quit_and_save_dialog.call_deferred("popup_centered")
+			quit_and_save_dialog.call_deferred("popup_centered")
 
 	Global.dialog_open(true)
 
@@ -363,6 +379,7 @@ func _use_osx_shortcuts() -> void:
 
 
 func _exit_tree() -> void:
+	Global.config_cache.set_value("window", "layout", Global.top_menu_container.selected_layout)
 	Global.config_cache.set_value("window", "screen", OS.current_screen)
 	Global.config_cache.set_value(
 		"window", "maximized", OS.window_maximized || OS.window_fullscreen

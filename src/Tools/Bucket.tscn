@@ -22,6 +22,8 @@ corner_radius_bottom_left = 5
 anti_aliasing = false
 
 [node name="ToolOptions" instance=ExtResource( 2 )]
+margin_right = 138.0
+margin_bottom = 105.0
 script = ExtResource( 3 )
 
 [node name="Label" parent="." index="0"]
@@ -46,7 +48,55 @@ text = "Same color area"
 items = [ "Same color area", null, false, 0, null, "Same color pixels", null, false, 1, null ]
 selected = 0
 
-[node name="FillWith" type="Label" parent="." index="3"]
+[node name="Similarity" type="VBoxContainer" parent="." index="3"]
+visible = false
+margin_top = 60.0
+margin_right = 131.0
+margin_bottom = 122.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Similarity" index="0"]
+margin_left = 33.0
+margin_right = 97.0
+margin_bottom = 14.0
+size_flags_horizontal = 4
+text = "Similarity:"
+
+[node name="Value" type="SpinBox" parent="Similarity" index="1"]
+margin_left = 28.0
+margin_top = 18.0
+margin_right = 102.0
+margin_bottom = 42.0
+hint_tooltip = "How much two colors are Similar/Close together"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+step = 0.001
+value = 100.0
+align = 1
+suffix = "%"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Slider" type="HSlider" parent="Similarity" index="2"]
+margin_left = 19.0
+margin_top = 46.0
+margin_right = 111.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 92, 0 )
+hint_tooltip = "How much two colors are Similar/Close together"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+step = 0.001
+value = 100.0
+ticks_on_borders = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="FillWith" type="Label" parent="." index="4"]
 margin_left = 38.0
 margin_top = 60.0
 margin_right = 92.0
@@ -54,7 +104,7 @@ margin_bottom = 74.0
 size_flags_horizontal = 4
 text = "Fill with:"
 
-[node name="FillWithOptions" type="OptionButton" parent="." index="4"]
+[node name="FillWithOptions" type="OptionButton" parent="." index="5"]
 margin_left = 5.0
 margin_top = 78.0
 margin_right = 126.0
@@ -65,7 +115,7 @@ text = "Selected Color"
 items = [ "Selected Color", null, false, 0, null, "Pattern", null, false, 1, null ]
 selected = 0
 
-[node name="FillPattern" type="VBoxContainer" parent="." index="5"]
+[node name="FillPattern" type="VBoxContainer" parent="." index="6"]
 visible = false
 margin_left = 22.0
 margin_top = 102.0
@@ -137,30 +187,9 @@ margin_right = 85.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 
-[node name="PixelPerfect" parent="." index="6"]
-visible = false
-
-[node name="EmptySpacer" parent="." index="7"]
-visible = false
-margin_top = 212.0
-margin_right = 131.0
-margin_bottom = 224.0
-
-[node name="Mirror" parent="." index="8"]
-visible = false
-margin_top = 212.0
-margin_right = 131.0
-margin_bottom = 229.0
-
-[node name="Horizontal" parent="Mirror" index="0"]
-margin_left = 27.0
-margin_right = 42.0
-
-[node name="Vertical" parent="Mirror" index="1"]
-margin_left = 86.0
-margin_right = 103.0
-
 [connection signal="item_selected" from="FillAreaOptions" to="." method="_on_FillAreaOptions_item_selected"]
+[connection signal="value_changed" from="Similarity/Value" to="." method="_on_Value_value_changed"]
+[connection signal="value_changed" from="Similarity/Slider" to="." method="_on_Slider_value_changed"]
 [connection signal="item_selected" from="FillWithOptions" to="." method="_on_FillWithOptions_item_selected"]
 [connection signal="pressed" from="FillPattern/Type" to="." method="_on_PatternType_pressed"]
 [connection signal="value_changed" from="FillPattern/XOffset/OffsetX" to="." method="_on_PatternOffsetX_value_changed"]

@@ -1,8 +1,9 @@
 extends Node
 
+signal project_changed
+
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
-enum ThemeTypes { DARK, BLUE, CARAMEL, LIGHT }
 enum TileMode { NONE, BOTH, X_AXIS, Y_AXIS }
 enum IconColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
@@ -22,12 +23,12 @@ var ui_tooltips := {}
 # Canvas related stuff
 var layers_changed_skip := false
 var can_draw := false
+var move_guides_on_canvas := false
 var has_focus := false
 
 var play_only_tags := true
 var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
-var default_clear_color := Color.gray
 
 # Preferences
 var pressure_sensitivity_mode = PressureSensitivity.NONE
@@ -37,7 +38,6 @@ var smooth_zoom := true
 
 var shrink := 1.0
 var dim_on_popup := true
-var theme_type: int = ThemeTypes.DARK
 var modulate_icon_color := Color.gray
 var icon_color_from: int = IconColorFrom.THEME
 var custom_icon_color := Color.gray
@@ -80,8 +80,11 @@ var show_left_tool_icon := true
 var show_right_tool_icon := true
 var left_square_indicator_visible := true
 var right_square_indicator_visible := false
+var native_cursors := false
+var cross_cursor := true
 
 # View menu options
+var greyscale_view := false
 var mirror_view := false
 var draw_grid := false
 var draw_pixel_grid := false
@@ -98,24 +101,22 @@ var onion_skinning_blue_red := false
 var palettes := {}
 
 # Nodes
-var notification_label_node = preload("res://src/UI/NotificationLabel.tscn")
+var notification_label_node: PackedScene = preload("res://src/UI/NotificationLabel.tscn")
 
-onready var root: Node = get_tree().get_root()
-onready var control: Node = root.get_node("Control")
+onready var control: Node = get_tree().get_root().get_node("Control")
 
 onready var left_cursor: Sprite = control.find_node("LeftCursor")
 onready var right_cursor: Sprite = control.find_node("RightCursor")
 onready var canvas: Canvas = control.find_node("Canvas")
 onready var tabs: Tabs = control.find_node("Tabs")
 onready var main_viewport: ViewportContainer = control.find_node("ViewportContainer")
-onready var second_viewport: ViewportContainer = control.find_node("ViewportContainer2")
-onready var main_canvas_container: Container = control.find_node("Main Canvas")
+onready var second_viewport: ViewportContainer = control.find_node("Second Canvas")
 onready var canvas_preview_container: Container = control.find_node("Canvas Preview")
 onready var small_preview_viewport: ViewportContainer = canvas_preview_container.find_node(
 	"PreviewViewportContainer"
 )
 onready var camera: Camera2D = main_viewport.find_node("Camera2D")
-onready var camera2: Camera2D = control.find_node("Camera2D2")
+onready var camera2: Camera2D = second_viewport.find_node("Camera2D2")
 onready var camera_preview: Camera2D = control.find_node("CameraPreview")
 onready var cameras := [camera, camera2, camera_preview]
 onready var horizontal_ruler: BaseButton = control.find_node("HorizontalRuler")
@@ -123,13 +124,9 @@ onready var vertical_ruler: BaseButton = control.find_node("VerticalRuler")
 onready var transparent_checker: ColorRect = control.find_node("TransparentChecker")
 onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider")
 
-onready var tool_panel: Panel = control.find_node("Tools")
-onready var color_pickers: Container = control.find_node("Color Pickers")
-onready var left_tool_options_scroll: ScrollContainer = control.find_node("Left Tool Options")
-onready var right_tool_options_scroll: ScrollContainer = control.find_node("Right Tool Options")
 onready var brushes_popup: Popup = control.find_node("BrushesPopup")
 onready var patterns_popup: Popup = control.find_node("PatternsPopup")
-onready var palette_panel: PalettePanel = control.find_node("Palette Panel")
+onready var palette_panel: PalettePanel = control.find_node("Palettes")
 
 onready var top_menu_container: Panel = control.find_node("TopMenuContainer")
 onready var rotation_level_button: Button = control.find_node("RotationLevel")
@@ -163,7 +160,6 @@ onready var save_sprites_html5_dialog: ConfirmationDialog = control.find_node("S
 onready var export_dialog: AcceptDialog = control.find_node("ExportDialog")
 onready var preferences_dialog: AcceptDialog = control.find_node("PreferencesDialog")
 onready var error_dialog: AcceptDialog = control.find_node("ErrorDialog")
-onready var quit_and_save_dialog: ConfirmationDialog = control.find_node("QuitAndSaveDialog")
 
 onready var current_version: String = ProjectSettings.get_setting("application/config/Version")
 
@@ -185,10 +181,7 @@ func _ready() -> void:
 	var proj_size := Vector2(default_width, default_height)
 	projects.append(Project.new([], tr("untitled"), proj_size))
 	current_project = projects[0]
-	current_project.layers.append(PixelLayer.new())
 	current_project.fill_color = default_fill_color
-	var frame: Frame = current_project.new_empty_frame()
-	current_project.frames.append(frame)
 
 	for node in get_tree().get_nodes_in_group("UIButtons"):
 		var tooltip: String = node.hint_tooltip
@@ -200,8 +193,7 @@ func notification_label(text: String) -> void:
 	var notification: Label = notification_label_node.instance()
 	notification.text = tr(text)
 	notification.rect_position = Vector2(70, animation_timeline.rect_position.y)
-	notification.theme = control.theme
-	get_tree().get_root().add_child(notification)
+	control.add_child(notification)
 
 
 func general_undo(project: Project = current_project) -> void:
@@ -249,6 +241,10 @@ func undo_or_redo(
 
 		canvas.selection.update()
 		if action_name == "Scale":
+			for i in project.frames.size():
+				for j in project.layers.size():
+					var current_cel: Cel = project.frames[i].cels[j]
+					current_cel.image_texture.create_from_image(current_cel.image, 0)
 			canvas.camera_zoom()
 			canvas.grid.update()
 			canvas.pixel_grid.update()
@@ -280,7 +276,9 @@ func _project_changed(value: int) -> void:
 	canvas.selection.transform_content_confirm()
 	current_project_index = value
 	current_project = projects[value]
-	current_project.change_project()
+	connect("project_changed", current_project, "change_project")
+	emit_signal("project_changed")
+	disconnect("project_changed", current_project, "change_project")
 
 
 func dialog_open(open: bool) -> void:
@@ -314,14 +312,15 @@ func disable_button(button: BaseButton, disable: bool) -> void:
 
 
 func change_button_texturerect(texture_button: TextureRect, new_file_name: String) -> void:
+	if !texture_button.texture:
+		return
 	var file_name := texture_button.texture.resource_path.get_basename().get_file()
 	var directory_path := texture_button.texture.resource_path.get_basename().replace(file_name, "")
 	texture_button.texture = load(directory_path.plus_file(new_file_name))
 
 
 func update_hint_tooltips() -> void:
-	var tool_buttons: Container = control.find_node("ToolButtons")
-	tool_buttons.update_hintooltips()
+	Tools.update_hint_tooltips()
 
 	for tip in ui_tooltips:
 		tip.hint_tooltip = tr(ui_tooltips[tip]) % tip.shortcut.get_as_text()

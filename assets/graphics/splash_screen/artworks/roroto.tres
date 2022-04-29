@@ -1,0 +1,482 @@
+[gd_resource type="AnimatedTexture" load_steps=160 format=2]
+
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_001.png" type="Texture" id=1]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_002.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_003.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_004.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_005.png" type="Texture" id=5]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_006.png" type="Texture" id=6]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_007.png" type="Texture" id=7]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_008.png" type="Texture" id=8]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_009.png" type="Texture" id=9]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_010.png" type="Texture" id=10]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_011.png" type="Texture" id=11]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_012.png" type="Texture" id=12]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_013.png" type="Texture" id=13]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_014.png" type="Texture" id=14]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_015.png" type="Texture" id=15]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_016.png" type="Texture" id=16]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_017.png" type="Texture" id=17]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_018.png" type="Texture" id=18]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_019.png" type="Texture" id=19]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_020.png" type="Texture" id=20]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_021.png" type="Texture" id=21]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_022.png" type="Texture" id=22]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_023.png" type="Texture" id=23]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_024.png" type="Texture" id=24]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_025.png" type="Texture" id=25]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_026.png" type="Texture" id=26]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_027.png" type="Texture" id=27]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_028.png" type="Texture" id=28]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_029.png" type="Texture" id=29]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_030.png" type="Texture" id=30]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_031.png" type="Texture" id=31]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_032.png" type="Texture" id=32]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_033.png" type="Texture" id=33]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_034.png" type="Texture" id=34]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_035.png" type="Texture" id=35]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_036.png" type="Texture" id=36]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_037.png" type="Texture" id=37]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_038.png" type="Texture" id=38]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_039.png" type="Texture" id=39]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_040.png" type="Texture" id=40]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_041.png" type="Texture" id=41]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_042.png" type="Texture" id=42]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_043.png" type="Texture" id=43]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_044.png" type="Texture" id=44]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_045.png" type="Texture" id=45]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_046.png" type="Texture" id=46]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_047.png" type="Texture" id=47]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_048.png" type="Texture" id=48]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_049.png" type="Texture" id=49]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_050.png" type="Texture" id=50]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_051.png" type="Texture" id=51]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_052.png" type="Texture" id=52]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_053.png" type="Texture" id=53]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_054.png" type="Texture" id=54]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_055.png" type="Texture" id=55]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_056.png" type="Texture" id=56]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_057.png" type="Texture" id=57]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_058.png" type="Texture" id=58]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_059.png" type="Texture" id=59]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_060.png" type="Texture" id=60]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_061.png" type="Texture" id=61]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_062.png" type="Texture" id=62]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_063.png" type="Texture" id=63]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_064.png" type="Texture" id=64]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_065.png" type="Texture" id=65]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_066.png" type="Texture" id=66]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_067.png" type="Texture" id=67]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_068.png" type="Texture" id=68]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_069.png" type="Texture" id=69]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_070.png" type="Texture" id=70]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_071.png" type="Texture" id=71]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_072.png" type="Texture" id=72]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_073.png" type="Texture" id=73]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_074.png" type="Texture" id=74]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_075.png" type="Texture" id=75]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_076.png" type="Texture" id=76]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_077.png" type="Texture" id=77]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_078.png" type="Texture" id=78]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_079.png" type="Texture" id=79]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_080.png" type="Texture" id=80]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_081.png" type="Texture" id=81]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_082.png" type="Texture" id=82]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_083.png" type="Texture" id=83]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_084.png" type="Texture" id=84]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_085.png" type="Texture" id=85]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_086.png" type="Texture" id=86]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_087.png" type="Texture" id=87]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_088.png" type="Texture" id=88]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_089.png" type="Texture" id=89]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_090.png" type="Texture" id=90]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_091.png" type="Texture" id=91]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_092.png" type="Texture" id=92]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_093.png" type="Texture" id=93]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_094.png" type="Texture" id=94]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_095.png" type="Texture" id=95]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_096.png" type="Texture" id=96]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_097.png" type="Texture" id=97]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_098.png" type="Texture" id=98]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_099.png" type="Texture" id=99]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_100.png" type="Texture" id=100]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_101.png" type="Texture" id=101]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_102.png" type="Texture" id=102]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_103.png" type="Texture" id=103]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_104.png" type="Texture" id=104]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_105.png" type="Texture" id=105]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_106.png" type="Texture" id=106]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_107.png" type="Texture" id=107]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_108.png" type="Texture" id=108]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_109.png" type="Texture" id=109]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_110.png" type="Texture" id=110]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_111.png" type="Texture" id=111]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_112.png" type="Texture" id=112]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_113.png" type="Texture" id=113]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_114.png" type="Texture" id=114]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_115.png" type="Texture" id=115]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_116.png" type="Texture" id=116]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_117.png" type="Texture" id=117]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_118.png" type="Texture" id=118]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_119.png" type="Texture" id=119]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_120.png" type="Texture" id=120]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_121.png" type="Texture" id=121]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_122.png" type="Texture" id=122]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_123.png" type="Texture" id=123]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_124.png" type="Texture" id=124]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_125.png" type="Texture" id=125]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_126.png" type="Texture" id=126]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_127.png" type="Texture" id=127]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_128.png" type="Texture" id=128]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_129.png" type="Texture" id=129]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_130.png" type="Texture" id=130]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_131.png" type="Texture" id=131]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_132.png" type="Texture" id=132]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_133.png" type="Texture" id=133]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_134.png" type="Texture" id=134]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_135.png" type="Texture" id=135]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_136.png" type="Texture" id=136]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_137.png" type="Texture" id=137]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_138.png" type="Texture" id=138]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_139.png" type="Texture" id=139]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_140.png" type="Texture" id=140]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_141.png" type="Texture" id=141]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_142.png" type="Texture" id=142]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_143.png" type="Texture" id=143]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_144.png" type="Texture" id=144]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_145.png" type="Texture" id=145]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_146.png" type="Texture" id=146]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_147.png" type="Texture" id=147]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_148.png" type="Texture" id=148]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_149.png" type="Texture" id=149]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_150.png" type="Texture" id=150]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_151.png" type="Texture" id=151]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_152.png" type="Texture" id=152]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_153.png" type="Texture" id=153]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_154.png" type="Texture" id=154]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_155.png" type="Texture" id=155]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_156.png" type="Texture" id=156]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_157.png" type="Texture" id=157]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_158.png" type="Texture" id=158]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/roroto/roroto_159.png" type="Texture" id=159]
+
+[resource]
+frames = 159
+fps = 12.0
+frame_0/texture = ExtResource( 1 )
+frame_1/texture = ExtResource( 2 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 3 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 4 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 5 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 6 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 7 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 8 )
+frame_7/delay_sec = 0.0
+frame_8/texture = ExtResource( 9 )
+frame_8/delay_sec = 0.0
+frame_9/texture = ExtResource( 10 )
+frame_9/delay_sec = 0.0
+frame_10/texture = ExtResource( 11 )
+frame_10/delay_sec = 0.0
+frame_11/texture = ExtResource( 12 )
+frame_11/delay_sec = 0.0
+frame_12/texture = ExtResource( 13 )
+frame_12/delay_sec = 0.0
+frame_13/texture = ExtResource( 14 )
+frame_13/delay_sec = 0.0
+frame_14/texture = ExtResource( 15 )
+frame_14/delay_sec = 0.0
+frame_15/texture = ExtResource( 16 )
+frame_15/delay_sec = 0.0
+frame_16/texture = ExtResource( 17 )
+frame_16/delay_sec = 0.0
+frame_17/texture = ExtResource( 18 )
+frame_17/delay_sec = 0.0
+frame_18/texture = ExtResource( 19 )
+frame_18/delay_sec = 0.0
+frame_19/texture = ExtResource( 20 )
+frame_19/delay_sec = 0.0
+frame_20/texture = ExtResource( 21 )
+frame_20/delay_sec = 0.0
+frame_21/texture = ExtResource( 22 )
+frame_21/delay_sec = 0.0
+frame_22/texture = ExtResource( 23 )
+frame_22/delay_sec = 0.0
+frame_23/texture = ExtResource( 24 )
+frame_23/delay_sec = 0.0
+frame_24/texture = ExtResource( 25 )
+frame_24/delay_sec = 0.0
+frame_25/texture = ExtResource( 26 )
+frame_25/delay_sec = 0.0
+frame_26/texture = ExtResource( 27 )
+frame_26/delay_sec = 0.0
+frame_27/texture = ExtResource( 28 )
+frame_27/delay_sec = 0.0
+frame_28/texture = ExtResource( 29 )
+frame_28/delay_sec = 0.0
+frame_29/texture = ExtResource( 30 )
+frame_29/delay_sec = 0.0
+frame_30/texture = ExtResource( 31 )
+frame_30/delay_sec = 0.0
+frame_31/texture = ExtResource( 32 )
+frame_31/delay_sec = 0.0
+frame_32/texture = ExtResource( 33 )
+frame_32/delay_sec = 0.0
+frame_33/texture = ExtResource( 34 )
+frame_33/delay_sec = 0.0
+frame_34/texture = ExtResource( 35 )
+frame_34/delay_sec = 0.0
+frame_35/texture = ExtResource( 36 )
+frame_35/delay_sec = 0.0
+frame_36/texture = ExtResource( 37 )
+frame_36/delay_sec = 0.0
+frame_37/texture = ExtResource( 38 )
+frame_37/delay_sec = 0.0
+frame_38/texture = ExtResource( 39 )
+frame_38/delay_sec = 0.0
+frame_39/texture = ExtResource( 40 )
+frame_39/delay_sec = 0.0
+frame_40/texture = ExtResource( 41 )
+frame_40/delay_sec = 0.0
+frame_41/texture = ExtResource( 42 )
+frame_41/delay_sec = 0.0
+frame_42/texture = ExtResource( 43 )
+frame_42/delay_sec = 0.0
+frame_43/texture = ExtResource( 44 )
+frame_43/delay_sec = 0.0
+frame_44/texture = ExtResource( 45 )
+frame_44/delay_sec = 0.0
+frame_45/texture = ExtResource( 46 )
+frame_45/delay_sec = 0.0
+frame_46/texture = ExtResource( 47 )
+frame_46/delay_sec = 0.0
+frame_47/texture = ExtResource( 48 )
+frame_47/delay_sec = 0.0
+frame_48/texture = ExtResource( 49 )
+frame_48/delay_sec = 0.0
+frame_49/texture = ExtResource( 50 )
+frame_49/delay_sec = 0.0
+frame_50/texture = ExtResource( 51 )
+frame_50/delay_sec = 0.0
+frame_51/texture = ExtResource( 52 )
+frame_51/delay_sec = 0.0
+frame_52/texture = ExtResource( 53 )
+frame_52/delay_sec = 0.0
+frame_53/texture = ExtResource( 54 )
+frame_53/delay_sec = 0.0
+frame_54/texture = ExtResource( 55 )
+frame_54/delay_sec = 0.0
+frame_55/texture = ExtResource( 56 )
+frame_55/delay_sec = 0.0
+frame_56/texture = ExtResource( 57 )
+frame_56/delay_sec = 0.0
+frame_57/texture = ExtResource( 58 )
+frame_57/delay_sec = 0.0
+frame_58/texture = ExtResource( 59 )
+frame_58/delay_sec = 0.0
+frame_59/texture = ExtResource( 60 )
+frame_59/delay_sec = 0.0
+frame_60/texture = ExtResource( 61 )
+frame_60/delay_sec = 0.0
+frame_61/texture = ExtResource( 62 )
+frame_61/delay_sec = 0.0
+frame_62/texture = ExtResource( 63 )
+frame_62/delay_sec = 0.0
+frame_63/texture = ExtResource( 64 )
+frame_63/delay_sec = 0.0
+frame_64/texture = ExtResource( 65 )
+frame_64/delay_sec = 0.0
+frame_65/texture = ExtResource( 66 )
+frame_65/delay_sec = 0.0
+frame_66/texture = ExtResource( 67 )
+frame_66/delay_sec = 0.0
+frame_67/texture = ExtResource( 68 )
+frame_67/delay_sec = 0.0
+frame_68/texture = ExtResource( 69 )
+frame_68/delay_sec = 0.0
+frame_69/texture = ExtResource( 70 )
+frame_69/delay_sec = 0.0
+frame_70/texture = ExtResource( 71 )
+frame_70/delay_sec = 0.0
+frame_71/texture = ExtResource( 72 )
+frame_71/delay_sec = 0.0
+frame_72/texture = ExtResource( 73 )
+frame_72/delay_sec = 0.0
+frame_73/texture = ExtResource( 74 )
+frame_73/delay_sec = 0.0
+frame_74/texture = ExtResource( 75 )
+frame_74/delay_sec = 0.0
+frame_75/texture = ExtResource( 76 )
+frame_75/delay_sec = 0.0
+frame_76/texture = ExtResource( 77 )
+frame_76/delay_sec = 0.0
+frame_77/texture = ExtResource( 78 )
+frame_77/delay_sec = 0.0
+frame_78/texture = ExtResource( 79 )
+frame_78/delay_sec = 0.0
+frame_79/texture = ExtResource( 80 )
+frame_79/delay_sec = 0.0
+frame_80/texture = ExtResource( 81 )
+frame_80/delay_sec = 0.0
+frame_81/texture = ExtResource( 82 )
+frame_81/delay_sec = 0.0
+frame_82/texture = ExtResource( 83 )
+frame_82/delay_sec = 0.0
+frame_83/texture = ExtResource( 84 )
+frame_83/delay_sec = 0.0
+frame_84/texture = ExtResource( 85 )
+frame_84/delay_sec = 0.0
+frame_85/texture = ExtResource( 86 )
+frame_85/delay_sec = 0.0
+frame_86/texture = ExtResource( 87 )
+frame_86/delay_sec = 0.0
+frame_87/texture = ExtResource( 88 )
+frame_87/delay_sec = 0.0
+frame_88/texture = ExtResource( 89 )
+frame_88/delay_sec = 0.0
+frame_89/texture = ExtResource( 90 )
+frame_89/delay_sec = 0.0
+frame_90/texture = ExtResource( 91 )
+frame_90/delay_sec = 0.0
+frame_91/texture = ExtResource( 92 )
+frame_91/delay_sec = 0.0
+frame_92/texture = ExtResource( 93 )
+frame_92/delay_sec = 0.0
+frame_93/texture = ExtResource( 94 )
+frame_93/delay_sec = 0.0
+frame_94/texture = ExtResource( 95 )
+frame_94/delay_sec = 0.0
+frame_95/texture = ExtResource( 96 )
+frame_95/delay_sec = 0.0
+frame_96/texture = ExtResource( 97 )
+frame_96/delay_sec = 0.0
+frame_97/texture = ExtResource( 98 )
+frame_97/delay_sec = 0.0
+frame_98/texture = ExtResource( 99 )
+frame_98/delay_sec = 0.0
+frame_99/texture = ExtResource( 100 )
+frame_99/delay_sec = 0.0
+frame_100/texture = ExtResource( 101 )
+frame_100/delay_sec = 0.0
+frame_101/texture = ExtResource( 102 )
+frame_101/delay_sec = 0.0
+frame_102/texture = ExtResource( 103 )
+frame_102/delay_sec = 0.0
+frame_103/texture = ExtResource( 104 )
+frame_103/delay_sec = 0.0
+frame_104/texture = ExtResource( 105 )
+frame_104/delay_sec = 0.0
+frame_105/texture = ExtResource( 106 )
+frame_105/delay_sec = 0.0
+frame_106/texture = ExtResource( 107 )
+frame_106/delay_sec = 0.0
+frame_107/texture = ExtResource( 108 )
+frame_107/delay_sec = 0.0
+frame_108/texture = ExtResource( 109 )
+frame_108/delay_sec = 0.0
+frame_109/texture = ExtResource( 110 )
+frame_109/delay_sec = 0.0
+frame_110/texture = ExtResource( 111 )
+frame_110/delay_sec = 0.0
+frame_111/texture = ExtResource( 112 )
+frame_111/delay_sec = 0.0
+frame_112/texture = ExtResource( 113 )
+frame_112/delay_sec = 0.0
+frame_113/texture = ExtResource( 114 )
+frame_113/delay_sec = 0.0
+frame_114/texture = ExtResource( 115 )
+frame_114/delay_sec = 0.0
+frame_115/texture = ExtResource( 116 )
+frame_115/delay_sec = 0.0
+frame_116/texture = ExtResource( 117 )
+frame_116/delay_sec = 0.0
+frame_117/texture = ExtResource( 118 )
+frame_117/delay_sec = 0.0
+frame_118/texture = ExtResource( 119 )
+frame_118/delay_sec = 0.0
+frame_119/texture = ExtResource( 120 )
+frame_119/delay_sec = 0.0
+frame_120/texture = ExtResource( 121 )
+frame_120/delay_sec = 0.0
+frame_121/texture = ExtResource( 122 )
+frame_121/delay_sec = 0.0
+frame_122/texture = ExtResource( 123 )
+frame_122/delay_sec = 0.0
+frame_123/texture = ExtResource( 124 )
+frame_123/delay_sec = 0.0
+frame_124/texture = ExtResource( 125 )
+frame_124/delay_sec = 0.0
+frame_125/texture = ExtResource( 126 )
+frame_125/delay_sec = 0.0
+frame_126/texture = ExtResource( 127 )
+frame_126/delay_sec = 0.0
+frame_127/texture = ExtResource( 128 )
+frame_127/delay_sec = 0.0
+frame_128/texture = ExtResource( 129 )
+frame_128/delay_sec = 0.0
+frame_129/texture = ExtResource( 130 )
+frame_129/delay_sec = 0.0
+frame_130/texture = ExtResource( 131 )
+frame_130/delay_sec = 0.0
+frame_131/texture = ExtResource( 132 )
+frame_131/delay_sec = 0.0
+frame_132/texture = ExtResource( 133 )
+frame_132/delay_sec = 0.0
+frame_133/texture = ExtResource( 134 )
+frame_133/delay_sec = 0.0
+frame_134/texture = ExtResource( 135 )
+frame_134/delay_sec = 0.0
+frame_135/texture = ExtResource( 136 )
+frame_135/delay_sec = 0.0
+frame_136/texture = ExtResource( 137 )
+frame_136/delay_sec = 0.0
+frame_137/texture = ExtResource( 138 )
+frame_137/delay_sec = 0.0
+frame_138/texture = ExtResource( 139 )
+frame_138/delay_sec = 0.0
+frame_139/texture = ExtResource( 140 )
+frame_139/delay_sec = 0.0
+frame_140/texture = ExtResource( 141 )
+frame_140/delay_sec = 0.0
+frame_141/texture = ExtResource( 142 )
+frame_141/delay_sec = 0.0
+frame_142/texture = ExtResource( 143 )
+frame_142/delay_sec = 0.0
+frame_143/texture = ExtResource( 144 )
+frame_143/delay_sec = 0.0
+frame_144/texture = ExtResource( 145 )
+frame_144/delay_sec = 0.0
+frame_145/texture = ExtResource( 146 )
+frame_145/delay_sec = 0.0
+frame_146/texture = ExtResource( 147 )
+frame_146/delay_sec = 0.0
+frame_147/texture = ExtResource( 148 )
+frame_147/delay_sec = 0.0
+frame_148/texture = ExtResource( 149 )
+frame_148/delay_sec = 0.0
+frame_149/texture = ExtResource( 150 )
+frame_149/delay_sec = 0.0
+frame_150/texture = ExtResource( 151 )
+frame_150/delay_sec = 0.0
+frame_151/texture = ExtResource( 152 )
+frame_151/delay_sec = 0.0
+frame_152/texture = ExtResource( 153 )
+frame_152/delay_sec = 0.0
+frame_153/texture = ExtResource( 154 )
+frame_153/delay_sec = 0.0
+frame_154/texture = ExtResource( 155 )
+frame_154/delay_sec = 0.0
+frame_155/texture = ExtResource( 156 )
+frame_155/delay_sec = 0.0
+frame_156/texture = ExtResource( 157 )
+frame_156/delay_sec = 0.0
+frame_157/texture = ExtResource( 158 )
+frame_157/delay_sec = 0.0
+frame_158/texture = ExtResource( 159 )
+frame_158/delay_sec = 0.0

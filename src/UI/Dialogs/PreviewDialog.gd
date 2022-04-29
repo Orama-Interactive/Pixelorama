@@ -19,22 +19,29 @@ var current_import_option: int = ImageImportOptions.NEW_TAB
 var spritesheet_horizontal := 1
 var spritesheet_vertical := 1
 var brush_type: int = BrushTypes.FILE
+var opened_once = false
+var is_master: bool = false
+var hiding: bool = false
 
 onready var texture_rect: TextureRect = $VBoxContainer/CenterContainer/TextureRect
 onready var image_size_label: Label = $VBoxContainer/SizeContainer/ImageSizeLabel
 onready var frame_size_label: Label = $VBoxContainer/SizeContainer/FrameSizeLabel
 onready var spritesheet_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions
-onready var spritesheet_layer_options = $VBoxContainer/HBoxContainer/SpritesheetLayerOptions
+onready var spritesheet_lay_opt = $VBoxContainer/HBoxContainer/SpritesheetLayerOptions
 onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
 onready var replace_frame_options = $VBoxContainer/HBoxContainer/ReplaceFrameOptions
 onready var new_layer_options = $VBoxContainer/HBoxContainer/NewLayerOptions
 onready var new_brush_options = $VBoxContainer/HBoxContainer/NewBrushOptions
 onready var new_brush_name = $VBoxContainer/HBoxContainer/NewBrushOptions/BrushName
 
+onready var import_options: OptionButton = $VBoxContainer/HBoxContainer/ImportOption
+onready var apply_all: CheckBox = $VBoxContainer/ApplyAll
+
 
 func _on_PreviewDialog_about_to_show() -> void:
-	var import_options: OptionButton = get_node("VBoxContainer/HBoxContainer/ImportOption")
-
+	if opened_once:
+		return
+	opened_once = true
 	# # order as in ImageImportOptions enum
 	import_options.add_item("New tab")
 	import_options.add_item("Spritesheet (new tab)")
@@ -69,74 +76,160 @@ func _on_PreviewDialog_about_to_show() -> void:
 		+ "×"
 		+ str(image.get_size().y)
 	)
+	if OpenSave.preview_dialogs.size() > 1:
+		apply_all.visible = true
 
 
 func _on_PreviewDialog_popup_hide() -> void:
-	queue_free()
+	if hiding:  # if the popup is hiding because of master
+		return
+	elif is_master:  # if the master is closed then close others too
+		for child in Global.control.get_children():
+			if "PreviewDialog" in child.name:
+				OpenSave.preview_dialogs.erase(child)
+				child.queue_free()
+	else:  # dialogs being closed separately
+		OpenSave.preview_dialogs.erase(self)
+		queue_free()
 	# Call Global.dialog_open() only if it's the only preview dialog opened
-	for child in Global.control.get_children():
-		if child != self and "PreviewDialog" in child.name:
-			return
+	if OpenSave.preview_dialogs.size() != 0:
+		return
 	Global.dialog_open(false)
 
 
 func _on_PreviewDialog_confirmed() -> void:
-	if current_import_option == ImageImportOptions.NEW_TAB:
-		OpenSave.open_image_as_new_tab(path, image)
+	if is_master:  # if the master is confirmed then confirm others too
+		is_master = false
+		synchronize()
+		for child in Global.control.get_children():
+			if "PreviewDialog" in child.name:
+				child.emit_signal("confirmed")
+	else:
+		if current_import_option == ImageImportOptions.NEW_TAB:
+			OpenSave.open_image_as_new_tab(path, image)
 
-	elif current_import_option == ImageImportOptions.SPRITESHEET_TAB:
-		OpenSave.open_image_as_spritesheet_tab(
-			path, image, spritesheet_horizontal, spritesheet_vertical
-		)
+		elif current_import_option == ImageImportOptions.SPRITESHEET_TAB:
+			OpenSave.open_image_as_spritesheet_tab(
+				path, image, spritesheet_horizontal, spritesheet_vertical
+			)
 
-	elif current_import_option == ImageImportOptions.SPRITESHEET_LAYER:
-		var frame_index: int = spritesheet_layer_options.get_node("AtFrameSpinbox").value - 1
-		OpenSave.open_image_as_spritesheet_layer(
-			path,
-			image,
-			path.get_basename().get_file(),
-			spritesheet_horizontal,
-			spritesheet_vertical,
-			frame_index
-		)
+		elif current_import_option == ImageImportOptions.SPRITESHEET_LAYER:
+			var frame_index: int = spritesheet_lay_opt.get_node("AtFrameSpinbox").value - 1
+			OpenSave.open_image_as_spritesheet_layer(
+				path,
+				image,
+				path.get_basename().get_file(),
+				spritesheet_horizontal,
+				spritesheet_vertical,
+				frame_index
+			)
 
-	elif current_import_option == ImageImportOptions.NEW_FRAME:
-		var layer_index: int = new_frame_options.get_node("AtLayerSpinbox").value
-		OpenSave.open_image_as_new_frame(image, layer_index)
+		elif current_import_option == ImageImportOptions.NEW_FRAME:
+			var layer_index: int = new_frame_options.get_node("AtLayerSpinbox").value
+			OpenSave.open_image_as_new_frame(image, layer_index)
 
-	elif current_import_option == ImageImportOptions.REPLACE_FRAME:
-		var layer_index: int = replace_frame_options.get_node("AtLayerSpinbox").value
-		var frame_index: int = replace_frame_options.get_node("AtFrameSpinbox").value - 1
-		OpenSave.open_image_at_frame(image, layer_index, frame_index)
+		elif current_import_option == ImageImportOptions.REPLACE_FRAME:
+			var layer_index: int = replace_frame_options.get_node("AtLayerSpinbox").value
+			var frame_index: int = replace_frame_options.get_node("AtFrameSpinbox").value - 1
+			OpenSave.open_image_at_frame(image, layer_index, frame_index)
 
-	elif current_import_option == ImageImportOptions.NEW_LAYER:
-		var frame_index: int = new_layer_options.get_node("AtFrameSpinbox").value - 1
-		OpenSave.open_image_as_new_layer(image, path.get_basename().get_file(), frame_index)
+		elif current_import_option == ImageImportOptions.NEW_LAYER:
+			var frame_index: int = new_layer_options.get_node("AtFrameSpinbox").value - 1
+			OpenSave.open_image_as_new_layer(image, path.get_basename().get_file(), frame_index)
 
-	elif current_import_option == ImageImportOptions.PALETTE:
-		Palettes.import_palette(path)
+		elif current_import_option == ImageImportOptions.PALETTE:
+			Palettes.import_palette_from_path(path)
 
-	elif current_import_option == ImageImportOptions.BRUSH:
-		add_brush()
+		elif current_import_option == ImageImportOptions.BRUSH:
+			add_brush()
 
-	elif current_import_option == ImageImportOptions.PATTERN:
-		var file_name_ext: String = path.get_file()
-		file_name_ext = file_name_replace(file_name_ext, "Patterns")
-		var file_name: String = file_name_ext.get_basename()
-		image.convert(Image.FORMAT_RGBA8)
-		Global.patterns_popup.add(image, file_name)
+		elif current_import_option == ImageImportOptions.PATTERN:
+			var file_name_ext: String = path.get_file()
+			file_name_ext = file_name_replace(file_name_ext, "Patterns")
+			var file_name: String = file_name_ext.get_basename()
+			image.convert(Image.FORMAT_RGBA8)
+			Global.patterns_popup.add(image, file_name)
 
-		# Copy the image file into the "pixelorama/Patterns" directory
-		var location := "Patterns".plus_file(file_name_ext)
-		var dir = Directory.new()
-		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+			# Copy the image file into the "pixelorama/Patterns" directory
+			var location := "Patterns".plus_file(file_name_ext)
+			var dir = Directory.new()
+			dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+
+
+func _on_ApplyAll_toggled(pressed) -> void:
+	is_master = pressed
+	# below 4 (and the last) line is needed for correct popup placement
+	var old_rect = get_rect()
+	disconnect("popup_hide", self, "_on_PreviewDialog_popup_hide")
+	hide()
+	connect("popup_hide", self, "_on_PreviewDialog_popup_hide")
+	for child in Global.control.get_children():
+		if child != self and "PreviewDialog" in child.name:
+			child.hiding = pressed
+			if pressed:
+				child.hide()
+				synchronize()
+			else:
+				child.popup_centered()
+	popup(old_rect)  # needed for correct popup_order
+
+
+func synchronize() -> void:
+	for child in Global.control.get_children():
+		if child != self and "PreviewDialog" in child.name:
+			var dialog = child
+			#sync modes
+			var id = current_import_option
+			dialog.import_options.select(id)
+			dialog.import_options.emit_signal("item_selected", id)
+
+			#sync properties (if any)
+			if (
+				id == ImageImportOptions.SPRITESHEET_TAB
+				or id == ImageImportOptions.SPRITESHEET_LAYER
+			):
+				dialog.spritesheet_tab_options.get_node("HorizontalFrames").value = min(
+					spritesheet_tab_options.get_node("HorizontalFrames").value, image.get_size().x
+				)
+				dialog.spritesheet_tab_options.get_node("VerticalFrames").value = min(
+					spritesheet_tab_options.get_node("VerticalFrames").value, image.get_size().y
+				)
+				if id == ImageImportOptions.SPRITESHEET_LAYER:
+					dialog.spritesheet_lay_opt.get_node("AtFrameSpinbox").value = (spritesheet_lay_opt.get_node(
+						"AtFrameSpinbox"
+					).value)
+
+			elif id == ImageImportOptions.NEW_FRAME:
+				dialog.new_frame_options.get_node("AtLayerSpinbox").value = (new_frame_options.get_node(
+					"AtLayerSpinbox"
+				).value)
+
+			elif id == ImageImportOptions.REPLACE_FRAME:
+				dialog.replace_frame_options.get_node("AtLayerSpinbox").value = (replace_frame_options.get_node(
+					"AtLayerSpinbox"
+				).value)
+				dialog.replace_frame_options.get_node("AtFrameSpinbox").value = (replace_frame_options.get_node(
+					"AtFrameSpinbox"
+				).value)
+
+			elif id == ImageImportOptions.NEW_LAYER:
+				dialog.new_layer_options.get_node("AtFrameSpinbox").value = (new_layer_options.get_node(
+					"AtFrameSpinbox"
+				).value)
+
+			elif id == ImageImportOptions.BRUSH:
+				var type = new_brush_options.get_node("BrushTypeOption").selected
+				dialog.new_brush_options.get_node("BrushTypeOption").select(type)
+				dialog.new_brush_options.get_node("BrushTypeOption").emit_signal(
+					"item_selected", type
+				)
 
 
 func _on_ImportOption_item_selected(id: int) -> void:
 	current_import_option = id
 	frame_size_label.visible = false
 	spritesheet_tab_options.visible = false
-	spritesheet_layer_options.visible = false
+	spritesheet_lay_opt.visible = false
 	new_frame_options.visible = false
 	replace_frame_options.visible = false
 	new_layer_options.visible = false
@@ -155,10 +248,10 @@ func _on_ImportOption_item_selected(id: int) -> void:
 	elif id == ImageImportOptions.SPRITESHEET_LAYER:
 		frame_size_label.visible = true
 		spritesheet_tab_options.visible = true
-		spritesheet_layer_options.visible = true
+		spritesheet_lay_opt.visible = true
 		texture_rect.get_child(0).visible = true
 		texture_rect.get_child(1).visible = true
-		rect_size.x = spritesheet_layer_options.rect_size.x
+		rect_size.x = spritesheet_lay_opt.rect_size.x
 
 	elif id == ImageImportOptions.NEW_FRAME:
 		new_frame_options.visible = true

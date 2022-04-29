@@ -24,14 +24,27 @@ margin_right = 118.0
 margin_left = 17.0
 margin_right = 109.0
 
-[node name="PixelPerfect" parent="." index="3"]
+[node name="ColorInterpolation" parent="." index="3"]
+margin_top = 216.0
+margin_right = 126.0
+margin_bottom = 278.0
+
+[node name="Label" parent="ColorInterpolation" index="0"]
 margin_left = 9.0
-margin_right = 117.0
+margin_right = 116.0
+
+[node name="Factor" parent="ColorInterpolation" index="1"]
+margin_left = 26.0
+margin_right = 100.0
+
+[node name="Slider" parent="ColorInterpolation" index="2"]
+margin_left = 17.0
+margin_right = 109.0
 
 [node name="ShadingMode" type="OptionButton" parent="." index="4"]
-margin_top = 102.0
+margin_top = 74.0
 margin_right = 126.0
-margin_bottom = 122.0
+margin_bottom = 94.0
 mouse_default_cursor_shape = 2
 text = "Simple Shading"
 items = [ "Simple Shading", null, false, 0, null, "Hue Shifting", null, false, 1, null ]
@@ -39,9 +52,9 @@ selected = 0
 
 [node name="LightenDarken" type="OptionButton" parent="." index="5"]
 margin_left = 17.0
-margin_top = 126.0
+margin_top = 98.0
 margin_right = 109.0
-margin_bottom = 146.0
+margin_bottom = 118.0
 rect_min_size = Vector2( 92, 0 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
@@ -50,9 +63,9 @@ items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
 selected = 0
 
 [node name="Amount" type="VBoxContainer" parent="." index="6"]
-margin_top = 150.0
+margin_top = 122.0
 margin_right = 126.0
-margin_bottom = 212.0
+margin_bottom = 184.0
 alignment = 1
 
 [node name="Label" type="Label" parent="Amount" index="0"]
@@ -207,41 +220,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 1
 value = 10.0
 ticks_on_borders = true
-
-[node name="ColorInterpolation" parent="." index="8"]
-margin_top = 216.0
-margin_right = 126.0
-margin_bottom = 278.0
-
-[node name="Label" parent="ColorInterpolation" index="0"]
-margin_left = 9.0
-margin_right = 116.0
-
-[node name="Factor" parent="ColorInterpolation" index="1"]
-margin_left = 26.0
-margin_right = 100.0
-
-[node name="Slider" parent="ColorInterpolation" index="2"]
-margin_left = 17.0
-margin_right = 109.0
-
-[node name="EmptySpacer" parent="." index="9"]
-margin_top = 216.0
-margin_right = 126.0
-margin_bottom = 228.0
-
-[node name="Mirror" parent="." index="10"]
-margin_top = 232.0
-margin_right = 126.0
-margin_bottom = 249.0
-
-[node name="Horizontal" parent="Mirror" index="0"]
-margin_left = 25.0
-margin_right = 40.0
-
-[node name="Vertical" parent="Mirror" index="1"]
-margin_left = 84.0
-margin_right = 101.0
 
 [connection signal="item_selected" from="ShadingMode" to="." method="_on_ShadingMode_item_selected"]
 [connection signal="item_selected" from="LightenDarken" to="." method="_on_LightenDarken_item_selected"]

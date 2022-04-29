@@ -1,3 +1,4 @@
+# gdlint: ignore=max-public-methods
 extends Node
 
 # Presets for creating a new palette
@@ -118,6 +119,8 @@ func _create_new_empty_palette(name: String, comment: String, width: int, height
 
 
 func _create_new_palette_from_current_palette(name: String, comment: String) -> void:
+	if !current_palette:
+		return
 	var new_palette: Palette = current_palette.duplicate()
 	new_palette.name = name
 	new_palette.comment = comment
@@ -428,15 +431,13 @@ func _get_best_palette_file_location(looking_paths: Array, fname: String):  # ->
 	return null
 
 
-func import_palette(path: String) -> void:
+func import_palette_from_path(path: String) -> void:
 	if does_palette_exist(path.get_basename().get_file()):
 		# If there is a palette with same name ignore import for now
 		return
 
 	var palette: Palette = null
 	match path.to_lower().get_extension():
-		"tres":
-			palette = load(path)
 		"gpl":
 			var file = File.new()
 			if file.file_exists(path):
@@ -464,12 +465,25 @@ func import_palette(path: String) -> void:
 				file.close()
 				palette = _import_json_palette(text)
 
+	import_palette(palette, path.get_file())
+
+
+func import_palette(palette: Palette, file_name: String) -> void:
+	if does_palette_exist(file_name.get_basename()):
+		# If there is a palette with same name ignore import for now
+		return
 	if palette:
 		var palette_path := _save_palette(palette)
 		palettes[palette_path] = palette
 		select_palette(palette_path)
 		Global.palette_panel.setup_palettes_selector()
 		Global.palette_panel.select_palette(palette_path)
+	else:
+		Global.error_dialog.set_text(
+			tr("Can't load file '%s'.\nThis is not a valid palette file.") % [file_name]
+		)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
 
 
 func _import_gpl(path: String, text: String) -> Palette:

@@ -12,21 +12,28 @@ var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
 
-var timeline_scroll: ScrollContainer
-var tag_scroll_container: ScrollContainer
-var fps_spinbox: SpinBox
+onready var old_scroll: int = 0  # The previous scroll state of $ScrollContainer
+onready var tag_spacer = find_node("TagSpacer")
+onready var start_spacer = find_node("StartSpacer")
 
+onready var timeline_scroll: ScrollContainer = find_node("TimelineScroll")
+onready var main_scroll: ScrollContainer = find_node("ScrollContainer")
+onready var timeline_container: VBoxContainer = find_node("TimelineContainer")
+onready var tag_scroll_container: ScrollContainer = find_node("TagScroll")
+onready var fps_spinbox: SpinBox = find_node("FPSValue")
 onready var onion_skinning_button: BaseButton = find_node("OnionSkinning")
 onready var loop_animation_button: BaseButton = find_node("LoopAnim")
 
 
 func _ready() -> void:
-	timeline_scroll = find_node("TimelineScroll")
-	tag_scroll_container = find_node("TagScroll")
-	fps_spinbox = find_node("FPSValue")
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
+
+	# Set important size_flags (intentionally set at runtime)
+	# Otherwise you yont be able to see "TimelineScroll" in editor
+	find_node("EndSpacer").size_flags_horizontal = SIZE_EXPAND_FILL
+	timeline_scroll.size_flags_horizontal = SIZE_FILL
 
 
 func _input(event: InputEvent) -> void:
@@ -43,10 +50,43 @@ func _input(event: InputEvent) -> void:
 func _h_scroll_changed(value: float) -> void:
 	# Let the main timeline ScrollContainer affect the tag ScrollContainer too
 	tag_scroll_container.get_child(0).rect_min_size.x = (
-		timeline_scroll.get_child(0).rect_size.x
-		- 212
+		timeline_scroll.scroll_horizontal
+		+ tag_scroll_container.rect_size.x * 3
 	)
-	tag_scroll_container.scroll_horizontal = value
+	old_scroll = value  # Needed for (_on_TimelineContainer_item_rect_changed)
+	var diff = start_spacer.rect_min_size.x - value
+	var a = main_scroll.scroll_horizontal
+	var b = timeline_scroll.scroll_horizontal
+	if a > b:
+		tag_scroll_container.scroll_horizontal = 0
+		tag_spacer.rect_min_size.x = diff
+	else:
+		tag_spacer.rect_min_size.x = 0
+		tag_scroll_container.scroll_horizontal = -diff
+
+
+# the below two signals control scrolling functionality
+func _on_AnimationTimeline_item_rect_changed() -> void:
+	# Timeline size
+	timeline_scroll.rect_min_size.x = rect_size.x
+
+
+func _on_TimelineContainer_item_rect_changed() -> void:
+	# Layer movement
+	var limit = timeline_container.rect_size.x - main_scroll.rect_size.x
+	var amount = main_scroll.scroll_horizontal
+	start_spacer.rect_min_size.x = min(amount, max(0, limit - 1))
+
+	# Tag movement
+	var diff = start_spacer.rect_min_size.x - old_scroll
+	var a = main_scroll.scroll_horizontal
+	var b = timeline_scroll.scroll_horizontal
+	if a > b:
+		tag_spacer.rect_min_size.x = diff
+		tag_scroll_container.scroll_horizontal = 0
+	else:
+		tag_spacer.rect_min_size.x = 0
+		tag_scroll_container.scroll_horizontal = -diff
 
 
 func cel_size_changed(value: int) -> void:
@@ -81,16 +121,36 @@ func cel_size_changed(value: int) -> void:
 
 func add_frame() -> void:
 	var project: Project = Global.current_project
+	var frame_add_index := project.current_frame + 1
 	var frame: Frame = project.new_empty_frame()
 	var new_frames: Array = project.frames.duplicate()
 	var new_layers: Array = project.duplicate_layers()
-	new_frames.insert(project.current_frame + 1, frame)
+	new_frames.insert(frame_add_index, frame)
 
 	for l_i in range(new_layers.size()):
 		if new_layers[l_i].new_cels_linked:  # If the link button is pressed
 			new_layers[l_i].linked_cels.append(frame)
 			frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
 			frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
+
+	# Code to PUSH AHEAD tags starting after the frame
+	var new_animation_tags := Global.current_project.animation_tags.duplicate()
+	# Loop through the tags to create new classes for them, so that they won't be the same
+	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
+	for i in new_animation_tags.size():
+		new_animation_tags[i] = AnimationTag.new(
+			new_animation_tags[i].name,
+			new_animation_tags[i].color,
+			new_animation_tags[i].from,
+			new_animation_tags[i].to
+		)
+	# Loop through the tags to see if the frame is in one
+	for tag in new_animation_tags:
+		if frame_add_index >= tag.from && frame_add_index <= tag.to:
+			tag.to += 1
+		elif (frame_add_index) < tag.from:
+			tag.from += 1
+			tag.to += 1
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
@@ -99,30 +159,41 @@ func add_frame() -> void:
 
 	project.undo_redo.add_do_property(project, "frames", new_frames)
 	project.undo_redo.add_do_property(project, "current_frame", project.current_frame + 1)
+	Global.current_project.undo_redo.add_do_property(
+		Global.current_project, "animation_tags", new_animation_tags
+	)
 	project.undo_redo.add_do_property(project, "layers", new_layers)
 
 	project.undo_redo.add_undo_property(project, "frames", project.frames)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.current_project, "animation_tags", Global.current_project.animation_tags
+	)
 	project.undo_redo.add_undo_property(project, "layers", project.layers)
 	project.undo_redo.commit_action()
 
 
 func _on_DeleteFrame_pressed(frame := -1) -> void:
-	delete_frame(frame)
+	var frames := []
+	for cel in Global.current_project.selected_cels:
+		frame = cel[0]
+		if not frame in frames:
+			frames.append(frame)
+	frames.sort()
+	delete_frames(frames)
 
 
-func delete_frame(frame := -1) -> void:
+func delete_frames(frames := []) -> void:
 	if Global.current_project.frames.size() == 1:
 		return
-	if frame == -1:
-		frame = Global.current_project.current_frame
 
-	var frame_to_delete: Frame = Global.current_project.frames[frame]
+	if frames.size() == 0:
+		frames.append(Global.current_project.current_frame)
+
 	var new_frames: Array = Global.current_project.frames.duplicate()
-	new_frames.erase(frame_to_delete)
 	var current_frame := Global.current_project.current_frame
-	if current_frame > 0 && current_frame == new_frames.size():  # If it's the last frame
-		current_frame -= 1
+	var new_layers: Array = Global.current_project.duplicate_layers()
+	var frame_correction := 0  # Only needed for tag adjustment
 
 	var new_animation_tags := Global.current_project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
@@ -135,26 +206,37 @@ func delete_frame(frame := -1) -> void:
 			new_animation_tags[i].to
 		)
 
-	# Loop through the tags to see if the frame is in one
-	for tag in new_animation_tags:
-		if frame + 1 >= tag.from && frame + 1 <= tag.to:
-			if tag.from == tag.to:  # If we're deleting the only frame in the tag
-				new_animation_tags.erase(tag)
-			else:
+	for frame in frames:
+		if new_frames.size() == 1:  # If only 1 frame
+			break
+		var frame_to_delete: Frame = Global.current_project.frames[frame]
+		new_frames.erase(frame_to_delete)
+		if current_frame > 0 && current_frame == new_frames.size():  # If it's the last frame
+			current_frame -= 1
+
+		# Check if one of the cels of the frame is linked
+		# if they are, unlink them too
+		# this prevents removed cels being kept in linked memory
+		for layer in new_layers:
+			for linked in layer.linked_cels:
+				if linked == Global.current_project.frames[frame]:
+					layer.linked_cels.erase(linked)
+
+		# Loop through the tags to see if the frame is in one
+		frame -= frame_correction  # Erasing made frames indexes 1 step ahead their intended tags
+		var tag_correction := 0  # needed when tag is erased
+		for tag_ind in new_animation_tags.size():
+			var tag = new_animation_tags[tag_ind - tag_correction]
+			if frame + 1 >= tag.from && frame + 1 <= tag.to:
+				if tag.from == tag.to:  # If we're deleting the only frame in the tag
+					new_animation_tags.erase(tag)
+					tag_correction += 1
+				else:
+					tag.to -= 1
+			elif frame + 1 < tag.from:
+				tag.from -= 1
 				tag.to -= 1
-		elif frame + 1 < tag.from:
-			tag.from -= 1
-			tag.to -= 1
-
-	# Check if one of the cels of the frame is linked
-	# if they are, unlink them too
-	# this prevents removed cels being kept in linked memory
-	var new_layers: Array = Global.current_project.duplicate_layers()
-
-	for layer in new_layers:
-		for linked in layer.linked_cels:
-			if linked == Global.current_project.frames[frame]:
-				layer.linked_cels.erase(linked)
+		frame_correction += 1  # Compensation for the next batch
 
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Remove Frame")
@@ -187,33 +269,23 @@ func delete_frame(frame := -1) -> void:
 
 
 func _on_CopyFrame_pressed(frame := -1) -> void:
-	copy_frame(frame)
+	var frames := []
+	for cel in Global.current_project.selected_cels:
+		frame = cel[0]
+		if not frame in frames:
+			frames.append(frame)
+	frames.sort()
+	copy_frames(frames)
 
 
-func copy_frame(frame := -1) -> void:
+func copy_frames(frames := []) -> void:
 	Global.canvas.selection.transform_content_confirm()
-	if frame == -1:
-		frame = Global.current_project.current_frame
 
-	var new_frame := Frame.new()
+	if frames.size() == 0:
+		frames.append(Global.current_project.current_frame)
+
 	var new_frames := Global.current_project.frames.duplicate()
 	var new_layers: Array = Global.current_project.duplicate_layers()
-	new_frames.insert(frame + 1, new_frame)
-
-	var prev_frame: Frame = Global.current_project.frames[frame]
-	for cel in prev_frame.cels:  # Copy every cel
-		var sprite := Image.new()
-		sprite.copy_from(cel.image)
-		var sprite_texture := ImageTexture.new()
-		sprite_texture.create_from_image(sprite, 0)
-		new_frame.cels.append(PixelCel.new(sprite, cel.opacity, sprite_texture))
-
-	new_frame.duration = prev_frame.duration
-	for l_i in range(new_layers.size()):
-		if new_layers[l_i].new_cels_linked:  # If the link button is pressed
-			new_layers[l_i].linked_cels.append(new_frame)
-			new_frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
-			new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
 
 	var new_animation_tags := Global.current_project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
@@ -226,10 +298,33 @@ func copy_frame(frame := -1) -> void:
 			new_animation_tags[i].to
 		)
 
-	# Loop through the tags to see if the frame is in one
-	for tag in new_animation_tags:
-		if frame + 1 >= tag.from && frame + 1 <= tag.to:
-			tag.to += 1
+	for frm in frames.size():
+		var frame = frames[(frames.size() - 1) - frm]
+		var new_frame := Frame.new()
+		new_frames.insert(frames[-1] + 1, new_frame)
+
+		var prev_frame: Frame = Global.current_project.frames[frame]
+		for cel in prev_frame.cels:  # Copy every cel
+			var sprite := Image.new()
+			sprite.copy_from(cel.image)
+			var sprite_texture := ImageTexture.new()
+			sprite_texture.create_from_image(sprite, 0)
+			new_frame.cels.append(Cel.new(sprite, cel.opacity, sprite_texture))
+
+		new_frame.duration = prev_frame.duration
+		for l_i in range(new_layers.size()):
+			if new_layers[l_i].new_cels_linked:  # If the link button is pressed
+				new_layers[l_i].linked_cels.append(new_frame)
+				new_frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
+				new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
+
+		# Loop through the tags to see if the frame is in one
+		for tag in new_animation_tags:
+			if frames[-1] + 1 >= tag.from && frames[-1] + 1 <= tag.to:
+				tag.to += 1
+			elif frames[-1] + 1 < tag.from:
+				tag.from += 1
+				tag.to += 1
 
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Add Frame")
@@ -238,7 +333,7 @@ func copy_frame(frame := -1) -> void:
 
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
 	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "current_frame", frame + 1
+		Global.current_project, "current_frame", frames[-1] + 1
 	)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
 	Global.current_project.undo_redo.add_do_property(
@@ -249,7 +344,7 @@ func copy_frame(frame := -1) -> void:
 		Global.current_project, "frames", Global.current_project.frames
 	)
 	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_frame", frame
+		Global.current_project, "current_frame", frames[-1]
 	)
 	Global.current_project.undo_redo.add_undo_property(
 		Global.current_project, "layers", Global.current_project.layers
@@ -273,7 +368,7 @@ func _on_MoveLeft_pressed() -> void:
 
 func _on_MoveRight_pressed() -> void:
 	var frame: int = Global.current_project.current_frame
-	if frame == last_frame:
+	if frame == Global.current_project.frames.size() - 1:  # using last_frame caused problems
 		return
 	Global.frame_ids.get_child(frame).change_frame_order(1)
 

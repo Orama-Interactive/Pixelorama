@@ -56,7 +56,7 @@ func _input(event: InputEvent) -> void:
 		and line_edit.visible
 		and event.scancode != KEY_SPACE
 	):
-		save_layer_name(line_edit.text)
+		_save_layer_name(line_edit.text)
 
 
 func _on_LayerContainer_gui_input(event: InputEvent) -> void:
@@ -74,18 +74,15 @@ func _on_LayerContainer_gui_input(event: InputEvent) -> void:
 					var frame_layer := [i, j]
 					if !project.selected_cels.has(frame_layer):
 						project.selected_cels.append(frame_layer)
+			project.current_layer = layer
 		elif Input.is_action_pressed("ctrl"):
 			for i in range(0, project.frames.size()):
 				var frame_layer := [i, layer]
 				if !project.selected_cels.has(frame_layer):
 					project.selected_cels.append(frame_layer)
+			project.current_layer = layer
 		else:  # If the button is pressed without Shift or Control
-			project.selected_cels.clear()
-			var frame_layer := [project.current_frame, layer]
-			if !project.selected_cels.has(frame_layer):
-				project.selected_cels.append(frame_layer)
-
-		project.current_layer = layer
+			_select_current_layer()
 
 		if event.doubleclick:
 			label.visible = false
@@ -95,10 +92,10 @@ func _on_LayerContainer_gui_input(event: InputEvent) -> void:
 
 
 func _on_LineEdit_focus_exited() -> void:
-	save_layer_name(line_edit.text)
+	_save_layer_name(line_edit.text)
 
 
-func save_layer_name(new_name: String) -> void:
+func _save_layer_name(new_name: String) -> void:
 	label.visible = true
 	line_edit.visible = false
 	line_edit.editable = false
@@ -111,11 +108,22 @@ func _on_VisibilityButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].visible = !Global.current_project.layers[layer].visible
 	Global.canvas.update()
+	_select_current_layer()
 
 
 func _on_LockButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].locked = !Global.current_project.layers[layer].locked
+	_select_current_layer()
+
+
+func _select_current_layer() -> void:
+	Global.current_project.selected_cels.clear()
+	var frame_layer := [Global.current_project.current_frame, layer]
+	if !Global.current_project.selected_cels.has(frame_layer):
+		Global.current_project.selected_cels.append(frame_layer)
+
+	Global.current_project.current_layer = layer
 
 
 func get_drag_data(_position) -> Array:

@@ -1,7 +1,7 @@
-extends HBoxContainer
+extends Container
 
-onready var left_picker := $LeftColorPickerButton
-onready var right_picker := $RightColorPickerButton
+onready var left_picker := $ColorPickersHorizontal/LeftColorPickerButton
+onready var right_picker := $ColorPickersHorizontal/RightColorPickerButton
 
 
 func _ready() -> void:

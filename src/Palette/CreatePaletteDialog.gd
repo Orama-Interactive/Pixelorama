@@ -1,6 +1,6 @@
 extends ConfirmationDialog
 
-# Emitted when user confirms his changes
+# Emitted when user confirms their changes
 signal saved(preset, name, comment, width, height, add_alpha_colors, colors_from)
 
 # Reference to current palette stored when dialog opens
@@ -34,6 +34,9 @@ func open(opened_current_palette: Palette) -> void:
 
 	# Disable ok button until user enters name
 	toggle_ok_button_disability(true)
+
+	# Disable create "From Current Palette" if there's no palette
+	preset_input.set_item_disabled(1, !current_palette)
 
 	# Stop all inputs in the rest of the app
 	Global.dialog_open(true)

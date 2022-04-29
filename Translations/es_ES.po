@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-01-17 06:19\n"
+"PO-Revision-Date: 2022-03-30 23:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -66,6 +66,9 @@ msgstr "Selecciona"
 msgid "View"
 msgstr "Ver"
 
+msgid "Window"
+msgstr "Ventana"
+
 msgid "Image"
 msgstr "Imagen"
 
@@ -98,6 +101,9 @@ msgstr "Importar"
 
 msgid "Export"
 msgstr "Exportar"
+
+msgid "Overwrite"
+msgstr ""
 
 msgid "Export..."
 msgstr "Exportar..."
@@ -162,8 +168,8 @@ msgstr "Limpiar"
 msgid "Invert"
 msgstr "Invertir"
 
-msgid "Flip"
-msgstr "Girar"
+msgid "Mirror Image"
+msgstr ""
 
 msgid "Flip Horizontal"
 msgstr "Voltear Horizontalmente"
@@ -182,6 +188,30 @@ msgstr "Opacidad de Ventana"
 
 msgid "Panel Layout"
 msgstr "Diseño del Panel"
+
+msgid "Panels"
+msgstr "Paneles"
+
+msgid "Layouts"
+msgstr "Diseños"
+
+msgid "Moveable Panels"
+msgstr ""
+
+msgid "Manage Layouts"
+msgstr "Gestionar Diseños"
+
+msgid "Add"
+msgstr ""
+
+msgid "Add Layout"
+msgstr ""
+
+msgid "Edit Layout"
+msgstr ""
+
+msgid "Are you sure you want to delete this layout?"
+msgstr ""
 
 msgid "Auto"
 msgstr "Auto"
@@ -230,6 +260,9 @@ msgstr "Opciones de importación"
 
 msgid "Import as:"
 msgstr "Importar como:"
+
+msgid "Apply to all"
+msgstr ""
 
 msgid "Recent projects"
 msgstr "Proyectos recientes"
@@ -309,10 +342,18 @@ msgstr "¡Ruta de directorio o nombre de archivo no es válido!"
 msgid "Exporting in progress..."
 msgstr "Exportación en progreso..."
 
+msgid "Can't load file '%s'."
+msgstr "No se puede cargar el archivo '%s'."
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "No se puede cargar el archivo '%s'.\n"
 "Código de error: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr "No se puede cargar el archivo '%s'.\n"
+"Este no es un archivo de paleta válido."
 
 msgid "Frame"
 msgstr "Fotograma"
@@ -445,6 +486,12 @@ msgstr "Copia de seguridad"
 
 msgid "Performance"
 msgstr "Rendimiento"
+
+msgid "Extensions"
+msgstr "Extensiones"
+
+msgid "Cursors"
+msgstr "Cursores"
 
 msgid "Indicators"
 msgstr "Indicadores"
@@ -740,6 +787,18 @@ msgstr "Japonés"
 msgid "Ukrainian"
 msgstr "Ucraniano"
 
+msgid "Danish"
+msgstr ""
+
+msgid "Swedish"
+msgstr ""
+
+msgid "Serbian (Cyrillic)"
+msgstr ""
+
+msgid "Dutch"
+msgstr ""
+
 msgid "Development Team"
 msgstr "Equipo de desarrollo"
 
@@ -799,14 +858,11 @@ msgstr "Cubo de pintura\n\n"
 "%s para el botón izquierdo del mouse\n"
 "%s para el botón derecho del mouse"
 
-msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "Selección poligonal\n"
-"Haga doble clic para conectar el último punto al punto de partida\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
+msgstr ""
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -850,14 +906,11 @@ msgstr "Vista\n\n"
 "%s para el botón izquierdo del mouse\n"
 "%s para el botón derecho del mouse"
 
-msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "Selector de color\n"
-"Seleccione un color de un píxel del sprite\n\n"
-"%s para el botón izquierdo del mouse\n"
-"%s para el botón derecho del mouse"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
+msgstr ""
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -979,6 +1032,12 @@ msgstr "Mostrar icono de herramienta derecha"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Muestra un icono de la herramienta derecha seleccionada junto al cursor en el lienzo"
+
+msgid "Use native mouse cursors"
+msgstr "Usar cursores nativos del ratón"
+
+msgid "Use cross cursor for the canvas"
+msgstr "Usar cursor cruzado para el lienzo"
 
 msgid "Guides"
 msgstr "Guías"
@@ -1127,6 +1186,21 @@ msgstr "Establece el límite de fotogramas por segundo de la aplicación. Cuanto
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Si se activa esta opción, cuando la ventana de la aplicación pierde el enfoque, se detiene. Esto ayuda a reducir el uso de la CPU cuando está inactiva. La aplicación no se detiene cuando el ratón entra en la ventana de la aplicación."
 
+msgid "Add Extension"
+msgstr "Agregar Extensión"
+
+msgid "Enable"
+msgstr "Habilitar"
+
+msgid "Disable"
+msgstr "Deshabilitar"
+
+msgid "Uninstall"
+msgstr "Desinstalar"
+
+msgid "Open Folder"
+msgstr "Abrir Carpeta"
+
 msgid "Brush:"
 msgstr "Pincel:"
 
@@ -1160,8 +1234,9 @@ msgstr "Pixelado perfecto"
 msgid "Fill inside"
 msgstr "Rellenar el interior"
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Hace que las líneas sean suaves eliminando los píxeles sobrantes en los bordes"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Pixel Perfect hace que las líneas sean suaves eliminando los píxeles sobrantes en los bordes"
 
 msgid "Fill Shape"
 msgstr "Rellena forma"
@@ -1819,6 +1894,9 @@ msgstr "Mueve el marco seleccionado hacia la derecha."
 msgid "Frame duration"
 msgstr "Duración de los fotogramas"
 
+msgid "Duration"
+msgstr "Duración"
+
 msgid "Tiled In Both Axis"
 msgstr "Mosaico en Ambos Ejes"
 
@@ -1863,4 +1941,31 @@ msgstr "Reducir el tamaño de la paleta restablecerá las posiciones de colores.
 
 msgid "Position:"
 msgstr "Posición:"
+
+msgid "Tools"
+msgstr ""
+
+msgid "Main Canvas"
+msgstr ""
+
+msgid "Second Canvas"
+msgstr ""
+
+msgid "Animation Timeline"
+msgstr ""
+
+msgid "Canvas Preview"
+msgstr ""
+
+msgid "Color Pickers"
+msgstr ""
+
+msgid "Global Tool Options"
+msgstr ""
+
+msgid "Left Tool Options"
+msgstr ""
+
+msgid "Right Tool Options"
+msgstr ""
 

@@ -30,9 +30,10 @@ func _confirmed() -> void:
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	var selection: Image = project.bitmap_to_image(project.selection_bitmap, false)
 	var selection_tex := ImageTexture.new()
-	selection_tex.create_from_image(selection)
+	if selection_checkbox.pressed and project.has_selection:
+		var selection: Image = project.bitmap_to_image(project.selection_bitmap)
+		selection_tex.create_from_image(selection, 0)
 
 	if !confirmed:
 		preview.material.set_shader_param("red", red)

@@ -46,6 +46,7 @@ var directory_path := ""
 var file_name := "untitled"
 var file_format: int = Export.FileFormat.PNG
 var was_exported := false
+var export_overwrite := false
 
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
 var pixel_layer_button_node = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
@@ -259,9 +260,14 @@ func change_project() -> void:
 	if !was_exported:
 		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 	else:
-		Global.top_menu_container.file_menu.set_item_text(
-			6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format))
-		)
+		if export_overwrite:
+			Global.top_menu_container.file_menu.set_item_text(
+				6, tr("Overwrite") + " %s" % (file_name + Export.file_format_string(file_format))
+			)
+		else:
+			Global.top_menu_container.file_menu.set_item_text(
+				6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format))
+			)
 
 	for j in Global.TileMode.values():
 		Global.top_menu_container.tile_mode_submenu.set_item_checked(j, j == tile_mode)
@@ -551,14 +557,9 @@ func _frame_changed(value: int) -> void:
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
 	for i in frames.size():
-		var text_color := Color.white
-		if (
-			Global.theme_type == Global.ThemeTypes.CARAMEL
-			|| Global.theme_type == Global.ThemeTypes.LIGHT
-		):
-			text_color = Color.black
-		Global.frame_ids.get_child(i).add_color_override("font_color", text_color)
-		for container in Global.frames_container.get_children():  # De-select all the other frames
+		var frame_button: BaseButton = Global.frame_ids.get_child(i)
+		frame_button.pressed = false
+		for container in Global.frames_container.get_children():  # De-select all the other cels
 			if i < container.get_child_count():
 				container.get_child(i).pressed = false
 
@@ -569,9 +570,9 @@ func _frame_changed(value: int) -> void:
 		var current_frame_tmp: int = cel[0]
 		var current_layer_tmp: int = cel[1]
 		if current_frame_tmp < Global.frame_ids.get_child_count():
-			Global.frame_ids.get_child(current_frame_tmp).add_color_override(
-				"font_color", Global.control.theme.get_color("Selected Color", "Label")
-			)
+			var frame_button: BaseButton = Global.frame_ids.get_child(current_frame_tmp)
+			frame_button.pressed = true
+
 		var container_child_count: int = Global.frames_container.get_child_count()
 		if current_layer_tmp < container_child_count:
 			var container = Global.frames_container.get_child(
@@ -690,7 +691,7 @@ func _animation_tags_changed(value: Array) -> void:
 		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + 1
 		var tag_size: int = tag.to - tag.from
 		# We dont need the 4 pixels at the end of last cel
-		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 4
+		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 8
 		tag_c.rect_position.y = 1  # To make top line of tag visible
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
@@ -803,15 +804,11 @@ func resize_bitmap(bitmap: BitMap, new_size: Vector2) -> BitMap:
 
 # Unexposed BitMap class function
 # https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L622
-func bitmap_to_image(bitmap: BitMap, square := true) -> Image:
+func bitmap_to_image(bitmap: BitMap) -> Image:
 	var image := Image.new()
 	var width := bitmap.get_size().x
 	var height := bitmap.get_size().y
-	if square:
-		var square_size = max(width, height)
-		image.create(square_size, square_size, false, Image.FORMAT_LA8)
-	else:
-		image.create(width, height, false, Image.FORMAT_LA8)
+	image.create(width, height, false, Image.FORMAT_LA8)
 	image.lock()
 	for x in width:
 		for y in height:
