@@ -159,7 +159,7 @@ func generate_shader(layers : Array) -> String:
 				BlendMode.SOFT_LIGHT:
 					blend = "mix(col.rgb, clamp(mix(2.0 * col.rgb * {tex}.rgb + col.rgb * col.rgb * (1.0 - 2.0 * {tex}.rgb), sqrt(col.rgb) * (2.0 * {tex}.rgb - 1.0) + (2.0 * col.rgb) * (1.0 - {tex}.rgb), round(col.rgb)), 0.0, 1.0).rgb, {tex.a}).rgb"
 				BlendMode.HARD_LIGHT:
-					blend = "mix(col.rgb, clamp(mix(2.0 * {tex}.rgb * col.rgb, 1.0 - 2.0 * (1.0 - col.rgb) * (1.0 - {tex}.rgb), round(col.rgb)), 0.0, 1.0).rgb, {tex.a}).rgb"
+					blend = "mix(col.rgb, clamp(mix(2.0 * col.rgb * {tex}.rgb, 1.0 - 2.0 * (1.0 - {tex}.rgb) * (1.0 - col.rgb), round({tex}.rgb)), 0.0, 1.0).rgb, {tex.a}).rgb"
 
 			blend = blend.format({"tex": tex, "tex.a": tex_a})
 			draws += "col.rgb = mix({normal}, {blend}, col.a);".format({"normal": normal, "blend": blend, "i": i})
