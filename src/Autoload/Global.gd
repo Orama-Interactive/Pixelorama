@@ -230,7 +230,8 @@ func undo_or_redo(
 			"Centralize",
 			"Merge Layer",
 			"Link Cel",
-			"Unlink Cel"
+			"Unlink Cel",
+			"Set Blend Mode"
 		]
 	):
 		if layer_index > -1 and frame_index > -1:
@@ -260,6 +261,10 @@ func undo_or_redo(
 
 	elif "Move Cels" == action_name:
 		project.frames = project.frames  # to call frames_changed
+
+	elif "Set Blend Mode" == action_name:
+		layer_blend_mode_option.selected = project.layers[project.current_layer].blend_mode
+		canvas.update_shader()
 
 	canvas.update()
 	if !project.has_changed:
