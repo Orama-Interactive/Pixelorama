@@ -732,10 +732,10 @@ func _on_MergeDownLayer_pressed() -> void:
 		var new_cels: Array = f.cels.duplicate()
 		for i in new_cels.size():
 			new_cels[i] = Cel.new(new_cels[i].image, new_cels[i].opacity)
-		var selected_layer : Layer = new_layers[Global.current_project.current_layer]
-		var new_layer : Layer = new_layers[Global.current_project.current_layer - 1]
 		var selected_layer_idx : int = Global.current_project.current_layer
 		var new_layer_idx : int = Global.current_project.current_layer - 1
+		var new_layer : Layer = new_layers[new_layer_idx]
+
 		var merged_image := Image.new()
 		merged_image.copy_from(f.cels[new_layer_idx].image)
 
@@ -813,5 +813,5 @@ func _on_BlendModeOption_item_selected(index) -> void:
 	var current_layers: Array = Global.current_project.layers
 	var current_layer: Layer = current_layers[Global.current_project.current_layer]
 	current_layer.blend_mode = index
-	Global.canvas.generate_shader(current_layers)
+	Global.canvas.update_shader()
 	Global.canvas.update()

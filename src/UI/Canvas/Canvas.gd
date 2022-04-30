@@ -37,7 +37,7 @@ func _ready() -> void:
 	yield(get_tree(), "idle_frame")
 	camera_zoom()
 
-	generate_shader(Global.current_project.layers)
+	update_shader()
 	Global.canvas_preview_container.canvas_preview.material = material
 	Global.second_viewport.get_node("Viewport/CanvasPreview").material = material
 	tile_mode.material = material
@@ -123,7 +123,7 @@ func camera_zoom() -> void:
 	Global.transparent_checker.update_rect()
 
 
-func generate_shader(layers : Array): # Optionally returns the generated code
+func generate_shader(layers : Array) -> String:
 	var uniforms := ""
 	var draws := ""
 	uniforms += "uniform int current_layer;"
@@ -182,9 +182,12 @@ void fragment() {
 	COLOR = vec4(col_fix, col.a);
 }"""
 	code = code.format({"uniforms": uniforms, "draws": draws})
-	material.shader.code = code
-	
 	return code
+
+
+func update_shader() -> void:
+	var code = generate_shader(Global.current_project.layers)
+	material.shader.code = code
 
 
 func update_texture(layer_i: int, frame_i := -1, project: Project = Global.current_project) -> void:

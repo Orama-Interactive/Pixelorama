@@ -217,6 +217,7 @@ func change_project() -> void:
 	for brush in brushes:
 		Brushes.add_project_brush(brush)
 
+	Global.canvas.update_shader()
 	Global.canvas.update()
 	Global.canvas.grid.update()
 	Global.transparent_checker.update_rect()
@@ -528,7 +529,7 @@ func _layers_changed(value: Array) -> void:
 	self.current_frame = current_frame  # Call frame_changed to update UI
 	_toggle_layer_buttons_layers()
 
-	Global.canvas.generate_shader(layers)
+	Global.canvas.update_shader()
 
 
 func _remove_cel_buttons() -> void:
