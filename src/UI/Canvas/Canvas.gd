@@ -6,6 +6,7 @@ var sprite_changed_this_frame := false  # For optimization purposes
 var move_preview_location := Vector2.ZERO
 
 #onready var currently_visible_frame: Viewport = $CurrentlyVisibleFrame
+onready var viewport_container = $ViewportContainer
 onready var current_frame_drawer = $ViewportContainer/Viewport/CurrentFrameDrawer
 onready var tile_mode = $TileMode
 onready var pixel_grid = $PixelGrid
@@ -85,6 +86,11 @@ func _input(event: InputEvent) -> void:
 
 	if sprite_changed_this_frame:
 		update_selected_cels_textures()
+
+
+func set_canvas_size(size: Vector2) -> void:
+	viewport_container.rect_size = size
+	current_frame_drawer.rect_size = size
 
 
 func camera_zoom() -> void:

@@ -230,7 +230,7 @@ func change_project() -> void:
 
 	Global.canvas.update()
 	Global.canvas.current_frame_drawer.material = layer_blend_material
-	Global.canvas.current_frame_drawer.rect_size = size
+	Global.canvas.set_canvas_size(size)
 	Global.canvas.grid.update()
 	Global.transparent_checker.update_rect()
 	Global.animation_timeline.fps_spinbox.value = fps
@@ -378,7 +378,7 @@ func deserialize(dict: Dictionary) -> void:
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
 		size.y = dict.size_y
-		Global.canvas.current_frame_drawer.rect_size = size
+		Global.canvas.set_canvas_size(size)
 		_update_tile_mode_rects()
 		selection_bitmap = resize_bitmap(selection_bitmap, size)
 	if dict.has("save_path"):
@@ -452,7 +452,7 @@ func _name_changed(value: String) -> void:
 
 func _size_changed(value: Vector2) -> void:
 	size = value
-	Global.canvas.current_frame_drawer.rect_size = size
+	Global.canvas.set_canvas_size(size)
 	_update_tile_mode_rects()
 
 
