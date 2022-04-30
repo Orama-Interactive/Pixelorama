@@ -101,10 +101,11 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 				gen.generate_image(_cel, shader, params, _project.size)
 				yield(gen, "done")
 
-	if (_project.has_selection
+	if (
+		_project.has_selection
 		and selection_checkbox.pressed
 		and type_option_button.text != "Nearest neighbour (Shader)"
-		):
+	):
 		_cel.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 	else:
 		_cel.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
