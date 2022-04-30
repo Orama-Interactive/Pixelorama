@@ -173,7 +173,8 @@ render_mode unshaded;
 {uniforms}
 
 void fragment() {
-	vec4 col;
+	vec4 col = COLOR.rgba;
+	col.a = 0.0;
 	vec2 cur_layer_pos = move_prev_pos * TEXTURE_PIXEL_SIZE;
 	vec2 border_uv = abs((UV - cur_layer_pos - 0.5) * 2.0);
 	float border = 1.0 - clamp(floor(max(border_uv.x, border_uv.y)), 0.0, 1.0);
