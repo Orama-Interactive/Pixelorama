@@ -96,6 +96,7 @@ func show_tab() -> void:
 			animation_options_direction.selected = Export.direction
 			animation_options.show()
 	set_preview()
+	update_dimensions_label()
 	tabs.current_tab = Export.current_tab
 
 
@@ -208,6 +209,14 @@ func create_frame_tag_list() -> void:
 		spritesheet_frames.add_item(item.name)
 
 
+func update_dimensions_label():
+	var dimension_label: Label = $VBoxContainer/Dimensions/DimensionLabel
+	dimension_label.text = "Export Dimensions : "
+	if Export.processed_images.size() > 0:
+		var new_size: Vector2 = Export.processed_images[0].get_size() * (Export.resize / 100.0)
+		dimension_label.text += str(new_size.x, "x", new_size.y)
+
+
 func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
 	# 0 is invalid path, 1 is invalid name
 	if path_or_name == 0:
@@ -286,12 +295,14 @@ func _on_Orientation_item_selected(id: int) -> void:
 		spritesheet_lines_count_label.text = "Rows:"
 	spritesheet_lines_count.value = Export.frames_divided_by_spritesheet_lines()
 	Export.process_spritesheet()
+	update_dimensions_label()
 	set_preview()
 
 
 func _on_LinesCount_value_changed(value: float) -> void:
 	Export.lines_count = value
 	Export.process_spritesheet()
+	update_dimensions_label()
 	set_preview()
 
 
@@ -315,6 +326,7 @@ func _on_Direction_item_selected(id: int) -> void:
 
 func _on_Resize_value_changed(value: float) -> void:
 	Export.resize = value
+	update_dimensions_label()
 
 
 func _on_Interpolation_item_selected(id: int) -> void:
