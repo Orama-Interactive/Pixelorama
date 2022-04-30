@@ -593,7 +593,7 @@ func _layer_changed(value: int) -> void:
 
 	_toggle_layer_buttons_current_layer()
 
-	yield(Global.get_tree().create_timer(0.01), "timeout")
+	yield(Global.get_tree(), "idle_frame")
 	self.current_frame = current_frame  # Call frame_changed to update UI
 	for layer_button in Global.layers_container.get_children():
 		layer_button.pressed = false
@@ -606,9 +606,8 @@ func _layer_changed(value: int) -> void:
 			)
 			layer_button.pressed = true
 	
-	var layer_blend_mode: int = Global.current_project.layers[value].blend_mode
+	var layer_blend_mode: int = layers[current_layer].blend_mode
 	Global.layer_blend_mode_option.selected = layer_blend_mode
-
 
 
 func _toggle_layer_buttons_layers() -> void:
