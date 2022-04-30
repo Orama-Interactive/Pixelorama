@@ -52,7 +52,7 @@ void fragment() {
 	vec4 rotated = texture(TEXTURE, rotate(pixelated_uv, pivot, ratio)); // Rotated image
 	rotated.a *= texture(selection_tex, rotate(pixelated_uv, pivot, ratio)).a; // Combine with rotated selection mask
 	
-	COLOR.rgb = rotated.rgb; // Set the rotated image in place of the Original
+	COLOR.rgb = mix(mix(original.rgb, rotated.rgb, rotated.a * border), rotated.rgb, selection);
 	COLOR.a = mix(original.a, 0.0, selection); // Remove alpha on the selected area
 	COLOR.a = mix(COLOR.a, 1.0, rotated.a * border); // Combine alpha of original image and rotated
 }
