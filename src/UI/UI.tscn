@@ -234,7 +234,7 @@ margin_bottom = -4.0
 margin_left = 60.0
 margin_top = 8.0
 margin_right = 938.0
-margin_bottom = 532.0
+margin_bottom = 512.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -266,14 +266,14 @@ script = ExtResource( 6 )
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="DockableContainer/Main Canvas"]
 margin_top = 58.0
 margin_right = 878.0
-margin_bottom = 524.0
+margin_bottom = 504.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="VerticalRuler" type="Button" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler"]
 margin_right = 16.0
-margin_bottom = 466.0
+margin_bottom = 446.0
 rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
 mouse_default_cursor_shape = 15
@@ -285,7 +285,7 @@ script = ExtResource( 4 )
 [node name="ViewportContainer" type="ViewportContainer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler"]
 margin_left = 16.0
 margin_right = 878.0
-margin_bottom = 466.0
+margin_bottom = 446.0
 focus_mode = 2
 mouse_default_cursor_shape = 3
 size_flags_horizontal = 3
@@ -294,7 +294,7 @@ stretch = true
 script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 862, 466 )
+size = Vector2( 862, 446 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
@@ -348,9 +348,10 @@ script = ExtResource( 7 )
 
 [node name="Animation Timeline" parent="DockableContainer" instance=ExtResource( 18 )]
 margin_left = 60.0
-margin_top = 556.0
+margin_top = 536.0
 margin_right = 938.0
 margin_bottom = 716.0
+rect_min_size = Vector2( 36, 180 )
 
 [node name="Canvas Preview" parent="DockableContainer" instance=ExtResource( 16 )]
 margin_left = 958.0
