@@ -398,6 +398,9 @@ func deserialize(dict: Dictionary) -> void:
 		if dict.has("layers"):
 			var layer_i := 0
 			for saved_layer in dict.layers:
+				var blend_mode := 0
+				if saved_layer.has("blend_mode"): # Backwards compatibility
+					blend_mode = saved_layer.blend_mode
 				var linked_cels := []
 				for linked_cel_number in saved_layer.linked_cels:
 					linked_cels.append(frames[linked_cel_number])
@@ -409,7 +412,7 @@ func deserialize(dict: Dictionary) -> void:
 					saved_layer.visible,
 					saved_layer.locked,
 					saved_layer.new_cels_linked,
-					saved_layer.blend_mode,
+					blend_mode,
 					linked_cels
 				)
 				layers.append(layer)
