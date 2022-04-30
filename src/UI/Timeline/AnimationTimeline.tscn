@@ -764,6 +764,7 @@ margin_left = 85.0
 margin_right = 186.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 101, 0 )
+focus_mode = 0
 align = 1
 
 [node name="SpacerControl2" type="Control" parent="ScrollContainer/TimelineContainer/LayerBlendMode"]
