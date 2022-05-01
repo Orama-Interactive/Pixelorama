@@ -208,7 +208,6 @@ func fill_in_color(position: Vector2) -> void:
 		}
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(image, ColorReplaceShader, params, project.size)
-		yield(gen, "done")
 
 
 func fill_in_area(position: Vector2) -> void:
