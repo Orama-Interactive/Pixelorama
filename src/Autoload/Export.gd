@@ -378,22 +378,17 @@ func get_proccessed_image_animation_tag_and_start_id(processed_image_id: int) ->
 # Blends canvas layers into passed image starting from the origin position
 func blend_layers(image: Image, frame: Frame, origin: Vector2 = Vector2(0, 0)) -> void:
 	image.lock()
-	var layer_i := 0
-	for cel in frame.cels:
-		if Global.current_project.layers[layer_i].visible:
-			var cel_image := Image.new()
-			cel_image.copy_from(cel.image)
-			cel_image.lock()
+	var cel_image := Image.new()
+	cel_image.lock()
 
-			var gen = ShaderImageEffect.new()
-			var params = {}
-			for i in Global.current_project.layers.size():
-				params["tex%s" % i] = frame.cels[i].image_texture
-				params["tex%s_opacity" % i] = frame.cels[i].opacity
-			gen.generate_image(cel_image, Global.canvas.material.shader, params, Global.current_project.size)
-			image.blend_rect(cel_image, Rect2(Vector2.ZERO, Global.current_project.size), origin)
-			cel_image.unlock()
-		layer_i += 1
+	var gen = ShaderImageEffect.new()
+	var params = {}
+	for i in Global.current_project.layers.size():
+		params["tex%s" % i] = frame.cels[i].image_texture
+		params["tex%s_opacity" % i] = frame.cels[i].opacity
+	gen.generate_image(cel_image, Global.canvas.material.shader, params, Global.current_project.size)
+	image.blend_rect(cel_image, Rect2(Vector2.ZERO, Global.current_project.size), origin)
+	cel_image.unlock()
 	image.unlock()
 
 
