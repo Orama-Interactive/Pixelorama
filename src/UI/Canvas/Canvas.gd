@@ -135,7 +135,7 @@ func generate_shader(layers : Array) -> String:
 	
 			var tex := "texture(tex{i}, UV - cur_layer_pos * float(current_layer - {i} == 0))".format({"i": i}) # Layer, move uv if it's the selected
 			var tex_a := "texture(tex{i}, UV - cur_layer_pos * float(current_layer - {i} == 0)).a * tex{i}_opacity".format({"i": i}) # Layer, move uv if it's the selected
-			var normal := "mix(col.rgb, {tex}.rgb, {tex}.a).rgb".format({"tex": tex}) # Normal blending, used for outside area
+			var normal := "mix(col.rgb, {tex}.rgb, {tex.a}).rgb".format({"tex": tex, "tex.a": tex_a}) # Normal blending, used for outside area
 			var blend := "" # Blending formula
 			match layers[i].blend_mode:
 				BlendMode.NORMAL:
@@ -173,13 +173,12 @@ render_mode unshaded;
 {uniforms}
 
 void fragment() {
-	vec4 col = COLOR.rgba;
-	col.a = 0.0;
+	vec4 col = vec4(0.0);
 	vec2 cur_layer_pos = move_prev_pos * TEXTURE_PIXEL_SIZE;
 	vec2 border_uv = abs((UV - cur_layer_pos - 0.5) * 2.0);
 	float border = 1.0 - clamp(floor(max(border_uv.x, border_uv.y)), 0.0, 1.0);
 	{draws}
-	vec3 col_fix = col.rgb/col.a;
+	vec3 col_fix = clamp(col.rgb/col.a, 0.0, 1.0);
 	COLOR = vec4(col_fix, col.a);
 }"""
 	code = code.format({"uniforms": uniforms, "draws": draws})
