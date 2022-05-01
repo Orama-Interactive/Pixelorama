@@ -386,7 +386,9 @@ func blend_layers(image: Image, frame: Frame, origin: Vector2 = Vector2(0, 0)) -
 	for i in Global.current_project.layers.size():
 		params["tex%s" % i] = frame.cels[i].image_texture
 		params["tex%s_opacity" % i] = frame.cels[i].opacity
-	gen.generate_image(cel_image, Global.canvas.material.shader, params, Global.current_project.size)
+	gen.generate_image(
+		cel_image, Global.canvas.material.shader, params, Global.current_project.size
+	)
 	image.blend_rect(cel_image, Rect2(Vector2.ZERO, Global.current_project.size), origin)
 	cel_image.unlock()
 	image.unlock()

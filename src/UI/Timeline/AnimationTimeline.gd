@@ -732,39 +732,35 @@ func _on_MergeDownLayer_pressed() -> void:
 		var new_cels: Array = f.cels.duplicate()
 		for i in new_cels.size():
 			new_cels[i] = Cel.new(new_cels[i].image, new_cels[i].opacity)
-		var selected_layer_idx : int = Global.current_project.current_layer
-		var new_layer_idx : int = Global.current_project.current_layer - 1
-		var new_layer : Layer = new_layers[new_layer_idx]
+		var selected_layer_idx: int = Global.current_project.current_layer
+		var new_layer_idx: int = Global.current_project.current_layer - 1
+		var new_layer: Layer = new_layers[new_layer_idx]
 
 		var merged_image := Image.new()
 		merged_image.copy_from(f.cels[new_layer_idx].image)
 
 		var gen = ShaderImageEffect.new()
 		var params = {
-			"tex0" : f.cels[new_layer_idx].image_texture,
-			"tex0_opacity" : f.cels[new_layer_idx].opacity,
-			"tex1" : f.cels[selected_layer_idx].image_texture,
-			"tex1_opacity" : f.cels[selected_layer_idx].opacity
+			"tex0": f.cels[new_layer_idx].image_texture,
+			"tex0_opacity": f.cels[new_layer_idx].opacity,
+			"tex1": f.cels[selected_layer_idx].image_texture,
+			"tex1_opacity": f.cels[selected_layer_idx].opacity
 		}
 
 		var shader = Shader.new()
-		shader.code = Global.canvas.generate_shader([
-													Global.current_project.layers[new_layer_idx],
-													Global.current_project.layers[selected_layer_idx]
-													])
+		shader.code = Global.canvas.generate_shader(
+			[
+				Global.current_project.layers[new_layer_idx],
+				Global.current_project.layers[selected_layer_idx]
+			]
+		)
 		gen.generate_image(merged_image, shader, params, Global.current_project.size)
 
 		new_cels.remove(selected_layer_idx)
 		if (
 			!new_cels[new_layer_idx].image.is_invisible()
-			and (
-				new_layer.linked_cels.size()
-				> 1
-			)
-			and (
-				f
-				in new_layer.linked_cels
-			)
+			and (new_layer.linked_cels.size() > 1)
+			and (f in new_layer.linked_cels)
 		):
 			new_layer.linked_cels.erase(f)
 			new_cels[new_layer_idx].image = merged_image
@@ -773,9 +769,7 @@ func _on_MergeDownLayer_pressed() -> void:
 				f.cels[new_layer_idx].image, "data", merged_image.data
 			)
 			Global.current_project.undo_redo.add_undo_property(
-				f.cels[new_layer_idx].image,
-				"data",
-				f.cels[new_layer_idx].image.data
+				f.cels[new_layer_idx].image, "data", f.cels[new_layer_idx].image.data
 			)
 
 		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)

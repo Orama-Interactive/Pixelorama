@@ -399,7 +399,7 @@ func deserialize(dict: Dictionary) -> void:
 			var layer_i := 0
 			for saved_layer in dict.layers:
 				var blend_mode := 0
-				if saved_layer.has("blend_mode"): # Backwards compatibility
+				if saved_layer.has("blend_mode"):  # Backwards compatibility
 					blend_mode = saved_layer.blend_mode
 				var linked_cels := []
 				for linked_cel_number in saved_layer.linked_cels:

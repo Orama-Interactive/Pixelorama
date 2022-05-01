@@ -18,7 +18,7 @@ func _draw() -> void:
 		frame = current_project.current_frame
 	var current_cels: Array = current_project.frames[frame].cels
 
-	draw_texture(current_cels[0].image_texture, Vector2.ZERO, Color.white) # Placeholder
+	draw_texture(current_cels[0].image_texture, Vector2.ZERO, Color.white)  # Placeholder
 
 
 func _on_AnimationTimer_timeout() -> void:
