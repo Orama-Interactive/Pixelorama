@@ -138,7 +138,9 @@ func generate_shader(layers: Array) -> String:
 			var move := "cur_layer_pos * float(current_layer - {i} == 0)"  # Move if it's selected
 			var border := "mix(1.0, border, float(current_layer - {i} == 0))"
 			var tex := "texture(tex{i}, UV - {move})".format({"i": i, "move": move})
-			var tex_a := "{tex}.a * tex{i}_opacity".format({"tex": tex, "i": i})
+			var tex_a := "{tex}.a * {border} * tex{i}_opacity".format(
+					{"tex": tex, "i": i, "border": border}
+				)
 
 			# Normal blending, used for outside area
 			var normal := "mix(col.rgb, {tex}.rgb, {tex.a} * {border}).rgb".format(
