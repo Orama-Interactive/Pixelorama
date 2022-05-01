@@ -262,10 +262,6 @@ func undo_or_redo(
 	elif "Move Cels" == action_name:
 		project.frames = project.frames  # to call frames_changed
 
-	elif "Set Blend Mode" == action_name:
-		layer_blend_mode_option.selected = project.layers[project.current_layer].blend_mode
-		canvas.update_shader()
-
 	canvas.update()
 	if !project.has_changed:
 		project.has_changed = true

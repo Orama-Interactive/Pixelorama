@@ -809,14 +809,14 @@ func _on_BlendModeOption_item_selected(index) -> void:
 	var current_layers: Array = Global.current_project.layers
 	var current_layer: Layer = current_layers[Global.current_project.current_layer]
 	var previous_index = current_layer.blend_mode
-	current_layer.blend_mode = index
-
-	Global.canvas.update_shader()
-	Global.canvas.update()
 
 	Global.current_project.undo_redo.create_action("Set Blend Mode")
-	Global.current_project.undo_redo.add_do_property(current_layer, "blend_mode", index)
-	Global.current_project.undo_redo.add_undo_property(current_layer, "blend_mode", previous_index)
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	Global.current_project.undo_redo.add_do_property(current_layer, "blend_mode", index)
+	Global.current_project.undo_redo.add_do_method(blendmode_option, "select", index)
+	Global.current_project.undo_redo.add_do_method(Global.canvas, "update_shader")
+	Global.current_project.undo_redo.add_undo_property(current_layer, "blend_mode", previous_index)
+	Global.current_project.undo_redo.add_undo_method(blendmode_option, "select", previous_index)
+	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	Global.current_project.undo_redo.add_undo_method(Global.canvas, "update_shader")
 	Global.current_project.undo_redo.commit_action()
