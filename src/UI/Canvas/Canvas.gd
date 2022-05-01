@@ -139,8 +139,8 @@ func generate_shader(layers: Array) -> String:
 			var border := "mix(1.0, border, float(current_layer - {i} == 0))"
 			var tex := "texture(tex{i}, UV - {move})".format({"i": i, "move": move})
 			var tex_a := "{tex}.a * {border} * tex{i}_opacity".format(
-					{"tex": tex, "i": i, "border": border}
-				)
+				{"tex": tex, "i": i, "border": border}
+			)
 
 			# Normal blending, used for outside area
 			var normal := "mix(col.rgb, {tex}.rgb, {tex.a} * {border}).rgb".format(
@@ -166,33 +166,36 @@ func generate_shader(layers: Array) -> String:
 				BlendMode.DODGE:
 					blend = "col.rgb / (1.0 - {tex}.rgb)"
 				BlendMode.OVERLAY:
-					blend = ("mix(2.0 * col.rgb * {tex}.rgb, "
-							+ "1.0 - 2.0 * (1.0 - {tex}.rgb) * (1.0 - col.rgb),"
-							+ "round(col.rgb))"
-							)
+					blend = (
+						"mix(2.0 * col.rgb * {tex}.rgb, "
+						+ "1.0 - 2.0 * (1.0 - {tex}.rgb) * (1.0 - col.rgb),"
+						+ "round(col.rgb))"
+					)
 				BlendMode.SOFT_LIGHT:
-					blend = ("mix(2.0 * col.rgb * {tex}.rgb + col.rgb * col.rgb * "
-							+ "(1.0 - 2.0 * {tex}.rgb), "
-							+ "sqrt(col.rgb) * (2.0 * {tex}.rgb - 1.0) + "
-							+ "(2.0 * col.rgb) * (1.0 - {tex}.rgb),"
-							+ "round(col.rgb))"
-							)
+					blend = (
+						"mix(2.0 * col.rgb * {tex}.rgb + col.rgb * col.rgb * "
+						+ "(1.0 - 2.0 * {tex}.rgb), "
+						+ "sqrt(col.rgb) * (2.0 * {tex}.rgb - 1.0) + "
+						+ "(2.0 * col.rgb) * (1.0 - {tex}.rgb),"
+						+ "round(col.rgb))"
+					)
 				BlendMode.HARD_LIGHT:
-					blend = ("mix(2.0 * col.rgb * {tex}.rgb, "
-							+ "1.0 - 2.0 * (1.0 - {tex}.rgb) * (1.0 - col.rgb), "
-							+ "round({tex}.rgb))"
-							)
+					blend = (
+						"mix(2.0 * col.rgb * {tex}.rgb, "
+						+ "1.0 - 2.0 * (1.0 - {tex}.rgb) * (1.0 - col.rgb), "
+						+ "round({tex}.rgb))"
+					)
 
 			blend = blend.format({"tex": tex, "tex.a": tex_a})
 			blended = "mix(col.rgb, clamp({formula}, 0.0, 1.0), {tex.a})".format(
 				{"formula": blend, "tex.a": tex_a}
 			)
-			draws += "col.rgb = mix({normal}, {blended}, col.a);".format({
-				"normal": normal, "blended": blended, "i": i}
+			draws += "col.rgb = mix({normal}, {blended}, col.a);".format(
+				{"normal": normal, "blended": blended, "i": i}
 			)
-			draws += "col.a = mix(col.a, 1.0, {tex.a});".format({"tex": tex,
-																"tex.a": tex_a,
-																"i": i})
+			draws += "col.a = mix(col.a, 1.0, {tex.a});".format(
+				{"tex": tex, "tex.a": tex_a, "i": i}
+			)
 	# Generate code
 	var code: String = """
 shader_type canvas_item;
