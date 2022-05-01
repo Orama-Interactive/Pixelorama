@@ -605,7 +605,7 @@ func _layer_changed(value: int) -> void:
 				Global.layers_container.get_child_count() - 1 - current_layer_tmp
 			)
 			layer_button.pressed = true
-	
+
 	var layer_blend_mode: int = layers[current_layer].blend_mode
 	Global.layer_blend_mode_option.selected = layer_blend_mode
 

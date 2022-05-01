@@ -11,7 +11,12 @@ var blend_mode := 0
 
 
 func _init(
-	_name := "", _visible := true, _locked := false, _new_cels_linked := false, _blend_mode := 0, _linked_cels := []
+	_name := "",
+	_visible := true,
+	_locked := false,
+	_new_cels_linked := false,
+	_blend_mode := 0,
+	_linked_cels := []
 ) -> void:
 	name = _name
 	visible = _visible

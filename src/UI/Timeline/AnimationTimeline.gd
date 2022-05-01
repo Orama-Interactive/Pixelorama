@@ -748,8 +748,10 @@ func _on_MergeDownLayer_pressed() -> void:
 		}
 
 		var shader = Shader.new()
-		shader.code = Global.canvas.generate_shader([	Global.current_project.layers[new_layer_idx], 
-														Global.current_project.layers[selected_layer_idx]])
+		shader.code = Global.canvas.generate_shader([
+													Global.current_project.layers[new_layer_idx],
+													Global.current_project.layers[selected_layer_idx]
+													])
 		gen.generate_image(merged_image, shader, params, Global.current_project.size)
 
 		new_cels.remove(selected_layer_idx)

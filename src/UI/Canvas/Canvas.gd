@@ -2,7 +2,7 @@ class_name Canvas
 extends Node2D
 
 enum BlendMode {
-	NORMAL, 
+	NORMAL,
 	ADD,
 	SUB,
 	MUL,
@@ -55,7 +55,9 @@ func _draw() -> void:
 		position_tmp.x = position_tmp.x + Global.current_project.size.x
 		scale_tmp.x = -1
 	draw_set_transform(position_tmp, rotation, scale_tmp)
-	draw_texture(current_cels[0].image_texture, Vector2.ZERO) # Placeholder so we can have a material here
+
+	# Placeholder so we can have a material here
+	draw_texture(current_cels[0].image_texture, Vector2.ZERO)
 
 	# Draw current frame layers
 	for i in range(Global.current_project.layers.size()):
@@ -132,39 +134,63 @@ func generate_shader(layers : Array) -> String:
 		if layers[i].visible:  # if it's visible
 			uniforms += "uniform sampler2D tex%s;" % i
 			uniforms += "uniform float tex%s_opacity;" % i
-	
-			var tex := "texture(tex{i}, UV - cur_layer_pos * float(current_layer - {i} == 0))".format({"i": i}) # Layer, move uv if it's the selected
-			var tex_a := "texture(tex{i}, UV - cur_layer_pos * float(current_layer - {i} == 0)).a * tex{i}_opacity".format({"i": i}) # Layer, move uv if it's the selected
-			var normal := "mix(col.rgb, {tex}.rgb, {tex.a}).rgb".format({"tex": tex, "tex.a": tex_a}) # Normal blending, used for outside area
-			var blend := "" # Blending formula
+
+			var move := "cur_layer_pos * float(current_layer - {i} == 0)" # Move if it's selected
+			var border := "mix(1.0, border, float(current_layer - {i} == 0))"
+			var tex := "texture(tex{i}, UV - {move})".format({"i": i, "move": move})
+			var tex_a := "{tex}.a * tex{i}_opacity".format({"tex": tex, "i": i})
+
+			# Normal blending, used for outside area
+			var normal := "mix(col.rgb, {tex}.rgb, {tex.a} * {border}).rgb".format({
+																				"tex": tex,
+																				"tex.a": tex_a,
+																				"border": border
+																				})
+			var blend := "" # Blend formula
+			var blended := "" # Blended image (previous layers and current layer)
 			match layers[i].blend_mode:
 				BlendMode.NORMAL:
-					blend = "mix(col.rgb, {tex}.rgb, {tex.a})"
+					blend = "{tex}.rgb"
 				BlendMode.ADD:
-					blend = "mix(col.rgb, clamp(col.rgb + {tex}.rgb, 0.0, 1.0).rgb, {tex.a}).rgb"
+					blend = "col.rgb + {tex}.rgb"
 				BlendMode.SUB:
-					blend = "mix(col.rgb, clamp(col.rgb - {tex}.rgb, 0.0, 1.0).rgb, {tex.a}).rgb"
+					blend = "col.rgb - {tex}.rgb"
 				BlendMode.MUL:
-					blend = "mix(col.rgb, clamp(col.rgb * {tex}.rgb, 0.0, 1.0).rgb, {tex.a}).rgb"
+					blend = "col.rgb * {tex}.rgb"
 				BlendMode.SCREEN:
-					blend = "mix(col.rgb, clamp(mix(col.rgb, 1.0 - (1.0 - col.rgb) * (1.0 - {tex}.rgb), {tex.a}), 0.0, 1.0).rgb, {tex.a}).rgb"
+					blend = "mix(col.rgb, 1.0 - (1.0 - col.rgb) * (1.0 - {tex}.rgb), {tex.a})"
 				BlendMode.DIFFERENCE:
-					blend = "mix(col.rgb, clamp(abs(col.rgb - {tex}.rgb), 0.0, 1.0).rgb, {tex.a}).rgb"
+					blend = "abs(col.rgb - {tex}.rgb)"
 				BlendMode.BURN:
-					blend = "mix(col.rgb, clamp(1.0 - (1.0 - col.rgb) / {tex}.rgb, 0.0, 1.0).rgb, {tex.a}).rgb"
+					blend = "1.0 - (1.0 - col.rgb) / {tex}.rgb"
 				BlendMode.DODGE:
-					blend = "mix(col.rgb, clamp(col.rgb / (1.0 - {tex}.rgb), 0.0, 1.0).rgb, {tex.a}).rgb"
+					blend = "col.rgb / (1.0 - {tex}.rgb)"
 				BlendMode.OVERLAY:
-					blend = "mix(col.rgb, clamp(mix(2.0 * col.rgb * {tex}.rgb, 1.0 - 2.0 * (1.0 - {tex}.rgb) * (1.0 - col.rgb), round(col.rgb)), 0.0, 1.0).rgb, {tex.a}).rgb"
+					blend = "mix(2.0 * col.rgb * {tex}.rgb, " + \
+							"1.0 - 2.0 * (1.0 - {tex}.rgb) * (1.0 - col.rgb)," + \
+							"round(col.rgb))"
 				BlendMode.SOFT_LIGHT:
-					blend = "mix(col.rgb, clamp(mix(2.0 * col.rgb * {tex}.rgb + col.rgb * col.rgb * (1.0 - 2.0 * {tex}.rgb), sqrt(col.rgb) * (2.0 * {tex}.rgb - 1.0) + (2.0 * col.rgb) * (1.0 - {tex}.rgb), round(col.rgb)), 0.0, 1.0).rgb, {tex.a}).rgb"
+					blend = "mix(2.0 * col.rgb * {tex}.rgb + col.rgb * col.rgb *" + \
+														"(1.0 - 2.0 * {tex}.rgb), " + \
+							"sqrt(col.rgb) * (2.0 * {tex}.rgb - 1.0) + " + \
+														"(2.0 * col.rgb) * (1.0 - {tex}.rgb)," + \
+							"round(col.rgb))"
 				BlendMode.HARD_LIGHT:
-					blend = "mix(col.rgb, clamp(mix(2.0 * col.rgb * {tex}.rgb, 1.0 - 2.0 * (1.0 - {tex}.rgb) * (1.0 - col.rgb), round({tex}.rgb)), 0.0, 1.0).rgb, {tex.a}).rgb"
+					blend = "mix(2.0 * col.rgb * {tex}.rgb, " + \
+							"1.0 - 2.0 * (1.0 - {tex}.rgb) * (1.0 - col.rgb), " + \
+							"round({tex}.rgb))"
 
 			blend = blend.format({"tex": tex, "tex.a": tex_a})
-			draws += "col.rgb = mix({normal}, {blend}, col.a);".format({"normal": normal, "blend": blend, "i": i})
-			draws += "col.a = mix(col.a, 1.0, {tex}.a * tex{i}_opacity * mix(1.0, border, float(current_layer - {i} == 0)));".format({"tex": tex, "i": i})
-
+			blended = "mix(col.rgb, clamp({formula}, 0.0, 1.0), {tex.a})".format({
+																				"formula": blend,
+																				"tex.a": tex_a
+																				})
+			draws += "col.rgb = mix({normal}, {blended}, col.a);".format({
+																			"normal": normal,
+																			"blended": blended,
+																			"i": i
+																		})
+			draws += "col.a = mix(col.a, 1.0, {tex.a});".format({"tex": tex, "i": i})
 	# Generate code
 	var code : String = """
 shader_type canvas_item;
