@@ -65,7 +65,7 @@ margin_right = 278.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "Linear"
-items = [ "Linear", null, false, 0, null, "Radial", null, false, 1, null, "Step", null, false, 2, null, "Radial Step", null, false, 3, null, "Dithering", null, false, 4, null, "Radial Dithering", null, false, 5, null ]
+items = [ "Linear", null, false, 0, null, "Radial", null, false, 1, null, "Linear Step", null, false, 2, null, "Radial Step", null, false, 3, null, "Linear Dithering", null, false, 4, null, "Radial Dithering", null, false, 5, null ]
 selected = 0
 
 [node name="ColorsLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]

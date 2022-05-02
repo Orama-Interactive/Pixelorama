@@ -1,12 +1,12 @@
 extends ImageEffect
 
-enum { LINEAR, RADIAL, STEP, RADIAL_STEP, DITHERING, RADIAL_DITHERING }
+enum { LINEAR, RADIAL, LINEAR_STEP, RADIAL_STEP, LINEAR_DITHERING, RADIAL_DITHERING }
 
 var shader_linear: Shader = preload("res://src/Shaders/Gradients/Linear.gdshader")
 var shader_radial: Shader = preload("res://src/Shaders/Gradients/Radial.gdshader")
-var shader_step: Shader = preload("res://src/Shaders/Gradients/Step.gdshader")
+var shader_linear_step: Shader = preload("res://src/Shaders/Gradients/LinearStep.gdshader")
 var shader_radial_step: Shader = preload("res://src/Shaders/Gradients/RadialStep.gdshader")
-var shader_dither: Shader = preload("res://src/Shaders/Gradients/Dithering.gdshader")
+var shader_linear_dither: Shader = preload("res://src/Shaders/Gradients/LinearDithering.gdshader")
 var shader_radial_dither: Shader = preload("res://src/Shaders/Gradients/RadialDithering.gdshader")
 
 var confirmed := false
@@ -123,14 +123,14 @@ func _on_TypeOptionButton_item_selected(index: int) -> void:
 		RADIAL:
 			shader = shader_radial
 			get_tree().set_group("gradient_radial", "visible", true)
-		STEP:
-			shader = shader_step
+		LINEAR_STEP:
+			shader = shader_linear_step
 			get_tree().set_group("gradient_step", "visible", true)
 		RADIAL_STEP:
 			shader = shader_radial_step
 			get_tree().set_group("gradient_radial_step", "visible", true)
-		DITHERING:
-			shader = shader_dither
+		LINEAR_DITHERING:
+			shader = shader_linear_dither
 			get_tree().set_group("gradient_dithering", "visible", true)
 		RADIAL_DITHERING:
 			shader = shader_radial_dither
