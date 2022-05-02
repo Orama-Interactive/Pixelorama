@@ -89,7 +89,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"first_color": color1.color,
 		"second_color": color2.color,
 		"selection": selection_tex,
-		"position": position.value,
+		"position": (position.value / 100.0) - 0.5,
 		"angle": angle.value,
 		"center": Vector2(center_x.value / 100.0, center_y.value / 100.0),
 		"radius": Vector2(radius_x.value, radius_y.value),

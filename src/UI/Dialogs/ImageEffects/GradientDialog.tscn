@@ -108,9 +108,8 @@ margin_top = 48.0
 margin_right = 278.0
 margin_bottom = 72.0
 mouse_default_cursor_shape = 2
-min_value = -0.5
-max_value = 0.5
-step = 0.01
+value = 50.0
+suffix = "%"
 
 [node name="AngleLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear", "gradient_step"]]
 margin_top = 81.0
@@ -131,7 +130,7 @@ suffix = "°"
 margin_top = 109.0
 margin_right = 160.0
 margin_bottom = 123.0
-text = "Size:"
+text = "Transition size:"
 
 [node name="SizeSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
 margin_left = 164.0
