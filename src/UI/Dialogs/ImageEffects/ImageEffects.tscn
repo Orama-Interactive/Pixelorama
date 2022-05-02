@@ -34,7 +34,6 @@ margin_bottom = 392.0
 [node name="DesaturateDialog" parent="." instance=ExtResource( 3 )]
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 13 )]
-visible = false
 margin_right = 217.0
 margin_bottom = 106.0
 
