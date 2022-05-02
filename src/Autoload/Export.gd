@@ -379,6 +379,9 @@ func get_proccessed_image_animation_tag_and_start_id(processed_image_id: int) ->
 func blend_layers(image: Image, frame: Frame, origin: Vector2 = Vector2(0, 0)) -> void:
 	image.lock()
 	var cel_image := Image.new()
+	cel_image.create(
+		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
+	)
 	cel_image.lock()
 
 	var gen = ShaderImageEffect.new()
