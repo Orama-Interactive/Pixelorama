@@ -4,9 +4,9 @@
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="GradientDialog" type="ConfirmationDialog"]
-margin_right = 200.0
-margin_bottom = 196.0
-rect_min_size = Vector2( 172, 60.2 )
+margin_right = 334.0
+margin_bottom = 444.0
+rect_min_size = Vector2( 334, 444 )
 window_title = "Gradient"
 resizable = true
 script = ExtResource( 1 )
@@ -26,14 +26,14 @@ __meta__ = {
 }
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_right = 285.0
-margin_bottom = 200.0
+margin_right = 318.0
+margin_bottom = 240.0
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 42.5
-margin_right = 242.5
-margin_bottom = 200.0
+margin_left = 39.0
+margin_right = 279.0
+margin_bottom = 240.0
 rect_min_size = Vector2( 200, 200 )
 size_flags_horizontal = 5
 size_flags_vertical = 3
@@ -48,86 +48,248 @@ margin_right = 0.0
 margin_bottom = 0.0
 
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
-margin_top = 204.0
-margin_right = 285.0
-margin_bottom = 304.0
+margin_top = 244.0
+margin_right = 318.0
+margin_bottom = 400.0
 columns = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="TypeLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
 margin_top = 3.0
 margin_right = 160.0
 margin_bottom = 17.0
+text = "Type:"
+
+[node name="TypeOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
+margin_left = 164.0
+margin_right = 278.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Linear"
+items = [ "Linear", null, false, 0, null, "Radial", null, false, 1, null, "Step", null, false, 2, null, "Radial Step", null, false, 3, null, "Dithering", null, false, 4, null, "Radial Dithering", null, false, 5, null ]
+selected = 0
+
+[node name="ColorsLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
+margin_top = 27.0
+margin_right = 160.0
+margin_bottom = 41.0
 text = "Colors:"
 
-[node name="ColorsContainer" type="HBoxContainer" parent="VBoxContainer/OptionsContainer"]
-margin_left = 164.0
-margin_right = 285.0
-margin_bottom = 20.0
-
-[node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer/ColorsContainer"]
-margin_right = 20.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 0 )
-mouse_default_cursor_shape = 2
-
-[node name="ColorPickerButton2" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer/ColorsContainer"]
-margin_left = 24.0
-margin_right = 44.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 0 )
-mouse_default_cursor_shape = 2
-color = Color( 1, 1, 1, 1 )
-
-[node name="Label2" type="Label" parent="VBoxContainer/OptionsContainer"]
-margin_top = 29.0
-margin_right = 160.0
-margin_bottom = 43.0
-text = "Steps:"
-
-[node name="StepSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+[node name="ColorsContainer" type="HBoxContainer" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
 margin_left = 164.0
 margin_top = 24.0
-margin_right = 285.0
-margin_bottom = 48.0
+margin_right = 278.0
+margin_bottom = 44.0
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer/ColorsContainer"]
+margin_right = 55.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+
+[node name="ColorPickerButton2" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer/ColorsContainer"]
+margin_left = 59.0
+margin_right = 114.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+color = Color( 1, 1, 1, 1 )
+
+[node name="PositionLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear", "gradient_step"]]
+margin_top = 53.0
+margin_right = 160.0
+margin_bottom = 67.0
+text = "Position:"
+
+[node name="PositionSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear", "gradient_step"]]
+margin_left = 164.0
+margin_top = 48.0
+margin_right = 278.0
+margin_bottom = 72.0
+mouse_default_cursor_shape = 2
+value = 50.0
+suffix = "%"
+
+[node name="AngleLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear", "gradient_step"]]
+margin_top = 81.0
+margin_right = 160.0
+margin_bottom = 95.0
+text = "Angle:"
+
+[node name="AngleSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear", "gradient_step"]]
+margin_left = 164.0
+margin_top = 76.0
+margin_right = 278.0
+margin_bottom = 100.0
+mouse_default_cursor_shape = 2
+max_value = 360.0
+suffix = "°"
+
+[node name="SizeLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
+margin_top = 109.0
+margin_right = 160.0
+margin_bottom = 123.0
+text = "Transition size:"
+
+[node name="SizeSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
+margin_left = 164.0
+margin_top = 104.0
+margin_right = 278.0
+margin_bottom = 128.0
+mouse_default_cursor_shape = 2
+min_value = 1.0
+max_value = 200.0
+value = 100.0
+suffix = "%"
+
+[node name="StepsLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_radial_step", "gradient_step"]]
+visible = false
+margin_top = 137.0
+margin_right = 160.0
+margin_bottom = 151.0
+text = "Steps:"
+
+[node name="StepSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer" groups=["gradient_radial_step", "gradient_step"]]
+visible = false
+margin_left = 164.0
+margin_top = 132.0
+margin_right = 316.0
+margin_bottom = 156.0
 mouse_default_cursor_shape = 2
 min_value = 2.0
 value = 2.0
 
-[node name="Label3" type="Label" parent="VBoxContainer/OptionsContainer"]
-margin_top = 55.0
+[node name="CenterLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_radial", "gradient_radial_dithering", "gradient_radial_step"]]
+visible = false
+margin_top = 165.0
 margin_right = 160.0
-margin_bottom = 69.0
-text = "Direction:"
+margin_bottom = 179.0
+text = "Center:"
 
-[node name="DirectionOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 164.0
-margin_top = 52.0
-margin_right = 285.0
-margin_bottom = 72.0
+[node name="CenterContainer" type="HBoxContainer" parent="VBoxContainer/OptionsContainer" groups=["gradient_radial", "gradient_radial_dithering", "gradient_radial_step"]]
+visible = false
+margin_top = 132.0
+margin_right = 183.0
+margin_bottom = 156.0
+
+[node name="XLabel" type="Label" parent="VBoxContainer/OptionsContainer/CenterContainer"]
+margin_top = 5.0
+margin_right = 12.0
+margin_bottom = 19.0
+text = "X:"
+
+[node name="CenterXSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer/CenterContainer"]
+margin_left = 16.0
+margin_right = 90.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
-text = "Top to Bottom"
-items = [ "Top to Bottom", null, false, 0, null, "Bottom to Top", null, false, 1, null, "Left to Right", null, false, 2, null, "Right to Left", null, false, 3, null ]
-selected = 0
+value = 50.0
+suffix = "%"
 
-[node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
-margin_top = 76.0
+[node name="YLabel" type="Label" parent="VBoxContainer/OptionsContainer/CenterContainer"]
+margin_left = 94.0
+margin_top = 5.0
+margin_right = 105.0
+margin_bottom = 19.0
+text = "Y:"
+
+[node name="CenterYSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer/CenterContainer"]
+margin_left = 109.0
+margin_right = 183.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+value = 50.0
+suffix = "%"
+
+[node name="RadiusLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_radial", "gradient_radial_dithering", "gradient_radial_step"]]
+visible = false
+margin_top = 193.0
 margin_right = 160.0
-margin_bottom = 100.0
+margin_bottom = 207.0
+text = "Radius:"
+
+[node name="RadiusContainer" type="HBoxContainer" parent="VBoxContainer/OptionsContainer" groups=["gradient_radial", "gradient_radial_dithering", "gradient_radial_step"]]
+visible = false
+margin_left = 164.0
+margin_top = 188.0
+margin_right = 316.0
+margin_bottom = 212.0
+
+[node name="XLabel" type="Label" parent="VBoxContainer/OptionsContainer/RadiusContainer"]
+margin_left = -164.0
+margin_top = -51.0
+margin_right = -152.0
+margin_bottom = -37.0
+text = "X:"
+
+[node name="RadiusXSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer/RadiusContainer"]
+margin_right = 74.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+min_value = 0.01
+step = 0.01
+value = 1.0
+
+[node name="YLabel" type="Label" parent="VBoxContainer/OptionsContainer/RadiusContainer"]
+margin_left = -70.0
+margin_top = -51.0
+margin_right = -59.0
+margin_bottom = -37.0
+text = "Y:"
+
+[node name="RadiusYSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer/RadiusContainer"]
+margin_left = 78.0
+margin_right = 152.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+min_value = 0.01
+step = 0.01
+value = 1.0
+
+[node name="DitheringLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_radial_dithering"]]
+visible = false
+margin_top = 219.0
+margin_right = 160.0
+margin_bottom = 233.0
+text = "Dithering pattern:"
+
+[node name="DitheringOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_radial_dithering"]]
+visible = false
+margin_left = 164.0
+margin_top = 216.0
+margin_right = 316.0
+margin_bottom = 236.0
+mouse_default_cursor_shape = 2
+text = "Bayer 2x2"
+
+[node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
+margin_top = 132.0
+margin_right = 160.0
+margin_bottom = 156.0
 mouse_default_cursor_shape = 2
 pressed = true
 text = "Only affect selection"
 
-[node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
+[node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
 margin_left = 164.0
-margin_top = 76.0
-margin_right = 285.0
-margin_bottom = 100.0
+margin_top = 132.0
+margin_right = 278.0
+margin_bottom = 156.0
 mouse_default_cursor_shape = 2
 text = "Selected cels"
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
 
-[connection signal="color_changed" from="VBoxContainer/OptionsContainer/ColorsContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
-[connection signal="color_changed" from="VBoxContainer/OptionsContainer/ColorsContainer/ColorPickerButton2" to="." method="_on_ColorPickerButton2_color_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/StepSpinBox" to="." method="_on_StepSpinBox_value_changed"]
-[connection signal="item_selected" from="VBoxContainer/OptionsContainer/DirectionOptionButton" to="." method="_on_DirectionOptionButton_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/OptionsContainer/TypeOptionButton" to="." method="_on_TypeOptionButton_item_selected"]
+[connection signal="color_changed" from="VBoxContainer/OptionsContainer/ColorsContainer/ColorPickerButton" to="." method="_color_changed"]
+[connection signal="color_changed" from="VBoxContainer/OptionsContainer/ColorsContainer/ColorPickerButton2" to="." method="_color_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/PositionSpinBox" to="." method="_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/AngleSpinBox" to="." method="_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/SizeSpinBox" to="." method="_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/StepSpinBox" to="." method="_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/CenterContainer/CenterXSpinBox" to="." method="_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/CenterContainer/CenterYSpinBox" to="." method="_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/RadiusContainer/RadiusXSpinBox" to="." method="_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/OptionsContainer/RadiusContainer/RadiusYSpinBox" to="." method="_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/OptionsContainer/DitheringOptionButton" to="." method="_on_DitheringOptionButton_item_selected"]
