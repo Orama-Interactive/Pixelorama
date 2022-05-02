@@ -29,6 +29,7 @@ void fragment() {
 	float rotated_stepped = floor(rotated / step_v) * step_v_m;  // Similar to GDScript's stepify
 	rotated_stepped = clamp(rotated_stepped, 0.0, 1.0);
 	vec4 output = mix(first_color, second_color, rotated_stepped);
+	output = mix(original_color, output, output.a);
 
 	COLOR = mix(original_color, output, selection_color.a);
 }

@@ -18,5 +18,6 @@ void fragment() {
 	float fixed_size = (size / 2.0) + 0.5;
 	float smooth_dist = smoothstep(1.0 - fixed_size, fixed_size, distance(uv, center / radius));
 	vec4 output = second_color * smooth_dist + (1.0 - smooth_dist) * first_color;
+	output = mix(original_color, output, output.a);
 	COLOR = mix(original_color, output, selection_color.a);
 }

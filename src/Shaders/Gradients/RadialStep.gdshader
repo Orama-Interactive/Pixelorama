@@ -30,6 +30,7 @@ void fragment() {
 	}
 	uv_stepped = clamp(uv_stepped, 0.0, 1.0);
 	vec4 output = mix(first_color, second_color, uv_stepped);
+	output = mix(original_color, output, output.a);
 	
 	COLOR = mix(original_color, output, selection_color.a);
 }

@@ -33,6 +33,7 @@ void fragment() {
 	}
 	float dithered = step(uv_stepped, dither_value.r);
 	vec4 output = first_color * dithered + second_color * (1.0 - dithered);
+	output = mix(original_color, output, output.a);
 	
 	COLOR = mix(original_color, output, selection_color.a);
 }

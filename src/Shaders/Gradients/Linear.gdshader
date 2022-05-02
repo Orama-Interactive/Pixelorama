@@ -21,5 +21,6 @@ void fragment() {
 	
 	float pos = smoothstep((1.0 - fixed_size) + fixed_position, fixed_size + fixed_position, rotated);
 	vec4 output = mix(first_color, second_color, pos); 
+	output = mix(original_color, output, output.a);
 	COLOR = mix(original_color, output, selection_color.a);
 }
