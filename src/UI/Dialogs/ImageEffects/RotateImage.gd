@@ -101,7 +101,11 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 				gen.generate_image(_cel, shader, params, _project.size)
 				yield(gen, "done")
 
-	if _project.has_selection and selection_checkbox.pressed:
+	if (
+		_project.has_selection
+		and selection_checkbox.pressed
+		and type_option_button.text != "Nearest neighbour (Shader)"
+	):
 		_cel.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 	else:
 		_cel.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
@@ -147,3 +151,25 @@ func _on_LiveCheckbox_toggled(button_pressed: bool) -> void:
 	live_preview = button_pressed
 	wait_time_spinbox.editable = !live_preview
 	wait_time_spinbox.get_parent().visible = !live_preview
+
+
+func _on_quick_change_angle_pressed(change_type: String) -> void:
+	var current_angle = angle_hslider.value
+	var new_angle = current_angle
+	match change_type:
+		"-90":
+			new_angle = current_angle - 90
+		"-45":
+			new_angle = current_angle - 45
+		"0":
+			new_angle = 0
+		"+45":
+			new_angle = current_angle + 45
+		"+90":
+			new_angle = current_angle + 90
+
+	if new_angle < 0:
+		new_angle = new_angle + 360
+	elif new_angle >= 360:
+		new_angle = new_angle - 360
+	angle_hslider.value = new_angle
