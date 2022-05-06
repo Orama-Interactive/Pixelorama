@@ -160,6 +160,7 @@ func _ready() -> void:
 		presets_option_button.add_item(preset.name)
 	_fill_selector_options()
 
+	# Remove input types that are not changeable
 	var i := 0
 	for type in changeable_types:
 		if !type:
@@ -167,7 +168,9 @@ func _ready() -> void:
 		else:
 			i += 1
 
-	_construct_tree()
+	var shortcuts_preset: int = config_file.get_value("shortcuts", "shortcuts_preset", 0)
+	presets_option_button.select(shortcuts_preset)
+	_on_PresetsOptionButton_item_selected(shortcuts_preset)
 
 
 func _construct_tree() -> void:
@@ -402,3 +405,5 @@ func _on_PresetsOptionButton_item_selected(index: int) -> void:
 		groups[group].tree_item = null
 	tree.clear()
 	_construct_tree()
+	config_file.set_value("shortcuts", "shortcuts_preset", index)
+	config_file.save(config_path)
