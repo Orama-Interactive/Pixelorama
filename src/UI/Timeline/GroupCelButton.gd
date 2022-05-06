@@ -24,6 +24,11 @@ func button_setup() -> void:
 #	cel = Global.current_project.frames[frame].cels[layer]
 	#image = cel.image
 
+	# TODO: Check formatting:
+	if (is_instance_valid(Global.current_project.layers[layer].parent)
+			and not Global.current_project.layers[layer].parent.is_expanded_in_hierarchy()):
+		visible = false
+
 
 func _on_GroupCelButton_resized() -> void:
 	get_node("CelShader").rect_min_size.x = rect_min_size.x - 4

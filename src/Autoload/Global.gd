@@ -232,12 +232,14 @@ func undo_or_redo(
 			"Unlink Cel"
 		]
 	):
-		if layer_index > -1 and frame_index > -1:
-			canvas.update_texture(layer_index, frame_index, project)
-		else:
-			for i in project.frames.size():
-				for j in project.layers.size():
-					canvas.update_texture(j, i, project)
+		# TODO: Check this:
+		if not current_project.layers[layer_index] is GroupLayer:
+			if layer_index > -1 and frame_index > -1:
+				canvas.update_texture(layer_index, frame_index, project)
+			else:
+				for i in project.frames.size():
+					for j in project.layers.size():
+						canvas.update_texture(j, i, project)
 
 		canvas.selection.update()
 		if action_name == "Scale":

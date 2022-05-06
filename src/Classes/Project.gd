@@ -460,13 +460,13 @@ func _frames_changed(value: Array) -> void:
 		layer_cel_container.name = "FRAMESS " + str(i)
 		Global.frames_container.add_child(layer_cel_container)
 		for j in range(frames.size()):
-			if layers[j] is PixelLayer:
+			if layers[i] is PixelLayer:
 				var cel_button = pixel_cel_button_node.instance()
 				cel_button.frame = j
 				cel_button.layer = i
 				cel_button.get_child(0).texture = frames[j].cels[i].image_texture
 				layer_cel_container.add_child(cel_button)
-			elif layers[j] is GroupLayer:
+			elif layers[i] is GroupLayer:
 				# TODO: Make GroupLayers work here
 				pass
 
@@ -514,15 +514,15 @@ func _layers_changed(value: Array) -> void:
 		Global.frames_container.add_child(layer_cel_container)
 		# TODO: FIGURE OUT FRAMES WITH GROUP LAYERS!
 		for j in range(frames.size()):
+			var cel_button # TODO: Figure out static typing (will there be a BaseCelButton?)
 			if layers[i] is PixelLayer:
-				var cel_button = pixel_cel_button_node.instance()
-				cel_button.frame = j
-				cel_button.layer = i
+				cel_button = pixel_cel_button_node.instance()
 				cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-				layer_cel_container.add_child(cel_button)
 			elif layers[i] is GroupLayer:
-				var cel_button = group_cel_button_node.instance()
-				layer_cel_container.add_child(cel_button)
+				cel_button = group_cel_button_node.instance()
+			cel_button.frame = j
+			cel_button.layer = i
+			layer_cel_container.add_child(cel_button)
 
 	var layer_button = Global.layers_container.get_child(
 		Global.layers_container.get_child_count() - 1 - current_layer
