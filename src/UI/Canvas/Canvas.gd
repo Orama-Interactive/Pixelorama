@@ -38,8 +38,10 @@ func _draw() -> void:
 	draw_set_transform(position_tmp, rotation, scale_tmp)
 	# Draw current frame layers
 	for i in range(Global.current_project.layers.size()):
+		if current_cels[i] is GroupCel:
+			continue
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
-		if Global.current_project.layers[i].visible:  # if it's visible
+		if Global.current_project.layers[i].is_visible_in_hierarchy():
 			if i == current_layer:
 				draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
 			else:
@@ -108,7 +110,8 @@ func update_texture(layer_i: int, frame_i := -1, project: Project = Global.curre
 		frame_i = project.current_frame
 
 	if frame_i < project.frames.size() and layer_i < project.layers.size():
-		var current_cel: Cel = project.frames[frame_i].cels[layer_i]
+		# TODO: make sure this is right:
+		var current_cel: PixelCel = project.frames[frame_i].cels[layer_i]
 		current_cel.image_texture.set_data(current_cel.image)
 
 		if project == Global.current_project:
@@ -125,7 +128,8 @@ func update_selected_cels_textures(project: Project = Global.current_project) ->
 		var frame_index: int = cel_index[0]
 		var layer_index: int = cel_index[1]
 		if frame_index < project.frames.size() and layer_index < project.layers.size():
-			var current_cel: Cel = project.frames[frame_index].cels[layer_index]
+			# TODO: make sure this is right:
+			var current_cel: PixelCel = project.frames[frame_index].cels[layer_index]
 			current_cel.image_texture.set_data(current_cel.image)
 
 			if project == Global.current_project:

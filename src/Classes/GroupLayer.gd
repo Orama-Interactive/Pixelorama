@@ -4,8 +4,6 @@ extends BaseLayer
 
 #var children := []
 var expanded := true
-var blend_shader: Shader
-
 
 func _init(_name := "") -> void:
 	name = _name
