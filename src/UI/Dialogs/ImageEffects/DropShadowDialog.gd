@@ -31,6 +31,7 @@ func _confirmed() -> void:
 func set_nodes() -> void:
 	preview = $VBoxContainer/AspectRatioContainer/Preview
 	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
+	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:

@@ -208,7 +208,6 @@ func fill_in_color(position: Vector2) -> void:
 		}
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(image, ColorReplaceShader, params, project.size)
-		yield(gen, "done")
 
 
 func fill_in_area(position: Vector2) -> void:
@@ -303,7 +302,7 @@ func _flood_line_around_point(
 	segment.todo_below = position.y < project.size.y - 1
 	# this is an actual segment we should be coloring, so we add it to the results for the
 	# current image
-	if segment.right_position > segment.left_position:
+	if segment.right_position >= segment.left_position:
 		_allegro_image_segments.append(segment)
 	# we know the point just east of the segment is not part of a segment that should be
 	# processed, else it would be part of this segment
