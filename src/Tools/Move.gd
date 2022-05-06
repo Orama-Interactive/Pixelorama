@@ -137,7 +137,7 @@ func _get_undo_data() -> Dictionary:
 			cels.append(project.frames[cel_index[0]].cels[cel_index[1]])
 	else:
 		for frame in project.frames:
-			var cel: Cel = frame.cels[project.current_layer]
+			var cel: PixelCel = frame.cels[project.current_layer]
 			cels.append(cel)
 	for cel in cels:
 		var image: Image = cel.image

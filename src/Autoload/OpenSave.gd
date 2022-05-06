@@ -188,13 +188,16 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 	if file_major_version >= 0 and file_minor_version > 6:
 		var global_layer_line := file.get_line()
 		while global_layer_line == ".":
-			var layer_name := file.get_line()
-			var layer_visibility := file.get_8()
-			var layer_lock := file.get_8()
-			var layer_new_cels_linked := file.get_8()
+			var layer_dict:= {
+				"name": file.get_line(),
+				"visible": file.get_8(),
+				"locked": file.get_8(),
+				"new_cels_linked": file.get_8(),
+				"linked_cels": []
+			}
 			linked_cels.append(file.get_var())
-
-			var l := Layer.new(layer_name, layer_visibility, layer_lock, layer_new_cels_linked, [])
+			var l := PixelLayer.new()
+			l.deserialize(layer_dict)
 			new_project.layers.append(l)
 			global_layer_line = file.get_line()
 
@@ -211,17 +214,17 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 			if file_major_version == 0 and file_minor_version < 7:
 				var layer_name_old_version = file.get_line()
 				if frame == 0:
-					var l := Layer.new(layer_name_old_version)
+					var l := PixelLayer.new(layer_name_old_version)
 					new_project.layers.append(l)
 			var cel_opacity := 1.0
 			if file_major_version >= 0 and file_minor_version > 5:
 				cel_opacity = file.get_float()
 			var image := Image.new()
 			image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
-			frame_class.cels.append(Cel.new(image, cel_opacity))
+			frame_class.cels.append(PixelCel.new(image, cel_opacity))
 			if file_major_version >= 0 and file_minor_version >= 7:
 				if frame in linked_cels[layer_i]:
-					var linked_cel: Cel = new_project.layers[layer_i].linked_cels[0].cels[layer_i]
+					var linked_cel: PixelCel = new_project.layers[layer_i].linked_cels[0].cels[layer_i]
 					new_project.layers[layer_i].linked_cels.append(frame_class)
 					frame_class.cels[layer_i].image = linked_cel.image
 					frame_class.cels[layer_i].image_texture = linked_cel.image_texture
@@ -346,7 +349,7 @@ func save_pxo_file(
 	file.store_line(to_save)
 	for frame in project.frames:
 		for cel in frame.cels:
-			file.store_buffer(cel.image.get_data())
+			file.store_buffer(cel.get_image().get_data())
 
 	for brush in project.brushes:
 		file.store_buffer(brush.get_data())
@@ -386,12 +389,12 @@ func save_pxo_file(
 
 func open_image_as_new_tab(path: String, image: Image) -> void:
 	var project = Project.new([], path.get_file(), image.get_size())
-	project.layers.append(Layer.new())
+	project.layers.append(PixelLayer.new())
 	Global.projects.append(project)
 
 	var frame := Frame.new()
 	image.convert(Image.FORMAT_RGBA8)
-	frame.cels.append(Cel.new(image, 1))
+	frame.cels.append(PixelCel.new(image, 1))
 
 	project.frames.append(frame)
 	set_new_imported_tab(project, path)
@@ -399,7 +402,7 @@ func open_image_as_new_tab(path: String, image: Image) -> void:
 
 func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert: int) -> void:
 	var project = Project.new([], path.get_file())
-	project.layers.append(Layer.new())
+	project.layers.append(PixelLayer.new())
 	Global.projects.append(project)
 	horiz = min(horiz, image.get_size().x)
 	vert = min(vert, image.get_size().y)
@@ -414,13 +417,13 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 			)
 			project.size = cropped_image.get_size()
 			cropped_image.convert(Image.FORMAT_RGBA8)
-			frame.cels.append(Cel.new(cropped_image, 1))
+			frame.cels.append(PixelCel.new(cropped_image, 1))
 
 			for _i in range(1, project.layers.size()):
 				var empty_sprite := Image.new()
 				empty_sprite.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 				empty_sprite.fill(Color(0, 0, 0, 0))
-				frame.cels.append(Cel.new(empty_sprite, 1))
+				frame.cels.append(PixelCel.new(empty_sprite, 1))
 
 			project.frames.append(frame)
 
@@ -457,12 +460,12 @@ func open_image_as_spritesheet_layer(
 			var frame: Frame = project.new_empty_frame()
 			new_frames.insert(project.current_frame + 1, frame)
 	#Create new layer for spritesheet
-	var layer := Layer.new(file_name)
+	var layer := PixelLayer.new(file_name)
 	new_layers.append(layer)
 	for f in new_frames:
 		var new_layer := Image.new()
 		new_layer.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		f.cels.append(Cel.new(new_layer, 1))
+		f.cels.append(PixelCel.new(new_layer, 1))
 
 	# slice spritesheet
 	var image_no: int = 0
@@ -479,7 +482,7 @@ func open_image_as_spritesheet_layer(
 			for i in new_frames.size():
 				if i == frame_index:
 					cropped_image.convert(Image.FORMAT_RGBA8)
-					new_frames[i].cels[layer_index] = (Cel.new(cropped_image, 1))
+					new_frames[i].cels[layer_index] = (PixelCel.new(cropped_image, 1))
 			image_no += 1
 
 	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
@@ -512,7 +515,7 @@ func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> vo
 	for i in project.frames.size():
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
-			frames[i].cels[layer_index] = (Cel.new(image, 1))
+			frames[i].cels[layer_index] = (PixelCel.new(image, 1))
 			project.undo_redo.add_do_property(project.frames[i], "cels", frames[i].cels)
 			project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
 
@@ -536,11 +539,11 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 	for i in project.layers.size():
 		if i == layer_index:
 			image.convert(Image.FORMAT_RGBA8)
-			frame.cels.append(Cel.new(image, 1))
+			frame.cels.append(PixelCel.new(image, 1))
 		else:
 			var empty_image := Image.new()
 			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-			frame.cels.append(Cel.new(empty_image, 1))
+			frame.cels.append(PixelCel.new(empty_image, 1))
 
 	new_frames.append(frame)
 
@@ -563,7 +566,7 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 	var new_layers: Array = Global.current_project.layers.duplicate()
-	var layer := Layer.new(file_name)
+	var layer := PixelLayer.new(file_name)
 
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Add Layer")
@@ -571,11 +574,11 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 		var new_cels: Array = project.frames[i].cels.duplicate(true)
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
-			new_cels.append(Cel.new(image, 1))
+			new_cels.append(PixelCel.new(image, 1))
 		else:
 			var empty_image := Image.new()
 			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-			new_cels.append(Cel.new(empty_image, 1))
+			new_cels.append(PixelCel.new(empty_image, 1))
 
 		project.undo_redo.add_do_property(project.frames[i], "cels", new_cels)
 		project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)

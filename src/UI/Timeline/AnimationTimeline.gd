@@ -309,7 +309,7 @@ func copy_frames(frames := []) -> void:
 			sprite.copy_from(cel.image)
 			var sprite_texture := ImageTexture.new()
 			sprite_texture.create_from_image(sprite, 0)
-			new_frame.cels.append(Cel.new(sprite, cel.opacity, sprite_texture))
+			new_frame.cels.append(PixelCel.new(sprite, cel.opacity, sprite_texture))
 
 		new_frame.duration = prev_frame.duration
 		for l_i in range(new_layers.size()):
@@ -598,7 +598,7 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 func add_layer(is_new := true) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var new_layers: Array = Global.current_project.layers.duplicate()
-	var l := Layer.new()
+	var l := PixelLayer.new()
 	if !is_new:  # Clone layer
 		l.name = (
 			Global.current_project.layers[Global.current_project.current_layer].name
@@ -624,7 +624,53 @@ func add_layer(is_new := true) -> void:
 			new_layer.copy_from(f.cels[Global.current_project.current_layer].image)
 
 		var new_cels: Array = f.cels.duplicate()
-		new_cels.append(Cel.new(new_layer, 1))
+		new_cels.append(PixelCel.new(new_layer, 1))
+		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
+		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+
+	Global.current_project.undo_redo.add_do_property(
+		Global.current_project, "current_layer", Global.current_project.layers.size()
+	)
+	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.current_project, "current_layer", Global.current_project.current_layer
+	)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.current_project, "layers", Global.current_project.layers
+	)
+
+	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	Global.current_project.undo_redo.commit_action()
+
+
+func add_group_layer(is_new := true) -> void:
+	Global.canvas.selection.transform_content_confirm()
+	var new_layers: Array = Global.current_project.layers.duplicate()
+	var l := GroupLayer.new()
+#	if !is_new:  # Clone layer
+#		l.name = (
+#			Global.current_project.layers[Global.current_project.current_layer].name
+#			+ " ("
+#			+ tr("copy")
+#			+ ")"
+#		)
+	new_layers.append(l)
+	# Add current layer to this group
+#	Global.current_project.layers[Global.current_project.current_layer].parent = l
+	# Add all layers to this group:
+	for layer in Global.current_project.layers:
+		if not layer.parent:
+			layer.parent = l
+	# Add last layer to this group:
+#	Global.current_project.layers[-1].parent = l
+
+	Global.current_project.undos += 1
+	Global.current_project.undo_redo.create_action("Add Layer")
+
+	for f in Global.current_project.frames:
+		var new_cels: Array = f.cels.duplicate()
+		new_cels.append(GroupCel.new())
 		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
 		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
 
@@ -718,7 +764,7 @@ func _on_MergeDownLayer_pressed() -> void:
 	for f in Global.current_project.frames:
 		var new_cels: Array = f.cels.duplicate()
 		for i in new_cels.size():
-			new_cels[i] = Cel.new(new_cels[i].image, new_cels[i].opacity)
+			new_cels[i] = PixelCel.new(new_cels[i].image, new_cels[i].opacity)
 		var selected_layer := Image.new()
 		selected_layer.copy_from(new_cels[Global.current_project.current_layer].image)
 
@@ -790,7 +836,7 @@ func _on_MergeDownLayer_pressed() -> void:
 
 func _on_OpacitySlider_value_changed(value) -> void:
 	var current_frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
-	var cel: Cel = current_frame.cels[Global.current_project.current_layer]
+	var cel: BaseCel = current_frame.cels[Global.current_project.current_layer]
 	cel.opacity = value / 100
 	Global.layer_opacity_slider.value = value
 	Global.layer_opacity_spinbox.value = value

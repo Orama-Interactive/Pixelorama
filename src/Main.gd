@@ -22,7 +22,7 @@ func _ready() -> void:
 
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
-	Global.current_project.layers.append(Layer.new())
+	Global.current_project.layers.append(PixelLayer.new())
 	var frame: Frame = Global.current_project.new_empty_frame()
 	Global.current_project.frames.append(frame)
 	Global.current_project.layers = Global.current_project.layers

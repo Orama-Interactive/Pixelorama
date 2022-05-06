@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/UI/Timeline/CelButton.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Timeline/GroupCelButton.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=3]
 
@@ -16,7 +16,7 @@ shader_param/rect_size = Vector2( 0, 0 )
 shader_param/follow_movement = false
 shader_param/follow_scale = false
 
-[node name="CelButton" type="Button"]
+[node name="GroupCelButton" type="Button"]
 margin_top = 18.0
 margin_right = 36.0
 margin_bottom = 54.0
@@ -31,7 +31,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CelTexture" type="TextureRect" parent="."]
+[node name="CelShader" type="TextureRect" parent="."]
 margin_left = 2.0
 margin_top = 1.78536
 margin_right = 34.0
@@ -45,7 +45,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TransparentChecker" parent="CelTexture" instance=ExtResource( 2 )]
+[node name="TransparentChecker" parent="CelShader" instance=ExtResource( 2 )]
 show_behind_parent = true
 material = SubResource( 1 )
 anchor_right = 1.0
@@ -57,17 +57,9 @@ margin_bottom = 0.0
 margin_right = 20.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-items = [ "Delete", null, 0, false, false, -1, 0, null, "", false, "Link Cel", null, 0, false, false, -1, 0, null, "", false ]
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LinkedIndicator" type="Polygon2D" parent="."]
-color = Color( 0.0627451, 0.741176, 0.215686, 1 )
-invert_enable = true
-invert_border = 1.0
-polygon = PoolVector2Array( 0, 0, 36, 0, 36, 36, 0, 36 )
-
 [connection signal="pressed" from="." to="." method="_on_CelButton_pressed"]
-[connection signal="resized" from="." to="." method="_on_CelButton_resized"]
-[connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]
+[connection signal="resized" from="." to="." method="_on_GroupCelButton_resized"]

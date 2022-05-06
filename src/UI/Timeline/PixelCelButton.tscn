@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=1]
+[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/Timeline/CelButton.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/size = 10.0
+shader_param/alpha = 1.0
+shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
+shader_param/color2 = Color( 1, 1, 1, 1 )
+shader_param/offset = Vector2( 0, 0 )
+shader_param/scale = Vector2( 0, 0 )
+shader_param/rect_size = Vector2( 0, 0 )
+shader_param/follow_movement = false
+shader_param/follow_scale = false
+
+[node name="CelButton" type="Button"]
+margin_top = 18.0
+margin_right = 36.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 36, 36 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = true
+button_mask = 7
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CelTexture" type="TextureRect" parent="."]
+margin_left = 2.0
+margin_top = 1.78536
+margin_right = 34.0
+margin_bottom = 33.7854
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TransparentChecker" parent="CelTexture" instance=ExtResource( 2 )]
+show_behind_parent = true
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+margin_right = 20.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+items = [ "Delete", null, 0, false, false, -1, 0, null, "", false, "Link Cel", null, 0, false, false, -1, 0, null, "", false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LinkedIndicator" type="Polygon2D" parent="."]
+color = Color( 0.0627451, 0.741176, 0.215686, 1 )
+invert_enable = true
+invert_border = 1.0
+polygon = PoolVector2Array( 0, 0, 36, 0, 36, 36, 0, 36 )
+
+[connection signal="pressed" from="." to="." method="_on_CelButton_pressed"]
+[connection signal="resized" from="." to="." method="_on_CelButton_resized"]
+[connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]

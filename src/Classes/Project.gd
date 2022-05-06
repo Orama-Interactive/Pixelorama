@@ -46,8 +46,10 @@ var was_exported := false
 var export_overwrite := false
 
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
-var layer_button_node = preload("res://src/UI/Timeline/LayerButton.tscn")
-var cel_button_node = preload("res://src/UI/Timeline/CelButton.tscn")
+var pixel_layer_button_node = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
+var group_layer_button_node = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
+var pixel_cel_button_node = preload("res://src/UI/Timeline/PixelCelButton.tscn")
+var group_cel_button_node = preload("res://src/UI/Timeline/GroupCelButton.tscn")
 var animation_tag_node = preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
 
@@ -113,7 +115,7 @@ func new_empty_frame() -> Frame:
 		image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 		if bottom_layer:
 			image.fill(fill_color)
-		frame.cels.append(Cel.new(image, 1))
+		frame.cels.append(PixelCel.new(image, 1))
 		bottom_layer = false
 
 	return frame
@@ -150,7 +152,11 @@ func change_project() -> void:
 	# Create new ones
 	for i in range(layers.size() - 1, -1, -1):
 		# Create layer buttons
-		var layer_container = layer_button_node.instance()
+		var layer_container: BaseLayerButton
+		if layers[i] is PixelLayer:
+			layer_container = pixel_layer_button_node.instance()
+		elif layers[i] is GroupLayer:
+			layer_container = group_layer_button_node.instance()
 		layer_container.layer = i
 		if layers[i].name == "":
 			layers[i].name = tr("Layer") + " %s" % i
@@ -162,7 +168,7 @@ func change_project() -> void:
 		var layer_cel_container := HBoxContainer.new()
 		Global.frames_container.add_child(layer_cel_container)
 		for j in range(frames.size()):  # Create Cel buttons
-			var cel_button = cel_button_node.instance()
+			var cel_button = pixel_cel_button_node.instance()
 			cel_button.frame = j
 			cel_button.layer = i
 			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
@@ -296,19 +302,7 @@ func change_project() -> void:
 func serialize() -> Dictionary:
 	var layer_data := []
 	for layer in layers:
-		var linked_cels := []
-		for cel in layer.linked_cels:
-			linked_cels.append(frames.find(cel))
-
-		layer_data.append(
-			{
-				"name": layer.name,
-				"visible": layer.visible,
-				"locked": layer.locked,
-				"new_cels_linked": layer.new_cels_linked,
-				"linked_cels": linked_cels,
-			}
-		)
+		layer_data.append(layer.serialize())
 
 	var tag_data := []
 	for tag in animation_tags:
@@ -374,6 +368,7 @@ func deserialize(dict: Dictionary) -> void:
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
 		size.y = dict.size_y
+
 		_update_tile_mode_rects()
 		selection_bitmap = resize_bitmap(selection_bitmap, size)
 	if dict.has("save_path"):
@@ -383,7 +378,7 @@ func deserialize(dict: Dictionary) -> void:
 		for frame in dict.frames:
 			var cels := []
 			for cel in frame.cels:
-				cels.append(Cel.new(Image.new(), cel.opacity))
+				cels.append(PixelCel.new(Image.new(), cel.opacity))
 			var duration := 1.0
 			if frame.has("duration"):
 				duration = frame.duration
@@ -394,23 +389,18 @@ func deserialize(dict: Dictionary) -> void:
 			frame_i += 1
 
 		if dict.has("layers"):
-			var layer_i := 0
 			for saved_layer in dict.layers:
-				var linked_cels := []
-				for linked_cel_number in saved_layer.linked_cels:
-					linked_cels.append(frames[linked_cel_number])
-					var linked_cel: Cel = frames[linked_cel_number].cels[layer_i]
-					linked_cel.image = linked_cels[0].cels[layer_i].image
-					linked_cel.image_texture = linked_cels[0].cels[layer_i].image_texture
-				var layer := Layer.new(
-					saved_layer.name,
-					saved_layer.visible,
-					saved_layer.locked,
-					saved_layer.new_cels_linked,
-					linked_cels
-				)
-				layers.append(layer)
-				layer_i += 1
+				match saved_layer.get("type", "pixel"):
+					"pixel":
+						layers.append(PixelLayer.new())
+					"group":
+						layers.append(GroupLayer.new())
+			# Parent references to other layers are created when deserializing
+			# a layer, so loop again after creating them.
+			for layer_i in range(dict.layers.size()):
+				layers[layer_i].project = self
+				layers[layer_i].index = layer_i
+				layers[layer_i].deserialize(dict.layers[layer_i])
 	if dict.has("tags"):
 		for tag in dict.tags:
 			animation_tags.append(AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to))
@@ -470,11 +460,15 @@ func _frames_changed(value: Array) -> void:
 		layer_cel_container.name = "FRAMESS " + str(i)
 		Global.frames_container.add_child(layer_cel_container)
 		for j in range(frames.size()):
-			var cel_button = cel_button_node.instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-			layer_cel_container.add_child(cel_button)
+			if layers[j] is PixelLayer:
+				var cel_button = pixel_cel_button_node.instance()
+				cel_button.frame = j
+				cel_button.layer = i
+				cel_button.get_child(0).texture = frames[j].cels[i].image_texture
+				layer_cel_container.add_child(cel_button)
+			elif layers[j] is GroupLayer:
+				# TODO: Make GroupLayers work here
+				pass
 
 	for j in range(frames.size()):
 		var button: Button = frame_button_node.instance()
@@ -500,8 +494,14 @@ func _layers_changed(value: Array) -> void:
 	_remove_cel_buttons()
 
 	for i in range(layers.size() - 1, -1, -1):
-		var layer_button: LayerButton = layer_button_node.instance()
+		var layer_button: BaseLayerButton
+		if layers[i] is PixelLayer:
+			layer_button = pixel_layer_button_node.instance()
+		elif layers[i] is GroupLayer:
+			layer_button = group_layer_button_node.instance()
 		layer_button.layer = i
+		layers[i].index = i
+		layers[i].project = self
 		if layers[i].name == "":
 			layers[i].name = tr("Layer") + " %s" % i
 
@@ -512,12 +512,17 @@ func _layers_changed(value: Array) -> void:
 		var layer_cel_container := HBoxContainer.new()
 		layer_cel_container.name = "LAYERSSS " + str(i)
 		Global.frames_container.add_child(layer_cel_container)
+		# TODO: FIGURE OUT FRAMES WITH GROUP LAYERS!
 		for j in range(frames.size()):
-			var cel_button = cel_button_node.instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-			layer_cel_container.add_child(cel_button)
+			if layers[i] is PixelLayer:
+				var cel_button = pixel_cel_button_node.instance()
+				cel_button.frame = j
+				cel_button.layer = i
+				cel_button.get_child(0).texture = frames[j].cels[i].image_texture
+				layer_cel_container.add_child(cel_button)
+			elif layers[i] is GroupLayer:
+				var cel_button = group_cel_button_node.instance()
+				layer_cel_container.add_child(cel_button)
 
 	var layer_button = Global.layers_container.get_child(
 		Global.layers_container.get_child_count() - 1 - current_layer
@@ -570,10 +575,13 @@ func _frame_changed(value: int) -> void:
 		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
 	)
 
+
 	if current_frame < frames.size():
-		var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
-		Global.layer_opacity_slider.value = cel_opacity * 100
-		Global.layer_opacity_spinbox.value = cel_opacity * 100
+		# TODO: Make this work with groups:
+		if not layers[current_layer] is GroupLayer:
+			var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
+			Global.layer_opacity_slider.value = cel_opacity * 100
+			Global.layer_opacity_spinbox.value = cel_opacity * 100
 
 	Global.canvas.update()
 	Global.transparent_checker.update_rect()
@@ -602,7 +610,7 @@ func _layer_changed(value: int) -> void:
 func _toggle_layer_buttons_layers() -> void:
 	if !layers:
 		return
-	if layers[current_layer].locked:
+	if layers[current_layer].is_locked_in_hierarchy():
 		Global.disable_button(Global.remove_layer_button, true)
 
 	if layers.size() == 1:
@@ -610,7 +618,7 @@ func _toggle_layer_buttons_layers() -> void:
 		Global.disable_button(Global.move_up_layer_button, true)
 		Global.disable_button(Global.move_down_layer_button, true)
 		Global.disable_button(Global.merge_down_layer_button, true)
-	elif !layers[current_layer].locked:
+	elif !layers[current_layer].is_locked_in_hierarchy():
 		Global.disable_button(Global.remove_layer_button, false)
 
 
@@ -628,7 +636,7 @@ func _toggle_layer_buttons_current_layer() -> void:
 		Global.disable_button(Global.merge_down_layer_button, true)
 
 	if current_layer < layers.size():
-		if layers[current_layer].locked:
+		if layers[current_layer].is_locked_in_hierarchy():
 			Global.disable_button(Global.remove_layer_button, true)
 		else:
 			if layers.size() > 1:
@@ -700,6 +708,7 @@ func is_empty() -> bool:
 	return (
 		frames.size() == 1
 		and layers.size() == 1
+		and layers[0] is PixelLayer
 		and frames[0].cels[0].image.is_invisible()
 		and animation_tags.size() == 0
 	)
@@ -710,14 +719,16 @@ func duplicate_layers() -> Array:
 	# Loop through the array to create new classes for each element, so that they
 	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
 	for i in new_layers.size():
-		var new_linked_cels = new_layers[i].linked_cels.duplicate()
-		new_layers[i] = Layer.new(
-			new_layers[i].name,
-			new_layers[i].visible,
-			new_layers[i].locked,
-			new_layers[i].new_cels_linked,
-			new_linked_cels
-		)
+		var layer_dict: Dictionary = new_layers[i].serialize()
+		#layer_dict.linked_cels = new_layers[i].linked_cels.duplicate()
+		match layer_dict.type:
+			"pixel":
+				new_layers[i] = PixelLayer.new()
+			"group":
+				new_layers[i] = GroupLayer.new()
+		new_layers[i].index = i
+		new_layers[i].project = self
+		new_layers[i].deserialize(layer_dict)
 
 	return new_layers
 

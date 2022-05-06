@@ -47,7 +47,7 @@ func _confirmed() -> void:
 		for cel_index in project.selected_cels:
 			if !project.layers[cel_index[1]].can_layer_get_drawn():
 				continue
-			var cel: Cel = project.frames[cel_index[0]].cels[cel_index[1]]
+			var cel: PixelCel = project.frames[cel_index[0]].cels[cel_index[1]]
 			var cel_image: Image = cel.image
 			commit_action(cel_image)
 		_commit_undo("Draw", undo_data, project)
@@ -118,7 +118,7 @@ func _get_selected_draw_images(project: Project) -> Array:  # Array of Images
 	var images := []
 	if affect == CEL:
 		for cel_index in project.selected_cels:
-			var cel: Cel = project.frames[cel_index[0]].cels[cel_index[1]]
+			var cel: PixelCel = project.frames[cel_index[0]].cels[cel_index[1]]
 			images.append(cel.image)
 	else:
 		for frame in project.frames:

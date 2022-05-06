@@ -4,7 +4,7 @@ enum MenuOptions { DELETE, LINK, PROPERTIES }
 
 var frame := 0
 var layer := 0
-var cel: Cel
+var cel: PixelCel
 var image: Image
 
 onready var popup_menu: PopupMenu = $PopupMenu
@@ -108,7 +108,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			var new_layers: Array = Global.current_project.duplicate_layers()
 			var new_cels: Array = f.cels.duplicate()
 			for i in new_cels.size():
-				new_cels[i] = Cel.new(
+				new_cels[i] = PixelCel.new(
 					new_cels[i].image, new_cels[i].opacity, new_cels[i].image_texture
 				)
 
@@ -160,7 +160,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 func _delete_cel_content() -> void:
 	if image.is_invisible():
 		return
-	var curr_layer: Layer = Global.current_project.layers[layer]
+	var curr_layer: PixelLayer = Global.current_project.layers[layer]
 	if !curr_layer.can_layer_get_drawn():
 		return
 	var project = Global.current_project
@@ -188,11 +188,11 @@ func get_drag_data(_position) -> Array:
 	button.add_child(texture_rect)
 	set_drag_preview(button)
 
-	return ["Cel", frame, layer]
+	return ["PixelCel", frame, layer]
 
 
 func can_drop_data(_pos, data) -> bool:
-	if typeof(data) == TYPE_ARRAY and data[0] == "Cel":
+	if typeof(data) == TYPE_ARRAY and data[0] == "PixelCel":
 		var new_frame = data[1]
 		var new_layer = data[2]
 		if (
