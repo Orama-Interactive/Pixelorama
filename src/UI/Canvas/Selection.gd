@@ -705,6 +705,10 @@ func copy() -> void:
 func paste() -> void:
 	var clipboard = str2var(OS.get_clipboard())
 	if typeof(clipboard) == TYPE_DICTIONARY:
+		# A sanity check
+		if not clipboard.has_all(["image", "selection_bitmap", "big_bounding_rectangle", "selection_offset"]):
+			return
+
 		if clipboard.image.is_empty():
 			return
 		clear_selection()
@@ -774,6 +778,9 @@ func new_brush() -> void:
 		project.move_bitmap_values(selected_bitmap_copy, false)
 		var clipboard = str2var(OS.get_clipboard())
 		if typeof(clipboard) == TYPE_DICTIONARY:
+			# A sanity check
+			if not clipboard.has_all(["image", "selection_bitmap", "big_bounding_rectangle", "selection_offset"]):
+				return
 			clipboard.selection_bitmap = selected_bitmap_copy
 	else:
 		brush = image.get_rect(big_bounding_rectangle)
