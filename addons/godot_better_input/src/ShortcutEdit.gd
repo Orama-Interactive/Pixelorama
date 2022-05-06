@@ -70,8 +70,36 @@ export(String) var config_path := "user://cache.ini"
 
 var presets := [Preset.new("Default", false), Preset.new("Custom")]
 var selected_preset: Preset = presets[0]
-var actions := {}
-var groups := {}
+var actions := {
+	"new_file": InputAction.new("", "Menu"),
+	"open_file": InputAction.new("", "Menu"),
+	"save_file": InputAction.new("", "Menu"),
+	"save_file_as": InputAction.new("", "Menu"),
+	"export_file": InputAction.new("", "Menu"),
+	"export_file_as": InputAction.new("", "Menu"),
+	"quit": InputAction.new("", "Menu"),
+	"undo": InputAction.new("", "Menu"),
+	"redo": InputAction.new("", "Menu"),
+	"mirror_view": InputAction.new("", "Menu"),
+	"show_grid": InputAction.new("", "Menu"),
+	"show_pixel_grid": InputAction.new("", "Menu"),
+	"show_rulers": InputAction.new("", "Menu"),
+	"zen_mode": InputAction.new("", "Menu"),
+	"toggle_fullscreen": InputAction.new("", "Menu"),
+	"open_docs": InputAction.new("", "Menu"),
+	"cut": InputAction.new("", "Menu"),
+	"copy": InputAction.new("", "Menu"),
+	"paste": InputAction.new("", "Menu"),
+	"clear_selection": InputAction.new("", "Menu"),
+	"select_all": InputAction.new("", "Menu"),
+	"invert_selection": InputAction.new("", "Menu"),
+	"new_brush": InputAction.new("", "Menu"),
+	"edit_mode": InputAction.new("Moveable Panels", "Menu"),
+}
+var groups := {
+	"Tools": InputGroup.new(),
+	"Menu": InputGroup.new(),
+}
 var currently_editing_tree_item: TreeItem
 var config_file: ConfigFile
 
@@ -118,8 +146,8 @@ class Preset:
 		if !customizable:
 			return
 		for action in bindings:
-			var action_list: Array = config_file.get_value(config_section, action, [])
-			if action_list:
+			var action_list = config_file.get_value(config_section, action, [null])
+			if action_list != [null]:
 				bindings[action] = action_list
 
 	func change_action(action: String) -> void:
@@ -150,6 +178,13 @@ class InputGroup:
 
 func _ready() -> void:
 	config_file = Global.config_cache
+	for t in Tools.tools:
+		var tool_shortcut: String = Tools.tools[t].shortcut
+		var left_tool_shortcut := "left_%s_tool" % tool_shortcut
+		var right_tool_shortcut := "right_%s_tool" % tool_shortcut
+		actions[left_tool_shortcut] = InputAction.new("", "Tools")
+		actions[right_tool_shortcut] = InputAction.new("", "Tools")
+
 	if !config_path.empty():
 		config_file.load(config_path)
 	for preset in presets:
