@@ -66,12 +66,14 @@ const JOY_AXIS_NAMES := [
 export(Array, String) var ignore_actions := []
 export(bool) var ignore_ui_actions := true
 export(Array, bool) var changeable_types := [true, true, true, false]
+export(String) var config_path := "user://cache.ini"
 
 var presets := [Preset.new("Default", false), Preset.new("Custom")]
 var selected_preset: Preset = presets[0]
 var actions := {}
 var groups := {}
 var currently_editing_tree_item: TreeItem
+var config_file: ConfigFile
 
 # Textures taken from Godot https://github.com/godotengine/godot/tree/master/editor/icons
 var add_tex: Texture = preload("res://addons/godot_better_input/assets/add.svg")
@@ -99,6 +101,8 @@ class Preset:
 	var customizable := true
 	var bindings := {}
 	var config_section := ""
+	var config_path := ""
+	var config_file: ConfigFile
 
 	func _init(_name := "", _customizable := true) -> void:
 		name = _name
@@ -109,20 +113,20 @@ class Preset:
 			bindings[action] = InputMap.get_action_list(action)
 
 	func load_from_file() -> void:
-		if !Global.config_cache:
+		if !config_file:
 			return
 		if !customizable:
 			return
 		for action in bindings:
-			var action_list: Array = Global.config_cache.get_value(config_section, action, [])
+			var action_list: Array = config_file.get_value(config_section, action, [])
 			if action_list:
 				bindings[action] = action_list
 
 	func change_action(action: String) -> void:
 		bindings[action] = InputMap.get_action_list(action)
-		if Global.config_cache and customizable:
-			Global.config_cache.set_value(config_section, action, bindings[action])
-			Global.config_cache.save("user://cache.ini")
+		if config_file and customizable:
+			config_file.set_value(config_section, action, bindings[action])
+			config_file.save(config_path)
 
 
 class InputAction:
@@ -145,8 +149,14 @@ class InputGroup:
 
 
 func _ready() -> void:
+	config_file = Global.config_cache
+	if !config_path.empty():
+		config_file.load(config_path)
 	for preset in presets:
-		preset.load_from_file()
+		if config_file:
+			preset.config_path = config_path
+			preset.config_file = config_file
+			preset.load_from_file()
 		presets_option_button.add_item(preset.name)
 	_fill_selector_options()
 
@@ -172,6 +182,7 @@ func _construct_tree() -> void:
 			continue
 		if ignore_ui_actions and action.begins_with("ui_"):
 			continue
+
 		var display_name := get_action_name(action)
 		var group_name := ""
 		if action in actions:
