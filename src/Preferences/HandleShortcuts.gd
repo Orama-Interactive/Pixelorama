@@ -114,12 +114,104 @@ func toggle_shortcut_buttons(enabled: bool) -> void:
 
 
 func set_action_shortcut(action: String, oldinput: InputEventKey, newinput: InputEventKey) -> void:
+	# Only updates the InputMap
 	InputMap.action_erase_event(action, oldinput)
 	InputMap.action_add_event(action, newinput)
-	var color_switch: BaseButton = Global.control.find_node("ColorSwitch")
+	update_ui_shortcuts(action)
+
+
+func update_ui_shortcuts(action: String):
+	# Updates UI elements according to InputMap (Tool shortcuts are updated from a seperate function)
 	# Set shortcut to switch colors button
 	if action == "switch_colors":
-		color_switch.shortcut.shortcut = InputMap.get_action_list("switch_colors")[0]
+		update_ui_shortcut("ColorSwitch", action)
+	# Set timeline shortcuts
+	if action == "go_to_first_frame":
+		update_ui_shortcut("FirstFrame", action)
+	if action == "go_to_previous_frame":
+		update_ui_shortcut("PreviousFrame", action)
+	if action == "play_backwards":
+		update_ui_shortcut("PlayBackwards", action)
+	if action == "play_forward":
+		update_ui_shortcut("PlayForward", action)
+	if action == "go_to_next_frame":
+		update_ui_shortcut("NextFrame", action)
+	if action == "go_to_last_frame":
+		update_ui_shortcut("LastFrame", action)
+	# Set shortcuts for Menu Options
+	var top_menu: Panel = Global.control.find_node("TopMenuContainer")
+	var file_menu: PopupMenu = top_menu.file_menu_button.get_popup()
+	var edit_menu: PopupMenu = top_menu.edit_menu_button.get_popup()
+	var select_menu: PopupMenu = top_menu.select_menu_button.get_popup()
+	var view_menu: PopupMenu = top_menu.view_menu_button.get_popup()
+	var window_menu: PopupMenu = top_menu.window_menu_button.get_popup()
+	var help_menu: PopupMenu = top_menu.help_menu_button.get_popup()
+	if action == "new_file":
+		update_menu_option(file_menu, "New...", action)
+	if action == "open_file":
+		update_menu_option(file_menu, "Open...", action)
+	if action == "save_file":
+		update_menu_option(file_menu, "Save...", action)
+	if action == "save_file_as":
+		update_menu_option(file_menu, "Save as...", action)
+	if action == "export_file":
+		update_menu_option(file_menu, "Export...", action)
+	if action == "export_file_as":
+		update_menu_option(file_menu, "Export as...", action)
+	if action == "quit":
+		update_menu_option(file_menu, "Quit", action)
+	if action == "undo":
+		update_menu_option(edit_menu, "Undo", action)
+	if action == "redo":
+		update_menu_option(edit_menu, "Redo", action)
+	if action == "copy":
+		update_menu_option(edit_menu, "Copy", action)
+	if action == "cut":
+		update_menu_option(edit_menu, "Cut", action)
+	if action == "paste":
+		update_menu_option(edit_menu, "Paste", action)
+	if action == "delete":
+		update_menu_option(edit_menu, "Delete", action)
+	if action == "new_brush":
+		update_menu_option(edit_menu, "New Brush", action)
+	if action == "select_all":
+		update_menu_option(select_menu, "All", action)
+	if action == "clear_selection":
+		update_menu_option(select_menu, "Clear", action)
+	if action == "invert_selection":
+		update_menu_option(select_menu, "Invert", action)
+	if action == "mirror_view":
+		update_menu_option(view_menu, "Mirror View", action)
+	if action == "show_grid":
+		update_menu_option(view_menu, "Show Grid", action)
+	if action == "show_pixel_grid":
+		update_menu_option(view_menu, "Show Pixel Grid", action)
+	if action == "show_rulers":
+		update_menu_option(view_menu, "Show Rulers", action)
+	if action == "show_guides":
+		update_menu_option(view_menu, "Show Guides", action)
+	if action == "edit_mode":
+		for child in window_menu.get_children():
+			if child.name == "panels_submenu":
+				update_menu_option(child, "Moveable Panels", action)
+	if action == "zen_mode":
+		update_menu_option(window_menu, "Zen Mode", action)
+	if action == "toggle_fullscreen":
+		update_menu_option(window_menu, "Fullscreen Mode", action)
+	if action == "open_docs":
+		update_menu_option(help_menu, "Online Docs", action)
+
+
+func update_ui_shortcut(name: String, action: String):
+	var ui_button: BaseButton = Global.control.find_node(name)
+	ui_button.shortcut.shortcut = InputMap.get_action_list(action)[0]
+
+
+func update_menu_option(menu: PopupMenu, name: String, action: String):
+	for idx in menu.get_item_count():
+		if menu.get_item_text(idx) == name:
+			var accel: int = InputMap.get_action_list(action)[0].get_scancode_with_modifiers()
+			menu.set_item_accelerator(idx, accel)
 
 
 func _on_Shortcut_button_pressed(button: Button) -> void:

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-01-06 00:39\n"
+"PO-Revision-Date: 2022-03-31 03:02\n"
 
 msgid "OK"
 msgstr "确定"
@@ -66,6 +66,9 @@ msgstr "选择"
 msgid "View"
 msgstr "视图"
 
+msgid "Window"
+msgstr "窗口"
+
 msgid "Image"
 msgstr "图像"
 
@@ -98,6 +101,9 @@ msgstr "导入"
 
 msgid "Export"
 msgstr "导出"
+
+msgid "Overwrite"
+msgstr "覆盖"
 
 msgid "Export..."
 msgstr "导出..."
@@ -162,8 +168,8 @@ msgstr "清除"
 msgid "Invert"
 msgstr "反向"
 
-msgid "Flip"
-msgstr "翻转"
+msgid "Mirror Image"
+msgstr "镜像图像"
 
 msgid "Flip Horizontal"
 msgstr "水平翻转"
@@ -182,6 +188,30 @@ msgstr "窗口不透明度"
 
 msgid "Panel Layout"
 msgstr "面板布局"
+
+msgid "Panels"
+msgstr "面板"
+
+msgid "Layouts"
+msgstr "布局"
+
+msgid "Moveable Panels"
+msgstr "可移动面板"
+
+msgid "Manage Layouts"
+msgstr "管理布局"
+
+msgid "Add"
+msgstr "添加"
+
+msgid "Add Layout"
+msgstr "添加布局"
+
+msgid "Edit Layout"
+msgstr "编辑布局"
+
+msgid "Are you sure you want to delete this layout?"
+msgstr "您确定要删除此布局吗？"
 
 msgid "Auto"
 msgstr "自动"
@@ -230,6 +260,9 @@ msgstr "导入选项"
 
 msgid "Import as:"
 msgstr "导入为："
+
+msgid "Apply to all"
+msgstr "应用到全部"
 
 msgid "Recent projects"
 msgstr "最近项目"
@@ -309,10 +342,18 @@ msgstr "目录路径或文件名无效！"
 msgid "Exporting in progress..."
 msgstr "正在导出..."
 
+msgid "Can't load file '%s'."
+msgstr "无法加载 '%s' 文件。"
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "无法加载文件 '%s'。\n"
 "错误代码： %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr "无法加载 '%s' 文件。\n"
+"这不是一个有效的调色板文件。"
 
 msgid "Frame"
 msgstr "帧"
@@ -445,6 +486,12 @@ msgstr "备份"
 
 msgid "Performance"
 msgstr "性能"
+
+msgid "Extensions"
+msgstr "扩展"
+
+msgid "Cursors"
+msgstr "光标"
 
 msgid "Indicators"
 msgstr "指示"
@@ -740,6 +787,18 @@ msgstr "日文"
 msgid "Ukrainian"
 msgstr "乌克兰语"
 
+msgid "Danish"
+msgstr "丹麦语"
+
+msgid "Swedish"
+msgstr "瑞典语"
+
+msgid "Serbian (Cyrillic)"
+msgstr "塞尔维亚语（西里尔语）"
+
+msgid "Dutch"
+msgstr "荷兰语"
+
 msgid "Development Team"
 msgstr "开发团队"
 
@@ -799,14 +858,14 @@ msgstr "椭圆选区\n\n"
 "%s 用于鼠标左键\n"
 "%s 用于鼠标右键"
 
-msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "多边形选区\n"
-"双击将最后一个点连接到起点\n\n"
-"%s 用于鼠标左键\n"
-"%s 用于鼠标右键"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
+msgstr "多边形选择\n\n"
+"%s 鼠标左键\n"
+"%s 鼠标右键\n\n"
+"双击将最后一个点连接到起点"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -850,14 +909,14 @@ msgstr "平移\n\n"
 "%s 为鼠标左键\n"
 "%s 为鼠标右键"
 
-msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "拾色器\n"
-"从子画面像素选择颜色\n\n"
-"%s 为鼠标左键\n"
-"%s 为鼠标右键"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
+msgstr "拾色器\n\n"
+"%s 鼠标左键\n"
+"%s 鼠标右键\n\n"
+"从画面的像素中选择一种颜色"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -979,6 +1038,12 @@ msgstr "显示右侧工具图标"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "在画布上的光标旁边显示所选右侧工具的图标"
+
+msgid "Use native mouse cursors"
+msgstr "使用原生鼠标光标"
+
+msgid "Use cross cursor for the canvas"
+msgstr "画布使用十字光标"
 
 msgid "Guides"
 msgstr "参考线"
@@ -1127,6 +1192,21 @@ msgstr "设置应用程序帧每秒的限制。 数字越低，CPU 使用率越�
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "如果打开此选项，当应用程序的窗口失去焦点时，它会暂停。 这有助于在空闲时降低 CPU 使用率。 当鼠标进入应用程序的窗口时，应用程序被取消暂停。"
 
+msgid "Add Extension"
+msgstr "添加扩展"
+
+msgid "Enable"
+msgstr "启用"
+
+msgid "Disable"
+msgstr "禁用"
+
+msgid "Uninstall"
+msgstr "卸载"
+
+msgid "Open Folder"
+msgstr "打开文件夹"
+
 msgid "Brush:"
 msgstr "画笔:"
 
@@ -1160,8 +1240,10 @@ msgstr "平滑像素"
 msgid "Fill inside"
 msgstr "内部填充"
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "通过去除边缘上多余的像素使线条平滑"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "完美像素\n"
+"通过去除边缘上的额外像素使线条平滑"
 
 msgid "Fill Shape"
 msgstr "填充形状"
@@ -1819,6 +1901,9 @@ msgstr "移动所选帧到右侧。"
 msgid "Frame duration"
 msgstr "帧持续时间"
 
+msgid "Duration"
+msgstr "持续时间"
+
 msgid "Tiled In Both Axis"
 msgstr "在两个轴上平移"
 
@@ -1863,4 +1948,31 @@ msgstr "减小调色板尺寸将重置颜色的位置。不适合新调色板尺
 
 msgid "Position:"
 msgstr "位置："
+
+msgid "Tools"
+msgstr "工具"
+
+msgid "Main Canvas"
+msgstr "主画布"
+
+msgid "Second Canvas"
+msgstr "第二个画布"
+
+msgid "Animation Timeline"
+msgstr "动画时间轴"
+
+msgid "Canvas Preview"
+msgstr "画布预览"
+
+msgid "Color Pickers"
+msgstr "拾色器"
+
+msgid "Global Tool Options"
+msgstr "全局工具选项"
+
+msgid "Left Tool Options"
+msgstr "左键工具选项"
+
+msgid "Right Tool Options"
+msgstr "右键工具选项"
 

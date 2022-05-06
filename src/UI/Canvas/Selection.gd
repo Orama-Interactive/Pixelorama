@@ -101,7 +101,12 @@ func _input(event: InputEvent) -> void:
 			if gizmo:
 				Global.main_viewport.mouse_default_cursor_shape = gizmo.get_cursor()
 			else:
-				Global.main_viewport.mouse_default_cursor_shape = Input.CURSOR_CROSS
+				var cursor := Control.CURSOR_ARROW
+				if Global.cross_cursor:
+					cursor = Control.CURSOR_CROSS
+
+				if Global.main_viewport.mouse_default_cursor_shape != cursor:
+					Global.main_viewport.mouse_default_cursor_shape = cursor
 
 		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 			if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
@@ -192,7 +197,14 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 			var input := Vector2()
 			input.x = int(event.is_action("ui_right")) - int(event.is_action("ui_left"))
 			input.y = int(event.is_action("ui_down")) - int(event.is_action("ui_up"))
-			move_content(input.rotated(stepify(Global.camera.rotation, PI / 2)) * step)
+			var move := input.rotated(stepify(Global.camera.rotation, PI / 2))
+			# These checks are needed to fix a bug where the selection got stuck
+			# to the canvas boundaries when they were 1px away from them
+			if is_equal_approx(abs(move.x), 0):
+				move.x = 0
+			if is_equal_approx(abs(move.y), 0):
+				move.y = 0
+			move_content(move * step)
 
 
 # Check if an event is a ui_up/down/left/right event-press
@@ -637,6 +649,9 @@ func _get_selected_draw_images() -> Array:  # Array of Images
 
 
 func cut() -> void:
+	var project: Project = Global.current_project
+	if !project.layers[project.current_layer].can_layer_get_drawn():
+		return
 	copy()
 	delete()
 

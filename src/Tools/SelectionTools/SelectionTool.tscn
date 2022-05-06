@@ -114,18 +114,7 @@ min_value = 1.0
 value = 1.0
 allow_greater = true
 
-[node name="PixelPerfect" parent="." index="7"]
-visible = false
-
-[node name="EmptySpacer" parent="." index="8"]
-margin_top = 166.0
-margin_bottom = 178.0
-
-[node name="Mirror" parent="." index="9"]
-margin_top = 182.0
-margin_bottom = 199.0
-
-[node name="Timer" type="Timer" parent="." index="10"]
+[node name="Timer" type="Timer" parent="." index="7"]
 wait_time = 0.2
 one_shot = true
 

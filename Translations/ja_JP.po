@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-01-05 19:26\n"
+"PO-Revision-Date: 2022-03-31 01:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -66,6 +66,9 @@ msgstr "選択"
 msgid "View"
 msgstr "表示"
 
+msgid "Window"
+msgstr "ウインドウ"
+
 msgid "Image"
 msgstr "画像"
 
@@ -98,6 +101,9 @@ msgstr "インポート"
 
 msgid "Export"
 msgstr "エクスポート"
+
+msgid "Overwrite"
+msgstr "上書き"
 
 msgid "Export..."
 msgstr "エクスポート..."
@@ -162,8 +168,8 @@ msgstr "削除"
 msgid "Invert"
 msgstr "反転"
 
-msgid "Flip"
-msgstr "反転"
+msgid "Mirror Image"
+msgstr "ミラー画像"
 
 msgid "Flip Horizontal"
 msgstr "水平方向に反転"
@@ -182,6 +188,30 @@ msgstr "ウィンドウ不透明度"
 
 msgid "Panel Layout"
 msgstr "パネルのレイアウト"
+
+msgid "Panels"
+msgstr "パネル"
+
+msgid "Layouts"
+msgstr "レイアウト"
+
+msgid "Moveable Panels"
+msgstr "可動パネル"
+
+msgid "Manage Layouts"
+msgstr "レイアウト管理"
+
+msgid "Add"
+msgstr "追加"
+
+msgid "Add Layout"
+msgstr "レイアウトを追加"
+
+msgid "Edit Layout"
+msgstr "レイアウトを編集"
+
+msgid "Are you sure you want to delete this layout?"
+msgstr "本当にこのレイアウトを削除してよろしいですか？"
 
 msgid "Auto"
 msgstr "オート"
@@ -230,6 +260,9 @@ msgstr "インポートオプション"
 
 msgid "Import as:"
 msgstr "形式を指定してインポート"
+
+msgid "Apply to all"
+msgstr "すべてに適用"
 
 msgid "Recent projects"
 msgstr "最近のプロジェクト"
@@ -309,10 +342,18 @@ msgstr "ディレクトリパスまたはファイル名が無効です！"
 msgid "Exporting in progress..."
 msgstr "エクスポート中..."
 
+msgid "Can't load file '%s'."
+msgstr "ファイル '%s' を読み込めません。"
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "ファイル '%s' を読み込むことができません。\n"
 "エラーコード: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr "ファイル '%s' を読み込めません。\n"
+"これは有効なパレットファイルではありません。"
 
 msgid "Frame"
 msgstr "フレーム"
@@ -445,6 +486,12 @@ msgstr "バックアップ"
 
 msgid "Performance"
 msgstr "パフォーマンス"
+
+msgid "Extensions"
+msgstr "拡張機能"
+
+msgid "Cursors"
+msgstr "カーソル"
 
 msgid "Indicators"
 msgstr "インジケーター"
@@ -740,6 +787,18 @@ msgstr "日本語"
 msgid "Ukrainian"
 msgstr "ウクライナ語"
 
+msgid "Danish"
+msgstr "デンマーク語"
+
+msgid "Swedish"
+msgstr "スウェーデン語"
+
+msgid "Serbian (Cyrillic)"
+msgstr "セルビア語 (キリル文字)"
+
+msgid "Dutch"
+msgstr "オランダ語"
+
 msgid "Development Team"
 msgstr "Development Team"
 
@@ -799,14 +858,14 @@ msgstr "楕円形選択\n\n"
 "%sでマウスの左ボタンを 楕円形選択 に変更\n"
 "%sでマウスの右ボタンを 楕円形選択 に変更"
 
-msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "多角形選択\n"
-"最後の点を開始点に接続するにはダブルクリック\n\n"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
+msgstr "多角形選択\n\n\n"
 "%sでマウスの左ボタンを 多角形選択 に変更\n"
-"%sでマウスの右ボタンを 多角形選択 に変更"
+"%sでマウスの右ボタンを 多角形選択 に変更\n\n"
+"ダブルクリックで始点と終点を接続します"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -850,14 +909,14 @@ msgstr "パン\n\n"
 "%sでマウスの左ボタンを パン に変更\n"
 "%sでマウスの右ボタンを パン に変更"
 
-msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "カラーピッカー\n"
-"スプライトのピクセルから色を選択してください。\n\n"
-"%sでマウスの左ボタンを カラーピッカー に変更\n"
-"%sでマウスの右ボタンを カラーピッカー に変更"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
+msgstr "色選択\n\n\n"
+"%sでマウスの左ボタンを 色選択 に変更\n"
+"%sでマウスの右ボタンを 色選択 に変更\n\n"
+"画像のピクセルから色を選択します"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -979,6 +1038,12 @@ msgstr "マウスの右ボタンのツールのアイコンを表示"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "キャンバス上のカーソルの隣に選択したマウスの右ボタンのツールのアイコンを表示します"
+
+msgid "Use native mouse cursors"
+msgstr "通常のマウスカーソルを使用"
+
+msgid "Use cross cursor for the canvas"
+msgstr "キャンバスにクロスカーソルを使用"
 
 msgid "Guides"
 msgstr "ガイド"
@@ -1127,6 +1192,21 @@ msgstr "アプリケーションのフレーム/秒の制限を設定します�
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "これをオンにすると、アプリケーションのウィンドウがフォーカスを失ったときに一時停止します。 これはアイドル時のCPU使用率を低下させるのに役立ちます。マウスがアプリケーションのウィンドウに入ったとき、アプリケーションは一時停止を解除します。"
 
+msgid "Add Extension"
+msgstr "拡張機能を追加"
+
+msgid "Enable"
+msgstr "有効"
+
+msgid "Disable"
+msgstr "無効"
+
+msgid "Uninstall"
+msgstr "アンインストール"
+
+msgid "Open Folder"
+msgstr "フォルダーを開く"
+
 msgid "Brush:"
 msgstr "ブラシ："
 
@@ -1160,8 +1240,10 @@ msgstr "ピクセルパーフェクト"
 msgid "Fill inside"
 msgstr "中を塗りつぶす"
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "エッジの余分なピクセルを削除することで線を滑らかにします"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "ピクセルパーフェクト\n"
+"角の余分なピクセルを除去することで線を滑らかにします"
 
 msgid "Fill Shape"
 msgstr "図形の塗りつぶし"
@@ -1819,6 +1901,9 @@ msgstr "選択したフレームを右に移動します。"
 msgid "Frame duration"
 msgstr "フレームの長さ"
 
+msgid "Duration"
+msgstr "持続時間"
+
 msgid "Tiled In Both Axis"
 msgstr "両方の軸にタイルされています"
 
@@ -1863,4 +1948,31 @@ msgstr "パレットサイズを小さくすると、色の位置がリセット
 
 msgid "Position:"
 msgstr "ポジション:"
+
+msgid "Tools"
+msgstr "ツール"
+
+msgid "Main Canvas"
+msgstr "メインキャンバス"
+
+msgid "Second Canvas"
+msgstr "セカンドキャンバス"
+
+msgid "Animation Timeline"
+msgstr "アニメーションタイムライン"
+
+msgid "Canvas Preview"
+msgstr "キャンバスプレビュー"
+
+msgid "Color Pickers"
+msgstr "色選択"
+
+msgid "Global Tool Options"
+msgstr "グローバルツールオプション"
+
+msgid "Left Tool Options"
+msgstr "左ツールオプション"
+
+msgid "Right Tool Options"
+msgstr "右ツールオプション"
 

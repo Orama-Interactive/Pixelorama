@@ -22,9 +22,6 @@ margin_right = 524.0
 margin_bottom = 494.0
 rect_min_size = Vector2( 330, 0 )
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Tabs" type="Tabs" parent="VBoxContainer"]
 margin_right = 516.0
@@ -45,7 +42,7 @@ text = "Preview:"
 [node name="PreviewPanel" type="Panel" parent="VBoxContainer"]
 margin_top = 54.0
 margin_right = 516.0
-margin_bottom = 278.0
+margin_bottom = 260.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -66,7 +63,7 @@ __meta__ = {
 
 [node name="Previews" type="GridContainer" parent="VBoxContainer/PreviewPanel/PreviewScroll"]
 margin_right = 516.0
-margin_bottom = 224.0
+margin_bottom = 206.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
@@ -101,9 +98,9 @@ rounded = true
 align = 2
 
 [node name="SpritesheetOptions" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 282.0
+margin_top = 264.0
 margin_right = 516.0
-margin_bottom = 330.0
+margin_bottom = 312.0
 
 [node name="Frames" type="HBoxContainer" parent="VBoxContainer/SpritesheetOptions"]
 margin_right = 516.0
@@ -169,9 +166,9 @@ value = 1.0
 align = 2
 
 [node name="AnimationOptions" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 334.0
+margin_top = 316.0
 margin_right = 516.0
-margin_bottom = 386.0
+margin_bottom = 368.0
 
 [node name="AnimationType" type="OptionButton" parent="VBoxContainer/AnimationOptions"]
 margin_right = 516.0
@@ -219,14 +216,14 @@ __meta__ = {
 }
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 390.0
+margin_top = 372.0
 margin_right = 516.0
-margin_bottom = 394.0
+margin_bottom = 376.0
 
 [node name="Options" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 398.0
+margin_top = 380.0
 margin_right = 516.0
-margin_bottom = 422.0
+margin_bottom = 404.0
 
 [node name="ResizeLabel" type="Label" parent="VBoxContainer/Options"]
 margin_top = 5.0
@@ -268,6 +265,25 @@ text = "Nearest"
 align = 2
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, false, 4, null ]
 selected = 0
+
+[node name="Dimensions" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 408.0
+margin_right = 516.0
+margin_bottom = 422.0
+
+[node name="DimensionLabel" type="Label" parent="VBoxContainer/Dimensions"]
+margin_right = 256.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Export Dimensions : "
+align = 1
+valign = 1
+
+[node name="Spacer" type="Control" parent="VBoxContainer/Dimensions"]
+margin_left = 260.0
+margin_right = 516.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
 margin_top = 426.0
@@ -345,8 +361,8 @@ window_title = "Open a Directory"
 resizable = true
 mode = 2
 access = 2
-current_dir = "/Users"
-current_path = "/Users/"
+current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-play_improvements"
+current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-play_improvements/"
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
 margin_left = 8.0
@@ -357,7 +373,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 window_title = "Alarm!"
 resizable = true
-dialog_text = "Directory path or file name is not valid!"
+dialog_text = "Directory path and file name are not valid!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -411,6 +427,7 @@ __meta__ = {
 __meta__ = {
 "_editor_description_": "Timer to advance animation frames in animation preview."
 }
+
 [connection signal="about_to_show" from="." to="." method="_on_ExportDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ExportDialog_confirmed"]
 [connection signal="custom_action" from="." to="." method="_on_ExportDialog_custom_action"]

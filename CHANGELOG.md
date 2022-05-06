@@ -4,7 +4,53 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v0.9.2] - Unreleased
+## [v0.10] - 2022-04-15
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Martin Novák ([@novhack](https://github.com/novhack)), Lili Zoey ([@sayaks](https://github.com/sayaks)), [@ArthyChaux](https://github.com/ArthyChaux)
+
+### Added
+- A new Window menu has been added that has the new UI system options, as well as Zen mode and Fullscreen mode that were previously under the View menu.
+- A similarity option has been added to the "same color pixels" mode of the bucket tool. [#649](https://github.com/Orama-Interactive/Pixelorama/pull/649)
+- Added an experimental Extensions system that will let the users make their own extensions that add new functionality to Pixelorama. Keep in mind that this is still experimental and backwards compatibility is NOT guaranteed - use at your own risk.
+- A grayscale mode for the canvas has been added to the View menu. [#646](https://github.com/Orama-Interactive/Pixelorama/pull/646)
+- Bulk importing images has been made easier by adding an "Apply to all" checkbox that uses the same import options for all images that are to be imported. [#624](https://github.com/Orama-Interactive/Pixelorama/pull/624)
+- Extra cursor options have been added to the Preferences that let the user use the native mouse cursors of the OS and toggle the cross cursor on or off for the canvas, and the "Indicators" tab has been renamed to "Cursors".
+- Frame duration now appears as a hint tooltip of the frame buttons.
+- Added Portuguese translation.
+
+### Changed
+- The UI system has changed completely. Users can re-arrange all of the panels and place them wherever they want, resize them or hide them from view. It is also possible to save and load custom UI layouts. [#640](https://github.com/Orama-Interactive/Pixelorama/pull/640)
+- The secondary canvas is hidden from view by default, but it can become visible by going to the Window > Panels.
+- The mirroring and pixel perfect options are now global tool options and affect both left and right tools.
+- Various timeline improvements, like deleting and cloning multiple selected frames and when creating new frames, tags that are in front of them are being pushed. If the currently selected frames are inside a tag, creating new frames makes the tag bigger. [#648](https://github.com/Orama-Interactive/Pixelorama/pull/648)
+- The custom mouse cursor now scales with the UI. [#642](https://github.com/Orama-Interactive/Pixelorama/issues/642)
+- Importing an image will replace the previous project, if that project is empty.
+- Clicking on a layer toggle button (lock, visible & cel linking) now selects that layer.
+- Resize Canvas will always display the current size of the project.
+- Imported images can now be immediately exported, and for imported png images "Overwrite" is being displayed instead of "Export", until the user uses "Export as...".
+- The toolbar and the animation timeline now have a scrollbar.
+- Cut no longer works in invisible/locked layers.
+- You can now move guides with the pan tool. [#647](https://github.com/Orama-Interactive/Pixelorama/pull/647)
+- "Flip" has been renamed to "Mirror Image".
+- The documentation keyboard shortcut has been changed from F12 to F1.
+
+### Fixed
+- Drawing with big brush sizes has been optimized. [#657](https://github.com/Orama-Interactive/Pixelorama/pull/657) - which was based on [#554](https://github.com/Orama-Interactive/Pixelorama/pull/554)
+- The "same color pixels" mode of the bucket tool has become a lot faster because it now uses a shader. [#649](https://github.com/Orama-Interactive/Pixelorama/pull/649) - which was based on [#613](https://github.com/Orama-Interactive/Pixelorama/pull/613)
+- Fixed crash when importing non-palette .tres files.
+- Deferred mode for the color pickers of gradients has been enabled, so that the gradient preview color only changes on mouse release. Addressed a part of [#645](https://github.com/Orama-Interactive/Pixelorama/issues/645).
+- "From Current Palette" preset option is now disabled when creating a new palette, if there is no current palette, which fixes [#659](https://github.com/Orama-Interactive/Pixelorama/issues/659)
+- Aspect ratio in scale image no longer sets width and height to have the same value, but it works as expected like it does in the create new image dialog.
+- macOS shortcuts have been fixed, only Command is needed again instead of Command + Control.
+- Fixed a bug where the selection got stuck to the canvas boundaries when they were 1px away from them.
+- The export status of a project no longer resets when saving it as a pxo.
+- Fixed a rare issue where the splash screen never appears and the program is unresponsive.
+- Canvas texture updating has been slightly optimized. [#661](https://github.com/Orama-Interactive/Pixelorama/pull/661)
+
+### Removed
+- The Panel Layout menu option with Widescreen and Tallscreen panel layouts have been removed in favor of the new UI system.
+
+## [v0.9.2] - 2022-01-21
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Darshan Phaldesai ([@luiq54](https://github.com/luiq54)), [@mrtripie](https://github.com/mrtripie)
 
@@ -17,6 +63,7 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Darshan Phaldes
 - The user can no longer delete the content of a cel that belongs to a locked or invisible layer.
 - Window transparency has been re-enabled in macOS.
 - Guides are a little easier to select and drag now.
+- The monochromatic palette has been changed.
 
 ### Fixed
 - Massively improved memory management by fixing a memory leak. Previously, every time the user made a change, memory kept going up and never coming down. Now, data that can never be recovered, like undo data that have been rewritten in history, are also removed from memory. [4832690](https://github.com/Orama-Interactive/Pixelorama/commit/48326900d9d9f0b32fd435e56fd5a39bbf13fa36)

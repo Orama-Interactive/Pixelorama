@@ -1,6 +1,6 @@
 extends ConfirmationDialog
 
-# Emitted when user confirms his changes
+# Emitted when user confirms their changes
 signal saved(name, comment, width, height)
 signal deleted
 

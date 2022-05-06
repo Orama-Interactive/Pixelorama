@@ -18,20 +18,26 @@ func scale_3x(sprite: Image, tol: float = 50) -> Image:
 	var h: Color
 	var i: Color
 
-	for x in range(1, sprite.get_width() - 1):
-		for y in range(1, sprite.get_height() - 1):
+	for x in range(0, sprite.get_width()):
+		for y in range(0, sprite.get_height()):
 			var xs: float = 3 * x
 			var ys: float = 3 * y
 
-			a = sprite.get_pixel(x - 1, y - 1)
-			b = sprite.get_pixel(x, y - 1)
-			c = sprite.get_pixel(x + 1, y - 1)
-			d = sprite.get_pixel(x - 1, y)
-			e = sprite.get_pixel(x, y)
-			f = sprite.get_pixel(x + 1, y)
-			g = sprite.get_pixel(x - 1, y + 1)
-			h = sprite.get_pixel(x, y + 1)
-			i = sprite.get_pixel(x + 1, y + 1)
+			a = sprite.get_pixel(max(x - 1, 0), max(y - 1, 0))
+			b = sprite.get_pixel(min(x, sprite.get_width() - 1), max(y - 1, 0))
+			c = sprite.get_pixel(min(x + 1, sprite.get_width() - 1), max(y - 1, 0))
+			d = sprite.get_pixel(max(x - 1, 0), min(y, sprite.get_height() - 1))
+			e = sprite.get_pixel(min(x, sprite.get_width() - 1), min(y, sprite.get_height() - 1))
+			f = sprite.get_pixel(
+				min(x + 1, sprite.get_width() - 1), min(y, sprite.get_height() - 1)
+			)
+			g = sprite.get_pixel(max(x - 1, 0), min(y + 1, sprite.get_height() - 1))
+			h = sprite.get_pixel(
+				min(x, sprite.get_width() - 1), min(y + 1, sprite.get_height() - 1)
+			)
+			i = sprite.get_pixel(
+				min(x + 1, sprite.get_width() - 1), min(y + 1, sprite.get_height() - 1)
+			)
 
 			var db: bool = similar_colors(d, b, tol)
 			var dh: bool = similar_colors(d, h, tol)
@@ -42,19 +48,23 @@ func scale_3x(sprite: Image, tol: float = 50) -> Image:
 			var eg: bool = similar_colors(e, g, tol)
 			var ei: bool = similar_colors(e, i, tol)
 
-			scaled.set_pixel(xs - 1, ys - 1, d if (db and !dh and !bf) else e)
+			scaled.set_pixel(max(xs - 1, 0), max(ys - 1, 0), d if (db and !dh and !bf) else e)
 			scaled.set_pixel(
-				xs, ys - 1, b if (db and !dh and !bf and !ec) or (bf and !db and !fh and !ea) else e
+				xs,
+				max(ys - 1, 0),
+				b if (db and !dh and !bf and !ec) or (bf and !db and !fh and !ea) else e
 			)
-			scaled.set_pixel(xs + 1, ys - 1, f if (bf and !db and !fh) else e)
+			scaled.set_pixel(xs + 1, max(ys - 1, 0), f if (bf and !db and !fh) else e)
 			scaled.set_pixel(
-				xs - 1, ys, d if (dh and !fh and !db and !ea) or (db and !dh and !bf and !eg) else e
+				max(xs - 1, 0),
+				ys,
+				d if (dh and !fh and !db and !ea) or (db and !dh and !bf and !eg) else e
 			)
 			scaled.set_pixel(xs, ys, e)
 			scaled.set_pixel(
 				xs + 1, ys, f if (bf and !db and !fh and !ei) or (fh and !bf and !dh and !ec) else e
 			)
-			scaled.set_pixel(xs - 1, ys + 1, d if (dh and !fh and !db) else e)
+			scaled.set_pixel(max(xs - 1, 0), ys + 1, d if (dh and !fh and !db) else e)
 			scaled.set_pixel(
 				xs, ys + 1, h if (fh and !bf and !dh and !eg) or (dh and !fh and !db and !ei) else e
 			)
@@ -640,60 +650,3 @@ func generate_outline(
 	image.unlock()
 	new_image.unlock()
 	image.copy_from(new_image)
-
-
-func generate_gradient(
-	image: Image,
-	colors: Array,
-	steps: int,
-	direction: int,
-	affect_selection: bool,
-	project: Project
-) -> void:
-	if colors.size() < 2:
-		return
-
-	var t = 1.0 / (steps - 1)
-	for i in range(1, steps - 1):
-		var color: Color
-		color = colors[-1].linear_interpolate(colors[0], t * i)
-		colors.insert(1, color)
-
-	if direction == GradientDirection.BOTTOM or direction == GradientDirection.RIGHT:
-		colors.invert()
-
-	var draw_rectangle := Rect2()
-	var selection := affect_selection and project.has_selection
-	if selection:
-		draw_rectangle = project.get_selection_rectangle()
-	else:
-		draw_rectangle = Rect2(Vector2.ZERO, project.size)
-	var size := draw_rectangle.size
-	image.lock()
-	var gradient_size
-
-	if direction == GradientDirection.TOP or direction == GradientDirection.BOTTOM:
-		gradient_size = size.y / steps
-		for i in steps:
-			for xx in size.x:
-				var start = i * gradient_size
-				var end = (i + 1) * gradient_size
-				for yy in range(start, end):
-					var pos: Vector2 = Vector2(xx, yy) + draw_rectangle.position
-					if selection and !project.selection_bitmap.get_bit(pos):
-						continue
-					image.set_pixelv(pos, colors[i])
-
-	else:
-		gradient_size = size.x / steps
-		for i in steps:
-			for yy in size.y:
-				var start = i * gradient_size
-				var end = (i + 1) * gradient_size
-				for xx in range(start, end):
-					var pos: Vector2 = Vector2(xx, yy) + draw_rectangle.position
-					if selection and !project.selection_bitmap.get_bit(pos):
-						continue
-					image.set_pixelv(pos, colors[i])
-
-	image.unlock()

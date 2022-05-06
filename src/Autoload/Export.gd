@@ -12,7 +12,7 @@ const MedianCutQuantization = preload("res://addons/gdgifexporter/quantization/m
 
 var current_tab: int = ExportTab.FRAME
 # Frame options
-var frame_number := 0
+var frame_number := 1
 # All frames and their layers processed/blended into images
 var processed_images = []  # Image[]
 
@@ -150,7 +150,12 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 	# Stop export if directory path or file name are not valid
 	var dir = Directory.new()
 	if not dir.dir_exists(directory_path) or not file_name.is_valid_filename():
-		export_dialog.open_path_validation_alert_popup()
+		if not dir.dir_exists(directory_path) and file_name.is_valid_filename():
+			export_dialog.open_path_validation_alert_popup(0)
+		elif not file_name.is_valid_filename() and dir.dir_exists(directory_path):
+			export_dialog.open_path_validation_alert_popup(1)
+		else:
+			export_dialog.open_path_validation_alert_popup()
 		return false
 
 	# Check export paths
@@ -176,11 +181,11 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 		# Check if the file already exists
 		var file_check: File = File.new()
 		if file_check.file_exists(export_path):
-			# Ask user if he want's to overwrite the file
+			# Ask user if they want to overwrite the file
 			if not was_exported or (was_exported and not ignore_overwrites):
 				# Overwrite existing file?
 				export_dialog.open_file_exists_alert_popup(file_exists_alert % export_path)
-				# Stops the function until the user decides if he want's to overwrite
+				# Stops the function until the user decides if they want to overwrite
 				yield(export_dialog, "resume_export_function")
 				if stop_export:
 					# User decided to stop export
@@ -220,9 +225,14 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 	# Store settings for quick export and when the dialog is opened again
 	was_exported = true
 	Global.current_project.was_exported = true
-	Global.top_menu_container.file_menu.set_item_text(
-		6, tr("Export") + " %s" % (file_name + file_format_string(file_format))
-	)
+	if Global.current_project.export_overwrite:
+		Global.top_menu_container.file_menu.set_item_text(
+			6, tr("Overwrite") + " %s" % (file_name + Export.file_format_string(file_format))
+		)
+	else:
+		Global.top_menu_container.file_menu.set_item_text(
+			6, tr("Export") + " %s" % (file_name + file_format_string(file_format))
+		)
 
 	# Only show when not exporting gif - gif export finishes in thread
 	if not (current_tab == ExportTab.ANIMATION and animation_type == AnimationType.ANIMATED):

@@ -9,35 +9,23 @@
 [ext_resource path="res://src/Palette/PalettePanel.gd" type="Script" id=8]
 
 [node name="PalettePanel" type="PanelContainer"]
-margin_right = 300.0
-margin_bottom = 319.0
+margin_right = 318.0
+margin_bottom = 118.0
 rect_min_size = Vector2( 318, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 0
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PaletteVBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 311.0
-margin_bottom = 312.0
+margin_bottom = 111.0
 size_flags_horizontal = 3
-
-[node name="PalettesLabel" type="Label" parent="PaletteVBoxContainer"]
-margin_right = 304.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-text = "Palettes"
-align = 1
 
 [node name="PaletteButtons" type="HBoxContainer" parent="PaletteVBoxContainer"]
-margin_top = 18.0
 margin_right = 304.0
-margin_bottom = 40.0
+margin_bottom = 22.0
 
 [node name="PaletteSelect" type="OptionButton" parent="PaletteVBoxContainer/PaletteButtons"]
 margin_right = 252.0
@@ -104,14 +92,14 @@ __meta__ = {
 }
 
 [node name="HSeparator" type="HSeparator" parent="PaletteVBoxContainer"]
-margin_top = 44.0
+margin_top = 26.0
 margin_right = 304.0
-margin_bottom = 48.0
+margin_bottom = 30.0
 
 [node name="SwatchesContainer" type="HBoxContainer" parent="PaletteVBoxContainer"]
-margin_top = 52.0
+margin_top = 34.0
 margin_right = 304.0
-margin_bottom = 104.0
+margin_bottom = 86.0
 size_flags_horizontal = 3
 
 [node name="ColorButtons" type="VBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer"]

@@ -39,17 +39,11 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="PixelPerfect" parent="." index="4"]
-margin_left = 10.0
-margin_top = 102.0
-margin_right = 118.0
-margin_bottom = 126.0
-
 [node name="FillInside" type="CheckBox" parent="." index="5"]
 margin_left = 19.0
-margin_top = 130.0
+margin_top = 102.0
 margin_right = 109.0
-margin_bottom = 154.0
+margin_bottom = 126.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Fill inside"
@@ -57,24 +51,6 @@ align = 1
 __meta__ = {
 "_editor_description_": ""
 }
-
-[node name="EmptySpacer" parent="." index="7"]
-margin_top = 158.0
-margin_right = 128.0
-margin_bottom = 170.0
-
-[node name="Mirror" parent="." index="8"]
-margin_top = 174.0
-margin_right = 128.0
-margin_bottom = 191.0
-
-[node name="Horizontal" parent="Mirror" index="0"]
-margin_left = 26.0
-margin_right = 41.0
-
-[node name="Vertical" parent="Mirror" index="1"]
-margin_left = 85.0
-margin_right = 102.0
 
 [connection signal="toggled" from="Overwrite" to="." method="_on_Overwrite_toggled"]
 [connection signal="toggled" from="FillInside" to="." method="_on_FillInside_toggled"]

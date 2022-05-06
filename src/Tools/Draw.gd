@@ -2,6 +2,7 @@ extends BaseTool
 
 var _brush := Brushes.get_default_brush()
 var _brush_size := 1
+var _cache_limit: int = 3
 var _brush_interpolate := 0
 var _brush_image := Image.new()
 var _brush_texture := ImageTexture.new()
@@ -43,6 +44,7 @@ func _on_Brush_selected(brush: Brushes.Brush) -> void:
 
 func _on_BrushSize_value_changed(value: float) -> void:
 	_brush_size = int(value)
+	_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
 	update_config()
 	save_config()
 
@@ -183,9 +185,9 @@ func draw_tool(position: Vector2) -> void:
 	if Global.pressure_sensitivity_mode == Global.PressureSensitivity.ALPHA:
 		strength *= Tools.pen_pressure
 
-	_drawer.pixel_perfect = tool_slot.pixel_perfect if _brush_size == 1 else false
-	_drawer.horizontal_mirror = tool_slot.horizontal_mirror
-	_drawer.vertical_mirror = tool_slot.vertical_mirror
+	_drawer.pixel_perfect = Tools.pixel_perfect if _brush_size == 1 else false
+	_drawer.horizontal_mirror = Tools.horizontal_mirror
+	_drawer.vertical_mirror = Tools.vertical_mirror
 	_drawer.color_op.strength = strength
 
 	match _brush.type:
@@ -278,17 +280,17 @@ func draw_tool_brush(position: Vector2) -> void:
 	var mirror_x = (project.x_symmetry_point + 1) - dst.x - src_rect.size.x
 	var mirror_y = (project.y_symmetry_point + 1) - dst.y - src_rect.size.y
 
-	if tool_slot.horizontal_mirror:
+	if Tools.horizontal_mirror:
 		var x_dst := Vector2(mirror_x, dst.y)
 		var mirror_brush_x: Image = remove_unselected_parts_of_brush(_mirror_brushes.x, x_dst)
 		_draw_brush_image(mirror_brush_x, _flip_rect(src_rect, size, true, false), x_dst)
-		if tool_slot.vertical_mirror:
+		if Tools.vertical_mirror:
 			var xy_dst := Vector2(mirror_x, mirror_y)
 			var mirror_brush_xy: Image = remove_unselected_parts_of_brush(
 				_mirror_brushes.xy, xy_dst
 			)
 			_draw_brush_image(mirror_brush_xy, _flip_rect(src_rect, size, true, true), xy_dst)
-	if tool_slot.vertical_mirror:
+	if Tools.vertical_mirror:
 		var y_dst := Vector2(dst.x, mirror_y)
 		var mirror_brush_y: Image = remove_unselected_parts_of_brush(_mirror_brushes.y, y_dst)
 		_draw_brush_image(mirror_brush_y, _flip_rect(src_rect, size, false, true), y_dst)
@@ -345,6 +347,13 @@ func draw_indicator_at(position: Vector2, offset: Vector2, color: Color) -> void
 
 
 func _set_pixel(position: Vector2, ignore_mirroring := false) -> void:
+	if position in _draw_cache and _for_frame == Global.current_project.current_frame:
+		return
+	if _draw_cache.size() > _cache_limit or _for_frame != Global.current_project.current_frame:
+		_draw_cache = []
+		_for_frame = Global.current_project.current_frame
+	_draw_cache.append(position)  # Store the position of pixel
+
 	var project: Project = Global.current_project
 	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
@@ -500,7 +509,7 @@ func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 	var angle := rad2deg(end.angle_to_point(start))
 	var distance := start.distance_to(end)
 	if Tools.control:
-		if tool_slot.pixel_perfect:
+		if Tools.pixel_perfect:
 			angle = stepify(angle, 22.5)
 			if step_decimals(angle) != 0:
 				var diff := end - start

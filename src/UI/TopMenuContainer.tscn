@@ -7,17 +7,11 @@ margin_right = 1280.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MenuItems" type="HBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 4.0
 margin_right = 1010.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="FileMenu" type="MenuButton" parent="MenuItems"]
 margin_right = 35.0
@@ -58,9 +52,18 @@ mouse_default_cursor_shape = 2
 text = "View"
 switch_on_hover = true
 
-[node name="HelpMenu" type="MenuButton" parent="MenuItems"]
+[node name="WindowMenu" type="MenuButton" parent="MenuItems"]
 margin_left = 236.0
-margin_right = 278.0
+margin_right = 299.0
+margin_bottom = 20.0
+focus_mode = 2
+mouse_default_cursor_shape = 2
+text = "Window"
+switch_on_hover = true
+
+[node name="HelpMenu" type="MenuButton" parent="MenuItems"]
+margin_left = 303.0
+margin_right = 345.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "Help"
@@ -73,9 +76,6 @@ anchor_bottom = 1.0
 margin_left = -65.5
 margin_right = 65.5
 custom_constants/separation = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RotationStats" type="CenterContainer" parent="TopLabels"]
 margin_right = 60.0
@@ -148,9 +148,6 @@ margin_right = 0.00012207
 margin_bottom = 13.0
 grow_horizontal = 2
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CurrentFrame" type="Label" parent="HBoxContainer"]
 margin_left = 106.0

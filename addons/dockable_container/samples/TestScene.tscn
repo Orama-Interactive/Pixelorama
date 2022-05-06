@@ -1,0 +1,238 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://addons/dockable_container/dockable_container.gd" type="Script" id=1]
+[ext_resource path="res://addons/dockable_container/layout.gd" type="Script" id=2]
+[ext_resource path="res://addons/dockable_container/layout_split.gd" type="Script" id=3]
+[ext_resource path="res://addons/dockable_container/samples/TestScene.gd" type="Script" id=4]
+[ext_resource path="res://addons/dockable_container/layout_panel.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+resource_name = "Tabs"
+script = ExtResource( 5 )
+names = PoolStringArray( "Control0" )
+current_tab = 0
+
+[sub_resource type="Resource" id=2]
+resource_name = "Tabs"
+script = ExtResource( 5 )
+names = PoolStringArray( "Control2" )
+current_tab = 0
+
+[sub_resource type="Resource" id=3]
+resource_name = "Tabs"
+script = ExtResource( 5 )
+names = PoolStringArray( "Control3" )
+current_tab = 0
+
+[sub_resource type="Resource" id=4]
+resource_name = "Split"
+script = ExtResource( 3 )
+direction = 1
+percent = 0.5
+first = SubResource( 2 )
+second = SubResource( 3 )
+
+[sub_resource type="Resource" id=5]
+resource_name = "Split"
+script = ExtResource( 3 )
+direction = 1
+percent = 0.333
+first = SubResource( 1 )
+second = SubResource( 4 )
+
+[sub_resource type="Resource" id=6]
+resource_name = "Tabs"
+script = ExtResource( 5 )
+names = PoolStringArray( "Control1" )
+current_tab = 0
+
+[sub_resource type="Resource" id=7]
+resource_name = "Tabs"
+script = ExtResource( 5 )
+names = PoolStringArray( "Control4" )
+current_tab = 0
+
+[sub_resource type="Resource" id=8]
+resource_name = "Split"
+script = ExtResource( 3 )
+direction = 1
+percent = 0.5
+first = SubResource( 6 )
+second = SubResource( 7 )
+
+[sub_resource type="Resource" id=9]
+resource_name = "Tabs"
+script = ExtResource( 5 )
+names = PoolStringArray( "Control5", "Control6" )
+current_tab = 1
+
+[sub_resource type="Resource" id=10]
+resource_name = "Split"
+script = ExtResource( 3 )
+direction = 0
+percent = 0.649798
+first = SubResource( 8 )
+second = SubResource( 9 )
+
+[sub_resource type="Resource" id=11]
+resource_name = "Split"
+script = ExtResource( 3 )
+direction = 0
+percent = 0.230294
+first = SubResource( 5 )
+second = SubResource( 10 )
+
+[sub_resource type="Resource" id=12]
+resource_name = "Layout"
+script = ExtResource( 2 )
+root = SubResource( 11 )
+hidden_tabs = {
+
+}
+
+[node name="SampleScene" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 20.0
+custom_constants/separation = 16
+alignment = 1
+
+[node name="AddControlButton" type="Button" parent="HBoxContainer"]
+margin_left = 345.0
+margin_right = 472.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "(+) ADD CONTROL"
+
+[node name="SaveLayoutButton" type="Button" parent="HBoxContainer"]
+margin_left = 488.0
+margin_right = 575.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Save Layout"
+
+[node name="LoadLayoutButton" type="Button" parent="HBoxContainer"]
+margin_left = 591.0
+margin_right = 679.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Load Layout"
+
+[node name="ControlPrefab" type="ColorRect" parent="HBoxContainer"]
+visible = false
+margin_left = 677.0
+margin_right = 697.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0.129412, 0.121569, 0.121569, 1 )
+
+[node name="Buttons" type="VBoxContainer" parent="HBoxContainer/ControlPrefab"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -65.5
+margin_top = -22.0
+margin_right = 65.5
+margin_bottom = 22.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rename" type="Button" parent="HBoxContainer/ControlPrefab/Buttons"]
+margin_right = 131.0
+margin_bottom = 20.0
+text = "Rename"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Remove" type="Button" parent="HBoxContainer/ControlPrefab/Buttons"]
+margin_top = 24.0
+margin_right = 131.0
+margin_bottom = 44.0
+text = "REMOVE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DockableContainer" type="Container" parent="."]
+margin_top = 24.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+layout = SubResource( 12 )
+
+[node name="Control0" type="ColorRect" parent="DockableContainer"]
+margin_left = 4.0
+margin_top = 32.0
+margin_right = 225.821
+margin_bottom = 180.476
+rect_min_size = Vector2( 64, 64 )
+
+[node name="Control1" type="ColorRect" parent="DockableContainer"]
+margin_left = 245.821
+margin_top = 32.0
+margin_right = 740.079
+margin_bottom = 276.0
+rect_min_size = Vector2( 128, 128 )
+color = Color( 0.141176, 0.0745098, 0.603922, 1 )
+
+[node name="Control2" type="ColorRect" parent="DockableContainer"]
+margin_left = 4.0
+margin_top = 228.476
+margin_right = 225.821
+margin_bottom = 374.238
+rect_min_size = Vector2( 64, 64 )
+color = Color( 0.533333, 0.380392, 0.380392, 1 )
+
+[node name="Control3" type="ColorRect" parent="DockableContainer"]
+margin_left = 4.0
+margin_top = 422.238
+margin_right = 225.821
+margin_bottom = 568.0
+rect_min_size = Vector2( 64, 64 )
+color = Color( 0.741176, 0.188235, 0.188235, 1 )
+
+[node name="Control4" type="ColorRect" parent="DockableContainer"]
+margin_left = 245.821
+margin_top = 324.0
+margin_right = 740.079
+margin_bottom = 568.0
+rect_min_size = Vector2( 128, 128 )
+color = Color( 0.129412, 0.121569, 0.121569, 1 )
+
+[node name="Control5" type="ColorRect" parent="DockableContainer"]
+margin_left = 760.079
+margin_top = 32.0
+margin_right = 1020.0
+margin_bottom = 568.0
+rect_min_size = Vector2( 64, 64 )
+color = Color( 0.333333, 0.862745, 0.8, 1 )
+
+[node name="Control6" type="ColorRect" parent="DockableContainer"]
+visible = false
+margin_left = 760.079
+margin_top = 32.0
+margin_right = 1020.0
+margin_bottom = 568.0
+rect_min_size = Vector2( 64, 64 )
+color = Color( 0.898039, 0.921569, 0.188235, 1 )
+[connection signal="pressed" from="HBoxContainer/AddControlButton" to="." method="_on_add_pressed"]
+[connection signal="pressed" from="HBoxContainer/SaveLayoutButton" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="HBoxContainer/LoadLayoutButton" to="." method="_on_load_pressed"]

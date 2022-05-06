@@ -52,16 +52,11 @@ visible = false
 margin_top = 18.0
 margin_bottom = 34.0
 
-[node name="PixelPerfect" parent="." index="5"]
-visible = false
-margin_top = 66.0
-margin_bottom = 90.0
-
-[node name="ColorInterpolation" parent="." index="6"]
+[node name="ColorInterpolation" parent="." index="5"]
 margin_top = 66.0
 margin_bottom = 128.0
 
-[node name="FillCheckbox" type="CheckBox" parent="." index="7"]
+[node name="FillCheckbox" type="CheckBox" parent="." index="6"]
 margin_left = 13.0
 margin_top = 66.0
 margin_right = 102.0
@@ -70,14 +65,6 @@ hint_tooltip = "Fills the drawn shape with color, instead of drawing a hollow sh
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Fill Shape"
-
-[node name="EmptySpacer" parent="." index="8"]
-margin_top = 94.0
-margin_bottom = 106.0
-
-[node name="Mirror" parent="." index="9"]
-margin_top = 110.0
-margin_bottom = 127.0
 
 [connection signal="value_changed" from="ShapeThickness/ThicknessSpinbox" to="." method="_on_Thickness_value_changed"]
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]

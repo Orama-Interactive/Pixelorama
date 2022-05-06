@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-01-05 16:10\n"
+"PO-Revision-Date: 2022-03-31 13:50\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -66,6 +66,9 @@ msgstr "Επιλογή"
 msgid "View"
 msgstr "Προβολή"
 
+msgid "Window"
+msgstr "Παράθυρο"
+
 msgid "Image"
 msgstr "Εικόνα"
 
@@ -98,6 +101,9 @@ msgstr "Εισαγωγή"
 
 msgid "Export"
 msgstr "Εξαγωγή"
+
+msgid "Overwrite"
+msgstr "Αντικατάσταση"
 
 msgid "Export..."
 msgstr "Εξαγωγή..."
@@ -162,8 +168,8 @@ msgstr "Εκκαθάριση"
 msgid "Invert"
 msgstr "Αντιστροφή"
 
-msgid "Flip"
-msgstr "Αναστροφή"
+msgid "Mirror Image"
+msgstr "Αναστροφή Εικόνας"
 
 msgid "Flip Horizontal"
 msgstr "Οριζόντια αναστροφή"
@@ -182,6 +188,30 @@ msgstr "Αδιαφάνεια Παραθύρου"
 
 msgid "Panel Layout"
 msgstr "Διάταξη Πλαισίου"
+
+msgid "Panels"
+msgstr "Πλαίσια"
+
+msgid "Layouts"
+msgstr "Διατάξεις"
+
+msgid "Moveable Panels"
+msgstr "Κινητά πλαίσια"
+
+msgid "Manage Layouts"
+msgstr "Διαχείριση διατάξεων"
+
+msgid "Add"
+msgstr "Προσθήκη"
+
+msgid "Add Layout"
+msgstr "Προσθήκη διάταξης"
+
+msgid "Edit Layout"
+msgstr "Επεξεργασία διάταξης"
+
+msgid "Are you sure you want to delete this layout?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν τη διάταξη;"
 
 msgid "Auto"
 msgstr "Αυτόματο"
@@ -230,6 +260,9 @@ msgstr "Επιλογές Εισαγωγής"
 
 msgid "Import as:"
 msgstr "Εισαγωγή ως:"
+
+msgid "Apply to all"
+msgstr "Εφαρμογή σε όλα"
 
 msgid "Recent projects"
 msgstr "Πρόσφατα έργα"
@@ -309,10 +342,18 @@ msgstr "Η διαδρομή του φακέλου ή το όνομα αρχεί�
 msgid "Exporting in progress..."
 msgstr "Εξαγωγή σε εξέλιξη..."
 
+msgid "Can't load file '%s'."
+msgstr "Αδυναμία φόρτωσης του αρχείου '%s'."
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Δεν είναι δυνατή η φόρτωση του αρχείου '%s'.\n"
 "Κωδικός σφάλματος: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr "Αδυναμία φόρτωσης του αρχείου '%s'.\n"
+"Αυτό δεν είναι έγκυρο αρχείο παλέτας."
 
 msgid "Frame"
 msgstr "Καρέ"
@@ -445,6 +486,12 @@ msgstr "Αντίγραφο ασφαλείας"
 
 msgid "Performance"
 msgstr "Επίδοση"
+
+msgid "Extensions"
+msgstr "Επεκτάσεις"
+
+msgid "Cursors"
+msgstr "Κέρσορες"
 
 msgid "Indicators"
 msgstr "Δείκτες"
@@ -740,6 +787,18 @@ msgstr "Ιαπωνικά"
 msgid "Ukrainian"
 msgstr "Ουκρανικά"
 
+msgid "Danish"
+msgstr "Δανικά"
+
+msgid "Swedish"
+msgstr "Σουηδικά"
+
+msgid "Serbian (Cyrillic)"
+msgstr "Σερβικά (Κυριλλικά)"
+
+msgid "Dutch"
+msgstr "Ολλανδικά"
+
 msgid "Development Team"
 msgstr "Ομάδα Ανάπτυξης"
 
@@ -799,14 +858,14 @@ msgstr "Ελλειπτική επιλογή\n\n"
 "%s για το αριστερό κουμπί ποντικιού\n"
 "%s για το δεξί κουμπί ποντικιού"
 
-msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "Πολυγωνική επιλογή\n"
-"Κάντε διπλό κλικ για να συνδέσετε το τελευταίο σημείο στο σημείο εκκίνησης\n\n"
-"%s για το αριστερό πλήκτρο του ποντικιού\n"
-"%s για το δεξί πλήκτρο του ποντικιού"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
+msgstr "Πολυγωνική επιλογή\n\n"
+"%s για αριστερό πλήκτρο του ποντικιού\n"
+"%s για δεξί πλήκτρο του ποντικιού\n\n"
+"Διπλό κλικ για σύνδεση του τελευταίου σημείου στο σημείο εκκίνησης"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -850,14 +909,14 @@ msgstr "Μετακίνηση κάμερας\n\n"
 "%s για το αριστερό κουμπί ποντικιού\n"
 "%s για το δεξί κουμπί ποντικιού"
 
-msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "Επιλογέας χρωμάτων\n"
-"Επιλέξτε ένα χρώμα από ένα εικονοστοιχείο της εικόνας\n\n"
-"%s για το αριστερό κουμπί ποντικιού\n"
-"%s για το δεξί κουμπί ποντικιού"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
+msgstr "Επιλογέας χρωμάτων\n\n"
+"%s για αριστερό πλήκτρο του ποντικιού\n"
+"%s για δεξί πλήκτρο του ποντικιού\n\n"
+"Επιλέξτε ένα χρώμα από ένα εικονοστοιχείο του αντικειμένου"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -979,6 +1038,12 @@ msgstr "Εμφάνιση δεξιού εικονιδίου εργαλείου"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Εμφανίζει ένα εικονίδιο του επιλεγμένου δεξιού εργαλείου δίπλα στο κέρσορα στον καμβά"
+
+msgid "Use native mouse cursors"
+msgstr "Χρήση κερσόρων του λειτουργικού συστήματος"
+
+msgid "Use cross cursor for the canvas"
+msgstr "Χρήση σταυρού κέρσορα για τον καμβά"
 
 msgid "Guides"
 msgstr "Οδηγοί"
@@ -1127,6 +1192,21 @@ msgstr "Ορίζει το όριο των καρέ της εφαρμογής α�
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Αν είναι ενεργοποιημένο, όταν το παράθυρο της εφαρμογής χάνει την εστίαση του, γίνεται παύση της εφαρμογής. Αυτό βοηθά στη μείωση της χρήσης του επεξεργαστή (CPU) όταν βρίσκεται σε αδράνεια. Η εφαρμογή συνεχίζεται όταν το ποντίκι εισέρχεται στο παράθυρο της."
 
+msgid "Add Extension"
+msgstr "Προσθήκη επέκτασης"
+
+msgid "Enable"
+msgstr "Ενεργοποίηση"
+
+msgid "Disable"
+msgstr "Απενεργοποίηση"
+
+msgid "Uninstall"
+msgstr "Απεγκατάσταση"
+
+msgid "Open Folder"
+msgstr "Άνοιγμα φακέλου"
+
 msgid "Brush:"
 msgstr "Πινέλο:"
 
@@ -1160,8 +1240,10 @@ msgstr "Pixel Perfect"
 msgid "Fill inside"
 msgstr "Εσωτερικό γέμισμα"
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Κάνει τις γραμμές ομαλές αφαιρώντας τα επιπλέον pixel στα άκρα"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Pixel Perfect\n"
+"Κάνει τις γραμμές ομαλές αφαιρώντας τα επιπλέον εικονοστοιχεία στα άκρα"
 
 msgid "Fill Shape"
 msgstr "Γέμισμα Σχήματος"
@@ -1819,6 +1901,9 @@ msgstr "Μετακίνηση του επιλεγμένου καρέ προς τ�
 msgid "Frame duration"
 msgstr "Διάρκεια καρέ"
 
+msgid "Duration"
+msgstr "Διάρκεια"
+
 msgid "Tiled In Both Axis"
 msgstr "Επανάληψη και στους 2 άξονες"
 
@@ -1863,4 +1948,31 @@ msgstr "Η μείωση του μεγέθους της παλέτας θα επ�
 
 msgid "Position:"
 msgstr "Θέση:"
+
+msgid "Tools"
+msgstr "Εργαλεία"
+
+msgid "Main Canvas"
+msgstr "Κύριος καμβάς"
+
+msgid "Second Canvas"
+msgstr "Δεύτερος καμβάς"
+
+msgid "Animation Timeline"
+msgstr "Χρονοδιάγραμμα"
+
+msgid "Canvas Preview"
+msgstr "Προεπισκόπηση καμβά"
+
+msgid "Color Pickers"
+msgstr "Επιλογείς χρωμάτων"
+
+msgid "Global Tool Options"
+msgstr "Καθολικές επιλογές εργαλείων"
+
+msgid "Left Tool Options"
+msgstr "Επιλογές αριστερού εργαλείου"
+
+msgid "Right Tool Options"
+msgstr "Επιλογές δεξιού εργαλείου"
 

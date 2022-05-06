@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-01-05 00:44\n"
+"PO-Revision-Date: 2022-03-30 23:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -66,6 +66,9 @@ msgstr "Velg"
 msgid "View"
 msgstr "Vis"
 
+msgid "Window"
+msgstr "Vindu"
+
 msgid "Image"
 msgstr "Bilde"
 
@@ -98,6 +101,9 @@ msgstr "Importer"
 
 msgid "Export"
 msgstr "Eksporter"
+
+msgid "Overwrite"
+msgstr ""
 
 msgid "Export..."
 msgstr "Eksporter..."
@@ -162,8 +168,8 @@ msgstr "Nullstill"
 msgid "Invert"
 msgstr "Inverter"
 
-msgid "Flip"
-msgstr "Vend"
+msgid "Mirror Image"
+msgstr ""
 
 msgid "Flip Horizontal"
 msgstr "Speilvend Horisontalt"
@@ -178,10 +184,34 @@ msgid "Tile Mode"
 msgstr "Flismodus"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Gjennomsiktighet på vindu"
 
 msgid "Panel Layout"
 msgstr "Paneloppsett"
+
+msgid "Panels"
+msgstr "Paneler"
+
+msgid "Layouts"
+msgstr "Oppsett"
+
+msgid "Moveable Panels"
+msgstr ""
+
+msgid "Manage Layouts"
+msgstr "Gjør om på oppstett"
+
+msgid "Add"
+msgstr ""
+
+msgid "Add Layout"
+msgstr ""
+
+msgid "Edit Layout"
+msgstr ""
+
+msgid "Are you sure you want to delete this layout?"
+msgstr ""
 
 msgid "Auto"
 msgstr "Automatisk"
@@ -230,6 +260,9 @@ msgstr "Importeringsvalg"
 
 msgid "Import as:"
 msgstr "Importér som:"
+
+msgid "Apply to all"
+msgstr ""
 
 msgid "Recent projects"
 msgstr "Siste prosjekter"
@@ -309,9 +342,17 @@ msgstr "Banen eller filnavnet er ikke gyldig!"
 msgid "Exporting in progress..."
 msgstr "Eksport pågår..."
 
+msgid "Can't load file '%s'."
+msgstr "Kan ikke laste fil '%s'."
+
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
 msgstr "Kan ikke laste fil '%s'. Feilkode: %s"
+
+msgid "Can't load file '%s'.\n"
+"This is not a valid palette file."
+msgstr "Kan ikke laste fil '%s'.\n"
+"Dette er ikke en gyldig palettfil."
 
 msgid "Frame"
 msgstr "Bilde"
@@ -444,6 +485,12 @@ msgstr "Sikkerhetskopi"
 
 msgid "Performance"
 msgstr "Ytelse"
+
+msgid "Extensions"
+msgstr "Utvidelser"
+
+msgid "Cursors"
+msgstr "Markører"
 
 msgid "Indicators"
 msgstr "Indikatorer"
@@ -739,6 +786,18 @@ msgstr "Japansk"
 msgid "Ukrainian"
 msgstr "Ukrainsk"
 
+msgid "Danish"
+msgstr "Dansk"
+
+msgid "Swedish"
+msgstr "Svensk"
+
+msgid "Serbian (Cyrillic)"
+msgstr "Serbisk (kyrillisk)"
+
+msgid "Dutch"
+msgstr "Nederlandsk"
+
 msgid "Development Team"
 msgstr "Utviklingsteam"
 
@@ -798,10 +857,10 @@ msgstr "Elliptisk Markering\n\n"
 "%s for venstre museknapp\n"
 "%s for høyre museknapp"
 
-msgid "Polygonal Selection\n"
-"Double-click to connect the last point to the starting point\n\n"
+msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
+"%s for right mouse button\n\n"
+"Double-click to connect the last point to the starting point"
 msgstr "Polygonal Markering\n\n"
 "%s for venstre museknapp\n"
 "%s for høyre museknapp"
@@ -848,12 +907,11 @@ msgstr "Panorer\n\n"
 "%s for venstre museknapp\n"
 "%s for høyre museknapp"
 
-msgid "Color Picker\n"
-"Select a color from a pixel of the sprite\n\n"
+msgid "Color Picker\n\n"
 "%s for left mouse button\n"
-"%s for right mouse button"
-msgstr "Fargevelger\n"
-"Velg en farge fra en piksel på figuren\n\n"
+"%s for right mouse button\n\n"
+"Select a color from a pixel of the sprite"
+msgstr "Fargevelger\n\n"
 "%s for venstre museknapp\n"
 "%s for høyre museknapp"
 
@@ -977,6 +1035,12 @@ msgstr "Vis høyre verktøyikon"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Viser ikonet til det valgte høyreverktøyet ved siden av markøren på lerretet"
+
+msgid "Use native mouse cursors"
+msgstr "Bruk vanlige musepekere"
+
+msgid "Use cross cursor for the canvas"
+msgstr "Bruk kryssmarkør for lerretet"
 
 msgid "Guides"
 msgstr "Guider"
@@ -1117,13 +1181,28 @@ msgid "Set application FPS limit:"
 msgstr "Sett prorgammets grense for Bilder Per Sekund, BPS:"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Sett programmet på pause når det mister fokus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Setter grensen for hvor mange bilder per sekund programmet kan ha. Lavere tall bruker mindre prosessorkraft, men programmet går saktere, mer hakkete og kan slutte å svare. 0 betyr at det ikke er noen grense."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr ""
+msgstr "Hvis denne er påslått og programmet mister fokus vil programmet settes på pause. Dette gjør så programmet bruker mindre prosessorkraft ved inaktivitet. Programmet vil gå tilbake til normalt når musen går inn i programmets vindu."
+
+msgid "Add Extension"
+msgstr "Legg til utvidelse"
+
+msgid "Enable"
+msgstr "Aktiver"
+
+msgid "Disable"
+msgstr "Deaktiver"
+
+msgid "Uninstall"
+msgstr "Avinstaller"
+
+msgid "Open Folder"
+msgstr "Åpne Mappe"
 
 msgid "Brush:"
 msgstr "Børste:"
@@ -1158,8 +1237,10 @@ msgstr "Pikselperfekt"
 msgid "Fill inside"
 msgstr "Fyll inn"
 
-msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr "Gjør linjer glatte ved å fjerne ekstra piksler på kantene"
+msgid "Pixel Perfect\n"
+"Makes lines smooth by removing the extra pixels on the edges"
+msgstr "Pikselperfekt\n"
+"Gjør linjer glatte ved å fjerne de ekstra pikslene på kantene"
 
 msgid "Fill Shape"
 msgstr "Fyll Form"
@@ -1350,19 +1431,19 @@ msgid "Blue-Red Mode"
 msgstr "Blå-Rød-Modus"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "Vis tidligere bilder:"
 
 msgid "Show future frames:"
-msgstr ""
+msgstr "Vis fremtidige bilder:"
 
 msgid "Above canvas"
-msgstr ""
+msgstr "Over lerretet"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "Under lerretet"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Hvis du ønsker at et lag skal ignorere \"Onion Skinning\" legger du bare til \"_io\" på slutten av lagets navn."
 
 msgid "Add a new frame"
 msgstr "Legg til nytt bilde"
@@ -1460,10 +1541,10 @@ msgid "Redo: Draw"
 msgstr "Gjør om: Tegne"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Angre: Markér"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Gjør om: Markér"
 
 msgid "Undo: Scale"
 msgstr "Angre: Skalér"
@@ -1757,7 +1838,7 @@ msgid "Opens last opened project on startup"
 msgstr "Åpne sist åpnede prosjekt ved oppstart"
 
 msgid "Quit confirmation"
-msgstr ""
+msgstr "Avslutningsbekreftelse"
 
 msgid "Enable autosave"
 msgstr "Aktivér automatisk lagring"
@@ -1815,6 +1896,9 @@ msgstr "Flytt det merkede bildet til høyre."
 msgid "Frame duration"
 msgstr "Bildevarighet"
 
+msgid "Duration"
+msgstr "Varighet"
+
 msgid "Tiled In Both Axis"
 msgstr "Flislagt i begge Akser"
 
@@ -1859,4 +1943,31 @@ msgstr "Redusering av palettstørrelse vil nullstille fargenes lagrede posisjon.
 
 msgid "Position:"
 msgstr "Posisjon:"
+
+msgid "Tools"
+msgstr "Verktøy"
+
+msgid "Main Canvas"
+msgstr "Hovedlerret"
+
+msgid "Second Canvas"
+msgstr "Andre Lerret"
+
+msgid "Animation Timeline"
+msgstr "Animasjonstidslinje"
+
+msgid "Canvas Preview"
+msgstr "Forhåndsvisning av Lerret"
+
+msgid "Color Pickers"
+msgstr "Fargevelgere"
+
+msgid "Global Tool Options"
+msgstr "Innstillinger for Alle Verktøy"
+
+msgid "Left Tool Options"
+msgstr "Innstillinger for Venstre Verktøy"
+
+msgid "Right Tool Options"
+msgstr "Innstillinger for Høyre Verktøy"
 

@@ -1467,6 +1467,7 @@ shadow_color = Color( 0, 0, 0, 0.1 )
 shadow_size = 4
 
 [resource]
+resource_name = "Caramel"
 default_font = ExtResource( 1 )
 BoxContainer/constants/separation = 4
 Button/colors/font_color = Color( 0.237305, 0.193295, 0.141827, 1 )
@@ -1607,6 +1608,7 @@ HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 8
 HSplitContainer/icons/grabber = SubResource( 86 )
 HSplitContainer/styles/bg = SubResource( 87 )
+Icons/colors/modulate_color = Color( 0.2, 0.2, 0.2, 1 )
 ItemList/colors/font_color = Color( 0.237305, 0.193295, 0.141827, 1 )
 ItemList/colors/font_color_selected = Color( 0, 0, 0, 1 )
 ItemList/colors/guide_color = Color( 0, 0, 0, 0.05 )
@@ -1661,6 +1663,7 @@ MenuButton/styles/focus = SubResource( 23 )
 MenuButton/styles/hover = SubResource( 23 )
 MenuButton/styles/normal = SubResource( 23 )
 MenuButton/styles/pressed = SubResource( 23 )
+Misc/colors/clear_color = Color( 0.866667, 0.701961, 0.439216, 1 )
 OptionButton/colors/font_color = Color( 0.237305, 0.193295, 0.141827, 1 )
 OptionButton/colors/font_color_disabled = Color( 0, 0, 0, 0.3 )
 OptionButton/colors/font_color_hover = Color( 0.142383, 0.115977, 0.085096, 1 )

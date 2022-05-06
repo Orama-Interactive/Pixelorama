@@ -8,6 +8,16 @@ onready var frame_properties: ConfirmationDialog = Global.control.find_node("Fra
 
 func _ready() -> void:
 	connect("pressed", self, "_button_pressed")
+	connect("mouse_entered", self, "_update_tooltip")
+
+
+func _update_tooltip() -> void:
+	var duration: float = Global.current_project.frames[frame].duration
+	var duration_sec: float = duration * (1.0 / Global.current_project.fps)
+	var duration_str := str(duration_sec)
+	if "." in duration_str:  # If its a decimal value
+		duration_str = "%.2f" % duration_sec  # Up to 2 decimal places
+	hint_tooltip = "%s: %sx (%s sec)" % [tr("Duration"), str(duration), duration_str]
 
 
 func _button_pressed() -> void:
@@ -51,7 +61,7 @@ func _button_pressed() -> void:
 		pressed = !pressed
 	elif Input.is_action_just_released("middle_mouse"):
 		pressed = !pressed
-		Global.animation_timeline.delete_frame(frame)
+		Global.animation_timeline.delete_frames([frame])
 	else:  # An example of this would be Space
 		pressed = !pressed
 
@@ -59,9 +69,9 @@ func _button_pressed() -> void:
 func _on_PopupMenu_id_pressed(id: int) -> void:
 	match id:
 		0:  # Remove Frame
-			Global.animation_timeline.delete_frame(frame)
+			Global.animation_timeline.delete_frames([frame])
 		1:  # Clone Frame
-			Global.animation_timeline.copy_frame(frame)
+			Global.animation_timeline.copy_frames([frame])
 		2:  # Move Left
 			change_frame_order(-1)
 		3:  # Move Right

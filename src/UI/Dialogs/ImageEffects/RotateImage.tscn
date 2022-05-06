@@ -4,15 +4,12 @@
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="RotateImage" type="ConfirmationDialog"]
-margin_right = 348.0
+margin_right = 320.0
 margin_bottom = 380.0
-rect_min_size = Vector2( 348, 380 )
+rect_min_size = Vector2( 320, 380 )
 window_title = "Rotate Image"
 resizable = true
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -21,19 +18,16 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -36.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_right = 332.0
-margin_bottom = 228.0
+margin_right = 304.0
+margin_bottom = 204.0
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 52.0
-margin_right = 280.0
-margin_bottom = 228.0
+margin_left = 50.0
+margin_right = 254.0
+margin_bottom = 204.0
 rect_min_size = Vector2( 200, 200 )
 expand = true
 stretch_mode = 5
@@ -46,14 +40,14 @@ margin_right = 0.0
 margin_bottom = 0.0
 
 [node name="LiveSettings" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 232.0
-margin_right = 332.0
-margin_bottom = 256.0
+margin_top = 208.0
+margin_right = 304.0
+margin_bottom = 232.0
 alignment = 1
 
 [node name="LiveCheckbox" type="CheckBox" parent="VBoxContainer/LiveSettings"]
-margin_left = 112.0
-margin_right = 220.0
+margin_left = 98.0
+margin_right = 206.0
 margin_bottom = 24.0
 pressed = true
 text = "Live Preview"
@@ -86,9 +80,9 @@ editable = false
 suffix = "msec"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 260.0
-margin_right = 332.0
-margin_bottom = 280.0
+margin_top = 236.0
+margin_right = 304.0
+margin_bottom = 256.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
 margin_top = 3.0
@@ -98,15 +92,51 @@ text = "Type:"
 
 [node name="TypeOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
 margin_left = 38.0
-margin_right = 332.0
+margin_right = 304.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 260.0
+margin_right = 304.0
+margin_bottom = 280.0
+alignment = 1
+
+[node name="Deduct90" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 65.0
+margin_right = 98.0
+margin_bottom = 20.0
+text = "-90"
+
+[node name="Deduct45" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 102.0
+margin_right = 135.0
+margin_bottom = 20.0
+text = "-45"
+
+[node name="Zero" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 139.0
+margin_right = 159.0
+margin_bottom = 20.0
+text = "0"
+
+[node name="Add45" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 163.0
+margin_right = 199.0
+margin_bottom = 20.0
+text = "+45"
+
+[node name="Add90" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 203.0
+margin_right = 239.0
+margin_bottom = 20.0
+text = "+90"
+
 [node name="AngleOptions" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 284.0
-margin_right = 332.0
+margin_right = 304.0
 margin_bottom = 308.0
 
 [node name="Label" type="Label" parent="VBoxContainer/AngleOptions"]
@@ -117,7 +147,7 @@ text = "Angle:"
 
 [node name="AngleHSlider" type="HSlider" parent="VBoxContainer/AngleOptions"]
 margin_left = 44.0
-margin_right = 254.0
+margin_right = 226.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -128,8 +158,8 @@ __meta__ = {
 }
 
 [node name="AngleSpinBox" type="SpinBox" parent="VBoxContainer/AngleOptions"]
-margin_left = 258.0
-margin_right = 332.0
+margin_left = 230.0
+margin_right = 304.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 max_value = 359.0
@@ -137,7 +167,7 @@ suffix = "°"
 
 [node name="OptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 312.0
-margin_right = 332.0
+margin_right = 304.0
 margin_bottom = 336.0
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
@@ -161,6 +191,11 @@ selected = 0
 [connection signal="toggled" from="VBoxContainer/LiveSettings/LiveCheckbox" to="." method="_on_LiveCheckbox_toggled"]
 [connection signal="value_changed" from="VBoxContainer/WaitSettings/WaitTime" to="." method="_on_WaitTime_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer2/TypeOptionButton" to="." method="_on_TypeOptionButton_item_selected"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Deduct90" to="." method="_on_quick_change_angle_pressed" binds= [ "-90" ]]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Deduct45" to="." method="_on_quick_change_angle_pressed" binds= [ "-45" ]]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Zero" to="." method="_on_quick_change_angle_pressed" binds= [ "0" ]]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Add45" to="." method="_on_quick_change_angle_pressed" binds= [ "+45" ]]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Add90" to="." method="_on_quick_change_angle_pressed" binds= [ "+90" ]]
 [connection signal="value_changed" from="VBoxContainer/AngleOptions/AngleHSlider" to="." method="_on_HSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/AngleOptions/AngleSpinBox" to="." method="_on_SpinBox_value_changed"]
 [connection signal="timeout" from="WaitApply" to="." method="_on_WaitApply_timeout"]

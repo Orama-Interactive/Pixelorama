@@ -1,18 +1,14 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/splash_screen/artworks/wishdream.png" type="Texture" id=2]
 [ext_resource path="res://assets/graphics/timeline/move_arrow.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/icons/icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/splash_screen/version.png" type="Texture" id=5]
 [ext_resource path="res://assets/fonts/Roboto-Small.tres" type="DynamicFont" id=7]
 [ext_resource path="res://assets/graphics/splash_screen/discord.png" type="Texture" id=9]
 [ext_resource path="res://assets/graphics/splash_screen/github_32px.png" type="Texture" id=10]
 [ext_resource path="res://assets/graphics/splash_screen/patreon_mark_white.png" type="Texture" id=11]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
-border_width_top = 20
-border_color = Color( 0.403922, 0.403922, 0.403922, 1 )
-expand_margin_top = 20.0
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -30,11 +26,8 @@ bg_color = Color( 0.6, 0.6, 0.6, 0 )
 margin_right = 640.0
 margin_bottom = 583.0
 rect_min_size = Vector2( 640, 583 )
-custom_styles/panel = SubResource( 1 )
+resizable = true
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Contents" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -49,9 +42,10 @@ __meta__ = {
 margin_right = 640.0
 margin_bottom = 406.0
 rect_min_size = Vector2( 640, 406 )
+size_flags_vertical = 3
 texture = ExtResource( 2 )
 expand = true
-stretch_mode = 6
+stretch_mode = 7
 
 [node name="ChangeArtBtnLeft" type="Button" parent="Contents/SplashArt" groups=["UIButtons"]]
 anchor_top = 0.5
@@ -117,6 +111,31 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Overlay" type="HBoxContainer" parent="Contents/SplashArt"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 128.0
+margin_bottom = 40.0
+
+[node name="PixeloramaIcon" type="TextureRect" parent="Contents/SplashArt/Overlay"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="VersionText" type="TextureRect" parent="Contents/SplashArt/Overlay"]
+margin_left = 28.0
+margin_top = 6.0
+margin_right = 112.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 84, 12 )
+size_flags_vertical = 4
+texture = ExtResource( 5 )
+expand = true
 
 [node name="ArtBy" type="HBoxContainer" parent="Contents"]
 margin_top = 414.0
@@ -216,6 +235,24 @@ autowrap = true
 margin_top = 18.0
 margin_right = 284.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 230, 0 )
+size_flags_vertical = 8
+text = "MysteryStudio"
+autowrap = true
+
+[node name="PatronsLabel3" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
+margin_top = 36.0
+margin_right = 284.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 230, 0 )
+size_flags_vertical = 8
+text = "ShikadiGum"
+autowrap = true
+
+[node name="PatronsLabel4" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
+margin_top = 54.0
+margin_right = 284.0
+margin_bottom = 68.0
 rect_min_size = Vector2( 230, 0 )
 size_flags_vertical = 8
 text = "Hugo Locurcio"

@@ -4,6 +4,7 @@ var current_save_paths := []  # Array of strings
 # Stores a filename of a backup file in user:// until user saves manually
 var backup_save_paths := []  # Array of strings
 var preview_dialog_tscn = preload("res://src/UI/Dialogs/PreviewDialog.tscn")
+var preview_dialogs := []  # Array of preview dialogs
 
 onready var autosave_timer: Timer
 
@@ -23,8 +24,30 @@ func handle_loading_files(files: PoolStringArray) -> void:
 		var file_ext: String = file.get_extension().to_lower()
 		if file_ext == "pxo":  # Pixelorama project file
 			open_pxo_file(file)
-		elif file_ext == "tres" or file_ext == "gpl" or file_ext == "pal" or file_ext == "json":
-			Palettes.import_palette(file)
+
+		elif file_ext == "tres":  # Godot resource file
+			var resource = load(file)
+			if resource is Palette:
+				Palettes.import_palette(resource, file.get_file())
+			else:
+				var file_name: String = file.get_file()
+				Global.error_dialog.set_text(tr("Can't load file '%s'.") % [file_name])
+				Global.error_dialog.popup_centered()
+				Global.dialog_open(true)
+
+		elif file_ext == "gpl" or file_ext == "pal" or file_ext == "json":
+			Palettes.import_palette_from_path(file)
+
+		elif file_ext in ["pck", "zip"]:  # Godot resource pack file
+			Global.preferences_dialog.extensions.install_extension(file)
+
+		elif file_ext == "shader":  # Godot shader file
+			var shader = load(file)
+			if !shader is Shader:
+				continue
+			var file_name: String = file.get_file().get_basename()
+			Global.control.find_node("ShaderEffect").change_shader(shader, file_name)
+
 		else:  # Image files
 			var image := Image.new()
 			var err := image.load(file)
@@ -41,6 +64,7 @@ func handle_loading_files(files: PoolStringArray) -> void:
 
 func handle_loading_image(file: String, image: Image) -> void:
 	var preview_dialog: ConfirmationDialog = preview_dialog_tscn.instance()
+	preview_dialogs.append(preview_dialog)
 	preview_dialog.path = file
 	preview_dialog.image = image
 	Global.control.add_child(preview_dialog)
@@ -352,10 +376,9 @@ func save_pxo_file(
 		# Set last opened project path and save
 		Global.config_cache.set_value("preferences", "last_project_path", path)
 		Global.config_cache.save("user://cache.ini")
-		Export.file_name = path.get_file().trim_suffix(".pxo")
-		Export.directory_path = path.get_base_dir()
-		Export.was_exported = false
-		project.was_exported = false
+		if !project.was_exported:
+			Export.file_name = path.get_file().trim_suffix(".pxo")
+			Export.directory_path = path.get_base_dir()
 		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
 
 	save_project_to_recent_list(path)
@@ -371,7 +394,7 @@ func open_image_as_new_tab(path: String, image: Image) -> void:
 	frame.cels.append(Cel.new(image, 1))
 
 	project.frames.append(frame)
-	set_new_tab(project, path)
+	set_new_imported_tab(project, path)
 
 
 func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert: int) -> void:
@@ -401,7 +424,7 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 
 			project.frames.append(frame)
 
-	set_new_tab(project, path)
+	set_new_imported_tab(project, path)
 
 
 func open_image_as_spritesheet_layer(
@@ -572,9 +595,9 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	project.undo_redo.commit_action()
 
 
-func set_new_tab(project: Project, path: String) -> void:
-	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
+func set_new_imported_tab(project: Project, path: String) -> void:
+	var prev_project_empty: bool = Global.current_project.is_empty()
+	var prev_project_pos: int = Global.current_project_index
 
 	Global.window_title = (
 		path.get_file()
@@ -586,11 +609,21 @@ func set_new_tab(project: Project, path: String) -> void:
 	if project.has_changed:
 		Global.window_title = Global.window_title + "(*)"
 	var file_name := path.get_basename().get_file()
-	var directory_path := path.get_basename().replace(file_name, "")
+	var directory_path := path.get_base_dir()
 	project.directory_path = directory_path
 	project.file_name = file_name
+	project.was_exported = true
+	if path.get_extension().to_lower() == "png":
+		project.export_overwrite = true
 	Export.directory_path = directory_path
 	Export.file_name = file_name
+	Export.was_exported = true
+
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	Global.canvas.camera_zoom()
+
+	if prev_project_empty:
+		Global.tabs.delete_tab(prev_project_pos)
 
 
 func update_autosave() -> void:

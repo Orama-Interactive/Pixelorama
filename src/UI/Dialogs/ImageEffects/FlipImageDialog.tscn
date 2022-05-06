@@ -7,7 +7,7 @@
 margin_right = 283.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 172, 60.2 )
-window_title = "Flip"
+window_title = "Mirror Image"
 resizable = true
 script = ExtResource( 1 )
 
@@ -21,13 +21,13 @@ __meta__ = {
 }
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_right = 278.0
+margin_right = 283.0
 margin_bottom = 200.0
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 39.0
-margin_right = 239.0
+margin_left = 41.5
+margin_right = 241.5
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
 expand = true
@@ -42,7 +42,7 @@ margin_bottom = 0.0
 
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
 margin_top = 204.0
-margin_right = 278.0
+margin_right = 283.0
 margin_bottom = 256.0
 columns = 2
 
@@ -50,14 +50,15 @@ columns = 2
 margin_right = 160.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
-text = "Flip Horizontal"
+pressed = true
+text = "Horizontal"
 
 [node name="FlipVertical" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
 margin_left = 164.0
-margin_right = 278.0
+margin_right = 283.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
-text = "Flip Vertical"
+text = "Vertical"
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
 margin_top = 28.0
@@ -70,7 +71,7 @@ text = "Only affect selection"
 [node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
 margin_left = 164.0
 margin_top = 28.0
-margin_right = 278.0
+margin_right = 283.0
 margin_bottom = 52.0
 mouse_default_cursor_shape = 2
 text = "Selected cels"

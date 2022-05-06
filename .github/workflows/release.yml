@@ -8,7 +8,7 @@ env:
   GODOT_VERSION: 3.4.2
   GODOT_VERSION_MAC: 3.4.2
   EXPORT_NAME: Pixelorama
-  TAG: v0.9.1
+  TAG: v0.10
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 jobs:
@@ -42,13 +42,17 @@ jobs:
           godot -v --export "Windows Desktop 32-bit" ./build/windows-32bit/$EXPORT_NAME.exe
       - name: Copy pixelorama_data folder 📁
         run: |
+          cp -R ./pixelorama_data ./build/windows-64bit
+          rm ./build/windows-64bit/pixelorama_data/.gdignore
+          cp -R ./pixelorama_data ./build/windows-32bit
+          rm ./build/windows-32bit/pixelorama_data/.gdignore
           cp -R ./pixelorama_data ./build
           rm ./build/pixelorama_data/.gdignore
       - name: Zip 🗜️
         working-directory: ./build
         run: |
-          zip windows-64bit.zip -rj windows-64bit && zip -r windows-64bit.zip pixelorama_data
-          zip windows-32bit.zip -rj windows-32bit && zip -r windows-32bit.zip pixelorama_data
+          zip -r Pixelorama.Windows-64bit.zip windows-64bit
+          zip -r Pixelorama.Windows-32bit.zip windows-32bit
       - name: Build installer 🔧
         run: |
           python3 ./installer/utils/po2nsi.py -i ./installer/pixelorama.nsi -o ./installer/pixelorama_loc.nsi -p ./installer/po -l "English" -v
@@ -106,19 +110,19 @@ jobs:
       - name: Create tar.gz archive 🗜️
         run: |
           cd build
-          tar zcvf linux-64bit.tar.gz linux-64bit
-          tar zcvf linux-32bit.tar.gz linux-32bit
-          tar zcvf linux-rpi4.tar.gz linux-rpi4
+          tar zcvf Pixelorama.Linux-64bit.tar.gz linux-64bit
+          tar zcvf Pixelorama.Linux-32bit.tar.gz linux-32bit
+          tar zcvf Pixelorama.Linux-RPI4.tar.gz linux-rpi4
       - name: Upload Release Assets to itch.io 🎮
         run: |
-          butler push ./build/linux-64bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-64 --userversion ${{env.TAG}}
-          butler push ./build/linux-32bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-32 --userversion ${{env.TAG}}
-          butler push ./build/linux-rpi4.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-rpi4 --userversion ${{env.TAG}}
+          butler push ./build/Pixelorama.Linux-64bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-64 --userversion ${{env.TAG}}
+          butler push ./build/Pixelorama.Linux-32bit.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-32 --userversion ${{env.TAG}}
+          butler push ./build/Pixelorama.Linux-RPI4.tar.gz ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:linux-rpi4 --userversion ${{env.TAG}}
       - name: Upload Release Asset 🚀
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./build/linux-*.tar.gz
+          file: ./build/Pixelorama.Linux-*.tar.gz
           tag: ${{env.TAG}}
           overwrite: true
           file_glob: true

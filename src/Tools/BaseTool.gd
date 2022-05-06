@@ -8,60 +8,15 @@ var cursor_text := ""
 
 var _cursor := Vector2.INF
 
+var _draw_cache: PoolVector2Array = []  # for storing already drawn pixels
+var _for_frame := 0  # cache for which frame?
+
 
 func _ready() -> void:
 	kname = name.replace(" ", "_").to_lower()
 	$Label.text = tool_slot.name
 
 	load_config()
-	$PixelPerfect.pressed = tool_slot.pixel_perfect
-	$Mirror/Horizontal.pressed = tool_slot.horizontal_mirror
-	$Mirror/Horizontal.modulate = Global.modulate_icon_color
-	$Mirror/Vertical.pressed = tool_slot.vertical_mirror
-	$Mirror/Vertical.modulate = Global.modulate_icon_color
-
-
-func _on_PixelPerfect_toggled(button_pressed: bool) -> void:
-	tool_slot.pixel_perfect = button_pressed
-	tool_slot.save_config()
-
-
-func _on_Horizontal_toggled(button_pressed: bool) -> void:
-	tool_slot.horizontal_mirror = button_pressed
-	tool_slot.save_config()
-	Global.show_y_symmetry_axis = button_pressed
-	# If the button is not pressed but another button is, keep the symmetry guide visible
-	if (
-		!button_pressed
-		and (
-			Tools._slots[BUTTON_LEFT].horizontal_mirror
-			or Tools._slots[BUTTON_RIGHT].horizontal_mirror
-		)
-	):
-		Global.show_y_symmetry_axis = true
-	Global.current_project.y_symmetry_axis.visible = (
-		Global.show_y_symmetry_axis
-		and Global.show_guides
-	)
-
-
-func _on_Vertical_toggled(button_pressed: bool) -> void:
-	tool_slot.vertical_mirror = button_pressed
-	tool_slot.save_config()
-	Global.show_x_symmetry_axis = button_pressed
-	# If the button is not pressed but another button is, keep the symmetry guide visible
-	if (
-		!button_pressed
-		and (
-			Tools._slots[BUTTON_LEFT].vertical_mirror
-			or Tools._slots[BUTTON_RIGHT].vertical_mirror
-		)
-	):
-		Global.show_x_symmetry_axis = true
-	Global.current_project.x_symmetry_axis.visible = (
-		Global.show_x_symmetry_axis
-		and Global.show_guides
-	)
 
 
 func save_config() -> void:
@@ -88,6 +43,7 @@ func update_config() -> void:
 
 
 func draw_start(_position: Vector2) -> void:
+	_draw_cache = []
 	is_moving = true
 
 
@@ -100,6 +56,7 @@ func draw_move(position: Vector2) -> void:
 
 func draw_end(_position: Vector2) -> void:
 	is_moving = false
+	_draw_cache = []
 
 
 func cursor_move(position: Vector2) -> void:

@@ -3,25 +3,35 @@ extends WindowDialog
 var artworks := [
 	[
 		"Roroto Sic",
-		preload("res://assets/graphics/splash_screen/artworks/roroto.png"),
-		"https://linktr.ee/Roroto_Sic"
+		preload("res://assets/graphics/splash_screen/artworks/roroto.tres"),
+		"https://linktr.ee/Roroto_Sic",
+		Color.black
 	],
 	[
-		"Kamilayza",
-		preload("res://assets/graphics/splash_screen/artworks/kamilayza.png"),
-		"https://twitter.com/kamilayza"
+		"Kalpar",
+		preload("res://assets/graphics/splash_screen/artworks/kalpar.png"),
+		"https://resite.link/Kalpar",
+		Color.white
+	],
+	[
+		"Uch",
+		preload("res://assets/graphics/splash_screen/artworks/uch.png"),
+		"https://www.instagram.com/vs.pxl/",
+		Color.black
 	],
 	[
 		"Wishdream",
 		preload("res://assets/graphics/splash_screen/artworks/wishdream.png"),
-		"https://twitter.com/WishdreamStar"
-	]
+		"https://twitter.com/WishdreamStar",
+		Color.black
+	],
 ]
 
 var chosen_artwork: int
-
 var splash_art_texturerect: TextureRect
 var art_by_label: Button
+
+onready var version_text: TextureRect = find_node("VersionText")
 
 
 func _on_SplashDialog_about_to_show() -> void:
@@ -36,12 +46,6 @@ func _on_SplashDialog_about_to_show() -> void:
 	chosen_artwork = randi() % artworks.size()
 	change_artwork(0)
 
-	get_stylebox("panel", "WindowDialog").bg_color = Global.control.theme.get_stylebox(
-		"panel", "WindowDialog"
-	).bg_color
-	get_stylebox("panel", "WindowDialog").border_color = Global.control.theme.get_stylebox(
-		"panel", "WindowDialog"
-	).border_color
 	if OS.get_name() == "HTML5":
 		$Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn.visible = false
 
@@ -57,9 +61,12 @@ func change_artwork(direction: int) -> void:
 	art_by_label.text = tr("Art by: %s") % artworks[chosen_artwork][0]
 	art_by_label.hint_tooltip = artworks[chosen_artwork][2]
 
+	version_text.modulate = artworks[chosen_artwork][3]
+
 
 func _on_ArtCredits_pressed() -> void:
-	OS.shell_open(artworks[chosen_artwork][2])
+	if artworks[chosen_artwork][2]:
+		OS.shell_open(artworks[chosen_artwork][2])
 
 
 func _on_ShowOnStartup_toggled(pressed: bool) -> void:

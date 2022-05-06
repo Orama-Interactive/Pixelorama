@@ -6,8 +6,6 @@ uniform float hue_shift_amount : hint_range(-1, 1);
 uniform float sat_shift_amount : hint_range(-1, 1);
 uniform float val_shift_amount : hint_range(-1, 1);
 uniform sampler2D selection;
-uniform bool affect_selection;
-uniform bool has_selection;
 
 vec3 rgb2hsb(vec3 c){
 	vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
@@ -61,11 +59,6 @@ void fragment() {
 
 	
 	col = hsb2rgb(hsb);
-	vec3 output;
-	if(affect_selection && has_selection)
-		output = mix(original_color.rgb, col, selection_color.a);
-	else
-		output = col;
+	vec3 output = mix(original_color.rgb, col, selection_color.a);
 	COLOR = vec4(output.rgb, original_color.a);
-
 }

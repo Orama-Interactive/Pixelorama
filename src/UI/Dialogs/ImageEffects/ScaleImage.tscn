@@ -97,17 +97,13 @@ max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer" groups=[
-"UIButtons",
-]]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer" groups=["UIButtons"]]
 margin_left = 225.0
 margin_right = 234.0
 margin_bottom = 52.0
 texture = ExtResource( 2 )
 
-[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/TextureRect" groups=[
-"UIButtons",
-]]
+[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/TextureRect" groups=["UIButtons"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

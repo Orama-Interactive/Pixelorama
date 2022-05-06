@@ -30,18 +30,4 @@ text = "Left Color"
 items = [ "Left Color", null, false, 0, null, "Right Color", null, false, 1, null ]
 selected = 0
 
-[node name="PixelPerfect" parent="." index="2"]
-visible = false
-margin_top = 60.0
-margin_bottom = 84.0
-
-[node name="EmptySpacer" parent="." index="3"]
-visible = false
-margin_top = 60.0
-margin_bottom = 72.0
-
-[node name="Mirror" parent="." index="4"]
-visible = false
-margin_top = 60.0
-margin_bottom = 77.0
 [connection signal="item_selected" from="ColorPicker/Options" to="." method="_on_Options_item_selected"]
