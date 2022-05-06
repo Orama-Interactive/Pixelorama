@@ -685,13 +685,12 @@ func copy() -> void:
 	cl_selection_offset = project.selection_offset
 
 	var transfer_clipboard = {
-		"image" : cl_image,
-		"selection_bitmap" : cl_selection_bitmap,
-		"big_bounding_rectangle" : cl_big_bounding_rectangle,
-		"selection_offset" : cl_selection_offset,
+		"image": cl_image,
+		"selection_bitmap": cl_selection_bitmap,
+		"big_bounding_rectangle": cl_big_bounding_rectangle,
+		"selection_offset": cl_selection_offset,
 	}
 	OS.set_clipboard(var2str(transfer_clipboard))
-
 
 	if !to_copy.is_empty():
 		var pattern: Patterns.Pattern = Global.patterns_popup.get_pattern(0)
@@ -706,7 +705,9 @@ func paste() -> void:
 	var clipboard = str2var(OS.get_clipboard())
 	if typeof(clipboard) == TYPE_DICTIONARY:
 		# A sanity check
-		if not clipboard.has_all(["image", "selection_bitmap", "big_bounding_rectangle", "selection_offset"]):
+		if not clipboard.has_all(
+			["image", "selection_bitmap", "big_bounding_rectangle", "selection_offset"]
+		):
 			return
 
 		if clipboard.image.is_empty():
@@ -718,7 +719,6 @@ func paste() -> void:
 		original_bitmap = project.selection_bitmap.duplicate()
 		original_big_bounding_rectangle = big_bounding_rectangle
 		original_offset = project.selection_offset
-
 
 		var clip_bitmap: BitMap = clipboard.selection_bitmap.duplicate()
 		var max_size := Vector2(
@@ -779,7 +779,9 @@ func new_brush() -> void:
 		var clipboard = str2var(OS.get_clipboard())
 		if typeof(clipboard) == TYPE_DICTIONARY:
 			# A sanity check
-			if not clipboard.has_all(["image", "selection_bitmap", "big_bounding_rectangle", "selection_offset"]):
+			if not clipboard.has_all(
+				["image", "selection_bitmap", "big_bounding_rectangle", "selection_offset"]
+			):
 				return
 			clipboard.selection_bitmap = selected_bitmap_copy
 	else:
