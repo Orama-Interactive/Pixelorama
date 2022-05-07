@@ -64,8 +64,7 @@ func compress_lzw(index_stream: PoolByteArray, colors: PoolByteArray) -> Array:
 			index_buffer = new_index_buffer
 		else:  # if NO
 			# Add a row for index buffer + k into our code table
-			var blep = code_table.get(index_buffer, -1)
-			binary_code_stream.write_bits(blep, current_code_size)
+			binary_code_stream.write_bits(code_table.get(index_buffer, -1), current_code_size)
 
 			# We don't want to add new code to code table if we've exceeded 4095
 			# index.
