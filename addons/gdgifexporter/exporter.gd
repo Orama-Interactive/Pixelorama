@@ -258,16 +258,14 @@ func color_table_bit_size(color_table: Array) -> int:
 
 func add_local_color_table(color_table: Array) -> void:
 	for color in color_table:
-		data.append(color[0])
-		data.append(color[1])
-		data.append(color[2])
+		data.append_array([color[0], color[1], color[2]])
 
 	var size := color_table_bit_size(color_table)
 	var proper_size := int(pow(2, size + 1))
 
 	if color_table.size() != proper_size:
 		for i in range(proper_size - color_table.size()):
-			data += PoolByteArray([0, 0, 0])
+			data.append_array([0, 0, 0])
 
 
 func add_image_data_block(lzw_min_code_size: int, _data: PoolByteArray) -> void:
