@@ -27,7 +27,15 @@ var artworks := [
 	],
 ]
 
+var tips := [
+	"That you can edit the canvas zoom and rotation From the top Menu",
+	"You can drag guides out of rulers",
+	"You can customize layouts from window->layouts",
+	"You can enable Greyscale from view menu",
+]
+
 var chosen_artwork: int
+var chosen_tip: int
 var splash_art_texturerect: TextureRect
 var art_by_label: Button
 
@@ -44,7 +52,9 @@ func _on_SplashDialog_about_to_show() -> void:
 	window_title = "Pixelorama" + " " + Global.current_version
 
 	chosen_artwork = randi() % artworks.size()
+	chosen_tip = randi() % tips.size()
 	change_artwork(0)
+	change_tip(0)
 
 	if OS.get_name() == "HTML5":
 		$Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn.visible = false
@@ -62,6 +72,16 @@ func change_artwork(direction: int) -> void:
 	art_by_label.hint_tooltip = artworks[chosen_artwork][2]
 
 	version_text.modulate = artworks[chosen_artwork][3]
+
+
+func change_tip(direction: int) -> void:
+	if chosen_tip + direction > tips.size() - 1 or chosen_tip + direction < 0:
+		chosen_tip = 0 if direction == 1 else tips.size() - 1
+	else:
+		chosen_tip = chosen_tip + direction
+
+	var tip_container = $Contents/ButtonsPatronsLogos/Buttons/VBoxContainer/Tip
+	tip_container.bbcode_text = tips[chosen_tip]
 
 
 func _on_ArtCredits_pressed() -> void:
@@ -110,3 +130,11 @@ func _on_ChangeArtBtnLeft_pressed():
 
 func _on_ChangeArtBtnRight_pressed():
 	change_artwork(1)
+
+
+func _on_PreviousTip_pressed() -> void:
+	change_tip(-1)
+
+
+func _on_NextTip_pressed() -> void:
+	change_tip(+1)
