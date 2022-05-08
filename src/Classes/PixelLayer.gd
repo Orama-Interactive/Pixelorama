@@ -11,7 +11,7 @@ func _init(_name := "") -> void:
 
 func serialize() -> Dictionary:
 	var dict = .serialize()
-	dict["type"] = "pixel"
+	dict["type"] = PIXEL_LAYER
 	dict["new_cels_linked"] = new_cels_linked
 	dict["linked_cels"] = []
 	for cel in linked_cels:

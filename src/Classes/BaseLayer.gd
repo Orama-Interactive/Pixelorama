@@ -2,6 +2,8 @@ class_name BaseLayer
 extends Reference
 # Base class for layer properties. Different layer types extend from this class.
 
+enum { PIXEL_LAYER = 0, GROUP_LAYER = 1 }
+
 var name := ""
 var visible := true
 var locked := false
