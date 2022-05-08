@@ -1413,6 +1413,9 @@ msgstr ""
 msgid "Layer"
 msgstr ""
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr ""
 
