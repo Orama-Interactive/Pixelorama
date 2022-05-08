@@ -50,7 +50,7 @@ func has_children() -> bool:
 
 func serialize() -> Dictionary:
 	var data = .serialize()
-	data["type"] = GROUP_LAYER
+	data["type"] = Global.LayerTypes.GROUP
 	data["expanded"] = expanded
 	return data
 

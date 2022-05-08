@@ -2,6 +2,7 @@ extends Node
 
 signal project_changed
 
+enum LayerTypes { PIXEL, GROUP }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
 enum TileMode { NONE, BOTH, X_AXIS, Y_AXIS }

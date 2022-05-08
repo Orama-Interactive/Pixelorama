@@ -390,10 +390,10 @@ func deserialize(dict: Dictionary) -> void:
 
 		if dict.has("layers"):
 			for saved_layer in dict.layers:
-				match int(saved_layer.get("type", BaseLayer.PIXEL_LAYER)):
-					BaseLayer.PIXEL_LAYER:
+				match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
+					Global.LayerTypes.PIXEL:
 						layers.append(PixelLayer.new())
-					BaseLayer.GROUP_LAYER:
+					Global.LayerTypes.GROUP:
 						layers.append(GroupLayer.new())
 			# Parent references to other layers are created when deserializing
 			# a layer, so loop again after creating them.
@@ -722,9 +722,9 @@ func duplicate_layers() -> Array:
 		var layer_dict: Dictionary = new_layers[i].serialize()
 		#layer_dict.linked_cels = new_layers[i].linked_cels.duplicate()
 		match layer_dict.type:
-			BaseLayer.PIXEL_LAYER:
+			Global.LayerTypes.PIXEL:
 				new_layers[i] = PixelLayer.new()
-			BaseLayer.GROUP_LAYER:
+			Global.LayerTypes.GROUP:
 				new_layers[i] = GroupLayer.new()
 		new_layers[i].index = i
 		new_layers[i].project = self
