@@ -1,6 +1,8 @@
 class_name BaseLayerButton
 extends Button
 
+const HIERARCHY_DEPTH_PIXEL_SHIFT = 8
+
 var layer := 0
 
 onready var visibility_button: BaseButton = find_node("VisibilityButton")
@@ -35,7 +37,7 @@ func _ready() -> void:
 
 	# Visualize how deep into the hierarchy the layer is
 	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
-	hierarchy_spacer.rect_min_size.x = hierarchy_depth * 8
+	hierarchy_spacer.rect_min_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 	if Global.control.theme.get_color("font_color", "Button").v > 0.5: # Light text is dark theme
 		self_modulate.v += hierarchy_depth * 0.2
 	else: # Dark text should be light theme
@@ -138,9 +140,37 @@ func get_drag_data(_position) -> Array:
 
 func can_drop_data(_pos, data) -> bool:
 	if typeof(data) == TYPE_ARRAY:
-		return data[0] == "Layer"
-	else:
-		return false
+		if data[0] == "Layer":
+			var region: Rect2
+			var depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
+			if Input.is_key_pressed(KEY_CONTROL): # Swap layers
+				region = get_global_rect()
+			else: # Shift layers
+				if Global.current_project.layers[layer].accepts_child(data[1]):
+					# Top, center, or bottom region?
+					if _get_region_rect(0, 0.25).has_point(get_global_mouse_position()):
+						# Drawn regions are shifted up/down a bit from actual for visual clearity
+						region = _get_region_rect(-0.1, 0.25)
+					elif _get_region_rect(0.25, 0.5).has_point(get_global_mouse_position()):
+						region = _get_region_rect(0.15, 0.7)
+						depth += 1
+					else:
+						region = _get_region_rect(0.85, 0.25)
+				else:
+					# Top or bottom region?
+					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
+						region =  _get_region_rect(-0.1, 0.25)
+					else:
+						region =  _get_region_rect(0.85, 0.25)
+			# Shift drawn region to the right a bit for hierarchy depth visualization:
+			region.position.x += depth * HIERARCHY_DEPTH_PIXEL_SHIFT
+			region.size.x -= depth * HIERARCHY_DEPTH_PIXEL_SHIFT
+			Global.animation_timeline.drag_highlight.rect_global_position = region.position
+			Global.animation_timeline.drag_highlight.rect_size = region.size
+			Global.animation_timeline.drag_highlight.show()
+			return true
+	Global.animation_timeline.drag_highlight.hide()
+	return false
 
 
 func drop_data(_pos, data) -> void:
@@ -177,3 +207,10 @@ func drop_data(_pos, data) -> void:
 	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	Global.current_project.undo_redo.commit_action()
+
+
+func _get_region_rect(y_offset: float, y_size: float) -> Rect2:
+	var rect := get_global_rect()
+	rect.position.y += rect.size.y * y_offset
+	rect.size.y *= y_size
+	return rect

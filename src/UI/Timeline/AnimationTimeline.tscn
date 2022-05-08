@@ -131,14 +131,15 @@ margin_bottom = 38.0
 size_flags_horizontal = 3
 
 [node name="LayerButtonPanelContainer" type="PanelContainer" parent="ScrollContainer/TimelineContainer/TimelineButtons"]
-margin_right = 217.0
+margin_right = 190.0
 margin_bottom = 38.0
+rect_min_size = Vector2( 190, 0 )
 custom_styles/panel = SubResource( 2 )
 
 [node name="LayerButtons" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer"]
 margin_left = 4.5
 margin_top = 3.0
-margin_right = 212.5
+margin_right = 185.5
 margin_bottom = 25.0
 size_flags_vertical = 0
 custom_constants/separation = 9
@@ -218,6 +219,7 @@ __meta__ = {
 }
 
 [node name="MoveUpLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
+visible = false
 margin_left = 93.0
 margin_right = 115.0
 margin_bottom = 22.0
@@ -244,8 +246,9 @@ __meta__ = {
 }
 
 [node name="MoveDownLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 124.0
-margin_right = 146.0
+visible = false
+margin_left = 93.0
+margin_right = 115.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Move down the current layer"
@@ -270,8 +273,8 @@ __meta__ = {
 }
 
 [node name="CloneLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 155.0
-margin_right = 177.0
+margin_left = 93.0
+margin_right = 115.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Clone current layer"
@@ -295,8 +298,8 @@ __meta__ = {
 }
 
 [node name="MergeDownLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 186.0
-margin_right = 208.0
+margin_left = 124.0
+margin_right = 146.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Merge current layer with the one below"
@@ -321,7 +324,7 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="ScrollContainer/TimelineContainer/TimelineButtons"]
-margin_left = 221.0
+margin_left = 194.0
 margin_right = 386.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
@@ -821,12 +824,12 @@ align = 1
 
 [node name="SpacerControl2" type="Control" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer"]
 margin_left = 188.0
-margin_right = 217.0
+margin_right = 240.0
 margin_bottom = 32.0
-rect_min_size = Vector2( 29, 0 )
+rect_min_size = Vector2( 52, 32 )
 
 [node name="TagScroll" type="ScrollContainer" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer"]
-margin_left = 219.0
+margin_left = 242.0
 margin_right = 902.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
@@ -836,7 +839,7 @@ theme = SubResource( 20 )
 scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/TagScroll"]
-margin_right = 683.0
+margin_right = 660.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -846,7 +849,7 @@ custom_constants/separation = 0
 margin_bottom = 32.0
 
 [node name="TagContainer" type="Control" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/TagScroll/HBoxContainer"]
-margin_right = 683.0
+margin_right = 660.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 
@@ -1031,6 +1034,13 @@ valign = 1
 autowrap = true
 
 [node name="FrameTagDialog" parent="." instance=ExtResource( 42 )]
+
+[node name="DragHighlight" type="ColorRect" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+color = Color( 0, 0.741176, 1, 0.501961 )
 
 [connection signal="item_rect_changed" from="." to="." method="_on_AnimationTimeline_item_rect_changed"]
 [connection signal="item_rect_changed" from="ScrollContainer/TimelineContainer" to="." method="_on_TimelineContainer_item_rect_changed"]

@@ -2,7 +2,6 @@ class_name GroupLayer
 extends BaseLayer
 # A class for group layer properties
 
-#var children := []
 var expanded := true
 
 func _init(_name := "") -> void:
@@ -19,6 +18,10 @@ func serialize() -> Dictionary:
 func deserialize(dict: Dictionary) -> void:
 	.deserialize(dict)
 	expanded = dict.expanded
+
+
+func accepts_child(layer: BaseLayer) -> bool:
+	return true
 
 
 func is_expanded_in_hierarchy() -> bool:

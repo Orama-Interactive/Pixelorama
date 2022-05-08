@@ -23,6 +23,7 @@ onready var tag_scroll_container: ScrollContainer = find_node("TagScroll")
 onready var fps_spinbox: SpinBox = find_node("FPSValue")
 onready var onion_skinning_button: BaseButton = find_node("OnionSkinning")
 onready var loop_animation_button: BaseButton = find_node("LoopAnim")
+onready var drag_highlight: ColorRect = find_node("DragHighlight")
 
 
 func _ready() -> void:
@@ -34,6 +35,16 @@ func _ready() -> void:
 	# Otherwise you yont be able to see "TimelineScroll" in editor
 	find_node("EndSpacer").size_flags_horizontal = SIZE_EXPAND_FILL
 	timeline_scroll.size_flags_horizontal = SIZE_FILL
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAG_END:
+		drag_highlight.hide()
+
+func can_drop_data(_position, _data) -> bool:
+	drag_highlight.hide()
+	print ("can drag?")
+	return false
 
 
 func _input(event: InputEvent) -> void:
@@ -656,12 +667,13 @@ func add_group_layer(is_new := true) -> void:
 #			+ ")"
 #		)
 	new_layers.append(l)
+
 	# Add current layer to this group
 #	Global.current_project.layers[Global.current_project.current_layer].parent = l
 	# Add all layers to this group:
-	for layer in Global.current_project.layers:
-		if not layer.parent:
-			layer.parent = l
+#	for layer in Global.current_project.layers:
+#		if not layer.parent:
+#			layer.parent = l
 	# Add last layer to this group:
 #	Global.current_project.layers[-1].parent = l
 
