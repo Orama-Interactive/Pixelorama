@@ -10,6 +10,27 @@ var parent: BaseLayer
 var project
 var index: int
 
+# TODO: Search for layer visbility/locked checks that should be changed to the hierarchy ones:
+func is_visible_in_hierarchy() -> bool:
+	if is_instance_valid(parent) and visible:
+		return parent.is_visible_in_hierarchy()
+	return visible
+
+
+func is_locked_in_hierarchy() -> bool:
+	if is_instance_valid(parent) and not locked:
+		return parent.is_locked_in_hierarchy()
+	return locked
+
+
+func get_hierarchy_depth() -> int:
+	if is_instance_valid(parent):
+		return parent.get_hierarchy_depth() + 1
+	return 0
+
+
+# Functions to Override:
+
 func serialize() -> Dictionary:
 	assert(index == project.layers.find(self)) # TODO: remove once sure index is synced properly
 	return {
@@ -36,22 +57,3 @@ func can_layer_get_drawn() -> bool:
 
 func accepts_child(layer: BaseLayer) -> bool:
 	return false
-
-
-# TODO: Search for layer visbility/locked checks that should be changed to the hierarchy ones:
-func is_visible_in_hierarchy() -> bool:
-	if is_instance_valid(parent) and visible:
-		return parent.is_visible_in_hierarchy()
-	return visible
-
-
-func is_locked_in_hierarchy() -> bool:
-	if is_instance_valid(parent) and not locked:
-		return parent.is_locked_in_hierarchy()
-	return locked
-
-
-func get_hierarchy_depth() -> int:
-	if is_instance_valid(parent):
-		return parent.get_hierarchy_depth() + 1
-	return 0

@@ -30,5 +30,7 @@ func deserialize(dict: Dictionary) -> void:
 		linked_cel.image_texture = linked_cels[0].cels[index].image_texture
 
 
+# Overridden Functions:
+
 func can_layer_get_drawn() -> bool:
 	return is_visible_in_hierarchy() && !is_locked_in_hierarchy()
