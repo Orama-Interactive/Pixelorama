@@ -31,6 +31,7 @@ func initialize_color_code_table(colors: PoolByteArray) -> void:
 # compression and decompression done with source:
 # http://www.matthewflickinger.com/lab/whatsinagif/lzw_image_data.asp
 
+
 func compress_lzw(index_stream: PoolByteArray, colors: PoolByteArray) -> Array:
 	# Initialize code table
 	initialize_color_code_table(colors)
@@ -68,7 +69,7 @@ func compress_lzw(index_stream: PoolByteArray, colors: PoolByteArray) -> Array:
 
 			# We don't want to add new code to code table if we've exceeded 4095
 			# index.
-			var last_entry_index: int =  entries_counter - 1
+			var last_entry_index: int = entries_counter - 1
 			if last_entry_index != 4095:
 				# Output the code for just the index buffer to our code stream
 				# warning-ignore:return_value_discarded
@@ -101,7 +102,6 @@ func compress_lzw(index_stream: PoolByteArray, colors: PoolByteArray) -> Array:
 	var min_code_size: int = get_bits_number_for(clear_code_index) - 1
 
 	return [binary_code_stream.pack(), min_code_size]
-
 
 #func decompress_lzw(
 #	code_stream_data: PoolByteArray, min_code_size: int, colors: PoolByteArray
