@@ -268,22 +268,28 @@ func add_local_color_table(color_table: Array) -> void:
 			data.append_array([0, 0, 0])
 
 
-func add_image_data_block(lzw_min_code_size: int, _data: PoolByteArray) -> void:
+func add_image_data_block(lzw_min_code_size: int, frame_data: PoolByteArray) -> void:
+	var max_block_size = 254
 	data.append(lzw_min_code_size)
+	# the amount of blocks which will be stored
+	# ceiled because the last block doesn't have to be exactly max_block_size
+	var block_count = ceil(frame_data.size() / float(max_block_size))
 
-	var block_size_index: int = 0
-	var i: int = 0
-	var data_index: int = 0
-	while data_index < _data.size():
-		if i == 0:
-			data.append(0)
-			block_size_index = data.size() - 1
-		data.append(_data[data_index])
-		data[block_size_index] += 1
-		data_index += 1
-		i += 1
-		if i == 254:
-			i = 0
+	for i in range(block_count):
+		var start_block_index = i * max_block_size
+		var end_block_index = (i * max_block_size) + max_block_size - 1
+		# final block can be smaller than max block size
+		end_block_index = (
+			end_block_index
+			if end_block_index < frame_data.size() - 1
+			else frame_data.size() - 1
+		)
+		var block_size = end_block_index - start_block_index + 1
+		var block = frame_data.subarray(start_block_index, end_block_index)
 
-	if not _data.empty():
+		# store block size and it's data
+		data.append(block_size)
+		data.append_array(block)
+
+	if not frame_data.empty():
 		data.append(0)
