@@ -6,40 +6,64 @@ var selected_preset: Preset = presets[0]
 var actions := {
 	"new_file":
 	MenuInputAction.new(
-		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/FileMenu", Global.FileMenuId.NEW
+		"",
+		"File Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
+		Global.FileMenuId.NEW
 	),
 	"open_file":
 	MenuInputAction.new(
-		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/FileMenu", Global.FileMenuId.OPEN
+		"",
+		"File Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
+		Global.FileMenuId.OPEN
 	),
 	"save_file":
 	MenuInputAction.new(
-		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/FileMenu", Global.FileMenuId.SAVE
+		"",
+		"File Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
+		Global.FileMenuId.SAVE
 	),
 	"save_file_as":
 	MenuInputAction.new(
-		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/FileMenu", Global.FileMenuId.SAVE_AS
+		"",
+		"File Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
+		Global.FileMenuId.SAVE_AS
 	),
 	"export_file":
 	MenuInputAction.new(
-		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/FileMenu", Global.FileMenuId.EXPORT
+		"",
+		"File Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
+		Global.FileMenuId.EXPORT
 	),
 	"export_file_as":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"File Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
 		Global.FileMenuId.EXPORT_AS
 	),
 	"quit":
 	MenuInputAction.new(
-		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/FileMenu", Global.FileMenuId.QUIT
+		"",
+		"File Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
+		Global.FileMenuId.QUIT
 	),
 	"redo":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"Edit Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
 		Global.EditMenuId.REDO,
@@ -48,7 +72,7 @@ var actions := {
 	"undo":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"Edit Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
 		Global.EditMenuId.UNDO,
@@ -56,24 +80,40 @@ var actions := {
 	),
 	"cut":
 	MenuInputAction.new(
-		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", Global.EditMenuId.CUT
+		"",
+		"Edit Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
+		Global.EditMenuId.CUT
 	),
 	"copy":
 	MenuInputAction.new(
-		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", Global.EditMenuId.COPY
+		"",
+		"Edit Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
+		Global.EditMenuId.COPY
 	),
 	"paste":
 	MenuInputAction.new(
-		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", Global.EditMenuId.PASTE
+		"",
+		"Edit Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
+		Global.EditMenuId.PASTE
 	),
 	"delete":
 	MenuInputAction.new(
-		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", Global.EditMenuId.DELETE
+		"",
+		"Edit Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
+		Global.EditMenuId.DELETE
 	),
 	"new_brush":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"Edit Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
 		Global.EditMenuId.NEW_BRUSH
@@ -81,7 +121,7 @@ var actions := {
 	"mirror_view":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"View Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
 		Global.ViewMenuId.MIRROR_VIEW
@@ -89,7 +129,7 @@ var actions := {
 	"show_grid":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"View Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
 		Global.ViewMenuId.SHOW_GRID
@@ -97,7 +137,7 @@ var actions := {
 	"show_pixel_grid":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"View Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
 		Global.ViewMenuId.SHOW_PIXEL_GRID
@@ -105,7 +145,7 @@ var actions := {
 	"show_guides":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"View Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
 		Global.ViewMenuId.SHOW_GUIDES
@@ -113,7 +153,7 @@ var actions := {
 	"show_rulers":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"View Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
 		Global.ViewMenuId.SHOW_RULERS
@@ -121,7 +161,7 @@ var actions := {
 	"zen_mode":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"Window Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/WindowMenu",
 		Global.WindowMenuId.ZEN_MODE
@@ -129,7 +169,7 @@ var actions := {
 	"toggle_fullscreen":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"Window Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/WindowMenu",
 		Global.WindowMenuId.FULLSCREEN_MODE
@@ -137,7 +177,7 @@ var actions := {
 	"clear_selection":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"Select Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/SelectMenu",
 		Global.SelectMenuId.CLEAR_SELECTION
@@ -145,7 +185,7 @@ var actions := {
 	"select_all":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"Select Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/SelectMenu",
 		Global.SelectMenuId.SELECT_ALL
@@ -153,7 +193,7 @@ var actions := {
 	"invert_selection":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"Select Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/SelectMenu",
 		Global.SelectMenuId.INVERT
@@ -161,16 +201,24 @@ var actions := {
 	"open_docs":
 	MenuInputAction.new(
 		"",
-		"Menu",
+		"Help Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/HelpMenu",
 		Global.HelpMenuId.ONLINE_DOCS
 	),
-	"edit_mode": InputAction.new("Moveable Panels", "Menu"),
+	"edit_mode": InputAction.new("Moveable Panels", "Window Menu"),
 }
 var groups := {
 	"Tools": InputGroup.new(),
+	"Left": InputGroup.new("Tools"),
+	"Right": InputGroup.new("Tools"),
 	"Menu": InputGroup.new(),
+	"File Menu": InputGroup.new("Menu"),
+	"Edit Menu": InputGroup.new("Menu"),
+	"Select Menu": InputGroup.new("Menu"),
+	"Image Menu": InputGroup.new("Menu"),
+	"Window Menu": InputGroup.new("Menu"),
+	"Help Menu": InputGroup.new("Menu"),
 }
 var ignore_actions := []
 var ignore_ui_actions := true
@@ -282,8 +330,8 @@ func _ready() -> void:
 		var tool_shortcut: String = Tools.tools[t].shortcut
 		var left_tool_shortcut := "left_%s_tool" % tool_shortcut
 		var right_tool_shortcut := "right_%s_tool" % tool_shortcut
-		actions[left_tool_shortcut] = InputAction.new("", "Tools")
-		actions[right_tool_shortcut] = InputAction.new("", "Tools")
+		actions[left_tool_shortcut] = InputAction.new("", "Left")
+		actions[right_tool_shortcut] = InputAction.new("", "Right")
 
 
 func _input(event: InputEvent) -> void:
