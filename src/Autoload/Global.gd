@@ -8,6 +8,43 @@ enum TileMode { NONE, BOTH, X_AXIS, Y_AXIS }
 enum IconColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
+enum FileMenuId { NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
+enum EditMenuId { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
+enum ViewMenuId {
+	TILE_MODE,
+	GREYSCALE_VIEW,
+	MIRROR_VIEW,
+	SHOW_GRID,
+	SHOW_PIXEL_GRID,
+	SHOW_RULERS,
+	SHOW_GUIDES,
+}
+enum WindowMenuId { WINDOW_OPACITY, PANELS, LAYOUTS, ZEN_MODE, FULLSCREEN_MODE }
+enum ImageMenuId {
+	SCALE_IMAGE,
+	CENTRALIZE_IMAGE,
+	CROP_IMAGE,
+	RESIZE_CANVAS,
+	FLIP,
+	ROTATE,
+	INVERT_COLORS,
+	DESATURATION,
+	OUTLINE,
+	DROP_SHADOW,
+	HSV,
+	GRADIENT,
+	SHADER
+}
+enum SelectMenuId { SELECT_ALL, CLEAR_SELECTION, INVERT }
+enum HelpMenuId {
+	VIEW_SPLASH_SCREEN,
+	ONLINE_DOCS,
+	ISSUE_TRACKER,
+	OPEN_LOGS_FOLDER,
+	CHANGELOG,
+	ABOUT_PIXELORAMA
+}
+
 var root_directory := "."
 var window_title := "" setget _title_changed  # Why doesn't Godot have get_window_title()?
 var config_cache := ConfigFile.new()

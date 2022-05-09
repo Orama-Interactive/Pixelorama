@@ -4,33 +4,173 @@ extends Node
 var presets := [Preset.new("Default", false), Preset.new("Custom")]
 var selected_preset: Preset = presets[0]
 var actions := {
-	"new_file": InputAction.new("", "Menu"),
-	"open_file": InputAction.new("", "Menu"),
-	"save_file": InputAction.new("", "Menu"),
-	"save_file_as": InputAction.new("", "Menu"),
-	"export_file": InputAction.new("", "Menu"),
-	"export_file_as": InputAction.new("", "Menu"),
-	"quit": InputAction.new("", "Menu"),
+	"new_file":
+	MenuInputAction.new(
+		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/FileMenu", Global.FileMenuId.NEW
+	),
+	"open_file":
+	MenuInputAction.new(
+		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/FileMenu", Global.FileMenuId.OPEN
+	),
+	"save_file":
+	MenuInputAction.new(
+		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/FileMenu", Global.FileMenuId.SAVE
+	),
+	"save_file_as":
+	MenuInputAction.new(
+		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/FileMenu", Global.FileMenuId.SAVE_AS
+	),
+	"export_file":
+	MenuInputAction.new(
+		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/FileMenu", Global.FileMenuId.EXPORT
+	),
+	"export_file_as":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
+		Global.FileMenuId.EXPORT_AS
+	),
+	"quit":
+	MenuInputAction.new(
+		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/FileMenu", Global.FileMenuId.QUIT
+	),
 	"redo":
-	MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", 1, true),
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
+		Global.EditMenuId.REDO,
+		true
+	),
 	"undo":
-	MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", 0, true),
-	"mirror_view": InputAction.new("", "Menu"),
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
+		Global.EditMenuId.UNDO,
+		true
+	),
+	"cut":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
+		Global.EditMenuId.CUT,
+		true
+	),
+	"copy":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
+		Global.EditMenuId.COPY,
+		true
+	),
+	"paste":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
+		Global.EditMenuId.PASTE,
+		true
+	),
+	"new_brush":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
+		Global.EditMenuId.NEW_BRUSH,
+		true
+	),
+	"mirror_view":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
+		Global.ViewMenuId.MIRROR_VIEW,
+		true
+	),
 	"show_grid":
-	MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/ViewMenu", 3),
-	"show_pixel_grid": InputAction.new("", "Menu"),
-	"show_rulers": InputAction.new("", "Menu"),
-	"zen_mode": InputAction.new("", "Menu"),
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
+		Global.ViewMenuId.SHOW_GRID
+	),
+	"show_pixel_grid":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
+		Global.ViewMenuId.SHOW_PIXEL_GRID
+	),
+	"show_rulers":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
+		Global.ViewMenuId.SHOW_RULERS
+	),
+	"zen_mode":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/WindowMenu",
+		Global.WindowMenuId.ZEN_MODE
+	),
 	"toggle_fullscreen":
-	MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/WindowMenu", 4),
-	"open_docs": InputAction.new("", "Menu"),
-	"cut": InputAction.new("", "Menu"),
-	"copy": InputAction.new("", "Menu"),
-	"paste": InputAction.new("", "Menu"),
-	"clear_selection": InputAction.new("", "Menu"),
-	"select_all": InputAction.new("", "Menu"),
-	"invert_selection": InputAction.new("", "Menu"),
-	"new_brush": InputAction.new("", "Menu"),
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/WindowMenu",
+		Global.WindowMenuId.FULLSCREEN_MODE
+	),
+	"clear_selection":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/SelectMenu",
+		Global.SelectMenuId.CLEAR_SELECTION
+	),
+	"select_all":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/SelectMenu",
+		Global.SelectMenuId.SELECT_ALL
+	),
+	"invert_selection":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/SelectMenu",
+		Global.SelectMenuId.INVERT
+	),
+	"open_docs":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/HelpMenu",
+		Global.HelpMenuId.ONLINE_DOCS
+	),
 	"edit_mode": InputAction.new("Moveable Panels", "Menu"),
 }
 var groups := {
