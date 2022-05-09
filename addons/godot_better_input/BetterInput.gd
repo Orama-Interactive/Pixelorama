@@ -110,6 +110,9 @@ class InputAction:
 	func update_ui(_action: String) -> void:
 		pass
 
+	func handle_input(event: InputEvent, action: String) -> bool:
+		return false
+
 
 class MenuInputAction:
 	extends InputAction
@@ -149,6 +152,25 @@ class MenuInputAction:
 				break
 		node.set_item_accelerator(menu_item_id, accel)
 
+	func handle_input(event: InputEvent, action: String) -> bool:
+		if not node:
+			return false
+		if event.is_action_pressed(action):
+			if event is InputEventKey:
+				var acc: int = node.get_item_accelerator(menu_item_id)
+				# If the event is the same as the menu item's accelerator, skip
+				if acc == event.get_scancode_with_modifiers():
+					return true
+			node.emit_signal("id_pressed", menu_item_id)
+			return true
+		if event.is_action(action) and echo:
+			if event.is_echo():
+				var menu: PopupMenu = node
+				node.emit_signal("id_pressed", menu_item_id)
+				return true
+
+		return false
+
 
 class InputGroup:
 	var parent_group := ""
@@ -186,25 +208,9 @@ func _input(event: InputEvent) -> void:
 
 	for action in actions:
 		var input_action: InputAction = actions[action]
-		if not input_action is MenuInputAction:
-			continue
-
-		if event.is_action_pressed(action):
-			var menu: PopupMenu = input_action.node
-			if not menu:
-				return
-			if event is InputEventKey:
-				var acc: int = menu.get_item_accelerator(input_action.menu_item_id)
-				# If the event is the same as the menu item's accelerator, skip
-				if acc == event.get_scancode_with_modifiers():
-					return
-			menu.emit_signal("id_pressed", input_action.menu_item_id)
+		var done: bool = input_action.handle_input(event, action)
+		if done:
 			return
-		if event.is_action(action) and input_action.echo:
-			if event.is_echo():
-				var menu: PopupMenu = input_action.node
-				menu.emit_signal("id_pressed", input_action.menu_item_id)
-				return
 
 
 func action_add_event(action: String, new_event: InputEvent) -> void:
