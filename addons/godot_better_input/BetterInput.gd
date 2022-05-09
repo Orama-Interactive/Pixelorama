@@ -56,30 +56,19 @@ var actions := {
 	),
 	"cut":
 	MenuInputAction.new(
-		"",
-		"Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
-		Global.EditMenuId.CUT,
-		true
+		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", Global.EditMenuId.CUT
 	),
 	"copy":
 	MenuInputAction.new(
-		"",
-		"Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
-		Global.EditMenuId.COPY,
-		true
+		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", Global.EditMenuId.COPY
 	),
 	"paste":
 	MenuInputAction.new(
-		"",
-		"Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
-		Global.EditMenuId.PASTE,
-		true
+		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", Global.EditMenuId.PASTE
+	),
+	"delete":
+	MenuInputAction.new(
+		"", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", Global.EditMenuId.DELETE
 	),
 	"new_brush":
 	MenuInputAction.new(
@@ -87,8 +76,7 @@ var actions := {
 		"Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
-		Global.EditMenuId.NEW_BRUSH,
-		true
+		Global.EditMenuId.NEW_BRUSH
 	),
 	"mirror_view":
 	MenuInputAction.new(
@@ -96,8 +84,7 @@ var actions := {
 		"Menu",
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
-		Global.ViewMenuId.MIRROR_VIEW,
-		true
+		Global.ViewMenuId.MIRROR_VIEW
 	),
 	"show_grid":
 	MenuInputAction.new(
@@ -114,6 +101,14 @@ var actions := {
 		true,
 		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
 		Global.ViewMenuId.SHOW_PIXEL_GRID
+	),
+	"show_guides":
+	MenuInputAction.new(
+		"",
+		"Menu",
+		true,
+		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
+		Global.ViewMenuId.SHOW_GUIDES
 	),
 	"show_rulers":
 	MenuInputAction.new(
