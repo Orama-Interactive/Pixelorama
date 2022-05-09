@@ -109,7 +109,9 @@ func _ready() -> void:
 		else:
 			i += 1
 
-	var shortcuts_preset: int = BetterInput.config_file.get_value("shortcuts", "shortcuts_preset", 0)
+	var shortcuts_preset: int = BetterInput.config_file.get_value(
+		"shortcuts", "shortcuts_preset", 0
+	)
 	presets_option_button.select(shortcuts_preset)
 	_on_PresetsOptionButton_item_selected(shortcuts_preset)
 
@@ -291,7 +293,7 @@ func _on_ShortcutTree_button_pressed(item: TreeItem, _column: int, id: int) -> v
 			rect.size = Vector2(110, 23 * shortcut_type_menu.get_item_count())
 			shortcut_type_menu.popup(rect)
 		elif id == 1:  # Delete
-			InputMap.action_erase_events(action)
+			BetterInput.action_erase_events(action)
 			BetterInput.selected_preset.change_action(action)
 			var child := item.get_children()
 			while child != null:
@@ -312,7 +314,7 @@ func _on_ShortcutTree_button_pressed(item: TreeItem, _column: int, id: int) -> v
 		elif id == 1:  # Delete
 			if not parent_action is String:
 				return
-			InputMap.action_erase_event(parent_action, action)
+			BetterInput.action_erase_event(parent_action, action)
 			BetterInput.selected_preset.change_action(parent_action)
 			item.free()
 
@@ -337,9 +339,9 @@ func _on_ShortcutTypeMenu_id_pressed(id: int) -> void:
 func _on_PresetsOptionButton_item_selected(index: int) -> void:
 	BetterInput.selected_preset = BetterInput.presets[index]
 	for action in BetterInput.selected_preset.bindings:
-		InputMap.action_erase_events(action)
+		BetterInput.action_erase_events(action)
 		for event in BetterInput.selected_preset.bindings[action]:
-			InputMap.action_add_event(action, event)
+			BetterInput.action_add_event(action, event)
 
 	# Re-construct the tree
 	for group in BetterInput.groups:

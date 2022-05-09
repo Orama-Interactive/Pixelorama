@@ -11,14 +11,18 @@ var actions := {
 	"export_file": InputAction.new("", "Menu"),
 	"export_file_as": InputAction.new("", "Menu"),
 	"quit": InputAction.new("", "Menu"),
-	"redo": MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", 1, true),
-	"undo": MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", 0, true),
+	"redo":
+	MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", 1, true),
+	"undo":
+	MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", 0, true),
 	"mirror_view": InputAction.new("", "Menu"),
-	"show_grid": MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/ViewMenu", 3),
+	"show_grid":
+	MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/ViewMenu", 3),
 	"show_pixel_grid": InputAction.new("", "Menu"),
 	"show_rulers": InputAction.new("", "Menu"),
 	"zen_mode": InputAction.new("", "Menu"),
-	"toggle_fullscreen": MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/WindowMenu", 4),
+	"toggle_fullscreen":
+	MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/WindowMenu", 4),
 	"open_docs": InputAction.new("", "Menu"),
 	"cut": InputAction.new("", "Menu"),
 	"copy": InputAction.new("", "Menu"),
@@ -35,6 +39,7 @@ var groups := {
 }
 var config_path := "user://cache.ini"
 var config_file: ConfigFile = Global.config_cache
+
 
 class Preset:
 	var name := ""
@@ -105,6 +110,17 @@ class MenuInputAction:
 		elif node is MenuButton:
 			menu_node = node.get_popup()
 
+	func update_item_accelerator(action: String) -> void:
+		if !menu_node:
+			return
+		var accel := 0
+		var events := InputMap.get_action_list(action)
+		for event in events:
+			if event is InputEventKey:
+				accel = event.get_scancode_with_modifiers()
+				break
+		menu_node.set_item_accelerator(menu_item_id, accel)
+
 
 class InputGroup:
 	var parent_group := ""
@@ -120,7 +136,8 @@ func _init() -> void:
 		if !config_path.empty():
 			config_file.load(config_path)
 
-# Code not in the plugin
+
+# Code not in the original plugin
 func _ready() -> void:
 	for t in Tools.tools:
 		var tool_shortcut: String = Tools.tools[t].shortcut
@@ -152,3 +169,21 @@ func _input(event: InputEvent) -> void:
 				var menu: PopupMenu = input_action.menu_node
 				menu.emit_signal("id_pressed", input_action.menu_item_id)
 				return
+
+
+func action_add_event(action: String, new_event: InputEvent) -> void:
+	InputMap.action_add_event(action, new_event)
+	if action in actions and actions[action] is MenuInputAction:
+		actions[action].update_item_accelerator(action)
+
+
+func action_erase_event(action: String, event: InputEvent) -> void:
+	InputMap.action_erase_event(action, event)
+	if action in actions and actions[action] is MenuInputAction:
+		actions[action].update_item_accelerator(action)
+
+
+func action_erase_events(action: String) -> void:
+	InputMap.action_erase_events(action)
+	if action in actions and actions[action] is MenuInputAction:
+		actions[action].update_item_accelerator(action)

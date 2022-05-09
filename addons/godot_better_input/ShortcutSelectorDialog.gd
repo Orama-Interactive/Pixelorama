@@ -66,7 +66,7 @@ func _set_shortcut(action: String, old_event: InputEvent, new_event: InputEvent)
 	if InputMap.action_has_event(action, new_event):  # If the current action already has that event
 		return false
 	if old_event:
-		InputMap.action_erase_event(action, old_event)
+		BetterInput.action_erase_event(action, old_event)
 
 	# Loop through other actions to see if the event exists there, to re-assign it
 	var matching_pair := _find_matching_event_in_map(action, new_event)
@@ -78,7 +78,7 @@ func _set_shortcut(action: String, old_event: InputEvent, new_event: InputEvent)
 
 		var action_to_replace: String = matching_pair[0]
 		var input_to_replace: InputEvent = matching_pair[1]
-		InputMap.action_erase_event(action_to_replace, input_to_replace)
+		BetterInput.action_erase_event(action_to_replace, input_to_replace)
 		BetterInput.selected_preset.change_action(action_to_replace)
 		var tree_item: TreeItem = root.tree.get_root()
 		var prev_tree_item: TreeItem
@@ -98,7 +98,7 @@ func _set_shortcut(action: String, old_event: InputEvent, new_event: InputEvent)
 
 			tree_item = _get_next_tree_item(tree_item)
 
-	InputMap.action_add_event(action, new_event)
+	BetterInput.action_add_event(action, new_event)
 	BetterInput.selected_preset.change_action(action)
 	return true
 
