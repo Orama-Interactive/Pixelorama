@@ -84,26 +84,6 @@ func _input(event: InputEvent) -> void:
 		if get_focus_owner() is LineEdit:
 			get_focus_owner().release_focus()
 
-	# The section of code below is reserved for Undo and Redo!
-	# Do not place code for Input below, but above.
-	if !event.is_echo():  # Checks if the action is pressed down
-		if event.is_action_pressed("redo_secondary"):
-			# Done, so that "redo_secondary" hasn't a slight delay before it starts.
-			# The "redo" and "undo" action don't have a slight delay,
-			# because they get called as an accelerator once pressed (TopMenuContainer.gd, Line 152)
-			Global.current_project.commit_redo()
-		return
-
-	if event.is_action("redo"):  # Ctrl + Y
-		Global.current_project.commit_redo()
-
-	if event.is_action("redo_secondary"):  # Shift + Ctrl + Z
-		Global.current_project.commit_redo()
-
-	if event.is_action("undo") and !event.shift:  # Ctrl + Z and check if shift isn't pressed
-		# so "undo" isn't accidentaly triggered while using "redo_secondary"
-		Global.current_project.commit_undo()
-
 
 func _setup_application_window_size() -> void:
 	get_tree().set_screen_stretch(

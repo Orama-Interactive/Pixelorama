@@ -78,14 +78,14 @@ var actions := {
 	"export_file": InputAction.new("", "Menu"),
 	"export_file_as": InputAction.new("", "Menu"),
 	"quit": InputAction.new("", "Menu"),
-	"undo": InputAction.new("", "Menu"),
-	"redo": InputAction.new("", "Menu"),
+	"redo": MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", 1, true),
+	"undo": MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", 0, true),
 	"mirror_view": InputAction.new("", "Menu"),
-	"show_grid": InputAction.new("", "Menu"),
+	"show_grid": MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/ViewMenu", 3),
 	"show_pixel_grid": InputAction.new("", "Menu"),
 	"show_rulers": InputAction.new("", "Menu"),
 	"zen_mode": InputAction.new("", "Menu"),
-	"toggle_fullscreen": InputAction.new("", "Menu"),
+	"toggle_fullscreen": MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/WindowMenu", 4),
 	"open_docs": InputAction.new("", "Menu"),
 	"cut": InputAction.new("", "Menu"),
 	"copy": InputAction.new("", "Menu"),
@@ -168,6 +168,26 @@ class InputAction:
 		global = _global
 
 
+class MenuInputAction extends InputAction:
+	var menu_node_path := ""
+	var menu_node: PopupMenu
+	var menu_item_id := 0
+	var echo := false
+
+	func _init(_display_name := "", _group := "", _global := true, _menu_node_path := "", _menu_item_id := 0, _echo := false) -> void:
+		._init(_display_name, _group, _global)
+		menu_node_path = _menu_node_path
+		menu_item_id = _menu_item_id
+		echo = _echo
+
+	func get_menu_node(root: Node) -> void:
+		var node = root.get_node(menu_node_path)
+		if node is PopupMenu:
+			menu_node = node
+		elif node is MenuButton:
+			menu_node = node.get_popup()
+
+
 class InputGroup:
 	var parent_group := ""
 	var tree_item: TreeItem
@@ -184,6 +204,11 @@ func _ready() -> void:
 		var right_tool_shortcut := "right_%s_tool" % tool_shortcut
 		actions[left_tool_shortcut] = InputAction.new("", "Tools")
 		actions[right_tool_shortcut] = InputAction.new("", "Tools")
+
+	for action in actions:
+		var input_action: InputAction = actions[action]
+		if input_action is MenuInputAction:
+			input_action.get_menu_node(get_tree().current_scene)
 
 	if !config_path.empty():
 		config_file.load(config_path)
@@ -206,6 +231,27 @@ func _ready() -> void:
 	var shortcuts_preset: int = config_file.get_value("shortcuts", "shortcuts_preset", 0)
 	presets_option_button.select(shortcuts_preset)
 	_on_PresetsOptionButton_item_selected(shortcuts_preset)
+
+
+func _input(event: InputEvent) -> void:
+	for action in actions:
+		var input_action: InputAction = actions[action]
+		if not input_action is MenuInputAction:
+			continue
+		if event.is_action_pressed(action):
+			var menu: PopupMenu = input_action.menu_node
+			if event is InputEventKey:
+				var acc: int = menu.get_item_accelerator(input_action.menu_item_id)
+				# If the event is the same as the menu item's accelerator, skip
+				if acc == event.get_scancode_with_modifiers():
+					return
+			menu.emit_signal("id_pressed", input_action.menu_item_id)
+			return
+		elif event.is_action(action) and input_action.echo:
+			if event.is_echo():
+				var menu: PopupMenu = input_action.menu_node
+				menu.emit_signal("id_pressed", input_action.menu_item_id)
+				return
 
 
 func _construct_tree() -> void:
