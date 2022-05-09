@@ -93,7 +93,7 @@ func _ready() -> void:
 	for action in BetterInput.actions:
 		var input_action: BetterInput.InputAction = BetterInput.actions[action]
 		if input_action is BetterInput.MenuInputAction:
-			input_action.get_menu_node(get_tree().current_scene)
+			input_action.get_menu_node(Global.top_menu_container.get_node("MenuItems"))
 	_fill_selector_options()
 
 	# Remove input types that are not changeable

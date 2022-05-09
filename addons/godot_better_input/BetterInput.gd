@@ -4,208 +4,45 @@ extends Node
 var presets := [Preset.new("Default", false), Preset.new("Custom")]
 var selected_preset: Preset = presets[0]
 var actions := {
-	"new_file":
-	MenuInputAction.new(
-		"",
-		"File Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
-		Global.FileMenuId.NEW
-	),
-	"open_file":
-	MenuInputAction.new(
-		"",
-		"File Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
-		Global.FileMenuId.OPEN
-	),
-	"save_file":
-	MenuInputAction.new(
-		"",
-		"File Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
-		Global.FileMenuId.SAVE
-	),
+	"new_file": MenuInputAction.new("", "File Menu", true, "FileMenu", Global.FileMenuId.NEW),
+	"open_file": MenuInputAction.new("", "File Menu", true, "FileMenu", Global.FileMenuId.OPEN),
+	"save_file": MenuInputAction.new("", "File Menu", true, "FileMenu", Global.FileMenuId.SAVE),
 	"save_file_as":
-	MenuInputAction.new(
-		"",
-		"File Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
-		Global.FileMenuId.SAVE_AS
-	),
-	"export_file":
-	MenuInputAction.new(
-		"",
-		"File Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
-		Global.FileMenuId.EXPORT
-	),
+	MenuInputAction.new("", "File Menu", true, "FileMenu", Global.FileMenuId.SAVE_AS),
+	"export_file": MenuInputAction.new("", "File Menu", true, "FileMenu", Global.FileMenuId.EXPORT),
 	"export_file_as":
-	MenuInputAction.new(
-		"",
-		"File Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
-		Global.FileMenuId.EXPORT_AS
-	),
-	"quit":
-	MenuInputAction.new(
-		"",
-		"File Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/FileMenu",
-		Global.FileMenuId.QUIT
-	),
-	"redo":
-	MenuInputAction.new(
-		"",
-		"Edit Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
-		Global.EditMenuId.REDO,
-		true
-	),
-	"undo":
-	MenuInputAction.new(
-		"",
-		"Edit Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
-		Global.EditMenuId.UNDO,
-		true
-	),
-	"cut":
-	MenuInputAction.new(
-		"",
-		"Edit Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
-		Global.EditMenuId.CUT
-	),
-	"copy":
-	MenuInputAction.new(
-		"",
-		"Edit Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
-		Global.EditMenuId.COPY
-	),
-	"paste":
-	MenuInputAction.new(
-		"",
-		"Edit Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
-		Global.EditMenuId.PASTE
-	),
-	"delete":
-	MenuInputAction.new(
-		"",
-		"Edit Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
-		Global.EditMenuId.DELETE
-	),
+	MenuInputAction.new("", "File Menu", true, "FileMenu", Global.FileMenuId.EXPORT_AS),
+	"quit": MenuInputAction.new("", "File Menu", true, "FileMenu", Global.FileMenuId.QUIT),
+	"redo": MenuInputAction.new("", "Edit Menu", true, "EditMenu", Global.EditMenuId.REDO, true),
+	"undo": MenuInputAction.new("", "Edit Menu", true, "EditMenu", Global.EditMenuId.UNDO, true),
+	"cut": MenuInputAction.new("", "Edit Menu", true, "EditMenu", Global.EditMenuId.CUT),
+	"copy": MenuInputAction.new("", "Edit Menu", true, "EditMenu", Global.EditMenuId.COPY),
+	"paste": MenuInputAction.new("", "Edit Menu", true, "EditMenu", Global.EditMenuId.PASTE),
+	"delete": MenuInputAction.new("", "Edit Menu", true, "EditMenu", Global.EditMenuId.DELETE),
 	"new_brush":
-	MenuInputAction.new(
-		"",
-		"Edit Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/EditMenu",
-		Global.EditMenuId.NEW_BRUSH
-	),
+	MenuInputAction.new("", "Edit Menu", true, "EditMenu", Global.EditMenuId.NEW_BRUSH),
 	"mirror_view":
-	MenuInputAction.new(
-		"",
-		"View Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
-		Global.ViewMenuId.MIRROR_VIEW
-	),
+	MenuInputAction.new("", "View Menu", true, "ViewMenu", Global.ViewMenuId.MIRROR_VIEW),
 	"show_grid":
-	MenuInputAction.new(
-		"",
-		"View Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
-		Global.ViewMenuId.SHOW_GRID
-	),
+	MenuInputAction.new("", "View Menu", true, "ViewMenu", Global.ViewMenuId.SHOW_GRID),
 	"show_pixel_grid":
-	MenuInputAction.new(
-		"",
-		"View Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
-		Global.ViewMenuId.SHOW_PIXEL_GRID
-	),
+	MenuInputAction.new("", "View Menu", true, "ViewMenu", Global.ViewMenuId.SHOW_PIXEL_GRID),
 	"show_guides":
-	MenuInputAction.new(
-		"",
-		"View Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
-		Global.ViewMenuId.SHOW_GUIDES
-	),
+	MenuInputAction.new("", "View Menu", true, "ViewMenu", Global.ViewMenuId.SHOW_GUIDES),
 	"show_rulers":
-	MenuInputAction.new(
-		"",
-		"View Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/ViewMenu",
-		Global.ViewMenuId.SHOW_RULERS
-	),
+	MenuInputAction.new("", "View Menu", true, "ViewMenu", Global.ViewMenuId.SHOW_RULERS),
 	"zen_mode":
-	MenuInputAction.new(
-		"",
-		"Window Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/WindowMenu",
-		Global.WindowMenuId.ZEN_MODE
-	),
+	MenuInputAction.new("", "Window Menu", true, "WindowMenu", Global.WindowMenuId.ZEN_MODE),
 	"toggle_fullscreen":
-	MenuInputAction.new(
-		"",
-		"Window Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/WindowMenu",
-		Global.WindowMenuId.FULLSCREEN_MODE
-	),
+	MenuInputAction.new("", "Window Menu", true, "WindowMenu", Global.WindowMenuId.FULLSCREEN_MODE),
 	"clear_selection":
-	MenuInputAction.new(
-		"",
-		"Select Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/SelectMenu",
-		Global.SelectMenuId.CLEAR_SELECTION
-	),
+	MenuInputAction.new("", "Select Menu", true, "SelectMenu", Global.SelectMenuId.CLEAR_SELECTION),
 	"select_all":
-	MenuInputAction.new(
-		"",
-		"Select Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/SelectMenu",
-		Global.SelectMenuId.SELECT_ALL
-	),
+	MenuInputAction.new("", "Select Menu", true, "SelectMenu", Global.SelectMenuId.SELECT_ALL),
 	"invert_selection":
-	MenuInputAction.new(
-		"",
-		"Select Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/SelectMenu",
-		Global.SelectMenuId.INVERT
-	),
+	MenuInputAction.new("", "Select Menu", true, "SelectMenu", Global.SelectMenuId.INVERT),
 	"open_docs":
-	MenuInputAction.new(
-		"",
-		"Help Menu",
-		true,
-		"MenuAndUI/TopMenuContainer/MenuItems/HelpMenu",
-		Global.HelpMenuId.ONLINE_DOCS
-	),
+	MenuInputAction.new("", "Help Menu", true, "HelpMenu", Global.HelpMenuId.ONLINE_DOCS),
 	"edit_mode": InputAction.new("Moveable Panels", "Window Menu"),
 }
 var groups := {
