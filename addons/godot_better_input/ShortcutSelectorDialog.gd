@@ -123,9 +123,9 @@ func _find_matching_event_in_map(action: String, event: InputEvent) -> Array:
 		group = BetterInput.actions[action].group
 
 	for map_action in InputMap.get_actions():
-		if map_action in root.ignore_actions:
+		if map_action in BetterInput.ignore_actions:
 			continue
-		if root.ignore_ui_actions and map_action.begins_with("ui_"):
+		if BetterInput.ignore_ui_actions and map_action.begins_with("ui_"):
 			continue
 		for map_event in InputMap.get_action_list(map_action):
 			if event.shortcut_match(map_event):

@@ -37,6 +37,10 @@ var groups := {
 	"Tools": InputGroup.new(),
 	"Menu": InputGroup.new(),
 }
+var ignore_actions := []
+var ignore_ui_actions := true
+var changeable_types := [true, true, true, false]
+var multiple_menu_accelerators := true
 var config_path := "user://cache.ini"
 var config_file: ConfigFile = Global.config_cache
 
@@ -137,9 +141,9 @@ func _init() -> void:
 			config_file.load(config_path)
 
 
-# Code not in the original plugin
 func _ready() -> void:
-	for t in Tools.tools:
+	set_process_input(multiple_menu_accelerators)
+	for t in Tools.tools:  # Code not in the original plugin
 		var tool_shortcut: String = Tools.tools[t].shortcut
 		var left_tool_shortcut := "left_%s_tool" % tool_shortcut
 		var right_tool_shortcut := "right_%s_tool" % tool_shortcut

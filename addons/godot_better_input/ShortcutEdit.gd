@@ -63,12 +63,7 @@ const JOY_AXIS_NAMES := [
 	"",
 ]
 
-export(Array, String) var ignore_actions := []
-export(bool) var ignore_ui_actions := true
-export(Array, bool) var changeable_types := [true, true, true, false]
-
 var currently_editing_tree_item: TreeItem
-
 # Textures taken from Godot https://github.com/godotengine/godot/tree/master/editor/icons
 var add_tex: Texture = preload("res://addons/godot_better_input/assets/add.svg")
 var edit_tex: Texture = preload("res://addons/godot_better_input/assets/edit.svg")
@@ -103,7 +98,7 @@ func _ready() -> void:
 
 	# Remove input types that are not changeable
 	var i := 0
-	for type in changeable_types:
+	for type in BetterInput.changeable_types:
 		if !type:
 			shortcut_type_menu.remove_item(i)
 		else:
@@ -124,9 +119,9 @@ func _construct_tree() -> void:
 		_create_group_tree_item(input_group, group)
 
 	for action in BetterInput.selected_preset.bindings:  # Fill the tree with actions and their events
-		if action in ignore_actions:
+		if action in BetterInput.ignore_actions:
 			continue
-		if ignore_ui_actions and action.begins_with("ui_"):
+		if BetterInput.ignore_ui_actions and action.begins_with("ui_"):
 			continue
 
 		var display_name := get_action_name(action)
@@ -221,16 +216,16 @@ func add_event_tree_item(event: InputEvent, action_tree_item: TreeItem) -> void:
 	var event_class := event.get_class()
 	match event_class:
 		"InputEventKey":
-			if !changeable_types[0]:
+			if !BetterInput.changeable_types[0]:
 				return
 		"InputEventMouseButton":
-			if !changeable_types[1]:
+			if !BetterInput.changeable_types[1]:
 				return
 		"InputEventJoypadButton":
-			if !changeable_types[2]:
+			if !BetterInput.changeable_types[2]:
 				return
 		"InputEventJoypadMotion":
-			if !changeable_types[3]:
+			if !BetterInput.changeable_types[3]:
 				return
 
 	var buttons_disabled := false if BetterInput.selected_preset.customizable else true
