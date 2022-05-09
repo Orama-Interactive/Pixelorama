@@ -52,12 +52,13 @@ var groups := {
 	"Menu": InputGroup.new(),
 	"File Menu": InputGroup.new("Menu"),
 	"Edit Menu": InputGroup.new("Menu"),
+	"View Menu": InputGroup.new("Menu"),
 	"Select Menu": InputGroup.new("Menu"),
 	"Image Menu": InputGroup.new("Menu"),
 	"Window Menu": InputGroup.new("Menu"),
 	"Help Menu": InputGroup.new("Menu"),
 }
-var ignore_actions := []
+var ignore_actions := ["left_mouse", "right_mouse", "middle_mouse"]
 var ignore_ui_actions := true
 var changeable_types := [true, true, true, false]
 var multiple_menu_accelerators := true

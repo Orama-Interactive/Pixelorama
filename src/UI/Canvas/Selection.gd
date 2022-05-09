@@ -81,13 +81,13 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if is_moving_content:
-			if Input.is_action_just_pressed("enter"):
-				transform_content_confirm()
-			elif Input.is_action_just_pressed("escape"):
-				transform_content_cancel()
+	if is_moving_content:
+		if Input.is_action_just_pressed("confirm"):
+			transform_content_confirm()
+		elif Input.is_action_just_pressed("cancel"):
+			transform_content_cancel()
 
+	if event is InputEventKey:
 		_move_with_arrow_keys(event)
 
 	elif event is InputEventMouse:

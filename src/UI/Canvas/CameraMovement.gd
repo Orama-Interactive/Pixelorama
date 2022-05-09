@@ -200,9 +200,9 @@ func _input(event: InputEvent) -> void:
 		drag = false
 		return
 
-	if event.is_action_pressed("middle_mouse") || event.is_action_pressed("space"):
+	if event.is_action_pressed("pan"):
 		drag = true
-	elif event.is_action_released("middle_mouse") || event.is_action_released("space"):
+	elif event.is_action_released("pan"):
 		drag = false
 	elif event.is_action_pressed("zoom_in"):  # Wheel Up Event
 		zoom_camera(-1)
