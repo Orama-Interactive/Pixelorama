@@ -211,15 +211,18 @@ func action_add_event(action: String, new_event: InputEvent) -> void:
 	InputMap.action_add_event(action, new_event)
 	if action in actions:
 		actions[action].update_ui(action)
+	Global.update_hint_tooltips()
 
 
 func action_erase_event(action: String, event: InputEvent) -> void:
 	InputMap.action_erase_event(action, event)
 	if action in actions:
 		actions[action].update_ui(action)
+	Global.update_hint_tooltips()
 
 
 func action_erase_events(action: String) -> void:
 	InputMap.action_erase_events(action)
 	if action in actions:
 		actions[action].update_ui(action)
+	Global.update_hint_tooltips()

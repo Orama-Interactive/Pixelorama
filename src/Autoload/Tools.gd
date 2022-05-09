@@ -165,13 +165,17 @@ class Tool:
 		var left_text := ""
 		var right_text := ""
 		if InputMap.has_action("left_" + shortcut + "_tool"):
-			var left_shortcut: String = InputMap.get_action_list("left_" + shortcut + "_tool")[0].as_text()
-			shortcuts.append(left_shortcut)
-			left_text = "\n%s for left mouse button"
+			var left_list := InputMap.get_action_list("left_" + shortcut + "_tool")
+			if left_list.size() > 0:
+				var left_shortcut: String = left_list[0].as_text()
+				shortcuts.append(left_shortcut)
+				left_text = "\n%s for left mouse button"
 		if InputMap.has_action("right_" + shortcut + "_tool"):
-			var right_shortcut: String = InputMap.get_action_list("right_" + shortcut + "_tool")[0].as_text()
-			shortcuts.append(right_shortcut)
-			right_text = "\n%s for right mouse button"
+			var right_list := InputMap.get_action_list("right_" + shortcut + "_tool")
+			if right_list.size() > 0:
+				var right_shortcut: String = right_list[0].as_text()
+				shortcuts.append(right_shortcut)
+				right_text = "\n%s for right mouse button"
 
 		if !shortcuts.empty():
 			hint += "\n" + left_text + right_text
@@ -182,19 +186,19 @@ class Tool:
 		# Some tools have shift,ctrl,alt "HARD CODED" in them using (InputEventWithModifiers)
 		# But Others only use the regular is_action_pressed() function
 		# their Shift, Ctrl, Alt are listed Below
-		var code_shift = InputMap.get_action_list("shift")[0].get_scancode_with_modifiers()
-		var code_ctrl = InputMap.get_action_list("ctrl")[0].get_scancode_with_modifiers()
-		var code_alt = InputMap.get_action_list("alt")[0].get_scancode_with_modifiers()
-		var configurable_shift: String = OS.get_scancode_string(code_shift)
-		var configurable_ctrl: String = OS.get_scancode_string(code_ctrl)
-		var configurable_alt: String = OS.get_scancode_string(code_alt)
-		for shortcut_idx in extra_shortcuts.size():
-			if extra_shortcuts_order[shortcut_idx] == "configurable_shift":
-				extra_shortcuts[shortcut_idx] = configurable_shift
-			if extra_shortcuts_order[shortcut_idx] == "configurable_ctrl":
-				extra_shortcuts[shortcut_idx] = configurable_ctrl
-			if extra_shortcuts_order[shortcut_idx] == "configurable_alt":
-				extra_shortcuts[shortcut_idx] = configurable_alt
+#		var code_shift = InputMap.get_action_list("shift")[0].get_scancode_with_modifiers()
+#		var code_ctrl = InputMap.get_action_list("ctrl")[0].get_scancode_with_modifiers()
+#		var code_alt = InputMap.get_action_list("alt")[0].get_scancode_with_modifiers()
+#		var configurable_shift: String = OS.get_scancode_string(code_shift)
+#		var configurable_ctrl: String = OS.get_scancode_string(code_ctrl)
+#		var configurable_alt: String = OS.get_scancode_string(code_alt)
+#		for shortcut_idx in extra_shortcuts.size():
+#			if extra_shortcuts_order[shortcut_idx] == "configurable_shift":
+#				extra_shortcuts[shortcut_idx] = configurable_shift
+#			if extra_shortcuts_order[shortcut_idx] == "configurable_ctrl":
+#				extra_shortcuts[shortcut_idx] = configurable_ctrl
+#			if extra_shortcuts_order[shortcut_idx] == "configurable_alt":
+#				extra_shortcuts[shortcut_idx] = configurable_alt
 		shortcuts.append_array(extra_shortcuts)
 
 		if shortcuts.empty():
