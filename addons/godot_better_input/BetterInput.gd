@@ -167,6 +167,11 @@ func _init() -> void:
 
 func _ready() -> void:
 	set_process_input(multiple_menu_accelerators)
+	for action in actions:
+		var input_action: InputAction = actions[action]
+		if input_action is MenuInputAction:
+			input_action.get_menu_node(Global.top_menu_container.get_node("MenuItems"))
+
 	for t in Tools.tools:  # Code not in the original plugin
 		var tool_shortcut: String = Tools.tools[t].shortcut
 		var left_tool_shortcut := "left_%s_tool" % tool_shortcut

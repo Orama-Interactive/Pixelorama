@@ -90,10 +90,6 @@ func _ready() -> void:
 		preset.load_from_file()
 		presets_option_button.add_item(preset.name)
 
-	for action in BetterInput.actions:
-		var input_action: BetterInput.InputAction = BetterInput.actions[action]
-		if input_action is BetterInput.MenuInputAction:
-			input_action.get_menu_node(Global.top_menu_container.get_node("MenuItems"))
 	_fill_selector_options()
 
 	# Remove input types that are not changeable
