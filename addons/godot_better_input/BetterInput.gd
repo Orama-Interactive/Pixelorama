@@ -107,6 +107,9 @@ class InputAction:
 		group = _group
 		global = _global
 
+	func update_ui(_action: String) -> void:
+		pass
+
 
 class MenuInputAction:
 	extends InputAction
@@ -135,7 +138,7 @@ class MenuInputAction:
 		elif node is MenuButton:
 			menu_node = node.get_popup()
 
-	func update_item_accelerator(action: String) -> void:
+	func update_ui(action: String) -> void:
 		if !menu_node:
 			return
 		var accel := 0
@@ -201,17 +204,17 @@ func _input(event: InputEvent) -> void:
 
 func action_add_event(action: String, new_event: InputEvent) -> void:
 	InputMap.action_add_event(action, new_event)
-	if action in actions and actions[action] is MenuInputAction:
-		actions[action].update_item_accelerator(action)
+	if action in actions:
+		actions[action].update_ui(action)
 
 
 func action_erase_event(action: String, event: InputEvent) -> void:
 	InputMap.action_erase_event(action, event)
-	if action in actions and actions[action] is MenuInputAction:
-		actions[action].update_item_accelerator(action)
+	if action in actions:
+		actions[action].update_ui(action)
 
 
 func action_erase_events(action: String) -> void:
 	InputMap.action_erase_events(action)
-	if action in actions and actions[action] is MenuInputAction:
-		actions[action].update_item_accelerator(action)
+	if action in actions:
+		actions[action].update_ui(action)
