@@ -32,9 +32,5 @@ func deserialize(dict: Dictionary) -> void:
 
 # Overridden Functions:
 
-func get_layer_type_name() -> String:
-	return "Layer" # In the interface, its just referred to as a regular "Layer"
-
-
 func can_layer_get_drawn() -> bool:
 	return is_visible_in_hierarchy() && !is_locked_in_hierarchy()

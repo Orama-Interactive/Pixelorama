@@ -159,7 +159,7 @@ func change_project() -> void:
 			layer_container = group_layer_button_node.instance()
 		layer_container.layer = i
 		if layers[i].name == "":
-			layers[i].name = tr(layers[i].get_layer_type_name()) + " %s" % i
+			layers[i].name = layers[i].get_default_name(i)
 
 		Global.layers_container.add_child(layer_container)
 		layer_container.label.text = layers[i].name
@@ -503,7 +503,7 @@ func _layers_changed(value: Array) -> void:
 		layers[i].index = i
 		layers[i].project = self
 		if layers[i].name == "":
-			layers[i].name = tr(layers[i].get_layer_type_name()) + " %s" % i
+			layers[i].name = layers[i].get_default_name(i)
 
 		Global.layers_container.add_child(layer_button)
 		layer_button.label.text = layers[i].name

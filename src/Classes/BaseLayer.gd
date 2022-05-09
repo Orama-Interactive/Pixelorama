@@ -51,8 +51,8 @@ func deserialize(dict: Dictionary) -> void:
 		parent = project.layers[dict.parent]
 
 
-func get_layer_type_name() -> String:
-	return "Base"
+func get_default_name(number: int) -> String:
+	return tr("Layer") + " %s" % number
 
 
 func can_layer_get_drawn() -> bool:

@@ -58,8 +58,8 @@ func deserialize(dict: Dictionary) -> void:
 	expanded = dict.expanded
 
 
-func get_layer_type_name() -> String:
-	return "Group"
+func get_default_name(number: int) -> String:
+	return tr("Group") + " %s" % number
 
 
 func accepts_child(layer: BaseLayer) -> bool:
