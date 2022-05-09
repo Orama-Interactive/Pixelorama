@@ -335,6 +335,9 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		return
+
 	for action in actions:
 		var input_action: InputAction = actions[action]
 		if not input_action is MenuInputAction:
