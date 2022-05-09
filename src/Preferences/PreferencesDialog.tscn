@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/Preferences/PreferencesDialog.gd" type="Script" id=1]
 [ext_resource path="res://src/Preferences/HandleExtensions.gd" type="Script" id=2]
-[ext_resource path="res://addons/godot_better_input/src/ShortcutEdit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/godot_better_input/ShortcutEdit.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Preferences/HandleLanguages.gd" type="Script" id=4]
 [ext_resource path="res://src/Preferences/HandleThemes.gd" type="Script" id=5]
 

@@ -73,13 +73,13 @@ func _set_shortcut(action: String, old_event: InputEvent, new_event: InputEvent)
 
 	if matching_pair:
 		var group := ""
-		if action in root.actions:
-			group = root.actions[action].group
+		if action in BetterInput.actions:
+			group = BetterInput.actions[action].group
 
 		var action_to_replace: String = matching_pair[0]
 		var input_to_replace: InputEvent = matching_pair[1]
 		InputMap.action_erase_event(action_to_replace, input_to_replace)
-		root.selected_preset.change_action(action_to_replace)
+		BetterInput.selected_preset.change_action(action_to_replace)
 		var tree_item: TreeItem = root.tree.get_root()
 		var prev_tree_item: TreeItem
 		while tree_item != null:  # Loop through Tree's TreeItems...
@@ -87,10 +87,10 @@ func _set_shortcut(action: String, old_event: InputEvent, new_event: InputEvent)
 			if metadata is InputEvent:
 				if input_to_replace.shortcut_match(metadata):
 					var map_action: String = tree_item.get_parent().get_metadata(0)
-					if map_action in root.actions:
+					if map_action in BetterInput.actions:
 						# If it's local, check if it's the same group, otherwise ignore
-						if !root.actions[map_action].global:
-							if root.actions[map_action].group != group:
+						if !BetterInput.actions[map_action].global:
+							if BetterInput.actions[map_action].group != group:
 								tree_item = _get_next_tree_item(tree_item)
 								continue
 					tree_item.free()
@@ -99,11 +99,11 @@ func _set_shortcut(action: String, old_event: InputEvent, new_event: InputEvent)
 			tree_item = _get_next_tree_item(tree_item)
 
 	InputMap.action_add_event(action, new_event)
-	root.selected_preset.change_action(action)
+	BetterInput.selected_preset.change_action(action)
 	return true
 
 
-# Algorithm based on https://github.com/godotengine/godot/blob/master/scene/gui/tree.cpp#L685
+# Based on https://github.com/godotengine/godot/blob/master/scene/gui/tree.cpp#L685
 func _get_next_tree_item(current: TreeItem) -> TreeItem:
 	if current.get_children():
 		current = current.get_children()
@@ -119,8 +119,8 @@ func _get_next_tree_item(current: TreeItem) -> TreeItem:
 
 func _find_matching_event_in_map(action: String, event: InputEvent) -> Array:
 	var group := ""
-	if action in root.actions:
-		group = root.actions[action].group
+	if action in BetterInput.actions:
+		group = BetterInput.actions[action].group
 
 	for map_action in InputMap.get_actions():
 		if map_action in root.ignore_actions:
@@ -129,10 +129,10 @@ func _find_matching_event_in_map(action: String, event: InputEvent) -> Array:
 			continue
 		for map_event in InputMap.get_action_list(map_action):
 			if event.shortcut_match(map_event):
-				if map_action in root.actions:
+				if map_action in BetterInput.actions:
 					# If it's local, check if it's the same group, otherwise ignore
-					if !root.actions[map_action].global:
-						if root.actions[map_action].group != group:
+					if !BetterInput.actions[map_action].global:
+						if BetterInput.actions[map_action].group != group:
 							continue
 
 				return [map_action, map_event]

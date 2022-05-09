@@ -66,42 +66,8 @@ const JOY_AXIS_NAMES := [
 export(Array, String) var ignore_actions := []
 export(bool) var ignore_ui_actions := true
 export(Array, bool) var changeable_types := [true, true, true, false]
-export(String) var config_path := "user://cache.ini"
 
-var presets := [Preset.new("Default", false), Preset.new("Custom")]
-var selected_preset: Preset = presets[0]
-var actions := {
-	"new_file": InputAction.new("", "Menu"),
-	"open_file": InputAction.new("", "Menu"),
-	"save_file": InputAction.new("", "Menu"),
-	"save_file_as": InputAction.new("", "Menu"),
-	"export_file": InputAction.new("", "Menu"),
-	"export_file_as": InputAction.new("", "Menu"),
-	"quit": InputAction.new("", "Menu"),
-	"redo": MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", 1, true),
-	"undo": MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/EditMenu", 0, true),
-	"mirror_view": InputAction.new("", "Menu"),
-	"show_grid": MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/ViewMenu", 3),
-	"show_pixel_grid": InputAction.new("", "Menu"),
-	"show_rulers": InputAction.new("", "Menu"),
-	"zen_mode": InputAction.new("", "Menu"),
-	"toggle_fullscreen": MenuInputAction.new("", "Menu", true, "MenuAndUI/TopMenuContainer/MenuItems/WindowMenu", 4),
-	"open_docs": InputAction.new("", "Menu"),
-	"cut": InputAction.new("", "Menu"),
-	"copy": InputAction.new("", "Menu"),
-	"paste": InputAction.new("", "Menu"),
-	"clear_selection": InputAction.new("", "Menu"),
-	"select_all": InputAction.new("", "Menu"),
-	"invert_selection": InputAction.new("", "Menu"),
-	"new_brush": InputAction.new("", "Menu"),
-	"edit_mode": InputAction.new("Moveable Panels", "Menu"),
-}
-var groups := {
-	"Tools": InputGroup.new(),
-	"Menu": InputGroup.new(),
-}
 var currently_editing_tree_item: TreeItem
-var config_file: ConfigFile
 
 # Textures taken from Godot https://github.com/godotengine/godot/tree/master/editor/icons
 var add_tex: Texture = preload("res://addons/godot_better_input/assets/add.svg")
@@ -124,100 +90,15 @@ onready var joy_key_shortcut_selector: ConfirmationDialog = $JoyKeyShortcutSelec
 onready var joy_axis_shortcut_selector: ConfirmationDialog = $JoyAxisShortcutSelectorDialog
 
 
-class Preset:
-	var name := ""
-	var customizable := true
-	var bindings := {}
-	var config_section := ""
-	var config_path := ""
-	var config_file: ConfigFile
-
-	func _init(_name := "", _customizable := true) -> void:
-		name = _name
-		customizable = _customizable
-		config_section = "shortcuts-%s" % name
-
-		for action in InputMap.get_actions():
-			bindings[action] = InputMap.get_action_list(action)
-
-	func load_from_file() -> void:
-		if !config_file:
-			return
-		if !customizable:
-			return
-		for action in bindings:
-			var action_list = config_file.get_value(config_section, action, [null])
-			if action_list != [null]:
-				bindings[action] = action_list
-
-	func change_action(action: String) -> void:
-		bindings[action] = InputMap.get_action_list(action)
-		if config_file and customizable:
-			config_file.set_value(config_section, action, bindings[action])
-			config_file.save(config_path)
-
-
-class InputAction:
-	var display_name := ""
-	var group := ""
-	var global := true
-
-	func _init(_display_name := "", _group := "", _global := true) -> void:
-		display_name = _display_name
-		group = _group
-		global = _global
-
-
-class MenuInputAction extends InputAction:
-	var menu_node_path := ""
-	var menu_node: PopupMenu
-	var menu_item_id := 0
-	var echo := false
-
-	func _init(_display_name := "", _group := "", _global := true, _menu_node_path := "", _menu_item_id := 0, _echo := false) -> void:
-		._init(_display_name, _group, _global)
-		menu_node_path = _menu_node_path
-		menu_item_id = _menu_item_id
-		echo = _echo
-
-	func get_menu_node(root: Node) -> void:
-		var node = root.get_node(menu_node_path)
-		if node is PopupMenu:
-			menu_node = node
-		elif node is MenuButton:
-			menu_node = node.get_popup()
-
-
-class InputGroup:
-	var parent_group := ""
-	var tree_item: TreeItem
-
-	func _init(_parent_group := "") -> void:
-		parent_group = _parent_group
-
-
 func _ready() -> void:
-	config_file = Global.config_cache
-	for t in Tools.tools:
-		var tool_shortcut: String = Tools.tools[t].shortcut
-		var left_tool_shortcut := "left_%s_tool" % tool_shortcut
-		var right_tool_shortcut := "right_%s_tool" % tool_shortcut
-		actions[left_tool_shortcut] = InputAction.new("", "Tools")
-		actions[right_tool_shortcut] = InputAction.new("", "Tools")
-
-	for action in actions:
-		var input_action: InputAction = actions[action]
-		if input_action is MenuInputAction:
-			input_action.get_menu_node(get_tree().current_scene)
-
-	if !config_path.empty():
-		config_file.load(config_path)
-	for preset in presets:
-		if config_file:
-			preset.config_path = config_path
-			preset.config_file = config_file
-			preset.load_from_file()
+	for preset in BetterInput.presets:
+		preset.load_from_file()
 		presets_option_button.add_item(preset.name)
+
+	for action in BetterInput.actions:
+		var input_action: BetterInput.InputAction = BetterInput.actions[action]
+		if input_action is BetterInput.MenuInputAction:
+			input_action.get_menu_node(get_tree().current_scene)
 	_fill_selector_options()
 
 	# Remove input types that are not changeable
@@ -228,40 +109,19 @@ func _ready() -> void:
 		else:
 			i += 1
 
-	var shortcuts_preset: int = config_file.get_value("shortcuts", "shortcuts_preset", 0)
+	var shortcuts_preset: int = BetterInput.config_file.get_value("shortcuts", "shortcuts_preset", 0)
 	presets_option_button.select(shortcuts_preset)
 	_on_PresetsOptionButton_item_selected(shortcuts_preset)
 
 
-func _input(event: InputEvent) -> void:
-	for action in actions:
-		var input_action: InputAction = actions[action]
-		if not input_action is MenuInputAction:
-			continue
-		if event.is_action_pressed(action):
-			var menu: PopupMenu = input_action.menu_node
-			if event is InputEventKey:
-				var acc: int = menu.get_item_accelerator(input_action.menu_item_id)
-				# If the event is the same as the menu item's accelerator, skip
-				if acc == event.get_scancode_with_modifiers():
-					return
-			menu.emit_signal("id_pressed", input_action.menu_item_id)
-			return
-		elif event.is_action(action) and input_action.echo:
-			if event.is_echo():
-				var menu: PopupMenu = input_action.menu_node
-				menu.emit_signal("id_pressed", input_action.menu_item_id)
-				return
-
-
 func _construct_tree() -> void:
-	var buttons_disabled := false if selected_preset.customizable else true
+	var buttons_disabled := false if BetterInput.selected_preset.customizable else true
 	var tree_root: TreeItem = tree.create_item()
-	for group in groups:  # Create groups
-		var input_group: InputGroup = groups[group]
+	for group in BetterInput.groups:  # Create groups
+		var input_group: BetterInput.InputGroup = BetterInput.groups[group]
 		_create_group_tree_item(input_group, group)
 
-	for action in selected_preset.bindings:  # Fill the tree with actions and their events
+	for action in BetterInput.selected_preset.bindings:  # Fill the tree with actions and their events
 		if action in ignore_actions:
 			continue
 		if ignore_ui_actions and action.begins_with("ui_"):
@@ -269,13 +129,13 @@ func _construct_tree() -> void:
 
 		var display_name := get_action_name(action)
 		var group_name := ""
-		if action in actions:
-			var input_action: InputAction = actions[action]
+		if action in BetterInput.actions:
+			var input_action: BetterInput.InputAction = BetterInput.actions[action]
 			group_name = input_action.group
 
 		var tree_item: TreeItem
-		if group_name and group_name in groups:
-			var input_group: InputGroup = groups[group_name]
+		if group_name and group_name in BetterInput.groups:
+			var input_group: BetterInput.InputGroup = BetterInput.groups[group_name]
 			var group_root: TreeItem = input_group.tree_item
 			tree_item = tree.create_item(group_root)
 
@@ -320,13 +180,13 @@ func _fill_selector_options() -> void:
 		i += 0.5
 
 
-func _create_group_tree_item(group: InputGroup, group_name: String) -> void:
+func _create_group_tree_item(group: BetterInput.InputGroup, group_name: String) -> void:
 	if group.tree_item:
 		return
 
 	var group_root: TreeItem
 	if group.parent_group:
-		var parent_group: InputGroup = groups[group.parent_group]
+		var parent_group: BetterInput.InputGroup = BetterInput.groups[group.parent_group]
 		_create_group_tree_item(parent_group, group.parent_group)
 		group_root = tree.create_item(parent_group.tree_item)
 	else:
@@ -338,8 +198,8 @@ func _create_group_tree_item(group: InputGroup, group_name: String) -> void:
 
 func get_action_name(action: String) -> String:
 	var display_name := ""
-	if action in actions:
-		display_name = actions[action].display_name
+	if action in BetterInput.actions:
+		display_name = BetterInput.actions[action].display_name
 
 	if display_name.empty():
 		display_name = _humanize_snake_case(action)
@@ -371,7 +231,7 @@ func add_event_tree_item(event: InputEvent, action_tree_item: TreeItem) -> void:
 			if !changeable_types[3]:
 				return
 
-	var buttons_disabled := false if selected_preset.customizable else true
+	var buttons_disabled := false if BetterInput.selected_preset.customizable else true
 	var event_tree_item: TreeItem = tree.create_item(action_tree_item)
 	event_tree_item.set_text(0, event_to_str(event))
 	event_tree_item.set_metadata(0, event)
@@ -432,7 +292,7 @@ func _on_ShortcutTree_button_pressed(item: TreeItem, _column: int, id: int) -> v
 			shortcut_type_menu.popup(rect)
 		elif id == 1:  # Delete
 			InputMap.action_erase_events(action)
-			selected_preset.change_action(action)
+			BetterInput.selected_preset.change_action(action)
 			var child := item.get_children()
 			while child != null:
 				child.free()
@@ -453,7 +313,7 @@ func _on_ShortcutTree_button_pressed(item: TreeItem, _column: int, id: int) -> v
 			if not parent_action is String:
 				return
 			InputMap.action_erase_event(parent_action, action)
-			selected_preset.change_action(parent_action)
+			BetterInput.selected_preset.change_action(parent_action)
 			item.free()
 
 
@@ -475,16 +335,16 @@ func _on_ShortcutTypeMenu_id_pressed(id: int) -> void:
 
 
 func _on_PresetsOptionButton_item_selected(index: int) -> void:
-	selected_preset = presets[index]
-	for action in selected_preset.bindings:
+	BetterInput.selected_preset = BetterInput.presets[index]
+	for action in BetterInput.selected_preset.bindings:
 		InputMap.action_erase_events(action)
-		for event in selected_preset.bindings[action]:
+		for event in BetterInput.selected_preset.bindings[action]:
 			InputMap.action_add_event(action, event)
 
 	# Re-construct the tree
-	for group in groups:
-		groups[group].tree_item = null
+	for group in BetterInput.groups:
+		BetterInput.groups[group].tree_item = null
 	tree.clear()
 	_construct_tree()
-	config_file.set_value("shortcuts", "shortcuts_preset", index)
-	config_file.save(config_path)
+	BetterInput.config_file.set_value("shortcuts", "shortcuts_preset", index)
+	BetterInput.config_file.save(BetterInput.config_path)
