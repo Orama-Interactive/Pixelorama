@@ -360,4 +360,10 @@ func update_hint_tooltips() -> void:
 	Tools.update_hint_tooltips()
 
 	for tip in ui_tooltips:
-		tip.hint_tooltip = tr(ui_tooltips[tip]) % tip.shortcut.get_as_text()
+		var hint := "None"
+		var event_type: InputEvent = tip.shortcut.shortcut
+		if event_type is InputEventKey:
+			hint = event_type.as_text()
+		elif event_type is InputEventAction:
+			hint = BetterInput.action_get_first_key(event_type.action)
+		tip.hint_tooltip = tr(ui_tooltips[tip]) % hint

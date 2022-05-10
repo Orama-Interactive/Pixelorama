@@ -107,10 +107,10 @@ class InputAction:
 		group = _group
 		global = _global
 
-	func update_ui(_action: String) -> void:
+	func update_node(_action: String) -> void:
 		pass
 
-	func handle_input(event: InputEvent, action: String) -> bool:
+	func handle_input(_event: InputEvent, _action: String) -> bool:
 		return false
 
 
@@ -134,14 +134,14 @@ class MenuInputAction:
 		menu_item_id = _menu_item_id
 		echo = _echo
 
-	func get_menu_node(root: Node) -> void:
+	func get_node(root: Node) -> void:
 		var temp_node = root.get_node(node_path)
 		if temp_node is PopupMenu:
 			node = node
 		elif temp_node is MenuButton:
 			node = temp_node.get_popup()
 
-	func update_ui(action: String) -> void:
+	func update_node(action: String) -> void:
 		if !node:
 			return
 		var accel := 0
@@ -165,7 +165,6 @@ class MenuInputAction:
 			return true
 		if event.is_action(action) and echo:
 			if event.is_echo():
-				var menu: PopupMenu = node
 				node.emit_signal("id_pressed", menu_item_id)
 				return true
 
@@ -192,7 +191,7 @@ func _ready() -> void:
 	for action in actions:
 		var input_action: InputAction = actions[action]
 		if input_action is MenuInputAction:
-			input_action.get_menu_node(Global.top_menu_container.get_node("MenuItems"))
+			input_action.get_node(Global.top_menu_container.get_node("MenuItems"))
 
 	for t in Tools.tools:  # Code not in the original plugin
 		var tool_shortcut: String = Tools.tools[t].shortcut
@@ -216,19 +215,29 @@ func _input(event: InputEvent) -> void:
 func action_add_event(action: String, new_event: InputEvent) -> void:
 	InputMap.action_add_event(action, new_event)
 	if action in actions:
-		actions[action].update_ui(action)
+		actions[action].update_node(action)
 	Global.update_hint_tooltips()
 
 
 func action_erase_event(action: String, event: InputEvent) -> void:
 	InputMap.action_erase_event(action, event)
 	if action in actions:
-		actions[action].update_ui(action)
+		actions[action].update_node(action)
 	Global.update_hint_tooltips()
 
 
 func action_erase_events(action: String) -> void:
 	InputMap.action_erase_events(action)
 	if action in actions:
-		actions[action].update_ui(action)
+		actions[action].update_node(action)
 	Global.update_hint_tooltips()
+
+
+func action_get_first_key(action: String) -> String:
+	var text := "None"
+	var events := InputMap.get_action_list(action)
+	for event in events:
+		if event is InputEventKey:
+			text = event.as_text()
+			break
+	return text
