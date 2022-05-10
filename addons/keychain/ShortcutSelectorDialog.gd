@@ -148,10 +148,10 @@ func _on_ShortcutSelectorDialog_about_to_show() -> void:
 		listened_input = null
 		already_exists.text = ""
 		entered_shortcut.text = ""
+		set_process_input(true)
 	else:
 		if !listened_input:
 			_on_OptionButton_item_selected(0)
-	set_process_input(true)
 
 
 func _on_ShortcutSelectorDialog_popup_hide() -> void:
