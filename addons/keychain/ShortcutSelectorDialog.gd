@@ -14,6 +14,9 @@ onready var already_exists: Label = $VBoxContainer/AlreadyExistsLabel
 
 func _ready() -> void:
 	set_process_input(false)
+	get_ok().focus_mode = Control.FOCUS_NONE
+	get_cancel().focus_mode = Control.FOCUS_NONE
+	get_close_button().focus_mode = Control.FOCUS_NONE
 
 
 func _input(event: InputEvent) -> void:
