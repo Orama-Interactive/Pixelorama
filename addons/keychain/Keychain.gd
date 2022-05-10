@@ -46,9 +46,23 @@ var actions := {
 	"open_docs":
 	MenuInputAction.new("", "Help Menu", true, "HelpMenu", Global.HelpMenuId.ONLINE_DOCS),
 	"edit_mode": InputAction.new("Moveable Panels", "Window Menu"),
+	"zoom_in": InputAction.new("", "General"),
+	"zoom_out": InputAction.new("", "General"),
+	"pan": InputAction.new("", "General"),
+	"confirm": InputAction.new("", "General"),
+	"cancel": InputAction.new("", "General"),
+	"switch_colors": InputAction.new("", "Buttons"),
+	"go_to_first_frame": InputAction.new("", "Buttons"),
+	"go_to_last_frame": InputAction.new("", "Buttons"),
+	"go_to_previous_frame": InputAction.new("", "Buttons"),
+	"go_to_next_frame": InputAction.new("", "Buttons"),
+	"play_backwards": InputAction.new("", "Buttons"),
+	"play_forward": InputAction.new("", "Buttons"),
 }
 # Syntax: "Group Name": InputGroup.new("Parent Group Name")
 var groups := {
+	"General": InputGroup.new(),
+	"Buttons": InputGroup.new(),
 	"Tools": InputGroup.new(),
 	"Left": InputGroup.new("Tools"),
 	"Right": InputGroup.new("Tools"),
