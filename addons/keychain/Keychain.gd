@@ -61,7 +61,7 @@ var actions := {
 }
 # Syntax: "Group Name": InputGroup.new("Parent Group Name")
 var groups := {
-	"General": InputGroup.new(),
+	"General": InputGroup.new("", false),
 	"Buttons": InputGroup.new(),
 	"Tools": InputGroup.new(),
 	"Left": InputGroup.new("Tools"),
@@ -195,10 +195,12 @@ class MenuInputAction:
 
 class InputGroup:
 	var parent_group := ""
+	var folded := true
 	var tree_item: TreeItem
 
-	func _init(_parent_group := "") -> void:
+	func _init(_parent_group := "", _folded := true) -> void:
 		parent_group = _parent_group
+		folded = _folded
 
 
 func _init() -> void:

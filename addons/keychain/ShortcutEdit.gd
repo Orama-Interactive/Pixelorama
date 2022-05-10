@@ -187,6 +187,8 @@ func _create_group_tree_item(group: Keychain.InputGroup, group_name: String) -> 
 	group_root.set_text(0, group_name)
 	group_root.set_icon(0, folder_tex)
 	group.tree_item = group_root
+	if group.folded:
+		group_root.collapsed = true
 
 
 func get_action_name(action: String) -> String:
