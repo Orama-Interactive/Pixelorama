@@ -75,7 +75,7 @@ var groups := {
 	"Window Menu": InputGroup.new("Menu"),
 	"Help Menu": InputGroup.new("Menu"),
 }
-var ignore_actions := ["left_mouse", "right_mouse", "middle_mouse"]
+var ignore_actions := ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl", "alt"]
 var ignore_ui_actions := true
 var changeable_types := [true, true, true, false]
 var multiple_menu_accelerators := true
@@ -129,6 +129,7 @@ class InputAction:
 
 	func handle_input(_event: InputEvent, _action: String) -> bool:
 		return false
+
 
 # This class is useful for the accelerators of PopupMenu items
 # It's possible for PopupMenu items to have multiple shortcuts by using

@@ -95,7 +95,7 @@ var tools := {
 		"""Hold %s to snap the angle of the line
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
-		["Shift", "configurable_ctrl", "configurable_alt"]
+		["Shift", "Ctrl", "Alt"]
 	),
 	"RectangleTool":
 	Tool.new(
@@ -106,7 +106,7 @@ Hold %s to displace the shape's origin""",
 		"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
-		["configurable_shift", "configurable_ctrl", "configurable_alt"]
+		["Shift", "Ctrl", "Alt"]
 	),
 	"EllipseTool":
 	Tool.new(
@@ -117,7 +117,7 @@ Hold %s to displace the shape's origin""",
 		"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
-		["configurable_shift", "configurable_ctrl", "configurable_alt"]
+		["Shift", "Ctrl", "Alt"]
 	),
 }
 
@@ -155,7 +155,6 @@ class Tool:
 		scene = _scene
 		extra_hint = _extra_hint
 		extra_shortcuts = _extra_shortucts
-		extra_shortcuts_order = _extra_shortucts.duplicate()
 		icon = load("res://assets/graphics/tools/%s.png" % name.to_lower())
 		cursor_icon = load("res://assets/graphics/tools/cursors/%s.png" % name.to_lower())
 
@@ -183,22 +182,6 @@ class Tool:
 		if !extra_hint.empty():
 			hint += "\n\n" + extra_hint
 
-		# Some tools have shift,ctrl,alt "HARD CODED" in them using (InputEventWithModifiers)
-		# But Others only use the regular is_action_pressed() function
-		# their Shift, Ctrl, Alt are listed Below
-#		var code_shift = InputMap.get_action_list("shift")[0].get_scancode_with_modifiers()
-#		var code_ctrl = InputMap.get_action_list("ctrl")[0].get_scancode_with_modifiers()
-#		var code_alt = InputMap.get_action_list("alt")[0].get_scancode_with_modifiers()
-#		var configurable_shift: String = OS.get_scancode_string(code_shift)
-#		var configurable_ctrl: String = OS.get_scancode_string(code_ctrl)
-#		var configurable_alt: String = OS.get_scancode_string(code_alt)
-#		for shortcut_idx in extra_shortcuts.size():
-#			if extra_shortcuts_order[shortcut_idx] == "configurable_shift":
-#				extra_shortcuts[shortcut_idx] = configurable_shift
-#			if extra_shortcuts_order[shortcut_idx] == "configurable_ctrl":
-#				extra_shortcuts[shortcut_idx] = configurable_ctrl
-#			if extra_shortcuts_order[shortcut_idx] == "configurable_alt":
-#				extra_shortcuts[shortcut_idx] = configurable_alt
 		shortcuts.append_array(extra_shortcuts)
 
 		if shortcuts.empty():

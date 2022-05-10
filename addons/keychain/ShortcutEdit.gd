@@ -100,9 +100,7 @@ func _ready() -> void:
 		else:
 			i += 1
 
-	var shortcuts_preset: int = Keychain.config_file.get_value(
-		"shortcuts", "shortcuts_preset", 0
-	)
+	var shortcuts_preset: int = Keychain.config_file.get_value("shortcuts", "shortcuts_preset", 0)
 	presets_option_button.select(shortcuts_preset)
 	_on_PresetsOptionButton_item_selected(shortcuts_preset)
 
