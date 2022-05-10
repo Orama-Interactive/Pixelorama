@@ -66,20 +66,20 @@ func _set_shortcut(action: String, old_event: InputEvent, new_event: InputEvent)
 	if InputMap.action_has_event(action, new_event):  # If the current action already has that event
 		return false
 	if old_event:
-		BetterInput.action_erase_event(action, old_event)
+		Keychain.action_erase_event(action, old_event)
 
 	# Loop through other actions to see if the event exists there, to re-assign it
 	var matching_pair := _find_matching_event_in_map(action, new_event)
 
 	if matching_pair:
 		var group := ""
-		if action in BetterInput.actions:
-			group = BetterInput.actions[action].group
+		if action in Keychain.actions:
+			group = Keychain.actions[action].group
 
 		var action_to_replace: String = matching_pair[0]
 		var input_to_replace: InputEvent = matching_pair[1]
-		BetterInput.action_erase_event(action_to_replace, input_to_replace)
-		BetterInput.selected_preset.change_action(action_to_replace)
+		Keychain.action_erase_event(action_to_replace, input_to_replace)
+		Keychain.selected_preset.change_action(action_to_replace)
 		var tree_item: TreeItem = root.tree.get_root()
 		var prev_tree_item: TreeItem
 		while tree_item != null:  # Loop through Tree's TreeItems...
@@ -87,10 +87,10 @@ func _set_shortcut(action: String, old_event: InputEvent, new_event: InputEvent)
 			if metadata is InputEvent:
 				if input_to_replace.shortcut_match(metadata):
 					var map_action: String = tree_item.get_parent().get_metadata(0)
-					if map_action in BetterInput.actions:
+					if map_action in Keychain.actions:
 						# If it's local, check if it's the same group, otherwise ignore
-						if !BetterInput.actions[map_action].global:
-							if BetterInput.actions[map_action].group != group:
+						if !Keychain.actions[map_action].global:
+							if Keychain.actions[map_action].group != group:
 								tree_item = _get_next_tree_item(tree_item)
 								continue
 					tree_item.free()
@@ -98,8 +98,8 @@ func _set_shortcut(action: String, old_event: InputEvent, new_event: InputEvent)
 
 			tree_item = _get_next_tree_item(tree_item)
 
-	BetterInput.action_add_event(action, new_event)
-	BetterInput.selected_preset.change_action(action)
+	Keychain.action_add_event(action, new_event)
+	Keychain.selected_preset.change_action(action)
 	return true
 
 
@@ -119,20 +119,20 @@ func _get_next_tree_item(current: TreeItem) -> TreeItem:
 
 func _find_matching_event_in_map(action: String, event: InputEvent) -> Array:
 	var group := ""
-	if action in BetterInput.actions:
-		group = BetterInput.actions[action].group
+	if action in Keychain.actions:
+		group = Keychain.actions[action].group
 
 	for map_action in InputMap.get_actions():
-		if map_action in BetterInput.ignore_actions:
+		if map_action in Keychain.ignore_actions:
 			continue
-		if BetterInput.ignore_ui_actions and map_action.begins_with("ui_"):
+		if Keychain.ignore_ui_actions and map_action.begins_with("ui_"):
 			continue
 		for map_event in InputMap.get_action_list(map_action):
 			if event.shortcut_match(map_event):
-				if map_action in BetterInput.actions:
+				if map_action in Keychain.actions:
 					# If it's local, check if it's the same group, otherwise ignore
-					if !BetterInput.actions[map_action].global:
-						if BetterInput.actions[map_action].group != group:
+					if !Keychain.actions[map_action].global:
+						if Keychain.actions[map_action].group != group:
 							continue
 
 				return [map_action, map_event]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/edit.svg-1aa184cf649547c9a3763ed3c8dc7f4f.stex"
+path="res://.import/keyboard.svg-fac365b6f70899f1dfa71ce4b4761ac6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot_better_input/assets/edit.svg"
-dest_files=[ "res://.import/edit.svg-1aa184cf649547c9a3763ed3c8dc7f4f.stex" ]
+source_file="res://addons/keychain/assets/keyboard.svg"
+dest_files=[ "res://.import/keyboard.svg-fac365b6f70899f1dfa71ce4b4761ac6.stex" ]
 
 [params]
 

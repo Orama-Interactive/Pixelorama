@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shortcut.svg-63fa6b5d0459da6bd06aa3fe606978b9.stex"
+path="res://.import/mouse.svg-559695787f3bb55c16dc66bd6a9b9032.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot_better_input/assets/shortcut.svg"
-dest_files=[ "res://.import/shortcut.svg-63fa6b5d0459da6bd06aa3fe606978b9.stex" ]
+source_file="res://addons/keychain/assets/mouse.svg"
+dest_files=[ "res://.import/mouse.svg-559695787f3bb55c16dc66bd6a9b9032.stex" ]
 
 [params]
 

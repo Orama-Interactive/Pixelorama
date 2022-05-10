@@ -65,16 +65,16 @@ const JOY_AXIS_NAMES := [
 
 var currently_editing_tree_item: TreeItem
 # Textures taken from Godot https://github.com/godotengine/godot/tree/master/editor/icons
-var add_tex: Texture = preload("res://addons/godot_better_input/assets/add.svg")
-var edit_tex: Texture = preload("res://addons/godot_better_input/assets/edit.svg")
-var delete_tex: Texture = preload("res://addons/godot_better_input/assets/close.svg")
-var joy_axis_tex: Texture = preload("res://addons/godot_better_input/assets/joy_axis.svg")
-var joy_button_tex: Texture = preload("res://addons/godot_better_input/assets/joy_button.svg")
-var key_tex: Texture = preload("res://addons/godot_better_input/assets/keyboard.svg")
-var key_phys_tex: Texture = preload("res://addons/godot_better_input/assets/keyboard_physical.svg")
-var mouse_tex: Texture = preload("res://addons/godot_better_input/assets/mouse.svg")
-var shortcut_tex: Texture = preload("res://addons/godot_better_input/assets/shortcut.svg")
-var folder_tex: Texture = preload("res://addons/godot_better_input/assets/folder.svg")
+var add_tex: Texture = preload("assets/add.svg")
+var edit_tex: Texture = preload("assets/edit.svg")
+var delete_tex: Texture = preload("assets/close.svg")
+var joy_axis_tex: Texture = preload("assets/joy_axis.svg")
+var joy_button_tex: Texture = preload("assets/joy_button.svg")
+var key_tex: Texture = preload("assets/keyboard.svg")
+var key_phys_tex: Texture = preload("assets/keyboard_physical.svg")
+var mouse_tex: Texture = preload("assets/mouse.svg")
+var shortcut_tex: Texture = preload("assets/shortcut.svg")
+var folder_tex: Texture = preload("assets/folder.svg")
 
 onready var tree: Tree = $VBoxContainer/ShortcutTree
 onready var presets_option_button: OptionButton = find_node("PresetsOptionButton")
@@ -86,7 +86,7 @@ onready var joy_axis_shortcut_selector: ConfirmationDialog = $JoyAxisShortcutSel
 
 
 func _ready() -> void:
-	for preset in BetterInput.presets:
+	for preset in Keychain.presets:
 		preset.load_from_file()
 		presets_option_button.add_item(preset.name)
 
@@ -94,13 +94,13 @@ func _ready() -> void:
 
 	# Remove input types that are not changeable
 	var i := 0
-	for type in BetterInput.changeable_types:
+	for type in Keychain.changeable_types:
 		if !type:
 			shortcut_type_menu.remove_item(i)
 		else:
 			i += 1
 
-	var shortcuts_preset: int = BetterInput.config_file.get_value(
+	var shortcuts_preset: int = Keychain.config_file.get_value(
 		"shortcuts", "shortcuts_preset", 0
 	)
 	presets_option_button.select(shortcuts_preset)
@@ -108,27 +108,27 @@ func _ready() -> void:
 
 
 func _construct_tree() -> void:
-	var buttons_disabled := false if BetterInput.selected_preset.customizable else true
+	var buttons_disabled := false if Keychain.selected_preset.customizable else true
 	var tree_root: TreeItem = tree.create_item()
-	for group in BetterInput.groups:  # Create groups
-		var input_group: BetterInput.InputGroup = BetterInput.groups[group]
+	for group in Keychain.groups:  # Create groups
+		var input_group: Keychain.InputGroup = Keychain.groups[group]
 		_create_group_tree_item(input_group, group)
 
-	for action in BetterInput.selected_preset.bindings:  # Fill the tree with actions and their events
-		if action in BetterInput.ignore_actions:
+	for action in Keychain.selected_preset.bindings:  # Fill the tree with actions and their events
+		if action in Keychain.ignore_actions:
 			continue
-		if BetterInput.ignore_ui_actions and action.begins_with("ui_"):
+		if Keychain.ignore_ui_actions and action.begins_with("ui_"):
 			continue
 
 		var display_name := get_action_name(action)
 		var group_name := ""
-		if action in BetterInput.actions:
-			var input_action: BetterInput.InputAction = BetterInput.actions[action]
+		if action in Keychain.actions:
+			var input_action: Keychain.InputAction = Keychain.actions[action]
 			group_name = input_action.group
 
 		var tree_item: TreeItem
-		if group_name and group_name in BetterInput.groups:
-			var input_group: BetterInput.InputGroup = BetterInput.groups[group_name]
+		if group_name and group_name in Keychain.groups:
+			var input_group: Keychain.InputGroup = Keychain.groups[group_name]
 			var group_root: TreeItem = input_group.tree_item
 			tree_item = tree.create_item(group_root)
 
@@ -173,13 +173,13 @@ func _fill_selector_options() -> void:
 		i += 0.5
 
 
-func _create_group_tree_item(group: BetterInput.InputGroup, group_name: String) -> void:
+func _create_group_tree_item(group: Keychain.InputGroup, group_name: String) -> void:
 	if group.tree_item:
 		return
 
 	var group_root: TreeItem
 	if group.parent_group:
-		var parent_group: BetterInput.InputGroup = BetterInput.groups[group.parent_group]
+		var parent_group: Keychain.InputGroup = Keychain.groups[group.parent_group]
 		_create_group_tree_item(parent_group, group.parent_group)
 		group_root = tree.create_item(parent_group.tree_item)
 	else:
@@ -191,8 +191,8 @@ func _create_group_tree_item(group: BetterInput.InputGroup, group_name: String) 
 
 func get_action_name(action: String) -> String:
 	var display_name := ""
-	if action in BetterInput.actions:
-		display_name = BetterInput.actions[action].display_name
+	if action in Keychain.actions:
+		display_name = Keychain.actions[action].display_name
 
 	if display_name.empty():
 		display_name = _humanize_snake_case(action)
@@ -212,19 +212,19 @@ func add_event_tree_item(event: InputEvent, action_tree_item: TreeItem) -> void:
 	var event_class := event.get_class()
 	match event_class:
 		"InputEventKey":
-			if !BetterInput.changeable_types[0]:
+			if !Keychain.changeable_types[0]:
 				return
 		"InputEventMouseButton":
-			if !BetterInput.changeable_types[1]:
+			if !Keychain.changeable_types[1]:
 				return
 		"InputEventJoypadButton":
-			if !BetterInput.changeable_types[2]:
+			if !Keychain.changeable_types[2]:
 				return
 		"InputEventJoypadMotion":
-			if !BetterInput.changeable_types[3]:
+			if !Keychain.changeable_types[3]:
 				return
 
-	var buttons_disabled := false if BetterInput.selected_preset.customizable else true
+	var buttons_disabled := false if Keychain.selected_preset.customizable else true
 	var event_tree_item: TreeItem = tree.create_item(action_tree_item)
 	event_tree_item.set_text(0, event_to_str(event))
 	event_tree_item.set_metadata(0, event)
@@ -285,8 +285,8 @@ func _on_ShortcutTree_button_pressed(item: TreeItem, _column: int, id: int) -> v
 			rect.size = Vector2(110, 23 * shortcut_type_menu.get_item_count())
 			shortcut_type_menu.popup(rect)
 		elif id == 1:  # Delete
-			BetterInput.action_erase_events(action)
-			BetterInput.selected_preset.change_action(action)
+			Keychain.action_erase_events(action)
+			Keychain.selected_preset.change_action(action)
 			var child := item.get_children()
 			while child != null:
 				child.free()
@@ -306,8 +306,8 @@ func _on_ShortcutTree_button_pressed(item: TreeItem, _column: int, id: int) -> v
 		elif id == 1:  # Delete
 			if not parent_action is String:
 				return
-			BetterInput.action_erase_event(parent_action, action)
-			BetterInput.selected_preset.change_action(parent_action)
+			Keychain.action_erase_event(parent_action, action)
+			Keychain.selected_preset.change_action(parent_action)
 			item.free()
 
 
@@ -329,16 +329,16 @@ func _on_ShortcutTypeMenu_id_pressed(id: int) -> void:
 
 
 func _on_PresetsOptionButton_item_selected(index: int) -> void:
-	BetterInput.selected_preset = BetterInput.presets[index]
-	for action in BetterInput.selected_preset.bindings:
-		BetterInput.action_erase_events(action)
-		for event in BetterInput.selected_preset.bindings[action]:
-			BetterInput.action_add_event(action, event)
+	Keychain.selected_preset = Keychain.presets[index]
+	for action in Keychain.selected_preset.bindings:
+		Keychain.action_erase_events(action)
+		for event in Keychain.selected_preset.bindings[action]:
+			Keychain.action_add_event(action, event)
 
 	# Re-construct the tree
-	for group in BetterInput.groups:
-		BetterInput.groups[group].tree_item = null
+	for group in Keychain.groups:
+		Keychain.groups[group].tree_item = null
 	tree.clear()
 	_construct_tree()
-	BetterInput.config_file.set_value("shortcuts", "shortcuts_preset", index)
-	BetterInput.config_file.save(BetterInput.config_path)
+	Keychain.config_file.set_value("shortcuts", "shortcuts_preset", index)
+	Keychain.config_file.save(Keychain.config_path)

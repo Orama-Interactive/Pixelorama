@@ -168,7 +168,7 @@ Tools="*res://src/Autoload/Tools.gd"
 Html5FileExchange="*res://src/Autoload/HTML5FileExchange.gd"
 Export="*res://src/Autoload/Export.gd"
 Palettes="*res://src/Autoload/Palettes.gd"
-BetterInput="*res://addons/godot_better_input/BetterInput.gd"
+Keychain="*res://addons/keychain/Keychain.gd"
 
 [debug]
 
@@ -188,7 +188,7 @@ window/per_pixel_transparency/enabled.Android=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dockable_container/plugin.cfg", "res://addons/godot_better_input/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dockable_container/plugin.cfg", "res://addons/keychain/plugin.cfg" )
 
 [gui]
 

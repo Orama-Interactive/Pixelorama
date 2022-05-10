@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/folder.svg-2c8a60ddb2091a8e99b0e2d5526a7cd3.stex"
+path="res://.import/joy_button.svg-df5663c6f296cab556e81b9c770699d0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot_better_input/assets/folder.svg"
-dest_files=[ "res://.import/folder.svg-2c8a60ddb2091a8e99b0e2d5526a7cd3.stex" ]
+source_file="res://addons/keychain/assets/joy_button.svg"
+dest_files=[ "res://.import/joy_button.svg-df5663c6f296cab556e81b9c770699d0.stex" ]
 
 [params]
 

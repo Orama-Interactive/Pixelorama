@@ -3,6 +3,8 @@ extends Node
 # Change these settings
 var presets := [Preset.new("Default", false), Preset.new("Custom")]
 var selected_preset: Preset = presets[0]
+# Syntax: "action_name": InputAction.new("Action Display Name", "Group", true)
+# Note that "action_name" must already exist in the Project's Input Map.
 var actions := {
 	"new_file": MenuInputAction.new("", "File Menu", true, "FileMenu", Global.FileMenuId.NEW),
 	"open_file": MenuInputAction.new("", "File Menu", true, "FileMenu", Global.FileMenuId.OPEN),
@@ -45,6 +47,7 @@ var actions := {
 	MenuInputAction.new("", "Help Menu", true, "HelpMenu", Global.HelpMenuId.ONLINE_DOCS),
 	"edit_mode": InputAction.new("Moveable Panels", "Window Menu"),
 }
+# Syntax: "Group Name": InputGroup.new("Parent Group Name")
 var groups := {
 	"Tools": InputGroup.new(),
 	"Left": InputGroup.new("Tools"),
@@ -81,20 +84,20 @@ class Preset:
 			bindings[action] = InputMap.get_action_list(action)
 
 	func load_from_file() -> void:
-		if !BetterInput.config_file:
+		if !Keychain.config_file:
 			return
 		if !customizable:
 			return
 		for action in bindings:
-			var action_list = BetterInput.config_file.get_value(config_section, action, [null])
+			var action_list = Keychain.config_file.get_value(config_section, action, [null])
 			if action_list != [null]:
 				bindings[action] = action_list
 
 	func change_action(action: String) -> void:
 		bindings[action] = InputMap.get_action_list(action)
-		if BetterInput.config_file and customizable:
-			BetterInput.config_file.set_value(config_section, action, bindings[action])
-			BetterInput.config_file.save(BetterInput.config_path)
+		if Keychain.config_file and customizable:
+			Keychain.config_file.set_value(config_section, action, bindings[action])
+			Keychain.config_file.save(Keychain.config_path)
 
 
 class InputAction:
@@ -113,7 +116,12 @@ class InputAction:
 	func handle_input(_event: InputEvent, _action: String) -> bool:
 		return false
 
-
+# This class is useful for the accelerators of PopupMenu items
+# It's possible for PopupMenu items to have multiple shortcuts by using
+# set_item_shortcut(), but we have no control over the accelerator text that appears.
+# Thus, we are stuck with using accelerators instead of shortcuts.
+# If Godot ever receives the ability to change the accelerator text of the items,
+# we could in theory remove this class.
 class MenuInputAction:
 	extends InputAction
 	var node_path := ""

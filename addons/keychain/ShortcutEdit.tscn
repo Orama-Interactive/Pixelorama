@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://addons/godot_better_input/ShortcutEdit.gd" type="Script" id=1]
-[ext_resource path="res://addons/godot_better_input/assets/joy_axis.svg" type="Texture" id=2]
-[ext_resource path="res://addons/godot_better_input/assets/joy_button.svg" type="Texture" id=3]
-[ext_resource path="res://addons/godot_better_input/assets/keyboard.svg" type="Texture" id=4]
-[ext_resource path="res://addons/godot_better_input/assets/mouse.svg" type="Texture" id=5]
-[ext_resource path="res://addons/godot_better_input/ShortcutSelectorDialog.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/keychain/ShortcutEdit.gd" type="Script" id=1]
+[ext_resource path="res://addons/keychain/assets/joy_axis.svg" type="Texture" id=2]
+[ext_resource path="res://addons/keychain/assets/keyboard.svg" type="Texture" id=3]
+[ext_resource path="res://addons/keychain/assets/joy_button.svg" type="Texture" id=4]
+[ext_resource path="res://addons/keychain/assets/mouse.svg" type="Texture" id=5]
+[ext_resource path="res://addons/keychain/ShortcutSelectorDialog.tscn" type="PackedScene" id=6]
 
 [node name="ShortcutEdit" type="VBoxContainer"]
 anchor_right = 1.0
@@ -45,7 +45,7 @@ hide_root = true
 [node name="ShortcutTypeMenu" type="PopupMenu" parent="."]
 margin_right = 20.0
 margin_bottom = 20.0
-items = [ "Key", ExtResource( 4 ), 0, false, false, 0, 0, null, "", false, "Mouse Button", ExtResource( 5 ), 0, false, false, 1, 0, null, "", false, "Joy Button", ExtResource( 3 ), 0, false, false, 2, 0, null, "", false, "Joy Axis", ExtResource( 2 ), 0, false, false, 3, 0, null, "", false ]
+items = [ "Key", ExtResource( 3 ), 0, false, false, 0, 0, null, "", false, "Mouse Button", ExtResource( 5 ), 0, false, false, 1, 0, null, "", false, "Joy Button", ExtResource( 4 ), 0, false, false, 2, 0, null, "", false, "Joy Axis", ExtResource( 2 ), 0, false, false, 3, 0, null, "", false ]
 
 [node name="KeyboardShortcutSelectorDialog" parent="." instance=ExtResource( 6 )]
 
