@@ -279,8 +279,9 @@ func _on_ShortcutTree_button_pressed(item: TreeItem, _column: int, id: int) -> v
 	if action is String:
 		if id == 0:  # Add
 			var rect: Rect2 = tree.get_item_area_rect(item, 0)
-			rect.position.x = rect.end.x
+			rect.position.x = rect.end.x - 42
 			rect.position.y += 42 - tree.get_scroll().y
+			rect.position += rect_global_position
 			rect.size = Vector2(110, 23 * shortcut_type_menu.get_item_count())
 			shortcut_type_menu.popup(rect)
 		elif id == 1:  # Delete
