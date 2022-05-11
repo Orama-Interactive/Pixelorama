@@ -63,16 +63,12 @@ __meta__ = {
 [node name="CreateNewImage" parent="Dialogs" instance=ExtResource( 28 )]
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource( 12 )]
-current_dir = "/home/emmanouil/Documents/Orama/Pixelorama"
-current_path = "/home/emmanouil/Documents/Orama/Pixelorama/"
 
 [node name="SaveSprite" parent="Dialogs" instance=ExtResource( 11 )]
 margin_left = 108.0
 margin_top = 40.0
 margin_right = 623.0
 margin_bottom = 388.0
-current_dir = "/home/emmanouil/Documents/Orama/Pixelorama"
-current_path = "/home/emmanouil/Documents/Orama/Pixelorama/untitled"
 
 [node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource( 8 )]
 
