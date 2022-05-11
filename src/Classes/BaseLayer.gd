@@ -11,6 +11,37 @@ var project
 var index: int
 
 # TODO: Search for layer visbility/locked checks that should be changed to the hierarchy ones:
+# Returns true if this is a direct or indirect parent of layer
+func is_a_parent_of(layer: BaseLayer) -> bool:
+	if layer.parent == self:
+		return true
+	elif is_instance_valid(layer.parent):
+		return is_a_parent_of(layer.parent)
+	return false
+
+# TODO: Consider going backwards in get_children functions, to allow breaking
+func get_children_direct() -> Array:
+	var children := []
+	for i in range(index):
+		if project.layers[i].parent == self:
+			children.append(project.layers[i])
+	return children
+
+
+func get_children_recursive() -> Array:
+	var children := []
+	for i in range(index):
+		if is_a_parent_of(project.layers[i]):
+			children.append(project.layers[i])
+	return children
+
+
+func has_children() -> bool:
+	if index == 0:
+		return false
+	return project.layers[index - 1].parent == self
+
+
 func is_visible_in_hierarchy() -> bool:
 	if is_instance_valid(parent) and visible:
 		return parent.is_visible_in_hierarchy()

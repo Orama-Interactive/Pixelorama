@@ -5,7 +5,17 @@ extends Reference
 
 var opacity: float
 
+
+# Functions to override:
+
 # TODO: Should this be the case?
 # Each Cel type should have a get_image function, which will either return
 # its image data for PixelCels, or return a render of that cel. It's meant
 # for read-only usage of image data from any type of cel
+
+func save_image_data_to_pxo(_file: File) -> void:
+	return
+
+
+func load_image_data_from_pxo(_file: File, _project_size: Vector2) -> void:
+	return

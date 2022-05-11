@@ -378,6 +378,7 @@ func deserialize(dict: Dictionary) -> void:
 		for frame in dict.frames:
 			var cels := []
 			for cel in frame.cels:
+				# TODO: Give the correct cel type
 				cels.append(PixelCel.new(Image.new(), cel.opacity))
 			var duration := 1.0
 			if frame.has("duration"):

@@ -109,11 +109,7 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 		new_project.deserialize(dict.result)
 		for frame in new_project.frames:
 			for cel in frame.cels:
-				var buffer := file.get_buffer(new_project.size.x * new_project.size.y * 4)
-				cel.image.create_from_data(
-					new_project.size.x, new_project.size.y, false, Image.FORMAT_RGBA8, buffer
-				)
-				cel.image = cel.image  # Just to call image_changed
+				cel.load_image_data_from_pxo(file, new_project.size)
 
 		if dict.result.has("brushes"):
 			for brush in dict.result.brushes:
@@ -349,7 +345,7 @@ func save_pxo_file(
 	file.store_line(to_save)
 	for frame in project.frames:
 		for cel in frame.cels:
-			file.store_buffer(cel.get_image().get_data())
+			cel.save_image_data_to_pxo(file)
 
 	for brush in project.brushes:
 		file.store_buffer(brush.get_data())
