@@ -39,6 +39,7 @@ func _ready() -> void:
 	# Visualize how deep into the hierarchy the layer is
 	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
 	hierarchy_spacer.rect_min_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
+
 	if Global.control.theme.get_color("font_color", "Button").v > 0.5: # Light text is dark theme
 		self_modulate.v += hierarchy_depth * 0.4
 	else: # Dark text should be light theme
@@ -51,6 +52,14 @@ func _ready() -> void:
 			visibility_button.modulate.a = 0.33
 		if Global.current_project.layers[layer].parent.is_locked_in_hierarchy():
 			lock_button.modulate.a = 0.33
+
+
+func _draw():
+	if hierarchy_spacer.rect_size.x > 0.1:
+		var color := Color(1, 1, 1, 0.33)
+		color.v = round(Global.control.theme.get_color("font_color", "Button").v)
+		var x =  hierarchy_spacer.rect_global_position.x - rect_global_position.x + hierarchy_spacer.rect_size.x
+		draw_line(Vector2(x, 0), Vector2(x, rect_size.y), color)
 
 
 func _input(event: InputEvent) -> void:

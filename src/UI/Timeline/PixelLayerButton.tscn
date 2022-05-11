@@ -129,6 +129,7 @@ margin_left = 126.0
 margin_right = 230.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 104, 0 )
+rect_pivot_offset = Vector2( -187, -9 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 alignment = 1
