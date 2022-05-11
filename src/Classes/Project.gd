@@ -171,6 +171,7 @@ func change_project() -> void:
 			var cel_button = pixel_cel_button_node.instance()
 			cel_button.frame = j
 			cel_button.layer = i
+			# TODO: Mak sure this works properly with groups
 			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
 			if j == current_frame and i == current_layer:
 				cel_button.pressed = true
@@ -373,13 +374,18 @@ func deserialize(dict: Dictionary) -> void:
 		selection_bitmap = resize_bitmap(selection_bitmap, size)
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
-	if dict.has("frames"):
+	if dict.has("frames") and dict.has("layers"):
 		var frame_i := 0
 		for frame in dict.frames:
 			var cels := []
+			var cel_i := 0
 			for cel in frame.cels:
-				# TODO: Give the correct cel type
-				cels.append(PixelCel.new(Image.new(), cel.opacity))
+				match int(dict.layers[cel_i].get("type", Global.LayerTypes.PIXEL)):
+					Global.LayerTypes.PIXEL:
+						cels.append(PixelCel.new(Image.new(), cel.opacity))
+					Global.LayerTypes.GROUP:
+						cels.append(GroupCel.new(cel.opacity))
+				cel_i += 1
 			var duration := 1.0
 			if frame.has("duration"):
 				duration = frame.duration
@@ -389,19 +395,18 @@ func deserialize(dict: Dictionary) -> void:
 			frames.append(Frame.new(cels, duration))
 			frame_i += 1
 
-		if dict.has("layers"):
-			for saved_layer in dict.layers:
-				match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
-					Global.LayerTypes.PIXEL:
-						layers.append(PixelLayer.new())
-					Global.LayerTypes.GROUP:
-						layers.append(GroupLayer.new())
-			# Parent references to other layers are created when deserializing
-			# a layer, so loop again after creating them.
-			for layer_i in range(dict.layers.size()):
-				layers[layer_i].project = self
-				layers[layer_i].index = layer_i
-				layers[layer_i].deserialize(dict.layers[layer_i])
+		for saved_layer in dict.layers:
+			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
+				Global.LayerTypes.PIXEL:
+					layers.append(PixelLayer.new())
+				Global.LayerTypes.GROUP:
+					layers.append(GroupLayer.new())
+		# Parent references to other layers are created when deserializing
+		# a layer, so loop again after creating them:
+		for layer_i in range(dict.layers.size()):
+			layers[layer_i].project = self
+			layers[layer_i].index = layer_i
+			layers[layer_i].deserialize(dict.layers[layer_i])
 	if dict.has("tags"):
 		for tag in dict.tags:
 			animation_tags.append(AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to))
