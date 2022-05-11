@@ -152,6 +152,8 @@ func _on_ShortcutSelectorDialog_about_to_show() -> void:
 	else:
 		if !listened_input:
 			_on_OptionButton_item_selected(0)
+		else:
+			_show_assigned_state(listened_input)
 
 
 func _on_ShortcutSelectorDialog_popup_hide() -> void:
