@@ -7,12 +7,10 @@ var code_table := {}
 var entries_counter := 0
 
 
-func log2(value: float) -> float:
-	return log(value) / log(2.0)
-
-
-func get_bits_number_for(value: int) -> int:
-	return 1 if value == 0 else int(ceil(log2(value + 1)))
+func get_bit_length(value: int):
+	# bitwise or on value does ensure that the function works with value 0
+	# long number at the end is log(2.0)
+	return ceil((log(value | 0x1 + 1) / 0.6931471805599453))
 
 
 func initialize_color_code_table(colors: PoolByteArray) -> void:
@@ -24,7 +22,7 @@ func initialize_color_code_table(colors: PoolByteArray) -> void:
 		entries_counter += 1
 	# move counter to the first available compression code index
 	var last_color_index: int = colors.size() - 1
-	var clear_code_index: int = pow(2, get_bits_number_for(last_color_index))
+	var clear_code_index: int = pow(2, get_bit_length(last_color_index))
 	entries_counter = clear_code_index + 2
 
 
@@ -42,8 +40,8 @@ func compress_lzw(index_stream: PoolByteArray, colors: PoolByteArray) -> Array:
 	# Number 15 is in binary 0b1111, so we'll need 4 bits to write all
 	# colors down.
 	var last_color_index: int = colors.size() - 1
-	var clear_code_index: int = pow(2, get_bits_number_for(last_color_index))
-	var current_code_size: int = get_bits_number_for(clear_code_index)
+	var clear_code_index: int = pow(2, get_bit_length(last_color_index))
+	var current_code_size: int = get_bit_length(clear_code_index)
 	var binary_code_stream = lsbbitpacker.LSBLZWBitPacker.new()
 
 	# initialize with Clear Code
@@ -82,12 +80,12 @@ func compress_lzw(index_stream: PoolByteArray, colors: PoolByteArray) -> Array:
 				initialize_color_code_table(colors)
 				# get_bits_number_for(clear_code_index) is the same as
 				# LZW code size + 1
-				current_code_size = get_bits_number_for(clear_code_index)
+				current_code_size = get_bit_length(clear_code_index)
 
 			# Detect when you have to save new codes in bigger bits boxes
 			# change current code size when it happens because we want to save
 			# flexible code sized codes
-			var new_code_size_candidate: int = get_bits_number_for(entries_counter - 1)
+			var new_code_size_candidate: int = get_bit_length(entries_counter - 1)
 			if new_code_size_candidate > current_code_size:
 				current_code_size = new_code_size_candidate
 
@@ -99,7 +97,7 @@ func compress_lzw(index_stream: PoolByteArray, colors: PoolByteArray) -> Array:
 	# output end with End Of Information Code
 	binary_code_stream.write_bits(clear_code_index + 1, current_code_size)
 
-	var min_code_size: int = get_bits_number_for(clear_code_index) - 1
+	var min_code_size: int = get_bit_length(clear_code_index) - 1
 
 	return [binary_code_stream.pack(), min_code_size]
 
