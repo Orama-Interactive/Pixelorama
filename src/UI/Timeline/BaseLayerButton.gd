@@ -18,6 +18,7 @@ func _ready() -> void:
 	var layer_buttons = find_node("LayerButtons")
 	for child in layer_buttons.get_children():
 		var texture = child.get_child(0)
+		# TODO: Check if this can be safely removed:
 #		var last_backslash = texture.texture.resource_path.get_base_dir().find_last("/")
 #		var button_category = texture.texture.resource_path.get_base_dir().right(last_backslash + 1)
 #		var normal_file_name = texture.texture.resource_path.get_file()
@@ -39,7 +40,7 @@ func _ready() -> void:
 	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
 	hierarchy_spacer.rect_min_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 	if Global.control.theme.get_color("font_color", "Button").v > 0.5: # Light text is dark theme
-		self_modulate.v += hierarchy_depth * 0.2
+		self_modulate.v += hierarchy_depth * 0.4
 	else: # Dark text should be light theme
 		self_modulate.v -= hierarchy_depth * 0.075
 
@@ -145,23 +146,21 @@ func can_drop_data(_pos, data) -> bool:
 			var depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
 			if Input.is_key_pressed(KEY_CONTROL): # Swap layers
 				region = get_global_rect()
+				# TODO: Check if depth is correct
 			else: # Shift layers
-				if Global.current_project.layers[layer].accepts_child(data[1]):
-					# Top, center, or bottom region?
-					if _get_region_rect(0, 0.25).has_point(get_global_mouse_position()):
-						# Drawn regions are shifted up/down a bit from actual for visual clearity
-						region = _get_region_rect(-0.1, 0.25)
-					elif _get_region_rect(0.25, 0.5).has_point(get_global_mouse_position()):
-						region = _get_region_rect(0.15, 0.7)
+				# If accepted as a child, is it in the center region?
+				if (Global.current_project.layers[layer].accepts_child(data[1])
+							and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
+						):
+						# Drawn regions are adusted a bit from actual to clearify drop position
+						region = _get_region_rect(0.15, 0.85)
 						depth += 1
-					else:
-						region = _get_region_rect(0.85, 0.25)
 				else:
 					# Top or bottom region?
 					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
-						region =  _get_region_rect(-0.1, 0.25)
+						region =  _get_region_rect(-0.1, 0.15)
 					else:
-						region =  _get_region_rect(0.85, 0.25)
+						region =  _get_region_rect(0.85, 1.1)
 			# Shift drawn region to the right a bit for hierarchy depth visualization:
 			region.position.x += depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 			region.size.x -= depth * HIERARCHY_DEPTH_PIXEL_SHIFT
@@ -174,27 +173,89 @@ func can_drop_data(_pos, data) -> bool:
 
 
 func drop_data(_pos, data) -> void:
-	var new_layer = data[1]
-	if layer == new_layer:
+	var dropped_layer: int = data[1]
+	# TODO: Invalid cases can be prevented in can_drop_data only
+	if layer == dropped_layer:
 		return
 
-	var new_layers: Array = Global.current_project.layers.duplicate()
-	var temp = new_layers[layer]
-	new_layers[layer] = new_layers[new_layer]
-	new_layers[new_layer] = temp
-
 	Global.current_project.undo_redo.create_action("Change Layer Order")
-	for f in Global.current_project.frames:
-		var new_cels: Array = f.cels.duplicate()
-		var temp_canvas = new_cels[layer]
-		new_cels[layer] = new_cels[new_layer]
-		new_cels[new_layer] = temp_canvas
-		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+	var new_layers: Array = Global.current_project.layers.duplicate()
+	var temp: BaseLayer = new_layers[layer]
+	if Input.is_key_pressed(KEY_CONTROL): # Swap layers # TODO Need to check when swapping is allowed
+		new_layers[layer] = new_layers[dropped_layer]
+		new_layers[dropped_layer] = temp
+
+		# TODO: Make sure to swap parents too
+
+		for f in Global.current_project.frames:
+			var new_cels: Array = f.cels.duplicate()
+			var temp_canvas = new_cels[layer]
+			new_cels[layer] = new_cels[dropped_layer]
+			new_cels[dropped_layer] = temp_canvas
+			Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
+			Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+	# TODO: Having "SourceLayers/OldLayers (that you don't change) and new_layers would make this less confusing
+	else:
+		# layers_to_shift should be in order of the layer indices, starting from the lowest
+		var layers_to_shift: Array = new_layers[dropped_layer].get_children_recursive()
+		layers_to_shift.append(new_layers[dropped_layer])
+
+		var to_index: int # the index where the LOWEST shifted layer should end up
+		var to_parent: BaseLayer
+
+		# If accepted as a child, is it in the center region?
+		if (new_layers[layer].accepts_child(data[1])
+				and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
+			):
+			to_index = layer
+			to_parent = new_layers[layer]
+		else:
+			# Top or bottom region?
+			if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
+				to_index = layer + 1 # TODO Is this right?
+				to_parent = new_layers[layer].parent
+			else:
+				# Place under the layer, if it has children, place after its lowest child
+				if new_layers[layer].has_children():
+					to_index = new_layers[layer].get_children_recursive()[0].index
+				else:
+					to_index = layer # TODO Is this right?
+				to_parent = new_layers[layer].parent
+
+		# Make sure to set parent BEFORE adjusting new_layers
+		Global.current_project.undo_redo.add_do_property(
+			new_layers[dropped_layer], "parent", to_parent
+		)
+		Global.current_project.undo_redo.add_undo_property(
+			new_layers[dropped_layer], "parent", new_layers[dropped_layer].parent
+		)
+
+		if dropped_layer < layer:
+			to_index -= layers_to_shift.size()
+		print("to_index = ", to_index)
+
+		var x := layers_to_shift.size() - 1
+		while x >= 0:
+			new_layers.remove(layers_to_shift[x].index)
+			x -= 1
+		for i in range(layers_to_shift.size()):
+			new_layers.insert(to_index + i, layers_to_shift[i])
+
+		for f in Global.current_project.frames:
+			var new_cels: Array = f.cels.duplicate()
+			x = layers_to_shift.size() - 1
+			while x >= 0:
+				new_cels.remove(layers_to_shift[x].index)
+				x -= 1
+			for i in range(layers_to_shift.size()):
+				new_cels.insert(to_index + i, f.cels[layers_to_shift[i].index])
+
+			Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
+			Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
 
 	if Global.current_project.current_layer == layer:
 		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_layer", new_layer
+			Global.current_project, "current_layer", dropped_layer
 		)
 		Global.current_project.undo_redo.add_undo_property(
 			Global.current_project, "current_layer", Global.current_project.current_layer
@@ -209,8 +270,8 @@ func drop_data(_pos, data) -> void:
 	Global.current_project.undo_redo.commit_action()
 
 
-func _get_region_rect(y_offset: float, y_size: float) -> Rect2:
+func _get_region_rect(y_begin: float, y_end: float) -> Rect2:
 	var rect := get_global_rect()
-	rect.position.y += rect.size.y * y_offset
-	rect.size.y *= y_size
+	rect.position.y += rect.size.y * y_begin
+	rect.size.y *= y_end - y_begin
 	return rect
