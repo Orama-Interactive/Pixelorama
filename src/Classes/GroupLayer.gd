@@ -32,5 +32,5 @@ func get_default_name(number: int) -> String:
 	return tr("Group") + " %s" % number
 
 
-func accepts_child(layer: BaseLayer) -> bool:
+func accepts_child(_layer: BaseLayer) -> bool:
 	return true
