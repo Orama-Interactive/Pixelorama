@@ -7,15 +7,22 @@ var listened_input: InputEvent
 
 onready var root: Node = get_parent()
 onready var input_type_l: Label = $VBoxContainer/InputTypeLabel
-onready var entered_shortcut: Label = $VBoxContainer/EnteredShortcutLabel
+onready var entered_shortcut: LineEdit = $VBoxContainer/EnteredShortcut
 onready var option_button: OptionButton = $VBoxContainer/OptionButton
 onready var already_exists: Label = $VBoxContainer/AlreadyExistsLabel
 
 
 func _ready() -> void:
 	set_process_input(false)
-	get_ok().focus_mode = Control.FOCUS_NONE
-	get_cancel().focus_mode = Control.FOCUS_NONE
+	if input_type == InputTypes.KEYBOARD:
+		get_ok().focus_neighbour_top = entered_shortcut.get_path()
+		get_cancel().focus_neighbour_top = entered_shortcut.get_path()
+		entered_shortcut.focus_neighbour_bottom = get_ok().get_path()
+	else:
+		get_ok().focus_neighbour_top = option_button.get_path()
+		get_cancel().focus_neighbour_top = option_button.get_path()
+		option_button.focus_neighbour_bottom = get_ok().get_path()
+
 	get_close_button().focus_mode = Control.FOCUS_NONE
 
 
@@ -148,7 +155,8 @@ func _on_ShortcutSelectorDialog_about_to_show() -> void:
 		listened_input = null
 		already_exists.text = ""
 		entered_shortcut.text = ""
-		set_process_input(true)
+		yield(get_tree(), "idle_frame")
+		entered_shortcut.grab_focus()
 	else:
 		if !listened_input:
 			_on_OptionButton_item_selected(0)
@@ -172,3 +180,11 @@ func _on_OptionButton_item_selected(index: int) -> void:
 		listened_input.axis = index / 2
 		listened_input.axis_value = -1.0 if index % 2 == 0 else 1.0
 	_show_assigned_state(listened_input)
+
+
+func _on_EnteredShortcut_focus_entered() -> void:
+	set_process_input(true)
+
+
+func _on_EnteredShortcut_focus_exited() -> void:
+	set_process_input(false)
