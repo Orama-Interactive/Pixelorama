@@ -178,6 +178,10 @@ func change_project() -> void:
 
 			layer_cel_container.add_child(cel_button)
 
+		if (is_instance_valid(layers[i].parent)
+				and not layers[i].parent.is_expanded_in_hierarchy()):
+			layer_cel_container.visible = false
+
 	for j in range(frames.size()):  # Create frame ID labels
 		var button: Button = frame_button_node.instance()
 		button.frame = j
@@ -475,6 +479,9 @@ func _frames_changed(value: Array) -> void:
 			elif layers[i] is GroupLayer:
 				# TODO: Make GroupLayers work here
 				pass
+		if (is_instance_valid(layers[i].parent)
+				and not layers[i].parent.is_expanded_in_hierarchy()):
+			layer_cel_container.visible = false
 
 	for j in range(frames.size()):
 		var button: Button = frame_button_node.instance()
@@ -529,6 +536,9 @@ func _layers_changed(value: Array) -> void:
 			cel_button.frame = j
 			cel_button.layer = i
 			layer_cel_container.add_child(cel_button)
+		if (is_instance_valid(layers[i].parent)
+				and not layers[i].parent.is_expanded_in_hierarchy()):
+			layer_cel_container.visible = false
 
 	var layer_button = Global.layers_container.get_child(
 		Global.layers_container.get_child_count() - 1 - current_layer
