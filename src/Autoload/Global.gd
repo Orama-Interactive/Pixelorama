@@ -202,6 +202,91 @@ onready var current_version: String = ProjectSettings.get_setting("application/c
 
 
 func _ready() -> void:
+	Keychain.config_file = config_cache
+	Keychain.actions = {
+		"new_file": Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.NEW),
+		"open_file":
+		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.OPEN),
+		"save_file":
+		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.SAVE),
+		"save_file_as":
+		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.SAVE_AS),
+		"export_file":
+		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.EXPORT),
+		"export_file_as":
+		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.EXPORT_AS),
+		"quit": Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.QUIT),
+		"redo":
+		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.REDO, true),
+		"undo":
+		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.UNDO, true),
+		"cut": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.CUT),
+		"copy": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.COPY),
+		"paste": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.PASTE),
+		"delete":
+		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.DELETE),
+		"new_brush":
+		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.NEW_BRUSH),
+		"mirror_view":
+		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenuId.MIRROR_VIEW),
+		"show_grid":
+		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenuId.SHOW_GRID),
+		"show_pixel_grid":
+		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenuId.SHOW_PIXEL_GRID),
+		"show_guides":
+		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenuId.SHOW_GUIDES),
+		"show_rulers":
+		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenuId.SHOW_RULERS),
+		"zen_mode":
+		Keychain.MenuInputAction.new("", "Window Menu", true, "WindowMenu", WindowMenuId.ZEN_MODE),
+		"toggle_fullscreen":
+		Keychain.MenuInputAction.new(
+			"", "Window Menu", true, "WindowMenu", WindowMenuId.FULLSCREEN_MODE
+		),
+		"clear_selection":
+		Keychain.MenuInputAction.new(
+			"", "Select Menu", true, "SelectMenu", SelectMenuId.CLEAR_SELECTION
+		),
+		"select_all":
+		Keychain.MenuInputAction.new(
+			"", "Select Menu", true, "SelectMenu", SelectMenuId.SELECT_ALL
+		),
+		"invert_selection":
+		Keychain.MenuInputAction.new("", "Select Menu", true, "SelectMenu", SelectMenuId.INVERT),
+		"open_docs":
+		Keychain.MenuInputAction.new("", "Help Menu", true, "HelpMenu", HelpMenuId.ONLINE_DOCS),
+		"edit_mode": Keychain.InputAction.new("Moveable Panels", "Window Menu"),
+		"zoom_in": Keychain.InputAction.new("", "General"),
+		"zoom_out": Keychain.InputAction.new("", "General"),
+		"pan": Keychain.InputAction.new("", "General"),
+		"confirm": Keychain.InputAction.new("", "General"),
+		"cancel": Keychain.InputAction.new("", "General"),
+		"switch_colors": Keychain.InputAction.new("", "Buttons"),
+		"go_to_first_frame": Keychain.InputAction.new("", "Buttons"),
+		"go_to_last_frame": Keychain.InputAction.new("", "Buttons"),
+		"go_to_previous_frame": Keychain.InputAction.new("", "Buttons"),
+		"go_to_next_frame": Keychain.InputAction.new("", "Buttons"),
+		"play_backwards": Keychain.InputAction.new("", "Buttons"),
+		"play_forward": Keychain.InputAction.new("", "Buttons"),
+	}
+
+	Keychain.groups = {
+		"General": Keychain.InputGroup.new("", false),
+		"Buttons": Keychain.InputGroup.new(),
+		"Tools": Keychain.InputGroup.new(),
+		"Left": Keychain.InputGroup.new("Tools"),
+		"Right": Keychain.InputGroup.new("Tools"),
+		"Menu": Keychain.InputGroup.new(),
+		"File Menu": Keychain.InputGroup.new("Menu"),
+		"Edit Menu": Keychain.InputGroup.new("Menu"),
+		"View Menu": Keychain.InputGroup.new("Menu"),
+		"Select Menu": Keychain.InputGroup.new("Menu"),
+		"Image Menu": Keychain.InputGroup.new("Menu"),
+		"Window Menu": Keychain.InputGroup.new("Menu"),
+		"Help Menu": Keychain.InputGroup.new("Menu"),
+	}
+	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl", "alt"]
+
 	if OS.has_feature("standalone"):
 		root_directory = OS.get_executable_path().get_base_dir()
 	# root_directory must be set earlier than this is because XDGDataDirs depends on it

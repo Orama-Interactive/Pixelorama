@@ -207,6 +207,12 @@ func _ready() -> void:
 	_tool_buttons = Global.control.find_node("ToolButtons")
 	for t in tools:
 		add_tool_button(tools[t])
+		var tool_shortcut: String = Tools.tools[t].shortcut
+		var left_tool_shortcut := "left_%s_tool" % tool_shortcut
+		var right_tool_shortcut := "right_%s_tool" % tool_shortcut
+		Keychain.actions[left_tool_shortcut] = Keychain.InputAction.new("", "Left")
+		Keychain.actions[right_tool_shortcut] = Keychain.InputAction.new("", "Right")
+
 	_slots[BUTTON_LEFT] = Slot.new("Left tool")
 	_slots[BUTTON_RIGHT] = Slot.new("Right tool")
 	_panels[BUTTON_LEFT] = Global.control.find_node("LeftPanelContainer", true, false)
