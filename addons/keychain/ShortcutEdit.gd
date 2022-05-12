@@ -87,7 +87,6 @@ onready var joy_axis_shortcut_selector: ConfirmationDialog = $JoyAxisShortcutSel
 
 func _ready() -> void:
 	for preset in Keychain.presets:
-		preset.load_from_file()
 		presets_option_button.add_item(preset.name)
 
 	_fill_selector_options()
@@ -100,9 +99,8 @@ func _ready() -> void:
 		else:
 			i += 1
 
-	var shortcuts_preset: int = Keychain.config_file.get_value("shortcuts", "shortcuts_preset", 0)
-	presets_option_button.select(shortcuts_preset)
-	_on_PresetsOptionButton_item_selected(shortcuts_preset)
+	presets_option_button.select(Keychain.preset_index)
+	_on_PresetsOptionButton_item_selected(Keychain.preset_index)
 
 
 func _construct_tree() -> void:
@@ -329,11 +327,7 @@ func _on_ShortcutTypeMenu_id_pressed(id: int) -> void:
 
 
 func _on_PresetsOptionButton_item_selected(index: int) -> void:
-	Keychain.selected_preset = Keychain.presets[index]
-	for action in Keychain.selected_preset.bindings:
-		Keychain.action_erase_events(action)
-		for event in Keychain.selected_preset.bindings[action]:
-			Keychain.action_add_event(action, event)
+	Keychain.change_preset(index)
 
 	# Re-construct the tree
 	for group in Keychain.groups:

@@ -3,6 +3,7 @@ extends Node
 # Change these settings
 var presets := [Preset.new("Default", false), Preset.new("Custom")]
 var selected_preset: Preset = presets[0]
+var preset_index := 0
 # Syntax: "action_name": InputAction.new("Action Display Name", "Group", true)
 # Note that "action_name" must already exist in the Project's Input Map.
 var actions := {
@@ -137,6 +138,9 @@ class InputAction:
 # Thus, we are stuck with using accelerators instead of shortcuts.
 # If Godot ever receives the ability to change the accelerator text of the items,
 # we could in theory remove this class.
+# If you don't care about PopupMenus in the same scene as ShortcutEdit
+# such as projects like Pixelorama where everything is in the same scene,
+# then you can ignore this class.
 class MenuInputAction:
 	extends InputAction
 	var node_path := ""
@@ -213,6 +217,11 @@ func _init() -> void:
 
 func _ready() -> void:
 	set_process_input(multiple_menu_accelerators)
+	for preset in presets:
+		preset.load_from_file()
+	preset_index = config_file.get_value("shortcuts", "shortcuts_preset", 0)
+	change_preset(preset_index)
+
 	for action in actions:
 		var input_action: InputAction = actions[action]
 		if input_action is MenuInputAction:
@@ -235,6 +244,15 @@ func _input(event: InputEvent) -> void:
 		var done: bool = input_action.handle_input(event, action)
 		if done:
 			return
+
+
+func change_preset(index: int) -> void:
+	preset_index = index
+	selected_preset = presets[index]
+	for action in selected_preset.bindings:
+		action_erase_events(action)
+		for event in selected_preset.bindings[action]:
+			action_add_event(action, event)
 
 
 func action_add_event(action: String, new_event: InputEvent) -> void:
