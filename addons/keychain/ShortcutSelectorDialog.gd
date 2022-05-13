@@ -45,7 +45,7 @@ func _show_assigned_state(event: InputEvent) -> void:
 
 	var matching_pair: Array = _find_matching_event_in_map(action, event)
 	if matching_pair:
-		already_exists.text = "Already assigned to: %s" % root.get_action_name(matching_pair[0])
+		already_exists.text = tr("Already assigned to: %s") % root.get_action_name(matching_pair[0])
 	else:
 		already_exists.text = ""
 

@@ -1,5 +1,7 @@
 extends Node
 
+const TRANSLATIONS_PATH := "res://addons/keychain/translations"
+
 # Change these settings
 var presets := [Preset.new("Default", false), Preset.new("Custom")]
 var selected_preset: Preset = presets[0]
@@ -144,6 +146,18 @@ func _ready() -> void:
 			config_file.load(config_path)
 
 	set_process_input(multiple_menu_accelerators)
+
+	var dir := Directory.new()
+	dir.open(TRANSLATIONS_PATH)
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		if !dir.current_is_dir():
+			if file_name.get_extension() == "po":
+				var t: Translation = load(TRANSLATIONS_PATH.plus_file(file_name))
+				TranslationServer.add_translation(t)
+		file_name = dir.get_next()
+
 	for preset in presets:
 		preset.load_from_file()
 	preset_index = config_file.get_value("shortcuts", "shortcuts_preset", 0)

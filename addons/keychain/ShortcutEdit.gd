@@ -41,22 +41,22 @@ const JOY_BUTTON_NAMES := [
 ]
 
 const JOY_AXIS_NAMES := [
-	" (Left Stick Left)",
-	" (Left Stick Right)",
-	" (Left Stick Up)",
-	" (Left Stick Down)",
-	" (Right Stick Left)",
-	" (Right Stick Right)",
-	" (Right Stick Up)",
-	" (Right Stick Down)",
+	"(Left Stick Left)",
+	"(Left Stick Right)",
+	"(Left Stick Up)",
+	"(Left Stick Down)",
+	"(Right Stick Left)",
+	"(Right Stick Right)",
+	"(Right Stick Up)",
+	"(Right Stick Down)",
 	"",
 	"",
 	"",
 	"",
 	"",
-	" (L2)",
+	"(L2)",
 	"",
-	" (R2)",
+	"(R2)",
 	"",
 	"",
 	"",
@@ -155,16 +155,16 @@ func _fill_selector_options() -> void:
 
 	var joy_key_option_button: OptionButton = joy_key_shortcut_selector.option_button
 	for i in JOY_BUTTON_MAX:
-		var text: String = "Button %s" % i
+		var text: String = tr("Button") + " %s" % i
 		if i < JOY_BUTTON_NAMES.size():
-			text += " (%s)" % JOY_BUTTON_NAMES[i]
+			text += " (%s)" % tr(JOY_BUTTON_NAMES[i])
 		joy_key_option_button.add_item(text)
 
 	var joy_axis_option_button: OptionButton = joy_axis_shortcut_selector.option_button
 	var i := 0.0
 	for option in JOY_AXIS_NAMES:
 		var sign_symbol = "+" if floor(i) != i else "-"
-		var text: String = "Axis %s %s%s" % [floor(i), sign_symbol, option]
+		var text: String = tr("Axis") + " %s %s %s" % [floor(i), sign_symbol, tr(option)]
 		joy_axis_option_button.add_item(text)
 		i += 0.5
 
@@ -254,20 +254,22 @@ func event_to_str(event: InputEvent) -> String:
 		output = OS.get_scancode_string(scancode) + physical_str
 
 	elif event is InputEventMouseButton:
-		output = MOUSE_BUTTON_NAMES[event.button_index - 1]
+		output = tr(MOUSE_BUTTON_NAMES[event.button_index - 1])
 
 	elif event is InputEventJoypadButton:
 		var button_index: int = event.button_index
+		output = tr("Button")
 		if button_index >= JOY_BUTTON_NAMES.size():
-			output = "Button %s" % button_index
+			output += " %s" % button_index
 		else:
-			output = "Button %s (%s)" % [button_index, JOY_BUTTON_NAMES[button_index]]
+			output += " %s (%s)" % [button_index, tr(JOY_BUTTON_NAMES[button_index])]
 
 	elif event is InputEventJoypadMotion:
 		var positive_axis: bool = event.axis_value > 0
 		var axis_value: int = event.axis * 2 + int(positive_axis)
 		var sign_symbol = "+" if positive_axis else "-"
-		output = "Axis %s %s%s" % [event.axis, sign_symbol, JOY_AXIS_NAMES[axis_value]]
+		output = tr("Axis")
+		output += " %s %s %s" % [event.axis, sign_symbol, tr(JOY_AXIS_NAMES[axis_value])]
 	return output
 
 

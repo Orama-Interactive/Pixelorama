@@ -25,13 +25,13 @@ margin_bottom = 20.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_top = 3.0
-margin_right = 52.0
+margin_right = 45.0
 margin_bottom = 17.0
-text = "Presets:"
+text = "Preset:"
 
 [node name="PresetsOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
-margin_left = 56.0
-margin_right = 85.0
+margin_left = 49.0
+margin_right = 78.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 
