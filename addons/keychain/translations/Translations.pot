@@ -25,6 +25,18 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
+msgid "Key"
+msgstr ""
+
+msgid "Mouse Button"
+msgstr ""
+
+msgid "Joy Button"
+msgstr ""
+
+msgid "Joy Axis"
+msgstr ""
+
 msgid "Button"
 msgstr ""
 

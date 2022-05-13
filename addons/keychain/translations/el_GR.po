@@ -31,8 +31,20 @@ msgstr "Προεπιλογή"
 msgid "Custom"
 msgstr "Προσαρμοσμένο"
 
-msgid "Button"
+msgid "Key"
 msgstr "Πλήκτρο"
+
+msgid "Mouse Button"
+msgstr "Κουμπί ποντικιού"
+
+msgid "Joy Button"
+msgstr "Κουμπί χειριστηρίου"
+
+msgid "Joy Axis"
+msgstr "Άξονας χειριστηρίου"
+
+msgid "Button"
+msgstr "Κουμπί"
 
 msgid "Axis"
 msgstr "Άξονας"
@@ -50,10 +62,10 @@ msgid "Mouse Button Index:"
 msgstr "Δείκτης κουμπιού ποντικού"
 
 msgid "Joypad Button Index:"
-msgstr "Δείκτης κουμπιού joypad"
+msgstr "Δείκτης κουμπιού χειριστηρίου"
 
 msgid "Joypad Axis Index:"
-msgstr "Δείκτης άξονα joypad"
+msgstr "Δείκτης άξονα χειριστηρίου"
 
 msgid "Already assigned to: %s"
 msgstr "Έχει ήδη εκχωρηθεί σε: %s"
