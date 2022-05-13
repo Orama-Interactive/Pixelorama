@@ -19,7 +19,7 @@ enum ViewMenu {
 	SHOW_RULERS,
 	SHOW_GUIDES,
 }
-enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, ZEN_MODE, FULLSCREEN_MODE }
+enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, MOVABLE_PANELS, ZEN_MODE, FULLSCREEN_MODE }
 enum ImageMenu {
 	SCALE_IMAGE,
 	CENTRALIZE_IMAGE,
@@ -234,6 +234,7 @@ func _ready() -> void:
 		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.SHOW_GUIDES),
 		"show_rulers":
 		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.SHOW_RULERS),
+		"moveable_panels": Keychain.MenuInputAction.new("", "Window Menu", true, "WindowMenu", WindowMenu.MOVABLE_PANELS),
 		"zen_mode":
 		Keychain.MenuInputAction.new("", "Window Menu", true, "WindowMenu", WindowMenu.ZEN_MODE),
 		"toggle_fullscreen":
@@ -250,7 +251,6 @@ func _ready() -> void:
 		Keychain.MenuInputAction.new("", "Select Menu", true, "SelectMenu", SelectMenu.INVERT),
 		"open_docs":
 		Keychain.MenuInputAction.new("", "Help Menu", true, "HelpMenu", HelpMenu.ONLINE_DOCS),
-		"edit_mode": Keychain.InputAction.new("Moveable Panels", "Window Menu"),
 		"zoom_in": Keychain.InputAction.new("", "General"),
 		"zoom_out": Keychain.InputAction.new("", "General"),
 		"pan": Keychain.InputAction.new("", "General"),

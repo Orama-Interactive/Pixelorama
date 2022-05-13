@@ -146,6 +146,7 @@ func _setup_window_menu() -> void:
 		"Window Opacity",
 		"Panels",
 		"Layouts",
+		"Movable Panels",
 		"Zen Mode",
 		"Fullscreen Mode",
 	]
@@ -173,13 +174,10 @@ func _setup_window_menu() -> void:
 func _setup_panels_submenu(item: String) -> void:
 	panels_submenu.set_name("panels_submenu")
 	panels_submenu.hide_on_checkable_item_selection = false
-	panels_submenu.add_check_item(
-		"Moveable Panels", 0, InputMap.get_action_list("edit_mode")[0].get_scancode_with_modifiers()
-	)
 	for element in ui_elements:
 		panels_submenu.add_check_item(element.name)
 		var is_hidden: bool = ui.is_control_hidden(element)
-		panels_submenu.set_item_checked(ui_elements.find(element) + 1, !is_hidden)
+		panels_submenu.set_item_checked(ui_elements.find(element), !is_hidden)
 
 	panels_submenu.connect("id_pressed", self, "_panels_submenu_id_pressed")
 	window_menu.add_child(panels_submenu)
@@ -431,6 +429,9 @@ func window_menu_id_pressed(id: int) -> void:
 		Global.WindowMenu.WINDOW_OPACITY:
 			window_opacity_dialog.popup_centered()
 			Global.dialog_open(true)
+		Global.WindowMenu.MOVABLE_PANELS:
+			ui.tabs_visible = !ui.tabs_visible
+			window_menu.set_item_checked(id, ui.tabs_visible)
 		Global.WindowMenu.ZEN_MODE:
 			_toggle_zen_mode()
 		Global.WindowMenu.FULLSCREEN_MODE:
@@ -440,14 +441,11 @@ func window_menu_id_pressed(id: int) -> void:
 
 
 func _panels_submenu_id_pressed(id: int) -> void:
-	if id == 0:
-		ui.tabs_visible = !ui.tabs_visible
-		panels_submenu.set_item_checked(0, ui.tabs_visible)
-	if zen_mode or id == 0:
+	if zen_mode:
 		return
 
 	var element_visible = panels_submenu.is_item_checked(id)
-	ui.set_control_hidden(ui_elements[id - 1], element_visible)
+	ui.set_control_hidden(ui_elements[id], element_visible)
 	panels_submenu.set_item_checked(id, !element_visible)
 
 
@@ -470,7 +468,7 @@ func set_layout(id: int) -> void:
 
 	for i in ui_elements.size():
 		var is_hidden: bool = ui.is_control_hidden(ui_elements[i])
-		panels_submenu.set_item_checked(i + 1, !is_hidden)
+		panels_submenu.set_item_checked(i, !is_hidden)
 
 	if zen_mode:  # Turn zen mode off
 		Global.control.find_node("TabsContainer").visible = true
@@ -541,7 +539,7 @@ func _toggle_zen_mode() -> void:
 	for i in ui_elements.size():
 		if ui_elements[i].name == "Main Canvas":
 			continue
-		if !panels_submenu.is_item_checked(i + 1):
+		if !panels_submenu.is_item_checked(i):
 			continue
 		ui.set_control_hidden(ui_elements[i], !zen_mode)
 	Global.control.find_node("TabsContainer").visible = zen_mode
