@@ -8,9 +8,9 @@ enum TileMode { NONE, BOTH, X_AXIS, Y_AXIS }
 enum IconColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
-enum FileMenuId { NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
-enum EditMenuId { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
-enum ViewMenuId {
+enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
+enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
+enum ViewMenu {
 	TILE_MODE,
 	GREYSCALE_VIEW,
 	MIRROR_VIEW,
@@ -19,8 +19,8 @@ enum ViewMenuId {
 	SHOW_RULERS,
 	SHOW_GUIDES,
 }
-enum WindowMenuId { WINDOW_OPACITY, PANELS, LAYOUTS, ZEN_MODE, FULLSCREEN_MODE }
-enum ImageMenuId {
+enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, ZEN_MODE, FULLSCREEN_MODE }
+enum ImageMenu {
 	SCALE_IMAGE,
 	CENTRALIZE_IMAGE,
 	CROP_IMAGE,
@@ -35,8 +35,8 @@ enum ImageMenuId {
 	GRADIENT,
 	SHADER
 }
-enum SelectMenuId { SELECT_ALL, CLEAR_SELECTION, INVERT }
-enum HelpMenuId {
+enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT }
+enum HelpMenu {
 	VIEW_SPLASH_SCREEN,
 	ONLINE_DOCS,
 	ISSUE_TRACKER,
@@ -204,57 +204,52 @@ onready var current_version: String = ProjectSettings.get_setting("application/c
 func _ready() -> void:
 	Keychain.config_file = config_cache
 	Keychain.actions = {
-		"new_file": Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.NEW),
-		"open_file":
-		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.OPEN),
-		"save_file":
-		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.SAVE),
+		"new_file": Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.NEW),
+		"open_file": Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.OPEN),
+		"save_file": Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.SAVE),
 		"save_file_as":
-		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.SAVE_AS),
+		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.SAVE_AS),
 		"export_file":
-		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.EXPORT),
+		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.EXPORT),
 		"export_file_as":
-		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.EXPORT_AS),
-		"quit": Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenuId.QUIT),
+		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.EXPORT_AS),
+		"quit": Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.QUIT),
 		"redo":
-		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.REDO, true),
+		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.REDO, true),
 		"undo":
-		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.UNDO, true),
-		"cut": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.CUT),
-		"copy": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.COPY),
-		"paste": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.PASTE),
-		"delete":
-		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.DELETE),
+		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.UNDO, true),
+		"cut": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.CUT),
+		"copy": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.COPY),
+		"paste": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.PASTE),
+		"delete": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.DELETE),
 		"new_brush":
-		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenuId.NEW_BRUSH),
+		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.NEW_BRUSH),
 		"mirror_view":
-		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenuId.MIRROR_VIEW),
+		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.MIRROR_VIEW),
 		"show_grid":
-		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenuId.SHOW_GRID),
+		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.SHOW_GRID),
 		"show_pixel_grid":
-		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenuId.SHOW_PIXEL_GRID),
+		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.SHOW_PIXEL_GRID),
 		"show_guides":
-		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenuId.SHOW_GUIDES),
+		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.SHOW_GUIDES),
 		"show_rulers":
-		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenuId.SHOW_RULERS),
+		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.SHOW_RULERS),
 		"zen_mode":
-		Keychain.MenuInputAction.new("", "Window Menu", true, "WindowMenu", WindowMenuId.ZEN_MODE),
+		Keychain.MenuInputAction.new("", "Window Menu", true, "WindowMenu", WindowMenu.ZEN_MODE),
 		"toggle_fullscreen":
 		Keychain.MenuInputAction.new(
-			"", "Window Menu", true, "WindowMenu", WindowMenuId.FULLSCREEN_MODE
+			"", "Window Menu", true, "WindowMenu", WindowMenu.FULLSCREEN_MODE
 		),
 		"clear_selection":
 		Keychain.MenuInputAction.new(
-			"", "Select Menu", true, "SelectMenu", SelectMenuId.CLEAR_SELECTION
+			"", "Select Menu", true, "SelectMenu", SelectMenu.CLEAR_SELECTION
 		),
 		"select_all":
-		Keychain.MenuInputAction.new(
-			"", "Select Menu", true, "SelectMenu", SelectMenuId.SELECT_ALL
-		),
+		Keychain.MenuInputAction.new("", "Select Menu", true, "SelectMenu", SelectMenu.SELECT_ALL),
 		"invert_selection":
-		Keychain.MenuInputAction.new("", "Select Menu", true, "SelectMenu", SelectMenuId.INVERT),
+		Keychain.MenuInputAction.new("", "Select Menu", true, "SelectMenu", SelectMenu.INVERT),
 		"open_docs":
-		Keychain.MenuInputAction.new("", "Help Menu", true, "HelpMenu", HelpMenuId.ONLINE_DOCS),
+		Keychain.MenuInputAction.new("", "Help Menu", true, "HelpMenu", HelpMenu.ONLINE_DOCS),
 		"edit_mode": Keychain.InputAction.new("Moveable Panels", "Window Menu"),
 		"zoom_in": Keychain.InputAction.new("", "General"),
 		"zoom_out": Keychain.InputAction.new("", "General"),
