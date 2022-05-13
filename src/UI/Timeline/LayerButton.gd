@@ -182,12 +182,26 @@ func get_drag_data(_position) -> Array:
 func can_drop_data(_pos, data) -> bool:
 	if typeof(data) == TYPE_ARRAY:
 		if data[0] == "Layer":
+			var curr_layer: BaseLayer = Global.current_project.layers[layer]
+			var drag_layer: BaseLayer = Global.current_project.layers[data[1]]
+
+			if curr_layer == drag_layer:
+				Global.animation_timeline.drag_highlight.visible = false
+				return false
+
 			var region: Rect2
 			var depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
+
 			if Input.is_key_pressed(KEY_CONTROL): # Swap layers
+				if drag_layer.is_a_parent_of(curr_layer) or curr_layer.is_a_parent_of(drag_layer):
+					Global.animation_timeline.drag_highlight.visible = false
+					return false
 				region = get_global_rect()
-				# TODO: Check if depth is correct
+
 			else: # Shift layers
+				if drag_layer.is_a_parent_of(curr_layer):
+					Global.animation_timeline.drag_highlight.visible = false
+					return false
 				# If accepted as a child, is it in the center region?
 				if (Global.current_project.layers[layer].accepts_child(data[1])
 							and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
@@ -206,17 +220,14 @@ func can_drop_data(_pos, data) -> bool:
 			region.size.x -= depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 			Global.animation_timeline.drag_highlight.rect_global_position = region.position
 			Global.animation_timeline.drag_highlight.rect_size = region.size
-			Global.animation_timeline.drag_highlight.show()
+			Global.animation_timeline.drag_highlight.visible = true
 			return true
-	Global.animation_timeline.drag_highlight.hide()
+	Global.animation_timeline.drag_highlight.visible = false
 	return false
 
 
 func drop_data(_pos, data) -> void:
 	var dropped_layer: int = data[1]
-	# TODO: Invalid cases can be prevented in can_drop_data only
-	if layer == dropped_layer:
-		return
 
 	Global.current_project.undo_redo.create_action("Change Layer Order")
 	var new_layers: Array = Global.current_project.layers.duplicate()

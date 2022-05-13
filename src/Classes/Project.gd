@@ -152,7 +152,7 @@ func change_project() -> void:
 	# Create new ones
 	for i in range(layers.size() - 1, -1, -1):
 		# Create layer buttons
-		var layer_container: BaseLayerButton
+		var layer_container: LayerButton
 		if layers[i] is PixelLayer:
 			layer_container = pixel_layer_button_node.instance()
 		elif layers[i] is GroupLayer:
@@ -507,7 +507,7 @@ func _layers_changed(value: Array) -> void:
 	_remove_cel_buttons()
 
 	for i in range(layers.size() - 1, -1, -1):
-		var layer_button: BaseLayerButton
+		var layer_button: LayerButton
 		if layers[i] is PixelLayer:
 			layer_button = pixel_layer_button_node.instance()
 		elif layers[i] is GroupLayer:
