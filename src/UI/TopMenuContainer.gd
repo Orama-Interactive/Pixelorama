@@ -44,26 +44,26 @@ func _ready() -> void:
 
 
 func _setup_file_menu() -> void:
-	var file_menu_items := {  # order as in FileMenu enum
-		"New...": InputMap.get_action_list("new_file")[0].get_scancode_with_modifiers(),
-		"Open...": InputMap.get_action_list("open_file")[0].get_scancode_with_modifiers(),
-		"Open last project...": 0,
-		"Recent projects": 0,
-		"Save...": InputMap.get_action_list("save_file")[0].get_scancode_with_modifiers(),
-		"Save as...": InputMap.get_action_list("save_file_as")[0].get_scancode_with_modifiers(),
-		"Export...": InputMap.get_action_list("export_file")[0].get_scancode_with_modifiers(),
-		"Export as...": InputMap.get_action_list("export_file_as")[0].get_scancode_with_modifiers(),
-		"Quit": InputMap.get_action_list("quit")[0].get_scancode_with_modifiers(),
-	}
+	# Order as in FileMenu enum
+	var file_menu_items := [
+		"New...",
+		"Open...",
+		"Open last project...",
+		"Recent projects",
+		"Save...",
+		"Save as...",
+		"Export...",
+		"Export as...",
+		"Quit",
+	]
 	file_menu = file_menu_button.get_popup()
 	var i := 0
-
-	for item in file_menu_items.keys():
+	for item in file_menu_items:
 		if item == "Recent projects":
 			_setup_recent_projects_submenu(item)
 		else:
-			file_menu.add_item(item, i, file_menu_items[item])
-			i += 1
+			file_menu.add_item(item, i)
+		i += 1
 
 	file_menu.connect("id_pressed", self, "file_menu_id_pressed")
 
@@ -87,21 +87,14 @@ func update_recent_projects_submenu() -> void:
 
 
 func _setup_edit_menu() -> void:
-	var edit_menu_items := {  # order as in Global.EditMenu enum
-		"Undo": InputMap.get_action_list("undo")[0].get_scancode_with_modifiers(),
-		"Redo": InputMap.get_action_list("redo")[0].get_scancode_with_modifiers(),
-		"Copy": InputMap.get_action_list("copy")[0].get_scancode_with_modifiers(),
-		"Cut": InputMap.get_action_list("cut")[0].get_scancode_with_modifiers(),
-		"Paste": InputMap.get_action_list("paste")[0].get_scancode_with_modifiers(),
-		"Delete": InputMap.get_action_list("delete")[0].get_scancode_with_modifiers(),
-		"New Brush": InputMap.get_action_list("new_brush")[0].get_scancode_with_modifiers(),
-		"Preferences": 0
-	}
+	# Order as in Global.EditMenu enum
+	var edit_menu_items := [
+		"Undo", "Redo", "Copy", "Cut", "Paste", "Delete", "New Brush", "Preferences"
+	]
 	var edit_menu: PopupMenu = edit_menu_button.get_popup()
 	var i := 0
-
-	for item in edit_menu_items.keys():
-		edit_menu.add_item(item, i, edit_menu_items[item])
+	for item in edit_menu_items:
+		edit_menu.add_item(item, i)
 		i += 1
 
 	edit_menu.set_item_disabled(6, true)
@@ -109,24 +102,23 @@ func _setup_edit_menu() -> void:
 
 
 func _setup_view_menu() -> void:
-	var view_menu_items := {  # order as in Global.ViewMenu enum
-		"Tile Mode": 0,
-		"Greyscale View": 0,
-		"Mirror View": InputMap.get_action_list("mirror_view")[0].get_scancode_with_modifiers(),
-		"Show Grid": InputMap.get_action_list("show_grid")[0].get_scancode_with_modifiers(),
-		"Show Pixel Grid":
-		InputMap.get_action_list("show_pixel_grid")[0].get_scancode_with_modifiers(),
-		"Show Rulers": InputMap.get_action_list("show_rulers")[0].get_scancode_with_modifiers(),
-		"Show Guides": InputMap.get_action_list("show_guides")[0].get_scancode_with_modifiers(),
-	}
+	# Order as in Global.ViewMenu enum
+	var view_menu_items := [
+		"Tile Mode",
+		"Greyscale View",
+		"Mirror View",
+		"Show Grid",
+		"Show Pixel Grid",
+		"Show Rulers",
+		"Show Guides",
+	]
 	view_menu = view_menu_button.get_popup()
-
 	var i := 0
-	for item in view_menu_items.keys():
+	for item in view_menu_items:
 		if item == "Tile Mode":
 			_setup_tile_mode_submenu(item)
 		else:
-			view_menu.add_check_item(item, i, view_menu_items[item])
+			view_menu.add_check_item(item, i)
 		i += 1
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GUIDES, true)
@@ -149,26 +141,25 @@ func _setup_tile_mode_submenu(item: String) -> void:
 
 
 func _setup_window_menu() -> void:
-	var window_menu_items := {  # order as in Global.WindowMenu enum
-		"Window Opacity": 0,
-		"Panels": 0,
-		"Layouts": 0,
-		"Zen Mode": InputMap.get_action_list("zen_mode")[0].get_scancode_with_modifiers(),
-		"Fullscreen Mode":
-		InputMap.get_action_list("toggle_fullscreen")[0].get_scancode_with_modifiers(),
-	}
+	# Order as in Global.WindowMenu enum
+	var window_menu_items := [
+		"Window Opacity",
+		"Panels",
+		"Layouts",
+		"Zen Mode",
+		"Fullscreen Mode",
+	]
 	window_menu = window_menu_button.get_popup()
-
 	var i := 0
-	for item in window_menu_items.keys():
+	for item in window_menu_items:
 		if item == "Panels":
 			_setup_panels_submenu(item)
 		elif item == "Layouts":
 			_setup_layouts_submenu(item)
 		elif item == "Window Opacity":
-			window_menu.add_item(item, i, window_menu_items[item])
+			window_menu.add_item(item, i)
 		else:
-			window_menu.add_check_item(item, i, window_menu_items[item])
+			window_menu.add_check_item(item, i)
 		i += 1
 	window_menu.hide_on_checkable_item_selection = false
 	window_menu.connect("id_pressed", self, "window_menu_id_pressed")
@@ -227,26 +218,26 @@ func populate_layouts_submenu() -> void:
 
 
 func _setup_image_menu() -> void:
-	var image_menu_items := {  # order as in Global.ImageMenu enum
-		"Scale Image": 0,
-		"Centralize Image": 0,
-		"Crop Image": 0,
-		"Resize Canvas": 0,
-		"Mirror Image": 0,
-		"Rotate Image": 0,
-		"Invert Colors": 0,
-		"Desaturation": 0,
-		"Outline": 0,
-		"Drop Shadow": 0,
-		"Adjust Hue/Saturation/Value": 0,
-		"Gradient": 0,
-		# "Shader": 0
-	}
+	# Order as in Global.ImageMenu enum
+	var image_menu_items := [
+		"Scale Image",
+		"Centralize Image",
+		"Crop Image",
+		"Resize Canvas",
+		"Mirror Image",
+		"Rotate Image",
+		"Invert Colors",
+		"Desaturation",
+		"Outline",
+		"Drop Shadow",
+		"Adjust Hue/Saturation/Value",
+		"Gradient",
+		# "Shader"
+	]
 	var image_menu: PopupMenu = image_menu_button.get_popup()
-
 	var i := 0
-	for item in image_menu_items.keys():
-		image_menu.add_item(item, i, image_menu_items[item])
+	for item in image_menu_items:
+		image_menu.add_item(item, i)
 		if i == Global.ImageMenu.RESIZE_CANVAS:
 			image_menu.add_separator()
 		i += 1
@@ -255,35 +246,31 @@ func _setup_image_menu() -> void:
 
 
 func _setup_select_menu() -> void:
-	var select_menu_items := {  # order as in Global.EditMenu enum
-		"All": InputMap.get_action_list("select_all")[0].get_scancode_with_modifiers(),
-		"Clear": InputMap.get_action_list("clear_selection")[0].get_scancode_with_modifiers(),
-		"Invert": InputMap.get_action_list("invert_selection")[0].get_scancode_with_modifiers(),
-	}
+	# Order as in Global.SelectMenu enum
+	var select_menu_items := ["All", "Clear", "Invert"]
 	var select_menu: PopupMenu = select_menu_button.get_popup()
 	var i := 0
-
-	for item in select_menu_items.keys():
-		select_menu.add_item(item, i, select_menu_items[item])
+	for item in select_menu_items:
+		select_menu.add_item(item, i)
 		i += 1
 
 	select_menu.connect("id_pressed", self, "select_menu_id_pressed")
 
 
 func _setup_help_menu() -> void:
-	var help_menu_items := {  # order as in Global.HelpMenu enum
-		"View Splash Screen": 0,
-		"Online Docs": InputMap.get_action_list("open_docs")[0].get_scancode_with_modifiers(),
-		"Issue Tracker": 0,
-		"Open Logs Folder": 0,
-		"Changelog": 0,
-		"About Pixelorama": 0
-	}
+	# Order as in Global.HelpMenu enum
+	var help_menu_items := [
+		"View Splash Screen",
+		"Online Docs",
+		"Issue Tracker",
+		"Open Logs Folder",
+		"Changelog",
+		"About Pixelorama",
+	]
 	var help_menu: PopupMenu = help_menu_button.get_popup()
-
 	var i := 0
-	for item in help_menu_items.keys():
-		help_menu.add_item(item, i, help_menu_items[item])
+	for item in help_menu_items:
+		help_menu.add_item(item, i)
 		i += 1
 
 	help_menu.connect("id_pressed", self, "help_menu_id_pressed")
