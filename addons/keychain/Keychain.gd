@@ -104,12 +104,8 @@ class MenuInputAction:
 	func update_node(action: String) -> void:
 		if !node:
 			return
-		var accel := 0
-		var events := InputMap.get_action_list(action)
-		for event in events:
-			if event is InputEventKey:
-				accel = event.get_scancode_with_modifiers()
-				break
+		var first_key: InputEventKey = Keychain.action_get_first_key(action)
+		var accel := first_key.get_scancode_with_modifiers() if first_key else 0
 		node.set_item_accelerator(menu_item_id, accel)
 
 	func handle_input(event: InputEvent, action: String) -> bool:
@@ -179,8 +175,8 @@ func change_preset(index: int) -> void:
 			action_add_event(action, event)
 
 
-func action_add_event(action: String, new_event: InputEvent) -> void:
-	InputMap.action_add_event(action, new_event)
+func action_add_event(action: String, event: InputEvent) -> void:
+	InputMap.action_add_event(action, event)
 	if action in actions:
 		actions[action].update_node(action)
 	Global.update_hint_tooltips()
@@ -200,11 +196,11 @@ func action_erase_events(action: String) -> void:
 	Global.update_hint_tooltips()
 
 
-func action_get_first_key(action: String) -> String:
-	var text := "None"
+func action_get_first_key(action: String) -> InputEventKey:
+	var first_key: InputEventKey = null
 	var events := InputMap.get_action_list(action)
 	for event in events:
 		if event is InputEventKey:
-			text = event.as_text()
+			first_key = event
 			break
-	return text
+	return first_key

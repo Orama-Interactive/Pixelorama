@@ -445,5 +445,6 @@ func update_hint_tooltips() -> void:
 		if event_type is InputEventKey:
 			hint = event_type.as_text()
 		elif event_type is InputEventAction:
-			hint = Keychain.action_get_first_key(event_type.action)
+			var first_key: InputEventKey = Keychain.action_get_first_key(event_type.action)
+			hint = first_key.as_text() if first_key else "None"
 		tip.hint_tooltip = tr(ui_tooltips[tip]) % hint
