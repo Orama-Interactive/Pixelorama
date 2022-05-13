@@ -10,7 +10,6 @@ var parent: BaseLayer
 var project
 var index: int
 
-# TODO: Search for layer visbility/locked checks that should be changed to the hierarchy ones:
 # Returns true if this is a direct or indirect parent of layer
 func is_a_parent_of(layer: BaseLayer) -> bool:
 	if layer.parent == self:
@@ -41,7 +40,7 @@ func has_children() -> bool:
 		return false
 	return project.layers[index - 1].parent == self
 
-
+# TODO: Search for layer visbility/locked checks that should be changed to the hierarchy ones:
 func is_visible_in_hierarchy() -> bool:
 	if is_instance_valid(parent) and visible:
 		return parent.is_visible_in_hierarchy()

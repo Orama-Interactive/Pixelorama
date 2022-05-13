@@ -233,7 +233,7 @@ func undo_or_redo(
 			"Unlink Cel"
 		]
 	):
-		# TODO: Check this:
+		# TODO: Check this: THIS IS PROBABLY WRONG (can't check if GROUP LAYER if INDEX is -1)
 		if not current_project.layers[layer_index] is GroupLayer:
 			if layer_index > -1 and frame_index > -1:
 				canvas.update_texture(layer_index, frame_index, project)
