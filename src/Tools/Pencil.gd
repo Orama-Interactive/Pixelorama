@@ -40,12 +40,12 @@ func _on_FillInside_toggled(button_pressed):
 func _input(event: InputEvent) -> void:
 	var overwrite_button: CheckBox = $Overwrite
 
-	if event.is_action_pressed("ctrl"):
+	if event.is_action_pressed("change_tool_mode"):
 		_prev_mode = overwrite_button.pressed
-	if event.is_action("ctrl"):
+	if event.is_action("change_tool_mode"):
 		overwrite_button.pressed = !_prev_mode
 		_overwrite = overwrite_button.pressed
-	if event.is_action_released("ctrl"):
+	if event.is_action_released("change_tool_mode"):
 		overwrite_button.pressed = _prev_mode
 		_overwrite = overwrite_button.pressed
 
@@ -71,7 +71,7 @@ func update_config() -> void:
 
 func draw_start(position: Vector2) -> void:
 	.draw_start(position)
-	if Input.is_action_pressed("alt"):
+	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
 		_pick_color(position)
 		return
@@ -90,7 +90,7 @@ func draw_start(position: Vector2) -> void:
 	prepare_undo("Draw")
 	_drawer.reset()
 
-	_draw_line = Tools.shift
+	_draw_line = Input.is_action_pressed("draw_create_line")
 	if _draw_line:
 		_line_start = position
 		_line_end = position
@@ -107,7 +107,7 @@ func draw_start(position: Vector2) -> void:
 func draw_move(position: Vector2) -> void:
 	.draw_move(position)
 	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed("alt"):
+		if Input.is_action_pressed("draw_color_picker"):
 			_pick_color(position)
 		return
 

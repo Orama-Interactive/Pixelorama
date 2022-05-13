@@ -6,9 +6,6 @@ var pen_pressure := 1.0
 var horizontal_mirror := false
 var vertical_mirror := false
 var pixel_perfect := false
-var control := false
-var shift := false
-var alt := false
 
 var tools := {
 	"RectSelect":
@@ -138,7 +135,6 @@ class Tool:
 	var shortcut := ""
 	var extra_hint := ""
 	var extra_shortcuts := []  # Array of String(s)
-	var extra_shortcuts_order := []  # Array to keep shift, ctrl, alt in order
 	var button_node: BaseButton
 
 	func _init(
@@ -375,11 +371,6 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 	var draw_pos := position
 	if Global.mirror_view:
 		draw_pos.x = Global.current_project.size.x - position.x - 1
-
-	if event is InputEventWithModifiers:
-		control = event.control
-		shift = event.shift
-		alt = event.alt
 
 	if event is InputEventMouseButton:
 		if event.button_index in [BUTTON_LEFT, BUTTON_RIGHT]:

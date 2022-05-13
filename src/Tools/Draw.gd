@@ -508,7 +508,7 @@ func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 	var result := {}
 	var angle := rad2deg(end.angle_to_point(start))
 	var distance := start.distance_to(end)
-	if Tools.control:
+	if Input.is_action_pressed("draw_snap_angle"):
 		if Tools.pixel_perfect:
 			angle = stepify(angle, 22.5)
 			if step_decimals(angle) != 0:

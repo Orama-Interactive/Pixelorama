@@ -204,56 +204,56 @@ onready var current_version: String = ProjectSettings.get_setting("application/c
 func _ready() -> void:
 	Keychain.config_file = config_cache
 	Keychain.actions = {
-		"new_file": Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.NEW),
-		"open_file": Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.OPEN),
-		"save_file": Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.SAVE),
+		"new_file": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.NEW),
+		"open_file": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.OPEN),
+		"save_file": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.SAVE),
 		"save_file_as":
-		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.SAVE_AS),
+		Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.SAVE_AS),
 		"export_file":
-		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.EXPORT),
+		Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.EXPORT),
 		"export_file_as":
-		Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.EXPORT_AS),
-		"quit": Keychain.MenuInputAction.new("", "File Menu", true, "FileMenu", FileMenu.QUIT),
+		Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.EXPORT_AS),
+		"quit": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.QUIT),
 		"redo":
-		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.REDO, true),
+		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.REDO, true),
 		"undo":
-		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.UNDO, true),
-		"cut": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.CUT),
-		"copy": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.COPY),
-		"paste": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.PASTE),
-		"delete": Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.DELETE),
+		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.UNDO, true),
+		"cut": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.CUT),
+		"copy": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.COPY),
+		"paste": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.PASTE),
+		"delete": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.DELETE),
 		"new_brush":
-		Keychain.MenuInputAction.new("", "Edit Menu", true, "EditMenu", EditMenu.NEW_BRUSH),
+		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.NEW_BRUSH),
 		"mirror_view":
-		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.MIRROR_VIEW),
+		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.MIRROR_VIEW),
 		"show_grid":
-		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.SHOW_GRID),
+		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.SHOW_GRID),
 		"show_pixel_grid":
-		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.SHOW_PIXEL_GRID),
+		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.SHOW_PIXEL_GRID),
 		"show_guides":
-		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.SHOW_GUIDES),
+		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.SHOW_GUIDES),
 		"show_rulers":
-		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.SHOW_RULERS),
+		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.SHOW_RULERS),
 		"moveable_panels":
 		Keychain.MenuInputAction.new(
-			"", "Window Menu", true, "WindowMenu", WindowMenu.MOVABLE_PANELS
+			"", "Window menu", true, "WindowMenu", WindowMenu.MOVABLE_PANELS
 		),
 		"zen_mode":
-		Keychain.MenuInputAction.new("", "Window Menu", true, "WindowMenu", WindowMenu.ZEN_MODE),
+		Keychain.MenuInputAction.new("", "Window menu", true, "WindowMenu", WindowMenu.ZEN_MODE),
 		"toggle_fullscreen":
 		Keychain.MenuInputAction.new(
-			"", "Window Menu", true, "WindowMenu", WindowMenu.FULLSCREEN_MODE
+			"", "Window menu", true, "WindowMenu", WindowMenu.FULLSCREEN_MODE
 		),
 		"clear_selection":
 		Keychain.MenuInputAction.new(
-			"", "Select Menu", true, "SelectMenu", SelectMenu.CLEAR_SELECTION
+			"", "Select menu", true, "SelectMenu", SelectMenu.CLEAR_SELECTION
 		),
 		"select_all":
-		Keychain.MenuInputAction.new("", "Select Menu", true, "SelectMenu", SelectMenu.SELECT_ALL),
+		Keychain.MenuInputAction.new("", "Select menu", true, "SelectMenu", SelectMenu.SELECT_ALL),
 		"invert_selection":
-		Keychain.MenuInputAction.new("", "Select Menu", true, "SelectMenu", SelectMenu.INVERT),
+		Keychain.MenuInputAction.new("", "Select menu", true, "SelectMenu", SelectMenu.INVERT),
 		"open_docs":
-		Keychain.MenuInputAction.new("", "Help Menu", true, "HelpMenu", HelpMenu.ONLINE_DOCS),
+		Keychain.MenuInputAction.new("", "Help menu", true, "HelpMenu", HelpMenu.ONLINE_DOCS),
 		"zoom_in": Keychain.InputAction.new("", "General"),
 		"zoom_out": Keychain.InputAction.new("", "General"),
 		"pan": Keychain.InputAction.new("", "General"),
@@ -266,6 +266,22 @@ func _ready() -> void:
 		"go_to_next_frame": Keychain.InputAction.new("", "Buttons"),
 		"play_backwards": Keychain.InputAction.new("", "Buttons"),
 		"play_forward": Keychain.InputAction.new("", "Buttons"),
+		"change_tool_mode": Keychain.InputAction.new("", "Tool modifiers", false),
+		"draw_create_line": Keychain.InputAction.new("", "Draw tools", false),
+		"draw_snap_angle": Keychain.InputAction.new("", "Draw tools", false),
+		"draw_color_picker": Keychain.InputAction.new("", "Draw tools", false),
+		"shape_perfect": Keychain.InputAction.new("", "Shape tools", false),
+		"shape_center": Keychain.InputAction.new("", "Shape tools", false),
+		"shape_displace": Keychain.InputAction.new("", "Shape tools", false),
+		"selection_add": Keychain.InputAction.new("", "Selection tools", false),
+		"selection_subtract": Keychain.InputAction.new("", "Selection tools", false),
+		"selection_intersect": Keychain.InputAction.new("", "Selection tools", false),
+		"transform_snap_axis": Keychain.InputAction.new("", "Transformation tools", false),
+		"transform_snap_grid": Keychain.InputAction.new("", "Transformation tools", false),
+		"transform_move_selection_only":
+		Keychain.InputAction.new("", "Transformation tools", false),
+		"transform_copy_selection_content":
+		Keychain.InputAction.new("", "Transformation tools", false),
 	}
 
 	Keychain.groups = {
@@ -275,15 +291,20 @@ func _ready() -> void:
 		"Left": Keychain.InputGroup.new("Tools"),
 		"Right": Keychain.InputGroup.new("Tools"),
 		"Menu": Keychain.InputGroup.new(),
-		"File Menu": Keychain.InputGroup.new("Menu"),
-		"Edit Menu": Keychain.InputGroup.new("Menu"),
-		"View Menu": Keychain.InputGroup.new("Menu"),
-		"Select Menu": Keychain.InputGroup.new("Menu"),
-		"Image Menu": Keychain.InputGroup.new("Menu"),
-		"Window Menu": Keychain.InputGroup.new("Menu"),
-		"Help Menu": Keychain.InputGroup.new("Menu"),
+		"File menu": Keychain.InputGroup.new("Menu"),
+		"Edit menu": Keychain.InputGroup.new("Menu"),
+		"View menu": Keychain.InputGroup.new("Menu"),
+		"Select menu": Keychain.InputGroup.new("Menu"),
+		"Image menu": Keychain.InputGroup.new("Menu"),
+		"Window menu": Keychain.InputGroup.new("Menu"),
+		"Help menu": Keychain.InputGroup.new("Menu"),
+		"Tool modifiers": Keychain.InputGroup.new(),
+		"Draw tools": Keychain.InputGroup.new("Tool modifiers"),
+		"Shape tools": Keychain.InputGroup.new("Tool modifiers"),
+		"Selection tools": Keychain.InputGroup.new("Tool modifiers"),
+		"Transformation tools": Keychain.InputGroup.new("Tool modifiers"),
 	}
-	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl", "alt"]
+	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
 
 	if OS.has_feature("standalone"):
 		root_directory = OS.get_executable_path().get_base_dir()
