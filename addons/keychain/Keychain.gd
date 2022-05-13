@@ -173,27 +173,26 @@ func change_preset(index: int) -> void:
 		action_erase_events(action)
 		for event in selected_preset.bindings[action]:
 			action_add_event(action, event)
+	# NOTE: Following line not present in the plugin itself, be careful not to overwrite
+	Global.update_hint_tooltips()
 
 
 func action_add_event(action: String, event: InputEvent) -> void:
 	InputMap.action_add_event(action, event)
 	if action in actions:
 		actions[action].update_node(action)
-	Global.update_hint_tooltips()
 
 
 func action_erase_event(action: String, event: InputEvent) -> void:
 	InputMap.action_erase_event(action, event)
 	if action in actions:
 		actions[action].update_node(action)
-	Global.update_hint_tooltips()
 
 
 func action_erase_events(action: String) -> void:
 	InputMap.action_erase_events(action)
 	if action in actions:
 		actions[action].update_node(action)
-	Global.update_hint_tooltips()
 
 
 func action_get_first_key(action: String) -> InputEventKey:

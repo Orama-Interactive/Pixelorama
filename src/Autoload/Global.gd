@@ -440,6 +440,7 @@ func change_button_texturerect(texture_button: TextureRect, new_file_name: Strin
 
 
 func update_hint_tooltips() -> void:
+	yield(get_tree(), "idle_frame")
 	Tools.update_hint_tooltips()
 
 	for tip in ui_tooltips:
