@@ -227,6 +227,9 @@ func drop_data(_pos, data) -> void:
 				# Place under the layer, if it has children, place after its lowest child
 				if new_layers[layer].has_children():
 					to_index = new_layers[layer].get_children_recursive()[0].index
+
+					if new_layers[layer].is_a_parent_of(new_layers[dropped_layer]):
+						to_index += layers_to_shift.size()
 				else:
 					to_index = layer # TODO Is this right?
 				to_parent = new_layers[layer].parent
