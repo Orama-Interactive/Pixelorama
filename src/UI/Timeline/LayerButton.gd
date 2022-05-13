@@ -1,16 +1,19 @@
-class_name BaseLayerButton
+class_name LayerButton
 extends Button
 
 const HIERARCHY_DEPTH_PIXEL_SHIFT = 8
 
 var layer := 0
 
+onready var expand_button: BaseButton = find_node("ExpandButton")
 onready var visibility_button: BaseButton = find_node("VisibilityButton")
 onready var lock_button: BaseButton = find_node("LockButton")
 onready var label: Label = find_node("Label")
 onready var line_edit: LineEdit = find_node("LineEdit")
 onready var hierarchy_spacer: Control = find_node("HierarchySpacer")
+onready var linked_button: BaseButton = find_node("LinkButton")
 
+export var hide_expand_button := true
 
 func _ready() -> void:
 	rect_min_size.y = Global.animation_timeline.cel_size
@@ -18,13 +21,16 @@ func _ready() -> void:
 	var layer_buttons = find_node("LayerButtons")
 	for child in layer_buttons.get_children():
 		var texture = child.get_child(0)
-		# TODO: Check if this can be safely removed:
-#		var last_backslash = texture.texture.resource_path.get_base_dir().find_last("/")
-#		var button_category = texture.texture.resource_path.get_base_dir().right(last_backslash + 1)
-#		var normal_file_name = texture.texture.resource_path.get_file()
-
-#		texture.texture = load("res://assets/graphics/%s/%s" % [button_category, normal_file_name])
 		texture.modulate = Global.modulate_icon_color
+
+	if hide_expand_button:
+		expand_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		expand_button.get_child(0).visible = false  # Hide the TextureRect
+	else:
+		if Global.current_project.layers[layer].expanded:
+			Global.change_button_texturerect(expand_button.get_child(0), "group_expanded.png")
+		else:
+			Global.change_button_texturerect(expand_button.get_child(0), "group_collapsed.png")
 
 	if Global.current_project.layers[layer].visible:
 		Global.change_button_texturerect(visibility_button.get_child(0), "layer_visible.png")
@@ -35,6 +41,12 @@ func _ready() -> void:
 		Global.change_button_texturerect(lock_button.get_child(0), "lock.png")
 	else:
 		Global.change_button_texturerect(lock_button.get_child(0), "unlock.png")
+
+	if linked_button:
+		if Global.current_project.layers[layer].new_cels_linked:  # If new layers will be linked
+			Global.change_button_texturerect(linked_button.get_child(0), "linked_layer.png")
+		else:
+			Global.change_button_texturerect(linked_button.get_child(0), "unlinked_layer.png")
 
 	# Visualize how deep into the hierarchy the layer is
 	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
@@ -116,6 +128,10 @@ func _save_layer_name(new_name: String) -> void:
 	Global.current_project.layers[layer].name = new_name
 
 
+func _on_ExpandButton_pressed():
+	Global.current_project.layers[layer].expanded = !Global.current_project.layers[layer].expanded
+
+
 func _on_VisibilityButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].visible = !Global.current_project.layers[layer].visible
@@ -127,6 +143,21 @@ func _on_LockButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].locked = !Global.current_project.layers[layer].locked
 	_select_current_layer()
+
+
+func _on_LinkButton_pressed() -> void:
+	Global.canvas.selection.transform_content_confirm()
+	var layer_class: PixelLayer = Global.current_project.layers[layer]
+	layer_class.new_cels_linked = !layer_class.new_cels_linked
+	if layer_class.new_cels_linked && !layer_class.linked_cels:
+		# If button is pressed and there are no linked cels in the layer
+		layer_class.linked_cels.append(
+			Global.current_project.frames[Global.current_project.current_frame]
+		)
+		var container = Global.frames_container.get_child(Global.current_project.current_layer)
+		container.get_child(Global.current_project.current_frame).button_setup()
+
+	Global.current_project.layers = Global.current_project.layers  # Call the setter
 
 
 func _select_current_layer() -> void:

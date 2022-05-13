@@ -108,10 +108,11 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			var new_layers: Array = Global.current_project.duplicate_layers()
 			var new_cels: Array = f.cels.duplicate()
 			for i in new_cels.size():
+				# TODO: This doesn't work
 				new_cels[i] = PixelCel.new(
 					new_cels[i].image, new_cels[i].opacity, new_cels[i].image_texture
 				)
-
+# TODO: Make sure all this stuff still works after refactor:
 			if popup_menu.get_item_metadata(MenuOptions.LINK) == "Unlink Cel":
 				new_layers[layer].linked_cels.remove(cel_index)
 				var sprite := Image.new()
