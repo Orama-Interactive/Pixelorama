@@ -234,7 +234,10 @@ func _ready() -> void:
 		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.SHOW_GUIDES),
 		"show_rulers":
 		Keychain.MenuInputAction.new("", "View Menu", true, "ViewMenu", ViewMenu.SHOW_RULERS),
-		"moveable_panels": Keychain.MenuInputAction.new("", "Window Menu", true, "WindowMenu", WindowMenu.MOVABLE_PANELS),
+		"moveable_panels":
+		Keychain.MenuInputAction.new(
+			"", "Window Menu", true, "WindowMenu", WindowMenu.MOVABLE_PANELS
+		),
 		"zen_mode":
 		Keychain.MenuInputAction.new("", "Window Menu", true, "WindowMenu", WindowMenu.ZEN_MODE),
 		"toggle_fullscreen":
