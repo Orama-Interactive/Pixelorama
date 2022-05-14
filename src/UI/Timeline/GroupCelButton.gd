@@ -19,17 +19,19 @@ func button_setup() -> void:
 	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, layer]
 
 	# Reset the checkers size because it assumes you want the same size as the canvas
-	var checker = $CelShader/TransparentChecker
+	var checker = $CelTexture/TransparentChecker
 	checker.rect_size = checker.get_parent().rect_size
 #	cel = Global.current_project.frames[frame].cels[layer]
 	#image = cel.image
 
 
 func _on_GroupCelButton_resized() -> void:
-	get_node("CelShader").rect_min_size.x = rect_min_size.x - 4
-	get_node("CelShader").rect_min_size.y = rect_min_size.y - 4
+	get_node("CelTexture").rect_min_size.x = rect_min_size.x - 4
+	get_node("CelTexture").rect_min_size.y = rect_min_size.y - 4
 
 
 func _pressed():
 	# TODO: PixelCelButton could just use the func instead of signal too
+
+	# TODO: Some of the funtionality from PixelCelButton needs to be moved over
 	pass
