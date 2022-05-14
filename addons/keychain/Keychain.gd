@@ -13,7 +13,7 @@ var actions := {}
 var groups := {}
 var ignore_actions := []
 var ignore_ui_actions := true
-var changeable_types := [true, true, true, false]
+var changeable_types := [true, true, true, true]
 var multiple_menu_accelerators := true
 var config_path := "user://cache.ini"
 var config_file: ConfigFile
