@@ -22,14 +22,32 @@ msgstr "Επεξεργασία"
 msgid "Delete"
 msgstr "Διαγραφή"
 
-msgid "Preset:"
-msgstr "Προκαθορισμένο:"
+msgid "Shortcut profile:"
+msgstr "Προφίλ συντομέυσεων:"
 
 msgid "Default"
 msgstr "Προεπιλογή"
 
 msgid "Custom"
 msgstr "Προσαρμοσμένο"
+
+msgid "New"
+msgstr "Νέο"
+
+msgid "Rename"
+msgstr "Μετονομασία"
+
+msgid "Open Folder"
+msgstr "Άνοιγμα φακέλου"
+
+msgid "New Shortcut Profile"
+msgstr "Νέο προφίλ συντομέυσεων"
+
+msgid "Rename Shortcut Profile"
+msgstr "Μετονομασία προφίλ συντομεύσεων"
+
+msgid "Are you sure you want to delete this shortcut profile?"
+msgstr "Είστε σίγουροι πως θέλετε να διαγραφτεί αυτό το προφίλ συντομέυσεων;"
 
 msgid "Key"
 msgstr "Πλήκτρο"

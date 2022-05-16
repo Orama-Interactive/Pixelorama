@@ -109,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/ShaderImageEffect.gd"
 }, {
+"base": "Resource",
+"class": "ShortcutProfile",
+"language": "GDScript",
+"path": "res://addons/keychain/ShortcutProfile.gd"
+}, {
 "base": "Guide",
 "class": "SymmetryGuide",
 "language": "GDScript",
@@ -135,6 +140,7 @@ _global_script_class_icons={
 "Project": "",
 "SelectionTool": "",
 "ShaderImageEffect": "",
+"ShortcutProfile": "",
 "SymmetryGuide": ""
 }
 

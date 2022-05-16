@@ -309,6 +309,7 @@ func _ready() -> void:
 		"Transformation tools": Keychain.InputGroup.new("Tool modifiers"),
 	}
 	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
+	Keychain.multiple_menu_accelerators = true
 
 	if OS.has_feature("standalone"):
 		root_directory = OS.get_executable_path().get_base_dir()

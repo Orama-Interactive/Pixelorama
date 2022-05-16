@@ -16,13 +16,31 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-msgid "Preset:"
+msgid "Shortcut profile:"
 msgstr ""
 
 msgid "Default"
 msgstr ""
 
 msgid "Custom"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Open Folder"
+msgstr ""
+
+msgid "New Shortcut Profile"
+msgstr ""
+
+msgid "Rename Shortcut Profile"
+msgstr ""
+
+msgid "Are you sure you want to delete this shortcut profile?"
 msgstr ""
 
 msgid "Key"
