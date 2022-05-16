@@ -288,8 +288,6 @@ func _initialize_keychain() -> void:
 		"camera_up": Keychain.InputAction.new("", "General"),
 		"camera_down": Keychain.InputAction.new("", "General"),
 		"pan": Keychain.InputAction.new("", "General"),
-		"confirm": Keychain.InputAction.new("", "General"),
-		"cancel": Keychain.InputAction.new("", "General"),
 		"switch_colors": Keychain.InputAction.new("", "Buttons"),
 		"go_to_first_frame": Keychain.InputAction.new("", "Buttons"),
 		"go_to_last_frame": Keychain.InputAction.new("", "Buttons"),
@@ -307,6 +305,8 @@ func _initialize_keychain() -> void:
 		"selection_add": Keychain.InputAction.new("", "Selection tools", false),
 		"selection_subtract": Keychain.InputAction.new("", "Selection tools", false),
 		"selection_intersect": Keychain.InputAction.new("", "Selection tools", false),
+		"transformation_confirm": Keychain.InputAction.new("", "Transformation tools", false),
+		"transformation_cancel": Keychain.InputAction.new("", "Transformation tools", false),
 		"transform_snap_axis": Keychain.InputAction.new("", "Transformation tools", false),
 		"transform_snap_grid": Keychain.InputAction.new("", "Transformation tools", false),
 		"transform_move_selection_only":

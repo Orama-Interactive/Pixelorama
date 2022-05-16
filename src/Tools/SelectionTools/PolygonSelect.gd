@@ -18,7 +18,7 @@ func _input(event: InputEvent) -> void:
 			_ready_to_apply = true
 			apply_selection(Vector2.ZERO)  # Argument doesn't matter
 	else:
-		if event.is_action_pressed("cancel") and _ongoing_selection:
+		if event.is_action_pressed("transformation_cancel") and _ongoing_selection:
 			_ongoing_selection = false
 			_draw_points.clear()
 			_ready_to_apply = false

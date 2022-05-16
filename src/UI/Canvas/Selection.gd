@@ -82,9 +82,9 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if is_moving_content:
-		if Input.is_action_just_pressed("confirm"):
+		if Input.is_action_just_pressed("transformation_confirm"):
 			transform_content_confirm()
-		elif Input.is_action_just_pressed("cancel"):
+		elif Input.is_action_just_pressed("transformation_cancel"):
 			transform_content_cancel()
 
 	if event is InputEventKey:
