@@ -202,6 +202,33 @@ onready var current_version: String = ProjectSettings.get_setting("application/c
 
 
 func _ready() -> void:
+	_initialize_keychain()
+
+	if OS.has_feature("standalone"):
+		root_directory = OS.get_executable_path().get_base_dir()
+	# root_directory must be set earlier than this is because XDGDataDirs depends on it
+	directory_module = XDGDataPaths.new()
+
+	# Load settings from the config file
+	config_cache.load("user://cache.ini")
+
+	default_width = config_cache.get_value("preferences", "default_width", default_width)
+	default_height = config_cache.get_value("preferences", "default_height", default_height)
+	default_fill_color = config_cache.get_value(
+		"preferences", "default_fill_color", default_fill_color
+	)
+	var proj_size := Vector2(default_width, default_height)
+	projects.append(Project.new([], tr("untitled"), proj_size))
+	current_project = projects[0]
+	current_project.fill_color = default_fill_color
+
+	for node in get_tree().get_nodes_in_group("UIButtons"):
+		var tooltip: String = node.hint_tooltip
+		if !tooltip.empty() and node.shortcut:
+			ui_tooltips[node] = tooltip
+
+
+func _initialize_keychain() -> void:
 	Keychain.config_file = config_cache
 	Keychain.actions = {
 		"new_file": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.NEW),
@@ -310,29 +337,6 @@ func _ready() -> void:
 	}
 	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
 	Keychain.multiple_menu_accelerators = true
-
-	if OS.has_feature("standalone"):
-		root_directory = OS.get_executable_path().get_base_dir()
-	# root_directory must be set earlier than this is because XDGDataDirs depends on it
-	directory_module = XDGDataPaths.new()
-
-	# Load settings from the config file
-	config_cache.load("user://cache.ini")
-
-	default_width = config_cache.get_value("preferences", "default_width", default_width)
-	default_height = config_cache.get_value("preferences", "default_height", default_height)
-	default_fill_color = config_cache.get_value(
-		"preferences", "default_fill_color", default_fill_color
-	)
-	var proj_size := Vector2(default_width, default_height)
-	projects.append(Project.new([], tr("untitled"), proj_size))
-	current_project = projects[0]
-	current_project.fill_color = default_fill_color
-
-	for node in get_tree().get_nodes_in_group("UIButtons"):
-		var tooltip: String = node.hint_tooltip
-		if !tooltip.empty() and node.shortcut:
-			ui_tooltips[node] = tooltip
 
 
 func notification_label(text: String) -> void:
