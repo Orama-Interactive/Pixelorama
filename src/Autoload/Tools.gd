@@ -69,7 +69,7 @@ var tools := {
 		"pencil",
 		preload("res://src/Tools/Pencil.tscn"),
 		"Hold %s to make a line",
-		["Shift"]
+		["draw_create_line"]
 	),
 	"Eraser":
 	Tool.new(
@@ -78,7 +78,7 @@ var tools := {
 		"eraser",
 		preload("res://src/Tools/Eraser.tscn"),
 		"Hold %s to make a line",
-		["Shift"]
+		["draw_create_line"]
 	),
 	"Bucket": Tool.new("Bucket", "Bucket", "fill", preload("res://src/Tools/Bucket.tscn")),
 	"Shading":
@@ -92,7 +92,7 @@ var tools := {
 		"""Hold %s to snap the angle of the line
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
-		["Shift", "Ctrl", "Alt"]
+		["shape_perfect", "shape_center", "shape_displace"]
 	),
 	"RectangleTool":
 	Tool.new(
@@ -103,7 +103,7 @@ Hold %s to displace the shape's origin""",
 		"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
-		["Shift", "Ctrl", "Alt"]
+		["shape_perfect", "shape_center", "shape_displace"]
 	),
 	"EllipseTool":
 	Tool.new(
@@ -114,7 +114,7 @@ Hold %s to displace the shape's origin""",
 		"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
-		["Shift", "Ctrl", "Alt"]
+		["shape_perfect", "shape_center", "shape_displace"]
 	),
 }
 
@@ -178,7 +178,15 @@ class Tool:
 		if !extra_hint.empty():
 			hint += "\n\n" + extra_hint
 
-		shortcuts.append_array(extra_shortcuts)
+		var extra_shortcuts_mapped := []
+		for event in extra_shortcuts:
+			var key: InputEventKey = Keychain.action_get_first_key(event)
+			var key_string := "None"
+			if key:
+				key_string = OS.get_scancode_string(key.get_scancode_with_modifiers())
+			extra_shortcuts_mapped.append(key_string)
+
+		shortcuts.append_array(extra_shortcuts_mapped)
 
 		if shortcuts.empty():
 			hint = tr(hint)
