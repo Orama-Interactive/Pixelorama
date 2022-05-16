@@ -1,6 +1,9 @@
 class_name Canvas
 extends Node2D
 
+const MOVE_ACTIONS := ["move_mouse_left", "move_mouse_right", "move_mouse_up", "move_mouse_down"]
+const CURSOR_SPEED_RATE := 6.0
+
 var current_pixel := Vector2.ZERO
 var sprite_changed_this_frame := false  # For optimization purposes
 var move_preview_location := Vector2.ZERO
@@ -57,18 +60,25 @@ func _draw() -> void:
 func _input(event: InputEvent) -> void:
 	# Don't process anything below if the input isn't a mouse event, or Shift/Ctrl.
 	# This decreases CPU/GPU usage slightly.
+	var get_velocity := false
 	if not event is InputEventMouse:
-		if not event is InputEventKey:
+		for action in MOVE_ACTIONS:
+			if event.is_action(action):
+				get_velocity = true
+		if !get_velocity:
 			return
-		elif not event.scancode in [KEY_SHIFT, KEY_CONTROL]:
-			return
-#	elif not get_viewport_rect().has_point(event.position):
-#		return
 
+	var tmp_position: Vector2 = Global.main_viewport.get_local_mouse_position()
+	if get_velocity:
+		var velocity := Input.get_vector(
+			"move_mouse_left", "move_mouse_right", "move_mouse_up", "move_mouse_down"
+		)
+		if velocity != Vector2.ZERO:
+			tmp_position += velocity * CURSOR_SPEED_RATE
+			Global.main_viewport.warp_mouse(tmp_position)
 	# Do not use self.get_local_mouse_position() because it return unexpected
 	# value when shrink parameter is not equal to one. At godot version 3.2.3
 	var tmp_transform = get_canvas_transform().affine_inverse()
-	var tmp_position = Global.main_viewport.get_local_mouse_position()
 	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
 
 	if Global.has_focus:
