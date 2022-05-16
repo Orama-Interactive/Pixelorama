@@ -61,15 +61,15 @@ func _get_shape_points_filled(_size: Vector2) -> PoolVector2Array:
 
 func _input(event: InputEvent) -> void:
 	if _drawing:
-		if event.is_action_pressed("alt"):
+		if event.is_action_pressed("shape_displace"):
 			_displace_origin = true
-		elif event.is_action_released("alt"):
+		elif event.is_action_released("shape_displace"):
 			_displace_origin = false
 
 
 func draw_start(position: Vector2) -> void:
 	.draw_start(position)
-	if Input.is_action_pressed("alt"):
+	if Input.is_action_pressed("shape_displace"):
 		_picking_color = true
 		_pick_color(position)
 		return
@@ -88,7 +88,7 @@ func draw_start(position: Vector2) -> void:
 func draw_move(position: Vector2) -> void:
 	.draw_move(position)
 	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed("alt"):
+		if Input.is_action_pressed("shape_displace"):
 			_pick_color(position)
 		return
 
@@ -97,8 +97,8 @@ func draw_move(position: Vector2) -> void:
 			_original_pos += position - _offset
 		var d = _line_angle_constraint(_original_pos, position)
 		_dest = d.position
-		# Didn't use (Tools.control) to make more consistent with shape tools
-		if Input.is_action_pressed("ctrl"):
+
+		if Input.is_action_pressed("shape_center"):
 			_start = _original_pos - (_dest - _original_pos)
 		else:
 			_start = _original_pos
@@ -202,7 +202,7 @@ func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 	var result := {}
 	var angle := rad2deg(end.angle_to_point(start))
 	var distance := start.distance_to(end)
-	if Tools.shift:
+	if Input.is_action_pressed("shape_perfect"):
 		angle = stepify(angle, 22.5)
 		if step_decimals(angle) != 0:
 			var diff := end - start

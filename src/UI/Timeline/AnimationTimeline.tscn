@@ -36,49 +36,41 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 expand_margin_bottom = 32.0
 
-[sub_resource type="InputEventKey" id=3]
-control = true
-command = true
-scancode = 16777229
+[sub_resource type="InputEventAction" id=21]
+action = "go_to_first_frame"
 
 [sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
+shortcut = SubResource( 21 )
 
-[sub_resource type="InputEventKey" id=5]
-control = true
-command = true
-scancode = 16777231
+[sub_resource type="InputEventAction" id=23]
+action = "go_to_previous_frame"
 
 [sub_resource type="ShortCut" id=6]
-shortcut = SubResource( 5 )
+shortcut = SubResource( 23 )
 
-[sub_resource type="InputEventKey" id=7]
-scancode = 16777247
+[sub_resource type="InputEventAction" id=24]
+action = "play_backwards"
 
 [sub_resource type="ShortCut" id=8]
-shortcut = SubResource( 7 )
+shortcut = SubResource( 24 )
 
-[sub_resource type="InputEventKey" id=9]
-scancode = 16777248
+[sub_resource type="InputEventAction" id=25]
+action = "play_forward"
 
 [sub_resource type="ShortCut" id=10]
-shortcut = SubResource( 9 )
+shortcut = SubResource( 25 )
 
-[sub_resource type="InputEventKey" id=11]
-control = true
-command = true
-scancode = 16777233
+[sub_resource type="InputEventAction" id=26]
+action = "go_to_next_frame"
 
 [sub_resource type="ShortCut" id=12]
-shortcut = SubResource( 11 )
+shortcut = SubResource( 26 )
 
-[sub_resource type="InputEventKey" id=13]
-control = true
-command = true
-scancode = 16777230
+[sub_resource type="InputEventAction" id=22]
+action = "go_to_last_frame"
 
 [sub_resource type="ShortCut" id=14]
-shortcut = SubResource( 13 )
+shortcut = SubResource( 22 )
 
 [sub_resource type="StyleBoxEmpty" id=15]
 

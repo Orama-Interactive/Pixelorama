@@ -8,6 +8,43 @@ enum TileMode { NONE, BOTH, X_AXIS, Y_AXIS }
 enum IconColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
+enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
+enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
+enum ViewMenu {
+	TILE_MODE,
+	GREYSCALE_VIEW,
+	MIRROR_VIEW,
+	SHOW_GRID,
+	SHOW_PIXEL_GRID,
+	SHOW_RULERS,
+	SHOW_GUIDES,
+}
+enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, MOVABLE_PANELS, ZEN_MODE, FULLSCREEN_MODE }
+enum ImageMenu {
+	SCALE_IMAGE,
+	CENTRALIZE_IMAGE,
+	CROP_IMAGE,
+	RESIZE_CANVAS,
+	FLIP,
+	ROTATE,
+	INVERT_COLORS,
+	DESATURATION,
+	OUTLINE,
+	DROP_SHADOW,
+	HSV,
+	GRADIENT,
+	SHADER
+}
+enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT }
+enum HelpMenu {
+	VIEW_SPLASH_SCREEN,
+	ONLINE_DOCS,
+	ISSUE_TRACKER,
+	OPEN_LOGS_FOLDER,
+	CHANGELOG,
+	ABOUT_PIXELORAMA
+}
+
 var root_directory := "."
 var window_title := "" setget _title_changed  # Why doesn't Godot have get_window_title()?
 var config_cache := ConfigFile.new()
@@ -165,6 +202,8 @@ onready var current_version: String = ProjectSettings.get_setting("application/c
 
 
 func _ready() -> void:
+	_initialize_keychain()
+
 	if OS.has_feature("standalone"):
 		root_directory = OS.get_executable_path().get_base_dir()
 	# root_directory must be set earlier than this is because XDGDataDirs depends on it
@@ -187,6 +226,117 @@ func _ready() -> void:
 		var tooltip: String = node.hint_tooltip
 		if !tooltip.empty() and node.shortcut:
 			ui_tooltips[node] = tooltip
+
+
+func _initialize_keychain() -> void:
+	Keychain.config_file = config_cache
+	Keychain.actions = {
+		"new_file": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.NEW),
+		"open_file": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.OPEN),
+		"save_file": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.SAVE),
+		"save_file_as":
+		Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.SAVE_AS),
+		"export_file":
+		Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.EXPORT),
+		"export_file_as":
+		Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.EXPORT_AS),
+		"quit": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.QUIT),
+		"redo":
+		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.REDO, true),
+		"undo":
+		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.UNDO, true),
+		"cut": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.CUT),
+		"copy": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.COPY),
+		"paste": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.PASTE),
+		"delete": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.DELETE),
+		"new_brush":
+		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.NEW_BRUSH),
+		"mirror_view":
+		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.MIRROR_VIEW),
+		"show_grid":
+		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.SHOW_GRID),
+		"show_pixel_grid":
+		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.SHOW_PIXEL_GRID),
+		"show_guides":
+		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.SHOW_GUIDES),
+		"show_rulers":
+		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.SHOW_RULERS),
+		"moveable_panels":
+		Keychain.MenuInputAction.new(
+			"", "Window menu", true, "WindowMenu", WindowMenu.MOVABLE_PANELS
+		),
+		"zen_mode":
+		Keychain.MenuInputAction.new("", "Window menu", true, "WindowMenu", WindowMenu.ZEN_MODE),
+		"toggle_fullscreen":
+		Keychain.MenuInputAction.new(
+			"", "Window menu", true, "WindowMenu", WindowMenu.FULLSCREEN_MODE
+		),
+		"clear_selection":
+		Keychain.MenuInputAction.new(
+			"", "Select menu", true, "SelectMenu", SelectMenu.CLEAR_SELECTION
+		),
+		"select_all":
+		Keychain.MenuInputAction.new("", "Select menu", true, "SelectMenu", SelectMenu.SELECT_ALL),
+		"invert_selection":
+		Keychain.MenuInputAction.new("", "Select menu", true, "SelectMenu", SelectMenu.INVERT),
+		"open_docs":
+		Keychain.MenuInputAction.new("", "Help menu", true, "HelpMenu", HelpMenu.ONLINE_DOCS),
+		"zoom_in": Keychain.InputAction.new("", "General"),
+		"zoom_out": Keychain.InputAction.new("", "General"),
+		"camera_left": Keychain.InputAction.new("", "General"),
+		"camera_right": Keychain.InputAction.new("", "General"),
+		"camera_up": Keychain.InputAction.new("", "General"),
+		"camera_down": Keychain.InputAction.new("", "General"),
+		"pan": Keychain.InputAction.new("", "General"),
+		"confirm": Keychain.InputAction.new("", "General"),
+		"cancel": Keychain.InputAction.new("", "General"),
+		"switch_colors": Keychain.InputAction.new("", "Buttons"),
+		"go_to_first_frame": Keychain.InputAction.new("", "Buttons"),
+		"go_to_last_frame": Keychain.InputAction.new("", "Buttons"),
+		"go_to_previous_frame": Keychain.InputAction.new("", "Buttons"),
+		"go_to_next_frame": Keychain.InputAction.new("", "Buttons"),
+		"play_backwards": Keychain.InputAction.new("", "Buttons"),
+		"play_forward": Keychain.InputAction.new("", "Buttons"),
+		"change_tool_mode": Keychain.InputAction.new("", "Tool modifiers", false),
+		"draw_create_line": Keychain.InputAction.new("", "Draw tools", false),
+		"draw_snap_angle": Keychain.InputAction.new("", "Draw tools", false),
+		"draw_color_picker": Keychain.InputAction.new("", "Draw tools", false),
+		"shape_perfect": Keychain.InputAction.new("", "Shape tools", false),
+		"shape_center": Keychain.InputAction.new("", "Shape tools", false),
+		"shape_displace": Keychain.InputAction.new("", "Shape tools", false),
+		"selection_add": Keychain.InputAction.new("", "Selection tools", false),
+		"selection_subtract": Keychain.InputAction.new("", "Selection tools", false),
+		"selection_intersect": Keychain.InputAction.new("", "Selection tools", false),
+		"transform_snap_axis": Keychain.InputAction.new("", "Transformation tools", false),
+		"transform_snap_grid": Keychain.InputAction.new("", "Transformation tools", false),
+		"transform_move_selection_only":
+		Keychain.InputAction.new("", "Transformation tools", false),
+		"transform_copy_selection_content":
+		Keychain.InputAction.new("", "Transformation tools", false),
+	}
+
+	Keychain.groups = {
+		"General": Keychain.InputGroup.new("", false),
+		"Buttons": Keychain.InputGroup.new(),
+		"Tools": Keychain.InputGroup.new(),
+		"Left": Keychain.InputGroup.new("Tools"),
+		"Right": Keychain.InputGroup.new("Tools"),
+		"Menu": Keychain.InputGroup.new(),
+		"File menu": Keychain.InputGroup.new("Menu"),
+		"Edit menu": Keychain.InputGroup.new("Menu"),
+		"View menu": Keychain.InputGroup.new("Menu"),
+		"Select menu": Keychain.InputGroup.new("Menu"),
+		"Image menu": Keychain.InputGroup.new("Menu"),
+		"Window menu": Keychain.InputGroup.new("Menu"),
+		"Help menu": Keychain.InputGroup.new("Menu"),
+		"Tool modifiers": Keychain.InputGroup.new(),
+		"Draw tools": Keychain.InputGroup.new("Tool modifiers"),
+		"Shape tools": Keychain.InputGroup.new("Tool modifiers"),
+		"Selection tools": Keychain.InputGroup.new("Tool modifiers"),
+		"Transformation tools": Keychain.InputGroup.new("Tool modifiers"),
+	}
+	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
+	Keychain.multiple_menu_accelerators = true
 
 
 func notification_label(text: String) -> void:
@@ -320,7 +470,15 @@ func change_button_texturerect(texture_button: TextureRect, new_file_name: Strin
 
 
 func update_hint_tooltips() -> void:
+	yield(get_tree(), "idle_frame")
 	Tools.update_hint_tooltips()
 
 	for tip in ui_tooltips:
-		tip.hint_tooltip = tr(ui_tooltips[tip]) % tip.shortcut.get_as_text()
+		var hint := "None"
+		var event_type: InputEvent = tip.shortcut.shortcut
+		if event_type is InputEventKey:
+			hint = event_type.as_text()
+		elif event_type is InputEventAction:
+			var first_key: InputEventKey = Keychain.action_get_first_key(event_type.action)
+			hint = first_key.as_text() if first_key else "None"
+		tip.hint_tooltip = tr(ui_tooltips[tip]) % hint

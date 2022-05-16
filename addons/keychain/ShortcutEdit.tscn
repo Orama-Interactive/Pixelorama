@@ -1,0 +1,114 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/keychain/ShortcutEdit.gd" type="Script" id=1]
+[ext_resource path="res://addons/keychain/assets/joy_button.svg" type="Texture" id=2]
+[ext_resource path="res://addons/keychain/assets/keyboard.svg" type="Texture" id=3]
+[ext_resource path="res://addons/keychain/assets/joy_axis.svg" type="Texture" id=4]
+[ext_resource path="res://addons/keychain/assets/mouse.svg" type="Texture" id=5]
+[ext_resource path="res://addons/keychain/ShortcutSelectorDialog.tscn" type="PackedScene" id=6]
+
+[node name="ShortcutEdit" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
+script = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 20.0
+
+[node name="ProfileLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_top = 3.0
+margin_right = 102.0
+margin_bottom = 17.0
+text = "Shortcut profile:"
+
+[node name="ProfileOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 106.0
+margin_right = 135.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+
+[node name="NewProfile" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 139.0
+margin_right = 179.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "New"
+
+[node name="RenameProfile" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 183.0
+margin_right = 247.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Rename"
+
+[node name="DeleteProfile" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 251.0
+margin_right = 306.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Delete"
+
+[node name="OpenProfileFolder" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 310.0
+margin_right = 401.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Open Folder"
+
+[node name="ShortcutTree" type="Tree" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_vertical = 3
+hide_root = true
+
+[node name="ShortcutTypeMenu" type="PopupMenu" parent="."]
+margin_right = 20.0
+margin_bottom = 20.0
+items = [ "Key", ExtResource( 3 ), 0, false, false, 0, 0, null, "", false, "Mouse Button", ExtResource( 5 ), 0, false, false, 1, 0, null, "", false, "Joy Button", ExtResource( 2 ), 0, false, false, 2, 0, null, "", false, "Joy Axis", ExtResource( 4 ), 0, false, false, 3, 0, null, "", false ]
+
+[node name="KeyboardShortcutSelectorDialog" parent="." instance=ExtResource( 6 )]
+
+[node name="MouseShortcutSelectorDialog" parent="." instance=ExtResource( 6 )]
+input_type = 1
+
+[node name="JoyKeyShortcutSelectorDialog" parent="." instance=ExtResource( 6 )]
+input_type = 2
+
+[node name="JoyAxisShortcutSelectorDialog" parent="." instance=ExtResource( 6 )]
+input_type = 3
+
+[node name="ProfileSettings" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+
+[node name="ProfileName" type="LineEdit" parent="ProfileSettings"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 192.0
+margin_bottom = 34.0
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="DeleteConfirmation" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+dialog_text = "Are you sure you want to delete this shortcut profile?"
+
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/ProfileOptionButton" to="." method="_on_ProfileOptionButton_item_selected"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/NewProfile" to="." method="_on_NewProfile_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/RenameProfile" to="." method="_on_RenameProfile_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/DeleteProfile" to="." method="_on_DeleteProfile_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/OpenProfileFolder" to="." method="_on_OpenProfileFolder_pressed"]
+[connection signal="button_pressed" from="VBoxContainer/ShortcutTree" to="." method="_on_ShortcutTree_button_pressed"]
+[connection signal="item_activated" from="VBoxContainer/ShortcutTree" to="." method="_on_ShortcutTree_item_activated"]
+[connection signal="id_pressed" from="ShortcutTypeMenu" to="." method="_on_ShortcutTypeMenu_id_pressed"]
+[connection signal="confirmed" from="ProfileSettings" to="." method="_on_ProfileSettings_confirmed"]
+[connection signal="confirmed" from="DeleteConfirmation" to="." method="_on_DeleteConfirmation_confirmed"]

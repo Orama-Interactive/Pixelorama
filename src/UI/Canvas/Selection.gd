@@ -81,13 +81,13 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if is_moving_content:
-			if Input.is_action_just_pressed("enter"):
-				transform_content_confirm()
-			elif Input.is_action_just_pressed("escape"):
-				transform_content_cancel()
+	if is_moving_content:
+		if Input.is_action_just_pressed("confirm"):
+			transform_content_confirm()
+		elif Input.is_action_just_pressed("cancel"):
+			transform_content_cancel()
 
+	if event is InputEventKey:
 		_move_with_arrow_keys(event)
 
 	elif event is InputEventMouse:
@@ -116,10 +116,10 @@ func _input(event: InputEvent) -> void:
 					Global.has_focus = false
 					mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
 					dragged_gizmo = gizmo
-					if Input.is_action_pressed("alt"):
+					if Input.is_action_pressed("transform_move_selection_only"):
 						transform_content_confirm()
 					if !is_moving_content:
-						if Input.is_action_pressed("alt"):
+						if Input.is_action_pressed("transform_move_selection_only"):
 							undo_data = get_undo_data(false)
 							temp_rect = big_bounding_rectangle
 							temp_bitmap = Global.current_project.selection_bitmap
@@ -301,7 +301,7 @@ func update_on_zoom(zoom: float) -> void:
 func _gizmo_resize() -> void:
 	var dir := dragged_gizmo.direction
 
-	if Input.is_action_pressed("ctrl"):
+	if Input.is_action_pressed("shape_center"):
 		# Code inspired from https://github.com/GDQuest/godot-open-rpg
 		if dir.x != 0 and dir.y != 0:  # Border gizmos
 			temp_rect.size = ((Global.canvas.current_pixel - temp_rect_pivot) * 2.0 * dir)
@@ -314,7 +314,7 @@ func _gizmo_resize() -> void:
 	else:
 		_resize_rect(Global.canvas.current_pixel, dir)
 
-	if Input.is_action_pressed("shift"):  # Maintain aspect ratio
+	if Input.is_action_pressed("shape_perfect"):  # Maintain aspect ratio
 		var end_y = temp_rect.end.y
 		if dir == Vector2(1, -1) or dir.x == 0:  # Top right corner, center top and center bottom
 			var size := temp_rect.size.y

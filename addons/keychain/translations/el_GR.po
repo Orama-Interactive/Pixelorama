@@ -1,0 +1,215 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Keychain\n"
+"Last-Translator: Overloaded\n"
+"Language-Team: none\n"
+"Language: el_GR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+msgid "OK"
+msgstr "Εντάξει"
+
+msgid "Cancel"
+msgstr "Άκυρο"
+
+msgid "Add"
+msgstr "Προσθήκη"
+
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+msgid "Delete"
+msgstr "Διαγραφή"
+
+msgid "Shortcut profile:"
+msgstr "Προφίλ συντομέυσεων:"
+
+msgid "Default"
+msgstr "Προεπιλογή"
+
+msgid "Custom"
+msgstr "Προσαρμοσμένο"
+
+msgid "New"
+msgstr "Νέο"
+
+msgid "Rename"
+msgstr "Μετονομασία"
+
+msgid "Open Folder"
+msgstr "Άνοιγμα φακέλου"
+
+msgid "New Shortcut Profile"
+msgstr "Νέο προφίλ συντομέυσεων"
+
+msgid "Rename Shortcut Profile"
+msgstr "Μετονομασία προφίλ συντομεύσεων"
+
+msgid "Are you sure you want to delete this shortcut profile?"
+msgstr "Είστε σίγουροι πως θέλετε να διαγραφτεί αυτό το προφίλ συντομέυσεων;"
+
+msgid "Key"
+msgstr "Πλήκτρο"
+
+msgid "Mouse Button"
+msgstr "Κουμπί ποντικιού"
+
+msgid "Joy Button"
+msgstr "Κουμπί χειριστηρίου"
+
+msgid "Joy Axis"
+msgstr "Άξονας χειριστηρίου"
+
+msgid "Button"
+msgstr "Κουμπί"
+
+msgid "Axis"
+msgstr "Άξονας"
+
+msgid "(Physical)"
+msgstr "(Φυσικό)"
+
+msgid "Set the shortcut"
+msgstr "Επιλέξτε μια συντόμευση"
+
+msgid "Press a key or a key combination to set the shortcut"
+msgstr "Πατήστε ένα πλήκτρο ή συνδυασμό πλήκτρων για να ορίσετε τη συντόμευση"
+
+msgid "Mouse Button Index:"
+msgstr "Δείκτης κουμπιού ποντικού"
+
+msgid "Joypad Button Index:"
+msgstr "Δείκτης κουμπιού χειριστηρίου"
+
+msgid "Joypad Axis Index:"
+msgstr "Δείκτης άξονα χειριστηρίου"
+
+msgid "Already assigned to: %s"
+msgstr "Έχει ήδη εκχωρηθεί σε: %s"
+
+msgid "Left Button"
+msgstr "Αριστερό κουμπί"
+
+msgid "Right Button"
+msgstr "Δεξί κουμπί"
+
+msgid "Middle Button"
+msgstr "Μεσαίο κουμπί"
+
+msgid "Wheel Up Button"
+msgstr "Τρόχος πάνω"
+
+msgid "Wheel Down Button"
+msgstr "Τρόχος κάτω"
+
+msgid "Wheel Left Button"
+msgstr "Τρόχος αριστερά"
+
+msgid "Wheel Right Button"
+msgstr "Τρόχος δεξιά"
+
+msgid "X Button 1"
+msgstr "Κουμπί X 1"
+
+msgid "X Button 2"
+msgstr "Κουμπί X 2"
+
+msgid "DualShock Cross, Xbox A, Nintendo B"
+msgstr "DualShock Σταυρός, Xbox A, Nintendo B"
+
+msgid "DualShock Circle, Xbox B, Nintendo A"
+msgstr "DualShock Κύκλος, Xbox B, Nintendo A"
+
+msgid "DualShock Square, Xbox X, Nintendo Y"
+msgstr "DualShock Τετράγωνο, Xbox X, Nintendo Y"
+
+msgid "DualShock Triangle, Xbox Y, Nintendo X"
+msgstr "DualShock Τρίγωνο, Xbox Y, Nintendo X"
+
+msgid "L, L1"
+msgstr "L, L1"
+
+msgid "R, R1"
+msgstr "R, R1"
+
+msgid "L2"
+msgstr "L2"
+
+msgid "R2"
+msgstr "R2"
+
+msgid "L3"
+msgstr "L3"
+
+msgid "R3"
+msgstr "R3"
+
+msgid "Select, DualShock Share, Nintendo -"
+msgstr ""
+
+msgid "Start, DualShock Options, Nintendo +"
+msgstr ""
+
+msgid "D-Pad Up"
+msgstr "D-Pad Πάνω"
+
+msgid "D-Pad Down"
+msgstr "D-Pad Κάτω"
+
+msgid "D-Pad Left"
+msgstr "D-Pad Αριστερά"
+
+msgid "D-Pad Right"
+msgstr "D-Pad Δεξιά"
+
+msgid "Home, DualShock PS, Guide"
+msgstr ""
+
+msgid "Xbox Share, PS5 Microphone, Nintendo Capture"
+msgstr "Xbox Share, PS5 Μικρόφωνο, Nintendo Capture"
+
+msgid "Xbox Paddle 1"
+msgstr ""
+
+msgid "Xbox Paddle 2"
+msgstr ""
+
+msgid "Xbox Paddle 3"
+msgstr ""
+
+msgid "Xbox Paddle 4"
+msgstr ""
+
+msgid "PS4/5 Touchpad"
+msgstr "PS4/5 επιφάνεια αφής"
+
+msgid "(Left Stick Left)"
+msgstr "(Αριστερό Stick Αριστερά)"
+
+msgid "(Left Stick Right)"
+msgstr "(Αριστερό Stick Δεξιά)"
+
+msgid "(Left Stick Up)"
+msgstr "(Αριστερό Stick Πάνω)"
+
+msgid "(Left Stick Down)"
+msgstr "(Αριστερό Stick Κάτω)"
+
+msgid "(Right Stick Left)"
+msgstr "(Δεξί Stick Αριστερά)"
+
+msgid "(Right Stick Right)"
+msgstr "(Δεξί Stick Δεξιά)"
+
+msgid "(Right Stick Up)"
+msgstr "(Δεξί Stick Πάνω)"
+
+msgid "(Right Stick Down)"
+msgstr "(Δεξί Stick Κάτω)"
+
+msgid "(L2)"
+msgstr "(L2)"
+
+msgid "(R2)"
+msgstr "(R2)"

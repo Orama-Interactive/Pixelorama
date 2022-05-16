@@ -111,13 +111,13 @@ func _init() -> void:
 func _input(event: InputEvent) -> void:
 	var options: OptionButton = $LightenDarken
 
-	if event.is_action_pressed("ctrl"):
+	if event.is_action_pressed("change_tool_mode"):
 		_prev_mode = options.selected
-	if event.is_action("ctrl"):
+	if event.is_action("change_tool_mode"):
 		options.selected = _prev_mode ^ 1
 		_mode = options.selected
 		_drawer.color_op.lighten_or_darken = _mode
-	if event.is_action_released("ctrl"):
+	if event.is_action_released("change_tool_mode"):
 		options.selected = _prev_mode
 		_mode = options.selected
 		_drawer.color_op.lighten_or_darken = _mode
@@ -211,7 +211,7 @@ func update_strength() -> void:
 
 func draw_start(position: Vector2) -> void:
 	.draw_start(position)
-	if Input.is_action_pressed("alt"):
+	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
 		_pick_color(position)
 		return
@@ -225,7 +225,7 @@ func draw_start(position: Vector2) -> void:
 	prepare_undo("Draw")
 	_drawer.reset()
 
-	_draw_line = Tools.shift
+	_draw_line = Input.is_action_pressed("draw_create_line")
 	if _draw_line:
 		_line_start = position
 		_line_end = position
@@ -240,7 +240,7 @@ func draw_start(position: Vector2) -> void:
 func draw_move(position: Vector2) -> void:
 	.draw_move(position)
 	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed("alt"):
+		if Input.is_action_pressed("draw_color_picker"):
 			_pick_color(position)
 		return
 
