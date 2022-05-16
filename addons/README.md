@@ -1,5 +1,11 @@
 # Addons
 
+## Keychain
+
+- Upstream: https://github.com/Orama-Interactive/Keychain
+- Version: Based on git commit 751540203124426947d69bd81f50fea07eded91d with slight modifications in Keychain.gd and ShortcutEdit.tscn.
+- License: [MIT](https://github.com/Orama-Interactive/Keychain/blob/main/LICENSE)
+
 ## gdgifexporter
 
 - Upstream: https://github.com/jegor377/godot-gdgifexporter
