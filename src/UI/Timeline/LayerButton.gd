@@ -192,7 +192,7 @@ func can_drop_data(_pos, data) -> bool:
 			var region: Rect2
 			var depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
 
-			if Input.is_key_pressed(KEY_CONTROL): # Swap layers
+			if Input.is_action_pressed("ctrl"): # Swap layers
 				if drag_layer.is_a_parent_of(curr_layer) or curr_layer.is_a_parent_of(drag_layer):
 					Global.animation_timeline.drag_highlight.visible = false
 					return false
@@ -232,24 +232,30 @@ func drop_data(_pos, data) -> void:
 	Global.current_project.undo_redo.create_action("Change Layer Order")
 	var new_layers: Array = Global.current_project.layers.duplicate()
 	var temp: BaseLayer = new_layers[layer]
-	if Input.is_key_pressed(KEY_CONTROL): # Swap layers # TODO Need to check when swapping is allowed
-		new_layers[layer] = new_layers[dropped_layer]
-		new_layers[dropped_layer] = temp
-
-		# TODO: Make sure to swap parents too
-
-		for f in Global.current_project.frames:
-			var new_cels: Array = f.cels.duplicate()
-			var temp_canvas = new_cels[layer]
-			new_cels[layer] = new_cels[dropped_layer]
-			new_cels[dropped_layer] = temp_canvas
-			Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-			Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+	if Input.is_action_pressed("ctrl"): # Swap layers # TODO Need to check when swapping is allowed
+		pass # TODO: Figure out swapping
+#		new_layers[layer] = new_layers[dropped_layer]
+#		new_layers[dropped_layer] = temp
+#
+#		# TODO: Make sure to swap parents too
+#
+#		for f in Global.current_project.frames:
+#			var new_cels: Array = f.cels.duplicate()
+#			var temp_canvas = new_cels[layer]
+#			new_cels[layer] = new_cels[dropped_layer]
+#			new_cels[dropped_layer] = temp_canvas
+#			Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
+#			Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
 	# TODO: Having "SourceLayers/OldLayers (that you don't change) and new_layers would make this less confusing
 	else:
 		# layers_to_shift should be in order of the layer indices, starting from the lowest
-		var layers_to_shift: Array = new_layers[dropped_layer].get_children_recursive()
-		layers_to_shift.append(new_layers[dropped_layer])
+#		var layers_to_shift: Array = new_layers[dropped_layer].get_children_recursive()
+#		layers_to_shift.append(new_layers[dropped_layer])
+
+		var from_indices := []
+		for c in new_layers[dropped_layer].get_children_recursive():
+			from_indices.append(c.index)
+		from_indices.append(dropped_layer)
 
 		var to_index: int # the index where the LOWEST shifted layer should end up
 		var to_parent: BaseLayer
@@ -271,54 +277,31 @@ func drop_data(_pos, data) -> void:
 					to_index = new_layers[layer].get_children_recursive()[0].index
 
 					if new_layers[layer].is_a_parent_of(new_layers[dropped_layer]):
-						to_index += layers_to_shift.size()
+						to_index += from_indices.size()
 				else:
 					to_index = layer # TODO Is this right?
 				to_parent = new_layers[layer].parent
 
-		# Make sure to set parent BEFORE adjusting new_layers
-		Global.current_project.undo_redo.add_do_property(
-			new_layers[dropped_layer], "parent", to_parent
-		)
-		Global.current_project.undo_redo.add_undo_property(
-			new_layers[dropped_layer], "parent", new_layers[dropped_layer].parent
-		)
-
 		if dropped_layer < layer:
-			to_index -= layers_to_shift.size()
+			to_index -= from_indices.size()
 		print("to_index = ", to_index)
 
-		var x := layers_to_shift.size() - 1
-		while x >= 0:
-			new_layers.remove(layers_to_shift[x].index)
-			x -= 1
-		for i in range(layers_to_shift.size()):
-			new_layers.insert(to_index + i, layers_to_shift[i])
+		var to_indices := []
+		var from_parents := []
+		for i in range(from_indices.size()):
+			to_indices.append(to_index + i)
+			from_parents.append(new_layers[from_indices[i]].parent)
+		var to_parents := from_parents.duplicate()
+		to_parents[-1] = to_parent
 
-		for f in Global.current_project.frames:
-			var new_cels: Array = f.cels.duplicate()
-			x = layers_to_shift.size() - 1
-			while x >= 0:
-				new_cels.remove(layers_to_shift[x].index)
-				x -= 1
-			for i in range(layers_to_shift.size()):
-				new_cels.insert(to_index + i, f.cels[layers_to_shift[i].index])
-
-			Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-			Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
-
-	if Global.current_project.current_layer == layer:
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_layer", dropped_layer
+		Global.current_project.undo_redo.add_do_method(
+			Global.current_project, "move_layers", from_indices, to_indices, to_parents
 		)
-		Global.current_project.undo_redo.add_undo_property(
-			Global.current_project, "current_layer", Global.current_project.current_layer
+		Global.current_project.undo_redo.add_undo_method(
+			Global.current_project, "move_layers", to_indices, from_indices, from_parents
 		)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "layers", Global.current_project.layers
-	)
 
+	# TODO: undo_or_redo is at end here, but earlier in others, does it matter which order?
 	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	Global.current_project.undo_redo.commit_action()

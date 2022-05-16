@@ -911,3 +911,114 @@ func resize_bitmap_values(bitmap: BitMap, new_size: Vector2, flip_x: bool, flip_
 	new_bitmap.create_from_image_alpha(image)
 
 	return new_bitmap
+
+
+func add_frame(frame: Frame, index: int) -> void:
+	# TODO: May need to call _frames_changed setter here (at least for some of it)
+	frames.insert(index, frame)
+	current_frame = index # TODO Probably need to call setter
+	# TODO: Test link/unlink cels and animation tag pushing thoroughly, I'm not sure if they're
+	# 	easily reversable (probably possible though, tags may need an "undo" bool, links
+	# 	may work with a passed array, or maybe its better if they're just not handled here
+
+	# Link cels:
+	for l_i in range(layers.size()):
+		if layers[l_i].new_cels_linked:  # If the link button is pressed
+			layers[l_i].linked_cels.append(frame)
+			frame.cels[l_i].image = layers[l_i].linked_cels[0].cels[l_i].image
+			frame.cels[l_i].image_texture = layers[l_i].linked_cels[0].cels[l_i].image_texture
+
+	# PUSH AHEAD animation tags starting after the frame
+	for tag in animation_tags:
+		if index >= tag.from && index <= tag.to:
+			tag.to += 1
+		elif (index) < tag.from:
+			tag.from += 1
+			tag.to += 1
+
+	# TODO: Check if these (especially remove/move) mess up selection?
+	_frames_changed(frames)# TODO: Add Frame and Cel Buttons
+
+
+func remove_frame(index: int) -> void:
+	# TODO: If this messes up selection, would doing multiple here help?
+	frames.remove(index)
+	# TODO: Figure out what to set current_frame to
+	current_frame -= 1
+
+	# Unlink cels:
+	for layer in layers:
+		for linked in layer.linked_cels:
+			if linked == frames[index]:
+				layer.linked_cels.erase(linked)
+
+	# PUSH BACK animation tags starting after the frame
+	for tag in animation_tags:
+		if index >= tag.from && index <= tag.to:
+			tag.to -= 1
+		elif (index) < tag.from:
+			tag.from -= 1
+			tag.to -= 1
+
+	_frames_changed(frames)# TODO: Remove Frame/CelButtons
+
+
+func move_frame(from_index: int, to_index: int) -> void:
+	var frame = frames[from_index]
+	frames.remove(from_index)
+	# TODO: Ensure the final position is always right
+	frames.insert(to_index, frame)
+	# TODO: Set current frame
+	_frames_changed(frames)# TODO: Remove and then add Frame/CelButtons
+
+
+func add_layer(layer: BaseLayer, index: int, cels: Array) -> void:
+	# TODO: Global.canvas.selection.transform_content_confirm()
+	layers.insert(index, layer)
+	current_layer = index # TODO: Setter (which is the preferred way to call it?)
+	for f in range(frames.size()):
+		frames[f].cels.insert(index, cels[f])
+	# TODO: Update layer index
+	_layers_changed(layers)# TODO: Add layer and cel buttons
+
+
+func remove_layer(index: int) -> void:
+	# TODO: Global.canvas.selection.transform_content_confirm()
+	layers.remove(index)
+	current_layer = index - 1 # TODO: Setter
+	for frame in frames:
+		frame.cels.remove(index)
+	# TODO: Update layer index
+	_layers_changed(layers)# TODO: Remove layer and cel buttons
+
+
+# from_indices and to_indicies should start from the lowest index, and go up
+func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> void:
+	# TODO: it may be good to do a test run with using loops of add/remove_layer instead of using move_layers
+	# to_parents could just be a single for now, but then how should move_layers be named?
+	# TODO: Global.canvas.selection.transform_content_confirm()
+	var old_layers := layers.duplicate()
+	var removed_cels := [] # Array of array of cels (an array for each layer removed)
+
+	for i in range(from_indices.size()):
+		# With each removed index, future indices need to be lowered, so subtract by i
+		layers.remove(from_indices[i] - i)
+		removed_cels.append([])
+		for frame in frames:
+			removed_cels[i].append(frame.cels[from_indices[i] - i])
+			frame.cels.remove(from_indices[i] - i)
+		# TODO: remove layer and cel buttons
+	for i in range(to_indices.size()):
+		layers.insert(to_indices[i], old_layers[from_indices[i]])
+		layers[to_indices[i]].parent = to_parents[i]
+		# TODO: Frames...
+		for f in range(frames.size()):
+			frames[f].cels.insert(to_indices[i], removed_cels[i][f])
+		# TODO: Add layer and cel buttons
+	# TODO: Update layer index
+	_layers_changed(layers) # TODO Remove (needs buttons and index update)
+
+
+func move_cel() -> void:
+	# not sure about this one
+	pass
