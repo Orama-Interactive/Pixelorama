@@ -61,11 +61,14 @@ func _input(event: InputEvent) -> void:
 	# Don't process anything below if the input isn't a mouse event, or Shift/Ctrl.
 	# This decreases CPU/GPU usage slightly.
 	var get_velocity := false
-	if not event is InputEventMouse:
+	if not event is InputEventMouseMotion:
 		for action in MOVE_ACTIONS:
 			if event.is_action(action):
 				get_velocity = true
-		if !get_velocity:
+		if (
+			!get_velocity
+			and !(event.is_action("activate_left_tool") or event.is_action("activate_right_tool"))
+		):
 			return
 
 	var tmp_position: Vector2 = Global.main_viewport.get_local_mouse_position()

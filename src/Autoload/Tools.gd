@@ -380,14 +380,18 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 	if Global.mirror_view:
 		draw_pos.x = Global.current_project.size.x - position.x - 1
 
-	if event is InputEventMouseButton:
-		if event.button_index in [BUTTON_LEFT, BUTTON_RIGHT]:
-			if event.pressed and _active_button == -1:
-				_active_button = event.button_index
-				_slots[_active_button].tool_node.draw_start(draw_pos)
-			elif not event.pressed and event.button_index == _active_button:
-				_slots[_active_button].tool_node.draw_end(draw_pos)
-				_active_button = -1
+	if event.is_action_pressed("activate_left_tool") and _active_button == -1:
+		_active_button = BUTTON_LEFT
+		_slots[_active_button].tool_node.draw_start(draw_pos)
+	elif event.is_action_released("activate_left_tool") and _active_button == BUTTON_LEFT:
+		_slots[_active_button].tool_node.draw_end(draw_pos)
+		_active_button = -1
+	elif event.is_action("activate_right_tool") and _active_button == -1:
+		_active_button = BUTTON_RIGHT
+		_slots[_active_button].tool_node.draw_start(draw_pos)
+	elif event.is_action_released("activate_right_tool") and _active_button == BUTTON_RIGHT:
+		_slots[_active_button].tool_node.draw_end(draw_pos)
+		_active_button = -1
 
 	if event is InputEventMouseMotion:
 		pen_pressure = event.pressure
