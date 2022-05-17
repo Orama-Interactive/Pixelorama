@@ -653,7 +653,7 @@ func cut() -> void:
 	if !project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	copy()
-	delete()
+	delete(false)
 
 
 func copy() -> void:
@@ -728,9 +728,11 @@ func paste() -> void:
 	project.selection_bitmap_changed()
 
 
-func delete() -> void:
+func delete(selected_cels := true) -> void:
 	var project: Project = Global.current_project
 	if !project.has_selection:
+		return
+	if !project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	if is_moving_content:
 		is_moving_content = false
@@ -743,12 +745,18 @@ func delete() -> void:
 		return
 
 	var undo_data_tmp := get_undo_data(true)
-	var image: Image = project.frames[project.current_frame].cels[project.current_layer].image
+	var images: Array
+	if selected_cels:
+		images = _get_selected_draw_images()
+	else:
+		images = [project.frames[project.current_frame].cels[project.current_layer].image]
+
 	for x in big_bounding_rectangle.size.x:
 		for y in big_bounding_rectangle.size.y:
 			var pos := Vector2(x, y) + big_bounding_rectangle.position
 			if project.can_pixel_get_drawn(pos):
-				image.set_pixelv(pos, Color(0))
+				for image in images:
+					image.set_pixelv(pos, Color(0))
 	commit_undo("Draw", undo_data_tmp)
 
 
