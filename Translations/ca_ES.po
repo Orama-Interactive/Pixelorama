@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-04-26 12:38\n"
+"PO-Revision-Date: 2022-05-18 19:00\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -336,8 +336,14 @@ msgstr "El fitxer existeix, sobrescriure?"
 msgid "File %s already exists. Overwrite?"
 msgstr "El fitxer \"%s\" ja existeix. El vos sobreescriure?"
 
-msgid "Directory path or file name is not valid!"
-msgstr "La ruta o directori de l'arxiu no existeix!"
+msgid "Directory path is not valid!"
+msgstr ""
+
+msgid "File name is not valid!"
+msgstr ""
+
+msgid "Directory path and file name are not valid!"
+msgstr ""
 
 msgid "Exporting in progress..."
 msgstr "S'està exportant..."
@@ -607,11 +613,53 @@ msgstr "Desaturació"
 msgid "Outline"
 msgstr "Contorn"
 
+msgid "Drop Shadow"
+msgstr ""
+
+msgid "Offset X:"
+msgstr ""
+
+msgid "Offset Y:"
+msgstr ""
+
+msgid "Shadow color:"
+msgstr ""
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajusta la Tonalitat/Saturació/Lluminositat"
 
 msgid "Gradient"
 msgstr "Degradat"
+
+msgid "Linear"
+msgstr ""
+
+msgid "Radial"
+msgstr ""
+
+msgid "Linear Step"
+msgstr ""
+
+msgid "Radial Step"
+msgstr ""
+
+msgid "Linear Dithering"
+msgstr ""
+
+msgid "Radial Dithering"
+msgstr ""
+
+msgid "Transition size:"
+msgstr ""
+
+msgid "Center:"
+msgstr ""
+
+msgid "Radius:"
+msgstr ""
+
+msgid "Dithering pattern:"
+msgstr ""
 
 msgid "Adjust HSV"
 msgstr "Ajusta l'HSV"
@@ -1863,6 +1911,9 @@ msgstr "Tancar"
 
 msgid "Delete"
 msgstr "Eliminar"
+
+msgid "Discard All"
+msgstr ""
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
