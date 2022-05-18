@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2022-03-30 23:31\n"
+"PO-Revision-Date: 2022-05-18 11:56\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -28,16 +28,16 @@ msgid "Please Confirm..."
 msgstr "Bonvolu konfirmu..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Nomo de dosiero:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Nomo de projekto:"
 
 msgid "Image Size"
 msgstr "Mezuro de bildo"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Grando de la tolo"
 
 msgid "Frame Size"
 msgstr ""
