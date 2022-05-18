@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-05-18 18:59\n"
+"PO-Revision-Date: 2022-05-18 20:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -337,13 +337,13 @@ msgid "File %s already exists. Overwrite?"
 msgstr "O arquivo %s já existe. Substituir?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Caminho de pasta inválido!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Nome de arquivo inválido!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Caminho de diretório e nome de arquivo inválidos!"
 
 msgid "Exporting in progress..."
 msgstr "Exportação em andamento..."
@@ -614,16 +614,16 @@ msgid "Outline"
 msgstr "Contorno"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Sombra projetada"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Deslocar X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Deslocar Y:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Cor da sombra:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajustar Matiz/Saturação/Valor"
@@ -632,25 +632,25 @@ msgid "Gradient"
 msgstr "Gradiente"
 
 msgid "Linear"
-msgstr ""
+msgstr "Linear"
 
 msgid "Radial"
-msgstr ""
+msgstr "Radial"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Passo Linear"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Passo Radial"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "Linear Dithering"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "Radial Dithering"
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Tamanho de transição:"
 
 msgid "Center:"
 msgstr ""
