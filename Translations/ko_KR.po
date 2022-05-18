@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-03-30 23:31\n"
+"PO-Revision-Date: 2022-05-18 19:00\n"
 
 msgid "OK"
 msgstr "예"
@@ -336,8 +336,14 @@ msgstr "파일이 이미 존재합니다, 덮어씌우시겠습니까?"
 msgid "File %s already exists. Overwrite?"
 msgstr "파일 %s이(가) 이미 존재합니다. 덮어씌우시겠습니까?"
 
-msgid "Directory path or file name is not valid!"
-msgstr "디렉토리 경로나 파일 이름이 유효하지 않습니다!"
+msgid "Directory path is not valid!"
+msgstr ""
+
+msgid "File name is not valid!"
+msgstr ""
+
+msgid "Directory path and file name are not valid!"
+msgstr ""
 
 msgid "Exporting in progress..."
 msgstr "내보내는 중..."
@@ -607,11 +613,53 @@ msgstr "채도 낮추기"
 msgid "Outline"
 msgstr "외곽선"
 
+msgid "Drop Shadow"
+msgstr ""
+
+msgid "Offset X:"
+msgstr ""
+
+msgid "Offset Y:"
+msgstr ""
+
+msgid "Shadow color:"
+msgstr ""
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr "색상/채도/명도 수정"
 
 msgid "Gradient"
 msgstr "그레디언트"
+
+msgid "Linear"
+msgstr ""
+
+msgid "Radial"
+msgstr ""
+
+msgid "Linear Step"
+msgstr ""
+
+msgid "Radial Step"
+msgstr ""
+
+msgid "Linear Dithering"
+msgstr ""
+
+msgid "Radial Dithering"
+msgstr ""
+
+msgid "Transition size:"
+msgstr ""
+
+msgid "Center:"
+msgstr ""
+
+msgid "Radius:"
+msgstr ""
+
+msgid "Dithering pattern:"
+msgstr ""
 
 msgid "Adjust HSV"
 msgstr "HSV 수정"
@@ -1863,6 +1911,9 @@ msgstr "닫기"
 
 msgid "Delete"
 msgstr "삭제"
+
+msgid "Discard All"
+msgstr ""
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
