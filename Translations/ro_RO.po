@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-05-18 18:59\n"
+"PO-Revision-Date: 2022-05-18 20:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -337,13 +337,13 @@ msgid "File %s already exists. Overwrite?"
 msgstr "Fișierul %s există deja. Suprascrii?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Calea directorului nu este validă!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Numele fișierului nu este valid!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Calea directorului și numele fișierului nu sunt valide!"
 
 msgid "Exporting in progress..."
 msgstr "Exportare în desfășurare..."
@@ -617,13 +617,13 @@ msgid "Drop Shadow"
 msgstr ""
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Decalaj X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Decalaj Y:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Culoarea umbrei:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajustare nuanță/saturație/valoare"
@@ -638,10 +638,10 @@ msgid "Radial"
 msgstr ""
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Pas liniar"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Pas radial"
 
 msgid "Linear Dithering"
 msgstr ""
