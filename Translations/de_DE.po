@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-05-18 19:00\n"
+"PO-Revision-Date: 2022-05-18 19:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -337,13 +337,13 @@ msgid "File %s already exists. Overwrite?"
 msgstr "Datei %s existiert bereits, überschreiben?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Verzeichnispfad ist ungültig!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Dateiname ist ungültig!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Verzeichnispfad und Dateiname sind ungültig!"
 
 msgid "Exporting in progress..."
 msgstr "Export läuft..."
@@ -613,16 +613,16 @@ msgid "Outline"
 msgstr "Umriss"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Schlagschatten"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Offset X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Offset Y:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Schattenfarbe:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Farbton/Sättigung/Wert anpassen"
@@ -631,34 +631,34 @@ msgid "Gradient"
 msgstr "Gradient"
 
 msgid "Linear"
-msgstr ""
+msgstr "Linear"
 
 msgid "Radial"
-msgstr ""
+msgstr "Radial"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Linearer Schritt"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Radialer Schritt"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "Lineares Dithering"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "Radiales Dithering"
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Übergangsgröße:"
 
 msgid "Center:"
-msgstr ""
+msgstr "Zentriert:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Radius:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Dithering-Muster:"
 
 msgid "Adjust HSV"
 msgstr "HSV anpassen"
@@ -1914,7 +1914,7 @@ msgid "Delete"
 msgstr "Löschen"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Alle verwerfen"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
