@@ -6,6 +6,7 @@ var is_quitting_on_save := false
 var cursor_image: Texture = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI/DockableContainer
+onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
 onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
 onready var quit_and_save_dialog: ConfirmationDialog = find_node("QuitAndSaveDialog")
 
@@ -147,8 +148,7 @@ func _show_splash_screen() -> void:
 
 func _handle_backup() -> void:
 	# If backup file exists, Pixelorama was not closed properly (probably crashed) - reopen backup
-	var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
-	backup_confirmation.get_cancel().text = tr("Delete")
+	backup_confirmation.add_button("Discard All", false, "discard")
 	if Global.config_cache.has_section("backups"):
 		var project_paths = Global.config_cache.get_section_keys("backups")
 		if project_paths.size() > 0:
@@ -161,11 +161,11 @@ func _handle_backup() -> void:
 			backup_confirmation.connect(
 				"confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths, backup_paths]
 			)
-			backup_confirmation.get_cancel().connect(
-				"pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths]
-			)
-			backup_confirmation.get_close_button().connect(
-				"pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths]
+			backup_confirmation.connect(
+				"custom_action",
+				self,
+				"_on_BackupConfirmation_custom_action",
+				[project_paths, backup_paths]
 			)
 			backup_confirmation.popup_centered()
 			Global.can_draw = false
@@ -334,7 +334,12 @@ func _on_BackupConfirmation_confirmed(project_paths: Array, backup_paths: Array)
 	Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 
 
-func _on_BackupConfirmation_delete(project_paths: Array, backup_paths: Array) -> void:
+func _on_BackupConfirmation_custom_action(
+	action: String, project_paths: Array, backup_paths: Array
+) -> void:
+	backup_confirmation.hide()
+	if action != "discard":
+		return
 	for i in range(project_paths.size()):
 		OpenSave.remove_backup_by_path(project_paths[i], backup_paths[i])
 	# Reopen last project
