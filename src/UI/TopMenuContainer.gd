@@ -146,7 +146,7 @@ func _setup_window_menu() -> void:
 		"Window Opacity",
 		"Panels",
 		"Layouts",
-		"Movable Panels",
+		"Moveable Panels",
 		"Zen Mode",
 		"Fullscreen Mode",
 	]
