@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-05-18 20:01\n"
+"PO-Revision-Date: 2022-05-18 20:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -653,13 +653,13 @@ msgid "Transition size:"
 msgstr "Tamanho de transição:"
 
 msgid "Center:"
-msgstr ""
+msgstr "Centro:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Raio:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Dithering pattern:"
 
 msgid "Adjust HSV"
 msgstr "Ajustar MSV"
@@ -1909,7 +1909,7 @@ msgid "Delete"
 msgstr "Deletar"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Descartar Todos"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
