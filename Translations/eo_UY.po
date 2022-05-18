@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2022-05-18 11:56\n"
+"PO-Revision-Date: 2022-05-18 18:59\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -336,8 +336,14 @@ msgstr "Dosiero ekzistas, ĉu rekonservi?"
 msgid "File %s already exists. Overwrite?"
 msgstr "Dosiero %s jam ekzistas. Ĉu rekonservi?"
 
-msgid "Directory path or file name is not valid!"
-msgstr "Dosieruja vojo aŭ dosiera nomo estas malĝusta!"
+msgid "Directory path is not valid!"
+msgstr ""
+
+msgid "File name is not valid!"
+msgstr ""
+
+msgid "Directory path and file name are not valid!"
+msgstr ""
 
 msgid "Exporting in progress..."
 msgstr ""
@@ -606,10 +612,52 @@ msgstr ""
 msgid "Outline"
 msgstr "Konturoj"
 
+msgid "Drop Shadow"
+msgstr ""
+
+msgid "Offset X:"
+msgstr ""
+
+msgid "Offset Y:"
+msgstr ""
+
+msgid "Shadow color:"
+msgstr ""
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
 msgid "Gradient"
+msgstr ""
+
+msgid "Linear"
+msgstr ""
+
+msgid "Radial"
+msgstr ""
+
+msgid "Linear Step"
+msgstr ""
+
+msgid "Radial Step"
+msgstr ""
+
+msgid "Linear Dithering"
+msgstr ""
+
+msgid "Radial Dithering"
+msgstr ""
+
+msgid "Transition size:"
+msgstr ""
+
+msgid "Center:"
+msgstr ""
+
+msgid "Radius:"
+msgstr ""
+
+msgid "Dithering pattern:"
 msgstr ""
 
 msgid "Adjust HSV"
@@ -1805,6 +1853,9 @@ msgid "Close"
 msgstr "Fermi"
 
 msgid "Delete"
+msgstr ""
+
+msgid "Discard All"
 msgstr ""
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
