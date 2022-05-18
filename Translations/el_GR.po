@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-05-18 19:00\n"
+"PO-Revision-Date: 2022-05-18 21:37\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -340,10 +340,10 @@ msgid "Directory path is not valid!"
 msgstr ""
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Το όνομα του αρχείου σας δεν είναι έγκυρο!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Η διαδρομή του φακέλου και το όνομα αρχείο δεν είναι έγκυρα!"
 
 msgid "Exporting in progress..."
 msgstr "Εξαγωγή σε εξέλιξη..."
