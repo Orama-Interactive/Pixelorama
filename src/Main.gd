@@ -164,6 +164,9 @@ func _handle_backup() -> void:
 			backup_confirmation.get_cancel().connect(
 				"pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths]
 			)
+			backup_confirmation.get_close_button().connect(
+				"pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths]
+			)
 			backup_confirmation.popup_centered()
 			Global.can_draw = false
 			modulate = Color(0.5, 0.5, 0.5)
