@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-05-18 20:29\n"
+"PO-Revision-Date: 2022-05-18 20:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -644,22 +644,22 @@ msgid "Radial Step"
 msgstr "Pas radial"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "Intercalare liniară a nuanțelor"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "Intercalare radială a nuanțelor"
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Dimensiunea tranziției:"
 
 msgid "Center:"
 msgstr ""
 
 msgid "Radius:"
-msgstr ""
+msgstr "Rază:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Model de intercalare a nuanțelor:"
 
 msgid "Adjust HSV"
 msgstr "Ajustare NSV"
@@ -1915,7 +1915,7 @@ msgid "Delete"
 msgstr "Ștergere"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Renunțare la toate"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
