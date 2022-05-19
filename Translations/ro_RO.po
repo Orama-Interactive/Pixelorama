@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-05-18 20:38\n"
+"PO-Revision-Date: 2022-05-19 08:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -614,7 +614,7 @@ msgid "Outline"
 msgstr "Contur"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Umbră"
 
 msgid "Offset X:"
 msgstr "Decalaj X:"
@@ -632,10 +632,10 @@ msgid "Gradient"
 msgstr "Degrade"
 
 msgid "Linear"
-msgstr ""
+msgstr "Liniar"
 
 msgid "Radial"
-msgstr ""
+msgstr "Radial"
 
 msgid "Linear Step"
 msgstr "Pas liniar"
@@ -653,7 +653,7 @@ msgid "Transition size:"
 msgstr "Dimensiunea tranziției:"
 
 msgid "Center:"
-msgstr ""
+msgstr "Centru:"
 
 msgid "Radius:"
 msgstr "Rază:"
