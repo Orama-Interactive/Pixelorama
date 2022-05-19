@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-05-18 18:59\n"
+"PO-Revision-Date: 2022-05-19 14:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -340,7 +340,7 @@ msgid "Directory path is not valid!"
 msgstr ""
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Неправильное имя файла!"
 
 msgid "Directory path and file name are not valid!"
 msgstr ""
@@ -614,16 +614,16 @@ msgid "Outline"
 msgstr "Обводка"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Отбросить тень"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Смещение по X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Смещение по Y:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Цвет тени:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Изменить Оттенок/Насыщенность/Яркость"
@@ -653,10 +653,10 @@ msgid "Transition size:"
 msgstr ""
 
 msgid "Center:"
-msgstr ""
+msgstr "Центр:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Радиус:"
 
 msgid "Dithering pattern:"
 msgstr ""
