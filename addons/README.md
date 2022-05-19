@@ -3,7 +3,7 @@
 ## Keychain
 
 - Upstream: https://github.com/Orama-Interactive/Keychain
-- Version: Based on git commit 751540203124426947d69bd81f50fea07eded91d with slight modifications in Keychain.gd and ShortcutEdit.tscn.
+- Version: Based on git commit 29e80383e46acb5478696d40990bc3624a6920c4 with slight modifications in Keychain.gd and ShortcutEdit.tscn.
 - License: [MIT](https://github.com/Orama-Interactive/Keychain/blob/main/LICENSE)
 
 ## gdgifexporter
