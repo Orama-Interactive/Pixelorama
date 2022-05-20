@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-05-18 19:00\n"
+"PO-Revision-Date: 2022-05-20 02:02\n"
 
 msgid "OK"
 msgstr "예"
@@ -340,7 +340,7 @@ msgid "Directory path is not valid!"
 msgstr ""
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "파일 명이 유효하지 않습니다!"
 
 msgid "Directory path and file name are not valid!"
 msgstr ""
@@ -617,10 +617,10 @@ msgid "Drop Shadow"
 msgstr ""
 
 msgid "Offset X:"
-msgstr ""
+msgstr "X 오프셋:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Y 오프셋:"
 
 msgid "Shadow color:"
 msgstr ""
