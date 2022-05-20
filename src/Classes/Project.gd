@@ -219,6 +219,7 @@ func change_project() -> void:
 
 	Global.canvas.update()
 	Global.canvas.grid.update()
+	Global.canvas.tile_mode.update()
 	Global.transparent_checker.update_rect()
 	Global.animation_timeline.fps_spinbox.value = fps
 	Global.horizontal_ruler.update()
