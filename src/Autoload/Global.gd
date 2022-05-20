@@ -304,7 +304,7 @@ func _initialize_keychain() -> void:
 		"change_tool_mode": Keychain.InputAction.new("", "Tool modifiers", false),
 		"draw_create_line": Keychain.InputAction.new("", "Draw tools", false),
 		"draw_snap_angle": Keychain.InputAction.new("", "Draw tools", false),
-		"draw_color_picker": Keychain.InputAction.new("", "Draw tools", false),
+		"draw_color_picker": Keychain.InputAction.new("Quick color picker", "Draw tools", false),
 		"shape_perfect": Keychain.InputAction.new("", "Shape tools", false),
 		"shape_center": Keychain.InputAction.new("", "Shape tools", false),
 		"shape_displace": Keychain.InputAction.new("", "Shape tools", false),
