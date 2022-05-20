@@ -754,6 +754,82 @@ activate_right_tool={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+open_last_project={
+"deadzone": 0.5,
+"events": [  ]
+}
+preferences={
+"deadzone": 0.5,
+"events": [  ]
+}
+scale_image={
+"deadzone": 0.5,
+"events": [  ]
+}
+centralize_image={
+"deadzone": 0.5,
+"events": [  ]
+}
+crop_image={
+"deadzone": 0.5,
+"events": [  ]
+}
+resize_canvas={
+"deadzone": 0.5,
+"events": [  ]
+}
+mirror_image={
+"deadzone": 0.5,
+"events": [  ]
+}
+rotate_image={
+"deadzone": 0.5,
+"events": [  ]
+}
+invert_colors={
+"deadzone": 0.5,
+"events": [  ]
+}
+desaturation={
+"deadzone": 0.5,
+"events": [  ]
+}
+outline={
+"deadzone": 0.5,
+"events": [  ]
+}
+drop_shadow={
+"deadzone": 0.5,
+"events": [  ]
+}
+adjust_hsv={
+"deadzone": 0.5,
+"events": [  ]
+}
+gradient={
+"deadzone": 0.5,
+"events": [  ]
+}
+view_splash_screen={
+"deadzone": 0.5,
+"events": [  ]
+}
+issue_tracker={
+"deadzone": 0.5,
+"events": [  ]
+}
+open_logs_folder={
+"deadzone": 0.5,
+"events": [  ]
+}
+changelog={
+"deadzone": 0.5,
+"events": [  ]
+}
+about_pixelorama={
+"deadzone": 0.5,
+"events": [  ]
+}
 
 [locale]
 
