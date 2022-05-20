@@ -111,7 +111,7 @@ func new_empty_frame() -> Frame:
 	for l in layers:  # Create as many cels as there are layers
 		var image := Image.new()
 		image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-		if bottom_layer:
+		if bottom_layer and fill_color.a > 0:
 			image.fill(fill_color)
 		frame.cels.append(Cel.new(image, 1))
 		bottom_layer = false
@@ -219,6 +219,7 @@ func change_project() -> void:
 
 	Global.canvas.update()
 	Global.canvas.grid.update()
+	Global.canvas.tile_mode.update()
 	Global.transparent_checker.update_rect()
 	Global.animation_timeline.fps_spinbox.value = fps
 	Global.horizontal_ruler.update()

@@ -6,9 +6,6 @@ var pen_pressure := 1.0
 var horizontal_mirror := false
 var vertical_mirror := false
 var pixel_perfect := false
-var control := false
-var shift := false
-var alt := false
 
 var tools := {
 	"RectSelect":
@@ -72,7 +69,7 @@ var tools := {
 		"pencil",
 		preload("res://src/Tools/Pencil.tscn"),
 		"Hold %s to make a line",
-		["Shift"]
+		["draw_create_line"]
 	),
 	"Eraser":
 	Tool.new(
@@ -81,7 +78,7 @@ var tools := {
 		"eraser",
 		preload("res://src/Tools/Eraser.tscn"),
 		"Hold %s to make a line",
-		["Shift"]
+		["draw_create_line"]
 	),
 	"Bucket": Tool.new("Bucket", "Bucket", "fill", preload("res://src/Tools/Bucket.tscn")),
 	"Shading":
@@ -95,7 +92,7 @@ var tools := {
 		"""Hold %s to snap the angle of the line
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
-		["Shift", "configurable_ctrl", "configurable_alt"]
+		["shape_perfect", "shape_center", "shape_displace"]
 	),
 	"RectangleTool":
 	Tool.new(
@@ -106,7 +103,7 @@ Hold %s to displace the shape's origin""",
 		"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
-		["configurable_shift", "configurable_ctrl", "configurable_alt"]
+		["shape_perfect", "shape_center", "shape_displace"]
 	),
 	"EllipseTool":
 	Tool.new(
@@ -117,7 +114,7 @@ Hold %s to displace the shape's origin""",
 		"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
-		["configurable_shift", "configurable_ctrl", "configurable_alt"]
+		["shape_perfect", "shape_center", "shape_displace"]
 	),
 }
 
@@ -138,7 +135,6 @@ class Tool:
 	var shortcut := ""
 	var extra_hint := ""
 	var extra_shortcuts := []  # Array of String(s)
-	var extra_shortcuts_order := []  # Array to keep shift, ctrl, alt in order
 	var button_node: BaseButton
 
 	func _init(
@@ -155,7 +151,6 @@ class Tool:
 		scene = _scene
 		extra_hint = _extra_hint
 		extra_shortcuts = _extra_shortucts
-		extra_shortcuts_order = _extra_shortucts.duplicate()
 		icon = load("res://assets/graphics/tools/%s.png" % name.to_lower())
 		cursor_icon = load("res://assets/graphics/tools/cursors/%s.png" % name.to_lower())
 
@@ -165,13 +160,17 @@ class Tool:
 		var left_text := ""
 		var right_text := ""
 		if InputMap.has_action("left_" + shortcut + "_tool"):
-			var left_shortcut: String = InputMap.get_action_list("left_" + shortcut + "_tool")[0].as_text()
-			shortcuts.append(left_shortcut)
-			left_text = "\n%s for left mouse button"
+			var left_list := InputMap.get_action_list("left_" + shortcut + "_tool")
+			if left_list.size() > 0:
+				var left_shortcut: String = left_list[0].as_text()
+				shortcuts.append(left_shortcut)
+				left_text = "\n%s for left mouse button"
 		if InputMap.has_action("right_" + shortcut + "_tool"):
-			var right_shortcut: String = InputMap.get_action_list("right_" + shortcut + "_tool")[0].as_text()
-			shortcuts.append(right_shortcut)
-			right_text = "\n%s for right mouse button"
+			var right_list := InputMap.get_action_list("right_" + shortcut + "_tool")
+			if right_list.size() > 0:
+				var right_shortcut: String = right_list[0].as_text()
+				shortcuts.append(right_shortcut)
+				right_text = "\n%s for right mouse button"
 
 		if !shortcuts.empty():
 			hint += "\n" + left_text + right_text
@@ -179,23 +178,15 @@ class Tool:
 		if !extra_hint.empty():
 			hint += "\n\n" + extra_hint
 
-		# Some tools have shift,ctrl,alt "HARD CODED" in them using (InputEventWithModifiers)
-		# But Others only use the regular is_action_pressed() function
-		# their Shift, Ctrl, Alt are listed Below
-		var code_shift = InputMap.get_action_list("shift")[0].get_scancode_with_modifiers()
-		var code_ctrl = InputMap.get_action_list("ctrl")[0].get_scancode_with_modifiers()
-		var code_alt = InputMap.get_action_list("alt")[0].get_scancode_with_modifiers()
-		var configurable_shift: String = OS.get_scancode_string(code_shift)
-		var configurable_ctrl: String = OS.get_scancode_string(code_ctrl)
-		var configurable_alt: String = OS.get_scancode_string(code_alt)
-		for shortcut_idx in extra_shortcuts.size():
-			if extra_shortcuts_order[shortcut_idx] == "configurable_shift":
-				extra_shortcuts[shortcut_idx] = configurable_shift
-			if extra_shortcuts_order[shortcut_idx] == "configurable_ctrl":
-				extra_shortcuts[shortcut_idx] = configurable_ctrl
-			if extra_shortcuts_order[shortcut_idx] == "configurable_alt":
-				extra_shortcuts[shortcut_idx] = configurable_alt
-		shortcuts.append_array(extra_shortcuts)
+		var extra_shortcuts_mapped := []
+		for event in extra_shortcuts:
+			var key: InputEventKey = Keychain.action_get_first_key(event)
+			var key_string := "None"
+			if key:
+				key_string = OS.get_scancode_string(key.get_scancode_with_modifiers())
+			extra_shortcuts_mapped.append(key_string)
+
+		shortcuts.append_array(extra_shortcuts_mapped)
 
 		if shortcuts.empty():
 			hint = tr(hint)
@@ -220,6 +211,12 @@ func _ready() -> void:
 	_tool_buttons = Global.control.find_node("ToolButtons")
 	for t in tools:
 		add_tool_button(tools[t])
+		var tool_shortcut: String = Tools.tools[t].shortcut
+		var left_tool_shortcut := "left_%s_tool" % tool_shortcut
+		var right_tool_shortcut := "right_%s_tool" % tool_shortcut
+		Keychain.actions[left_tool_shortcut] = Keychain.InputAction.new("", "Left")
+		Keychain.actions[right_tool_shortcut] = Keychain.InputAction.new("", "Right")
+
 	_slots[BUTTON_LEFT] = Slot.new("Left tool")
 	_slots[BUTTON_RIGHT] = Slot.new("Right tool")
 	_panels[BUTTON_LEFT] = Global.control.find_node("LeftPanelContainer", true, false)
@@ -383,19 +380,18 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 	if Global.mirror_view:
 		draw_pos.x = Global.current_project.size.x - position.x - 1
 
-	if event is InputEventWithModifiers:
-		control = event.control
-		shift = event.shift
-		alt = event.alt
-
-	if event is InputEventMouseButton:
-		if event.button_index in [BUTTON_LEFT, BUTTON_RIGHT]:
-			if event.pressed and _active_button == -1:
-				_active_button = event.button_index
-				_slots[_active_button].tool_node.draw_start(draw_pos)
-			elif not event.pressed and event.button_index == _active_button:
-				_slots[_active_button].tool_node.draw_end(draw_pos)
-				_active_button = -1
+	if event.is_action_pressed("activate_left_tool") and _active_button == -1:
+		_active_button = BUTTON_LEFT
+		_slots[_active_button].tool_node.draw_start(draw_pos)
+	elif event.is_action_released("activate_left_tool") and _active_button == BUTTON_LEFT:
+		_slots[_active_button].tool_node.draw_end(draw_pos)
+		_active_button = -1
+	elif event.is_action("activate_right_tool") and _active_button == -1:
+		_active_button = BUTTON_RIGHT
+		_slots[_active_button].tool_node.draw_start(draw_pos)
+	elif event.is_action_released("activate_right_tool") and _active_button == BUTTON_RIGHT:
+		_slots[_active_button].tool_node.draw_end(draw_pos)
+		_active_button = -1
 
 	if event is InputEventMouseMotion:
 		pen_pressure = event.pressure

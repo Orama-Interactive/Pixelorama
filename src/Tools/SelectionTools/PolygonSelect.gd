@@ -17,8 +17,8 @@ func _input(event: InputEvent) -> void:
 			append_gap(_draw_points[-1], _draw_points[0], _draw_points)
 			_ready_to_apply = true
 			apply_selection(Vector2.ZERO)  # Argument doesn't matter
-	elif event is InputEventKey:
-		if event.is_action_pressed("escape") and _ongoing_selection:
+	else:
+		if event.is_action_pressed("transformation_cancel") and _ongoing_selection:
 			_ongoing_selection = false
 			_draw_points.clear()
 			_ready_to_apply = false

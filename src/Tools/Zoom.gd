@@ -9,12 +9,12 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_relative = event.relative
 
-	if event.is_action_pressed("ctrl"):
+	if event.is_action_pressed("change_tool_mode"):
 		_prev_mode = $ModeOptions.selected
-	if event.is_action("ctrl"):
+	if event.is_action("change_tool_mode"):
 		$ModeOptions.selected = _prev_mode ^ 1
 		_zoom_mode = $ModeOptions.selected
-	if event.is_action_released("ctrl"):
+	if event.is_action_released("change_tool_mode"):
 		$ModeOptions.selected = _prev_mode
 		_zoom_mode = $ModeOptions.selected
 

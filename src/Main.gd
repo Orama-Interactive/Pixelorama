@@ -6,6 +6,7 @@ var is_quitting_on_save := false
 var cursor_image: Texture = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI/DockableContainer
+onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
 onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
 onready var quit_and_save_dialog: ConfirmationDialog = find_node("QuitAndSaveDialog")
 
@@ -84,26 +85,6 @@ func _input(event: InputEvent) -> void:
 		if get_focus_owner() is LineEdit:
 			get_focus_owner().release_focus()
 
-	# The section of code below is reserved for Undo and Redo!
-	# Do not place code for Input below, but above.
-	if !event.is_echo():  # Checks if the action is pressed down
-		if event.is_action_pressed("redo_secondary"):
-			# Done, so that "redo_secondary" hasn't a slight delay before it starts.
-			# The "redo" and "undo" action don't have a slight delay,
-			# because they get called as an accelerator once pressed (TopMenuContainer.gd, Line 152)
-			Global.current_project.commit_redo()
-		return
-
-	if event.is_action("redo"):  # Ctrl + Y
-		Global.current_project.commit_redo()
-
-	if event.is_action("redo_secondary"):  # Shift + Ctrl + Z
-		Global.current_project.commit_redo()
-
-	if event.is_action("undo") and !event.shift:  # Ctrl + Z and check if shift isn't pressed
-		# so "undo" isn't accidentaly triggered while using "redo_secondary"
-		Global.current_project.commit_undo()
-
 
 func _setup_application_window_size() -> void:
 	get_tree().set_screen_stretch(
@@ -167,8 +148,7 @@ func _show_splash_screen() -> void:
 
 func _handle_backup() -> void:
 	# If backup file exists, Pixelorama was not closed properly (probably crashed) - reopen backup
-	var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
-	backup_confirmation.get_cancel().text = tr("Delete")
+	backup_confirmation.add_button("Discard All", false, "discard")
 	if Global.config_cache.has_section("backups"):
 		var project_paths = Global.config_cache.get_section_keys("backups")
 		if project_paths.size() > 0:
@@ -181,8 +161,11 @@ func _handle_backup() -> void:
 			backup_confirmation.connect(
 				"confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths, backup_paths]
 			)
-			backup_confirmation.get_cancel().connect(
-				"pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths]
+			backup_confirmation.connect(
+				"custom_action",
+				self,
+				"_on_BackupConfirmation_custom_action",
+				[project_paths, backup_paths]
 			)
 			backup_confirmation.popup_centered()
 			Global.can_draw = false
@@ -351,7 +334,12 @@ func _on_BackupConfirmation_confirmed(project_paths: Array, backup_paths: Array)
 	Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 
 
-func _on_BackupConfirmation_delete(project_paths: Array, backup_paths: Array) -> void:
+func _on_BackupConfirmation_custom_action(
+	action: String, project_paths: Array, backup_paths: Array
+) -> void:
+	backup_confirmation.hide()
+	if action != "discard":
+		return
 	for i in range(project_paths.size()):
 		OpenSave.remove_backup_by_path(project_paths[i], backup_paths[i])
 	# Reopen last project

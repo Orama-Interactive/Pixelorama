@@ -26,7 +26,6 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ],
-"_edit_use_anchors_": false,
 "_edit_vertical_guides_": [  ]
 }
 

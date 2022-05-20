@@ -34,7 +34,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.", "Portions of this software are copyright © 2021 The FreeType Project (www.freetype.org). All rights reserved.", "MIT License
 
-Copyright (c) 2020 Igor Santarek
+Copyright (c) 2022 Orama Interactive
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -161,7 +161,15 @@ express Statement of Purpose.
  d. Affirmer understands and acknowledges that Creative Commons is not a
     party to this document and has no duty or obligation with respect to
     this CC0 or use of the Work.
-" ]
+", "MIT License
+
+Copyright (c) 2020 Igor Santarek
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE." ]
 
 [node name="AboutUI" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -376,13 +384,14 @@ mouse_default_cursor_shape = 2
 group = SubResource( 1 )
 text = "FreeType"
 
-[node name="godot-gdgifexporterLicense" type="CheckBox" parent="AboutUI/Credits/Licenses/LicenseButtonsContainer"]
+[node name="keychainLicense" type="CheckBox" parent="AboutUI/Credits/Licenses/LicenseButtonsContainer"]
+margin_left = 157.0
 margin_top = 28.0
-margin_right = 153.0
+margin_right = 348.0
 margin_bottom = 52.0
 mouse_default_cursor_shape = 2
 group = SubResource( 1 )
-text = "godot-gdgifexporter"
+text = "Keychain"
 
 [node name="godot-dockable-containerLicense" type="CheckBox" parent="AboutUI/Credits/Licenses/LicenseButtonsContainer"]
 margin_left = 157.0
@@ -392,6 +401,14 @@ margin_bottom = 52.0
 mouse_default_cursor_shape = 2
 group = SubResource( 1 )
 text = "godot-dockable-container"
+
+[node name="godot-gdgifexporterLicense" type="CheckBox" parent="AboutUI/Credits/Licenses/LicenseButtonsContainer"]
+margin_top = 28.0
+margin_right = 153.0
+margin_bottom = 52.0
+mouse_default_cursor_shape = 2
+group = SubResource( 1 )
+text = "godot-gdgifexporter"
 
 [node name="HSeparator2" type="HSeparator" parent="AboutUI"]
 margin_top = 349.0
