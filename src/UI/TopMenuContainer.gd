@@ -125,6 +125,28 @@ func _setup_view_menu() -> void:
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
 
+	var draw_grid: bool = Global.config_cache.get_value("view_menu", "draw_grid", Global.draw_grid)
+	if draw_grid != Global.draw_grid:
+		_toggle_show_grid()
+
+	var draw_pixel_grid: bool = Global.config_cache.get_value(
+		"view_menu", "draw_pixel_grid", Global.draw_pixel_grid
+	)
+	if draw_pixel_grid != Global.draw_pixel_grid:
+		_toggle_show_pixel_grid()
+
+	var show_rulers: bool = Global.config_cache.get_value(
+		"view_menu", "show_rulers", Global.show_rulers
+	)
+	if show_rulers != Global.show_rulers:
+		_toggle_show_rulers()
+
+	var show_guides: bool = Global.config_cache.get_value(
+		"view_menu", "show_guides", Global.show_guides
+	)
+	if show_guides != Global.show_guides:
+		_toggle_show_guides()
+
 
 func _setup_tile_mode_submenu(item: String) -> void:
 	tile_mode_submenu.set_name("tile_mode_submenu")
@@ -506,13 +528,15 @@ func _toggle_mirror_view() -> void:
 func _toggle_show_grid() -> void:
 	Global.draw_grid = !Global.draw_grid
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GRID, Global.draw_grid)
-	Global.canvas.grid.update()
+	if Global.canvas.grid:
+		Global.canvas.grid.update()
 
 
 func _toggle_show_pixel_grid() -> void:
 	Global.draw_pixel_grid = !Global.draw_pixel_grid
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_PIXEL_GRID, Global.draw_pixel_grid)
-	Global.canvas.pixel_grid.update()
+	if Global.canvas.pixel_grid:
+		Global.canvas.pixel_grid.update()
 
 
 func _toggle_show_rulers() -> void:
