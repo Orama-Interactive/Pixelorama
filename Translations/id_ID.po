@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-05-18 18:59\n"
+"PO-Revision-Date: 2022-05-22 08:59\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -337,10 +337,10 @@ msgid "File %s already exists. Overwrite?"
 msgstr "Berkas %s sudah ada. Timpa saja?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Jalur direktori tidak absah!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Nama berkas tidak absah!"
 
 msgid "Directory path and file name are not valid!"
 msgstr ""
