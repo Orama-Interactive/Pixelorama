@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-05-20 02:02\n"
+"PO-Revision-Date: 2022-05-22 12:51\n"
 
 msgid "OK"
 msgstr "예"
@@ -653,10 +653,10 @@ msgid "Transition size:"
 msgstr ""
 
 msgid "Center:"
-msgstr ""
+msgstr "중심:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "반지름:"
 
 msgid "Dithering pattern:"
 msgstr ""
