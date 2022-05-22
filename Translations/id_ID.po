@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-05-22 08:59\n"
+"PO-Revision-Date: 2022-05-22 09:09\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -343,7 +343,7 @@ msgid "File name is not valid!"
 msgstr "Nama berkas tidak absah!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Jalur direktori dan nama berkas tidak absah!"
 
 msgid "Exporting in progress..."
 msgstr "Ekspor sedang berlangsung..."
@@ -614,7 +614,7 @@ msgid "Outline"
 msgstr "Garis luar"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Drop Shadow"
 
 msgid "Offset X:"
 msgstr ""
