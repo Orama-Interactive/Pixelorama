@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-05-22 09:09\n"
+"PO-Revision-Date: 2022-05-22 09:19\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -617,13 +617,13 @@ msgid "Drop Shadow"
 msgstr "Drop Shadow"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Offset X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Offset Y:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Warna bayangan:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Sesuaikan Rona/Saturasi/Nilai"
