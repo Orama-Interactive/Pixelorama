@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-05-22 09:33\n"
+"PO-Revision-Date: 2022-05-22 09:49\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -659,7 +659,7 @@ msgid "Radius:"
 msgstr "Jari-jari:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Pola bauran galat:"
 
 msgid "Adjust HSV"
 msgstr "Sesuaikan HSV"
@@ -1915,7 +1915,7 @@ msgid "Delete"
 msgstr "Hapus"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Buang Semua"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
