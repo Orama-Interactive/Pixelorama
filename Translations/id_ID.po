@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-05-22 09:19\n"
+"PO-Revision-Date: 2022-05-22 09:33\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -632,31 +632,31 @@ msgid "Gradient"
 msgstr "Gradien"
 
 msgid "Linear"
-msgstr ""
+msgstr "Linier"
 
 msgid "Radial"
-msgstr ""
+msgstr "Radial"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Langkah Linier"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Langkah Radial"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "Bauran Galat Linier"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "Bauran Galat Radial"
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Ukuran peralihan:"
 
 msgid "Center:"
-msgstr ""
+msgstr "Tengah:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Jari-jari:"
 
 msgid "Dithering pattern:"
 msgstr ""
