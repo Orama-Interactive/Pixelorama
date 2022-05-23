@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-05-22 12:51\n"
+"PO-Revision-Date: 2022-05-23 10:51\n"
 
 msgid "OK"
 msgstr "예"
@@ -262,7 +262,7 @@ msgid "Import as:"
 msgstr "다음으로 가져오기:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "모두 적용"
 
 msgid "Recent projects"
 msgstr "최근 프로잭트"
@@ -337,13 +337,13 @@ msgid "File %s already exists. Overwrite?"
 msgstr "파일 %s이(가) 이미 존재합니다. 덮어씌우시겠습니까?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "경로가 유효 하지 않습니다."
 
 msgid "File name is not valid!"
 msgstr "파일 명이 유효하지 않습니다!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "디렉토리 경로나 파일 이름이 유효하지 않습니다!"
 
 msgid "Exporting in progress..."
 msgstr "내보내는 중..."
@@ -614,7 +614,7 @@ msgid "Outline"
 msgstr "외곽선"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "그림자"
 
 msgid "Offset X:"
 msgstr "X 오프셋:"
@@ -623,7 +623,7 @@ msgid "Offset Y:"
 msgstr "Y 오프셋:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "그림자 색상:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "색상/채도/명도 수정"
@@ -632,25 +632,25 @@ msgid "Gradient"
 msgstr "그레디언트"
 
 msgid "Linear"
-msgstr ""
+msgstr "선형"
 
 msgid "Radial"
-msgstr ""
+msgstr "반지름"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "선형 단계"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "반지름 단계"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "선형 디더링"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "반지름 디더링"
 
 msgid "Transition size:"
-msgstr ""
+msgstr "전환 크기:"
 
 msgid "Center:"
 msgstr "중심:"
@@ -659,7 +659,7 @@ msgid "Radius:"
 msgstr "반지름:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "디더링 패턴"
 
 msgid "Adjust HSV"
 msgstr "HSV 수정"
@@ -1913,7 +1913,7 @@ msgid "Delete"
 msgstr "삭제"
 
 msgid "Discard All"
-msgstr ""
+msgstr "모두 버리기"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
