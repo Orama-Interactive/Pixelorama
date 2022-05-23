@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-05-18 21:37\n"
+"PO-Revision-Date: 2022-05-23 15:22\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -337,13 +337,13 @@ msgid "File %s already exists. Overwrite?"
 msgstr "Το αρχείο \"%s\" υπάρχει ήδη. Αντικατάσταση;"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Η διαδρομή του φακέλου δεν είναι έγκυρη!"
 
 msgid "File name is not valid!"
-msgstr "Το όνομα του αρχείου σας δεν είναι έγκυρο!"
+msgstr "Το όνομα του αρχείου δεν είναι έγκυρο!"
 
 msgid "Directory path and file name are not valid!"
-msgstr "Η διαδρομή του φακέλου και το όνομα αρχείο δεν είναι έγκυρα!"
+msgstr "Η διαδρομή του φακέλου και το όνομα του αρχείου δεν είναι έγκυρα!"
 
 msgid "Exporting in progress..."
 msgstr "Εξαγωγή σε εξέλιξη..."
@@ -617,13 +617,13 @@ msgid "Drop Shadow"
 msgstr ""
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Μετατόπιση X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Μετατόπιση Y:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Χρώμα σκιάς:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
@@ -632,16 +632,16 @@ msgid "Gradient"
 msgstr "Διαβάθμιση"
 
 msgid "Linear"
-msgstr ""
+msgstr "Γραμμική"
 
 msgid "Radial"
-msgstr ""
+msgstr "Ακτινική"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Γραμμικό Βήμα"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Ακτινικό Βήμα"
 
 msgid "Linear Dithering"
 msgstr ""
@@ -650,13 +650,13 @@ msgid "Radial Dithering"
 msgstr ""
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Μέγεθος μετάβασης:"
 
 msgid "Center:"
-msgstr ""
+msgstr "Κέντρο:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Ακτίνα:"
 
 msgid "Dithering pattern:"
 msgstr ""
@@ -1915,7 +1915,7 @@ msgid "Delete"
 msgstr "Διαγραφή"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Απόρριψη όλων"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
