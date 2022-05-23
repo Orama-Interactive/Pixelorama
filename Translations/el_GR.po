@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-05-23 15:22\n"
+"PO-Revision-Date: 2022-05-23 15:53\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -614,7 +614,7 @@ msgid "Outline"
 msgstr "Περίγραμμα"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Πίπτουσα σκιά"
 
 msgid "Offset X:"
 msgstr "Μετατόπιση X:"
@@ -644,10 +644,10 @@ msgid "Radial Step"
 msgstr "Ακτινικό Βήμα"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "Γραμμική χρωματική αντιπαράθεση"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "Ακτινική χρωματική αντιπαράθεση"
 
 msgid "Transition size:"
 msgstr "Μέγεθος μετάβασης:"
@@ -659,7 +659,7 @@ msgid "Radius:"
 msgstr "Ακτίνα:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Μοτίβο χρωματικής αντιπαράθεσης:"
 
 msgid "Adjust HSV"
 msgstr "Ρύθμιση HSV"
