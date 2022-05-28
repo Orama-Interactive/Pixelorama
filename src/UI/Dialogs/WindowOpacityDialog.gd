@@ -5,6 +5,7 @@ onready var spinbox: SpinBox = $HBoxContainer2/SpinBox
 
 
 func _on_WindowOpacityDialog_about_to_show() -> void:
+	OS.window_per_pixel_transparency_enabled = true
 	hslider.editable = !OS.window_fullscreen
 	spinbox.editable = hslider.editable
 

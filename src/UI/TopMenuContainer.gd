@@ -575,7 +575,7 @@ func _toggle_fullscreen() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
 	window_menu.set_item_checked(Global.WindowMenu.FULLSCREEN_MODE, OS.window_fullscreen)
 	if OS.window_fullscreen:  # If window is fullscreen then reset transparency
-		window_opacity_dialog.set_window_opacity(1.0)
+		window_opacity_dialog.set_window_opacity(100.0)
 
 
 func image_menu_id_pressed(id: int) -> void:
