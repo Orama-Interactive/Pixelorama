@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-03-31 06:07\n"
+"PO-Revision-Date: 2022-05-19 08:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -336,8 +336,14 @@ msgstr "Fișierul există deja. Suprascrii?"
 msgid "File %s already exists. Overwrite?"
 msgstr "Fișierul %s există deja. Suprascrii?"
 
-msgid "Directory path or file name is not valid!"
-msgstr "Calea directorului sau numele fișierului nu este valid!"
+msgid "Directory path is not valid!"
+msgstr "Calea directorului nu este validă!"
+
+msgid "File name is not valid!"
+msgstr "Numele fișierului nu este valid!"
+
+msgid "Directory path and file name are not valid!"
+msgstr "Calea directorului și numele fișierului nu sunt valide!"
 
 msgid "Exporting in progress..."
 msgstr "Exportare în desfășurare..."
@@ -607,11 +613,53 @@ msgstr "Desaturație"
 msgid "Outline"
 msgstr "Contur"
 
+msgid "Drop Shadow"
+msgstr "Umbră"
+
+msgid "Offset X:"
+msgstr "Decalaj X:"
+
+msgid "Offset Y:"
+msgstr "Decalaj Y:"
+
+msgid "Shadow color:"
+msgstr "Culoarea umbrei:"
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajustare nuanță/saturație/valoare"
 
 msgid "Gradient"
 msgstr "Degrade"
+
+msgid "Linear"
+msgstr "Liniar"
+
+msgid "Radial"
+msgstr "Radial"
+
+msgid "Linear Step"
+msgstr "Pas liniar"
+
+msgid "Radial Step"
+msgstr "Pas radial"
+
+msgid "Linear Dithering"
+msgstr "Intercalare liniară a nuanțelor"
+
+msgid "Radial Dithering"
+msgstr "Intercalare radială a nuanțelor"
+
+msgid "Transition size:"
+msgstr "Dimensiunea tranziției:"
+
+msgid "Center:"
+msgstr "Centru:"
+
+msgid "Radius:"
+msgstr "Rază:"
+
+msgid "Dithering pattern:"
+msgstr "Model de intercalare a nuanțelor:"
 
 msgid "Adjust HSV"
 msgstr "Ajustare NSV"
@@ -1865,6 +1913,9 @@ msgstr "Închide"
 
 msgid "Delete"
 msgstr "Ștergere"
+
+msgid "Discard All"
+msgstr "Renunțare la toate"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"

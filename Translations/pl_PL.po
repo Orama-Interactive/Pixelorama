@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-03-30 23:31\n"
+"PO-Revision-Date: 2022-05-18 18:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -336,8 +336,14 @@ msgstr "Plik istnieje! Nadpisać?"
 msgid "File %s already exists. Overwrite?"
 msgstr "Plik %s już istnieje. Nadpisać?"
 
-msgid "Directory path or file name is not valid!"
-msgstr "Ścieżka do katalogu lub nazwa pliku nie jest prawidłowa!"
+msgid "Directory path is not valid!"
+msgstr ""
+
+msgid "File name is not valid!"
+msgstr ""
+
+msgid "Directory path and file name are not valid!"
+msgstr ""
 
 msgid "Exporting in progress..."
 msgstr "Eksportowanie w toku..."
@@ -605,11 +611,53 @@ msgstr "Desaturacja (zmniejsz nasycenie)"
 msgid "Outline"
 msgstr "Krawędź"
 
+msgid "Drop Shadow"
+msgstr ""
+
+msgid "Offset X:"
+msgstr ""
+
+msgid "Offset Y:"
+msgstr ""
+
+msgid "Shadow color:"
+msgstr ""
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Dostosuj Odcień/Nasycenie/Wartość"
 
 msgid "Gradient"
 msgstr "Gradient"
+
+msgid "Linear"
+msgstr ""
+
+msgid "Radial"
+msgstr ""
+
+msgid "Linear Step"
+msgstr ""
+
+msgid "Radial Step"
+msgstr ""
+
+msgid "Linear Dithering"
+msgstr ""
+
+msgid "Radial Dithering"
+msgstr ""
+
+msgid "Transition size:"
+msgstr ""
+
+msgid "Center:"
+msgstr ""
+
+msgid "Radius:"
+msgstr ""
+
+msgid "Dithering pattern:"
+msgstr ""
 
 msgid "Adjust HSV"
 msgstr "Dostosuj HSV"
@@ -1856,6 +1904,9 @@ msgstr "Zamknij"
 
 msgid "Delete"
 msgstr "Usuń"
+
+msgid "Discard All"
+msgstr ""
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"

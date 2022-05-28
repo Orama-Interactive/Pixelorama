@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-03-31 01:11\n"
+"PO-Revision-Date: 2022-05-19 04:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -336,8 +336,14 @@ msgstr "ファイルが存在します。上書きしますか？"
 msgid "File %s already exists. Overwrite?"
 msgstr "ファイル %s は既に存在しています。上書きしますか？"
 
-msgid "Directory path or file name is not valid!"
-msgstr "ディレクトリパスまたはファイル名が無効です！"
+msgid "Directory path is not valid!"
+msgstr "ディレクトリパスが有効ではありません！"
+
+msgid "File name is not valid!"
+msgstr "ファイル名が有効ではありません！"
+
+msgid "Directory path and file name are not valid!"
+msgstr "ディレクトリパスとファイル名が無効です！"
 
 msgid "Exporting in progress..."
 msgstr "エクスポート中..."
@@ -607,11 +613,53 @@ msgstr "彩度を下げる"
 msgid "Outline"
 msgstr "アウトライン"
 
+msgid "Drop Shadow"
+msgstr "ドロップシャドウ"
+
+msgid "Offset X:"
+msgstr "オフセット X:"
+
+msgid "Offset Y:"
+msgstr "オフセット Y:"
+
+msgid "Shadow color:"
+msgstr "影の色:"
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr "色相/彩度/値を調整"
 
 msgid "Gradient"
 msgstr "グラディエーション"
+
+msgid "Linear"
+msgstr "線形"
+
+msgid "Radial"
+msgstr "放射状"
+
+msgid "Linear Step"
+msgstr "線形ステップ"
+
+msgid "Radial Step"
+msgstr "放射状ステップ"
+
+msgid "Linear Dithering"
+msgstr "線形ディザリング"
+
+msgid "Radial Dithering"
+msgstr "放射状ディザリング"
+
+msgid "Transition size:"
+msgstr "トランジションサイズ:"
+
+msgid "Center:"
+msgstr "中心:"
+
+msgid "Radius:"
+msgstr "半径:"
+
+msgid "Dithering pattern:"
+msgstr "ディザリングパターン:"
 
 msgid "Adjust HSV"
 msgstr "HSVを調整"
@@ -1865,6 +1913,9 @@ msgstr "閉じる"
 
 msgid "Delete"
 msgstr "削除"
+
+msgid "Discard All"
+msgstr "すべて破棄"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"

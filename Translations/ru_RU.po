@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-03-30 23:31\n"
+"PO-Revision-Date: 2022-05-26 13:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -336,8 +336,14 @@ msgstr "Файл существует, перезаписать?"
 msgid "File %s already exists. Overwrite?"
 msgstr "Файл %s уже существует. Перезаписать?"
 
-msgid "Directory path or file name is not valid!"
-msgstr "Недопустимый путь к папке или имя файла!"
+msgid "Directory path is not valid!"
+msgstr ""
+
+msgid "File name is not valid!"
+msgstr "Неправильное имя файла!"
+
+msgid "Directory path and file name are not valid!"
+msgstr ""
 
 msgid "Exporting in progress..."
 msgstr "Выполняется экспорт..."
@@ -607,11 +613,53 @@ msgstr "Обесцвечивание"
 msgid "Outline"
 msgstr "Обводка"
 
+msgid "Drop Shadow"
+msgstr "Отбросить тень"
+
+msgid "Offset X:"
+msgstr "Смещение по X:"
+
+msgid "Offset Y:"
+msgstr "Смещение по Y:"
+
+msgid "Shadow color:"
+msgstr "Цвет тени:"
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Изменить Оттенок/Насыщенность/Яркость"
 
 msgid "Gradient"
 msgstr "Градиент"
+
+msgid "Linear"
+msgstr ""
+
+msgid "Radial"
+msgstr ""
+
+msgid "Linear Step"
+msgstr ""
+
+msgid "Radial Step"
+msgstr ""
+
+msgid "Linear Dithering"
+msgstr ""
+
+msgid "Radial Dithering"
+msgstr ""
+
+msgid "Transition size:"
+msgstr "Размер перехода:"
+
+msgid "Center:"
+msgstr "Центр:"
+
+msgid "Radius:"
+msgstr "Радиус:"
+
+msgid "Dithering pattern:"
+msgstr ""
 
 msgid "Adjust HSV"
 msgstr "Настройка цвета"
@@ -1865,6 +1913,9 @@ msgstr "Закрыть"
 
 msgid "Delete"
 msgstr "Удалить"
+
+msgid "Discard All"
+msgstr ""
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
