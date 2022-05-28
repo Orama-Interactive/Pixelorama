@@ -1,13 +1,15 @@
 extends AcceptDialog
 
-onready var hslider: HSlider = $HBoxContainer2/HSlider
-onready var spinbox: SpinBox = $HBoxContainer2/SpinBox
+onready var hslider: HSlider = $VBoxContainer/HBoxContainer/HSlider
+onready var spinbox: SpinBox = $VBoxContainer/HBoxContainer/SpinBox
+onready var fullscreen_warning: Label = $VBoxContainer/FullscreenWarning
 
 
 func _on_WindowOpacityDialog_about_to_show() -> void:
 	OS.window_per_pixel_transparency_enabled = true
 	hslider.editable = !OS.window_fullscreen
 	spinbox.editable = hslider.editable
+	fullscreen_warning.visible = !spinbox.editable
 
 
 func _on_value_changed(value: float) -> void:
