@@ -201,7 +201,7 @@ func draw_tool(position: Vector2) -> void:
 	_draw_tool(position)
 
 
-func _prepare_tool() ->void:
+func _prepare_tool() -> void:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	var strength := _strength
