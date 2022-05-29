@@ -23,7 +23,7 @@ var _polylines := []
 var _line_polylines := []
 
 # Memorize some stuff when doing brush strokes
-var _stroke_images := [] # Array of Images
+var _stroke_images := []  # Array of Images
 
 
 func _ready() -> void:
