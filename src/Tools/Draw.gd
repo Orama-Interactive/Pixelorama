@@ -28,6 +28,7 @@ var _stroke_images := []  # Array of Images
 var _tile_mode_rect: Rect2
 var _is_mask_size_zero := true
 
+
 func _ready() -> void:
 	Tools.connect("color_changed", self, "_on_Color_changed")
 	Global.brushes_popup.connect("brush_removed", self, "_on_Brush_removed")
