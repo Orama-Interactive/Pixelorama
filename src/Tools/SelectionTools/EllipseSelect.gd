@@ -8,7 +8,6 @@ var _displace_origin = false  # Mouse Click + Alt
 
 
 func _input(event: InputEvent) -> void:
-	._input(event)
 	if !_move and !_rect.has_no_area():
 		if event.is_action_pressed("shape_perfect"):
 			_square = true
