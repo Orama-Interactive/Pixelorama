@@ -23,8 +23,10 @@ var _polylines := []
 var _line_polylines := []
 
 # Memorize some stuff when doing brush strokes
+var _stroke_project: Project
 var _stroke_images := []  # Array of Images
-
+var _tile_mode_rect: Rect2
+var _is_mask_size_zero := true
 
 func _ready() -> void:
 	Tools.connect("color_changed", self, "_on_Color_changed")
@@ -156,6 +158,7 @@ func update_mask(can_skip := true) -> void:
 			_mask = PoolByteArray()
 		return
 	var size: Vector2 = Global.current_project.size
+	_is_mask_size_zero = false
 	# Faster than zeroing PoolByteArray directly.
 	# See: https://github.com/Orama-Interactive/Pixelorama/pull/439
 	var nulled_array := []
@@ -211,8 +214,14 @@ func _prepare_tool() -> void:
 	_drawer.horizontal_mirror = Tools.horizontal_mirror
 	_drawer.vertical_mirror = Tools.vertical_mirror
 	_drawer.color_op.strength = strength
+	# Memorize current project
+	_stroke_project = Global.current_project
 	# Memorize the frame/layer we are drawing on rather than fetching it on every pixel
 	_stroke_images = _get_selected_draw_images()
+	# Memorize current tile mode
+	_tile_mode_rect = _stroke_project.get_tile_mode_rect()
+	# This may prevent a few tests when setting pixels
+	_is_mask_size_zero = _mask.size() == 0
 
 
 # Make sure to alway have invoked _prepare_tool() before this
@@ -269,14 +278,14 @@ func draw_tool_circle(position: Vector2, fill := false) -> void:
 	var err := 2 - r * 2
 	var draw := true
 	if fill:
-		_set_pixel(position)
+		_set_pixel_no_cache(position)
 	while x < 0:
 		if draw:
 			for i in range(1 if fill else -x, -x + 1):
-				_set_pixel(position + Vector2(-i, y))
-				_set_pixel(position + Vector2(-y, -i))
-				_set_pixel(position + Vector2(i, -y))
-				_set_pixel(position + Vector2(y, i))
+				_set_pixel_no_cache(position + Vector2(-i, y))
+				_set_pixel_no_cache(position + Vector2(-y, -i))
+				_set_pixel_no_cache(position + Vector2(i, -y))
+				_set_pixel_no_cache(position + Vector2(y, i))
 		draw = not fill
 		r = err
 		if r <= y:
@@ -377,30 +386,37 @@ func draw_indicator_at(position: Vector2, offset: Vector2, color: Color) -> void
 
 
 func _set_pixel(position: Vector2, ignore_mirroring := false) -> void:
-	if position in _draw_cache and _for_frame == Global.current_project.current_frame:
+	if position in _draw_cache and _for_frame == _stroke_project.current_frame:
 		return
-	if _draw_cache.size() > _cache_limit or _for_frame != Global.current_project.current_frame:
+	if _draw_cache.size() > _cache_limit or _for_frame != _stroke_project.current_frame:
 		_draw_cache = []
-		_for_frame = Global.current_project.current_frame
+		_for_frame = _stroke_project.current_frame
 	_draw_cache.append(position)  # Store the position of pixel
+	# Invoke uncached version to actually draw the pixel
+	_set_pixel_no_cache(position, ignore_mirroring)
 
-	var project: Project = Global.current_project
-	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
-		position = position.posmodv(project.size)
 
-	if !project.can_pixel_get_drawn(position):
+func _set_pixel_no_cache(position: Vector2, ignore_mirroring := false) -> void:
+	if _stroke_project.tile_mode and _tile_mode_rect.has_point(position):
+		position = position.posmodv(_stroke_project.size)
+
+	if !_stroke_project.can_pixel_get_drawn(position):
 		return
 
 	var images := _stroke_images
-	var i := int(position.x + position.y * project.size.x)
-	if _mask.size() >= i + 1:
-		if _mask[i] < Tools.pen_pressure:
-			_mask[i] = Tools.pen_pressure
-			for image in images:
-				_drawer.set_pixel(image, position, tool_slot.color, ignore_mirroring)
-	else:
+	if _is_mask_size_zero:
 		for image in images:
 			_drawer.set_pixel(image, position, tool_slot.color, ignore_mirroring)
+	else:
+		var i := int(position.x + position.y * _stroke_project.size.x)
+		if _mask.size() >= i + 1:
+			if _mask[i] < Tools.pen_pressure:
+				_mask[i] = Tools.pen_pressure
+				for image in images:
+					_drawer.set_pixel(image, position, tool_slot.color, ignore_mirroring)
+		else:
+			for image in images:
+				_drawer.set_pixel(image, position, tool_slot.color, ignore_mirroring)
 
 
 func _draw_brush_image(_image: Image, _src_rect: Rect2, _dst: Vector2) -> void:
