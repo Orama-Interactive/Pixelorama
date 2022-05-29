@@ -22,6 +22,9 @@ var _indicator := BitMap.new()
 var _polylines := []
 var _line_polylines := []
 
+# Memorize some stuff when doing brush strokes
+var _stroke_images := [] # Array of Images
+
 
 func _ready() -> void:
 	Tools.connect("color_changed", self, "_on_Color_changed")
@@ -194,17 +197,28 @@ func commit_undo() -> void:
 
 
 func draw_tool(position: Vector2) -> void:
+	_prepare_tool()
+	_draw_tool(position)
+
+
+func _prepare_tool() ->void:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	var strength := _strength
 	if Global.pressure_sensitivity_mode == Global.PressureSensitivity.ALPHA:
 		strength *= Tools.pen_pressure
-
 	_drawer.pixel_perfect = Tools.pixel_perfect if _brush_size == 1 else false
 	_drawer.horizontal_mirror = Tools.horizontal_mirror
 	_drawer.vertical_mirror = Tools.vertical_mirror
 	_drawer.color_op.strength = strength
+	# Memorize the frame/layer we are drawing on rather than fetching it on every pixel
+	_stroke_images = _get_selected_draw_images()
 
+
+# Make sure to alway have invoked _prepare_tool() before this
+func _draw_tool(position: Vector2) -> void:
+	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+		return
 	match _brush.type:
 		Brushes.PIXEL:
 			draw_tool_pixel(position)
@@ -227,6 +241,7 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 	var sy = 1 if start.y < end.y else -1
 	var x = start.x
 	var y = start.y
+	_prepare_tool()
 	while !(x == end.x && y == end.y):
 		e2 = err << 1
 		if e2 >= dy:
@@ -235,7 +250,7 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 		if e2 <= dx:
 			err += dx
 			y += sy
-		draw_tool(Vector2(x, y))
+		_draw_tool(Vector2(x, y))
 
 
 func draw_tool_pixel(position: Vector2) -> void:
@@ -376,7 +391,7 @@ func _set_pixel(position: Vector2, ignore_mirroring := false) -> void:
 	if !project.can_pixel_get_drawn(position):
 		return
 
-	var images := _get_selected_draw_images()
+	var images := _stroke_images
 	var i := int(position.x + position.y * project.size.x)
 	if _mask.size() >= i + 1:
 		if _mask[i] < Tools.pen_pressure:
