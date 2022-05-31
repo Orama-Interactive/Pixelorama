@@ -27,6 +27,7 @@ var _stroke_project: Project
 var _stroke_images := []  # Array of Images
 var _tile_mode_rect: Rect2
 var _is_mask_size_zero := true
+var _circle_tool_shortcut: PoolVector2Array
 
 
 func _ready() -> void:
@@ -223,6 +224,24 @@ func _prepare_tool() -> void:
 	_tile_mode_rect = _stroke_project.get_tile_mode_rect()
 	# This may prevent a few tests when setting pixels
 	_is_mask_size_zero = _mask.size() == 0
+	match _brush.type:
+		Brushes.CIRCLE:
+			_prepare_circle_tool(false)
+		Brushes.FILLED_CIRCLE:
+			_prepare_circle_tool(true)
+
+
+func _prepare_circle_tool(fill: bool) -> void:
+	_circle_tool_shortcut = PoolVector2Array()
+	var circle_tool_map = _create_circle_indicator(_brush_size, fill)
+	# Go through that BitMap and build an Array of the "displacement" from the center of the bits
+	# that are true.
+	var diameter = 2 * _brush_size + 1
+	for n in range(0, diameter):
+		for m in range(0, diameter):
+			if circle_tool_map.get_bit(Vector2(m, n)):
+				_circle_tool_shortcut.append(Vector2(m - _brush_size, n - _brush_size))
+
 
 
 # Make sure to alway have invoked _prepare_tool() before this
@@ -273,29 +292,37 @@ func draw_tool_pixel(position: Vector2) -> void:
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
 func draw_tool_circle(position: Vector2, fill := false) -> void:
-	var r := _brush_size
-	var x := -r
-	var y := 0
-	var err := 2 - r * 2
-	var draw := true
-	if fill:
-		_set_pixel_no_cache(position)
-	while x < 0:
-		if draw:
-			for i in range(1 if fill else -x, -x + 1):
-				_set_pixel_no_cache(position + Vector2(-i, y))
-				_set_pixel_no_cache(position + Vector2(-y, -i))
-				_set_pixel_no_cache(position + Vector2(i, -y))
-				_set_pixel_no_cache(position + Vector2(y, i))
-		draw = not fill
-		r = err
-		if r <= y:
-			y += 1
-			err += y * 2 + 1
-			draw = true
-		if r > x || err > y:
-			x += 1
-			err += x * 2 + 1
+	if _circle_tool_shortcut:
+		_draw_tool_circle_from_map(position)
+	else:
+		var r := _brush_size
+		var x := -r
+		var y := 0
+		var err := 2 - r * 2
+		var draw := true
+		if fill:
+			_set_pixel_no_cache(position)
+		while x < 0:
+			if draw:
+				for i in range(1 if fill else -x, -x + 1):
+					_set_pixel_no_cache(position + Vector2(-i, y))
+					_set_pixel_no_cache(position + Vector2(-y, -i))
+					_set_pixel_no_cache(position + Vector2(i, -y))
+					_set_pixel_no_cache(position + Vector2(y, i))
+			draw = not fill
+			r = err
+			if r <= y:
+				y += 1
+				err += y * 2 + 1
+				draw = true
+			if r > x || err > y:
+				x += 1
+				err += x * 2 + 1
+
+
+func _draw_tool_circle_from_map(position: Vector2) -> void:
+	for displacement in _circle_tool_shortcut:
+		_set_pixel_no_cache(position + displacement)
 
 
 func draw_tool_brush(position: Vector2) -> void:
