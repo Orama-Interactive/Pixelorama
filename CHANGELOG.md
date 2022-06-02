@@ -35,9 +35,10 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Matteo Piovanel
 - Fixed issue with the bucket tool's "same color pixels" method not working in all selected cels.
 - Fixed broken 90-degree rotation. [#676](https://github.com/Orama-Interactive/Pixelorama/pull/676)
 - Fixed export bug where the path is being changed if there's a folder with the same name as the file.
-- Fixed visual bug caused by window transparency. [#680](https://github.com/Orama-Interactive/Pixelorama/pull/680)
+- Fixed visual bug caused by window opacity. [#680](https://github.com/Orama-Interactive/Pixelorama/pull/680)
 - It is no longer possible to delete content from cels belonging to invisible or locked cels.
 - Scale image aspect ratio is now updating correctly when the dialog is about to appear.
+- Going into fullscreen mode and then exiting it no longer makes the window opacity not working properly. Note that window opacity still does not work when in fullscreen mode.
 
 ## [v0.10] - 2022-04-15
 This update has been brought to you by the contributions of:
