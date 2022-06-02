@@ -308,7 +308,7 @@ func _compute_draw_tool_pixel(position: Vector2) -> PoolVector2Array:
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
 func draw_tool_circle(position: Vector2, fill := false) -> void:
-	for coord in _compute_draw_tool_circle(position, fill) :
+	for coord in _compute_draw_tool_circle(position, fill):
 		_set_pixel_no_cache(coord)
 
 
