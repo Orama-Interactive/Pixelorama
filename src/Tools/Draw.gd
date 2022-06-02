@@ -203,7 +203,9 @@ func commit_undo() -> void:
 
 func draw_tool(position: Vector2) -> void:
 	_prepare_tool()
-	_draw_tool(position)
+	var coords_to_draw = _draw_tool(position)
+	for coord in coords_to_draw:
+		_set_pixel_no_cache(coord)
 
 
 func _prepare_tool() -> void:
@@ -243,19 +245,21 @@ func _prepare_circle_tool(fill: bool) -> void:
 				_circle_tool_shortcut.append(Vector2(m - _brush_size, n - _brush_size))
 
 
-# Make sure to alway have invoked _prepare_tool() before this
-func _draw_tool(position: Vector2) -> void:
+# Make sure to alway have invoked _prepare_tool() before this. This computes the coordinates to be
+# drawn if it can (except for the generic brush, when it's actually drawing them)
+func _draw_tool(position: Vector2) -> PoolVector2Array:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
-		return
+		return PoolVector2Array()  # empty fallback
 	match _brush.type:
 		Brushes.PIXEL:
-			draw_tool_pixel(position)
+			return _compute_draw_tool_pixel(position)
 		Brushes.CIRCLE:
-			draw_tool_circle(position, false)
+			return _compute_draw_tool_circle(position, false)
 		Brushes.FILLED_CIRCLE:
-			draw_tool_circle(position, true)
+			return _compute_draw_tool_circle(position, true)
 		_:
 			draw_tool_brush(position)
+	return PoolVector2Array()  # empty fallback
 
 
 # Bresenham's Algorithm
@@ -270,6 +274,7 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 	var x = start.x
 	var y = start.y
 	_prepare_tool()
+	var coords_to_draw = {}
 	while !(x == end.x && y == end.y):
 		e2 = err << 1
 		if e2 >= dy:
@@ -278,36 +283,55 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 		if e2 <= dx:
 			err += dx
 			y += sy
-		_draw_tool(Vector2(x, y))
+		#coords_to_draw.append_array(_draw_tool(Vector2(x, y)))
+		for coord in _draw_tool(Vector2(x, y)):
+			coords_to_draw[coord] = 0
+	for c in coords_to_draw.keys():
+		_set_pixel_no_cache(c)
 
 
 func draw_tool_pixel(position: Vector2) -> void:
+	for coord in _compute_draw_tool_pixel(position):
+		_set_pixel_no_cache(coord)
+
+
+# Compute the array of coordinates that should be drawn
+func _compute_draw_tool_pixel(position: Vector2) -> PoolVector2Array:
+	var result = PoolVector2Array()
 	var start := position - Vector2.ONE * (_brush_size >> 1)
 	var end := start + Vector2.ONE * _brush_size
 	for y in range(start.y, end.y):
 		for x in range(start.x, end.x):
-			_set_pixel(Vector2(x, y))
+			result.append(Vector2(x, y))
+	return result
 
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
 func draw_tool_circle(position: Vector2, fill := false) -> void:
+	for coord in _compute_draw_tool_circle(position, fill) :
+		_set_pixel_no_cache(coord)
+
+
+# Compute the array of coordinates that should be drawn
+func _compute_draw_tool_circle(position: Vector2, fill := false) -> PoolVector2Array:
 	if _circle_tool_shortcut:
-		_draw_tool_circle_from_map(position)
+		return _draw_tool_circle_from_map(position)
 	else:
+		var result = PoolVector2Array()
 		var r := _brush_size
 		var x := -r
 		var y := 0
 		var err := 2 - r * 2
 		var draw := true
 		if fill:
-			_set_pixel_no_cache(position)
+			result.append(position)
 		while x < 0:
 			if draw:
 				for i in range(1 if fill else -x, -x + 1):
-					_set_pixel_no_cache(position + Vector2(-i, y))
-					_set_pixel_no_cache(position + Vector2(-y, -i))
-					_set_pixel_no_cache(position + Vector2(i, -y))
-					_set_pixel_no_cache(position + Vector2(y, i))
+					result.append(position + Vector2(-i, y))
+					result.append(position + Vector2(-y, -i))
+					result.append(position + Vector2(i, -y))
+					result.append(position + Vector2(y, i))
 			draw = not fill
 			r = err
 			if r <= y:
@@ -317,11 +341,14 @@ func draw_tool_circle(position: Vector2, fill := false) -> void:
 			if r > x || err > y:
 				x += 1
 				err += x * 2 + 1
+		return result
 
 
-func _draw_tool_circle_from_map(position: Vector2) -> void:
+func _draw_tool_circle_from_map(position: Vector2) -> PoolVector2Array:
+	var result = PoolVector2Array()
 	for displacement in _circle_tool_shortcut:
-		_set_pixel_no_cache(position + displacement)
+		result.append(position + displacement)
+	return result
 
 
 func draw_tool_brush(position: Vector2) -> void:
