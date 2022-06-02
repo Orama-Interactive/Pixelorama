@@ -1,4 +1,3 @@
-
 shader_type canvas_item;
 render_mode unshaded;
 
@@ -47,14 +46,14 @@ void fragment() {
 		hsb.y =  mix(hsb.y, 1 , sat_shift_amount);
 	}
 	else if (sat_shift_amount < 0.0) {
-		hsb.y =  mix(0, hsb.y , 1f - abs(sat_shift_amount));
+		hsb.y =  mix(0, hsb.y , 1.0 - abs(sat_shift_amount));
 	}
 
 	if(val_shift_amount > 0.0) {
 		hsb.z =  mix(hsb.z, 1 , val_shift_amount);
 	}
 	else if (val_shift_amount < 0.0) {
-		hsb.z =  mix(0, hsb.z , 1f - abs(val_shift_amount));
+		hsb.z =  mix(0, hsb.z , 1.0 - abs(val_shift_amount));
 	}
 
 	

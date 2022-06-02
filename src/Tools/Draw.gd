@@ -63,10 +63,11 @@ func _on_Brush_selected(brush: Brushes.Brush) -> void:
 
 
 func _on_BrushSize_value_changed(value: float) -> void:
-	_brush_size = int(value)
-	_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
-	update_config()
-	save_config()
+	if _brush_size != int(value):
+		_brush_size = int(value)
+		_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
+		update_config()
+		save_config()
 
 
 func _on_InterpolateFactor_value_changed(value: float) -> void:
