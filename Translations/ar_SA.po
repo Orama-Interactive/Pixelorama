@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2022-05-18 19:00\n"
+"PO-Revision-Date: 2022-06-03 21:44\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -184,6 +184,9 @@ msgid "Tile Mode"
 msgstr "وضع البلاط"
 
 msgid "Window Opacity"
+msgstr ""
+
+msgid "Window opacity does not work on fullscreen mode."
 msgstr ""
 
 msgid "Panel Layout"
