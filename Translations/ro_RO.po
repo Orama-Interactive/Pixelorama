@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-05-19 08:33\n"
+"PO-Revision-Date: 2022-06-03 21:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -185,6 +185,9 @@ msgstr "Mod mozaic"
 
 msgid "Window Opacity"
 msgstr "Opacitatea ferestrei"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr ""
 
 msgid "Panel Layout"
 msgstr "Dispunerea panoului"
