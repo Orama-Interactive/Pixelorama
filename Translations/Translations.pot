@@ -175,6 +175,9 @@ msgstr ""
 msgid "Window Opacity"
 msgstr ""
 
+msgid "Window opacity does not work on fullscreen mode."
+msgstr ""
+
 msgid "Panel Layout"
 msgstr ""
 
