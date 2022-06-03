@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-05-23 15:53\n"
+"PO-Revision-Date: 2022-06-03 21:43\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -185,6 +185,9 @@ msgstr "Λειτουργία μοτίβου"
 
 msgid "Window Opacity"
 msgstr "Αδιαφάνεια Παραθύρου"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr ""
 
 msgid "Panel Layout"
 msgstr "Διάταξη Πλαισίου"
