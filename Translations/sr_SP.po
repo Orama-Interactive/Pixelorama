@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2022-05-18 18:59\n"
+"PO-Revision-Date: 2022-06-03 21:43\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -185,6 +185,9 @@ msgstr "Бешавни режим"
 
 msgid "Window Opacity"
 msgstr "Непрозирност прозора"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr ""
 
 msgid "Panel Layout"
 msgstr ""
