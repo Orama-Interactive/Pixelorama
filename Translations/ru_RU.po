@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-05-26 13:54\n"
+"PO-Revision-Date: 2022-06-03 21:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -185,6 +185,9 @@ msgstr "Бесшовный режим"
 
 msgid "Window Opacity"
 msgstr "Непрозрачность окна"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr ""
 
 msgid "Panel Layout"
 msgstr "Расположение панелей"
