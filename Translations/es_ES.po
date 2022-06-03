@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-05-18 19:00\n"
+"PO-Revision-Date: 2022-06-03 21:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -185,6 +185,9 @@ msgstr "Modo mosaico"
 
 msgid "Window Opacity"
 msgstr "Opacidad de Ventana"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr ""
 
 msgid "Panel Layout"
 msgstr "Diseño del Panel"
