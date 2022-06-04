@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-06-03 21:44\n"
+"PO-Revision-Date: 2022-06-04 02:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -187,7 +187,7 @@ msgid "Window Opacity"
 msgstr "ウィンドウ不透明度"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "ウィンドウの不透明度はフルスクリーンモードでは機能しません。"
 
 msgid "Panel Layout"
 msgstr "パネルのレイアウト"
