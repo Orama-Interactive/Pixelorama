@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-06-03 21:44\n"
+"PO-Revision-Date: 2022-06-04 12:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -187,7 +187,7 @@ msgid "Window Opacity"
 msgstr "Fenstertransparenz"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "Fenstertransparenz funktioniert nicht im Vollbildmodus."
 
 msgid "Panel Layout"
 msgstr "Panel-Layout"
