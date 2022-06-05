@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-06-03 21:43\n"
+"PO-Revision-Date: 2022-06-05 14:21\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -343,10 +343,10 @@ msgid "Directory path is not valid!"
 msgstr ""
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Dosya adı geçerli değil!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Dosya yolu ve dosya adı geçerli değil!"
 
 msgid "Exporting in progress..."
 msgstr "Dışa aktarma işlemi devam ediyor..."
