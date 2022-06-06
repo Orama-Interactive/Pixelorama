@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-06-03 21:44\n"
+"PO-Revision-Date: 2022-06-06 11:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -187,7 +187,7 @@ msgid "Window Opacity"
 msgstr "Opacidade da Janela"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "A Opacidade de janela não funciona no modo de tela cheia."
 
 msgid "Panel Layout"
 msgstr "Layout do Painel"
