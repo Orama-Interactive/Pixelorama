@@ -676,7 +676,7 @@ func help_menu_id_pressed(id: int) -> void:
 			Global.control.get_node("Dialogs/SplashDialog").popup_centered()
 			Global.dialog_open(true)
 		Global.HelpMenu.ONLINE_DOCS:
-			OS.shell_open("https://orama-interactive.github.io/Pixelorama-Docs/")
+			OS.shell_open("https://www.oramainteractive.com/Pixelorama-Docs/")
 		Global.HelpMenu.ISSUE_TRACKER:
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		Global.HelpMenu.OPEN_LOGS_FOLDER:
@@ -685,7 +685,7 @@ func help_menu_id_pressed(id: int) -> void:
 			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		Global.HelpMenu.CHANGELOG:
 			OS.shell_open(
-				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v010---2022-04-15"
+				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v0101---2022-06-06"
 			)
 		Global.HelpMenu.ABOUT_PIXELORAMA:
 			Global.control.get_node("Dialogs/AboutDialog").popup_centered()
