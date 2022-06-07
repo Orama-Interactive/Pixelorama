@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-06-03 21:44\n"
+"PO-Revision-Date: 2022-06-07 15:58\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -187,7 +187,7 @@ msgid "Window Opacity"
 msgstr "Непрозорість вікна"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "Прозорість вікна не працює в повноекранному режимі."
 
 msgid "Panel Layout"
 msgstr "Позиція панелей"
@@ -340,13 +340,13 @@ msgid "File %s already exists. Overwrite?"
 msgstr "Файл \"%s\" вже існує. Перезаписати?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Шлях до директорії неправильний!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Назва файла неправильна!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Шлях до директорії і назва файла неправильні!"
 
 msgid "Exporting in progress..."
 msgstr "Виконується експорт..."
@@ -617,16 +617,16 @@ msgid "Outline"
 msgstr "Контур"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Тінь"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Зсув за X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Зсув за Y:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Колір тіні:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Змінити Відтінки/Насиченість/Яскравість"
@@ -635,10 +635,10 @@ msgid "Gradient"
 msgstr "Градієнт"
 
 msgid "Linear"
-msgstr ""
+msgstr "Лінійний"
 
 msgid "Radial"
-msgstr ""
+msgstr "Радіальний"
 
 msgid "Linear Step"
 msgstr ""
