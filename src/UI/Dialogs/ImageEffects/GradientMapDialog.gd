@@ -1,10 +1,8 @@
 extends ImageEffect
 
 var shader: Shader = preload("res://src/Shaders/GradientMap.gdshader")
-var confirmed := false
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
@@ -17,16 +15,6 @@ func set_nodes() -> void:
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 
 
-func _about_to_show() -> void:
-	confirmed = false
-	._about_to_show()
-
-
-func _confirmed() -> void:
-	confirmed = true
-	._confirmed()
-
-
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
@@ -36,7 +24,6 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	var params := {"selection": selection_tex, "map": $VBoxContainer/GradientEdit.texture}
 
 	if !confirmed:
-		preview.material.shader = shader
 		for param in params:
 			preview.material.set_shader_param(param, params[param])
 	else:

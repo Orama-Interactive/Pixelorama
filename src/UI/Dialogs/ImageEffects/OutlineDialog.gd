@@ -4,7 +4,6 @@ var color := Color.red
 var thickness := 1
 var pattern := 0
 var inside_image := false
-var confirmed := false
 var shader: Shader
 
 onready var outline_color = $VBoxContainer/OptionsContainer/OutlineColor
@@ -15,22 +14,11 @@ func _ready() -> void:
 		$VBoxContainer/OptionsContainer/PatternOptionButton.disabled = true
 	else:
 		shader = load("res://src/Shaders/OutlineInline.gdshader")
-	outline_color.get_picker().presets_visible = false
-	color = outline_color.color
-
-
-func _about_to_show() -> void:
-	confirmed = false
-	if shader:
 		var sm := ShaderMaterial.new()
 		sm.shader = shader
 		preview.set_material(sm)
-	._about_to_show()
-
-
-func _confirmed() -> void:
-	confirmed = true
-	._confirmed()
+	outline_color.get_picker().presets_visible = false
+	color = outline_color.color
 
 
 func set_nodes() -> void:
@@ -51,24 +39,19 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		var selection: Image = project.bitmap_to_image(project.selection_bitmap)
 		selection_tex.create_from_image(selection, 0)
 
+	var params := {
+		"color": color,
+		"width": thickness,
+		"pattern": pattern,
+		"inside": inside_image,
+		"selection": selection_tex,
+		"affect_selection": selection_checkbox.pressed,
+		"has_selection": project.has_selection
+	}
 	if !confirmed:
-		preview.material.set_shader_param("color", color)
-		preview.material.set_shader_param("width", thickness)
-		preview.material.set_shader_param("pattern", pattern)
-		preview.material.set_shader_param("inside", inside_image)
-		preview.material.set_shader_param("selection", selection_tex)
-		preview.material.set_shader_param("affect_selection", selection_checkbox.pressed)
-		preview.material.set_shader_param("has_selection", project.has_selection)
+		for param in params:
+			preview.material.set_shader_param(param, params[param])
 	else:
-		var params := {
-			"color": color,
-			"width": thickness,
-			"pattern": pattern,
-			"inside": inside_image,
-			"selection": selection_tex,
-			"affect_selection": selection_checkbox.pressed,
-			"has_selection": project.has_selection
-		}
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
 		yield(gen, "done")
