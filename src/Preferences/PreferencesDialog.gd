@@ -68,6 +68,10 @@ var preferences := [
 	),
 	Preference.new("checker_follow_scale", "Canvas/CheckerOptions/CheckerFollowScale", "pressed"),
 	Preference.new("tilemode_opacity", "Canvas/CheckerOptions/TileModeOpacity", "value"),
+	Preference.new("tilemode_x_basis_x", "Canvas/TileModeOptions/TileModeXBasisX", "value"),
+	Preference.new("tilemode_x_basis_y", "Canvas/TileModeOptions/TileModeXBasisY", "value"),
+	Preference.new("tilemode_y_basis_x", "Canvas/TileModeOptions/TileModeYBasisX", "value"),
+	Preference.new("tilemode_y_basis_y", "Canvas/TileModeOptions/TileModeYBasisY", "value"),
 	Preference.new("selection_animated_borders", "Selection/SelectionOptions/Animate", "pressed"),
 	Preference.new("selection_border_color_1", "Selection/SelectionOptions/BorderColor1", "color"),
 	Preference.new("selection_border_color_2", "Selection/SelectionOptions/BorderColor2", "color"),
@@ -238,6 +242,10 @@ func preference_update(prop: String) -> void:
 		Global.canvas.pixel_grid.update()
 
 	if "checker" in prop:
+		Global.transparent_checker.update_rect()
+
+	if 'basis' in prop:
+		Global.canvas.tile_mode.update()
 		Global.transparent_checker.update_rect()
 
 	if prop in ["guide_color"]:

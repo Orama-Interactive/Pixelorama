@@ -731,6 +731,9 @@ func can_pixel_get_drawn(
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
 		return false
 
+	if tile_mode != Global.TileMode.NONE and get_nearest_tile(pixel).position != Vector2.ZERO:
+		return false
+
 	if has_selection:
 		if selection_position.x < 0:
 			pixel.x -= selection_position.x
