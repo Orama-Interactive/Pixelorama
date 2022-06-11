@@ -252,6 +252,7 @@ func _setup_image_menu() -> void:
 		"Drop Shadow",
 		"Adjust Hue/Saturation/Value",
 		"Gradient",
+		"Gradient Map",
 		# "Shader"
 	]
 	var image_menu: PopupMenu = image_menu_button.get_popup()
@@ -618,6 +619,10 @@ func image_menu_id_pressed(id: int) -> void:
 
 		Global.ImageMenu.GRADIENT:
 			Global.control.get_node("Dialogs/ImageEffects/GradientDialog").popup_centered()
+			Global.dialog_open(true)
+
+		Global.ImageMenu.GRADIENT_MAP:
+			Global.control.get_node("Dialogs/ImageEffects/GradientMapDialog").popup_centered()
 			Global.dialog_open(true)
 
 #		Global.ImageMenu.SHADER:

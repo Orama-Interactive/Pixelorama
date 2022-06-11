@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/Frame.gd"
 }, {
+"base": "TextureRect",
+"class": "GradientEditNode",
+"language": "GDScript",
+"path": "res://src/UI/Nodes/GradientEdit.gd"
+}, {
 "base": "Line2D",
 "class": "Guide",
 "language": "GDScript",
@@ -127,6 +132,7 @@ _global_script_class_icons={
 "Cel": "",
 "Drawer": "",
 "Frame": "",
+"GradientEditNode": "",
 "Guide": "",
 "ImageEffect": "",
 "Layer": "",
@@ -827,6 +833,10 @@ changelog={
 "events": [  ]
 }
 about_pixelorama={
+"deadzone": 0.5,
+"events": [  ]
+}
+gradient_map={
 "deadzone": 0.5,
 "events": [  ]
 }

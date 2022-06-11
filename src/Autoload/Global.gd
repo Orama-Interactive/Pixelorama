@@ -33,6 +33,7 @@ enum ImageMenu {
 	DROP_SHADOW,
 	HSV,
 	GRADIENT,
+	GRADIENT_MAP,
 	SHADER
 }
 enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT }
@@ -281,6 +282,8 @@ func _initialize_keychain() -> void:
 		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.HSV),
 		"gradient":
 		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.GRADIENT),
+		"gradient_map":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.GRADIENT_MAP),
 		"mirror_view":
 		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.MIRROR_VIEW),
 		"show_grid":
