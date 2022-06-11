@@ -2,8 +2,7 @@ extends Node2D
 
 
 func _draw() -> void:
-	var size: Vector2 = Global.current_project.size
-	var positions: Array = get_tile_positions(size)
+	var positions := get_tile_positions()
 	var tilemode_opacity := Global.tilemode_opacity
 
 	var position_tmp := position
@@ -23,28 +22,23 @@ func _draw() -> void:
 	draw_set_transform(position, rotation, scale)
 
 
-func get_tile_positions(size):
-	match Global.current_project.tile_mode:
-		Global.TileMode.BOTH:
-			return [
-				Vector2(0, size.y),  # Down
-				Vector2(-size.x, size.y),  # Down left
-				Vector2(-size.x, 0),  # Left
-				-size,  # Up left
-				Vector2(0, -size.y),  # Up
-				Vector2(size.x, -size.y),  # Up right
-				Vector2(size.x, 0),  # Right
-				size  # Down right
-			]
-		Global.TileMode.X_AXIS:
-			return [
-				Vector2(size.x, 0),  # Right
-				Vector2(-size.x, 0),  # Left
-			]
-		Global.TileMode.Y_AXIS:
-			return [
-				Vector2(0, size.y),  # Down
-				Vector2(0, -size.y),  # Up
-			]
-		_:
-			return []
+func get_tile_positions() -> Array:
+	var basis_x := Global.current_project.get_tile_mode_basis_x()
+	var basis_y := Global.current_project.get_tile_mode_basis_y()
+	var tile_mode := Global.current_project.tile_mode
+	var x_range := (
+		range(-1, 2)
+		if tile_mode in [Global.TileMode.X_AXIS, Global.TileMode.BOTH]
+		else range(0, 1)
+	)
+	var y_range := (
+		range(-1, 2)
+		if tile_mode in [Global.TileMode.Y_AXIS, Global.TileMode.BOTH]
+		else range(0, 1)
+	)
+	var positions := []
+	for r in y_range:
+		for c in x_range:
+			var position: Vector2 = r * basis_y + c * basis_x
+			positions.append(position)
+	return positions

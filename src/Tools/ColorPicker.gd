@@ -53,8 +53,7 @@ func draw_end(position: Vector2) -> void:
 
 func _pick_color(position: Vector2) -> void:
 	var project: Project = Global.current_project
-	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
-		position = position.posmodv(project.size)
+	position = project.get_tile_mode_position(position)
 
 	if position.x < 0 or position.y < 0:
 		return
