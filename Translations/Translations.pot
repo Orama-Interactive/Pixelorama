@@ -621,6 +621,9 @@ msgstr ""
 msgid "Gradient"
 msgstr ""
 
+msgid "Gradient Map"
+msgstr ""
+
 msgid "Linear"
 msgstr ""
 
