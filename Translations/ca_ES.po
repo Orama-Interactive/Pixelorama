@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-06-03 21:44\n"
+"PO-Revision-Date: 2022-06-13 23:28\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -633,6 +633,9 @@ msgstr "Ajusta la Tonalitat/Saturació/Lluminositat"
 
 msgid "Gradient"
 msgstr "Degradat"
+
+msgid "Gradient Map"
+msgstr ""
 
 msgid "Linear"
 msgstr ""
