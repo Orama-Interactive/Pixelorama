@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-06-04 02:50\n"
+"PO-Revision-Date: 2022-06-13 23:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -633,6 +633,9 @@ msgstr "色相/彩度/値を調整"
 
 msgid "Gradient"
 msgstr "グラディエーション"
+
+msgid "Gradient Map"
+msgstr ""
 
 msgid "Linear"
 msgstr "線形"
