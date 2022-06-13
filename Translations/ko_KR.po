@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-06-03 21:44\n"
+"PO-Revision-Date: 2022-06-13 23:28\n"
 
 msgid "OK"
 msgstr "예"
@@ -633,6 +633,9 @@ msgstr "색상/채도/명도 수정"
 
 msgid "Gradient"
 msgstr "그레디언트"
+
+msgid "Gradient Map"
+msgstr ""
 
 msgid "Linear"
 msgstr "선형"
