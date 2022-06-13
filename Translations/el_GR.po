@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-06-05 13:21\n"
+"PO-Revision-Date: 2022-06-13 23:28\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -633,6 +633,9 @@ msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
 
 msgid "Gradient"
 msgstr "Διαβάθμιση"
+
+msgid "Gradient Map"
+msgstr ""
 
 msgid "Linear"
 msgstr "Γραμμική"
