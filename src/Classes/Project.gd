@@ -910,7 +910,7 @@ func get_nearest_tile(position: Vector2) -> Rect2:
 	# Transform2D.basis_xform_inv() is broken so compute the inverse explicitly:
 	# https://github.com/godotengine/godot/issues/58556
 	var screen_to_tile_space := tile_to_screen_space.affine_inverse()
-	var p := position - size / 2.0 + Vector2(0.5, 0.5) # p relative to center of tiles
+	var p := position - size / 2.0 + Vector2(0.5, 0.5)  # p relative to center of tiles
 	var p_tile_space := screen_to_tile_space.basis_xform(p)
 	var tl_tile := tile_to_screen_space.basis_xform(p_tile_space.floor())
 	var tr_tile := tl_tile + basis_x

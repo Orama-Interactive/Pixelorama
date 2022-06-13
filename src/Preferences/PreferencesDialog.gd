@@ -244,7 +244,7 @@ func preference_update(prop: String) -> void:
 	if "checker" in prop:
 		Global.transparent_checker.update_rect()
 
-	if 'basis' in prop:
+	if "basis" in prop:
 		Global.canvas.tile_mode.update()
 		Global.transparent_checker.update_rect()
 

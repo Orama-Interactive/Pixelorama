@@ -405,10 +405,7 @@ func remove_unselected_parts_of_brush(brush: Image, dst: Vector2) -> Image:
 
 func draw_indicator() -> void:
 	draw_indicator_at(_cursor, Vector2.ZERO, Color.blue)
-	if (
-		Global.current_project.tile_mode
-		and Global.current_project.is_tile_mode_in_range(_cursor)
-	):
+	if Global.current_project.tile_mode and Global.current_project.is_tile_mode_in_range(_cursor):
 		var position := _line_start if _draw_line else _cursor
 		var nearest_tile := Global.current_project.get_nearest_tile(position)
 		if nearest_tile.position != Vector2.ZERO:
