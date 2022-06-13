@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-06-05 14:21\n"
+"PO-Revision-Date: 2022-06-13 23:28\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -632,6 +632,9 @@ msgstr "Renk/Doygunluk/Ton değerlerini Ayarla"
 
 msgid "Gradient"
 msgstr "Gradyan"
+
+msgid "Gradient Map"
+msgstr ""
 
 msgid "Linear"
 msgstr ""
