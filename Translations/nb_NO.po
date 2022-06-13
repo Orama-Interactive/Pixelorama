@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-06-03 21:44\n"
+"PO-Revision-Date: 2022-06-13 23:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -632,6 +632,9 @@ msgstr "Justér Fargetone/Metning/Verdi"
 
 msgid "Gradient"
 msgstr "Gradient"
+
+msgid "Gradient Map"
+msgstr ""
 
 msgid "Linear"
 msgstr ""
