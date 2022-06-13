@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-06-07 17:03\n"
+"PO-Revision-Date: 2022-06-13 23:28\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -633,6 +633,9 @@ msgstr "Змінити Відтінки/Насиченість/Яскравіс�
 
 msgid "Gradient"
 msgstr "Градієнт"
+
+msgid "Gradient Map"
+msgstr ""
 
 msgid "Linear"
 msgstr "Лінійний"
