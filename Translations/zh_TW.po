@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2022-06-03 21:43\n"
+"PO-Revision-Date: 2022-06-13 23:28\n"
 
 msgid "OK"
 msgstr "確定"
@@ -631,6 +631,9 @@ msgstr "調整色相、飽和度、亮度"
 
 msgid "Gradient"
 msgstr "顏色漸變"
+
+msgid "Gradient Map"
+msgstr ""
 
 msgid "Linear"
 msgstr ""
