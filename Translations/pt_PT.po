@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2022-06-03 21:43\n"
+"PO-Revision-Date: 2022-06-13 23:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -632,6 +632,9 @@ msgstr "Ajustar Hue/Saturação/Valor"
 
 msgid "Gradient"
 msgstr "Gradiente"
+
+msgid "Gradient Map"
+msgstr ""
 
 msgid "Linear"
 msgstr ""
