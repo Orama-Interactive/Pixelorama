@@ -20,12 +20,24 @@ func get_bounding_rect() -> Rect2:
 	var y_basis := get_y_basis()
 	match mode:
 		MODE.BOTH:
-			var diagonal = x_basis + y_basis
-			return Rect2(-diagonal, 2 * diagonal + tile_size)
+			var diagonal := x_basis + y_basis
+			var cross_diagonal := x_basis - y_basis
+			var bounding_rect := Rect2(-diagonal, Vector2.ZERO)
+			bounding_rect = bounding_rect.expand(diagonal)
+			bounding_rect = bounding_rect.expand(-cross_diagonal)
+			bounding_rect = bounding_rect.expand(cross_diagonal)
+			bounding_rect = bounding_rect.grow_individual(0, 0, tile_size.x, tile_size.y)
+			return bounding_rect
 		MODE.X_AXIS:
-			return Rect2(-x_basis, 2 * x_basis + tile_size)
+			var bounding_rect := Rect2(-x_basis, Vector2.ZERO)
+			bounding_rect = bounding_rect.expand(x_basis)
+			bounding_rect = bounding_rect.grow_individual(0, 0, tile_size.x, tile_size.y)
+			return bounding_rect
 		MODE.Y_AXIS:
-			return Rect2(-y_basis, 2 * y_basis + tile_size)
+			var bounding_rect := Rect2(-y_basis, Vector2.ZERO)
+			bounding_rect = bounding_rect.expand(y_basis)
+			bounding_rect = bounding_rect.grow_individual(0, 0, tile_size.x, tile_size.y)
+			return bounding_rect
 		_:
 			return Rect2(Vector2.ZERO, tile_size)
 
