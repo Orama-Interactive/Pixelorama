@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-06-13 23:28\n"
+"PO-Revision-Date: 2022-06-14 15:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -635,7 +635,7 @@ msgid "Gradient"
 msgstr "Degrade"
 
 msgid "Gradient Map"
-msgstr ""
+msgstr "Hartă degrade"
 
 msgid "Linear"
 msgstr "Liniar"
