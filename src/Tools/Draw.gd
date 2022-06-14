@@ -351,7 +351,7 @@ func _draw_tool_circle_from_map(position: Vector2) -> PoolVector2Array:
 
 func draw_tool_brush(position: Vector2) -> void:
 	var project: Project = Global.current_project
-	position = project.get_tile_mode_position(position)
+	position = project.tiles.get_canon_position(position)
 
 	var size := _brush_image.get_size()
 	var dst := position - (size / 2).floor()
@@ -405,9 +405,9 @@ func remove_unselected_parts_of_brush(brush: Image, dst: Vector2) -> Image:
 
 func draw_indicator() -> void:
 	draw_indicator_at(_cursor, Vector2.ZERO, Color.blue)
-	if Global.current_project.tile_mode and Global.current_project.is_tile_mode_in_range(_cursor):
+	if Global.current_project.tiles.mode and Global.current_project.tiles.has_point(_cursor):
 		var position := _line_start if _draw_line else _cursor
-		var nearest_tile := Global.current_project.get_nearest_tile(position)
+		var nearest_tile := Global.current_project.tiles.get_nearest_tile(position)
 		if nearest_tile.position != Vector2.ZERO:
 			var offset := nearest_tile.position
 			draw_indicator_at(_cursor, offset, Color.green)
@@ -445,7 +445,7 @@ func _set_pixel(position: Vector2, ignore_mirroring := false) -> void:
 
 
 func _set_pixel_no_cache(position: Vector2, ignore_mirroring := false) -> void:
-	position = _stroke_project.get_tile_mode_position(position)
+	position = _stroke_project.tiles.get_canon_position(position)
 
 	if !_stroke_project.can_pixel_get_drawn(position):
 		return
@@ -644,7 +644,7 @@ func _get_undo_data() -> Dictionary:
 
 func _pick_color(position: Vector2) -> void:
 	var project: Project = Global.current_project
-	position = project.get_tile_mode_position(position)
+	position = project.tiles.get_canon_position(position)
 
 	if position.x < 0 or position.y < 0:
 		return

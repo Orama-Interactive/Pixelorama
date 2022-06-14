@@ -5,7 +5,7 @@ extends Reference
 var name := "" setget _name_changed
 var size: Vector2 setget _size_changed
 var undo_redo := UndoRedo.new()
-var tile_mode: int = Global.TileMode.NONE
+var tiles := Tiles.new()
 var undos := 0  # The number of times we added undo properties
 var fill_color := Color(0)
 var has_changed := false setget _has_changed_changed
@@ -54,6 +54,7 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	frames = _frames
 	name = _name
 	size = _size
+	tiles.tile_size = _size
 	selection_bitmap.create(size)
 
 	Global.tabs.add_tab(name)
@@ -255,8 +256,8 @@ func change_project() -> void:
 				6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format))
 			)
 
-	for j in Global.TileMode.values():
-		Global.top_menu_container.tile_mode_submenu.set_item_checked(j, j == tile_mode)
+	for j in Tiles.MODE.values():
+		Global.top_menu_container.tile_mode_submenu.set_item_checked(j, j == tiles.mode)
 
 	# Change selection effect & bounding rectangle
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset
@@ -450,6 +451,7 @@ func _name_changed(value: String) -> void:
 
 func _size_changed(value: Vector2) -> void:
 	size = value
+	tiles.tile_size = value
 
 
 func _frames_changed(value: Array) -> void:
@@ -715,7 +717,7 @@ func can_pixel_get_drawn(
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
 		return false
 
-	if tile_mode != Global.TileMode.NONE and get_nearest_tile(pixel).position != Vector2.ZERO:
+	if tiles.mode != Tiles.MODE.NONE and tiles.get_nearest_tile(pixel).position != Vector2.ZERO:
 		return false
 
 	if has_selection:
@@ -872,86 +874,3 @@ func resize_bitmap_values(bitmap: BitMap, new_size: Vector2, flip_x: bool, flip_
 	new_bitmap.create_from_image_alpha(image)
 
 	return new_bitmap
-
-
-func get_tile_mode_basis_x() -> Vector2:
-	var basis := Vector2(Global.tilemode_x_basis_x, Global.tilemode_x_basis_y)
-	if basis == Vector2(0, 0):
-		basis = Vector2(size.x, 0)
-	return basis
-
-
-func get_tile_mode_basis_y() -> Vector2:
-	var basis := Vector2(Global.tilemode_y_basis_x, Global.tilemode_y_basis_y)
-	if basis == Vector2(0, 0):
-		basis = Vector2(0, size.y)
-	return basis
-
-
-func get_tile_mode_rect() -> Rect2:
-	var basis_x := get_tile_mode_basis_x()
-	var basis_y := get_tile_mode_basis_y()
-	match tile_mode:
-		Global.TileMode.BOTH:
-			var diagonal = basis_x + basis_y
-			return Rect2(-diagonal, 2 * diagonal + size)
-		Global.TileMode.X_AXIS:
-			return Rect2(-basis_x, 2 * basis_x + size)
-		Global.TileMode.Y_AXIS:
-			return Rect2(-basis_y, 2 * basis_y + size)
-		_:
-			return Rect2(Vector2.ZERO, size)
-
-
-func get_nearest_tile(position: Vector2) -> Rect2:
-	var basis_x := get_tile_mode_basis_x()
-	var basis_y := get_tile_mode_basis_y()
-	var tile_to_screen_space := Transform2D(basis_x, basis_y, Vector2.ZERO)
-	# Transform2D.basis_xform_inv() is broken so compute the inverse explicitly:
-	# https://github.com/godotengine/godot/issues/58556
-	var screen_to_tile_space := tile_to_screen_space.affine_inverse()
-	var p := position - size / 2.0 + Vector2(0.5, 0.5)  # p relative to center of tiles
-	var p_tile_space := screen_to_tile_space.basis_xform(p)
-	var tl_tile := tile_to_screen_space.basis_xform(p_tile_space.floor())
-	var tr_tile := tl_tile + basis_x
-	var bl_tile := tl_tile + basis_y
-	var br_tile := tl_tile + basis_x + basis_y
-	var tl_tile_dist := (p - tl_tile).length_squared()
-	var tr_tile_dist := (p - tr_tile).length_squared()
-	var bl_tile_dist := (p - bl_tile).length_squared()
-	var br_tile_dist := (p - br_tile).length_squared()
-	match [tl_tile_dist, tr_tile_dist, bl_tile_dist, br_tile_dist].min():
-		tl_tile_dist:
-			return Rect2(tl_tile, size)
-		tr_tile_dist:
-			return Rect2(tr_tile, size)
-		bl_tile_dist:
-			return Rect2(bl_tile, size)
-		_:
-			return Rect2(br_tile, size)
-
-
-func get_tile_mode_position(position: Vector2) -> Vector2:
-	if tile_mode == Global.TileMode.NONE:
-		return position
-	var nearest_tile = get_nearest_tile(position)
-	if nearest_tile.has_point(position):
-		position -= nearest_tile.position
-	return position
-
-
-func is_tile_mode_in_range(position: Vector2) -> bool:
-	var basis_x := get_tile_mode_basis_x()
-	var basis_y := get_tile_mode_basis_y()
-	var screen_to_tile_space := Transform2D(basis_x, basis_y, Vector2.ZERO).affine_inverse()
-	var nearest_tile := get_nearest_tile(position)
-	var nearest_tile_tile_space := screen_to_tile_space.basis_xform(nearest_tile.position).round()
-	match tile_mode:
-		Global.TileMode.BOTH:
-			return abs(nearest_tile_tile_space.x) <= 1 and abs(nearest_tile_tile_space.y) <= 1
-		Global.TileMode.X_AXIS:
-			return abs(nearest_tile_tile_space.x) <= 1 and abs(nearest_tile_tile_space.y) == 0
-		Global.TileMode.Y_AXIS:
-			return abs(nearest_tile_tile_space.x) == 0 and abs(nearest_tile_tile_space.y) <= 1
-		_:
-			return nearest_tile_tile_space == Vector2.ZERO

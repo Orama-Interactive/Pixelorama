@@ -7,7 +7,7 @@ func _draw() -> void:
 
 	var target_rect: Rect2
 	if Global.grid_draw_over_tile_mode:
-		target_rect = Global.current_project.get_tile_mode_rect()
+		target_rect = Global.current_project.tiles.get_bounding_rect()
 	else:
 		target_rect = Rect2(Vector2.ZERO, Global.current_project.size)
 	if target_rect.has_no_area():

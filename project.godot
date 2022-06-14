@@ -123,6 +123,11 @@ _global_script_classes=[ {
 "class": "SymmetryGuide",
 "language": "GDScript",
 "path": "res://src/UI/Canvas/Rulers/SymmetryGuide.gd"
+}, {
+"base": "Reference",
+"class": "Tiles",
+"language": "GDScript",
+"path": "res://src/Classes/Tiles.gd"
 } ]
 _global_script_class_icons={
 "AnimationTag": "",
@@ -147,7 +152,8 @@ _global_script_class_icons={
 "SelectionTool": "",
 "ShaderImageEffect": "",
 "ShortcutProfile": "",
-"SymmetryGuide": ""
+"SymmetryGuide": "",
+"Tiles": ""
 }
 
 [application]

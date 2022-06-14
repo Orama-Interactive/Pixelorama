@@ -23,22 +23,22 @@ func _draw() -> void:
 
 
 func get_tile_positions() -> Array:
-	var basis_x := Global.current_project.get_tile_mode_basis_x()
-	var basis_y := Global.current_project.get_tile_mode_basis_y()
-	var tile_mode := Global.current_project.tile_mode
+	var x_basis: Vector2 = Global.current_project.tiles.get_x_basis()
+	var y_basis: Vector2 = Global.current_project.tiles.get_y_basis()
+	var tile_mode: int = Global.current_project.tiles.mode
 	var x_range := (
 		range(-1, 2)
-		if tile_mode in [Global.TileMode.X_AXIS, Global.TileMode.BOTH]
+		if tile_mode in [Tiles.MODE.X_AXIS, Tiles.MODE.BOTH]
 		else range(0, 1)
 	)
 	var y_range := (
 		range(-1, 2)
-		if tile_mode in [Global.TileMode.Y_AXIS, Global.TileMode.BOTH]
+		if tile_mode in [Tiles.MODE.Y_AXIS, Tiles.MODE.BOTH]
 		else range(0, 1)
 	)
 	var positions := []
 	for r in y_range:
 		for c in x_range:
-			var position: Vector2 = r * basis_y + c * basis_x
+			var position: Vector2 = r * y_basis + c * x_basis
 			positions.append(position)
 	return positions
