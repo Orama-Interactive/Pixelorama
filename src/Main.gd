@@ -31,8 +31,8 @@ func _ready() -> void:
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
 	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
 
-	quit_and_save_dialog.add_button("Save & Exit", false, "Save")
-	quit_and_save_dialog.get_ok().text = "Exit without saving"
+	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
+	quit_and_save_dialog.get_ok().text = "Save & Exit"
 
 	Global.open_sprites_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
@@ -268,7 +268,7 @@ func save_project(path: String) -> void:
 	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 
 	if is_quitting_on_save:
-		_on_QuitDialog_confirmed()
+		_quit()
 
 
 func _on_SaveSpriteHTML5_confirmed() -> void:
@@ -301,22 +301,30 @@ func show_quit_dialog() -> void:
 			if Global.quit_confirmation:
 				quit_dialog.call_deferred("popup_centered")
 			else:
-				_on_QuitDialog_confirmed()
+				_quit()
 		else:
 			quit_and_save_dialog.call_deferred("popup_centered")
 
 	Global.dialog_open(true)
 
 
-func _on_QuitAndSaveDialog_custom_action(action: String) -> void:
-	if action == "Save":
-		is_quitting_on_save = true
-		Global.save_sprites_dialog.popup_centered()
-		quit_dialog.hide()
-		Global.dialog_open(true)
-
-
 func _on_QuitDialog_confirmed() -> void:
+	_quit()
+
+
+func _on_QuitAndSaveDialog_custom_action(action: String) -> void:
+	if action == "ExitWithoutSaving":
+		_quit()
+
+
+func _on_QuitAndSaveDialog_confirmed() -> void:
+	is_quitting_on_save = true
+	Global.save_sprites_dialog.popup_centered()
+	quit_dialog.hide()
+	Global.dialog_open(true)
+
+
+func _quit() -> void:
 	# Darken the UI to denote that the application is currently exiting
 	# (it won't respond to user input in this state).
 	modulate = Color(0.5, 0.5, 0.5)
