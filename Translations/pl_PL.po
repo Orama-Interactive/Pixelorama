@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-06-16 18:19\n"
+"PO-Revision-Date: 2022-06-16 19:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,7 +169,7 @@ msgid "Invert"
 msgstr "Odwróć"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Lustrzane Odbicie"
 
 msgid "Flip Horizontal"
 msgstr "Odbij w poziomie"
@@ -190,7 +190,7 @@ msgid "Window opacity does not work on fullscreen mode."
 msgstr "Przezroczystość okna nie działa w trybie pełnoekranowym."
 
 msgid "Panel Layout"
-msgstr "Układ panelu"
+msgstr "Szablon panelu"
 
 msgid "Panels"
 msgstr "Panele"
@@ -202,7 +202,7 @@ msgid "Moveable Panels"
 msgstr "Ruchome panele"
 
 msgid "Manage Layouts"
-msgstr "Zarządzaj układami"
+msgstr "Zarządzaj szablonami"
 
 msgid "Add"
 msgstr "Dodaj"
@@ -360,7 +360,8 @@ msgstr "Nie można załadować pliku '%s'. Kod błędu: %s"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Nie można wczytać pliku '%s'.\n"
+"Plik nie jest poprawną paletą."
 
 msgid "Frame"
 msgstr "Klatka"
@@ -495,10 +496,10 @@ msgid "Performance"
 msgstr "Wydajność"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Rozszerzenia"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Kursory"
 
 msgid "Indicators"
 msgstr "Wskaźniki"
@@ -615,16 +616,16 @@ msgid "Outline"
 msgstr "Krawędź"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Cień"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Przesunięcie X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Przesunięcie Y:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Kolor cienia:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Dostosuj Odcień/Nasycenie/Wartość"
@@ -633,37 +634,37 @@ msgid "Gradient"
 msgstr "Gradient"
 
 msgid "Gradient Map"
-msgstr ""
+msgstr "Mapa gradientu"
 
 msgid "Linear"
-msgstr ""
+msgstr "Prosty"
 
 msgid "Radial"
-msgstr ""
+msgstr "Promienisty"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Prosty, krokowy"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Promienisty, krokowy"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "Proste ditherowanie"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "Promieniste Ditherowanie"
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Rozmiar zmiany:"
 
 msgid "Center:"
-msgstr ""
+msgstr "Środek:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Promień:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Wzór ditheringu:"
 
 msgid "Adjust HSV"
 msgstr "Dostosuj HSV"
@@ -840,16 +841,16 @@ msgid "Ukrainian"
 msgstr "Ukraiński"
 
 msgid "Danish"
-msgstr ""
+msgstr "Duński"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Szwedzki"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Serbski (Cyrylica)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Niderlandzki"
 
 msgid "Development Team"
 msgstr "Zespół developerski"
@@ -914,7 +915,10 @@ msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "Zaznaczenie wielokątem\n\n"
+"%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy\n\n"
+"Kliknij dwukrotnie, aby połączyć ostatni punkt, z pierwszym"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -962,7 +966,10 @@ msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "Wybór koloru\n\n"
+"%s dla lewego przycisku myszy\n"
+"%s dla prawego przycisku myszy\n\n"
+"Wybierz kolor z piksela obrazu"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1086,10 +1093,10 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Wyświetla ikonę prawego wybranego narzędzia obok kursora na płótnie"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Używaj systemowych kursorów"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Używaj krzyżykowego kursora dla płótna"
 
 msgid "Guides"
 msgstr "Poradniki"
@@ -1239,19 +1246,19 @@ msgid "If this is toggled on, when the application's window loses focus, it gets
 msgstr "Jeśli ta opcja jest włączona i okno aplikacji traci skupienie, to program zostanie zapauzowany. To pomaga zmniejszyć użycie procesora, kiedy aplikacja działa w tle. Aplikacja zostaje odpauzowana, kiedy myszka pojawi się na oknie aplikacji."
 
 msgid "Add Extension"
-msgstr ""
+msgstr "Dodaj rozszerzenie"
 
 msgid "Enable"
-msgstr ""
+msgstr "Włącz"
 
 msgid "Disable"
-msgstr ""
+msgstr "Wyłącz"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Odinstaluj"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Otwórz folder"
 
 msgid "Brush:"
 msgstr "Pędzel:"
@@ -1288,7 +1295,8 @@ msgstr "Wypełnij wnętrze"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Pikselowa Dokładność\n"
+"sprawia, że linie są gładkie, usuwając dodatkowe piksele na krawędziach"
 
 msgid "Fill Shape"
 msgstr "Wypełnij kształt"
@@ -1888,7 +1896,7 @@ msgid "Opens last opened project on startup"
 msgstr "Po uruchomieniu, załaduje ostatni projekt"
 
 msgid "Quit confirmation"
-msgstr ""
+msgstr "Potwierdzenie wyjścia z aplikacji"
 
 msgid "Enable autosave"
 msgstr "Włącz automatyczne zapisywanie"
@@ -1912,7 +1920,7 @@ msgid "Delete"
 msgstr "Usuń"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Odrzuć Wszystkie"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
@@ -1950,7 +1958,7 @@ msgid "Frame duration"
 msgstr "Czas trwania klatki"
 
 msgid "Duration"
-msgstr ""
+msgstr "Czas trwania"
 
 msgid "Tiled In Both Axis"
 msgstr "Kafelkowanie na obu osiach"
@@ -1998,29 +2006,29 @@ msgid "Position:"
 msgstr "Pozycja:"
 
 msgid "Tools"
-msgstr ""
+msgstr "Narzędzia"
 
 msgid "Main Canvas"
-msgstr ""
+msgstr "Główne płótno"
 
 msgid "Second Canvas"
-msgstr ""
+msgstr "Drugie płótno"
 
 msgid "Animation Timeline"
-msgstr ""
+msgstr "Oś czasu animacji"
 
 msgid "Canvas Preview"
-msgstr ""
+msgstr "Podgląd płótna"
 
 msgid "Color Pickers"
-msgstr ""
+msgstr "Wybieracze kolorów"
 
 msgid "Global Tool Options"
-msgstr ""
+msgstr "Globalne opcje narzędzi"
 
 msgid "Left Tool Options"
-msgstr ""
+msgstr "Opcje lewego narzędzia"
 
 msgid "Right Tool Options"
-msgstr ""
+msgstr "Opcje prawego narzędzia"
 
