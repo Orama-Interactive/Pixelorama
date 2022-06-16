@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-06-13 23:28\n"
+"PO-Revision-Date: 2022-06-16 18:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Widok"
 
 msgid "Window"
-msgstr ""
+msgstr "Okno"
 
 msgid "Image"
 msgstr "Obraz"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Eksportuj"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Nadpisz"
 
 msgid "Export..."
 msgstr "Eksportuj..."
@@ -187,34 +187,34 @@ msgid "Window Opacity"
 msgstr "Przezroczystość okna"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "Przezroczystość okna nie działa w trybie pełnoekranowym."
 
 msgid "Panel Layout"
 msgstr "Układ panelu"
 
 msgid "Panels"
-msgstr ""
+msgstr "Panele"
 
 msgid "Layouts"
-msgstr ""
+msgstr "Szablony"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Ruchome panele"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Zarządzaj układami"
 
 msgid "Add"
-msgstr ""
+msgstr "Dodaj"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Dodaj Szablon"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Edytuj Szablon"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Czy jesteś pewien, że chcesz usunąć ten szablon?"
 
 msgid "Auto"
 msgstr "Automatyczny"
@@ -265,7 +265,7 @@ msgid "Import as:"
 msgstr "Importuj jako:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "Zastosuj dla wszystkich"
 
 msgid "Recent projects"
 msgstr "Ostatnie projekty"
@@ -340,19 +340,19 @@ msgid "File %s already exists. Overwrite?"
 msgstr "Plik %s już istnieje. Nadpisać?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Ścieżka jest nieprawidłowa!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Nazwa pliku jest nieprawidłowa!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Ścieżka do katalogu i nazwa pliku są niepoprawne!"
 
 msgid "Exporting in progress..."
 msgstr "Eksportowanie w toku..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Nie można wczytać pliku '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
