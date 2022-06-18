@@ -105,6 +105,7 @@ func _setup_view_menu() -> void:
 	# Order as in Global.ViewMenu enum
 	var view_menu_items := [
 		"Tile Mode",
+		"Tile Mode Offsets",
 		"Greyscale View",
 		"Mirror View",
 		"Show Grid",
@@ -117,6 +118,8 @@ func _setup_view_menu() -> void:
 	for item in view_menu_items:
 		if item == "Tile Mode":
 			_setup_tile_mode_submenu(item)
+		elif item == "Tile Mode Offsets":
+			view_menu.add_item(item, i)
 		else:
 			view_menu.add_check_item(item, i)
 		i += 1
@@ -244,7 +247,6 @@ func _setup_image_menu() -> void:
 		"Centralize Image",
 		"Crop Image",
 		"Resize Canvas",
-		"Tile Mode Offsets",
 		"Mirror Image",
 		"Rotate Image",
 		"Invert Colors",
@@ -260,7 +262,7 @@ func _setup_image_menu() -> void:
 	var i := 0
 	for item in image_menu_items:
 		image_menu.add_item(item, i)
-		if i == Global.ImageMenu.TILE_MODE_OFFSETS:
+		if i == Global.ImageMenu.RESIZE_CANVAS:
 			image_menu.add_separator()
 		i += 1
 
@@ -420,6 +422,8 @@ func edit_menu_id_pressed(id: int) -> void:
 
 func view_menu_id_pressed(id: int) -> void:
 	match id:
+		Global.ViewMenu.TILE_MODE_OFFSETS:
+			_show_tile_mode_offsets_popup()
 		Global.ViewMenu.GREYSCALE_VIEW:
 			_toggle_greyscale_view()
 		Global.ViewMenu.MIRROR_VIEW:
@@ -593,9 +597,6 @@ func image_menu_id_pressed(id: int) -> void:
 
 		Global.ImageMenu.RESIZE_CANVAS:
 			_show_resize_canvas_popup()
-
-		Global.ImageMenu.TILE_MODE_OFFSETS:
-			_show_tile_mode_offsets_popup()
 
 		Global.ImageMenu.FLIP:
 			Global.control.get_node("Dialogs/ImageEffects/FlipImageDialog").popup_centered()
