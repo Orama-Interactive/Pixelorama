@@ -26,6 +26,7 @@ func _on_TileModeOffsets_about_to_show() -> void:
 func _on_TileModeOffsets_confirmed() -> void:
 	Global.current_project.tiles.x_basis = tile_mode.tiles.x_basis
 	Global.current_project.tiles.y_basis = tile_mode.tiles.y_basis
+	Global.canvas.tile_mode.update()
 	Global.transparent_checker.update_rect()
 
 
