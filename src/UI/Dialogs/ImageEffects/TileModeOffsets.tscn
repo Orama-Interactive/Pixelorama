@@ -103,12 +103,14 @@ margin_right = 200.0
 margin_bottom = 330.0
 size_flags_vertical = 3
 
-[node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
+[node name="Preview" type="Control" parent="VBoxContainer/AspectRatioContainer"]
 margin_right = 200.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
-expand = true
-stretch_mode = 5
+
+[node name="TileMode" type="Node2D" parent="VBoxContainer/AspectRatioContainer/Preview"]
+material = SubResource( 1 )
+script = ExtResource( 3 )
 
 [node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 1 )]
 show_behind_parent = true
@@ -117,12 +119,9 @@ anchor_bottom = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
 
-[node name="TileMode" type="Node2D" parent="VBoxContainer/AspectRatioContainer/Preview"]
-material = SubResource( 1 )
-script = ExtResource( 3 )
-
 [connection signal="about_to_show" from="." to="." method="_on_TileModeOffsets_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_TileModeOffsets_confirmed"]
+[connection signal="item_rect_changed" from="." to="." method="_on_TileModeOffsets_item_rect_changed"]
 [connection signal="popup_hide" from="." to="." method="_on_TileModeOffsets_popup_hide"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/XBasisX" to="." method="_on_XBasisX_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/XBasisY" to="." method="_on_XBasisY_value_changed"]

@@ -378,6 +378,7 @@ func deserialize(dict: Dictionary) -> void:
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
 		size.y = dict.size_y
+		tiles.tile_size = size
 		selection_bitmap = resize_bitmap(selection_bitmap, size)
 	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
 		tiles.x_basis.x = dict.tile_mode_x_basis_x

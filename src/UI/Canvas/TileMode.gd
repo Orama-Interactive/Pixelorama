@@ -1,6 +1,7 @@
 extends Node2D
 
 var tiles: Tiles
+var draw_center := false
 
 
 func _draw() -> void:
@@ -44,6 +45,8 @@ func get_tile_positions() -> Array:
 	var positions := []
 	for r in y_range:
 		for c in x_range:
+			if not draw_center and r == 0 and c == 0:
+				continue
 			var position: Vector2 = r * y_basis + c * x_basis
 			positions.append(position)
 	return positions
