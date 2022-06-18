@@ -24,6 +24,7 @@ enum ImageMenu {
 	CENTRALIZE_IMAGE,
 	CROP_IMAGE,
 	RESIZE_CANVAS,
+	TILE_MODE_OFFSETS,
 	FLIP,
 	ROTATE,
 	INVERT_COLORS,
@@ -101,10 +102,6 @@ var checker_color_2 := Color(0.34, 0.35, 0.34, 1)
 var checker_follow_movement := false
 var checker_follow_scale := false
 var tilemode_opacity := 1.0
-var tilemode_x_basis_x := 0
-var tilemode_x_basis_y := 0
-var tilemode_y_basis_x := 0
-var tilemode_y_basis_y := 0
 
 var selection_animated_borders := true
 var selection_border_color_1 := Color.white

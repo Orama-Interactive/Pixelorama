@@ -4,20 +4,18 @@ extends Reference
 enum MODE { NONE, BOTH, X_AXIS, Y_AXIS }
 
 var mode: int = MODE.NONE
-var tile_size := Vector2.ZERO
+var x_basis: Vector2
+var y_basis: Vector2
+var tile_size: Vector2
 
 
-static func get_x_basis() -> Vector2:
-	return Vector2(Global.tilemode_x_basis_x, Global.tilemode_x_basis_y)
-
-
-static func get_y_basis() -> Vector2:
-	return Vector2(Global.tilemode_y_basis_x, Global.tilemode_y_basis_y)
+func _init(size: Vector2):
+	x_basis = Vector2(size.x, 0)
+	y_basis = Vector2(0, size.y)
+	tile_size = size
 
 
 func get_bounding_rect() -> Rect2:
-	var x_basis := get_x_basis()
-	var y_basis := get_y_basis()
 	match mode:
 		MODE.BOTH:
 			var diagonal := x_basis + y_basis
@@ -43,8 +41,6 @@ func get_bounding_rect() -> Rect2:
 
 
 func get_nearest_tile(point: Vector2) -> Rect2:
-	var x_basis := get_x_basis()
-	var y_basis := get_y_basis()
 	var tile_to_screen_space := Transform2D(x_basis, y_basis, Vector2.ZERO)
 	# Transform2D.basis_xform_inv() is broken so compute the inverse explicitly:
 	# https://github.com/godotengine/godot/issues/58556
@@ -80,8 +76,6 @@ func get_canon_position(position: Vector2) -> Vector2:
 
 
 func has_point(point: Vector2) -> bool:
-	var x_basis := get_x_basis()
-	var y_basis := get_y_basis()
 	var screen_to_tile_space := Transform2D(x_basis, y_basis, Vector2.ZERO).affine_inverse()
 	var nearest_tile := get_nearest_tile(point)
 	var nearest_tile_tile_space := screen_to_tile_space.basis_xform(nearest_tile.position).round()

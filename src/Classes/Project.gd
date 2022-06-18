@@ -5,7 +5,7 @@ extends Reference
 var name := "" setget _name_changed
 var size: Vector2 setget _size_changed
 var undo_redo := UndoRedo.new()
-var tiles := Tiles.new()
+var tiles: Tiles
 var undos := 0  # The number of times we added undo properties
 var fill_color := Color(0)
 var has_changed := false setget _has_changed_changed
@@ -54,7 +54,7 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	frames = _frames
 	name = _name
 	size = _size
-	tiles.tile_size = _size
+	tiles = Tiles.new(size)
 	selection_bitmap.create(size)
 
 	Global.tabs.add_tab(name)
@@ -352,6 +352,10 @@ func serialize() -> Dictionary:
 		"name": name,
 		"size_x": size.x,
 		"size_y": size.y,
+		"tile_mode_x_basis_x": tiles.x_basis.x,
+		"tile_mode_x_basis_y": tiles.x_basis.y,
+		"tile_mode_y_basis_x": tiles.y_basis.x,
+		"tile_mode_y_basis_y": tiles.y_basis.y,
 		"save_path": OpenSave.current_save_paths[Global.projects.find(self)],
 		"layers": layer_data,
 		"tags": tag_data,
@@ -375,6 +379,12 @@ func deserialize(dict: Dictionary) -> void:
 		size.x = dict.size_x
 		size.y = dict.size_y
 		selection_bitmap = resize_bitmap(selection_bitmap, size)
+	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
+		tiles.x_basis.x = dict.tile_mode_x_basis_x
+		tiles.x_basis.y = dict.tile_mode_x_basis_y
+	if dict.has("tile_mode_y_basis_x") and dict.has("tile_mode_y_basis_y"):
+		tiles.y_basis.x = dict.tile_mode_y_basis_x
+		tiles.y_basis.y = dict.tile_mode_y_basis_y
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
 	if dict.has("frames"):
@@ -450,8 +460,16 @@ func _name_changed(value: String) -> void:
 
 
 func _size_changed(value: Vector2) -> void:
-	size = value
+	if size.x != 0:
+		tiles.x_basis = (tiles.x_basis * value.x / size.x).round()
+	else:
+		tiles.x_basis = Vector2(value.x, 0)
+	if size.y != 0:
+		tiles.y_basis = (tiles.y_basis * value.y / size.y).round()
+	else:
+		tiles.y_basis = Vector2(0, value.y)
 	tiles.tile_size = value
+	size = value
 
 
 func _frames_changed(value: Array) -> void:

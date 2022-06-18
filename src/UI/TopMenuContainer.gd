@@ -244,6 +244,7 @@ func _setup_image_menu() -> void:
 		"Centralize Image",
 		"Crop Image",
 		"Resize Canvas",
+		"Tile Mode Offsets",
 		"Mirror Image",
 		"Rotate Image",
 		"Invert Colors",
@@ -259,7 +260,7 @@ func _setup_image_menu() -> void:
 	var i := 0
 	for item in image_menu_items:
 		image_menu.add_item(item, i)
-		if i == Global.ImageMenu.RESIZE_CANVAS:
+		if i == Global.ImageMenu.TILE_MODE_OFFSETS:
 			image_menu.add_separator()
 		i += 1
 
@@ -593,6 +594,9 @@ func image_menu_id_pressed(id: int) -> void:
 		Global.ImageMenu.RESIZE_CANVAS:
 			_show_resize_canvas_popup()
 
+		Global.ImageMenu.TILE_MODE_OFFSETS:
+			_show_tile_mode_offsets_popup()
+
 		Global.ImageMenu.FLIP:
 			Global.control.get_node("Dialogs/ImageEffects/FlipImageDialog").popup_centered()
 			Global.dialog_open(true)
@@ -640,6 +644,11 @@ func _show_scale_image_popup() -> void:
 
 func _show_resize_canvas_popup() -> void:
 	Global.control.get_node("Dialogs/ImageEffects/ResizeCanvas").popup_centered()
+	Global.dialog_open(true)
+
+
+func _show_tile_mode_offsets_popup() -> void:
+	Global.control.get_node("Dialogs/ImageEffects/TileModeOffsets").popup_centered()
 	Global.dialog_open(true)
 
 

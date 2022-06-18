@@ -1,16 +1,16 @@
 extends Node2D
 
+var tiles: Tiles
+
 
 func _draw() -> void:
 	var positions := get_tile_positions()
 	var tilemode_opacity := Global.tilemode_opacity
 
-	var position_tmp := position
-	var scale_tmp := scale
 	if Global.mirror_view:
-		position_tmp.x = position_tmp.x + Global.current_project.size.x
-		scale_tmp.x = -1
-	draw_set_transform(position_tmp, rotation, scale_tmp)
+		var position_tmp := Vector2(Global.current_project.size.x, 0)
+		var scale_tmp := Vector2(-1, 1)
+		draw_set_transform(position_tmp, 0, scale_tmp)
 
 	var modulate_color := Color(
 		tilemode_opacity, tilemode_opacity, tilemode_opacity, tilemode_opacity
@@ -19,13 +19,18 @@ func _draw() -> void:
 	for pos in positions:
 		draw_texture(current_frame_texture, pos, modulate_color)
 
-	draw_set_transform(position, rotation, scale)
+	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
 
 
 func get_tile_positions() -> Array:
-	var x_basis: Vector2 = Global.current_project.tiles.get_x_basis()
-	var y_basis: Vector2 = Global.current_project.tiles.get_y_basis()
-	var tile_mode: int = Global.current_project.tiles.mode
+	var defaulted_tiles := tiles
+	if defaulted_tiles == null:
+		defaulted_tiles = Global.current_project.tiles
+
+	var x_basis: Vector2 = defaulted_tiles.x_basis
+	var y_basis: Vector2 = defaulted_tiles.y_basis
+	var tile_mode: int = defaulted_tiles.mode
+
 	var x_range := (
 		range(-1, 2)
 		if tile_mode in [Tiles.MODE.X_AXIS, Tiles.MODE.BOTH]
