@@ -442,6 +442,11 @@ func view_menu_id_pressed(id: int) -> void:
 	Global.canvas.update()
 
 
+func _show_tile_mode_offsets_popup() -> void:
+	Global.control.get_node("Dialogs/TileModeOffsetsDialog").popup_centered()
+	Global.dialog_open(true)
+
+
 func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.current_project.tiles.mode = id
 	Global.transparent_checker.fit_rect(Global.current_project.tiles.get_bounding_rect())
@@ -645,11 +650,6 @@ func _show_scale_image_popup() -> void:
 
 func _show_resize_canvas_popup() -> void:
 	Global.control.get_node("Dialogs/ImageEffects/ResizeCanvas").popup_centered()
-	Global.dialog_open(true)
-
-
-func _show_tile_mode_offsets_popup() -> void:
-	Global.control.get_node("Dialogs/ImageEffects/TileModeOffsets").popup_centered()
 	Global.dialog_open(true)
 
 

@@ -8,7 +8,7 @@ onready var preview_rect: Control = $VBoxContainer/AspectRatioContainer/Preview
 onready var tile_mode: Node2D = $VBoxContainer/AspectRatioContainer/Preview/TileMode
 
 
-func _on_TileModeOffsets_about_to_show() -> void:
+func _on_TileModeOffsetsDialog_about_to_show() -> void:
 	tile_mode.draw_center = true
 	tile_mode.tiles = Tiles.new(Global.current_project.size)
 	tile_mode.tiles.mode = Tiles.MODE.BOTH
@@ -21,7 +21,7 @@ func _on_TileModeOffsets_about_to_show() -> void:
 	update_preview()
 
 
-func _on_TileModeOffsets_confirmed() -> void:
+func _on_TileModeOffsetsDialog_confirmed() -> void:
 	Global.current_project.tiles.x_basis = tile_mode.tiles.x_basis
 	Global.current_project.tiles.y_basis = tile_mode.tiles.y_basis
 	Global.canvas.tile_mode.update()
@@ -63,10 +63,10 @@ func update_preview() -> void:
 	preview_rect.get_node("TransparentChecker").rect_size = preview_rect.rect_size
 
 
-func _on_TileModeOffsets_popup_hide() -> void:
+func _on_TileModeOffsetsDialog_popup_hide() -> void:
 	Global.dialog_open(false)
 
 
-func _on_TileModeOffsets_item_rect_changed():
+func _on_TileModeOffsetsDialog_item_rect_changed():
 	if tile_mode:
 		update_preview()
