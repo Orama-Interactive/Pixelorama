@@ -26,7 +26,6 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ],
-"_edit_use_anchors_": false,
 "_edit_vertical_guides_": [  ]
 }
 
@@ -149,7 +148,7 @@ visible = false
 [connection signal="popup_hide" from="Dialogs/UnsavedCanvasDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="Dialogs/QuitDialog" to="." method="_on_QuitDialog_confirmed"]
 [connection signal="popup_hide" from="Dialogs/QuitDialog" to="." method="_can_draw_true"]
-[connection signal="confirmed" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitDialog_confirmed"]
+[connection signal="confirmed" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_confirmed"]
 [connection signal="custom_action" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_custom_action"]
 [connection signal="popup_hide" from="Dialogs/QuitAndSaveDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/ErrorDialog" to="." method="_can_draw_true"]

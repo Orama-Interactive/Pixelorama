@@ -1,22 +1,10 @@
 extends Camera2D
 
 enum Cameras { MAIN, SECOND, SMALL }
-enum Direction { UP, DOWN, LEFT, RIGHT }
 
-const LOW_SPEED_MOVE_RATE := 150.0
-const MEDIUM_SPEED_MOVE_RATE := 750.0
-const HIGH_SPEED_MOVE_RATE := 3750.0
-const KEY_MOVE_ACTION_NAMES := ["ui_up", "ui_down", "ui_left", "ui_right"]
-# Holds sign multipliers for the given directions nyaa
-# (per the indices defined by Direction)
-# UP, DOWN, LEFT, RIGHT in that order
-const DIRECTIONAL_SIGN_MULTIPLIERS := [
-	Vector2(0.0, -1.0), Vector2(0.0, 1.0), Vector2(-1.0, 0.0), Vector2(1.0, 0.0)
-]
+const KEY_MOVE_ACTION_NAMES := ["camera_left", "camera_right", "camera_up", "camera_down"]
+const CAMERA_SPEED_RATE := 15.0
 
-# Indices are as in the Direction enum
-# This is the total time the key for that direction has been pressed.
-var key_move_press_time := [0.0, 0.0, 0.0, 0.0]
 var tween: Tween
 var zoom_min := Vector2(0.005, 0.005)
 var zoom_max := Vector2.ONE
@@ -106,90 +94,6 @@ func update_transparent_checker_offset() -> void:
 	transparent_checker.update_offset(o, s)
 
 
-# Get the speed multiplier for when you've pressed
-# a movement key for the given amount of time
-func _dir_move_zoom_multiplier(press_time: float) -> float:
-	if press_time < 0:
-		return 0.0
-	if Input.is_key_pressed(KEY_SHIFT) and Input.is_key_pressed(KEY_CONTROL):
-		return HIGH_SPEED_MOVE_RATE
-	elif Input.is_key_pressed(KEY_SHIFT):
-		return MEDIUM_SPEED_MOVE_RATE
-	elif !Input.is_key_pressed(KEY_CONTROL):
-		# control + right/left is used to move frames so
-		# we do this check to ensure that there is no conflict
-		return LOW_SPEED_MOVE_RATE
-	else:
-		return 0.0
-
-
-func _reset_dir_move_time(direction) -> void:
-	key_move_press_time[direction] = 0.0
-
-
-# Check if an event is a ui_up/down/left/right event-press :)
-func _is_action_direction_pressed(event: InputEvent, allow_echo: bool = true) -> bool:
-	for slot in Tools._slots.values():
-		if slot.tool_node is SelectionTool:
-			return false
-	for action in KEY_MOVE_ACTION_NAMES:
-		if event.is_action_pressed(action, allow_echo):
-			return true
-	return false
-
-
-# Check if an event is a ui_up/down/left/right event release nya
-func _is_action_direction_released(event: InputEvent) -> bool:
-	for slot in Tools._slots.values():
-		if slot.tool_node is SelectionTool:
-			return false
-	for action in KEY_MOVE_ACTION_NAMES:
-		if event.is_action_released(action):
-			return true
-	return false
-
-
-# get the Direction associated with the event.
-# if not a direction event return null
-func _get_action_direction(event: InputEvent):  # -> Optional[Direction]
-	if event.is_action("ui_up"):
-		return Direction.UP
-	elif event.is_action("ui_down"):
-		return Direction.DOWN
-	elif event.is_action("ui_left"):
-		return Direction.LEFT
-	elif event.is_action("ui_right"):
-		return Direction.RIGHT
-	return null
-
-
-# Process an action event for a pressed direction
-# action
-func _process_direction_action_pressed(event: InputEvent) -> void:
-	var dir = _get_action_direction(event)
-	if dir == null:
-		return
-	var increment := get_process_delta_time()
-	# Count the total time we've been doing this ^.^
-	key_move_press_time[dir] += increment
-	var this_direction_press_time: float = key_move_press_time[dir]
-	var move_speed := _dir_move_zoom_multiplier(this_direction_press_time)
-	offset = (
-		offset
-		+ move_speed * increment * DIRECTIONAL_SIGN_MULTIPLIERS[dir].rotated(rotation) * zoom
-	)
-	_update_rulers()
-	update_transparent_checker_offset()
-
-
-# Process an action for a release direction action
-func _process_direction_action_released(event: InputEvent) -> void:
-	var dir = _get_action_direction(event)
-	if dir == null:
-		return
-	_reset_dir_move_time(dir)
-
-
 func _input(event: InputEvent) -> void:
 	if !Global.can_draw:
 		drag = false
@@ -200,14 +104,26 @@ func _input(event: InputEvent) -> void:
 		drag = false
 		return
 
-	if event.is_action_pressed("middle_mouse") || event.is_action_pressed("space"):
+	var get_velocity := false
+	for action in KEY_MOVE_ACTION_NAMES:
+		if event.is_action(action):
+			get_velocity = true
+
+	if get_velocity:
+		var velocity := Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
+		if velocity != Vector2.ZERO and !_has_selection_tool():
+			offset += velocity.rotated(rotation) * zoom * CAMERA_SPEED_RATE
+			_update_rulers()
+
+	if event.is_action_pressed("pan"):
 		drag = true
-	elif event.is_action_released("middle_mouse") || event.is_action_released("space"):
+	elif event.is_action_released("pan"):
 		drag = false
 	elif event.is_action_pressed("zoom_in"):  # Wheel Up Event
 		zoom_camera(-1)
 	elif event.is_action_pressed("zoom_out"):  # Wheel Down Event
 		zoom_camera(1)
+
 	elif event is InputEventMagnifyGesture:  # Zoom Gesture on a Laptop touchpad
 		if event.factor < 1:
 			zoom_camera(1)
@@ -220,13 +136,15 @@ func _input(event: InputEvent) -> void:
 		offset = offset - event.relative.rotated(rotation) * zoom
 		update_transparent_checker_offset()
 		_update_rulers()
-	elif event is InputEventKey:
-		if _is_action_direction_pressed(event):
-			_process_direction_action_pressed(event)
-		elif _is_action_direction_released(event):
-			_process_direction_action_released(event)
 
 	save_values_to_project()
+
+
+func _has_selection_tool() -> bool:
+	for slot in Tools._slots.values():
+		if slot.tool_node is SelectionTool:
+			return true
+	return false
 
 
 # Rotate Camera

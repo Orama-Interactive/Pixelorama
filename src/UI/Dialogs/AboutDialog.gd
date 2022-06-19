@@ -55,6 +55,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Art Leeman (artleeman)": ["Spanish"],
 	"DevCentu": ["Spanish"],
 	"Seifer23": ["Catalan"],
+	"Joel García Cascalló (jocsencat) ": ["Catalan"],
 	"Agnis Aldiņš (NeZvers)": ["Latvian"],
 	"Edgars Korns (Eddy11)": ["Latvian"],
 	"Teashrock": ["Esperanto"],
@@ -176,7 +177,7 @@ func _on_Groups_item_selected() -> void:
 
 
 func _on_Website_pressed() -> void:
-	OS.shell_open("https://www.orama-interactive.com")
+	OS.shell_open("https://www.oramainteractive.com")
 
 
 func _on_GitHub_pressed() -> void:
@@ -257,6 +258,11 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Silent Orb (silentorb)")
 	contributors.create_item(contributor_root).set_text(0, "  JumpJetAvocado")
 	contributors.create_item(contributor_root).set_text(0, "  ArthyChaux")
+	contributors.create_item(contributor_root).set_text(0, "  AlphinAlbukhari")
+	contributors.create_item(contributor_root).set_text(
+		0, "  Matteo Piovanelli (MatteoPiovanelli-Laser)"
+	)
+	contributors.create_item(contributor_root).set_text(0, "  Haoyu Qiu (timothyqiu)")
 
 
 func create_translators() -> void:

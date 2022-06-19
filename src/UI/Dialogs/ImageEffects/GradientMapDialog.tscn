@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/Nodes/GradientEdit.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/GradientMapDialog.gd" type="Script" id=3]
+
+[node name="GradientMapDialog" type="ConfirmationDialog"]
+margin_right = 200.0
+margin_bottom = 70.0
+window_title = "Gradient Map"
+resizable = true
+script = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
+margin_right = 278.0
+margin_bottom = 200.0
+size_flags_vertical = 3
+
+[node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
+margin_left = 39.0
+margin_right = 239.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+size_flags_horizontal = 5
+size_flags_vertical = 3
+expand = true
+stretch_mode = 5
+
+[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 1 )]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="GradientEdit" parent="VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 204.0
+margin_right = 278.0
+margin_bottom = 234.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
+margin_top = 238.0
+margin_right = 278.0
+margin_bottom = 262.0
+columns = 2
+
+[node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
+margin_right = 160.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+pressed = true
+text = "Only affect selection"
+
+[node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
+margin_left = 164.0
+margin_right = 278.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+text = "Selected cels"
+items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
+selected = 0
+
+[connection signal="updated" from="VBoxContainer/GradientEdit" to="." method="_on_GradientEdit_updated"]

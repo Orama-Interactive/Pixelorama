@@ -36,7 +36,7 @@ func set_config(config: Dictionary) -> void:
 
 func draw_start(position: Vector2) -> void:
 	.draw_start(position)
-	if Input.is_action_pressed("alt"):
+	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
 		_pick_color(position)
 		return
@@ -50,7 +50,7 @@ func draw_start(position: Vector2) -> void:
 	prepare_undo("Draw")
 	_drawer.reset()
 
-	_draw_line = Tools.shift
+	_draw_line = Input.is_action_pressed("draw_create_line")
 	if _draw_line:
 		_line_start = position
 		_line_end = position
@@ -65,7 +65,7 @@ func draw_start(position: Vector2) -> void:
 func draw_move(position: Vector2) -> void:
 	.draw_move(position)
 	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed("alt"):
+		if Input.is_action_pressed("draw_color_picker"):
 			_pick_color(position)
 		return
 

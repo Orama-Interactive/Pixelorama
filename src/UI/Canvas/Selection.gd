@@ -73,13 +73,13 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if is_moving_content:
-			if Input.is_action_just_pressed("enter"):
-				transform_content_confirm()
-			elif Input.is_action_just_pressed("escape"):
-				transform_content_cancel()
+	if is_moving_content:
+		if Input.is_action_just_pressed("transformation_confirm"):
+			transform_content_confirm()
+		elif Input.is_action_just_pressed("transformation_cancel"):
+			transform_content_cancel()
 
+	if event is InputEventKey:
 		_move_with_arrow_keys(event)
 
 	elif event is InputEventMouse:
@@ -108,10 +108,10 @@ func _input(event: InputEvent) -> void:
 					Global.has_focus = false
 					mouse_pos_on_gizmo_drag = Global.canvas.current_pixel
 					dragged_gizmo = gizmo
-					if Input.is_action_pressed("alt"):
+					if Input.is_action_pressed("transform_move_selection_only"):
 						transform_content_confirm()
 					if !is_moving_content:
-						if Input.is_action_pressed("alt"):
+						if Input.is_action_pressed("transform_move_selection_only"):
 							undo_data = get_undo_data(false)
 							temp_rect = big_bounding_rectangle
 							temp_bitmap = Global.current_project.selection_bitmap
@@ -293,7 +293,7 @@ func update_on_zoom(zoom: float) -> void:
 func _gizmo_resize() -> void:
 	var dir := dragged_gizmo.direction
 
-	if Input.is_action_pressed("ctrl"):
+	if Input.is_action_pressed("shape_center"):
 		# Code inspired from https://github.com/GDQuest/godot-open-rpg
 		if dir.x != 0 and dir.y != 0:  # Border gizmos
 			temp_rect.size = ((Global.canvas.current_pixel - temp_rect_pivot) * 2.0 * dir)
@@ -306,7 +306,7 @@ func _gizmo_resize() -> void:
 	else:
 		_resize_rect(Global.canvas.current_pixel, dir)
 
-	if Input.is_action_pressed("shift"):  # Maintain aspect ratio
+	if Input.is_action_pressed("shape_perfect"):  # Maintain aspect ratio
 		var end_y = temp_rect.end.y
 		if dir == Vector2(1, -1) or dir.x == 0:  # Top right corner, center top and center bottom
 			var size := temp_rect.size.y
@@ -645,7 +645,7 @@ func cut() -> void:
 	if !project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	copy()
-	delete()
+	delete(false)
 
 
 func copy() -> void:
@@ -741,9 +741,11 @@ func paste() -> void:
 		project.selection_bitmap_changed()
 
 
-func delete() -> void:
+func delete(selected_cels := true) -> void:
 	var project: Project = Global.current_project
 	if !project.has_selection:
+		return
+	if !project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	if is_moving_content:
 		is_moving_content = false
@@ -756,12 +758,18 @@ func delete() -> void:
 		return
 
 	var undo_data_tmp := get_undo_data(true)
-	var image: Image = project.frames[project.current_frame].cels[project.current_layer].image
+	var images: Array
+	if selected_cels:
+		images = _get_selected_draw_images()
+	else:
+		images = [project.frames[project.current_frame].cels[project.current_layer].image]
+
 	for x in big_bounding_rectangle.size.x:
 		for y in big_bounding_rectangle.size.y:
 			var pos := Vector2(x, y) + big_bounding_rectangle.position
 			if project.can_pixel_get_drawn(pos):
-				image.set_pixelv(pos, Color(0))
+				for image in images:
+					image.set_pixelv(pos, Color(0))
 	commit_undo("Draw", undo_data_tmp)
 
 

@@ -1,7 +1,6 @@
 extends ImageEffect
 
 var live_preview: bool = true
-var confirmed := false
 var shader: Shader = preload("res://src/Shaders/Rotation.shader")
 
 onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
@@ -109,12 +108,6 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 		_cel.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 	else:
 		_cel.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
-
-
-func _confirmed() -> void:
-	confirmed = true
-	._confirmed()
-	angle_hslider.value = 0
 
 
 func _on_HSlider_value_changed(_value: float) -> void:

@@ -41,7 +41,7 @@ func handle_loading_files(files: PoolStringArray) -> void:
 		elif file_ext in ["pck", "zip"]:  # Godot resource pack file
 			Global.preferences_dialog.extensions.install_extension(file)
 
-		elif file_ext == "shader":  # Godot shader file
+		elif file_ext == "shader" or file_ext == "gdshader":  # Godot shader file
 			var shader = load(file)
 			if !shader is Shader:
 				continue

@@ -14,7 +14,7 @@ onready var selection_node: Node2D = Global.canvas.selection
 
 func _input(event: InputEvent) -> void:
 	if _start_pos != Vector2.INF:
-		if event.is_action_pressed("ctrl"):
+		if event.is_action_pressed("transform_snap_grid"):
 			_snap_to_grid = true
 			var grid_size := Vector2(Global.grid_width, Global.grid_height)
 			_offset = _offset.snapped(grid_size)
@@ -25,7 +25,7 @@ func _input(event: InputEvent) -> void:
 					selection_node.big_bounding_rectangle.position
 					- prev_pos
 				)
-		elif event.is_action_released("ctrl"):
+		elif event.is_action_released("transform_snap_grid"):
 			_snap_to_grid = false
 
 
@@ -49,7 +49,7 @@ func draw_move(position: Vector2) -> void:
 	# while the content is being moved
 	if _content_transformation_check != selection_node.is_moving_content:
 		return
-	if Tools.shift:  # Snap to axis
+	if Input.is_action_pressed("transform_snap_axis"):
 		var angle := position.angle_to_point(_start_pos)
 		if abs(angle) <= PI / 4 or abs(angle) >= 3 * PI / 4:
 			position.y = _start_pos.y
@@ -74,7 +74,7 @@ func draw_end(position: Vector2) -> void:
 		_start_pos != Vector2.INF
 		and _content_transformation_check == selection_node.is_moving_content
 	):
-		if Tools.shift:  # Snap to axis
+		if Input.is_action_pressed("transform_snap_axis"):
 			var angle := position.angle_to_point(_start_pos)
 			if abs(angle) <= PI / 4 or abs(angle) >= 3 * PI / 4:
 				position.y = _start_pos.y

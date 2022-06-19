@@ -175,6 +175,9 @@ msgstr ""
 msgid "Window Opacity"
 msgstr ""
 
+msgid "Window opacity does not work on fullscreen mode."
+msgstr ""
+
 msgid "Panel Layout"
 msgstr ""
 
@@ -325,7 +328,13 @@ msgstr ""
 msgid "File %s already exists. Overwrite?"
 msgstr ""
 
-msgid "Directory path or file name is not valid!"
+msgid "Directory path is not valid!"
+msgstr ""
+
+msgid "File name is not valid!"
+msgstr ""
+
+msgid "Directory path and file name are not valid!"
 msgstr ""
 
 msgid "Exporting in progress..."
@@ -594,10 +603,55 @@ msgstr ""
 msgid "Outline"
 msgstr ""
 
+msgid "Drop Shadow"
+msgstr ""
+
+msgid "Offset X:"
+msgstr ""
+
+msgid "Offset Y:"
+msgstr ""
+
+msgid "Shadow color:"
+msgstr ""
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
 msgid "Gradient"
+msgstr ""
+
+msgid "Gradient Map"
+msgstr ""
+
+msgid "Linear"
+msgstr ""
+
+msgid "Radial"
+msgstr ""
+
+msgid "Linear Step"
+msgstr ""
+
+msgid "Radial Step"
+msgstr ""
+
+msgid "Linear Dithering"
+msgstr ""
+
+msgid "Radial Dithering"
+msgstr ""
+
+msgid "Transition size:"
+msgstr ""
+
+msgid "Center:"
+msgstr ""
+
+msgid "Radius:"
+msgstr ""
+
+msgid "Dithering pattern:"
 msgstr ""
 
 msgid "Adjust HSV"
@@ -1793,6 +1847,9 @@ msgid "Close"
 msgstr ""
 
 msgid "Delete"
+msgstr ""
+
+msgid "Discard All"
 msgstr ""
 
 msgid "Autosaved project(s) from a crashed session were found.\n"

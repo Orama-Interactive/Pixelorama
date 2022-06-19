@@ -87,6 +87,7 @@ onready var autosave_container: Container = right_side.get_node("Backup/Autosave
 onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
 onready var shrink_label: Label = right_side.get_node("Interface/ShrinkContainer/ShrinkLabel")
 onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
+onready var shortcuts: Control = right_side.get_node("Shortcuts")
 onready var extensions: BoxContainer = right_side.get_node("Extensions")
 
 
@@ -106,6 +107,12 @@ class Preference:
 func _ready() -> void:
 	# Replace OK since preference changes are being applied immediately, not after OK confirmation
 	get_ok().text = tr("Close")
+
+	for child in shortcuts.get_children():
+		if not child is AcceptDialog:
+			continue
+		child.connect("confirmed", Global, "update_hint_tooltips")
+
 	for child in right_side.get_children():
 		content_list.append(child.name)
 

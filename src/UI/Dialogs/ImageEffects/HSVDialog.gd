@@ -3,7 +3,6 @@ extends ImageEffect
 var shader: Shader = preload("res://src/Shaders/HSV.shader")
 
 var live_preview: bool = true
-var confirmed: bool = false
 
 onready var hue_slider = $VBoxContainer/HBoxContainer/Sliders/Hue
 onready var sat_slider = $VBoxContainer/HBoxContainer/Sliders/Saturation
@@ -16,11 +15,14 @@ onready var wait_apply_timer = $WaitApply
 onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
 
 
-func _about_to_show() -> void:
-	reset()
+func _ready() -> void:
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
 	preview.set_material(sm)
+
+
+func _about_to_show() -> void:
+	reset()
 	._about_to_show()
 
 
@@ -30,34 +32,24 @@ func set_nodes() -> void:
 	affect_option_button = $VBoxContainer/AffectHBoxContainer/AffectOptionButton
 
 
-func _confirmed() -> void:
-	confirmed = true
-	._confirmed()
-	reset()
-
-
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
 		var selection: Image = project.bitmap_to_image(project.selection_bitmap)
 		selection_tex.create_from_image(selection, 0)
 
+	var params := {
+		"hue_shift_amount": hue_slider.value / 360,
+		"sat_shift_amount": sat_slider.value / 100,
+		"val_shift_amount": val_slider.value / 100,
+		"selection": selection_tex,
+		"affect_selection": selection_checkbox.pressed,
+		"has_selection": project.has_selection
+	}
 	if !confirmed:
-		preview.material.set_shader_param("hue_shift_amount", hue_slider.value / 360)
-		preview.material.set_shader_param("sat_shift_amount", sat_slider.value / 100)
-		preview.material.set_shader_param("val_shift_amount", val_slider.value / 100)
-		preview.material.set_shader_param("selection", selection_tex)
-		preview.material.set_shader_param("affect_selection", selection_checkbox.pressed)
-		preview.material.set_shader_param("has_selection", project.has_selection)
+		for param in params:
+			preview.material.set_shader_param(param, params[param])
 	else:
-		var params := {
-			"hue_shift_amount": hue_slider.value / 360,
-			"sat_shift_amount": sat_slider.value / 100,
-			"val_shift_amount": val_slider.value / 100,
-			"selection": selection_tex,
-			"affect_selection": selection_checkbox.pressed,
-			"has_selection": project.has_selection
-		}
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
 		yield(gen, "done")

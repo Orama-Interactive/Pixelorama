@@ -8,19 +8,18 @@ var _displace_origin = false  # Mouse Click + Alt
 
 
 func _input(event: InputEvent) -> void:
-	._input(event)
 	if !_move and !_rect.has_no_area():
-		if event.is_action_pressed("shift"):
+		if event.is_action_pressed("shape_perfect"):
 			_square = true
-		elif event.is_action_released("shift"):
+		elif event.is_action_released("shape_perfect"):
 			_square = false
-		if event.is_action_pressed("ctrl"):
+		if event.is_action_pressed("shape_center"):
 			_expand_from_center = true
-		elif event.is_action_released("ctrl"):
+		elif event.is_action_released("shape_center"):
 			_expand_from_center = false
-		if event.is_action_pressed("alt"):
+		if event.is_action_pressed("shape_displace"):
 			_displace_origin = true
-		elif event.is_action_released("alt"):
+		elif event.is_action_released("shape_displace"):
 			_displace_origin = false
 
 
