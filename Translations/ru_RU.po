@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-06-13 23:28\n"
+"PO-Revision-Date: 2022-06-20 10:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -199,7 +199,7 @@ msgid "Layouts"
 msgstr "Слои"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Перемещаемые панели"
 
 msgid "Manage Layouts"
 msgstr "Управление слоями"
@@ -208,13 +208,13 @@ msgid "Add"
 msgstr "Добавить"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Добавить компоновку"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Редактировать компоновку"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Вы уверены, что хотите удалить эту компоновку?"
 
 msgid "Auto"
 msgstr "Автоматически"
@@ -265,7 +265,7 @@ msgid "Import as:"
 msgstr "Импортировать как:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "Применить ко всем"
 
 msgid "Recent projects"
 msgstr "Недавние проекты"
@@ -340,13 +340,13 @@ msgid "File %s already exists. Overwrite?"
 msgstr "Файл %s уже существует. Перезаписать?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Недопустимый путь к каталогу!"
 
 msgid "File name is not valid!"
 msgstr "Неправильное имя файла!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Недопустимый путь к папке или имя файла!"
 
 msgid "Exporting in progress..."
 msgstr "Выполняется экспорт..."
@@ -638,10 +638,10 @@ msgid "Gradient Map"
 msgstr ""
 
 msgid "Linear"
-msgstr ""
+msgstr "Линейный"
 
 msgid "Radial"
-msgstr ""
+msgstr "Радиальный"
 
 msgid "Linear Step"
 msgstr ""
@@ -1921,7 +1921,7 @@ msgid "Delete"
 msgstr "Удалить"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Отменить все"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
