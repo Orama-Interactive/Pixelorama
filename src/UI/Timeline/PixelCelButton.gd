@@ -103,6 +103,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			_delete_cel_content()
 
 		MenuOptions.LINK:
+			# TODO: See if there is any refactoring to do here:
 			var f: Frame = Global.current_project.frames[frame]
 			var cel_index: int = Global.current_project.layers[layer].linked_cels.find(f)
 			var new_layers: Array = Global.current_project.duplicate_layers()
@@ -194,71 +195,111 @@ func get_drag_data(_position) -> Array:
 
 func can_drop_data(_pos, data) -> bool:
 	if typeof(data) == TYPE_ARRAY and data[0] == "PixelCel":
-		var new_frame = data[1]
-		var new_layer = data[2]
-		if (
+		var drag_frame = data[1]
+		var drag_layer = data[2]
+		# TODO: Is this part really right? Should't it only matter if they're linked, and we're changing layers?
+		#		It would need to add linked cel logic to project move/swap_cel though
+		# If the cel we're dragging or the cel we are targeting are linked, don't allow dragging
+		if not (
 			Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels
 			or (
-				Global.current_project.frames[new_frame]
-				in Global.current_project.layers[new_layer].linked_cels
+				Global.current_project.frames[drag_frame]
+				in Global.current_project.layers[drag_layer].linked_cels
 			)
 		):
-			# If the cel we're dragging or the cel we are targeting are linked, don't allow dragging
-			return false
-		else:
-			return true
-	else:
-		return false
+			# TODO: This may be able to be combined with the previous condition depending on the the last TODO
+			if not (drag_frame == frame and drag_layer == layer):
+				var region: Rect2
+				if Input.is_action_pressed("ctrl") or layer != drag_layer: # Swap cels
+					region = get_global_rect()
+				else: # Move cels
+					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
+						region = _get_region_rect(-0.125, 0.125)
+						region.position.x -= 2  # Container spacing
+					else:
+						region = _get_region_rect(0.875, 1.125)
+						region.position.x += 2  # Container spacing
+				Global.animation_timeline.drag_highlight.rect_global_position = region.position
+				Global.animation_timeline.drag_highlight.rect_size = region.size
+				Global.animation_timeline.drag_highlight.visible = true
+				return true
+
+	Global.animation_timeline.drag_highlight.visible = false
+	return false
 
 
 func drop_data(_pos, data) -> void:
-	var new_frame = data[1]
-	var new_layer = data[2]
-	if new_frame == frame and new_layer == layer:
-		return
+	var drop_frame = data[1]
+	var drop_layer = data[2]
+	var project = Global.current_project
 
-	var this_frame_new_cels = Global.current_project.frames[frame].cels.duplicate()
-	var new_frame_new_cels
-	var temp = this_frame_new_cels[layer]
-	this_frame_new_cels[layer] = Global.current_project.frames[new_frame].cels[new_layer]
-	if frame == new_frame:
-		this_frame_new_cels[new_layer] = temp
-	else:
-		new_frame_new_cels = Global.current_project.frames[new_frame].cels.duplicate()
-		new_frame_new_cels[new_layer] = temp
+#	var this_frame_new_cels = project.frames[frame].cels.duplicate()
+#	var drop_frame_new_cels
+#	var temp = this_frame_new_cels[layer]
+#	this_frame_new_cels[layer] = project.frames[drop_frame].cels[drop_layer]
+#	if frame == drop_frame:
+#		this_frame_new_cels[drop_layer] = temp
+#	else:
+#		drop_frame_new_cels = project.frames[drop_frame].cels.duplicate()
+#		drop_frame_new_cels[drop_layer] = temp
 
-	Global.current_project.undo_redo.create_action("Move Cels")
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project.frames[frame], "cels", this_frame_new_cels
-	)
+	project.undo_redo.create_action("Move Cels")
+#	project.undo_redo.add_do_property(
+#		project.frames[frame], "cels", this_frame_new_cels
+#	)
+#
+#	project.undo_redo.add_do_property(project, "current_layer", layer)
+#	project.undo_redo.add_undo_property(
+#		project, "current_layer", project.current_layer
+#	)
+#
+#	if frame != drop_frame:  # If the cel moved to a different frame
+#		project.undo_redo.add_do_property(
+#			project.frames[drop_frame], "cels", drop_frame_new_cels
+#		)
+#
+#		project.undo_redo.add_do_property(
+#			project, "current_frame", frame
+#		)
+#		project.undo_redo.add_undo_property(
+#			project, "current_frame", project.current_frame
+#		)
+#
+#		project.undo_redo.add_undo_property(
+#			project.frames[drop_frame],
+#			"cels",
+#			project.frames[drop_frame].cels
+#		)
+#
+#	project.undo_redo.add_undo_property(
+#		project.frames[frame], "cels", project.frames[frame].cels
+#	)
 
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "current_layer", layer)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_layer", Global.current_project.current_layer
-	)
+	if Input.is_action_pressed("ctrl") or layer != drop_layer: # Swap cels
+		project.undo_redo.add_do_method(project, "swap_cel", frame, layer, drop_frame, drop_layer)
+		project.undo_redo.add_undo_method(project, "swap_cel", frame, layer, drop_frame, drop_layer)
+	else: # Move cels
+		var to_frame: int
+		# TODO: Test that this is correct: (after cel button ui changes)
+		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
+			to_frame = frame
+		else:
+			to_frame = frame + 1
+		project.undo_redo.add_do_method(project, "move_cel", drop_frame, to_frame, layer)
+		project.undo_redo.add_undo_method(project, "move_cel", to_frame, drop_frame, layer)
 
-	if frame != new_frame:  # If the cel moved to a different frame
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project.frames[new_frame], "cels", new_frame_new_cels
-		)
+	project.undo_redo.add_do_property(project, "current_layer", layer)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	if frame != drop_frame:  # If the cel moved to a different frame
+		project.undo_redo.add_do_property(project, "current_frame", frame)
+		project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.commit_action()
 
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_frame", frame
-		)
-		Global.current_project.undo_redo.add_undo_property(
-			Global.current_project, "current_frame", Global.current_project.current_frame
-		)
 
-		Global.current_project.undo_redo.add_undo_property(
-			Global.current_project.frames[new_frame],
-			"cels",
-			Global.current_project.frames[new_frame].cels
-		)
-
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project.frames[frame], "cels", Global.current_project.frames[frame].cels
-	)
-
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.commit_action()
+func _get_region_rect(x_begin: float, x_end: float) -> Rect2:
+	var rect := get_global_rect()
+	rect.position.x += rect.size.x * x_begin
+	rect.size.x *= x_end - x_begin
+	return rect

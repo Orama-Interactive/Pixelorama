@@ -45,11 +45,13 @@ var file_format: int = Export.FileFormat.PNG
 var was_exported := false
 var export_overwrite := false
 
+# TODO: These should be able to be removed....
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
 var pixel_layer_button_node = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
 var group_layer_button_node = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
 var pixel_cel_button_node = preload("res://src/UI/Timeline/PixelCelButton.tscn")
 var group_cel_button_node = preload("res://src/UI/Timeline/GroupCelButton.tscn")
+# ... up to this:
 var animation_tag_node = preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
 
@@ -140,63 +142,65 @@ func _selection_offset_changed(value: Vector2) -> void:
 
 func change_project() -> void:
 	# Remove old nodes
-	for container in Global.layers_container.get_children():
-		container.queue_free()
+#	for container in Global.layers_container.get_children():
+#		container.queue_free()
+#
+#	_remove_cel_buttons()
+#
+#	for frame_id in Global.frame_ids.get_children():
+#		Global.frame_ids.remove_child(frame_id)
+#		frame_id.queue_free()
+#
+#	# Create new ones
+#	for i in range(layers.size() - 1, -1, -1):
+#		# Create layer buttons
+#		var layer_container: LayerButton
+#		if layers[i] is PixelLayer:
+#			layer_container = pixel_layer_button_node.instance()
+#		elif layers[i] is GroupLayer:
+#			layer_container = group_layer_button_node.instance()
+#		layer_container.layer = i
+#		if layers[i].name == "":
+#			layers[i].name = layers[i].get_default_name(i)
+#
+#		Global.layers_container.add_child(layer_container)
+#		layer_container.label.text = layers[i].name
+#		layer_container.line_edit.text = layers[i].name
+#
+#		var layer_cel_container := HBoxContainer.new()
+#		Global.frames_container.add_child(layer_cel_container)
+#		for j in range(frames.size()):  # Create Cel buttons
+#			var cel_button = pixel_cel_button_node.instance()
+#			cel_button.frame = j
+#			cel_button.layer = i
+#			# TODO: Mak sure this works properly with groups
+#			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
+#			if j == current_frame and i == current_layer:
+#				cel_button.pressed = true
+#
+#			layer_cel_container.add_child(cel_button)
+#
+#		if (is_instance_valid(layers[i].parent)
+#				and not layers[i].parent.is_expanded_in_hierarchy()):
+#			layer_cel_container.visible = false
+#
+#	for j in range(frames.size()):  # Create frame ID labels
+#		var button: Button = frame_button_node.instance()
+#		button.frame = j
+#		button.rect_min_size.x = Global.animation_timeline.cel_size
+#		button.text = str(j + 1)
+#		if j == current_frame:
+#			button.add_color_override(
+#				"font_color", Global.control.theme.get_color("Selected Color", "Label")
+#			)
+#		Global.frame_ids.add_child(button)
+#
+#	var layer_button = Global.layers_container.get_child(
+#		Global.layers_container.get_child_count() - 1 - current_layer
+#	)
+#	layer_button.pressed = true
 
-	_remove_cel_buttons()
-
-	for frame_id in Global.frame_ids.get_children():
-		Global.frame_ids.remove_child(frame_id)
-		frame_id.queue_free()
-
-	# Create new ones
-	for i in range(layers.size() - 1, -1, -1):
-		# Create layer buttons
-		var layer_container: LayerButton
-		if layers[i] is PixelLayer:
-			layer_container = pixel_layer_button_node.instance()
-		elif layers[i] is GroupLayer:
-			layer_container = group_layer_button_node.instance()
-		layer_container.layer = i
-		if layers[i].name == "":
-			layers[i].name = layers[i].get_default_name(i)
-
-		Global.layers_container.add_child(layer_container)
-		layer_container.label.text = layers[i].name
-		layer_container.line_edit.text = layers[i].name
-
-		var layer_cel_container := HBoxContainer.new()
-		Global.frames_container.add_child(layer_cel_container)
-		for j in range(frames.size()):  # Create Cel buttons
-			var cel_button = pixel_cel_button_node.instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			# TODO: Mak sure this works properly with groups
-			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-			if j == current_frame and i == current_layer:
-				cel_button.pressed = true
-
-			layer_cel_container.add_child(cel_button)
-
-		if (is_instance_valid(layers[i].parent)
-				and not layers[i].parent.is_expanded_in_hierarchy()):
-			layer_cel_container.visible = false
-
-	for j in range(frames.size()):  # Create frame ID labels
-		var button: Button = frame_button_node.instance()
-		button.frame = j
-		button.rect_min_size.x = Global.animation_timeline.cel_size
-		button.text = str(j + 1)
-		if j == current_frame:
-			button.add_color_override(
-				"font_color", Global.control.theme.get_color("Selected Color", "Label")
-			)
-		Global.frame_ids.add_child(button)
-
-	var layer_button = Global.layers_container.get_child(
-		Global.layers_container.get_child_count() - 1 - current_layer
-	)
-	layer_button.pressed = true
+	Global.animation_timeline.project_changed()
 
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
@@ -459,36 +463,36 @@ func _frames_changed(value: Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	frames = value
 	selected_cels.clear()
-	_remove_cel_buttons()
-
-	for frame_id in Global.frame_ids.get_children():
-		Global.frame_ids.remove_child(frame_id)
-		frame_id.queue_free()
-
-	for i in range(layers.size() - 1, -1, -1):
-		var layer_cel_container := HBoxContainer.new()
-		layer_cel_container.name = "FRAMESS " + str(i)
-		Global.frames_container.add_child(layer_cel_container)
-		for j in range(frames.size()):
-			if layers[i] is PixelLayer:
-				var cel_button = pixel_cel_button_node.instance()
-				cel_button.frame = j
-				cel_button.layer = i
-				cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-				layer_cel_container.add_child(cel_button)
-			elif layers[i] is GroupLayer:
-				# TODO: Make GroupLayers work here
-				pass
-		if (is_instance_valid(layers[i].parent)
-				and not layers[i].parent.is_expanded_in_hierarchy()):
-			layer_cel_container.visible = false
-
-	for j in range(frames.size()):
-		var button: Button = frame_button_node.instance()
-		button.frame = j
-		button.rect_min_size.x = Global.animation_timeline.cel_size
-		button.text = str(j + 1)
-		Global.frame_ids.add_child(button)
+#	_remove_cel_buttons()
+#
+#	for frame_id in Global.frame_ids.get_children():
+#		Global.frame_ids.remove_child(frame_id)
+#		frame_id.queue_free()
+#
+#	for i in range(layers.size() - 1, -1, -1):
+#		var layer_cel_container := HBoxContainer.new()
+#		layer_cel_container.name = "FRAMESS " + str(i)
+#		Global.frames_container.add_child(layer_cel_container)
+#		for j in range(frames.size()):
+#			if layers[i] is PixelLayer:
+#				var cel_button = pixel_cel_button_node.instance()
+#				cel_button.frame = j
+#				cel_button.layer = i
+#				cel_button.get_child(0).texture = frames[j].cels[i].image_texture
+#				layer_cel_container.add_child(cel_button)
+#			elif layers[i] is GroupLayer:
+#				# TODO: Make GroupLayers work here
+#				pass
+#		if (is_instance_valid(layers[i].parent)
+#				and not layers[i].parent.is_expanded_in_hierarchy()):
+#			layer_cel_container.visible = false
+#
+#	for j in range(frames.size()):
+#		var button: Button = frame_button_node.instance()
+#		button.frame = j
+#		button.rect_min_size.x = Global.animation_timeline.cel_size
+#		button.text = str(j + 1)
+#		Global.frame_ids.add_child(button)
 
 	_set_timeline_first_and_last_frames()
 
@@ -501,50 +505,50 @@ func _layers_changed(value: Array) -> void:
 
 	selected_cels.clear()
 
-	for container in Global.layers_container.get_children():
-		container.queue_free()
-
-	_remove_cel_buttons()
-
-	for i in range(layers.size() - 1, -1, -1):
-		var layer_button: LayerButton
-		if layers[i] is PixelLayer:
-			layer_button = pixel_layer_button_node.instance()
-		elif layers[i] is GroupLayer:
-			layer_button = group_layer_button_node.instance()
-		layer_button.layer = i
-		layers[i].index = i
-		layers[i].project = self
-		if layers[i].name == "":
-			layers[i].name = layers[i].get_default_name(i)
-
-		Global.layers_container.add_child(layer_button)
-		layer_button.label.text = layers[i].name
-		layer_button.line_edit.text = layers[i].name
-
-		var layer_cel_container := HBoxContainer.new()
-		layer_cel_container.name = "LAYERSSS " + str(i)
-		Global.frames_container.add_child(layer_cel_container)
-		# TODO: FIGURE OUT FRAMES WITH GROUP LAYERS!
-		for j in range(frames.size()):
-			var cel_button # TODO: Figure out static typing (will there be a BaseCelButton?)
-			if layers[i] is PixelLayer:
-				cel_button = pixel_cel_button_node.instance()
-				cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-			elif layers[i] is GroupLayer:
-				cel_button = group_cel_button_node.instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			layer_cel_container.add_child(cel_button)
-		if (is_instance_valid(layers[i].parent)
-				and not layers[i].parent.is_expanded_in_hierarchy()):
-			layer_cel_container.visible = false
-
-	var layer_button = Global.layers_container.get_child(
-		Global.layers_container.get_child_count() - 1 - current_layer
-	)
-	layer_button.pressed = true
-	self.current_frame = current_frame  # Call frame_changed to update UI
+#	for container in Global.layers_container.get_children():
+#		container.queue_free()
+#
+#	_remove_cel_buttons()
+#
+#	for i in range(layers.size() - 1, -1, -1):
+#		var layer_button: LayerButton
+#		if layers[i] is PixelLayer:
+#			layer_button = pixel_layer_button_node.instance()
+#		elif layers[i] is GroupLayer:
+#			layer_button = group_layer_button_node.instance()
+#		layer_button.layer = i
+#		layers[i].index = i
+#		layers[i].project = self
+#		if layers[i].name == "":
+#			layers[i].name = layers[i].get_default_name(i)
+#
+#		Global.layers_container.add_child(layer_button)
+#		layer_button.label.text = layers[i].name
+#		layer_button.line_edit.text = layers[i].name
+#
+#		var layer_cel_container := HBoxContainer.new()
+#		layer_cel_container.name = "LAYERSSS " + str(i)
+#		Global.frames_container.add_child(layer_cel_container)
+#		# TODO: FIGURE OUT FRAMES WITH GROUP LAYERS!
+#		for j in range(frames.size()):
+#			var cel_button # TODO: Figure out static typing (will there be a BaseCelButton?)
+#			if layers[i] is PixelLayer:
+#				cel_button = pixel_cel_button_node.instance()
+#				cel_button.get_child(0).texture = frames[j].cels[i].image_texture
+#			elif layers[i] is GroupLayer:
+#				cel_button = group_cel_button_node.instance()
+#			cel_button.frame = j
+#			cel_button.layer = i
+#			layer_cel_container.add_child(cel_button)
+#		if (is_instance_valid(layers[i].parent)
+#				and not layers[i].parent.is_expanded_in_hierarchy()):
+#			layer_cel_container.visible = false
+#
+#	var layer_button = Global.layers_container.get_child(
+#		Global.layers_container.get_child_count() - 1 - current_layer
+#	)
+#	layer_button.pressed = true
+#	self.current_frame = current_frame  # Call frame_changed to update UI
 	_toggle_layer_buttons_layers()
 
 
@@ -916,80 +920,127 @@ func resize_bitmap_values(bitmap: BitMap, new_size: Vector2, flip_x: bool, flip_
 func add_frame(frame: Frame, index: int) -> void:
 	# TODO: May need to call _frames_changed setter here (at least for some of it)
 	frames.insert(index, frame)
-	current_frame = index # TODO Probably need to call setter
-	# TODO: Test link/unlink cels and animation tag pushing thoroughly, I'm not sure if they're
+	# TODO: Test link/unlink cels thoroughly, I'm not sure if they're
 	# 	easily reversable (probably possible though, tags may need an "undo" bool, links
 	# 	may work with a passed array, or maybe its better if they're just not handled here
 
-	# Link cels:
-	for l_i in range(layers.size()):
-		if layers[l_i].new_cels_linked:  # If the link button is pressed
-			layers[l_i].linked_cels.append(frame)
-			frame.cels[l_i].image = layers[l_i].linked_cels[0].cels[l_i].image
-			frame.cels[l_i].image_texture = layers[l_i].linked_cels[0].cels[l_i].image_texture
-
-	# PUSH AHEAD animation tags starting after the frame
-	for tag in animation_tags:
-		if index >= tag.from && index <= tag.to:
-			tag.to += 1
-		elif (index) < tag.from:
-			tag.from += 1
-			tag.to += 1
+#	# Link cels:
+#	for l_i in range(layers.size()):
+#		if layers[l_i].new_cels_linked:  # If the link button is pressed
+#			layers[l_i].linked_cels.append(frame)
+#			frame.cels[l_i].image = layers[l_i].linked_cels[0].cels[l_i].image
+#			frame.cels[l_i].image_texture = layers[l_i].linked_cels[0].cels[l_i].image_texture
+#
 
 	# TODO: Check if these (especially remove/move) mess up selection?
-	_frames_changed(frames)# TODO: Add Frame and Cel Buttons
+	_frames_changed(frames)# TODO: Remove
+	# TODO: These may need an if self == Global.current_project depending on use
+	Global.animation_timeline.project_frame_added(index)
+	# Update the frames and frame buttons:
+	for f in range(frames.size()):
+		Global.frame_ids.get_child(f).frame = f
+		Global.frame_ids.get_child(f).text = str(f + 1)
+	# Update the cel buttons:
+	for l in range(layers.size()):
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in range(frames.size()):
+			layer_cel_container.get_child(f).frame = f
+			layer_cel_container.get_child(f).button_setup()
 
 
 func remove_frame(index: int) -> void:
 	# TODO: If this messes up selection, would doing multiple here help?
 	frames.remove(index)
-	# TODO: Figure out what to set current_frame to
-	current_frame -= 1
 
-	# Unlink cels:
-	for layer in layers:
-		for linked in layer.linked_cels:
-			if linked == frames[index]:
-				layer.linked_cels.erase(linked)
+#	# Unlink cels:
+#	for layer in layers:
+#		for linked in layer.linked_cels:
+#			if linked == frames[index]:
+#				layer.linked_cels.erase(linked)
 
-	# PUSH BACK animation tags starting after the frame
-	for tag in animation_tags:
-		if index >= tag.from && index <= tag.to:
-			tag.to -= 1
-		elif (index) < tag.from:
-			tag.from -= 1
-			tag.to -= 1
-
-	_frames_changed(frames)# TODO: Remove Frame/CelButtons
+	_frames_changed(frames)# TODO: Remove
+	Global.animation_timeline.project_frame_removed(index)
+	# Update the frames and frame buttons:
+	for f in range(frames.size()):
+		Global.frame_ids.get_child(f).frame = f
+		Global.frame_ids.get_child(f).text = str(f + 1)
+	# Update the cel buttons:
+	for l in range(layers.size()):
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in range(frames.size()):
+			layer_cel_container.get_child(f).frame = f
+			layer_cel_container.get_child(f).button_setup()
 
 
 func move_frame(from_index: int, to_index: int) -> void:
 	var frame = frames[from_index]
 	frames.remove(from_index)
+	Global.animation_timeline.project_frame_removed(from_index)
 	# TODO: Ensure the final position is always right
 	frames.insert(to_index, frame)
 	# TODO: Set current frame
-	_frames_changed(frames)# TODO: Remove and then add Frame/CelButtons
+	Global.animation_timeline.project_frame_added(to_index)
+	_frames_changed(frames)# TODO: Remove
+	# Update the frames and frame buttons:
+	for f in range(frames.size()):
+		Global.frame_ids.get_child(f).frame = f
+		Global.frame_ids.get_child(f).text = str(f + 1)
+	# Update the cel buttons:
+	for l in range(layers.size()):
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in range(frames.size()):
+			layer_cel_container.get_child(f).frame = f
+			layer_cel_container.get_child(f).button_setup()
+
+
+func swap_frame(a_index: int, b_index: int) -> void:
+	# TODO: current frame
+	var temp: Frame = frames[a_index]
+	frames[a_index] = frames[b_index]
+	frames[b_index] = temp
+	Global.animation_timeline.project_frame_removed(a_index)
+	Global.animation_timeline.project_frame_added(a_index)
+	Global.animation_timeline.project_frame_removed(b_index)
+	Global.animation_timeline.project_frame_added(b_index)
 
 
 func add_layer(layer: BaseLayer, index: int, cels: Array) -> void:
 	# TODO: Global.canvas.selection.transform_content_confirm()
 	layers.insert(index, layer)
-	current_layer = index # TODO: Setter (which is the preferred way to call it?)
 	for f in range(frames.size()):
 		frames[f].cels.insert(index, cels[f])
-	# TODO: Update layer index
-	_layers_changed(layers)# TODO: Add layer and cel buttons
+	layer.project = self
+	# TODO: Update layer index (and others, more efficient if add layer supports multiple)
+	# TODO: Update layer button indices
+	_layers_changed(layers)# TODO: Remove
+	Global.animation_timeline.project_layer_added(index)
+	# Update the layer indices and layer/cel buttons:
+	for l in range(layers.size()):
+		layers[l].index = l
+		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in range(frames.size()):
+			layer_cel_container.get_child(f).layer = l
+			layer_cel_container.get_child(f).button_setup()
 
 
 func remove_layer(index: int) -> void:
 	# TODO: Global.canvas.selection.transform_content_confirm()
 	layers.remove(index)
-	current_layer = index - 1 # TODO: Setter
 	for frame in frames:
 		frame.cels.remove(index)
-	# TODO: Update layer index
-	_layers_changed(layers)# TODO: Remove layer and cel buttons
+	# TODO: Update layer index (and others, more efficient if remove layer supports multiple)
+	# TODO: Update layer button indices
+	_layers_changed(layers)# TODO: Remove
+	Global.animation_timeline.project_layer_removed(index)
+	# Update the layer indices and layer/cel buttons:
+	for l in range(layers.size()):
+		layers[l].index = l
+		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in range(frames.size()):
+			layer_cel_container.get_child(f).layer = l
+			layer_cel_container.get_child(f).button_setup()
 
 
 # from_indices and to_indicies should start from the lowest index, and go up
@@ -1007,6 +1058,7 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 		for frame in frames:
 			removed_cels[i].append(frame.cels[from_indices[i] - i])
 			frame.cels.remove(from_indices[i] - i)
+		Global.animation_timeline.project_layer_removed(from_indices[i] - i)
 		# TODO: remove layer and cel buttons
 	for i in range(to_indices.size()):
 		layers.insert(to_indices[i], old_layers[from_indices[i]])
@@ -1014,11 +1066,46 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 		# TODO: Frames...
 		for f in range(frames.size()):
 			frames[f].cels.insert(to_indices[i], removed_cels[i][f])
+		Global.animation_timeline.project_layer_added(to_indices[i])
 		# TODO: Add layer and cel buttons
-	# TODO: Update layer index
+	# Update the layer indices and layer/cel buttons:
+	for l in range(layers.size()):
+		layers[l].index = l
+		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in range(frames.size()):
+			layer_cel_container.get_child(f).layer = l
+			layer_cel_container.get_child(f).button_setup()
 	_layers_changed(layers) # TODO Remove (needs buttons and index update)
 
 
-func move_cel() -> void:
-	# not sure about this one
-	pass
+func move_cel(from_frame: int, to_frame: int, layer: int) -> void:
+	# TODO: Current frame
+	# TODO: Current layer
+	var cel: BaseCel = frames[from_frame].cels[layer]
+	if from_frame < to_frame:
+		for f in range(from_frame + 1, to_frame + 1):
+			frames[f - 1].cels[layer] = frames[f].cels[layer]
+	else:
+		for f in range(to_frame, from_frame):
+			frames[f + 1].cels[layer] = frames[f].cels[layer]
+	frames[to_frame].cels[layer] = cel
+	Global.animation_timeline.project_cel_removed(from_frame, layer)
+	Global.animation_timeline.project_cel_added(to_frame, layer)
+	# Update the cel buttons for this layer:
+	var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - layer)
+	for f in range(frames.size()):
+		layer_cel_container.get_child(f).frame = f
+		layer_cel_container.get_child(f).button_setup()
+
+
+func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:
+	# TODO: Current frame
+	# TODO: Current layer
+	var temp: BaseCel = frames[a_frame].cels[a_layer]
+	frames[a_frame].cels[a_layer] = frames[b_frame].cels[b_layer]
+	frames[b_frame].cels[b_layer] = temp
+	Global.animation_timeline.project_cel_removed(a_frame, a_layer)
+	Global.animation_timeline.project_cel_added(a_frame, a_layer)
+	Global.animation_timeline.project_cel_removed(b_frame, b_layer)
+	Global.animation_timeline.project_cel_added(b_frame, b_layer)

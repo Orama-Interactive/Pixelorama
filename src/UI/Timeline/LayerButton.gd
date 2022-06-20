@@ -18,6 +18,9 @@ export var hide_expand_button := true
 func _ready() -> void:
 	rect_min_size.y = Global.animation_timeline.cel_size
 
+	label.text = Global.current_project.layers[layer].name
+	line_edit.text = Global.current_project.layers[layer].name
+
 	var layer_buttons = find_node("LayerButtons")
 	for child in layer_buttons.get_children():
 		var texture = child.get_child(0)
@@ -227,35 +230,33 @@ func can_drop_data(_pos, data) -> bool:
 
 
 func drop_data(_pos, data) -> void:
-	var dropped_layer: int = data[1]
+	var drop_layer: int = data[1]
+	var project = Global.current_project # TODO: perhaps having a project variable for the enitre class would be nice (also for cel/frame buttons)
 
-	Global.current_project.undo_redo.create_action("Change Layer Order")
-	var new_layers: Array = Global.current_project.layers.duplicate()
+	project.undo_redo.create_action("Change Layer Order")
+	var new_layers: Array = project.layers.duplicate()
 	var temp: BaseLayer = new_layers[layer]
 	if Input.is_action_pressed("ctrl"): # Swap layers # TODO Need to check when swapping is allowed
 		pass # TODO: Figure out swapping
-#		new_layers[layer] = new_layers[dropped_layer]
-#		new_layers[dropped_layer] = temp
+#		new_layers[layer] = new_layers[drop_layer]
+#		new_layers[drop_layer] = temp
 #
 #		# TODO: Make sure to swap parents too
 #
 #		for f in Global.current_project.frames:
 #			var new_cels: Array = f.cels.duplicate()
 #			var temp_canvas = new_cels[layer]
-#			new_cels[layer] = new_cels[dropped_layer]
-#			new_cels[dropped_layer] = temp_canvas
-#			Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-#			Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+#			new_cels[layer] = new_cels[drop_layer]
+#			new_cels[drop_layer] = temp_canvas
+#			project.undo_redo.add_do_property(f, "cels", new_cels)
+#			project.undo_redo.add_undo_property(f, "cels", f.cels)
 	# TODO: Having "SourceLayers/OldLayers (that you don't change) and new_layers would make this less confusing
 	else:
-		# layers_to_shift should be in order of the layer indices, starting from the lowest
-#		var layers_to_shift: Array = new_layers[dropped_layer].get_children_recursive()
-#		layers_to_shift.append(new_layers[dropped_layer])
-
+		# from_indices should be in order of the layer indices, starting from the lowest
 		var from_indices := []
-		for c in new_layers[dropped_layer].get_children_recursive():
+		for c in new_layers[drop_layer].get_children_recursive():
 			from_indices.append(c.index)
-		from_indices.append(dropped_layer)
+		from_indices.append(drop_layer)
 
 		var to_index: int # the index where the LOWEST shifted layer should end up
 		var to_parent: BaseLayer
@@ -276,13 +277,13 @@ func drop_data(_pos, data) -> void:
 				if new_layers[layer].has_children():
 					to_index = new_layers[layer].get_children_recursive()[0].index
 
-					if new_layers[layer].is_a_parent_of(new_layers[dropped_layer]):
+					if new_layers[layer].is_a_parent_of(new_layers[drop_layer]):
 						to_index += from_indices.size()
 				else:
 					to_index = layer # TODO Is this right?
 				to_parent = new_layers[layer].parent
 
-		if dropped_layer < layer:
+		if drop_layer < layer:
 			to_index -= from_indices.size()
 		print("to_index = ", to_index)
 
@@ -294,17 +295,19 @@ func drop_data(_pos, data) -> void:
 		var to_parents := from_parents.duplicate()
 		to_parents[-1] = to_parent
 
-		Global.current_project.undo_redo.add_do_method(
-			Global.current_project, "move_layers", from_indices, to_indices, to_parents
+		project.undo_redo.add_do_method(
+			project, "move_layers", from_indices, to_indices, to_parents
 		)
-		Global.current_project.undo_redo.add_undo_method(
-			Global.current_project, "move_layers", to_indices, from_indices, from_parents
+		project.undo_redo.add_undo_method(
+			project, "move_layers", to_indices, from_indices, from_parents
 		)
-
+	if project.current_layer == layer:
+		project.undo_redo.add_do_property(project, "current_layer", drop_layer)
+		project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	# TODO: undo_or_redo is at end here, but earlier in others, does it matter which order?
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.commit_action()
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.commit_action()
 
 
 func _get_region_rect(y_begin: float, y_end: float) -> Rect2:

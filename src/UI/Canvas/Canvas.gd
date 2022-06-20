@@ -132,12 +132,13 @@ func update_selected_cels_textures(project: Project = Global.current_project) ->
 			var current_cel: PixelCel = project.frames[frame_index].cels[layer_index]
 			current_cel.image_texture.set_data(current_cel.image)
 
-			if project == Global.current_project:
-				var container_index = Global.frames_container.get_child_count() - 1 - layer_index
-				var layer_cel_container = Global.frames_container.get_child(container_index)
-				var cel_button = layer_cel_container.get_child(frame_index)
-				var cel_texture_rect: TextureRect = cel_button.find_node("CelTexture")
-				cel_texture_rect.texture = current_cel.image_texture
+			# TODO: This wasn't working anymore, but is it even needed? (Same as above)
+#			if project == Global.current_project:
+#				var container_index = Global.frames_container.get_child_count() - 1 - layer_index
+#				var layer_cel_container = Global.frames_container.get_child(container_index)
+#				var cel_button = layer_cel_container.get_child(frame_index)
+#				var cel_texture_rect: TextureRect = cel_button.find_node("CelTexture")
+#				cel_texture_rect.texture = current_cel.image_texture
 
 
 func refresh_onion() -> void:

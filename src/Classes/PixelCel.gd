@@ -35,3 +35,9 @@ func load_image_data_from_pxo(file: File, project_size: Vector2) -> void:
 	var buffer := file.get_buffer(project_size.x * project_size.y * 4)
 	image.create_from_data(project_size.x, project_size.y, false, Image.FORMAT_RGBA8, buffer)
 	image_changed(image)
+
+
+func create_cel_button() -> Button:
+	var cel_button = load("res://src/UI/Timeline/PixelCelButton.tscn").instance()
+	cel_button.get_child(0).texture = image_texture
+	return cel_button

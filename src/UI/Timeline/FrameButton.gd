@@ -126,40 +126,79 @@ func get_drag_data(_position) -> Array:
 
 func can_drop_data(_pos, data) -> bool:
 	if typeof(data) == TYPE_ARRAY:
-		return data[0] == "Frame"
-	else:
-		return false
+		if data[0] == "Frame":
+			if data[1] != frame: # Can't move to same frame
+				var region: Rect2
+				if Input.is_action_pressed("ctrl"): # Swap frames
+					region = get_global_rect()
+				else: # Move frames
+					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
+						region = _get_region_rect(-0.125, 0.125)
+						region.position.x -= 2  # Container spacing
+					else:
+						region = _get_region_rect(0.875, 1.125)
+						region.position.x += 2  # Container spacing
+				Global.animation_timeline.drag_highlight.rect_global_position = region.position
+				Global.animation_timeline.drag_highlight.rect_size = region.size
+				Global.animation_timeline.drag_highlight.visible = true
+				return true
+	Global.animation_timeline.drag_highlight.visible = false
+	return false
 
 
 func drop_data(_pos, data) -> void:
-	var new_frame = data[1]
-	if frame == new_frame:
-		return
+	var drop_frame = data[1]
+	var project = Global.current_project
 
-	var new_frames: Array = Global.current_project.frames.duplicate()
-	var temp = new_frames[frame]
-	new_frames[frame] = new_frames[new_frame]
-	new_frames[new_frame] = temp
+#	var drop_frames: Array = Global.current_project.frames.duplicate()
+#	var temp = drop_frames[frame]
+#	drop_frames[frame] = drop_frames[drop_frame]
+#	drop_frames[drop_frame] = temp
 
-	Global.current_project.undo_redo.create_action("Change Frame Order")
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "frames", Global.current_project.frames
-	)
+	project.undo_redo.create_action("Change Frame Order")
+#	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", drop_frames)
+#	Global.current_project.undo_redo.add_undo_property(
+#		Global.current_project, "frames", Global.current_project.frames
+#	)
+#
+#	if Global.current_project.current_frame == drop_frame:
+#		Global.current_project.undo_redo.add_do_property(
+#			Global.current_project, "current_frame", frame
+#		)
+#	else:
+#		Global.current_project.undo_redo.add_do_property(
+#			Global.current_project, "current_frame", Global.current_project.current_frame
+#		)
+#
+#	Global.current_project.undo_redo.add_undo_property(
+#		Global.current_project, "current_frame", Global.current_project.current_frame
+#	)
 
-	if Global.current_project.current_frame == new_frame:
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_frame", frame
-		)
+	if Input.is_action_pressed("ctrl"): # Swap frames
+		project.undo_redo.add_do_method(project, "swap_frame", frame, drop_frame)
+		project.undo_redo.add_undo_method(project, "swap_frame", frame, drop_frame)
+	else: # Move frames
+		var to_frame: int
+		# TODO: Test that this is correct: (after cel button ui changes)
+		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
+			to_frame = frame
+		else:
+			to_frame = frame + 1
+		project.undo_redo.add_do_method(project, "move_frame", drop_frame, to_frame)
+		project.undo_redo.add_undo_method(project, "move_frame", to_frame, drop_frame)
+
+	if project.current_frame == drop_frame:
+		project.undo_redo.add_do_property(project, "current_frame", frame)
 	else:
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_frame", Global.current_project.current_frame
-		)
+		project.undo_redo.add_do_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.commit_action()
 
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_frame", Global.current_project.current_frame
-	)
 
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.commit_action()
+func _get_region_rect(x_begin: float, x_end: float) -> Rect2:
+	var rect := get_global_rect()
+	rect.position.x += rect.size.x * x_begin
+	rect.size.x *= x_end - x_begin
+	return rect

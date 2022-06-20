@@ -10,3 +10,7 @@ func _init(_opacity := 1.0) -> void:
 func get_image() -> Image:
 	# TODO: render the material as an image and return it
 	return Image.new()
+
+
+func create_cel_button() -> Button:
+	return load("res://src/UI/Timeline/GroupCelButton.tscn").instance() as Button

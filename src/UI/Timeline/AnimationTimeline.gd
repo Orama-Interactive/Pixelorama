@@ -12,6 +12,12 @@ var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
 
+var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
+var pixel_layer_button_node = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
+var group_layer_button_node = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
+var pixel_cel_button_node = preload("res://src/UI/Timeline/PixelCelButton.tscn")
+var group_cel_button_node = preload("res://src/UI/Timeline/GroupCelButton.tscn")
+
 onready var old_scroll: int = 0  # The previous scroll state of $ScrollContainer
 onready var tag_spacer = find_node("TagSpacer")
 onready var start_spacer = find_node("StartSpacer")
@@ -134,15 +140,45 @@ func add_frame() -> void:
 	var project: Project = Global.current_project
 	var frame_add_index := project.current_frame + 1
 	var frame: Frame = project.new_empty_frame()
+	var new_layers: Array = project.duplicate_layers()
+
+	for l_i in range(new_layers.size()):
+		if new_layers[l_i].new_cels_linked:  # If the link button is pressed
+			new_layers[l_i].linked_cels.append(frame)
+			frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
+			frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
+
+	# Code to PUSH AHEAD tags starting after the frame
+	var new_animation_tags := project.animation_tags.duplicate()
+	# Loop through the tags to create new classes for them, so that they won't be the same
+	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
+	for i in new_animation_tags.size():
+		new_animation_tags[i] = AnimationTag.new(
+			new_animation_tags[i].name,
+			new_animation_tags[i].color,
+			new_animation_tags[i].from,
+			new_animation_tags[i].to
+		)
+	# Loop through the tags to see if the frame is in one
+	for tag in new_animation_tags:
+		if frame_add_index >= tag.from && frame_add_index <= tag.to:
+			tag.to += 1
+		elif (frame_add_index) < tag.from:
+			tag.from += 1
+			tag.to += 1
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-
 	project.undo_redo.add_do_method(project, "add_frame", frame, frame_add_index)
 	project.undo_redo.add_undo_method(project, "remove_frame", frame_add_index)
-
+	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
+	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
+	project.undo_redo.add_do_property(project, "current_frame", project.current_frame + 1)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.commit_action()
 
 
@@ -164,6 +200,54 @@ func delete_frames(frames := []) -> void:
 	if frames.size() == 0:
 		frames.append(project.current_frame)
 
+	var new_frames: Array = project.frames.duplicate()
+	var current_frame := project.current_frame
+	var new_layers: Array = project.duplicate_layers()
+	var frame_correction := 0  # Only needed for tag adjustment
+
+	var new_animation_tags := project.animation_tags.duplicate()
+	# Loop through the tags to create new classes for them, so that they won't be the same
+	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
+	for i in new_animation_tags.size():
+		new_animation_tags[i] = AnimationTag.new(
+			new_animation_tags[i].name,
+			new_animation_tags[i].color,
+			new_animation_tags[i].from,
+			new_animation_tags[i].to
+		)
+
+	for frame in frames:
+		if new_frames.size() == 1:  # If only 1 frame
+			break
+		var frame_to_delete: Frame = project.frames[frame]
+		new_frames.erase(frame_to_delete)
+		if current_frame > 0 && current_frame == new_frames.size():  # If it's the last frame
+			current_frame -= 1
+
+		# Check if one of the cels of the frame is linked
+		# if they are, unlink them too
+		# this prevents removed cels being kept in linked memory
+		for layer in new_layers:
+			for linked in layer.linked_cels:
+				if linked == project.frames[frame]:
+					layer.linked_cels.erase(linked)
+
+		# Loop through the tags to see if the frame is in one
+		frame -= frame_correction  # Erasing made frames indexes 1 step ahead their intended tags
+		var tag_correction := 0  # needed when tag is erased
+		for tag_ind in new_animation_tags.size():
+			var tag = new_animation_tags[tag_ind - tag_correction]
+			if frame + 1 >= tag.from && frame + 1 <= tag.to:
+				if tag.from == tag.to:  # If we're deleting the only frame in the tag
+					new_animation_tags.erase(tag)
+					tag_correction += 1
+				else:
+					tag.to -= 1
+			elif frame + 1 < tag.from:
+				tag.from -= 1
+				tag.to -= 1
+		frame_correction += 1  # Compensation for the next batch
+
 	project.undos += 1
 	project.undo_redo.create_action("Remove Frame")
 
@@ -176,9 +260,15 @@ func delete_frames(frames := []) -> void:
 			project, "add_frame", project.frames[frames[i]], frames[i]
 		)
 
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.commit_action()
+	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_undo_property(project, "layers", Global.current_project.layers)
+	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
+	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
+	project.undo_redo.add_do_property(project, "current_frame", current_frame)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.commit_action()
 
 
 func _on_CopyFrame_pressed(frame := -1) -> void:
@@ -190,7 +280,7 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 	frames.sort()
 	copy_frames(frames)
 
-
+# TODO: Refactor copy_frames as well:
 func copy_frames(frames := []) -> void:
 	# TODO: Work on this one (probably need a copy_to function on Cel classes)
 	Global.canvas.selection.transform_content_confirm()
@@ -544,7 +634,8 @@ func add_layer(is_new := true) -> void:
 
 	project.undo_redo.add_do_method(project, "add_layer", l, project.layers.size(), cels)
 	project.undo_redo.add_undo_method(project, "remove_layer", project.layers.size())
-
+	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
@@ -564,7 +655,8 @@ func add_group_layer(is_new := true) -> void:
 
 	project.undo_redo.add_do_method(project, "add_layer", l, project.layers.size(), cels)
 	project.undo_redo.add_undo_method(project, "remove_layer", project.layers.size())
-
+	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
@@ -586,12 +678,13 @@ func _on_RemoveLayer_pressed() -> void:
 	project.undo_redo.add_undo_method(
 		project, "add_layer", project.layers[project.current_layer], project.current_layer, cels
 	)
-
+	project.undo_redo.add_do_property(project, "current_layer", max(project.current_layer - 1, 0))
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
-
+# TODO: Refactor this (probably completely remove)
 func change_layer_order(rate: int) -> void:
 	var change = Global.current_project.current_layer + rate
 
@@ -713,3 +806,112 @@ func _on_OpacitySlider_value_changed(value) -> void:
 
 func _on_OnionSkinningSettings_popup_hide() -> void:
 	Global.can_draw = true
+
+
+func project_changed() -> void:
+	var project: Project = Global.current_project # TODO: maybe pass in instead?
+	# TODO: Remove all buttons
+	for child in Global.layers_container.get_children():
+		child.queue_free()
+	for child in Global.frame_ids.get_children():
+		child.queue_free()
+	for container in Global.frames_container.get_children():
+		container.queue_free()
+
+	for i in range(project.layers.size()):
+		project_layer_added(i)
+	for f in range(project.frames.size()):
+		var button: Button = frame_button_node.instance()
+		button.frame = f
+		button.rect_min_size.x = Global.animation_timeline.cel_size
+		button.text = str(f + 1)
+		Global.frame_ids.add_child(button)
+		Global.frame_ids.move_child(button, f)
+
+	# TODO: May not be needed, depending on other changes to selection
+	var current_layer_button = Global.layers_container.get_child(
+		Global.layers_container.get_child_count() - 1 - project.current_layer
+	)
+	current_layer_button.pressed = true
+
+
+func project_frame_added(frame: int) -> void:
+	var project: Project = Global.current_project # TODO: maybe pass in instead?
+	var button: Button = frame_button_node.instance()
+	button.frame = frame
+	button.rect_min_size.x = Global.animation_timeline.cel_size
+	button.text = str(frame + 1)
+	Global.frame_ids.add_child(button)
+	Global.frame_ids.move_child(button, frame)
+
+	var layer := 0 # TODO: This probably needs to be reveresed...
+	for container in Global.frames_container.get_children():
+		var cel_button = project.frames[frame].cels[layer].create_cel_button()
+		cel_button.frame = frame
+		cel_button.layer = layer
+		container.add_child(cel_button)
+		container.move_child(cel_button, frame)
+		layer += 1
+
+
+func project_frame_removed(frame: int) -> void:
+	Global.frame_ids.get_child(frame).free()
+	for container in Global.frames_container.get_children():
+		container.get_child(frame).free()
+
+
+func project_layer_added(layer: int) -> void:
+	var project: Project = Global.current_project # TODO: maybe pass in instead?
+	# TODO: should probably have a "layer" variable... (to many project.layers[layer])...
+	#		...or refactor things so less of this code is needed here.
+
+	var layer_button: LayerButton
+	if project.layers[layer] is PixelLayer:
+		layer_button = pixel_layer_button_node.instance()
+	elif project.layers[layer] is GroupLayer:
+		layer_button = group_layer_button_node.instance()
+	layer_button.layer = layer# - 1 # TODO: See if needed
+	if project.layers[layer].name == "": # TODO: This probably could be somewhere else...
+		project.layers[layer].name = project.layers[layer].get_default_name(layer)
+
+	Global.layers_container.add_child(layer_button)
+	var count := Global.layers_container.get_child_count()
+	Global.layers_container.move_child(layer_button, count - 1 - layer)
+
+	var layer_cel_container := HBoxContainer.new()
+	# TODO: Is there any need for a name (and why is it LAYERSSS in one place, and FRAMESS in another?)
+	layer_cel_container.name = "LAYERSSS " + str(layer)
+	Global.frames_container.add_child(layer_cel_container)
+	Global.frames_container.move_child(layer_cel_container, count - 1 - layer)
+	for f in range(project.frames.size()):
+		var cel_button = project.frames[f].cels[layer].create_cel_button()
+		cel_button.frame = f
+		cel_button.layer = layer# - 1 # TODO: See if needed
+		layer_cel_container.add_child(cel_button)
+
+# TODO: are names like "project_layer_removed" or "remove_layer_ui" better?
+#	maybe "layer_removed_in_project"? or something else?
+func project_layer_removed(layer: int) -> void:
+	var count := Global.layers_container.get_child_count()
+	Global.layers_container.get_child(count - layer).free()
+	Global.frames_container.get_child(count - layer).free()
+
+
+func project_cel_added(frame: int, layer: int) -> void:
+	var container := Global.frames_container.get_child(
+		Global.frames_container.get_child_count() - 1 - layer
+	)
+	var cel_button = Global.current_project.frames[frame].cels[layer].create_cel_button()
+	cel_button.frame = frame
+	cel_button.layer = layer
+	# TODO: Do we need stuff like this for selection?
+#	cel_button.pressed = Global.current_project.selected_cels.has([frame, layer])
+	container.add_child(cel_button)
+	container.move_child(cel_button, frame)
+
+# TODO: Not yet sure if this is really needed:
+func project_cel_removed(frame: int, layer: int) -> void:
+	var container := Global.frames_container.get_child(
+		Global.frames_container.get_child_count() - 1 - layer
+	)
+	container.get_child(frame).free()

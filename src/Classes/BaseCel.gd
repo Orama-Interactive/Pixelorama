@@ -13,9 +13,17 @@ var opacity: float
 # its image data for PixelCels, or return a render of that cel. It's meant
 # for read-only usage of image data from any type of cel
 
+func get_image() -> Image:
+	return null
+
+
 func save_image_data_to_pxo(_file: File) -> void:
 	return
 
 
 func load_image_data_from_pxo(_file: File, _project_size: Vector2) -> void:
 	return
+
+
+func create_cel_button() -> Button:
+	return null
