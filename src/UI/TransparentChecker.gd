@@ -8,7 +8,7 @@ func _ready() -> void:
 func update_rect() -> void:
 	rect_size = Global.current_project.size
 	if self == Global.transparent_checker:
-		fit_rect(Global.current_project.get_tile_mode_rect())
+		fit_rect(Global.current_project.tiles.get_bounding_rect())
 		Global.second_viewport.get_node("Viewport/TransparentChecker").update_rect()
 		Global.small_preview_viewport.get_node("Viewport/TransparentChecker").update_rect()
 	material.set_shader_param("size", Global.checker_size)

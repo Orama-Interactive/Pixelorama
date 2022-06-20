@@ -76,7 +76,7 @@ func _get_draw_rect() -> Rect2:
 	if Global.current_project.has_selection:
 		return Global.current_project.get_selection_rectangle()
 	else:
-		return Global.current_project.tile_mode_rects[Global.TileMode.NONE]
+		return Rect2(Vector2.ZERO, Global.current_project.size)
 
 
 func _get_draw_image() -> Image:

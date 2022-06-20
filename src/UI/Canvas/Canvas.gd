@@ -52,7 +52,7 @@ func _draw() -> void:
 		refresh_onion()
 	currently_visible_frame.size = Global.current_project.size
 	current_frame_drawer.update()
-	if Global.current_project.tile_mode != Global.TileMode.NONE:
+	if Global.current_project.tiles.mode != Tiles.MODE.NONE:
 		tile_mode.update()
 	draw_set_transform(position, rotation, scale)
 

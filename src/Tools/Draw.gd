@@ -25,7 +25,6 @@ var _line_polylines := []
 # Memorize some stuff when doing brush strokes
 var _stroke_project: Project
 var _stroke_images := []  # Array of Images
-var _tile_mode_rect: Rect2
 var _is_mask_size_zero := true
 var _circle_tool_shortcut: PoolVector2Array
 
@@ -223,8 +222,6 @@ func _prepare_tool() -> void:
 	_stroke_project = Global.current_project
 	# Memorize the frame/layer we are drawing on rather than fetching it on every pixel
 	_stroke_images = _get_selected_draw_images()
-	# Memorize current tile mode
-	_tile_mode_rect = _stroke_project.get_tile_mode_rect()
 	# This may prevent a few tests when setting pixels
 	_is_mask_size_zero = _mask.size() == 0
 	match _brush.type:
@@ -354,9 +351,7 @@ func _draw_tool_circle_from_map(position: Vector2) -> PoolVector2Array:
 
 func draw_tool_brush(position: Vector2) -> void:
 	var project: Project = Global.current_project
-
-	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
-		position = position.posmodv(project.size)
+	position = project.tiles.get_canon_position(position)
 
 	var size := _brush_image.get_size()
 	var dst := position - (size / 2).floor()
@@ -410,13 +405,11 @@ func remove_unselected_parts_of_brush(brush: Image, dst: Vector2) -> Image:
 
 func draw_indicator() -> void:
 	draw_indicator_at(_cursor, Vector2.ZERO, Color.blue)
-	if (
-		Global.current_project.tile_mode
-		and Global.current_project.get_tile_mode_rect().has_point(_cursor)
-	):
-		var tile := _line_start if _draw_line else _cursor
-		if not Global.current_project.tile_mode_rects[Global.TileMode.NONE].has_point(tile):
-			var offset := tile - tile.posmodv(Global.current_project.size)
+	if Global.current_project.tiles.mode and Global.current_project.tiles.has_point(_cursor):
+		var position := _line_start if _draw_line else _cursor
+		var nearest_tile := Global.current_project.tiles.get_nearest_tile(position)
+		if nearest_tile.position != Vector2.ZERO:
+			var offset := nearest_tile.position
 			draw_indicator_at(_cursor, offset, Color.green)
 
 
@@ -452,8 +445,7 @@ func _set_pixel(position: Vector2, ignore_mirroring := false) -> void:
 
 
 func _set_pixel_no_cache(position: Vector2, ignore_mirroring := false) -> void:
-	if _stroke_project.tile_mode and _tile_mode_rect.has_point(position):
-		position = position.posmodv(_stroke_project.size)
+	position = _stroke_project.tiles.get_canon_position(position)
 
 	if !_stroke_project.can_pixel_get_drawn(position):
 		return
@@ -652,8 +644,7 @@ func _get_undo_data() -> Dictionary:
 
 func _pick_color(position: Vector2) -> void:
 	var project: Project = Global.current_project
-	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
-		position = position.posmodv(project.size)
+	position = project.tiles.get_canon_position(position)
 
 	if position.x < 0 or position.y < 0:
 		return
