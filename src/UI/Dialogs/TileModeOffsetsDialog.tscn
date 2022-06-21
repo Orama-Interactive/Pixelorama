@@ -19,7 +19,7 @@ script = ExtResource( 3 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 208.0
-margin_bottom = 338.0
+margin_bottom = 362.0
 
 [node name="TileModeOffsets" type="Label" parent="VBoxContainer"]
 margin_right = 200.0
@@ -29,7 +29,7 @@ text = "Tile Mode Offsets"
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
 margin_top = 18.0
 margin_right = 200.0
-margin_bottom = 126.0
+margin_bottom = 150.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 2
 columns = 2
@@ -97,10 +97,16 @@ min_value = -16384.0
 max_value = 16384.0
 suffix = "px"
 
+[node name="Reset" type="Button" parent="VBoxContainer/OptionsContainer"]
+margin_top = 112.0
+margin_right = 61.0
+margin_bottom = 132.0
+text = "Reset"
+
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_top = 130.0
+margin_top = 154.0
 margin_right = 200.0
-margin_bottom = 330.0
+margin_bottom = 354.0
 size_flags_vertical = 3
 
 [node name="Preview" type="Control" parent="VBoxContainer/AspectRatioContainer"]
@@ -127,3 +133,4 @@ margin_bottom = 0.0
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/XBasisY" to="." method="_on_XBasisY_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/YBasisX" to="." method="_on_YBasisX_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/YBasisY" to="." method="_on_YBasisY_value_changed"]
+[connection signal="pressed" from="VBoxContainer/OptionsContainer/Reset" to="." method="_on_Reset_pressed"]

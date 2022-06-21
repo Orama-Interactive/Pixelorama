@@ -70,3 +70,14 @@ func _on_TileModeOffsetsDialog_popup_hide() -> void:
 func _on_TileModeOffsetsDialog_item_rect_changed():
 	if tile_mode:
 		update_preview()
+
+
+func _on_Reset_pressed():
+	var size = Global.current_project.size
+	tile_mode.tiles.x_basis = Vector2(size.x, 0)
+	tile_mode.tiles.y_basis = Vector2(0, size.y)
+	x_basis_x_spinbox.value = size.x
+	x_basis_y_spinbox.value = 0
+	y_basis_x_spinbox.value = 0
+	y_basis_y_spinbox.value = size.y
+	update_preview()
