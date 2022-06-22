@@ -1082,20 +1082,41 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 func move_cel(from_frame: int, to_frame: int, layer: int) -> void:
 	# TODO: Current frame
 	# TODO: Current layer
+
+	# TODO: Remove this debugging chunk:
+	var OG_CELS = []
+	for F in frames:
+		OG_CELS.append(F.cels[layer])
+
 	var cel: BaseCel = frames[from_frame].cels[layer]
-	if from_frame < to_frame:
-		for f in range(from_frame + 1, to_frame + 1):
-			frames[f - 1].cels[layer] = frames[f].cels[layer]
+	if to_frame < from_frame:
+		# TODO: These cels were not always correct... verify they are:
+		# TODO: After testing for correctness, can you reduce the amoutn of +/- 1s?
+		for f in range(from_frame - 1, to_frame - 1, -1): # Backward range
+			frames[f + 1].cels[layer] = frames[f].cels[layer] # Move right
 	else:
-		for f in range(to_frame, from_frame):
-			frames[f + 1].cels[layer] = frames[f].cels[layer]
+		for f in range(from_frame + 1, to_frame + 1): # Forward range
+			frames[f - 1].cels[layer] = frames[f].cels[layer] # Move left
 	frames[to_frame].cels[layer] = cel
 	Global.animation_timeline.project_cel_removed(from_frame, layer)
 	Global.animation_timeline.project_cel_added(to_frame, layer)
+
+	# TODO: Remove this debugging chunk:
+	var TEMP_CEL_INDICES = []
+	for F in frames:
+		TEMP_CEL_INDICES.append(OG_CELS.find(F.cels[layer]))
+		assert(TEMP_CEL_INDICES.count(TEMP_CEL_INDICES[-1]) == 1)
+	print("From: ", from_frame, " To: ", to_frame)
+	print("CELS: ", TEMP_CEL_INDICES)
+
 	# Update the cel buttons for this layer:
 	var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - layer)
 	for f in range(frames.size()):
 		layer_cel_container.get_child(f).frame = f
+
+		# TODO: Remove this after the fix is verified (and remove all spacing):
+		layer_cel_container.get_child(f).cel = frames[f].cels[layer]
+
 		layer_cel_container.get_child(f).button_setup()
 
 

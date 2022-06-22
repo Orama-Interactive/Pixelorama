@@ -180,10 +180,12 @@ func drop_data(_pos, data) -> void:
 	else: # Move frames
 		var to_frame: int
 		# TODO: Test that this is correct: (after cel button ui changes)
-		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
+		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()): # Left
 			to_frame = frame
-		else:
+		else: # Right
 			to_frame = frame + 1
+		if drop_frame < frame:
+			to_frame -= 1
 		project.undo_redo.add_do_method(project, "move_frame", drop_frame, to_frame)
 		project.undo_redo.add_undo_method(project, "move_frame", to_frame, drop_frame)
 

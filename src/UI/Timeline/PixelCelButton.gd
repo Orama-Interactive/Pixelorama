@@ -213,10 +213,10 @@ func can_drop_data(_pos, data) -> bool:
 				if Input.is_action_pressed("ctrl") or layer != drag_layer: # Swap cels
 					region = get_global_rect()
 				else: # Move cels
-					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
+					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()): # Left
 						region = _get_region_rect(-0.125, 0.125)
 						region.position.x -= 2  # Container spacing
-					else:
+					else: # Right
 						region = _get_region_rect(0.875, 1.125)
 						region.position.x += 2  # Container spacing
 				Global.animation_timeline.drag_highlight.rect_global_position = region.position
@@ -281,10 +281,14 @@ func drop_data(_pos, data) -> void:
 	else: # Move cels
 		var to_frame: int
 		# TODO: Test that this is correct: (after cel button ui changes)
-		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
+		# TODO: This breaks sometimes (after several tests usually), I'm not sure what the condition it breaks in is, maybe need to draw it out?
+		#		(This is probably an error in the project.move_cel function)
+		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()): # Left
 			to_frame = frame
-		else:
+		else: # Right
 			to_frame = frame + 1
+		if drop_frame < frame:
+			to_frame -= 1
 		project.undo_redo.add_do_method(project, "move_cel", drop_frame, to_frame, layer)
 		project.undo_redo.add_undo_method(project, "move_cel", to_frame, drop_frame, layer)
 
