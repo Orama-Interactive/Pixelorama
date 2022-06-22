@@ -280,9 +280,6 @@ func drop_data(_pos, data) -> void:
 		project.undo_redo.add_undo_method(project, "swap_cel", frame, layer, drop_frame, drop_layer)
 	else: # Move cels
 		var to_frame: int
-		# TODO: Test that this is correct: (after cel button ui changes)
-		# TODO: This breaks sometimes (after several tests usually), I'm not sure what the condition it breaks in is, maybe need to draw it out?
-		#		(This is probably an error in the project.move_cel function)
 		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()): # Left
 			to_frame = frame
 		else: # Right
