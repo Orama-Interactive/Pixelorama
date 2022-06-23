@@ -72,7 +72,7 @@ func apply_selection(_position: Vector2) -> void:
 			Global.canvas.selection.commit_undo("Select", undo_data)
 
 	if _rect.size != Vector2.ZERO:
-		var selection_bitmap_copy: BitMap = project.selection_bitmap.duplicate()
+		var selection_bitmap_copy: Image = project.selection_image.duplicate()
 		set_ellipse(selection_bitmap_copy, _rect.position)
 
 		# Handle mirroring
@@ -104,28 +104,26 @@ func apply_selection(_position: Vector2) -> void:
 			mirror_y_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 			set_ellipse(selection_bitmap_copy, mirror_y_rect.abs().position)
 
-		project.selection_bitmap = selection_bitmap_copy
-		Global.canvas.selection.big_bounding_rectangle = project.get_selection_rectangle(
-			project.selection_bitmap
-		)
+		project.selection_image = selection_bitmap_copy
+		Global.canvas.selection.big_bounding_rectangle = project.get_selection_rectangle()
 		Global.canvas.selection.commit_undo("Select", undo_data)
 
 
-func set_ellipse(bitmap: BitMap, position: Vector2) -> void:
+func set_ellipse(image: Image, position: Vector2) -> void:
 	var project: Project = Global.current_project
-	var bitmap_size: Vector2 = bitmap.get_size()
+	var bitmap_size: Vector2 = image.get_size()
 	if _intersect:
-		bitmap.set_bit_rect(Rect2(Vector2.ZERO, bitmap_size), false)
+		image.fill(Color(0))
 	var points := _get_shape_points_filled(_rect.size)
 	for p in points:
 		var pos: Vector2 = position + p
 		if pos.x < 0 or pos.y < 0 or pos.x >= bitmap_size.x or pos.y >= bitmap_size.y:
 			continue
 		if _intersect:
-			if project.selection_bitmap.get_bit(pos):
-				bitmap.set_bit(pos, true)
+			if project.is_pixel_selected(pos):
+				project.select_pixel(pos, true, image)
 		else:
-			bitmap.set_bit(pos, !_subtract)
+			project.select_pixel(pos, !_subtract, image)
 
 
 # Given an origin point and destination point, returns a rect representing

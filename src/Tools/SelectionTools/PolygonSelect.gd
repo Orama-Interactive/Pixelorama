@@ -113,10 +113,9 @@ func apply_selection(_position) -> void:
 		cleared = true
 		Global.canvas.selection.clear_selection()
 	if _draw_points.size() > 3:
-		var selection_bitmap_copy: BitMap = project.selection_bitmap.duplicate()
-		var bitmap_size: Vector2 = selection_bitmap_copy.get_size()
+		var selection_bitmap_copy: Image = project.selection_image.duplicate()
 		if _intersect:
-			selection_bitmap_copy.set_bit_rect(Rect2(Vector2.ZERO, bitmap_size), false)
+			selection_bitmap_copy.fill(Color(0))
 		lasso_selection(selection_bitmap_copy, _draw_points)
 
 		# Handle mirroring
@@ -127,10 +126,8 @@ func apply_selection(_position) -> void:
 		if Tools.vertical_mirror:
 			lasso_selection(selection_bitmap_copy, mirror_array(_draw_points, false, true))
 
-		project.selection_bitmap = selection_bitmap_copy
-		Global.canvas.selection.big_bounding_rectangle = project.get_selection_rectangle(
-			project.selection_bitmap
-		)
+		project.selection_image = selection_bitmap_copy
+		Global.canvas.selection.big_bounding_rectangle = project.get_selection_rectangle()
 	else:
 		if !cleared:
 			Global.canvas.selection.clear_selection()
@@ -142,17 +139,17 @@ func apply_selection(_position) -> void:
 	Global.canvas.previews.update()
 
 
-func lasso_selection(bitmap: BitMap, points: PoolVector2Array) -> void:
+func lasso_selection(image: Image, points: PoolVector2Array) -> void:
 	var project: Project = Global.current_project
-	var size := bitmap.get_size()
+	var size := image.get_size()
 	for point in points:
 		if point.x < 0 or point.y < 0 or point.x >= size.x or point.y >= size.y:
 			continue
 		if _intersect:
-			if project.selection_bitmap.get_bit(point):
-				bitmap.set_bit(point, true)
+			if project.is_pixel_selected(point):
+				project.select_pixel(point, true, image)
 		else:
-			bitmap.set_bit(point, !_subtract)
+			project.select_pixel(point, !_subtract, image)
 
 	var v := Vector2()
 	var image_size: Vector2 = project.size
@@ -162,10 +159,10 @@ func lasso_selection(bitmap: BitMap, points: PoolVector2Array) -> void:
 			v.y = y
 			if Geometry.is_point_in_polygon(v, points):
 				if _intersect:
-					if project.selection_bitmap.get_bit(v):
-						bitmap.set_bit(v, true)
+					if project.is_pixel_selected(v):
+						project.select_pixel(v, true, image)
 				else:
-					bitmap.set_bit(v, !_subtract)
+					project.select_pixel(v, !_subtract, image)
 
 
 # Bresenham's Algorithm

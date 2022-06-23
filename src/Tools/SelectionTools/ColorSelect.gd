@@ -11,7 +11,7 @@ func apply_selection(position: Vector2) -> void:
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()
 
-	var selection_bitmap_copy: BitMap = project.selection_bitmap.duplicate()
+	var selection_bitmap_copy: Image = project.selection_image.duplicate()
 	if _intersect:
 		var full_rect = Rect2(Vector2.ZERO, selection_bitmap_copy.get_size())
 		selection_bitmap_copy.set_bit_rect(full_rect, false)
@@ -25,13 +25,13 @@ func apply_selection(position: Vector2) -> void:
 			var pos := Vector2(x, y)
 			if color.is_equal_approx(cel_image.get_pixelv(pos)):
 				if _intersect:
-					selection_bitmap_copy.set_bit(pos, project.selection_bitmap.get_bit(pos))
+					project.select_pixel(pos, project.is_pixel_selected(pos), selection_bitmap_copy)
 				else:
-					selection_bitmap_copy.set_bit(pos, !_subtract)
+					project.select_pixel(pos, !_subtract, selection_bitmap_copy)
 
 	cel_image.unlock()
-	project.selection_bitmap = selection_bitmap_copy
+	project.selection_image = selection_bitmap_copy
 	Global.canvas.selection.big_bounding_rectangle = project.get_selection_rectangle(
-		project.selection_bitmap
+		project.selection_image
 	)
 	Global.canvas.selection.commit_undo("Select", undo_data)
