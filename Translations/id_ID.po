@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-06-13 23:28\n"
+"PO-Revision-Date: 2022-06-23 17:17\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -635,7 +635,7 @@ msgid "Gradient"
 msgstr "Gradien"
 
 msgid "Gradient Map"
-msgstr ""
+msgstr "Peta Gradien"
 
 msgid "Linear"
 msgstr "Linier"
