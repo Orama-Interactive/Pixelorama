@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://src/UI/Dialogs/SaveSprite.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/Dialogs/OpenSprite.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/UI/Dialogs/ManageLayouts.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/UI/Dialogs/TileModeOffsetsDialog.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.tscn" type="PackedScene" id=27]
 [ext_resource path="res://src/UI/Dialogs/CreateNewImage.tscn" type="PackedScene" id=28]
 [ext_resource path="res://src/Preferences/PreferencesDialog.tscn" type="PackedScene" id=32]
@@ -120,6 +121,8 @@ dialog_autowrap = true
 [node name="FrameProperties" parent="Dialogs" instance=ExtResource( 9 )]
 
 [node name="WindowOpacityDialog" parent="Dialogs" instance=ExtResource( 10 )]
+
+[node name="TileModeOffsetsDialog" parent="Dialogs" instance=ExtResource( 14 )]
 
 [node name="Extensions" type="Control" parent="."]
 __meta__ = {

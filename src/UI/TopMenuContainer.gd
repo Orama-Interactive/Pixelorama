@@ -105,6 +105,7 @@ func _setup_view_menu() -> void:
 	# Order as in Global.ViewMenu enum
 	var view_menu_items := [
 		"Tile Mode",
+		"Tile Mode Offsets",
 		"Greyscale View",
 		"Mirror View",
 		"Show Grid",
@@ -117,6 +118,8 @@ func _setup_view_menu() -> void:
 	for item in view_menu_items:
 		if item == "Tile Mode":
 			_setup_tile_mode_submenu(item)
+		elif item == "Tile Mode Offsets":
+			view_menu.add_item(item, i)
 		else:
 			view_menu.add_check_item(item, i)
 		i += 1
@@ -150,11 +153,11 @@ func _setup_view_menu() -> void:
 
 func _setup_tile_mode_submenu(item: String) -> void:
 	tile_mode_submenu.set_name("tile_mode_submenu")
-	tile_mode_submenu.add_radio_check_item("None", Global.TileMode.NONE)
-	tile_mode_submenu.set_item_checked(Global.TileMode.NONE, true)
-	tile_mode_submenu.add_radio_check_item("Tiled In Both Axis", Global.TileMode.BOTH)
-	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", Global.TileMode.X_AXIS)
-	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", Global.TileMode.Y_AXIS)
+	tile_mode_submenu.add_radio_check_item("None", Tiles.MODE.NONE)
+	tile_mode_submenu.set_item_checked(Tiles.MODE.NONE, true)
+	tile_mode_submenu.add_radio_check_item("Tiled In Both Axis", Tiles.MODE.BOTH)
+	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", Tiles.MODE.X_AXIS)
+	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", Tiles.MODE.Y_AXIS)
 	tile_mode_submenu.hide_on_checkable_item_selection = false
 
 	tile_mode_submenu.connect("id_pressed", self, "_tile_mode_submenu_id_pressed")
@@ -419,6 +422,8 @@ func edit_menu_id_pressed(id: int) -> void:
 
 func view_menu_id_pressed(id: int) -> void:
 	match id:
+		Global.ViewMenu.TILE_MODE_OFFSETS:
+			_show_tile_mode_offsets_popup()
 		Global.ViewMenu.GREYSCALE_VIEW:
 			_toggle_greyscale_view()
 		Global.ViewMenu.MIRROR_VIEW:
@@ -437,10 +442,15 @@ func view_menu_id_pressed(id: int) -> void:
 	Global.canvas.update()
 
 
+func _show_tile_mode_offsets_popup() -> void:
+	Global.control.get_node("Dialogs/TileModeOffsetsDialog").popup_centered()
+	Global.dialog_open(true)
+
+
 func _tile_mode_submenu_id_pressed(id: int) -> void:
-	Global.current_project.tile_mode = id
-	Global.transparent_checker.fit_rect(Global.current_project.get_tile_mode_rect())
-	for i in Global.TileMode.values():
+	Global.current_project.tiles.mode = id
+	Global.transparent_checker.fit_rect(Global.current_project.tiles.get_bounding_rect())
+	for i in Tiles.MODE.values():
 		tile_mode_submenu.set_item_checked(i, i == id)
 	Global.canvas.tile_mode.update()
 	Global.canvas.pixel_grid.update()
