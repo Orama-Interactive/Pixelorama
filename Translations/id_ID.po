@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-06-23 17:17\n"
+"PO-Revision-Date: 2022-06-23 18:12\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -187,7 +187,7 @@ msgid "Window Opacity"
 msgstr "Kelegapan Jendela"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "Kelegapan jendela tidak dapat bekerja di mode layar penuh."
 
 msgid "Panel Layout"
 msgstr "Tata Letak Panel"
