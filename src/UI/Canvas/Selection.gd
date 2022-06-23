@@ -690,7 +690,11 @@ func copy() -> void:
 		"big_bounding_rectangle": cl_big_bounding_rectangle,
 		"selection_offset": cl_selection_offset,
 	}
-	OS.set_clipboard(var2str(transfer_clipboard))
+	# Store to ".clipboard.txt" file
+	var clipboard_file = File.new()
+	clipboard_file.open("user://clipboard.txt", File.WRITE)
+	clipboard_file.store_var(transfer_clipboard, true)
+	clipboard_file.close()
 
 	if !to_copy.is_empty():
 		var pattern: Patterns.Pattern = Global.patterns_popup.get_pattern(0)
@@ -702,7 +706,14 @@ func copy() -> void:
 
 
 func paste() -> void:
-	var clipboard = str2var(OS.get_clipboard())
+	# Read from the ".clipboard.txt" file
+	var clipboard_file = File.new()
+	if !clipboard_file.file_exists("user://clipboard.txt"):
+		return
+	clipboard_file.open("user://clipboard.txt", File.READ)
+	var clipboard = clipboard_file.get_var(true)
+	clipboard_file.close()
+
 	if typeof(clipboard) == TYPE_DICTIONARY:
 		# A sanity check
 		if not clipboard.has_all(
