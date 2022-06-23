@@ -25,7 +25,7 @@ var y_symmetry_point
 var x_symmetry_axis := SymmetryGuide.new()
 var y_symmetry_axis := SymmetryGuide.new()
 
-var selection_image := Image.new()
+var selection_image := SelectionMap.new()
 var selection_bitmap := BitMap.new()
 # This is useful for when the selection is outside of the canvas boundaries,
 # on the left and/or above (negative coords)
@@ -261,7 +261,7 @@ func change_project() -> void:
 	# Change selection effect & bounding rectangle
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset
 	selection_bitmap_changed()
-	Global.canvas.selection.big_bounding_rectangle = get_selection_rectangle()
+	Global.canvas.selection.big_bounding_rectangle = selection_image.get_used_rect()
 	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
 	Global.canvas.selection.update()
 	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
@@ -762,7 +762,7 @@ func duplicate_layers() -> Array:
 
 func can_pixel_get_drawn(
 	pixel: Vector2,
-	image: Image = selection_image,
+	image: SelectionMap = selection_image,
 	selection_position: Vector2 = Global.canvas.selection.big_bounding_rectangle.position
 ) -> bool:
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
@@ -776,25 +776,9 @@ func can_pixel_get_drawn(
 			pixel.x -= selection_position.x
 		if selection_position.y < 0:
 			pixel.y -= selection_position.y
-		return is_pixel_selected(pixel, image)
+		return image.is_pixel_selected(pixel)
 	else:
 		return true
-
-
-func is_pixel_selected(pixel: Vector2, image: Image = selection_image) -> bool:
-	image.lock()
-	var selected: bool = image.get_pixelv(pixel).a > 0
-	image.unlock()
-	return selected
-
-
-func select_pixel(pixel: Vector2, select := true, image: Image = selection_image) -> void:
-	image.lock()
-	if select:
-		image.set_pixelv(pixel, Color(1))
-	else:
-		image.set_pixelv(pixel, Color(0))
-	image.unlock()
 
 
 func invert_bitmap(bitmap: BitMap) -> void:
@@ -835,10 +819,6 @@ func bitmap_to_image(bitmap: BitMap) -> Image:
 			image.set_pixelv(pos, color)
 	image.unlock()
 	return image
-
-
-func get_selection_rectangle(image: Image = selection_image) -> Rect2:
-	return image.get_used_rect()
 
 
 func move_bitmap_values(image: Image, move_offset := true) -> void:

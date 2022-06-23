@@ -442,7 +442,7 @@ func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
 				if !Rect2(Vector2.ZERO, selection_bitmap_copy.get_size()).has_point(pos):
 					continue
 				selection_bitmap_copy.set_bit(pos, project.selection_bitmap.get_bit(pos))
-	big_bounding_rectangle = project.get_selection_rectangle(selection_bitmap_copy)
+	big_bounding_rectangle = selection_bitmap_copy.get_used_rect()
 
 	if offset_position != Vector2.ZERO:
 		big_bounding_rectangle.position += offset_position
@@ -843,7 +843,7 @@ func invert() -> void:
 	project.invert_bitmap(selection_bitmap_copy)
 	project.selection_bitmap = selection_bitmap_copy
 	project.selection_bitmap_changed()
-	self.big_bounding_rectangle = project.get_selection_rectangle(selection_bitmap_copy)
+	self.big_bounding_rectangle = selection_bitmap_copy.get_used_rect()
 	project.selection_offset = Vector2.ZERO
 	commit_undo("Select", undo_data_tmp)
 

@@ -66,7 +66,7 @@ func draw_start(position: Vector2) -> void:
 	if (
 		offsetted_pos.x >= 0
 		and offsetted_pos.y >= 0
-		and project.is_pixel_selected(offsetted_pos)
+		and project.selection_image.is_pixel_selected(offsetted_pos)
 		and (!_add and !_subtract and !_intersect or quick_copy)
 		and !_ongoing_selection
 	):
@@ -85,7 +85,7 @@ func draw_start(position: Vector2) -> void:
 						selection_node.big_bounding_rectangle.position
 					)
 
-				var selected_bitmap_copy = project.selection_image.duplicate()
+				var selected_bitmap_copy: SelectionMap = project.selection_image.duplicate()
 				project.move_bitmap_values(selected_bitmap_copy)
 
 				project.selection_image = selected_bitmap_copy
@@ -190,9 +190,9 @@ func _on_XSpinBox_value_changed(value: float) -> void:
 	timer.start()
 	selection_node.big_bounding_rectangle.position.x = value
 
-	var selection_bitmap_copy: Image = project.selection_image.duplicate()
-	project.move_bitmap_values(selection_bitmap_copy)
-	project.selection_image = selection_bitmap_copy
+	var selection_map_copy: SelectionMap = project.selection_image.duplicate()
+	project.move_bitmap_values(selection_map_copy)
+	project.selection_image = selection_map_copy
 	project.selection_bitmap_changed()
 
 
@@ -205,9 +205,9 @@ func _on_YSpinBox_value_changed(value: float) -> void:
 	timer.start()
 	selection_node.big_bounding_rectangle.position.y = value
 
-	var selection_bitmap_copy: Image = project.selection_image.duplicate()
-	project.move_bitmap_values(selection_bitmap_copy)
-	project.selection_image = selection_bitmap_copy
+	var selection_map_copy: SelectionMap = project.selection_image.duplicate()
+	project.move_bitmap_values(selection_map_copy)
+	project.selection_image = selection_map_copy
 	project.selection_bitmap_changed()
 
 
@@ -243,7 +243,7 @@ func _on_HSpinBox_value_changed(value: float) -> void:
 
 func resize_selection() -> void:
 	var project: Project = Global.current_project
-	var image: Image = project.selection_image
+	var image: SelectionMap = project.selection_image
 	if selection_node.is_moving_content:
 		image = selection_node.selection_image
 		var preview_image: Image = selection_node.preview_image
@@ -255,11 +255,11 @@ func resize_selection() -> void:
 		)
 		selection_node.preview_image_texture.create_from_image(preview_image, 0)
 
-	var selection_bitmap_copy: Image = project.selection_image.duplicate()
-	selection_bitmap_copy = project.resize_bitmap_values(
+	var selection_map_copy: SelectionMap = project.selection_image.duplicate()
+	selection_map_copy = project.resize_bitmap_values(
 		image, selection_node.big_bounding_rectangle.size, false, false
 	)
-	project.selection_image = selection_bitmap_copy
+	project.selection_image = selection_map_copy
 	project.selection_bitmap_changed()
 
 

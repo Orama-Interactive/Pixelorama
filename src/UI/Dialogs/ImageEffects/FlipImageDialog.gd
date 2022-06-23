@@ -33,7 +33,7 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 		var selected := Image.new()
 		var rectangle: Rect2 = Global.canvas.selection.big_bounding_rectangle
 		if project != Global.current_project:
-			rectangle = project.get_selection_rectangle()
+			rectangle = project.selection_image.get_used_rect()
 		selected = cel.get_rect(rectangle)
 		selected.lock()
 		cel.lock()

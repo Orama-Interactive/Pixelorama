@@ -77,22 +77,21 @@ func apply_selection(_position) -> void:
 		cleared = true
 		Global.canvas.selection.clear_selection()
 	if _draw_points.size() > 3:
-		var selection_bitmap_copy: Image = project.selection_image.duplicate()
-		var bitmap_size: Vector2 = selection_bitmap_copy.get_size()
+		var selection_map_copy: SelectionMap = project.selection_image.duplicate()
 		if _intersect:
-			selection_bitmap_copy.set_bit_rect(Rect2(Vector2.ZERO, bitmap_size), false)
-		lasso_selection(selection_bitmap_copy, _draw_points)
+			selection_map_copy.clear()
+		lasso_selection(selection_map_copy, _draw_points)
 
 		# Handle mirroring
 		if Tools.horizontal_mirror:
-			lasso_selection(selection_bitmap_copy, mirror_array(_draw_points, true, false))
+			lasso_selection(selection_map_copy, mirror_array(_draw_points, true, false))
 			if Tools.vertical_mirror:
-				lasso_selection(selection_bitmap_copy, mirror_array(_draw_points, true, true))
+				lasso_selection(selection_map_copy, mirror_array(_draw_points, true, true))
 		if Tools.vertical_mirror:
-			lasso_selection(selection_bitmap_copy, mirror_array(_draw_points, false, true))
+			lasso_selection(selection_map_copy, mirror_array(_draw_points, false, true))
 
-		project.selection_image = selection_bitmap_copy
-		Global.canvas.selection.big_bounding_rectangle = project.get_selection_rectangle()
+		project.selection_image = selection_map_copy
+		Global.canvas.selection.big_bounding_rectangle = project.selection_image.get_used_rect()
 	else:
 		if !cleared:
 			Global.canvas.selection.clear_selection()
@@ -102,17 +101,17 @@ func apply_selection(_position) -> void:
 	_last_position = Vector2.INF
 
 
-func lasso_selection(image: Image, points: PoolVector2Array) -> void:
+func lasso_selection(selection_map: SelectionMap, points: PoolVector2Array) -> void:
 	var project: Project = Global.current_project
-	var size := image.get_size()
+	var size := selection_map.get_size()
 	for point in points:
 		if point.x < 0 or point.y < 0 or point.x >= size.x or point.y >= size.y:
 			continue
 		if _intersect:
 			if project.is_pixel_selected(point):
-				project.select_pixel(point, true, image)
+				selection_map.select_pixel(point, true)
 		else:
-			project.select_pixel(point, !_subtract, image)
+			selection_map.select_pixel(point, !_subtract)
 
 	var v := Vector2()
 	var image_size: Vector2 = project.size
@@ -123,9 +122,9 @@ func lasso_selection(image: Image, points: PoolVector2Array) -> void:
 			if Geometry.is_point_in_polygon(v, points):
 				if _intersect:
 					if project.is_pixel_selected(v):
-						project.select_pixel(v, true, image)
+						selection_map.select_pixel(v, true)
 				else:
-					project.select_pixel(v, !_subtract, image)
+					selection_map.select_pixel(v, !_subtract)
 
 
 # Bresenham's Algorithm
