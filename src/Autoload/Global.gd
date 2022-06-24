@@ -452,6 +452,7 @@ func undo_or_redo(
 			canvas.camera_zoom()
 			canvas.grid.update()
 			canvas.pixel_grid.update()
+			project.selection_bitmap_changed()
 			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	elif "Frame" in action_name:

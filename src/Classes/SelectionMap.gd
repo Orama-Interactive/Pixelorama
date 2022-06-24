@@ -74,7 +74,7 @@ func move_bitmap_values(project, move_offset := true) -> void:
 
 func resize_bitmap_values(project, new_size: Vector2, flip_x: bool, flip_y: bool) -> void:
 	var size := get_size()
-	var selection_node = Global.canvas.selection
+	var selection_node: Node2D = Global.canvas.selection
 	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position
 	var dst := selection_position
 	var new_bitmap_size := size
