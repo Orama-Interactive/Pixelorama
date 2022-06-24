@@ -426,8 +426,9 @@ func general_do_scale(width: int, height: int) -> void:
 	var x_ratio = project.size.x / width
 	var y_ratio = project.size.y / height
 
-	var selection_map: SelectionMap = project.selection_image.duplicate()
-	selection_map.crop(size.x, size.y)
+	var selection_map_copy := SelectionMap.new()
+	selection_map_copy.copy_from(project.selection_image)
+	selection_map_copy.crop(size.x, size.y)
 
 	var new_x_symmetry_point = project.x_symmetry_point / x_ratio
 	var new_y_symmetry_point = project.y_symmetry_point / y_ratio
@@ -441,7 +442,7 @@ func general_do_scale(width: int, height: int) -> void:
 	project.undos += 1
 	project.undo_redo.create_action("Scale")
 	project.undo_redo.add_do_property(project, "size", size)
-	project.undo_redo.add_do_property(project, "selection_image", selection_map)
+	project.undo_redo.add_do_property(project, "selection_image", selection_map_copy)
 	project.undo_redo.add_do_property(project, "x_symmetry_point", new_x_symmetry_point)
 	project.undo_redo.add_do_property(project, "y_symmetry_point", new_y_symmetry_point)
 	project.undo_redo.add_do_property(project.x_symmetry_axis, "points", new_x_symmetry_axis_points)

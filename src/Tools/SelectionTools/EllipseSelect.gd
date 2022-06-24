@@ -72,7 +72,8 @@ func apply_selection(_position: Vector2) -> void:
 			Global.canvas.selection.commit_undo("Select", undo_data)
 
 	if _rect.size != Vector2.ZERO:
-		var selection_map_copy: SelectionMap = project.selection_image.duplicate()
+		var selection_map_copy := SelectionMap.new()
+		selection_map_copy.copy_from(project.selection_image)
 		set_ellipse(selection_map_copy, _rect.position)
 
 		# Handle mirroring

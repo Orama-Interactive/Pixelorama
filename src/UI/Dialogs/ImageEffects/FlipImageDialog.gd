@@ -83,8 +83,10 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 
 
 func _get_undo_data(project: Project) -> Dictionary:
+	var bitmap_image := SelectionMap.new()
+	bitmap_image.copy_from(project.selection_image)
 	var data := {}
-	data["selection_image"] = project.selection_image.duplicate()
+	data["selection_image"] = bitmap_image
 	data["outline_offset"] = project.selection_offset
 
 	var images := _get_selected_draw_images(project)
@@ -99,7 +101,8 @@ func _flip_selection(project: Project = Global.current_project) -> void:
 	if !(selection_checkbox.pressed and project.has_selection):
 		return
 
-	var bitmap_image: Image = project.selection_image.duplicate()
+	var bitmap_image := SelectionMap.new()
+	bitmap_image.copy_from(project.selection_image)
 	var selection_rect := bitmap_image.get_used_rect()
 	var smaller_bitmap_image := bitmap_image.get_rect(selection_rect)
 

@@ -77,7 +77,8 @@ func apply_selection(_position) -> void:
 		cleared = true
 		Global.canvas.selection.clear_selection()
 	if _draw_points.size() > 3:
-		var selection_map_copy: SelectionMap = project.selection_image.duplicate()
+		var selection_map_copy := SelectionMap.new()
+		selection_map_copy.copy_from(project.selection_image)
 		if _intersect:
 			selection_map_copy.clear()
 		lasso_selection(selection_map_copy, _draw_points)

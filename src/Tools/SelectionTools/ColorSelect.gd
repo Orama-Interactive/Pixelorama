@@ -11,7 +11,8 @@ func apply_selection(position: Vector2) -> void:
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()
 
-	var selection_map_copy: SelectionMap = project.selection_image.duplicate()
+	var selection_map_copy := SelectionMap.new()
+	selection_map_copy.copy_from(project.selection_image)
 	if _intersect:
 		selection_map_copy.clear()
 
