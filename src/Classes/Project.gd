@@ -26,7 +26,6 @@ var x_symmetry_axis := SymmetryGuide.new()
 var y_symmetry_axis := SymmetryGuide.new()
 
 var selection_image := SelectionMap.new()
-var selection_bitmap := BitMap.new()
 # This is useful for when the selection is outside of the canvas boundaries,
 # on the left and/or above (negative coords)
 var selection_offset := Vector2.ZERO setget _selection_offset_changed
@@ -779,22 +778,6 @@ func can_pixel_get_drawn(
 		return image.is_pixel_selected(pixel)
 	else:
 		return true
-
-
-# Unexposed BitMap class function
-# https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L605
-func resize_bitmap(bitmap: BitMap, new_size: Vector2) -> BitMap:
-	if new_size == bitmap.get_size():
-		return bitmap
-	var new_bitmap := BitMap.new()
-	new_bitmap.create(new_size)
-	var lw = min(bitmap.get_size().x, new_size.x)
-	var lh = min(bitmap.get_size().y, new_size.y)
-	for x in lw:
-		for y in lh:
-			new_bitmap.set_bit(Vector2(x, y), bitmap.get_bit(Vector2(x, y)))
-
-	return new_bitmap
 
 
 # Unexposed BitMap class function
