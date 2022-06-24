@@ -433,7 +433,7 @@ func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
 		selection_map_copy.move_bitmap_values()
 
 	if operation == SelectionOperation.ADD:
-		selection_map_copy.fill_rect(rect, Color(1))
+		selection_map_copy.fill_rect(rect, Color(1, 1, 1, 1))
 	elif operation == SelectionOperation.SUBTRACT:
 		selection_map_copy.fill_rect(rect, Color(0))
 	elif operation == SelectionOperation.INTERSECT:

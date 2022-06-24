@@ -12,7 +12,7 @@ func is_pixel_selected(pixel: Vector2) -> bool:
 func select_pixel(pixel: Vector2, select := true) -> void:
 	lock()
 	if select:
-		set_pixelv(pixel, Color(1))
+		set_pixelv(pixel, Color(1, 1, 1, 1))
 	else:
 		set_pixelv(pixel, Color(0))
 	unlock()
