@@ -893,8 +893,8 @@ func project_layer_added(layer: int) -> void:
 #	maybe "layer_removed_in_project"? or something else?
 func project_layer_removed(layer: int) -> void:
 	var count := Global.layers_container.get_child_count()
-	Global.layers_container.get_child(count - layer).free()
-	Global.frames_container.get_child(count - layer).free()
+	Global.layers_container.get_child(count - 1 - layer).free()
+	Global.frames_container.get_child(count - 1 - layer).free()
 
 
 func project_cel_added(frame: int, layer: int) -> void:
