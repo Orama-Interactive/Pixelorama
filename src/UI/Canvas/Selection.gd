@@ -443,7 +443,7 @@ func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
 				var pos := Vector2(x, y)
 				if !Rect2(Vector2.ZERO, selection_map_copy.get_size()).has_point(pos):
 					continue
-				selection_map_copy.set_bit(pos, project.selection_image.is_pixel_selected(pos))
+				selection_map_copy.select_pixel(pos, project.selection_image.is_pixel_selected(pos))
 	big_bounding_rectangle = selection_map_copy.get_used_rect()
 
 	if offset_position != Vector2.ZERO:
@@ -489,7 +489,7 @@ func transform_content_start() -> void:
 			undo_data = get_undo_data(false)
 			return
 		is_moving_content = true
-		original_bitmap.copy_from(Global.current_project.selection_images)
+		original_bitmap.copy_from(Global.current_project.selection_image)
 		original_big_bounding_rectangle = big_bounding_rectangle
 		original_offset = Global.current_project.selection_offset
 		update()
@@ -866,8 +866,7 @@ func clear_selection(use_undo := false) -> void:
 	var selection_map_copy := SelectionMap.new()
 	selection_map_copy.copy_from(project.selection_image)
 	selection_map_copy.crop(project.size.x, project.size.y)
-	var full_rect = Rect2(Vector2.ZERO, selection_map_copy.get_size())
-	selection_map_copy.set_bit_rect(full_rect, false)
+	selection_map_copy.clear()
 	project.selection_image = selection_map_copy
 
 	self.big_bounding_rectangle = Rect2()

@@ -120,7 +120,7 @@ func new_empty_frame() -> Frame:
 
 func selection_bitmap_changed() -> void:
 	var image_texture := ImageTexture.new()
-	has_selection = selection_image.is_invisible()
+	has_selection = !selection_image.is_invisible()
 	if has_selection:
 		image_texture.create_from_image(selection_image, 0)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture

@@ -109,7 +109,7 @@ func lasso_selection(selection_map: SelectionMap, points: PoolVector2Array) -> v
 		if point.x < 0 or point.y < 0 or point.x >= size.x or point.y >= size.y:
 			continue
 		if _intersect:
-			if project.is_pixel_selected(point):
+			if selection_map.is_pixel_selected(point):
 				selection_map.select_pixel(point, true)
 		else:
 			selection_map.select_pixel(point, !_subtract)
@@ -122,7 +122,7 @@ func lasso_selection(selection_map: SelectionMap, points: PoolVector2Array) -> v
 			v.y = y
 			if Geometry.is_point_in_polygon(v, points):
 				if _intersect:
-					if project.is_pixel_selected(v):
+					if selection_map.is_pixel_selected(v):
 						selection_map.select_pixel(v, true)
 				else:
 					selection_map.select_pixel(v, !_subtract)
