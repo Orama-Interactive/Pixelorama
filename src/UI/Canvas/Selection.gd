@@ -352,10 +352,12 @@ func _gizmo_resize() -> void:
 			preview_image.flip_y()
 		preview_image_texture.create_from_image(preview_image, 0)
 
-	Global.current_project.selection_map = temp_bitmap
-	Global.current_project.selection_map.resize_bitmap_values(
+	var temp_bitmap_copy := SelectionMap.new()
+	temp_bitmap_copy.copy_from(temp_bitmap)
+	temp_bitmap_copy.resize_bitmap_values(
 		Global.current_project, size, temp_rect.size.x < 0, temp_rect.size.y < 0
 	)
+	Global.current_project.selection_map = temp_bitmap_copy
 	Global.current_project.selection_map_changed()
 	update()
 

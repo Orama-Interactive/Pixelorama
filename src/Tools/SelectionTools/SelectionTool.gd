@@ -259,8 +259,7 @@ func resize_selection() -> void:
 		selection_node.preview_image_texture.create_from_image(preview_image, 0)
 
 	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(project.selection_map)
-	selection_map_copy = image
+	selection_map_copy.copy_from(image)
 	selection_map_copy.resize_bitmap_values(
 		project, selection_node.big_bounding_rectangle.size, false, false
 	)
