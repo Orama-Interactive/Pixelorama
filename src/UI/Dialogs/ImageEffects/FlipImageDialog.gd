@@ -76,9 +76,9 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 			continue
 		project.undo_redo.add_undo_property(image, "data", undo_data[image])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false, -1, -1, project)
-	project.undo_redo.add_do_method(project, "selection_bitmap_changed")
+	project.undo_redo.add_do_method(project, "selection_map_changed")
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, -1, -1, project)
-	project.undo_redo.add_undo_method(project, "selection_bitmap_changed")
+	project.undo_redo.add_undo_method(project, "selection_map_changed")
 	project.undo_redo.commit_action()
 
 

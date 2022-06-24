@@ -195,7 +195,7 @@ func _on_XSpinBox_value_changed(value: float) -> void:
 	selection_map_copy.copy_from(project.selection_map)
 	selection_map_copy.move_bitmap_values(project)
 	project.selection_map = selection_map_copy
-	project.selection_bitmap_changed()
+	project.selection_map_changed()
 
 
 func _on_YSpinBox_value_changed(value: float) -> void:
@@ -211,7 +211,7 @@ func _on_YSpinBox_value_changed(value: float) -> void:
 	selection_map_copy.copy_from(project.selection_map)
 	selection_map_copy.move_bitmap_values(project)
 	project.selection_map = selection_map_copy
-	project.selection_bitmap_changed()
+	project.selection_map_changed()
 
 
 func _on_WSpinBox_value_changed(value: float) -> void:
@@ -265,7 +265,7 @@ func resize_selection() -> void:
 		project, selection_node.big_bounding_rectangle.size, false, false
 	)
 	project.selection_map = selection_map_copy
-	project.selection_bitmap_changed()
+	project.selection_map_changed()
 
 
 func _on_Timer_timeout() -> void:

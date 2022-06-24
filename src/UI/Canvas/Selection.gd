@@ -356,7 +356,7 @@ func _gizmo_resize() -> void:
 	Global.current_project.selection_map.resize_bitmap_values(
 		Global.current_project, size, temp_rect.size.x < 0, temp_rect.size.y < 0
 	)
-	Global.current_project.selection_bitmap_changed()
+	Global.current_project.selection_map_changed()
 	update()
 
 
@@ -409,7 +409,7 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 	)
 	DrawingAlgos.nn_rotate(bitmap_image, angle, bitmap_pivot)
 	Global.current_project.selection_map = bitmap_image
-	Global.current_project.selection_bitmap_changed()
+	Global.current_project.selection_map_changed()
 	self.big_bounding_rectangle = bitmap_image.get_used_rect()
 	update()
 
@@ -475,7 +475,7 @@ func move_borders_end() -> void:
 	if !is_moving_content:
 		commit_undo("Select", undo_data)
 	else:
-		Global.current_project.selection_bitmap_changed()
+		Global.current_project.selection_map_changed()
 	update()
 
 
@@ -555,7 +555,7 @@ func transform_content_cancel() -> void:
 	is_moving_content = false
 	self.big_bounding_rectangle = original_big_bounding_rectangle
 	project.selection_map = original_bitmap
-	project.selection_bitmap_changed()
+	project.selection_map_changed()
 	preview_image = original_preview_image
 	if !is_pasting:
 		var cel_image: Image = project.frames[project.current_frame].cels[project.current_layer].image
@@ -609,9 +609,9 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 				continue
 			project.undo_redo.add_undo_property(image, "data", undo_data_tmp[image])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_do_method(project, "selection_bitmap_changed")
+	project.undo_redo.add_do_method(project, "selection_map_changed")
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_undo_method(project, "selection_bitmap_changed")
+	project.undo_redo.add_undo_method(project, "selection_map_changed")
 	project.undo_redo.commit_action()
 
 	undo_data.clear()
@@ -756,7 +756,7 @@ func paste() -> void:
 		preview_image.copy_from(original_preview_image)
 		preview_image_texture.create_from_image(preview_image, 0)
 
-		project.selection_bitmap_changed()
+		project.selection_map_changed()
 
 
 func delete(selected_cels := true) -> void:
@@ -851,7 +851,7 @@ func invert() -> void:
 	selection_map_copy.crop(project.size.x, project.size.y)
 	selection_map_copy.invert()
 	project.selection_map = selection_map_copy
-	project.selection_bitmap_changed()
+	project.selection_map_changed()
 	self.big_bounding_rectangle = selection_map_copy.get_used_rect()
 	project.selection_offset = Vector2.ZERO
 	commit_undo("Select", undo_data_tmp)

@@ -118,7 +118,7 @@ func new_empty_frame() -> Frame:
 	return frame
 
 
-func selection_bitmap_changed() -> void:
+func selection_map_changed() -> void:
 	var image_texture := ImageTexture.new()
 	has_selection = !selection_map.is_invisible()
 	if has_selection:
@@ -259,7 +259,7 @@ func change_project() -> void:
 
 	# Change selection effect & bounding rectangle
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset
-	selection_bitmap_changed()
+	selection_map_changed()
 	Global.canvas.selection.big_bounding_rectangle = selection_map.get_used_rect()
 	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
 	Global.canvas.selection.update()
