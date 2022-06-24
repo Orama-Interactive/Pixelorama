@@ -778,20 +778,3 @@ func can_pixel_get_drawn(
 		return image.is_pixel_selected(pixel)
 	else:
 		return true
-
-
-# Unexposed BitMap class function
-# https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L622
-func bitmap_to_image(bitmap: BitMap) -> Image:
-	var image := Image.new()
-	var width := bitmap.get_size().x
-	var height := bitmap.get_size().y
-	image.create(width, height, false, Image.FORMAT_LA8)
-	image.lock()
-	for x in width:
-		for y in height:
-			var pos := Vector2(x, y)
-			var color = Color(1, 1, 1, 1) if bitmap.get_bit(pos) else Color(0, 0, 0, 0)
-			image.set_pixelv(pos, color)
-	image.unlock()
-	return image
