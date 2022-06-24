@@ -25,7 +25,7 @@ var y_symmetry_point
 var x_symmetry_axis := SymmetryGuide.new()
 var y_symmetry_axis := SymmetryGuide.new()
 
-var selection_image := SelectionMap.new()
+var selection_map := SelectionMap.new()
 # This is useful for when the selection is outside of the canvas boundaries,
 # on the left and/or above (negative coords)
 var selection_offset := Vector2.ZERO setget _selection_offset_changed
@@ -55,7 +55,7 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	name = _name
 	size = _size
 	tiles = Tiles.new(size)
-	selection_image.create(size.x, size.y, false, Image.FORMAT_LA8)
+	selection_map.create(size.x, size.y, false, Image.FORMAT_LA8)
 
 	Global.tabs.add_tab(name)
 	OpenSave.current_save_paths.append("")
@@ -120,9 +120,9 @@ func new_empty_frame() -> Frame:
 
 func selection_bitmap_changed() -> void:
 	var image_texture := ImageTexture.new()
-	has_selection = !selection_image.is_invisible()
+	has_selection = !selection_map.is_invisible()
 	if has_selection:
-		image_texture.create_from_image(selection_image, 0)
+		image_texture.create_from_image(selection_map, 0)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
 	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
 
@@ -260,7 +260,7 @@ func change_project() -> void:
 	# Change selection effect & bounding rectangle
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset
 	selection_bitmap_changed()
-	Global.canvas.selection.big_bounding_rectangle = selection_image.get_used_rect()
+	Global.canvas.selection.big_bounding_rectangle = selection_map.get_used_rect()
 	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
 	Global.canvas.selection.update()
 	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
@@ -386,7 +386,7 @@ func deserialize(dict: Dictionary) -> void:
 		size.x = dict.size_x
 		size.y = dict.size_y
 		tiles.tile_size = size
-		selection_image.crop(size.x, size.y)
+		selection_map.crop(size.x, size.y)
 	if dict.has("has_mask"):
 		tiles.has_mask = dict.has_mask
 	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
@@ -761,7 +761,7 @@ func duplicate_layers() -> Array:
 
 func can_pixel_get_drawn(
 	pixel: Vector2,
-	image: SelectionMap = selection_image,
+	image: SelectionMap = selection_map,
 	selection_position: Vector2 = Global.canvas.selection.big_bounding_rectangle.position
 ) -> bool:
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:

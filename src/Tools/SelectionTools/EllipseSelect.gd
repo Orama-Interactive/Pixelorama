@@ -73,7 +73,7 @@ func apply_selection(_position: Vector2) -> void:
 
 	if _rect.size != Vector2.ZERO:
 		var selection_map_copy := SelectionMap.new()
-		selection_map_copy.copy_from(project.selection_image)
+		selection_map_copy.copy_from(project.selection_map)
 		set_ellipse(selection_map_copy, _rect.position)
 
 		# Handle mirroring
@@ -105,8 +105,8 @@ func apply_selection(_position: Vector2) -> void:
 			mirror_y_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 			set_ellipse(selection_map_copy, mirror_y_rect.abs().position)
 
-		project.selection_image = selection_map_copy
-		Global.canvas.selection.big_bounding_rectangle = project.selection_image.get_used_rect()
+		project.selection_map = selection_map_copy
+		Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 		Global.canvas.selection.commit_undo("Select", undo_data)
 
 

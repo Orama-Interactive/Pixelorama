@@ -12,7 +12,7 @@ func apply_selection(position: Vector2) -> void:
 		Global.canvas.selection.clear_selection()
 
 	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(project.selection_image)
+	selection_map_copy.copy_from(project.selection_map)
 	if _intersect:
 		selection_map_copy.clear()
 
@@ -35,8 +35,8 @@ func apply_selection(position: Vector2) -> void:
 		mirror_y.y = Global.current_project.y_symmetry_point - position.y
 		_flood_fill(mirror_y, cel_image, selection_map_copy)
 	cel_image.unlock()
-	project.selection_image = selection_map_copy
-	Global.canvas.selection.big_bounding_rectangle = project.selection_image.get_used_rect()
+	project.selection_map = selection_map_copy
+	Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	Global.canvas.selection.commit_undo("Select", undo_data)
 
 

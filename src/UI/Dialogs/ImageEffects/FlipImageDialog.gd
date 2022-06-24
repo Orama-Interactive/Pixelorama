@@ -33,7 +33,7 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 		var selected := Image.new()
 		var rectangle: Rect2 = Global.canvas.selection.big_bounding_rectangle
 		if project != Global.current_project:
-			rectangle = project.selection_image.get_used_rect()
+			rectangle = project.selection_map.get_used_rect()
 		selected = cel.get_rect(rectangle)
 		selected.lock()
 		cel.lock()
@@ -61,9 +61,9 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 	var redo_data := _get_undo_data(project)
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	project.undo_redo.add_do_property(project, "selection_image", redo_data["selection_image"])
+	project.undo_redo.add_do_property(project, "selection_map", redo_data["selection_map"])
 	project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])
-	project.undo_redo.add_undo_property(project, "selection_image", undo_data["selection_image"])
+	project.undo_redo.add_undo_property(project, "selection_map", undo_data["selection_map"])
 	project.undo_redo.add_undo_property(project, "selection_offset", undo_data["outline_offset"])
 
 	for image in redo_data:
@@ -84,9 +84,9 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 
 func _get_undo_data(project: Project) -> Dictionary:
 	var bitmap_image := SelectionMap.new()
-	bitmap_image.copy_from(project.selection_image)
+	bitmap_image.copy_from(project.selection_map)
 	var data := {}
-	data["selection_image"] = bitmap_image
+	data["selection_map"] = bitmap_image
 	data["outline_offset"] = project.selection_offset
 
 	var images := _get_selected_draw_images(project)
@@ -102,7 +102,7 @@ func _flip_selection(project: Project = Global.current_project) -> void:
 		return
 
 	var bitmap_image := SelectionMap.new()
-	bitmap_image.copy_from(project.selection_image)
+	bitmap_image.copy_from(project.selection_map)
 	var selection_rect := bitmap_image.get_used_rect()
 	var smaller_bitmap_image := bitmap_image.get_rect(selection_rect)
 
@@ -117,4 +117,4 @@ func _flip_selection(project: Project = Global.current_project) -> void:
 		Rect2(Vector2.ZERO, smaller_bitmap_image.get_size()),
 		selection_rect.position
 	)
-	project.selection_image = bitmap_image
+	project.selection_map = bitmap_image

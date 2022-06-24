@@ -49,6 +49,7 @@ func _about_to_show() -> void:
 	angle_hslider.value = 0
 
 
+
 func decide_pivot() -> void:
 	var size := Global.current_project.size
 	pivot = size / 2
