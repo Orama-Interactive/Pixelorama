@@ -86,7 +86,7 @@ func draw_start(position: Vector2) -> void:
 					)
 
 				var selected_bitmap_copy: SelectionMap = project.selection_image.duplicate()
-				project.move_bitmap_values(selected_bitmap_copy)
+				selected_bitmap_copy.move_bitmap_values()
 
 				project.selection_image = selected_bitmap_copy
 				selection_node.commit_undo("Move Selection", selection_node.undo_data)
@@ -191,7 +191,7 @@ func _on_XSpinBox_value_changed(value: float) -> void:
 	selection_node.big_bounding_rectangle.position.x = value
 
 	var selection_map_copy: SelectionMap = project.selection_image.duplicate()
-	project.move_bitmap_values(selection_map_copy)
+	selection_map_copy.move_bitmap_values()
 	project.selection_image = selection_map_copy
 	project.selection_bitmap_changed()
 
@@ -206,7 +206,7 @@ func _on_YSpinBox_value_changed(value: float) -> void:
 	selection_node.big_bounding_rectangle.position.y = value
 
 	var selection_map_copy: SelectionMap = project.selection_image.duplicate()
-	project.move_bitmap_values(selection_map_copy)
+	selection_map_copy.move_bitmap_values()
 	project.selection_image = selection_map_copy
 	project.selection_bitmap_changed()
 
@@ -256,8 +256,9 @@ func resize_selection() -> void:
 		selection_node.preview_image_texture.create_from_image(preview_image, 0)
 
 	var selection_map_copy: SelectionMap = project.selection_image.duplicate()
-	selection_map_copy = project.resize_bitmap_values(
-		image, selection_node.big_bounding_rectangle.size, false, false
+	selection_map_copy = image
+	selection_map_copy.resize_bitmap_values(
+		selection_node.big_bounding_rectangle.size, false, false
 	)
 	project.selection_image = selection_map_copy
 	project.selection_bitmap_changed()

@@ -781,13 +781,6 @@ func can_pixel_get_drawn(
 		return true
 
 
-func invert_bitmap(bitmap: BitMap) -> void:
-	for x in bitmap.get_size().x:
-		for y in bitmap.get_size().y:
-			var pos := Vector2(x, y)
-			bitmap.set_bit(pos, !bitmap.get_bit(pos))
-
-
 # Unexposed BitMap class function
 # https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L605
 func resize_bitmap(bitmap: BitMap, new_size: Vector2) -> BitMap:
@@ -818,76 +811,4 @@ func bitmap_to_image(bitmap: BitMap) -> Image:
 			var color = Color(1, 1, 1, 1) if bitmap.get_bit(pos) else Color(0, 0, 0, 0)
 			image.set_pixelv(pos, color)
 	image.unlock()
-	return image
-
-
-func move_bitmap_values(image: Image, move_offset := true) -> void:
-	var selection_node = Global.canvas.selection
-	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position
-	var selection_end: Vector2 = selection_node.big_bounding_rectangle.end
-
-	var selection_rect := image.get_used_rect()
-	var smaller_image := image.get_rect(selection_rect)
-	image.fill(Color(0))
-	var dst := selection_position
-	var x_diff = selection_end.x - size.x
-	var y_diff = selection_end.y - size.y
-	var nw = max(size.x, size.x + x_diff)
-	var nh = max(size.y, size.y + y_diff)
-
-	if selection_position.x < 0:
-		nw -= selection_position.x
-		if move_offset:
-			self.selection_offset.x = selection_position.x
-		dst.x = 0
-	else:
-		if move_offset:
-			self.selection_offset.x = 0
-	if selection_position.y < 0:
-		nh -= selection_position.y
-		if move_offset:
-			self.selection_offset.y = selection_position.y
-		dst.y = 0
-	else:
-		if move_offset:
-			self.selection_offset.y = 0
-
-	if nw <= image.get_size().x:
-		nw = image.get_size().x
-	if nh <= image.get_size().y:
-		nh = image.get_size().y
-
-	image.crop(nw, nh)
-	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, Vector2(nw, nh)), dst)
-
-
-func resize_bitmap_values(image: Image, new_size: Vector2, flip_x: bool, flip_y: bool) -> Image:
-	var selection_node = Global.canvas.selection
-	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position
-	var dst := selection_position
-	var new_bitmap_size := size
-	new_bitmap_size.x = max(size.x, abs(selection_position.x) + new_size.x)
-	new_bitmap_size.y = max(size.y, abs(selection_position.y) + new_size.y)
-	var selection_rect := image.get_used_rect()
-	var smaller_image := image.get_rect(selection_rect)
-	if selection_position.x <= 0:
-		self.selection_offset.x = selection_position.x
-		dst.x = 0
-	else:
-		self.selection_offset.x = 0
-	if selection_position.y <= 0:
-		self.selection_offset.y = selection_position.y
-		dst.y = 0
-	else:
-		self.selection_offset.y = 0
-	image.fill(Color(0))
-	smaller_image.resize(new_size.x, new_size.y, Image.INTERPOLATE_NEAREST)
-	if flip_x:
-		smaller_image.flip_x()
-	if flip_y:
-		smaller_image.flip_y()
-	if new_bitmap_size != size:
-		image.crop(new_bitmap_size.x, new_bitmap_size.y)
-	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, new_bitmap_size), dst)
-
 	return image

@@ -22,6 +22,13 @@ func clear() -> void:
 	fill(Color(0))
 
 
+func invert() -> void:
+	for x in get_size().x:
+		for y in get_size().y:
+			var pos := Vector2(x, y)
+			select_pixel(pos, !is_pixel_selected(pos))
+
+
 func move_bitmap_values(move_offset := true) -> void:
 	var size := get_size()
 	var selection_node = Global.canvas.selection
