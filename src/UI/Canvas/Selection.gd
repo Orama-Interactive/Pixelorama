@@ -655,7 +655,7 @@ func cut() -> void:
 func copy() -> void:
 	var project: Project = Global.current_project
 	var cl_image := Image.new()
-	var cl_selection_bitmap = SelectionMap.new()
+	var cl_selection_map := SelectionMap.new()
 	var cl_big_bounding_rectangle := Rect2()
 	var cl_selection_offset := Vector2.ZERO
 
@@ -668,7 +668,7 @@ func copy() -> void:
 		var selection_map_copy := SelectionMap.new()
 		selection_map_copy.copy_from(project.selection_image)
 		selection_map_copy.move_bitmap_values(project, false)
-		cl_selection_bitmap = selection_map_copy
+		cl_selection_map = selection_map_copy
 	else:
 		to_copy = image.get_rect(big_bounding_rectangle)
 		to_copy.lock()
@@ -684,19 +684,19 @@ func copy() -> void:
 				if not project.selection_image.is_pixel_selected(pos + offset_pos):
 					to_copy.set_pixelv(pos, Color(0))
 		to_copy.unlock()
-		cl_selection_bitmap.copy_from(project.selection_image)
+		cl_selection_map.copy_from(project.selection_image)
 	cl_image = to_copy
 	cl_big_bounding_rectangle = big_bounding_rectangle
 	cl_selection_offset = project.selection_offset
 
-	var transfer_clipboard = {
+	var transfer_clipboard := {
 		"image": cl_image,
-		"selection_image": cl_selection_bitmap,
+		"selection_map": cl_selection_map.data,
 		"big_bounding_rectangle": cl_big_bounding_rectangle,
 		"selection_offset": cl_selection_offset,
 	}
 	# Store to ".clipboard.txt" file
-	var clipboard_file = File.new()
+	var clipboard_file := File.new()
 	clipboard_file.open("user://clipboard.txt", File.WRITE)
 	clipboard_file.store_var(transfer_clipboard, true)
 	clipboard_file.close()
@@ -712,7 +712,7 @@ func copy() -> void:
 
 func paste() -> void:
 	# Read from the ".clipboard.txt" file
-	var clipboard_file = File.new()
+	var clipboard_file := File.new()
 	if !clipboard_file.file_exists("user://clipboard.txt"):
 		return
 	clipboard_file.open("user://clipboard.txt", File.READ)
@@ -722,7 +722,7 @@ func paste() -> void:
 	if typeof(clipboard) == TYPE_DICTIONARY:
 		# A sanity check
 		if not clipboard.has_all(
-			["image", "selection_image", "big_bounding_rectangle", "selection_offset"]
+			["image", "selection_map", "big_bounding_rectangle", "selection_offset"]
 		):
 			return
 
@@ -736,14 +736,14 @@ func paste() -> void:
 		original_big_bounding_rectangle = big_bounding_rectangle
 		original_offset = project.selection_offset
 
-		var clip_bitmap := SelectionMap.new()
-		clip_bitmap.copy_from(clipboard.selection_image)
+		var clip_map := SelectionMap.new()
+		clip_map.data = clipboard.selection_map
 		var max_size := Vector2(
-			max(clip_bitmap.get_size().x, project.selection_image.get_size().x),
-			max(clip_bitmap.get_size().y, project.selection_image.get_size().y)
+			max(clip_map.get_size().x, project.selection_image.get_size().x),
+			max(clip_map.get_size().y, project.selection_image.get_size().y)
 		)
 
-		project.selection_image = clip_bitmap
+		project.selection_image = clip_map
 		project.selection_image.crop(max_size.x, max_size.y)
 		self.big_bounding_rectangle = clipboard.big_bounding_rectangle
 		project.selection_offset = clipboard.selection_offset
