@@ -354,7 +354,7 @@ func _gizmo_resize() -> void:
 
 	Global.current_project.selection_image = temp_bitmap
 	Global.current_project.selection_image.resize_bitmap_values(
-		size, temp_rect.size.x < 0, temp_rect.size.y < 0
+		Global.current_project, size, temp_rect.size.x < 0, temp_rect.size.y < 0
 	)
 	Global.current_project.selection_bitmap_changed()
 	update()
@@ -430,7 +430,7 @@ func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
 
 	if offset_position != Vector2.ZERO:
 		big_bounding_rectangle.position -= offset_position
-		selection_map_copy.move_bitmap_values()
+		selection_map_copy.move_bitmap_values(project)
 
 	if operation == SelectionOperation.ADD:
 		selection_map_copy.fill_rect(rect, Color(1, 1, 1, 1))
@@ -448,7 +448,7 @@ func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
 
 	if offset_position != Vector2.ZERO:
 		big_bounding_rectangle.position += offset_position
-		selection_map_copy.move_bitmap_values()
+		selection_map_copy.move_bitmap_values(project)
 
 	project.selection_image = selection_map_copy
 	self.big_bounding_rectangle = big_bounding_rectangle  # call getter method
@@ -469,7 +469,7 @@ func move_borders(move: Vector2) -> void:
 func move_borders_end() -> void:
 	var selection_map_copy := SelectionMap.new()
 	selection_map_copy.copy_from(Global.current_project.selection_image)
-	selection_map_copy.move_bitmap_values()
+	selection_map_copy.move_bitmap_values(Global.current_project)
 
 	Global.current_project.selection_image = selection_map_copy
 	if !is_moving_content:
@@ -533,7 +533,7 @@ func transform_content_confirm() -> void:
 				)
 	var selection_map_copy := SelectionMap.new()
 	selection_map_copy.copy_from(project.selection_image)
-	selection_map_copy.move_bitmap_values()
+	selection_map_copy.move_bitmap_values(project)
 	project.selection_image = selection_map_copy
 	commit_undo("Move Selection", undo_data)
 
@@ -667,7 +667,7 @@ func copy() -> void:
 		to_copy.copy_from(preview_image)
 		var selection_map_copy := SelectionMap.new()
 		selection_map_copy.copy_from(project.selection_image)
-		selection_map_copy.move_bitmap_values(false)
+		selection_map_copy.move_bitmap_values(project, false)
 		cl_selection_bitmap = selection_map_copy
 	else:
 		to_copy = image.get_rect(big_bounding_rectangle)
@@ -802,7 +802,7 @@ func new_brush() -> void:
 		brush.copy_from(preview_image)
 		var selection_map_copy := SelectionMap.new()
 		selection_map_copy.copy_from(project.selection_image)
-		selection_map_copy.move_bitmap_values(false)
+		selection_map_copy.move_bitmap_values(project, false)
 		var clipboard = str2var(OS.get_clipboard())
 		if typeof(clipboard) == TYPE_DICTIONARY:
 			# A sanity check

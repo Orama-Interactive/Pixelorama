@@ -3,6 +3,8 @@ extends Image
 
 
 func is_pixel_selected(pixel: Vector2) -> bool:
+	if pixel.x < 0 or pixel.y < 0 or pixel.x >= get_width() or pixel.y >= get_height():
+		return false
 	lock()
 	var selected: bool = get_pixelv(pixel).a > 0
 	unlock()
@@ -29,7 +31,7 @@ func invert() -> void:
 			select_pixel(pos, !is_pixel_selected(pos))
 
 
-func move_bitmap_values(move_offset := true) -> void:
+func move_bitmap_values(project, move_offset := true) -> void:
 	var size := get_size()
 	var selection_node = Global.canvas.selection
 	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position
@@ -47,19 +49,19 @@ func move_bitmap_values(move_offset := true) -> void:
 	if selection_position.x < 0:
 		nw -= selection_position.x
 		if move_offset:
-			self.selection_offset.x = selection_position.x
+			project.selection_offset.x = selection_position.x
 		dst.x = 0
 	else:
 		if move_offset:
-			self.selection_offset.x = 0
+			project.selection_offset.x = 0
 	if selection_position.y < 0:
 		nh -= selection_position.y
 		if move_offset:
-			self.selection_offset.y = selection_position.y
+			project.selection_offset.y = selection_position.y
 		dst.y = 0
 	else:
 		if move_offset:
-			self.selection_offset.y = 0
+			project.selection_offset.y = 0
 
 	if nw <= size.x:
 		nw = size.x
@@ -70,7 +72,7 @@ func move_bitmap_values(move_offset := true) -> void:
 	blit_rect(smaller_image, Rect2(Vector2.ZERO, Vector2(nw, nh)), dst)
 
 
-func resize_bitmap_values(new_size: Vector2, flip_x: bool, flip_y: bool) -> void:
+func resize_bitmap_values(project, new_size: Vector2, flip_x: bool, flip_y: bool) -> void:
 	var size := get_size()
 	var selection_node = Global.canvas.selection
 	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position
@@ -81,15 +83,15 @@ func resize_bitmap_values(new_size: Vector2, flip_x: bool, flip_y: bool) -> void
 	var selection_rect := get_used_rect()
 	var smaller_image := get_rect(selection_rect)
 	if selection_position.x <= 0:
-		self.selection_offset.x = selection_position.x
+		project.selection_offset.x = selection_position.x
 		dst.x = 0
 	else:
-		self.selection_offset.x = 0
+		project.selection_offset.x = 0
 	if selection_position.y <= 0:
-		self.selection_offset.y = selection_position.y
+		project.selection_offset.y = selection_position.y
 		dst.y = 0
 	else:
-		self.selection_offset.y = 0
+		project.selection_offset.y = 0
 	clear()
 	smaller_image.resize(new_size.x, new_size.y, Image.INTERPOLATE_NEAREST)
 	if flip_x:
