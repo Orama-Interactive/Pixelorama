@@ -855,7 +855,8 @@ func project_frame_added(frame: int) -> void:
 
 
 func project_frame_removed(frame: int) -> void:
-	Global.frame_ids.get_child(frame).free()
+	Global.frame_ids.get_child(frame).queue_free()
+	Global.frame_ids.remove_child(Global.frame_ids.get_child(frame))
 	for container in Global.frames_container.get_children():
 		container.get_child(frame).free()
 
@@ -915,3 +916,8 @@ func project_cel_removed(frame: int, layer: int) -> void:
 		Global.frames_container.get_child_count() - 1 - layer
 	)
 	container.get_child(frame).free()
+
+# TODO: Consider if this is better kept here, inline in LayerButton, or as a method in LayerButton
+func update_layer_buttons() -> void:
+	for c in Global.layers_container.get_children():
+		c._ready() # TODO: Should there be a specific place for this?

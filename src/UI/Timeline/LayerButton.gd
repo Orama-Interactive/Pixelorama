@@ -56,13 +56,12 @@ func _ready() -> void:
 	hierarchy_spacer.rect_min_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 
 	if Global.control.theme.get_color("font_color", "Button").v > 0.5: # Light text is dark theme
-		self_modulate.v += hierarchy_depth * 0.4
+		self_modulate.v = 1 + hierarchy_depth * 0.4
 	else: # Dark text should be light theme
-		self_modulate.v -= hierarchy_depth * 0.075
+		self_modulate.v = 1 - hierarchy_depth * 0.075
 
 	if is_instance_valid(Global.current_project.layers[layer].parent):
-		if not Global.current_project.layers[layer].parent.is_expanded_in_hierarchy():
-			visible = false
+		visible = Global.current_project.layers[layer].parent.is_expanded_in_hierarchy()
 		if not Global.current_project.layers[layer].parent.is_visible_in_hierarchy():
 			visibility_button.modulate.a = 0.33
 		if Global.current_project.layers[layer].parent.is_locked_in_hierarchy():
@@ -133,6 +132,7 @@ func _save_layer_name(new_name: String) -> void:
 
 func _on_ExpandButton_pressed():
 	Global.current_project.layers[layer].expanded = !Global.current_project.layers[layer].expanded
+	Global.animation_timeline.update_layer_buttons()
 
 
 func _on_VisibilityButton_pressed() -> void:
@@ -140,12 +140,14 @@ func _on_VisibilityButton_pressed() -> void:
 	Global.current_project.layers[layer].visible = !Global.current_project.layers[layer].visible
 	Global.canvas.update()
 	_select_current_layer()
+	Global.animation_timeline.update_layer_buttons()
 
 
 func _on_LockButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].locked = !Global.current_project.layers[layer].locked
 	_select_current_layer()
+	Global.animation_timeline.update_layer_buttons()
 
 
 func _on_LinkButton_pressed() -> void:
@@ -161,6 +163,7 @@ func _on_LinkButton_pressed() -> void:
 		container.get_child(Global.current_project.current_frame).button_setup()
 
 	Global.current_project.layers = Global.current_project.layers  # Call the setter
+	Global.animation_timeline.update_layer_buttons() # TODO: this one doesn't need to update all (and others only a specific range)
 
 
 func _select_current_layer() -> void:

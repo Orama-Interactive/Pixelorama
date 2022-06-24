@@ -82,36 +82,34 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			frame_properties.set_frame_label(frame)
 			frame_properties.set_frame_dur(Global.current_project.frames[frame].duration)
 
-
+# TODO: Remove this later... (or simplify?)
 func change_frame_order(rate: int) -> void:
 	var change = frame + rate
-	var new_frames: Array = Global.current_project.frames.duplicate()
-	var temp = new_frames[frame]
-	new_frames[frame] = new_frames[change]
-	new_frames[change] = temp
+	var project = Global.current_project
+#	var new_frames: Array = Global.current_project.frames.duplicate()
+#	var temp = new_frames[frame]
+#	new_frames[frame] = new_frames[change]
+#	new_frames[change] = temp
 
-	Global.current_project.undo_redo.create_action("Change Frame Order")
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "frames", Global.current_project.frames
-	)
+	project.undo_redo.create_action("Change Frame Order")
+#	project.undo_redo.add_do_property(project, "frames", new_frames)
+#	project.undo_redo.add_undo_property(
+#		project, "frames", project.frames
+#	)
 
-	if Global.current_project.current_frame == frame:
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_frame", change
-		)
+	project.undo_redo.add_do_method(project, "move_frame", frame, change)
+	project.undo_redo.add_undo_method(project, "move_frame", change, frame)
+
+	if project.current_frame == frame:
+		project.undo_redo.add_do_property(project, "current_frame", change)
 	else:
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_frame", Global.current_project.current_frame
-		)
+		project.undo_redo.add_do_property(project, "current_frame", project.current_frame)
 
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_frame", Global.current_project.current_frame
-	)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.commit_action()
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.commit_action()
 
 
 func get_drag_data(_position) -> Array:
