@@ -588,9 +588,7 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 	)
 	project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])
 
-	project.undo_redo.add_undo_property(
-		project, "selection_map", undo_data_tmp["selection_map"]
-	)
+	project.undo_redo.add_undo_property(project, "selection_map", undo_data_tmp["selection_map"])
 	project.undo_redo.add_undo_property(
 		self, "big_bounding_rectangle", undo_data_tmp["big_bounding_rectangle"]
 	)

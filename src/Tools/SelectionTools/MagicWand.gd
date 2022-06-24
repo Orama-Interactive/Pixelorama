@@ -8,7 +8,8 @@ var _allegro_image_segments: Array
 
 func apply_selection(position: Vector2) -> void:
 	var project: Project = Global.current_project
-	if position.x < 0 or position.y < 0 or position.x >= project.size.x or position.y >= project.size.y:
+	var size: Vector2 = project.size
+	if position.x < 0 or position.y < 0 or position.x >= size.x or position.y >= size.y:
 		return
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()
