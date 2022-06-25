@@ -72,6 +72,8 @@ func _on_AnimationTimeline_item_rect_changed() -> void:
 
 
 func _on_TimelineContainer_item_rect_changed() -> void:
+	if not timeline_container:
+		return
 	# Layer movement
 	var limit = timeline_container.rect_size.x - main_scroll.rect_size.x
 	var amount = main_scroll.scroll_horizontal
