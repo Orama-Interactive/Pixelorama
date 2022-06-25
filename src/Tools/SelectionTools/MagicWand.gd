@@ -182,7 +182,8 @@ func _select_segments(selection_map: SelectionMap) -> void:
 
 
 func _set_bit(p: Vector2, selection_map: SelectionMap) -> void:
+	var project: Project = Global.current_project
 	if _intersect:
-		selection_map.select_pixel(p, selection_map.is_pixel_selected(p))
+		selection_map.select_pixel(p, project.selection_map.is_pixel_selected(p))
 	else:
 		selection_map.select_pixel(p, !_subtract)

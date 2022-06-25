@@ -111,6 +111,7 @@ func apply_selection(_position: Vector2) -> void:
 
 
 func set_ellipse(selection_map: SelectionMap, position: Vector2) -> void:
+	var project: Project = Global.current_project
 	var bitmap_size: Vector2 = selection_map.get_size()
 	if _intersect:
 		selection_map.clear()
@@ -120,7 +121,7 @@ func set_ellipse(selection_map: SelectionMap, position: Vector2) -> void:
 		if pos.x < 0 or pos.y < 0 or pos.x >= bitmap_size.x or pos.y >= bitmap_size.y:
 			continue
 		if _intersect:
-			if selection_map.is_pixel_selected(pos):
+			if project.selection_map.is_pixel_selected(pos):
 				selection_map.select_pixel(pos, true)
 		else:
 			selection_map.select_pixel(pos, !_subtract)

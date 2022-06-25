@@ -25,7 +25,8 @@ func apply_selection(position: Vector2) -> void:
 			var pos := Vector2(x, y)
 			if color.is_equal_approx(cel_image.get_pixelv(pos)):
 				if _intersect:
-					selection_map_copy.select_pixel(pos, selection_map_copy.is_pixel_selected(pos))
+					var selected: bool = project.selection_map.is_pixel_selected(pos)
+					selection_map_copy.select_pixel(pos, selected)
 				else:
 					selection_map_copy.select_pixel(pos, !_subtract)
 
