@@ -30,6 +30,7 @@ func invert() -> void:
 	var params := {"red": true, "green": true, "blue": true, "alpha": true}
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(self, invert_shader, params, get_size())
+	self.convert(Image.FORMAT_LA8)
 
 
 func move_bitmap_values(project, move_offset := true) -> void:
