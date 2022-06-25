@@ -1,7 +1,7 @@
 class_name SelectionMap
 extends Image
 
-var shader: Shader = preload("res://src/Shaders/Invert.shader")
+var invert_shader: Shader = preload("res://src/Shaders/Invert.shader")
 
 func is_pixel_selected(pixel: Vector2) -> bool:
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= get_width() or pixel.y >= get_height():
@@ -33,7 +33,7 @@ func invert() -> void:
 		"alpha": true
 	}
 	var gen := ShaderImageEffect.new()
-	gen.generate_image(self, shader, params, get_size())
+	gen.generate_image(self, invert_shader, params, get_size())
 
 
 func move_bitmap_values(project, move_offset := true) -> void:
