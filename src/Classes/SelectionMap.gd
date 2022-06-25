@@ -3,6 +3,7 @@ extends Image
 
 var invert_shader: Shader = preload("res://src/Shaders/Invert.shader")
 
+
 func is_pixel_selected(pixel: Vector2) -> bool:
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= get_width() or pixel.y >= get_height():
 		return false
@@ -26,12 +27,7 @@ func clear() -> void:
 
 
 func invert() -> void:
-	var params := {
-		"red": true,
-		"green": true,
-		"blue": true,
-		"alpha": true
-	}
+	var params := {"red": true, "green": true, "blue": true, "alpha": true}
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(self, invert_shader, params, get_size())
 
