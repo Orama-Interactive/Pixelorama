@@ -64,6 +64,8 @@ __meta__ = {
 [node name="CreateNewImage" parent="Dialogs" instance=ExtResource( 28 )]
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource( 12 )]
+window_title = "Open File(s)"
+mode = 1
 
 [node name="SaveSprite" parent="Dialogs" instance=ExtResource( 11 )]
 margin_left = 108.0
@@ -139,7 +141,7 @@ visible = false
 
 [connection signal="popup_hide" from="Dialogs/SplashDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/CreateNewImage" to="." method="_can_draw_true"]
-[connection signal="file_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_file_selected"]
+[connection signal="files_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_files_selected"]
 [connection signal="popup_hide" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_popup_hide"]
 [connection signal="file_selected" from="Dialogs/SaveSprite" to="." method="_on_SaveSprite_file_selected"]
 [connection signal="popup_hide" from="Dialogs/SaveSprite" to="." method="_can_draw_true"]

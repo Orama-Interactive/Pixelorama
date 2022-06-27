@@ -204,8 +204,8 @@ func _notification(what: int) -> void:
 				Global.has_focus = true
 
 
-func _on_files_dropped(_files: PoolStringArray, _screen: int) -> void:
-	OpenSave.handle_loading_files(_files)
+func _on_files_dropped(files: PoolStringArray, _screen: int) -> void:
+	OpenSave.handle_loading_files(files)
 	var splash_dialog = Global.control.get_node("Dialogs/SplashDialog")
 	if splash_dialog.visible:
 		splash_dialog.hide()
@@ -251,10 +251,10 @@ func load_recent_project_file(path: String) -> void:
 		Global.dialog_open(true)
 
 
-func _on_OpenSprite_file_selected(path: String) -> void:
-	OpenSave.handle_loading_files([path])
-	Global.save_sprites_dialog.current_dir = path.get_base_dir()
-	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
+func _on_OpenSprite_files_selected(paths: PoolStringArray) -> void:
+	OpenSave.handle_loading_files(paths)
+	Global.save_sprites_dialog.current_dir = paths[0].get_base_dir()
+	Global.config_cache.set_value("data", "current_dir", paths[0].get_base_dir())
 
 
 func _on_SaveSprite_file_selected(path: String) -> void:
