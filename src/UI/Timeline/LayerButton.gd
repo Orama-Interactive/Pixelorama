@@ -38,7 +38,7 @@ func _ready() -> void:
 	_update_buttons()
 
 
-func _update_buttons():
+func _update_buttons() -> void:
 	if hide_expand_button:
 		expand_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		expand_button.get_child(0).visible = false  # Hide the TextureRect
@@ -75,8 +75,6 @@ func _update_buttons():
 
 func _update_buttons_all_layers() -> void:
 	# TODO: would it be better to have specified range? (if so rename all_layers to for_layers)
-	# TODO: IDK if this the right place to put it, but sometimes when moving a layer into a group
-	#		their heirachy visualization isn't at the right level (perhaps not removed and readded?)
 	for layer_button in Global.layers_container.get_children():
 		layer_button._update_buttons()
 		var expanded = Global.current_project.layers[layer_button.layer].is_expanded_in_hierarchy()
@@ -84,7 +82,7 @@ func _update_buttons_all_layers() -> void:
 		Global.frames_container.get_child(layer_button.get_index()).visible = expanded
 
 
-func _draw():
+func _draw() -> void:
 	if hierarchy_spacer.rect_size.x > 0.1:
 		var color := Color(1, 1, 1, 0.33)
 		color.v = round(Global.control.theme.get_color("font_color", "Button").v)

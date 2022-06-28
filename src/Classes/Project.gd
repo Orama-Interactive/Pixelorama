@@ -574,20 +574,20 @@ func _frame_changed(value: int) -> void:
 		selected_cels.append([current_frame, current_layer])
 	# Select the new frame
 	for cel in selected_cels:
-		var current_frame_tmp: int = cel[0]
-		var current_layer_tmp: int = cel[1]
-		if current_frame_tmp < Global.frame_ids.get_child_count():
-			var frame_button: BaseButton = Global.frame_ids.get_child(current_frame_tmp)
+		var frame: int = cel[0]
+		var layer: int = cel[1]
+		if frame < Global.frame_ids.get_child_count():
+			var frame_button: BaseButton = Global.frame_ids.get_child(frame)
 			frame_button.pressed = true
 
 		var container_child_count: int = Global.frames_container.get_child_count()
-		if current_layer_tmp < container_child_count:
+		if layer < container_child_count:
 			var container = Global.frames_container.get_child(
-				container_child_count - 1 - current_layer_tmp
+				container_child_count - 1 - layer
 			)
-			if current_frame_tmp < container.get_child_count():
-				var fbutton = container.get_child(current_frame_tmp)
-				fbutton.pressed = true
+			if frame < container.get_child_count():
+				var cel_button = container.get_child(frame)
+				cel_button.pressed = true
 
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
 	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
@@ -619,10 +619,10 @@ func _layer_changed(value: int) -> void:
 		layer_button.pressed = false
 
 	for cel in selected_cels:
-		var current_layer_tmp: int = cel[1]
-		if current_layer_tmp < Global.layers_container.get_child_count():
+		var layer: int = cel[1]
+		if layer < Global.layers_container.get_child_count():
 			var layer_button = Global.layers_container.get_child(
-				Global.layers_container.get_child_count() - 1 - current_layer_tmp
+				Global.layers_container.get_child_count() - 1 - layer
 			)
 			layer_button.pressed = true
 
@@ -1121,22 +1121,22 @@ func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:
 
 func _update_animation_timeline_selection() -> void:
 	for cel in selected_cels:
-		var current_frame_tmp: int = cel[0]
-		var current_layer_tmp: int = cel[1]
-		if current_frame_tmp < Global.frame_ids.get_child_count():
-			var frame_button: BaseButton = Global.frame_ids.get_child(current_frame_tmp)
+		var frame: int = cel[0]
+		var layer: int = cel[1]
+		if frame < Global.frame_ids.get_child_count():
+			var frame_button: BaseButton = Global.frame_ids.get_child(frame)
 			frame_button.pressed = true
 
 		var container_child_count: int = Global.frames_container.get_child_count()
-		if current_layer_tmp < container_child_count:
+		if layer < container_child_count:
 			var container = Global.frames_container.get_child(
-				container_child_count - 1 - current_layer_tmp
+				container_child_count - 1 - layer
 			)
-			if current_frame_tmp < container.get_child_count():
-				var cel_button = container.get_child(current_frame_tmp)
+			if frame < container.get_child_count():
+				var cel_button = container.get_child(frame)
 				cel_button.pressed = true
 
 			var layer_button = Global.layers_container.get_child(
-				container_child_count - 1 - current_layer_tmp
+				container_child_count - 1 - layer
 			)
 			layer_button.pressed = true

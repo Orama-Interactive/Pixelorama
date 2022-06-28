@@ -831,12 +831,6 @@ func project_changed() -> void:
 		Global.frame_ids.add_child(button)
 		Global.frame_ids.move_child(button, f)
 
-	# TODO: May not be needed, depending on other changes to selection
-#	var current_layer_button = Global.layers_container.get_child(
-#		Global.layers_container.get_child_count() - 1 - project.current_layer
-#	)
-#	current_layer_button.pressed = true
-
 	# TODO: Remove an inline what's needed here if this isn't used anywhere else:
 	Global.current_project._update_animation_timeline_selection()
 
