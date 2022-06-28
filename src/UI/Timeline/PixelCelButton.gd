@@ -233,48 +233,7 @@ func drop_data(_pos, data) -> void:
 	var drop_layer = data[2]
 	var project = Global.current_project
 
-#	var this_frame_new_cels = project.frames[frame].cels.duplicate()
-#	var drop_frame_new_cels
-#	var temp = this_frame_new_cels[layer]
-#	this_frame_new_cels[layer] = project.frames[drop_frame].cels[drop_layer]
-#	if frame == drop_frame:
-#		this_frame_new_cels[drop_layer] = temp
-#	else:
-#		drop_frame_new_cels = project.frames[drop_frame].cels.duplicate()
-#		drop_frame_new_cels[drop_layer] = temp
-
 	project.undo_redo.create_action("Move Cels")
-#	project.undo_redo.add_do_property(
-#		project.frames[frame], "cels", this_frame_new_cels
-#	)
-#
-#	project.undo_redo.add_do_property(project, "current_layer", layer)
-#	project.undo_redo.add_undo_property(
-#		project, "current_layer", project.current_layer
-#	)
-#
-#	if frame != drop_frame:  # If the cel moved to a different frame
-#		project.undo_redo.add_do_property(
-#			project.frames[drop_frame], "cels", drop_frame_new_cels
-#		)
-#
-#		project.undo_redo.add_do_property(
-#			project, "current_frame", frame
-#		)
-#		project.undo_redo.add_undo_property(
-#			project, "current_frame", project.current_frame
-#		)
-#
-#		project.undo_redo.add_undo_property(
-#			project.frames[drop_frame],
-#			"cels",
-#			project.frames[drop_frame].cels
-#		)
-#
-#	project.undo_redo.add_undo_property(
-#		project.frames[frame], "cels", project.frames[frame].cels
-#	)
-
 	if Input.is_action_pressed("ctrl") or layer != drop_layer: # Swap cels
 		project.undo_redo.add_do_method(project, "swap_cel", frame, layer, drop_frame, drop_layer)
 		project.undo_redo.add_undo_method(project, "swap_cel", frame, layer, drop_frame, drop_layer)
