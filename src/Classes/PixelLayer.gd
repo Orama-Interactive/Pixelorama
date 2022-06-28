@@ -4,7 +4,7 @@ extends BaseLayer
 
 var new_cels_linked := false
 var linked_cels := []  # Array of Frames
-
+# TODO: Should _init include project as a parameter? (for all Layer types)
 func _init(_name := "") -> void:
 	name = _name
 

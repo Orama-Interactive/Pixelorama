@@ -7,6 +7,8 @@ onready var frame_properties: ConfirmationDialog = Global.control.find_node("Fra
 
 
 func _ready() -> void:
+	rect_min_size.x = Global.animation_timeline.cel_size
+	text = str(frame + 1)
 	connect("pressed", self, "_button_pressed")
 	connect("mouse_entered", self, "_update_tooltip")
 

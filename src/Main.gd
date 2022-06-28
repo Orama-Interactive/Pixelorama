@@ -22,11 +22,13 @@ func _ready() -> void:
 
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
-	Global.current_project.add_layer(PixelLayer.new(), 0, [])
-	var frame: Frame = Global.current_project.new_empty_frame()
-	Global.current_project.add_frame(frame, 0)
+	Global.current_project.layers.append(PixelLayer.new())
+	Global.current_project.layers[0].project = Global.current_project
+	Global.current_project.frames.append(Global.current_project.new_empty_frame())
+	Global.animation_timeline.project_changed()
+
 	# TODO: I Think this line should be safe to remove: (calling setter)
-	Global.current_project.layers = Global.current_project.layers
+#	Global.current_project.layers = Global.current_project.layers
 
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
 	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())

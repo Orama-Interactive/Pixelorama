@@ -13,6 +13,7 @@ var past_above_canvas := true
 var future_above_canvas := true
 
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
+# TODO: May remove some of these:
 var pixel_layer_button_node = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
 var group_layer_button_node = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
 var pixel_cel_button_node = preload("res://src/UI/Timeline/PixelCelButton.tscn")
@@ -827,24 +828,23 @@ func project_changed() -> void:
 	for f in range(project.frames.size()):
 		var button: Button = frame_button_node.instance()
 		button.frame = f
-		button.rect_min_size.x = Global.animation_timeline.cel_size
-		button.text = str(f + 1)
 		Global.frame_ids.add_child(button)
 		Global.frame_ids.move_child(button, f)
 
 	# TODO: May not be needed, depending on other changes to selection
-	var current_layer_button = Global.layers_container.get_child(
-		Global.layers_container.get_child_count() - 1 - project.current_layer
-	)
-	current_layer_button.pressed = true
+#	var current_layer_button = Global.layers_container.get_child(
+#		Global.layers_container.get_child_count() - 1 - project.current_layer
+#	)
+#	current_layer_button.pressed = true
+
+	# TODO: Remove an inline what's needed here if this isn't used anywhere else:
+	Global.current_project._update_animation_timeline_selection()
 
 
 func project_frame_added(frame: int) -> void:
 	var project: Project = Global.current_project # TODO: maybe pass in instead?
 	var button: Button = frame_button_node.instance()
 	button.frame = frame
-	button.rect_min_size.x = Global.animation_timeline.cel_size
-	button.text = str(frame + 1)
 	Global.frame_ids.add_child(button)
 	Global.frame_ids.move_child(button, frame)
 
@@ -856,6 +856,7 @@ func project_frame_added(frame: int) -> void:
 		container.add_child(cel_button)
 		container.move_child(cel_button, frame)
 		layer += 1
+	# TODO: Adding a frame with multiple layers results in the cels being put backwards!
 
 
 func project_frame_removed(frame: int) -> void:

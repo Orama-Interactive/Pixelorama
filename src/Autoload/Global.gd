@@ -263,6 +263,7 @@ func undo_or_redo(
 			animation_timer.stop()
 
 	elif "Move Cels" == action_name:
+		# TODO: is this still required?
 		project.frames = project.frames  # to call frames_changed
 
 	canvas.update()
