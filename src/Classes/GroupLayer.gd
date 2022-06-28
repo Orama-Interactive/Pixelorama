@@ -7,13 +7,6 @@ var expanded := true
 func _init(_name := "") -> void:
 	name = _name
 
-
-func is_expanded_in_hierarchy() -> bool:
-	if is_instance_valid(parent) and expanded:
-		return parent.is_expanded_in_hierarchy()
-	return expanded
-
-
 # Overridden Functions:
 
 func serialize() -> Dictionary:

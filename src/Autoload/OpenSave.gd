@@ -122,14 +122,16 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 				Brushes.add_project_brush(image)
 
 	file.close()
-	if !empty_project:
-		Global.projects.append(new_project)
-		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	else:
+	if empty_project:
 		if dict.error == OK and dict.result.has("fps"):
 			Global.animation_timeline.fps_spinbox.value = dict.result.fps
+		Global.animation_timeline.project_changed()
+		# TODO: Do these need to be here?
 		new_project.frames = new_project.frames  # Just to call frames_changed
 		new_project.layers = new_project.layers  # Just to call layers_changed
+	else:
+		Global.projects.append(new_project)
+		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
 
 	if not untitled_backup:

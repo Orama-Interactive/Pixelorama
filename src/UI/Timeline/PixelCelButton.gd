@@ -109,7 +109,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			var new_layers: Array = Global.current_project.duplicate_layers()
 			var new_cels: Array = f.cels.duplicate()
 			for i in new_cels.size():
-				# TODO: This doesn't work
+				# TODO: This doesn't work (currently replaces ALL cels on the frame)
 				new_cels[i] = PixelCel.new(
 					new_cels[i].image, new_cels[i].opacity, new_cels[i].image_texture
 				)

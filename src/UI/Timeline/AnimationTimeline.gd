@@ -180,6 +180,9 @@ func add_frame() -> void:
 	project.undo_redo.add_do_property(project, "current_frame", project.current_frame + 1)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.commit_action()
+	# TODO: Remove after testing:
+	print(project.selected_cels)
+	print(project.current_frame)
 
 
 func _on_DeleteFrame_pressed(frame := -1) -> void:
@@ -602,6 +605,7 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 
 func add_layer(is_new := true) -> void:
 	# TODO: Duplicate functionality should probably be split out to allow for different layer types
+	# TODO: Bug where adding a layer isn't selecting the new layer?
 	Global.canvas.selection.transform_content_confirm()
 	var l := PixelLayer.new()
 	var project: Project = Global.current_project
@@ -632,10 +636,10 @@ func add_layer(is_new := true) -> void:
 
 		cels.append(PixelCel.new(new_layer, 1))
 
-	project.undo_redo.add_do_method(project, "add_layer", l, project.layers.size(), cels)
-	project.undo_redo.add_undo_method(project, "remove_layer", project.layers.size())
 	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_do_method(project, "add_layer", l, project.layers.size(), cels)
+	project.undo_redo.add_undo_method(project, "remove_layer", project.layers.size())
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
@@ -653,10 +657,10 @@ func add_group_layer(is_new := true) -> void:
 	for f in project.frames:
 		cels.append(GroupCel.new())
 
-	project.undo_redo.add_do_method(project, "add_layer", l, project.layers.size(), cels)
-	project.undo_redo.add_undo_method(project, "remove_layer", project.layers.size())
 	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_do_method(project, "add_layer", l, project.layers.size(), cels)
+	project.undo_redo.add_undo_method(project, "remove_layer", project.layers.size())
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
@@ -674,12 +678,12 @@ func _on_RemoveLayer_pressed() -> void:
 	for f in project.frames:
 		cels.append(f.cels[project.current_layer])
 
+	project.undo_redo.add_do_property(project, "current_layer", max(project.current_layer - 1, 0))
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_do_method(project, "remove_layer", project.current_layer)
 	project.undo_redo.add_undo_method(
 		project, "add_layer", project.layers[project.current_layer], project.current_layer, cels
 	)
-	project.undo_redo.add_do_property(project, "current_layer", max(project.current_layer - 1, 0))
-	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -890,6 +894,9 @@ func project_layer_added(layer: int) -> void:
 		cel_button.layer = layer# - 1 # TODO: See if needed
 		layer_cel_container.add_child(cel_button)
 
+	layer_button.visible = Global.current_project.layers[layer].is_expanded_in_hierarchy()
+	layer_cel_container.visible = layer_button.visible
+
 # TODO: are names like "project_layer_removed" or "remove_layer_ui" better?
 #	maybe "layer_removed_in_project"? or something else?
 func project_layer_removed(layer: int) -> void:
@@ -916,8 +923,3 @@ func project_cel_removed(frame: int, layer: int) -> void:
 		Global.frames_container.get_child_count() - 1 - layer
 	)
 	container.get_child(frame).free()
-
-# TODO: Consider if this is better kept here, inline in LayerButton, or as a method in LayerButton
-func update_layer_buttons() -> void:
-	for c in Global.layers_container.get_children():
-		c._ready() # TODO: Should there be a specific place for this?

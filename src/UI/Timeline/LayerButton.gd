@@ -26,6 +26,19 @@ func _ready() -> void:
 		var texture = child.get_child(0)
 		texture.modulate = Global.modulate_icon_color
 
+	# Visualize how deep into the hierarchy the layer is
+	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
+	hierarchy_spacer.rect_min_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
+
+	if Global.control.theme.get_color("font_color", "Button").v > 0.5: # Light text is dark theme
+		self_modulate.v = 1 + hierarchy_depth * 0.4
+	else: # Dark text should be light theme
+		self_modulate.v = 1 - hierarchy_depth * 0.075
+
+	_update_buttons()
+
+
+func _update_buttons():
 	if hide_expand_button:
 		expand_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		expand_button.get_child(0).visible = false  # Hide the TextureRect
@@ -51,21 +64,24 @@ func _ready() -> void:
 		else:
 			Global.change_button_texturerect(linked_button.get_child(0), "unlinked_layer.png")
 
-	# Visualize how deep into the hierarchy the layer is
-	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
-	hierarchy_spacer.rect_min_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
-
-	if Global.control.theme.get_color("font_color", "Button").v > 0.5: # Light text is dark theme
-		self_modulate.v = 1 + hierarchy_depth * 0.4
-	else: # Dark text should be light theme
-		self_modulate.v = 1 - hierarchy_depth * 0.075
-
+	visibility_button.modulate.a = 1
+	lock_button.modulate.a = 1
 	if is_instance_valid(Global.current_project.layers[layer].parent):
-		visible = Global.current_project.layers[layer].parent.is_expanded_in_hierarchy()
 		if not Global.current_project.layers[layer].parent.is_visible_in_hierarchy():
 			visibility_button.modulate.a = 0.33
 		if Global.current_project.layers[layer].parent.is_locked_in_hierarchy():
 			lock_button.modulate.a = 0.33
+
+
+func _update_buttons_all_layers() -> void:
+	# TODO: would it be better to have specified range? (if so rename all_layers to for_layers)
+	# TODO: IDK if this the right place to put it, but sometimes when moving a layer into a group
+	#		their heirachy visualization isn't at the right level (perhaps not removed and readded?)
+	for layer_button in Global.layers_container.get_children():
+		layer_button._update_buttons()
+		var expanded = Global.current_project.layers[layer_button.layer].is_expanded_in_hierarchy()
+		layer_button.visible = expanded
+		Global.frames_container.get_child(layer_button.get_index()).visible = expanded
 
 
 func _draw():
@@ -131,8 +147,10 @@ func _save_layer_name(new_name: String) -> void:
 
 
 func _on_ExpandButton_pressed():
+	# TODO: What should happen when the current_layer or selected_cels are children of a layer you collapse?
+	#		Should the current_layer/selection move to ones aren't collapsed? Maybe add to github list of possible later changes
 	Global.current_project.layers[layer].expanded = !Global.current_project.layers[layer].expanded
-	Global.animation_timeline.update_layer_buttons()
+	_update_buttons_all_layers()
 
 
 func _on_VisibilityButton_pressed() -> void:
@@ -140,14 +158,14 @@ func _on_VisibilityButton_pressed() -> void:
 	Global.current_project.layers[layer].visible = !Global.current_project.layers[layer].visible
 	Global.canvas.update()
 	_select_current_layer()
-	Global.animation_timeline.update_layer_buttons()
+	_update_buttons_all_layers()
 
 
 func _on_LockButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].locked = !Global.current_project.layers[layer].locked
 	_select_current_layer()
-	Global.animation_timeline.update_layer_buttons()
+	_update_buttons_all_layers()
 
 
 func _on_LinkButton_pressed() -> void:
@@ -163,7 +181,7 @@ func _on_LinkButton_pressed() -> void:
 		container.get_child(Global.current_project.current_frame).button_setup()
 
 	Global.current_project.layers = Global.current_project.layers  # Call the setter
-	Global.animation_timeline.update_layer_buttons() # TODO: this one doesn't need to update all (and others only a specific range)
+	_update_buttons()
 
 
 func _select_current_layer() -> void:
@@ -256,6 +274,7 @@ func drop_data(_pos, data) -> void:
 	# TODO: Having "SourceLayers/OldLayers (that you don't change) and new_layers would make this less confusing
 	else:
 		# from_indices should be in order of the layer indices, starting from the lowest
+		# TODO: can this code be made easier to read?
 		var from_indices := []
 		for c in new_layers[drop_layer].get_children_recursive():
 			from_indices.append(c.index)
