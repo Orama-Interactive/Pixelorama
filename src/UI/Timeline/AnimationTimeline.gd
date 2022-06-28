@@ -181,9 +181,6 @@ func add_frame() -> void:
 	project.undo_redo.add_do_property(project, "current_frame", project.current_frame + 1)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.commit_action()
-	# TODO: Remove after testing:
-	print(project.selected_cels)
-	print(project.current_frame)
 
 
 func _on_DeleteFrame_pressed(frame := -1) -> void:
@@ -689,7 +686,7 @@ func _on_RemoveLayer_pressed() -> void:
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
-# TODO: Refactor this (probably completely remove)
+# TODO: Refactor this (maybe completely remove)
 func change_layer_order(rate: int) -> void:
 	var change = Global.current_project.current_layer + rate
 
@@ -721,7 +718,7 @@ func change_layer_order(rate: int) -> void:
 	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	Global.current_project.undo_redo.commit_action()
 
-
+# TODO: Does this need to be part of the refactor?
 func _on_MergeDownLayer_pressed() -> void:
 	var new_layers: Array = Global.current_project.duplicate_layers()
 

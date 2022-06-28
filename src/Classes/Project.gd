@@ -141,65 +141,6 @@ func _selection_offset_changed(value: Vector2) -> void:
 
 
 func change_project() -> void:
-	# Remove old nodes
-#	for container in Global.layers_container.get_children():
-#		container.queue_free()
-#
-#	_remove_cel_buttons()
-#
-#	for frame_id in Global.frame_ids.get_children():
-#		Global.frame_ids.remove_child(frame_id)
-#		frame_id.queue_free()
-#
-#	# Create new ones
-#	for i in range(layers.size() - 1, -1, -1):
-#		# Create layer buttons
-#		var layer_container: LayerButton
-#		if layers[i] is PixelLayer:
-#			layer_container = pixel_layer_button_node.instance()
-#		elif layers[i] is GroupLayer:
-#			layer_container = group_layer_button_node.instance()
-#		layer_container.layer = i
-#		if layers[i].name == "":
-#			layers[i].name = layers[i].get_default_name(i)
-#
-#		Global.layers_container.add_child(layer_container)
-#		layer_container.label.text = layers[i].name
-#		layer_container.line_edit.text = layers[i].name
-#
-#		var layer_cel_container := HBoxContainer.new()
-#		Global.frames_container.add_child(layer_cel_container)
-#		for j in range(frames.size()):  # Create Cel buttons
-#			var cel_button = pixel_cel_button_node.instance()
-#			cel_button.frame = j
-#			cel_button.layer = i
-#			# TODO: Mak sure this works properly with groups
-#			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-#			if j == current_frame and i == current_layer:
-#				cel_button.pressed = true
-#
-#			layer_cel_container.add_child(cel_button)
-#
-#		if (is_instance_valid(layers[i].parent)
-#				and not layers[i].parent.is_expanded_in_hierarchy()):
-#			layer_cel_container.visible = false
-#
-#	for j in range(frames.size()):  # Create frame ID labels
-#		var button: Button = frame_button_node.instance()
-#		button.frame = j
-#		button.rect_min_size.x = Global.animation_timeline.cel_size
-#		button.text = str(j + 1)
-#		if j == current_frame:
-#			button.add_color_override(
-#				"font_color", Global.control.theme.get_color("Selected Color", "Label")
-#			)
-#		Global.frame_ids.add_child(button)
-#
-#	var layer_button = Global.layers_container.get_child(
-#		Global.layers_container.get_child_count() - 1 - current_layer
-#	)
-#	layer_button.pressed = true
-
 	Global.animation_timeline.project_changed()
 
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
@@ -463,36 +404,6 @@ func _frames_changed(value: Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	frames = value
 #	selected_cels.clear() # TODO: This is commented out to prevent selected_cels being blank at begginning (Will it still be needed? Will removing the setter calls in the new functions fix it?)
-#	_remove_cel_buttons()
-#
-#	for frame_id in Global.frame_ids.get_children():
-#		Global.frame_ids.remove_child(frame_id)
-#		frame_id.queue_free()
-#
-#	for i in range(layers.size() - 1, -1, -1):
-#		var layer_cel_container := HBoxContainer.new()
-#		layer_cel_container.name = "FRAMESS " + str(i)
-#		Global.frames_container.add_child(layer_cel_container)
-#		for j in range(frames.size()):
-#			if layers[i] is PixelLayer:
-#				var cel_button = pixel_cel_button_node.instance()
-#				cel_button.frame = j
-#				cel_button.layer = i
-#				cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-#				layer_cel_container.add_child(cel_button)
-#			elif layers[i] is GroupLayer:
-#				# TODO: Make GroupLayers work here
-#				pass
-#		if (is_instance_valid(layers[i].parent)
-#				and not layers[i].parent.is_expanded_in_hierarchy()):
-#			layer_cel_container.visible = false
-#
-#	for j in range(frames.size()):
-#		var button: Button = frame_button_node.instance()
-#		button.frame = j
-#		button.rect_min_size.x = Global.animation_timeline.cel_size
-#		button.text = str(j + 1)
-#		Global.frame_ids.add_child(button)
 
 	_set_timeline_first_and_last_frames()
 
@@ -505,45 +416,6 @@ func _layers_changed(value: Array) -> void:
 
 #	selected_cels.clear() # TODO: This is commented out to prevent selected_cels being blank at begginning (Will it still be needed? Will removing the setter calls in the new functions fix it?)
 
-#	for container in Global.layers_container.get_children():
-#		container.queue_free()
-#
-#	_remove_cel_buttons()
-#
-#	for i in range(layers.size() - 1, -1, -1):
-#		var layer_button: LayerButton
-#		if layers[i] is PixelLayer:
-#			layer_button = pixel_layer_button_node.instance()
-#		elif layers[i] is GroupLayer:
-#			layer_button = group_layer_button_node.instance()
-#		layer_button.layer = i
-#		layers[i].index = i
-#		layers[i].project = self
-#		if layers[i].name == "":
-#			layers[i].name = layers[i].get_default_name(i)
-#
-#		Global.layers_container.add_child(layer_button)
-#		layer_button.label.text = layers[i].name
-#		layer_button.line_edit.text = layers[i].name
-#
-#		var layer_cel_container := HBoxContainer.new()
-#		layer_cel_container.name = "LAYERSSS " + str(i)
-#		Global.frames_container.add_child(layer_cel_container)
-#		# TODO: FIGURE OUT FRAMES WITH GROUP LAYERS!
-#		for j in range(frames.size()):
-#			var cel_button # TODO: Figure out static typing (will there be a BaseCelButton?)
-#			if layers[i] is PixelLayer:
-#				cel_button = pixel_cel_button_node.instance()
-#				cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-#			elif layers[i] is GroupLayer:
-#				cel_button = group_cel_button_node.instance()
-#			cel_button.frame = j
-#			cel_button.layer = i
-#			layer_cel_container.add_child(cel_button)
-#		if (is_instance_valid(layers[i].parent)
-#				and not layers[i].parent.is_expanded_in_hierarchy()):
-#			layer_cel_container.visible = false
-#
 #	var layer_button = Global.layers_container.get_child(
 #		Global.layers_container.get_child_count() - 1 - current_layer
 #	)

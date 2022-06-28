@@ -88,17 +88,8 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 func change_frame_order(rate: int) -> void:
 	var change = frame + rate
 	var project = Global.current_project
-#	var new_frames: Array = Global.current_project.frames.duplicate()
-#	var temp = new_frames[frame]
-#	new_frames[frame] = new_frames[change]
-#	new_frames[change] = temp
 
 	project.undo_redo.create_action("Change Frame Order")
-#	project.undo_redo.add_do_property(project, "frames", new_frames)
-#	project.undo_redo.add_undo_property(
-#		project, "frames", project.frames
-#	)
-
 	project.undo_redo.add_do_method(project, "move_frame", frame, change)
 	project.undo_redo.add_undo_method(project, "move_frame", change, frame)
 
@@ -108,7 +99,6 @@ func change_frame_order(rate: int) -> void:
 		project.undo_redo.add_do_property(project, "current_frame", project.current_frame)
 
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
-
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
@@ -149,37 +139,12 @@ func can_drop_data(_pos, data) -> bool:
 func drop_data(_pos, data) -> void:
 	var drop_frame = data[1]
 	var project = Global.current_project
-
-#	var drop_frames: Array = Global.current_project.frames.duplicate()
-#	var temp = drop_frames[frame]
-#	drop_frames[frame] = drop_frames[drop_frame]
-#	drop_frames[drop_frame] = temp
-
 	project.undo_redo.create_action("Change Frame Order")
-#	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", drop_frames)
-#	Global.current_project.undo_redo.add_undo_property(
-#		Global.current_project, "frames", Global.current_project.frames
-#	)
-#
-#	if Global.current_project.current_frame == drop_frame:
-#		Global.current_project.undo_redo.add_do_property(
-#			Global.current_project, "current_frame", frame
-#		)
-#	else:
-#		Global.current_project.undo_redo.add_do_property(
-#			Global.current_project, "current_frame", Global.current_project.current_frame
-#		)
-#
-#	Global.current_project.undo_redo.add_undo_property(
-#		Global.current_project, "current_frame", Global.current_project.current_frame
-#	)
-
 	if Input.is_action_pressed("ctrl"): # Swap frames
 		project.undo_redo.add_do_method(project, "swap_frame", frame, drop_frame)
 		project.undo_redo.add_undo_method(project, "swap_frame", frame, drop_frame)
 	else: # Move frames
 		var to_frame: int
-		# TODO: Test that this is correct: (after cel button ui changes)
 		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()): # Left
 			to_frame = frame
 		else: # Right
