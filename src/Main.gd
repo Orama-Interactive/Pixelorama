@@ -364,7 +364,10 @@ func _use_osx_shortcuts() -> void:
 	var inputmap := InputMap
 
 	for action in inputmap.get_actions():
-		var event: InputEvent = inputmap.get_action_list(action)[0]
+		var action_list: Array = inputmap.get_action_list(action)
+		if action_list.size() == 0:
+			continue
+		var event: InputEvent = action_list[0]
 
 		if event.is_action("show_pixel_grid"):
 			event.shift = true
