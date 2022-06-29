@@ -321,9 +321,11 @@ func drop_data(_pos, data) -> void:
 		project.undo_redo.add_undo_method(
 			project, "move_layers", to_indices, from_indices, from_parents
 		)
-	if project.current_layer == layer:
-		project.undo_redo.add_do_property(project, "current_layer", drop_layer)
-		project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	if project.current_layer == drop_layer: # TODO: This doesn't work...
+		project.undo_redo.add_do_property(project, "current_layer", layer)
+	else:
+		project.undo_redo.add_do_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	# TODO: undo_or_redo is at end here, but earlier in others, does it matter which order?
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)

@@ -43,7 +43,7 @@ func _ready() -> void:
 	find_node("EndSpacer").size_flags_horizontal = SIZE_EXPAND_FILL
 	timeline_scroll.size_flags_horizontal = SIZE_FILL
 
-
+# TODO: See if these two should be kept or done another way:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
 		drag_highlight.hide()
@@ -251,7 +251,6 @@ func delete_frames(frames := []) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Remove Frame")
-
 	var x := frames.size() - 1
 	while x >= 0:
 		project.undo_redo.add_do_method(project, "remove_frame", frames[x])
@@ -260,7 +259,6 @@ func delete_frames(frames := []) -> void:
 		project.undo_redo.add_undo_method(
 			project, "add_frame", project.frames[frames[i]], frames[i]
 		)
-
 	project.undo_redo.add_do_property(project, "layers", new_layers)
 	project.undo_redo.add_undo_property(project, "layers", Global.current_project.layers)
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
@@ -812,7 +810,7 @@ func _on_OnionSkinningSettings_popup_hide() -> void:
 
 func project_changed() -> void:
 	var project: Project = Global.current_project # TODO: maybe pass in instead?
-	# TODO: Remove all buttons
+	# TODO: Could using queue_free rather than free (or remove and queue_free) actually cause bugs?
 	for child in Global.layers_container.get_children():
 		child.queue_free()
 	for child in Global.frame_ids.get_children():
@@ -839,15 +837,14 @@ func project_frame_added(frame: int) -> void:
 	Global.frame_ids.add_child(button)
 	Global.frame_ids.move_child(button, frame)
 
-	var layer := 0 # TODO: This probably needs to be reveresed...
+	var layer := Global.frames_container.get_child_count() - 1
 	for container in Global.frames_container.get_children():
 		var cel_button = project.frames[frame].cels[layer].create_cel_button()
 		cel_button.frame = frame
 		cel_button.layer = layer
 		container.add_child(cel_button)
 		container.move_child(cel_button, frame)
-		layer += 1
-	# TODO: Adding a frame with multiple layers results in the cels being put backwards!
+		layer -= 1
 
 
 func project_frame_removed(frame: int) -> void:
@@ -861,13 +858,13 @@ func project_layer_added(layer: int) -> void:
 	var project: Project = Global.current_project # TODO: maybe pass in instead?
 	# TODO: should probably have a "layer" variable... (to many project.layers[layer])...
 	#		...or refactor things so less of this code is needed here.
-
+	# TODO: Could this function be organized in a better way?
 	var layer_button: LayerButton
 	if project.layers[layer] is PixelLayer:
 		layer_button = pixel_layer_button_node.instance()
 	elif project.layers[layer] is GroupLayer:
 		layer_button = group_layer_button_node.instance()
-	layer_button.layer = layer# - 1 # TODO: See if needed
+	layer_button.layer = layer # TODO: See if needed
 	if project.layers[layer].name == "": # TODO: This probably could be somewhere else...
 		project.layers[layer].name = project.layers[layer].get_default_name(layer)
 
@@ -889,8 +886,7 @@ func project_layer_added(layer: int) -> void:
 	layer_button.visible = Global.current_project.layers[layer].is_expanded_in_hierarchy()
 	layer_cel_container.visible = layer_button.visible
 
-# TODO: are names like "project_layer_removed" or "remove_layer_ui" better?
-#	maybe "layer_removed_in_project"? or something else?
+
 func project_layer_removed(layer: int) -> void:
 	var count := Global.layers_container.get_child_count()
 	Global.layers_container.get_child(count - 1 - layer).free()
@@ -909,7 +905,7 @@ func project_cel_added(frame: int, layer: int) -> void:
 	container.add_child(cel_button)
 	container.move_child(cel_button, frame)
 
-# TODO: Not yet sure if this is really needed:
+
 func project_cel_removed(frame: int, layer: int) -> void:
 	var container := Global.frames_container.get_child(
 		Global.frames_container.get_child_count() - 1 - layer

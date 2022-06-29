@@ -403,8 +403,7 @@ func _size_changed(value: Vector2) -> void:
 func _frames_changed(value: Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	frames = value
-#	selected_cels.clear() # TODO: This is commented out to prevent selected_cels being blank at begginning (Will it still be needed? Will removing the setter calls in the new functions fix it?)
-
+#	selected_cels.clear() # TODO: Determine if this needs to be kept (If it is, selected cels needs to be intialized after creating project (ie: in Main), rather than here
 	_set_timeline_first_and_last_frames()
 
 
@@ -414,8 +413,8 @@ func _layers_changed(value: Array) -> void:
 		Global.layers_changed_skip = false
 		return
 
-#	selected_cels.clear() # TODO: This is commented out to prevent selected_cels being blank at begginning (Will it still be needed? Will removing the setter calls in the new functions fix it?)
-
+#	selected_cels.clear() # TODO: Determine if this needs to be kept (If it is, selected cels needs to be intialized after creating project (ie: in Main), rather than here
+	# TODO: investigate wether these are still required:
 #	var layer_button = Global.layers_container.get_child(
 #		Global.layers_container.get_child_count() - 1 - current_layer
 #	)
@@ -466,7 +465,6 @@ func _frame_changed(value: int) -> void:
 	Global.disable_button(
 		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
 	)
-
 
 	if current_frame < frames.size():
 		# TODO: Make this work with groups:
@@ -790,12 +788,10 @@ func resize_bitmap_values(bitmap: BitMap, new_size: Vector2, flip_x: bool, flip_
 
 
 func add_frame(frame: Frame, index: int) -> void:
+	assert(self == Global.current_project) # TODO: Remove (Things like calling project_frame/layer_added may need to do a check if its the current project if this fails)
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
-	# TODO: May need to call _frames_changed setter here (at least for some of it)
 	frames.insert(index, frame)
-	# TODO: Check if these (especially remove/move) mess up selection?
-#	_frames_changed(frames)# TODO: Remove
 	# TODO: These may need an if self == Global.current_project depending on use
 	Global.animation_timeline.project_frame_added(index)
 	# Update the frames and frame buttons:
@@ -808,10 +804,6 @@ func add_frame(frame: Frame, index: int) -> void:
 		for f in range(frames.size()):
 			layer_cel_container.get_child(f).frame = f
 			layer_cel_container.get_child(f).button_setup()
-#	_update_animation_timeline_selection()
-#	# TODO: Remove after testing:
-#	print(selected_cels)
-#	print(current_frame)
 
 
 func remove_frame(index: int) -> void:
@@ -820,7 +812,6 @@ func remove_frame(index: int) -> void:
 	# TODO: If this messes up selection, would doing multiple here help?
 	# TODO: Could one half of cel linking and animation tags be included in the add or remove_frame functions? (ie: removing works, but adding doesn't?)
 	frames.remove(index)
-#	_frames_changed(frames)# TODO: Remove
 	Global.animation_timeline.project_frame_removed(index)
 	# Update the frames and frame buttons:
 	for f in range(frames.size()):
@@ -835,16 +826,13 @@ func remove_frame(index: int) -> void:
 
 
 func move_frame(from_index: int, to_index: int) -> void:
-	# TODO: move_cel transform_content_confirm bug likely applies here too...
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	var frame = frames[from_index]
 	frames.remove(from_index)
 	Global.animation_timeline.project_frame_removed(from_index)
-	# TODO: Ensure the final position is always right
 	frames.insert(to_index, frame)
 	Global.animation_timeline.project_frame_added(to_index)
-#	_frames_changed(frames)# TODO: Remove
 	# Update the frames and frame buttons:
 	for f in range(frames.size()):
 		Global.frame_ids.get_child(f).frame = f
@@ -859,6 +847,7 @@ func move_frame(from_index: int, to_index: int) -> void:
 
 func swap_frame(a_index: int, b_index: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
 	var temp: Frame = frames[a_index]
 	frames[a_index] = frames[b_index]
 	frames[b_index] = temp
@@ -869,14 +858,14 @@ func swap_frame(a_index: int, b_index: int) -> void:
 
 
 func add_layer(layer: BaseLayer, index: int, cels: Array) -> void:
-	# TODO: Global.canvas.selection.transform_content_confirm()
+	assert(self == Global.current_project) # TODO: Remove (Things like calling project_frame/layer_added may need to do a check if its the current project if this fails)
+	# TODO: is Global.canvas.selection.transform_content_confirm() needed for layer changes (it wasn't used before I think)
+	selected_cels.clear()
 	layers.insert(index, layer)
 	for f in range(frames.size()):
 		frames[f].cels.insert(index, cels[f])
 	layer.project = self
 	# TODO: Update layer index (and others, more efficient if add layer supports multiple)
-	# TODO: Update layer button indices
-#	_layers_changed(layers)# TODO: Remove
 	Global.animation_timeline.project_layer_added(index)
 	# Update the layer indices and layer/cel buttons:
 	for l in range(layers.size()):
@@ -887,17 +876,14 @@ func add_layer(layer: BaseLayer, index: int, cels: Array) -> void:
 			layer_cel_container.get_child(f).layer = l
 			layer_cel_container.get_child(f).button_setup()
 	_toggle_layer_buttons_layers()
-#	_update_animation_timeline_selection()
 
 
 func remove_layer(index: int) -> void:
-	# TODO: Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
 	layers.remove(index)
 	for frame in frames:
 		frame.cels.remove(index)
 	# TODO: Update layer index (and others, more efficient if remove layer supports multiple)
-#	# TODO: Update layer button indices
-#	_layers_changed(layers)# TODO: Remove
 	Global.animation_timeline.project_layer_removed(index)
 	# Update the layer indices and layer/cel buttons:
 	for l in range(layers.size()):
@@ -907,15 +893,14 @@ func remove_layer(index: int) -> void:
 		for f in range(frames.size()):
 			layer_cel_container.get_child(f).layer = l
 			layer_cel_container.get_child(f).button_setup()
-	# TODO: This causes a bug where the current layer index is incorrect (should be fixed)
 	_toggle_layer_buttons_layers()
 
 
 # from_indices and to_indicies should start from the lowest index, and go up
 func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> void:
 	# TODO: it may be good to do a test run with using loops of add/remove_layer instead of using move_layers
-	# to_parents could just be a single for now, but then how should move_layers be named?
-	# TODO: Global.canvas.selection.transform_content_confirm()
+	# TODO: to_parents could just be a single for now, but then how should move_layers be named?
+	selected_cels.clear()
 	var old_layers := layers.duplicate()
 	var removed_cels := [] # Array of array of cels (an array for each layer removed)
 
@@ -927,10 +912,9 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 			removed_cels[i].append(frame.cels[from_indices[i] - i])
 			frame.cels.remove(from_indices[i] - i)
 		Global.animation_timeline.project_layer_removed(from_indices[i] - i)
-		# TODO: remove layer and cel buttons
 	for i in range(to_indices.size()):
 		layers.insert(to_indices[i], old_layers[from_indices[i]])
-		layers[to_indices[i]].parent = to_parents[i]
+		layers[to_indices[i]].parent = to_parents[i] # TODO: it could be possible to do the to_parents when removing (previous loop), allowing this loop to be recombined with the next
 		for f in range(frames.size()):
 			frames[f].cels.insert(to_indices[i], removed_cels[i][f])
 	for i in range(to_indices.size()): # Loop again (All parents must be set before adding the UI)
@@ -943,20 +927,19 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 		for f in range(frames.size()):
 			layer_cel_container.get_child(f).layer = l
 			layer_cel_container.get_child(f).button_setup()
-	#_layers_changed(layers) # TODO Remove (needs buttons and index update)
 	_toggle_layer_buttons_layers()
 
 
 func swap_layers() -> void:
+	selected_cels.clear()
 	# TODO: Implement swap_layers
 	pass
 	_toggle_layer_buttons_layers()
 
 
 func move_cel(from_frame: int, to_frame: int, layer: int) -> void:
-	# TODO: In move_cel there seems to be an issue with transform_content_confirm losing image data
-	# 		sometimes, may not happen in swap_cel from quick test
 	Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
 	var cel: BaseCel = frames[from_frame].cels[layer]
 	if from_frame < to_frame:
 		for f in range(from_frame, to_frame): # Forward range
@@ -972,16 +955,12 @@ func move_cel(from_frame: int, to_frame: int, layer: int) -> void:
 	var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - layer)
 	for f in range(frames.size()):
 		layer_cel_container.get_child(f).frame = f
-
-		# TODO: Remove this after the fix is verified (and remove all spacing):
-#		layer_cel_container.get_child(f).cel = frames[f].cels[layer]
-
 		layer_cel_container.get_child(f).button_setup()
-#	Global.canvas.update() # TODO This shouldn't be needed, is it? (Global.undo_redo should do it)
 
 
 func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
 	var temp: BaseCel = frames[a_frame].cels[a_layer]
 	frames[a_frame].cels[a_layer] = frames[b_frame].cels[b_layer]
 	frames[b_frame].cels[b_layer] = temp
