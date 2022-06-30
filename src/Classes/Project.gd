@@ -787,13 +787,13 @@ func resize_bitmap_values(bitmap: BitMap, new_size: Vector2, flip_x: bool, flip_
 	return new_bitmap
 
 
-func add_frame(frame: Frame, index: int) -> void:
+func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be in ascending order
 	assert(self == Global.current_project) # TODO: Remove (Things like calling project_frame/layer_added may need to do a check if its the current project if this fails)
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
-	frames.insert(index, frame)
-	# TODO: These may need an if self == Global.current_project depending on use
-	Global.animation_timeline.project_frame_added(index)
+	for i in range(new_frames.size()):
+		frames.insert(indices[i], new_frames[i])
+		Global.animation_timeline.project_frame_added(indices[i])
 	# Update the frames and frame buttons:
 	for f in range(frames.size()):
 		Global.frame_ids.get_child(f).frame = f
@@ -806,13 +806,15 @@ func add_frame(frame: Frame, index: int) -> void:
 			layer_cel_container.get_child(f).button_setup()
 
 
-func remove_frame(index: int) -> void:
+func remove_frames(indices: Array) -> void:  # indices should be in ascending order
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	# TODO: If this messes up selection, would doing multiple here help?
 	# TODO: Could one half of cel linking and animation tags be included in the add or remove_frame functions? (ie: removing works, but adding doesn't?)
-	frames.remove(index)
-	Global.animation_timeline.project_frame_removed(index)
+	for i in range(indices.size()):
+		# With each removed index, future indices need to be lowered, so subtract by i
+		frames.remove(indices[i] - i)
+		Global.animation_timeline.project_frame_removed(indices[i] - i)
 	# Update the frames and frame buttons:
 	for f in range(frames.size()):
 		Global.frame_ids.get_child(f).frame = f
@@ -896,7 +898,7 @@ func remove_layer(index: int) -> void:
 	_toggle_layer_buttons_layers()
 
 
-# from_indices and to_indicies should start from the lowest index, and go up
+# from_indices and to_indicies should be in ascending order
 func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> void:
 	# TODO: it may be good to do a test run with using loops of add/remove_layer instead of using move_layers
 	# TODO: to_parents could just be a single for now, but then how should move_layers be named?

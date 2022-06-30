@@ -172,8 +172,8 @@ func add_frame() -> void:
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(project, "add_frame", frame, frame_add_index)
-	project.undo_redo.add_undo_method(project, "remove_frame", frame_add_index)
+	project.undo_redo.add_do_method(project, "add_frames", [frame], [frame_add_index])
+	project.undo_redo.add_undo_method(project, "remove_frames", [frame_add_index])
 	project.undo_redo.add_do_property(project, "layers", new_layers)
 	project.undo_redo.add_undo_property(project, "layers", project.layers)
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
@@ -249,16 +249,14 @@ func delete_frames(frames := []) -> void:
 				tag.to -= 1
 		frame_correction += 1  # Compensation for the next batch
 
+	var frame_refs := []
+	for f in frames:
+		frame_refs.append(project.frames[f])
+
 	project.undos += 1
 	project.undo_redo.create_action("Remove Frame")
-	var x := frames.size() - 1
-	while x >= 0:
-		project.undo_redo.add_do_method(project, "remove_frame", frames[x])
-		x -= 1
-	for i in range(frames.size()):
-		project.undo_redo.add_undo_method(
-			project, "add_frame", project.frames[frames[i]], frames[i]
-		)
+	project.undo_redo.add_do_method(project, "remove_frames", frames)
+	project.undo_redo.add_undo_method(project, "add_frames", frame_refs, frames)
 	project.undo_redo.add_do_property(project, "layers", new_layers)
 	project.undo_redo.add_undo_property(project, "layers", Global.current_project.layers)
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
