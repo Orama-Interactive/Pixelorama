@@ -267,7 +267,7 @@ func delete_frames(frames := []) -> void:
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
-
+# TODO: Is there any point in frame here being a func parameter? Same with _on_DeleteFrame_presssed above (and maybe more)
 func _on_CopyFrame_pressed(frame := -1) -> void:
 	var frames := []
 	for cel in Global.current_project.selected_cels:
@@ -277,20 +277,21 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 	frames.sort()
 	copy_frames(frames)
 
-# TODO: Refactor copy_frames as well:
+
 func copy_frames(frames := []) -> void:
-	# TODO: Work on this one (probably need a copy_to function on Cel classes)
 	Global.canvas.selection.transform_content_confirm()
+	var project: Project = Global.current_project
 
 	if frames.size() == 0:
-		frames.append(Global.current_project.current_frame)
+		frames.append(project.current_frame)
 
-	var new_frames := Global.current_project.frames.duplicate()
-	var new_layers: Array = Global.current_project.duplicate_layers()
+	var new_layers: Array = project.duplicate_layers()
+	var copied_frames := []
+	var copied_indices := []
 
-	var new_animation_tags := Global.current_project.animation_tags.duplicate()
+	var new_animation_tags := project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
-	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
+	# as project.animation_tags's classes. Needed for undo/redo to work properly.
 	for i in new_animation_tags.size():
 		new_animation_tags[i] = AnimationTag.new(
 			new_animation_tags[i].name,
@@ -299,13 +300,16 @@ func copy_frames(frames := []) -> void:
 			new_animation_tags[i].to
 		)
 
-	for frm in frames.size():
-		var frame = frames[(frames.size() - 1) - frm]
+	for i in frames.size():
+		var frame = frames[i]
 		var new_frame := Frame.new()
-		new_frames.insert(frames[-1] + 1, new_frame)
+		copied_frames.append(new_frame)
+		# Indices should start after the last frame to copy, and go up for each iteration:
+		copied_indices.append(frames[-1] + 1 + i)
 
-		var prev_frame: Frame = Global.current_project.frames[frame]
+		var prev_frame: Frame = project.frames[frame]
 		for cel in prev_frame.cels:  # Copy every cel
+			# TODO: if Cel classes had a copy func, that would be quite useful here (and when copying layers)
 			var sprite := Image.new()
 			sprite.copy_from(cel.image)
 			var sprite_texture := ImageTexture.new()
@@ -327,33 +331,21 @@ func copy_frames(frames := []) -> void:
 				tag.from += 1
 				tag.to += 1
 
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Add Frame")
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undos += 1
+	project.undo_redo.create_action("Add Frame")
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(project, "add_frames", copied_frames, copied_indices)
+	project.undo_redo.add_undo_method(project, "remove_frames", copied_indices)
 
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "current_frame", frames[-1] + 1
-	)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "animation_tags", new_animation_tags
-	)
+	project.undo_redo.add_do_property(project, "current_frame", frames[-1] + 1)
+	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "frames", Global.current_project.frames
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_frame", frames[-1]
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "layers", Global.current_project.layers
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "animation_tags", Global.current_project.animation_tags
-	)
-	Global.current_project.undo_redo.commit_action()
+	project.undo_redo.add_undo_property(project, "current_frame", frames[-1])
+	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
+	project.undo_redo.commit_action()
 
 
 func _on_FrameTagButton_pressed() -> void:
