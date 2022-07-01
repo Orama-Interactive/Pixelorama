@@ -6,7 +6,6 @@ var _ready_to_apply := false
 
 
 func _input(event: InputEvent) -> void:
-	._input(event)
 	if _move:
 		return
 	if event is InputEventMouseMotion:

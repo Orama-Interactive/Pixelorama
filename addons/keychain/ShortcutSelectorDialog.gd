@@ -97,14 +97,9 @@ func _set_shortcut(action: String, old_event: InputEvent, new_event: InputEvent)
 			if metadata is InputEvent:
 				if input_to_replace.shortcut_match(metadata):
 					var map_action: String = tree_item.get_parent().get_metadata(0)
-					if map_action in Keychain.actions:
-						# If it's local, check if it's the same group, otherwise ignore
-						if !Keychain.actions[map_action].global:
-							if Keychain.actions[map_action].group != group:
-								tree_item = _get_next_tree_item(tree_item)
-								continue
-					tree_item.free()
-					break
+					if map_action == action_to_replace:
+						tree_item.free()
+						break
 
 			tree_item = _get_next_tree_item(tree_item)
 
@@ -138,14 +133,16 @@ func _find_matching_event_in_map(action: String, event: InputEvent) -> Array:
 		if Keychain.ignore_ui_actions and map_action.begins_with("ui_"):
 			continue
 		for map_event in InputMap.get_action_list(map_action):
-			if event.shortcut_match(map_event):
-				if map_action in Keychain.actions:
-					# If it's local, check if it's the same group, otherwise ignore
-					if !Keychain.actions[map_action].global:
-						if Keychain.actions[map_action].group != group:
-							continue
+			if !event.shortcut_match(map_event):
+				continue
 
-				return [map_action, map_event]
+			if map_action in Keychain.actions:
+				# If it's local, check if it's the same group, otherwise ignore
+				if !Keychain.actions[action].global or !Keychain.actions[map_action].global:
+					if Keychain.actions[map_action].group != group:
+						continue
+
+			return [map_action, map_event]
 
 	return []
 
@@ -158,10 +155,22 @@ func _on_ShortcutSelectorDialog_about_to_show() -> void:
 		yield(get_tree(), "idle_frame")
 		entered_shortcut.grab_focus()
 	else:
-		if !listened_input:
+		var metadata = root.currently_editing_tree_item.get_metadata(0)
+		if metadata is InputEvent:  # Editing an input event
+			var index := 0
+			if metadata is InputEventMouseButton:
+				index = metadata.button_index - 1
+			elif metadata is InputEventJoypadButton:
+				index = metadata.button_index
+			elif metadata is InputEventJoypadMotion:
+				index = metadata.axis * 2
+				index += round(metadata.axis_value) / 2.0 + 0.5
+			option_button.select(index)
+			_on_OptionButton_item_selected(index)
+
+		elif metadata is String:  # Adding a new input event to an action
+			option_button.select(0)
 			_on_OptionButton_item_selected(0)
-		else:
-			_show_assigned_state(listened_input)
 
 
 func _on_ShortcutSelectorDialog_popup_hide() -> void:

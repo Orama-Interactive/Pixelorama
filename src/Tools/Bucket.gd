@@ -145,7 +145,7 @@ func draw_start(position: Vector2) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	if (
 		!Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn()
-		or !Global.current_project.tile_mode_rects[Global.TileMode.NONE].has_point(position)
+		or Global.current_project.tiles.get_nearest_tile(position).position != Vector2.ZERO
 	):
 		return
 	if (
@@ -444,8 +444,7 @@ func _get_undo_data() -> Dictionary:
 
 func _pick_color(position: Vector2) -> void:
 	var project: Project = Global.current_project
-	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
-		position = position.posmodv(project.size)
+	position = project.tiles.get_canon_position(position)
 
 	if position.x < 0 or position.y < 0:
 		return

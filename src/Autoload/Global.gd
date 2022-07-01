@@ -4,7 +4,6 @@ signal project_changed
 
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
-enum TileMode { NONE, BOTH, X_AXIS, Y_AXIS }
 enum IconColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
@@ -12,6 +11,7 @@ enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXP
 enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
 enum ViewMenu {
 	TILE_MODE,
+	TILE_MODE_OFFSETS,
 	GREYSCALE_VIEW,
 	MIRROR_VIEW,
 	SHOW_GRID,
@@ -33,6 +33,7 @@ enum ImageMenu {
 	DROP_SHADOW,
 	HSV,
 	GRADIENT,
+	GRADIENT_MAP,
 	SHADER
 }
 enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT }
@@ -233,6 +234,8 @@ func _initialize_keychain() -> void:
 	Keychain.actions = {
 		"new_file": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.NEW),
 		"open_file": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.OPEN),
+		"open_last_project":
+		Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.OPEN_LAST_PROJECT),
 		"save_file": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.SAVE),
 		"save_file_as":
 		Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.SAVE_AS),
@@ -251,6 +254,36 @@ func _initialize_keychain() -> void:
 		"delete": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.DELETE),
 		"new_brush":
 		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.NEW_BRUSH),
+		"preferences":
+		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.PREFERENCES),
+		"scale_image":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.SCALE_IMAGE),
+		"centralize_image":
+		Keychain.MenuInputAction.new(
+			"", "Image menu", true, "ImageMenu", ImageMenu.CENTRALIZE_IMAGE
+		),
+		"crop_image":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.CROP_IMAGE),
+		"resize_canvas":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.RESIZE_CANVAS),
+		"mirror_image":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.FLIP),
+		"rotate_image":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.ROTATE),
+		"invert_colors":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.INVERT_COLORS),
+		"desaturation":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.DESATURATION),
+		"outline":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.OUTLINE),
+		"drop_shadow":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.DROP_SHADOW),
+		"adjust_hsv":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.HSV),
+		"gradient":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.GRADIENT),
+		"gradient_map":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.GRADIENT_MAP),
 		"mirror_view":
 		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.MIRROR_VIEW),
 		"show_grid":
@@ -279,8 +312,20 @@ func _initialize_keychain() -> void:
 		Keychain.MenuInputAction.new("", "Select menu", true, "SelectMenu", SelectMenu.SELECT_ALL),
 		"invert_selection":
 		Keychain.MenuInputAction.new("", "Select menu", true, "SelectMenu", SelectMenu.INVERT),
+		"view_splash_screen":
+		Keychain.MenuInputAction.new(
+			"", "Help menu", true, "HelpMenu", HelpMenu.VIEW_SPLASH_SCREEN
+		),
 		"open_docs":
 		Keychain.MenuInputAction.new("", "Help menu", true, "HelpMenu", HelpMenu.ONLINE_DOCS),
+		"issue_tracker":
+		Keychain.MenuInputAction.new("", "Help menu", true, "HelpMenu", HelpMenu.ISSUE_TRACKER),
+		"open_logs_folder":
+		Keychain.MenuInputAction.new("", "Help menu", true, "HelpMenu", HelpMenu.OPEN_LOGS_FOLDER),
+		"changelog":
+		Keychain.MenuInputAction.new("", "Help menu", true, "HelpMenu", HelpMenu.CHANGELOG),
+		"about_pixelorama":
+		Keychain.MenuInputAction.new("", "Help menu", true, "HelpMenu", HelpMenu.ABOUT_PIXELORAMA),
 		"zoom_in": Keychain.InputAction.new("", "Canvas"),
 		"zoom_out": Keychain.InputAction.new("", "Canvas"),
 		"camera_left": Keychain.InputAction.new("", "Canvas"),

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-03-31 03:02\n"
+"PO-Revision-Date: 2022-05-19 01:32\n"
 
 msgid "OK"
 msgstr "确定"
@@ -336,8 +336,14 @@ msgstr "文件已存在，覆盖吗?"
 msgid "File %s already exists. Overwrite?"
 msgstr "文件 %s 已经存在。覆盖吗?"
 
-msgid "Directory path or file name is not valid!"
-msgstr "目录路径或文件名无效！"
+msgid "Directory path is not valid!"
+msgstr "目录路径无效！"
+
+msgid "File name is not valid!"
+msgstr "文件名称无效。"
+
+msgid "Directory path and file name are not valid!"
+msgstr "目录路径和文件名无效！"
 
 msgid "Exporting in progress..."
 msgstr "正在导出..."
@@ -607,11 +613,53 @@ msgstr "去饱和"
 msgid "Outline"
 msgstr "轮廓"
 
+msgid "Drop Shadow"
+msgstr "阴影"
+
+msgid "Offset X:"
+msgstr "偏移 X："
+
+msgid "Offset Y:"
+msgstr "偏移 Y："
+
+msgid "Shadow color:"
+msgstr "阴影颜色："
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr "调整色相/饱和度/值"
 
 msgid "Gradient"
 msgstr "渐变"
+
+msgid "Linear"
+msgstr "线性"
+
+msgid "Radial"
+msgstr "径向"
+
+msgid "Linear Step"
+msgstr "线性步骤"
+
+msgid "Radial Step"
+msgstr "径向步骤"
+
+msgid "Linear Dithering"
+msgstr "线性抖动"
+
+msgid "Radial Dithering"
+msgstr "径向抖动"
+
+msgid "Transition size:"
+msgstr "过渡大小："
+
+msgid "Center:"
+msgstr "中心："
+
+msgid "Radius:"
+msgstr "半径："
+
+msgid "Dithering pattern:"
+msgstr "抖动模式："
 
 msgid "Adjust HSV"
 msgstr "调整 HSV"
@@ -1865,6 +1913,9 @@ msgstr "关闭"
 
 msgid "Delete"
 msgstr "删除"
+
+msgid "Discard All"
+msgstr "放弃全部"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"

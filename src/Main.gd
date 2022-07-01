@@ -31,8 +31,8 @@ func _ready() -> void:
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
 	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
 
-	quit_and_save_dialog.add_button("Save & Exit", false, "Save")
-	quit_and_save_dialog.get_ok().text = "Exit without saving"
+	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
+	quit_and_save_dialog.get_ok().text = "Save & Exit"
 
 	Global.open_sprites_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
@@ -204,8 +204,8 @@ func _notification(what: int) -> void:
 				Global.has_focus = true
 
 
-func _on_files_dropped(_files: PoolStringArray, _screen: int) -> void:
-	OpenSave.handle_loading_files(_files)
+func _on_files_dropped(files: PoolStringArray, _screen: int) -> void:
+	OpenSave.handle_loading_files(files)
 	var splash_dialog = Global.control.get_node("Dialogs/SplashDialog")
 	if splash_dialog.visible:
 		splash_dialog.hide()
@@ -251,10 +251,10 @@ func load_recent_project_file(path: String) -> void:
 		Global.dialog_open(true)
 
 
-func _on_OpenSprite_file_selected(path: String) -> void:
-	OpenSave.handle_loading_files([path])
-	Global.save_sprites_dialog.current_dir = path.get_base_dir()
-	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
+func _on_OpenSprite_files_selected(paths: PoolStringArray) -> void:
+	OpenSave.handle_loading_files(paths)
+	Global.save_sprites_dialog.current_dir = paths[0].get_base_dir()
+	Global.config_cache.set_value("data", "current_dir", paths[0].get_base_dir())
 
 
 func _on_SaveSprite_file_selected(path: String) -> void:
@@ -268,7 +268,7 @@ func save_project(path: String) -> void:
 	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 
 	if is_quitting_on_save:
-		_on_QuitDialog_confirmed()
+		_quit()
 
 
 func _on_SaveSpriteHTML5_confirmed() -> void:
@@ -301,22 +301,30 @@ func show_quit_dialog() -> void:
 			if Global.quit_confirmation:
 				quit_dialog.call_deferred("popup_centered")
 			else:
-				_on_QuitDialog_confirmed()
+				_quit()
 		else:
 			quit_and_save_dialog.call_deferred("popup_centered")
 
 	Global.dialog_open(true)
 
 
-func _on_QuitAndSaveDialog_custom_action(action: String) -> void:
-	if action == "Save":
-		is_quitting_on_save = true
-		Global.save_sprites_dialog.popup_centered()
-		quit_dialog.hide()
-		Global.dialog_open(true)
-
-
 func _on_QuitDialog_confirmed() -> void:
+	_quit()
+
+
+func _on_QuitAndSaveDialog_custom_action(action: String) -> void:
+	if action == "ExitWithoutSaving":
+		_quit()
+
+
+func _on_QuitAndSaveDialog_confirmed() -> void:
+	is_quitting_on_save = true
+	Global.save_sprites_dialog.popup_centered()
+	quit_dialog.hide()
+	Global.dialog_open(true)
+
+
+func _quit() -> void:
 	# Darken the UI to denote that the application is currently exiting
 	# (it won't respond to user input in this state).
 	modulate = Color(0.5, 0.5, 0.5)
@@ -356,7 +364,10 @@ func _use_osx_shortcuts() -> void:
 	var inputmap := InputMap
 
 	for action in inputmap.get_actions():
-		var event: InputEvent = inputmap.get_action_list(action)[0]
+		var action_list: Array = inputmap.get_action_list(action)
+		if action_list.size() == 0:
+			continue
+		var event: InputEvent = action_list[0]
 
 		if event.is_action("show_pixel_grid"):
 			event.shift = true
@@ -374,6 +385,10 @@ func _exit_tree() -> void:
 	)
 	Global.config_cache.set_value("window", "position", OS.window_position)
 	Global.config_cache.set_value("window", "size", OS.window_size)
+	Global.config_cache.set_value("view_menu", "draw_grid", Global.draw_grid)
+	Global.config_cache.set_value("view_menu", "draw_pixel_grid", Global.draw_pixel_grid)
+	Global.config_cache.set_value("view_menu", "show_rulers", Global.show_rulers)
+	Global.config_cache.set_value("view_menu", "show_guides", Global.show_guides)
 	Global.config_cache.save("user://cache.ini")
 
 	var i := 0

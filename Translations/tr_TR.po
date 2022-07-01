@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-04-14 16:20\n"
+"PO-Revision-Date: 2022-05-18 18:59\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -336,8 +336,14 @@ msgstr "Dosya Zaten Var, Üzerine Yazılsın mı?"
 msgid "File %s already exists. Overwrite?"
 msgstr "%s dosyası zaten var. Üzerine yazılsın mı?"
 
-msgid "Directory path or file name is not valid!"
-msgstr "Dosya yolu ve dosya adı geçerli değil!"
+msgid "Directory path is not valid!"
+msgstr ""
+
+msgid "File name is not valid!"
+msgstr ""
+
+msgid "Directory path and file name are not valid!"
+msgstr ""
 
 msgid "Exporting in progress..."
 msgstr "Dışa aktarma işlemi devam ediyor..."
@@ -606,11 +612,53 @@ msgstr "Solgunlaştır"
 msgid "Outline"
 msgstr "Anahat"
 
+msgid "Drop Shadow"
+msgstr ""
+
+msgid "Offset X:"
+msgstr ""
+
+msgid "Offset Y:"
+msgstr ""
+
+msgid "Shadow color:"
+msgstr ""
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Renk/Doygunluk/Ton değerlerini Ayarla"
 
 msgid "Gradient"
 msgstr "Gradyan"
+
+msgid "Linear"
+msgstr ""
+
+msgid "Radial"
+msgstr ""
+
+msgid "Linear Step"
+msgstr ""
+
+msgid "Radial Step"
+msgstr ""
+
+msgid "Linear Dithering"
+msgstr ""
+
+msgid "Radial Dithering"
+msgstr ""
+
+msgid "Transition size:"
+msgstr ""
+
+msgid "Center:"
+msgstr ""
+
+msgid "Radius:"
+msgstr ""
+
+msgid "Dithering pattern:"
+msgstr ""
 
 msgid "Adjust HSV"
 msgstr "R/D/T değerlerini Ayarla"
@@ -1825,6 +1873,9 @@ msgstr "Kapat"
 
 msgid "Delete"
 msgstr "Sil"
+
+msgid "Discard All"
+msgstr ""
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"

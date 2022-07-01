@@ -9,7 +9,6 @@ var shader_radial_step: Shader = preload("res://src/Shaders/Gradients/RadialStep
 var shader_linear_dither: Shader = preload("res://src/Shaders/Gradients/LinearDithering.gdshader")
 var shader_radial_dither: Shader = preload("res://src/Shaders/Gradients/RadialDithering.gdshader")
 
-var confirmed := false
 var shader: Shader = shader_linear
 var dither_matrices := [
 	DitherMatrix.new(preload("res://assets/dither-matrices/bayer2.png"), "Bayer 2x2"),
@@ -54,16 +53,6 @@ func _ready() -> void:
 
 	for matrix in dither_matrices:
 		dithering_option_button.add_item(matrix.name)
-
-
-func _about_to_show() -> void:
-	confirmed = false
-	._about_to_show()
-
-
-func _confirmed() -> void:
-	confirmed = true
-	._confirmed()
 
 
 func set_nodes() -> void:

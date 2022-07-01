@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-03-30 23:32\n"
+"PO-Revision-Date: 2022-05-18 18:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -336,8 +336,14 @@ msgstr "Fil Eksisterer. Vil du overskrive?"
 msgid "File %s already exists. Overwrite?"
 msgstr "Fil %s eksisterer allerede. Vil du overskrive?"
 
-msgid "Directory path or file name is not valid!"
-msgstr "Mappesti eller filnavn er ikke gyldigt!"
+msgid "Directory path is not valid!"
+msgstr ""
+
+msgid "File name is not valid!"
+msgstr ""
+
+msgid "Directory path and file name are not valid!"
+msgstr ""
 
 msgid "Exporting in progress..."
 msgstr "Eksport er i gang..."
@@ -606,11 +612,53 @@ msgstr "Desaturation"
 msgid "Outline"
 msgstr "Kontur"
 
+msgid "Drop Shadow"
+msgstr ""
+
+msgid "Offset X:"
+msgstr ""
+
+msgid "Offset Y:"
+msgstr ""
+
+msgid "Shadow color:"
+msgstr ""
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Justér Nuance/Mætning/Værdi"
 
 msgid "Gradient"
 msgstr "Gradient"
+
+msgid "Linear"
+msgstr ""
+
+msgid "Radial"
+msgstr ""
+
+msgid "Linear Step"
+msgstr ""
+
+msgid "Radial Step"
+msgstr ""
+
+msgid "Linear Dithering"
+msgstr ""
+
+msgid "Radial Dithering"
+msgstr ""
+
+msgid "Transition size:"
+msgstr ""
+
+msgid "Center:"
+msgstr ""
+
+msgid "Radius:"
+msgstr ""
+
+msgid "Dithering pattern:"
+msgstr ""
 
 msgid "Adjust HSV"
 msgstr "Justér HSV"
@@ -1850,6 +1898,9 @@ msgid "Close"
 msgstr ""
 
 msgid "Delete"
+msgstr ""
+
+msgid "Discard All"
 msgstr ""
 
 msgid "Autosaved project(s) from a crashed session were found.\n"

@@ -105,6 +105,7 @@ func _setup_view_menu() -> void:
 	# Order as in Global.ViewMenu enum
 	var view_menu_items := [
 		"Tile Mode",
+		"Tile Mode Offsets",
 		"Greyscale View",
 		"Mirror View",
 		"Show Grid",
@@ -117,6 +118,8 @@ func _setup_view_menu() -> void:
 	for item in view_menu_items:
 		if item == "Tile Mode":
 			_setup_tile_mode_submenu(item)
+		elif item == "Tile Mode Offsets":
+			view_menu.add_item(item, i)
 		else:
 			view_menu.add_check_item(item, i)
 		i += 1
@@ -125,14 +128,36 @@ func _setup_view_menu() -> void:
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
 
+	var draw_grid: bool = Global.config_cache.get_value("view_menu", "draw_grid", Global.draw_grid)
+	if draw_grid != Global.draw_grid:
+		_toggle_show_grid()
+
+	var draw_pixel_grid: bool = Global.config_cache.get_value(
+		"view_menu", "draw_pixel_grid", Global.draw_pixel_grid
+	)
+	if draw_pixel_grid != Global.draw_pixel_grid:
+		_toggle_show_pixel_grid()
+
+	var show_rulers: bool = Global.config_cache.get_value(
+		"view_menu", "show_rulers", Global.show_rulers
+	)
+	if show_rulers != Global.show_rulers:
+		_toggle_show_rulers()
+
+	var show_guides: bool = Global.config_cache.get_value(
+		"view_menu", "show_guides", Global.show_guides
+	)
+	if show_guides != Global.show_guides:
+		_toggle_show_guides()
+
 
 func _setup_tile_mode_submenu(item: String) -> void:
 	tile_mode_submenu.set_name("tile_mode_submenu")
-	tile_mode_submenu.add_radio_check_item("None", Global.TileMode.NONE)
-	tile_mode_submenu.set_item_checked(Global.TileMode.NONE, true)
-	tile_mode_submenu.add_radio_check_item("Tiled In Both Axis", Global.TileMode.BOTH)
-	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", Global.TileMode.X_AXIS)
-	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", Global.TileMode.Y_AXIS)
+	tile_mode_submenu.add_radio_check_item("None", Tiles.MODE.NONE)
+	tile_mode_submenu.set_item_checked(Tiles.MODE.NONE, true)
+	tile_mode_submenu.add_radio_check_item("Tiled In Both Axis", Tiles.MODE.BOTH)
+	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", Tiles.MODE.X_AXIS)
+	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", Tiles.MODE.Y_AXIS)
 	tile_mode_submenu.hide_on_checkable_item_selection = false
 
 	tile_mode_submenu.connect("id_pressed", self, "_tile_mode_submenu_id_pressed")
@@ -230,6 +255,7 @@ func _setup_image_menu() -> void:
 		"Drop Shadow",
 		"Adjust Hue/Saturation/Value",
 		"Gradient",
+		"Gradient Map",
 		# "Shader"
 	]
 	var image_menu: PopupMenu = image_menu_button.get_popup()
@@ -396,6 +422,8 @@ func edit_menu_id_pressed(id: int) -> void:
 
 func view_menu_id_pressed(id: int) -> void:
 	match id:
+		Global.ViewMenu.TILE_MODE_OFFSETS:
+			_show_tile_mode_offsets_popup()
 		Global.ViewMenu.GREYSCALE_VIEW:
 			_toggle_greyscale_view()
 		Global.ViewMenu.MIRROR_VIEW:
@@ -414,10 +442,15 @@ func view_menu_id_pressed(id: int) -> void:
 	Global.canvas.update()
 
 
+func _show_tile_mode_offsets_popup() -> void:
+	Global.control.get_node("Dialogs/TileModeOffsetsDialog").popup_centered()
+	Global.dialog_open(true)
+
+
 func _tile_mode_submenu_id_pressed(id: int) -> void:
-	Global.current_project.tile_mode = id
-	Global.transparent_checker.fit_rect(Global.current_project.get_tile_mode_rect())
-	for i in Global.TileMode.values():
+	Global.current_project.tiles.mode = id
+	Global.transparent_checker.fit_rect(Global.current_project.tiles.get_bounding_rect())
+	for i in Tiles.MODE.values():
 		tile_mode_submenu.set_item_checked(i, i == id)
 	Global.canvas.tile_mode.update()
 	Global.canvas.pixel_grid.update()
@@ -506,13 +539,15 @@ func _toggle_mirror_view() -> void:
 func _toggle_show_grid() -> void:
 	Global.draw_grid = !Global.draw_grid
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GRID, Global.draw_grid)
-	Global.canvas.grid.update()
+	if Global.canvas.grid:
+		Global.canvas.grid.update()
 
 
 func _toggle_show_pixel_grid() -> void:
 	Global.draw_pixel_grid = !Global.draw_pixel_grid
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_PIXEL_GRID, Global.draw_pixel_grid)
-	Global.canvas.pixel_grid.update()
+	if Global.canvas.pixel_grid:
+		Global.canvas.pixel_grid.update()
 
 
 func _toggle_show_rulers() -> void:
@@ -551,7 +586,7 @@ func _toggle_fullscreen() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
 	window_menu.set_item_checked(Global.WindowMenu.FULLSCREEN_MODE, OS.window_fullscreen)
 	if OS.window_fullscreen:  # If window is fullscreen then reset transparency
-		window_opacity_dialog.set_window_opacity(1.0)
+		window_opacity_dialog.set_window_opacity(100.0)
 
 
 func image_menu_id_pressed(id: int) -> void:
@@ -594,6 +629,10 @@ func image_menu_id_pressed(id: int) -> void:
 
 		Global.ImageMenu.GRADIENT:
 			Global.control.get_node("Dialogs/ImageEffects/GradientDialog").popup_centered()
+			Global.dialog_open(true)
+
+		Global.ImageMenu.GRADIENT_MAP:
+			Global.control.get_node("Dialogs/ImageEffects/GradientMapDialog").popup_centered()
 			Global.dialog_open(true)
 
 #		Global.ImageMenu.SHADER:
@@ -652,7 +691,7 @@ func help_menu_id_pressed(id: int) -> void:
 			Global.control.get_node("Dialogs/SplashDialog").popup_centered()
 			Global.dialog_open(true)
 		Global.HelpMenu.ONLINE_DOCS:
-			OS.shell_open("https://orama-interactive.github.io/Pixelorama-Docs/")
+			OS.shell_open("https://www.oramainteractive.com/Pixelorama-Docs/")
 		Global.HelpMenu.ISSUE_TRACKER:
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		Global.HelpMenu.OPEN_LOGS_FOLDER:
@@ -661,7 +700,7 @@ func help_menu_id_pressed(id: int) -> void:
 			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		Global.HelpMenu.CHANGELOG:
 			OS.shell_open(
-				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v010---2022-04-15"
+				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v0101---2022-06-06"
 			)
 		Global.HelpMenu.ABOUT_PIXELORAMA:
 			Global.control.get_node("Dialogs/AboutDialog").popup_centered()

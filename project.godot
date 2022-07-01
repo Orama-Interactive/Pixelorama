@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/Frame.gd"
 }, {
+"base": "TextureRect",
+"class": "GradientEditNode",
+"language": "GDScript",
+"path": "res://src/UI/Nodes/GradientEdit.gd"
+}, {
 "base": "Line2D",
 "class": "Guide",
 "language": "GDScript",
@@ -118,6 +123,11 @@ _global_script_classes=[ {
 "class": "SymmetryGuide",
 "language": "GDScript",
 "path": "res://src/UI/Canvas/Rulers/SymmetryGuide.gd"
+}, {
+"base": "Reference",
+"class": "Tiles",
+"language": "GDScript",
+"path": "res://src/Classes/Tiles.gd"
 } ]
 _global_script_class_icons={
 "AnimationTag": "",
@@ -127,6 +137,7 @@ _global_script_class_icons={
 "Cel": "",
 "Drawer": "",
 "Frame": "",
+"GradientEditNode": "",
 "Guide": "",
 "ImageEffect": "",
 "Layer": "",
@@ -141,7 +152,8 @@ _global_script_class_icons={
 "SelectionTool": "",
 "ShaderImageEffect": "",
 "ShortcutProfile": "",
-"SymmetryGuide": ""
+"SymmetryGuide": "",
+"Tiles": ""
 }
 
 [application]
@@ -158,7 +170,7 @@ config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/custom_user_dir_name.X11="pixelorama"
 run/low_processor_mode.Android=false
-config/Version="v0.10.1-dev"
+config/Version="v0.10.2-dev"
 
 [audio]
 
@@ -753,6 +765,86 @@ activate_right_tool={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
  ]
+}
+open_last_project={
+"deadzone": 0.5,
+"events": [  ]
+}
+preferences={
+"deadzone": 0.5,
+"events": [  ]
+}
+scale_image={
+"deadzone": 0.5,
+"events": [  ]
+}
+centralize_image={
+"deadzone": 0.5,
+"events": [  ]
+}
+crop_image={
+"deadzone": 0.5,
+"events": [  ]
+}
+resize_canvas={
+"deadzone": 0.5,
+"events": [  ]
+}
+mirror_image={
+"deadzone": 0.5,
+"events": [  ]
+}
+rotate_image={
+"deadzone": 0.5,
+"events": [  ]
+}
+invert_colors={
+"deadzone": 0.5,
+"events": [  ]
+}
+desaturation={
+"deadzone": 0.5,
+"events": [  ]
+}
+outline={
+"deadzone": 0.5,
+"events": [  ]
+}
+drop_shadow={
+"deadzone": 0.5,
+"events": [  ]
+}
+adjust_hsv={
+"deadzone": 0.5,
+"events": [  ]
+}
+gradient={
+"deadzone": 0.5,
+"events": [  ]
+}
+view_splash_screen={
+"deadzone": 0.5,
+"events": [  ]
+}
+issue_tracker={
+"deadzone": 0.5,
+"events": [  ]
+}
+open_logs_folder={
+"deadzone": 0.5,
+"events": [  ]
+}
+changelog={
+"deadzone": 0.5,
+"events": [  ]
+}
+about_pixelorama={
+"deadzone": 0.5,
+"events": [  ]
+}
+gradient_map={
+"deadzone": 0.5,
+"events": [  ]
 }
 
 [locale]

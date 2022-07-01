@@ -13,7 +13,6 @@ var _ongoing_selection := false
 var _add := false  # Shift + Mouse Click
 var _subtract := false  # Ctrl + Mouse Click
 var _intersect := false  # Shift + Ctrl + Mouse Click
-var _snap_to_grid := false  # Mouse Click + Ctrl
 
 # Used to check if the state of content transformation has been changed
 # while draw_move() is being called. For example, pressing Enter while still moving content
@@ -31,28 +30,12 @@ func _ready() -> void:
 	set_spinbox_values()
 
 
-func _input(event: InputEvent) -> void:
-	if _move:
-		if event.is_action_pressed("transform_snap_grid"):
-			_snap_to_grid = true
-			var grid_size := Vector2(Global.grid_width, Global.grid_height)
-			_offset = _offset.snapped(grid_size)
-			var prev_pos = selection_node.big_bounding_rectangle.position
-			selection_node.big_bounding_rectangle.position = prev_pos.snapped(grid_size)
-			selection_node.marching_ants_outline.offset += (
-				selection_node.big_bounding_rectangle.position
-				- prev_pos
-			)
-		elif event.is_action_released("transform_snap_grid"):
-			_snap_to_grid = false
-
-
 func set_spinbox_values() -> void:
 	var select_rect: Rect2 = selection_node.big_bounding_rectangle
 	xspinbox.editable = !select_rect.has_no_area()
-	yspinbox.editable = !select_rect.has_no_area()
-	wspinbox.editable = !select_rect.has_no_area()
-	hspinbox.editable = !select_rect.has_no_area()
+	yspinbox.editable = xspinbox.editable
+	wspinbox.editable = xspinbox.editable
+	hspinbox.editable = xspinbox.editable
 
 	xspinbox.value = select_rect.position.x
 	yspinbox.value = select_rect.position.y
@@ -149,7 +132,15 @@ func draw_move(position: Vector2) -> void:
 				position.y = _start_pos.y
 			else:
 				position.x = _start_pos.x
-		if _snap_to_grid:
+		if Input.is_action_pressed("transform_snap_grid"):
+			var grid_size := Vector2(Global.grid_width, Global.grid_height)
+			_offset = _offset.snapped(grid_size)
+			var prev_pos = selection_node.big_bounding_rectangle.position
+			selection_node.big_bounding_rectangle.position = prev_pos.snapped(grid_size)
+			selection_node.marching_ants_outline.offset += (
+				selection_node.big_bounding_rectangle.position
+				- prev_pos
+			)
 			position = position.snapped(Vector2(Global.grid_width, Global.grid_height))
 			position += Vector2(Global.grid_offset_x, Global.grid_offset_y)
 
@@ -173,7 +164,6 @@ func draw_end(position: Vector2) -> void:
 			apply_selection(position)
 
 	_move = false
-	_snap_to_grid = false
 	cursor_text = ""
 
 
