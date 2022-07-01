@@ -308,17 +308,12 @@ func copy_frames(frames := []) -> void:
 		copied_indices.append(frames[-1] + 1 + i)
 
 		var prev_frame: Frame = project.frames[frame]
-		for cel in prev_frame.cels:  # Copy every cel
-			# TODO: if Cel classes had a copy func, that would be quite useful here (and when copying layers)
-			var sprite := Image.new()
-			sprite.copy_from(cel.image)
-			var sprite_texture := ImageTexture.new()
-			sprite_texture.create_from_image(sprite, 0)
-			new_frame.cels.append(PixelCel.new(sprite, cel.opacity, sprite_texture))
+		for cel in prev_frame.cels:
+			new_frame.cels.append(cel.copy())
 
 		new_frame.duration = prev_frame.duration
 		for l_i in range(new_layers.size()):
-			if new_layers[l_i].new_cels_linked:  # If the link button is pressed
+			if new_layers[l_i].get("new_cels_linked"):  # If the link button is pressed
 				new_layers[l_i].linked_cels.append(new_frame)
 				new_frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
 				new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
@@ -592,7 +587,7 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 func add_layer(is_new := true) -> void:
 	# TODO: Duplicate functionality should probably be split out to allow for different layer types
 	# TODO: Bug where adding a layer isn't selecting the new layer?
-	Global.canvas.selection.transform_content_confirm()
+	Global.canvas.selection.transform_content_confirm() # TODO: Figure out once and for all, do these belong here, or in the project reversable functions (where these will be called on undo as well)
 	var l := PixelLayer.new()
 	var project: Project = Global.current_project
 	if !is_new:  # Clone layer

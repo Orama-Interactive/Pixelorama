@@ -12,5 +12,10 @@ func get_image() -> Image:
 	return Image.new()
 
 
+func copy() -> BaseCel:
+	# Using get_script over the class name prevents a cyclic reference:
+	return get_script().new(opacity)
+
+
 func create_cel_button() -> Button:
 	return load("res://src/UI/Timeline/GroupCelButton.tscn").instance() as Button

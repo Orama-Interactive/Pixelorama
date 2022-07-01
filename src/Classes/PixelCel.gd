@@ -37,6 +37,15 @@ func load_image_data_from_pxo(file: File, project_size: Vector2) -> void:
 	image_changed(image)
 
 
+func copy() -> BaseCel:
+	var copy_image := Image.new()
+	copy_image.copy_from(image)
+	var copy_texture := ImageTexture.new()
+	copy_texture.create_from_image(copy_image, 0)
+	# Using get_script over the class name prevents a cyclic reference:
+	return get_script().new(copy_image, opacity, copy_texture)
+
+
 func create_cel_button() -> Button:
 	var cel_button = load("res://src/UI/Timeline/PixelCelButton.tscn").instance()
 	cel_button.get_child(0).texture = image_texture

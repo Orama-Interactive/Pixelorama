@@ -25,5 +25,9 @@ func load_image_data_from_pxo(_file: File, _project_size: Vector2) -> void:
 	return
 
 
+func copy() -> BaseCel:
+	return null
+
+
 func create_cel_button() -> Button:
 	return null
