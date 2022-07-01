@@ -580,47 +580,33 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 # Layer buttons
 
 
-func add_layer(is_new := true) -> void:
+func _on_AddLayer_pressed() -> void:
 	# TODO R: Duplicate functionality should probably be split out to allow for different layer types
 	Global.canvas.selection.transform_content_confirm() # TODO R: Figure out once and for all, do these belong here, or in the project reversable functions (where these will be called on undo as well)
 	var project: Project = Global.current_project
-	var l : BaseLayer
-	if is_new:
-		l = PixelLayer.new()
-	else:  # Clone layer
-		l = project.layers[project.current_layer].copy()
-		l.name = str(project.layers[project.current_layer].name, " (", tr("copy"), ")")
 
+	var l := PixelLayer.new()
 	var cels := []
 	for f in project.frames:
-		if is_new:
-			var new_cel_image := Image.new()
-			new_cel_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-			cels.append(PixelCel.new(new_cel_image, 1))
-		else:  # Clone layer
-			cels.append(f.cels[project.current_layer].copy())
-
-	# TODO R: Copies don't have linked cels properly set up...
+		var new_cel_image := Image.new()
+		new_cel_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		cels.append(PixelCel.new(new_cel_image, 1))
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
-	if is_new:
-		project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
-		project.undo_redo.add_do_method(project, "add_layers", [l], [project.layers.size()], [cels])
-	else:
-		project.undo_redo.add_do_property(project, "current_layer", project.current_layer + 1)
-		project.undo_redo.add_do_method(project, "add_layers", [l], [project.current_layer + 1], [cels])
+	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])  # TODO R: this is the wrong index for a duplicated layer
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(project, "add_layers", [l], [project.layers.size()], [cels])
+	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
 
-func add_group_layer(is_new := true) -> void:
+func _on_AddGroup_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
-
 	var project: Project = Global.current_project
+
 	var l := GroupLayer.new()
 	var cels := []
 	for f in project.frames:
@@ -632,8 +618,32 @@ func add_group_layer(is_new := true) -> void:
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_do_method(project, "add_layers", [l], [project.layers.size()], [cels])
 	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.commit_action()
+
+
+func _on_CloneLayer_pressed() -> void:
+	# TODO L: Multiple layer support here would be nice
+	Global.canvas.selection.transform_content_confirm()
+
+	var project: Project = Global.current_project
+	var l: BaseLayer = project.layers[project.current_layer].copy()
+	l.name = str(project.layers[project.current_layer].name, " (", tr("copy"), ")")
+	var cels := []
+	for f in project.frames:
+		cels.append(f.cels[project.current_layer].copy())
+
+	# TODO R: Copies don't have linked cels properly set up...
+
+	project.undos += 1
+	project.undo_redo.create_action("Add Layer")
+	project.undo_redo.add_do_property(project, "current_layer", project.current_layer + 1)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_do_method(project, "add_layers", [l], [project.current_layer + 1], [cels])
+	project.undo_redo.add_undo_method(project, "remove_layers", [project.current_layer + 1])
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
 
@@ -642,19 +652,25 @@ func _on_RemoveLayer_pressed() -> void:
 	if project.layers.size() == 1:
 		return
 
-	project.undos += 1
-	project.undo_redo.create_action("Remove Layer")
+	var layers : Array = project.layers[project.current_layer].get_children_recursive()
+	layers.append(project.layers[project.current_layer])
+	var indices := []
+	for l in layers:
+		indices.append(l.index)
 
 	var cels := []
-	for f in project.frames:
-		cels.append(f.cels[project.current_layer])
+	for l in layers:
+		cels.append([])
+		for f in project.frames:
+			cels[-1].append(f.cels[l.index])
 
-	project.undo_redo.add_do_property(project, "current_layer", max(project.current_layer - 1, 0))
+	project.undos += 1
+	project.undo_redo.create_action("Remove Layer")
+	# TODO R: what should be the new current layer?
+	project.undo_redo.add_do_property(project, "current_layer", max(indices[0] - 1, 0))
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_do_method(project, "remove_layers", [project.current_layer])
-	project.undo_redo.add_undo_method(
-		project, "add_layers", [project.layers[project.current_layer]], [project.current_layer], [cels]
-	)
+	project.undo_redo.add_do_method(project, "remove_layers", indices)
+	project.undo_redo.add_undo_method(project, "add_layers", layers, indices, cels)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()

@@ -173,6 +173,7 @@ margin_right = 53.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Create a new group layer"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroup"]
@@ -1037,12 +1038,12 @@ color = Color( 0, 0.741176, 1, 0.501961 )
 
 [connection signal="item_rect_changed" from="." to="." method="_on_AnimationTimeline_item_rect_changed"]
 [connection signal="item_rect_changed" from="ScrollContainer/TimelineContainer" to="." method="_on_TimelineContainer_item_rect_changed"]
-[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
-[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroup" to="." method="add_group_layer" binds= [ true ]]
+[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddLayer" to="." method="_on_AddLayer_pressed"]
+[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroup" to="." method="_on_AddGroup_pressed"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
-[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
+[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/CloneLayer" to="." method="_on_CloneLayer_pressed"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/AddFrame" to="." method="add_frame"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]
