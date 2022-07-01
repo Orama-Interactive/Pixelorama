@@ -606,12 +606,12 @@ func add_layer(is_new := true) -> void:
 	project.undo_redo.create_action("Add Layer")
 	if is_new:
 		project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
-		project.undo_redo.add_do_method(project, "add_layer", l, project.layers.size(), cels)
+		project.undo_redo.add_do_method(project, "add_layers", [l], [project.layers.size()], [cels])
 	else:
 		project.undo_redo.add_do_property(project, "current_layer", project.current_layer + 1)
-		project.undo_redo.add_do_method(project, "add_layer", l, project.current_layer + 1, cels)
+		project.undo_redo.add_do_method(project, "add_layers", [l], [project.current_layer + 1], [cels])
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_undo_method(project, "remove_layer", project.layers.size())
+	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])  # TODO R: this is the wrong index for a duplicated layer
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
@@ -630,8 +630,8 @@ func add_group_layer(is_new := true) -> void:
 	project.undo_redo.create_action("Add Layer")
 	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_do_method(project, "add_layer", l, project.layers.size(), cels)
-	project.undo_redo.add_undo_method(project, "remove_layer", project.layers.size())
+	project.undo_redo.add_do_method(project, "add_layers", [l], [project.layers.size()], [cels])
+	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
@@ -651,9 +651,9 @@ func _on_RemoveLayer_pressed() -> void:
 
 	project.undo_redo.add_do_property(project, "current_layer", max(project.current_layer - 1, 0))
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_do_method(project, "remove_layer", project.current_layer)
+	project.undo_redo.add_do_method(project, "remove_layers", [project.current_layer])
 	project.undo_redo.add_undo_method(
-		project, "add_layer", project.layers[project.current_layer], project.current_layer, cels
+		project, "add_layers", [project.layers[project.current_layer]], [project.current_layer], [cels]
 	)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)

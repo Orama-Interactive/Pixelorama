@@ -849,15 +849,15 @@ func swap_frame(a_index: int, b_index: int) -> void:
 	Global.animation_timeline.project_frame_added(b_index)
 
 
-func add_layer(layer: BaseLayer, index: int, cels: Array) -> void:
+func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels is 2d Array of cels
 	assert(self == Global.current_project) # TODO R: Remove (Things like calling project_frame/layer_added may need to do a check if its the current project if this fails)
 	selected_cels.clear()
-	layers.insert(index, layer)
-	for f in range(frames.size()):
-		frames[f].cels.insert(index, cels[f])
-	layer.project = self
-	# TODO R: Update layer index (and others, more efficient if add layer supports multiple)
-	Global.animation_timeline.project_layer_added(index)
+	for i in range(indices.size()):
+		layers.insert(indices[i], new_layers[i])
+		for f in range(frames.size()):
+			frames[f].cels.insert(indices[i], cels[i][f])
+		new_layers[i].project = self
+		Global.animation_timeline.project_layer_added(indices[i])
 	# Update the layer indices and layer/cel buttons:
 	for l in range(layers.size()):
 		layers[l].index = l
@@ -869,13 +869,14 @@ func add_layer(layer: BaseLayer, index: int, cels: Array) -> void:
 	_toggle_layer_buttons_layers()
 
 
-func remove_layer(index: int) -> void:
+func remove_layers(indices: Array) -> void:
 	selected_cels.clear()
-	layers.remove(index)
-	for frame in frames:
-		frame.cels.remove(index)
-	# TODO R: Update layer index (and others, more efficient if remove layer supports multiple)
-	Global.animation_timeline.project_layer_removed(index)
+	for i in range(indices.size()):
+		# With each removed index, future indices need to be lowered, so subtract by i
+		layers.remove(indices[i] - i)
+		for frame in frames:
+			frame.cels.remove(indices[i] - i)
+		Global.animation_timeline.project_layer_removed(indices[i] - i)
 	# Update the layer indices and layer/cel buttons:
 	for l in range(layers.size()):
 		layers[l].index = l
