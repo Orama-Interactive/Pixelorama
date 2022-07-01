@@ -287,7 +287,7 @@ func copy_frames(frames := []) -> void:
 
 	var new_layers: Array = project.duplicate_layers()
 	var copied_frames := []
-	var copied_indices := []
+	var copied_indices := range(frames[-1] + 1, frames[-1] + 1 + frames.size())
 
 	var new_animation_tags := project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
@@ -300,12 +300,9 @@ func copy_frames(frames := []) -> void:
 			new_animation_tags[i].to
 		)
 
-	for i in frames.size():
-		var frame = frames[i]
+	for frame in frames:
 		var new_frame := Frame.new()
 		copied_frames.append(new_frame)
-		# Indices should start after the last frame to copy, and go up for each iteration:
-		copied_indices.append(frames[-1] + 1 + i)
 
 		var prev_frame: Frame = project.frames[frame]
 		for cel in prev_frame.cels:
