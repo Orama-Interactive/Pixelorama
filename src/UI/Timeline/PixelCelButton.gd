@@ -9,7 +9,7 @@ var image: Image
 
 onready var popup_menu: PopupMenu = $PopupMenu
 
-
+# TODO: The linked indicator seems to not get updated properly (adding a new linked cel won't show the indicator until another timeline change, same with linking an existing cel)
 func _ready() -> void:
 	button_setup()
 

@@ -605,20 +605,12 @@ func is_empty() -> bool:
 
 
 func duplicate_layers() -> Array:
+	# TODO: May want to test this a bit after refactor
 	var new_layers: Array = layers.duplicate()
 	# Loop through the array to create new classes for each element, so that they
 	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
 	for i in new_layers.size():
-		var layer_dict: Dictionary = new_layers[i].serialize()
-		#layer_dict.linked_cels = new_layers[i].linked_cels.duplicate()
-		match layer_dict.type:
-			Global.LayerTypes.PIXEL:
-				new_layers[i] = PixelLayer.new()
-			Global.LayerTypes.GROUP:
-				new_layers[i] = GroupLayer.new()
-		new_layers[i].index = i
-		new_layers[i].project = self
-		new_layers[i].deserialize(layer_dict)
+		new_layers[i] = new_layers[i].copy()
 
 	return new_layers
 

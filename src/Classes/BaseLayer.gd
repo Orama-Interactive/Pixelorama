@@ -87,6 +87,14 @@ func deserialize(dict: Dictionary) -> void:
 		parent = project.layers[dict.parent]
 
 
+func copy() -> BaseLayer:
+	var copy = get_script().new()
+	copy.project = project
+	copy.index = index
+	copy.deserialize(serialize())
+	return copy
+
+
 func get_default_name(number: int) -> String:
 	return tr("Layer") + " %s" % number
 

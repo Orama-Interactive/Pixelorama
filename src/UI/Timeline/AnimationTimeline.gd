@@ -588,38 +588,34 @@ func add_layer(is_new := true) -> void:
 	# TODO: Duplicate functionality should probably be split out to allow for different layer types
 	# TODO: Bug where adding a layer isn't selecting the new layer?
 	Global.canvas.selection.transform_content_confirm() # TODO: Figure out once and for all, do these belong here, or in the project reversable functions (where these will be called on undo as well)
-	var l := PixelLayer.new()
 	var project: Project = Global.current_project
-	if !is_new:  # Clone layer
-		l.name = (
-			project.layers[project.current_layer].name
-			+ " ("
-			+ tr("copy")
-			+ ")"
-		)
+	var l : BaseLayer
+	if is_new:
+		l = PixelLayer.new()
+	else:  # Clone layer
+		l = project.layers[project.current_layer].copy()
+		l.name = str(project.layers[project.current_layer].name, " (", tr("copy"), ")")
+
+	var cels := []
+	for f in project.frames:
+		if is_new:
+			var new_cel_image := Image.new()
+			new_cel_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			cels.append(PixelCel.new(new_cel_image, 1))
+		else:  # Clone layer
+			cels.append(f.cels[project.current_layer].copy())
+
+	# TODO: Copies don't have linked cels properly set up...
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
-
-	var cels := []
-
-	for f in project.frames:
-		var new_layer := Image.new()
-		if is_new:
-			new_layer.create(
-				project.size.x,
-				project.size.y,
-				false,
-				Image.FORMAT_RGBA8
-			)
-		else:  # Clone layer
-			new_layer.copy_from(f.cels[project.current_layer].image)
-
-		cels.append(PixelCel.new(new_layer, 1))
-
-	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+	if is_new:
+		project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+		project.undo_redo.add_do_method(project, "add_layer", l, project.layers.size(), cels)
+	else:
+		project.undo_redo.add_do_property(project, "current_layer", project.current_layer + 1)
+		project.undo_redo.add_do_method(project, "add_layer", l, project.current_layer + 1, cels)
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_do_method(project, "add_layer", l, project.layers.size(), cels)
 	project.undo_redo.add_undo_method(project, "remove_layer", project.layers.size())
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
@@ -628,16 +624,15 @@ func add_layer(is_new := true) -> void:
 
 func add_group_layer(is_new := true) -> void:
 	Global.canvas.selection.transform_content_confirm()
-	var l := GroupLayer.new()
 
 	var project: Project = Global.current_project
-	project.undos += 1
-	project.undo_redo.create_action("Add Layer")
-
+	var l := GroupLayer.new()
 	var cels := []
 	for f in project.frames:
 		cels.append(GroupCel.new())
 
+	project.undos += 1
+	project.undo_redo.create_action("Add Layer")
 	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_do_method(project, "add_layer", l, project.layers.size(), cels)
