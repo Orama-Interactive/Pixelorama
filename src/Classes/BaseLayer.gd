@@ -18,7 +18,7 @@ func is_a_parent_of(layer: BaseLayer) -> bool:
 		return is_a_parent_of(layer.parent)
 	return false
 
-# TODO: Consider going backwards in get_children functions, to allow breaking
+# TODO L: Consider going backwards in get_children functions, to allow breaking
 func get_children_direct() -> Array:
 	var children := []
 	for i in range(index):
@@ -46,7 +46,7 @@ func is_expanded_in_hierarchy() -> bool:
 		return parent.expanded and parent.is_expanded_in_hierarchy()
 	return true
 
-# TODO: Search for layer visbility/locked checks that should be changed to the hierarchy ones:
+# TODO H: Search for layer visbility/locked checks that should be changed to the hierarchy ones:
 func is_visible_in_hierarchy() -> bool:
 	if is_instance_valid(parent) and visible:
 		return parent.is_visible_in_hierarchy()
@@ -68,7 +68,7 @@ func get_hierarchy_depth() -> int:
 # Functions to Override:
 
 func serialize() -> Dictionary:
-	assert(index == project.layers.find(self)) # TODO: remove once sure index is synced properly
+	assert(index == project.layers.find(self)) # TODO H: remove once sure index is synced properly
 	return {
 		"name": name,
 		"visible": visible,

@@ -9,7 +9,7 @@ var image: Image
 
 onready var popup_menu: PopupMenu = $PopupMenu
 
-# TODO: The linked indicator seems to not get updated properly (adding a new linked cel won't show the indicator until another timeline change, same with linking an existing cel)
+# TODO R: The linked indicator seems to not get updated properly (adding a new linked cel won't show the indicator until another timeline change, same with linking an existing cel)
 func _ready() -> void:
 	button_setup()
 
@@ -103,17 +103,17 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			_delete_cel_content()
 
 		MenuOptions.LINK:
-			# TODO: See if there is any refactoring to do here:
+			# TODO R: See if there is any refactoring to do here:
 			var f: Frame = Global.current_project.frames[frame]
 			var cel_index: int = Global.current_project.layers[layer].linked_cels.find(f)
 			var new_layers: Array = Global.current_project.duplicate_layers()
 			var new_cels: Array = f.cels.duplicate()
 			for i in new_cels.size():
-				# TODO: This doesn't work (currently replaces ALL cels on the frame)
+				# TODO H: This doesn't work (currently replaces ALL cels on the frame)
 				new_cels[i] = PixelCel.new(
 					new_cels[i].image, new_cels[i].opacity, new_cels[i].image_texture
 				)
-# TODO: Make sure all this stuff still works after refactor:
+# TODO R: Make sure all this stuff still works after refactor:
 			if popup_menu.get_item_metadata(MenuOptions.LINK) == "Unlink Cel":
 				new_layers[layer].linked_cels.remove(cel_index)
 				var sprite := Image.new()
@@ -197,7 +197,7 @@ func can_drop_data(_pos, data) -> bool:
 	if typeof(data) == TYPE_ARRAY and data[0] == "PixelCel":
 		var drag_frame = data[1]
 		var drag_layer = data[2]
-		# TODO: Is this part really right? Should't it only matter if they're linked, and we're changing layers?
+		# TODO L: Is this part really right? Should't it only matter if they're linked, and we're changing layers?
 		#		It would need to add linked cel logic to project move/swap_cel though
 		# If the cel we're dragging or the cel we are targeting are linked, don't allow dragging
 		if not (
@@ -207,7 +207,7 @@ func can_drop_data(_pos, data) -> bool:
 				in Global.current_project.layers[drag_layer].linked_cels
 			)
 		):
-			# TODO: This may be able to be combined with the previous condition depending on the the last TODO
+			# TODO L: This may be able to be combined with the previous condition depending on the the last TODO
 			if not (drag_frame == frame and drag_layer == layer):
 				var region: Rect2
 				if Input.is_action_pressed("ctrl") or layer != drag_layer: # Swap cels

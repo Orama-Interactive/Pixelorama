@@ -110,7 +110,7 @@ func update_texture(layer_i: int, frame_i := -1, project: Project = Global.curre
 		frame_i = project.current_frame
 
 	if frame_i < project.frames.size() and layer_i < project.layers.size():
-		# TODO: make sure this is right:
+		# TODO H: make sure this is right:
 		var current_cel: PixelCel = project.frames[frame_i].cels[layer_i]
 		current_cel.image_texture.set_data(current_cel.image)
 
@@ -128,11 +128,11 @@ func update_selected_cels_textures(project: Project = Global.current_project) ->
 		var frame_index: int = cel_index[0]
 		var layer_index: int = cel_index[1]
 		if frame_index < project.frames.size() and layer_index < project.layers.size():
-			# TODO: make sure this is right:
+			# TODO H: make sure this is right:
 			var current_cel: PixelCel = project.frames[frame_index].cels[layer_index]
 			current_cel.image_texture.set_data(current_cel.image)
 
-			# TODO: This wasn't working anymore, but is it even needed? (Same as above)
+			# TODO H: This wasn't working anymore, but is it even needed? (Same as above)
 #			if project == Global.current_project:
 #				var container_index = Global.frames_container.get_child_count() - 1 - layer_index
 #				var layer_cel_container = Global.frames_container.get_child(container_index)

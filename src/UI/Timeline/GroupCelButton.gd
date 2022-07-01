@@ -31,7 +31,7 @@ func _on_GroupCelButton_resized() -> void:
 
 
 func _pressed():
-	# TODO: PixelCelButton could just use the func instead of signal too
+	# TODO L: PixelCelButton could just use the func instead of signal too
 
-	# TODO: Some of the funtionality from PixelCelButton needs to be moved over
+	# TODO H: Some of the funtionality from PixelCelButton needs to be moved over
 	pass

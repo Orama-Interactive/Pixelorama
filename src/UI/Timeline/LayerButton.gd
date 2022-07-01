@@ -74,7 +74,8 @@ func _update_buttons() -> void:
 
 
 func _update_buttons_all_layers() -> void:
-	# TODO: would it be better to have specified range? (if so rename all_layers to for_layers)
+	# TODO R: would it be better to have specified range? (if so rename all_layers to for_layers)
+	#			Maybe update_buttons_recursive (including children) is all we need?
 	for layer_button in Global.layers_container.get_children():
 		layer_button._update_buttons()
 		var expanded = Global.current_project.layers[layer_button.layer].is_expanded_in_hierarchy()
@@ -145,7 +146,7 @@ func _save_layer_name(new_name: String) -> void:
 
 
 func _on_ExpandButton_pressed():
-	# TODO: What should happen when the current_layer or selected_cels are children of a layer you collapse?
+	# TODO L: What should happen when the current_layer or selected_cels are children of a layer you collapse?
 	#		Should the current_layer/selection move to ones aren't collapsed? Maybe add to github list of possible later changes
 	Global.current_project.layers[layer].expanded = !Global.current_project.layers[layer].expanded
 	_update_buttons_all_layers()
@@ -250,17 +251,17 @@ func can_drop_data(_pos, data) -> bool:
 
 func drop_data(_pos, data) -> void:
 	var drop_layer: int = data[1]
-	var project = Global.current_project # TODO: perhaps having a project variable for the enitre class would be nice (also for cel/frame buttons)
+	var project = Global.current_project # TODO L: perhaps having a project variable for the enitre class would be nice (also for cel/frame buttons)
 
 	project.undo_redo.create_action("Change Layer Order")
 	var new_layers: Array = project.layers.duplicate()
 	var temp: BaseLayer = new_layers[layer]
-	if Input.is_action_pressed("ctrl"): # Swap layers # TODO Need to check when swapping is allowed
-		pass # TODO: Figure out swapping
+	if Input.is_action_pressed("ctrl"): # Swap layers
+		pass # TODO R: Figure out swapping
 #		new_layers[layer] = new_layers[drop_layer]
 #		new_layers[drop_layer] = temp
 #
-#		# TODO: Make sure to swap parents too
+#		# TODO R: Make sure to swap parents too
 #
 #		for f in Global.current_project.frames:
 #			var new_cels: Array = f.cels.duplicate()
@@ -269,10 +270,10 @@ func drop_data(_pos, data) -> void:
 #			new_cels[drop_layer] = temp_canvas
 #			project.undo_redo.add_do_property(f, "cels", new_cels)
 #			project.undo_redo.add_undo_property(f, "cels", f.cels)
-	# TODO: Having "SourceLayers/OldLayers (that you don't change) and new_layers would make this less confusing
+	# TODO R: Having "SourceLayers/OldLayers (that you don't change) and new_layers would make this less confusing
 	else:
 		# from_indices should be in order of the layer indices, starting from the lowest
-		# TODO: can this code be made easier to read?
+		# TODO R: can this code be made easier to read?
 		var from_indices := []
 		for c in new_layers[drop_layer].get_children_recursive():
 			from_indices.append(c.index)
@@ -290,7 +291,7 @@ func drop_data(_pos, data) -> void:
 		else:
 			# Top or bottom region?
 			if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
-				to_index = layer + 1 # TODO Is this right?
+				to_index = layer + 1
 				to_parent = new_layers[layer].parent
 			else:
 				# Place under the layer, if it has children, place after its lowest child
@@ -300,7 +301,7 @@ func drop_data(_pos, data) -> void:
 					if new_layers[layer].is_a_parent_of(new_layers[drop_layer]):
 						to_index += from_indices.size()
 				else:
-					to_index = layer # TODO Is this right?
+					to_index = layer
 				to_parent = new_layers[layer].parent
 
 		if drop_layer < layer:
@@ -321,12 +322,11 @@ func drop_data(_pos, data) -> void:
 		project.undo_redo.add_undo_method(
 			project, "move_layers", to_indices, from_indices, from_parents
 		)
-	if project.current_layer == drop_layer: # TODO: This doesn't work...
+	if project.current_layer == drop_layer: # TODO R: This doesn't work... (Actually I think this was fixed?, should match FrameButton)
 		project.undo_redo.add_do_property(project, "current_layer", layer)
 	else:
 		project.undo_redo.add_do_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	# TODO: undo_or_redo is at end here, but earlier in others, does it matter which order?
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()

@@ -233,7 +233,7 @@ func undo_or_redo(
 			"Unlink Cel"
 		]
 	):
-		# TODO: Check this: THIS IS PROBABLY WRONG (can't check if GROUP LAYER if INDEX is -1)
+		# TODO H: Check this: THIS IS PROBABLY WRONG (can't check if GROUP LAYER if INDEX is -1)
 		if not current_project.layers[layer_index] is GroupLayer:
 			if layer_index > -1 and frame_index > -1:
 				canvas.update_texture(layer_index, frame_index, project)
@@ -246,7 +246,7 @@ func undo_or_redo(
 		if action_name == "Scale":
 			for i in project.frames.size():
 				for j in project.layers.size():
-					# TODO: ensure this is the correct cel type:
+					# TODO H: ensure this is the correct cel type:
 					var current_cel: BaseCel = project.frames[i].cels[j]
 					current_cel.image_texture.create_from_image(current_cel.image, 0)
 			canvas.camera_zoom()
@@ -255,7 +255,7 @@ func undo_or_redo(
 			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	elif "Frame" in action_name:
-		# TODO: Does what this comment says after the refacotr remain true?
+		# TODO R: Does what this comment says after the refacotr remain true?
 		# This actually means that frames.size is one, but it hasn't been updated yet
 		if (undo and project.frames.size() == 2) or project.frames.size() == 1:  # Stop animating
 			play_forward.pressed = false
@@ -263,7 +263,7 @@ func undo_or_redo(
 			animation_timer.stop()
 
 	elif "Move Cels" == action_name:
-		# TODO: is this still required?
+		# TODO R: is this still required?
 		project.frames = project.frames  # to call frames_changed
 
 	canvas.update()

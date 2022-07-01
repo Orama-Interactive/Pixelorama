@@ -84,7 +84,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			frame_properties.set_frame_label(frame)
 			frame_properties.set_frame_dur(Global.current_project.frames[frame].duration)
 
-# TODO: Remove this later... (or simplify?)
+
 func change_frame_order(rate: int) -> void:
 	var change = frame + rate
 	var project = Global.current_project
