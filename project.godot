@@ -187,6 +187,7 @@ Html5FileExchange="*res://src/Autoload/HTML5FileExchange.gd"
 Export="*res://src/Autoload/Export.gd"
 Palettes="*res://src/Autoload/Palettes.gd"
 Keychain="*res://addons/keychain/Keychain.gd"
+ExtensionsApi="*res://src/Autoload/ExtensionsAPI.gd"
 
 [debug]
 
