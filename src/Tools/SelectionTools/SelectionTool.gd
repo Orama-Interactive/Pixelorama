@@ -143,7 +143,9 @@ func draw_move(position: Vector2) -> void:
 			)
 			position = position.snapped(grid_size)
 			var grid_offset = Vector2(Global.grid_offset_x, Global.grid_offset_y)
-			grid_offset = Vector2(fmod(grid_offset.x, grid_size.x), fmod(grid_offset.y, grid_size.y))
+			grid_offset = Vector2(
+				fmod(grid_offset.x, grid_size.x), fmod(grid_offset.y, grid_size.y)
+			)
 			position += grid_offset
 
 		if _move_content:
