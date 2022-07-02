@@ -45,13 +45,7 @@ var file_format: int = Export.FileFormat.PNG
 var was_exported := false
 var export_overwrite := false
 
-# TODO R: These should be able to be removed....
-var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
-var pixel_layer_button_node = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
-var group_layer_button_node = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
-var pixel_cel_button_node = preload("res://src/UI/Timeline/PixelCelButton.tscn")
-var group_cel_button_node = preload("res://src/UI/Timeline/GroupCelButton.tscn")
-# ... up to this:
+# TODO L: Perhaps animation_tags could get a similar refactoring (In a later PR)
 var animation_tag_node = preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
 
@@ -460,6 +454,7 @@ func _frame_changed(value: int) -> void:
 				var cel_button = container.get_child(frame)
 				cel_button.pressed = true
 
+	# TODO R: When starting up, with only one frame, these aren't getting called:
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
 	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
 	Global.disable_button(
@@ -822,7 +817,7 @@ func move_frame(from_index: int, to_index: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	var frame = frames[from_index]
-	frames.remove(from_index)
+	frames.remove(from_index) # TODO: Maybe the insert(pop_at) trick will work here?
 	Global.animation_timeline.project_frame_removed(from_index)
 	frames.insert(to_index, frame)
 	Global.animation_timeline.project_frame_added(to_index)
@@ -893,7 +888,7 @@ func remove_layers(indices: Array) -> void:
 func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> void:
 	# TODO R: it may be good to do a test run with using add/remove_layers instead of using move_layers
 	selected_cels.clear()
-	var old_layers := layers.duplicate()
+	var old_layers := layers.duplicate() # TODO R: Could maybe change to just empty layers array, using append(pop_at) trick like in swap_layers
 	var removed_cels := [] # Array of array of cels (an array for each layer removed)
 
 	for i in range(from_indices.size()):
@@ -922,10 +917,47 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 	_toggle_layer_buttons_layers()
 
 
-func swap_layers() -> void:
+func swap_layers(a_indices: Array, a_parents: Array, b_indices: Array, b_parents: Array) -> void:
 	selected_cels.clear()
-	# TODO R: Implement swap_layers
-	pass
+
+	var a_layers := []
+	var b_layers := []
+
+	# TODO R: With these inputs, this probably isn't reversable if multiple layer suppport is added with a split.
+
+	# THIS IS PROBABLY NOT NEEDED (Combined below with append + pop_at to move them to these arrays)
+#	for l in a_indices:
+#		a_layers.append(layers[l])
+#	for l in b_indices:
+#		b_layers.append(layers[l])
+
+	# remove a_indices from layers, while adding to a_layers
+	# remove b_indices (+ a_indicies.size() if b_indices >  a_indices) Ifrom layers, while adding to b_layers
+
+	# TODO R: Got to consider which of a_indices or b_indices is higher here, probably + a_indicies.size() if b_indices >  a_indices)
+	for i in range(a_indices.size()):
+#		layers.remove(a_indices[i] + i)
+		a_layers.append(layers.pop_at(a_indices[i] + i))
+		Global.animation_timeline.project_layer_removed(a_indices[i] + i)
+	for i in range(b_indices.size()):
+#		layers.remove(b_indices[i] + i)
+		b_layers.append(layers.pop_at(b_indices[i] + i))
+		Global.animation_timeline.project_layer_removed(b_indices[i] + i)
+
+	# TODO R: What about if one is higher thant he other?
+	# add b_layers to a_indices
+	# add a_layers to b_indices
+
+	# TODO R: Do something about the parents...
+
+	# Update the layer indices and layer/cel buttons:
+	for l in range(layers.size()):
+		layers[l].index = l
+		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in range(frames.size()):
+			layer_cel_container.get_child(f).layer = l
+			layer_cel_container.get_child(f).button_setup()
 	_toggle_layer_buttons_layers()
 
 

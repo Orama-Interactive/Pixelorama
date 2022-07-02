@@ -322,7 +322,7 @@ func drop_data(_pos, data) -> void:
 		project.undo_redo.add_undo_method(
 			project, "move_layers", to_indices, from_indices, from_parents
 		)
-	if project.current_layer == drop_layer: # TODO R: This doesn't work... (Actually I think this was fixed?, should match FrameButton)
+	if project.current_layer == drop_layer:
 		project.undo_redo.add_do_property(project, "current_layer", layer)
 	else:
 		project.undo_redo.add_do_property(project, "current_layer", project.current_layer)

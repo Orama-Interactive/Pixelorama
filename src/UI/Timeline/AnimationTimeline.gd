@@ -16,8 +16,6 @@ var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
 # TODO R: May remove some of these:
 var pixel_layer_button_node = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
 var group_layer_button_node = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
-var pixel_cel_button_node = preload("res://src/UI/Timeline/PixelCelButton.tscn")
-var group_cel_button_node = preload("res://src/UI/Timeline/GroupCelButton.tscn")
 
 onready var old_scroll: int = 0  # The previous scroll state of $ScrollContainer
 onready var tag_spacer = find_node("TagSpacer")
@@ -194,6 +192,7 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 
 
 func delete_frames(frames := []) -> void:
+	# TODO R: If there is mulitple frames, it is currently possible to select and delete them all
 	var project: Project = Global.current_project
 	if project.frames.size() == 1:
 		return
@@ -581,7 +580,6 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 
 
 func _on_AddLayer_pressed() -> void:
-	# TODO R: Duplicate functionality should probably be split out to allow for different layer types
 	Global.canvas.selection.transform_content_confirm() # TODO R: Figure out once and for all, do these belong here, or in the project reversable functions (where these will be called on undo as well)
 	var project: Project = Global.current_project
 
@@ -648,6 +646,7 @@ func _on_CloneLayer_pressed() -> void:
 
 
 func _on_RemoveLayer_pressed() -> void:
+	# TODO R: It is currently possible to delete all layers (by having all layers in a group and deleting the group)
 	var project: Project = Global.current_project
 	if project.layers.size() == 1:
 		return
@@ -891,8 +890,6 @@ func project_cel_added(frame: int, layer: int) -> void:
 	var cel_button = Global.current_project.frames[frame].cels[layer].create_cel_button()
 	cel_button.frame = frame
 	cel_button.layer = layer
-	# TODO R: Do we need stuff like this for selection?
-#	cel_button.pressed = Global.current_project.selected_cels.has([frame, layer])
 	container.add_child(cel_button)
 	container.move_child(cel_button, frame)
 
