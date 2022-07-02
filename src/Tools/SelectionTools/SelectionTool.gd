@@ -141,8 +141,10 @@ func draw_move(position: Vector2) -> void:
 				selection_node.big_bounding_rectangle.position
 				- prev_pos
 			)
-			position = position.snapped(Vector2(Global.grid_width, Global.grid_height))
-			position += Vector2(Global.grid_offset_x, Global.grid_offset_y)
+			position = position.snapped(grid_size)
+			var grid_offset = Vector2(Global.grid_offset_x, Global.grid_offset_y)
+			grid_offset = Vector2(fmod(grid_offset.x, grid_size.x), fmod(grid_offset.y, grid_size.y))
+			position += grid_offset
 
 		if _move_content:
 			selection_node.move_content(position - _offset)
