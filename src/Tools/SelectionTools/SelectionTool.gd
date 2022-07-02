@@ -125,36 +125,36 @@ func draw_move(position: Vector2) -> void:
 	# while the content is being moved
 	if _content_transformation_check != selection_node.is_moving_content:
 		return
-	if _move:
-		if Input.is_action_pressed("transform_snap_axis"):  # Snap to axis
-			var angle := position.angle_to_point(_start_pos)
-			if abs(angle) <= PI / 4 or abs(angle) >= 3 * PI / 4:
-				position.y = _start_pos.y
-			else:
-				position.x = _start_pos.x
-		if Input.is_action_pressed("transform_snap_grid"):
-			var grid_size := Vector2(Global.grid_width, Global.grid_height)
-			_offset = _offset.snapped(grid_size)
-			var prev_pos = selection_node.big_bounding_rectangle.position
-			selection_node.big_bounding_rectangle.position = prev_pos.snapped(grid_size)
-			selection_node.marching_ants_outline.offset += (
-				selection_node.big_bounding_rectangle.position
-				- prev_pos
-			)
-			position = position.snapped(grid_size)
-			var grid_offset = Vector2(Global.grid_offset_x, Global.grid_offset_y)
-			grid_offset = Vector2(
-				fmod(grid_offset.x, grid_size.x), fmod(grid_offset.y, grid_size.y)
-			)
-			position += grid_offset
+	if not _move:
+		return
 
-		if _move_content:
-			selection_node.move_content(position - _offset)
+	if Input.is_action_pressed("transform_snap_axis"):  # Snap to axis
+		var angle := position.angle_to_point(_start_pos)
+		if abs(angle) <= PI / 4 or abs(angle) >= 3 * PI / 4:
+			position.y = _start_pos.y
 		else:
-			selection_node.move_borders(position - _offset)
+			position.x = _start_pos.x
+	if Input.is_action_pressed("transform_snap_grid"):
+		var grid_size := Vector2(Global.grid_width, Global.grid_height)
+		_offset = _offset.snapped(grid_size)
+		var prev_pos = selection_node.big_bounding_rectangle.position
+		selection_node.big_bounding_rectangle.position = prev_pos.snapped(grid_size)
+		selection_node.marching_ants_outline.offset += (
+			selection_node.big_bounding_rectangle.position
+			- prev_pos
+		)
+		position = position.snapped(grid_size)
+		var grid_offset = Vector2(Global.grid_offset_x, Global.grid_offset_y)
+		grid_offset = Vector2(fmod(grid_offset.x, grid_size.x), fmod(grid_offset.y, grid_size.y))
+		position += grid_offset
 
-		_offset = position
-		_set_cursor_text(selection_node.big_bounding_rectangle)
+	if _move_content:
+		selection_node.move_content(position - _offset)
+	else:
+		selection_node.move_borders(position - _offset)
+
+	_offset = position
+	_set_cursor_text(selection_node.big_bounding_rectangle)
 
 
 func draw_end(position: Vector2) -> void:

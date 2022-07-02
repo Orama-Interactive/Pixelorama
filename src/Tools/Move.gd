@@ -49,15 +49,7 @@ func draw_move(position: Vector2) -> void:
 	# while the content is being moved
 	if _content_transformation_check != selection_node.is_moving_content:
 		return
-	if Input.is_action_pressed("transform_snap_axis"):
-		var angle := position.angle_to_point(_start_pos)
-		if abs(angle) <= PI / 4 or abs(angle) >= 3 * PI / 4:
-			position.y = _start_pos.y
-		else:
-			position.x = _start_pos.x
-	if _snap_to_grid:  # Snap to grid
-		position = position.snapped(Vector2(Global.grid_width, Global.grid_height))
-		position += Vector2(Global.grid_offset_x, Global.grid_offset_y)
+	position = _snap_position(position)
 
 	if Global.current_project.has_selection:
 		selection_node.move_content(position - _offset)
@@ -74,23 +66,13 @@ func draw_end(position: Vector2) -> void:
 		_start_pos != Vector2.INF
 		and _content_transformation_check == selection_node.is_moving_content
 	):
-		if Input.is_action_pressed("transform_snap_axis"):
-			var angle := position.angle_to_point(_start_pos)
-			if abs(angle) <= PI / 4 or abs(angle) >= 3 * PI / 4:
-				position.y = _start_pos.y
-			else:
-				position.x = _start_pos.x
-
-		if _snap_to_grid:  # Snap to grid
-			position = position.snapped(Vector2(Global.grid_width, Global.grid_height))
-			position += Vector2(Global.grid_offset_x, Global.grid_offset_y)
-
-		var pixel_diff: Vector2 = position - _start_pos
+		position = _snap_position(position)
 		var project: Project = Global.current_project
 
 		if project.has_selection:
 			selection_node.move_borders_end()
 		else:
+			var pixel_diff: Vector2 = position - _start_pos
 			Global.canvas.move_preview_location = Vector2.ZERO
 			var images := _get_selected_draw_images()
 			for image in images:
@@ -103,6 +85,23 @@ func draw_end(position: Vector2) -> void:
 
 	_start_pos = Vector2.INF
 	_snap_to_grid = false
+
+
+func _snap_position(position: Vector2) -> Vector2:
+	if Input.is_action_pressed("transform_snap_axis"):
+		var angle := position.angle_to_point(_start_pos)
+		if abs(angle) <= PI / 4 or abs(angle) >= 3 * PI / 4:
+			position.y = _start_pos.y
+		else:
+			position.x = _start_pos.x
+	if _snap_to_grid:  # Snap to grid
+		var grid_size := Vector2(Global.grid_width, Global.grid_height)
+		position = position.snapped(grid_size)
+		var grid_offset = Vector2(Global.grid_offset_x, Global.grid_offset_y)
+		grid_offset = Vector2(fmod(grid_offset.x, grid_size.x), fmod(grid_offset.y, grid_size.y))
+		position += grid_offset
+
+	return position
 
 
 func commit_undo(action: String) -> void:
