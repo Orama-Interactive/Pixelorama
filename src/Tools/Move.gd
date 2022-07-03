@@ -24,7 +24,9 @@ func _input(event: InputEvent) -> void:
 				# The First time transform_snap_grid is enabled then _snap_position() is not called
 				# and selection had wrong offset so i chose to do selection offsetting here
 				var grid_offset = Vector2(Global.grid_offset_x, Global.grid_offset_y)
-				grid_offset = Vector2(fmod(grid_offset.x, grid_size.x), fmod(grid_offset.y, grid_size.y))
+				grid_offset = Vector2(
+					fmod(grid_offset.x, grid_size.x), fmod(grid_offset.y, grid_size.y)
+				)
 				selection_node.big_bounding_rectangle.position += grid_offset
 				selection_node.marching_ants_outline.offset += (
 					selection_node.big_bounding_rectangle.position
@@ -107,7 +109,10 @@ func _snap_position(position: Vector2) -> Vector2:
 		if !Global.current_project.has_selection:
 			var move_offset :=  Vector2.ZERO
 			move_offset.x = _start_pos.x - int(_start_pos.x/Global.grid_width) * Global.grid_width
-			move_offset.y = _start_pos.y - int(_start_pos.y/Global.grid_height) * Global.grid_height
+			move_offset.y = (
+				_start_pos.y
+				- int(_start_pos.y/Global.grid_height) * Global.grid_height
+			)
 			position += move_offset
 
 	return position
@@ -153,4 +158,3 @@ func _get_undo_data() -> Dictionary:
 		data[image] = image.data
 		image.lock()
 	return data
-
