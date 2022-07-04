@@ -156,7 +156,7 @@ func _draw_shape() -> void:
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
-		# Draw each point offseted based on the shape's thickness
+		# Draw each point offsetted based on the shape's thickness
 		draw_tool(point)
 
 	commit_undo()

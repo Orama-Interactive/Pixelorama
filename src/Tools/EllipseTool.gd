@@ -2,15 +2,15 @@ extends "res://src/Tools/ShapeDrawer.gd"
 
 
 func _get_shape_points_filled(size: Vector2) -> PoolVector2Array:
-	var offseted_size := size + Vector2.ONE * (_thickness - 1)
-	var border := _get_ellipse_points(Vector2.ZERO, offseted_size)
+	var offsetted_size := size + Vector2.ONE * (_thickness - 1)
+	var border := _get_ellipse_points(Vector2.ZERO, offsetted_size)
 	var filling := []
-	var bitmap := _fill_bitmap_with_points(border, offseted_size)
+	var bitmap := _fill_bitmap_with_points(border, offsetted_size)
 
-	for x in range(1, ceil(offseted_size.x / 2)):
+	for x in range(1, ceil(offsetted_size.x / 2)):
 		var fill := false
 		var prev_is_true := false
-		for y in range(0, ceil(offseted_size.y / 2)):
+		for y in range(0, ceil(offsetted_size.y / 2)):
 			var top_l_p := Vector2(x, y)
 			var bit := bitmap.get_bit(top_l_p)
 
@@ -20,9 +20,9 @@ func _get_shape_points_filled(size: Vector2) -> PoolVector2Array:
 
 			if not bit and (fill or prev_is_true):
 				filling.append(top_l_p)
-				filling.append(Vector2(x, offseted_size.y - y - 1))
-				filling.append(Vector2(offseted_size.x - x - 1, y))
-				filling.append(Vector2(offseted_size.x - x - 1, offseted_size.y - y - 1))
+				filling.append(Vector2(x, offsetted_size.y - y - 1))
+				filling.append(Vector2(offsetted_size.x - x - 1, y))
+				filling.append(Vector2(offsetted_size.x - x - 1, offsetted_size.y - y - 1))
 
 				if prev_is_true:
 					fill = true
