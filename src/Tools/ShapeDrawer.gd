@@ -84,7 +84,7 @@ func _input(event: InputEvent) -> void:
 
 func draw_start(position: Vector2) -> void:
 	.draw_start(position)
-	if Input.is_action_pressed("shape_displace"):
+	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
 		_pick_color(position)
 		return
@@ -101,8 +101,8 @@ func draw_start(position: Vector2) -> void:
 
 func draw_move(position: Vector2) -> void:
 	.draw_move(position)
-	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed("shape_displace"):
+	if _picking_color:  # Still return even if we released draw_color_picker (Alt)
+		if Input.is_action_pressed("draw_color_picker"):
 			_pick_color(position)
 		return
 
@@ -165,7 +165,7 @@ func _draw_shape(origin: Vector2, dest: Vector2) -> void:
 # Given an origin point and destination point, returns a rect representing
 # where the shape will be drawn and what is its size
 func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
-	var rect := Rect2(Vector2.ZERO, Vector2.ZERO)
+	var rect := Rect2()
 
 	# Center the rect on the mouse
 	if Input.is_action_pressed("shape_center"):
@@ -196,19 +196,6 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 
 func _get_points(size: Vector2) -> PoolVector2Array:
 	return _get_shape_points_filled(size) if _fill else _get_shape_points(size)
-
-
-func _outline_point(p: Vector2, thickness: int = 1, include_p: bool = true) -> Array:
-	var array := []
-
-	if thickness != 1:
-		var t_of = thickness - 1
-		for x in range(-t_of, thickness):
-			for y in range(-t_of, thickness):
-				if x == 0 and y == 0 and not include_p:
-					continue
-				array.append(p + Vector2(x, y))
-	return array
 
 
 func _set_cursor_text(rect: Rect2) -> void:
