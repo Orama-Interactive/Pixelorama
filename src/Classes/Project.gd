@@ -61,19 +61,19 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	OpenSave.current_save_paths.append("")
 	OpenSave.backup_save_paths.append("")
 
-	x_symmetry_point = size.x / 2
-	y_symmetry_point = size.y / 2
+	x_symmetry_point = size.x
+	y_symmetry_point = size.y
 
 	x_symmetry_axis.type = x_symmetry_axis.Types.HORIZONTAL
 	x_symmetry_axis.project = self
-	x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point))
-	x_symmetry_axis.add_point(Vector2(19999, y_symmetry_point))
+	x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point / 2 + 0.5))
+	x_symmetry_axis.add_point(Vector2(19999, y_symmetry_point / 2 + 0.5))
 	Global.canvas.add_child(x_symmetry_axis)
 
 	y_symmetry_axis.type = y_symmetry_axis.Types.VERTICAL
 	y_symmetry_axis.project = self
-	y_symmetry_axis.add_point(Vector2(x_symmetry_point, -19999))
-	y_symmetry_axis.add_point(Vector2(x_symmetry_point, 19999))
+	y_symmetry_axis.add_point(Vector2(x_symmetry_point / 2 + 0.5, -19999))
+	y_symmetry_axis.add_point(Vector2(x_symmetry_point / 2 + 0.5, 19999))
 	Global.canvas.add_child(y_symmetry_axis)
 
 	if OS.get_name() == "HTML5":
