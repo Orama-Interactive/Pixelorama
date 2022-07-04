@@ -2,7 +2,7 @@ extends "res://src/Tools/ShapeDrawer.gd"
 
 
 func _get_shape_points_filled(size: Vector2) -> PoolVector2Array:
-	var offseted_size := size + Vector2(2, 2) * (_thickness - 1)
+	var offseted_size := size + Vector2.ONE * (_thickness - 1)
 	var border := _get_ellipse_points(Vector2.ZERO, offseted_size)
 	var filling := []
 	var bitmap := _fill_bitmap_with_points(border, offseted_size)
@@ -38,9 +38,9 @@ func _get_shape_points(size: Vector2) -> PoolVector2Array:
 	if _thickness == 1:
 		return PoolVector2Array(_get_ellipse_points(Vector2.ZERO, size))
 
-	var size_offset := Vector2.ONE * 2 * (_thickness - 1)
+	var size_offset := Vector2.ONE * (_thickness - 1)
 	var new_size := size + size_offset
-	var inner_ellipse_size = new_size - 2 * size_offset
+	var inner_ellipse_size = new_size - size_offset
 
 	# The inner ellipse is to small to create a gap in the middle of the ellipse,
 	# just return a filled ellipse

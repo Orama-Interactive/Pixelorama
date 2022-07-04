@@ -32,7 +32,7 @@ func update_indicator() -> void:
 	var points := _get_points(rect.size)
 	var t_offset := _thickness - 1
 	var t_offsetv := Vector2(t_offset, t_offset)
-	indicator.create(rect.size + t_offsetv * 2)
+	indicator.create(rect.size + t_offsetv)
 	for point in points:
 		indicator.set_bit(point, 1)
 
@@ -137,11 +137,12 @@ func draw_preview() -> void:
 		var points := _get_points(rect.size)
 		var t_offset := _thickness - 1
 		var t_offsetv := Vector2(t_offset, t_offset)
-		indicator.create(rect.size + t_offsetv * 2)
+		indicator.create(rect.size + t_offsetv)
 		for point in points:
 			indicator.set_bit(point, 1)
 
-		canvas.draw_set_transform(rect.position - t_offsetv, canvas.rotation, canvas.scale)
+		var transform_pos: Vector2 = rect.position - t_offsetv + Vector2(0.5, 0.5) * (t_offset - 1)
+		canvas.draw_set_transform(transform_pos.ceil(), canvas.rotation, canvas.scale)
 
 		for line in _create_polylines(indicator):
 			canvas.draw_polyline(PoolVector2Array(line), Color.black)
@@ -156,8 +157,8 @@ func _draw_shape(origin: Vector2, dest: Vector2) -> void:
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
-		# Draw each point offseted based on the shape's thickness
-		draw_tool(rect.position + point - Vector2.ONE * (_thickness - 1))
+		# Draw each point offsetted based on the shape's thickness
+		draw_tool(rect.position + point - Vector2(0.5, 0.5) * (_thickness - 1))
 
 	commit_undo()
 
