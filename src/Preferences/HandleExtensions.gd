@@ -69,9 +69,40 @@ func install_extension(path: String) -> void:
 	_add_extension(file_name)
 
 
+func _uninstall_extension(file_name := "", remove_file := true, item := extension_selected) -> void:
+	if remove_file:
+		var dir := Directory.new()
+		var err := dir.remove(EXTENSIONS_PATH.plus_file(file_name))
+		if err != OK:
+			print(err)
+			return
+
+	var extension: Extension = extensions[file_name]
+	extension.enabled = false
+	_enable_extension(extension, false)
+
+	extensions.erase(file_name)
+	extension_list.remove_item(item)
+	extension_selected = -1
+	enable_button.disabled = true
+	uninstall_button.disabled = true
+
+
 func _add_extension(file_name: String) -> void:
 	if extensions.has(file_name):
-		return
+		var item := -1
+		for i in extension_list.get_item_count():
+			if extension_list.get_item_metadata(i) == file_name:
+				item = i
+				break
+		if item == -1:
+			print("Failed to find %s" % file_name)
+			return
+		_uninstall_extension(file_name, false, item)
+		# Wait two frames so the previous nodes can get freed
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
+
 	var file_name_no_ext: String = file_name.get_basename()
 	var file_path: String = EXTENSIONS_PATH.plus_file(file_name)
 	var success := ProjectSettings.load_resource_pack(file_path)
@@ -125,6 +156,8 @@ func _enable_extension(extension: Extension, save_to_config := true) -> void:
 				var extension_node: Node = extension_scene.instance()
 				extension_parent.add_child(extension_node)
 				extension_node.add_to_group(id)  # Keep track of what to remove later
+			else:
+				print("Failed to load extension %s" % id)
 	else:
 		for ext_node in extension_parent.get_children():
 			if ext_node.is_in_group(id):  # Node for extention found
@@ -169,22 +202,7 @@ func _on_EnableButton_pressed() -> void:
 
 
 func _on_UninstallButton_pressed() -> void:
-	var dir := Directory.new()
-	var file_name: String = extension_list.get_item_metadata(extension_selected)
-	var err := dir.remove(EXTENSIONS_PATH.plus_file(file_name))
-	if err != OK:
-		print(err)
-		return
-
-	var extension: Extension = extensions[file_name]
-	extension.enabled = false
-	_enable_extension(extension, false)
-
-	extensions.erase(file_name)
-	extension_list.remove_item(extension_selected)
-	extension_selected = -1
-	enable_button.disabled = true
-	uninstall_button.disabled = true
+	_uninstall_extension(extension_list.get_item_metadata(extension_selected))
 
 
 func _on_OpenFolderButton_pressed() -> void:
