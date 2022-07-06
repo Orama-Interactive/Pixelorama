@@ -1,3 +1,4 @@
+# gdlint: ignore=max-public-methods
 extends Node
 
 enum { FILE, EDIT, SELECT, IMAGE, VIEW, WINDOW, HELP }
@@ -13,6 +14,14 @@ func dialog_open(open: bool) -> void:
 
 func get_extensions_node() -> Node:
 	return Global.control.get_node("Extensions")
+
+
+func get_config_file() -> ConfigFile:
+	return Global.config_cache
+
+
+func get_canvas() -> Canvas:
+	return Global.canvas
 
 
 func _get_popup_menu(menu_type: int) -> PopupMenu:
@@ -39,7 +48,9 @@ func add_menu_item(menu_type: int, item_name: String, item_metadata, item_id := 
 	if not image_menu:
 		return -1
 	image_menu.add_item(item_name, item_id)
-	var idx: int = image_menu.get_item_count() - 1
+	var idx := item_id
+	if item_id == -1:
+		idx = image_menu.get_item_count() - 1
 	image_menu.set_item_metadata(idx, item_metadata)
 
 	return idx
