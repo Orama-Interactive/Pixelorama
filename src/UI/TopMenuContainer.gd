@@ -357,8 +357,9 @@ func _on_open_last_project_file_menu_option_pressed() -> void:
 
 func _save_project_file() -> void:
 	Global.control.is_quitting_on_save = false
-	var path = OpenSave.current_save_paths[Global.current_project_index]
+	var path: String = OpenSave.current_save_paths[Global.current_project_index]
 	if path == "":
+		Global.dialog_open(true)
 		if OS.get_name() == "HTML5":
 			var save_dialog: ConfirmationDialog = Global.save_sprites_html5_dialog
 			var save_filename = save_dialog.get_node("FileNameContainer/FileNameLineEdit")
@@ -366,14 +367,15 @@ func _save_project_file() -> void:
 			save_filename.text = Global.current_project.name
 		else:
 			Global.save_sprites_dialog.popup_centered()
-			Global.save_sprites_dialog.current_file = Global.current_project.name
-		Global.dialog_open(true)
+			yield(get_tree(), "idle_frame")
+			Global.save_sprites_dialog.get_line_edit().text = Global.current_project.name
 	else:
 		Global.control.save_project(path)
 
 
 func _save_project_file_as() -> void:
 	Global.control.is_quitting_on_save = false
+	Global.dialog_open(true)
 	if OS.get_name() == "HTML5":
 		var save_dialog: ConfirmationDialog = Global.save_sprites_html5_dialog
 		var save_filename = save_dialog.get_node("FileNameContainer/FileNameLineEdit")
@@ -381,8 +383,8 @@ func _save_project_file_as() -> void:
 		save_filename.text = Global.current_project.name
 	else:
 		Global.save_sprites_dialog.popup_centered()
-		Global.save_sprites_dialog.current_file = Global.current_project.name
-	Global.dialog_open(true)
+		yield(get_tree(), "idle_frame")
+		Global.save_sprites_dialog.get_line_edit().text = Global.current_project.name
 
 
 func _export_file() -> void:
