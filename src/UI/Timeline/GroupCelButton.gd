@@ -5,8 +5,6 @@ var layer := 0
 var cel: GroupCel
 var mat: Material
 
-onready var popup_menu: PopupMenu = $PopupMenu
-
 
 func _ready() -> void:
 	button_setup()

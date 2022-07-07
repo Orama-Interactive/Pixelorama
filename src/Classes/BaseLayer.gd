@@ -7,6 +7,9 @@ var visible := true
 var locked := false
 var blend_mode := 0
 var parent: BaseLayer
+# TODO H: Memory seems to not be freed when closing a project. I suspect this new project ref to
+#		be the reason (in Project.remove simply removing the project from the Global.projects array
+#		can't auto free it because there's still refences to it, in the layers):
 var project
 var index: int
 

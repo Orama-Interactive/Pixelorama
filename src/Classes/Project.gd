@@ -889,15 +889,14 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 	# TODO R: it may be good to do a test run with using add/remove_layers instead of using move_layers
 	selected_cels.clear()
 	var old_layers := layers.duplicate() # TODO R: Could maybe change to just empty layers array, using append(pop_at) trick like in swap_layers
-	var removed_cels := [] # Array of array of cels (an array for each layer removed)
+	var removed_cels := [] # 2D array of cels (an array for each layer removed)
 
 	for i in range(from_indices.size()):
 		# With each removed index, future indices need to be lowered, so subtract by i
 		layers.remove(from_indices[i] - i)
 		removed_cels.append([])
 		for frame in frames:
-			removed_cels[i].append(frame.cels[from_indices[i] - i])
-			frame.cels.remove(from_indices[i] - i)
+			removed_cels[i].append(frame.cels.pop_at(from_indices[i] - i))
 		Global.animation_timeline.project_layer_removed(from_indices[i] - i)
 	for i in range(to_indices.size()):
 		layers.insert(to_indices[i], old_layers[from_indices[i]])
@@ -917,38 +916,42 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 	_toggle_layer_buttons_layers()
 
 
-func swap_layers(a_indices: Array, a_parents: Array, b_indices: Array, b_parents: Array) -> void:
+# "a" and "b" should both contain "from", "to", and "to_parents" arrays.
+# (Using dictionaries because there seems to be a limit of 5 arguments for do/undo method calls)
+func swap_layers(a: Dictionary, b: Dictionary) -> void:
 	selected_cels.clear()
-
+	print("a: ", a, "  b: ", b) # TODO R: Remove
 	var a_layers := []
 	var b_layers := []
+	var a_cels := [] # 2D array of cels (an array for each layer removed)
+	var b_cels := [] # 2D array of cels (an array for each layer removed)
+	for i in a.from.size():
+		a_layers.append(layers.pop_at(a.from[i] - i))
+		Global.animation_timeline.project_layer_removed(a.from[i] - i)
+		a_layers[i].parent = a.to_parents[i] # All parents must be set early, before creating buttons
+		a_cels.append([])
+		for frame in frames:
+			a_cels[i].append(frame.cels.pop_at(a.from[i] - i))
+	for i in b.from.size():
+		var index = (b.from[i] - i) if a.from[0] > b.from[0] else (b.from[i] - i - a.from.size())
+		b_layers.append(layers.pop_at(index))
+		Global.animation_timeline.project_layer_removed(index)
+		b_layers[i].parent = b.to_parents[i] # All parents must be set early, before creating buttons
+		b_cels.append([])
+		for frame in frames:
+			b_cels[i].append(frame.cels.pop_at(index))
 
-	# TODO R: With these inputs, this probably isn't reversable if multiple layer suppport is added with a split.
-
-	# THIS IS PROBABLY NOT NEEDED (Combined below with append + pop_at to move them to these arrays)
-#	for l in a_indices:
-#		a_layers.append(layers[l])
-#	for l in b_indices:
-#		b_layers.append(layers[l])
-
-	# remove a_indices from layers, while adding to a_layers
-	# remove b_indices (+ a_indicies.size() if b_indices >  a_indices) Ifrom layers, while adding to b_layers
-
-	# TODO R: Got to consider which of a_indices or b_indices is higher here, probably + a_indicies.size() if b_indices >  a_indices)
-	for i in range(a_indices.size()):
-#		layers.remove(a_indices[i] + i)
-		a_layers.append(layers.pop_at(a_indices[i] + i))
-		Global.animation_timeline.project_layer_removed(a_indices[i] + i)
-	for i in range(b_indices.size()):
-#		layers.remove(b_indices[i] + i)
-		b_layers.append(layers.pop_at(b_indices[i] + i))
-		Global.animation_timeline.project_layer_removed(b_indices[i] + i)
-
-	# TODO R: What about if one is higher thant he other?
-	# add b_layers to a_indices
-	# add a_layers to b_indices
-
-	# TODO R: Do something about the parents...
+	for i in a_layers.size():
+		var index = a.to[i] if a.to[0] < b.to[0] else (a.to[i] - b.to.size())
+		layers.insert(index, a_layers[i])
+		for f in range(frames.size()):
+			frames[f].cels.insert(index, a_cels[i][f])
+		Global.animation_timeline.project_layer_added(index)
+	for i in b_layers.size():
+		layers.insert(b.to[i], b_layers[i])
+		for f in range(frames.size()):
+			frames[f].cels.insert(b.to[i], b_cels[i][f])
+		Global.animation_timeline.project_layer_added(b.to[i])
 
 	# Update the layer indices and layer/cel buttons:
 	for l in range(layers.size()):

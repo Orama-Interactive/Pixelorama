@@ -193,11 +193,17 @@ func _select_current_layer() -> void:
 
 
 func get_drag_data(_position) -> Array:
-	var button := Button.new()
-	button.rect_size = rect_size
-	button.theme = Global.control.theme
-	button.text = label.text
-	set_drag_preview(button)
+	var layers := range(layer - Global.current_project.layers[layer].get_children_recursive().size(), layer + 1)
+
+	var box := VBoxContainer.new()
+
+	for i in range(layers.size()):
+		var button := Button.new()
+		button.rect_min_size = rect_size
+		button.theme = Global.control.theme
+		button.text = Global.current_project.layers[layers[-1 - i]].name
+		box.add_child(button)
+		set_drag_preview(box)
 
 	return ["Layer", layer]
 
@@ -255,30 +261,50 @@ func drop_data(_pos, data) -> void:
 
 	project.undo_redo.create_action("Change Layer Order")
 	var new_layers: Array = project.layers.duplicate()
-	var temp: BaseLayer = new_layers[layer]
-	if Input.is_action_pressed("ctrl"): # Swap layers
-		pass # TODO R: Figure out swapping
-#		new_layers[layer] = new_layers[drop_layer]
-#		new_layers[drop_layer] = temp
-#
-#		# TODO R: Make sure to swap parents too
-#
-#		for f in Global.current_project.frames:
-#			var new_cels: Array = f.cels.duplicate()
-#			var temp_canvas = new_cels[layer]
-#			new_cels[layer] = new_cels[drop_layer]
-#			new_cels[drop_layer] = temp_canvas
-#			project.undo_redo.add_do_property(f, "cels", new_cels)
-#			project.undo_redo.add_undo_property(f, "cels", f.cels)
-	# TODO R: Having "SourceLayers/OldLayers (that you don't change) and new_layers would make this less confusing
-	else:
-		# from_indices should be in order of the layer indices, starting from the lowest
-		# TODO R: can this code be made easier to read?
-		var from_indices := []
-		for c in new_layers[drop_layer].get_children_recursive():
-			from_indices.append(c.index)
-		from_indices.append(drop_layer)
 
+	# TODO R: Check for other loops that could be replaced with a range...
+	# TODO R: new_layers is a little confusing, does it acutally need to be duplicated anymore? It shouldn't be modified...
+	# TODO R: can this code be made easier to read?
+
+	var drop_from_indices := range(drop_layer - new_layers[drop_layer].get_children_recursive().size(), drop_layer + 1 )
+
+	var drop_from_parents := []
+	for i in range(drop_from_indices.size()):
+		drop_from_parents.append(new_layers[drop_from_indices[i]].parent)
+
+	if Input.is_action_pressed("ctrl"): # Swap layers
+		# a and b both need "from", "to", and "to_parents"
+		# a is this layer (and children), b is the dropped layers
+		var a := { "from": range(layer - new_layers[layer].get_children_recursive().size(), layer + 1) }
+		var b := { "from": drop_from_indices}
+
+		if a.from[0] < b.from[0]:
+			a["to"] = range(b.from[-1] + 1 - a.from.size(), b.from[-1] + 1) # Size of a, starting from end of b
+			b["to"] = range(a.from[0], a.from[0] + b.from.size()) # Size of b, starting from beginning of a
+		else:
+			a["to"] = range(b.from[0], b.from[0] + a.from.size()) # Size of a, starting from beginning of b
+			b["to"] = range(a.from[-1] + 1 - b.from.size(), a.from[-1] + 1) # Size of b, starting from end of a
+
+		var a_from_parents := []
+		for l in a.from:
+			a_from_parents.append(new_layers[l].parent)
+
+		a["to_parents"] = a_from_parents.duplicate()
+		b["to_parents"] = drop_from_parents.duplicate()
+		for i in a.to_parents.size(): # TODO R: comment to explain this
+			if a.to_parents[i] == a_from_parents[-1]:
+				a.to_parents[i] = drop_from_parents[-1]
+		for i in b.to_parents.size():
+			if b.to_parents[i] == drop_from_parents[-1]:
+				b.to_parents[i] = a_from_parents[-1]
+
+		project.undo_redo.add_do_method(project, "swap_layers", a, b)
+		project.undo_redo.add_undo_method(project, "swap_layers",
+			{ "from": a.to, "to": a.from, "to_parents": a_from_parents },
+			{ "from": b.to, "to": drop_from_indices, "to_parents": drop_from_parents }
+		)
+
+	else: # Move layers
 		var to_index: int # the index where the LOWEST shifted layer should end up
 		var to_parent: BaseLayer
 
@@ -299,28 +325,24 @@ func drop_data(_pos, data) -> void:
 					to_index = new_layers[layer].get_children_recursive()[0].index
 
 					if new_layers[layer].is_a_parent_of(new_layers[drop_layer]):
-						to_index += from_indices.size()
+						to_index += drop_from_indices.size()
 				else:
 					to_index = layer
 				to_parent = new_layers[layer].parent
 
 		if drop_layer < layer:
-			to_index -= from_indices.size()
-		print("to_index = ", to_index)
+			to_index -= drop_from_indices.size()
 
-		var to_indices := []
-		var from_parents := []
-		for i in range(from_indices.size()):
-			to_indices.append(to_index + i)
-			from_parents.append(new_layers[from_indices[i]].parent)
-		var to_parents := from_parents.duplicate()
+		var drop_to_indices := range(to_index, to_index + drop_from_indices.size())
+
+		var to_parents := drop_from_parents.duplicate()
 		to_parents[-1] = to_parent
 
 		project.undo_redo.add_do_method(
-			project, "move_layers", from_indices, to_indices, to_parents
+			project, "move_layers", drop_from_indices, drop_to_indices, to_parents
 		)
 		project.undo_redo.add_undo_method(
-			project, "move_layers", to_indices, from_indices, from_parents
+			project, "move_layers", drop_to_indices, drop_from_indices, drop_from_parents
 		)
 	if project.current_layer == drop_layer:
 		project.undo_redo.add_do_property(project, "current_layer", layer)

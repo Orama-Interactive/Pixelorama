@@ -799,6 +799,7 @@ func _on_OnionSkinningSettings_popup_hide() -> void:
 
 
 func project_changed() -> void:
+	# TODO H: Changing project takes twice as long as previously, why? (Not sure if this func is the problem)
 	var project: Project = Global.current_project # TODO R: maybe pass in instead?
 	# TODO R: Could using queue_free rather than free (or remove and queue_free) actually cause bugs?
 	for child in Global.layers_container.get_children():
