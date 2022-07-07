@@ -361,10 +361,10 @@ func update_tool_cursors() -> void:
 
 
 func draw_indicator() -> void:
-	if Global.left_square_indicator_visible:
-		_slots[BUTTON_LEFT].tool_node.draw_indicator()
 	if Global.right_square_indicator_visible:
-		_slots[BUTTON_RIGHT].tool_node.draw_indicator()
+		_slots[BUTTON_RIGHT].tool_node.draw_indicator(false)
+	if Global.left_square_indicator_visible:
+		_slots[BUTTON_LEFT].tool_node.draw_indicator(true)
 
 
 func draw_preview() -> void:

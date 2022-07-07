@@ -80,6 +80,8 @@ var modulate_icon_color := Color.gray
 var icon_color_from: int = IconColorFrom.THEME
 var custom_icon_color := Color.gray
 var tool_button_size: int = ButtonSize.SMALL
+var left_tool_color := Color("0086cf")
+var right_tool_color := Color("fd6d14")
 
 var default_width := 64
 var default_height := 64
@@ -117,7 +119,7 @@ var enable_autosave := true
 var show_left_tool_icon := true
 var show_right_tool_icon := true
 var left_square_indicator_visible := true
-var right_square_indicator_visible := false
+var right_square_indicator_visible := true
 var native_cursors := false
 var cross_cursor := true
 
