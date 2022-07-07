@@ -83,7 +83,7 @@ class MenuInputAction:
 	func handle_input(event: InputEvent, action: String) -> bool:
 		if not node:
 			return false
-		if event.is_action_pressed(action):
+		if event.is_action_pressed(action, false, true):
 			if event is InputEventKey:
 				var acc: int = node.get_item_accelerator(menu_item_id)
 				# If the event is the same as the menu item's accelerator, skip
@@ -91,7 +91,7 @@ class MenuInputAction:
 					return true
 			node.emit_signal("id_pressed", menu_item_id)
 			return true
-		if event.is_action(action) and echo:
+		if event.is_action(action, true) and echo:
 			if event.is_echo():
 				node.emit_signal("id_pressed", menu_item_id)
 				return true
