@@ -19,7 +19,6 @@ __meta__ = {
 
 [node name="BackgroundLeft" type="NinePatchRect" parent="."]
 visible = false
-modulate = Color( 0, 0.52549, 0.811765, 1 )
 anchor_bottom = 1.0
 margin_right = 12.0
 texture = ExtResource( 1 )
@@ -34,7 +33,6 @@ __meta__ = {
 
 [node name="BackgroundRight" type="NinePatchRect" parent="."]
 visible = false
-modulate = Color( 0.992157, 0.427451, 0.0784314, 1 )
 anchor_bottom = 1.0
 margin_left = 24.0
 margin_top = 24.0

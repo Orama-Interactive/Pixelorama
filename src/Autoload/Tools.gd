@@ -253,6 +253,8 @@ func _ready() -> void:
 func add_tool_button(t: Tool) -> void:
 	var tool_button: BaseButton = _tool_button_scene.instance()
 	tool_button.name = t.name
+	tool_button.get_node("BackgroundLeft").modulate = Global.left_tool_color
+	tool_button.get_node("BackgroundRight").modulate = Global.right_tool_color
 	tool_button.get_node("ToolIcon").texture = t.icon
 	tool_button.hint_tooltip = t.generate_hint_tooltip()
 	t.button_node = tool_button
