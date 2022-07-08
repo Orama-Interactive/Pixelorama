@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-07-08 00:57\n"
+"PO-Revision-Date: 2022-07-08 10:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -569,10 +569,10 @@ msgid "Icon color:"
 msgstr "Цвет значка:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Цвет левого инструмента:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Цвет правого инструмента:"
 
 msgid "Tool button size:"
 msgstr "Размер кнопок инструментов:"
@@ -641,7 +641,7 @@ msgid "Gradient"
 msgstr "Градиент"
 
 msgid "Gradient Map"
-msgstr ""
+msgstr "Карта градиента"
 
 msgid "Linear"
 msgstr "Линейный"
@@ -650,16 +650,16 @@ msgid "Radial"
 msgstr "Радиальный"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Линейный шаг"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Радиальный шаг"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "Линейный с псевдосмешиванием"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "Радиальный с псевдосмешиванием"
 
 msgid "Transition size:"
 msgstr "Размер перехода:"
@@ -671,7 +671,7 @@ msgid "Radius:"
 msgstr "Радиус:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Шаблон псевдосмешивания:"
 
 msgid "Adjust HSV"
 msgstr "Настройка цвета"
