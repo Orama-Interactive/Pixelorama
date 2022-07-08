@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-07-08 00:57\n"
+"PO-Revision-Date: 2022-07-08 06:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -569,10 +569,10 @@ msgid "Icon color:"
 msgstr "Culoarea pictogramei:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Culoarea instrumentului din stânga:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Culoarea instrumentului din dreapta:"
 
 msgid "Tool button size:"
 msgstr "Mărimea butonului instrumentului:"
@@ -2034,8 +2034,8 @@ msgid "Global Tool Options"
 msgstr "Opțiuni pentru instrumentul global"
 
 msgid "Left Tool Options"
-msgstr "Opțiuni pentru unealta din stânga"
+msgstr "Opțiuni pentru instrumentul din stânga"
 
 msgid "Right Tool Options"
-msgstr "Opțiuni pentru unealta din dreapta"
+msgstr "Opțiuni pentru instrumentul din dreapta"
 
