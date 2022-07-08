@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-07-08 00:57\n"
+"PO-Revision-Date: 2022-07-08 10:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -568,10 +568,10 @@ msgid "Icon color:"
 msgstr "Icon-Farbe:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Farbe des linken Werkzeugs:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Farbe des rechten Werkzeugs:"
 
 msgid "Tool button size:"
 msgstr "Werkzeugbutton-Größe:"
