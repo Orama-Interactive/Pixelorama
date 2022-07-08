@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-07-08 00:58\n"
+"PO-Revision-Date: 2022-07-08 06:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -569,10 +569,10 @@ msgid "Icon color:"
 msgstr "アイコンの色:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "左ツールの色:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "右ツールの色:"
 
 msgid "Tool button size:"
 msgstr "ツールボタンのサイズ:"
