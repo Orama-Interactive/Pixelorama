@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-06-20 10:35\n"
+"PO-Revision-Date: 2022-07-08 00:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -567,6 +567,12 @@ msgstr "Цвет значка из:"
 
 msgid "Icon color:"
 msgstr "Цвет значка:"
+
+msgid "Left tool color:"
+msgstr ""
+
+msgid "Right tool color:"
+msgstr ""
 
 msgid "Tool button size:"
 msgstr "Размер кнопок инструментов:"
