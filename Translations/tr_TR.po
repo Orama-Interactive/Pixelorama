@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-06-13 23:28\n"
+"PO-Revision-Date: 2022-07-08 00:57\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -566,6 +566,12 @@ msgstr "Simge rengi:"
 
 msgid "Icon color:"
 msgstr "Simge rengi:"
+
+msgid "Left tool color:"
+msgstr ""
+
+msgid "Right tool color:"
+msgstr ""
 
 msgid "Tool button size:"
 msgstr "Araç gereç butonu büyüklüğü:"
