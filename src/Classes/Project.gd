@@ -307,6 +307,7 @@ func serialize() -> Dictionary:
 				"locked": layer.locked,
 				"new_cels_linked": layer.new_cels_linked,
 				"linked_cels": linked_cels,
+				"metadata": _serialize_metadata(layer)
 			}
 		)
 
@@ -337,15 +338,16 @@ func serialize() -> Dictionary:
 	for frame in frames:
 		var cel_data := []
 		for cel in frame.cels:
-			cel_data.append(
-				{
-					"opacity": cel.opacity,
-				}
-			)
-		frame_data.append({"cels": cel_data, "duration": frame.duration})
+			cel_data.append({"opacity": cel.opacity, "metadata": _serialize_metadata(cel)})
+
+		frame_data.append(
+			{"cels": cel_data, "duration": frame.duration, "metadata": _serialize_metadata(frame)}
+		)
 	var brush_data := []
 	for brush in brushes:
 		brush_data.append({"size_x": brush.get_size().x, "size_y": brush.get_size().y})
+
+	var metadata := _serialize_metadata(self)
 
 	var project_data := {
 		"pixelorama_version": Global.current_version,
@@ -366,7 +368,8 @@ func serialize() -> Dictionary:
 		"export_directory_path": directory_path,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
-		"fps": fps
+		"fps": fps,
+		"metadata": metadata
 	}
 
 	return project_data
@@ -393,14 +396,18 @@ func deserialize(dict: Dictionary) -> void:
 		for frame in dict.frames:
 			var cels := []
 			for cel in frame.cels:
-				cels.append(Cel.new(Image.new(), cel.opacity))
+				var cel_class := Cel.new(Image.new(), cel.opacity)
+				_deserialize_metadata(cel_class, cel)
+				cels.append(cel_class)
 			var duration := 1.0
 			if frame.has("duration"):
 				duration = frame.duration
 			elif dict.has("frame_duration"):
 				duration = dict.frame_duration[frame_i]
 
-			frames.append(Frame.new(cels, duration))
+			var frame_class := Frame.new(cels, duration)
+			_deserialize_metadata(frame_class, frame)
+			frames.append(frame_class)
 			frame_i += 1
 
 		if dict.has("layers"):
@@ -419,6 +426,7 @@ func deserialize(dict: Dictionary) -> void:
 					saved_layer.new_cels_linked,
 					linked_cels
 				)
+				_deserialize_metadata(layer, saved_layer)
 				layers.append(layer)
 				layer_i += 1
 	if dict.has("tags"):
@@ -453,6 +461,22 @@ func deserialize(dict: Dictionary) -> void:
 		file_format = dict.export_file_format
 	if dict.has("fps"):
 		fps = dict.fps
+	_deserialize_metadata(self, dict)
+
+
+func _serialize_metadata(object: Object) -> Dictionary:
+	var metadata := {}
+	for meta in object.get_meta_list():
+		metadata[meta] = object.get_meta(meta)
+	return metadata
+
+
+func _deserialize_metadata(object: Object, dict: Dictionary) -> void:
+	if not dict.has("metadata"):
+		return
+	var metadata: Dictionary = dict["metadata"]
+	for meta in metadata.keys():
+		object.set_meta(meta, metadata[meta])
 
 
 func _name_changed(value: String) -> void:
