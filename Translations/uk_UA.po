@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-07-08 00:57\n"
+"PO-Revision-Date: 2022-07-08 10:25\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -569,10 +569,10 @@ msgid "Icon color:"
 msgstr "Колір значків:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Колір лівого інструменту:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Колір правого інструменту:"
 
 msgid "Tool button size:"
 msgstr "Розмір кнопок інструментів:"
