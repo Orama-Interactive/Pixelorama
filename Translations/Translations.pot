@@ -555,6 +555,12 @@ msgstr ""
 msgid "Icon color:"
 msgstr ""
 
+msgid "Left tool color:"
+msgstr ""
+
+msgid "Right tool color:"
+msgstr ""
+
 msgid "Tool button size:"
 msgstr ""
 

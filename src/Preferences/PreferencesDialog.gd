@@ -8,6 +8,8 @@ var preferences := [
 	Preference.new("dim_on_popup", "Interface/DimPopup/CheckBox", "pressed"),
 	Preference.new("icon_color_from", "Interface/IconColorFrom/IconColorOptionButton", "selected"),
 	Preference.new("custom_icon_color", "Interface/IconColorFrom/IconColorButton", "color"),
+	Preference.new("left_tool_color", "Interface/IconColorFrom/LeftToolColorButton", "color"),
+	Preference.new("right_tool_color", "Interface/IconColorFrom/RightToolColorButton", "color"),
 	Preference.new(
 		"tool_button_size", "Interface/ToolButtonSize/ToolButtonSizeOptionButton", "selected"
 	),
@@ -265,6 +267,16 @@ func preference_update(prop: String) -> void:
 		else:
 			Global.modulate_icon_color = Global.custom_icon_color
 		themes.change_icon_colors()
+
+	if prop == "left_tool_color":
+		for child in Tools._tool_buttons.get_children():
+			var left_background: NinePatchRect = child.get_node("BackgroundLeft")
+			left_background.modulate = Global.left_tool_color
+
+	if prop == "right_tool_color":
+		for child in Tools._tool_buttons.get_children():
+			var left_background: NinePatchRect = child.get_node("BackgroundRight")
+			left_background.modulate = Global.right_tool_color
 
 	if prop == "tool_button_size":
 		Tools.set_button_size(Global.tool_button_size)

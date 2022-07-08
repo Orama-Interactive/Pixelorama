@@ -130,9 +130,9 @@ text = "System Language"
 
 [node name="Interface" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
-margin_top = 28.0
+margin_top = 56.0
 margin_right = 498.0
-margin_bottom = 198.0
+margin_bottom = 250.0
 
 [node name="ShrinkContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
 margin_right = 498.0
@@ -232,7 +232,7 @@ margin_bottom = 90.0
 [node name="IconColorFrom" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
 margin_top = 94.0
 margin_right = 498.0
-margin_bottom = 138.0
+margin_bottom = 162.0
 columns = 3
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
@@ -243,7 +243,7 @@ text = "Icon color from:"
 
 [node name="IconColorOptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
 margin_left = 106.0
-margin_right = 179.0
+margin_right = 199.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "Theme"
@@ -251,9 +251,9 @@ items = [ "Theme", null, false, 0, null, "Custom", null, false, 1, null ]
 selected = 0
 
 [node name="Label2" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
-margin_left = 183.0
+margin_left = 203.0
 margin_top = 3.0
-margin_right = 251.0
+margin_right = 271.0
 margin_bottom = 17.0
 text = "Icon color:"
 
@@ -266,15 +266,48 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 color = Color( 0.75, 0.75, 0.75, 1 )
 
-[node name="HSeparator3" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 142.0
-margin_right = 498.0
-margin_bottom = 146.0
+[node name="Label3" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
+margin_left = 106.0
+margin_top = 27.0
+margin_right = 199.0
+margin_bottom = 41.0
+text = "Left tool color:"
 
-[node name="ToolButtonSize" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 150.0
+[node name="LeftToolColorButton" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
+margin_left = 203.0
+margin_top = 24.0
+margin_right = 267.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 64, 20 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+color = Color( 0, 0.52549, 0.811765, 1 )
+
+[node name="Label4" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
+margin_top = 51.0
+margin_right = 102.0
+margin_bottom = 65.0
+text = "Right tool color:"
+
+[node name="RightToolColorButton" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
+margin_left = 106.0
+margin_top = 48.0
+margin_right = 170.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 64, 20 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+color = Color( 0.992157, 0.427451, 0.0784314, 1 )
+
+[node name="HSeparator3" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_top = 166.0
 margin_right = 498.0
 margin_bottom = 170.0
+
+[node name="ToolButtonSize" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_top = 174.0
+margin_right = 498.0
+margin_bottom = 194.0
 columns = 3
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ToolButtonSize"]
@@ -1174,8 +1207,6 @@ mode = 1
 access = 2
 filters = PoolStringArray( "*.pck ; Godot Resource Pack File", "*.zip ;" )
 show_hidden_files = true
-current_dir = "/home/emmanouil/Documents/Orama/Pixelorama"
-current_path = "/home/emmanouil/Documents/Orama/Pixelorama/"
 
 [connection signal="about_to_show" from="." to="." method="_on_PreferencesDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_PreferencesDialog_popup_hide"]
