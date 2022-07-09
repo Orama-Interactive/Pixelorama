@@ -74,7 +74,7 @@ func _update_buttons() -> void:
 
 
 func _update_buttons_all_layers() -> void:
-	# TODO R: would it be better to have specified range? (if so rename all_layers to for_layers)
+	# TODO R2: would it be better to have specified range? (if so rename all_layers to for_layers)
 	#			Maybe update_buttons_recursive (including children) is all we need?
 	for layer_button in Global.layers_container.get_children():
 		layer_button._update_buttons()
@@ -262,9 +262,9 @@ func drop_data(_pos, data) -> void:
 	project.undo_redo.create_action("Change Layer Order")
 	var new_layers: Array = project.layers.duplicate()
 
-	# TODO R: Check for other loops that could be replaced with a range...
-	# TODO R: new_layers is a little confusing, does it acutally need to be duplicated anymore? It shouldn't be modified...
-	# TODO R: can this code be made easier to read?
+	# TODO R1: Check for other loops that could be replaced with a range...
+	# TODO R1: new_layers is a little confusing, does it acutally need to be duplicated anymore? It shouldn't be modified...
+	# TODO R1: can this code be made easier to read?
 
 	var drop_from_indices := range(drop_layer - new_layers[drop_layer].get_children_recursive().size(), drop_layer + 1 )
 
@@ -291,7 +291,7 @@ func drop_data(_pos, data) -> void:
 
 		a["to_parents"] = a_from_parents.duplicate()
 		b["to_parents"] = drop_from_parents.duplicate()
-		for i in a.to_parents.size(): # TODO R: comment to explain this
+		for i in a.to_parents.size(): # TODO R0: comment to explain this
 			if a.to_parents[i] == a_from_parents[-1]:
 				a.to_parents[i] = drop_from_parents[-1]
 		for i in b.to_parents.size():

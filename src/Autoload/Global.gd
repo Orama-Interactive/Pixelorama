@@ -255,7 +255,7 @@ func undo_or_redo(
 			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	elif "Frame" in action_name:
-		# TODO R: Does what this comment says after the refacotr remain true? (Perhaps this should be moved to move_frame?)
+		# TODO R2: Does what this comment says after the refacotr remain true? (Perhaps this should be moved to move_frame?)
 		# This actually means that frames.size is one, but it hasn't been updated yet
 		if (undo and project.frames.size() == 2) or project.frames.size() == 1:  # Stop animating
 			play_forward.pressed = false
@@ -263,7 +263,7 @@ func undo_or_redo(
 			animation_timer.stop()
 
 	elif "Move Cels" == action_name:
-		# TODO R: is this still required?
+		# TODO R2: is this still required?
 		project.frames = project.frames  # to call frames_changed
 
 	canvas.update()

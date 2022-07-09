@@ -13,7 +13,7 @@ var past_above_canvas := true
 var future_above_canvas := true
 
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
-# TODO R: May remove some of these:
+# TODO R1: May remove some of these:
 var pixel_layer_button_node = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
 var group_layer_button_node = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
 
@@ -192,7 +192,7 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 
 
 func delete_frames(frames := []) -> void:
-	# TODO R: If there is mulitple frames, it is currently possible to select and delete them all
+	# TODO R0: If there is mulitple frames, it is currently possible to select and delete them all
 	var project: Project = Global.current_project
 	if project.frames.size() == 1:
 		return
@@ -580,7 +580,7 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 
 
 func _on_AddLayer_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm() # TODO R: Figure out once and for all, do these belong here, or in the project reversable functions (where these will be called on undo as well)
+	Global.canvas.selection.transform_content_confirm() # TODO R2: Figure out once and for all, do these belong here, or in the project reversable functions (where these will be called on undo as well)
 	var project: Project = Global.current_project
 
 	var l := PixelLayer.new()
@@ -632,7 +632,7 @@ func _on_CloneLayer_pressed() -> void:
 	for f in project.frames:
 		cels.append(f.cels[project.current_layer].copy())
 
-	# TODO R: Copies don't have linked cels properly set up...
+	# TODO R0: Copies don't have linked cels properly set up...
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
@@ -646,7 +646,7 @@ func _on_CloneLayer_pressed() -> void:
 
 
 func _on_RemoveLayer_pressed() -> void:
-	# TODO R: It is currently possible to delete all layers (by having all layers in a group and deleting the group)
+	# TODO R0: It is currently possible to delete all layers (by having all layers in a group and deleting the group)
 	var project: Project = Global.current_project
 	if project.layers.size() == 1:
 		return
@@ -665,7 +665,7 @@ func _on_RemoveLayer_pressed() -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Remove Layer")
-	# TODO R: what should be the new current layer?
+	# TODO R3: what should be the new current layer?
 	project.undo_redo.add_do_property(project, "current_layer", max(indices[0] - 1, 0))
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_do_method(project, "remove_layers", indices)
@@ -706,7 +706,7 @@ func change_layer_order(rate: int) -> void:
 	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	Global.current_project.undo_redo.commit_action()
 
-# TODO R: Does this need to be part of the refactor?
+# TODO R0: Does this need to be part of the refactor?
 func _on_MergeDownLayer_pressed() -> void:
 	var new_layers: Array = Global.current_project.duplicate_layers()
 
@@ -800,8 +800,8 @@ func _on_OnionSkinningSettings_popup_hide() -> void:
 
 func project_changed() -> void:
 	# TODO H: Changing project takes twice as long as previously, why? (Not sure if this func is the problem)
-	var project: Project = Global.current_project # TODO R: maybe pass in instead?
-	# TODO R: Could using queue_free rather than free (or remove and queue_free) actually cause bugs?
+	var project: Project = Global.current_project # TODO R3: maybe pass in instead?
+	# TODO R2: Could using queue_free rather than free (or remove and queue_free) actually cause bugs?
 	for child in Global.layers_container.get_children():
 		child.queue_free()
 	for child in Global.frame_ids.get_children():
@@ -817,12 +817,12 @@ func project_changed() -> void:
 		Global.frame_ids.add_child(button)
 		Global.frame_ids.move_child(button, f)
 
-	# TODO R: Remove and inline what's needed here if this isn't used anywhere else:
+	# TODO R3: Remove and inline what's needed here if this isn't used anywhere else:
 	Global.current_project._update_animation_timeline_selection()
 
 
 func project_frame_added(frame: int) -> void:
-	var project: Project = Global.current_project # TODO R: maybe pass in instead?
+	var project: Project = Global.current_project # TODO R3: maybe pass in instead?
 	var button: Button = frame_button_node.instance()
 	button.frame = frame
 	Global.frame_ids.add_child(button)
@@ -847,16 +847,16 @@ func project_frame_removed(frame: int) -> void:
 
 func project_layer_added(layer: int) -> void:
 	var project: Project = Global.current_project
-	# TODO R: should probably have a "layer" variable... (to many project.layers[layer])...
+	# TODO R3: should probably have a "layer" variable... (to many project.layers[layer])...
 	#		...or refactor things so less of this code is needed here.
-	# TODO R: Could this function be organized in a better way?
+	# TODO R1: Could this function be organized in a better way?
 	var layer_button: LayerButton
 	if project.layers[layer] is PixelLayer:
 		layer_button = pixel_layer_button_node.instance()
 	elif project.layers[layer] is GroupLayer:
 		layer_button = group_layer_button_node.instance()
-	layer_button.layer = layer # TODO R: See if needed
-	if project.layers[layer].name == "": # TODO R: This probably could be somewhere else... add_layer(s) in project?
+	layer_button.layer = layer # TODO R1: See if needed
+	if project.layers[layer].name == "": # TODO R1: This probably could be somewhere else... add_layer(s) in project?
 		project.layers[layer].name = project.layers[layer].get_default_name(layer)
 
 	Global.layers_container.add_child(layer_button)
@@ -864,14 +864,14 @@ func project_layer_added(layer: int) -> void:
 	Global.layers_container.move_child(layer_button, count - 1 - layer)
 
 	var layer_cel_container := HBoxContainer.new()
-	# TODO R: Is there any need for a name (and why is it LAYERSSS in one place, and FRAMESS in another?)
+	# TODO R3: Is there any need for a name (and why is it LAYERSSS in one place, and FRAMESS in another?)
 	layer_cel_container.name = "LAYERSSS " + str(layer)
 	Global.frames_container.add_child(layer_cel_container)
 	Global.frames_container.move_child(layer_cel_container, count - 1 - layer)
 	for f in range(project.frames.size()):
 		var cel_button = project.frames[f].cels[layer].create_cel_button()
 		cel_button.frame = f
-		cel_button.layer = layer# - 1 # TODO R: See if needed
+		cel_button.layer = layer# - 1 # TODO R1: See if needed
 		layer_cel_container.add_child(cel_button)
 
 	layer_button.visible = Global.current_project.layers[layer].is_expanded_in_hierarchy()

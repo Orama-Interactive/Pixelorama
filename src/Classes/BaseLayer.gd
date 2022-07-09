@@ -97,7 +97,7 @@ func copy() -> BaseLayer:
 	copy.deserialize(serialize())
 	return copy
 
-
+# TODO L: Should this be turned into set_as_default_name?
 func get_default_name(number: int) -> String:
 	return tr("Layer") + " %s" % number
 

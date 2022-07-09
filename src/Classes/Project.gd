@@ -397,7 +397,7 @@ func _size_changed(value: Vector2) -> void:
 func _frames_changed(value: Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	frames = value
-#	selected_cels.clear() # TODO R: Determine if this needs to be kept (If it is, selected cels needs to be intialized after creating project (ie: in Main), rather than here
+#	selected_cels.clear() # TODO R2: Determine if this needs to be kept (If it is, selected cels needs to be intialized after creating project (ie: in Main), rather than here
 	_set_timeline_first_and_last_frames()
 
 
@@ -407,8 +407,8 @@ func _layers_changed(value: Array) -> void:
 		Global.layers_changed_skip = false
 		return
 
-#	selected_cels.clear() # TODO R: Determine if this needs to be kept (If it is, selected cels needs to be intialized after creating project (ie: in Main), rather than here
-	# TODO R: investigate wether these are still required:
+#	selected_cels.clear() # TODO R2: Determine if this needs to be kept (If it is, selected cels needs to be intialized after creating project (ie: in Main), rather than here
+	# TODO R2: investigate wether these are still required:
 #	var layer_button = Global.layers_container.get_child(
 #		Global.layers_container.get_child_count() - 1 - current_layer
 #	)
@@ -454,7 +454,7 @@ func _frame_changed(value: int) -> void:
 				var cel_button = container.get_child(frame)
 				cel_button.pressed = true
 
-	# TODO R: When starting up, with only one frame, these aren't getting called:
+	# TODO R0: When starting up, with only one frame, these aren't getting called:
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
 	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
 	Global.disable_button(
@@ -555,7 +555,7 @@ func _animation_tags_changed(value: Array) -> void:
 
 	_set_timeline_first_and_last_frames()
 
-# TODO R: Is this really required in _frames_changed (or the add/remove frame funcs, seems to work fine without when playing anim)
+# TODO R1: Is this really required in _frames_changed (or the add/remove frame funcs, seems to work fine without when playing anim)
 func _set_timeline_first_and_last_frames() -> void:
 	# This is useful in case tags get modified DURING the animation is playing
 	# otherwise, this code is useless in this context, since these values are being set
@@ -600,7 +600,7 @@ func is_empty() -> bool:
 
 
 func duplicate_layers() -> Array:
-	# TODO R: May want to test this a bit after refactor
+	# TODO R1: May want to test this a bit after refactor
 	# TODO H: When duplicating the layers, parent references would be using the old layers now, this will probably cause bugs
 	var new_layers: Array = layers.duplicate()
 	# Loop through the array to create new classes for each element, so that they
@@ -775,7 +775,7 @@ func resize_bitmap_values(bitmap: BitMap, new_size: Vector2, flip_x: bool, flip_
 
 
 func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be in ascending order
-	assert(self == Global.current_project) # TODO R: Remove (Things like calling project_frame/layer_added may need to do a check if its the current project if this fails)
+	assert(self == Global.current_project) # TODO R3: Remove (Things like calling project_frame/layer_added may need to do a check if its the current project if this fails)
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	for i in range(new_frames.size()):
@@ -796,7 +796,7 @@ func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be
 func remove_frames(indices: Array) -> void:  # indices should be in ascending order
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
-	# TODO R: Could one half of cel linking and animation tags be included in the add or remove_frame functions? (ie: removing works, but adding doesn't?)
+	# TODO R1: Could one half of cel linking and animation tags be included in the add or remove_frame functions? (ie: removing works, but adding doesn't?)
 	for i in range(indices.size()):
 		# With each removed index, future indices need to be lowered, so subtract by i
 		frames.remove(indices[i] - i)
@@ -846,7 +846,7 @@ func swap_frame(a_index: int, b_index: int) -> void:
 
 
 func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels is 2d Array of cels
-	assert(self == Global.current_project) # TODO R: Remove (Things like calling project_frame/layer_added may need to do a check if its the current project if this fails)
+	assert(self == Global.current_project) # TODO R3: Remove (Things like calling project_frame/layer_added may need to do a check if its the current project if this fails)
 	selected_cels.clear()
 	for i in range(indices.size()):
 		layers.insert(indices[i], new_layers[i])
@@ -886,9 +886,8 @@ func remove_layers(indices: Array) -> void:
 
 # from_indices and to_indicies should be in ascending order
 func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> void:
-	# TODO R: it may be good to do a test run with using add/remove_layers instead of using move_layers
 	selected_cels.clear()
-	var old_layers := layers.duplicate() # TODO R: Could maybe change to just empty layers array, using append(pop_at) trick like in swap_layers
+	var old_layers := layers.duplicate() # TODO R1: Could maybe change to just empty layers array, using append(pop_at) trick like in swap_layers
 	var removed_cels := [] # 2D array of cels (an array for each layer removed)
 
 	for i in range(from_indices.size()):
@@ -900,7 +899,7 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 		Global.animation_timeline.project_layer_removed(from_indices[i] - i)
 	for i in range(to_indices.size()):
 		layers.insert(to_indices[i], old_layers[from_indices[i]])
-		layers[to_indices[i]].parent = to_parents[i] # TODO R: it could be possible to do the to_parents when removing (previous loop), allowing this loop to be recombined with the next
+		layers[to_indices[i]].parent = to_parents[i] # TODO R1: it could be possible to do the to_parents when removing (previous loop), allowing this loop to be recombined with the next
 		for f in range(frames.size()):
 			frames[f].cels.insert(to_indices[i], removed_cels[i][f])
 	for i in range(to_indices.size()): # Loop again (All parents must be set before adding the UI)
@@ -920,7 +919,7 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 # (Using dictionaries because there seems to be a limit of 5 arguments for do/undo method calls)
 func swap_layers(a: Dictionary, b: Dictionary) -> void:
 	selected_cels.clear()
-	print("a: ", a, "  b: ", b) # TODO R: Remove
+	print("a: ", a, "  b: ", b) # TODO R3: Remove
 	var a_layers := []
 	var b_layers := []
 	var a_cels := [] # 2D array of cels (an array for each layer removed)

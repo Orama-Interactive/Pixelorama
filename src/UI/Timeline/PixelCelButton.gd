@@ -9,7 +9,7 @@ var image: Image
 
 onready var popup_menu: PopupMenu = $PopupMenu
 
-# TODO R: The linked indicator seems to not get updated properly (adding a new linked cel won't show the indicator until another timeline change, same with linking an existing cel)
+# TODO R0: The linked indicator seems to not get updated properly (adding a new linked cel won't show the indicator until another timeline change, same with linking an existing cel)
 func _ready() -> void:
 	button_setup()
 
@@ -103,7 +103,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			_delete_cel_content()
 
 		MenuOptions.LINK:
-			# TODO R: See if there is any refactoring to do here:
+			# TODO R0: See if there is any refactoring to do here:
 			var f: Frame = Global.current_project.frames[frame]
 			var cel_index: int = Global.current_project.layers[layer].linked_cels.find(f)
 			var new_layers: Array = Global.current_project.duplicate_layers()
@@ -113,7 +113,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				new_cels[i] = PixelCel.new(
 					new_cels[i].image, new_cels[i].opacity, new_cels[i].image_texture
 				)
-# TODO R: Make sure all this stuff still works after refactor:
+# TODO R3: Make sure all this stuff still works after refactor:
 			if popup_menu.get_item_metadata(MenuOptions.LINK) == "Unlink Cel":
 				new_layers[layer].linked_cels.remove(cel_index)
 				var sprite := Image.new()
