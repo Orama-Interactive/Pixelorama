@@ -130,7 +130,6 @@ func _add_extension(file_name: String) -> void:
 	var file_name_no_ext: String = file_name.get_basename()
 	var file_path: String = EXTENSIONS_PATH.plus_file(file_name)
 	var success := ProjectSettings.load_resource_pack(file_path)
-
 	if !success:
 		print("Failed loading resource pack.")
 		var dir := Directory.new()
