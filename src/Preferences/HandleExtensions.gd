@@ -10,7 +10,8 @@ onready var enable_button: Button = $HBoxContainer/EnableButton
 onready var uninstall_button: Button = $HBoxContainer/UninstallButton
 onready var extension_parent: Node = Global.control.get_node("Extensions")
 
-var damaged_extension :String
+var damaged_extension: String
+
 
 class Extension:
 	var file_name := ""
