@@ -81,7 +81,7 @@ var preferences := [
 
 var content_list := []
 var selected_item := 0
-var restore_default_button_tcsn = preload("res://src/Preferences/RestoreDefaultButton.tscn")
+var restore_default_button_tcsn := preload("res://src/Preferences/RestoreDefaultButton.tscn")
 
 onready var list: ItemList = $HSplitContainer/List
 onready var right_side: VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
@@ -233,16 +233,16 @@ func preference_update(prop: String) -> void:
 		else:
 			autosave_interval.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
-	if "grid" in prop:
+	elif "grid" in prop:
 		Global.canvas.grid.update()
 
-	if prop in ["pixel_grid_show_at_zoom", "pixel_grid_color"]:
+	elif prop in ["pixel_grid_show_at_zoom", "pixel_grid_color"]:
 		Global.canvas.pixel_grid.update()
 
-	if "checker" in prop:
+	elif "checker" in prop:
 		Global.transparent_checker.update_rect()
 
-	if prop in ["guide_color"]:
+	elif prop in ["guide_color"]:
 		for guide in Global.canvas.get_children():
 			if guide is SymmetryGuide:
 				# Add a subtle difference to the normal guide color by mixing in some blue
@@ -250,17 +250,17 @@ func preference_update(prop: String) -> void:
 			elif guide is Guide:
 				guide.default_color = Global.guide_color
 
-	if prop in ["fps_limit"]:
+	elif prop in ["fps_limit"]:
 		Engine.set_target_fps(Global.fps_limit)
 
-	if "selection" in prop:
+	elif "selection" in prop:
 		var marching_ants: Sprite = Global.canvas.selection.marching_ants_outline
 		marching_ants.material.set_shader_param("animated", Global.selection_animated_borders)
 		marching_ants.material.set_shader_param("first_color", Global.selection_border_color_1)
 		marching_ants.material.set_shader_param("second_color", Global.selection_border_color_2)
 		Global.canvas.selection.update()
 
-	if prop in ["icon_color_from", "custom_icon_color"]:
+	elif prop in ["icon_color_from", "custom_icon_color"]:
 		if Global.icon_color_from == Global.IconColorFrom.THEME:
 			var current_theme: Theme = themes.themes[themes.theme_index]
 			Global.modulate_icon_color = current_theme.get_color("modulate_color", "Icons")
@@ -268,26 +268,26 @@ func preference_update(prop: String) -> void:
 			Global.modulate_icon_color = Global.custom_icon_color
 		themes.change_icon_colors()
 
-	if prop == "left_tool_color":
+	elif prop == "left_tool_color":
 		for child in Tools._tool_buttons.get_children():
 			var left_background: NinePatchRect = child.get_node("BackgroundLeft")
 			left_background.modulate = Global.left_tool_color
 
-	if prop == "right_tool_color":
+	elif prop == "right_tool_color":
 		for child in Tools._tool_buttons.get_children():
 			var left_background: NinePatchRect = child.get_node("BackgroundRight")
 			left_background.modulate = Global.right_tool_color
 
-	if prop == "tool_button_size":
+	elif prop == "tool_button_size":
 		Tools.set_button_size(Global.tool_button_size)
 
-	if prop == "native_cursors":
+	elif prop == "native_cursors":
 		if Global.native_cursors:
 			Input.set_custom_mouse_cursor(null, Input.CURSOR_CROSS, Vector2(15, 15))
 		else:
 			Global.control.set_custom_cursor()
 
-	if prop == "cross_cursor":
+	elif prop == "cross_cursor":
 		if Global.cross_cursor:
 			Global.main_viewport.mouse_default_cursor_shape = Control.CURSOR_CROSS
 		else:
@@ -344,5 +344,5 @@ func _on_ShrinkApplyButton_pressed() -> void:
 	hide()
 	popup_centered(Vector2(400, 280))
 	Global.dialog_open(true)
-	yield(Global.get_tree().create_timer(0.01), "timeout")
+	yield(get_tree(), "idle_frame")
 	Global.camera.fit_to_frame(Global.current_project.size)
