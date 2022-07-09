@@ -4,13 +4,12 @@ const EXTENSIONS_PATH := "user://extensions"
 
 var extensions := {}  # Extension name : Extension class
 var extension_selected := -1
+var damaged_extension: String
 
 onready var extension_list: ItemList = $InstalledExtensions
 onready var enable_button: Button = $HBoxContainer/EnableButton
 onready var uninstall_button: Button = $HBoxContainer/UninstallButton
 onready var extension_parent: Node = Global.control.get_node("Extensions")
-
-var damaged_extension: String
 
 
 class Extension:
