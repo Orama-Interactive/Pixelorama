@@ -10,6 +10,7 @@ onready var enable_button: Button = $HBoxContainer/EnableButton
 onready var uninstall_button: Button = $HBoxContainer/UninstallButton
 onready var extension_parent: Node = Global.control.get_node("Extensions")
 
+var damaged_extension :String
 
 class Extension:
 	var file_name := ""
@@ -89,6 +90,29 @@ func _uninstall_extension(file_name := "", remove_file := true, item := extensio
 
 
 func _add_extension(file_name: String) -> void:
+	var tester_file := File.new()  # For testing and deleting damaged extensions
+	var remover_directory := Directory.new()
+	# Remove any extension that was proven guilty before this extension is loaded
+	if tester_file.file_exists(EXTENSIONS_PATH.plus_file("Faulty.txt")):
+		# This code will only run if pixelorama crashed
+		var faulty_path = EXTENSIONS_PATH.plus_file("Faulty.txt")
+		tester_file.open(faulty_path, File.READ)
+		damaged_extension = tester_file.get_as_text()
+		tester_file.close()
+		remover_directory.remove(EXTENSIONS_PATH.plus_file(damaged_extension))
+		remover_directory.remove(EXTENSIONS_PATH.plus_file("Faulty.txt"))
+
+	# Don't load a deleted extension
+	if damaged_extension == file_name:
+		# This code will only run if pixelorama crashed
+		damaged_extension = ""
+		return
+
+	# The new (about to load) extension will be considered guilty till it's proven innocent
+	tester_file.open(EXTENSIONS_PATH.plus_file("Faulty.txt"), File.WRITE)
+	tester_file.store_string(file_name)  # Guilty till proven innocent ;)
+	tester_file.close()
+
 	if extensions.has(file_name):
 		var item := -1
 		for i in extension_list.get_item_count():
@@ -106,6 +130,7 @@ func _add_extension(file_name: String) -> void:
 	var file_name_no_ext: String = file_name.get_basename()
 	var file_path: String = EXTENSIONS_PATH.plus_file(file_name)
 	var success := ProjectSettings.load_resource_pack(file_path)
+
 	if !success:
 		print("Failed loading resource pack.")
 		var dir := Directory.new()
@@ -138,6 +163,10 @@ func _add_extension(file_name: String) -> void:
 	extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, false)
 	if extension.enabled:
 		_enable_extension(extension)
+
+	# If an extension doesn't crash pixelorama then it is proven innocent
+	# And we should now delete it's "Faulty.txt" file
+	remover_directory.remove(EXTENSIONS_PATH.plus_file("Faulty.txt"))
 
 
 func _enable_extension(extension: Extension, save_to_config := true) -> void:
