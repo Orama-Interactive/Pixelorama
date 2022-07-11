@@ -193,17 +193,18 @@ func _select_current_layer() -> void:
 
 
 func get_drag_data(_position) -> Array:
+	# TODO H: If keeping this new multi layer drag design, layers here can be reutrned in the array
+	#			instead of layer...
 	var layers := range(layer - Global.current_project.layers[layer].get_children_recursive().size(), layer + 1)
 
 	var box := VBoxContainer.new()
-
-	for i in range(layers.size()):
+	for i in layers.size():
 		var button := Button.new()
 		button.rect_min_size = rect_size
 		button.theme = Global.control.theme
 		button.text = Global.current_project.layers[layers[-1 - i]].name
 		box.add_child(button)
-		set_drag_preview(box)
+	set_drag_preview(box)
 
 	return ["Layer", layer]
 
@@ -289,14 +290,13 @@ func drop_data(_pos, data) -> void:
 		for l in a.from:
 			a_from_parents.append(new_layers[l].parent)
 
+		# to_parents starts as a dulpicate of from_parents, set the root layer's (with one layer or
+		# group with its children, this will always be the last layer [-1]) parent to the other
+		# root layer's parent
 		a["to_parents"] = a_from_parents.duplicate()
 		b["to_parents"] = drop_from_parents.duplicate()
-		for i in a.to_parents.size(): # TODO R0: comment to explain this
-			if a.to_parents[i] == a_from_parents[-1]:
-				a.to_parents[i] = drop_from_parents[-1]
-		for i in b.to_parents.size():
-			if b.to_parents[i] == drop_from_parents[-1]:
-				b.to_parents[i] = a_from_parents[-1]
+		a.to_parents[-1] = drop_from_parents[-1]
+		b.to_parents[-1] = a_from_parents[-1]
 
 		project.undo_redo.add_do_method(project, "swap_layers", a, b)
 		project.undo_redo.add_undo_method(project, "swap_layers",
