@@ -462,11 +462,9 @@ func _frame_changed(value: int) -> void:
 	)
 
 	if current_frame < frames.size():
-		# TODO H: Make this work with groups:
-		if not layers[current_layer] is GroupLayer:
-			var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
-			Global.layer_opacity_slider.value = cel_opacity * 100
-			Global.layer_opacity_spinbox.value = cel_opacity * 100
+		var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
+		Global.layer_opacity_slider.value = cel_opacity * 100
+		Global.layer_opacity_spinbox.value = cel_opacity * 100
 
 	Global.canvas.update()
 	Global.transparent_checker.update_rect()

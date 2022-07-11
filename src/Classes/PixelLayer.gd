@@ -34,3 +34,7 @@ func deserialize(dict: Dictionary) -> void:
 
 func can_layer_get_drawn() -> bool:
 	return is_visible_in_hierarchy() && !is_locked_in_hierarchy()
+
+
+func create_layer_button() -> Node:
+	return Global.pixel_layer_button_node.instance()

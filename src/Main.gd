@@ -27,7 +27,7 @@ func _ready() -> void:
 	Global.current_project.frames.append(Global.current_project.new_empty_frame())
 	Global.animation_timeline.project_changed() # TODO R2: would it be a good idea to remove this, and the intial buttons back into the timeiline scene?
 
-	# TODO R3: I Think this line should be safe to remove: (calling setter)
+	# TODO R3: I Think this line should be safe to remove: (calling setter, already called when appending the layer)
 #	Global.current_project.layers = Global.current_project.layers
 
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())

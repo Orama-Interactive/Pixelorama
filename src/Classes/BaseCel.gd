@@ -29,5 +29,5 @@ func copy() -> BaseCel:
 	return null
 
 
-func create_cel_button() -> Button:
+func create_cel_button() -> Node:
 	return null

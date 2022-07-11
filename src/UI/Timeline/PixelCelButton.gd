@@ -9,7 +9,10 @@ var image: Image
 
 onready var popup_menu: PopupMenu = $PopupMenu
 
-# TODO R0: The linked indicator seems to not get updated properly (adding a new linked cel won't show the indicator until another timeline change, same with linking an existing cel)
+# TODO R3: The linked indicator seems to not get updated properly (adding a new linked cel won't show
+#			the indicator until another timeline change, same with linking an existing cel)
+#			(this is most likely due to the order of do/undo methods/properties being added in
+#			AnimationTimeline. Will leave until I decide what to do about setting linked in the first place)
 func _ready() -> void:
 	button_setup()
 
@@ -103,10 +106,12 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			_delete_cel_content()
 
 		MenuOptions.LINK:
-			# TODO R0: See if there is any refactoring to do here:
-			var f: Frame = Global.current_project.frames[frame]
-			var cel_index: int = Global.current_project.layers[layer].linked_cels.find(f)
-			var new_layers: Array = Global.current_project.duplicate_layers()
+			# TODO R3: If you do part of linked cels in add/remove frames, consider changes here:
+			# TODO R3: Make add_do/undo_property/method order consistent
+			var project: Project = Global.current_project
+			var f: Frame = project.frames[frame]
+			var cel_index: int = project.layers[layer].linked_cels.find(f)
+			var new_layers: Array = project.duplicate_layers()
 			var new_cels: Array = f.cels.duplicate()
 			for i in new_cels.size():
 				# TODO H: This doesn't work (currently replaces ALL cels on the frame)
@@ -123,40 +128,32 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				new_cels[layer].image = sprite
 				new_cels[layer].image_texture = sprite_texture
 
-				Global.current_project.undo_redo.create_action("Unlink Cel")
-				Global.current_project.undo_redo.add_do_property(
-					Global.current_project, "layers", new_layers
-				)
-				Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-				Global.current_project.undo_redo.add_undo_property(
-					Global.current_project, "layers", Global.current_project.layers
-				)
-				Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+				project.undo_redo.create_action("Unlink Cel")
+				project.undo_redo.add_do_property(project, "layers", new_layers)
+				project.undo_redo.add_do_property(f, "cels", new_cels)
+				project.undo_redo.add_undo_property(project, "layers", project.layers)
+				project.undo_redo.add_undo_property(f, "cels", f.cels)
 
-				Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-				Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-				Global.current_project.undo_redo.commit_action()
+				project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+				project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+				project.undo_redo.commit_action()
 
 			elif popup_menu.get_item_metadata(MenuOptions.LINK) == "Link Cel":
 				new_layers[layer].linked_cels.append(f)
-				Global.current_project.undo_redo.create_action("Link Cel")
-				Global.current_project.undo_redo.add_do_property(
-					Global.current_project, "layers", new_layers
-				)
+				project.undo_redo.create_action("Link Cel")
+				project.undo_redo.add_do_property(project, "layers", new_layers)
 				if new_layers[layer].linked_cels.size() > 1:
 					# If there are already linked cels, set the current cel's image
 					# to the first linked cel's image
 					new_cels[layer].image = new_layers[layer].linked_cels[0].cels[layer].image
 					new_cels[layer].image_texture = new_layers[layer].linked_cels[0].cels[layer].image_texture
-					Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-					Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+					project.undo_redo.add_do_property(f, "cels", new_cels)
+					project.undo_redo.add_undo_property(f, "cels", f.cels)
 
-				Global.current_project.undo_redo.add_undo_property(
-					Global.current_project, "layers", Global.current_project.layers
-				)
-				Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-				Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-				Global.current_project.undo_redo.commit_action()
+				project.undo_redo.add_undo_property(project, "layers", project.layers)
+				project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+				project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+				project.undo_redo.commit_action()
 
 
 func _delete_cel_content() -> void:

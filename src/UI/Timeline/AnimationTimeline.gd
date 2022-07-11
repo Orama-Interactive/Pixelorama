@@ -13,9 +13,6 @@ var past_above_canvas := true
 var future_above_canvas := true
 
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
-# TODO R1: May remove some of these:
-var pixel_layer_button_node = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
-var group_layer_button_node = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
 
 onready var old_scroll: int = 0  # The previous scroll state of $ScrollContainer
 onready var tag_spacer = find_node("TagSpacer")
@@ -799,23 +796,31 @@ func _on_OnionSkinningSettings_popup_hide() -> void:
 
 
 func project_changed() -> void:
-	# TODO H: Changing project takes twice as long as previously, why? (Not sure if this func is the problem)
+	# TODO R0: When changing project the selcted frames will be 1 less (1 further to the left)
+	#				then they should be
+	# TODO R0: If you draw in the automatically created project, then load/create a new project,
+	#				then going back to the automatically created project tab, you can't add/remove
+	#				layers/frames (and probaly other issues).
+	#				THIS HASN't BEEN REPEATED
 	var project: Project = Global.current_project # TODO R3: maybe pass in instead?
-	# TODO R2: Could using queue_free rather than free (or remove and queue_free) actually cause bugs?
+	# TODO R0: Could using queue_free rather than free (or remove and queue_free) actually cause bugs?
+	#				This caused the bug where changing the project would have the wrong frame button
+	#				selected, but only when move_children was not called
 	for child in Global.layers_container.get_children():
 		child.queue_free()
 	for child in Global.frame_ids.get_children():
-		child.queue_free()
+#		child.queue_free()
+		child.free()
 	for container in Global.frames_container.get_children():
 		container.queue_free()
 
-	for i in range(project.layers.size()):
+	for i in range(project.layers.size()):  # TODO R2: Could this be faster if it did it in reverse order?
 		project_layer_added(i)
 	for f in range(project.frames.size()):
 		var button: Button = frame_button_node.instance()
 		button.frame = f
 		Global.frame_ids.add_child(button)
-		Global.frame_ids.move_child(button, f)
+#		Global.frame_ids.move_child(button, f) # TODO R0: Is this needed? Shouldn't they be in order already? (Perhaps commenting it out caused one of the above issues?)
 
 	# TODO R3: Remove and inline what's needed here if this isn't used anywhere else:
 	Global.current_project._update_animation_timeline_selection()
@@ -847,14 +852,9 @@ func project_frame_removed(frame: int) -> void:
 
 func project_layer_added(layer: int) -> void:
 	var project: Project = Global.current_project
-	# TODO R3: should probably have a "layer" variable... (to many project.layers[layer])...
-	#		...or refactor things so less of this code is needed here.
+
 	# TODO R1: Could this function be organized in a better way?
-	var layer_button: LayerButton
-	if project.layers[layer] is PixelLayer:
-		layer_button = pixel_layer_button_node.instance()
-	elif project.layers[layer] is GroupLayer:
-		layer_button = group_layer_button_node.instance()
+	var layer_button: LayerButton = project.layers[layer].create_layer_button()
 	layer_button.layer = layer # TODO R1: See if needed
 	if project.layers[layer].name == "": # TODO R1: This probably could be somewhere else... add_layer(s) in project?
 		project.layers[layer].name = project.layers[layer].get_default_name(layer)
@@ -865,6 +865,7 @@ func project_layer_added(layer: int) -> void:
 
 	var layer_cel_container := HBoxContainer.new()
 	# TODO R3: Is there any need for a name (and why is it LAYERSSS in one place, and FRAMESS in another?)
+	# TODO R0: Could the order here affect performance?
 	layer_cel_container.name = "LAYERSSS " + str(layer)
 	Global.frames_container.add_child(layer_cel_container)
 	Global.frames_container.move_child(layer_cel_container, count - 1 - layer)

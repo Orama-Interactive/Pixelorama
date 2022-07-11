@@ -17,5 +17,5 @@ func copy() -> BaseCel:
 	return get_script().new(opacity)
 
 
-func create_cel_button() -> Button:
-	return load("res://src/UI/Timeline/GroupCelButton.tscn").instance() as Button
+func create_cel_button() -> Node:
+	return Global.group_cel_button_node.instance()

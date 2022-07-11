@@ -27,3 +27,7 @@ func get_default_name(number: int) -> String:
 
 func accepts_child(_layer: BaseLayer) -> bool:
 	return true
+
+
+func create_layer_button() -> Node:
+	return Global.group_layer_button_node.instance()

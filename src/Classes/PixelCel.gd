@@ -7,7 +7,6 @@ extends BaseCel
 var image: Image setget image_changed
 var image_texture: ImageTexture
 
-
 func _init(_image := Image.new(), _opacity := 1.0, _image_texture: ImageTexture = null) -> void:
 	if _image_texture:
 		image_texture = _image_texture
@@ -46,7 +45,7 @@ func copy() -> BaseCel:
 	return get_script().new(copy_image, opacity, copy_texture)
 
 
-func create_cel_button() -> Button:
-	var cel_button = load("res://src/UI/Timeline/PixelCelButton.tscn").instance()
+func create_cel_button() -> Node:
+	var cel_button = Global.pixel_cel_button_node.instance()
 	cel_button.get_child(0).texture = image_texture
 	return cel_button
