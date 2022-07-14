@@ -189,12 +189,13 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 
 
 func delete_frames(frames := []) -> void:
-	# TODO R0: If there is mulitple frames, it is currently possible to select and delete them all
 	var project: Project = Global.current_project
 	if project.frames.size() == 1:
 		return
 
-	if frames.size() == 0:
+	if frames.size() == project.frames.size():
+		frames.remove(frames.size() - 1) # Ensure the project has at least 1 frame
+	elif frames.size() == 0:
 		frames.append(project.current_frame)
 
 	var new_frames: Array = project.frames.duplicate()
@@ -214,8 +215,6 @@ func delete_frames(frames := []) -> void:
 		)
 
 	for frame in frames:
-		if new_frames.size() == 1:  # If only 1 frame
-			break
 		var frame_to_delete: Frame = project.frames[frame]
 		new_frames.erase(frame_to_delete)
 		if current_frame > 0 && current_frame == new_frames.size():  # If it's the last frame
@@ -643,7 +642,6 @@ func _on_CloneLayer_pressed() -> void:
 
 
 func _on_RemoveLayer_pressed() -> void:
-	# TODO R0: It is currently possible to delete all layers (by having all layers in a group and deleting the group)
 	var project: Project = Global.current_project
 	if project.layers.size() == 1:
 		return
@@ -784,23 +782,14 @@ func _on_OnionSkinningSettings_popup_hide() -> void:
 
 
 func project_changed() -> void:
-	# TODO R0: When changing project the selcted frames will be 1 less (1 further to the left)
-	#				then they should be
-	# TODO R0: If you draw in the automatically created project, then load/create a new project,
-	#				then going back to the automatically created project tab, you can't add/remove
-	#				layers/frames (and probaly other issues).
-	#				THIS HASN't BEEN REPEATED
 	var project: Project = Global.current_project # TODO R3: maybe pass in instead?
-	# TODO R0: Could using queue_free rather than free (or remove and queue_free) actually cause bugs?
-	#				This caused the bug where changing the project would have the wrong frame button
-	#				selected, but only when move_children was not called
+	# These must be removed from tree immediately to not mess up the indices of the new buttons:
 	for child in Global.layers_container.get_children():
-		child.queue_free()
+		child.free()
 	for child in Global.frame_ids.get_children():
-#		child.queue_free()
 		child.free()
 	for container in Global.frames_container.get_children():
-		container.queue_free()
+		container.free()
 
 	for i in range(project.layers.size()):  # TODO R2: Could this be faster if it did it in reverse order?
 		project_layer_added(i)
@@ -808,7 +797,6 @@ func project_changed() -> void:
 		var button: Button = frame_button_node.instance()
 		button.frame = f
 		Global.frame_ids.add_child(button)
-#		Global.frame_ids.move_child(button, f) # TODO R0: Is this needed? Shouldn't they be in order already? (Perhaps commenting it out caused one of the above issues?)
 
 	# TODO R3: Remove and inline what's needed here if this isn't used anywhere else:
 	Global.current_project._update_animation_timeline_selection()
@@ -853,7 +841,6 @@ func project_layer_added(layer: int) -> void:
 
 	var layer_cel_container := HBoxContainer.new()
 	# TODO R3: Is there any need for a name (and why is it LAYERSSS in one place, and FRAMESS in another?)
-	# TODO R0: Could the order here affect performance?
 	layer_cel_container.name = "LAYERSSS " + str(layer)
 	Global.frames_container.add_child(layer_cel_container)
 	Global.frames_container.move_child(layer_cel_container, count - 1 - layer)
