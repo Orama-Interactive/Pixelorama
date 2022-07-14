@@ -703,83 +703,141 @@ func change_layer_order(rate: int) -> void:
 	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	Global.current_project.undo_redo.commit_action()
 
-# TODO R0: Does this need to be part of the refactor?
+
+#func _on_MergeDownLayer_pressed() -> void:
+#	var project: Project = Global.current_project
+#	var new_layers: Array = project.duplicate_layers()
+#
+#	project.undos += 1
+#	project.undo_redo.create_action("Merge Layer")
+#	for f in project.frames:
+#		var new_cels: Array = f.cels.duplicate()
+#		for i in new_cels.size():
+#			new_cels[i] = PixelCel.new(new_cels[i].image, new_cels[i].opacity)
+#		# TODO Later: top_image here doesn't really need to be a copy if there isn't layer transparency
+#		#			though this probably will be rewriten with blend modes anyway...
+#		var top_image := Image.new()
+#		top_image.copy_from(new_cels[project.current_layer].image)
+#
+#		top_image.lock()
+#		if f.cels[project.current_layer].opacity < 1:  # If we have layer transparency
+#			for xx in top_image.get_size().x:
+#				for yy in top_image.get_size().y:
+#					var pixel_color: Color = top_image.get_pixel(xx, yy)
+#					var alpha: float = pixel_color.a * f.cels[project.current_layer].opacity
+#					top_image.set_pixel(
+#						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
+#					)
+#		top_image.unlock()
+#
+#		var bottom_image := Image.new()
+#		bottom_image.copy_from(f.cels[project.current_layer - 1].image)
+#		bottom_image.blend_rect(top_image, Rect2(Vector2.ZERO, project.size), Vector2.ZERO)
+#		new_cels.remove(project.current_layer) # TODO NOTE: Removign the cel here
+#		if (
+#			!top_image.is_invisible()
+#			and project.layers[project.current_layer - 1].linked_cels.size() > 1
+#			and f in project.layers[project.current_layer - 1].linked_cels
+#		):
+#			new_layers[project.current_layer - 1].linked_cels.erase(f)
+#			new_cels[project.current_layer - 1].image = bottom_image
+#		else:
+#			project.undo_redo.add_do_property(
+#				f.cels[project.current_layer - 1].image, "data", bottom_image.data
+#			)
+#			project.undo_redo.add_undo_property(
+#				f.cels[project.current_layer - 1].image,
+#				"data",
+#				f.cels[project.current_layer - 1].image.data
+#			)
+#
+#		project.undo_redo.add_do_property(f, "cels", new_cels)
+#		project.undo_redo.add_undo_property(f, "cels", f.cels)
+#
+#	new_layers.remove(project.current_layer)
+#	project.undo_redo.add_do_property(project, "current_layer", project.current_layer - 1)
+#	project.undo_redo.add_do_property(project, "layers", new_layers)
+#	project.undo_redo.add_undo_property(project, "layers", project.layers)
+#	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+#
+#	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+#	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+#	project.undo_redo.commit_action()
+
+
 func _on_MergeDownLayer_pressed() -> void:
-	var new_layers: Array = Global.current_project.duplicate_layers()
+	var project: Project = Global.current_project
+	var new_bottom_linked_cels: Array = project.layers[project.current_layer - 1].linked_cels.duplicate()
 
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Merge Layer")
-	for f in Global.current_project.frames:
-		var new_cels: Array = f.cels.duplicate()
-		for i in new_cels.size():
-			new_cels[i] = PixelCel.new(new_cels[i].image, new_cels[i].opacity)
-		var selected_layer := Image.new()
-		selected_layer.copy_from(new_cels[Global.current_project.current_layer].image)
+	project.undos += 1
+	project.undo_redo.create_action("Merge Layer")
 
-		selected_layer.lock()
-		if f.cels[Global.current_project.current_layer].opacity < 1:  # If we have layer transparency
-			for xx in selected_layer.get_size().x:
-				for yy in selected_layer.get_size().y:
-					var pixel_color: Color = selected_layer.get_pixel(xx, yy)
-					var alpha: float = (
-						pixel_color.a
-						* f.cels[Global.current_project.current_layer].opacity
-					)
-					selected_layer.set_pixel(
+	for f in project.frames:
+		# TODO Later: top_image here doesn't really need to be a copy if there isn't layer transparency
+		#			though this probably will be rewriten with blend modes anyway...
+		var top_image := Image.new()
+		top_image.copy_from(f.cels[project.current_layer].image)
+
+		top_image.lock()
+		if f.cels[project.current_layer].opacity < 1:  # If we have layer transparency
+			for xx in top_image.get_size().x:
+				for yy in top_image.get_size().y:
+					var pixel_color: Color = top_image.get_pixel(xx, yy)
+					var alpha: float = pixel_color.a * f.cels[project.current_layer].opacity
+					top_image.set_pixel(
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
-		selected_layer.unlock()
+		top_image.unlock()
 
-		var new_layer := Image.new()
-		new_layer.copy_from(f.cels[Global.current_project.current_layer - 1].image)
-		new_layer.blend_rect(
-			selected_layer, Rect2(Vector2.ZERO, Global.current_project.size), Vector2.ZERO
-		)
-		new_cels.remove(Global.current_project.current_layer)
+		var bottom_image := Image.new()
+		bottom_image.copy_from(f.cels[project.current_layer - 1].image)
+		bottom_image.blend_rect(top_image, Rect2(Vector2.ZERO, project.size), Vector2.ZERO)
 		if (
-			!selected_layer.is_invisible()
-			and (
-				Global.current_project.layers[Global.current_project.current_layer - 1].linked_cels.size()
-				> 1
-			)
-			and (
-				f
-				in Global.current_project.layers[(
-					Global.current_project.current_layer
-					- 1
-				)].linked_cels
-			)
+			!top_image.is_invisible()
+			and project.layers[project.current_layer - 1].linked_cels.size() > 1
+			and f in project.layers[project.current_layer - 1].linked_cels
 		):
-			new_layers[Global.current_project.current_layer - 1].linked_cels.erase(f)
-			new_cels[Global.current_project.current_layer - 1].image = new_layer
+			new_bottom_linked_cels.erase(f)
+
+			project.undo_redo.add_do_property(f.cels[project.current_layer - 1], "image_texture", ImageTexture.new())
+			project.undo_redo.add_undo_property(f.cels[project.current_layer - 1], "image_texture", f.cels[project.current_layer - 1].image_texture)
+
+			project.undo_redo.add_do_property(f.cels[project.current_layer - 1], "image", bottom_image)
+			project.undo_redo.add_undo_property(
+				f.cels[project.current_layer - 1], "image", f.cels[project.current_layer - 1].image
+			)
 		else:
-			Global.current_project.undo_redo.add_do_property(
-				f.cels[Global.current_project.current_layer - 1].image, "data", new_layer.data
+			project.undo_redo.add_do_property(
+				f.cels[project.current_layer - 1].image, "data", bottom_image.data
 			)
-			Global.current_project.undo_redo.add_undo_property(
-				f.cels[Global.current_project.current_layer - 1].image,
+			project.undo_redo.add_undo_property(
+				f.cels[project.current_layer - 1].image,
 				"data",
-				f.cels[Global.current_project.current_layer - 1].image.data
+				f.cels[project.current_layer - 1].image.data
 			)
 
-		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+	var top_cels := []
+	for f in project.frames:
+		top_cels.append(f.cels[project.current_layer])
 
-	new_layers.remove(Global.current_project.current_layer)
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "current_layer", Global.current_project.current_layer - 1
+	project.undo_redo.add_do_property(project, "current_layer", project.current_layer - 1)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_do_property(
+		project.layers[project.current_layer - 1], "linked_cels", new_bottom_linked_cels
 	)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "layers", Global.current_project.layers
+	project.undo_redo.add_undo_property(
+		project.layers[project.current_layer - 1],
+		"linked_cels",
+		project.layers[project.current_layer - 1].linked_cels
 	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_layer", Global.current_project.current_layer
+	project.undo_redo.add_do_method(project, "remove_layers", [project.current_layer])
+	project.undo_redo.add_undo_method(
+		project, "add_layers",
+		[project.layers[project.current_layer]], [project.current_layer], [top_cels]
 	)
-
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.commit_action()
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.commit_action()
 
 
 func _on_OpacitySlider_value_changed(value) -> void:

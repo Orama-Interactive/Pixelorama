@@ -123,6 +123,9 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				new_layers[layer].linked_cels.remove(cel_index)
 				var sprite := Image.new()
 				sprite.copy_from(f.cels[layer].image)
+				# TODO L: In PixelCel's image setter, setting the iamge already calls create_from_image on the texture,
+				# 			so I think its getting called twice, setting the new image texture first and then setting
+				#			the image should work without having to call create_from_image here:
 				var sprite_texture := ImageTexture.new()
 				sprite_texture.create_from_image(sprite, 0)
 				new_cels[layer].image = sprite

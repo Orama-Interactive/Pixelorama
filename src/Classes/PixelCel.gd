@@ -35,7 +35,10 @@ func load_image_data_from_pxo(file: File, project_size: Vector2) -> void:
 	image.create_from_data(project_size.x, project_size.y, false, Image.FORMAT_RGBA8, buffer)
 	image_changed(image)
 
-
+# TODO R3: A copy_image bool parameter could be useful for places such as the merging layers function
+# 		where the copied cels don't need the image to be copied (at least not yet in that case)
+#		Alternatively, keep it as is, and maybe put a comment on the copy function mentioning that it
+# 		copies the image data too...
 func copy() -> BaseCel:
 	var copy_image := Image.new()
 	copy_image.copy_from(image)
