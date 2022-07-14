@@ -12,6 +12,10 @@ func dialog_open(open: bool) -> void:
 	Global.dialog_open(open)
 
 
+func get_global() -> Global:
+	return Global
+
+
 func get_extensions_node() -> Node:
 	return Global.control.get_node("Extensions")
 
