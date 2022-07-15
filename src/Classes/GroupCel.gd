@@ -12,10 +12,5 @@ func get_image() -> Image:
 	return Image.new()
 
 
-func copy() -> BaseCel:
-	# Using get_script over the class name prevents a cyclic reference:
-	return get_script().new(opacity)
-
-
 func create_cel_button() -> Node:
 	return Global.group_cel_button_node.instance()

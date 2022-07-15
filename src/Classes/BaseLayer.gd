@@ -97,6 +97,16 @@ func copy() -> BaseLayer:
 	copy.deserialize(serialize())
 	return copy
 
+
+func copy_cel(_frame: int, _new_content: bool) -> BaseCel:
+	return null
+
+# TODO R3: Currently new content is never needed to be false, should it be removed?
+# Used to copy all cels with cel linking properly set up between copies:
+func copy_all_cels(_new_content: bool) -> Array:
+	return []
+
+
 # TODO L: Should this be turned into set_as_default_name?
 func get_default_name(number: int) -> String:
 	return tr("Layer") + " %s" % number

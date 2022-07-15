@@ -21,6 +21,19 @@ func deserialize(dict: Dictionary) -> void:
 	expanded = dict.expanded
 
 
+func copy_cel(frame_index: int, _new_content: bool) -> BaseCel:
+	var cel: GroupCel = project.frames[frame_index].cels[index]
+	return GroupCel.new(cel.opacity)
+
+
+func copy_all_cels(_new_content: bool) -> Array:
+	var cels := []
+	for frame in project.frames:
+		var cel: GroupCel = frame.cels[index]
+		cels.append(GroupCel.new(cel.opacity))
+	return cels
+
+
 func get_default_name(number: int) -> String:
 	return tr("Group") + " %s" % number
 

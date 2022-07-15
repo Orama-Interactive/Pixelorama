@@ -32,6 +32,44 @@ func deserialize(dict: Dictionary) -> void:
 		linked_cel.image_texture = linked_cels[0].cels[index].image_texture
 
 
+func copy_cel(frame_index: int, new_content: bool) -> BaseCel:
+	var cel: PixelCel = project.frames[frame_index].cels[index]
+	if new_content:
+		var copy_image := Image.new()
+		copy_image.copy_from(cel.image)
+		return PixelCel.new(copy_image, cel.opacity)
+	else:
+		return PixelCel.new(cel.image, cel.opacity, cel.image_texture)
+
+
+func copy_all_cels(new_content: bool) -> Array:
+	var cels := []
+
+	var linked_image: Image
+	var linked_texture: ImageTexture
+	if not linked_cels.empty():
+		var cel: PixelCel = linked_cels[0].cels[index]
+		if new_content:
+			linked_image = Image.new()
+			linked_image.copy_from(cel.image)
+			linked_texture = ImageTexture.new()
+		else:
+			linked_image = cel.image
+			linked_texture = cel.image_texture
+
+	for frame in project.frames:
+		var cel: PixelCel = frame.cels[index]
+		if linked_cels.has(frame):
+			cels.append(PixelCel.new(linked_image, cel.opacity, linked_texture))
+		elif new_content:
+			var copy_image := Image.new()
+			copy_image.copy_from(cel.image)
+			cels.append(PixelCel.new(copy_image, cel.opacity))
+		else:
+			cels.append(PixelCel.new(cel.image, cel.opacity, cel.image_texture))
+	return cels
+
+
 func can_layer_get_drawn() -> bool:
 	return is_visible_in_hierarchy() && !is_locked_in_hierarchy()
 

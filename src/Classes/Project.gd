@@ -496,6 +496,10 @@ func _toggle_layer_buttons_layers() -> void:
 	if layers[current_layer].is_locked_in_hierarchy():
 		Global.disable_button(Global.remove_layer_button, true)
 
+	# TODO R0: Figure out how to disable the remove layer button when a group that has all layers as chidlren
+	#			is selected:
+	var current_layer_size = layers[current_layer].get_children_recursive().size() + 1
+
 	if layers.size() == 1:
 		Global.disable_button(Global.remove_layer_button, true)
 		Global.disable_button(Global.move_up_layer_button, true)

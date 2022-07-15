@@ -300,12 +300,16 @@ func copy_frames(frames := []) -> void:
 		copied_frames.append(new_frame)
 
 		var prev_frame: Frame = project.frames[frame]
-		for cel in prev_frame.cels:
-			new_frame.cels.append(cel.copy())
 
 		new_frame.duration = prev_frame.duration
 		for l_i in range(new_layers.size()):
-			if new_layers[l_i].get("new_cels_linked"):  # If the link button is pressed
+			# If the layer has new_cels_linked variable, and its true
+			var new_cels_linked: bool = new_layers[l_i].get("new_cels_linked")
+
+			# Copy the cel, create new cel content if new cels aren't linked
+			new_frame.cels.append(new_layers[l_i].copy_cel(frame, !new_cels_linked))
+
+			if new_cels_linked:  # If the link button is pressed
 				new_layers[l_i].linked_cels.append(new_frame)
 				new_frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
 				new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
@@ -624,11 +628,7 @@ func _on_CloneLayer_pressed() -> void:
 	var project: Project = Global.current_project
 	var l: BaseLayer = project.layers[project.current_layer].copy()
 	l.name = str(project.layers[project.current_layer].name, " (", tr("copy"), ")")
-	var cels := []
-	for f in project.frames:
-		cels.append(f.cels[project.current_layer].copy())
-
-	# TODO R0: Copies don't have linked cels properly set up...
+	var cels: Array = project.layers[project.current_layer].copy_all_cels(true)
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")

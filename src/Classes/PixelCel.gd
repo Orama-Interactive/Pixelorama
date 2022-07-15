@@ -12,7 +12,7 @@ func _init(_image := Image.new(), _opacity := 1.0, _image_texture: ImageTexture 
 		image_texture = _image_texture
 	else:
 		image_texture = ImageTexture.new()
-	self.image = _image
+	self.image = _image # Set image and call setter
 	opacity = _opacity
 
 
@@ -34,18 +34,6 @@ func load_image_data_from_pxo(file: File, project_size: Vector2) -> void:
 	var buffer := file.get_buffer(project_size.x * project_size.y * 4)
 	image.create_from_data(project_size.x, project_size.y, false, Image.FORMAT_RGBA8, buffer)
 	image_changed(image)
-
-# TODO R3: A copy_image bool parameter could be useful for places such as the merging layers function
-# 		where the copied cels don't need the image to be copied (at least not yet in that case)
-#		Alternatively, keep it as is, and maybe put a comment on the copy function mentioning that it
-# 		copies the image data too...
-func copy() -> BaseCel:
-	var copy_image := Image.new()
-	copy_image.copy_from(image)
-	var copy_texture := ImageTexture.new()
-	copy_texture.create_from_image(copy_image, 0)
-	# Using get_script over the class name prevents a cyclic reference:
-	return get_script().new(copy_image, opacity, copy_texture)
 
 
 func create_cel_button() -> Node:
