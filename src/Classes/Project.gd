@@ -492,17 +492,16 @@ func _layer_changed(value: int) -> void:
 func _toggle_layer_buttons() -> void:
 	if layers.empty() or current_layer >= layers.size():
 		return
-	# The size of the current layer (1) plus its children:
-	var current_layer_size: int = 1 + layers[current_layer].get_children_recursive().size()
+	var child_count: int = layers[current_layer].get_children_recursive().size()
 
 	Global.disable_button(Global.remove_layer_button,
 		layers[current_layer].is_locked_in_hierarchy()
-		or layers.size() == current_layer_size
+		or layers.size() == child_count + 1
 	)
 	Global.disable_button(Global.move_up_layer_button, current_layer == layers.size() - 1)
-	Global.disable_button(Global.move_down_layer_button, current_layer == current_layer_size - 1)
+	Global.disable_button(Global.move_down_layer_button, current_layer == child_count)
 	Global.disable_button(Global.merge_down_layer_button,
-		current_layer == current_layer_size - 1
+		current_layer == child_count
 		or layers[current_layer] is GroupLayer
 		or layers[current_layer - 1] is GroupLayer
 	)
