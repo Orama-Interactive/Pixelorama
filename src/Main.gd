@@ -361,10 +361,8 @@ func _on_BackupConfirmation_popup_hide() -> void:
 
 
 func _use_osx_shortcuts() -> void:
-	var inputmap := InputMap
-
-	for action in inputmap.get_actions():
-		var action_list: Array = inputmap.get_action_list(action)
+	for action in InputMap.get_actions():
+		var action_list: Array = InputMap.get_action_list(action)
 		if action_list.size() == 0:
 			continue
 		var event: InputEvent = action_list[0]
