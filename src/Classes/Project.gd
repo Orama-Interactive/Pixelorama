@@ -872,22 +872,21 @@ func remove_layers(indices: Array) -> void:
 # from_indices and to_indicies should be in ascending order
 func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> void:
 	selected_cels.clear()
-	var old_layers := layers.duplicate() # TODO R1: Could maybe change to just empty layers array, using append(pop_at) trick like in swap_layers
+	var removed_layers := []
 	var removed_cels := [] # 2D array of cels (an array for each layer removed)
 
-	for i in range(from_indices.size()):
+	for i in from_indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
-		layers.remove(from_indices[i] - i)
+		removed_layers.append(layers.pop_at(from_indices[i] - i))
+		removed_layers[i].parent = to_parents[i] # parents must be set before UI created in next loop
 		removed_cels.append([])
 		for frame in frames:
 			removed_cels[i].append(frame.cels.pop_at(from_indices[i] - i))
 		Global.animation_timeline.project_layer_removed(from_indices[i] - i)
-	for i in range(to_indices.size()):
-		layers.insert(to_indices[i], old_layers[from_indices[i]])
-		layers[to_indices[i]].parent = to_parents[i] # TODO R1: it could be possible to do the to_parents when removing (previous loop), allowing this loop to be recombined with the next
+	for i in to_indices.size():
+		layers.insert(to_indices[i], removed_layers[i])
 		for f in range(frames.size()):
 			frames[f].cels.insert(to_indices[i], removed_cels[i][f])
-	for i in range(to_indices.size()): # Loop again (All parents must be set before adding the UI)
 		Global.animation_timeline.project_layer_added(to_indices[i])
 	# Update the layer indices and layer/cel buttons:
 	for l in range(layers.size()):
