@@ -499,7 +499,10 @@ func _toggle_layer_buttons() -> void:
 		or layers.size() == child_count + 1
 	)
 	Global.disable_button(Global.move_up_layer_button, current_layer == layers.size() - 1)
-	Global.disable_button(Global.move_down_layer_button, current_layer == child_count)
+	Global.disable_button(Global.move_down_layer_button,
+		current_layer == child_count
+		and not is_instance_valid(layers[current_layer].parent)
+	)
 	Global.disable_button(Global.merge_down_layer_button,
 		current_layer == child_count
 		or layers[current_layer] is GroupLayer

@@ -669,37 +669,56 @@ func _on_RemoveLayer_pressed() -> void:
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
-# TODO L: Refactor this (maybe completely remove)
-func change_layer_order(rate: int) -> void:
-	var change = Global.current_project.current_layer + rate
 
-	var new_layers: Array = Global.current_project.layers.duplicate()
-	var temp = new_layers[Global.current_project.current_layer]
-	new_layers[Global.current_project.current_layer] = new_layers[change]
-	new_layers[change] = temp
-	Global.current_project.undo_redo.create_action("Change Layer Order")
-	for f in Global.current_project.frames:
-		var new_cels: Array = f.cels.duplicate()
-		var temp_canvas = new_cels[Global.current_project.current_layer]
-		new_cels[Global.current_project.current_layer] = new_cels[change]
-		new_cels[change] = temp_canvas
-		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+func change_layer_order(up: bool) -> void:
+	var project: Project = Global.current_project
+	var layer: BaseLayer = project.layers[project.current_layer]
+	var to_index = layer.index
+	var child_count = layer.get_children_recursive().size()
+	var from_indices := range(layer.index - child_count, layer.index + 1)
+	var from_parents := []
+	for l in from_indices:
+		from_parents.append(project.layers[l].parent)
+	var to_parents := from_parents.duplicate()
 
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "current_layer", change
-	)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "layers", Global.current_project.layers
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_layer", Global.current_project.current_layer
-	)
+	if up:
+		var above_layer: BaseLayer = project.layers[project.current_layer + 1]
+		if layer.parent == above_layer: # Above is the parent, leave the parent
+			to_parents[-1] = above_layer.parent
+			to_index = layer.index + 1
+		elif layer.parent != above_layer.parent: # Above layer must be deeper in the hierarchy
+			to_parents[-1] = above_layer.parent # (this may be more than 1 level deeper)
+			while to_parents[-1].parent != layer.parent:
+				to_parents[-1]= to_parents[-1].parent # Incase we went multiple levels, drop extra
+		elif above_layer.accepts_child(layer):
+			to_parents[-1] = above_layer
+		else:
+			to_index = layer.index + 1
+	else: # Down
+		if layer.index == child_count: # If at the very bottom of the layer stack
+			if not is_instance_valid(layer.parent):
+				return
+			to_parents[-1] = layer.parent.parent # Drop a level in the hierarchy
+		else:
+			var below_layer: BaseLayer = project.layers[project.current_layer - 1 - child_count]
+			if layer.parent != below_layer.parent: # If there is a hierarchy change
+				to_parents[-1] = below_layer.parent
+			elif below_layer.accepts_child(layer):
+				to_parents[-1] = below_layer
+				to_index = layer.index - 1
+			else:
+				to_index = layer.index - 1
 
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.commit_action()
+	var to_indices := range(to_index - child_count, to_index + 1)
+
+	project.undo_redo.create_action("Change Layer Order")
+	project.undo_redo.add_do_property(project, "current_layer", to_index)
+	project.undo_redo.add_do_method(project, "move_layers", from_indices, to_indices, to_parents)
+	project.undo_redo.add_undo_method(project, "move_layers", to_indices, from_indices, from_parents)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.commit_action()
 
 
 func _on_MergeDownLayer_pressed() -> void:
@@ -710,6 +729,9 @@ func _on_MergeDownLayer_pressed() -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Merge Layer")
+
+	# TODO R0: When there is a group layer/cel present in the tree, merging down Pixel Layers
+	#			 doesn't get the texture updated. (Image is updated though, doing something else will update texture)
 
 	for f in project.frames:
 		# TODO Later: top_image here doesn't really need to be a copy if there isn't layer transparency
