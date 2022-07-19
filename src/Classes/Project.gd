@@ -584,13 +584,14 @@ func is_empty() -> bool:
 
 
 func duplicate_layers() -> Array:
-	# TODO R1: May want to test this a bit after refactor
-	# TODO H: When duplicating the layers, parent references would be using the old layers now, this will probably cause bugs
 	var new_layers: Array = layers.duplicate()
 	# Loop through the array to create new classes for each element, so that they
 	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
 	for i in new_layers.size():
 		new_layers[i] = new_layers[i].copy()
+	for l in new_layers:
+		if is_instance_valid(l.parent):
+			l.parent = new_layers[l.parent.index] # Update the parent to the new copy of the parent
 	return new_layers
 
 
