@@ -144,7 +144,7 @@ func change_project() -> void:
 	Global.disable_button(
 		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
 	)
-	_toggle_layer_buttons()
+	toggle_layer_buttons()
 
 	self.animation_tags = animation_tags
 
@@ -413,7 +413,7 @@ func _layers_changed(value: Array) -> void:
 #	)
 #	layer_button.pressed = true
 #	self.current_frame = current_frame  # Call frame_changed to update UI
-	_toggle_layer_buttons()
+	toggle_layer_buttons()
 
 
 func _remove_cel_buttons() -> void:
@@ -453,18 +453,12 @@ func _frame_changed(value: int) -> void:
 				var cel_button = container.get_child(frame)
 				cel_button.pressed = true
 
-	# TODO R0: When starting up, with only one frame, these aren't getting called:
-	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
-	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
-	Global.disable_button(
-		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
-	)
-
 	if current_frame < frames.size():
 		var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
 		Global.layer_opacity_slider.value = cel_opacity * 100
 		Global.layer_opacity_spinbox.value = cel_opacity * 100
 
+	toggle_frame_buttons()
 	Global.canvas.update()
 	Global.transparent_checker.update_rect()
 
@@ -473,7 +467,7 @@ func _layer_changed(value: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	current_layer = value
 
-	_toggle_layer_buttons()
+	toggle_layer_buttons()
 
 	yield(Global.get_tree().create_timer(0.01), "timeout")
 	self.current_frame = current_frame  # Call frame_changed to update UI
@@ -489,7 +483,15 @@ func _layer_changed(value: int) -> void:
 			layer_button.pressed = true
 
 
-func _toggle_layer_buttons() -> void:
+func toggle_frame_buttons() -> void:
+	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
+	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
+	Global.disable_button(
+		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
+	)
+
+
+func toggle_layer_buttons() -> void:
 	if layers.empty() or current_layer >= layers.size():
 		return
 	var child_count: int = layers[current_layer].get_children_recursive().size()
@@ -844,7 +846,7 @@ func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels
 		for f in range(frames.size()):
 			layer_cel_container.get_child(f).layer = l
 			layer_cel_container.get_child(f).button_setup()
-	_toggle_layer_buttons()
+	toggle_layer_buttons()
 
 
 func remove_layers(indices: Array) -> void:
@@ -863,7 +865,7 @@ func remove_layers(indices: Array) -> void:
 		for f in range(frames.size()):
 			layer_cel_container.get_child(f).layer = l
 			layer_cel_container.get_child(f).button_setup()
-	_toggle_layer_buttons()
+	toggle_layer_buttons()
 
 
 # from_indices and to_indicies should be in ascending order
@@ -894,7 +896,7 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 		for f in range(frames.size()):
 			layer_cel_container.get_child(f).layer = l
 			layer_cel_container.get_child(f).button_setup()
-	_toggle_layer_buttons()
+	toggle_layer_buttons()
 
 
 # "a" and "b" should both contain "from", "to", and "to_parents" arrays.
@@ -942,7 +944,7 @@ func swap_layers(a: Dictionary, b: Dictionary) -> void:
 		for f in range(frames.size()):
 			layer_cel_container.get_child(f).layer = l
 			layer_cel_container.get_child(f).button_setup()
-	_toggle_layer_buttons()
+	toggle_layer_buttons()
 
 
 func move_cel(from_frame: int, to_frame: int, layer: int) -> void:
