@@ -275,7 +275,6 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 
 
 func copy_frames(frames := []) -> void:
-	Global.canvas.selection.transform_content_confirm()
 	var project: Project = Global.current_project
 
 	if frames.size() == 0:
@@ -522,8 +521,8 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 
 func _on_NextFrame_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
-	Global.current_project.selected_cels.clear()
+	Global.canvas.selection.transform_content_confirm() # TODO R4: These may be safe to remove, (frame_changed in project calls it)
+	Global.current_project.selected_cels.clear() # TODO NOTE: ^^ Though clearing the selected cels may mess that up.
 	if Global.current_project.current_frame < Global.current_project.frames.size() - 1:
 		Global.current_project.current_frame += 1
 
@@ -581,7 +580,6 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 
 
 func _on_AddLayer_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm() # TODO R2: Figure out once and for all, do these belong here, or in the project reversable functions (where these will be called on undo as well)
 	var project: Project = Global.current_project
 
 	var l := PixelLayer.new()
@@ -603,7 +601,6 @@ func _on_AddLayer_pressed() -> void:
 
 
 func _on_AddGroup_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
 	var project: Project = Global.current_project
 
 	var l := GroupLayer.new()
@@ -623,8 +620,6 @@ func _on_AddGroup_pressed() -> void:
 
 
 func _on_CloneLayer_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
-
 	var project: Project = Global.current_project
 	var l: BaseLayer = project.layers[project.current_layer].copy()
 	l.name = str(project.layers[project.current_layer].name, " (", tr("copy"), ")")

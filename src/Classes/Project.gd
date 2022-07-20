@@ -851,6 +851,7 @@ func swap_frame(a_index: int, b_index: int) -> void:
 
 func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels is 2d Array of cels
 	assert(self == Global.current_project) # TODO R3: Remove (Things like calling project_frame/layer_added may need to do a check if its the current project if this fails)
+	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	for i in range(indices.size()):
 		layers.insert(indices[i], new_layers[i])
@@ -870,6 +871,7 @@ func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels
 
 
 func remove_layers(indices: Array) -> void:
+	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	for i in range(indices.size()):
 		# With each removed index, future indices need to be lowered, so subtract by i
@@ -890,6 +892,7 @@ func remove_layers(indices: Array) -> void:
 
 # from_indices and to_indicies should be in ascending order
 func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> void:
+	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	var removed_layers := []
 	var removed_cels := [] # 2D array of cels (an array for each layer removed)
@@ -921,6 +924,7 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 # "a" and "b" should both contain "from", "to", and "to_parents" arrays.
 # (Using dictionaries because there seems to be a limit of 5 arguments for do/undo method calls)
 func swap_layers(a: Dictionary, b: Dictionary) -> void:
+	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	print("a: ", a, "  b: ", b) # TODO R3: Remove
 	var a_layers := []
