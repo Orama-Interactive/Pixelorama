@@ -558,14 +558,13 @@ func _animation_tags_changed(value: Array) -> void:
 
 	_set_timeline_first_and_last_frames()
 
-# TODO R1: Is this really required in _frames_changed (or the add/remove frame funcs, seems to work fine without when playing anim)
+
 func _set_timeline_first_and_last_frames() -> void:
 	# This is useful in case tags get modified DURING the animation is playing
 	# otherwise, this code is useless in this context, since these values are being set
 	# when the play buttons get pressed anyway
 	Global.animation_timeline.first_frame = 0
 	Global.animation_timeline.last_frame = frames.size() - 1
-	# TODO NOTE: Perhaps its needed fo the play_only_tags bit?
 	if Global.play_only_tags:
 		for tag in animation_tags:
 			if current_frame + 1 >= tag.from && current_frame + 1 <= tag.to:

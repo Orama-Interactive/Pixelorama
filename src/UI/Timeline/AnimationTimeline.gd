@@ -851,7 +851,7 @@ func project_layer_added(layer: int) -> void:
 	var layer_button: LayerButton = project.layers[layer].create_layer_button()
 	layer_button.layer = layer
 	if project.layers[layer].name == "": # TODO R1: This probably could be somewhere else... add_layer(s) in project?
-		project.layers[layer].name = project.layers[layer].get_default_name(layer)
+		project.layers[layer].set_name_to_default(layer)
 
 	var layer_cel_container := HBoxContainer.new()
 	# TODO R3: Is there any need for a name (and why is it LAYERSSS in one place, and FRAMESS in another?)

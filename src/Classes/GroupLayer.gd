@@ -34,8 +34,8 @@ func copy_all_cels(_new_content: bool) -> Array:
 	return cels
 
 
-func get_default_name(number: int) -> String:
-	return tr("Group") + " %s" % number
+func set_name_to_default(number: int) -> void:
+	name = tr("Group") + " %s" % number
 
 
 func accepts_child(_layer: BaseLayer) -> bool:

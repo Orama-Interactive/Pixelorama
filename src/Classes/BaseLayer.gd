@@ -107,9 +107,8 @@ func copy_all_cels(_new_content: bool) -> Array:
 	return []
 
 
-# TODO L: Should this be turned into set_as_default_name?
-func get_default_name(number: int) -> String:
-	return tr("Layer") + " %s" % number
+func set_name_to_default(number: int) -> void:
+	name = tr("Layer") + " %s" % number
 
 
 func can_layer_get_drawn() -> bool:
