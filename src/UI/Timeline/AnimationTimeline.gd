@@ -891,4 +891,5 @@ func project_cel_removed(frame: int, layer: int) -> void:
 	var container := Global.frames_container.get_child(
 		Global.frames_container.get_child_count() - 1 - layer
 	)
-	container.get_child(frame).free()
+	container.get_child(frame).queue_free()
+	container.remove_child(container.get_child(frame))

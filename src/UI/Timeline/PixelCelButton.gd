@@ -127,24 +127,13 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				sprite_texture.create_from_image(sprite, 0)
 				new_cels[layer].image = sprite
 				new_cels[layer].image_texture = sprite_texture
-
 				project.undo_redo.create_action("Unlink Cel")
-				project.undo_redo.add_do_property(project, "layers", new_layers)
-				project.undo_redo.add_do_method(self, "button_setup")
 				project.undo_redo.add_do_property(f, "cels", new_cels)
-				project.undo_redo.add_undo_property(project, "layers", project.layers)
-				project.undo_redo.add_undo_method(self, "button_setup")
 				project.undo_redo.add_undo_property(f, "cels", f.cels)
-
-				project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-				project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-				project.undo_redo.commit_action()
 
 			elif popup_menu.get_item_metadata(MenuOptions.LINK) == "Link Cel":
 				new_layers[layer].linked_cels.append(f)
 				project.undo_redo.create_action("Link Cel")
-				project.undo_redo.add_do_property(project, "layers", new_layers)
-				project.undo_redo.add_do_method(self, "button_setup")
 				if new_layers[layer].linked_cels.size() > 1:
 					# If there are already linked cels, set the current cel's image
 					# to the first linked cel's image
@@ -153,11 +142,17 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 					project.undo_redo.add_do_property(f, "cels", new_cels)
 					project.undo_redo.add_undo_property(f, "cels", f.cels)
 
-				project.undo_redo.add_undo_property(project, "layers", project.layers)
-				project.undo_redo.add_undo_method(self, "button_setup")
-				project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-				project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-				project.undo_redo.commit_action()
+			project.undo_redo.add_do_property(project, "layers", new_layers)
+			project.undo_redo.add_undo_property(project, "layers", project.layers)
+			# Remove and add a new cel button to update appearance
+			project.undo_redo.add_do_method(Global.animation_timeline, "project_cel_removed", frame, layer)
+			project.undo_redo.add_undo_method(Global.animation_timeline, "project_cel_removed", frame, layer)
+			project.undo_redo.add_do_method(Global.animation_timeline, "project_cel_added", frame, layer)
+			project.undo_redo.add_undo_method(Global.animation_timeline, "project_cel_added", frame, layer)
+
+			project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+			project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+			project.undo_redo.commit_action()
 
 
 func _delete_cel_content() -> void:
