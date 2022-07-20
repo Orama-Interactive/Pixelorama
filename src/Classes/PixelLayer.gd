@@ -33,10 +33,11 @@ func deserialize(dict: Dictionary) -> void:
 
 
 func copy_cel(frame_index: int, linked: bool) -> BaseCel:
-	var cel: PixelCel = project.frames[frame_index].cels[index]
-	if linked:
+	if linked and not linked_cels.empty():
+		var cel: PixelCel = linked_cels[0].cels[index]
 		return PixelCel.new(cel.image, cel.opacity, cel.image_texture)
 	else:
+		var cel: PixelCel = project.frames[frame_index].cels[index]
 		var copy_image := Image.new()
 		copy_image.copy_from(cel.image)
 		return PixelCel.new(copy_image, cel.opacity)

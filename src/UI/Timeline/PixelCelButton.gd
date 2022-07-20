@@ -104,7 +104,6 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 		MenuOptions.LINK:
 			# TODO R3: If you do part of linked cels in add/remove frames, consider changes here:
-			# TODO R4: Make add_do/undo_property/method order consistent (and make sure it doesn't cause issues)
 			var project: Project = Global.current_project
 			var f: Frame = project.frames[frame]
 			var cel_index: int = project.layers[layer].linked_cels.find(f)
@@ -150,8 +149,8 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			project.undo_redo.add_do_method(Global.animation_timeline, "project_cel_added", frame, layer)
 			project.undo_redo.add_undo_method(Global.animation_timeline, "project_cel_added", frame, layer)
 
-			project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 			project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+			project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 			project.undo_redo.commit_action()
 
 
