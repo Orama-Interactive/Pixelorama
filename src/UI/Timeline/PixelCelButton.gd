@@ -8,11 +8,8 @@ var cel: PixelCel
 var image: Image
 
 onready var popup_menu: PopupMenu = $PopupMenu
+onready var linked_indicator: Polygon2D = $LinkedIndicator
 
-# TODO R3: The linked indicator seems to not get updated properly (adding a new linked cel won't show
-#			the indicator until another timeline change, same with linking an existing cel)
-#			(this is most likely due to the order of do/undo methods/properties being added in
-#			AnimationTimeline. Will leave until I decide what to do about setting linked in the first place)
 func _ready() -> void:
 	button_setup()
 
@@ -23,11 +20,11 @@ func button_setup() -> void:
 
 	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, layer]
 	if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels:
-		get_node("LinkedIndicator").visible = true
+		linked_indicator.visible = true
 		popup_menu.set_item_text(MenuOptions.LINK, "Unlink Cel")
 		popup_menu.set_item_metadata(MenuOptions.LINK, "Unlink Cel")
 	else:
-		get_node("LinkedIndicator").visible = false
+		linked_indicator.visible = false
 		popup_menu.set_item_text(MenuOptions.LINK, "Link Cel")
 		popup_menu.set_item_metadata(MenuOptions.LINK, "Link Cel")
 
@@ -133,8 +130,10 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 				project.undo_redo.create_action("Unlink Cel")
 				project.undo_redo.add_do_property(project, "layers", new_layers)
+				project.undo_redo.add_do_method(self, "button_setup")
 				project.undo_redo.add_do_property(f, "cels", new_cels)
 				project.undo_redo.add_undo_property(project, "layers", project.layers)
+				project.undo_redo.add_undo_method(self, "button_setup")
 				project.undo_redo.add_undo_property(f, "cels", f.cels)
 
 				project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
@@ -145,6 +144,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				new_layers[layer].linked_cels.append(f)
 				project.undo_redo.create_action("Link Cel")
 				project.undo_redo.add_do_property(project, "layers", new_layers)
+				project.undo_redo.add_do_method(self, "button_setup")
 				if new_layers[layer].linked_cels.size() > 1:
 					# If there are already linked cels, set the current cel's image
 					# to the first linked cel's image
@@ -154,6 +154,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 					project.undo_redo.add_undo_property(f, "cels", f.cels)
 
 				project.undo_redo.add_undo_property(project, "layers", project.layers)
+				project.undo_redo.add_undo_method(self, "button_setup")
 				project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 				project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 				project.undo_redo.commit_action()

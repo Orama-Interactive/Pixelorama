@@ -168,10 +168,10 @@ func add_frame() -> void:
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(project, "add_frames", [frame], [frame_add_index])
-	project.undo_redo.add_undo_method(project, "remove_frames", [frame_add_index])
 	project.undo_redo.add_do_property(project, "layers", new_layers)
 	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.add_do_method(project, "add_frames", [frame], [frame_add_index])
+	project.undo_redo.add_undo_method(project, "remove_frames", [frame_add_index])
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.add_do_property(project, "current_frame", project.current_frame + 1)
@@ -251,10 +251,10 @@ func delete_frames(frames := []) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Remove Frame")
-	project.undo_redo.add_do_method(project, "remove_frames", frames)
-	project.undo_redo.add_undo_method(project, "add_frames", frame_refs, frames)
 	project.undo_redo.add_do_property(project, "layers", new_layers)
 	project.undo_redo.add_undo_property(project, "layers", Global.current_project.layers)
+	project.undo_redo.add_do_method(project, "remove_frames", frames)
+	project.undo_redo.add_undo_method(project, "add_frames", frame_refs, frames)
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.add_do_property(project, "current_frame", current_frame)
@@ -306,8 +306,9 @@ func copy_frames(frames := []) -> void:
 			# If the layer has new_cels_linked variable, and its true
 			var new_cels_linked: bool = new_layers[l_i].get("new_cels_linked")
 
+			# TODO R3: Make sure this is working:
 			# Copy the cel, create new cel content if new cels aren't linked
-			new_frame.cels.append(new_layers[l_i].copy_cel(frame, !new_cels_linked))
+			new_frame.cels.append(new_layers[l_i].copy_cel(frame, new_cels_linked))
 
 			if new_cels_linked:  # If the link button is pressed
 				new_layers[l_i].linked_cels.append(new_frame)
@@ -326,15 +327,13 @@ func copy_frames(frames := []) -> void:
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_undo_property(project, "layers", project.layers)
 	project.undo_redo.add_do_method(project, "add_frames", copied_frames, copied_indices)
 	project.undo_redo.add_undo_method(project, "remove_frames", copied_indices)
-
 	project.undo_redo.add_do_property(project, "current_frame", frames[-1] + 1)
-	project.undo_redo.add_do_property(project, "layers", new_layers)
-	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
-
 	project.undo_redo.add_undo_property(project, "current_frame", frames[-1])
-	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.commit_action()
 
