@@ -848,29 +848,28 @@ func project_frame_removed(frame: int) -> void:
 func project_layer_added(layer: int) -> void:
 	var project: Project = Global.current_project
 
-	# TODO R1: Could this function be organized in a better way?
 	var layer_button: LayerButton = project.layers[layer].create_layer_button()
-	layer_button.layer = layer # TODO R1: See if needed
+	layer_button.layer = layer
 	if project.layers[layer].name == "": # TODO R1: This probably could be somewhere else... add_layer(s) in project?
 		project.layers[layer].name = project.layers[layer].get_default_name(layer)
-
-	Global.layers_container.add_child(layer_button)
-	var count := Global.layers_container.get_child_count()
-	Global.layers_container.move_child(layer_button, count - 1 - layer)
 
 	var layer_cel_container := HBoxContainer.new()
 	# TODO R3: Is there any need for a name (and why is it LAYERSSS in one place, and FRAMESS in another?)
 	layer_cel_container.name = "LAYERSSS " + str(layer)
-	Global.frames_container.add_child(layer_cel_container)
-	Global.frames_container.move_child(layer_cel_container, count - 1 - layer)
 	for f in range(project.frames.size()):
 		var cel_button = project.frames[f].cels[layer].create_cel_button()
 		cel_button.frame = f
-		cel_button.layer = layer# - 1 # TODO R1: See if needed
+		cel_button.layer = layer
 		layer_cel_container.add_child(cel_button)
 
 	layer_button.visible = Global.current_project.layers[layer].is_expanded_in_hierarchy()
 	layer_cel_container.visible = layer_button.visible
+
+	Global.layers_container.add_child(layer_button)
+	var count := Global.layers_container.get_child_count()
+	Global.layers_container.move_child(layer_button, count - 1 - layer)
+	Global.frames_container.add_child(layer_cel_container)
+	Global.frames_container.move_child(layer_cel_container, count - 1 - layer)
 
 
 func project_layer_removed(layer: int) -> void:
