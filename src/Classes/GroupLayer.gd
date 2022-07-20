@@ -21,12 +21,12 @@ func deserialize(dict: Dictionary) -> void:
 	expanded = dict.expanded
 
 
-func copy_cel(frame_index: int, _new_content: bool) -> BaseCel:
+func copy_cel(frame_index: int, _linked: bool) -> BaseCel:
 	var cel: GroupCel = project.frames[frame_index].cels[index]
 	return GroupCel.new(cel.opacity)
 
 
-func copy_all_cels(_new_content: bool) -> Array:
+func copy_all_cels() -> Array:
 	var cels := []
 	for frame in project.frames:
 		var cel: GroupCel = frame.cels[index]

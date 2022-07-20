@@ -97,13 +97,12 @@ func copy() -> BaseLayer:
 	copy.deserialize(serialize())
 	return copy
 
-# TODO R3: Would linked be be better than new_content? (Have to reverse the branches of course)
-func copy_cel(_frame: int, _new_content: bool) -> BaseCel:
+
+func copy_cel(_frame: int, _linked: bool) -> BaseCel:
 	return null
 
-# TODO R3: Currently new content is never needed to be false, should it be removed?
 # Used to copy all cels with cel linking properly set up between copies:
-func copy_all_cels(_new_content: bool) -> Array:
+func copy_all_cels() -> Array:
 	return []
 
 

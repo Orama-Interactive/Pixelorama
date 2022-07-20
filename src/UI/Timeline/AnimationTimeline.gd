@@ -625,7 +625,7 @@ func _on_CloneLayer_pressed() -> void:
 	var project: Project = Global.current_project
 	var l: BaseLayer = project.layers[project.current_layer].copy()
 	l.name = str(project.layers[project.current_layer].name, " (", tr("copy"), ")")
-	var cels: Array = project.layers[project.current_layer].copy_all_cels(true)
+	var cels: Array = project.layers[project.current_layer].copy_all_cels()
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
