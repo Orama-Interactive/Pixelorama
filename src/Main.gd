@@ -27,7 +27,7 @@ func _ready() -> void:
 	Global.current_project.frames.append(Global.current_project.new_empty_frame())
 	Global.animation_timeline.project_changed()
 	Global.current_project.toggle_frame_buttons()
-	# TODO R3: I Think this line should be safe to remove: (calling setter, already called when appending the layer)
+	# TODO R4: I Think this line should be safe to remove: (calling setter, already called when appending the layer)
 #	Global.current_project.layers = Global.current_project.layers
 
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())

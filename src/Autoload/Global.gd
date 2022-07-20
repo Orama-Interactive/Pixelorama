@@ -269,7 +269,7 @@ func undo_or_redo(
 		pass
 
 	elif "Move Cels" == action_name:
-		# TODO R3: is this still required? (Looks safe to remove, unless something is added back to frames_changed)
+		# TODO R4: is this still required? (Looks safe to remove, unless something is added back to frames_changed)
 		project.frames = project.frames  # to call frames_changed
 
 	canvas.update()

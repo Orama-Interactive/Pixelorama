@@ -657,7 +657,6 @@ func _on_RemoveLayer_pressed() -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Remove Layer")
-	# TODO R3: what should be the new current layer?
 	project.undo_redo.add_do_property(project, "current_layer", max(indices[0] - 1, 0))
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_do_method(project, "remove_layers", indices)
@@ -801,7 +800,7 @@ func _on_OnionSkinningSettings_popup_hide() -> void:
 
 
 func project_changed() -> void:
-	var project: Project = Global.current_project # TODO R3: maybe pass in instead?
+	var project: Project = Global.current_project
 	# These must be removed from tree immediately to not mess up the indices of the new buttons:
 	for child in Global.layers_container.get_children():
 		child.free()
@@ -817,12 +816,12 @@ func project_changed() -> void:
 		button.frame = f
 		Global.frame_ids.add_child(button)
 
-	# TODO R3: Remove and inline what's needed here if this isn't used anywhere else:
+	# TODO R4: Remove and inline what's needed here if this isn't used anywhere else:
 	Global.current_project._update_animation_timeline_selection()
 
 
 func project_frame_added(frame: int) -> void:
-	var project: Project = Global.current_project # TODO R3: maybe pass in instead?
+	var project: Project = Global.current_project
 	var button: Button = frame_button_node.instance()
 	button.frame = frame
 	Global.frame_ids.add_child(button)

@@ -74,7 +74,7 @@ func _update_buttons() -> void:
 
 
 func _update_buttons_all_layers() -> void:
-	# TODO R3: would it be better to have specified range? (if so rename all_layers to for_layers)
+	# TODO R4: would it be better to have specified range? (if so rename all_layers to for_layers)
 	#			Maybe update_buttons_recursive (including children) is all we need?
 	for layer_button in Global.layers_container.get_children():
 		layer_button._update_buttons()

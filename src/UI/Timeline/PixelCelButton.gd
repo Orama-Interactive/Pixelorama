@@ -107,7 +107,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 		MenuOptions.LINK:
 			# TODO R3: If you do part of linked cels in add/remove frames, consider changes here:
-			# TODO R3: Make add_do/undo_property/method order consistent
+			# TODO R4: Make add_do/undo_property/method order consistent (and make sure it doesn't cause issues)
 			var project: Project = Global.current_project
 			var f: Frame = project.frames[frame]
 			var cel_index: int = project.layers[layer].linked_cels.find(f)
