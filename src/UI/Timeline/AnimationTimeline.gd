@@ -810,9 +810,9 @@ func project_changed() -> void:
 	for container in Global.frames_container.get_children():
 		container.free()
 
-	for i in range(project.layers.size()):  # TODO R2: Could this be faster if it did it in reverse order?
+	for i in project.layers.size():
 		project_layer_added(i)
-	for f in range(project.frames.size()):
+	for f in project.frames.size():
 		var button: Button = frame_button_node.instance()
 		button.frame = f
 		Global.frame_ids.add_child(button)
