@@ -415,6 +415,8 @@ func _on_PlayBackwards_toggled(button_pressed: bool) -> void:
 
 func _on_AnimationTimer_timeout() -> void:
 	if first_frame == last_frame:
+		Global.play_forward.pressed = false
+		Global.play_backwards.pressed = false
 		$AnimationTimer.stop()
 		return
 

@@ -565,6 +565,7 @@ func _set_timeline_first_and_last_frames() -> void:
 	# when the play buttons get pressed anyway
 	Global.animation_timeline.first_frame = 0
 	Global.animation_timeline.last_frame = frames.size() - 1
+	# TODO NOTE: Perhaps its needed fo the play_only_tags bit?
 	if Global.play_only_tags:
 		for tag in animation_tags:
 			if current_frame + 1 >= tag.from && current_frame + 1 <= tag.to:
@@ -795,6 +796,7 @@ func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be
 		for f in range(frames.size()):
 			layer_cel_container.get_child(f).frame = f
 			layer_cel_container.get_child(f).button_setup()
+	_set_timeline_first_and_last_frames()
 
 
 func remove_frames(indices: Array) -> void:  # indices should be in ascending order
@@ -815,6 +817,7 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 		for f in range(frames.size()):
 			layer_cel_container.get_child(f).frame = f
 			layer_cel_container.get_child(f).button_setup()
+	_set_timeline_first_and_last_frames()
 
 
 func move_frame(from_index: int, to_index: int) -> void:
@@ -835,6 +838,7 @@ func move_frame(from_index: int, to_index: int) -> void:
 		for f in range(frames.size()):
 			layer_cel_container.get_child(f).frame = f
 			layer_cel_container.get_child(f).button_setup()
+	_set_timeline_first_and_last_frames()
 
 
 func swap_frame(a_index: int, b_index: int) -> void:
@@ -847,6 +851,7 @@ func swap_frame(a_index: int, b_index: int) -> void:
 	Global.animation_timeline.project_frame_added(a_index)
 	Global.animation_timeline.project_frame_removed(b_index)
 	Global.animation_timeline.project_frame_added(b_index)
+	_set_timeline_first_and_last_frames()
 
 
 func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels is 2d Array of cels

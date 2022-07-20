@@ -259,12 +259,14 @@ func undo_or_redo(
 			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	elif "Frame" in action_name:
-		# TODO R2: Does what this comment says after the refacotr remain true?
+		# TODO R4: This should be safe to remove after adding play_forwards/backwards.pressed = false to _on_AnimationTimer_timeout
+		#			If not, does what this comment says after the refacotr remain true?
 		# This actually means that frames.size is one, but it hasn't been updated yet
-		if (undo and project.frames.size() == 2) or project.frames.size() == 1:  # Stop animating
-			play_forward.pressed = false
-			play_backwards.pressed = false
-			animation_timer.stop()
+#		if (undo and project.frames.size() == 2) or project.frames.size() == 1:  # Stop animating
+#			play_forward.pressed = false
+#			play_backwards.pressed = false
+#			animation_timer.stop()
+		pass
 
 	elif "Move Cels" == action_name:
 		# TODO R3: is this still required? (Looks safe to remove, unless something is added back to frames_changed)
