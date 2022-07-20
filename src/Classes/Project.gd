@@ -396,7 +396,17 @@ func _size_changed(value: Vector2) -> void:
 func _frames_changed(value: Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	frames = value
-#	selected_cels.clear() # TODO R2: Determine if this needs to be kept (If it is, selected cels needs to be intialized after creating project (ie: in Main), rather than here
+#	selected_cels.clear() # TODO R4: Determine if this needs to be kept (If it is, selected cels needs to be intialized after creating project (ie: in Main), rather than here
+	# TODO NOTE: perhaps if you don't clear the selected cels, some invalid ones may be included? (ie: removed cels?)
+	# 			selected cels is already cleared when using the new frame/layer/cel functions
+	#			THESE SHOULD PROBABLY BE SAFE TO REMOVE FOR NORMAL USAGE, IS THERE A PLACE WHERE THEY'RE NOT?
+	#			OTHER THAN ON STARTUP, IS THERE ANY DISADVANGTAGE TO KEEPING? (may be better to keep just to be sure)
+	print(selected_cels)
+	for c in selected_cels:
+		if c[0] >= frames.size():
+			print("invalid frame in selected cel")
+	# REMOVE ALL THAT DEBUG CODE ^^^^^^^^^^^^^^^^
+
 	_set_timeline_first_and_last_frames()
 
 
@@ -406,8 +416,17 @@ func _layers_changed(value: Array) -> void:
 		Global.layers_changed_skip = false
 		return
 
-#	selected_cels.clear() # TODO R2: Determine if this needs to be kept (If it is, selected cels needs to be intialized after creating project (ie: in Main), rather than here
-	# TODO R2: investigate wether these are still required:
+#	selected_cels.clear() # TODO R4: Determine if this needs to be kept (If it is, selected cels needs to be intialized after creating project (ie: in Main), rather than here
+	# TODO NOTE: perhaps if you don't clear the selected cels, some invalid ones may be included? (ie: removed cels?)
+	# 			selected cels is already cleared when using the new frame/layer/cel functions
+	#			THESE SHOULD PROBABLY BE SAFE TO REMOVE FOR NORMAL USAGE, IS THERE A PLACE WHERE THEY'RE NOT?
+	#			OTHER THAN ON STARTUP, IS THERE ANY DISADVANGTAGE TO KEEPING? (may be better to keep just to be sure)
+	for c in selected_cels:
+		if c[1] >= layers.size():
+			print("invalid layer in selected cel")
+	# REMOVE ALL THAT DEBUG CODE ^^^^^^^^^^^^^^^^
+
+	# TODO R4: investigate wether these are still required (Should be safe to remove):
 #	var layer_button = Global.layers_container.get_child(
 #		Global.layers_container.get_child_count() - 1 - current_layer
 #	)

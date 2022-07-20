@@ -139,6 +139,7 @@ func add_frame() -> void:
 	var new_layers: Array = project.duplicate_layers()
 
 	for l_i in range(new_layers.size()):
+		# TODO H: Make sure this works with groups (Check out copy frames):
 		if new_layers[l_i].new_cels_linked:  # If the link button is pressed
 			new_layers[l_i].linked_cels.append(frame)
 			frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
@@ -622,7 +623,6 @@ func _on_AddGroup_pressed() -> void:
 
 
 func _on_CloneLayer_pressed() -> void:
-	# TODO L: Multiple layer support here would be nice
 	Global.canvas.selection.transform_content_confirm()
 
 	var project: Project = Global.current_project
@@ -730,7 +730,7 @@ func _on_MergeDownLayer_pressed() -> void:
 	project.undos += 1
 	project.undo_redo.create_action("Merge Layer")
 
-	# TODO R0: When there is a group layer/cel present in the tree, merging down Pixel Layers
+	# TODO H: When there is a group layer/cel present in the tree, merging down Pixel Layers
 	#			 doesn't get the texture updated. (Image is updated though, doing something else will update texture)
 
 	for f in project.frames:

@@ -97,7 +97,7 @@ func copy() -> BaseLayer:
 	copy.deserialize(serialize())
 	return copy
 
-
+# TODO R3: Would linked be be better than new_content? (Have to reverse the branches of course)
 func copy_cel(_frame: int, _new_content: bool) -> BaseCel:
 	return null
 
