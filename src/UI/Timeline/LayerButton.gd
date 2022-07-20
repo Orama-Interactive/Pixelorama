@@ -261,21 +261,20 @@ func drop_data(_pos, data) -> void:
 	var project = Global.current_project # TODO L: perhaps having a project variable for the enitre class would be nice (also for cel/frame buttons)
 
 	project.undo_redo.create_action("Change Layer Order")
-	var new_layers: Array = project.layers.duplicate()
+	var layers: Array = project.layers # This shouldn't be modified directly
 
-	# TODO R1: new_layers is a little confusing, does it acutally need to be duplicated anymore? It shouldn't be modified...
 	# TODO R1: can this code be made easier to read?
 
-	var drop_from_indices := range(drop_layer - new_layers[drop_layer].get_children_recursive().size(), drop_layer + 1 )
+	var drop_from_indices := range(drop_layer - layers[drop_layer].get_children_recursive().size(), drop_layer + 1 )
 
 	var drop_from_parents := []
 	for i in range(drop_from_indices.size()):
-		drop_from_parents.append(new_layers[drop_from_indices[i]].parent)
+		drop_from_parents.append(layers[drop_from_indices[i]].parent)
 
 	if Input.is_action_pressed("ctrl"): # Swap layers
 		# a and b both need "from", "to", and "to_parents"
 		# a is this layer (and children), b is the dropped layers
-		var a := { "from": range(layer - new_layers[layer].get_children_recursive().size(), layer + 1) }
+		var a := { "from": range(layer - layers[layer].get_children_recursive().size(), layer + 1) }
 		var b := { "from": drop_from_indices}
 
 		if a.from[0] < b.from[0]:
@@ -287,7 +286,7 @@ func drop_data(_pos, data) -> void:
 
 		var a_from_parents := []
 		for l in a.from:
-			a_from_parents.append(new_layers[l].parent)
+			a_from_parents.append(layers[l].parent)
 
 		# to_parents starts as a dulpicate of from_parents, set the root layer's (with one layer or
 		# group with its children, this will always be the last layer [-1]) parent to the other
@@ -304,30 +303,32 @@ func drop_data(_pos, data) -> void:
 		)
 
 	else: # Move layers
+		# TODO R1: would it make it more consistent (and easier to read) if to_index was changed
+		#			to use the highest layer?
 		var to_index: int # the index where the LOWEST shifted layer should end up
 		var to_parent: BaseLayer
 
 		# If accepted as a child, is it in the center region?
-		if (new_layers[layer].accepts_child(data[1])
+		if (layers[layer].accepts_child(data[1])
 				and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
 			):
 			to_index = layer
-			to_parent = new_layers[layer]
+			to_parent = layers[layer]
 		else:
 			# Top or bottom region?
 			if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
 				to_index = layer + 1
-				to_parent = new_layers[layer].parent
+				to_parent = layers[layer].parent
 			else:
 				# Place under the layer, if it has children, place after its lowest child
-				if new_layers[layer].has_children():
-					to_index = new_layers[layer].get_children_recursive()[0].index
+				if layers[layer].has_children():
+					to_index = layers[layer].get_children_recursive()[0].index
 
-					if new_layers[layer].is_a_parent_of(new_layers[drop_layer]):
+					if layers[layer].is_a_parent_of(layers[drop_layer]):
 						to_index += drop_from_indices.size()
 				else:
 					to_index = layer
-				to_parent = new_layers[layer].parent
+				to_parent = layers[layer].parent
 
 		if drop_layer < layer:
 			to_index -= drop_from_indices.size()

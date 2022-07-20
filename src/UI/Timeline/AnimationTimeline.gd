@@ -850,7 +850,7 @@ func project_layer_added(layer: int) -> void:
 
 	var layer_button: LayerButton = project.layers[layer].create_layer_button()
 	layer_button.layer = layer
-	if project.layers[layer].name == "": # TODO R1: This probably could be somewhere else... add_layer(s) in project?
+	if project.layers[layer].name == "":
 		project.layers[layer].set_name_to_default(layer)
 
 	var layer_cel_container := HBoxContainer.new()
