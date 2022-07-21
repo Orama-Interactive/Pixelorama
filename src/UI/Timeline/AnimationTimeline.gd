@@ -664,7 +664,8 @@ func _on_RemoveLayer_pressed() -> void:
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
-
+# Move the layer up or down in layer order and/or reparent to be deeper/shallower in the
+# layer hierarchy depending on its current index and parent
 func change_layer_order(up: bool) -> void:
 	var project: Project = Global.current_project
 	var layer: BaseLayer = project.layers[project.current_layer]
@@ -678,13 +679,15 @@ func change_layer_order(up: bool) -> void:
 
 	if up:
 		var above_layer: BaseLayer = project.layers[project.current_layer + 1]
-		if layer.parent == above_layer: # Above is the parent, leave the parent
+		if layer.parent == above_layer: # Above is the parent, leave the parent and go up
 			to_parents[-1] = above_layer.parent
 			to_index = layer.index + 1
 		elif layer.parent != above_layer.parent: # Above layer must be deeper in the hierarchy
-			to_parents[-1] = above_layer.parent # (this may be more than 1 level deeper)
+			# Move layer 1 level deeper in hierarchy. Done by setting its parent to the parent of
+			# above_layer, and if that is multiple levels, drop levels until its just 1
+			to_parents[-1] = above_layer.parent
 			while to_parents[-1].parent != layer.parent:
-				to_parents[-1]= to_parents[-1].parent # Incase we went multiple levels, drop extra
+				to_parents[-1] = to_parents[-1].parent
 		elif above_layer.accepts_child(layer):
 			to_parents[-1] = above_layer
 		else:
