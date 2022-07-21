@@ -410,12 +410,12 @@ func _on_PlayBackwards_toggled(button_pressed: bool) -> void:
 
 	play_animation(button_pressed, false)
 
-
+# Called on each frame of the animation
 func _on_AnimationTimer_timeout() -> void:
 	if first_frame == last_frame:
 		Global.play_forward.pressed = false
 		Global.play_backwards.pressed = false
-		$AnimationTimer.stop()
+		Global.animation_timer.stop()
 		return
 
 	Global.canvas.selection.transform_content_confirm()
@@ -620,6 +620,7 @@ func _on_AddGroup_pressed() -> void:
 
 
 func _on_CloneLayer_pressed() -> void:
+	# TODO H: clone children along with layer
 	var project: Project = Global.current_project
 	var l: BaseLayer = project.layers[project.current_layer].copy()
 	l.name = str(project.layers[project.current_layer].name, " (", tr("copy"), ")")
@@ -799,7 +800,8 @@ func _on_OnionSkinningSettings_popup_hide() -> void:
 
 func project_changed() -> void:
 	var project: Project = Global.current_project
-	# These must be removed from tree immediately to not mess up the indices of the new buttons:
+	# These must be removed from tree immediately to not mess up the indices of
+	# the new buttons, so use either free or queue_free + parent.remove_child
 	for child in Global.layers_container.get_children():
 		child.free()
 	for child in Global.frame_ids.get_children():

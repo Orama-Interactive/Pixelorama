@@ -21,7 +21,8 @@ func is_a_parent_of(layer: BaseLayer) -> bool:
 		return is_a_parent_of(layer.parent)
 	return false
 
-# TODO L: Consider going backwards in get_children functions, to allow breaking
+# TODO L: Consider going backwards in get_children functions, to allow breaking (test performance)
+# TODO L: Consider combining these into one func with bool, and adding a get_child_count func
 func get_children_direct() -> Array:
 	var children := []
 	for i in range(index):

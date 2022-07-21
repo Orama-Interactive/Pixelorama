@@ -143,7 +143,8 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 			project.undo_redo.add_do_property(project, "layers", new_layers)
 			project.undo_redo.add_undo_property(project, "layers", project.layers)
-			# Remove and add a new cel button to update appearance
+			# Remove and add a new cel button to update appearance (can't use self.button_setup
+			# because there is no guarantee that it will be the exact same cel button instance)
 			project.undo_redo.add_do_method(Global.animation_timeline, "project_cel_removed", frame, layer)
 			project.undo_redo.add_undo_method(Global.animation_timeline, "project_cel_removed", frame, layer)
 			project.undo_redo.add_do_method(Global.animation_timeline, "project_cel_added", frame, layer)
