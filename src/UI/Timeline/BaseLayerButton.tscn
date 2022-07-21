@@ -8,10 +8,12 @@
 margin_right = 236.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 236, 36 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 toggle_mode = true
 action_mode = 0
+enabled_focus_mode = 0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ],

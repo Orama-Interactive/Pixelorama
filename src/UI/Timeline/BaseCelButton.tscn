@@ -20,11 +20,13 @@ margin_top = 18.0
 margin_right = 36.0
 margin_bottom = 54.0
 rect_min_size = Vector2( 36, 36 )
+focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 toggle_mode = true
 button_mask = 7
+enabled_focus_mode = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
