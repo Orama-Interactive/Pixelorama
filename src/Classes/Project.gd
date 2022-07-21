@@ -800,7 +800,6 @@ func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be
 func remove_frames(indices: Array) -> void:  # indices should be in ascending order
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
-	# TODO R1: Could one half of cel linking and animation tags be included in the add or remove_frame functions? (ie: removing works, but adding doesn't?)
 	for i in range(indices.size()):
 		# With each removed index, future indices need to be lowered, so subtract by i
 		frames.remove(indices[i] - i)

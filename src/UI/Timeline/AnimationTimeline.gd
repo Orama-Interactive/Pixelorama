@@ -521,7 +521,7 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 
 func _on_NextFrame_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm() # TODO R4: These may be safe to remove, (frame_changed in project calls it)
+	Global.canvas.selection.transform_content_confirm() # TODO R3: These may be safe to remove, (frame_changed in project calls it)
 	Global.current_project.selected_cels.clear() # TODO NOTE: ^^ Though clearing the selected cels may mess that up.
 	if Global.current_project.current_frame < Global.current_project.frames.size() - 1:
 		Global.current_project.current_frame += 1
@@ -801,6 +801,9 @@ func _on_OnionSkinningSettings_popup_hide() -> void:
 	Global.can_draw = true
 
 
+# Methods to update the UI in response to changes in the current project
+
+
 func project_changed() -> void:
 	var project: Project = Global.current_project
 	# These must be removed from tree immediately to not mess up the indices of
@@ -819,7 +822,7 @@ func project_changed() -> void:
 		button.frame = f
 		Global.frame_ids.add_child(button)
 
-	# TODO R4: Remove and inline what's needed here if this isn't used anywhere else:
+	# TODO R3: Remove and inline what's needed here if this isn't used anywhere else:
 	Global.current_project._update_animation_timeline_selection()
 
 
@@ -856,7 +859,7 @@ func project_layer_added(layer: int) -> void:
 		project.layers[layer].set_name_to_default(layer)
 
 	var layer_cel_container := HBoxContainer.new()
-	# TODO R3: Is there any need for a name (and why is it LAYERSSS in one place, and FRAMESS in another?)
+	# TODO R4: Is there any need for a name (and why is it LAYERSSS in one place, and FRAMESS in another?)
 	layer_cel_container.name = "LAYERSSS " + str(layer)
 	for f in range(project.frames.size()):
 		var cel_button = project.frames[f].cels[layer].create_cel_button()

@@ -103,7 +103,6 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			_delete_cel_content()
 
 		MenuOptions.LINK:
-			# TODO R3: If you do part of linked cels in add/remove frames, consider changes here:
 			var project: Project = Global.current_project
 			var f: Frame = project.frames[frame]
 			var cel_index: int = project.layers[layer].linked_cels.find(f)

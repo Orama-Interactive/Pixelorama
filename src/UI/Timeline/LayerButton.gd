@@ -74,7 +74,7 @@ func _update_buttons() -> void:
 
 
 func _update_buttons_all_layers() -> void:
-	# TODO R4: would it be better to have specified range? (if so rename all_layers to for_layers)
+	# TODO R3: would it be better to have specified range? (if so rename all_layers to for_layers)
 	#			Maybe update_buttons_recursive (including children) is all we need?
 	for layer_button in Global.layers_container.get_children():
 		layer_button._update_buttons()
@@ -262,8 +262,6 @@ func drop_data(_pos, data) -> void:
 
 	project.undo_redo.create_action("Change Layer Order")
 	var layers: Array = project.layers # This shouldn't be modified directly
-
-	# TODO R1: can this code be made easier to read?
 
 	var drop_from_indices := range(drop_layer - layers[drop_layer].get_children_recursive().size(), drop_layer + 1 )
 
