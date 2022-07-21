@@ -102,7 +102,7 @@ func copy() -> BaseLayer:
 func copy_cel(_frame: int, _linked: bool) -> BaseCel:
 	return null
 
-# Used to copy all cels with cel linking properly set up between copies:
+# Used to copy all cels with cel linking properly set up between this set of copies:
 func copy_all_cels() -> Array:
 	return []
 
