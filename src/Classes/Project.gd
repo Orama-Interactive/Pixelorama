@@ -434,12 +434,6 @@ func _layers_changed(value: Array) -> void:
 #	self.current_frame = current_frame  # Call frame_changed to update UI
 	toggle_layer_buttons()
 
-# TODO R4: should be safe to remove
-func _remove_cel_buttons() -> void:
-	for container in Global.frames_container.get_children():
-		Global.frames_container.remove_child(container)
-		container.queue_free()
-
 
 func _frame_changed(value: int) -> void:
 	Global.canvas.selection.transform_content_confirm()

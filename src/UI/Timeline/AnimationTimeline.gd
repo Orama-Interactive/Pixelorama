@@ -878,8 +878,6 @@ func project_layer_added(layer: int) -> void:
 		project.layers[layer].set_name_to_default(layer)
 
 	var layer_cel_container := HBoxContainer.new()
-	# TODO R4: Is there any need for a name (and why is it LAYERSSS in one place, and FRAMESS in another?)
-	layer_cel_container.name = "LAYERSSS " + str(layer)
 	for f in range(project.frames.size()):
 		var cel_button = project.frames[f].cels[layer].create_cel_button()
 		cel_button.frame = f
