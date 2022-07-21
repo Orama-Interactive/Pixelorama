@@ -114,7 +114,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				new_cels[i] = PixelCel.new(
 					new_cels[i].image, new_cels[i].opacity, new_cels[i].image_texture
 				)
-# TODO R3: Make sure all this stuff still works after refactor:
+			# TODO H: Make sure all this works with group layers:
 			if popup_menu.get_item_metadata(MenuOptions.LINK) == "Unlink Cel":
 				new_layers[layer].linked_cels.remove(cel_index)
 				var sprite := Image.new()

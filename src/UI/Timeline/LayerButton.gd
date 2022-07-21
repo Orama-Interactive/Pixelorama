@@ -303,9 +303,7 @@ func drop_data(_pos, data) -> void:
 		)
 
 	else: # Move layers
-		# TODO R1: would it make it more consistent (and easier to read) if to_index was changed
-		#			to use the highest layer?
-		var to_index: int # the index where the LOWEST shifted layer should end up
+		var to_index: int # the index where the LOWEST moved layer should end up
 		var to_parent: BaseLayer
 
 		# If accepted as a child, is it in the center region?

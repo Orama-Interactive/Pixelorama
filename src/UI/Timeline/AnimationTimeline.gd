@@ -669,19 +669,19 @@ func _on_RemoveLayer_pressed() -> void:
 func change_layer_order(up: bool) -> void:
 	var project: Project = Global.current_project
 	var layer: BaseLayer = project.layers[project.current_layer]
-	var to_index = layer.index
 	var child_count = layer.get_children_recursive().size()
 	var from_indices := range(layer.index - child_count, layer.index + 1)
 	var from_parents := []
 	for l in from_indices:
 		from_parents.append(project.layers[l].parent)
 	var to_parents := from_parents.duplicate()
+	var to_index = layer.index - child_count # the index where the LOWEST shifted layer should end up
 
 	if up:
 		var above_layer: BaseLayer = project.layers[project.current_layer + 1]
 		if layer.parent == above_layer: # Above is the parent, leave the parent and go up
 			to_parents[-1] = above_layer.parent
-			to_index = layer.index + 1
+			to_index = to_index + 1
 		elif layer.parent != above_layer.parent: # Above layer must be deeper in the hierarchy
 			# Move layer 1 level deeper in hierarchy. Done by setting its parent to the parent of
 			# above_layer, and if that is multiple levels, drop levels until its just 1
@@ -691,7 +691,7 @@ func change_layer_order(up: bool) -> void:
 		elif above_layer.accepts_child(layer):
 			to_parents[-1] = above_layer
 		else:
-			to_index = layer.index + 1
+			to_index = to_index + 1
 	else: # Down
 		if layer.index == child_count: # If at the very bottom of the layer stack
 			if not is_instance_valid(layer.parent):
@@ -700,22 +700,22 @@ func change_layer_order(up: bool) -> void:
 		else:
 			var below_layer: BaseLayer = project.layers[project.current_layer - 1 - child_count]
 			if layer.parent != below_layer.parent: # If there is a hierarchy change
-				to_parents[-1] = below_layer.parent
+				to_parents[-1] = layer.parent.parent # Drop a level in the hierarchy
 			elif below_layer.accepts_child(layer):
 				to_parents[-1] = below_layer
-				to_index = layer.index - 1
+				to_index = to_index - 1
 			else:
-				to_index = layer.index - 1
+				to_index = to_index - 1
 
-	var to_indices := range(to_index - child_count, to_index + 1)
+	var to_indices := range(to_index, to_index + child_count + 1)
 
 	project.undo_redo.create_action("Change Layer Order")
-	project.undo_redo.add_do_property(project, "current_layer", to_index)
+	project.undo_redo.add_do_property(project, "current_layer", to_index + child_count)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_do_method(project, "move_layers", from_indices, to_indices, to_parents)
 	project.undo_redo.add_undo_method(project, "move_layers", to_indices, from_indices, from_parents)
-	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
 
