@@ -521,8 +521,8 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 
 func _on_NextFrame_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm() # TODO R3: These may be safe to remove, (frame_changed in project calls it)
-	Global.current_project.selected_cels.clear() # TODO NOTE: ^^ Though clearing the selected cels may mess that up.
+	Global.canvas.selection.transform_content_confirm()
+	Global.current_project.selected_cels.clear()
 	if Global.current_project.current_frame < Global.current_project.frames.size() - 1:
 		Global.current_project.current_frame += 1
 
@@ -822,8 +822,27 @@ func project_changed() -> void:
 		button.frame = f
 		Global.frame_ids.add_child(button)
 
-	# TODO R3: Remove and inline what's needed here if this isn't used anywhere else:
-	Global.current_project._update_animation_timeline_selection()
+	# Press selected cel/frame/layer buttons
+	for cel in project.selected_cels:
+		var frame: int = cel[0]
+		var layer: int = cel[1]
+		if frame < Global.frame_ids.get_child_count():
+			var frame_button: BaseButton = Global.frame_ids.get_child(frame)
+			frame_button.pressed = true
+
+		var container_child_count: int = Global.frames_container.get_child_count()
+		if layer < container_child_count:
+			var container = Global.frames_container.get_child(
+				container_child_count - 1 - layer
+			)
+			if frame < container.get_child_count():
+				var cel_button = container.get_child(frame)
+				cel_button.pressed = true
+
+			var layer_button = Global.layers_container.get_child(
+				container_child_count - 1 - layer
+			)
+			layer_button.pressed = true
 
 
 func project_frame_added(frame: int) -> void:

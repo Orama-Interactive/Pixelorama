@@ -434,7 +434,7 @@ func _layers_changed(value: Array) -> void:
 #	self.current_frame = current_frame  # Call frame_changed to update UI
 	toggle_layer_buttons()
 
-
+# TODO R4: should be safe to remove
 func _remove_cel_buttons() -> void:
 	for container in Global.frames_container.get_children():
 		Global.frames_container.remove_child(container)
@@ -778,6 +778,9 @@ func resize_bitmap_values(bitmap: BitMap, new_size: Vector2, flip_x: bool, flip_
 	return new_bitmap
 
 
+# Timeline modifications
+
+
 func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be in ascending order
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
@@ -1001,26 +1004,3 @@ func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:
 	Global.animation_timeline.project_cel_added(a_frame, a_layer)
 	Global.animation_timeline.project_cel_removed(b_frame, b_layer)
 	Global.animation_timeline.project_cel_added(b_frame, b_layer)
-
-
-func _update_animation_timeline_selection() -> void:
-	for cel in selected_cels:
-		var frame: int = cel[0]
-		var layer: int = cel[1]
-		if frame < Global.frame_ids.get_child_count():
-			var frame_button: BaseButton = Global.frame_ids.get_child(frame)
-			frame_button.pressed = true
-
-		var container_child_count: int = Global.frames_container.get_child_count()
-		if layer < container_child_count:
-			var container = Global.frames_container.get_child(
-				container_child_count - 1 - layer
-			)
-			if frame < container.get_child_count():
-				var cel_button = container.get_child(frame)
-				cel_button.pressed = true
-
-			var layer_button = Global.layers_container.get_child(
-				container_child_count - 1 - layer
-			)
-			layer_button.pressed = true

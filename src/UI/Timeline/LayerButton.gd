@@ -72,10 +72,8 @@ func _update_buttons() -> void:
 		if Global.current_project.layers[layer].parent.is_locked_in_hierarchy():
 			lock_button.modulate.a = 0.33
 
-
+# Used when pressing a button on this changes the appearnce of other layers (ie: expand or visible)
 func _update_buttons_all_layers() -> void:
-	# TODO R3: would it be better to have specified range? (if so rename all_layers to for_layers)
-	#			Maybe update_buttons_recursive (including children) is all we need?
 	for layer_button in Global.layers_container.get_children():
 		layer_button._update_buttons()
 		var expanded = Global.current_project.layers[layer_button.layer].is_expanded_in_hierarchy()
