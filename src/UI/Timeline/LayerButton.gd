@@ -139,7 +139,6 @@ func _save_layer_name(new_name: String) -> void:
 	line_edit.visible = false
 	line_edit.editable = false
 	label.text = new_name
-	Global.layers_changed_skip = true
 	Global.current_project.layers[layer].name = new_name
 
 
@@ -177,7 +176,6 @@ func _on_LinkButton_pressed() -> void:
 		var container = Global.frames_container.get_child(Global.current_project.current_layer)
 		container.get_child(Global.current_project.current_frame).button_setup()
 
-	Global.current_project.layers = Global.current_project.layers  # Call the setter
 	_update_buttons()
 
 

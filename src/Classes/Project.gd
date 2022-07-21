@@ -10,8 +10,8 @@ var tile_mode_rects := []  # Cached to avoid recalculation
 var undos := 0  # The number of times we added undo properties
 var fill_color := Color(0)
 var has_changed := false setget _has_changed_changed
-var frames := [] setget _frames_changed  # Array of Frames (that contain Cels)
-var layers := [] setget _layers_changed  # Array of Layers
+var frames := [] # Array of Frames (that contain Cels)
+var layers := [] # Array of Layers
 var current_frame := 0 setget _frame_changed
 var current_layer := 0 setget _layer_changed
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
@@ -391,48 +391,6 @@ func _name_changed(value: String) -> void:
 func _size_changed(value: Vector2) -> void:
 	size = value
 	_update_tile_mode_rects()
-
-
-func _frames_changed(value: Array) -> void:
-	Global.canvas.selection.transform_content_confirm()
-	frames = value
-#	selected_cels.clear() # TODO R4: Determine if this needs to be kept (If it is, selected cels needs to be intialized after creating project (ie: in Main), rather than here
-	# TODO NOTE: perhaps if you don't clear the selected cels, some invalid ones may be included? (ie: removed cels?)
-	# 			selected cels is already cleared when using the new frame/layer/cel functions
-	#			THESE SHOULD PROBABLY BE SAFE TO REMOVE FOR NORMAL USAGE, IS THERE A PLACE WHERE THEY'RE NOT?
-	#			OTHER THAN ON STARTUP, IS THERE ANY DISADVANGTAGE TO KEEPING? (may be better to keep just to be sure)
-	print(selected_cels)
-	for c in selected_cels:
-		if c[0] >= frames.size():
-			print("invalid frame in selected cel")
-	# REMOVE ALL THAT DEBUG CODE ^^^^^^^^^^^^^^^^
-
-	_set_timeline_first_and_last_frames()
-
-
-func _layers_changed(value: Array) -> void:
-	layers = value
-	if Global.layers_changed_skip:
-		Global.layers_changed_skip = false
-		return
-
-#	selected_cels.clear() # TODO R4: Determine if this needs to be kept (If it is, selected cels needs to be intialized after creating project (ie: in Main), rather than here
-	# TODO NOTE: perhaps if you don't clear the selected cels, some invalid ones may be included? (ie: removed cels?)
-	# 			selected cels is already cleared when using the new frame/layer/cel functions
-	#			THESE SHOULD PROBABLY BE SAFE TO REMOVE FOR NORMAL USAGE, IS THERE A PLACE WHERE THEY'RE NOT?
-	#			OTHER THAN ON STARTUP, IS THERE ANY DISADVANGTAGE TO KEEPING? (may be better to keep just to be sure)
-	for c in selected_cels:
-		if c[1] >= layers.size():
-			print("invalid layer in selected cel")
-	# REMOVE ALL THAT DEBUG CODE ^^^^^^^^^^^^^^^^
-
-	# TODO R4: investigate wether these are still required (Should be safe to remove):
-#	var layer_button = Global.layers_container.get_child(
-#		Global.layers_container.get_child_count() - 1 - current_layer
-#	)
-#	layer_button.pressed = true
-#	self.current_frame = current_frame  # Call frame_changed to update UI
-	toggle_layer_buttons()
 
 
 func _frame_changed(value: int) -> void:

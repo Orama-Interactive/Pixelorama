@@ -22,7 +22,6 @@ var current_project_index := 0 setget _project_changed
 var ui_tooltips := {}
 
 # Canvas related stuff
-var layers_changed_skip := false
 var can_draw := false
 var move_guides_on_canvas := false
 var has_focus := false
