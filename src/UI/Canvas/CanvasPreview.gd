@@ -26,11 +26,23 @@ func _draw() -> void:
 
 
 func _on_AnimationTimer_timeout() -> void:
+	var first_frame := 0
+	var last_frame: int = Global.current_project.frames.size() - 1
 	var current_project: Project = Global.current_project
-	if frame < current_project.frames.size() - 1:
+
+	if Global.play_only_tags:
+		for tag in current_project.animation_tags:
+			if (
+				current_project.current_frame + 1 >= tag.from
+				&& current_project.current_frame + 1 <= tag.to
+			):
+				first_frame = tag.from - 1
+				last_frame = min(current_project.frames.size() - 1, tag.to - 1)
+
+	if frame < last_frame:
 		frame += 1
 	else:
-		frame = 0
+		frame = first_frame
 
 	$AnimationTimer.set_one_shot(true)
 	$AnimationTimer.wait_time = (
