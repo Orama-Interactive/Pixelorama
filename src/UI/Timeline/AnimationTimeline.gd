@@ -878,7 +878,7 @@ func project_layer_added(layer: int) -> void:
 		project.layers[layer].set_name_to_default(layer)
 
 	var layer_cel_container := HBoxContainer.new()
-	for f in range(project.frames.size()):
+	for f in project.frames.size():
 		var cel_button = project.frames[f].cels[layer].create_cel_button()
 		cel_button.frame = f
 		cel_button.layer = layer

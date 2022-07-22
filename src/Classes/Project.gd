@@ -736,17 +736,17 @@ func resize_bitmap_values(bitmap: BitMap, new_size: Vector2, flip_x: bool, flip_
 func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be in ascending order
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
-	for i in range(new_frames.size()):
+	for i in new_frames.size():
 		frames.insert(indices[i], new_frames[i])
 		Global.animation_timeline.project_frame_added(indices[i])
 	# Update the frames and frame buttons:
-	for f in range(frames.size()):
+	for f in frames.size():
 		Global.frame_ids.get_child(f).frame = f
 		Global.frame_ids.get_child(f).text = str(f + 1)
 	# Update the cel buttons:
-	for l in range(layers.size()):
+	for l in layers.size():
 		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
-		for f in range(frames.size()):
+		for f in frames.size():
 			layer_cel_container.get_child(f).frame = f
 			layer_cel_container.get_child(f).button_setup()
 	_set_timeline_first_and_last_frames()
@@ -755,18 +755,18 @@ func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be
 func remove_frames(indices: Array) -> void:  # indices should be in ascending order
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
-	for i in range(indices.size()):
+	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
 		frames.remove(indices[i] - i)
 		Global.animation_timeline.project_frame_removed(indices[i] - i)
 	# Update the frames and frame buttons:
-	for f in range(frames.size()):
+	for f in frames.size():
 		Global.frame_ids.get_child(f).frame = f
 		Global.frame_ids.get_child(f).text = str(f + 1)
 	# Update the cel buttons:
-	for l in range(layers.size()):
+	for l in layers.size():
 		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
-		for f in range(frames.size()):
+		for f in frames.size():
 			layer_cel_container.get_child(f).frame = f
 			layer_cel_container.get_child(f).button_setup()
 	_set_timeline_first_and_last_frames()
@@ -781,13 +781,13 @@ func move_frame(from_index: int, to_index: int) -> void:
 	frames.insert(to_index, frame)
 	Global.animation_timeline.project_frame_added(to_index)
 	# Update the frames and frame buttons:
-	for f in range(frames.size()):
+	for f in frames.size():
 		Global.frame_ids.get_child(f).frame = f
 		Global.frame_ids.get_child(f).text = str(f + 1)
 	# Update the cel buttons:
-	for l in range(layers.size()):
+	for l in layers.size():
 		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
-		for f in range(frames.size()):
+		for f in frames.size():
 			layer_cel_container.get_child(f).frame = f
 			layer_cel_container.get_child(f).button_setup()
 	_set_timeline_first_and_last_frames()
@@ -809,18 +809,18 @@ func swap_frame(a_index: int, b_index: int) -> void:
 func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels is 2d Array of cels
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
-	for i in range(indices.size()):
+	for i in indices.size():
 		layers.insert(indices[i], new_layers[i])
-		for f in range(frames.size()):
+		for f in frames.size():
 			frames[f].cels.insert(indices[i], cels[i][f])
 		new_layers[i].project = self
 		Global.animation_timeline.project_layer_added(indices[i])
 	# Update the layer indices and layer/cel buttons:
-	for l in range(layers.size()):
+	for l in layers.size():
 		layers[l].index = l
 		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
 		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
-		for f in range(frames.size()):
+		for f in frames.size():
 			layer_cel_container.get_child(f).layer = l
 			layer_cel_container.get_child(f).button_setup()
 	toggle_layer_buttons()
@@ -829,18 +829,18 @@ func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels
 func remove_layers(indices: Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
-	for i in range(indices.size()):
+	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
 		layers.remove(indices[i] - i)
 		for frame in frames:
 			frame.cels.remove(indices[i] - i)
 		Global.animation_timeline.project_layer_removed(indices[i] - i)
 	# Update the layer indices and layer/cel buttons:
-	for l in range(layers.size()):
+	for l in layers.size():
 		layers[l].index = l
 		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
 		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
-		for f in range(frames.size()):
+		for f in frames.size():
 			layer_cel_container.get_child(f).layer = l
 			layer_cel_container.get_child(f).button_setup()
 	toggle_layer_buttons()
@@ -863,15 +863,15 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 		Global.animation_timeline.project_layer_removed(from_indices[i] - i)
 	for i in to_indices.size():
 		layers.insert(to_indices[i], removed_layers[i])
-		for f in range(frames.size()):
+		for f in frames.size():
 			frames[f].cels.insert(to_indices[i], removed_cels[i][f])
 		Global.animation_timeline.project_layer_added(to_indices[i])
 	# Update the layer indices and layer/cel buttons:
-	for l in range(layers.size()):
+	for l in layers.size():
 		layers[l].index = l
 		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
 		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
-		for f in range(frames.size()):
+		for f in frames.size():
 			layer_cel_container.get_child(f).layer = l
 			layer_cel_container.get_child(f).button_setup()
 	toggle_layer_buttons()
@@ -905,21 +905,21 @@ func swap_layers(a: Dictionary, b: Dictionary) -> void:
 	for i in a_layers.size():
 		var index = a.to[i] if a.to[0] < b.to[0] else (a.to[i] - b.to.size())
 		layers.insert(index, a_layers[i])
-		for f in range(frames.size()):
+		for f in frames.size():
 			frames[f].cels.insert(index, a_cels[i][f])
 		Global.animation_timeline.project_layer_added(index)
 	for i in b_layers.size():
 		layers.insert(b.to[i], b_layers[i])
-		for f in range(frames.size()):
+		for f in frames.size():
 			frames[f].cels.insert(b.to[i], b_cels[i][f])
 		Global.animation_timeline.project_layer_added(b.to[i])
 
 	# Update the layer indices and layer/cel buttons:
-	for l in range(layers.size()):
+	for l in layers.size():
 		layers[l].index = l
 		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
 		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
-		for f in range(frames.size()):
+		for f in frames.size():
 			layer_cel_container.get_child(f).layer = l
 			layer_cel_container.get_child(f).button_setup()
 	toggle_layer_buttons()
@@ -941,7 +941,7 @@ func move_cel(from_frame: int, to_frame: int, layer: int) -> void:
 
 	# Update the cel buttons for this layer:
 	var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - layer)
-	for f in range(frames.size()):
+	for f in frames.size():
 		layer_cel_container.get_child(f).frame = f
 		layer_cel_container.get_child(f).button_setup()
 
