@@ -51,6 +51,12 @@ func decide_pivot():
 			selection_rectangle.position
 			+ ((selection_rectangle.end - selection_rectangle.position) / 2)
 		)
+		if type_option_button.text != "Nearest neighbour (Shader)":
+			# Pivot correction in case of even size
+			if int(selection_rectangle.end.x - selection_rectangle.position.x) % 2 == 0:
+				pivot.x -= 0.5
+			if int(selection_rectangle.end.y - selection_rectangle.position.y) % 2 == 0:
+				pivot.y -= 0.5
 
 
 func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
@@ -72,11 +78,6 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 		selection_tex.create_from_image(selection, 0)
 
 		if type_option_button.text != "Nearest neighbour (Shader)":
-			# Pivot correction in case of even size
-			if int(selection_rectangle.end.x - selection_rectangle.position.x) % 2 == 0:
-				pivot.x -= 0.5
-			if int(selection_rectangle.end.y - selection_rectangle.position.y) % 2 == 0:
-				pivot.y -= 0.5
 			image.lock()
 			_cel.lock()
 			for x in _project.size.x:
