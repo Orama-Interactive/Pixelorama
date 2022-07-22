@@ -87,7 +87,7 @@ suffix = "px"
 margin_top = 59.0
 margin_right = 160.0
 margin_bottom = 73.0
-text = "Shadow Color"
+text = "Shadow color:"
 
 [node name="ShadowColor" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer"]
 margin_left = 164.0

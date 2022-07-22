@@ -1,10 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/graphics/misc/color_defaults.png" type="Texture" id=1]
 [ext_resource path="res://assets/graphics/misc/color_switch.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/ColorPickers.gd" type="Script" id=3]
 
+[sub_resource type="InputEventAction" id=20]
+action = "switch_colors"
+
 [sub_resource type="ShortCut" id=19]
+shortcut = SubResource( 20 )
 
 [node name="ColorPickers" type="PanelContainer"]
 margin_left = 958.0

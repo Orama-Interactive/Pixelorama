@@ -36,49 +36,41 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 expand_margin_bottom = 32.0
 
-[sub_resource type="InputEventKey" id=3]
-control = true
-command = true
-scancode = 16777229
+[sub_resource type="InputEventAction" id=21]
+action = "go_to_first_frame"
 
 [sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
+shortcut = SubResource( 21 )
 
-[sub_resource type="InputEventKey" id=5]
-control = true
-command = true
-scancode = 16777231
+[sub_resource type="InputEventAction" id=23]
+action = "go_to_previous_frame"
 
 [sub_resource type="ShortCut" id=6]
-shortcut = SubResource( 5 )
+shortcut = SubResource( 23 )
 
-[sub_resource type="InputEventKey" id=7]
-scancode = 16777247
+[sub_resource type="InputEventAction" id=24]
+action = "play_backwards"
 
 [sub_resource type="ShortCut" id=8]
-shortcut = SubResource( 7 )
+shortcut = SubResource( 24 )
 
-[sub_resource type="InputEventKey" id=9]
-scancode = 16777248
+[sub_resource type="InputEventAction" id=25]
+action = "play_forward"
 
 [sub_resource type="ShortCut" id=10]
-shortcut = SubResource( 9 )
+shortcut = SubResource( 25 )
 
-[sub_resource type="InputEventKey" id=11]
-control = true
-command = true
-scancode = 16777233
+[sub_resource type="InputEventAction" id=26]
+action = "go_to_next_frame"
 
 [sub_resource type="ShortCut" id=12]
-shortcut = SubResource( 11 )
+shortcut = SubResource( 26 )
 
-[sub_resource type="InputEventKey" id=13]
-control = true
-command = true
-scancode = 16777230
+[sub_resource type="InputEventAction" id=22]
+action = "go_to_last_frame"
 
 [sub_resource type="ShortCut" id=14]
-shortcut = SubResource( 13 )
+shortcut = SubResource( 22 )
 
 [sub_resource type="StyleBoxEmpty" id=15]
 
@@ -328,14 +320,14 @@ margin_bottom = 38.0
 size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/TimelineContainer/TimelineButtons"]
-margin_left = 390.0
+margin_left = 382.0
 margin_right = 902.0
 margin_bottom = 38.0
 
 [node name="AnimationButtons" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 505.0
+margin_right = 513.0
 margin_bottom = 31.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
@@ -678,13 +670,14 @@ __meta__ = {
 
 [node name="LoopButtons" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons"]
 margin_left = 360.0
-margin_right = 498.0
+margin_right = 506.0
 margin_bottom = 24.0
 
 [node name="OnionSkinningSettings" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
 margin_top = 2.0
-margin_right = 12.0
+margin_right = 20.0
 margin_bottom = 22.0
+rect_min_size = Vector2( 20, 0 )
 hint_tooltip = "Onion Skinning settings"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -696,21 +689,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -3.0
-margin_top = -6.0
-margin_right = 3.0
-margin_bottom = 6.0
+margin_left = -7.0
+margin_top = -7.0
+margin_right = 7.0
+margin_bottom = 7.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 30 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_editor_description_": ""
 }
 
 [node name="OnionSkinning" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
-margin_left = 16.0
+margin_left = 24.0
 margin_top = 2.0
-margin_right = 36.0
+margin_right = 44.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
 hint_tooltip = "Enable/disable Onion Skinning"
@@ -730,14 +723,11 @@ margin_bottom = 7.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 29 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LoopAnim" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons" groups=["UIButtons"]]
-margin_left = 40.0
+margin_left = 48.0
 margin_top = 2.0
-margin_right = 60.0
+margin_right = 68.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
 hint_tooltip = "Cycle loop"
@@ -760,8 +750,8 @@ __meta__ = {
 }
 
 [node name="FPSValue" type="SpinBox" parent="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons"]
-margin_left = 64.0
-margin_right = 138.0
+margin_left = 72.0
+margin_right = 146.0
 margin_bottom = 24.0
 hint_tooltip = "How many frames per second should the animation preview be?
 The more FPS, the faster the animation plays."

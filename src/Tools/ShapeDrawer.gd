@@ -32,7 +32,7 @@ func update_indicator() -> void:
 	var points := _get_points(rect.size)
 	var t_offset := _thickness - 1
 	var t_offsetv := Vector2(t_offset, t_offset)
-	indicator.create(rect.size + t_offsetv * 2)
+	indicator.create(rect.size + t_offsetv)
 	for point in points:
 		indicator.set_bit(point, 1)
 
@@ -76,15 +76,15 @@ func _get_shape_points_filled(_size: Vector2) -> PoolVector2Array:
 
 func _input(event: InputEvent) -> void:
 	if _drawing:
-		if event.is_action_pressed("alt"):
+		if event.is_action_pressed("shape_displace"):
 			_displace_origin = true
-		elif event.is_action_released("alt"):
+		elif event.is_action_released("shape_displace"):
 			_displace_origin = false
 
 
 func draw_start(position: Vector2) -> void:
 	.draw_start(position)
-	if Input.is_action_pressed("alt"):
+	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
 		_pick_color(position)
 		return
@@ -101,8 +101,8 @@ func draw_start(position: Vector2) -> void:
 
 func draw_move(position: Vector2) -> void:
 	.draw_move(position)
-	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed("alt"):
+	if _picking_color:  # Still return even if we released draw_color_picker (Alt)
+		if Input.is_action_pressed("draw_color_picker"):
 			_pick_color(position)
 		return
 
@@ -137,11 +137,12 @@ func draw_preview() -> void:
 		var points := _get_points(rect.size)
 		var t_offset := _thickness - 1
 		var t_offsetv := Vector2(t_offset, t_offset)
-		indicator.create(rect.size + t_offsetv * 2)
+		indicator.create(rect.size + t_offsetv)
 		for point in points:
 			indicator.set_bit(point, 1)
 
-		canvas.draw_set_transform(rect.position - t_offsetv, canvas.rotation, canvas.scale)
+		var transform_pos: Vector2 = rect.position - t_offsetv + Vector2(0.5, 0.5) * (t_offset - 1)
+		canvas.draw_set_transform(transform_pos.ceil(), canvas.rotation, canvas.scale)
 
 		for line in _create_polylines(indicator):
 			canvas.draw_polyline(PoolVector2Array(line), Color.black)
@@ -156,8 +157,8 @@ func _draw_shape(origin: Vector2, dest: Vector2) -> void:
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
-		# Draw each point offseted based on the shape's thickness
-		draw_tool(rect.position + point - Vector2.ONE * (_thickness - 1))
+		# Draw each point offsetted based on the shape's thickness
+		draw_tool(rect.position + point - Vector2(0.5, 0.5) * (_thickness - 1))
 
 	commit_undo()
 
@@ -165,15 +166,13 @@ func _draw_shape(origin: Vector2, dest: Vector2) -> void:
 # Given an origin point and destination point, returns a rect representing
 # where the shape will be drawn and what is its size
 func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
-	# WARNING: Don't replace Input.is_action_pressed for Tools.control,
-	# it makes the preview jittery on Windows
-	var rect := Rect2(Vector2.ZERO, Vector2.ZERO)
+	var rect := Rect2()
 
 	# Center the rect on the mouse
-	if Input.is_action_pressed("ctrl"):
+	if Input.is_action_pressed("shape_center"):
 		var new_size := (dest - origin).floor()
 		# Make rect 1:1 while centering it on the mouse
-		if Input.is_action_pressed("shift"):
+		if Input.is_action_pressed("shape_perfect"):
 			var square_size := max(abs(new_size.x), abs(new_size.y))
 			new_size = Vector2(square_size, square_size)
 
@@ -181,7 +180,7 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 		dest = origin + 2 * new_size
 
 	# Make rect 1:1 while not trying to center it
-	if Input.is_action_pressed("shift"):
+	if Input.is_action_pressed("shape_perfect"):
 		var square_size := min(abs(origin.x - dest.x), abs(origin.y - dest.y))
 		rect.position.x = origin.x if origin.x < dest.x else origin.x - square_size
 		rect.position.y = origin.y if origin.y < dest.y else origin.y - square_size
@@ -198,19 +197,6 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 
 func _get_points(size: Vector2) -> PoolVector2Array:
 	return _get_shape_points_filled(size) if _fill else _get_shape_points(size)
-
-
-func _outline_point(p: Vector2, thickness: int = 1, include_p: bool = true) -> Array:
-	var array := []
-
-	if thickness != 1:
-		var t_of = thickness - 1
-		for x in range(-t_of, thickness):
-			for y in range(-t_of, thickness):
-				if x == 0 and y == 0 and not include_p:
-					continue
-				array.append(p + Vector2(x, y))
-	return array
 
 
 func _set_cursor_text(rect: Rect2) -> void:

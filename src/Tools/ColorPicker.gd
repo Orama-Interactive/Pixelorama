@@ -7,12 +7,12 @@ var _color_slot := 0
 func _input(event: InputEvent) -> void:
 	var options: OptionButton = $ColorPicker/Options
 
-	if event.is_action_pressed("ctrl"):
+	if event.is_action_pressed("change_tool_mode"):
 		_prev_mode = options.selected
-	if event.is_action("ctrl"):
+	if event.is_action("change_tool_mode"):
 		options.selected = _prev_mode ^ 1
 		_color_slot = options.selected
-	if event.is_action_released("ctrl"):
+	if event.is_action_released("change_tool_mode"):
 		options.selected = _prev_mode
 		_color_slot = options.selected
 
@@ -53,8 +53,7 @@ func draw_end(position: Vector2) -> void:
 
 func _pick_color(position: Vector2) -> void:
 	var project: Project = Global.current_project
-	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
-		position = position.posmodv(project.size)
+	position = project.tiles.get_canon_position(position)
 
 	if position.x < 0 or position.y < 0:
 		return

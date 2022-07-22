@@ -4,6 +4,67 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v0.10.2] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@GrantMoyer](https://github.com/GrantMoyer)
+
+### Added
+- A gradient map image effect. Addresses the second half of [#595](https://github.com/Orama-Interactive/Pixelorama/discussions/595).
+- New offset options in tile mode that allow for non-rectangular tiling. [#707](https://github.com/Orama-Interactive/Pixelorama/pull/707)
+- Added a basic API for Extensions. Has not been documented yet.
+
+### Changed
+- Copying now works between multiple Pixelorama instances, and the clipboard is even being remembered when the app closes. Note that you cannot copy image data to another software, and you cannot paste image data from another software into Pixelorama. [#693](https://github.com/Orama-Interactive/Pixelorama/pull/693)
+- Importing multiple images at once from File, Open is now possible.
+- On quit, the "Save & Exit" button is now focused by default.
+- The icon for onion skinning options has changed. [#711](https://github.com/Orama-Interactive/Pixelorama/pull/711)
+- Extensions are now being automatically reloaded if the user installs an already-existing extension, without the need to restart Pixelorama.
+
+### Fixed
+- Fixed a macOS crash on startup. [90d2473](https://github.com/Orama-Interactive/Pixelorama/commit/90d2473f5256425146a8c10f539b7737aa37fd23)
+- Even-numbered thickness sizes on the rectangle and ellipse shape tools now work as expected. The thickness of the shapes no longer goes up by 2 pixels. [23f591a](https://github.com/Orama-Interactive/Pixelorama/commit/23f591a8626c12fd7e6344ab59f8e33b8d20cb99)
+- [[Keychain](https://github.com/Orama-Interactive/Keychain)] Fixed issue with menu events being triggered by actions that are not exact matches. This means that, for example, "Control + Shift + S" will no longer activate both "Save" and "Save as", but only "Save as". [09c9583](https://github.com/Orama-Interactive/Keychain/commit/09c95835ef034effa949732cf9cf9bd315ed08a8)
+- Fixed issue with save file dialog taking the name of the first file it sees. [5d65e82](https://github.com/Orama-Interactive/Pixelorama/commit/5d65e820708ed7586fdb7f0ac4633f7b468ec73d)
+- Fixed grid-based snapped movement when the offset of the grid was larger than the grid size. [#712](https://github.com/Orama-Interactive/Pixelorama/pull/712)
+- Fixed the symmetry points being on the wrong location on project initialization. [f432def](https://github.com/Orama-Interactive/Pixelorama/commit/f432defd1f92fde0677a5d10fde87e5219e47065)
+- The quick color picker shortcut of the shape tools is now mapped to the correct action. [55935bc](https://github.com/Orama-Interactive/Pixelorama/commit/55935bcfd2597b9fc6be94c40542934e5f99aefc)
+
+## [v0.10.1] - 2022-06-06
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Matteo Piovanelli ([@MatteoPiovanelli-Laser](https://github.com/MatteoPiovanelli-Laser)), [@AlphinAlbukhari](https://github.com/AlphinAlbukhari), Martin Novák ([@novhack](https://github.com/novhack))
+
+### Added
+- The [Keychain plugin](https://github.com/Orama-Interactive/Keychain) has been implemented. Keychain makes Pixelorama's shortcut system fully configurable, and it provides the ability to the users to set custom shortcuts of every input type for all input actions. The plugin is developed by us and it's free to use for your own Godot projects as well! [#700](https://github.com/Orama-Interactive/Pixelorama/pull/700)
+- The cursor can now be moved with the numpad arrow keys and gamepad's left stick and d-pad, the canvas can be moved with gamepad's right stick and it is also possible to map the activate left and right tool actions to keyboard and gamepad buttons, to allow drawing from these devices, making Pixelorama a lot more accessible. Made possible by the Keychain plugin.
+- A lot more gradient options have been added. Apart from the Linear Step gradient, there are now Linear, Radial, Radial Step, Linear Dithering and Radial Dithering gradient types. They are all shader-based, so they are a lot faster than the previous method. [#677](https://github.com/Orama-Interactive/Pixelorama/pull/677)
+- A drop shadow image effect has been added. [#674](https://github.com/Orama-Interactive/Pixelorama/pull/674)
+- A new rotation method has been added. It is shader-based, therefore faster than the other methods. [#683](https://github.com/Orama-Interactive/Pixelorama/pull/683)
+- All menu items now have changeable shortcuts. Made possible by the Keychain plugin.
+- The dimensions of the exported file(s) are now visible in the export dialog. [#686](https://github.com/Orama-Interactive/Pixelorama/pull/686)
+
+### Changed
+- The outline effect is now generated using shaders, except in the Web platform. This makes outline generation more faster and gives better results.
+- In the backup confirmation dialog, "Delete" has been changed to "Discard all" and a Cancel button has been added.
+- Grid, pixel grid, rulers and guides view menu settings are now being remembered when Pixelorama closes and opens again.
+- The export window is now more clear if the directory path, the file name or both are invalid. [#669](https://github.com/Orama-Interactive/Pixelorama/pull/669)
+- Timeline scroll behavior has been tweaked. [#682](https://github.com/Orama-Interactive/Pixelorama/pull/682)
+- Image brush size is now using percentage suffix (%) instead of pixels (px). [#671](https://github.com/Orama-Interactive/Pixelorama/pull/671)
+- The brushes popup tab alignment and position has changed depending on where it's asked to popup. [#671](https://github.com/Orama-Interactive/Pixelorama/pull/671)
+- It is now possible to delete content from all selected cels.
+
+### Fixed
+- The flood fill algorithm (bucket tool's "same color area" mode) is now a lot faster. [#667](https://github.com/Orama-Interactive/Pixelorama/pull/667) and [#672](https://github.com/Orama-Interactive/Pixelorama/pull/672)
+- Based on the above, the magic wand tool is also a lot faster.
+- Shader-based image effects are now a lot faster if there is no selection.
+- GIF exporting is now faster. [#696](https://github.com/Orama-Interactive/Pixelorama/pull/696)
+- Fixed issue with the bucket tool's "same color pixels" method not working in all selected cels.
+- Fixed broken 90-degree rotation. [#676](https://github.com/Orama-Interactive/Pixelorama/pull/676)
+- Fixed export bug where the path is being changed if there's a folder with the same name as the file.
+- Fixed visual bug caused by window opacity. [#680](https://github.com/Orama-Interactive/Pixelorama/pull/680)
+- It is no longer possible to delete content from cels belonging to invisible or locked cels.
+- Scale image aspect ratio is now updating correctly when the dialog is about to appear.
+- Going into fullscreen mode and then exiting it no longer makes the window opacity not working properly. Note that window opacity still does not work when in fullscreen mode.
+
 ## [v0.10] - 2022-04-15
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), Martin Novák ([@novhack](https://github.com/novhack)), Lili Zoey ([@sayaks](https://github.com/sayaks)), [@ArthyChaux](https://github.com/ArthyChaux)

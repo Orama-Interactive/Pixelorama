@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2022-04-04 14:03\n"
+"PO-Revision-Date: 2022-05-18 19:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -336,8 +336,14 @@ msgstr "Soubor existuje, přepsat?"
 msgid "File %s already exists. Overwrite?"
 msgstr "Soubor %s již existuje. Přepsat?"
 
-msgid "Directory path or file name is not valid!"
-msgstr "Cesta složky nebo název souboru je neplatný!"
+msgid "Directory path is not valid!"
+msgstr ""
+
+msgid "File name is not valid!"
+msgstr ""
+
+msgid "Directory path and file name are not valid!"
+msgstr ""
 
 msgid "Exporting in progress..."
 msgstr "Probíhá export..."
@@ -606,11 +612,53 @@ msgstr "Odstíny šedi"
 msgid "Outline"
 msgstr "Obrys"
 
+msgid "Drop Shadow"
+msgstr ""
+
+msgid "Offset X:"
+msgstr ""
+
+msgid "Offset Y:"
+msgstr ""
+
+msgid "Shadow color:"
+msgstr ""
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Upravit odstín/sytost/hodnotu"
 
 msgid "Gradient"
 msgstr "Gradient"
+
+msgid "Linear"
+msgstr ""
+
+msgid "Radial"
+msgstr ""
+
+msgid "Linear Step"
+msgstr ""
+
+msgid "Radial Step"
+msgstr ""
+
+msgid "Linear Dithering"
+msgstr ""
+
+msgid "Radial Dithering"
+msgstr ""
+
+msgid "Transition size:"
+msgstr ""
+
+msgid "Center:"
+msgstr ""
+
+msgid "Radius:"
+msgstr ""
+
+msgid "Dithering pattern:"
+msgstr ""
 
 msgid "Adjust HSV"
 msgstr "Upravit odstín/sytost/hodnotu"
@@ -1858,6 +1906,9 @@ msgstr "Zavřít"
 
 msgid "Delete"
 msgstr "Smazat"
+
+msgid "Discard All"
+msgstr ""
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"

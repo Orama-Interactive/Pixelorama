@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-03-31 23:51\n"
+"PO-Revision-Date: 2022-05-18 18:59\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -336,8 +336,14 @@ msgstr "Файл існує, перезаписати?"
 msgid "File %s already exists. Overwrite?"
 msgstr "Файл \"%s\" вже існує. Перезаписати?"
 
-msgid "Directory path or file name is not valid!"
-msgstr "Шлях до каталогу або ім'я файлу недійсні!"
+msgid "Directory path is not valid!"
+msgstr ""
+
+msgid "File name is not valid!"
+msgstr ""
+
+msgid "Directory path and file name are not valid!"
+msgstr ""
 
 msgid "Exporting in progress..."
 msgstr "Виконується експорт..."
@@ -607,11 +613,53 @@ msgstr "Знебарвлення"
 msgid "Outline"
 msgstr "Контур"
 
+msgid "Drop Shadow"
+msgstr ""
+
+msgid "Offset X:"
+msgstr ""
+
+msgid "Offset Y:"
+msgstr ""
+
+msgid "Shadow color:"
+msgstr ""
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Змінити Відтінки/Насиченість/Яскравість"
 
 msgid "Gradient"
 msgstr "Градієнт"
+
+msgid "Linear"
+msgstr ""
+
+msgid "Radial"
+msgstr ""
+
+msgid "Linear Step"
+msgstr ""
+
+msgid "Radial Step"
+msgstr ""
+
+msgid "Linear Dithering"
+msgstr ""
+
+msgid "Radial Dithering"
+msgstr ""
+
+msgid "Transition size:"
+msgstr ""
+
+msgid "Center:"
+msgstr ""
+
+msgid "Radius:"
+msgstr ""
+
+msgid "Dithering pattern:"
+msgstr ""
 
 msgid "Adjust HSV"
 msgstr "Налаштування HSV"
@@ -1865,6 +1913,9 @@ msgstr "Закрити"
 
 msgid "Delete"
 msgstr "Видалити"
+
+msgid "Discard All"
+msgstr ""
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"

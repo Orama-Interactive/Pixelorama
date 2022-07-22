@@ -1,7 +1,7 @@
 class_name SymmetryGuide
 extends Guide
 
-var _texture = preload("res://assets/graphics/dotted_line.png")
+var _texture: Texture = preload("res://assets/graphics/dotted_line.png")
 
 
 func _ready() -> void:

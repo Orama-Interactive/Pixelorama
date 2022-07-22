@@ -2,12 +2,6 @@ name: "dev-clickable-builds"
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
-    paths-ignore: 
-    - "Translations/*"
-    - "installer/*.pot"
-    - "installer/po/*"
 
 env:
   GODOT_VERSION: 3.4.2

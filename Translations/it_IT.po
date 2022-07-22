@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-03-31 00:12\n"
+"PO-Revision-Date: 2022-05-18 22:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -336,8 +336,14 @@ msgstr "Il file esiste già, vuoi sovrascrivere?"
 msgid "File %s already exists. Overwrite?"
 msgstr "Il file \"%s\" è già esistente. Sovrascrivere?"
 
-msgid "Directory path or file name is not valid!"
-msgstr "Il percorso o il nome della cartella non sono validi!"
+msgid "Directory path is not valid!"
+msgstr "Il percorso directory non è valido!"
+
+msgid "File name is not valid!"
+msgstr "Nome file non valido!"
+
+msgid "Directory path and file name are not valid!"
+msgstr "Il percorso della directory e il nome del file non sono validi!"
 
 msgid "Exporting in progress..."
 msgstr "Esportazione in corso..."
@@ -607,11 +613,53 @@ msgstr "Desaturazione"
 msgid "Outline"
 msgstr "Contorno"
 
+msgid "Drop Shadow"
+msgstr "Rilascia Ombra"
+
+msgid "Offset X:"
+msgstr "Spostamento X:"
+
+msgid "Offset Y:"
+msgstr "Spostamento Y:"
+
+msgid "Shadow color:"
+msgstr "Colore ombra:"
+
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Regola Tonalità/Saturazione/Valore"
 
 msgid "Gradient"
 msgstr "Gradiente"
+
+msgid "Linear"
+msgstr "Lineare"
+
+msgid "Radial"
+msgstr "Radial"
+
+msgid "Linear Step"
+msgstr "Fase Lineare"
+
+msgid "Radial Step"
+msgstr "Passo Radiale"
+
+msgid "Linear Dithering"
+msgstr "Dithering lineare"
+
+msgid "Radial Dithering"
+msgstr "Dithering radiale"
+
+msgid "Transition size:"
+msgstr "Dimensione della transizione:"
+
+msgid "Center:"
+msgstr "Centro:"
+
+msgid "Radius:"
+msgstr "Raggio:"
+
+msgid "Dithering pattern:"
+msgstr "Motivo dithering:"
 
 msgid "Adjust HSV"
 msgstr "Regola HSV"
@@ -1865,6 +1913,9 @@ msgstr "Chiudi"
 
 msgid "Delete"
 msgstr "Elimina"
+
+msgid "Discard All"
+msgstr "Scarta Tutto"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"

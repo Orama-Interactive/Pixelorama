@@ -9,7 +9,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if not Global.has_focus or not event is InputEventKey:
 		return
-	for action in ["undo", "redo", "redo_secondary"]:
+	for action in ["undo", "redo"]:
 		if event.is_action_pressed(action):
 			return
 

@@ -4,6 +4,7 @@ const EXTENSIONS_PATH := "user://extensions"
 
 var extensions := {}  # Extension name : Extension class
 var extension_selected := -1
+var damaged_extension: String
 
 onready var extension_list: ItemList = $InstalledExtensions
 onready var enable_button: Button = $HBoxContainer/EnableButton
@@ -69,9 +70,63 @@ func install_extension(path: String) -> void:
 	_add_extension(file_name)
 
 
+func _uninstall_extension(file_name := "", remove_file := true, item := extension_selected) -> void:
+	if remove_file:
+		var dir := Directory.new()
+		var err := dir.remove(EXTENSIONS_PATH.plus_file(file_name))
+		if err != OK:
+			print(err)
+			return
+
+	var extension: Extension = extensions[file_name]
+	extension.enabled = false
+	_enable_extension(extension, false)
+
+	extensions.erase(file_name)
+	extension_list.remove_item(item)
+	extension_selected = -1
+	enable_button.disabled = true
+	uninstall_button.disabled = true
+
+
 func _add_extension(file_name: String) -> void:
-	if extensions.has(file_name):
+	var tester_file := File.new()  # For testing and deleting damaged extensions
+	var remover_directory := Directory.new()
+	# Remove any extension that was proven guilty before this extension is loaded
+	if tester_file.file_exists(EXTENSIONS_PATH.plus_file("Faulty.txt")):
+		# This code will only run if pixelorama crashed
+		var faulty_path = EXTENSIONS_PATH.plus_file("Faulty.txt")
+		tester_file.open(faulty_path, File.READ)
+		damaged_extension = tester_file.get_as_text()
+		tester_file.close()
+		remover_directory.remove(EXTENSIONS_PATH.plus_file(damaged_extension))
+		remover_directory.remove(EXTENSIONS_PATH.plus_file("Faulty.txt"))
+
+	# Don't load a deleted extension
+	if damaged_extension == file_name:
+		# This code will only run if pixelorama crashed
+		damaged_extension = ""
 		return
+
+	# The new (about to load) extension will be considered guilty till it's proven innocent
+	tester_file.open(EXTENSIONS_PATH.plus_file("Faulty.txt"), File.WRITE)
+	tester_file.store_string(file_name)  # Guilty till proven innocent ;)
+	tester_file.close()
+
+	if extensions.has(file_name):
+		var item := -1
+		for i in extension_list.get_item_count():
+			if extension_list.get_item_metadata(i) == file_name:
+				item = i
+				break
+		if item == -1:
+			print("Failed to find %s" % file_name)
+			return
+		_uninstall_extension(file_name, false, item)
+		# Wait two frames so the previous nodes can get freed
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
+
 	var file_name_no_ext: String = file_name.get_basename()
 	var file_path: String = EXTENSIONS_PATH.plus_file(file_name)
 	var success := ProjectSettings.load_resource_pack(file_path)
@@ -108,6 +163,10 @@ func _add_extension(file_name: String) -> void:
 	if extension.enabled:
 		_enable_extension(extension)
 
+	# If an extension doesn't crash pixelorama then it is proven innocent
+	# And we should now delete it's "Faulty.txt" file
+	remover_directory.remove(EXTENSIONS_PATH.plus_file("Faulty.txt"))
+
 
 func _enable_extension(extension: Extension, save_to_config := true) -> void:
 	var extension_path: String = "res://src/Extensions/%s/" % extension.file_name
@@ -125,6 +184,8 @@ func _enable_extension(extension: Extension, save_to_config := true) -> void:
 				var extension_node: Node = extension_scene.instance()
 				extension_parent.add_child(extension_node)
 				extension_node.add_to_group(id)  # Keep track of what to remove later
+			else:
+				print("Failed to load extension %s" % id)
 	else:
 		for ext_node in extension_parent.get_children():
 			if ext_node.is_in_group(id):  # Node for extention found
@@ -169,22 +230,7 @@ func _on_EnableButton_pressed() -> void:
 
 
 func _on_UninstallButton_pressed() -> void:
-	var dir := Directory.new()
-	var file_name: String = extension_list.get_item_metadata(extension_selected)
-	var err := dir.remove(EXTENSIONS_PATH.plus_file(file_name))
-	if err != OK:
-		print(err)
-		return
-
-	var extension: Extension = extensions[file_name]
-	extension.enabled = false
-	_enable_extension(extension, false)
-
-	extensions.erase(file_name)
-	extension_list.remove_item(extension_selected)
-	extension_selected = -1
-	enable_button.disabled = true
-	uninstall_button.disabled = true
+	_uninstall_extension(extension_list.get_item_metadata(extension_selected))
 
 
 func _on_OpenFolderButton_pressed() -> void:

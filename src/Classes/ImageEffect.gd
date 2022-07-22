@@ -13,6 +13,7 @@ var preview_texture := ImageTexture.new()
 var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
+var confirmed := false
 
 
 func _ready() -> void:
@@ -30,6 +31,7 @@ func _ready() -> void:
 
 
 func _about_to_show() -> void:
+	confirmed = false
 	Global.canvas.selection.transform_content_confirm()
 	var frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
 	current_cel = frame.cels[Global.current_project.current_layer].image
@@ -41,6 +43,7 @@ func _about_to_show() -> void:
 
 
 func _confirmed() -> void:
+	confirmed = true
 	var project: Project = Global.current_project
 	if affect == CEL:
 		var undo_data := _get_undo_data(project)

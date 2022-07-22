@@ -63,9 +63,10 @@ func cursor_move(position: Vector2) -> void:
 	_cursor = position
 
 
-func draw_indicator() -> void:
+func draw_indicator(left: bool) -> void:
 	var rect := Rect2(_cursor, Vector2.ONE)
-	Global.canvas.indicators.draw_rect(rect, Color.blue, false)
+	var color := Global.left_tool_color if left else Global.right_tool_color
+	Global.canvas.indicators.draw_rect(rect, color, false)
 
 
 func draw_preview() -> void:
@@ -76,7 +77,7 @@ func _get_draw_rect() -> Rect2:
 	if Global.current_project.has_selection:
 		return Global.current_project.get_selection_rectangle()
 	else:
-		return Global.current_project.tile_mode_rects[Global.TileMode.NONE]
+		return Rect2(Vector2.ZERO, Global.current_project.size)
 
 
 func _get_draw_image() -> Image:

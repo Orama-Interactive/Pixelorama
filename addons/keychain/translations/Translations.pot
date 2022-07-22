@@ -1,0 +1,209 @@
+msgid ""
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Shortcut profile:"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Custom"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Open Folder"
+msgstr ""
+
+msgid "New Shortcut Profile"
+msgstr ""
+
+msgid "Rename Shortcut Profile"
+msgstr ""
+
+msgid "Are you sure you want to delete this shortcut profile?"
+msgstr ""
+
+msgid "Key"
+msgstr ""
+
+msgid "Mouse Button"
+msgstr ""
+
+msgid "Joy Button"
+msgstr ""
+
+msgid "Joy Axis"
+msgstr ""
+
+msgid "Button"
+msgstr ""
+
+msgid "Axis"
+msgstr ""
+
+msgid "(Physical)"
+msgstr ""
+
+msgid "Set the shortcut"
+msgstr ""
+
+msgid "Press a key or a key combination to set the shortcut"
+msgstr ""
+
+msgid "Mouse Button Index:"
+msgstr ""
+
+msgid "Joypad Button Index:"
+msgstr ""
+
+msgid "Joypad Axis Index:"
+msgstr ""
+
+msgid "Already assigned to: %s"
+msgstr ""
+
+msgid "Left Button"
+msgstr ""
+
+msgid "Right Button"
+msgstr ""
+
+msgid "Middle Button"
+msgstr ""
+
+msgid "Wheel Up Button"
+msgstr ""
+
+msgid "Wheel Down Button"
+msgstr ""
+
+msgid "Wheel Left Button"
+msgstr ""
+
+msgid "Wheel Right Button"
+msgstr ""
+
+msgid "X Button 1"
+msgstr ""
+
+msgid "X Button 2"
+msgstr ""
+
+msgid "DualShock Cross, Xbox A, Nintendo B"
+msgstr ""
+
+msgid "DualShock Circle, Xbox B, Nintendo A"
+msgstr ""
+
+msgid "DualShock Square, Xbox X, Nintendo Y"
+msgstr ""
+
+msgid "DualShock Triangle, Xbox Y, Nintendo X"
+msgstr ""
+
+msgid "L, L1"
+msgstr ""
+
+msgid "R, R1"
+msgstr ""
+
+msgid "L2"
+msgstr ""
+
+msgid "R2"
+msgstr ""
+
+msgid "L3"
+msgstr ""
+
+msgid "R3"
+msgstr ""
+
+msgid "Select, DualShock Share, Nintendo -"
+msgstr ""
+
+msgid "Start, DualShock Options, Nintendo +"
+msgstr ""
+
+msgid "D-Pad Up"
+msgstr ""
+
+msgid "D-Pad Down"
+msgstr ""
+
+msgid "D-Pad Left"
+msgstr ""
+
+msgid "D-Pad Right"
+msgstr ""
+
+msgid "Home, DualShock PS, Guide"
+msgstr ""
+
+msgid "Xbox Share, PS5 Microphone, Nintendo Capture"
+msgstr ""
+
+msgid "Xbox Paddle 1"
+msgstr ""
+
+msgid "Xbox Paddle 2"
+msgstr ""
+
+msgid "Xbox Paddle 3"
+msgstr ""
+
+msgid "Xbox Paddle 4"
+msgstr ""
+
+msgid "PS4/5 Touchpad"
+msgstr ""
+
+msgid "(Left Stick Left)"
+msgstr ""
+
+msgid "(Left Stick Right)"
+msgstr ""
+
+msgid "(Left Stick Up)"
+msgstr ""
+
+msgid "(Left Stick Down)"
+msgstr ""
+
+msgid "(Right Stick Left)"
+msgstr ""
+
+msgid "(Right Stick Right)"
+msgstr ""
+
+msgid "(Right Stick Up)"
+msgstr ""
+
+msgid "(Right Stick Down)"
+msgstr ""
+
+msgid "(L2)"
+msgstr ""
+
+msgid "(R2)"
+msgstr ""

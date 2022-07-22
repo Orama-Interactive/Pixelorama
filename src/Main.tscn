@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://src/UI/Dialogs/SaveSprite.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/Dialogs/OpenSprite.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/UI/Dialogs/ManageLayouts.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/UI/Dialogs/TileModeOffsetsDialog.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.tscn" type="PackedScene" id=27]
 [ext_resource path="res://src/UI/Dialogs/CreateNewImage.tscn" type="PackedScene" id=28]
 [ext_resource path="res://src/Preferences/PreferencesDialog.tscn" type="PackedScene" id=32]
@@ -26,7 +27,6 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ],
-"_edit_use_anchors_": false,
 "_edit_vertical_guides_": [  ]
 }
 
@@ -64,6 +64,8 @@ __meta__ = {
 [node name="CreateNewImage" parent="Dialogs" instance=ExtResource( 28 )]
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource( 12 )]
+window_title = "Open File(s)"
+mode = 1
 
 [node name="SaveSprite" parent="Dialogs" instance=ExtResource( 11 )]
 margin_left = 108.0
@@ -122,6 +124,8 @@ dialog_autowrap = true
 
 [node name="WindowOpacityDialog" parent="Dialogs" instance=ExtResource( 10 )]
 
+[node name="TileModeOffsetsDialog" parent="Dialogs" instance=ExtResource( 14 )]
+
 [node name="Extensions" type="Control" parent="."]
 __meta__ = {
 "_edit_use_anchors_": false
@@ -137,7 +141,7 @@ visible = false
 
 [connection signal="popup_hide" from="Dialogs/SplashDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/CreateNewImage" to="." method="_can_draw_true"]
-[connection signal="file_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_file_selected"]
+[connection signal="files_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_files_selected"]
 [connection signal="popup_hide" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_popup_hide"]
 [connection signal="file_selected" from="Dialogs/SaveSprite" to="." method="_on_SaveSprite_file_selected"]
 [connection signal="popup_hide" from="Dialogs/SaveSprite" to="." method="_can_draw_true"]
@@ -149,7 +153,7 @@ visible = false
 [connection signal="popup_hide" from="Dialogs/UnsavedCanvasDialog" to="." method="_can_draw_true"]
 [connection signal="confirmed" from="Dialogs/QuitDialog" to="." method="_on_QuitDialog_confirmed"]
 [connection signal="popup_hide" from="Dialogs/QuitDialog" to="." method="_can_draw_true"]
-[connection signal="confirmed" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitDialog_confirmed"]
+[connection signal="confirmed" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_confirmed"]
 [connection signal="custom_action" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_custom_action"]
 [connection signal="popup_hide" from="Dialogs/QuitAndSaveDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/ErrorDialog" to="." method="_can_draw_true"]

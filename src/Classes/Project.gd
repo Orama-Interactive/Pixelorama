@@ -5,8 +5,7 @@ extends Reference
 var name := "" setget _name_changed
 var size: Vector2 setget _size_changed
 var undo_redo := UndoRedo.new()
-var tile_mode: int = Global.TileMode.NONE
-var tile_mode_rects := []  # Cached to avoid recalculation
+var tiles: Tiles
 var undos := 0  # The number of times we added undo properties
 var fill_color := Color(0)
 var has_changed := false setget _has_changed_changed
@@ -53,26 +52,26 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	frames = _frames
 	name = _name
 	size = _size
+	tiles = Tiles.new(size)
 	selection_bitmap.create(size)
-	_update_tile_mode_rects()
 
 	Global.tabs.add_tab(name)
 	OpenSave.current_save_paths.append("")
 	OpenSave.backup_save_paths.append("")
 
-	x_symmetry_point = size.x / 2
-	y_symmetry_point = size.y / 2
+	x_symmetry_point = size.x
+	y_symmetry_point = size.y
 
 	x_symmetry_axis.type = x_symmetry_axis.Types.HORIZONTAL
 	x_symmetry_axis.project = self
-	x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point))
-	x_symmetry_axis.add_point(Vector2(19999, y_symmetry_point))
+	x_symmetry_axis.add_point(Vector2(-19999, y_symmetry_point / 2 + 0.5))
+	x_symmetry_axis.add_point(Vector2(19999, y_symmetry_point / 2 + 0.5))
 	Global.canvas.add_child(x_symmetry_axis)
 
 	y_symmetry_axis.type = y_symmetry_axis.Types.VERTICAL
 	y_symmetry_axis.project = self
-	y_symmetry_axis.add_point(Vector2(x_symmetry_point, -19999))
-	y_symmetry_axis.add_point(Vector2(x_symmetry_point, 19999))
+	y_symmetry_axis.add_point(Vector2(x_symmetry_point / 2 + 0.5, -19999))
+	y_symmetry_axis.add_point(Vector2(x_symmetry_point / 2 + 0.5, 19999))
 	Global.canvas.add_child(y_symmetry_axis)
 
 	if OS.get_name() == "HTML5":
@@ -109,7 +108,7 @@ func new_empty_frame() -> Frame:
 	for l in layers:  # Create as many cels as there are layers
 		var image := Image.new()
 		image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-		if bottom_layer:
+		if bottom_layer and fill_color.a > 0:
 			image.fill(fill_color)
 		frame.cels.append(PixelCel.new(image, 1))
 		bottom_layer = false
@@ -168,6 +167,7 @@ func change_project() -> void:
 
 	Global.canvas.update()
 	Global.canvas.grid.update()
+	Global.canvas.tile_mode.update()
 	Global.transparent_checker.update_rect()
 	Global.animation_timeline.fps_spinbox.value = fps
 	Global.horizontal_ruler.update()
@@ -205,8 +205,8 @@ func change_project() -> void:
 				6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format))
 			)
 
-	for j in Global.TileMode.values():
-		Global.top_menu_container.tile_mode_submenu.set_item_checked(j, j == tile_mode)
+	for j in Tiles.MODE.values():
+		Global.top_menu_container.tile_mode_submenu.set_item_checked(j, j == tiles.mode)
 
 	# Change selection effect & bounding rectangle
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset
@@ -246,6 +246,7 @@ func serialize() -> Dictionary:
 	var layer_data := []
 	for layer in layers:
 		layer_data.append(layer.serialize())
+		layer_data[-1]["metadata"] = _serialize_metadata(layer)
 
 	var tag_data := []
 	for tag in animation_tags:
@@ -274,21 +275,26 @@ func serialize() -> Dictionary:
 	for frame in frames:
 		var cel_data := []
 		for cel in frame.cels:
-			cel_data.append(
-				{
-					"opacity": cel.opacity,
-				}
-			)
-		frame_data.append({"cels": cel_data, "duration": frame.duration})
+			cel_data.append({"opacity": cel.opacity, "metadata": _serialize_metadata(cel)})
+
+		frame_data.append(
+			{"cels": cel_data, "duration": frame.duration, "metadata": _serialize_metadata(frame)}
+		)
 	var brush_data := []
 	for brush in brushes:
 		brush_data.append({"size_x": brush.get_size().x, "size_y": brush.get_size().y})
+
+	var metadata := _serialize_metadata(self)
 
 	var project_data := {
 		"pixelorama_version": Global.current_version,
 		"name": name,
 		"size_x": size.x,
 		"size_y": size.y,
+		"tile_mode_x_basis_x": tiles.x_basis.x,
+		"tile_mode_x_basis_y": tiles.x_basis.y,
+		"tile_mode_y_basis_x": tiles.y_basis.x,
+		"tile_mode_y_basis_y": tiles.y_basis.y,
 		"save_path": OpenSave.current_save_paths[Global.projects.find(self)],
 		"layers": layer_data,
 		"tags": tag_data,
@@ -299,7 +305,8 @@ func serialize() -> Dictionary:
 		"export_directory_path": directory_path,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
-		"fps": fps
+		"fps": fps,
+		"metadata": metadata
 	}
 
 	return project_data
@@ -311,9 +318,14 @@ func deserialize(dict: Dictionary) -> void:
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
 		size.y = dict.size_y
-
-		_update_tile_mode_rects()
+		tiles.tile_size = size
 		selection_bitmap = resize_bitmap(selection_bitmap, size)
+	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
+		tiles.x_basis.x = dict.tile_mode_x_basis_x
+		tiles.x_basis.y = dict.tile_mode_x_basis_y
+	if dict.has("tile_mode_y_basis_x") and dict.has("tile_mode_y_basis_y"):
+		tiles.y_basis.x = dict.tile_mode_y_basis_x
+		tiles.y_basis.y = dict.tile_mode_y_basis_y
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
 	if dict.has("frames") and dict.has("layers"):
@@ -327,6 +339,7 @@ func deserialize(dict: Dictionary) -> void:
 						cels.append(PixelCel.new(Image.new(), cel.opacity))
 					Global.LayerTypes.GROUP:
 						cels.append(GroupCel.new(cel.opacity))
+				_deserialize_metadata(cels[cel_i], cel)
 				cel_i += 1
 			var duration := 1.0
 			if frame.has("duration"):
@@ -334,7 +347,9 @@ func deserialize(dict: Dictionary) -> void:
 			elif dict.has("frame_duration"):
 				duration = dict.frame_duration[frame_i]
 
-			frames.append(Frame.new(cels, duration))
+			var frame_class := Frame.new(cels, duration)
+			_deserialize_metadata(frame_class, frame)
+			frames.append(frame_class)
 			frame_i += 1
 
 		for saved_layer in dict.layers:
@@ -345,10 +360,11 @@ func deserialize(dict: Dictionary) -> void:
 					layers.append(GroupLayer.new())
 		# Parent references to other layers are created when deserializing
 		# a layer, so loop again after creating them:
-		for layer_i in range(dict.layers.size()):
+		for layer_i in dict.layers.size():
 			layers[layer_i].project = self
 			layers[layer_i].index = layer_i
 			layers[layer_i].deserialize(dict.layers[layer_i])
+			_deserialize_metadata(layers[layer_i], dict.layers[layer_i])
 	if dict.has("tags"):
 		for tag in dict.tags:
 			animation_tags.append(AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to))
@@ -381,6 +397,22 @@ func deserialize(dict: Dictionary) -> void:
 		file_format = dict.export_file_format
 	if dict.has("fps"):
 		fps = dict.fps
+	_deserialize_metadata(self, dict)
+
+
+func _serialize_metadata(object: Object) -> Dictionary:
+	var metadata := {}
+	for meta in object.get_meta_list():
+		metadata[meta] = object.get_meta(meta)
+	return metadata
+
+
+func _deserialize_metadata(object: Object, dict: Dictionary) -> void:
+	if not dict.has("metadata"):
+		return
+	var metadata: Dictionary = dict["metadata"]
+	for meta in metadata.keys():
+		object.set_meta(meta, metadata[meta])
 
 
 func _name_changed(value: String) -> void:
@@ -389,8 +421,16 @@ func _name_changed(value: String) -> void:
 
 
 func _size_changed(value: Vector2) -> void:
+	if size.x != 0:
+		tiles.x_basis = (tiles.x_basis * value.x / size.x).round()
+	else:
+		tiles.x_basis = Vector2(value.x, 0)
+	if size.y != 0:
+		tiles.y_basis = (tiles.y_basis * value.y / size.y).round()
+	else:
+		tiles.y_basis = Vector2(0, value.y)
+	tiles.tile_size = value
 	size = value
-	_update_tile_mode_rects()
 
 
 func _frame_changed(value: int) -> void:
@@ -532,18 +572,6 @@ func _has_changed_changed(value: bool) -> void:
 		Global.tabs.set_tab_title(Global.tabs.current_tab, name)
 
 
-func get_tile_mode_rect() -> Rect2:
-	return tile_mode_rects[tile_mode]
-
-
-func _update_tile_mode_rects() -> void:
-	tile_mode_rects.resize(Global.TileMode.size())
-	tile_mode_rects[Global.TileMode.NONE] = Rect2(Vector2.ZERO, size)
-	tile_mode_rects[Global.TileMode.BOTH] = Rect2(Vector2(-1, -1) * size, Vector2(3, 3) * size)
-	tile_mode_rects[Global.TileMode.X_AXIS] = Rect2(Vector2(-1, 0) * size, Vector2(3, 1) * size)
-	tile_mode_rects[Global.TileMode.Y_AXIS] = Rect2(Vector2(0, -1) * size, Vector2(1, 3) * size)
-
-
 func is_empty() -> bool:
 	return (
 		frames.size() == 1
@@ -572,6 +600,9 @@ func can_pixel_get_drawn(
 	selection_position: Vector2 = Global.canvas.selection.big_bounding_rectangle.position
 ) -> bool:
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
+		return false
+
+	if tiles.mode != Tiles.MODE.NONE and tiles.get_nearest_tile(pixel).position != Vector2.ZERO:
 		return false
 
 	if has_selection:

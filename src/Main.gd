@@ -6,6 +6,7 @@ var is_quitting_on_save := false
 var cursor_image: Texture = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI/DockableContainer
+onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
 onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
 onready var quit_and_save_dialog: ConfirmationDialog = find_node("QuitAndSaveDialog")
 
@@ -31,8 +32,8 @@ func _ready() -> void:
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
 	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
 
-	quit_and_save_dialog.add_button("Save & Exit", false, "Save")
-	quit_and_save_dialog.get_ok().text = "Exit without saving"
+	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
+	quit_and_save_dialog.get_ok().text = "Save & Exit"
 
 	Global.open_sprites_dialog.current_dir = Global.config_cache.get_value(
 		"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
@@ -84,26 +85,6 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event.scancode == KEY_ENTER or event.scancode == KEY_KP_ENTER):
 		if get_focus_owner() is LineEdit:
 			get_focus_owner().release_focus()
-
-	# The section of code below is reserved for Undo and Redo!
-	# Do not place code for Input below, but above.
-	if !event.is_echo():  # Checks if the action is pressed down
-		if event.is_action_pressed("redo_secondary"):
-			# Done, so that "redo_secondary" hasn't a slight delay before it starts.
-			# The "redo" and "undo" action don't have a slight delay,
-			# because they get called as an accelerator once pressed (TopMenuContainer.gd, Line 152)
-			Global.current_project.commit_redo()
-		return
-
-	if event.is_action("redo"):  # Ctrl + Y
-		Global.current_project.commit_redo()
-
-	if event.is_action("redo_secondary"):  # Shift + Ctrl + Z
-		Global.current_project.commit_redo()
-
-	if event.is_action("undo") and !event.shift:  # Ctrl + Z and check if shift isn't pressed
-		# so "undo" isn't accidentaly triggered while using "redo_secondary"
-		Global.current_project.commit_undo()
 
 
 func _setup_application_window_size() -> void:
@@ -168,8 +149,7 @@ func _show_splash_screen() -> void:
 
 func _handle_backup() -> void:
 	# If backup file exists, Pixelorama was not closed properly (probably crashed) - reopen backup
-	var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
-	backup_confirmation.get_cancel().text = tr("Delete")
+	backup_confirmation.add_button("Discard All", false, "discard")
 	if Global.config_cache.has_section("backups"):
 		var project_paths = Global.config_cache.get_section_keys("backups")
 		if project_paths.size() > 0:
@@ -182,8 +162,11 @@ func _handle_backup() -> void:
 			backup_confirmation.connect(
 				"confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths, backup_paths]
 			)
-			backup_confirmation.get_cancel().connect(
-				"pressed", self, "_on_BackupConfirmation_delete", [project_paths, backup_paths]
+			backup_confirmation.connect(
+				"custom_action",
+				self,
+				"_on_BackupConfirmation_custom_action",
+				[project_paths, backup_paths]
 			)
 			backup_confirmation.popup_centered()
 			Global.can_draw = false
@@ -222,8 +205,8 @@ func _notification(what: int) -> void:
 				Global.has_focus = true
 
 
-func _on_files_dropped(_files: PoolStringArray, _screen: int) -> void:
-	OpenSave.handle_loading_files(_files)
+func _on_files_dropped(files: PoolStringArray, _screen: int) -> void:
+	OpenSave.handle_loading_files(files)
 	var splash_dialog = Global.control.get_node("Dialogs/SplashDialog")
 	if splash_dialog.visible:
 		splash_dialog.hide()
@@ -269,10 +252,10 @@ func load_recent_project_file(path: String) -> void:
 		Global.dialog_open(true)
 
 
-func _on_OpenSprite_file_selected(path: String) -> void:
-	OpenSave.handle_loading_files([path])
-	Global.save_sprites_dialog.current_dir = path.get_base_dir()
-	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
+func _on_OpenSprite_files_selected(paths: PoolStringArray) -> void:
+	OpenSave.handle_loading_files(paths)
+	Global.save_sprites_dialog.current_dir = paths[0].get_base_dir()
+	Global.config_cache.set_value("data", "current_dir", paths[0].get_base_dir())
 
 
 func _on_SaveSprite_file_selected(path: String) -> void:
@@ -286,7 +269,7 @@ func save_project(path: String) -> void:
 	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 
 	if is_quitting_on_save:
-		_on_QuitDialog_confirmed()
+		_quit()
 
 
 func _on_SaveSpriteHTML5_confirmed() -> void:
@@ -319,22 +302,30 @@ func show_quit_dialog() -> void:
 			if Global.quit_confirmation:
 				quit_dialog.call_deferred("popup_centered")
 			else:
-				_on_QuitDialog_confirmed()
+				_quit()
 		else:
 			quit_and_save_dialog.call_deferred("popup_centered")
 
 	Global.dialog_open(true)
 
 
-func _on_QuitAndSaveDialog_custom_action(action: String) -> void:
-	if action == "Save":
-		is_quitting_on_save = true
-		Global.save_sprites_dialog.popup_centered()
-		quit_dialog.hide()
-		Global.dialog_open(true)
-
-
 func _on_QuitDialog_confirmed() -> void:
+	_quit()
+
+
+func _on_QuitAndSaveDialog_custom_action(action: String) -> void:
+	if action == "ExitWithoutSaving":
+		_quit()
+
+
+func _on_QuitAndSaveDialog_confirmed() -> void:
+	is_quitting_on_save = true
+	Global.save_sprites_dialog.popup_centered()
+	quit_dialog.hide()
+	Global.dialog_open(true)
+
+
+func _quit() -> void:
 	# Darken the UI to denote that the application is currently exiting
 	# (it won't respond to user input in this state).
 	modulate = Color(0.5, 0.5, 0.5)
@@ -352,7 +343,12 @@ func _on_BackupConfirmation_confirmed(project_paths: Array, backup_paths: Array)
 	Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 
 
-func _on_BackupConfirmation_delete(project_paths: Array, backup_paths: Array) -> void:
+func _on_BackupConfirmation_custom_action(
+	action: String, project_paths: Array, backup_paths: Array
+) -> void:
+	backup_confirmation.hide()
+	if action != "discard":
+		return
 	for i in range(project_paths.size()):
 		OpenSave.remove_backup_by_path(project_paths[i], backup_paths[i])
 	# Reopen last project
@@ -366,10 +362,11 @@ func _on_BackupConfirmation_popup_hide() -> void:
 
 
 func _use_osx_shortcuts() -> void:
-	var inputmap := InputMap
-
-	for action in inputmap.get_actions():
-		var event: InputEvent = inputmap.get_action_list(action)[0]
+	for action in InputMap.get_actions():
+		var action_list: Array = InputMap.get_action_list(action)
+		if action_list.size() == 0:
+			continue
+		var event: InputEvent = action_list[0]
 
 		if event.is_action("show_pixel_grid"):
 			event.shift = true
@@ -387,6 +384,10 @@ func _exit_tree() -> void:
 	)
 	Global.config_cache.set_value("window", "position", OS.window_position)
 	Global.config_cache.set_value("window", "size", OS.window_size)
+	Global.config_cache.set_value("view_menu", "draw_grid", Global.draw_grid)
+	Global.config_cache.set_value("view_menu", "draw_pixel_grid", Global.draw_pixel_grid)
+	Global.config_cache.set_value("view_menu", "show_rulers", Global.show_rulers)
+	Global.config_cache.set_value("view_menu", "show_guides", Global.show_guides)
 	Global.config_cache.save("user://cache.ini")
 
 	var i := 0

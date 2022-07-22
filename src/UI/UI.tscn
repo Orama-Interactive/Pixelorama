@@ -285,6 +285,7 @@ script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/ViewportContainer"]
 size = Vector2( 862, 466 )
+handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
 

@@ -22,13 +22,13 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	var options: OptionButton = $FillAreaOptions
 
-	if event.is_action_pressed("ctrl"):
+	if event.is_action_pressed("change_tool_mode"):
 		_prev_mode = options.selected
-	if event.is_action("ctrl"):
+	if event.is_action("change_tool_mode"):
 		options.selected = _prev_mode ^ 1
 		_fill_area = options.selected
 		$Similarity.visible = (_fill_area == 1)
-	if event.is_action_released("ctrl"):
+	if event.is_action_released("change_tool_mode"):
 		options.selected = _prev_mode
 		_fill_area = options.selected
 		$Similarity.visible = (_fill_area == 1)
@@ -138,14 +138,14 @@ func update_pattern() -> void:
 
 func draw_start(position: Vector2) -> void:
 	.draw_start(position)
-	if Input.is_action_pressed("alt"):
+	if Input.is_action_pressed("draw_color_picker"):
 		_pick_color(position)
 		return
 
 	Global.canvas.selection.transform_content_confirm()
 	if (
 		!Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn()
-		or !Global.current_project.tile_mode_rects[Global.TileMode.NONE].has_point(position)
+		or Global.current_project.tiles.get_nearest_tile(position).position != Vector2.ZERO
 	):
 		return
 	if (
@@ -444,8 +444,7 @@ func _get_undo_data() -> Dictionary:
 
 func _pick_color(position: Vector2) -> void:
 	var project: Project = Global.current_project
-	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
-		position = position.posmodv(project.size)
+	position = project.tiles.get_canon_position(position)
 
 	if position.x < 0 or position.y < 0:
 		return

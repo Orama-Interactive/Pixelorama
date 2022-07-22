@@ -13,32 +13,42 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 232.0
-margin_bottom = 32.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_right = -8.0
+margin_bottom = -36.0
 
-[node name="HSlider" type="HSlider" parent="HBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 327.0
+margin_bottom = 24.0
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
 margin_top = 4.0
-margin_right = 146.0
+margin_right = 249.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 value = 100.0
 
-[node name="SpinBox" type="SpinBox" parent="HBoxContainer2"]
-margin_left = 150.0
-margin_right = 224.0
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer"]
+margin_left = 253.0
+margin_right = 327.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 value = 100.0
 
+[node name="FullscreenWarning" type="Label" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 327.0
+margin_bottom = 42.0
+custom_colors/font_color = Color( 1, 0.364706, 0.364706, 1 )
+text = "Window opacity does not work on fullscreen mode."
+
 [connection signal="about_to_show" from="." to="." method="_on_WindowOpacityDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_WindowOpacityDialog_popup_hide"]
-[connection signal="value_changed" from="HBoxContainer2/HSlider" to="." method="_on_value_changed"]
-[connection signal="value_changed" from="HBoxContainer2/SpinBox" to="." method="_on_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/HSlider" to="." method="_on_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpinBox" to="." method="_on_value_changed"]
