@@ -7,13 +7,6 @@ var expanded := true
 func _init(_name := "") -> void:
 	name = _name
 
-
-func is_expanded_in_hierarchy() -> bool:
-	if is_instance_valid(parent) and expanded:
-		return parent.is_expanded_in_hierarchy()
-	return expanded
-
-
 # Overridden Functions:
 
 func serialize() -> Dictionary:
@@ -28,9 +21,26 @@ func deserialize(dict: Dictionary) -> void:
 	expanded = dict.expanded
 
 
-func get_default_name(number: int) -> String:
-	return tr("Group") + " %s" % number
+func copy_cel(frame_index: int, _linked: bool) -> BaseCel:
+	var cel: GroupCel = project.frames[frame_index].cels[index]
+	return GroupCel.new(cel.opacity)
+
+
+func copy_all_cels() -> Array:
+	var cels := []
+	for frame in project.frames:
+		var cel: GroupCel = frame.cels[index]
+		cels.append(GroupCel.new(cel.opacity))
+	return cels
+
+
+func set_name_to_default(number: int) -> void:
+	name = tr("Group") + " %s" % number
 
 
 func accepts_child(_layer: BaseLayer) -> bool:
 	return true
+
+
+func create_layer_button() -> Node:
+	return Global.group_layer_button_node.instance()

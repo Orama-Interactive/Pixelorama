@@ -8,5 +8,9 @@ func _init(_opacity := 1.0) -> void:
 
 
 func get_image() -> Image:
-	# TODO: render the material as an image and return it
+	# TODO H: render the material as an image and return it
 	return Image.new()
+
+
+func create_cel_button() -> Node:
+	return Global.group_cel_button_node.instance()

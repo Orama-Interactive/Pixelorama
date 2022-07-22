@@ -12,6 +12,8 @@ var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
 
+var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
+
 onready var old_scroll: int = 0  # The previous scroll state of $ScrollContainer
 onready var tag_spacer = find_node("TagSpacer")
 onready var start_spacer = find_node("StartSpacer")
@@ -36,7 +38,7 @@ func _ready() -> void:
 	find_node("EndSpacer").size_flags_horizontal = SIZE_EXPAND_FILL
 	timeline_scroll.size_flags_horizontal = SIZE_FILL
 
-
+# TODO L: See if these two should be kept or done another way:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
 		drag_highlight.hide()
@@ -134,18 +136,17 @@ func add_frame() -> void:
 	var project: Project = Global.current_project
 	var frame_add_index := project.current_frame + 1
 	var frame: Frame = project.new_empty_frame()
-	var new_frames: Array = project.frames.duplicate()
 	var new_layers: Array = project.duplicate_layers()
-	new_frames.insert(frame_add_index, frame)
 
 	for l_i in range(new_layers.size()):
+		# TODO H: Make sure this works with groups (Check out copy frames):
 		if new_layers[l_i].new_cels_linked:  # If the link button is pressed
 			new_layers[l_i].linked_cels.append(frame)
 			frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
 			frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
 
 	# Code to PUSH AHEAD tags starting after the frame
-	var new_animation_tags := Global.current_project.animation_tags.duplicate()
+	var new_animation_tags := project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
 	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
 	for i in new_animation_tags.size():
@@ -167,20 +168,14 @@ func add_frame() -> void:
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-
-	project.undo_redo.add_do_property(project, "frames", new_frames)
-	project.undo_redo.add_do_property(project, "current_frame", project.current_frame + 1)
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "animation_tags", new_animation_tags
-	)
 	project.undo_redo.add_do_property(project, "layers", new_layers)
-
-	project.undo_redo.add_undo_property(project, "frames", project.frames)
-	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "animation_tags", Global.current_project.animation_tags
-	)
 	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.add_do_method(project, "add_frames", [frame], [frame_add_index])
+	project.undo_redo.add_undo_method(project, "remove_frames", [frame_add_index])
+	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
+	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
+	project.undo_redo.add_do_property(project, "current_frame", project.current_frame + 1)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.commit_action()
 
 
@@ -195,18 +190,21 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 
 
 func delete_frames(frames := []) -> void:
-	if Global.current_project.frames.size() == 1:
+	var project: Project = Global.current_project
+	if project.frames.size() == 1:
 		return
 
-	if frames.size() == 0:
-		frames.append(Global.current_project.current_frame)
+	if frames.size() == project.frames.size():
+		frames.remove(frames.size() - 1) # Ensure the project has at least 1 frame
+	elif frames.size() == 0:
+		frames.append(project.current_frame)
 
-	var new_frames: Array = Global.current_project.frames.duplicate()
-	var current_frame := Global.current_project.current_frame
-	var new_layers: Array = Global.current_project.duplicate_layers()
+	var new_frames: Array = project.frames.duplicate()
+	var current_frame := project.current_frame
+	var new_layers: Array = project.duplicate_layers()
 	var frame_correction := 0  # Only needed for tag adjustment
 
-	var new_animation_tags := Global.current_project.animation_tags.duplicate()
+	var new_animation_tags := project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
 	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
 	for i in new_animation_tags.size():
@@ -218,9 +216,7 @@ func delete_frames(frames := []) -> void:
 		)
 
 	for frame in frames:
-		if new_frames.size() == 1:  # If only 1 frame
-			break
-		var frame_to_delete: Frame = Global.current_project.frames[frame]
+		var frame_to_delete: Frame = project.frames[frame]
 		new_frames.erase(frame_to_delete)
 		if current_frame > 0 && current_frame == new_frames.size():  # If it's the last frame
 			current_frame -= 1
@@ -230,7 +226,7 @@ func delete_frames(frames := []) -> void:
 		# this prevents removed cels being kept in linked memory
 		for layer in new_layers:
 			for linked in layer.linked_cels:
-				if linked == Global.current_project.frames[frame]:
+				if linked == project.frames[frame]:
 					layer.linked_cels.erase(linked)
 
 		# Loop through the tags to see if the frame is in one
@@ -249,36 +245,25 @@ func delete_frames(frames := []) -> void:
 				tag.to -= 1
 		frame_correction += 1  # Compensation for the next batch
 
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Remove Frame")
+	var frame_refs := []
+	for f in frames:
+		frame_refs.append(project.frames[f])
 
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "current_frame", current_frame
-	)
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "animation_tags", new_animation_tags
-	)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
+	project.undos += 1
+	project.undo_redo.create_action("Remove Frame")
+	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_undo_property(project, "layers", Global.current_project.layers)
+	project.undo_redo.add_do_method(project, "remove_frames", frames)
+	project.undo_redo.add_undo_method(project, "add_frames", frame_refs, frames)
+	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
+	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
+	project.undo_redo.add_do_property(project, "current_frame", current_frame)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.commit_action()
 
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "frames", Global.current_project.frames
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_frame", Global.current_project.current_frame
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "animation_tags", Global.current_project.animation_tags
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "layers", Global.current_project.layers
-	)
-
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.commit_action()
-
-
+# TODO L: Is there any point in frame here being a func parameter? Same with _on_DeleteFrame_presssed above (and maybe more)
 func _on_CopyFrame_pressed(frame := -1) -> void:
 	var frames := []
 	for cel in Global.current_project.selected_cels:
@@ -290,17 +275,18 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 
 
 func copy_frames(frames := []) -> void:
-	Global.canvas.selection.transform_content_confirm()
+	var project: Project = Global.current_project
 
 	if frames.size() == 0:
-		frames.append(Global.current_project.current_frame)
+		frames.append(project.current_frame)
 
-	var new_frames := Global.current_project.frames.duplicate()
-	var new_layers: Array = Global.current_project.duplicate_layers()
+	var new_layers: Array = project.duplicate_layers()
+	var copied_frames := []
+	var copied_indices := range(frames[-1] + 1, frames[-1] + 1 + frames.size())
 
-	var new_animation_tags := Global.current_project.animation_tags.duplicate()
+	var new_animation_tags := project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
-	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
+	# as project.animation_tags's classes. Needed for undo/redo to work properly.
 	for i in new_animation_tags.size():
 		new_animation_tags[i] = AnimationTag.new(
 			new_animation_tags[i].name,
@@ -309,22 +295,21 @@ func copy_frames(frames := []) -> void:
 			new_animation_tags[i].to
 		)
 
-	for frm in frames.size():
-		var frame = frames[(frames.size() - 1) - frm]
+	for frame in frames:
 		var new_frame := Frame.new()
-		new_frames.insert(frames[-1] + 1, new_frame)
+		copied_frames.append(new_frame)
 
-		var prev_frame: Frame = Global.current_project.frames[frame]
-		for cel in prev_frame.cels:  # Copy every cel
-			var sprite := Image.new()
-			sprite.copy_from(cel.image)
-			var sprite_texture := ImageTexture.new()
-			sprite_texture.create_from_image(sprite, 0)
-			new_frame.cels.append(PixelCel.new(sprite, cel.opacity, sprite_texture))
+		var prev_frame: Frame = project.frames[frame]
 
 		new_frame.duration = prev_frame.duration
 		for l_i in range(new_layers.size()):
-			if new_layers[l_i].new_cels_linked:  # If the link button is pressed
+			# If the layer has new_cels_linked variable, and its true
+			var new_cels_linked: bool = new_layers[l_i].get("new_cels_linked")
+
+			# Copy the cel, create new cel content if new cels aren't linked
+			new_frame.cels.append(new_layers[l_i].copy_cel(frame, new_cels_linked))
+
+			if new_cels_linked:  # If the link button is pressed
 				new_layers[l_i].linked_cels.append(new_frame)
 				new_frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
 				new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
@@ -337,33 +322,19 @@ func copy_frames(frames := []) -> void:
 				tag.from += 1
 				tag.to += 1
 
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Add Frame")
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "current_frame", frames[-1] + 1
-	)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "animation_tags", new_animation_tags
-	)
-
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "frames", Global.current_project.frames
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_frame", frames[-1]
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "layers", Global.current_project.layers
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "animation_tags", Global.current_project.animation_tags
-	)
-	Global.current_project.undo_redo.commit_action()
+	project.undos += 1
+	project.undo_redo.create_action("Add Frame")
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.add_do_method(project, "add_frames", copied_frames, copied_indices)
+	project.undo_redo.add_undo_method(project, "remove_frames", copied_indices)
+	project.undo_redo.add_do_property(project, "current_frame", frames[-1] + 1)
+	project.undo_redo.add_undo_property(project, "current_frame", frames[-1])
+	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
+	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
+	project.undo_redo.commit_action()
 
 
 func _on_FrameTagButton_pressed() -> void:
@@ -439,10 +410,12 @@ func _on_PlayBackwards_toggled(button_pressed: bool) -> void:
 
 	play_animation(button_pressed, false)
 
-
+# Called on each frame of the animation
 func _on_AnimationTimer_timeout() -> void:
 	if first_frame == last_frame:
-		$AnimationTimer.stop()
+		Global.play_forward.pressed = false
+		Global.play_backwards.pressed = false
+		Global.animation_timer.stop()
 		return
 
 	Global.canvas.selection.transform_content_confirm()
@@ -606,244 +579,213 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 # Layer buttons
 
 
-func add_layer(is_new := true) -> void:
-	Global.canvas.selection.transform_content_confirm()
-	var new_layers: Array = Global.current_project.layers.duplicate()
+func _on_AddLayer_pressed() -> void:
+	var project: Project = Global.current_project
+
 	var l := PixelLayer.new()
-	if !is_new:  # Clone layer
-		l.name = (
-			Global.current_project.layers[Global.current_project.current_layer].name
-			+ " ("
-			+ tr("copy")
-			+ ")"
-		)
-	new_layers.append(l)
+	var cels := []
+	for f in project.frames:
+		var new_cel_image := Image.new()
+		new_cel_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		cels.append(PixelCel.new(new_cel_image, 1))
 
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Add Layer")
-
-	for f in Global.current_project.frames:
-		var new_layer := Image.new()
-		if is_new:
-			new_layer.create(
-				Global.current_project.size.x,
-				Global.current_project.size.y,
-				false,
-				Image.FORMAT_RGBA8
-			)
-		else:  # Clone layer
-			new_layer.copy_from(f.cels[Global.current_project.current_layer].image)
-
-		var new_cels: Array = f.cels.duplicate()
-		new_cels.append(PixelCel.new(new_layer, 1))
-		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
-
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "current_layer", Global.current_project.layers.size()
-	)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_layer", Global.current_project.current_layer
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "layers", Global.current_project.layers
-	)
-
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.commit_action()
+	project.undos += 1
+	project.undo_redo.create_action("Add Layer")
+	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_do_method(project, "add_layers", [l], [project.layers.size()], [cels])
+	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.commit_action()
 
 
-func add_group_layer(is_new := true) -> void:
-	Global.canvas.selection.transform_content_confirm()
-	var new_layers: Array = Global.current_project.layers.duplicate()
+func _on_AddGroup_pressed() -> void:
+	var project: Project = Global.current_project
+
 	var l := GroupLayer.new()
-#	if !is_new:  # Clone layer
-#		l.name = (
-#			Global.current_project.layers[Global.current_project.current_layer].name
-#			+ " ("
-#			+ tr("copy")
-#			+ ")"
-#		)
-	new_layers.append(l)
+	var cels := []
+	for f in project.frames:
+		cels.append(GroupCel.new())
 
-	# Add current layer to this group
-#	Global.current_project.layers[Global.current_project.current_layer].parent = l
-	# Add all layers to this group:
-#	for layer in Global.current_project.layers:
-#		if not layer.parent:
-#			layer.parent = l
-	# Add last layer to this group:
-#	Global.current_project.layers[-1].parent = l
+	project.undos += 1
+	project.undo_redo.create_action("Add Layer")
+	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_do_method(project, "add_layers", [l], [project.layers.size()], [cels])
+	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.commit_action()
 
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Add Layer")
 
-	for f in Global.current_project.frames:
-		var new_cels: Array = f.cels.duplicate()
-		new_cels.append(GroupCel.new())
-		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+func _on_CloneLayer_pressed() -> void:
+	# TODO H: clone children along with layer
+	var project: Project = Global.current_project
+	var l: BaseLayer = project.layers[project.current_layer].copy()
+	l.name = str(project.layers[project.current_layer].name, " (", tr("copy"), ")")
+	var cels: Array = project.layers[project.current_layer].copy_all_cels()
 
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "current_layer", Global.current_project.layers.size()
-	)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_layer", Global.current_project.current_layer
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "layers", Global.current_project.layers
-	)
-
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.commit_action()
+	project.undos += 1
+	project.undo_redo.create_action("Add Layer")
+	project.undo_redo.add_do_property(project, "current_layer", project.current_layer + 1)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_do_method(project, "add_layers", [l], [project.current_layer + 1], [cels])
+	project.undo_redo.add_undo_method(project, "remove_layers", [project.current_layer + 1])
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.commit_action()
 
 
 func _on_RemoveLayer_pressed() -> void:
-	if Global.current_project.layers.size() == 1:
+	var project: Project = Global.current_project
+	if project.layers.size() == 1:
 		return
-	var new_layers: Array = Global.current_project.layers.duplicate()
-	new_layers.remove(Global.current_project.current_layer)
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Remove Layer")
-	if Global.current_project.current_layer > 0:
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_layer", Global.current_project.current_layer - 1
-		)
-	else:
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_layer", Global.current_project.current_layer
-		)
 
-	for f in Global.current_project.frames:
-		var new_cels: Array = f.cels.duplicate()
-		new_cels.remove(Global.current_project.current_layer)
-		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+	var layers : Array = project.layers[project.current_layer].get_children_recursive()
+	layers.append(project.layers[project.current_layer])
+	var indices := []
+	for l in layers:
+		indices.append(l.index)
 
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_layer", Global.current_project.current_layer
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "layers", Global.current_project.layers
-	)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.commit_action()
+	var cels := []
+	for l in layers:
+		cels.append([])
+		for f in project.frames:
+			cels[-1].append(f.cels[l.index])
 
+	project.undos += 1
+	project.undo_redo.create_action("Remove Layer")
+	project.undo_redo.add_do_property(project, "current_layer", max(indices[0] - 1, 0))
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_do_method(project, "remove_layers", indices)
+	project.undo_redo.add_undo_method(project, "add_layers", layers, indices, cels)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.commit_action()
 
-func change_layer_order(rate: int) -> void:
-	var change = Global.current_project.current_layer + rate
+# Move the layer up or down in layer order and/or reparent to be deeper/shallower in the
+# layer hierarchy depending on its current index and parent
+func change_layer_order(up: bool) -> void:
+	var project: Project = Global.current_project
+	var layer: BaseLayer = project.layers[project.current_layer]
+	var child_count = layer.get_children_recursive().size()
+	var from_indices := range(layer.index - child_count, layer.index + 1)
+	var from_parents := []
+	for l in from_indices:
+		from_parents.append(project.layers[l].parent)
+	var to_parents := from_parents.duplicate()
+	var to_index = layer.index - child_count # the index where the LOWEST shifted layer should end up
 
-	var new_layers: Array = Global.current_project.layers.duplicate()
-	var temp = new_layers[Global.current_project.current_layer]
-	new_layers[Global.current_project.current_layer] = new_layers[change]
-	new_layers[change] = temp
-	Global.current_project.undo_redo.create_action("Change Layer Order")
-	for f in Global.current_project.frames:
-		var new_cels: Array = f.cels.duplicate()
-		var temp_canvas = new_cels[Global.current_project.current_layer]
-		new_cels[Global.current_project.current_layer] = new_cels[change]
-		new_cels[change] = temp_canvas
-		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+	if up:
+		var above_layer: BaseLayer = project.layers[project.current_layer + 1]
+		if layer.parent == above_layer: # Above is the parent, leave the parent and go up
+			to_parents[-1] = above_layer.parent
+			to_index = to_index + 1
+		elif layer.parent != above_layer.parent: # Above layer must be deeper in the hierarchy
+			# Move layer 1 level deeper in hierarchy. Done by setting its parent to the parent of
+			# above_layer, and if that is multiple levels, drop levels until its just 1
+			to_parents[-1] = above_layer.parent
+			while to_parents[-1].parent != layer.parent:
+				to_parents[-1] = to_parents[-1].parent
+		elif above_layer.accepts_child(layer):
+			to_parents[-1] = above_layer
+		else:
+			to_index = to_index + 1
+	else: # Down
+		if layer.index == child_count: # If at the very bottom of the layer stack
+			if not is_instance_valid(layer.parent):
+				return
+			to_parents[-1] = layer.parent.parent # Drop a level in the hierarchy
+		else:
+			var below_layer: BaseLayer = project.layers[project.current_layer - 1 - child_count]
+			if layer.parent != below_layer.parent: # If there is a hierarchy change
+				to_parents[-1] = layer.parent.parent # Drop a level in the hierarchy
+			elif below_layer.accepts_child(layer):
+				to_parents[-1] = below_layer
+				to_index = to_index - 1
+			else:
+				to_index = to_index - 1
 
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "current_layer", change
-	)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "layers", Global.current_project.layers
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_layer", Global.current_project.current_layer
-	)
+	var to_indices := range(to_index, to_index + child_count + 1)
 
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.commit_action()
+	project.undo_redo.create_action("Change Layer Order")
+	project.undo_redo.add_do_property(project, "current_layer", to_index + child_count)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_do_method(project, "move_layers", from_indices, to_indices, to_parents)
+	project.undo_redo.add_undo_method(project, "move_layers", to_indices, from_indices, from_parents)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.commit_action()
 
 
 func _on_MergeDownLayer_pressed() -> void:
-	var new_layers: Array = Global.current_project.duplicate_layers()
+	var project: Project = Global.current_project
+	var top_layer: PixelLayer = project.layers[project.current_layer]
+	var bottom_layer : PixelLayer = project.layers[project.current_layer - 1]
+	var new_linked_cels: Array = bottom_layer.linked_cels.duplicate()
 
-	Global.current_project.undos += 1
-	Global.current_project.undo_redo.create_action("Merge Layer")
-	for f in Global.current_project.frames:
-		var new_cels: Array = f.cels.duplicate()
-		for i in new_cels.size():
-			new_cels[i] = PixelCel.new(new_cels[i].image, new_cels[i].opacity)
-		var selected_layer := Image.new()
-		selected_layer.copy_from(new_cels[Global.current_project.current_layer].image)
+	project.undos += 1
+	project.undo_redo.create_action("Merge Layer")
 
-		selected_layer.lock()
-		if f.cels[Global.current_project.current_layer].opacity < 1:  # If we have layer transparency
-			for xx in selected_layer.get_size().x:
-				for yy in selected_layer.get_size().y:
-					var pixel_color: Color = selected_layer.get_pixel(xx, yy)
-					var alpha: float = (
-						pixel_color.a
-						* f.cels[Global.current_project.current_layer].opacity
-					)
-					selected_layer.set_pixel(
+	# TODO H: When there is a group layer/cel present in the tree, merging down Pixel Layers
+	#			 doesn't get the texture updated. (Image is updated though, doing something else will update texture)
+
+	for f in project.frames:
+		# TODO Later: top_image here doesn't really need to be a copy if there isn't layer transparency
+		#			though this probably will be rewriten with blend modes anyway...
+		var top_image := Image.new()
+		top_image.copy_from(f.cels[top_layer.index].image)
+
+		top_image.lock()
+		if f.cels[top_layer.index].opacity < 1:  # If we have layer transparency
+			for xx in top_image.get_size().x:
+				for yy in top_image.get_size().y:
+					var pixel_color: Color = top_image.get_pixel(xx, yy)
+					var alpha: float = pixel_color.a * f.cels[top_layer.index].opacity
+					top_image.set_pixel(
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
-		selected_layer.unlock()
+		top_image.unlock()
 
-		var new_layer := Image.new()
-		new_layer.copy_from(f.cels[Global.current_project.current_layer - 1].image)
-		new_layer.blend_rect(
-			selected_layer, Rect2(Vector2.ZERO, Global.current_project.size), Vector2.ZERO
-		)
-		new_cels.remove(Global.current_project.current_layer)
+		var bottom_image := Image.new()
+		bottom_image.copy_from(f.cels[bottom_layer.index].image)
+		bottom_image.blend_rect(top_image, Rect2(Vector2.ZERO, project.size), Vector2.ZERO)
 		if (
-			!selected_layer.is_invisible()
-			and (
-				Global.current_project.layers[Global.current_project.current_layer - 1].linked_cels.size()
-				> 1
-			)
-			and (
-				f
-				in Global.current_project.layers[(
-					Global.current_project.current_layer
-					- 1
-				)].linked_cels
-			)
+			!top_image.is_invisible()
+			and bottom_layer.linked_cels.size() > 1
+			and f in bottom_layer.linked_cels
 		):
-			new_layers[Global.current_project.current_layer - 1].linked_cels.erase(f)
-			new_cels[Global.current_project.current_layer - 1].image = new_layer
+			new_linked_cels.erase(f)
+			project.undo_redo.add_do_property(f.cels[bottom_layer.index], "image_texture", ImageTexture.new())
+			project.undo_redo.add_undo_property(
+				f.cels[bottom_layer.index], "image_texture", f.cels[bottom_layer.index].image_texture
+			)
+			project.undo_redo.add_do_property(f.cels[bottom_layer.index], "image", bottom_image)
+			project.undo_redo.add_undo_property(
+				f.cels[bottom_layer.index], "image", f.cels[bottom_layer.index].image
+			)
 		else:
-			Global.current_project.undo_redo.add_do_property(
-				f.cels[Global.current_project.current_layer - 1].image, "data", new_layer.data
+			project.undo_redo.add_do_property(
+				f.cels[bottom_layer.index].image, "data", bottom_image.data
 			)
-			Global.current_project.undo_redo.add_undo_property(
-				f.cels[Global.current_project.current_layer - 1].image,
-				"data",
-				f.cels[Global.current_project.current_layer - 1].image.data
+			project.undo_redo.add_undo_property(
+				f.cels[bottom_layer.index].image, "data", f.cels[bottom_layer.index].image.data
 			)
 
-		Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-		Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
+	var top_cels := []
+	for f in project.frames:
+		top_cels.append(f.cels[top_layer.index])
 
-	new_layers.remove(Global.current_project.current_layer)
-	Global.current_project.undo_redo.add_do_property(
-		Global.current_project, "current_layer", Global.current_project.current_layer - 1
-	)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "layers", Global.current_project.layers
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_layer", Global.current_project.current_layer
-	)
-
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.commit_action()
+	project.undo_redo.add_do_property(project, "current_layer", bottom_layer.index)
+	project.undo_redo.add_undo_property(project, "current_layer", top_layer.index)
+	project.undo_redo.add_do_property(bottom_layer, "linked_cels", new_linked_cels)
+	project.undo_redo.add_undo_property(bottom_layer, "linked_cels", bottom_layer.linked_cels)
+	project.undo_redo.add_do_method(project, "remove_layers", [top_layer.index])
+	project.undo_redo.add_undo_method(project, "add_layers", [top_layer], [top_layer.index], [top_cels])
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.commit_action()
 
 
 func _on_OpacitySlider_value_changed(value) -> void:
@@ -857,3 +799,121 @@ func _on_OpacitySlider_value_changed(value) -> void:
 
 func _on_OnionSkinningSettings_popup_hide() -> void:
 	Global.can_draw = true
+
+
+# Methods to update the UI in response to changes in the current project
+
+
+func project_changed() -> void:
+	var project: Project = Global.current_project
+	# These must be removed from tree immediately to not mess up the indices of
+	# the new buttons, so use either free or queue_free + parent.remove_child
+	for child in Global.layers_container.get_children():
+		child.free()
+	for child in Global.frame_ids.get_children():
+		child.free()
+	for container in Global.frames_container.get_children():
+		container.free()
+
+	for i in project.layers.size():
+		project_layer_added(i)
+	for f in project.frames.size():
+		var button: Button = frame_button_node.instance()
+		button.frame = f
+		Global.frame_ids.add_child(button)
+
+	# Press selected cel/frame/layer buttons
+	for cel in project.selected_cels:
+		var frame: int = cel[0]
+		var layer: int = cel[1]
+		if frame < Global.frame_ids.get_child_count():
+			var frame_button: BaseButton = Global.frame_ids.get_child(frame)
+			frame_button.pressed = true
+
+		var container_child_count: int = Global.frames_container.get_child_count()
+		if layer < container_child_count:
+			var container = Global.frames_container.get_child(
+				container_child_count - 1 - layer
+			)
+			if frame < container.get_child_count():
+				var cel_button = container.get_child(frame)
+				cel_button.pressed = true
+
+			var layer_button = Global.layers_container.get_child(
+				container_child_count - 1 - layer
+			)
+			layer_button.pressed = true
+
+
+func project_frame_added(frame: int) -> void:
+	var project: Project = Global.current_project
+	var button: Button = frame_button_node.instance()
+	button.frame = frame
+	Global.frame_ids.add_child(button)
+	Global.frame_ids.move_child(button, frame)
+
+	var layer := Global.frames_container.get_child_count() - 1
+	for container in Global.frames_container.get_children():
+		var cel_button = project.frames[frame].cels[layer].create_cel_button()
+		cel_button.frame = frame
+		cel_button.layer = layer
+		container.add_child(cel_button)
+		container.move_child(cel_button, frame)
+		layer -= 1
+
+
+func project_frame_removed(frame: int) -> void:
+	Global.frame_ids.get_child(frame).queue_free()
+	Global.frame_ids.remove_child(Global.frame_ids.get_child(frame))
+	for container in Global.frames_container.get_children():
+		container.get_child(frame).free()
+
+
+func project_layer_added(layer: int) -> void:
+	var project: Project = Global.current_project
+
+	var layer_button: LayerButton = project.layers[layer].create_layer_button()
+	layer_button.layer = layer
+	if project.layers[layer].name == "":
+		project.layers[layer].set_name_to_default(layer)
+
+	var layer_cel_container := HBoxContainer.new()
+	for f in project.frames.size():
+		var cel_button = project.frames[f].cels[layer].create_cel_button()
+		cel_button.frame = f
+		cel_button.layer = layer
+		layer_cel_container.add_child(cel_button)
+
+	layer_button.visible = Global.current_project.layers[layer].is_expanded_in_hierarchy()
+	layer_cel_container.visible = layer_button.visible
+
+	Global.layers_container.add_child(layer_button)
+	var count := Global.layers_container.get_child_count()
+	Global.layers_container.move_child(layer_button, count - 1 - layer)
+	Global.frames_container.add_child(layer_cel_container)
+	Global.frames_container.move_child(layer_cel_container, count - 1 - layer)
+
+
+func project_layer_removed(layer: int) -> void:
+	var count := Global.layers_container.get_child_count()
+	Global.layers_container.get_child(count - 1 - layer).free()
+	Global.frames_container.get_child(count - 1 - layer).free()
+
+
+func project_cel_added(frame: int, layer: int) -> void:
+	var container := Global.frames_container.get_child(
+		Global.frames_container.get_child_count() - 1 - layer
+	)
+	var cel_button = Global.current_project.frames[frame].cels[layer].create_cel_button()
+	cel_button.frame = frame
+	cel_button.layer = layer
+	container.add_child(cel_button)
+	container.move_child(cel_button, frame)
+
+
+func project_cel_removed(frame: int, layer: int) -> void:
+	var container := Global.frames_container.get_child(
+		Global.frames_container.get_child_count() - 1 - layer
+	)
+	container.get_child(frame).queue_free()
+	container.remove_child(container.get_child(frame))

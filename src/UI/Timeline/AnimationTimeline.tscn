@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/layers/new.png" type="Texture" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/graphics/layers/delete.png" type="Texture" id=6]
 [ext_resource path="res://assets/graphics/layers/clone.png" type="Texture" id=7]
 [ext_resource path="res://assets/graphics/timeline/move_arrow.png" type="Texture" id=8]
-[ext_resource path="res://src/UI/Timeline/FrameButton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/graphics/layers/group_new.png" type="Texture" id=10]
 [ext_resource path="res://assets/graphics/timeline/new_frame.png" type="Texture" id=19]
 [ext_resource path="res://assets/graphics/timeline/remove_frame.png" type="Texture" id=20]
@@ -174,6 +173,7 @@ margin_right = 53.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Create a new group layer"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroup"]
@@ -219,7 +219,6 @@ __meta__ = {
 }
 
 [node name="MoveUpLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
-visible = false
 margin_left = 93.0
 margin_right = 115.0
 margin_bottom = 22.0
@@ -246,9 +245,8 @@ __meta__ = {
 }
 
 [node name="MoveDownLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
-visible = false
-margin_left = 93.0
-margin_right = 115.0
+margin_left = 124.0
+margin_right = 146.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Move down the current layer"
@@ -273,8 +271,8 @@ __meta__ = {
 }
 
 [node name="CloneLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 93.0
-margin_right = 115.0
+margin_left = 155.0
+margin_right = 177.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Clone current layer"
@@ -298,8 +296,8 @@ __meta__ = {
 }
 
 [node name="MergeDownLayer" type="Button" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 124.0
-margin_right = 146.0
+margin_left = 186.0
+margin_right = 208.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Merge current layer with the one below"
@@ -876,7 +874,7 @@ margin_bottom = 68.0
 size_flags_horizontal = 3
 
 [node name="LayersAndFrames" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll"]
-margin_right = 81.0
+margin_right = 45.0
 margin_bottom = 68.0
 size_flags_vertical = 3
 
@@ -899,22 +897,16 @@ margin_bottom = 20.0
 
 [node name="FrameButtonsAndIds" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames"]
 margin_left = 45.0
-margin_right = 81.0
+margin_right = 45.0
 margin_bottom = 68.0
 
 [node name="FrameIDs" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
-margin_right = 36.0
-margin_bottom = 20.0
+margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 
-[node name="FrameButton" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds/FrameIDs" instance=ExtResource( 9 )]
-margin_right = 36.0
-rect_min_size = Vector2( 36, 0 )
-
 [node name="FramesContainer" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames/FrameButtonsAndIds"]
-margin_top = 24.0
-margin_right = 36.0
-margin_bottom = 24.0
+margin_top = 20.0
+margin_bottom = 20.0
 
 [node name="EndSpacer" type="Control" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer"]
 margin_left = 888.0
@@ -1044,12 +1036,12 @@ color = Color( 0, 0.741176, 1, 0.501961 )
 
 [connection signal="item_rect_changed" from="." to="." method="_on_AnimationTimeline_item_rect_changed"]
 [connection signal="item_rect_changed" from="ScrollContainer/TimelineContainer" to="." method="_on_TimelineContainer_item_rect_changed"]
-[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [ true ]]
-[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroup" to="." method="add_group_layer" binds= [ true ]]
+[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddLayer" to="." method="_on_AddLayer_pressed"]
+[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroup" to="." method="_on_AddGroup_pressed"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
-[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ 1 ]]
-[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ -1 ]]
-[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/CloneLayer" to="." method="add_layer" binds= [ false ]]
+[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ true ]]
+[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ false ]]
+[connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/CloneLayer" to="." method="_on_CloneLayer_pressed"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/MergeDownLayer" to="." method="_on_MergeDownLayer_pressed"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/AddFrame" to="." method="add_frame"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/FrameButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]

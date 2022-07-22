@@ -7,6 +7,9 @@ var visible := true
 var locked := false
 var blend_mode := 0
 var parent: BaseLayer
+# TODO H: Memory seems to not be freed when closing a project. I suspect this new project ref to
+#		be the reason (in Project.remove simply removing the project from the Global.projects array
+#		can't auto free it because there's still refences to it, in the layers):
 var project
 var index: int
 
@@ -18,7 +21,8 @@ func is_a_parent_of(layer: BaseLayer) -> bool:
 		return is_a_parent_of(layer.parent)
 	return false
 
-# TODO: Consider going backwards in get_children functions, to allow breaking
+# TODO L: Consider going backwards in get_children functions, to allow breaking (test performance)
+# TODO L: Consider combining these into one func with bool, and adding a get_child_count func
 func get_children_direct() -> Array:
 	var children := []
 	for i in range(index):
@@ -40,7 +44,13 @@ func has_children() -> bool:
 		return false
 	return project.layers[index - 1].parent == self
 
-# TODO: Search for layer visbility/locked checks that should be changed to the hierarchy ones:
+
+func is_expanded_in_hierarchy() -> bool:
+	if is_instance_valid(parent):
+		return parent.expanded and parent.is_expanded_in_hierarchy()
+	return true
+
+# TODO H: Search for layer visbility/locked checks that should be changed to the hierarchy ones:
 func is_visible_in_hierarchy() -> bool:
 	if is_instance_valid(parent) and visible:
 		return parent.is_visible_in_hierarchy()
@@ -62,7 +72,7 @@ func get_hierarchy_depth() -> int:
 # Functions to Override:
 
 func serialize() -> Dictionary:
-	assert(index == project.layers.find(self)) # TODO: remove once sure index is synced properly
+	assert(index == project.layers.find(self)) # TODO H: remove once sure index is synced properly
 	return {
 		"name": name,
 		"visible": visible,
@@ -81,8 +91,24 @@ func deserialize(dict: Dictionary) -> void:
 		parent = project.layers[dict.parent]
 
 
-func get_default_name(number: int) -> String:
-	return tr("Layer") + " %s" % number
+func copy() -> BaseLayer:
+	var copy = get_script().new()
+	copy.project = project
+	copy.index = index
+	copy.deserialize(serialize())
+	return copy
+
+
+func copy_cel(_frame: int, _linked: bool) -> BaseCel:
+	return null
+
+# Used to copy all cels with cel linking properly set up between this set of copies:
+func copy_all_cels() -> Array:
+	return []
+
+
+func set_name_to_default(number: int) -> void:
+	name = tr("Layer") + " %s" % number
 
 
 func can_layer_get_drawn() -> bool:
@@ -91,3 +117,7 @@ func can_layer_get_drawn() -> bool:
 
 func accepts_child(_layer: BaseLayer) -> bool:
 	return false
+
+
+func create_layer_button() -> Node:
+	return null

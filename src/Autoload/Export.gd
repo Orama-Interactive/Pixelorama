@@ -380,7 +380,7 @@ func blend_layers(image: Image, frame: Frame, origin: Vector2 = Vector2(0, 0)) -
 	image.lock()
 	var layer_i := 0
 	for cel in frame.cels:
-		# TODO: Check
+		# TODO H: Check
 		if Global.current_project.layers[layer_i].visible and not cel is GroupCel:
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.image)

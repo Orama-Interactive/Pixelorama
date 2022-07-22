@@ -7,6 +7,8 @@ onready var frame_properties: ConfirmationDialog = Global.control.find_node("Fra
 
 
 func _ready() -> void:
+	rect_min_size.x = Global.animation_timeline.cel_size
+	text = str(frame + 1)
 	connect("pressed", self, "_button_pressed")
 	connect("mouse_entered", self, "_update_tooltip")
 
@@ -85,33 +87,21 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 func change_frame_order(rate: int) -> void:
 	var change = frame + rate
-	var new_frames: Array = Global.current_project.frames.duplicate()
-	var temp = new_frames[frame]
-	new_frames[frame] = new_frames[change]
-	new_frames[change] = temp
+	var project = Global.current_project
 
-	Global.current_project.undo_redo.create_action("Change Frame Order")
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "frames", Global.current_project.frames
-	)
+	project.undo_redo.create_action("Change Frame Order")
+	project.undo_redo.add_do_method(project, "move_frame", frame, change)
+	project.undo_redo.add_undo_method(project, "move_frame", change, frame)
 
-	if Global.current_project.current_frame == frame:
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_frame", change
-		)
+	if project.current_frame == frame:
+		project.undo_redo.add_do_property(project, "current_frame", change)
 	else:
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_frame", Global.current_project.current_frame
-		)
+		project.undo_redo.add_do_property(project, "current_frame", project.current_frame)
 
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_frame", Global.current_project.current_frame
-	)
-
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.commit_action()
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.commit_action()
 
 
 func get_drag_data(_position) -> Array:
@@ -126,40 +116,56 @@ func get_drag_data(_position) -> Array:
 
 func can_drop_data(_pos, data) -> bool:
 	if typeof(data) == TYPE_ARRAY:
-		return data[0] == "Frame"
-	else:
-		return false
+		if data[0] == "Frame":
+			if data[1] != frame: # Can't move to same frame
+				var region: Rect2
+				if Input.is_action_pressed("ctrl"): # Swap frames
+					region = get_global_rect()
+				else: # Move frames
+					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
+						region = _get_region_rect(-0.125, 0.125)
+						region.position.x -= 2  # Container spacing
+					else:
+						region = _get_region_rect(0.875, 1.125)
+						region.position.x += 2  # Container spacing
+				Global.animation_timeline.drag_highlight.rect_global_position = region.position
+				Global.animation_timeline.drag_highlight.rect_size = region.size
+				Global.animation_timeline.drag_highlight.visible = true
+				return true
+	Global.animation_timeline.drag_highlight.visible = false
+	return false
 
 
 func drop_data(_pos, data) -> void:
-	var new_frame = data[1]
-	if frame == new_frame:
-		return
+	var drop_frame = data[1]
+	var project = Global.current_project
+	project.undo_redo.create_action("Change Frame Order")
+	if Input.is_action_pressed("ctrl"): # Swap frames
+		project.undo_redo.add_do_method(project, "swap_frame", frame, drop_frame)
+		project.undo_redo.add_undo_method(project, "swap_frame", frame, drop_frame)
+	else: # Move frames
+		var to_frame: int
+		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()): # Left
+			to_frame = frame
+		else: # Right
+			to_frame = frame + 1
+		if drop_frame < frame:
+			to_frame -= 1
+		project.undo_redo.add_do_method(project, "move_frame", drop_frame, to_frame)
+		project.undo_redo.add_undo_method(project, "move_frame", to_frame, drop_frame)
 
-	var new_frames: Array = Global.current_project.frames.duplicate()
-	var temp = new_frames[frame]
-	new_frames[frame] = new_frames[new_frame]
-	new_frames[new_frame] = temp
-
-	Global.current_project.undo_redo.create_action("Change Frame Order")
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "frames", Global.current_project.frames
-	)
-
-	if Global.current_project.current_frame == new_frame:
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_frame", frame
-		)
+	if project.current_frame == drop_frame:
+		project.undo_redo.add_do_property(project, "current_frame", frame)
 	else:
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_frame", Global.current_project.current_frame
-		)
+		project.undo_redo.add_do_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.commit_action()
 
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "current_frame", Global.current_project.current_frame
-	)
 
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.commit_action()
+func _get_region_rect(x_begin: float, x_end: float) -> Rect2:
+	var rect := get_global_rect()
+	rect.position.x += rect.size.x * x_begin
+	rect.size.x *= x_end - x_begin
+	return rect

@@ -7,13 +7,12 @@ extends BaseCel
 var image: Image setget image_changed
 var image_texture: ImageTexture
 
-
 func _init(_image := Image.new(), _opacity := 1.0, _image_texture: ImageTexture = null) -> void:
 	if _image_texture:
 		image_texture = _image_texture
 	else:
 		image_texture = ImageTexture.new()
-	self.image = _image
+	self.image = _image # Set image and call setter
 	opacity = _opacity
 
 
@@ -35,3 +34,9 @@ func load_image_data_from_pxo(file: File, project_size: Vector2) -> void:
 	var buffer := file.get_buffer(project_size.x * project_size.y * 4)
 	image.create_from_data(project_size.x, project_size.y, false, Image.FORMAT_RGBA8, buffer)
 	image_changed(image)
+
+
+func create_cel_button() -> Node:
+	var cel_button = Global.pixel_cel_button_node.instance()
+	cel_button.get_child(0).texture = image_texture
+	return cel_button

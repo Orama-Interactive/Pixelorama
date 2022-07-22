@@ -22,7 +22,6 @@ var current_project_index := 0 setget _project_changed
 var ui_tooltips := {}
 
 # Canvas related stuff
-var layers_changed_skip := false
 var can_draw := false
 var move_guides_on_canvas := false
 var has_focus := false
@@ -103,6 +102,10 @@ var palettes := {}
 
 # Nodes
 var notification_label_node: PackedScene = preload("res://src/UI/NotificationLabel.tscn")
+var pixel_layer_button_node: PackedScene = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
+var group_layer_button_node: PackedScene = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
+var pixel_cel_button_node: PackedScene = preload("res://src/UI/Timeline/PixelCelButton.tscn")
+var group_cel_button_node: PackedScene = preload("res://src/UI/Timeline/GroupCelButton.tscn")
 
 onready var control: Node = get_tree().get_root().get_node("Control")
 
@@ -233,7 +236,7 @@ func undo_or_redo(
 			"Unlink Cel"
 		]
 	):
-		# TODO: Check this: THIS IS PROBABLY WRONG (can't check if GROUP LAYER if INDEX is -1)
+		# TODO H: Check this: THIS IS PROBABLY WRONG (can't check if GROUP LAYER if INDEX is -1)
 		if not current_project.layers[layer_index] is GroupLayer:
 			if layer_index > -1 and frame_index > -1:
 				canvas.update_texture(layer_index, frame_index, project)
@@ -246,23 +249,13 @@ func undo_or_redo(
 		if action_name == "Scale":
 			for i in project.frames.size():
 				for j in project.layers.size():
-					# TODO: ensure this is the correct cel type:
+					# TODO H: ensure this is the correct cel type:
 					var current_cel: BaseCel = project.frames[i].cels[j]
 					current_cel.image_texture.create_from_image(current_cel.image, 0)
 			canvas.camera_zoom()
 			canvas.grid.update()
 			canvas.pixel_grid.update()
 			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
-
-	elif "Frame" in action_name:
-		# This actually means that frames.size is one, but it hasn't been updated yet
-		if (undo and project.frames.size() == 2) or project.frames.size() == 1:  # Stop animating
-			play_forward.pressed = false
-			play_backwards.pressed = false
-			animation_timer.stop()
-
-	elif "Move Cels" == action_name:
-		project.frames = project.frames  # to call frames_changed
 
 	canvas.update()
 	if !project.has_changed:

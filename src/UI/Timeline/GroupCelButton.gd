@@ -5,8 +5,6 @@ var layer := 0
 var cel: GroupCel
 var mat: Material
 
-onready var popup_menu: PopupMenu = $PopupMenu
-
 
 func _ready() -> void:
 	button_setup()
@@ -31,7 +29,7 @@ func _on_GroupCelButton_resized() -> void:
 
 
 func _pressed():
-	# TODO: PixelCelButton could just use the func instead of signal too
+	# TODO L: PixelCelButton could just use the func instead of signal too
 
-	# TODO: Some of the funtionality from PixelCelButton needs to be moved over
+	# TODO H: Some of the funtionality from PixelCelButton needs to be moved over
 	pass

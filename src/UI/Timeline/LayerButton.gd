@@ -18,11 +18,27 @@ export var hide_expand_button := true
 func _ready() -> void:
 	rect_min_size.y = Global.animation_timeline.cel_size
 
+	label.text = Global.current_project.layers[layer].name
+	line_edit.text = Global.current_project.layers[layer].name
+
 	var layer_buttons = find_node("LayerButtons")
 	for child in layer_buttons.get_children():
 		var texture = child.get_child(0)
 		texture.modulate = Global.modulate_icon_color
 
+	# Visualize how deep into the hierarchy the layer is
+	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
+	hierarchy_spacer.rect_min_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
+
+	if Global.control.theme.get_color("font_color", "Button").v > 0.5: # Light text is dark theme
+		self_modulate.v = 1 + hierarchy_depth * 0.4
+	else: # Dark text should be light theme
+		self_modulate.v = 1 - hierarchy_depth * 0.075
+
+	_update_buttons()
+
+
+func _update_buttons() -> void:
 	if hide_expand_button:
 		expand_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		expand_button.get_child(0).visible = false  # Hide the TextureRect
@@ -48,25 +64,24 @@ func _ready() -> void:
 		else:
 			Global.change_button_texturerect(linked_button.get_child(0), "unlinked_layer.png")
 
-	# Visualize how deep into the hierarchy the layer is
-	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
-	hierarchy_spacer.rect_min_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
-
-	if Global.control.theme.get_color("font_color", "Button").v > 0.5: # Light text is dark theme
-		self_modulate.v += hierarchy_depth * 0.4
-	else: # Dark text should be light theme
-		self_modulate.v -= hierarchy_depth * 0.075
-
+	visibility_button.modulate.a = 1
+	lock_button.modulate.a = 1
 	if is_instance_valid(Global.current_project.layers[layer].parent):
-		if not Global.current_project.layers[layer].parent.is_expanded_in_hierarchy():
-			visible = false
 		if not Global.current_project.layers[layer].parent.is_visible_in_hierarchy():
 			visibility_button.modulate.a = 0.33
 		if Global.current_project.layers[layer].parent.is_locked_in_hierarchy():
 			lock_button.modulate.a = 0.33
 
+# Used when pressing a button on this changes the appearnce of other layers (ie: expand or visible)
+func _update_buttons_all_layers() -> void:
+	for layer_button in Global.layers_container.get_children():
+		layer_button._update_buttons()
+		var expanded = Global.current_project.layers[layer_button.layer].is_expanded_in_hierarchy()
+		layer_button.visible = expanded
+		Global.frames_container.get_child(layer_button.get_index()).visible = expanded
 
-func _draw():
+
+func _draw() -> void:
 	if hierarchy_spacer.rect_size.x > 0.1:
 		var color := Color(1, 1, 1, 0.33)
 		color.v = round(Global.control.theme.get_color("font_color", "Button").v)
@@ -124,12 +139,14 @@ func _save_layer_name(new_name: String) -> void:
 	line_edit.visible = false
 	line_edit.editable = false
 	label.text = new_name
-	Global.layers_changed_skip = true
 	Global.current_project.layers[layer].name = new_name
 
 
 func _on_ExpandButton_pressed():
+	# TODO L: What should happen when the current_layer or selected_cels are children of a layer you collapse?
+	#		Should the current_layer/selection move to ones aren't collapsed? Maybe add to github list of possible later changes
 	Global.current_project.layers[layer].expanded = !Global.current_project.layers[layer].expanded
+	_update_buttons_all_layers()
 
 
 func _on_VisibilityButton_pressed() -> void:
@@ -137,12 +154,14 @@ func _on_VisibilityButton_pressed() -> void:
 	Global.current_project.layers[layer].visible = !Global.current_project.layers[layer].visible
 	Global.canvas.update()
 	_select_current_layer()
+	_update_buttons_all_layers()
 
 
 func _on_LockButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].locked = !Global.current_project.layers[layer].locked
 	_select_current_layer()
+	_update_buttons_all_layers()
 
 
 func _on_LinkButton_pressed() -> void:
@@ -157,7 +176,7 @@ func _on_LinkButton_pressed() -> void:
 		var container = Global.frames_container.get_child(Global.current_project.current_layer)
 		container.get_child(Global.current_project.current_frame).button_setup()
 
-	Global.current_project.layers = Global.current_project.layers  # Call the setter
+	_update_buttons()
 
 
 func _select_current_layer() -> void:
@@ -170,11 +189,18 @@ func _select_current_layer() -> void:
 
 
 func get_drag_data(_position) -> Array:
-	var button := Button.new()
-	button.rect_size = rect_size
-	button.theme = Global.control.theme
-	button.text = label.text
-	set_drag_preview(button)
+	# TODO H: If keeping this new multi layer drag design, layers here can be reutrned in the array
+	#			instead of layer...
+	var layers := range(layer - Global.current_project.layers[layer].get_children_recursive().size(), layer + 1)
+
+	var box := VBoxContainer.new()
+	for i in layers.size():
+		var button := Button.new()
+		button.rect_min_size = rect_size
+		button.theme = Global.control.theme
+		button.text = Global.current_project.layers[layers[-1 - i]].name
+		box.add_child(button)
+	set_drag_preview(box)
 
 	return ["Layer", layer]
 
@@ -192,7 +218,7 @@ func can_drop_data(_pos, data) -> bool:
 			var region: Rect2
 			var depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
 
-			if Input.is_key_pressed(KEY_CONTROL): # Swap layers
+			if Input.is_action_pressed("ctrl"): # Swap layers
 				if drag_layer.is_a_parent_of(curr_layer) or curr_layer.is_a_parent_of(drag_layer):
 					Global.animation_timeline.drag_highlight.visible = false
 					return false
@@ -227,101 +253,97 @@ func can_drop_data(_pos, data) -> bool:
 
 
 func drop_data(_pos, data) -> void:
-	var dropped_layer: int = data[1]
+	var drop_layer: int = data[1]
+	var project = Global.current_project # TODO L: perhaps having a project variable for the enitre class would be nice (also for cel/frame buttons)
 
-	Global.current_project.undo_redo.create_action("Change Layer Order")
-	var new_layers: Array = Global.current_project.layers.duplicate()
-	var temp: BaseLayer = new_layers[layer]
-	if Input.is_key_pressed(KEY_CONTROL): # Swap layers # TODO Need to check when swapping is allowed
-		new_layers[layer] = new_layers[dropped_layer]
-		new_layers[dropped_layer] = temp
+	project.undo_redo.create_action("Change Layer Order")
+	var layers: Array = project.layers # This shouldn't be modified directly
 
-		# TODO: Make sure to swap parents too
+	var drop_from_indices := range(drop_layer - layers[drop_layer].get_children_recursive().size(), drop_layer + 1 )
 
-		for f in Global.current_project.frames:
-			var new_cels: Array = f.cels.duplicate()
-			var temp_canvas = new_cels[layer]
-			new_cels[layer] = new_cels[dropped_layer]
-			new_cels[dropped_layer] = temp_canvas
-			Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-			Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
-	# TODO: Having "SourceLayers/OldLayers (that you don't change) and new_layers would make this less confusing
-	else:
-		# layers_to_shift should be in order of the layer indices, starting from the lowest
-		var layers_to_shift: Array = new_layers[dropped_layer].get_children_recursive()
-		layers_to_shift.append(new_layers[dropped_layer])
+	var drop_from_parents := []
+	for i in range(drop_from_indices.size()):
+		drop_from_parents.append(layers[drop_from_indices[i]].parent)
 
-		var to_index: int # the index where the LOWEST shifted layer should end up
+	if Input.is_action_pressed("ctrl"): # Swap layers
+		# a and b both need "from", "to", and "to_parents"
+		# a is this layer (and children), b is the dropped layers
+		var a := { "from": range(layer - layers[layer].get_children_recursive().size(), layer + 1) }
+		var b := { "from": drop_from_indices}
+
+		if a.from[0] < b.from[0]:
+			a["to"] = range(b.from[-1] + 1 - a.from.size(), b.from[-1] + 1) # Size of a, starting from end of b
+			b["to"] = range(a.from[0], a.from[0] + b.from.size()) # Size of b, starting from beginning of a
+		else:
+			a["to"] = range(b.from[0], b.from[0] + a.from.size()) # Size of a, starting from beginning of b
+			b["to"] = range(a.from[-1] + 1 - b.from.size(), a.from[-1] + 1) # Size of b, starting from end of a
+
+		var a_from_parents := []
+		for l in a.from:
+			a_from_parents.append(layers[l].parent)
+
+		# to_parents starts as a dulpicate of from_parents, set the root layer's (with one layer or
+		# group with its children, this will always be the last layer [-1]) parent to the other
+		# root layer's parent
+		a["to_parents"] = a_from_parents.duplicate()
+		b["to_parents"] = drop_from_parents.duplicate()
+		a.to_parents[-1] = drop_from_parents[-1]
+		b.to_parents[-1] = a_from_parents[-1]
+
+		project.undo_redo.add_do_method(project, "swap_layers", a, b)
+		project.undo_redo.add_undo_method(project, "swap_layers",
+			{ "from": a.to, "to": a.from, "to_parents": a_from_parents },
+			{ "from": b.to, "to": drop_from_indices, "to_parents": drop_from_parents }
+		)
+
+	else: # Move layers
+		var to_index: int # the index where the LOWEST moved layer should end up
 		var to_parent: BaseLayer
 
 		# If accepted as a child, is it in the center region?
-		if (new_layers[layer].accepts_child(data[1])
+		if (layers[layer].accepts_child(data[1])
 				and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
 			):
 			to_index = layer
-			to_parent = new_layers[layer]
+			to_parent = layers[layer]
 		else:
 			# Top or bottom region?
 			if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
-				to_index = layer + 1 # TODO Is this right?
-				to_parent = new_layers[layer].parent
+				to_index = layer + 1
+				to_parent = layers[layer].parent
 			else:
 				# Place under the layer, if it has children, place after its lowest child
-				if new_layers[layer].has_children():
-					to_index = new_layers[layer].get_children_recursive()[0].index
+				if layers[layer].has_children():
+					to_index = layers[layer].get_children_recursive()[0].index
 
-					if new_layers[layer].is_a_parent_of(new_layers[dropped_layer]):
-						to_index += layers_to_shift.size()
+					if layers[layer].is_a_parent_of(layers[drop_layer]):
+						to_index += drop_from_indices.size()
 				else:
-					to_index = layer # TODO Is this right?
-				to_parent = new_layers[layer].parent
+					to_index = layer
+				to_parent = layers[layer].parent
 
-		# Make sure to set parent BEFORE adjusting new_layers
-		Global.current_project.undo_redo.add_do_property(
-			new_layers[dropped_layer], "parent", to_parent
+		if drop_layer < layer:
+			to_index -= drop_from_indices.size()
+
+		var drop_to_indices := range(to_index, to_index + drop_from_indices.size())
+
+		var to_parents := drop_from_parents.duplicate()
+		to_parents[-1] = to_parent
+
+		project.undo_redo.add_do_method(
+			project, "move_layers", drop_from_indices, drop_to_indices, to_parents
 		)
-		Global.current_project.undo_redo.add_undo_property(
-			new_layers[dropped_layer], "parent", new_layers[dropped_layer].parent
+		project.undo_redo.add_undo_method(
+			project, "move_layers", drop_to_indices, drop_from_indices, drop_from_parents
 		)
-
-		if dropped_layer < layer:
-			to_index -= layers_to_shift.size()
-		print("to_index = ", to_index)
-
-		var x := layers_to_shift.size() - 1
-		while x >= 0:
-			new_layers.remove(layers_to_shift[x].index)
-			x -= 1
-		for i in range(layers_to_shift.size()):
-			new_layers.insert(to_index + i, layers_to_shift[i])
-
-		for f in Global.current_project.frames:
-			var new_cels: Array = f.cels.duplicate()
-			x = layers_to_shift.size() - 1
-			while x >= 0:
-				new_cels.remove(layers_to_shift[x].index)
-				x -= 1
-			for i in range(layers_to_shift.size()):
-				new_cels.insert(to_index + i, f.cels[layers_to_shift[i].index])
-
-			Global.current_project.undo_redo.add_do_property(f, "cels", new_cels)
-			Global.current_project.undo_redo.add_undo_property(f, "cels", f.cels)
-
-	if Global.current_project.current_layer == layer:
-		Global.current_project.undo_redo.add_do_property(
-			Global.current_project, "current_layer", dropped_layer
-		)
-		Global.current_project.undo_redo.add_undo_property(
-			Global.current_project, "current_layer", Global.current_project.current_layer
-		)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.current_project, "layers", Global.current_project.layers
-	)
-
-	Global.current_project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	Global.current_project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	Global.current_project.undo_redo.commit_action()
+	if project.current_layer == drop_layer:
+		project.undo_redo.add_do_property(project, "current_layer", layer)
+	else:
+		project.undo_redo.add_do_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.commit_action()
 
 
 func _get_region_rect(y_begin: float, y_end: float) -> Rect2:
