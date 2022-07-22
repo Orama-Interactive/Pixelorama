@@ -158,7 +158,7 @@ func _on_LiveCheckbox_toggled(button_pressed: bool) -> void:
 	wait_time_spinbox.editable = !live_preview
 	wait_time_spinbox.get_parent().visible = !live_preview
 	if !button_pressed:
-		rect_size = Vector2.ZERO  # Reset rect_size of dialog
+		rect_size.y += 1  # Reset rect_size of dialog
 
 
 func _on_quick_change_angle_pressed(change_type: String) -> void:
@@ -193,7 +193,7 @@ func _on_TogglePivot_toggled(button_pressed: bool) -> void:
 	else:
 		$VBoxContainer/Pivot/TogglePivot.text = "Pivot Options: (>)"
 		$VBoxContainer/Pivot/TogglePivot.focus_mode = 0
-	rect_size = Vector2.ZERO  # Reset rect_size of dialog
+	rect_size.y += 1  # Reset rect_size of dialog
 
 
 func _on_Pivot_value_changed(value: float, is_x: bool) -> void:
