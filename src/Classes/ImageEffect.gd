@@ -3,10 +3,10 @@ extends AcceptDialog
 # Parent class for all image effects
 # Methods that have "pass" are meant to be replaced by the inherited Scripts
 
-enum { CEL, FRAME, ALL_FRAMES, ALL_PROJECTS }
+enum { SELECTED_CELS, FRAME, ALL_FRAMES, ALL_PROJECTS }
 
-var affect: int = CEL
-var current_cel := Image.new()
+var affect: int = SELECTED_CELS
+var selected_cels := Image.new()
 var current_frame := Image.new()
 var preview_image := Image.new()
 var preview_texture := ImageTexture.new()
@@ -19,6 +19,9 @@ var confirmed := false
 func _ready() -> void:
 	set_nodes()
 	current_frame.create(
+		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
+	)
+	selected_cels.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
 	connect("about_to_show", self, "_about_to_show")
@@ -34,7 +37,9 @@ func _about_to_show() -> void:
 	confirmed = false
 	Global.canvas.selection.transform_content_confirm()
 	var frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
-	current_cel = frame.cels[Global.current_project.current_layer].image
+	selected_cels.resize(Global.current_project.size.x, Global.current_project.size.y)
+	selected_cels.fill(Color(0, 0, 0, 0))
+	Export.blend_selected_cels(selected_cels, frame)
 	current_frame.resize(Global.current_project.size.x, Global.current_project.size.y)
 	current_frame.fill(Color(0, 0, 0, 0))
 	Export.blend_layers(current_frame, frame)
@@ -45,7 +50,7 @@ func _about_to_show() -> void:
 func _confirmed() -> void:
 	confirmed = true
 	var project: Project = Global.current_project
-	if affect == CEL:
+	if affect == SELECTED_CELS:
 		var undo_data := _get_undo_data(project)
 		for cel_index in project.selected_cels:
 			if !project.layers[cel_index[1]].can_layer_get_drawn():
@@ -119,7 +124,7 @@ func _get_undo_data(project: Project) -> Dictionary:
 
 func _get_selected_draw_images(project: Project) -> Array:  # Array of Images
 	var images := []
-	if affect == CEL:
+	if affect == SELECTED_CELS:
 		for cel_index in project.selected_cels:
 			var cel: Cel = project.frames[cel_index[0]].cels[cel_index[1]]
 			images.append(cel.image)
@@ -141,8 +146,8 @@ func _on_AffectOptionButton_item_selected(index: int) -> void:
 
 func update_preview() -> void:
 	match affect:
-		CEL:
-			preview_image.copy_from(current_cel)
+		SELECTED_CELS:
+			preview_image.copy_from(selected_cels)
 		_:
 			preview_image.copy_from(current_frame)
 	commit_action(preview_image)
