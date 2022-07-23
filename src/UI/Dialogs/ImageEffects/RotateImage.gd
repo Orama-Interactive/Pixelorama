@@ -11,6 +11,7 @@ onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
 
 var pivot := Vector2.ZERO
 
+
 func _ready() -> void:
 	type_option_button.add_item("Rotxel")
 	type_option_button.add_item("Upscale, Rotate and Downscale")
@@ -209,9 +210,9 @@ func _on_Indicator_draw() -> void:
 	var pivot_indicator = $VBoxContainer/AspectRatioContainer/Indicator
 	var img_size := preview_image.get_size()
 	# find the scale using the larger measurement
-	var ratio = (pivot_indicator.rect_size/img_size)
+	var ratio = pivot_indicator.rect_size / img_size
 	# we need to set the scale according to the larger side
-	var conversion_scale :float
+	var conversion_scale: float
 	if img_size.x > img_size.y:
 		conversion_scale = ratio.x
 	else:
@@ -219,8 +220,12 @@ func _on_Indicator_draw() -> void:
 	var pivot_position = pivot * conversion_scale
 	pivot_indicator.draw_arc(pivot_position, 2, 0, 360, 360, Color.yellow, 0.5)
 	pivot_indicator.draw_arc(pivot_position, 6, 0, 360, 360, Color.white, 0.5)
-	pivot_indicator.draw_line(pivot_position - Vector2.UP * 10, pivot_position - Vector2.DOWN * 10, Color.white, 0.5)
-	pivot_indicator.draw_line(pivot_position - Vector2.RIGHT * 10, pivot_position - Vector2.LEFT * 10, Color.white, 0.5)
+	pivot_indicator.draw_line(
+		pivot_position - Vector2.UP * 10, pivot_position - Vector2.DOWN * 10, Color.white, 0.5
+	)
+	pivot_indicator.draw_line(
+		pivot_position - Vector2.RIGHT * 10, pivot_position - Vector2.LEFT * 10, Color.white, 0.5
+	)
 
 
 func _on_Indicator_gui_input(event: InputEvent) -> void:
@@ -231,9 +236,9 @@ func _on_Indicator_gui_input(event: InputEvent) -> void:
 			var y_pivot = $VBoxContainer/Pivot/Options/Y/YPivot
 			var img_size := preview_image.get_size()
 			var mouse_pos = get_local_mouse_position() - pivot_indicator.rect_position
-			var ratio = (img_size / pivot_indicator.rect_size)
+			var ratio = img_size / pivot_indicator.rect_size
 			# we need to set the scale according to the larger side
-			var conversion_scale :float
+			var conversion_scale: float
 			if img_size.x > img_size.y:
 				conversion_scale = ratio.x
 			else:
