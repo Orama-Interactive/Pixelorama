@@ -60,7 +60,6 @@ func decide_pivot():
 
 
 func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
-	update()
 	var angle: float = deg2rad(angle_hslider.value)
 # warning-ignore:integer_division
 # warning-ignore:integer_division
