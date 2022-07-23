@@ -202,7 +202,8 @@ func _on_Pivot_value_changed(value: float, is_x: bool) -> void:
 		pivot.y = value
 	# Refresh the indicator
 	$VBoxContainer/AspectRatioContainer/Indicator.update()
-	update_preview()
+	if angle_hslider.value != 0:
+		update_preview()
 
 
 func _on_Indicator_draw() -> void:
