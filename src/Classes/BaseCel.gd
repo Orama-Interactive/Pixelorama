@@ -5,13 +5,31 @@ extends Reference
 
 var opacity: float
 
+# Methods to override:
 
-# Functions to override:
+# TODO H: Perhaps get_content, set_content, and delete_content/clear_content methods will be good to have here:
+#			- get_content will return certain content of the cel (should metadata be included?)
+#			- set_content will set the content (same structure as get_content returns)
+#			- delete/clear_content will erase it,
+#			- using get_content and set_content could become useful for linking/unlinking cels, and will be reversible for undo
+#				- this can be used to replace copy_cel and copy_all_cels in layer classes
+#			- using all 3 will allow you to delete content, and undo it in cel button
+#				= making this generic and should solve issues with combing cel_button scripts into 1
+#			- copy_content may also be a useful method to have
+
+
 
 # TODO H: Should this be the case?
 # Each Cel type should have a get_image function, which will either return
 # its image data for PixelCels, or return a render of that cel. It's meant
 # for read-only usage of image data from any type of cel
+
+# TODO NOTE ^: I'm thinking this shouldn't be the case right now. I'm thinking each cel should have
+#				a texture var. using texture.get_data it can be possible to copy selections or color pick.
+#				There will be an update_texture method, which will either immedietly update it, or set it
+#				to be queued for update (only frames that aren't currently being viewed). When the user
+#				isn't drawing, Pixelorama can update these textures. (maybe an update_texture and a queue_texture_update
+#				method may be better, we'll see
 
 func get_image() -> Image:
 	return null

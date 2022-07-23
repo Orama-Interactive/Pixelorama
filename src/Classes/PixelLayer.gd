@@ -9,7 +9,7 @@ func _init(_name := "") -> void:
 	name = _name
 
 
-# Overridden Functions:
+# Overridden Methods:
 
 func serialize() -> Dictionary:
 	var dict = .serialize()

@@ -7,7 +7,7 @@ var expanded := true
 func _init(_name := "") -> void:
 	name = _name
 
-# Overridden Functions:
+# Overridden Methods:
 
 func serialize() -> Dictionary:
 	var data = .serialize()
