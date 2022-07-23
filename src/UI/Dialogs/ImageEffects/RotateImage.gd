@@ -2,14 +2,13 @@ extends ImageEffect
 
 var live_preview: bool = true
 var shader: Shader = preload("res://src/Shaders/Rotation.shader")
+var pivot := Vector2.ZERO
 
 onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
 onready var angle_hslider: HSlider = $VBoxContainer/AngleOptions/AngleHSlider
 onready var angle_spinbox: SpinBox = $VBoxContainer/AngleOptions/AngleSpinBox
 onready var wait_apply_timer = $WaitApply
 onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
-
-var pivot := Vector2.ZERO
 
 
 func _ready() -> void:
