@@ -99,13 +99,13 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 			if !confirmed:
 				preview.material.set_shader_param("angle", angle)
 				preview.material.set_shader_param("selection_tex", selection_tex)
-				preview.material.set_shader_param("selection_pivot", pivot + Vector2(0.5, 0.5))
+				preview.material.set_shader_param("selection_pivot", pivot)
 				preview.material.set_shader_param("selection_size", selection_size)
 			else:
 				var params = {
 					"angle": angle,
 					"selection_tex": selection_tex,
-					"selection_pivot": pivot + Vector2(0.5, 0.5),
+					"selection_pivot": pivot,
 					"selection_size": selection_size
 				}
 				var gen := ShaderImageEffect.new()
@@ -216,8 +216,11 @@ func _on_Indicator_draw() -> void:
 		conversion_scale = ratio.x
 	else:
 		conversion_scale = ratio.y
-	var pivot_position = pivot * (conversion_scale)
-	pivot_indicator.draw_arc(pivot_position, 2, 0, 360, 360, Color.yellow, 1)
+	var pivot_position = pivot * conversion_scale
+	pivot_indicator.draw_arc(pivot_position, 2, 0, 360, 360, Color.yellow, 0.5)
+	pivot_indicator.draw_arc(pivot_position, 6, 0, 360, 360, Color.white, 0.5)
+	pivot_indicator.draw_line(pivot_position - Vector2.UP * 10, pivot_position - Vector2.DOWN * 10, Color.white, 0.5)
+	pivot_indicator.draw_line(pivot_position - Vector2.RIGHT * 10, pivot_position - Vector2.LEFT * 10, Color.white, 0.5)
 
 
 func _on_Indicator_gui_input(event: InputEvent) -> void:
@@ -235,7 +238,7 @@ func _on_Indicator_gui_input(event: InputEvent) -> void:
 				conversion_scale = ratio.x
 			else:
 				conversion_scale = ratio.y
-			var new_pos = mouse_pos * (conversion_scale)
+			var new_pos = mouse_pos * conversion_scale
 			x_pivot.value = new_pos.x
 			y_pivot.value = new_pos.y
 			pivot_indicator.update()
