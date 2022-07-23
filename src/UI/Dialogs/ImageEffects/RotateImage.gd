@@ -209,7 +209,15 @@ func _on_Pivot_value_changed(value: float, is_x: bool) -> void:
 func _on_Indicator_draw() -> void:
 	var pivot_indicator = $VBoxContainer/AspectRatioContainer/Indicator
 	var img_size := preview_image.get_size()
-	var pivot_position = pivot * (pivot_indicator.rect_size/img_size)
+	# find the scale using the larger measurement
+	var ratio = (pivot_indicator.rect_size/img_size)
+	# we need to set the scale according to the larger side
+	var conversion_scale :float
+	if img_size.x > img_size.y:
+		conversion_scale = ratio.x
+	else:
+		conversion_scale = ratio.y
+	var pivot_position = pivot * (conversion_scale)
 	pivot_indicator.draw_arc(pivot_position, 2, 0, 360, 360, Color.yellow, 1)
 
 
@@ -219,8 +227,16 @@ func _on_Indicator_gui_input(event: InputEvent) -> void:
 			var pivot_indicator = $VBoxContainer/AspectRatioContainer/Indicator
 			var x_pivot = $VBoxContainer/Pivot/Options/X/XPivot
 			var y_pivot = $VBoxContainer/Pivot/Options/Y/YPivot
+			var img_size := preview_image.get_size()
 			var mouse_pos = get_local_mouse_position() - pivot_indicator.rect_position
-			var new_pos = mouse_pos * (preview_image.get_size() / pivot_indicator.rect_size)
+			var ratio = (img_size / pivot_indicator.rect_size)
+			# we need to set the scale according to the larger side
+			var conversion_scale :float
+			if img_size.x > img_size.y:
+				conversion_scale = ratio.x
+			else:
+				conversion_scale = ratio.y
+			var new_pos = mouse_pos * (conversion_scale)
 			x_pivot.value = new_pos.x
 			y_pivot.value = new_pos.y
 			pivot_indicator.update()
