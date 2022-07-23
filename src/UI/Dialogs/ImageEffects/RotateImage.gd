@@ -99,13 +99,13 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 			if !confirmed:
 				preview.material.set_shader_param("angle", angle)
 				preview.material.set_shader_param("selection_tex", selection_tex)
-				preview.material.set_shader_param("selection_pivot", pivot)
+				preview.material.set_shader_param("selection_pivot", pivot + Vector2(0.5, 0.5))
 				preview.material.set_shader_param("selection_size", selection_size)
 			else:
 				var params = {
 					"angle": angle,
 					"selection_tex": selection_tex,
-					"selection_pivot": pivot,
+					"selection_pivot": pivot + Vector2(0.5, 0.5),
 					"selection_size": selection_size
 				}
 				var gen := ShaderImageEffect.new()
