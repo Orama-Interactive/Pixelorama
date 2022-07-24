@@ -12,10 +12,12 @@ onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
 
 
 func _ready() -> void:
+	# Algorithms are arranged according to their speed
+	type_option_button.add_item("Nearest neighbour (Shader)")
+	type_option_button.add_item("Nearest neighbour")
 	type_option_button.add_item("Rotxel")
 	type_option_button.add_item("Upscale, Rotate and Downscale")
-	type_option_button.add_item("Nearest neighbour")
-	type_option_button.add_item("Nearest neighbour (Shader)")
+	type_option_button.emit_signal("item_selected", 0)
 
 
 func set_nodes() -> void:
