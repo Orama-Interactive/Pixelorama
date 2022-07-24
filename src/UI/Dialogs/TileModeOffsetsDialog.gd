@@ -12,6 +12,8 @@ func _on_TileModeOffsetsDialog_about_to_show() -> void:
 	tile_mode.draw_center = true
 	tile_mode.tiles = Tiles.new(Global.current_project.size)
 	tile_mode.tiles.mode = Tiles.MODE.BOTH
+	if Global.current_project.tiles.mode != Tiles.MODE.NONE:
+		tile_mode.tiles.mode = Global.current_project.tiles.mode
 	tile_mode.tiles.x_basis = Global.current_project.tiles.x_basis
 	tile_mode.tiles.y_basis = Global.current_project.tiles.y_basis
 	x_basis_x_spinbox.value = tile_mode.tiles.x_basis.x
