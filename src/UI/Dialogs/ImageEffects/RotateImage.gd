@@ -26,7 +26,6 @@ func set_nodes() -> void:
 
 func _about_to_show() -> void:
 	if pivot == Vector2.INF:
-		print("pi")
 		decide_pivot()
 	confirmed = false
 	._about_to_show()
@@ -252,4 +251,3 @@ func _on_Indicator_gui_input(event: InputEvent) -> void:
 			x_pivot.value = new_pos.x
 			y_pivot.value = new_pos.y
 			pivot_indicator.update()
-
