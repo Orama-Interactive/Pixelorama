@@ -19,22 +19,29 @@ func _on_TileModeOffsetsDialog_about_to_show() -> void:
 	y_basis_x_spinbox.value = tile_mode.tiles.y_basis.x
 	y_basis_y_spinbox.value = tile_mode.tiles.y_basis.y
 
+	_show_options()
 	if Global.current_project.tiles.mode == Tiles.MODE.X_AXIS:
 		y_basis_x_spinbox.visible = false
 		y_basis_y_spinbox.visible = false
-		$VBoxContainer/OptionsContainer/YBasisX.visible = false
-		$VBoxContainer/OptionsContainer/YBasisY.visible = false
+		$VBoxContainer/OptionsContainer/YBasisXLabel.visible = false
+		$VBoxContainer/OptionsContainer/YBasisYLabel.visible = false
 	elif Global.current_project.tiles.mode == Tiles.MODE.Y_AXIS:
 		x_basis_x_spinbox.visible = false
 		x_basis_y_spinbox.visible = false
-		$VBoxContainer/OptionsContainer/XBasisX.visible = false
-		$VBoxContainer/OptionsContainer/XBasisY.visible = false
-	else:
-		x_basis_x_spinbox.visible = true
-		x_basis_y_spinbox.visible = true
-		y_basis_x_spinbox.visible = true
-		y_basis_y_spinbox.visible = true
+		$VBoxContainer/OptionsContainer/XBasisXLabel.visible = false
+		$VBoxContainer/OptionsContainer/XBasisYLabel.visible = false
 	update_preview()
+
+
+func _show_options():
+	x_basis_x_spinbox.visible = true
+	x_basis_y_spinbox.visible = true
+	y_basis_x_spinbox.visible = true
+	y_basis_y_spinbox.visible = true
+	$VBoxContainer/OptionsContainer/YBasisXLabel.visible = true
+	$VBoxContainer/OptionsContainer/YBasisYLabel.visible = true
+	$VBoxContainer/OptionsContainer/XBasisXLabel.visible = true
+	$VBoxContainer/OptionsContainer/XBasisYLabel.visible = true
 
 
 func _on_TileModeOffsetsDialog_confirmed() -> void:
