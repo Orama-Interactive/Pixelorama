@@ -47,9 +47,12 @@ func get_nearest_tile(point: Vector2) -> Rect2:
 	if Rect2(Vector2.ZERO, tile_size).has_point(point):
 		return Rect2(Vector2.ZERO, tile_size)
 
-	for pos in positions:
+	for pos_ind in positions.size():
+		# Tiles on top gets detected first in case of overlap
+		var pos = positions[positions.size() - pos_ind - 1]
 		var test_rect = Rect2(pos, tile_size)
 		if test_rect.has_point(point):
+			print(test_rect.position)
 			return test_rect
 
 	return Rect2(Vector2.ZERO, tile_size)
