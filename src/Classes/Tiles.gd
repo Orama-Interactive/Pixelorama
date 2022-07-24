@@ -52,7 +52,6 @@ func get_nearest_tile(point: Vector2) -> Rect2:
 		var pos = positions[positions.size() - pos_ind - 1]
 		var test_rect = Rect2(pos, tile_size)
 		if test_rect.has_point(point):
-			print(test_rect.position)
 			return test_rect
 
 	return Rect2(Vector2.ZERO, tile_size)
