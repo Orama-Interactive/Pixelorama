@@ -4,7 +4,6 @@
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="RotateImage" type="ConfirmationDialog"]
-visible = true
 margin_right = 342.0
 margin_bottom = 450.0
 rect_min_size = Vector2( 342, 450 )
