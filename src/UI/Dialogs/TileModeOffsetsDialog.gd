@@ -18,6 +18,22 @@ func _on_TileModeOffsetsDialog_about_to_show() -> void:
 	x_basis_y_spinbox.value = tile_mode.tiles.x_basis.y
 	y_basis_x_spinbox.value = tile_mode.tiles.y_basis.x
 	y_basis_y_spinbox.value = tile_mode.tiles.y_basis.y
+
+	if Global.current_project.tiles.mode == Tiles.MODE.X_AXIS:
+		y_basis_x_spinbox.visible = false
+		y_basis_y_spinbox.visible = false
+		$VBoxContainer/OptionsContainer/YBasisX.visible = false
+		$VBoxContainer/OptionsContainer/YBasisY.visible = false
+	elif Global.current_project.tiles.mode == Tiles.MODE.Y_AXIS:
+		x_basis_x_spinbox.visible = false
+		x_basis_y_spinbox.visible = false
+		$VBoxContainer/OptionsContainer/XBasisX.visible = false
+		$VBoxContainer/OptionsContainer/XBasisY.visible = false
+	else:
+		x_basis_x_spinbox.visible = true
+		x_basis_y_spinbox.visible = true
+		y_basis_x_spinbox.visible = true
+		y_basis_y_spinbox.visible = true
 	update_preview()
 
 
