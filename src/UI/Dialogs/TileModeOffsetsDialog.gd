@@ -106,3 +106,21 @@ func _on_Reset_pressed():
 	y_basis_x_spinbox.value = 0
 	y_basis_y_spinbox.value = size.y
 	update_preview()
+
+
+func _on_LoadMask_pressed() -> void:
+	$FileDialog.popup_centered()
+
+
+func _on_FileDialog_file_selected(path: String) -> void:
+	var image := Image.new()
+	var err := image.load(path)
+	if err != OK:  # An error occured
+		var file_name: String = path.get_file()
+		Global.error_dialog.set_text(
+			tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)]
+		)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+	$VBoxContainer/OptionsContainer/LoadMask.text = path.get_file()
+	Global.current_project.tiles.tile_mask = image
