@@ -42,7 +42,10 @@ func get_bounding_rect() -> Rect2:
 
 func get_nearest_tile(point: Vector2) -> Rect2:
 	var positions = Global.canvas.tile_mode.get_tile_positions()
-	positions.append(Vector2.ZERO)  # The central tile is included manually
+
+	# Priortize main tile as nearest if mouse is in it
+	if Rect2(Vector2.ZERO, tile_size).has_point(point):
+		return Rect2(Vector2.ZERO, tile_size)
 
 	for pos in positions:
 		var test_rect = Rect2(pos, tile_size)
