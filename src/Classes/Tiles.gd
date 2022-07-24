@@ -7,12 +7,15 @@ var mode: int = MODE.NONE
 var x_basis: Vector2
 var y_basis: Vector2
 var tile_size: Vector2
+var tile_mask := Image.new()
 
 
 func _init(size: Vector2):
 	x_basis = Vector2(size.x, 0)
 	y_basis = Vector2(0, size.y)
 	tile_size = size
+	tile_mask.create(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
+	tile_mask.fill(Color.white)
 
 
 func get_bounding_rect() -> Rect2:
@@ -42,19 +45,37 @@ func get_bounding_rect() -> Rect2:
 
 func get_nearest_tile(point: Vector2) -> Rect2:
 	var positions = Global.canvas.tile_mode.get_tile_positions()
+	positions.append(Vector2.ZERO)
 
-	# Priortize main tile as nearest if mouse is in it
-	if Rect2(Vector2.ZERO, tile_size).has_point(point):
-		return Rect2(Vector2.ZERO, tile_size)
-
+	var candidates := []
 	for pos_ind in positions.size():
 		# Tiles on top gets detected first in case of overlap
 		var pos = positions[positions.size() - pos_ind - 1]
 		var test_rect = Rect2(pos, tile_size)
 		if test_rect.has_point(point):
-			return test_rect
+			candidates.append(test_rect)
+	if candidates.empty():
+		return Rect2(Vector2.ZERO, tile_size)
 
-	return Rect2(Vector2.ZERO, tile_size)
+	var final := []
+	for candidate in candidates:
+		var rel_pos = point - candidate.position
+		tile_mask.lock()
+		if tile_mask.get_pixelv(rel_pos).a == 1.0:
+			final.append(candidate)
+		tile_mask.unlock()
+
+	if final.empty():
+		return Rect2(Vector2.ZERO, tile_size)
+	final.sort_custom(self, "sort_by_height")
+	return final[0]
+
+
+func sort_by_height(a: Rect2, b: Rect2):
+	if a.position.y > b.position.y:
+		return false
+	else:
+		return true
 
 
 func get_canon_position(position: Vector2) -> Vector2:
