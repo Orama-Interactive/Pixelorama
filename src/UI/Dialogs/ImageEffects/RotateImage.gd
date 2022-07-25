@@ -3,6 +3,7 @@ extends ImageEffect
 var live_preview: bool = true
 var shader: Shader = preload("res://src/Shaders/Rotation.shader")
 var pivot := Vector2.INF
+var drag_pivot := false
 
 onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
 onready var pivot_indicator: Control = $VBoxContainer/AspectRatioContainer/Indicator
@@ -10,8 +11,8 @@ onready var x_pivot: SpinBox = $VBoxContainer/Pivot/TitleButtons/XPivot
 onready var y_pivot: SpinBox = $VBoxContainer/Pivot/TitleButtons/YPivot
 onready var angle_hslider: HSlider = $VBoxContainer/AngleOptions/AngleHSlider
 onready var angle_spinbox: SpinBox = $VBoxContainer/AngleOptions/AngleSpinBox
-onready var wait_apply_timer = $WaitApply
-onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
+onready var wait_apply_timer: Timer = $WaitApply
+onready var wait_time_spinbox: SpinBox = $VBoxContainer/WaitSettings/WaitTime
 
 
 func _ready() -> void:
@@ -30,6 +31,7 @@ func set_nodes() -> void:
 
 
 func _about_to_show() -> void:
+	drag_pivot = false
 	if pivot == Vector2.INF:
 		decide_pivot()
 	confirmed = false
@@ -139,7 +141,7 @@ func _on_SpinBox_value_changed(_value: float) -> void:
 
 func _on_TypeOptionButton_item_selected(_id: int) -> void:
 	if type_option_button.text == "Nearest neighbour (Shader)":
-		var sm = ShaderMaterial.new()
+		var sm := ShaderMaterial.new()
 		sm.shader = shader
 		preview.set_material(sm)
 	else:
@@ -203,14 +205,14 @@ func _on_Pivot_value_changed(value: float, is_x: bool) -> void:
 func _on_Indicator_draw() -> void:
 	var img_size := preview_image.get_size()
 	# find the scale using the larger measurement
-	var ratio = pivot_indicator.rect_size / img_size
+	var ratio := pivot_indicator.rect_size / img_size
 	# we need to set the scale according to the larger side
 	var conversion_scale: float
 	if img_size.x > img_size.y:
 		conversion_scale = ratio.x
 	else:
 		conversion_scale = ratio.y
-	var pivot_position = pivot * conversion_scale
+	var pivot_position := pivot * conversion_scale
 	pivot_indicator.draw_arc(pivot_position, 2, 0, 360, 360, Color.yellow, 0.5)
 	pivot_indicator.draw_arc(pivot_position, 6, 0, 360, 360, Color.white, 0.5)
 	pivot_indicator.draw_line(
@@ -222,18 +224,21 @@ func _on_Indicator_draw() -> void:
 
 
 func _on_Indicator_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		if event.pressure == 1.0:
-			var img_size := preview_image.get_size()
-			var mouse_pos := get_local_mouse_position() - pivot_indicator.rect_position
-			var ratio := img_size / pivot_indicator.rect_size
-			# we need to set the scale according to the larger side
-			var conversion_scale: float
-			if img_size.x > img_size.y:
-				conversion_scale = ratio.x
-			else:
-				conversion_scale = ratio.y
-			var new_pos := mouse_pos * conversion_scale
-			x_pivot.value = new_pos.x
-			y_pivot.value = new_pos.y
-			pivot_indicator.update()
+	if event.is_action_pressed("left_mouse"):
+		drag_pivot = true
+	if event.is_action_released("left_mouse"):
+		drag_pivot = false
+	if drag_pivot:
+		var img_size := preview_image.get_size()
+		var mouse_pos := get_local_mouse_position() - pivot_indicator.rect_position
+		var ratio := img_size / pivot_indicator.rect_size
+		# we need to set the scale according to the larger side
+		var conversion_scale: float
+		if img_size.x > img_size.y:
+			conversion_scale = ratio.x
+		else:
+			conversion_scale = ratio.y
+		var new_pos := mouse_pos * conversion_scale
+		x_pivot.value = new_pos.x
+		y_pivot.value = new_pos.y
+		pivot_indicator.update()
