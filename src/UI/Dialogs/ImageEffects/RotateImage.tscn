@@ -113,14 +113,26 @@ margin_top = 290.0
 margin_right = 326.0
 margin_bottom = 310.0
 
-[node name="TogglePivot" type="Button" parent="VBoxContainer/Pivot"]
+[node name="TitleButtons" type="HBoxContainer" parent="VBoxContainer/Pivot"]
 margin_right = 326.0
 margin_bottom = 20.0
+
+[node name="TogglePivot" type="Button" parent="VBoxContainer/Pivot/TitleButtons"]
+margin_right = 268.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
 size_flags_vertical = 2
 toggle_mode = true
 text = "Pivot Options (>)"
 flat = true
 align = 0
+
+[node name="Centre" type="Button" parent="VBoxContainer/Pivot/TitleButtons"]
+margin_left = 272.0
+margin_right = 326.0
+margin_bottom = 20.0
+hint_tooltip = "Centers the pivot (if selection is present then it's centre is selected instead)"
+text = "Center"
 
 [node name="Options" type="VBoxContainer" parent="VBoxContainer/Pivot"]
 visible = false
@@ -296,7 +308,8 @@ selected = 0
 [connection signal="toggled" from="VBoxContainer/LiveSettings/LiveCheckbox" to="." method="_on_LiveCheckbox_toggled"]
 [connection signal="value_changed" from="VBoxContainer/WaitSettings/WaitTime" to="." method="_on_WaitTime_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer2/TypeOptionButton" to="." method="_on_TypeOptionButton_item_selected"]
-[connection signal="toggled" from="VBoxContainer/Pivot/TogglePivot" to="." method="_on_TogglePivot_toggled"]
+[connection signal="toggled" from="VBoxContainer/Pivot/TitleButtons/TogglePivot" to="." method="_on_TogglePivot_toggled"]
+[connection signal="pressed" from="VBoxContainer/Pivot/TitleButtons/Centre" to="." method="_on_Centre_pressed"]
 [connection signal="value_changed" from="VBoxContainer/Pivot/Options/X/XPivot" to="." method="_on_Pivot_value_changed" binds= [ true ]]
 [connection signal="value_changed" from="VBoxContainer/Pivot/Options/Y/YPivot" to="." method="_on_Pivot_value_changed" binds= [ false ]]
 [connection signal="value_changed" from="VBoxContainer/AngleOptions/AngleHSlider" to="." method="_on_HSlider_value_changed"]
