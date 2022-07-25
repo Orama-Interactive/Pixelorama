@@ -122,5 +122,13 @@ func _on_FileDialog_file_selected(path: String) -> void:
 		)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
+		return
+	if image.get_size() != Global.current_project.size:
+		Global.error_dialog.set_text(
+			tr("The mask must have the same size as the project")
+		)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+		return
 	$VBoxContainer/OptionsContainer/LoadMask.text = path.get_file()
 	Global.current_project.tiles.tile_mask = image
