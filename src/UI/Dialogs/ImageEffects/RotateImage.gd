@@ -2,7 +2,7 @@ extends ImageEffect
 
 var live_preview: bool = true
 var shader: Shader = preload("res://src/Shaders/Rotation.shader")
-var pivot := Vector2.ZERO
+var pivot := Vector2.INF
 
 onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
 onready var angle_hslider: HSlider = $VBoxContainer/AngleOptions/AngleHSlider
@@ -12,10 +12,12 @@ onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
 
 
 func _ready() -> void:
+	# Algorithms are arranged according to their speed
+	type_option_button.add_item("Nearest neighbour (Shader)")
+	type_option_button.add_item("Nearest neighbour")
 	type_option_button.add_item("Rotxel")
 	type_option_button.add_item("Upscale, Rotate and Downscale")
-	type_option_button.add_item("Nearest neighbour")
-	type_option_button.add_item("Nearest neighbour (Shader)")
+	type_option_button.emit_signal("item_selected", 0)
 
 
 func set_nodes() -> void:
@@ -25,9 +27,8 @@ func set_nodes() -> void:
 
 
 func _about_to_show() -> void:
-	$VBoxContainer/Pivot/Options.visible = false
-	$VBoxContainer/Pivot/TogglePivot.pressed = false
-	decide_pivot()
+	if pivot == Vector2.INF:
+		decide_pivot()
 	confirmed = false
 	._about_to_show()
 	wait_apply_timer.wait_time = wait_time_spinbox.value / 1000.0
@@ -57,6 +58,9 @@ func decide_pivot():
 				pivot.x -= 0.5
 			if int(selection_rectangle.end.y - selection_rectangle.position.y) % 2 == 0:
 				pivot.y -= 0.5
+
+	$VBoxContainer/Pivot/Options/X/XPivot.value = pivot.x
+	$VBoxContainer/Pivot/Options/Y/YPivot.value = pivot.y
 
 
 func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
@@ -185,14 +189,16 @@ func _on_quick_change_angle_pressed(change_type: String) -> void:
 func _on_TogglePivot_toggled(button_pressed: bool) -> void:
 	$VBoxContainer/Pivot/Options.visible = button_pressed
 	if button_pressed:
-		$VBoxContainer/Pivot/TogglePivot.text = "Pivot Options: (v)"
-		$VBoxContainer/Pivot/TogglePivot.focus_mode = 0
-		$VBoxContainer/Pivot/Options/X/XPivot.value = pivot.x
-		$VBoxContainer/Pivot/Options/Y/YPivot.value = pivot.y
+		$VBoxContainer/Pivot/TitleButtons/TogglePivot.text = "Pivot Options: (v)"
+		$VBoxContainer/Pivot/TitleButtons/TogglePivot.focus_mode = 0
 	else:
-		$VBoxContainer/Pivot/TogglePivot.text = "Pivot Options: (>)"
-		$VBoxContainer/Pivot/TogglePivot.focus_mode = 0
+		$VBoxContainer/Pivot/TitleButtons/TogglePivot.text = "Pivot Options: (>)"
+		$VBoxContainer/Pivot/TitleButtons/TogglePivot.focus_mode = 0
 	rect_size.y += 1  # Reset rect_size of dialog
+
+
+func _on_Centre_pressed() -> void:
+	decide_pivot()
 
 
 func _on_Pivot_value_changed(value: float, is_x: bool) -> void:
