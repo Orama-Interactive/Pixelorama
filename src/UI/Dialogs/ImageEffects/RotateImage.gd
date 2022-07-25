@@ -7,8 +7,8 @@ var drag_pivot := false
 
 onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
 onready var pivot_indicator: Control = $VBoxContainer/AspectRatioContainer/Indicator
-onready var x_pivot: SpinBox = $VBoxContainer/Pivot/TitleButtons/XPivot
-onready var y_pivot: SpinBox = $VBoxContainer/Pivot/TitleButtons/YPivot
+onready var x_pivot: SpinBox = $VBoxContainer/TitleButtons/XPivot
+onready var y_pivot: SpinBox = $VBoxContainer/TitleButtons/YPivot
 onready var angle_hslider: HSlider = $VBoxContainer/AngleOptions/AngleHSlider
 onready var angle_spinbox: SpinBox = $VBoxContainer/AngleOptions/AngleSpinBox
 onready var wait_apply_timer: Timer = $WaitApply
@@ -127,7 +127,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 		cel.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 
 
-func _on_HSlider_value_changed(_value: float) -> void:
+func _on_AngleHSlider_value_changed(_value: float) -> void:
 	angle_spinbox.value = angle_hslider.value
 	if live_preview:
 		update_preview()
@@ -135,7 +135,7 @@ func _on_HSlider_value_changed(_value: float) -> void:
 		wait_apply_timer.start()
 
 
-func _on_SpinBox_value_changed(_value: float) -> void:
+func _on_AngleSpinBox_value_changed(_value: float) -> void:
 	angle_hslider.value = angle_spinbox.value
 
 
@@ -165,20 +165,11 @@ func _on_LiveCheckbox_toggled(button_pressed: bool) -> void:
 		rect_size.y += 1  # Reset rect_size of dialog
 
 
-func _on_quick_change_angle_pressed(change_type: String) -> void:
+func _on_quick_change_angle_pressed(angle_value: int) -> void:
 	var current_angle := angle_hslider.value
-	var new_angle := current_angle
-	match change_type:
-		"-90":
-			new_angle = current_angle - 90
-		"-45":
-			new_angle = current_angle - 45
-		"0":
-			new_angle = 0
-		"+45":
-			new_angle = current_angle + 45
-		"+90":
-			new_angle = current_angle + 90
+	var new_angle := current_angle + angle_value
+	if angle_value == 0:
+		new_angle = 0
 
 	if new_angle < 0:
 		new_angle = new_angle + 360
