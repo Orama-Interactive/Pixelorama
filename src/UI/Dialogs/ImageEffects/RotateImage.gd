@@ -5,6 +5,9 @@ var shader: Shader = preload("res://src/Shaders/Rotation.shader")
 var pivot := Vector2.INF
 
 onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
+onready var pivot_indicator: Control = $VBoxContainer/AspectRatioContainer/Indicator
+onready var x_pivot: SpinBox = $VBoxContainer/Pivot/TitleButtons/XPivot
+onready var y_pivot: SpinBox = $VBoxContainer/Pivot/TitleButtons/YPivot
 onready var angle_hslider: HSlider = $VBoxContainer/AngleOptions/AngleHSlider
 onready var angle_spinbox: SpinBox = $VBoxContainer/AngleOptions/AngleSpinBox
 onready var wait_apply_timer = $WaitApply
@@ -35,9 +38,9 @@ func _about_to_show() -> void:
 	angle_hslider.value = 0
 
 
-func decide_pivot():
+func decide_pivot() -> void:
 	var size := Global.current_project.size
-	pivot = Vector2(size.x / 2, size.y / 2)
+	pivot = size / 2
 
 	# Pivot correction in case of even size
 	if type_option_button.text != "Nearest neighbour (Shader)":
@@ -59,20 +62,18 @@ func decide_pivot():
 			if int(selection_rectangle.end.y - selection_rectangle.position.y) % 2 == 0:
 				pivot.y -= 0.5
 
-	$VBoxContainer/Pivot/Options/X/XPivot.value = pivot.x
-	$VBoxContainer/Pivot/Options/Y/YPivot.value = pivot.y
+	x_pivot.value = pivot.x
+	y_pivot.value = pivot.y
 
 
-func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
+func commit_action(cel: Image, _project: Project = Global.current_project) -> void:
 	var angle: float = deg2rad(angle_hslider.value)
-# warning-ignore:integer_division
-# warning-ignore:integer_division
 
-	var selection_size := _cel.get_size()
+	var selection_size := cel.get_size()
 	var selection_tex := ImageTexture.new()
 
 	var image := Image.new()
-	image.copy_from(_cel)
+	image.copy_from(cel)
 	if _project.has_selection and selection_checkbox.pressed:
 		var selection_rectangle: Rect2 = _project.get_selection_rectangle()
 		selection_size = selection_rectangle.size
@@ -82,16 +83,16 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 
 		if type_option_button.text != "Nearest neighbour (Shader)":
 			image.lock()
-			_cel.lock()
+			cel.lock()
 			for x in _project.size.x:
 				for y in _project.size.y:
 					var pos := Vector2(x, y)
 					if !_project.can_pixel_get_drawn(pos):
 						image.set_pixelv(pos, Color(0, 0, 0, 0))
 					else:
-						_cel.set_pixelv(pos, Color(0, 0, 0, 0))
+						cel.set_pixelv(pos, Color(0, 0, 0, 0))
 			image.unlock()
-			_cel.unlock()
+			cel.unlock()
 	match type_option_button.text:
 		"Rotxel":
 			DrawingAlgos.rotxel(image, angle, pivot)
@@ -100,20 +101,18 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 		"Upscale, Rotate and Downscale":
 			DrawingAlgos.fake_rotsprite(image, angle, pivot)
 		"Nearest neighbour (Shader)":
+			var params := {
+				"angle": angle,
+				"selection_tex": selection_tex,
+				"selection_pivot": pivot,
+				"selection_size": selection_size
+			}
 			if !confirmed:
-				preview.material.set_shader_param("angle", angle)
-				preview.material.set_shader_param("selection_tex", selection_tex)
-				preview.material.set_shader_param("selection_pivot", pivot)
-				preview.material.set_shader_param("selection_size", selection_size)
+				for param in params:
+					preview.material.set_shader_param(param, params[param])
 			else:
-				var params = {
-					"angle": angle,
-					"selection_tex": selection_tex,
-					"selection_pivot": pivot,
-					"selection_size": selection_size
-				}
 				var gen := ShaderImageEffect.new()
-				gen.generate_image(_cel, shader, params, _project.size)
+				gen.generate_image(cel, shader, params, _project.size)
 				yield(gen, "done")
 
 	if (
@@ -121,9 +120,9 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 		and selection_checkbox.pressed
 		and type_option_button.text != "Nearest neighbour (Shader)"
 	):
-		_cel.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
+		cel.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 	else:
-		_cel.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
+		cel.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 
 
 func _on_HSlider_value_changed(_value: float) -> void:
@@ -165,8 +164,8 @@ func _on_LiveCheckbox_toggled(button_pressed: bool) -> void:
 
 
 func _on_quick_change_angle_pressed(change_type: String) -> void:
-	var current_angle = angle_hslider.value
-	var new_angle = current_angle
+	var current_angle := angle_hslider.value
+	var new_angle := current_angle
 	match change_type:
 		"-90":
 			new_angle = current_angle - 90
@@ -186,17 +185,6 @@ func _on_quick_change_angle_pressed(change_type: String) -> void:
 	angle_hslider.value = new_angle
 
 
-func _on_TogglePivot_toggled(button_pressed: bool) -> void:
-	$VBoxContainer/Pivot/Options.visible = button_pressed
-	if button_pressed:
-		$VBoxContainer/Pivot/TitleButtons/TogglePivot.text = "Pivot Options: (v)"
-		$VBoxContainer/Pivot/TitleButtons/TogglePivot.focus_mode = 0
-	else:
-		$VBoxContainer/Pivot/TitleButtons/TogglePivot.text = "Pivot Options: (>)"
-		$VBoxContainer/Pivot/TitleButtons/TogglePivot.focus_mode = 0
-	rect_size.y += 1  # Reset rect_size of dialog
-
-
 func _on_Centre_pressed() -> void:
 	decide_pivot()
 
@@ -207,13 +195,12 @@ func _on_Pivot_value_changed(value: float, is_x: bool) -> void:
 	else:
 		pivot.y = value
 	# Refresh the indicator
-	$VBoxContainer/AspectRatioContainer/Indicator.update()
+	pivot_indicator.update()
 	if angle_hslider.value != 0:
 		update_preview()
 
 
 func _on_Indicator_draw() -> void:
-	var pivot_indicator = $VBoxContainer/AspectRatioContainer/Indicator
 	var img_size := preview_image.get_size()
 	# find the scale using the larger measurement
 	var ratio = pivot_indicator.rect_size / img_size
@@ -237,19 +224,16 @@ func _on_Indicator_draw() -> void:
 func _on_Indicator_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if event.pressure == 1.0:
-			var pivot_indicator = $VBoxContainer/AspectRatioContainer/Indicator
-			var x_pivot = $VBoxContainer/Pivot/Options/X/XPivot
-			var y_pivot = $VBoxContainer/Pivot/Options/Y/YPivot
 			var img_size := preview_image.get_size()
-			var mouse_pos = get_local_mouse_position() - pivot_indicator.rect_position
-			var ratio = img_size / pivot_indicator.rect_size
+			var mouse_pos := get_local_mouse_position() - pivot_indicator.rect_position
+			var ratio := img_size / pivot_indicator.rect_size
 			# we need to set the scale according to the larger side
 			var conversion_scale: float
 			if img_size.x > img_size.y:
 				conversion_scale = ratio.x
 			else:
 				conversion_scale = ratio.y
-			var new_pos = mouse_pos * conversion_scale
+			var new_pos := mouse_pos * conversion_scale
 			x_pivot.value = new_pos.x
 			y_pivot.value = new_pos.y
 			pivot_indicator.update()
