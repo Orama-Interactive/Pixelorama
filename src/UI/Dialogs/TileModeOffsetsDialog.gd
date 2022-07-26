@@ -32,6 +32,10 @@ func _on_TileModeOffsetsDialog_about_to_show() -> void:
 		x_basis_y_spinbox.visible = false
 		$VBoxContainer/OptionsContainer/XBasisXLabel.visible = false
 		$VBoxContainer/OptionsContainer/XBasisYLabel.visible = false
+
+	$VBoxContainer/OptionsContainer/LoadMask.text = "Load Mask"
+	if Global.current_project.tiles.has_mask:
+		$VBoxContainer/OptionsContainer/LoadMask.text = "Loaded"
 	update_preview()
 
 
@@ -128,5 +132,6 @@ func _on_FileDialog_file_selected(path: String) -> void:
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
 		return
-	$VBoxContainer/OptionsContainer/LoadMask.text = path.get_file()
+	$VBoxContainer/OptionsContainer/LoadMask.text = "Loaded"
 	Global.current_project.tiles.tile_mask = image
+	Global.current_project.tiles.has_mask = true
