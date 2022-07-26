@@ -494,6 +494,7 @@ func _size_changed(value: Vector2) -> void:
 	else:
 		tiles.y_basis = Vector2(0, value.y)
 	tiles.tile_size = value
+	tiles.reset_mask()
 	size = value
 
 
@@ -760,7 +761,7 @@ func can_pixel_get_drawn(
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
 		return false
 
-	if tiles.mode != Tiles.MODE.NONE and !Rect2(Vector2.ZERO, tiles.tile_size).has_point(pixel):
+	if tiles.mode != Tiles.MODE.NONE and !tiles.has_point(pixel):
 		return false
 
 	if has_selection:
