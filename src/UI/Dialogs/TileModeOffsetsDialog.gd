@@ -1,17 +1,21 @@
 extends ConfirmationDialog
 
-onready var x_basis_x_spinbox: SpinBox = $VBoxContainer/OptionsContainer/XBasisX
-onready var x_basis_y_spinbox: SpinBox = $VBoxContainer/OptionsContainer/XBasisY
-onready var y_basis_x_spinbox: SpinBox = $VBoxContainer/OptionsContainer/YBasisX
-onready var y_basis_y_spinbox: SpinBox = $VBoxContainer/OptionsContainer/YBasisY
+onready var x_basis_x_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsContainer/XBasisX
+onready var x_basis_y_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsContainer/XBasisY
+onready var y_basis_x_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsContainer/YBasisX
+onready var y_basis_y_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsContainer/YBasisY
 onready var preview_rect: Control = $VBoxContainer/AspectRatioContainer/Preview
 onready var tile_mode: Node2D = $VBoxContainer/AspectRatioContainer/Preview/TileMode
+onready var load_button: Button = $VBoxContainer/HBoxContainer/Mask/LoadMask
+onready var mask_hint: TextureRect = $VBoxContainer/HBoxContainer/Mask/MaskHint
 
 
 func _on_TileModeOffsetsDialog_about_to_show() -> void:
 	tile_mode.draw_center = true
 	tile_mode.tiles = Tiles.new(Global.current_project.size)
 	tile_mode.tiles.mode = Tiles.MODE.BOTH
+	if Global.current_project.tiles.mode != Tiles.MODE.NONE:
+		tile_mode.tiles.mode = Global.current_project.tiles.mode
 	if Global.current_project.tiles.mode != Tiles.MODE.NONE:
 		tile_mode.tiles.mode = Global.current_project.tiles.mode
 	tile_mode.tiles.x_basis = Global.current_project.tiles.x_basis
@@ -25,17 +29,20 @@ func _on_TileModeOffsetsDialog_about_to_show() -> void:
 	if Global.current_project.tiles.mode == Tiles.MODE.X_AXIS:
 		y_basis_x_spinbox.visible = false
 		y_basis_y_spinbox.visible = false
-		$VBoxContainer/OptionsContainer/YBasisXLabel.visible = false
-		$VBoxContainer/OptionsContainer/YBasisYLabel.visible = false
+		$VBoxContainer/HBoxContainer/OptionsContainer/YBasisXLabel.visible = false
+		$VBoxContainer/HBoxContainer/OptionsContainer/YBasisYLabel.visible = false
 	elif Global.current_project.tiles.mode == Tiles.MODE.Y_AXIS:
 		x_basis_x_spinbox.visible = false
 		x_basis_y_spinbox.visible = false
-		$VBoxContainer/OptionsContainer/XBasisXLabel.visible = false
-		$VBoxContainer/OptionsContainer/XBasisYLabel.visible = false
+		$VBoxContainer/HBoxContainer/OptionsContainer/XBasisXLabel.visible = false
+		$VBoxContainer/HBoxContainer/OptionsContainer/XBasisYLabel.visible = false
 
-	$VBoxContainer/OptionsContainer/LoadMask.text = "Load Mask"
+	load_button.text = "Load Mask"
 	if Global.current_project.tiles.has_mask:
-		$VBoxContainer/OptionsContainer/LoadMask.text = "Loaded"
+		load_button.text = "Loaded"
+	var tex := ImageTexture.new()
+	tex.create_from_image(Global.current_project.tiles.tile_mask)
+	mask_hint.texture = tex
 	update_preview()
 
 
@@ -44,10 +51,10 @@ func _show_options():
 	x_basis_y_spinbox.visible = true
 	y_basis_x_spinbox.visible = true
 	y_basis_y_spinbox.visible = true
-	$VBoxContainer/OptionsContainer/YBasisXLabel.visible = true
-	$VBoxContainer/OptionsContainer/YBasisYLabel.visible = true
-	$VBoxContainer/OptionsContainer/XBasisXLabel.visible = true
-	$VBoxContainer/OptionsContainer/XBasisYLabel.visible = true
+	$VBoxContainer/HBoxContainer/OptionsContainer/YBasisXLabel.visible = true
+	$VBoxContainer/HBoxContainer/OptionsContainer/YBasisYLabel.visible = true
+	$VBoxContainer/HBoxContainer/OptionsContainer/XBasisXLabel.visible = true
+	$VBoxContainer/HBoxContainer/OptionsContainer/XBasisYLabel.visible = true
 
 
 func _on_TileModeOffsetsDialog_confirmed() -> void:
@@ -132,6 +139,9 @@ func _on_FileDialog_file_selected(path: String) -> void:
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
 		return
-	$VBoxContainer/OptionsContainer/LoadMask.text = "Loaded"
+	load_button.text = "Loaded"
 	Global.current_project.tiles.tile_mask = image
 	Global.current_project.tiles.has_mask = true
+	var tex := ImageTexture.new()
+	tex.create_from_image(Global.current_project.tiles.tile_mask)
+	mask_hint.texture = tex
