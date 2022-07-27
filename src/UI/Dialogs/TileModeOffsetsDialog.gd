@@ -120,6 +120,7 @@ func _on_Reset_pressed():
 
 
 func _on_LoadMask_pressed() -> void:
+	$FileDialog.current_dir = Global.current_project.directory_path
 	$FileDialog.popup_centered()
 
 

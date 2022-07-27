@@ -8,7 +8,6 @@
 blend_mode = 4
 
 [node name="TileModeOffsetsDialog" type="ConfirmationDialog"]
-visible = true
 margin_right = 216.0
 margin_bottom = 374.0
 rect_min_size = Vector2( 172, 60.2 )
