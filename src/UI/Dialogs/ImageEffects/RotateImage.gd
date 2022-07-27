@@ -49,7 +49,6 @@ func _about_to_show() -> void:
 	angle_hslider.value = 0
 
 
-
 func decide_pivot() -> void:
 	var size := Global.current_project.size
 	pivot = size / 2
@@ -62,7 +61,7 @@ func decide_pivot() -> void:
 			pivot.y -= 0.5
 
 	if Global.current_project.has_selection and selection_checkbox.pressed:
-		var selection_rectangle: Rect2 = Global.current_project.get_selection_rectangle()
+		var selection_rectangle: Rect2 = Global.current_project.selection_map.get_used_rect()
 		pivot = (
 			selection_rectangle.position
 			+ ((selection_rectangle.end - selection_rectangle.position) / 2)
@@ -87,10 +86,10 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 	var image := Image.new()
 	image.copy_from(cel)
 	if _project.has_selection and selection_checkbox.pressed:
-		var selection_rectangle: Rect2 = _project.get_selection_rectangle()
+		var selection_rectangle: Rect2 = _project.selection_map.get_used_rect()
 		selection_size = selection_rectangle.size
 
-		var selection: Image = _project.bitmap_to_image(_project.selection_bitmap)
+		var selection: Image = _project.selection_map
 		selection_tex.create_from_image(selection, 0)
 
 		if !_type_is_shader():
