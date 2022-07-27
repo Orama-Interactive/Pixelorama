@@ -354,6 +354,8 @@ func serialize() -> Dictionary:
 		"name": name,
 		"size_x": size.x,
 		"size_y": size.y,
+		"has_mask": tiles.has_mask,
+		"tile_mask": var2str(tiles.tile_mask),
 		"tile_mode_x_basis_x": tiles.x_basis.x,
 		"tile_mode_x_basis_y": tiles.x_basis.y,
 		"tile_mode_y_basis_x": tiles.y_basis.x,
@@ -383,6 +385,13 @@ func deserialize(dict: Dictionary) -> void:
 		size.y = dict.size_y
 		tiles.tile_size = size
 		selection_bitmap = resize_bitmap(selection_bitmap, size)
+	if dict.has("has_mask") and dict.has("tile_mask"):
+		tiles.has_mask = dict.has_mask
+		if dict.has_mask:
+			tiles.tile_mask = str2var(dict.tile_mask)
+		else:
+			tiles.reset_mask()
+
 	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
 		tiles.x_basis.x = dict.tile_mode_x_basis_x
 		tiles.x_basis.y = dict.tile_mode_x_basis_y
