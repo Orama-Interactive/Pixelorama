@@ -98,6 +98,19 @@ func clear_swatches() -> void:
 		swatch.queue_free()
 
 
+func find_and_select_color(mouse_button: int, target_color: Color) -> void:
+	var old_index = Palettes.current_palette_get_selected_color_index(mouse_button)
+	for color_ind in swatches.size():
+		if target_color.is_equal_approx(swatches[color_ind].color):
+			select_swatch(mouse_button, color_ind, old_index)
+			match mouse_button:
+				BUTTON_LEFT:
+					Palettes.left_selected_color = color_ind
+				BUTTON_RIGHT:
+					Palettes.right_selected_color = color_ind
+			break
+
+
 # Displays a left/right highlight over a swatch
 func select_swatch(mouse_button: int, palette_index: int, old_palette_index: int) -> void:
 	var index = convert_palette_index_to_grid_index(palette_index)
