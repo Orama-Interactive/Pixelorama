@@ -128,7 +128,7 @@ func _on_LoadMask_pressed() -> void:
 		$FileDialog.popup_centered()
 
 
-func _on_html_image_loaded(image_info :Dictionary):
+func _on_html_image_loaded(image_info: Dictionary):
 	if image_info.has("image"):
 		load_mask(image_info.image)
 		Html5FileExchange.disconnect("image_loaded", self, "_on_html_image_loaded")
