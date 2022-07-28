@@ -100,7 +100,7 @@ func load_image(load_directly := true):
 
 	var image = Image.new()
 	var image_error
-	var image_info :Dictionary = {}
+	var image_info: Dictionary = {}
 	match image_type:
 		"image/png":
 			image_error = image.load_png_from_buffer(image_data)
