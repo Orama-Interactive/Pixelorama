@@ -120,8 +120,18 @@ func _on_Reset_pressed():
 
 
 func _on_LoadMask_pressed() -> void:
-	$FileDialog.current_dir = Global.current_project.directory_path
-	$FileDialog.popup_centered()
+	if OS.get_name() == "HTML5":
+		Html5FileExchange.connect("image_loaded", self, "_on_html_image_loaded")
+		Html5FileExchange.load_image(false)
+	else:
+		$FileDialog.current_dir = Global.current_project.directory_path
+		$FileDialog.popup_centered()
+
+
+func _on_html_image_loaded(image_info :Dictionary):
+	if image_info.has("image"):
+		load_mask(image_info.image)
+		Html5FileExchange.disconnect("image_loaded", self, "_on_html_image_loaded")
 
 
 func _on_FileDialog_file_selected(path: String) -> void:
@@ -140,6 +150,11 @@ func _on_FileDialog_file_selected(path: String) -> void:
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
 		return
+
+	load_mask(image)
+
+
+func load_mask(image: Image):
 	load_button.text = "Loaded"
 	Global.current_project.tiles.tile_mask = image
 	Global.current_project.tiles.has_mask = true
