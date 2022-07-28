@@ -320,6 +320,8 @@ func assign_color(color: Color, button: int, change_alpha := true) -> void:
 	_slots[button].color = color
 	Global.config_cache.set_value(_slots[button].kname, "color", color)
 	emit_signal("color_changed", color, button)
+	# If current palette has that color then select that color
+	Global.palette_panel.palette_grid.find_and_select_color(button, color)
 
 
 func get_assigned_color(button: int) -> Color:
