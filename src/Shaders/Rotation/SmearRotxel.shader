@@ -119,9 +119,11 @@ void fragment() {
 	vec4 rotated_selection = rotate(selection_tex, UV, TEXTURE_PIXEL_SIZE);
 	vec4 rotated = rotate(TEXTURE, UV, TEXTURE_PIXEL_SIZE);
 	rotated = mix(vec4(0.0), rotated, rotated_selection.a);
+	rotated.a *= rotated_selection.a; // Combine with selection mask
+	float mask = mix(selection.a, 1.0, 1.0 - ceil(original.a)); // Combine selection mask with area outside original
 	
 	// Combine original and rotated image only when intersecting, otherwise just pure rotated image.
-	COLOR.rgb = mix(mix(original.rgb, rotated.rgb, rotated.a), rotated.rgb, selection.a);
+	COLOR.rgb = mix(mix(original.rgb, rotated.rgb, rotated.a), rotated.rgb, mask);
 	COLOR.a = mix(original.a, 0.0, selection.a); // Remove alpha on the selected area
 	COLOR.a = mix(COLOR.a, 1.0, rotated.a); // Combine alpha of original image and rotated
 }
