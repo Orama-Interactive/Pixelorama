@@ -1,7 +1,8 @@
 extends ImageEffect
 
 var live_preview: bool = true
-var shader: Shader = preload("res://src/Shaders/Rotation.shader")
+var rotxel_shader: Shader
+var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeightbour.shader")
 var pivot := Vector2.INF
 var drag_pivot := false
 
@@ -11,12 +12,20 @@ onready var x_pivot: SpinBox = $VBoxContainer/TitleButtons/XPivot
 onready var y_pivot: SpinBox = $VBoxContainer/TitleButtons/YPivot
 onready var angle_hslider: HSlider = $VBoxContainer/AngleOptions/AngleHSlider
 onready var angle_spinbox: SpinBox = $VBoxContainer/AngleOptions/AngleSpinBox
+onready var smear_options: Container = $VBoxContainer/SmearOptions
+onready var init_angle_hslider: HSlider = smear_options.get_node("AngleOptions/InitialAngleHSlider")
+onready var init_angle_spinbox: SpinBox = smear_options.get_node("AngleOptions/InitialAngleSpinBox")
+onready var tolerance_hslider: HSlider = smear_options.get_node("Tolerance/ToleranceHSlider")
+onready var tolerance_spinbox: SpinBox = smear_options.get_node("Tolerance/ToleranceSpinBox")
 onready var wait_apply_timer: Timer = $WaitApply
 onready var wait_time_spinbox: SpinBox = $VBoxContainer/WaitSettings/WaitTime
 
 
 func _ready() -> void:
 	# Algorithms are arranged according to their speed
+	if OS.get_name() != "HTML5":
+		type_option_button.add_item("Rotxel with Smear")
+		rotxel_shader = load("res://src/Shaders/Rotation/SmearRotxel.shader")
 	type_option_button.add_item("Nearest neighbour (Shader)")
 	type_option_button.add_item("Nearest neighbour")
 	type_option_button.add_item("Rotxel")
@@ -83,7 +92,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 		var selection: Image = _project.bitmap_to_image(_project.selection_bitmap)
 		selection_tex.create_from_image(selection, 0)
 
-		if type_option_button.text != "Nearest neighbour (Shader)":
+		if !_type_is_shader():
 			image.lock()
 			cel.lock()
 			for x in _project.size.x:
@@ -96,12 +105,23 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 			image.unlock()
 			cel.unlock()
 	match type_option_button.text:
-		"Rotxel":
-			DrawingAlgos.rotxel(image, angle, pivot)
-		"Nearest neighbour":
-			DrawingAlgos.nn_rotate(image, angle, pivot)
-		"Upscale, Rotate and Downscale":
-			DrawingAlgos.fake_rotsprite(image, angle, pivot)
+		"Rotxel with Smear":
+			var params := {
+				"initial_angle": init_angle_hslider.value,
+				"ending_angle": angle_hslider.value,
+				"tolerance": tolerance_hslider.value,
+				"selection_tex": selection_tex,
+				"origin": pivot / cel.get_size(),
+				"selection_size": selection_size
+			}
+			if !confirmed:
+				for param in params:
+					preview.material.set_shader_param(param, params[param])
+			else:
+				var gen := ShaderImageEffect.new()
+				gen.generate_image(cel, rotxel_shader, params, _project.size)
+				yield(gen, "done")
+
 		"Nearest neighbour (Shader)":
 			var params := {
 				"angle": angle,
@@ -114,17 +134,43 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 					preview.material.set_shader_param(param, params[param])
 			else:
 				var gen := ShaderImageEffect.new()
-				gen.generate_image(cel, shader, params, _project.size)
+				gen.generate_image(cel, nn_shader, params, _project.size)
 				yield(gen, "done")
+		"Rotxel":
+			DrawingAlgos.rotxel(image, angle, pivot)
+		"Nearest neighbour":
+			DrawingAlgos.nn_rotate(image, angle, pivot)
+		"Upscale, Rotate and Downscale":
+			DrawingAlgos.fake_rotsprite(image, angle, pivot)
 
-	if (
-		_project.has_selection
-		and selection_checkbox.pressed
-		and type_option_button.text != "Nearest neighbour (Shader)"
-	):
+	if _project.has_selection and selection_checkbox.pressed and !_type_is_shader():
 		cel.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 	else:
 		cel.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
+
+
+func _type_is_shader() -> bool:
+	return (
+		type_option_button.text == "Nearest neighbour (Shader)"
+		or type_option_button.text == "Rotxel with Smear"
+	)
+
+
+func _on_TypeOptionButton_item_selected(_id: int) -> void:
+	if type_option_button.text == "Rotxel with Smear":
+		var sm := ShaderMaterial.new()
+		sm.shader = rotxel_shader
+		preview.set_material(sm)
+		smear_options.visible = true
+	elif type_option_button.text == "Nearest neighbour (Shader)":
+		var sm := ShaderMaterial.new()
+		sm.shader = nn_shader
+		preview.set_material(sm)
+		smear_options.visible = false
+	else:
+		preview.set_material(null)
+		smear_options.visible = false
+	update_preview()
 
 
 func _on_AngleHSlider_value_changed(_value: float) -> void:
@@ -139,14 +185,28 @@ func _on_AngleSpinBox_value_changed(_value: float) -> void:
 	angle_hslider.value = angle_spinbox.value
 
 
-func _on_TypeOptionButton_item_selected(_id: int) -> void:
-	if type_option_button.text == "Nearest neighbour (Shader)":
-		var sm := ShaderMaterial.new()
-		sm.shader = shader
-		preview.set_material(sm)
+func _on_InitialAngleHSlider_value_changed(_value: float) -> void:
+	init_angle_spinbox.value = init_angle_hslider.value
+	if live_preview:
+		update_preview()
 	else:
-		preview.set_material(null)
-	update_preview()
+		wait_apply_timer.start()
+
+
+func _on_InitialAngleSpinBox_value_changed(_value: float) -> void:
+	init_angle_hslider.value = init_angle_spinbox.value
+
+
+func _on_ToleranceHSlider_value_changed(_value: float) -> void:
+	tolerance_spinbox.value = tolerance_hslider.value
+	if live_preview:
+		update_preview()
+	else:
+		wait_apply_timer.start()
+
+
+func _on_ToleranceSpinBox_value_changed(_value: float) -> void:
+	tolerance_hslider.value = tolerance_spinbox.value
 
 
 func _on_WaitApply_timeout() -> void:
@@ -176,6 +236,19 @@ func _on_quick_change_angle_pressed(angle_value: int) -> void:
 	elif new_angle >= 360:
 		new_angle = new_angle - 360
 	angle_hslider.value = new_angle
+
+
+func _on_quick_change_init_angle_pressed(angle_value: int) -> void:
+	var current_angle := init_angle_hslider.value
+	var new_angle := current_angle + angle_value
+	if angle_value == 0:
+		new_angle = 0
+
+	if new_angle < 0:
+		new_angle = new_angle + 360
+	elif new_angle >= 360:
+		new_angle = new_angle - 360
+	init_angle_hslider.value = new_angle
 
 
 func _on_Centre_pressed() -> void:

@@ -21,13 +21,13 @@ margin_bottom = -36.0
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
 margin_right = 326.0
-margin_bottom = 252.0
+margin_bottom = 200.0
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 37.0
-margin_right = 289.0
-margin_bottom = 252.0
+margin_left = 63.0
+margin_right = 263.0
+margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
 expand = true
 stretch_mode = 5
@@ -40,15 +40,15 @@ margin_right = 0.0
 margin_bottom = 0.0
 
 [node name="Indicator" type="Control" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 37.0
-margin_right = 289.0
-margin_bottom = 252.0
+margin_left = 63.0
+margin_right = 263.0
+margin_bottom = 200.0
 mouse_default_cursor_shape = 2
 
 [node name="LiveSettings" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 256.0
+margin_top = 204.0
 margin_right = 326.0
-margin_bottom = 280.0
+margin_bottom = 228.0
 alignment = 1
 
 [node name="LiveCheckbox" type="CheckBox" parent="VBoxContainer/LiveSettings"]
@@ -86,9 +86,9 @@ editable = false
 suffix = "msec"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 284.0
+margin_top = 232.0
 margin_right = 326.0
-margin_bottom = 304.0
+margin_bottom = 252.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
 margin_top = 3.0
@@ -105,14 +105,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 308.0
+margin_top = 256.0
 margin_right = 326.0
-margin_bottom = 312.0
+margin_bottom = 260.0
 
 [node name="TitleButtons" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 316.0
+margin_top = 264.0
 margin_right = 326.0
-margin_bottom = 340.0
+margin_bottom = 288.0
 
 [node name="Label" type="Label" parent="VBoxContainer/TitleButtons"]
 margin_top = 5.0
@@ -155,14 +155,14 @@ mouse_default_cursor_shape = 2
 text = "Center"
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 344.0
+margin_top = 292.0
 margin_right = 326.0
-margin_bottom = 348.0
+margin_bottom = 296.0
 
 [node name="AngleOptions" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 352.0
+margin_top = 300.0
 margin_right = 326.0
-margin_bottom = 376.0
+margin_bottom = 324.0
 
 [node name="Label" type="Label" parent="VBoxContainer/AngleOptions"]
 margin_top = 5.0
@@ -191,9 +191,9 @@ max_value = 359.0
 suffix = "°"
 
 [node name="QuickRotations" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 380.0
+margin_top = 328.0
 margin_right = 326.0
-margin_bottom = 400.0
+margin_bottom = 348.0
 alignment = 1
 
 [node name="Deduct90" type="Button" parent="VBoxContainer/QuickRotations"]
@@ -231,15 +231,137 @@ margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "+90"
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
-margin_top = 404.0
+[node name="SmearOptions" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_top = 352.0
 margin_right = 326.0
-margin_bottom = 408.0
+margin_bottom = 454.0
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/SmearOptions"]
+margin_right = 326.0
+margin_bottom = 4.0
+
+[node name="Label" type="Label" parent="VBoxContainer/SmearOptions"]
+margin_top = 8.0
+margin_right = 326.0
+margin_bottom = 22.0
+text = "Smear options:"
+
+[node name="Tolerance" type="HBoxContainer" parent="VBoxContainer/SmearOptions"]
+margin_top = 26.0
+margin_right = 326.0
+margin_bottom = 50.0
+
+[node name="Label" type="Label" parent="VBoxContainer/SmearOptions/Tolerance"]
+margin_top = 5.0
+margin_right = 66.0
+margin_bottom = 19.0
+text = "Tolerance:"
+
+[node name="ToleranceHSlider" type="HSlider" parent="VBoxContainer/SmearOptions/Tolerance"]
+margin_left = 70.0
+margin_right = 248.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 255.0
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToleranceSpinBox" type="SpinBox" parent="VBoxContainer/SmearOptions/Tolerance"]
+margin_left = 252.0
+margin_right = 326.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+max_value = 255.0
+value = 100.0
+
+[node name="AngleOptions" type="HBoxContainer" parent="VBoxContainer/SmearOptions"]
+margin_top = 54.0
+margin_right = 326.0
+margin_bottom = 78.0
+
+[node name="Label" type="Label" parent="VBoxContainer/SmearOptions/AngleOptions"]
+margin_top = 5.0
+margin_right = 79.0
+margin_bottom = 19.0
+text = "Initial angle:"
+
+[node name="InitialAngleHSlider" type="HSlider" parent="VBoxContainer/SmearOptions/AngleOptions"]
+margin_left = 83.0
+margin_right = 248.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 359.0
+value = 359.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InitialAngleSpinBox" type="SpinBox" parent="VBoxContainer/SmearOptions/AngleOptions"]
+margin_left = 252.0
+margin_right = 326.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+max_value = 359.0
+value = 359.0
+suffix = "°"
+
+[node name="QuickRotations" type="HBoxContainer" parent="VBoxContainer/SmearOptions"]
+margin_top = 82.0
+margin_right = 326.0
+margin_bottom = 102.0
+alignment = 1
+
+[node name="Deduct90" type="Button" parent="VBoxContainer/SmearOptions/QuickRotations"]
+margin_left = 76.0
+margin_right = 109.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "-90"
+
+[node name="Deduct45" type="Button" parent="VBoxContainer/SmearOptions/QuickRotations"]
+margin_left = 113.0
+margin_right = 146.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "-45"
+
+[node name="Zero" type="Button" parent="VBoxContainer/SmearOptions/QuickRotations"]
+margin_left = 150.0
+margin_right = 170.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "0"
+
+[node name="Add45" type="Button" parent="VBoxContainer/SmearOptions/QuickRotations"]
+margin_left = 174.0
+margin_right = 210.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "+45"
+
+[node name="Add90" type="Button" parent="VBoxContainer/SmearOptions/QuickRotations"]
+margin_left = 214.0
+margin_right = 250.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "+90"
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+margin_top = 458.0
+margin_right = 326.0
+margin_bottom = 462.0
 
 [node name="OptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 412.0
+margin_top = 466.0
 margin_right = 326.0
-margin_bottom = 436.0
+margin_bottom = 490.0
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
 margin_right = 160.0
@@ -274,4 +396,13 @@ selected = 0
 [connection signal="pressed" from="VBoxContainer/QuickRotations/Zero" to="." method="_on_quick_change_angle_pressed" binds= [ 0 ]]
 [connection signal="pressed" from="VBoxContainer/QuickRotations/Add45" to="." method="_on_quick_change_angle_pressed" binds= [ 45 ]]
 [connection signal="pressed" from="VBoxContainer/QuickRotations/Add90" to="." method="_on_quick_change_angle_pressed" binds= [ 90 ]]
+[connection signal="value_changed" from="VBoxContainer/SmearOptions/Tolerance/ToleranceHSlider" to="." method="_on_ToleranceHSlider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SmearOptions/Tolerance/ToleranceSpinBox" to="." method="_on_ToleranceSpinBox_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SmearOptions/AngleOptions/InitialAngleHSlider" to="." method="_on_InitialAngleHSlider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SmearOptions/AngleOptions/InitialAngleSpinBox" to="." method="_on_InitialAngleSpinBox_value_changed"]
+[connection signal="pressed" from="VBoxContainer/SmearOptions/QuickRotations/Deduct90" to="." method="_on_quick_change_init_angle_pressed" binds= [ -90 ]]
+[connection signal="pressed" from="VBoxContainer/SmearOptions/QuickRotations/Deduct45" to="." method="_on_quick_change_init_angle_pressed" binds= [ -45 ]]
+[connection signal="pressed" from="VBoxContainer/SmearOptions/QuickRotations/Zero" to="." method="_on_quick_change_init_angle_pressed" binds= [ 0 ]]
+[connection signal="pressed" from="VBoxContainer/SmearOptions/QuickRotations/Add45" to="." method="_on_quick_change_init_angle_pressed" binds= [ 45 ]]
+[connection signal="pressed" from="VBoxContainer/SmearOptions/QuickRotations/Add90" to="." method="_on_quick_change_init_angle_pressed" binds= [ 90 ]]
 [connection signal="timeout" from="WaitApply" to="." method="_on_WaitApply_timeout"]
