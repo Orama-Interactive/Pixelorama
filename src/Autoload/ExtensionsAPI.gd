@@ -28,6 +28,10 @@ func get_canvas() -> Canvas:
 	return Global.canvas
 
 
+func get_dialogs_parent_node() -> Node:
+	return Global.control.get_node("Dialogs")
+
+
 func _get_popup_menu(menu_type: int) -> PopupMenu:
 	match menu_type:
 		FILE:
