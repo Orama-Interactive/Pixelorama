@@ -494,10 +494,10 @@ func open_image_as_spritesheet_layer(
 			new_frames[frame_index].cels[layer_index] = (Cel.new(cropped_image, 1))
 			image_no += 1
 
-	project.undo_redo.add_do_property(project, "frames", new_frames)
-	project.undo_redo.add_do_property(project, "layers", new_layers)
 	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
 	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+	project.undo_redo.add_do_property(project, "frames", new_frames)
+	project.undo_redo.add_do_property(project, "layers", new_layers)
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.add_undo_property(project, "layers", project.layers)
