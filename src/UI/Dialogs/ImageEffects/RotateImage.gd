@@ -238,19 +238,6 @@ func _on_quick_change_angle_pressed(angle_value: int) -> void:
 	angle_hslider.value = new_angle
 
 
-func _on_quick_change_init_angle_pressed(angle_value: int) -> void:
-	var current_angle := init_angle_hslider.value
-	var new_angle := current_angle + angle_value
-	if angle_value == 0:
-		new_angle = 0
-
-	if new_angle < 0:
-		new_angle = new_angle + 360
-	elif new_angle >= 360:
-		new_angle = new_angle - 360
-	init_angle_hslider.value = new_angle
-
-
 func _on_Centre_pressed() -> void:
 	decide_pivot()
 
