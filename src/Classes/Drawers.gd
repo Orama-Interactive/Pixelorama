@@ -25,7 +25,8 @@ class ColorOp:
 class SimpleDrawer:
 	func set_pixel(image: Image, position: Vector2, color: Color, op: ColorOp) -> void:
 		var color_old := image.get_pixelv(position)
-		var color_new := op.process(color, color_old)
+		var color_str = color.to_html()
+		var color_new := op.process(Color(color_str), color_old)
 		if not color_new.is_equal_approx(color_old):
 			image.set_pixelv(position, color_new)
 
@@ -40,8 +41,9 @@ class PixelPerfectDrawer:
 
 	func set_pixel(image: Image, position: Vector2, color: Color, op: ColorOp) -> void:
 		var color_old = image.get_pixelv(position)
+		var color_str = color.to_html()
 		last_pixels.push_back([position, color_old])
-		image.set_pixelv(position, op.process(color, color_old))
+		image.set_pixelv(position, op.process(Color(color_str), color_old))
 
 		var corner = last_pixels.pop_front()
 		var neighbour = last_pixels[0]

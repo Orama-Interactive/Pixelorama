@@ -28,6 +28,10 @@ func get_canvas() -> Canvas:
 	return Global.canvas
 
 
+func get_dialogs_parent_node() -> Node:
+	return Global.control.get_node("Dialogs")
+
+
 func _get_popup_menu(menu_type: int) -> PopupMenu:
 	match menu_type:
 		FILE:
@@ -48,23 +52,23 @@ func _get_popup_menu(menu_type: int) -> PopupMenu:
 
 
 func add_menu_item(menu_type: int, item_name: String, item_metadata, item_id := -1) -> int:
-	var image_menu: PopupMenu = _get_popup_menu(menu_type)
-	if not image_menu:
+	var popup_menu: PopupMenu = _get_popup_menu(menu_type)
+	if not popup_menu:
 		return -1
-	image_menu.add_item(item_name, item_id)
+	popup_menu.add_item(item_name, item_id)
 	var idx := item_id
 	if item_id == -1:
-		idx = image_menu.get_item_count() - 1
-	image_menu.set_item_metadata(idx, item_metadata)
+		idx = popup_menu.get_item_count() - 1
+	popup_menu.set_item_metadata(idx, item_metadata)
 
 	return idx
 
 
 func remove_menu_item(menu_type: int, item_idx: int) -> void:
-	var image_menu: PopupMenu = _get_popup_menu(menu_type)
-	if not image_menu:
+	var popup_menu: PopupMenu = _get_popup_menu(menu_type)
+	if not popup_menu:
 		return
-	image_menu.remove_item(item_idx)
+	popup_menu.remove_item(item_idx)
 
 
 func add_tool(
