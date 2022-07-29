@@ -145,7 +145,7 @@ func draw_start(position: Vector2) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	if (
 		!Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn()
-		or Global.current_project.tiles.get_nearest_tile(position).position != Vector2.ZERO
+		or !Rect2(Vector2.ZERO, Global.current_project.size).has_point(position)
 	):
 		return
 	if (
@@ -385,12 +385,13 @@ func _compute_segments_for_image(
 
 func _color_segments(image: Image) -> void:
 	if _fill_with == 0 or _pattern == null:
+		var color_str = tool_slot.color.to_html()
 		# short circuit for flat colors
 		for c in _allegro_image_segments.size():
 			var p = _allegro_image_segments[c]
 			for px in range(p.left_position, p.right_position + 1):
 				# We don't have to check again whether the point being processed is within the bounds
-				image.set_pixel(px, p.y, tool_slot.color)
+				image.set_pixel(px, p.y, Color(color_str))
 	else:
 		# shortcircuit tests for patternfills
 		var pattern_size = _pattern.image.get_size()
