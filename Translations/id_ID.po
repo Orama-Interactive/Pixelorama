@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-07-08 00:57\n"
+"PO-Revision-Date: 2022-07-30 10:04\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -569,10 +569,10 @@ msgid "Icon color:"
 msgstr "Warna ikon:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Warna alat di kiri:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Warna alat di kanan:"
 
 msgid "Tool button size:"
 msgstr "Ukuran tombol alat:"
@@ -1935,13 +1935,13 @@ msgstr "Ditemukan proyek yang disimpan otomatis dari sesi kena mogok.\n"
 "Apa kamu ingin memulihkan datanya?"
 
 msgid "Backup reloaded"
-msgstr "Pencadangan dimuat ulang"
+msgstr "Cadangan dimuat ulang"
 
 msgid "Remove currently selected palette"
 msgstr "Hapus palet yang sedang dipilih"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr "Kamu yakin ingin menghapus palet ini? (Tak bisa dikembalikan)"
+msgstr "Apa kamu yakin ingin menghapus palet ini? (Tak bisa diurungkan)"
 
 msgid "You can't remove more palettes!"
 msgstr "Tidak bisa menghapus palet lagi!"
