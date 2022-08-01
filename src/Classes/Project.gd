@@ -347,7 +347,9 @@ func serialize() -> Dictionary:
 	for brush in brushes:
 		brush_data.append({"size_x": brush.get_size().x, "size_y": brush.get_size().y})
 
-	var tile_mask_data := {"size_x": tiles.tile_mask.get_size().x, "size_y": tiles.tile_mask.get_size().y}
+	var tile_mask_data := {
+		"size_x": tiles.tile_mask.get_size().x, "size_y": tiles.tile_mask.get_size().y
+	}
 
 	var metadata := _serialize_metadata(self)
 
@@ -924,3 +926,4 @@ func resize_bitmap_values(bitmap: BitMap, new_size: Vector2, flip_x: bool, flip_
 	new_bitmap.create_from_image_alpha(image)
 
 	return new_bitmap
+

@@ -136,7 +136,6 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 			else:
 				new_project.tiles.reset_mask()
 
-
 	file.close()
 	if !empty_project:
 		Global.projects.append(new_project)
@@ -758,3 +757,4 @@ func save_project_to_recent_list(path: String) -> void:
 
 	Global.top_menu_container.recent_projects_submenu.clear()
 	top_menu_container.update_recent_projects_submenu()
+
