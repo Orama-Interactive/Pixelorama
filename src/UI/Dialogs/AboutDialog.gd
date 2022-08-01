@@ -22,6 +22,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Serhiy Dmytryshyn (dies)": ["Polish"],
 	"Igor Santarek (jegor377)": ["Polish"],
 	"RainbowP": ["Polish"],
+	"Michał (molters.tv)": ["Polish"],
 	"Michael Alexsander (YeldhamDev)": ["Brazilian Portuguese"],
 	"Cedulio Cezar (ceduliocezar)": ["Brazilian Portuguese"],
 	"Alexandre Oliveira (rockytvbr)": ["Brazilian Portuguese"],
@@ -263,6 +264,7 @@ func create_contributors() -> void:
 		0, "  Matteo Piovanelli (MatteoPiovanelli-Laser)"
 	)
 	contributors.create_item(contributor_root).set_text(0, "  Haoyu Qiu (timothyqiu)")
+	contributors.create_item(contributor_root).set_text(0, "  GrantMoyer")
 
 
 func create_translators() -> void:
