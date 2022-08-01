@@ -926,4 +926,3 @@ func resize_bitmap_values(bitmap: BitMap, new_size: Vector2, flip_x: bool, flip_
 	new_bitmap.create_from_image_alpha(image)
 
 	return new_bitmap
-

@@ -757,4 +757,3 @@ func save_project_to_recent_list(path: String) -> void:
 
 	Global.top_menu_container.recent_projects_submenu.clear()
 	top_menu_container.update_recent_projects_submenu()
-
