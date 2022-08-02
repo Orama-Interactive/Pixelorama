@@ -134,6 +134,8 @@ margin_top = 26.0
 margin_right = 136.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 136, 74 )
+hint_tooltip = "Mask will only allow the drawing to remain within it's bounds
+(Used for custom tiles)"
 size_flags_vertical = 3
 expand = true
 stretch_mode = 6
@@ -148,9 +150,8 @@ margin_top = 112.0
 margin_right = 136.0
 margin_bottom = 132.0
 rect_min_size = Vector2( 100, 0 )
-hint_tooltip = "Mask will only allow the drawing to remain within it's bounds
-(Used for custom tiles)"
-text = "Load Mask"
+hint_tooltip = "Create the Tile Mask from Current Frame"
+text = "Current Frame?"
 clip_text = true
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
@@ -187,8 +188,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.png ; PNG Image" )
-current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-Tile-mode-Fixes"
-current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-Tile-mode-Fixes/"
+current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-master"
+current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-master/"
 __meta__ = {
 "_editor_description_": ""
 }
