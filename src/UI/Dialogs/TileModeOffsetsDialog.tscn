@@ -177,23 +177,6 @@ anchor_bottom = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
 
-[node name="FileDialog" type="FileDialog" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 293.0
-margin_bottom = 362.0
-rect_min_size = Vector2( 172, 60.2 )
-window_title = "Open a File"
-resizable = true
-mode = 0
-access = 2
-filters = PoolStringArray( "*.png ; PNG Image" )
-current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-master"
-current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-master/"
-__meta__ = {
-"_editor_description_": ""
-}
-
 [connection signal="about_to_show" from="." to="." method="_on_TileModeOffsetsDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_TileModeOffsetsDialog_confirmed"]
 [connection signal="item_rect_changed" from="." to="." method="_on_TileModeOffsetsDialog_item_rect_changed"]
@@ -204,4 +187,3 @@ __meta__ = {
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/OptionsContainer/YBasisY" to="." method="_on_YBasisY_value_changed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/OptionsContainer/Reset" to="." method="_on_Reset_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Mask/LoadMask" to="." method="_on_LoadMask_pressed"]
-[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]
