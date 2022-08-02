@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-07-08 03:53\n"
+"PO-Revision-Date: 2022-08-02 09:55\n"
 
 msgid "OK"
 msgstr "确定"
@@ -187,7 +187,7 @@ msgid "Window Opacity"
 msgstr "窗口不透明度"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "窗口不透明度在全屏模式下不起作用"
 
 msgid "Panel Layout"
 msgstr "面板布局"
@@ -641,7 +641,7 @@ msgid "Gradient"
 msgstr "渐变"
 
 msgid "Gradient Map"
-msgstr ""
+msgstr "渐变贴图"
 
 msgid "Linear"
 msgstr "线性"
