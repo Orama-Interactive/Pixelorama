@@ -7,6 +7,7 @@ onready var y_basis_y_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsCon
 onready var preview_rect: Control = $VBoxContainer/AspectRatioContainer/Preview
 onready var tile_mode: Node2D = $VBoxContainer/AspectRatioContainer/Preview/TileMode
 onready var load_button: Button = $VBoxContainer/HBoxContainer/Mask/LoadMask
+onready var reset_mask: Button = $VBoxContainer/HBoxContainer/Mask/ResetMask
 onready var mask_hint: TextureRect = $VBoxContainer/HBoxContainer/Mask/MaskHint
 
 
@@ -37,12 +38,10 @@ func _on_TileModeOffsetsDialog_about_to_show() -> void:
 		$VBoxContainer/HBoxContainer/OptionsContainer/XBasisXLabel.visible = false
 		$VBoxContainer/HBoxContainer/OptionsContainer/XBasisYLabel.visible = false
 
-	load_button.text = "Load Mask"
+	reset_mask.disabled = true
 	if Global.current_project.tiles.has_mask:
-		load_button.text = "Loaded"
-	var tex := ImageTexture.new()
-	tex.create_from_image(Global.current_project.tiles.tile_mask)
-	mask_hint.texture = tex
+		reset_mask.disabled = false
+
 	update_preview()
 
 
@@ -98,6 +97,11 @@ func update_preview() -> void:
 	tile_mode.update()
 	preview_rect.get_node("TransparentChecker").rect_size = preview_rect.rect_size
 
+	# Also update the tile_mask preview
+	var tex := ImageTexture.new()
+	tex.create_from_image(Global.current_project.tiles.tile_mask)
+	mask_hint.texture = tex
+
 
 func _on_TileModeOffsetsDialog_popup_hide() -> void:
 	Global.dialog_open(false)
@@ -120,44 +124,28 @@ func _on_Reset_pressed():
 
 
 func _on_LoadMask_pressed() -> void:
-	if OS.get_name() == "HTML5":
-		Html5FileExchange.connect("image_loaded", self, "_on_html_image_loaded")
-		Html5FileExchange.load_image(false)
-	else:
-		$FileDialog.current_dir = Global.current_project.directory_path
-		$FileDialog.popup_centered()
-
-
-func _on_html_image_loaded(image_info: Dictionary):
-	if image_info.has("image"):
-		load_mask(image_info.image)
-		Html5FileExchange.disconnect("image_loaded", self, "_on_html_image_loaded")
-
-
-func _on_FileDialog_file_selected(path: String) -> void:
+	var frame_idx = Global.current_project.current_frame
+	var current_frame = Global.current_project.frames[frame_idx]
+	var tiles = Global.current_project.tiles
+	var size = tiles.tile_size
 	var image := Image.new()
-	var err := image.load(path)
-	if err != OK:  # An error occured
-		var file_name: String = path.get_file()
-		Global.error_dialog.set_text(
-			tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)]
-		)
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
-		return
-	if image.get_size() != Global.current_project.size:
-		Global.error_dialog.set_text(tr("The mask must have the same size as the project"))
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
-		return
-
-	load_mask(image)
+	image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+	Export.blend_layers(image, current_frame)
+	if image.get_used_rect().size == Vector2.ZERO:
+		reset_mask.disabled = true
+		tiles.reset_mask()
+	else:
+		load_mask(image)
+	update_preview()
 
 
 func load_mask(image: Image):
-	load_button.text = "Loaded"
+	reset_mask.disabled = false
 	Global.current_project.tiles.tile_mask = image
 	Global.current_project.tiles.has_mask = true
-	var tex := ImageTexture.new()
-	tex.create_from_image(Global.current_project.tiles.tile_mask)
-	mask_hint.texture = tex
+
+
+func _on_ResetMask_pressed() -> void:
+	reset_mask.disabled = true
+	Global.current_project.tiles.reset_mask()
+	update_preview()
