@@ -7,6 +7,7 @@ onready var y_basis_y_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsCon
 onready var preview_rect: Control = $VBoxContainer/AspectRatioContainer/Preview
 onready var tile_mode: Node2D = $VBoxContainer/AspectRatioContainer/Preview/TileMode
 onready var load_button: Button = $VBoxContainer/HBoxContainer/Mask/LoadMask
+onready var reset_mask: Button = $VBoxContainer/HBoxContainer/Mask/ResetMask
 onready var mask_hint: TextureRect = $VBoxContainer/HBoxContainer/Mask/MaskHint
 
 
@@ -37,9 +38,10 @@ func _on_TileModeOffsetsDialog_about_to_show() -> void:
 		$VBoxContainer/HBoxContainer/OptionsContainer/XBasisXLabel.visible = false
 		$VBoxContainer/HBoxContainer/OptionsContainer/XBasisYLabel.visible = false
 
-	var tex := ImageTexture.new()
-	tex.create_from_image(Global.current_project.tiles.tile_mask)
-	mask_hint.texture = tex
+	reset_mask.disabled = true
+	if Global.current_project.tiles.has_mask:
+		reset_mask.disabled = false
+
 	update_preview()
 
 
@@ -95,6 +97,11 @@ func update_preview() -> void:
 	tile_mode.update()
 	preview_rect.get_node("TransparentChecker").rect_size = preview_rect.rect_size
 
+	# Also update the tile_mask preview
+	var tex := ImageTexture.new()
+	tex.create_from_image(Global.current_project.tiles.tile_mask)
+	mask_hint.texture = tex
+
 
 func _on_TileModeOffsetsDialog_popup_hide() -> void:
 	Global.dialog_open(false)
@@ -125,17 +132,20 @@ func _on_LoadMask_pressed() -> void:
 	image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 	Export.blend_layers(image, current_frame)
 	if image.get_used_rect().size == Vector2.ZERO:
+		reset_mask.disabled = true
 		tiles.reset_mask()
-		var tex := ImageTexture.new()
-		tex.create_from_image(tiles.tile_mask)
-		mask_hint.texture = tex
 	else:
 		load_mask(image)
+	update_preview()
 
 
 func load_mask(image: Image):
+	reset_mask.disabled = false
 	Global.current_project.tiles.tile_mask = image
 	Global.current_project.tiles.has_mask = true
-	var tex := ImageTexture.new()
-	tex.create_from_image(Global.current_project.tiles.tile_mask)
-	mask_hint.texture = tex
+
+
+func _on_ResetMask_pressed() -> void:
+	reset_mask.disabled = true
+	Global.current_project.tiles.reset_mask()
+	update_preview()
