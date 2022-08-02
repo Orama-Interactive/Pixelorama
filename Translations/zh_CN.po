@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-08-02 09:55\n"
+"PO-Revision-Date: 2022-08-02 11:51\n"
 
 msgid "OK"
 msgstr "确定"
@@ -163,7 +163,7 @@ msgid "Rotate Image"
 msgstr "旋转图像"
 
 msgid "Clear"
-msgstr "清除"
+msgstr "取消选中"
 
 msgid "Invert"
 msgstr "反向"
