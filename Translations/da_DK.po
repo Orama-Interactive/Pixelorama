@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-08-02 19:07\n"
+"PO-Revision-Date: 2022-08-02 20:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -665,10 +665,10 @@ msgid "Transition size:"
 msgstr ""
 
 msgid "Center:"
-msgstr ""
+msgstr "Centrum:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Radius:"
 
 msgid "Dithering pattern:"
 msgstr ""
@@ -944,7 +944,7 @@ msgstr "Magic Wand\n\n"
 msgid "Lasso / Free Select Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Lasso / Fri Markering-Værktøj\n\n"
+msgstr "Lasso- / Fri Markering-Værktøj\n\n"
 "%s for venstre museknap\n"
 "%s for højre museknap"
 
@@ -1006,7 +1006,7 @@ msgstr "Spand\n\n"
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Skyggeværktøj\n\n"
+msgstr "Skyggelægningsværktøj\n\n"
 "%s for venstre museknap\n"
 "%s for højre museknap"
 
@@ -1121,7 +1121,7 @@ msgid "Grid type:"
 msgstr "Gitter-type:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr "Angiver typen af gitteret mellem rektangulær, isometrisk eller begge"
+msgstr "Indstiller typen af gitteret mellem rektangulær, isometrisk eller begge"
 
 msgid "Rectangular"
 msgstr "Rektangulær"
@@ -1136,13 +1136,13 @@ msgid "Rectangular grid width:"
 msgstr "Rektangulær gitter-bredde:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Angiver hvor langt fra hinanden vertikale linjer er i det rektangulære gitter"
+msgstr "Indstiller hvor langt fra hinanden vertikale linjer er i det rektangulære gitter"
 
 msgid "Rectangular grid height:"
 msgstr "Rektangulær gitter-højde:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Angiver hvor langt fra hinanden horisontale linjer er i det rektangulære gitter"
+msgstr "Indstiller hvor langt fra hinanden horisontale linjer er i det rektangulære gitter"
 
 msgid "Isometric cell bounds width:"
 msgstr ""
@@ -1256,16 +1256,16 @@ msgid "Add Extension"
 msgstr "Tilføj Udvidelse"
 
 msgid "Enable"
-msgstr ""
+msgstr "Aktivér"
 
 msgid "Disable"
-msgstr ""
+msgstr "Deaktivér"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Afinstallér"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Åbn Mappe"
 
 msgid "Brush:"
 msgstr "Pensel:"
@@ -1437,13 +1437,13 @@ msgid "How many frames per second should the animation preview be?\n"
 msgstr ""
 
 msgid "No loop"
-msgstr "Ingen loop"
+msgstr "Ingen løkke"
 
 msgid "Cycle loop"
 msgstr ""
 
 msgid "Ping-pong loop"
-msgstr ""
+msgstr "Ping-pong løkke"
 
 msgid "Onion Skinning:"
 msgstr ""
@@ -1495,10 +1495,10 @@ msgid "Show future frames:"
 msgstr ""
 
 msgid "Above canvas"
-msgstr ""
+msgstr "Over lærred"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "Under lærred"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
 msgstr ""
@@ -1558,7 +1558,7 @@ msgid "Merge current layer with the one below"
 msgstr "Sammenflet nuværende lag med det nedenfor"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Opacitet:"
 
 msgid "Tile mode opacity:"
 msgstr ""
@@ -1578,25 +1578,25 @@ msgstr "Aktivér/deaktivér celleforbinding\n\n"
 "Forbundne celler bliver delt på flere rammer"
 
 msgid "Palette"
-msgstr ""
+msgstr "Palet"
 
 msgid "Palettes"
-msgstr ""
+msgstr "Paletter"
 
 msgid "Add a new palette"
-msgstr ""
+msgstr "Tilføj en ny palet"
 
 msgid "Edit currently selected palette"
 msgstr ""
 
 msgid "Choose a palette"
-msgstr ""
+msgstr "Vælg en palet"
 
 msgid "Undo: Draw"
-msgstr "Fortryd: Penselstrøg"
+msgstr "Fortryd: Tegn"
 
 msgid "Redo: Draw"
-msgstr ""
+msgstr "Gentag: Tegn"
 
 msgid "Undo: Select"
 msgstr ""
@@ -1677,34 +1677,34 @@ msgid "Redo: Change frame duration"
 msgstr ""
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Flyt Guide"
 
 msgid "File saved"
-msgstr ""
+msgstr "Fil gemt"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Fil gemt automatisk"
 
 msgid "File failed to open. Error code %s"
-msgstr ""
+msgstr "Filen kunne ikke åbnes. Fejlkode %s"
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Filen kunne ikke gemmes. Fejlkode %s"
 
 msgid "File exported"
-msgstr ""
+msgstr "Fil eksporteret"
 
 msgid "New Empty Palette"
-msgstr ""
+msgstr "Ny Tom Palet"
 
 msgid "Import Palette"
-msgstr ""
+msgstr "Importér Palet"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Opret Palet Fra Nuværende Sprite"
 
 msgid "Palette Name:"
-msgstr ""
+msgstr "Paletnavn:"
 
 msgid "Color Name:"
 msgstr "Farvenavn:"
@@ -1719,7 +1719,7 @@ msgid "Error"
 msgstr "Fejl"
 
 msgid "Error: Palette must have a valid name."
-msgstr ""
+msgstr "Fejl: Palet skal have et gyldigt navn."
 
 msgid "Invalid Palette file!"
 msgstr ""
@@ -1755,16 +1755,16 @@ msgid "Don't show again"
 msgstr ""
 
 msgid "Image Options"
-msgstr ""
+msgstr "Billedindstillinger"
 
 msgid "Default width:"
-msgstr ""
+msgstr "Standardbredde:"
 
 msgid "A default width of a new image"
 msgstr ""
 
 msgid "Default height:"
-msgstr ""
+msgstr "Standardhøjde:"
 
 msgid "A default height of a new image"
 msgstr ""
@@ -1779,25 +1779,25 @@ msgid "Lock aspect ratio"
 msgstr ""
 
 msgid "Portrait"
-msgstr ""
+msgstr "Portræt"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Landskab"
 
 msgid "Templates:"
-msgstr ""
+msgstr "Skabeloner:"
 
 msgid "Preset"
-msgstr ""
+msgstr "Forudindstilling"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Forudindstilling:"
 
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 msgid "Custom"
-msgstr ""
+msgstr "Brugerdefineret"
 
 msgid "Rectangular Selection"
 msgstr ""
@@ -1815,37 +1815,37 @@ msgid "Magic Wand"
 msgstr ""
 
 msgid "Lasso / Free Select Tool"
-msgstr ""
+msgstr "Lasso- / Fri Markering-Værktøj"
 
 msgid "Move"
-msgstr ""
+msgstr "Flyt"
 
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 msgid "Pan"
 msgstr ""
 
 msgid "Color Picker"
-msgstr ""
+msgstr "Farvevælger"
 
 msgid "Pencil"
-msgstr ""
+msgstr "Blyant"
 
 msgid "Eraser"
-msgstr ""
+msgstr "Viskelæder"
 
 msgid "Bucket"
-msgstr ""
+msgstr "Spand"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Skyggelægning Værktøj"
 
 msgid "Line Tool"
-msgstr ""
+msgstr "Linjeværktøj"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "Rektangelværktøj"
 
 msgid "Ellipse Tool"
 msgstr ""
@@ -1863,13 +1863,13 @@ msgid "Already assigned"
 msgstr ""
 
 msgid "Left Tool:"
-msgstr ""
+msgstr "Venstre Værktøj:"
 
 msgid "A tool assigned to the left mouse button"
 msgstr ""
 
 msgid "Right Tool:"
-msgstr ""
+msgstr "Højre Værktøj:"
 
 msgid "A tool assigned to the right mouse button"
 msgstr ""
@@ -1914,13 +1914,13 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Luk"
 
 msgid "Delete"
-msgstr ""
+msgstr "Slet"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Kassér Alle"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
@@ -1936,28 +1936,28 @@ msgid "Are you sure you want to remove this palette? (Cannot be undone)"
 msgstr ""
 
 msgid "You can't remove more palettes!"
-msgstr ""
+msgstr "Du kan ikke fjerne flere paletter!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
+msgstr "Kan ikke fjerne paletten, fordi den ikke eksisterer!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr ""
+msgstr "Der opstod en fejl under fjernelse af paletten! Fejlkode: %s"
 
 msgid "and"
-msgstr ""
+msgstr "og"
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Flyt den markerede ramme til venstre."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Flyt den markerede ramme til højre."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Rammevarighed"
 
 msgid "Duration"
-msgstr ""
+msgstr "Varighed"
 
 msgid "Tiled In Both Axis"
 msgstr ""
@@ -1975,7 +1975,7 @@ msgid "Comment:"
 msgstr ""
 
 msgid "Empty"
-msgstr ""
+msgstr "Tom"
 
 msgid "From Current Palette"
 msgstr ""
@@ -2005,7 +2005,7 @@ msgid "Position:"
 msgstr ""
 
 msgid "Tools"
-msgstr ""
+msgstr "Værktøjer"
 
 msgid "Main Canvas"
 msgstr ""
@@ -2014,13 +2014,13 @@ msgid "Second Canvas"
 msgstr ""
 
 msgid "Animation Timeline"
-msgstr ""
+msgstr "Animationstidslinje"
 
 msgid "Canvas Preview"
-msgstr ""
+msgstr "Lærredforhåndsvisning"
 
 msgid "Color Pickers"
-msgstr ""
+msgstr "Farvevælgere"
 
 msgid "Global Tool Options"
 msgstr ""
