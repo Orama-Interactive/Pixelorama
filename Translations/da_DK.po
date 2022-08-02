@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-07-08 00:57\n"
+"PO-Revision-Date: 2022-08-02 19:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Vis"
 
 msgid "Window"
-msgstr ""
+msgstr "Vindue"
 
 msgid "Image"
 msgstr "Billede"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Eksportér"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Overskriv"
 
 msgid "Export..."
 msgstr "Eksportér..."
@@ -169,7 +169,7 @@ msgid "Invert"
 msgstr "Invertér"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Spejlbillede"
 
 msgid "Flip Horizontal"
 msgstr "Spejlvend Horisontalt"
@@ -187,34 +187,34 @@ msgid "Window Opacity"
 msgstr "Vindue Opacitet"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "Vinduesopacitet virker ikke i fuldskærmstilstand."
 
 msgid "Panel Layout"
 msgstr "Sidelayout"
 
 msgid "Panels"
-msgstr ""
+msgstr "Paneler"
 
 msgid "Layouts"
-msgstr ""
+msgstr "Layouts"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Flytbare Paneler"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Håndtér Layouts"
 
 msgid "Add"
-msgstr ""
+msgstr "Tilføj"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Tilføj Layout"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Redigér Layout"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Er du sikker på, at du vil slette dette layout?"
 
 msgid "Auto"
 msgstr "Auto"
@@ -265,7 +265,7 @@ msgid "Import as:"
 msgstr "Importér som:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "Anvend på alle"
 
 msgid "Recent projects"
 msgstr "Seneste projekter"
@@ -340,19 +340,19 @@ msgid "File %s already exists. Overwrite?"
 msgstr "Fil %s eksisterer allerede. Vil du overskrive?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Mappestien er ikke gyldig!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Filnavnet er ikke gyldigt!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Mappestien eller filnavnet er ikke gyldigt!"
 
 msgid "Exporting in progress..."
 msgstr "Eksport er i gang..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Kan ikke indlæse fil '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -361,7 +361,8 @@ msgstr "Kan ikke indlæse fil '%s'.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Kan ikke indlæse fil '%s'.\n"
+"Dette er ikke en gyldig palet-fil."
 
 msgid "Frame"
 msgstr "Ramme"
@@ -496,10 +497,10 @@ msgid "Performance"
 msgstr "Ydeevne"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Udvidelser"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Markører"
 
 msgid "Indicators"
 msgstr "Indikatorer"
@@ -568,10 +569,10 @@ msgid "Icon color:"
 msgstr "Ikonfarve:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Venstre værktøjsfarve:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Højre værktøjsfarve:"
 
 msgid "Tool button size:"
 msgstr "Værktøjsknap-størrelse:"
@@ -622,16 +623,16 @@ msgid "Outline"
 msgstr "Kontur"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Skyggeeffekt"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Forskydning X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Forskydning Y:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Skyggefarve:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Justér Nuance/Mætning/Værdi"
@@ -643,7 +644,7 @@ msgid "Gradient Map"
 msgstr ""
 
 msgid "Linear"
-msgstr ""
+msgstr "Lineær"
 
 msgid "Radial"
 msgstr ""
@@ -847,16 +848,16 @@ msgid "Ukrainian"
 msgstr "Ukrainsk"
 
 msgid "Danish"
-msgstr ""
+msgstr "Dansk"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Svensk"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Serbisk (Kyrillisk)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Hollandsk"
 
 msgid "Development Team"
 msgstr "Udviklingsteam"
@@ -921,7 +922,10 @@ msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "Polygonal Markering\n\n"
+"%s for venstre museknap\n"
+"%s for højre museknap\n\n"
+"Dobbeltklik for at forbinde det sidste punkt til startpunktet"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -969,7 +973,10 @@ msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "Farvevælger\n\n"
+"%s for venstre museknap\n"
+"%s for højre museknap\n\n"
+"Vælg en farve fra en pixel af spriten"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1096,7 +1103,7 @@ msgid "Use native mouse cursors"
 msgstr ""
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Brug krydsmarkør til lærredet"
 
 msgid "Guides"
 msgstr "Guider"
@@ -1246,7 +1253,7 @@ msgid "If this is toggled on, when the application's window loses focus, it gets
 msgstr ""
 
 msgid "Add Extension"
-msgstr ""
+msgstr "Tilføj Udvidelse"
 
 msgid "Enable"
 msgstr ""
