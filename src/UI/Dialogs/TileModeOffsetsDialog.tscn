@@ -18,29 +18,33 @@ script = ExtResource( 3 )
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 208.0
+margin_right = 293.0
 margin_bottom = 362.0
 
 [node name="TileModeOffsets" type="Label" parent="VBoxContainer"]
-margin_right = 200.0
+margin_right = 285.0
 margin_bottom = 14.0
 text = "Tile Mode Offsets"
 
-[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 18.0
-margin_right = 200.0
+margin_right = 285.0
 margin_bottom = 150.0
+
+[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 137.0
+margin_bottom = 132.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 2
 columns = 2
 
-[node name="XBasisXLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="XBasisXLabel" type="Label" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
 margin_top = 5.0
 margin_right = 61.0
 margin_bottom = 19.0
 text = "X-basis x:"
 
-[node name="XBasisX" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+[node name="XBasisX" type="SpinBox" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
 margin_left = 63.0
 margin_right = 137.0
 margin_bottom = 24.0
@@ -49,13 +53,13 @@ min_value = -16384.0
 max_value = 16384.0
 suffix = "px"
 
-[node name="XBasisYLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="XBasisYLabel" type="Label" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
 margin_top = 33.0
 margin_right = 61.0
 margin_bottom = 47.0
 text = "X-basis y:"
 
-[node name="XBasisY" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+[node name="XBasisY" type="SpinBox" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
 margin_left = 63.0
 margin_top = 28.0
 margin_right = 137.0
@@ -65,13 +69,13 @@ min_value = -16384.0
 max_value = 16384.0
 suffix = "px"
 
-[node name="YBasisXLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="YBasisXLabel" type="Label" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
 margin_top = 61.0
 margin_right = 61.0
 margin_bottom = 75.0
 text = "Y-basis x:"
 
-[node name="YBasisX" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+[node name="YBasisX" type="SpinBox" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
 margin_left = 63.0
 margin_top = 56.0
 margin_right = 137.0
@@ -81,13 +85,13 @@ min_value = -16384.0
 max_value = 16384.0
 suffix = "px"
 
-[node name="YBasisYLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="YBasisYLabel" type="Label" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
 margin_top = 89.0
 margin_right = 61.0
 margin_bottom = 103.0
 text = "Y-basis y:"
 
-[node name="YBasisY" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+[node name="YBasisY" type="SpinBox" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
 margin_left = 63.0
 margin_top = 84.0
 margin_right = 137.0
@@ -97,20 +101,67 @@ min_value = -16384.0
 max_value = 16384.0
 suffix = "px"
 
-[node name="Reset" type="Button" parent="VBoxContainer/OptionsContainer"]
+[node name="Reset" type="Button" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
 margin_top = 112.0
 margin_right = 61.0
 margin_bottom = 132.0
 text = "Reset"
 
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+margin_left = 141.0
+margin_right = 145.0
+margin_bottom = 132.0
+
+[node name="Mask" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 149.0
+margin_right = 285.0
+margin_bottom = 132.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Mask"]
+margin_right = 136.0
+margin_bottom = 14.0
+text = "Tile Mask"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer/Mask"]
+margin_top = 18.0
+margin_right = 136.0
+margin_bottom = 22.0
+
+[node name="MaskHint" type="TextureRect" parent="VBoxContainer/HBoxContainer/Mask"]
+margin_top = 26.0
+margin_right = 136.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 136, 74 )
+size_flags_vertical = 3
+expand = true
+stretch_mode = 6
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/HBoxContainer/Mask"]
+margin_top = 104.0
+margin_right = 136.0
+margin_bottom = 108.0
+
+[node name="LoadMask" type="Button" parent="VBoxContainer/HBoxContainer/Mask"]
+margin_top = 112.0
+margin_right = 136.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 100, 0 )
+hint_tooltip = "Mask will only allow the drawing to remain within it's bounds
+(Used for custom tiles)"
+text = "Load Mask"
+clip_text = true
+
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
 margin_top = 154.0
-margin_right = 200.0
+margin_right = 285.0
 margin_bottom = 354.0
 size_flags_vertical = 3
 
 [node name="Preview" type="Control" parent="VBoxContainer/AspectRatioContainer"]
-margin_right = 200.0
+margin_left = 42.5
+margin_right = 242.5
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
 
@@ -125,12 +176,31 @@ anchor_bottom = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
 
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 293.0
+margin_bottom = 362.0
+rect_min_size = Vector2( 172, 60.2 )
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.png ; PNG Image" )
+current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-Tile-mode-Fixes"
+current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-Tile-mode-Fixes/"
+__meta__ = {
+"_editor_description_": ""
+}
+
 [connection signal="about_to_show" from="." to="." method="_on_TileModeOffsetsDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_TileModeOffsetsDialog_confirmed"]
 [connection signal="item_rect_changed" from="." to="." method="_on_TileModeOffsetsDialog_item_rect_changed"]
 [connection signal="popup_hide" from="." to="." method="_on_TileModeOffsetsDialog_popup_hide"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/XBasisX" to="." method="_on_XBasisX_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/XBasisY" to="." method="_on_XBasisY_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/YBasisX" to="." method="_on_YBasisX_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/YBasisY" to="." method="_on_YBasisY_value_changed"]
-[connection signal="pressed" from="VBoxContainer/OptionsContainer/Reset" to="." method="_on_Reset_pressed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/OptionsContainer/XBasisX" to="." method="_on_XBasisX_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/OptionsContainer/XBasisY" to="." method="_on_XBasisY_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/OptionsContainer/YBasisX" to="." method="_on_YBasisX_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/OptionsContainer/YBasisY" to="." method="_on_YBasisY_value_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/OptionsContainer/Reset" to="." method="_on_Reset_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Mask/LoadMask" to="." method="_on_LoadMask_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

@@ -145,7 +145,7 @@ func draw_start(position: Vector2) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	if (
 		!Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn()
-		or Global.current_project.tiles.get_nearest_tile(position).position != Vector2.ZERO
+		or !Rect2(Vector2.ZERO, Global.current_project.size).has_point(position)
 	):
 		return
 	if (

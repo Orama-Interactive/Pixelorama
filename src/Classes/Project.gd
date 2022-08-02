@@ -347,6 +347,10 @@ func serialize() -> Dictionary:
 	for brush in brushes:
 		brush_data.append({"size_x": brush.get_size().x, "size_y": brush.get_size().y})
 
+	var tile_mask_data := {
+		"size_x": tiles.tile_mask.get_size().x, "size_y": tiles.tile_mask.get_size().y
+	}
+
 	var metadata := _serialize_metadata(self)
 
 	var project_data := {
@@ -354,6 +358,8 @@ func serialize() -> Dictionary:
 		"name": name,
 		"size_x": size.x,
 		"size_y": size.y,
+		"has_mask": tiles.has_mask,
+		"tile_mask": tile_mask_data,
 		"tile_mode_x_basis_x": tiles.x_basis.x,
 		"tile_mode_x_basis_y": tiles.x_basis.y,
 		"tile_mode_y_basis_x": tiles.y_basis.x,
@@ -383,6 +389,8 @@ func deserialize(dict: Dictionary) -> void:
 		size.y = dict.size_y
 		tiles.tile_size = size
 		selection_bitmap = resize_bitmap(selection_bitmap, size)
+	if dict.has("has_mask"):
+		tiles.has_mask = dict.has_mask
 	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
 		tiles.x_basis.x = dict.tile_mode_x_basis_x
 		tiles.x_basis.y = dict.tile_mode_x_basis_y
@@ -494,6 +502,7 @@ func _size_changed(value: Vector2) -> void:
 	else:
 		tiles.y_basis = Vector2(0, value.y)
 	tiles.tile_size = value
+	tiles.reset_mask()
 	size = value
 
 
@@ -760,7 +769,7 @@ func can_pixel_get_drawn(
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
 		return false
 
-	if tiles.mode != Tiles.MODE.NONE and tiles.get_nearest_tile(pixel).position != Vector2.ZERO:
+	if tiles.mode != Tiles.MODE.NONE and !tiles.has_point(pixel):
 		return false
 
 	if has_selection:

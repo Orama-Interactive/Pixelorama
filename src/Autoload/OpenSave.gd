@@ -125,6 +125,17 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 				new_project.brushes.append(image)
 				Brushes.add_project_brush(image)
 
+		if dict.result.has("tile_mask") and dict.result.has("has_mask"):
+			if dict.result.has_mask:
+				var t_width = dict.result.tile_mask.size_x
+				var t_height = dict.result.tile_mask.size_y
+				var buffer := file.get_buffer(t_width * t_height * 4)
+				var image := Image.new()
+				image.create_from_data(t_width, t_height, false, Image.FORMAT_RGBA8, buffer)
+				new_project.tiles.tile_mask = image
+			else:
+				new_project.tiles.reset_mask()
+
 	file.close()
 	if !empty_project:
 		Global.projects.append(new_project)
@@ -350,6 +361,9 @@ func save_pxo_file(
 
 	for brush in project.brushes:
 		file.store_buffer(brush.get_data())
+
+	if project.tiles.has_mask:
+		file.store_buffer(project.tiles.tile_mask.get_data())
 
 	file.close()
 
