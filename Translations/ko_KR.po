@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-07-11 02:52\n"
+"PO-Revision-Date: 2022-08-03 09:54\n"
 
 msgid "OK"
 msgstr "예"
@@ -187,7 +187,7 @@ msgid "Window Opacity"
 msgstr "창 불투명도"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "전체 화면 모드에서는 창 불투명도가 작동되지 않습니다."
 
 msgid "Panel Layout"
 msgstr "레이아웃 배치"
@@ -641,7 +641,7 @@ msgid "Gradient"
 msgstr "그레디언트"
 
 msgid "Gradient Map"
-msgstr ""
+msgstr "그레이디언트 맵"
 
 msgid "Linear"
 msgstr "선형"
