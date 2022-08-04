@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-08-04 08:00\n"
+"PO-Revision-Date: 2022-08-04 10:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -647,13 +647,13 @@ msgid "Linear"
 msgstr "Lineær"
 
 msgid "Radial"
-msgstr ""
+msgstr "Radial"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Lineært Trin"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Radialt Trin"
 
 msgid "Linear Dithering"
 msgstr ""
@@ -662,7 +662,7 @@ msgid "Radial Dithering"
 msgstr ""
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Overgangsstørrelse:"
 
 msgid "Center:"
 msgstr "Centrum:"
@@ -1021,7 +1021,7 @@ msgstr "Linjeværktøj\n\n"
 "%s for højre museknap\n\n"
 "Hold %s for at fastgøre linjens vinkel\n"
 "Hold %s for at centrere formen på oprindelsespunktet af klikket\n"
-"Hold %s for at fortrænge formens oprindelsespunkt"
+"Hold %s for at fortrænge formens begyndelsespunkt"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1034,7 +1034,7 @@ msgstr "Rektangel-værktøj\n\n"
 "%s for højre museknap\n\n"
 "Hold %s for at oprette en 1:1 form\n"
 "Hold %s for at centrere formen på oprindelsespunktet af klikket\n"
-"Hold %s for at fortrænge formens oprindelsespunkt"
+"Hold %s for at fortrænge formens begyndelsespunkt"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -1047,7 +1047,7 @@ msgstr "Ellipse Tool\n\n"
 "%s for højre museknap\n\n"
 "Hold %s for at oprette en 1:1 form\n"
 "Hold %s for at centrere formen på oprindelsespunktet af klikket\n"
-"Hold %s for at fortrænge formens oprindelsespunkt"
+"Hold %s for at fortrænge formens begyndelsespunkt"
 
 msgid "Rectangle"
 msgstr "Rektangel"
@@ -1157,22 +1157,22 @@ msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Gitterforskydning x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Indstiller gitterets x-forskydning fra lærredets begyndelsespunkt (øverste venstre hjørne af billedet)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Gitterforskydning y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Indstiller gitterets y-forskydning fra lærredets begyndelsespunkt (øverste venstre hjørne af billedet)"
 
 msgid "Draw over Tile Mode:"
 msgstr ""
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Hvis deaktiveret, gitteret vil kun blive tegnet over det oprindelige billede"
 
 msgid "Grid color:"
 msgstr "Gitterfarve:"
@@ -1543,16 +1543,16 @@ msgid "Create a new layer"
 msgstr "Opret et nyt lag"
 
 msgid "Remove current layer"
-msgstr ""
+msgstr "Fjern nuværende lag"
 
 msgid "Move up the current layer"
-msgstr ""
+msgstr "Flyt det nuværende lag op"
 
 msgid "Move down the current layer"
-msgstr ""
+msgstr "Flyt det nuværende lag ned"
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "Klon nuværende lag"
 
 msgid "Merge current layer with the one below"
 msgstr "Sammenflet nuværende lag med det nedenfor"
@@ -1722,37 +1722,37 @@ msgid "Error: Palette must have a valid name."
 msgstr "Fejl: Palet skal have et gyldigt navn."
 
 msgid "Invalid Palette file!"
-msgstr ""
+msgstr "Ugyldig Paletfil!"
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Redigér Palet"
 
 msgid "Create colors with alpha component"
 msgstr ""
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Hent kun farver fra markering"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Hent farver fra"
 
 msgid "Patrons:"
-msgstr ""
+msgstr "Patrons:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr ""
 
 msgid "Become a Platinum Sponsor"
-msgstr ""
+msgstr "Bliv en Platinsponsor"
 
 msgid "Become a Gold Sponsor"
-msgstr ""
+msgstr "Bliv en Guldsponsor"
 
 msgid "Become a Patron"
-msgstr ""
+msgstr "Bliv en Patron"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "Vis ikke igen"
 
 msgid "Image Options"
 msgstr "Billedindstillinger"
@@ -1905,7 +1905,7 @@ msgid "Autosave interval:"
 msgstr ""
 
 msgid "minute(s)"
-msgstr ""
+msgstr "minut(ter)"
 
 msgid "Create new directory for each frame tag"
 msgstr ""
@@ -1969,10 +1969,10 @@ msgid "Tiled In Y Axis"
 msgstr ""
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Opret en ny palet"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Kommentar:"
 
 msgid "Empty"
 msgstr "Tom"
@@ -1987,7 +1987,7 @@ msgid "From Current Selection"
 msgstr ""
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Tilføj en ny farve"
 
 msgid "Remove a selected color"
 msgstr "Fjern en valgt farve"
@@ -2002,16 +2002,16 @@ msgid "Reducing palette size will reset positions of colors. Colors that don't f
 msgstr ""
 
 msgid "Position:"
-msgstr ""
+msgstr "Position:"
 
 msgid "Tools"
 msgstr "Værktøjer"
 
 msgid "Main Canvas"
-msgstr ""
+msgstr "Primære Lærred"
 
 msgid "Second Canvas"
-msgstr ""
+msgstr "Sekundære Lærred"
 
 msgid "Animation Timeline"
 msgstr "Animationstidslinje"
