@@ -11,6 +11,7 @@ var active_cursor: GradientCursor  # Showing a color picker popup to change a cu
 
 onready var x_offset: float = rect_size.x - GradientCursor.WIDTH
 onready var gradient: Gradient = texture.gradient
+onready var color_picker: ColorPicker = $Popup.get_node("ColorPicker")
 
 
 class GradientCursor:
@@ -132,8 +133,11 @@ func add_cursor(x: float, color: Color) -> void:
 
 func select_color(cursor: GradientCursor, position: Vector2) -> void:
 	active_cursor = cursor
-	var color_picker = $Popup.get_node("ColorPicker")
 	color_picker.color = cursor.color
+	if position.x > rect_global_position.x + (rect_size.x / 2.0):
+		position.x = rect_global_position.x + rect_size.x
+	else:
+		position.x = rect_global_position.x - $Popup.rect_size.x
 	$Popup.rect_position = position
 	$Popup.popup()
 
