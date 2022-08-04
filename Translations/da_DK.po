@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-08-02 20:14\n"
+"PO-Revision-Date: 2022-08-04 08:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1241,7 +1241,7 @@ msgid "Only custom preset can be modified"
 msgstr ""
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Indstil applikationens FPS-grænse:"
 
 msgid "Pause application when it loses focus"
 msgstr ""
@@ -1540,7 +1540,7 @@ msgid "Layers"
 msgstr "Lag"
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "Opret et nyt lag"
 
 msgid "Remove current layer"
 msgstr ""
