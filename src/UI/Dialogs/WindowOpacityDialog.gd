@@ -38,6 +38,8 @@ func set_window_opacity(value: float) -> void:
 			var point = container.get_rect().position + (container.get_rect().size / 2.0)
 			if main_canvas.get_rect().has_point(point):
 				container.self_modulate.a = value
+			else:
+				container.self_modulate.a = 1.0
 	Global.transparent_checker.transparency(value)
 
 
