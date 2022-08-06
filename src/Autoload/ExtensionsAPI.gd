@@ -192,8 +192,22 @@ func add_theme(theme: Theme) -> void:
 	themes.add_theme(theme)
 
 
+func find_theme(theme :Theme) -> int:
+	var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
+	return themes.themes.find(theme)
+
+
 func get_theme() -> Theme:
 	return Global.control.theme
+
+
+func set_theme(idx: int) -> int:
+	var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
+	if idx >= 0 and idx < themes.themes.size():
+		themes.buttons_container.get_child(idx).emit_signal("pressed")
+		return OK
+	else:
+		return -1
 
 
 func remove_theme(theme: Theme) -> void:
