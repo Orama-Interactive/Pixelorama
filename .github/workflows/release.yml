@@ -207,7 +207,7 @@ jobs:
         run: |
           apt-get update && apt-get install -y rsync
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.4.0
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           folder: build/web # The folder the action should deploy.
