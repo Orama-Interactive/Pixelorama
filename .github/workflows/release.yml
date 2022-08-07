@@ -207,11 +207,10 @@ jobs:
         run: |
           apt-get update && apt-get install -y rsync
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@4.4.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: build/web # The folder the action should deploy.
+          token: ${{ secrets.GITHUB_TOKEN }}
+          folder: build/web # The folder the action should deploy.
       - name: Upload Release Assets to itch.io 🎮
         run: |
           butler push ./build/web ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:web --userversion ${{env.TAG}}

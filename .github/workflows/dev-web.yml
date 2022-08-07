@@ -29,9 +29,8 @@ jobs:
         run: |
           apt-get update && apt-get install -y rsync
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@4.4.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: build/web # The folder the action should deploy.
-          TARGET_FOLDER: early_access
+          token: ${{ secrets.GITHUB_TOKEN }}
+          folder: build/web # The folder the action should deploy.
+          target-folder: early_access
