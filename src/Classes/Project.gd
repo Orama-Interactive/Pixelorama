@@ -163,16 +163,16 @@ func change_project() -> void:
 			cel_button.frame = j
 			cel_button.layer = i
 			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-			if j == current_frame and i == current_layer:
-				cel_button.pressed = true
+			cel_button.pressed = j == current_frame and i == current_layer
 
 			layer_cel_container.add_child(cel_button)
 
-	for j in range(frames.size()):  # Create frame ID labels
+	for j in range(frames.size()):  # Create frame buttons
 		var button: Button = frame_button_node.instance()
 		button.frame = j
 		button.rect_min_size.x = Global.animation_timeline.cel_size
 		button.text = str(j + 1)
+		button.pressed = j == current_frame
 		Global.frame_ids.add_child(button)
 
 	var layer_button = Global.layers_container.get_child(
