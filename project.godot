@@ -175,7 +175,6 @@ config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/custom_user_dir_name.X11="pixelorama"
-run/low_processor_mode.Android=false
 config/Version="v0.10.2-dev"
 
 [audio]
