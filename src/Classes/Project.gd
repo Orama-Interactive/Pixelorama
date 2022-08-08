@@ -173,10 +173,6 @@ func change_project() -> void:
 		button.frame = j
 		button.rect_min_size.x = Global.animation_timeline.cel_size
 		button.text = str(j + 1)
-		if j == current_frame:
-			button.add_color_override(
-				"font_color", Global.control.theme.get_color("Selected Color", "Label")
-			)
 		Global.frame_ids.add_child(button)
 
 	var layer_button = Global.layers_container.get_child(
