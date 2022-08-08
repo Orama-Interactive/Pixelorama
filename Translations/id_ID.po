@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-07-30 10:04\n"
+"PO-Revision-Date: 2022-08-08 23:15\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -465,6 +465,9 @@ msgstr "\"Cubic\""
 
 msgid "Trilinear"
 msgstr "\"Trilinear\""
+
+msgid "Constant"
+msgstr ""
 
 msgid "General"
 msgstr "Umum"
