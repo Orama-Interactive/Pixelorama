@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-08-08 12:05\n"
+"PO-Revision-Date: 2022-08-08 13:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,7 +169,7 @@ msgid "Invert"
 msgstr "Invertir"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Reflejar Imagen"
 
 msgid "Flip Horizontal"
 msgstr "Voltear Horizontalmente"
@@ -181,13 +181,13 @@ msgid "Preferences"
 msgstr "Preferencias"
 
 msgid "Tile Mode"
-msgstr "Modo mosaico"
+msgstr "Modo Mosaico"
 
 msgid "Window Opacity"
 msgstr "Opacidad de Ventana"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "La opacidad de la ventana no funciona en el modo pantalla completa."
 
 msgid "Panel Layout"
 msgstr "Diseño del Panel"
@@ -199,22 +199,22 @@ msgid "Layouts"
 msgstr "Diseños"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Paneles Móviles"
 
 msgid "Manage Layouts"
 msgstr "Gestionar Diseños"
 
 msgid "Add"
-msgstr ""
+msgstr "Añadir"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Añadir Vista"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Editar Vista"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "¿Seguro que quieres eliminar esta vista?"
 
 msgid "Auto"
 msgstr "Auto"
@@ -265,7 +265,7 @@ msgid "Import as:"
 msgstr "Importar como:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "Aplicar a todo"
 
 msgid "Recent projects"
 msgstr "Proyectos recientes"
@@ -340,13 +340,13 @@ msgid "File %s already exists. Overwrite?"
 msgstr "El archivo \"%s\" ya existe. ¿Desea sobreescribir?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "¡Ruta de directorio no válida!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "¡Nombre de archivo no válido!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "¡La ruta del directorio y el nombre de archivo no son válidos!"
 
 msgid "Exporting in progress..."
 msgstr "Exportación en progreso..."
@@ -569,10 +569,10 @@ msgid "Icon color:"
 msgstr "Color del icono:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Color de la herramienta izquierda:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Color de la herramienta derecha:"
 
 msgid "Tool button size:"
 msgstr "Tamaño de boton de herramienta:"
@@ -623,16 +623,16 @@ msgid "Outline"
 msgstr "Silueta"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Sombra Paralela"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Desplazamiento X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Desplazamiento Y:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Color de la sombra:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajustar Matiz/Saturación/Valor"
@@ -641,37 +641,37 @@ msgid "Gradient"
 msgstr "Gradiente"
 
 msgid "Gradient Map"
-msgstr ""
+msgstr "Mapa de degradado"
 
 msgid "Linear"
-msgstr ""
+msgstr "Lineal"
 
 msgid "Radial"
-msgstr ""
+msgstr "Radial"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Lineal por pasos"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Radial por pasos"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "Degradado Lineal"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "Degradado Radial"
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Tamaño de transición:"
 
 msgid "Center:"
-msgstr ""
+msgstr "Centro:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Radio:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Patrón del degradado:"
 
 msgid "Adjust HSV"
 msgstr "Ajustar HSV"
@@ -848,16 +848,16 @@ msgid "Ukrainian"
 msgstr "Ucraniano"
 
 msgid "Danish"
-msgstr ""
+msgstr "Danés"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Sueco"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Serbio (Cirílico)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Holandés"
 
 msgid "Development Team"
 msgstr "Equipo de desarrollo"
@@ -922,7 +922,10 @@ msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "Selección poligonal\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón\n\n"
+"Haga doble clic para conectar el último punto al punto inicial"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -970,7 +973,10 @@ msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "Selector de Color\n\n"
+"%s para el botón izquierdo del ratón\n"
+"%s para el botón derecho del ratón\n\n"
+"Seleccione un color de un píxel del sprite"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1920,7 +1926,7 @@ msgid "Delete"
 msgstr "Borrar"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Descartar Todo"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
@@ -2006,29 +2012,29 @@ msgid "Position:"
 msgstr "Posición:"
 
 msgid "Tools"
-msgstr ""
+msgstr "Herramientas"
 
 msgid "Main Canvas"
-msgstr ""
+msgstr "Lienzo Principal"
 
 msgid "Second Canvas"
-msgstr ""
+msgstr "Lienzo Secundario"
 
 msgid "Animation Timeline"
-msgstr ""
+msgstr "Timeline de Animación"
 
 msgid "Canvas Preview"
-msgstr ""
+msgstr "Previsualizar Lienzo"
 
 msgid "Color Pickers"
-msgstr ""
+msgstr "Selectores de Color"
 
 msgid "Global Tool Options"
-msgstr ""
+msgstr "Opciones de Herramienta Globales"
 
 msgid "Left Tool Options"
-msgstr ""
+msgstr "Opciones de Herramienta Izquierda"
 
 msgid "Right Tool Options"
-msgstr ""
+msgstr "Opciones de Herramienta Derecha"
 
