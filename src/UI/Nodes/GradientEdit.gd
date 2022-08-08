@@ -2,7 +2,7 @@
 # gdlint: ignore=max-line-length
 # https://github.com/RodZill4/material-maker/blob/master/material_maker/widgets/gradient_editor/gradient_editor.gd
 class_name GradientEditNode
-extends TextureRect
+extends Control
 
 signal updated(gradient, cc)
 
@@ -10,6 +10,8 @@ var continuous_change := true
 var active_cursor: GradientCursor  # Showing a color picker popup to change a cursor's color
 
 onready var x_offset: float = rect_size.x - GradientCursor.WIDTH
+onready var texture_rect: TextureRect = $TextureRect
+onready var texture: Texture = $TextureRect.texture
 onready var gradient: Gradient = texture.gradient
 onready var color_picker: ColorPicker = $Popup.get_node("ColorPicker")
 
@@ -20,7 +22,10 @@ class GradientCursor:
 	const WIDTH := 10
 	var color: Color
 	var sliding := false
-	onready var label: Label = get_parent().get_node("Value")
+
+	onready var parent: TextureRect = get_parent()
+	onready var grand_parent: Container = parent.get_parent()
+	onready var label: Label = parent.get_node("Value")
 
 	func _ready() -> void:
 		rect_position = Vector2(0, 15)
@@ -47,20 +52,19 @@ class GradientCursor:
 		if ev is InputEventMouseButton:
 			if ev.button_index == BUTTON_LEFT:
 				if ev.doubleclick:
-					get_parent().select_color(self, ev.global_position)
+					grand_parent.select_color(self, ev.global_position)
 				elif ev.pressed:
-					get_parent().continuous_change = false
+					grand_parent.continuous_change = false
 					sliding = true
 					label.visible = true
 					label.text = "%.03f" % get_cursor_position()
 				else:
 					sliding = false
 					label.visible = false
-			elif ev.button_index == BUTTON_RIGHT and get_parent().get_sorted_cursors().size() > 2:
-				var parent = get_parent()
+			elif ev.button_index == BUTTON_RIGHT and grand_parent.get_sorted_cursors().size() > 2:
 				parent.remove_child(self)
-				parent.continuous_change = false
-				parent.update_from_value()
+				grand_parent.continuous_change = false
+				grand_parent.update_from_value()
 				queue_free()
 		elif ev is InputEventMouseMotion and (ev.button_mask & BUTTON_MASK_LEFT) != 0 and sliding:
 			rect_position.x += get_local_mouse_position().x
@@ -68,18 +72,18 @@ class GradientCursor:
 				rect_position.x = (
 					round(get_cursor_position() * 20.0)
 					* 0.05
-					* (get_parent().rect_size.x - WIDTH)
+					* (parent.rect_size.x - WIDTH)
 				)
-			rect_position.x = min(max(0, rect_position.x), get_parent().rect_size.x - rect_size.x)
-			get_parent().update_from_value()
+			rect_position.x = min(max(0, rect_position.x), parent.rect_size.x - rect_size.x)
+			grand_parent.update_from_value()
 			label.text = "%.03f" % get_cursor_position()
 
 	func get_cursor_position() -> float:
-		return rect_position.x / (get_parent().rect_size.x - WIDTH)
+		return rect_position.x / (parent.rect_size.x - WIDTH)
 
 	func set_color(c: Color) -> void:
 		color = c
-		get_parent().update_from_value()
+		grand_parent.update_from_value()
 		update()
 
 	static func sort(a, b) -> bool:
@@ -97,9 +101,9 @@ func _ready() -> void:
 
 
 func create_cursors() -> void:
-	for c in get_children():
+	for c in texture_rect.get_children():
 		if c is GradientCursor:
-			remove_child(c)
+			texture_rect.remove_child(c)
 			c.queue_free()
 	for i in gradient.get_point_count():
 		var p: float = gradient.get_offset(i)
@@ -116,7 +120,7 @@ func _gui_input(ev: InputEvent) -> void:
 
 func update_from_value() -> void:
 	gradient.offsets = []
-	for c in get_children():
+	for c in texture_rect.get_children():
 		if c is GradientCursor:
 			var point: float = c.rect_position.x / x_offset
 			gradient.add_point(point, c.color)
@@ -126,7 +130,7 @@ func update_from_value() -> void:
 
 func add_cursor(x: float, color: Color) -> void:
 	var cursor := GradientCursor.new()
-	add_child(cursor)
+	texture_rect.add_child(cursor)
 	cursor.rect_position.x = x
 	cursor.color = color
 
@@ -144,7 +148,7 @@ func select_color(cursor: GradientCursor, position: Vector2) -> void:
 
 func get_sorted_cursors() -> Array:
 	var array := []
-	for c in get_children():
+	for c in texture_rect.get_children():
 		if c is GradientCursor:
 			array.append(c)
 	array.sort_custom(GradientCursor, "sort")
@@ -164,3 +168,7 @@ func _on_GradientEdit_resized() -> void:
 		return
 	x_offset = rect_size.x - GradientCursor.WIDTH
 	create_cursors()
+
+
+func _on_InterpolationOptionButton_item_selected(index: int) -> void:
+	gradient.interpolation_mode = index

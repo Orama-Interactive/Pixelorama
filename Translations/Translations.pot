@@ -453,6 +453,9 @@ msgstr ""
 msgid "Trilinear"
 msgstr ""
 
+msgid "Constant"
+msgstr ""
+
 msgid "General"
 msgstr ""
 

@@ -44,7 +44,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/Frame.gd"
 }, {
-"base": "TextureRect",
+"base": "Control",
 "class": "GradientEditNode",
 "language": "GDScript",
 "path": "res://src/UI/Nodes/GradientEdit.gd"
