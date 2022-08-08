@@ -66,7 +66,7 @@ func draw_start(position: Vector2) -> void:
 	if (
 		offsetted_pos.x >= 0
 		and offsetted_pos.y >= 0
-		and project.selection_bitmap.get_bit(offsetted_pos)
+		and project.selection_map.is_pixel_selected(offsetted_pos)
 		and (!_add and !_subtract and !_intersect or quick_copy)
 		and !_ongoing_selection
 	):
@@ -81,14 +81,15 @@ func draw_start(position: Vector2) -> void:
 					image.blit_rect_mask(
 						selection_node.preview_image,
 						selection_node.preview_image,
-						Rect2(Vector2.ZERO, project.selection_bitmap.get_size()),
+						Rect2(Vector2.ZERO, project.selection_map.get_size()),
 						selection_node.big_bounding_rectangle.position
 					)
 
-				var selected_bitmap_copy = project.selection_bitmap.duplicate()
-				project.move_bitmap_values(selected_bitmap_copy)
+				var selection_map_copy := SelectionMap.new()
+				selection_map_copy.copy_from(project.selection_map)
+				selection_map_copy.move_bitmap_values(project)
 
-				project.selection_bitmap = selected_bitmap_copy
+				project.selection_map = selection_map_copy
 				selection_node.commit_undo("Move Selection", selection_node.undo_data)
 				selection_node.undo_data = selection_node.get_undo_data(true)
 			else:
@@ -98,7 +99,7 @@ func draw_start(position: Vector2) -> void:
 					image.blit_rect_mask(
 						selection_node.preview_image,
 						selection_node.preview_image,
-						Rect2(Vector2.ZERO, project.selection_bitmap.get_size()),
+						Rect2(Vector2.ZERO, project.selection_map.get_size()),
 						selection_node.big_bounding_rectangle.position
 					)
 				Global.canvas.update_selected_cels_textures()
@@ -190,10 +191,11 @@ func _on_XSpinBox_value_changed(value: float) -> void:
 	timer.start()
 	selection_node.big_bounding_rectangle.position.x = value
 
-	var selection_bitmap_copy: BitMap = project.selection_bitmap.duplicate()
-	project.move_bitmap_values(selection_bitmap_copy)
-	project.selection_bitmap = selection_bitmap_copy
-	project.selection_bitmap_changed()
+	var selection_map_copy := SelectionMap.new()
+	selection_map_copy.copy_from(project.selection_map)
+	selection_map_copy.move_bitmap_values(project)
+	project.selection_map = selection_map_copy
+	project.selection_map_changed()
 
 
 func _on_YSpinBox_value_changed(value: float) -> void:
@@ -205,10 +207,11 @@ func _on_YSpinBox_value_changed(value: float) -> void:
 	timer.start()
 	selection_node.big_bounding_rectangle.position.y = value
 
-	var selection_bitmap_copy: BitMap = project.selection_bitmap.duplicate()
-	project.move_bitmap_values(selection_bitmap_copy)
-	project.selection_bitmap = selection_bitmap_copy
-	project.selection_bitmap_changed()
+	var selection_map_copy := SelectionMap.new()
+	selection_map_copy.copy_from(project.selection_map)
+	selection_map_copy.move_bitmap_values(project)
+	project.selection_map = selection_map_copy
+	project.selection_map_changed()
 
 
 func _on_WSpinBox_value_changed(value: float) -> void:
@@ -243,9 +246,9 @@ func _on_HSpinBox_value_changed(value: float) -> void:
 
 func resize_selection() -> void:
 	var project: Project = Global.current_project
-	var bitmap: BitMap = project.selection_bitmap
+	var image: SelectionMap = project.selection_map
 	if selection_node.is_moving_content:
-		bitmap = selection_node.original_bitmap
+		image = selection_node.original_bitmap
 		var preview_image: Image = selection_node.preview_image
 		preview_image.copy_from(selection_node.original_preview_image)
 		preview_image.resize(
@@ -255,12 +258,13 @@ func resize_selection() -> void:
 		)
 		selection_node.preview_image_texture.create_from_image(preview_image, 0)
 
-	var selection_bitmap_copy: BitMap = project.selection_bitmap.duplicate()
-	selection_bitmap_copy = project.resize_bitmap_values(
-		bitmap, selection_node.big_bounding_rectangle.size, false, false
+	var selection_map_copy := SelectionMap.new()
+	selection_map_copy.copy_from(image)
+	selection_map_copy.resize_bitmap_values(
+		project, selection_node.big_bounding_rectangle.size, false, false
 	)
-	project.selection_bitmap = selection_bitmap_copy
-	project.selection_bitmap_changed()
+	project.selection_map = selection_map_copy
+	project.selection_map_changed()
 
 
 func _on_Timer_timeout() -> void:

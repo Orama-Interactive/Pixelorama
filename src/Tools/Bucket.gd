@@ -181,7 +181,7 @@ func fill_in_color(position: Vector2) -> void:
 		var selection: Image
 		var selection_tex := ImageTexture.new()
 		if project.has_selection:
-			selection = project.bitmap_to_image(project.selection_bitmap)
+			selection = project.selection_map
 		else:
 			selection = Image.new()
 			selection.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)

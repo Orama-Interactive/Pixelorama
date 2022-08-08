@@ -1,5 +1,27 @@
 extends SelectionTool
 
+var shader: Shader = preload("res://src/Shaders/ColorSelect.gdshader")
+var _similarity := 100
+
+
+func get_config() -> Dictionary:
+	return {"similarity": _similarity}
+
+
+func set_config(config: Dictionary) -> void:
+	_similarity = config.get("similarity", _similarity)
+
+
+func update_config() -> void:
+	$Similarity/SimilaritySpinBox.value = _similarity
+	$Similarity/SimilaritySlider.value = _similarity
+
+
+func _on_Similarity_value_changed(value: float) -> void:
+	_similarity = value
+	update_config()
+	save_config()
+
 
 func apply_selection(position: Vector2) -> void:
 	var project: Project = Global.current_project
@@ -8,30 +30,28 @@ func apply_selection(position: Vector2) -> void:
 	if position.x > project.size.x - 1 or position.y > project.size.y - 1:
 		return
 
-	if !_add and !_subtract and !_intersect:
-		Global.canvas.selection.clear_selection()
-
-	var selection_bitmap_copy: BitMap = project.selection_bitmap.duplicate()
-	if _intersect:
-		var full_rect = Rect2(Vector2.ZERO, selection_bitmap_copy.get_size())
-		selection_bitmap_copy.set_bit_rect(full_rect, false)
-
 	var cel_image := Image.new()
 	cel_image.copy_from(_get_draw_image())
 	cel_image.lock()
 	var color := cel_image.get_pixelv(position)
-	for x in cel_image.get_width():
-		for y in cel_image.get_height():
-			var pos := Vector2(x, y)
-			if color.is_equal_approx(cel_image.get_pixelv(pos)):
-				if _intersect:
-					selection_bitmap_copy.set_bit(pos, project.selection_bitmap.get_bit(pos))
-				else:
-					selection_bitmap_copy.set_bit(pos, !_subtract)
-
 	cel_image.unlock()
-	project.selection_bitmap = selection_bitmap_copy
-	Global.canvas.selection.big_bounding_rectangle = project.get_selection_rectangle(
-		project.selection_bitmap
-	)
+	var operation := 0
+	if _subtract:
+		operation = 1
+	elif _intersect:
+		operation = 2
+
+	var params := {"color": color, "similarity_percent": _similarity, "operation": operation}
+	if _add or _subtract or _intersect:
+		var selection_tex := ImageTexture.new()
+		selection_tex.create_from_image(project.selection_map, 0)
+		params["selection"] = selection_tex
+	var gen := ShaderImageEffect.new()
+	gen.generate_image(cel_image, shader, params, project.size)
+	cel_image.convert(Image.FORMAT_LA8)
+
+	var selection_map_copy := SelectionMap.new()
+	selection_map_copy.copy_from(cel_image)
+	project.selection_map = selection_map_copy
+	Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	Global.canvas.selection.commit_undo("Select", undo_data)

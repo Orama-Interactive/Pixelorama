@@ -397,7 +397,7 @@ func remove_unselected_parts_of_brush(brush: Image, dst: Vector2) -> Image:
 	for x in size.x:
 		for y in size.y:
 			var pos := Vector2(x, y) + dst
-			if !project.selection_bitmap.get_bit(pos):
+			if !project.selection_map.is_pixel_selected(pos):
 				new_brush.set_pixel(x, y, Color(0))
 	new_brush.unlock()
 	return new_brush

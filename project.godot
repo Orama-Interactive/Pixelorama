@@ -104,6 +104,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/Project.gd"
 }, {
+"base": "Image",
+"class": "SelectionMap",
+"language": "GDScript",
+"path": "res://src/Classes/SelectionMap.gd"
+}, {
 "base": "BaseTool",
 "class": "SelectionTool",
 "language": "GDScript",
@@ -149,6 +154,7 @@ _global_script_class_icons={
 "PaletteSwatch": "",
 "Patterns": "",
 "Project": "",
+"SelectionMap": "",
 "SelectionTool": "",
 "ShaderImageEffect": "",
 "ShortcutProfile": "",

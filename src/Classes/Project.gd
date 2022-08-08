@@ -25,7 +25,7 @@ var y_symmetry_point
 var x_symmetry_axis := SymmetryGuide.new()
 var y_symmetry_axis := SymmetryGuide.new()
 
-var selection_bitmap := BitMap.new()
+var selection_map := SelectionMap.new()
 # This is useful for when the selection is outside of the canvas boundaries,
 # on the left and/or above (negative coords)
 var selection_offset := Vector2.ZERO setget _selection_offset_changed
@@ -55,7 +55,7 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	name = _name
 	size = _size
 	tiles = Tiles.new(size)
-	selection_bitmap.create(size)
+	selection_map.create(size.x, size.y, false, Image.FORMAT_LA8)
 
 	Global.tabs.add_tab(name)
 	OpenSave.current_save_paths.append("")
@@ -118,13 +118,11 @@ func new_empty_frame() -> Frame:
 	return frame
 
 
-func selection_bitmap_changed() -> void:
-	var image := Image.new()
+func selection_map_changed() -> void:
 	var image_texture := ImageTexture.new()
-	has_selection = selection_bitmap.get_true_bit_count() > 0
+	has_selection = !selection_map.is_invisible()
 	if has_selection:
-		image = bitmap_to_image(selection_bitmap)
-		image_texture.create_from_image(image, 0)
+		image_texture.create_from_image(selection_map, 0)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
 	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
 
@@ -261,8 +259,8 @@ func change_project() -> void:
 
 	# Change selection effect & bounding rectangle
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset
-	selection_bitmap_changed()
-	Global.canvas.selection.big_bounding_rectangle = get_selection_rectangle()
+	selection_map_changed()
+	Global.canvas.selection.big_bounding_rectangle = selection_map.get_used_rect()
 	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
 	Global.canvas.selection.update()
 	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
@@ -388,7 +386,7 @@ func deserialize(dict: Dictionary) -> void:
 		size.x = dict.size_x
 		size.y = dict.size_y
 		tiles.tile_size = size
-		selection_bitmap = resize_bitmap(selection_bitmap, size)
+		selection_map.crop(size.x, size.y)
 	if dict.has("has_mask"):
 		tiles.has_mask = dict.has_mask
 	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
@@ -763,7 +761,7 @@ func duplicate_layers() -> Array:
 
 func can_pixel_get_drawn(
 	pixel: Vector2,
-	bitmap: BitMap = selection_bitmap,
+	image: SelectionMap = selection_map,
 	selection_position: Vector2 = Global.canvas.selection.big_bounding_rectangle.position
 ) -> bool:
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
@@ -777,152 +775,6 @@ func can_pixel_get_drawn(
 			pixel.x -= selection_position.x
 		if selection_position.y < 0:
 			pixel.y -= selection_position.y
-		return bitmap.get_bit(pixel)
+		return image.is_pixel_selected(pixel)
 	else:
 		return true
-
-
-func invert_bitmap(bitmap: BitMap) -> void:
-	for x in bitmap.get_size().x:
-		for y in bitmap.get_size().y:
-			var pos := Vector2(x, y)
-			bitmap.set_bit(pos, !bitmap.get_bit(pos))
-
-
-# Unexposed BitMap class function
-# https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L605
-func resize_bitmap(bitmap: BitMap, new_size: Vector2) -> BitMap:
-	if new_size == bitmap.get_size():
-		return bitmap
-	var new_bitmap := BitMap.new()
-	new_bitmap.create(new_size)
-	var lw = min(bitmap.get_size().x, new_size.x)
-	var lh = min(bitmap.get_size().y, new_size.y)
-	for x in lw:
-		for y in lh:
-			new_bitmap.set_bit(Vector2(x, y), bitmap.get_bit(Vector2(x, y)))
-
-	return new_bitmap
-
-
-# Unexposed BitMap class function
-# https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L622
-func bitmap_to_image(bitmap: BitMap) -> Image:
-	var image := Image.new()
-	var width := bitmap.get_size().x
-	var height := bitmap.get_size().y
-	image.create(width, height, false, Image.FORMAT_LA8)
-	image.lock()
-	for x in width:
-		for y in height:
-			var pos := Vector2(x, y)
-			var color = Color(1, 1, 1, 1) if bitmap.get_bit(pos) else Color(0, 0, 0, 0)
-			image.set_pixelv(pos, color)
-	image.unlock()
-	return image
-
-
-# Algorithm taken from Image.get_used_rect()
-# https://github.com/godotengine/godot/blob/master/core/io/image.cpp
-func get_selection_rectangle(bitmap: BitMap = selection_bitmap) -> Rect2:
-	if bitmap.get_true_bit_count() == 0:
-		return Rect2()
-
-	var minx := 0xFFFFFF
-	var miny := 0xFFFFFF
-	var maxx := -1
-	var maxy := -1
-	for j in bitmap.get_size().y:
-		for i in bitmap.get_size().x:
-			if !bitmap.get_bit(Vector2(i, j)):
-				continue
-			if i > maxx:
-				maxx = i
-			if j > maxy:
-				maxy = j
-			if i < minx:
-				minx = i
-			if j < miny:
-				miny = j
-
-	if maxx == -1:
-		return Rect2()
-	else:
-		return Rect2(minx, miny, maxx - minx + 1, maxy - miny + 1)
-
-
-func move_bitmap_values(bitmap: BitMap, move_offset := true) -> void:
-	var selection_node = Global.canvas.selection
-	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position
-	var selection_end: Vector2 = selection_node.big_bounding_rectangle.end
-
-	var image: Image = bitmap_to_image(bitmap)
-	var selection_rect := image.get_used_rect()
-	var smaller_image := image.get_rect(selection_rect)
-	image.fill(Color(0))
-	var dst := selection_position
-	var x_diff = selection_end.x - size.x
-	var y_diff = selection_end.y - size.y
-	var nw = max(size.x, size.x + x_diff)
-	var nh = max(size.y, size.y + y_diff)
-
-	if selection_position.x < 0:
-		nw -= selection_position.x
-		if move_offset:
-			self.selection_offset.x = selection_position.x
-		dst.x = 0
-	else:
-		if move_offset:
-			self.selection_offset.x = 0
-	if selection_position.y < 0:
-		nh -= selection_position.y
-		if move_offset:
-			self.selection_offset.y = selection_position.y
-		dst.y = 0
-	else:
-		if move_offset:
-			self.selection_offset.y = 0
-
-	if nw <= image.get_size().x:
-		nw = image.get_size().x
-	if nh <= image.get_size().y:
-		nh = image.get_size().y
-
-	image.crop(nw, nh)
-	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, Vector2(nw, nh)), dst)
-	bitmap.create_from_image_alpha(image)
-
-
-func resize_bitmap_values(bitmap: BitMap, new_size: Vector2, flip_x: bool, flip_y: bool) -> BitMap:
-	var selection_node = Global.canvas.selection
-	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position
-	var dst := selection_position
-	var new_bitmap_size := size
-	new_bitmap_size.x = max(size.x, abs(selection_position.x) + new_size.x)
-	new_bitmap_size.y = max(size.y, abs(selection_position.y) + new_size.y)
-	var new_bitmap := BitMap.new()
-	var image: Image = bitmap_to_image(bitmap)
-	var selection_rect := image.get_used_rect()
-	var smaller_image := image.get_rect(selection_rect)
-	if selection_position.x <= 0:
-		self.selection_offset.x = selection_position.x
-		dst.x = 0
-	else:
-		self.selection_offset.x = 0
-	if selection_position.y <= 0:
-		self.selection_offset.y = selection_position.y
-		dst.y = 0
-	else:
-		self.selection_offset.y = 0
-	image.fill(Color(0))
-	smaller_image.resize(new_size.x, new_size.y, Image.INTERPOLATE_NEAREST)
-	if flip_x:
-		smaller_image.flip_x()
-	if flip_y:
-		smaller_image.flip_y()
-	if new_bitmap_size != size:
-		image.crop(new_bitmap_size.x, new_bitmap_size.y)
-	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, new_bitmap_size), dst)
-	new_bitmap.create_from_image_alpha(image)
-
-	return new_bitmap
