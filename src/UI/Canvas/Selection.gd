@@ -782,12 +782,16 @@ func delete(selected_cels := true) -> void:
 	else:
 		images = [project.frames[project.current_frame].cels[project.current_layer].image]
 
-	for x in big_bounding_rectangle.size.x:
-		for y in big_bounding_rectangle.size.y:
-			var pos := Vector2(x, y) + big_bounding_rectangle.position
-			if project.can_pixel_get_drawn(pos):
-				for image in images:
-					image.set_pixelv(pos, Color(0))
+	var blank := Image.new()
+	blank.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	var selection_map_copy := SelectionMap.new()
+	selection_map_copy.copy_from(project.selection_map)
+	# In case the selection map is bigger than the canvas
+	selection_map_copy.crop(project.size.x, project.size.y)
+	for image in images:
+		image.blit_rect_mask(
+			blank, selection_map_copy, big_bounding_rectangle, big_bounding_rectangle.position
+		)
 	commit_undo("Draw", undo_data_tmp)
 
 
