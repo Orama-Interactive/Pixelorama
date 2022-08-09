@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-07-08 00:57\n"
+"PO-Revision-Date: 2022-08-08 23:15\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -464,6 +464,9 @@ msgstr "Kübik"
 
 msgid "Trilinear"
 msgstr "Üç çizgili"
+
+msgid "Constant"
+msgstr ""
 
 msgid "General"
 msgstr "Genel"
