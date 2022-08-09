@@ -2,13 +2,6 @@
 
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.204595, 0.1247, 0.29, 1 )
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 6.0
 content_margin_right = 6.0
@@ -844,13 +837,6 @@ flags = 0
 image = SubResource( 201 )
 size = Vector2( 12, 12 )
 
-[sub_resource type="StyleBoxFlat" id=97]
-content_margin_left = 6.0
-content_margin_right = 6.0
-content_margin_top = 4.0
-content_margin_bottom = 4.0
-bg_color = Color( 0.04202, 0.0252, 0.06, 1 )
-
 [sub_resource type="StyleBoxFlat" id=98]
 content_margin_left = 6.0
 content_margin_right = 6.0
@@ -1019,6 +1005,13 @@ shadow_color = Color( 0, 0, 0, 0.3 )
 shadow_size = 4
 
 [sub_resource type="StyleBoxEmpty" id=118]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.204595, 0.1247, 0.29, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="Image" id=207]
 data = {
@@ -1247,6 +1240,13 @@ border_color = Color( 1, 1, 1, 1 )
 shadow_color = Color( 0, 0, 0, 0.3 )
 shadow_size = 4
 
+[sub_resource type="StyleBoxFlat" id=97]
+content_margin_left = 6.0
+content_margin_right = 6.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color( 0.04202, 0.0252, 0.06, 1 )
+
 [sub_resource type="Image" id=218]
 data = {
 "data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 0, 255, 255, 255, 84, 255, 255, 255, 108, 255, 255, 255, 11, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 11, 255, 255, 255, 108, 255, 255, 255, 84, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 0, 255, 255, 255, 100, 255, 255, 255, 150, 255, 255, 255, 123, 255, 255, 255, 11, 255, 255, 255, 11, 255, 255, 255, 123, 255, 255, 255, 150, 255, 255, 255, 100, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 0, 255, 255, 255, 12, 255, 255, 255, 123, 255, 255, 255, 150, 255, 255, 255, 122, 255, 255, 255, 122, 255, 255, 255, 150, 255, 255, 255, 123, 255, 255, 255, 12, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 0, 255, 255, 255, 12, 255, 255, 255, 123, 255, 255, 255, 150, 255, 255, 255, 150, 255, 255, 255, 123, 255, 255, 255, 12, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 0, 255, 255, 255, 12, 255, 255, 255, 109, 255, 255, 255, 108, 255, 255, 255, 12, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
@@ -1468,7 +1468,6 @@ Button/colors/font_color_hover = Color( 0.879412, 0.868235, 0.892353, 1 )
 Button/colors/font_color_pressed = Color( 0.662745, 0, 1, 1 )
 Button/colors/icon_color_hover = Color( 1.15, 1.15, 1.15, 1 )
 Button/colors/icon_color_pressed = Color( 0.762157, 0, 1.15, 1 )
-Button/styles/Ruler = SubResource( 1 )
 Button/styles/disabled = SubResource( 2 )
 Button/styles/focus = SubResource( 3 )
 Button/styles/hover = SubResource( 4 )
@@ -1636,7 +1635,6 @@ OptionButton/styles/focus = SubResource( 3 )
 OptionButton/styles/hover = SubResource( 4 )
 OptionButton/styles/normal = SubResource( 5 )
 OptionButton/styles/pressed = SubResource( 6 )
-Panel/styles/TopMenu = SubResource( 97 )
 Panel/styles/panel = SubResource( 98 )
 PanelContainer/styles/panel = SubResource( 99 )
 PopupDialog/styles/panel = SubResource( 100 )
@@ -1674,6 +1672,11 @@ RichTextLabel/constants/shadow_offset_x = 1
 RichTextLabel/constants/shadow_offset_y = 1
 RichTextLabel/styles/focus = SubResource( 118 )
 RichTextLabel/styles/normal = SubResource( 47 )
+RulerButton/base_type = "Button"
+RulerButton/styles/focus = SubResource( 1 )
+RulerButton/styles/hover = SubResource( 1 )
+RulerButton/styles/normal = SubResource( 1 )
+RulerButton/styles/pressed = SubResource( 1 )
 SpinBox/icons/updown = SubResource( 120 )
 TabContainer/colors/font_color_bg = Color( 1, 1, 1, 0.3 )
 TabContainer/colors/font_color_fg = Color( 0.79902, 0.780392, 0.820588, 1 )
@@ -1722,6 +1725,8 @@ ToolButton/styles/pressed = SubResource( 22 )
 TooltipLabel/colors/font_color = Color( 0.20098, 0.219608, 0.179412, 1 )
 TooltipLabel/colors/font_color_shadow = Color( 0, 0, 0, 0.1 )
 TooltipPanel/styles/panel = SubResource( 145 )
+TopMenuPanel/base_type = "Panel"
+TopMenuPanel/styles/panel = SubResource( 97 )
 Tree/colors/custom_button_font_highlight = Color( 0.879412, 0.868235, 0.892353, 1 )
 Tree/colors/drop_position_color = Color( 0.662745, 0, 1, 1 )
 Tree/colors/font_color = Color( 0.79902, 0.780392, 0.820588, 1 )

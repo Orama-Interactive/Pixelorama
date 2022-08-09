@@ -2,13 +2,6 @@
 
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.54, 0.43668, 0.3186, 1 )
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 6.0
 content_margin_right = 6.0
@@ -850,9 +843,6 @@ flags = 0
 image = SubResource( 202 )
 size = Vector2( 12, 12 )
 
-[sub_resource type="StyleBoxFlat" id=98]
-bg_color = Color( 0.709804, 0.517647, 0.188235, 1 )
-
 [sub_resource type="StyleBoxFlat" id=99]
 content_margin_left = 6.0
 content_margin_right = 6.0
@@ -1021,6 +1011,13 @@ shadow_color = Color( 0, 0, 0, 0.1 )
 shadow_size = 4
 
 [sub_resource type="StyleBoxEmpty" id=119]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.54, 0.43668, 0.3186, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="Image" id=208]
 data = {
@@ -1262,6 +1259,9 @@ border_color = Color( 0, 0, 0, 1 )
 shadow_color = Color( 0, 0, 0, 0.1 )
 shadow_size = 4
 
+[sub_resource type="StyleBoxFlat" id=98]
+bg_color = Color( 0.709804, 0.517647, 0.188235, 1 )
+
 [sub_resource type="Image" id=219]
 data = {
 "data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 30, 0, 30, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 30, 0, 30, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 30, 0, 62, 62, 62, 98, 62, 62, 62, 109, 46, 46, 46, 12, 0, 0, 0, 0, 0, 0, 0, 0, 46, 46, 46, 12, 62, 62, 62, 109, 62, 62, 62, 98, 30, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 31, 31, 0, 63, 63, 63, 109, 64, 64, 64, 150, 64, 64, 64, 123, 47, 47, 47, 12, 47, 47, 47, 12, 64, 64, 64, 123, 64, 64, 64, 150, 63, 63, 63, 109, 31, 31, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 46, 46, 46, 13, 64, 64, 64, 124, 64, 64, 64, 150, 64, 64, 64, 123, 64, 64, 64, 123, 64, 64, 64, 150, 64, 64, 64, 124, 46, 46, 46, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 49, 49, 13, 64, 64, 64, 124, 64, 64, 64, 150, 64, 64, 64, 150, 64, 64, 64, 124, 49, 49, 49, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 48, 48, 13, 64, 64, 64, 115, 64, 64, 64, 115, 48, 48, 48, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 32, 32, 0, 32, 32, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
@@ -1478,7 +1478,6 @@ Button/colors/icon_color_hover = Color( 1.45, 1.45, 1.45, 1 )
 Button/colors/icon_color_pressed = Color( 3.5, 2.86863, 0.0137255, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = ExtResource( 1 )
-Button/styles/Ruler = SubResource( 1 )
 Button/styles/disabled = SubResource( 2 )
 Button/styles/focus = SubResource( 3 )
 Button/styles/hover = SubResource( 4 )
@@ -1678,10 +1677,7 @@ OptionButton/styles/focus = SubResource( 3 )
 OptionButton/styles/hover = SubResource( 4 )
 OptionButton/styles/normal = SubResource( 5 )
 OptionButton/styles/pressed = SubResource( 6 )
-Panel/styles/TopMenu = SubResource( 98 )
 Panel/styles/panel = SubResource( 99 )
-Panel/styles/panelf = null
-Panel/styles/panelnc = null
 PanelContainer/styles/panel = SubResource( 100 )
 PopupDialog/styles/panel = SubResource( 101 )
 PopupMenu/colors/font_color = Color( 0.237305, 0.193295, 0.141827, 1 )
@@ -1721,6 +1717,11 @@ RichTextLabel/constants/shadow_offset_x = 1
 RichTextLabel/constants/shadow_offset_y = 1
 RichTextLabel/styles/focus = SubResource( 119 )
 RichTextLabel/styles/normal = SubResource( 49 )
+RulerButton/base_type = "Button"
+RulerButton/styles/focus = SubResource( 1 )
+RulerButton/styles/hover = SubResource( 1 )
+RulerButton/styles/normal = SubResource( 1 )
+RulerButton/styles/pressed = SubResource( 1 )
 SpinBox/icons/updown = SubResource( 121 )
 TabContainer/colors/font_color_bg = Color( 0, 0, 0, 0.3 )
 TabContainer/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
@@ -1807,6 +1808,8 @@ ToolButton/styles/pressed = SubResource( 23 )
 TooltipLabel/colors/font_color = Color( 0.762695, 0.806705, 0.858173, 1 )
 TooltipLabel/colors/font_color_shadow = Color( 1, 1, 1, 0.1 )
 TooltipPanel/styles/panel = SubResource( 147 )
+TopMenuPanel/base_type = "Panel"
+TopMenuPanel/styles/panel = SubResource( 98 )
 Tree/colors/cursor_color = Color( 0, 0, 0, 1 )
 Tree/colors/custom_button_font_highlight = Color( 0.142383, 0.115977, 0.085096, 1 )
 Tree/colors/drop_position_color = Color( 1, 0.819608, 0.00392157, 1 )

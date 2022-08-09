@@ -250,6 +250,7 @@ margin_bottom = 58.0
 rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
 mouse_default_cursor_shape = 14
+theme_type_variation = "RulerButton"
 action_mode = 0
 script = ExtResource( 6 )
 
@@ -269,6 +270,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 15
 size_flags_horizontal = 0
 size_flags_vertical = 3
+theme_type_variation = "RulerButton"
 action_mode = 0
 script = ExtResource( 4 )
 

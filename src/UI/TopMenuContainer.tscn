@@ -6,6 +6,7 @@
 margin_right = 1280.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
+theme_type_variation = "TopMenuPanel"
 script = ExtResource( 2 )
 
 [node name="MenuItems" type="HBoxContainer" parent="."]

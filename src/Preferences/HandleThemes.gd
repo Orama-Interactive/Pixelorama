@@ -95,19 +95,6 @@ func change_theme(id: int) -> void:
 	var lbpc_stylebox: StyleBoxFlat = layer_button_pcont.get_stylebox("panel", "PanelContainer")
 	lbpc_stylebox.bg_color = clear_color
 
-	# Will no longer be needed when Godot 3.5 is out
-	var top_menu_style: StyleBox = theme.get_stylebox("TopMenu", "Panel")
-	var ruler_style: StyleBox = theme.get_stylebox("Ruler", "Button")
-	Global.top_menu_container.add_stylebox_override("panel", top_menu_style)
-	Global.horizontal_ruler.add_stylebox_override("normal", ruler_style)
-	Global.horizontal_ruler.add_stylebox_override("pressed", ruler_style)
-	Global.horizontal_ruler.add_stylebox_override("hover", ruler_style)
-	Global.horizontal_ruler.add_stylebox_override("focus", ruler_style)
-	Global.vertical_ruler.add_stylebox_override("normal", ruler_style)
-	Global.vertical_ruler.add_stylebox_override("pressed", ruler_style)
-	Global.vertical_ruler.add_stylebox_override("hover", ruler_style)
-	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
-
 	change_icon_colors()
 
 	for child in Global.preferences_dialog.get_node("Popups").get_children():
