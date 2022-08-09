@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-08-03 09:54\n"
+"PO-Revision-Date: 2022-08-09 00:13\n"
 
 msgid "OK"
 msgstr "예"
@@ -465,6 +465,9 @@ msgstr "Cubic"
 
 msgid "Trilinear"
 msgstr "Trilinear"
+
+msgid "Constant"
+msgstr ""
 
 msgid "General"
 msgstr "일반적"
