@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-08-09 00:12\n"
+"PO-Revision-Date: 2022-08-09 12:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -467,7 +467,7 @@ msgid "Trilinear"
 msgstr "Triliniară"
 
 msgid "Constant"
-msgstr ""
+msgstr "Constantă"
 
 msgid "General"
 msgstr "General"
