@@ -495,11 +495,8 @@ func dialog_open(open: bool) -> void:
 	else:
 		can_draw = true
 
-	control.get_node("ModulateTween").interpolate_property(
-		control, "modulate", control.modulate, dim_color, 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT
-	)
-
-	control.get_node("ModulateTween").start()
+	var tween := create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+	tween.tween_property(control, "modulate", dim_color, 0.1)
 
 
 func disable_button(button: BaseButton, disable: bool) -> void:
