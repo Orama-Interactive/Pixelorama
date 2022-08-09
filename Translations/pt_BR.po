@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-07-08 09:04\n"
+"PO-Revision-Date: 2022-08-09 00:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -465,6 +465,9 @@ msgstr "Cúbica"
 
 msgid "Trilinear"
 msgstr "Trilinear"
+
+msgid "Constant"
+msgstr ""
 
 msgid "General"
 msgstr "Geral"
