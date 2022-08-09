@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-08-09 00:13\n"
+"PO-Revision-Date: 2022-08-09 04:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -467,7 +467,7 @@ msgid "Trilinear"
 msgstr "トライリニア"
 
 msgid "Constant"
-msgstr ""
+msgstr "固定"
 
 msgid "General"
 msgstr "一般"
