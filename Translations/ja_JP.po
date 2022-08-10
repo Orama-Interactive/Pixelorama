@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-08-09 04:29\n"
+"PO-Revision-Date: 2022-08-10 22:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -162,11 +162,26 @@ msgstr "画像を中央に"
 msgid "Rotate Image"
 msgstr "画像を回転"
 
+msgid "Pivot (x, y):"
+msgstr ""
+
+msgid "Smear options:"
+msgstr ""
+
+msgid "Tolerance::"
+msgstr ""
+
+msgid "Initial angle:"
+msgstr ""
+
 msgid "Clear"
 msgstr "削除"
 
 msgid "Invert"
 msgstr "反転"
+
+msgid "Grayscale View"
+msgstr ""
 
 msgid "Mirror Image"
 msgstr "ミラー画像"
@@ -182,6 +197,33 @@ msgstr "設定"
 
 msgid "Tile Mode"
 msgstr "タイルモード"
+
+msgid "Tile Mode Offsets"
+msgstr ""
+
+msgid "X-basis x:"
+msgstr ""
+
+msgid "X-basis y:"
+msgstr ""
+
+msgid "Y-basis x:"
+msgstr ""
+
+msgid "Y-basis y:"
+msgstr ""
+
+msgid "Tile Mask"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Use Current Frame"
+msgstr ""
+
+msgid "Reset Mask"
+msgstr ""
 
 msgid "Window Opacity"
 msgstr "ウィンドウ不透明度"
@@ -270,11 +312,11 @@ msgstr "すべてに適用"
 msgid "Recent projects"
 msgstr "最近のプロジェクト"
 
-msgid "New tab"
-msgstr "新しいタブ"
+msgid "New project"
+msgstr ""
 
-msgid "Spritesheet (new tab)"
-msgstr "スプライトシート（新規タブ）"
+msgid "Spritesheet (new project)"
+msgstr ""
 
 msgid "Spritesheet (new layer)"
 msgstr "スプライトシート (新規レイヤー)"
