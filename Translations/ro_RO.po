@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-08-09 12:17\n"
+"PO-Revision-Date: 2022-08-10 22:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -162,11 +162,26 @@ msgstr "Centralizare imagine"
 msgid "Rotate Image"
 msgstr "Rotire imagine"
 
+msgid "Pivot (x, y):"
+msgstr ""
+
+msgid "Smear options:"
+msgstr ""
+
+msgid "Tolerance::"
+msgstr ""
+
+msgid "Initial angle:"
+msgstr ""
+
 msgid "Clear"
 msgstr "Ștergere"
 
 msgid "Invert"
 msgstr "Inversare"
+
+msgid "Grayscale View"
+msgstr ""
 
 msgid "Mirror Image"
 msgstr "Oglindire imagine"
@@ -182,6 +197,33 @@ msgstr "Preferințe"
 
 msgid "Tile Mode"
 msgstr "Mod mozaic"
+
+msgid "Tile Mode Offsets"
+msgstr ""
+
+msgid "X-basis x:"
+msgstr ""
+
+msgid "X-basis y:"
+msgstr ""
+
+msgid "Y-basis x:"
+msgstr ""
+
+msgid "Y-basis y:"
+msgstr ""
+
+msgid "Tile Mask"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Use Current Frame"
+msgstr ""
+
+msgid "Reset Mask"
+msgstr ""
 
 msgid "Window Opacity"
 msgstr "Opacitatea ferestrei"
@@ -270,11 +312,11 @@ msgstr "Aplicare la toate"
 msgid "Recent projects"
 msgstr "Proiecte recente"
 
-msgid "New tab"
-msgstr "Filă nouă"
+msgid "New project"
+msgstr ""
 
-msgid "Spritesheet (new tab)"
-msgstr "Foaie cu grafice bidimensionale (filă nouă)"
+msgid "Spritesheet (new project)"
+msgstr ""
 
 msgid "Spritesheet (new layer)"
 msgstr "Foaie cu grafice bidimensionale (strat nou)"
