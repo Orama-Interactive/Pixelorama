@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-08-09 00:13\n"
+"PO-Revision-Date: 2022-08-10 22:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -162,11 +162,26 @@ msgstr "Centralisér Billede"
 msgid "Rotate Image"
 msgstr "Rotér Billede"
 
+msgid "Pivot (x, y):"
+msgstr ""
+
+msgid "Smear options:"
+msgstr ""
+
+msgid "Tolerance::"
+msgstr ""
+
+msgid "Initial angle:"
+msgstr ""
+
 msgid "Clear"
 msgstr "Ryd"
 
 msgid "Invert"
 msgstr "Invertér"
+
+msgid "Grayscale View"
+msgstr ""
 
 msgid "Mirror Image"
 msgstr "Spejlbillede"
@@ -182,6 +197,33 @@ msgstr "Præferencer"
 
 msgid "Tile Mode"
 msgstr "Felt-tilstand"
+
+msgid "Tile Mode Offsets"
+msgstr ""
+
+msgid "X-basis x:"
+msgstr ""
+
+msgid "X-basis y:"
+msgstr ""
+
+msgid "Y-basis x:"
+msgstr ""
+
+msgid "Y-basis y:"
+msgstr ""
+
+msgid "Tile Mask"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Use Current Frame"
+msgstr ""
+
+msgid "Reset Mask"
+msgstr ""
 
 msgid "Window Opacity"
 msgstr "Vindue Opacitet"
@@ -270,11 +312,11 @@ msgstr "Anvend på alle"
 msgid "Recent projects"
 msgstr "Seneste projekter"
 
-msgid "New tab"
-msgstr "Ny fane"
+msgid "New project"
+msgstr ""
 
-msgid "Spritesheet (new tab)"
-msgstr "Spritesheet (ny fane)"
+msgid "Spritesheet (new project)"
+msgstr ""
 
 msgid "Spritesheet (new layer)"
 msgstr "Spritesheet (nyt lag)"
