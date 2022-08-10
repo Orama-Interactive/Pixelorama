@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-08-09 00:13\n"
+"PO-Revision-Date: 2022-08-10 22:41\n"
 
 msgid "OK"
 msgstr "예"
@@ -162,11 +162,26 @@ msgstr "이미지 중앙 집중화"
 msgid "Rotate Image"
 msgstr "이미지 회전"
 
+msgid "Pivot (x, y):"
+msgstr ""
+
+msgid "Smear options:"
+msgstr ""
+
+msgid "Tolerance::"
+msgstr ""
+
+msgid "Initial angle:"
+msgstr ""
+
 msgid "Clear"
 msgstr "초기화"
 
 msgid "Invert"
 msgstr "반전"
+
+msgid "Grayscale View"
+msgstr ""
 
 msgid "Mirror Image"
 msgstr "미러 이미지"
@@ -182,6 +197,33 @@ msgstr "환경설정"
 
 msgid "Tile Mode"
 msgstr "타일 모드"
+
+msgid "Tile Mode Offsets"
+msgstr ""
+
+msgid "X-basis x:"
+msgstr ""
+
+msgid "X-basis y:"
+msgstr ""
+
+msgid "Y-basis x:"
+msgstr ""
+
+msgid "Y-basis y:"
+msgstr ""
+
+msgid "Tile Mask"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Use Current Frame"
+msgstr ""
+
+msgid "Reset Mask"
+msgstr ""
 
 msgid "Window Opacity"
 msgstr "창 불투명도"
@@ -270,11 +312,11 @@ msgstr "모두 적용"
 msgid "Recent projects"
 msgstr "최근 프로잭트"
 
-msgid "New tab"
-msgstr "새 창"
+msgid "New project"
+msgstr ""
 
-msgid "Spritesheet (new tab)"
-msgstr "스프레드시트 (새 탭)"
+msgid "Spritesheet (new project)"
+msgstr ""
 
 msgid "Spritesheet (new layer)"
 msgstr "스프레드시트 (새 레이어)"
