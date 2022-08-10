@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-08-10 23:47\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -163,16 +163,16 @@ msgid "Rotate Image"
 msgstr "Περιστροφή Εικόνας"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "Άξονας (x, y):"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Επιλογές μουτζούρας:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Ανοχή:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Αρχική γωνία:"
 
 msgid "Clear"
 msgstr "Εκκαθάριση"
@@ -181,7 +181,7 @@ msgid "Invert"
 msgstr "Αντιστροφή"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Προβολή σε κλίμακα γκρι"
 
 msgid "Mirror Image"
 msgstr "Αναστροφή Εικόνας"
@@ -199,31 +199,31 @@ msgid "Tile Mode"
 msgstr "Λειτουργία μοτίβου"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Μετατόπιση λειτουργίας μοτίβου"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "Χ-βάση x:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "Χ-βάση y:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "Y-βάση x:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y-βάση y:"
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Μάσκα μοτίβου"
 
 msgid "Reset"
-msgstr ""
+msgstr "Επαναφορά"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "Χρήση τρέχοντος καρέ"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Επαναφορά μάσκας"
 
 msgid "Window Opacity"
 msgstr "Αδιαφάνεια Παραθύρου"
@@ -313,10 +313,10 @@ msgid "Recent projects"
 msgstr "Πρόσφατα έργα"
 
 msgid "New project"
-msgstr ""
+msgstr "Νέο έργο"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Φύλλο καρέ (νέο έργο)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Φύλλο καρέ (νέα στρώση)"
