@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-08-08 23:15\n"
+"PO-Revision-Date: 2022-08-10 22:40\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -162,11 +162,26 @@ msgstr "Resmi Ortala"
 msgid "Rotate Image"
 msgstr "Resmi Döndür"
 
+msgid "Pivot (x, y):"
+msgstr ""
+
+msgid "Smear options:"
+msgstr ""
+
+msgid "Tolerance::"
+msgstr ""
+
+msgid "Initial angle:"
+msgstr ""
+
 msgid "Clear"
 msgstr "Temizle"
 
 msgid "Invert"
 msgstr "Ters Çevir"
+
+msgid "Grayscale View"
+msgstr ""
 
 msgid "Mirror Image"
 msgstr "Ayna Görüntüsü"
@@ -182,6 +197,33 @@ msgstr "Tercihler"
 
 msgid "Tile Mode"
 msgstr "Karo Modu"
+
+msgid "Tile Mode Offsets"
+msgstr ""
+
+msgid "X-basis x:"
+msgstr ""
+
+msgid "X-basis y:"
+msgstr ""
+
+msgid "Y-basis x:"
+msgstr ""
+
+msgid "Y-basis y:"
+msgstr ""
+
+msgid "Tile Mask"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Use Current Frame"
+msgstr ""
+
+msgid "Reset Mask"
+msgstr ""
 
 msgid "Window Opacity"
 msgstr "Pencere Şeffaflığı"
@@ -270,11 +312,11 @@ msgstr "Hepsine uygula"
 msgid "Recent projects"
 msgstr "Son Projeleriniz"
 
-msgid "New tab"
-msgstr "Yeni sekme"
+msgid "New project"
+msgstr ""
 
-msgid "Spritesheet (new tab)"
-msgstr "Hareketli sayfa (yeni sekme)"
+msgid "Spritesheet (new project)"
+msgstr ""
 
 msgid "Spritesheet (new layer)"
 msgstr "Resim Sayfası (yeni katman)"
