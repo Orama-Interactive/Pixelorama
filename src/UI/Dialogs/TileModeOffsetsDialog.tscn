@@ -105,6 +105,7 @@ suffix = "px"
 margin_top = 112.0
 margin_right = 61.0
 margin_bottom = 132.0
+mouse_default_cursor_shape = 2
 text = "Reset"
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
@@ -151,7 +152,8 @@ margin_right = 136.0
 margin_bottom = 132.0
 rect_min_size = Vector2( 100, 0 )
 hint_tooltip = "Create the Tile Mask from Current Frame"
-text = "Current Frame?"
+mouse_default_cursor_shape = 2
+text = "Use Current Frame"
 clip_text = true
 
 [node name="ResetMask" type="Button" parent="VBoxContainer/HBoxContainer/Mask"]
@@ -160,6 +162,7 @@ margin_right = 136.0
 margin_bottom = 156.0
 rect_min_size = Vector2( 100, 0 )
 hint_tooltip = "Create the Tile Mask from Current Frame"
+mouse_default_cursor_shape = 2
 disabled = true
 text = "Reset Mask"
 clip_text = true

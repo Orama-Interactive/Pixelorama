@@ -106,7 +106,7 @@ func _setup_view_menu() -> void:
 	var view_menu_items := [
 		"Tile Mode",
 		"Tile Mode Offsets",
-		"Greyscale View",
+		"Grayscale View",
 		"Mirror View",
 		"Show Grid",
 		"Show Pixel Grid",

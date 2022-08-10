@@ -43,8 +43,8 @@ func _on_PreviewDialog_about_to_show() -> void:
 		return
 	opened_once = true
 	# # order as in ImageImportOptions enum
-	import_options.add_item("New tab")
-	import_options.add_item("Spritesheet (new tab)")
+	import_options.add_item("New project")
+	import_options.add_item("Spritesheet (new project)")
 	import_options.add_item("Spritesheet (new layer)")
 	import_options.add_item("New frame")
 	import_options.add_item("Replace frame")
