@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-08-08 23:15\n"
+"PO-Revision-Date: 2022-08-10 22:41\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -162,11 +162,26 @@ msgstr "Tengahkan Gambar"
 msgid "Rotate Image"
 msgstr "Putar Gambar"
 
+msgid "Pivot (x, y):"
+msgstr ""
+
+msgid "Smear options:"
+msgstr ""
+
+msgid "Tolerance::"
+msgstr ""
+
+msgid "Initial angle:"
+msgstr ""
+
 msgid "Clear"
 msgstr "Lepas"
 
 msgid "Invert"
 msgstr "Terbalikkan"
+
+msgid "Grayscale View"
+msgstr ""
 
 msgid "Mirror Image"
 msgstr "Cerminkan Gambar"
@@ -182,6 +197,33 @@ msgstr "Preferensi"
 
 msgid "Tile Mode"
 msgstr "Mode Ubin"
+
+msgid "Tile Mode Offsets"
+msgstr ""
+
+msgid "X-basis x:"
+msgstr ""
+
+msgid "X-basis y:"
+msgstr ""
+
+msgid "Y-basis x:"
+msgstr ""
+
+msgid "Y-basis y:"
+msgstr ""
+
+msgid "Tile Mask"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Use Current Frame"
+msgstr ""
+
+msgid "Reset Mask"
+msgstr ""
 
 msgid "Window Opacity"
 msgstr "Kelegapan Jendela"
@@ -270,11 +312,11 @@ msgstr "Terapkan ke semua"
 msgid "Recent projects"
 msgstr "Proyek yang tadi"
 
-msgid "New tab"
-msgstr "Tab baru"
+msgid "New project"
+msgstr ""
 
-msgid "Spritesheet (new tab)"
-msgstr "Lembar sprite (tab baru)"
+msgid "Spritesheet (new project)"
+msgstr ""
 
 msgid "Spritesheet (new layer)"
 msgstr "Lembar sprite (lapisan baru)"
