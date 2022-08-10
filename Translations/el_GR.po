@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-08-09 01:09\n"
+"PO-Revision-Date: 2022-08-10 22:41\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -162,11 +162,26 @@ msgstr "Μετακίνηση εικόνας στο κέντρο"
 msgid "Rotate Image"
 msgstr "Περιστροφή Εικόνας"
 
+msgid "Pivot (x, y):"
+msgstr ""
+
+msgid "Smear options:"
+msgstr ""
+
+msgid "Tolerance::"
+msgstr ""
+
+msgid "Initial angle:"
+msgstr ""
+
 msgid "Clear"
 msgstr "Εκκαθάριση"
 
 msgid "Invert"
 msgstr "Αντιστροφή"
+
+msgid "Grayscale View"
+msgstr ""
 
 msgid "Mirror Image"
 msgstr "Αναστροφή Εικόνας"
@@ -182,6 +197,33 @@ msgstr "Προτιμήσεις"
 
 msgid "Tile Mode"
 msgstr "Λειτουργία μοτίβου"
+
+msgid "Tile Mode Offsets"
+msgstr ""
+
+msgid "X-basis x:"
+msgstr ""
+
+msgid "X-basis y:"
+msgstr ""
+
+msgid "Y-basis x:"
+msgstr ""
+
+msgid "Y-basis y:"
+msgstr ""
+
+msgid "Tile Mask"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Use Current Frame"
+msgstr ""
+
+msgid "Reset Mask"
+msgstr ""
 
 msgid "Window Opacity"
 msgstr "Αδιαφάνεια Παραθύρου"
@@ -270,11 +312,11 @@ msgstr "Εφαρμογή σε όλα"
 msgid "Recent projects"
 msgstr "Πρόσφατα έργα"
 
-msgid "New tab"
-msgstr "Νέα καρτέλα"
+msgid "New project"
+msgstr ""
 
-msgid "Spritesheet (new tab)"
-msgstr "Φύλλο καρέ (νέα καρτέλα)"
+msgid "Spritesheet (new project)"
+msgstr ""
 
 msgid "Spritesheet (new layer)"
 msgstr "Φύλλο καρέ (νέα στρώση)"
