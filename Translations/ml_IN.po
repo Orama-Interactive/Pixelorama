@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malayalam\n"
 "Language: ml_IN\n"
-"PO-Revision-Date: 2022-08-09 00:13\n"
+"PO-Revision-Date: 2022-08-10 22:40\n"
 
 msgid "OK"
 msgstr ""
@@ -162,10 +162,25 @@ msgstr ""
 msgid "Rotate Image"
 msgstr ""
 
+msgid "Pivot (x, y):"
+msgstr ""
+
+msgid "Smear options:"
+msgstr ""
+
+msgid "Tolerance::"
+msgstr ""
+
+msgid "Initial angle:"
+msgstr ""
+
 msgid "Clear"
 msgstr ""
 
 msgid "Invert"
+msgstr ""
+
+msgid "Grayscale View"
 msgstr ""
 
 msgid "Mirror Image"
@@ -181,6 +196,33 @@ msgid "Preferences"
 msgstr ""
 
 msgid "Tile Mode"
+msgstr ""
+
+msgid "Tile Mode Offsets"
+msgstr ""
+
+msgid "X-basis x:"
+msgstr ""
+
+msgid "X-basis y:"
+msgstr ""
+
+msgid "Y-basis x:"
+msgstr ""
+
+msgid "Y-basis y:"
+msgstr ""
+
+msgid "Tile Mask"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Use Current Frame"
+msgstr ""
+
+msgid "Reset Mask"
 msgstr ""
 
 msgid "Window Opacity"
@@ -270,10 +312,10 @@ msgstr ""
 msgid "Recent projects"
 msgstr ""
 
-msgid "New tab"
+msgid "New project"
 msgstr ""
 
-msgid "Spritesheet (new tab)"
+msgid "Spritesheet (new project)"
 msgstr ""
 
 msgid "Spritesheet (new layer)"
