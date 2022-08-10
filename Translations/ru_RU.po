@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-08-08 23:15\n"
+"PO-Revision-Date: 2022-08-10 22:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -162,11 +162,26 @@ msgstr "Централизовать изображение"
 msgid "Rotate Image"
 msgstr "Повернуть изображение"
 
+msgid "Pivot (x, y):"
+msgstr ""
+
+msgid "Smear options:"
+msgstr ""
+
+msgid "Tolerance::"
+msgstr ""
+
+msgid "Initial angle:"
+msgstr ""
+
 msgid "Clear"
 msgstr "Очистить"
 
 msgid "Invert"
 msgstr "Инвертировать"
+
+msgid "Grayscale View"
+msgstr ""
 
 msgid "Mirror Image"
 msgstr "Отраженное изображение"
@@ -182,6 +197,33 @@ msgstr "Настройки"
 
 msgid "Tile Mode"
 msgstr "Бесшовный режим"
+
+msgid "Tile Mode Offsets"
+msgstr ""
+
+msgid "X-basis x:"
+msgstr ""
+
+msgid "X-basis y:"
+msgstr ""
+
+msgid "Y-basis x:"
+msgstr ""
+
+msgid "Y-basis y:"
+msgstr ""
+
+msgid "Tile Mask"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Use Current Frame"
+msgstr ""
+
+msgid "Reset Mask"
+msgstr ""
 
 msgid "Window Opacity"
 msgstr "Непрозрачность окна"
@@ -270,11 +312,11 @@ msgstr "Применить ко всем"
 msgid "Recent projects"
 msgstr "Недавние проекты"
 
-msgid "New tab"
-msgstr "Новая вкладка"
+msgid "New project"
+msgstr ""
 
-msgid "Spritesheet (new tab)"
-msgstr "Таблица спрайтов (новая вкладка)"
+msgid "Spritesheet (new project)"
+msgstr ""
 
 msgid "Spritesheet (new layer)"
 msgstr "Таблица спрайтов (новый слой)"
