@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-08-11 11:26\n"
+"PO-Revision-Date: 2022-08-11 12:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -166,7 +166,7 @@ msgid "Pivot (x, y):"
 msgstr "Pivot (x, y):"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Verwisch-Optionen:"
 
 msgid "Tolerance:"
 msgstr "Toleranz:"
@@ -217,7 +217,7 @@ msgid "Tile Mask"
 msgstr "Tile-Maske"
 
 msgid "Reset"
-msgstr "Reset"
+msgstr "Zurücksetzen"
 
 msgid "Use Current Frame"
 msgstr "Aktuellen Frame verwenden"
