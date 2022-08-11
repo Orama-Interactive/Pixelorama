@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-08-11 20:42\n"
+"PO-Revision-Date: 2022-08-11 21:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -223,7 +223,7 @@ msgid "Use Current Frame"
 msgstr "Użyj Aktualnej Klatki"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Zresetuj Maskę"
 
 msgid "Window Opacity"
 msgstr "Przezroczystość okna"
@@ -313,10 +313,10 @@ msgid "Recent projects"
 msgstr "Ostatnie projekty"
 
 msgid "New project"
-msgstr ""
+msgstr "Nowy Projekt"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Spritesheet (nowy projekt)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Spritesheet (nowa warstwa)"
@@ -508,7 +508,7 @@ msgid "Trilinear"
 msgstr "Trójlinowa"
 
 msgid "Constant"
-msgstr ""
+msgstr "Stała"
 
 msgid "General"
 msgstr "Ogólne"
