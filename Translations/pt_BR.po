@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-08-11 12:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Exportar"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Sobrescrever"
 
 msgid "Export..."
 msgstr "Exportar..."
@@ -163,16 +163,16 @@ msgid "Rotate Image"
 msgstr "Girar imagem"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "Pivô (x, y):"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Opções Smear:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Tolerância:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Ângulo inicial:"
 
 msgid "Clear"
 msgstr "Limpar"
@@ -181,7 +181,7 @@ msgid "Invert"
 msgstr "Inverter"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Visualização em cinza"
 
 msgid "Mirror Image"
 msgstr "Imagem espelhada"
@@ -199,31 +199,31 @@ msgid "Tile Mode"
 msgstr "Modo de Tile"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Deslocamentos do Modo Telha"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X-base x:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "X-base y:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "Y-base x:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y-base y:"
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Máscara de bloco"
 
 msgid "Reset"
-msgstr ""
+msgstr "Redefinir"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "Usar o Quadro Atual"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Resetar máscara"
 
 msgid "Window Opacity"
 msgstr "Opacidade da Janela"
@@ -256,7 +256,7 @@ msgid "Edit Layout"
 msgstr "Editar Layout"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Tem certeza de que deseja excluir este layout?"
 
 msgid "Auto"
 msgstr "Automático"
@@ -313,10 +313,10 @@ msgid "Recent projects"
 msgstr "Projetos recentes"
 
 msgid "New project"
-msgstr ""
+msgstr "Novo projeto"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Planilha (novo projeto)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Spritesheet (nova camada)"
@@ -967,7 +967,10 @@ msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "Seleção poligonal\n\n"
+"%s para o botão esquerdo do mouse\n"
+"%s para o botão direito do mouse\n\n"
+"Clique duplo para conectar o último ponto ao ponto inicial"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -1015,7 +1018,10 @@ msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "Selecionador de cores\n\n"
+"%s para o botão esquerdo do mouse\n"
+"%s para o botão direito do mouse\n\n"
+"Selecione uma cor de um pixel do sprite"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -2052,29 +2058,29 @@ msgid "Position:"
 msgstr "Posição:"
 
 msgid "Tools"
-msgstr ""
+msgstr "Ferramentas"
 
 msgid "Main Canvas"
-msgstr ""
+msgstr "Tela principal"
 
 msgid "Second Canvas"
-msgstr ""
+msgstr "Segunda tela"
 
 msgid "Animation Timeline"
-msgstr ""
+msgstr "Linha do tempo da animação"
 
 msgid "Canvas Preview"
-msgstr ""
+msgstr "Pré-visualização da tela"
 
 msgid "Color Pickers"
-msgstr ""
+msgstr "Seletor de cores"
 
 msgid "Global Tool Options"
-msgstr ""
+msgstr "Opções de ferramentas globais"
 
 msgid "Left Tool Options"
-msgstr ""
+msgstr "Opções da Ferramenta Esquerda"
 
 msgid "Right Tool Options"
-msgstr ""
+msgstr "Opções da Ferramenta Direita"
 
