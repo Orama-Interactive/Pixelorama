@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-08-11 00:49\n"
+"PO-Revision-Date: 2022-08-11 02:30\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -64,7 +64,7 @@ msgid "Select"
 msgstr "Seleksi"
 
 msgid "View"
-msgstr "Lihat"
+msgstr "Tampilan"
 
 msgid "Window"
 msgstr "Jendela"
@@ -163,7 +163,7 @@ msgid "Rotate Image"
 msgstr "Putar Gambar"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "Pivot (x, y):"
 
 msgid "Smear options:"
 msgstr "Opsi melumur:"
@@ -181,7 +181,7 @@ msgid "Invert"
 msgstr "Terbalikkan"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Tampilan Skala Abu-abu"
 
 msgid "Mirror Image"
 msgstr "Cerminkan Gambar"
@@ -268,7 +268,7 @@ msgid "Tallscreen"
 msgstr "Layar tinggi"
 
 msgid "Mirror View"
-msgstr "Cerminkan Tampilan"
+msgstr "Tampilan Cermin"
 
 msgid "Show Grid"
 msgstr "Tampilkan Kisi"
