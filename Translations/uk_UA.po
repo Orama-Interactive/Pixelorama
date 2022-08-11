@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-08-11 08:37\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -163,16 +163,16 @@ msgid "Rotate Image"
 msgstr "Повернути зображення"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "Центр обертання (x, y):"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Параметри мазку:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Допустиме відхилення:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Початковий кут:"
 
 msgid "Clear"
 msgstr "Очистити"
@@ -181,7 +181,7 @@ msgid "Invert"
 msgstr "Інвертувати"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Сірий режим перегляду"
 
 msgid "Mirror Image"
 msgstr "Віддзеркалити зображення"
@@ -199,31 +199,31 @@ msgid "Tile Mode"
 msgstr "Безшовний режим"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Зміщення в безшовному режимі"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X для X-базису:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "Y для X-базису:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "X для Y-базису:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y для Y-базису:"
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Тайлова маска"
 
 msgid "Reset"
-msgstr ""
+msgstr "Скинути"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "З поточного кадра"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Скинути маску"
 
 msgid "Window Opacity"
 msgstr "Непрозорість вікна"
@@ -313,10 +313,10 @@ msgid "Recent projects"
 msgstr "Нещодавні проєкти"
 
 msgid "New project"
-msgstr ""
+msgstr "Новий проєкт"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Таблиця спрайтів (новий проєкт)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Таблиця спрайтів (новий шар)"
@@ -509,7 +509,7 @@ msgid "Trilinear"
 msgstr "Трилінійна"
 
 msgid "Constant"
-msgstr ""
+msgstr "Константа"
 
 msgid "General"
 msgstr "Загальні"
