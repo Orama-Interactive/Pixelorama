@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-08-11 04:49\n"
+"PO-Revision-Date: 2022-08-11 06:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -163,16 +163,16 @@ msgid "Rotate Image"
 msgstr "画像を回転"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "原点 (x, y):"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "スミアオプション:"
 
 msgid "Tolerance:"
 msgstr "許容範囲:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "初期角度:"
 
 msgid "Clear"
 msgstr "削除"
@@ -181,7 +181,7 @@ msgid "Invert"
 msgstr "反転"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "グレースケール表示"
 
 msgid "Mirror Image"
 msgstr "ミラー画像"
@@ -199,19 +199,19 @@ msgid "Tile Mode"
 msgstr "タイルモード"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "タイルモードのオフセット"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X基底 x:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "X基底 y:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "Y基底 x:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y基底 y:"
 
 msgid "Tile Mask"
 msgstr "タイルマスク"
