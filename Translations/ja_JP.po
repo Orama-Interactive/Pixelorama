@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-08-11 04:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,7 +169,7 @@ msgid "Smear options:"
 msgstr ""
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "許容範囲:"
 
 msgid "Initial angle:"
 msgstr ""
@@ -214,16 +214,16 @@ msgid "Y-basis y:"
 msgstr ""
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "タイルマスク"
 
 msgid "Reset"
-msgstr ""
+msgstr "初期化"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "現在のフレームを使用"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "マスクを初期化"
 
 msgid "Window Opacity"
 msgstr "ウィンドウ不透明度"
@@ -313,10 +313,10 @@ msgid "Recent projects"
 msgstr "最近のプロジェクト"
 
 msgid "New project"
-msgstr ""
+msgstr "新規プロジェクト"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "スプライトシート(新規プロジェクト)"
 
 msgid "Spritesheet (new layer)"
 msgstr "スプライトシート (新規レイヤー)"
