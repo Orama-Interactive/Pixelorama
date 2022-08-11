@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-08-11 00:49\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -166,13 +166,13 @@ msgid "Pivot (x, y):"
 msgstr ""
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Opsi melumur:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Toleransi:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Sudut inisial:"
 
 msgid "Clear"
 msgstr "Lepas"
@@ -199,31 +199,31 @@ msgid "Tile Mode"
 msgstr "Mode Ubin"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Offset Mode Ubin"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X berdasar-x:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "Y berdasar-x:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "X berdasar-y:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y berdasar-y:"
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Mask Ubin"
 
 msgid "Reset"
-msgstr ""
+msgstr "Atur ulang"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "Gunakan Bingkai Saat Ini"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Atur ulang Mask"
 
 msgid "Window Opacity"
 msgstr "Kelegapan Jendela"
@@ -313,10 +313,10 @@ msgid "Recent projects"
 msgstr "Proyek yang tadi"
 
 msgid "New project"
-msgstr ""
+msgstr "Proyek baru"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Lembar sprite (proyek baru)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Lembar sprite (lapisan baru)"
@@ -509,7 +509,7 @@ msgid "Trilinear"
 msgstr "\"Trilinear\""
 
 msgid "Constant"
-msgstr ""
+msgstr "Konstanta"
 
 msgid "General"
 msgstr "Umum"
