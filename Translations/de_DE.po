@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-08-11 11:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -163,16 +163,16 @@ msgid "Rotate Image"
 msgstr "Bild drehen"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "Pivot (x, y):"
 
 msgid "Smear options:"
 msgstr ""
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Toleranz:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Anfangswinkel:"
 
 msgid "Clear"
 msgstr "Leeren"
@@ -181,7 +181,7 @@ msgid "Invert"
 msgstr "Invertieren"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Graustufen-Ansicht"
 
 msgid "Mirror Image"
 msgstr "Bild spiegeln"
@@ -199,31 +199,31 @@ msgid "Tile Mode"
 msgstr "Kachelmodus"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Tile-Modus Offsets"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X-Basis x:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "X-Basis y:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "Y-Basis x:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y-Basis y:"
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Tile-Maske"
 
 msgid "Reset"
-msgstr ""
+msgstr "Reset"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "Aktuellen Frame verwenden"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Maske zurücksetzen"
 
 msgid "Window Opacity"
 msgstr "Fenstertransparenz"
@@ -313,10 +313,10 @@ msgid "Recent projects"
 msgstr "Letzte Projekte"
 
 msgid "New project"
-msgstr ""
+msgstr "Neues Projekt"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Spritesheet (neues Projekt)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Spritesheet (neue Ebene)"
