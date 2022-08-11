@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-05-26 13:54\n"
+"PO-Revision-Date: 2022-08-10 22:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -162,11 +162,26 @@ msgstr "Централизовать изображение"
 msgid "Rotate Image"
 msgstr "Повернуть изображение"
 
+msgid "Pivot (x, y):"
+msgstr ""
+
+msgid "Smear options:"
+msgstr ""
+
+msgid "Tolerance:"
+msgstr ""
+
+msgid "Initial angle:"
+msgstr ""
+
 msgid "Clear"
 msgstr "Очистить"
 
 msgid "Invert"
 msgstr "Инвертировать"
+
+msgid "Grayscale View"
+msgstr ""
 
 msgid "Mirror Image"
 msgstr "Отраженное изображение"
@@ -183,8 +198,38 @@ msgstr "Настройки"
 msgid "Tile Mode"
 msgstr "Бесшовный режим"
 
+msgid "Tile Mode Offsets"
+msgstr ""
+
+msgid "X-basis x:"
+msgstr ""
+
+msgid "X-basis y:"
+msgstr ""
+
+msgid "Y-basis x:"
+msgstr ""
+
+msgid "Y-basis y:"
+msgstr ""
+
+msgid "Tile Mask"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Use Current Frame"
+msgstr ""
+
+msgid "Reset Mask"
+msgstr ""
+
 msgid "Window Opacity"
 msgstr "Непрозрачность окна"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr "Прозрачность окна не работает в полноэкранном режиме."
 
 msgid "Panel Layout"
 msgstr "Расположение панелей"
@@ -196,7 +241,7 @@ msgid "Layouts"
 msgstr "Слои"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Перемещаемые панели"
 
 msgid "Manage Layouts"
 msgstr "Управление слоями"
@@ -205,13 +250,13 @@ msgid "Add"
 msgstr "Добавить"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Добавить компоновку"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Редактировать компоновку"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Вы уверены, что хотите удалить эту компоновку?"
 
 msgid "Auto"
 msgstr "Автоматически"
@@ -262,16 +307,16 @@ msgid "Import as:"
 msgstr "Импортировать как:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "Применить ко всем"
 
 msgid "Recent projects"
 msgstr "Недавние проекты"
 
-msgid "New tab"
-msgstr "Новая вкладка"
+msgid "New project"
+msgstr ""
 
-msgid "Spritesheet (new tab)"
-msgstr "Таблица спрайтов (новая вкладка)"
+msgid "Spritesheet (new project)"
+msgstr ""
 
 msgid "Spritesheet (new layer)"
 msgstr "Таблица спрайтов (новый слой)"
@@ -337,13 +382,13 @@ msgid "File %s already exists. Overwrite?"
 msgstr "Файл %s уже существует. Перезаписать?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Недопустимый путь к каталогу!"
 
 msgid "File name is not valid!"
 msgstr "Неправильное имя файла!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Недопустимый путь к папке или имя файла!"
 
 msgid "Exporting in progress..."
 msgstr "Выполняется экспорт..."
@@ -463,6 +508,9 @@ msgstr "Кубический"
 msgid "Trilinear"
 msgstr "Трилинейный"
 
+msgid "Constant"
+msgstr ""
+
 msgid "General"
 msgstr "Общие"
 
@@ -565,6 +613,12 @@ msgstr "Цвет значка из:"
 msgid "Icon color:"
 msgstr "Цвет значка:"
 
+msgid "Left tool color:"
+msgstr "Цвет левого инструмента:"
+
+msgid "Right tool color:"
+msgstr "Цвет правого инструмента:"
+
 msgid "Tool button size:"
 msgstr "Размер кнопок инструментов:"
 
@@ -631,23 +685,26 @@ msgstr "Изменить Оттенок/Насыщенность/Яркость"
 msgid "Gradient"
 msgstr "Градиент"
 
+msgid "Gradient Map"
+msgstr "Карта градиента"
+
 msgid "Linear"
-msgstr ""
+msgstr "Линейный"
 
 msgid "Radial"
-msgstr ""
+msgstr "Радиальный"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Линейный шаг"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Радиальный шаг"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "Линейный с псевдосмешиванием"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "Радиальный с псевдосмешиванием"
 
 msgid "Transition size:"
 msgstr "Размер перехода:"
@@ -659,7 +716,7 @@ msgid "Radius:"
 msgstr "Радиус:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Шаблон псевдосмешивания:"
 
 msgid "Adjust HSV"
 msgstr "Настройка цвета"
@@ -1915,7 +1972,7 @@ msgid "Delete"
 msgstr "Удалить"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Отменить все"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"

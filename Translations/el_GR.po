@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-05-23 15:53\n"
+"PO-Revision-Date: 2022-08-10 23:47\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -162,11 +162,26 @@ msgstr "Μετακίνηση εικόνας στο κέντρο"
 msgid "Rotate Image"
 msgstr "Περιστροφή Εικόνας"
 
+msgid "Pivot (x, y):"
+msgstr "Άξονας (x, y):"
+
+msgid "Smear options:"
+msgstr "Επιλογές μουτζούρας:"
+
+msgid "Tolerance:"
+msgstr "Ανοχή:"
+
+msgid "Initial angle:"
+msgstr "Αρχική γωνία:"
+
 msgid "Clear"
 msgstr "Εκκαθάριση"
 
 msgid "Invert"
 msgstr "Αντιστροφή"
+
+msgid "Grayscale View"
+msgstr "Προβολή σε κλίμακα γκρι"
 
 msgid "Mirror Image"
 msgstr "Αναστροφή Εικόνας"
@@ -183,8 +198,38 @@ msgstr "Προτιμήσεις"
 msgid "Tile Mode"
 msgstr "Λειτουργία μοτίβου"
 
+msgid "Tile Mode Offsets"
+msgstr "Μετατόπιση λειτουργίας μοτίβου"
+
+msgid "X-basis x:"
+msgstr "Χ-βάση x:"
+
+msgid "X-basis y:"
+msgstr "Χ-βάση y:"
+
+msgid "Y-basis x:"
+msgstr "Y-βάση x:"
+
+msgid "Y-basis y:"
+msgstr "Y-βάση y:"
+
+msgid "Tile Mask"
+msgstr "Μάσκα μοτίβου"
+
+msgid "Reset"
+msgstr "Επαναφορά"
+
+msgid "Use Current Frame"
+msgstr "Χρήση τρέχοντος καρέ"
+
+msgid "Reset Mask"
+msgstr "Επαναφορά μάσκας"
+
 msgid "Window Opacity"
 msgstr "Αδιαφάνεια Παραθύρου"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr "Η αδιαφάνεια παραθύρου δε λειτουργεί σε λειτουργία πλήρους οθόνης."
 
 msgid "Panel Layout"
 msgstr "Διάταξη Πλαισίου"
@@ -267,11 +312,11 @@ msgstr "Εφαρμογή σε όλα"
 msgid "Recent projects"
 msgstr "Πρόσφατα έργα"
 
-msgid "New tab"
-msgstr "Νέα καρτέλα"
+msgid "New project"
+msgstr "Νέο έργο"
 
-msgid "Spritesheet (new tab)"
-msgstr "Φύλλο καρέ (νέα καρτέλα)"
+msgid "Spritesheet (new project)"
+msgstr "Φύλλο καρέ (νέο έργο)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Φύλλο καρέ (νέα στρώση)"
@@ -463,6 +508,9 @@ msgstr "Κυβική"
 msgid "Trilinear"
 msgstr "Τριγραμμική"
 
+msgid "Constant"
+msgstr "Σταθερή"
+
 msgid "General"
 msgstr "Γενικά"
 
@@ -565,6 +613,12 @@ msgstr "Χρώμα εικονιδίων από:"
 msgid "Icon color:"
 msgstr "Χρώμα εικονιδίων:"
 
+msgid "Left tool color:"
+msgstr "Χρώμα αριστερού εργαλείου:"
+
+msgid "Right tool color:"
+msgstr "Χρώμα δεξιού εργαλείου:"
+
 msgid "Tool button size:"
 msgstr "Μέγεθος κουμπιών εργαλείων:"
 
@@ -630,6 +684,9 @@ msgstr "Ρύθμιση απόχρωσης/κορεσμού/τιμής"
 
 msgid "Gradient"
 msgstr "Διαβάθμιση"
+
+msgid "Gradient Map"
+msgstr "Χάρτης Διαβαθμίσεων"
 
 msgid "Linear"
 msgstr "Γραμμική"

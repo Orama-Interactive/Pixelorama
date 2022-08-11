@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-05-19 08:33\n"
+"PO-Revision-Date: 2022-08-11 11:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -162,11 +162,26 @@ msgstr "Centralizare imagine"
 msgid "Rotate Image"
 msgstr "Rotire imagine"
 
+msgid "Pivot (x, y):"
+msgstr "Pivot (x, y):"
+
+msgid "Smear options:"
+msgstr "Animație prin efect de neclaritate:"
+
+msgid "Tolerance:"
+msgstr "Toleranță:"
+
+msgid "Initial angle:"
+msgstr "Unghi inițial:"
+
 msgid "Clear"
 msgstr "Ștergere"
 
 msgid "Invert"
 msgstr "Inversare"
+
+msgid "Grayscale View"
+msgstr "Vizualizare în tonuri de gri"
 
 msgid "Mirror Image"
 msgstr "Oglindire imagine"
@@ -183,8 +198,38 @@ msgstr "Preferințe"
 msgid "Tile Mode"
 msgstr "Mod mozaic"
 
+msgid "Tile Mode Offsets"
+msgstr "Decalaje mod mozaic"
+
+msgid "X-basis x:"
+msgstr "Bază X x:"
+
+msgid "X-basis y:"
+msgstr "Bază X y:"
+
+msgid "Y-basis x:"
+msgstr "Bază Y x:"
+
+msgid "Y-basis y:"
+msgstr "Bază Y y:"
+
+msgid "Tile Mask"
+msgstr "Mască mozaic"
+
+msgid "Reset"
+msgstr "Resetare"
+
+msgid "Use Current Frame"
+msgstr "Utilizare cadru actual"
+
+msgid "Reset Mask"
+msgstr "Resetare mască"
+
 msgid "Window Opacity"
 msgstr "Opacitatea ferestrei"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr "Opacitatea ferestrei nu funcționează în modul ecran complet."
 
 msgid "Panel Layout"
 msgstr "Dispunerea panoului"
@@ -267,11 +312,11 @@ msgstr "Aplicare la toate"
 msgid "Recent projects"
 msgstr "Proiecte recente"
 
-msgid "New tab"
-msgstr "Filă nouă"
+msgid "New project"
+msgstr "Proiect nou"
 
-msgid "Spritesheet (new tab)"
-msgstr "Foaie cu grafice bidimensionale (filă nouă)"
+msgid "Spritesheet (new project)"
+msgstr "Foaie cu grafice bidimensionale (proiect nou)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Foaie cu grafice bidimensionale (strat nou)"
@@ -463,6 +508,9 @@ msgstr "Cubică"
 msgid "Trilinear"
 msgstr "Triliniară"
 
+msgid "Constant"
+msgstr "Constantă"
+
 msgid "General"
 msgstr "General"
 
@@ -565,6 +613,12 @@ msgstr "Culoarea pictogramei din:"
 msgid "Icon color:"
 msgstr "Culoarea pictogramei:"
 
+msgid "Left tool color:"
+msgstr "Culoarea instrumentului din stânga:"
+
+msgid "Right tool color:"
+msgstr "Culoarea instrumentului din dreapta:"
+
 msgid "Tool button size:"
 msgstr "Mărimea butonului instrumentului:"
 
@@ -630,6 +684,9 @@ msgstr "Ajustare nuanță/saturație/valoare"
 
 msgid "Gradient"
 msgstr "Degrade"
+
+msgid "Gradient Map"
+msgstr "Hartă degrade"
 
 msgid "Linear"
 msgstr "Liniar"
@@ -2022,8 +2079,8 @@ msgid "Global Tool Options"
 msgstr "Opțiuni pentru instrumentul global"
 
 msgid "Left Tool Options"
-msgstr "Opțiuni pentru unealta din stânga"
+msgstr "Opțiuni pentru instrumentul din stânga"
 
 msgid "Right Tool Options"
-msgstr "Opțiuni pentru unealta din dreapta"
+msgstr "Opțiuni pentru instrumentul din dreapta"
 

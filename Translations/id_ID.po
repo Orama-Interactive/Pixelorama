@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-05-22 09:49\n"
+"PO-Revision-Date: 2022-08-11 02:30\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -64,7 +64,7 @@ msgid "Select"
 msgstr "Seleksi"
 
 msgid "View"
-msgstr "Lihat"
+msgstr "Tampilan"
 
 msgid "Window"
 msgstr "Jendela"
@@ -162,11 +162,26 @@ msgstr "Tengahkan Gambar"
 msgid "Rotate Image"
 msgstr "Putar Gambar"
 
+msgid "Pivot (x, y):"
+msgstr "Pivot (x, y):"
+
+msgid "Smear options:"
+msgstr "Opsi melumur:"
+
+msgid "Tolerance:"
+msgstr "Toleransi:"
+
+msgid "Initial angle:"
+msgstr "Sudut inisial:"
+
 msgid "Clear"
-msgstr "Kosongkan"
+msgstr "Lepas"
 
 msgid "Invert"
 msgstr "Terbalikkan"
+
+msgid "Grayscale View"
+msgstr "Tampilan Skala Abu-abu"
 
 msgid "Mirror Image"
 msgstr "Cerminkan Gambar"
@@ -181,10 +196,40 @@ msgid "Preferences"
 msgstr "Preferensi"
 
 msgid "Tile Mode"
-msgstr "Mode Urutan Ubin"
+msgstr "Mode Ubin"
+
+msgid "Tile Mode Offsets"
+msgstr "Offset Mode Ubin"
+
+msgid "X-basis x:"
+msgstr "X berdasar-x:"
+
+msgid "X-basis y:"
+msgstr "Y berdasar-x:"
+
+msgid "Y-basis x:"
+msgstr "X berdasar-y:"
+
+msgid "Y-basis y:"
+msgstr "Y berdasar-y:"
+
+msgid "Tile Mask"
+msgstr "Mask Ubin"
+
+msgid "Reset"
+msgstr "Atur ulang"
+
+msgid "Use Current Frame"
+msgstr "Gunakan Bingkai Saat Ini"
+
+msgid "Reset Mask"
+msgstr "Atur ulang Mask"
 
 msgid "Window Opacity"
 msgstr "Kelegapan Jendela"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr "Kelegapan jendela tidak bisa di mode layar penuh."
 
 msgid "Panel Layout"
 msgstr "Tata Letak Panel"
@@ -223,7 +268,7 @@ msgid "Tallscreen"
 msgstr "Layar tinggi"
 
 msgid "Mirror View"
-msgstr "Cerminkan Tampilan"
+msgstr "Tampilan Cermin"
 
 msgid "Show Grid"
 msgstr "Tampilkan Kisi"
@@ -267,11 +312,11 @@ msgstr "Terapkan ke semua"
 msgid "Recent projects"
 msgstr "Proyek yang tadi"
 
-msgid "New tab"
-msgstr "Tab baru"
+msgid "New project"
+msgstr "Proyek baru"
 
-msgid "Spritesheet (new tab)"
-msgstr "Lembar sprite (tab baru)"
+msgid "Spritesheet (new project)"
+msgstr "Lembar sprite (proyek baru)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Lembar sprite (lapisan baru)"
@@ -463,6 +508,9 @@ msgstr "\"Cubic\""
 msgid "Trilinear"
 msgstr "\"Trilinear\""
 
+msgid "Constant"
+msgstr "Konstanta"
+
 msgid "General"
 msgstr "Umum"
 
@@ -565,6 +613,12 @@ msgstr "Warna ikon dari:"
 msgid "Icon color:"
 msgstr "Warna ikon:"
 
+msgid "Left tool color:"
+msgstr "Warna alat di kiri:"
+
+msgid "Right tool color:"
+msgstr "Warna alat di kanan:"
+
 msgid "Tool button size:"
 msgstr "Ukuran tombol alat:"
 
@@ -630,6 +684,9 @@ msgstr "Sesuaikan Rona/Saturasi/Nilai"
 
 msgid "Gradient"
 msgstr "Gradien"
+
+msgid "Gradient Map"
+msgstr "Peta Gradien"
 
 msgid "Linear"
 msgstr "Linier"
@@ -743,7 +800,7 @@ msgid "GitHub Repo"
 msgstr "Repositori GitHub"
 
 msgid "Donate"
-msgstr "Derma (Donate)"
+msgstr "Menyumbang"
 
 msgid "Developers"
 msgstr "Pengembang"
@@ -752,7 +809,7 @@ msgid "Contributors"
 msgstr "Kontributor"
 
 msgid "Donors"
-msgstr "Donatur"
+msgstr "Penderma"
 
 msgid "Translators"
 msgstr "Penerjemah"
@@ -785,19 +842,19 @@ msgid "Russian"
 msgstr "Bhs. Rusia"
 
 msgid "Chinese Simplified"
-msgstr "China (Simpel)"
+msgstr "Bhs. Cina (Sederhana)"
 
 msgid "Chinese Traditional"
 msgstr "Bhs. Cina (Tradisional)"
 
 msgid "Italian"
-msgstr "Italia"
+msgstr "Bhs. Italia"
 
 msgid "Latvian"
 msgstr "Bhs. Latvia"
 
 msgid "Spanish"
-msgstr "Spanyol"
+msgstr "Bhs. Spanyol"
 
 msgid "Catalan"
 msgstr "Bhs. Katalonia"
@@ -878,13 +935,13 @@ msgid "Unsaved Image"
 msgstr "Gambar belum disimpan"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr "Perubahan belum tersimpan, perubahan akan hilang jika kamu melanjutkan."
+msgstr "Perubahan belum disimpan, perubahan akan hilang jika kamu melanjutkan."
 
 msgid "Save before exiting?"
 msgstr "Simpan sebelum keluar?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr "Perubahan belum disimpan. Sebaiknya ini bagaimana?"
+msgstr "Progres belum disimpan. Sebaiknya ini bagaimana?"
 
 msgid "Save & Exit"
 msgstr "Simpan & Keluar"
@@ -1007,9 +1064,9 @@ msgid "Line Tool\n\n"
 msgstr "Alat Garis\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
-"Tahan %s untuk membengkok sudut garis\n"
-"Tahan %s untuk menengahkan bentuk pada klik asli\n"
-"Tahan %s untuk mengubah wujud bentuk asli"
+"Tahan %s untuk menyepit sudut garis\n"
+"Tahan %s untuk membuat bentuk di tengah klik\n"
+"Tahan %s untuk menggeser bentuk saat ini"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1021,8 +1078,8 @@ msgstr "Alat Persegi Panjang\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
 "Tahan %s untuk membuat bentuk 1:1\n"
-"Tahan %s untuk menengahkan bentuk pada klik asli\n"
-"Tahan %s untuk mengubah wujud bentuk asli"
+"Tahan %s untuk membuat bentuk di tengah klik\n"
+"Tahan %s untuk menggeser bentuk saat ini"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -1034,8 +1091,8 @@ msgstr "Alat Elips\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
 "Tahan %s untuk membuat bentuk 1:1\n"
-"Tahan %s untuk menengahkan bentuk pada klik asli\n"
-"Tahan %s untuk mengubah wujud bentuk asli"
+"Tahan %s untuk membuat bentuk di tengah klik\n"
+"Tahan %s untuk menggeser bentuk saat ini"
 
 msgid "Rectangle"
 msgstr "Persegi Panjang"
@@ -1097,7 +1154,7 @@ msgid "Guides"
 msgstr "Panduan"
 
 msgid "Guides color:"
-msgstr "Warna Panduan:"
+msgstr "Warna panduan:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Warna dari penggaris yang ditunjukkan di kanvas"
@@ -1133,13 +1190,13 @@ msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr "Menetapkan seberapa jauh garis mendatar kisi persegi panjang"
 
 msgid "Isometric cell bounds width:"
-msgstr "Lebar batas sel isometik:"
+msgstr "Lebar batas sel isometrik:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
 msgstr "Menetapkan lebar kotak pembatas yang disejajarkan sumbu sel isometrik"
 
 msgid "Isometric cell bounds height:"
-msgstr "Tinggi batas sel isometik:"
+msgstr "Tinggi batas sel isometrik:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr "Menetapkan tinggi kotak pembatas yang disejajarkan sumbu sel isometrik"
@@ -1175,7 +1232,7 @@ msgid "Show at zoom:"
 msgstr "Muncul saat dikeker:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr "Menetapkan minimal bisa dikeker saat kisi piksel muncul"
+msgstr "Menetapkan minimal keker, agar kisi piksel dimunculkan"
 
 msgid "Pixel grid color:"
 msgstr "Warna kisi piksel:"
@@ -1732,7 +1789,7 @@ msgid "Get colors from"
 msgstr "Ambil warna dari"
 
 msgid "Patrons:"
-msgstr "Patrons:"
+msgstr "Patron:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
 msgstr "Ingin ada nama atau perusahaan ditampilkan pada layar splash?"
@@ -1923,13 +1980,13 @@ msgstr "Ditemukan proyek yang disimpan otomatis dari sesi kena mogok.\n"
 "Apa kamu ingin memulihkan datanya?"
 
 msgid "Backup reloaded"
-msgstr "Pencadangan dimuat ulang"
+msgstr "Cadangan dimuat ulang"
 
 msgid "Remove currently selected palette"
 msgstr "Hapus palet yang sedang dipilih"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr "Kamu yakin ingin menghapus palet ini? (Tak bisa dikembalikan)"
+msgstr "Apa kamu yakin ingin menghapus palet ini? (Tak bisa diurungkan)"
 
 msgid "You can't remove more palettes!"
 msgstr "Tidak bisa menghapus palet lagi!"

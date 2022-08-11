@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-05-23 10:51\n"
+"PO-Revision-Date: 2022-08-10 22:47\n"
 
 msgid "OK"
 msgstr "예"
@@ -162,11 +162,26 @@ msgstr "이미지 중앙 집중화"
 msgid "Rotate Image"
 msgstr "이미지 회전"
 
+msgid "Pivot (x, y):"
+msgstr ""
+
+msgid "Smear options:"
+msgstr ""
+
+msgid "Tolerance:"
+msgstr ""
+
+msgid "Initial angle:"
+msgstr ""
+
 msgid "Clear"
 msgstr "초기화"
 
 msgid "Invert"
 msgstr "반전"
+
+msgid "Grayscale View"
+msgstr ""
 
 msgid "Mirror Image"
 msgstr "미러 이미지"
@@ -183,8 +198,38 @@ msgstr "환경설정"
 msgid "Tile Mode"
 msgstr "타일 모드"
 
+msgid "Tile Mode Offsets"
+msgstr ""
+
+msgid "X-basis x:"
+msgstr ""
+
+msgid "X-basis y:"
+msgstr ""
+
+msgid "Y-basis x:"
+msgstr ""
+
+msgid "Y-basis y:"
+msgstr ""
+
+msgid "Tile Mask"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Use Current Frame"
+msgstr ""
+
+msgid "Reset Mask"
+msgstr ""
+
 msgid "Window Opacity"
 msgstr "창 불투명도"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr "전체 화면 모드에서는 창 불투명도가 작동되지 않습니다."
 
 msgid "Panel Layout"
 msgstr "레이아웃 배치"
@@ -267,11 +312,11 @@ msgstr "모두 적용"
 msgid "Recent projects"
 msgstr "최근 프로잭트"
 
-msgid "New tab"
-msgstr "새 창"
+msgid "New project"
+msgstr ""
 
-msgid "Spritesheet (new tab)"
-msgstr "스프레드시트 (새 탭)"
+msgid "Spritesheet (new project)"
+msgstr ""
 
 msgid "Spritesheet (new layer)"
 msgstr "스프레드시트 (새 레이어)"
@@ -463,6 +508,9 @@ msgstr "Cubic"
 msgid "Trilinear"
 msgstr "Trilinear"
 
+msgid "Constant"
+msgstr ""
+
 msgid "General"
 msgstr "일반적"
 
@@ -565,6 +613,12 @@ msgstr "아이콘 색상 출처:"
 msgid "Icon color:"
 msgstr "아이콘 색상:"
 
+msgid "Left tool color:"
+msgstr "왼쪽 도구 색상"
+
+msgid "Right tool color:"
+msgstr "오른쪽 도구 색상"
+
 msgid "Tool button size:"
 msgstr "도구 버튼 크기"
 
@@ -630,6 +684,9 @@ msgstr "색상/채도/명도 수정"
 
 msgid "Gradient"
 msgstr "그레디언트"
+
+msgid "Gradient Map"
+msgstr "그레이디언트 맵"
 
 msgid "Linear"
 msgstr "선형"
