@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-08-13 19:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -217,7 +217,7 @@ msgid "Tile Mask"
 msgstr ""
 
 msgid "Reset"
-msgstr ""
+msgstr "Nulstil"
 
 msgid "Use Current Frame"
 msgstr ""
@@ -313,7 +313,7 @@ msgid "Recent projects"
 msgstr "Seneste projekter"
 
 msgid "New project"
-msgstr ""
+msgstr "Nyt projekt"
 
 msgid "Spritesheet (new project)"
 msgstr ""
@@ -509,7 +509,7 @@ msgid "Trilinear"
 msgstr "Trilinear"
 
 msgid "Constant"
-msgstr ""
+msgstr "Konstant"
 
 msgid "General"
 msgstr "Generel"
