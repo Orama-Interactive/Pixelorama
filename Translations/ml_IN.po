@@ -10,64 +10,64 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malayalam\n"
 "Language: ml_IN\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-08-13 10:45\n"
 
 msgid "OK"
-msgstr ""
+msgstr "ഓക്കേ"
 
 msgid "Cancel"
-msgstr ""
+msgstr "റദ്ദാക്കുക"
 
 msgid "Open"
-msgstr ""
+msgstr "തുറക്കുക"
 
 msgid "Save"
-msgstr ""
+msgstr "സേവ് ചെയ്യുക"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "ദയവായി ഉറപ്പിക്കുക..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "ഫയലിന്റെ പേര് :"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "പ്രോജക്ടിന്റെ പേര് :"
 
 msgid "Image Size"
-msgstr ""
+msgstr "ചിത്രത്തിന്റെ വലുപ്പം"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "ക്യാന്വാസിന്റെ വലുപ്പം"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "ഫ്രയ്മിന്റെ വലുപ്പം"
 
 msgid "Size:"
-msgstr ""
+msgstr "വലുപ്പം:"
 
 msgid "Width:"
-msgstr ""
+msgstr "വീതി"
 
 msgid "Height:"
-msgstr ""
+msgstr "ഉയരം:"
 
 msgid "Center"
-msgstr ""
+msgstr "നടുവേ"
 
 msgid "File"
-msgstr ""
+msgstr "ഫയൽ"
 
 msgid "Edit"
-msgstr ""
+msgstr "എഡിറ്റ്"
 
 msgid "Select"
-msgstr ""
+msgstr "സെലക്ട്"
 
 msgid "View"
-msgstr ""
+msgstr "വ്യൂ"
 
 msgid "Window"
-msgstr ""
+msgstr "വിന്ഡോ"
 
 msgid "Image"
 msgstr ""
