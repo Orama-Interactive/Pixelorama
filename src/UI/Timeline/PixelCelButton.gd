@@ -106,6 +106,8 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			var project: Project = Global.current_project
 			var f: Frame = project.frames[frame]
 			var cel_index: int = project.layers[layer].linked_cels.find(f)
+			# TODO H0: If my content methods idea is used, I think new_cels won't need to exist
+			#			Will new_layers be needed either?
 			var new_layers: Array = project.duplicate_layers()
 			var new_cels: Array = f.cels.duplicate()
 			for i in new_cels.size():
@@ -116,18 +118,21 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			# TODO H: Make sure all this works with group layers:
 			if popup_menu.get_item_metadata(MenuOptions.LINK) == "Unlink Cel":
 				new_layers[layer].linked_cels.remove(cel_index)
-				var sprite := Image.new()
-				sprite.copy_from(f.cels[layer].image)
-				# TODO L: In PixelCel's image setter, setting the iamge already calls create_from_image on the texture,
-				# 			so I think its getting called twice, setting the new image texture first and then setting
-				#			the image should work without having to call create_from_image here:
-				var sprite_texture := ImageTexture.new()
-				sprite_texture.create_from_image(sprite, 0)
-				new_cels[layer].image = sprite
-				new_cels[layer].image_texture = sprite_texture
+#				var sprite := Image.new()
+#				sprite.copy_from(f.cels[layer].image)
+#				# TODO L: In PixelCel's image setter, setting the iamge already calls create_from_image on the texture,
+#				# 			so I think its getting called twice, setting the new image texture first and then setting
+#				#			the image should work without having to call create_from_image here:
+#				var sprite_texture := ImageTexture.new()
+#				sprite_texture.create_from_image(sprite, 0)
+#				new_cels[layer].image = sprite
+#				new_cels[layer].image_texture = sprite_texture
 				project.undo_redo.create_action("Unlink Cel")
-				project.undo_redo.add_do_property(f, "cels", new_cels)
-				project.undo_redo.add_undo_property(f, "cels", f.cels)
+#				project.undo_redo.add_do_property(f, "cels", new_cels)
+#				project.undo_redo.add_undo_property(f, "cels", f.cels)
+				var cel: BaseCel = project.frames[frame].cels[layer]
+				project.undo_redo.add_do_method(cel, "set_content", cel.copy_content())
+				project.undo_redo.add_undo_method(cel, "set_content", cel.get_content())
 
 			elif popup_menu.get_item_metadata(MenuOptions.LINK) == "Link Cel":
 				new_layers[layer].linked_cels.append(f)
@@ -135,10 +140,14 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				if new_layers[layer].linked_cels.size() > 1:
 					# If there are already linked cels, set the current cel's image
 					# to the first linked cel's image
-					new_cels[layer].image = new_layers[layer].linked_cels[0].cels[layer].image
-					new_cels[layer].image_texture = new_layers[layer].linked_cels[0].cels[layer].image_texture
-					project.undo_redo.add_do_property(f, "cels", new_cels)
-					project.undo_redo.add_undo_property(f, "cels", f.cels)
+#					new_cels[layer].image = new_layers[layer].linked_cels[0].cels[layer].image
+#					new_cels[layer].image_texture = new_layers[layer].linked_cels[0].cels[layer].image_texture
+#					project.undo_redo.add_do_property(f, "cels", new_cels)
+#					project.undo_redo.add_undo_property(f, "cels", f.cels)
+					var cel: BaseCel = project.frames[frame].cels[layer]
+					var linked_cel: BaseCel = project.layers[layer].linked_cels[0].cels[layer]
+					project.undo_redo.add_do_method(cel, "set_content", linked_cel.get_content())
+					project.undo_redo.add_undo_method(cel, "set_content", cel.get_content())
 
 			project.undo_redo.add_do_property(project, "layers", new_layers)
 			project.undo_redo.add_undo_property(project, "layers", project.layers)
@@ -155,21 +164,40 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 
 func _delete_cel_content() -> void:
-	if image.is_invisible():
-		return
-	var curr_layer: PixelLayer = Global.current_project.layers[layer]
-	if !curr_layer.can_layer_get_drawn():
-		return
+#	if image.is_invisible():
+#		return
+#	var curr_layer: PixelLayer = Global.current_project.layers[layer]
+#	if !curr_layer.can_layer_get_drawn():
+#		return
+#	var project = Global.current_project
+#	image.unlock()
+#	var data := image.data
+#	project.undos += 1
+#	project.undo_redo.create_action("Draw")
+#	project.undo_redo.add_undo_property(image, "data", data)
+#	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, frame, layer, project)
+#	image.fill(0)
+#	project.undo_redo.add_do_property(image, "data", image.data)
+#	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer, project)
+#	project.undo_redo.commit_action()'
 	var project = Global.current_project
-	image.unlock()
-	var data := image.data
+	var cel: BaseCel = project.frames[frame].cels[layer]
+	var empty_content = cel.create_empty_content()
+	var old_content = cel.get_content()
 	project.undos += 1
 	project.undo_redo.create_action("Draw")
-	project.undo_redo.add_undo_property(image, "data", data)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, frame, layer, project)
-	image.fill(0)
-	project.undo_redo.add_do_property(image, "data", image.data)
+	if project.frames[frame] in project.layers[layer].linked_cels:
+		for frame in project.layers[layer].linked_cels:
+			project.undo_redo.add_do_method(frame.cels[layer], "set_content", empty_content)
+			project.undo_redo.add_undo_method(frame.cels[layer], "set_content", old_content)
+			# TODO H0: Creating an empty texture here is wasting memory, also the updating
+			#			TODO would be fixed automatically by using the same texture
+			# TODO H0: The other cel buttons need their texture updated...
+	else:
+		project.undo_redo.add_do_method(cel, "set_content", empty_content)
+		project.undo_redo.add_undo_method(cel, "set_content", old_content)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer, project)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, frame, layer, project)
 	project.undo_redo.commit_action()
 
 

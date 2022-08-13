@@ -69,7 +69,7 @@ func get_hierarchy_depth() -> int:
 	return 0
 
 
-# Methods to override:
+# Methods to Override:
 
 func serialize() -> Dictionary:
 	assert(index == project.layers.find(self)) # TODO H: remove once sure index is synced properly

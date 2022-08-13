@@ -5,7 +5,7 @@ extends Reference
 
 var opacity: float
 
-# Methods to override:
+# Methods to Override:
 
 # TODO H: Perhaps get_content, set_content, and delete_content/clear_content methods will be good to have here:
 #			- get_content will return certain content of the cel (should metadata be included?)
@@ -17,6 +17,26 @@ var opacity: float
 #				= making this generic and should solve issues with combing cel_button scripts into 1
 #			- copy_content may also be a useful method to have
 
+# TODO H1: These content methods need good doc comments:
+
+func set_content(content: Array) -> void:
+	return
+
+# TODO H0: Consider if the return content methods should have a bool option for including a texture,
+# of if the texture should be completely not included (textures aren't always needed. But how can we
+# ensure that different texture types are properly set up if textures are completely not included here?
+# Will seperate methods for the textures be able to work well?
+# Maybe for now, don't worry about possible different texture types, and don't do copying layers/frames
+func get_content() -> Array:
+	return []
+
+
+func create_empty_content() -> Array:
+	return []
+
+
+func copy_content() -> Array:
+	return []
 
 
 # TODO H: Should this be the case?

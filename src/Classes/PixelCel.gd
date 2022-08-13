@@ -22,6 +22,31 @@ func image_changed(value: Image) -> void:
 		image_texture.create_from_image(image, 0)
 
 
+func set_content(content: Array) -> void:
+	image = content[0]
+	image_texture = content[1]
+
+
+func get_content() -> Array:
+	return [image, image_texture]
+
+
+func create_empty_content() -> Array:
+	var empty_image := Image.new()
+	empty_image.create(image.get_size().x, image.get_size().y, false, Image.FORMAT_RGBA8)
+	var empty_texture := ImageTexture.new()
+	empty_texture.create_from_image(empty_image, 0)
+	return [empty_image, empty_texture]
+
+
+func copy_content() -> Array:
+	var copy_image := Image.new()
+	copy_image.create_from_data(image.get_width(), image.get_height(), false, Image.FORMAT_RGBA8, image.get_data())
+	var copy_texture := ImageTexture.new()
+	copy_texture.create_from_image(copy_image, 0)
+	return [copy_image, copy_texture]
+
+
 func get_image() -> Image:
 	return image
 
