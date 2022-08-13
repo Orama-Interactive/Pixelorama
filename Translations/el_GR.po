@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-08-10 23:47\n"
+"PO-Revision-Date: 2022-08-13 14:45\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -166,7 +166,7 @@ msgid "Pivot (x, y):"
 msgstr "Άξονας (x, y):"
 
 msgid "Smear options:"
-msgstr "Επιλογές μουτζούρας:"
+msgstr "Επιλογές απλώματος:"
 
 msgid "Tolerance:"
 msgstr "Ανοχή:"
