@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-08-11 21:48\n"
+"PO-Revision-Date: 2022-08-14 17:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -163,7 +163,7 @@ msgid "Rotate Image"
 msgstr "Obróć obraz"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "Pivot (x, y):"
 
 msgid "Smear options:"
 msgstr "Opcje rozmazywania:"
@@ -202,16 +202,16 @@ msgid "Tile Mode Offsets"
 msgstr "Przesunięcia trybu kafelkowego"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "Baza X.x:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "Baza X.y:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "Baza Y.x:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Baza Y.y:"
 
 msgid "Tile Mask"
 msgstr "Maska kafelków"
