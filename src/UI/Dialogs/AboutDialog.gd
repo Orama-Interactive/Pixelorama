@@ -84,6 +84,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Vancat": ["Turkish"],
 	"Ferhat Geçdoğan (ferhatgec)": ["Turkish"],
 	"designy": ["Turkish"],
+	"CaelusV": ["Danish"],
 	"GGIEnrike":
 	[
 		"Romanian",
