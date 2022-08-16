@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v0.10.2] - Unreleased
+## [v0.10.2] - 2022-08-18
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@GrantMoyer](https://github.com/GrantMoyer)
 
@@ -16,6 +16,7 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@GrantMoyer](h
 - A basic API for Extensions. Has not been documented yet and is stil experimental.
 - A similarity option in the Select by Color tool. [#710](https://github.com/Orama-Interactive/Pixelorama/pull/710)
 - The left and right tool colors in the background of the tool buttons and the indicators on the canvas can now be changed from the Preferences.
+- Added Danish translations.
 
 ### Changed
 - Copying now works between multiple Pixelorama instances, and the clipboard is even being remembered when the app closes. Note that you cannot copy image data to another software, and you cannot paste image data from another software into Pixelorama. [#693](https://github.com/Orama-Interactive/Pixelorama/pull/693)
@@ -32,7 +33,7 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@GrantMoyer](h
 - Even-numbered thickness sizes on the rectangle and ellipse shape tools now work as expected. The thickness of the shapes no longer goes up by 2 pixels. [23f591a](https://github.com/Orama-Interactive/Pixelorama/commit/23f591a8626c12fd7e6344ab59f8e33b8d20cb99)
 - [[Keychain](https://github.com/Orama-Interactive/Keychain)] Fixed issue with menu events being triggered by actions that are not exact matches. This means that, for example, "Control + Shift + S" will no longer activate both "Save" and "Save as", but only "Save as". [09c9583](https://github.com/Orama-Interactive/Keychain/commit/09c95835ef034effa949732cf9cf9bd315ed08a8)
 - Massively improved the performance of the selection system, most notably the Rectangle Selection and Select by Color tools, and selection content deletion. [#710](https://github.com/Orama-Interactive/Pixelorama/pull/710)
-- Performance when drawing big lines on big canvases has been increased, thanks to the update to Godot 3.5. Most likely due to [godot/#62826](https://github.com/godotengine/godot/pull/62826)
+- Performance when drawing big lines on big canvases has been increased, thanks to the update to Godot 3.5. Most likely due to [godotengine/godot#62826](https://github.com/godotengine/godot/pull/62826)
 - Fixed issue with save file dialog taking the name of the first file it sees. [5d65e82](https://github.com/Orama-Interactive/Pixelorama/commit/5d65e820708ed7586fdb7f0ac4633f7b468ec73d)
 - Fixed grid-based snapped movement when the offset of the grid was larger than the grid size. [#712](https://github.com/Orama-Interactive/Pixelorama/pull/712)
 - Fixed the symmetry points being on the wrong location on project initialization. [f432def](https://github.com/Orama-Interactive/Pixelorama/commit/f432defd1f92fde0677a5d10fde87e5219e47065)
