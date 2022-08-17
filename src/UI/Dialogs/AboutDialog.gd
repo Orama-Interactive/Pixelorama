@@ -32,6 +32,7 @@ const TRANSLATORS_DICTIONARY := {
 	"TheNoobPro44": ["Brazilian Portuguese"],
 	"DippoZz": ["Brazilian Portuguese"],
 	"Luciano Salomoni (LucianoSalomoni)": ["Brazilian Portuguese"],
+	"Carlos A. G. Silva (CarloSilva)": ["Brazilian Portuguese"],
 	"Andreev Andrei": ["Russian"],
 	"ax trifonov (ax34)": ["Russian"],
 	"Artem (blinovartem)": ["Russian"],
@@ -214,10 +215,12 @@ func create_donors() -> void:
 	donors.create_item(donors_root).set_text(0, "  David Maziarka")
 	donors.create_item(donors_root).set_text(0, "  Jonas Rudlang")
 	donors.create_item(donors_root).set_text(0, "  ShikadiGum")
+	donors.create_item(donors_root).set_text(0, "  pookey")
 
 
 func create_contributors() -> void:
 	var contributor_root := contributors.create_item()
+	contributors.create_item(contributor_root).set_text(0, "  Fayez Akhtar (Variable)")
 	contributors.create_item(contributor_root).set_text(0, "  Hugo Locurcio (Calinou)")
 	contributors.create_item(contributor_root).set_text(0, "  CheetoHead (greusser)")
 	contributors.create_item(contributor_root).set_text(0, "  Michael Alexsander (YeldhamDev)")
@@ -231,7 +234,6 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Xenofon Konitsas (huskee)")
 	contributors.create_item(contributor_root).set_text(0, "  Martin Zabinski (Martin1991zab)")
 	contributors.create_item(contributor_root).set_text(0, "  Marco Galli (Gaarco)")
-	contributors.create_item(contributor_root).set_text(0, "  Fayez Akhtar (Variable)")
 	contributors.create_item(contributor_root).set_text(0, "  Matheus Pesegoginski (MatheusPese)")
 	contributors.create_item(contributor_root).set_text(0, "  AbhinavKDev (abhinav3967)")
 	contributors.create_item(contributor_root).set_text(0, "  sapient_cogbag")
@@ -251,7 +253,7 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  THWLF")
 	contributors.create_item(contributor_root).set_text(0, "  Gamespleasure")
 	contributors.create_item(contributor_root).set_text(0, "  ballerburg9005")
-	contributors.create_item(contributor_root).set_text(0, "  Kawan Weege (DragonOfWar)")
+	contributors.create_item(contributor_root).set_text(0, "  Kawan Weege (Dwahgon)")
 	contributors.create_item(contributor_root).set_text(0, "  kevinms")
 	contributors.create_item(contributor_root).set_text(0, "  Álex Román Núñez (EIREXE)")
 	contributors.create_item(contributor_root).set_text(0, "  mrtripie")
