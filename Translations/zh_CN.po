@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-08-13 06:25\n"
 
 msgid "OK"
 msgstr "确定"
@@ -163,16 +163,16 @@ msgid "Rotate Image"
 msgstr "旋转图像"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "支点 (x, y):"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "涂抹选项："
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "容差:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "初始角度:"
 
 msgid "Clear"
 msgstr "取消选中"
@@ -181,7 +181,7 @@ msgid "Invert"
 msgstr "反向"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "灰度视图"
 
 msgid "Mirror Image"
 msgstr "镜像图像"
@@ -199,31 +199,31 @@ msgid "Tile Mode"
 msgstr "平铺模式"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "平铺模式偏移"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X-基准 x:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "X-基准 y:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "Y-基准 x:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y-基准 y:"
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "平铺蒙版"
 
 msgid "Reset"
-msgstr ""
+msgstr "重置"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "当前帧"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "重置蒙版"
 
 msgid "Window Opacity"
 msgstr "窗口不透明度"
@@ -313,10 +313,10 @@ msgid "Recent projects"
 msgstr "最近项目"
 
 msgid "New project"
-msgstr ""
+msgstr "新建项目"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "纸张（新建项目）"
 
 msgid "Spritesheet (new layer)"
 msgstr "纸张（新建图层）"
@@ -509,7 +509,7 @@ msgid "Trilinear"
 msgstr "三线性"
 
 msgid "Constant"
-msgstr ""
+msgstr "常量"
 
 msgid "General"
 msgstr "常规​​​​​"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-08-11 12:22\n"
+"PO-Revision-Date: 2022-08-16 10:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -166,7 +166,7 @@ msgid "Pivot (x, y):"
 msgstr "Pivô (x, y):"
 
 msgid "Smear options:"
-msgstr "Opções Smear:"
+msgstr "Opções de Mancha:"
 
 msgid "Tolerance:"
 msgstr "Tolerância:"
@@ -181,7 +181,7 @@ msgid "Invert"
 msgstr "Inverter"
 
 msgid "Grayscale View"
-msgstr "Visualização em cinza"
+msgstr "Visualização em tons de cinza"
 
 msgid "Mirror Image"
 msgstr "Imagem espelhada"
@@ -199,7 +199,7 @@ msgid "Tile Mode"
 msgstr "Modo de Tile"
 
 msgid "Tile Mode Offsets"
-msgstr "Deslocamentos do Modo Telha"
+msgstr "Deslocamentos do Modo Ladrilho"
 
 msgid "X-basis x:"
 msgstr "X-base x:"
@@ -214,7 +214,7 @@ msgid "Y-basis y:"
 msgstr "Y-base y:"
 
 msgid "Tile Mask"
-msgstr "Máscara de bloco"
+msgstr "Máscara de Ladrilho"
 
 msgid "Reset"
 msgstr "Redefinir"
@@ -223,7 +223,7 @@ msgid "Use Current Frame"
 msgstr "Usar o Quadro Atual"
 
 msgid "Reset Mask"
-msgstr "Resetar máscara"
+msgstr "Reiniciar máscara"
 
 msgid "Window Opacity"
 msgstr "Opacidade da Janela"
@@ -316,7 +316,7 @@ msgid "New project"
 msgstr "Novo projeto"
 
 msgid "Spritesheet (new project)"
-msgstr "Planilha (novo projeto)"
+msgstr "Spritesheet (novo projeto)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Spritesheet (nova camada)"

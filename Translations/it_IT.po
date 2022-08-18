@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-08-12 00:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -163,16 +163,16 @@ msgid "Rotate Image"
 msgstr "Ruota Immagine"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "Perno (x, y):"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Opzioni di sbavatura:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Tolleranza:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Angolo iniziale:"
 
 msgid "Clear"
 msgstr "Cancella"
@@ -181,7 +181,7 @@ msgid "Invert"
 msgstr "Inverti"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Visualizzazione Scala Di Grigio"
 
 msgid "Mirror Image"
 msgstr "Immagine A Specchio"
@@ -199,31 +199,31 @@ msgid "Tile Mode"
 msgstr "Modalità Tile"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Scostamenti Modalità Piastrelle"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X-base x:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "X base y:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "Y base x:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y-base y:"
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Maschera Piastrelle"
 
 msgid "Reset"
-msgstr ""
+msgstr "Azzera"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "Usa il Fotogramma Attuale"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Azzera Maschera"
 
 msgid "Window Opacity"
 msgstr "Opacità Finestra"
@@ -313,10 +313,10 @@ msgid "Recent projects"
 msgstr "Progetti recenti"
 
 msgid "New project"
-msgstr ""
+msgstr "Nuovo progetto"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Spritesheet (progetto nuovo)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Spritesheet (nuovo livello)"
