@@ -327,18 +327,12 @@ func get_assigned_color(button: int) -> Color:
 
 
 func set_button_size(button_size: int) -> void:
-	if button_size == Global.ButtonSize.SMALL:
-		for t in _tool_buttons.get_children():
-			t.rect_min_size = Vector2(24, 24)
-			t.get_node("BackgroundLeft").rect_size.x = 12
-			t.get_node("BackgroundRight").rect_size.x = 12
-			t.get_node("BackgroundRight").rect_position = Vector2(24, 24)
-	else:
-		for t in _tool_buttons.get_children():
-			t.rect_min_size = Vector2(32, 32)
-			t.get_node("BackgroundLeft").rect_size.x = 16
-			t.get_node("BackgroundRight").rect_size.x = 16
-			t.get_node("BackgroundRight").rect_position = Vector2(32, 32)
+	var size := Vector2(24, 24) if button_size == Global.ButtonSize.SMALL else Vector2(32, 32)
+	for t in _tool_buttons.get_children():
+		t.rect_min_size = size
+		t.get_node("BackgroundLeft").rect_size.x = size.x / 2
+		t.get_node("BackgroundRight").rect_size.x = size.x / 2
+		t.get_node("BackgroundRight").rect_position = size
 
 
 func update_tool_buttons() -> void:

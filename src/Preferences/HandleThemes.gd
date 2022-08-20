@@ -89,10 +89,8 @@ func change_theme(id: int) -> void:
 	VisualServer.set_default_clear_color(clear_color)
 
 	# Temporary code
-	var layer_button_pcont: PanelContainer = Global.animation_timeline.find_node(
-		"LayerButtonPanelContainer"
-	)
-	var lbpc_stylebox: StyleBoxFlat = layer_button_pcont.get_stylebox("panel", "PanelContainer")
+	var lbpc: PanelContainer = Global.animation_timeline.find_node("LayerButtonPanelContainer")
+	var lbpc_stylebox: StyleBoxFlat = lbpc.get_stylebox("panel", "PanelContainer")
 	lbpc_stylebox.bg_color = clear_color
 
 	change_icon_colors()
