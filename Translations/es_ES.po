@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-08-22 01:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -166,13 +166,13 @@ msgid "Pivot (x, y):"
 msgstr ""
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Opciones de Smear:"
 
 msgid "Tolerance:"
 msgstr ""
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Ángulo inicial:"
 
 msgid "Clear"
 msgstr "Limpiar"
@@ -181,7 +181,7 @@ msgid "Invert"
 msgstr "Invertir"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Ver en Escala de Grises"
 
 msgid "Mirror Image"
 msgstr "Reflejar Imagen"
@@ -199,7 +199,7 @@ msgid "Tile Mode"
 msgstr "Modo Mosaico"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Desplazamiento del Modo Casilla"
 
 msgid "X-basis x:"
 msgstr ""
@@ -214,13 +214,13 @@ msgid "Y-basis y:"
 msgstr ""
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Máscara de Casillas"
 
 msgid "Reset"
-msgstr ""
+msgstr "Reiniciar"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "Utilizar Fotograma actual"
 
 msgid "Reset Mask"
 msgstr ""
@@ -316,7 +316,7 @@ msgid "New project"
 msgstr ""
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Hoja de Sprites (Nuevo Proyecto)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Hoja de sprites (nueva capa)"
