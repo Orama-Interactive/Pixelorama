@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-08-23 21:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Exporter"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Écraser"
 
 msgid "Export..."
 msgstr "Exporter..."
@@ -163,7 +163,7 @@ msgid "Rotate Image"
 msgstr "Pivoter l'image"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "Pivot (x, y) :"
 
 msgid "Smear options:"
 msgstr ""
@@ -172,7 +172,7 @@ msgid "Tolerance:"
 msgstr ""
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Angle initial :"
 
 msgid "Clear"
 msgstr "Effacer"
@@ -217,10 +217,10 @@ msgid "Tile Mask"
 msgstr ""
 
 msgid "Reset"
-msgstr ""
+msgstr "Réinitialiser"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "Utiliser l'image actuelle"
 
 msgid "Reset Mask"
 msgstr ""
@@ -247,7 +247,7 @@ msgid "Manage Layouts"
 msgstr "Gérer les dispositions"
 
 msgid "Add"
-msgstr ""
+msgstr "Ajouter"
 
 msgid "Add Layout"
 msgstr ""
@@ -307,13 +307,13 @@ msgid "Import as:"
 msgstr "Importer en tant que :"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "Appliquer à tous"
 
 msgid "Recent projects"
 msgstr "Projets récents"
 
 msgid "New project"
-msgstr ""
+msgstr "Nouveau projet"
 
 msgid "Spritesheet (new project)"
 msgstr ""
@@ -385,7 +385,7 @@ msgid "Directory path is not valid!"
 msgstr ""
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Nom de fichier invalide !"
 
 msgid "Directory path and file name are not valid!"
 msgstr ""
@@ -893,16 +893,16 @@ msgid "Ukrainian"
 msgstr "Ukrainien"
 
 msgid "Danish"
-msgstr ""
+msgstr "Danois"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Suédois"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Serbe (Cyrillique)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Néerlandais"
 
 msgid "Development Team"
 msgstr "Équipe de développement"
