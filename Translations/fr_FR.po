@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-08-23 21:39\n"
+"PO-Revision-Date: 2022-08-23 22:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Nom du fichier :"
 
 msgid "Project Name:"
-msgstr "Nom du projet:"
+msgstr "Nom du projet :"
 
 msgid "Image Size"
 msgstr "Taille de l'image"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Taille de la frame"
 
 msgid "Size:"
-msgstr "Taille:"
+msgstr "Taille :"
 
 msgid "Width:"
 msgstr "Largeur :"
@@ -187,7 +187,7 @@ msgid "Mirror Image"
 msgstr ""
 
 msgid "Flip Horizontal"
-msgstr "Retourner Horizontalement"
+msgstr "Miroir horizontal"
 
 msgid "Flip Vertical"
 msgstr "Miroir vertical"
@@ -229,7 +229,7 @@ msgid "Window Opacity"
 msgstr "Opacité de la fenêtre"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "L'opacité des fenêtres ne fonctionne pas en mode plein écran."
 
 msgid "Panel Layout"
 msgstr "Disposition des sections"
@@ -668,16 +668,16 @@ msgid "Outline"
 msgstr "Contour"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Ombre portée"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Décalage X :"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Décalage Y :"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Couleur d'ombre :"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajuster la Teinte/Saturation/Valeur"
@@ -689,10 +689,10 @@ msgid "Gradient Map"
 msgstr ""
 
 msgid "Linear"
-msgstr ""
+msgstr "Linéaire"
 
 msgid "Radial"
-msgstr ""
+msgstr "Radial"
 
 msgid "Linear Step"
 msgstr ""
@@ -707,13 +707,13 @@ msgid "Radial Dithering"
 msgstr ""
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Taille de transition :"
 
 msgid "Center:"
-msgstr ""
+msgstr "Centre :"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Rayon :"
 
 msgid "Dithering pattern:"
 msgstr ""
@@ -967,7 +967,10 @@ msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "Sélection polygonale\n\n"
+"%s pour le bouton gauche de la souris\n"
+"%s pour le bouton droit de la souris\n\n"
+"Double-cliquez pour relier le dernier point au point de départ"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -1015,7 +1018,10 @@ msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "Pipette\n\n"
+"%s pour le bouton gauche de la souris\n"
+"%s pour le bouton droit de la souris\n\n"
+"Sélectionnez une couleur à partir d'un pixel du sprite"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -2052,19 +2058,19 @@ msgid "Position:"
 msgstr "Position :"
 
 msgid "Tools"
-msgstr ""
+msgstr "Outils"
 
 msgid "Main Canvas"
-msgstr ""
+msgstr "Canevas principal"
 
 msgid "Second Canvas"
-msgstr ""
+msgstr "Canevas secondaire"
 
 msgid "Animation Timeline"
 msgstr ""
 
 msgid "Canvas Preview"
-msgstr ""
+msgstr "Aperçu du canevas"
 
 msgid "Color Pickers"
 msgstr ""
