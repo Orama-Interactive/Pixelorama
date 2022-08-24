@@ -143,10 +143,8 @@ var palettes := {}
 # Nodes
 var notification_label_node: PackedScene = preload("res://src/UI/NotificationLabel.tscn")
 
-onready var control: Node = get_tree().get_root().get_node("Control")
+onready var control: Node = get_tree().current_scene
 
-onready var left_cursor: Sprite = control.find_node("LeftCursor")
-onready var right_cursor: Sprite = control.find_node("RightCursor")
 onready var canvas: Canvas = control.find_node("Canvas")
 onready var tabs: Tabs = control.find_node("Tabs")
 onready var main_viewport: ViewportContainer = control.find_node("ViewportContainer")

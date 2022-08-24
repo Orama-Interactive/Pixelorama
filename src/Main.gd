@@ -7,8 +7,10 @@ var cursor_image: Texture = preload("res://assets/graphics/cursor.png")
 
 onready var ui := $MenuAndUI/UI/DockableContainer
 onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
-onready var quit_dialog: ConfirmationDialog = find_node("QuitDialog")
-onready var quit_and_save_dialog: ConfirmationDialog = find_node("QuitAndSaveDialog")
+onready var quit_dialog: ConfirmationDialog = $Dialogs/QuitDialog
+onready var quit_and_save_dialog: ConfirmationDialog = $Dialogs/QuitAndSaveDialog
+onready var left_cursor: Sprite = $LeftCursor
+onready var right_cursor: Sprite = $RightCursor
 
 
 func _init() -> void:
@@ -78,8 +80,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	Global.left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
-	Global.right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
+	left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
+	right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
 
 	if event is InputEventKey and (event.scancode == KEY_ENTER or event.scancode == KEY_KP_ENTER):
 		if get_focus_owner() is LineEdit:
