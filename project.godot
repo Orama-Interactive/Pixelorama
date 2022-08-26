@@ -203,6 +203,7 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1280
 window/size/height=720
+window/dpi/allow_hidpi=true
 window/per_pixel_transparency/allowed=true
 window/per_pixel_transparency/enabled=true
 window/per_pixel_transparency/allowed.HTML5=false
@@ -213,10 +214,6 @@ window/per_pixel_transparency/enabled.Android=false
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/dockable_container/plugin.cfg", "res://addons/keychain/plugin.cfg" )
-
-[gui]
-
-theme/use_hidpi.clickable=true
 
 [importer_defaults]
 
