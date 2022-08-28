@@ -5,3 +5,50 @@
 
 [node name="ToolOptions" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="Similarity" type="VBoxContainer" parent="." index="8"]
+margin_top = 166.0
+margin_right = 116.0
+margin_bottom = 228.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Similarity" index="0"]
+margin_left = 26.0
+margin_right = 90.0
+margin_bottom = 14.0
+size_flags_horizontal = 4
+text = "Similarity:"
+
+[node name="SimilaritySpinBox" type="SpinBox" parent="Similarity" index="1"]
+margin_left = 21.0
+margin_top = 18.0
+margin_right = 95.0
+margin_bottom = 42.0
+hint_tooltip = "How much two colors are Similar/Close together"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+value = 100.0
+align = 1
+suffix = "%"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SimilaritySlider" type="HSlider" parent="Similarity" index="2"]
+margin_left = 12.0
+margin_top = 46.0
+margin_right = 104.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 92, 0 )
+hint_tooltip = "How much two colors are Similar/Close together"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+value = 100.0
+__meta__ = {
+"_editor_description_": ""
+}
+
+[connection signal="value_changed" from="Similarity/SimilaritySpinBox" to="." method="_on_Similarity_value_changed"]
+[connection signal="value_changed" from="Similarity/SimilaritySlider" to="." method="_on_Similarity_value_changed"]

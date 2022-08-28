@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2022-05-18 18:59\n"
+"PO-Revision-Date: 2022-08-10 22:47\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -162,11 +162,26 @@ msgstr ""
 msgid "Rotate Image"
 msgstr "Ротирај слику"
 
+msgid "Pivot (x, y):"
+msgstr ""
+
+msgid "Smear options:"
+msgstr ""
+
+msgid "Tolerance:"
+msgstr ""
+
+msgid "Initial angle:"
+msgstr ""
+
 msgid "Clear"
 msgstr "Брисати"
 
 msgid "Invert"
 msgstr "Обрнути"
+
+msgid "Grayscale View"
+msgstr ""
 
 msgid "Mirror Image"
 msgstr ""
@@ -183,8 +198,38 @@ msgstr "Подешавања"
 msgid "Tile Mode"
 msgstr "Бешавни режим"
 
+msgid "Tile Mode Offsets"
+msgstr ""
+
+msgid "X-basis x:"
+msgstr ""
+
+msgid "X-basis y:"
+msgstr ""
+
+msgid "Y-basis x:"
+msgstr ""
+
+msgid "Y-basis y:"
+msgstr ""
+
+msgid "Tile Mask"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Use Current Frame"
+msgstr ""
+
+msgid "Reset Mask"
+msgstr ""
+
 msgid "Window Opacity"
 msgstr "Непрозирност прозора"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr ""
 
 msgid "Panel Layout"
 msgstr ""
@@ -267,10 +312,10 @@ msgstr ""
 msgid "Recent projects"
 msgstr "Скорашњи пројекти"
 
-msgid "New tab"
-msgstr "Нови таб"
+msgid "New project"
+msgstr ""
 
-msgid "Spritesheet (new tab)"
+msgid "Spritesheet (new project)"
 msgstr ""
 
 msgid "Spritesheet (new layer)"
@@ -461,6 +506,9 @@ msgstr ""
 msgid "Trilinear"
 msgstr "Трилинеарно"
 
+msgid "Constant"
+msgstr ""
+
 msgid "General"
 msgstr "Опште"
 
@@ -563,6 +611,12 @@ msgstr ""
 msgid "Icon color:"
 msgstr ""
 
+msgid "Left tool color:"
+msgstr ""
+
+msgid "Right tool color:"
+msgstr ""
+
 msgid "Tool button size:"
 msgstr ""
 
@@ -627,6 +681,9 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
 msgid "Gradient"
+msgstr ""
+
+msgid "Gradient Map"
 msgstr ""
 
 msgid "Linear"

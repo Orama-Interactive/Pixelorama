@@ -5,7 +5,6 @@ enum Cameras { MAIN, SECOND, SMALL }
 const KEY_MOVE_ACTION_NAMES := ["camera_left", "camera_right", "camera_up", "camera_down"]
 const CAMERA_SPEED_RATE := 15.0
 
-var tween: Tween
 var zoom_min := Vector2(0.005, 0.005)
 var zoom_max := Vector2.ONE
 var viewport_container: ViewportContainer
@@ -19,9 +18,6 @@ func _ready() -> void:
 	rotating = true
 	viewport_container = get_parent().get_parent()
 	transparent_checker = get_parent().get_node("TransparentChecker")
-	tween = Tween.new()
-	add_child(tween)
-	tween.connect("tween_step", self, "_on_tween_step")
 	update_transparent_checker_offset()
 
 	# signals regarding rotation stats
@@ -180,13 +176,11 @@ func zoom_camera(dir: int) -> void:
 				offset
 				+ (-0.5 * viewport_size + mouse_pos).rotated(rotation) * (zoom - new_zoom)
 			)
-			tween.interpolate_property(
-				self, "zoom", zoom, new_zoom, 0.05, Tween.TRANS_LINEAR, Tween.EASE_IN
-			)
-			tween.interpolate_property(
-				self, "offset", offset, new_offset, 0.05, Tween.TRANS_LINEAR, Tween.EASE_IN
-			)
-			tween.start()
+			var tween := create_tween().set_parallel()
+			tween.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
+			tween.connect("step_finished", self, "_on_tween_step")
+			tween.tween_property(self, "zoom", new_zoom, 0.05)
+			tween.tween_property(self, "offset", new_offset, 0.05)
 
 	else:
 		var prev_zoom := zoom
@@ -205,10 +199,9 @@ func zoom_camera_percent(value: float) -> void:
 	var percent: float = 100.0 / value
 	var new_zoom = Vector2(percent, percent)
 	if Global.smooth_zoom:
-		tween.interpolate_property(
-			self, "zoom", zoom, new_zoom, 0.05, Tween.TRANS_LINEAR, Tween.EASE_IN
-		)
-		tween.start()
+		var tween := create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
+		tween.connect("step_finished", self, "_on_tween_step")
+		tween.tween_property(self, "zoom", new_zoom, 0.05)
 	else:
 		zoom = new_zoom
 		zoom_changed()
@@ -234,7 +227,7 @@ func _update_rulers() -> void:
 	Global.vertical_ruler.update()
 
 
-func _on_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
+func _on_tween_step(_idx: int) -> void:
 	zoom_changed()
 
 

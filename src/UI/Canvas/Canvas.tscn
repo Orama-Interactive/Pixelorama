@@ -43,6 +43,7 @@ render_target_update_mode = 3
 script = ExtResource( 5 )
 
 [node name="TileMode" type="Node2D" parent="."]
+show_behind_parent = true
 material = SubResource( 1 )
 script = ExtResource( 4 )
 

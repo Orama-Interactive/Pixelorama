@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2022-05-18 18:59\n"
+"PO-Revision-Date: 2022-08-10 22:47\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -162,11 +162,26 @@ msgstr "Afbeelding centreren"
 msgid "Rotate Image"
 msgstr "Afbeelding draaien"
 
+msgid "Pivot (x, y):"
+msgstr ""
+
+msgid "Smear options:"
+msgstr ""
+
+msgid "Tolerance:"
+msgstr ""
+
+msgid "Initial angle:"
+msgstr ""
+
 msgid "Clear"
 msgstr "Wissen"
 
 msgid "Invert"
 msgstr "Omkeren"
+
+msgid "Grayscale View"
+msgstr ""
 
 msgid "Mirror Image"
 msgstr ""
@@ -183,7 +198,37 @@ msgstr "Instellingen"
 msgid "Tile Mode"
 msgstr "Tegelmodus"
 
+msgid "Tile Mode Offsets"
+msgstr ""
+
+msgid "X-basis x:"
+msgstr ""
+
+msgid "X-basis y:"
+msgstr ""
+
+msgid "Y-basis x:"
+msgstr ""
+
+msgid "Y-basis y:"
+msgstr ""
+
+msgid "Tile Mask"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Use Current Frame"
+msgstr ""
+
+msgid "Reset Mask"
+msgstr ""
+
 msgid "Window Opacity"
+msgstr ""
+
+msgid "Window opacity does not work on fullscreen mode."
 msgstr ""
 
 msgid "Panel Layout"
@@ -267,11 +312,11 @@ msgstr ""
 msgid "Recent projects"
 msgstr "Recente projecten"
 
-msgid "New tab"
-msgstr "Nieuw tabblad"
+msgid "New project"
+msgstr ""
 
-msgid "Spritesheet (new tab)"
-msgstr "Spritesheet (nieuw tabblad)"
+msgid "Spritesheet (new project)"
+msgstr ""
 
 msgid "Spritesheet (new layer)"
 msgstr "Spritesheet (nieuwe laag)"
@@ -461,6 +506,9 @@ msgstr ""
 msgid "Trilinear"
 msgstr ""
 
+msgid "Constant"
+msgstr ""
+
 msgid "General"
 msgstr ""
 
@@ -563,6 +611,12 @@ msgstr ""
 msgid "Icon color:"
 msgstr ""
 
+msgid "Left tool color:"
+msgstr ""
+
+msgid "Right tool color:"
+msgstr ""
+
 msgid "Tool button size:"
 msgstr ""
 
@@ -627,6 +681,9 @@ msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
 msgid "Gradient"
+msgstr ""
+
+msgid "Gradient Map"
 msgstr ""
 
 msgid "Linear"

@@ -144,7 +144,7 @@ func _create_new_palette_from_current_selection(
 	for x in current_project.size.x:
 		for y in current_project.size.y:
 			var pos := Vector2(x, y)
-			if current_project.selection_bitmap.get_bit(pos):
+			if current_project.selection_map.is_pixel_selected(pos):
 				pixels.append(pos)
 	_fill_new_palette_with_colors(pixels, new_palette, add_alpha_colors, get_colors_from)
 

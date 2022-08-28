@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-05-18 18:59\n"
+"PO-Revision-Date: 2022-08-11 08:37\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -162,11 +162,26 @@ msgstr "Централізувати зображення"
 msgid "Rotate Image"
 msgstr "Повернути зображення"
 
+msgid "Pivot (x, y):"
+msgstr "Центр обертання (x, y):"
+
+msgid "Smear options:"
+msgstr "Параметри мазку:"
+
+msgid "Tolerance:"
+msgstr "Допустиме відхилення:"
+
+msgid "Initial angle:"
+msgstr "Початковий кут:"
+
 msgid "Clear"
 msgstr "Очистити"
 
 msgid "Invert"
 msgstr "Інвертувати"
+
+msgid "Grayscale View"
+msgstr "Сірий режим перегляду"
 
 msgid "Mirror Image"
 msgstr "Віддзеркалити зображення"
@@ -183,8 +198,38 @@ msgstr "Налаштування"
 msgid "Tile Mode"
 msgstr "Безшовний режим"
 
+msgid "Tile Mode Offsets"
+msgstr "Зміщення в безшовному режимі"
+
+msgid "X-basis x:"
+msgstr "X для X-базису:"
+
+msgid "X-basis y:"
+msgstr "Y для X-базису:"
+
+msgid "Y-basis x:"
+msgstr "X для Y-базису:"
+
+msgid "Y-basis y:"
+msgstr "Y для Y-базису:"
+
+msgid "Tile Mask"
+msgstr "Тайлова маска"
+
+msgid "Reset"
+msgstr "Скинути"
+
+msgid "Use Current Frame"
+msgstr "З поточного кадра"
+
+msgid "Reset Mask"
+msgstr "Скинути маску"
+
 msgid "Window Opacity"
 msgstr "Непрозорість вікна"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr "Прозорість вікна не працює в повноекранному режимі."
 
 msgid "Panel Layout"
 msgstr "Позиція панелей"
@@ -267,11 +312,11 @@ msgstr "Застосувати до всіх"
 msgid "Recent projects"
 msgstr "Нещодавні проєкти"
 
-msgid "New tab"
-msgstr "Нова вкладка"
+msgid "New project"
+msgstr "Новий проєкт"
 
-msgid "Spritesheet (new tab)"
-msgstr "Таблиця спрайтів (нова вкладка)"
+msgid "Spritesheet (new project)"
+msgstr "Таблиця спрайтів (новий проєкт)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Таблиця спрайтів (новий шар)"
@@ -337,13 +382,13 @@ msgid "File %s already exists. Overwrite?"
 msgstr "Файл \"%s\" вже існує. Перезаписати?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Шлях до директорії неправильний!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Назва файла неправильна!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Шлях до директорії і назва файла неправильні!"
 
 msgid "Exporting in progress..."
 msgstr "Виконується експорт..."
@@ -463,6 +508,9 @@ msgstr "Кубічна"
 msgid "Trilinear"
 msgstr "Трилінійна"
 
+msgid "Constant"
+msgstr "Константа"
+
 msgid "General"
 msgstr "Загальні"
 
@@ -565,6 +613,12 @@ msgstr "Колір значків з:"
 msgid "Icon color:"
 msgstr "Колір значків:"
 
+msgid "Left tool color:"
+msgstr "Колір лівого інструменту:"
+
+msgid "Right tool color:"
+msgstr "Колір правого інструменту:"
+
 msgid "Tool button size:"
 msgstr "Розмір кнопок інструментів:"
 
@@ -614,16 +668,16 @@ msgid "Outline"
 msgstr "Контур"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Тінь"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Зсув за X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Зсув за Y:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Колір тіні:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Змінити Відтінки/Насиченість/Яскравість"
@@ -631,35 +685,38 @@ msgstr "Змінити Відтінки/Насиченість/Яскравіс�
 msgid "Gradient"
 msgstr "Градієнт"
 
+msgid "Gradient Map"
+msgstr "Карта градієнту"
+
 msgid "Linear"
-msgstr ""
+msgstr "Лінійний"
 
 msgid "Radial"
-msgstr ""
+msgstr "Радіальний"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Лінійний кроками"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Радіальний кроками"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "Лінійний крапками"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "Радіальний крапками"
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Розмір переходу:"
 
 msgid "Center:"
-msgstr ""
+msgstr "Центр:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Радіус:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Шаблон точок:"
 
 msgid "Adjust HSV"
 msgstr "Налаштування HSV"
@@ -1915,7 +1972,7 @@ msgid "Delete"
 msgstr "Видалити"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Відкинути все"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"

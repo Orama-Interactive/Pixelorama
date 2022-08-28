@@ -75,7 +75,7 @@ func draw_preview() -> void:
 
 func _get_draw_rect() -> Rect2:
 	if Global.current_project.has_selection:
-		return Global.current_project.get_selection_rectangle()
+		return Global.current_project.selection_map.get_used_rect()
 	else:
 		return Rect2(Vector2.ZERO, Global.current_project.size)
 

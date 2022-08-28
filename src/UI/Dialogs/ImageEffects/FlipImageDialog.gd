@@ -33,7 +33,7 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 		var selected := Image.new()
 		var rectangle: Rect2 = Global.canvas.selection.big_bounding_rectangle
 		if project != Global.current_project:
-			rectangle = project.get_selection_rectangle()
+			rectangle = project.selection_map.get_used_rect()
 		selected = cel.get_rect(rectangle)
 		selected.lock()
 		cel.lock()
@@ -61,9 +61,9 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 	var redo_data := _get_undo_data(project)
 	project.undos += 1
 	project.undo_redo.create_action(action)
-	project.undo_redo.add_do_property(project, "selection_bitmap", redo_data["selection_bitmap"])
+	project.undo_redo.add_do_property(project, "selection_map", redo_data["selection_map"])
 	project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])
-	project.undo_redo.add_undo_property(project, "selection_bitmap", undo_data["selection_bitmap"])
+	project.undo_redo.add_undo_property(project, "selection_map", undo_data["selection_map"])
 	project.undo_redo.add_undo_property(project, "selection_offset", undo_data["outline_offset"])
 
 	for image in redo_data:
@@ -76,15 +76,17 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 			continue
 		project.undo_redo.add_undo_property(image, "data", undo_data[image])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false, -1, -1, project)
-	project.undo_redo.add_do_method(project, "selection_bitmap_changed")
+	project.undo_redo.add_do_method(project, "selection_map_changed")
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, -1, -1, project)
-	project.undo_redo.add_undo_method(project, "selection_bitmap_changed")
+	project.undo_redo.add_undo_method(project, "selection_map_changed")
 	project.undo_redo.commit_action()
 
 
 func _get_undo_data(project: Project) -> Dictionary:
+	var bitmap_image := SelectionMap.new()
+	bitmap_image.copy_from(project.selection_map)
 	var data := {}
-	data["selection_bitmap"] = project.selection_bitmap.duplicate()
+	data["selection_map"] = bitmap_image
 	data["outline_offset"] = project.selection_offset
 
 	var images := _get_selected_draw_images(project)
@@ -99,7 +101,8 @@ func _flip_selection(project: Project = Global.current_project) -> void:
 	if !(selection_checkbox.pressed and project.has_selection):
 		return
 
-	var bitmap_image: Image = project.bitmap_to_image(project.selection_bitmap)
+	var bitmap_image := SelectionMap.new()
+	bitmap_image.copy_from(project.selection_map)
 	var selection_rect := bitmap_image.get_used_rect()
 	var smaller_bitmap_image := bitmap_image.get_rect(selection_rect)
 
@@ -114,6 +117,4 @@ func _flip_selection(project: Project = Global.current_project) -> void:
 		Rect2(Vector2.ZERO, smaller_bitmap_image.get_size()),
 		selection_rect.position
 	)
-	var bitmap_copy: BitMap = project.selection_bitmap.duplicate()
-	bitmap_copy.create_from_image_alpha(bitmap_image)
-	project.selection_bitmap = bitmap_copy
+	project.selection_map = bitmap_image

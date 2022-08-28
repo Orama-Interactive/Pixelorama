@@ -8,37 +8,38 @@ var _allegro_image_segments: Array
 
 func apply_selection(position: Vector2) -> void:
 	var project: Project = Global.current_project
+	var size: Vector2 = project.size
+	if position.x < 0 or position.y < 0 or position.x >= size.x or position.y >= size.y:
+		return
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()
 
-	var selection_bitmap_copy: BitMap = project.selection_bitmap.duplicate()
+	var selection_map_copy := SelectionMap.new()
+	selection_map_copy.copy_from(project.selection_map)
 	if _intersect:
-		var full_rect = Rect2(Vector2.ZERO, selection_bitmap_copy.get_size())
-		selection_bitmap_copy.set_bit_rect(full_rect, false)
+		selection_map_copy.clear()
 
 	var cel_image := Image.new()
 	cel_image.copy_from(_get_draw_image())
 	cel_image.lock()
-	_flood_fill(position, cel_image, selection_bitmap_copy)
+	_flood_fill(position, cel_image, selection_map_copy)
 
 	# Handle mirroring
 	if Tools.horizontal_mirror:
 		var mirror_x := position
 		mirror_x.x = Global.current_project.x_symmetry_point - position.x
-		_flood_fill(mirror_x, cel_image, selection_bitmap_copy)
+		_flood_fill(mirror_x, cel_image, selection_map_copy)
 		if Tools.vertical_mirror:
 			var mirror_xy := mirror_x
 			mirror_xy.y = Global.current_project.y_symmetry_point - position.y
-			_flood_fill(mirror_xy, cel_image, selection_bitmap_copy)
+			_flood_fill(mirror_xy, cel_image, selection_map_copy)
 	if Tools.vertical_mirror:
 		var mirror_y := position
 		mirror_y.y = Global.current_project.y_symmetry_point - position.y
-		_flood_fill(mirror_y, cel_image, selection_bitmap_copy)
+		_flood_fill(mirror_y, cel_image, selection_map_copy)
 	cel_image.unlock()
-	project.selection_bitmap = selection_bitmap_copy
-	Global.canvas.selection.big_bounding_rectangle = project.get_selection_rectangle(
-		project.selection_bitmap
-	)
+	project.selection_map = selection_map_copy
+	Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	Global.canvas.selection.commit_undo("Select", undo_data)
 
 
@@ -128,7 +129,7 @@ func _check_flooded_segment(
 	return ret
 
 
-func _flood_fill(position: Vector2, image: Image, bitmap: BitMap) -> void:
+func _flood_fill(position: Vector2, image: Image, selection_map: SelectionMap) -> void:
 	# implements the floodfill routine by Shawn Hargreaves
 	# from https://www1.udel.edu/CIS/software/dist/allegro-4.2.1/src/flood.c
 	var project: Project = Global.current_project
@@ -139,7 +140,7 @@ func _flood_fill(position: Vector2, image: Image, bitmap: BitMap) -> void:
 	_compute_segments_for_image(position, project, image, color)
 	# now actually color the image: since we have already checked a few things for the points
 	# we'll process here, we're going to skip a bunch of safety checks to speed things up.
-	_select_segments(bitmap)
+	_select_segments(selection_map)
 
 
 func _compute_segments_for_image(
@@ -171,18 +172,18 @@ func _compute_segments_for_image(
 					done = false
 
 
-func _select_segments(bitmap: BitMap) -> void:
+func _select_segments(selection_map: SelectionMap) -> void:
 	# short circuit for flat colors
 	for c in _allegro_image_segments.size():
 		var p = _allegro_image_segments[c]
 		for px in range(p.left_position, p.right_position + 1):
 			# We don't have to check again whether the point being processed is within the bounds
-			_set_bit(Vector2(px, p.y), bitmap)
+			_set_bit(Vector2(px, p.y), selection_map)
 
 
-func _set_bit(p: Vector2, bitmap: BitMap) -> void:
+func _set_bit(p: Vector2, selection_map: SelectionMap) -> void:
 	var project: Project = Global.current_project
 	if _intersect:
-		bitmap.set_bit(p, project.selection_bitmap.get_bit(p))
+		selection_map.select_pixel(p, project.selection_map.is_pixel_selected(p))
 	else:
-		bitmap.set_bit(p, !_subtract)
+		selection_map.select_pixel(p, !_subtract)

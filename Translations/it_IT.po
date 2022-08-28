@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-05-18 22:49\n"
+"PO-Revision-Date: 2022-08-12 00:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -162,11 +162,26 @@ msgstr "Centralizza Immagine"
 msgid "Rotate Image"
 msgstr "Ruota Immagine"
 
+msgid "Pivot (x, y):"
+msgstr "Perno (x, y):"
+
+msgid "Smear options:"
+msgstr "Opzioni di sbavatura:"
+
+msgid "Tolerance:"
+msgstr "Tolleranza:"
+
+msgid "Initial angle:"
+msgstr "Angolo iniziale:"
+
 msgid "Clear"
 msgstr "Cancella"
 
 msgid "Invert"
 msgstr "Inverti"
+
+msgid "Grayscale View"
+msgstr "Visualizzazione Scala Di Grigio"
 
 msgid "Mirror Image"
 msgstr "Immagine A Specchio"
@@ -183,8 +198,38 @@ msgstr "Preferenze"
 msgid "Tile Mode"
 msgstr "Modalità Tile"
 
+msgid "Tile Mode Offsets"
+msgstr "Scostamenti Modalità Piastrelle"
+
+msgid "X-basis x:"
+msgstr "X-base x:"
+
+msgid "X-basis y:"
+msgstr "X base y:"
+
+msgid "Y-basis x:"
+msgstr "Y base x:"
+
+msgid "Y-basis y:"
+msgstr "Y-base y:"
+
+msgid "Tile Mask"
+msgstr "Maschera Piastrelle"
+
+msgid "Reset"
+msgstr "Azzera"
+
+msgid "Use Current Frame"
+msgstr "Usa il Fotogramma Attuale"
+
+msgid "Reset Mask"
+msgstr "Azzera Maschera"
+
 msgid "Window Opacity"
 msgstr "Opacità Finestra"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr "Opacità della finestra non funziona in modalità Schermo Intero."
 
 msgid "Panel Layout"
 msgstr "Layout Pannello"
@@ -267,11 +312,11 @@ msgstr "Applica a tutti"
 msgid "Recent projects"
 msgstr "Progetti recenti"
 
-msgid "New tab"
-msgstr "Nuova scheda"
+msgid "New project"
+msgstr "Nuovo progetto"
 
-msgid "Spritesheet (new tab)"
-msgstr "Spritesheet (nuova scheda)"
+msgid "Spritesheet (new project)"
+msgstr "Spritesheet (progetto nuovo)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Spritesheet (nuovo livello)"
@@ -463,6 +508,9 @@ msgstr "Cubica"
 msgid "Trilinear"
 msgstr "Trilineare"
 
+msgid "Constant"
+msgstr "Costante"
+
 msgid "General"
 msgstr "Generale"
 
@@ -565,6 +613,12 @@ msgstr "Colore icona da:"
 msgid "Icon color:"
 msgstr "Colore dell'icona:"
 
+msgid "Left tool color:"
+msgstr "Colore strumento sinistra:"
+
+msgid "Right tool color:"
+msgstr "Colore strumento destro:"
+
 msgid "Tool button size:"
 msgstr "Dimensione del pulsante dello strumento:"
 
@@ -630,6 +684,9 @@ msgstr "Regola Tonalità/Saturazione/Valore"
 
 msgid "Gradient"
 msgstr "Gradiente"
+
+msgid "Gradient Map"
+msgstr "Mappa Gradiente"
 
 msgid "Linear"
 msgstr "Lineare"

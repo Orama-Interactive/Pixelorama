@@ -7,12 +7,16 @@ var mode: int = MODE.NONE
 var x_basis: Vector2
 var y_basis: Vector2
 var tile_size: Vector2
+var tile_mask := Image.new()
+var has_mask := false
 
 
 func _init(size: Vector2):
 	x_basis = Vector2(size.x, 0)
 	y_basis = Vector2(0, size.y)
 	tile_size = size
+	tile_mask.create(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
+	tile_mask.fill(Color.white)
 
 
 func get_bounding_rect() -> Rect2:
@@ -41,29 +45,36 @@ func get_bounding_rect() -> Rect2:
 
 
 func get_nearest_tile(point: Vector2) -> Rect2:
-	var tile_to_screen_space := Transform2D(x_basis, y_basis, Vector2.ZERO)
-	# Transform2D.basis_xform_inv() is broken so compute the inverse explicitly:
-	# https://github.com/godotengine/godot/issues/58556
-	var screen_to_tile_space := tile_to_screen_space.affine_inverse()
-	var p := point - tile_size / 2.0 + Vector2(0.5, 0.5)  # p relative to center of tiles
-	var p_tile_space := screen_to_tile_space.basis_xform(p)
-	var tl_tile := tile_to_screen_space.basis_xform(p_tile_space.floor())
-	var tr_tile := tl_tile + x_basis
-	var bl_tile := tl_tile + y_basis
-	var br_tile := tl_tile + x_basis + y_basis
-	var tl_tile_dist := (p - tl_tile).length_squared()
-	var tr_tile_dist := (p - tr_tile).length_squared()
-	var bl_tile_dist := (p - bl_tile).length_squared()
-	var br_tile_dist := (p - br_tile).length_squared()
-	match [tl_tile_dist, tr_tile_dist, bl_tile_dist, br_tile_dist].min():
-		tl_tile_dist:
-			return Rect2(tl_tile, tile_size)
-		tr_tile_dist:
-			return Rect2(tr_tile, tile_size)
-		bl_tile_dist:
-			return Rect2(bl_tile, tile_size)
-		_:
-			return Rect2(br_tile, tile_size)
+	var positions = Global.canvas.tile_mode.get_tile_positions()
+	positions.append(Vector2.ZERO)
+
+	var candidates := []
+	for pos in positions:
+		var test_rect = Rect2(pos, tile_size)
+		if test_rect.has_point(point):
+			candidates.append(test_rect)
+	if candidates.empty():
+		return Rect2(Vector2.ZERO, tile_size)
+
+	var final := []
+	tile_mask.lock()
+	for candidate in candidates:
+		var rel_pos = point - candidate.position
+		if tile_mask.get_pixelv(rel_pos).a == 1.0:
+			final.append(candidate)
+	tile_mask.unlock()
+
+	if final.empty():
+		return Rect2(Vector2.ZERO, tile_size)
+	final.sort_custom(self, "sort_by_height")
+	return final[0]
+
+
+func sort_by_height(a: Rect2, b: Rect2):
+	if a.position.y > b.position.y:
+		return false
+	else:
+		return true
 
 
 func get_canon_position(position: Vector2) -> Vector2:
@@ -76,15 +87,19 @@ func get_canon_position(position: Vector2) -> Vector2:
 
 
 func has_point(point: Vector2) -> bool:
-	var screen_to_tile_space := Transform2D(x_basis, y_basis, Vector2.ZERO).affine_inverse()
-	var nearest_tile := get_nearest_tile(point)
-	var nearest_tile_tile_space := screen_to_tile_space.basis_xform(nearest_tile.position).round()
-	match mode:
-		MODE.BOTH:
-			return abs(nearest_tile_tile_space.x) <= 1 and abs(nearest_tile_tile_space.y) <= 1
-		MODE.X_AXIS:
-			return abs(nearest_tile_tile_space.x) <= 1 and abs(nearest_tile_tile_space.y) == 0
-		MODE.Y_AXIS:
-			return abs(nearest_tile_tile_space.x) == 0 and abs(nearest_tile_tile_space.y) <= 1
-		_:
-			return nearest_tile_tile_space == Vector2.ZERO
+	var positions = Global.canvas.tile_mode.get_tile_positions()
+	positions.append(Vector2.ZERO)  # The central tile is included manually
+	tile_mask.lock()
+	for tile_pos in positions:
+		var test_rect = Rect2(tile_pos, tile_size)
+		var rel_pos = point - tile_pos
+		if test_rect.has_point(point) and tile_mask.get_pixelv(rel_pos).a == 1.0:
+			return true
+	tile_mask.unlock()
+	return false
+
+
+func reset_mask():
+	tile_mask.create(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
+	tile_mask.fill(Color.white)
+	has_mask = false
