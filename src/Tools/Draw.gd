@@ -314,32 +314,32 @@ func draw_tool_circle(position: Vector2, fill := false) -> void:
 func _compute_draw_tool_circle(position: Vector2, fill := false) -> PoolVector2Array:
 	if _circle_tool_shortcut:
 		return _draw_tool_circle_from_map(position)
-	else:
-		var result := PoolVector2Array()
-		var r := _brush_size
-		var x := -r
-		var y := 0
-		var err := 2 - r * 2
-		var draw := true
-		if fill:
-			result.append(position)
-		while x < 0:
-			if draw:
-				for i in range(1 if fill else -x, -x + 1):
-					result.append(position + Vector2(-i, y))
-					result.append(position + Vector2(-y, -i))
-					result.append(position + Vector2(i, -y))
-					result.append(position + Vector2(y, i))
-			draw = not fill
-			r = err
-			if r <= y:
-				y += 1
-				err += y * 2 + 1
-				draw = true
-			if r > x || err > y:
-				x += 1
-				err += x * 2 + 1
-		return result
+
+	var result := PoolVector2Array()
+	var r := _brush_size
+	var x := -r
+	var y := 0
+	var err := 2 - r * 2
+	var draw := true
+	if fill:
+		result.append(position)
+	while x < 0:
+		if draw:
+			for i in range(1 if fill else -x, -x + 1):
+				result.append(position + Vector2(-i, y))
+				result.append(position + Vector2(-y, -i))
+				result.append(position + Vector2(i, -y))
+				result.append(position + Vector2(y, i))
+		draw = not fill
+		r = err
+		if r <= y:
+			y += 1
+			err += y * 2 + 1
+			draw = true
+		if r > x || err > y:
+			x += 1
+			err += x * 2 + 1
+	return result
 
 
 func _draw_tool_circle_from_map(position: Vector2) -> PoolVector2Array:
@@ -375,9 +375,7 @@ func draw_tool_brush(position: Vector2) -> void:
 		_draw_brush_image(mirror_brush_x, _flip_rect(src_rect, size, true, false), x_dst)
 		if Tools.vertical_mirror:
 			var xy_dst := Vector2(mirror_x, mirror_y)
-			var mirror_brush_xy: Image = remove_unselected_parts_of_brush(
-				_mirror_brushes.xy, xy_dst
-			)
+			var mirror_brush_xy := remove_unselected_parts_of_brush(_mirror_brushes.xy, xy_dst)
 			_draw_brush_image(mirror_brush_xy, _flip_rect(src_rect, size, true, true), xy_dst)
 	if Tools.vertical_mirror:
 		var y_dst := Vector2(dst.x, mirror_y)
@@ -523,7 +521,6 @@ func _create_circle_indicator(size: int, fill := false) -> BitMap:
 	var bitmap := BitMap.new()
 	bitmap.create(Vector2.ONE * (size * 2 + 1))
 	var position := Vector2(size, size)
-
 	var r := size
 	var x := -r
 	var y := 0
