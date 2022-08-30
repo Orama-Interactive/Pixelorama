@@ -96,6 +96,10 @@ func _input(event: InputEvent) -> void:
 				var cursor := Control.CURSOR_ARROW
 				if Global.cross_cursor:
 					cursor = Control.CURSOR_CROSS
+				var project: Project = Global.current_project
+				var layer: Layer = project.layers[project.current_layer]
+				if not layer.can_layer_get_drawn():
+					cursor = Control.CURSOR_FORBIDDEN
 
 				if Global.main_viewport.mouse_default_cursor_shape != cursor:
 					Global.main_viewport.mouse_default_cursor_shape = cursor
