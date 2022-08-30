@@ -214,7 +214,9 @@ func _prepare_tool() -> void:
 	var strength := _strength
 	if Global.pressure_sensitivity_mode == Global.PressureSensitivity.ALPHA:
 		strength *= Tools.pen_pressure
-	_drawer.pixel_perfect = Tools.pixel_perfect if _brush_size == 1 else false
+	_drawer.pixel_perfect = false
+	if _brush_size == 1 and _brush.type == Brushes.PIXEL:
+		_drawer.pixel_perfect = Tools.pixel_perfect
 	_drawer.horizontal_mirror = Tools.horizontal_mirror
 	_drawer.vertical_mirror = Tools.vertical_mirror
 	_drawer.color_op.strength = strength
