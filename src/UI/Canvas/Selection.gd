@@ -79,7 +79,7 @@ func _input(event: InputEvent) -> void:
 		elif Input.is_action_just_pressed("transformation_cancel"):
 			transform_content_cancel()
 
-	if event is InputEventKey:
+	if event is InputEventKey and Global.can_draw:
 		_move_with_arrow_keys(event)
 
 	elif event is InputEventMouse:
