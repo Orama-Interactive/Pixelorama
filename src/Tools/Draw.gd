@@ -245,7 +245,7 @@ func _prepare_circle_tool(fill: bool) -> void:
 				_circle_tool_shortcut.append(Vector2(m - _brush_size, n - _brush_size))
 
 
-# Make sure to alway have invoked _prepare_tool() before this. This computes the coordinates to be
+# Make sure to alwayσ have invoked _prepare_tool() before this. This computes the coordinates to be
 # drawn if it can (except for the generic brush, when it's actually drawing them)
 func _draw_tool(position: Vector2) -> PoolVector2Array:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
@@ -567,10 +567,10 @@ func _create_line_indicator(indicator: BitMap, start: Vector2, end: Vector2) -> 
 	var dy := int(-abs(end.y - start.y))
 	var err := dx + dy
 	var e2 := err << 1
-	var sx = 1 if start.x < end.x else -1
-	var sy = 1 if start.y < end.y else -1
-	var x = start.x
-	var y = start.y
+	var sx := 1 if start.x < end.x else -1
+	var sy := 1 if start.y < end.y else -1
+	var x := start.x
+	var y := start.y
 	while !(x == end.x && y == end.y):
 		_blit_indicator(bitmap, indicator, Vector2(x, y))
 		e2 = err << 1
