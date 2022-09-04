@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-09-04 22:36\n"
+"PO-Revision-Date: 2022-09-04 23:32\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -440,7 +440,7 @@ msgid "Cancel Export"
 msgstr "Dışarı Aktarmayı İptal Et"
 
 msgid "Alert!"
-msgstr "Uyarı!"
+msgstr "Dikkat!"
 
 msgid "Select Current Folder"
 msgstr "Geçerli Klasörü Seç"
@@ -449,7 +449,7 @@ msgid "Open a Directory"
 msgstr "Dizin Aç"
 
 msgid "All frames as multiple files"
-msgstr "Çoklu dosya olarak bütün kareler"
+msgstr "Çoklu dosyalar olarak tüm kareler"
 
 msgid "All frames as a single file animation"
 msgstr "Tüm kareler tek bir dosya animasyonu olarak"
@@ -458,13 +458,13 @@ msgid "Background:"
 msgstr "Arka plan:"
 
 msgid "Direction:"
-msgstr "Dosya yolu:"
+msgstr "Yön:"
 
 msgid "Forward"
 msgstr "İleri"
 
 msgid "Backwards"
-msgstr "Geriye doğru"
+msgstr "Geri"
 
 msgid "Ping-Pong"
 msgstr "Ping Pong"
@@ -497,7 +497,7 @@ msgid "Interpolation:"
 msgstr "İnterpolasyon:"
 
 msgid "Nearest"
-msgstr "En Yakın"
+msgstr "En yakın"
 
 msgid "Bilinear"
 msgstr "Çift doğrusal"
@@ -515,7 +515,7 @@ msgid "General"
 msgstr "Genel"
 
 msgid "Startup"
-msgstr "Başlamak"
+msgstr "Başlangıç"
 
 msgid "Language"
 msgstr "Dil"
@@ -554,16 +554,16 @@ msgid "On"
 msgstr "Açık"
 
 msgid "Restore default value"
-msgstr "Varsayılanları yükle"
+msgstr "Varsayılan değeri geri yükle"
 
 msgid "Smooth Zoom"
 msgstr "Yumuşak Yakınlaştırma"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr "هنگام دور و نزدیک شدن، انتقال نرم تری نشان می دهد"
+msgstr "Yakınlaştırırken veya uzaklaştırırken daha yumuşak geçiş ekler"
 
 msgid "Tablet pressure sensitivity:"
-msgstr "حساسیت قلم:"
+msgstr "Tablet basınç hassasiyeti:"
 
 msgid "None"
 msgstr "Hiç biri"
@@ -575,7 +575,7 @@ msgid "Color:"
 msgstr "Renk:"
 
 msgid "Guide color:"
-msgstr "Kılavuz çizgileri rengi:"
+msgstr "Kılavuz rengi:"
 
 msgid "System Language"
 msgstr "Sistem Dili"
@@ -608,7 +608,7 @@ msgid "Theme"
 msgstr "Tema"
 
 msgid "Icon color from:"
-msgstr "Simge rengi:"
+msgstr "Şuradan simge rengi:"
 
 msgid "Icon color:"
 msgstr "Simge rengi:"
@@ -635,7 +635,7 @@ msgid "Selected cels"
 msgstr "Seçilen hücreler"
 
 msgid "Current cel"
-msgstr "Aktif kare"
+msgstr "Geçerli hücre"
 
 msgid "Current frame"
 msgstr "Geçerli kare"
@@ -650,19 +650,19 @@ msgid "Invert Colors"
 msgstr "Renkleri Ters Çevir"
 
 msgid "Modify Red Channel"
-msgstr "Kırmızı kanalı değiştir"
+msgstr "Kırmızı Kanalı Düzenle"
 
 msgid "Modify Green Channel"
-msgstr "Yeşil kanalı değiştir"
+msgstr "Yeşil Kanalı Düzenle"
 
 msgid "Modify Blue Channel"
-msgstr "Mavi kanalı değiştir"
+msgstr "Mavi Kanalı Düzenle"
 
 msgid "Modify Alpha Channel"
 msgstr "Alfa Kanalını Düzenle"
 
 msgid "Desaturation"
-msgstr "Solgunlaştır"
+msgstr "Doygunluğu azalt"
 
 msgid "Outline"
 msgstr "Anahat"
@@ -680,7 +680,7 @@ msgid "Shadow color:"
 msgstr "Gölge rengi:"
 
 msgid "Adjust Hue/Saturation/Value"
-msgstr "Renk/Doygunluk/Ton Değerlerini Ayarla"
+msgstr "Renk Tonu/Doygunluk/Değer Ayarla"
 
 msgid "Gradient"
 msgstr "Gradyan"
@@ -719,7 +719,7 @@ msgid "Dithering pattern:"
 msgstr "Titreme kalıbı:"
 
 msgid "Adjust HSV"
-msgstr "R/D/T değerlerini Ayarla"
+msgstr "HSV Ayarla"
 
 msgid "Type:"
 msgstr "Tür:"
@@ -728,19 +728,19 @@ msgid "Angle:"
 msgstr "Açı:"
 
 msgid "Hue:"
-msgstr "Renk:"
+msgstr "Renk Tonu:"
 
 msgid "Saturation:"
 msgstr "Doygunluk:"
 
 msgid "Value:"
-msgstr "Ton:"
+msgstr "Değer:"
 
 msgid "Apply"
 msgstr "Uygula"
 
 msgid "Diagonal"
-msgstr "Köşegen"
+msgstr "Çapraz"
 
 msgid "Place inside image"
 msgstr "Resmin içine yerleştir"
@@ -749,13 +749,13 @@ msgid "Thickness:"
 msgstr "Kalınlık:"
 
 msgid "Colors:"
-msgstr "Renk:"
+msgstr "Renkler:"
 
 msgid "Steps:"
 msgstr "Adımlar:"
 
 msgid "Top to Bottom"
-msgstr "Yukarıdan aşağıya"
+msgstr "Yukarıdan Aşağıya"
 
 msgid "Bottom to Top"
 msgstr "Aşağıdan Yukarıya"
@@ -791,16 +791,16 @@ msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive Tarafından Geliştirilmiştir"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "©2019-Orama Interactive ve destekçileri tarafından"
+msgstr "©2019-günümüz, Orama Interactive ve destekçileri tarafından"
 
 msgid "Website"
-msgstr "İnternet sitesi"
+msgstr "Web sitesi"
 
 msgid "GitHub Repo"
-msgstr "GitHub Repo"
+msgstr "GitHub Deposu"
 
 msgid "Donate"
-msgstr "Bağış"
+msgstr "Bağış Yap"
 
 msgid "Developers"
 msgstr "Geliştiriciler"
@@ -905,19 +905,19 @@ msgid "Dutch"
 msgstr "Flemenkçe"
 
 msgid "Development Team"
-msgstr "Geliştirici Takımı"
+msgstr "Geliştirme Takımı"
 
 msgid "Lead Programmer"
 msgstr "Baş Programcı"
 
 msgid "UI Designer"
-msgstr "KA Tasarımcısı"
+msgstr "Kullanıcı Arayüzü Tasarımcısı"
 
 msgid "GitHub Contributors"
-msgstr "GitHub destekçileri"
+msgstr "GitHub Katkıcıları"
 
 msgid "Art by: %s"
-msgstr "Sanatçı:%s"
+msgstr "Sanatçı: %s"
 
 msgid "untitled"
 msgstr "başlıksız"
@@ -947,7 +947,7 @@ msgid "Save & Exit"
 msgstr "Kaydet ve Çık"
 
 msgid "Exit without saving"
-msgstr "Kaydetmeden çık"
+msgstr "Kaydetmeden Çık"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
@@ -1003,8 +1003,9 @@ msgstr "Taşı\n\n"
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "%s için sol tıkla\n"
-"%s için sağ tıkla"
+msgstr "Yakınlaştır\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s"
 
 msgid "Pan\n\n"
 "%s for left mouse button\n"
@@ -1027,8 +1028,8 @@ msgid "Pencil\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
 msgstr "Kalem\n\n"
-"%s için sol tıkla\n"
-"%s için sağ tıkla\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s\n\n"
 "Çizgi çizmek için %s basılı tut"
 
 msgid "Eraser\n\n"
@@ -1036,16 +1037,16 @@ msgid "Eraser\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
 msgstr "Silgi\n\n"
-"Sol tık için %s\n"
-"Sağ tık için %s\n\n"
-"Bir çizgi için basılı tutun %s"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s\n\n"
+"Bir çizgi için %s basılı tutun"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Kova\n\n"
-"sol fare butonu için %s\n"
-"sağ fare butonu için %s"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s"
 
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
@@ -1100,18 +1101,18 @@ msgid "Ellipse"
 msgstr "Elips"
 
 msgid "Choose a color for the left tool"
-msgstr "Sol araç için bir renk seç"
+msgstr "Sol araç için renk seç"
 
 msgid "Choose a color for the right tool"
 msgstr "Sağ araç için renk seç"
 
 msgid "Switch left and right colors\n"
 "(%s)"
-msgstr "Sağ ve sol renklerini değiş\n"
+msgstr "Sağ ve sol renklerini yer değiştir\n"
 "(%s)"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr "Renkleri ilk ayarlara döndür (sol için siyah, sağ için beyaz)"
+msgstr "Renkleri varsayılan durumuna sıfırla (sol için siyah, sağ için beyaz)"
 
 msgid "Left tool"
 msgstr "Sol araç"
@@ -1132,13 +1133,13 @@ msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
 msgstr "Çizim yaparken sağ fare piksel göstergesini ya da tuval üzerinde ki fırçayı göster"
 
 msgid "Show left tool icon"
-msgstr "Sol araç ikonunu göster"
+msgstr "Sol araç simgesini göster"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
 msgstr "Tuvalde imlecin yanında seçilen sol aracın simgesini görüntüler"
 
 msgid "Show right tool icon"
-msgstr "Sağ araç ikonunu göster"
+msgstr "Sağ araç simgesini göster"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Tuvalde imlecin yanında seçilen sağ aracın simgesini görüntüler"
@@ -1156,7 +1157,7 @@ msgid "Guides color:"
 msgstr "Kılavuzların rengi:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr "Tuvalde gösterilen yardımcı çizgilerin rengi"
+msgstr "Tuvalde görüntülenen cetvel kılavuzlarının rengi"
 
 msgid "Grid"
 msgstr "Izgara"
@@ -1240,37 +1241,37 @@ msgid "A color of the pixel grid"
 msgstr "Piksel ızgaranın rengi"
 
 msgid "Transparency"
-msgstr "Şeffaflık"
+msgstr "Saydamlık"
 
 msgid "Checker size:"
 msgstr "Dama deseni boyutu:"
 
 msgid "Size of the transparent checker background"
-msgstr "Arkaplandaki geçirgen dama desenleri boyutu"
+msgstr "Saydam arkaplan dama deseninin boyutu"
 
 msgid "Checker color 1:"
 msgstr "Dama deseni rengi 1:"
 
 msgid "First color of the transparent checker background"
-msgstr "Arkaplandaki geçirgen dama deseninin 1. rengi"
+msgstr "Saydam arkaplan dama deseninin ilk rengi"
 
 msgid "Checker color 2:"
 msgstr "Dama deseni rengi 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr "Arkaplandaki geçirgen dama deseninin 2. rengi"
+msgstr "Saydam arkaplan dama deseninin ikinci rengi"
 
 msgid "Follow Canvas Movement"
 msgstr "Tuvaldeki Hareketi Takip Et"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr "Geçirgen dama deseni tuval hareketlerini takip eder"
+msgstr "Saydam dama deseni tuval hareketlerini takip eder"
 
 msgid "Follow Canvas Zoom Level"
 msgstr "Tuval Yakınlaştırma Düzeyini Takip Et"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr "Geçirgen dama deseni tuval yakınlaştırma düzeyini takip eder"
+msgstr "Saydam dama deseni tuval yakınlaştırma düzeyini takip eder"
 
 msgid "Animated selection borders"
 msgstr "Animasyonlu seçim kenarlıkları"
@@ -1282,7 +1283,7 @@ msgid "Border color 2:"
 msgstr "Kenarlık rengi 2:"
 
 msgid "Only custom preset can be modified"
-msgstr "Sadece özel yapılmış seçenekler değiştirilebilir"
+msgstr "Sadece özel önayar değiştirilebilir"
 
 msgid "Set application FPS limit:"
 msgstr "Uygulama FPS sınırını ayarla:"
@@ -1321,10 +1322,10 @@ msgid "Pixel brush"
 msgstr "Piksel fırçası"
 
 msgid "Circle brush"
-msgstr "Dairesel fırça"
+msgstr "Daire fırça"
 
 msgid "Filled circle brush"
-msgstr "Dolgulu çember fırça"
+msgstr "Dolgulu daire fırça"
 
 msgid "Custom brush"
 msgstr "Özel fırça"
@@ -1333,7 +1334,7 @@ msgid "Brush size:"
 msgstr "Fırça boyutu:"
 
 msgid "Overwrite Color"
-msgstr "Rengin üzerine yaz"
+msgstr "Rengin Üzerine Yaz"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "Renkleri karıştırmak yerine rengin üzerine yazar. Bu seçenek sadece tamamiyle opak olmayan renkler için geçerlidir"
@@ -1386,7 +1387,7 @@ msgid "Simple Shading"
 msgstr "Basit Gölgeleme"
 
 msgid "Hue Shifting"
-msgstr "Ton Kayması"
+msgstr "Renk Tonu Kayması"
 
 msgid "Lighten"
 msgstr "Aydınlat"
@@ -1706,10 +1707,10 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Yinele: Özel Fırçayı Sil"
 
 msgid "Undo: Modify Frame Tag"
-msgstr "Geri Al: Kare Etiketini Değiştir"
+msgstr "Geri Al: Kare Etiketini Düzenle"
 
 msgid "Redo: Modify Frame Tag"
-msgstr "Yinele: Kare Etiketini Değiştir"
+msgstr "Yinele: Kare Etiketini Düzenle"
 
 msgid "Undo: Delete Frame Tag"
 msgstr "Geri Al: Kare Etiketini Sil"
@@ -1811,7 +1812,7 @@ msgid "A default width of a new image"
 msgstr "Yeni resmin varsayılan genişliği"
 
 msgid "Default height:"
-msgstr "Varsayılan Yükseklik:"
+msgstr "Varsayılan yükseklik:"
 
 msgid "A default height of a new image"
 msgstr "Yeni resmin varsayılan yüksekliği"
@@ -1835,10 +1836,10 @@ msgid "Templates:"
 msgstr "Şablonlar:"
 
 msgid "Preset"
-msgstr "Hazır Ayarlar"
+msgstr "Önayar"
 
 msgid "Preset:"
-msgstr "Hazır Ayarlar:"
+msgstr "Önayar:"
 
 msgid "Default"
 msgstr "Varsayılan"
@@ -1940,7 +1941,7 @@ msgid "Open last project on startup"
 msgstr "Başlangıçta son projeyi aç"
 
 msgid "Opens last opened project on startup"
-msgstr "Başlangıçta son projeyi açar"
+msgstr "Başlangıçta son açılan projeyi açar"
 
 msgid "Quit confirmation"
 msgstr "Çıkış doğrulaması"
