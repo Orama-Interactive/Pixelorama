@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-09-04 20:11\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -169,7 +169,7 @@ msgid "Smear options:"
 msgstr ""
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Tolerans:"
 
 msgid "Initial angle:"
 msgstr ""
@@ -217,13 +217,13 @@ msgid "Tile Mask"
 msgstr ""
 
 msgid "Reset"
-msgstr ""
+msgstr "Sıfırla"
 
 msgid "Use Current Frame"
 msgstr ""
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Maskeyi Sıfırla"
 
 msgid "Window Opacity"
 msgstr "Pencere Şeffaflığı"
@@ -271,7 +271,7 @@ msgid "Mirror View"
 msgstr "Yansima"
 
 msgid "Show Grid"
-msgstr "Kılavuz çizgilerini göster"
+msgstr "Izgarayı Göster"
 
 msgid "Show Pixel Grid"
 msgstr "Piksel Izgarayı Göster"
@@ -313,7 +313,7 @@ msgid "Recent projects"
 msgstr "Son Projeleriniz"
 
 msgid "New project"
-msgstr ""
+msgstr "Yeni proje"
 
 msgid "Spritesheet (new project)"
 msgstr ""
@@ -346,10 +346,10 @@ msgid "Vertical frames:"
 msgstr "Dikey çerçeveler:"
 
 msgid "Start frame:"
-msgstr "Çerçeveyi oluştur:"
+msgstr "Başlangıç karesi:"
 
 msgid "At frame:"
-msgstr "Çerçevede:"
+msgstr "Karede:"
 
 msgid "At layer:"
 msgstr "Katmanda:"
@@ -508,7 +508,7 @@ msgid "Trilinear"
 msgstr "Üç çizgili"
 
 msgid "Constant"
-msgstr ""
+msgstr "Sabit"
 
 msgid "General"
 msgstr "Genel"
@@ -688,7 +688,7 @@ msgid "Gradient Map"
 msgstr ""
 
 msgid "Linear"
-msgstr ""
+msgstr "Doğrusal"
 
 msgid "Radial"
 msgstr ""
@@ -709,10 +709,10 @@ msgid "Transition size:"
 msgstr ""
 
 msgid "Center:"
-msgstr ""
+msgstr "Ortala:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Yarıçap:"
 
 msgid "Dithering pattern:"
 msgstr ""
@@ -898,10 +898,10 @@ msgid "Swedish"
 msgstr "İsveççe"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Sırpça (Kiril)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Flemenkçe"
 
 msgid "Development Team"
 msgstr "Geliştirici Takımı"
@@ -1125,7 +1125,7 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr "Tuvalde gösterilen yardımcı çizgilerin rengi"
 
 msgid "Grid"
-msgstr "Kılavuz çizgisi"
+msgstr "Izgara"
 
 msgid "Grid type:"
 msgstr "Izgara tipi:"
@@ -1143,16 +1143,16 @@ msgid "All"
 msgstr "Tümü"
 
 msgid "Rectangular grid width:"
-msgstr ""
+msgstr "Dikdörtgen ızgara genişliği:"
 
 msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr ""
+msgstr "Dikdörtgen ızgaranın dikey çizgilerinin birbirinden ne kadar uzakta olduğunu ayarlar"
 
 msgid "Rectangular grid height:"
-msgstr ""
+msgstr "Dikdörtgen ızgara yüksekliği:"
 
 msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
+msgstr "Dikdörtgen ızgaranın yatay çizgilerinin birbirinden ne kadar uzakta olduğunu ayarlar"
 
 msgid "Isometric cell bounds width:"
 msgstr ""
@@ -1167,22 +1167,22 @@ msgid "Sets the height of the isometric cell's axis aligned bounding box"
 msgstr ""
 
 msgid "Grid offset x:"
-msgstr ""
+msgstr "Izgara konumu x:"
 
 msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Izgaranın tuval orijininden x konumunu ayarlar (resmin sol üst köşesi)"
 
 msgid "Grid offset y:"
-msgstr ""
+msgstr "Izgara konumu y:"
 
 msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Izgaranın tuval orijininden y konumunu ayarlar (resmin sol üst köşesi)"
 
 msgid "Draw over Tile Mode:"
 msgstr ""
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Devre dışı bırakılırsa, ızgara yalnızca orijinal görüntünün üzerine çizilir"
 
 msgid "Grid color:"
 msgstr "Izgara rengi:"
@@ -1191,19 +1191,19 @@ msgid "A color of the grid"
 msgstr "Izgaranın rengi"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Piksel Izgara"
 
 msgid "Show at zoom:"
 msgstr ""
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Piksel ızgarasının gösterileceği asgari yakınlaştırmayı ayarlar"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Piksel ızgara rengi:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Piksel ızgaranın rengi"
 
 msgid "Transparency"
 msgstr "Şeffaflık"
