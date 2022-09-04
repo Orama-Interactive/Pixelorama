@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-09-04 21:28\n"
+"PO-Revision-Date: 2022-09-04 22:36\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -118,7 +118,7 @@ msgid "Export PNG as..."
 msgstr "PNG'yi Dışa Farklı Aktar..."
 
 msgid "Quit"
-msgstr "Çıkış"
+msgstr "Çık"
 
 msgid "Undo"
 msgstr "Geri Al"
@@ -163,7 +163,7 @@ msgid "Rotate Image"
 msgstr "Resmi Döndür"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "Eksen (x, y):"
 
 msgid "Smear options:"
 msgstr "Smear seçenekleri:"
@@ -172,7 +172,7 @@ msgid "Tolerance:"
 msgstr "Tolerans:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Başlangıç açısı:"
 
 msgid "Clear"
 msgstr "Temizle"
@@ -202,16 +202,16 @@ msgid "Tile Mode Offsets"
 msgstr "Döşeme Kipi Ofsetleri"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X-tabanlı x:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "Y-tabanlı y:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "Y-tabanlı x:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y-tabanlı y:"
 
 msgid "Tile Mask"
 msgstr "Döşeme Maskesi"
@@ -289,7 +289,7 @@ msgid "Zen Mode"
 msgstr "Zen Kipi"
 
 msgid "Fullscreen Mode"
-msgstr "Tam Ekran Modu"
+msgstr "Tam Ekran Kipi"
 
 msgid "Fill with color:"
 msgstr "Renk ile doldur:"
@@ -310,16 +310,16 @@ msgid "Apply to all"
 msgstr "Hepsine uygula"
 
 msgid "Recent projects"
-msgstr "Son Projeleriniz"
+msgstr "Son Projeler"
 
 msgid "New project"
 msgstr "Yeni proje"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Resim sayfası (yeni proje)"
 
 msgid "Spritesheet (new layer)"
-msgstr "Resim Sayfası (yeni katman)"
+msgstr "Resim sayfası (yeni katman)"
 
 msgid "New frame"
 msgstr "Yeni kare"
@@ -367,13 +367,13 @@ msgid "Random brush"
 msgstr "Rastgele fırça"
 
 msgid "Save Sprite as .pxo"
-msgstr "Görüntüyü .pxo olarak kaydet"
+msgstr "Resmi .pxo Olarak Kaydet"
 
 msgid "Export Sprite as .png"
-msgstr "Görüntüyü .png olarak dışa aktar"
+msgstr "Resmi .png Olarak Dışa Aktar"
 
 msgid "Export Sprite"
-msgstr "Görüntüyü Dışa Aktar"
+msgstr "Resmi Dışa Aktar"
 
 msgid "File Exists, Overwrite?"
 msgstr "Dosya Zaten Var, Üzerine Yazılsın mı?"
@@ -382,7 +382,7 @@ msgid "File %s already exists. Overwrite?"
 msgstr "%s dosyası zaten var. Üzerine yazılsın mı?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Dizin yolu geçersiz!"
 
 msgid "File name is not valid!"
 msgstr "Dosya adı geçersiz!"
@@ -403,7 +403,8 @@ msgstr "'%s' dosyası yüklenemedi.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "'%s' dosyası yüklenemedi.\n"
+"Geçerli bir palet dosyası değil."
 
 msgid "Frame"
 msgstr "Kare"
@@ -415,7 +416,7 @@ msgid "All Frames"
 msgstr "Tüm Kareler"
 
 msgid "Spritesheet"
-msgstr "Hareketli sayfalar"
+msgstr "Resim sayfası"
 
 msgid "Animation"
 msgstr "Animasyon"
@@ -445,7 +446,7 @@ msgid "Select Current Folder"
 msgstr "Geçerli Klasörü Seç"
 
 msgid "Open a Directory"
-msgstr "Bir dosya aç"
+msgstr "Dizin Aç"
 
 msgid "All frames as multiple files"
 msgstr "Çoklu dosya olarak bütün kareler"
@@ -484,10 +485,10 @@ msgid "Path:"
 msgstr "Yol:"
 
 msgid "Directories & Files:"
-msgstr "Dizinler & Dosyalar:"
+msgstr "Dizinler ve Dosyalar:"
 
 msgid "Create Folder"
-msgstr "Yeni Klasör"
+msgstr "Klasör Oluştur"
 
 msgid "File:"
 msgstr "Dosya:"
@@ -613,10 +614,10 @@ msgid "Icon color:"
 msgstr "Simge rengi:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Sol araç rengi:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Sağ araç rengi:"
 
 msgid "Tool button size:"
 msgstr "Araç düğme boyutu:"
@@ -670,10 +671,10 @@ msgid "Drop Shadow"
 msgstr "Gölge"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Konum X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Konum Y:"
 
 msgid "Shadow color:"
 msgstr "Gölge rengi:"
@@ -769,13 +770,13 @@ msgid "View Splash Screen"
 msgstr "Açılış Ekranını Göster"
 
 msgid "Online Docs"
-msgstr "Çevrimiçi Dökümanlar"
+msgstr "Çevrimiçi Belgeler"
 
 msgid "Issue Tracker"
 msgstr "Sorun İzleyici"
 
 msgid "Open Logs Folder"
-msgstr "Kayıt Klasörünü Aç"
+msgstr "Günlükler Klasörünü Aç"
 
 msgid "Changelog"
 msgstr "Değişiklikler"
@@ -934,7 +935,7 @@ msgid "Unsaved Image"
 msgstr "Kaydedilmemiş Resim"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr "Kaydedilmemiş değişiklikler var. Devam edecek misiniz?"
+msgstr "Kaydedilmemiş değişiklikler var. Devam ederseniz bunlar kaybolacak."
 
 msgid "Save before exiting?"
 msgstr "Çıkıştan önce kaydetsin mi?"
@@ -943,7 +944,7 @@ msgid "You have unsaved progress. How do you wish to proceed?"
 msgstr "Kaydedilmemiş işlemin var. Ne yapılmasını istersin?"
 
 msgid "Save & Exit"
-msgstr "Kaydet & Çık"
+msgstr "Kaydet ve Çık"
 
 msgid "Exit without saving"
 msgstr "Kaydetmeden çık"
@@ -959,37 +960,45 @@ msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Eliptik Seçim\n\n"
-"Sol tık için %s\n"
-"Sağ tık için %s"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s"
 
 msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
 msgstr "Çokgen Seçim\n\n"
-"%s sol fare düğmesi\n"
-"%s sağ fare düğmesi için\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s\n\n"
 "Son noktayı başlangıç noktasına bağlamak için çift tıklayın"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Renge Göre Seç\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s"
 
 msgid "Magic Wand\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Sihirli Değnek\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s"
 
 msgid "Lasso / Free Select Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Kement / Serbest Seçim Aracı\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Taşı\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
@@ -1000,13 +1009,18 @@ msgstr "%s için sol tıkla\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Kaydır\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s"
 
 msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "Renk Seçici\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s\n\n"
+"Resmin pikselinden renk seç"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1036,7 +1050,9 @@ msgstr "Kova\n\n"
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Gölgeleme Aracı\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
@@ -1044,7 +1060,12 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Çizgi Aracı\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s\n\n"
+"Çizginin açısını yakalamak için %s tuşunu basılı tutun\n"
+"Şekli tıklama orijininde ortalamak için %s tuşunu basılı tutun\n"
+"Şeklin orijinini değiştirmek için %s tuşunu basılı tutun"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1052,7 +1073,12 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Dikdörtgen Aracı\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s\n\n"
+"1:1 şekil oluşturmak için %s tuşunu basılı tutun\n"
+"Şekli tıklama orijininde ortalamak için %s tuşunu basılı tutun\n"
+"Şeklin orijinini değiştirmek için %s tuşunu basılı tutun"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -1060,7 +1086,12 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Elips Aracı\n\n"
+"Sol fare düğmesi için %s\n"
+"Sağ fare düğmesi için %s\n\n"
+"1:1 şekil oluşturmak için %s tuşunu basılı tutun\n"
+"Şekli tıklama orijininde ortalamak için %s tuşunu basılı tutun\n"
+"Şeklin orijinini değiştirmek için %s tuşunu basılı tutun"
 
 msgid "Rectangle"
 msgstr "Dikdörtgen"
@@ -1092,7 +1123,7 @@ msgid "Left pixel indicator"
 msgstr "Sol piksel göstergesi"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr "Çizim yaparken sol fare piksel göstergesini ya da tuval üzerinde ki fırçayı göster"
+msgstr "Çizim yaparken tuval üzerinde sol fare piksel göstergesini ya da fırçayı göster"
 
 msgid "Right pixel indicator"
 msgstr "Sağ piksel göstergesi"
@@ -1104,19 +1135,19 @@ msgid "Show left tool icon"
 msgstr "Sol araç ikonunu göster"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr "Tuval üzerinde ki göstergenin yanında seçilen sol araç ikonunu göster"
+msgstr "Tuvalde imlecin yanında seçilen sol aracın simgesini görüntüler"
 
 msgid "Show right tool icon"
 msgstr "Sağ araç ikonunu göster"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr "Tuval üzerinde ki göstergenin yanında seçilen sağ araç ikonunu göster"
+msgstr "Tuvalde imlecin yanında seçilen sağ aracın simgesini görüntüler"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Yerel fare imleçlerini kullan"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Tuval için çarpı imlecini kullan"
 
 msgid "Guides"
 msgstr "Kılavuzlar"
@@ -1134,7 +1165,7 @@ msgid "Grid type:"
 msgstr "Izgara tipi:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr "Izgara modunu seç izometrik, dikdörtgensel veya ikisi birden"
+msgstr "Izgara kipini dikdörtgen, izometrik veya her ikisi birden olarak ayarlar"
 
 msgid "Rectangular"
 msgstr "Dikdörtgen"
@@ -1158,16 +1189,16 @@ msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr "Dikdörtgen ızgaranın yatay çizgilerinin birbirinden ne kadar uzakta olduğunu ayarlar"
 
 msgid "Isometric cell bounds width:"
-msgstr ""
+msgstr "İzometrik hücre sınırları genişliği:"
 
 msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "İzometrik hücrenin eksen hizalı sınırlayıcı kutusunun genişliğini ayarlar"
 
 msgid "Isometric cell bounds height:"
-msgstr ""
+msgstr "İzometrik hücre sınırları yüksekliği:"
 
 msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
+msgstr "İzometrik hücrenin eksen hizalı sınırlayıcı kutusunun yüksekliğini ayarlar"
 
 msgid "Grid offset x:"
 msgstr "Izgara konumu x:"
@@ -1197,7 +1228,7 @@ msgid "Pixel Grid"
 msgstr "Piksel Izgara"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Yakınlaştırmada göster:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr "Piksel ızgarasının gösterileceği asgari yakınlaştırmayı ayarlar"
@@ -1242,13 +1273,13 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Geçirgen dama deseni tuval yakınlaştırma düzeyini takip eder"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Animasyonlu seçim kenarlıkları"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Kenarlık rengi 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Kenarlık rengi 2:"
 
 msgid "Only custom preset can be modified"
 msgstr "Sadece özel yapılmış seçenekler değiştirilebilir"
@@ -1257,7 +1288,7 @@ msgid "Set application FPS limit:"
 msgstr "Uygulama FPS sınırını ayarla:"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Odağı kaybettiğinde uygulamayı duraklat"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Uygulamanın saniyedeki kare sınırını ayarlar. Rakam ne kadar düşük olursa CPU kullanımı o kadar düşük olur, ancak uygulama daha yavaş, kesikli ve tepkisiz hale gelir. 0, sınır olmadığı anlamına gelir."
@@ -1269,22 +1300,22 @@ msgid "Add Extension"
 msgstr "Uzantı Ekle"
 
 msgid "Enable"
-msgstr ""
+msgstr "Etkinleştir"
 
 msgid "Disable"
-msgstr ""
+msgstr "Devre dışı bırak"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Kaldır"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Klasörü Aç"
 
 msgid "Brush:"
 msgstr "Fırça:"
 
 msgid "Select a brush"
-msgstr "Bir fırça seç"
+msgstr "Fırça seç"
 
 msgid "Pixel brush"
 msgstr "Piksel fırçası"
@@ -1315,10 +1346,11 @@ msgstr "İçini doldur"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Mükemmel Piksel\n"
+"Kenarlardaki fazla pikselleri kaldırarak çizgileri pürüzsüzleştirir"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Şekli Doldur"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr "İçi boş bir şekil çizmek yerine çizilen şekli renkle doldurur"
@@ -1342,7 +1374,7 @@ msgid "Fill with:"
 msgstr "Bununla Doldur:"
 
 msgid "Selected Color"
-msgstr "Seçilen renk"
+msgstr "Seçilen Renk"
 
 msgid "Pattern"
 msgstr "Şablon"
@@ -1501,7 +1533,7 @@ msgstr "Eğer seçili ise animasyon sadece aynı etikete sahip karelerde oynatı
 "Seçili değil ise animasyon bütün karelerde oynatılır."
 
 msgid "Blue-Red Mode"
-msgstr "Mavi-Kırmızı Modu"
+msgstr "Mavi-Kırmızı Kipi"
 
 msgid "Show past frames:"
 msgstr "Önceki kareleri göster:"
@@ -1510,13 +1542,13 @@ msgid "Show future frames:"
 msgstr "Gelecek kareleri göster:"
 
 msgid "Above canvas"
-msgstr ""
+msgstr "Tuvalin üstünde"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "Tuvalin altında"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr ""
+msgstr "Bir katmanın soğan kabuğunu yok saymasını istiyorsanız, adına \"_io\" son ekini eklemeniz yeterlidir."
 
 msgid "Add a new frame"
 msgstr "Yeni kare ekle"
@@ -1602,7 +1634,7 @@ msgid "Add a new palette"
 msgstr "Yeni bir palet ekle"
 
 msgid "Edit currently selected palette"
-msgstr "Şu anki paleti düzenle"
+msgstr "Seçili paleti düzenle"
 
 msgid "Choose a palette"
 msgstr "Bir palet seç"
@@ -1716,7 +1748,7 @@ msgid "Import Palette"
 msgstr "Paleti İçe Aktar"
 
 msgid "Create Palette From Current Sprite"
-msgstr "Renk paletini aktif spritedan oluştur"
+msgstr "Paleti Geçerli Resimden Oluştur"
 
 msgid "Palette Name:"
 msgstr "Palet Adı:"
@@ -1725,7 +1757,7 @@ msgid "Color Name:"
 msgstr "Renk Adı:"
 
 msgid "Use current left & right colors"
-msgstr "Seçili olan sol & sağ renkleri kullan"
+msgstr "Seçili olan sol ve sağ renkleri kullan"
 
 msgid "Create a new empty palette?"
 msgstr "Yeni palet oluşturulsun mu?"
@@ -1791,13 +1823,13 @@ msgid "A default background color of a new image"
 msgstr "Yeni resmin varsayılan arkaplan rengi"
 
 msgid "Lock aspect ratio"
-msgstr ""
+msgstr "En boy oranlarını kilitle"
 
 msgid "Portrait"
-msgstr ""
+msgstr "Dikey"
 
 msgid "Landscape"
-msgstr ""
+msgstr "Yatay"
 
 msgid "Templates:"
 msgstr "Şablonlar:"
@@ -1818,28 +1850,28 @@ msgid "Rectangular Selection"
 msgstr "Dikdörtgen Seçim"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "Eliptik Seçim"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "Çokgen Seçim"
 
 msgid "Select By Color"
-msgstr ""
+msgstr "Renge Göre Seç"
 
 msgid "Magic Wand"
-msgstr ""
+msgstr "Sihirli Değnek"
 
 msgid "Lasso / Free Select Tool"
-msgstr ""
+msgstr "Kement / Serbest Seçim Aracı"
 
 msgid "Move"
-msgstr ""
+msgstr "Taşı"
 
 msgid "Zoom"
 msgstr "Yakınlaştır"
 
 msgid "Pan"
-msgstr ""
+msgstr "Kaydır"
 
 msgid "Color Picker"
 msgstr "Renk Seçici"
@@ -1854,16 +1886,16 @@ msgid "Bucket"
 msgstr "Kova"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Gölgeleme Aracı"
 
 msgid "Line Tool"
-msgstr ""
+msgstr "Çizgi Aracı"
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "Dikdörtgen Araç"
 
 msgid "Ellipse Tool"
-msgstr ""
+msgstr "Elips Araç"
 
 msgid "Switch Colors"
 msgstr "Rekleri Değiştir"
@@ -1935,11 +1967,12 @@ msgid "Delete"
 msgstr "Sil"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Hepsinden Vazgeç"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
-msgstr ""
+msgstr "Çöken bir oturumdan otomatik kaydedilen proje(ler) bulundu.\n"
+"Verileri kurtarmak ister misin?"
 
 msgid "Backup reloaded"
 msgstr "Yedek yüklendi"
@@ -1972,7 +2005,7 @@ msgid "Frame duration"
 msgstr "Kare süresi"
 
 msgid "Duration"
-msgstr ""
+msgstr "Süre"
 
 msgid "Tiled In Both Axis"
 msgstr "İki Eksende Döşenmiş"
@@ -1984,34 +2017,34 @@ msgid "Tiled In Y Axis"
 msgstr "Y Ekseninde Düşenmiş"
 
 msgid "Create a new palette"
-msgstr ""
+msgstr "Yeni palet oluştur"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Yorum:"
 
 msgid "Empty"
 msgstr "Boş"
 
 msgid "From Current Palette"
-msgstr ""
+msgstr "Geçerli Paletten"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "Geçerli Resimden"
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "Geçerli Seçimden"
 
 msgid "Add a new color"
-msgstr ""
+msgstr "Yeni renk ekle"
 
 msgid "Remove a selected color"
 msgstr "Seçili rengi kaldır"
 
 msgid "Palette with the same name and path already exists!"
-msgstr ""
+msgstr "Aynı ada ve yola sahip palet zaten var!"
 
 msgid "Palette name is required!"
-msgstr ""
+msgstr "Palet adı gerekli!"
 
 msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
 msgstr "Palet boyutunu küçültmek renklerin konumlarını sıfırlar. Yeni palet boyutuna uymayan renkler kaybolacak!"
@@ -2020,22 +2053,22 @@ msgid "Position:"
 msgstr "Konum:"
 
 msgid "Tools"
-msgstr ""
+msgstr "Araçlar"
 
 msgid "Main Canvas"
-msgstr ""
+msgstr "Ana Tuval"
 
 msgid "Second Canvas"
-msgstr ""
+msgstr "İkincil Tuval"
 
 msgid "Animation Timeline"
-msgstr ""
+msgstr "Animasyon Zaman Çizelgesi"
 
 msgid "Canvas Preview"
-msgstr ""
+msgstr "Tuval Önizleme"
 
 msgid "Color Pickers"
-msgstr ""
+msgstr "Renk Seçiciler"
 
 msgid "Global Tool Options"
 msgstr "Küresel Araç Seçenekleri"
