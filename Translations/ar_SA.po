@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-09-04 20:11\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -247,7 +247,7 @@ msgid "Manage Layouts"
 msgstr ""
 
 msgid "Add"
-msgstr ""
+msgstr "إضافة"
 
 msgid "Add Layout"
 msgstr ""
@@ -307,13 +307,13 @@ msgid "Import as:"
 msgstr "استيراد باسم:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "تطبيق على الكل"
 
 msgid "Recent projects"
 msgstr "المشاريع الأخيرة"
 
 msgid "New project"
-msgstr ""
+msgstr "مشروع جديد"
 
 msgid "Spritesheet (new project)"
 msgstr ""
@@ -520,7 +520,7 @@ msgid "Language"
 msgstr "اللغة"
 
 msgid "Interface"
-msgstr ""
+msgstr "الواجهة"
 
 msgid "Themes"
 msgstr ""
@@ -601,7 +601,7 @@ msgid "Light"
 msgstr "فاتح"
 
 msgid "Purple"
-msgstr ""
+msgstr "بنفسجي"
 
 msgid "Theme"
 msgstr ""
@@ -736,7 +736,7 @@ msgid "Value:"
 msgstr ""
 
 msgid "Apply"
-msgstr ""
+msgstr "تطبيق"
 
 msgid "Diagonal"
 msgstr ""
@@ -748,7 +748,7 @@ msgid "Thickness:"
 msgstr ""
 
 msgid "Colors:"
-msgstr ""
+msgstr "الألوان:"
 
 msgid "Steps:"
 msgstr ""
@@ -832,7 +832,7 @@ msgid "Polish"
 msgstr "اليولندية"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "البرتغالية"
 
 msgid "Brazilian Portuguese"
 msgstr "البرتغالية البرازلية"
