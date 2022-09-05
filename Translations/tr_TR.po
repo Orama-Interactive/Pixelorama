@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-09-04 23:32\n"
+"PO-Revision-Date: 2022-09-05 00:39\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -40,7 +40,7 @@ msgid "Canvas Size"
 msgstr "Tuval Boyutu"
 
 msgid "Frame Size"
-msgstr "Kare Boyutu"
+msgstr "Çerçeve Boyutu"
 
 msgid "Size:"
 msgstr "Boyut:"
@@ -298,7 +298,7 @@ msgid "Open a File"
 msgstr "Dosya Aç"
 
 msgid "Open File(s)"
-msgstr "Dosya(ları) aç"
+msgstr "Dosya(ları) Aç"
 
 msgid "Import Options"
 msgstr "İçeri Aktarma Seçenekleri"
@@ -316,10 +316,10 @@ msgid "New project"
 msgstr "Yeni proje"
 
 msgid "Spritesheet (new project)"
-msgstr "Resim sayfası (yeni proje)"
+msgstr "Hareketli sayfa (yeni proje)"
 
 msgid "Spritesheet (new layer)"
-msgstr "Resim sayfası (yeni katman)"
+msgstr "Hareketli sayfa (yeni katman)"
 
 msgid "New frame"
 msgstr "Yeni kare"
@@ -334,10 +334,10 @@ msgid "New palette"
 msgstr "Yeni palet"
 
 msgid "New brush"
-msgstr "Yeni Fırça"
+msgstr "Yeni fırça"
 
 msgid "New pattern"
-msgstr "Yeni desen"
+msgstr "Yeni kalıp"
 
 msgid "Horizontal frames:"
 msgstr "Yatay kareler:"
@@ -367,13 +367,13 @@ msgid "Random brush"
 msgstr "Rastgele fırça"
 
 msgid "Save Sprite as .pxo"
-msgstr "Resmi .pxo Olarak Kaydet"
+msgstr "Sprite'ı .pxo Olarak Kaydet"
 
 msgid "Export Sprite as .png"
-msgstr "Resmi .png Olarak Dışa Aktar"
+msgstr "Sprite'ı .png Olarak Dışa Aktar"
 
 msgid "Export Sprite"
-msgstr "Resmi Dışa Aktar"
+msgstr "Sprite'ı Dışa Aktar"
 
 msgid "File Exists, Overwrite?"
 msgstr "Dosya Zaten Var, Üzerine Yazılsın mı?"
@@ -416,7 +416,7 @@ msgid "All Frames"
 msgstr "Tüm Kareler"
 
 msgid "Spritesheet"
-msgstr "Resim sayfası"
+msgstr "Hareketli sayfa"
 
 msgid "Animation"
 msgstr "Animasyon"
@@ -1021,7 +1021,7 @@ msgid "Color Picker\n\n"
 msgstr "Renk Seçici\n\n"
 "Sol fare düğmesi için %s\n"
 "Sağ fare düğmesi için %s\n\n"
-"Resmin pikselinden renk seç"
+"Sprite pikselinden renk seç"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1363,7 +1363,7 @@ msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Rengi fırçadan alır, 100: şu an seçili olan renk"
 
 msgid "Fill area:"
-msgstr "Alanı Doldur:"
+msgstr "Alanı doldur:"
 
 msgid "Same color area"
 msgstr "Aynı renk alan"
@@ -1372,13 +1372,13 @@ msgid "Same color pixels"
 msgstr "Aynı renk pikseller"
 
 msgid "Fill with:"
-msgstr "Bununla Doldur:"
+msgstr "Şununla doldur:"
 
 msgid "Selected Color"
 msgstr "Seçilen Renk"
 
 msgid "Pattern"
-msgstr "Şablon"
+msgstr "Kalıp"
 
 msgid "Offset"
 msgstr "Uzaklık"
@@ -1390,7 +1390,7 @@ msgid "Hue Shifting"
 msgstr "Renk Tonu Kayması"
 
 msgid "Lighten"
-msgstr "Aydınlat"
+msgstr "Açıklaştır"
 
 msgid "Darken"
 msgstr "Koyulaştır"
@@ -1399,7 +1399,7 @@ msgid "Amount:"
 msgstr "Miktar:"
 
 msgid "Lighten/Darken amount"
-msgstr "Açıklık/Karanlık miktarı"
+msgstr "Açıklaştır/Koyulaştır miktarı"
 
 msgid "Pick for:"
 msgstr "İçin Seç:"
@@ -1423,7 +1423,7 @@ msgid "Options:"
 msgstr "Seçenekler:"
 
 msgid "Fit to frame"
-msgstr "Kareye sığdır"
+msgstr "Çerçeveye Sığdır"
 
 msgid "100% Zoom"
 msgstr "100% Yakınlaştırma"
@@ -1435,10 +1435,10 @@ msgid "Horizontal"
 msgstr "Yatay"
 
 msgid "Enable horizontal mirrored drawing"
-msgstr "Çizim için yatay aynamalamayı aktif et"
+msgstr "Çizim için yatay aynamalamayı etkinleştir"
 
 msgid "Enable vertical mirrored drawing"
-msgstr "Çizim için dikey aynamalamayı aktif et"
+msgstr "Çizim için dikey aynamalamayı etkinleştir"
 
 msgid "Vertical"
 msgstr "Dikey"
@@ -1448,11 +1448,13 @@ msgstr "Geçerli kare:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr "İlk kareye atla (%s)"
+msgstr "İlk kareye atla\n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr "Önceki kareye geç (%s)"
+msgstr "Önceki kareye git\n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
@@ -1461,16 +1463,18 @@ msgstr "Animasyonu tersten oynat (son kareden ilk kareye)\n"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr "Animasyonu oynat(ilk kareden son kareye)\n"
+msgstr "Animasyonu oynat (ilk kareden son kareye)\n"
 "(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr "Sonraki kareye geç (%s)"
+msgstr "Sonraki kareye git\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr "Son kareye atla (%s)"
+msgstr "Son kareye atla\n"
+"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr "Onion Skinning özellikleri"
@@ -1487,7 +1491,7 @@ msgid "No loop"
 msgstr "Döngü kapalı"
 
 msgid "Cycle loop"
-msgstr "Döngüyü açık"
+msgstr "Döngü açık"
 
 msgid "Ping-pong loop"
 msgstr "Pinpon döngüsü"
@@ -1523,7 +1527,7 @@ msgid "Animation plays only on frames of the same tag"
 msgstr "Animasyon sadece aynı etiketli karelerde oynatılır"
 
 msgid "Tag %s (Frame %s)"
-msgstr "Etiket %s( Kare %s)"
+msgstr "Etiket %s(Kare %s)"
 
 msgid "Tag %s (Frames %s-%s)"
 msgstr "Etiket %s (Kareler %s-%s)"
@@ -1534,7 +1538,7 @@ msgstr "Eğer seçili ise animasyon sadece aynı etikete sahip karelerde oynatı
 "Seçili değil ise animasyon bütün karelerde oynatılır."
 
 msgid "Blue-Red Mode"
-msgstr "Mavi-Kırmızı Kipi"
+msgstr "Mavi-Kırmızı Kip"
 
 msgid "Show past frames:"
 msgstr "Önceki kareleri göster:"
@@ -1570,10 +1574,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr "Hücreye köprüle"
+msgstr "Hücreye Köprüle"
 
 msgid "Unlink Cel"
-msgstr "Hücre köprüsünü sil"
+msgstr "Hücre Köprüsünü Kaldır"
 
 msgid "Frame Properties"
 msgstr "Kare Özellikleri"
@@ -1594,13 +1598,13 @@ msgid "Remove current layer"
 msgstr "Geçerli katmanı kaldır"
 
 msgid "Move up the current layer"
-msgstr "Katmanı üste taşı"
+msgstr "Katmanı yukarı taşı"
 
 msgid "Move down the current layer"
 msgstr "Katmanı aşağı taşı"
 
 msgid "Clone current layer"
-msgstr "Katmanı kopyala"
+msgstr "Katmanı klonla"
 
 msgid "Merge current layer with the one below"
 msgstr "Aktif katmanı alttaki katmanla birleştir"
@@ -1612,17 +1616,17 @@ msgid "Tile mode opacity:"
 msgstr "Döşeme kipi matlığı:"
 
 msgid "Toggle layer's visibility"
-msgstr "Katmanların görünürlüğünü Aç/Kapat"
+msgstr "Katmanın görünürlüğünü aç/kapat"
 
 msgid "Lock/unlock layer"
-msgstr "Katmanı kilitle/aç"
+msgstr "Katmanı kilitle/kilidini kaldır"
 
 msgid "Frame: %s, Layer: %s"
 msgstr "Kare: %s, Katman: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Hücre köprülemesini Aç/Kapat\n\n"
+msgstr "Hücre köprülemesini etkinleştir/devre dışı bırak\n\n"
 "Köprülenmiş hücreler birçok kare tarafından paylaşılır"
 
 msgid "Palette"
@@ -1632,13 +1636,13 @@ msgid "Palettes"
 msgstr "Paletler"
 
 msgid "Add a new palette"
-msgstr "Yeni bir palet ekle"
+msgstr "Yeni palet ekle"
 
 msgid "Edit currently selected palette"
 msgstr "Seçili paleti düzenle"
 
 msgid "Choose a palette"
-msgstr "Bir palet seç"
+msgstr "Palet seç"
 
 msgid "Undo: Draw"
 msgstr "Geri Al: Çizim"
@@ -1731,7 +1735,7 @@ msgid "File saved"
 msgstr "Dosya kaydedildi"
 
 msgid "File autosaved"
-msgstr "Dosya kaydedildi"
+msgstr "Dosya otomatik kaydedildi"
 
 msgid "File failed to open. Error code %s"
 msgstr "Dosya açılamadı. Hata kodu %s"
@@ -1743,13 +1747,13 @@ msgid "File exported"
 msgstr "Dosya dışa aktarıldı"
 
 msgid "New Empty Palette"
-msgstr "Yeni Palet"
+msgstr "Yeni Boş Palet"
 
 msgid "Import Palette"
 msgstr "Paleti İçe Aktar"
 
 msgid "Create Palette From Current Sprite"
-msgstr "Paleti Geçerli Resimden Oluştur"
+msgstr "Geçerli Hareketli Sayfadan Palet Oluştur"
 
 msgid "Palette Name:"
 msgstr "Palet Adı:"
@@ -1758,10 +1762,10 @@ msgid "Color Name:"
 msgstr "Renk Adı:"
 
 msgid "Use current left & right colors"
-msgstr "Seçili olan sol ve sağ renkleri kullan"
+msgstr "Geçerli sol ve sağ renkleri kullan"
 
 msgid "Create a new empty palette?"
-msgstr "Yeni palet oluşturulsun mu?"
+msgstr "Yeni boş palet oluşturulsun mu?"
 
 msgid "Error"
 msgstr "Hata"
@@ -1824,7 +1828,7 @@ msgid "A default background color of a new image"
 msgstr "Yeni resmin varsayılan arkaplan rengi"
 
 msgid "Lock aspect ratio"
-msgstr "En boy oranlarını kilitle"
+msgstr "En boy oranını kilitle"
 
 msgid "Portrait"
 msgstr "Dikey"
@@ -1902,28 +1906,28 @@ msgid "Switch Colors"
 msgstr "Rekleri Değiştir"
 
 msgid "Set the shortcut"
-msgstr "Kısayol seç"
+msgstr "Kısayol ayarla"
 
 msgid "Press a key or a key combination to set the shortcut"
-msgstr "Bir kısayol seçmek için bir tuş yada bir tuş kombinasyonuna basın"
+msgstr "Kısayol ayarlamak için bir tuş yada bir tuş kombinasyonuna basın"
 
 msgid "Already assigned"
-msgstr "Aynı tuş zaten atanıldı"
+msgstr "Zaten atanıldı"
 
 msgid "Left Tool:"
-msgstr "Sol araç:"
+msgstr "Sol Araç:"
 
 msgid "A tool assigned to the left mouse button"
-msgstr "Sol fareye bir araç atandı"
+msgstr "Sol fare düğmesine bir araç atandı"
 
 msgid "Right Tool:"
-msgstr "Sağ araç:"
+msgstr "Sağ Araç:"
 
 msgid "A tool assigned to the right mouse button"
-msgstr "Sol fareye bir araç atandı"
+msgstr "Sağ fare düğmesine bir araç atandı"
 
 msgid "Cannot find last project file."
-msgstr "Son proje bulunamadı."
+msgstr "Son proje dosyası bulunamadı."
 
 msgid "Cannot find project file."
 msgstr "Proje dosyası bulunamadı."
@@ -1944,16 +1948,16 @@ msgid "Opens last opened project on startup"
 msgstr "Başlangıçta son açılan projeyi açar"
 
 msgid "Quit confirmation"
-msgstr "Çıkış doğrulaması"
+msgstr "Çıkış onayı"
 
 msgid "Enable autosave"
 msgstr "Otomatik kaydetmeyi etkinleştir"
 
 msgid "Autosave interval:"
-msgstr "Otomatik kaydetme aralığı:"
+msgstr "Otomatik kaydetme sıklığı:"
 
 msgid "minute(s)"
-msgstr "dakika(lar)"
+msgstr "dakika"
 
 msgid "Create new directory for each frame tag"
 msgstr "Her kare etiketi için yeni dizin oluştur"
@@ -1976,13 +1980,13 @@ msgstr "Çöken bir oturumdan otomatik kaydedilen proje(ler) bulundu.\n"
 "Verileri kurtarmak ister misin?"
 
 msgid "Backup reloaded"
-msgstr "Yedek yüklendi"
+msgstr "Yedek yeniden yüklendi"
 
 msgid "Remove currently selected palette"
 msgstr "Seçili paleti kaldır"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr "Bu paleti kaldırmak istediğine emin misin? (Geri alınamaz)"
+msgstr "Paleti kaldırmak istediğine emin misin? (Geri alınamaz)"
 
 msgid "You can't remove more palettes!"
 msgstr "Daha fazla palet kaldıramazsın!"
@@ -1991,7 +1995,7 @@ msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Olmayan paleti kaldıramazsın!"
 
 msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Paleti kaldırırken bir hata oldu! Hata kodu: %s"
+msgstr "Palet kaldırılırken hata oldu! Hata kodu: %s"
 
 msgid "and"
 msgstr "ve"
@@ -2030,7 +2034,7 @@ msgid "From Current Palette"
 msgstr "Geçerli Paletten"
 
 msgid "From Current Sprite"
-msgstr "Geçerli Resimden"
+msgstr "Geçerli Sprite'dan"
 
 msgid "From Current Selection"
 msgstr "Geçerli Seçimden"
