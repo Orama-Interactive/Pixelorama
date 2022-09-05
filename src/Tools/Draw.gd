@@ -245,7 +245,7 @@ func _prepare_circle_tool(fill: bool) -> void:
 				_circle_tool_shortcut.append(Vector2(m - _brush_size, n - _brush_size))
 
 
-# Make sure to alwayσ have invoked _prepare_tool() before this. This computes the coordinates to be
+# Make sure to always have invoked _prepare_tool() before this. This computes the coordinates to be
 # drawn if it can (except for the generic brush, when it's actually drawing them)
 func _draw_tool(position: Vector2) -> PoolVector2Array:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
