@@ -4,6 +4,7 @@ extends Reference
 # The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
 
 var opacity: float
+var image_texture: ImageTexture
 
 # Methods to Override:
 
@@ -19,7 +20,7 @@ var opacity: float
 
 # TODO H1: These content methods need good doc comments:
 
-func set_content(content: Array) -> void:
+func set_content(content) -> void:
 	return
 
 # TODO H0: Consider if the return content methods should have a bool option for including a texture,
@@ -27,15 +28,15 @@ func set_content(content: Array) -> void:
 # ensure that different texture types are properly set up if textures are completely not included here?
 # Will seperate methods for the textures be able to work well?
 # Maybe for now, don't worry about possible different texture types, and don't do copying layers/frames
-func get_content() -> Array:
+func get_content():
 	return []
 
 
-func create_empty_content() -> Array:
+func create_empty_content():
 	return []
 
 
-func copy_content() -> Array:
+func copy_content():
 	return []
 
 

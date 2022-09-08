@@ -5,7 +5,7 @@ extends BaseCel
 # The "image" variable is where the image data of each cel are.
 
 var image: Image setget image_changed
-var image_texture: ImageTexture
+#var image_texture: ImageTexture # TODO H1: ERASE if having in base class works nicely
 
 func _init(_image := Image.new(), _opacity := 1.0, _image_texture: ImageTexture = null) -> void:
 	if _image_texture:
@@ -22,29 +22,25 @@ func image_changed(value: Image) -> void:
 		image_texture.create_from_image(image, 0)
 
 
-func set_content(content: Array) -> void:
-	image = content[0]
-	image_texture = content[1]
+func set_content(content) -> void:
+	image = content
+	image_texture.create_from_image(image, 0)
 
 
-func get_content() -> Array:
-	return [image, image_texture]
+func get_content():
+	return image
 
 
-func create_empty_content() -> Array:
+func create_empty_content():
 	var empty_image := Image.new()
 	empty_image.create(image.get_size().x, image.get_size().y, false, Image.FORMAT_RGBA8)
-	var empty_texture := ImageTexture.new()
-	empty_texture.create_from_image(empty_image, 0)
-	return [empty_image, empty_texture]
+	return empty_image
 
 
-func copy_content() -> Array:
+func copy_content():
 	var copy_image := Image.new()
 	copy_image.create_from_data(image.get_width(), image.get_height(), false, Image.FORMAT_RGBA8, image.get_data())
-	var copy_texture := ImageTexture.new()
-	copy_texture.create_from_image(copy_image, 0)
-	return [copy_image, copy_texture]
+	return copy_image
 
 
 func get_image() -> Image:
