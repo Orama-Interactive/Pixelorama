@@ -188,18 +188,6 @@ func append_gap(start: Vector2, end: Vector2, array: Array) -> void:
 		array.append(Vector2(x, y))
 
 
-func _fill_bitmap_with_points(points: Array, size: Vector2) -> BitMap:
-	var bitmap := BitMap.new()
-	bitmap.create(size)
-
-	for point in points:
-		if point.x < 0 or point.y < 0 or point.x >= size.x or point.y >= size.y:
-			continue
-		bitmap.set_bit(point, 1)
-
-	return bitmap
-
-
 func mirror_array(array: Array, h: bool, v: bool) -> Array:
 	var new_array := []
 	var project: Project = Global.current_project
