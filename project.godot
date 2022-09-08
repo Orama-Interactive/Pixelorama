@@ -44,7 +44,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/Frame.gd"
 }, {
-"base": "TextureRect",
+"base": "Control",
 "class": "GradientEditNode",
 "language": "GDScript",
 "path": "res://src/UI/Nodes/GradientEdit.gd"
@@ -104,6 +104,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/Project.gd"
 }, {
+"base": "Image",
+"class": "SelectionMap",
+"language": "GDScript",
+"path": "res://src/Classes/SelectionMap.gd"
+}, {
 "base": "BaseTool",
 "class": "SelectionTool",
 "language": "GDScript",
@@ -149,6 +154,7 @@ _global_script_class_icons={
 "PaletteSwatch": "",
 "Patterns": "",
 "Project": "",
+"SelectionMap": "",
 "SelectionTool": "",
 "ShaderImageEffect": "",
 "ShortcutProfile": "",
@@ -169,8 +175,7 @@ config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/custom_user_dir_name.X11="pixelorama"
-run/low_processor_mode.Android=false
-config/Version="v0.10.2-dev"
+config/Version="v0.10.3-dev"
 
 [audio]
 
@@ -198,6 +203,7 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1280
 window/size/height=720
+window/dpi/allow_hidpi=true
 window/per_pixel_transparency/allowed=true
 window/per_pixel_transparency/enabled=true
 window/per_pixel_transparency/allowed.HTML5=false
@@ -208,10 +214,6 @@ window/per_pixel_transparency/enabled.Android=false
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/dockable_container/plugin.cfg", "res://addons/keychain/plugin.cfg" )
-
-[gui]
-
-theme/use_hidpi.clickable=true
 
 [importer_defaults]
 
@@ -850,7 +852,7 @@ gradient_map={
 
 [locale]
 
-translations=PoolStringArray( "res://Translations/zh_TW.po", "res://Translations/pt_BR.po", "res://Translations/de_DE.po", "res://Translations/el_GR.po", "res://Translations/en_US.po", "res://Translations/fr_FR.po", "res://Translations/it_IT.po", "res://Translations/pl_PL.po", "res://Translations/ru_RU.po", "res://Translations/es_ES.po", "res://Translations/zh_CN.po", "res://Translations/lv_LV.po", "res://Translations/eo_UY.po", "res://Translations/cs_CZ.po", "res://Translations/id_ID.po", "res://Translations/hu_HU.po", "res://Translations/ro_RO.po", "res://Translations/ko_KR.po", "res://Translations/tr_TR.po", "res://Translations/ja_JP.po", "res://Translations/nb_NO.po", "res://Translations/uk_UA.po", "res://Translations/pt_PT.po" )
+translations=PoolStringArray( "res://Translations/zh_TW.po", "res://Translations/pt_BR.po", "res://Translations/de_DE.po", "res://Translations/el_GR.po", "res://Translations/en_US.po", "res://Translations/fr_FR.po", "res://Translations/it_IT.po", "res://Translations/pl_PL.po", "res://Translations/ru_RU.po", "res://Translations/es_ES.po", "res://Translations/zh_CN.po", "res://Translations/lv_LV.po", "res://Translations/eo_UY.po", "res://Translations/cs_CZ.po", "res://Translations/id_ID.po", "res://Translations/hu_HU.po", "res://Translations/ro_RO.po", "res://Translations/ko_KR.po", "res://Translations/tr_TR.po", "res://Translations/ja_JP.po", "res://Translations/nb_NO.po", "res://Translations/uk_UA.po", "res://Translations/pt_PT.po", "res://Translations/da_DK.po" )
 locale_filter=[ 0, [  ] ]
 
 [logging]

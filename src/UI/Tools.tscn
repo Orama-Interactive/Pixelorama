@@ -12,21 +12,16 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-margin_right = 14.0
+margin_right = 38.0
 margin_bottom = 14.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
+size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ToolButtons" type="GridContainer" parent="PanelContainer"]
+[node name="ToolButtons" type="HFlowContainer" parent="PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 7.0
+margin_right = 31.0
 margin_bottom = 7.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
 script = ExtResource( 3 )
-
-[connection signal="resized" from="." to="PanelContainer/ToolButtons" method="_on_Tools_resized"]

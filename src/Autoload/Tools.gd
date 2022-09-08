@@ -232,9 +232,7 @@ func _ready() -> void:
 	if not tool_name in tools:
 		tool_name = "Eraser"
 	set_tool(tool_name, BUTTON_RIGHT)
-
 	update_tool_buttons()
-	update_tool_cursors()
 
 	horizontal_mirror = Global.config_cache.get_value("preferences", "horizontal_mirror", false)
 	vertical_mirror = Global.config_cache.get_value("preferences", "vertical_mirror", false)
@@ -248,6 +246,7 @@ func _ready() -> void:
 	assign_color(color_value, BUTTON_LEFT, false)
 	color_value = Global.config_cache.get_value(_slots[BUTTON_RIGHT].kname, "color", Color.white)
 	assign_color(color_value, BUTTON_RIGHT, false)
+	update_tool_cursors()
 
 
 func add_tool_button(t: Tool) -> void:
@@ -327,18 +326,12 @@ func get_assigned_color(button: int) -> Color:
 
 
 func set_button_size(button_size: int) -> void:
-	if button_size == Global.ButtonSize.SMALL:
-		for t in _tool_buttons.get_children():
-			t.rect_min_size = Vector2(24, 24)
-			t.get_node("BackgroundLeft").rect_size.x = 12
-			t.get_node("BackgroundRight").rect_size.x = 12
-			t.get_node("BackgroundRight").rect_position = Vector2(24, 24)
-	else:
-		for t in _tool_buttons.get_children():
-			t.rect_min_size = Vector2(32, 32)
-			t.get_node("BackgroundLeft").rect_size.x = 16
-			t.get_node("BackgroundRight").rect_size.x = 16
-			t.get_node("BackgroundRight").rect_position = Vector2(32, 32)
+	var size := Vector2(24, 24) if button_size == Global.ButtonSize.SMALL else Vector2(32, 32)
+	for t in _tool_buttons.get_children():
+		t.rect_min_size = size
+		t.get_node("BackgroundLeft").rect_size.x = size.x / 2
+		t.get_node("BackgroundRight").rect_size.x = size.x / 2
+		t.get_node("BackgroundRight").rect_position = size
 
 
 func update_tool_buttons() -> void:
@@ -357,9 +350,9 @@ func update_hint_tooltips() -> void:
 
 func update_tool_cursors() -> void:
 	var left_tool: Tool = tools[_slots[BUTTON_LEFT].tool_node.name]
-	Global.left_cursor.texture = left_tool.cursor_icon
+	Global.control.left_cursor.texture = left_tool.cursor_icon
 	var right_tool: Tool = tools[_slots[BUTTON_RIGHT].tool_node.name]
-	Global.right_cursor.texture = right_tool.cursor_icon
+	Global.control.right_cursor.texture = right_tool.cursor_icon
 
 
 func draw_indicator() -> void:

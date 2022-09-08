@@ -108,8 +108,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="TimelineContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 902.0
-margin_bottom = 160.0
+margin_right = 745.0
+margin_bottom = 104.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -827,7 +827,6 @@ theme = SubResource( 20 )
 scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/TagScroll"]
-margin_right = 660.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -865,7 +864,7 @@ size_flags_horizontal = 3
 
 [node name="LayersAndFrames" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll"]
 margin_right = 45.0
-margin_bottom = 68.0
+margin_bottom = 20.0
 size_flags_vertical = 3
 
 [node name="LayerVBoxCont" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames"]

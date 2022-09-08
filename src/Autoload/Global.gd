@@ -147,10 +147,8 @@ var group_layer_button_node: PackedScene = preload("res://src/UI/Timeline/GroupL
 var pixel_cel_button_node: PackedScene = preload("res://src/UI/Timeline/PixelCelButton.tscn")
 var group_cel_button_node: PackedScene = preload("res://src/UI/Timeline/GroupCelButton.tscn")
 
-onready var control: Node = get_tree().get_root().get_node("Control")
+onready var control: Node = get_tree().current_scene
 
-onready var left_cursor: Sprite = control.find_node("LeftCursor")
-onready var right_cursor: Sprite = control.find_node("RightCursor")
 onready var canvas: Canvas = control.find_node("Canvas")
 onready var tabs: Tabs = control.find_node("Tabs")
 onready var main_viewport: ViewportContainer = control.find_node("ViewportContainer")
@@ -459,6 +457,7 @@ func undo_or_redo(
 			canvas.camera_zoom()
 			canvas.grid.update()
 			canvas.pixel_grid.update()
+			project.selection_map_changed()
 			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	canvas.update()
@@ -491,11 +490,8 @@ func dialog_open(open: bool) -> void:
 	else:
 		can_draw = true
 
-	control.get_node("ModulateTween").interpolate_property(
-		control, "modulate", control.modulate, dim_color, 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT
-	)
-
-	control.get_node("ModulateTween").start()
+	var tween := create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+	tween.tween_property(control, "modulate", dim_color, 0.1)
 
 
 func disable_button(button: BaseButton, disable: bool) -> void:

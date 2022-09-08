@@ -9,9 +9,9 @@ uniform vec2 selection_size;
 
 vec2 rotate(vec2 uv, vec2 pivot, float ratio) {
 	// Scale and center image
-	uv.x -= 0.5;
+	uv.x -= pivot.x;
 	uv.x *= ratio;
-	uv.x += 0.5;
+	uv.x += pivot.x;
 	
 	// Rotate image
 	uv -= pivot;
@@ -31,13 +31,10 @@ void fragment() {
 	vec2 tex_size = 1.0 / TEXTURE_PIXEL_SIZE; // Texture size in real pixel coordinates
 	vec2 pixelated_uv = floor(UV * tex_size) / (tex_size - 1.0); // Pixelate UV to fit resolution
 	vec2 pivot = selection_pivot / tex_size; // Normalize pivot position
-	vec2 sel_size = selection_size / tex_size; // Normalize selection size
 	float ratio = tex_size.x / tex_size.y; // Resolution ratio
 	
 	// Make a border to prevent stretching pixels on the edge
 	vec2 border_uv = rotate(pixelated_uv, pivot, ratio);
-	border_uv -= pivot - sel_size / 2.0; // Move the border to selection position
-	border_uv /= sel_size; // Set border size to selection size
 	
 	// Center the border
 	border_uv -= 0.5;

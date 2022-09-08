@@ -50,7 +50,6 @@ anchor_bottom = 0.0
 margin_top = 204.0
 margin_right = 278.0
 margin_bottom = 234.0
-rect_min_size = Vector2( 0, 30 )
 
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
 margin_top = 238.0

@@ -106,7 +106,7 @@ func _setup_view_menu() -> void:
 	var view_menu_items := [
 		"Tile Mode",
 		"Tile Mode Offsets",
-		"Greyscale View",
+		"Grayscale View",
 		"Mirror View",
 		"Show Grid",
 		"Show Pixel Grid",
@@ -692,7 +692,7 @@ func help_menu_id_pressed(id: int) -> void:
 			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		Global.HelpMenu.CHANGELOG:
 			OS.shell_open(
-				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v0101---2022-06-06"
+				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v0102---2022-08-18"
 			)
 		Global.HelpMenu.ABOUT_PIXELORAMA:
 			Global.control.get_node("Dialogs/AboutDialog").popup_centered()

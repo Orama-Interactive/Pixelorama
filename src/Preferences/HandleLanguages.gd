@@ -3,6 +3,7 @@ extends Node
 const LANGUAGES_DICT := {
 	"en_US": ["English", "English"],
 	"cs_CZ": ["Czech", "Czech"],
+	"da_DK": ["Dansk", "Danish"],
 	"de_DE": ["Deutsch", "German"],
 	"el_GR": ["Ελληνικά", "Greek"],
 	"eo": ["Esperanto", "Esperanto"],

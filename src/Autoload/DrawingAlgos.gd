@@ -3,6 +3,73 @@ extends Node
 enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
 
 
+# Algorithm based on http://members.chello.at/easyfilter/bresenham.html
+func get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
+	var array := []
+	var x0 := int(pos.x)
+	var x1 := pos.x + int(size.x - 1)
+	var y0 := int(pos.y)
+	var y1 := int(pos.y) + int(size.y - 1)
+	var a := int(abs(x1 - x0))
+	var b := int(abs(y1 - x0))
+	var b1 := b & 1
+	var dx := 4 * (1 - a) * b * b
+	var dy := 4 * (b1 + 1) * a * a
+	var err := dx + dy + b1 * a * a
+	var e2 := 0
+
+	if x0 > x1:
+		x0 = x1
+		x1 += a
+
+	if y0 > y1:
+		y0 = y1
+
+# warning-ignore:integer_division
+	y0 += (b + 1) / 2
+	y1 = y0 - b1
+	a *= 8 * a
+	b1 = 8 * b * b
+
+	while x0 <= x1:
+		var v1 := Vector2(x1, y0)
+		var v2 := Vector2(x0, y0)
+		var v3 := Vector2(x0, y1)
+		var v4 := Vector2(x1, y1)
+		array.append(v1)
+		array.append(v2)
+		array.append(v3)
+		array.append(v4)
+
+		e2 = 2 * err
+
+		if e2 <= dy:
+			y0 += 1
+			y1 -= 1
+			dy += a
+			err += dy
+
+		if e2 >= dx || 2 * err > dy:
+			x0 += 1
+			x1 -= 1
+			dx += b1
+			err += dx
+
+	while y0 - y1 < b:
+		var v1 := Vector2(x0 - 1, y0)
+		var v2 := Vector2(x1 + 1, y0)
+		var v3 := Vector2(x0 - 1, y1)
+		var v4 := Vector2(x1 + 1, y1)
+		array.append(v1)
+		array.append(v2)
+		array.append(v3)
+		array.append(v4)
+		y0 += 1
+		y1 -= 1
+
+	return array
+
+
 func scale_3x(sprite: Image, tol: float = 50) -> Image:
 	var scaled := Image.new()
 	scaled.create(sprite.get_width() * 3, sprite.get_height() * 3, false, Image.FORMAT_RGBA8)
@@ -426,8 +493,9 @@ func general_do_scale(width: int, height: int) -> void:
 	var x_ratio = project.size.x / width
 	var y_ratio = project.size.y / height
 
-	var bitmap: BitMap
-	bitmap = project.resize_bitmap(project.selection_bitmap, size)
+	var selection_map_copy := SelectionMap.new()
+	selection_map_copy.copy_from(project.selection_map)
+	selection_map_copy.crop(size.x, size.y)
 
 	var new_x_symmetry_point = project.x_symmetry_point / x_ratio
 	var new_y_symmetry_point = project.y_symmetry_point / y_ratio
@@ -441,7 +509,7 @@ func general_do_scale(width: int, height: int) -> void:
 	project.undos += 1
 	project.undo_redo.create_action("Scale")
 	project.undo_redo.add_do_property(project, "size", size)
-	project.undo_redo.add_do_property(project, "selection_bitmap", bitmap)
+	project.undo_redo.add_do_property(project, "selection_map", selection_map_copy)
 	project.undo_redo.add_do_property(project, "x_symmetry_point", new_x_symmetry_point)
 	project.undo_redo.add_do_property(project, "y_symmetry_point", new_y_symmetry_point)
 	project.undo_redo.add_do_property(project.x_symmetry_axis, "points", new_x_symmetry_axis_points)
@@ -451,7 +519,7 @@ func general_do_scale(width: int, height: int) -> void:
 func general_undo_scale() -> void:
 	var project: Project = Global.current_project
 	project.undo_redo.add_undo_property(project, "size", project.size)
-	project.undo_redo.add_undo_property(project, "selection_bitmap", project.selection_bitmap)
+	project.undo_redo.add_undo_property(project, "selection_map", project.selection_map)
 	project.undo_redo.add_undo_property(project, "x_symmetry_point", project.x_symmetry_point)
 	project.undo_redo.add_undo_property(project, "y_symmetry_point", project.y_symmetry_point)
 	project.undo_redo.add_undo_property(

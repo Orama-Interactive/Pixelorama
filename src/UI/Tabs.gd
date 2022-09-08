@@ -5,6 +5,26 @@ onready var unsaved_changes_dialog: ConfirmationDialog = Global.control.find_nod
 )
 
 
+# Thanks to https://github.com/godotengine/godot/issues/64498#issuecomment-1217992089
+func _gui_input(event: InputEvent) -> void:
+	if not event is InputEventMouseButton:
+		return
+	if !event.pressed or event.button_index != BUTTON_MIDDLE:
+		return
+	var rect := get_rect()
+	var w := rect.position.x
+	var w_limit := rect.size.x
+	for i in get_tab_count():
+		if i < get_tab_offset():
+			continue
+		w += get_tab_rect(i).size.x
+		if w_limit < w:
+			return
+		if get_tab_rect(i).has_point(event.position):
+			_on_Tabs_tab_close(i)
+			return
+
+
 func _on_Tabs_tab_changed(tab: int) -> void:
 	Global.current_project_index = tab
 

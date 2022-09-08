@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-05-18 19:54\n"
+"PO-Revision-Date: 2022-08-11 12:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -162,11 +162,26 @@ msgstr "Bild zentrieren"
 msgid "Rotate Image"
 msgstr "Bild drehen"
 
+msgid "Pivot (x, y):"
+msgstr "Pivot (x, y):"
+
+msgid "Smear options:"
+msgstr "Verwisch-Optionen:"
+
+msgid "Tolerance:"
+msgstr "Toleranz:"
+
+msgid "Initial angle:"
+msgstr "Anfangswinkel:"
+
 msgid "Clear"
 msgstr "Leeren"
 
 msgid "Invert"
 msgstr "Invertieren"
+
+msgid "Grayscale View"
+msgstr "Graustufen-Ansicht"
 
 msgid "Mirror Image"
 msgstr "Bild spiegeln"
@@ -183,8 +198,38 @@ msgstr "Einstellungen"
 msgid "Tile Mode"
 msgstr "Kachelmodus"
 
+msgid "Tile Mode Offsets"
+msgstr "Tile-Modus Offsets"
+
+msgid "X-basis x:"
+msgstr "X-Basis x:"
+
+msgid "X-basis y:"
+msgstr "X-Basis y:"
+
+msgid "Y-basis x:"
+msgstr "Y-Basis x:"
+
+msgid "Y-basis y:"
+msgstr "Y-Basis y:"
+
+msgid "Tile Mask"
+msgstr "Tile-Maske"
+
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+msgid "Use Current Frame"
+msgstr "Aktuellen Frame verwenden"
+
+msgid "Reset Mask"
+msgstr "Maske zurücksetzen"
+
 msgid "Window Opacity"
 msgstr "Fenstertransparenz"
+
+msgid "Window opacity does not work on fullscreen mode."
+msgstr "Fenstertransparenz funktioniert nicht im Vollbildmodus."
 
 msgid "Panel Layout"
 msgstr "Panel-Layout"
@@ -267,11 +312,11 @@ msgstr "Auf alle anwenden"
 msgid "Recent projects"
 msgstr "Letzte Projekte"
 
-msgid "New tab"
-msgstr "Neuer Tab"
+msgid "New project"
+msgstr "Neues Projekt"
 
-msgid "Spritesheet (new tab)"
-msgstr "Spritesheet (neuer Tab)"
+msgid "Spritesheet (new project)"
+msgstr "Spritesheet (neues Projekt)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Spritesheet (neue Ebene)"
@@ -462,6 +507,9 @@ msgstr "Kubisch"
 msgid "Trilinear"
 msgstr "Triliniar"
 
+msgid "Constant"
+msgstr "Konstant"
+
 msgid "General"
 msgstr "Allgemein"
 
@@ -564,6 +612,12 @@ msgstr "Icon-Farbe von:"
 msgid "Icon color:"
 msgstr "Icon-Farbe:"
 
+msgid "Left tool color:"
+msgstr "Farbe des linken Werkzeugs:"
+
+msgid "Right tool color:"
+msgstr "Farbe des rechten Werkzeugs:"
+
 msgid "Tool button size:"
 msgstr "Werkzeugbutton-Größe:"
 
@@ -629,6 +683,9 @@ msgstr "Farbton/Sättigung/Wert anpassen"
 
 msgid "Gradient"
 msgstr "Gradient"
+
+msgid "Gradient Map"
+msgstr "Verlaufsumsetzung"
 
 msgid "Linear"
 msgstr "Linear"

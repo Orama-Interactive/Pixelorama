@@ -75,7 +75,7 @@ func draw_preview() -> void:
 
 func _get_draw_rect() -> Rect2:
 	if Global.current_project.has_selection:
-		return Global.current_project.get_selection_rectangle()
+		return Global.current_project.selection_map.get_used_rect()
 	else:
 		return Rect2(Vector2.ZERO, Global.current_project.size)
 
@@ -124,6 +124,18 @@ func _create_polylines(bitmap: BitMap) -> Array:
 			if y + 1 >= size.y or not bitmap.get_bit(p + Vector2(0, 1)):
 				_add_polylines_segment(lines, p + Vector2(0, 1), p + Vector2(1, 1))
 	return lines
+
+
+func _fill_bitmap_with_points(points: Array, size: Vector2) -> BitMap:
+	var bitmap := BitMap.new()
+	bitmap.create(size)
+
+	for point in points:
+		if point.x < 0 or point.y < 0 or point.x >= size.x or point.y >= size.y:
+			continue
+		bitmap.set_bit(point, 1)
+
+	return bitmap
 
 
 func _add_polylines_segment(lines: Array, start: Vector2, end: Vector2) -> void:

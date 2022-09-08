@@ -1,4 +1,4 @@
-extends WindowDialog
+extends AcceptDialog
 
 var artworks := [
 	[
@@ -32,6 +32,10 @@ var splash_art_texturerect: TextureRect
 var art_by_label: Button
 
 onready var version_text: TextureRect = find_node("VersionText")
+
+
+func _ready() -> void:
+	get_ok().visible = false
 
 
 func _on_SplashDialog_about_to_show() -> void:

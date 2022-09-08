@@ -22,17 +22,19 @@ bg_color = Color( 1, 1, 1, 0 )
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
-[node name="SplashDialog" type="WindowDialog"]
-margin_right = 640.0
-margin_bottom = 583.0
-rect_min_size = Vector2( 640, 583 )
+[node name="SplashDialog" type="AcceptDialog"]
+margin_right = 656.0
+margin_bottom = 611.0
 resizable = true
 script = ExtResource( 1 )
 
 [node name="Contents" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -46.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
 custom_constants/separation = 8
 __meta__ = {
 "_edit_use_anchors_": false
@@ -41,7 +43,6 @@ __meta__ = {
 [node name="SplashArt" type="TextureRect" parent="Contents"]
 margin_right = 640.0
 margin_bottom = 406.0
-rect_min_size = Vector2( 640, 406 )
 size_flags_vertical = 3
 texture = ExtResource( 2 )
 expand = true
@@ -237,22 +238,13 @@ margin_right = 284.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 230, 0 )
 size_flags_vertical = 8
-text = "MysteryStudio"
+text = "ShikadiGum"
 autowrap = true
 
 [node name="PatronsLabel3" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
 margin_top = 36.0
 margin_right = 284.0
 margin_bottom = 50.0
-rect_min_size = Vector2( 230, 0 )
-size_flags_vertical = 8
-text = "ShikadiGum"
-autowrap = true
-
-[node name="PatronsLabel4" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
-margin_top = 54.0
-margin_right = 284.0
-margin_bottom = 68.0
 rect_min_size = Vector2( 230, 0 )
 size_flags_vertical = 8
 text = "Hugo Locurcio"

@@ -20,6 +20,7 @@ onready var theme_color_preview_scene = preload("res://src/Preferences/ThemeColo
 func _ready() -> void:
 	for theme in themes:
 		add_theme(theme)
+	yield(get_tree(), "idle_frame")
 
 	var theme_id: int = Global.config_cache.get_value("preferences", "theme", 0)
 	if theme_id >= themes.size():
@@ -88,24 +89,9 @@ func change_theme(id: int) -> void:
 	VisualServer.set_default_clear_color(clear_color)
 
 	# Temporary code
-	var layer_button_pcont: PanelContainer = Global.animation_timeline.find_node(
-		"LayerButtonPanelContainer"
-	)
-	var lbpc_stylebox: StyleBoxFlat = layer_button_pcont.get_stylebox("panel", "PanelContainer")
+	var lbpc: PanelContainer = Global.animation_timeline.find_node("LayerButtonPanelContainer")
+	var lbpc_stylebox: StyleBoxFlat = lbpc.get_stylebox("panel", "PanelContainer")
 	lbpc_stylebox.bg_color = clear_color
-
-	# Will no longer be needed when Godot 3.5 is out
-	var top_menu_style: StyleBox = theme.get_stylebox("TopMenu", "Panel")
-	var ruler_style: StyleBox = theme.get_stylebox("Ruler", "Button")
-	Global.top_menu_container.add_stylebox_override("panel", top_menu_style)
-	Global.horizontal_ruler.add_stylebox_override("normal", ruler_style)
-	Global.horizontal_ruler.add_stylebox_override("pressed", ruler_style)
-	Global.horizontal_ruler.add_stylebox_override("hover", ruler_style)
-	Global.horizontal_ruler.add_stylebox_override("focus", ruler_style)
-	Global.vertical_ruler.add_stylebox_override("normal", ruler_style)
-	Global.vertical_ruler.add_stylebox_override("pressed", ruler_style)
-	Global.vertical_ruler.add_stylebox_override("hover", ruler_style)
-	Global.vertical_ruler.add_stylebox_override("focus", ruler_style)
 
 	change_icon_colors()
 

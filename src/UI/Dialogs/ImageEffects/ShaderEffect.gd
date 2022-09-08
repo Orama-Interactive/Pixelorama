@@ -10,9 +10,9 @@ onready var shader_params: BoxContainer = $VBoxContainer/ShaderParams
 func _about_to_show() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
-	current_cel = frame.cels[Global.current_project.current_layer].image
+	Export.blend_selected_cels(selected_cels, frame)
 
-	preview_image.copy_from(current_cel)
+	preview_image.copy_from(selected_cels)
 	preview_texture.create_from_image(preview_image, 0)
 	preview.texture = preview_texture
 
@@ -27,7 +27,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		params[param] = param_data
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(cel, shader, params, project.size)
-	current_cel.unlock()
+	selected_cels.unlock()
 	yield(gen, "done")
 
 
