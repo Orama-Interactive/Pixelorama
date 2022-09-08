@@ -4,10 +4,10 @@ enum MenuOptions { DELETE, LINK, PROPERTIES }
 
 var frame := 0
 var layer := 0
-var cel: PixelCel
+var cel: BaseCel
 
-onready var popup_menu: PopupMenu = $PopupMenu
-onready var linked_indicator: Polygon2D = $LinkedIndicator
+onready var popup_menu: PopupMenu = get_node_or_null("PopupMenu")
+onready var linked_indicator: Polygon2D = get_node_or_null("LinkedIndicator")
 
 func _ready() -> void:
 	button_setup()
@@ -18,14 +18,15 @@ func button_setup() -> void:
 	rect_min_size.y = Global.animation_timeline.cel_size
 
 	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, layer]
-	if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels:
-		linked_indicator.visible = true
-		popup_menu.set_item_text(MenuOptions.LINK, "Unlink Cel")
-		popup_menu.set_item_metadata(MenuOptions.LINK, "Unlink Cel")
-	else:
-		linked_indicator.visible = false
-		popup_menu.set_item_text(MenuOptions.LINK, "Link Cel")
-		popup_menu.set_item_metadata(MenuOptions.LINK, "Link Cel")
+	if is_instance_valid(linked_indicator):
+		if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels:
+			linked_indicator.visible = true
+			popup_menu.set_item_text(MenuOptions.LINK, "Unlink Cel")
+			popup_menu.set_item_metadata(MenuOptions.LINK, "Unlink Cel")
+		else:
+			linked_indicator.visible = false
+			popup_menu.set_item_text(MenuOptions.LINK, "Link Cel")
+			popup_menu.set_item_metadata(MenuOptions.LINK, "Link Cel")
 
 	# Reset the checkers size because it assumes you want the same size as the canvas
 	var checker = $CelTexture/TransparentChecker
