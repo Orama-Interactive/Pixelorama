@@ -5,7 +5,6 @@ enum MenuOptions { DELETE, LINK, PROPERTIES }
 var frame := 0
 var layer := 0
 var cel: PixelCel
-var image: Image
 
 onready var popup_menu: PopupMenu = $PopupMenu
 onready var linked_indicator: Polygon2D = $LinkedIndicator
@@ -32,7 +31,6 @@ func button_setup() -> void:
 	var checker = $CelTexture/TransparentChecker
 	checker.rect_size = checker.get_parent().rect_size
 	cel = Global.current_project.frames[frame].cels[layer]
-	image = cel.image
 
 
 func _on_CelButton_resized() -> void:
@@ -110,6 +108,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			#			Will new_layers be needed either?
 			var new_layers: Array = project.duplicate_layers()
 			var new_cels: Array = f.cels.duplicate()
+			# TODO H: Make sure all this works with group layers:
 			for i in new_cels.size():
 				# TODO H: This doesn't work (currently replaces ALL cels on the frame)
 				new_cels[i] = PixelCel.new(
