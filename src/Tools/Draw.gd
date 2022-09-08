@@ -234,7 +234,6 @@ func _prepare_tool() -> void:
 
 
 func _prepare_circle_tool(fill: bool) -> void:
-	_circle_tool_shortcut = PoolVector2Array()
 	var circle_tool_map := _create_circle_indicator(_brush_size, fill)
 	# Go through that BitMap and build an Array of the "displacement" from the center of the bits
 	# that are true.
@@ -510,33 +509,9 @@ func _create_pixel_indicator(size: int) -> BitMap:
 
 
 func _create_circle_indicator(size: int, fill := false) -> BitMap:
-	var bitmap := BitMap.new()
-	bitmap.create(Vector2.ONE * (size * 2 + 1))
-	var position := Vector2(size, size)
-	var r := size
-	var x := -r
-	var y := 0
-	var err := 2 - r * 2
-	var draw := true
-	if fill:
-		bitmap.set_bit(position, true)
-	while x < 0:
-		if draw:
-			for i in range(1 if fill else -x, -x + 1):
-				bitmap.set_bit(position + Vector2(-i, y), true)
-				bitmap.set_bit(position + Vector2(-y, -i), true)
-				bitmap.set_bit(position + Vector2(i, -y), true)
-				bitmap.set_bit(position + Vector2(y, i), true)
-		draw = not fill
-		r = err
-		if r <= y:
-			y += 1
-			err += y * 2 + 1
-			draw = true
-		if r > x || err > y:
-			x += 1
-			err += x * 2 + 1
-	return bitmap
+	_circle_tool_shortcut = PoolVector2Array()
+	var diameter := Vector2(size, size) * 2 + Vector2.ONE
+	return _fill_bitmap_with_points(_compute_draw_tool_circle(Vector2(size, size), fill), diameter)
 
 
 func _create_line_indicator(indicator: BitMap, start: Vector2, end: Vector2) -> BitMap:
