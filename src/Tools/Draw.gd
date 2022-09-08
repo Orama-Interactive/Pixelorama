@@ -290,11 +290,6 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 		_set_pixel_no_cache(c)
 
 
-func draw_tool_pixel(position: Vector2) -> void:
-	for coord in _compute_draw_tool_pixel(position):
-		_set_pixel_no_cache(coord)
-
-
 # Compute the array of coordinates that should be drawn
 func _compute_draw_tool_pixel(position: Vector2) -> PoolVector2Array:
 	var result := PoolVector2Array()
@@ -307,11 +302,6 @@ func _compute_draw_tool_pixel(position: Vector2) -> PoolVector2Array:
 
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
-func draw_tool_circle(position: Vector2, fill := false) -> void:
-	for coord in _compute_draw_tool_circle(position, fill):
-		_set_pixel_no_cache(coord)
-
-
 # Compute the array of coordinates that should be drawn
 func _compute_draw_tool_circle(position: Vector2, fill := false) -> PoolVector2Array:
 	if _circle_tool_shortcut:
