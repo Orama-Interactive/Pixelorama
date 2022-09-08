@@ -5,3 +5,6 @@
 
 [node name="GroupCelButton" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="TransparentChecker" parent="CelTexture" index="0"]
+visible = false
