@@ -327,18 +327,18 @@ selected = 0
 
 [node name="Canvas" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
-margin_top = 28.0
-margin_right = 498.0
-margin_bottom = 384.0
+margin_top = 56.0
+margin_right = 529.0
+margin_bottom = 606.0
 
 [node name="ZoomLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_right = 498.0
+margin_right = 529.0
 margin_bottom = 14.0
 text = "Zoom"
 
 [node name="ZoomOptions" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_top = 18.0
-margin_right = 498.0
+margin_right = 529.0
 margin_bottom = 42.0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/ZoomOptions"]
@@ -359,18 +359,18 @@ text = "On"
 
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_top = 46.0
-margin_right = 498.0
+margin_right = 529.0
 margin_bottom = 50.0
 
 [node name="GuideLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_top = 54.0
-margin_right = 498.0
+margin_right = 529.0
 margin_bottom = 68.0
 text = "Guides"
 
 [node name="GuideOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_top = 72.0
-margin_right = 498.0
+margin_right = 529.0
 margin_bottom = 92.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
@@ -396,26 +396,26 @@ color = Color( 0.63, 0.13, 0.94, 1 )
 
 [node name="HSeparator2" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_top = 96.0
-margin_right = 498.0
+margin_right = 529.0
 margin_bottom = 100.0
 
 [node name="GridLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_top = 104.0
-margin_right = 498.0
+margin_right = 529.0
 margin_bottom = 118.0
 text = "Grid"
 
 [node name="GridOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_top = 122.0
-margin_right = 498.0
-margin_bottom = 222.0
+margin_right = 529.0
+margin_bottom = 282.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
 [node name="GridTypeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_top = 3.0
-margin_right = 123.0
+margin_right = 183.0
 margin_bottom = 17.0
 hint_tooltip = "Sets the type of the grid between rectangular, isometric or both"
 mouse_filter = 0
@@ -425,8 +425,8 @@ __meta__ = {
 }
 
 [node name="GridType" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 127.0
-margin_right = 230.0
+margin_left = 187.0
+margin_right = 337.0
 margin_bottom = 20.0
 hint_tooltip = "Sets the type of the grid between rectangular, isometric or both"
 mouse_default_cursor_shape = 2
@@ -435,9 +435,9 @@ items = [ "Rectangular", null, false, 0, null, "Isometric", null, false, 1, null
 selected = 0
 
 [node name="GridWidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 234.0
+margin_left = 341.0
 margin_top = 3.0
-margin_right = 344.0
+margin_right = 529.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 110, 0 )
 hint_tooltip = "Sets how far apart are vertical lines of the rectangular grid"
@@ -446,7 +446,7 @@ text = "Rectangular grid width:"
 
 [node name="GridWidthValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_top = 24.0
-margin_right = 123.0
+margin_right = 183.0
 margin_bottom = 48.0
 hint_tooltip = "Sets how far apart are vertical lines of the rectangular grid"
 mouse_default_cursor_shape = 2
@@ -458,18 +458,18 @@ align = 2
 suffix = "px"
 
 [node name="GridHeightLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 127.0
+margin_left = 187.0
 margin_top = 29.0
-margin_right = 230.0
+margin_right = 337.0
 margin_bottom = 43.0
 hint_tooltip = "Sets how far apart are horizontal lines of the rectangular grid"
 mouse_filter = 0
 text = "Rectangular grid height:"
 
 [node name="GridHeightValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 234.0
+margin_left = 341.0
 margin_top = 24.0
-margin_right = 344.0
+margin_right = 529.0
 margin_bottom = 48.0
 hint_tooltip = "Sets how far apart are horizontal lines of the rectangular grid"
 mouse_default_cursor_shape = 2
@@ -482,16 +482,16 @@ suffix = "px"
 
 [node name="IsometricCellBoundsWidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_top = 57.0
-margin_right = 123.0
+margin_right = 183.0
 margin_bottom = 71.0
 hint_tooltip = "Sets the width of the isometric cell's axis aligned bounding box"
 mouse_filter = 0
 text = "Isometric cell bounds width:"
 
 [node name="IsometricCellBoundsWidthValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 127.0
+margin_left = 187.0
 margin_top = 52.0
-margin_right = 230.0
+margin_right = 337.0
 margin_bottom = 76.0
 hint_tooltip = "Sets the width of the isometric cell's axis aligned bounding box"
 mouse_default_cursor_shape = 2
@@ -503,18 +503,18 @@ align = 2
 suffix = "px"
 
 [node name="IsometricCellBoundsHeightLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_left = 341.0
 margin_top = 57.0
-margin_right = 123.0
+margin_right = 529.0
 margin_bottom = 71.0
 hint_tooltip = "Sets the height of the isometric cell's axis aligned bounding box"
 mouse_filter = 0
 text = "Isometric cell bounds height:"
 
 [node name="IsometricCellBoundsHeightValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 127.0
-margin_top = 52.0
-margin_right = 230.0
-margin_bottom = 76.0
+margin_top = 80.0
+margin_right = 183.0
+margin_bottom = 104.0
 hint_tooltip = "Sets the height of the isometric cell's axis aligned bounding box"
 mouse_default_cursor_shape = 2
 min_value = 2.0
@@ -525,18 +525,19 @@ align = 2
 suffix = "px"
 
 [node name="GridOffsetXLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_top = 57.0
-margin_right = 123.0
-margin_bottom = 71.0
+margin_left = 187.0
+margin_top = 85.0
+margin_right = 337.0
+margin_bottom = 99.0
 hint_tooltip = "Sets grid's x offset from the canvas origin (top left corner of the image)"
 mouse_filter = 0
 text = "Grid offset x:"
 
 [node name="GridOffsetXValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 127.0
-margin_top = 52.0
-margin_right = 230.0
-margin_bottom = 76.0
+margin_left = 341.0
+margin_top = 80.0
+margin_right = 529.0
+margin_bottom = 104.0
 hint_tooltip = "Sets grid's x offset from the canvas origin (top left corner of the image)"
 mouse_default_cursor_shape = 2
 min_value = -16384.0
@@ -546,18 +547,18 @@ align = 2
 suffix = "px"
 
 [node name="GridOffsetYLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_top = 57.0
-margin_right = 123.0
-margin_bottom = 71.0
+margin_top = 113.0
+margin_right = 183.0
+margin_bottom = 127.0
 hint_tooltip = "Sets grid's y offset from the canvas origin (top left corner of the image)"
 mouse_filter = 0
 text = "Grid offset y:"
 
 [node name="GridOffsetYValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 127.0
-margin_top = 52.0
-margin_right = 230.0
-margin_bottom = 76.0
+margin_left = 187.0
+margin_top = 108.0
+margin_right = 337.0
+margin_bottom = 132.0
 hint_tooltip = "Sets grid's y offset from the canvas origin (top left corner of the image)"
 mouse_default_cursor_shape = 2
 min_value = -16384.0
@@ -567,73 +568,73 @@ align = 2
 suffix = "px"
 
 [node name="GridDrawOverTileModeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_top = -99.0
-margin_right = 131.0
-margin_bottom = -85.0
+margin_left = 341.0
+margin_top = 113.0
+margin_right = 529.0
+margin_bottom = 127.0
 rect_min_size = Vector2( 110, 0 )
 hint_tooltip = "If disabled, the grid will be drawn only over the original image"
 mouse_filter = 0
 text = "Draw over Tile Mode:"
 
 [node name="GridDrawOverTileMode" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 114.0
-margin_top = -104.0
-margin_right = 161.0
-margin_bottom = -80.0
+margin_top = 136.0
+margin_right = 183.0
+margin_bottom = 160.0
 hint_tooltip = "If disabled, the grid will be drawn only over the original image"
 mouse_default_cursor_shape = 2
 text = "On"
 
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 234.0
-margin_top = 57.0
-margin_right = 344.0
-margin_bottom = 71.0
+margin_left = 187.0
+margin_top = 141.0
+margin_right = 337.0
+margin_bottom = 155.0
 hint_tooltip = "A color of the grid"
 mouse_filter = 0
 text = "Grid color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_top = 80.0
-margin_right = 123.0
-margin_bottom = 100.0
+margin_left = 341.0
+margin_top = 136.0
+margin_right = 529.0
+margin_bottom = 160.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "A color of the grid"
 mouse_default_cursor_shape = 2
 
 [node name="HSeparator3" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 226.0
-margin_right = 498.0
-margin_bottom = 230.0
+margin_top = 286.0
+margin_right = 529.0
+margin_bottom = 290.0
 
 [node name="PixelGridLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 234.0
-margin_right = 498.0
-margin_bottom = 248.0
+margin_top = 294.0
+margin_right = 529.0
+margin_bottom = 308.0
 text = "Pixel Grid"
 
 [node name="PixelGridOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 122.0
-margin_right = 498.0
-margin_bottom = 222.0
+margin_top = 312.0
+margin_right = 529.0
+margin_bottom = 360.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
 [node name="ShowAtZoomLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
-margin_left = 234.0
-margin_top = 3.0
-margin_right = 344.0
-margin_bottom = 17.0
+margin_top = 5.0
+margin_right = 110.0
+margin_bottom = 19.0
 rect_min_size = Vector2( 110, 0 )
 hint_tooltip = "Sets the minimal zoom at which pixel grid will be shown"
 mouse_filter = 0
 text = "Show at zoom:"
 
 [node name="ShowAtZoom" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
-margin_top = 24.0
-margin_right = 123.0
-margin_bottom = 48.0
+margin_left = 114.0
+margin_right = 194.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
 hint_tooltip = "Sets the minimal zoom at which pixel grid will be shown"
 mouse_default_cursor_shape = 2
@@ -646,37 +647,37 @@ align = 2
 suffix = "%"
 
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
-margin_left = 234.0
-margin_top = 57.0
-margin_right = 344.0
-margin_bottom = 71.0
+margin_left = 198.0
+margin_top = 5.0
+margin_right = 297.0
+margin_bottom = 19.0
 hint_tooltip = "A color of the pixel grid"
 mouse_filter = 0
 text = "Pixel grid color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
-margin_top = 80.0
-margin_right = 123.0
-margin_bottom = 100.0
+margin_top = 28.0
+margin_right = 110.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "A color of the pixel grid"
 mouse_default_cursor_shape = 2
 
 [node name="HSeparator4" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 226.0
-margin_right = 498.0
-margin_bottom = 230.0
+margin_top = 364.0
+margin_right = 529.0
+margin_bottom = 368.0
 
 [node name="TransparencyLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 234.0
-margin_right = 498.0
-margin_bottom = 248.0
+margin_top = 372.0
+margin_right = 529.0
+margin_bottom = 386.0
 text = "Transparency"
 
 [node name="CheckerOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 252.0
-margin_right = 498.0
-margin_bottom = 356.0
+margin_top = 390.0
+margin_right = 529.0
+margin_bottom = 494.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
@@ -791,6 +792,52 @@ max_value = 1.0
 step = 0.1
 value = 1.0
 align = 2
+
+[node name="HSeparator5" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 498.0
+margin_right = 529.0
+margin_bottom = 502.0
+
+[node name="BackgroundOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 506.0
+margin_right = 529.0
+margin_bottom = 550.0
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
+columns = 3
+
+[node name="ColorFromLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/BackgroundOptions"]
+margin_top = 3.0
+margin_right = 148.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 110, 0 )
+mouse_filter = 0
+text = "Background color from:"
+
+[node name="ColorOptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/BackgroundOptions"]
+margin_left = 152.0
+margin_right = 225.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Theme"
+items = [ "Theme", null, false, 0, null, "Custom", null, false, 1, null ]
+selected = 0
+
+[node name="ColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/BackgroundOptions"]
+margin_left = 229.0
+margin_top = 3.0
+margin_right = 343.0
+margin_bottom = 17.0
+mouse_filter = 0
+text = "Background color:"
+
+[node name="BackgroundColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/BackgroundOptions"]
+margin_top = 24.0
+margin_right = 148.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 64, 20 )
+mouse_default_cursor_shape = 2
+color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="Selection" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false

@@ -14,7 +14,7 @@ onready var themes := [
 
 onready var buttons_container: BoxContainer = $ThemeButtons
 onready var colors_container: BoxContainer = $ThemeColorsSpacer/ThemeColors
-onready var theme_color_preview_scene = preload("res://src/Preferences/ThemeColorPreview.tscn")
+onready var theme_color_preview_scene := preload("res://src/Preferences/ThemeColorPreview.tscn")
 
 
 func _ready() -> void:
@@ -74,11 +74,14 @@ func change_theme(id: int) -> void:
 	var theme: Theme = themes[id]
 	var icon_color: Color = theme.get_color("modulate_color", "Icons")
 
-	if Global.icon_color_from == Global.IconColorFrom.THEME:
+	if Global.icon_color_from == Global.ColorFrom.THEME:
 		Global.modulate_icon_color = icon_color
 
 	Global.control.theme = theme
+	change_clear_color()
+	change_icon_colors()
 
+	# Temporary code
 	var clear_color: Color = theme.get_color("clear_color", "Misc")
 	if !clear_color:
 		var panel_stylebox: StyleBox = theme.get_stylebox("panel", "PanelContainer")
@@ -86,20 +89,29 @@ func change_theme(id: int) -> void:
 			clear_color = panel_stylebox.bg_color
 		else:
 			clear_color = Color.gray
-	VisualServer.set_default_clear_color(clear_color)
-
-	# Temporary code
 	var lbpc: PanelContainer = Global.animation_timeline.find_node("LayerButtonPanelContainer")
 	var lbpc_stylebox: StyleBoxFlat = lbpc.get_stylebox("panel", "PanelContainer")
 	lbpc_stylebox.bg_color = clear_color
-
-	change_icon_colors()
 
 	for child in Global.preferences_dialog.get_node("Popups").get_children():
 		child.theme = theme
 
 	# Sets disabled theme color on palette swatches
 	Global.palette_panel.reset_empty_palette_swatches_color()
+
+
+func change_clear_color() -> void:
+	var clear_color: Color = Global.control.theme.get_color("clear_color", "Misc")
+	if !clear_color:
+		var panel_stylebox: StyleBox = Global.control.theme.get_stylebox("panel", "PanelContainer")
+		if panel_stylebox is StyleBoxFlat:
+			clear_color = panel_stylebox.bg_color
+		else:
+			clear_color = Color.gray
+	if Global.clear_color_from == Global.ColorFrom.THEME:
+		VisualServer.set_default_clear_color(clear_color)
+	else:
+		VisualServer.set_default_clear_color(Global.modulate_clear_color)
 
 
 func change_icon_colors() -> void:
