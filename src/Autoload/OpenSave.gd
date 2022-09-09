@@ -202,7 +202,7 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 				"linked_cels": []
 			}
 			linked_cels.append(file.get_var())
-			var l := PixelLayer.new()
+			var l := PixelLayer.new(new_project)
 			l.deserialize(layer_dict)
 			new_project.layers.append(l)
 			global_layer_line = file.get_line()
@@ -220,7 +220,7 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 			if file_major_version == 0 and file_minor_version < 7:
 				var layer_name_old_version = file.get_line()
 				if frame == 0:
-					var l := PixelLayer.new(layer_name_old_version)
+					var l := PixelLayer.new(new_project, layer_name_old_version)
 					new_project.layers.append(l)
 			var cel_opacity := 1.0
 			if file_major_version >= 0 and file_minor_version > 5:
@@ -398,7 +398,7 @@ func save_pxo_file(
 
 func open_image_as_new_tab(path: String, image: Image) -> void:
 	var project = Project.new([], path.get_file(), image.get_size())
-	project.layers.append(PixelLayer.new())
+	project.layers.append(PixelLayer.new(project))
 	Global.projects.append(project)
 
 	var frame := Frame.new()
@@ -411,7 +411,7 @@ func open_image_as_new_tab(path: String, image: Image) -> void:
 
 func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert: int) -> void:
 	var project = Project.new([], path.get_file())
-	project.layers.append(PixelLayer.new())
+	project.layers.append(PixelLayer.new(project))
 	Global.projects.append(project)
 	horiz = min(horiz, image.get_size().x)
 	vert = min(vert, image.get_size().y)
@@ -485,7 +485,7 @@ func open_image_as_spritesheet_layer(
 			new_frames.insert(project.current_frame + 1, new_frame)
 
 	# Create new layer for spritesheet
-	var layer := PixelLayer.new(file_name)
+	var layer := PixelLayer.new(project, file_name)
 	new_layers.append(layer)
 	for f in new_frames:
 		var new_layer := Image.new()
@@ -589,7 +589,7 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 	var new_layers: Array = Global.current_project.layers.duplicate()
-	var layer := PixelLayer.new(file_name)
+	var layer := PixelLayer.new(project, file_name)
 
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Add Layer")

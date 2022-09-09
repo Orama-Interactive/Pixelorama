@@ -363,13 +363,12 @@ func deserialize(dict: Dictionary) -> void:
 		for saved_layer in dict.layers:
 			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
 				Global.LayerTypes.PIXEL:
-					layers.append(PixelLayer.new())
+					layers.append(PixelLayer.new(self))
 				Global.LayerTypes.GROUP:
-					layers.append(GroupLayer.new())
+					layers.append(GroupLayer.new(self))
 		# Parent references to other layers are created when deserializing
 		# a layer, so loop again after creating them:
 		for layer_i in dict.layers.size():
-			layers[layer_i].project = self
 			layers[layer_i].index = layer_i
 			layers[layer_i].deserialize(dict.layers[layer_i])
 			_deserialize_metadata(layers[layer_i], dict.layers[layer_i])

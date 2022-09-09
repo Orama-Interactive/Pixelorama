@@ -89,7 +89,7 @@ func deserialize(dict: Dictionary) -> void:
 
 
 func copy() -> BaseLayer:
-	var copy = get_script().new()
+	var copy = get_script().new(project)
 	copy.project = project
 	copy.index = index
 	copy.deserialize(serialize())

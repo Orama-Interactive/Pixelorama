@@ -584,7 +584,7 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 func _on_AddLayer_pressed() -> void:
 	var project: Project = Global.current_project
 
-	var l := PixelLayer.new()
+	var l := PixelLayer.new(project)
 	var cels := []
 	for f in project.frames:
 		var new_cel_image := Image.new()
@@ -605,7 +605,7 @@ func _on_AddLayer_pressed() -> void:
 func _on_AddGroup_pressed() -> void:
 	var project: Project = Global.current_project
 
-	var l := GroupLayer.new()
+	var l := GroupLayer.new(project)
 	var cels := []
 	for f in project.frames:
 		cels.append(GroupCel.new())
