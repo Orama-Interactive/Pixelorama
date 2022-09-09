@@ -86,6 +86,8 @@ func remove() -> void:
 	undo_redo.free()
 	for guide in guides:
 		guide.queue_free()
+	# Prevents memory leak (due to the layers' project reference stopping ref counting from freeing)
+	layers.clear()
 	Global.projects.erase(self)
 
 

@@ -5,7 +5,6 @@ extends BaseCel
 # The "image" variable is where the image data of each cel are.
 
 var image: Image setget image_changed
-#var image_texture: ImageTexture # TODO H1: ERASE if having in base class works nicely
 
 func _init(_image := Image.new(), _opacity := 1.0, _image_texture: ImageTexture = null) -> void:
 	if _image_texture:

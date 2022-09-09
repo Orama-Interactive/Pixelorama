@@ -442,6 +442,7 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 func open_image_as_spritesheet_layer(
 	_path: String, image: Image, file_name: String, horizontal: int, vertical: int, start_frame: int
 ) -> void:
+	# TODO H0: Will need to rewrite this method using new ways to add layers/frames. (no ducplicate arrays). Check other open methods too!
 	# Data needed to slice images
 	horizontal = min(horizontal, image.get_size().x)
 	vertical = min(vertical, image.get_size().y)
@@ -475,7 +476,7 @@ func open_image_as_spritesheet_layer(
 			for l_i in range(new_layers.size()):  # Create as many cels as there are layers
 				var new_img := Image.new()
 				new_img.create(project_width, project_height, false, Image.FORMAT_RGBA8)
-				# TODO H1: Make sure this PixelCel is right:
+				# TODO H1: Make sure this PixelCel is right: (I this can be for any layer type)
 				new_frame.cels.append(PixelCel.new(new_img, 1))
 				if new_layers[l_i].new_cels_linked:
 					new_layers[l_i].linked_cels.append(new_frame)

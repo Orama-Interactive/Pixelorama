@@ -8,7 +8,7 @@ func _init(_opacity := 1.0) -> void:
 
 
 func get_image() -> Image:
-	# TODO H: render the material as an image and return it
+	# TODO H: This can be used for copying selections or picking colors... Can maybe make from texture data?
 	return Image.new()
 
 
