@@ -87,8 +87,9 @@ func _on_CelButton_pressed() -> void:
 			release_focus()
 
 	elif Input.is_action_just_released("right_mouse"):
-		popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
-		pressed = !pressed
+		if is_instance_valid(popup_menu):
+			popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
+			pressed = !pressed
 	elif Input.is_action_just_released("middle_mouse"):
 		pressed = !pressed
 		_delete_cel_content()
@@ -105,19 +106,9 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			var project: Project = Global.current_project
 			var f: Frame = project.frames[frame]
 			var cel_index: int = project.layers[layer].linked_cels.find(f)
-			# TODO H0: If my content methods idea is used, I think new_cels won't need to exist
-			#			Will new_layers be needed either?
-			var new_layers: Array = project.duplicate_layers()
-			var new_cels: Array = f.cels.duplicate()
-			# TODO H: Make sure all this works with group layers:
-			for i in new_cels.size():
-				# TODO H: This doesn't work (currently replaces ALL cels on the frame)
-				new_cels[i] = PixelCel.new(
-					new_cels[i].image, new_cels[i].opacity, new_cels[i].image_texture
-				)
-			# TODO H: Make sure all this works with group layers:
+			var new_linked_cels: Array = project.layers[layer].linked_cels.duplicate()
 			if popup_menu.get_item_metadata(MenuOptions.LINK) == "Unlink Cel":
-				new_layers[layer].linked_cels.remove(cel_index)
+				new_linked_cels.remove(cel_index)
 				project.undo_redo.create_action("Unlink Cel")
 				var cel: BaseCel = project.frames[frame].cels[layer]
 				project.undo_redo.add_do_property(cel, "image_texture", ImageTexture.new())
@@ -126,9 +117,9 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				project.undo_redo.add_undo_method(cel, "set_content", cel.get_content())
 
 			elif popup_menu.get_item_metadata(MenuOptions.LINK) == "Link Cel":
-				new_layers[layer].linked_cels.append(f)
+				new_linked_cels.append(f)
 				project.undo_redo.create_action("Link Cel")
-				if new_layers[layer].linked_cels.size() > 1:
+				if new_linked_cels.size() > 1:
 					# If there are already linked cels, set the current cel's image
 					# to the first linked cel's image
 					var cel: BaseCel = project.frames[frame].cels[layer]
@@ -138,8 +129,10 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 					project.undo_redo.add_do_method(cel, "set_content", linked_cel.get_content())
 					project.undo_redo.add_undo_method(cel, "set_content", cel.get_content())
 
-			project.undo_redo.add_do_property(project, "layers", new_layers)
-			project.undo_redo.add_undo_property(project, "layers", project.layers)
+			project.undo_redo.add_do_property(project.layers[layer], "linked_cels", new_linked_cels)
+			project.undo_redo.add_undo_property(
+				project.layers[layer], "linked_cels", project.layers[layer].linked_cels
+			)
 			# Remove and add a new cel button to update appearance (can't use self.button_setup
 			# because there is no guarantee that it will be the exact same cel button instance)
 			project.undo_redo.add_do_method(Global.animation_timeline, "project_cel_removed", frame, layer)
