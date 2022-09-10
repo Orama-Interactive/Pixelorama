@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-09-10 00:02\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -611,6 +611,12 @@ msgstr ""
 
 msgid "Icon color:"
 msgstr "Ikon színe:"
+
+msgid "Background color from:"
+msgstr ""
+
+msgid "Background color:"
+msgstr ""
 
 msgid "Left tool color:"
 msgstr ""
