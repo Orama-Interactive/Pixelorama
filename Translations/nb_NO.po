@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-09-10 00:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -611,6 +611,12 @@ msgstr "Ikonfarge fra:"
 
 msgid "Icon color:"
 msgstr "Ikonfarge:"
+
+msgid "Background color from:"
+msgstr ""
+
+msgid "Background color:"
+msgstr ""
 
 msgid "Left tool color:"
 msgstr ""
