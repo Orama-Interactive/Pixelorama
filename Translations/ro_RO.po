@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-08-11 11:26\n"
+"PO-Revision-Date: 2022-09-10 00:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -612,6 +612,12 @@ msgstr "Culoarea pictogramei din:"
 
 msgid "Icon color:"
 msgstr "Culoarea pictogramei:"
+
+msgid "Background color from:"
+msgstr ""
+
+msgid "Background color:"
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "Culoarea instrumentului din stânga:"
