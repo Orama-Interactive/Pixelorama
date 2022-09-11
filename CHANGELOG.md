@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - The splash dialog can be resized to a smaller size than the default.
 
 ### Fixed
-- Deleting content from locker/invisible layers is no longer possible.
+- Deleting content from locked/invisible layers is no longer possible.
 - Selection can no longer be moved if there is a dialog open.
 
 ## [v0.10.2] - 2022-08-18
