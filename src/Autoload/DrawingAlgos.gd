@@ -3,6 +3,103 @@ extends Node
 enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
 
 
+# Algorithm based on http://members.chello.at/easyfilter/bresenham.html
+func get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
+	var array := []
+	var x0 := int(pos.x)
+	var x1 := pos.x + int(size.x - 1)
+	var y0 := int(pos.y)
+	var y1 := int(pos.y) + int(size.y - 1)
+	var a := int(abs(x1 - x0))
+	var b := int(abs(y1 - x0))
+	var b1 := b & 1
+	var dx := 4 * (1 - a) * b * b
+	var dy := 4 * (b1 + 1) * a * a
+	var err := dx + dy + b1 * a * a
+	var e2 := 0
+
+	if x0 > x1:
+		x0 = x1
+		x1 += a
+
+	if y0 > y1:
+		y0 = y1
+
+# warning-ignore:integer_division
+	y0 += (b + 1) / 2
+	y1 = y0 - b1
+	a *= 8 * a
+	b1 = 8 * b * b
+
+	while x0 <= x1:
+		var v1 := Vector2(x1, y0)
+		var v2 := Vector2(x0, y0)
+		var v3 := Vector2(x0, y1)
+		var v4 := Vector2(x1, y1)
+		array.append(v1)
+		array.append(v2)
+		array.append(v3)
+		array.append(v4)
+
+		e2 = 2 * err
+		if e2 <= dy:
+			y0 += 1
+			y1 -= 1
+			dy += a
+			err += dy
+
+		if e2 >= dx || 2 * err > dy:
+			x0 += 1
+			x1 -= 1
+			dx += b1
+			err += dx
+
+	while y0 - y1 < b:
+		var v1 := Vector2(x0 - 1, y0)
+		var v2 := Vector2(x1 + 1, y0)
+		var v3 := Vector2(x0 - 1, y1)
+		var v4 := Vector2(x1 + 1, y1)
+		array.append(v1)
+		array.append(v2)
+		array.append(v3)
+		array.append(v4)
+		y0 += 1
+		y1 -= 1
+
+	return array
+
+
+func get_ellipse_points_filled(pos: Vector2, size: Vector2, thickness := 1) -> PoolVector2Array:
+	var offsetted_size := size + Vector2.ONE * (thickness - 1)
+	var border := get_ellipse_points(pos, offsetted_size)
+	var filling := []
+
+	for x in range(1, ceil(offsetted_size.x / 2)):
+		var fill := false
+		var prev_is_true := false
+		for y in range(0, ceil(offsetted_size.y / 2)):
+			var top_l_p := Vector2(x, y)
+			var bit := border.has(pos + top_l_p)
+
+			if bit and not fill:
+				prev_is_true = true
+				continue
+
+			if not bit and (fill or prev_is_true):
+				filling.append(pos + top_l_p)
+				filling.append(pos + Vector2(x, offsetted_size.y - y - 1))
+				filling.append(pos + Vector2(offsetted_size.x - x - 1, y))
+				filling.append(pos + Vector2(offsetted_size.x - x - 1, offsetted_size.y - y - 1))
+
+				if prev_is_true:
+					fill = true
+					prev_is_true = false
+			elif bit and fill:
+				break
+
+	return PoolVector2Array(border + filling)
+
+
 func scale_3x(sprite: Image, tol: float = 50) -> Image:
 	var scaled := Image.new()
 	scaled.create(sprite.get_width() * 3, sprite.get_height() * 3, false, Image.FORMAT_RGBA8)

@@ -6,13 +6,13 @@ var vertical_mirror := false
 var color_op := ColorOp.new()
 
 var simple_drawer := SimpleDrawer.new()
-var pixel_perfect_drawers = [
+var pixel_perfect_drawers := [
 	PixelPerfectDrawer.new(),
 	PixelPerfectDrawer.new(),
 	PixelPerfectDrawer.new(),
 	PixelPerfectDrawer.new()
 ]
-var drawers = [simple_drawer, simple_drawer, simple_drawer, simple_drawer]
+var drawers := [simple_drawer, simple_drawer, simple_drawer, simple_drawer]
 
 
 class ColorOp:

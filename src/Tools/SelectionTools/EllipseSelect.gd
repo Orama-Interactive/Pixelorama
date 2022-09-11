@@ -255,13 +255,3 @@ func _get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
 		y1 -= 1
 
 	return array
-
-
-func _fill_bitmap_with_points(points: Array, size: Vector2) -> BitMap:
-	var bitmap := BitMap.new()
-	bitmap.create(size)
-
-	for point in points:
-		bitmap.set_bit(point, 1)
-
-	return bitmap

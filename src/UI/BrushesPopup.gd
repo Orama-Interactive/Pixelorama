@@ -5,9 +5,9 @@ signal brush_selected(brush)
 signal brush_removed(brush)
 enum { PIXEL, CIRCLE, FILLED_CIRCLE, FILE, RANDOM_FILE, CUSTOM }
 
-var pixel_image = preload("res://assets/graphics/pixel_image.png")
-var circle_image = preload("res://assets/graphics/circle_9x9.png")
-var circle_filled_image = preload("res://assets/graphics/circle_filled_9x9.png")
+var pixel_image := preload("res://assets/graphics/pixel_image.png")
+var circle_image := preload("res://assets/graphics/circle_9x9.png")
+var circle_filled_image := preload("res://assets/graphics/circle_filled_9x9.png")
 
 
 class Brush:
@@ -18,8 +18,8 @@ class Brush:
 
 
 func _ready() -> void:
-	var container = Global.brushes_popup.get_node("TabContainer/File/FileBrushContainer")
-	var button = create_button(pixel_image)
+	var container = get_node("TabContainer/File/FileBrushContainer")
+	var button := create_button(pixel_image)
 	button.brush.type = PIXEL
 	button.hint_tooltip = "Pixel brush"
 	container.add_child(button)
@@ -44,7 +44,7 @@ func select_brush(brush: Brush) -> void:
 
 
 static func get_default_brush() -> Brush:
-	var brush = Brush.new()
+	var brush := Brush.new()
 	brush.type = PIXEL
 	brush.index = 0
 	return brush
@@ -60,7 +60,7 @@ static func create_button(image: Image) -> Node:
 
 
 static func add_file_brush(images: Array, hint := "") -> void:
-	var button = create_button(images[0])
+	var button := create_button(images[0])
 	button.brush.type = FILE if images.size() == 1 else RANDOM_FILE
 	button.brush.image = images[0]
 	button.brush.random = images
@@ -71,7 +71,7 @@ static func add_file_brush(images: Array, hint := "") -> void:
 
 
 static func add_project_brush(image: Image, hint := "") -> void:
-	var button = create_button(image)
+	var button := create_button(image)
 	button.brush.type = CUSTOM
 	button.brush.image = image
 	button.hint_tooltip = hint
@@ -90,10 +90,10 @@ static func clear_project_brush() -> void:
 func get_brush(type: int, index: int) -> Brush:
 	var container
 	if type == CUSTOM:
-		container = Global.brushes_popup.get_node("TabContainer/Project/ProjectBrushContainer")
+		container = get_node("TabContainer/Project/ProjectBrushContainer")
 	else:
-		container = Global.brushes_popup.get_node("TabContainer/File/FileBrushContainer")
-	var brush = get_default_brush()
+		container = get_node("TabContainer/File/FileBrushContainer")
+	var brush := get_default_brush()
 	if index < container.get_child_count():
 		brush = container.get_child(index).brush
 	return brush
@@ -103,7 +103,7 @@ func remove_brush(brush_button: Node) -> void:
 	emit_signal("brush_removed", brush_button.brush)
 
 	var project = Global.current_project
-	var undo_brushes = project.brushes.duplicate()
+	var undo_brushes: Array = project.brushes.duplicate()
 	project.brushes.erase(brush_button.brush.image)
 
 	project.undos += 1

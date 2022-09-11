@@ -600,6 +600,12 @@ msgstr ""
 msgid "Icon color:"
 msgstr ""
 
+msgid "Background color from:"
+msgstr ""
+
+msgid "Background color:"
+msgstr ""
+
 msgid "Left tool color:"
 msgstr ""
 

@@ -22,6 +22,10 @@ func select_pixel(pixel: Vector2, select := true) -> void:
 	unlock()
 
 
+func select_all() -> void:
+	fill(Color(1, 1, 1, 1))
+
+
 func clear() -> void:
 	fill(Color(0))
 
