@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-09-10 00:01\n"
+"PO-Revision-Date: 2022-09-12 13:03\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -614,10 +614,10 @@ msgid "Icon color:"
 msgstr "Χρώμα εικονιδίων:"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Χρώμα υποβάθρου από:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Χρώμα υποβάθρου:"
 
 msgid "Left tool color:"
 msgstr "Χρώμα αριστερού εργαλείου:"
