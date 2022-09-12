@@ -622,18 +622,33 @@ func _on_AddGroup_pressed() -> void:
 
 
 func _on_CloneLayer_pressed() -> void:
-	# TODO H: clone children along with layer
 	var project: Project = Global.current_project
-	var l: BaseLayer = project.layers[project.current_layer].copy()
-	l.name = str(project.layers[project.current_layer].name, " (", tr("copy"), ")")
-	var cels: Array = project.layers[project.current_layer].copy_all_cels()
+	var source_layers: Array = project.layers[project.current_layer].get_children_recursive()
+	source_layers.append(project.layers[project.current_layer])
+
+	var clones := [] # Array of Layers
+	var cels := [] # 2D Array of Cels
+	for sl in source_layers:
+		var cl: BaseLayer = sl.copy()
+		if sl.index == project.current_layer:
+			cl.name = str(sl.name, " (", tr("copy"), ")")
+		clones.append(cl)
+		cels.append(sl.copy_all_cels())
+
+	# Swap parents with clones if the parent is one of the source layers
+	for cl in clones:
+		var p = source_layers.find(cl.parent)
+		if p > -1:
+			cl.parent = clones[p]
+
+	var indices := range(project.current_layer + 1, project.current_layer + clones.size() + 1)
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
-	project.undo_redo.add_do_property(project, "current_layer", project.current_layer + 1)
+	project.undo_redo.add_do_property(project, "current_layer", project.current_layer + clones.size())
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_do_method(project, "add_layers", [l], [project.current_layer + 1], [cels])
-	project.undo_redo.add_undo_method(project, "remove_layers", [project.current_layer + 1])
+	project.undo_redo.add_do_method(project, "add_layers", clones, indices, cels)
+	project.undo_redo.add_undo_method(project, "remove_layers", indices)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -644,7 +659,7 @@ func _on_RemoveLayer_pressed() -> void:
 	if project.layers.size() == 1:
 		return
 
-	var layers : Array = project.layers[project.current_layer].get_children_recursive()
+	var layers: Array = project.layers[project.current_layer].get_children_recursive()
 	layers.append(project.layers[project.current_layer])
 	var indices := []
 	for l in layers:
