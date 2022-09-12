@@ -56,6 +56,10 @@ func get_image() -> Image:
 	return null
 
 
+func update_texture() -> void:
+	return
+
+
 func save_image_data_to_pxo(_file: File) -> void:
 	return
 
