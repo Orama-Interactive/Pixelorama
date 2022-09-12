@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-09-12 15:22\n"
+"PO-Revision-Date: 2022-09-12 16:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1978,7 +1978,7 @@ msgid "Delete"
 msgstr "Supprimer"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Tout abandonner"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
