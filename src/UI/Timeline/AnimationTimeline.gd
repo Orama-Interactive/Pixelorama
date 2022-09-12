@@ -730,9 +730,6 @@ func _on_MergeDownLayer_pressed() -> void:
 	project.undos += 1
 	project.undo_redo.create_action("Merge Layer")
 
-	# TODO H: When there is a group layer/cel present in the tree, merging down Pixel Layers
-	#			 doesn't get the texture updated. (Image is updated though, doing something else will update texture)
-
 	for f in project.frames:
 		# TODO Later: top_image here doesn't really need to be a copy if there isn't layer transparency
 		#			though this probably will be rewriten with blend modes anyway...

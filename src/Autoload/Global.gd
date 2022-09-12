@@ -438,15 +438,12 @@ func undo_or_redo(
 			"Unlink Cel"
 		]
 	):
-		# TODO H: Check this: THIS IS PROBABLY WRONG (can't check if GROUP LAYER if INDEX is -1)
-		#		I THINK IF I ADD AN UPDATE_TEXTURE METHOD TO EACH CEL TYPE, IT WON'T NEED THIS CHECK!
-		if not current_project.layers[layer_index] is GroupLayer:
-			if layer_index > -1 and frame_index > -1:
-				canvas.update_texture(layer_index, frame_index, project)
-			else:
-				for i in project.frames.size():
-					for j in project.layers.size():
-						canvas.update_texture(j, i, project)
+		if layer_index > -1 and frame_index > -1:
+			canvas.update_texture(layer_index, frame_index, project)
+		else:
+			for i in project.frames.size():
+				for j in project.layers.size():
+					canvas.update_texture(j, i, project)
 
 		canvas.selection.update()
 		if action_name == "Scale":
