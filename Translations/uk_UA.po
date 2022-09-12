@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-09-10 00:01\n"
+"PO-Revision-Date: 2022-09-12 08:37\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -455,7 +455,7 @@ msgid "All frames as a single file animation"
 msgstr "Всі кадри як один файл анімації"
 
 msgid "Background:"
-msgstr "Тло:"
+msgstr "Фон:"
 
 msgid "Direction:"
 msgstr "Напрямок:"
@@ -614,10 +614,10 @@ msgid "Icon color:"
 msgstr "Колір значків:"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Колір фону з:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Колір фону:"
 
 msgid "Left tool color:"
 msgstr "Колір лівого інструменту:"
