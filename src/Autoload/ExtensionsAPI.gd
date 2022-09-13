@@ -4,6 +4,14 @@ extends Node
 enum { FILE, EDIT, SELECT, IMAGE, VIEW, WINDOW, HELP }
 
 
+func get_api_version() -> int:
+	return ProjectSettings.get_setting("application/config/ExtensionsAPI_Version")
+
+
+func get_pixelorama_version() -> String:
+	return ProjectSettings.get_setting("application/config/Version")
+
+
 func dialog_open(open: bool) -> void:
 	Global.dialog_open(open)
 

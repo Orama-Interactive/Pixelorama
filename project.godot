@@ -176,6 +176,7 @@ config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/custom_user_dir_name.X11="pixelorama"
 config/Version="v0.10.3-dev"
+config/ExtensionsAPI_Version=2
 
 [audio]
 
