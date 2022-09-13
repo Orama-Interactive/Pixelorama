@@ -442,7 +442,7 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 func open_image_as_spritesheet_layer(
 	_path: String, image: Image, file_name: String, horizontal: int, vertical: int, start_frame: int
 ) -> void:
-	# TODO H0: Will need to rewrite this method using new ways to add layers/frames. (no ducplicate arrays). Check other open methods too!
+	# TODO H0: Check other open methods too!
 	# Data needed to slice images
 	horizontal = min(horizontal, image.get_size().x)
 	vertical = min(vertical, image.get_size().y)
@@ -459,42 +459,43 @@ func open_image_as_spritesheet_layer(
 	# Initialize undo mechanism
 	project.undos += 1
 	project.undo_redo.create_action("Add Spritesheet Layer")
-	var new_layers: Array = project.layers.duplicate()
-	var new_frames: Array = []
-	# Create a duplicate of "project.frames"
-	for i in project.frames.size():
-		var frame := Frame.new()
-		frame.cels = project.frames[i].cels.duplicate(true)
-		new_frames.append(frame)
+	var new_layers: Array = project.layers.duplicate() # Used for updating linked_cels lists
 
 	# Create new frames (if needed)
-	var new_frames_size = start_frame + (vertical * horizontal)
+	var new_frames_size = max(project.frames.size(), (start_frame + (vertical * horizontal)))
+	var frames := []
+	var frame_indices: Array
+
 	if new_frames_size > project.frames.size():
 		var required_frames = new_frames_size - project.frames.size()
+		# TODO H: Is adding the new frames starting after the current frame right? (Maybe its better to start after the last frame)
+		frame_indices= range(project.current_frame + 1, project.current_frame + required_frames + 1)
 		for i in required_frames:
 			var new_frame := Frame.new()
-			for l_i in range(new_layers.size()):  # Create as many cels as there are layers
+			for l_i in range(project.layers.size()):  # Create as many cels as there are layers
+				# TODO H1: This should work for any layer type: (Probably add a create_empty_cel for each layer type?
 				var new_img := Image.new()
 				new_img.create(project_width, project_height, false, Image.FORMAT_RGBA8)
-				# TODO H1: Make sure this PixelCel is right: (I this can be for any layer type)
 				new_frame.cels.append(PixelCel.new(new_img, 1))
+				# TODO H: Make sure setting of linked cels like this works everywhere (ie: image should be replaced with content)
+				#			CONSIDER NEW LINKED CELS IDEA, DOES IT AFFECT THIS?
 				if new_layers[l_i].new_cels_linked:
 					new_layers[l_i].linked_cels.append(new_frame)
 					new_frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
 					new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
-			new_frames.insert(project.current_frame + 1, new_frame)
+			frames.append(new_frame)
 
 	# Create new layer for spritesheet
 	var layer := PixelLayer.new(project, file_name)
-	new_layers.append(layer)
-	for f in new_frames:
+	var cels := []
+	for f in new_frames_size:
+		# TODO H: use that create_empty_cel method if made
 		var new_layer := Image.new()
 		new_layer.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		f.cels.append(PixelCel.new(new_layer, 1))
+		cels.append(PixelCel.new(new_layer, 1))
 
 	# Slice spritesheet
 	var image_no: int = 0
-	var layer_index = new_layers.size() - 1
 	for yy in range(vertical):
 		for xx in range(horizontal):
 			var cropped_image := Image.new()
@@ -503,20 +504,22 @@ func open_image_as_spritesheet_layer(
 			)
 			cropped_image.crop(project.size.x, project.size.y)
 			var frame_index = start_frame + image_no
-
 			cropped_image.convert(Image.FORMAT_RGBA8)
-			new_frames[frame_index].cels[layer_index] = (PixelCel.new(cropped_image, 1))
+			cels[frame_index].image = cropped_image
 			image_no += 1
 
-	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
+	project.undo_redo.add_do_property(project, "current_frame", new_frames_size - 1)
 	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
-	project.undo_redo.add_do_property(project, "frames", new_frames)
+	project.undo_redo.add_do_method(project, "add_frames", frames, frame_indices)
 	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_do_method(project, "add_layers", [layer], [project.layers.size()], [cels])
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
 	project.undo_redo.add_undo_property(project, "layers", project.layers)
-	project.undo_redo.add_undo_property(project, "frames", project.frames)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(project, "remove_frames", frame_indices)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 

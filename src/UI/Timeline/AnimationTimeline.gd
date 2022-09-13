@@ -138,7 +138,7 @@ func add_frame() -> void:
 	var project: Project = Global.current_project
 	var frame_add_index := project.current_frame + 1
 	var frame: Frame = project.new_empty_frame()
-	var new_layers: Array = project.duplicate_layers()
+	var new_layers: Array = project.duplicate_layers() # TODO H: Perhaps new_layers here should be replaced with new_linked_cels (ALSO CONSIDER NEW LINKED CELS IDEA WHICH SHOULD FIX AUTOMATICALLY)?
 
 	for l_i in range(new_layers.size()):
 		# TODO H: Make sure this works with groups (Check out copy frames):
@@ -201,9 +201,9 @@ func delete_frames(frames := []) -> void:
 	elif frames.size() == 0:
 		frames.append(project.current_frame)
 
-	var new_frames: Array = project.frames.duplicate()
+	var new_frames: Array = project.frames.duplicate() # TODO H: Is new_frames here still REALLY being used?
 	var current_frame := project.current_frame
-	var new_layers: Array = project.duplicate_layers()
+	var new_layers: Array = project.duplicate_layers() # TODO H: Perhaps new_layers here should be replaced with new_linked_cels (ALSO CONSIDER NEW LINKED CELS IDEA WHICH SHOULD FIX AUTOMATICALLY)?
 	var frame_correction := 0  # Only needed for tag adjustment
 
 	var new_animation_tags := project.animation_tags.duplicate()
@@ -282,7 +282,7 @@ func copy_frames(frames := []) -> void:
 	if frames.size() == 0:
 		frames.append(project.current_frame)
 
-	var new_layers: Array = project.duplicate_layers()
+	var new_layers: Array = project.duplicate_layers() # TODO H: Perhaps new_layers here should be replaced with new_linked_cels (ALSO CONSIDER NEW LINKED CELS IDEA WHICH SHOULD FIX AUTOMATICALLY)?
 	var copied_frames := []
 	var copied_indices := range(frames[-1] + 1, frames[-1] + 1 + frames.size())
 
