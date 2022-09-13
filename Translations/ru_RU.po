@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-09-10 00:01\n"
+"PO-Revision-Date: 2022-09-13 08:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -172,7 +172,7 @@ msgid "Tolerance:"
 msgstr ""
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Начальный угол:"
 
 msgid "Clear"
 msgstr "Очистить"
@@ -181,7 +181,7 @@ msgid "Invert"
 msgstr "Инвертировать"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Вид в оттенках серого"
 
 msgid "Mirror Image"
 msgstr "Отраженное изображение"
@@ -199,7 +199,7 @@ msgid "Tile Mode"
 msgstr "Бесшовный режим"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Сдвиг в бесшовном режиме"
 
 msgid "X-basis x:"
 msgstr ""
@@ -214,16 +214,16 @@ msgid "Y-basis y:"
 msgstr ""
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Тайловая маска"
 
 msgid "Reset"
-msgstr ""
+msgstr "Сброс"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "Использовать текущий кадр"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Сбросить маску"
 
 msgid "Window Opacity"
 msgstr "Непрозрачность окна"
@@ -313,10 +313,10 @@ msgid "Recent projects"
 msgstr "Недавние проекты"
 
 msgid "New project"
-msgstr ""
+msgstr "Новый проект"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Таблица спрайтов (новый проект)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Таблица спрайтов (новый слой)"
@@ -509,7 +509,7 @@ msgid "Trilinear"
 msgstr "Трилинейный"
 
 msgid "Constant"
-msgstr ""
+msgstr "Константа"
 
 msgid "General"
 msgstr "Общие"
@@ -614,10 +614,10 @@ msgid "Icon color:"
 msgstr "Цвет значка:"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Цвет фона из:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Цвет фона:"
 
 msgid "Left tool color:"
 msgstr "Цвет левого инструмента:"
