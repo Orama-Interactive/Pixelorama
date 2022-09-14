@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2022-09-10 00:01\n"
+"PO-Revision-Date: 2022-09-14 21:24\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -133,6 +133,9 @@ msgid "Cut"
 msgstr ""
 
 msgid "Paste"
+msgstr ""
+
+msgid "Paste in Place"
 msgstr ""
 
 msgid "Delete"
