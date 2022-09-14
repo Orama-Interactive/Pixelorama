@@ -214,9 +214,7 @@ func _prepare_tool() -> void:
 	var strength := _strength
 	if Global.pressure_sensitivity_mode == Global.PressureSensitivity.ALPHA:
 		strength *= Tools.pen_pressure
-	_drawer.pixel_perfect = false
-	if _brush_size == 1 and _brush.type == Brushes.PIXEL:
-		_drawer.pixel_perfect = Tools.pixel_perfect
+	_drawer.pixel_perfect = Tools.pixel_perfect if _brush_size == 1 else false
 	_drawer.horizontal_mirror = Tools.horizontal_mirror
 	_drawer.vertical_mirror = Tools.vertical_mirror
 	_drawer.color_op.strength = strength
@@ -300,36 +298,18 @@ func _compute_draw_tool_pixel(position: Vector2) -> PoolVector2Array:
 	return result
 
 
-# Algorithm based on http://members.chello.at/easyfilter/bresenham.html
 # Compute the array of coordinates that should be drawn
 func _compute_draw_tool_circle(position: Vector2, fill := false) -> PoolVector2Array:
+	var size := Vector2(_brush_size, _brush_size)
+	var pos = position - (size / 2).floor()
 	if _circle_tool_shortcut:
 		return _draw_tool_circle_from_map(position)
 
 	var result := PoolVector2Array()
-	var r := _brush_size
-	var x := -r
-	var y := 0
-	var err := 2 - r * 2
-	var draw := true
 	if fill:
-		result.append(position)
-	while x < 0:
-		if draw:
-			for i in range(1 if fill else -x, -x + 1):
-				result.append(position + Vector2(-i, y))
-				result.append(position + Vector2(-y, -i))
-				result.append(position + Vector2(i, -y))
-				result.append(position + Vector2(y, i))
-		draw = not fill
-		r = err
-		if r <= y:
-			y += 1
-			err += y * 2 + 1
-			draw = true
-		if r > x || err > y:
-			x += 1
-			err += x * 2 + 1
+		result = DrawingAlgos.get_ellipse_points_filled(pos, size)
+	else:
+		result = DrawingAlgos.get_ellipse_points(pos, size)
 	return result
 
 

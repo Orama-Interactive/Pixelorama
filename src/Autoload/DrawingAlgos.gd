@@ -42,7 +42,6 @@ func get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
 		array.append(v4)
 
 		e2 = 2 * err
-
 		if e2 <= dy:
 			y0 += 1
 			y1 -= 1
@@ -68,6 +67,37 @@ func get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
 		y1 -= 1
 
 	return array
+
+
+func get_ellipse_points_filled(pos: Vector2, size: Vector2, thickness := 1) -> PoolVector2Array:
+	var offsetted_size := size + Vector2.ONE * (thickness - 1)
+	var border := get_ellipse_points(pos, offsetted_size)
+	var filling := []
+
+	for x in range(1, ceil(offsetted_size.x / 2)):
+		var fill := false
+		var prev_is_true := false
+		for y in range(0, ceil(offsetted_size.y / 2)):
+			var top_l_p := Vector2(x, y)
+			var bit := border.has(pos + top_l_p)
+
+			if bit and not fill:
+				prev_is_true = true
+				continue
+
+			if not bit and (fill or prev_is_true):
+				filling.append(pos + top_l_p)
+				filling.append(pos + Vector2(x, offsetted_size.y - y - 1))
+				filling.append(pos + Vector2(offsetted_size.x - x - 1, y))
+				filling.append(pos + Vector2(offsetted_size.x - x - 1, offsetted_size.y - y - 1))
+
+				if prev_is_true:
+					fill = true
+					prev_is_true = false
+			elif bit and fill:
+				break
+
+	return PoolVector2Array(border + filling)
 
 
 func scale_3x(sprite: Image, tol: float = 50) -> Image:

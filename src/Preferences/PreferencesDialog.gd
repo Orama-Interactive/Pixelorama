@@ -70,6 +70,8 @@ var preferences := [
 	),
 	Preference.new("checker_follow_scale", "Canvas/CheckerOptions/CheckerFollowScale", "pressed"),
 	Preference.new("tilemode_opacity", "Canvas/CheckerOptions/TileModeOpacity", "value"),
+	Preference.new("clear_color_from", "Canvas/BackgroundOptions/ColorOptionButton", "selected"),
+	Preference.new("modulate_clear_color", "Canvas/BackgroundOptions/BackgroundColor", "color"),
 	Preference.new("selection_animated_borders", "Selection/SelectionOptions/Animate", "pressed"),
 	Preference.new("selection_border_color_1", "Selection/SelectionOptions/BorderColor1", "color"),
 	Preference.new("selection_border_color_2", "Selection/SelectionOptions/BorderColor2", "color"),
@@ -261,12 +263,15 @@ func preference_update(prop: String) -> void:
 		Global.canvas.selection.update()
 
 	elif prop in ["icon_color_from", "custom_icon_color"]:
-		if Global.icon_color_from == Global.IconColorFrom.THEME:
+		if Global.icon_color_from == Global.ColorFrom.THEME:
 			var current_theme: Theme = themes.themes[themes.theme_index]
 			Global.modulate_icon_color = current_theme.get_color("modulate_color", "Icons")
 		else:
 			Global.modulate_icon_color = Global.custom_icon_color
 		themes.change_icon_colors()
+
+	elif prop in ["modulate_clear_color", "clear_color_from"]:
+		themes.change_clear_color()
 
 	elif prop == "left_tool_color":
 		for child in Tools._tool_buttons.get_children():

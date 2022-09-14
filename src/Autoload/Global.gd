@@ -5,7 +5,7 @@ signal project_changed
 enum LayerTypes { PIXEL, GROUP }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
-enum IconColorFrom { THEME, CUSTOM }
+enum ColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
 enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
@@ -77,7 +77,9 @@ var smooth_zoom := true
 var shrink := 1.0
 var dim_on_popup := true
 var modulate_icon_color := Color.gray
-var icon_color_from: int = IconColorFrom.THEME
+var icon_color_from: int = ColorFrom.THEME
+var modulate_clear_color := Color.gray
+var clear_color_from: int = ColorFrom.THEME
 var custom_icon_color := Color.gray
 var tool_button_size: int = ButtonSize.SMALL
 var left_tool_color := Color("0086cf")

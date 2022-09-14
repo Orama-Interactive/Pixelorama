@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v0.10.3] - Unreleased
+
+### Added
+- Copy, cut & delete now affect the entire cel if there is no selection.
+- Project tabs can now be closed with the middle mouse button.
+- The background color of the canvas is now configurable, as requested in [#586](https://github.com/Orama-Interactive/Pixelorama/discussions/586).
+
+### Changed
+- Circle brushes now scale properly and support even-numbered diameters.
+- If a layer is locked or invisible, the cursor changes into forbidden when the user is hovering the mouse over the canvas.
+- hiDPI is now enabled - solves [#159](https://github.com/Orama-Interactive/Pixelorama/issues/159).
+- The splash dialog can be resized to a smaller size than the default.
+
+### Fixed
+- Deleting content from locked/invisible layers is no longer possible.
+- Selection can no longer be moved if there is a dialog open.
+
 ## [v0.10.2] - 2022-08-18
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@GrantMoyer](https://github.com/GrantMoyer)
