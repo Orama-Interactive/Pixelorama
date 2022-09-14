@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2022-09-10 00:01\n"
+"PO-Revision-Date: 2022-09-14 21:24\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -134,6 +134,9 @@ msgstr "قص"
 
 msgid "Paste"
 msgstr "لصق"
+
+msgid "Paste in Place"
+msgstr ""
 
 msgid "Delete"
 msgstr "حذف"
