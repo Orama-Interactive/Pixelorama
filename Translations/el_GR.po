@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-09-12 13:03\n"
+"PO-Revision-Date: 2022-09-14 21:25\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -134,6 +134,9 @@ msgstr "Αποκοπή"
 
 msgid "Paste"
 msgstr "Επικόλληση"
+
+msgid "Paste in Place"
+msgstr ""
 
 msgid "Delete"
 msgstr "Διαγραφή"
