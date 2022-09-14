@@ -450,9 +450,6 @@ func undo_or_redo(
 			for i in project.frames.size():
 				for j in project.layers.size():
 					var current_cel: BaseCel = project.frames[i].cels[j]
-					# TODO H: Would using current_cel.update_texture with a new recreate param for
-					#		using create_from_image instead (which actually resizes too, but is slower) be better?
-					#		Or maybe a create texture method?
 					current_cel.image_texture.create_from_image(current_cel.get_image(), 0)
 			canvas.camera_zoom()
 			canvas.grid.update()

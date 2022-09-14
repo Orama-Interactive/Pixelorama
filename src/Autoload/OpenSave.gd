@@ -443,7 +443,7 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 func open_image_as_spritesheet_layer(
 	_path: String, image: Image, file_name: String, horizontal: int, vertical: int, start_frame: int
 ) -> void:
-	# TODO H0: Check other open methods too!
+
 	# Data needed to slice images
 	horizontal = min(horizontal, image.get_size().x)
 	vertical = min(vertical, image.get_size().y)

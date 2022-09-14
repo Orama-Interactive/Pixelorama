@@ -8,7 +8,10 @@ var image_texture: ImageTexture
 
 # Methods to Override:
 
-# TODO H: Perhaps get_content, set_content, and delete_content/clear_content methods will be good to have here:
+# TODO H: Check if copying cels can use the content methods
+
+# TODO H1: These content methods need good doc comments:
+#			COMMENT FROM THE IDEA TODO COMMENT (MAY BE USEFUL FOR WRITING COMMENTS)
 #			- get_content will return certain content of the cel (should metadata be included?)
 #			- set_content will set the content (same structure as get_content returns)
 #			- delete/clear_content will erase it,
@@ -18,16 +21,10 @@ var image_texture: ImageTexture
 #				= making this generic and should solve issues with combing cel_button scripts into 1
 #			- copy_content may also be a useful method to have
 
-# TODO H1: These content methods need good doc comments:
-
 func set_content(content) -> void:
 	return
 
-# TODO H0: Consider if the return content methods should have a bool option for including a texture,
-# of if the texture should be completely not included (textures aren't always needed. But how can we
-# ensure that different texture types are properly set up if textures are completely not included here?
-# Will seperate methods for the textures be able to work well?
-# Maybe for now, don't worry about possible different texture types, and don't do copying layers/frames
+
 func get_content():
 	return []
 
@@ -40,18 +37,8 @@ func copy_content():
 	return []
 
 
-# TODO H: Should this be the case?
-# Each Cel type should have a get_image function, which will either return
-# its image data for PixelCels, or return a render of that cel. It's meant
-# for read-only usage of image data from any type of cel
-
-# TODO NOTE ^: I'm thinking this shouldn't be the case right now. I'm thinking each cel should have
-#				a texture var. using texture.get_data it can be possible to copy selections or color pick.
-#				There will be an update_texture method, which will either immedietly update it, or set it
-#				to be queued for update (only frames that aren't currently being viewed). When the user
-#				isn't drawing, Pixelorama can update these textures. (maybe an update_texture and a queue_texture_update
-#				method may be better, we'll see
-
+# Returns the image var for image based cel types, or a render for procedural types.
+# It's meant for read-only usage of image data, such as copying selections or color picking.
 func get_image() -> Image:
 	return null
 
