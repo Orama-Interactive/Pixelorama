@@ -141,7 +141,7 @@ func add_frame() -> void:
 	var new_layers: Array = project.duplicate_layers()
 
 	for l_i in range(new_layers.size()):
-		# TODO H: Make sure this works with groups (Check out copy frames):
+		# TODO H0: Make sure this works with groups (Check out copy frames):
 		if new_layers[l_i].new_cels_linked:  # If the link button is pressed
 			new_layers[l_i].linked_cels.append(frame)
 			frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image

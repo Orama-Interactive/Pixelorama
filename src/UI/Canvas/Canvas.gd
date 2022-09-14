@@ -126,7 +126,7 @@ func update_texture(layer_i: int, frame_i := -1, project: Project = Global.curre
 		var current_cel: BaseCel = project.frames[frame_i].cels[layer_i]
 		current_cel.update_texture()
 
-		# TODO H: is this even needed? (Same as below)
+		# TODO H2: is this even needed? (Same as below)
 #		if project == Global.current_project:
 #			var container_index = Global.frames_container.get_child_count() - 1 - layer_i
 #			var layer_cel_container = Global.frames_container.get_child(container_index)
@@ -144,7 +144,7 @@ func update_selected_cels_textures(project: Project = Global.current_project) ->
 			var current_cel: BaseCel = project.frames[frame_index].cels[layer_index]
 			current_cel.update_texture()
 
-			# TODO H: This wasn't working anymore, but is it even needed? (Same as above)
+			# TODO H2: This wasn't working anymore, but is it even needed? (Same as above)
 #			if project == Global.current_project:
 #				var container_index = Global.frames_container.get_child_count() - 1 - layer_index
 #				var layer_cel_container = Global.frames_container.get_child(container_index)

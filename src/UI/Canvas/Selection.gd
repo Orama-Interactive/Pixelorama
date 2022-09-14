@@ -97,7 +97,7 @@ func _input(event: InputEvent) -> void:
 				if Global.cross_cursor:
 					cursor = Control.CURSOR_CROSS
 				var project: Project = Global.current_project
-				# TODO H1: Make sure this BaseLayer is supposed to be BaseLayer
+				# TODO H0: Make sure this BaseLayer is supposed to be BaseLayer
 				var layer: BaseLayer = project.layers[project.current_layer]
 				if not layer.can_layer_get_drawn():
 					cursor = Control.CURSOR_FORBIDDEN

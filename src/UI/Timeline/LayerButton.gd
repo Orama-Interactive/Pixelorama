@@ -189,7 +189,7 @@ func _select_current_layer() -> void:
 
 
 func get_drag_data(_position) -> Array:
-	# TODO H: If keeping this new multi layer drag design, layers here can be reutrned in the array
+	# TODO H1: If keeping this new multi layer drag design, layers here can be reutrned in the array
 	#			instead of layer...
 	var layers := range(layer - Global.current_project.layers[layer].get_children_recursive().size(), layer + 1)
 

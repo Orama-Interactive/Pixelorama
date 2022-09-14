@@ -474,7 +474,7 @@ func open_image_as_spritesheet_layer(
 			var new_frame := Frame.new()
 			for l_i in range(project.layers.size()):  # Create as many cels as there are layers
 				new_frame.cels.append(project.layers[l_i].new_empty_cel())
-				# TODO H: Make sure setting of linked cels like this works everywhere (ie: image should be replaced with content)
+				# TODO H0: Make sure setting of linked cels like this works everywhere (ie: image should be replaced with content)
 				#			CONSIDER NEW LINKED CELS IDEA, DOES IT AFFECT THIS?
 				if new_layers[l_i].new_cels_linked:
 					new_layers[l_i].linked_cels.append(new_frame)
@@ -486,7 +486,7 @@ func open_image_as_spritesheet_layer(
 	var layer := PixelLayer.new(project, file_name)
 	var cels := []
 	for f in new_frames_size:
-		# TODO H: Consider optimizing this so extra images aren't made for frames that are in the range
+		# TODO H0: Consider optimizing this so extra images aren't made for frames that are in the range
 		#		of the spritesheet's frames (To do this, need to resize cel array at first, and set them by index for
 		#		cels not in that range, and then in the # Splice spritesheet section, create the PixelCel there.
 		#		(Maybe instead calculate the yy and xx values, removing the yy/xx loops, and combining with this loop?)
@@ -506,6 +506,7 @@ func open_image_as_spritesheet_layer(
 			cels[frame_index].image = cropped_image
 			image_no += 1
 
+	# TODO L: Maybe this is the better undo/redo order (As sometimes the do and undo steps can't be in the same order like here), should everything be made consistent with this?
 	project.undo_redo.add_do_property(project, "current_frame", new_frames_size - 1)
 	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
 	project.undo_redo.add_do_method(project, "add_frames", frames, frame_indices)
@@ -523,7 +524,7 @@ func open_image_as_spritesheet_layer(
 
 
 func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> void:
-	# TODO H: What should happen if the layer_index isn't a PixelLayer?
+	# TODO H1: What should happen if the layer_index isn't a PixelLayer?
 	# 			Option 1: Disable OK button and show red message saying to choose a Pixel Layer
 	#			Option 2: Replace spinbox with an option list that contains all Pixel Layers (maybe better UX too)
 	var project = Global.current_project
@@ -558,8 +559,8 @@ func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> vo
 
 
 func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
-	# TODO H: Make work after the timeline refactor
-	# TODO H: What should happen if the layer_index isn't a PixelLayer?
+	# TODO H0: Make work after the timeline refactor
+	# TODO H1: What should happen if the layer_index isn't a PixelLayer?
 	# 			Option 1: Disable OK button and show red message saying to choose a Pixel Layer
 	#			Option 2: Replace spinbox with an option list that contains all Pixel Layers (maybe better UX too)
 	var project = Global.current_project
@@ -592,7 +593,7 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 
 
 func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) -> void:
-	# TODO H: Make work after the timeline refactor
+	# TODO H0: Make work after the timeline refactor
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 	var new_layers: Array = Global.current_project.layers.duplicate()
