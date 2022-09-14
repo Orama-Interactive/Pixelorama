@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-09-14 21:24\n"
+"PO-Revision-Date: 2022-09-14 23:57\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -136,7 +136,7 @@ msgid "Paste"
 msgstr "Yapıştır"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Yerinde Yapıştır"
 
 msgid "Delete"
 msgstr "Sil"
