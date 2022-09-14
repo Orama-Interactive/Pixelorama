@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2022-09-10 00:01\n"
+"PO-Revision-Date: 2022-09-14 21:24\n"
 
 msgid "OK"
 msgstr "確定"
@@ -134,6 +134,9 @@ msgstr "剪下"
 
 msgid "Paste"
 msgstr "貼上"
+
+msgid "Paste in Place"
+msgstr ""
 
 msgid "Delete"
 msgstr "刪除"
