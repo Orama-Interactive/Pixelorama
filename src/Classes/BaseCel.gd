@@ -21,7 +21,7 @@ var image_texture: ImageTexture
 #				= making this generic and should solve issues with combing cel_button scripts into 1
 #			- copy_content may also be a useful method to have
 
-func set_content(content) -> void:
+func set_content(_content) -> void:
 	return
 
 
