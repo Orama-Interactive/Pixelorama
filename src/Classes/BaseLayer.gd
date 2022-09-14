@@ -120,5 +120,5 @@ func accepts_child(_layer: BaseLayer) -> bool:
 	return false
 
 
-func create_layer_button() -> Node:
+func instantiate_layer_button() -> Node:
 	return null

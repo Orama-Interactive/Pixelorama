@@ -14,5 +14,5 @@ func get_image() -> Image:
 	return image
 
 
-func create_cel_button() -> Node:
+func instantiate_cel_button() -> Node:
 	return Global.group_cel_button_node.instance()

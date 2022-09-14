@@ -866,7 +866,7 @@ func project_frame_added(frame: int) -> void:
 
 	var layer := Global.frames_container.get_child_count() - 1
 	for container in Global.frames_container.get_children():
-		var cel_button = project.frames[frame].cels[layer].create_cel_button()
+		var cel_button = project.frames[frame].cels[layer].instantiate_cel_button()
 		cel_button.frame = frame
 		cel_button.layer = layer
 		container.add_child(cel_button)
@@ -884,14 +884,14 @@ func project_frame_removed(frame: int) -> void:
 func project_layer_added(layer: int) -> void:
 	var project: Project = Global.current_project
 
-	var layer_button: LayerButton = project.layers[layer].create_layer_button()
+	var layer_button: LayerButton = project.layers[layer].instantiate_layer_button()
 	layer_button.layer = layer
 	if project.layers[layer].name == "":
 		project.layers[layer].set_name_to_default(layer)
 
 	var layer_cel_container := HBoxContainer.new()
 	for f in project.frames.size():
-		var cel_button = project.frames[f].cels[layer].create_cel_button()
+		var cel_button = project.frames[f].cels[layer].instantiate_cel_button()
 		cel_button.frame = f
 		cel_button.layer = layer
 		layer_cel_container.add_child(cel_button)
@@ -916,7 +916,7 @@ func project_cel_added(frame: int, layer: int) -> void:
 	var container := Global.frames_container.get_child(
 		Global.frames_container.get_child_count() - 1 - layer
 	)
-	var cel_button = Global.current_project.frames[frame].cels[layer].create_cel_button()
+	var cel_button = Global.current_project.frames[frame].cels[layer].instantiate_cel_button()
 	cel_button.frame = frame
 	cel_button.layer = layer
 	container.add_child(cel_button)
