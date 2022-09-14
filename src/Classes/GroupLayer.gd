@@ -22,7 +22,7 @@ func deserialize(dict: Dictionary) -> void:
 	expanded = dict.expanded
 
 
-func create_empty_cel() -> BaseCel:
+func new_empty_cel() -> BaseCel:
 	return GroupCel.new()
 
 

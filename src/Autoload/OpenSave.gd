@@ -473,7 +473,7 @@ func open_image_as_spritesheet_layer(
 		for i in required_frames:
 			var new_frame := Frame.new()
 			for l_i in range(project.layers.size()):  # Create as many cels as there are layers
-				new_frame.cels.append(project.layers[l_i].create_empty_cel())
+				new_frame.cels.append(project.layers[l_i].new_empty_cel())
 				# TODO H: Make sure setting of linked cels like this works everywhere (ie: image should be replaced with content)
 				#			CONSIDER NEW LINKED CELS IDEA, DOES IT AFFECT THIS?
 				if new_layers[l_i].new_cels_linked:
@@ -490,7 +490,7 @@ func open_image_as_spritesheet_layer(
 		#		of the spritesheet's frames (To do this, need to resize cel array at first, and set them by index for
 		#		cels not in that range, and then in the # Splice spritesheet section, create the PixelCel there.
 		#		(Maybe instead calculate the yy and xx values, removing the yy/xx loops, and combining with this loop?)
-		cels.append(layer.create_empty_cel())
+		cels.append(layer.new_empty_cel())
 
 	# Slice spritesheet
 	var image_no: int = 0
@@ -568,7 +568,7 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 			image.convert(Image.FORMAT_RGBA8)
 			frame.cels.append(PixelCel.new(image, 1))
 		else:
-			frame.cels.append(project.layers[i].create_empty_cel())
+			frame.cels.append(project.layers[i].new_empty_cel())
 
 	new_frames.append(frame)
 
@@ -602,7 +602,7 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 			image.convert(Image.FORMAT_RGBA8)
 			new_cels.append(PixelCel.new(image, 1))
 		else:
-			new_cels.append(layer.create_empty_cel())
+			new_cels.append(layer.new_empty_cel())
 
 		project.undo_redo.add_do_property(project.frames[i], "cels", new_cels)
 		project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)

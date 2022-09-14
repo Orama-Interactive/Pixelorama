@@ -96,7 +96,7 @@ func copy() -> BaseLayer:
 	return copy
 
 
-func create_empty_cel() -> BaseCel:
+func new_empty_cel() -> BaseCel:
 	return null
 
 

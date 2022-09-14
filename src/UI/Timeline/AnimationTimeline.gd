@@ -587,7 +587,7 @@ func _on_AddLayer_pressed() -> void:
 	var l := PixelLayer.new(project)
 	var cels := []
 	for f in project.frames:
-		cels.append(l.create_empty_cel())
+		cels.append(l.new_empty_cel())
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
@@ -606,7 +606,7 @@ func _on_AddGroup_pressed() -> void:
 	var l := GroupLayer.new(project)
 	var cels := []
 	for f in project.frames:
-		cels.append(l.create_empty_cel())
+		cels.append(l.new_empty_cel())
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
