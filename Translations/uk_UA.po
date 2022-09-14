@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-09-12 08:37\n"
+"PO-Revision-Date: 2022-09-14 21:24\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -134,6 +134,9 @@ msgstr "Вирізати"
 
 msgid "Paste"
 msgstr "Вставити"
+
+msgid "Paste in Place"
+msgstr ""
 
 msgid "Delete"
 msgstr "Вилучити"
