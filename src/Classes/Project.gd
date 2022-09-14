@@ -108,13 +108,11 @@ func new_empty_frame() -> Frame:
 	var frame := Frame.new()
 	var bottom_layer := true
 	for l in layers:  # Create as many cels as there are layers
-		var image := Image.new()
-		image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-		if bottom_layer and fill_color.a > 0:
-			image.fill(fill_color)
-		frame.cels.append(PixelCel.new(image, 1))
+		var cel: BaseCel = l.create_empty_cel()
+		if cel is PixelCel and bottom_layer and fill_color.a > 0:
+			cel.image.fill(fill_color)
+		frame.cels.append(cel)
 		bottom_layer = false
-
 	return frame
 
 

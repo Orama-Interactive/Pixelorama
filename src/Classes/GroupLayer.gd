@@ -22,6 +22,10 @@ func deserialize(dict: Dictionary) -> void:
 	expanded = dict.expanded
 
 
+func create_empty_cel() -> BaseCel:
+	return GroupCel.new()
+
+
 func copy_cel(frame_index: int, _linked: bool) -> BaseCel:
 	var cel: GroupCel = project.frames[frame_index].cels[index]
 	return GroupCel.new(cel.opacity)

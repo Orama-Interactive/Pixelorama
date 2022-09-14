@@ -428,6 +428,7 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 			cropped_image.convert(Image.FORMAT_RGBA8)
 			frame.cels.append(PixelCel.new(cropped_image, 1))
 
+			# TODO L: This for loop doesn't need to exist (its adding cels to layers that never exist):
 			for _i in range(1, project.layers.size()):
 				var empty_sprite := Image.new()
 				empty_sprite.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
@@ -465,18 +466,14 @@ func open_image_as_spritesheet_layer(
 	var new_frames_size = max(project.frames.size(), (start_frame + (vertical * horizontal)))
 	var frames := []
 	var frame_indices: Array
-
 	if new_frames_size > project.frames.size():
 		var required_frames = new_frames_size - project.frames.size()
-		# TODO H: Is adding the new frames starting after the current frame right? (Maybe its better to start after the last frame)
+		# TODO L: Is adding the new frames starting after the current frame right? (Maybe its better to start after the last frame)
 		frame_indices= range(project.current_frame + 1, project.current_frame + required_frames + 1)
 		for i in required_frames:
 			var new_frame := Frame.new()
 			for l_i in range(project.layers.size()):  # Create as many cels as there are layers
-				# TODO H1: This should work for any layer type: (Probably add a create_empty_cel for each layer type?
-				var new_img := Image.new()
-				new_img.create(project_width, project_height, false, Image.FORMAT_RGBA8)
-				new_frame.cels.append(PixelCel.new(new_img, 1))
+				new_frame.cels.append(project.layers[l_i].create_empty_cel())
 				# TODO H: Make sure setting of linked cels like this works everywhere (ie: image should be replaced with content)
 				#			CONSIDER NEW LINKED CELS IDEA, DOES IT AFFECT THIS?
 				if new_layers[l_i].new_cels_linked:
@@ -489,10 +486,11 @@ func open_image_as_spritesheet_layer(
 	var layer := PixelLayer.new(project, file_name)
 	var cels := []
 	for f in new_frames_size:
-		# TODO H: use that create_empty_cel method if made
-		var new_layer := Image.new()
-		new_layer.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		cels.append(PixelCel.new(new_layer, 1))
+		# TODO H: Consider optimizing this so extra images aren't made for frames that are in the range
+		#		of the spritesheet's frames (To do this, need to resize cel array at first, and set them by index for
+		#		cels not in that range, and then in the # Splice spritesheet section, create the PixelCel there.
+		#		(Maybe instead calculate the yy and xx values, removing the yy/xx loops, and combining with this loop?)
+		cels.append(layer.create_empty_cel())
 
 	# Slice spritesheet
 	var image_no: int = 0
@@ -525,6 +523,7 @@ func open_image_as_spritesheet_layer(
 
 
 func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> void:
+	# TODO H: What should happen if the layer_index isn't a PixelLayer?
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 
@@ -557,6 +556,8 @@ func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> vo
 
 
 func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
+	# TODO H: Make work after the timeline refactor
+	# TODO H: What should happen if the layer_index isn't a PixelLayer?
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 	var new_frames: Array = project.frames.duplicate()
@@ -567,9 +568,7 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 			image.convert(Image.FORMAT_RGBA8)
 			frame.cels.append(PixelCel.new(image, 1))
 		else:
-			var empty_image := Image.new()
-			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-			frame.cels.append(PixelCel.new(empty_image, 1))
+			frame.cels.append(project.layers[i].create_empty_cel())
 
 	new_frames.append(frame)
 
@@ -589,6 +588,7 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 
 
 func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) -> void:
+	# TODO H: Make work after the timeline refactor
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 	var new_layers: Array = Global.current_project.layers.duplicate()
@@ -602,9 +602,7 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 			image.convert(Image.FORMAT_RGBA8)
 			new_cels.append(PixelCel.new(image, 1))
 		else:
-			var empty_image := Image.new()
-			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-			new_cels.append(PixelCel.new(empty_image, 1))
+			new_cels.append(layer.create_empty_cel())
 
 		project.undo_redo.add_do_property(project.frames[i], "cels", new_cels)
 		project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)

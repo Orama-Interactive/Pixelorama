@@ -96,6 +96,10 @@ func copy() -> BaseLayer:
 	return copy
 
 
+func create_empty_cel() -> BaseCel:
+	return null
+
+
 func copy_cel(_frame: int, _linked: bool) -> BaseCel:
 	return null
 

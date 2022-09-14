@@ -33,6 +33,12 @@ func deserialize(dict: Dictionary) -> void:
 		linked_cel.image_texture = linked_cels[0].cels[index].image_texture
 
 
+func create_empty_cel() -> BaseCel:
+	var image := Image.new()
+	image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	return PixelCel.new(image)
+
+
 func copy_cel(frame_index: int, linked: bool) -> BaseCel:
 	if linked and not linked_cels.empty():
 		var cel: PixelCel = linked_cels[0].cels[index]
