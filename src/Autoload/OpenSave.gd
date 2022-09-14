@@ -524,6 +524,8 @@ func open_image_as_spritesheet_layer(
 
 func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> void:
 	# TODO H: What should happen if the layer_index isn't a PixelLayer?
+	# 			Option 1: Disable OK button and show red message saying to choose a Pixel Layer
+	#			Option 2: Replace spinbox with an option list that contains all Pixel Layers (maybe better UX too)
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 
@@ -558,6 +560,8 @@ func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> vo
 func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 	# TODO H: Make work after the timeline refactor
 	# TODO H: What should happen if the layer_index isn't a PixelLayer?
+	# 			Option 1: Disable OK button and show red message saying to choose a Pixel Layer
+	#			Option 2: Replace spinbox with an option list that contains all Pixel Layers (maybe better UX too)
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 	var new_frames: Array = project.frames.duplicate()
