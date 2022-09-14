@@ -8,7 +8,7 @@ enum ColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
 enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
-enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
+enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, PASTE_IN_PLACE, DELETE, NEW_BRUSH, PREFERENCES }
 enum ViewMenu {
 	TILE_MODE,
 	TILE_MODE_OFFSETS,
@@ -253,6 +253,8 @@ func _initialize_keychain() -> void:
 		"cut": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.CUT),
 		"copy": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.COPY),
 		"paste": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.PASTE),
+		"paste_in_place":
+		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.PASTE_IN_PLACE),
 		"delete": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.DELETE),
 		"new_brush":
 		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.NEW_BRUSH),

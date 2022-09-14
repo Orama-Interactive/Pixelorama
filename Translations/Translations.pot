@@ -124,6 +124,9 @@ msgstr ""
 msgid "Paste"
 msgstr ""
 
+msgid "Paste in Place"
+msgstr ""
+
 msgid "Delete"
 msgstr ""
 
