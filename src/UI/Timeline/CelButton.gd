@@ -110,7 +110,6 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			if popup_menu.get_item_metadata(MenuOptions.LINK) == "Unlink Cel":
 				new_linked_cels.remove(cel_index)
 				project.undo_redo.create_action("Unlink Cel")
-#				var cel: BaseCel = project.frames[frame].cels[layer]
 				project.undo_redo.add_do_property(cel, "image_texture", ImageTexture.new())
 				project.undo_redo.add_undo_property(cel, "image_texture", cel.image_texture)
 				project.undo_redo.add_do_method(cel, "set_content", cel.copy_content())
@@ -122,7 +121,6 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				if new_linked_cels.size() > 1:
 					# If there are already linked cels, set the current cel's image
 					# to the first linked cel's image
-#					var cel: BaseCel = project.frames[frame].cels[layer]
 					var linked_cel: BaseCel = project.layers[layer].linked_cels[0].cels[layer]
 					project.undo_redo.add_do_property(cel, "image_texture", linked_cel.image_texture)
 					project.undo_redo.add_undo_property(cel, "image_texture", cel.image_texture)
@@ -147,7 +145,6 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 func _delete_cel_content() -> void:
 	var project = Global.current_project
-#	var cel: BaseCel = project.frames[frame].cels[layer]
 	var empty_content = cel.create_empty_content()
 	var old_content = cel.get_content()
 	project.undos += 1
