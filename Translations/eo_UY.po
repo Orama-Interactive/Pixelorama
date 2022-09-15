@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2022-09-15 09:04\n"
+"PO-Revision-Date: 2022-09-15 11:06\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr ""
 
 msgid "Size:"
-msgstr ""
+msgstr "Grandeco:"
 
 msgid "Width:"
 msgstr "Larĝo:"
@@ -52,7 +52,7 @@ msgid "Height:"
 msgstr "Alto:"
 
 msgid "Center"
-msgstr ""
+msgstr "Centro"
 
 msgid "File"
 msgstr "Dosiero"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Redakti"
 
 msgid "Select"
-msgstr ""
+msgstr "Elekti"
 
 msgid "View"
 msgstr "Montri"
@@ -94,7 +94,7 @@ msgid "Save as..."
 msgstr "Konservi kiel..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Uzi ZSTD-densigadon"
 
 msgid "Import"
 msgstr "Importi"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Eksporti"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Superskribi"
 
 msgid "Export..."
 msgstr "Eksporti..."
@@ -160,7 +160,7 @@ msgid "Resize Canvas"
 msgstr "Ŝanĝi la dimensiojn de la tavolo"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Centrigi bildon"
 
 msgid "Rotate Image"
 msgstr "Turni bildon"
@@ -187,7 +187,7 @@ msgid "Grayscale View"
 msgstr ""
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Renversi bildon"
 
 msgid "Flip Horizontal"
 msgstr "Speguli horizontale"
@@ -235,40 +235,40 @@ msgid "Window opacity does not work on fullscreen mode."
 msgstr ""
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Poziciaro de paneloj"
 
 msgid "Panels"
 msgstr ""
 
 msgid "Layouts"
-msgstr ""
+msgstr "Poziciaroj"
 
 msgid "Moveable Panels"
 msgstr ""
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Administri poziciarojn"
 
 msgid "Add"
 msgstr "Aldoni"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Aldoni poziciaron"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Redakti poziciaron"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Ĉu vi vere volas forigi tiun ĉi poziciaron?"
 
 msgid "Auto"
-msgstr ""
+msgstr "Aŭtomata"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Larĝekrana"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Altekrana"
 
 msgid "Mirror View"
 msgstr ""
@@ -361,13 +361,13 @@ msgid "Brush type:"
 msgstr ""
 
 msgid "File brush"
-msgstr ""
+msgstr "Dosiera peniko"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Projekta peniko"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Hazarda peniko"
 
 msgid "Save Sprite as .pxo"
 msgstr "Konservi spriton kiel .pxo"
@@ -394,10 +394,10 @@ msgid "Directory path and file name are not valid!"
 msgstr ""
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Esportado estas faradata..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Oni ne povas legi la dosieron '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -406,7 +406,8 @@ msgstr "Ne povas ŝarĝi dosieron '%s'.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Oni ne povas legi la dosieron '%s'.\n"
+"Ĝi ne estas ĝusta paletra dosiero."
 
 msgid "Frame"
 msgstr "Kadro"
@@ -523,7 +524,7 @@ msgid "Language"
 msgstr "Lingvo"
 
 msgid "Interface"
-msgstr ""
+msgstr "Interfaco"
 
 msgid "Themes"
 msgstr "Temoj"
@@ -532,10 +533,10 @@ msgid "Canvas"
 msgstr "Kanvaso"
 
 msgid "Selection"
-msgstr ""
+msgstr "Elektaĵo"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Fulmoklavoj"
 
 msgid "Backup"
 msgstr ""
@@ -607,7 +608,7 @@ msgid "Purple"
 msgstr "Purpura"
 
 msgid "Theme"
-msgstr ""
+msgstr "Temo"
 
 msgid "Icon color from:"
 msgstr "Koloro de piktogramoj el:"
@@ -634,10 +635,10 @@ msgid "Small"
 msgstr "Malgranda"
 
 msgid "Big"
-msgstr ""
+msgstr "Granda"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Nur post elektado"
 
 msgid "Selected cels"
 msgstr ""
@@ -676,7 +677,7 @@ msgid "Outline"
 msgstr "Konturoj"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Ĵeti ombron"
 
 msgid "Offset X:"
 msgstr ""
@@ -709,22 +710,22 @@ msgid "Radial Step"
 msgstr "Radiusa paŝo"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "Lineara punktismo"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "Radiusa punktismo"
 
 msgid "Transition size:"
 msgstr ""
 
 msgid "Center:"
-msgstr ""
+msgstr "Centro:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Radiuso:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Ŝablono de punktismo:"
 
 msgid "Adjust HSV"
 msgstr ""
@@ -751,7 +752,7 @@ msgid "Diagonal"
 msgstr "Diagonala"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Meti ene en la bildo"
 
 msgid "Thickness:"
 msgstr "Dikeco:"
@@ -841,7 +842,7 @@ msgid "Polish"
 msgstr "Pola"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugala"
 
 msgid "Brazilian Portuguese"
 msgstr "Brazila portugala"
@@ -865,49 +866,49 @@ msgid "Spanish"
 msgstr "Hispana"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Kataluna"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonezia"
 
 msgid "Czech"
-msgstr ""
+msgstr "Ĉeĥa"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Araba"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turka"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Norvega (Bokmål)"
 
 msgid "Korean"
-msgstr ""
+msgstr "Korea"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Hungara"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Rumana"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japana"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukraina"
 
 msgid "Danish"
-msgstr ""
+msgstr "Dana"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Sveda"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Serba (cirila)"
 
 msgid "Dutch"
 msgstr ""
@@ -1135,7 +1136,7 @@ msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "Ĉiuj"
 
 msgid "Rectangular grid width:"
 msgstr ""
@@ -1270,37 +1271,37 @@ msgid "Uninstall"
 msgstr ""
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Malfermi dosierujon"
 
 msgid "Brush:"
 msgstr "Peniko:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Elekti penikon"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "Rastrumera peniko"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "Ronda peniko"
 
 msgid "Filled circle brush"
-msgstr ""
+msgstr "Plena ronda peniko"
 
 msgid "Custom brush"
 msgstr "Propra peniklo"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Grandeco de la peniko:"
 
 msgid "Overwrite Color"
-msgstr ""
+msgstr "Superskribi koloron"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr ""
+msgstr "Superskribas koloron anstataŭ miksi ĝin kun suba koloro. La opcio nur estas konsiderata, kiam la koloroj ne estas tute opakaj"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Rastumera precizemo"
 
 msgid "Fill inside"
 msgstr ""
