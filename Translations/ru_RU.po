@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-09-14 21:24\n"
+"PO-Revision-Date: 2022-09-15 09:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -136,7 +136,7 @@ msgid "Paste"
 msgstr "Вставить"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Вставить на место"
 
 msgid "Delete"
 msgstr "Удалить"
@@ -166,13 +166,13 @@ msgid "Rotate Image"
 msgstr "Повернуть изображение"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "Центр вращения (x, y):"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Настройки мазка:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Допустимое отклонение:"
 
 msgid "Initial angle:"
 msgstr "Начальный угол:"
@@ -205,16 +205,16 @@ msgid "Tile Mode Offsets"
 msgstr "Сдвиг в бесшовном режиме"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X для X-базиса:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "Y для X-базиса:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "X для Y-базиса:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y для Y-базиса:"
 
 msgid "Tile Mask"
 msgstr "Тайловая маска"
