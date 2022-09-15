@@ -173,7 +173,9 @@ func _on_LinkButton_pressed() -> void:
 		layer_class.linked_cels.append(
 			Global.current_project.frames[Global.current_project.current_frame]
 		)
-		var container = Global.frames_container.get_child(Global.current_project.current_layer)
+		var container = Global.frames_container.get_child(
+			Global.frames_container.get_child_count() - 1 - Global.current_project.current_layer
+		)
 		container.get_child(Global.current_project.current_frame).button_setup()
 
 	_update_buttons()

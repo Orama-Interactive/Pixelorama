@@ -474,11 +474,9 @@ func open_image_as_spritesheet_layer(
 			var new_frame := Frame.new()
 			for l_i in range(project.layers.size()):  # Create as many cels as there are layers
 				new_frame.cels.append(project.layers[l_i].new_empty_cel())
-				# TODO H0: Make sure setting of linked cels like this works everywhere (ie: image should be replaced with content)
-				#			CONSIDER NEW LINKED CELS IDEA, DOES IT AFFECT THIS?
 				if new_layers[l_i].get("new_cels_linked"):
 					new_layers[l_i].linked_cels.append(new_frame)
-					new_frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
+					new_frame.cels[l_i].set_content(new_layers[l_i].linked_cels[0].cels[l_i].get_content())
 					new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
 			frames.append(new_frame)
 
