@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-09-14 22:32\n"
+"PO-Revision-Date: 2022-09-15 15:44\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1280,7 +1280,7 @@ msgid "Follow Canvas Zoom Level"
 msgstr "Να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr "Το διάφανο υποβάθρο - σκακιέρα να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
+msgstr "Το διάφανο υπόβαθρο - σκακιέρα να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
 
 msgid "Animated selection borders"
 msgstr "Κίνηση περιγράμματος επιλογής"
