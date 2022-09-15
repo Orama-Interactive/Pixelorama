@@ -484,25 +484,19 @@ func open_image_as_spritesheet_layer(
 	var layer := PixelLayer.new(project, file_name)
 	var cels := []
 	for f in new_frames_size:
-		# TODO H0: Consider optimizing this so extra images aren't made for frames that are in the range
-		#		of the spritesheet's frames (To do this, need to resize cel array at first, and set them by index for
-		#		cels not in that range, and then in the # Splice spritesheet section, create the PixelCel there.
-		#		(Maybe instead calculate the yy and xx values, removing the yy/xx loops, and combining with this loop?)
-		cels.append(layer.new_empty_cel())
-
-	# Slice spritesheet
-	var image_no: int = 0
-	for yy in range(vertical):
-		for xx in range(horizontal):
+		if f >= start_frame and f < (start_frame + (vertical * horizontal)):
+			# Slice spritesheet
+			var xx: int = (f - start_frame) % horizontal
+			var yy: int = (f - start_frame) / horizontal
 			var cropped_image := Image.new()
 			cropped_image = image.get_rect(
 				Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
 			cropped_image.crop(project.size.x, project.size.y)
-			var frame_index = start_frame + image_no
 			cropped_image.convert(Image.FORMAT_RGBA8)
-			cels[frame_index].image = cropped_image
-			image_no += 1
+			cels.append(PixelCel.new(cropped_image))
+		else:
+			cels.append(layer.new_empty_cel())
 
 	# TODO L: Maybe this is the better undo/redo order (As sometimes the do and undo steps can't be in the same order like here), should everything be made consistent with this?
 	project.undo_redo.add_do_property(project, "current_frame", new_frames_size - 1)
