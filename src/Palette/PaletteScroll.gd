@@ -4,9 +4,9 @@ var scroll := Vector2.ZERO
 var drag_started := false
 var drag_start_position := Vector2.ZERO
 
-onready var h_slider := $MarginContainer/HScrollBar
-onready var v_slider := $HBoxContainer/CenterContainer/HBoxContainer/VScrollBar
-onready var palette_grid := $HBoxContainer/CenterContainer/HBoxContainer/PaletteGrid
+onready var h_slider := $"%HScrollBar"
+onready var v_slider := $"%VScrollBar"
+onready var palette_grid := $"%PaletteGrid"
 
 
 func _input(event) -> void:

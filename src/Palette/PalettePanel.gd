@@ -7,19 +7,18 @@ var palettes_id_path := {}
 var edited_swatch_index := -1
 var edited_swatch_color := Color.transparent
 
-onready var palette_select := $PaletteVBoxContainer/PaletteButtons/PaletteSelect
-onready var add_palette_button := $PaletteVBoxContainer/PaletteButtons/AddPalette
-onready var palette_grid := find_node("PaletteGrid")
-onready var palette_scroll := $PaletteVBoxContainer/SwatchesContainer/PaletteScroll
+onready var palette_select := $"%PaletteSelect"
+onready var palette_grid := $"%PaletteGrid"
+onready var palette_scroll := $"%PaletteScroll"
 
-onready var add_color_button := $PaletteVBoxContainer/SwatchesContainer/ColorButtons/AddColor
-onready var delete_color_button := $PaletteVBoxContainer/SwatchesContainer/ColorButtons/DeleteColor
+onready var add_color_button := $"%AddColor"
+onready var delete_color_button := $"%DeleteColor"
 
-onready var edit_palette_dialog := $EditPaletteDialog
-onready var create_palette_dialog := $CreatePaletteDialog
+onready var edit_palette_dialog := $"%EditPaletteDialog"
+onready var create_palette_dialog := $"%CreatePaletteDialog"
 
 # Color picker button itself is hidden but it's popup is used to edit color swatches
-onready var hidden_color_picker := $HiddenColorPickerButton
+onready var hidden_color_picker := $"%HiddenColorPickerButton"
 
 
 func _ready() -> void:
