@@ -305,9 +305,7 @@ func copy_frames(frames := []) -> void:
 		new_frame.duration = prev_frame.duration
 		for l_i in range(new_layers.size()):
 			# If the layer has new_cels_linked variable, and its true
-			var new_cels_linked: bool
-			if new_layers[l_i].get("new_cels_linked"):
-				new_cels_linked = true
+			var new_cels_linked := true if new_layers[l_i].get("new_cels_linked") else false
 
 			# Copy the cel, create new cel content if new cels aren't linked
 			new_frame.cels.append(new_layers[l_i].copy_cel(frame, new_cels_linked))
