@@ -11,6 +11,7 @@ var fill_color := Color(0)
 var has_changed := false setget _has_changed_changed
 var frames := [] # Array of Frames (that contain Cels)
 var layers := [] # Array of Layers
+# TODO H1: Comment how these are intended to be modified (or document somehow else?)
 var current_frame := 0 setget _frame_changed
 var current_layer := 0 setget _layer_changed
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
@@ -622,6 +623,7 @@ func can_pixel_get_drawn(
 
 
 # Timeline modifications
+# TODO H1: Comment how these are meant to be used
 
 func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be in ascending order
 	Global.canvas.selection.transform_content_confirm()

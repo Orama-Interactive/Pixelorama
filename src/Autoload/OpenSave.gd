@@ -589,33 +589,26 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 
 
 func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) -> void:
-	# TODO H0: Make work after the timeline refactor
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
-	var new_layers: Array = Global.current_project.layers.duplicate()
 	var layer := PixelLayer.new(project, file_name)
+	var cels := []
 
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Add Layer")
 	for i in project.frames.size():
-		var new_cels: Array = project.frames[i].cels.duplicate(true)
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
-			new_cels.append(PixelCel.new(image, 1))
+			cels.append(PixelCel.new(image, 1))
 		else:
-			new_cels.append(layer.new_empty_cel())
+			cels.append(layer.new_empty_cel())
 
-		project.undo_redo.add_do_property(project.frames[i], "cels", new_cels)
-		project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
-
-	new_layers.append(layer)
-
-	project.undo_redo.add_do_property(project, "current_layer", new_layers.size() - 1)
-	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+	project.undo_redo.add_do_method(project, "add_layers", [layer], [project.layers.size()], [cels])
 	project.undo_redo.add_do_property(project, "current_frame", frame_index)
 
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
