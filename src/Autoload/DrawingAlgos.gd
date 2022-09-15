@@ -423,7 +423,8 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 
 	for f in Global.current_project.frames:
 		for i in range(f.cels.size() - 1, -1, -1):
-			# TODO H0: Make work with Groups
+			if f.cels[i] is GroupCel:
+				continue
 			var sprite := Image.new()
 			sprite.copy_from(f.cels[i].image)
 			# Different method for scale_3x

@@ -5,6 +5,7 @@ extends BaseCel
 
 func _init(_opacity := 1.0) -> void:
 	opacity = _opacity
+	image_texture = ImageTexture.new()
 
 
 func get_image() -> Image:
