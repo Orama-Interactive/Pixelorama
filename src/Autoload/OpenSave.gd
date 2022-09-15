@@ -559,13 +559,11 @@ func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> vo
 
 
 func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
-	# TODO H0: Make work after the timeline refactor
 	# TODO H1: What should happen if the layer_index isn't a PixelLayer?
 	# 			Option 1: Disable OK button and show red message saying to choose a Pixel Layer
 	#			Option 2: Replace spinbox with an option list that contains all Pixel Layers (maybe better UX too)
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
-	var new_frames: Array = project.frames.duplicate()
 
 	var frame := Frame.new()
 	for i in project.layers.size():
@@ -575,20 +573,18 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 		else:
 			frame.cels.append(project.layers[i].new_empty_cel())
 
-	new_frames.append(frame)
-
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 
-	project.undo_redo.add_do_property(project, "frames", new_frames)
-	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
+	project.undo_redo.add_do_method(project, "add_frames", [frame], [project.frames.size()])
 	project.undo_redo.add_do_property(project, "current_layer", layer_index)
+	project.undo_redo.add_do_property(project, "current_frame", project.frames.size())
 
-	project.undo_redo.add_undo_property(project, "frames", project.frames)
-	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_method(project, "remove_frames", [project.frames.size()])
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.commit_action()
 
 
