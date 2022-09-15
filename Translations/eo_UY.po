@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2022-09-14 21:24\n"
+"PO-Revision-Date: 2022-09-15 09:04\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Montri"
 
 msgid "Window"
-msgstr ""
+msgstr "Fenestro"
 
 msgid "Image"
 msgstr "Bildo"
@@ -127,28 +127,28 @@ msgid "Redo"
 msgstr "Refari"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopii"
 
 msgid "Cut"
-msgstr ""
+msgstr "Eltondi"
 
 msgid "Paste"
-msgstr ""
+msgstr "Enmeti"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Enmeti en lokon"
 
 msgid "Delete"
 msgstr "Forigi"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Nova peniko"
 
 msgid "Scale Image"
 msgstr "Skali bildon"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Rastrumeroj"
 
 msgid "Percentage"
 msgstr ""
@@ -157,7 +157,7 @@ msgid "Crop Image"
 msgstr "Tondi bildon"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Ŝanĝi la dimensiojn de la tavolo"
 
 msgid "Centralize Image"
 msgstr ""
@@ -166,7 +166,7 @@ msgid "Rotate Image"
 msgstr "Turni bildon"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "Rotacicentro (x, y):"
 
 msgid "Smear options:"
 msgstr ""
@@ -250,7 +250,7 @@ msgid "Manage Layouts"
 msgstr ""
 
 msgid "Add"
-msgstr ""
+msgstr "Aldoni"
 
 msgid "Add Layout"
 msgstr ""
@@ -289,7 +289,7 @@ msgid "Show Animation Timeline"
 msgstr "Montri animacian kronologion"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Zena reĝimo"
 
 msgid "Fullscreen Mode"
 msgstr ""
@@ -334,10 +334,10 @@ msgid "New layer"
 msgstr ""
 
 msgid "New palette"
-msgstr ""
+msgstr "Nova paletro"
 
 msgid "New brush"
-msgstr ""
+msgstr "Nova peniko"
 
 msgid "New pattern"
 msgstr ""
@@ -547,10 +547,10 @@ msgid "Extensions"
 msgstr ""
 
 msgid "Cursors"
-msgstr ""
+msgstr "Musmontriloj"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indikatoroj"
 
 msgid "On"
 msgstr ""
@@ -604,34 +604,34 @@ msgid "Light"
 msgstr "Hela"
 
 msgid "Purple"
-msgstr ""
+msgstr "Purpura"
 
 msgid "Theme"
 msgstr ""
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Koloro de piktogramoj el:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Koloro de piktogramoj:"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Koloro de la fono el:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Koloro de la fono:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Koloro de la maldekstra ilo:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Koloro de la dekstra ilo:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Grandeco de la ilaj butonoj:"
 
 msgid "Small"
-msgstr ""
+msgstr "Malgranda"
 
 msgid "Big"
 msgstr ""
@@ -685,28 +685,28 @@ msgid "Offset Y:"
 msgstr ""
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Koloro de la ombro:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
 msgid "Gradient"
-msgstr ""
+msgstr "Gradiento"
 
 msgid "Gradient Map"
 msgstr ""
 
 msgid "Linear"
-msgstr ""
+msgstr "Lineara"
 
 msgid "Radial"
-msgstr ""
+msgstr "Radiusa"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Lineara paŝo"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Radiusa paŝo"
 
 msgid "Linear Dithering"
 msgstr ""
