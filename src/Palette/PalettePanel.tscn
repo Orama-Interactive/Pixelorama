@@ -207,3 +207,4 @@ margin_bottom = 312.0
 [connection signal="saved" from="EditPaletteDialog" to="." method="_on_EditPaletteDialog_saved"]
 [connection signal="saved" from="CreatePaletteDialog" to="." method="_on_CreatePaletteDialog_saved"]
 [connection signal="color_changed" from="HiddenColorPickerButton" to="." method="_on_ColorPicker_color_changed"]
+[connection signal="popup_closed" from="HiddenColorPickerButton" to="." method="_on_HiddenColorPickerButton_popup_closed"]

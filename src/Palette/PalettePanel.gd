@@ -4,7 +4,8 @@ extends PanelContainer
 var palettes_path_id := {}
 var palettes_id_path := {}
 
-var edited_swatch_index = -1
+var edited_swatch_index := -1
+var edited_swatch_color := Color.transparent
 
 onready var palette_select := $PaletteVBoxContainer/PaletteButtons/PaletteSelect
 onready var add_palette_button := $PaletteVBoxContainer/PaletteButtons/AddPalette
@@ -188,13 +189,18 @@ func _on_PaletteGrid_swatch_pressed(mouse_button: int, index: int) -> void:
 
 func _on_ColorPicker_color_changed(color: Color) -> void:
 	if edited_swatch_index != -1:
-		Palettes.current_palette_set_color(edited_swatch_index, color)
+		edited_swatch_color = color
 		palette_grid.set_swatch_color(edited_swatch_index, color)
 
 		if edited_swatch_index == Palettes.current_palette_get_selected_color_index(BUTTON_LEFT):
 			Tools.assign_color(color, BUTTON_LEFT)
 		if edited_swatch_index == Palettes.current_palette_get_selected_color_index(BUTTON_RIGHT):
 			Tools.assign_color(color, BUTTON_RIGHT)
+
+
+func _on_HiddenColorPickerButton_popup_closed():
+	# Saves edited swatch to palette file when color selection dialog is closed
+	Palettes.current_palette_set_color(edited_swatch_index, edited_swatch_color)
 
 
 func _on_EditPaletteDialog_deleted() -> void:
