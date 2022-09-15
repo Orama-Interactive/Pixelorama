@@ -38,10 +38,11 @@ func _on_CelButton_resized() -> void:
 	get_node("CelTexture").rect_min_size.x = rect_min_size.x - 4
 	get_node("CelTexture").rect_min_size.y = rect_min_size.y - 4
 
-	get_node("LinkedIndicator").polygon[1].x = rect_min_size.x
-	get_node("LinkedIndicator").polygon[2].x = rect_min_size.x
-	get_node("LinkedIndicator").polygon[2].y = rect_min_size.y
-	get_node("LinkedIndicator").polygon[3].y = rect_min_size.y
+	if is_instance_valid(linked_indicator):
+		linked_indicator.polygon[1].x = rect_min_size.x
+		linked_indicator.polygon[2].x = rect_min_size.x
+		linked_indicator.polygon[2].y = rect_min_size.y
+		linked_indicator.polygon[3].y = rect_min_size.y
 
 
 func _on_CelButton_pressed() -> void:

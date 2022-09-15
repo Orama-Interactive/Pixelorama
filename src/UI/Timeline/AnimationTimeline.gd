@@ -141,10 +141,9 @@ func add_frame() -> void:
 	var new_layers: Array = project.duplicate_layers()
 
 	for l_i in range(new_layers.size()):
-		# TODO H0: Make sure this works with groups (Check out copy frames):
-		if new_layers[l_i].new_cels_linked:  # If the link button is pressed
+		if new_layers[l_i].get("new_cels_linked"):  # If the link button is pressed
 			new_layers[l_i].linked_cels.append(frame)
-			frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
+			frame.cels[l_i].set_content(new_layers[l_i].linked_cels[0].cels[l_i].get_content())
 			frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
 
 	# Code to PUSH AHEAD tags starting after the frame
@@ -306,14 +305,16 @@ func copy_frames(frames := []) -> void:
 		new_frame.duration = prev_frame.duration
 		for l_i in range(new_layers.size()):
 			# If the layer has new_cels_linked variable, and its true
-			var new_cels_linked: bool = new_layers[l_i].get("new_cels_linked")
+			var new_cels_linked = new_layers[l_i].get("new_cels_linked")
+			if new_cels_linked == null:
+				new_cels_linked = false
 
 			# Copy the cel, create new cel content if new cels aren't linked
 			new_frame.cels.append(new_layers[l_i].copy_cel(frame, new_cels_linked))
 
 			if new_cels_linked:  # If the link button is pressed
 				new_layers[l_i].linked_cels.append(new_frame)
-				new_frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
+				new_frame.cels[l_i].set_content(new_layers[l_i].linked_cels[0].cels[l_i].get_content())
 				new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
 
 		# Loop through the tags to see if the frame is in one
