@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-09-15 15:44\n"
+"PO-Revision-Date: 2022-09-15 17:03\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -2010,10 +2010,10 @@ msgid "and"
 msgstr "και"
 
 msgid "Move the selected frame to the left."
-msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα αριστερά"
+msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα αριστερά."
 
 msgid "Move the selected frame to the right."
-msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα δεξιά"
+msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα δεξιά."
 
 msgid "Frame duration"
 msgstr "Διάρκεια καρέ"
