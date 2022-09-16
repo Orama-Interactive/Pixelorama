@@ -8,7 +8,7 @@ var image_texture: ImageTexture
 
 # Methods to Override:
 
-# TODO H0: Check if copying cels can use the content methods
+# TODO L: Check if copying cels can use the content methods (Do during/after Linked Cel refactor)
 
 # TODO H1: These content methods need good doc comments:
 #			COMMENT FROM THE IDEA TODO COMMENT (MAY BE USEFUL FOR WRITING COMMENTS)

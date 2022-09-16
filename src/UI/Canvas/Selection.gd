@@ -71,7 +71,8 @@ func _ready() -> void:
 
 #	gizmos.append(Gizmo.new(Gizmo.Type.ROTATE)) # Rotation gizmo (temp)
 
-# TODO H/L: Can't move/resize a selection on a group cel (It just draws a new selection), maybe has to do with can_layer_get_drawn?
+# TODO L: Can't move/resize a selection on a group cel (It just draws a new selection), maybe has to do with can_layer_get_drawn?
+#					This is a bug with the selection input in general, also happens with locked Pixel Layers. Ask Overloaded about it
 func _input(event: InputEvent) -> void:
 	if is_moving_content:
 		if Input.is_action_just_pressed("transformation_confirm"):
@@ -97,7 +98,6 @@ func _input(event: InputEvent) -> void:
 				if Global.cross_cursor:
 					cursor = Control.CURSOR_CROSS
 				var project: Project = Global.current_project
-				# TODO H0: Make sure this BaseLayer is supposed to be BaseLayer
 				var layer: BaseLayer = project.layers[project.current_layer]
 				if not layer.can_layer_get_drawn():
 					cursor = Control.CURSOR_FORBIDDEN
