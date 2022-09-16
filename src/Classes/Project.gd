@@ -9,9 +9,9 @@ var tiles: Tiles
 var undos := 0  # The number of times we added undo properties
 var fill_color := Color(0)
 var has_changed := false setget _has_changed_changed
+# TODO H1: Comment how these are intended to be modified (or document somehow else?)
 var frames := [] # Array of Frames (that contain Cels)
 var layers := [] # Array of Layers
-# TODO H1: Comment how these are intended to be modified (or document somehow else?)
 var current_frame := 0 setget _frame_changed
 var current_layer := 0 setget _layer_changed
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)

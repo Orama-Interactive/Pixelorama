@@ -9,7 +9,6 @@ func _init(_opacity := 1.0) -> void:
 
 
 func get_image() -> Image:
-	# TODO H1: This can be used for copying selections or picking colors... Can maybe make from texture data?
 	var image = Image.new()
 	image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 	return image
