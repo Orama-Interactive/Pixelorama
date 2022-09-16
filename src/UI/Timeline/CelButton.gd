@@ -174,17 +174,18 @@ func get_drag_data(_position) -> Array:
 	button.add_child(texture_rect)
 	set_drag_preview(button)
 
-	return ["PixelCel", frame, layer]
+	return ["Cel", frame, layer]
 
 
 func can_drop_data(_pos, data) -> bool:
-	if typeof(data) == TYPE_ARRAY and data[0] == "PixelCel":
+	if typeof(data) == TYPE_ARRAY and data[0] == "Cel":
 		var drag_frame = data[1]
 		var drag_layer = data[2]
 		# TODO L: Is this part really right? Should't it only matter if they're linked, and we're changing layers?
 		#		It would need to add linked cel logic to project move/swap_cel though
+		#		I THINK I WILL CHANGE THIS WITH FUTURE LINKED CEL UPDATE (might not need move/swap_cel logic)
 		# If the cel we're dragging or the cel we are targeting are linked, don't allow dragging
-		if not (
+		if Global.current_project.layers[layer] is GroupLayer or not (
 			Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels
 			or (
 				Global.current_project.frames[drag_frame]
