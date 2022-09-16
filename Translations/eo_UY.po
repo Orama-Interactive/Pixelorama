@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2022-09-16 10:26\n"
+"PO-Revision-Date: 2022-09-16 11:34\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -40,7 +40,7 @@ msgid "Canvas Size"
 msgstr "Grando de la tolo"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Dimensio de filmero"
 
 msgid "Size:"
 msgstr "Grandeco:"
@@ -223,7 +223,7 @@ msgid "Reset"
 msgstr ""
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "Uzu aktualan filmeron"
 
 msgid "Reset Mask"
 msgstr ""
@@ -325,10 +325,10 @@ msgid "Spritesheet (new layer)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "Nova filmero"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Anstataŭigi filmeron"
 
 msgid "New layer"
 msgstr ""
@@ -343,16 +343,16 @@ msgid "New pattern"
 msgstr ""
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Horizontalaj filmeroj:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Vertikalaj filmeroj:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Komenca filmero:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "En filmero:"
 
 msgid "At layer:"
 msgstr "En tavolo:"
@@ -647,10 +647,10 @@ msgid "Current cel"
 msgstr ""
 
 msgid "Current frame"
-msgstr ""
+msgstr "Aktuala filmero"
 
 msgid "All frames"
-msgstr ""
+msgstr "Ĉiuj filmeroj"
 
 msgid "All projects"
 msgstr ""
@@ -1253,7 +1253,7 @@ msgid "Pause application when it loses focus"
 msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "Agordas la kvoto de renoviĝoj de bildo po sekundo. Ju malpli estas la numero, des malpli multe da procesora tempo estas uzata, sed la programo iĝas malpli rapida kaj reagema. 0 signifas, ke ne ekzistas limo."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
@@ -1404,7 +1404,7 @@ msgid "Vertical"
 msgstr "Vertikala"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Aktuala filmero:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -1641,19 +1641,19 @@ msgid "Undo: Add Frame"
 msgstr "Malfaritas: Aldoni kadron"
 
 msgid "Redo: Add Frame"
-msgstr "Refaritas: Aldoni kadron"
+msgstr "Refaritas: Aldoni filmeron"
 
 msgid "Undo: Remove Frame"
-msgstr "Malfaritas: Forigi kadron"
+msgstr "Malfaritas: Forigi filmeron"
 
 msgid "Redo: Remove Frame"
-msgstr "Refaritas: Forigi kadron"
+msgstr "Refaritas: Forigi filmeron"
 
 msgid "Undo: Change Frame Order"
-msgstr "Malfaritas: Ŝanĝi ordon de kadroj"
+msgstr "Malfaritas: Ŝanĝi ordon de filmeroj"
 
 msgid "Redo: Change Frame Order"
-msgstr "Refaritas: Ŝanĝi ordon de kadroj"
+msgstr "Refaritas: Ŝanĝi ordon de filmeroj"
 
 msgid "Undo: Delete Custom Brush"
 msgstr "Malfaritas: Forigi propran penikon"
@@ -1674,10 +1674,10 @@ msgid "Redo: Delete Frame Tag"
 msgstr ""
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Malfari: Ŝanĝi daŭron de filmero"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Refari: Ŝanĝi daŭron de filmero"
 
 msgid "Move Guide"
 msgstr "Movi direktlinion"
@@ -1914,7 +1914,7 @@ msgid "Create new directory for each frame tag"
 msgstr ""
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Kreas kelkajn dosierojn, sed ĉiu dosiero estas konservita en malsama dosierujo laŭ la filmera etikedo"
 
 msgid "Close"
 msgstr "Fermi"
@@ -1951,13 +1951,13 @@ msgid "and"
 msgstr ""
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Movas la elektitan filmeron maldekstren."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Movas la elektitan filmeron dekstren."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Daŭro de filmero"
 
 msgid "Duration"
 msgstr ""
