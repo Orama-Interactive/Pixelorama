@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-09-16 21:26\n"
+"PO-Revision-Date: 2022-09-16 23:09\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -698,17 +698,18 @@ msgid "Gradient Map"
 msgstr "Gradyan Haritası"
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "Eşit parçalara böl"
 
 msgid "Parts:"
-msgstr ""
+msgstr "Parçalar:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "Sonuna nokta ekle"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr ""
+msgstr "Bu etkinleştirilirse, son nokta gradnayın sonuna eklenir.\n"
+"Son rengin dikkate alınması için, gradyanı sabit ara değerlemeye dönüştürmek istiyorsanız bunu devre dışı bırakın."
 
 msgid "Linear"
 msgstr "Doğrusal"
@@ -1991,7 +1992,7 @@ msgid "Close"
 msgstr "Kapat"
 
 msgid "Delete"
-msgstr ""
+msgstr "Sil"
 
 msgid "Discard All"
 msgstr "Hepsinden Vazgeç"
