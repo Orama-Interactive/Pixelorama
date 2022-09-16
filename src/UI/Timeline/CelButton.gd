@@ -90,7 +90,7 @@ func _on_CelButton_pressed() -> void:
 	elif Input.is_action_just_released("right_mouse"):
 		if is_instance_valid(popup_menu):
 			popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
-			pressed = !pressed
+		pressed = !pressed
 	elif Input.is_action_just_released("middle_mouse"):
 		pressed = !pressed
 		_delete_cel_content()
