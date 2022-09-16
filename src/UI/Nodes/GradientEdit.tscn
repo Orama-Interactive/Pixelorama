@@ -109,7 +109,7 @@ margin_top = 28.0
 margin_right = 1280.0
 margin_bottom = 52.0
 hint_tooltip = "If this is enabled, the last point gets added at the end of the gradient.
-Disable this if you wish to convert the gradient to have constant interpolation, so that it will take into account the last color."
+Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 mouse_default_cursor_shape = 2
 text = "Add point at the end"
 
