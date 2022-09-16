@@ -506,6 +506,8 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 	general_do_scale(width, height)
 	for f in Global.current_project.frames:
 		for c in f.cels:
+			if not c is PixelCel:
+				continue
 			var sprite := Image.new()
 			sprite.create(width, height, false, Image.FORMAT_RGBA8)
 			sprite.blend_rect(
