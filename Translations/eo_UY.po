@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2022-09-15 11:06\n"
+"PO-Revision-Date: 2022-09-16 10:26\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -355,10 +355,10 @@ msgid "At frame:"
 msgstr ""
 
 msgid "At layer:"
-msgstr ""
+msgstr "En tavolo:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Tipo de pentriko:"
 
 msgid "File brush"
 msgstr "Dosiera peniko"
