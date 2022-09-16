@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-09-15 11:06\n"
+"PO-Revision-Date: 2022-09-16 21:20\n"
 
 msgid "OK"
 msgstr "确定"
@@ -696,6 +696,19 @@ msgstr "渐变"
 
 msgid "Gradient Map"
 msgstr "渐变贴图"
+
+msgid "Divide into equal parts"
+msgstr ""
+
+msgid "Parts:"
+msgstr ""
+
+msgid "Add point at the end"
+msgstr ""
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that it will take into account the last color."
+msgstr ""
 
 msgid "Linear"
 msgstr "线性"
