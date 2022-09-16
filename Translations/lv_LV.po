@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2022-09-16 21:20\n"
+"PO-Revision-Date: 2022-09-16 21:26\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -706,7 +706,7 @@ msgid "Add point at the end"
 msgstr ""
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
-"Disable this if you wish to convert the gradient to have constant interpolation, so that it will take into account the last color."
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
 msgid "Linear"
@@ -1948,7 +1948,7 @@ msgid "Close"
 msgstr ""
 
 msgid "Delete"
-msgstr "Izdzēst"
+msgstr ""
 
 msgid "Discard All"
 msgstr ""
