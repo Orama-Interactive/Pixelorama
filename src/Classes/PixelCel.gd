@@ -21,13 +21,13 @@ func image_changed(value: Image) -> void:
 		image_texture.create_from_image(image, 0)
 
 
+func get_content():
+	return image
+
+
 func set_content(content) -> void:
 	image = content
 	image_texture.create_from_image(image, 0)
-
-
-func get_content():
-	return image
 
 
 func create_empty_content():

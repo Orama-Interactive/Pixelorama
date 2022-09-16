@@ -10,29 +10,23 @@ var image_texture: ImageTexture
 
 # TODO L: Check if copying cels can use the content methods (Do during/after Linked Cel refactor)
 
-# TODO H1: These content methods need good doc comments:
-#			COMMENT FROM THE IDEA TODO COMMENT (MAY BE USEFUL FOR WRITING COMMENTS)
-#			- get_content will return certain content of the cel (should metadata be included?)
-#			- set_content will set the content (same structure as get_content returns)
-#			- delete/clear_content will erase it,
-#			- using get_content and set_content could become useful for linking/unlinking cels, and will be reversible for undo
-#				- this can be used to replace copy_cel and copy_all_cels in layer classes
-#			- using all 3 will allow you to delete content, and undo it in cel button
-#				= making this generic and should solve issues with combing cel_button scripts into 1
-#			- copy_content may also be a useful method to have
+# The content methods deal with the unique content of each cel type. For example, an Image for
+# PixelLayers, or a Dictionary of settings for a procedural layer type, and null for Groups.
+# Can be used fo linking/unlinking cels, copying, and deleting content
+func get_content():
+	return null
+
 
 func set_content(_content) -> void:
 	return
 
 
-func get_content():
-	return []
-
-
+# Can be used to delete the content of the cel with set_content
+# (using the old content from get_content as undo data)
 func create_empty_content():
 	return []
 
-
+# Can be used for creating copy content for copying cels or unlinking cels
 func copy_content():
 	return []
 
