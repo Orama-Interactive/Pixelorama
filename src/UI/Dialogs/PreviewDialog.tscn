@@ -154,7 +154,6 @@ visible = false
 margin_left = 155.0
 margin_right = 286.0
 margin_bottom = 24.0
-size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewFrameOptions"]
 margin_top = 5.0
@@ -174,7 +173,6 @@ visible = false
 margin_left = 155.0
 margin_right = 427.0
 margin_bottom = 24.0
-size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ReplaceCelOptions"]
 margin_top = 5.0
