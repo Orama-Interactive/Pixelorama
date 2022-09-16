@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-09-15 17:03\n"
+"PO-Revision-Date: 2022-09-16 21:20\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -696,6 +696,19 @@ msgstr "Διαβάθμιση"
 
 msgid "Gradient Map"
 msgstr "Χάρτης Διαβαθμίσεων"
+
+msgid "Divide into equal parts"
+msgstr ""
+
+msgid "Parts:"
+msgstr ""
+
+msgid "Add point at the end"
+msgstr ""
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that it will take into account the last color."
+msgstr ""
 
 msgid "Linear"
 msgstr "Γραμμική"
