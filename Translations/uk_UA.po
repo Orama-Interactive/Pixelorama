@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-09-16 21:26\n"
+"PO-Revision-Date: 2022-09-16 23:09\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -698,17 +698,18 @@ msgid "Gradient Map"
 msgstr "Карта градієнту"
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "Розділити на рівні частини"
 
 msgid "Parts:"
-msgstr ""
+msgstr "Частини:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "Додати точку в кінці"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr ""
+msgstr "Якщо увімкнено, останню точку буде додано в кінець градієнту.\n"
+"Вимкніть, щоб перетворити градієнт таким чином, щоб в ньому була константна інтерполяція, щоб останній колір враховувався."
 
 msgid "Linear"
 msgstr "Лінійний"
@@ -1991,7 +1992,7 @@ msgid "Close"
 msgstr "Закрити"
 
 msgid "Delete"
-msgstr ""
+msgstr "Видалити"
 
 msgid "Discard All"
 msgstr "Відкинути все"
