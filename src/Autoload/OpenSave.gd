@@ -519,34 +519,26 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	# TODO H1: What should happen if the layer_index isn't a PixelLayer?
 	# 			Option 1: Disable OK button and show red message saying to choose a Pixel Layer
 	#			Option 2: Replace spinbox with an option list that contains all Pixel Layers (maybe better UX too)
-	# TODO H0: Make work after refactor (Its directly setting frames, and the cel button doesn't' get updated)
 	var project = Global.current_project
-	image.crop(project.size.x, project.size.y)
-
 	project.undos += 1
 	project.undo_redo.create_action("Replaced Cel")
 
-	var frames: Array = []
-	# create a duplicate of "project.frames"
-	for i in project.frames.size():
-		var frame := Frame.new()
-		frame.cels = project.frames[i].cels.duplicate(true)
-		frames.append(frame)
-
 	for i in project.frames.size():
 		if i == frame_index:
+			image.crop(project.size.x, project.size.y)
 			image.convert(Image.FORMAT_RGBA8)
-			frames[i].cels[layer_index] = (PixelCel.new(image, 1))
-			project.undo_redo.add_do_property(project.frames[i], "cels", frames[i].cels)
-			project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
+			var cel: PixelCel = project.frames[i].cels[layer_index]
+			project.undo_redo.add_do_property(cel, "image", image)
+			project.undo_redo.add_undo_property(cel, "image", cel.image)
 
-	project.undo_redo.add_do_property(project, "frames", frames)
+	project.undo_redo.add_do_property(project, "selected_cels", [])
+	project.undo_redo.add_do_property(project, "current_layer", layer_index)
 	project.undo_redo.add_do_property(project, "current_frame", frame_index)
-
-	project.undo_redo.add_undo_property(project, "frames", project.frames)
-	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
-
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+
+	project.undo_redo.add_undo_property(project, "selected_cels", [])
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
@@ -569,12 +561,11 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-
 	project.undo_redo.add_do_method(project, "add_frames", [frame], [project.frames.size()])
 	project.undo_redo.add_do_property(project, "current_layer", layer_index)
 	project.undo_redo.add_do_property(project, "current_frame", project.frames.size())
 
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_undo_method(project, "remove_frames", [project.frames.size()])
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
