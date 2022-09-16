@@ -65,6 +65,11 @@ func get_hierarchy_depth() -> int:
 	return 0
 
 
+func get_layer_path() -> String:
+	if is_instance_valid(parent):
+		return str(parent.get_layer_path(), "/", name)
+	return name
+
 # Methods to Override:
 
 func serialize() -> Dictionary:
