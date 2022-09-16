@@ -524,7 +524,7 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	image.crop(project.size.x, project.size.y)
 
 	project.undos += 1
-	project.undo_redo.create_action("Replaced Frame")
+	project.undo_redo.create_action("Replaced Cel")
 
 	var frames: Array = []
 	# create a duplicate of "project.frames"
