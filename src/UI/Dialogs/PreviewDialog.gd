@@ -125,11 +125,11 @@ func _on_PreviewDialog_confirmed() -> void:
 			)
 
 		elif current_import_option == ImageImportOptions.NEW_FRAME:
-			var layer_index: int = new_frame_options.get_node("AtLayerSpinbox").value
+			var layer_index: int = new_frame_options.get_node("AtLayerOption").get_selected_id()
 			OpenSave.open_image_as_new_frame(image, layer_index)
 
 		elif current_import_option == ImageImportOptions.REPLACE_CEL:
-			var layer_index: int = replace_cel_options.get_node("AtLayerSpinbox").value
+			var layer_index: int = replace_cel_options.get_node("AtLayerOption").get_selected_id()
 			var frame_index: int = replace_cel_options.get_node("AtFrameSpinbox").value - 1
 			OpenSave.open_image_at_cel(image, layer_index, frame_index)
 
@@ -200,14 +200,14 @@ func synchronize() -> void:
 					).value)
 
 			elif id == ImageImportOptions.NEW_FRAME:
-				dialog.new_frame_options.get_node("AtLayerSpinbox").value = (new_frame_options.get_node(
-					"AtLayerSpinbox"
-				).value)
+				dialog.new_frame_options.get_node("AtLayerOption").selected = (new_frame_options.get_node(
+					"AtLayerOption"
+				).selected)
 
 			elif id == ImageImportOptions.REPLACE_CEL:
-				dialog.replace_cel_options.get_node("AtLayerSpinbox").value = (replace_cel_options.get_node(
-					"AtLayerSpinbox"
-				).value)
+				dialog.replace_cel_options.get_node("AtLayerOption").selected = (replace_cel_options.get_node(
+					"AtLayerOption"
+				).selected)
 				dialog.replace_cel_options.get_node("AtFrameSpinbox").value = (replace_cel_options.get_node(
 					"AtFrameSpinbox"
 				).value)
@@ -255,17 +255,32 @@ func _on_ImportOption_item_selected(id: int) -> void:
 
 	elif id == ImageImportOptions.NEW_FRAME:
 		new_frame_options.visible = true
-		new_frame_options.get_node("AtLayerSpinbox").max_value = (
-			Global.current_project.layers.size()
-			- 1
-		)
-
+		# Fill the at layer option button:
+		var at_layer_option: OptionButton = new_frame_options.get_node("AtLayerOption")
+		var layers := Global.current_project.layers.duplicate()
+		layers.invert()
+		var i := 0
+		for l in layers:
+			if not l is PixelLayer:
+				continue
+			at_layer_option.add_item(l.name, l.index)
+			at_layer_option.set_item_tooltip(i, l.get_layer_path())
+			i += 1
+		at_layer_option.selected = at_layer_option.get_item_count() - 1
 	elif id == ImageImportOptions.REPLACE_CEL:
 		replace_cel_options.visible = true
-		replace_cel_options.get_node("AtLayerSpinbox").max_value = (
-			Global.current_project.layers.size()
-			- 1
-		)
+		# Fill the at layer option button:
+		var at_layer_option: OptionButton = replace_cel_options.get_node("AtLayerOption")
+		var layers := Global.current_project.layers.duplicate()
+		layers.invert()
+		var i := 0
+		for l in layers:
+			if not l is PixelLayer:
+				continue
+			at_layer_option.add_item(l.name, l.index)
+			at_layer_option.set_item_tooltip(i, l.get_layer_path())
+			i += 1
+		at_layer_option.selected = at_layer_option.get_item_count() - 1
 		var at_frame_spinbox: SpinBox = replace_cel_options.get_node("AtFrameSpinbox")
 		at_frame_spinbox.max_value = Global.current_project.frames.size()
 
