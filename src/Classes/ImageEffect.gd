@@ -123,16 +123,17 @@ func _get_undo_data(project: Project) -> Dictionary:
 
 
 func _get_selected_draw_images(project: Project) -> Array:  # Array of Images
-	# TODO H0: Make GroupCel work on ImageEffect (this method is part of it)
 	var images := []
 	if affect == SELECTED_CELS:
 		for cel_index in project.selected_cels:
-			var cel: PixelCel = project.frames[cel_index[0]].cels[cel_index[1]]
-			images.append(cel.image)
+			var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+			if cel is PixelCel:
+				images.append(cel.image)
 	else:
 		for frame in project.frames:
 			for cel in frame.cels:
-				images.append(cel.image)
+				if cel is PixelCel:
+					images.append(cel.image)
 	return images
 
 

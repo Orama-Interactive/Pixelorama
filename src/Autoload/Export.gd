@@ -406,9 +406,11 @@ func blend_selected_cels(image: Image, frame: Frame, origin: Vector2 = Vector2(0
 		var test_array = [Global.current_project.current_frame, cel_ind]
 		if not test_array in Global.current_project.selected_cels:
 			continue
+		if not frame.cels[cel_ind] is PixelCel:
+			continue
 
-		# TODO H1: Make sure this PixelCel usage is right
 		var cel: PixelCel = frame.cels[cel_ind]
+
 		if Global.current_project.layers[layer_i].visible:
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.image)
