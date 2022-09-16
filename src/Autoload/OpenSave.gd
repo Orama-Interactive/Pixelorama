@@ -515,10 +515,11 @@ func open_image_as_spritesheet_layer(
 	project.undo_redo.commit_action()
 
 
-func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> void:
+func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void:
 	# TODO H1: What should happen if the layer_index isn't a PixelLayer?
 	# 			Option 1: Disable OK button and show red message saying to choose a Pixel Layer
 	#			Option 2: Replace spinbox with an option list that contains all Pixel Layers (maybe better UX too)
+	# TODO H0: Make work after refactor (Its directly setting frames, and the cel button doesn't' get updated)
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 

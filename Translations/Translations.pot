@@ -313,7 +313,7 @@ msgstr ""
 msgid "New frame"
 msgstr ""
 
-msgid "Replace frame"
+msgid "Replace cel"
 msgstr ""
 
 msgid "New layer"

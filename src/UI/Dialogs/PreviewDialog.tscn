@@ -168,33 +168,33 @@ margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 max_value = 0.0
 
-[node name="ReplaceFrameOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="ReplaceCelOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
 margin_left = 155.0
 margin_right = 427.0
 margin_bottom = 24.0
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ReplaceFrameOptions"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ReplaceCelOptions"]
 margin_top = 5.0
 margin_right = 53.0
 margin_bottom = 19.0
 text = "At layer:"
 
-[node name="AtLayerSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/ReplaceFrameOptions"]
+[node name="AtLayerSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/ReplaceCelOptions"]
 margin_left = 57.0
 margin_right = 131.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 max_value = 0.0
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/ReplaceFrameOptions"]
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/ReplaceCelOptions"]
 margin_left = 135.0
 margin_top = 5.0
 margin_right = 194.0
 margin_bottom = 19.0
 text = "At frame:"
 
-[node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/ReplaceFrameOptions"]
+[node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/ReplaceCelOptions"]
 margin_left = 198.0
 margin_right = 272.0
 margin_bottom = 24.0
