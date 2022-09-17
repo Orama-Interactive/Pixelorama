@@ -3,9 +3,9 @@ extends Button
 
 const HIERARCHY_DEPTH_PIXEL_SHIFT = 8
 
-var layer := 0
-
 export var hide_expand_button := true
+
+var layer := 0
 
 onready var expand_button: BaseButton = find_node("ExpandButton")
 onready var visibility_button: BaseButton = find_node("VisibilityButton")
@@ -178,7 +178,7 @@ func _on_LinkButton_pressed() -> void:
 			Global.current_project.frames[Global.current_project.current_frame]
 		)
 		var container = Global.frames_container.get_child(
-			Global.frames_container.get_child_count() - 1 - Global.current_project.current_layer
+			Global.frames_container.get_child_count() - 1 - layer
 		)
 		container.get_child(Global.current_project.current_frame).button_setup()
 
