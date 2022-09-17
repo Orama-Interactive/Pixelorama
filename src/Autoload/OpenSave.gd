@@ -428,12 +428,12 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 			cropped_image.convert(Image.FORMAT_RGBA8)
 			frame.cels.append(PixelCel.new(cropped_image, 1))
 
-			# TODO L: This for loop doesn't need to exist (its adding cels to layers that never exist):
-			for _i in range(1, project.layers.size()):
-				var empty_sprite := Image.new()
-				empty_sprite.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-				empty_sprite.fill(Color(0, 0, 0, 0))
-				frame.cels.append(PixelCel.new(empty_sprite, 1))
+			# TODO L0: This for loop doesn't need to exist (its adding cels to layers that never exist):
+#			for _i in range(1, project.layers.size()):
+#				var empty_sprite := Image.new()
+#				empty_sprite.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+#				empty_sprite.fill(Color(0, 0, 0, 0))
+#				frame.cels.append(PixelCel.new(empty_sprite, 1))
 
 			project.frames.append(frame)
 
@@ -468,7 +468,7 @@ func open_image_as_spritesheet_layer(
 	var frame_indices: Array
 	if new_frames_size > project.frames.size():
 		var required_frames = new_frames_size - project.frames.size()
-		# TODO L: Is adding the new frames starting after the current frame right? (Maybe its better to start after the last frame)
+		# TODO L0: Is adding the new frames starting after the current frame right? (Maybe its better to start after the last frame)
 		frame_indices= range(project.current_frame + 1, project.current_frame + required_frames + 1)
 		for i in required_frames:
 			var new_frame := Frame.new()
@@ -498,7 +498,7 @@ func open_image_as_spritesheet_layer(
 		else:
 			cels.append(layer.new_empty_cel())
 
-	# TODO L: Maybe this is the better undo/redo order (As sometimes the do and undo steps can't be in the same order like here), should everything be made consistent with this?
+	# TODO L0: Maybe this is the better undo/redo order (As sometimes the do and undo steps can't be in the same order like here), should everything be made consistent with this?
 	project.undo_redo.add_do_property(project, "current_frame", new_frames_size - 1)
 	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
 	project.undo_redo.add_do_method(project, "add_frames", frames, frame_indices)

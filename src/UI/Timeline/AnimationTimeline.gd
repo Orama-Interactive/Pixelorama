@@ -38,7 +38,7 @@ func _ready() -> void:
 	find_node("EndSpacer").size_flags_horizontal = SIZE_EXPAND_FILL
 	timeline_scroll.size_flags_horizontal = SIZE_FILL
 
-# TODO L: See if these two should be kept or done another way:
+# TODO Later: See if these two should be kept or done another way:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
 		drag_highlight.hide()
@@ -264,7 +264,7 @@ func delete_frames(frames := []) -> void:
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
-# TODO L: Is there any point in frame here being a func parameter? Same with _on_DeleteFrame_presssed above (and maybe more)
+# TODO L0: Is there any point in frame here being a func parameter? Same with _on_DeleteFrame_presssed above (and maybe more)
 func _on_CopyFrame_pressed(frame := -1) -> void:
 	var frames := []
 	for cel in Global.current_project.selected_cels:
@@ -743,8 +743,6 @@ func _on_MergeDownLayer_pressed() -> void:
 	project.undo_redo.create_action("Merge Layer")
 
 	for f in project.frames:
-		# TODO Later: top_image here doesn't really need to be a copy if there isn't layer transparency
-		#			though this probably will be rewriten with blend modes anyway...
 		var top_image := Image.new()
 		top_image.copy_from(f.cels[top_layer.index].image)
 

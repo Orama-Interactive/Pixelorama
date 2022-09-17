@@ -143,8 +143,6 @@ func _save_layer_name(new_name: String) -> void:
 
 
 func _on_ExpandButton_pressed():
-	# TODO L: What should happen when the current_layer or selected_cels are children of a layer you collapse?
-	#		Should the current_layer/selection move to ones aren't collapsed? Maybe add to github list of possible later changes
 	Global.current_project.layers[layer].expanded = !Global.current_project.layers[layer].expanded
 	_update_buttons_all_layers()
 
@@ -256,7 +254,7 @@ func can_drop_data(_pos, data) -> bool:
 
 func drop_data(_pos, data) -> void:
 	var drop_layer: int = data[1]
-	var project = Global.current_project # TODO L: perhaps having a project variable for the enitre class would be nice (also for cel/frame buttons)
+	var project = Global.current_project
 
 	project.undo_redo.create_action("Change Layer Order")
 	var layers: Array = project.layers # This shouldn't be modified directly

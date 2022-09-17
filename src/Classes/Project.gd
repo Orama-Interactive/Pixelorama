@@ -47,7 +47,6 @@ var file_format: int = Export.FileFormat.PNG
 var was_exported := false
 var export_overwrite := false
 
-# TODO L: Perhaps animation_tags could get a similar refactoring (In a later PR)
 var animation_tag_node = preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
 
