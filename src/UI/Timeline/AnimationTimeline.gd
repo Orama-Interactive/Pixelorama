@@ -181,13 +181,13 @@ func add_frame() -> void:
 
 
 func _on_DeleteFrame_pressed() -> void:
-	var frames := []
+	var indices := []
 	for cel in Global.current_project.selected_cels:
 		var frame: int = cel[0]
-		if not frame in frames:
-			frames.append(frame)
-	frames.sort()
-	delete_frames(frames)
+		if not frame in indices:
+			indices.append(frame)
+	indices.sort()
+	delete_frames(indices)
 
 
 func delete_frames(indices := []) -> void:
