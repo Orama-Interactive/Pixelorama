@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-09-16 21:26\n"
+"PO-Revision-Date: 2022-09-17 04:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -698,17 +698,18 @@ msgid "Gradient Map"
 msgstr "グラデーションマップ"
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "等しいパーツに分割"
 
 msgid "Parts:"
-msgstr ""
+msgstr "パーツ:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "最後にポイントを追加"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr ""
+msgstr "これが有効な場合、最後のポイントはグラデーションの最後に追加されます。\n"
+"グラデーションを一定の補間に変換したい場合は、これを無効にします。"
 
 msgid "Linear"
 msgstr "線形"
@@ -1991,7 +1992,7 @@ msgid "Close"
 msgstr "閉じる"
 
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 msgid "Discard All"
 msgstr "すべて破棄"
