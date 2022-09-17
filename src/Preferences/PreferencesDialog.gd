@@ -90,6 +90,7 @@ onready var right_side: VBoxContainer = $HSplitContainer/ScrollContainer/VBoxCon
 onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
 onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
 onready var shrink_label: Label = right_side.get_node("Interface/ShrinkContainer/ShrinkLabel")
+onready var shrink_h_slider: HSlider = $"%ShrinkHSlider"
 onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
 onready var shortcuts: Control = right_side.get_node("Shortcuts")
 onready var extensions: BoxContainer = right_side.get_node("Extensions")
@@ -111,6 +112,7 @@ class Preference:
 func _ready() -> void:
 	# Replace OK since preference changes are being applied immediately, not after OK confirmation
 	get_ok().text = tr("Close")
+	shrink_h_slider.value = Global.shrink  # In case shrink is not equal to 1
 
 	for child in shortcuts.get_children():
 		if not child is AcceptDialog:

@@ -154,6 +154,7 @@ text = "1"
 align = 2
 
 [node name="ShrinkHSlider" type="HSlider" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer"]
+unique_name_in_owner = true
 margin_left = 142.0
 margin_right = 446.0
 margin_bottom = 16.0
