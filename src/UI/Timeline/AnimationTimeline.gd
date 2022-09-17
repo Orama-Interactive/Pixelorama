@@ -180,10 +180,10 @@ func add_frame() -> void:
 	project.undo_redo.commit_action()
 
 
-func _on_DeleteFrame_pressed(frame := -1) -> void:
+func _on_DeleteFrame_pressed() -> void:
 	var frames := []
 	for cel in Global.current_project.selected_cels:
-		frame = cel[0]
+		var frame: int = cel[0]
 		if not frame in frames:
 			frames.append(frame)
 	frames.sort()
@@ -264,11 +264,11 @@ func delete_frames(frames := []) -> void:
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
-# TODO L0: Is there any point in frame here being a func parameter? Same with _on_DeleteFrame_presssed above (and maybe more)
-func _on_CopyFrame_pressed(frame := -1) -> void:
+
+func _on_CopyFrame_pressed() -> void:
 	var frames := []
 	for cel in Global.current_project.selected_cels:
-		frame = cel[0]
+		var frame: int = cel[0]
 		if not frame in frames:
 			frames.append(frame)
 	frames.sort()
