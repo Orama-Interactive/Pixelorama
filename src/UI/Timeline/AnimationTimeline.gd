@@ -183,9 +183,9 @@ func add_frame() -> void:
 func _on_DeleteFrame_pressed() -> void:
 	var indices := []
 	for cel in Global.current_project.selected_cels:
-		var frame: int = cel[0]
-		if not frame in indices:
-			indices.append(frame)
+		var f: int = cel[0]
+		if not f in indices:
+			indices.append(f)
 	indices.sort()
 	delete_frames(indices)
 
@@ -258,24 +258,24 @@ func delete_frames(indices := []) -> void:
 
 
 func _on_CopyFrame_pressed() -> void:
-	var frames := []
+	var indices := []
 	for cel in Global.current_project.selected_cels:
-		var frame: int = cel[0]
-		if not frame in frames:
-			frames.append(frame)
-	frames.sort()
-	copy_frames(frames)
+		var f: int = cel[0]
+		if not f in indices:
+			indices.append(f)
+	indices.sort()
+	copy_frames(indices)
 
 
-func copy_frames(frames := []) -> void:
+func copy_frames(indices := []) -> void:
 	var project: Project = Global.current_project
 
-	if frames.size() == 0:
-		frames.append(project.current_frame)
+	if indices.size() == 0:
+		indices.append(project.current_frame)
 
 	var new_layers: Array = project.duplicate_layers()
 	var copied_frames := []
-	var copied_indices := range(frames[-1] + 1, frames[-1] + 1 + frames.size())
+	var copied_indices := range(indices[-1] + 1, indices[-1] + 1 + indices.size())
 
 	var new_animation_tags := project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
@@ -288,11 +288,11 @@ func copy_frames(frames := []) -> void:
 			new_animation_tags[i].to
 		)
 
-	for frame in frames:
+	for f in indices:
 		var new_frame := Frame.new()
 		copied_frames.append(new_frame)
 
-		var prev_frame: Frame = project.frames[frame]
+		var prev_frame: Frame = project.frames[f]
 
 		new_frame.duration = prev_frame.duration
 		for l_i in range(new_layers.size()):
@@ -300,7 +300,7 @@ func copy_frames(frames := []) -> void:
 			var new_cels_linked := true if new_layers[l_i].get("new_cels_linked") else false
 
 			# Copy the cel, create new cel content if new cels aren't linked
-			new_frame.cels.append(new_layers[l_i].copy_cel(frame, new_cels_linked))
+			new_frame.cels.append(new_layers[l_i].copy_cel(f, new_cels_linked))
 
 			if new_cels_linked:  # If the link button is pressed
 				new_layers[l_i].linked_cels.append(new_frame)
@@ -309,9 +309,9 @@ func copy_frames(frames := []) -> void:
 
 		# Loop through the tags to see if the frame is in one
 		for tag in new_animation_tags:
-			if frames[-1] + 1 >= tag.from && frames[-1] + 1 <= tag.to:
+			if indices[-1] + 1 >= tag.from && indices[-1] + 1 <= tag.to:
 				tag.to += 1
-			elif frames[-1] + 1 < tag.from:
+			elif indices[-1] + 1 < tag.from:
 				tag.from += 1
 				tag.to += 1
 
@@ -323,8 +323,8 @@ func copy_frames(frames := []) -> void:
 	project.undo_redo.add_undo_property(project, "layers", project.layers)
 	project.undo_redo.add_do_method(project, "add_frames", copied_frames, copied_indices)
 	project.undo_redo.add_undo_method(project, "remove_frames", copied_indices)
-	project.undo_redo.add_do_property(project, "current_frame", frames[-1] + 1)
-	project.undo_redo.add_undo_property(project, "current_frame", frames[-1])
+	project.undo_redo.add_do_property(project, "current_frame", indices[-1] + 1)
+	project.undo_redo.add_undo_property(project, "current_frame", indices[-1])
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.commit_action()
