@@ -181,10 +181,6 @@ func can_drop_data(_pos, data) -> bool:
 	if typeof(data) == TYPE_ARRAY and data[0] == "Cel":
 		var drag_frame = data[1]
 		var drag_layer = data[2]
-		# TODO Later: Is this part really right? Should't it only matter if they're linked, and we're changing layers?
-		#		It would need to add linked cel logic to project move/swap_cel though
-		#		I THINK I WILL CHANGE THIS WITH FUTURE LINKED CEL UPDATE (might not need move/swap_cel logic)
-		# If the cel we're dragging or the cel we are targeting are linked, don't allow dragging
 		if Global.current_project.layers[layer] is GroupLayer or not (
 			Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels
 			or (
@@ -192,7 +188,6 @@ func can_drop_data(_pos, data) -> bool:
 				in Global.current_project.layers[drag_layer].linked_cels
 			)
 		):
-			# TODO Later: This may be able to be combined with the previous condition depending on the the last TODO
 			if not (drag_frame == frame and drag_layer == layer):
 				var region: Rect2
 				if Input.is_action_pressed("ctrl") or layer != drag_layer: # Swap cels

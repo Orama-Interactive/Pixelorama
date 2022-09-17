@@ -8,8 +8,6 @@ var image_texture: ImageTexture
 
 # Methods to Override:
 
-# TODO Later: Check if copying cels can use the content methods (Do during/after Linked Cel refactor)
-
 # The content methods deal with the unique content of each cel type. For example, an Image for
 # PixelLayers, or a Dictionary of settings for a procedural layer type, and null for Groups.
 # Can be used fo linking/unlinking cels, copying, and deleting content

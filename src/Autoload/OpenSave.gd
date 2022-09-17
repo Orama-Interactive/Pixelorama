@@ -459,7 +459,6 @@ func open_image_as_spritesheet_layer(
 	var frame_indices: Array
 	if new_frames_size > project.frames.size():
 		var required_frames = new_frames_size - project.frames.size()
-		# TODO LAsk: Is adding the new frames starting after the current frame right? (Maybe its better to start after the last frame)
 		frame_indices= range(project.current_frame + 1, project.current_frame + required_frames + 1)
 		for i in required_frames:
 			var new_frame := Frame.new()
@@ -489,7 +488,6 @@ func open_image_as_spritesheet_layer(
 		else:
 			cels.append(layer.new_empty_cel())
 
-	# TODO Later: Maybe this is the better undo/redo order (As sometimes the do and undo steps can't be in the same order like here), should everything be made consistent with this?
 	project.undo_redo.add_do_property(project, "current_frame", new_frames_size - 1)
 	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
 	project.undo_redo.add_do_method(project, "add_frames", frames, frame_indices)

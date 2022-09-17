@@ -406,7 +406,7 @@ func deserialize(dict: Dictionary) -> void:
 		fps = dict.fps
 	_deserialize_metadata(self, dict)
 
-# TODO LAask: Consider how these are used:
+
 func _serialize_metadata(object: Object) -> Dictionary:
 	var metadata := {}
 	for meta in object.get_meta_list():

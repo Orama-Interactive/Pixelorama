@@ -17,7 +17,7 @@ func is_a_parent_of(layer: BaseLayer) -> bool:
 		return is_a_parent_of(layer.parent)
 	return false
 
-# TODO Later: Consider going backwards in get_children function, to allow breaking (test performance)
+
 func get_children(recursive: bool) -> Array:
 	var children := []
 	if recursive:
@@ -82,7 +82,7 @@ func get_layer_path() -> String:
 # Methods to Override:
 
 func serialize() -> Dictionary:
-	assert(index == project.layers.find(self)) # TODO Lask: remove once sure index is synced properly
+	assert(index == project.layers.find(self))
 	return {
 		"name": name,
 		"visible": visible,
