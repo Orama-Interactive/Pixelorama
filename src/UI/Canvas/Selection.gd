@@ -642,8 +642,9 @@ func _get_selected_draw_images() -> Array:  # Array of Images
 	var images := []
 	var project: Project = Global.current_project
 	for cel_index in project.selected_cels:
-		# TODO: Figure this out (Issue when pasting selection to group cel)
-		var cel: PixelCel = project.frames[cel_index[0]].cels[cel_index[1]]
+		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+		if not cel is PixelCel:
+			continue
 		if project.layers[cel_index[1]].can_layer_get_drawn():
 			images.append(cel.image)
 	return images
