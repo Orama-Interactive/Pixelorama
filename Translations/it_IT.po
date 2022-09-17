@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-09-16 21:26\n"
+"PO-Revision-Date: 2022-09-17 02:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -698,17 +698,18 @@ msgid "Gradient Map"
 msgstr "Mappa Gradiente"
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "Dividi in parti uguali"
 
 msgid "Parts:"
-msgstr ""
+msgstr "Parti:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "Aggiungere punto alla fine"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr ""
+msgstr "Se abilitata, l' ultimo punto viene aggiunto alla fine del gradiente\n"
+"Disabilitare questa opzione se si desidera convertire il gradiente per avere un'interpolazione costante, in modo che l'ultimo colore venga preso in conto."
 
 msgid "Linear"
 msgstr "Lineare"
@@ -1991,7 +1992,7 @@ msgid "Close"
 msgstr "Chiudi"
 
 msgid "Delete"
-msgstr ""
+msgstr "Cancellare"
 
 msgid "Discard All"
 msgstr "Scarta Tutto"
