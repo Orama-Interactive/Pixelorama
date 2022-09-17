@@ -55,7 +55,7 @@ func is_expanded_in_hierarchy() -> bool:
 		return parent.expanded and parent.is_expanded_in_hierarchy()
 	return true
 
-# TODO H2: Search for layer visbility/locked checks that should be changed to the hierarchy ones:
+
 func is_visible_in_hierarchy() -> bool:
 	if is_instance_valid(parent) and visible:
 		return parent.is_visible_in_hierarchy()

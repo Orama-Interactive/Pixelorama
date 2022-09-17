@@ -411,7 +411,7 @@ func blend_selected_cels(image: Image, frame: Frame, origin: Vector2 = Vector2(0
 
 		var cel: PixelCel = frame.cels[cel_ind]
 
-		if Global.current_project.layers[layer_i].visible:
+		if Global.current_project.layers[layer_i].is_visible_in_hierarchy():
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.image)
 			cel_image.lock()
