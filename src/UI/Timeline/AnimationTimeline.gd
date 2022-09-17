@@ -38,15 +38,10 @@ func _ready() -> void:
 	find_node("EndSpacer").size_flags_horizontal = SIZE_EXPAND_FILL
 	timeline_scroll.size_flags_horizontal = SIZE_FILL
 
-# TODO Later: See if these two should be kept or done another way:
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
 		drag_highlight.hide()
-
-func can_drop_data(_position, _data) -> bool:
-	drag_highlight.hide()
-	print ("can drag?")
-	return false
 
 
 func _input(event: InputEvent) -> void:
