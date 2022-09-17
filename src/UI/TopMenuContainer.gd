@@ -89,7 +89,15 @@ func update_recent_projects_submenu() -> void:
 func _setup_edit_menu() -> void:
 	# Order as in Global.EditMenu enum
 	var edit_menu_items := [
-		"Undo", "Redo", "Copy", "Cut", "Paste", "Delete", "New Brush", "Preferences"
+		"Undo",
+		"Redo",
+		"Copy",
+		"Cut",
+		"Paste",
+		"Paste in Place",
+		"Delete",
+		"New Brush",
+		"Preferences"
 	]
 	var edit_menu: PopupMenu = edit_menu_button.get_popup()
 	var i := 0
@@ -401,6 +409,8 @@ func edit_menu_id_pressed(id: int) -> void:
 			Global.canvas.selection.cut()
 		Global.EditMenu.PASTE:
 			Global.canvas.selection.paste()
+		Global.EditMenu.PASTE_IN_PLACE:
+			Global.canvas.selection.paste(true)
 		Global.EditMenu.DELETE:
 			Global.canvas.selection.delete()
 		Global.EditMenu.NEW_BRUSH:
