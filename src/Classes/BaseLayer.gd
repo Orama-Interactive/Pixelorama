@@ -9,6 +9,7 @@ var parent: BaseLayer
 var project
 var index: int
 
+
 # Returns true if this is a direct or indirect parent of layer
 func is_a_parent_of(layer: BaseLayer) -> bool:
 	if layer.parent == self:
@@ -79,7 +80,9 @@ func get_layer_path() -> String:
 		return str(parent.get_layer_path(), "/", name)
 	return name
 
+
 # Methods to Override:
+
 
 func serialize() -> Dictionary:
 	assert(index == project.layers.find(self))
@@ -113,6 +116,7 @@ func new_empty_cel() -> BaseCel:
 
 func copy_cel(_frame: int, _linked: bool) -> BaseCel:
 	return null
+
 
 # Used to copy all cels with cel linking properly set up between this set of copies:
 func copy_all_cels() -> Array:

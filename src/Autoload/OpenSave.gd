@@ -194,7 +194,7 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 	if file_major_version >= 0 and file_minor_version > 6:
 		var global_layer_line := file.get_line()
 		while global_layer_line == ".":
-			var layer_dict:= {
+			var layer_dict := {
 				"name": file.get_line(),
 				"visible": file.get_8(),
 				"locked": file.get_8(),
@@ -434,7 +434,6 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 func open_image_as_spritesheet_layer(
 	_path: String, image: Image, file_name: String, horizontal: int, vertical: int, start_frame: int
 ) -> void:
-
 	# Data needed to slice images
 	horizontal = min(horizontal, image.get_size().x)
 	vertical = min(vertical, image.get_size().y)
@@ -451,22 +450,26 @@ func open_image_as_spritesheet_layer(
 	# Initialize undo mechanism
 	project.undos += 1
 	project.undo_redo.create_action("Add Spritesheet Layer")
-	var new_layers: Array = project.layers.duplicate() # Used for updating linked_cels lists
+	var new_layers: Array = project.layers.duplicate()  # Used for updating linked_cels lists
 
 	# Create new frames (if needed)
-	var new_frames_size = max(project.frames.size(), (start_frame + (vertical * horizontal)))
+	var new_frames_size = max(project.frames.size(), start_frame + (vertical * horizontal))
 	var frames := []
 	var frame_indices: Array
 	if new_frames_size > project.frames.size():
 		var required_frames = new_frames_size - project.frames.size()
-		frame_indices= range(project.current_frame + 1, project.current_frame + required_frames + 1)
+		frame_indices = range(
+			project.current_frame + 1, project.current_frame + required_frames + 1
+		)
 		for i in required_frames:
 			var new_frame := Frame.new()
 			for l_i in range(project.layers.size()):  # Create as many cels as there are layers
 				new_frame.cels.append(project.layers[l_i].new_empty_cel())
 				if new_layers[l_i].get("new_cels_linked"):
 					new_layers[l_i].linked_cels.append(new_frame)
-					new_frame.cels[l_i].set_content(new_layers[l_i].linked_cels[0].cels[l_i].get_content())
+					new_frame.cels[l_i].set_content(
+						new_layers[l_i].linked_cels[0].cels[l_i].get_content()
+					)
 					new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
 			frames.append(new_frame)
 

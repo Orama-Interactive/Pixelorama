@@ -12,8 +12,8 @@ var has_changed := false setget _has_changed_changed
 # frames and layers Arrays should generally only be modified directly when
 # opening/creating a project. When modifiying the current project, use
 # the add/remove/move/swap_frames/layers methods
-var frames := [] # Array of Frames (that contain Cels)
-var layers := [] # Array of Layers
+var frames := []  # Array of Frames (that contain Cels)
+var layers := []  # Array of Layers
 var current_frame := 0 setget _frame_changed
 var current_layer := 0 setget _layer_changed
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
@@ -465,9 +465,7 @@ func _frame_changed(value: int) -> void:
 
 		var container_child_count: int = Global.frames_container.get_child_count()
 		if layer < container_child_count:
-			var container = Global.frames_container.get_child(
-				container_child_count - 1 - layer
-			)
+			var container = Global.frames_container.get_child(container_child_count - 1 - layer)
 			if frame < container.get_child_count():
 				var cel_button = container.get_child(frame)
 				cel_button.pressed = true
@@ -515,19 +513,22 @@ func toggle_layer_buttons() -> void:
 		return
 	var child_count: int = layers[current_layer].get_child_count(true)
 
-	Global.disable_button(Global.remove_layer_button,
-		layers[current_layer].is_locked_in_hierarchy()
-		or layers.size() == child_count + 1
+	Global.disable_button(
+		Global.remove_layer_button,
+		layers[current_layer].is_locked_in_hierarchy() or layers.size() == child_count + 1
 	)
 	Global.disable_button(Global.move_up_layer_button, current_layer == layers.size() - 1)
-	Global.disable_button(Global.move_down_layer_button,
-		current_layer == child_count
-		and not is_instance_valid(layers[current_layer].parent)
+	Global.disable_button(
+		Global.move_down_layer_button,
+		current_layer == child_count and not is_instance_valid(layers[current_layer].parent)
 	)
-	Global.disable_button(Global.merge_down_layer_button,
-		current_layer == child_count
-		or layers[current_layer] is GroupLayer
-		or layers[current_layer - 1] is GroupLayer
+	Global.disable_button(
+		Global.merge_down_layer_button,
+		(
+			current_layer == child_count
+			or layers[current_layer] is GroupLayer
+			or layers[current_layer - 1] is GroupLayer
+		)
 	)
 
 
@@ -598,7 +599,7 @@ func duplicate_layers() -> Array:
 		new_layers[i] = new_layers[i].copy()
 	for l in new_layers:
 		if is_instance_valid(l.parent):
-			l.parent = new_layers[l.parent.index] # Update the parent to the new copy of the parent
+			l.parent = new_layers[l.parent.index]  # Update the parent to the new copy of the parent
 	return new_layers
 
 
@@ -629,6 +630,7 @@ func can_pixel_get_drawn(
 # These allow you to add/remove/move/swap frames/layers/cels. It updates the Animation Timeline
 # UI, and updates indices. These are designed to be reversible, meaning that to undo an add, you
 # use remove, and vise versa. To undo a move or swap, use move or swap with the paramaters swapped.
+
 
 func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be in ascending order
 	Global.canvas.selection.transform_content_confirm()
@@ -748,12 +750,12 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	var removed_layers := []
-	var removed_cels := [] # 2D array of cels (an array for each layer removed)
+	var removed_cels := []  # 2D array of cels (an array for each layer removed)
 
 	for i in from_indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
 		removed_layers.append(layers.pop_at(from_indices[i] - i))
-		removed_layers[i].parent = to_parents[i] # parents must be set before UI created in next loop
+		removed_layers[i].parent = to_parents[i]  # parents must be set before UI created in next loop
 		removed_cels.append([])
 		for frame in frames:
 			removed_cels[i].append(frame.cels.pop_at(from_indices[i] - i))
@@ -781,12 +783,12 @@ func swap_layers(a: Dictionary, b: Dictionary) -> void:
 	selected_cels.clear()
 	var a_layers := []
 	var b_layers := []
-	var a_cels := [] # 2D array of cels (an array for each layer removed)
-	var b_cels := [] # 2D array of cels (an array for each layer removed)
+	var a_cels := []  # 2D array of cels (an array for each layer removed)
+	var b_cels := []  # 2D array of cels (an array for each layer removed)
 	for i in a.from.size():
 		a_layers.append(layers.pop_at(a.from[i] - i))
 		Global.animation_timeline.project_layer_removed(a.from[i] - i)
-		a_layers[i].parent = a.to_parents[i] # All parents must be set early, before creating buttons
+		a_layers[i].parent = a.to_parents[i]  # All parents must be set early, before creating buttons
 		a_cels.append([])
 		for frame in frames:
 			a_cels[i].append(frame.cels.pop_at(a.from[i] - i))
@@ -794,7 +796,7 @@ func swap_layers(a: Dictionary, b: Dictionary) -> void:
 		var index = (b.from[i] - i) if a.from[0] > b.from[0] else (b.from[i] - i - a.from.size())
 		b_layers.append(layers.pop_at(index))
 		Global.animation_timeline.project_layer_removed(index)
-		b_layers[i].parent = b.to_parents[i] # All parents must be set early, before creating buttons
+		b_layers[i].parent = b.to_parents[i]  # All parents must be set early, before creating buttons
 		b_cels.append([])
 		for frame in frames:
 			b_cels[i].append(frame.cels.pop_at(index))
@@ -827,11 +829,11 @@ func move_cel(from_frame: int, to_frame: int, layer: int) -> void:
 	selected_cels.clear()
 	var cel: BaseCel = frames[from_frame].cels[layer]
 	if from_frame < to_frame:
-		for f in range(from_frame, to_frame): # Forward range
-			frames[f].cels[layer] = frames[f + 1].cels[layer] # Move left
+		for f in range(from_frame, to_frame):  # Forward range
+			frames[f].cels[layer] = frames[f + 1].cels[layer]  # Move left
 	else:
-		for f in range(from_frame, to_frame, -1): # Backward range
-			frames[f].cels[layer] = frames[f - 1].cels[layer] # Move right
+		for f in range(from_frame, to_frame, -1):  # Backward range
+			frames[f].cels[layer] = frames[f - 1].cels[layer]  # Move right
 	frames[to_frame].cels[layer] = cel
 	Global.animation_timeline.project_cel_removed(from_frame, layer)
 	Global.animation_timeline.project_cel_added(to_frame, layer)

@@ -8,6 +8,7 @@ var image_texture: ImageTexture
 
 # Methods to Override:
 
+
 # The content methods deal with the unique content of each cel type. For example, an Image for
 # PixelLayers, or a Dictionary of settings for a procedural layer type, and null for Groups.
 # Can be used fo linking/unlinking cels, copying, and deleting content
@@ -23,6 +24,7 @@ func set_content(_content) -> void:
 # (using the old content from get_content as undo data)
 func create_empty_content():
 	return []
+
 
 # Can be used for creating copy content for copying cels or unlinking cels
 func copy_content():

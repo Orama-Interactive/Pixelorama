@@ -6,12 +6,13 @@ extends BaseCel
 
 var image: Image setget image_changed
 
+
 func _init(_image := Image.new(), _opacity := 1.0, _image_texture: ImageTexture = null) -> void:
 	if _image_texture:
 		image_texture = _image_texture
 	else:
 		image_texture = ImageTexture.new()
-	self.image = _image # Set image and call setter
+	self.image = _image  # Set image and call setter
 	opacity = _opacity
 
 
@@ -38,7 +39,9 @@ func create_empty_content():
 
 func copy_content():
 	var copy_image := Image.new()
-	copy_image.create_from_data(image.get_width(), image.get_height(), false, Image.FORMAT_RGBA8, image.get_data())
+	copy_image.create_from_data(
+		image.get_width(), image.get_height(), false, Image.FORMAT_RGBA8, image.get_data()
+	)
 	return copy_image
 
 

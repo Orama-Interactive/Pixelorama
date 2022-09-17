@@ -5,12 +5,14 @@ extends BaseLayer
 var new_cels_linked := false
 var linked_cels := []  # Array of Frames
 
+
 func _init(_project, _name := "") -> void:
 	project = _project
 	name = _name
 
 
 # Overridden Methods:
+
 
 func serialize() -> Dictionary:
 	var dict = .serialize()
