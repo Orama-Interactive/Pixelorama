@@ -459,7 +459,7 @@ func open_image_as_spritesheet_layer(
 	var frame_indices: Array
 	if new_frames_size > project.frames.size():
 		var required_frames = new_frames_size - project.frames.size()
-		# TODO L0: Is adding the new frames starting after the current frame right? (Maybe its better to start after the last frame)
+		# TODO LAsk: Is adding the new frames starting after the current frame right? (Maybe its better to start after the last frame)
 		frame_indices= range(project.current_frame + 1, project.current_frame + required_frames + 1)
 		for i in required_frames:
 			var new_frame := Frame.new()
