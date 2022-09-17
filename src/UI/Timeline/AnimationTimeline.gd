@@ -200,8 +200,7 @@ func delete_frames(frames := []) -> void:
 	elif frames.size() == 0:
 		frames.append(project.current_frame)
 
-	var new_frames: Array = project.frames.duplicate() # TODO H: Is new_frames here still REALLY being used?
-	var current_frame := project.current_frame
+	var current_frame: int = min(project.current_frame, project.frames.size() - frames.size() - 1)
 	var new_layers: Array = project.duplicate_layers()
 	var frame_correction := 0  # Only needed for tag adjustment
 
@@ -217,11 +216,6 @@ func delete_frames(frames := []) -> void:
 		)
 
 	for frame in frames:
-		var frame_to_delete: Frame = project.frames[frame]
-		new_frames.erase(frame_to_delete)
-		if current_frame > 0 && current_frame == new_frames.size():  # If it's the last frame
-			current_frame -= 1
-
 		# Check if one of the cels of the frame is linked
 		# if they are, unlink them too
 		# this prevents removed cels being kept in linked memory
