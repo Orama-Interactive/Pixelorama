@@ -620,7 +620,7 @@ func _on_AddGroup_pressed() -> void:
 
 func _on_CloneLayer_pressed() -> void:
 	var project: Project = Global.current_project
-	var source_layers: Array = project.layers[project.current_layer].get_children_recursive()
+	var source_layers: Array = project.layers[project.current_layer].get_children(true)
 	source_layers.append(project.layers[project.current_layer])
 
 	var clones := [] # Array of Layers
@@ -656,7 +656,7 @@ func _on_RemoveLayer_pressed() -> void:
 	if project.layers.size() == 1:
 		return
 
-	var layers: Array = project.layers[project.current_layer].get_children_recursive()
+	var layers: Array = project.layers[project.current_layer].get_children(true)
 	layers.append(project.layers[project.current_layer])
 	var indices := []
 	for l in layers:
@@ -683,7 +683,7 @@ func _on_RemoveLayer_pressed() -> void:
 func change_layer_order(up: bool) -> void:
 	var project: Project = Global.current_project
 	var layer: BaseLayer = project.layers[project.current_layer]
-	var child_count = layer.get_children_recursive().size()
+	var child_count = layer.get_child_count(true)
 	var from_indices := range(layer.index - child_count, layer.index + 1)
 	var from_parents := []
 	for l in from_indices:

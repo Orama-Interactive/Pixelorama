@@ -17,22 +17,31 @@ func is_a_parent_of(layer: BaseLayer) -> bool:
 		return is_a_parent_of(layer.parent)
 	return false
 
-# TODO Later: Consider going backwards in get_children functions, to allow breaking (test performance)
-# TODO L0: Consider combining these into one func with bool, and adding a get_child_count func
-func get_children_direct() -> Array:
+# TODO Later: Consider going backwards in get_children function, to allow breaking (test performance)
+func get_children(recursive: bool) -> Array:
 	var children := []
-	for i in range(index):
-		if project.layers[i].parent == self:
-			children.append(project.layers[i])
+	if recursive:
+		for i in index:
+			if is_a_parent_of(project.layers[i]):
+				children.append(project.layers[i])
+	else:
+		for i in index:
+			if project.layers[i].parent == self:
+				children.append(project.layers[i])
 	return children
 
 
-func get_children_recursive() -> Array:
-	var children := []
-	for i in range(index):
-		if is_a_parent_of(project.layers[i]):
-			children.append(project.layers[i])
-	return children
+func get_child_count(recursive: bool) -> int:
+	var count := 0
+	if recursive:
+		for i in index:
+			if is_a_parent_of(project.layers[i]):
+				count += 1
+	else:
+		for i in index:
+			if project.layers[i].parent == self:
+				count += 1
+	return count
 
 
 func has_children() -> bool:

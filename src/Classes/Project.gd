@@ -513,7 +513,7 @@ func toggle_frame_buttons() -> void:
 func toggle_layer_buttons() -> void:
 	if layers.empty() or current_layer >= layers.size():
 		return
-	var child_count: int = layers[current_layer].get_children_recursive().size()
+	var child_count: int = layers[current_layer].get_child_count(true)
 
 	Global.disable_button(Global.remove_layer_button,
 		layers[current_layer].is_locked_in_hierarchy()

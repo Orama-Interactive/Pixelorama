@@ -191,7 +191,7 @@ func _select_current_layer() -> void:
 func get_drag_data(_position) -> Array:
 	# TODO H1: If keeping this new multi layer drag design, layers here can be reutrned in the array
 	#			instead of layer...
-	var layers := range(layer - Global.current_project.layers[layer].get_children_recursive().size(), layer + 1)
+	var layers := range(layer - Global.current_project.layers[layer].get_child_count(true), layer + 1)
 
 	var box := VBoxContainer.new()
 	for i in layers.size():
@@ -259,7 +259,7 @@ func drop_data(_pos, data) -> void:
 	project.undo_redo.create_action("Change Layer Order")
 	var layers: Array = project.layers # This shouldn't be modified directly
 
-	var drop_from_indices := range(drop_layer - layers[drop_layer].get_children_recursive().size(), drop_layer + 1 )
+	var drop_from_indices := range(drop_layer - layers[drop_layer].get_child_count(true), drop_layer + 1 )
 
 	var drop_from_parents := []
 	for i in range(drop_from_indices.size()):
@@ -268,7 +268,7 @@ func drop_data(_pos, data) -> void:
 	if Input.is_action_pressed("ctrl"): # Swap layers
 		# a and b both need "from", "to", and "to_parents"
 		# a is this layer (and children), b is the dropped layers
-		var a := { "from": range(layer - layers[layer].get_children_recursive().size(), layer + 1) }
+		var a := { "from": range(layer - layers[layer].get_child_count(true), layer + 1) }
 		var b := { "from": drop_from_indices}
 
 		if a.from[0] < b.from[0]:
@@ -314,7 +314,7 @@ func drop_data(_pos, data) -> void:
 			else:
 				# Place under the layer, if it has children, place after its lowest child
 				if layers[layer].has_children():
-					to_index = layers[layer].get_children_recursive()[0].index
+					to_index = layers[layer].get_children(true)[0].index
 
 					if layers[layer].is_a_parent_of(layers[drop_layer]):
 						to_index += drop_from_indices.size()
