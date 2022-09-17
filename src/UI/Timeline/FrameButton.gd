@@ -117,11 +117,11 @@ func get_drag_data(_position) -> Array:
 func can_drop_data(_pos, data) -> bool:
 	if typeof(data) == TYPE_ARRAY:
 		if data[0] == "Frame":
-			if data[1] != frame: # Can't move to same frame
+			if data[1] != frame:  # Can't move to same frame
 				var region: Rect2
-				if Input.is_action_pressed("ctrl"): # Swap frames
+				if Input.is_action_pressed("ctrl"):  # Swap frames
 					region = get_global_rect()
-				else: # Move frames
+				else:  # Move frames
 					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
 						region = _get_region_rect(-0.125, 0.125)
 						region.position.x -= 2  # Container spacing
@@ -140,14 +140,14 @@ func drop_data(_pos, data) -> void:
 	var drop_frame = data[1]
 	var project = Global.current_project
 	project.undo_redo.create_action("Change Frame Order")
-	if Input.is_action_pressed("ctrl"): # Swap frames
+	if Input.is_action_pressed("ctrl"):  # Swap frames
 		project.undo_redo.add_do_method(project, "swap_frame", frame, drop_frame)
 		project.undo_redo.add_undo_method(project, "swap_frame", frame, drop_frame)
-	else: # Move frames
+	else:  # Move frames
 		var to_frame: int
-		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()): # Left
+		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
 			to_frame = frame
-		else: # Right
+		else:  # Right
 			to_frame = frame + 1
 		if drop_frame < frame:
 			to_frame -= 1

@@ -71,6 +71,7 @@ func _ready() -> void:
 
 #	gizmos.append(Gizmo.new(Gizmo.Type.ROTATE)) # Rotation gizmo (temp)
 
+
 func _input(event: InputEvent) -> void:
 	if is_moving_content:
 		if Input.is_action_just_pressed("transformation_confirm"):

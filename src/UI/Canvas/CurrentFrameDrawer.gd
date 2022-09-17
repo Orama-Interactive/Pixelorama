@@ -6,6 +6,9 @@ func _draw() -> void:
 	for i in range(Global.current_project.layers.size()):
 		if current_cels[i] is GroupCel:
 			continue
-		if Global.current_project.layers[i].is_visible_in_hierarchy() and current_cels[i].opacity > 0:
+		if (
+			Global.current_project.layers[i].is_visible_in_hierarchy()
+			and current_cels[i].opacity > 0
+		):
 			var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
 			draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)

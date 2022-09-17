@@ -191,7 +191,7 @@ func delete_frames(indices := []) -> void:
 		return
 
 	if indices.size() == project.frames.size():
-		indices.remove(indices.size() - 1) # Ensure the project has at least 1 frame
+		indices.remove(indices.size() - 1)  # Ensure the project has at least 1 frame
 	elif indices.size() == 0:
 		indices.append(project.current_frame)
 
@@ -299,7 +299,9 @@ func copy_frames(indices := []) -> void:
 
 			if new_cels_linked:  # If the link button is pressed
 				new_layers[l_i].linked_cels.append(new_frame)
-				new_frame.cels[l_i].set_content(new_layers[l_i].linked_cels[0].cels[l_i].get_content())
+				new_frame.cels[l_i].set_content(
+					new_layers[l_i].linked_cels[0].cels[l_i].get_content()
+				)
 				new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
 
 		# Loop through the tags to see if the frame is in one
@@ -397,6 +399,7 @@ func _on_PlayBackwards_toggled(button_pressed: bool) -> void:
 		Global.change_button_texturerect(Global.play_backwards.get_child(0), "play_backwards.png")
 
 	play_animation(button_pressed, false)
+
 
 # Called on each frame of the animation
 func _on_AnimationTimer_timeout() -> void:
@@ -610,8 +613,8 @@ func _on_CloneLayer_pressed() -> void:
 	var source_layers: Array = project.layers[project.current_layer].get_children(true)
 	source_layers.append(project.layers[project.current_layer])
 
-	var clones := [] # Array of Layers
-	var cels := [] # 2D Array of Cels
+	var clones := []  # Array of Layers
+	var cels := []  # 2D Array of Cels
 	for sl in source_layers:
 		var cl: BaseLayer = sl.copy()
 		if sl.index == project.current_layer:
@@ -629,7 +632,9 @@ func _on_CloneLayer_pressed() -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
-	project.undo_redo.add_do_property(project, "current_layer", project.current_layer + clones.size())
+	project.undo_redo.add_do_property(
+		project, "current_layer", project.current_layer + clones.size()
+	)
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_do_method(project, "add_layers", clones, indices, cels)
 	project.undo_redo.add_undo_method(project, "remove_layers", indices)
@@ -665,6 +670,7 @@ func _on_RemoveLayer_pressed() -> void:
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
+
 # Move the layer up or down in layer order and/or reparent to be deeper/shallower in the
 # layer hierarchy depending on its current index and parent
 func change_layer_order(up: bool) -> void:
@@ -676,14 +682,14 @@ func change_layer_order(up: bool) -> void:
 	for l in from_indices:
 		from_parents.append(project.layers[l].parent)
 	var to_parents := from_parents.duplicate()
-	var to_index = layer.index - child_count # the index where the LOWEST shifted layer should end up
+	var to_index = layer.index - child_count  # the index where the LOWEST shifted layer should end up
 
 	if up:
 		var above_layer: BaseLayer = project.layers[project.current_layer + 1]
-		if layer.parent == above_layer: # Above is the parent, leave the parent and go up
+		if layer.parent == above_layer:  # Above is the parent, leave the parent and go up
 			to_parents[-1] = above_layer.parent
 			to_index = to_index + 1
-		elif layer.parent != above_layer.parent: # Above layer must be deeper in the hierarchy
+		elif layer.parent != above_layer.parent:  # Above layer must be deeper in the hierarchy
 			# Move layer 1 level deeper in hierarchy. Done by setting its parent to the parent of
 			# above_layer, and if that is multiple levels, drop levels until its just 1
 			to_parents[-1] = above_layer.parent
@@ -693,15 +699,15 @@ func change_layer_order(up: bool) -> void:
 			to_parents[-1] = above_layer
 		else:
 			to_index = to_index + 1
-	else: # Down
-		if layer.index == child_count: # If at the very bottom of the layer stack
+	else:  # Down
+		if layer.index == child_count:  # If at the very bottom of the layer stack
 			if not is_instance_valid(layer.parent):
 				return
-			to_parents[-1] = layer.parent.parent # Drop a level in the hierarchy
+			to_parents[-1] = layer.parent.parent  # Drop a level in the hierarchy
 		else:
 			var below_layer: BaseLayer = project.layers[project.current_layer - 1 - child_count]
-			if layer.parent != below_layer.parent: # If there is a hierarchy change
-				to_parents[-1] = layer.parent.parent # Drop a level in the hierarchy
+			if layer.parent != below_layer.parent:  # If there is a hierarchy change
+				to_parents[-1] = layer.parent.parent  # Drop a level in the hierarchy
 			elif below_layer.accepts_child(layer):
 				to_parents[-1] = below_layer
 				to_index = to_index - 1
@@ -714,7 +720,9 @@ func change_layer_order(up: bool) -> void:
 	project.undo_redo.add_do_property(project, "current_layer", to_index + child_count)
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_do_method(project, "move_layers", from_indices, to_indices, to_parents)
-	project.undo_redo.add_undo_method(project, "move_layers", to_indices, from_indices, from_parents)
+	project.undo_redo.add_undo_method(
+		project, "move_layers", to_indices, from_indices, from_parents
+	)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -723,7 +731,7 @@ func change_layer_order(up: bool) -> void:
 func _on_MergeDownLayer_pressed() -> void:
 	var project: Project = Global.current_project
 	var top_layer: PixelLayer = project.layers[project.current_layer]
-	var bottom_layer : PixelLayer = project.layers[project.current_layer - 1]
+	var bottom_layer: PixelLayer = project.layers[project.current_layer - 1]
 	var new_linked_cels: Array = bottom_layer.linked_cels.duplicate()
 
 	project.undos += 1
@@ -753,9 +761,13 @@ func _on_MergeDownLayer_pressed() -> void:
 			and f in bottom_layer.linked_cels
 		):
 			new_linked_cels.erase(f)
-			project.undo_redo.add_do_property(f.cels[bottom_layer.index], "image_texture", ImageTexture.new())
+			project.undo_redo.add_do_property(
+				f.cels[bottom_layer.index], "image_texture", ImageTexture.new()
+			)
 			project.undo_redo.add_undo_property(
-				f.cels[bottom_layer.index], "image_texture", f.cels[bottom_layer.index].image_texture
+				f.cels[bottom_layer.index],
+				"image_texture",
+				f.cels[bottom_layer.index].image_texture
 			)
 			project.undo_redo.add_do_property(f.cels[bottom_layer.index], "image", bottom_image)
 			project.undo_redo.add_undo_property(
@@ -778,7 +790,9 @@ func _on_MergeDownLayer_pressed() -> void:
 	project.undo_redo.add_do_property(bottom_layer, "linked_cels", new_linked_cels)
 	project.undo_redo.add_undo_property(bottom_layer, "linked_cels", bottom_layer.linked_cels)
 	project.undo_redo.add_do_method(project, "remove_layers", [top_layer.index])
-	project.undo_redo.add_undo_method(project, "add_layers", [top_layer], [top_layer.index], [top_cels])
+	project.undo_redo.add_undo_method(
+		project, "add_layers", [top_layer], [top_layer.index], [top_cels]
+	)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
@@ -828,16 +842,12 @@ func project_changed() -> void:
 
 		var container_child_count: int = Global.frames_container.get_child_count()
 		if layer < container_child_count:
-			var container = Global.frames_container.get_child(
-				container_child_count - 1 - layer
-			)
+			var container = Global.frames_container.get_child(container_child_count - 1 - layer)
 			if frame < container.get_child_count():
 				var cel_button = container.get_child(frame)
 				cel_button.pressed = true
 
-			var layer_button = Global.layers_container.get_child(
-				container_child_count - 1 - layer
-			)
+			var layer_button = Global.layers_container.get_child(container_child_count - 1 - layer)
 			layer_button.pressed = true
 
 

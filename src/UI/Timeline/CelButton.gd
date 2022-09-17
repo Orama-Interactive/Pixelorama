@@ -9,6 +9,7 @@ var cel: BaseCel
 onready var popup_menu: PopupMenu = get_node_or_null("PopupMenu")
 onready var linked_indicator: Polygon2D = get_node_or_null("LinkedIndicator")
 
+
 func _ready() -> void:
 	button_setup()
 
@@ -123,7 +124,9 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 					# If there are already linked cels, set the current cel's image
 					# to the first linked cel's image
 					var linked_cel: BaseCel = project.layers[layer].linked_cels[0].cels[layer]
-					project.undo_redo.add_do_property(cel, "image_texture", linked_cel.image_texture)
+					project.undo_redo.add_do_property(
+						cel, "image_texture", linked_cel.image_texture
+					)
 					project.undo_redo.add_undo_property(cel, "image_texture", cel.image_texture)
 					project.undo_redo.add_do_method(cel, "set_content", linked_cel.get_content())
 					project.undo_redo.add_undo_method(cel, "set_content", cel.get_content())
@@ -134,10 +137,18 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			)
 			# Remove and add a new cel button to update appearance (can't use self.button_setup
 			# because there is no guarantee that it will be the exact same cel button instance)
-			project.undo_redo.add_do_method(Global.animation_timeline, "project_cel_removed", frame, layer)
-			project.undo_redo.add_undo_method(Global.animation_timeline, "project_cel_removed", frame, layer)
-			project.undo_redo.add_do_method(Global.animation_timeline, "project_cel_added", frame, layer)
-			project.undo_redo.add_undo_method(Global.animation_timeline, "project_cel_added", frame, layer)
+			project.undo_redo.add_do_method(
+				Global.animation_timeline, "project_cel_removed", frame, layer
+			)
+			project.undo_redo.add_undo_method(
+				Global.animation_timeline, "project_cel_removed", frame, layer
+			)
+			project.undo_redo.add_do_method(
+				Global.animation_timeline, "project_cel_added", frame, layer
+			)
+			project.undo_redo.add_undo_method(
+				Global.animation_timeline, "project_cel_added", frame, layer
+			)
 
 			project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 			project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
@@ -181,22 +192,28 @@ func can_drop_data(_pos, data) -> bool:
 	if typeof(data) == TYPE_ARRAY and data[0] == "Cel":
 		var drag_frame = data[1]
 		var drag_layer = data[2]
-		if Global.current_project.layers[layer] is GroupLayer or not (
-			Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels
-			or (
-				Global.current_project.frames[drag_frame]
-				in Global.current_project.layers[drag_layer].linked_cels
+		if (
+			Global.current_project.layers[layer] is GroupLayer
+			or not (
+				(
+					Global.current_project.frames[frame]
+					in Global.current_project.layers[layer].linked_cels
+				)
+				or (
+					Global.current_project.frames[drag_frame]
+					in Global.current_project.layers[drag_layer].linked_cels
+				)
 			)
 		):
 			if not (drag_frame == frame and drag_layer == layer):
 				var region: Rect2
-				if Input.is_action_pressed("ctrl") or layer != drag_layer: # Swap cels
+				if Input.is_action_pressed("ctrl") or layer != drag_layer:  # Swap cels
 					region = get_global_rect()
-				else: # Move cels
-					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()): # Left
+				else:  # Move cels
+					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
 						region = _get_region_rect(-0.125, 0.125)
 						region.position.x -= 2  # Container spacing
-					else: # Right
+					else:  # Right
 						region = _get_region_rect(0.875, 1.125)
 						region.position.x += 2  # Container spacing
 				Global.animation_timeline.drag_highlight.rect_global_position = region.position
@@ -214,14 +231,14 @@ func drop_data(_pos, data) -> void:
 	var project = Global.current_project
 
 	project.undo_redo.create_action("Move Cels")
-	if Input.is_action_pressed("ctrl") or layer != drop_layer: # Swap cels
+	if Input.is_action_pressed("ctrl") or layer != drop_layer:  # Swap cels
 		project.undo_redo.add_do_method(project, "swap_cel", frame, layer, drop_frame, drop_layer)
 		project.undo_redo.add_undo_method(project, "swap_cel", frame, layer, drop_frame, drop_layer)
-	else: # Move cels
+	else:  # Move cels
 		var to_frame: int
-		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()): # Left
+		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
 			to_frame = frame
-		else: # Right
+		else:  # Right
 			to_frame = frame + 1
 		if drop_frame < frame:
 			to_frame -= 1

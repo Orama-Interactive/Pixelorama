@@ -23,7 +23,10 @@ func _draw() -> void:
 		if current_cels[i] is GroupCel:
 			continue
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
-		if i < current_project.layers.size() and current_project.layers[i].is_visible_in_hierarchy():
+		if (
+			i < current_project.layers.size()
+			and current_project.layers[i].is_visible_in_hierarchy()
+		):
 			draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
 
 

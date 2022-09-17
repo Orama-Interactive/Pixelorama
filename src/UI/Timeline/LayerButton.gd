@@ -15,6 +15,7 @@ onready var linked_button: BaseButton = find_node("LinkButton")
 
 export var hide_expand_button := true
 
+
 func _ready() -> void:
 	rect_min_size.y = Global.animation_timeline.cel_size
 
@@ -30,9 +31,9 @@ func _ready() -> void:
 	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
 	hierarchy_spacer.rect_min_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 
-	if Global.control.theme.get_color("font_color", "Button").v > 0.5: # Light text is dark theme
+	if Global.control.theme.get_color("font_color", "Button").v > 0.5:  # Light text is dark theme
 		self_modulate.v = 1 + hierarchy_depth * 0.4
-	else: # Dark text should be light theme
+	else:  # Dark text should be light theme
 		self_modulate.v = 1 - hierarchy_depth * 0.075
 
 	_update_buttons()
@@ -72,6 +73,7 @@ func _update_buttons() -> void:
 		if Global.current_project.layers[layer].parent.is_locked_in_hierarchy():
 			lock_button.modulate.a = 0.33
 
+
 # Used when pressing a button on this changes the appearnce of other layers (ie: expand or visible)
 func _update_buttons_all_layers() -> void:
 	for layer_button in Global.layers_container.get_children():
@@ -85,7 +87,11 @@ func _draw() -> void:
 	if hierarchy_spacer.rect_size.x > 0.1:
 		var color := Color(1, 1, 1, 0.33)
 		color.v = round(Global.control.theme.get_color("font_color", "Button").v)
-		var x =  hierarchy_spacer.rect_global_position.x - rect_global_position.x + hierarchy_spacer.rect_size.x
+		var x = (
+			hierarchy_spacer.rect_global_position.x
+			- rect_global_position.x
+			+ hierarchy_spacer.rect_size.x
+		)
 		draw_line(Vector2(x, 0), Vector2(x, rect_size.y), color)
 
 
@@ -189,7 +195,9 @@ func _select_current_layer() -> void:
 
 
 func get_drag_data(_position) -> Array:
-	var layers := range(layer - Global.current_project.layers[layer].get_child_count(true), layer + 1)
+	var layers := range(
+		layer - Global.current_project.layers[layer].get_child_count(true), layer + 1
+	)
 
 	var box := VBoxContainer.new()
 	for i in layers.size():
@@ -216,29 +224,30 @@ func can_drop_data(_pos, data) -> bool:
 			var region: Rect2
 			var depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
 
-			if Input.is_action_pressed("ctrl"): # Swap layers
+			if Input.is_action_pressed("ctrl"):  # Swap layers
 				if drag_layer.is_a_parent_of(curr_layer) or curr_layer.is_a_parent_of(drag_layer):
 					Global.animation_timeline.drag_highlight.visible = false
 					return false
 				region = get_global_rect()
 
-			else: # Shift layers
+			else:  # Shift layers
 				if drag_layer.is_a_parent_of(curr_layer):
 					Global.animation_timeline.drag_highlight.visible = false
 					return false
 				# If accepted as a child, is it in the center region?
-				if (Global.current_project.layers[layer].accepts_child(data[1])
-							and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
-						):
-						# Drawn regions are adusted a bit from actual to clearify drop position
-						region = _get_region_rect(0.15, 0.85)
-						depth += 1
+				if (
+					Global.current_project.layers[layer].accepts_child(data[1])
+					and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
+				):
+					# Drawn regions are adusted a bit from actual to clearify drop position
+					region = _get_region_rect(0.15, 0.85)
+					depth += 1
 				else:
 					# Top or bottom region?
 					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
-						region =  _get_region_rect(-0.1, 0.15)
+						region = _get_region_rect(-0.1, 0.15)
 					else:
-						region =  _get_region_rect(0.85, 1.1)
+						region = _get_region_rect(0.85, 1.1)
 			# Shift drawn region to the right a bit for hierarchy depth visualization:
 			region.position.x += depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 			region.size.x -= depth * HIERARCHY_DEPTH_PIXEL_SHIFT
@@ -255,26 +264,28 @@ func drop_data(_pos, data) -> void:
 	var project = Global.current_project
 
 	project.undo_redo.create_action("Change Layer Order")
-	var layers: Array = project.layers # This shouldn't be modified directly
+	var layers: Array = project.layers  # This shouldn't be modified directly
 
-	var drop_from_indices := range(drop_layer - layers[drop_layer].get_child_count(true), drop_layer + 1 )
+	var drop_from_indices := range(
+		drop_layer - layers[drop_layer].get_child_count(true), drop_layer + 1
+	)
 
 	var drop_from_parents := []
 	for i in range(drop_from_indices.size()):
 		drop_from_parents.append(layers[drop_from_indices[i]].parent)
 
-	if Input.is_action_pressed("ctrl"): # Swap layers
+	if Input.is_action_pressed("ctrl"):  # Swap layers
 		# a and b both need "from", "to", and "to_parents"
 		# a is this layer (and children), b is the dropped layers
-		var a := { "from": range(layer - layers[layer].get_child_count(true), layer + 1) }
-		var b := { "from": drop_from_indices}
+		var a := {"from": range(layer - layers[layer].get_child_count(true), layer + 1)}
+		var b := {"from": drop_from_indices}
 
 		if a.from[0] < b.from[0]:
-			a["to"] = range(b.from[-1] + 1 - a.from.size(), b.from[-1] + 1) # Size of a, starting from end of b
-			b["to"] = range(a.from[0], a.from[0] + b.from.size()) # Size of b, starting from beginning of a
+			a["to"] = range(b.from[-1] + 1 - a.from.size(), b.from[-1] + 1)  # Size of a, starting from end of b
+			b["to"] = range(a.from[0], a.from[0] + b.from.size())  # Size of b, starting from beginning of a
 		else:
-			a["to"] = range(b.from[0], b.from[0] + a.from.size()) # Size of a, starting from beginning of b
-			b["to"] = range(a.from[-1] + 1 - b.from.size(), a.from[-1] + 1) # Size of b, starting from end of a
+			a["to"] = range(b.from[0], b.from[0] + a.from.size())  # Size of a, starting from beginning of b
+			b["to"] = range(a.from[-1] + 1 - b.from.size(), a.from[-1] + 1)  # Size of b, starting from end of a
 
 		var a_from_parents := []
 		for l in a.from:
@@ -289,19 +300,22 @@ func drop_data(_pos, data) -> void:
 		b.to_parents[-1] = a_from_parents[-1]
 
 		project.undo_redo.add_do_method(project, "swap_layers", a, b)
-		project.undo_redo.add_undo_method(project, "swap_layers",
-			{ "from": a.to, "to": a.from, "to_parents": a_from_parents },
-			{ "from": b.to, "to": drop_from_indices, "to_parents": drop_from_parents }
+		project.undo_redo.add_undo_method(
+			project,
+			"swap_layers",
+			{"from": a.to, "to": a.from, "to_parents": a_from_parents},
+			{"from": b.to, "to": drop_from_indices, "to_parents": drop_from_parents}
 		)
 
-	else: # Move layers
-		var to_index: int # the index where the LOWEST moved layer should end up
+	else:  # Move layers
+		var to_index: int  # the index where the LOWEST moved layer should end up
 		var to_parent: BaseLayer
 
 		# If accepted as a child, is it in the center region?
-		if (layers[layer].accepts_child(data[1])
-				and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
-			):
+		if (
+			layers[layer].accepts_child(data[1])
+			and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
+		):
 			to_index = layer
 			to_parent = layers[layer]
 		else:
