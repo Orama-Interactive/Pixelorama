@@ -82,7 +82,7 @@ func get_layer_path() -> String:
 # Methods to Override:
 
 func serialize() -> Dictionary:
-	assert(index == project.layers.find(self)) # TODO H2: remove once sure index is synced properly
+	assert(index == project.layers.find(self)) # TODO Lask: remove once sure index is synced properly
 	return {
 		"name": name,
 		"visible": visible,

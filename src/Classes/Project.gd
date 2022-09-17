@@ -673,7 +673,7 @@ func move_frame(from_index: int, to_index: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	var frame = frames[from_index]
-	frames.remove(from_index) # TODO: Maybe the insert(pop_at) trick will work here?
+	frames.remove(from_index)
 	Global.animation_timeline.project_frame_removed(from_index)
 	frames.insert(to_index, frame)
 	Global.animation_timeline.project_frame_added(to_index)
