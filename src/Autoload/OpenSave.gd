@@ -427,16 +427,7 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 			project.size = cropped_image.get_size()
 			cropped_image.convert(Image.FORMAT_RGBA8)
 			frame.cels.append(PixelCel.new(cropped_image, 1))
-
-			# TODO L0: This for loop doesn't need to exist (its adding cels to layers that never exist):
-#			for _i in range(1, project.layers.size()):
-#				var empty_sprite := Image.new()
-#				empty_sprite.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-#				empty_sprite.fill(Color(0, 0, 0, 0))
-#				frame.cels.append(PixelCel.new(empty_sprite, 1))
-
 			project.frames.append(frame)
-
 	set_new_imported_tab(project, path)
 
 
