@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-09-16 21:26\n"
+"PO-Revision-Date: 2022-09-17 19:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -136,7 +136,7 @@ msgid "Paste"
 msgstr "Lipire"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Lipire în loc"
 
 msgid "Delete"
 msgstr "Ștergere"
@@ -698,17 +698,18 @@ msgid "Gradient Map"
 msgstr "Hartă degrade"
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "Împărțire în părți egale"
 
 msgid "Parts:"
-msgstr ""
+msgstr "Părți:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "Adăugare punct la final"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr ""
+msgstr "Dacă această opțiune este activată, ultimul punct este adăugat la sfârșitul degradeului.\n"
+"Dezactivează opțiunea dacă dorești să convertești degradeul pentru a avea interpolare constantă, astfel încât să fie luată în considerare ultima culoare."
 
 msgid "Linear"
 msgstr "Liniar"
@@ -1991,7 +1992,7 @@ msgid "Close"
 msgstr "Închide"
 
 msgid "Delete"
-msgstr ""
+msgstr "Ștergere"
 
 msgid "Discard All"
 msgstr "Renunțare la toate"
