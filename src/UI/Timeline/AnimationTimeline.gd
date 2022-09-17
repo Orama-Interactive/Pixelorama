@@ -190,18 +190,19 @@ func _on_DeleteFrame_pressed() -> void:
 	delete_frames(frames)
 
 
-func delete_frames(frames := []) -> void:
+func delete_frames(indices := []) -> void:
 	var project: Project = Global.current_project
 	if project.frames.size() == 1:
 		return
 
-	if frames.size() == project.frames.size():
-		frames.remove(frames.size() - 1) # Ensure the project has at least 1 frame
-	elif frames.size() == 0:
-		frames.append(project.current_frame)
+	if indices.size() == project.frames.size():
+		indices.remove(indices.size() - 1) # Ensure the project has at least 1 frame
+	elif indices.size() == 0:
+		indices.append(project.current_frame)
 
-	var current_frame: int = min(project.current_frame, project.frames.size() - frames.size() - 1)
+	var current_frame: int = min(project.current_frame, project.frames.size() - indices.size() - 1)
 	var new_layers: Array = project.duplicate_layers()
+	var frames := []
 	var frame_correction := 0  # Only needed for tag adjustment
 
 	var new_animation_tags := project.animation_tags.duplicate()
@@ -215,41 +216,38 @@ func delete_frames(frames := []) -> void:
 			new_animation_tags[i].to
 		)
 
-	for frame in frames:
+	for f in indices:
+		frames.append(project.frames[f])
 		# Check if one of the cels of the frame is linked
 		# if they are, unlink them too
 		# this prevents removed cels being kept in linked memory
 		for layer in new_layers:
 			for linked in layer.linked_cels:
-				if linked == project.frames[frame]:
+				if linked == project.frames[f]:
 					layer.linked_cels.erase(linked)
 
 		# Loop through the tags to see if the frame is in one
-		frame -= frame_correction  # Erasing made frames indexes 1 step ahead their intended tags
+		f -= frame_correction  # Erasing made frames indexes 1 step ahead their intended tags
 		var tag_correction := 0  # needed when tag is erased
 		for tag_ind in new_animation_tags.size():
 			var tag = new_animation_tags[tag_ind - tag_correction]
-			if frame + 1 >= tag.from && frame + 1 <= tag.to:
+			if f + 1 >= tag.from && f + 1 <= tag.to:
 				if tag.from == tag.to:  # If we're deleting the only frame in the tag
 					new_animation_tags.erase(tag)
 					tag_correction += 1
 				else:
 					tag.to -= 1
-			elif frame + 1 < tag.from:
+			elif f + 1 < tag.from:
 				tag.from -= 1
 				tag.to -= 1
 		frame_correction += 1  # Compensation for the next batch
-
-	var frame_refs := []
-	for f in frames:
-		frame_refs.append(project.frames[f])
 
 	project.undos += 1
 	project.undo_redo.create_action("Remove Frame")
 	project.undo_redo.add_do_property(project, "layers", new_layers)
 	project.undo_redo.add_undo_property(project, "layers", Global.current_project.layers)
-	project.undo_redo.add_do_method(project, "remove_frames", frames)
-	project.undo_redo.add_undo_method(project, "add_frames", frame_refs, frames)
+	project.undo_redo.add_do_method(project, "remove_frames", indices)
+	project.undo_redo.add_undo_method(project, "add_frames", frames, indices)
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.add_do_property(project, "current_frame", current_frame)
