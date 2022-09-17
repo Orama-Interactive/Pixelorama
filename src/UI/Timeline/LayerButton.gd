@@ -5,6 +5,8 @@ const HIERARCHY_DEPTH_PIXEL_SHIFT = 8
 
 var layer := 0
 
+export var hide_expand_button := true
+
 onready var expand_button: BaseButton = find_node("ExpandButton")
 onready var visibility_button: BaseButton = find_node("VisibilityButton")
 onready var lock_button: BaseButton = find_node("LockButton")
@@ -12,8 +14,6 @@ onready var label: Label = find_node("Label")
 onready var line_edit: LineEdit = find_node("LineEdit")
 onready var hierarchy_spacer: Control = find_node("HierarchySpacer")
 onready var linked_button: BaseButton = find_node("LinkButton")
-
-export var hide_expand_button := true
 
 
 func _ready() -> void:
@@ -36,10 +36,10 @@ func _ready() -> void:
 	else:  # Dark text should be light theme
 		self_modulate.v = 1 - hierarchy_depth * 0.075
 
-	_update_buttons()
+	update_buttons()
 
 
-func _update_buttons() -> void:
+func update_buttons() -> void:
 	if hide_expand_button:
 		expand_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		expand_button.get_child(0).visible = false  # Hide the TextureRect
@@ -77,7 +77,7 @@ func _update_buttons() -> void:
 # Used when pressing a button on this changes the appearnce of other layers (ie: expand or visible)
 func _update_buttons_all_layers() -> void:
 	for layer_button in Global.layers_container.get_children():
-		layer_button._update_buttons()
+		layer_button.update_buttons()
 		var expanded = Global.current_project.layers[layer_button.layer].is_expanded_in_hierarchy()
 		layer_button.visible = expanded
 		Global.frames_container.get_child(layer_button.get_index()).visible = expanded
@@ -182,7 +182,7 @@ func _on_LinkButton_pressed() -> void:
 		)
 		container.get_child(Global.current_project.current_frame).button_setup()
 
-	_update_buttons()
+	update_buttons()
 
 
 func _select_current_layer() -> void:
@@ -281,11 +281,11 @@ func drop_data(_pos, data) -> void:
 		var b := {"from": drop_from_indices}
 
 		if a.from[0] < b.from[0]:
-			a["to"] = range(b.from[-1] + 1 - a.from.size(), b.from[-1] + 1)  # Size of a, starting from end of b
-			b["to"] = range(a.from[0], a.from[0] + b.from.size())  # Size of b, starting from beginning of a
+			a["to"] = range(b.from[-1] + 1 - a.from.size(), b.from[-1] + 1)  # Size of a, start from end of b
+			b["to"] = range(a.from[0], a.from[0] + b.from.size())  # Size of b, start from beginning of a
 		else:
-			a["to"] = range(b.from[0], b.from[0] + a.from.size())  # Size of a, starting from beginning of b
-			b["to"] = range(a.from[-1] + 1 - b.from.size(), a.from[-1] + 1)  # Size of b, starting from end of a
+			a["to"] = range(b.from[0], b.from[0] + a.from.size())  # Size of a, start from beginning of b
+			b["to"] = range(a.from[-1] + 1 - b.from.size(), a.from[-1] + 1)  # Size of b, start from end of a
 
 		var a_from_parents := []
 		for l in a.from:
