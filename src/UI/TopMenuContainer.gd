@@ -105,7 +105,7 @@ func _setup_edit_menu() -> void:
 		edit_menu.add_item(item, i)
 		i += 1
 
-	edit_menu.set_item_disabled(6, true)
+	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, true)
 	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
 
 
