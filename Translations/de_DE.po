@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-09-18 14:34\n"
+"PO-Revision-Date: 2022-09-18 16:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1384,6 +1384,22 @@ msgstr "Pinselfarbe von"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Farbe von dem Pinsel selbst, 100: die aktuell ausgewählte Farbe"
 
+#. Found in the bucket tool options.
+msgid "Fill area:"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr ""
+
 msgid "Fill with:"
 msgstr "Füllen mit:"
 
@@ -1982,7 +1998,7 @@ msgid "Close"
 msgstr "Schließen"
 
 msgid "Delete"
-msgstr "Löschen"
+msgstr ""
 
 msgid "Discard All"
 msgstr "Alle verwerfen"
