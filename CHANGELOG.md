@@ -11,6 +11,7 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 ### Added
 - The UI now automatically gets scaled, based on the dpi and resolution of the monitor. Resolves [#643](https://github.com/Orama-Interactive/Pixelorama/issues/643).
 - A "Divide into equal parts" button has been added in Gradient Map. This is meant for easy gradient bisecting, which is helpful for converting Linear/Cubic interpolated gradients into Constant. This will eventually be used in gradient generation as well, once multi-color gradient generation support gets implemented.
+- A new fill area option has been added to the bucket tool options, "Whole Selection". This fills the entire selection with a color or pattern, regardless of the colors of the pixels.
 - Project tabs can now be closed with the middle mouse button.
 - The background color of the canvas is now configurable, as requested in [#586](https://github.com/Orama-Interactive/Pixelorama/discussions/586).
 
@@ -22,12 +23,15 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 - hiDPI is now enabled - solves [#159](https://github.com/Orama-Interactive/Pixelorama/issues/159).
 - The UI can now be scaled down to 0.5 and 0.75.
 - Palette swatches now get highlighted if their color is selected from the color buttons. [#730](https://github.com/Orama-Interactive/Pixelorama/pull/730)
+- In the bucket tool options, "Same color area" and "Same color pixels" have been renamed to "Similar area" and "Similar colors" respectively.
 - The splash dialog can be resized to a smaller size than the default.
 
 ### Fixed
 - Deleting content from locked/invisible layers is no longer possible.
 - Selection can no longer be moved if there is a dialog open.
 - Onion skinning now works properly with mirror view. Addresses part of [#717](https://github.com/Orama-Interactive/Pixelorama/issues/717).
+- Fix invalid pattern image error when using the bucket tool to replace colors.
+- Fixed issue with the bucket tool where if the selected color is the same as the pixel's color in mouse position, the operation stops even if there are other cels selected.
 
 ## [v0.10.2] - 2022-08-18
 This update has been brought to you by the contributions of:
