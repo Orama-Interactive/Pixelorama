@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2022-09-18 14:34\n"
+"PO-Revision-Date: 2022-09-18 16:26\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -1345,6 +1345,22 @@ msgstr "Ecset színből"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Szín a ecsetből, 100: a jelenleg kiválasztott szín"
 
+#. Found in the bucket tool options.
+msgid "Fill area:"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr ""
+
 msgid "Fill with:"
 msgstr "Kitöltés ezzel:"
 
@@ -1943,7 +1959,7 @@ msgid "Close"
 msgstr "Bezárás"
 
 msgid "Delete"
-msgstr "Törlés"
+msgstr ""
 
 msgid "Discard All"
 msgstr ""
