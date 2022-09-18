@@ -1,12 +1,15 @@
 extends BaseTool
 
+enum FillArea { AREA, COLORS, SELECTION }
+enum FillWith { COLOR, PATTERN }
+
 const COLOR_REPLACE_SHADER := preload("res://src/Shaders/ColorReplace.shader")
 
 var _prev_mode := 0
 var _pattern: Patterns.Pattern
 var _similarity := 100
-var _fill_area := true
-var _fill_with := 0
+var _fill_area: int = FillArea.AREA
+var _fill_with: int = FillWith.COLOR
 var _offset_x := 0
 var _offset_y := 0
 # working array used as buffer for segments while flooding
@@ -14,24 +17,34 @@ var _allegro_flood_segments: Array
 # results array per image while flooding
 var _allegro_image_segments: Array
 
-onready var fill_check_box: CheckBox = $FillCheckBox
-
 
 func _ready() -> void:
 	update_pattern()
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("change_tool_mode") or event.is_action_released("change_tool_mode"):
-		fill_check_box.pressed = not fill_check_box.pressed
-		_fill_area = fill_check_box.pressed
-		$Similarity.visible = not _fill_area
+	if event.is_action_pressed("change_tool_mode"):
+		_prev_mode = _fill_area
+	if event.is_action("change_tool_mode"):
+		if _fill_area == FillArea.SELECTION:
+			_fill_area = FillArea.AREA
+		else:
+			_fill_area = _prev_mode ^ 1
+		_select_fill_area_optionbutton()
+	if event.is_action_released("change_tool_mode"):
+		_fill_area = _prev_mode
+		_select_fill_area_optionbutton()
 
 
-func _on_FillCheckBox_toggled(button_pressed: bool) -> void:
-	_fill_area = button_pressed
+func _on_FillAreaOptions_item_selected(index: int) -> void:
+	_fill_area = index
 	update_config()
 	save_config()
+
+
+func _select_fill_area_optionbutton() -> void:
+	$FillAreaOptions.selected = _fill_area
+	$Similarity.visible = (_fill_area == FillArea.COLORS)
 
 
 func _on_FillWithOptions_item_selected(index: int) -> void:
@@ -105,12 +118,11 @@ func set_config(config: Dictionary) -> void:
 
 
 func update_config() -> void:
-	$FillCheckBox.pressed = _fill_area
+	_select_fill_area_optionbutton()
 	$FillWithOptions.selected = _fill_with
-	$Similarity.visible = not _fill_area
 	$Similarity/Value.value = _similarity
 	$Similarity/Slider.value = _similarity
-	$FillPattern.visible = _fill_with == 1
+	$FillPattern.visible = _fill_with == FillWith.PATTERN
 	$FillPattern/XOffset/OffsetX.value = _offset_x
 	$FillPattern/YOffset/OffsetY.value = _offset_y
 
@@ -147,11 +159,14 @@ func draw_start(position: Vector2) -> void:
 		and not Global.current_project.can_pixel_get_drawn(position)
 	):
 		return
-	var undo_data = _get_undo_data()
-	if _fill_area:
-		fill_in_area(position)
-	else:
-		fill_in_color(position)
+	var undo_data := _get_undo_data()
+	match _fill_area:
+		FillArea.AREA:
+			fill_in_area(position)
+		FillArea.COLORS:
+			fill_in_color(position)
+		FillArea.SELECTION:
+			fill_in_selection()
 	commit_undo("Draw", undo_data)
 
 
@@ -169,7 +184,7 @@ func fill_in_color(position: Vector2) -> void:
 	var images := _get_selected_draw_images()
 	for image in images:
 		var pattern_image: Image
-		if _fill_with == 0 or _pattern == null:
+		if _fill_with == FillWith.COLOR or _pattern == null:
 			if tool_slot.color.is_equal_approx(color):
 				return
 		else:
@@ -205,7 +220,7 @@ func fill_in_color(position: Vector2) -> void:
 			# pixel offset converted to pattern uv offset
 			"pattern_uv_offset":
 			Vector2.ONE / pattern_tex.get_size() * Vector2(_offset_x, _offset_y),
-			"has_pattern": true if _fill_with == 1 else false
+			"has_pattern": true if _fill_with == FillWith.PATTERN else false
 		}
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(image, COLOR_REPLACE_SHADER, params, project.size)
@@ -230,6 +245,25 @@ func fill_in_area(position: Vector2) -> void:
 			_flood_fill(Vector2(mirror_x, mirror_y))
 	if Tools.vertical_mirror and mirror_y_inside:
 		_flood_fill(Vector2(position.x, mirror_y))
+
+
+func fill_in_selection() -> void:
+	var project: Project = Global.current_project
+	var images := _get_selected_draw_images()
+	if project.has_selection:
+		var filler := Image.new()
+		filler.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		filler.fill(tool_slot.color)
+		var rect: Rect2 = Global.canvas.selection.big_bounding_rectangle
+		var selection_map_copy := SelectionMap.new()
+		selection_map_copy.copy_from(project.selection_map)
+		# In case the selection map is bigger than the canvas
+		selection_map_copy.crop(project.size.x, project.size.y)
+		for image in images:
+			image.blit_rect_mask(filler, selection_map_copy, rect, rect.position)
+	else:
+		for image in images:
+			image.fill(tool_slot.color)
 
 
 # Add a new segment to the array
@@ -337,7 +371,7 @@ func _flood_fill(position: Vector2) -> void:
 	var images := _get_selected_draw_images()
 	for image in images:
 		var color: Color = image.get_pixelv(position)
-		if _fill_with == 0 or _pattern == null:
+		if _fill_with == FillWith.COLOR or _pattern == null:
 			# end early if we are filling with the same color
 			if tool_slot.color.is_equal_approx(color):
 				return
@@ -385,7 +419,7 @@ func _compute_segments_for_image(
 
 
 func _color_segments(image: Image) -> void:
-	if _fill_with == 0 or _pattern == null:
+	if _fill_with == FillWith.COLOR or _pattern == null:
 		var color_str = tool_slot.color.to_html()
 		# short circuit for flat colors
 		for c in _allegro_image_segments.size():
