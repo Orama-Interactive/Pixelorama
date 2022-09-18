@@ -27,18 +27,18 @@ margin_bottom = 105.0
 script = ExtResource( 3 )
 
 [node name="Label" parent="." index="0"]
-margin_right = 133.0
+margin_right = 132.0
 
 [node name="FillCheckBox" type="CheckBox" parent="." index="1"]
 margin_top = 18.0
-margin_right = 133.0
+margin_right = 132.0
 margin_bottom = 42.0
-hint_tooltip = "If enabled, it fills the continuous area with the selected color.
+hint_tooltip = "If enabled, it fills the contiguous area with the selected color.
 If disabled, it replaces all pixels of the same color with the selected color."
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 pressed = true
-text = "Fill continuously"
+text = "Fill contiguously"
 align = 1
 
 [node name="Similarity" type="VBoxContainer" parent="." index="2"]
@@ -98,9 +98,9 @@ size_flags_horizontal = 4
 text = "Fill with:"
 
 [node name="FillWithOptions" type="OptionButton" parent="." index="4"]
-margin_left = 6.0
+margin_left = 5.0
 margin_top = 64.0
-margin_right = 127.0
+margin_right = 126.0
 margin_bottom = 84.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
