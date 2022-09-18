@@ -5,21 +5,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 <br><br>
 
 ## [v0.10.3] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
 ### Added
-- Copy, cut & delete now affect the entire cel if there is no selection.
+- The UI now automatically gets scaled, based on the dpi and resolution of the monitor. Resolves [#643](https://github.com/Orama-Interactive/Pixelorama/issues/643).
+- A "Divide into equal parts" button has been added in Gradient Map. This is meant for easy gradient bisecting, which is helpful for converting Linear/Cubic interpolated gradients into Constant. This will eventually be used in gradient generation as well, once multi-color gradient generation support gets implemented.
 - Project tabs can now be closed with the middle mouse button.
 - The background color of the canvas is now configurable, as requested in [#586](https://github.com/Orama-Interactive/Pixelorama/discussions/586).
 
 ### Changed
 - Circle brushes now scale properly and support even-numbered diameters.
+- Copy, cut & delete now affect the entire cel if there is no selection.
+- The paste placement behavior has been changed. Paste now places the pasted content in the middle of the canvas view, instead of its original position. A new option in the Edit menu has been added, "Paste in Place", that preserves the previous behavior.
 - If a layer is locked or invisible, the cursor changes into forbidden when the user is hovering the mouse over the canvas.
 - hiDPI is now enabled - solves [#159](https://github.com/Orama-Interactive/Pixelorama/issues/159).
+- The UI can now be scaled down to 0.5 and 0.75.
+- Palette swatches now get highlighted if their color is selected from the color buttons. [#730](https://github.com/Orama-Interactive/Pixelorama/pull/730)
 - The splash dialog can be resized to a smaller size than the default.
 
 ### Fixed
 - Deleting content from locked/invisible layers is no longer possible.
 - Selection can no longer be moved if there is a dialog open.
+- Onion skinning now works properly with mirror view. Addresses part of [#717](https://github.com/Orama-Interactive/Pixelorama/issues/717).
 
 ## [v0.10.2] - 2022-08-18
 This update has been brought to you by the contributions of:
