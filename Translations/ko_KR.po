@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-09-18 14:34\n"
+"PO-Revision-Date: 2022-09-18 16:27\n"
 
 msgid "OK"
 msgstr "예"
@@ -1382,6 +1382,22 @@ msgstr "브러시 색상을 ~에서"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: 브러시 자체의 색상, 100: 현재 선택된 색상"
 
+#. Found in the bucket tool options.
+msgid "Fill area:"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr ""
+
 msgid "Fill with:"
 msgstr "이것으로 채우기:"
 
@@ -1980,7 +1996,7 @@ msgid "Close"
 msgstr "닫기"
 
 msgid "Delete"
-msgstr "삭제"
+msgstr ""
 
 msgid "Discard All"
 msgstr "모두 버리기"
