@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-09-18 14:34\n"
+"PO-Revision-Date: 2022-09-18 16:26\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1385,6 +1385,22 @@ msgstr "Χρώμα πινέλου από"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Χρώμα από το πινέλο, 100: επιλεγμένο χρώμα"
 
+#. Found in the bucket tool options.
+msgid "Fill area:"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr ""
+
 msgid "Fill with:"
 msgstr "Γέμισμα με:"
 
@@ -1983,7 +1999,7 @@ msgid "Close"
 msgstr "Κλείσιμο"
 
 msgid "Delete"
-msgstr "Διαγραφή"
+msgstr ""
 
 msgid "Discard All"
 msgstr "Απόρριψη όλων"
