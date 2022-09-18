@@ -1,6 +1,6 @@
 extends BaseTool
 
-const ColorReplaceShader := preload("res://src/Shaders/ColorReplace.shader")
+const COLOR_REPLACE_SHADER := preload("res://src/Shaders/ColorReplace.shader")
 
 var _prev_mode := 0
 var _pattern: Patterns.Pattern
@@ -174,8 +174,15 @@ func fill_in_color(position: Vector2) -> void:
 	var color: Color = _get_draw_image().get_pixelv(position)
 	var images := _get_selected_draw_images()
 	for image in images:
+		var pattern_image: Image
 		if _fill_with == 0 or _pattern == null:
 			if tool_slot.color.is_equal_approx(color):
+				return
+		else:
+			# End early if we are filling with an empty pattern
+			pattern_image = _pattern.image
+			var pattern_size := pattern_image.get_size()
+			if pattern_size.x == 0 or pattern_size.y == 0:
 				return
 
 		var selection: Image
@@ -190,8 +197,8 @@ func fill_in_color(position: Vector2) -> void:
 		selection_tex.create_from_image(selection)
 
 		var pattern_tex := ImageTexture.new()
-		if _pattern:
-			pattern_tex.create_from_image(_pattern.image)
+		if _pattern and pattern_image:
+			pattern_tex.create_from_image(pattern_image)
 
 		var params := {
 			"size": project.size,
@@ -207,7 +214,7 @@ func fill_in_color(position: Vector2) -> void:
 			"has_pattern": true if _fill_with == 1 else false
 		}
 		var gen := ShaderImageEffect.new()
-		gen.generate_image(image, ColorReplaceShader, params, project.size)
+		gen.generate_image(image, COLOR_REPLACE_SHADER, params, project.size)
 
 
 func fill_in_area(position: Vector2) -> void:
@@ -342,7 +349,7 @@ func _flood_fill(position: Vector2) -> void:
 				return
 		else:
 			# end early if we are filling with an empty pattern
-			var pattern_size = _pattern.image.get_size()
+			var pattern_size := _pattern.image.get_size()
 			if pattern_size.x == 0 or pattern_size.y == 0:
 				return
 		# init flood data structures
