@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-09-17 01:47\n"
+"PO-Revision-Date: 2022-09-18 13:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1385,14 +1385,14 @@ msgstr "Cor de pincel do"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Cor do próprio pincel, 100: A cor atualmente selecionada"
 
-msgid "Fill area:"
-msgstr "Área de preenchimento:"
+#. Found in the bucket tool options, to let users toggle if it should fill colors continuously or not.
+msgid "Fill continuously"
+msgstr ""
 
-msgid "Same color area"
-msgstr "Área de mesma cor"
-
-msgid "Same color pixels"
-msgstr "Pixels de mesma cor"
+#. Hint tooltip of the "Fill continuously" checkbox, found in the bucket tool options.
+msgid "If enabled, it fills the continuous area with the selected color.\n"
+"If disabled, it replaces all pixels of the same color with the selected color."
+msgstr ""
 
 msgid "Fill with:"
 msgstr "Preencher com:"
