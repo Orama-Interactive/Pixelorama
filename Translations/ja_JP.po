@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-09-18 16:27\n"
+"PO-Revision-Date: 2022-09-18 17:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1387,19 +1387,19 @@ msgstr "0: ブラシ自体の色、100: 現在選択されている色"
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "塗りつぶし領域:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "類似領域"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "類似色"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "全て選択"
 
 msgid "Fill with:"
 msgstr "次で塗りつぶし:"
@@ -1999,7 +1999,7 @@ msgid "Close"
 msgstr "閉じる"
 
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 msgid "Discard All"
 msgstr "すべて破棄"
