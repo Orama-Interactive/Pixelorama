@@ -4,6 +4,7 @@ enum FillArea { AREA, COLORS, SELECTION }
 enum FillWith { COLOR, PATTERN }
 
 const COLOR_REPLACE_SHADER := preload("res://src/Shaders/ColorReplace.shader")
+const PATTERN_FILL_SHADER := preload("res://src/Shaders/PatternFill.gdshader")
 
 var _prev_mode := 0
 var _pattern: Patterns.Pattern
@@ -180,13 +181,13 @@ func draw_end(position: Vector2) -> void:
 
 func fill_in_color(position: Vector2) -> void:
 	var project: Project = Global.current_project
-	var color: Color = _get_draw_image().get_pixelv(position)
 	var images := _get_selected_draw_images()
 	for image in images:
+		var color: Color = image.get_pixelv(position)
 		var pattern_image: Image
 		if _fill_with == FillWith.COLOR or _pattern == null:
 			if tool_slot.color.is_equal_approx(color):
-				return
+				continue
 		else:
 			# End early if we are filling with an empty pattern
 			pattern_image = _pattern.image
@@ -250,25 +251,60 @@ func fill_in_area(position: Vector2) -> void:
 func fill_in_selection() -> void:
 	var project: Project = Global.current_project
 	var images := _get_selected_draw_images()
-	if project.has_selection:
-		var filler := Image.new()
-		filler.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		filler.fill(tool_slot.color)
-		var rect: Rect2 = Global.canvas.selection.big_bounding_rectangle
-		var selection_map_copy := SelectionMap.new()
-		selection_map_copy.copy_from(project.selection_map)
-		# In case the selection map is bigger than the canvas
-		selection_map_copy.crop(project.size.x, project.size.y)
-		for image in images:
-			image.blit_rect_mask(filler, selection_map_copy, rect, rect.position)
+	if _fill_with == FillWith.COLOR or _pattern == null:
+		if project.has_selection:
+			var filler := Image.new()
+			filler.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			filler.fill(tool_slot.color)
+			var rect: Rect2 = Global.canvas.selection.big_bounding_rectangle
+			var selection_map_copy := SelectionMap.new()
+			selection_map_copy.copy_from(project.selection_map)
+			# In case the selection map is bigger than the canvas
+			selection_map_copy.crop(project.size.x, project.size.y)
+			for image in images:
+				image.blit_rect_mask(filler, selection_map_copy, rect, rect.position)
+		else:
+			for image in images:
+				image.fill(tool_slot.color)
 	else:
+		# End early if we are filling with an empty pattern
+		var pattern_image: Image = _pattern.image
+		var pattern_size := pattern_image.get_size()
+		if pattern_size.x == 0 or pattern_size.y == 0:
+			return
+
+		var selection: Image
+		var selection_tex := ImageTexture.new()
+		if project.has_selection:
+			selection = project.selection_map
+		else:
+			selection = Image.new()
+			selection.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			selection.fill(Color(1, 1, 1, 1))
+
+		selection_tex.create_from_image(selection)
+
+		var pattern_tex := ImageTexture.new()
+		if _pattern and pattern_image:
+			pattern_tex.create_from_image(pattern_image)
+
+		var params := {
+			"selection": selection_tex,
+			"size": project.size,
+			"pattern": pattern_tex,
+			"pattern_size": pattern_tex.get_size(),
+			# pixel offset converted to pattern uv offset
+			"pattern_uv_offset":
+			Vector2.ONE / pattern_tex.get_size() * Vector2(_offset_x, _offset_y),
+		}
 		for image in images:
-			image.fill(tool_slot.color)
+			var gen := ShaderImageEffect.new()
+			gen.generate_image(image, PATTERN_FILL_SHADER, params, project.size)
 
 
 # Add a new segment to the array
 func _add_new_segment(y: int = 0) -> void:
-	var segment = {}
+	var segment := {}
 	segment.flooding = false
 	segment.todo_above = false
 	segment.todo_below = false
@@ -374,7 +410,7 @@ func _flood_fill(position: Vector2) -> void:
 		if _fill_with == FillWith.COLOR or _pattern == null:
 			# end early if we are filling with the same color
 			if tool_slot.color.is_equal_approx(color):
-				return
+				continue
 		else:
 			# end early if we are filling with an empty pattern
 			var pattern_size := _pattern.image.get_size()
