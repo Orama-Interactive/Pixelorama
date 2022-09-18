@@ -27,28 +27,21 @@ margin_bottom = 105.0
 script = ExtResource( 3 )
 
 [node name="Label" parent="." index="0"]
-margin_right = 131.0
+margin_right = 133.0
 
-[node name="FillArea" type="Label" parent="." index="1"]
-margin_left = 38.0
+[node name="FillCheckBox" type="CheckBox" parent="." index="1"]
 margin_top = 18.0
-margin_right = 92.0
-margin_bottom = 32.0
+margin_right = 133.0
+margin_bottom = 42.0
+hint_tooltip = "If enabled, it fills the continuous area with the selected color.
+If disabled, it replaces all pixels of the same color with the selected color."
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-text = "Fill area:"
+pressed = true
+text = "Fill continuously"
+align = 1
 
-[node name="FillAreaOptions" type="OptionButton" parent="." index="2"]
-margin_top = 36.0
-margin_right = 131.0
-margin_bottom = 56.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 4
-text = "Same color area"
-items = [ "Same color area", null, false, 0, null, "Same color pixels", null, false, 1, null ]
-selected = 0
-
-[node name="Similarity" type="VBoxContainer" parent="." index="3"]
+[node name="Similarity" type="VBoxContainer" parent="." index="2"]
 visible = false
 margin_top = 60.0
 margin_right = 131.0
@@ -96,26 +89,26 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="FillWith" type="Label" parent="." index="4"]
-margin_left = 38.0
-margin_top = 60.0
-margin_right = 92.0
-margin_bottom = 74.0
+[node name="FillWith" type="Label" parent="." index="3"]
+margin_left = 39.0
+margin_top = 46.0
+margin_right = 93.0
+margin_bottom = 60.0
 size_flags_horizontal = 4
 text = "Fill with:"
 
-[node name="FillWithOptions" type="OptionButton" parent="." index="5"]
-margin_left = 5.0
-margin_top = 78.0
-margin_right = 126.0
-margin_bottom = 98.0
+[node name="FillWithOptions" type="OptionButton" parent="." index="4"]
+margin_left = 6.0
+margin_top = 64.0
+margin_right = 127.0
+margin_bottom = 84.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Selected Color"
 items = [ "Selected Color", null, false, 0, null, "Pattern", null, false, 1, null ]
 selected = 0
 
-[node name="FillPattern" type="VBoxContainer" parent="." index="6"]
+[node name="FillPattern" type="VBoxContainer" parent="." index="5"]
 visible = false
 margin_left = 22.0
 margin_top = 102.0
@@ -187,7 +180,7 @@ margin_right = 85.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 
-[connection signal="item_selected" from="FillAreaOptions" to="." method="_on_FillAreaOptions_item_selected"]
+[connection signal="toggled" from="FillCheckBox" to="." method="_on_FillCheckBox_toggled"]
 [connection signal="value_changed" from="Similarity/Value" to="." method="_on_Value_value_changed"]
 [connection signal="value_changed" from="Similarity/Slider" to="." method="_on_Slider_value_changed"]
 [connection signal="item_selected" from="FillWithOptions" to="." method="_on_FillWithOptions_item_selected"]

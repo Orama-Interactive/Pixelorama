@@ -5,7 +5,7 @@ const COLOR_REPLACE_SHADER := preload("res://src/Shaders/ColorReplace.shader")
 var _prev_mode := 0
 var _pattern: Patterns.Pattern
 var _similarity := 100
-var _fill_area := 0
+var _fill_area := true
 var _fill_with := 0
 var _offset_x := 0
 var _offset_y := 0
@@ -14,28 +14,22 @@ var _allegro_flood_segments: Array
 # results array per image while flooding
 var _allegro_image_segments: Array
 
+onready var fill_check_box: CheckBox = $FillCheckBox
+
 
 func _ready() -> void:
 	update_pattern()
 
 
 func _input(event: InputEvent) -> void:
-	var options: OptionButton = $FillAreaOptions
-
-	if event.is_action_pressed("change_tool_mode"):
-		_prev_mode = options.selected
-	if event.is_action("change_tool_mode"):
-		options.selected = _prev_mode ^ 1
-		_fill_area = options.selected
-		$Similarity.visible = (_fill_area == 1)
-	if event.is_action_released("change_tool_mode"):
-		options.selected = _prev_mode
-		_fill_area = options.selected
-		$Similarity.visible = (_fill_area == 1)
+	if event.is_action_pressed("change_tool_mode") or event.is_action_released("change_tool_mode"):
+		fill_check_box.pressed = not fill_check_box.pressed
+		_fill_area = fill_check_box.pressed
+		$Similarity.visible = not _fill_area
 
 
-func _on_FillAreaOptions_item_selected(index: int) -> void:
-	_fill_area = index
+func _on_FillCheckBox_toggled(button_pressed: bool) -> void:
+	_fill_area = button_pressed
 	update_config()
 	save_config()
 
@@ -111,9 +105,9 @@ func set_config(config: Dictionary) -> void:
 
 
 func update_config() -> void:
-	$FillAreaOptions.selected = _fill_area
+	$FillCheckBox.pressed = _fill_area
 	$FillWithOptions.selected = _fill_with
-	$Similarity.visible = (_fill_area == 1)
+	$Similarity.visible = not _fill_area
 	$Similarity/Value.value = _similarity
 	$Similarity/Slider.value = _similarity
 	$FillPattern.visible = _fill_with == 1
@@ -154,7 +148,7 @@ func draw_start(position: Vector2) -> void:
 	):
 		return
 	var undo_data = _get_undo_data()
-	if _fill_area == 0:
+	if _fill_area:
 		fill_in_area(position)
 	else:
 		fill_in_color(position)
