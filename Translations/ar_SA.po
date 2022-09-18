@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-09-18 16:26\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -135,6 +135,9 @@ msgstr "قص"
 msgid "Paste"
 msgstr "لصق"
 
+msgid "Paste in Place"
+msgstr ""
+
 msgid "Delete"
 msgstr "حذف"
 
@@ -247,7 +250,7 @@ msgid "Manage Layouts"
 msgstr ""
 
 msgid "Add"
-msgstr ""
+msgstr "إضافة"
 
 msgid "Add Layout"
 msgstr ""
@@ -307,13 +310,13 @@ msgid "Import as:"
 msgstr "استيراد باسم:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "تطبيق على الكل"
 
 msgid "Recent projects"
 msgstr "المشاريع الأخيرة"
 
 msgid "New project"
-msgstr ""
+msgstr "مشروع جديد"
 
 msgid "Spritesheet (new project)"
 msgstr ""
@@ -325,7 +328,7 @@ msgid "New frame"
 msgstr "إطار جديد"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "استبدال الإطار"
 
 msgid "New layer"
 msgstr "طبقة جديدة"
@@ -520,7 +523,7 @@ msgid "Language"
 msgstr "اللغة"
 
 msgid "Interface"
-msgstr ""
+msgstr "الواجهة"
 
 msgid "Themes"
 msgstr ""
@@ -601,7 +604,7 @@ msgid "Light"
 msgstr "فاتح"
 
 msgid "Purple"
-msgstr ""
+msgstr "بنفسجي"
 
 msgid "Theme"
 msgstr ""
@@ -610,6 +613,12 @@ msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
+msgstr ""
+
+msgid "Background color from:"
+msgstr ""
+
+msgid "Background color:"
 msgstr ""
 
 msgid "Left tool color:"
@@ -676,7 +685,7 @@ msgid "Offset Y:"
 msgstr ""
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "لون الظل:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
@@ -685,6 +694,19 @@ msgid "Gradient"
 msgstr ""
 
 msgid "Gradient Map"
+msgstr ""
+
+msgid "Divide into equal parts"
+msgstr ""
+
+msgid "Parts:"
+msgstr ""
+
+msgid "Add point at the end"
+msgstr ""
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
 msgid "Linear"
@@ -736,7 +758,7 @@ msgid "Value:"
 msgstr ""
 
 msgid "Apply"
-msgstr ""
+msgstr "تطبيق"
 
 msgid "Diagonal"
 msgstr ""
@@ -748,7 +770,7 @@ msgid "Thickness:"
 msgstr ""
 
 msgid "Colors:"
-msgstr ""
+msgstr "الألوان:"
 
 msgid "Steps:"
 msgstr ""
@@ -832,7 +854,7 @@ msgid "Polish"
 msgstr "اليولندية"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "البرتغالية"
 
 msgid "Brazilian Portuguese"
 msgstr "البرتغالية البرازلية"
@@ -889,19 +911,19 @@ msgid "Japanese"
 msgstr "اليابانية"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "الأوكرانية"
 
 msgid "Danish"
-msgstr ""
+msgstr "الدنماركية"
 
 msgid "Swedish"
-msgstr ""
+msgstr "السويدية"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "الصربية (السيريلية)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "الهولندية"
 
 msgid "Development Team"
 msgstr "فريق التطوير"
@@ -1057,7 +1079,7 @@ msgid "Ellipse Tool\n\n"
 msgstr ""
 
 msgid "Rectangle"
-msgstr ""
+msgstr "مستطيل"
 
 msgid "Ellipse"
 msgstr ""
@@ -1272,7 +1294,7 @@ msgid "Uninstall"
 msgstr ""
 
 msgid "Open Folder"
-msgstr ""
+msgstr "فتح المجلد"
 
 msgid "Brush:"
 msgstr ""
@@ -1323,13 +1345,20 @@ msgstr ""
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
 msgstr ""
 
-msgid "Same color area"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
 msgstr ""
 
-msgid "Same color pixels"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
 msgstr ""
 
 msgid "Fill with:"
@@ -1405,7 +1434,7 @@ msgid "Vertical"
 msgstr ""
 
 msgid "Current frame:"
-msgstr ""
+msgstr "الإطار الحالي:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -1469,13 +1498,13 @@ msgid "Add a new frame tag"
 msgstr ""
 
 msgid "Name:"
-msgstr ""
+msgstr "الاسم:"
 
 msgid "From:"
-msgstr ""
+msgstr "من:"
 
 msgid "To:"
-msgstr ""
+msgstr " إلى:"
 
 msgid "Animation plays only on frames of the same tag"
 msgstr ""
@@ -1509,10 +1538,10 @@ msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffi
 msgstr ""
 
 msgid "Add a new frame"
-msgstr ""
+msgstr "إضافة إطار جديد"
 
 msgid "Remove Frame"
-msgstr ""
+msgstr "إزالة الإطار"
 
 msgid "Clone Frame"
 msgstr ""
@@ -1545,7 +1574,7 @@ msgid "Layers"
 msgstr ""
 
 msgid "Create a new layer"
-msgstr ""
+msgstr "إنشاء طبقة جديدة"
 
 msgid "Remove current layer"
 msgstr ""
@@ -1711,7 +1740,7 @@ msgid "Palette Name:"
 msgstr ""
 
 msgid "Color Name:"
-msgstr ""
+msgstr "اسم اللون:"
 
 msgid "Use current left & right colors"
 msgstr ""
@@ -1759,7 +1788,7 @@ msgid "Don't show again"
 msgstr ""
 
 msgid "Image Options"
-msgstr ""
+msgstr "خيارات الصورة"
 
 msgid "Default width:"
 msgstr ""
@@ -1837,7 +1866,7 @@ msgid "Pencil"
 msgstr ""
 
 msgid "Eraser"
-msgstr ""
+msgstr "ممحاة"
 
 msgid "Bucket"
 msgstr ""
@@ -1849,7 +1878,7 @@ msgid "Line Tool"
 msgstr ""
 
 msgid "Rectangle Tool"
-msgstr ""
+msgstr "أداة المستطيل"
 
 msgid "Ellipse Tool"
 msgstr ""
@@ -1888,10 +1917,10 @@ msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr ""
 
 msgid "Open Last Project"
-msgstr ""
+msgstr "فتح آخر مشروع"
 
 msgid "Open last project..."
-msgstr ""
+msgstr "فتح آخر مشروع..."
 
 msgid "Open last project on startup"
 msgstr ""
@@ -1918,13 +1947,13 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "إغلاق"
 
 msgid "Delete"
 msgstr ""
 
 msgid "Discard All"
-msgstr ""
+msgstr "تجاهل الكل"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
@@ -1961,7 +1990,7 @@ msgid "Frame duration"
 msgstr ""
 
 msgid "Duration"
-msgstr ""
+msgstr "المدة"
 
 msgid "Tiled In Both Axis"
 msgstr ""
@@ -1991,7 +2020,7 @@ msgid "From Current Selection"
 msgstr ""
 
 msgid "Add a new color"
-msgstr ""
+msgstr "إضافة لون جديد"
 
 msgid "Remove a selected color"
 msgstr ""

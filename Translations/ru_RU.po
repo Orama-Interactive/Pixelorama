@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-09-18 16:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -135,6 +135,9 @@ msgstr "Вырезать"
 msgid "Paste"
 msgstr "Вставить"
 
+msgid "Paste in Place"
+msgstr "Вставить на место"
+
 msgid "Delete"
 msgstr "Удалить"
 
@@ -163,16 +166,16 @@ msgid "Rotate Image"
 msgstr "Повернуть изображение"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "Центр вращения (x, y):"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Настройки мазка:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Допустимое отклонение:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Начальный угол:"
 
 msgid "Clear"
 msgstr "Очистить"
@@ -181,7 +184,7 @@ msgid "Invert"
 msgstr "Инвертировать"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Вид в оттенках серого"
 
 msgid "Mirror Image"
 msgstr "Отраженное изображение"
@@ -199,31 +202,31 @@ msgid "Tile Mode"
 msgstr "Бесшовный режим"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Сдвиг в бесшовном режиме"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X для X-базиса:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "Y для X-базиса:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "X для Y-базиса:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y для Y-базиса:"
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Тайловая маска"
 
 msgid "Reset"
-msgstr ""
+msgstr "Сброс"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "Использовать текущий кадр"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Сбросить маску"
 
 msgid "Window Opacity"
 msgstr "Непрозрачность окна"
@@ -313,10 +316,10 @@ msgid "Recent projects"
 msgstr "Недавние проекты"
 
 msgid "New project"
-msgstr ""
+msgstr "Новый проект"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Таблица спрайтов (новый проект)"
 
 msgid "Spritesheet (new layer)"
 msgstr "Таблица спрайтов (новый слой)"
@@ -509,7 +512,7 @@ msgid "Trilinear"
 msgstr "Трилинейный"
 
 msgid "Constant"
-msgstr ""
+msgstr "Константа"
 
 msgid "General"
 msgstr "Общие"
@@ -613,6 +616,12 @@ msgstr "Цвет значка из:"
 msgid "Icon color:"
 msgstr "Цвет значка:"
 
+msgid "Background color from:"
+msgstr "Цвет фона из:"
+
+msgid "Background color:"
+msgstr "Цвет фона:"
+
 msgid "Left tool color:"
 msgstr "Цвет левого инструмента:"
 
@@ -687,6 +696,19 @@ msgstr "Градиент"
 
 msgid "Gradient Map"
 msgstr "Карта градиента"
+
+msgid "Divide into equal parts"
+msgstr "Разделить на равные части"
+
+msgid "Parts:"
+msgstr "Части:"
+
+msgid "Add point at the end"
+msgstr "Добавить точку в конце"
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
+msgstr ""
 
 msgid "Linear"
 msgstr "Линейный"
@@ -1362,14 +1384,21 @@ msgstr "Цвет кисти из"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Собственный цвет кисти, 100: Выбранный цвет"
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr "Залить область:"
+msgstr ""
 
-msgid "Same color area"
-msgstr "Область того же цвета"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr ""
 
-msgid "Same color pixels"
-msgstr "Пиксели того же цвета"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr ""
 
 msgid "Fill with:"
 msgstr "Заполнить:"
@@ -1969,7 +1998,7 @@ msgid "Close"
 msgstr "Закрыть"
 
 msgid "Delete"
-msgstr "Удалить"
+msgstr ""
 
 msgid "Discard All"
 msgstr "Отменить все"

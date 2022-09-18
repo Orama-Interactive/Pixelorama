@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-08-11 12:22\n"
+"PO-Revision-Date: 2022-09-18 17:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -134,6 +134,9 @@ msgstr "Ausschneiden"
 
 msgid "Paste"
 msgstr "Einfügen"
+
+msgid "Paste in Place"
+msgstr "An Ort einfügen"
 
 msgid "Delete"
 msgstr "Löschen"
@@ -612,6 +615,12 @@ msgstr "Icon-Farbe von:"
 msgid "Icon color:"
 msgstr "Icon-Farbe:"
 
+msgid "Background color from:"
+msgstr "Hintergrundfarbe von:"
+
+msgid "Background color:"
+msgstr "Hintergrundfarbe:"
+
 msgid "Left tool color:"
 msgstr "Farbe des linken Werkzeugs:"
 
@@ -686,6 +695,20 @@ msgstr "Gradient"
 
 msgid "Gradient Map"
 msgstr "Verlaufsumsetzung"
+
+msgid "Divide into equal parts"
+msgstr "In gleiche Teile teilen"
+
+msgid "Parts:"
+msgstr "Teile:"
+
+msgid "Add point at the end"
+msgstr "Punkt am Ende hinzufügen"
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
+msgstr "Wenn diese Option aktiviert ist, wird der letzte Punkt am Ende des Farbverlaufs hinzugefügt.\n"
+"Deaktiviere dies, wenn du den Farbverlauf für eine konstante Interpolation konvertieren möchtest, so, dass die letzte Farbe berücksichtigt wird."
 
 msgid "Linear"
 msgstr "Linear"
@@ -1361,14 +1384,21 @@ msgstr "Pinselfarbe von"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Farbe von dem Pinsel selbst, 100: die aktuell ausgewählte Farbe"
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr "Fülle Bereich"
+msgstr "Fülle Bereich:"
 
-msgid "Same color area"
-msgstr "Gleiche Farbfläche"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr "Ähnlicher Bereich"
 
-msgid "Same color pixels"
-msgstr "Gleiche Farbpixel"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr "Ähnliche Farben"
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr "Ganze Auswahl"
 
 msgid "Fill with:"
 msgstr "Füllen mit:"

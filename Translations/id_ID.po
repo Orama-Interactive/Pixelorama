@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-08-11 02:30\n"
+"PO-Revision-Date: 2022-09-18 16:26\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -134,6 +134,9 @@ msgstr "Potong"
 
 msgid "Paste"
 msgstr "Tempel"
+
+msgid "Paste in Place"
+msgstr ""
 
 msgid "Delete"
 msgstr "Hapus"
@@ -613,6 +616,12 @@ msgstr "Warna ikon dari:"
 msgid "Icon color:"
 msgstr "Warna ikon:"
 
+msgid "Background color from:"
+msgstr ""
+
+msgid "Background color:"
+msgstr ""
+
 msgid "Left tool color:"
 msgstr "Warna alat di kiri:"
 
@@ -687,6 +696,19 @@ msgstr "Gradien"
 
 msgid "Gradient Map"
 msgstr "Peta Gradien"
+
+msgid "Divide into equal parts"
+msgstr ""
+
+msgid "Parts:"
+msgstr ""
+
+msgid "Add point at the end"
+msgstr ""
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
+msgstr ""
 
 msgid "Linear"
 msgstr "Linier"
@@ -1362,14 +1384,21 @@ msgstr "Warna kuas dari"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Warna dari kuasnya sendiri, 100: Warna yang dipilih saat ini"
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr "Area diisi:"
+msgstr ""
 
-msgid "Same color area"
-msgstr "Area berwarna sama"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr ""
 
-msgid "Same color pixels"
-msgstr "Piksel berwarna sama"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr ""
 
 msgid "Fill with:"
 msgstr "Isi dengan:"
@@ -1969,7 +1998,7 @@ msgid "Close"
 msgstr "Tutup"
 
 msgid "Delete"
-msgstr "Hapus"
+msgstr ""
 
 msgid "Discard All"
 msgstr "Buang Semua"

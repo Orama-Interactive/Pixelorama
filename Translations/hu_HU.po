@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-09-18 16:26\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -134,6 +134,9 @@ msgstr "Kivágás"
 
 msgid "Paste"
 msgstr "Beillesztés"
+
+msgid "Paste in Place"
+msgstr ""
 
 msgid "Delete"
 msgstr "Törlés"
@@ -612,6 +615,12 @@ msgstr ""
 msgid "Icon color:"
 msgstr "Ikon színe:"
 
+msgid "Background color from:"
+msgstr ""
+
+msgid "Background color:"
+msgstr ""
+
 msgid "Left tool color:"
 msgstr ""
 
@@ -685,6 +694,19 @@ msgid "Gradient"
 msgstr "Színátmenet"
 
 msgid "Gradient Map"
+msgstr ""
+
+msgid "Divide into equal parts"
+msgstr ""
+
+msgid "Parts:"
+msgstr ""
+
+msgid "Add point at the end"
+msgstr ""
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
 msgid "Linear"
@@ -1323,14 +1345,21 @@ msgstr "Ecset színből"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Szín a ecsetből, 100: a jelenleg kiválasztott szín"
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr "Terület kitöltése:"
+msgstr ""
 
-msgid "Same color area"
-msgstr "Ugyanaz a színterület"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr ""
 
-msgid "Same color pixels"
-msgstr "Ugyanazon színű pixelek"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr ""
 
 msgid "Fill with:"
 msgstr "Kitöltés ezzel:"
@@ -1930,7 +1959,7 @@ msgid "Close"
 msgstr "Bezárás"
 
 msgid "Delete"
-msgstr "Törlés"
+msgstr ""
 
 msgid "Discard All"
 msgstr ""
