@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-09-16 23:09\n"
+"PO-Revision-Date: 2022-09-18 13:37\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1385,14 +1385,14 @@ msgstr "Fırça rengini buradan"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Rengi fırçadan alır, 100: şu an seçili olan renk"
 
-msgid "Fill area:"
-msgstr "Alanı doldur:"
+#. Found in the bucket tool options, to let users toggle if it should fill colors continuously or not.
+msgid "Fill continuously"
+msgstr ""
 
-msgid "Same color area"
-msgstr "Aynı renk alan"
-
-msgid "Same color pixels"
-msgstr "Aynı renk pikseller"
+#. Hint tooltip of the "Fill continuously" checkbox, found in the bucket tool options.
+msgid "If enabled, it fills the continuous area with the selected color.\n"
+"If disabled, it replaces all pixels of the same color with the selected color."
+msgstr ""
 
 msgid "Fill with:"
 msgstr "Şununla doldur:"
