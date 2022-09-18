@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2022-09-16 21:26\n"
+"PO-Revision-Date: 2022-09-18 13:36\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1344,14 +1344,14 @@ msgstr "畫筆顏色"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: 畫筆自己的顏色, 100: 目前選定的顏色"
 
-msgid "Fill area:"
-msgstr "填滿："
+#. Found in the bucket tool options, to let users toggle if it should fill colors continuously or not.
+msgid "Fill continuously"
+msgstr ""
 
-msgid "Same color area"
-msgstr "同色區"
-
-msgid "Same color pixels"
-msgstr "同色像素"
+#. Hint tooltip of the "Fill continuously" checkbox, found in the bucket tool options.
+msgid "If enabled, it fills the continuous area with the selected color.\n"
+"If disabled, it replaces all pixels of the same color with the selected color."
+msgstr ""
 
 msgid "Fill with:"
 msgstr "填滿："
@@ -1950,7 +1950,7 @@ msgid "Close"
 msgstr "關閉"
 
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 msgid "Discard All"
 msgstr ""
