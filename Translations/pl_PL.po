@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-09-18 16:27\n"
+"PO-Revision-Date: 2022-09-18 17:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -136,7 +136,7 @@ msgid "Paste"
 msgstr "Wklej"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Wklej w Miejscu"
 
 msgid "Delete"
 msgstr "Usuń"
@@ -616,10 +616,10 @@ msgid "Icon color:"
 msgstr "Kolor ikony:"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Kolor tła z:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Kolor tła:"
 
 msgid "Left tool color:"
 msgstr "Kolor lewego narzędzia:"
@@ -697,17 +697,18 @@ msgid "Gradient Map"
 msgstr "Mapa gradientu"
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "Podziel na równe części"
 
 msgid "Parts:"
-msgstr ""
+msgstr "Części:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "Dodaj punkt na końcu"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr ""
+msgstr "Gdy włączone, ostatni punkt będzie dodawany na końcu gradientu.\n"
+"Wyłącz, jeśli chcesz gradient ze stałą interpolacją, aby ostatni kolor był brany pod uwagę."
 
 msgid "Linear"
 msgstr "Prosty"
@@ -1385,19 +1386,19 @@ msgstr "0: Kolor pochodzący z samego pędzla, 100: Obecnie wybrany kolor rysowa
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Wypełniony obszar:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "Podobny obszar"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "Podobne kolory"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "Całe zaznaczenie"
 
 msgid "Fill with:"
 msgstr "Wypełnij za pomocą:"
@@ -1997,7 +1998,7 @@ msgid "Close"
 msgstr "Zamknij"
 
 msgid "Delete"
-msgstr ""
+msgstr "Usuń"
 
 msgid "Discard All"
 msgstr "Odrzuć Wszystkie"
