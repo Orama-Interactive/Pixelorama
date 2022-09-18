@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-09-16 21:26\n"
+"PO-Revision-Date: 2022-09-18 13:37\n"
 
 msgid "OK"
 msgstr "예"
@@ -1382,14 +1382,14 @@ msgstr "브러시 색상을 ~에서"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: 브러시 자체의 색상, 100: 현재 선택된 색상"
 
-msgid "Fill area:"
-msgstr "채우는 영역:"
+#. Found in the bucket tool options, to let users toggle if it should fill colors continuously or not.
+msgid "Fill continuously"
+msgstr ""
 
-msgid "Same color area"
-msgstr "같은 색상 영역"
-
-msgid "Same color pixels"
-msgstr "같은 색상 픽셀"
+#. Hint tooltip of the "Fill continuously" checkbox, found in the bucket tool options.
+msgid "If enabled, it fills the continuous area with the selected color.\n"
+"If disabled, it replaces all pixels of the same color with the selected color."
+msgstr ""
 
 msgid "Fill with:"
 msgstr "이것으로 채우기:"
@@ -1989,7 +1989,7 @@ msgid "Close"
 msgstr "닫기"
 
 msgid "Delete"
-msgstr ""
+msgstr "삭제"
 
 msgid "Discard All"
 msgstr "모두 버리기"
