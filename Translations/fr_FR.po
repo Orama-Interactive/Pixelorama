@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-09-18 13:37\n"
+"PO-Revision-Date: 2022-09-18 14:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1384,15 +1384,6 @@ msgstr "Couleur de la brosse depuis"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0 : Couleur depuis la brosse elle-même, 100 : la couleur actuellement sélectionnée"
-
-#. Found in the bucket tool options, to let users toggle if it should fill colors continuously or not.
-msgid "Fill continuously"
-msgstr ""
-
-#. Hint tooltip of the "Fill continuously" checkbox, found in the bucket tool options.
-msgid "If enabled, it fills the continuous area with the selected color.\n"
-"If disabled, it replaces all pixels of the same color with the selected color."
-msgstr ""
 
 msgid "Fill with:"
 msgstr "Remplir avec:"
