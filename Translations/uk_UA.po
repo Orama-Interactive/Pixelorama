@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-09-18 16:27\n"
+"PO-Revision-Date: 2022-09-19 09:38\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1387,19 +1387,19 @@ msgstr "0: Колір з самого пензля, 100: поточний кол
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Область заповнення:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "Подібна область"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "Подібні кольори"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "Все виділення"
 
 msgid "Fill with:"
 msgstr "Чим залити:"
@@ -1999,7 +1999,7 @@ msgid "Close"
 msgstr "Закрити"
 
 msgid "Delete"
-msgstr ""
+msgstr "Видалити"
 
 msgid "Discard All"
 msgstr "Відкинути все"
