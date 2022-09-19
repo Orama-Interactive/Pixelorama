@@ -1387,15 +1387,15 @@ msgstr "0: Cor do próprio pincel, 100: A cor atualmente selecionada"
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Preencher área:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "Área semelhante"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "Cores semelhantes"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
@@ -1601,7 +1601,7 @@ msgid "Move Right"
 msgstr "Mover para a Direita"
 
 msgid "Add Frame Tag"
-msgstr ""
+msgstr "Adicionar Tag para Quadro"
 
 msgid "Link Cel"
 msgstr "Vincular célula"
@@ -1999,7 +1999,7 @@ msgid "Close"
 msgstr "Fechar"
 
 msgid "Delete"
-msgstr ""
+msgstr "Deletar"
 
 msgid "Discard All"
 msgstr "Descartar Todos"
