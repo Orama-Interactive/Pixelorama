@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-09-18 16:26\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -609,11 +609,17 @@ msgstr "Lilla"
 msgid "Theme"
 msgstr "Utseende"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Ikonfarge fra:"
 
 msgid "Icon color:"
 msgstr "Ikonfarge:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr ""
@@ -1991,9 +1997,6 @@ msgstr "Oppretter flere filer, hver fil lagres i en mappe som tilsvarer bildemer
 
 msgid "Close"
 msgstr "Lukk"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr ""
