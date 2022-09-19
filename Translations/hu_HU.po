@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2022-09-18 16:26\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -609,11 +609,17 @@ msgstr "Lila"
 msgid "Theme"
 msgstr "Téma"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
 msgstr "Ikon színe:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr ""
@@ -1957,9 +1963,6 @@ msgstr "Több fájlt hoz létre, de minden fájlt külön könyvtárban tárol, 
 
 msgid "Close"
 msgstr "Bezárás"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr ""
