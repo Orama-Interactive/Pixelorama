@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-09-18 16:26\n"
+"PO-Revision-Date: 2022-09-19 03:48\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1387,19 +1387,19 @@ msgstr "0：画笔本身的颜色，100：当前选择的颜色"
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "填充区域："
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "相似区域"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "相似颜色"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "全部选区"
 
 msgid "Fill with:"
 msgstr "填充使用："
@@ -1999,7 +1999,7 @@ msgid "Close"
 msgstr "关闭"
 
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 msgid "Discard All"
 msgstr "放弃全部"
