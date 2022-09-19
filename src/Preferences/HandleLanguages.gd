@@ -28,6 +28,7 @@ const LANGUAGES_DICT := {
 }
 
 var loaded_locales: Array
+onready var system_language: CheckBox = $"System Language"
 
 
 func _ready() -> void:
@@ -35,7 +36,7 @@ func _ready() -> void:
 
 	# Make sure locales are always sorted, in the same order
 	loaded_locales.sort()
-	var button_group: ButtonGroup = get_child(0).group
+	var button_group: ButtonGroup = system_language.group
 
 	# Create radiobuttons for each language
 	for locale in loaded_locales:
@@ -56,8 +57,8 @@ func _ready() -> void:
 
 		# Set the language option menu's default selected option to the loaded locale
 		var locale_index: int = loaded_locales.find(saved_locale)
-		get_child(0).pressed = false  # Unset System Language option in preferences
-		get_child(locale_index + 1).pressed = true
+		system_language.pressed = false  # Unset System Language option in preferences
+		get_child(locale_index + 2).pressed = true
 	else:  # If the user doesn't have a language preference, set it to their OS' locale
 		TranslationServer.set_locale(OS.get_locale())
 
@@ -69,10 +70,10 @@ func _ready() -> void:
 
 func _on_Language_pressed(index: int) -> void:
 	get_child(index).pressed = true
-	if index == 0:
+	if index == 1:
 		TranslationServer.set_locale(OS.get_locale())
 	else:
-		TranslationServer.set_locale(loaded_locales[index - 1])
+		TranslationServer.set_locale(loaded_locales[index - 2])
 
 	Global.config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
 	Global.config_cache.save("user://cache.ini")

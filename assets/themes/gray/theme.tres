@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=177 format=2]
+[gd_resource type="Theme" load_steps=178 format=2]
 
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/Roboto-Big.tres" type="DynamicFont" id=2]
 
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 6.0
@@ -1647,6 +1648,9 @@ HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 8
 HSplitContainer/icons/grabber = SubResource( 89 )
 HSplitContainer/styles/bg = SubResource( 90 )
+Header/base_type = "Label"
+Header/colors/font_color = Color( 0.909804, 0.909804, 0.909804, 1 )
+Header/fonts/font = ExtResource( 2 )
 Icons/colors/modulate_color = Color( 0.74902, 0.74902, 0.74902, 1 )
 ItemList/colors/font_color = Color( 0.848039, 0.848039, 0.848039, 1 )
 ItemList/colors/font_color_selected = Color( 1, 1, 1, 1 )
@@ -1662,7 +1666,7 @@ ItemList/styles/cursor = SubResource( 93 )
 ItemList/styles/cursor_unfocused = SubResource( 93 )
 ItemList/styles/selected = SubResource( 94 )
 ItemList/styles/selected_focus = SubResource( 95 )
-Label/colors/font_color = Color( 0.848039, 0.848039, 0.848039, 1 )
+Label/colors/font_color = Color( 0.847059, 0.847059, 0.847059, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 Label/constants/line_spacing = 3

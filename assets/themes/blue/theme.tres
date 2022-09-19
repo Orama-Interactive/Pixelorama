@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=170 format=2]
+[gd_resource type="Theme" load_steps=171 format=2]
 
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/Roboto-Big.tres" type="DynamicFont" id=2]
 
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 6.0
@@ -1560,6 +1561,9 @@ HSlider/styles/slider = SubResource( 82 )
 HSplitContainer/constants/separation = 8
 HSplitContainer/icons/grabber = SubResource( 84 )
 HSplitContainer/styles/bg = SubResource( 85 )
+Header/base_type = "Label"
+Header/colors/font_color = Color( 0.85098, 0.85098, 0.85098, 1 )
+Header/fonts/font = ExtResource( 2 )
 Icons/colors/modulate_color = Color( 0.74902, 0.74902, 0.74902, 1 )
 ItemList/colors/font_color = Color( 0.8, 0.8075, 0.8275, 1 )
 ItemList/colors/font_color_selected = Color( 1, 1, 1, 1 )

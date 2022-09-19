@@ -5,18 +5,14 @@
 
 [sub_resource type="ImageTexture" id=1]
 
-[node name="RestoreDefaultButton" type="TextureButton" groups=[
-"UIButtons",
-]]
+[node name="RestoreDefaultButton" type="TextureButton" groups=["UIButtons"]]
 margin_right = 16.0
 margin_bottom = 16.0
+size_flags_horizontal = 8
 size_flags_vertical = 4
 disabled = true
 texture_normal = ExtResource( 1 )
 texture_disabled = SubResource( 1 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="pressed" from="." to="." method="_on_RestoreDefaultButton_pressed"]

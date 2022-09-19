@@ -6,12 +6,12 @@ var preferences := [
 	Preference.new("quit_confirmation", "Startup/StartupContainer/QuitConfirmation", "pressed"),
 	Preference.new("shrink", "Interface/ShrinkContainer/ShrinkHSlider", "value"),
 	Preference.new("dim_on_popup", "Interface/DimPopup/CheckBox", "pressed"),
-	Preference.new("icon_color_from", "Interface/IconColorFrom/IconColorOptionButton", "selected"),
-	Preference.new("custom_icon_color", "Interface/IconColorFrom/IconColorButton", "color"),
-	Preference.new("left_tool_color", "Interface/IconColorFrom/LeftToolColorButton", "color"),
-	Preference.new("right_tool_color", "Interface/IconColorFrom/RightToolColorButton", "color"),
+	Preference.new("icon_color_from", "Interface/ButtonOptions/IconColorOptionButton", "selected"),
+	Preference.new("custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color"),
+	Preference.new("left_tool_color", "Interface/ButtonOptions/LeftToolColorButton", "color"),
+	Preference.new("right_tool_color", "Interface/ButtonOptions/RightToolColorButton", "color"),
 	Preference.new(
-		"tool_button_size", "Interface/ToolButtonSize/ToolButtonSizeOptionButton", "selected"
+		"tool_button_size", "Interface/ButtonOptions/ToolButtonSizeOptionButton", "selected"
 	),
 	Preference.new(
 		"pressure_sensitivity_mode",

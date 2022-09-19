@@ -60,6 +60,24 @@ size_flags_vertical = 3
 margin_right = 498.0
 margin_bottom = 52.0
 
+[node name="StartupHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup"]
+margin_top = 108.0
+margin_right = 498.0
+margin_bottom = 122.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupHeader"]
+margin_right = 51.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Startup"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupHeader"]
+margin_left = 51.0
+margin_right = 498.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
 [node name="StartupContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup"]
 margin_right = 498.0
 margin_bottom = 52.0
@@ -69,6 +87,7 @@ columns = 3
 margin_top = 5.0
 margin_right = 180.0
 margin_bottom = 19.0
+size_flags_horizontal = 3
 text = "Open last project on startup"
 
 [node name="OpenLastProject" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
@@ -77,6 +96,7 @@ margin_right = 231.0
 margin_bottom = 24.0
 hint_tooltip = "Opens last opened project on startup"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "On"
 
 [node name="QuitConfirmationLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
@@ -120,6 +140,24 @@ margin_right = 506.0
 margin_bottom = 632.0
 script = ExtResource( 4 )
 
+[node name="LanguageHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Language"]
+margin_top = 108.0
+margin_right = 498.0
+margin_bottom = 122.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Language/LanguageHeader"]
+margin_right = 51.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Language"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Language/LanguageHeader"]
+margin_left = 51.0
+margin_right = 498.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
 [node name="System Language" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Language"]
 margin_right = 506.0
 margin_bottom = 24.0
@@ -132,7 +170,25 @@ text = "System Language"
 visible = false
 margin_top = 56.0
 margin_right = 498.0
-margin_bottom = 250.0
+margin_bottom = 244.0
+
+[node name="InterfaceHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_top = 52.0
+margin_right = 498.0
+margin_bottom = 66.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/InterfaceHeader"]
+margin_right = 51.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Interface"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/InterfaceHeader"]
+margin_left = 51.0
+margin_right = 498.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
 
 [node name="ShrinkContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
 margin_right = 498.0
@@ -193,21 +249,28 @@ mouse_default_cursor_shape = 2
 pressed = true
 text = "On"
 
-[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+[node name="ThemesHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
 margin_top = 52.0
 margin_right = 498.0
-margin_bottom = 56.0
+margin_bottom = 66.0
+custom_constants/separation = 0
 
-[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 60.0
-margin_right = 498.0
-margin_bottom = 74.0
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ThemesHeader"]
+margin_right = 51.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
 text = "Themes"
 
-[node name="Themes" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 78.0
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ThemesHeader"]
+margin_left = 51.0
 margin_right = 498.0
-margin_bottom = 82.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Themes" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_top = 70.0
+margin_right = 498.0
+margin_bottom = 74.0
 script = ExtResource( 5 )
 
 [node name="ThemeButtons" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/Themes"]
@@ -225,117 +288,134 @@ margin_top = 4.0
 margin_bottom = 4.0
 custom_constants/separation = 12
 
-[node name="HSeparator2" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 86.0
+[node name="ButtonHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_top = 78.0
 margin_right = 498.0
-margin_bottom = 90.0
+margin_bottom = 92.0
+custom_constants/separation = 0
 
-[node name="IconColorFrom" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 94.0
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonHeader"]
+margin_right = 50.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Buttons"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonHeader"]
+margin_left = 50.0
 margin_right = 498.0
-margin_bottom = 162.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="ButtonOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_top = 96.0
+margin_right = 498.0
+margin_bottom = 188.0
 columns = 3
 
-[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
 margin_top = 3.0
-margin_right = 102.0
+margin_right = 194.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "Tool button size:"
+
+[node name="ToolButtonSizeOptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
+margin_left = 198.0
+margin_right = 392.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "Small"
+items = [ "Small", null, false, 0, null, "Big", null, false, 1, null ]
+selected = 0
+
+[node name="Label2" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
+margin_left = 396.0
+margin_top = 3.0
+margin_right = 498.0
 margin_bottom = 17.0
 text = "Icon color from:"
 
-[node name="IconColorOptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
-margin_left = 106.0
-margin_right = 199.0
-margin_bottom = 20.0
+[node name="IconColorOptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
+margin_top = 24.0
+margin_right = 194.0
+margin_bottom = 44.0
 mouse_default_cursor_shape = 2
 text = "Theme"
 items = [ "Theme", null, false, 0, null, "Custom", null, false, 1, null ]
 selected = 0
 
-[node name="Label2" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
-margin_left = 203.0
-margin_top = 3.0
-margin_right = 271.0
-margin_bottom = 17.0
+[node name="Label3" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
+margin_left = 198.0
+margin_top = 27.0
+margin_right = 392.0
+margin_bottom = 41.0
 text = "Icon color:"
 
-[node name="IconColorButton" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
+[node name="IconColorButton" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
+margin_left = 396.0
 margin_top = 24.0
-margin_right = 64.0
+margin_right = 460.0
 margin_bottom = 44.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 color = Color( 0.75, 0.75, 0.75, 1 )
 
-[node name="Label3" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
-margin_left = 106.0
-margin_top = 27.0
-margin_right = 199.0
-margin_bottom = 41.0
+[node name="Label4" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
+margin_top = 51.0
+margin_right = 194.0
+margin_bottom = 65.0
 text = "Left tool color:"
 
-[node name="LeftToolColorButton" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
-margin_left = 203.0
-margin_top = 24.0
-margin_right = 267.0
-margin_bottom = 44.0
+[node name="LeftToolColorButton" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
+margin_left = 198.0
+margin_top = 48.0
+margin_right = 262.0
+margin_bottom = 68.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 color = Color( 0, 0.52549, 0.811765, 1 )
 
-[node name="Label4" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
+[node name="Label5" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
+margin_left = 396.0
 margin_top = 51.0
-margin_right = 102.0
+margin_right = 498.0
 margin_bottom = 65.0
 text = "Right tool color:"
 
-[node name="RightToolColorButton" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/IconColorFrom"]
-margin_left = 106.0
-margin_top = 48.0
-margin_right = 170.0
-margin_bottom = 68.0
+[node name="RightToolColorButton" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
+margin_top = 72.0
+margin_right = 64.0
+margin_bottom = 92.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 color = Color( 0.992157, 0.427451, 0.0784314, 1 )
 
-[node name="HSeparator3" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 166.0
-margin_right = 498.0
-margin_bottom = 170.0
-
-[node name="ToolButtonSize" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 174.0
-margin_right = 498.0
-margin_bottom = 194.0
-columns = 3
-
-[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ToolButtonSize"]
-margin_top = 3.0
-margin_right = 107.0
-margin_bottom = 17.0
-text = "Tool button size:"
-
-[node name="ToolButtonSizeOptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ToolButtonSize"]
-margin_left = 111.0
-margin_right = 175.0
-margin_bottom = 20.0
-mouse_default_cursor_shape = 2
-text = "Small"
-items = [ "Small", null, false, 0, null, "Big", null, false, 1, null ]
-selected = 0
-
 [node name="Canvas" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
 margin_top = 56.0
 margin_right = 529.0
-margin_bottom = 606.0
+margin_bottom = 584.0
 
-[node name="ZoomLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+[node name="ZoomHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_right = 529.0
 margin_bottom = 14.0
+custom_constants/separation = 0
+
+[node name="ZoomLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/ZoomHeader"]
+margin_right = 37.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
 text = "Zoom"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/ZoomHeader"]
+margin_left = 37.0
+margin_right = 529.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
 
 [node name="ZoomOptions" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_top = 18.0
@@ -344,72 +424,90 @@ margin_bottom = 42.0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/ZoomOptions"]
 margin_top = 5.0
-margin_right = 110.0
+margin_right = 262.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 110, 0 )
+size_flags_horizontal = 3
 text = "Smooth Zoom"
 
 [node name="SmoothZoom" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/ZoomOptions"]
-margin_left = 114.0
-margin_right = 161.0
+margin_left = 266.0
+margin_right = 529.0
 margin_bottom = 24.0
 hint_tooltip = "Adds a smoother transition when zooming in or out"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 pressed = true
 text = "On"
 
-[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+[node name="GuideHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_top = 46.0
 margin_right = 529.0
-margin_bottom = 50.0
+margin_bottom = 60.0
+custom_constants/separation = 0
 
-[node name="GuideLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 54.0
-margin_right = 529.0
-margin_bottom = 68.0
+[node name="GuideLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GuideHeader"]
+margin_right = 45.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
 text = "Guides"
 
-[node name="GuideOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 72.0
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GuideHeader"]
+margin_left = 45.0
 margin_right = 529.0
-margin_bottom = 92.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="GuideOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 64.0
+margin_right = 529.0
+margin_bottom = 84.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
 [node name="GuideColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GuideOptions"]
 margin_top = 3.0
-margin_right = 110.0
+margin_right = 175.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 110, 0 )
 hint_tooltip = "A color of ruler guides displayed on the canvas"
 mouse_filter = 0
+size_flags_horizontal = 3
 text = "Guides color:"
 
 [node name="GuideColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GuideOptions"]
-margin_left = 114.0
-margin_right = 178.0
+margin_left = 179.0
+margin_right = 354.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "A color of ruler guides displayed on the canvas"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 color = Color( 0.63, 0.13, 0.94, 1 )
 
-[node name="HSeparator2" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 96.0
+[node name="GridHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 88.0
 margin_right = 529.0
-margin_bottom = 100.0
+margin_bottom = 102.0
+custom_constants/separation = 0
 
-[node name="GridLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 104.0
-margin_right = 529.0
-margin_bottom = 118.0
+[node name="GridLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridHeader"]
+margin_right = 27.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
 text = "Grid"
 
-[node name="GridOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 122.0
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridHeader"]
+margin_left = 27.0
 margin_right = 529.0
-margin_bottom = 282.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="GridOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 106.0
+margin_right = 529.0
+margin_bottom = 266.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
@@ -420,6 +518,7 @@ margin_right = 183.0
 margin_bottom = 17.0
 hint_tooltip = "Sets the type of the grid between rectangular, isometric or both"
 mouse_filter = 0
+size_flags_horizontal = 3
 text = "Grid type:"
 __meta__ = {
 "_editor_description_": ""
@@ -431,6 +530,7 @@ margin_right = 337.0
 margin_bottom = 20.0
 hint_tooltip = "Sets the type of the grid between rectangular, isometric or both"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "Rectangular"
 items = [ "Rectangular", null, false, 0, null, "Isometric", null, false, 1, null, "All", null, false, 2, null ]
 selected = 0
@@ -604,41 +704,50 @@ rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "A color of the grid"
 mouse_default_cursor_shape = 2
 
-[node name="HSeparator3" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 286.0
+[node name="PixelGridHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 270.0
 margin_right = 529.0
-margin_bottom = 290.0
+margin_bottom = 284.0
+custom_constants/separation = 0
 
-[node name="PixelGridLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 294.0
-margin_right = 529.0
-margin_bottom = 308.0
+[node name="PixelGridLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridHeader"]
+margin_right = 62.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
 text = "Pixel Grid"
 
-[node name="PixelGridOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 312.0
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridHeader"]
+margin_left = 62.0
 margin_right = 529.0
-margin_bottom = 360.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="PixelGridOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 288.0
+margin_right = 529.0
+margin_bottom = 336.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
 [node name="ShowAtZoomLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
 margin_top = 5.0
-margin_right = 110.0
+margin_right = 211.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 110, 0 )
 hint_tooltip = "Sets the minimal zoom at which pixel grid will be shown"
 mouse_filter = 0
+size_flags_horizontal = 3
 text = "Show at zoom:"
 
 [node name="ShowAtZoom" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
-margin_left = 114.0
-margin_right = 194.0
+margin_left = 215.0
+margin_right = 426.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
 hint_tooltip = "Sets the minimal zoom at which pixel grid will be shown"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 min_value = 500.0
 max_value = 16384.0
 step = 100.0
@@ -648,9 +757,9 @@ align = 2
 suffix = "%"
 
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
-margin_left = 198.0
+margin_left = 430.0
 margin_top = 5.0
-margin_right = 297.0
+margin_right = 529.0
 margin_bottom = 19.0
 hint_tooltip = "A color of the pixel grid"
 mouse_filter = 0
@@ -658,46 +767,55 @@ text = "Pixel grid color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
 margin_top = 28.0
-margin_right = 110.0
+margin_right = 211.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "A color of the pixel grid"
 mouse_default_cursor_shape = 2
 
-[node name="HSeparator4" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 364.0
+[node name="TransparencyHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 340.0
 margin_right = 529.0
-margin_bottom = 368.0
+margin_bottom = 354.0
+custom_constants/separation = 0
 
-[node name="TransparencyLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 372.0
-margin_right = 529.0
-margin_bottom = 386.0
+[node name="TransparencyLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/TransparencyHeader"]
+margin_right = 84.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
 text = "Transparency"
 
-[node name="CheckerOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 390.0
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/TransparencyHeader"]
+margin_left = 84.0
 margin_right = 529.0
-margin_bottom = 494.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="CheckerOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 358.0
+margin_right = 529.0
+margin_bottom = 462.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
 [node name="SizeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
 margin_top = 5.0
-margin_right = 162.0
+margin_right = 177.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 110, 0 )
 hint_tooltip = "Size of the transparent checker background"
 mouse_filter = 0
+size_flags_horizontal = 3
 text = "Checker size:"
 
 [node name="CheckerSizeValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 166.0
-margin_right = 284.0
+margin_left = 181.0
+margin_right = 357.0
 margin_bottom = 24.0
 hint_tooltip = "Size of the transparent checker background"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 min_value = 1.0
 max_value = 16384.0
 value = 10.0
@@ -706,9 +824,9 @@ align = 2
 suffix = "px"
 
 [node name="CheckerColor1Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 288.0
+margin_left = 361.0
 margin_top = 5.0
-margin_right = 456.0
+margin_right = 529.0
 margin_bottom = 19.0
 hint_tooltip = "First color of the transparent checker background"
 mouse_filter = 0
@@ -716,7 +834,7 @@ text = "Checker color 1:"
 
 [node name="CheckerColor1" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
 margin_top = 28.0
-margin_right = 162.0
+margin_right = 177.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "First color of the transparent checker background"
@@ -724,18 +842,18 @@ mouse_default_cursor_shape = 2
 color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="CheckerColor2Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 166.0
+margin_left = 181.0
 margin_top = 31.0
-margin_right = 284.0
+margin_right = 357.0
 margin_bottom = 45.0
 hint_tooltip = "Second color of the transparent checker background"
 mouse_filter = 0
 text = "Checker color 2:"
 
 [node name="CheckerColor2" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 288.0
+margin_left = 361.0
 margin_top = 28.0
-margin_right = 456.0
+margin_right = 529.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "Second color of the transparent checker background"
@@ -744,49 +862,49 @@ color = Color( 0.341176, 0.34902, 0.341176, 1 )
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
 margin_top = 57.0
-margin_right = 162.0
+margin_right = 177.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 110, 0 )
 text = "Follow Canvas Movement"
 
 [node name="CheckerFollowMovement" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 166.0
+margin_left = 181.0
 margin_top = 52.0
-margin_right = 284.0
+margin_right = 357.0
 margin_bottom = 76.0
 hint_tooltip = "The transparent checker follow the movement of canvas"
 mouse_default_cursor_shape = 2
 text = "On"
 
 [node name="Label2" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 288.0
+margin_left = 361.0
 margin_top = 57.0
-margin_right = 456.0
+margin_right = 529.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 110, 0 )
 text = "Follow Canvas Zoom Level"
 
 [node name="CheckerFollowScale" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
 margin_top = 80.0
-margin_right = 162.0
+margin_right = 177.0
 margin_bottom = 104.0
 hint_tooltip = "The transparent checker follow the zoom level of canvas"
 mouse_default_cursor_shape = 2
 text = "On"
 
 [node name="Label3" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 166.0
+margin_left = 181.0
 margin_top = 85.0
-margin_right = 284.0
+margin_right = 357.0
 margin_bottom = 99.0
 rect_min_size = Vector2( 110, 0 )
 mouse_filter = 0
 text = "Tile mode opacity:"
 
 [node name="TileModeOpacity" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/CheckerOptions"]
-margin_left = 288.0
+margin_left = 361.0
 margin_top = 80.0
-margin_right = 456.0
+margin_right = 529.0
 margin_bottom = 104.0
 mouse_default_cursor_shape = 2
 max_value = 1.0
@@ -794,47 +912,62 @@ step = 0.1
 value = 1.0
 align = 2
 
-[node name="HSeparator5" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 498.0
+[node name="BackgroundHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 466.0
 margin_right = 529.0
-margin_bottom = 502.0
+margin_bottom = 480.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/BackgroundHeader"]
+margin_right = 74.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Background"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/BackgroundHeader"]
+margin_left = 74.0
+margin_right = 529.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
 
 [node name="BackgroundOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
-margin_top = 506.0
+margin_top = 484.0
 margin_right = 529.0
-margin_bottom = 550.0
+margin_bottom = 528.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
 [node name="ColorFromLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/BackgroundOptions"]
 margin_top = 3.0
-margin_right = 148.0
+margin_right = 204.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 110, 0 )
 mouse_filter = 0
+size_flags_horizontal = 3
 text = "Background color from:"
 
 [node name="ColorOptionButton" type="OptionButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/BackgroundOptions"]
-margin_left = 152.0
-margin_right = 225.0
+margin_left = 208.0
+margin_right = 411.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "Theme"
 items = [ "Theme", null, false, 0, null, "Custom", null, false, 1, null ]
 selected = 0
 
 [node name="ColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/BackgroundOptions"]
-margin_left = 229.0
+margin_left = 415.0
 margin_top = 3.0
-margin_right = 343.0
+margin_right = 529.0
 margin_bottom = 17.0
 mouse_filter = 0
 text = "Background color:"
 
 [node name="BackgroundColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/BackgroundOptions"]
 margin_top = 24.0
-margin_right = 148.0
+margin_right = 204.0
 margin_bottom = 44.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
@@ -845,6 +978,24 @@ visible = false
 margin_top = 28.0
 margin_right = 498.0
 margin_bottom = 76.0
+
+[node name="SelectionHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Selection"]
+margin_top = 108.0
+margin_right = 498.0
+margin_bottom = 122.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Selection/SelectionHeader"]
+margin_right = 51.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Selection"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Selection/SelectionHeader"]
+margin_left = 51.0
+margin_right = 498.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
 
 [node name="SelectionOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Selection"]
 margin_right = 498.0
@@ -859,6 +1010,7 @@ margin_right = 176.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 110, 0 )
 mouse_filter = 0
+size_flags_horizontal = 3
 text = "Animated selection borders"
 
 [node name="Animate" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Selection/SelectionOptions"]
@@ -866,6 +1018,7 @@ margin_left = 180.0
 margin_right = 275.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 pressed = true
 text = "On"
 
@@ -913,6 +1066,24 @@ margin_top = 184.0
 margin_right = 498.0
 margin_bottom = 254.0
 
+[node name="BackupHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Backup"]
+margin_top = 108.0
+margin_right = 498.0
+margin_bottom = 122.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Backup/BackupHeader"]
+margin_right = 51.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Backup"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Backup/BackupHeader"]
+margin_left = 51.0
+margin_right = 498.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
 [node name="AutosaveContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Backup"]
 margin_top = 18.0
 margin_right = 498.0
@@ -923,6 +1094,7 @@ columns = 3
 margin_top = 5.0
 margin_right = 115.0
 margin_bottom = 19.0
+size_flags_horizontal = 3
 text = "Enable autosave"
 
 [node name="EnableAutosave" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Backup/AutosaveContainer"]
@@ -930,6 +1102,7 @@ margin_left = 119.0
 margin_right = 214.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 pressed = true
 text = "On"
 __meta__ = {
@@ -940,7 +1113,7 @@ __meta__ = {
 margin_top = 33.0
 margin_right = 115.0
 margin_bottom = 47.0
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 text = "Autosave interval:"
 
 [node name="AutosaveInterval" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Backup/AutosaveContainer"]
@@ -950,7 +1123,7 @@ margin_right = 214.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 95, 0 )
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 min_value = 0.1
 max_value = 30.0
 step = 0.25
@@ -967,6 +1140,24 @@ margin_top = 28.0
 margin_right = 500.0
 margin_bottom = 80.0
 
+[node name="PerformanceHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance"]
+margin_top = 108.0
+margin_right = 498.0
+margin_bottom = 122.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceHeader"]
+margin_right = 51.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Performance"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceHeader"]
+margin_left = 51.0
+margin_right = 498.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
 [node name="PerformanceContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance"]
 margin_right = 500.0
 margin_bottom = 52.0
@@ -978,7 +1169,7 @@ margin_right = 158.0
 margin_bottom = 19.0
 hint_tooltip = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 mouse_filter = 0
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 text = "Set application FPS limit:"
 
 [node name="SetFPSLimit" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer"]
@@ -988,7 +1179,7 @@ margin_bottom = 24.0
 rect_min_size = Vector2( 95, 0 )
 hint_tooltip = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 max_value = 144.0
 align = 2
 __meta__ = {
@@ -1022,6 +1213,24 @@ margin_top = 56.0
 margin_right = 498.0
 margin_bottom = 65.0
 script = ExtResource( 2 )
+
+[node name="ExtensionsHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Extensions"]
+margin_top = 108.0
+margin_right = 498.0
+margin_bottom = 122.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Extensions/ExtensionsHeader"]
+margin_right = 51.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Extensions"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Extensions/ExtensionsHeader"]
+margin_left = 51.0
+margin_right = 498.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
 
 [node name="InstalledExtensions" type="ItemList" parent="HSplitContainer/ScrollContainer/VBoxContainer/Extensions"]
 margin_right = 498.0
@@ -1064,6 +1273,24 @@ margin_top = 56.0
 margin_right = 525.0
 margin_bottom = 164.0
 
+[node name="CursorsHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors"]
+margin_top = 108.0
+margin_right = 498.0
+margin_bottom = 122.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsHeader"]
+margin_right = 51.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Cursors"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsHeader"]
+margin_left = 51.0
+margin_right = 498.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
 [node name="CursorsContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors"]
 margin_right = 525.0
 margin_bottom = 108.0
@@ -1075,6 +1302,7 @@ columns = 3
 margin_top = 5.0
 margin_right = 126.0
 margin_bottom = 19.0
+size_flags_horizontal = 3
 text = "Left pixel indicator"
 
 [node name="LeftIndicatorCheckbox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Cursors/CursorsContainer"]
@@ -1174,6 +1402,24 @@ margin_top = 240.0
 margin_right = 506.0
 margin_bottom = 316.0
 
+[node name="ImageHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image"]
+margin_top = 108.0
+margin_right = 498.0
+margin_bottom = 122.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageHeader"]
+margin_right = 51.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Image"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageHeader"]
+margin_left = 51.0
+margin_right = 498.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
 [node name="ImageOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image"]
 margin_right = 506.0
 margin_bottom = 76.0
@@ -1188,6 +1434,7 @@ margin_bottom = 19.0
 rect_min_size = Vector2( 110, 0 )
 hint_tooltip = "A default width of a new image"
 mouse_filter = 0
+size_flags_horizontal = 3
 text = "Default width:"
 
 [node name="ImageDefaultWidth" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Image/ImageOptions"]
@@ -1196,6 +1443,7 @@ margin_right = 188.0
 margin_bottom = 24.0
 hint_tooltip = "A default width of a new image"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
