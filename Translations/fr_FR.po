@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-09-18 16:26\n"
+"PO-Revision-Date: 2022-09-19 17:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1387,19 +1387,19 @@ msgstr "0 : Couleur depuis la brosse elle-même, 100 : la couleur actuellement s
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Remplir la zone :"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "Zone similaire"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "Couleurs similaires"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "Sélection entière"
 
 msgid "Fill with:"
 msgstr "Remplir avec:"
@@ -1999,7 +1999,7 @@ msgid "Close"
 msgstr "Fermer"
 
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 msgid "Discard All"
 msgstr "Tout abandonner"
