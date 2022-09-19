@@ -279,11 +279,13 @@ func preference_update(prop: String) -> void:
 		for child in Tools._tool_buttons.get_children():
 			var left_background: NinePatchRect = child.get_node("BackgroundLeft")
 			left_background.modulate = Global.left_tool_color
+		Tools._slots[BUTTON_LEFT].tool_node.color_rect.color = Global.left_tool_color
 
 	elif prop == "right_tool_color":
 		for child in Tools._tool_buttons.get_children():
 			var left_background: NinePatchRect = child.get_node("BackgroundRight")
 			left_background.modulate = Global.right_tool_color
+		Tools._slots[BUTTON_RIGHT].tool_node.color_rect.color = Global.right_tool_color
 
 	elif prop == "tool_button_size":
 		Tools.set_button_size(Global.tool_button_size)

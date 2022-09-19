@@ -5,16 +5,21 @@ var is_moving = false
 var kname: String
 var tool_slot = null  # Tools.Slot, can't have static typing due to cyclic errors
 var cursor_text := ""
-
 var _cursor := Vector2.INF
 
 var _draw_cache: PoolVector2Array = []  # for storing already drawn pixels
 var _for_frame := 0  # cache for which frame?
 
+onready var color_rect: ColorRect = $ColorRect
+
 
 func _ready() -> void:
 	kname = name.replace(" ", "_").to_lower()
-	$Label.text = tool_slot.name
+	if tool_slot.name == "Left tool":
+		color_rect.color = Global.left_tool_color
+	else:
+		color_rect.color = Global.right_tool_color
+	$Label.text = Tools.tools[name].display_name
 
 	load_config()
 
