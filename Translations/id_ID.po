@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-09-18 16:26\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -610,11 +610,17 @@ msgstr "Ungu"
 msgid "Theme"
 msgstr "Tema"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Warna ikon dari:"
 
 msgid "Icon color:"
 msgstr "Warna ikon:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr ""
@@ -1996,9 +2002,6 @@ msgstr "Membuat banyak berkas, tapi setiap berkas ditampung di direktori berbeda
 
 msgid "Close"
 msgstr "Tutup"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr "Buang Semua"
