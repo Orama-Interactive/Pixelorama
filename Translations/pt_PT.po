@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2022-09-18 16:27\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -609,11 +609,17 @@ msgstr "Roxo"
 msgid "Theme"
 msgstr "Tema"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Cor de Icon de:"
 
 msgid "Icon color:"
 msgstr "Cor de Icon:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr ""
@@ -1981,9 +1987,6 @@ msgstr "Cria multiplos ficheiros mas cada um gravado numa diretoria diferente qu
 
 msgid "Close"
 msgstr "Fechar"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr ""
