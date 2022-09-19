@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2022-09-18 16:26\n"
+"PO-Revision-Date: 2022-09-19 21:28\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -609,10 +609,16 @@ msgstr "بنفسجي"
 msgid "Theme"
 msgstr ""
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
+msgstr ""
+
+msgid "Background"
 msgstr ""
 
 msgid "Background color from:"
@@ -1948,9 +1954,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "إغلاق"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr "تجاهل الكل"
