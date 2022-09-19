@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-09-18 17:23\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -610,11 +610,17 @@ msgstr "Μωβ"
 msgid "Theme"
 msgstr "Θέμα"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Χρώμα εικονιδίων από:"
 
 msgid "Icon color:"
 msgstr "Χρώμα εικονιδίων:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr "Χρώμα υποβάθρου από:"
@@ -1997,9 +2003,6 @@ msgstr "Δημιουργεί πολλά αρχεία, αλλά κάθε αρχε
 
 msgid "Close"
 msgstr "Κλείσιμο"
-
-msgid "Delete"
-msgstr "Διαγραφή"
 
 msgid "Discard All"
 msgstr "Απόρριψη όλων"
