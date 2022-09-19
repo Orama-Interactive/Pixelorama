@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-09-19 07:59\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -610,11 +610,17 @@ msgstr "Mov"
 msgid "Theme"
 msgstr "Temă"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Culoarea pictogramei din:"
 
 msgid "Icon color:"
 msgstr "Culoarea pictogramei:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr "Culoare de fundal din:"
@@ -1997,9 +2003,6 @@ msgstr "Creează mai multe fișiere, dar fiecare fișier este stocat în alt dir
 
 msgid "Close"
 msgstr "Închide"
-
-msgid "Delete"
-msgstr "Ștergere"
 
 msgid "Discard All"
 msgstr "Renunțare la toate"
