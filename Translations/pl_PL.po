@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-09-18 17:23\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -609,11 +609,17 @@ msgstr "Fioletowy"
 msgid "Theme"
 msgstr "Motyw"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Kolor ikony z:"
 
 msgid "Icon color:"
 msgstr "Kolor ikony:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr "Kolor tła z:"
@@ -1996,9 +2002,6 @@ msgstr "Tworzy wiele plików, ale każdy plik jest przechowywany w innym katalog
 
 msgid "Close"
 msgstr "Zamknij"
-
-msgid "Delete"
-msgstr "Usuń"
 
 msgid "Discard All"
 msgstr "Odrzuć Wszystkie"
