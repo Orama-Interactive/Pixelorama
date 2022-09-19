@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-09-18 19:56\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -610,11 +610,17 @@ msgstr "Viola"
 msgid "Theme"
 msgstr "Tema"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Colore icona da:"
 
 msgid "Icon color:"
 msgstr "Colore dell'icona:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr "Colore di sfondo da:"
@@ -1997,9 +2003,6 @@ msgstr "Crea più file ma ogni file è memorizzato in una cartella diversa che c
 
 msgid "Close"
 msgstr "Chiudi"
-
-msgid "Delete"
-msgstr "Elimina"
 
 msgid "Discard All"
 msgstr "Scarta Tutto"
