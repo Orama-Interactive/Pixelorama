@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-09-19 17:18\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -610,11 +610,17 @@ msgstr "Violet"
 msgid "Theme"
 msgstr "Thème"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Couleur de l'icône depuis:"
 
 msgid "Icon color:"
 msgstr "Couleur de l'icône:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr ""
@@ -1997,9 +2003,6 @@ msgstr "Crée plusieurs fichiers mais chacun est stocké dans différents réper
 
 msgid "Close"
 msgstr "Fermer"
-
-msgid "Delete"
-msgstr "Supprimer"
 
 msgid "Discard All"
 msgstr "Tout abandonner"
