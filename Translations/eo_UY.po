@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2022-09-18 16:26\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -610,11 +610,17 @@ msgstr "Purpura"
 msgid "Theme"
 msgstr "Temo"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Koloro de piktogramoj el:"
 
 msgid "Icon color:"
 msgstr "Koloro de piktogramoj:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr "Koloro de la fono el:"
@@ -1938,9 +1944,6 @@ msgstr "Kreas kelkajn dosierojn, sed ĉiu dosiero estas konservita en malsama do
 
 msgid "Close"
 msgstr "Fermi"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr ""
