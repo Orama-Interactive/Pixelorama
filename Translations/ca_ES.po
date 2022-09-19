@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-09-18 16:26\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -610,11 +610,17 @@ msgstr "Porpra"
 msgid "Theme"
 msgstr "Tema"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Color d'icona de:"
 
 msgid "Icon color:"
 msgstr "Color d'icona:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr ""
@@ -1994,9 +2000,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "Tancar"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr ""
