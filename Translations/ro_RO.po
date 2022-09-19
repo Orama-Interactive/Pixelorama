@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-09-18 16:26\n"
+"PO-Revision-Date: 2022-09-19 07:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1387,19 +1387,19 @@ msgstr "0: culoarea provenită din pensulă, 100: culoarea selectată în prezen
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Zona de umplere:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "Zonă similară"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "Culori similare"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "Selecția completă"
 
 msgid "Fill with:"
 msgstr "Umplere cu:"
@@ -1999,7 +1999,7 @@ msgid "Close"
 msgstr "Închide"
 
 msgid "Delete"
-msgstr ""
+msgstr "Ștergere"
 
 msgid "Discard All"
 msgstr "Renunțare la toate"
