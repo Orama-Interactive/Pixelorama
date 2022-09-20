@@ -53,8 +53,8 @@ func add_theme(theme: Theme) -> void:
 		var theme_color_preview: ColorRect = theme_color_preview_scene.instance()
 		var color1: Color = panel_stylebox.bg_color
 		var color2: Color = panel_container_stylebox.bg_color
-		theme_color_preview.get_child(0).color = color1
-		theme_color_preview.get_child(1).color = color2
+		theme_color_preview.get_child(0).get_child(0).color = color1
+		theme_color_preview.get_child(0).get_child(1).color = color2
 		colors_container.add_child(theme_color_preview)
 
 

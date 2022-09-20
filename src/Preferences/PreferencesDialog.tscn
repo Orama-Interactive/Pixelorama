@@ -58,41 +58,41 @@ size_flags_vertical = 3
 
 [node name="Startup" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 margin_right = 498.0
-margin_bottom = 52.0
+margin_bottom = 70.0
 
 [node name="StartupHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup"]
-margin_top = 108.0
 margin_right = 498.0
-margin_bottom = 122.0
+margin_bottom = 14.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupHeader"]
-margin_right = 51.0
+margin_right = 45.0
 margin_bottom = 14.0
 theme_type_variation = "Header"
 text = "Startup"
 
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupHeader"]
-margin_left = 51.0
+margin_left = 45.0
 margin_right = 498.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="StartupContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup"]
+margin_top = 18.0
 margin_right = 498.0
-margin_bottom = 52.0
+margin_bottom = 70.0
 columns = 3
 
 [node name="OpenLastProjectLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
 margin_top = 5.0
-margin_right = 180.0
+margin_right = 189.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "Open last project on startup"
 
 [node name="OpenLastProject" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
-margin_left = 184.0
-margin_right = 231.0
+margin_left = 193.0
+margin_right = 381.0
 margin_bottom = 24.0
 hint_tooltip = "Opens last opened project on startup"
 mouse_default_cursor_shape = 2
@@ -100,15 +100,15 @@ size_flags_horizontal = 3
 text = "On"
 
 [node name="QuitConfirmationLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
-margin_left = 235.0
+margin_left = 385.0
 margin_top = 5.0
-margin_right = 348.0
+margin_right = 498.0
 margin_bottom = 19.0
 text = "Quit confirmation"
 
 [node name="QuitConfirmation" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
 margin_top = 28.0
-margin_right = 180.0
+margin_right = 189.0
 margin_bottom = 52.0
 mouse_default_cursor_shape = 2
 text = "On"
@@ -168,31 +168,31 @@ text = "System Language"
 
 [node name="Interface" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
-margin_top = 56.0
+margin_top = 74.0
 margin_right = 498.0
-margin_bottom = 244.0
+margin_bottom = 280.0
 
 [node name="InterfaceHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 52.0
 margin_right = 498.0
-margin_bottom = 66.0
+margin_bottom = 14.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/InterfaceHeader"]
-margin_right = 51.0
+margin_right = 57.0
 margin_bottom = 14.0
 theme_type_variation = "Header"
 text = "Interface"
 
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/InterfaceHeader"]
-margin_left = 51.0
+margin_left = 57.0
 margin_right = 498.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="ShrinkContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_top = 18.0
 margin_right = 498.0
-margin_bottom = 20.0
+margin_bottom = 38.0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer"]
 margin_top = 3.0
@@ -231,9 +231,9 @@ mouse_default_cursor_shape = 2
 text = "Apply"
 
 [node name="DimPopup" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 24.0
+margin_top = 42.0
 margin_right = 498.0
-margin_bottom = 48.0
+margin_bottom = 66.0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/DimPopup"]
 margin_top = 5.0
@@ -250,9 +250,9 @@ pressed = true
 text = "On"
 
 [node name="ThemesHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 52.0
+margin_top = 70.0
 margin_right = 498.0
-margin_bottom = 66.0
+margin_bottom = 84.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ThemesHeader"]
@@ -268,18 +268,20 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="Themes" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 70.0
+margin_top = 88.0
 margin_right = 498.0
-margin_bottom = 74.0
+margin_bottom = 92.0
 script = ExtResource( 5 )
 
 [node name="ThemeButtons" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/Themes"]
 margin_bottom = 4.0
+size_flags_horizontal = 3
 
 [node name="ThemeColorsSpacer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/Themes"]
 margin_left = 4.0
 margin_right = 4.0
 margin_bottom = 4.0
+size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/Themes/ThemeColorsSpacer"]
 
@@ -289,9 +291,9 @@ margin_bottom = 4.0
 custom_constants/separation = 12
 
 [node name="ButtonHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 78.0
+margin_top = 96.0
 margin_right = 498.0
-margin_bottom = 92.0
+margin_bottom = 110.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonHeader"]
@@ -307,9 +309,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="ButtonOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 96.0
+margin_top = 114.0
 margin_right = 498.0
-margin_bottom = 188.0
+margin_bottom = 206.0
 columns = 3
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
@@ -359,7 +361,6 @@ margin_right = 460.0
 margin_bottom = 44.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
 color = Color( 0.75, 0.75, 0.75, 1 )
 
 [node name="Label4" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
@@ -375,7 +376,6 @@ margin_right = 262.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
 color = Color( 0, 0.52549, 0.811765, 1 )
 
 [node name="Label5" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
@@ -391,7 +391,6 @@ margin_right = 64.0
 margin_bottom = 92.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
 color = Color( 0.992157, 0.427451, 0.0784314, 1 )
 
 [node name="Canvas" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
@@ -1054,11 +1053,36 @@ margin_bottom = 48.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
 
-[node name="Shortcuts" parent="HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 3 )]
+[node name="Shortcuts" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false
-margin_top = 56.0
+margin_top = 74.0
 margin_right = 498.0
-margin_bottom = 56.0
+margin_bottom = 406.0
+size_flags_vertical = 3
+
+[node name="ShortcutHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts"]
+margin_right = 498.0
+margin_bottom = 14.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/ShortcutHeader"]
+margin_right = 60.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Shortcuts"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/ShortcutHeader"]
+margin_left = 60.0
+margin_right = 498.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="ShortcutEdit" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 18.0
+margin_right = 498.0
+margin_bottom = 332.0
 
 [node name="Backup" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
 visible = false

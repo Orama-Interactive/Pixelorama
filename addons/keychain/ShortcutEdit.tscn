@@ -7,7 +7,7 @@
 [ext_resource path="res://addons/keychain/assets/mouse.svg" type="Texture" id=5]
 [ext_resource path="res://addons/keychain/ShortcutSelectorDialog.tscn" type="PackedScene" id=6]
 
-[node name="ShortcutEdit" type="VBoxContainer"]
+[node name="ShortcutEdit" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 3

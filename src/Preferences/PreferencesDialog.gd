@@ -92,7 +92,7 @@ onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveIn
 onready var shrink_label: Label = right_side.get_node("Interface/ShrinkContainer/ShrinkLabel")
 onready var shrink_h_slider: HSlider = $"%ShrinkHSlider"
 onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
-onready var shortcuts: Control = right_side.get_node("Shortcuts")
+onready var shortcuts: Control = right_side.get_node("Shortcuts/ShortcutEdit")
 onready var extensions: BoxContainer = right_side.get_node("Extensions")
 
 
