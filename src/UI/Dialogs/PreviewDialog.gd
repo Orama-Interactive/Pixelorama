@@ -53,6 +53,10 @@ func _on_PreviewDialog_about_to_show() -> void:
 	import_options.add_item("New brush")
 	import_options.add_item("New pattern")
 
+	# Select the option that the preview dialog before it had selected
+	import_options.select(OpenSave.last_dialog_option)
+	import_options.emit_signal("item_selected", OpenSave.last_dialog_option)
+
 	var img_texture := ImageTexture.new()
 	img_texture.create_from_image(image, 0)
 	texture_rect.texture = img_texture
@@ -227,6 +231,7 @@ func synchronize() -> void:
 
 func _on_ImportOption_item_selected(id: int) -> void:
 	current_import_option = id
+	OpenSave.last_dialog_option = current_import_option
 	frame_size_label.visible = false
 	spritesheet_tab_options.visible = false
 	spritesheet_lay_opt.visible = false

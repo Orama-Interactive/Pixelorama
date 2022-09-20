@@ -7,9 +7,9 @@
 script = ExtResource( 2 )
 
 [node name="Opacity" type="VBoxContainer" parent="." index="4"]
-margin_top = 74.0
+margin_top = 82.0
 margin_right = 116.0
-margin_bottom = 136.0
+margin_bottom = 144.0
 
 [node name="OpacityLabel" type="Label" parent="Opacity" index="0"]
 margin_right = 116.0

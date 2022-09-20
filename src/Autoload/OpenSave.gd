@@ -5,6 +5,7 @@ var current_save_paths := []  # Array of strings
 var backup_save_paths := []  # Array of strings
 var preview_dialog_tscn = preload("res://src/UI/Dialogs/PreviewDialog.tscn")
 var preview_dialogs := []  # Array of preview dialogs
+var last_dialog_option: int = 0
 
 onready var autosave_timer: Timer
 
