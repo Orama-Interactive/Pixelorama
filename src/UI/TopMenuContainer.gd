@@ -416,7 +416,7 @@ func edit_menu_id_pressed(id: int) -> void:
 		Global.EditMenu.NEW_BRUSH:
 			Global.canvas.selection.new_brush()
 		Global.EditMenu.PREFERENCES:
-			Global.preferences_dialog.popup_centered(Vector2(400, 280))
+			Global.preferences_dialog.popup_centered(Vector2(600, 400))
 			Global.dialog_open(true)
 		_:
 			_handle_metadata(id, edit_menu_button)
