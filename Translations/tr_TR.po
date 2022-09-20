@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2022-09-20 00:00\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -611,7 +611,7 @@ msgid "Theme"
 msgstr "Tema"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Düğmeler"
 
 msgid "Icon color from:"
 msgstr "Şuradan simge rengi:"
@@ -620,7 +620,7 @@ msgid "Icon color:"
 msgstr "Simge rengi:"
 
 msgid "Background"
-msgstr ""
+msgstr "Arka plan"
 
 msgid "Background color from:"
 msgstr "Şuradan arkaplan rengi:"
