@@ -747,7 +747,7 @@ func save_project_to_recent_list(path: String) -> void:
 		return
 
 	if top_menu_container.recent_projects.has(path):
-		return
+		top_menu_container.recent_projects.erase(path)
 
 	if top_menu_container.recent_projects.size() >= 5:
 		top_menu_container.recent_projects.pop_front()
