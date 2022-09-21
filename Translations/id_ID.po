@@ -10,10 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-09-21 06:05\n"
+"PO-Revision-Date: 2022-09-21 07:04\n"
 
 msgid "OK"
-msgstr "Oke"
+msgstr "Sip"
 
 msgid "Cancel"
 msgstr "Batal"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Ekspor"
 
 msgid "Overwrite"
-msgstr "Timpa"
+msgstr "Timpa baru"
 
 msgid "Export..."
 msgstr "Ekspor..."
@@ -244,7 +244,7 @@ msgid "Layouts"
 msgstr "Tata letak"
 
 msgid "Moveable Panels"
-msgstr "Panel Dapat Dipindah"
+msgstr "Panel Bisa Dipindah"
 
 msgid "Manage Layouts"
 msgstr "Atur Tata Letak"
@@ -425,7 +425,7 @@ msgid "Animation"
 msgstr "Animasi"
 
 msgid "Preview:"
-msgstr "Pratinjau:"
+msgstr "Pratayang:"
 
 msgid "Frame:"
 msgstr "Bingkai:"
