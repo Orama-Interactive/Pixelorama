@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2022-09-21 06:05\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -136,7 +136,7 @@ msgid "Paste"
 msgstr "Tempel"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Tempel di Tempat"
 
 msgid "Delete"
 msgstr "Hapus"
@@ -611,7 +611,7 @@ msgid "Theme"
 msgstr "Tema"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Tombol"
 
 msgid "Icon color from:"
 msgstr "Warna ikon dari:"
@@ -620,13 +620,13 @@ msgid "Icon color:"
 msgstr "Warna ikon:"
 
 msgid "Background"
-msgstr ""
+msgstr "Latar belakang"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Warna latar belakang dari:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Warna latar belakang:"
 
 msgid "Left tool color:"
 msgstr "Warna alat di kiri:"
@@ -704,17 +704,18 @@ msgid "Gradient Map"
 msgstr "Peta Gradien"
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "Pisah menjadi sama rata"
 
 msgid "Parts:"
-msgstr ""
+msgstr "Bagian:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "Tambah titik di akhir"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr ""
+msgstr "Jika dinyalakan, titik yang terakhir akan ditambah ke ujung gradien.\n"
+"Matikan ini jika ingin mengubah interpolasi gradien tetap konstan, sehingga warna yang terakhir juga akan disertakan."
 
 msgid "Linear"
 msgstr "Linier"
@@ -998,7 +999,7 @@ msgid "Polygonal Selection\n\n"
 msgstr "Seleksi Poligon\n\n"
 "%s untuk tetikus kiri\n"
 "%s untuk tetikus kanan\n\n"
-"Pencet dua kali untuk menghubungkan bagian akhir ke bagian awal"
+"Pencet dua kali untuk menghubungkan titik akhir ke titik awal"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -1392,19 +1393,19 @@ msgstr "0: Warna dari kuasnya sendiri, 100: Warna yang dipilih saat ini"
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Area diisi:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "Area serupa"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "Warna serupa"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "Seluruh seleksi"
 
 msgid "Fill with:"
 msgstr "Isi dengan:"
