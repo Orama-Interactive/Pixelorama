@@ -319,6 +319,11 @@ func _handle_metadata(id: int, menu_button: MenuButton) -> void:
 				metadata.call("menu_item_clicked")
 
 
+func _popup_dialog(dialog: Popup, size := Vector2.ZERO) -> void:
+	dialog.popup_centered(size)
+	Global.dialog_open(true)
+
+
 func file_menu_id_pressed(id: int) -> void:
 	if not Global.can_draw:
 		return
@@ -336,8 +341,7 @@ func file_menu_id_pressed(id: int) -> void:
 		Global.FileMenu.EXPORT:
 			_export_file()
 		Global.FileMenu.EXPORT_AS:
-			Global.export_dialog.popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.export_dialog)
 		Global.FileMenu.QUIT:
 			Global.control.show_quit_dialog()
 		_:
@@ -353,8 +357,7 @@ func _open_project_file() -> void:
 	if OS.get_name() == "HTML5":
 		Html5FileExchange.load_image()
 	else:
-		Global.open_sprites_dialog.popup_centered()
-		Global.dialog_open(true)
+		_popup_dialog(Global.open_sprites_dialog)
 		Global.control.opensprite_file_selected = false
 
 
@@ -363,8 +366,7 @@ func _on_open_last_project_file_menu_option_pressed() -> void:
 		Global.control.load_last_project()
 	else:
 		Global.error_dialog.set_text("You haven't saved or opened any project in Pixelorama yet!")
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
+		_popup_dialog(Global.error_dialog)
 
 
 func _save_project_file() -> void:
@@ -391,8 +393,7 @@ func _save_project_file_as() -> void:
 
 func _export_file() -> void:
 	if Export.was_exported == false:
-		Global.export_dialog.popup_centered()
-		Global.dialog_open(true)
+		_popup_dialog(Global.export_dialog)
 	else:
 		Export.external_export()
 
@@ -424,8 +425,7 @@ func edit_menu_id_pressed(id: int) -> void:
 		Global.EditMenu.NEW_BRUSH:
 			Global.canvas.selection.new_brush()
 		Global.EditMenu.PREFERENCES:
-			Global.preferences_dialog.popup_centered(Vector2(600, 400))
-			Global.dialog_open(true)
+			_popup_dialog(Global.preferences_dialog, Vector2(600, 400))
 		_:
 			_handle_metadata(id, edit_menu_button)
 
@@ -435,7 +435,7 @@ func view_menu_id_pressed(id: int) -> void:
 		return
 	match id:
 		Global.ViewMenu.TILE_MODE_OFFSETS:
-			_show_tile_mode_offsets_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/TileModeOffsetsDialog"))
 		Global.ViewMenu.GREYSCALE_VIEW:
 			_toggle_greyscale_view()
 		Global.ViewMenu.MIRROR_VIEW:
@@ -454,11 +454,6 @@ func view_menu_id_pressed(id: int) -> void:
 	Global.canvas.update()
 
 
-func _show_tile_mode_offsets_popup() -> void:
-	Global.control.get_node("Dialogs/TileModeOffsetsDialog").popup_centered()
-	Global.dialog_open(true)
-
-
 func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.current_project.tiles.mode = id
 	Global.transparent_checker.fit_rect(Global.current_project.tiles.get_bounding_rect())
@@ -474,8 +469,7 @@ func window_menu_id_pressed(id: int) -> void:
 		return
 	match id:
 		Global.WindowMenu.WINDOW_OPACITY:
-			window_opacity_dialog.popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(window_opacity_dialog)
 		Global.WindowMenu.MOVABLE_PANELS:
 			ui.tabs_visible = !ui.tabs_visible
 			window_menu.set_item_checked(id, ui.tabs_visible)
@@ -498,8 +492,7 @@ func _panels_submenu_id_pressed(id: int) -> void:
 
 func _layouts_submenu_id_pressed(id: int) -> void:
 	if id == 0:
-		Global.control.get_node("Dialogs/ManageLayouts").popup_centered()
-		Global.dialog_open(true)
+		_popup_dialog(Global.control.get_node("Dialogs/ManageLayouts"))
 	else:
 		set_layout(id - 1)
 
@@ -608,7 +601,7 @@ func image_menu_id_pressed(id: int) -> void:
 		return
 	match id:
 		Global.ImageMenu.SCALE_IMAGE:
-			_show_scale_image_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ScaleImage"))
 
 		Global.ImageMenu.CENTRALIZE_IMAGE:
 			DrawingAlgos.centralize()
@@ -617,76 +610,40 @@ func image_menu_id_pressed(id: int) -> void:
 			DrawingAlgos.crop_image()
 
 		Global.ImageMenu.RESIZE_CANVAS:
-			_show_resize_canvas_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ResizeCanvas"))
 
 		Global.ImageMenu.FLIP:
-			Global.control.get_node("Dialogs/ImageEffects/FlipImageDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/FlipImageDialog"))
 
 		Global.ImageMenu.ROTATE:
-			_show_rotate_image_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/RotateImage"))
 
 		Global.ImageMenu.INVERT_COLORS:
-			Global.control.get_node("Dialogs/ImageEffects/InvertColorsDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/InvertColorsDialog"))
 
 		Global.ImageMenu.DESATURATION:
-			Global.control.get_node("Dialogs/ImageEffects/DesaturateDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/DesaturateDialog"))
 
 		Global.ImageMenu.OUTLINE:
-			_show_add_outline_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/OutlineDialog"))
 
 		Global.ImageMenu.DROP_SHADOW:
-			_show_drop_shadow_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/DropShadowDialog"))
 
 		Global.ImageMenu.HSV:
-			_show_hsv_configuration_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/HSVDialog"))
 
 		Global.ImageMenu.GRADIENT:
-			Global.control.get_node("Dialogs/ImageEffects/GradientDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/GradientDialog"))
 
 		Global.ImageMenu.GRADIENT_MAP:
-			Global.control.get_node("Dialogs/ImageEffects/GradientMapDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/GradientMapDialog"))
 
 #		Global.ImageMenu.SHADER:
-#			Global.control.get_node("Dialogs/ImageEffects/ShaderEffect").popup_centered()
-#			Global.dialog_open(true)
+#			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ShaderEffect"))
 
 		_:
 			_handle_metadata(id, image_menu_button)
-
-
-func _show_scale_image_popup() -> void:
-	Global.control.get_node("Dialogs/ImageEffects/ScaleImage").popup_centered()
-	Global.dialog_open(true)
-
-
-func _show_resize_canvas_popup() -> void:
-	Global.control.get_node("Dialogs/ImageEffects/ResizeCanvas").popup_centered()
-	Global.dialog_open(true)
-
-
-func _show_rotate_image_popup() -> void:
-	Global.control.get_node("Dialogs/ImageEffects/RotateImage").popup_centered()
-	Global.dialog_open(true)
-
-
-func _show_add_outline_popup() -> void:
-	Global.control.get_node("Dialogs/ImageEffects/OutlineDialog").popup_centered()
-	Global.dialog_open(true)
-
-
-func _show_drop_shadow_popup() -> void:
-	Global.control.get_node("Dialogs/ImageEffects/DropShadowDialog").popup_centered()
-	Global.dialog_open(true)
-
-
-func _show_hsv_configuration_popup() -> void:
-	Global.control.get_node("Dialogs/ImageEffects/HSVDialog").popup_centered()
-	Global.dialog_open(true)
 
 
 func select_menu_id_pressed(id: int) -> void:
@@ -708,8 +665,7 @@ func help_menu_id_pressed(id: int) -> void:
 		return
 	match id:
 		Global.HelpMenu.VIEW_SPLASH_SCREEN:
-			Global.control.get_node("Dialogs/SplashDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/SplashDialog"))
 		Global.HelpMenu.ONLINE_DOCS:
 			OS.shell_open("https://www.oramainteractive.com/Pixelorama-Docs/")
 		Global.HelpMenu.ISSUE_TRACKER:
@@ -723,7 +679,6 @@ func help_menu_id_pressed(id: int) -> void:
 				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v0102---2022-08-18"
 			)
 		Global.HelpMenu.ABOUT_PIXELORAMA:
-			Global.control.get_node("Dialogs/AboutDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/AboutDialog"))
 		_:
 			_handle_metadata(id, help_menu_button)
