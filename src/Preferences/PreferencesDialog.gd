@@ -351,7 +351,7 @@ func _on_ShrinkApplyButton_pressed() -> void:
 	)
 	Global.control.set_custom_cursor()
 	hide()
-	popup_centered(Vector2(400, 280))
+	popup_centered(Vector2(600, 400))
 	Global.dialog_open(true)
 	yield(get_tree(), "idle_frame")
 	Global.camera.fit_to_frame(Global.current_project.size)
