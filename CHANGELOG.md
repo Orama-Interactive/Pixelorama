@@ -20,18 +20,25 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 - Copy, cut & delete now affect the entire cel if there is no selection.
 - The paste placement behavior has been changed. Paste now places the pasted content in the middle of the canvas view, instead of its original position. A new option in the Edit menu has been added, "Paste in Place", that preserves the previous behavior.
 - If a layer is locked or invisible, the cursor changes into forbidden when the user is hovering the mouse over the canvas.
+- The left & right tool options now have a header with the name of the currently selected tool, and a color indicator on the top.
+- The preferences dialog has been polished. Headers have been added for each segment, and all of the elements are now vertically aligned with each other.
 - hiDPI is now enabled - solves [#159](https://github.com/Orama-Interactive/Pixelorama/issues/159).
 - The UI can now be scaled down to 0.5 and 0.75.
+- The recent projects menu now makes the most recent project appear on top, and if you open a project already in the recent projects list, it would then be moved to the most recent spot on the list. [#755](https://github.com/Orama-Interactive/Pixelorama/pull/755)
+- The import dialog now remembers the last option. [#754](https://github.com/Orama-Interactive/Pixelorama/pull/754)
 - Palette swatches now get highlighted if their color is selected from the color buttons. [#730](https://github.com/Orama-Interactive/Pixelorama/pull/730)
 - In the bucket tool options, "Same color area" and "Same color pixels" have been renamed to "Similar area" and "Similar colors" respectively.
-- The splash dialog can be resized to a smaller size than the default.
+- Non-keyboard shortcut bindings for tools are now allowed. You can, for example, map your tools to a mouse or gamepad button.
+- The splash and preference dialogs can now be resized to a smaller size than the default.
 
 ### Fixed
 - Deleting content from locked/invisible layers is no longer possible.
 - Selection can no longer be moved if there is a dialog open.
+- Tool and menu shortcuts no longer get activated if a dialog is open. [#709](https://github.com/Orama-Interactive/Pixelorama/issues/709).
 - Onion skinning now works properly with mirror view. Addresses part of [#717](https://github.com/Orama-Interactive/Pixelorama/issues/717).
 - Fix invalid pattern image error when using the bucket tool to replace colors.
 - Fixed issue with the bucket tool where if the selected color is the same as the pixel's color in mouse position, the operation stops even if there are other cels selected.
+- The "Close" button in the preferences no longer remains stuck in the previous language, if the language changes and the previous one was not English.
 
 ## [v0.10.2] - 2022-08-18
 This update has been brought to you by the contributions of:
