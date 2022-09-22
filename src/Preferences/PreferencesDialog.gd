@@ -111,7 +111,7 @@ class Preference:
 
 func _ready() -> void:
 	# Replace OK since preference changes are being applied immediately, not after OK confirmation
-	get_ok().text = tr("Close")
+	get_ok().text = "Close"
 	shrink_h_slider.value = Global.shrink  # In case shrink is not equal to 1
 
 	for child in shortcuts.get_children():
