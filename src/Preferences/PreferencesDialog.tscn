@@ -158,6 +158,7 @@ size_flags_horizontal = 3
 [node name="System Language" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Language"]
 margin_right = 506.0
 margin_bottom = 24.0
+hint_tooltip = "System Language"
 mouse_default_cursor_shape = 2
 pressed = true
 group = SubResource( 1 )
@@ -1528,6 +1529,7 @@ show_hidden_files = true
 [connection signal="about_to_show" from="." to="." method="_on_PreferencesDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_PreferencesDialog_popup_hide"]
 [connection signal="item_selected" from="HSplitContainer/List" to="." method="_on_List_item_selected"]
+[connection signal="pressed" from="HSplitContainer/ScrollContainer/VBoxContainer/Language/System Language" to="HSplitContainer/ScrollContainer/VBoxContainer/Language" method="_on_Language_pressed" binds= [ 1 ]]
 [connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer/ShrinkHSlider" to="." method="_on_ShrinkHSlider_value_changed"]
 [connection signal="pressed" from="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer/ShrinkApplyButton" to="." method="_on_ShrinkApplyButton_pressed"]
 [connection signal="item_selected" from="HSplitContainer/ScrollContainer/VBoxContainer/Extensions/InstalledExtensions" to="HSplitContainer/ScrollContainer/VBoxContainer/Extensions" method="_on_InstalledExtensions_item_selected"]

@@ -27,21 +27,21 @@ const LANGUAGES_DICT := {
 	"uk_UA": ["Українська", "Ukrainian"],
 }
 
-var loaded_locales: Array
-onready var system_language: CheckBox = $"System Language"
+var loaded_locales := LANGUAGES_DICT.keys()
 
 
 func _ready() -> void:
-	loaded_locales = TranslationServer.get_loaded_locales()
+	loaded_locales.sort()  # Make sure locales are always sorted
+	var locale_index := -1
+	var saved_locale := OS.get_locale()
+	# Load language
+	if Global.config_cache.has_section_key("preferences", "locale"):
+		saved_locale = Global.config_cache.get_value("preferences", "locale")
+		locale_index = loaded_locales.find(saved_locale)
+	TranslationServer.set_locale(saved_locale)  # If no language is saved, OS' locale is used
 
-	# Make sure locales are always sorted, in the same order
-	loaded_locales.sort()
-	var button_group: ButtonGroup = system_language.group
-
-	# Create radiobuttons for each language
-	for locale in loaded_locales:
-		if !locale in LANGUAGES_DICT:
-			continue
+	var button_group: ButtonGroup = $"System Language".group
+	for locale in loaded_locales:  # Create radiobuttons for each language
 		var button := CheckBox.new()
 		button.text = LANGUAGES_DICT[locale][0] + " [%s]" % [locale]
 		button.name = LANGUAGES_DICT[locale][1]
@@ -49,36 +49,19 @@ func _ready() -> void:
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		button.group = button_group
 		add_child(button)
-
-	# Load language
-	if Global.config_cache.has_section_key("preferences", "locale"):
-		var saved_locale: String = Global.config_cache.get_value("preferences", "locale")
-		TranslationServer.set_locale(saved_locale)
-
-		# Set the language option menu's default selected option to the loaded locale
-		var locale_index: int = loaded_locales.find(saved_locale)
-		system_language.pressed = false  # Unset System Language option in preferences
-		get_child(locale_index + 2).pressed = true
-	else:  # If the user doesn't have a language preference, set it to their OS' locale
-		TranslationServer.set_locale(OS.get_locale())
-
-	for child in get_children():
-		if child is Button:
-			child.connect("pressed", self, "_on_Language_pressed", [child.get_index()])
-			child.hint_tooltip = child.name
+		button.connect("pressed", self, "_on_Language_pressed", [button.get_index()])
+	get_child(locale_index + 2).pressed = true  # Select the appropriate button
 
 
 func _on_Language_pressed(index: int) -> void:
-	get_child(index).pressed = true
 	if index == 1:
 		TranslationServer.set_locale(OS.get_locale())
 	else:
 		TranslationServer.set_locale(loaded_locales[index - 2])
-
 	Global.config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
 	Global.config_cache.save("user://cache.ini")
 
-	# Update Translations
+	# Update some UI elements with the new translations
 	Global.update_hint_tooltips()
 	Global.preferences_dialog.list.clear()
 	Global.preferences_dialog.add_tabs(true)
