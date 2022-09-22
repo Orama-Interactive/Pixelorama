@@ -12,16 +12,16 @@ var default_layout_size := layouts.size()
 var selected_layout := 0
 var zen_mode := false
 
-onready var ui_elements: Array = Global.control.find_node("DockableContainer").get_children()
-onready var file_menu_button: MenuButton = find_node("FileMenu")
-onready var edit_menu_button: MenuButton = find_node("EditMenu")
-onready var view_menu_button: MenuButton = find_node("ViewMenu")
-onready var window_menu_button: MenuButton = find_node("WindowMenu")
-onready var image_menu_button: MenuButton = find_node("ImageMenu")
-onready var select_menu_button: MenuButton = find_node("SelectMenu")
-onready var help_menu_button: MenuButton = find_node("HelpMenu")
-
 onready var ui: Container = Global.control.find_node("DockableContainer")
+onready var ui_elements: Array = ui.get_children()
+onready var file_menu_button := $MenuItems/FileMenu
+onready var edit_menu_button := $MenuItems/EditMenu
+onready var select_menu_button := $MenuItems/SelectMenu
+onready var image_menu_button := $MenuItems/ImageMenu
+onready var view_menu_button := $MenuItems/ViewMenu
+onready var window_menu_button := $MenuItems/WindowMenu
+onready var help_menu_button := $MenuItems/HelpMenu
+
 onready var greyscale_vision: ColorRect = ui.find_node("GreyscaleVision")
 onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("CreateNewImage")
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
@@ -320,6 +320,8 @@ func _handle_metadata(id: int, menu_button: MenuButton) -> void:
 
 
 func file_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.FileMenu.NEW:
 			_on_new_project_file_menu_option_pressed()
@@ -402,6 +404,8 @@ func _on_recent_projects_submenu_id_pressed(id: int) -> void:
 
 
 func edit_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.EditMenu.UNDO:
 			Global.current_project.commit_undo()
@@ -427,6 +431,8 @@ func edit_menu_id_pressed(id: int) -> void:
 
 
 func view_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.ViewMenu.TILE_MODE_OFFSETS:
 			_show_tile_mode_offsets_popup()
@@ -464,6 +470,8 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 
 
 func window_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.WindowMenu.WINDOW_OPACITY:
 			window_opacity_dialog.popup_centered()
@@ -596,6 +604,8 @@ func _toggle_fullscreen() -> void:
 
 
 func image_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.ImageMenu.SCALE_IMAGE:
 			_show_scale_image_popup()
@@ -680,6 +690,8 @@ func _show_hsv_configuration_popup() -> void:
 
 
 func select_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.SelectMenu.SELECT_ALL:
 			Global.canvas.selection.select_all()
@@ -692,6 +704,8 @@ func select_menu_id_pressed(id: int) -> void:
 
 
 func help_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.HelpMenu.VIEW_SPLASH_SCREEN:
 			Global.control.get_node("Dialogs/SplashDialog").popup_centered()
