@@ -2,7 +2,9 @@ extends FlowContainer
 
 
 func _input(event: InputEvent) -> void:
-	if not Global.has_focus or not event is InputEventKey:
+	if not Global.has_focus or not Global.can_draw:
+		return
+	if event is InputEventMouseMotion:
 		return
 	for action in ["undo", "redo"]:
 		if event.is_action_pressed(action):
