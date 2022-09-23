@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-09-18 16:27\n"
+"PO-Revision-Date: 2022-09-19 22:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -610,11 +610,17 @@ msgstr "Фиолетовый"
 msgid "Theme"
 msgstr "Тема"
 
+msgid "Buttons"
+msgstr "Кнопки"
+
 msgid "Icon color from:"
 msgstr "Цвет значка из:"
 
 msgid "Icon color:"
 msgstr "Цвет значка:"
+
+msgid "Background"
+msgstr "Фон"
 
 msgid "Background color from:"
 msgstr "Цвет фона из:"
@@ -1996,9 +2002,6 @@ msgstr "Создает несколько файлов, но каждый фай
 
 msgid "Close"
 msgstr "Закрыть"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr "Отменить все"

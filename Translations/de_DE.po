@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-09-18 17:23\n"
+"PO-Revision-Date: 2022-09-20 16:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -609,11 +609,17 @@ msgstr "Violett"
 msgid "Theme"
 msgstr "Design"
 
+msgid "Buttons"
+msgstr "Tasten"
+
 msgid "Icon color from:"
 msgstr "Icon-Farbe von:"
 
 msgid "Icon color:"
 msgstr "Icon-Farbe:"
+
+msgid "Background"
+msgstr "Hintergrund"
 
 msgid "Background color from:"
 msgstr "Hintergrundfarbe von:"
@@ -1996,9 +2002,6 @@ msgstr "Erstellt mehrere Dateien, aber jede Datei wird in einem anderen Verzeich
 
 msgid "Close"
 msgstr "Schließen"
-
-msgid "Delete"
-msgstr "Löschen"
 
 msgid "Discard All"
 msgstr "Alle verwerfen"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-09-18 16:27\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "예"
@@ -610,11 +610,17 @@ msgstr "보라색"
 msgid "Theme"
 msgstr "테마"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "아이콘 색상 출처:"
 
 msgid "Icon color:"
 msgstr "아이콘 색상:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr ""
@@ -1994,9 +2000,6 @@ msgstr "여러 파일을 만들지만 프레임 태그로 분류되어 다른 �
 
 msgid "Close"
 msgstr "닫기"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr "모두 버리기"

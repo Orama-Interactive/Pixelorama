@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-09-18 16:26\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -610,17 +610,23 @@ msgstr "Roxo"
 msgid "Theme"
 msgstr "Tema"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Cor do ícone de:"
 
 msgid "Icon color:"
 msgstr "Cor do ícone:"
 
-msgid "Background color from:"
+msgid "Background"
 msgstr ""
 
+msgid "Background color from:"
+msgstr "Cor de fundo de:"
+
 msgid "Background color:"
-msgstr ""
+msgstr "Cor de fundo:"
 
 msgid "Left tool color:"
 msgstr "Cor da ferramenta esquerda:"
@@ -1387,19 +1393,19 @@ msgstr "0: Cor do próprio pincel, 100: A cor atualmente selecionada"
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Preencher área:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "Área semelhante"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "Cores semelhantes"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "Seleção inteira"
 
 msgid "Fill with:"
 msgstr "Preencher com:"
@@ -1997,9 +2003,6 @@ msgstr "Cria vários arquivos, mas cada arquivo é armazenado em um diretório d
 
 msgid "Close"
 msgstr "Fechar"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr "Descartar Todos"

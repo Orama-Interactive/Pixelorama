@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-09-18 17:23\n"
+"PO-Revision-Date: 2022-09-20 05:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -610,11 +610,17 @@ msgstr "紫"
 msgid "Theme"
 msgstr "テーマ"
 
+msgid "Buttons"
+msgstr "ボタン"
+
 msgid "Icon color from:"
 msgstr "次のもののアイコンの色:"
 
 msgid "Icon color:"
 msgstr "アイコンの色:"
+
+msgid "Background"
+msgstr "背景"
 
 msgid "Background color from:"
 msgstr "背景色の参照元:"
@@ -1997,9 +2003,6 @@ msgstr "複数のファイルを作成しますが、各ファイルはフレー
 
 msgid "Close"
 msgstr "閉じる"
-
-msgid "Delete"
-msgstr "削除"
 
 msgid "Discard All"
 msgstr "すべて破棄"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2022-09-18 16:26\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "確定"
@@ -608,10 +608,16 @@ msgstr "紫色"
 msgid "Theme"
 msgstr "主題"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
+msgstr ""
+
+msgid "Background"
 msgstr ""
 
 msgid "Background color from:"
@@ -1955,9 +1961,6 @@ msgstr "根據影格標籤在不同的資料夾創建多個獨立檔案"
 
 msgid "Close"
 msgstr "關閉"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr ""

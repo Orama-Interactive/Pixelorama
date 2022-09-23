@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2022-09-18 16:26\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -609,11 +609,17 @@ msgstr "Fialová"
 msgid "Theme"
 msgstr "Motiv"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Barvy ikon z:"
 
 msgid "Icon color:"
 msgstr "Barva ikon:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr ""
@@ -1989,9 +1995,6 @@ msgstr "Vytvoří více souborů, ale každý soubor je uložen v jiném adresá
 
 msgid "Close"
 msgstr "Zavřít"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr ""

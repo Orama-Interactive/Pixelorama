@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2022-09-18 16:27\n"
+"PO-Revision-Date: 2022-09-19 21:28\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -608,11 +608,17 @@ msgstr "Lila"
 msgid "Theme"
 msgstr "Tema"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
 msgstr "Ikonfärg:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr ""
@@ -1936,9 +1942,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "Stäng"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr ""

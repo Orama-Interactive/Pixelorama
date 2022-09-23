@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-09-18 16:26\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -610,11 +610,17 @@ msgstr "Lilla"
 msgid "Theme"
 msgstr "Tema"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Ikonfarve fra:"
 
 msgid "Icon color:"
 msgstr "Ikonfarve:"
+
+msgid "Background"
+msgstr ""
 
 msgid "Background color from:"
 msgstr ""
@@ -1989,9 +1995,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "Luk"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr "Kassér Alle"
