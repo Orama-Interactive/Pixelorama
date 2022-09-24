@@ -12,7 +12,10 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 - The UI now automatically gets scaled, based on the dpi and resolution of the monitor. Resolves [#643](https://github.com/Orama-Interactive/Pixelorama/issues/643).
 - A "Divide into equal parts" button has been added in Gradient Map. This is meant for easy gradient bisecting, which is helpful for converting Linear/Cubic interpolated gradients into Constant. This will eventually be used in gradient generation as well, once multi-color gradient generation support gets implemented.
 - A new fill area option has been added to the bucket tool options, "Whole Selection". This fills the entire selection with a color or pattern, regardless of the colors of the pixels.
+- The UI can now be scaled down to 0.5 and 0.75.
+- Palette swatches now get highlighted if their color is selected from the color buttons. [#730](https://github.com/Orama-Interactive/Pixelorama/pull/730)
 - Project tabs can now be closed with the middle mouse button.
+- Non-keyboard shortcut bindings for tools are now allowed. You can, for example, map your tools to a mouse or gamepad button.
 - The background color of the canvas is now configurable, as requested in [#586](https://github.com/Orama-Interactive/Pixelorama/discussions/586).
 
 ### Changed
@@ -23,12 +26,9 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 - The left & right tool options now have a header with the name of the currently selected tool, and a color indicator on the top.
 - The preferences dialog has been polished. Headers have been added for each segment, and all of the elements are now vertically aligned with each other.
 - hiDPI is now enabled - solves [#159](https://github.com/Orama-Interactive/Pixelorama/issues/159).
-- The UI can now be scaled down to 0.5 and 0.75.
 - The recent projects menu now makes the most recent project appear on top, and if you open a project already in the recent projects list, it would then be moved to the most recent spot on the list. [#755](https://github.com/Orama-Interactive/Pixelorama/pull/755)
 - The import dialog now remembers the last option. [#754](https://github.com/Orama-Interactive/Pixelorama/pull/754)
-- Palette swatches now get highlighted if their color is selected from the color buttons. [#730](https://github.com/Orama-Interactive/Pixelorama/pull/730)
 - In the bucket tool options, "Same color area" and "Same color pixels" have been renamed to "Similar area" and "Similar colors" respectively.
-- Non-keyboard shortcut bindings for tools are now allowed. You can, for example, map your tools to a mouse or gamepad button.
 - The splash and preference dialogs can now be resized to a smaller size than the default.
 
 ### Fixed
