@@ -803,9 +803,9 @@ func delete(selected_cels := true) -> void:
 	else:
 		images = [project.frames[project.current_frame].cels[project.current_layer].image]
 
-	var blank := Image.new()
-	blank.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	if project.has_selection:
+		var blank := Image.new()
+		blank.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 		var selection_map_copy := SelectionMap.new()
 		selection_map_copy.copy_from(project.selection_map)
 		# In case the selection map is bigger than the canvas
