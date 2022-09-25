@@ -197,14 +197,8 @@ func can_drop_data(_pos, data) -> bool:
 			if (
 				project.layers[layer] is GroupLayer
 				or not (
-					(
-						project.frames[frame]
-						in project.layers[layer].linked_cels
-					)
-					or (
-						project.frames[drag_frame]
-						in project.layers[drag_layer].linked_cels
-					)
+					(project.frames[frame] in project.layers[layer].linked_cels)
+					or (project.frames[drag_frame] in project.layers[drag_layer].linked_cels)
 				)
 			):
 				if not (drag_frame == frame and drag_layer == layer):
