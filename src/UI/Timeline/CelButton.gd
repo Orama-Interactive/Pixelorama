@@ -189,37 +189,39 @@ func get_drag_data(_position) -> Array:
 
 
 func can_drop_data(_pos, data) -> bool:
+	var project: Project = Global.current_project
 	if typeof(data) == TYPE_ARRAY and data[0] == "Cel":
 		var drag_frame = data[1]
 		var drag_layer = data[2]
-		if (
-			Global.current_project.layers[layer] is GroupLayer
-			or not (
-				(
-					Global.current_project.frames[frame]
-					in Global.current_project.layers[layer].linked_cels
+		if project.layers[drag_layer].get_script() == project.layers[layer].get_script():
+			if (
+				project.layers[layer] is GroupLayer
+				or not (
+					(
+						project.frames[frame]
+						in project.layers[layer].linked_cels
+					)
+					or (
+						project.frames[drag_frame]
+						in project.layers[drag_layer].linked_cels
+					)
 				)
-				or (
-					Global.current_project.frames[drag_frame]
-					in Global.current_project.layers[drag_layer].linked_cels
-				)
-			)
-		):
-			if not (drag_frame == frame and drag_layer == layer):
-				var region: Rect2
-				if Input.is_action_pressed("ctrl") or layer != drag_layer:  # Swap cels
-					region = get_global_rect()
-				else:  # Move cels
-					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
-						region = _get_region_rect(-0.125, 0.125)
-						region.position.x -= 2  # Container spacing
-					else:  # Right
-						region = _get_region_rect(0.875, 1.125)
-						region.position.x += 2  # Container spacing
-				Global.animation_timeline.drag_highlight.rect_global_position = region.position
-				Global.animation_timeline.drag_highlight.rect_size = region.size
-				Global.animation_timeline.drag_highlight.visible = true
-				return true
+			):
+				if not (drag_frame == frame and drag_layer == layer):
+					var region: Rect2
+					if Input.is_action_pressed("ctrl") or layer != drag_layer:  # Swap cels
+						region = get_global_rect()
+					else:  # Move cels
+						if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
+							region = _get_region_rect(-0.125, 0.125)
+							region.position.x -= 2  # Container spacing
+						else:  # Right
+							region = _get_region_rect(0.875, 1.125)
+							region.position.x += 2  # Container spacing
+					Global.animation_timeline.drag_highlight.rect_global_position = region.position
+					Global.animation_timeline.drag_highlight.rect_size = region.size
+					Global.animation_timeline.drag_highlight.visible = true
+					return true
 
 	Global.animation_timeline.drag_highlight.visible = false
 	return false
