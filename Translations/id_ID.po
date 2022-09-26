@@ -10,10 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-09-21 07:04\n"
+"PO-Revision-Date: 2022-09-26 14:15\n"
 
 msgid "OK"
-msgstr "Sip"
+msgstr "Oke"
 
 msgid "Cancel"
 msgstr "Batal"
