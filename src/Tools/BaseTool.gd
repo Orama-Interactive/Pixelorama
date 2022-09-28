@@ -50,6 +50,7 @@ func update_config() -> void:
 func draw_start(_position: Vector2) -> void:
 	_draw_cache = []
 	is_moving = true
+	Global.current_project.can_undo = false
 
 
 func draw_move(position: Vector2) -> void:
@@ -62,6 +63,7 @@ func draw_move(position: Vector2) -> void:
 func draw_end(_position: Vector2) -> void:
 	is_moving = false
 	_draw_cache = []
+	Global.current_project.can_undo = true
 
 
 func cursor_move(position: Vector2) -> void:

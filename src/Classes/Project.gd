@@ -8,6 +8,7 @@ var size: Vector2 setget _size_changed
 var undo_redo := UndoRedo.new()
 var tiles: Tiles
 var undos := 0  # The number of times we added undo properties
+var can_undo = true
 var fill_color := Color(0)
 var has_changed := false setget _has_changed_changed
 # frames and layers Arrays should generally only be modified directly when
@@ -95,6 +96,8 @@ func remove() -> void:
 
 
 func commit_undo() -> void:
+	if not can_undo:
+		return
 	if Global.canvas.selection.is_moving_content:
 		Global.canvas.selection.transform_content_cancel()
 	else:
@@ -102,6 +105,8 @@ func commit_undo() -> void:
 
 
 func commit_redo() -> void:
+	if not can_undo:
+		return
 	Global.control.redone = true
 	undo_redo.redo()
 	Global.control.redone = false
