@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-09-20 16:23\n"
+"PO-Revision-Date: 2022-09-28 19:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -327,8 +327,8 @@ msgstr "Spritesheet (neue Ebene)"
 msgid "New frame"
 msgstr "Neuer Frame"
 
-msgid "Replace frame"
-msgstr "Frame ersetzen"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Neue Ebene"
@@ -1623,11 +1623,17 @@ msgstr "Frame-Eigenschaften"
 msgid "Layer"
 msgstr "Ebene"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Ebenen"
 
 msgid "Create a new layer"
 msgstr "Erstelle eine neue Ebene"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Entferne aktuelle Ebene"
@@ -1663,6 +1669,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Aktiviere/Deaktiviere Celverlinkungen\n\n"
 "Verlinkte Cels werden über mehrere Frames geteilt"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Palette"
