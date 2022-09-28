@@ -383,7 +383,7 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 	elif event.is_action_released("activate_left_tool") and _active_button == BUTTON_LEFT:
 		_slots[_active_button].tool_node.draw_end(draw_pos)
 		_active_button = -1
-	elif event.is_action("activate_right_tool") and _active_button == -1:
+	elif event.is_action_pressed("activate_right_tool") and _active_button == -1:
 		_active_button = BUTTON_RIGHT
 		_slots[_active_button].tool_node.draw_start(draw_pos)
 	elif event.is_action_released("activate_right_tool") and _active_button == BUTTON_RIGHT:
