@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2022-09-28 19:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -327,8 +327,8 @@ msgstr "Spritesheet (nowa warstwa)"
 msgid "New frame"
 msgstr "Nowa klatka"
 
-msgid "Replace frame"
-msgstr "Zamień klatkę"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nowa warstwa"
@@ -1623,11 +1623,17 @@ msgstr "Właściwości klatki"
 msgid "Layer"
 msgstr "Warstwa"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Warstwy"
 
 msgid "Create a new layer"
 msgstr "Stwórz nową warstwę"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Usuń obecną warstwę"
@@ -1663,6 +1669,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Włącz/wyłącz łączenie komórek\n\n"
 "Złączone komórki są współdzielone przez wiele komórek"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Paleta kolorów"
