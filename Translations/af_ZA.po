@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Afrikaans\n"
 "Language: af_ZA\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2022-09-28 19:11\n"
 
 msgid "OK"
 msgstr ""
@@ -327,7 +327,7 @@ msgstr ""
 msgid "New frame"
 msgstr ""
 
-msgid "Replace frame"
+msgid "Replace cel"
 msgstr ""
 
 msgid "New layer"
@@ -1564,10 +1564,16 @@ msgstr ""
 msgid "Layer"
 msgstr ""
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr ""
 
 msgid "Create a new layer"
+msgstr ""
+
+msgid "Create a new group layer"
 msgstr ""
 
 msgid "Remove current layer"
@@ -1602,6 +1608,9 @@ msgstr ""
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
+msgstr ""
+
+msgid "Expand/collapse group"
 msgstr ""
 
 msgid "Palette"
