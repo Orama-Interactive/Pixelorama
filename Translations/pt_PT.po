@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2022-09-28 19:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -327,8 +327,8 @@ msgstr "Folha de Imagens (nova camada)"
 msgid "New frame"
 msgstr "Nova frame"
 
-msgid "Replace frame"
-msgstr "Substituir frame"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nova camada"
@@ -1608,11 +1608,17 @@ msgstr "Propriedades de frame"
 msgid "Layer"
 msgstr "Camada"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Camadas"
 
 msgid "Create a new layer"
 msgstr "Criar uma nova camada"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Remover a camada atual"
@@ -1648,6 +1654,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Ligar/desligar células ligadas\n\n"
 "Células são partilhadas por várias frames"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Palete"
