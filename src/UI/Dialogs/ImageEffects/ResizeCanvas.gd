@@ -22,7 +22,7 @@ func _on_ResizeCanvas_about_to_show() -> void:
 
 	var layer_i := 0
 	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
-		if Global.current_project.layers[layer_i].visible:
+		if cel is PixelCel and Global.current_project.layers[layer_i].is_visible_in_hierarchy():
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.image)
 			cel_image.lock()

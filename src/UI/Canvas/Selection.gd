@@ -98,7 +98,7 @@ func _input(event: InputEvent) -> void:
 				if Global.cross_cursor:
 					cursor = Control.CURSOR_CROSS
 				var project: Project = Global.current_project
-				var layer: Layer = project.layers[project.current_layer]
+				var layer: BaseLayer = project.layers[project.current_layer]
 				if not layer.can_layer_get_drawn():
 					cursor = Control.CURSOR_FORBIDDEN
 
@@ -644,7 +644,9 @@ func _get_selected_draw_images() -> Array:  # Array of Images
 	var images := []
 	var project: Project = Global.current_project
 	for cel_index in project.selected_cels:
-		var cel: Cel = project.frames[cel_index[0]].cels[cel_index[1]]
+		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+		if not cel is PixelCel:
+			continue
 		if project.layers[cel_index[1]].can_layer_get_drawn():
 			images.append(cel.image)
 	return images
@@ -665,7 +667,7 @@ func copy() -> void:
 	var cl_big_bounding_rectangle := Rect2()
 	var cl_selection_offset := Vector2.ZERO
 
-	var image: Image = project.frames[project.current_frame].cels[project.current_layer].image
+	var image: Image = project.frames[project.current_frame].cels[project.current_layer].get_image()
 	var to_copy := Image.new()
 	if !project.has_selection:
 		to_copy.copy_from(image)

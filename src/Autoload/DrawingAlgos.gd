@@ -423,6 +423,8 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 
 	for f in Global.current_project.frames:
 		for i in range(f.cels.size() - 1, -1, -1):
+			if f.cels[i] is GroupCel:
+				continue
 			var sprite := Image.new()
 			sprite.copy_from(f.cels[i].image)
 			# Different method for scale_3x
@@ -449,6 +451,8 @@ func centralize() -> void:
 	# Find used rect of the current frame (across all of the layers)
 	var used_rect := Rect2()
 	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
+		if not cel is PixelCel:
+			continue
 		var cel_rect: Rect2 = cel.image.get_used_rect()
 		if not cel_rect.has_no_area():
 			used_rect = cel_rect if used_rect.has_no_area() else used_rect.merge(cel_rect)
@@ -457,14 +461,16 @@ func centralize() -> void:
 
 	var offset: Vector2 = (0.5 * (Global.current_project.size - used_rect.size)).floor()
 	general_do_centralize()
-	for c in Global.current_project.frames[Global.current_project.current_frame].cels:
+	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
+		if not cel is PixelCel:
+			continue
 		var sprite := Image.new()
 		sprite.create(
 			Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 		)
-		sprite.blend_rect(c.image, used_rect, offset)
-		Global.current_project.undo_redo.add_do_property(c.image, "data", sprite.data)
-		Global.current_project.undo_redo.add_undo_property(c.image, "data", c.image.data)
+		sprite.blend_rect(cel.image, used_rect, offset)
+		Global.current_project.undo_redo.add_do_property(cel.image, "data", sprite.data)
+		Global.current_project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
 	general_undo_centralize()
 
 
@@ -473,6 +479,8 @@ func crop_image() -> void:
 	var used_rect := Rect2()
 	for f in Global.current_project.frames:
 		for cel in f.cels:
+			if not cel is PixelCel:
+				continue
 			cel.image.unlock()  # May be unneeded now, but keep it just in case
 			var cel_used_rect: Rect2 = cel.image.get_used_rect()
 			if cel_used_rect == Rect2(0, 0, 0, 0):  # If the cel has no content
@@ -493,6 +501,8 @@ func crop_image() -> void:
 	# Loop through all the cels to crop them
 	for f in Global.current_project.frames:
 		for cel in f.cels:
+			if not cel is PixelCel:
+				continue
 			var sprite: Image = cel.image.get_rect(used_rect)
 			Global.current_project.undo_redo.add_do_property(cel.image, "data", sprite.data)
 			Global.current_project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
@@ -504,6 +514,8 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 	general_do_scale(width, height)
 	for f in Global.current_project.frames:
 		for c in f.cels:
+			if not c is PixelCel:
+				continue
 			var sprite := Image.new()
 			sprite.create(width, height, false, Image.FORMAT_RGBA8)
 			sprite.blend_rect(

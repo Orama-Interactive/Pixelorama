@@ -110,11 +110,7 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 		new_project.deserialize(dict.result)
 		for frame in new_project.frames:
 			for cel in frame.cels:
-				var buffer := file.get_buffer(new_project.size.x * new_project.size.y * 4)
-				cel.image.create_from_data(
-					new_project.size.x, new_project.size.y, false, Image.FORMAT_RGBA8, buffer
-				)
-				cel.image = cel.image  # Just to call image_changed
+				cel.load_image_data_from_pxo(file, new_project.size)
 
 		if dict.result.has("brushes"):
 			for brush in dict.result.brushes:
@@ -138,14 +134,13 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 				new_project.tiles.reset_mask()
 
 	file.close()
-	if !empty_project:
-		Global.projects.append(new_project)
-		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	else:
+	if empty_project:
 		if dict.error == OK and dict.result.has("fps"):
 			Global.animation_timeline.fps_spinbox.value = dict.result.fps
-		new_project.frames = new_project.frames  # Just to call frames_changed
-		new_project.layers = new_project.layers  # Just to call layers_changed
+		Global.animation_timeline.project_changed()
+	else:
+		Global.projects.append(new_project)
+		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
 
 	if not untitled_backup:
@@ -200,13 +195,16 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 	if file_major_version >= 0 and file_minor_version > 6:
 		var global_layer_line := file.get_line()
 		while global_layer_line == ".":
-			var layer_name := file.get_line()
-			var layer_visibility := file.get_8()
-			var layer_lock := file.get_8()
-			var layer_new_cels_linked := file.get_8()
+			var layer_dict := {
+				"name": file.get_line(),
+				"visible": file.get_8(),
+				"locked": file.get_8(),
+				"new_cels_linked": file.get_8(),
+				"linked_cels": []
+			}
 			linked_cels.append(file.get_var())
-
-			var l := Layer.new(layer_name, layer_visibility, layer_lock, layer_new_cels_linked, [])
+			var l := PixelLayer.new(new_project)
+			l.deserialize(layer_dict)
 			new_project.layers.append(l)
 			global_layer_line = file.get_line()
 
@@ -223,17 +221,17 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 			if file_major_version == 0 and file_minor_version < 7:
 				var layer_name_old_version = file.get_line()
 				if frame == 0:
-					var l := Layer.new(layer_name_old_version)
+					var l := PixelLayer.new(new_project, layer_name_old_version)
 					new_project.layers.append(l)
 			var cel_opacity := 1.0
 			if file_major_version >= 0 and file_minor_version > 5:
 				cel_opacity = file.get_float()
 			var image := Image.new()
 			image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
-			frame_class.cels.append(Cel.new(image, cel_opacity))
+			frame_class.cels.append(PixelCel.new(image, cel_opacity))
 			if file_major_version >= 0 and file_minor_version >= 7:
 				if frame in linked_cels[layer_i]:
-					var linked_cel: Cel = new_project.layers[layer_i].linked_cels[0].cels[layer_i]
+					var linked_cel: PixelCel = new_project.layers[layer_i].linked_cels[0].cels[layer_i]
 					new_project.layers[layer_i].linked_cels.append(frame_class)
 					frame_class.cels[layer_i].image = linked_cel.image
 					frame_class.cels[layer_i].image_texture = linked_cel.image_texture
@@ -358,7 +356,7 @@ func save_pxo_file(
 	file.store_line(to_save)
 	for frame in project.frames:
 		for cel in frame.cels:
-			file.store_buffer(cel.image.get_data())
+			cel.save_image_data_to_pxo(file)
 
 	for brush in project.brushes:
 		file.store_buffer(brush.get_data())
@@ -401,12 +399,12 @@ func save_pxo_file(
 
 func open_image_as_new_tab(path: String, image: Image) -> void:
 	var project = Project.new([], path.get_file(), image.get_size())
-	project.layers.append(Layer.new())
+	project.layers.append(PixelLayer.new(project))
 	Global.projects.append(project)
 
 	var frame := Frame.new()
 	image.convert(Image.FORMAT_RGBA8)
-	frame.cels.append(Cel.new(image, 1))
+	frame.cels.append(PixelCel.new(image, 1))
 
 	project.frames.append(frame)
 	set_new_imported_tab(project, path)
@@ -414,7 +412,7 @@ func open_image_as_new_tab(path: String, image: Image) -> void:
 
 func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert: int) -> void:
 	var project = Project.new([], path.get_file())
-	project.layers.append(Layer.new())
+	project.layers.append(PixelLayer.new(project))
 	Global.projects.append(project)
 	horiz = min(horiz, image.get_size().x)
 	vert = min(vert, image.get_size().y)
@@ -429,16 +427,8 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 			)
 			project.size = cropped_image.get_size()
 			cropped_image.convert(Image.FORMAT_RGBA8)
-			frame.cels.append(Cel.new(cropped_image, 1))
-
-			for _i in range(1, project.layers.size()):
-				var empty_sprite := Image.new()
-				empty_sprite.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-				empty_sprite.fill(Color(0, 0, 0, 0))
-				frame.cels.append(Cel.new(empty_sprite, 1))
-
+			frame.cels.append(PixelCel.new(cropped_image, 1))
 			project.frames.append(frame)
-
 	set_new_imported_tab(project, path)
 
 
@@ -461,95 +451,84 @@ func open_image_as_spritesheet_layer(
 	# Initialize undo mechanism
 	project.undos += 1
 	project.undo_redo.create_action("Add Spritesheet Layer")
-	var new_layers: Array = project.layers.duplicate()
-	var new_frames: Array = []
-	# Create a duplicate of "project.frames"
-	for i in project.frames.size():
-		var frame := Frame.new()
-		frame.cels = project.frames[i].cels.duplicate(true)
-		new_frames.append(frame)
+	var new_layers: Array = project.layers.duplicate()  # Used for updating linked_cels lists
 
 	# Create new frames (if needed)
-	var new_frames_size = start_frame + (vertical * horizontal)
+	var new_frames_size = max(project.frames.size(), start_frame + (vertical * horizontal))
+	var frames := []
+	var frame_indices: Array
 	if new_frames_size > project.frames.size():
 		var required_frames = new_frames_size - project.frames.size()
+		frame_indices = range(
+			project.current_frame + 1, project.current_frame + required_frames + 1
+		)
 		for i in required_frames:
 			var new_frame := Frame.new()
-			for l_i in range(new_layers.size()):  # Create as many cels as there are layers
-				var new_img := Image.new()
-				new_img.create(project_width, project_height, false, Image.FORMAT_RGBA8)
-				new_frame.cels.append(Cel.new(new_img, 1))
-				if new_layers[l_i].new_cels_linked:
+			for l_i in range(project.layers.size()):  # Create as many cels as there are layers
+				new_frame.cels.append(project.layers[l_i].new_empty_cel())
+				if new_layers[l_i].get("new_cels_linked"):
 					new_layers[l_i].linked_cels.append(new_frame)
-					new_frame.cels[l_i].image = new_layers[l_i].linked_cels[0].cels[l_i].image
+					new_frame.cels[l_i].set_content(
+						new_layers[l_i].linked_cels[0].cels[l_i].get_content()
+					)
 					new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
-			new_frames.insert(project.current_frame + 1, new_frame)
+			frames.append(new_frame)
 
 	# Create new layer for spritesheet
-	var layer := Layer.new(file_name)
-	new_layers.append(layer)
-	for f in new_frames:
-		var new_layer := Image.new()
-		new_layer.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		f.cels.append(Cel.new(new_layer, 1))
-
-	# Slice spritesheet
-	var image_no: int = 0
-	var layer_index = new_layers.size() - 1
-	for yy in range(vertical):
-		for xx in range(horizontal):
+	var layer := PixelLayer.new(project, file_name)
+	var cels := []
+	for f in new_frames_size:
+		if f >= start_frame and f < (start_frame + (vertical * horizontal)):
+			# Slice spritesheet
+			var xx: int = (f - start_frame) % horizontal
+			var yy: int = (f - start_frame) / horizontal
 			var cropped_image := Image.new()
 			cropped_image = image.get_rect(
 				Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
 			cropped_image.crop(project.size.x, project.size.y)
-			var frame_index = start_frame + image_no
-
 			cropped_image.convert(Image.FORMAT_RGBA8)
-			new_frames[frame_index].cels[layer_index] = (Cel.new(cropped_image, 1))
-			image_no += 1
+			cels.append(PixelCel.new(cropped_image))
+		else:
+			cels.append(layer.new_empty_cel())
 
-	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
+	project.undo_redo.add_do_property(project, "current_frame", new_frames_size - 1)
 	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
-	project.undo_redo.add_do_property(project, "frames", new_frames)
+	project.undo_redo.add_do_method(project, "add_frames", frames, frame_indices)
 	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_do_method(project, "add_layers", [layer], [project.layers.size()], [cels])
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
 	project.undo_redo.add_undo_property(project, "layers", project.layers)
-	project.undo_redo.add_undo_property(project, "frames", project.frames)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(project, "remove_frames", frame_indices)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
 
-func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> void:
+func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void:
 	var project = Global.current_project
-	image.crop(project.size.x, project.size.y)
-
 	project.undos += 1
-	project.undo_redo.create_action("Replaced Frame")
-
-	var frames: Array = []
-	# create a duplicate of "project.frames"
-	for i in project.frames.size():
-		var frame := Frame.new()
-		frame.cels = project.frames[i].cels.duplicate(true)
-		frames.append(frame)
+	project.undo_redo.create_action("Replaced Cel")
 
 	for i in project.frames.size():
 		if i == frame_index:
+			image.crop(project.size.x, project.size.y)
 			image.convert(Image.FORMAT_RGBA8)
-			frames[i].cels[layer_index] = (Cel.new(image, 1))
-			project.undo_redo.add_do_property(project.frames[i], "cels", frames[i].cels)
-			project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
+			var cel: PixelCel = project.frames[i].cels[layer_index]
+			project.undo_redo.add_do_property(cel, "image", image)
+			project.undo_redo.add_undo_property(cel, "image", cel.image)
 
-	project.undo_redo.add_do_property(project, "frames", frames)
+	project.undo_redo.add_do_property(project, "selected_cels", [])
+	project.undo_redo.add_do_property(project, "current_layer", layer_index)
 	project.undo_redo.add_do_property(project, "current_frame", frame_index)
-
-	project.undo_redo.add_undo_property(project, "frames", project.frames)
-	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
-
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+
+	project.undo_redo.add_undo_property(project, "selected_cels", [])
+	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
@@ -557,64 +536,50 @@ func open_image_at_frame(image: Image, layer_index := 0, frame_index := 0) -> vo
 func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
-	var new_frames: Array = project.frames.duplicate()
 
 	var frame := Frame.new()
 	for i in project.layers.size():
 		if i == layer_index:
 			image.convert(Image.FORMAT_RGBA8)
-			frame.cels.append(Cel.new(image, 1))
+			frame.cels.append(PixelCel.new(image, 1))
 		else:
-			var empty_image := Image.new()
-			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-			frame.cels.append(Cel.new(empty_image, 1))
-
-	new_frames.append(frame)
+			frame.cels.append(project.layers[i].new_empty_cel())
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-
-	project.undo_redo.add_do_property(project, "frames", new_frames)
-	project.undo_redo.add_do_property(project, "current_frame", new_frames.size() - 1)
+	project.undo_redo.add_do_method(project, "add_frames", [frame], [project.frames.size()])
 	project.undo_redo.add_do_property(project, "current_layer", layer_index)
+	project.undo_redo.add_do_property(project, "current_frame", project.frames.size())
 
-	project.undo_redo.add_undo_property(project, "frames", project.frames)
-	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_undo_method(project, "remove_frames", [project.frames.size()])
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.commit_action()
 
 
 func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) -> void:
 	var project = Global.current_project
 	image.crop(project.size.x, project.size.y)
-	var new_layers: Array = Global.current_project.layers.duplicate()
-	var layer := Layer.new(file_name)
+	var layer := PixelLayer.new(project, file_name)
+	var cels := []
 
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Add Layer")
 	for i in project.frames.size():
-		var new_cels: Array = project.frames[i].cels.duplicate(true)
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
-			new_cels.append(Cel.new(image, 1))
+			cels.append(PixelCel.new(image, 1))
 		else:
-			var empty_image := Image.new()
-			empty_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-			new_cels.append(Cel.new(empty_image, 1))
+			cels.append(layer.new_empty_cel())
 
-		project.undo_redo.add_do_property(project.frames[i], "cels", new_cels)
-		project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
-
-	new_layers.append(layer)
-
-	project.undo_redo.add_do_property(project, "current_layer", new_layers.size() - 1)
-	project.undo_redo.add_do_property(project, "layers", new_layers)
+	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+	project.undo_redo.add_do_method(project, "add_layers", [layer], [project.layers.size()], [cels])
 	project.undo_redo.add_do_property(project, "current_frame", frame_index)
 
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_undo_property(project, "layers", project.layers)
+	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
