@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-09-20 05:39\n"
+"PO-Revision-Date: 2022-09-28 19:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -327,8 +327,8 @@ msgstr "スプライトシート (新規レイヤー)"
 msgid "New frame"
 msgstr "新しいフレーム"
 
-msgid "Replace frame"
-msgstr "フレームを置換"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "新規レイヤー"
@@ -1624,11 +1624,17 @@ msgstr "フレームのプロパティ"
 msgid "Layer"
 msgstr "レイヤー"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "レイヤー"
 
 msgid "Create a new layer"
 msgstr "新しいレイヤーを作成"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "現在のレイヤーを削除"
@@ -1664,6 +1670,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "セルリンクを有効/無効にする\n\n"
 "リンクされたセルは複数のフレームで共有されています"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "パレット"
