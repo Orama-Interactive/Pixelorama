@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-09-20 01:09\n"
+"PO-Revision-Date: 2022-09-28 19:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -327,8 +327,8 @@ msgstr "Spritesheet (nuovo livello)"
 msgid "New frame"
 msgstr "Nuovo frame"
 
-msgid "Replace frame"
-msgstr "Sostituisci fotogramma"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nuovo livello"
@@ -1624,11 +1624,17 @@ msgstr "Proprietà del frame"
 msgid "Layer"
 msgstr "Livello"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Livelli"
 
 msgid "Create a new layer"
 msgstr "Crea un nuovo livello"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Rimuovi il livello corrente"
@@ -1664,6 +1670,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Abilita/Disabilita il collegamento di cel\n\n"
 "I cel collegati sono condivisi su più frame"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Palette"
