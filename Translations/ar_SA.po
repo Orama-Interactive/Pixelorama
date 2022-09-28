@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2022-09-19 21:28\n"
+"PO-Revision-Date: 2022-09-28 19:10\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -327,8 +327,8 @@ msgstr ""
 msgid "New frame"
 msgstr "إطار جديد"
 
-msgid "Replace frame"
-msgstr "استبدال الإطار"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "طبقة جديدة"
@@ -1576,11 +1576,17 @@ msgstr ""
 msgid "Layer"
 msgstr ""
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr ""
 
 msgid "Create a new layer"
 msgstr "إنشاء طبقة جديدة"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr ""
@@ -1614,6 +1620,9 @@ msgstr ""
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
+msgstr ""
+
+msgid "Expand/collapse group"
 msgstr ""
 
 msgid "Palette"
