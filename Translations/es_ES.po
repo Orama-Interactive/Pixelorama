@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2022-09-28 19:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -327,8 +327,8 @@ msgstr "Hoja de sprites (nueva capa)"
 msgid "New frame"
 msgstr "Nuevo fotograma"
 
-msgid "Replace frame"
-msgstr "Reemplazar fotograma"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nueva capa"
@@ -1622,11 +1622,17 @@ msgstr "Propiedades de los fotogramas"
 msgid "Layer"
 msgstr "Capa"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Capas"
 
 msgid "Create a new layer"
 msgstr "Crear nueva capa"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Eliminar capa actual"
@@ -1662,6 +1668,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Activar/desactivar vínculo de celdas\n\n"
 "Se comparten celdas a través de múltiples fotogramas"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Paleta"
