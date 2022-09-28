@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2022-09-28 19:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -327,8 +327,8 @@ msgstr "Tegneark (nytt lag)"
 msgid "New frame"
 msgstr "Nytt bilde"
 
-msgid "Replace frame"
-msgstr "Erstatt bilde"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nytt lag"
@@ -1618,11 +1618,17 @@ msgstr "Bildeegenskaper"
 msgid "Layer"
 msgstr "Lag"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Lag"
 
 msgid "Create a new layer"
 msgstr "Lag et nytt lag"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Fjern gjeldende lag"
@@ -1658,6 +1664,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Aktiver/deaktiver cellelenking\n\n"
 "Lenkede celler deles mellom flere bilder"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Palett"
