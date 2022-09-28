@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2022-09-28 19:11\n"
 
 msgid "OK"
 msgstr "예"
@@ -327,8 +327,8 @@ msgstr "스프레드시트 (새 레이어)"
 msgid "New frame"
 msgstr "새 프레임"
 
-msgid "Replace frame"
-msgstr "프레임 변경"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "새 레이어"
@@ -1621,11 +1621,17 @@ msgstr "프레임 속성"
 msgid "Layer"
 msgstr "레이어"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "레이어"
 
 msgid "Create a new layer"
 msgstr "새 레이어 생성"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "현재 레이어 제거"
@@ -1661,6 +1667,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "셀 연결 활성화/비활성화\n\n"
 "연결된 셀들은 여러 프레임에 공유 됩니다"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "팔레트"
