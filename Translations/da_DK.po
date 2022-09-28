@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2022-09-28 19:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -327,8 +327,8 @@ msgstr "Spritesheet (nyt lag)"
 msgid "New frame"
 msgstr "Ny ramme"
 
-msgid "Replace frame"
-msgstr "Erstat ramme"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nyt lag"
@@ -1616,11 +1616,17 @@ msgstr ""
 msgid "Layer"
 msgstr "Lag"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Lag"
 
 msgid "Create a new layer"
 msgstr "Opret et nyt lag"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Fjern nuværende lag"
@@ -1656,6 +1662,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Aktivér/deaktivér celleforbinding\n\n"
 "Forbundne celler bliver delt på flere rammer"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Palet"
