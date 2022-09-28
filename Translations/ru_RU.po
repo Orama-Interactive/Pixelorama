@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-09-19 22:59\n"
+"PO-Revision-Date: 2022-09-28 19:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -327,8 +327,8 @@ msgstr "Таблица спрайтов (новый слой)"
 msgid "New frame"
 msgstr "Новый кадр"
 
-msgid "Replace frame"
-msgstr "Заменить кадр"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Новый слой"
@@ -1623,11 +1623,17 @@ msgstr "Свойства кадра"
 msgid "Layer"
 msgstr "Слой"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Слои"
 
 msgid "Create a new layer"
 msgstr "Создать новый слой"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Удалить текущий слой"
@@ -1663,6 +1669,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Включить/выключить соединение ячеек\n\n"
 "Соединённые ячейки используются в нескольких кадрах"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Палитра"
