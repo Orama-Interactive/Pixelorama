@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2022-09-28 19:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -327,8 +327,8 @@ msgstr "Spritesheet (nová vrstva)"
 msgid "New frame"
 msgstr "Nový snímek"
 
-msgid "Replace frame"
-msgstr "Nahradit snímek"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nová vrstva"
@@ -1616,11 +1616,17 @@ msgstr "Vlastnosti snímku"
 msgid "Layer"
 msgstr "Vrstva"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Vrstvy"
 
 msgid "Create a new layer"
 msgstr "Vytvořit novou vrstvu"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Odstranit aktuální vrstvu"
@@ -1656,6 +1662,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Povolit/zakázat propojení buněk\n\n"
 "Propojené buňky jsou sdíleny přes vícero snímků"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Paleta"
