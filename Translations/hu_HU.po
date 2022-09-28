@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2022-09-28 19:11\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -327,8 +327,8 @@ msgstr "Képsorozat (új réteg)"
 msgid "New frame"
 msgstr "Új képkocka"
 
-msgid "Replace frame"
-msgstr "Képkocka kicserélése"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Új réteg"
@@ -1584,11 +1584,17 @@ msgstr "Képkocka tulajdonságai"
 msgid "Layer"
 msgstr "Réteg"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Rétegek"
 
 msgid "Create a new layer"
 msgstr "Új réteg létrehozása"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Aktuális réteg eltávolítása"
@@ -1624,6 +1630,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "A cella-összekapcsolás be/ki kapcsolása\n\n"
 "Az összekapcsolt cellák több képkockáig tartanak"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Paletta"
