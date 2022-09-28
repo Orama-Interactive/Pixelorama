@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-09-19 22:59\n"
+"PO-Revision-Date: 2022-09-28 19:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -327,8 +327,8 @@ msgstr "Grille de sprite (nouvelle couche)"
 msgid "New frame"
 msgstr "Nouvelle frame"
 
-msgid "Replace frame"
-msgstr "Remplacer la frame"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nouveau calque"
@@ -1624,11 +1624,17 @@ msgstr "Propriétés de la frame"
 msgid "Layer"
 msgstr "Couche"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Calques"
 
 msgid "Create a new layer"
 msgstr "Créer un calque"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Supprimer le calque"
@@ -1664,6 +1670,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Activer/désactiver la liaison des cellules\n\n"
 "Les cellules liées sont partagées sur plusieurs frames"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Palette"
