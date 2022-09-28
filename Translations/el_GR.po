@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-09-21 15:33\n"
+"PO-Revision-Date: 2022-09-28 19:11\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -327,8 +327,8 @@ msgstr "Φύλλο καρέ (νέα στρώση)"
 msgid "New frame"
 msgstr "Νέο καρέ"
 
-msgid "Replace frame"
-msgstr "Αντικατάσταση καρέ"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Νέα στρώση"
@@ -1624,11 +1624,17 @@ msgstr "Ιδιότητες καρέ"
 msgid "Layer"
 msgstr "Στρώση"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Στρώσεις"
 
 msgid "Create a new layer"
 msgstr "Δημιουργία νέας στρώσης"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Διαγραφή της τρέχουσας στρώσης"
@@ -1664,6 +1670,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "Ενεργοποίηση/Απενεργοποίηση σύνδεσης cel\n\n"
 "Τα συνδεδεμένα cels μοιράζονται ανάμεσα σε πολλά καρέ"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Παλέτα"
