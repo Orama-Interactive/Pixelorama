@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2022-09-28 19:10\n"
 
 msgid "OK"
 msgstr "確定"
@@ -327,7 +327,7 @@ msgstr ""
 msgid "New frame"
 msgstr "新增影格"
 
-msgid "Replace frame"
+msgid "Replace cel"
 msgstr ""
 
 msgid "New layer"
@@ -1582,11 +1582,17 @@ msgstr "影格屬性"
 msgid "Layer"
 msgstr "圖層"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "圖層"
 
 msgid "Create a new layer"
 msgstr "新增圖層"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "刪除此圖層"
@@ -1622,6 +1628,9 @@ msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
 msgstr "開關 Cel 連結\n\n"
 "連結的 Cel 會在多個影格重複"
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "色盤"
