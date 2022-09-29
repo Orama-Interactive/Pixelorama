@@ -1,5 +1,7 @@
 extends Node
 
+signal theme_changed
+
 var theme_index := 0
 var theme_button_group := ButtonGroup.new()
 
@@ -98,6 +100,7 @@ func change_theme(id: int) -> void:
 
 	# Sets disabled theme color on palette swatches
 	Global.palette_panel.reset_empty_palette_swatches_color()
+	emit_signal("theme_changed")
 
 
 func change_clear_color() -> void:

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=179 format=2]
+[gd_resource type="Theme" load_steps=178 format=2]
 
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/Roboto-Big.tres" type="DynamicFont" id=2]
@@ -750,21 +750,21 @@ content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
-bg_color = Color( 0.334961, 0.334961, 0.334961, 1 )
+bg_color = Color( 0.333333, 0.333333, 0.333333, 1 )
 
 [sub_resource type="StyleBoxFlat" id=87]
 content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
-bg_color = Color( 0.334961, 0.334961, 0.334961, 1 )
+bg_color = Color( 0.333333, 0.333333, 0.333333, 1 )
 
 [sub_resource type="StyleBoxFlat" id=88]
 content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
-bg_color = Color( 0.0679686, 0.0679686, 0.0679686, 1 )
+bg_color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
 
 [sub_resource type="Image" id=205]
 data = {
@@ -1030,21 +1030,6 @@ margin_left = 6.0
 margin_right = 6.0
 margin_top = 6.0
 margin_bottom = 6.0
-
-[sub_resource type="StyleBoxFlat" id=122]
-content_margin_left = 8.0
-content_margin_right = 8.0
-content_margin_top = 8.0
-content_margin_bottom = 8.0
-bg_color = Color( 0.0792967, 0.0792967, 0.0792967, 1 )
-border_width_left = 1
-border_width_top = 24
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0.0792967, 0.0792967, 0.0792967, 1 )
-expand_margin_top = 24.0
-shadow_color = Color( 0, 0, 0, 0.3 )
-shadow_size = 4
 
 [sub_resource type="StyleBoxEmpty" id=123]
 
@@ -1761,7 +1746,6 @@ PopupPanel/styles/panel = SubResource( 105 )
 ProgressBar/colors/font_color = Color( 0.77832, 0.77832, 0.77832, 1 )
 ProgressBar/styles/bg = SubResource( 118 )
 ProgressBar/styles/fg = SubResource( 121 )
-ProjectSettingsEditor/styles/panel = SubResource( 122 )
 RichTextLabel/colors/default_color = Color( 0.77832, 0.77832, 0.77832, 1 )
 RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 RichTextLabel/constants/shadow_as_outline = 0
@@ -1926,6 +1910,8 @@ VSplitContainer/constants/autohide = 1
 VSplitContainer/constants/separation = 8
 VSplitContainer/icons/grabber = SubResource( 172 )
 VSplitContainer/styles/bg = SubResource( 175 )
+ValueSlider/colors/progress_color = Color( 0.333333, 0.333333, 0.333333, 1 )
+ValueSlider/colors/under_color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
 WindowDialog/colors/title_color = Color( 0.77832, 0.77832, 0.77832, 1 )
 WindowDialog/constants/close_h_ofs = 22
 WindowDialog/constants/close_v_ofs = 20

@@ -1437,7 +1437,7 @@ content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
-bg_color = Color( 0.544118, 0.544118, 0.544118, 1 )
+bg_color = Color( 0.545098, 0.545098, 0.545098, 1 )
 
 [sub_resource type="StyleBoxFlat" id=168]
 content_margin_left = 2.0
@@ -1918,6 +1918,8 @@ VSplitContainer/constants/autohide = 1
 VSplitContainer/constants/separation = 8
 VSplitContainer/icons/grabber = SubResource( 171 )
 VSplitContainer/styles/bg = SubResource( 174 )
+ValueSlider/colors/progress_color = Color( 0.545098, 0.545098, 0.545098, 1 )
+ValueSlider/colors/under_color = Color( 0.235294, 0.235294, 0.235294, 1 )
 WindowDialog/colors/title_color = Color( 0.848039, 0.848039, 0.848039, 1 )
 WindowDialog/constants/close_h_ofs = 22
 WindowDialog/constants/close_v_ofs = 20

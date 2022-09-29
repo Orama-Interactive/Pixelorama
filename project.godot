@@ -153,6 +153,11 @@ _global_script_classes=[ {
 "class": "Tiles",
 "language": "GDScript",
 "path": "res://src/Classes/Tiles.gd"
+}, {
+"base": "TextureProgress",
+"class": "ValueSlider",
+"language": "GDScript",
+"path": "res://src/UI/Nodes/ValueSlider.gd"
 } ]
 _global_script_class_icons={
 "AnimationTag": "",
@@ -183,7 +188,8 @@ _global_script_class_icons={
 "ShaderImageEffect": "",
 "ShortcutProfile": "",
 "SymmetryGuide": "",
-"Tiles": ""
+"Tiles": "",
+"ValueSlider": ""
 }
 
 [application]
@@ -199,7 +205,7 @@ config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/custom_user_dir_name.X11="pixelorama"
-config/Version="v0.10.3-stable"
+config/Version="v0.11-dev"
 config/ExtensionsAPI_Version=2
 
 [audio]

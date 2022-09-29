@@ -1380,14 +1380,14 @@ content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
-bg_color = Color( 0.4, 0.4225, 0.4825, 1 )
+bg_color = Color( 0.4, 0.423529, 0.482353, 1 )
 
 [sub_resource type="StyleBoxFlat" id=162]
 content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
-bg_color = Color( 0.1, 0.115, 0.155, 1 )
+bg_color = Color( 0.101961, 0.113725, 0.156863, 1 )
 
 [sub_resource type="Image" id=218]
 data = {
@@ -1781,6 +1781,8 @@ VSlider/styles/slider = SubResource( 162 )
 VSplitContainer/constants/separation = 8
 VSplitContainer/icons/grabber = SubResource( 164 )
 VSplitContainer/styles/bg = SubResource( 167 )
+ValueSlider/colors/progress_color = Color( 0.4, 0.423529, 0.482353, 1 )
+ValueSlider/colors/under_color = Color( 0.101961, 0.113725, 0.156863, 1 )
 WindowDialog/colors/title_color = Color( 0.8, 0.8075, 0.8275, 1 )
 WindowDialog/constants/close_h_ofs = 22
 WindowDialog/constants/close_v_ofs = 20
