@@ -195,8 +195,7 @@ onready var remove_layer_button: BaseButton = animation_timeline.find_node("Remo
 onready var move_up_layer_button: BaseButton = animation_timeline.find_node("MoveUpLayer")
 onready var move_down_layer_button: BaseButton = animation_timeline.find_node("MoveDownLayer")
 onready var merge_down_layer_button: BaseButton = animation_timeline.find_node("MergeDownLayer")
-onready var layer_opacity_slider: HSlider = animation_timeline.find_node("OpacitySlider")
-onready var layer_opacity_spinbox: SpinBox = animation_timeline.find_node("OpacitySpinBox")
+onready var layer_opacity_slider: ValueSlider = animation_timeline.find_node("OpacitySlider")
 
 onready var open_sprites_dialog: FileDialog = control.find_node("OpenSprite")
 onready var save_sprites_dialog: FileDialog = control.find_node("SaveSprite")

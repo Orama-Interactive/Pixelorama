@@ -802,8 +802,6 @@ func _on_OpacitySlider_value_changed(value) -> void:
 	var current_frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
 	var cel: BaseCel = current_frame.cels[Global.current_project.current_layer]
 	cel.opacity = value / 100
-	Global.layer_opacity_slider.value = value
-	Global.layer_opacity_spinbox.value = value
 	Global.canvas.update()
 
 

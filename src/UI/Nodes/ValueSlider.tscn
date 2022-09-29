@@ -8,7 +8,7 @@
 [node name="ValueSlider" type="TextureProgress"]
 margin_right = 6.0
 margin_bottom = 6.0
-rect_min_size = Vector2( 32, 32 )
+rect_min_size = Vector2( 32, 24 )
 mouse_filter = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/layers/new.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/graphics/layers/delete.png" type="Texture" id=6]
 [ext_resource path="res://assets/graphics/layers/clone.png" type="Texture" id=7]
 [ext_resource path="res://assets/graphics/timeline/move_arrow.png" type="Texture" id=8]
+[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/graphics/layers/group_new.png" type="Texture" id=10]
 [ext_resource path="res://assets/graphics/timeline/new_frame.png" type="Texture" id=19]
 [ext_resource path="res://assets/graphics/timeline/remove_frame.png" type="Texture" id=20]
@@ -99,17 +100,14 @@ margin_bottom = 160.0
 rect_min_size = Vector2( 36, 160 )
 rect_clip_content = true
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="TimelineContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 745.0
-margin_bottom = 104.0
+margin_right = 902.0
+margin_bottom = 160.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -122,7 +120,7 @@ margin_bottom = 38.0
 size_flags_horizontal = 3
 
 [node name="LayerButtonPanelContainer" type="PanelContainer" parent="ScrollContainer/TimelineContainer/TimelineButtons"]
-margin_right = 190.0
+margin_right = 217.0
 margin_bottom = 38.0
 rect_min_size = Vector2( 190, 0 )
 custom_styles/panel = SubResource( 2 )
@@ -130,7 +128,7 @@ custom_styles/panel = SubResource( 2 )
 [node name="LayerButtons" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/TimelineButtons/LayerButtonPanelContainer"]
 margin_left = 4.5
 margin_top = 3.0
-margin_right = 185.5
+margin_right = 212.5
 margin_bottom = 25.0
 size_flags_vertical = 0
 custom_constants/separation = 9
@@ -314,8 +312,8 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="ScrollContainer/TimelineContainer/TimelineButtons"]
-margin_left = 194.0
-margin_right = 386.0
+margin_left = 221.0
+margin_right = 378.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 
@@ -774,50 +772,26 @@ margin_right = 4.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 4, 0 )
 
-[node name="OpacityContainer" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer"]
+[node name="OpacitySlider" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer" instance=ExtResource( 9 )]
 margin_left = 6.0
-margin_right = 186.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 180, 0 )
-
-[node name="OpacityLabel" type="Label" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
-margin_top = 9.0
-margin_right = 53.0
-margin_bottom = 23.0
-size_flags_horizontal = 0
-text = "Opacity:"
-valign = 1
-
-[node name="OpacitySlider" type="HSlider" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
-margin_left = 57.0
-margin_top = 8.0
-margin_right = 102.0
+margin_right = 213.0
 margin_bottom = 24.0
-focus_mode = 0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
+rect_min_size = Vector2( 207, 24 )
+size_flags_horizontal = 1
+size_flags_vertical = 0
 value = 100.0
-ticks_on_borders = true
-
-[node name="OpacitySpinBox" type="SpinBox" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer"]
-margin_left = 106.0
-margin_top = 4.0
-margin_right = 180.0
-margin_bottom = 28.0
-mouse_default_cursor_shape = 2
-size_flags_vertical = 4
-value = 100.0
-align = 1
+tint_under = Color( 0, 0, 0, 1 )
+tint_progress = Color( 0, 0, 0, 1 )
+prefix = "Opacity:"
 
 [node name="SpacerControl2" type="Control" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer"]
-margin_left = 188.0
-margin_right = 240.0
+margin_left = 215.0
+margin_right = 267.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 52, 32 )
 
 [node name="TagScroll" type="ScrollContainer" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer"]
-margin_left = 242.0
+margin_left = 269.0
 margin_right = 902.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
@@ -827,6 +801,7 @@ theme = SubResource( 20 )
 scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/TagScroll"]
+margin_right = 633.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -836,7 +811,7 @@ custom_constants/separation = 0
 margin_bottom = 32.0
 
 [node name="TagContainer" type="Control" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/TagScroll/HBoxContainer"]
-margin_right = 660.0
+margin_right = 633.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 
@@ -864,7 +839,7 @@ size_flags_horizontal = 3
 
 [node name="LayersAndFrames" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll"]
 margin_right = 45.0
-margin_bottom = 20.0
+margin_bottom = 68.0
 size_flags_vertical = 3
 
 [node name="LayerVBoxCont" type="VBoxContainer" parent="ScrollContainer/TimelineContainer/PanelContainer/HBoxContainer/TimelineScroll/LayersAndFrames"]
@@ -1048,8 +1023,7 @@ color = Color( 0, 0.741176, 1, 0.501961 )
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/OnionSkinning" to="." method="_on_OnionSkinning_pressed"]
 [connection signal="pressed" from="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="value_changed" from="ScrollContainer/TimelineContainer/TimelineButtons/PanelContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
-[connection signal="value_changed" from="ScrollContainer/TimelineContainer/OpacityAndTagContainer/OpacityContainer/OpacitySpinBox" to="." method="_on_OpacitySlider_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/TimelineContainer/OpacityAndTagContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
 [connection signal="popup_hide" from="OnionSkinningSettings" to="." method="_on_OnionSkinningSettings_popup_hide"]
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]

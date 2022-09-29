@@ -481,7 +481,6 @@ func _frame_changed(value: int) -> void:
 	if current_frame < frames.size():
 		var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
 		Global.layer_opacity_slider.value = cel_opacity * 100
-		Global.layer_opacity_spinbox.value = cel_opacity * 100
 
 	toggle_frame_buttons()
 	Global.canvas.update()
