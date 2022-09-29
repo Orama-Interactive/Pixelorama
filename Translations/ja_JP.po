@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-09-28 19:11\n"
+"PO-Revision-Date: 2022-09-29 06:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -328,7 +328,7 @@ msgid "New frame"
 msgstr "新しいフレーム"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "セルを置換"
 
 msgid "New layer"
 msgstr "新規レイヤー"
@@ -1625,7 +1625,7 @@ msgid "Layer"
 msgstr "レイヤー"
 
 msgid "Group"
-msgstr ""
+msgstr "グループ"
 
 msgid "Layers"
 msgstr "レイヤー"
@@ -1634,7 +1634,7 @@ msgid "Create a new layer"
 msgstr "新しいレイヤーを作成"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "新しいグループレイヤーを作成"
 
 msgid "Remove current layer"
 msgstr "現在のレイヤーを削除"
@@ -1672,7 +1672,7 @@ msgstr "セルリンクを有効/無効にする\n\n"
 "リンクされたセルは複数のフレームで共有されています"
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "グループを展開/閉じる"
 
 msgid "Palette"
 msgstr "パレット"
