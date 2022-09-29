@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-09-28 19:10\n"
+"PO-Revision-Date: 2022-09-29 10:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -328,7 +328,7 @@ msgid "New frame"
 msgstr "Новый кадр"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Заменить ячейку"
 
 msgid "New layer"
 msgstr "Новый слой"
@@ -1392,19 +1392,19 @@ msgstr "0: Собственный цвет кисти, 100: Выбранный �
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Область заливки:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "Похожая область"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "Похожие цвета"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "Всё выделение"
 
 msgid "Fill with:"
 msgstr "Заполнить:"
@@ -1633,7 +1633,7 @@ msgid "Create a new layer"
 msgstr "Создать новый слой"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "Создать групповой слой"
 
 msgid "Remove current layer"
 msgstr "Удалить текущий слой"
@@ -1671,7 +1671,7 @@ msgstr "Включить/выключить соединение ячеек\n\n"
 "Соединённые ячейки используются в нескольких кадрах"
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "Развернуть/свернуть"
 
 msgid "Palette"
 msgstr "Палитра"
