@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-09-28 19:11\n"
+"PO-Revision-Date: 2022-09-29 02:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -328,7 +328,7 @@ msgid "New frame"
 msgstr "Nuovo frame"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Sostituire la cella"
 
 msgid "New layer"
 msgstr "Nuovo livello"
@@ -1625,7 +1625,7 @@ msgid "Layer"
 msgstr "Livello"
 
 msgid "Group"
-msgstr ""
+msgstr "Gruppo"
 
 msgid "Layers"
 msgstr "Livelli"
@@ -1634,7 +1634,7 @@ msgid "Create a new layer"
 msgstr "Crea un nuovo livello"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "Creare un nuovo strato di gruppo"
 
 msgid "Remove current layer"
 msgstr "Rimuovi il livello corrente"
@@ -1672,7 +1672,7 @@ msgstr "Abilita/Disabilita il collegamento di cel\n\n"
 "I cel collegati sono condivisi su più frame"
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "Espandere/comprimere gruppo"
 
 msgid "Palette"
 msgstr "Palette"
