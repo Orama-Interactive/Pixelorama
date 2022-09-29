@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-09-28 19:11\n"
+"PO-Revision-Date: 2022-09-29 07:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -328,7 +328,7 @@ msgid "New frame"
 msgstr "Neuer Frame"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Cel ersetzen"
 
 msgid "New layer"
 msgstr "Neue Ebene"
@@ -1624,7 +1624,7 @@ msgid "Layer"
 msgstr "Ebene"
 
 msgid "Group"
-msgstr ""
+msgstr "Gruppe"
 
 msgid "Layers"
 msgstr "Ebenen"
@@ -1633,7 +1633,7 @@ msgid "Create a new layer"
 msgstr "Erstelle eine neue Ebene"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "Neue Gruppen-Ebene erstellen"
 
 msgid "Remove current layer"
 msgstr "Entferne aktuelle Ebene"
@@ -1671,7 +1671,7 @@ msgstr "Aktiviere/Deaktiviere Celverlinkungen\n\n"
 "Verlinkte Cels werden über mehrere Frames geteilt"
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "Gruppe aus- / einklappen"
 
 msgid "Palette"
 msgstr "Palette"
