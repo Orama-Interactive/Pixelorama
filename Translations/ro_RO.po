@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-09-28 19:11\n"
+"PO-Revision-Date: 2022-09-29 06:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -328,7 +328,7 @@ msgid "New frame"
 msgstr "Cadru nou"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Înlocuire cel"
 
 msgid "New layer"
 msgstr "Strat nou"
@@ -1625,7 +1625,7 @@ msgid "Layer"
 msgstr "Strat"
 
 msgid "Group"
-msgstr ""
+msgstr "Grup"
 
 msgid "Layers"
 msgstr "Straturi"
@@ -1634,7 +1634,7 @@ msgid "Create a new layer"
 msgstr "Creează un strat nou"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "Creează un nou strat de grup"
 
 msgid "Remove current layer"
 msgstr "Elimină stratul actual"
@@ -1672,7 +1672,7 @@ msgstr "Activează/dezactivează conectarea celurilor\n\n"
 "Celurile conectate sunt distribuite pe mai multe cadre"
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "Extindere/restrânge grup"
 
 msgid "Palette"
 msgstr "Paletă"
