@@ -1,4 +1,5 @@
 # Made by MrTriPie
+tool
 class_name ValueSlider
 extends TextureProgress
 
@@ -24,8 +25,9 @@ onready var line_edit: LineEdit = $LineEdit
 
 func _ready() -> void:
 	reset_display()
-	yield(get_tree(), "idle_frame")
-	Global.preferences_dialog.themes.connect("theme_changed", self, "reset_display")
+	if not Engine.editor_hint:
+		yield(get_tree(), "idle_frame")
+		Global.preferences_dialog.themes.connect("theme_changed", self, "reset_display")
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -132,4 +134,4 @@ func reset_display() -> void:
 		tint_progress = get_color("progress_color", "ValueSlider")
 	else:
 		tint_progress = Color.transparent
-	line_edit.text = str(prefix, " ", value, " ", suffix).strip_edges()
+	line_edit.text = str(tr(prefix), " ", value, " ", tr(suffix)).strip_edges()
