@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-09-28 19:10\n"
+"PO-Revision-Date: 2022-09-29 09:52\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -328,7 +328,7 @@ msgid "New frame"
 msgstr "Новий кадр"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Замінити клітинку"
 
 msgid "New layer"
 msgstr "Новий шар"
@@ -1634,7 +1634,7 @@ msgid "Create a new layer"
 msgstr "Створити новий шар"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "Створити груповий шар"
 
 msgid "Remove current layer"
 msgstr "Видалити поточний шар"
@@ -1672,7 +1672,7 @@ msgstr "Дозволити/заборонити з’єднання клітин
 "З’єднані клітинки використовуються в декількох шарах"
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "Розгорнути/згорнути групу"
 
 msgid "Palette"
 msgstr "Палітра"
