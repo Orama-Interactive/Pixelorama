@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-09-28 19:10\n"
+"PO-Revision-Date: 2022-09-29 00:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -328,7 +328,7 @@ msgid "New frame"
 msgstr "Novo Quadro"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Substituir o cel"
 
 msgid "New layer"
 msgstr "Nova camada"
@@ -1625,7 +1625,7 @@ msgid "Layer"
 msgstr "Camada"
 
 msgid "Group"
-msgstr ""
+msgstr "Grupo"
 
 msgid "Layers"
 msgstr "Camadas"
@@ -1634,7 +1634,7 @@ msgid "Create a new layer"
 msgstr "Criar nova camada"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "Criar um novo grupo de camada"
 
 msgid "Remove current layer"
 msgstr "Remover camada atual"
@@ -1672,7 +1672,7 @@ msgstr "Ativar/desativar vínculo de células\n\n"
 "Células vinculadas estão sendo compartilhadas entre quadros"
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "Expandir/recolher grupo"
 
 msgid "Palette"
 msgstr "Paleta"
