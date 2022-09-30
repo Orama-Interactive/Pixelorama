@@ -35,15 +35,22 @@ func _gui_input(event: InputEvent) -> void:
 	if not editable:
 		return
 	if state == NORMAL:
-		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
-			state = HELD
-			set_meta("mouse_start_position", get_local_mouse_position())
+		if event is InputEventMouseButton and event.pressed:
+			if event.button_index == BUTTON_LEFT:
+				state = HELD
+				set_meta("mouse_start_position", get_local_mouse_position())
+			elif event.button_index == BUTTON_WHEEL_UP:
+				if snap_by_default:
+					value += step if event.control else snap_step
+				else:
+					value += snap_step if event.control else step
+			elif event.button_index == BUTTON_WHEEL_DOWN:
+				if snap_by_default:
+					value -= step if event.control else snap_step
+				else:
+					value -= snap_step if event.control else step
 	elif state == HELD:
-		if (
-			event is InputEventMouseButton
-			and event.button_index == BUTTON_LEFT
-			and not event.pressed
-		):
+		if event.is_action_released("left_mouse"):
 			state = TYPING
 			line_edit.text = str(value)
 			line_edit.editable = true
@@ -59,11 +66,7 @@ func _gui_input(event: InputEvent) -> void:
 				set_meta("start_ratio", ratio)
 				set_meta("start_value", value)
 	elif state == SLIDING:
-		if (
-			event is InputEventMouseButton
-			and event.button_index == BUTTON_LEFT
-			and not event.pressed
-		):
+		if event.is_action_released("left_mouse"):
 			state = NORMAL
 			remove_meta("mouse_start_position")
 			remove_meta("start_ratio")
