@@ -26,9 +26,11 @@ onready var line_edit: LineEdit = $LineEdit
 
 func _ready() -> void:
 	reset_display()
-	if not Engine.editor_hint:
-		yield(get_tree(), "idle_frame")
-		Global.preferences_dialog.themes.connect("theme_changed", self, "reset_display")
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_THEME_CHANGED or what == NOTIFICATION_TRANSLATION_CHANGED:
+		reset_display()
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -133,6 +135,8 @@ func _confirm_text(confirm := true) -> void:
 
 
 func reset_display() -> void:
+	if not line_edit:
+		return
 	line_edit.selecting_enabled = false  # Remove the selection
 	line_edit.editable = false
 	tint_under = get_color("under_color", "ValueSlider")
