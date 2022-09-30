@@ -6,8 +6,8 @@ extends TextureProgress
 enum { NORMAL, HELD, SLIDING, TYPING }
 
 export var editable := true
-export var prefix: String
-export var suffix: String
+export var prefix: String setget _prefix_changed
+export var suffix: String setget _suffix_changed
 # Size of additional snapping (applied in addition to Range's step).
 # This should always be larger than step.
 export var snap_step := 1.0
@@ -25,12 +25,12 @@ onready var line_edit: LineEdit = $LineEdit
 
 
 func _ready() -> void:
-	reset_display()
+	_reset_display()
 
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_THEME_CHANGED or what == NOTIFICATION_TRANSLATION_CHANGED:
-		reset_display()
+		_reset_display()
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -98,6 +98,16 @@ func _gui_input(event: InputEvent) -> void:
 					value = round(value / snap_step) * snap_step
 
 
+func _prefix_changed(v: String) -> void:
+	prefix = v
+	_reset_display()
+
+
+func _suffix_changed(v: String) -> void:
+	suffix = v
+	_reset_display()
+
+
 func _on_LineEdit_gui_input(event: InputEvent) -> void:
 	if state == TYPING:
 		if event is InputEventKey and event.scancode == KEY_ESCAPE:
@@ -106,7 +116,7 @@ func _on_LineEdit_gui_input(event: InputEvent) -> void:
 
 
 func _on_value_changed(_value: float) -> void:
-	reset_display()
+	_reset_display()
 
 
 func _on_LineEdit_text_entered(_new_text) -> void:
@@ -124,17 +134,17 @@ func _confirm_text(confirm := true) -> void:
 		var expression := Expression.new()
 		var error := expression.parse(line_edit.text, [])
 		if error != OK:
-			reset_display()
+			_reset_display()
 			return
 		var result = expression.execute([], null, true)
 		if expression.has_execute_failed() or not (result is int or result is float):
-			reset_display()
+			_reset_display()
 			return
 		value = result
-	reset_display()
+	_reset_display()
 
 
-func reset_display() -> void:
+func _reset_display() -> void:
 	if not line_edit:
 		return
 	line_edit.selecting_enabled = false  # Remove the selection
