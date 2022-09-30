@@ -5,6 +5,7 @@ extends TextureProgress
 
 enum { NORMAL, HELD, SLIDING, TYPING }
 
+export var editable := true
 export var prefix: String
 export var suffix: String
 # Size of additional snapping (applied in addition to Range's step).
@@ -31,6 +32,8 @@ func _ready() -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
+	if not editable:
+		return
 	if state == NORMAL:
 		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 			state = HELD

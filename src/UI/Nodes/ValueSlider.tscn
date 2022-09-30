@@ -15,6 +15,8 @@ size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 2 )
+tint_under = Color( 0, 0, 0, 1 )
+tint_progress = Color( 0, 0, 0, 1 )
 nine_patch_stretch = true
 stretch_margin_left = 3
 stretch_margin_top = 3
@@ -28,8 +30,10 @@ anchor_bottom = 1.0
 mouse_filter = 2
 custom_styles/read_only = SubResource( 1 )
 custom_styles/normal = SubResource( 1 )
+text = "0"
 align = 1
 editable = false
+selecting_enabled = false
 
 [connection signal="value_changed" from="." to="." method="_on_value_changed"]
 [connection signal="focus_exited" from="LineEdit" to="." method="_confirm_text"]

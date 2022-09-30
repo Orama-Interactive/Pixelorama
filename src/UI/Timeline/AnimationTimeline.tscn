@@ -780,8 +780,6 @@ rect_min_size = Vector2( 207, 24 )
 size_flags_horizontal = 1
 size_flags_vertical = 0
 value = 100.0
-tint_under = Color( 0, 0, 0, 1 )
-tint_progress = Color( 0, 0, 0, 1 )
 prefix = "Opacity:"
 
 [node name="SpacerControl2" type="Control" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer"]
