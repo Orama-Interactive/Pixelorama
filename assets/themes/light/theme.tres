@@ -1680,6 +1680,7 @@ LineEdit/colors/clear_button_color_pressed = Color( 0, 0.356863, 1, 1 )
 LineEdit/colors/cursor_color = Color( 0.25, 0.25, 0.25, 1 )
 LineEdit/colors/font_color = Color( 0.25, 0.25, 0.25, 1 )
 LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.5, 0.5, 0.5, 1 )
 LineEdit/colors/read_only = Color( 0, 0, 0, 0.3 )
 LineEdit/colors/selection_color = Color( 0, 0.356863, 1, 0.4 )
 LineEdit/constants/minimum_spaces = 12
