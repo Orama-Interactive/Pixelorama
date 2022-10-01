@@ -7,13 +7,13 @@ var artworks := [
 		"https://linktr.ee/Roroto_Sic",
 		Color.black
 	],
-	[
+	[  # Licensed under CC BY-NC, https://creativecommons.org/licenses/by-nc/3.0/
 		"Kalpar",
 		preload("res://assets/graphics/splash_screen/artworks/kalpar.png"),
 		"https://resite.link/Kalpar",
 		Color.white
 	],
-	[
+	[  # Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/
 		"Uch",
 		preload("res://assets/graphics/splash_screen/artworks/uch.png"),
 		"https://www.instagram.com/vs.pxl/",
