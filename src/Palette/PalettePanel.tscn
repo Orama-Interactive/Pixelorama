@@ -129,6 +129,7 @@ script = ExtResource( 6 )
 [node name="HBoxContainer" type="HBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll"]
 margin_right = 124.0
 margin_bottom = 52.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
@@ -136,6 +137,7 @@ alignment = 1
 margin_right = 120.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer"]
@@ -149,8 +151,8 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 margin_right = 120.0
 margin_bottom = 52.0
-size_flags_horizontal = 7
-size_flags_vertical = 7
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/vseparation = 3
 custom_constants/hseparation = 3
 script = ExtResource( 5 )

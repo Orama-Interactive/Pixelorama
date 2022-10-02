@@ -36,7 +36,11 @@ func set_sliders(palette: Palette, origin: Vector2) -> void:
 
 
 func reset_sliders():
-	set_sliders(palette_grid.displayed_palette, palette_grid.grid_window_origin)
+	set_sliders(palette_grid.current_palette, palette_grid.grid_window_origin)
+
+
+func resize_grid():
+	palette_grid.resize_grid(rect_size - Vector2(v_slider.rect_size.x, h_slider.rect_size.y))
 
 
 func scroll_grid() -> void:
@@ -69,8 +73,7 @@ func _on_PaletteGrid_gui_input(event) -> void:
 
 
 func _on_PaletteScroll_resized():
-	palette_grid.redraw_palette()
-	palette_grid.resize_grid()
+	resize_grid()
 	reset_sliders()
 
 
@@ -87,4 +90,5 @@ func _on_PaletteScroll_gui_input(event):
 				palette_grid.change_swatch_size(-Vector2.ONE)
 			else:
 				scroll_vector = Vector2.RIGHT if event.shift else Vector2.DOWN
-		set_sliders(palette_grid.displayed_palette, palette_grid.grid_window_origin + scroll_vector)
+		resize_grid()
+		set_sliders(palette_grid.current_palette, palette_grid.grid_window_origin + scroll_vector)

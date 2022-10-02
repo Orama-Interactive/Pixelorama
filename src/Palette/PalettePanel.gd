@@ -54,7 +54,8 @@ func select_palette(palette_path: String) -> void:
 	if palette_id != null:
 		palette_select.selected = palette_id
 		Palettes.select_palette(palette_path)
-		palette_grid.display_palette(Palettes.get_current_palette())
+		palette_grid.set_palette(Palettes.get_current_palette())
+		palette_scroll.resize_grid()
 		palette_scroll.set_sliders(Palettes.get_current_palette(), palette_grid.grid_window_origin)
 
 		var left_selected = Palettes.current_palette_get_selected_color_index(BUTTON_LEFT)

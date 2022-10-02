@@ -11,10 +11,19 @@ const MIN_SWATCH_SIZE = 8
 const MAX_SWATCH_SIZE = 64
 
 var swatches := []  # PaletteSwatch
-var displayed_palette = null
+var current_palette = null
 var grid_window_origin := Vector2.ZERO
 var grid_size := Vector2.ZERO
 var swatch_size := Vector2(DEFAULT_SWATCH_SIZE, DEFAULT_SWATCH_SIZE)
+
+
+func set_palette(new_palette: Palette ) -> void:
+	# Only display valid palette objects
+	if not new_palette:
+		return
+
+	current_palette = new_palette
+	grid_window_origin = Vector2.ZERO
 
 
 func setup_swatches() -> void:
@@ -24,7 +33,7 @@ func setup_swatches() -> void:
 		for i in range(swatches.size(), grid_size.x * grid_size.y):
 			var swatch: PaletteSwatch = PaletteSwatchScene.instance()
 			swatch.index = i
-			clear_swatch(swatch)
+			init_swatch(swatch)
 			swatch.connect("pressed", self, "_on_PaletteSwatch_pressed", [i])
 			swatch.connect("double_clicked", self, "_on_PaletteSwatch_double_clicked", [i])
 			swatch.connect("dropped", self, "_on_PaletteSwatch_dropped")
@@ -38,10 +47,10 @@ func setup_swatches() -> void:
 			swatch.queue_free()
 
 		for i in range(0, swatches.size()):
-			clear_swatch(swatches[i])
+			init_swatch(swatches[i])
 
 
-func clear_swatch(swatch: PaletteSwatch) -> void:
+func init_swatch(swatch: PaletteSwatch) -> void:
 	swatch.color = PaletteSwatch.DEFAULT_COLOR
 	swatch.show_left_highlight = false
 	swatch.show_right_highlight = false
@@ -49,21 +58,7 @@ func clear_swatch(swatch: PaletteSwatch) -> void:
 	swatch.set_swatch_size(swatch_size)
 
 
-# Origin determines a position in palette which will be displayed on top left of grid
-func display_palette(palette: Palette) -> void:
-	# Reset grid origin when palette changes
-	if displayed_palette != palette:
-		displayed_palette = palette
-		grid_window_origin = Vector2.ZERO
-
-	# Only display valid palette objects
-	if not palette:
-		return
-
-	resize_grid()
-	setup_swatches()
-
-	# Create empty palette buttons
+func draw_palette() -> void:
 	for j in range(grid_size.y):
 		for i in range(grid_size.x):
 			var grid_index: int = i + grid_size.x * j
@@ -71,7 +66,7 @@ func display_palette(palette: Palette) -> void:
 			var swatch = swatches[grid_index]
 			swatch.show_left_highlight = false
 			swatch.show_right_highlight = false
-			var color = palette.get_color(index)
+			var color = current_palette.get_color(index)
 			if color != null:
 				swatch.color = color
 				swatch.empty = false
@@ -80,13 +75,9 @@ func display_palette(palette: Palette) -> void:
 				swatch.empty = true
 
 
-func redraw_palette() -> void:
-	display_palette(displayed_palette)
-
-
 func scroll_palette(origin: Vector2) -> void:
 	grid_window_origin = origin
-	redraw_palette()
+	draw_palette()
 
 
 func find_and_select_color(mouse_button: int, target_color: Color) -> void:
@@ -159,24 +150,24 @@ func _on_PaletteSwatch_dropped(source_index: int, target_index: int) -> void:
 # Grid index adds grid window origin
 func convert_grid_index_to_palette_index(index: int) -> int:
 	return (
-		int(index / grid_size.x + grid_window_origin.y) * displayed_palette.width
+		int(index / grid_size.x + grid_window_origin.y) * current_palette.width
 		+ (index % int(grid_size.x) + grid_window_origin.x)
 	)
 
 
 func convert_palette_index_to_grid_index(palette_index: int) -> int:
-	var x: int = palette_index % displayed_palette.width
-	var y: int = palette_index / displayed_palette.width
+	var x: int = palette_index % current_palette.width
+	var y: int = palette_index / current_palette.width
 	return int((x - grid_window_origin.x) + (y - grid_window_origin.y) * grid_size.x)
 
 
-func resize_grid() -> void:
-	if displayed_palette:
-		var grid_x: int = rect_size.x / (swatch_size.x + get("custom_constants/hseparation"))
-		var grid_y: int = rect_size.y / (swatch_size.y + get("custom_constants/vseparation"))
-
-		grid_size.x = min(grid_x, displayed_palette.width)
-		grid_size.y = min(grid_y, displayed_palette.height)
+func resize_grid(new_rect_size: Vector2) -> void:
+	var grid_x: int = new_rect_size.x / (swatch_size.x + get("custom_constants/hseparation"))
+	var grid_y: int = new_rect_size.y / (swatch_size.y + get("custom_constants/vseparation"))
+	grid_size.x = min(grid_x, current_palette.width)
+	grid_size.y = min(grid_y, current_palette.height)
+	setup_swatches()
+	draw_palette()
 
 
 func change_swatch_size(size_diff: Vector2):
@@ -188,9 +179,7 @@ func change_swatch_size(size_diff: Vector2):
 
 	for swatch in swatches:
 		swatch.set_swatch_size(swatch_size)
-	redraw_palette()
 
 
 func _on_PaletteGrid_resized():
-	resize_grid()
-	redraw_palette()
+	draw_palette()
