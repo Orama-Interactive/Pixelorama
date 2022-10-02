@@ -6,15 +6,20 @@ signal swatch_double_clicked(mouse_button, index, position)
 signal swatch_dropped(source_index, target_index)
 
 const PaletteSwatchScene := preload("res://src/Palette/PaletteSwatch.tscn")
-const DEFAULT_SWATCH_SIZE = 26
-const MIN_SWATCH_SIZE = 8
-const MAX_SWATCH_SIZE = 64
+const DEFAULT_SWATCH_SIZE = Vector2(26, 26)
+const MIN_SWATCH_SIZE = Vector2(8, 8)
+const MAX_SWATCH_SIZE = Vector2(64, 64)
 
 var swatches := []  # PaletteSwatch
 var current_palette = null
 var grid_window_origin := Vector2.ZERO
 var grid_size := Vector2.ZERO
-var swatch_size := Vector2(DEFAULT_SWATCH_SIZE, DEFAULT_SWATCH_SIZE)
+var swatch_size := DEFAULT_SWATCH_SIZE
+
+func _ready():
+	swatch_size = Global.config_cache.get_value(
+		"palettes", "swatch_size", DEFAULT_SWATCH_SIZE
+	)
 
 
 func set_palette(new_palette: Palette ) -> void:
@@ -172,13 +177,15 @@ func resize_grid(new_rect_size: Vector2) -> void:
 
 func change_swatch_size(size_diff: Vector2):
 	swatch_size += size_diff
-	if swatch_size.x < MIN_SWATCH_SIZE:
-		swatch_size = Vector2(MIN_SWATCH_SIZE, MIN_SWATCH_SIZE)
-	elif swatch_size.x > MAX_SWATCH_SIZE:
-		swatch_size = Vector2(MAX_SWATCH_SIZE, MAX_SWATCH_SIZE)
+	if swatch_size.x < MIN_SWATCH_SIZE.x:
+		swatch_size = MIN_SWATCH_SIZE
+	elif swatch_size.x > MAX_SWATCH_SIZE.x:
+		swatch_size = MAX_SWATCH_SIZE
 
 	for swatch in swatches:
 		swatch.set_swatch_size(swatch_size)
+
+	Global.config_cache.set_value("palettes", "swatch_size", swatch_size)
 
 
 func _on_PaletteGrid_resized():
