@@ -124,6 +124,9 @@ msgstr ""
 msgid "Paste"
 msgstr ""
 
+msgid "Paste in Place"
+msgstr ""
+
 msgid "Delete"
 msgstr ""
 
@@ -313,7 +316,7 @@ msgstr ""
 msgid "New frame"
 msgstr ""
 
-msgid "Replace frame"
+msgid "Replace cel"
 msgstr ""
 
 msgid "New layer"
@@ -594,10 +597,16 @@ msgstr ""
 msgid "Theme"
 msgstr ""
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
+msgstr ""
+
+msgid "Background"
 msgstr ""
 
 msgid "Background color from:"
@@ -679,6 +688,19 @@ msgid "Gradient"
 msgstr ""
 
 msgid "Gradient Map"
+msgstr ""
+
+msgid "Divide into equal parts"
+msgstr ""
+
+msgid "Parts:"
+msgstr ""
+
+msgid "Add point at the end"
+msgstr ""
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
 msgid "Linear"
@@ -1306,13 +1328,20 @@ msgstr ""
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
 msgstr ""
 
-msgid "Same color area"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
 msgstr ""
 
-msgid "Same color pixels"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
 msgstr ""
 
 msgid "Fill with:"
@@ -1524,10 +1553,16 @@ msgstr ""
 msgid "Layer"
 msgstr ""
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr ""
 
 msgid "Create a new layer"
+msgstr ""
+
+msgid "Create a new group layer"
 msgstr ""
 
 msgid "Remove current layer"
@@ -1562,6 +1597,9 @@ msgstr ""
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
+msgstr ""
+
+msgid "Expand/collapse group"
 msgstr ""
 
 msgid "Palette"
@@ -1901,9 +1939,6 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
-
-msgid "Delete"
 msgstr ""
 
 msgid "Discard All"

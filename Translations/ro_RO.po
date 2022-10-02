@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-08-11 11:26\n"
+"PO-Revision-Date: 2022-09-19 22:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -134,6 +134,9 @@ msgstr "Decupare"
 
 msgid "Paste"
 msgstr "Lipire"
+
+msgid "Paste in Place"
+msgstr "Lipire în loc"
 
 msgid "Delete"
 msgstr "Ștergere"
@@ -607,11 +610,23 @@ msgstr "Mov"
 msgid "Theme"
 msgstr "Temă"
 
+msgid "Buttons"
+msgstr "Butoane"
+
 msgid "Icon color from:"
 msgstr "Culoarea pictogramei din:"
 
 msgid "Icon color:"
 msgstr "Culoarea pictogramei:"
+
+msgid "Background"
+msgstr "Fundal"
+
+msgid "Background color from:"
+msgstr "Culoare de fundal din:"
+
+msgid "Background color:"
+msgstr "Culoare de fundal:"
 
 msgid "Left tool color:"
 msgstr "Culoarea instrumentului din stânga:"
@@ -687,6 +702,20 @@ msgstr "Degrade"
 
 msgid "Gradient Map"
 msgstr "Hartă degrade"
+
+msgid "Divide into equal parts"
+msgstr "Împărțire în părți egale"
+
+msgid "Parts:"
+msgstr "Părți:"
+
+msgid "Add point at the end"
+msgstr "Adăugare punct la final"
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
+msgstr "Dacă această opțiune este activată, ultimul punct este adăugat la sfârșitul degradeului.\n"
+"Dezactivează opțiunea dacă dorești să convertești degradeul pentru a avea interpolare constantă, astfel încât să fie luată în considerare ultima culoare."
 
 msgid "Linear"
 msgstr "Liniar"
@@ -1362,14 +1391,21 @@ msgstr "Culoarea pensulei de la"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: culoarea provenită din pensulă, 100: culoarea selectată în prezent"
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
 msgstr "Zona de umplere:"
 
-msgid "Same color area"
-msgstr "Zona de aceeași culoare"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr "Zonă similară"
 
-msgid "Same color pixels"
-msgstr "Pixelii de aceeași culoare"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr "Culori similare"
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr "Selecția completă"
 
 msgid "Fill with:"
 msgstr "Umplere cu:"
@@ -1967,9 +2003,6 @@ msgstr "Creează mai multe fișiere, dar fiecare fișier este stocat în alt dir
 
 msgid "Close"
 msgstr "Închide"
-
-msgid "Delete"
-msgstr "Ștergere"
 
 msgid "Discard All"
 msgstr "Renunțare la toate"

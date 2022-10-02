@@ -26,29 +26,33 @@ margin_right = 138.0
 margin_bottom = 105.0
 script = ExtResource( 3 )
 
-[node name="Label" parent="." index="0"]
+[node name="ColorRect" parent="." index="0"]
 margin_right = 131.0
 
-[node name="FillArea" type="Label" parent="." index="1"]
+[node name="Label" parent="." index="1"]
+margin_right = 131.0
+
+[node name="FillArea" type="Label" parent="." index="2"]
 margin_left = 38.0
-margin_top = 18.0
+margin_top = 26.0
 margin_right = 92.0
-margin_bottom = 32.0
+margin_bottom = 40.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Fill area:"
 
-[node name="FillAreaOptions" type="OptionButton" parent="." index="2"]
-margin_top = 36.0
-margin_right = 131.0
-margin_bottom = 56.0
+[node name="FillAreaOptions" type="OptionButton" parent="." index="3"]
+margin_left = 13.0
+margin_top = 44.0
+margin_right = 117.0
+margin_bottom = 64.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
-text = "Same color area"
-items = [ "Same color area", null, false, 0, null, "Same color pixels", null, false, 1, null ]
+text = "Similar area"
+items = [ "Similar area", null, false, 0, null, "Similar colors", null, false, 1, null, "Whole selection", null, false, 2, null ]
 selected = 0
 
-[node name="Similarity" type="VBoxContainer" parent="." index="3"]
+[node name="Similarity" type="VBoxContainer" parent="." index="4"]
 visible = false
 margin_top = 60.0
 margin_right = 131.0
@@ -96,26 +100,26 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="FillWith" type="Label" parent="." index="4"]
+[node name="FillWith" type="Label" parent="." index="5"]
 margin_left = 38.0
-margin_top = 60.0
+margin_top = 68.0
 margin_right = 92.0
-margin_bottom = 74.0
+margin_bottom = 82.0
 size_flags_horizontal = 4
 text = "Fill with:"
 
-[node name="FillWithOptions" type="OptionButton" parent="." index="5"]
+[node name="FillWithOptions" type="OptionButton" parent="." index="6"]
 margin_left = 5.0
-margin_top = 78.0
+margin_top = 86.0
 margin_right = 126.0
-margin_bottom = 98.0
+margin_bottom = 106.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 text = "Selected Color"
 items = [ "Selected Color", null, false, 0, null, "Pattern", null, false, 1, null ]
 selected = 0
 
-[node name="FillPattern" type="VBoxContainer" parent="." index="6"]
+[node name="FillPattern" type="VBoxContainer" parent="." index="7"]
 visible = false
 margin_left = 22.0
 margin_top = 102.0

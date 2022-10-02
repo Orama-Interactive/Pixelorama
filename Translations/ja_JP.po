@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-08-11 06:03\n"
+"PO-Revision-Date: 2022-09-20 05:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -134,6 +134,9 @@ msgstr "カット"
 
 msgid "Paste"
 msgstr "ペースト"
+
+msgid "Paste in Place"
+msgstr "現在の場所に貼り付け"
 
 msgid "Delete"
 msgstr "削除"
@@ -607,11 +610,23 @@ msgstr "紫"
 msgid "Theme"
 msgstr "テーマ"
 
+msgid "Buttons"
+msgstr "ボタン"
+
 msgid "Icon color from:"
 msgstr "次のもののアイコンの色:"
 
 msgid "Icon color:"
 msgstr "アイコンの色:"
+
+msgid "Background"
+msgstr "背景"
+
+msgid "Background color from:"
+msgstr "背景色の参照元:"
+
+msgid "Background color:"
+msgstr "背景色:"
 
 msgid "Left tool color:"
 msgstr "左ツールの色:"
@@ -687,6 +702,20 @@ msgstr "グラディエーション"
 
 msgid "Gradient Map"
 msgstr "グラデーションマップ"
+
+msgid "Divide into equal parts"
+msgstr "等しいパーツに分割"
+
+msgid "Parts:"
+msgstr "パーツ:"
+
+msgid "Add point at the end"
+msgstr "最後にポイントを追加"
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
+msgstr "これが有効な場合、最後のポイントはグラデーションの最後に追加されます。\n"
+"グラデーションを一定の補間に変換したい場合は、これを無効にします。"
 
 msgid "Linear"
 msgstr "線形"
@@ -1362,14 +1391,21 @@ msgstr "ブラシの色"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: ブラシ自体の色、100: 現在選択されている色"
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr "塗りつぶし範囲:"
+msgstr "塗りつぶし領域:"
 
-msgid "Same color area"
-msgstr "同じ色の範囲"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr "類似領域"
 
-msgid "Same color pixels"
-msgstr "同じ色のピクセル"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr "類似色"
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr "全て選択"
 
 msgid "Fill with:"
 msgstr "次で塗りつぶし:"
@@ -1967,9 +2003,6 @@ msgstr "複数のファイルを作成しますが、各ファイルはフレー
 
 msgid "Close"
 msgstr "閉じる"
-
-msgid "Delete"
-msgstr "削除"
 
 msgid "Discard All"
 msgstr "すべて破棄"

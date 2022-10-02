@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -134,6 +134,9 @@ msgstr "Cortar"
 
 msgid "Paste"
 msgstr "Colar"
+
+msgid "Paste in Place"
+msgstr ""
 
 msgid "Delete"
 msgstr "Apagar"
@@ -606,11 +609,23 @@ msgstr "Roxo"
 msgid "Theme"
 msgstr "Tema"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Cor de Icon de:"
 
 msgid "Icon color:"
 msgstr "Cor de Icon:"
+
+msgid "Background"
+msgstr ""
+
+msgid "Background color from:"
+msgstr ""
+
+msgid "Background color:"
+msgstr ""
 
 msgid "Left tool color:"
 msgstr ""
@@ -685,6 +700,19 @@ msgid "Gradient"
 msgstr "Gradiente"
 
 msgid "Gradient Map"
+msgstr ""
+
+msgid "Divide into equal parts"
+msgstr ""
+
+msgid "Parts:"
+msgstr ""
+
+msgid "Add point at the end"
+msgstr ""
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
 msgid "Linear"
@@ -1349,14 +1377,21 @@ msgstr "Cor de pincel de"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Cor do próprio pincel, 100: cor atualmente selecionada"
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr "Preencher area:"
+msgstr ""
 
-msgid "Same color area"
-msgstr "Area com a mesma cor"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr ""
 
-msgid "Same color pixels"
-msgstr "Pixeis com a mesma cor"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr ""
 
 msgid "Fill with:"
 msgstr "Preencher com:"
@@ -1952,9 +1987,6 @@ msgstr "Cria multiplos ficheiros mas cada um gravado numa diretoria diferente qu
 
 msgid "Close"
 msgstr "Fechar"
-
-msgid "Delete"
-msgstr "Apagar"
 
 msgid "Discard All"
 msgstr ""

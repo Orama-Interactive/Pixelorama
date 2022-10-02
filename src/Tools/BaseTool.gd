@@ -5,16 +5,21 @@ var is_moving = false
 var kname: String
 var tool_slot = null  # Tools.Slot, can't have static typing due to cyclic errors
 var cursor_text := ""
-
 var _cursor := Vector2.INF
 
 var _draw_cache: PoolVector2Array = []  # for storing already drawn pixels
 var _for_frame := 0  # cache for which frame?
 
+onready var color_rect: ColorRect = $ColorRect
+
 
 func _ready() -> void:
 	kname = name.replace(" ", "_").to_lower()
-	$Label.text = tool_slot.name
+	if tool_slot.name == "Left tool":
+		color_rect.color = Global.left_tool_color
+	else:
+		color_rect.color = Global.right_tool_color
+	$Label.text = Tools.tools[name].display_name
 
 	load_config()
 
@@ -45,6 +50,7 @@ func update_config() -> void:
 func draw_start(_position: Vector2) -> void:
 	_draw_cache = []
 	is_moving = true
+	Global.current_project.can_undo = false
 
 
 func draw_move(position: Vector2) -> void:
@@ -57,6 +63,7 @@ func draw_move(position: Vector2) -> void:
 func draw_end(_position: Vector2) -> void:
 	is_moving = false
 	_draw_cache = []
+	Global.current_project.can_undo = true
 
 
 func cursor_move(position: Vector2) -> void:
@@ -82,14 +89,14 @@ func _get_draw_rect() -> Rect2:
 
 func _get_draw_image() -> Image:
 	var project: Project = Global.current_project
-	return project.frames[project.current_frame].cels[project.current_layer].image
+	return project.frames[project.current_frame].cels[project.current_layer].get_image()
 
 
 func _get_selected_draw_images() -> Array:  # Array of Images
 	var images := []
 	var project: Project = Global.current_project
 	for cel_index in project.selected_cels:
-		var cel: Cel = project.frames[cel_index[0]].cels[cel_index[1]]
+		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 		if project.layers[cel_index[1]].can_layer_get_drawn():
 			images.append(cel.image)
 	return images

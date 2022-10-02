@@ -6,12 +6,12 @@ var preferences := [
 	Preference.new("quit_confirmation", "Startup/StartupContainer/QuitConfirmation", "pressed"),
 	Preference.new("shrink", "Interface/ShrinkContainer/ShrinkHSlider", "value"),
 	Preference.new("dim_on_popup", "Interface/DimPopup/CheckBox", "pressed"),
-	Preference.new("icon_color_from", "Interface/IconColorFrom/IconColorOptionButton", "selected"),
-	Preference.new("custom_icon_color", "Interface/IconColorFrom/IconColorButton", "color"),
-	Preference.new("left_tool_color", "Interface/IconColorFrom/LeftToolColorButton", "color"),
-	Preference.new("right_tool_color", "Interface/IconColorFrom/RightToolColorButton", "color"),
+	Preference.new("icon_color_from", "Interface/ButtonOptions/IconColorOptionButton", "selected"),
+	Preference.new("custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color"),
+	Preference.new("left_tool_color", "Interface/ButtonOptions/LeftToolColorButton", "color"),
+	Preference.new("right_tool_color", "Interface/ButtonOptions/RightToolColorButton", "color"),
 	Preference.new(
-		"tool_button_size", "Interface/ToolButtonSize/ToolButtonSizeOptionButton", "selected"
+		"tool_button_size", "Interface/ButtonOptions/ToolButtonSizeOptionButton", "selected"
 	),
 	Preference.new(
 		"pressure_sensitivity_mode",
@@ -90,8 +90,9 @@ onready var right_side: VBoxContainer = $HSplitContainer/ScrollContainer/VBoxCon
 onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
 onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
 onready var shrink_label: Label = right_side.get_node("Interface/ShrinkContainer/ShrinkLabel")
+onready var shrink_h_slider: HSlider = $"%ShrinkHSlider"
 onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
-onready var shortcuts: Control = right_side.get_node("Shortcuts")
+onready var shortcuts: Control = right_side.get_node("Shortcuts/ShortcutEdit")
 onready var extensions: BoxContainer = right_side.get_node("Extensions")
 
 
@@ -110,7 +111,8 @@ class Preference:
 
 func _ready() -> void:
 	# Replace OK since preference changes are being applied immediately, not after OK confirmation
-	get_ok().text = tr("Close")
+	get_ok().text = "Close"
+	shrink_h_slider.value = Global.shrink  # In case shrink is not equal to 1
 
 	for child in shortcuts.get_children():
 		if not child is AcceptDialog:
@@ -277,11 +279,13 @@ func preference_update(prop: String) -> void:
 		for child in Tools._tool_buttons.get_children():
 			var left_background: NinePatchRect = child.get_node("BackgroundLeft")
 			left_background.modulate = Global.left_tool_color
+		Tools._slots[BUTTON_LEFT].tool_node.color_rect.color = Global.left_tool_color
 
 	elif prop == "right_tool_color":
 		for child in Tools._tool_buttons.get_children():
 			var left_background: NinePatchRect = child.get_node("BackgroundRight")
 			left_background.modulate = Global.right_tool_color
+		Tools._slots[BUTTON_RIGHT].tool_node.color_rect.color = Global.right_tool_color
 
 	elif prop == "tool_button_size":
 		Tools.set_button_size(Global.tool_button_size)
@@ -347,7 +351,7 @@ func _on_ShrinkApplyButton_pressed() -> void:
 	)
 	Global.control.set_custom_cursor()
 	hide()
-	popup_centered(Vector2(400, 280))
+	popup_centered(Vector2(600, 400))
 	Global.dialog_open(true)
 	yield(get_tree(), "idle_frame")
 	Global.camera.fit_to_frame(Global.current_project.size)

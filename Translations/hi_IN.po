@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hindi\n"
 "Language: hi_IN\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "ठीक है"
@@ -134,6 +134,9 @@ msgstr "काटें"
 
 msgid "Paste"
 msgstr "चिपकाएँ"
+
+msgid "Paste in Place"
+msgstr ""
 
 msgid "Delete"
 msgstr "मिटायें"
@@ -605,10 +608,22 @@ msgstr ""
 msgid "Theme"
 msgstr ""
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
+msgstr ""
+
+msgid "Background"
+msgstr ""
+
+msgid "Background color from:"
+msgstr ""
+
+msgid "Background color:"
 msgstr ""
 
 msgid "Left tool color:"
@@ -684,6 +699,19 @@ msgid "Gradient"
 msgstr ""
 
 msgid "Gradient Map"
+msgstr ""
+
+msgid "Divide into equal parts"
+msgstr ""
+
+msgid "Parts:"
+msgstr ""
+
+msgid "Add point at the end"
+msgstr ""
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
 msgid "Linear"
@@ -1311,13 +1339,20 @@ msgstr ""
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
 msgstr ""
 
-msgid "Same color area"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
 msgstr ""
 
-msgid "Same color pixels"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
 msgstr ""
 
 msgid "Fill with:"
@@ -1906,9 +1941,6 @@ msgid "Creates multiple files but every file is stored in different directory th
 msgstr ""
 
 msgid "Close"
-msgstr ""
-
-msgid "Delete"
 msgstr ""
 
 msgid "Discard All"

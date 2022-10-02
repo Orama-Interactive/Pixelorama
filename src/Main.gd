@@ -14,6 +14,7 @@ onready var right_cursor: Sprite = $RightCursor
 
 
 func _init() -> void:
+	Global.shrink = _get_auto_display_scale()
 	if OS.get_name() == "OSX":
 		_use_osx_shortcuts()
 
@@ -25,10 +26,10 @@ func _ready() -> void:
 
 	Global.window_title = tr("untitled") + " - Pixelorama " + Global.current_version
 
-	Global.current_project.layers.append(Layer.new())
-	var frame: Frame = Global.current_project.new_empty_frame()
-	Global.current_project.frames.append(frame)
-	Global.current_project.layers = Global.current_project.layers
+	Global.current_project.layers.append(PixelLayer.new(Global.current_project))
+	Global.current_project.frames.append(Global.current_project.new_empty_frame())
+	Global.animation_timeline.project_changed()
+	Global.current_project.toggle_frame_buttons()
 
 	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
 	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
@@ -86,6 +87,22 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event.scancode == KEY_ENTER or event.scancode == KEY_KP_ENTER):
 		if get_focus_owner() is LineEdit:
 			get_focus_owner().release_focus()
+
+
+# Taken from https://github.com/godotengine/godot/blob/3.x/editor/editor_settings.cpp#L1474
+func _get_auto_display_scale() -> float:
+	if OS.get_name() == "OSX":
+		return OS.get_screen_max_scale()
+
+	var dpi := OS.get_screen_dpi()
+	var smallest_dimension: int = min(OS.get_screen_size().x, OS.get_screen_size().y)
+	if dpi >= 192 && smallest_dimension >= 1400:
+		return 2.0  # hiDPI display.
+	elif smallest_dimension >= 1700:
+		return 1.5  # Likely a hiDPI display, but we aren't certain due to the returned DPI.
+	elif smallest_dimension <= 800:
+		return 0.75  # Small loDPI display.
+	return 1.0
 
 
 func _setup_application_window_size() -> void:

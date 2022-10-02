@@ -2,13 +2,14 @@ extends Node
 
 signal project_changed
 
+enum LayerTypes { PIXEL, GROUP }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
 enum ColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
 enum FileMenu { NEW, OPEN, OPEN_LAST_PROJECT, RECENT, SAVE, SAVE_AS, EXPORT, EXPORT_AS, QUIT }
-enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, DELETE, NEW_BRUSH, PREFERENCES }
+enum EditMenu { UNDO, REDO, COPY, CUT, PASTE, PASTE_IN_PLACE, DELETE, NEW_BRUSH, PREFERENCES }
 enum ViewMenu {
 	TILE_MODE,
 	TILE_MODE_OFFSETS,
@@ -59,7 +60,6 @@ var current_project_index := 0 setget _project_changed
 var ui_tooltips := {}
 
 # Canvas related stuff
-var layers_changed_skip := false
 var can_draw := false
 var move_guides_on_canvas := false
 var has_focus := false
@@ -144,6 +144,10 @@ var palettes := {}
 
 # Nodes
 var notification_label_node: PackedScene = preload("res://src/UI/NotificationLabel.tscn")
+var pixel_layer_button_node: PackedScene = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
+var group_layer_button_node: PackedScene = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
+var pixel_cel_button_node: PackedScene = preload("res://src/UI/Timeline/PixelCelButton.tscn")
+var group_cel_button_node: PackedScene = preload("res://src/UI/Timeline/GroupCelButton.tscn")
 
 onready var control: Node = get_tree().current_scene
 
@@ -191,8 +195,7 @@ onready var remove_layer_button: BaseButton = animation_timeline.find_node("Remo
 onready var move_up_layer_button: BaseButton = animation_timeline.find_node("MoveUpLayer")
 onready var move_down_layer_button: BaseButton = animation_timeline.find_node("MoveDownLayer")
 onready var merge_down_layer_button: BaseButton = animation_timeline.find_node("MergeDownLayer")
-onready var layer_opacity_slider: HSlider = animation_timeline.find_node("OpacitySlider")
-onready var layer_opacity_spinbox: SpinBox = animation_timeline.find_node("OpacitySpinBox")
+onready var layer_opacity_slider: ValueSlider = animation_timeline.find_node("OpacitySlider")
 
 onready var open_sprites_dialog: FileDialog = control.find_node("OpenSprite")
 onready var save_sprites_dialog: FileDialog = control.find_node("SaveSprite")
@@ -253,6 +256,8 @@ func _initialize_keychain() -> void:
 		"cut": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.CUT),
 		"copy": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.COPY),
 		"paste": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.PASTE),
+		"paste_in_place":
+		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.PASTE_IN_PLACE),
 		"delete": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.DELETE),
 		"new_brush":
 		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.NEW_BRUSH),
@@ -447,23 +452,13 @@ func undo_or_redo(
 		if action_name == "Scale":
 			for i in project.frames.size():
 				for j in project.layers.size():
-					var current_cel: Cel = project.frames[i].cels[j]
-					current_cel.image_texture.create_from_image(current_cel.image, 0)
+					var current_cel: BaseCel = project.frames[i].cels[j]
+					current_cel.image_texture.create_from_image(current_cel.get_image(), 0)
 			canvas.camera_zoom()
 			canvas.grid.update()
 			canvas.pixel_grid.update()
 			project.selection_map_changed()
 			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
-
-	elif "Frame" in action_name:
-		# This actually means that frames.size is one, but it hasn't been updated yet
-		if (undo and project.frames.size() == 2) or project.frames.size() == 1:  # Stop animating
-			play_forward.pressed = false
-			play_backwards.pressed = false
-			animation_timer.stop()
-
-	elif "Move Cels" == action_name:
-		project.frames = project.frames  # to call frames_changed
 
 	canvas.update()
 	if !project.has_changed:

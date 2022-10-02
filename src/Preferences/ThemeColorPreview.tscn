@@ -5,33 +5,31 @@ margin_right = 50.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 50, 16 )
 color = Color( 0.380392, 0.384314, 0.380392, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_top = 0.5
-anchor_bottom = 0.5
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 3.0
-margin_top = -5.0
-margin_right = 23.0
-margin_bottom = 5.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
+margin_right = 20.0
+margin_bottom = 10.0
 rect_min_size = Vector2( 20, 10 )
+size_flags_horizontal = 3
 color = Color( 0.152941, 0.152941, 0.152941, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="ColorRect" parent="."]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -23.0
-margin_top = -5.0
-margin_right = -3.0
-margin_bottom = 5.0
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer"]
+margin_left = 24.0
+margin_right = 44.0
+margin_bottom = 10.0
 rect_min_size = Vector2( 20, 10 )
+size_flags_horizontal = 3
 color = Color( 0.411765, 0.411765, 0.411765, 1 )
 __meta__ = {
 "_edit_use_anchors_": false

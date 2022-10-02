@@ -12,16 +12,16 @@ var default_layout_size := layouts.size()
 var selected_layout := 0
 var zen_mode := false
 
-onready var ui_elements: Array = Global.control.find_node("DockableContainer").get_children()
-onready var file_menu_button: MenuButton = find_node("FileMenu")
-onready var edit_menu_button: MenuButton = find_node("EditMenu")
-onready var view_menu_button: MenuButton = find_node("ViewMenu")
-onready var window_menu_button: MenuButton = find_node("WindowMenu")
-onready var image_menu_button: MenuButton = find_node("ImageMenu")
-onready var select_menu_button: MenuButton = find_node("SelectMenu")
-onready var help_menu_button: MenuButton = find_node("HelpMenu")
-
 onready var ui: Container = Global.control.find_node("DockableContainer")
+onready var ui_elements: Array = ui.get_children()
+onready var file_menu_button := $MenuItems/FileMenu
+onready var edit_menu_button := $MenuItems/EditMenu
+onready var select_menu_button := $MenuItems/SelectMenu
+onready var image_menu_button := $MenuItems/ImageMenu
+onready var view_menu_button := $MenuItems/ViewMenu
+onready var window_menu_button := $MenuItems/WindowMenu
+onready var help_menu_button := $MenuItems/HelpMenu
+
 onready var greyscale_vision: ColorRect = ui.find_node("GreyscaleVision")
 onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("CreateNewImage")
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
@@ -82,14 +82,24 @@ func _setup_recent_projects_submenu(item: String) -> void:
 
 
 func update_recent_projects_submenu() -> void:
-	for project in recent_projects:
+	var reversed_recent_projects = recent_projects.duplicate()
+	reversed_recent_projects.invert()
+	for project in reversed_recent_projects:
 		recent_projects_submenu.add_item(project.get_file())
 
 
 func _setup_edit_menu() -> void:
 	# Order as in Global.EditMenu enum
 	var edit_menu_items := [
-		"Undo", "Redo", "Copy", "Cut", "Paste", "Delete", "New Brush", "Preferences"
+		"Undo",
+		"Redo",
+		"Copy",
+		"Cut",
+		"Paste",
+		"Paste in Place",
+		"Delete",
+		"New Brush",
+		"Preferences"
 	]
 	var edit_menu: PopupMenu = edit_menu_button.get_popup()
 	var i := 0
@@ -97,7 +107,7 @@ func _setup_edit_menu() -> void:
 		edit_menu.add_item(item, i)
 		i += 1
 
-	edit_menu.set_item_disabled(6, true)
+	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, true)
 	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
 
 
@@ -309,7 +319,14 @@ func _handle_metadata(id: int, menu_button: MenuButton) -> void:
 				metadata.call("menu_item_clicked")
 
 
+func _popup_dialog(dialog: Popup, size := Vector2.ZERO) -> void:
+	dialog.popup_centered(size)
+	Global.dialog_open(true)
+
+
 func file_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.FileMenu.NEW:
 			_on_new_project_file_menu_option_pressed()
@@ -324,8 +341,7 @@ func file_menu_id_pressed(id: int) -> void:
 		Global.FileMenu.EXPORT:
 			_export_file()
 		Global.FileMenu.EXPORT_AS:
-			Global.export_dialog.popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.export_dialog)
 		Global.FileMenu.QUIT:
 			Global.control.show_quit_dialog()
 		_:
@@ -341,8 +357,7 @@ func _open_project_file() -> void:
 	if OS.get_name() == "HTML5":
 		Html5FileExchange.load_image()
 	else:
-		Global.open_sprites_dialog.popup_centered()
-		Global.dialog_open(true)
+		_popup_dialog(Global.open_sprites_dialog)
 		Global.control.opensprite_file_selected = false
 
 
@@ -351,8 +366,7 @@ func _on_open_last_project_file_menu_option_pressed() -> void:
 		Global.control.load_last_project()
 	else:
 		Global.error_dialog.set_text("You haven't saved or opened any project in Pixelorama yet!")
-		Global.error_dialog.popup_centered()
-		Global.dialog_open(true)
+		_popup_dialog(Global.error_dialog)
 
 
 func _save_project_file() -> void:
@@ -379,17 +393,20 @@ func _save_project_file_as() -> void:
 
 func _export_file() -> void:
 	if Export.was_exported == false:
-		Global.export_dialog.popup_centered()
-		Global.dialog_open(true)
+		_popup_dialog(Global.export_dialog)
 	else:
 		Export.external_export()
 
 
 func _on_recent_projects_submenu_id_pressed(id: int) -> void:
-	Global.control.load_recent_project_file(recent_projects[id])
+	var reversed_recent_projects = recent_projects.duplicate()
+	reversed_recent_projects.invert()
+	Global.control.load_recent_project_file(reversed_recent_projects[id])
 
 
 func edit_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.EditMenu.UNDO:
 			Global.current_project.commit_undo()
@@ -401,21 +418,24 @@ func edit_menu_id_pressed(id: int) -> void:
 			Global.canvas.selection.cut()
 		Global.EditMenu.PASTE:
 			Global.canvas.selection.paste()
+		Global.EditMenu.PASTE_IN_PLACE:
+			Global.canvas.selection.paste(true)
 		Global.EditMenu.DELETE:
 			Global.canvas.selection.delete()
 		Global.EditMenu.NEW_BRUSH:
 			Global.canvas.selection.new_brush()
 		Global.EditMenu.PREFERENCES:
-			Global.preferences_dialog.popup_centered(Vector2(400, 280))
-			Global.dialog_open(true)
+			_popup_dialog(Global.preferences_dialog, Vector2(600, 400))
 		_:
 			_handle_metadata(id, edit_menu_button)
 
 
 func view_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.ViewMenu.TILE_MODE_OFFSETS:
-			_show_tile_mode_offsets_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/TileModeOffsetsDialog"))
 		Global.ViewMenu.GREYSCALE_VIEW:
 			_toggle_greyscale_view()
 		Global.ViewMenu.MIRROR_VIEW:
@@ -434,11 +454,6 @@ func view_menu_id_pressed(id: int) -> void:
 	Global.canvas.update()
 
 
-func _show_tile_mode_offsets_popup() -> void:
-	Global.control.get_node("Dialogs/TileModeOffsetsDialog").popup_centered()
-	Global.dialog_open(true)
-
-
 func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.current_project.tiles.mode = id
 	Global.transparent_checker.fit_rect(Global.current_project.tiles.get_bounding_rect())
@@ -450,10 +465,11 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 
 
 func window_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.WindowMenu.WINDOW_OPACITY:
-			window_opacity_dialog.popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(window_opacity_dialog)
 		Global.WindowMenu.MOVABLE_PANELS:
 			ui.tabs_visible = !ui.tabs_visible
 			window_menu.set_item_checked(id, ui.tabs_visible)
@@ -476,8 +492,7 @@ func _panels_submenu_id_pressed(id: int) -> void:
 
 func _layouts_submenu_id_pressed(id: int) -> void:
 	if id == 0:
-		Global.control.get_node("Dialogs/ManageLayouts").popup_centered()
-		Global.dialog_open(true)
+		_popup_dialog(Global.control.get_node("Dialogs/ManageLayouts"))
 	else:
 		set_layout(id - 1)
 
@@ -582,9 +597,11 @@ func _toggle_fullscreen() -> void:
 
 
 func image_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.ImageMenu.SCALE_IMAGE:
-			_show_scale_image_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ScaleImage"))
 
 		Global.ImageMenu.CENTRALIZE_IMAGE:
 			DrawingAlgos.centralize()
@@ -593,79 +610,45 @@ func image_menu_id_pressed(id: int) -> void:
 			DrawingAlgos.crop_image()
 
 		Global.ImageMenu.RESIZE_CANVAS:
-			_show_resize_canvas_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ResizeCanvas"))
 
 		Global.ImageMenu.FLIP:
-			Global.control.get_node("Dialogs/ImageEffects/FlipImageDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/FlipImageDialog"))
 
 		Global.ImageMenu.ROTATE:
-			_show_rotate_image_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/RotateImage"))
 
 		Global.ImageMenu.INVERT_COLORS:
-			Global.control.get_node("Dialogs/ImageEffects/InvertColorsDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/InvertColorsDialog"))
 
 		Global.ImageMenu.DESATURATION:
-			Global.control.get_node("Dialogs/ImageEffects/DesaturateDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/DesaturateDialog"))
 
 		Global.ImageMenu.OUTLINE:
-			_show_add_outline_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/OutlineDialog"))
 
 		Global.ImageMenu.DROP_SHADOW:
-			_show_drop_shadow_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/DropShadowDialog"))
 
 		Global.ImageMenu.HSV:
-			_show_hsv_configuration_popup()
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/HSVDialog"))
 
 		Global.ImageMenu.GRADIENT:
-			Global.control.get_node("Dialogs/ImageEffects/GradientDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/GradientDialog"))
 
 		Global.ImageMenu.GRADIENT_MAP:
-			Global.control.get_node("Dialogs/ImageEffects/GradientMapDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/GradientMapDialog"))
 
 #		Global.ImageMenu.SHADER:
-#			Global.control.get_node("Dialogs/ImageEffects/ShaderEffect").popup_centered()
-#			Global.dialog_open(true)
+#			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ShaderEffect"))
 
 		_:
 			_handle_metadata(id, image_menu_button)
 
 
-func _show_scale_image_popup() -> void:
-	Global.control.get_node("Dialogs/ImageEffects/ScaleImage").popup_centered()
-	Global.dialog_open(true)
-
-
-func _show_resize_canvas_popup() -> void:
-	Global.control.get_node("Dialogs/ImageEffects/ResizeCanvas").popup_centered()
-	Global.dialog_open(true)
-
-
-func _show_rotate_image_popup() -> void:
-	Global.control.get_node("Dialogs/ImageEffects/RotateImage").popup_centered()
-	Global.dialog_open(true)
-
-
-func _show_add_outline_popup() -> void:
-	Global.control.get_node("Dialogs/ImageEffects/OutlineDialog").popup_centered()
-	Global.dialog_open(true)
-
-
-func _show_drop_shadow_popup() -> void:
-	Global.control.get_node("Dialogs/ImageEffects/DropShadowDialog").popup_centered()
-	Global.dialog_open(true)
-
-
-func _show_hsv_configuration_popup() -> void:
-	Global.control.get_node("Dialogs/ImageEffects/HSVDialog").popup_centered()
-	Global.dialog_open(true)
-
-
 func select_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.SelectMenu.SELECT_ALL:
 			Global.canvas.selection.select_all()
@@ -678,10 +661,11 @@ func select_menu_id_pressed(id: int) -> void:
 
 
 func help_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
 	match id:
 		Global.HelpMenu.VIEW_SPLASH_SCREEN:
-			Global.control.get_node("Dialogs/SplashDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/SplashDialog"))
 		Global.HelpMenu.ONLINE_DOCS:
 			OS.shell_open("https://www.oramainteractive.com/Pixelorama-Docs/")
 		Global.HelpMenu.ISSUE_TRACKER:
@@ -692,10 +676,9 @@ func help_menu_id_pressed(id: int) -> void:
 			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		Global.HelpMenu.CHANGELOG:
 			OS.shell_open(
-				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v0102---2022-08-18"
+				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v0103---2022-09-26"
 			)
 		Global.HelpMenu.ABOUT_PIXELORAMA:
-			Global.control.get_node("Dialogs/AboutDialog").popup_centered()
-			Global.dialog_open(true)
+			_popup_dialog(Global.control.get_node("Dialogs/AboutDialog"))
 		_:
 			_handle_metadata(id, help_menu_button)

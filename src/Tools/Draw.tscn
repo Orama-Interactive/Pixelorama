@@ -24,10 +24,10 @@ anti_aliasing = false
 [node name="ToolOptions" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
-[node name="Brush" type="HBoxContainer" parent="." index="1"]
-margin_top = 18.0
+[node name="Brush" type="HBoxContainer" parent="." index="2"]
+margin_top = 26.0
 margin_right = 116.0
-margin_bottom = 50.0
+margin_bottom = 58.0
 alignment = 1
 
 [node name="Type" type="Button" parent="Brush" index="0"]
@@ -63,11 +63,11 @@ value = 1.0
 align = 1
 suffix = "px"
 
-[node name="BrushSize" type="HSlider" parent="." index="2"]
+[node name="BrushSize" type="HSlider" parent="." index="3"]
 margin_left = 12.0
-margin_top = 54.0
+margin_top = 62.0
 margin_right = 104.0
-margin_bottom = 70.0
+margin_bottom = 78.0
 rect_min_size = Vector2( 92, 0 )
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -79,7 +79,7 @@ value = 1.0
 allow_greater = true
 ticks_on_borders = true
 
-[node name="ColorInterpolation" type="VBoxContainer" parent="." index="3"]
+[node name="ColorInterpolation" type="VBoxContainer" parent="." index="4"]
 visible = false
 margin_top = 102.0
 margin_right = 116.0

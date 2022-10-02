@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -40,10 +40,10 @@ msgid "Canvas Size"
 msgstr "Grando de la tolo"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Dimensio de filmero"
 
 msgid "Size:"
-msgstr ""
+msgstr "Grandeco:"
 
 msgid "Width:"
 msgstr "Larĝo:"
@@ -52,7 +52,7 @@ msgid "Height:"
 msgstr "Alto:"
 
 msgid "Center"
-msgstr ""
+msgstr "Centro"
 
 msgid "File"
 msgstr "Dosiero"
@@ -61,13 +61,13 @@ msgid "Edit"
 msgstr "Redakti"
 
 msgid "Select"
-msgstr ""
+msgstr "Elekti"
 
 msgid "View"
 msgstr "Montri"
 
 msgid "Window"
-msgstr ""
+msgstr "Fenestro"
 
 msgid "Image"
 msgstr "Bildo"
@@ -94,7 +94,7 @@ msgid "Save as..."
 msgstr "Konservi kiel..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Uzi ZSTD-densigadon"
 
 msgid "Import"
 msgstr "Importi"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Eksporti"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Superskribi"
 
 msgid "Export..."
 msgstr "Eksporti..."
@@ -127,25 +127,28 @@ msgid "Redo"
 msgstr "Refari"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopii"
 
 msgid "Cut"
-msgstr ""
+msgstr "Eltondi"
 
 msgid "Paste"
-msgstr ""
+msgstr "Enmeti"
+
+msgid "Paste in Place"
+msgstr "Enmeti en lokon"
 
 msgid "Delete"
 msgstr "Forigi"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Nova peniko"
 
 msgid "Scale Image"
 msgstr "Skali bildon"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Rastrumeroj"
 
 msgid "Percentage"
 msgstr ""
@@ -154,16 +157,16 @@ msgid "Crop Image"
 msgstr "Tondi bildon"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Ŝanĝi la dimensiojn de la tavolo"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Centrigi bildon"
 
 msgid "Rotate Image"
 msgstr "Turni bildon"
 
 msgid "Pivot (x, y):"
-msgstr ""
+msgstr "Rotacicentro (x, y):"
 
 msgid "Smear options:"
 msgstr ""
@@ -184,7 +187,7 @@ msgid "Grayscale View"
 msgstr ""
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Renversi bildon"
 
 msgid "Flip Horizontal"
 msgstr "Speguli horizontale"
@@ -220,7 +223,7 @@ msgid "Reset"
 msgstr ""
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "Uzu aktualan filmeron"
 
 msgid "Reset Mask"
 msgstr ""
@@ -232,40 +235,40 @@ msgid "Window opacity does not work on fullscreen mode."
 msgstr ""
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Poziciaro de paneloj"
 
 msgid "Panels"
 msgstr ""
 
 msgid "Layouts"
-msgstr ""
+msgstr "Poziciaroj"
 
 msgid "Moveable Panels"
 msgstr ""
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Administri poziciarojn"
 
 msgid "Add"
-msgstr ""
+msgstr "Aldoni"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Aldoni poziciaron"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Redakti poziciaron"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Ĉu vi vere volas forigi tiun ĉi poziciaron?"
 
 msgid "Auto"
-msgstr ""
+msgstr "Aŭtomata"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Larĝekrana"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Altekrana"
 
 msgid "Mirror View"
 msgstr ""
@@ -286,7 +289,7 @@ msgid "Show Animation Timeline"
 msgstr "Montri animacian kronologion"
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Zena reĝimo"
 
 msgid "Fullscreen Mode"
 msgstr ""
@@ -322,49 +325,49 @@ msgid "Spritesheet (new layer)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "Nova filmero"
 
 msgid "Replace frame"
-msgstr ""
+msgstr "Anstataŭigi filmeron"
 
 msgid "New layer"
 msgstr ""
 
 msgid "New palette"
-msgstr ""
+msgstr "Nova paletro"
 
 msgid "New brush"
-msgstr ""
+msgstr "Nova peniko"
 
 msgid "New pattern"
 msgstr ""
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Horizontalaj filmeroj:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Vertikalaj filmeroj:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Komenca filmero:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "En filmero:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "En tavolo:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Tipo de pentriko:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Dosiera peniko"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Projekta peniko"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Hazarda peniko"
 
 msgid "Save Sprite as .pxo"
 msgstr "Konservi spriton kiel .pxo"
@@ -391,10 +394,10 @@ msgid "Directory path and file name are not valid!"
 msgstr ""
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Esportado estas faradata..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Oni ne povas legi la dosieron '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -403,7 +406,8 @@ msgstr "Ne povas ŝarĝi dosieron '%s'.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Oni ne povas legi la dosieron '%s'.\n"
+"Ĝi ne estas ĝusta paletra dosiero."
 
 msgid "Frame"
 msgstr "Kadro"
@@ -520,7 +524,7 @@ msgid "Language"
 msgstr "Lingvo"
 
 msgid "Interface"
-msgstr ""
+msgstr "Interfaco"
 
 msgid "Themes"
 msgstr "Temoj"
@@ -529,10 +533,10 @@ msgid "Canvas"
 msgstr "Kanvaso"
 
 msgid "Selection"
-msgstr ""
+msgstr "Elektaĵo"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Fulmoklavoj"
 
 msgid "Backup"
 msgstr ""
@@ -544,10 +548,10 @@ msgid "Extensions"
 msgstr ""
 
 msgid "Cursors"
-msgstr ""
+msgstr "Musmontriloj"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indikatoroj"
 
 msgid "On"
 msgstr ""
@@ -601,34 +605,46 @@ msgid "Light"
 msgstr "Hela"
 
 msgid "Purple"
-msgstr ""
+msgstr "Purpura"
 
 msgid "Theme"
+msgstr "Temo"
+
+msgid "Buttons"
 msgstr ""
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Koloro de piktogramoj el:"
 
 msgid "Icon color:"
+msgstr "Koloro de piktogramoj:"
+
+msgid "Background"
 msgstr ""
+
+msgid "Background color from:"
+msgstr "Koloro de la fono el:"
+
+msgid "Background color:"
+msgstr "Koloro de la fono:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Koloro de la maldekstra ilo:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Koloro de la dekstra ilo:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Grandeco de la ilaj butonoj:"
 
 msgid "Small"
-msgstr ""
+msgstr "Malgranda"
 
 msgid "Big"
-msgstr ""
+msgstr "Granda"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Nur post elektado"
 
 msgid "Selected cels"
 msgstr ""
@@ -637,10 +653,10 @@ msgid "Current cel"
 msgstr ""
 
 msgid "Current frame"
-msgstr ""
+msgstr "Aktuala filmero"
 
 msgid "All frames"
-msgstr ""
+msgstr "Ĉiuj filmeroj"
 
 msgid "All projects"
 msgstr ""
@@ -667,7 +683,7 @@ msgid "Outline"
 msgstr "Konturoj"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Ĵeti ombron"
 
 msgid "Offset X:"
 msgstr ""
@@ -676,46 +692,59 @@ msgid "Offset Y:"
 msgstr ""
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Koloro de la ombro:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
 msgid "Gradient"
-msgstr ""
+msgstr "Gradiento"
 
 msgid "Gradient Map"
 msgstr ""
 
-msgid "Linear"
+msgid "Divide into equal parts"
 msgstr ""
+
+msgid "Parts:"
+msgstr ""
+
+msgid "Add point at the end"
+msgstr ""
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
+msgstr ""
+
+msgid "Linear"
+msgstr "Lineara"
 
 msgid "Radial"
-msgstr ""
+msgstr "Radiusa"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Lineara paŝo"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Radiusa paŝo"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "Lineara punktismo"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "Radiusa punktismo"
 
 msgid "Transition size:"
 msgstr ""
 
 msgid "Center:"
-msgstr ""
+msgstr "Centro:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Radiuso:"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Ŝablono de punktismo:"
 
 msgid "Adjust HSV"
 msgstr ""
@@ -742,7 +771,7 @@ msgid "Diagonal"
 msgstr "Diagonala"
 
 msgid "Place inside image"
-msgstr ""
+msgstr "Meti ene en la bildo"
 
 msgid "Thickness:"
 msgstr "Dikeco:"
@@ -832,7 +861,7 @@ msgid "Polish"
 msgstr "Pola"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugala"
 
 msgid "Brazilian Portuguese"
 msgstr "Brazila portugala"
@@ -856,49 +885,49 @@ msgid "Spanish"
 msgstr "Hispana"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Kataluna"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonezia"
 
 msgid "Czech"
-msgstr ""
+msgstr "Ĉeĥa"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Araba"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turka"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Norvega (Bokmål)"
 
 msgid "Korean"
-msgstr ""
+msgstr "Korea"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Hungara"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Rumana"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japana"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukraina"
 
 msgid "Danish"
-msgstr ""
+msgstr "Dana"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Sveda"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Serba (cirila)"
 
 msgid "Dutch"
 msgstr ""
@@ -1126,7 +1155,7 @@ msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "Ĉiuj"
 
 msgid "Rectangular grid width:"
 msgstr ""
@@ -1243,7 +1272,7 @@ msgid "Pause application when it loses focus"
 msgstr ""
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr ""
+msgstr "Agordas la kvoto de renoviĝoj de bildo po sekundo. Ju malpli estas la numero, des malpli multe da procesora tempo estas uzata, sed la programo iĝas malpli rapida kaj reagema. 0 signifas, ke ne ekzistas limo."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
@@ -1261,37 +1290,37 @@ msgid "Uninstall"
 msgstr ""
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Malfermi dosierujon"
 
 msgid "Brush:"
 msgstr "Peniko:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "Elekti penikon"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "Rastrumera peniko"
 
 msgid "Circle brush"
-msgstr ""
+msgstr "Ronda peniko"
 
 msgid "Filled circle brush"
-msgstr ""
+msgstr "Plena ronda peniko"
 
 msgid "Custom brush"
 msgstr "Propra peniklo"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Grandeco de la peniko:"
 
 msgid "Overwrite Color"
-msgstr ""
+msgstr "Superskribi koloron"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr ""
+msgstr "Superskribas koloron anstataŭ miksi ĝin kun suba koloro. La opcio nur estas konsiderata, kiam la koloroj ne estas tute opakaj"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Rastumera precizemo"
 
 msgid "Fill inside"
 msgstr ""
@@ -1312,13 +1341,20 @@ msgstr ""
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr ""
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr "Plenumi areon:"
-
-msgid "Same color area"
 msgstr ""
 
-msgid "Same color pixels"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
 msgstr ""
 
 msgid "Fill with:"
@@ -1394,7 +1430,7 @@ msgid "Vertical"
 msgstr "Vertikala"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "Aktuala filmero:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -1631,19 +1667,19 @@ msgid "Undo: Add Frame"
 msgstr "Malfaritas: Aldoni kadron"
 
 msgid "Redo: Add Frame"
-msgstr "Refaritas: Aldoni kadron"
+msgstr "Refaritas: Aldoni filmeron"
 
 msgid "Undo: Remove Frame"
-msgstr "Malfaritas: Forigi kadron"
+msgstr "Malfaritas: Forigi filmeron"
 
 msgid "Redo: Remove Frame"
-msgstr "Refaritas: Forigi kadron"
+msgstr "Refaritas: Forigi filmeron"
 
 msgid "Undo: Change Frame Order"
-msgstr "Malfaritas: Ŝanĝi ordon de kadroj"
+msgstr "Malfaritas: Ŝanĝi ordon de filmeroj"
 
 msgid "Redo: Change Frame Order"
-msgstr "Refaritas: Ŝanĝi ordon de kadroj"
+msgstr "Refaritas: Ŝanĝi ordon de filmeroj"
 
 msgid "Undo: Delete Custom Brush"
 msgstr "Malfaritas: Forigi propran penikon"
@@ -1664,10 +1700,10 @@ msgid "Redo: Delete Frame Tag"
 msgstr ""
 
 msgid "Undo: Change frame duration"
-msgstr ""
+msgstr "Malfari: Ŝanĝi daŭron de filmero"
 
 msgid "Redo: Change frame duration"
-msgstr ""
+msgstr "Refari: Ŝanĝi daŭron de filmero"
 
 msgid "Move Guide"
 msgstr "Movi direktlinion"
@@ -1904,13 +1940,10 @@ msgid "Create new directory for each frame tag"
 msgstr ""
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr ""
+msgstr "Kreas kelkajn dosierojn, sed ĉiu dosiero estas konservita en malsama dosierujo laŭ la filmera etikedo"
 
 msgid "Close"
 msgstr "Fermi"
-
-msgid "Delete"
-msgstr ""
 
 msgid "Discard All"
 msgstr ""
@@ -1941,13 +1974,13 @@ msgid "and"
 msgstr ""
 
 msgid "Move the selected frame to the left."
-msgstr ""
+msgstr "Movas la elektitan filmeron maldekstren."
 
 msgid "Move the selected frame to the right."
-msgstr ""
+msgstr "Movas la elektitan filmeron dekstren."
 
 msgid "Frame duration"
-msgstr ""
+msgstr "Daŭro de filmero"
 
 msgid "Duration"
 msgstr ""

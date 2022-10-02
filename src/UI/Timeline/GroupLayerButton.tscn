@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/Timeline/BaseLayerButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/graphics/layers/group_expanded.png" type="Texture" id=4]
+
+[node name="GroupLayerButton" instance=ExtResource( 1 )]
+hide_expand_button = false
+
+[node name="TextureRect" parent="HBoxContainer/LayerButtons/ExpandButton" index="0"]
+texture = ExtResource( 4 )

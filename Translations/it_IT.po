@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-08-12 00:58\n"
+"PO-Revision-Date: 2022-09-20 01:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -134,6 +134,9 @@ msgstr "Taglia"
 
 msgid "Paste"
 msgstr "Incolla"
+
+msgid "Paste in Place"
+msgstr "Incolla nel luogo"
 
 msgid "Delete"
 msgstr "Elimina"
@@ -607,11 +610,23 @@ msgstr "Viola"
 msgid "Theme"
 msgstr "Tema"
 
+msgid "Buttons"
+msgstr "Pulsanti"
+
 msgid "Icon color from:"
 msgstr "Colore icona da:"
 
 msgid "Icon color:"
 msgstr "Colore dell'icona:"
+
+msgid "Background"
+msgstr "Sfondo"
+
+msgid "Background color from:"
+msgstr "Colore di sfondo da:"
+
+msgid "Background color:"
+msgstr "Colore dello sfondo:"
 
 msgid "Left tool color:"
 msgstr "Colore strumento sinistra:"
@@ -687,6 +702,20 @@ msgstr "Gradiente"
 
 msgid "Gradient Map"
 msgstr "Mappa Gradiente"
+
+msgid "Divide into equal parts"
+msgstr "Dividi in parti uguali"
+
+msgid "Parts:"
+msgstr "Parti:"
+
+msgid "Add point at the end"
+msgstr "Aggiungere punto alla fine"
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
+msgstr "Se abilitata, l' ultimo punto viene aggiunto alla fine del gradiente\n"
+"Disabilitare questa opzione se si desidera convertire il gradiente per avere un'interpolazione costante, in modo che l'ultimo colore venga preso in conto."
 
 msgid "Linear"
 msgstr "Lineare"
@@ -1362,14 +1391,21 @@ msgstr "Colore del pennello da"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Colore dal pennello stesso, 100: il colore attualmente selezionato"
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
 msgstr "Riempi l'area:"
 
-msgid "Same color area"
-msgstr "Area dello stesso colore"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr "Area simile"
 
-msgid "Same color pixels"
-msgstr "Pixel dello stesso colore"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr "Colori simili"
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr "Selezione intera"
 
 msgid "Fill with:"
 msgstr "Riempi con:"
@@ -1967,9 +2003,6 @@ msgstr "Crea più file ma ogni file è memorizzato in una cartella diversa che c
 
 msgid "Close"
 msgstr "Chiudi"
-
-msgid "Delete"
-msgstr "Elimina"
 
 msgid "Discard All"
 msgstr "Scarta Tutto"

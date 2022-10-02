@@ -5,7 +5,7 @@ enum ImageImportOptions {
 	SPRITESHEET_TAB,
 	SPRITESHEET_LAYER,
 	NEW_FRAME,
-	REPLACE_FRAME,
+	REPLACE_CEL,
 	NEW_LAYER,
 	PALETTE,
 	BRUSH,
@@ -29,7 +29,7 @@ onready var frame_size_label: Label = $VBoxContainer/SizeContainer/FrameSizeLabe
 onready var spritesheet_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions
 onready var spritesheet_lay_opt = $VBoxContainer/HBoxContainer/SpritesheetLayerOptions
 onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
-onready var replace_frame_options = $VBoxContainer/HBoxContainer/ReplaceFrameOptions
+onready var replace_cel_options = $VBoxContainer/HBoxContainer/ReplaceCelOptions
 onready var new_layer_options = $VBoxContainer/HBoxContainer/NewLayerOptions
 onready var new_brush_options = $VBoxContainer/HBoxContainer/NewBrushOptions
 onready var new_brush_name = $VBoxContainer/HBoxContainer/NewBrushOptions/BrushName
@@ -47,11 +47,15 @@ func _on_PreviewDialog_about_to_show() -> void:
 	import_options.add_item("Spritesheet (new project)")
 	import_options.add_item("Spritesheet (new layer)")
 	import_options.add_item("New frame")
-	import_options.add_item("Replace frame")
+	import_options.add_item("Replace cel")
 	import_options.add_item("New layer")
 	import_options.add_item("New palette")
 	import_options.add_item("New brush")
 	import_options.add_item("New pattern")
+
+	# Select the option that the preview dialog before it had selected
+	import_options.select(OpenSave.last_dialog_option)
+	import_options.emit_signal("item_selected", OpenSave.last_dialog_option)
 
 	var img_texture := ImageTexture.new()
 	img_texture.create_from_image(image, 0)
@@ -125,13 +129,13 @@ func _on_PreviewDialog_confirmed() -> void:
 			)
 
 		elif current_import_option == ImageImportOptions.NEW_FRAME:
-			var layer_index: int = new_frame_options.get_node("AtLayerSpinbox").value
+			var layer_index: int = new_frame_options.get_node("AtLayerOption").get_selected_id()
 			OpenSave.open_image_as_new_frame(image, layer_index)
 
-		elif current_import_option == ImageImportOptions.REPLACE_FRAME:
-			var layer_index: int = replace_frame_options.get_node("AtLayerSpinbox").value
-			var frame_index: int = replace_frame_options.get_node("AtFrameSpinbox").value - 1
-			OpenSave.open_image_at_frame(image, layer_index, frame_index)
+		elif current_import_option == ImageImportOptions.REPLACE_CEL:
+			var layer_index: int = replace_cel_options.get_node("AtLayerOption").get_selected_id()
+			var frame_index: int = replace_cel_options.get_node("AtFrameSpinbox").value - 1
+			OpenSave.open_image_at_cel(image, layer_index, frame_index)
 
 		elif current_import_option == ImageImportOptions.NEW_LAYER:
 			var frame_index: int = new_layer_options.get_node("AtFrameSpinbox").value - 1
@@ -200,15 +204,15 @@ func synchronize() -> void:
 					).value)
 
 			elif id == ImageImportOptions.NEW_FRAME:
-				dialog.new_frame_options.get_node("AtLayerSpinbox").value = (new_frame_options.get_node(
-					"AtLayerSpinbox"
-				).value)
+				dialog.new_frame_options.get_node("AtLayerOption").selected = (new_frame_options.get_node(
+					"AtLayerOption"
+				).selected)
 
-			elif id == ImageImportOptions.REPLACE_FRAME:
-				dialog.replace_frame_options.get_node("AtLayerSpinbox").value = (replace_frame_options.get_node(
-					"AtLayerSpinbox"
-				).value)
-				dialog.replace_frame_options.get_node("AtFrameSpinbox").value = (replace_frame_options.get_node(
+			elif id == ImageImportOptions.REPLACE_CEL:
+				dialog.replace_cel_options.get_node("AtLayerOption").selected = (replace_cel_options.get_node(
+					"AtLayerOption"
+				).selected)
+				dialog.replace_cel_options.get_node("AtFrameSpinbox").value = (replace_cel_options.get_node(
 					"AtFrameSpinbox"
 				).value)
 
@@ -227,11 +231,12 @@ func synchronize() -> void:
 
 func _on_ImportOption_item_selected(id: int) -> void:
 	current_import_option = id
+	OpenSave.last_dialog_option = current_import_option
 	frame_size_label.visible = false
 	spritesheet_tab_options.visible = false
 	spritesheet_lay_opt.visible = false
 	new_frame_options.visible = false
-	replace_frame_options.visible = false
+	replace_cel_options.visible = false
 	new_layer_options.visible = false
 	new_brush_options.visible = false
 	texture_rect.get_child(0).visible = false
@@ -255,18 +260,33 @@ func _on_ImportOption_item_selected(id: int) -> void:
 
 	elif id == ImageImportOptions.NEW_FRAME:
 		new_frame_options.visible = true
-		new_frame_options.get_node("AtLayerSpinbox").max_value = (
-			Global.current_project.layers.size()
-			- 1
-		)
-
-	elif id == ImageImportOptions.REPLACE_FRAME:
-		replace_frame_options.visible = true
-		replace_frame_options.get_node("AtLayerSpinbox").max_value = (
-			Global.current_project.layers.size()
-			- 1
-		)
-		var at_frame_spinbox: SpinBox = replace_frame_options.get_node("AtFrameSpinbox")
+		# Fill the at layer option button:
+		var at_layer_option: OptionButton = new_frame_options.get_node("AtLayerOption")
+		var layers := Global.current_project.layers.duplicate()
+		layers.invert()
+		var i := 0
+		for l in layers:
+			if not l is PixelLayer:
+				continue
+			at_layer_option.add_item(l.name, l.index)
+			at_layer_option.set_item_tooltip(i, l.get_layer_path())
+			i += 1
+		at_layer_option.selected = at_layer_option.get_item_count() - 1
+	elif id == ImageImportOptions.REPLACE_CEL:
+		replace_cel_options.visible = true
+		# Fill the at layer option button:
+		var at_layer_option: OptionButton = replace_cel_options.get_node("AtLayerOption")
+		var layers := Global.current_project.layers.duplicate()
+		layers.invert()
+		var i := 0
+		for l in layers:
+			if not l is PixelLayer:
+				continue
+			at_layer_option.add_item(l.name, l.index)
+			at_layer_option.set_item_tooltip(i, l.get_layer_path())
+			i += 1
+		at_layer_option.selected = at_layer_option.get_item_count() - 1
+		var at_frame_spinbox: SpinBox = replace_cel_options.get_node("AtFrameSpinbox")
 		at_frame_spinbox.max_value = Global.current_project.frames.size()
 
 	elif id == ImageImportOptions.NEW_LAYER:

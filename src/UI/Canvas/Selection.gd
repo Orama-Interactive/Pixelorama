@@ -3,6 +3,7 @@ extends Node2D
 enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
 
 const KEY_MOVE_ACTION_NAMES := ["ui_up", "ui_down", "ui_left", "ui_right"]
+const CLIPBOARD_FILE_PATH := "user://clipboard.txt"
 
 var is_moving_content := false
 var arrow_key_move := false
@@ -97,7 +98,7 @@ func _input(event: InputEvent) -> void:
 				if Global.cross_cursor:
 					cursor = Control.CURSOR_CROSS
 				var project: Project = Global.current_project
-				var layer: Layer = project.layers[project.current_layer]
+				var layer: BaseLayer = project.layers[project.current_layer]
 				if not layer.can_layer_get_drawn():
 					cursor = Control.CURSOR_FORBIDDEN
 
@@ -643,7 +644,9 @@ func _get_selected_draw_images() -> Array:  # Array of Images
 	var images := []
 	var project: Project = Global.current_project
 	for cel_index in project.selected_cels:
-		var cel: Cel = project.frames[cel_index[0]].cels[cel_index[1]]
+		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+		if not cel is PixelCel:
+			continue
 		if project.layers[cel_index[1]].can_layer_get_drawn():
 			images.append(cel.image)
 	return images
@@ -664,7 +667,7 @@ func copy() -> void:
 	var cl_big_bounding_rectangle := Rect2()
 	var cl_selection_offset := Vector2.ZERO
 
-	var image: Image = project.frames[project.current_frame].cels[project.current_layer].image
+	var image: Image = project.frames[project.current_frame].cels[project.current_layer].get_image()
 	var to_copy := Image.new()
 	if !project.has_selection:
 		to_copy.copy_from(image)
@@ -682,10 +685,10 @@ func copy() -> void:
 			to_copy = image.get_rect(big_bounding_rectangle)
 			to_copy.lock()
 			# Remove unincluded pixels if the selection is not a single rectangle
+			var offset_pos := big_bounding_rectangle.position
 			for x in to_copy.get_size().x:
 				for y in to_copy.get_size().y:
 					var pos := Vector2(x, y)
-					var offset_pos = big_bounding_rectangle.position
 					if offset_pos.x < 0:
 						offset_pos.x = 0
 					if offset_pos.y < 0:
@@ -704,9 +707,9 @@ func copy() -> void:
 		"big_bounding_rectangle": cl_big_bounding_rectangle,
 		"selection_offset": cl_selection_offset,
 	}
-	# Store to ".clipboard.txt" file
+
 	var clipboard_file := File.new()
-	clipboard_file.open("user://clipboard.txt", File.WRITE)
+	clipboard_file.open(CLIPBOARD_FILE_PATH, File.WRITE)
 	clipboard_file.store_var(transfer_clipboard, true)
 	clipboard_file.close()
 
@@ -719,53 +722,66 @@ func copy() -> void:
 		container.get_child(0).get_child(0).texture = tex
 
 
-func paste() -> void:
-	# Read from the ".clipboard.txt" file
+func paste(in_place := false) -> void:
 	var clipboard_file := File.new()
-	if !clipboard_file.file_exists("user://clipboard.txt"):
+	if !clipboard_file.file_exists(CLIPBOARD_FILE_PATH):
 		return
-	clipboard_file.open("user://clipboard.txt", File.READ)
+	clipboard_file.open(CLIPBOARD_FILE_PATH, File.READ)
 	var clipboard = clipboard_file.get_var(true)
 	clipboard_file.close()
 
-	if typeof(clipboard) == TYPE_DICTIONARY:
-		# A sanity check
-		if not clipboard.has_all(
-			["image", "selection_map", "big_bounding_rectangle", "selection_offset"]
-		):
-			return
+	# Sanity checks
+	if typeof(clipboard) != TYPE_DICTIONARY:
+		return
+	if !clipboard.has_all(["image", "selection_map", "big_bounding_rectangle", "selection_offset"]):
+		return
+	if clipboard.image.is_empty():
+		return
 
-		if clipboard.image.is_empty():
-			return
-		clear_selection()
-		undo_data = get_undo_data(true)
-		var project: Project = Global.current_project
+	clear_selection()
+	undo_data = get_undo_data(true)
+	var project: Project = Global.current_project
 
-		original_bitmap.copy_from(project.selection_map)
-		original_big_bounding_rectangle = big_bounding_rectangle
-		original_offset = project.selection_offset
+	original_bitmap.copy_from(project.selection_map)
+	original_big_bounding_rectangle = big_bounding_rectangle
+	original_offset = project.selection_offset
 
-		var clip_map := SelectionMap.new()
-		clip_map.data = clipboard.selection_map
-		var max_size := Vector2(
-			max(clip_map.get_size().x, project.selection_map.get_size().x),
-			max(clip_map.get_size().y, project.selection_map.get_size().y)
-		)
+	var clip_map := SelectionMap.new()
+	clip_map.data = clipboard.selection_map
+	var max_size := Vector2(
+		max(clip_map.get_size().x, project.selection_map.get_size().x),
+		max(clip_map.get_size().y, project.selection_map.get_size().y)
+	)
 
-		project.selection_map = clip_map
-		project.selection_map.crop(max_size.x, max_size.y)
-		self.big_bounding_rectangle = clipboard.big_bounding_rectangle
-		project.selection_offset = clipboard.selection_offset
+	project.selection_map = clip_map
+	project.selection_map.crop(max_size.x, max_size.y)
+	project.selection_offset = clipboard.selection_offset
+	big_bounding_rectangle = clipboard.big_bounding_rectangle
+	if not in_place:  # If "Paste" is selected, and not "Paste in Place"
+		var camera_center := Global.camera.get_camera_screen_center()
+		camera_center -= big_bounding_rectangle.size / 2
+		var max_pos := project.size - big_bounding_rectangle.size
+		if max_pos.x >= 0:
+			camera_center.x = clamp(camera_center.x, 0, max_pos.x)
+		else:
+			camera_center.x = 0
+		if max_pos.y >= 0:
+			camera_center.y = clamp(camera_center.y, 0, max_pos.y)
+		else:
+			camera_center.y = 0
+		big_bounding_rectangle.position = camera_center
+		project.selection_map.move_bitmap_values(Global.current_project, false)
 
-		temp_bitmap = project.selection_map
-		temp_rect = big_bounding_rectangle
-		is_moving_content = true
-		is_pasting = true
-		original_preview_image = clipboard.image
-		preview_image.copy_from(original_preview_image)
-		preview_image_texture.create_from_image(preview_image, 0)
+	self.big_bounding_rectangle = big_bounding_rectangle
+	temp_bitmap = project.selection_map
+	temp_rect = big_bounding_rectangle
+	is_moving_content = true
+	is_pasting = true
+	original_preview_image = clipboard.image
+	preview_image.copy_from(original_preview_image)
+	preview_image_texture.create_from_image(preview_image, 0)
 
-		project.selection_map_changed()
+	project.selection_map_changed()
 
 
 func delete(selected_cels := true) -> void:
@@ -789,9 +805,9 @@ func delete(selected_cels := true) -> void:
 	else:
 		images = [project.frames[project.current_frame].cels[project.current_layer].image]
 
-	var blank := Image.new()
-	blank.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	if project.has_selection:
+		var blank := Image.new()
+		blank.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 		var selection_map_copy := SelectionMap.new()
 		selection_map_copy.copy_from(project.selection_map)
 		# In case the selection map is bigger than the canvas

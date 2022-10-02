@@ -14,6 +14,9 @@ onready var texture_rect: TextureRect = $TextureRect
 onready var texture: Texture = $TextureRect.texture
 onready var gradient: Gradient = texture.gradient
 onready var color_picker: ColorPicker = $Popup.get_node("ColorPicker")
+onready var divide_dialog: ConfirmationDialog = $DivideConfirmationDialog
+onready var number_of_parts_spin_box: SpinBox = $"%NumberOfPartsSpinBox"
+onready var add_point_end_check_box: CheckBox = $"%AddPointEndCheckBox"
 
 
 class GradientCursor:
@@ -97,10 +100,10 @@ class GradientCursor:
 
 
 func _ready() -> void:
-	create_cursors()
+	_create_cursors()
 
 
-func create_cursors() -> void:
+func _create_cursors() -> void:
 	for c in texture_rect.get_children():
 		if c is GradientCursor:
 			texture_rect.remove_child(c)
@@ -167,8 +170,30 @@ func _on_GradientEdit_resized() -> void:
 	if not gradient:
 		return
 	x_offset = rect_size.x - GradientCursor.WIDTH
-	create_cursors()
+	_create_cursors()
 
 
 func _on_InterpolationOptionButton_item_selected(index: int) -> void:
 	gradient.interpolation_mode = index
+
+
+func _on_DivideButton_pressed() -> void:
+	divide_dialog.popup_centered()
+
+
+func _on_DivideConfirmationDialog_confirmed() -> void:
+	var add_point_to_end := add_point_end_check_box.pressed
+	var parts := number_of_parts_spin_box.value
+	var colors := []
+	var end_point = 1 if add_point_to_end else 0
+	parts -= end_point
+
+	if not add_point_to_end:
+		# Move the final color one part behind, useful for it to be in constant interpolation
+		gradient.add_point((parts - 1) / parts, gradient.interpolate(1))
+	for i in parts + end_point:
+		colors.append(gradient.interpolate(i / parts))
+	gradient.offsets = []
+	for i in parts + end_point:
+		gradient.add_point(i / parts, colors[i])
+	_create_cursors()

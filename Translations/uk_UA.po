@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-08-11 08:37\n"
+"PO-Revision-Date: 2022-09-20 12:11\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -134,6 +134,9 @@ msgstr "Вирізати"
 
 msgid "Paste"
 msgstr "Вставити"
+
+msgid "Paste in Place"
+msgstr "Вставити на місце"
 
 msgid "Delete"
 msgstr "Вилучити"
@@ -455,7 +458,7 @@ msgid "All frames as a single file animation"
 msgstr "Всі кадри як один файл анімації"
 
 msgid "Background:"
-msgstr "Тло:"
+msgstr "Фон:"
 
 msgid "Direction:"
 msgstr "Напрямок:"
@@ -607,11 +610,23 @@ msgstr "Фіолетова"
 msgid "Theme"
 msgstr "Тема"
 
+msgid "Buttons"
+msgstr "Кнопки"
+
 msgid "Icon color from:"
 msgstr "Колір значків з:"
 
 msgid "Icon color:"
 msgstr "Колір значків:"
+
+msgid "Background"
+msgstr "Фон"
+
+msgid "Background color from:"
+msgstr "Колір фону з:"
+
+msgid "Background color:"
+msgstr "Колір фону:"
 
 msgid "Left tool color:"
 msgstr "Колір лівого інструменту:"
@@ -687,6 +702,20 @@ msgstr "Градієнт"
 
 msgid "Gradient Map"
 msgstr "Карта градієнту"
+
+msgid "Divide into equal parts"
+msgstr "Розділити на рівні частини"
+
+msgid "Parts:"
+msgstr "Частини:"
+
+msgid "Add point at the end"
+msgstr "Додати точку в кінці"
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
+msgstr "Якщо увімкнено, останню точку буде додано в кінець градієнту.\n"
+"Вимкніть, щоб перетворити градієнт таким чином, щоб в ньому була константна інтерполяція, щоб останній колір враховувався."
 
 msgid "Linear"
 msgstr "Лінійний"
@@ -1362,14 +1391,21 @@ msgstr "Колір пензля з"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Колір з самого пензля, 100: поточний колір"
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr "Область заливки:"
+msgstr "Область заповнення:"
 
-msgid "Same color area"
-msgstr "Область одного кольору"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr "Подібна область"
 
-msgid "Same color pixels"
-msgstr "Пікселі одного кольору"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr "Подібні кольори"
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr "Все виділення"
 
 msgid "Fill with:"
 msgstr "Чим залити:"
@@ -1967,9 +2003,6 @@ msgstr "Ствоює декілька файлів, але кожен файл �
 
 msgid "Close"
 msgstr "Закрити"
-
-msgid "Delete"
-msgstr "Видалити"
 
 msgid "Discard All"
 msgstr "Відкинути все"

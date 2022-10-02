@@ -5,9 +5,11 @@
 [node name="FrameButton" type="Button"]
 margin_right = 12.0
 margin_bottom = 20.0
+focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 button_mask = 7
+enabled_focus_mode = 0
 text = "1"
 script = ExtResource( 1 )
 __meta__ = {

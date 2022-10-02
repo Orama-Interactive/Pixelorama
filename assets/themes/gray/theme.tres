@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=177 format=2]
+[gd_resource type="Theme" load_steps=178 format=2]
 
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/Roboto-Big.tres" type="DynamicFont" id=2]
 
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 6.0
@@ -1436,7 +1437,7 @@ content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
-bg_color = Color( 0.544118, 0.544118, 0.544118, 1 )
+bg_color = Color( 0.545098, 0.545098, 0.545098, 1 )
 
 [sub_resource type="StyleBoxFlat" id=168]
 content_margin_left = 2.0
@@ -1647,6 +1648,9 @@ HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 8
 HSplitContainer/icons/grabber = SubResource( 89 )
 HSplitContainer/styles/bg = SubResource( 90 )
+Header/base_type = "Label"
+Header/colors/font_color = Color( 0.909804, 0.909804, 0.909804, 1 )
+Header/fonts/font = ExtResource( 2 )
 Icons/colors/modulate_color = Color( 0.74902, 0.74902, 0.74902, 1 )
 ItemList/colors/font_color = Color( 0.848039, 0.848039, 0.848039, 1 )
 ItemList/colors/font_color_selected = Color( 1, 1, 1, 1 )
@@ -1662,7 +1666,7 @@ ItemList/styles/cursor = SubResource( 93 )
 ItemList/styles/cursor_unfocused = SubResource( 93 )
 ItemList/styles/selected = SubResource( 94 )
 ItemList/styles/selected_focus = SubResource( 95 )
-Label/colors/font_color = Color( 0.848039, 0.848039, 0.848039, 1 )
+Label/colors/font_color = Color( 0.847059, 0.847059, 0.847059, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 Label/constants/line_spacing = 3
@@ -1914,6 +1918,8 @@ VSplitContainer/constants/autohide = 1
 VSplitContainer/constants/separation = 8
 VSplitContainer/icons/grabber = SubResource( 171 )
 VSplitContainer/styles/bg = SubResource( 174 )
+ValueSlider/colors/progress_color = Color( 0.545098, 0.545098, 0.545098, 1 )
+ValueSlider/colors/under_color = Color( 0.235294, 0.235294, 0.235294, 1 )
 WindowDialog/colors/title_color = Color( 0.848039, 0.848039, 0.848039, 1 )
 WindowDialog/constants/close_h_ofs = 22
 WindowDialog/constants/close_v_ofs = 20

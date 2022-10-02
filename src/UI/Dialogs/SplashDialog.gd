@@ -1,25 +1,25 @@
 extends AcceptDialog
 
 var artworks := [
-	[
+	[  # Licensed under CC BY-NC-ND, https://creativecommons.org/licenses/by-nc-nd/4.0/
 		"Roroto Sic",
 		preload("res://assets/graphics/splash_screen/artworks/roroto.tres"),
 		"https://linktr.ee/Roroto_Sic",
 		Color.black
 	],
-	[
+	[  # Licensed under CC BY-NC, https://creativecommons.org/licenses/by-nc/3.0/
 		"Kalpar",
 		preload("res://assets/graphics/splash_screen/artworks/kalpar.png"),
 		"https://resite.link/Kalpar",
 		Color.white
 	],
-	[
+	[  # Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/
 		"Uch",
 		preload("res://assets/graphics/splash_screen/artworks/uch.png"),
 		"https://www.instagram.com/vs.pxl/",
 		Color.black
 	],
-	[
+	[  # Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/
 		"Wishdream",
 		preload("res://assets/graphics/splash_screen/artworks/wishdream.png"),
 		"https://twitter.com/WishdreamStar",

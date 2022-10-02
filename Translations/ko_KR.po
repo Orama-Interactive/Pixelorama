@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-08-13 13:43\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "예"
@@ -134,6 +134,9 @@ msgstr "잘라내기"
 
 msgid "Paste"
 msgstr "붙여넣기"
+
+msgid "Paste in Place"
+msgstr ""
 
 msgid "Delete"
 msgstr "삭제"
@@ -316,7 +319,7 @@ msgid "New project"
 msgstr "신규 프로젝트"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "스프레드시트 (새 프로젝트)"
 
 msgid "Spritesheet (new layer)"
 msgstr "스프레드시트 (새 레이어)"
@@ -509,7 +512,7 @@ msgid "Trilinear"
 msgstr "Trilinear"
 
 msgid "Constant"
-msgstr ""
+msgstr "고정"
 
 msgid "General"
 msgstr "일반적"
@@ -607,11 +610,23 @@ msgstr "보라색"
 msgid "Theme"
 msgstr "테마"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "아이콘 색상 출처:"
 
 msgid "Icon color:"
 msgstr "아이콘 색상:"
+
+msgid "Background"
+msgstr ""
+
+msgid "Background color from:"
+msgstr ""
+
+msgid "Background color:"
+msgstr ""
 
 msgid "Left tool color:"
 msgstr "왼쪽 도구 색상"
@@ -687,6 +702,19 @@ msgstr "그레디언트"
 
 msgid "Gradient Map"
 msgstr "그레이디언트 맵"
+
+msgid "Divide into equal parts"
+msgstr ""
+
+msgid "Parts:"
+msgstr ""
+
+msgid "Add point at the end"
+msgstr ""
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
+msgstr ""
 
 msgid "Linear"
 msgstr "선형"
@@ -1360,14 +1388,21 @@ msgstr "브러시 색상을 ~에서"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: 브러시 자체의 색상, 100: 현재 선택된 색상"
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr "채우는 영역:"
+msgstr ""
 
-msgid "Same color area"
-msgstr "같은 색상 영역"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr ""
 
-msgid "Same color pixels"
-msgstr "같은 색상 픽셀"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr ""
 
 msgid "Fill with:"
 msgstr "이것으로 채우기:"
@@ -1965,9 +2000,6 @@ msgstr "여러 파일을 만들지만 프레임 태그로 분류되어 다른 �
 
 msgid "Close"
 msgstr "닫기"
-
-msgid "Delete"
-msgstr "삭제"
 
 msgid "Discard All"
 msgstr "모두 버리기"

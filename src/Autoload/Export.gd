@@ -380,7 +380,7 @@ func blend_layers(image: Image, frame: Frame, origin: Vector2 = Vector2(0, 0)) -
 	image.lock()
 	var layer_i := 0
 	for cel in frame.cels:
-		if Global.current_project.layers[layer_i].visible:
+		if Global.current_project.layers[layer_i].is_visible_in_hierarchy() and cel is PixelCel:
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.image)
 			cel_image.lock()
@@ -406,9 +406,12 @@ func blend_selected_cels(image: Image, frame: Frame, origin: Vector2 = Vector2(0
 		var test_array = [Global.current_project.current_frame, cel_ind]
 		if not test_array in Global.current_project.selected_cels:
 			continue
+		if not frame.cels[cel_ind] is PixelCel:
+			continue
 
-		var cel: Cel = frame.cels[cel_ind]
-		if Global.current_project.layers[layer_i].visible:
+		var cel: PixelCel = frame.cels[cel_ind]
+
+		if Global.current_project.layers[layer_i].is_visible_in_hierarchy():
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.image)
 			cel_image.lock()

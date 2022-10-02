@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-08-10 22:47\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -134,6 +134,9 @@ msgstr "Retalla"
 
 msgid "Paste"
 msgstr "Enganxar"
+
+msgid "Paste in Place"
+msgstr ""
 
 msgid "Delete"
 msgstr "Eliminar"
@@ -607,11 +610,23 @@ msgstr "Porpra"
 msgid "Theme"
 msgstr "Tema"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "Color d'icona de:"
 
 msgid "Icon color:"
 msgstr "Color d'icona:"
+
+msgid "Background"
+msgstr ""
+
+msgid "Background color from:"
+msgstr ""
+
+msgid "Background color:"
+msgstr ""
 
 msgid "Left tool color:"
 msgstr ""
@@ -686,6 +701,19 @@ msgid "Gradient"
 msgstr "Degradat"
 
 msgid "Gradient Map"
+msgstr ""
+
+msgid "Divide into equal parts"
+msgstr ""
+
+msgid "Parts:"
+msgstr ""
+
+msgid "Add point at the end"
+msgstr ""
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
 msgid "Linear"
@@ -1362,14 +1390,21 @@ msgstr "Color del pinzell de"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Color del mateix pinzell, 100: El color seleccionat"
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr "Omplir area:"
+msgstr ""
 
-msgid "Same color area"
-msgstr "Àrea del mateix color"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr ""
 
-msgid "Same color pixels"
-msgstr "Pixels del mateix color"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr ""
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr ""
 
 msgid "Fill with:"
 msgstr "Omplir amb:"
@@ -1965,9 +2000,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "Tancar"
-
-msgid "Delete"
-msgstr "Eliminar"
 
 msgid "Discard All"
 msgstr ""

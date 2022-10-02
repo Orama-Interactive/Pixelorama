@@ -15,6 +15,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Lulullia (lulullia902)": ["French"],
 	"Anne Onyme 017 (Anne17)": ["French"],
 	"Nicolas.C (nico57c)": ["French"],
+	"EGuillemot": ["French"],
 	"Schweini07": ["German"],
 	"Martin Zabinski (Martin1991zab)": ["German"],
 	"Manuel (DrMoebyus)": ["German"],
@@ -33,6 +34,7 @@ const TRANSLATORS_DICTIONARY := {
 	"DippoZz": ["Brazilian Portuguese"],
 	"Luciano Salomoni (LucianoSalomoni)": ["Brazilian Portuguese"],
 	"Carlos A. G. Silva (CarloSilva)": ["Brazilian Portuguese"],
+	"Vitor Gabriel (Ranbut)": ["Brazilian Portuguese"],
 	"Andreev Andrei": ["Russian"],
 	"ax trifonov (ax34)": ["Russian"],
 	"Artem (blinovartem)": ["Russian"],
@@ -40,6 +42,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Daniil Belyakov (ermegil)": ["Russian"],
 	"stomleny_cmok": ["Russian", "Ukrainian"],
 	"Bohdan Matviiv (BodaMat)": ["Ukrainian"],
+	"Ruslan Hryschuk (kifflow) ": ["Ukrainian"],
 	"Kinwailo": ["Chinese Traditional"],
 	"曹恩逢 (SiderealArt)": ["Chinese Traditional"],
 	"Chenxu Wang": ["Chinese Simplified"],
@@ -85,6 +88,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Vancat": ["Turkish"],
 	"Ferhat Geçdoğan (ferhatgec)": ["Turkish"],
 	"designy": ["Turkish"],
+	"libre ajans (libreajans)": ["Turkish"],
 	"CaelusV": ["Danish"],
 	"GGIEnrike":
 	[

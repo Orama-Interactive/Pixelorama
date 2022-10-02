@@ -6,10 +6,10 @@
 [node name="ToolOptions" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="ColorPicker" type="VBoxContainer" parent="." index="1"]
-margin_top = 18.0
+[node name="ColorPicker" type="VBoxContainer" parent="." index="2"]
+margin_top = 26.0
 margin_right = 116.0
-margin_bottom = 56.0
+margin_bottom = 64.0
 
 [node name="Label" type="Label" parent="ColorPicker" index="0"]
 margin_left = 32.0

@@ -1,3 +1,4 @@
+# gdlint: ignore=max-public-methods
 class_name Project
 extends Reference
 # A class for project properties.
@@ -7,10 +8,14 @@ var size: Vector2 setget _size_changed
 var undo_redo := UndoRedo.new()
 var tiles: Tiles
 var undos := 0  # The number of times we added undo properties
+var can_undo = true
 var fill_color := Color(0)
 var has_changed := false setget _has_changed_changed
-var frames := [] setget _frames_changed  # Array of Frames (that contain Cels)
-var layers := [] setget _layers_changed  # Array of Layers
+# frames and layers Arrays should generally only be modified directly when
+# opening/creating a project. When modifiying the current project, use
+# the add/remove/move/swap_frames/layers methods
+var frames := []  # Array of Frames (that contain Cels)
+var layers := []  # Array of Layers
 var current_frame := 0 setget _frame_changed
 var current_layer := 0 setget _layer_changed
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
@@ -44,9 +49,6 @@ var file_format: int = Export.FileFormat.PNG
 var was_exported := false
 var export_overwrite := false
 
-var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
-var layer_button_node = preload("res://src/UI/Timeline/LayerButton.tscn")
-var cel_button_node = preload("res://src/UI/Timeline/CelButton.tscn")
 var animation_tag_node = preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
 
@@ -88,10 +90,14 @@ func remove() -> void:
 	undo_redo.free()
 	for guide in guides:
 		guide.queue_free()
+	# Prevents memory leak (due to the layers' project reference stopping ref counting from freeing)
+	layers.clear()
 	Global.projects.erase(self)
 
 
 func commit_undo() -> void:
+	if not can_undo:
+		return
 	if Global.canvas.selection.is_moving_content:
 		Global.canvas.selection.transform_content_cancel()
 	else:
@@ -99,6 +105,8 @@ func commit_undo() -> void:
 
 
 func commit_redo() -> void:
+	if not can_undo:
+		return
 	Global.control.redone = true
 	undo_redo.redo()
 	Global.control.redone = false
@@ -108,13 +116,11 @@ func new_empty_frame() -> Frame:
 	var frame := Frame.new()
 	var bottom_layer := true
 	for l in layers:  # Create as many cels as there are layers
-		var image := Image.new()
-		image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-		if bottom_layer and fill_color.a > 0:
-			image.fill(fill_color)
-		frame.cels.append(Cel.new(image, 1))
+		var cel: BaseCel = l.new_empty_cel()
+		if cel is PixelCel and bottom_layer and fill_color.a > 0:
+			cel.image.fill(fill_color)
+		frame.cels.append(cel)
 		bottom_layer = false
-
 	return frame
 
 
@@ -124,7 +130,8 @@ func selection_map_changed() -> void:
 	if has_selection:
 		image_texture.create_from_image(selection_map, 0)
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
-	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
+	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu_button.get_popup()
+	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
 
 
 func _selection_offset_changed(value: Vector2) -> void:
@@ -134,51 +141,7 @@ func _selection_offset_changed(value: Vector2) -> void:
 
 
 func change_project() -> void:
-	# Remove old nodes
-	for container in Global.layers_container.get_children():
-		container.queue_free()
-
-	_remove_cel_buttons()
-
-	for frame_id in Global.frame_ids.get_children():
-		Global.frame_ids.remove_child(frame_id)
-		frame_id.queue_free()
-
-	# Create new ones
-	for i in range(layers.size() - 1, -1, -1):
-		# Create layer buttons
-		var layer_container = layer_button_node.instance()
-		layer_container.layer = i
-		if layers[i].name == "":
-			layers[i].name = tr("Layer") + " %s" % i
-
-		Global.layers_container.add_child(layer_container)
-		layer_container.label.text = layers[i].name
-		layer_container.line_edit.text = layers[i].name
-
-		var layer_cel_container := HBoxContainer.new()
-		Global.frames_container.add_child(layer_cel_container)
-		for j in range(frames.size()):  # Create Cel buttons
-			var cel_button = cel_button_node.instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-			cel_button.pressed = j == current_frame and i == current_layer
-
-			layer_cel_container.add_child(cel_button)
-
-	for j in range(frames.size()):  # Create frame buttons
-		var button: Button = frame_button_node.instance()
-		button.frame = j
-		button.rect_min_size.x = Global.animation_timeline.cel_size
-		button.text = str(j + 1)
-		button.pressed = j == current_frame
-		Global.frame_ids.add_child(button)
-
-	var layer_button = Global.layers_container.get_child(
-		Global.layers_container.get_child_count() - 1 - current_layer
-	)
-	layer_button.pressed = true
+	Global.animation_timeline.project_changed()
 
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
@@ -187,8 +150,7 @@ func change_project() -> void:
 	Global.disable_button(
 		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
 	)
-	_toggle_layer_buttons_layers()
-	_toggle_layer_buttons_current_layer()
+	toggle_layer_buttons()
 
 	self.animation_tags = animation_tags
 
@@ -259,7 +221,8 @@ func change_project() -> void:
 	Global.canvas.selection.big_bounding_rectangle = selection_map.get_used_rect()
 	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
 	Global.canvas.selection.update()
-	Global.top_menu_container.edit_menu_button.get_popup().set_item_disabled(6, !has_selection)
+	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu_button.get_popup()
+	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
 
 	var i := 0
 	for camera in Global.cameras:
@@ -290,20 +253,8 @@ func change_project() -> void:
 func serialize() -> Dictionary:
 	var layer_data := []
 	for layer in layers:
-		var linked_cels := []
-		for cel in layer.linked_cels:
-			linked_cels.append(frames.find(cel))
-
-		layer_data.append(
-			{
-				"name": layer.name,
-				"visible": layer.visible,
-				"locked": layer.locked,
-				"new_cels_linked": layer.new_cels_linked,
-				"linked_cels": linked_cels,
-				"metadata": _serialize_metadata(layer)
-			}
-		)
+		layer_data.append(layer.serialize())
+		layer_data[-1]["metadata"] = _serialize_metadata(layer)
 
 	var tag_data := []
 	for tag in animation_tags:
@@ -393,14 +344,19 @@ func deserialize(dict: Dictionary) -> void:
 		tiles.y_basis.y = dict.tile_mode_y_basis_y
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
-	if dict.has("frames"):
+	if dict.has("frames") and dict.has("layers"):
 		var frame_i := 0
 		for frame in dict.frames:
 			var cels := []
+			var cel_i := 0
 			for cel in frame.cels:
-				var cel_class := Cel.new(Image.new(), cel.opacity)
-				_deserialize_metadata(cel_class, cel)
-				cels.append(cel_class)
+				match int(dict.layers[cel_i].get("type", Global.LayerTypes.PIXEL)):
+					Global.LayerTypes.PIXEL:
+						cels.append(PixelCel.new(Image.new(), cel.opacity))
+					Global.LayerTypes.GROUP:
+						cels.append(GroupCel.new(cel.opacity))
+				_deserialize_metadata(cels[cel_i], cel)
+				cel_i += 1
 			var duration := 1.0
 			if frame.has("duration"):
 				duration = frame.duration
@@ -412,25 +368,18 @@ func deserialize(dict: Dictionary) -> void:
 			frames.append(frame_class)
 			frame_i += 1
 
-		if dict.has("layers"):
-			var layer_i := 0
-			for saved_layer in dict.layers:
-				var linked_cels := []
-				for linked_cel_number in saved_layer.linked_cels:
-					linked_cels.append(frames[linked_cel_number])
-					var linked_cel: Cel = frames[linked_cel_number].cels[layer_i]
-					linked_cel.image = linked_cels[0].cels[layer_i].image
-					linked_cel.image_texture = linked_cels[0].cels[layer_i].image_texture
-				var layer := Layer.new(
-					saved_layer.name,
-					saved_layer.visible,
-					saved_layer.locked,
-					saved_layer.new_cels_linked,
-					linked_cels
-				)
-				_deserialize_metadata(layer, saved_layer)
-				layers.append(layer)
-				layer_i += 1
+		for saved_layer in dict.layers:
+			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
+				Global.LayerTypes.PIXEL:
+					layers.append(PixelLayer.new(self))
+				Global.LayerTypes.GROUP:
+					layers.append(GroupLayer.new(self))
+		# Parent references to other layers are created when deserializing
+		# a layer, so loop again after creating them:
+		for layer_i in dict.layers.size():
+			layers[layer_i].index = layer_i
+			layers[layer_i].deserialize(dict.layers[layer_i])
+			_deserialize_metadata(layers[layer_i], dict.layers[layer_i])
 	if dict.has("tags"):
 		for tag in dict.tags:
 			animation_tags.append(AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to))
@@ -500,84 +449,6 @@ func _size_changed(value: Vector2) -> void:
 	size = value
 
 
-func _frames_changed(value: Array) -> void:
-	Global.canvas.selection.transform_content_confirm()
-	frames = value
-	selected_cels.clear()
-	_remove_cel_buttons()
-
-	for frame_id in Global.frame_ids.get_children():
-		Global.frame_ids.remove_child(frame_id)
-		frame_id.queue_free()
-
-	for i in range(layers.size() - 1, -1, -1):
-		var layer_cel_container := HBoxContainer.new()
-		layer_cel_container.name = "FRAMESS " + str(i)
-		Global.frames_container.add_child(layer_cel_container)
-		for j in range(frames.size()):
-			var cel_button = cel_button_node.instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-			layer_cel_container.add_child(cel_button)
-
-	for j in range(frames.size()):
-		var button: Button = frame_button_node.instance()
-		button.frame = j
-		button.rect_min_size.x = Global.animation_timeline.cel_size
-		button.text = str(j + 1)
-		Global.frame_ids.add_child(button)
-
-	_set_timeline_first_and_last_frames()
-
-
-func _layers_changed(value: Array) -> void:
-	layers = value
-	if Global.layers_changed_skip:
-		Global.layers_changed_skip = false
-		return
-
-	selected_cels.clear()
-
-	for container in Global.layers_container.get_children():
-		container.queue_free()
-
-	_remove_cel_buttons()
-
-	for i in range(layers.size() - 1, -1, -1):
-		var layer_button: LayerButton = layer_button_node.instance()
-		layer_button.layer = i
-		if layers[i].name == "":
-			layers[i].name = tr("Layer") + " %s" % i
-
-		Global.layers_container.add_child(layer_button)
-		layer_button.label.text = layers[i].name
-		layer_button.line_edit.text = layers[i].name
-
-		var layer_cel_container := HBoxContainer.new()
-		layer_cel_container.name = "LAYERSSS " + str(i)
-		Global.frames_container.add_child(layer_cel_container)
-		for j in range(frames.size()):
-			var cel_button = cel_button_node.instance()
-			cel_button.frame = j
-			cel_button.layer = i
-			cel_button.get_child(0).texture = frames[j].cels[i].image_texture
-			layer_cel_container.add_child(cel_button)
-
-	var layer_button = Global.layers_container.get_child(
-		Global.layers_container.get_child_count() - 1 - current_layer
-	)
-	layer_button.pressed = true
-	self.current_frame = current_frame  # Call frame_changed to update UI
-	_toggle_layer_buttons_layers()
-
-
-func _remove_cel_buttons() -> void:
-	for container in Global.frames_container.get_children():
-		Global.frames_container.remove_child(container)
-		container.queue_free()
-
-
 func _frame_changed(value: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	current_frame = value
@@ -594,32 +465,24 @@ func _frame_changed(value: int) -> void:
 		selected_cels.append([current_frame, current_layer])
 	# Select the new frame
 	for cel in selected_cels:
-		var current_frame_tmp: int = cel[0]
-		var current_layer_tmp: int = cel[1]
-		if current_frame_tmp < Global.frame_ids.get_child_count():
-			var frame_button: BaseButton = Global.frame_ids.get_child(current_frame_tmp)
+		var frame: int = cel[0]
+		var layer: int = cel[1]
+		if frame < Global.frame_ids.get_child_count():
+			var frame_button: BaseButton = Global.frame_ids.get_child(frame)
 			frame_button.pressed = true
 
 		var container_child_count: int = Global.frames_container.get_child_count()
-		if current_layer_tmp < container_child_count:
-			var container = Global.frames_container.get_child(
-				container_child_count - 1 - current_layer_tmp
-			)
-			if current_frame_tmp < container.get_child_count():
-				var fbutton = container.get_child(current_frame_tmp)
-				fbutton.pressed = true
-
-	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
-	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
-	Global.disable_button(
-		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
-	)
+		if layer < container_child_count:
+			var container = Global.frames_container.get_child(container_child_count - 1 - layer)
+			if frame < container.get_child_count():
+				var cel_button = container.get_child(frame)
+				cel_button.pressed = true
 
 	if current_frame < frames.size():
 		var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
 		Global.layer_opacity_slider.value = cel_opacity * 100
-		Global.layer_opacity_spinbox.value = cel_opacity * 100
 
+	toggle_frame_buttons()
 	Global.canvas.update()
 	Global.transparent_checker.update_rect()
 
@@ -628,7 +491,7 @@ func _layer_changed(value: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	current_layer = value
 
-	_toggle_layer_buttons_current_layer()
+	toggle_layer_buttons()
 
 	yield(Global.get_tree().create_timer(0.01), "timeout")
 	self.current_frame = current_frame  # Call frame_changed to update UI
@@ -636,48 +499,44 @@ func _layer_changed(value: int) -> void:
 		layer_button.pressed = false
 
 	for cel in selected_cels:
-		var current_layer_tmp: int = cel[1]
-		if current_layer_tmp < Global.layers_container.get_child_count():
+		var layer: int = cel[1]
+		if layer < Global.layers_container.get_child_count():
 			var layer_button = Global.layers_container.get_child(
-				Global.layers_container.get_child_count() - 1 - current_layer_tmp
+				Global.layers_container.get_child_count() - 1 - layer
 			)
 			layer_button.pressed = true
 
 
-func _toggle_layer_buttons_layers() -> void:
-	if !layers:
+func toggle_frame_buttons() -> void:
+	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
+	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
+	Global.disable_button(
+		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
+	)
+
+
+func toggle_layer_buttons() -> void:
+	if layers.empty() or current_layer >= layers.size():
 		return
-	if layers[current_layer].locked:
-		Global.disable_button(Global.remove_layer_button, true)
+	var child_count: int = layers[current_layer].get_child_count(true)
 
-	if layers.size() == 1:
-		Global.disable_button(Global.remove_layer_button, true)
-		Global.disable_button(Global.move_up_layer_button, true)
-		Global.disable_button(Global.move_down_layer_button, true)
-		Global.disable_button(Global.merge_down_layer_button, true)
-	elif !layers[current_layer].locked:
-		Global.disable_button(Global.remove_layer_button, false)
-
-
-func _toggle_layer_buttons_current_layer() -> void:
-	if current_layer < layers.size() - 1:
-		Global.disable_button(Global.move_up_layer_button, false)
-	else:
-		Global.disable_button(Global.move_up_layer_button, true)
-
-	if current_layer > 0:
-		Global.disable_button(Global.move_down_layer_button, false)
-		Global.disable_button(Global.merge_down_layer_button, false)
-	else:
-		Global.disable_button(Global.move_down_layer_button, true)
-		Global.disable_button(Global.merge_down_layer_button, true)
-
-	if current_layer < layers.size():
-		if layers[current_layer].locked:
-			Global.disable_button(Global.remove_layer_button, true)
-		else:
-			if layers.size() > 1:
-				Global.disable_button(Global.remove_layer_button, false)
+	Global.disable_button(
+		Global.remove_layer_button,
+		layers[current_layer].is_locked_in_hierarchy() or layers.size() == child_count + 1
+	)
+	Global.disable_button(Global.move_up_layer_button, current_layer == layers.size() - 1)
+	Global.disable_button(
+		Global.move_down_layer_button,
+		current_layer == child_count and not is_instance_valid(layers[current_layer].parent)
+	)
+	Global.disable_button(
+		Global.merge_down_layer_button,
+		(
+			current_layer == child_count
+			or layers[current_layer] is GroupLayer
+			or layers[current_layer - 1] is GroupLayer
+		)
+	)
 
 
 func _animation_tags_changed(value: Array) -> void:
@@ -733,6 +592,7 @@ func is_empty() -> bool:
 	return (
 		frames.size() == 1
 		and layers.size() == 1
+		and layers[0] is PixelLayer
 		and frames[0].cels[0].image.is_invisible()
 		and animation_tags.size() == 0
 	)
@@ -743,15 +603,10 @@ func duplicate_layers() -> Array:
 	# Loop through the array to create new classes for each element, so that they
 	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
 	for i in new_layers.size():
-		var new_linked_cels = new_layers[i].linked_cels.duplicate()
-		new_layers[i] = Layer.new(
-			new_layers[i].name,
-			new_layers[i].visible,
-			new_layers[i].locked,
-			new_layers[i].new_cels_linked,
-			new_linked_cels
-		)
-
+		new_layers[i] = new_layers[i].copy()
+	for l in new_layers:
+		if is_instance_valid(l.parent):
+			l.parent = new_layers[l.parent.index]  # Update the parent to the new copy of the parent
 	return new_layers
 
 
@@ -774,3 +629,236 @@ func can_pixel_get_drawn(
 		return image.is_pixel_selected(pixel)
 	else:
 		return true
+
+
+# Timeline modifications
+# Modifying layers or frames Arrays on the current project should generally only be done
+# through these methods.
+# These allow you to add/remove/move/swap frames/layers/cels. It updates the Animation Timeline
+# UI, and updates indices. These are designed to be reversible, meaning that to undo an add, you
+# use remove, and vise versa. To undo a move or swap, use move or swap with the paramaters swapped.
+
+
+func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be in ascending order
+	Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
+	for i in new_frames.size():
+		frames.insert(indices[i], new_frames[i])
+		Global.animation_timeline.project_frame_added(indices[i])
+	# Update the frames and frame buttons:
+	for f in frames.size():
+		Global.frame_ids.get_child(f).frame = f
+		Global.frame_ids.get_child(f).text = str(f + 1)
+	# Update the cel buttons:
+	for l in layers.size():
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in frames.size():
+			layer_cel_container.get_child(f).frame = f
+			layer_cel_container.get_child(f).button_setup()
+	_set_timeline_first_and_last_frames()
+
+
+func remove_frames(indices: Array) -> void:  # indices should be in ascending order
+	Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
+	for i in indices.size():
+		# With each removed index, future indices need to be lowered, so subtract by i
+		frames.remove(indices[i] - i)
+		Global.animation_timeline.project_frame_removed(indices[i] - i)
+	# Update the frames and frame buttons:
+	for f in frames.size():
+		Global.frame_ids.get_child(f).frame = f
+		Global.frame_ids.get_child(f).text = str(f + 1)
+	# Update the cel buttons:
+	for l in layers.size():
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in frames.size():
+			layer_cel_container.get_child(f).frame = f
+			layer_cel_container.get_child(f).button_setup()
+	_set_timeline_first_and_last_frames()
+
+
+func move_frame(from_index: int, to_index: int) -> void:
+	Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
+	var frame = frames[from_index]
+	frames.remove(from_index)
+	Global.animation_timeline.project_frame_removed(from_index)
+	frames.insert(to_index, frame)
+	Global.animation_timeline.project_frame_added(to_index)
+	# Update the frames and frame buttons:
+	for f in frames.size():
+		Global.frame_ids.get_child(f).frame = f
+		Global.frame_ids.get_child(f).text = str(f + 1)
+	# Update the cel buttons:
+	for l in layers.size():
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in frames.size():
+			layer_cel_container.get_child(f).frame = f
+			layer_cel_container.get_child(f).button_setup()
+	_set_timeline_first_and_last_frames()
+
+
+func swap_frame(a_index: int, b_index: int) -> void:
+	Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
+	var temp: Frame = frames[a_index]
+	frames[a_index] = frames[b_index]
+	frames[b_index] = temp
+	Global.animation_timeline.project_frame_removed(a_index)
+	Global.animation_timeline.project_frame_added(a_index)
+	Global.animation_timeline.project_frame_removed(b_index)
+	Global.animation_timeline.project_frame_added(b_index)
+	_set_timeline_first_and_last_frames()
+
+
+func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels is 2d Array of cels
+	Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
+	for i in indices.size():
+		layers.insert(indices[i], new_layers[i])
+		for f in frames.size():
+			frames[f].cels.insert(indices[i], cels[i][f])
+		new_layers[i].project = self
+		Global.animation_timeline.project_layer_added(indices[i])
+	# Update the layer indices and layer/cel buttons:
+	for l in layers.size():
+		layers[l].index = l
+		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in frames.size():
+			layer_cel_container.get_child(f).layer = l
+			layer_cel_container.get_child(f).button_setup()
+	toggle_layer_buttons()
+
+
+func remove_layers(indices: Array) -> void:
+	Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
+	for i in indices.size():
+		# With each removed index, future indices need to be lowered, so subtract by i
+		layers.remove(indices[i] - i)
+		for frame in frames:
+			frame.cels.remove(indices[i] - i)
+		Global.animation_timeline.project_layer_removed(indices[i] - i)
+	# Update the layer indices and layer/cel buttons:
+	for l in layers.size():
+		layers[l].index = l
+		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in frames.size():
+			layer_cel_container.get_child(f).layer = l
+			layer_cel_container.get_child(f).button_setup()
+	toggle_layer_buttons()
+
+
+# from_indices and to_indicies should be in ascending order
+func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> void:
+	Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
+	var removed_layers := []
+	var removed_cels := []  # 2D array of cels (an array for each layer removed)
+
+	for i in from_indices.size():
+		# With each removed index, future indices need to be lowered, so subtract by i
+		removed_layers.append(layers.pop_at(from_indices[i] - i))
+		removed_layers[i].parent = to_parents[i]  # parents must be set before UI created in next loop
+		removed_cels.append([])
+		for frame in frames:
+			removed_cels[i].append(frame.cels.pop_at(from_indices[i] - i))
+		Global.animation_timeline.project_layer_removed(from_indices[i] - i)
+	for i in to_indices.size():
+		layers.insert(to_indices[i], removed_layers[i])
+		for f in frames.size():
+			frames[f].cels.insert(to_indices[i], removed_cels[i][f])
+		Global.animation_timeline.project_layer_added(to_indices[i])
+	# Update the layer indices and layer/cel buttons:
+	for l in layers.size():
+		layers[l].index = l
+		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in frames.size():
+			layer_cel_container.get_child(f).layer = l
+			layer_cel_container.get_child(f).button_setup()
+	toggle_layer_buttons()
+
+
+# "a" and "b" should both contain "from", "to", and "to_parents" arrays.
+# (Using dictionaries because there seems to be a limit of 5 arguments for do/undo method calls)
+func swap_layers(a: Dictionary, b: Dictionary) -> void:
+	Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
+	var a_layers := []
+	var b_layers := []
+	var a_cels := []  # 2D array of cels (an array for each layer removed)
+	var b_cels := []  # 2D array of cels (an array for each layer removed)
+	for i in a.from.size():
+		a_layers.append(layers.pop_at(a.from[i] - i))
+		Global.animation_timeline.project_layer_removed(a.from[i] - i)
+		a_layers[i].parent = a.to_parents[i]  # All parents must be set early, before creating buttons
+		a_cels.append([])
+		for frame in frames:
+			a_cels[i].append(frame.cels.pop_at(a.from[i] - i))
+	for i in b.from.size():
+		var index = (b.from[i] - i) if a.from[0] > b.from[0] else (b.from[i] - i - a.from.size())
+		b_layers.append(layers.pop_at(index))
+		Global.animation_timeline.project_layer_removed(index)
+		b_layers[i].parent = b.to_parents[i]  # All parents must be set early, before creating buttons
+		b_cels.append([])
+		for frame in frames:
+			b_cels[i].append(frame.cels.pop_at(index))
+
+	for i in a_layers.size():
+		var index = a.to[i] if a.to[0] < b.to[0] else (a.to[i] - b.to.size())
+		layers.insert(index, a_layers[i])
+		for f in frames.size():
+			frames[f].cels.insert(index, a_cels[i][f])
+		Global.animation_timeline.project_layer_added(index)
+	for i in b_layers.size():
+		layers.insert(b.to[i], b_layers[i])
+		for f in frames.size():
+			frames[f].cels.insert(b.to[i], b_cels[i][f])
+		Global.animation_timeline.project_layer_added(b.to[i])
+
+	# Update the layer indices and layer/cel buttons:
+	for l in layers.size():
+		layers[l].index = l
+		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
+		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		for f in frames.size():
+			layer_cel_container.get_child(f).layer = l
+			layer_cel_container.get_child(f).button_setup()
+	toggle_layer_buttons()
+
+
+func move_cel(from_frame: int, to_frame: int, layer: int) -> void:
+	Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
+	var cel: BaseCel = frames[from_frame].cels[layer]
+	if from_frame < to_frame:
+		for f in range(from_frame, to_frame):  # Forward range
+			frames[f].cels[layer] = frames[f + 1].cels[layer]  # Move left
+	else:
+		for f in range(from_frame, to_frame, -1):  # Backward range
+			frames[f].cels[layer] = frames[f - 1].cels[layer]  # Move right
+	frames[to_frame].cels[layer] = cel
+	Global.animation_timeline.project_cel_removed(from_frame, layer)
+	Global.animation_timeline.project_cel_added(to_frame, layer)
+
+	# Update the cel buttons for this layer:
+	var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - layer)
+	for f in frames.size():
+		layer_cel_container.get_child(f).frame = f
+		layer_cel_container.get_child(f).button_setup()
+
+
+func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:
+	Global.canvas.selection.transform_content_confirm()
+	selected_cels.clear()
+	var temp: BaseCel = frames[a_frame].cels[a_layer]
+	frames[a_frame].cels[a_layer] = frames[b_frame].cels[b_layer]
+	frames[b_frame].cels[b_layer] = temp
+	Global.animation_timeline.project_cel_removed(a_frame, a_layer)
+	Global.animation_timeline.project_cel_added(a_frame, a_layer)
+	Global.animation_timeline.project_cel_removed(b_frame, b_layer)
+	Global.animation_timeline.project_cel_added(b_frame, b_layer)

@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/AnimationTag.gd"
 }, {
+"base": "Reference",
+"class": "BaseCel",
+"language": "GDScript",
+"path": "res://src/Classes/BaseCel.gd"
+}, {
+"base": "Reference",
+"class": "BaseLayer",
+"language": "GDScript",
+"path": "res://src/Classes/BaseLayer.gd"
+}, {
 "base": "VBoxContainer",
 "class": "BaseTool",
 "language": "GDScript",
@@ -30,11 +40,6 @@ _global_script_classes=[ {
 "path": "res://src/UI/Canvas/Canvas.gd"
 }, {
 "base": "Reference",
-"class": "Cel",
-"language": "GDScript",
-"path": "res://src/Classes/Cel.gd"
-}, {
-"base": "Reference",
 "class": "Drawer",
 "language": "GDScript",
 "path": "res://src/Classes/Drawers.gd"
@@ -49,6 +54,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/Nodes/GradientEdit.gd"
 }, {
+"base": "BaseCel",
+"class": "GroupCel",
+"language": "GDScript",
+"path": "res://src/Classes/GroupCel.gd"
+}, {
+"base": "BaseLayer",
+"class": "GroupLayer",
+"language": "GDScript",
+"path": "res://src/Classes/GroupLayer.gd"
+}, {
 "base": "Line2D",
 "class": "Guide",
 "language": "GDScript",
@@ -58,11 +73,6 @@ _global_script_classes=[ {
 "class": "ImageEffect",
 "language": "GDScript",
 "path": "res://src/Classes/ImageEffect.gd"
-}, {
-"base": "Reference",
-"class": "Layer",
-"language": "GDScript",
-"path": "res://src/Classes/Layer.gd"
 }, {
 "base": "Button",
 "class": "LayerButton",
@@ -99,6 +109,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/PatternsPopup.gd"
 }, {
+"base": "BaseCel",
+"class": "PixelCel",
+"language": "GDScript",
+"path": "res://src/Classes/PixelCel.gd"
+}, {
+"base": "BaseLayer",
+"class": "PixelLayer",
+"language": "GDScript",
+"path": "res://src/Classes/PixelLayer.gd"
+}, {
 "base": "Reference",
 "class": "Project",
 "language": "GDScript",
@@ -133,19 +153,26 @@ _global_script_classes=[ {
 "class": "Tiles",
 "language": "GDScript",
 "path": "res://src/Classes/Tiles.gd"
+}, {
+"base": "TextureProgress",
+"class": "ValueSlider",
+"language": "GDScript",
+"path": "res://src/UI/Nodes/ValueSlider.gd"
 } ]
 _global_script_class_icons={
 "AnimationTag": "",
+"BaseCel": "",
+"BaseLayer": "",
 "BaseTool": "",
 "Brushes": "",
 "Canvas": "",
-"Cel": "",
 "Drawer": "",
 "Frame": "",
 "GradientEditNode": "",
+"GroupCel": "",
+"GroupLayer": "",
 "Guide": "",
 "ImageEffect": "",
-"Layer": "",
 "LayerButton": "",
 "Palette": "",
 "PaletteColor": "",
@@ -153,13 +180,16 @@ _global_script_class_icons={
 "PalettePanel": "",
 "PaletteSwatch": "",
 "Patterns": "",
+"PixelCel": "",
+"PixelLayer": "",
 "Project": "",
 "SelectionMap": "",
 "SelectionTool": "",
 "ShaderImageEffect": "",
 "ShortcutProfile": "",
 "SymmetryGuide": "",
-"Tiles": ""
+"Tiles": "",
+"ValueSlider": ""
 }
 
 [application]
@@ -175,7 +205,7 @@ config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/custom_user_dir_name.X11="pixelorama"
-config/Version="v0.10.3-dev"
+config/Version="v0.11-dev"
 config/ExtensionsAPI_Version=2
 
 [audio]
@@ -315,9 +345,24 @@ copy={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":67,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+cut={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":88,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
 paste={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":86,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+paste_in_place={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":86,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+delete={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777224,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 left_shading_tool={
@@ -354,11 +399,6 @@ shift={
 ctrl={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
-}
-delete={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777224,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 pan={
@@ -481,11 +521,6 @@ zen_mode={
 open_docs={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777244,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
-}
-cut={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":88,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 mirror_view={

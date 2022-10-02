@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/roroto.png-5bb796ce1a0c5bb768b883a88b3da539.stex"
+path="res://.import/group_collapsed.png-9d08fac1c2f635c754860111d024aa0f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/splash_screen/artworks/roroto.png"
-dest_files=[ "res://.import/roroto.png-5bb796ce1a0c5bb768b883a88b3da539.stex" ]
+source_file="res://assets/graphics/layers/group_collapsed.png"
+dest_files=[ "res://.import/group_collapsed.png-9d08fac1c2f635c754860111d024aa0f.stex" ]
 
 [params]
 

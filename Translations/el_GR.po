@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-08-13 14:45\n"
+"PO-Revision-Date: 2022-09-21 15:33\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -134,6 +134,9 @@ msgstr "Αποκοπή"
 
 msgid "Paste"
 msgstr "Επικόλληση"
+
+msgid "Paste in Place"
+msgstr "Επιτόπια επικόλληση"
 
 msgid "Delete"
 msgstr "Διαγραφή"
@@ -607,11 +610,23 @@ msgstr "Μωβ"
 msgid "Theme"
 msgstr "Θέμα"
 
+msgid "Buttons"
+msgstr "Κουμπιά"
+
 msgid "Icon color from:"
 msgstr "Χρώμα εικονιδίων από:"
 
 msgid "Icon color:"
 msgstr "Χρώμα εικονιδίων:"
+
+msgid "Background"
+msgstr "Υπόβαθρο"
+
+msgid "Background color from:"
+msgstr "Χρώμα υποβάθρου από:"
+
+msgid "Background color:"
+msgstr "Χρώμα υποβάθρου:"
 
 msgid "Left tool color:"
 msgstr "Χρώμα αριστερού εργαλείου:"
@@ -687,6 +702,20 @@ msgstr "Διαβάθμιση"
 
 msgid "Gradient Map"
 msgstr "Χάρτης Διαβαθμίσεων"
+
+msgid "Divide into equal parts"
+msgstr "Χωρίστε σε ίσα τμήματα"
+
+msgid "Parts:"
+msgstr "Τμήματα:"
+
+msgid "Add point at the end"
+msgstr "Προσθήκη σημείου στο τέλος"
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
+msgstr "Αν αυτό είναι ενεργοποιημένο, το τελευταίο σημείο προστίθεται στο τέλος της διαβάθμισης.\n"
+"Απενεργοποιήστε το αν θέλετε να μετατρέψετε τη διαβάθμιση για συνεχή παρεμβολή, έτσι ώστε το τελευταίο χρώμα να ληφθεί υπόψη."
 
 msgid "Linear"
 msgstr "Γραμμική"
@@ -1271,7 +1300,7 @@ msgid "Follow Canvas Zoom Level"
 msgstr "Να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr "Το διάφανο υποβάθρο - σκακιέρα να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
+msgstr "Το διάφανο υπόβαθρο - σκακιέρα να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
 
 msgid "Animated selection borders"
 msgstr "Κίνηση περιγράμματος επιλογής"
@@ -1362,14 +1391,21 @@ msgstr "Χρώμα πινέλου από"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0: Χρώμα από το πινέλο, 100: επιλεγμένο χρώμα"
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
 msgstr "Περιοχή γεμίσματος:"
 
-msgid "Same color area"
-msgstr "Περιοχή ίδιου χρώματος"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr "Παρόμοια περιοχή"
 
-msgid "Same color pixels"
-msgstr "Πίξελς ίδιου χρώματος"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr "Παρόμοια χρώματα"
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr "Ολόκληρη επιλογή"
 
 msgid "Fill with:"
 msgstr "Γέμισμα με:"
@@ -1968,9 +2004,6 @@ msgstr "Δημιουργεί πολλά αρχεία, αλλά κάθε αρχε
 msgid "Close"
 msgstr "Κλείσιμο"
 
-msgid "Delete"
-msgstr "Διαγραφή"
-
 msgid "Discard All"
 msgstr "Απόρριψη όλων"
 
@@ -2001,10 +2034,10 @@ msgid "and"
 msgstr "και"
 
 msgid "Move the selected frame to the left."
-msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα αριστερά"
+msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα αριστερά."
 
 msgid "Move the selected frame to the right."
-msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα δεξιά"
+msgstr "Μετακίνηση του επιλεγμένου καρέ προς τα δεξιά."
 
 msgid "Frame duration"
 msgstr "Διάρκεια καρέ"

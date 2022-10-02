@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-08-13 06:25\n"
+"PO-Revision-Date: 2022-09-19 21:29\n"
 
 msgid "OK"
 msgstr "确定"
@@ -134,6 +134,9 @@ msgstr "剪切"
 
 msgid "Paste"
 msgstr "粘贴"
+
+msgid "Paste in Place"
+msgstr "原位粘贴"
 
 msgid "Delete"
 msgstr "删除"
@@ -607,11 +610,23 @@ msgstr "紫色"
 msgid "Theme"
 msgstr "主题"
 
+msgid "Buttons"
+msgstr ""
+
 msgid "Icon color from:"
 msgstr "图标颜色从："
 
 msgid "Icon color:"
 msgstr "图标颜色："
+
+msgid "Background"
+msgstr ""
+
+msgid "Background color from:"
+msgstr "背景颜色从："
+
+msgid "Background color:"
+msgstr "背景颜色："
 
 msgid "Left tool color:"
 msgstr "左侧工具颜色："
@@ -687,6 +702,20 @@ msgstr "渐变"
 
 msgid "Gradient Map"
 msgstr "渐变贴图"
+
+msgid "Divide into equal parts"
+msgstr "分成等份"
+
+msgid "Parts:"
+msgstr "部件："
+
+msgid "Add point at the end"
+msgstr "在结尾处添加点"
+
+msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
+"Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
+msgstr "如果启用此功能，则最后一个点将添加到渐变的末尾。\n"
+"如果您希望将渐变转换为具有恒定插值，请禁用此选项，以便将最后一种颜色考虑在内。"
 
 msgid "Linear"
 msgstr "线性"
@@ -791,7 +820,7 @@ msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "©版权所有 2019- Orama Interactive 和贡献者"
+msgstr "© 版权所有 2022 - Orama Interactive 和贡献者"
 
 msgid "Website"
 msgstr "网站"
@@ -1362,14 +1391,21 @@ msgstr "画笔颜色从"
 msgid "0: Color from the brush itself, 100: the currently selected color"
 msgstr "0：画笔本身的颜色，100：当前选择的颜色"
 
+#. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr "填充区域:"
+msgstr "填充区域："
 
-msgid "Same color area"
-msgstr "相同颜色区域"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar area"
+msgstr "相似区域"
 
-msgid "Same color pixels"
-msgstr "相同颜色像素"
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Similar colors"
+msgstr "相似颜色"
+
+#. Found in the bucket tool options, one of the fill area options.
+msgid "Whole selection"
+msgstr "全部选区"
 
 msgid "Fill with:"
 msgstr "填充使用："
@@ -1967,9 +2003,6 @@ msgstr "创建多个文件，但每个文件都存储在与其帧标签相对应
 
 msgid "Close"
 msgstr "关闭"
-
-msgid "Delete"
-msgstr "删除"
 
 msgid "Discard All"
 msgstr "放弃全部"
