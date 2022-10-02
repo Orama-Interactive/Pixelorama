@@ -16,13 +16,12 @@ var grid_window_origin := Vector2.ZERO
 var grid_size := Vector2.ZERO
 var swatch_size := DEFAULT_SWATCH_SIZE
 
-func _ready():
-	swatch_size = Global.config_cache.get_value(
-		"palettes", "swatch_size", DEFAULT_SWATCH_SIZE
-	)
+
+func _ready() -> void:
+	swatch_size = Global.config_cache.get_value("palettes", "swatch_size", DEFAULT_SWATCH_SIZE)
 
 
-func set_palette(new_palette: Palette ) -> void:
+func set_palette(new_palette: Palette) -> void:
 	# Only display valid palette objects
 	if not new_palette:
 		return
@@ -136,22 +135,6 @@ func reset_empty_swatches_color() -> void:
 			swatch.empty = true
 
 
-func _on_PaletteSwatch_pressed(mouse_button: int, index: int) -> void:
-	var palette_index = convert_grid_index_to_palette_index(index)
-	emit_signal("swatch_pressed", mouse_button, palette_index)
-
-
-func _on_PaletteSwatch_double_clicked(mouse_button: int, position: Vector2, index: int) -> void:
-	var palette_index = convert_grid_index_to_palette_index(index)
-	emit_signal("swatch_double_clicked", mouse_button, palette_index, position)
-
-
-func _on_PaletteSwatch_dropped(source_index: int, target_index: int) -> void:
-	var palette_source_index = convert_grid_index_to_palette_index(source_index)
-	var palette_target_index = convert_grid_index_to_palette_index(target_index)
-	emit_signal("swatch_dropped", palette_source_index, palette_target_index)
-
-
 # Grid index adds grid window origin
 func convert_grid_index_to_palette_index(index: int) -> int:
 	return (
@@ -175,7 +158,7 @@ func resize_grid(new_rect_size: Vector2) -> void:
 	draw_palette()
 
 
-func change_swatch_size(size_diff: Vector2):
+func change_swatch_size(size_diff: Vector2) -> void:
 	swatch_size += size_diff
 	if swatch_size.x < MIN_SWATCH_SIZE.x:
 		swatch_size = MIN_SWATCH_SIZE
@@ -188,5 +171,17 @@ func change_swatch_size(size_diff: Vector2):
 	Global.config_cache.set_value("palettes", "swatch_size", swatch_size)
 
 
-func _on_PaletteGrid_resized():
-	draw_palette()
+func _on_PaletteSwatch_pressed(mouse_button: int, index: int) -> void:
+	var palette_index = convert_grid_index_to_palette_index(index)
+	emit_signal("swatch_pressed", mouse_button, palette_index)
+
+
+func _on_PaletteSwatch_double_clicked(mouse_button: int, position: Vector2, index: int) -> void:
+	var palette_index = convert_grid_index_to_palette_index(index)
+	emit_signal("swatch_double_clicked", mouse_button, palette_index, position)
+
+
+func _on_PaletteSwatch_dropped(source_index: int, target_index: int) -> void:
+	var palette_source_index = convert_grid_index_to_palette_index(source_index)
+	var palette_target_index = convert_grid_index_to_palette_index(target_index)
+	emit_signal("swatch_dropped", palette_source_index, palette_target_index)
