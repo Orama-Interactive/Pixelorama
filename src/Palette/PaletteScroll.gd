@@ -7,6 +7,13 @@ var drag_start_position := Vector2.ZERO
 onready var h_slider := $"%HScrollBar"
 onready var v_slider := $"%VScrollBar"
 onready var palette_grid := $"%PaletteGrid"
+onready var scroll_container := $"%ScrollContainer"
+
+
+func _ready():
+	# Hide default scollbars
+	scroll_container.get_h_scrollbar().rect_scale = Vector2.ZERO
+	scroll_container.get_v_scrollbar().rect_scale = Vector2.ZERO
 
 
 func _input(event) -> void:
@@ -18,17 +25,18 @@ func _input(event) -> void:
 
 func set_sliders(palette: Palette, origin: Vector2) -> void:
 	h_slider.value = origin.x
-	v_slider.value = origin.y
 	h_slider.max_value = palette.width
-	if h_slider.max_value <= PaletteGrid.MAX_GRID_SIZE.x:
-		h_slider.visible = false
-	else:
-		h_slider.visible = true
+	h_slider.page = palette_grid.grid_size.x
+	h_slider.visible = false if h_slider.max_value <= palette_grid.grid_size.x else true
+
+	v_slider.value = origin.y
 	v_slider.max_value = palette.height
-	if v_slider.max_value <= PaletteGrid.MAX_GRID_SIZE.y:
-		v_slider.visible = false
-	else:
-		v_slider.visible = true
+	v_slider.page = palette_grid.grid_size.y
+	v_slider.visible = false if v_slider.max_value <= palette_grid.grid_size.y else true
+
+
+func reset_sliders():
+	set_sliders(palette_grid.displayed_palette, palette_grid.grid_window_origin)
 
 
 func scroll_grid() -> void:
@@ -58,3 +66,9 @@ func _on_PaletteGrid_gui_input(event) -> void:
 	if event is InputEventMouseMotion and drag_started:
 		h_slider.value = (drag_start_position.x - event.position.x) / PaletteSwatch.SWATCH_SIZE.x
 		v_slider.value = (drag_start_position.y - event.position.y) / PaletteSwatch.SWATCH_SIZE.y
+
+
+func _on_PaletteScroll_resized():
+	palette_grid.redraw_palette()
+	palette_grid.resize_grid()
+	reset_sliders()

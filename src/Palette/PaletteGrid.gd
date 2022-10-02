@@ -7,36 +7,42 @@ signal swatch_dropped(source_index, target_index)
 
 const PaletteSwatchScene := preload("res://src/Palette/PaletteSwatch.tscn")
 
-# Must be integer values
-const MAX_GRID_SIZE = Vector2(8, 8)
-
 var swatches := []  # PaletteSwatch
 
 var displayed_palette = null
 var grid_window_origin := Vector2.ZERO
-var grid_size := Vector2(8, 8)
+var grid_size := Vector2.ZERO
 
 
-func _ready():
-	init_swatches()
-
-
-func init_swatches() -> void:
-	columns = grid_size.x
-	for j in range(grid_size.y):
-		for i in range(grid_size.x):
-			var index: int = i + grid_size.x * j
+func setup_swatches() -> void:
+	# Colums cannot be 0
+	columns = 1.0 if grid_size.x == 0.0 else grid_size.x
+	if grid_size.x * grid_size.y > swatches.size():
+		for i in range(swatches.size(), grid_size.x * grid_size.y):
 			var swatch: PaletteSwatch = PaletteSwatchScene.instance()
-			swatch.index = index
-			swatch.color = PaletteSwatch.DEFAULT_COLOR
-			swatch.show_left_highlight = false
-			swatch.show_right_highlight = false
-			swatch.empty = true
-			swatch.connect("pressed", self, "_on_PaletteSwatch_pressed", [index])
-			swatch.connect("double_clicked", self, "_on_PaletteSwatch_double_clicked", [index])
+			swatch.index = i
+			clear_swatch(swatch)
+			swatch.connect("pressed", self, "_on_PaletteSwatch_pressed", [i])
+			swatch.connect("double_clicked", self, "_on_PaletteSwatch_double_clicked", [i])
 			swatch.connect("dropped", self, "_on_PaletteSwatch_dropped")
 			add_child(swatch)
 			swatches.push_back(swatch)
+	else:
+		var diff = swatches.size() - grid_size.x * grid_size.y
+		for _i in range(0, diff):
+			var swatch = swatches.pop_back()
+			remove_child(swatch)
+			swatch.queue_free()
+
+		for i in range(0, swatches.size()):
+			clear_swatch(swatches[i])
+
+
+func clear_swatch(swatch: PaletteSwatch) -> void:
+	swatch.color = PaletteSwatch.DEFAULT_COLOR
+	swatch.show_left_highlight = false
+	swatch.show_right_highlight = false
+	swatch.empty = true
 
 
 # Origin determines a position in palette which will be displayed on top left of grid
@@ -50,23 +56,8 @@ func display_palette(palette: Palette) -> void:
 	if not palette:
 		return
 
-	if swatches.size() == 0:
-		init_swatches()
-
-	if palette.width < MAX_GRID_SIZE.x or palette.height < MAX_GRID_SIZE.y:
-		grid_size = Vector2(
-			min(palette.width, MAX_GRID_SIZE.x), min(palette.height, MAX_GRID_SIZE.y)
-		)
-		clear_swatches()
-		init_swatches()
-	elif (
-		palette.width >= MAX_GRID_SIZE.x
-		and palette.height >= MAX_GRID_SIZE.y
-		and grid_size != MAX_GRID_SIZE
-	):
-		grid_size = MAX_GRID_SIZE
-		clear_swatches()
-		init_swatches()
+	resize_grid()
+	setup_swatches()
 
 	# Create empty palette buttons
 	for j in range(grid_size.y):
@@ -85,17 +76,13 @@ func display_palette(palette: Palette) -> void:
 				swatch.empty = true
 
 
-func scroll_palette(origin: Vector2) -> void:
-	grid_window_origin = origin
+func redraw_palette() -> void:
 	display_palette(displayed_palette)
 
 
-# Removes all swatches
-func clear_swatches() -> void:
-	swatches.clear()
-	for swatch in get_children():
-		remove_child(swatch)  # To remove the child immediately and not at the end of the frame
-		swatch.queue_free()
+func scroll_palette(origin: Vector2) -> void:
+	grid_window_origin = origin
+	redraw_palette()
 
 
 func find_and_select_color(mouse_button: int, target_color: Color) -> void:
@@ -177,3 +164,17 @@ func convert_palette_index_to_grid_index(palette_index: int) -> int:
 	var x: int = palette_index % displayed_palette.width
 	var y: int = palette_index / displayed_palette.width
 	return int((x - grid_window_origin.x) + (y - grid_window_origin.y) * grid_size.x)
+
+
+func resize_grid() -> void:
+	if displayed_palette:
+		var grid_x: int = rect_size.x / (PaletteSwatch.SWATCH_SIZE.x + get("custom_constants/hseparation"))
+		var grid_y: int = rect_size.y / (PaletteSwatch.SWATCH_SIZE.y + get("custom_constants/vseparation"))
+
+		grid_size.x = min(grid_x, displayed_palette.width)
+		grid_size.y = min(grid_y, displayed_palette.height)
+
+
+func _on_PaletteGrid_resized():
+	resize_grid()
+	redraw_palette()

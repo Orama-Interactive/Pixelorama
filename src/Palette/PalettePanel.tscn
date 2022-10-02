@@ -9,27 +9,24 @@
 [ext_resource path="res://src/Palette/PalettePanel.gd" type="Script" id=8]
 
 [node name="PalettePanel" type="PanelContainer"]
-margin_right = 318.0
-margin_bottom = 118.0
-rect_min_size = Vector2( 318, 0 )
 size_flags_horizontal = 3
-size_flags_vertical = 0
+size_flags_vertical = 3
 script = ExtResource( 8 )
 
 [node name="PaletteVBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 311.0
-margin_bottom = 111.0
+margin_right = 159.0
+margin_bottom = 93.0
 size_flags_horizontal = 3
 
 [node name="PaletteButtons" type="HBoxContainer" parent="PaletteVBoxContainer"]
-margin_right = 304.0
+margin_right = 152.0
 margin_bottom = 22.0
 
 [node name="PaletteSelect" type="OptionButton" parent="PaletteVBoxContainer/PaletteButtons"]
 unique_name_in_owner = true
-margin_right = 252.0
+margin_right = 100.0
 margin_bottom = 22.0
 grow_horizontal = 0
 rect_min_size = Vector2( 100, 0 )
@@ -39,8 +36,8 @@ size_flags_horizontal = 3
 clip_text = true
 
 [node name="EditPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
-margin_left = 256.0
-margin_right = 278.0
+margin_left = 104.0
+margin_right = 126.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Edit currently selected palette"
@@ -61,13 +58,10 @@ margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AddPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
-margin_left = 282.0
-margin_right = 304.0
+margin_left = 130.0
+margin_right = 152.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Create a new palette"
@@ -91,19 +85,19 @@ texture = ExtResource( 3 )
 
 [node name="HSeparator" type="HSeparator" parent="PaletteVBoxContainer"]
 margin_top = 26.0
-margin_right = 304.0
+margin_right = 152.0
 margin_bottom = 30.0
 
 [node name="SwatchesContainer" type="HBoxContainer" parent="PaletteVBoxContainer"]
 margin_top = 34.0
-margin_right = 304.0
-margin_bottom = 104.0
+margin_right = 152.0
+margin_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ColorButtons" type="VBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer"]
 margin_right = 24.0
-margin_bottom = 70.0
+margin_bottom = 52.0
 
 [node name="AddColor" type="Button" parent="PaletteVBoxContainer/SwatchesContainer/ColorButtons"]
 unique_name_in_owner = true
@@ -127,24 +121,38 @@ text = "-"
 [node name="PaletteScroll" type="VBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer"]
 unique_name_in_owner = true
 margin_left = 28.0
-margin_right = 304.0
-margin_bottom = 70.0
+margin_right = 152.0
+margin_bottom = 52.0
 size_flags_horizontal = 3
 script = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll"]
-margin_right = 276.0
-margin_bottom = 15.0
+margin_right = 124.0
+margin_bottom = 52.0
+size_flags_vertical = 3
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer"]
-margin_left = 136.0
-margin_right = 136.0
-margin_bottom = 15.0
+margin_right = 120.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+alignment = 1
 
-[node name="PaletteGrid" type="GridContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-columns = 8
+margin_right = 120.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PaletteGrid" type="GridContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+margin_right = 120.0
+margin_bottom = 52.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+custom_constants/vseparation = 3
+custom_constants/hseparation = 3
 script = ExtResource( 5 )
 
 [node name="HScrollBar" type="HScrollBar" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer"]
@@ -159,16 +167,16 @@ page = 8.0
 custom_step = 1.0
 
 [node name="MarginContainer" type="MarginContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer"]
-margin_left = 140.0
-margin_right = 140.0
-margin_bottom = 15.0
+margin_left = 124.0
+margin_right = 124.0
+margin_bottom = 52.0
 custom_constants/margin_bottom = 15
 
 [node name="VScrollBar" type="VScrollBar" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 visible = false
 margin_right = 12.0
-margin_bottom = 12.0
+margin_bottom = 37.0
 step = 1.0
 page = 8.0
 custom_step = 1.0
@@ -203,10 +211,10 @@ margin_bottom = 111.0
 [connection signal="gui_input" from="PaletteVBoxContainer/SwatchesContainer/ColorButtons/AddColor" to="." method="_on_AddColor_gui_input"]
 [connection signal="gui_input" from="PaletteVBoxContainer/SwatchesContainer/ColorButtons/DeleteColor" to="." method="_on_DeleteColor_gui_input"]
 [connection signal="resized" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_PaletteScroll_resized"]
-[connection signal="gui_input" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/PaletteGrid" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_PaletteGrid_gui_input"]
-[connection signal="swatch_double_clicked" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/PaletteGrid" to="." method="_on_PaletteGrid_swatch_double_clicked"]
-[connection signal="swatch_dropped" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/PaletteGrid" to="." method="_on_PaletteGrid_swatch_dropped"]
-[connection signal="swatch_pressed" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/PaletteGrid" to="." method="_on_PaletteGrid_swatch_pressed"]
+[connection signal="gui_input" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/ScrollContainer/PaletteGrid" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_PaletteGrid_gui_input"]
+[connection signal="swatch_double_clicked" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/ScrollContainer/PaletteGrid" to="." method="_on_PaletteGrid_swatch_double_clicked"]
+[connection signal="swatch_dropped" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/ScrollContainer/PaletteGrid" to="." method="_on_PaletteGrid_swatch_dropped"]
+[connection signal="swatch_pressed" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/ScrollContainer/PaletteGrid" to="." method="_on_PaletteGrid_swatch_pressed"]
 [connection signal="value_changed" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/HScrollBar" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_HSlider_value_changed"]
 [connection signal="value_changed" from="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/MarginContainer/VScrollBar" to="PaletteVBoxContainer/SwatchesContainer/PaletteScroll" method="_on_VSlider_value_changed"]
 [connection signal="deleted" from="EditPaletteDialog" to="." method="_on_EditPaletteDialog_deleted"]
