@@ -72,3 +72,13 @@ func _on_PaletteScroll_resized():
 	palette_grid.redraw_palette()
 	palette_grid.resize_grid()
 	reset_sliders()
+
+
+func _on_PaletteScroll_gui_input(event):
+	if event is InputEventMouseButton and event.pressed:
+		var scroll_vector = Vector2.ZERO
+		if event.button_index == BUTTON_WHEEL_UP:
+			scroll_vector = Vector2(-1, 0) if event.shift else Vector2(0, -1)
+		if event.button_index == BUTTON_WHEEL_DOWN:
+			scroll_vector = Vector2(1, 0) if event.shift else Vector2(0, 1)
+		set_sliders(palette_grid.displayed_palette, palette_grid.grid_window_origin + scroll_vector)
