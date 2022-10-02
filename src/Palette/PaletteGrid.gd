@@ -6,12 +6,15 @@ signal swatch_double_clicked(mouse_button, index, position)
 signal swatch_dropped(source_index, target_index)
 
 const PaletteSwatchScene := preload("res://src/Palette/PaletteSwatch.tscn")
+const DEFAULT_SWATCH_SIZE = 26
+const MIN_SWATCH_SIZE = 8
+const MAX_SWATCH_SIZE = 64
 
 var swatches := []  # PaletteSwatch
-
 var displayed_palette = null
 var grid_window_origin := Vector2.ZERO
 var grid_size := Vector2.ZERO
+var swatch_size := Vector2(DEFAULT_SWATCH_SIZE, DEFAULT_SWATCH_SIZE)
 
 
 func setup_swatches() -> void:
@@ -43,6 +46,7 @@ func clear_swatch(swatch: PaletteSwatch) -> void:
 	swatch.show_left_highlight = false
 	swatch.show_right_highlight = false
 	swatch.empty = true
+	swatch.set_swatch_size(swatch_size)
 
 
 # Origin determines a position in palette which will be displayed on top left of grid
@@ -168,11 +172,23 @@ func convert_palette_index_to_grid_index(palette_index: int) -> int:
 
 func resize_grid() -> void:
 	if displayed_palette:
-		var grid_x: int = rect_size.x / (PaletteSwatch.SWATCH_SIZE.x + get("custom_constants/hseparation"))
-		var grid_y: int = rect_size.y / (PaletteSwatch.SWATCH_SIZE.y + get("custom_constants/vseparation"))
+		var grid_x: int = rect_size.x / (swatch_size.x + get("custom_constants/hseparation"))
+		var grid_y: int = rect_size.y / (swatch_size.y + get("custom_constants/vseparation"))
 
 		grid_size.x = min(grid_x, displayed_palette.width)
 		grid_size.y = min(grid_y, displayed_palette.height)
+
+
+func change_swatch_size(size_diff: Vector2):
+	swatch_size += size_diff
+	if swatch_size.x < MIN_SWATCH_SIZE:
+		swatch_size = Vector2(MIN_SWATCH_SIZE, MIN_SWATCH_SIZE)
+	elif swatch_size.x > MAX_SWATCH_SIZE:
+		swatch_size = Vector2(MAX_SWATCH_SIZE, MAX_SWATCH_SIZE)
+
+	for swatch in swatches:
+		swatch.set_swatch_size(swatch_size)
+	redraw_palette()
 
 
 func _on_PaletteGrid_resized():

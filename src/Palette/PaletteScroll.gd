@@ -60,12 +60,12 @@ func _on_PaletteGrid_gui_input(event) -> void:
 			# Keeps position where the dragging started
 			drag_start_position = (
 				event.position
-				+ Vector2(h_slider.value, v_slider.value) * PaletteSwatch.SWATCH_SIZE
+				+ Vector2(h_slider.value, v_slider.value) * palette_grid.swatch_size
 			)
 
 	if event is InputEventMouseMotion and drag_started:
-		h_slider.value = (drag_start_position.x - event.position.x) / PaletteSwatch.SWATCH_SIZE.x
-		v_slider.value = (drag_start_position.y - event.position.y) / PaletteSwatch.SWATCH_SIZE.y
+		h_slider.value = (drag_start_position.x - event.position.x) / palette_grid.swatch_size.x
+		v_slider.value = (drag_start_position.y - event.position.y) / palette_grid.swatch_size.y
 
 
 func _on_PaletteScroll_resized():
@@ -78,7 +78,13 @@ func _on_PaletteScroll_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		var scroll_vector = Vector2.ZERO
 		if event.button_index == BUTTON_WHEEL_UP:
-			scroll_vector = Vector2(-1, 0) if event.shift else Vector2(0, -1)
+			if event.control:
+				palette_grid.change_swatch_size(Vector2.ONE)
+			else:
+				scroll_vector = Vector2.LEFT if event.shift else Vector2.UP
 		if event.button_index == BUTTON_WHEEL_DOWN:
-			scroll_vector = Vector2(1, 0) if event.shift else Vector2(0, 1)
+			if event.control:
+				palette_grid.change_swatch_size(-Vector2.ONE)
+			else:
+				scroll_vector = Vector2.RIGHT if event.shift else Vector2.DOWN
 		set_sliders(palette_grid.displayed_palette, palette_grid.grid_window_origin + scroll_vector)
