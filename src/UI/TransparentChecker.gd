@@ -32,15 +32,14 @@ func fit_rect(rect: Rect2) -> void:
 	rect_size = rect.size
 
 
-func transparency(value: float) -> void:
-	# first make viewport transparent then background and then viewport
+func update_transparency(value: float) -> void:
+	# Change the transparency status of the parent viewport and the root viewport
 	if value == 1.0:
 		get_parent().transparent_bg = false
-		get_tree().get_root().set_transparent_background(false)
+		get_tree().get_root().transparent_bg = false
 	else:
 		get_parent().transparent_bg = true
-		get_tree().get_root().set_transparent_background(true)
+		get_tree().get_root().transparent_bg = true
 
-	# this controls opacity 0 for transparent, 1 or a greater value than 1 is opaque
-	# i have set a minimum amount for the fade (We would'nt want the canvas to dissapear now would we?)
+	# Set a minimum amount for the fade so the canvas won't disappear
 	material.set("shader_param/alpha", clamp(value, 0.1, 1))

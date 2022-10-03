@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/WindowOpacityDialog.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=2]
 
 [node name="WindowOpacityDialog" type="AcceptDialog"]
 margin_right = 204.0
@@ -21,24 +22,9 @@ margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -36.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ValueSlider" parent="VBoxContainer" instance=ExtResource( 2 )]
 margin_right = 327.0
 margin_bottom = 24.0
-
-[node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
-margin_top = 4.0
-margin_right = 249.0
-margin_bottom = 20.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-value = 100.0
-
-[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer"]
-margin_left = 253.0
-margin_right = 327.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
 value = 100.0
 
 [node name="FullscreenWarning" type="Label" parent="VBoxContainer"]
@@ -50,5 +36,4 @@ text = "Window opacity does not work on fullscreen mode."
 
 [connection signal="about_to_show" from="." to="." method="_on_WindowOpacityDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_WindowOpacityDialog_popup_hide"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/HSlider" to="." method="_on_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpinBox" to="." method="_on_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/ValueSlider" to="." method="set_window_opacity"]

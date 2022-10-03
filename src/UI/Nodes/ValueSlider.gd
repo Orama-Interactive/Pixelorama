@@ -1,4 +1,4 @@
-# Made by MrTriPie
+# Initial version made by MrTriPie, has been modified
 tool
 class_name ValueSlider
 extends TextureProgress
