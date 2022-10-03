@@ -4,8 +4,8 @@ extends AcceptDialog
 var preferences := [
 	Preference.new("open_last_project", "Startup/StartupContainer/OpenLastProject", "pressed"),
 	Preference.new("quit_confirmation", "Startup/StartupContainer/QuitConfirmation", "pressed"),
-	Preference.new("shrink", "Interface/ShrinkContainer/ShrinkHSlider", "value"),
-	Preference.new("dim_on_popup", "Interface/DimPopup/CheckBox", "pressed"),
+	Preference.new("shrink", "%ShrinkSlider", "value"),
+	Preference.new("dim_on_popup", "Interface/InterfaceOptions/DimCheckBox", "pressed"),
 	Preference.new("icon_color_from", "Interface/ButtonOptions/IconColorOptionButton", "selected"),
 	Preference.new("custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color"),
 	Preference.new("left_tool_color", "Interface/ButtonOptions/LeftToolColorButton", "color"),
@@ -89,8 +89,7 @@ onready var list: ItemList = $HSplitContainer/List
 onready var right_side: VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
 onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
 onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
-onready var shrink_label: Label = right_side.get_node("Interface/ShrinkContainer/ShrinkLabel")
-onready var shrink_h_slider: HSlider = $"%ShrinkHSlider"
+onready var shrink_slider: ValueSlider = $"%ShrinkSlider"
 onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
 onready var shortcuts: Control = right_side.get_node("Shortcuts/ShortcutEdit")
 onready var extensions: BoxContainer = right_side.get_node("Extensions")
@@ -112,7 +111,7 @@ class Preference:
 func _ready() -> void:
 	# Replace OK since preference changes are being applied immediately, not after OK confirmation
 	get_ok().text = "Close"
-	shrink_h_slider.value = Global.shrink  # In case shrink is not equal to 1
+	shrink_slider.value = Global.shrink  # In case shrink is not equal to 1
 
 	for child in shortcuts.get_children():
 		if not child is AcceptDialog:
@@ -130,15 +129,21 @@ func _ready() -> void:
 
 	for pref in preferences:
 		var node: Node = right_side.get_node(pref.node_path)
-		var node_position := node.get_index()
 
 		var restore_default_button: BaseButton = restore_default_button_tcsn.instance()
 		restore_default_button.setting_name = pref.prop_name
 		restore_default_button.value_type = pref.value_type
 		restore_default_button.default_value = pref.default_value
 		restore_default_button.node = node
-		node.get_parent().add_child(restore_default_button)
-		node.get_parent().move_child(restore_default_button, node_position)
+		if pref.node_path == "%ShrinkSlider":
+			# Add the default button to the shrink slider's grandparent
+			var node_position := node.get_parent().get_index()
+			node.get_parent().get_parent().add_child(restore_default_button)
+			node.get_parent().get_parent().move_child(restore_default_button, node_position)
+		else:
+			var node_position := node.get_index()
+			node.get_parent().add_child(restore_default_button)
+			node.get_parent().move_child(restore_default_button, node_position)
 
 		match pref.value_type:
 			"pressed":
@@ -336,10 +341,6 @@ func _on_List_item_selected(index: int) -> void:
 	selected_item = index
 	for child in right_side.get_children():
 		child.visible = child.name == content_list[index]
-
-
-func _on_ShrinkHSlider_value_changed(value: float) -> void:
-	shrink_label.text = str(value)
 
 
 func _on_ShrinkApplyButton_pressed() -> void:

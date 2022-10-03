@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Preferences/PreferencesDialog.gd" type="Script" id=1]
 [ext_resource path="res://src/Preferences/HandleExtensions.gd" type="Script" id=2]
 [ext_resource path="res://addons/keychain/ShortcutEdit.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Preferences/HandleLanguages.gd" type="Script" id=4]
 [ext_resource path="res://src/Preferences/HandleThemes.gd" type="Script" id=5]
+[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -54,11 +55,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Startup" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
-margin_right = 348.0
+margin_right = 498.0
 margin_bottom = 70.0
 
 [node name="StartupHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup"]
-margin_right = 348.0
+margin_right = 498.0
 margin_bottom = 14.0
 custom_constants/separation = 0
 
@@ -70,26 +71,26 @@ text = "Startup"
 
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupHeader"]
 margin_left = 45.0
-margin_right = 348.0
+margin_right = 498.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="StartupContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup"]
 margin_top = 18.0
-margin_right = 348.0
+margin_right = 498.0
 margin_bottom = 70.0
 columns = 3
 
 [node name="OpenLastProjectLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
 margin_top = 5.0
-margin_right = 180.0
+margin_right = 189.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "Open last project on startup"
 
 [node name="OpenLastProject" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
-margin_left = 184.0
-margin_right = 231.0
+margin_left = 193.0
+margin_right = 381.0
 margin_bottom = 24.0
 hint_tooltip = "Opens last opened project on startup"
 mouse_default_cursor_shape = 2
@@ -97,15 +98,15 @@ size_flags_horizontal = 3
 text = "On"
 
 [node name="QuitConfirmationLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
-margin_left = 235.0
+margin_left = 385.0
 margin_top = 5.0
-margin_right = 348.0
+margin_right = 498.0
 margin_bottom = 19.0
 text = "Quit confirmation"
 
 [node name="QuitConfirmation" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Startup/StartupContainer"]
 margin_top = 28.0
-margin_right = 180.0
+margin_right = 189.0
 margin_bottom = 52.0
 mouse_default_cursor_shape = 2
 text = "On"
@@ -168,7 +169,7 @@ text = "System Language"
 visible = false
 margin_top = 74.0
 margin_right = 498.0
-margin_bottom = 280.0
+margin_bottom = 284.0
 
 [node name="InterfaceHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
 margin_right = 498.0
@@ -187,70 +188,61 @@ margin_right = 498.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
-[node name="ShrinkContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+[node name="InterfaceOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_right = 40.0
+margin_bottom = 40.0
+columns = 3
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/InterfaceOptions"]
+margin_top = 23.0
+margin_right = 88.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+text = "Display scale:"
+
+[node name="ShrinkContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/InterfaceOptions"]
 margin_top = 18.0
 margin_right = 498.0
-margin_bottom = 38.0
+margin_bottom = 42.0
 
-[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer"]
-margin_top = 3.0
-margin_right = 84.0
-margin_bottom = 17.0
-text = "Display Scale"
-
-[node name="ShrinkLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer"]
-margin_left = 88.0
-margin_top = 3.0
-margin_right = 138.0
-margin_bottom = 17.0
-rect_min_size = Vector2( 50, 0 )
-text = "1"
-align = 2
-
-[node name="ShrinkHSlider" type="HSlider" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer"]
+[node name="ShrinkSlider" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/InterfaceOptions/ShrinkContainer" instance=ExtResource( 6 )]
 unique_name_in_owner = true
-margin_left = 142.0
-margin_right = 446.0
-margin_bottom = 16.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
+margin_left = 92.0
+margin_right = 293.0
+margin_bottom = 24.0
 min_value = 0.5
 max_value = 4.0
 step = 0.25
 value = 1.0
-tick_count = 8
-ticks_on_borders = true
 
-[node name="ShrinkApplyButton" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer"]
-margin_left = 450.0
+[node name="ShrinkApplyButton" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/InterfaceOptions/ShrinkContainer"]
+margin_left = 297.0
 margin_right = 498.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 text = "Apply"
 
-[node name="DimPopup" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 42.0
-margin_right = 498.0
-margin_bottom = 66.0
-
-[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/DimPopup"]
-margin_top = 5.0
-margin_right = 193.0
-margin_bottom = 19.0
+[node name="DimLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/InterfaceOptions"]
+margin_top = 51.0
+margin_right = 247.0
+margin_bottom = 65.0
+size_flags_horizontal = 3
 text = "Dim interface on dialog popup"
 
-[node name="CheckBox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/DimPopup"]
-margin_left = 197.0
-margin_right = 244.0
-margin_bottom = 24.0
+[node name="DimCheckBox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/InterfaceOptions"]
+margin_left = 251.0
+margin_top = 46.0
+margin_right = 498.0
+margin_bottom = 70.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 pressed = true
 text = "On"
 
 [node name="ThemesHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 70.0
+margin_top = 74.0
 margin_right = 498.0
-margin_bottom = 84.0
+margin_bottom = 88.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ThemesHeader"]
@@ -266,32 +258,35 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="Themes" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 88.0
+margin_top = 92.0
 margin_right = 498.0
-margin_bottom = 92.0
+margin_bottom = 96.0
 script = ExtResource( 5 )
 
 [node name="ThemeButtons" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/Themes"]
+margin_right = 247.0
 margin_bottom = 4.0
 size_flags_horizontal = 3
 
 [node name="ThemeColorsSpacer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/Themes"]
-margin_left = 4.0
-margin_right = 4.0
+margin_left = 251.0
+margin_right = 498.0
 margin_bottom = 4.0
 size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/Themes/ThemeColorsSpacer"]
+margin_right = 247.0
 
 [node name="ThemeColors" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/Themes/ThemeColorsSpacer"]
 margin_top = 4.0
+margin_right = 247.0
 margin_bottom = 4.0
 custom_constants/separation = 12
 
 [node name="ButtonHeader" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 96.0
+margin_top = 100.0
 margin_right = 498.0
-margin_bottom = 110.0
+margin_bottom = 114.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonHeader"]
@@ -307,9 +302,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="ButtonOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_top = 114.0
+margin_top = 118.0
 margin_right = 498.0
-margin_bottom = 206.0
+margin_bottom = 210.0
 columns = 3
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
@@ -355,7 +350,7 @@ text = "Icon color:"
 [node name="IconColorButton" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
 margin_left = 396.0
 margin_top = 24.0
-margin_right = 460.0
+margin_right = 498.0
 margin_bottom = 44.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
@@ -370,7 +365,7 @@ text = "Left tool color:"
 [node name="LeftToolColorButton" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
 margin_left = 198.0
 margin_top = 48.0
-margin_right = 262.0
+margin_right = 392.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
@@ -385,7 +380,7 @@ text = "Right tool color:"
 
 [node name="RightToolColorButton" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ButtonOptions"]
 margin_top = 72.0
-margin_right = 64.0
+margin_right = 194.0
 margin_bottom = 92.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
@@ -1530,8 +1525,7 @@ show_hidden_files = true
 [connection signal="popup_hide" from="." to="." method="_on_PreferencesDialog_popup_hide"]
 [connection signal="item_selected" from="HSplitContainer/List" to="." method="_on_List_item_selected"]
 [connection signal="pressed" from="HSplitContainer/ScrollContainer/VBoxContainer/Language/System Language" to="HSplitContainer/ScrollContainer/VBoxContainer/Language" method="_on_Language_pressed" binds= [ 1 ]]
-[connection signal="value_changed" from="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer/ShrinkHSlider" to="." method="_on_ShrinkHSlider_value_changed"]
-[connection signal="pressed" from="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer/ShrinkApplyButton" to="." method="_on_ShrinkApplyButton_pressed"]
+[connection signal="pressed" from="HSplitContainer/ScrollContainer/VBoxContainer/Interface/InterfaceOptions/ShrinkContainer/ShrinkApplyButton" to="." method="_on_ShrinkApplyButton_pressed"]
 [connection signal="item_selected" from="HSplitContainer/ScrollContainer/VBoxContainer/Extensions/InstalledExtensions" to="HSplitContainer/ScrollContainer/VBoxContainer/Extensions" method="_on_InstalledExtensions_item_selected"]
 [connection signal="nothing_selected" from="HSplitContainer/ScrollContainer/VBoxContainer/Extensions/InstalledExtensions" to="HSplitContainer/ScrollContainer/VBoxContainer/Extensions" method="_on_InstalledExtensions_nothing_selected"]
 [connection signal="pressed" from="HSplitContainer/ScrollContainer/VBoxContainer/Extensions/HBoxContainer/AddExtensionButton" to="HSplitContainer/ScrollContainer/VBoxContainer/Extensions" method="_on_AddExtensionButton_pressed"]
