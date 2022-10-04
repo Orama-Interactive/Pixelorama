@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-09-28 19:10\n"
+"PO-Revision-Date: 2022-10-04 21:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1408,9 +1408,11 @@ msgstr ""
 msgid "Fill with:"
 msgstr "Udfyld med:"
 
-msgid "Selected Color"
-msgstr "Valgt Farve"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr ""
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Mønster"
 
