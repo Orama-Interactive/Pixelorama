@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-09-29 06:01\n"
+"PO-Revision-Date: 2022-10-04 21:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1410,9 +1410,11 @@ msgstr "Selecția completă"
 msgid "Fill with:"
 msgstr "Umplere cu:"
 
-msgid "Selected Color"
-msgstr "Culoarea selectată"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr ""
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Model"
 
