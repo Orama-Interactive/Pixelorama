@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-09-29 15:31\n"
+"PO-Revision-Date: 2022-10-04 21:50\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1410,9 +1410,11 @@ msgstr "Ολόκληρη επιλογή"
 msgid "Fill with:"
 msgstr "Γέμισμα με:"
 
-msgid "Selected Color"
-msgstr "Επιλεγμένο χρώμα"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr ""
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Μοτίβο"
 
