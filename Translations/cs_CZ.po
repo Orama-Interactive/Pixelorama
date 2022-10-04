@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2022-09-28 19:11\n"
+"PO-Revision-Date: 2022-10-04 14:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1916,7 +1916,7 @@ msgid "Pan"
 msgstr "Posun plátna"
 
 msgid "Color Picker"
-msgstr "Kapátko"
+msgstr "Výběr barvy"
 
 msgid "Pencil"
 msgstr "Tužka"
@@ -2092,29 +2092,29 @@ msgid "Position:"
 msgstr "Pozice:"
 
 msgid "Tools"
-msgstr ""
+msgstr "Nástroje"
 
 msgid "Main Canvas"
-msgstr ""
+msgstr "Hlavní plátno"
 
 msgid "Second Canvas"
-msgstr ""
+msgstr "Druhé plátno"
 
 msgid "Animation Timeline"
 msgstr ""
 
 msgid "Canvas Preview"
-msgstr ""
+msgstr "Náhled plátna"
 
 msgid "Color Pickers"
-msgstr ""
+msgstr "Výběry barvy"
 
 msgid "Global Tool Options"
-msgstr ""
+msgstr "Globální možnosti nástrojů"
 
 msgid "Left Tool Options"
-msgstr ""
+msgstr "Možnosti levého nástroje"
 
 msgid "Right Tool Options"
-msgstr ""
+msgstr "Možnosti pravého nástroje"
 
