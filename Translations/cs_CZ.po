@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2022-10-04 14:28\n"
+"PO-Revision-Date: 2022-10-04 21:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1402,9 +1402,11 @@ msgstr ""
 msgid "Fill with:"
 msgstr "Vyplnit pomocí:"
 
-msgid "Selected Color"
-msgstr "Vybraná barva"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr ""
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Šablona"
 
