@@ -75,4 +75,5 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
 [connection signal="gui_input" from="." to="." method="_on_PaletteSlot_gui_input"]

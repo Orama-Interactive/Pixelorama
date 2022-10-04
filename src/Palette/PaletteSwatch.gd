@@ -5,7 +5,6 @@ signal pressed(mouse_button)
 signal double_clicked(mouse_button, position)
 signal dropped(source_index, new_index)
 
-const SWATCH_SIZE := Vector2(26, 26)  # Required by grid sliders
 const DEFAULT_COLOR := Color(0.0, 0.0, 0.0, 0.0)
 
 var index := -1
@@ -14,27 +13,27 @@ var show_right_highlight := false
 var empty := true setget set_empty
 
 
-func _ready() -> void:
-	rect_min_size = SWATCH_SIZE
-	rect_size = SWATCH_SIZE
+func set_swatch_size(size: Vector2) -> void:
+	rect_min_size = size
+	rect_size = size
 
 
 func _draw() -> void:
 	if not empty:
 		# Black border around swatches with a color
-		draw_rect(Rect2(Vector2.ZERO, SWATCH_SIZE), Color.black, false, 1)
+		draw_rect(Rect2(Vector2.ZERO, rect_size), Color.black, false, 1)
 
 	if show_left_highlight:
 		# Display outer border highlight
-		draw_rect(Rect2(Vector2.ZERO, SWATCH_SIZE), Color.white, false, 1)
-		draw_rect(Rect2(Vector2.ONE, SWATCH_SIZE - Vector2(2, 2)), Color.black, false, 1)
+		draw_rect(Rect2(Vector2.ZERO, rect_size), Color.white, false, 1)
+		draw_rect(Rect2(Vector2.ONE, rect_size - Vector2(2, 2)), Color.black, false, 1)
 
 	if show_right_highlight:
 		# Display inner border highlight
-		var margin := SWATCH_SIZE / 4
-		draw_rect(Rect2(margin, SWATCH_SIZE - margin * 2), Color.black, false, 1)
+		var margin := rect_size / 4
+		draw_rect(Rect2(margin, rect_size - margin * 2), Color.black, false, 1)
 		draw_rect(
-			Rect2(margin - Vector2.ONE, SWATCH_SIZE - margin * 2 + Vector2(2, 2)),
+			Rect2(margin - Vector2.ONE, rect_size - margin * 2 + Vector2(2, 2)),
 			Color.white,
 			false,
 			1
