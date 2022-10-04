@@ -11,14 +11,11 @@ margin_top = 26.0
 margin_right = 116.0
 margin_bottom = 40.0
 text = "Position:"
-align = 1
 
 [node name="XContainer" type="HBoxContainer" parent="." index="3"]
-margin_left = 10.0
 margin_top = 44.0
-margin_right = 105.0
+margin_right = 116.0
 margin_bottom = 68.0
-size_flags_horizontal = 4
 
 [node name="Label" type="Label" parent="XContainer" index="0"]
 margin_top = 5.0
@@ -29,19 +26,18 @@ text = "X:"
 
 [node name="XSpinBox" type="SpinBox" parent="XContainer" index="1"]
 margin_left = 21.0
-margin_right = 95.0
+margin_right = 116.0
 margin_bottom = 24.0
 hint_tooltip = "X coordinate of the top left corner"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 allow_greater = true
 allow_lesser = true
 
 [node name="YContainer" type="HBoxContainer" parent="." index="4"]
-margin_left = 10.0
 margin_top = 72.0
-margin_right = 105.0
+margin_right = 116.0
 margin_bottom = 96.0
-size_flags_horizontal = 4
 
 [node name="Label" type="Label" parent="YContainer" index="0"]
 margin_top = 5.0
@@ -52,10 +48,11 @@ text = "Y:"
 
 [node name="YSpinBox" type="SpinBox" parent="YContainer" index="1"]
 margin_left = 21.0
-margin_right = 95.0
+margin_right = 116.0
 margin_bottom = 24.0
 hint_tooltip = "Y coordinate of the top left corner"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 allow_greater = true
 allow_lesser = true
 
@@ -64,14 +61,11 @@ margin_top = 100.0
 margin_right = 116.0
 margin_bottom = 114.0
 text = "Size:"
-align = 1
 
 [node name="WidthContainer" type="HBoxContainer" parent="." index="6"]
-margin_left = 10.0
 margin_top = 118.0
-margin_right = 105.0
+margin_right = 116.0
 margin_bottom = 142.0
-size_flags_horizontal = 4
 
 [node name="Label" type="Label" parent="WidthContainer" index="0"]
 margin_top = 5.0
@@ -82,20 +76,19 @@ text = "W:"
 
 [node name="WSpinBox" type="SpinBox" parent="WidthContainer" index="1"]
 margin_left = 21.0
-margin_right = 95.0
+margin_right = 116.0
 margin_bottom = 24.0
 hint_tooltip = "Width of selection"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 min_value = 1.0
 value = 1.0
 allow_greater = true
 
 [node name="HeightContainer" type="HBoxContainer" parent="." index="7"]
-margin_left = 10.0
 margin_top = 146.0
-margin_right = 105.0
+margin_right = 116.0
 margin_bottom = 170.0
-size_flags_horizontal = 4
 
 [node name="Label" type="Label" parent="HeightContainer" index="0"]
 margin_top = 5.0
@@ -106,10 +99,11 @@ text = "H:"
 
 [node name="HSpinBox" type="SpinBox" parent="HeightContainer" index="1"]
 margin_left = 21.0
-margin_right = 95.0
+margin_right = 116.0
 margin_bottom = 24.0
 hint_tooltip = "Height of selection"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 min_value = 1.0
 value = 1.0
 allow_greater = true

@@ -12,20 +12,17 @@ margin_right = 116.0
 margin_bottom = 64.0
 
 [node name="Label" type="Label" parent="ColorPicker" index="0"]
-margin_left = 32.0
-margin_right = 83.0
+margin_right = 116.0
 margin_bottom = 14.0
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 4
+size_flags_vertical = 1
 text = "Pick for:"
 
 [node name="Options" type="OptionButton" parent="ColorPicker" index="1"]
-margin_left = 13.0
 margin_top = 18.0
-margin_right = 103.0
+margin_right = 116.0
 margin_bottom = 38.0
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 4
 text = "Left Color"
 items = [ "Left Color", null, false, 0, null, "Right Color", null, false, 1, null ]
 selected = 0

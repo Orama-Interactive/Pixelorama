@@ -63,7 +63,6 @@ func update_config() -> void:
 	.update_config()
 	$FillCheckbox.pressed = _fill
 	$ThicknessSlider.value = _thickness
-	$ShapeThickness/ThicknessSpinbox.value = _thickness
 
 
 func _get_shape_points(_size: Vector2) -> PoolVector2Array:

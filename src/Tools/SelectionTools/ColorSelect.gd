@@ -13,8 +13,7 @@ func set_config(config: Dictionary) -> void:
 
 
 func update_config() -> void:
-	$Similarity/SimilaritySpinBox.value = _similarity
-	$Similarity/SimilaritySlider.value = _similarity
+	$SimilaritySlider.value = _similarity
 
 
 func _on_Similarity_value_changed(value: float) -> void:

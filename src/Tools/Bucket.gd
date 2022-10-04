@@ -44,25 +44,17 @@ func _on_FillAreaOptions_item_selected(index: int) -> void:
 
 
 func _select_fill_area_optionbutton() -> void:
-	$FillAreaOptions.selected = _fill_area
-	$Similarity.visible = (_fill_area == FillArea.COLORS)
+	$"%FillAreaOptions".selected = _fill_area
+	$SimilaritySlider.visible = (_fill_area == FillArea.COLORS)
 
 
 func _on_FillWithOptions_item_selected(index: int) -> void:
 	_fill_with = index
-	$Similarity/Value.value = _similarity
 	update_config()
 	save_config()
 
 
-func _on_Value_value_changed(value: float) -> void:
-	_similarity = value
-	$Similarity/Slider.value = _similarity
-	update_config()
-	save_config()
-
-
-func _on_Slider_value_changed(value: float) -> void:
+func _on_SimilaritySlider_value_changed(value: float) -> void:
 	_similarity = value
 	update_config()
 	save_config()
@@ -120,9 +112,8 @@ func set_config(config: Dictionary) -> void:
 
 func update_config() -> void:
 	_select_fill_area_optionbutton()
-	$FillWithOptions.selected = _fill_with
-	$Similarity/Value.value = _similarity
-	$Similarity/Slider.value = _similarity
+	$"%FillWithOptions".selected = _fill_with
+	$SimilaritySlider.value = _similarity
 	$FillPattern.visible = _fill_with == FillWith.PATTERN
 	$FillPattern/XOffset/OffsetX.value = _offset_x
 	$FillPattern/YOffset/OffsetY.value = _offset_y

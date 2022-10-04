@@ -104,15 +104,13 @@ func set_config(config: Dictionary) -> void:
 
 
 func update_config() -> void:
-	$Brush/Size.value = _brush_size
-	$BrushSize.value = _brush_size
-	$ColorInterpolation/Factor.value = _brush_interpolate
-	$ColorInterpolation/Slider.value = _brush_interpolate
+	$Brush/BrushSize.value = _brush_size
+	$ColorInterpolation.value = _brush_interpolate
 	update_brush()
 
 
 func update_brush() -> void:
-	$Brush/Size.suffix = "px"  # Assume we are using default brushes
+	$Brush/BrushSize.suffix = "px"  # Assume we are using default brushes
 	match _brush.type:
 		Brushes.PIXEL:
 			_brush_texture.create_from_image(load("res://assets/graphics/pixel_image.png"), 0)
@@ -121,7 +119,7 @@ func update_brush() -> void:
 		Brushes.FILLED_CIRCLE:
 			_brush_texture.create_from_image(load("res://assets/graphics/circle_filled_9x9.png"), 0)
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
-			$Brush/Size.suffix = "00 %"  # It's an image so a different size convention is used
+			$Brush/BrushSize.suffix = "00 %"  # Use a different size convention on images
 			if _brush.random.size() <= 1:
 				_brush_image = _create_blended_brush_image(_brush.image)
 			else:

@@ -1347,9 +1347,11 @@ msgstr ""
 msgid "Fill with:"
 msgstr ""
 
-msgid "Selected Color"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
 msgstr ""
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr ""
 

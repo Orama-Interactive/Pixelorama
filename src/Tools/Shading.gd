@@ -188,15 +188,11 @@ func update_config() -> void:
 	.update_config()
 	$ShadingMode.selected = _shading_mode
 	$LightenDarken.selected = _mode
-	$Amount/Spinbox.value = _amount
-	$Amount/Slider.value = _amount
-	$HueShiftingOptions/AmountHue/Spinbox.value = _hue_amount
-	$HueShiftingOptions/AmountHue/Slider.value = _hue_amount
-	$HueShiftingOptions/AmountSat/Spinbox.value = _sat_amount
-	$HueShiftingOptions/AmountSat/Slider.value = _sat_amount
-	$HueShiftingOptions/AmountValue/Spinbox.value = _value_amount
-	$HueShiftingOptions/AmountValue/Slider.value = _value_amount
-	$Amount.visible = _shading_mode == ShadingMode.SIMPLE
+	$AmountSlider.value = _amount
+	$HueShiftingOptions/HueSlider.value = _hue_amount
+	$HueShiftingOptions/SatSlider.value = _sat_amount
+	$HueShiftingOptions/ValueSlider.value = _value_amount
+	$AmountSlider.visible = _shading_mode == ShadingMode.SIMPLE
 	$HueShiftingOptions.visible = _shading_mode == ShadingMode.HUE_SHIFTING
 	update_strength()
 
