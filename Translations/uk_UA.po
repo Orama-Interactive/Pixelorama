@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-09-29 17:00\n"
+"PO-Revision-Date: 2022-10-04 21:50\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1410,9 +1410,11 @@ msgstr "Все виділення"
 msgid "Fill with:"
 msgstr "Чим залити:"
 
-msgid "Selected Color"
-msgstr "Вибраний колір"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr ""
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Шаблон"
 
