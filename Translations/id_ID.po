@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-10-04 21:50\n"
+"PO-Revision-Date: 2022-10-05 16:41\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1412,7 +1412,7 @@ msgstr "Isi dengan:"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Selected color"
-msgstr ""
+msgstr "Warna yang dipilih"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
