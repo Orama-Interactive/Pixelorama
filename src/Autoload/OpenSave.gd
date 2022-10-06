@@ -319,7 +319,7 @@ func save_pxo_file(
 ) -> void:
 	if !autosave:
 		project.name = path.get_file()
-	var serialized_data = project.serialize()
+	var serialized_data := project.serialize()
 	if !serialized_data:
 		Global.error_dialog.set_text(
 			tr("File failed to save. Converting project data to dictionary failed.")
@@ -327,7 +327,7 @@ func save_pxo_file(
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
 		return
-	var to_save = JSON.print(serialized_data)
+	var to_save := JSON.print(serialized_data)
 	if !to_save:
 		Global.error_dialog.set_text(
 			tr("File failed to save. Converting dictionary to JSON failed.")
@@ -336,12 +336,19 @@ func save_pxo_file(
 		Global.dialog_open(true)
 		return
 
-	var file: File = File.new()
-	var err
+	# Check if a file with the same name exists. If it does, rename the new file temporarily.
+	# Needed in case of a crash, so that the old file won't be replaced with an empty one.
+	var temp_path := path
+	var dir := Directory.new()
+	if dir.file_exists(path):
+		temp_path = path + "1"
+
+	var file := File.new()
+	var err: int
 	if use_zstd_compression:
-		err = file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
+		err = file.open_compressed(temp_path, File.WRITE, File.COMPRESSION_ZSTD)
 	else:
-		err = file.open(path, File.WRITE)
+		err = file.open(temp_path, File.WRITE)
 
 	if err != OK:
 		Global.error_dialog.set_text(tr("File failed to save. Error code %s") % err)
@@ -357,24 +364,26 @@ func save_pxo_file(
 	for frame in project.frames:
 		for cel in frame.cels:
 			cel.save_image_data_to_pxo(file)
-
 	for brush in project.brushes:
 		file.store_buffer(brush.get_data())
-
 	if project.tiles.has_mask:
 		file.store_buffer(project.tiles.tile_mask.get_data())
 
 	file.close()
 
+	if temp_path != path:
+		# Rename the new file to its proper name and remove the old file, if it exists.
+		dir.rename(temp_path, path)
+
 	if OS.get_name() == "HTML5" and OS.has_feature("JavaScript") and !autosave:
 		err = file.open(path, File.READ)
-		if !err:
-			var file_data = Array(file.get_buffer(file.get_len()))
+		if err == OK:
+			var file_data := Array(file.get_buffer(file.get_len()))
 			JavaScript.download_buffer(file_data, path.get_file())
 		file.close()
 		# Remove the .pxo file from memory, as we don't need it anymore
-		var dir = Directory.new()
-		dir.remove(path)
+		var browser_dir := Directory.new()
+		browser_dir.remove(path)
 
 	if autosave:
 		Global.notification_label("File autosaved")
@@ -398,7 +407,7 @@ func save_pxo_file(
 
 
 func open_image_as_new_tab(path: String, image: Image) -> void:
-	var project = Project.new([], path.get_file(), image.get_size())
+	var project := Project.new([], path.get_file(), image.get_size())
 	project.layers.append(PixelLayer.new(project))
 	Global.projects.append(project)
 
@@ -411,7 +420,7 @@ func open_image_as_new_tab(path: String, image: Image) -> void:
 
 
 func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert: int) -> void:
-	var project = Project.new([], path.get_file())
+	var project := Project.new([], path.get_file())
 	project.layers.append(PixelLayer.new(project))
 	Global.projects.append(project)
 	horiz = min(horiz, image.get_size().x)
@@ -509,7 +518,7 @@ func open_image_as_spritesheet_layer(
 
 
 func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void:
-	var project = Global.current_project
+	var project: Project = Global.current_project
 	project.undos += 1
 	project.undo_redo.create_action("Replaced Cel")
 
@@ -534,7 +543,7 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 
 
 func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
-	var project = Global.current_project
+	var project: Project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 
 	var frame := Frame.new()
@@ -560,7 +569,7 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 
 
 func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) -> void:
-	var project = Global.current_project
+	var project: Project = Global.current_project
 	image.crop(project.size.x, project.size.y)
 	var layer := PixelLayer.new(project, file_name)
 	var cels := []
@@ -721,5 +730,5 @@ func save_project_to_recent_list(path: String) -> void:
 
 	Global.config_cache.set_value("data", "recent_projects", top_menu_container.recent_projects)
 
-	Global.top_menu_container.recent_projects_submenu.clear()
+	top_menu_container.recent_projects_submenu.clear()
 	top_menu_container.update_recent_projects_submenu()
