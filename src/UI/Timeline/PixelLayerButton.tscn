@@ -14,9 +14,9 @@ margin_top = 7.0
 margin_right = 118.0
 margin_bottom = 29.0
 rect_min_size = Vector2( 22, 22 )
-hint_tooltip = "Enable/disable cel linking
+hint_tooltip = "Enable/disable automatic linking of new cels when creating new frames
 
-Linked cels are being shared across multiple frames"
+Linked cels are shared across multiple frames"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -33,8 +33,5 @@ margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="pressed" from="HBoxContainer/LayerButtons/LinkButton" to="." method="_on_LinkButton_pressed"]
