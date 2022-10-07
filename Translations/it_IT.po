@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-10-04 21:50\n"
+"PO-Revision-Date: 2022-10-07 10:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1412,7 +1412,7 @@ msgstr "Riempi con:"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Selected color"
-msgstr ""
+msgstr "Colore selezionato"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
