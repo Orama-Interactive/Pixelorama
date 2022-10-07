@@ -172,16 +172,6 @@ func _on_LinkButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var layer_class: PixelLayer = Global.current_project.layers[layer]
 	layer_class.new_cels_linked = !layer_class.new_cels_linked
-	if layer_class.new_cels_linked && !layer_class.linked_cels:
-		# If button is pressed and there are no linked cels in the layer
-		layer_class.linked_cels.append(
-			Global.current_project.frames[Global.current_project.current_frame]
-		)
-		var container = Global.frames_container.get_child(
-			Global.frames_container.get_child_count() - 1 - layer
-		)
-		container.get_child(Global.current_project.current_frame).button_setup()
-
 	update_buttons()
 
 
