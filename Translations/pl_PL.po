@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-10-04 21:50\n"
+"PO-Revision-Date: 2022-10-08 13:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -328,7 +328,7 @@ msgid "New frame"
 msgstr "Nowa klatka"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Zastąp komórkę"
 
 msgid "New layer"
 msgstr "Nowa warstwa"
@@ -610,7 +610,7 @@ msgid "Theme"
 msgstr "Motyw"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Przyciski"
 
 msgid "Icon color from:"
 msgstr "Kolor ikony z:"
@@ -619,7 +619,7 @@ msgid "Icon color:"
 msgstr "Kolor ikony:"
 
 msgid "Background"
-msgstr ""
+msgstr "Tło"
 
 msgid "Background color from:"
 msgstr "Kolor tła z:"
@@ -1411,7 +1411,7 @@ msgstr "Wypełnij za pomocą:"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Selected color"
-msgstr ""
+msgstr "Wybrany kolor"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
@@ -1626,7 +1626,7 @@ msgid "Layer"
 msgstr "Warstwa"
 
 msgid "Group"
-msgstr ""
+msgstr "Grupa"
 
 msgid "Layers"
 msgstr "Warstwy"
@@ -1635,7 +1635,7 @@ msgid "Create a new layer"
 msgstr "Stwórz nową warstwę"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "Stwórz nową grupę warstw"
 
 msgid "Remove current layer"
 msgstr "Usuń obecną warstwę"
@@ -1673,7 +1673,7 @@ msgstr "Włącz/wyłącz łączenie komórek\n\n"
 "Złączone komórki są współdzielone przez wiele komórek"
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "Rozwiń/zwiń grupę"
 
 msgid "Palette"
 msgstr "Paleta kolorów"
