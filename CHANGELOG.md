@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v0.11] - Unreleased
+This update has been brought to you by the contributions of:
+[@mrtripie](https://github.com/mrtripie), Martin Novák ([@novhack](https://github.com/novhack))
+
+### Added
+- Layer groups in the timeline, for better organization. [#698](https://github.com/Orama-Interactive/Pixelorama/pull/698)
+
+### Changed
+- The palette panel is now more reactive; it automatically resizes in order to show/hide swatches based on its size. It is also now possible to scroll palettes with the mouse wheel, and resize the swatches with Control + mouse wheel. [#761](https://github.com/Orama-Interactive/Pixelorama/pull/761)
+- Slider + SpinBox combinations have been replaced by a custom slider, made by [@mrtripie](https://github.com/mrtripie). (Ongoing)
+
+### Fixed
+- The timeline has been refactored behind the scenes, and its performance has been massively improved for projects with a lot of frames and layers. [#698](https://github.com/Orama-Interactive/Pixelorama/pull/698)
+- If Pixelorama crashes during saving of a .pxo file and a file of the same name already exists in that directory, it no longer gets replaced with an empty 0 byte file. [#763](https://github.com/Orama-Interactive/Pixelorama/issues/763)
+- The right tool gets activated only if the right mouse button (or whatever input action is assigned) is first pressed. [cc332c6](https://github.com/Orama-Interactive/Pixelorama/commit/cc332c6cbf3f9265a95a4bdc4998c9ca6c4f750a)
+- No more error in the debugger or the terminal appear when attempting to undo/redo while drawing. [af2b1fe](https://github.com/Orama-Interactive/Pixelorama/commit/af2b1feb1f63144ebce00520ea2f8ee832dc49bd)
+
 ## [v0.10.3] - 2022-09-26
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
