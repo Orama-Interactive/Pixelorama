@@ -113,22 +113,40 @@ func unlink_cel(cel: BaseCel) -> void:
 
 func serialize() -> Dictionary:
 	assert(index == project.layers.find(self))
-	# TODO H0: Serialize cel_link_sets
-	return {
+	# TODO H0: Figure out why saving my test project is resulting in a .pxo1 failed save (though changing it to .pxo and opening seems to work?)
+	var dict := {
 		"name": name,
 		"visible": visible,
 		"locked": locked,
 		"parent": parent.index if is_instance_valid(parent) else -1
 	}
+	if not cel_link_sets.empty():
+		var cels := []  # Cels array for easy finding of the frame index for link_set saving
+		for frame in project.frames:
+			cels.append(frame.cels[index])
+		dict["link_sets"] = []
+		for link_set in cel_link_sets:
+			dict["link_sets"].append([])
+			for cel in link_set:
+				dict["link_sets"][-1].append(cels.find(cel))
+	return dict
 
 
 func deserialize(dict: Dictionary) -> void:
-	# TODO H0: Deserialize cel_link_sets
 	name = dict.name
 	visible = dict.visible
 	locked = dict.locked
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
+	if dict.has("link_sets"):
+		for link_set in dict["link_sets"]:
+			cel_link_sets.append([])
+			for linked_cel_index in link_set:
+				var linked_cel: BaseCel = project.frames[linked_cel_index].cels[index]
+				cel_link_sets[-1].append(linked_cel)
+				linked_cel.link_set = cel_link_sets[-1]
+				linked_cel.set_content(cel_link_sets[-1][0].get_content())
+				linked_cel.image_texture = cel_link_sets[-1][0].image_texture
 
 
 func copy() -> BaseLayer:

@@ -16,7 +16,6 @@ func serialize() -> Dictionary:
 	var dict = .serialize()
 	dict["type"] = Global.LayerTypes.PIXEL
 	dict["new_cels_linked"] = new_cels_linked
-	dict["linked_cels"] = []
 	return dict
 
 
@@ -24,11 +23,12 @@ func deserialize(dict: Dictionary) -> void:
 	.deserialize(dict)
 	new_cels_linked = dict.new_cels_linked
 
-	if dict.has("linked_cel") and not dict["linked_cel"].empty():  # Old linked cel system
+	if dict.has("linked_cels") and not dict["linked_cels"].empty():  # Old linked cel system
 		cel_link_sets = [[]]
 		for linked_cel_index in dict["linked_cels"]:
 			var linked_cel: PixelCel = project.frames[linked_cel_index].cels[index] # TODO 0: Do I have my index at this point?
 			cel_link_sets[0].append(linked_cel)
+			linked_cel.link_set = cel_link_sets[0]
 			linked_cel.image = cel_link_sets[0][0].image
 			linked_cel.image_texture = cel_link_sets[0][0].image_texture
 

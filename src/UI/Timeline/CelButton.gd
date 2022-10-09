@@ -27,16 +27,16 @@ func button_setup() -> void:
 			var link_set_index = cel_link_sets.find(cel.link_set)
 			linked_indicator.color.h = float(link_set_index) / max(cel_link_sets.size(), 6)  # TODO: Improve
 #			linked_indicator.color.v *= min(1, (1 / linked_indicator.color.get_luminance()) * 0.75)  # Trick to make them all about the same luminance
-			print(
-				"Index: ",
-				float(link_set_index),
-				"  Size: ",
-				cel_link_sets.size(),
-				"  Max: ",
-				max(cel_link_sets.size(), 6),
-				"  Hue: ",
-				linked_indicator.color.h
-			)  # TODO: REMOVE
+#			print(
+#				"Index: ",
+#				float(link_set_index),
+#				"  Size: ",
+#				cel_link_sets.size(),
+#				"  Max: ",
+#				max(cel_link_sets.size(), 6),
+#				"  Hue: ",
+#				linked_indicator.color.h
+#			)  # TODO: REMOVE
 
 	# Reset the checkers size because it assumes you want the same size as the canvas
 	var checker = $CelTexture/TransparentChecker
@@ -234,7 +234,7 @@ func can_drop_data(_pos, data) -> bool:
 		var drag_frame = data[1]
 		var drag_layer = data[2]
 		if project.layers[drag_layer].get_script() == project.layers[layer].get_script():
-			if (  # Only do it if both cels are on the same layer, or both are not linked
+			if (  # If both cels are on the same layer, or both are not linked
 				drag_layer == layer
 				or (
 					project.frames[frame].cels[layer].link_set == null
