@@ -109,7 +109,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				project.undo_redo.create_action("Unlink Cel")
 				var selected_cels = project.selected_cels.duplicate()
 				if not selected_cels.has([frame, layer]):
-					selected_cels.append([frame, layer])
+					selected_cels.append([frame, layer])  # Include this cel with the selected ones
 				for cel_index in selected_cels:
 					if layer != cel_index[1]:  # Skip selected cels not on the same layer
 						continue
@@ -212,10 +212,10 @@ func can_drop_data(_pos, data) -> bool:
 		var drag_layer = data[2]
 		if project.layers[drag_layer].get_script() == project.layers[layer].get_script():
 			if (
-				project.layers[layer] is GroupLayer
-				or not (
-					(project.frames[frame] in project.layers[layer].linked_cels)
-					or (project.frames[drag_frame] in project.layers[drag_layer].linked_cels)
+				drag_layer == layer
+				or (
+					project.frames[frame].cels[layer].link_set == null
+					and project.frames[drag_frame].cels[drag_layer].link_set == null
 				)
 			):
 				if not (drag_frame == frame and drag_layer == layer):
