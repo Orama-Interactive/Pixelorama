@@ -643,13 +643,13 @@ func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	for i in new_frames.size():
-		# For each linked cel in the frame, update its layer's cel_link_groups
+		# For each linked cel in the frame, update its layer's cel_link_sets
 		for l in layers.size():
 			var cel: BaseCel = new_frames[i].cels[l]
-			if cel.link_group != null:
-				if not layers[l].cel_link_groups.has(cel.link_group):
-					layers[l].cel_link_groups.append(cel.link_group)
-				cel.link_group.append(cel)
+			if cel.link_set != null:
+				if not layers[l].cel_link_sets.has(cel.link_set):
+					layers[l].cel_link_sets.append(cel.link_set)
+				cel.link_set.append(cel)
 		# Add frame
 		frames.insert(indices[i], new_frames[i])
 		Global.animation_timeline.project_frame_added(indices[i])
@@ -671,13 +671,13 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 	selected_cels.clear()
 	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
-		# For each linked cel in the frame, update its layer's cel_link_groups
+		# For each linked cel in the frame, update its layer's cel_link_sets
 		for l in layers.size():
 			var cel: BaseCel = frames[indices[i] - i].cels[l]
-			if cel.link_group != null:
-				cel.link_group.erase(cel)
-				if cel.link_group.empty():
-					layers[l].cel_link_groups.erase(cel.link_group)
+			if cel.link_set != null:
+				cel.link_set.erase(cel)
+				if cel.link_set.empty():
+					layers[l].cel_link_sets.erase(cel.link_set)
 		# Remove frame
 		frames.remove(indices[i] - i)
 		Global.animation_timeline.project_frame_removed(indices[i] - i)

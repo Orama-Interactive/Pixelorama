@@ -137,11 +137,11 @@ func add_frame() -> void:
 	for l in range(project.layers.size()):
 		if project.layers[l].new_cels_linked:  # If the link button is pressed
 			var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
-			if prev_cel.link_group == null:
-				prev_cel.link_group = [prev_cel] # TODO: Should this be part of do/undo? (Maybe this chunk of code should be moved below the tag code if undo is added?
+			if prev_cel.link_set == null:
+				prev_cel.link_set = [prev_cel] # TODO: Should this be part of do/undo? (Maybe this chunk of code should be moved below the tag code if undo is added?
 			frame.cels[l].set_content(prev_cel.get_content())
 			frame.cels[l].image_texture = prev_cel.image_texture
-			frame.cels[l].link_group = prev_cel.link_group
+			frame.cels[l].link_set = prev_cel.link_set
 
 	# Code to PUSH AHEAD tags starting after the frame
 	var new_animation_tags := project.animation_tags.duplicate()

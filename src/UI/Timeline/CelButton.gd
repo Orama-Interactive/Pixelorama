@@ -21,13 +21,13 @@ func button_setup() -> void:
 	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, layer]
 	cel = Global.current_project.frames[frame].cels[layer]
 	if is_instance_valid(linked_indicator):
-		linked_indicator.visible = cel.link_group != null
-		if cel.link_group != null:
-			var cel_link_groups: Array = Global.current_project.layers[layer].cel_link_groups
-			var link_group_index = cel_link_groups.find(cel.link_group)
-			linked_indicator.color.h = float(link_group_index) / max(cel_link_groups.size(), 6) # TODO: Improve
+		linked_indicator.visible = cel.link_set != null
+		if cel.link_set != null:
+			var cel_link_sets: Array = Global.current_project.layers[layer].cel_link_sets
+			var link_set_index = cel_link_sets.find(cel.link_set)
+			linked_indicator.color.h = float(link_set_index) / max(cel_link_sets.size(), 6) # TODO: Improve
 #			linked_indicator.color.v *= min(1, (1 / linked_indicator.color.get_luminance()) * 0.75)  # Trick to make them all about the same luminance
-			print("Index: ", float(link_group_index), "  Size: ", cel_link_groups.size(), "  Max: ", max(cel_link_groups.size(), 6), "  Hue: ", linked_indicator.color.h)
+			print("Index: ", float(link_set_index), "  Size: ", cel_link_sets.size(), "  Max: ", max(cel_link_sets.size(), 6), "  Hue: ", linked_indicator.color.h) # TODO: REMOVE
 
 	# Reset the checkers size because it assumes you want the same size as the canvas
 	var checker = $CelTexture/TransparentChecker
@@ -114,11 +114,11 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 					if layer != cel_index[1]:  # Skip selected cels not on the same layer
 						continue
 					var selected_cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
-					if selected_cel.link_group == null:  # Skip cels that aren't linked
+					if selected_cel.link_set == null:  # Skip cels that aren't linked
 						continue
 					project.undo_redo.add_do_method(project.layers[layer], "unlink_cel", selected_cel)
-					project.undo_redo.add_undo_method(project.layers[layer], "link_cel", selected_cel, selected_cel.link_group)
-					if selected_cel.link_group.size() > 1:  # Skip copying content if not linked to another
+					project.undo_redo.add_undo_method(project.layers[layer], "link_cel", selected_cel, selected_cel.link_set)
+					if selected_cel.link_set.size() > 1:  # Skip copying content if not linked to another
 						project.undo_redo.add_do_property(selected_cel, "image_texture", ImageTexture.new())
 						project.undo_redo.add_undo_property(selected_cel, "image_texture", selected_cel.image_texture)
 						project.undo_redo.add_do_method(selected_cel, "set_content", selected_cel.copy_content())
@@ -126,9 +126,9 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 			elif id == MenuOptions.LINK:
 				project.undo_redo.create_action("Link Cel")
-				var link_group: Array = [] if cel.link_group == null else cel.link_group
-				if cel.link_group == null:
-					project.undo_redo.add_do_method(project.layers[layer], "link_cel", cel, link_group)
+				var link_set: Array = [] if cel.link_set == null else cel.link_set
+				if cel.link_set == null:
+					project.undo_redo.add_do_method(project.layers[layer], "link_cel", cel, link_set)
 					project.undo_redo.add_undo_method(project.layers[layer], "unlink_cel", cel)
 
 				for cel_index in project.selected_cels:
@@ -137,18 +137,18 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 					var selected_cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 					if cel == selected_cel:  # Don't need to link cel to itself
 						continue
-					if selected_cel.link_group == link_group:  # Skip cels that were already linked
+					if selected_cel.link_set == link_set:  # Skip cels that were already linked
 						continue
 					project.undo_redo.add_do_method(selected_cel, "set_content", cel.get_content())
 					project.undo_redo.add_undo_method(selected_cel, "set_content", selected_cel.get_content())
 					project.undo_redo.add_do_property(selected_cel, "image_texture", cel.image_texture)
 					project.undo_redo.add_undo_property(selected_cel, "image_texture", selected_cel.image_texture)
 
-					project.undo_redo.add_do_method(project.layers[layer], "link_cel", selected_cel, link_group)
-					if selected_cel.link_group == null:
+					project.undo_redo.add_do_method(project.layers[layer], "link_cel", selected_cel, link_set)
+					if selected_cel.link_set == null:
 						project.undo_redo.add_undo_method(project.layers[layer], "unlink_cel", selected_cel)
 					else:
-						project.undo_redo.add_undo_method(project.layers[layer], "link_cel", selected_cel, selected_cel.link_group)
+						project.undo_redo.add_undo_method(project.layers[layer], "link_cel", selected_cel, selected_cel.link_set)
 
 			# Remove and add a new cel button to update appearance (can't use button_setup
 			# because there is no guarantee that it will be the exact same cel button instance)
@@ -178,11 +178,11 @@ func _delete_cel_content() -> void:
 	var old_content = cel.get_content()
 	project.undos += 1
 	project.undo_redo.create_action("Draw")
-	if cel.link_group == null:
+	if cel.link_set == null:
 		project.undo_redo.add_do_method(cel, "set_content", empty_content)
 		project.undo_redo.add_undo_method(cel, "set_content", old_content)
 	else:
-		for linked_cel in cel.link_group:
+		for linked_cel in cel.link_set:
 			project.undo_redo.add_do_method(linked_cel, "set_content", empty_content)
 			project.undo_redo.add_undo_method(linked_cel, "set_content", old_content)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer, project)

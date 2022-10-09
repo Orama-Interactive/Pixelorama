@@ -5,7 +5,7 @@ extends Reference
 
 var opacity: float
 var image_texture: ImageTexture
-var link_group = null # The linked cel group array this cel is in, or null if its not linked # TODO H1: Perhaps there could be a better name than "group", set, list, array, etc.
+var link_set = null # The linked cel array this cel is in, or null if its not linked # TODO H1: Perhaps there could be a better name than "group", set, list, array, etc.
 
 # Methods to Override:
 

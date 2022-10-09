@@ -25,12 +25,12 @@ func deserialize(dict: Dictionary) -> void:
 	new_cels_linked = dict.new_cels_linked
 
 	if dict.has("linked_cel") and not dict["linked_cel"].empty():  # Old linked cel system
-		cel_link_groups = [[]]
+		cel_link_sets = [[]]
 		for linked_cel_index in dict["linked_cels"]:
 			var linked_cel: PixelCel = project.frames[linked_cel_index].cels[index] # TODO 0: Do I have my index at this point?
-			cel_link_groups[0].append(linked_cel)
-			linked_cel.image = cel_link_groups[0][0].image
-			linked_cel.image_texture = cel_link_groups[0][0].image_texture
+			cel_link_sets[0].append(linked_cel)
+			linked_cel.image = cel_link_sets[0][0].image
+			linked_cel.image_texture = cel_link_sets[0][0].image_texture
 
 
 func new_empty_cel() -> BaseCel:
