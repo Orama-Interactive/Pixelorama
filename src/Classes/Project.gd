@@ -597,7 +597,7 @@ func is_empty() -> bool:
 		and animation_tags.size() == 0
 	)
 
-
+# TODO H1: This should be removable
 func duplicate_layers() -> Array:
 	var new_layers: Array = layers.duplicate()
 	# Loop through the array to create new classes for each element, so that they
@@ -643,6 +643,14 @@ func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	for i in new_frames.size():
+		# For each linked cel in the frame, update its layer's cel_link_groups
+		for l in layers.size():
+			var cel: BaseCel = new_frames[i].cels[l]
+			if cel.link_group != null:
+				if not layers[l].cel_link_groups.has(cel.link_group):
+					layers[l].cel_link_groups.append(cel.link_group)
+				cel.link_group.append(cel)
+		# Add frame
 		frames.insert(indices[i], new_frames[i])
 		Global.animation_timeline.project_frame_added(indices[i])
 	# Update the frames and frame buttons:
@@ -663,6 +671,14 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 	selected_cels.clear()
 	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
+		# For each linked cel in the frame, update its layer's cel_link_groups
+		for l in layers.size():
+			var cel: BaseCel = frames[indices[i] - i].cels[l]
+			if cel.link_group != null:
+				cel.link_group.erase(cel)
+				if cel.link_group.empty():
+					layers[l].cel_link_groups.erase(cel.link_group)
+		# Remove frame
 		frames.remove(indices[i] - i)
 		Global.animation_timeline.project_frame_removed(indices[i] - i)
 	# Update the frames and frame buttons:

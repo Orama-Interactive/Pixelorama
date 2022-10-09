@@ -1,6 +1,6 @@
 extends Button
 
-enum MenuOptions { DELETE, LINK, PROPERTIES }
+enum MenuOptions { DELETE, LINK, UNLINK, PROPERTIES }
 
 var frame := 0
 var layer := 0
@@ -19,20 +19,19 @@ func button_setup() -> void:
 	rect_min_size.y = Global.animation_timeline.cel_size
 
 	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, layer]
+	cel = Global.current_project.frames[frame].cels[layer]
 	if is_instance_valid(linked_indicator):
-		if Global.current_project.frames[frame] in Global.current_project.layers[layer].linked_cels:
-			linked_indicator.visible = true
-			popup_menu.set_item_text(MenuOptions.LINK, "Unlink Cel")
-			popup_menu.set_item_metadata(MenuOptions.LINK, "Unlink Cel")
-		else:
-			linked_indicator.visible = false
-			popup_menu.set_item_text(MenuOptions.LINK, "Link Cel")
-			popup_menu.set_item_metadata(MenuOptions.LINK, "Link Cel")
+		linked_indicator.visible = cel.link_group != null
+		if cel.link_group != null:
+			var cel_link_groups: Array = Global.current_project.layers[layer].cel_link_groups
+			var link_group_index = cel_link_groups.find(cel.link_group)
+			linked_indicator.color.h = float(link_group_index) / max(cel_link_groups.size(), 6) # TODO: Improve
+#			linked_indicator.color.v *= min(1, (1 / linked_indicator.color.get_luminance()) * 0.75)  # Trick to make them all about the same luminance
+			print("Index: ", float(link_group_index), "  Size: ", cel_link_groups.size(), "  Max: ", max(cel_link_groups.size(), 6), "  Hue: ", linked_indicator.color.h)
 
 	# Reset the checkers size because it assumes you want the same size as the canvas
 	var checker = $CelTexture/TransparentChecker
 	checker.rect_size = checker.get_parent().rect_size
-	cel = Global.current_project.frames[frame].cels[layer]
 
 
 func _on_CelButton_resized() -> void:
@@ -104,51 +103,69 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 		MenuOptions.DELETE:
 			_delete_cel_content()
 
-		MenuOptions.LINK:
+		MenuOptions.LINK, MenuOptions.UNLINK:
 			var project: Project = Global.current_project
-			var f: Frame = project.frames[frame]
-			var cel_index: int = project.layers[layer].linked_cels.find(f)
-			var new_linked_cels: Array = project.layers[layer].linked_cels.duplicate()
-			if popup_menu.get_item_metadata(MenuOptions.LINK) == "Unlink Cel":
-				new_linked_cels.remove(cel_index)
+			if id == MenuOptions.UNLINK:
 				project.undo_redo.create_action("Unlink Cel")
-				project.undo_redo.add_do_property(cel, "image_texture", ImageTexture.new())
-				project.undo_redo.add_undo_property(cel, "image_texture", cel.image_texture)
-				project.undo_redo.add_do_method(cel, "set_content", cel.copy_content())
-				project.undo_redo.add_undo_method(cel, "set_content", cel.get_content())
+				var selected_cels = project.selected_cels.duplicate()
+				if not selected_cels.has([frame, layer]):
+					selected_cels.append([frame, layer])
+				for cel_index in selected_cels:
+					if layer != cel_index[1]:  # Skip selected cels not on the same layer
+						continue
+					var selected_cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+					if selected_cel.link_group == null:  # Skip cels that aren't linked
+						continue
+					project.undo_redo.add_do_method(project.layers[layer], "unlink_cel", selected_cel)
+					project.undo_redo.add_undo_method(project.layers[layer], "link_cel", selected_cel, selected_cel.link_group)
+					if selected_cel.link_group.size() > 1:  # Skip copying content if not linked to another
+						project.undo_redo.add_do_property(selected_cel, "image_texture", ImageTexture.new())
+						project.undo_redo.add_undo_property(selected_cel, "image_texture", selected_cel.image_texture)
+						project.undo_redo.add_do_method(selected_cel, "set_content", selected_cel.copy_content())
+						project.undo_redo.add_undo_method(selected_cel, "set_content", selected_cel.get_content())
 
-			elif popup_menu.get_item_metadata(MenuOptions.LINK) == "Link Cel":
-				new_linked_cels.append(f)
+			elif id == MenuOptions.LINK:
 				project.undo_redo.create_action("Link Cel")
-				if new_linked_cels.size() > 1:
-					# If there are already linked cels, set the current cel's image
-					# to the first linked cel's image
-					var linked_cel: BaseCel = project.layers[layer].linked_cels[0].cels[layer]
-					project.undo_redo.add_do_property(
-						cel, "image_texture", linked_cel.image_texture
-					)
-					project.undo_redo.add_undo_property(cel, "image_texture", cel.image_texture)
-					project.undo_redo.add_do_method(cel, "set_content", linked_cel.get_content())
-					project.undo_redo.add_undo_method(cel, "set_content", cel.get_content())
+				var link_group: Array = [] if cel.link_group == null else cel.link_group
+				if cel.link_group == null:
+					project.undo_redo.add_do_method(project.layers[layer], "link_cel", cel, link_group)
+					project.undo_redo.add_undo_method(project.layers[layer], "unlink_cel", cel)
 
-			project.undo_redo.add_do_property(project.layers[layer], "linked_cels", new_linked_cels)
-			project.undo_redo.add_undo_property(
-				project.layers[layer], "linked_cels", project.layers[layer].linked_cels
-			)
-			# Remove and add a new cel button to update appearance (can't use self.button_setup
+				for cel_index in project.selected_cels:
+					if layer != cel_index[1]:  # Skip selected cels not on the same layer
+						continue
+					var selected_cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+					if cel == selected_cel:  # Don't need to link cel to itself
+						continue
+					if selected_cel.link_group == link_group:  # Skip cels that were already linked
+						continue
+					project.undo_redo.add_do_method(selected_cel, "set_content", cel.get_content())
+					project.undo_redo.add_undo_method(selected_cel, "set_content", selected_cel.get_content())
+					project.undo_redo.add_do_property(selected_cel, "image_texture", cel.image_texture)
+					project.undo_redo.add_undo_property(selected_cel, "image_texture", selected_cel.image_texture)
+
+					project.undo_redo.add_do_method(project.layers[layer], "link_cel", selected_cel, link_group)
+					if selected_cel.link_group == null:
+						project.undo_redo.add_undo_method(project.layers[layer], "unlink_cel", selected_cel)
+					else:
+						project.undo_redo.add_undo_method(project.layers[layer], "link_cel", selected_cel, selected_cel.link_group)
+
+			# Remove and add a new cel button to update appearance (can't use button_setup
 			# because there is no guarantee that it will be the exact same cel button instance)
-			project.undo_redo.add_do_method(
-				Global.animation_timeline, "project_cel_removed", frame, layer
-			)
-			project.undo_redo.add_undo_method(
-				Global.animation_timeline, "project_cel_removed", frame, layer
-			)
-			project.undo_redo.add_do_method(
-				Global.animation_timeline, "project_cel_added", frame, layer
-			)
-			project.undo_redo.add_undo_method(
-				Global.animation_timeline, "project_cel_added", frame, layer
-			)
+			# May be able to use button_setup with a lambda to find correct cel button in Godot 4
+			for f in project.frames.size():
+				project.undo_redo.add_do_method(
+					Global.animation_timeline, "project_cel_removed", f, layer
+				)
+				project.undo_redo.add_undo_method(
+					Global.animation_timeline, "project_cel_removed", f, layer
+				)
+				project.undo_redo.add_do_method(
+					Global.animation_timeline, "project_cel_added", f, layer
+				)
+				project.undo_redo.add_undo_method(
+					Global.animation_timeline, "project_cel_added", f, layer
+				)
 
 			project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 			project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
@@ -161,13 +178,13 @@ func _delete_cel_content() -> void:
 	var old_content = cel.get_content()
 	project.undos += 1
 	project.undo_redo.create_action("Draw")
-	if project.frames[frame] in project.layers[layer].linked_cels:
-		for f in project.layers[layer].linked_cels:
-			project.undo_redo.add_do_method(f.cels[layer], "set_content", empty_content)
-			project.undo_redo.add_undo_method(f.cels[layer], "set_content", old_content)
-	else:
+	if cel.link_group == null:
 		project.undo_redo.add_do_method(cel, "set_content", empty_content)
 		project.undo_redo.add_undo_method(cel, "set_content", old_content)
+	else:
+		for linked_cel in cel.link_group:
+			project.undo_redo.add_do_method(linked_cel, "set_content", empty_content)
+			project.undo_redo.add_undo_method(linked_cel, "set_content", old_content)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer, project)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, frame, layer, project)
 	project.undo_redo.commit_action()

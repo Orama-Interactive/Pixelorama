@@ -11,13 +11,14 @@ script = ExtResource( 2 )
 margin_right = 20.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
-items = [ "Delete", null, 0, false, false, -1, 0, null, "", false, "Link Cel", null, 0, false, false, -1, 0, null, "", false ]
+items = [ "Delete", null, 0, false, false, -1, 0, null, "", false, "Link Cels to", null, 0, false, false, -1, 0, null, "", false, "Unlink Cels", null, 0, false, false, 2, 0, null, "", false ]
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LinkedIndicator" type="Polygon2D" parent="." index="2"]
-color = Color( 0.0627451, 0.741176, 0.215686, 1 )
+show_behind_parent = true
+color = Color( 1, 0, 0, 1 )
 invert_enable = true
 invert_border = 1.0
 polygon = PoolVector2Array( 0, 0, 36, 0, 36, 36, 0, 36 )

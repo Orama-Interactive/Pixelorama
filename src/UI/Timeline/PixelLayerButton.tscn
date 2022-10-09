@@ -16,7 +16,7 @@ margin_bottom = 29.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Enable/disable automatic linking of new cels when creating new frames
 
-Linked cels are shared across multiple frames"
+Linked cels share content across multiple frames"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4

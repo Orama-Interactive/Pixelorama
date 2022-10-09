@@ -3,12 +3,13 @@ extends Reference
 # Base class for layer properties. Different layer types extend from this class.
 
 var name := ""
-var visible := true
-var locked := false
-var parent: BaseLayer
 var project
 var index: int
-
+var parent: BaseLayer
+var visible := true
+var locked := false
+var new_cels_linked := false
+var cel_link_groups := []  # 2D Array of Cels (Each Array inside this represents a "link group")
 
 # Returns true if this is a direct or indirect parent of layer
 func is_a_parent_of(layer: BaseLayer) -> bool:
@@ -80,12 +81,39 @@ func get_layer_path() -> String:
 		return str(parent.get_layer_path(), "/", name)
 	return name
 
+# Links a cel to link_group. Just handles changing cel_link_groups and cel.link_group.
+# Content and image_texture should be handled seperately for undo/redo related reasons.
+func link_cel(cel: BaseCel, link_group: Array) -> void:
+	# TODO: Should this handle a null link group (combining with unlink_cel, or be kept seperated?)
+	# TODO: What if link group is equal tocurrent link group of cel to link?
+	# Erase from the cel's current link_group
+	if cel.link_group != null:
+		cel.link_group.erase(cel)
+		if cel.link_group.empty():
+			cel_link_groups.erase(cel.link_group)
+	# Add to link_group
+	cel.link_group = link_group
+	link_group.append(cel)
+	if not cel_link_groups.has(link_group):
+		cel_link_groups.append(link_group)
+
+# Unlnks a cel from its link_group. Just handles changing cel_link_groups and cel.link_group.
+# Content and image_texture should be handled seperately for undo/redo related reasons.
+func unlink_cel(cel: BaseCel) -> void:
+	if cel.link_group == null:
+		return
+	cel.link_group.erase(cel)
+	if cel.link_group.empty():
+		cel_link_groups.erase(cel.link_group)
+	cel.link_group = null
+
 
 # Methods to Override:
 
 
 func serialize() -> Dictionary:
 	assert(index == project.layers.find(self))
+	# TODO H0: Serialize cel_link_groups
 	return {
 		"name": name,
 		"visible": visible,
@@ -95,6 +123,7 @@ func serialize() -> Dictionary:
 
 
 func deserialize(dict: Dictionary) -> void:
+	# TODO H0: Deserialize cel_link_groups
 	name = dict.name
 	visible = dict.visible
 	locked = dict.locked

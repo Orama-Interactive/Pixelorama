@@ -133,13 +133,15 @@ func add_frame() -> void:
 	var project: Project = Global.current_project
 	var frame_add_index := project.current_frame + 1
 	var frame: Frame = project.new_empty_frame()
-	var new_layers: Array = project.duplicate_layers()
 
-	for l_i in range(new_layers.size()):
-		if new_layers[l_i].get("new_cels_linked"):  # If the link button is pressed
-			new_layers[l_i].linked_cels.append(frame)
-			frame.cels[l_i].set_content(new_layers[l_i].linked_cels[0].cels[l_i].get_content())
-			frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
+	for l in range(project.layers.size()):
+		if project.layers[l].new_cels_linked:  # If the link button is pressed
+			var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
+			if prev_cel.link_group == null:
+				prev_cel.link_group = [prev_cel] # TODO: Should this be part of do/undo? (Maybe this chunk of code should be moved below the tag code if undo is added?
+			frame.cels[l].set_content(prev_cel.get_content())
+			frame.cels[l].image_texture = prev_cel.image_texture
+			frame.cels[l].link_group = prev_cel.link_group
 
 	# Code to PUSH AHEAD tags starting after the frame
 	var new_animation_tags := project.animation_tags.duplicate()
@@ -164,8 +166,6 @@ func add_frame() -> void:
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_property(project, "layers", new_layers)
-	project.undo_redo.add_undo_property(project, "layers", project.layers)
 	project.undo_redo.add_do_method(project, "add_frames", [frame], [frame_add_index])
 	project.undo_redo.add_undo_method(project, "remove_frames", [frame_add_index])
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
@@ -196,7 +196,6 @@ func delete_frames(indices := []) -> void:
 		indices.append(project.current_frame)
 
 	var current_frame: int = min(project.current_frame, project.frames.size() - indices.size() - 1)
-	var new_layers: Array = project.duplicate_layers()
 	var frames := []
 	var frame_correction := 0  # Only needed for tag adjustment
 
@@ -213,13 +212,6 @@ func delete_frames(indices := []) -> void:
 
 	for f in indices:
 		frames.append(project.frames[f])
-		# Check if one of the cels of the frame is linked
-		# if they are, unlink them too
-		# this prevents removed cels being kept in linked memory
-		for layer in new_layers:
-			for linked in layer.linked_cels:
-				if linked == project.frames[f]:
-					layer.linked_cels.erase(linked)
 
 		# Loop through the tags to see if the frame is in one
 		f -= frame_correction  # Erasing made frames indexes 1 step ahead their intended tags
@@ -239,8 +231,6 @@ func delete_frames(indices := []) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Remove Frame")
-	project.undo_redo.add_do_property(project, "layers", new_layers)
-	project.undo_redo.add_undo_property(project, "layers", Global.current_project.layers)
 	project.undo_redo.add_do_method(project, "remove_frames", indices)
 	project.undo_redo.add_undo_method(project, "add_frames", frames, indices)
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
@@ -268,7 +258,7 @@ func copy_frames(indices := []) -> void:
 	if indices.size() == 0:
 		indices.append(project.current_frame)
 
-	var new_layers: Array = project.duplicate_layers()
+	var new_layers: Array = project.duplicate_layers() # TODO H1: This should be removable
 	var copied_frames := []
 	var copied_indices := range(indices[-1] + 1, indices[-1] + 1 + indices.size())
 
@@ -291,6 +281,7 @@ func copy_frames(indices := []) -> void:
 
 		new_frame.duration = prev_frame.duration
 		for l_i in range(new_layers.size()):
+			# TODO H0: Update Here
 			# If the layer has new_cels_linked variable, and its true
 			var new_cels_linked := true if new_layers[l_i].get("new_cels_linked") else false
 
@@ -831,9 +822,9 @@ func project_changed() -> void:
 		Global.frame_ids.add_child(button)
 
 	# Press selected cel/frame/layer buttons
-	for cel in project.selected_cels:
-		var frame: int = cel[0]
-		var layer: int = cel[1]
+	for cel_index in project.selected_cels:
+		var frame: int = cel_index[0]
+		var layer: int = cel_index[1]
 		if frame < Global.frame_ids.get_child_count():
 			var frame_button: BaseButton = Global.frame_ids.get_child(frame)
 			frame_button.pressed = true

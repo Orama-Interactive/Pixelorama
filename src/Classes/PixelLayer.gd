@@ -2,9 +2,7 @@ class_name PixelLayer
 extends BaseLayer
 # A class for standard pixel layer properties.
 
-var new_cels_linked := false
-var linked_cels := []  # Array of Frames
-
+var linked_cels := [] # TODO 0: Remove when possible
 
 func _init(_project, _name := "") -> void:
 	project = _project
@@ -19,8 +17,6 @@ func serialize() -> Dictionary:
 	dict["type"] = Global.LayerTypes.PIXEL
 	dict["new_cels_linked"] = new_cels_linked
 	dict["linked_cels"] = []
-	for cel in linked_cels:
-		dict.linked_cels.append(project.frames.find(cel))
 	return dict
 
 
@@ -28,11 +24,13 @@ func deserialize(dict: Dictionary) -> void:
 	.deserialize(dict)
 	new_cels_linked = dict.new_cels_linked
 
-	for linked_cel_number in dict.linked_cels:
-		linked_cels.append(project.frames[linked_cel_number])
-		var linked_cel: PixelCel = project.frames[linked_cel_number].cels[index]
-		linked_cel.image = linked_cels[0].cels[index].image
-		linked_cel.image_texture = linked_cels[0].cels[index].image_texture
+	if dict.has("linked_cel") and not dict["linked_cel"].empty():  # Old linked cel system
+		cel_link_groups = [[]]
+		for linked_cel_index in dict["linked_cels"]:
+			var linked_cel: PixelCel = project.frames[linked_cel_index].cels[index] # TODO 0: Do I have my index at this point?
+			cel_link_groups[0].append(linked_cel)
+			linked_cel.image = cel_link_groups[0][0].image
+			linked_cel.image_texture = cel_link_groups[0][0].image_texture
 
 
 func new_empty_cel() -> BaseCel:
