@@ -597,18 +597,6 @@ func is_empty() -> bool:
 		and animation_tags.size() == 0
 	)
 
-# TODO H1: This should be removable
-func duplicate_layers() -> Array:
-	var new_layers: Array = layers.duplicate()
-	# Loop through the array to create new classes for each element, so that they
-	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
-	for i in new_layers.size():
-		new_layers[i] = new_layers[i].copy()
-	for l in new_layers:
-		if is_instance_valid(l.parent):
-			l.parent = new_layers[l.parent.index]  # Update the parent to the new copy of the parent
-	return new_layers
-
 
 func can_pixel_get_drawn(
 	pixel: Vector2,
