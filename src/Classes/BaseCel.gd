@@ -17,7 +17,7 @@ func get_content():
 	return null
 
 
-func set_content(_content) -> void:
+func set_content(_content, _texture: ImageTexture = null) -> void:
 	return
 
 

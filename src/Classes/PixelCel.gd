@@ -26,10 +26,12 @@ func get_content():
 	return image
 
 
-func set_content(content) -> void:
+func set_content(content, texture: ImageTexture = null) -> void:
 	image = content
-#	assert(not image.is_empty()) # TODO: When deserialiizng in base layer, the image is empty at first, is this create_from_image here needed in any usage of set_content?
-	image_texture.create_from_image(image, 0)
+	if is_instance_valid(texture):
+		image_texture = texture
+	else:
+		image_texture.create_from_image(image, 0)
 
 
 func create_empty_content():

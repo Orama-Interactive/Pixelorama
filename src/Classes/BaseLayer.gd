@@ -138,14 +138,14 @@ func deserialize(dict: Dictionary) -> void:
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
 	if dict.has("link_sets"):
+		# TODO: Can this bit be cleaned up a bit?
 		for link_set in dict["link_sets"]:
 			cel_link_sets.append([])
 			for linked_cel_index in link_set:
 				var linked_cel: BaseCel = project.frames[linked_cel_index].cels[index]
 				cel_link_sets[-1].append(linked_cel)
 				linked_cel.link_set = cel_link_sets[-1]
-				linked_cel.set_content(cel_link_sets[-1][0].get_content())
-				linked_cel.image_texture = cel_link_sets[-1][0].image_texture
+				linked_cel.set_content(cel_link_sets[-1][0].get_content(), cel_link_sets[-1][0].image_texture)
 
 
 func new_empty_cel() -> BaseCel:
