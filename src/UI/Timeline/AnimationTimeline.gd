@@ -258,7 +258,6 @@ func copy_frames(indices := []) -> void:
 	if indices.size() == 0:
 		indices.append(project.current_frame)
 
-#	var new_layers: Array = project.duplicate_layers() # TODO H1: This should be removable
 	var copied_frames := []
 	var copied_indices := range(indices[-1] + 1, indices[-1] + 1 + indices.size())
 
@@ -306,8 +305,6 @@ func copy_frames(indices := []) -> void:
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-#	project.undo_redo.add_do_property(project, "layers", new_layers)
-#	project.undo_redo.add_undo_property(project, "layers", project.layers)
 	project.undo_redo.add_do_method(project, "add_frames", copied_frames, copied_indices)
 	project.undo_redo.add_undo_method(project, "remove_frames", copied_indices)
 	project.undo_redo.add_do_property(project, "current_frame", indices[-1] + 1)
