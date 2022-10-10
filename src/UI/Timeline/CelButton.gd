@@ -130,14 +130,12 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 						project.layers[layer], "link_cel", s_cel, s_cel.link_set
 					)
 					if s_cel.link_set.size() > 1:  # Skip copying content if not linked to another
-						project.undo_redo.add_do_property(
-							s_cel, "image_texture", ImageTexture.new()
+						project.undo_redo.add_do_method(
+							s_cel, "set_content", s_cel.copy_content(), ImageTexture.new()
 						)
-						project.undo_redo.add_undo_property(
-							s_cel, "image_texture", s_cel.image_texture
+						project.undo_redo.add_undo_method(
+							s_cel, "set_content", s_cel.get_content(), s_cel.image_texture
 						)
-						project.undo_redo.add_do_method(s_cel, "set_content", s_cel.copy_content())
-						project.undo_redo.add_undo_method(s_cel, "set_content", s_cel.get_content())
 
 			elif id == MenuOptions.LINK:
 				project.undo_redo.create_action("Link Cel")
@@ -156,16 +154,17 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 						continue
 					if s_cel.link_set == link_set:  # Skip cels that were already linked
 						continue
-					project.undo_redo.add_do_method(s_cel, "set_content", cel.get_content())
-					project.undo_redo.add_undo_method(s_cel, "set_content", s_cel.get_content())
-					project.undo_redo.add_do_property(s_cel, "image_texture", cel.image_texture)
-					project.undo_redo.add_undo_property(s_cel, "image_texture", s_cel.image_texture)
-
 					project.undo_redo.add_do_method(
 						project.layers[layer], "link_cel", s_cel, link_set
 					)
 					project.undo_redo.add_undo_method(
 						project.layers[layer], "link_cel", s_cel, s_cel.link_set
+					)
+					project.undo_redo.add_do_method(
+						s_cel, "set_content", cel.get_content(), cel.image_texture
+					)
+					project.undo_redo.add_undo_method(
+						s_cel, "set_content", s_cel.get_content(), s_cel.image_texture
 					)
 
 			# Remove and add a new cel button to update appearance (can't use button_setup

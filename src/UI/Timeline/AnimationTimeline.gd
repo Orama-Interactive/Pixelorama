@@ -139,8 +139,7 @@ func add_frame() -> void:
 			var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
 			if prev_cel.link_set == null:
 				prev_cel.link_set = [prev_cel] # TODO: Should this be part of do/undo? (Maybe this chunk of code should be moved below the tag code if undo is added?
-			frame.cels[l].set_content(prev_cel.get_content())
-			frame.cels[l].image_texture = prev_cel.image_texture
+			frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
 			frame.cels[l].link_set = prev_cel.link_set
 
 	# Code to PUSH AHEAD tags starting after the frame
@@ -285,8 +284,7 @@ func copy_frames(indices := []) -> void:
 			if project.layers[l_i].new_cels_linked:
 				if cel.link_set == null:
 					cel.link_set = [cel] # TODO: Should this be part of do/undo? (Maybe this chunk of code should be moved below the tag code if undo is added?
-				new_cel.set_content(cel.get_content())
-				new_cel.image_texture = cel.image_texture
+				new_cel.set_content(cel.get_content(), cel.image_texture)
 				new_cel.link_set = cel.link_set
 			else:
 				new_cel.set_content(cel.copy_content())
