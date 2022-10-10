@@ -76,6 +76,14 @@ func get_hierarchy_depth() -> int:
 	return 0
 
 
+func copy() -> BaseLayer:
+	var copy = get_script().new(project)
+	copy.project = project
+	copy.index = index
+	copy.deserialize(serialize())
+	return copy
+
+
 func get_layer_path() -> String:
 	if is_instance_valid(parent):
 		return str(parent.get_layer_path(), "/", name)
@@ -138,14 +146,6 @@ func deserialize(dict: Dictionary) -> void:
 				linked_cel.link_set = cel_link_sets[-1]
 				linked_cel.set_content(cel_link_sets[-1][0].get_content())
 				linked_cel.image_texture = cel_link_sets[-1][0].image_texture
-
-
-func copy() -> BaseLayer:
-	var copy = get_script().new(project)
-	copy.project = project
-	copy.index = index
-	copy.deserialize(serialize())
-	return copy
 
 
 func new_empty_cel() -> BaseCel:
