@@ -258,7 +258,7 @@ func copy_frames(indices := []) -> void:
 	if indices.size() == 0:
 		indices.append(project.current_frame)
 
-	var new_layers: Array = project.duplicate_layers() # TODO H1: This should be removable
+#	var new_layers: Array = project.duplicate_layers() # TODO H1: This should be removable
 	var copied_frames := []
 	var copied_indices := range(indices[-1] + 1, indices[-1] + 1 + indices.size())
 
@@ -280,20 +280,19 @@ func copy_frames(indices := []) -> void:
 		var prev_frame: Frame = project.frames[f]
 
 		new_frame.duration = prev_frame.duration
-		for l_i in range(new_layers.size()):
-			# TODO H0: Update Here
-			# If the layer has new_cels_linked variable, and its true
-			var new_cels_linked := true if new_layers[l_i].get("new_cels_linked") else false
-
-			# Copy the cel, create new cel content if new cels aren't linked
-			new_frame.cels.append(new_layers[l_i].copy_cel(f, new_cels_linked))
-
-			if new_cels_linked:  # If the link button is pressed
-				new_layers[l_i].linked_cels.append(new_frame)
-				new_frame.cels[l_i].set_content(
-					new_layers[l_i].linked_cels[0].cels[l_i].get_content()
-				)
-				new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
+		for l_i in range(project.layers.size()):
+			var cel: BaseCel = project.frames[f].cels[l_i]  # The cel we're copying from
+			var new_cel: BaseCel = cel.get_script().new()
+			if project.layers[l_i].new_cels_linked:
+				if cel.link_set == null:
+					cel.link_set = [cel] # TODO: Should this be part of do/undo? (Maybe this chunk of code should be moved below the tag code if undo is added?
+				new_cel.set_content(cel.get_content())
+				new_cel.image_texture = cel.image_texture
+				new_cel.link_set = cel.link_set
+			else:
+				new_cel.set_content(cel.copy_content())
+			new_cel.opacity = cel.opacity
+			new_frame.cels.append(new_cel)
 
 		# Loop through the tags to see if the frame is in one
 		for tag in new_animation_tags:
@@ -307,8 +306,8 @@ func copy_frames(indices := []) -> void:
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_property(project, "layers", new_layers)
-	project.undo_redo.add_undo_property(project, "layers", project.layers)
+#	project.undo_redo.add_do_property(project, "layers", new_layers)
+#	project.undo_redo.add_undo_property(project, "layers", project.layers)
 	project.undo_redo.add_do_method(project, "add_frames", copied_frames, copied_indices)
 	project.undo_redo.add_undo_method(project, "remove_frames", copied_indices)
 	project.undo_redo.add_do_property(project, "current_frame", indices[-1] + 1)
