@@ -11,20 +11,18 @@ uniform sampler2D selection;
 
 bool has_contrary_neighbour(vec2 uv, vec2 texture_pixel_size, sampler2D tex) {
 	for (float i = -ceil(width); i <= ceil(width); i++) {
-		float x = abs(i) > width ? width * sign(i) : i;
 		float offset;
 
 		if (pattern == 0) {
-			offset = width - abs(x);
+			offset = width - abs(i);
 		} else if (pattern == 1) {
-			offset = floor(sqrt(pow(width + 0.5, 2) - x * x));
+			offset = floor(sqrt(pow(width + 0.5, 2) - i * i));
 		} else if (pattern == 2) {
 			offset = width;
 		}
 
 		for (float j = -ceil(offset); j <= ceil(offset); j++) {
-			float y = abs(j) > offset ? offset * sign(j) : j;
-			vec2 xy = uv + texture_pixel_size * vec2(x, y);
+			vec2 xy = uv + texture_pixel_size * vec2(i, j);
 
 			if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(tex, xy).a == 0.0) == inside) {
 				return true;
