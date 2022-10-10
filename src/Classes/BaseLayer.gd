@@ -81,11 +81,11 @@ func get_layer_path() -> String:
 		return str(parent.get_layer_path(), "/", name)
 	return name
 
-# Links a cel to link_set. Just handles changing cel_link_sets and cel.link_set.
-# Content and image_texture should be handled seperately for undo/redo related reasons.
-func link_cel(cel: BaseCel, link_set: Array) -> void:
-	# TODO: Should this handle a null link set (combining with unlink_cel, or be kept seperated?)
-	# TODO: What if link set is equal to current link set of cel to link?
+# Links a cel to link_set if its an array, or unlinks if null. Just handles changing cel_link_sets
+# and cel.link_set. Content/image_texture are handled seperately for undo/redo related reasons
+func link_cel(cel: BaseCel, link_set = null) -> void:
+	if cel.link_set == link_set:
+		return  # TODO: This shouldn't be required, so verify if this will actually compare correctly
 	# Erase from the cel's current link_set
 	if cel.link_set != null:
 		cel.link_set.erase(cel)
@@ -93,19 +93,10 @@ func link_cel(cel: BaseCel, link_set: Array) -> void:
 			cel_link_sets.erase(cel.link_set)
 	# Add to link_set
 	cel.link_set = link_set
-	link_set.append(cel)
-	if not cel_link_sets.has(link_set):
-		cel_link_sets.append(link_set)
-
-# Unlnks a cel from its link_set. Just handles changing cel_link_sets and cel.link_set.
-# Content and image_texture should be handled seperately for undo/redo related reasons.
-func unlink_cel(cel: BaseCel) -> void:
-	if cel.link_set == null:
-		return
-	cel.link_set.erase(cel)
-	if cel.link_set.empty():
-		cel_link_sets.erase(cel.link_set)
-	cel.link_set = null
+	if link_set != null:
+		link_set.append(cel)
+		if not cel_link_sets.has(link_set):
+			cel_link_sets.append(link_set)
 
 
 # Methods to Override:

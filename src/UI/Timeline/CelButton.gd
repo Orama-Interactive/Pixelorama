@@ -125,7 +125,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 					var s_cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 					if s_cel.link_set == null:  # Skip cels that aren't linked
 						continue
-					project.undo_redo.add_do_method(project.layers[layer], "unlink_cel", s_cel)
+					project.undo_redo.add_do_method(project.layers[layer], "link_cel", s_cel, null)
 					project.undo_redo.add_undo_method(
 						project.layers[layer], "link_cel", s_cel, s_cel.link_set
 					)
@@ -146,7 +146,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 					project.undo_redo.add_do_method(
 						project.layers[layer], "link_cel", cel, link_set
 					)
-					project.undo_redo.add_undo_method(project.layers[layer], "unlink_cel", cel)
+					project.undo_redo.add_undo_method(project.layers[layer], "link_cel", cel, null)
 
 				for cel_index in project.selected_cels:
 					if layer != cel_index[1]:  # Skip selected cels not on the same layer
@@ -164,14 +164,9 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 					project.undo_redo.add_do_method(
 						project.layers[layer], "link_cel", s_cel, link_set
 					)
-					if s_cel.link_set == null:
-						project.undo_redo.add_undo_method(
-							project.layers[layer], "unlink_cel", s_cel
-						)
-					else:
-						project.undo_redo.add_undo_method(
-							project.layers[layer], "link_cel", s_cel, s_cel.link_set
-						)
+					project.undo_redo.add_undo_method(
+						project.layers[layer], "link_cel", s_cel, s_cel.link_set
+					)
 
 			# Remove and add a new cel button to update appearance (can't use button_setup
 			# because there is no guarantee that it will be the exact same cel button instance)
