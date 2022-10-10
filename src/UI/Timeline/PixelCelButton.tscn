@@ -17,7 +17,6 @@ __meta__ = {
 }
 
 [node name="LinkedIndicator" type="Polygon2D" parent="." index="2"]
-show_behind_parent = true
 color = Color( 1, 0, 0, 1 )
 invert_enable = true
 invert_border = 1.0
