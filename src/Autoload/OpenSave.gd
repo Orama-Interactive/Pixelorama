@@ -460,12 +460,11 @@ func open_image_as_spritesheet_layer(
 	# Initialize undo mechanism
 	project.undos += 1
 	project.undo_redo.create_action("Add Spritesheet Layer")
-	var new_layers: Array = project.layers.duplicate()  # Used for updating linked_cels lists # TODO: THIS CAN PROBABLY BE REMOVED
 
 	# Create new frames (if needed)
 	var new_frames_size = max(project.frames.size(), start_frame + (vertical * horizontal))
 	var frames := []
-	var frame_indices: Array
+	var frame_indices := []
 	if new_frames_size > project.frames.size():
 		var required_frames = new_frames_size - project.frames.size()
 		frame_indices = range(
@@ -473,15 +472,14 @@ func open_image_as_spritesheet_layer(
 		)
 		for i in required_frames:
 			var new_frame := Frame.new()
-			for l_i in range(project.layers.size()):  # Create as many cels as there are layers
-				new_frame.cels.append(project.layers[l_i].new_empty_cel())
-				# TODO: I'm wondering if this part is even needed anymore?
-				if new_layers[l_i].get("new_cels_linked"):
-					new_layers[l_i].linked_cels.append(new_frame)
-					new_frame.cels[l_i].set_content(
-						new_layers[l_i].linked_cels[0].cels[l_i].get_content(),
-						new_layers[l_i].linked_cels[0].cels[l_i].image_texture
-					)
+			for l in range(project.layers.size()):  # Create as many cels as there are layers
+				new_frame.cels.append(project.layers[l].new_empty_cel())
+				if project.layers[l].new_cels_linked:
+					var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
+					if prev_cel.link_set == null:
+						prev_cel.link_set = [prev_cel] # TODO: Should this be part of do/undo? (Maybe this chunk of code should be moved below the tag code if undo is added?
+					new_frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
+					new_frame.cels[l].link_set = prev_cel.link_set
 			frames.append(new_frame)
 
 	# Create new layer for spritesheet
@@ -505,14 +503,12 @@ func open_image_as_spritesheet_layer(
 	project.undo_redo.add_do_property(project, "current_frame", new_frames_size - 1)
 	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
 	project.undo_redo.add_do_method(project, "add_frames", frames, frame_indices)
-	project.undo_redo.add_do_property(project, "layers", new_layers)# TODO: THIS CAN PROBABLY BE REMOVED
 	project.undo_redo.add_do_method(project, "add_layers", [layer], [project.layers.size()], [cels])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
-	project.undo_redo.add_undo_property(project, "layers", project.layers)# TODO: THIS CAN PROBABLY BE REMOVED
 	project.undo_redo.add_undo_method(project, "remove_frames", frame_indices)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
