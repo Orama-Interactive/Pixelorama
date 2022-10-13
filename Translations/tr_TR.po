@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-10-05 01:09\n"
+"PO-Revision-Date: 2022-10-13 18:50\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1627,7 +1627,7 @@ msgid "Layer"
 msgstr "Katman"
 
 msgid "Group"
-msgstr ""
+msgstr "Grup"
 
 msgid "Layers"
 msgstr "Katmanlar"
@@ -1636,7 +1636,7 @@ msgid "Create a new layer"
 msgstr "Yeni katman oluştur"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "Yeni grup katmanı oluştur"
 
 msgid "Remove current layer"
 msgstr "Geçerli katmanı kaldır"
@@ -1674,7 +1674,7 @@ msgstr "Hücre köprülemesini etkinleştir/devre dışı bırak\n\n"
 "Köprülenmiş hücreler birçok kare tarafından paylaşılır"
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "Grubu genişlet/daralt"
 
 msgid "Palette"
 msgstr "Palet"
