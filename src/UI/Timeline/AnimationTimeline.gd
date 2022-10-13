@@ -756,10 +756,6 @@ func _on_MergeDownLayer_pressed() -> void:
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
 		top_image.unlock()
-		# TODO: It seems that tge texture on a no longer linked cel button isn't getting properly updated (Before this PR)?
-		# (Maybe it had to do with removing the canvas.update_textures bit for cel buttons?) (What's weird is that the linked
-		# indicator is updated but not the texture? Probably due to the cel buttons texture being setup in PixelCel.instantiate_cel_button
-		# rather than in CelButton.button_setup)
 		# TODO: Should Cel classes get a method like merge_content? Maybe its best if only PixelLayers support merging?
 		var bottom_cel: BaseCel = frame.cels[bottom_layer.index]
 		var bottom_image := Image.new()

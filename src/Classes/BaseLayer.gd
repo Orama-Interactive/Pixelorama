@@ -112,7 +112,6 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 
 func serialize() -> Dictionary:
 	assert(index == project.layers.find(self))
-	# TODO H0: Figure out why saving my test project is resulting in a .pxo1 failed save (though changing it to .pxo and opening seems to work?)
 	var dict := {
 		"name": name,
 		"visible": visible,
