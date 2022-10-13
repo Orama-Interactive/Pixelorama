@@ -30,8 +30,10 @@ func set_content(content, texture: ImageTexture = null) -> void:
 	image = content
 	if is_instance_valid(texture):
 		image_texture = texture
+		if image_texture.get_size() != image.get_size():
+			image_texture.create_from_image(image, 0)
 	else:
-		image_texture.create_from_image(image, 0)
+		image_texture.create_from_image(image, 0) # TODO: This could just be the set_data I think...
 
 
 func create_empty_content():
