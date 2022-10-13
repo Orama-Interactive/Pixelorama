@@ -19,6 +19,7 @@ export var snap_by_default := false
 # If show_progress is true it will show the colored progress bar, good for values with a specific
 # range. False will hide it, which is good for values that can be any number.
 export var show_progress := true
+export var show_arrows := true setget _show_arrows_changed
 
 var state := NORMAL
 onready var line_edit: LineEdit = $LineEdit
@@ -108,6 +109,12 @@ func _suffix_changed(v: String) -> void:
 	_reset_display()
 
 
+func _show_arrows_changed(v: bool) -> void:
+	show_arrows = v
+	$"%ValueUp".visible = v
+	$"%ValueDown".visible = v
+
+
 func _on_LineEdit_gui_input(event: InputEvent) -> void:
 	if state == TYPING:
 		if event is InputEventKey and event.scancode == KEY_ESCAPE:
@@ -155,3 +162,17 @@ func _reset_display() -> void:
 	else:
 		tint_progress = Color.transparent
 	line_edit.text = str(tr(prefix), " ", value, " ", tr(suffix)).strip_edges()
+	$"%ValueUp".modulate = Global.modulate_icon_color
+	$"%ValueDown".modulate = Global.modulate_icon_color
+
+
+func _on_ValueUp_pressed() -> void:
+	if not editable:
+		return
+	value += snap_step if Input.is_action_pressed("ctrl") else step
+
+
+func _on_ValueDown_pressed() -> void:
+	if not editable:
+		return
+	value -= snap_step if Input.is_action_pressed("ctrl") else step

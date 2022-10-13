@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/misc/value_slider.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/misc/value_arrow.svg" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/misc/value_arrow_hover.svg" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/misc/value_arrow_press.svg" type="Texture" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="ValueSlider" type="TextureProgress"]
-margin_right = 6.0
-margin_bottom = 6.0
+margin_right = 24.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 32, 24 )
 mouse_filter = 0
 mouse_default_cursor_shape = 2
@@ -35,7 +38,41 @@ align = 1
 editable = false
 selecting_enabled = false
 
+[node name="ValueUp" type="TextureButton" parent="." groups=["UIButtons"]]
+unique_name_in_owner = true
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -15.0
+margin_top = 12.0
+margin_right = -3.0
+margin_bottom = 24.0
+rect_scale = Vector2( 1, -1 )
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+stretch_mode = 3
+
+[node name="ValueDown" type="TextureButton" parent="." groups=["UIButtons"]]
+unique_name_in_owner = true
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -15.0
+margin_top = -12.0
+margin_right = -3.0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+stretch_mode = 3
+
 [connection signal="value_changed" from="." to="." method="_on_value_changed"]
 [connection signal="focus_exited" from="LineEdit" to="." method="_confirm_text"]
 [connection signal="gui_input" from="LineEdit" to="." method="_on_LineEdit_gui_input"]
 [connection signal="text_entered" from="LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="pressed" from="ValueUp" to="." method="_on_ValueUp_pressed"]
+[connection signal="pressed" from="ValueDown" to="." method="_on_ValueDown_pressed"]
