@@ -2,8 +2,6 @@ class_name PixelLayer
 extends BaseLayer
 # A class for standard pixel layer properties.
 
-var linked_cels := [] # TODO 0: Remove when possible
-
 func _init(_project, _name := "") -> void:
 	project = _project
 	name = _name
