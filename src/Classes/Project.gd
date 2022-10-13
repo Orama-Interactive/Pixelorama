@@ -378,7 +378,10 @@ func deserialize(dict: Dictionary) -> void:
 		# a layer, so loop again after creating them:
 		for layer_i in dict.layers.size():
 			layers[layer_i].index = layer_i
-			layers[layer_i].deserialize(dict.layers[layer_i])
+			var layer_dict: Dictionary = dict.layers[layer_i]
+			if layer_dict.has("linked_cels"):  # Convert old linked_cels to link_sets
+				layer_dict["link_sets"] = [layer_dict["linked_cels"]]
+			layers[layer_i].deserialize(layer_dict)
 			_deserialize_metadata(layers[layer_i], dict.layers[layer_i])
 	if dict.has("tags"):
 		for tag in dict.tags:
