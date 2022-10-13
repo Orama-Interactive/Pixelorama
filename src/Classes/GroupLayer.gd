@@ -29,14 +29,6 @@ func new_empty_cel() -> BaseCel:
 	return GroupCel.new()
 
 
-func copy_all_cels() -> Array:
-	var cels := []
-	for frame in project.frames:
-		var cel: GroupCel = frame.cels[index]
-		cels.append(GroupCel.new(cel.opacity))
-	return cels
-
-
 func set_name_to_default(number: int) -> void:
 	name = tr("Group") + " %s" % number
 

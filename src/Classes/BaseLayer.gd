@@ -152,11 +152,6 @@ func new_empty_cel() -> BaseCel:
 	return null
 
 
-# Used to copy all cels with cel linking properly set up between this set of copies:
-func copy_all_cels() -> Array:
-	return []
-
-
 func set_name_to_default(number: int) -> void:
 	name = tr("Layer") + " %s" % number
 

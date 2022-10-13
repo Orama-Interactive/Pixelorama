@@ -39,28 +39,6 @@ func new_empty_cel() -> BaseCel:
 	return PixelCel.new(image)
 
 
-func copy_all_cels() -> Array:
-	var cels := []
-
-	var linked_image: Image
-	var linked_texture: ImageTexture
-	if not linked_cels.empty():
-		var cel: PixelCel = linked_cels[0].cels[index]
-		linked_image = Image.new()
-		linked_image.copy_from(cel.image)
-		linked_texture = ImageTexture.new()
-
-	for frame in project.frames:
-		var cel: PixelCel = frame.cels[index]
-		if linked_cels.has(frame):
-			cels.append(PixelCel.new(linked_image, cel.opacity, linked_texture))
-		else:
-			var copy_image := Image.new()
-			copy_image.copy_from(cel.image)
-			cels.append(PixelCel.new(copy_image, cel.opacity))
-	return cels
-
-
 func can_layer_get_drawn() -> bool:
 	return is_visible_in_hierarchy() && !is_locked_in_hierarchy()
 

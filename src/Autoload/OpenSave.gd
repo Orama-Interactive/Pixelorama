@@ -230,6 +230,7 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 			image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
 			frame_class.cels.append(PixelCel.new(image, cel_opacity))
 			if file_major_version >= 0 and file_minor_version >= 7:
+				# TODO: Hard for me to test, but is this part required? (there is a l.deserialize call up higher)
 				if frame in linked_cels[layer_i]:
 					var linked_cel: PixelCel = new_project.layers[layer_i].linked_cels[0].cels[layer_i]
 					new_project.layers[layer_i].linked_cels.append(frame_class)

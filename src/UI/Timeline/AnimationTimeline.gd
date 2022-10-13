@@ -601,11 +601,33 @@ func _on_CloneLayer_pressed() -> void:
 	var clones := []  # Array of Layers
 	var cels := []  # 2D Array of Cels
 	for sl in source_layers:
-		var cl: BaseLayer = sl.copy()
+		var cl: BaseLayer = sl.copy() # TODO: Does BaseLayer still need a copy method?
 		if sl.index == project.current_layer:
 			cl.name = str(sl.name, " (", tr("copy"), ")")
 		clones.append(cl)
-		cels.append(sl.copy_all_cels())
+
+		# TODO: Clean this up:
+		cels.append([])
+		for i in cl.cel_link_sets.size():
+			cl.cel_link_sets[i] = []  # Set to a new empty array
+
+		for frame in project.frames:
+			var source_cel: BaseCel = frame.cels[sl.index]
+			var new_cel: BaseCel = source_cel.get_script().new()
+
+			if source_cel.link_set == null:
+				new_cel.set_content(source_cel.copy_content())
+			else:
+				new_cel.link_set = cl.cel_link_sets[sl.cel_link_sets.find(source_cel.link_set)]
+
+				if new_cel.link_set.size() > 0:
+					new_cel.set_content(new_cel.link_set[0].get_content(), new_cel.link_set[0].image_texture)
+				else:
+					new_cel.set_content(source_cel.copy_content())
+				new_cel.link_set.append(new_cel)
+
+			new_cel.opacity = source_cel.opacity
+			cels[-1].append(new_cel)
 
 	# Swap parents with clones if the parent is one of the source layers
 	for cl in clones:
@@ -717,7 +739,7 @@ func _on_MergeDownLayer_pressed() -> void:
 	var project: Project = Global.current_project
 	var top_layer: PixelLayer = project.layers[project.current_layer]
 	var bottom_layer: PixelLayer = project.layers[project.current_layer - 1]
-	var new_linked_cels: Array = bottom_layer.linked_cels.duplicate()
+	var new_linked_cels: Array = bottom_layer.linked_cels.duplicate() # TODO: Update how linked cels are updated here
 
 	project.undos += 1
 	project.undo_redo.create_action("Merge Layer")
