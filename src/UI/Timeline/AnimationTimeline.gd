@@ -601,12 +601,10 @@ func _on_CloneLayer_pressed() -> void:
 	var clones := []  # Array of Layers
 	var cels := []  # 2D Array of Cels
 	for sl in source_layers:
-		var cl: BaseLayer = sl.copy() # TODO: Does BaseLayer still need a copy method?
-		if sl.index == project.current_layer:
-			cl.name = str(sl.name, " (", tr("copy"), ")")
+		var cl: BaseLayer = sl.copy() # TODO: Does BaseLayer still need a copy method (only used here currently)?
 		clones.append(cl)
 
-		# TODO: Clean this up:
+		# TODO: Clean this up (mostly clearer naming)
 		cels.append([])
 		for i in cl.cel_link_sets.size():
 			cl.cel_link_sets[i] = []  # Set to a new empty array
@@ -629,11 +627,12 @@ func _on_CloneLayer_pressed() -> void:
 			new_cel.opacity = source_cel.opacity
 			cels[-1].append(new_cel)
 
-	# Swap parents with clones if the parent is one of the source layers
 	for cl in clones:
 		var p = source_layers.find(cl.parent)
-		if p > -1:
+		if p > -1:  # Swap parent with clone if the parent is one of the source layers
 			cl.parent = clones[p]
+		else:  # Add (Copy) to the name if its not a child of another copied layer
+			cl.name = str(cl.name, " (", tr("copy"), ")")
 
 	var indices := range(project.current_layer + 1, project.current_layer + clones.size() + 1)
 
