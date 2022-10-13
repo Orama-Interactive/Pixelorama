@@ -191,20 +191,20 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 
 	var frame := 0
 
-	var linked_cels := []
+	var layer_dicts := []
 	if file_major_version >= 0 and file_minor_version > 6:
 		var global_layer_line := file.get_line()
 		while global_layer_line == ".":
-			var layer_dict := {
+			layer_dicts.append({
 				"name": file.get_line(),
 				"visible": file.get_8(),
 				"locked": file.get_8(),
 				"new_cels_linked": file.get_8(),
-				"linked_cels": []
-			}
-			linked_cels.append(file.get_var())
+				"link_sets": []
+			})
+			layer_dicts[-1]["link_sets"].append(file.get_var())
 			var l := PixelLayer.new(new_project)
-			l.deserialize(layer_dict)
+			l.index = new_project.layers.size()
 			new_project.layers.append(l)
 			global_layer_line = file.get_line()
 
@@ -222,6 +222,7 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 				var layer_name_old_version = file.get_line()
 				if frame == 0:
 					var l := PixelLayer.new(new_project, layer_name_old_version)
+					l.index = layer_i
 					new_project.layers.append(l)
 			var cel_opacity := 1.0
 			if file_major_version >= 0 and file_minor_version > 5:
@@ -229,14 +230,6 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 			var image := Image.new()
 			image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
 			frame_class.cels.append(PixelCel.new(image, cel_opacity))
-			if file_major_version >= 0 and file_minor_version >= 7:
-				# TODO: Hard for me to test, but is this part required? (there is a l.deserialize call up higher)
-				if frame in linked_cels[layer_i]:
-					var linked_cel: PixelCel = new_project.layers[layer_i].linked_cels[0].cels[layer_i]
-					new_project.layers[layer_i].linked_cels.append(frame_class)
-					frame_class.cels[layer_i].image = linked_cel.image
-					frame_class.cels[layer_i].image_texture = linked_cel.image_texture
-
 			layer_i += 1
 			layer_line = file.get_line()
 
@@ -260,6 +253,10 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 		new_project.frames.append(frame_class)
 		frame_line = file.get_line()
 		frame += 1
+
+	for layer_i in new_project.layers.size():
+		# Now that we have the layers, frames, and cels, deserialize layer data
+		new_project.layers[layer_i].deserialize(layer_dicts[layer_i])
 
 	if new_guides:
 		var guide_line := file.get_line()  # "guideline" no pun intended
