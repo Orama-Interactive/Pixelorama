@@ -738,63 +738,61 @@ func _on_MergeDownLayer_pressed() -> void:
 	var project: Project = Global.current_project
 	var top_layer: PixelLayer = project.layers[project.current_layer]
 	var bottom_layer: PixelLayer = project.layers[project.current_layer - 1]
-	var new_linked_cels: Array = bottom_layer.linked_cels.duplicate() # TODO: Update how linked cels are updated here
 
 	project.undos += 1
 	project.undo_redo.create_action("Merge Layer")
 
-	for f in project.frames:
+	for frame in project.frames:
 		var top_image := Image.new()
-		top_image.copy_from(f.cels[top_layer.index].image)
+		top_image.copy_from(frame.cels[top_layer.index].image)
 
 		top_image.lock()
-		if f.cels[top_layer.index].opacity < 1:  # If we have layer transparency
+		if frame.cels[top_layer.index].opacity < 1:  # If we have layer transparency
 			for xx in top_image.get_size().x:
 				for yy in top_image.get_size().y:
 					var pixel_color: Color = top_image.get_pixel(xx, yy)
-					var alpha: float = pixel_color.a * f.cels[top_layer.index].opacity
+					var alpha: float = pixel_color.a * frame.cels[top_layer.index].opacity
 					top_image.set_pixel(
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
 		top_image.unlock()
-
+		# TODO: It seems that tge texture on a no longer linked cel button isn't getting properly updated (Before this PR)?
+		# (Maybe it had to do with removing the canvas.update_textures bit for cel buttons?) (What's weird is that the linked
+		# indicator is updated but not the texture? Probably due to the cel buttons texture being setup in PixelCel.instantiate_cel_button
+		# rather than in CelButton.button_setup)
+		# TODO: Should Cel classes get a method like merge_content? Maybe its best if only PixelLayers support merging?
+		var bottom_cel: BaseCel = frame.cels[bottom_layer.index]
 		var bottom_image := Image.new()
-		bottom_image.copy_from(f.cels[bottom_layer.index].image)
+		bottom_image.copy_from(bottom_cel.image)
 		bottom_image.blend_rect(top_image, Rect2(Vector2.ZERO, project.size), Vector2.ZERO)
 		if (
-			!top_image.is_invisible()
-			and bottom_layer.linked_cels.size() > 1
-			and f in bottom_layer.linked_cels
+			bottom_cel.link_set != null
+			and bottom_cel.link_set.size() > 1
+			and not top_image.is_invisible()
 		):
-			new_linked_cels.erase(f)
+			# Unlink cel:
+			project.undo_redo.add_do_method(bottom_layer, "link_cel", bottom_cel, null)
+			project.undo_redo.add_undo_method(
+				bottom_layer, "link_cel", bottom_cel, bottom_cel.link_set
+			)
 			project.undo_redo.add_do_property(
-				f.cels[bottom_layer.index], "image_texture", ImageTexture.new()
+				bottom_cel, "image_texture", ImageTexture.new()
 			)
 			project.undo_redo.add_undo_property(
-				f.cels[bottom_layer.index],
-				"image_texture",
-				f.cels[bottom_layer.index].image_texture
+				bottom_cel, "image_texture", bottom_cel.image_texture
 			)
-			project.undo_redo.add_do_property(f.cels[bottom_layer.index], "image", bottom_image)
-			project.undo_redo.add_undo_property(
-				f.cels[bottom_layer.index], "image", f.cels[bottom_layer.index].image
-			)
+			project.undo_redo.add_do_property(bottom_cel, "image", bottom_image)
+			project.undo_redo.add_undo_property(bottom_cel, "image", bottom_cel.image)
 		else:
-			project.undo_redo.add_do_property(
-				f.cels[bottom_layer.index].image, "data", bottom_image.data
-			)
-			project.undo_redo.add_undo_property(
-				f.cels[bottom_layer.index].image, "data", f.cels[bottom_layer.index].image.data
-			)
+			project.undo_redo.add_do_property(bottom_cel.image, "data", bottom_image.data)
+			project.undo_redo.add_undo_property(bottom_cel.image, "data", bottom_cel.image.data)
 
 	var top_cels := []
-	for f in project.frames:
-		top_cels.append(f.cels[top_layer.index])
+	for frame in project.frames: # TODO: Can this be merged with the above loop?
+		top_cels.append(frame.cels[top_layer.index])
 
 	project.undo_redo.add_do_property(project, "current_layer", bottom_layer.index)
 	project.undo_redo.add_undo_property(project, "current_layer", top_layer.index)
-	project.undo_redo.add_do_property(bottom_layer, "linked_cels", new_linked_cels)
-	project.undo_redo.add_undo_property(bottom_layer, "linked_cels", bottom_layer.linked_cels)
 	project.undo_redo.add_do_method(project, "remove_layers", [top_layer.index])
 	project.undo_redo.add_undo_method(
 		project, "add_layers", [top_layer], [top_layer.index], [top_cels]
