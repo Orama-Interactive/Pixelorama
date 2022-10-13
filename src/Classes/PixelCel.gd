@@ -68,5 +68,4 @@ func load_image_data_from_pxo(file: File, project_size: Vector2) -> void:
 
 func instantiate_cel_button() -> Node:
 	var cel_button = Global.pixel_cel_button_node.instance()
-	cel_button.get_child(0).texture = image_texture
 	return cel_button

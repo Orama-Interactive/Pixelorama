@@ -20,6 +20,7 @@ func button_setup() -> void:
 
 	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, layer]
 	cel = Global.current_project.frames[frame].cels[layer]
+	$CelTexture.texture = cel.image_texture
 	if is_instance_valid(linked_indicator):
 		linked_indicator.visible = cel.link_set != null
 		if cel.link_set != null:
