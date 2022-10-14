@@ -92,8 +92,6 @@ func get_layer_path() -> String:
 # Links a cel to link_set if its an array, or unlinks if null. Just handles changing cel_link_sets
 # and cel.link_set. Content/image_texture are handled seperately for undo/redo related reasons
 func link_cel(cel: BaseCel, link_set = null) -> void:
-	if cel.link_set == link_set:
-		return  # TODO: This shouldn't be required, so verify if this will actually compare correctly
 	# Erase from the cel's current link_set
 	if cel.link_set != null:
 		cel.link_set.erase(cel)

@@ -475,7 +475,9 @@ func open_image_as_spritesheet_layer(
 				if project.layers[l].new_cels_linked:
 					var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
 					if prev_cel.link_set == null:
-						prev_cel.link_set = [prev_cel] # TODO: Should this be part of do/undo? (Maybe this chunk of code should be moved below the tag code if undo is added?
+						prev_cel.link_set = []
+						project.undo_redo.add_do_method(project.layers[l], "link_cel", prev_cel, prev_cel.link_set)
+						project.undo_redo.add_undo_method(project.layers[l], "link_cel", prev_cel, null)
 					new_frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
 					new_frame.cels[l].link_set = prev_cel.link_set
 			frames.append(new_frame)

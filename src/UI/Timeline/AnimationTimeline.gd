@@ -134,11 +134,16 @@ func add_frame() -> void:
 	var frame_add_index := project.current_frame + 1
 	var frame: Frame = project.new_empty_frame()
 
+	project.undos += 1
+	project.undo_redo.create_action("Add Frame")
+
 	for l in range(project.layers.size()):
 		if project.layers[l].new_cels_linked:  # If the link button is pressed
 			var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
 			if prev_cel.link_set == null:
-				prev_cel.link_set = [prev_cel] # TODO: Should this be part of do/undo? (Maybe this chunk of code should be moved below the tag code if undo is added?
+				prev_cel.link_set = []
+				project.undo_redo.add_do_method(project.layers[l], "link_cel", prev_cel, prev_cel.link_set)
+				project.undo_redo.add_undo_method(project.layers[l], "link_cel", prev_cel, null)
 			frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
 			frame.cels[l].link_set = prev_cel.link_set
 
@@ -161,8 +166,6 @@ func add_frame() -> void:
 			tag.from += 1
 			tag.to += 1
 
-	project.undos += 1
-	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(project, "add_frames", [frame], [frame_add_index])
@@ -271,6 +274,9 @@ func copy_frames(indices := []) -> void:
 			new_animation_tags[i].to
 		)
 
+	project.undos += 1
+	project.undo_redo.create_action("Add Frame")
+
 	for f in indices:
 		var new_frame := Frame.new()
 		copied_frames.append(new_frame)
@@ -278,12 +284,15 @@ func copy_frames(indices := []) -> void:
 		var prev_frame: Frame = project.frames[f]
 
 		new_frame.duration = prev_frame.duration
-		for l_i in range(project.layers.size()):
-			var cel: BaseCel = project.frames[f].cels[l_i]  # The cel we're copying from
+		for l in range(project.layers.size()):
+			# TODO: would something like orig_cel or source_cel be better name here?
+			var cel: BaseCel = project.frames[f].cels[l]  # The cel we're copying from
 			var new_cel: BaseCel = cel.get_script().new()
-			if project.layers[l_i].new_cels_linked:
+			if project.layers[l].new_cels_linked:
 				if cel.link_set == null:
-					cel.link_set = [cel] # TODO: Should this be part of do/undo? (Maybe this chunk of code should be moved below the tag code if undo is added?
+					cel.link_set = []
+					project.undo_redo.add_do_method(project.layers[l], "link_cel", cel, cel.link_set)
+					project.undo_redo.add_undo_method(project.layers[l], "link_cel", cel, null)
 				new_cel.set_content(cel.get_content(), cel.image_texture)
 				new_cel.link_set = cel.link_set
 			else:
@@ -299,8 +308,6 @@ func copy_frames(indices := []) -> void:
 				tag.from += 1
 				tag.to += 1
 
-	project.undos += 1
-	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(project, "add_frames", copied_frames, copied_indices)
