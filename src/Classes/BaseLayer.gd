@@ -137,14 +137,14 @@ func deserialize(dict: Dictionary) -> void:
 	if dict.has("linked_cels") and not dict["linked_cels"].empty():
 		dict["link_sets"] = [dict["linked_cels"]]  # Convert old linked_cels to link_sets
 	if dict.has("link_sets"):
-		# TODO: Can this bit be cleaned up a bit?
-		for link_set in dict["link_sets"]:
-			cel_link_sets.append([])
-			for linked_cel_index in link_set:
+		for serialized_link_set in dict["link_sets"]:
+			var link_set := []
+			for linked_cel_index in serialized_link_set:
 				var linked_cel: BaseCel = project.frames[linked_cel_index].cels[index]
-				cel_link_sets[-1].append(linked_cel)
-				linked_cel.link_set = cel_link_sets[-1]
-				linked_cel.set_content(cel_link_sets[-1][0].get_content(), cel_link_sets[-1][0].image_texture)
+				link_set.append(linked_cel)
+				linked_cel.link_set = link_set
+				linked_cel.set_content(link_set[0].get_content(), link_set[0].image_texture)
+			cel_link_sets.append(link_set)
 
 
 func new_empty_cel() -> BaseCel:
