@@ -136,8 +136,8 @@ func deserialize(dict: Dictionary) -> void:
 	locked = dict.locked
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
-	if dict.has("linked_cels"):  # Convert old linked_cels to link_sets
-		dict["link_sets"] = [dict["linked_cels"]]
+	if dict.has("linked_cels") and not dict["linked_cels"].empty():
+		dict["link_sets"] = [dict["linked_cels"]]  # Convert old linked_cels to link_sets
 	if dict.has("link_sets"):
 		# TODO: Can this bit be cleaned up a bit?
 		for link_set in dict["link_sets"]:
