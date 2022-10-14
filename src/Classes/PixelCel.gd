@@ -33,7 +33,7 @@ func set_content(content, texture: ImageTexture = null) -> void:
 		if image_texture.get_size() != image.get_size():
 			image_texture.create_from_image(image, 0)
 	else:
-		image_texture.create_from_image(image, 0) # TODO: This could just be the set_data I think...
+		image_texture.create_from_image(image, 0)
 
 
 func create_empty_content():

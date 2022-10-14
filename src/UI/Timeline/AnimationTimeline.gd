@@ -763,7 +763,6 @@ func _on_MergeDownLayer_pressed() -> void:
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
 		top_image.unlock()
-		# TODO: Should Cel classes get a method like merge_content? Maybe its best if only PixelLayers support merging?
 		var bottom_cel: BaseCel = frame.cels[bottom_layer.index]
 		var bottom_image := Image.new()
 		bottom_image.copy_from(bottom_cel.image)
