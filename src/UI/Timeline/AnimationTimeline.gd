@@ -281,23 +281,22 @@ func copy_frames(indices := []) -> void:
 		var new_frame := Frame.new()
 		copied_frames.append(new_frame)
 
-		var prev_frame: Frame = project.frames[f]
+		var src_frame: Frame = project.frames[f]
 
-		new_frame.duration = prev_frame.duration
+		new_frame.duration = src_frame.duration
 		for l in range(project.layers.size()):
-			# TODO: would something like orig_cel or source_cel be better name here?
-			var cel: BaseCel = project.frames[f].cels[l]  # The cel we're copying from
-			var new_cel: BaseCel = cel.get_script().new()
+			var src_cel: BaseCel = project.frames[f].cels[l]  # Cel we're copying from, the source
+			var new_cel: BaseCel = src_cel.get_script().new()
 			if project.layers[l].new_cels_linked:
-				if cel.link_set == null:
-					cel.link_set = []
-					project.undo_redo.add_do_method(project.layers[l], "link_cel", cel, cel.link_set)
-					project.undo_redo.add_undo_method(project.layers[l], "link_cel", cel, null)
-				new_cel.set_content(cel.get_content(), cel.image_texture)
-				new_cel.link_set = cel.link_set
+				if src_cel.link_set == null:
+					src_cel.link_set = []
+					project.undo_redo.add_do_method(project.layers[l], "link_cel", src_cel, src_cel.link_set)
+					project.undo_redo.add_undo_method(project.layers[l], "link_cel", src_cel, null)
+				new_cel.set_content(src_cel.get_content(), src_cel.image_texture)
+				new_cel.link_set = src_cel.link_set
 			else:
-				new_cel.set_content(cel.copy_content())
-			new_cel.opacity = cel.opacity
+				new_cel.set_content(src_cel.copy_content())
+			new_cel.opacity = src_cel.opacity
 			new_frame.cels.append(new_cel)
 
 		# Loop through the tags to see if the frame is in one
@@ -607,39 +606,41 @@ func _on_CloneLayer_pressed() -> void:
 
 	var clones := []  # Array of Layers
 	var cels := []  # 2D Array of Cels
-	for sl in source_layers:
-		var cl: BaseLayer = sl.copy() # TODO: Does BaseLayer still need a copy method (only used here currently)?
-		clones.append(cl)
+	for src_layer in source_layers:
+		var cl_layer: BaseLayer = src_layer.copy() # TODO: Does BaseLayer still need a copy method (only used here currently)?
+		clones.append(cl_layer)
 
-		# TODO: Clean this up (mostly clearer naming)
 		cels.append([])
-		for i in cl.cel_link_sets.size():
-			cl.cel_link_sets[i] = []  # Set to a new empty array
+		for i in cl_layer.cel_link_sets.size():
+			cl_layer.cel_link_sets[i] = []  # Set to a new empty array
 
 		for frame in project.frames:
-			var source_cel: BaseCel = frame.cels[sl.index]
-			var new_cel: BaseCel = source_cel.get_script().new()
+			var src_cel: BaseCel = frame.cels[src_layer.index]
+			var new_cel: BaseCel = src_cel.get_script().new()
 
-			if source_cel.link_set == null:
-				new_cel.set_content(source_cel.copy_content())
+			if src_cel.link_set == null:
+				new_cel.set_content(src_cel.copy_content())
 			else:
-				new_cel.link_set = cl.cel_link_sets[sl.cel_link_sets.find(source_cel.link_set)]
-
+				new_cel.link_set = cl_layer.cel_link_sets[
+					src_layer.cel_link_sets.find(src_cel.link_set)
+				]
 				if new_cel.link_set.size() > 0:
-					new_cel.set_content(new_cel.link_set[0].get_content(), new_cel.link_set[0].image_texture)
+					new_cel.set_content(
+						new_cel.link_set[0].get_content(), new_cel.link_set[0].image_texture
+					)
 				else:
-					new_cel.set_content(source_cel.copy_content())
+					new_cel.set_content(src_cel.copy_content())
 				new_cel.link_set.append(new_cel)
 
-			new_cel.opacity = source_cel.opacity
+			new_cel.opacity = src_cel.opacity
 			cels[-1].append(new_cel)
 
-	for cl in clones:
-		var p = source_layers.find(cl.parent)
+	for cl_layer in clones:
+		var p = source_layers.find(cl_layer.parent)
 		if p > -1:  # Swap parent with clone if the parent is one of the source layers
-			cl.parent = clones[p]
+			cl_layer.parent = clones[p]
 		else:  # Add (Copy) to the name if its not a child of another copied layer
-			cl.name = str(cl.name, " (", tr("copy"), ")")
+			cl_layer.name = str(cl_layer.name, " (", tr("copy"), ")")
 
 	var indices := range(project.current_layer + 1, project.current_layer + clones.size() + 1)
 
