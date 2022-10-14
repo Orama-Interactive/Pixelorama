@@ -1,4 +1,4 @@
-# Initial version made by MrTriPie, has been modified
+# Initial version made by MrTriPie, has been modified by Overloaded.
 tool
 class_name ValueSlider
 extends TextureProgress
@@ -20,9 +20,13 @@ export var snap_by_default := false
 # range. False will hide it, which is good for values that can be any number.
 export var show_progress := true
 export var show_arrows := true setget _show_arrows_changed
+export var echo_arrow_time := 0.075
 
 var state := NORMAL
+var arrow_is_held := 0  # Used for arrow button echo behavior. Is 1 for ValueUp, -1 for ValueDown.
+
 onready var line_edit: LineEdit = $LineEdit
+onready var timer: Timer = $Timer
 
 
 func _ready() -> void:
@@ -111,8 +115,10 @@ func _suffix_changed(v: String) -> void:
 
 func _show_arrows_changed(v: bool) -> void:
 	show_arrows = v
-	$"%ValueUp".visible = v
-	$"%ValueDown".visible = v
+	if not line_edit:
+		return
+	$ValueUp.visible = v
+	$ValueDown.visible = v
 
 
 func _on_LineEdit_gui_input(event: InputEvent) -> void:
@@ -162,17 +168,33 @@ func _reset_display() -> void:
 	else:
 		tint_progress = Color.transparent
 	line_edit.text = str(tr(prefix), " ", value, " ", tr(suffix)).strip_edges()
-	$"%ValueUp".modulate = Global.modulate_icon_color
-	$"%ValueDown".modulate = Global.modulate_icon_color
+	$ValueUp.modulate = Global.modulate_icon_color
+	$ValueDown.modulate = Global.modulate_icon_color
 
 
-func _on_ValueUp_pressed() -> void:
+func _on_Value_button_down(direction: int) -> void:
 	if not editable:
 		return
-	value += snap_step if Input.is_action_pressed("ctrl") else step
+	# Direction is either 1 or -1
+	value += (snap_step if Input.is_action_pressed("ctrl") else step) * direction
+	arrow_is_held = direction
+	timer.wait_time = echo_arrow_time * 8  # 0.6 with the default value
+	timer.one_shot = true
+	timer.start()
 
 
-func _on_ValueDown_pressed() -> void:
-	if not editable:
+func _on_Value_button_up() -> void:
+	arrow_is_held = 0
+	timer.stop()
+
+
+# Echo behavior. If the user keeps pressing the button, the value keeps changing.
+func _on_Timer_timeout() -> void:
+	if arrow_is_held == 0:
+		timer.stop()
 		return
-	value -= snap_step if Input.is_action_pressed("ctrl") else step
+	value += (snap_step if Input.is_action_pressed("ctrl") else step) * arrow_is_held
+	if timer.one_shot:
+		timer.wait_time = echo_arrow_time
+		timer.one_shot = false
+		timer.start()

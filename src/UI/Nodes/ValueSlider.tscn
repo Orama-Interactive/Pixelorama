@@ -39,7 +39,6 @@ editable = false
 selecting_enabled = false
 
 [node name="ValueUp" type="TextureButton" parent="." groups=["UIButtons"]]
-unique_name_in_owner = true
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -15.0
@@ -55,7 +54,6 @@ texture_hover = ExtResource( 4 )
 stretch_mode = 3
 
 [node name="ValueDown" type="TextureButton" parent="." groups=["UIButtons"]]
-unique_name_in_owner = true
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -70,9 +68,14 @@ texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )
 stretch_mode = 3
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="value_changed" from="." to="." method="_on_value_changed"]
 [connection signal="focus_exited" from="LineEdit" to="." method="_confirm_text"]
 [connection signal="gui_input" from="LineEdit" to="." method="_on_LineEdit_gui_input"]
 [connection signal="text_entered" from="LineEdit" to="." method="_on_LineEdit_text_entered"]
-[connection signal="pressed" from="ValueUp" to="." method="_on_ValueUp_pressed"]
-[connection signal="pressed" from="ValueDown" to="." method="_on_ValueDown_pressed"]
+[connection signal="button_down" from="ValueUp" to="." method="_on_Value_button_down" binds= [ 1 ]]
+[connection signal="button_up" from="ValueUp" to="." method="_on_Value_button_up"]
+[connection signal="button_down" from="ValueDown" to="." method="_on_Value_button_down" binds= [ -1 ]]
+[connection signal="button_up" from="ValueDown" to="." method="_on_Value_button_up"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
