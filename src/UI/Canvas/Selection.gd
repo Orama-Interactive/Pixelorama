@@ -584,7 +584,7 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 	if !undo_data_tmp:
 		print("No undo data found!")
 		return
-	var redo_data = get_undo_data(undo_data_tmp["undo_image"])
+	var redo_data := get_undo_data(undo_data_tmp["undo_image"])
 	var project: Project = Global.current_project
 
 	project.undos += 1

@@ -44,7 +44,7 @@ func _on_FillAreaOptions_item_selected(index: int) -> void:
 
 
 func _select_fill_area_optionbutton() -> void:
-	$"%FillAreaOptions".selected = _fill_area
+	$FillAreaOptions.selected = _fill_area
 	$SimilaritySlider.visible = (_fill_area == FillArea.COLORS)
 
 
@@ -112,11 +112,11 @@ func set_config(config: Dictionary) -> void:
 
 func update_config() -> void:
 	_select_fill_area_optionbutton()
-	$"%FillWithOptions".selected = _fill_with
+	$FillWithOptions.selected = _fill_with
 	$SimilaritySlider.value = _similarity
 	$FillPattern.visible = _fill_with == FillWith.PATTERN
-	$FillPattern/XOffset/OffsetX.value = _offset_x
-	$FillPattern/YOffset/OffsetY.value = _offset_y
+	$FillPattern/OffsetX.value = _offset_x
+	$FillPattern/OffsetY.value = _offset_y
 
 
 func update_pattern() -> void:
@@ -130,8 +130,8 @@ func update_pattern() -> void:
 		tex.create_from_image(_pattern.image, 0)
 	$FillPattern/Type/Texture.texture = tex
 	var size := _pattern.image.get_size()
-	$FillPattern/XOffset/OffsetX.max_value = size.x - 1
-	$FillPattern/YOffset/OffsetY.max_value = size.y - 1
+	$FillPattern/OffsetX.max_value = size.x - 1
+	$FillPattern/OffsetY.max_value = size.y - 1
 
 
 func draw_start(position: Vector2) -> void:

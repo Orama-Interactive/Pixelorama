@@ -19,10 +19,10 @@ var _intersect := false  # Shift + Ctrl + Mouse Click
 var _content_transformation_check := false
 
 onready var selection_node: Node2D = Global.canvas.selection
-onready var xspinbox: SpinBox = find_node("XSpinBox")
-onready var yspinbox: SpinBox = find_node("YSpinBox")
-onready var wspinbox: SpinBox = find_node("WSpinBox")
-onready var hspinbox: SpinBox = find_node("HSpinBox")
+onready var xspinbox: ValueSlider = $XSpinBox
+onready var yspinbox: ValueSlider = $YSpinBox
+onready var wspinbox: ValueSlider = $WSpinBox
+onready var hspinbox: ValueSlider = $HSpinBox
 onready var timer: Timer = $Timer
 
 
@@ -182,14 +182,24 @@ func _set_cursor_text(rect: Rect2) -> void:
 	cursor_text += " (%s, %s)" % [rect.size.x, rect.size.y]
 
 
-func _on_XSpinBox_value_changed(value: float) -> void:
+func _on_position_value_changed(value: float, horizontal: bool) -> void:
+	if horizontal:
+		if selection_node.big_bounding_rectangle.position.x == value:
+			return
+	else:
+		if selection_node.big_bounding_rectangle.position.y == value:
+			return
 	var project: Project = Global.current_project
-	if !project.has_selection or selection_node.big_bounding_rectangle.position.x == value:
+	if !project.has_selection:
 		return
+
 	if timer.is_stopped():
 		undo_data = selection_node.get_undo_data(false)
 	timer.start()
-	selection_node.big_bounding_rectangle.position.x = value
+	if horizontal:
+		selection_node.big_bounding_rectangle.position.x = value
+	else:
+		selection_node.big_bounding_rectangle.position.y = value
 
 	var selection_map_copy := SelectionMap.new()
 	selection_map_copy.copy_from(project.selection_map)
@@ -198,49 +208,29 @@ func _on_XSpinBox_value_changed(value: float) -> void:
 	project.selection_map_changed()
 
 
-func _on_YSpinBox_value_changed(value: float) -> void:
-	var project: Project = Global.current_project
-	if !project.has_selection or selection_node.big_bounding_rectangle.position.y == value:
+func _on_size_value_changed(value: float, horizontal: bool) -> void:
+	if horizontal:
+		if (
+			selection_node.big_bounding_rectangle.size.x == value
+			or selection_node.big_bounding_rectangle.size.x <= 0
+		):
+			return
+	else:
+		if (
+			selection_node.big_bounding_rectangle.size.y == value
+			or selection_node.big_bounding_rectangle.size.y <= 0
+		):
+			return
+	if !Global.current_project.has_selection:
 		return
+
 	if timer.is_stopped():
 		undo_data = selection_node.get_undo_data(false)
 	timer.start()
-	selection_node.big_bounding_rectangle.position.y = value
-
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(project.selection_map)
-	selection_map_copy.move_bitmap_values(project)
-	project.selection_map = selection_map_copy
-	project.selection_map_changed()
-
-
-func _on_WSpinBox_value_changed(value: float) -> void:
-	var project: Project = Global.current_project
-	if (
-		!project.has_selection
-		or selection_node.big_bounding_rectangle.size.x == value
-		or selection_node.big_bounding_rectangle.size.x <= 0
-	):
-		return
-	if timer.is_stopped():
-		undo_data = selection_node.get_undo_data(false)
-	timer.start()
-	selection_node.big_bounding_rectangle.size.x = value
-	resize_selection()
-
-
-func _on_HSpinBox_value_changed(value: float) -> void:
-	var project: Project = Global.current_project
-	if (
-		!project.has_selection
-		or selection_node.big_bounding_rectangle.size.y == value
-		or selection_node.big_bounding_rectangle.size.y <= 0
-	):
-		return
-	if timer.is_stopped():
-		undo_data = selection_node.get_undo_data(false)
-	timer.start()
-	selection_node.big_bounding_rectangle.size.y = value
+	if horizontal:
+		selection_node.big_bounding_rectangle.size.x = value
+	else:
+		selection_node.big_bounding_rectangle.size.y = value
 	resize_selection()
 
 

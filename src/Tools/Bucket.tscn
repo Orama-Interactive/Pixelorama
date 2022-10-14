@@ -33,20 +33,15 @@ margin_right = 131.0
 [node name="Label" parent="." index="1"]
 margin_right = 131.0
 
-[node name="FillAreaContainer" type="HBoxContainer" parent="." index="2"]
+[node name="FillArea" type="Label" parent="." index="2"]
 margin_top = 26.0
 margin_right = 131.0
 margin_bottom = 40.0
-
-[node name="FillArea" type="Label" parent="FillAreaContainer" index="0"]
-margin_right = 131.0
-margin_bottom = 14.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Fill area:"
 
 [node name="FillAreaOptions" type="OptionButton" parent="." index="3"]
-unique_name_in_owner = true
 margin_top = 44.0
 margin_right = 131.0
 margin_bottom = 64.0
@@ -64,19 +59,14 @@ margin_bottom = 92.0
 value = 100.0
 prefix = "Similarity:"
 
-[node name="FillWithContainer" type="HBoxContainer" parent="." index="5"]
+[node name="FillWith" type="Label" parent="." index="5"]
 margin_top = 68.0
 margin_right = 131.0
 margin_bottom = 82.0
-
-[node name="FillWith" type="Label" parent="FillWithContainer" index="0"]
-margin_right = 131.0
-margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Fill with:"
 
 [node name="FillWithOptions" type="OptionButton" parent="." index="6"]
-unique_name_in_owner = true
 margin_top = 86.0
 margin_right = 131.0
 margin_bottom = 106.0
@@ -90,7 +80,7 @@ selected = 0
 visible = false
 margin_top = 110.0
 margin_right = 131.0
-margin_bottom = 216.0
+margin_bottom = 198.0
 size_flags_horizontal = 3
 
 [node name="Type" type="Button" parent="FillPattern" index="0"]
@@ -112,51 +102,21 @@ margin_bottom = 32.0
 expand = true
 stretch_mode = 6
 
-[node name="Offset" type="Label" parent="FillPattern" index="1"]
+[node name="OffsetX" parent="FillPattern" index="1" instance=ExtResource( 1 )]
 margin_top = 36.0
 margin_right = 131.0
-margin_bottom = 50.0
-text = "Offset"
+margin_bottom = 60.0
+prefix = "Offset X:"
 
-[node name="XOffset" type="HBoxContainer" parent="FillPattern" index="2"]
-margin_top = 54.0
+[node name="OffsetY" parent="FillPattern" index="2" instance=ExtResource( 1 )]
+margin_top = 64.0
 margin_right = 131.0
-margin_bottom = 78.0
-
-[node name="Label" type="Label" parent="FillPattern/XOffset" index="0"]
-margin_top = 5.0
-margin_right = 8.0
-margin_bottom = 19.0
-text = "X"
-
-[node name="OffsetX" type="SpinBox" parent="FillPattern/XOffset" index="1"]
-margin_left = 12.0
-margin_right = 131.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-
-[node name="YOffset" type="HBoxContainer" parent="FillPattern" index="3"]
-margin_top = 82.0
-margin_right = 131.0
-margin_bottom = 106.0
-
-[node name="Label" type="Label" parent="FillPattern/YOffset" index="0"]
-margin_top = 5.0
-margin_right = 7.0
-margin_bottom = 19.0
-text = "Y"
-
-[node name="OffsetY" type="SpinBox" parent="FillPattern/YOffset" index="1"]
-margin_left = 11.0
-margin_right = 131.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
+margin_bottom = 88.0
+prefix = "Offset Y:"
 
 [connection signal="item_selected" from="FillAreaOptions" to="." method="_on_FillAreaOptions_item_selected"]
 [connection signal="value_changed" from="SimilaritySlider" to="." method="_on_SimilaritySlider_value_changed"]
 [connection signal="item_selected" from="FillWithOptions" to="." method="_on_FillWithOptions_item_selected"]
 [connection signal="pressed" from="FillPattern/Type" to="." method="_on_PatternType_pressed"]
-[connection signal="value_changed" from="FillPattern/XOffset/OffsetX" to="." method="_on_PatternOffsetX_value_changed"]
-[connection signal="value_changed" from="FillPattern/YOffset/OffsetY" to="." method="_on_PatternOffsetY_value_changed"]
+[connection signal="value_changed" from="FillPattern/OffsetX" to="." method="_on_PatternOffsetX_value_changed"]
+[connection signal="value_changed" from="FillPattern/OffsetY" to="." method="_on_PatternOffsetY_value_changed"]
