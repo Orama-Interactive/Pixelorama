@@ -76,14 +76,6 @@ func get_hierarchy_depth() -> int:
 	return 0
 
 
-func copy() -> BaseLayer:
-	var copy = get_script().new(project)
-	copy.project = project
-	copy.index = index
-	copy.deserialize(serialize())
-	return copy
-
-
 func get_layer_path() -> String:
 	if is_instance_valid(parent):
 		return str(parent.get_layer_path(), "/", name)

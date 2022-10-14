@@ -607,7 +607,10 @@ func _on_CloneLayer_pressed() -> void:
 	var clones := []  # Array of Layers
 	var cels := []  # 2D Array of Cels
 	for src_layer in source_layers:
-		var cl_layer: BaseLayer = src_layer.copy() # TODO: Does BaseLayer still need a copy method (only used here currently)?
+		var cl_layer = src_layer.get_script().new(project)
+		cl_layer.project = project
+		cl_layer.index = src_layer.index
+		cl_layer.deserialize(src_layer.serialize())
 		clones.append(cl_layer)
 
 		cels.append([])
