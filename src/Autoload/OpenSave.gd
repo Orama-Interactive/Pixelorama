@@ -195,13 +195,15 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 	if file_major_version >= 0 and file_minor_version > 6:
 		var global_layer_line := file.get_line()
 		while global_layer_line == ".":
-			layer_dicts.append({
-				"name": file.get_line(),
-				"visible": file.get_8(),
-				"locked": file.get_8(),
-				"new_cels_linked": file.get_8(),
-				"link_sets": []
-			})
+			layer_dicts.append(
+				{
+					"name": file.get_line(),
+					"visible": file.get_8(),
+					"locked": file.get_8(),
+					"new_cels_linked": file.get_8(),
+					"link_sets": []
+				}
+			)
 			layer_dicts[-1]["link_sets"].append(file.get_var())
 			var l := PixelLayer.new(new_project)
 			l.index = new_project.layers.size()
@@ -476,8 +478,12 @@ func open_image_as_spritesheet_layer(
 					var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
 					if prev_cel.link_set == null:
 						prev_cel.link_set = []
-						project.undo_redo.add_do_method(project.layers[l], "link_cel", prev_cel, prev_cel.link_set)
-						project.undo_redo.add_undo_method(project.layers[l], "link_cel", prev_cel, null)
+						project.undo_redo.add_do_method(
+							project.layers[l], "link_cel", prev_cel, prev_cel.link_set
+						)
+						project.undo_redo.add_undo_method(
+							project.layers[l], "link_cel", prev_cel, null
+						)
 					new_frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
 					new_frame.cels[l].link_set = prev_cel.link_set
 			frames.append(new_frame)

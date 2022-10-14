@@ -142,7 +142,9 @@ func add_frame() -> void:
 			var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
 			if prev_cel.link_set == null:
 				prev_cel.link_set = []
-				project.undo_redo.add_do_method(project.layers[l], "link_cel", prev_cel, prev_cel.link_set)
+				project.undo_redo.add_do_method(
+					project.layers[l], "link_cel", prev_cel, prev_cel.link_set
+				)
 				project.undo_redo.add_undo_method(project.layers[l], "link_cel", prev_cel, null)
 			frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
 			frame.cels[l].link_set = prev_cel.link_set
@@ -290,7 +292,9 @@ func copy_frames(indices := []) -> void:
 			if project.layers[l].new_cels_linked:
 				if src_cel.link_set == null:
 					src_cel.link_set = []
-					project.undo_redo.add_do_method(project.layers[l], "link_cel", src_cel, src_cel.link_set)
+					project.undo_redo.add_do_method(
+						project.layers[l], "link_cel", src_cel, src_cel.link_set
+					)
 					project.undo_redo.add_undo_method(project.layers[l], "link_cel", src_cel, null)
 				new_cel.set_content(src_cel.get_content(), src_cel.image_texture)
 				new_cel.link_set = src_cel.link_set
@@ -624,11 +628,13 @@ func _on_CloneLayer_pressed() -> void:
 			if src_cel.link_set == null:
 				new_cel.set_content(src_cel.copy_content())
 			else:
-				new_cel.link_set = cl_layer.cel_link_sets[
-					src_layer.cel_link_sets.find(src_cel.link_set)
-				]
+				new_cel.link_set = cl_layer.cel_link_sets[src_layer.cel_link_sets.find(
+					src_cel.link_set
+				)]
 				if new_cel.link_set.size() > 0:
-					new_cel.set_content(new_cel.link_set[0].get_content(), new_cel.link_set[0].image_texture)
+					new_cel.set_content(
+						new_cel.link_set[0].get_content(), new_cel.link_set[0].image_texture
+					)
 				else:
 					new_cel.set_content(src_cel.copy_content())
 				new_cel.link_set.append(new_cel)
@@ -782,9 +788,7 @@ func _on_MergeDownLayer_pressed() -> void:
 			project.undo_redo.add_undo_method(
 				bottom_layer, "link_cel", bottom_cel, bottom_cel.link_set
 			)
-			project.undo_redo.add_do_property(
-				bottom_cel, "image_texture", ImageTexture.new()
-			)
+			project.undo_redo.add_do_property(bottom_cel, "image_texture", ImageTexture.new())
 			project.undo_redo.add_undo_property(
 				bottom_cel, "image_texture", bottom_cel.image_texture
 			)

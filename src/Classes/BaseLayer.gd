@@ -11,6 +11,7 @@ var locked := false
 var new_cels_linked := false
 var cel_link_sets := []  # 2D Array of Cels (Each Array inside this represents a "link set")
 
+
 # Returns true if this is a direct or indirect parent of layer
 func is_a_parent_of(layer: BaseLayer) -> bool:
 	if layer.parent == self:
@@ -80,6 +81,7 @@ func get_layer_path() -> String:
 	if is_instance_valid(parent):
 		return str(parent.get_layer_path(), "/", name)
 	return name
+
 
 # Links a cel to link_set if its an array, or unlinks if null. Just handles changing cel_link_sets
 # and cel.link_set. Content/image_texture are handled seperately for undo/redo related reasons
