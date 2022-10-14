@@ -625,9 +625,7 @@ func _on_CloneLayer_pressed() -> void:
 					src_layer.cel_link_sets.find(src_cel.link_set)
 				]
 				if new_cel.link_set.size() > 0:
-					new_cel.set_content(
-						new_cel.link_set[0].get_content(), new_cel.link_set[0].image_texture
-					)
+					new_cel.set_content(new_cel.link_set[0].get_content(), new_cel.link_set[0].image_texture)
 				else:
 					new_cel.set_content(src_cel.copy_content())
 				new_cel.link_set.append(new_cel)
@@ -746,11 +744,14 @@ func _on_MergeDownLayer_pressed() -> void:
 	var project: Project = Global.current_project
 	var top_layer: PixelLayer = project.layers[project.current_layer]
 	var bottom_layer: PixelLayer = project.layers[project.current_layer - 1]
+	var top_cels := []
 
 	project.undos += 1
 	project.undo_redo.create_action("Merge Layer")
 
 	for frame in project.frames:
+		top_cels.append(frame.cels[top_layer.index])  # Store for undo purposes
+
 		var top_image := Image.new()
 		top_image.copy_from(frame.cels[top_layer.index].image)
 
@@ -789,10 +790,6 @@ func _on_MergeDownLayer_pressed() -> void:
 		else:
 			project.undo_redo.add_do_property(bottom_cel.image, "data", bottom_image.data)
 			project.undo_redo.add_undo_property(bottom_cel.image, "data", bottom_cel.image.data)
-
-	var top_cels := []
-	for frame in project.frames: # TODO: Can this be merged with the above loop?
-		top_cels.append(frame.cels[top_layer.index])
 
 	project.undo_redo.add_do_property(project, "current_layer", bottom_layer.index)
 	project.undo_redo.add_undo_property(project, "current_layer", top_layer.index)
