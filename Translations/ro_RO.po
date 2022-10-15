@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-10-05 05:30\n"
+"PO-Revision-Date: 2022-10-15 11:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,8 +165,11 @@ msgstr "Centralizare imagine"
 msgid "Rotate Image"
 msgstr "Rotire imagine"
 
-msgid "Pivot (x, y):"
-msgstr "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
+msgstr ""
 
 msgid "Smear options:"
 msgstr "Animație prin efect de neclaritate:"
