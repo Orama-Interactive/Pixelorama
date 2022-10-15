@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-10-15 11:20\n"
+"PO-Revision-Date: 2022-10-15 12:25\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -166,10 +166,10 @@ msgid "Rotate Image"
 msgstr "Putar Gambar"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Paksi x:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Paksi y:"
 
 msgid "Smear options:"
 msgstr "Opsi melumur:"
@@ -331,7 +331,7 @@ msgid "New frame"
 msgstr "Bingkai Baru"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Timpa cel"
 
 msgid "New layer"
 msgstr "Lapisan baru"
@@ -1630,7 +1630,7 @@ msgid "Layer"
 msgstr "Lapisan"
 
 msgid "Group"
-msgstr ""
+msgstr "Kelompok"
 
 msgid "Layers"
 msgstr "Lapisan"
@@ -1639,7 +1639,7 @@ msgid "Create a new layer"
 msgstr "Tambah lapisan baru"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "Tambah lapisan kelompok baru"
 
 msgid "Remove current layer"
 msgstr "Hapus lapisan saat ini"
@@ -1677,7 +1677,7 @@ msgstr "Mampukan/lumpuhkan penautan cel\n\n"
 "Cel ditautkan ke banyak bingkai agar bisa digambar bersamaan"
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "Bentang/ciutkan kelompok"
 
 msgid "Palette"
 msgstr "Palet"
