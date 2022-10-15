@@ -1540,10 +1540,10 @@ msgstr ""
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Unlink Cels"
+msgid "Link Cels to"
 msgstr ""
 
-msgid "Unlink Selected Cels"
+msgid "Unlink Cels"
 msgstr ""
 
 msgid "Frame Properties"
