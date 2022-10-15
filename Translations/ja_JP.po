@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-10-15 11:20\n"
+"PO-Revision-Date: 2022-10-15 12:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -166,10 +166,10 @@ msgid "Rotate Image"
 msgstr "画像を回転"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "中心 x:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "中心 y:"
 
 msgid "Smear options:"
 msgstr "スミアオプション:"
