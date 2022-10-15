@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-10-15 00:12\n"
+"PO-Revision-Date: 2022-10-15 11:20\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -165,8 +165,11 @@ msgstr "Μετακίνηση εικόνας στο κέντρο"
 msgid "Rotate Image"
 msgstr "Περιστροφή εικόνας"
 
-msgid "Pivot (x, y):"
-msgstr "Άξονας (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
+msgstr ""
 
 msgid "Smear options:"
 msgstr "Επιλογές απλώματος:"
