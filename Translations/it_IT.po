@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-10-07 10:11\n"
+"PO-Revision-Date: 2022-10-15 11:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,8 +165,11 @@ msgstr "Centralizza Immagine"
 msgid "Rotate Image"
 msgstr "Ruota Immagine"
 
-msgid "Pivot (x, y):"
-msgstr "Perno (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
+msgstr ""
 
 msgid "Smear options:"
 msgstr "Opzioni di sbavatura:"
