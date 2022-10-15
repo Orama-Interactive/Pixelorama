@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-10-15 11:20\n"
+"PO-Revision-Date: 2022-10-15 12:25\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -166,10 +166,10 @@ msgid "Rotate Image"
 msgstr "Resmi Döndür"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Pivot X:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Pivot Y:"
 
 msgid "Smear options:"
 msgstr "Smear seçenekleri:"
