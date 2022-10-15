@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2022-10-04 21:50\n"
+"PO-Revision-Date: 2022-10-15 11:20\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -165,8 +165,11 @@ msgstr "Centrigi bildon"
 msgid "Rotate Image"
 msgstr "Turni bildon"
 
-msgid "Pivot (x, y):"
-msgstr "Rotacicentro (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
+msgstr ""
 
 msgid "Smear options:"
 msgstr ""
