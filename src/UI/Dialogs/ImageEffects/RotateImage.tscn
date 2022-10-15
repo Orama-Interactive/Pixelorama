@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/RotateImage.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=3]
 
 [node name="RotateImage" type="ConfirmationDialog"]
 margin_right = 342.0
@@ -59,31 +60,17 @@ mouse_default_cursor_shape = 2
 pressed = true
 text = "Live Preview"
 
-[node name="WaitSettings" type="HBoxContainer" parent="VBoxContainer"]
+[node name="WaitTime" parent="VBoxContainer" instance=ExtResource( 3 )]
 visible = false
 margin_top = 232.0
 margin_right = 326.0
 margin_bottom = 256.0
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="VBoxContainer/WaitSettings"]
-margin_top = 5.0
-margin_right = 248.0
-margin_bottom = 19.0
-text = "Update preview delay (in milliseconds)"
-
-[node name="WaitTime" type="SpinBox" parent="VBoxContainer/WaitSettings"]
-margin_left = 252.0
-margin_right = 326.0
-margin_bottom = 24.0
 min_value = 1.0
 max_value = 1000.0
 value = 200.0
 editable = false
-suffix = "msec"
+prefix = "Preview delay:"
+suffix = "ms"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 254.0
@@ -109,44 +96,27 @@ margin_top = 278.0
 margin_right = 326.0
 margin_bottom = 282.0
 
-[node name="TitleButtons" type="HBoxContainer" parent="VBoxContainer"]
+[node name="PivotOptions" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 286.0
 margin_right = 326.0
 margin_bottom = 310.0
 
-[node name="Label" type="Label" parent="VBoxContainer/TitleButtons"]
-margin_top = 5.0
-margin_right = 70.0
-margin_bottom = 19.0
-text = "Pivot (x, y):"
-align = 2
-valign = 1
-
-[node name="XPivot" type="SpinBox" parent="VBoxContainer/TitleButtons"]
-margin_left = 74.0
-margin_right = 169.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-min_value = -10000.0
-max_value = 10000.0
+[node name="XPivot" parent="VBoxContainer/PivotOptions" instance=ExtResource( 3 )]
+margin_right = 132.0
 step = 0.5
 allow_greater = true
 allow_lesser = true
+prefix = "Pivot x:"
 
-[node name="YPivot" type="SpinBox" parent="VBoxContainer/TitleButtons"]
-margin_left = 173.0
+[node name="YPivot" parent="VBoxContainer/PivotOptions" instance=ExtResource( 3 )]
+margin_left = 136.0
 margin_right = 268.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-min_value = -10000.0
-max_value = 10000.0
 step = 0.5
 allow_greater = true
 allow_lesser = true
+prefix = "Pivot y:"
 
-[node name="Centre" type="Button" parent="VBoxContainer/TitleButtons"]
+[node name="Centre" type="Button" parent="VBoxContainer/PivotOptions"]
 margin_left = 272.0
 margin_right = 326.0
 margin_bottom = 24.0
@@ -159,36 +129,14 @@ margin_top = 314.0
 margin_right = 326.0
 margin_bottom = 318.0
 
-[node name="AngleOptions" type="HBoxContainer" parent="VBoxContainer"]
+[node name="AngleSlider" parent="VBoxContainer" instance=ExtResource( 3 )]
 margin_top = 322.0
 margin_right = 326.0
 margin_bottom = 346.0
-
-[node name="Label" type="Label" parent="VBoxContainer/AngleOptions"]
-margin_top = 5.0
-margin_right = 40.0
-margin_bottom = 19.0
-text = "Angle:"
-
-[node name="AngleHSlider" type="HSlider" parent="VBoxContainer/AngleOptions"]
-margin_left = 44.0
-margin_right = 248.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 max_value = 359.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AngleSpinBox" type="SpinBox" parent="VBoxContainer/AngleOptions"]
-margin_left = 252.0
-margin_right = 326.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-max_value = 359.0
+prefix = "Angle:"
 suffix = "°"
+snap_step = 45.0
 
 [node name="QuickRotations" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 350.0
@@ -197,45 +145,49 @@ margin_bottom = 370.0
 alignment = 1
 
 [node name="Deduct90" type="Button" parent="VBoxContainer/QuickRotations"]
-margin_left = 76.0
-margin_right = 109.0
+margin_right = 62.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "-90"
 
 [node name="Deduct45" type="Button" parent="VBoxContainer/QuickRotations"]
-margin_left = 113.0
-margin_right = 146.0
+margin_left = 66.0
+margin_right = 128.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "-45"
 
 [node name="Zero" type="Button" parent="VBoxContainer/QuickRotations"]
-margin_left = 150.0
-margin_right = 170.0
+margin_left = 132.0
+margin_right = 194.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "0"
 
 [node name="Add45" type="Button" parent="VBoxContainer/QuickRotations"]
-margin_left = 174.0
-margin_right = 210.0
+margin_left = 198.0
+margin_right = 260.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "+45"
 
 [node name="Add90" type="Button" parent="VBoxContainer/QuickRotations"]
-margin_left = 214.0
-margin_right = 250.0
+margin_left = 264.0
+margin_right = 326.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "+90"
 
 [node name="SmearOptions" type="VBoxContainer" parent="VBoxContainer"]
 visible = false
-margin_top = 376.0
+margin_top = 352.0
 margin_right = 326.0
-margin_bottom = 454.0
+margin_bottom = 430.0
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/SmearOptions"]
 margin_right = 326.0
@@ -247,70 +199,23 @@ margin_right = 326.0
 margin_bottom = 22.0
 text = "Smear options:"
 
-[node name="Tolerance" type="HBoxContainer" parent="VBoxContainer/SmearOptions"]
+[node name="ToleranceSlider" parent="VBoxContainer/SmearOptions" instance=ExtResource( 3 )]
 margin_top = 26.0
 margin_right = 326.0
 margin_bottom = 50.0
-
-[node name="Label" type="Label" parent="VBoxContainer/SmearOptions/Tolerance"]
-margin_top = 5.0
-margin_right = 66.0
-margin_bottom = 19.0
-text = "Tolerance:"
-
-[node name="ToleranceHSlider" type="HSlider" parent="VBoxContainer/SmearOptions/Tolerance"]
-margin_left = 70.0
-margin_right = 248.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 max_value = 255.0
 value = 100.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+prefix = "Tolerance:"
 
-[node name="ToleranceSpinBox" type="SpinBox" parent="VBoxContainer/SmearOptions/Tolerance"]
-margin_left = 252.0
-margin_right = 326.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-max_value = 255.0
-value = 100.0
-
-[node name="AngleOptions" type="HBoxContainer" parent="VBoxContainer/SmearOptions"]
+[node name="InitialAngleSlider" parent="VBoxContainer/SmearOptions" instance=ExtResource( 3 )]
 margin_top = 54.0
 margin_right = 326.0
 margin_bottom = 78.0
-
-[node name="Label" type="Label" parent="VBoxContainer/SmearOptions/AngleOptions"]
-margin_top = 5.0
-margin_right = 79.0
-margin_bottom = 19.0
-text = "Initial angle:"
-
-[node name="InitialAngleHSlider" type="HSlider" parent="VBoxContainer/SmearOptions/AngleOptions"]
-margin_left = 83.0
-margin_right = 248.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 max_value = 359.0
 value = 359.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="InitialAngleSpinBox" type="SpinBox" parent="VBoxContainer/SmearOptions/AngleOptions"]
-margin_left = 252.0
-margin_right = 326.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-max_value = 359.0
-value = 359.0
+prefix = "Initial angle:"
 suffix = "°"
+snap_step = 45.0
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
 margin_top = 374.0
@@ -323,17 +228,19 @@ margin_right = 326.0
 margin_bottom = 406.0
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
-margin_right = 160.0
+margin_right = 161.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 pressed = true
 text = "Only affect selection"
 
 [node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 164.0
-margin_right = 278.0
+margin_left = 165.0
+margin_right = 326.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "Selected cels"
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
@@ -343,20 +250,17 @@ selected = 0
 [connection signal="draw" from="VBoxContainer/AspectRatioContainer/Indicator" to="." method="_on_Indicator_draw"]
 [connection signal="gui_input" from="VBoxContainer/AspectRatioContainer/Indicator" to="." method="_on_Indicator_gui_input"]
 [connection signal="toggled" from="VBoxContainer/LiveSettings/LiveCheckbox" to="." method="_on_LiveCheckbox_toggled"]
-[connection signal="value_changed" from="VBoxContainer/WaitSettings/WaitTime" to="." method="_on_WaitTime_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/WaitTime" to="." method="_on_WaitTime_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer2/TypeOptionButton" to="." method="_on_TypeOptionButton_item_selected"]
-[connection signal="value_changed" from="VBoxContainer/TitleButtons/XPivot" to="." method="_on_Pivot_value_changed" binds= [ true ]]
-[connection signal="value_changed" from="VBoxContainer/TitleButtons/YPivot" to="." method="_on_Pivot_value_changed" binds= [ false ]]
-[connection signal="pressed" from="VBoxContainer/TitleButtons/Centre" to="." method="_on_Centre_pressed"]
-[connection signal="value_changed" from="VBoxContainer/AngleOptions/AngleHSlider" to="." method="_on_AngleHSlider_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/AngleOptions/AngleSpinBox" to="." method="_on_AngleSpinBox_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/PivotOptions/XPivot" to="." method="_on_Pivot_value_changed" binds= [ true ]]
+[connection signal="value_changed" from="VBoxContainer/PivotOptions/YPivot" to="." method="_on_Pivot_value_changed" binds= [ false ]]
+[connection signal="pressed" from="VBoxContainer/PivotOptions/Centre" to="." method="_on_Centre_pressed"]
+[connection signal="value_changed" from="VBoxContainer/AngleSlider" to="." method="_on_AngleSlider_value_changed"]
 [connection signal="pressed" from="VBoxContainer/QuickRotations/Deduct90" to="." method="_on_quick_change_angle_pressed" binds= [ -90 ]]
 [connection signal="pressed" from="VBoxContainer/QuickRotations/Deduct45" to="." method="_on_quick_change_angle_pressed" binds= [ -45 ]]
 [connection signal="pressed" from="VBoxContainer/QuickRotations/Zero" to="." method="_on_quick_change_angle_pressed" binds= [ 0 ]]
 [connection signal="pressed" from="VBoxContainer/QuickRotations/Add45" to="." method="_on_quick_change_angle_pressed" binds= [ 45 ]]
 [connection signal="pressed" from="VBoxContainer/QuickRotations/Add90" to="." method="_on_quick_change_angle_pressed" binds= [ 90 ]]
-[connection signal="value_changed" from="VBoxContainer/SmearOptions/Tolerance/ToleranceHSlider" to="." method="_on_ToleranceHSlider_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/SmearOptions/Tolerance/ToleranceSpinBox" to="." method="_on_ToleranceSpinBox_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/SmearOptions/AngleOptions/InitialAngleHSlider" to="." method="_on_InitialAngleHSlider_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/SmearOptions/AngleOptions/InitialAngleSpinBox" to="." method="_on_InitialAngleSpinBox_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SmearOptions/ToleranceSlider" to="." method="_on_ToleranceSlider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SmearOptions/InitialAngleSlider" to="." method="_on_InitialAngleSlider_value_changed"]
 [connection signal="timeout" from="WaitApply" to="." method="_on_WaitApply_timeout"]

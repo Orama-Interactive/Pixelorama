@@ -1,18 +1,13 @@
 extends ImageEffect
 
 var shader: Shader = preload("res://src/Shaders/HSV.shader")
+var live_preview := true
 
-var live_preview: bool = true
-
-onready var hue_slider = $VBoxContainer/HBoxContainer/Sliders/Hue
-onready var sat_slider = $VBoxContainer/HBoxContainer/Sliders/Saturation
-onready var val_slider = $VBoxContainer/HBoxContainer/Sliders/Value
-
-onready var hue_spinbox = $VBoxContainer/HBoxContainer/TextBoxes/Hue
-onready var sat_spinbox = $VBoxContainer/HBoxContainer/TextBoxes/Saturation
-onready var val_spinbox = $VBoxContainer/HBoxContainer/TextBoxes/Value
-onready var wait_apply_timer = $WaitApply
-onready var wait_time_spinbox = $VBoxContainer/WaitSettings/WaitTime
+onready var hue_slider: ValueSlider = $VBoxContainer/HueSlider
+onready var sat_slider: ValueSlider = $VBoxContainer/SaturationSlider
+onready var val_slider: ValueSlider = $VBoxContainer/ValueSlider
+onready var wait_apply_timer: Timer = $WaitApply
+onready var wait_time_slider: ValueSlider = $VBoxContainer/WaitTime
 
 
 func _ready() -> void:
@@ -22,7 +17,7 @@ func _ready() -> void:
 
 
 func _about_to_show() -> void:
-	reset()
+	_reset()
 	._about_to_show()
 
 
@@ -54,58 +49,29 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		yield(gen, "done")
 
 
-func reset() -> void:
-	disconnect_signals()
-	wait_apply_timer.wait_time = wait_time_spinbox.value / 1000.0
+func _reset() -> void:
+	wait_apply_timer.wait_time = wait_time_slider.value / 1000.0
 	hue_slider.value = 0
 	sat_slider.value = 0
 	val_slider.value = 0
-	hue_spinbox.value = 0
-	sat_spinbox.value = 0
-	val_spinbox.value = 0
-	reconnect_signals()
 	confirmed = false
 
 
-func disconnect_signals() -> void:
-	hue_slider.disconnect("value_changed", self, "_on_Hue_value_changed")
-	sat_slider.disconnect("value_changed", self, "_on_Saturation_value_changed")
-	val_slider.disconnect("value_changed", self, "_on_Value_value_changed")
-	hue_spinbox.disconnect("value_changed", self, "_on_Hue_value_changed")
-	sat_spinbox.disconnect("value_changed", self, "_on_Saturation_value_changed")
-	val_spinbox.disconnect("value_changed", self, "_on_Value_value_changed")
-
-
-func reconnect_signals() -> void:
-	hue_slider.connect("value_changed", self, "_on_Hue_value_changed")
-	sat_slider.connect("value_changed", self, "_on_Saturation_value_changed")
-	val_slider.connect("value_changed", self, "_on_Value_value_changed")
-	hue_spinbox.connect("value_changed", self, "_on_Hue_value_changed")
-	sat_spinbox.connect("value_changed", self, "_on_Saturation_value_changed")
-	val_spinbox.connect("value_changed", self, "_on_Value_value_changed")
-
-
-func _on_Hue_value_changed(value: float) -> void:
-	hue_spinbox.value = value
-	hue_slider.value = value
+func _on_HueSlider_value_changed(_value: float) -> void:
 	if live_preview:
 		update_preview()
 	else:
 		wait_apply_timer.start()
 
 
-func _on_Saturation_value_changed(value: float) -> void:
-	sat_spinbox.value = value
-	sat_slider.value = value
+func _on_SaturationSlider_value_changed(_value: float) -> void:
 	if live_preview:
 		update_preview()
 	else:
 		wait_apply_timer.start()
 
 
-func _on_Value_value_changed(value: float) -> void:
-	val_spinbox.value = value
-	val_slider.value = value
+func _on_ValueSlider_value_changed(_value: float) -> void:
 	if live_preview:
 		update_preview()
 	else:
@@ -122,5 +88,5 @@ func _on_WaitTime_value_changed(value: float) -> void:
 
 func _on_LiveCheckbox_toggled(button_pressed: bool) -> void:
 	live_preview = button_pressed
-	wait_time_spinbox.editable = !live_preview
-	wait_time_spinbox.get_parent().visible = !live_preview
+	wait_time_slider.editable = !live_preview
+	wait_time_slider.visible = !live_preview

@@ -154,7 +154,10 @@ msgstr ""
 msgid "Rotate Image"
 msgstr ""
 
-msgid "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
 msgstr ""
 
 msgid "Smear options:"

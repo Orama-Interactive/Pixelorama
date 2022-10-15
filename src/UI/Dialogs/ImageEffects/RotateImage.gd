@@ -8,17 +8,14 @@ var drag_pivot := false
 
 onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
 onready var pivot_indicator: Control = $VBoxContainer/AspectRatioContainer/Indicator
-onready var x_pivot: SpinBox = $VBoxContainer/TitleButtons/XPivot
-onready var y_pivot: SpinBox = $VBoxContainer/TitleButtons/YPivot
-onready var angle_hslider: HSlider = $VBoxContainer/AngleOptions/AngleHSlider
-onready var angle_spinbox: SpinBox = $VBoxContainer/AngleOptions/AngleSpinBox
+onready var x_pivot: ValueSlider = $VBoxContainer/PivotOptions/XPivot
+onready var y_pivot: ValueSlider = $VBoxContainer/PivotOptions/YPivot
+onready var angle_slider: ValueSlider = $VBoxContainer/AngleSlider
 onready var smear_options: Container = $VBoxContainer/SmearOptions
-onready var init_angle_hslider: HSlider = smear_options.get_node("AngleOptions/InitialAngleHSlider")
-onready var init_angle_spinbox: SpinBox = smear_options.get_node("AngleOptions/InitialAngleSpinBox")
-onready var tolerance_hslider: HSlider = smear_options.get_node("Tolerance/ToleranceHSlider")
-onready var tolerance_spinbox: SpinBox = smear_options.get_node("Tolerance/ToleranceSpinBox")
+onready var init_angle_slider: ValueSlider = smear_options.get_node("InitialAngleSlider")
+onready var tolerance_slider: ValueSlider = smear_options.get_node("ToleranceSlider")
 onready var wait_apply_timer: Timer = $WaitApply
-onready var wait_time_spinbox: SpinBox = $VBoxContainer/WaitSettings/WaitTime
+onready var wait_time_slider: ValueSlider = $VBoxContainer/WaitTime
 
 
 func _ready() -> void:
@@ -45,8 +42,8 @@ func _about_to_show() -> void:
 		decide_pivot()
 	confirmed = false
 	._about_to_show()
-	wait_apply_timer.wait_time = wait_time_spinbox.value / 1000.0
-	angle_hslider.value = 0
+	wait_apply_timer.wait_time = wait_time_slider.value / 1000.0
+	angle_slider.value = 0
 
 
 func decide_pivot() -> void:
@@ -78,7 +75,7 @@ func decide_pivot() -> void:
 
 
 func commit_action(cel: Image, _project: Project = Global.current_project) -> void:
-	var angle: float = deg2rad(angle_hslider.value)
+	var angle: float = deg2rad(angle_slider.value)
 
 	var selection_size := cel.get_size()
 	var selection_tex := ImageTexture.new()
@@ -107,9 +104,9 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 	match type_option_button.text:
 		"Rotxel with Smear":
 			var params := {
-				"initial_angle": init_angle_hslider.value,
-				"ending_angle": angle_hslider.value,
-				"tolerance": tolerance_hslider.value,
+				"initial_angle": init_angle_slider.value,
+				"ending_angle": angle_slider.value,
+				"tolerance": tolerance_slider.value,
 				"selection_tex": selection_tex,
 				"origin": pivot / cel.get_size(),
 				"selection_size": selection_size
@@ -173,40 +170,25 @@ func _on_TypeOptionButton_item_selected(_id: int) -> void:
 	update_preview()
 
 
-func _on_AngleHSlider_value_changed(_value: float) -> void:
-	angle_spinbox.value = angle_hslider.value
+func _on_AngleSlider_value_changed(_value: float) -> void:
 	if live_preview:
 		update_preview()
 	else:
 		wait_apply_timer.start()
 
 
-func _on_AngleSpinBox_value_changed(_value: float) -> void:
-	angle_hslider.value = angle_spinbox.value
-
-
-func _on_InitialAngleHSlider_value_changed(_value: float) -> void:
-	init_angle_spinbox.value = init_angle_hslider.value
+func _on_InitialAngleSlider_value_changed(_value: float) -> void:
 	if live_preview:
 		update_preview()
 	else:
 		wait_apply_timer.start()
 
 
-func _on_InitialAngleSpinBox_value_changed(_value: float) -> void:
-	init_angle_hslider.value = init_angle_spinbox.value
-
-
-func _on_ToleranceHSlider_value_changed(_value: float) -> void:
-	tolerance_spinbox.value = tolerance_hslider.value
+func _on_ToleranceSlider_value_changed(_value: float) -> void:
 	if live_preview:
 		update_preview()
 	else:
 		wait_apply_timer.start()
-
-
-func _on_ToleranceSpinBox_value_changed(_value: float) -> void:
-	tolerance_hslider.value = tolerance_spinbox.value
 
 
 func _on_WaitApply_timeout() -> void:
@@ -219,14 +201,14 @@ func _on_WaitTime_value_changed(value: float) -> void:
 
 func _on_LiveCheckbox_toggled(button_pressed: bool) -> void:
 	live_preview = button_pressed
-	wait_time_spinbox.editable = !live_preview
-	wait_time_spinbox.get_parent().visible = !live_preview
+	wait_time_slider.editable = !live_preview
+	wait_time_slider.visible = !live_preview
 	if !button_pressed:
 		rect_size.y += 1  # Reset rect_size of dialog
 
 
 func _on_quick_change_angle_pressed(angle_value: int) -> void:
-	var current_angle := angle_hslider.value
+	var current_angle := angle_slider.value
 	var new_angle := current_angle + angle_value
 	if angle_value == 0:
 		new_angle = 0
@@ -235,7 +217,7 @@ func _on_quick_change_angle_pressed(angle_value: int) -> void:
 		new_angle = new_angle + 360
 	elif new_angle >= 360:
 		new_angle = new_angle - 360
-	angle_hslider.value = new_angle
+	angle_slider.value = new_angle
 
 
 func _on_Centre_pressed() -> void:
@@ -249,7 +231,7 @@ func _on_Pivot_value_changed(value: float, is_x: bool) -> void:
 		pivot.y = value
 	# Refresh the indicator
 	pivot_indicator.update()
-	if angle_hslider.value != 0:
+	if angle_slider.value != 0:
 		update_preview()
 
 
