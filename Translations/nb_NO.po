@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-10-04 21:50\n"
+"PO-Revision-Date: 2022-10-15 11:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,7 +165,10 @@ msgstr "Sentrer Bildet"
 msgid "Rotate Image"
 msgstr "Rotér Bilde"
 
-msgid "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
 msgstr ""
 
 msgid "Smear options:"
