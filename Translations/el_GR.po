@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-10-05 13:39\n"
+"PO-Revision-Date: 2022-10-15 00:12\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -163,7 +163,7 @@ msgid "Centralize Image"
 msgstr "Μετακίνηση εικόνας στο κέντρο"
 
 msgid "Rotate Image"
-msgstr "Περιστροφή Εικόνας"
+msgstr "Περιστροφή εικόνας"
 
 msgid "Pivot (x, y):"
 msgstr "Άξονας (x, y):"
@@ -187,7 +187,7 @@ msgid "Grayscale View"
 msgstr "Προβολή σε κλίμακα γκρι"
 
 msgid "Mirror Image"
-msgstr "Αναστροφή Εικόνας"
+msgstr "Αναστροφή εικόνας"
 
 msgid "Flip Horizontal"
 msgstr "Οριζόντια αναστροφή"
@@ -229,7 +229,7 @@ msgid "Reset Mask"
 msgstr "Επαναφορά μάσκας"
 
 msgid "Window Opacity"
-msgstr "Αδιαφάνεια Παραθύρου"
+msgstr "Αδιαφάνεια παραθύρου"
 
 msgid "Window opacity does not work on fullscreen mode."
 msgstr "Η αδιαφάνεια παραθύρου δε λειτουργεί σε λειτουργία πλήρους οθόνης."
@@ -271,7 +271,7 @@ msgid "Tallscreen"
 msgstr "Κάθετη"
 
 msgid "Mirror View"
-msgstr "Αναστροφή Προβολής"
+msgstr "Αναστροφή προβολής"
 
 msgid "Show Grid"
 msgstr "Εμφάνιση πλέγματος"
@@ -289,10 +289,10 @@ msgid "Show Animation Timeline"
 msgstr "Εμφάνιση χρονοδιαγράμματος"
 
 msgid "Zen Mode"
-msgstr "Λειτουργία Zεν"
+msgstr "Λειτουργία ζεν"
 
 msgid "Fullscreen Mode"
-msgstr "Λειτουργία Πλήρους Οθόνης"
+msgstr "Λειτουργία πλήρους οθόνης"
 
 msgid "Fill with color:"
 msgstr "Γέμισμα με χρώμα:"
@@ -560,7 +560,7 @@ msgid "Restore default value"
 msgstr "Επαναφορά εργοστασιακής τιμής"
 
 msgid "Smooth Zoom"
-msgstr "Ομαλό Ζουμ"
+msgstr "Ομαλό ζουμ"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr "Κάνει την μετάβαση στην μεγέθυνση ή σμίκρυνση πιο ομαλή"
@@ -701,7 +701,7 @@ msgid "Gradient"
 msgstr "Διαβάθμιση"
 
 msgid "Gradient Map"
-msgstr "Χάρτης Διαβαθμίσεων"
+msgstr "Χάρτης διαβαθμίσεων"
 
 msgid "Divide into equal parts"
 msgstr "Χωρίστε σε ίσα τμήματα"
@@ -2060,10 +2060,10 @@ msgid "Tiled In Both Axis"
 msgstr "Επανάληψη και στους 2 άξονες"
 
 msgid "Tiled In X Axis"
-msgstr "Επανάληψη στον Άξονα Χ"
+msgstr "Επανάληψη στον άξονα Χ"
 
 msgid "Tiled In Y Axis"
-msgstr "Επανάληψη στον Άξονα Υ"
+msgstr "Επανάληψη στον άξονα Y"
 
 msgid "Create a new palette"
 msgstr "Δημιουργία νέας παλέτας"
