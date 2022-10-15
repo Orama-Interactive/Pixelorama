@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-10-04 21:50\n"
+"PO-Revision-Date: 2022-10-15 11:20\n"
 
 msgid "OK"
 msgstr "确定"
@@ -165,8 +165,11 @@ msgstr "集成图像"
 msgid "Rotate Image"
 msgstr "旋转图像"
 
-msgid "Pivot (x, y):"
-msgstr "支点 (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
+msgstr ""
 
 msgid "Smear options:"
 msgstr "涂抹选项："
