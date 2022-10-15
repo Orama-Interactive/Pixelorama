@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-10-08 13:57\n"
+"PO-Revision-Date: 2022-10-15 11:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,8 +165,11 @@ msgstr "Wyśrodkuj obraz"
 msgid "Rotate Image"
 msgstr "Obróć obraz"
 
-msgid "Pivot (x, y):"
-msgstr "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
+msgstr ""
 
 msgid "Smear options:"
 msgstr "Opcje rozmazywania:"
