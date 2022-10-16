@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-10-16 15:51\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1615,10 +1615,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Пов'язати клітинки з"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Відв'язати клітинки"
 
 msgid "Frame Properties"
 msgstr "Властивості кадру"
@@ -1673,7 +1673,8 @@ msgstr "Кадр: %s, шар: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Увімкнути/вимкнути автоматичне зв'язання нових клітинок при створенні нових кадрів\n\n"
+"Пов'язані клітинки будуть одночасно використовуватися в різних кадрах"
 
 msgid "Expand/collapse group"
 msgstr "Розгорнути/згорнути групу"
