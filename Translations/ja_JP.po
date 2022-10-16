@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-10-16 15:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1615,10 +1615,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "セルをリンクする"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "セルのリンクを解除"
 
 msgid "Frame Properties"
 msgstr "フレームのプロパティ"
@@ -1673,7 +1673,8 @@ msgstr "フレーム: %s, レイヤー: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "新しいフレームを作成するときに、新しいセルの自動リンクを有効/無効にしま\n\n"
+"リンクされたセルは、複数のフレームでコンテンツを共有します"
 
 msgid "Expand/collapse group"
 msgstr "グループを展開/閉じる"
