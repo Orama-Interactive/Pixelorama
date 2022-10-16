@@ -88,8 +88,11 @@ func get_layer_path() -> String:
 func link_cel(cel: BaseCel, link_set = null) -> void:
 	# Erase from the cel's current link_set
 	if cel.link_set != null:
-		cel.link_set["cels"].erase(cel)
-		if cel.link_set["cels"].empty():
+		if cel.link_set.has("cels"):
+			cel.link_set["cels"].erase(cel)
+			if cel.link_set["cels"].empty():
+				cel_link_sets.erase(cel.link_set)
+		else:
 			cel_link_sets.erase(cel.link_set)
 	# Add to link_set
 	cel.link_set = link_set
