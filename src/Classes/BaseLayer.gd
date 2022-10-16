@@ -121,6 +121,9 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 		print(cel_link_sets)
 		assert(cel_link_sets.find(cel.link_set) > -1)
 		assert(cel_link_sets.find(link_set) > -1)
+		for set in cel_link_sets:
+			for cel in set["cels"]:
+				assert(cel.link_set == set)
 
 
 # Methods to Override:
