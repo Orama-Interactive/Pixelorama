@@ -116,14 +116,6 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 							largest_gap_size = gap_size
 					link_set["hue"] = wrapf(largest_gap_pos + largest_gap_size / 2.0, 0, 1)
 			cel_link_sets.append(link_set)
-		print(link_set) # TODO: Remove these prints and asserts
-		print(cel.link_set)
-		print(cel_link_sets)
-		assert(cel_link_sets.find(cel.link_set) > -1)
-		assert(cel_link_sets.find(link_set) > -1)
-		for set in cel_link_sets:
-			for cel in set["cels"]:
-				assert(cel.link_set == set)
 
 
 # Methods to Override:

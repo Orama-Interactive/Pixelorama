@@ -614,14 +614,13 @@ func _on_CloneLayer_pressed() -> void:
 		var cl_layer: BaseLayer = src_layer.get_script().new(project)
 		cl_layer.project = project
 		cl_layer.index = src_layer.index
-		cl_layer.deserialize(src_layer.serialize())
+		var src_layer_data: Dictionary = src_layer.serialize()
+		for link_set in src_layer_data.get("link_sets", []):
+			link_set["cels"].clear() # Clear away the indices
+		cl_layer.deserialize(src_layer_data)
 		clones.append(cl_layer)
 
 		cels.append([])
-		for i in cl_layer.cel_link_sets.size():
-			cl_layer.cel_link_sets[i]["cels"] = []  # Set to a new empty array
-
-		print(src_layer.cel_link_sets) # TODO: Remove
 
 		for frame in project.frames:
 			var src_cel: BaseCel = frame.cels[src_layer.index]
@@ -630,12 +629,9 @@ func _on_CloneLayer_pressed() -> void:
 			if src_cel.link_set == null:
 				new_cel.set_content(src_cel.copy_content())
 			else:
-				# TODO: In this version, find is failing, for some reason the link_set isn't matching?
-				#		Printing often shows that the cel's link_set doesn't match... but why?
 				new_cel.link_set = cl_layer.cel_link_sets[src_layer.cel_link_sets.find(
 					src_cel.link_set
 				)]
-				print(src_cel.link_set) # TODO: Remove
 				if new_cel.link_set["cels"].size() > 0:
 					var linked_cel: BaseCel = new_cel.link_set["cels"][0]
 					new_cel.set_content(linked_cel.get_content(), linked_cel.image_texture)
