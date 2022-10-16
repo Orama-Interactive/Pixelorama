@@ -5,6 +5,7 @@ extends Reference
 
 var opacity: float
 var image_texture: ImageTexture
+var link_set = null  # The linked cel array this cel is in, or null if its not linked
 
 # Methods to Override:
 
@@ -16,7 +17,7 @@ func get_content():
 	return null
 
 
-func set_content(_content) -> void:
+func set_content(_content, _texture: ImageTexture = null) -> void:
 	return
 
 

@@ -598,18 +598,6 @@ func is_empty() -> bool:
 	)
 
 
-func duplicate_layers() -> Array:
-	var new_layers: Array = layers.duplicate()
-	# Loop through the array to create new classes for each element, so that they
-	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
-	for i in new_layers.size():
-		new_layers[i] = new_layers[i].copy()
-	for l in new_layers:
-		if is_instance_valid(l.parent):
-			l.parent = new_layers[l.parent.index]  # Update the parent to the new copy of the parent
-	return new_layers
-
-
 func can_pixel_get_drawn(
 	pixel: Vector2,
 	image: SelectionMap = selection_map,
@@ -643,6 +631,14 @@ func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	for i in new_frames.size():
+		# For each linked cel in the frame, update its layer's cel_link_sets
+		for l in layers.size():
+			var cel: BaseCel = new_frames[i].cels[l]
+			if cel.link_set != null:
+				if not layers[l].cel_link_sets.has(cel.link_set):
+					layers[l].cel_link_sets.append(cel.link_set)
+				cel.link_set.append(cel)
+		# Add frame
 		frames.insert(indices[i], new_frames[i])
 		Global.animation_timeline.project_frame_added(indices[i])
 	# Update the frames and frame buttons:
@@ -663,6 +659,14 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 	selected_cels.clear()
 	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
+		# For each linked cel in the frame, update its layer's cel_link_sets
+		for l in layers.size():
+			var cel: BaseCel = frames[indices[i] - i].cels[l]
+			if cel.link_set != null:
+				cel.link_set.erase(cel)
+				if cel.link_set.empty():
+					layers[l].cel_link_sets.erase(cel.link_set)
+		# Remove frame
 		frames.remove(indices[i] - i)
 		Global.animation_timeline.project_frame_removed(indices[i] - i)
 	# Update the frames and frame buttons:

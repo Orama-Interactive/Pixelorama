@@ -191,20 +191,22 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 
 	var frame := 0
 
-	var linked_cels := []
+	var layer_dicts := []
 	if file_major_version >= 0 and file_minor_version > 6:
 		var global_layer_line := file.get_line()
 		while global_layer_line == ".":
-			var layer_dict := {
-				"name": file.get_line(),
-				"visible": file.get_8(),
-				"locked": file.get_8(),
-				"new_cels_linked": file.get_8(),
-				"linked_cels": []
-			}
-			linked_cels.append(file.get_var())
+			layer_dicts.append(
+				{
+					"name": file.get_line(),
+					"visible": file.get_8(),
+					"locked": file.get_8(),
+					"new_cels_linked": file.get_8(),
+					"link_sets": []
+				}
+			)
+			layer_dicts[-1]["link_sets"].append(file.get_var())
 			var l := PixelLayer.new(new_project)
-			l.deserialize(layer_dict)
+			l.index = new_project.layers.size()
 			new_project.layers.append(l)
 			global_layer_line = file.get_line()
 
@@ -222,6 +224,7 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 				var layer_name_old_version = file.get_line()
 				if frame == 0:
 					var l := PixelLayer.new(new_project, layer_name_old_version)
+					l.index = layer_i
 					new_project.layers.append(l)
 			var cel_opacity := 1.0
 			if file_major_version >= 0 and file_minor_version > 5:
@@ -229,13 +232,6 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 			var image := Image.new()
 			image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
 			frame_class.cels.append(PixelCel.new(image, cel_opacity))
-			if file_major_version >= 0 and file_minor_version >= 7:
-				if frame in linked_cels[layer_i]:
-					var linked_cel: PixelCel = new_project.layers[layer_i].linked_cels[0].cels[layer_i]
-					new_project.layers[layer_i].linked_cels.append(frame_class)
-					frame_class.cels[layer_i].image = linked_cel.image
-					frame_class.cels[layer_i].image_texture = linked_cel.image_texture
-
 			layer_i += 1
 			layer_line = file.get_line()
 
@@ -259,6 +255,10 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 		new_project.frames.append(frame_class)
 		frame_line = file.get_line()
 		frame += 1
+
+	for layer_i in new_project.layers.size():
+		# Now that we have the layers, frames, and cels, deserialize layer data
+		new_project.layers[layer_i].deserialize(layer_dicts[layer_i])
 
 	if new_guides:
 		var guide_line := file.get_line()  # "guideline" no pun intended
@@ -460,12 +460,11 @@ func open_image_as_spritesheet_layer(
 	# Initialize undo mechanism
 	project.undos += 1
 	project.undo_redo.create_action("Add Spritesheet Layer")
-	var new_layers: Array = project.layers.duplicate()  # Used for updating linked_cels lists
 
 	# Create new frames (if needed)
 	var new_frames_size = max(project.frames.size(), start_frame + (vertical * horizontal))
 	var frames := []
-	var frame_indices: Array
+	var frame_indices := []
 	if new_frames_size > project.frames.size():
 		var required_frames = new_frames_size - project.frames.size()
 		frame_indices = range(
@@ -473,14 +472,20 @@ func open_image_as_spritesheet_layer(
 		)
 		for i in required_frames:
 			var new_frame := Frame.new()
-			for l_i in range(project.layers.size()):  # Create as many cels as there are layers
-				new_frame.cels.append(project.layers[l_i].new_empty_cel())
-				if new_layers[l_i].get("new_cels_linked"):
-					new_layers[l_i].linked_cels.append(new_frame)
-					new_frame.cels[l_i].set_content(
-						new_layers[l_i].linked_cels[0].cels[l_i].get_content()
-					)
-					new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
+			for l in range(project.layers.size()):  # Create as many cels as there are layers
+				new_frame.cels.append(project.layers[l].new_empty_cel())
+				if project.layers[l].new_cels_linked:
+					var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
+					if prev_cel.link_set == null:
+						prev_cel.link_set = []
+						project.undo_redo.add_do_method(
+							project.layers[l], "link_cel", prev_cel, prev_cel.link_set
+						)
+						project.undo_redo.add_undo_method(
+							project.layers[l], "link_cel", prev_cel, null
+						)
+					new_frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
+					new_frame.cels[l].link_set = prev_cel.link_set
 			frames.append(new_frame)
 
 	# Create new layer for spritesheet
@@ -504,14 +509,12 @@ func open_image_as_spritesheet_layer(
 	project.undo_redo.add_do_property(project, "current_frame", new_frames_size - 1)
 	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
 	project.undo_redo.add_do_method(project, "add_frames", frames, frame_indices)
-	project.undo_redo.add_do_property(project, "layers", new_layers)
 	project.undo_redo.add_do_method(project, "add_layers", [layer], [project.layers.size()], [cels])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
-	project.undo_redo.add_undo_property(project, "layers", project.layers)
 	project.undo_redo.add_undo_method(project, "remove_frames", frame_indices)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()

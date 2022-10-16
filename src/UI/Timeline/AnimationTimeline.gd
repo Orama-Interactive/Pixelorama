@@ -133,13 +133,21 @@ func add_frame() -> void:
 	var project: Project = Global.current_project
 	var frame_add_index := project.current_frame + 1
 	var frame: Frame = project.new_empty_frame()
-	var new_layers: Array = project.duplicate_layers()
 
-	for l_i in range(new_layers.size()):
-		if new_layers[l_i].get("new_cels_linked"):  # If the link button is pressed
-			new_layers[l_i].linked_cels.append(frame)
-			frame.cels[l_i].set_content(new_layers[l_i].linked_cels[0].cels[l_i].get_content())
-			frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
+	project.undos += 1
+	project.undo_redo.create_action("Add Frame")
+
+	for l in range(project.layers.size()):
+		if project.layers[l].new_cels_linked:  # If the link button is pressed
+			var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
+			if prev_cel.link_set == null:
+				prev_cel.link_set = []
+				project.undo_redo.add_do_method(
+					project.layers[l], "link_cel", prev_cel, prev_cel.link_set
+				)
+				project.undo_redo.add_undo_method(project.layers[l], "link_cel", prev_cel, null)
+			frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
+			frame.cels[l].link_set = prev_cel.link_set
 
 	# Code to PUSH AHEAD tags starting after the frame
 	var new_animation_tags := project.animation_tags.duplicate()
@@ -160,12 +168,8 @@ func add_frame() -> void:
 			tag.from += 1
 			tag.to += 1
 
-	project.undos += 1
-	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_property(project, "layers", new_layers)
-	project.undo_redo.add_undo_property(project, "layers", project.layers)
 	project.undo_redo.add_do_method(project, "add_frames", [frame], [frame_add_index])
 	project.undo_redo.add_undo_method(project, "remove_frames", [frame_add_index])
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
@@ -196,7 +200,6 @@ func delete_frames(indices := []) -> void:
 		indices.append(project.current_frame)
 
 	var current_frame: int = min(project.current_frame, project.frames.size() - indices.size() - 1)
-	var new_layers: Array = project.duplicate_layers()
 	var frames := []
 	var frame_correction := 0  # Only needed for tag adjustment
 
@@ -213,13 +216,6 @@ func delete_frames(indices := []) -> void:
 
 	for f in indices:
 		frames.append(project.frames[f])
-		# Check if one of the cels of the frame is linked
-		# if they are, unlink them too
-		# this prevents removed cels being kept in linked memory
-		for layer in new_layers:
-			for linked in layer.linked_cels:
-				if linked == project.frames[f]:
-					layer.linked_cels.erase(linked)
 
 		# Loop through the tags to see if the frame is in one
 		f -= frame_correction  # Erasing made frames indexes 1 step ahead their intended tags
@@ -239,8 +235,6 @@ func delete_frames(indices := []) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Remove Frame")
-	project.undo_redo.add_do_property(project, "layers", new_layers)
-	project.undo_redo.add_undo_property(project, "layers", Global.current_project.layers)
 	project.undo_redo.add_do_method(project, "remove_frames", indices)
 	project.undo_redo.add_undo_method(project, "add_frames", frames, indices)
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
@@ -268,7 +262,6 @@ func copy_frames(indices := []) -> void:
 	if indices.size() == 0:
 		indices.append(project.current_frame)
 
-	var new_layers: Array = project.duplicate_layers()
 	var copied_frames := []
 	var copied_indices := range(indices[-1] + 1, indices[-1] + 1 + indices.size())
 
@@ -283,26 +276,32 @@ func copy_frames(indices := []) -> void:
 			new_animation_tags[i].to
 		)
 
+	project.undos += 1
+	project.undo_redo.create_action("Add Frame")
+
 	for f in indices:
 		var new_frame := Frame.new()
 		copied_frames.append(new_frame)
 
-		var prev_frame: Frame = project.frames[f]
+		var src_frame: Frame = project.frames[f]
 
-		new_frame.duration = prev_frame.duration
-		for l_i in range(new_layers.size()):
-			# If the layer has new_cels_linked variable, and its true
-			var new_cels_linked := true if new_layers[l_i].get("new_cels_linked") else false
-
-			# Copy the cel, create new cel content if new cels aren't linked
-			new_frame.cels.append(new_layers[l_i].copy_cel(f, new_cels_linked))
-
-			if new_cels_linked:  # If the link button is pressed
-				new_layers[l_i].linked_cels.append(new_frame)
-				new_frame.cels[l_i].set_content(
-					new_layers[l_i].linked_cels[0].cels[l_i].get_content()
-				)
-				new_frame.cels[l_i].image_texture = new_layers[l_i].linked_cels[0].cels[l_i].image_texture
+		new_frame.duration = src_frame.duration
+		for l in range(project.layers.size()):
+			var src_cel: BaseCel = project.frames[f].cels[l]  # Cel we're copying from, the source
+			var new_cel: BaseCel = src_cel.get_script().new()
+			if project.layers[l].new_cels_linked:
+				if src_cel.link_set == null:
+					src_cel.link_set = []
+					project.undo_redo.add_do_method(
+						project.layers[l], "link_cel", src_cel, src_cel.link_set
+					)
+					project.undo_redo.add_undo_method(project.layers[l], "link_cel", src_cel, null)
+				new_cel.set_content(src_cel.get_content(), src_cel.image_texture)
+				new_cel.link_set = src_cel.link_set
+			else:
+				new_cel.set_content(src_cel.copy_content())
+			new_cel.opacity = src_cel.opacity
+			new_frame.cels.append(new_cel)
 
 		# Loop through the tags to see if the frame is in one
 		for tag in new_animation_tags:
@@ -312,12 +311,8 @@ func copy_frames(indices := []) -> void:
 				tag.from += 1
 				tag.to += 1
 
-	project.undos += 1
-	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_property(project, "layers", new_layers)
-	project.undo_redo.add_undo_property(project, "layers", project.layers)
 	project.undo_redo.add_do_method(project, "add_frames", copied_frames, copied_indices)
 	project.undo_redo.add_undo_method(project, "remove_frames", copied_indices)
 	project.undo_redo.add_do_property(project, "current_frame", indices[-1] + 1)
@@ -615,18 +610,44 @@ func _on_CloneLayer_pressed() -> void:
 
 	var clones := []  # Array of Layers
 	var cels := []  # 2D Array of Cels
-	for sl in source_layers:
-		var cl: BaseLayer = sl.copy()
-		if sl.index == project.current_layer:
-			cl.name = str(sl.name, " (", tr("copy"), ")")
-		clones.append(cl)
-		cels.append(sl.copy_all_cels())
+	for src_layer in source_layers:
+		var cl_layer = src_layer.get_script().new(project)
+		cl_layer.project = project
+		cl_layer.index = src_layer.index
+		cl_layer.deserialize(src_layer.serialize())
+		clones.append(cl_layer)
 
-	# Swap parents with clones if the parent is one of the source layers
-	for cl in clones:
-		var p = source_layers.find(cl.parent)
-		if p > -1:
-			cl.parent = clones[p]
+		cels.append([])
+		for i in cl_layer.cel_link_sets.size():
+			cl_layer.cel_link_sets[i] = []  # Set to a new empty array
+
+		for frame in project.frames:
+			var src_cel: BaseCel = frame.cels[src_layer.index]
+			var new_cel: BaseCel = src_cel.get_script().new()
+
+			if src_cel.link_set == null:
+				new_cel.set_content(src_cel.copy_content())
+			else:
+				new_cel.link_set = cl_layer.cel_link_sets[src_layer.cel_link_sets.find(
+					src_cel.link_set
+				)]
+				if new_cel.link_set.size() > 0:
+					new_cel.set_content(
+						new_cel.link_set[0].get_content(), new_cel.link_set[0].image_texture
+					)
+				else:
+					new_cel.set_content(src_cel.copy_content())
+				new_cel.link_set.append(new_cel)
+
+			new_cel.opacity = src_cel.opacity
+			cels[-1].append(new_cel)
+
+	for cl_layer in clones:
+		var p = source_layers.find(cl_layer.parent)
+		if p > -1:  # Swap parent with clone if the parent is one of the source layers
+			cl_layer.parent = clones[p]
+		else:  # Add (Copy) to the name if its not a child of another copied layer
+			cl_layer.name = str(cl_layer.name, " (", tr("copy"), ")")
 
 	var indices := range(project.current_layer + 1, project.current_layer + clones.size() + 1)
 
@@ -732,63 +753,53 @@ func _on_MergeDownLayer_pressed() -> void:
 	var project: Project = Global.current_project
 	var top_layer: PixelLayer = project.layers[project.current_layer]
 	var bottom_layer: PixelLayer = project.layers[project.current_layer - 1]
-	var new_linked_cels: Array = bottom_layer.linked_cels.duplicate()
+	var top_cels := []
 
 	project.undos += 1
 	project.undo_redo.create_action("Merge Layer")
 
-	for f in project.frames:
+	for frame in project.frames:
+		top_cels.append(frame.cels[top_layer.index])  # Store for undo purposes
+
 		var top_image := Image.new()
-		top_image.copy_from(f.cels[top_layer.index].image)
+		top_image.copy_from(frame.cels[top_layer.index].image)
 
 		top_image.lock()
-		if f.cels[top_layer.index].opacity < 1:  # If we have layer transparency
+		if frame.cels[top_layer.index].opacity < 1:  # If we have layer transparency
 			for xx in top_image.get_size().x:
 				for yy in top_image.get_size().y:
 					var pixel_color: Color = top_image.get_pixel(xx, yy)
-					var alpha: float = pixel_color.a * f.cels[top_layer.index].opacity
+					var alpha: float = pixel_color.a * frame.cels[top_layer.index].opacity
 					top_image.set_pixel(
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
 		top_image.unlock()
-
+		var bottom_cel: BaseCel = frame.cels[bottom_layer.index]
 		var bottom_image := Image.new()
-		bottom_image.copy_from(f.cels[bottom_layer.index].image)
+		bottom_image.copy_from(bottom_cel.image)
 		bottom_image.blend_rect(top_image, Rect2(Vector2.ZERO, project.size), Vector2.ZERO)
 		if (
-			!top_image.is_invisible()
-			and bottom_layer.linked_cels.size() > 1
-			and f in bottom_layer.linked_cels
+			bottom_cel.link_set != null
+			and bottom_cel.link_set.size() > 1
+			and not top_image.is_invisible()
 		):
-			new_linked_cels.erase(f)
-			project.undo_redo.add_do_property(
-				f.cels[bottom_layer.index], "image_texture", ImageTexture.new()
+			# Unlink cel:
+			project.undo_redo.add_do_method(bottom_layer, "link_cel", bottom_cel, null)
+			project.undo_redo.add_undo_method(
+				bottom_layer, "link_cel", bottom_cel, bottom_cel.link_set
 			)
+			project.undo_redo.add_do_property(bottom_cel, "image_texture", ImageTexture.new())
 			project.undo_redo.add_undo_property(
-				f.cels[bottom_layer.index],
-				"image_texture",
-				f.cels[bottom_layer.index].image_texture
+				bottom_cel, "image_texture", bottom_cel.image_texture
 			)
-			project.undo_redo.add_do_property(f.cels[bottom_layer.index], "image", bottom_image)
-			project.undo_redo.add_undo_property(
-				f.cels[bottom_layer.index], "image", f.cels[bottom_layer.index].image
-			)
+			project.undo_redo.add_do_property(bottom_cel, "image", bottom_image)
+			project.undo_redo.add_undo_property(bottom_cel, "image", bottom_cel.image)
 		else:
-			project.undo_redo.add_do_property(
-				f.cels[bottom_layer.index].image, "data", bottom_image.data
-			)
-			project.undo_redo.add_undo_property(
-				f.cels[bottom_layer.index].image, "data", f.cels[bottom_layer.index].image.data
-			)
-
-	var top_cels := []
-	for f in project.frames:
-		top_cels.append(f.cels[top_layer.index])
+			project.undo_redo.add_do_property(bottom_cel.image, "data", bottom_image.data)
+			project.undo_redo.add_undo_property(bottom_cel.image, "data", bottom_cel.image.data)
 
 	project.undo_redo.add_do_property(project, "current_layer", bottom_layer.index)
 	project.undo_redo.add_undo_property(project, "current_layer", top_layer.index)
-	project.undo_redo.add_do_property(bottom_layer, "linked_cels", new_linked_cels)
-	project.undo_redo.add_undo_property(bottom_layer, "linked_cels", bottom_layer.linked_cels)
 	project.undo_redo.add_do_method(project, "remove_layers", [top_layer.index])
 	project.undo_redo.add_undo_method(
 		project, "add_layers", [top_layer], [top_layer.index], [top_cels]
@@ -831,9 +842,9 @@ func project_changed() -> void:
 		Global.frame_ids.add_child(button)
 
 	# Press selected cel/frame/layer buttons
-	for cel in project.selected_cels:
-		var frame: int = cel[0]
-		var layer: int = cel[1]
+	for cel_index in project.selected_cels:
+		var frame: int = cel_index[0]
+		var layer: int = cel_index[1]
 		if frame < Global.frame_ids.get_child_count():
 			var frame_button: BaseButton = Global.frame_ids.get_child(frame)
 			frame_button.pressed = true
