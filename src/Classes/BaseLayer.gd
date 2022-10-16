@@ -151,7 +151,7 @@ func deserialize(dict: Dictionary) -> void:
 		dict["link_sets"] = [{"cels": dict["linked_cels"], "hue": Color.green.h}]
 	if dict.has("link_sets"):
 		for serialized_link_set in dict["link_sets"]:
-			var link_set := {"cels": [], "hue": serialized_link_set["hue"] }
+			var link_set := {"cels": [], "hue": serialized_link_set["hue"]}
 			for linked_cel_index in serialized_link_set["cels"]:
 				var cel: BaseCel = project.frames[linked_cel_index].cels[index]
 				link_set["cels"].append(cel)

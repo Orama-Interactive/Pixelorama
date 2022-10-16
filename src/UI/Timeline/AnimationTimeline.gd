@@ -616,7 +616,7 @@ func _on_CloneLayer_pressed() -> void:
 		cl_layer.index = src_layer.index
 		var src_layer_data: Dictionary = src_layer.serialize()
 		for link_set in src_layer_data.get("link_sets", []):
-			link_set["cels"].clear() # Clear away the indices
+			link_set["cels"].clear()  # Clear away the indices
 		cl_layer.deserialize(src_layer_data)
 		clones.append(cl_layer)
 
