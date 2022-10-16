@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-10-16 21:52\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1615,10 +1615,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Tautkan Cel ke"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Putuskan Cel"
 
 msgid "Frame Properties"
 msgstr "Rincian Sifat Bingkai"
@@ -1673,7 +1673,8 @@ msgstr "Bingkai: %s, Lapisan: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Mampukan/lumpuhkan penautan otomatis cel baru ketika membuat bingkai baru\n\n"
+"Cel tertaut akan membagi isinya di seluruh bingkai"
 
 msgid "Expand/collapse group"
 msgstr "Bentang/ciutkan kelompok"
