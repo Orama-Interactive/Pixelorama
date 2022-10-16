@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-10-16 15:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -328,7 +328,7 @@ msgid "Spritesheet (new layer)"
 msgstr "Spritesheet (nuovo livello)"
 
 msgid "New frame"
-msgstr "Nuovo frame"
+msgstr "Nuovo fotogramma"
 
 msgid "Replace cel"
 msgstr "Sostituire la cella"
@@ -355,7 +355,7 @@ msgid "Start frame:"
 msgstr "Fotogramma iniziale:"
 
 msgid "At frame:"
-msgstr "Al telaio:"
+msgstr "Al fotogramma:"
 
 msgid "At layer:"
 msgstr "A livello:"
@@ -1615,10 +1615,10 @@ msgid "Add Frame Tag"
 msgstr "Aggiungi tag Frame"
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Collega le celle a"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Scollega celle"
 
 msgid "Frame Properties"
 msgstr "Proprietà Del Frame"
@@ -1669,11 +1669,12 @@ msgid "Lock/unlock layer"
 msgstr "Blocca/Sblocca livello"
 
 msgid "Frame: %s, Layer: %s"
-msgstr "Quadro: %s, Livello: %s"
+msgstr "Fotogramma: %s, Livello: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Abilita/disabilita il collegamento automatico delle nuove celle alla creazione di nuovi fotogrammi\n\n"
+"Le celle collegate condividono contenuto tra diversi fotogrammi"
 
 msgid "Expand/collapse group"
 msgstr "Espandere/comprimere gruppo"
