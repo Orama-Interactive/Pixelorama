@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-10-16 15:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -166,10 +166,10 @@ msgid "Rotate Image"
 msgstr "Rotire imagine"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Pivot x:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Pivot y:"
 
 msgid "Smear options:"
 msgstr "Animație prin efect de neclaritate:"
@@ -1615,10 +1615,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Conectare celuri la"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Deconectare celuri"
 
 msgid "Frame Properties"
 msgstr "Proprietățile cadrului"
@@ -1673,7 +1673,8 @@ msgstr "Cadru: %s, strat: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Activează/dezactivează automat conectarea de celuri noi la crearea de cadre noi\n\n"
+"Celurile conectate împărtășesc conținut între mai multe cadre"
 
 msgid "Expand/collapse group"
 msgstr "Extindere/restrânge grup"
