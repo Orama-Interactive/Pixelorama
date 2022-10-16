@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-10-16 18:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1614,10 +1614,10 @@ msgid "Add Frame Tag"
 msgstr "Frame Tag hinzufügen"
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Cels verknüpfen mit"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Cels entfernen"
 
 msgid "Frame Properties"
 msgstr "Frame-Eigenschaften"
@@ -1672,7 +1672,8 @@ msgstr "Frame: %s, Ebene: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Aktiviere/Deaktiviere automatische Verlinkung neuer Cels beim Erstellen neuer Frames\n\n"
+"Verknüpfte Cels teilen Inhalte über mehrere Frames"
 
 msgid "Expand/collapse group"
 msgstr "Gruppe aus- / einklappen"
