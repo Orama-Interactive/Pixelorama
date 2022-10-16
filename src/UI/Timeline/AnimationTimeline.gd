@@ -141,7 +141,7 @@ func add_frame() -> void:
 		if project.layers[l].new_cels_linked:  # If the link button is pressed
 			var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
 			if prev_cel.link_set == null:
-				prev_cel.link_set = []
+				prev_cel.link_set = {}
 				project.undo_redo.add_do_method(
 					project.layers[l], "link_cel", prev_cel, prev_cel.link_set
 				)
@@ -291,7 +291,7 @@ func copy_frames(indices := []) -> void:
 			var new_cel: BaseCel = src_cel.get_script().new()
 			if project.layers[l].new_cels_linked:
 				if src_cel.link_set == null:
-					src_cel.link_set = []
+					src_cel.link_set = {}
 					project.undo_redo.add_do_method(
 						project.layers[l], "link_cel", src_cel, src_cel.link_set
 					)
@@ -611,7 +611,7 @@ func _on_CloneLayer_pressed() -> void:
 	var clones := []  # Array of Layers
 	var cels := []  # 2D Array of Cels
 	for src_layer in source_layers:
-		var cl_layer = src_layer.get_script().new(project)
+		var cl_layer: BaseLayer = src_layer.get_script().new(project)
 		cl_layer.project = project
 		cl_layer.index = src_layer.index
 		cl_layer.deserialize(src_layer.serialize())
@@ -619,7 +619,9 @@ func _on_CloneLayer_pressed() -> void:
 
 		cels.append([])
 		for i in cl_layer.cel_link_sets.size():
-			cl_layer.cel_link_sets[i] = []  # Set to a new empty array
+			cl_layer.cel_link_sets[i]["cels"] = []  # Set to a new empty array
+
+		print(src_layer.cel_link_sets) # TODO: Remove
 
 		for frame in project.frames:
 			var src_cel: BaseCel = frame.cels[src_layer.index]
@@ -628,16 +630,18 @@ func _on_CloneLayer_pressed() -> void:
 			if src_cel.link_set == null:
 				new_cel.set_content(src_cel.copy_content())
 			else:
+				# TODO: In this version, find is failing, for some reason the link_set isn't matching?
+				#		Printing often shows that the cel's link_set doesn't match... but why?
 				new_cel.link_set = cl_layer.cel_link_sets[src_layer.cel_link_sets.find(
 					src_cel.link_set
 				)]
-				if new_cel.link_set.size() > 0:
-					new_cel.set_content(
-						new_cel.link_set[0].get_content(), new_cel.link_set[0].image_texture
-					)
+				print(src_cel.link_set) # TODO: Remove
+				if new_cel.link_set["cels"].size() > 0:
+					var linked_cel: BaseCel = new_cel.link_set["cels"][0]
+					new_cel.set_content(linked_cel.get_content(), linked_cel.image_texture)
 				else:
 					new_cel.set_content(src_cel.copy_content())
-				new_cel.link_set.append(new_cel)
+				new_cel.link_set["cels"].append(new_cel)
 
 			new_cel.opacity = src_cel.opacity
 			cels[-1].append(new_cel)

@@ -9,7 +9,7 @@ var parent: BaseLayer
 var visible := true
 var locked := false
 var new_cels_linked := false
-var cel_link_sets := []  # 2D Array of Cels (Each Array inside this represents a "link set")
+var cel_link_sets := []  # Array of Dictionaries (Each Dictionary represents a cel's "link set")
 
 
 # Returns true if this is a direct or indirect parent of layer
@@ -83,20 +83,44 @@ func get_layer_path() -> String:
 	return name
 
 
-# Links a cel to link_set if its an array, or unlinks if null. Just handles changing cel_link_sets
-# and cel.link_set. Content/image_texture are handled seperately for undo/redo related reasons
+# Links a cel to link_set if its a Dictionary, or unlinks if null.
+# Content/image_texture are handled seperately for undo related reasons
 func link_cel(cel: BaseCel, link_set = null) -> void:
 	# Erase from the cel's current link_set
 	if cel.link_set != null:
-		cel.link_set.erase(cel)
-		if cel.link_set.empty():
+		cel.link_set["cels"].erase(cel)
+		if cel.link_set["cels"].empty():
 			cel_link_sets.erase(cel.link_set)
 	# Add to link_set
 	cel.link_set = link_set
 	if link_set != null:
-		link_set.append(cel)
+		if not link_set.has("cels"):
+			link_set["cels"] = []
+		link_set["cels"].append(cel)
 		if not cel_link_sets.has(link_set):
+			if not link_set.has("hue"):
+				var hues := PoolRealArray()
+				for other_link_set in cel_link_sets:
+					hues.append(other_link_set["hue"])
+				if hues.empty():
+					link_set["hue"] = Color.green.h
+				else:  # Calculate the largest gap in hue between existing link sets:
+					hues.sort()
+					# Start gap between the highest and lowest hues, otherwise its hard to include
+					var largest_gap_pos := hues[-1]
+					var largest_gap_size := 1.0 - (hues[-1] - hues[0])
+					for h in hues.size() - 1:
+						var gap_size: float = hues[h + 1] - hues[h]
+						if gap_size > largest_gap_size:
+							largest_gap_pos = hues[h]
+							largest_gap_size = gap_size
+					link_set["hue"] = wrapf(largest_gap_pos + largest_gap_size / 2.0, 0, 1)
 			cel_link_sets.append(link_set)
+		print(link_set) # TODO: Remove these prints and asserts
+		print(cel.link_set)
+		print(cel_link_sets)
+		assert(cel_link_sets.find(cel.link_set) > -1)
+		assert(cel_link_sets.find(link_set) > -1)
 
 
 # Methods to Override:
@@ -116,9 +140,9 @@ func serialize() -> Dictionary:
 			cels.append(frame.cels[index])
 		dict["link_sets"] = []
 		for link_set in cel_link_sets:
-			dict["link_sets"].append([])
-			for cel in link_set:
-				dict["link_sets"][-1].append(cels.find(cel))
+			dict["link_sets"].append({"cels": [], "hue": link_set["hue"]})
+			for cel in link_set["cels"]:
+				dict["link_sets"][-1]["cels"].append(cels.find(cel))
 	return dict
 
 
@@ -128,16 +152,17 @@ func deserialize(dict: Dictionary) -> void:
 	locked = dict.locked
 	if dict.get("parent", -1) != -1:
 		parent = project.layers[dict.parent]
-	if dict.has("linked_cels") and not dict["linked_cels"].empty():
-		dict["link_sets"] = [dict["linked_cels"]]  # Convert old linked_cels to link_sets
+	if dict.has("linked_cels") and not dict["linked_cels"].empty():  # Backwards compatibility
+		dict["link_sets"] = [{"cels": dict["linked_cels"], "hue": Color.green.h}]
 	if dict.has("link_sets"):
 		for serialized_link_set in dict["link_sets"]:
-			var link_set := []
-			for linked_cel_index in serialized_link_set:
-				var linked_cel: BaseCel = project.frames[linked_cel_index].cels[index]
-				link_set.append(linked_cel)
-				linked_cel.link_set = link_set
-				linked_cel.set_content(link_set[0].get_content(), link_set[0].image_texture)
+			var link_set := {"cels": [], "hue": serialized_link_set["hue"] }
+			for linked_cel_index in serialized_link_set["cels"]:
+				var cel: BaseCel = project.frames[linked_cel_index].cels[index]
+				link_set["cels"].append(cel)
+				cel.link_set = link_set
+				var linked_cel: BaseCel = link_set["cels"][0]
+				cel.set_content(linked_cel.get_content(), linked_cel.image_texture)
 			cel_link_sets.append(link_set)
 
 

@@ -5,7 +5,8 @@ extends Reference
 
 var opacity: float
 var image_texture: ImageTexture
-var link_set = null  # The linked cel array this cel is in, or null if its not linked
+# If the cel is linked a ref to the link set Dictionary this cel is in, or null if not linked:
+var link_set = null  # { "cels": Array, "hue": float } or null
 
 # Methods to Override:
 

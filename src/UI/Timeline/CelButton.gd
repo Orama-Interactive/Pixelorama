@@ -24,9 +24,7 @@ func button_setup() -> void:
 	if is_instance_valid(linked_indicator):
 		linked_indicator.visible = cel.link_set != null
 		if cel.link_set != null:
-			var cel_link_sets: Array = Global.current_project.layers[layer].cel_link_sets
-			var link_set_index = cel_link_sets.find(cel.link_set)
-			linked_indicator.color.h = float(link_set_index) / max(cel_link_sets.size(), 6)
+			linked_indicator.color.h = cel.link_set["hue"]
 
 	# Reset the checkers size because it assumes you want the same size as the canvas
 	var checker = $CelTexture/TransparentChecker
@@ -129,7 +127,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 			elif id == MenuOptions.LINK:
 				project.undo_redo.create_action("Link Cel")
-				var link_set: Array = [] if cel.link_set == null else cel.link_set
+				var link_set: Dictionary = {} if cel.link_set == null else cel.link_set
 				if cel.link_set == null:
 					project.undo_redo.add_do_method(
 						project.layers[layer], "link_cel", cel, link_set

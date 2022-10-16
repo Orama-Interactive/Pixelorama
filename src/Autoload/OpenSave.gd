@@ -477,7 +477,7 @@ func open_image_as_spritesheet_layer(
 				if project.layers[l].new_cels_linked:
 					var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
 					if prev_cel.link_set == null:
-						prev_cel.link_set = []
+						prev_cel.link_set = {}
 						project.undo_redo.add_do_method(
 							project.layers[l], "link_cel", prev_cel, prev_cel.link_set
 						)
