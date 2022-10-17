@@ -567,15 +567,27 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 
 func _on_AddLayer_pressed() -> void:
 	var project: Project = Global.current_project
-	var new_layer_idx = project.current_layer + 1
-
+	var current_layer = project.layers[project.current_layer]
 	var l := PixelLayer.new(project)
 	var cels := []
 	for f in project.frames:
 		cels.append(l.new_empty_cel())
 
-	# set the parent of layer to be the same as the layer below it
-	l.parent = Global.current_project.layers[new_layer_idx - 1].parent
+	var new_layer_idx = project.current_layer + 1
+	if current_layer is GroupLayer:
+		new_layer_idx = project.current_layer
+		if !current_layer.expanded:
+			current_layer.expanded = true
+			for layer_button in Global.layers_container.get_children():
+				layer_button.update_buttons()
+				var expanded = project.layers[layer_button.layer].is_expanded_in_hierarchy()
+				layer_button.visible = expanded
+				Global.frames_container.get_child(layer_button.get_index()).visible = expanded
+		# make layer child of group
+		l.parent = Global.current_project.layers[project.current_layer]
+	else:
+		# set the parent of layer to be the same as the layer below it
+		l.parent = Global.current_project.layers[project.current_layer].parent
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
@@ -590,15 +602,28 @@ func _on_AddLayer_pressed() -> void:
 
 func _on_AddGroup_pressed() -> void:
 	var project: Project = Global.current_project
-	var new_grouplayer_idx = project.current_layer + 1
+	var current_layer = project.layers[project.current_layer]
 
 	var l := GroupLayer.new(project)
 	var cels := []
 	for f in project.frames:
 		cels.append(l.new_empty_cel())
 
-	# set the parent of layer to be the same as the layer below it
-	l.parent = Global.current_project.layers[new_grouplayer_idx - 1].parent
+	var new_grouplayer_idx = project.current_layer + 1
+	if current_layer is GroupLayer:
+		new_grouplayer_idx = project.current_layer
+		if !current_layer.expanded:
+			current_layer.expanded = true
+			for layer_button in Global.layers_container.get_children():
+				layer_button.update_buttons()
+				var expanded = project.layers[layer_button.layer].is_expanded_in_hierarchy()
+				layer_button.visible = expanded
+				Global.frames_container.get_child(layer_button.get_index()).visible = expanded
+		# make layer child of group
+		l.parent = Global.current_project.layers[project.current_layer]
+	else:
+		# set the parent of layer to be the same as the layer below it
+		l.parent = Global.current_project.layers[project.current_layer].parent
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
