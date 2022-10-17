@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-10-17 14:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -331,7 +331,7 @@ msgid "New frame"
 msgstr "Nowa klatka"
 
 msgid "Replace cel"
-msgstr "Zastąp komórkę"
+msgstr "Zastąp kalkę"
 
 msgid "New layer"
 msgstr "Nowa warstwa"
@@ -649,10 +649,10 @@ msgid "Only affect selection"
 msgstr "Wpływ tylko na zaznaczenie"
 
 msgid "Selected cels"
-msgstr "Wybrane komórki"
+msgstr "Wybrane kalki"
 
 msgid "Current cel"
-msgstr "Bieżąca komórka"
+msgstr "Bieżąca kalka"
 
 msgid "Current frame"
 msgstr "Aktualna klatka"
@@ -1614,10 +1614,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Połącz kalki do"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Rozłącz kalki"
 
 msgid "Frame Properties"
 msgstr "Właściwości klatki"
@@ -1672,7 +1672,8 @@ msgstr "Klatka: %s, Warstwa: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Włącz/Wyłącz automatyczne łączenie nowych kalk, gdy są tworzone nowe klatki\n\n"
+"Połączone kalki dzielą zawartość pomiędzy wieloma klatkami"
 
 msgid "Expand/collapse group"
 msgstr "Rozwiń/zwiń grupę"
