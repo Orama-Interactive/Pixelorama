@@ -254,9 +254,10 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 		frame_line = file.get_line()
 		frame += 1
 
-	for layer_i in new_project.layers.size():
-		# Now that we have the layers, frames, and cels, deserialize layer data
-		new_project.layers[layer_i].deserialize(layer_dicts[layer_i])
+	if layer_dicts:
+		for layer_i in new_project.layers.size():
+			# Now that we have the layers, frames, and cels, deserialize layer data
+			new_project.layers[layer_i].deserialize(layer_dicts[layer_i])
 
 	if new_guides:
 		var guide_line := file.get_line()  # "guideline" no pun intended
