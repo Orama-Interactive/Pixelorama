@@ -201,10 +201,9 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 					"visible": file.get_8(),
 					"locked": file.get_8(),
 					"new_cels_linked": file.get_8(),
-					"link_sets": []
+					"linked_cels": file.get_var()
 				}
 			)
-			layer_dicts[-1]["link_sets"].append(file.get_var())
 			var l := PixelLayer.new(new_project)
 			l.index = new_project.layers.size()
 			new_project.layers.append(l)
