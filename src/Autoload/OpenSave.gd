@@ -135,9 +135,7 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 
 	file.close()
 	if empty_project:
-		if dict.error == OK and dict.result.has("fps"):
-			Global.animation_timeline.fps_spinbox.value = dict.result.fps
-		Global.animation_timeline.project_changed()
+		new_project.change_project()
 	else:
 		Global.projects.append(new_project)
 		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
@@ -255,9 +253,10 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 		frame_line = file.get_line()
 		frame += 1
 
-	for layer_i in new_project.layers.size():
-		# Now that we have the layers, frames, and cels, deserialize layer data
-		new_project.layers[layer_i].deserialize(layer_dicts[layer_i])
+	if layer_dicts:
+		for layer_i in new_project.layers.size():
+			# Now that we have the layers, frames, and cels, deserialize layer data
+			new_project.layers[layer_i].deserialize(layer_dicts[layer_i])
 
 	if new_guides:
 		var guide_line := file.get_line()  # "guideline" no pun intended
