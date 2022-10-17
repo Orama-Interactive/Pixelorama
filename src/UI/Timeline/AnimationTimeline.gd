@@ -567,18 +567,22 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 
 func _on_AddLayer_pressed() -> void:
 	var project: Project = Global.current_project
+	var new_layer_idx = project.current_layer + 1
 
 	var l := PixelLayer.new(project)
 	var cels := []
 	for f in project.frames:
 		cels.append(l.new_empty_cel())
 
+	# set the parent of layer to be the same as the layer below it
+	l.parent = Global.current_project.layers[new_layer_idx - 1].parent
+
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
-	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+	project.undo_redo.add_do_property(project, "current_layer", new_layer_idx)
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_do_method(project, "add_layers", [l], [project.layers.size()], [cels])
-	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
+	project.undo_redo.add_do_method(project, "add_layers", [l], [new_layer_idx], [cels])
+	project.undo_redo.add_undo_method(project, "remove_layers", [new_layer_idx])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -586,18 +590,22 @@ func _on_AddLayer_pressed() -> void:
 
 func _on_AddGroup_pressed() -> void:
 	var project: Project = Global.current_project
+	var new_grouplayer_idx = project.current_layer + 1
 
 	var l := GroupLayer.new(project)
 	var cels := []
 	for f in project.frames:
 		cels.append(l.new_empty_cel())
 
+	# set the parent of layer to be the same as the layer below it
+	l.parent = Global.current_project.layers[new_grouplayer_idx - 1].parent
+
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
-	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+	project.undo_redo.add_do_property(project, "current_layer", new_grouplayer_idx)
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_do_method(project, "add_layers", [l], [project.layers.size()], [cels])
-	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
+	project.undo_redo.add_do_method(project, "add_layers", [l], [new_grouplayer_idx], [cels])
+	project.undo_redo.add_undo_method(project, "remove_layers", [new_grouplayer_idx])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -890,7 +898,7 @@ func project_layer_added(layer: int) -> void:
 	var layer_button: LayerButton = project.layers[layer].instantiate_layer_button()
 	layer_button.layer = layer
 	if project.layers[layer].name == "":
-		project.layers[layer].set_name_to_default(layer)
+		project.layers[layer].set_name_to_default(Global.current_project.layers.size())
 
 	var layer_cel_container := HBoxContainer.new()
 	for f in project.frames.size():
