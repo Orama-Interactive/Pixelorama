@@ -17,6 +17,7 @@ __meta__ = {
 }
 
 [node name="LinkedIndicator" type="Polygon2D" parent="." index="2"]
+color = Color( 0, 1, 0, 1 )
 invert_enable = true
 invert_border = 1.0
 polygon = PoolVector2Array( 0, 0, 36, 0, 36, 36, 0, 36 )

@@ -775,7 +775,6 @@ rect_min_size = Vector2( 4, 0 )
 [node name="OpacitySlider" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer" instance=ExtResource( 9 )]
 margin_left = 6.0
 margin_right = 213.0
-margin_bottom = 24.0
 rect_min_size = Vector2( 207, 24 )
 size_flags_horizontal = 1
 size_flags_vertical = 0
@@ -784,12 +783,12 @@ prefix = "Opacity:"
 
 [node name="SpacerControl2" type="Control" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer"]
 margin_left = 215.0
-margin_right = 267.0
+margin_right = 239.0
 margin_bottom = 32.0
-rect_min_size = Vector2( 52, 32 )
+rect_min_size = Vector2( 24, 32 )
 
 [node name="TagScroll" type="ScrollContainer" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer"]
-margin_left = 269.0
+margin_left = 241.0
 margin_right = 902.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
@@ -799,7 +798,7 @@ theme = SubResource( 20 )
 scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/TagScroll"]
-margin_right = 633.0
+margin_right = 661.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -809,7 +808,7 @@ custom_constants/separation = 0
 margin_bottom = 32.0
 
 [node name="TagContainer" type="Control" parent="ScrollContainer/TimelineContainer/OpacityAndTagContainer/TagScroll/HBoxContainer"]
-margin_right = 633.0
+margin_right = 661.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 
