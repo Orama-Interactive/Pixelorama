@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-10-16 15:51\n"
+"PO-Revision-Date: 2022-10-18 09:35\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -166,10 +166,10 @@ msgid "Rotate Image"
 msgstr "Повернути зображення"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "X центра:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Y центра:"
 
 msgid "Smear options:"
 msgstr "Параметри мазку:"
