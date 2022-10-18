@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-10-18 10:39\n"
 
 msgid "OK"
 msgstr "确定"
@@ -166,10 +166,10 @@ msgid "Rotate Image"
 msgstr "旋转图像"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "位置 X 轴："
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "位置 Y 轴："
 
 msgid "Smear options:"
 msgstr "涂抹选项："
@@ -1615,10 +1615,10 @@ msgid "Add Frame Tag"
 msgstr "添加帧标签"
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "链接单元格到"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "取消链接单元格"
 
 msgid "Frame Properties"
 msgstr "帧属性"
@@ -1673,7 +1673,8 @@ msgstr "帧： %s, 图层：%s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "在创建新的帧时，启用/禁用自动链接新的帧\n\n"
+"链接的模型在多个帧中共享内容"
 
 msgid "Expand/collapse group"
 msgstr ""
