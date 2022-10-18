@@ -637,7 +637,7 @@ func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be
 			if cel.link_set != null:
 				if not layers[l].cel_link_sets.has(cel.link_set):
 					layers[l].cel_link_sets.append(cel.link_set)
-				cel.link_set.append(cel)
+				cel.link_set["cels"].append(cel)
 		# Add frame
 		frames.insert(indices[i], new_frames[i])
 		Global.animation_timeline.project_frame_added(indices[i])
@@ -663,8 +663,8 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 		for l in layers.size():
 			var cel: BaseCel = frames[indices[i] - i].cels[l]
 			if cel.link_set != null:
-				cel.link_set.erase(cel)
-				if cel.link_set.empty():
+				cel.link_set["cels"].erase(cel)
+				if cel.link_set["cels"].empty():
 					layers[l].cel_link_sets.erase(cel.link_set)
 		# Remove frame
 		frames.remove(indices[i] - i)

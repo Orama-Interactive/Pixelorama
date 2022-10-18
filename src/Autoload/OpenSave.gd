@@ -199,10 +199,9 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 					"visible": file.get_8(),
 					"locked": file.get_8(),
 					"new_cels_linked": file.get_8(),
-					"link_sets": []
+					"linked_cels": file.get_var()
 				}
 			)
-			layer_dicts[-1]["link_sets"].append(file.get_var())
 			var l := PixelLayer.new(new_project)
 			l.index = new_project.layers.size()
 			new_project.layers.append(l)
@@ -476,7 +475,7 @@ func open_image_as_spritesheet_layer(
 				if project.layers[l].new_cels_linked:
 					var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
 					if prev_cel.link_set == null:
-						prev_cel.link_set = []
+						prev_cel.link_set = {}
 						project.undo_redo.add_do_method(
 							project.layers[l], "link_cel", prev_cel, prev_cel.link_set
 						)
