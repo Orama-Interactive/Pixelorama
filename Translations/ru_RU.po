@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-10-18 13:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -166,10 +166,10 @@ msgid "Rotate Image"
 msgstr "Повернуть изображение"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "X центра:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Y центра:"
 
 msgid "Smear options:"
 msgstr "Настройки мазка:"
@@ -1614,10 +1614,10 @@ msgid "Add Frame Tag"
 msgstr "Добавить тег кадра"
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Привязать ячейки к"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Отвязать ячейки"
 
 msgid "Frame Properties"
 msgstr "Свойства кадра"
@@ -1672,7 +1672,8 @@ msgstr "Кадр: %s, слой: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Включить/отключить автоматическую привязку новых ячеек при создании новых кадров\n\n"
+"Содержание привязанных ячеей используется в нескольких кадрах"
 
 msgid "Expand/collapse group"
 msgstr "Развернуть/свернуть"
