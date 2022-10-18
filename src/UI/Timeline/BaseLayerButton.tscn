@@ -10,23 +10,18 @@ margin_bottom = 36.0
 rect_min_size = Vector2( 236, 36 )
 focus_mode = 0
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
 toggle_mode = true
 action_mode = 0
 enabled_focus_mode = 0
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_horizontal_guides_": [  ],
-"_edit_use_anchors_": false
+"_edit_horizontal_guides_": [  ]
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="EmptySpacer" type="Control" parent="HBoxContainer"]
 margin_bottom = 36.0
@@ -34,8 +29,9 @@ mouse_filter = 2
 
 [node name="LayerButtons" type="HBoxContainer" parent="HBoxContainer"]
 margin_left = 4.0
-margin_right = 90.0
+margin_right = 122.0
 margin_bottom = 36.0
+rect_min_size = Vector2( 118, 0 )
 custom_constants/separation = 10
 
 [node name="ExpandButton" type="ToolButton" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
@@ -115,9 +111,6 @@ margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LayerName" type="HBoxContainer" parent="HBoxContainer"]
 margin_left = 126.0
@@ -126,7 +119,7 @@ margin_bottom = 36.0
 rect_min_size = Vector2( 110, 0 )
 rect_pivot_offset = Vector2( -187, -9 )
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false

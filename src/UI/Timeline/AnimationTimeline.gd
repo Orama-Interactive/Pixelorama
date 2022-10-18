@@ -19,6 +19,8 @@ onready var tag_spacer = find_node("TagSpacer")
 onready var start_spacer = find_node("StartSpacer")
 
 onready var timeline_scroll: ScrollContainer = find_node("TimelineScroll")
+onready var frame_scroll_container: Control = find_node("FrameScrollContainer")
+onready var frame_scroll_bar: HScrollBar = find_node("FrameScrollBar")
 onready var main_scroll: ScrollContainer = find_node("ScrollContainer")
 onready var timeline_container: VBoxContainer = find_node("TimelineContainer")
 onready var tag_scroll_container: ScrollContainer = find_node("TagScroll")
@@ -37,6 +39,7 @@ func _ready() -> void:
 	# Otherwise you yont be able to see "TimelineScroll" in editor
 	find_node("EndSpacer").size_flags_horizontal = SIZE_EXPAND_FILL
 	timeline_scroll.size_flags_horizontal = SIZE_FILL
+	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x + 4
 
 
 func _notification(what: int) -> void:
@@ -55,6 +58,20 @@ func _input(event: InputEvent) -> void:
 			)
 
 
+func _get_minimum_size() -> Vector2:
+	return Vector2(Global.layers_container.rect_size.x + cel_size + 12, 100)
+
+
+func _on_FrameScrollBar_value_changed(value: float) -> void:
+	print("UPDATE TAGS!")
+	tag_scroll_container.get_child(0).rect_min_size.x = Global.frame_ids.rect_size.x
+	# Update the tag scroll as well:
+	tag_scroll_container.scroll_horizontal = value
+	pass # Replace with function body.
+
+
+
+# TODO: Need to have tags respond to new scrolling
 func _h_scroll_changed(value: float) -> void:
 	# Let the main timeline ScrollContainer affect the tag ScrollContainer too
 	tag_scroll_container.get_child(0).rect_min_size.x = (
@@ -71,6 +88,15 @@ func _h_scroll_changed(value: float) -> void:
 	else:
 		tag_spacer.rect_min_size.x = 0
 		tag_scroll_container.scroll_horizontal = -diff
+
+
+func _on_LayersContainer_resized() -> void:
+	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x
+
+
+func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and not event.pressed:
+		minimum_size_changed()  # After you're done resizing the layers, update min size
 
 
 # the below two signals control scrolling functionality
@@ -101,6 +127,7 @@ func _on_TimelineContainer_item_rect_changed() -> void:
 
 func cel_size_changed(value: int) -> void:
 	cel_size = clamp(value, min_cel_size, max_cel_size)
+	minimum_size_changed()
 	for layer_button in Global.layers_container.get_children():
 		layer_button.rect_min_size.y = cel_size
 		layer_button.rect_size.y = cel_size
