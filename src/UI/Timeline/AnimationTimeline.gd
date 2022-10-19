@@ -68,6 +68,9 @@ func _frame_scroll_changed(value: float) -> void:
 func _on_LayerVBox_resized() -> void:
 	# TODO: BUG Layers resizing doesn't update the tags!
 	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x
+	tag_spacer.rect_min_size.x = (frame_scroll_container.rect_global_position.x
+		 - tag_spacer.rect_global_position.x
+	)
 
 
 func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
