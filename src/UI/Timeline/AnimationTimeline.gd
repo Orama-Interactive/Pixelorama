@@ -33,7 +33,8 @@ func _ready() -> void:
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
 
-	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x + 4
+	# Makes sure that the frame and tag scroll bars are in the right place:
+	Global.layers_container.call_deferred("emit_signal", "resized")
 
 
 func _notification(what: int) -> void:
@@ -64,8 +65,6 @@ func _frame_scroll_changed(value: float) -> void:
 
 func _on_LayersContainer_resized() -> void:
 	# TODO: BUG Layers resizing doesn't update the tags!
-	# TODO: BUG frame_scroll_bar isn't properly setup on startup!
-	print("Resized layers, count: ", Global.layers_container.get_child_count())
 	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x
 
 
@@ -437,6 +436,7 @@ func _on_AnimationTimer_timeout() -> void:
 				2:  # Ping pong loop
 					animation_forward = true
 					_on_AnimationTimer_timeout()
+	frame_scroll_container.ensure_control_visible(Global.frame_ids.get_child(Global.current_project.current_frame))
 
 
 func play_animation(play: bool, forward_dir: bool) -> void:
@@ -842,6 +842,9 @@ func project_frame_added(frame: int) -> void:
 	button.frame = frame
 	Global.frame_ids.add_child(button)
 	Global.frame_ids.move_child(button, frame)
+	frame_scroll_container.call_deferred(  # Make it visible, yes 3 call_deferreds are required
+		"call_deferred", "call_deferred", "ensure_control_visible", button
+	)
 
 	var layer := Global.frames_container.get_child_count() - 1
 	for container in Global.frames_container.get_children():
