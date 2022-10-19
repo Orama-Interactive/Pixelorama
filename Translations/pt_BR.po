@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-10-19 11:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1615,10 +1615,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Vincular Células a"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Desvincular Células"
 
 msgid "Frame Properties"
 msgstr "Propriedades do Quadro"
@@ -1673,7 +1673,8 @@ msgstr "Frame: %s, Camada: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Ativar/desativar vinculação automática de novas células quando criar novos quadros\n\n"
+"Células vinculadas compartilham o conteúdo entre vários quadros"
 
 msgid "Expand/collapse group"
 msgstr "Expandir/recolher grupo"
