@@ -60,7 +60,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _get_minimum_size() -> Vector2:
-	return Vector2(Global.layers_container.rect_size.x + cel_size + 14, 100)
+	return Vector2(Global.layers_container.rect_size.x + cel_size + 10, 100)
 
 
 func _frame_scroll_changed(value: float) -> void:
