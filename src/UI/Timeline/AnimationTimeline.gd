@@ -21,8 +21,6 @@ onready var start_spacer = find_node("StartSpacer")
 onready var timeline_scroll: ScrollContainer = find_node("TimelineScroll")
 onready var frame_scroll_container: Control = find_node("FrameScrollContainer")
 onready var frame_scroll_bar: HScrollBar = find_node("FrameScrollBar")
-#onready var main_scroll: ScrollContainer = find_node("ScrollContainer")
-#onready var timeline_container: VBoxContainer = find_node("TimelineContainer")
 onready var tag_scroll_container: ScrollContainer = find_node("TagScroll")
 onready var fps_spinbox: SpinBox = find_node("FPSValue")
 onready var onion_skinning_button: BaseButton = find_node("OnionSkinning")
@@ -31,15 +29,10 @@ onready var drag_highlight: ColorRect = find_node("DragHighlight")
 
 
 func _ready() -> void:
-#	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
 	frame_scroll_bar.connect("value_changed", self, "_frame_scroll_changed")
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
 
-	# Set important size_flags (intentionally set at runtime)
-	# Otherwise you yont be able to see "TimelineScroll" in editor
-	find_node("EndSpacer").size_flags_horizontal = SIZE_EXPAND_FILL
-	timeline_scroll.size_flags_horizontal = SIZE_FILL
 	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x + 4
 
 
@@ -70,19 +63,15 @@ func _frame_scroll_changed(value: float) -> void:
 
 
 func _on_LayersContainer_resized() -> void:
-	print("Resized layers, count: ", Global.current_project.layers.size())
+	# TODO: BUG Layers resizing doesn't update the tags!
+	# TODO: BUG frame_scroll_bar isn't properly setup on startup!
+	print("Resized layers, count: ", Global.layers_container.get_child_count())
 	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x
 
 
 func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and not event.pressed:
 		minimum_size_changed()  # After you're done resizing the layers, update min size
-
-
-# the below two signals control scrolling functionality
-func _on_AnimationTimeline_item_rect_changed() -> void:
-	# Timeline size
-	timeline_scroll.rect_min_size.x = rect_size.x
 
 
 func cel_size_changed(value: int) -> void:

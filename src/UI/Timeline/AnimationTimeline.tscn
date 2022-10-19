@@ -1016,7 +1016,6 @@ margin_bottom = 40.0
 mouse_filter = 2
 color = Color( 0, 0.741176, 1, 0.501961 )
 
-[connection signal="item_rect_changed" from="." to="." method="_on_AnimationTimeline_item_rect_changed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddLayer" to="." method="_on_AddLayer_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/AddGroup" to="." method="_on_AddGroup_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerButtonPanelContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
