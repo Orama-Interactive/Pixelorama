@@ -836,14 +836,14 @@ margin_bottom = 64.0
 script = ExtResource( 11 )
 h_scroll_bar_node_path = NodePath("../../../BreakFreeFromContainer/FrameScrollBar")
 
-[node name="FrameAndCelButtons" type="VBoxContainer" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/FrameScrollContainer"]
+[node name="FrameAndCelBox" type="VBoxContainer" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/FrameScrollContainer"]
 margin_bottom = 20.0
 
-[node name="FrameHBox" type="HBoxContainer" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/FrameScrollContainer/FrameAndCelButtons"]
+[node name="FrameHBox" type="HBoxContainer" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/FrameScrollContainer/FrameAndCelBox"]
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 
-[node name="CelVBox" type="VBoxContainer" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/FrameScrollContainer/FrameAndCelButtons"]
+[node name="CelVBox" type="VBoxContainer" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/FrameScrollContainer/FrameAndCelBox"]
 margin_top = 20.0
 margin_bottom = 20.0
 
