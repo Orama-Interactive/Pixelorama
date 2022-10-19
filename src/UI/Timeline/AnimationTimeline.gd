@@ -34,7 +34,7 @@ func _ready() -> void:
 	fps_spinbox.value = Global.current_project.fps
 
 	# Makes sure that the frame and tag scroll bars are in the right place:
-	Global.layers_container.call_deferred("emit_signal", "resized")
+	Global.layer_vbox.call_deferred("emit_signal", "resized")
 
 
 func _notification(what: int) -> void:
@@ -56,16 +56,16 @@ func _input(event: InputEvent) -> void:
 func _get_minimum_size() -> Vector2:
 	# X targets enough to see layers, 1 frame, vertical scrollbar, and padding
 	# Y targets engough to see 1 layer
-	return Vector2(Global.layers_container.rect_size.x + cel_size + 22, cel_size + 105)
+	return Vector2(Global.layer_vbox.rect_size.x + cel_size + 22, cel_size + 105)
 
 
 func _frame_scroll_changed(value: float) -> void:
 	# Update the tag scroll as well:
-	tag_scroll_container.get_child(0).rect_min_size.x = Global.frame_ids.rect_size.x
+	tag_scroll_container.get_child(0).rect_min_size.x = Global.frame_hbox.rect_size.x
 	tag_scroll_container.scroll_horizontal = value
 
 
-func _on_LayersContainer_resized() -> void:
+func _on_LayerVBox_resized() -> void:
 	# TODO: BUG Layers resizing doesn't update the tags!
 	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x
 
@@ -78,17 +78,17 @@ func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
 func cel_size_changed(value: int) -> void:
 	cel_size = clamp(value, min_cel_size, max_cel_size)
 	minimum_size_changed()
-	for layer_button in Global.layers_container.get_children():
+	for layer_button in Global.layer_vbox.get_children():
 		layer_button.rect_min_size.y = cel_size
 		layer_button.rect_size.y = cel_size
-	for container in Global.frames_container.get_children():
-		for cel_button in container.get_children():
+	for cel_hbox in Global.cel_vbox.get_children():
+		for cel_button in cel_hbox.get_children():
 			cel_button.rect_min_size.x = cel_size
 			cel_button.rect_min_size.y = cel_size
 			cel_button.rect_size.x = cel_size
 			cel_button.rect_size.y = cel_size
 
-	for frame_id in Global.frame_ids.get_children():
+	for frame_id in Global.frame_hbox.get_children():
 		frame_id.rect_min_size.x = cel_size
 		frame_id.rect_size.x = cel_size
 
@@ -307,14 +307,14 @@ func _on_MoveLeft_pressed() -> void:
 	var frame: int = Global.current_project.current_frame
 	if frame == 0:
 		return
-	Global.frame_ids.get_child(frame).change_frame_order(-1)
+	Global.frame_hbox.get_child(frame).change_frame_order(-1)
 
 
 func _on_MoveRight_pressed() -> void:
 	var frame: int = Global.current_project.current_frame
 	if frame == Global.current_project.frames.size() - 1:  # using last_frame caused problems
 		return
-	Global.frame_ids.get_child(frame).change_frame_order(1)
+	Global.frame_hbox.get_child(frame).change_frame_order(1)
 
 
 func _on_OnionSkinning_pressed() -> void:
@@ -438,7 +438,7 @@ func _on_AnimationTimer_timeout() -> void:
 				2:  # Ping pong loop
 					animation_forward = true
 					_on_AnimationTimer_timeout()
-	frame_scroll_container.ensure_control_visible(Global.frame_ids.get_child(Global.current_project.current_frame))
+	frame_scroll_container.ensure_control_visible(Global.frame_hbox.get_child(Global.current_project.current_frame))
 
 
 func play_animation(play: bool, forward_dir: bool) -> void:
@@ -805,36 +805,36 @@ func project_changed() -> void:
 	var project: Project = Global.current_project
 	# These must be removed from tree immediately to not mess up the indices of
 	# the new buttons, so use either free or queue_free + parent.remove_child
-	for child in Global.layers_container.get_children():
-		child.free()
-	for child in Global.frame_ids.get_children():
-		child.free()
-	for container in Global.frames_container.get_children():
-		container.free()
+	for layer_button in Global.layer_vbox.get_children():
+		layer_button.free()
+	for frame_button in Global.frame_hbox.get_children():
+		frame_button.free()
+	for cel_hbox in Global.cel_vbox.get_children():
+		cel_hbox.free()
 
 	for i in project.layers.size():
 		project_layer_added(i)
 	for f in project.frames.size():
 		var button: Button = frame_button_node.instance()
 		button.frame = f
-		Global.frame_ids.add_child(button)
+		Global.frame_hbox.add_child(button)
 
 	# Press selected cel/frame/layer buttons
 	for cel_index in project.selected_cels:
 		var frame: int = cel_index[0]
 		var layer: int = cel_index[1]
-		if frame < Global.frame_ids.get_child_count():
-			var frame_button: BaseButton = Global.frame_ids.get_child(frame)
+		if frame < Global.frame_hbox.get_child_count():
+			var frame_button: BaseButton = Global.frame_hbox.get_child(frame)
 			frame_button.pressed = true
 
-		var container_child_count: int = Global.frames_container.get_child_count()
-		if layer < container_child_count:
-			var container = Global.frames_container.get_child(container_child_count - 1 - layer)
-			if frame < container.get_child_count():
-				var cel_button = container.get_child(frame)
+		var vbox_child_count: int = Global.cel_vbox.get_child_count()
+		if layer < vbox_child_count:
+			var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(vbox_child_count - 1 - layer)
+			if frame < cel_hbox.get_child_count():
+				var cel_button = cel_hbox.get_child(frame)
 				cel_button.pressed = true
 
-			var layer_button = Global.layers_container.get_child(container_child_count - 1 - layer)
+			var layer_button = Global.layer_vbox.get_child(vbox_child_count - 1 - layer)
 			layer_button.pressed = true
 
 
@@ -842,27 +842,27 @@ func project_frame_added(frame: int) -> void:
 	var project: Project = Global.current_project
 	var button: Button = frame_button_node.instance()
 	button.frame = frame
-	Global.frame_ids.add_child(button)
-	Global.frame_ids.move_child(button, frame)
+	Global.frame_hbox.add_child(button)
+	Global.frame_hbox.move_child(button, frame)
 	frame_scroll_container.call_deferred(  # Make it visible, yes 3 call_deferreds are required
 		"call_deferred", "call_deferred", "ensure_control_visible", button
 	)
 
-	var layer := Global.frames_container.get_child_count() - 1
-	for container in Global.frames_container.get_children():
+	var layer := Global.cel_vbox.get_child_count() - 1
+	for cel_hbox in Global.cel_vbox.get_children():
 		var cel_button = project.frames[frame].cels[layer].instantiate_cel_button()
 		cel_button.frame = frame
 		cel_button.layer = layer
-		container.add_child(cel_button)
-		container.move_child(cel_button, frame)
+		cel_hbox.add_child(cel_button)
+		cel_hbox.move_child(cel_button, frame)
 		layer -= 1
 
 
 func project_frame_removed(frame: int) -> void:
-	Global.frame_ids.get_child(frame).queue_free()
-	Global.frame_ids.remove_child(Global.frame_ids.get_child(frame))
-	for container in Global.frames_container.get_children():
-		container.get_child(frame).free()
+	Global.frame_hbox.get_child(frame).queue_free()
+	Global.frame_hbox.remove_child(Global.frame_hbox.get_child(frame))
+	for cel_hbox in Global.cel_vbox.get_children():
+		cel_hbox.get_child(frame).free()
 
 
 func project_layer_added(layer: int) -> void:
@@ -873,43 +873,43 @@ func project_layer_added(layer: int) -> void:
 	if project.layers[layer].name == "":
 		project.layers[layer].set_name_to_default(layer)
 
-	var layer_cel_container := HBoxContainer.new()
+	var cel_hbox := HBoxContainer.new()
 	for f in project.frames.size():
 		var cel_button = project.frames[f].cels[layer].instantiate_cel_button()
 		cel_button.frame = f
 		cel_button.layer = layer
-		layer_cel_container.add_child(cel_button)
+		cel_hbox.add_child(cel_button)
 
 	layer_button.visible = Global.current_project.layers[layer].is_expanded_in_hierarchy()
-	layer_cel_container.visible = layer_button.visible
+	cel_hbox.visible = layer_button.visible
 
-	Global.layers_container.add_child(layer_button)
-	var count := Global.layers_container.get_child_count()
-	Global.layers_container.move_child(layer_button, count - 1 - layer)
-	Global.frames_container.add_child(layer_cel_container)
-	Global.frames_container.move_child(layer_cel_container, count - 1 - layer)
+	Global.layer_vbox.add_child(layer_button)
+	var count := Global.layer_vbox.get_child_count()
+	Global.layer_vbox.move_child(layer_button, count - 1 - layer)
+	Global.cel_vbox.add_child(cel_hbox)
+	Global.cel_vbox.move_child(cel_hbox, count - 1 - layer)
 
 
 func project_layer_removed(layer: int) -> void:
-	var count := Global.layers_container.get_child_count()
-	Global.layers_container.get_child(count - 1 - layer).free()
-	Global.frames_container.get_child(count - 1 - layer).free()
+	var count := Global.layer_vbox.get_child_count()
+	Global.layer_vbox.get_child(count - 1 - layer).free()
+	Global.cel_vbox.get_child(count - 1 - layer).free()
 
 
 func project_cel_added(frame: int, layer: int) -> void:
-	var container := Global.frames_container.get_child(
-		Global.frames_container.get_child_count() - 1 - layer
+	var cel_hbox := Global.cel_vbox.get_child(
+		Global.cel_vbox.get_child_count() - 1 - layer
 	)
 	var cel_button = Global.current_project.frames[frame].cels[layer].instantiate_cel_button()
 	cel_button.frame = frame
 	cel_button.layer = layer
-	container.add_child(cel_button)
-	container.move_child(cel_button, frame)
+	cel_hbox.add_child(cel_button)
+	cel_hbox.move_child(cel_button, frame)
 
 
 func project_cel_removed(frame: int, layer: int) -> void:
-	var container := Global.frames_container.get_child(
-		Global.frames_container.get_child_count() - 1 - layer
+	var cel_hbox := Global.cel_vbox.get_child(
+		Global.cel_vbox.get_child_count() - 1 - layer
 	)
-	container.get_child(frame).queue_free()
-	container.remove_child(container.get_child(frame))
+	cel_hbox.get_child(frame).queue_free()
+	cel_hbox.remove_child(cel_hbox.get_child(frame))

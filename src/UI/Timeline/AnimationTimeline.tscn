@@ -852,7 +852,7 @@ text = "Layers"
 align = 1
 valign = 1
 
-[node name="LayersContainer" type="VBoxContainer" parent="TimelineContainer/PanelContainer/HBoxContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/LayerVBoxCont"]
+[node name="LayerVBox" type="VBoxContainer" parent="TimelineContainer/PanelContainer/HBoxContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/LayerVBoxCont"]
 margin_top = 20.0
 margin_right = 41.0
 margin_bottom = 20.0
@@ -868,11 +868,11 @@ h_scroll_bar_node_path = NodePath("../../../BreakFromContainer/FrameScrollBar")
 [node name="FrameAndCelButtons" type="VBoxContainer" parent="TimelineContainer/PanelContainer/HBoxContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/FrameScrollContainer"]
 margin_bottom = 20.0
 
-[node name="FrameIDs" type="HBoxContainer" parent="TimelineContainer/PanelContainer/HBoxContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/FrameScrollContainer/FrameAndCelButtons"]
+[node name="FrameHBox" type="HBoxContainer" parent="TimelineContainer/PanelContainer/HBoxContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/FrameScrollContainer/FrameAndCelButtons"]
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 
-[node name="FramesContainer" type="VBoxContainer" parent="TimelineContainer/PanelContainer/HBoxContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/FrameScrollContainer/FrameAndCelButtons"]
+[node name="CelVBox" type="VBoxContainer" parent="TimelineContainer/PanelContainer/HBoxContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/FrameScrollContainer/FrameAndCelButtons"]
 margin_top = 20.0
 margin_bottom = 20.0
 
@@ -1041,7 +1041,7 @@ color = Color( 0, 0.741176, 1, 0.501961 )
 [connection signal="value_changed" from="TimelineContainer/TimelineButtons/ScrollContainer/PanelContainer/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
 [connection signal="value_changed" from="TimelineContainer/OpacityAndTagContainer/OpacitySlider" to="." method="_on_OpacitySlider_value_changed"]
 [connection signal="gui_input" from="TimelineContainer/PanelContainer/HBoxContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer" to="." method="_on_LayerFrameSplitContainer_gui_input"]
-[connection signal="resized" from="TimelineContainer/PanelContainer/HBoxContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/LayerVBoxCont/LayersContainer" to="." method="_on_LayersContainer_resized"]
+[connection signal="resized" from="TimelineContainer/PanelContainer/HBoxContainer/VBoxContainer/TimelineScroll/LayerFrameSplitContainer/LayerVBoxCont/LayerVBox" to="." method="_on_LayerVBox_resized"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
 [connection signal="popup_hide" from="OnionSkinningSettings" to="." method="_on_OnionSkinningSettings_popup_hide"]
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
