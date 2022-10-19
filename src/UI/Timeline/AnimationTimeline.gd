@@ -567,18 +567,34 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 
 func _on_AddLayer_pressed() -> void:
 	var project: Project = Global.current_project
-
+	var current_layer = project.layers[project.current_layer]
 	var l := PixelLayer.new(project)
 	var cels := []
 	for f in project.frames:
 		cels.append(l.new_empty_cel())
 
+	var new_layer_idx = project.current_layer + 1
+	if current_layer is GroupLayer:
+		new_layer_idx = project.current_layer
+		if !current_layer.expanded:
+			current_layer.expanded = true
+			for layer_button in Global.layers_container.get_children():
+				layer_button.update_buttons()
+				var expanded = project.layers[layer_button.layer].is_expanded_in_hierarchy()
+				layer_button.visible = expanded
+				Global.frames_container.get_child(layer_button.get_index()).visible = expanded
+		# make layer child of group
+		l.parent = Global.current_project.layers[project.current_layer]
+	else:
+		# set the parent of layer to be the same as the layer below it
+		l.parent = Global.current_project.layers[project.current_layer].parent
+
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
-	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+	project.undo_redo.add_do_property(project, "current_layer", new_layer_idx)
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_do_method(project, "add_layers", [l], [project.layers.size()], [cels])
-	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
+	project.undo_redo.add_do_method(project, "add_layers", [l], [new_layer_idx], [cels])
+	project.undo_redo.add_undo_method(project, "remove_layers", [new_layer_idx])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -586,18 +602,35 @@ func _on_AddLayer_pressed() -> void:
 
 func _on_AddGroup_pressed() -> void:
 	var project: Project = Global.current_project
+	var current_layer = project.layers[project.current_layer]
 
 	var l := GroupLayer.new(project)
 	var cels := []
 	for f in project.frames:
 		cels.append(l.new_empty_cel())
 
+	var new_grouplayer_idx = project.current_layer + 1
+	if current_layer is GroupLayer:
+		new_grouplayer_idx = project.current_layer
+		if !current_layer.expanded:
+			current_layer.expanded = true
+			for layer_button in Global.layers_container.get_children():
+				layer_button.update_buttons()
+				var expanded = project.layers[layer_button.layer].is_expanded_in_hierarchy()
+				layer_button.visible = expanded
+				Global.frames_container.get_child(layer_button.get_index()).visible = expanded
+		# make layer child of group
+		l.parent = Global.current_project.layers[project.current_layer]
+	else:
+		# set the parent of layer to be the same as the layer below it
+		l.parent = Global.current_project.layers[project.current_layer].parent
+
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
-	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
+	project.undo_redo.add_do_property(project, "current_layer", new_grouplayer_idx)
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_do_method(project, "add_layers", [l], [project.layers.size()], [cels])
-	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
+	project.undo_redo.add_do_method(project, "add_layers", [l], [new_grouplayer_idx], [cels])
+	project.undo_redo.add_undo_method(project, "remove_layers", [new_grouplayer_idx])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -890,7 +923,7 @@ func project_layer_added(layer: int) -> void:
 	var layer_button: LayerButton = project.layers[layer].instantiate_layer_button()
 	layer_button.layer = layer
 	if project.layers[layer].name == "":
-		project.layers[layer].set_name_to_default(layer)
+		project.layers[layer].set_name_to_default(Global.current_project.layers.size())
 
 	var layer_cel_container := HBoxContainer.new()
 	for f in project.frames.size():
