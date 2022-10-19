@@ -21,8 +21,8 @@ onready var start_spacer = find_node("StartSpacer")
 onready var timeline_scroll: ScrollContainer = find_node("TimelineScroll")
 onready var frame_scroll_container: Control = find_node("FrameScrollContainer")
 onready var frame_scroll_bar: HScrollBar = find_node("FrameScrollBar")
-onready var main_scroll: ScrollContainer = find_node("ScrollContainer")
-onready var timeline_container: VBoxContainer = find_node("TimelineContainer")
+#onready var main_scroll: ScrollContainer = find_node("ScrollContainer")
+#onready var timeline_container: VBoxContainer = find_node("TimelineContainer")
 onready var tag_scroll_container: ScrollContainer = find_node("TagScroll")
 onready var fps_spinbox: SpinBox = find_node("FPSValue")
 onready var onion_skinning_button: BaseButton = find_node("OnionSkinning")
@@ -31,7 +31,8 @@ onready var drag_highlight: ColorRect = find_node("DragHighlight")
 
 
 func _ready() -> void:
-	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
+#	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
+	frame_scroll_bar.connect("value_changed", self, "_frame_scroll_changed")
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
 
@@ -59,38 +60,17 @@ func _input(event: InputEvent) -> void:
 
 
 func _get_minimum_size() -> Vector2:
-	return Vector2(Global.layers_container.rect_size.x + cel_size + 12, 100)
+	return Vector2(Global.layers_container.rect_size.x + cel_size + 14, 100)
 
 
-func _on_FrameScrollBar_value_changed(value: float) -> void:
-	print("UPDATE TAGS!")
-	tag_scroll_container.get_child(0).rect_min_size.x = Global.frame_ids.rect_size.x
+func _frame_scroll_changed(value: float) -> void:
 	# Update the tag scroll as well:
+	tag_scroll_container.get_child(0).rect_min_size.x = Global.frame_ids.rect_size.x
 	tag_scroll_container.scroll_horizontal = value
-	pass # Replace with function body.
-
-
-
-# TODO: Need to have tags respond to new scrolling
-func _h_scroll_changed(value: float) -> void:
-	# Let the main timeline ScrollContainer affect the tag ScrollContainer too
-	tag_scroll_container.get_child(0).rect_min_size.x = (
-		timeline_scroll.scroll_horizontal
-		+ tag_scroll_container.rect_size.x * 3
-	)
-	old_scroll = value  # Needed for (_on_TimelineContainer_item_rect_changed)
-	var diff = start_spacer.rect_min_size.x - value
-	var a = main_scroll.scroll_horizontal
-	var b = timeline_scroll.scroll_horizontal
-	if a > b:
-		tag_scroll_container.scroll_horizontal = 0
-		tag_spacer.rect_min_size.x = diff
-	else:
-		tag_spacer.rect_min_size.x = 0
-		tag_scroll_container.scroll_horizontal = -diff
 
 
 func _on_LayersContainer_resized() -> void:
+	print("Resized layers, count: ", Global.current_project.layers.size())
 	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x
 
 
@@ -103,26 +83,6 @@ func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
 func _on_AnimationTimeline_item_rect_changed() -> void:
 	# Timeline size
 	timeline_scroll.rect_min_size.x = rect_size.x
-
-
-func _on_TimelineContainer_item_rect_changed() -> void:
-	if not timeline_container:
-		return
-	# Layer movement
-	var limit = timeline_container.rect_size.x - main_scroll.rect_size.x
-	var amount = main_scroll.scroll_horizontal
-	start_spacer.rect_min_size.x = min(amount, max(0, limit - 1))
-
-	# Tag movement
-	var diff = start_spacer.rect_min_size.x - old_scroll
-	var a = main_scroll.scroll_horizontal
-	var b = timeline_scroll.scroll_horizontal
-	if a > b:
-		tag_spacer.rect_min_size.x = diff
-		tag_scroll_container.scroll_horizontal = 0
-	else:
-		tag_spacer.rect_min_size.x = 0
-		tag_scroll_container.scroll_horizontal = -diff
 
 
 func cel_size_changed(value: int) -> void:
