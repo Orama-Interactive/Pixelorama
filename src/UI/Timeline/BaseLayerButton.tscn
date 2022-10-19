@@ -5,9 +5,9 @@
 [ext_resource path="res://assets/graphics/layers/unlock.png" type="Texture" id=3]
 
 [node name="BaseLayerButton" type="Button"]
-margin_right = 236.0
+margin_right = 200.0
 margin_bottom = 36.0
-rect_min_size = Vector2( 236, 36 )
+rect_min_size = Vector2( 205, 36 )
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
@@ -114,9 +114,8 @@ texture = ExtResource( 3 )
 
 [node name="LayerName" type="HBoxContainer" parent="HBoxContainer"]
 margin_left = 126.0
-margin_right = 236.0
+margin_right = 205.0
 margin_bottom = 36.0
-rect_min_size = Vector2( 110, 0 )
 rect_pivot_offset = Vector2( -187, -9 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -132,7 +131,7 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="HBoxContainer/LayerName"]
 margin_left = 4.0
 margin_top = 11.0
-margin_right = 106.0
+margin_right = 75.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 text = "Layer 0"
@@ -152,8 +151,8 @@ caret_blink = true
 caret_blink_speed = 0.5
 
 [node name="EmptySpacer" type="Control" parent="HBoxContainer/LayerName"]
-margin_left = 110.0
-margin_right = 110.0
+margin_left = 79.0
+margin_right = 79.0
 margin_bottom = 36.0
 mouse_filter = 2
 
