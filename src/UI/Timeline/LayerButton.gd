@@ -22,6 +22,11 @@ func _ready() -> void:
 	label.text = Global.current_project.layers[layer].name
 	line_edit.text = Global.current_project.layers[layer].name
 
+	var layer_buttons = find_node("LayerButtons")
+	for child in layer_buttons.get_children():
+		var texture = child.get_child(0)
+		texture.modulate = Global.modulate_icon_color
+
 	# Visualize how deep into the hierarchy the layer is
 	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
 	hierarchy_spacer.rect_min_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
