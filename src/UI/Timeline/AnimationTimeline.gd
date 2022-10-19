@@ -71,8 +71,9 @@ func _frame_scroll_changed(value: float) -> void:
 func _on_LayerVBox_resized() -> void:
 	# TODO: BUG Layers resizing doesn't update the tags!
 	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x
-	tag_spacer.rect_min_size.x = (frame_scroll_container.rect_global_position.x
-		 - tag_spacer.rect_global_position.x
+	tag_spacer.rect_min_size.x = (
+		frame_scroll_container.rect_global_position.x
+		- tag_spacer.rect_global_position.x
 	)
 
 
@@ -390,13 +391,14 @@ func _on_AnimationTimer_timeout() -> void:
 		return
 
 	Global.canvas.selection.transform_content_confirm()
-	var fps = Global.current_project.fps
+	var project: Project = Global.current_project
+	var fps := project.fps
 	if animation_forward:
-		if Global.current_project.current_frame < last_frame:
-			Global.current_project.selected_cels.clear()
-			Global.current_project.current_frame += 1
+		if project.current_frame < last_frame:
+			project.selected_cels.clear()
+			project.current_frame += 1
 			Global.animation_timer.wait_time = (
-				Global.current_project.frames[Global.current_project.current_frame].duration
+				project.frames[project.current_frame].duration
 				* (1 / fps)
 			)
 			Global.animation_timer.start()  # Change the frame, change the wait time and start a cycle
@@ -408,10 +410,10 @@ func _on_AnimationTimer_timeout() -> void:
 					Global.animation_timer.stop()
 					is_animation_running = false
 				1:  # Cycle loop
-					Global.current_project.selected_cels.clear()
-					Global.current_project.current_frame = first_frame
+					project.selected_cels.clear()
+					project.current_frame = first_frame
 					Global.animation_timer.wait_time = (
-						Global.current_project.frames[Global.current_project.current_frame].duration
+						project.frames[project.current_frame].duration
 						* (1 / fps)
 					)
 					Global.animation_timer.start()
@@ -420,11 +422,11 @@ func _on_AnimationTimer_timeout() -> void:
 					_on_AnimationTimer_timeout()
 
 	else:
-		if Global.current_project.current_frame > first_frame:
-			Global.current_project.selected_cels.clear()
-			Global.current_project.current_frame -= 1
+		if project.current_frame > first_frame:
+			project.selected_cels.clear()
+			project.current_frame -= 1
 			Global.animation_timer.wait_time = (
-				Global.current_project.frames[Global.current_project.current_frame].duration
+				project.frames[project.current_frame].duration
 				* (1 / fps)
 			)
 			Global.animation_timer.start()
@@ -436,17 +438,19 @@ func _on_AnimationTimer_timeout() -> void:
 					Global.animation_timer.stop()
 					is_animation_running = false
 				1:  # Cycle loop
-					Global.current_project.selected_cels.clear()
-					Global.current_project.current_frame = last_frame
+					project.selected_cels.clear()
+					project.current_frame = last_frame
 					Global.animation_timer.wait_time = (
-						Global.current_project.frames[Global.current_project.current_frame].duration
+						project.frames[project.current_frame].duration
 						* (1 / fps)
 					)
 					Global.animation_timer.start()
 				2:  # Ping pong loop
 					animation_forward = true
 					_on_AnimationTimer_timeout()
-	frame_scroll_container.ensure_control_visible(Global.frame_hbox.get_child(Global.current_project.current_frame))
+	frame_scroll_container.ensure_control_visible(
+		Global.frame_hbox.get_child(project.current_frame)
+	)
 
 
 func play_animation(play: bool, forward_dir: bool) -> void:
@@ -554,10 +558,12 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 func add_layer(type: int) -> void:
 	var project: Project = Global.current_project
 	var current_layer = project.layers[project.current_layer]
-	var l : BaseLayer
+	var l: BaseLayer
 	match type:
-		Global.LayerTypes.PIXEL: l = PixelLayer.new(project)
-		Global.LayerTypes.GROUP: l = GroupLayer.new(project)
+		Global.LayerTypes.PIXEL:
+			l = PixelLayer.new(project)
+		Global.LayerTypes.GROUP:
+			l = GroupLayer.new(project)
 
 	var cels := []
 	for f in project.frames:
@@ -906,9 +912,7 @@ func project_layer_removed(layer: int) -> void:
 
 
 func project_cel_added(frame: int, layer: int) -> void:
-	var cel_hbox := Global.cel_vbox.get_child(
-		Global.cel_vbox.get_child_count() - 1 - layer
-	)
+	var cel_hbox := Global.cel_vbox.get_child(Global.cel_vbox.get_child_count() - 1 - layer)
 	var cel_button = Global.current_project.frames[frame].cels[layer].instantiate_cel_button()
 	cel_button.frame = frame
 	cel_button.layer = layer
@@ -917,8 +921,6 @@ func project_cel_added(frame: int, layer: int) -> void:
 
 
 func project_cel_removed(frame: int, layer: int) -> void:
-	var cel_hbox := Global.cel_vbox.get_child(
-		Global.cel_vbox.get_child_count() - 1 - layer
-	)
+	var cel_hbox := Global.cel_vbox.get_child(Global.cel_vbox.get_child_count() - 1 - layer)
 	cel_hbox.get_child(frame).queue_free()
 	cel_hbox.remove_child(cel_hbox.get_child(frame))

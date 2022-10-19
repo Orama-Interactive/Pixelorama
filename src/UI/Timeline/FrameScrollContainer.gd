@@ -5,6 +5,7 @@ const PADDING = 1
 export var h_scroll_bar_node_path: NodePath
 onready var h_scroll_bar: HScrollBar = get_node_or_null(h_scroll_bar_node_path)
 
+
 func _ready():
 	rect_clip_content = true
 	connect("sort_children", self, "_on_sort_children")
