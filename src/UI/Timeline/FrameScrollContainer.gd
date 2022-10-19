@@ -19,10 +19,10 @@ func _gui_input(event: InputEvent) -> void:
 		if event is InputEventMouseButton and (event.shift or not vertical_scroll):
 			if is_instance_valid(h_scroll_bar):
 				if event.button_index == BUTTON_WHEEL_UP:
-					h_scroll_bar.value -= event.factor * 20
+					h_scroll_bar.value -= Global.animation_timeline.cel_size / 2 + 2
 					accept_event()
 				elif event.button_index == BUTTON_WHEEL_DOWN:
-					h_scroll_bar.value += event.factor * 20
+					h_scroll_bar.value += Global.animation_timeline.cel_size / 2 + 2
 					accept_event()
 
 
