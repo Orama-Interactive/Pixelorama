@@ -551,15 +551,19 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 # Layer buttons
 
 
-func _on_AddLayer_pressed() -> void:
+func add_layer(type: int) -> void:
 	var project: Project = Global.current_project
 	var current_layer = project.layers[project.current_layer]
-	var l := PixelLayer.new(project)
+	var l : BaseLayer
+	match type:
+		Global.LayerTypes.PIXEL: l = PixelLayer.new(project)
+		Global.LayerTypes.GROUP: l = GroupLayer.new(project)
+
 	var cels := []
 	for f in project.frames:
 		cels.append(l.new_empty_cel())
 
-	var new_layer_idx = project.current_layer + 1
+	var new_layer_idx := project.current_layer + 1
 	if current_layer is GroupLayer:
 		new_layer_idx = project.current_layer
 		if !current_layer.expanded:
@@ -581,42 +585,6 @@ func _on_AddLayer_pressed() -> void:
 	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_do_method(project, "add_layers", [l], [new_layer_idx], [cels])
 	project.undo_redo.add_undo_method(project, "remove_layers", [new_layer_idx])
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.commit_action()
-
-
-func _on_AddGroup_pressed() -> void:
-	var project: Project = Global.current_project
-	var current_layer = project.layers[project.current_layer]
-
-	var l := GroupLayer.new(project)
-	var cels := []
-	for f in project.frames:
-		cels.append(l.new_empty_cel())
-
-	var new_grouplayer_idx = project.current_layer + 1
-	if current_layer is GroupLayer:
-		new_grouplayer_idx = project.current_layer
-		if !current_layer.expanded:
-			current_layer.expanded = true
-			for layer_button in Global.layer_vbox.get_children():
-				layer_button.update_buttons()
-				var expanded = project.layers[layer_button.layer].is_expanded_in_hierarchy()
-				layer_button.visible = expanded
-				Global.cel_vbox.get_child(layer_button.get_index()).visible = expanded
-		# make layer child of group
-		l.parent = Global.current_project.layers[project.current_layer]
-	else:
-		# set the parent of layer to be the same as the layer below it
-		l.parent = Global.current_project.layers[project.current_layer].parent
-
-	project.undos += 1
-	project.undo_redo.create_action("Add Layer")
-	project.undo_redo.add_do_property(project, "current_layer", new_grouplayer_idx)
-	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_do_method(project, "add_layers", [l], [new_grouplayer_idx], [cels])
-	project.undo_redo.add_undo_method(project, "remove_layers", [new_grouplayer_idx])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()

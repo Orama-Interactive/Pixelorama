@@ -979,8 +979,8 @@ margin_bottom = 40.0
 mouse_filter = 2
 color = Color( 0, 0.741176, 1, 0.501961 )
 
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddLayer" to="." method="_on_AddLayer_pressed"]
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddGroup" to="." method="_on_AddGroup_pressed"]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [ 0 ]]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddGroup" to="." method="add_layer" binds= [ 1 ]]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ true ]]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ false ]]
