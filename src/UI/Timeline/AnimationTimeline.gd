@@ -22,6 +22,7 @@ onready var timeline_scroll: ScrollContainer = find_node("TimelineScroll")
 onready var frame_scroll_container: Control = find_node("FrameScrollContainer")
 onready var frame_scroll_bar: HScrollBar = find_node("FrameScrollBar")
 onready var tag_scroll_container: ScrollContainer = find_node("TagScroll")
+onready var layer_frame_h_split: HSplitContainer = find_node("LayerFrameHSplit")
 onready var fps_spinbox: SpinBox = find_node("FPSValue")
 onready var onion_skinning_button: BaseButton = find_node("OnionSkinning")
 onready var loop_animation_button: BaseButton = find_node("LoopAnim")
@@ -32,6 +33,8 @@ func _ready() -> void:
 	frame_scroll_bar.connect("value_changed", self, "_frame_scroll_changed")
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
+	layer_frame_h_split.split_offset = Global.config_cache.get_value("timeline", "layer_size", 0)
+	self.cel_size = Global.config_cache.get_value("timeline", "cel_size", cel_size)  # Call setter
 
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	Global.layer_vbox.call_deferred("emit_signal", "resized")
@@ -74,6 +77,7 @@ func _on_LayerVBox_resized() -> void:
 
 
 func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
+	Global.config_cache.set_value("timeline", "layer_size", layer_frame_h_split.split_offset)
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and not event.pressed:
 		minimum_size_changed()  # After you're done resizing the layers, update min size
 
@@ -81,6 +85,7 @@ func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
 func cel_size_changed(value: int) -> void:
 	cel_size = clamp(value, min_cel_size, max_cel_size)
 	minimum_size_changed()
+	Global.config_cache.set_value("timeline", "cel_size", cel_size)
 	for layer_button in Global.layer_vbox.get_children():
 		layer_button.rect_min_size.y = cel_size
 		layer_button.rect_size.y = cel_size
