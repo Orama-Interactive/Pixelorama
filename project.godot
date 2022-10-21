@@ -158,6 +158,16 @@ _global_script_classes=[ {
 "class": "ValueSlider",
 "language": "GDScript",
 "path": "res://src/UI/Nodes/ValueSlider.gd"
+}, {
+"base": "BaseCel",
+"class": "VectorCel",
+"language": "GDScript",
+"path": "res://src/Classes/VectorCel.gd"
+}, {
+"base": "BaseLayer",
+"class": "VectorLayer",
+"language": "GDScript",
+"path": "res://src/Classes/VectorLayer.gd"
 } ]
 _global_script_class_icons={
 "AnimationTag": "",
@@ -189,7 +199,9 @@ _global_script_class_icons={
 "ShortcutProfile": "",
 "SymmetryGuide": "",
 "Tiles": "",
-"ValueSlider": ""
+"ValueSlider": "",
+"VectorCel": "",
+"VectorLayer": ""
 }
 
 [application]

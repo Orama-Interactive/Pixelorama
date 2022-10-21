@@ -564,6 +564,8 @@ func add_layer(type: int) -> void:
 			l = PixelLayer.new(project)
 		Global.LayerTypes.GROUP:
 			l = GroupLayer.new(project)
+		Global.LayerTypes.VECTOR:
+			l = VectorLayer.new(project)
 
 	var cels := []
 	for f in project.frames:

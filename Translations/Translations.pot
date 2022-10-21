@@ -1570,6 +1570,9 @@ msgstr ""
 msgid "Create a new group layer"
 msgstr ""
 
+msgid "Create a new vector layer"
+msgstr ""
+
 msgid "Remove current layer"
 msgstr ""
 
