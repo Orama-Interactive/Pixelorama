@@ -187,7 +187,7 @@ func _delete_cel_content() -> void:
 		project.undo_redo.add_do_method(cel, "set_content", empty_content)
 		project.undo_redo.add_undo_method(cel, "set_content", old_content)
 	else:
-		for linked_cel in cel.link_set:
+		for linked_cel in cel.link_set["cels"]:
 			project.undo_redo.add_do_method(linked_cel, "set_content", empty_content)
 			project.undo_redo.add_undo_method(linked_cel, "set_content", old_content)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer, project)
