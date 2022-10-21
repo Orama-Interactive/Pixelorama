@@ -28,7 +28,9 @@ func set_reference_to(control: Control) -> void:
 	if _reference_to != control:
 		if _reference_to:
 			_reference_to.disconnect("renamed", self, "_on_reference_to_renamed")
+			_reference_to.disconnect("minimum_size_changed", self, "minimum_size_changed")
 		_reference_to = control
+		_reference_to.connect("minimum_size_changed", self, "minimum_size_changed")
 		minimum_size_changed()
 		if not _reference_to:
 			return

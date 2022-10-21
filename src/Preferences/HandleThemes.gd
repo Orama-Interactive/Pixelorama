@@ -89,9 +89,6 @@ func change_theme(id: int) -> void:
 			clear_color = panel_stylebox.bg_color
 		else:
 			clear_color = Color.gray
-	var lbpc: PanelContainer = Global.animation_timeline.find_node("LayerButtonPanelContainer")
-	var lbpc_stylebox: StyleBoxFlat = lbpc.get_stylebox("panel", "PanelContainer")
-	lbpc_stylebox.bg_color = clear_color
 
 	for child in Global.preferences_dialog.get_node("Popups").get_children():
 		child.theme = theme

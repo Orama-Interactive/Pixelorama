@@ -455,11 +455,11 @@ func _frame_changed(value: int) -> void:
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
 	for i in frames.size():
-		var frame_button: BaseButton = Global.frame_ids.get_child(i)
+		var frame_button: BaseButton = Global.frame_hbox.get_child(i)
 		frame_button.pressed = false
-		for container in Global.frames_container.get_children():  # De-select all the other cels
-			if i < container.get_child_count():
-				container.get_child(i).pressed = false
+		for cel_hbox in Global.cel_vbox.get_children():  # De-select all the other cels
+			if i < cel_hbox.get_child_count():
+				cel_hbox.get_child(i).pressed = false
 
 	if selected_cels.empty():
 		selected_cels.append([current_frame, current_layer])
@@ -467,15 +467,15 @@ func _frame_changed(value: int) -> void:
 	for cel in selected_cels:
 		var frame: int = cel[0]
 		var layer: int = cel[1]
-		if frame < Global.frame_ids.get_child_count():
-			var frame_button: BaseButton = Global.frame_ids.get_child(frame)
+		if frame < Global.frame_hbox.get_child_count():
+			var frame_button: BaseButton = Global.frame_hbox.get_child(frame)
 			frame_button.pressed = true
 
-		var container_child_count: int = Global.frames_container.get_child_count()
-		if layer < container_child_count:
-			var container = Global.frames_container.get_child(container_child_count - 1 - layer)
-			if frame < container.get_child_count():
-				var cel_button = container.get_child(frame)
+		var vbox_child_count: int = Global.cel_vbox.get_child_count()
+		if layer < vbox_child_count:
+			var cel_hbox: Container = Global.cel_vbox.get_child(vbox_child_count - 1 - layer)
+			if frame < cel_hbox.get_child_count():
+				var cel_button = cel_hbox.get_child(frame)
 				cel_button.pressed = true
 
 	if current_frame < frames.size():
@@ -495,14 +495,14 @@ func _layer_changed(value: int) -> void:
 
 	yield(Global.get_tree().create_timer(0.01), "timeout")
 	self.current_frame = current_frame  # Call frame_changed to update UI
-	for layer_button in Global.layers_container.get_children():
+	for layer_button in Global.layer_vbox.get_children():
 		layer_button.pressed = false
 
 	for cel in selected_cels:
 		var layer: int = cel[1]
-		if layer < Global.layers_container.get_child_count():
-			var layer_button = Global.layers_container.get_child(
-				Global.layers_container.get_child_count() - 1 - layer
+		if layer < Global.layer_vbox.get_child_count():
+			var layer_button = Global.layer_vbox.get_child(
+				Global.layer_vbox.get_child_count() - 1 - layer
 			)
 			layer_button.pressed = true
 
@@ -643,14 +643,14 @@ func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be
 		Global.animation_timeline.project_frame_added(indices[i])
 	# Update the frames and frame buttons:
 	for f in frames.size():
-		Global.frame_ids.get_child(f).frame = f
-		Global.frame_ids.get_child(f).text = str(f + 1)
+		Global.frame_hbox.get_child(f).frame = f
+		Global.frame_hbox.get_child(f).text = str(f + 1)
 	# Update the cel buttons:
 	for l in layers.size():
-		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
 		for f in frames.size():
-			layer_cel_container.get_child(f).frame = f
-			layer_cel_container.get_child(f).button_setup()
+			cel_hbox.get_child(f).frame = f
+			cel_hbox.get_child(f).button_setup()
 	_set_timeline_first_and_last_frames()
 
 
@@ -671,14 +671,14 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 		Global.animation_timeline.project_frame_removed(indices[i] - i)
 	# Update the frames and frame buttons:
 	for f in frames.size():
-		Global.frame_ids.get_child(f).frame = f
-		Global.frame_ids.get_child(f).text = str(f + 1)
+		Global.frame_hbox.get_child(f).frame = f
+		Global.frame_hbox.get_child(f).text = str(f + 1)
 	# Update the cel buttons:
 	for l in layers.size():
-		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
 		for f in frames.size():
-			layer_cel_container.get_child(f).frame = f
-			layer_cel_container.get_child(f).button_setup()
+			cel_hbox.get_child(f).frame = f
+			cel_hbox.get_child(f).button_setup()
 	_set_timeline_first_and_last_frames()
 
 
@@ -692,14 +692,14 @@ func move_frame(from_index: int, to_index: int) -> void:
 	Global.animation_timeline.project_frame_added(to_index)
 	# Update the frames and frame buttons:
 	for f in frames.size():
-		Global.frame_ids.get_child(f).frame = f
-		Global.frame_ids.get_child(f).text = str(f + 1)
+		Global.frame_hbox.get_child(f).frame = f
+		Global.frame_hbox.get_child(f).text = str(f + 1)
 	# Update the cel buttons:
 	for l in layers.size():
-		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
 		for f in frames.size():
-			layer_cel_container.get_child(f).frame = f
-			layer_cel_container.get_child(f).button_setup()
+			cel_hbox.get_child(f).frame = f
+			cel_hbox.get_child(f).button_setup()
 	_set_timeline_first_and_last_frames()
 
 
@@ -728,11 +728,11 @@ func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels
 	# Update the layer indices and layer/cel buttons:
 	for l in layers.size():
 		layers[l].index = l
-		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
-		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
+		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
 		for f in frames.size():
-			layer_cel_container.get_child(f).layer = l
-			layer_cel_container.get_child(f).button_setup()
+			cel_hbox.get_child(f).layer = l
+			cel_hbox.get_child(f).button_setup()
 	toggle_layer_buttons()
 
 
@@ -748,11 +748,11 @@ func remove_layers(indices: Array) -> void:
 	# Update the layer indices and layer/cel buttons:
 	for l in layers.size():
 		layers[l].index = l
-		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
-		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
+		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
 		for f in frames.size():
-			layer_cel_container.get_child(f).layer = l
-			layer_cel_container.get_child(f).button_setup()
+			cel_hbox.get_child(f).layer = l
+			cel_hbox.get_child(f).button_setup()
 	toggle_layer_buttons()
 
 
@@ -779,11 +779,11 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 	# Update the layer indices and layer/cel buttons:
 	for l in layers.size():
 		layers[l].index = l
-		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
-		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
+		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
 		for f in frames.size():
-			layer_cel_container.get_child(f).layer = l
-			layer_cel_container.get_child(f).button_setup()
+			cel_hbox.get_child(f).layer = l
+			cel_hbox.get_child(f).button_setup()
 	toggle_layer_buttons()
 
 
@@ -827,11 +827,11 @@ func swap_layers(a: Dictionary, b: Dictionary) -> void:
 	# Update the layer indices and layer/cel buttons:
 	for l in layers.size():
 		layers[l].index = l
-		Global.layers_container.get_child(layers.size() - 1 - l).layer = l
-		var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - l)
+		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
+		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
 		for f in frames.size():
-			layer_cel_container.get_child(f).layer = l
-			layer_cel_container.get_child(f).button_setup()
+			cel_hbox.get_child(f).layer = l
+			cel_hbox.get_child(f).button_setup()
 	toggle_layer_buttons()
 
 
@@ -850,10 +850,10 @@ func move_cel(from_frame: int, to_frame: int, layer: int) -> void:
 	Global.animation_timeline.project_cel_added(to_frame, layer)
 
 	# Update the cel buttons for this layer:
-	var layer_cel_container = Global.frames_container.get_child(layers.size() - 1 - layer)
+	var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - layer)
 	for f in frames.size():
-		layer_cel_container.get_child(f).frame = f
-		layer_cel_container.get_child(f).button_setup()
+		cel_hbox.get_child(f).frame = f
+		cel_hbox.get_child(f).button_setup()
 
 
 func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:

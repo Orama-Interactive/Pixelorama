@@ -76,11 +76,11 @@ func update_buttons() -> void:
 
 # Used when pressing a button on this changes the appearnce of other layers (ie: expand or visible)
 func _update_buttons_all_layers() -> void:
-	for layer_button in Global.layers_container.get_children():
+	for layer_button in Global.layer_vbox.get_children():
 		layer_button.update_buttons()
 		var expanded = Global.current_project.layers[layer_button.layer].is_expanded_in_hierarchy()
 		layer_button.visible = expanded
-		Global.frames_container.get_child(layer_button.get_index()).visible = expanded
+		Global.cel_vbox.get_child(layer_button.get_index()).visible = expanded
 
 
 func _draw() -> void:
