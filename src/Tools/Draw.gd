@@ -578,7 +578,7 @@ func _get_undo_data() -> Dictionary:
 			var cel: PixelCel = frame.cels[project.current_layer]
 			cels.append(cel)
 	for cel in cels:
-		if cel is GroupCel:
+		if not cel is PixelCel:
 			continue
 		var image: Image = cel.image
 		image.unlock()
