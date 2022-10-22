@@ -11,8 +11,8 @@ var link_set = null  # { "cels": Array, "hue": float } or null
 # Methods to Override:
 
 
-# The content methods deal with the unique content of each cel type. For example, an Image for
-# PixelLayers, or a Dictionary of settings for a procedural layer type, and null for Groups.
+# The content methods deal with the unique content of each cel type. For example, an
+# Image for PixelCels, an Array of VectorShapes for VectorCels, and null for GroupCels.
 # Can be used fo linking/unlinking cels, copying, and deleting content
 func get_content():
 	return null
@@ -34,7 +34,7 @@ func copy_content():
 
 
 # Returns the image var for image based cel types, or a render for procedural types.
-# It's meant for read-only usage of image data, such as copying selections or color picking.
+# Good for reading image data of procedural cels, such as copying selections or color picking.
 func get_image() -> Image:
 	return null
 
