@@ -2,35 +2,47 @@ class_name VectorCel
 extends BaseCel
 # A class for the properties of cels in VectorLayers.
 # The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
-# The "shapes" variable stores the cel's content, VectorShapes
+# The "vshapes" variable stores the cel's content, VectorShapes
 
-var shapes := [
-	{
-		"type": "rect",
-		"x": 5,
-		"y": 20,
-		"w": 12,
-		"h": 16,
-	},
-	{
-		"type": "ellipse",
-		"x": 25,
-		"y": 32,
-		"radius": 12, # TODO: Change to w/h
-	},
-	{
-		"type": "text",
-		"x": 1,
-		"y": 15,
-		"text": "Hello World!"
-	}
-] # Array of VectorShapes
+var vshapes := [] # Array[BaseVectorShape]
 
-func _init(_shapes := [], _opacity := 1.0, _image_texture: ImageTexture = null) -> void:
-#	shapes = _shapes
+func _init(_vshapes := [], _opacity := 1.0, _image_texture: ImageTexture = null) -> void:
+	vshapes = _vshapes
+
+	# Placeholder:
+	# NOTE: Using the same font as the UI will cause an id_map error after updating the font (so its duplicated)
+	var test_font =  preload("res://assets/fonts/Roboto-Regular.tres").duplicate(true)
+	test_font.font_data.override_oversampling = 1
+
+	var text_vshape := TextVectorShape.new()
+	text_vshape.pos = Vector2(1, 20)
+	text_vshape.text = "Hello\nworld"
+	text_vshape.font = test_font
+	text_vshape.font_size = 12
+	text_vshape.outline_size = 1
+	text_vshape.extra_spacing = Vector2(0, 0)
+	text_vshape.color = Color.red
+	text_vshape.outline_color = Color.white
+	text_vshape.antialiased = false
+	vshapes.append(text_vshape)
+
+	test_font = test_font.duplicate(true)
+	text_vshape = TextVectorShape.new()
+	text_vshape.pos = Vector2(1, 60)
+	text_vshape.text = "Another\nTest!"
+	text_vshape.font = test_font
+	text_vshape.font_size = 8
+	text_vshape.outline_size = 3
+	text_vshape.extra_spacing = Vector2(3, 0)
+	text_vshape.color = Color.white
+	text_vshape.outline_color = Color.blue
+	text_vshape.antialiased = true
+	vshapes.append(text_vshape)
+
 	if _image_texture:
 		image_texture = _image_texture
 	else:
+		# TODO: Can we prevent an extra update_texture when opening files (since it can't be deserialized until it has all cels)
 		# TODO: Is it possible to use the viewport texture directly?
 		image_texture = ImageTexture.new()
 		update_texture()
@@ -38,18 +50,17 @@ func _init(_shapes := [], _opacity := 1.0, _image_texture: ImageTexture = null) 
 
 
 func get_content():
-	return shapes
+	return vshapes
 
 
 func set_content(content, texture: ImageTexture = null) -> void:
-	shapes = content
+	vshapes = content
 	if is_instance_valid(texture):
 		image_texture = texture
-		# TODO: Implement the equivalent:
-#		if image_texture.get_size() != image.get_size():
-#			image_texture.create_from_image(image, 0)
-#	else:
-#		image_texture.create_from_image(image, 0)
+		if image_texture.get_size() != Global.current_project.size:
+			update_texture()
+	else:
+		update_texture()
 
 
 func create_empty_content():
@@ -57,7 +68,11 @@ func create_empty_content():
 
 
 func copy_content():
-	return shapes.duplicate(true)
+	var copy_vshapes := []
+	for vshape in vshapes:
+		var copy = vshape.get_script().new()
+		copy.deserialize(vshape.serialize())
+	return copy_vshapes
 
 
 func get_image() -> Image:
@@ -80,25 +95,13 @@ func update_texture() -> void:
 	VisualServer.viewport_set_canvas_transform(vp, canvas, Transform())
 	VisualServer.canvas_item_set_parent(ci_rid, canvas)
 
-	for shape in shapes:
-		if shape["type"] == "rect":
-			VisualServer.canvas_item_add_rect(ci_rid, Rect2(shape["x"], shape["y"], shape["w"], shape["h"]), Color(0,0,1,0.5))
-		elif shape["type"] == "ellipse":
-			VisualServer.canvas_item_add_circle(ci_rid, Vector2(shape["x"], shape["y"]), shape["radius"], Color(1,0,0,0.5))
-		elif shape["type"] == "text":
-			var font := DynamicFont.new()
-			font.size = 12
-			font.font_data = preload("res://assets/fonts/Roboto-Regular.ttf")
-			font.font_data.override_oversampling = 1
-			font.outline_color = Color.red
-			font.outline_size = 2
-			font.draw(ci_rid, Vector2(shape["x"], shape["y"]), shape["text"])
+	for vshape in vshapes:
+		vshape.draw(ci_rid)
 
 	VisualServer.viewport_set_update_mode(vp, VisualServer.VIEWPORT_UPDATE_ONCE)
 	VisualServer.viewport_set_vflip(vp, true)  # TODO: May not be needed with 2 renders
 	VisualServer.force_draw(false)
-	var viewport_texture := Image.new()
-	viewport_texture = VisualServer.texture_get_data(VisualServer.viewport_get_texture(vp))
+	var viewport_texture := VisualServer.texture_get_data(VisualServer.viewport_get_texture(vp))
 	VisualServer.free_rid(vp)
 	VisualServer.free_rid(canvas)
 	VisualServer.free_rid(ci_rid)
@@ -110,8 +113,7 @@ func update_texture() -> void:
 	shader_effect.generate_image(viewport_texture, preload("res://src/Shaders/VectorRenderColorCorrect.gdshader"), {}, Global.current_project.size)
 
 	viewport_texture.convert(Image.FORMAT_RGBA8)
-	image_texture.create_from_image(viewport_texture)
-	image_texture.flags = 0
+	image_texture.create_from_image(viewport_texture, 0)
 	print("VectorCel update time (msec): ", Time.get_ticks_msec() - start_msec)
 
 

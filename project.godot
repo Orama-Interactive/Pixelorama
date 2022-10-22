@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Tools/BaseTool.gd"
 }, {
+"base": "Reference",
+"class": "BaseVectorShape",
+"language": "GDScript",
+"path": "res://src/Classes/VectorShapes/BaseVectorShape.gd"
+}, {
 "base": "Popup",
 "class": "Brushes",
 "language": "GDScript",
@@ -149,6 +154,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/Canvas/Rulers/SymmetryGuide.gd"
 }, {
+"base": "BaseVectorShape",
+"class": "TextVectorShape",
+"language": "GDScript",
+"path": "res://src/Classes/VectorShapes/TextVectorShape.gd"
+}, {
 "base": "Reference",
 "class": "Tiles",
 "language": "GDScript",
@@ -174,6 +184,7 @@ _global_script_class_icons={
 "BaseCel": "",
 "BaseLayer": "",
 "BaseTool": "",
+"BaseVectorShape": "",
 "Brushes": "",
 "Canvas": "",
 "Drawer": "",
@@ -198,6 +209,7 @@ _global_script_class_icons={
 "ShaderImageEffect": "",
 "ShortcutProfile": "",
 "SymmetryGuide": "",
+"TextVectorShape": "",
 "Tiles": "",
 "ValueSlider": "",
 "VectorCel": "",

@@ -3,6 +3,7 @@ extends Node
 signal project_changed
 
 enum LayerTypes { PIXEL, GROUP, VECTOR }
+enum VectorShapeTypes { TEXT }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
 enum ColorFrom { THEME, CUSTOM }
