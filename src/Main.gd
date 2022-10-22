@@ -68,10 +68,7 @@ func _ready() -> void:
 
 	_handle_backup()
 
-	# If the user wants to run Pixelorama with arguments in terminal mode
-	# or open files with Pixelorama directly, then handle that
-	if OS.get_cmdline_args():
-		OpenSave.handle_loading_files(OS.get_cmdline_args())
+	_handle_cmdline_arguments()
 	get_tree().connect("files_dropped", self, "_on_files_dropped")
 
 	if OS.get_name() == "Android":
@@ -197,6 +194,19 @@ func _handle_backup() -> void:
 			load_last_project()
 
 
+func _handle_cmdline_arguments() -> void:
+	var args := OS.get_cmdline_args()
+	if args.empty():
+		return
+
+	for arg in args:
+		if arg.begins_with("-") or arg.begins_with("--"):
+			# TODO: Add code to handle custom command line arguments
+			continue
+		else:
+			OpenSave.handle_loading_file(arg)
+
+
 func _notification(what: int) -> void:
 	match what:
 		MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
@@ -224,7 +234,8 @@ func _notification(what: int) -> void:
 
 
 func _on_files_dropped(files: PoolStringArray, _screen: int) -> void:
-	OpenSave.handle_loading_files(files)
+	for file in files:
+		OpenSave.handle_loading_file(file)
 	var splash_dialog = Global.control.get_node("Dialogs/SplashDialog")
 	if splash_dialog.visible:
 		splash_dialog.hide()
@@ -258,7 +269,7 @@ func load_recent_project_file(path: String) -> void:
 	# Check if file still exists on disk
 	var file_check := File.new()
 	if file_check.file_exists(path):  # If yes then load the file
-		OpenSave.handle_loading_files([path])
+		OpenSave.handle_loading_file(path)
 		# Sync file dialogs
 		Global.save_sprites_dialog.current_dir = path.get_base_dir()
 		Global.open_sprites_dialog.current_dir = path.get_base_dir()
@@ -271,7 +282,8 @@ func load_recent_project_file(path: String) -> void:
 
 
 func _on_OpenSprite_files_selected(paths: PoolStringArray) -> void:
-	OpenSave.handle_loading_files(paths)
+	for path in paths:
+		OpenSave.handle_loading_file(path)
 	Global.save_sprites_dialog.current_dir = paths[0].get_base_dir()
 	Global.config_cache.set_value("data", "current_dir", paths[0].get_base_dir())
 
