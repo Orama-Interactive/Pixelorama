@@ -164,6 +164,7 @@ margin_right = 84.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Create a new vector layer"
+focus_mode = 0
 mouse_default_cursor_shape = 2
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddVector"]
