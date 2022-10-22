@@ -21,7 +21,7 @@ func draw(canvas_item: RID) -> void:
 	font.extra_spacing_bottom = extra_spacing.y
 	font.outline_color = outline_color
 	font.font_data.antialiased = antialiased
-	var line_pos := pos
+	var line_pos := Vector2(pos.x, pos.y + font.get_height())
 	for line in lines:
 		font.draw(canvas_item, line_pos, line, color)
 		line_pos.y += font.get_height()
@@ -35,7 +35,7 @@ func has_point(point: Vector2) -> bool:
 	font.extra_spacing_bottom = extra_spacing.y
 	var line_pos := pos
 	for line in lines:
-		if Rect2(pos, font.get_string_size(line)).has_point(point):
+		if Rect2(line_pos, font.get_string_size(line)).has_point(point):
 			return true
 		line_pos.y += font.get_height()
 	return false
