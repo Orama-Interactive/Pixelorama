@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-10-22 23:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -175,10 +175,10 @@ msgid "Smear options:"
 msgstr ""
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Tolerância:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Ângulo inicial:"
 
 msgid "Clear"
 msgstr "Limpar"
@@ -253,7 +253,7 @@ msgid "Manage Layouts"
 msgstr ""
 
 msgid "Add"
-msgstr ""
+msgstr "Adicionar"
 
 msgid "Add Layout"
 msgstr ""
@@ -400,7 +400,7 @@ msgid "Exporting in progress..."
 msgstr "A Exportar..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Não foi possível carregar o ficheiro '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -409,7 +409,7 @@ msgstr "Não foi possível carregar o ficheiro '%s'.\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Não foi possível carregar o ficheiro '%s', porque não é um ficheiro de palete válido."
 
 msgid "Frame"
 msgstr "Imagem"
@@ -514,7 +514,7 @@ msgid "Trilinear"
 msgstr "Trilinear"
 
 msgid "Constant"
-msgstr ""
+msgstr "Constante"
 
 msgid "General"
 msgstr "Geral"
@@ -547,10 +547,10 @@ msgid "Performance"
 msgstr "Performance"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Extensões"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Cursores"
 
 msgid "Indicators"
 msgstr "Indicadores"
@@ -613,7 +613,7 @@ msgid "Theme"
 msgstr "Tema"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Botões"
 
 msgid "Icon color from:"
 msgstr "Cor de Icon de:"
@@ -622,19 +622,19 @@ msgid "Icon color:"
 msgstr "Cor de Icon:"
 
 msgid "Background"
-msgstr ""
+msgstr "Fundo"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Cor de fundo de:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Cor de fundo:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Cor da ferramenta esquerda:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Cor da ferramenta direita:"
 
 msgid "Tool button size:"
 msgstr "Tamanho de Botão de ferramenta:"
@@ -694,7 +694,7 @@ msgid "Offset Y:"
 msgstr ""
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Cor da sombra:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr "Ajustar Hue/Saturação/Valor"
@@ -709,7 +709,7 @@ msgid "Divide into equal parts"
 msgstr ""
 
 msgid "Parts:"
-msgstr ""
+msgstr "Partes:"
 
 msgid "Add point at the end"
 msgstr ""
@@ -1320,16 +1320,16 @@ msgid "Add Extension"
 msgstr ""
 
 msgid "Enable"
-msgstr ""
+msgstr "Ativar"
 
 msgid "Disable"
-msgstr ""
+msgstr "Desativar"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Desinstalar"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Abrir pasta"
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -1382,26 +1382,26 @@ msgstr "0: Cor do próprio pincel, 100: cor atualmente selecionada"
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Preencher área:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "Área semelhante"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "Cores semelhantes"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "Toda a seleção"
 
 msgid "Fill with:"
 msgstr "Preencher com:"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Selected color"
-msgstr ""
+msgstr "Cor selecionada"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
@@ -1572,10 +1572,10 @@ msgid "Show future frames:"
 msgstr ""
 
 msgid "Above canvas"
-msgstr ""
+msgstr "Acima da tela"
 
 msgid "Below canvas"
-msgstr ""
+msgstr "Abaixo da tela"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
 msgstr ""
