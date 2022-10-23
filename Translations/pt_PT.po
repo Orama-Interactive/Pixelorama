@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2022-10-22 23:06\n"
+"PO-Revision-Date: 2022-10-23 00:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -40,7 +40,7 @@ msgid "Canvas Size"
 msgstr "Tamanho da Tela"
 
 msgid "Frame Size"
-msgstr "Tamanho da Imagem"
+msgstr "Dimensões do fotograma"
 
 msgid "Size:"
 msgstr "Tamanho:"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Exportar"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Sobrescrever"
 
 msgid "Export..."
 msgstr "Exportar..."
@@ -187,10 +187,10 @@ msgid "Invert"
 msgstr "Inverter"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Visualização em escala de cinzentos"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Espelhar imagem"
 
 msgid "Flip Horizontal"
 msgstr "Virar Horizontalmente"
@@ -205,7 +205,7 @@ msgid "Tile Mode"
 msgstr "Modo de Azuleijo"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Desvios do Modo Mosaico"
 
 msgid "X-basis x:"
 msgstr ""
@@ -220,22 +220,22 @@ msgid "Y-basis y:"
 msgstr ""
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Máscara de mosaico"
 
 msgid "Reset"
-msgstr ""
+msgstr "Repor"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "Utilizar fotograma atual"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Repor máscara"
 
 msgid "Window Opacity"
 msgstr "Opacidade da janela"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "A opacidade da janela não funciona em modo de ecrã completo."
 
 msgid "Panel Layout"
 msgstr "Esquema de Painel"
@@ -247,22 +247,22 @@ msgid "Layouts"
 msgstr "Layouts"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Painéis amovíveis"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Gerir disposições"
 
 msgid "Add"
 msgstr "Adicionar"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Adicionar disposição"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Editar disposição"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Tem a certeza que pretende eliminar esta disposição?"
 
 msgid "Auto"
 msgstr "Automático"
@@ -313,13 +313,13 @@ msgid "Import as:"
 msgstr "Importar como:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "Aplicar a tudo"
 
 msgid "Recent projects"
 msgstr "Projetos recentes"
 
 msgid "New project"
-msgstr ""
+msgstr "Novo projeto"
 
 msgid "Spritesheet (new project)"
 msgstr ""
@@ -328,10 +328,10 @@ msgid "Spritesheet (new layer)"
 msgstr "Folha de Imagens (nova camada)"
 
 msgid "New frame"
-msgstr "Nova frame"
+msgstr "Novo fotograma"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Substituir célula"
 
 msgid "New layer"
 msgstr "Nova camada"
@@ -346,16 +346,16 @@ msgid "New pattern"
 msgstr "Novo padrão"
 
 msgid "Horizontal frames:"
-msgstr "Frames horizontais"
+msgstr "Fotogramas horizontais:"
 
 msgid "Vertical frames:"
-msgstr "Frames verticais"
+msgstr "Fotogramas verticais:"
 
 msgid "Start frame:"
-msgstr "Frame inicial:"
+msgstr "Fotograma inicial:"
 
 msgid "At frame:"
-msgstr "Na frame:"
+msgstr "No fotograma:"
 
 msgid "At layer:"
 msgstr "Na camada:"
@@ -388,13 +388,13 @@ msgid "File %s already exists. Overwrite?"
 msgstr "O ficheiro %s já existe, Substituir?"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Caminho do diretório inválido!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Nome do ficheiro inválido!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Caminho do diretório e nome do ficheiro inválido!"
 
 msgid "Exporting in progress..."
 msgstr "A Exportar..."
@@ -412,13 +412,13 @@ msgid "Can't load file '%s'.\n"
 msgstr "Não foi possível carregar o ficheiro '%s', porque não é um ficheiro de palete válido."
 
 msgid "Frame"
-msgstr "Imagem"
+msgstr "Fotograma"
 
 msgid "Frames:"
-msgstr "Imagens:"
+msgstr "Fotogramas:"
 
 msgid "All Frames"
-msgstr "Todas as Imagens"
+msgstr "Todos os fotogramas"
 
 msgid "Spritesheet"
 msgstr "Folha de Imagens"
@@ -430,7 +430,7 @@ msgid "Preview:"
 msgstr "Pré-Visualizar"
 
 msgid "Frame:"
-msgstr "Imagem:"
+msgstr "Fotograma:"
 
 msgid "Orientation:"
 msgstr "Oruentação"
@@ -454,10 +454,10 @@ msgid "Open a Directory"
 msgstr "Abrir uma Diretoria"
 
 msgid "All frames as multiple files"
-msgstr "Todas as imagens como vários ficheiros"
+msgstr "Todos os fotogramas como vários ficheiros"
 
 msgid "All frames as a single file animation"
-msgstr "Todas as imagens como um único ficheiro de animação"
+msgstr "Todos os fotogramas como um único ficheiro de animação"
 
 msgid "Background:"
 msgstr "Fundo de Ecrã:"
@@ -466,7 +466,7 @@ msgid "Direction:"
 msgstr "Direção:"
 
 msgid "Forward"
-msgstr "Para a Frente"
+msgstr "Para a frente"
 
 msgid "Backwards"
 msgstr "Para Trás"
@@ -655,10 +655,10 @@ msgid "Current cel"
 msgstr "Célula atual"
 
 msgid "Current frame"
-msgstr "Imagem atual"
+msgstr "Fotograma atual"
 
 msgid "All frames"
-msgstr "Todas as imagens"
+msgstr "Todas os fotogramas"
 
 msgid "All projects"
 msgstr "Todos os projetos"
@@ -703,32 +703,33 @@ msgid "Gradient"
 msgstr "Gradiente"
 
 msgid "Gradient Map"
-msgstr ""
+msgstr "Mapeamento gradiente"
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "Dividir em partes iguais"
 
 msgid "Parts:"
 msgstr "Partes:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "Adicionar ponto no fim"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr ""
+msgstr "Quando ativado, o último ponto é adicionado ao fim do gradiente.\n"
+"Desative caso pretenda converter o gradiente numa interpolação constante, para que a última cor seja tida em conta."
 
 msgid "Linear"
-msgstr ""
+msgstr "Linear"
 
 msgid "Radial"
-msgstr ""
+msgstr "Radial"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Passo linear"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Passo radial"
 
 msgid "Linear Dithering"
 msgstr ""
@@ -737,13 +738,13 @@ msgid "Radial Dithering"
 msgstr ""
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Tamanho da transição:"
 
 msgid "Center:"
-msgstr ""
+msgstr "Centro:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Raio:"
 
 msgid "Dithering pattern:"
 msgstr ""
@@ -806,7 +807,7 @@ msgid "Issue Tracker"
 msgstr "Tracker de Problemas"
 
 msgid "Open Logs Folder"
-msgstr ""
+msgstr "Abrir pasta de registos"
 
 msgid "Changelog"
 msgstr "Atualizações"
@@ -923,16 +924,16 @@ msgid "Ukrainian"
 msgstr "Ukraniano"
 
 msgid "Danish"
-msgstr ""
+msgstr "Dinamarquês"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Sueco"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Sérvio (Cirílico)"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Holandês"
 
 msgid "Development Team"
 msgstr "Equipa de Desenvolvimento"
@@ -996,7 +997,10 @@ msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "Seleção poligonal\n\n"
+"%s para o botão esquerdo do rato\n"
+"%s para o botão direito do rato\n\n"
+"Duplo clique para ligar o último ponto ao primeiro"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -1164,10 +1168,10 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Mostra o icone da ferramenta da direita selecionada perto do cursor na tela"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Usar cursores nativos"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Usar cursor em cruz na tela"
 
 msgid "Guides"
 msgstr "Guias"
@@ -1305,19 +1309,19 @@ msgid "Only custom preset can be modified"
 msgstr "Apenas presets personalizados podem ser modificados"
 
 msgid "Set application FPS limit:"
-msgstr "Define o limite de FPS da applicação:"
+msgstr "Define o limite de FPS da aplicação:"
 
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Pausar a aplicação quando perder o foco"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr "Define o limite de frames por segundo da aplicação. Quanto mais baixo, mais baixo o uso do CPU, mas a aplicação fica mais lenta, com cortes, e ineresponsiva. 0 significa que não tem limite."
+msgstr "Define o limite de fotogramas por segundo da aplicação. Quanto mais baixo, mais baixo o uso do processador, no entanto, a aplicação fica mais lenta, com cortes, e pouco responsiva. 0 significa que não tem limite."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr ""
+msgstr "Se ativado, e quando a janela da aplicação perder o foco, esta será pausada. Isto ajuda a baixar a utilização do processador durante inatividade. A aplicação é retomada quando o rato tornar a entrar na janela."
 
 msgid "Add Extension"
-msgstr ""
+msgstr "Adicionar extensão"
 
 msgid "Enable"
 msgstr "Ativar"
@@ -1450,7 +1454,7 @@ msgid "Options:"
 msgstr "Opções:"
 
 msgid "Fit to frame"
-msgstr "Preencher "
+msgstr "Ajustar ao fotograma"
 
 msgid "100% Zoom"
 msgstr "100% Zoom"
@@ -1471,16 +1475,16 @@ msgid "Vertical"
 msgstr "Vertical"
 
 msgid "Current frame:"
-msgstr "Frame atual:"
+msgstr "Fotograma atual:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr "Saltar para o primeiro frame\n"
+msgstr "Saltar para o primeiro fotograma\n"
 "(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr "Ir para o frame anterior\n"
+msgstr "Ir para o fotograma anterior\n"
 "(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
@@ -1493,12 +1497,12 @@ msgstr "Reproduzir a animação para a frente (do início ao fim)(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr "Ir para a próxima frame\n"
+msgstr "Ir para o próximo fotograma\n"
 "(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr "Saltar para a última frame\n"
+msgstr "Saltar para o último fotograma\n"
 "(%s)"
 
 msgid "Onion Skinning settings"
@@ -1509,8 +1513,8 @@ msgstr "Habilitar/desabilitar o modo Cebola"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "Quantos frames por segundo a pré-visualização da animação deve ter?\n"
-"Quantos mais FPS, mais rápido a animação é reproduzida"
+msgstr "Quantos fotogramas por segundo deve a pré-visualização da animação ter?\n"
+"Quantos mais FPS, mais rapidamente a animação é reproduzida."
 
 msgid "No loop"
 msgstr "Sem loop"
@@ -1525,19 +1529,19 @@ msgid "Onion Skinning:"
 msgstr "Modo Cebola:"
 
 msgid "Past Frames"
-msgstr "Frames Passadas"
+msgstr "Fotogramas anteriores"
 
 msgid "Future Frames"
-msgstr "Frames Futuras"
+msgstr "Fotogramas futuros"
 
 msgid "Manage frame tags"
-msgstr "Gerir as etiquetas de frame"
+msgstr "Gerir as etiquetas de fotograma"
 
 msgid "Frame Tag Properties"
-msgstr "Propriedades da etiqueta de frame"
+msgstr "Propriedades da etiqueta de fotograma"
 
 msgid "Add a new frame tag"
-msgstr "Adicionar uma nova etiqueta de frame"
+msgstr "Adicionar uma nova etiqueta de fotograma"
 
 msgid "Name:"
 msgstr "Nome:"
@@ -1549,27 +1553,27 @@ msgid "To:"
 msgstr "Até:"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr "A animação reporduz apenas as frames com a mesma etiqueta"
+msgstr "A animação reproduz apenas os fotogramas com a mesma etiqueta"
 
 msgid "Tag %s (Frame %s)"
-msgstr "Etiqueta %s (Frame %s)"
+msgstr "Etiqueta %s (Fotograma %s)"
 
 msgid "Tag %s (Frames %s-%s)"
-msgstr "Etiqueta %s (Frames %s-%s)"
+msgstr "Etiqueta %s (Fotogramas %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr "Quando selecionado, a animação reporduz apenas as frames com a mesma etiqueta.\n"
-"Quando não selecionado, a animação reproduz todas as frames, ignorando as etiquetas."
+msgstr "Quando selecionado, a animação reproduz apenas os fotogramas com a mesma etiqueta.\n"
+"Quando não selecionado, a animação reproduz todos os fotogramas, ignorando as etiquetas."
 
 msgid "Blue-Red Mode"
 msgstr "Modo Azul-Vermelho"
 
 msgid "Show past frames:"
-msgstr ""
+msgstr "Mostrar fotogramas anteriores:"
 
 msgid "Show future frames:"
-msgstr ""
+msgstr "Mostrar fotogramas futuros:"
 
 msgid "Above canvas"
 msgstr "Acima da tela"
@@ -1581,13 +1585,13 @@ msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffi
 msgstr ""
 
 msgid "Add a new frame"
-msgstr "Adicionar uma nova frame"
+msgstr "Adicionar um novo fotograma"
 
 msgid "Remove Frame"
-msgstr "Remover Frame"
+msgstr "Remover fotograma"
 
 msgid "Clone Frame"
-msgstr "Clonar Frame"
+msgstr "Clonar fotograma"
 
 msgid "Move Left"
 msgstr "Mover para a Esquerda"
@@ -1599,22 +1603,22 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Associar células a"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Desassociar células"
 
 msgid "Frame Properties"
-msgstr "Propriedades de Frame"
+msgstr "Propriedades do fotograma"
 
 msgid "Frame properties"
-msgstr "Propriedades de frame"
+msgstr "Propriedades do fotograma"
 
 msgid "Layer"
 msgstr "Camada"
 
 msgid "Group"
-msgstr ""
+msgstr "Grupo"
 
 msgid "Layers"
 msgstr "Camadas"
@@ -1623,7 +1627,7 @@ msgid "Create a new layer"
 msgstr "Criar uma nova camada"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "Criar uma camada de grupo"
 
 msgid "Remove current layer"
 msgstr "Remover a camada atual"
@@ -1653,14 +1657,15 @@ msgid "Lock/unlock layer"
 msgstr "Trancar/destrancar camada"
 
 msgid "Frame: %s, Layer: %s"
-msgstr "Frame: %s, Camada: %s"
+msgstr "Fotograma: %s, Camada: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Ativar/desativar a associação automática de novas células ao criar fotogramas\n\n"
+"Células associadas partilham conteúdo entre vários fotogramas"
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "Expandir/colapsar grupo"
 
 msgid "Palette"
 msgstr "Palete"
@@ -1720,22 +1725,22 @@ msgid "Redo: Change Layer Order"
 msgstr "Refazer: Alterar ordem de Camadas"
 
 msgid "Undo: Add Frame"
-msgstr "Desfazer: Adicionar frame"
+msgstr "Desfazer: Adicionar fotograma"
 
 msgid "Redo: Add Frame"
-msgstr "Refazer: Adicionar frame"
+msgstr "Refazer: Adicionar fotograma"
 
 msgid "Undo: Remove Frame"
-msgstr "Desfazer: Remover frame"
+msgstr "Desfazer: Remover fotograma"
 
 msgid "Redo: Remove Frame"
-msgstr "Refazer: Remover frame"
+msgstr "Refazer: Remover fotograma"
 
 msgid "Undo: Change Frame Order"
-msgstr "Desfazer: Alterar ordem de frames"
+msgstr "Desfazer: Alterar ordem de fotogramas"
 
 msgid "Redo: Change Frame Order"
-msgstr "Refazer: Alterar ordem de frames"
+msgstr "Refazer: Alterar ordem de fotogramas"
 
 msgid "Undo: Delete Custom Brush"
 msgstr "Desfazer: Apagar pincel personalizado"
@@ -1744,22 +1749,22 @@ msgid "Redo: Delete Custom Brush"
 msgstr "Refazer: Apagar pincel personalizado"
 
 msgid "Undo: Modify Frame Tag"
-msgstr "Desfazer: Alterar etiqueta de frame"
+msgstr "Desfazer: Alterar etiqueta do fotograma"
 
 msgid "Redo: Modify Frame Tag"
-msgstr "Refazer: Alterar etiqueta de frame"
+msgstr "Refazer: Alterar etiqueta do fotograma"
 
 msgid "Undo: Delete Frame Tag"
-msgstr "Desfazer: Apagar etiqueta de frame"
+msgstr "Desfazer: Apagar etiqueta do fotograma"
 
 msgid "Redo: Delete Frame Tag"
-msgstr "Refazer: Apagar etiqueta de frame"
+msgstr "Refazer: Apagar etiqueta do fotograma"
 
 msgid "Undo: Change frame duration"
-msgstr "Desfazer: Alterar duração da frame"
+msgstr "Desfazer: Alterar duração do fotograma"
 
 msgid "Redo: Change frame duration"
-msgstr "Refazer: Alterar duração da frame"
+msgstr "Refazer: Alterar duração do fotograma"
 
 msgid "Move Guide"
 msgstr "Guias de Movimento"
@@ -1993,16 +1998,16 @@ msgid "minute(s)"
 msgstr "minuto(s)"
 
 msgid "Create new directory for each frame tag"
-msgstr "Cria uma nova diretoria para cada frame"
+msgstr "Cria um diretório para cada fotograma"
 
 msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Cria multiplos ficheiros mas cada um gravado numa diretoria diferente que corresponde à etiqueta de frame"
+msgstr "Cria múltiplos ficheiros, mas cada um gravado num diretório diferente que corresponde à etiqueta de fotograma"
 
 msgid "Close"
 msgstr "Fechar"
 
 msgid "Discard All"
-msgstr ""
+msgstr "Descartar tudo"
 
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
@@ -2031,13 +2036,13 @@ msgid "and"
 msgstr "e"
 
 msgid "Move the selected frame to the left."
-msgstr "Move a frame selecionada para a direita"
+msgstr "Move o fotograma selecionado para a direita."
 
 msgid "Move the selected frame to the right."
-msgstr "Move a frame selecionada para a direita"
+msgstr "Move o fotograma selecionado para a direita."
 
 msgid "Frame duration"
-msgstr "Duração de frame"
+msgstr "Duração do fotograma"
 
 msgid "Duration"
 msgstr "Duração"
@@ -2088,19 +2093,19 @@ msgid "Position:"
 msgstr "Posição:"
 
 msgid "Tools"
-msgstr ""
+msgstr "Ferramentas"
 
 msgid "Main Canvas"
-msgstr ""
+msgstr "Tela principal"
 
 msgid "Second Canvas"
-msgstr ""
+msgstr "Tela secundária"
 
 msgid "Animation Timeline"
 msgstr ""
 
 msgid "Canvas Preview"
-msgstr ""
+msgstr "Pré-visualização da tela"
 
 msgid "Color Pickers"
 msgstr ""
@@ -2109,8 +2114,8 @@ msgid "Global Tool Options"
 msgstr ""
 
 msgid "Left Tool Options"
-msgstr ""
+msgstr "Opções da Ferramenta Esquerda"
 
 msgid "Right Tool Options"
-msgstr ""
+msgstr "Opções da Ferramenta Direita"
 
