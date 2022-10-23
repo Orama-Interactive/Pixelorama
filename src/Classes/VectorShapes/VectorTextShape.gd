@@ -1,5 +1,5 @@
-class_name TextVectorShape
-extends BaseVectorShape
+class_name VectorTextShape
+extends VectorBaseShape
 
 var pos: Vector2
 var text: String setget _set_text

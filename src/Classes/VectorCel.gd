@@ -4,7 +4,7 @@ extends BaseCel
 # The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
 # The "vshapes" variable stores the cel's content, VectorShapes
 
-var vshapes := [] # Array[BaseVectorShape]
+var vshapes := [] # Array[VectorBaseShape]
 
 func _init(_vshapes := [], _opacity := 1.0, _image_texture: ImageTexture = null) -> void:
 	vshapes = _vshapes
@@ -26,7 +26,7 @@ func create_test_vshapes():  # TODO: This method should be removed once integrat
 	var test_font =  preload("res://assets/fonts/Roboto-Regular.tres").duplicate(true)
 	test_font.font_data.override_oversampling = 1
 
-	var text_vshape := TextVectorShape.new()
+	var text_vshape := VectorTextShape.new()
 	text_vshape.pos = Vector2(1, 5)
 	text_vshape.text = "Hello\nworld"
 	text_vshape.font = test_font
@@ -39,7 +39,7 @@ func create_test_vshapes():  # TODO: This method should be removed once integrat
 	vshapes.append(text_vshape)
 
 	test_font = test_font.duplicate(true)
-	text_vshape = TextVectorShape.new()
+	text_vshape = VectorTextShape.new()
 	text_vshape.pos = Vector2(5, 40)
 	text_vshape.text = "Another\nTest!"
 	text_vshape.font = test_font

@@ -32,10 +32,10 @@ func deserialize(dict: Dictionary) -> void:
 	for f in dict["vshapes"].size():
 		var cel: VectorCel = project.frames[f].cels[index]
 		for serialized_vshape in dict["vshapes"][f]:
-			var vshape: BaseVectorShape
+			var vshape: VectorBaseShape
 			match serialized_vshape["type"]:
 				Global.VectorShapeTypes.TEXT:
-					vshape = TextVectorShape.new()
+					vshape = VectorTextShape.new()
 			vshape.deserialize(serialized_vshape)
 			cel.vshapes.append(vshape)
 

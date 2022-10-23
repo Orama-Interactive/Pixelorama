@@ -1,4 +1,4 @@
-class_name BaseVectorShape
+class_name VectorBaseShape
 extends Reference
 
 # Draw the shape on this CanvasItem RID using the VisualServer
