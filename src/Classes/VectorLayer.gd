@@ -37,6 +37,7 @@ func deserialize(dict: Dictionary) -> void:
 				Global.VectorShapeTypes.TEXT:
 					vshape = TextVectorShape.new()
 			vshape.deserialize(serialized_vshape)
+			cel.vshapes.append(vshape)
 
 
 func set_name_to_default(number: int) -> void:

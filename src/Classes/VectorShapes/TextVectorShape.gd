@@ -60,8 +60,8 @@ func deserialize(dict: Dictionary) -> void:
 	pos = Vector2(dict["pos"][0], dict["pos"][1])
 	self.text = dict["text"]  # Call the setter too
 #	font =  # TODO: figure out font
-	font.size = dict["f_size"]
-	font.outline_size = dict["ol_size"]
+	font_size = dict["f_size"]
+	outline_size = dict["ol_size"]
 	extra_spacing = Vector2(dict["ex_sp"][0], dict["ex_sp"][1])
 	color = Color(dict["col"])
 	outline_color = Color(dict["ol_col"])

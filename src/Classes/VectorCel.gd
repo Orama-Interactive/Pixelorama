@@ -9,18 +9,30 @@ var vshapes := [] # Array[BaseVectorShape]
 func _init(_vshapes := [], _opacity := 1.0, _image_texture: ImageTexture = null) -> void:
 	vshapes = _vshapes
 
-	# Placeholder:
-	# NOTE: Using the same font as the UI will cause an id_map error after updating the font (so its duplicated)
+	create_test_vshapes()
+
+	if _image_texture:
+		image_texture = _image_texture
+	else:
+		# TODO: Can we prevent an extra update_texture when opening files (since it can't be deserialized until it has all cels)
+		# TODO: Is it possible to use the viewport texture directly?
+		image_texture = ImageTexture.new()
+		update_texture()
+	opacity = _opacity
+	process_test_tools()
+
+
+func create_test_vshapes():  # TODO: This method should be removed once integration with actual tools begins
 	var test_font =  preload("res://assets/fonts/Roboto-Regular.tres").duplicate(true)
 	test_font.font_data.override_oversampling = 1
 
 	var text_vshape := TextVectorShape.new()
-	text_vshape.pos = Vector2(1, 20)
+	text_vshape.pos = Vector2(1, 5)
 	text_vshape.text = "Hello\nworld"
 	text_vshape.font = test_font
 	text_vshape.font_size = 12
 	text_vshape.outline_size = 1
-	text_vshape.extra_spacing = Vector2(0, 0)
+	text_vshape.extra_spacing = Vector2(0, 3)
 	text_vshape.color = Color.red
 	text_vshape.outline_color = Color.white
 	text_vshape.antialiased = false
@@ -28,7 +40,7 @@ func _init(_vshapes := [], _opacity := 1.0, _image_texture: ImageTexture = null)
 
 	test_font = test_font.duplicate(true)
 	text_vshape = TextVectorShape.new()
-	text_vshape.pos = Vector2(1, 60)
+	text_vshape.pos = Vector2(5, 40)
 	text_vshape.text = "Another\nTest!"
 	text_vshape.font = test_font
 	text_vshape.font_size = 8
@@ -39,14 +51,51 @@ func _init(_vshapes := [], _opacity := 1.0, _image_texture: ImageTexture = null)
 	text_vshape.antialiased = true
 	vshapes.append(text_vshape)
 
-	if _image_texture:
-		image_texture = _image_texture
-	else:
-		# TODO: Can we prevent an extra update_texture when opening files (since it can't be deserialized until it has all cels)
-		# TODO: Is it possible to use the viewport texture directly?
-		image_texture = ImageTexture.new()
-		update_texture()
-	opacity = _opacity
+
+func process_test_tools():  # TODO: This method should be removed once integration with actual tools begins
+	# Selection Test Loop:
+	var prev_mouse_pos := Vector2.ZERO
+	while(true):
+		yield(Global.get_tree(), "idle_frame")
+
+		if not Global.current_project.frames[Global.current_project.current_frame].cels.has(self):
+			continue
+
+		var tmp_transform = Global.canvas.get_canvas_transform().affine_inverse()
+		var tmp_position = Global.main_viewport.get_local_mouse_position()
+		var mouse_pos = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
+
+		var selected_index := -1
+		for s in vshapes.size():
+			if vshapes[s].has_point(mouse_pos):
+				selected_index = s
+		if selected_index < 0:
+			print("Can't select")
+			continue
+		print("Selected shape ", selected_index)
+
+		if Input.is_key_pressed(KEY_M):
+			vshapes[selected_index].pos += mouse_pos - prev_mouse_pos
+			vshapes[selected_index].pos = vshapes[selected_index].pos.snapped(Vector2.ONE)
+			update_texture()
+		if Input.is_action_just_released("copy"):
+			var copy = vshapes[selected_index].get_script().new()
+			copy.deserialize(vshapes[selected_index].serialize())
+			copy.font = vshapes[selected_index].font.duplicate(true)
+			vshapes.append(copy)
+			update_texture()
+		if Input.is_action_just_released("delete"):
+			vshapes.remove(selected_index)
+			update_texture()
+		if Input.is_key_pressed(KEY_R):
+			vshapes[selected_index].text = str(int(rand_range(100000, 9999999)))
+			vshapes[selected_index].color.h = rand_range(0, 1)
+			vshapes[selected_index].outline_color.h = rand_range(0, 1)
+			vshapes[selected_index].font_size = rand_range(8, 16)
+			vshapes[selected_index].outline_size = rand_range(0, 4)
+			vshapes[selected_index].antialiased = bool(round(rand_range(0, 1)))
+			update_texture()
+		prev_mouse_pos = mouse_pos
 
 
 func get_content():
@@ -80,7 +129,16 @@ func get_image() -> Image:
 
 
 func update_texture() -> void:
+	if vshapes.empty():
+		var image = Image.new()
+		# TODO: Color picker doesn't work when its a tiny image like this. Maybe it can can based on percentage? Or just have to use large full size
+		image.create(1, 1, false, Image.FORMAT_RGBA8)
+#		image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
+		image_texture.create_from_image(image, 0)
+		return
 	var start_msec := Time.get_ticks_msec()  # For benchmark
+
+	# TODO: Check if simply creating/setting up a viewport/canvas is slow. It may be worth keeping one around in Global or Project to share.
 
 	var vp := VisualServer.viewport_create()
 	var canvas := VisualServer.canvas_create()
