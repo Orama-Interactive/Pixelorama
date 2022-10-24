@@ -49,18 +49,19 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 204.0
 margin_right = 278.0
-margin_bottom = 234.0
+margin_bottom = 282.0
 
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
-margin_top = 238.0
+margin_top = 286.0
 margin_right = 278.0
-margin_bottom = 262.0
+margin_bottom = 310.0
 columns = 2
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
 margin_right = 160.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 pressed = true
 text = "Only affect selection"
 
@@ -69,6 +70,7 @@ margin_left = 164.0
 margin_right = 278.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "Selected cels"
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0

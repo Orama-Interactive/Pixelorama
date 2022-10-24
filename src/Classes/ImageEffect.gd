@@ -1,5 +1,5 @@
 class_name ImageEffect
-extends AcceptDialog
+extends ConfirmationDialog
 # Parent class for all image effects
 # Methods that have "pass" are meant to be replaced by the inherited Scripts
 
@@ -18,6 +18,8 @@ var confirmed := false
 
 func _ready() -> void:
 	set_nodes()
+	get_ok().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	get_cancel().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	current_frame.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)

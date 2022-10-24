@@ -31,6 +31,9 @@ onready var timer: Timer = $Timer
 
 func _ready() -> void:
 	_reset_display()
+	if not Engine.editor_hint:  # Pixelorama specific code
+		$ValueUp.modulate = Global.modulate_icon_color
+		$ValueDown.modulate = Global.modulate_icon_color
 
 
 func _notification(what: int) -> void:
@@ -168,8 +171,6 @@ func _reset_display() -> void:
 	else:
 		tint_progress = Color.transparent
 	line_edit.text = str(tr(prefix), " ", value, " ", tr(suffix)).strip_edges()
-	$ValueUp.modulate = Global.modulate_icon_color
-	$ValueDown.modulate = Global.modulate_icon_color
 
 
 func _on_Value_button_down(direction: int) -> void:

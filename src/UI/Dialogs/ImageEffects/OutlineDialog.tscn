@@ -56,15 +56,17 @@ __meta__ = {
 
 [node name="ThickLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 margin_top = 5.0
-margin_right = 148.0
+margin_right = 262.0
 margin_bottom = 19.0
+size_flags_horizontal = 3
 text = "Thickness:"
 
 [node name="ThickValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-margin_left = 152.0
-margin_right = 312.0
+margin_left = 266.0
+margin_right = 527.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 min_value = 1.0
 max_value = 16384.0
 value = 1.0
@@ -72,55 +74,62 @@ suffix = "px"
 
 [node name="OutlineColorLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 margin_top = 31.0
-margin_right = 148.0
+margin_right = 262.0
 margin_bottom = 45.0
+size_flags_horizontal = 3
 text = "Fill with color:"
 
 [node name="OutlineColor" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 152.0
+margin_left = 266.0
 margin_top = 28.0
-margin_right = 312.0
+margin_right = 527.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 64, 20 )
+size_flags_horizontal = 3
 color = Color( 1, 0, 0, 1 )
 
 [node name="PatternLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
 margin_top = 55.0
-margin_right = 148.0
+margin_right = 262.0
 margin_bottom = 69.0
+size_flags_horizontal = 3
 text = "Pattern:"
 
 [node name="PatternOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 152.0
+margin_left = 266.0
 margin_top = 52.0
-margin_right = 312.0
+margin_right = 527.0
 margin_bottom = 72.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "Diamond"
 items = [ "Diamond", null, false, 0, null, "Circle", null, false, 1, null, "Square", null, false, 2, null ]
 selected = 0
 
 [node name="InsideImageCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
 margin_top = 76.0
-margin_right = 148.0
+margin_right = 262.0
 margin_bottom = 100.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "Place inside image"
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
-margin_left = 152.0
+margin_left = 266.0
 margin_top = 76.0
-margin_right = 312.0
+margin_right = 527.0
 margin_bottom = 100.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 pressed = true
 text = "Only affect selection"
 
 [node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
 margin_top = 104.0
-margin_right = 148.0
+margin_right = 262.0
 margin_bottom = 124.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "Selected cels"
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0

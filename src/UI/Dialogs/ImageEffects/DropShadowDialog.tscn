@@ -52,6 +52,7 @@ __meta__ = {
 margin_top = 5.0
 margin_right = 160.0
 margin_bottom = 19.0
+size_flags_horizontal = 3
 text = "Offset X:"
 
 [node name="XSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
@@ -59,6 +60,7 @@ margin_left = 164.0
 margin_right = 278.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 max_value = 5.0
 value = 5.0
 allow_greater = true
@@ -69,6 +71,7 @@ suffix = "px"
 margin_top = 33.0
 margin_right = 160.0
 margin_bottom = 47.0
+size_flags_horizontal = 3
 text = "Offset Y:"
 
 [node name="YSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
@@ -77,6 +80,7 @@ margin_top = 28.0
 margin_right = 278.0
 margin_bottom = 52.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 max_value = 5.0
 value = 5.0
 allow_greater = true
@@ -87,6 +91,7 @@ suffix = "px"
 margin_top = 59.0
 margin_right = 160.0
 margin_bottom = 73.0
+size_flags_horizontal = 3
 text = "Shadow color:"
 
 [node name="ShadowColor" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer"]
@@ -95,6 +100,7 @@ margin_top = 56.0
 margin_right = 278.0
 margin_bottom = 76.0
 rect_min_size = Vector2( 64, 20 )
+size_flags_horizontal = 3
 color = Color( 0.0823529, 0.0823529, 0.0823529, 0.627451 )
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
@@ -102,6 +108,7 @@ margin_top = 80.0
 margin_right = 160.0
 margin_bottom = 104.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 pressed = true
 text = "Only affect selection"
 
@@ -111,6 +118,7 @@ margin_top = 80.0
 margin_right = 278.0
 margin_bottom = 104.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 text = "Selected cels"
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
