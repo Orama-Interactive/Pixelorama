@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-10-19 11:23\n"
+"PO-Revision-Date: 2022-10-26 16:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1415,7 +1415,7 @@ msgstr "Preencher com:"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Selected color"
-msgstr ""
+msgstr "Cor selecionada"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
