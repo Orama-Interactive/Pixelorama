@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/ReferencesPanel.gd" type="Script" id=1]
+
+[node name="References" type="VBoxContainer"]
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 383.0
+margin_bottom = 14.0
+text = "When opening an image, it may be imported as a reference."
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+margin_top = 18.0
+margin_right = 383.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="List" type="VBoxContainer" parent="Scroll"]
+margin_right = 383.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="."]
+margin_top = 22.0
+margin_right = 383.0
+margin_bottom = 42.0
+text = "temp add"
+
+[node name="TextEdit" type="LineEdit" parent="."]
+margin_top = 46.0
+margin_right = 383.0
+margin_bottom = 70.0
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

@@ -23,6 +23,7 @@ var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
 var animation_tags := [] setget _animation_tags_changed  # Array of AnimationTags
 var guides := []  # Array of Guides
 var brushes := []  # Array of Images
+var reference_images := []  # Array of ReferenceImages
 var fps := 6.0
 
 var x_symmetry_point
@@ -88,6 +89,8 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 
 func remove() -> void:
 	undo_redo.free()
+	for ri in reference_images:
+		ri.queue_free()
 	for guide in guides:
 		guide.queue_free()
 	# Prevents memory leak (due to the layers' project reference stopping ref counting from freeing)
@@ -179,6 +182,7 @@ func change_project() -> void:
 	Global.animation_timeline.fps_spinbox.value = fps
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
+	Global.references_panel.project_changed()
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 
 	Global.window_title = "%s - Pixelorama %s" % [name, Global.current_version]
@@ -292,6 +296,10 @@ func serialize() -> Dictionary:
 	for brush in brushes:
 		brush_data.append({"size_x": brush.get_size().x, "size_y": brush.get_size().y})
 
+	var reference_image_data := []
+	for reference_image in reference_images:
+		reference_image_data.append(reference_image.serialize())
+
 	var tile_mask_data := {
 		"size_x": tiles.tile_mask.get_size().x, "size_y": tiles.tile_mask.get_size().y
 	}
@@ -316,6 +324,7 @@ func serialize() -> Dictionary:
 		"symmetry_points": [x_symmetry_point, y_symmetry_point],
 		"frames": frame_data,
 		"brushes": brush_data,
+		"reference_images": reference_image_data,
 		"export_directory_path": directory_path,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
@@ -397,6 +406,12 @@ func deserialize(dict: Dictionary) -> void:
 			guide.has_focus = false
 			guide.project = self
 			Global.canvas.add_child(guide)
+	if dict.has("reference_images"):
+		for g in dict.reference_images:
+			var ri := ReferenceImage.new()
+			ri.project = self
+			ri.deserialize(g)
+			Global.canvas.add_child(ri)
 	if dict.has("symmetry_points"):
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]
