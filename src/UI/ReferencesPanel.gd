@@ -18,12 +18,3 @@ func project_changed():
 		var l = preload("res://src/UI/ReferenceImageButton.tscn").instance()
 		l.element = ref
 		list.add_child(l)
-
-func _on_Button_pressed():
-	var ri := ReferenceImage.new()
-	ri.project = Global.current_project
-	ri.deserialize({
-		"image_path": $TextEdit.text
-	})
-	Global.canvas.add_child(ri)
-	Global.current_project.change_project()

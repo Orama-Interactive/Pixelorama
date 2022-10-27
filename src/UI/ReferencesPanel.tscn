@@ -21,16 +21,3 @@ size_flags_vertical = 3
 margin_right = 383.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="Button" type="Button" parent="."]
-margin_top = 22.0
-margin_right = 383.0
-margin_bottom = 42.0
-text = "temp add"
-
-[node name="TextEdit" type="LineEdit" parent="."]
-margin_top = 46.0
-margin_right = 383.0
-margin_bottom = 70.0
-
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
