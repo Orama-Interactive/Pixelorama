@@ -5,7 +5,7 @@ enum Orientation { ROWS = 0, COLUMNS = 1 }
 enum AnimationType { MULTIPLE_FILES = 0, ANIMATED = 1 }
 enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
 # See file_format_string, file_format_description, and ExportDialog.gd
-enum FileFormat { PNG = 0, GIF = 1 }
+enum FileFormat { PNG = 0, GIF = 1, APNG = 2 }
 
 var current_tab: int = ExportTab.FRAME
 # Frame options
@@ -197,7 +197,10 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 
 	if current_tab == ExportTab.ANIMATION and animation_type == AnimationType.ANIMATED:
 		var exporter: BaseAnimationExporter
-		exporter = GIFAnimationExporter.new()
+		if file_format == FileFormat.APNG:
+			exporter = APNGAnimationExporter.new()
+		else:
+			exporter = GIFAnimationExporter.new()
 		var details = {"exporter": exporter, "export_dialog": export_dialog, "export_paths": export_paths}
 		if OS.get_name() == "HTML5":
 			export_animated(details)
@@ -315,6 +318,8 @@ func file_format_string(format_enum: int) -> String:
 			return ".png"
 		FileFormat.GIF:
 			return ".gif"
+		FileFormat.APNG:
+			return ".apng"
 		_:
 			return ""
 
@@ -324,6 +329,8 @@ func file_format_description(format_enum: int) -> String:
 			return "PNG Image"
 		FileFormat.GIF:
 			return "GIF Image"
+		FileFormat.APNG:
+			return "APNG Image"
 		_:
 			return ""
 

@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "BaseAnimationExporter",
+"class": "APNGAnimationExporter",
+"language": "GDScript",
+"path": "res://src/Classes/AnimationExporters/APNGAnimationExporter.gd"
+}, {
 "base": "Reference",
 "class": "AnimationTag",
 "language": "GDScript",
@@ -170,6 +175,7 @@ _global_script_classes=[ {
 "path": "res://src/UI/Nodes/ValueSlider.gd"
 } ]
 _global_script_class_icons={
+"APNGAnimationExporter": "",
 "AnimationTag": "",
 "BaseAnimationExporter": "",
 "BaseCel": "",

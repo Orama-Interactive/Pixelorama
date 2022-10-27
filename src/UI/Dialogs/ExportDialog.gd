@@ -201,7 +201,8 @@ func set_file_format_selector() -> void:
 					multiple_animations_directories.visible = true
 				Export.AnimationType.ANIMATED:
 					_set_file_format_selector_suitable_file_formats([
-						Export.FileFormat.GIF
+						Export.FileFormat.GIF,
+						Export.FileFormat.APNG
 					])
 					animation_options_animation_options.show()
 
