@@ -4,10 +4,12 @@ extends Container
 var element: ReferenceImage
 var _ignore_spinbox_changes = false
 
+
 func _ready():
 	$Interior/Path.text = element.image_path
 	element.connect("properties_changed", self, "_update_properties")
 	_update_properties()
+
 
 func _update_properties():
 	# This is because otherwise a little dance will occur.
@@ -19,9 +21,11 @@ func _update_properties():
 	$Interior/Options2/Opacity.value = element.modulate.a * 100
 	_ignore_spinbox_changes = false
 
+
 func _on_Reset_pressed():
 	element.position_reset()
 	element.change_properties()
+
 
 func _on_Remove_pressed():
 	var index = Global.current_project.reference_images.find(element)
@@ -31,6 +35,7 @@ func _on_Remove_pressed():
 		Global.current_project.reference_images.remove(index)
 		Global.current_project.change_project()
 
+
 func _on_Scale_value_changed(value):
 	if _ignore_spinbox_changes:
 		return
@@ -38,17 +43,20 @@ func _on_Scale_value_changed(value):
 	element.scale.y = value / 100
 	element.change_properties()
 
+
 func _on_X_value_changed(value):
 	if _ignore_spinbox_changes:
 		return
 	element.position.x = value
 	element.change_properties()
 
+
 func _on_Y_value_changed(value):
 	if _ignore_spinbox_changes:
 		return
 	element.position.y = value
 	element.change_properties()
+
 
 func _on_Opacity_value_changed(value):
 	if _ignore_spinbox_changes:

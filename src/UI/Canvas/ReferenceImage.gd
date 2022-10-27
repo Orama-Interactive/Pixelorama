@@ -2,25 +2,32 @@ class_name ReferenceImage
 extends Sprite
 # A class describing a reference image
 
+signal properties_changed
+
 var project = Global.current_project
 
 var image_path: String = ""
 
-signal properties_changed()
 
 func _ready() -> void:
 	project.reference_images.append(self)
 
+
 func change_properties():
 	emit_signal("properties_changed")
+
 
 # Resets the position and scale of the reference image.
 func position_reset():
 	position = project.size / 2.0
 	if texture != null:
-		scale = Vector2.ONE * min(project.size.x / texture.get_width(), project.size.y / texture.get_height())
+		scale = (
+			Vector2.ONE
+			* min(project.size.x / texture.get_width(), project.size.y / texture.get_height())
+		)
 	else:
 		scale = Vector2.ONE
+
 
 # Serialize details of the reference image.
 func serialize():
@@ -35,6 +42,7 @@ func serialize():
 		"modulate_a": modulate.a,
 		"image_path": image_path
 	}
+
 
 # Load details of the reference image from a dictionary.
 # Be aware that new ReferenceImages are created via deserialization.

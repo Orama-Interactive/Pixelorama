@@ -4,6 +4,7 @@ extends VBoxContainer
 
 onready var list = $"Scroll/List"
 
+
 func project_changed():
 	for c in list.get_children():
 		c.queue_free()

@@ -595,6 +595,7 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
 
+
 func import_reference_image_from_path(path: String):
 	var project: Project = Global.current_project
 	var ri := ReferenceImage.new()
@@ -602,6 +603,7 @@ func import_reference_image_from_path(path: String):
 	ri.deserialize({"image_path": path})
 	Global.canvas.add_child(ri)
 	project.change_project()
+
 
 func set_new_imported_tab(project: Project, path: String) -> void:
 	var prev_project_empty: bool = Global.current_project.is_empty()
