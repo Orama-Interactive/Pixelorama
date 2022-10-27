@@ -217,7 +217,7 @@ func _set_file_format_selector_suitable_file_formats(formats: Array):
 		file_file_format.add_item(label, i)
 	if needs_update:
 		Export.file_format = formats[0]
-	file_file_format.selected = Export.file_format
+	file_file_format.selected = file_file_format.get_item_index(Export.file_format)
 
 func create_frame_tag_list() -> void:
 	# Clear existing tag list from entry if it exists
@@ -384,7 +384,8 @@ func _on_FileDialog_dir_selected(dir: String) -> void:
 	Export.directory_path = dir
 
 
-func _on_FileFormat_item_selected(id: int) -> void:
+func _on_FileFormat_item_selected(idx: int) -> void:
+	var id = file_file_format.get_item_id(idx)
 	Global.current_project.file_format = id
 	Export.file_format = id
 
