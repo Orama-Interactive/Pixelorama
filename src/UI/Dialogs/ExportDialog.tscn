@@ -342,10 +342,6 @@ margin_right = 516.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 130, 0 )
 mouse_default_cursor_shape = 8
-disabled = true
-text = ".png; PNG Image"
-items = [ ".png; PNG Image", null, false, 0, null, ".gif; GIF Image", null, false, 1, null ]
-selected = 0
 
 [node name="Popups" type="Node" parent="."]
 

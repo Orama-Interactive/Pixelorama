@@ -4,7 +4,7 @@ enum ExportTab { FRAME = 0, SPRITESHEET = 1, ANIMATION = 2 }
 enum Orientation { ROWS = 0, COLUMNS = 1 }
 enum AnimationType { MULTIPLE_FILES = 0, ANIMATED = 1 }
 enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
-# See file_format_string and ExportDialog.tscn
+# See file_format_string, file_format_description, and ExportDialog.gd
 enum FileFormat { PNG = 0, GIF = 1 }
 
 var current_tab: int = ExportTab.FRAME
@@ -311,10 +311,19 @@ func scale_processed_images() -> void:
 
 func file_format_string(format_enum: int) -> String:
 	match format_enum:
-		FileFormat.PNG:  # PNG
+		FileFormat.PNG:
 			return ".png"
-		FileFormat.GIF:  # GIF
+		FileFormat.GIF:
 			return ".gif"
+		_:
+			return ""
+
+func file_format_description(format_enum: int) -> String:
+	match format_enum:
+		FileFormat.PNG:
+			return "PNG Image"
+		FileFormat.GIF:
+			return "GIF Image"
 		_:
 			return ""
 
