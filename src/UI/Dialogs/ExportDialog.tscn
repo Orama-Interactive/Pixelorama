@@ -361,8 +361,7 @@ window_title = "Open a Directory"
 resizable = true
 mode = 2
 access = 2
-current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-play_improvements"
-current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-play_improvements/"
+show_hidden_files = true
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
 margin_left = 8.0
