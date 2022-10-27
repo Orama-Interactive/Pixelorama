@@ -9,11 +9,11 @@ const MedianCutQuantization = preload("res://addons/gdgifexporter/quantization/m
 func _init():
 	mime_type = "image/gif"
 
-func export_animation(images: Array, durations: Array, _fps_hint: int, progress_report_obj: Object, progress_report_method, progress_report_args) -> PoolByteArray:
+func export_animation(images: Array, durations: Array, _fps_hint: float, progress_report_obj: Object, progress_report_method, progress_report_args) -> PoolByteArray:
 	var exporter = GIFExporter.new(
 		images[0].get_width(), images[0].get_height()
 	)
 	for i in range(images.size()):
-		exporter.add_frame(images[i], durations[i] * (1 / Global.current_project.fps), MedianCutQuantization)
+		exporter.add_frame(images[i], durations[i], MedianCutQuantization)
 		progress_report_obj.callv(progress_report_method, progress_report_args)
 	return exporter.export_file_data()
