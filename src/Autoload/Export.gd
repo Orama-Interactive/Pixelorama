@@ -201,15 +201,15 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 			exporter = APNGAnimationExporter.new()
 		else:
 			exporter = GIFAnimationExporter.new()
-		var details = {"exporter": exporter, "export_dialog": export_dialog, "export_paths": export_paths}
+		var details = {
+			"exporter": exporter, "export_dialog": export_dialog, "export_paths": export_paths
+		}
 		if OS.get_name() == "HTML5":
 			export_animated(details)
 		else:
 			if gif_export_thread.is_active():
 				gif_export_thread.wait_to_finish()
-			gif_export_thread.start(
-				self, "export_animated", details
-			)
+			gif_export_thread.start(self, "export_animated", details)
 	else:
 		for i in range(processed_images.size()):
 			if OS.get_name() == "HTML5":
@@ -281,13 +281,16 @@ func export_animated(args: Dictionary) -> void:
 
 	# Export and save gif
 	var file_data = exporter.export_animation(
-		sequence, durations, Global.current_project.fps, self, "increase_export_progress", [export_dialog]
+		sequence,
+		durations,
+		Global.current_project.fps,
+		self,
+		"increase_export_progress",
+		[export_dialog]
 	)
 
 	if OS.get_name() == "HTML5":
-		JavaScript.download_buffer(
-			file_data, args["export_paths"][0], exporter.mime_type
-		)
+		JavaScript.download_buffer(file_data, args["export_paths"][0], exporter.mime_type)
 	else:
 		var file: File = File.new()
 		file.open(args["export_paths"][0], File.WRITE)
@@ -295,6 +298,7 @@ func export_animated(args: Dictionary) -> void:
 		file.close()
 	export_dialog.toggle_export_progress_popup(false)
 	Global.notification_label("File(s) exported")
+
 
 func increase_export_progress(export_dialog: Node) -> void:
 	export_progress += export_progress_fraction
@@ -322,6 +326,7 @@ func file_format_string(format_enum: int) -> String:
 			return ".apng"
 		_:
 			return ""
+
 
 func file_format_description(format_enum: int) -> String:
 	match format_enum:

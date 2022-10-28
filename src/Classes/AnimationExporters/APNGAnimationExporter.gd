@@ -4,6 +4,7 @@ extends BaseAnimationExporter
 
 var crc32_table := []
 
+
 func _init():
 	mime_type = "image/apng"
 	# Calculate CRC32 table.
@@ -17,6 +18,7 @@ func _init():
 				crc >>= 1
 		crc32_table.push_back(crc & 0xFFFFFFFF)
 
+
 # Performs the update step of CRC32 over some bytes.
 # Note that this is not the whole story.
 # The CRC must be initialized to 0xFFFFFFFF, then updated, then bitwise-inverted.
@@ -29,7 +31,15 @@ func crc32_data(crc: int, data: PoolByteArray):
 		i += 1
 	return crc
 
-func export_animation(images: Array, durations: Array, fps_hint: float, progress_report_obj: Object, progress_report_method, progress_report_args) -> PoolByteArray:
+
+func export_animation(
+	images: Array,
+	durations: Array,
+	fps_hint: float,
+	progress_report_obj: Object,
+	progress_report_method,
+	progress_report_args
+) -> PoolByteArray:
 	var result = open_chunk()
 	# Magic number
 	result.put_32(0x89504E47)
@@ -56,13 +66,16 @@ func export_animation(images: Array, durations: Array, fps_hint: float, progress
 		chunk = open_chunk()
 		chunk.put_32(sequence)
 		sequence += 1
-		chunk.put_32(image.get_width()) # image w/h
+		# image w/h
+		chunk.put_32(image.get_width())
 		chunk.put_32(image.get_height())
-		chunk.put_32(0) # offset x/y
+		# offset x/y
+		chunk.put_32(0)
 		chunk.put_32(0)
 		write_delay(chunk, durations[i], fps_hint)
-		chunk.put_8(0) # dispose
-		chunk.put_8(0) # blend
+		# dispose / blend
+		chunk.put_8(0)
+		chunk.put_8(0)
 		write_chunk(result, "fcTL", chunk.data_array)
 		# IDAT/fdAT
 		chunk = open_chunk()
@@ -83,6 +96,7 @@ func export_animation(images: Array, durations: Array, fps_hint: float, progress
 	# Final chunk.
 	write_chunk(result, "IEND", PoolByteArray())
 	return result.data_array
+
 
 func write_delay(sp: StreamPeer, duration: float, fps_hint: float):
 	# Obvious bounds checking
@@ -117,6 +131,7 @@ func write_delay(sp: StreamPeer, duration: float, fps_hint: float):
 	sp.put_16(int(round(num)))
 	sp.put_16(int(round(den)))
 
+
 func write_padded_lines(sp: StreamPeer, img: Image):
 	if img.get_format() != Image.FORMAT_RGBA8:
 		push_warning("Image format in APNGAnimationExporter should only ever be RGBA8.")
@@ -134,10 +149,12 @@ func write_padded_lines(sp: StreamPeer, img: Image):
 		y += 1
 		base = nl
 
+
 func open_chunk() -> StreamPeerBuffer:
 	var result = StreamPeerBuffer.new()
 	result.big_endian = true
 	return result
+
 
 func write_chunk(sp: StreamPeer, type: String, data: PoolByteArray):
 	sp.put_32(len(data))

@@ -178,33 +178,28 @@ func remove_previews() -> void:
 	for child in previews.get_children():
 		child.free()
 
+
 func set_file_format_selector() -> void:
 	match Export.current_tab:
 		Export.ExportTab.FRAME:
-			_set_file_format_selector_suitable_file_formats([
-				Export.FileFormat.PNG
-			])
+			_set_file_format_selector_suitable_file_formats([Export.FileFormat.PNG])
 		Export.ExportTab.SPRITESHEET:
-			_set_file_format_selector_suitable_file_formats([
-				Export.FileFormat.PNG
-			])
+			_set_file_format_selector_suitable_file_formats([Export.FileFormat.PNG])
 		Export.ExportTab.ANIMATION:
 			multiple_animations_directories.visible = false
 			match Export.animation_type:
 				Export.AnimationType.MULTIPLE_FILES:
-					_set_file_format_selector_suitable_file_formats([
-						Export.FileFormat.PNG
-					])
+					_set_file_format_selector_suitable_file_formats([Export.FileFormat.PNG])
 					frame_timer.stop()
 					animation_options_animation_options.hide()
 					multiple_animations_directories.pressed = Export.new_dir_for_each_frame_tag
 					multiple_animations_directories.visible = true
 				Export.AnimationType.ANIMATED:
-					_set_file_format_selector_suitable_file_formats([
-						Export.FileFormat.GIF,
-						Export.FileFormat.APNG
-					])
+					_set_file_format_selector_suitable_file_formats(
+						[Export.FileFormat.GIF, Export.FileFormat.APNG]
+					)
 					animation_options_animation_options.show()
+
 
 # Updates the suitable list of file formats. First is preferred.
 # Note that if the current format is in the list, it stays for consistency.
@@ -214,11 +209,12 @@ func _set_file_format_selector_suitable_file_formats(formats: Array):
 	for i in formats:
 		if Export.file_format == i:
 			needs_update = false
-		var label = Export.file_format_string(i) +  "; " + Export.file_format_description(i)
+		var label = Export.file_format_string(i) + "; " + Export.file_format_description(i)
 		file_file_format.add_item(label, i)
 	if needs_update:
 		Export.file_format = formats[0]
 	file_file_format.selected = file_file_format.get_item_index(Export.file_format)
+
 
 func create_frame_tag_list() -> void:
 	# Clear existing tag list from entry if it exists
@@ -389,6 +385,7 @@ func _on_FileFormat_item_selected(idx: int) -> void:
 	var id = file_file_format.get_item_id(idx)
 	Global.current_project.file_format = id
 	Export.file_format = id
+
 
 func _on_FileExistsAlert_confirmed() -> void:
 	# Overwrite existing file
