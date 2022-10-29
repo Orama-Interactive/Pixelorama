@@ -10,6 +10,7 @@ const MedianCutQuantization = preload("res://addons/gdgifexporter/quantization/m
 func _init():
 	mime_type = "image/gif"
 
+
 func export_animation(
 	images: Array,
 	durations: Array,
