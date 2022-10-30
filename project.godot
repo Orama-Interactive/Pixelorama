@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "BaseAnimationExporter",
+"class": "APNGAnimationExporter",
+"language": "GDScript",
+"path": "res://src/Classes/AnimationExporters/APNGAnimationExporter.gd"
+}, {
 "base": "Reference",
 "class": "AnimationTag",
 "language": "GDScript",
 "path": "res://src/Classes/AnimationTag.gd"
+}, {
+"base": "Reference",
+"class": "BaseAnimationExporter",
+"language": "GDScript",
+"path": "res://src/Classes/AnimationExporters/BaseAnimationExporter.gd"
 }, {
 "base": "Reference",
 "class": "BaseCel",
@@ -48,6 +58,11 @@ _global_script_classes=[ {
 "class": "Frame",
 "language": "GDScript",
 "path": "res://src/Classes/Frame.gd"
+}, {
+"base": "BaseAnimationExporter",
+"class": "GIFAnimationExporter",
+"language": "GDScript",
+"path": "res://src/Classes/AnimationExporters/GIFAnimationExporter.gd"
 }, {
 "base": "Control",
 "class": "GradientEditNode",
@@ -160,7 +175,9 @@ _global_script_classes=[ {
 "path": "res://src/UI/Nodes/ValueSlider.gd"
 } ]
 _global_script_class_icons={
+"APNGAnimationExporter": "",
 "AnimationTag": "",
+"BaseAnimationExporter": "",
 "BaseCel": "",
 "BaseLayer": "",
 "BaseTool": "",
@@ -168,6 +185,7 @@ _global_script_class_icons={
 "Canvas": "",
 "Drawer": "",
 "Frame": "",
+"GIFAnimationExporter": "",
 "GradientEditNode": "",
 "GroupCel": "",
 "GroupLayer": "",

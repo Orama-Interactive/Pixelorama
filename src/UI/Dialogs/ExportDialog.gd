@@ -61,10 +61,9 @@ func show_tab() -> void:
 	spritesheet_options.hide()
 	animation_options.hide()
 
+	set_file_format_selector()
 	match Export.current_tab:
 		Export.ExportTab.FRAME:
-			Export.file_format = Export.FileFormat.PNG
-			file_file_format.selected = Export.FileFormat.PNG
 			frame_timer.stop()
 			if not Export.was_exported:
 				Export.frame_number = Global.current_project.current_frame + 1
@@ -76,12 +75,10 @@ func show_tab() -> void:
 			frame_options.show()
 		Export.ExportTab.SPRITESHEET:
 			create_frame_tag_list()
-			Export.file_format = Export.FileFormat.PNG
 			if not Export.was_exported:
 				Export.orientation = Export.Orientation.ROWS
 				Export.lines_count = int(ceil(sqrt(Export.number_of_frames)))
 			Export.process_spritesheet()
-			file_file_format.selected = Export.FileFormat.PNG
 			spritesheet_frames.select(Export.frame_current_tag)
 			frame_timer.stop()
 			spritesheet_orientation.selected = Export.orientation
@@ -90,7 +87,6 @@ func show_tab() -> void:
 			spritesheet_lines_count_label.text = "Columns:"
 			spritesheet_options.show()
 		Export.ExportTab.ANIMATION:
-			set_file_format_selector()
 			Export.process_animation()
 			animation_options_animation_type.selected = Export.animation_type
 			animation_options_direction.selected = Export.direction
@@ -184,19 +180,40 @@ func remove_previews() -> void:
 
 
 func set_file_format_selector() -> void:
-	multiple_animations_directories.visible = false
-	match Export.animation_type:
-		Export.AnimationType.MULTIPLE_FILES:
-			Export.file_format = Export.FileFormat.PNG
-			file_file_format.selected = Export.FileFormat.PNG
-			frame_timer.stop()
-			animation_options_animation_options.hide()
-			multiple_animations_directories.pressed = Export.new_dir_for_each_frame_tag
-			multiple_animations_directories.visible = true
-		Export.AnimationType.ANIMATED:
-			Export.file_format = Export.FileFormat.GIF
-			file_file_format.selected = Export.FileFormat.GIF
-			animation_options_animation_options.show()
+	match Export.current_tab:
+		Export.ExportTab.FRAME:
+			_set_file_format_selector_suitable_file_formats([Export.FileFormat.PNG])
+		Export.ExportTab.SPRITESHEET:
+			_set_file_format_selector_suitable_file_formats([Export.FileFormat.PNG])
+		Export.ExportTab.ANIMATION:
+			multiple_animations_directories.visible = false
+			match Export.animation_type:
+				Export.AnimationType.MULTIPLE_FILES:
+					_set_file_format_selector_suitable_file_formats([Export.FileFormat.PNG])
+					frame_timer.stop()
+					animation_options_animation_options.hide()
+					multiple_animations_directories.pressed = Export.new_dir_for_each_frame_tag
+					multiple_animations_directories.visible = true
+				Export.AnimationType.ANIMATED:
+					_set_file_format_selector_suitable_file_formats(
+						[Export.FileFormat.GIF, Export.FileFormat.APNG]
+					)
+					animation_options_animation_options.show()
+
+
+# Updates the suitable list of file formats. First is preferred.
+# Note that if the current format is in the list, it stays for consistency.
+func _set_file_format_selector_suitable_file_formats(formats: Array):
+	file_file_format.clear()
+	var needs_update = true
+	for i in formats:
+		if Export.file_format == i:
+			needs_update = false
+		var label = Export.file_format_string(i) + "; " + Export.file_format_description(i)
+		file_file_format.add_item(label, i)
+	if needs_update:
+		Export.file_format = formats[0]
+	file_file_format.selected = file_file_format.get_item_index(Export.file_format)
 
 
 func create_frame_tag_list() -> void:
@@ -364,7 +381,8 @@ func _on_FileDialog_dir_selected(dir: String) -> void:
 	Export.directory_path = dir
 
 
-func _on_FileFormat_item_selected(id: int) -> void:
+func _on_FileFormat_item_selected(idx: int) -> void:
+	var id = file_file_format.get_item_id(idx)
 	Global.current_project.file_format = id
 	Export.file_format = id
 
