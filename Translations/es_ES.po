@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-11-02 03:25\n"
+"PO-Revision-Date: 2022-11-02 05:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -319,7 +319,7 @@ msgid "Recent projects"
 msgstr "Proyectos recientes"
 
 msgid "New project"
-msgstr ""
+msgstr "Nuevo proyecto"
 
 msgid "Spritesheet (new project)"
 msgstr "Hoja de Sprites (Nuevo Proyecto)"
@@ -515,7 +515,7 @@ msgid "Trilinear"
 msgstr "Trilineal"
 
 msgid "Constant"
-msgstr ""
+msgstr "Constante"
 
 msgid "General"
 msgstr "General"
@@ -614,7 +614,7 @@ msgid "Theme"
 msgstr "Tema"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Botones"
 
 msgid "Icon color from:"
 msgstr "Color del icono de:"
@@ -623,13 +623,13 @@ msgid "Icon color:"
 msgstr "Color del icono:"
 
 msgid "Background"
-msgstr ""
+msgstr "Fondo"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Color del fondo:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Color de fondo:"
 
 msgid "Left tool color:"
 msgstr "Color de la herramienta izquierda:"
@@ -1402,7 +1402,7 @@ msgstr ""
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "Colores similares"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
@@ -1413,7 +1413,7 @@ msgstr "Rellenar con:"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Selected color"
-msgstr ""
+msgstr "Color seleccionado"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
