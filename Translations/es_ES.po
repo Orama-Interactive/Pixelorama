@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-11-02 03:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -136,7 +136,7 @@ msgid "Paste"
 msgstr "Pegar"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Copiar en lugar"
 
 msgid "Delete"
 msgstr "Borrar"
@@ -166,10 +166,10 @@ msgid "Rotate Image"
 msgstr "Rotar Imagen"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Eje X:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Eje Y:"
 
 msgid "Smear options:"
 msgstr "Opciones de Smear:"
@@ -208,16 +208,16 @@ msgid "Tile Mode Offsets"
 msgstr "Desplazamiento del Modo Casilla"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X base x:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "x base y:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "Y base y:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y base y:"
 
 msgid "Tile Mask"
 msgstr "Máscara de Casillas"
