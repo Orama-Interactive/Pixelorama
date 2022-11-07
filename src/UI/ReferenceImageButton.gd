@@ -18,6 +18,8 @@ func _update_properties():
 	$Interior/Options/Scale.value = element.scale.x * 100
 	$Interior/Options/X.value = element.position.x
 	$Interior/Options/Y.value = element.position.y
+	$Interior/Options/X.max_value = element.project.size.x
+	$Interior/Options/Y.max_value = element.project.size.y
 	$Interior/Options2/Opacity.value = element.modulate.a * 100
 	_ignore_spinbox_changes = false
 

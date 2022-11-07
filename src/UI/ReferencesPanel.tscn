@@ -6,18 +6,19 @@
 script = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="."]
-margin_right = 383.0
-margin_bottom = 14.0
+margin_right = 1.0
+margin_bottom = 1000.0
 text = "When opening an image, it may be imported as a reference."
+autowrap = true
 
 [node name="Scroll" type="ScrollContainer" parent="."]
-margin_top = 18.0
-margin_right = 383.0
-margin_bottom = 18.0
+margin_top = 1004.0
+margin_right = 1.0
+margin_bottom = 1004.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="List" type="VBoxContainer" parent="Scroll"]
-margin_right = 383.0
+margin_right = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
