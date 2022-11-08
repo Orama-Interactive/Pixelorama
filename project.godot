@@ -139,6 +139,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/Project.gd"
 }, {
+"base": "Sprite",
+"class": "ReferenceImage",
+"language": "GDScript",
+"path": "res://src/UI/Canvas/ReferenceImage.gd"
+}, {
+"base": "VBoxContainer",
+"class": "ReferencesPanel",
+"language": "GDScript",
+"path": "res://src/UI/ReferencesPanel.gd"
+}, {
 "base": "Image",
 "class": "SelectionMap",
 "language": "GDScript",
@@ -201,6 +211,8 @@ _global_script_class_icons={
 "PixelCel": "",
 "PixelLayer": "",
 "Project": "",
+"ReferenceImage": "",
+"ReferencesPanel": "",
 "SelectionMap": "",
 "SelectionTool": "",
 "ShaderImageEffect": "",

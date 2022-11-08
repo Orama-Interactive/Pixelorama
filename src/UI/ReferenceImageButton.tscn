@@ -1,0 +1,94 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/ReferenceImageButton.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=2]
+
+[node name="ReferenceImageButton" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -969.0
+margin_bottom = -581.0
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+
+[node name="Interior" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 304.0
+margin_bottom = 132.0
+
+[node name="Path" type="Label" parent="Interior"]
+margin_right = 297.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+autowrap = true
+
+[node name="Options" type="HBoxContainer" parent="Interior"]
+margin_top = 18.0
+margin_right = 297.0
+margin_bottom = 42.0
+
+[node name="Label2" type="Label" parent="Interior/Options"]
+margin_top = 5.0
+margin_right = 56.0
+margin_bottom = 19.0
+text = "Position:"
+
+[node name="X" parent="Interior/Options" instance=ExtResource( 2 )]
+margin_left = 60.0
+margin_right = 122.0
+allow_greater = true
+allow_lesser = true
+
+[node name="Y" parent="Interior/Options" instance=ExtResource( 2 )]
+margin_left = 126.0
+margin_right = 189.0
+allow_greater = true
+allow_lesser = true
+
+[node name="Label" type="Label" parent="Interior/Options"]
+margin_left = 193.0
+margin_top = 5.0
+margin_right = 230.0
+margin_bottom = 19.0
+text = "Scale:"
+
+[node name="Scale" parent="Interior/Options" instance=ExtResource( 2 )]
+margin_left = 234.0
+margin_right = 297.0
+allow_greater = true
+allow_lesser = true
+
+[node name="Options2" type="HBoxContainer" parent="Interior"]
+margin_top = 46.0
+margin_right = 297.0
+margin_bottom = 70.0
+
+[node name="Label" type="Label" parent="Interior/Options2"]
+margin_top = 5.0
+margin_right = 53.0
+margin_bottom = 19.0
+text = "Opacity:"
+
+[node name="Opacity" parent="Interior/Options2" instance=ExtResource( 2 )]
+margin_left = 57.0
+margin_right = 177.0
+
+[node name="Reset" type="Button" parent="Interior/Options2"]
+margin_left = 181.0
+margin_right = 229.0
+margin_bottom = 24.0
+text = "Reset"
+
+[node name="Remove" type="Button" parent="Interior/Options2"]
+margin_left = 233.0
+margin_right = 297.0
+margin_bottom = 24.0
+text = "Remove"
+
+[connection signal="value_changed" from="Interior/Options/X" to="." method="_on_X_value_changed"]
+[connection signal="value_changed" from="Interior/Options/Y" to="." method="_on_Y_value_changed"]
+[connection signal="value_changed" from="Interior/Options/Scale" to="." method="_on_Scale_value_changed"]
+[connection signal="value_changed" from="Interior/Options2/Opacity" to="." method="_on_Opacity_value_changed"]
+[connection signal="pressed" from="Interior/Options2/Reset" to="." method="_on_Reset_pressed"]
+[connection signal="pressed" from="Interior/Options2/Remove" to="." method="_on_Remove_pressed"]

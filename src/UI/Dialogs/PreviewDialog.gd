@@ -7,6 +7,7 @@ enum ImageImportOptions {
 	NEW_FRAME,
 	REPLACE_CEL,
 	NEW_LAYER,
+	NEW_REFERENCE_IMAGE,
 	PALETTE,
 	BRUSH,
 	PATTERN
@@ -49,6 +50,7 @@ func _on_PreviewDialog_about_to_show() -> void:
 	import_options.add_item("New frame")
 	import_options.add_item("Replace cel")
 	import_options.add_item("New layer")
+	import_options.add_item("New reference image")
 	import_options.add_item("New palette")
 	import_options.add_item("New brush")
 	import_options.add_item("New pattern")
@@ -140,6 +142,9 @@ func _on_PreviewDialog_confirmed() -> void:
 		elif current_import_option == ImageImportOptions.NEW_LAYER:
 			var frame_index: int = new_layer_options.get_node("AtFrameSpinbox").value - 1
 			OpenSave.open_image_as_new_layer(image, path.get_basename().get_file(), frame_index)
+
+		elif current_import_option == ImageImportOptions.NEW_REFERENCE_IMAGE:
+			OpenSave.import_reference_image_from_path(path)
 
 		elif current_import_option == ImageImportOptions.PALETTE:
 			Palettes.import_palette_from_path(path)

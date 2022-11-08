@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://src/UI/Tools.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/Shaders/Greyscale.gdshader" type="Shader" id=8]
 [ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=9]
 [ext_resource path="res://src/UI/GlobalToolOptions.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/UI/ReferencesPanel.tscn" type="PackedScene" id=11]
 [ext_resource path="res://addons/dockable_container/layout.gd" type="Script" id=14]
 [ext_resource path="res://src/UI/CanvasPreviewContainer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/UI/ColorPickers.tscn" type="PackedScene" id=17]
@@ -33,7 +34,7 @@ shader_param/size = Vector2( 100, 100 )
 [sub_resource type="Resource" id=1]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "Tools" )
+names = PoolStringArray( "Tools", "References" )
 current_tab = 0
 
 [sub_resource type="Resource" id=8]
@@ -223,20 +224,20 @@ margin_bottom = -4.0
 [node name="Main Canvas" type="VBoxContainer" parent="DockableContainer"]
 margin_left = 60.0
 margin_top = 8.0
-margin_right = 938.0
-margin_bottom = 532.0
+margin_right = 1063.0
+margin_bottom = 642.5
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="TabsContainer" type="PanelContainer" parent="DockableContainer/Main Canvas"]
-margin_right = 878.0
+margin_right = 1003.0
 margin_bottom = 38.0
 
 [node name="Tabs" type="Tabs" parent="DockableContainer/Main Canvas/TabsContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 871.0
+margin_right = 996.0
 margin_bottom = 31.0
 tab_align = 0
 tab_close_display_policy = 2
@@ -245,7 +246,7 @@ script = ExtResource( 3 )
 
 [node name="HorizontalRuler" type="Button" parent="DockableContainer/Main Canvas"]
 margin_top = 38.0
-margin_right = 878.0
+margin_right = 1003.0
 margin_bottom = 58.0
 rect_min_size = Vector2( 0, 16 )
 focus_mode = 0
@@ -256,15 +257,15 @@ script = ExtResource( 6 )
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="DockableContainer/Main Canvas"]
 margin_top = 58.0
-margin_right = 878.0
-margin_bottom = 524.0
+margin_right = 1003.0
+margin_bottom = 634.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="VerticalRuler" type="Button" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler"]
 margin_right = 16.0
-margin_bottom = 466.0
+margin_bottom = 576.0
 rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
 mouse_default_cursor_shape = 15
@@ -276,8 +277,8 @@ script = ExtResource( 4 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler"]
 margin_left = 16.0
-margin_right = 878.0
-margin_bottom = 466.0
+margin_right = 1003.0
+margin_bottom = 576.0
 focus_mode = 2
 mouse_default_cursor_shape = 3
 size_flags_horizontal = 3
@@ -286,7 +287,7 @@ stretch = true
 script = ExtResource( 23 )
 
 [node name="Viewport" type="Viewport" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/ViewportContainer"]
-size = Vector2( 862, 466 )
+size = Vector2( 987, 576 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
@@ -339,30 +340,31 @@ script = ExtResource( 7 )
 
 [node name="Animation Timeline" parent="DockableContainer" instance=ExtResource( 18 )]
 margin_left = 60.0
-margin_top = 556.0
-margin_right = 938.0
+margin_top = 666.5
+margin_right = 1063.0
 margin_bottom = 716.0
 
 [node name="Canvas Preview" parent="DockableContainer" instance=ExtResource( 16 )]
-margin_left = 958.0
+margin_left = 1083.0
 margin_top = 8.0
 margin_right = 1276.0
 margin_bottom = 98.0
 
 [node name="Color Pickers" parent="DockableContainer" instance=ExtResource( 17 )]
+margin_left = 1083.0
 margin_top = 122.0
 margin_bottom = 168.0
 
 [node name="Global Tool Options" parent="DockableContainer" instance=ExtResource( 10 )]
-margin_left = 958.0
+margin_left = 1083.0
 margin_top = 192.0
 margin_right = 1276.0
 margin_bottom = 242.0
 
 [node name="Left Tool Options" type="ScrollContainer" parent="DockableContainer"]
-margin_left = 958.0
+margin_left = 1083.0
 margin_top = 266.0
-margin_right = 1107.0
+margin_right = 1169.5
 margin_bottom = 592.0
 rect_min_size = Vector2( 72, 72 )
 __meta__ = {
@@ -370,31 +372,35 @@ __meta__ = {
 }
 
 [node name="LeftPanelContainer" type="PanelContainer" parent="DockableContainer/Left Tool Options"]
-margin_right = 149.0
-margin_bottom = 326.0
+margin_right = 130.0
+margin_bottom = 314.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Right Tool Options" type="ScrollContainer" parent="DockableContainer"]
-margin_left = 1127.0
+margin_left = 1189.5
 margin_top = 266.0
 margin_right = 1276.0
 margin_bottom = 592.0
 rect_min_size = Vector2( 72, 72 )
 
 [node name="RightPanelContainer" type="PanelContainer" parent="DockableContainer/Right Tool Options"]
-margin_right = 149.0
-margin_bottom = 326.0
+margin_right = 130.0
+margin_bottom = 314.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Palettes" parent="DockableContainer" instance=ExtResource( 20 )]
-margin_left = 958.0
+margin_left = 1083.0
 margin_top = 616.0
 margin_right = 1276.0
 margin_bottom = 716.0
+
+[node name="References" parent="DockableContainer" instance=ExtResource( 11 )]
+margin_right = 33.0
+margin_bottom = 14.0
 
 [connection signal="item_rect_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_item_rect_changed"]
 [connection signal="visibility_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_visibility_changed"]
