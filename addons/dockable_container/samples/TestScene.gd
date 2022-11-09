@@ -2,7 +2,7 @@ extends VBoxContainer
 
 const SAVED_LAYOUT_PATH = "user://layout.tres"
 
-onready var _container = $DockableContainer
+onready var _container = $DockableContainers/DockableContainer
 onready var _clone_control = $HBoxContainer/ControlPrefab
 onready var _checkbox_container = $HBoxContainer
 

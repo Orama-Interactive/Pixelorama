@@ -18,5 +18,5 @@ Files extracted from source:
 ## godot-dockable-container
 
 - Upstream: https://github.com/gilzoide/godot-dockable-container
-- Version: custom
+- Version: Based on git commit e5df60ed1d53246e03dba36053ff009846ba5174 with a modification on dockable_container.gd (lines 187-191).
 - License: [CC0-1.0](https://github.com/gilzoide/godot-dockable-container/blob/main/LICENSE)

@@ -90,11 +90,10 @@ func update_nodes(names: PoolStringArray) -> void:
 func move_node_to_leaf(node: Node, leaf: LayoutPanel, relative_position: int) -> void:
 	var node_name = node.name
 	var previous_leaf = _leaf_by_node_name.get(node_name)
-	if not previous_leaf:
-		return
-	previous_leaf.remove_node(node)
-	if previous_leaf.empty():
-		_remove_leaf(previous_leaf)
+	if previous_leaf:
+		previous_leaf.remove_node(node)
+		if previous_leaf.empty():
+			_remove_leaf(previous_leaf)
 
 	leaf.insert_node(relative_position, node)
 	_leaf_by_node_name[node_name] = leaf
