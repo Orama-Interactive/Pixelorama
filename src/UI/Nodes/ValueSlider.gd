@@ -21,6 +21,10 @@ export var snap_by_default := false
 export var show_progress := true
 export var show_arrows := true setget _show_arrows_changed
 export var echo_arrow_time := 0.075
+# This will be replaced with input action strings in Godot 4.x
+# Right now this is only used for changing the brush size with Control + Wheel
+# In Godot 4.x, the shortcut will be editable
+export var is_global := false
 
 var state := NORMAL
 var arrow_is_held := 0  # Used for arrow button echo behavior. Is 1 for ValueUp, -1 for ValueDown.
@@ -30,6 +34,7 @@ onready var timer: Timer = $Timer
 
 
 func _ready() -> void:
+	set_process_input(is_global)
 	_reset_display()
 	if not Engine.editor_hint:  # Pixelorama specific code
 		$ValueUp.modulate = Global.modulate_icon_color
@@ -39,6 +44,30 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_THEME_CHANGED or what == NOTIFICATION_TRANSLATION_CHANGED:
 		_reset_display()
+
+
+func _input(event: InputEvent) -> void:
+	if not editable:
+		return
+	# Hardcode Control + Wheel as a global shortcut, if is_global is true
+	# In Godot 4.x this will change into two is_action() checks for incrementing
+	# and decrementing
+	if not event is InputEventMouseButton:
+		return
+	if not event.pressed:
+		return
+	if not event.control:
+		return
+	if event.button_index == BUTTON_WHEEL_UP:
+		if snap_by_default:
+			value += step if event.control else snap_step
+		else:
+			value += snap_step if event.control else step
+	elif event.button_index == BUTTON_WHEEL_DOWN:
+		if snap_by_default:
+			value -= step if event.control else snap_step
+		else:
+			value -= snap_step if event.control else step
 
 
 func _gui_input(event: InputEvent) -> void:

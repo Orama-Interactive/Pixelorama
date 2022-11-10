@@ -60,6 +60,7 @@ value = 1.0
 allow_greater = true
 prefix = "Size:"
 suffix = "px"
+is_global = true
 
 [node name="ColorInterpolation" parent="." index="3" instance=ExtResource( 1 )]
 visible = false
