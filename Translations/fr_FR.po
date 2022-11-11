@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-11-11 14:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1630,7 +1630,7 @@ msgid "Layer"
 msgstr "Couche"
 
 msgid "Group"
-msgstr ""
+msgstr "Groupe"
 
 msgid "Layers"
 msgstr "Calques"
@@ -1676,7 +1676,7 @@ msgid "Enable/disable automatic linking of new cels when creating new frames\n\n
 msgstr ""
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "Développer / réduire le groupe"
 
 msgid "Palette"
 msgstr "Palette"
