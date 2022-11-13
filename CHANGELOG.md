@@ -6,14 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v0.11] - Unreleased
 This update has been brought to you by the contributions of:
-[@mrtripie](https://github.com/mrtripie), Martin Novák ([@novhack](https://github.com/novhack))
+[@mrtripie](https://github.com/mrtripie), Martin Novák ([@novhack](https://github.com/novhack)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@20kdc](https://github.com/20kdc)
 
 ### Added
 - Layer groups in the timeline, for better organization. [#698](https://github.com/Orama-Interactive/Pixelorama/pull/698)
+- Support for reference images has been implemented. [#771](https://github.com/Orama-Interactive/Pixelorama/pull/771)
+- Exporting to APNG is now possible. [#772](https://github.com/Orama-Interactive/Pixelorama/pull/772)
+- Control + Mouse wheel can now be used to adjust the brush size. Unfortunately, this shortcut cannot be edited at the moment, but it will be in the future. [#776](https://github.com/Orama-Interactive/Pixelorama/discussions/776)
 
 ### Changed
 - The palette panel is now more reactive; it automatically resizes in order to show/hide swatches based on its size. It is also now possible to scroll palettes with the mouse wheel, and resize the swatches with Control + mouse wheel. [#761](https://github.com/Orama-Interactive/Pixelorama/pull/761)
+- The UI of the animation timeline has been improved. [#769](https://github.com/Orama-Interactive/Pixelorama/pull/769)
+- Linked cels have been refactored, which allows for having multiple linked sets of cels in the same layer. [#764](https://github.com/Orama-Interactive/Pixelorama/pull/764)
 - Slider + SpinBox combinations have been replaced by a custom slider, made by [@mrtripie](https://github.com/mrtripie). (Ongoing)
+- Most dialogs received some UI changes, such as making their elments expand vertically, and making their Cancel and OK buttons a little bigger.
+- Layer adding behavior has been changed. [#767](https://github.com/Orama-Interactive/Pixelorama/pull/767)
 
 ### Fixed
 - The timeline has been refactored behind the scenes, and its performance has been massively improved for projects with a lot of frames and layers. [#698](https://github.com/Orama-Interactive/Pixelorama/pull/698)
