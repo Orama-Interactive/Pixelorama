@@ -1,17 +1,14 @@
 extends Node
 
-enum ExportTab { FRAME = 0, SPRITESHEET = 1, ANIMATION = 2 }
+enum ExportTab { FRAME = 0, SPRITESHEET = 1 }
 enum Orientation { ROWS = 0, COLUMNS = 1 }
-enum AnimationType { MULTIPLE_FILES = 0, ANIMATED = 1 }
 enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
 # See file_format_string, file_format_description, and ExportDialog.gd
 enum FileFormat { PNG = 0, GIF = 1, APNG = 2 }
 
 var current_tab: int = ExportTab.FRAME
-# Frame options
-var frame_number := 1
 # All frames and their layers processed/blended into images
-var processed_images = []  # Image[]
+var processed_images := []  # Image[]
 
 # Spritesheet options
 var frame_current_tag := 0  # Export only current frame tag
@@ -20,13 +17,12 @@ var orientation: int = Orientation.ROWS
 
 var lines_count := 1  # How many rows/columns before new line is added
 
-var animation_type: int = AnimationType.MULTIPLE_FILES
 var direction: int = AnimationDirection.FORWARD
 
 # Options
 var resize := 100
 var interpolation := 0  # Image.Interpolation
-var new_dir_for_each_frame_tag: bool = true  # you don't need to store this after export
+var new_dir_for_each_frame_tag := false  # you don't need to store this after export
 
 # Export directory path and export file name
 var directory_path := ""
@@ -36,7 +32,7 @@ var file_format: int = FileFormat.PNG
 var was_exported: bool = false
 
 # Export coroutine signal
-var stop_export = false
+var stop_export := false
 
 var file_exists_alert = "File %s already exists. Overwrite?"
 
@@ -52,55 +48,39 @@ func _exit_tree() -> void:
 
 
 func external_export() -> void:
-	match current_tab:
-		ExportTab.FRAME:
-			process_frame()
-		ExportTab.SPRITESHEET:
-			process_spritesheet()
-		ExportTab.ANIMATION:
-			process_animation()
+	process_data()
 	export_processed_images(true, Global.export_dialog)
 
 
-func process_frame() -> void:
-	processed_images.clear()
-	var frame = Global.current_project.frames[frame_number - 1]
-	var image := Image.new()
-	image.create(
-		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
-	)
-	blend_layers(image, frame)
-	processed_images.append(image)
+func process_data() -> void:
+	match current_tab:
+		ExportTab.FRAME:
+			process_animation()
+		ExportTab.SPRITESHEET:
+			process_spritesheet()
 
 
 func process_spritesheet() -> void:
 	processed_images.clear()
 	# Range of frames determined by tags
-	var frames := []
-	if frame_current_tag > 0:
-		var frame_start = Global.current_project.animation_tags[frame_current_tag - 1].from
-		var frame_end = Global.current_project.animation_tags[frame_current_tag - 1].to
-		frames = Global.current_project.frames.slice(frame_start - 1, frame_end - 1, 1, true)
-	else:
-		frames = Global.current_project.frames
-
+	var frames := calculate_frames()
 	# Then store the size of frames for other functions
 	number_of_frames = frames.size()
 
 	# If rows mode selected calculate columns count and vice versa
-	var spritesheet_columns = (
+	var spritesheet_columns := (
 		lines_count
 		if orientation == Orientation.ROWS
 		else frames_divided_by_spritesheet_lines()
 	)
-	var spritesheet_rows = (
+	var spritesheet_rows := (
 		lines_count
 		if orientation == Orientation.COLUMNS
 		else frames_divided_by_spritesheet_lines()
 	)
 
-	var width = Global.current_project.size.x * spritesheet_columns
-	var height = Global.current_project.size.y * spritesheet_rows
+	var width := Global.current_project.size.x * spritesheet_columns
+	var height := Global.current_project.size.y * spritesheet_rows
 
 	var whole_image := Image.new()
 	whole_image.create(width, height, false, Image.FORMAT_RGBA8)
@@ -134,7 +114,8 @@ func process_spritesheet() -> void:
 
 func process_animation() -> void:
 	processed_images.clear()
-	for frame in Global.current_project.frames:
+	var frames := calculate_frames()
+	for frame in frames:
 		var image := Image.new()
 		image.create(
 			Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
@@ -143,9 +124,23 @@ func process_animation() -> void:
 		processed_images.append(image)
 
 
+func calculate_frames() -> Array:
+	var frames := []
+	if frame_current_tag > 1:  # Specific tag
+		var frame_start: int = Global.current_project.animation_tags[frame_current_tag - 2].from
+		var frame_end: int = Global.current_project.animation_tags[frame_current_tag - 2].to
+		frames = Global.current_project.frames.slice(frame_start - 1, frame_end - 1, 1, true)
+	elif frame_current_tag == 1:  # Selected frames
+		for cel in Global.current_project.selected_cels:
+			frames.append(Global.current_project.frames[cel[0]])
+	else:  # All frames
+		frames = Global.current_project.frames
+	return frames
+
+
 func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialog) -> bool:
 	# Stop export if directory path or file name are not valid
-	var dir = Directory.new()
+	var dir := Directory.new()
 	if not dir.dir_exists(directory_path) or not file_name.is_valid_filename():
 		if not dir.dir_exists(directory_path) and file_name.is_valid_filename():
 			export_dialog.open_path_validation_alert_popup(0)
@@ -155,19 +150,14 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 			export_dialog.open_path_validation_alert_popup()
 		return false
 
+	var multiple_files := false
+	if current_tab == ExportTab.FRAME and not is_single_file_format():
+		multiple_files = true if processed_images.size() > 1 else false
 	# Check export paths
-	var export_paths = []
+	var export_paths := []
 	for i in range(processed_images.size()):
 		stop_export = false
-		var multiple_files := (
-			true
-			if (
-				current_tab == ExportTab.ANIMATION
-				and animation_type == AnimationType.MULTIPLE_FILES
-			)
-			else false
-		)
-		var export_path = create_export_path(multiple_files, i + 1)
+		var export_path := create_export_path(multiple_files, i + 1)
 		# If user want to create new directory for each animation tag then check
 		# if directories exist and create them if not
 		if multiple_files and new_dir_for_each_frame_tag:
@@ -189,13 +179,13 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 					return
 		export_paths.append(export_path)
 		# Only get one export path if single file animated image is exported
-		if current_tab == ExportTab.ANIMATION and animation_type == AnimationType.ANIMATED:
+		if is_single_file_format():
 			break
 
 	# Scale images that are to export
 	scale_processed_images()
 
-	if current_tab == ExportTab.ANIMATION and animation_type == AnimationType.ANIMATED:
+	if is_single_file_format():
 		var exporter: BaseAnimationExporter
 		if file_format == FileFormat.APNG:
 			exporter = APNGAnimationExporter.new()
@@ -238,7 +228,7 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 		)
 
 	# Only show when not exporting gif - gif export finishes in thread
-	if not (current_tab == ExportTab.ANIMATION and animation_type == AnimationType.ANIMATED):
+	if not is_single_file_format():
 		Global.notification_label("File(s) exported")
 	return true
 
@@ -340,19 +330,25 @@ func file_format_description(format_enum: int) -> String:
 			return ""
 
 
+func is_single_file_format(format_enum: int = file_format) -> bool:
+	# True when exporting to .gif and .apng (and potentially video formats in the future)
+	# False when exporting to .png, and other non-animated formats in the future
+	return format_enum == FileFormat.GIF or format_enum == FileFormat.APNG
+
+
 func create_export_path(multifile: bool, frame: int = 0) -> String:
-	var path = file_name
+	var path := file_name
 	# Only append frame number when there are multiple files exported
 	if multifile:
-		var frame_tag_and_start_id = get_proccessed_image_animation_tag_and_start_id(frame - 1)
+		var frame_tag_and_start_id := get_proccessed_image_animation_tag_and_start_id(frame - 1)
 		# Check if exported frame is in frame tag
 		if frame_tag_and_start_id != null:
-			var frame_tag = frame_tag_and_start_id[0]
-			var start_id = frame_tag_and_start_id[1]
+			var frame_tag: String = frame_tag_and_start_id[0]
+			var start_id: int = frame_tag_and_start_id[1]
 			# Remove unallowed characters in frame tag directory
 			var regex := RegEx.new()
 			regex.compile("[^a-zA-Z0-9_]+")
-			var frame_tag_dir = regex.sub(frame_tag, "", true)
+			var frame_tag_dir := regex.sub(frame_tag, "", true)
 			if new_dir_for_each_frame_tag:
 				# Add frame tag if frame has one
 				# (frame - start_id + 1) Makes frames id to start from 1 in each frame tag directory

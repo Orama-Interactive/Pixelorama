@@ -4,6 +4,7 @@
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="ExportDialog" type="AcceptDialog"]
+visible = true
 margin_right = 532.0
 margin_bottom = 530.0
 rect_min_size = Vector2( 456, 530 )
@@ -11,9 +12,6 @@ window_title = "Export..."
 resizable = true
 dialog_hide_on_ok = false
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
@@ -42,7 +40,7 @@ text = "Preview:"
 [node name="PreviewPanel" type="Panel" parent="VBoxContainer"]
 margin_top = 54.0
 margin_right = 516.0
-margin_bottom = 260.0
+margin_bottom = 288.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -63,69 +61,66 @@ __meta__ = {
 
 [node name="Previews" type="GridContainer" parent="VBoxContainer/PreviewPanel/PreviewScroll"]
 margin_right = 516.0
-margin_bottom = 206.0
+margin_bottom = 234.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 
-[node name="FrameOptions" type="VBoxContainer" parent="VBoxContainer"]
-visible = false
-margin_top = 278.0
-margin_right = 516.0
-margin_bottom = 302.0
-
-[node name="FrameNumber" type="HBoxContainer" parent="VBoxContainer/FrameOptions"]
-margin_right = 516.0
-margin_bottom = 24.0
-
-[node name="FrameNumberLabel" type="Label" parent="VBoxContainer/FrameOptions/FrameNumber"]
-margin_top = 5.0
-margin_right = 44.0
-margin_bottom = 19.0
-text = "Frame:"
-
-[node name="FrameNumber" type="SpinBox" parent="VBoxContainer/FrameOptions/FrameNumber"]
-margin_left = 48.0
-margin_right = 516.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 100, 0 )
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-min_value = 1.0
-page = 1.0
-value = 1.0
-rounded = true
-align = 2
-
-[node name="SpritesheetOptions" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 264.0
+[node name="Frames" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 292.0
 margin_right = 516.0
 margin_bottom = 312.0
 
-[node name="Frames" type="HBoxContainer" parent="VBoxContainer/SpritesheetOptions"]
-margin_right = 516.0
-margin_bottom = 20.0
-
-[node name="FramesLabel" type="Label" parent="VBoxContainer/SpritesheetOptions/Frames"]
+[node name="FramesLabel" type="Label" parent="VBoxContainer/Frames"]
 margin_top = 3.0
 margin_right = 51.0
 margin_bottom = 17.0
 text = "Frames:"
 
-[node name="Frames" type="OptionButton" parent="VBoxContainer/SpritesheetOptions/Frames"]
+[node name="Frames" type="OptionButton" parent="VBoxContainer/Frames"]
 margin_left = 55.0
 margin_right = 516.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
-text = "All Frames"
-items = [ "All Frames", null, false, 0, null ]
+text = "All frames"
+items = [ "All frames", null, false, 0, null, "Selected frames", null, false, 1, null ]
 selected = 0
 
-[node name="Orientation" type="HBoxContainer" parent="VBoxContainer/SpritesheetOptions"]
-margin_top = 24.0
+[node name="AnimatedOptions" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 316.0
 margin_right = 516.0
-margin_bottom = 48.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 0, 24 )
+
+[node name="DirectionLabel" type="Label" parent="VBoxContainer/AnimatedOptions"]
+margin_top = 5.0
+margin_right = 131.0
+margin_bottom = 19.0
+text = "Animation direction:"
+
+[node name="Direction" type="OptionButton" parent="VBoxContainer/AnimatedOptions"]
+margin_left = 135.0
+margin_right = 516.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 100, 0 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "Forward"
+items = [ "Forward", null, false, 0, null, "Backwards", null, false, 1, null, "Ping-Pong", null, false, 2, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpritesheetOptions" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 344.0
+margin_right = 516.0
+margin_bottom = 368.0
+
+[node name="Orientation" type="HBoxContainer" parent="VBoxContainer/SpritesheetOptions"]
+margin_right = 516.0
+margin_bottom = 24.0
 alignment = 1
 
 [node name="OrientationLabel" type="Label" parent="VBoxContainer/SpritesheetOptions/Orientation"]
@@ -166,54 +161,17 @@ value = 1.0
 align = 2
 
 [node name="AnimationOptions" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 316.0
+visible = false
+margin_top = 344.0
 margin_right = 516.0
 margin_bottom = 368.0
 
-[node name="AnimationType" type="OptionButton" parent="VBoxContainer/AnimationOptions"]
+[node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/AnimationOptions"]
 margin_right = 516.0
 margin_bottom = 24.0
-rect_min_size = Vector2( 0, 24 )
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-text = "All frames as multiple files"
-items = [ "All frames as multiple files", null, false, 0, null, "All frames as a single file animation", null, false, 1, null ]
-selected = 0
-
-[node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/AnimationOptions"]
-visible = false
-margin_top = 28.0
-margin_right = 516.0
-margin_bottom = 52.0
 hint_tooltip = "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
 mouse_default_cursor_shape = 2
 text = "Create new directory for each frame tag"
-
-[node name="AnimatedOptions" type="HBoxContainer" parent="VBoxContainer/AnimationOptions"]
-margin_top = 28.0
-margin_right = 516.0
-margin_bottom = 52.0
-rect_min_size = Vector2( 0, 24 )
-
-[node name="DirectionLabel" type="Label" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
-margin_top = 5.0
-margin_right = 63.0
-margin_bottom = 19.0
-text = "Direction:"
-
-[node name="Direction" type="OptionButton" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
-margin_left = 67.0
-margin_right = 516.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 100, 0 )
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-text = "Forward"
-items = [ "Forward", null, false, 0, null, "Backwards", null, false, 1, null, "Ping-Pong", null, false, 2, null ]
-selected = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 margin_top = 372.0
@@ -272,18 +230,10 @@ margin_right = 516.0
 margin_bottom = 422.0
 
 [node name="DimensionLabel" type="Label" parent="VBoxContainer/Dimensions"]
-margin_right = 256.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-text = "Export Dimensions : "
-align = 1
-valign = 1
-
-[node name="Spacer" type="Control" parent="VBoxContainer/Dimensions"]
-margin_left = 260.0
 margin_right = 516.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
+text = "Export dimensions: "
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
 margin_top = 426.0
@@ -330,14 +280,14 @@ text = "File:"
 
 [node name="FileLineEdit" type="LineEdit" parent="VBoxContainer/File"]
 margin_left = 34.0
-margin_right = 376.0
+margin_right = 382.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 text = "untitled"
 align = 2
 
 [node name="FileFormat" type="OptionButton" parent="VBoxContainer/File"]
-margin_left = 380.0
+margin_left = 386.0
 margin_right = 516.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 130, 0 )
@@ -428,13 +378,11 @@ __meta__ = {
 [connection signal="custom_action" from="." to="." method="_on_ExportDialog_custom_action"]
 [connection signal="popup_hide" from="." to="." method="_on_ExportDialog_popup_hide"]
 [connection signal="tab_clicked" from="VBoxContainer/Tabs" to="." method="_on_Tabs_tab_clicked"]
-[connection signal="value_changed" from="VBoxContainer/FrameOptions/FrameNumber/FrameNumber" to="." method="_on_Frame_value_changed"]
-[connection signal="item_selected" from="VBoxContainer/SpritesheetOptions/Frames/Frames" to="." method="_on_Frames_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/Frames/Frames" to="." method="_on_Frames_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/AnimatedOptions/Direction" to="." method="_on_Direction_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/SpritesheetOptions/Orientation/Orientation" to="." method="_on_Orientation_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/SpritesheetOptions/Orientation/LinesCount" to="." method="_on_LinesCount_value_changed"]
-[connection signal="item_selected" from="VBoxContainer/AnimationOptions/AnimationType" to="." method="_on_AnimationType_item_selected"]
 [connection signal="toggled" from="VBoxContainer/AnimationOptions/MultipleAnimationsDirectories" to="." method="_on_MultipleAnimationsDirectories_toggled"]
-[connection signal="item_selected" from="VBoxContainer/AnimationOptions/AnimatedOptions/Direction" to="." method="_on_Direction_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/Options/Resize" to="." method="_on_Resize_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/Options/Interpolation" to="." method="_on_Interpolation_item_selected"]
 [connection signal="text_changed" from="VBoxContainer/Path/PathLineEdit" to="." method="_on_PathLineEdit_text_changed"]
