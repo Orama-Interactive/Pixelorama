@@ -7,7 +7,7 @@ var preview_current_frame := 0
 var preview_frames := []
 var pingpong_direction = Export.AnimationDirection.FORWARD
 
-onready var tabs = $VBoxContainer/Tabs
+onready var tabs: Tabs = $VBoxContainer/Tabs
 onready var checker: ColorRect = $VBoxContainer/PreviewPanel/TransparentChecker
 onready var popups = $Popups
 onready var file_exists_alert_popup = $Popups/FileExistsAlert
@@ -16,22 +16,21 @@ onready var path_dialog_popup = $Popups/PathDialog
 onready var export_progress_popup = $Popups/ExportProgressBar
 onready var export_progress_bar = $Popups/ExportProgressBar/MarginContainer/ProgressBar
 
-onready var multiple_animations_directories = find_node("MultipleAnimationsDirectories")
+onready var multiple_animations_directories: CheckBox = find_node("MultipleAnimationsDirectories")
 onready var previews = $VBoxContainer/PreviewPanel/PreviewScroll/Previews
+onready var frames_option_button: OptionButton = $VBoxContainer/GridContainer/Frames
 onready var frame_timer: Timer = $FrameTimer
 
-onready var spritesheet_options = $VBoxContainer/SpritesheetOptions
-onready var spritesheet_frames = $VBoxContainer/Frames/Frames
-onready var spritesheet_orientation = $VBoxContainer/SpritesheetOptions/Orientation/Orientation
-onready var spritesheet_lines_count = $VBoxContainer/SpritesheetOptions/Orientation/LinesCount
-onready var spritesheet_lines_count_label = spritesheet_options.find_node("LinesCountLabel")
+onready var spritesheet_orientation: OptionButton = $VBoxContainer/GridContainer/Orientation
+onready var spritesheet_lines_count: SpinBox = $VBoxContainer/GridContainer/LinesCount
+onready var spritesheet_lines_count_label: Label = $VBoxContainer/GridContainer/LinesCountLabel
 
-onready var options_resize = $VBoxContainer/Options/Resize
-onready var options_interpolation = $VBoxContainer/Options/Interpolation
-onready var path_container = $VBoxContainer/Path
-onready var path_line_edit = $VBoxContainer/Path/PathLineEdit
-onready var file_line_edit = $VBoxContainer/File/FileLineEdit
-onready var file_format_options: OptionButton = $VBoxContainer/File/FileFormat
+onready var options_resize: SpinBox = $VBoxContainer/GridContainer/Resize
+onready var options_interpolation: OptionButton = $VBoxContainer/GridContainer/Interpolation
+onready var dimension_label: Label = $VBoxContainer/GridContainer/DimensionLabel
+onready var path_line_edit: LineEdit = $VBoxContainer/FilePath/PathLineEdit
+onready var file_line_edit: LineEdit = $VBoxContainer/FilePath/FileLineEdit
+onready var file_format_options: OptionButton = $VBoxContainer/FilePath/FileFormat
 
 
 func _ready() -> void:
@@ -49,7 +48,7 @@ func _ready() -> void:
 
 
 func show_tab() -> void:
-	spritesheet_options.hide()
+	get_tree().call_group("SpritesheetOptions", "hide")
 	set_file_format_selector()
 	create_frame_tag_list()
 	match Export.current_tab:
@@ -60,13 +59,13 @@ func show_tab() -> void:
 				Export.orientation = Export.Orientation.ROWS
 				Export.lines_count = int(ceil(sqrt(Export.number_of_frames)))
 			Export.process_spritesheet()
-			spritesheet_frames.select(Export.frame_current_tag)
+			frames_option_button.select(Export.frame_current_tag)
 			frame_timer.stop()
 			spritesheet_orientation.selected = Export.orientation
 			spritesheet_lines_count.max_value = Export.number_of_frames
 			spritesheet_lines_count.value = Export.lines_count
 			spritesheet_lines_count_label.text = "Columns:"
-			spritesheet_options.show()
+			get_tree().call_group("SpritesheetOptions", "show")
 	set_preview()
 	update_dimensions_label()
 	tabs.current_tab = Export.current_tab
@@ -181,21 +180,19 @@ func _set_file_format_selector_suitable_file_formats(formats: Array) -> void:
 
 func create_frame_tag_list() -> void:
 	# Clear existing tag list from entry if it exists
-	spritesheet_frames.clear()
-	spritesheet_frames.add_item("All frames", 0)  # Re-add removed 'All Frames' item
-	spritesheet_frames.add_item("Selected frames", 1)  # Re-add removed 'All Frames' item
+	frames_option_button.clear()
+	frames_option_button.add_item("All frames", 0)  # Re-add removed 'All Frames' item
+	frames_option_button.add_item("Selected frames", 1)  # Re-add removed 'All Frames' item
 
 	# Repopulate list with current tag list
 	for item in Global.current_project.animation_tags:
-		spritesheet_frames.add_item(item.name)
+		frames_option_button.add_item(item.name)
 
 
 func update_dimensions_label() -> void:
-	var dimension_label: Label = $VBoxContainer/Dimensions/DimensionLabel
-	dimension_label.text = "Export dimensions: "
 	if Export.processed_images.size() > 0:
 		var new_size: Vector2 = Export.processed_images[0].get_size() * (Export.resize / 100.0)
-		dimension_label.text += str(new_size.x, "x", new_size.y)
+		dimension_label.text = str(new_size.x, "x", new_size.y)
 
 
 func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
@@ -230,7 +227,7 @@ func _on_ExportDialog_about_to_show() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	# If we're on HTML5, don't let the user change the directory path
 	if OS.get_name() == "HTML5":
-		path_container.visible = false
+		get_tree().call_group("NotHTML5", "hide")
 		Export.directory_path = "user://"
 
 	if Export.directory_path.empty():
