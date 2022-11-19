@@ -106,7 +106,6 @@ size_flags_horizontal = 3
 min_value = 1.0
 max_value = 1000.0
 value = 1.0
-align = 2
 
 [node name="FramesLabel" type="Label" parent="VBoxContainer/GridContainer"]
 margin_top = 55.0
@@ -181,7 +180,6 @@ min_value = 50.0
 max_value = 1000.0
 step = 100.0
 value = 100.0
-align = 2
 suffix = "%"
 
 [node name="InterpolationLabel" type="Label" parent="VBoxContainer/GridContainer"]
@@ -199,7 +197,6 @@ margin_bottom = 172.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Nearest"
-align = 2
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, false, 4, null ]
 selected = 0
 
