@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-11-19 13:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -335,6 +335,9 @@ msgstr ""
 
 msgid "New layer"
 msgstr "Nová vrstva"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "Nová paleta"
@@ -2121,4 +2124,7 @@ msgstr "Možnosti levého nástroje"
 
 msgid "Right Tool Options"
 msgstr "Možnosti pravého nástroje"
+
+msgid "References"
+msgstr ""
 
