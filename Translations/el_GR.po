@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-11-19 13:26\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -335,6 +335,9 @@ msgstr "Αντικατάσταση cel"
 
 msgid "New layer"
 msgstr "Νέα στρώση"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "Νέα παλέτα"
@@ -2129,4 +2132,7 @@ msgstr "Επιλογές αριστερού εργαλείου"
 
 msgid "Right Tool Options"
 msgstr "Επιλογές δεξιού εργαλείου"
+
+msgid "References"
+msgstr ""
 
