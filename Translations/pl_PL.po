@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-10-17 14:24\n"
+"PO-Revision-Date: 2022-11-19 13:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -335,6 +335,9 @@ msgstr "Zastąp kalkę"
 
 msgid "New layer"
 msgstr "Nowa warstwa"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "Nowa paleta"
@@ -2129,4 +2132,7 @@ msgstr "Opcje lewego narzędzia"
 
 msgid "Right Tool Options"
 msgstr "Opcje prawego narzędzia"
+
+msgid "References"
+msgstr ""
 
