@@ -44,7 +44,7 @@ func _about_to_show() -> void:
 	Export.blend_selected_cels(selected_cels, frame)
 	current_frame.resize(Global.current_project.size.x, Global.current_project.size.y)
 	current_frame.fill(Color(0, 0, 0, 0))
-	Export.blend_layers(current_frame, frame)
+	Export.blend_all_layers(current_frame, frame)
 	update_preview()
 	update_transparent_background_size()
 

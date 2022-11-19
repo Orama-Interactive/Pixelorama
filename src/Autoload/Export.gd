@@ -10,11 +10,12 @@ var current_tab: int = ExportTab.FRAME
 # All frames and their layers processed/blended into images
 var processed_images := []  # Image[]
 
-# Spritesheet options
 var frame_current_tag := 0  # Export only current frame tag
+var export_layers := 0
 var number_of_frames := 1
-var orientation: int = Orientation.ROWS
 
+# Spritesheet options
+var orientation: int = Orientation.ROWS
 var lines_count := 1  # How many rows/columns before new line is added
 
 var direction: int = AnimationDirection.FORWARD
@@ -383,8 +384,17 @@ func get_proccessed_image_animation_tag_and_start_id(
 	return result_animation_tag_and_start_id
 
 
-# Blends canvas layers into passed image starting from the origin position
 func blend_layers(
+	image: Image, frame: Frame, origin := Vector2(0, 0), project := Global.current_project
+) -> void:
+	if export_layers == 0:
+		blend_all_layers(image, frame, origin, project)
+	elif export_layers == 1:
+		blend_selected_cels(image, frame, origin, project)
+
+
+# Blends canvas layers into passed image starting from the origin position
+func blend_all_layers(
 	image: Image, frame: Frame, origin := Vector2(0, 0), project := Global.current_project
 ) -> void:
 	image.lock()

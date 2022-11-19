@@ -5,7 +5,7 @@ signal resume_export_function
 
 var preview_current_frame := 0
 var preview_frames := []
-var pingpong_direction = Export.AnimationDirection.FORWARD
+var pingpong_direction: int = Export.AnimationDirection.FORWARD
 
 onready var tabs: Tabs = $VBoxContainer/Tabs
 onready var checker: ColorRect = $VBoxContainer/PreviewPanel/TransparentChecker
@@ -412,3 +412,9 @@ func _on_Frames_item_selected(id: int) -> void:
 	set_preview()
 	spritesheet_lines_count.max_value = Export.number_of_frames
 	spritesheet_lines_count.value = Export.lines_count
+
+
+func _on_Layers_item_selected(id: int) -> void:
+	Export.export_layers = id
+	Export.process_data()
+	set_preview()
