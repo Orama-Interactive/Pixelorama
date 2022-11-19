@@ -299,7 +299,7 @@ func _on_Interpolation_item_selected(id: int) -> void:
 
 func _on_ExportDialog_confirmed() -> void:
 	Global.current_project.export_overwrite = false
-	if Export.export_processed_images(false, self):
+	if Export.export_processed_images(false, self, Global.current_project):
 		hide()
 
 
@@ -392,7 +392,7 @@ func _on_FrameTimer_timeout() -> void:
 					target_frame = preview_current_frame + 1
 
 	frame_timer.wait_time = (
-		Global.current_project.frames[(target_frame % (preview_frames.size()))].duration
+		Global.current_project.frames[target_frame % (preview_frames.size())].duration
 		* (1 / Global.current_project.fps)
 	)
 	frame_timer.start()

@@ -4,7 +4,6 @@
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="ExportDialog" type="ConfirmationDialog"]
-visible = true
 margin_right = 532.0
 margin_bottom = 530.0
 rect_min_size = Vector2( 456, 530 )
