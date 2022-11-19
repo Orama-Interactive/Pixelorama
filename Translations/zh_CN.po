@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-10-18 10:39\n"
+"PO-Revision-Date: 2022-11-19 13:25\n"
 
 msgid "OK"
 msgstr "确定"
@@ -335,6 +335,9 @@ msgstr ""
 
 msgid "New layer"
 msgstr "新建图层"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "新建调色板"
@@ -2130,4 +2133,7 @@ msgstr "左键工具选项"
 
 msgid "Right Tool Options"
 msgstr "右键工具选项"
+
+msgid "References"
+msgstr ""
 
