@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-10-26 16:49\n"
+"PO-Revision-Date: 2022-11-19 13:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -335,6 +335,9 @@ msgstr "Substituir o cel"
 
 msgid "New layer"
 msgstr "Nova camada"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "Nova paleta"
@@ -2130,4 +2133,7 @@ msgstr "Opções da Ferramenta Esquerda"
 
 msgid "Right Tool Options"
 msgstr "Opções da Ferramenta Direita"
+
+msgid "References"
+msgstr ""
 
