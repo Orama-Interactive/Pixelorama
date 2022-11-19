@@ -325,6 +325,9 @@ msgstr ""
 msgid "New layer"
 msgstr ""
 
+msgid "New reference image"
+msgstr ""
+
 msgid "New palette"
 msgstr ""
 
@@ -2056,4 +2059,7 @@ msgid "Left Tool Options"
 msgstr ""
 
 msgid "Right Tool Options"
+msgstr ""
+
+msgid "References"
 msgstr ""
