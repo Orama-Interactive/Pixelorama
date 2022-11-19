@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-11-19 13:25\n"
+"PO-Revision-Date: 2022-11-19 18:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -337,7 +337,7 @@ msgid "New layer"
 msgstr "Strat nou"
 
 msgid "New reference image"
-msgstr ""
+msgstr "Imagine de referință nouă"
 
 msgid "New palette"
 msgstr "Paletă nouă"
@@ -2135,5 +2135,5 @@ msgid "Right Tool Options"
 msgstr "Opțiuni pentru instrumentul din dreapta"
 
 msgid "References"
-msgstr ""
+msgstr "Referințe"
 
