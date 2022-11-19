@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-11-19 13:25\n"
+"PO-Revision-Date: 2022-11-19 15:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -337,7 +337,7 @@ msgid "New layer"
 msgstr "Neue Ebene"
 
 msgid "New reference image"
-msgstr ""
+msgstr "Neues Referenzbild"
 
 msgid "New palette"
 msgstr "Neue Palette"
@@ -2133,5 +2133,5 @@ msgid "Right Tool Options"
 msgstr "Optionen des rechten Werkzeugs"
 
 msgid "References"
-msgstr ""
+msgstr "Referenzen"
 
