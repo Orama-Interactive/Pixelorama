@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Vietnamese\n"
 "Language: vi_VN\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-11-19 13:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -334,6 +334,9 @@ msgid "Replace cel"
 msgstr ""
 
 msgid "New layer"
+msgstr ""
+
+msgid "New reference image"
 msgstr ""
 
 msgid "New palette"
@@ -2067,5 +2070,8 @@ msgid "Left Tool Options"
 msgstr ""
 
 msgid "Right Tool Options"
+msgstr ""
+
+msgid "References"
 msgstr ""
 
