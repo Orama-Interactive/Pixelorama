@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-11-19 13:25\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -335,6 +335,9 @@ msgstr ""
 
 msgid "New layer"
 msgstr "طبقة جديدة"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "لوحة جديدة"
@@ -2079,5 +2082,8 @@ msgid "Left Tool Options"
 msgstr ""
 
 msgid "Right Tool Options"
+msgstr ""
+
+msgid "References"
 msgstr ""
 
