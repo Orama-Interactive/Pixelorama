@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-10-16 15:51\n"
+"PO-Revision-Date: 2022-11-19 13:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -335,6 +335,9 @@ msgstr "セルを置換"
 
 msgid "New layer"
 msgstr "新規レイヤー"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "新しいパレット"
@@ -2130,4 +2133,7 @@ msgstr "左ツールオプション"
 
 msgid "Right Tool Options"
 msgstr "右ツールオプション"
+
+msgid "References"
+msgstr ""
 
