@@ -3,7 +3,7 @@
 [ext_resource path="res://src/UI/Dialogs/ExportDialog.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
-[node name="ExportDialog" type="AcceptDialog"]
+[node name="ExportDialog" type="ConfirmationDialog"]
 visible = true
 margin_right = 532.0
 margin_bottom = 530.0
@@ -235,6 +235,8 @@ margin_right = 382.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 align = 2
+caret_blink = true
+caret_blink_speed = 0.5
 
 [node name="PathButton" type="Button" parent="VBoxContainer/FilePath" groups=["NotHTML5"]]
 margin_left = 386.0
@@ -258,6 +260,8 @@ margin_bottom = 52.0
 size_flags_horizontal = 3
 text = "untitled"
 align = 2
+caret_blink = true
+caret_blink_speed = 0.5
 
 [node name="FileFormat" type="OptionButton" parent="VBoxContainer/FilePath"]
 margin_left = 386.0
@@ -349,7 +353,6 @@ __meta__ = {
 
 [connection signal="about_to_show" from="." to="." method="_on_ExportDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ExportDialog_confirmed"]
-[connection signal="custom_action" from="." to="." method="_on_ExportDialog_custom_action"]
 [connection signal="popup_hide" from="." to="." method="_on_ExportDialog_popup_hide"]
 [connection signal="tab_clicked" from="VBoxContainer/Tabs" to="." method="_on_Tabs_tab_clicked"]
 [connection signal="item_selected" from="VBoxContainer/GridContainer/Orientation" to="." method="_on_Orientation_item_selected"]

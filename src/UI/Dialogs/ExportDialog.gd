@@ -1,4 +1,4 @@
-extends AcceptDialog
+extends ConfirmationDialog
 
 # called when user resumes export after filename collision
 signal resume_export_function
@@ -34,13 +34,13 @@ onready var file_format_options: OptionButton = $VBoxContainer/FilePath/FileForm
 
 
 func _ready() -> void:
+	get_ok().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	get_cancel().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	tabs.add_tab("Image")
 	tabs.add_tab("Spritesheet")
 	if OS.get_name() == "Windows":
-		add_button("Cancel", true, "cancel")
 		file_exists_alert_popup.add_button("Cancel Export", true, "cancel")
 	else:
-		add_button("Cancel", false, "cancel")
 		file_exists_alert_popup.add_button("Cancel Export", false, "cancel")
 
 	# Remove close button from export progress bar
@@ -303,11 +303,6 @@ func _on_ExportDialog_confirmed() -> void:
 		hide()
 
 
-func _on_ExportDialog_custom_action(action: String) -> void:
-	if action == "cancel":
-		hide()
-
-
 func _on_PathButton_pressed() -> void:
 	path_dialog_popup.popup_centered()
 
@@ -359,33 +354,22 @@ func _on_FrameTimer_timeout() -> void:
 		return
 	preview_texture_rect.texture = preview_frames[preview_current_frame]
 
+	var target_frame := preview_current_frame
 	match Export.direction:
 		Export.AnimationDirection.FORWARD:
 			if preview_current_frame == preview_frames.size() - 1:
 				preview_current_frame = 0
 			else:
 				preview_current_frame += 1
-			frame_timer.wait_time = (
-				Global.current_project.frames[(
-					(preview_current_frame - 1)
-					% (preview_frames.size())
-				)].duration
-				* (1 / Global.current_project.fps)
-			)
-			frame_timer.start()
+			target_frame = preview_current_frame - 1
+
 		Export.AnimationDirection.BACKWARDS:
 			if preview_current_frame == 0:
 				preview_current_frame = Export.processed_images.size() - 1
 			else:
 				preview_current_frame -= 1
-			frame_timer.wait_time = (
-				Global.current_project.frames[(
-					(preview_current_frame + 1)
-					% (preview_frames.size())
-				)].duration
-				* (1 / Global.current_project.fps)
-			)
-			frame_timer.start()
+			target_frame = preview_current_frame + 1
+
 		Export.AnimationDirection.PING_PONG:
 			match pingpong_direction:
 				Export.AnimationDirection.FORWARD:
@@ -396,14 +380,7 @@ func _on_FrameTimer_timeout() -> void:
 							preview_current_frame = 0
 					else:
 						preview_current_frame += 1
-					frame_timer.wait_time = (
-						Global.current_project.frames[(
-							(preview_current_frame - 1)
-							% (preview_frames.size())
-						)].duration
-						* (1 / Global.current_project.fps)
-					)
-					frame_timer.start()
+					target_frame = preview_current_frame - 1
 				Export.AnimationDirection.BACKWARDS:
 					if preview_current_frame == 0:
 						preview_current_frame += 1
@@ -412,14 +389,13 @@ func _on_FrameTimer_timeout() -> void:
 						pingpong_direction = Export.AnimationDirection.FORWARD
 					else:
 						preview_current_frame -= 1
-					frame_timer.wait_time = (
-						Global.current_project.frames[(
-							(preview_current_frame + 1)
-							% (preview_frames.size())
-						)].duration
-						* (1 / Global.current_project.fps)
-					)
-					frame_timer.start()
+					target_frame = preview_current_frame + 1
+
+	frame_timer.wait_time = (
+		Global.current_project.frames[(target_frame % (preview_frames.size()))].duration
+		* (1 / Global.current_project.fps)
+	)
+	frame_timer.start()
 
 
 func _on_ExportDialog_popup_hide() -> void:
