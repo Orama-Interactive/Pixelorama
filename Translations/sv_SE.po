@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2022-10-16 14:51\n"
+"PO-Revision-Date: 2022-11-19 13:25\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -335,6 +335,9 @@ msgstr ""
 
 msgid "New layer"
 msgstr "Nytt lager"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "Ny palett"
@@ -2067,5 +2070,8 @@ msgid "Left Tool Options"
 msgstr ""
 
 msgid "Right Tool Options"
+msgstr ""
+
+msgid "References"
 msgstr ""
 
