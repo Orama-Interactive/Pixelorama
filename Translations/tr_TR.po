@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-11-19 13:25\n"
+"PO-Revision-Date: 2022-11-19 15:43\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -337,7 +337,7 @@ msgid "New layer"
 msgstr "Yeni katman"
 
 msgid "New reference image"
-msgstr ""
+msgstr "Yeni referans resmi"
 
 msgid "New palette"
 msgstr "Yeni palet"
@@ -2134,5 +2134,5 @@ msgid "Right Tool Options"
 msgstr "Sağ Araç Seçenekleri"
 
 msgid "References"
-msgstr ""
+msgstr "Referanslar"
 
