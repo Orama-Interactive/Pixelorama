@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-11-19 13:25\n"
+"PO-Revision-Date: 2022-11-20 18:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -337,7 +337,7 @@ msgid "New layer"
 msgstr "Новый слой"
 
 msgid "New reference image"
-msgstr ""
+msgstr "Новый рисунок-образец"
 
 msgid "New palette"
 msgstr "Новая палитра"
@@ -2134,5 +2134,5 @@ msgid "Right Tool Options"
 msgstr "Настройки правого инструмента"
 
 msgid "References"
-msgstr ""
+msgstr "Образцы"
 
