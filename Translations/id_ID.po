@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-11-19 13:25\n"
+"PO-Revision-Date: 2022-11-20 00:50\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -337,7 +337,7 @@ msgid "New layer"
 msgstr "Lapisan baru"
 
 msgid "New reference image"
-msgstr ""
+msgstr "Gambar rujukan baru"
 
 msgid "New palette"
 msgstr "Palet baru"
@@ -2135,5 +2135,5 @@ msgid "Right Tool Options"
 msgstr "Opsi Alat Di Kanan"
 
 msgid "References"
-msgstr ""
+msgstr "Rujukan"
 
