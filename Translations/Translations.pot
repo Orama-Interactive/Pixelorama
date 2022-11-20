@@ -1937,10 +1937,10 @@ msgstr ""
 msgid "minute(s)"
 msgstr ""
 
-msgid "Create new directory for each frame tag"
+msgid "Create new folder for each frame tag"
 msgstr ""
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 msgstr ""
 
 msgid "Close"
