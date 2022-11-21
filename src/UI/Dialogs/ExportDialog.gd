@@ -55,15 +55,15 @@ func show_tab() -> void:
 		Export.ExportTab.FRAME:
 			Export.process_animation()
 		Export.ExportTab.SPRITESHEET:
-			if not Export.was_exported:
-				Export.orientation = Export.Orientation.ROWS
-				Export.lines_count = int(ceil(sqrt(Export.number_of_frames)))
 			frame_timer.stop()
+			Export.process_spritesheet()
 			spritesheet_orientation.selected = Export.orientation
 			spritesheet_lines_count.max_value = Export.number_of_frames
 			spritesheet_lines_count.value = Export.lines_count
-			spritesheet_lines_count_label.text = "Columns:"
-			Export.process_spritesheet()
+			if Export.orientation == Export.Orientation.ROWS:
+				spritesheet_lines_count_label.text = "Columns:"
+			else:
+				spritesheet_lines_count_label.text = "Rows:"
 			get_tree().call_group("SpritesheetOptions", "show")
 	set_preview()
 	update_dimensions_label()
