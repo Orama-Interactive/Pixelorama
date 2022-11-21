@@ -5,7 +5,6 @@ signal resume_export_function
 
 var preview_current_frame := 0
 var preview_frames := []
-var pingpong_direction: int = Export.AnimationDirection.FORWARD
 
 onready var tabs: Tabs = $VBoxContainer/Tabs
 onready var checker: ColorRect = $VBoxContainer/PreviewPanel/TransparentChecker
@@ -51,6 +50,7 @@ func show_tab() -> void:
 	get_tree().call_group("SpritesheetOptions", "hide")
 	set_file_format_selector()
 	create_frame_tag_list()
+	frames_option_button.select(Export.frame_current_tag)
 	match Export.current_tab:
 		Export.ExportTab.FRAME:
 			Export.process_animation()
@@ -59,7 +59,6 @@ func show_tab() -> void:
 				Export.orientation = Export.Orientation.ROWS
 				Export.lines_count = int(ceil(sqrt(Export.number_of_frames)))
 			Export.process_spritesheet()
-			frames_option_button.select(Export.frame_current_tag)
 			frame_timer.stop()
 			spritesheet_orientation.selected = Export.orientation
 			spritesheet_lines_count.max_value = Export.number_of_frames
@@ -103,15 +102,11 @@ func add_image_preview(image: Image, canvas_number: int = -1) -> void:
 
 
 func add_animated_preview() -> void:
-	preview_current_frame = (
-		Export.processed_images.size() - 1
-		if Export.direction == Export.AnimationDirection.BACKWARDS
-		else 0
-	)
+	preview_current_frame = 0
 	preview_frames = []
 
 	for processed_image in Export.processed_images:
-		var texture = ImageTexture.new()
+		var texture := ImageTexture.new()
 		texture.create_from_image(processed_image, 0)
 		preview_frames.push_back(texture)
 
@@ -278,14 +273,9 @@ func _on_LinesCount_value_changed(value: float) -> void:
 
 func _on_Direction_item_selected(id: int) -> void:
 	Export.direction = id
-	match id:
-		Export.AnimationDirection.FORWARD:
-			preview_current_frame = 0
-		Export.AnimationDirection.BACKWARDS:
-			preview_current_frame = Export.processed_images.size() - 1
-		Export.AnimationDirection.PING_PONG:
-			preview_current_frame = 0
-			pingpong_direction = Export.AnimationDirection.FORWARD
+	preview_current_frame = 0
+	Export.process_data()
+	set_preview()
 
 
 func _on_Resize_value_changed(value: float) -> void:
@@ -354,47 +344,12 @@ func _on_FrameTimer_timeout() -> void:
 		return
 	preview_texture_rect.texture = preview_frames[preview_current_frame]
 
-	var target_frame := preview_current_frame
-	match Export.direction:
-		Export.AnimationDirection.FORWARD:
-			if preview_current_frame == preview_frames.size() - 1:
-				preview_current_frame = 0
-			else:
-				preview_current_frame += 1
-			target_frame = preview_current_frame - 1
+	if preview_current_frame == preview_frames.size() - 1:
+		preview_current_frame = 0
+	else:
+		preview_current_frame += 1
 
-		Export.AnimationDirection.BACKWARDS:
-			if preview_current_frame == 0:
-				preview_current_frame = Export.processed_images.size() - 1
-			else:
-				preview_current_frame -= 1
-			target_frame = preview_current_frame + 1
-
-		Export.AnimationDirection.PING_PONG:
-			match pingpong_direction:
-				Export.AnimationDirection.FORWARD:
-					if preview_current_frame == preview_frames.size() - 1:
-						pingpong_direction = Export.AnimationDirection.BACKWARDS
-						preview_current_frame -= 1
-						if preview_current_frame <= 0:
-							preview_current_frame = 0
-					else:
-						preview_current_frame += 1
-					target_frame = preview_current_frame - 1
-				Export.AnimationDirection.BACKWARDS:
-					if preview_current_frame == 0:
-						preview_current_frame += 1
-						if preview_current_frame >= preview_frames.size() - 1:
-							preview_current_frame = 0
-						pingpong_direction = Export.AnimationDirection.FORWARD
-					else:
-						preview_current_frame -= 1
-					target_frame = preview_current_frame + 1
-
-	frame_timer.wait_time = (
-		Global.current_project.frames[target_frame % (preview_frames.size())].duration
-		* (1 / Global.current_project.fps)
-	)
+	frame_timer.wait_time = Export.durations[preview_current_frame - 1]
 	frame_timer.start()
 
 

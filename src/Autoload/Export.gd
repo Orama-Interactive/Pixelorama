@@ -9,6 +9,7 @@ enum FileFormat { PNG = 0, GIF = 1, APNG = 2 }
 var current_tab: int = ExportTab.FRAME
 # All frames and their layers processed/blended into images
 var processed_images := []  # Image[]
+var durations := []  # Array of floats
 
 var frame_current_tag := 0  # Export only current frame tag
 var export_layers := 0
@@ -115,12 +116,14 @@ func process_spritesheet(project := Global.current_project) -> void:
 
 func process_animation(project := Global.current_project) -> void:
 	processed_images.clear()
+	durations.clear()
 	var frames := calculate_frames(project)
 	for frame in frames:
 		var image := Image.new()
 		image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 		blend_layers(image, frame)
 		processed_images.append(image)
+		durations.append(frame.duration * (1.0 / project.fps))
 
 
 func calculate_frames(project := Global.current_project) -> Array:
@@ -133,7 +136,15 @@ func calculate_frames(project := Global.current_project) -> Array:
 		for cel in project.selected_cels:
 			frames.append(project.frames[cel[0]])
 	else:  # All frames
-		frames = project.frames
+		frames = project.frames.duplicate()
+
+	if direction == AnimationDirection.BACKWARDS:
+		frames.invert()
+	elif direction == AnimationDirection.PING_PONG:
+		var inverted_frames := frames.duplicate()
+		inverted_frames.invert()
+		inverted_frames.remove(0)
+		frames.append_array(inverted_frames)
 	return frames
 
 
@@ -242,41 +253,17 @@ func export_animated(args: Dictionary) -> void:
 	var exporter: BaseAnimationExporter = args["exporter"]
 	# This is an ExportDialog (which refers back here).
 	var export_dialog: ConfirmationDialog = args["export_dialog"]
-	# Array of Image
-	var sequence := []
-	# Array of float
-	var durations := []
-	match direction:
-		AnimationDirection.FORWARD:
-			for i in range(processed_images.size()):
-				sequence.push_back(processed_images[i])
-				durations.push_back(project.frames[i].duration)
-		AnimationDirection.BACKWARDS:
-			for i in range(processed_images.size() - 1, -1, -1):
-				sequence.push_back(processed_images[i])
-				durations.push_back(project.frames[i].duration)
-		AnimationDirection.PING_PONG:
-			for i in range(0, processed_images.size()):
-				sequence.push_back(processed_images[i])
-				durations.push_back(project.frames[i].duration)
-			for i in range(processed_images.size() - 2, 0, -1):
-				sequence.push_back(processed_images[i])
-				durations.push_back(project.frames[i].duration)
-
-	# Stuff we need to deal with across all images
-	for i in range(processed_images.size()):
-		durations[i] *= 1.0 / project.fps
 
 	# Export progress popup
 	# One fraction per each frame, one fraction for write to disk
-	export_progress_fraction = 100.0 / len(sequence)
+	export_progress_fraction = 100.0 / len(processed_images)
 	export_progress = 0.0
 	export_dialog.set_export_progress_bar(export_progress)
 	export_dialog.toggle_export_progress_popup(true)
 
 	# Export and save gif
 	var file_data := exporter.export_animation(
-		sequence, durations, project.fps, self, "increase_export_progress", [export_dialog]
+		processed_images, durations, project.fps, self, "increase_export_progress", [export_dialog]
 	)
 
 	if OS.get_name() == "HTML5":
