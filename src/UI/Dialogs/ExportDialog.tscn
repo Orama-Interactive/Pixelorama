@@ -213,7 +213,7 @@ margin_top = 176.0
 margin_right = 516.0
 margin_bottom = 190.0
 size_flags_horizontal = 3
-text = "64x64"
+text = "64×64"
 
 [node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/GridContainer"]
 margin_top = 194.0
