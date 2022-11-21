@@ -370,26 +370,33 @@ func get_proccessed_image_animation_tag_and_start_id(
 
 
 func blend_layers(
-	image: Image, frame: Frame, origin := Vector2(0, 0), project := Global.current_project
+	image: Image, frame: Frame, origin := Vector2.ZERO, project := Global.current_project
 ) -> void:
 	if export_layers == 0:
 		blend_all_layers(image, frame, origin, project)
 	elif export_layers == 1:
 		blend_selected_cels(image, frame, origin, project)
+	else:
+		var layer: BaseLayer = project.layers[export_layers - 2]
+		var layer_image := Image.new()
+		if layer is PixelLayer:
+			layer_image.copy_from(frame.cels[export_layers - 2].image)
+		elif layer is GroupLayer:
+			layer_image.copy_from(layer.blend_children(frame, Vector2.ZERO))
+		image.blend_rect(layer_image, Rect2(Vector2.ZERO, project.size), origin)
 
 
 # Blends canvas layers into passed image starting from the origin position
 func blend_all_layers(
-	image: Image, frame: Frame, origin := Vector2(0, 0), project := Global.current_project
+	image: Image, frame: Frame, origin := Vector2.ZERO, project := Global.current_project
 ) -> void:
-	image.lock()
 	var layer_i := 0
 	for cel in frame.cels:
 		if project.layers[layer_i].is_visible_in_hierarchy() and cel is PixelCel:
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.image)
-			cel_image.lock()
 			if cel.opacity < 1:  # If we have cel transparency
+				cel_image.lock()
 				for xx in cel_image.get_size().x:
 					for yy in cel_image.get_size().y:
 						var pixel_color := cel_image.get_pixel(xx, yy)
@@ -397,17 +404,15 @@ func blend_all_layers(
 						cel_image.set_pixel(
 							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 						)
+				cel_image.unlock()
 			image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
-			cel_image.unlock()
 		layer_i += 1
-	image.unlock()
 
 
 # Blends selected cels of the given frame into passed image starting from the origin position
 func blend_selected_cels(
 	image: Image, frame: Frame, origin := Vector2(0, 0), project := Global.current_project
 ) -> void:
-	image.lock()
 	var layer_i := 0
 	for cel_ind in frame.cels.size():
 		var test_array := [project.current_frame, cel_ind]
@@ -421,8 +426,8 @@ func blend_selected_cels(
 		if project.layers[layer_i].is_visible_in_hierarchy():
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.image)
-			cel_image.lock()
 			if cel.opacity < 1:  # If we have cel transparency
+				cel_image.lock()
 				for xx in cel_image.get_size().x:
 					for yy in cel_image.get_size().y:
 						var pixel_color := cel_image.get_pixel(xx, yy)
@@ -430,10 +435,9 @@ func blend_selected_cels(
 						cel_image.set_pixel(
 							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 						)
+				cel_image.unlock()
 			image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
-			cel_image.unlock()
 		layer_i += 1
-	image.unlock()
 
 
 func frames_divided_by_spritesheet_lines() -> int:

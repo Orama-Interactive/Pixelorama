@@ -18,6 +18,7 @@ onready var export_progress_bar: ProgressBar = $Popups/ExportProgressBar/MarginC
 onready var multiple_animations_directories: CheckBox = find_node("MultipleAnimationsDirectories")
 onready var previews: GridContainer = $VBoxContainer/PreviewPanel/PreviewScroll/Previews
 onready var frames_option_button: OptionButton = $VBoxContainer/GridContainer/Frames
+onready var layers_option_button: OptionButton = $VBoxContainer/GridContainer/Layers
 onready var frame_timer: Timer = $FrameTimer
 
 onready var spritesheet_orientation: OptionButton = $VBoxContainer/GridContainer/Orientation
@@ -51,6 +52,8 @@ func show_tab() -> void:
 	set_file_format_selector()
 	create_frame_tag_list()
 	frames_option_button.select(Export.frame_current_tag)
+	create_layer_list()
+	layers_option_button.select(Export.export_layers)
 	match Export.current_tab:
 		Export.ExportTab.FRAME:
 			Export.process_animation()
@@ -173,12 +176,25 @@ func _set_file_format_selector_suitable_file_formats(formats: Array) -> void:
 func create_frame_tag_list() -> void:
 	# Clear existing tag list from entry if it exists
 	frames_option_button.clear()
-	frames_option_button.add_item("All frames", 0)  # Re-add removed 'All Frames' item
-	frames_option_button.add_item("Selected frames", 1)  # Re-add removed 'All Frames' item
+	# Re-add removed items
+	frames_option_button.add_item("All frames", 0)
+	frames_option_button.add_item("Selected frames", 1)
 
 	# Repopulate list with current tag list
 	for item in Global.current_project.animation_tags:
 		frames_option_button.add_item(item.name)
+
+
+func create_layer_list() -> void:
+	# Clear existing tag list from entry if it exists
+	layers_option_button.clear()
+	# Re-add removed items
+	layers_option_button.add_item("Visible layers", 0)
+	layers_option_button.add_item("Selected layers", 1)
+
+	# Repopulate list with current tag list
+	for layer in Global.current_project.layers:
+		layers_option_button.add_item(layer.name)
 
 
 func update_dimensions_label() -> void:
