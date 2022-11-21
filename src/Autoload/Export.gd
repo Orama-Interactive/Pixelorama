@@ -11,32 +11,30 @@ var current_tab: int = ExportTab.FRAME
 var processed_images := []  # Image[]
 var durations := []  # Array of floats
 
-var frame_current_tag := 0  # Export only current frame tag
-var export_layers := 0
-var number_of_frames := 1
-
 # Spritesheet options
 var orientation: int = Orientation.ROWS
 var lines_count := 1  # How many rows/columns before new line is added
 
+# General options
+var frame_current_tag := 0  # Export only current frame tag
+var export_layers := 0
+var number_of_frames := 1
 var direction: int = AnimationDirection.FORWARD
-
-# Options
 var resize := 100
 var interpolation := 0  # Image.Interpolation
-var new_dir_for_each_frame_tag := false  # you don't need to store this after export
+var new_dir_for_each_frame_tag := false  # we don't need to store this after export
 
 # Export directory path and export file name
 var directory_path := ""
 var file_name := "untitled"
 var file_format: int = FileFormat.PNG
 
-var was_exported: bool = false
+var was_exported := false
 
 # Export coroutine signal
 var stop_export := false
 
-var file_exists_alert = "File %s already exists. Overwrite?"
+var file_exists_alert := "File %s already exists. Overwrite?"
 
 # Export progress variables
 var export_progress_fraction := 0.0

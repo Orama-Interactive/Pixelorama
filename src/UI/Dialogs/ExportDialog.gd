@@ -8,15 +8,15 @@ var preview_frames := []
 
 onready var tabs: Tabs = $VBoxContainer/Tabs
 onready var checker: ColorRect = $VBoxContainer/PreviewPanel/TransparentChecker
-onready var popups = $Popups
-onready var file_exists_alert_popup = $Popups/FileExistsAlert
-onready var path_validation_alert_popup = $Popups/PathValidationAlert
-onready var path_dialog_popup = $Popups/PathDialog
-onready var export_progress_popup = $Popups/ExportProgressBar
-onready var export_progress_bar = $Popups/ExportProgressBar/MarginContainer/ProgressBar
+onready var popups: Node = $Popups
+onready var file_exists_alert_popup: AcceptDialog = $Popups/FileExistsAlert
+onready var path_validation_alert_popup: AcceptDialog = $Popups/PathValidationAlert
+onready var path_dialog_popup: FileDialog = $Popups/PathDialog
+onready var export_progress_popup: WindowDialog = $Popups/ExportProgressBar
+onready var export_progress_bar: ProgressBar = $Popups/ExportProgressBar/MarginContainer/ProgressBar
 
 onready var multiple_animations_directories: CheckBox = find_node("MultipleAnimationsDirectories")
-onready var previews = $VBoxContainer/PreviewPanel/PreviewScroll/Previews
+onready var previews: GridContainer = $VBoxContainer/PreviewPanel/PreviewScroll/Previews
 onready var frames_option_button: OptionButton = $VBoxContainer/GridContainer/Frames
 onready var frame_timer: Timer = $FrameTimer
 
@@ -58,12 +58,12 @@ func show_tab() -> void:
 			if not Export.was_exported:
 				Export.orientation = Export.Orientation.ROWS
 				Export.lines_count = int(ceil(sqrt(Export.number_of_frames)))
-			Export.process_spritesheet()
 			frame_timer.stop()
 			spritesheet_orientation.selected = Export.orientation
 			spritesheet_lines_count.max_value = Export.number_of_frames
 			spritesheet_lines_count.value = Export.lines_count
 			spritesheet_lines_count_label.text = "Columns:"
+			Export.process_spritesheet()
 			get_tree().call_group("SpritesheetOptions", "show")
 	set_preview()
 	update_dimensions_label()
@@ -86,14 +86,14 @@ func set_preview() -> void:
 
 
 func add_image_preview(image: Image, canvas_number: int = -1) -> void:
-	var container = create_preview_container()
-	var preview = create_preview_rect()
+	var container := create_preview_container()
+	var preview := create_preview_rect()
 	preview.texture = ImageTexture.new()
 	preview.texture.create_from_image(image, 0)
 	container.add_child(preview)
 
 	if canvas_number != -1:
-		var label = Label.new()
+		var label := Label.new()
 		label.align = Label.ALIGN_CENTER
 		label.text = String(canvas_number)
 		container.add_child(label)
@@ -118,11 +118,8 @@ func add_animated_preview() -> void:
 	container.add_child(preview)
 
 	previews.add_child(container)
-	frame_timer.set_one_shot(true)  # wait_time can't change correctly if it is playing
-	frame_timer.wait_time = (
-		Global.current_project.frames[preview_current_frame].duration
-		* (1 / Global.current_project.fps)
-	)
+	frame_timer.set_one_shot(true)  # wait_time can't change correctly if the timer is playing
+	frame_timer.wait_time = Export.durations[preview_current_frame]
 	frame_timer.start()
 
 
