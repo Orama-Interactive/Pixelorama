@@ -281,7 +281,7 @@ margin_top = 28.0
 margin_right = 516.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 130, 0 )
-mouse_default_cursor_shape = 8
+mouse_default_cursor_shape = 2
 
 [node name="Popups" type="Node" parent="."]
 
