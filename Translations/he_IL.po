@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2022-11-23 09:54\n"
+"PO-Revision-Date: 2022-11-23 13:31\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -1762,7 +1762,7 @@ msgid "Palette Name:"
 msgstr ""
 
 msgid "Color Name:"
-msgstr ""
+msgstr "שם צבע:"
 
 msgid "Use current left & right colors"
 msgstr ""
