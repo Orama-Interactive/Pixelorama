@@ -253,9 +253,6 @@ func _on_ExportDialog_about_to_show() -> void:
 	file_format_options.selected = Export.file_format
 	show_tab()
 
-	for child in popups.get_children():  # Set the theme for the popups
-		child.theme = Global.control.theme
-
 	Export.file_exists_alert = tr("File %s already exists. Overwrite?")  # Update translation
 	# Set the size of the preview checker
 	checker.rect_size = checker.get_parent().rect_size
