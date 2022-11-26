@@ -15,7 +15,7 @@ mouse_default_cursor_shape = 2
 theme_type_variation = "CollapsibleCheckBox"
 toggle_mode = true
 
-[node name="TextureRect" type="TextureRect" parent="Button"]
+[node name="TextureRect" type="TextureRect" parent="Button" groups=["UIButtons"]]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 2.0

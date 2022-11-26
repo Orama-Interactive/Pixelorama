@@ -324,6 +324,10 @@ mouse_default_cursor_shape = 2
 text = "Create new folder for each frame tag"
 
 [node name="Popups" type="Control" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 524.0
+margin_bottom = 494.0
 mouse_filter = 2
 
 [node name="PathDialog" type="FileDialog" parent="Popups"]
