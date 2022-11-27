@@ -460,11 +460,11 @@ msgid "Selected layers"
 msgstr ""
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
-msgid "Pixel Layer:"
+msgid "Pixel layer:"
 msgstr ""
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
-msgid "Group Layer:"
+msgid "Group layer:"
 msgstr ""
 
 msgid "Direction:"
