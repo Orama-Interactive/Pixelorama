@@ -198,7 +198,11 @@ func create_layer_list() -> void:
 
 	# Repopulate list with current tag list
 	for layer in Global.current_project.layers:
-		layers_option_button.add_item(layer.name)
+		var layer_name := tr("Pixel Layer:")
+		if layer is GroupLayer:
+			layer_name = tr("Group Layer:")
+		layer_name += " %s" % layer.get_layer_path()
+		layers_option_button.add_item(layer_name)
 
 
 func update_dimensions_label() -> void:
