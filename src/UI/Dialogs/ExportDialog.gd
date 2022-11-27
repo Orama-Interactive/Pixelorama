@@ -8,14 +8,6 @@ var preview_frames := []
 
 onready var tabs: Tabs = $VBoxContainer/Tabs
 onready var checker: ColorRect = $"%TransparentChecker"
-onready var popups: Node = $Popups
-onready var file_exists_alert_popup: AcceptDialog = $Popups/FileExistsAlert
-onready var path_validation_alert_popup: AcceptDialog = $Popups/PathValidationAlert
-onready var path_dialog_popup: FileDialog = $Popups/PathDialog
-onready var export_progress_popup: WindowDialog = $Popups/ExportProgressBar
-onready var export_progress_bar: ProgressBar = $Popups/ExportProgressBar/MarginContainer/ProgressBar
-
-onready var multiple_animations_directories: CheckBox = $"%MultipleAnimationsDirectories"
 onready var previews: GridContainer = $"%Previews"
 
 onready var spritesheet_orientation: OptionButton = $"%Orientation"
@@ -25,12 +17,20 @@ onready var spritesheet_lines_count_label: Label = $"%LinesCountLabel"
 onready var frames_option_button: OptionButton = $"%Frames"
 onready var layers_option_button: OptionButton = $"%Layers"
 onready var options_resize: SpinBox = $"%Resize"
-onready var options_interpolation: OptionButton = $"%Interpolation"
 onready var dimension_label: Label = $"%DimensionLabel"
 
 onready var path_line_edit: LineEdit = $"%PathLineEdit"
 onready var file_line_edit: LineEdit = $"%FileLineEdit"
 onready var file_format_options: OptionButton = $"%FileFormat"
+
+onready var multiple_animations_directories: CheckBox = $"%MultipleAnimationsDirectories"
+onready var options_interpolation: OptionButton = $"%Interpolation"
+
+onready var file_exists_alert_popup: AcceptDialog = $Popups/FileExistsAlert
+onready var path_validation_alert_popup: AcceptDialog = $Popups/PathValidationAlert
+onready var path_dialog_popup: FileDialog = $Popups/PathDialog
+onready var export_progress_popup: WindowDialog = $Popups/ExportProgressBar
+onready var export_progress_bar: ProgressBar = $Popups/ExportProgressBar/MarginContainer/ProgressBar
 onready var frame_timer: Timer = $FrameTimer
 
 
