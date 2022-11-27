@@ -159,7 +159,7 @@ selected = 0
 margin_top = 103.0
 margin_right = 256.0
 margin_bottom = 117.0
-text = "Animation direction:"
+text = "Direction:"
 
 [node name="Direction" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
 margin_left = 260.0
@@ -285,7 +285,7 @@ margin_bottom = 238.0
 margin_top = 242.0
 margin_right = 516.0
 margin_bottom = 262.0
-text = "Advanced settings"
+text = "Advanced options"
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer"]
 visible = false

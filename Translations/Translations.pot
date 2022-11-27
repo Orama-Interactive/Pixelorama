@@ -441,13 +441,30 @@ msgstr ""
 msgid "Open a Directory"
 msgstr ""
 
-msgid "All frames as multiple files"
-msgstr ""
-
-msgid "All frames as a single file animation"
-msgstr ""
-
 msgid "Background:"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr ""
+
+msgid "Layers:"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr ""
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel Layer:"
+msgstr ""
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group Layer:"
 msgstr ""
 
 msgid "Direction:"
@@ -474,6 +491,10 @@ msgstr ""
 msgid "Rows:"
 msgstr ""
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr ""
+
 msgid "Path:"
 msgstr ""
 
@@ -484,6 +505,10 @@ msgid "Create Folder"
 msgstr ""
 
 msgid "File:"
+msgstr ""
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
 msgstr ""
 
 msgid "Interpolation:"
@@ -1937,9 +1962,11 @@ msgstr ""
 msgid "minute(s)"
 msgstr ""
 
+#. Found in the export dialog.
 msgid "Create new folder for each frame tag"
 msgstr ""
 
+#. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 msgstr ""
 
