@@ -80,7 +80,7 @@ margin_right = 516.0
 margin_bottom = 166.0
 columns = 2
 
-[node name="OrientationLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["SpritesheetOptions"]]
+[node name="OrientationLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
 margin_top = 3.0
 margin_right = 256.0
 margin_bottom = 17.0
@@ -89,7 +89,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Orientation" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["SpritesheetOptions"]]
+[node name="Orientation" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
 unique_name_in_owner = true
 margin_left = 260.0
 margin_right = 516.0
@@ -100,14 +100,14 @@ text = "Rows"
 items = [ "Rows", null, false, 0, null, "Columns", null, false, 1, null ]
 selected = 0
 
-[node name="LinesCountLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["SpritesheetOptions"]]
+[node name="LinesCountLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
 unique_name_in_owner = true
 margin_top = 29.0
 margin_right = 256.0
 margin_bottom = 43.0
 text = "Columns:"
 
-[node name="LinesCount" type="SpinBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["SpritesheetOptions"]]
+[node name="LinesCount" type="SpinBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
 unique_name_in_owner = true
 margin_left = 260.0
 margin_top = 24.0
@@ -313,7 +313,7 @@ text = "Nearest"
 items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, false, 4, null ]
 selected = 0
 
-[node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer"]
+[node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer" groups=["ExportImageOptions"]]
 unique_name_in_owner = true
 visible = false
 margin_top = 48.0
@@ -324,10 +324,6 @@ mouse_default_cursor_shape = 2
 text = "Create new folder for each frame tag"
 
 [node name="Popups" type="Control" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 524.0
-margin_bottom = 494.0
 mouse_filter = 2
 
 [node name="PathDialog" type="FileDialog" parent="Popups"]

@@ -1,12 +1,12 @@
 extends Node
 
-enum ExportTab { FRAME = 0, SPRITESHEET = 1 }
+enum ExportTab { IMAGE = 0, SPRITESHEET = 1 }
 enum Orientation { ROWS = 0, COLUMNS = 1 }
 enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
 # See file_format_string, file_format_description, and ExportDialog.gd
 enum FileFormat { PNG = 0, GIF = 1, APNG = 2 }
 
-var current_tab: int = ExportTab.FRAME
+var current_tab: int = ExportTab.IMAGE
 # All frames and their layers processed/blended into images
 var processed_images := []  # Image[]
 var durations := []  # Array of floats
@@ -54,7 +54,7 @@ func external_export(project := Global.current_project) -> void:
 
 func process_data(project := Global.current_project) -> void:
 	match current_tab:
-		ExportTab.FRAME:
+		ExportTab.IMAGE:
 			process_animation(project)
 		ExportTab.SPRITESHEET:
 			process_spritesheet(project)
@@ -161,7 +161,7 @@ func export_processed_images(
 		return false
 
 	var multiple_files := false
-	if current_tab == ExportTab.FRAME and not is_single_file_format():
+	if current_tab == ExportTab.IMAGE and not is_single_file_format():
 		multiple_files = true if processed_images.size() > 1 else false
 	# Check export paths
 	var export_paths := []

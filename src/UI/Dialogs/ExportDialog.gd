@@ -49,15 +49,18 @@ func _ready() -> void:
 
 
 func show_tab() -> void:
-	get_tree().call_group("SpritesheetOptions", "hide")
+	get_tree().call_group("ExportImageOptions", "hide")
+	get_tree().call_group("ExportSpritesheetOptions", "hide")
 	set_file_format_selector()
 	create_frame_tag_list()
 	frames_option_button.select(Export.frame_current_tag)
 	create_layer_list()
 	layers_option_button.select(Export.export_layers)
 	match Export.current_tab:
-		Export.ExportTab.FRAME:
+		Export.ExportTab.IMAGE:
 			Export.process_animation()
+			get_tree().call_group("ExportImageOptions", "show")
+			multiple_animations_directories.disabled = Export.is_single_file_format()
 		Export.ExportTab.SPRITESHEET:
 			frame_timer.stop()
 			Export.process_spritesheet()
@@ -68,7 +71,7 @@ func show_tab() -> void:
 				spritesheet_lines_count_label.text = "Columns:"
 			else:
 				spritesheet_lines_count_label.text = "Rows:"
-			get_tree().call_group("SpritesheetOptions", "show")
+			get_tree().call_group("ExportSpritesheetOptions", "show")
 	set_preview()
 	update_dimensions_label()
 	tabs.current_tab = Export.current_tab
@@ -151,7 +154,7 @@ func remove_previews() -> void:
 
 func set_file_format_selector() -> void:
 	match Export.current_tab:
-		Export.ExportTab.FRAME:
+		Export.ExportTab.IMAGE:
 			_set_file_format_selector_suitable_file_formats(
 				[Export.FileFormat.PNG, Export.FileFormat.GIF, Export.FileFormat.APNG]
 			)
@@ -329,7 +332,10 @@ func _on_FileFormat_item_selected(idx: int) -> void:
 	Global.current_project.file_format = id
 	Export.file_format = id
 	if not Export.is_single_file_format():
+		multiple_animations_directories.disabled = false
 		frame_timer.stop()
+	else:
+		multiple_animations_directories.disabled = true
 	set_preview()
 
 
