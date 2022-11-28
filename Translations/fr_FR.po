@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-11-28 19:28\n"
+"PO-Revision-Date: 2022-11-28 22:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -325,7 +325,7 @@ msgid "Spritesheet (new project)"
 msgstr ""
 
 msgid "Spritesheet (new layer)"
-msgstr "Grille de sprite (nouvelle couche)"
+msgstr "Grille de sprite (nouveau calque)"
 
 msgid "New frame"
 msgstr "Nouvelle frame"
@@ -462,26 +462,26 @@ msgstr "Arrière-plan :"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Frames sélectionnées"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Calques :"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Calques visibles"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Calques sélectionnés"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Calque de pixel :"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Groupe de calque :"
 
 msgid "Direction:"
 msgstr "Direction :"
@@ -509,7 +509,7 @@ msgstr "Lignes :"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Dimensions d'export :"
 
 msgid "Path:"
 msgstr "Chemin :"
@@ -525,7 +525,7 @@ msgstr "Fichier :"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Options avancées"
 
 msgid "Interpolation:"
 msgstr "Interpolation :"
@@ -1655,7 +1655,7 @@ msgid "Frame properties"
 msgstr "Propriétés de la frame"
 
 msgid "Layer"
-msgstr "Couche"
+msgstr "Calque"
 
 msgid "Group"
 msgstr "Groupe"
@@ -1667,7 +1667,7 @@ msgid "Create a new layer"
 msgstr "Créer un calque"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "Créer un nouveau groupe de calque"
 
 msgid "Remove current layer"
 msgstr "Supprimer le calque"
@@ -1697,7 +1697,7 @@ msgid "Lock/unlock layer"
 msgstr "Verrouiller/déverrouiller le calque"
 
 msgid "Frame: %s, Layer: %s"
-msgstr "Frame : %s, Couche : %s"
+msgstr "Frame : %s, Calque : %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
@@ -2038,11 +2038,11 @@ msgstr "minute(s)"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "Créer un nouveau dossier pour chaque tag de frame"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr ""
+msgstr "Créé plusieurs fichiers, mais chaque fichier est stocké dans un dossier qui correspond aux tags de frame"
 
 msgid "Close"
 msgstr "Fermer"
