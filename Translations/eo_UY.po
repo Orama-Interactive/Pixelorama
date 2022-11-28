@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2022-11-19 13:25\n"
+"PO-Revision-Date: 2022-11-28 19:28\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -457,14 +457,31 @@ msgstr ""
 msgid "Open a Directory"
 msgstr "Malfermi dosierujon"
 
-msgid "All frames as multiple files"
-msgstr "Ĉiuj kadroj kiel multaj dosieroj"
-
-msgid "All frames as a single file animation"
-msgstr "Ĉiuj kadroj kiel animacio de unu dosiero"
-
 msgid "Background:"
 msgstr "Fono:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr ""
+
+msgid "Layers:"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr ""
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr ""
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr ""
 
 msgid "Direction:"
 msgstr "Direkto:"
@@ -490,6 +507,10 @@ msgstr "Vicoj"
 msgid "Rows:"
 msgstr "Vicoj:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr ""
+
 msgid "Path:"
 msgstr "Vojo:"
 
@@ -501,6 +522,10 @@ msgstr "Krei dosierujon"
 
 msgid "File:"
 msgstr "Dosiero:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr ""
 
 msgid "Interpolation:"
 msgstr "Interpolado:"
@@ -1953,11 +1978,13 @@ msgstr "Aŭtokonserva intervalo:"
 msgid "minute(s)"
 msgstr "minuto(j)"
 
-msgid "Create new directory for each frame tag"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
 msgstr ""
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Kreas kelkajn dosierojn, sed ĉiu dosiero estas konservita en malsama dosierujo laŭ la filmera etikedo"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr ""
 
 msgid "Close"
 msgstr "Fermi"
