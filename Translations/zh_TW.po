@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2022-11-19 13:25\n"
+"PO-Revision-Date: 2022-11-28 19:28\n"
 
 msgid "OK"
 msgstr "確定"
@@ -455,14 +455,31 @@ msgstr "選擇當前資料夾"
 msgid "Open a Directory"
 msgstr "開啟資料夾"
 
-msgid "All frames as multiple files"
-msgstr "影格各自為獨立檔案"
-
-msgid "All frames as a single file animation"
-msgstr "所有影格為一個動畫檔"
-
 msgid "Background:"
 msgstr "背景："
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr ""
+
+msgid "Layers:"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr ""
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr ""
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr ""
 
 msgid "Direction:"
 msgstr "方向："
@@ -488,6 +505,10 @@ msgstr "列"
 msgid "Rows:"
 msgstr "列："
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr ""
+
 msgid "Path:"
 msgstr "路徑："
 
@@ -499,6 +520,10 @@ msgstr "創建資料夾"
 
 msgid "File:"
 msgstr "檔案："
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr ""
 
 msgid "Interpolation:"
 msgstr "插值："
@@ -1969,11 +1994,13 @@ msgstr "自動儲存間隔："
 msgid "minute(s)"
 msgstr "分鐘"
 
-msgid "Create new directory for each frame tag"
-msgstr "為每個影格標籤創建資料夾"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr ""
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "根據影格標籤在不同的資料夾創建多個獨立檔案"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr ""
 
 msgid "Close"
 msgstr "關閉"
