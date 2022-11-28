@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-11-28 19:28\n"
+"PO-Revision-Date: 2022-11-28 22:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -461,26 +461,26 @@ msgstr "Hintergrund:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Ausgewählte Frames"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Ebenen:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Sichtbare Ebenen"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Ausgewählte Ebenen"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Pixelebene:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Gruppenebene:"
 
 msgid "Direction:"
 msgstr "Richtung:"
@@ -508,7 +508,7 @@ msgstr "Reihen:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Export-Größen:"
 
 msgid "Path:"
 msgstr "Pfad:"
@@ -524,7 +524,7 @@ msgstr "Datei:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Erweiterte Optionen"
 
 msgid "Interpolation:"
 msgstr "Interpolation:"
@@ -2038,11 +2038,11 @@ msgstr "Minute(n)"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "Neuen Ordner für jeden Frame Tag erstellen"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr ""
+msgstr "Erstellt mehrere Dateien, aber jede Datei wird in einem anderen Ordner gespeichert, der seinem Frame Tag entspricht"
 
 msgid "Close"
 msgstr "Schließen"
