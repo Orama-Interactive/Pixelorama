@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-11-28 19:28\n"
+"PO-Revision-Date: 2022-11-28 22:20\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -462,26 +462,26 @@ msgstr "Arka plan:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Seçili kareler"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Katmanlar:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Görünür katmanlar"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Seçili katmanlar"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Piksel katmanı:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Grup katmanı:"
 
 msgid "Direction:"
 msgstr "Yön:"
@@ -509,7 +509,7 @@ msgstr "Sıralar:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Dışa aktarma boyutları:"
 
 msgid "Path:"
 msgstr "Yol:"
@@ -525,7 +525,7 @@ msgstr "Dosya:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Gelişmiş seçenekler"
 
 msgid "Interpolation:"
 msgstr "İnterpolasyon:"
@@ -2038,11 +2038,11 @@ msgstr "dakika"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "Her kare etiketi için yeni klasör oluştur"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr ""
+msgstr "Birden çok dosya oluşturur ancak her dosya, kare etiketine karşılık gelen farklı klasörde depolanır"
 
 msgid "Close"
 msgstr "Kapat"
