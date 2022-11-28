@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-11-19 13:26\n"
+"PO-Revision-Date: 2022-11-28 19:29\n"
 
 msgid "OK"
 msgstr "OK"
@@ -456,14 +456,31 @@ msgstr "Velg Gjeldende Mappe"
 msgid "Open a Directory"
 msgstr "Åpne en Mappe"
 
-msgid "All frames as multiple files"
-msgstr "Alle bilder som flere filer"
-
-msgid "All frames as a single file animation"
-msgstr "Alle bilder som en enkelt fil"
-
 msgid "Background:"
 msgstr "Bakgrunn:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr ""
+
+msgid "Layers:"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr ""
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr ""
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr ""
 
 msgid "Direction:"
 msgstr "Retning:"
@@ -489,6 +506,10 @@ msgstr "Rader"
 msgid "Rows:"
 msgstr "Rader:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr ""
+
 msgid "Path:"
 msgstr "Bane:"
 
@@ -500,6 +521,10 @@ msgstr "Opprett Mappe"
 
 msgid "File:"
 msgstr "Fil:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr ""
 
 msgid "Interpolation:"
 msgstr "Interpolering:"
@@ -2005,11 +2030,13 @@ msgstr "Intervall for automatisk lagring:"
 msgid "minute(s)"
 msgstr "minutt(er)"
 
-msgid "Create new directory for each frame tag"
-msgstr "Opprett ny mappe for hver bildemerkelapp"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr ""
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Oppretter flere filer, hver fil lagres i en mappe som tilsvarer bildemerkelappen sin"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr ""
 
 msgid "Close"
 msgstr "Lukk"
