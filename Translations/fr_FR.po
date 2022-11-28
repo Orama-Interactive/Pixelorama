@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2022-11-21 00:07\n"
+"PO-Revision-Date: 2022-11-28 19:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -457,14 +457,31 @@ msgstr "Sélectionner le dossier actuel"
 msgid "Open a Directory"
 msgstr "Ouvrir un répertoire"
 
-msgid "All frames as multiple files"
-msgstr "Toutes les frames sous forme de plusieurs fichiers"
-
-msgid "All frames as a single file animation"
-msgstr "Toutes les images sous forme d'un fichier d'animation unique"
-
 msgid "Background:"
 msgstr "Arrière-plan :"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr ""
+
+msgid "Layers:"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr ""
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr ""
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr ""
 
 msgid "Direction:"
 msgstr "Direction :"
@@ -490,6 +507,10 @@ msgstr "Lignes"
 msgid "Rows:"
 msgstr "Lignes :"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr ""
+
 msgid "Path:"
 msgstr "Chemin :"
 
@@ -501,6 +522,10 @@ msgstr "Créer un Dossier"
 
 msgid "File:"
 msgstr "Fichier :"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr ""
 
 msgid "Interpolation:"
 msgstr "Interpolation :"
@@ -2011,11 +2036,13 @@ msgstr "Intervalle de l'enregistrement automatique :"
 msgid "minute(s)"
 msgstr "minute(s)"
 
-msgid "Create new directory for each frame tag"
-msgstr "Créer un nouveau répertoire pour chaque tag de frame"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr ""
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Crée plusieurs fichiers mais chacun est stocké dans différents répertoires qui correspondent à son tag de frame"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr ""
 
 msgid "Close"
 msgstr "Fermer"
