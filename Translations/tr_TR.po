@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-11-29 18:07\n"
+"PO-Revision-Date: 2022-11-29 19:15\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -577,7 +577,7 @@ msgstr "Performans"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Sürücüler"
 
 msgid "Extensions"
 msgstr "Uzantılar"
@@ -590,7 +590,7 @@ msgstr "Göstergeler"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Değişikliklerin etkili olabilmesi için Pixeloroma yeniden başlatılmalıdır."
 
 msgid "On"
 msgstr "Açık"
