@@ -164,7 +164,7 @@ func _ready() -> void:
 		match pref.value_type:
 			"pressed":
 				node.connect(
-					"toggled", self, "_on_Preference_toggled", [pref, restore_default_button]
+					"toggled", self, "_on_Preference_value_changed", [pref, restore_default_button]
 				)
 			"value":
 				node.connect(
@@ -178,14 +178,14 @@ func _ready() -> void:
 				node.connect(
 					"color_changed",
 					self,
-					"_on_Preference_color_changed",
+					"_on_Preference_value_changed",
 					[pref, restore_default_button]
 				)
 			"selected":
 				node.connect(
 					"item_selected",
 					self,
-					"_on_Preference_item_selected",
+					"_on_Preference_value_changed",
 					[pref, restore_default_button]
 				)
 
@@ -194,6 +194,7 @@ func _ready() -> void:
 			var value = Global.config_cache.get_value("preferences", pref.prop_name)
 			Global.set(pref.prop_name, value)
 			node.set(pref.value_type, value)
+			global_value = Global.get(pref.prop_name)
 
 			# This is needed because color_changed doesn't fire if the color changes in code
 			if pref.value_type == "color":
@@ -213,48 +214,17 @@ func _ready() -> void:
 			)
 
 
-func _on_Preference_toggled(pressed: bool, pref: Preference, restore_default: BaseButton) -> void:
-	var prop := pref.prop_name
-	var default_value = pref.default_value
-	Global.set(prop, pressed)
-	if not pref.require_restart:
-		Global.config_cache.set_value("preferences", prop, pressed)
-	preference_update(prop, pref.require_restart)
-	disable_restore_default_button(restore_default, Global.get(prop) == default_value)
-
-
-func _on_Preference_value_changed(
-	value: float, pref: Preference, restore_default: BaseButton
-) -> void:
+func _on_Preference_value_changed(value, pref: Preference, restore_default: BaseButton) -> void:
 	var prop := pref.prop_name
 	var default_value = pref.default_value
 	Global.set(prop, value)
 	if not pref.require_restart:
 		Global.config_cache.set_value("preferences", prop, value)
 	preference_update(prop, pref.require_restart)
-	disable_restore_default_button(restore_default, Global.get(prop) == default_value)
-
-
-func _on_Preference_color_changed(
-	color: Color, pref: Preference, restore_default: BaseButton
-) -> void:
-	var prop := pref.prop_name
-	var default_value = pref.default_value
-	Global.set(prop, color)
-	if not pref.require_restart:
-		Global.config_cache.set_value("preferences", prop, color)
-	preference_update(prop, pref.require_restart)
-	disable_restore_default_button(restore_default, Global.get(prop).is_equal_approx(default_value))
-
-
-func _on_Preference_item_selected(id: int, pref: Preference, restore_default: BaseButton) -> void:
-	var prop := pref.prop_name
-	var default_value = pref.default_value
-	Global.set(prop, id)
-	if not pref.require_restart:
-		Global.config_cache.set_value("preferences", prop, id)
-	preference_update(prop, pref.require_restart)
-	disable_restore_default_button(restore_default, Global.get(prop) == default_value)
+	var disable: bool = Global.get(prop) == default_value
+	if typeof(value) == TYPE_COLOR:
+		disable = Global.get(prop).is_equal_approx(default_value)
+	disable_restore_default_button(restore_default, disable)
 
 
 func preference_update(prop: String, require_restart := false) -> void:
