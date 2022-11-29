@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-11-29 18:07\n"
+"PO-Revision-Date: 2022-11-29 23:34\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -2165,6 +2165,6 @@ msgstr ""
 msgid "Right Tool Options"
 msgstr ""
 
-msgid "References"
+msgid "Reference Images"
 msgstr ""
 
