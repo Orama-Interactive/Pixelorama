@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-11-29 18:07\n"
+"PO-Revision-Date: 2022-11-29 23:33\n"
 
 msgid "OK"
 msgstr "确定"
@@ -2169,6 +2169,6 @@ msgstr "左键工具选项"
 msgid "Right Tool Options"
 msgstr "右键工具选项"
 
-msgid "References"
-msgstr "参考"
+msgid "Reference Images"
+msgstr ""
 
