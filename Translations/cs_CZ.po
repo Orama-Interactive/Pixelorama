@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2022-11-29 18:07\n"
+"PO-Revision-Date: 2022-11-29 23:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2160,6 +2160,6 @@ msgstr "Možnosti levého nástroje"
 msgid "Right Tool Options"
 msgstr "Možnosti pravého nástroje"
 
-msgid "References"
+msgid "Reference Images"
 msgstr ""
 
