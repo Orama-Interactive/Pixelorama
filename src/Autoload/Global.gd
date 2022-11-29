@@ -212,6 +212,17 @@ onready var error_dialog: AcceptDialog = control.find_node("ErrorDialog")
 onready var current_version: String = ProjectSettings.get_setting("application/config/Version")
 
 
+func _init() -> void:
+	if OS.has_feature("editor"):
+		return
+
+	# Sets GLES2 as the default value in `override.cfg`.
+	# Without this, switching to GLES3 does not work, because it will default to GLES2.
+	var renderer_name := OS.get_video_driver_name(renderer)
+	ProjectSettings.set_initial_value("rendering/quality/driver/driver_name", renderer_name)
+	ProjectSettings.save_custom(OVERRIDE_FILE)
+
+
 func _ready() -> void:
 	_initialize_keychain()
 
