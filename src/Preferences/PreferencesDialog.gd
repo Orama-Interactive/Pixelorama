@@ -81,7 +81,8 @@ var preferences := [
 	),
 	Preference.new(
 		"renderer", "Drivers/DriversContainer/Renderer", "selected", true, OS.VIDEO_DRIVER_GLES2
-	)
+	),
+	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", true)
 ]
 
 var content_list := []
@@ -95,6 +96,8 @@ onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveIn
 onready var shrink_slider: ValueSlider = $"%ShrinkSlider"
 onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
 onready var shortcuts: Control = right_side.get_node("Shortcuts/ShortcutEdit")
+onready var tablet_driver_label: Label = $"%TabletDriverLabel"
+onready var tablet_driver: OptionButton = $"%TabletDriver"
 onready var extensions: BoxContainer = right_side.get_node("Extensions")
 onready var must_restart: BoxContainer = $"%MustRestart"
 
@@ -142,6 +145,12 @@ func _ready() -> void:
 		right_side.get_node("Startup").queue_free()
 		right_side.get_node("Language").visible = true
 		Global.open_last_project = false
+	elif OS.get_name() == "Windows":
+		tablet_driver_label.visible = true
+		tablet_driver.visible = true
+		for driver in OS.get_tablet_driver_count():
+			var driver_name := OS.get_tablet_driver_name(driver)
+			tablet_driver.add_item(driver_name, driver)
 
 	for pref in preferences:
 		var node: Node = right_side.get_node(pref.node_path)

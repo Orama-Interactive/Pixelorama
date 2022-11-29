@@ -119,6 +119,7 @@ var fps_limit := 0
 var autosave_interval := 1.0
 var enable_autosave := true
 var renderer := OS.get_current_video_driver() setget _renderer_changed
+var tablet_driver := 0 setget _tablet_driver_changed
 
 # Tools & options
 var show_left_tool_icon := true
@@ -503,6 +504,15 @@ func _renderer_changed(value: int) -> void:
 		return
 	var renderer_name := OS.get_video_driver_name(renderer)
 	ProjectSettings.set_setting("rendering/quality/driver/driver_name", renderer_name)
+	ProjectSettings.save_custom(OVERRIDE_FILE)
+
+
+func _tablet_driver_changed(value: int) -> void:
+	tablet_driver = value
+	if OS.has_feature("editor"):
+		return
+	var tablet_driver_name := OS.get_tablet_driver_name(tablet_driver)
+	ProjectSettings.set_setting("display/window/tablet_driver", tablet_driver_name)
 	ProjectSettings.save_custom(OVERRIDE_FILE)
 
 
