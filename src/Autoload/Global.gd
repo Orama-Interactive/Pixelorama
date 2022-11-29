@@ -47,6 +47,8 @@ enum HelpMenu {
 	ABOUT_PIXELORAMA
 }
 
+const OVERRIDE_FILE := "override.cfg"
+
 var root_directory := "."
 var window_title := "" setget _title_changed  # Why doesn't Godot have get_window_title()?
 var config_cache := ConfigFile.new()
@@ -116,6 +118,7 @@ var fps_limit := 0
 
 var autosave_interval := 1.0
 var enable_autosave := true
+var renderer := OS.get_current_video_driver() setget _renderer_changed
 
 # Tools & options
 var show_left_tool_icon := true
@@ -481,6 +484,15 @@ func _project_changed(value: int) -> void:
 	connect("project_changed", current_project, "change_project")
 	emit_signal("project_changed")
 	disconnect("project_changed", current_project, "change_project")
+
+
+func _renderer_changed(value: int) -> void:
+	renderer = value
+	if OS.has_feature("editor"):
+		return
+	var renderer_name := OS.get_video_driver_name(renderer)
+	ProjectSettings.set_setting("rendering/quality/driver/driver_name", renderer_name)
+	ProjectSettings.save_custom(OVERRIDE_FILE)
 
 
 func dialog_open(open: bool) -> void:
