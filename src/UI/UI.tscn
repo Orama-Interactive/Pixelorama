@@ -34,7 +34,7 @@ shader_param/size = Vector2( 100, 100 )
 [sub_resource type="Resource" id=1]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "Tools", "References" )
+names = PoolStringArray( "Tools" )
 current_tab = 0
 
 [sub_resource type="Resource" id=8]
@@ -74,7 +74,7 @@ second = SubResource( 9 )
 [sub_resource type="Resource" id=11]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "Canvas Preview" )
+names = PoolStringArray( "Canvas Preview", "Reference Images" )
 current_tab = 0
 
 [sub_resource type="Resource" id=20]
@@ -151,7 +151,7 @@ second = SubResource( 14 )
 resource_name = "Split"
 script = ExtResource( 27 )
 direction = 0
-percent = 0.962785
+percent = 0.855
 first = SubResource( 10 )
 second = SubResource( 15 )
 
@@ -398,9 +398,11 @@ margin_top = 616.0
 margin_right = 1276.0
 margin_bottom = 716.0
 
-[node name="References" parent="DockableContainer" instance=ExtResource( 11 )]
-margin_right = 33.0
-margin_bottom = 14.0
+[node name="Reference Images" parent="DockableContainer" instance=ExtResource( 11 )]
+visible = false
+margin_left = 1079.0
+margin_right = 1080.0
+margin_bottom = 1004.0
 
 [connection signal="item_rect_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_item_rect_changed"]
 [connection signal="visibility_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_visibility_changed"]

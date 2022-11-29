@@ -2096,5 +2096,5 @@ msgstr ""
 msgid "Right Tool Options"
 msgstr ""
 
-msgid "References"
+msgid "Reference Images"
 msgstr ""

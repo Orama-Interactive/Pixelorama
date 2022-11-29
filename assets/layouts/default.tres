@@ -10,136 +10,136 @@ script = ExtResource( 2 )
 names = PoolStringArray( "Tools" )
 current_tab = 0
 
-[sub_resource type="Resource" id=2]
+[sub_resource type="Resource" id=8]
 resource_name = "Tabs"
 script = ExtResource( 2 )
 names = PoolStringArray( "Main Canvas" )
 current_tab = 0
 
-[sub_resource type="Resource" id=3]
+[sub_resource type="Resource" id=28]
 resource_name = "Tabs"
 script = ExtResource( 2 )
 names = PoolStringArray( "Second Canvas" )
 current_tab = 0
 
-[sub_resource type="Resource" id=4]
+[sub_resource type="Resource" id=29]
 resource_name = "Split"
 script = ExtResource( 3 )
 direction = 0
 percent = 0.980952
-first = SubResource( 2 )
-second = SubResource( 3 )
-
-[sub_resource type="Resource" id=5]
-resource_name = "Tabs"
-script = ExtResource( 2 )
-names = PoolStringArray( "Animation Timeline" )
-current_tab = 0
-
-[sub_resource type="Resource" id=6]
-resource_name = "Split"
-script = ExtResource( 3 )
-direction = 1
-percent = 0.90625
-first = SubResource( 4 )
-second = SubResource( 5 )
-
-[sub_resource type="Resource" id=7]
-resource_name = "Tabs"
-script = ExtResource( 2 )
-names = PoolStringArray( "Canvas Preview" )
-current_tab = 0
-
-[sub_resource type="Resource" id=8]
-resource_name = "Tabs"
-script = ExtResource( 2 )
-names = PoolStringArray( "Color Pickers" )
-current_tab = 0
+first = SubResource( 8 )
+second = SubResource( 28 )
 
 [sub_resource type="Resource" id=9]
 resource_name = "Tabs"
 script = ExtResource( 2 )
-names = PoolStringArray( "Global Tool Options" )
+names = PoolStringArray( "Animation Timeline" )
 current_tab = 0
 
 [sub_resource type="Resource" id=10]
 resource_name = "Split"
 script = ExtResource( 3 )
 direction = 1
-percent = 0.5
-first = SubResource( 8 )
+percent = 0.90625
+first = SubResource( 29 )
 second = SubResource( 9 )
 
 [sub_resource type="Resource" id=11]
+resource_name = "Tabs"
+script = ExtResource( 2 )
+names = PoolStringArray( "Canvas Preview", "Reference Images" )
+current_tab = 0
+
+[sub_resource type="Resource" id=20]
+resource_name = "Tabs"
+script = ExtResource( 2 )
+names = PoolStringArray( "Color Pickers" )
+current_tab = 0
+
+[sub_resource type="Resource" id=30]
+resource_name = "Tabs"
+script = ExtResource( 2 )
+names = PoolStringArray( "Global Tool Options" )
+current_tab = 0
+
+[sub_resource type="Resource" id=31]
 resource_name = "Split"
 script = ExtResource( 3 )
 direction = 1
-percent = 0.85514
-first = SubResource( 7 )
-second = SubResource( 10 )
+percent = 0.5
+first = SubResource( 20 )
+second = SubResource( 30 )
 
-[sub_resource type="Resource" id=12]
+[sub_resource type="Resource" id=21]
+resource_name = "Split"
+script = ExtResource( 3 )
+direction = 1
+percent = 0.911765
+first = SubResource( 11 )
+second = SubResource( 31 )
+
+[sub_resource type="Resource" id=22]
 resource_name = "Tabs"
 script = ExtResource( 2 )
 names = PoolStringArray( "Left Tool Options" )
 current_tab = 0
 
-[sub_resource type="Resource" id=13]
+[sub_resource type="Resource" id=23]
 resource_name = "Tabs"
 script = ExtResource( 2 )
 names = PoolStringArray( "Right Tool Options" )
 current_tab = 0
 
-[sub_resource type="Resource" id=14]
+[sub_resource type="Resource" id=24]
 resource_name = "Split"
 script = ExtResource( 3 )
 direction = 0
 percent = 0.5
-first = SubResource( 12 )
-second = SubResource( 13 )
+first = SubResource( 22 )
+second = SubResource( 23 )
 
-[sub_resource type="Resource" id=15]
+[sub_resource type="Resource" id=13]
 resource_name = "Tabs"
 script = ExtResource( 2 )
 names = PoolStringArray( "Palettes" )
 current_tab = 0
 
+[sub_resource type="Resource" id=14]
+resource_name = "Split"
+script = ExtResource( 3 )
+direction = 1
+percent = 0.7
+first = SubResource( 24 )
+second = SubResource( 13 )
+
+[sub_resource type="Resource" id=15]
+resource_name = "Split"
+script = ExtResource( 3 )
+direction = 1
+percent = 0.332031
+first = SubResource( 21 )
+second = SubResource( 14 )
+
 [sub_resource type="Resource" id=16]
 resource_name = "Split"
 script = ExtResource( 3 )
-direction = 1
-percent = 0.697987
-first = SubResource( 14 )
+direction = 0
+percent = 0.72
+first = SubResource( 10 )
 second = SubResource( 15 )
 
-[sub_resource type="Resource" id=17]
-resource_name = "Split"
-script = ExtResource( 3 )
-direction = 1
-percent = 0.348266
-first = SubResource( 11 )
-second = SubResource( 16 )
-
-[sub_resource type="Resource" id=18]
-resource_name = "Split"
-script = ExtResource( 3 )
-direction = 0
-percent = 0.73
-first = SubResource( 6 )
-second = SubResource( 17 )
-
-[sub_resource type="Resource" id=19]
+[sub_resource type="Resource" id=5]
 resource_name = "Split"
 script = ExtResource( 3 )
 direction = 0
 percent = 0.0
 first = SubResource( 1 )
-second = SubResource( 18 )
+second = SubResource( 16 )
 
 [resource]
 resource_name = "Layout"
 script = ExtResource( 1 )
-root = SubResource( 19 )
+root = SubResource( 5 )
 hidden_tabs = {
 "Second Canvas": true
 }
