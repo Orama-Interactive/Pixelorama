@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-11-28 19:28\n"
+"PO-Revision-Date: 2022-11-29 10:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -462,26 +462,26 @@ msgstr "Fundal:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Cadre selectate"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Straturi:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Straturi vizibile"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Straturi selectate"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Strat de pixeli:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Strat de grup:"
 
 msgid "Direction:"
 msgstr "Direcție:"
@@ -509,7 +509,7 @@ msgstr "Rânduri:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Dimensiuni de export:"
 
 msgid "Path:"
 msgstr "Cale:"
@@ -525,7 +525,7 @@ msgstr "Fișier:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Opțiuni avansate"
 
 msgid "Interpolation:"
 msgstr "Interpolare:"
@@ -2039,11 +2039,11 @@ msgstr "minut(e)"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "Creează un dosar nou pentru fiecare etichetă de cadru"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr ""
+msgstr "Creează mai multe fișiere, dar fiecare fișier este stocat în alt dosar care corespunde cu eticheta de cadru a acestuia"
 
 msgid "Close"
 msgstr "Închide"
