@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2022-11-28 19:28\n"
+"PO-Revision-Date: 2022-11-29 18:07\n"
 
 msgid "OK"
 msgstr "確定"
@@ -573,6 +573,10 @@ msgstr "備份"
 msgid "Performance"
 msgstr ""
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr ""
+
 msgid "Extensions"
 msgstr ""
 
@@ -581,6 +585,10 @@ msgstr ""
 
 msgid "Indicators"
 msgstr "指標"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr ""
 
 msgid "On"
 msgstr "開啟"
