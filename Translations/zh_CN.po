@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-11-28 19:28\n"
+"PO-Revision-Date: 2022-11-29 07:35\n"
 
 msgid "OK"
 msgstr "确定"
@@ -462,26 +462,26 @@ msgstr "背景："
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "所选帧"
 
 msgid "Layers:"
-msgstr ""
+msgstr "图层："
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "可见图层"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "所选图层"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "像素图层："
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "组图层："
 
 msgid "Direction:"
 msgstr "方向："
@@ -509,7 +509,7 @@ msgstr "行:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "导出尺寸："
 
 msgid "Path:"
 msgstr "路径:"
@@ -525,7 +525,7 @@ msgstr "文件:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "高级选项"
 
 msgid "Interpolation:"
 msgstr "插值："
@@ -2039,11 +2039,11 @@ msgstr "分钟"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "为每个帧标签创建新文件夹"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr ""
+msgstr "创建多个文件，但每个文件都存储在与其帧标签相对应的不同文件夹中"
 
 msgid "Close"
 msgstr "关闭"
