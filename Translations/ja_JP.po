@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-11-28 19:29\n"
+"PO-Revision-Date: 2022-11-29 06:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -462,26 +462,26 @@ msgstr "バックグラウンド:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "選択したフレーム"
 
 msgid "Layers:"
-msgstr ""
+msgstr "レイヤー:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "表示レイヤー"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "選択したレイヤー"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "ピクセルレイヤー:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "グループレイヤー:"
 
 msgid "Direction:"
 msgstr "方向:"
@@ -509,7 +509,7 @@ msgstr "行:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "寸法をエクスポート:"
 
 msgid "Path:"
 msgstr "パス:"
@@ -525,7 +525,7 @@ msgstr "ファイル:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "詳細設定"
 
 msgid "Interpolation:"
 msgstr "補間:"
@@ -2039,11 +2039,11 @@ msgstr "分"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "フレームタグごとに新しいフォルダを作成"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr ""
+msgstr "複数のファイルを作成しますが、各ファイルはフレームタグに対応する異なるフォルダに保存されます。"
 
 msgid "Close"
 msgstr "閉じる"
