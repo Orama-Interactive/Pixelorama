@@ -50,8 +50,7 @@ func _input(event: InputEvent) -> void:
 	if not editable:
 		return
 	# Hardcode Control + Wheel as a global shortcut, if is_global is true
-	# In Godot 4.x this will change into two is_action() checks for incrementing
-	# and decrementing
+	# In Godot 4.x this will change into two is_action() checks for incrementing and decrementing
 	if not event is InputEventMouseButton:
 		return
 	if not event.pressed:
