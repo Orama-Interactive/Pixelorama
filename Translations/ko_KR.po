@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-11-29 18:08\n"
+"PO-Revision-Date: 2022-11-29 23:34\n"
 
 msgid "OK"
 msgstr "예"
@@ -2164,6 +2164,6 @@ msgstr "왼쪽 툴 설정"
 msgid "Right Tool Options"
 msgstr "오른쪽 툴 설정"
 
-msgid "References"
+msgid "Reference Images"
 msgstr ""
 
