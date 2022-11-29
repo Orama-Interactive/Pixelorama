@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-11-29 18:08\n"
+"PO-Revision-Date: 2022-11-29 23:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2169,6 +2169,6 @@ msgstr "左ツールオプション"
 msgid "Right Tool Options"
 msgstr "右ツールオプション"
 
-msgid "References"
-msgstr "参照"
+msgid "Reference Images"
+msgstr ""
 
