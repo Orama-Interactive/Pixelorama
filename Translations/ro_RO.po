@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-11-29 18:07\n"
+"PO-Revision-Date: 2022-11-29 23:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -577,7 +577,7 @@ msgstr "Performanță"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Drivere"
 
 msgid "Extensions"
 msgstr "Extensii"
@@ -590,7 +590,7 @@ msgstr "Indicatori"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Pixelorama trebuie repornit pentru ca setările să aibă efect."
 
 msgid "On"
 msgstr "Pornit"
@@ -2169,6 +2169,6 @@ msgstr "Opțiuni pentru instrumentul din stânga"
 msgid "Right Tool Options"
 msgstr "Opțiuni pentru instrumentul din dreapta"
 
-msgid "References"
-msgstr "Referințe"
+msgid "Reference Images"
+msgstr ""
 
