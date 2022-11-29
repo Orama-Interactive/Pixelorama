@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-11-29 18:07\n"
+"PO-Revision-Date: 2022-11-29 21:08\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -166,10 +166,10 @@ msgid "Rotate Image"
 msgstr "Περιστροφή εικόνας"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Άξονας x:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Άξονας y:"
 
 msgid "Smear options:"
 msgstr "Επιλογές απλώματος:"
@@ -462,26 +462,26 @@ msgstr "Υπόβαθρο:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Επιλεγμένα καρέ"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Στρώσεις:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Ορατές στρώσεις"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Επιλεγμένες στρώσεις"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Στρώση εικονοστοιχείων:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Στρώση ομάδας:"
 
 msgid "Direction:"
 msgstr "Κατεύθυνση:"
@@ -509,7 +509,7 @@ msgstr "Σειρές:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Διαστάσεις εξαγωγής:"
 
 msgid "Path:"
 msgstr "Διαδρομή:"
@@ -525,7 +525,7 @@ msgstr "Αρχείο:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Σύνθετες επιλογές"
 
 msgid "Interpolation:"
 msgstr "Παρεμβολή:"
@@ -577,7 +577,7 @@ msgstr "Επίδοση"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Οδηγοί"
 
 msgid "Extensions"
 msgstr "Επεκτάσεις"
@@ -590,7 +590,7 @@ msgstr "Δείκτες"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Το Pixelorama πρέπει να επανεκκινηθεί για να τεθούν σε ισχύ οι αλλαγές."
 
 msgid "On"
 msgstr "Ενεργό"
@@ -1651,10 +1651,10 @@ msgid "Add Frame Tag"
 msgstr "Προσθήκη Ετικέτας Καρέ"
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Σύνδεση cels με"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Αποσύνδεση cels"
 
 msgid "Frame Properties"
 msgstr "Ιδιότητες Καρέ"
@@ -1709,7 +1709,8 @@ msgstr "Καρέ: %s, Στρώση: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Ενεργοποίηση/απενεργοποίηση αυτόματης σύνδεσης νέων cels κατά τη δημιουργία νέων καρέ\n\n"
+"Τα συνδεδεμένα cels κάνουν κοινή χρήση περιεχομένου σε πολλαπλά καρέ"
 
 msgid "Expand/collapse group"
 msgstr "Ανάπτυξη/σύμπτυξη ομάδας"
@@ -2046,11 +2047,11 @@ msgstr "λεπτό(ά)"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "Δημιουργία νέου φακέλου για κάθε ετικέτα καρέ"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr ""
+msgstr "Δημιουργεί πολλά αρχεία, αλλά κάθε αρχείο αποθηκεύεται σε διαφορετικό φάκελο που αντιστοιχεί σε κάθε ετικέτα καρέ"
 
 msgid "Close"
 msgstr "Κλείσιμο"
