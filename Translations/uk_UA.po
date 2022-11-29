@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-11-29 18:07\n"
+"PO-Revision-Date: 2022-11-29 23:33\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -2169,6 +2169,6 @@ msgstr "Параметри лівого інструмента"
 msgid "Right Tool Options"
 msgstr "Параметри правого інструмента"
 
-msgid "References"
-msgstr "Зразки"
+msgid "Reference Images"
+msgstr ""
 
