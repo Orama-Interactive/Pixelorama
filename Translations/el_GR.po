@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-11-28 19:29\n"
+"PO-Revision-Date: 2022-11-29 18:07\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -575,6 +575,10 @@ msgstr "Αντίγραφο ασφαλείας"
 msgid "Performance"
 msgstr "Επίδοση"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr ""
+
 msgid "Extensions"
 msgstr "Επεκτάσεις"
 
@@ -583,6 +587,10 @@ msgstr "Κέρσορες"
 
 msgid "Indicators"
 msgstr "Δείκτες"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr ""
 
 msgid "On"
 msgstr "Ενεργό"
