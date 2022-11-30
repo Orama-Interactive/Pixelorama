@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-11-30 05:16\n"
+"PO-Revision-Date: 2022-11-30 11:40\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -462,26 +462,26 @@ msgstr "Latar belakang:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Bingkai yang dipilih"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Lapisan:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Lapisan terlihat"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Lapisan yang dipilih"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Lapisan piksel:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Lapisan berkumpul:"
 
 msgid "Direction:"
 msgstr "Arah:"
@@ -509,7 +509,7 @@ msgstr "Baris:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Ukuran saat ekspor:"
 
 msgid "Path:"
 msgstr "Jalur:"
@@ -525,7 +525,7 @@ msgstr "Berkas:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Opsi lanjutan"
 
 msgid "Interpolation:"
 msgstr "Interpolasi:"
@@ -2047,11 +2047,11 @@ msgstr "menit"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "Buat folder baru untuk setiap tag bingkai"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr ""
+msgstr "Membuat banyak berkas, tapi setiap berkas ditampung di folder berbeda sesuai dengan tag bingkainya"
 
 msgid "Close"
 msgstr "Tutup"
