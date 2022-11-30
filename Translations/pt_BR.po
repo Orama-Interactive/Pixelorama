@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2022-11-29 23:33\n"
+"PO-Revision-Date: 2022-11-30 09:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2170,5 +2170,5 @@ msgid "Right Tool Options"
 msgstr "Opções da Ferramenta Direita"
 
 msgid "Reference Images"
-msgstr ""
+msgstr "Imagens de Referência"
 
