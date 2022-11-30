@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-11-29 23:34\n"
+"PO-Revision-Date: 2022-11-30 09:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -337,7 +337,7 @@ msgid "New layer"
 msgstr "Новый слой"
 
 msgid "New reference image"
-msgstr "Новый рисунок-образец"
+msgstr "Новое эталонное изображение"
 
 msgid "New palette"
 msgstr "Новая палитра"
@@ -462,26 +462,26 @@ msgstr "Фон:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Выбранные кадры"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Слои:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Видимые слои"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Выбранные слои"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Слой пикселей:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Групповой слой:"
 
 msgid "Direction:"
 msgstr "Направление:"
@@ -509,7 +509,7 @@ msgstr "Строки:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Размер для экспорта:"
 
 msgid "Path:"
 msgstr "Путь:"
@@ -525,7 +525,7 @@ msgstr "Файл:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Расширенные опции"
 
 msgid "Interpolation:"
 msgstr "Интерполяция:"
@@ -577,7 +577,7 @@ msgstr "Производительность"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Драйверы"
 
 msgid "Extensions"
 msgstr "Расширения"
@@ -590,7 +590,7 @@ msgstr "Индикатор"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Следует перезапустить Pixeloram’у, чтобы применить изменения."
 
 msgid "On"
 msgstr "Вкл"
@@ -2046,11 +2046,11 @@ msgstr "мин."
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "Создать по папке для метки кадров"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr ""
+msgstr "Создаёт много файлов, но каждый файл будет в отдельной папке согласно его метке кадра"
 
 msgid "Close"
 msgstr "Закрыть"
@@ -2169,5 +2169,5 @@ msgid "Right Tool Options"
 msgstr "Настройки правого инструмента"
 
 msgid "Reference Images"
-msgstr ""
+msgstr "Эталонные изображения"
 
