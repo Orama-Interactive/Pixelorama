@@ -214,6 +214,8 @@ onready var current_version: String = ProjectSettings.get_setting("application/c
 
 
 func _init() -> void:
+	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
+		tablet_driver = 1
 	if OS.has_feature("editor"):
 		return
 

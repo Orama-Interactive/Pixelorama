@@ -82,7 +82,7 @@ var preferences := [
 	Preference.new(
 		"renderer", "Drivers/DriversContainer/Renderer", "selected", true, OS.VIDEO_DRIVER_GLES2
 	),
-	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", true)
+	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", true, 0)
 ]
 
 var content_list := []
@@ -120,7 +120,7 @@ class Preference:
 		node_path = _node_path
 		value_type = _value_type
 		require_restart = _require_restart
-		if _default_value:
+		if _default_value != null:
 			default_value = _default_value
 		else:
 			default_value = Global.get(prop_name)
