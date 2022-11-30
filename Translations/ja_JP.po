@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-11-29 23:34\n"
+"PO-Revision-Date: 2022-11-30 05:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -577,7 +577,7 @@ msgstr "パフォーマンス"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "ドライバー"
 
 msgid "Extensions"
 msgstr "拡張機能"
@@ -590,7 +590,7 @@ msgstr "インジケーター"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "変更を有効にするには、Pixeloramaを再起動する必要があります。"
 
 msgid "On"
 msgstr "オン"
@@ -2170,5 +2170,5 @@ msgid "Right Tool Options"
 msgstr "右ツールオプション"
 
 msgid "Reference Images"
-msgstr ""
+msgstr "参照画像"
 
