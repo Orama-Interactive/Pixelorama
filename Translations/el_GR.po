@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-11-29 23:34\n"
+"PO-Revision-Date: 2022-11-30 14:32\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -2170,5 +2170,5 @@ msgid "Right Tool Options"
 msgstr "Επιλογές δεξιού εργαλείου"
 
 msgid "Reference Images"
-msgstr ""
+msgstr "Εικόνες αναφοράς"
 
