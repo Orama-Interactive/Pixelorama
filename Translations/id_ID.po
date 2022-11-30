@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-11-29 23:33\n"
+"PO-Revision-Date: 2022-11-30 05:16\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -577,7 +577,7 @@ msgstr "Kinerja"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Pengandar"
 
 msgid "Extensions"
 msgstr "Ekstensi"
@@ -590,7 +590,7 @@ msgstr "Indikator"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Pixelorama harus dibuka ulang agar pengaturan ini berjalan."
 
 msgid "On"
 msgstr "Nyala"
@@ -2170,5 +2170,5 @@ msgid "Right Tool Options"
 msgstr "Opsi Alat Di Kanan"
 
 msgid "Reference Images"
-msgstr ""
+msgstr "Gambar Rujukan"
 
