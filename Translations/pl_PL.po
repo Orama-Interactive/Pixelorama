@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-11-29 23:34\n"
+"PO-Revision-Date: 2022-11-30 14:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -461,26 +461,26 @@ msgstr "Tło:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Wybrane klatki"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Warstwy:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Widoczne warstwy"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Wybrane Warstwy"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Warstwa pikselowa:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Warstwa grupowania:"
 
 msgid "Direction:"
 msgstr "Kierunek:"
@@ -508,7 +508,7 @@ msgstr "Rzędy:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Wymiary Exportu:"
 
 msgid "Path:"
 msgstr "Ścieżka:"
@@ -524,7 +524,7 @@ msgstr "Plik:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Zaawansowane opcje"
 
 msgid "Interpolation:"
 msgstr "Interpolacja:"
@@ -576,7 +576,7 @@ msgstr "Wydajność"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Sterowniki"
 
 msgid "Extensions"
 msgstr "Rozszerzenia"
@@ -589,7 +589,7 @@ msgstr "Wskaźniki"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Pixelorama musi zostać uruchomiona ponownie, aby zastosować zmiany."
 
 msgid "On"
 msgstr "Włączone"
@@ -2046,11 +2046,11 @@ msgstr "minuta(y)"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "Stwórz nowy folder dla każdego tagu animacji"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr ""
+msgstr "Tworzy wiele plików, lecz każdy jest zapisywany w innym folderze, odpowiadającym tagowi animacji"
 
 msgid "Close"
 msgstr "Zamknij"
@@ -2169,5 +2169,5 @@ msgid "Right Tool Options"
 msgstr "Opcje prawego narzędzia"
 
 msgid "Reference Images"
-msgstr ""
+msgstr "Obrazy odniesienia"
 
