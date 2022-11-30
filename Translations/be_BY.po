@@ -10,79 +10,79 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2022-11-30 14:32\n"
+"PO-Revision-Date: 2022-11-30 15:31\n"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Скасаваць"
 
 msgid "Open"
-msgstr ""
+msgstr "Адкрыць"
 
 msgid "Save"
-msgstr ""
+msgstr "Захаваць"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Пацвердзіце..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Імя файла:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Імя праекта:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Памер выявы"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Памер палатна"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Памер кадра"
 
 msgid "Size:"
-msgstr ""
+msgstr "Памер:"
 
 msgid "Width:"
-msgstr ""
+msgstr "Шырыня:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Высата:"
 
 msgid "Center"
-msgstr ""
+msgstr "Па цэнтру"
 
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 msgid "Edit"
-msgstr ""
+msgstr "Рэдагаваць"
 
 msgid "Select"
-msgstr ""
+msgstr "Выбар"
 
 msgid "View"
-msgstr ""
+msgstr "Прагляд"
 
 msgid "Window"
-msgstr ""
+msgstr "Акно"
 
 msgid "Image"
-msgstr ""
+msgstr "Выява"
 
 msgid "Effects"
-msgstr ""
+msgstr "Эфекты"
 
 msgid "Help"
-msgstr ""
+msgstr "Даведка"
 
 msgid "New"
-msgstr ""
+msgstr "Новы"
 
 msgid "New..."
-msgstr ""
+msgstr "Новы..."
 
 msgid "Open..."
 msgstr ""
@@ -97,64 +97,64 @@ msgid "Use ZSTD Compression"
 msgstr ""
 
 msgid "Import"
-msgstr ""
+msgstr "Імпарт"
 
 msgid "Export"
-msgstr ""
+msgstr "Экспарт"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Перазапіс"
 
 msgid "Export..."
-msgstr ""
+msgstr "Экспарт..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Экспарт як..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Экспарт PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Экспарт PNG як..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Выхад"
 
 msgid "Undo"
-msgstr ""
+msgstr "Адмяніць"
 
 msgid "Redo"
-msgstr ""
+msgstr "Вярнуць"
 
 msgid "Copy"
-msgstr ""
+msgstr "Капіяваць"
 
 msgid "Cut"
-msgstr ""
+msgstr "Выразаць"
 
 msgid "Paste"
-msgstr ""
+msgstr "Уставіць"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Уставіць на месцы"
 
 msgid "Delete"
-msgstr ""
+msgstr "Выдаліць"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Новы пэндзаль"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Масштаб выявы"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Пікселі"
 
 msgid "Percentage"
 msgstr ""
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Абрэзаць выяву"
 
 msgid "Resize Canvas"
 msgstr ""
@@ -223,7 +223,7 @@ msgid "Tile Mask"
 msgstr ""
 
 msgid "Reset"
-msgstr ""
+msgstr "Скід"
 
 msgid "Use Current Frame"
 msgstr ""
@@ -301,25 +301,25 @@ msgid "Fill with color:"
 msgstr ""
 
 msgid "Open a File"
-msgstr ""
+msgstr "Адкрыць файл"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Адкрыць файл(ы)"
 
 msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
-msgstr ""
+msgstr "Імпарт як:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "Прымяніць да ўсіх"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Нядаўнія праекты"
 
 msgid "New project"
-msgstr ""
+msgstr "Новы праект"
 
 msgid "Spritesheet (new project)"
 msgstr ""
@@ -328,22 +328,22 @@ msgid "Spritesheet (new layer)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "Новы кадр"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Замяніць кель"
 
 msgid "New layer"
-msgstr ""
+msgstr "Новы слой"
 
 msgid "New reference image"
 msgstr ""
 
 msgid "New palette"
-msgstr ""
+msgstr "Новая палітра"
 
 msgid "New brush"
-msgstr ""
+msgstr "Новы пэндзаль"
 
 msgid "New pattern"
 msgstr ""
@@ -364,16 +364,16 @@ msgid "At layer:"
 msgstr ""
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Тып пэндзля:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Пэндзаль файла"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Пэндзаль праекта"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Выпадковы пэндзаль"
 
 msgid "Save Sprite as .pxo"
 msgstr ""
@@ -385,10 +385,10 @@ msgid "Export Sprite"
 msgstr ""
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Файл існуе. Перазапісаць?"
 
 msgid "File %s already exists. Overwrite?"
-msgstr ""
+msgstr "Файл %s ужо існуе. Перазапісаць?"
 
 msgid "Directory path is not valid!"
 msgstr ""
@@ -414,25 +414,25 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
-msgstr ""
+msgstr "Кадр"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Кадры:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Усе кадры"
 
 msgid "Spritesheet"
 msgstr ""
 
 msgid "Animation"
-msgstr ""
+msgstr "Анімацыя"
 
 msgid "Preview:"
 msgstr ""
 
 msgid "Frame:"
-msgstr ""
+msgstr "Кадр:"
 
 msgid "Orientation:"
 msgstr ""
@@ -1664,7 +1664,7 @@ msgid "Add a new palette"
 msgstr ""
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Рэдагаваць выбраную палітру"
 
 msgid "Choose a palette"
 msgstr ""
@@ -1802,7 +1802,7 @@ msgid "Invalid Palette file!"
 msgstr ""
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Рэдагаваць палітру"
 
 msgid "Create colors with alpha component"
 msgstr ""
