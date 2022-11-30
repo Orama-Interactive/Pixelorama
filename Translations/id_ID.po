@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-11-30 11:40\n"
+"PO-Revision-Date: 2022-11-30 18:24\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -481,7 +481,7 @@ msgstr "Lapisan piksel:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr "Lapisan berkumpul:"
+msgstr "Lapisan kelompok:"
 
 msgid "Direction:"
 msgstr "Arah:"
