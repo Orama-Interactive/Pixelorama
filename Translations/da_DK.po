@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-12-01 00:07\n"
+"PO-Revision-Date: 2022-12-01 16:02\n"
 
 msgid "OK"
 msgstr "OK"
@@ -465,11 +465,11 @@ msgid "Selected frames"
 msgstr ""
 
 msgid "Layers:"
-msgstr ""
+msgstr "Lag:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Synlige lag"
 
 #. Found in the export dialog
 msgid "Selected layers"
@@ -525,7 +525,7 @@ msgstr "Fil:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Avancerede indstillinger"
 
 msgid "Interpolation:"
 msgstr "Interpolation:"
@@ -577,7 +577,7 @@ msgstr "Ydeevne"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Drivere"
 
 msgid "Extensions"
 msgstr "Udvidelser"
@@ -590,7 +590,7 @@ msgstr "Indikatorer"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Pixelorama skal genstartes før ændringer træder i kraft."
 
 msgid "On"
 msgstr "Slået til"
@@ -650,7 +650,7 @@ msgid "Theme"
 msgstr "Tema"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Knapper"
 
 msgid "Icon color from:"
 msgstr "Ikonfarve fra:"
@@ -659,13 +659,13 @@ msgid "Icon color:"
 msgstr "Ikonfarve:"
 
 msgid "Background"
-msgstr ""
+msgstr "Baggrund"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Baggrundsfarve fra:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Baggrundsfarve:"
 
 msgid "Left tool color:"
 msgstr "Venstre værktøjsfarve:"
@@ -972,7 +972,7 @@ msgid "Dutch"
 msgstr "Hollandsk"
 
 msgid "Belarusian"
-msgstr ""
+msgstr "Belarussisk"
 
 msgid "Development Team"
 msgstr "Udviklingsteam"
@@ -1369,19 +1369,19 @@ msgstr ""
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
-msgstr ""
+msgstr "Renderer:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr ""
+msgstr "Angiver rendereren/videodriveren, der anvendes. GLES2 er bedre for ældre og low-end enheder, men GLES3 kan tilbyde flere funktioner."
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
-msgstr ""
+msgstr "Tablet driver:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr ""
+msgstr "Angiver tabletdriveren, der bruges på Windows. Hvis du har Windows Ink aktiveret, skal du vælge winink."
 
 msgid "Add Extension"
 msgstr "Tilføj Udvidelse"
@@ -1449,7 +1449,7 @@ msgstr ""
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Udfyld område:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
@@ -1468,7 +1468,7 @@ msgstr "Udfyld med:"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Selected color"
-msgstr ""
+msgstr "Valgt farve"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
@@ -1677,7 +1677,7 @@ msgid "Layer"
 msgstr "Lag"
 
 msgid "Group"
-msgstr ""
+msgstr "Gruppe"
 
 msgid "Layers"
 msgstr "Lag"
@@ -1686,7 +1686,7 @@ msgid "Create a new layer"
 msgstr "Opret et nyt lag"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "Opret et nyt gruppelag"
 
 msgid "Remove current layer"
 msgstr "Fjern nuværende lag"
