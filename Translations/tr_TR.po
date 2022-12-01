@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-12-01 00:06\n"
+"PO-Revision-Date: 2022-12-01 02:36\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -973,7 +973,7 @@ msgid "Dutch"
 msgstr "Flemenkçe"
 
 msgid "Belarusian"
-msgstr ""
+msgstr "Belarusça"
 
 msgid "Development Team"
 msgstr "Geliştirme Takımı"
@@ -1370,19 +1370,19 @@ msgstr "Bu açılırsa, uygulamanın penceresi odağı kaybettiğinde duraklatı
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
-msgstr ""
+msgstr "İşleyici:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr ""
+msgstr "Kullanılan işleyiciyi/video sürücüsünü belirtir. GLES2, eski ve düşük özellikli cihazlar için daha iyidir, ancak GLES3 daha fazla özellik sunabilir."
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
-msgstr ""
+msgstr "Table sürücüsü:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr ""
+msgstr "Windows'ta kullanılan tablet sürücüsünü belirtir. Windows Ink'i etkinleştirdiyseniz, winnk'i seçin."
 
 msgid "Add Extension"
 msgstr "Uzantı Ekle"
