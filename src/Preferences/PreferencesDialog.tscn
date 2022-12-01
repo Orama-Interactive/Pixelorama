@@ -1230,7 +1230,7 @@ __meta__ = {
 visible = false
 margin_top = 74.0
 margin_right = 498.0
-margin_bottom = 136.0
+margin_bottom = 112.0
 
 [node name="DriversHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Drivers"]
 margin_right = 498.0
@@ -1252,7 +1252,7 @@ size_flags_horizontal = 3
 [node name="DriversContainer" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Drivers"]
 margin_top = 18.0
 margin_right = 498.0
-margin_bottom = 62.0
+margin_bottom = 38.0
 columns = 3
 
 [node name="RendererLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Drivers/DriversContainer"]
@@ -1267,6 +1267,7 @@ text = "Renderer:"
 margin_left = 168.0
 margin_right = 331.0
 margin_bottom = 20.0
+hint_tooltip = "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "GLES2"
@@ -1287,9 +1288,10 @@ text = "Tablet driver:"
 [node name="TabletDriver" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Drivers/DriversContainer"]
 unique_name_in_owner = true
 visible = false
-margin_top = 24.0
-margin_right = 164.0
-margin_bottom = 44.0
+margin_left = 335.0
+margin_right = 498.0
+margin_bottom = 20.0
+hint_tooltip = "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 
