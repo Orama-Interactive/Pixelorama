@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2022-11-29 23:36\n"
+"PO-Revision-Date: 2022-12-01 00:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -970,6 +970,9 @@ msgstr "Serbisk (kyrillisk)"
 msgid "Dutch"
 msgstr "Nederlandsk"
 
+msgid "Belarusian"
+msgstr ""
+
 msgid "Development Team"
 msgstr "Utviklingsteam"
 
@@ -1360,6 +1363,22 @@ msgstr "Setter grensen for hvor mange bilder per sekund programmet kan ha. Laver
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Hvis denne er påslått og programmet mister fokus vil programmet settes på pause. Dette gjør så programmet bruker mindre prosessorkraft ved inaktivitet. Programmet vil gå tilbake til normalt når musen går inn i programmets vindu."
+
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr ""
 
 msgid "Add Extension"
 msgstr "Legg til utvidelse"
