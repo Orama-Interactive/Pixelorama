@@ -216,14 +216,6 @@ onready var current_version: String = ProjectSettings.get_setting("application/c
 func _init() -> void:
 	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
 		tablet_driver = 1
-	if OS.has_feature("editor"):
-		return
-
-	# Sets GLES2 as the default value in `override.cfg`.
-	# Without this, switching to GLES3 does not work, because it will default to GLES2.
-	var renderer_name := OS.get_video_driver_name(renderer)
-	ProjectSettings.set_initial_value("rendering/quality/driver/driver_name", renderer_name)
-	ProjectSettings.save_custom(OVERRIDE_FILE)
 
 
 func _ready() -> void:
@@ -504,6 +496,10 @@ func _renderer_changed(value: int) -> void:
 	renderer = value
 	if OS.has_feature("editor"):
 		return
+
+	# Sets GLES2 as the default value in `override.cfg`.
+	# Without this, switching to GLES3 does not work, because it will default to GLES2.
+	ProjectSettings.set_initial_value("rendering/quality/driver/driver_name", "GLES2")
 	var renderer_name := OS.get_video_driver_name(renderer)
 	ProjectSettings.set_setting("rendering/quality/driver/driver_name", renderer_name)
 	ProjectSettings.save_custom(OVERRIDE_FILE)
