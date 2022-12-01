@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2022-12-01 09:43\n"
+"PO-Revision-Date: 2022-12-01 14:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -202,10 +202,10 @@ msgid "Preferences"
 msgstr ""
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Бясшоўны рэжым"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Зрух бясшоўнага рэжыму"
 
 msgid "X-basis x:"
 msgstr ""
@@ -238,52 +238,52 @@ msgid "Window opacity does not work on fullscreen mode."
 msgstr ""
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Макет панэляў"
 
 msgid "Panels"
-msgstr ""
+msgstr "Панэлі"
 
 msgid "Layouts"
-msgstr ""
+msgstr "Макеты"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Рухомыя панэлі"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Кіраванне макетамі"
 
 msgid "Add"
-msgstr ""
+msgstr "Дадаць"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Дадаць макет"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Рэдагаваць макет"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Вы сапраўды хочаце выдаліць гэты макет?"
 
 msgid "Auto"
-msgstr ""
+msgstr "Аўта"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Шырокаэкранны"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Высокаэкранны"
 
 msgid "Mirror View"
 msgstr ""
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Паказваць сетку"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Паказваць піксельную сетку"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Паказваць лінейкі"
 
 msgid "Show Guides"
 msgstr ""
@@ -292,7 +292,7 @@ msgid "Show Animation Timeline"
 msgstr ""
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Дзэн-рэжым"
 
 msgid "Fullscreen Mode"
 msgstr ""
@@ -456,61 +456,61 @@ msgid "Open a Directory"
 msgstr ""
 
 msgid "Background:"
-msgstr ""
+msgstr "Фон:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Выбраныя кадры"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Шары:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Бачныя шары"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Выбраныя шары"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Шар пікселяў:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Групавы шар:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Напрамак:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Уперад"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Назад"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Папераменны"
 
 msgid "Columns"
-msgstr ""
+msgstr "Слупкі"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Слупкі:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Радкі"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Радкі:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
 msgstr ""
 
 msgid "Path:"
-msgstr ""
+msgstr "Шлях:"
 
 msgid "Directories & Files:"
 msgstr ""
@@ -519,7 +519,7 @@ msgid "Create Folder"
 msgstr ""
 
 msgid "File:"
-msgstr ""
+msgstr "Файл:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -544,25 +544,25 @@ msgid "Constant"
 msgstr ""
 
 msgid "General"
-msgstr ""
+msgstr "Агульнае"
 
 msgid "Startup"
-msgstr ""
+msgstr "Запуск"
 
 msgid "Language"
-msgstr ""
+msgstr "Мова"
 
 msgid "Interface"
-msgstr ""
+msgstr "Інтэрфейс"
 
 msgid "Themes"
-msgstr ""
+msgstr "Тэмы"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Палатно"
 
 msgid "Selection"
-msgstr ""
+msgstr "Выбар"
 
 msgid "Shortcuts"
 msgstr ""
@@ -575,7 +575,7 @@ msgstr ""
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Драйверы"
 
 msgid "Extensions"
 msgstr ""
@@ -591,7 +591,7 @@ msgid "Pixelorama must be restarted for changes to take effect."
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "Укл."
 
 msgid "Restore default value"
 msgstr ""
@@ -606,19 +606,19 @@ msgid "Tablet pressure sensitivity:"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Адсутнічае"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "Колер:"
 
 msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
-msgstr ""
+msgstr "Мова сістэмы"
 
 msgid "Display Scale"
 msgstr ""
@@ -627,58 +627,58 @@ msgid "Dim interface on dialog popup"
 msgstr ""
 
 msgid "Dark"
-msgstr ""
+msgstr "Цёмная"
 
 msgid "Gray"
-msgstr ""
+msgstr "Серая"
 
 msgid "Blue"
-msgstr ""
+msgstr "Сіняя"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Карамельная"
 
 msgid "Light"
-msgstr ""
+msgstr "Светлая"
 
 msgid "Purple"
-msgstr ""
+msgstr "Фіялетавая"
 
 msgid "Theme"
-msgstr ""
+msgstr "Тэма"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Кнопкі"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Колер значка з:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Колер значка:"
 
 msgid "Background"
-msgstr ""
+msgstr "Фон"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Колер фона з:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Колер фона:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Колер левага інструмента:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Колер правага інструмента:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Памер кнопак інструментаў:"
 
 msgid "Small"
-msgstr ""
+msgstr "Маленькія"
 
 msgid "Big"
-msgstr ""
+msgstr "Вялікія"
 
 msgid "Only affect selection"
 msgstr ""
@@ -741,44 +741,44 @@ msgid "Gradient Map"
 msgstr ""
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "Падзяліць на роўныя часткі"
 
 msgid "Parts:"
-msgstr ""
+msgstr "Часткі:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "Дадаць кропку ў канцы"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr ""
+msgstr "Калі выбраны гэты пункт, у канец градыента дадаецца апошняя кропка. Адключыце гэты пункт, калі вы хочаце, каб у градыента была канстантная інтэрпаляцыя і апошні колер браўся да ўвагі."
 
 msgid "Linear"
-msgstr ""
+msgstr "Лінейны"
 
 msgid "Radial"
-msgstr ""
+msgstr "Радыяльны"
 
 msgid "Linear Step"
-msgstr ""
+msgstr "Лінейны па кроках"
 
 msgid "Radial Step"
-msgstr ""
+msgstr "Радыяльны па кроках"
 
 msgid "Linear Dithering"
-msgstr ""
+msgstr "Лінейны кропкамі"
 
 msgid "Radial Dithering"
-msgstr ""
+msgstr "Радыяльны кропкамі"
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Памер пераходу:"
 
 msgid "Center:"
-msgstr ""
+msgstr "Цэнтр:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Радыус:"
 
 msgid "Dithering pattern:"
 msgstr ""
@@ -787,10 +787,10 @@ msgid "Adjust HSV"
 msgstr ""
 
 msgid "Type:"
-msgstr ""
+msgstr "Тып:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Кут:"
 
 msgid "Hue:"
 msgstr ""
@@ -802,7 +802,7 @@ msgid "Value:"
 msgstr ""
 
 msgid "Apply"
-msgstr ""
+msgstr "Прымяніць"
 
 msgid "Diagonal"
 msgstr ""
@@ -814,28 +814,28 @@ msgid "Thickness:"
 msgstr ""
 
 msgid "Colors:"
-msgstr ""
+msgstr "Колеры:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Крокі:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "Зверху ўніз"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "Знізу ўверх"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Злева направа"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Справа налева"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Паказваць загрузачны экран"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Анлайн-дакументацыя"
 
 msgid "Issue Tracker"
 msgstr ""
@@ -844,52 +844,52 @@ msgid "Open Logs Folder"
 msgstr ""
 
 msgid "Changelog"
-msgstr ""
+msgstr "Спіс змен"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Пра праграму Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama — Pixelate your dreams!"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Распрацавалі Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019—наш час, Orama Interactive і іншыя аўтары"
 
 msgid "Website"
-msgstr ""
+msgstr "Сайт"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "Рэпазіторый GitHub"
 
 msgid "Donate"
 msgstr ""
 
 msgid "Developers"
-msgstr ""
+msgstr "Распрацоўшчыкі"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Удзельнікі"
 
 msgid "Donors"
-msgstr ""
+msgstr "Спонсары"
 
 msgid "Translators"
-msgstr ""
+msgstr "Перакладчыкі"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Ліцэнзіі"
 
 msgid "English"
-msgstr ""
+msgstr "Англійская"
 
 msgid "Greek"
-msgstr ""
+msgstr "Грэцкая"
 
 msgid "French"
-msgstr ""
+msgstr "Французская"
 
 msgid "German"
 msgstr ""
@@ -1009,13 +1009,13 @@ msgid "Save before exiting?"
 msgstr ""
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Ёсць незапісаныя змены. Працягнуць?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Захаваць і выйсці"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Выйсці без захавання"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
@@ -1180,10 +1180,10 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
 
 msgid "Grid"
-msgstr ""
+msgstr "Сетка"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Тып сеткі:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
