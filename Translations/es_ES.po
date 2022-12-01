@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-11-29 23:34\n"
+"PO-Revision-Date: 2022-12-01 00:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -971,6 +971,9 @@ msgstr "Serbio (Cirílico)"
 msgid "Dutch"
 msgstr "Holandés"
 
+msgid "Belarusian"
+msgstr ""
+
 msgid "Development Team"
 msgstr "Equipo de desarrollo"
 
@@ -1363,6 +1366,22 @@ msgstr "Establece el límite de fotogramas por segundo de la aplicación. Cuanto
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Si se activa esta opción, cuando la ventana de la aplicación pierde el enfoque, se detiene. Esto ayuda a reducir el uso de la CPU cuando está inactiva. La aplicación no se detiene cuando el ratón entra en la ventana de la aplicación."
+
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr ""
 
 msgid "Add Extension"
 msgstr "Agregar Extensión"
