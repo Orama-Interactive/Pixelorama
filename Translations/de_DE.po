@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-12-01 00:06\n"
+"PO-Revision-Date: 2022-12-01 07:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -972,7 +972,7 @@ msgid "Dutch"
 msgstr "Niederländisch"
 
 msgid "Belarusian"
-msgstr ""
+msgstr "Weißrussisch"
 
 msgid "Development Team"
 msgstr "Entwicklerteam"
@@ -1369,19 +1369,19 @@ msgstr "Wenn dies eingeschaltet ist und das Fenster der Anwendung den Fokus verl
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
-msgstr ""
+msgstr "Renderer:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr ""
+msgstr "Bestimmt den zu verwendenden Renderer/Video-Treiber. GLES2 ist besser für ältere und Low-End-Geräte, aber GLES3 kann mehr Funktionen bieten."
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
-msgstr ""
+msgstr "Tablet-Treiber:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr ""
+msgstr "Bestimmt den Tablet-Treiber, der unter Windows verwendet wird. Wenn Windows Tinte aktiviert ist, wählen Sie winink."
 
 msgid "Add Extension"
 msgstr "Erweiterung hinzufügen"
