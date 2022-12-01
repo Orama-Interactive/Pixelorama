@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-12-01 00:06\n"
+"PO-Revision-Date: 2022-12-01 09:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -973,7 +973,7 @@ msgid "Dutch"
 msgstr "Neerlandeză"
 
 msgid "Belarusian"
-msgstr ""
+msgstr "Belarusă"
 
 msgid "Development Team"
 msgstr "Echipa de dezvoltare"
@@ -1370,7 +1370,7 @@ msgstr "Dacă această opțiune este activată, în momentul în care fereastra 
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
-msgstr ""
+msgstr "Randator:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
