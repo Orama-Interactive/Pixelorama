@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-12-01 09:43\n"
+"PO-Revision-Date: 2022-12-01 10:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1374,15 +1374,15 @@ msgstr "Randator:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr ""
+msgstr "Specifică randatorul/driverul video utilizat. GLES2 este mai bun pentru dispozitivele mai vechi și cu o performanță mai redusă, dar GLES3 poate oferi mai multe caracteristici."
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
-msgstr ""
+msgstr "Driver tabletă:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr ""
+msgstr "Specifică driverul tabletei utilizat pe Windows. Dacă ai Windows Ink activat, selectează winink."
 
 msgid "Add Extension"
 msgstr "Adăugare extensie"
