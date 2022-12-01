@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-12-01 00:06\n"
+"PO-Revision-Date: 2022-12-01 01:16\n"
 
 msgid "OK"
 msgstr "确定"
@@ -973,7 +973,7 @@ msgid "Dutch"
 msgstr "荷兰语"
 
 msgid "Belarusian"
-msgstr ""
+msgstr "白俄罗斯语"
 
 msgid "Development Team"
 msgstr "开发团队"
@@ -1370,19 +1370,19 @@ msgstr "如果打开此选项，当应用程序的窗口失去焦点时，它会
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
-msgstr ""
+msgstr "渲染器："
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr ""
+msgstr "指定正在使用的渲染器/视频驱动。GLES2 更适合于旧的和低端的设备，但 GLES3 可能提供更多的功能。"
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
-msgstr ""
+msgstr "平板电脑驱动程序："
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr ""
+msgstr "指定在 Windows 上使用的平板电脑驱动程序。如果你启用了 Windows Ink，选择 winink。"
 
 msgid "Add Extension"
 msgstr "添加扩展"
