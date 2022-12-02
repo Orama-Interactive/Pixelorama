@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-12-02 00:32\n"
+"PO-Revision-Date: 2022-12-02 02:26\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -389,7 +389,8 @@ msgstr "Dosya Zaten Var, Üzerine Yazılsın mı?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "Aşağıdaki dosyalar zaten mevcut. Var olan dosyaların üzerine yazmak ister misiniz?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Dizin yolu geçersiz!"
