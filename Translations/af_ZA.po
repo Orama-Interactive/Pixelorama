@@ -10,52 +10,52 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Afrikaans\n"
 "Language: af_ZA\n"
-"PO-Revision-Date: 2022-12-02 00:33\n"
+"PO-Revision-Date: 2022-12-02 14:43\n"
 
 msgid "OK"
-msgstr ""
+msgstr "Goed"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Kanselleer"
 
 msgid "Open"
-msgstr ""
+msgstr "Mask oop"
 
 msgid "Save"
-msgstr ""
+msgstr "Stoor"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Bevestig asseblief..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Lêernaam:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Projek Naam:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Beeld grootte"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Seilgrootte"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Raam grootte"
 
 msgid "Size:"
-msgstr ""
+msgstr "Grootte:"
 
 msgid "Width:"
-msgstr ""
+msgstr "Breedte:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Hoogte:"
 
 msgid "Center"
-msgstr ""
+msgstr "Middel"
 
 msgid "File"
-msgstr ""
+msgstr "Lêer"
 
 msgid "Edit"
 msgstr ""
