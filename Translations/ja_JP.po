@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-12-02 00:33\n"
+"PO-Revision-Date: 2022-12-02 05:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -389,7 +389,8 @@ msgstr "ファイルが存在します。上書きしますか？"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "以下のファイルは既に存在します。上書きしますか？\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "ディレクトリパスが有効ではありません！"
