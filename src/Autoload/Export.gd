@@ -34,7 +34,7 @@ var was_exported := false
 # Export coroutine signal
 var stop_export := false
 
-var file_exists_alert := "File %s already exists. Overwrite?"
+var file_exists_alert := "The following files already exist. Do you wish to overwrite them?\n%s"
 
 # Export progress variables
 var export_progress_fraction := 0.0
@@ -165,34 +165,37 @@ func export_processed_images(
 		multiple_files = true if processed_images.size() > 1 else false
 	# Check export paths
 	var export_paths := []
+	var paths_of_existing_files := ""
 	for i in range(processed_images.size()):
 		stop_export = false
 		var export_path := create_export_path(multiple_files, project, i + 1)
-		# If user want to create new directory for each animation tag then check
-		# if directories exist and create them if not
+		# If the user wants to create a new directory for each animation tag then check
+		# if directories exist, and create them if not
 		if multiple_files and new_dir_for_each_frame_tag:
 			var frame_tag_directory := Directory.new()
 			if not frame_tag_directory.dir_exists(export_path.get_base_dir()):
 				frame_tag_directory.open(directory_path)
 				frame_tag_directory.make_dir(export_path.get_base_dir().get_file())
-		# Check if the file already exists
-		var file_check: File = File.new()
-		if file_check.file_exists(export_path):
-			# Ask user if they want to overwrite the file
-			if not was_exported or (was_exported and not ignore_overwrites):
-				# Overwrite existing file?
-				export_dialog.open_file_exists_alert_popup(file_exists_alert % export_path)
-				# Stops the function until the user decides if they want to overwrite
-				yield(export_dialog, "resume_export_function")
-				if stop_export:
-					# User decided to stop export
-					return
+
+		if not ignore_overwrites:  # Check if the files already exist
+			var file_check: File = File.new()
+			if file_check.file_exists(export_path):
+				if not paths_of_existing_files.empty():
+					paths_of_existing_files += "\n"
+				paths_of_existing_files += export_path
 		export_paths.append(export_path)
 		# Only get one export path if single file animated image is exported
 		if is_single_file_format():
 			break
 
-	# Scale images that are to export
+	if not paths_of_existing_files.empty():  # If files already exist
+		# Ask user if they want to overwrite the files
+		export_dialog.open_file_exists_alert_popup(tr(file_exists_alert) % paths_of_existing_files)
+		# Stops the function until the user decides if they want to overwrite
+		yield(export_dialog, "resume_export_function")
+		if stop_export:  # User decided to stop export
+			return
+
 	scale_processed_images()
 
 	if is_single_file_format():

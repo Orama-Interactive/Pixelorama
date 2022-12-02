@@ -376,7 +376,8 @@ msgstr ""
 msgid "File Exists, Overwrite?"
 msgstr ""
 
-msgid "File %s already exists. Overwrite?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
 msgstr ""
 
 msgid "Directory path is not valid!"

@@ -213,13 +213,14 @@ func update_dimensions_label() -> void:
 
 func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
 	# 0 is invalid path, 1 is invalid name
+	var error_text := "Directory path and file name are not valid!"
 	if path_or_name == 0:
-		path_validation_alert_popup.dialog_text = "Directory path is not valid!"
+		error_text = "Directory path is not valid!"
 	elif path_or_name == 1:
-		path_validation_alert_popup.dialog_text = "File name is not valid!"
-	else:
-		path_validation_alert_popup.dialog_text = "Directory path and file name are not valid!"
+		error_text = "File name is not valid!"
 
+	path_validation_alert_popup.dialog_text = error_text
+	print(error_text)
 	path_validation_alert_popup.popup_centered()
 
 
@@ -260,7 +261,6 @@ func _on_ExportDialog_about_to_show() -> void:
 	file_format_options.selected = Export.file_format
 	show_tab()
 
-	Export.file_exists_alert = tr("File %s already exists. Overwrite?")  # Update translation
 	# Set the size of the preview checker
 	checker.rect_size = checker.get_parent().rect_size
 
