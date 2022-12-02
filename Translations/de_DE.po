@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2022-12-02 00:33\n"
+"PO-Revision-Date: 2022-12-02 06:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -389,7 +389,8 @@ msgstr "Datei existiert schon, überschreiben?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "Die folgenden Dateien sind bereits vorhanden. Möchten Sie sie überschreiben?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Verzeichnispfad ist ungültig!"
