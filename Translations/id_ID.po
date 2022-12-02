@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-12-02 00:32\n"
+"PO-Revision-Date: 2022-12-02 05:10\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -389,7 +389,8 @@ msgstr "Ada berkasnya. Timpa saja?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "Berkas tersebut sudah ada. Apakah ingin ditimpa saja?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Jalur direktori tidak absah!"
@@ -974,7 +975,7 @@ msgid "Dutch"
 msgstr "Bhs. Belanda"
 
 msgid "Belarusian"
-msgstr ""
+msgstr "Bahasa Belarus"
 
 msgid "Development Team"
 msgstr "Regu Pengembangan"
@@ -1371,19 +1372,19 @@ msgstr "Jika dinyalakan, ketika jendela aplikasi hilang fokus nanti akan dijedak
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
-msgstr ""
+msgstr "Renderer:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr ""
+msgstr "Menentukan renderer/pengandar video yang dipakai. GLES2 lebih bagus untuk perangkat lawas atau kelas bawah, tapi GLES3 punya lebih banyak fitur."
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
-msgstr ""
+msgstr "Pengandar tablet:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr ""
+msgstr "Menentukan pengandar tablet yang dipakai pada Windows. Jika Windows Ink sudah diaktifkan, pilih winink."
 
 msgid "Add Extension"
 msgstr "Tambah Ekstensi"
