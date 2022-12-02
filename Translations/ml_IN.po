@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malayalam\n"
 "Language: ml_IN\n"
-"PO-Revision-Date: 2022-12-01 00:06\n"
+"PO-Revision-Date: 2022-12-02 00:33\n"
 
 msgid "OK"
 msgstr "ഓക്കേ"
@@ -387,7 +387,8 @@ msgstr ""
 msgid "File Exists, Overwrite?"
 msgstr ""
 
-msgid "File %s already exists. Overwrite?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
 msgstr ""
 
 msgid "Directory path is not valid!"
