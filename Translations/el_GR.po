@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-12-02 00:33\n"
+"PO-Revision-Date: 2022-12-03 22:55\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -389,7 +389,8 @@ msgstr "Το άρχειο υπάρχει, να γίνει αντικατάστα
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "Τα ακόλουθα αρχεία υπάρχουν ήδη. Θέλετε να τα αντικαταστήσετε;\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Η διαδρομή του φακέλου δεν είναι έγκυρη!"
