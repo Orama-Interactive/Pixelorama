@@ -10,31 +10,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Albanian\n"
 "Language: sq_AL\n"
-"PO-Revision-Date: 2022-12-03 22:55\n"
+"PO-Revision-Date: 2022-12-04 00:06\n"
 
 msgid "OK"
-msgstr ""
+msgstr "Ne rregull"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Anulo"
 
 msgid "Open"
-msgstr ""
+msgstr "Hapur"
 
 msgid "Save"
-msgstr ""
+msgstr "Ruaj"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Ju lutemi konfirmoni..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Emri i skedarit:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Emri i Projektit:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Madhësia e imazhit"
 
 msgid "Canvas Size"
 msgstr ""
