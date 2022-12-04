@@ -3,17 +3,21 @@ extends AcceptDialog
 var layout_selected := -1
 var is_editing := false
 
-onready var layout_list: ItemList = $VBoxContainer/SavedLayouts
+onready var layout_list: ItemList = find_node("SavedLayouts")
 onready var edit_layout: Button = find_node("EditLayout")
 onready var delete_layout: Button = find_node("DeleteLayout")
 onready var layout_settings: ConfirmationDialog = $LayoutSettings
 onready var layout_name: LineEdit = $LayoutSettings/LayoutName
 onready var delete_confirmation: ConfirmationDialog = $DeleteConfirmation
+onready var mimic_ui = find_node("LayoutPreview")
 
 
 func _on_ManageLayouts_about_to_show() -> void:
 	for layout in Global.top_menu_container.layouts:
 		layout_list.add_item(layout[0])
+	refresh_preview()
+	if layout_selected != -1:
+		layout_list.select(layout_selected)
 
 
 func _on_ManageLayouts_popup_hide() -> void:
@@ -29,6 +33,7 @@ func _on_SavedLayouts_item_selected(index: int) -> void:
 	layout_selected = index
 	edit_layout.disabled = index < Global.top_menu_container.default_layout_size
 	delete_layout.disabled = index < Global.top_menu_container.default_layout_size
+	refresh_preview()
 
 
 func _on_SavedLayouts_nothing_selected() -> void:
@@ -93,3 +98,24 @@ func _on_DeleteConfirmation_confirmed() -> void:
 	layout_selected = -1
 	edit_layout.disabled = true
 	delete_layout.disabled = true
+	refresh_preview()
+
+
+func refresh_preview():
+	for tab in mimic_ui.get_tabs():
+		mimic_ui.remove_child(tab)
+
+	for item in Global.top_menu_container.ui.get_tabs():
+		var box := TextEdit.new()
+		box.name = item.name
+		box.text = item.name
+		box.wrap_enabled = true
+		box.readonly = true
+		mimic_ui.add_child(box)
+
+	if layout_selected == -1:
+		mimic_ui.visible = false
+		return
+
+	mimic_ui.visible = true
+	mimic_ui.set_layout(Global.top_menu_container.layouts[layout_selected][1].clone())
