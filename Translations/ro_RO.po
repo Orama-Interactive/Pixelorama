@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-12-02 00:33\n"
+"PO-Revision-Date: 2022-12-04 19:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -389,7 +389,8 @@ msgstr "Fișierul există deja. Suprascrii?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "Următoarele fișiere există deja. Dorești să le suprascrii?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Calea directorului nu este validă!"
