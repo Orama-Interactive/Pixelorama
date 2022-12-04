@@ -104,7 +104,6 @@ func _on_DeleteConfirmation_confirmed() -> void:
 func refresh_preview():
 	for tab in mimic_ui.get_tabs():
 		mimic_ui.remove_child(tab)
-
 	for item in Global.top_menu_container.ui.get_tabs():
 		var box := TextEdit.new()
 		box.name = item.name
@@ -112,10 +111,8 @@ func refresh_preview():
 		box.wrap_enabled = true
 		box.readonly = true
 		mimic_ui.add_child(box)
-
 	if layout_selected == -1:
 		mimic_ui.visible = false
 		return
-
 	mimic_ui.visible = true
 	mimic_ui.set_layout(Global.top_menu_container.layouts[layout_selected][1].clone())
