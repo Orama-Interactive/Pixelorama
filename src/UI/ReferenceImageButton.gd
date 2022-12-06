@@ -84,8 +84,9 @@ func _on_Path_pressed() -> void:
 
 func _on_ApplyFilter_toggled(button_pressed: bool) -> void:
 	element.filter = button_pressed
-	if element.filter:
-		element.texture.flags = Texture.FLAG_MIPMAPS | Texture.FLAG_FILTER
-	else:
-		element.texture.flags = Texture.FLAG_MIPMAPS
+	if element.texture:
+		if element.filter:
+			element.texture.flags = Texture.FLAG_MIPMAPS | Texture.FLAG_FILTER
+		else:
+			element.texture.flags = Texture.FLAG_MIPMAPS
 	element.change_properties()
