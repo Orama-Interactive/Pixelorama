@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2022-12-02 00:33\n"
+"PO-Revision-Date: 2022-12-06 11:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -166,25 +166,25 @@ msgid "Rotate Image"
 msgstr "Паварот выявы"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "X цэнтра:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Y цэнтра:"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Налады мазка:"
 
 msgid "Tolerance:"
 msgstr ""
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Пачатковы вугал:"
 
 msgid "Clear"
-msgstr ""
+msgstr "Скінуць"
 
 msgid "Invert"
-msgstr ""
+msgstr "Інвертаваць"
 
 msgid "Grayscale View"
 msgstr ""
@@ -232,10 +232,10 @@ msgid "Reset Mask"
 msgstr ""
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Непразорасць акна"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "Непразорасць акна не ўлічваецца ў паўнаэкранным рэжыме."
 
 msgid "Panel Layout"
 msgstr "Макет панэляў"
@@ -295,7 +295,7 @@ msgid "Zen Mode"
 msgstr "Дзэн-рэжым"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Паўнаэкранны рэжым"
 
 msgid "Fill with color:"
 msgstr ""
@@ -349,19 +349,19 @@ msgid "New pattern"
 msgstr ""
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Кадры па гарызанталі:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Кадры па вертыкалі:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Пачатковы кадр:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "На кадры:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "На слоі:"
 
 msgid "Brush type:"
 msgstr "Тып пэндзля:"
@@ -430,16 +430,16 @@ msgid "Animation"
 msgstr "Анімацыя"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Папярэдні перагляд:"
 
 msgid "Frame:"
 msgstr "Кадр:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Арыентацыя:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Агляд"
 
 msgid "Resize:"
 msgstr ""
@@ -685,10 +685,10 @@ msgid "Only affect selection"
 msgstr ""
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Выбраныя келі"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Бягучы кель"
 
 msgid "Current frame"
 msgstr ""
@@ -700,7 +700,7 @@ msgid "All projects"
 msgstr ""
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Інвертаваць колеры"
 
 msgid "Modify Red Channel"
 msgstr ""
@@ -1665,7 +1665,7 @@ msgid "Lock/unlock layer"
 msgstr ""
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "Кадр: %s, Слой: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
