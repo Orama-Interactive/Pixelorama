@@ -10,6 +10,7 @@ var image_path: String = ""
 
 var filter = false
 
+
 func _ready() -> void:
 	project.reference_images.append(self)
 
