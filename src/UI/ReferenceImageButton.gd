@@ -6,7 +6,13 @@ var _ignore_spinbox_changes = false
 
 
 func _ready():
-	$Interior/PathHeader/Path.text = element.image_path
+	if OS.get_name() == "HTML5":
+		$Interior/PathHeader/Path.visible = false
+		$Interior/PathHeader/PathHTML.text = element.image_path
+	else:
+		$Interior/PathHeader/PathHTML.visible = false
+		$Interior/PathHeader/Path.text = element.image_path
+
 	if !element.texture:
 		$Interior/PreviewAndOptions/PreviewPanel/Warning.text = "Image Not Found!!!"
 	else:

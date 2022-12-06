@@ -24,13 +24,20 @@ custom_constants/separation = 0
 
 [node name="Path" type="LinkButton" parent="Interior/PathHeader"]
 modulate = Color( 0.552941, 1, 0.298039, 1 )
-margin_right = 148.0
+margin_right = 99.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 underline = 1
 
+[node name="PathHTML" type="Label" parent="Interior/PathHeader"]
+self_modulate = Color( 0.552941, 1, 0.298039, 1 )
+margin_left = 99.0
+margin_right = 198.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
 [node name="HSeparator" type="HSeparator" parent="Interior/PathHeader"]
-margin_left = 148.0
+margin_left = 198.0
 margin_right = 297.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
