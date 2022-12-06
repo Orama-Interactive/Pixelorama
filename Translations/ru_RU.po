@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2022-12-02 00:32\n"
+"PO-Revision-Date: 2022-12-06 11:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -389,7 +389,8 @@ msgstr "Файл существует, перезаписать?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "Указанные ниже файлы уже существуют. Перезаписать их?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Недопустимый путь к каталогу!"
