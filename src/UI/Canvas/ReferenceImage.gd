@@ -8,6 +8,7 @@ var project = Global.current_project
 
 var image_path: String = ""
 
+var filter = false
 
 func _ready() -> void:
 	project.reference_images.append(self)
@@ -40,6 +41,7 @@ func serialize():
 		"modulate_g": modulate.g,
 		"modulate_b": modulate.b,
 		"modulate_a": modulate.a,
+		"filter": filter,
 		"image_path": image_path
 	}
 
@@ -58,7 +60,7 @@ func deserialize(d: Dictionary):
 		if img.load(image_path) == OK:
 			var itex = ImageTexture.new()
 			# don't do FLAG_REPEAT - it could cause visual issues
-			itex.create_from_image(img, Texture.FLAG_MIPMAPS | Texture.FLAG_FILTER)
+			itex.create_from_image(img, Texture.FLAG_MIPMAPS)
 			texture = itex
 	# Now that the image may have been established...
 	position_reset()
@@ -78,4 +80,6 @@ func deserialize(d: Dictionary):
 		modulate.b = d["modulate_b"]
 	if d.has("modulate_a"):
 		modulate.a = d["modulate_a"]
+	if d.has("filter"):
+		filter = d["filter"]
 	change_properties()
