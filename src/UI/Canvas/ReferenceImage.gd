@@ -13,12 +13,12 @@ func _ready() -> void:
 	project.reference_images.append(self)
 
 
-func change_properties():
+func change_properties() -> void:
 	emit_signal("properties_changed")
 
 
 # Resets the position and scale of the reference image.
-func position_reset():
+func position_reset() -> void:
 	position = project.size / 2.0
 	if texture != null:
 		scale = (
@@ -30,7 +30,7 @@ func position_reset():
 
 
 # Serialize details of the reference image.
-func serialize():
+func serialize() -> Dictionary:
 	return {
 		"x": position.x,
 		"y": position.y,
@@ -47,16 +47,16 @@ func serialize():
 # Load details of the reference image from a dictionary.
 # Be aware that new ReferenceImages are created via deserialization.
 # This is because deserialization sets up some nice defaults.
-func deserialize(d: Dictionary):
+func deserialize(d: Dictionary) -> void:
 	modulate = Color(1, 1, 1, 0.5)
 	if d.has("image_path"):
 		# Note that reference images are referred to by path.
 		# These images may be rather big.
 		# Also
 		image_path = d["image_path"]
-		var img = Image.new()
+		var img := Image.new()
 		if img.load(image_path) == OK:
-			var itex = ImageTexture.new()
+			var itex := ImageTexture.new()
 			# don't do FLAG_REPEAT - it could cause visual issues
 			itex.create_from_image(img, Texture.FLAG_MIPMAPS | Texture.FLAG_FILTER)
 			texture = itex
@@ -79,3 +79,12 @@ func deserialize(d: Dictionary):
 	if d.has("modulate_a"):
 		modulate.a = d["modulate_a"]
 	change_properties()
+
+
+# Useful for HTML5
+func create_from_image(image: Image) -> void:
+	var itex := ImageTexture.new()
+	# don't do FLAG_REPEAT - it could cause visual issues
+	itex.create_from_image(image, Texture.FLAG_MIPMAPS | Texture.FLAG_FILTER)
+	texture = itex
+	position_reset()

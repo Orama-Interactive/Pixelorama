@@ -596,11 +596,21 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	project.undo_redo.commit_action()
 
 
-func import_reference_image_from_path(path: String):
+func import_reference_image_from_path(path: String) -> void:
 	var project: Project = Global.current_project
 	var ri := ReferenceImage.new()
 	ri.project = project
 	ri.deserialize({"image_path": path})
+	Global.canvas.add_child(ri)
+	project.change_project()
+
+
+# Useful for HTML5
+func import_reference_image_from_image(image: Image) -> void:
+	var project: Project = Global.current_project
+	var ri := ReferenceImage.new()
+	ri.project = project
+	ri.create_from_image(image)
 	Global.canvas.add_child(ri)
 	project.change_project()
 
