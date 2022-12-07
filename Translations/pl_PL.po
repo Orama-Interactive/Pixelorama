@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-12-02 00:33\n"
+"PO-Revision-Date: 2022-12-07 12:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -973,7 +973,7 @@ msgid "Dutch"
 msgstr "Niderlandzki"
 
 msgid "Belarusian"
-msgstr ""
+msgstr "Białoruski"
 
 msgid "Development Team"
 msgstr "Zespół developerski"
