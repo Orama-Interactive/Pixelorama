@@ -15,11 +15,26 @@ margin_right = 116.0
 margin_bottom = 4.0
 rect_min_size = Vector2( 0, 4 )
 
-[node name="Label" type="Label" parent="."]
+[node name="Header" type="HBoxContainer" parent="."]
 margin_top = 8.0
 margin_right = 116.0
 margin_bottom = 22.0
+custom_constants/separation = 0
+
+[node name="HSeparator2" type="HSeparator" parent="Header"]
+margin_right = 23.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Header"]
+margin_left = 23.0
+margin_right = 92.0
+margin_bottom = 14.0
 theme_type_variation = "Header"
-text = "Tool"
-align = 1
-autowrap = true
+text = "Tool Name"
+
+[node name="HSeparator" type="HSeparator" parent="Header"]
+margin_left = 92.0
+margin_right = 116.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
