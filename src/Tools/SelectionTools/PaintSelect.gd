@@ -162,7 +162,7 @@ func append_gap(start: Vector2, end: Vector2) -> void:
 		if e2 <= dx:
 			err += dx
 			y += sy
-		_draw_points.append(Vector2(x, y))
+		_draw_points.append_array(draw_tool(Vector2(x, y)))
 
 
 func mirror_array(array: Array, h: bool, v: bool) -> Array:
@@ -225,7 +225,9 @@ func _compute_draw_tool_pixel(position: Vector2) -> PoolVector2Array:
 	var end := start + Vector2.ONE * _brush_size
 	for y in range(start.y, end.y):
 		for x in range(start.x, end.x):
-			result.append(Vector2(x, y))
+			# Second Layer of Optimization
+			if !_draw_points.has(Vector2(x, y)):
+				result.append(Vector2(x, y))
 	return result
 
 
@@ -258,8 +260,9 @@ func _compute_draw_tool_brush(position: Vector2) -> PoolVector2Array:
 	brush_mask.create_from_image_alpha(_brush_image, 0.0)
 	for x in brush_mask.get_size().x:
 		for y in brush_mask.get_size().y:
-			if brush_mask.get_bit(Vector2(x, y)):
-				result.append(pos + Vector2(x, y))
+			if !_draw_points.has(Vector2(x, y)):
+				if brush_mask.get_bit(Vector2(x, y)):
+					result.append(pos + Vector2(x, y))
 
 	return result
 
