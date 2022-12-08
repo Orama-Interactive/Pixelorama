@@ -225,7 +225,6 @@ func _compute_draw_tool_pixel(position: Vector2) -> PoolVector2Array:
 	var end := start + Vector2.ONE * _brush_size
 	for y in range(start.y, end.y):
 		for x in range(start.x, end.x):
-			# Second Layer of Optimization
 			if !_draw_points.has(Vector2(x, y)):
 				result.append(Vector2(x, y))
 	return result
