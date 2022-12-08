@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-12-02 02:26\n"
+"PO-Revision-Date: 2022-12-08 16:05\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -331,7 +331,7 @@ msgid "New frame"
 msgstr "Yeni kare"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Hücreyi değiştir"
 
 msgid "New layer"
 msgstr "Yeni katman"
@@ -1672,10 +1672,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Hücreleri şuraya bağla"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Hücre bağlantısını kaldır"
 
 msgid "Frame Properties"
 msgstr "Kare Özellikleri"
@@ -1730,7 +1730,8 @@ msgstr "Kare: %s, Katman: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Yeni kare oluştururken yeni hücrelerin otomatik olarak bağlanmasını etkinleştirin/devre dışı bırakın\n\n"
+"Bağlantısı olan hücreler, içeriği birden fazla çerçeve arasında paylaşır"
 
 msgid "Expand/collapse group"
 msgstr "Grubu genişlet/daralt"
