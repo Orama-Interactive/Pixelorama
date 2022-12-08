@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-12-08 21:12\n"
+"PO-Revision-Date: 2022-12-08 22:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1375,15 +1375,15 @@ msgstr "Renderowanie:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr ""
+msgstr "Wybiera sterownik renderowania, GLES2 jest lepsze dla starszych i słabszych urządzeń, a GLES3 posiada więcej funkcji."
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
-msgstr ""
+msgstr "Sterownik tabletu:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr ""
+msgstr "Wybiera sterownik tabletu na Windowsie, jeżeli masz włączony \"Windows Ink\", wybierz \"winink\"."
 
 msgid "Add Extension"
 msgstr "Dodaj rozszerzenie"
