@@ -273,6 +273,7 @@ func create_contributors() -> void:
 	)
 	contributors.create_item(contributor_root).set_text(0, "  Haoyu Qiu (timothyqiu)")
 	contributors.create_item(contributor_root).set_text(0, "  GrantMoyer")
+	contributors.create_item(contributor_root).set_text(0, "  Arron Washington (radicaled)")
 
 
 func create_translators() -> void:
