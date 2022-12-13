@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-12-13 02:30\n"
+"PO-Revision-Date: 2022-12-13 05:22\n"
 
 msgid "OK"
 msgstr "确定"
@@ -331,7 +331,7 @@ msgid "New frame"
 msgstr "新建帧"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "替换新的cel"
 
 msgid "New layer"
 msgstr "新建图层"
@@ -389,7 +389,8 @@ msgstr "文件已存在，覆盖吗?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "下列文件已经存在。你想要覆盖它们吗？\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "目录路径无效！"
@@ -578,7 +579,7 @@ msgstr "性能"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "驱动程序"
 
 msgid "Extensions"
 msgstr "扩展"
@@ -591,7 +592,7 @@ msgstr "指示"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "必须重启Pixelorama才能使更改生效。"
 
 msgid "On"
 msgstr "开启"
@@ -651,7 +652,7 @@ msgid "Theme"
 msgstr "主题"
 
 msgid "Buttons"
-msgstr ""
+msgstr "按钮"
 
 msgid "Icon color from:"
 msgstr "图标颜色从："
@@ -660,7 +661,7 @@ msgid "Icon color:"
 msgstr "图标颜色："
 
 msgid "Background"
-msgstr ""
+msgstr "背景"
 
 msgid "Background color from:"
 msgstr "背景颜色从："
@@ -1471,7 +1472,7 @@ msgstr "填充使用："
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Selected color"
-msgstr ""
+msgstr "选择颜色"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
@@ -1733,7 +1734,7 @@ msgstr "在创建新的帧时，启用/禁用自动链接新的帧\n\n"
 "链接的模型在多个帧中共享内容"
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "展开/折叠组"
 
 msgid "Palette"
 msgstr "调色板"
@@ -2190,5 +2191,5 @@ msgid "Right Tool Options"
 msgstr "右键工具选项"
 
 msgid "Reference Images"
-msgstr ""
+msgstr "参考图像"
 
