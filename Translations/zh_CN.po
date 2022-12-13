@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-12-02 00:32\n"
+"PO-Revision-Date: 2022-12-13 02:30\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1686,7 +1686,7 @@ msgid "Layer"
 msgstr "图层"
 
 msgid "Group"
-msgstr ""
+msgstr "组"
 
 msgid "Layers"
 msgstr "图层"
@@ -1695,7 +1695,7 @@ msgid "Create a new layer"
 msgstr "创建一个新的图层"
 
 msgid "Create a new group layer"
-msgstr ""
+msgstr "创建新的组图层"
 
 msgid "Remove current layer"
 msgstr "移除当前图层"
