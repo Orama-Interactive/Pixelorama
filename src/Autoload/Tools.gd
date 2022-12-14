@@ -51,6 +51,13 @@ var tools := {
 		"lasso",
 		preload("res://src/Tools/SelectionTools/Lasso.tscn")
 	),
+	"PaintSelect":
+	Tool.new(
+		"PaintSelect",
+		"Select by Drawing",
+		"paint_selection",
+		preload("res://src/Tools/SelectionTools/PaintSelect.tscn")
+	),
 	"Move": Tool.new("Move", "Move", "move", preload("res://src/Tools/Move.tscn")),
 	"Zoom": Tool.new("Zoom", "Zoom", "zoom", preload("res://src/Tools/Zoom.tscn")),
 	"Pan": Tool.new("Pan", "Pan", "pan", preload("res://src/Tools/Pan.tscn")),
