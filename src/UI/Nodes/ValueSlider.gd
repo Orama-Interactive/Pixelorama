@@ -193,12 +193,13 @@ func _reset_display() -> void:
 		return
 	line_edit.selecting_enabled = false  # Remove the selection
 	line_edit.editable = false
-	var line_edit_color := line_edit.get_color("font_color")
-	var line_edit_disabled_color: Color = Global.control.theme.get_color("read_only", "LineEdit")
-	if editable:
-		line_edit.add_color_override("font_color_uneditable", line_edit_color)
-	else:
-		line_edit.add_color_override("font_color_uneditable", line_edit_disabled_color)
+	if not Engine.editor_hint:  # Pixelorama specific code
+		var line_edit_color := line_edit.get_color("font_color")
+		var line_edit_disabled_col: Color = Global.control.theme.get_color("read_only", "LineEdit")
+		if editable:
+			line_edit.add_color_override("font_color_uneditable", line_edit_color)
+		else:
+			line_edit.add_color_override("font_color_uneditable", line_edit_disabled_col)
 	tint_under = get_color("under_color", "ValueSlider")
 	if show_progress:
 		tint_progress = get_color("progress_color", "ValueSlider")
