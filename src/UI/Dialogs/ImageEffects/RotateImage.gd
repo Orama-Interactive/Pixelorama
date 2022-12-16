@@ -3,6 +3,7 @@ extends ImageEffect
 var live_preview: bool = true
 var rotxel_shader: Shader
 var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeightbour.shader")
+var clean4x_shader: Shader = preload("res://src/Shaders/Rotation/clean4x.gdshader")
 var pivot := Vector2.INF
 var drag_pivot := false
 
@@ -23,6 +24,7 @@ func _ready() -> void:
 	if OS.get_name() != "HTML5":
 		type_option_button.add_item("Rotxel with Smear")
 		rotxel_shader = load("res://src/Shaders/Rotation/SmearRotxel.shader")
+	type_option_button.add_item("clean4x")
 	type_option_button.add_item("Nearest neighbour (Shader)")
 	type_option_button.add_item("Nearest neighbour")
 	type_option_button.add_item("Rotxel")
@@ -119,6 +121,20 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				gen.generate_image(cel, rotxel_shader, params, _project.size)
 				yield(gen, "done")
 
+		"clean4x":
+			var params := {
+				"angle": angle,
+				"selection_tex": selection_tex,
+				"selection_pivot": pivot,
+				"selection_size": selection_size
+			}
+			if !confirmed:
+				for param in params:
+					preview.material.set_shader_param(param, params[param])
+			else:
+				var gen := ShaderImageEffect.new()
+				gen.generate_image(cel, clean4x_shader, params, _project.size)
+				yield(gen, "done")
 		"Nearest neighbour (Shader)":
 			var params := {
 				"angle": angle,
@@ -150,6 +166,7 @@ func _type_is_shader() -> bool:
 	return (
 		type_option_button.text == "Nearest neighbour (Shader)"
 		or type_option_button.text == "Rotxel with Smear"
+		or type_option_button.text == "clean4x"
 	)
 
 
@@ -159,6 +176,11 @@ func _on_TypeOptionButton_item_selected(_id: int) -> void:
 		sm.shader = rotxel_shader
 		preview.set_material(sm)
 		smear_options.visible = true
+	elif type_option_button.text == "clean4x":
+		var sm := ShaderMaterial.new()
+		sm.shader = clean4x_shader
+		preview.set_material(sm)
+		smear_options.visible = false
 	elif type_option_button.text == "Nearest neighbour (Shader)":
 		var sm := ShaderMaterial.new()
 		sm.shader = nn_shader
