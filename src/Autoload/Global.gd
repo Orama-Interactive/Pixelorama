@@ -412,7 +412,8 @@ func _initialize_keychain() -> void:
 func notification_label(text: String) -> void:
 	var notification: Label = notification_label_node.instance()
 	notification.text = tr(text)
-	notification.rect_position = Vector2(70, animation_timeline.rect_position.y)
+	notification.rect_position = main_viewport.rect_global_position
+	notification.rect_position.y += main_viewport.rect_size.y
 	control.add_child(notification)
 
 
