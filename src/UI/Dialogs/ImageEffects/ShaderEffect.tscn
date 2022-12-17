@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/ShaderEffect.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -22,48 +23,58 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -36.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_right = 384.0
+margin_right = 442.0
 margin_bottom = 31.0
 text = "This is an experimental feature and may not be included in the stable version"
 autowrap = true
 
-[node name="Preview" type="TextureRect" parent="VBoxContainer"]
-material = SubResource( 1 )
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
 margin_top = 35.0
-margin_right = 384.0
+margin_right = 442.0
 margin_bottom = 235.0
+size_flags_vertical = 3
+
+[node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
+material = SubResource( 1 )
+margin_left = 121.0
+margin_right = 321.0
+margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
+
+[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 2 )]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
 
 [node name="ChooseShader" type="Button" parent="VBoxContainer"]
 margin_top = 239.0
-margin_right = 384.0
+margin_right = 442.0
 margin_bottom = 259.0
 mouse_default_cursor_shape = 2
 text = "Choose Shader"
 
 [node name="ShaderLoadedLabel" type="Label" parent="VBoxContainer"]
 margin_top = 263.0
-margin_right = 384.0
+margin_right = 442.0
 margin_bottom = 277.0
 text = "No shader loaded!"
 autowrap = true
 
 [node name="ShaderParams" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 281.0
-margin_right = 384.0
+margin_right = 442.0
 margin_bottom = 281.0
 
 [node name="FileDialog" type="FileDialog" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 392.0
+margin_right = 450.0
 margin_bottom = 289.0
 window_title = "Open a File"
 resizable = true
@@ -71,8 +82,6 @@ mode = 0
 access = 2
 filters = PoolStringArray( "*shader; Godot Shader File" )
 show_hidden_files = true
-current_dir = "/"
-current_path = "/"
 
 [connection signal="pressed" from="VBoxContainer/ChooseShader" to="." method="_on_ChooseShader_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

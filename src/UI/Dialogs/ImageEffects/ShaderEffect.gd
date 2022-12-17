@@ -2,6 +2,7 @@ extends ImageEffect
 
 var shader: Shader
 var param_names := []  # String[]
+var value_slider_tscn := preload("res://src/UI/Nodes/ValueSlider.tscn")
 
 onready var shader_loaded_label: Label = $VBoxContainer/ShaderLoadedLabel
 onready var shader_params: BoxContainer = $VBoxContainer/ShaderParams
@@ -15,6 +16,7 @@ func _about_to_show() -> void:
 	preview_image.copy_from(selected_cels)
 	preview_texture.create_from_image(preview_image, 0)
 	preview.texture = preview_texture
+	._about_to_show()
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
@@ -46,7 +48,7 @@ func _on_FileDialog_file_selected(path: String) -> void:
 
 
 func set_nodes() -> void:
-	preview = $VBoxContainer/Preview
+	preview = $VBoxContainer/AspectRatioContainer/Preview
 
 
 func change_shader(shader_tmp: Shader, name: String) -> void:
@@ -87,7 +89,8 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 		if u_type == "float" or u_type == "int":
 			var label := Label.new()
 			label.text = u_name
-			var spinbox := SpinBox.new()
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			var slider: ValueSlider = value_slider_tscn.instance()
 			var min_value := 0.0
 			var max_value := 255.0
 			var step := 1.0
@@ -112,7 +115,7 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 					step = 0.01
 
 				if u_value != "":
-					spinbox.value = float(u_value)
+					slider.value = float(u_value)
 			else:
 				if range_values_array.size() >= 1:
 					min_value = int(range_values_array[0])
@@ -124,39 +127,42 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 					step = int(range_values_array[2])
 
 				if u_value != "":
-					spinbox.value = int(u_value)
-			spinbox.min_value = min_value
-			spinbox.max_value = max_value
-			spinbox.step = step
-			spinbox.connect("value_changed", self, "set_shader_param", [u_name])
+					slider.value = int(u_value)
+			slider.min_value = min_value
+			slider.max_value = max_value
+			slider.step = step
+			slider.connect("value_changed", self, "set_shader_param", [u_name])
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
-			hbox.add_child(spinbox)
+			hbox.add_child(slider)
 			shader_params.add_child(hbox)
 		elif u_type == "vec2":
 			var label := Label.new()
 			label.text = u_name
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var vector2 := _vec2str_to_vector2(u_value)
-			var spinbox1 := SpinBox.new()
-			spinbox1.value = vector2.x
-			spinbox1.connect("value_changed", self, "_set_vector2_shader_param", [u_name, true])
-			var spinbox2 := SpinBox.new()
-			spinbox2.value = vector2.y
-			spinbox2.connect("value_changed", self, "_set_vector2_shader_param", [u_name, false])
+			var slider1: ValueSlider = value_slider_tscn.instance()
+			slider1.value = vector2.x
+			slider1.connect("value_changed", self, "_set_vector2_shader_param", [u_name, true])
+			var slider2: ValueSlider = value_slider_tscn.instance()
+			slider2.value = vector2.y
+			slider2.connect("value_changed", self, "_set_vector2_shader_param", [u_name, false])
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
-			hbox.add_child(spinbox1)
-			hbox.add_child(spinbox2)
+			hbox.add_child(slider1)
+			hbox.add_child(slider2)
 			shader_params.add_child(hbox)
 		elif u_type == "vec4":
 			if "hint_color" in u_hint:
 				var label := Label.new()
 				label.text = u_name
+				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				var color := _vec4str_to_color(u_value)
 				var color_button := ColorPickerButton.new()
 				color_button.rect_min_size = Vector2(20, 20)
 				color_button.color = color
 				color_button.connect("color_changed", self, "set_shader_param", [u_name])
+				color_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				var hbox := HBoxContainer.new()
 				hbox.add_child(label)
 				hbox.add_child(color_button)
@@ -164,6 +170,7 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 		elif u_type == "sampler2D":
 			var label := Label.new()
 			label.text = u_name
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var file_dialog := FileDialog.new()
 			file_dialog.mode = FileDialog.MODE_OPEN_FILE
 			file_dialog.access = FileDialog.ACCESS_FILESYSTEM
@@ -174,6 +181,7 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			var button := Button.new()
 			button.text = "Load texture"
 			button.connect("pressed", file_dialog, "popup_centered")
+			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
 			hbox.add_child(button)
@@ -182,11 +190,13 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 		elif u_type == "bool":
 			var label := Label.new()
 			label.text = u_name
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var checkbox := CheckBox.new()
 			checkbox.text = "On"
 			if u_value == "true":
 				checkbox.pressed = true
 			checkbox.connect("toggled", self, "set_shader_param", [u_name])
+			checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
 			hbox.add_child(checkbox)
