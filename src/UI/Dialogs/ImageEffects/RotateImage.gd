@@ -53,7 +53,7 @@ func decide_pivot() -> void:
 	pivot = size / 2
 
 	# Pivot correction in case of even size
-	if type_option_button.text != "Nearest neighbour (Shader)":
+	if type_option_button.text != "Nearest neighbour (Shader)" and type_option_button.text != "clean4x":
 		if int(size.x) % 2 == 0:
 			pivot.x -= 0.5
 		if int(size.y) % 2 == 0:
@@ -65,7 +65,7 @@ func decide_pivot() -> void:
 			selection_rectangle.position
 			+ ((selection_rectangle.end - selection_rectangle.position) / 2)
 		)
-		if type_option_button.text != "Nearest neighbour (Shader)":
+		if type_option_button.text != "Nearest neighbour (Shader)" and type_option_button.text != "clean4x":
 			# Pivot correction in case of even size
 			if int(selection_rectangle.end.x - selection_rectangle.position.x) % 2 == 0:
 				pivot.x -= 0.5
@@ -126,12 +126,14 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				"angle": angle,
 				"selection_tex": selection_tex,
 				"selection_pivot": pivot,
-				"selection_size": selection_size
+				"selection_size": selection_size,
+				"preview": true
 			}
 			if !confirmed:
 				for param in params:
 					preview.material.set_shader_param(param, params[param])
 			else:
+				params["preview"] = false
 				var gen := ShaderImageEffect.new()
 				gen.generate_image(cel, clean4x_shader, params, _project.size)
 				yield(gen, "done")

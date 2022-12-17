@@ -17,6 +17,7 @@ uniform vec3 highestColor = vec3(1.,1.,1.);
 // can group shapes of visually similar colors, but creates
 // some artifacting and should be kept as low as possible.
 uniform float similarThreshold = 0.0;
+uniform bool preview = true;
 
 const float scale = 4.0;
 const mat3 yuv_matrix = mat3(vec3(0.299, 0.587, 0.114), vec3(-0.169, -0.331, 0.5), vec3(0.5, -0.419, -0.081));
@@ -80,7 +81,13 @@ void fragment() {
 	vec2 pivot = selection_pivot / size; // Normalize pivot position
 	float ratio = size.x / size.y; // Resolution ratio
 //	vec2 px = UV * size;
-	vec2 px = rotate(pixelated_uv, pivot, ratio) * size;
+	vec2 px;
+	if (preview) {
+		px = rotate(pixelated_uv, pivot, ratio) * size;
+	}
+	else {
+		px = rotate(UV, pivot, ratio) * size;
+	}
 	vec2 local = floor(mod(px,1.0)*scale);
 	vec2 localDiff = (local/1.0) - vec2(1.5, 1.5);
 	vec2 edge = floor(local/(scale/2.0))*(scale/2.0) - vec2(1.0, 1.0);
