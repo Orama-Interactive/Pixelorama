@@ -69,7 +69,7 @@ func _setup_file_menu() -> void:
 
 	if OS.get_name() == "HTML5":
 		file_menu.set_item_disabled(Global.FileMenu.OPEN_LAST_PROJECT, true)
-		file_menu.set_item_disabled(Global.FileMenu.SAVE, true)
+		file_menu.set_item_disabled(Global.FileMenu.RECENT, true)
 
 
 func _setup_recent_projects_submenu(item: String) -> void:
