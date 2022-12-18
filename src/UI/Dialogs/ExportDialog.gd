@@ -165,16 +165,17 @@ func set_file_format_selector() -> void:
 # Updates the suitable list of file formats. First is preferred.
 # Note that if the current format is in the list, it stays for consistency.
 func _set_file_format_selector_suitable_file_formats(formats: Array) -> void:
+	var project: Project = Global.current_project
 	file_format_options.clear()
 	var needs_update := true
 	for i in formats:
-		if Export.file_format == i:
+		if project.file_format == i:
 			needs_update = false
 		var label := Export.file_format_string(i) + "; " + Export.file_format_description(i)
 		file_format_options.add_item(label, i)
 	if needs_update:
-		Export.file_format = formats[0]
-	file_format_options.selected = file_format_options.get_item_index(Export.file_format)
+		project.file_format = formats[0]
+	file_format_options.selected = file_format_options.get_item_index(project.file_format)
 
 
 func create_frame_tag_list() -> void:
@@ -242,23 +243,24 @@ func set_export_progress_bar(value: float) -> void:
 
 func _on_ExportDialog_about_to_show() -> void:
 	Global.canvas.selection.transform_content_confirm()
+	var project: Project = Global.current_project
 	# If we're on HTML5, don't let the user change the directory path
 	if OS.get_name() == "HTML5":
 		get_tree().call_group("NotHTML5", "hide")
-		Export.directory_path = "user://"
+		project.directory_path = "user://"
 
-	if Export.directory_path.empty():
-		Export.directory_path = Global.config_cache.get_value(
+	if project.directory_path.empty():
+		project.directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
 
 	# If export already occurred - sets GUI to show previous settings
 	options_resize.value = Export.resize
 	options_interpolation.selected = Export.interpolation
-	path_line_edit.text = Export.directory_path
-	path_dialog_popup.current_dir = Export.directory_path
-	file_line_edit.text = Export.file_name
-	file_format_options.selected = Export.file_format
+	path_line_edit.text = project.directory_path
+	path_dialog_popup.current_dir = project.directory_path
+	file_line_edit.text = project.file_name
+	file_format_options.selected = project.file_format
 	show_tab()
 
 	# Set the size of the preview checker
@@ -317,24 +319,20 @@ func _on_PathButton_pressed() -> void:
 
 func _on_PathLineEdit_text_changed(new_text: String) -> void:
 	Global.current_project.directory_path = new_text
-	Export.directory_path = new_text
 
 
 func _on_FileLineEdit_text_changed(new_text: String) -> void:
 	Global.current_project.file_name = new_text
-	Export.file_name = new_text
 
 
 func _on_FileDialog_dir_selected(dir: String) -> void:
 	path_line_edit.text = dir
 	Global.current_project.directory_path = dir
-	Export.directory_path = dir
 
 
 func _on_FileFormat_item_selected(idx: int) -> void:
 	var id := file_format_options.get_item_id(idx)
 	Global.current_project.file_format = id
-	Export.file_format = id
 	if not Export.is_single_file_format():
 		multiple_animations_directories.disabled = false
 		frame_timer.stop()

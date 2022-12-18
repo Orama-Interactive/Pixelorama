@@ -24,13 +24,6 @@ var resize := 100
 var interpolation := 0  # Image.Interpolation
 var new_dir_for_each_frame_tag := false  # we don't need to store this after export
 
-# Export directory path and export file name
-var directory_path := ""
-var file_name := "untitled"
-var file_format: int = FileFormat.PNG
-
-var was_exported := false
-
 # Export coroutine signal
 var stop_export := false
 
@@ -151,17 +144,17 @@ func export_processed_images(
 ) -> bool:
 	# Stop export if directory path or file name are not valid
 	var dir := Directory.new()
-	if not dir.dir_exists(directory_path) or not file_name.is_valid_filename():
-		if not dir.dir_exists(directory_path) and file_name.is_valid_filename():
+	if not dir.dir_exists(project.directory_path) or not project.file_name.is_valid_filename():
+		if not dir.dir_exists(project.directory_path) and project.file_name.is_valid_filename():
 			export_dialog.open_path_validation_alert_popup(0)
-		elif not file_name.is_valid_filename() and dir.dir_exists(directory_path):
+		elif not project.file_name.is_valid_filename() and dir.dir_exists(project.directory_path):
 			export_dialog.open_path_validation_alert_popup(1)
 		else:
 			export_dialog.open_path_validation_alert_popup()
 		return false
 
 	var multiple_files := false
-	if current_tab == ExportTab.IMAGE and not is_single_file_format():
+	if current_tab == ExportTab.IMAGE and not is_single_file_format(project):
 		multiple_files = true if processed_images.size() > 1 else false
 	# Check export paths
 	var export_paths := []
@@ -174,7 +167,7 @@ func export_processed_images(
 		if multiple_files and new_dir_for_each_frame_tag:
 			var frame_tag_directory := Directory.new()
 			if not frame_tag_directory.dir_exists(export_path.get_base_dir()):
-				frame_tag_directory.open(directory_path)
+				frame_tag_directory.open(project.directory_path)
 				frame_tag_directory.make_dir(export_path.get_base_dir().get_file())
 
 		if not ignore_overwrites:  # Check if the files already exist
@@ -185,7 +178,7 @@ func export_processed_images(
 				paths_of_existing_files += export_path
 		export_paths.append(export_path)
 		# Only get one export path if single file animated image is exported
-		if is_single_file_format():
+		if is_single_file_format(project):
 			break
 
 	if not paths_of_existing_files.empty():  # If files already exist
@@ -198,9 +191,9 @@ func export_processed_images(
 
 	scale_processed_images()
 
-	if is_single_file_format():
+	if is_single_file_format(project):
 		var exporter: BaseAnimationExporter
-		if file_format == FileFormat.APNG:
+		if project.file_format == FileFormat.APNG:
 			exporter = APNGAnimationExporter.new()
 		else:
 			exporter = GIFAnimationExporter.new()
@@ -232,19 +225,19 @@ func export_processed_images(
 					Global.dialog_open(true)
 
 	# Store settings for quick export and when the dialog is opened again
-	was_exported = true
+	var file_name_with_ext := project.file_name + file_format_string(project.file_format)
 	project.was_exported = true
 	if project.export_overwrite:
 		Global.top_menu_container.file_menu.set_item_text(
-			6, tr("Overwrite") + " %s" % (file_name + Export.file_format_string(file_format))
+			Global.FileMenu.EXPORT, tr("Overwrite") + " %s" % file_name_with_ext
 		)
 	else:
 		Global.top_menu_container.file_menu.set_item_text(
-			6, tr("Export") + " %s" % (file_name + file_format_string(file_format))
+			Global.FileMenu.EXPORT, tr("Export") + " %s" % file_name_with_ext
 		)
 
 	# Only show when not exporting gif - gif export finishes in thread
-	if not is_single_file_format():
+	if not is_single_file_format(project):
 		Global.notification_label("File(s) exported")
 	return true
 
@@ -318,14 +311,14 @@ func file_format_description(format_enum: int) -> String:
 			return ""
 
 
-func is_single_file_format(format_enum: int = file_format) -> bool:
+func is_single_file_format(project := Global.current_project) -> bool:
 	# True when exporting to .gif and .apng (and potentially video formats in the future)
 	# False when exporting to .png, and other non-animated formats in the future
-	return format_enum == FileFormat.GIF or format_enum == FileFormat.APNG
+	return project.file_format == FileFormat.GIF or project.file_format == FileFormat.APNG
 
 
 func create_export_path(multifile: bool, project: Project, frame: int = 0) -> String:
-	var path := file_name
+	var path := project.file_name
 	# Only append frame number when there are multiple files exported
 	if multifile:
 		var frame_tag_and_start_id := get_proccessed_image_animation_tag_and_start_id(
@@ -343,8 +336,8 @@ func create_export_path(multifile: bool, project: Project, frame: int = 0) -> St
 				# Add frame tag if frame has one
 				# (frame - start_id + 1) Makes frames id to start from 1 in each frame tag directory
 				path += "_" + frame_tag_dir + "_" + String(frame - start_id + 1)
-				return directory_path.plus_file(frame_tag_dir).plus_file(
-					path + file_format_string(file_format)
+				return project.directory_path.plus_file(frame_tag_dir).plus_file(
+					path + file_format_string(project.file_format)
 				)
 			else:
 				# Add frame tag if frame has one
@@ -353,7 +346,7 @@ func create_export_path(multifile: bool, project: Project, frame: int = 0) -> St
 		else:
 			path += "_" + String(frame)
 
-	return directory_path.plus_file(path + file_format_string(file_format))
+	return project.directory_path.plus_file(path + file_format_string(project.file_format))
 
 
 func get_proccessed_image_animation_tag_and_start_id(

@@ -194,26 +194,23 @@ func change_project() -> void:
 		Global.open_sprites_dialog.current_path = save_path
 		Global.save_sprites_dialog.current_path = save_path
 		Global.top_menu_container.file_menu.set_item_text(
-			4, tr("Save") + " %s" % save_path.get_file()
+			Global.FileMenu.SAVE, tr("Save") + " %s" % save_path.get_file()
 		)
 	else:
-		Global.top_menu_container.file_menu.set_item_text(4, tr("Save"))
-
-	Export.directory_path = directory_path
-	Export.file_name = file_name
-	Export.file_format = file_format
-	Export.was_exported = was_exported
+		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save"))
 
 	if !was_exported:
-		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
+		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
 	else:
 		if export_overwrite:
 			Global.top_menu_container.file_menu.set_item_text(
-				6, tr("Overwrite") + " %s" % (file_name + Export.file_format_string(file_format))
+				Global.FileMenu.EXPORT,
+				tr("Overwrite") + " %s" % (file_name + Export.file_format_string(file_format))
 			)
 		else:
 			Global.top_menu_container.file_menu.set_item_text(
-				6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format))
+				Global.FileMenu.EXPORT,
+				tr("Export") + " %s" % (file_name + Export.file_format_string(file_format))
 			)
 
 	for j in Tiles.MODE.values():

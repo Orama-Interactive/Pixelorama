@@ -392,7 +392,7 @@ func _save_project_file_as() -> void:
 
 
 func _export_file() -> void:
-	if Export.was_exported == false:
+	if Global.current_project.was_exported == false:
 		_popup_dialog(Global.export_dialog)
 	else:
 		Export.external_export()

@@ -364,13 +364,13 @@ func _quit() -> void:
 
 func _on_BackupConfirmation_confirmed(project_paths: Array, backup_paths: Array) -> void:
 	OpenSave.reload_backup_file(project_paths, backup_paths)
-	Export.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
-	Export.directory_path = OpenSave.current_save_paths[0].get_base_dir()
-	Export.was_exported = false
+	Global.current_project.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
+	Global.current_project.directory_path = OpenSave.current_save_paths[0].get_base_dir()
+	Global.current_project.was_exported = false
 	Global.top_menu_container.file_menu.set_item_text(
-		4, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file()
+		Global.FileMenu.SAVE, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file()
 	)
-	Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
+	Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
 
 
 func _on_BackupConfirmation_custom_action(

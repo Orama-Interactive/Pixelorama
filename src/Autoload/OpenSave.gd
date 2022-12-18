@@ -148,13 +148,13 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 		# Set last opened project path and save
 		Global.config_cache.set_value("preferences", "last_project_path", path)
 		Global.config_cache.save("user://cache.ini")
-		Export.file_name = path.get_file().trim_suffix(".pxo")
-		Export.directory_path = path.get_base_dir()
-		new_project.directory_path = Export.directory_path
-		new_project.file_name = Export.file_name
-		Export.was_exported = false
-		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
-		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
+		new_project.directory_path = path.get_base_dir()
+		new_project.file_name = path.get_file().trim_suffix(".pxo")
+		new_project.was_exported = false
+		Global.top_menu_container.file_menu.set_item_text(
+			Global.FileMenu.SAVE, tr("Save") + " %s" % path.get_file()
+		)
+		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
 
 	save_project_to_recent_list(path)
 
@@ -396,9 +396,11 @@ func save_pxo_file(
 		Global.config_cache.set_value("preferences", "last_project_path", path)
 		Global.config_cache.save("user://cache.ini")
 		if !project.was_exported:
-			Export.file_name = path.get_file().trim_suffix(".pxo")
-			Export.directory_path = path.get_base_dir()
-		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
+			project.file_name = path.get_file().trim_suffix(".pxo")
+			project.directory_path = path.get_base_dir()
+		Global.top_menu_container.file_menu.set_item_text(
+			Global.FileMenu.SAVE, tr("Save") + " %s" % path.get_file()
+		)
 
 	save_project_to_recent_list(path)
 
@@ -635,9 +637,6 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 	project.was_exported = true
 	if path.get_extension().to_lower() == "png":
 		project.export_overwrite = true
-	Export.directory_path = directory_path
-	Export.file_name = file_name
-	Export.was_exported = true
 
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
