@@ -3,7 +3,7 @@ extends ImageEffect
 var live_preview: bool = true
 var rotxel_shader: Shader
 var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeightbour.shader")
-var clean4x_shader: Shader = preload("res://src/Shaders/Rotation/clean4x.gdshader")
+var clean_edge_shader: Shader = preload("res://src/Shaders/Rotation/cleanEdge.gdshader")
 var pivot := Vector2.INF
 var drag_pivot := false
 
@@ -24,7 +24,7 @@ func _ready() -> void:
 	if OS.get_name() != "HTML5":
 		type_option_button.add_item("Rotxel with Smear")
 		rotxel_shader = load("res://src/Shaders/Rotation/SmearRotxel.shader")
-	type_option_button.add_item("clean4x")
+	type_option_button.add_item("cleanEdge")
 	type_option_button.add_item("Nearest neighbour (Shader)")
 	type_option_button.add_item("Nearest neighbour")
 	type_option_button.add_item("Rotxel")
@@ -53,7 +53,10 @@ func decide_pivot() -> void:
 	pivot = size / 2
 
 	# Pivot correction in case of even size
-	if type_option_button.text != "Nearest neighbour (Shader)" and type_option_button.text != "clean4x":
+	if (
+		type_option_button.text != "Nearest neighbour (Shader)"
+		and type_option_button.text != "cleanEdge"
+	):
 		if int(size.x) % 2 == 0:
 			pivot.x -= 0.5
 		if int(size.y) % 2 == 0:
@@ -65,7 +68,10 @@ func decide_pivot() -> void:
 			selection_rectangle.position
 			+ ((selection_rectangle.end - selection_rectangle.position) / 2)
 		)
-		if type_option_button.text != "Nearest neighbour (Shader)" and type_option_button.text != "clean4x":
+		if (
+			type_option_button.text != "Nearest neighbour (Shader)"
+			and type_option_button.text != "cleanEdge"
+		):
 			# Pivot correction in case of even size
 			if int(selection_rectangle.end.x - selection_rectangle.position.x) % 2 == 0:
 				pivot.x -= 0.5
@@ -121,7 +127,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				gen.generate_image(cel, rotxel_shader, params, _project.size)
 				yield(gen, "done")
 
-		"clean4x":
+		"cleanEdge":
 			var params := {
 				"angle": angle,
 				"selection_tex": selection_tex,
@@ -135,7 +141,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 			else:
 				params["preview"] = false
 				var gen := ShaderImageEffect.new()
-				gen.generate_image(cel, clean4x_shader, params, _project.size)
+				gen.generate_image(cel, clean_edge_shader, params, _project.size)
 				yield(gen, "done")
 		"Nearest neighbour (Shader)":
 			var params := {
@@ -168,7 +174,7 @@ func _type_is_shader() -> bool:
 	return (
 		type_option_button.text == "Nearest neighbour (Shader)"
 		or type_option_button.text == "Rotxel with Smear"
-		or type_option_button.text == "clean4x"
+		or type_option_button.text == "cleanEdge"
 	)
 
 
@@ -178,9 +184,9 @@ func _on_TypeOptionButton_item_selected(_id: int) -> void:
 		sm.shader = rotxel_shader
 		preview.set_material(sm)
 		smear_options.visible = true
-	elif type_option_button.text == "clean4x":
+	elif type_option_button.text == "cleanEdge":
 		var sm := ShaderMaterial.new()
-		sm.shader = clean4x_shader
+		sm.shader = clean_edge_shader
 		preview.set_material(sm)
 		smear_options.visible = false
 	elif type_option_button.text == "Nearest neighbour (Shader)":
