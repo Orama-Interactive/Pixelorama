@@ -1,3 +1,4 @@
+# gdlint: ignore=max-public-methods
 extends Node
 
 var current_save_paths := []  # Array of strings
