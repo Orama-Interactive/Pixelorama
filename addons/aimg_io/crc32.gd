@@ -21,9 +21,9 @@ func ensure_ready():
 	_table_init_mutex.lock()
 	if not _table_initialized:
 		# Calculate CRC32 table.
-		var range8 = range(8)
+		var range8 := range(8)
 		for i in range(256):
-			var crc = i
+			var crc := i
 			for j in range8:
 				if (crc & 1) != 0:
 					crc = (crc >> 1) ^ reversed_polynomial
@@ -36,11 +36,11 @@ func ensure_ready():
 # Performs the update step of CRC32 over some bytes.
 # Note that this is not the whole story.
 # The CRC must be initialized to 0xFFFFFFFF, then updated, then bitwise-inverted.
-func update(crc: int, data: PoolByteArray):
-	var i = 0
-	var l = len(data)
+func update(crc: int, data: PoolByteArray) -> int:
+	var i := 0
+	var l := len(data)
 	while i < l:
-		var lb = data[i] ^ (crc & 0xFF)
+		var lb := data[i] ^ (crc & 0xFF)
 		crc = crc32_table[lb] ^ (crc >> 8)
 		i += 1
 	return crc

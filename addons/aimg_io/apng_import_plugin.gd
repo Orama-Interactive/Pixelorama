@@ -23,27 +23,55 @@ func get_preset_count():
 func get_preset_name(i):
 	return "Default"
 
+const TEXTURE_FLAGS_HINT = "Mipmaps,Repeat,Filter,Anisotropic Filter,Convert To Linear,Mirrored Repeat"
+
 func get_import_options(i):
-	return []
+	return [
+		{
+			"name": "image_texture_storage",
+			"default_value": 2,
+			"property_hint": PROPERTY_HINT_ENUM_SUGGESTION,
+			"hint_string": "Raw,Lossy,Lossless"
+		},
+		{
+			"name": "image_texture_lossy_quality",
+			"default_value": 0.7
+		},
+		{
+			"name": "texture_flags",
+			"default_value": 7,
+			"property_hint": PROPERTY_HINT_FLAGS,
+			"hint_string": TEXTURE_FLAGS_HINT
+		},
+		# We don't know if Godot will change things somehow.
+		{
+			"name": "texture_flags_add",
+			"default_value": 0
+		}
+	]
 
 func get_option_visibility(option, options):
 	return true
 
 func import(load_path: String, save_path: String, options, platform_variants, gen_files):
-	var res = AImgIOAPNGImporter.load_from_file(load_path)
+	var res := AImgIOAPNGImporter.load_from_file(load_path)
 	if res[0] != null:
 		push_error("AImgIOPNGImporter: " + res[0])
 		return ERR_FILE_UNRECOGNIZED
 	else:
-		var frames = res[1]
+		var frames: Array = res[1]
 		var root: AnimatedTexture = AnimatedTexture.new()
+		var flags: int = options["texture_flags"]
+		flags |= options["texture_flags_add"]
+		root.flags = flags
 		root.frames = len(frames)
 		root.fps = 1
 		for i in range(len(frames)):
 			var f: AImgIOFrame = frames[i]
 			root.set_frame_delay(i, f.duration - 1.0)
-			var tx = ImageTexture.new()
-			tx.create_from_image(f.content)
-			tx.storage = ImageTexture.STORAGE_COMPRESS_LOSSLESS
+			var tx := ImageTexture.new()
+			tx.storage = options["image_texture_storage"]
+			tx.lossy_quality = options["image_texture_lossy_quality"]
+			tx.create_from_image(f.content, flags)
 			root.set_frame_texture(i, tx)
 		return ResourceSaver.save(save_path + ".res", root)

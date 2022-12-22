@@ -30,7 +30,7 @@ func _init(t: PoolByteArray = PoolByteArray()):
 func read_magic():
 	if _target.get_available_bytes() < 8:
 		return "Not enough bytes in magic number"
-	var a = _target.get_32() & 0xFFFFFFFF
+	var a := _target.get_32() & 0xFFFFFFFF
 	if a != 0x89504E47:
 		return "Magic number start not 0x89504E47, but " + str(a)
 	a = _target.get_32() & 0xFFFFFFFF
@@ -42,11 +42,11 @@ func read_magic():
 func read_chunk() -> int:
 	if _target.get_available_bytes() < 8:
 		return ERR_FILE_EOF
-	var dlen = _target.get_32()
-	var a = char(_target.get_8())
-	var b = char(_target.get_8())
-	var c = char(_target.get_8())
-	var d = char(_target.get_8())
+	var dlen := _target.get_32()
+	var a := char(_target.get_8())
+	var b := char(_target.get_8())
+	var c := char(_target.get_8())
+	var d := char(_target.get_8())
 	chunk_type = a + b + c + d
 	if _target.get_available_bytes() >= dlen:
 		chunk_data = _target.get_data(dlen)[1]
@@ -64,17 +64,17 @@ func write_magic():
 
 # Creates a big-endian StreamPeerBuffer for writing PNG data into.
 func start_chunk() -> StreamPeerBuffer:
-	var result = StreamPeerBuffer.new()
+	var result := StreamPeerBuffer.new()
 	result.big_endian = true
 	return result
 
 # Writes a PNG chunk.
 func write_chunk(type: String, data: PoolByteArray):
 	_target.put_32(len(data))
-	var at = type.to_ascii()
+	var at := type.to_ascii()
 	_target.put_data(at)
 	_target.put_data(data)
-	var crc = crc32.update(crc32.mask, at)
+	var crc := crc32.update(crc32.mask, at)
 	crc = crc32.end(crc32.update(crc, data))
 	_target.put_32(crc)
 

@@ -9,7 +9,7 @@ extends Reference
 # Returns [error, frames] similar to some read functions.
 # However, error is a string.
 static func load_from_buffer(buffer: PoolByteArray) -> Array:
-	var stream = AImgIOAPNGStream.new(buffer)
+	var stream := AImgIOAPNGStream.new(buffer)
 	var magic_str = stream.read_magic()
 	if magic_str != null:
 		# well, that was a nope
@@ -33,21 +33,21 @@ static func load_from_buffer(buffer: PoolByteArray) -> Array:
 	# So to convert an APNG frame to a PNG for reading, we need to stitch:
 	# IHDR (modified), PLTE (if present), tRNS (if present), IDAT (from fdAT),
 	#  and IEND (generated).
-	var ihdr = PoolByteArray()
-	var plte = PoolByteArray()
-	var trns = PoolByteArray()
+	var ihdr := PoolByteArray()
+	var plte := PoolByteArray()
+	var trns := PoolByteArray()
 	# stored full width/height for buffer
-	var width = 0
-	var height = 0
+	var width := 0
+	var height := 0
 	# parse chunks
-	var frames = []
+	var frames := []
 	while stream.read_chunk() == OK:
 		if stream.chunk_type == "IHDR":
 			ihdr = stream.chunk_data
 			# extract necessary information
 			if len(ihdr) < 8:
 				return ["IHDR not even large enough for W/H", null]
-			var sp = StreamPeerBuffer.new()
+			var sp := StreamPeerBuffer.new()
 			sp.data_array = ihdr
 			sp.big_endian = true
 			width = sp.get_32()
@@ -57,7 +57,7 @@ static func load_from_buffer(buffer: PoolByteArray) -> Array:
 		elif stream.chunk_type == "tRNS":
 			trns = stream.chunk_data
 		elif stream.chunk_type == "fcTL":
-			var f = BFrame.new()
+			var f := BFrame.new()
 			var err = f.setup(stream.chunk_data)
 			if err != null:
 				return [err, null]
@@ -76,17 +76,17 @@ static func load_from_buffer(buffer: PoolByteArray) -> Array:
 			if len(frames) > 0:
 				var f: BFrame = frames[len(frames) - 1]
 				if len(stream.chunk_data) >= 4:
-					var data = stream.chunk_data.subarray(4, len(stream.chunk_data) - 1)
+					var data := stream.chunk_data.subarray(4, len(stream.chunk_data) - 1)
 					f.add_data(data)
 	# theoretically we *could* store the default frame somewhere, but *why*?
 	# just use Image functions if you want that
 	if len(frames) == 0:
 		return ["No frames", null]
 	# prepare initial operating buffer
-	var operating = Image.new()
+	var operating := Image.new()
 	operating.create(width, height, false, Image.FORMAT_RGBA8)
 	operating.fill(Color(0, 0, 0, 0))
-	var finished = []
+	var finished := []
 	for v in frames:
 		var fv: BFrame = v
 		# Ok, so to avoid having to deal with filters and stuff,
@@ -95,25 +95,25 @@ static func load_from_buffer(buffer: PoolByteArray) -> Array:
 		#  or had a very good understanding of the concerns of people who need
 		#  to retrofit their PNG decoders into APNG decoders, because the fact
 		#  you can even do this is *beautiful*.
-		var intermediary = fv.intermediary(ihdr, plte, trns)
-		var intermediary_img = Image.new()
+		var intermediary := fv.intermediary(ihdr, plte, trns)
+		var intermediary_img := Image.new()
 		if intermediary_img.load_png_from_buffer(intermediary) != OK:
 			return ["error during intermediary load - corrupt/bug?", null]
 		intermediary_img.convert(Image.FORMAT_RGBA8)
 		# dispose vars
-		var blit_target = operating
-		var copy_blit_target = true
+		var blit_target := operating
+		var copy_blit_target := true
 		# rectangles and such
-		var blit_src = Rect2(Vector2.ZERO, intermediary_img.get_size())
-		var blit_pos = Vector2(fv.x, fv.y)
-		var blit_tgt = Rect2(blit_pos, intermediary_img.get_size())
+		var blit_src := Rect2(Vector2.ZERO, intermediary_img.get_size())
+		var blit_pos := Vector2(fv.x, fv.y)
+		var blit_tgt := Rect2(blit_pos, intermediary_img.get_size())
 		# early dispose ops
 		if fv.dispose_op == 2:
 			# previous
 			# we handle this by never actually writing to the operating buffer,
 			#  but instead a copy (so we don't have to make another later)
 			blit_target = Image.new()
-			blit_target.copy_frame(operating)
+			blit_target.copy_from(operating)
 			copy_blit_target = false
 		# actually blit
 		if fv.blend_op == 0:
@@ -121,10 +121,10 @@ static func load_from_buffer(buffer: PoolByteArray) -> Array:
 		else:
 			blit_target.blend_rect(intermediary_img, blit_src, blit_pos)
 		# insert as frame
-		var ffin = AImgIOFrame.new()
+		var ffin := AImgIOFrame.new()
 		ffin.duration = fv.duration
 		if copy_blit_target:
-			var img = Image.new()
+			var img := Image.new()
 			img.copy_from(operating)
 			ffin.content = img
 		else:
@@ -140,7 +140,7 @@ static func load_from_buffer(buffer: PoolByteArray) -> Array:
 # Imports an APNG file into an animation as an array of frames.
 # Returns null on error.
 static func load_from_file(path: String) -> Array:
-	var o = File.new()
+	var o := File.new()
 	if o.open(path, File.READ) != OK:
 		return [null, "Unable to open file: " + path]
 	var l = o.get_len()
@@ -161,7 +161,7 @@ class BFrame extends Reference:
 	func setup(fctl: PoolByteArray):
 		if len(fctl) < 26:
 			return ""
-		var sp = StreamPeerBuffer.new()
+		var sp := StreamPeerBuffer.new()
 		sp.data_array = fctl
 		sp.big_endian = true
 		sp.get_32()
@@ -172,8 +172,8 @@ class BFrame extends Reference:
 		# so since blitting will do the crop anyway, let's just be generous
 		x = sp.get_32()
 		y = sp.get_32()
-		var num = float(sp.get_16() & 0xFFFF)
-		var den = float(sp.get_16() & 0xFFFF)
+		var num := float(sp.get_16() & 0xFFFF)
+		var den := float(sp.get_16() & 0xFFFF)
 		if den == 0.0:
 			den = 100
 		duration = num / den
@@ -181,14 +181,14 @@ class BFrame extends Reference:
 		blend_op = sp.get_8()
 		return null
 
-	func intermediary(ihdr: PoolByteArray, plte: PoolByteArray, trns: PoolByteArray):
+	func intermediary(ihdr: PoolByteArray, plte: PoolByteArray, trns: PoolByteArray) -> PoolByteArray:
 		# Might be important to note this operates on a copy of ihdr (by-value).
-		var sp = StreamPeerBuffer.new()
+		var sp := StreamPeerBuffer.new()
 		sp.data_array = ihdr
 		sp.big_endian = true
 		sp.put_32(w)
 		sp.put_32(h)
-		var intermed = AImgIOAPNGStream.new()
+		var intermed := AImgIOAPNGStream.new()
 		intermed.write_magic()
 		intermed.write_chunk("IHDR", sp.data_array)
 		if len(plte) > 0:
