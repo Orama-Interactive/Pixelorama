@@ -4,6 +4,7 @@ extends Reference
 
 var mime_type: String
 
+
 # Exports an animation to a byte array of file data.
 # The frames must be AImgIOFrame.
 # fps_hint is only a hint, animations may have higher FPSes than this.
@@ -18,4 +19,3 @@ func export_animation(
 	_progress_report_args
 ) -> PoolByteArray:
 	return PoolByteArray()
-

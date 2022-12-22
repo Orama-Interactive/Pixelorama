@@ -3,7 +3,9 @@ class_name AImgIOAPNGImporter
 extends Reference
 # Will NOT import regular, unanimated PNGs - use Image.load_png_from_buffer
 # This is because we don't want to import the default image as a frame
-# Therefore the fcTL chunk becomes
+# Therefore it just uses the rule:
+#  "fcTL chunk always precedes an APNG frame, even if that includes IDAT"
+
 
 # Imports an APNG PoolByteArray into an animation as an Array of frames.
 # Returns [error, frames] similar to some read functions.
@@ -137,6 +139,7 @@ static func load_from_buffer(buffer: PoolByteArray) -> Array:
 			operating.fill_rect(blit_tgt, Color(0, 0, 0, 0))
 	return [null, finished]
 
+
 # Imports an APNG file into an animation as an array of frames.
 # Returns null on error.
 static func load_from_file(path: String) -> Array:
@@ -148,7 +151,10 @@ static func load_from_file(path: String) -> Array:
 	o.close()
 	return load_from_buffer(data)
 
-class BFrame extends Reference:
+
+# Intermediate frame structure
+class BFrame:
+	extends Reference
 	var dispose_op: int
 	var blend_op: int
 	var x: int
@@ -181,7 +187,12 @@ class BFrame extends Reference:
 		blend_op = sp.get_8()
 		return null
 
-	func intermediary(ihdr: PoolByteArray, plte: PoolByteArray, trns: PoolByteArray) -> PoolByteArray:
+	# Creates an intermediary PNG.
+	# This can be loaded by Godot directly.
+	# This basically skips most of the APNG decoding process.
+	func intermediary(
+		ihdr: PoolByteArray, plte: PoolByteArray, trns: PoolByteArray
+	) -> PoolByteArray:
 		# Might be important to note this operates on a copy of ihdr (by-value).
 		var sp := StreamPeerBuffer.new()
 		sp.data_array = ihdr

@@ -11,4 +11,3 @@ var content: Image
 
 # Time in seconds this frame lasts for.
 var duration: float = 0.1
-

@@ -3,8 +3,8 @@
 ## aimgio
 
 - Upstream: https://gitlab.com/20kdc/20kdc_godot_addons
-- Version: Presently git commit 51234b46d9aaa58fb7901a5684e3cd54734c879b
-- License: [Unlicense](https://gitlab.com/20kdc/20kdc_godot_addons/-/blob/51234b46d9aaa58fb7901a5684e3cd54734c879b/addons/aimg_io/COPYING.txt)
+- Version: Presently git commit b6a1411758c856ad543f4f661ca4105aa7c0ab6d
+- License: [Unlicense](https://gitlab.com/20kdc/20kdc_godot_addons/-/blob/b6a1411758c856ad543f4f661ca4105aa7c0ab6d/addons/aimg_io/COPYING.txt)
 
 ## Keychain
 

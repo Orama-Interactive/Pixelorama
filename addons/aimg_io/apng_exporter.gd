@@ -2,8 +2,10 @@ class_name AImgIOAPNGExporter
 extends AImgIOBaseExporter
 # APNG exporter. To be clear, this is effectively magic.
 
+
 func _init():
 	mime_type = "image/apng"
+
 
 func export_animation(
 	frames: Array,
@@ -126,4 +128,3 @@ func write_padded_lines(sp: StreamPeer, img: Image):
 		sp.put_data(line)
 		y += 1
 		base = nl
-

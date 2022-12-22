@@ -15,6 +15,7 @@ var crc32_table = []
 var _table_init_mutex: Mutex = Mutex.new()
 var _table_initialized: bool = false
 
+
 # Ensures the CRC32's cached part is ready.
 # Should be called very infrequently, definitely not in an inner loop.
 func ensure_ready():
@@ -33,6 +34,7 @@ func ensure_ready():
 		_table_initialized = true
 	_table_init_mutex.unlock()
 
+
 # Performs the update step of CRC32 over some bytes.
 # Note that this is not the whole story.
 # The CRC must be initialized to 0xFFFFFFFF, then updated, then bitwise-inverted.
@@ -45,5 +47,7 @@ func update(crc: int, data: PoolByteArray) -> int:
 		i += 1
 	return crc
 
+
+# Finishes the CRC by XORing it with the mask.
 func end(crc: int) -> int:
 	return crc ^ mask

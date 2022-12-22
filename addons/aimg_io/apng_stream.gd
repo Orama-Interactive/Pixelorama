@@ -2,7 +2,15 @@ tool
 class_name AImgIOAPNGStream
 extends Reference
 # APNG IO context. To be clear, this is still effectively magic.
-# Also, the reason this must be a StreamPeerBuffer is simple:
+
+# Quite critical we preload this. Preloading creates static variables.
+# (Which GDScript doesn't really have, but we need since we have no tree access)
+var crc32: AImgIOCRC32 = preload("apng_crc32.tres")
+
+var chunk_type: String
+var chunk_data: PoolByteArray
+
+# The reason this must be a StreamPeerBuffer is simple:
 # 1. We need to support in-memory IO for HTML5 to really work
 # 2. We need get_available_bytes to be completely accurate in all* cases
 #    * A >2GB file doesn't count. Godot limitations.
@@ -11,12 +19,7 @@ extends Reference
 # Though even then that's betting the weirdness of corrupt files against the
 #  benefits of using less memory.
 var _target: StreamPeerBuffer
-# Quite critical we preload this. Preloading creates static variables.
-# (Which GDScript doesn't really have, but we need since we have no tree access)
-var crc32: AImgIOCRC32 = preload("apng_crc32.tres")
 
-var chunk_type: String
-var chunk_data: PoolByteArray
 
 func _init(t: PoolByteArray = PoolByteArray()):
 	crc32.ensure_ready()
@@ -24,7 +27,9 @@ func _init(t: PoolByteArray = PoolByteArray()):
 	_target.big_endian = true
 	_target.data_array = t
 
+
 # Reading
+
 
 # Reads the magic number. Returns the method of failure or null for success.
 func read_magic():
@@ -37,6 +42,7 @@ func read_magic():
 	if a != 0x0D0A1A0A:
 		return "Magic number end not 0x0D0A1A0A, but " + str(a)
 	return null
+
 
 # Reads a chunk into chunk_type and chunk_data. Returns an error code.
 func read_chunk() -> int:
@@ -56,17 +62,22 @@ func read_chunk() -> int:
 	_target.get_32()
 	return OK
 
+
 # Writing
 
+
+# Writes the PNG magic number.
 func write_magic():
 	_target.put_32(0x89504E47)
 	_target.put_32(0x0D0A1A0A)
+
 
 # Creates a big-endian StreamPeerBuffer for writing PNG data into.
 func start_chunk() -> StreamPeerBuffer:
 	var result := StreamPeerBuffer.new()
 	result.big_endian = true
 	return result
+
 
 # Writes a PNG chunk.
 func write_chunk(type: String, data: PoolByteArray):
@@ -77,6 +88,7 @@ func write_chunk(type: String, data: PoolByteArray):
 	var crc := crc32.update(crc32.mask, at)
 	crc = crc32.end(crc32.update(crc, data))
 	_target.put_32(crc)
+
 
 # Returns the data_array of the stream (to be used when you're done writing the file)
 func finish() -> PoolByteArray:
