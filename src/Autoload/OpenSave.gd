@@ -80,6 +80,7 @@ func handle_loading_image(file: String, image: Image) -> void:
 	preview_dialog.popup_centered()
 	Global.dialog_open(true)
 
+
 # For loading the output of AImgIO as a project
 func handle_loading_aimg(path: String, frames: Array) -> void:
 	var project := Project.new([], path.get_file(), frames[0].content.get_size())
@@ -109,6 +110,7 @@ func handle_loading_aimg(path: String, frames: Array) -> void:
 		project.frames.append(frame)
 
 	set_new_imported_tab(project, path)
+
 
 func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: bool = true) -> void:
 	var file := File.new()
