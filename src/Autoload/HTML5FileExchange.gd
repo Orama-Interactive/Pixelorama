@@ -103,6 +103,15 @@ func load_image(load_directly := true):
 	var image_info: Dictionary = {}
 	match image_type:
 		"image/png":
+			if load_directly:
+				# In this case we can afford to try APNG,
+				# because we know we're sending it through OpenSave handling.
+				# Otherwise we could end up passing something incompatible.
+				var res := AImgIOAPNGImporter.load_from_buffer(image_data)
+				if res[0] == null:
+					# Success, pass to OpenSave.
+					OpenSave.handle_loading_aimg(image_name, res[1])
+					return
 			image_error = image.load_png_from_buffer(image_data)
 		"image/jpeg":
 			image_error = image.load_jpg_from_buffer(image_data)
