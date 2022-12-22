@@ -1,6 +1,7 @@
 class_name GIFAnimationExporter
-extends BaseAnimationExporter
-# Acts as the interface between Pixelorama's format-independent interface and gdgifexporter.
+extends AImgIOBaseExporter
+# Acts as the interface between the AImgIO format-independent interface and gdgifexporter.
+# Note that if the interface needs changing for new features, do just change it!
 
 # Gif exporter
 const GIFExporter = preload("res://addons/gdgifexporter/exporter.gd")
@@ -12,15 +13,15 @@ func _init():
 
 
 func export_animation(
-	images: Array,
-	durations: Array,
+	frames: Array,
 	_fps_hint: float,
 	progress_report_obj: Object,
 	progress_report_method,
 	progress_report_args
 ) -> PoolByteArray:
-	var exporter = GIFExporter.new(images[0].get_width(), images[0].get_height())
-	for i in range(images.size()):
-		exporter.add_frame(images[i], durations[i], MedianCutQuantization)
+	var f = frames[0]
+	var exporter = GIFExporter.new(f.content.get_width(), f.content.get_height())
+	for v in frames:
+		exporter.add_frame(f.content, f.duration, MedianCutQuantization)
 		progress_report_obj.callv(progress_report_method, progress_report_args)
 	return exporter.export_file_data()
