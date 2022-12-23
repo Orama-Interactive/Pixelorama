@@ -192,9 +192,9 @@ func export_processed_images(
 	scale_processed_images()
 
 	if is_single_file_format(project):
-		var exporter: BaseAnimationExporter
+		var exporter: AImgIOBaseExporter
 		if project.file_format == FileFormat.APNG:
-			exporter = APNGAnimationExporter.new()
+			exporter = AImgIOAPNGExporter.new()
 		else:
 			exporter = GIFAnimationExporter.new()
 		var details := {
@@ -244,7 +244,7 @@ func export_processed_images(
 
 func export_animated(args: Dictionary) -> void:
 	var project: Project = args["project"]
-	var exporter: BaseAnimationExporter = args["exporter"]
+	var exporter: AImgIOBaseExporter = args["exporter"]
 	# This is an ExportDialog (which refers back here).
 	var export_dialog: ConfirmationDialog = args["export_dialog"]
 
@@ -255,9 +255,17 @@ func export_animated(args: Dictionary) -> void:
 	export_dialog.set_export_progress_bar(export_progress)
 	export_dialog.toggle_export_progress_popup(true)
 
-	# Export and save gif
+	# Transform into AImgIO form
+	var frames := []
+	for i in range(len(processed_images)):
+		var frame: AImgIOFrame = AImgIOFrame.new()
+		frame.content = processed_images[i]
+		frame.duration = durations[i]
+		frames.push_back(frame)
+
+	# Export and save GIF/APNG
 	var file_data := exporter.export_animation(
-		processed_images, durations, project.fps, self, "increase_export_progress", [export_dialog]
+		frames, project.fps, self, "increase_export_progress", [export_dialog]
 	)
 
 	if OS.get_name() == "HTML5":

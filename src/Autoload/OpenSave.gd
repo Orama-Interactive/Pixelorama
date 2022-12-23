@@ -1,3 +1,4 @@
+# gdlint: ignore=max-public-methods
 extends Node
 
 var current_save_paths := []  # Array of strings
@@ -49,6 +50,15 @@ func handle_loading_file(file: String) -> void:
 		Global.control.find_node("ShaderEffect").change_shader(shader, file_name)
 
 	else:  # Image files
+		# Attempt to load as APNG.
+		# Note that the APNG importer will *only* succeed for *animated* PNGs.
+		# This is intentional as still images should still act normally.
+		var apng_res := AImgIOAPNGImporter.load_from_file(file)
+		if apng_res[0] == null:
+			# No error - this is an APNG!
+			handle_loading_aimg(file, apng_res[1])
+			return
+		# Attempt to load as a regular image.
 		var image := Image.new()
 		var err := image.load(file)
 		if err != OK:  # An error occured
@@ -70,6 +80,37 @@ func handle_loading_image(file: String, image: Image) -> void:
 	Global.control.add_child(preview_dialog)
 	preview_dialog.popup_centered()
 	Global.dialog_open(true)
+
+
+# For loading the output of AImgIO as a project
+func handle_loading_aimg(path: String, frames: Array) -> void:
+	var project := Project.new([], path.get_file(), frames[0].content.get_size())
+	project.layers.append(PixelLayer.new(project))
+	Global.projects.append(project)
+
+	# Determine FPS as 1, unless all frames agree.
+	project.fps = 1
+	var first_duration = frames[0].duration
+	var frames_agree = true
+	for v in frames:
+		var aimg_frame: AImgIOFrame = v
+		if aimg_frame.duration != first_duration:
+			frames_agree = false
+			break
+	if frames_agree and (first_duration > 0.0):
+		project.fps = 1.0 / first_duration
+	# Convert AImgIO frames to Pixelorama frames
+	for v in frames:
+		var aimg_frame: AImgIOFrame = v
+		var frame := Frame.new()
+		if not frames_agree:
+			frame.duration = aimg_frame.duration * project.fps
+		var content := aimg_frame.content
+		content.convert(Image.FORMAT_RGBA8)
+		frame.cels.append(PixelCel.new(content, 1))
+		project.frames.append(frame)
+
+	set_new_imported_tab(project, path)
 
 
 func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: bool = true) -> void:
