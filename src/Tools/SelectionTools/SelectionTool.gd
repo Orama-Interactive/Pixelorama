@@ -38,10 +38,10 @@ func refresh_options():
 	# The existence of this function is to ensure all items
 	# are added when we are selecting an option (Bad things will happen if i dont do this...)
 	$Modes.clear()
-	$Modes.add_item("Default")
-	$Modes.add_item("Add")
-	$Modes.add_item("Subtract")
-	$Modes.add_item("Intersect")
+	$Modes.add_item("Default (Shortcuts)")
+	$Modes.add_item("Always Add")
+	$Modes.add_item("Always Subtract")
+	$Modes.add_item("Always Intersect")
 	$Modes.select(_mode_selected)
 
 
