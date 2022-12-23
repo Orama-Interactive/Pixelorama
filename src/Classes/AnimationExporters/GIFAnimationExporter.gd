@@ -19,9 +19,11 @@ func export_animation(
 	progress_report_method,
 	progress_report_args
 ) -> PoolByteArray:
-	var f = frames[0]
-	var exporter = GIFExporter.new(f.content.get_width(), f.content.get_height())
+	var first_frame: AImgIOFrame = frames[0]
+	var first_img := first_frame.content
+	var exporter = GIFExporter.new(first_img.get_width(), first_img.get_height())
 	for v in frames:
-		exporter.add_frame(f.content, f.duration, MedianCutQuantization)
+		var frame: AImgIOFrame = v
+		exporter.add_frame(frame.content, frame.duration, MedianCutQuantization)
 		progress_report_obj.callv(progress_report_method, progress_report_args)
 	return exporter.export_file_data()
