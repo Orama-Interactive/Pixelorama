@@ -19,7 +19,7 @@ func _ready() -> void:
 		color_rect.color = Global.left_tool_color
 	else:
 		color_rect.color = Global.right_tool_color
-	$Header/Label.text = Tools.tools[name].display_name
+	$Label.text = Tools.tools[name].display_name
 
 	load_config()
 
