@@ -104,7 +104,8 @@ func apply_selection(_position) -> void:
 	if !_add and !_subtract and !_intersect:
 		cleared = true
 		Global.canvas.selection.clear_selection()
-	if _draw_points.size() > 1:
+	# This is paint selection so we've done >= 1 nstead of > 1
+	if _draw_points.size() >= 1:
 		var selection_map_copy := SelectionMap.new()
 		selection_map_copy.copy_from(project.selection_map)
 		if _intersect:
