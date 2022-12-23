@@ -300,5 +300,3 @@ func resize_selection() -> void:
 func _on_Timer_timeout() -> void:
 	if !selection_node.is_moving_content:
 		selection_node.commit_undo("Move Selection", undo_data)
-
-
