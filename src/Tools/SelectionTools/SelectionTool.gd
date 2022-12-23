@@ -1,7 +1,7 @@
 class_name SelectionTool
 extends BaseTool
 
-enum Mode { DEFAULT, ADD, SUBTRACT, INTERSECT}
+enum Mode { DEFAULT, ADD, SUBTRACT, INTERSECT }
 
 var undo_data: Dictionary
 var _move := false
