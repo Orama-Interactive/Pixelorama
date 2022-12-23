@@ -1,6 +1,8 @@
 class_name SelectionTool
 extends BaseTool
 
+enum Mode {DEFAULT, ADD, SUBTRACT, INTERSECT}
+
 var undo_data: Dictionary
 var _move := false
 var _move_content := true
@@ -10,6 +12,7 @@ var _offset := Vector2.ZERO
 # click multiple times to create a selection
 var _ongoing_selection := false
 
+var _mode_selected := 0
 var _add := false  # Shift + Mouse Click
 var _subtract := false  # Ctrl + Mouse Click
 var _intersect := false  # Shift + Ctrl + Mouse Click
@@ -28,6 +31,32 @@ onready var timer: Timer = $Timer
 
 func _ready() -> void:
 	set_spinbox_values()
+	refresh_options()
+
+
+func refresh_options():
+	# The existence of this function is to ensure all items
+	# are added when we are selecting an option (Bad things will happen if i dont do this...)
+	$Modes.clear()
+	$Modes.add_item("Default")
+	$Modes.add_item("Add")
+	$Modes.add_item("Subtract")
+	$Modes.add_item("Intersect")
+	$Modes.select(_mode_selected)
+
+
+func get_config() -> Dictionary:
+	var config := .get_config()
+	config["mode_selected"] = _mode_selected
+	return config
+
+
+func set_config(config: Dictionary) -> void:
+	_mode_selected = config.get("mode_selected", 0)
+
+
+func update_config() -> void:
+	refresh_options()
 
 
 func set_spinbox_values() -> void:
@@ -173,7 +202,18 @@ func draw_end(position: Vector2) -> void:
 
 
 func apply_selection(_position: Vector2) -> void:
-	pass
+	match _mode_selected:
+		Mode.ADD:
+			_add = true
+		Mode.SUBTRACT:
+			_subtract = true
+		Mode.INTERSECT:
+			_intersect = true
+
+
+func _on_Modes_item_selected(index: int) -> void:
+	_mode_selected = index
+	save_config()
 
 
 func _set_cursor_text(rect: Rect2) -> void:
@@ -260,3 +300,5 @@ func resize_selection() -> void:
 func _on_Timer_timeout() -> void:
 	if !selection_node.is_moving_content:
 		selection_node.commit_undo("Move Selection", undo_data)
+
+

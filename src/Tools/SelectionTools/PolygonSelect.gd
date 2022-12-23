@@ -105,6 +105,7 @@ func draw_preview() -> void:
 
 
 func apply_selection(_position) -> void:
+	.apply_selection(_position)
 	if !_ready_to_apply:
 		return
 	var project: Project = Global.current_project

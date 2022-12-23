@@ -7,6 +7,7 @@ var _allegro_image_segments: Array
 
 
 func apply_selection(position: Vector2) -> void:
+	.apply_selection(position)
 	var project: Project = Global.current_project
 	var size: Vector2 = project.size
 	if position.x < 0 or position.y < 0 or position.x >= size.x or position.y >= size.y:

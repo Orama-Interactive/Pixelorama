@@ -5,7 +5,9 @@ var _similarity := 100
 
 
 func get_config() -> Dictionary:
-	return {"similarity": _similarity}
+	var config := .get_config()
+	config["similarity"] = _similarity
+	return config
 
 
 func set_config(config: Dictionary) -> void:
@@ -23,6 +25,7 @@ func _on_Similarity_value_changed(value: float) -> void:
 
 
 func apply_selection(position: Vector2) -> void:
+	.apply_selection(position)
 	var project: Project = Global.current_project
 	if position.x < 0 or position.y < 0:
 		return

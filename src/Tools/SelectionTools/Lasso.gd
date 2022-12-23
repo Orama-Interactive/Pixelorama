@@ -71,6 +71,7 @@ func draw_preview() -> void:
 
 
 func apply_selection(_position) -> void:
+	.apply_selection(_position)
 	var project: Project = Global.current_project
 	var cleared := false
 	if !_add and !_subtract and !_intersect:
