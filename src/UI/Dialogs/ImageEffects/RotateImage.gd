@@ -3,7 +3,7 @@ extends ImageEffect
 var live_preview: bool = true
 var rotxel_shader: Shader
 var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeightbour.shader")
-var clean_edge_shader: Shader = preload("res://src/Shaders/Rotation/cleanEdge.gdshader")
+var clean_edge_shader: Shader = DrawingAlgos.clean_edge_shader
 var pivot := Vector2.INF
 var drag_pivot := false
 
@@ -133,6 +133,8 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				"selection_tex": selection_tex,
 				"selection_pivot": pivot,
 				"selection_size": selection_size,
+				"slope": true,
+				"cleanup": false,
 				"preview": true
 			}
 			if !confirmed:
