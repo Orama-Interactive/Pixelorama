@@ -1,6 +1,7 @@
 extends Node
 
 enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
+var clean_edge_shader: Shader = preload("res://src/Shaders/Rotation/cleanEdge.gdshader")
 
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
@@ -427,8 +428,7 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 				continue
 			var sprite := Image.new()
 			sprite.copy_from(f.cels[i].image)
-			# Different method for scale_3x
-			if interpolation == 5:
+			if interpolation == 5:  # scale3x
 				var times: Vector2 = Vector2(
 					ceil(width / (3.0 * sprite.get_width())),
 					ceil(height / (3.0 * sprite.get_height()))
@@ -436,6 +436,10 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 				for _j in range(max(times.x, times.y)):
 					sprite.copy_from(scale_3x(sprite))
 				sprite.resize(width, height, 0)
+			elif interpolation == 6:  # cleanEdge
+				var params := {"angle": 0, "slope": true, "cleanup": true, "preview": false}
+				var gen := ShaderImageEffect.new()
+				gen.generate_image(sprite, clean_edge_shader, params, Vector2(width, height))
 			else:
 				sprite.resize(width, height, interpolation)
 			Global.current_project.undo_redo.add_do_property(f.cels[i].image, "data", sprite.data)
