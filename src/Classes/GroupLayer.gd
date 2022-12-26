@@ -43,7 +43,7 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 
 func serialize() -> Dictionary:
 	var data = .serialize()
-	data["type"] = Global.LayerTypes.GROUP
+	data["type"] = get_layer_type()
 	data["expanded"] = expanded
 	return data
 
@@ -51,6 +51,10 @@ func serialize() -> Dictionary:
 func deserialize(dict: Dictionary) -> void:
 	.deserialize(dict)
 	expanded = dict.expanded
+
+
+func get_layer_type() -> int:
+	return Global.LayerTypes.GROUP
 
 
 func new_empty_cel() -> BaseCel:

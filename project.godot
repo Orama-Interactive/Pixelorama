@@ -74,6 +74,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/Canvas/Canvas.gd"
 }, {
+"base": "BaseCel",
+"class": "Cel3D",
+"language": "GDScript",
+"path": "res://src/Classes/Cel3D.gd"
+}, {
+"base": "Spatial",
+"class": "Cel3DObject",
+"language": "GDScript",
+"path": "res://src/Classes/Cel3DObject.gd"
+}, {
 "base": "VBoxContainer",
 "class": "CollapsibleContainer",
 "language": "GDScript",
@@ -124,6 +134,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/ImageEffect.gd"
 }, {
+"base": "BaseLayer",
+"class": "Layer3D",
+"language": "GDScript",
+"path": "res://src/Classes/Layer3D.gd"
+}, {
 "base": "Button",
 "class": "LayerButton",
 "language": "GDScript",
@@ -138,6 +153,11 @@ _global_script_classes=[ {
 "class": "NotificationLabel",
 "language": "GDScript",
 "path": "res://src/UI/Nodes/NotificationLabel.gd"
+}, {
+"base": "Reference",
+"class": "ObjParse",
+"language": "GDScript",
+"path": "res://src/Classes/ObjParse.gd"
 }, {
 "base": "Resource",
 "class": "Palette",
@@ -238,6 +258,11 @@ _global_script_classes=[ {
 "class": "ValueSliderV2",
 "language": "GDScript",
 "path": "res://src/UI/Nodes/ValueSliderV2.gd"
+}, {
+"base": "HBoxContainer",
+"class": "ValueSliderV3",
+"language": "GDScript",
+"path": "res://src/UI/Nodes/ValueSliderV3.gd"
 } ]
 _global_script_class_icons={
 "AImgIOAPNGExporter": "",
@@ -253,6 +278,8 @@ _global_script_class_icons={
 "BaseTool": "",
 "Brushes": "",
 "Canvas": "",
+"Cel3D": "",
+"Cel3DObject": "",
 "CollapsibleContainer": "",
 "CropRect": "",
 "Drawer": "",
@@ -263,9 +290,11 @@ _global_script_class_icons={
 "GroupLayer": "",
 "Guide": "",
 "ImageEffect": "",
+"Layer3D": "",
 "LayerButton": "",
 "MaxMinEdit": "",
 "NotificationLabel": "",
+"ObjParse": "",
 "Palette": "",
 "PaletteColor": "",
 "PaletteGrid": "",
@@ -285,7 +314,8 @@ _global_script_class_icons={
 "SymmetryGuide": "",
 "Tiles": "",
 "ValueSlider": "",
-"ValueSliderV2": ""
+"ValueSliderV2": "",
+"ValueSliderV3": ""
 }
 
 [application]

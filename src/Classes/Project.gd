@@ -100,6 +100,10 @@ func remove() -> void:
 				c.queue_free()
 	for guide in guides:
 		guide.queue_free()
+	for frame in frames:
+		for l in layers.size():
+			var cel: BaseCel = frame.cels[l]
+			cel.on_remove()
 	# Prevents memory leak (due to the layers' project reference stopping ref counting from freeing)
 	layers.clear()
 	Global.projects.erase(self)
@@ -356,6 +360,15 @@ func deserialize(dict: Dictionary) -> void:
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
 	if dict.has("frames") and dict.has("layers"):
+		for saved_layer in dict.layers:
+			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
+				Global.LayerTypes.PIXEL:
+					layers.append(PixelLayer.new(self))
+				Global.LayerTypes.GROUP:
+					layers.append(GroupLayer.new(self))
+				Global.LayerTypes.THREE_D:
+					layers.append(Layer3D.new(self))
+
 		var frame_i := 0
 		for frame in dict.frames:
 			var cels := []
@@ -366,6 +379,8 @@ func deserialize(dict: Dictionary) -> void:
 						cels.append(PixelCel.new(Image.new(), cel.opacity))
 					Global.LayerTypes.GROUP:
 						cels.append(GroupCel.new(cel.opacity))
+					Global.LayerTypes.THREE_D:
+						cels.append(Cel3D.new(layers[cel_i], size, true))
 				_deserialize_metadata(cels[cel_i], cel)
 				cel_i += 1
 			var duration := 1.0
@@ -379,12 +394,6 @@ func deserialize(dict: Dictionary) -> void:
 			frames.append(frame_class)
 			frame_i += 1
 
-		for saved_layer in dict.layers:
-			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
-				Global.LayerTypes.PIXEL:
-					layers.append(PixelLayer.new(self))
-				Global.LayerTypes.GROUP:
-					layers.append(GroupLayer.new(self))
 		# Parent references to other layers are created when deserializing
 		# a layer, so loop again after creating them:
 		for layer_i in dict.layers.size():
@@ -553,6 +562,7 @@ func toggle_layer_buttons() -> void:
 			current_layer == child_count
 			or layers[current_layer] is GroupLayer
 			or layers[current_layer - 1] is GroupLayer
+			or layers[current_layer - 1] is Layer3D
 		)
 	)
 
@@ -680,6 +690,7 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 		# For each linked cel in the frame, update its layer's cel_link_sets
 		for l in layers.size():
 			var cel: BaseCel = frames[indices[i] - i].cels[l]
+			cel.on_remove()
 			if cel.link_set != null:
 				cel.link_set["cels"].erase(cel)
 				if cel.link_set["cels"].empty():
@@ -761,6 +772,7 @@ func remove_layers(indices: Array) -> void:
 		# With each removed index, future indices need to be lowered, so subtract by i
 		layers.remove(indices[i] - i)
 		for frame in frames:
+			frame.cels[indices[i] - i].on_remove()
 			frame.cels.remove(indices[i] - i)
 		Global.animation_timeline.project_layer_removed(indices[i] - i)
 	# Update the layer indices and layer/cel buttons:

@@ -18,6 +18,7 @@ onready var crop_rect: CropRect = $CropRect
 onready var indicators = $Indicators
 onready var previews = $Previews
 onready var mouse_guide_container = $MouseGuideContainer
+onready var gizmos_3d: Node2D = $Gizmos3D
 
 
 func _ready() -> void:
@@ -67,6 +68,14 @@ func _draw() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if Global.current_project.get_current_cel() is Cel3D and Global.has_focus:
+		for child in get_children():
+			if not child is Viewport:
+				continue
+			var modified_event := event.duplicate()
+			if event is InputEventMouse:
+				modified_event.position = current_pixel.floor()
+			child.input(modified_event)
 	# Don't process anything below if the input isn't a mouse event, or Shift/Ctrl.
 	# This decreases CPU/GPU usage slightly.
 	var get_velocity := false

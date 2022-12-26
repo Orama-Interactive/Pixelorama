@@ -3,7 +3,7 @@ extends Node
 signal project_changed
 signal cel_changed
 
-enum LayerTypes { PIXEL, GROUP }
+enum LayerTypes { PIXEL, GROUP, THREE_D }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum ColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
@@ -159,6 +159,7 @@ var crop_left := 0
 var crop_right := 0
 
 # Nodes
+var base_layer_button_node: PackedScene = preload("res://src/UI/Timeline/BaseLayerButton.tscn")
 var pixel_layer_button_node: PackedScene = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
 var group_layer_button_node: PackedScene = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
 var pixel_cel_button_node: PackedScene = preload("res://src/UI/Timeline/PixelCelButton.tscn")
@@ -479,7 +480,10 @@ func undo_or_redo(
 			for i in project.frames.size():
 				for j in project.layers.size():
 					var current_cel: BaseCel = project.frames[i].cels[j]
-					current_cel.image_texture.create_from_image(current_cel.get_image(), 0)
+					if current_cel is Cel3D:
+						current_cel.size_changed(project.size)
+					else:
+						current_cel.image_texture.create_from_image(current_cel.get_image(), 0)
 			canvas.camera_zoom()
 			canvas.grid.update()
 			canvas.pixel_grid.update()
@@ -578,3 +582,19 @@ func update_hint_tooltips() -> void:
 			var first_key: InputEventKey = Keychain.action_get_first_key(event_type.action)
 			hint = first_key.as_text() if first_key else "None"
 		tip.hint_tooltip = tr(ui_tooltips[tip]) % hint
+
+
+# Used in case some of the values in a dictionary are Strings, when they should be something else
+func convert_dictionary_values(dict: Dictionary) -> void:
+	for key in dict:
+		if typeof(dict[key]) != TYPE_STRING:
+			continue
+		if "transform" in key:  # Convert a String to a Transform
+			var transform_string: String = dict[key].replace(" - ", ", ")
+			dict[key] = str2var("Transform(" + transform_string + ")")
+		elif "color" in key:  # Convert a String to a Color
+			dict[key] = str2var("Color(" + dict[key] + ")")
+		elif "v2" in key:  # Convert a String to a Vector2
+			dict[key] = str2var("Vector2" + dict[key])
+		elif "size" in key:  # Convert a String to a Vector3
+			dict[key] = str2var("Vector3" + dict[key])
