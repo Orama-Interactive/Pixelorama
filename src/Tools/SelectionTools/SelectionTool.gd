@@ -38,10 +38,10 @@ func refresh_options():
 	# The existence of this function is to ensure all items
 	# are added when we are selecting an option (Bad things will happen if i dont do this...)
 	$Modes.clear()
-	$Modes.add_item("Default (Shortcuts)")
-	$Modes.add_item("Always Add")
-	$Modes.add_item("Always Subtract")
-	$Modes.add_item("Always Intersect")
+	$Modes.add_item("Default (New Selection)")
+	$Modes.add_item("Add to Selection")
+	$Modes.add_item("Subtract from Selection")
+	$Modes.add_item("Intersection of Selections")
 	$Modes.select(_mode_selected)
 
 
@@ -202,13 +202,17 @@ func draw_end(position: Vector2) -> void:
 
 
 func apply_selection(_position: Vector2) -> void:
+	# if a shortcut is activated then that will be obeyed instead 
 	match _mode_selected:
 		Mode.ADD:
-			_add = true
+			if !_subtract && !_intersect:
+				_add = true
 		Mode.SUBTRACT:
-			_subtract = true
+			if !_add && !_intersect:
+				_subtract = true
 		Mode.INTERSECT:
-			_intersect = true
+			if !_add && !_subtract:
+				_intersect = true
 
 
 func _on_Modes_item_selected(index: int) -> void:
