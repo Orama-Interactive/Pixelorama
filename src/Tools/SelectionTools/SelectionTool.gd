@@ -202,7 +202,7 @@ func draw_end(position: Vector2) -> void:
 
 
 func apply_selection(_position: Vector2) -> void:
-	# if a shortcut is activated then that will be obeyed instead 
+	# if a shortcut is activated then that will be obeyed instead
 	match _mode_selected:
 		Mode.ADD:
 			if !_subtract && !_intersect:
