@@ -9,20 +9,45 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "BaseAnimationExporter",
-"class": "APNGAnimationExporter",
+"base": "AImgIOBaseExporter",
+"class": "AImgIOAPNGExporter",
 "language": "GDScript",
-"path": "res://src/Classes/AnimationExporters/APNGAnimationExporter.gd"
+"path": "res://addons/aimg_io/apng_exporter.gd"
+}, {
+"base": "EditorImportPlugin",
+"class": "AImgIOAPNGImportPlugin",
+"language": "GDScript",
+"path": "res://addons/aimg_io/apng_import_plugin.gd"
+}, {
+"base": "Reference",
+"class": "AImgIOAPNGImporter",
+"language": "GDScript",
+"path": "res://addons/aimg_io/apng_importer.gd"
+}, {
+"base": "Reference",
+"class": "AImgIOAPNGStream",
+"language": "GDScript",
+"path": "res://addons/aimg_io/apng_stream.gd"
+}, {
+"base": "Reference",
+"class": "AImgIOBaseExporter",
+"language": "GDScript",
+"path": "res://addons/aimg_io/base_exporter.gd"
+}, {
+"base": "Resource",
+"class": "AImgIOCRC32",
+"language": "GDScript",
+"path": "res://addons/aimg_io/crc32.gd"
+}, {
+"base": "Reference",
+"class": "AImgIOFrame",
+"language": "GDScript",
+"path": "res://addons/aimg_io/frame.gd"
 }, {
 "base": "Reference",
 "class": "AnimationTag",
 "language": "GDScript",
 "path": "res://src/Classes/AnimationTag.gd"
-}, {
-"base": "Reference",
-"class": "BaseAnimationExporter",
-"language": "GDScript",
-"path": "res://src/Classes/AnimationExporters/BaseAnimationExporter.gd"
 }, {
 "base": "Reference",
 "class": "BaseCel",
@@ -64,7 +89,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Classes/Frame.gd"
 }, {
-"base": "BaseAnimationExporter",
+"base": "AImgIOBaseExporter",
 "class": "GIFAnimationExporter",
 "language": "GDScript",
 "path": "res://src/Classes/AnimationExporters/GIFAnimationExporter.gd"
@@ -190,9 +215,14 @@ _global_script_classes=[ {
 "path": "res://src/UI/Nodes/ValueSlider.gd"
 } ]
 _global_script_class_icons={
-"APNGAnimationExporter": "",
+"AImgIOAPNGExporter": "",
+"AImgIOAPNGImportPlugin": "",
+"AImgIOAPNGImporter": "",
+"AImgIOAPNGStream": "",
+"AImgIOBaseExporter": "",
+"AImgIOCRC32": "",
+"AImgIOFrame": "",
 "AnimationTag": "",
-"BaseAnimationExporter": "",
 "BaseCel": "",
 "BaseLayer": "",
 "BaseTool": "",
@@ -280,7 +310,7 @@ window/per_pixel_transparency/enabled.Android=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dockable_container/plugin.cfg", "res://addons/keychain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/aimg_io/plugin.cfg", "res://addons/dockable_container/plugin.cfg", "res://addons/keychain/plugin.cfg" )
 
 [importer_defaults]
 

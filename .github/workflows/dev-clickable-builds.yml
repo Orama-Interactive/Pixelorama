@@ -1,7 +1,7 @@
 name: "dev-clickable-builds"
 on:
   push:
-    branches: [ master ]
+    branches: [ ]
 
 env:
   GODOT_VERSION: 3.5

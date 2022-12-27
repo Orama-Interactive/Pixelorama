@@ -3,6 +3,7 @@ extends ImageEffect
 var live_preview: bool = true
 var rotxel_shader: Shader
 var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeightbour.shader")
+var clean_edge_shader: Shader = DrawingAlgos.clean_edge_shader
 var pivot := Vector2.INF
 var drag_pivot := false
 
@@ -23,6 +24,7 @@ func _ready() -> void:
 	if OS.get_name() != "HTML5":
 		type_option_button.add_item("Rotxel with Smear")
 		rotxel_shader = load("res://src/Shaders/Rotation/SmearRotxel.shader")
+	type_option_button.add_item("cleanEdge")
 	type_option_button.add_item("Nearest neighbour (Shader)")
 	type_option_button.add_item("Nearest neighbour")
 	type_option_button.add_item("Rotxel")
@@ -51,7 +53,10 @@ func decide_pivot() -> void:
 	pivot = size / 2
 
 	# Pivot correction in case of even size
-	if type_option_button.text != "Nearest neighbour (Shader)":
+	if (
+		type_option_button.text != "Nearest neighbour (Shader)"
+		and type_option_button.text != "cleanEdge"
+	):
 		if int(size.x) % 2 == 0:
 			pivot.x -= 0.5
 		if int(size.y) % 2 == 0:
@@ -63,7 +68,10 @@ func decide_pivot() -> void:
 			selection_rectangle.position
 			+ ((selection_rectangle.end - selection_rectangle.position) / 2)
 		)
-		if type_option_button.text != "Nearest neighbour (Shader)":
+		if (
+			type_option_button.text != "Nearest neighbour (Shader)"
+			and type_option_button.text != "cleanEdge"
+		):
 			# Pivot correction in case of even size
 			if int(selection_rectangle.end.x - selection_rectangle.position.x) % 2 == 0:
 				pivot.x -= 0.5
@@ -119,6 +127,24 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				gen.generate_image(cel, rotxel_shader, params, _project.size)
 				yield(gen, "done")
 
+		"cleanEdge":
+			var params := {
+				"angle": angle,
+				"selection_tex": selection_tex,
+				"selection_pivot": pivot,
+				"selection_size": selection_size,
+				"slope": true,
+				"cleanup": false,
+				"preview": true
+			}
+			if !confirmed:
+				for param in params:
+					preview.material.set_shader_param(param, params[param])
+			else:
+				params["preview"] = false
+				var gen := ShaderImageEffect.new()
+				gen.generate_image(cel, clean_edge_shader, params, _project.size)
+				yield(gen, "done")
 		"Nearest neighbour (Shader)":
 			var params := {
 				"angle": angle,
@@ -150,6 +176,7 @@ func _type_is_shader() -> bool:
 	return (
 		type_option_button.text == "Nearest neighbour (Shader)"
 		or type_option_button.text == "Rotxel with Smear"
+		or type_option_button.text == "cleanEdge"
 	)
 
 
@@ -159,6 +186,11 @@ func _on_TypeOptionButton_item_selected(_id: int) -> void:
 		sm.shader = rotxel_shader
 		preview.set_material(sm)
 		smear_options.visible = true
+	elif type_option_button.text == "cleanEdge":
+		var sm := ShaderMaterial.new()
+		sm.shader = clean_edge_shader
+		preview.set_material(sm)
+		smear_options.visible = false
 	elif type_option_button.text == "Nearest neighbour (Shader)":
 		var sm := ShaderMaterial.new()
 		sm.shader = nn_shader
