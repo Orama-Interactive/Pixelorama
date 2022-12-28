@@ -73,7 +73,7 @@ func _draw() -> void:
 			var text_xform = Transform2D(-PI / 2, Vector2(font.get_height() - 4, position.y - 2))
 			draw_set_transform_matrix(get_transform() * text_xform)
 			var val = (ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(0, j)).y
-			draw_string(font, Vector2(), str(int(val)))
+			draw_string(font, Vector2(), str(stepify(val, 0.1)))
 			draw_set_transform_matrix(get_transform())
 		else:
 			if j % minor_subdivision == 0:
