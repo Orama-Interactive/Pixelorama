@@ -7,60 +7,73 @@
 [node name="ToolOptions" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="PositionLabel" type="Label" parent="." index="2"]
+[node name="ModeLabel" type="Label" parent="." index="2"]
 margin_top = 26.0
 margin_right = 116.0
 margin_bottom = 40.0
-text = "Position:"
+text = "Mode:"
 
-[node name="XSpinBox" parent="." index="3" instance=ExtResource( 3 )]
+[node name="Modes" type="OptionButton" parent="." index="3"]
 margin_top = 44.0
 margin_right = 116.0
-margin_bottom = 68.0
+margin_bottom = 64.0
+align = 1
+
+[node name="PositionLabel" type="Label" parent="." index="4"]
+margin_top = 68.0
+margin_right = 116.0
+margin_bottom = 82.0
+text = "Position:"
+
+[node name="XSpinBox" parent="." index="5" instance=ExtResource( 3 )]
+margin_top = 86.0
+margin_right = 116.0
+margin_bottom = 110.0
 hint_tooltip = "X coordinate of the top left corner"
 allow_greater = true
 allow_lesser = true
 prefix = "X:"
 
-[node name="YSpinBox" parent="." index="4" instance=ExtResource( 3 )]
-margin_top = 72.0
+[node name="YSpinBox" parent="." index="6" instance=ExtResource( 3 )]
+margin_top = 114.0
 margin_right = 116.0
-margin_bottom = 96.0
+margin_bottom = 138.0
 hint_tooltip = "Y coordinate of the top left corner"
 allow_greater = true
 allow_lesser = true
 prefix = "Y:"
 
-[node name="SizeLabel" type="Label" parent="." index="5"]
-margin_top = 100.0
+[node name="SizeLabel" type="Label" parent="." index="7"]
+margin_top = 142.0
 margin_right = 116.0
-margin_bottom = 114.0
+margin_bottom = 156.0
 text = "Size:"
 
-[node name="WSpinBox" parent="." index="6" instance=ExtResource( 3 )]
-margin_top = 118.0
+[node name="WSpinBox" parent="." index="8" instance=ExtResource( 3 )]
+margin_top = 160.0
 margin_right = 116.0
-margin_bottom = 142.0
+margin_bottom = 184.0
 hint_tooltip = "Width of selection"
 min_value = 1.0
 value = 1.0
 allow_greater = true
 prefix = "W:"
 
-[node name="HSpinBox" parent="." index="7" instance=ExtResource( 3 )]
-margin_top = 146.0
+[node name="HSpinBox" parent="." index="9" instance=ExtResource( 3 )]
+margin_top = 188.0
 margin_right = 116.0
-margin_bottom = 170.0
+margin_bottom = 212.0
 hint_tooltip = "Height of selection"
 min_value = 1.0
 value = 1.0
 allow_greater = true
 prefix = "H:"
 
-[node name="Timer" type="Timer" parent="." index="8"]
+[node name="Timer" type="Timer" parent="." index="10"]
 wait_time = 0.2
 one_shot = true
 
+[connection signal="item_selected" from="Modes" to="." method="_on_Modes_item_selected"]
 [connection signal="value_changed" from="XSpinBox" to="." method="_on_position_value_changed" binds= [ true ]]
 [connection signal="value_changed" from="YSpinBox" to="." method="_on_position_value_changed" binds= [ false ]]
 [connection signal="value_changed" from="WSpinBox" to="." method="_on_size_value_changed" binds= [ true ]]

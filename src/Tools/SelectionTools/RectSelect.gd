@@ -88,6 +88,7 @@ func draw_preview() -> void:
 
 
 func apply_selection(_position: Vector2) -> void:
+	.apply_selection(_position)
 	var project: Project = Global.current_project
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()

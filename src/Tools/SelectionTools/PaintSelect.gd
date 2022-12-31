@@ -13,11 +13,11 @@ var _draw_points := []
 
 
 func get_config() -> Dictionary:
-	return {
-		"brush_type": _brush.type,
-		"brush_index": _brush.index,
-		"brush_size": _brush_size,
-	}
+	var config := .get_config()
+	config["brush_type"] = _brush.type
+	config["brush_index"] = _brush.index
+	config["brush_size"] = _brush_size
+	return config
 
 
 func set_config(config: Dictionary) -> void:
@@ -99,12 +99,14 @@ func draw_preview() -> void:
 
 
 func apply_selection(_position) -> void:
+	.apply_selection(_position)
 	var project: Project = Global.current_project
 	var cleared := false
 	if !_add and !_subtract and !_intersect:
 		cleared = true
 		Global.canvas.selection.clear_selection()
-	if _draw_points.size() > 1:
+	# This is paint selection so we've done >= 1 nstead of > 1
+	if _draw_points.size() >= 1:
 		var selection_map_copy := SelectionMap.new()
 		selection_map_copy.copy_from(project.selection_map)
 		if _intersect:
