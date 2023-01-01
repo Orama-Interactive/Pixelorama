@@ -76,8 +76,10 @@ func _draw() -> void:
 			)
 			var val = (ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(j, 0)).x
 			draw_string(
-				font, Vector2(position.x + RULER_WIDTH + 2, font.get_height() - 4), str(stepify(val, 0.1))
-			)
+				font,
+				Vector2(position.x + RULER_WIDTH + 2, font.get_height() - 4),
+				str(stepify(val, 0.1))
+ 			)
 		else:
 			if j % minor_subdivision == 0:
 				draw_line(
