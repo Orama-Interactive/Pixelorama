@@ -79,7 +79,7 @@ func _draw() -> void:
 				font,
 				Vector2(position.x + RULER_WIDTH + 2, font.get_height() - 4),
 				str(stepify(val, 0.1))
- 			)
+			)
 		else:
 			if j % minor_subdivision == 0:
 				draw_line(
