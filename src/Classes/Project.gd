@@ -3,6 +3,9 @@ class_name Project
 extends Reference
 # A class for project properties.
 
+# warning-ignore:unused_signal
+signal cel_changed(frame, layer)
+
 var name := "" setget _name_changed
 var size: Vector2 setget _size_changed
 var undo_redo := UndoRedo.new()
@@ -16,8 +19,8 @@ var has_changed := false setget _has_changed_changed
 # the add/remove/move/swap_frames/layers methods
 var frames := []  # Array of Frames (that contain Cels)
 var layers := []  # Array of Layers
-var current_frame := 0 setget _frame_changed
-var current_layer := 0 setget _layer_changed
+var current_frame := 0
+var current_layer := 0
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
 
 var animation_tags := [] setget _animation_tags_changed  # Array of AnimationTags
@@ -59,6 +62,7 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	size = _size
 	tiles = Tiles.new(size)
 	selection_map.create(size.x, size.y, false, Image.FORMAT_LA8)
+	connect("cel_changed", self, "_cel_changed")
 
 	Global.tabs.add_tab(name)
 	OpenSave.current_save_paths.append("")
@@ -464,62 +468,58 @@ func _size_changed(value: Vector2) -> void:
 	size = value
 
 
-func _frame_changed(value: int) -> void:
+func _cel_changed(new_frame: int, new_layer := -1) -> void:
+	if new_frame < 0:
+		new_frame = current_frame
+	if new_layer < 0:
+		new_layer = current_layer
 	Global.canvas.selection.transform_content_confirm()
-	current_frame = value
-	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
-
+	# Unpress all buttons
 	for i in frames.size():
 		var frame_button: BaseButton = Global.frame_hbox.get_child(i)
-		frame_button.pressed = false
-		for cel_hbox in Global.cel_vbox.get_children():  # De-select all the other cels
+		frame_button.pressed = false  # Unpress all frame buttons
+		for cel_hbox in Global.cel_vbox.get_children():
 			if i < cel_hbox.get_child_count():
-				cel_hbox.get_child(i).pressed = false
+				cel_hbox.get_child(i).pressed = false  # Unpress all cel buttons
+
+	for layer_button in Global.layer_vbox.get_children():
+		layer_button.pressed = false  # Unpress all layer buttons
 
 	if selected_cels.empty():
-		selected_cels.append([current_frame, current_layer])
-	# Select the new frame
-	for cel in selected_cels:
+		selected_cels.append([new_frame, new_layer])
+	for cel in selected_cels:  # Press selected buttons
 		var frame: int = cel[0]
 		var layer: int = cel[1]
 		if frame < Global.frame_hbox.get_child_count():
 			var frame_button: BaseButton = Global.frame_hbox.get_child(frame)
-			frame_button.pressed = true
+			frame_button.pressed = true  # Press selected frame buttons
 
-		var vbox_child_count: int = Global.cel_vbox.get_child_count()
-		if layer < vbox_child_count:
-			var cel_hbox: Container = Global.cel_vbox.get_child(vbox_child_count - 1 - layer)
+		var layer_vbox_child_count: int = Global.layer_vbox.get_child_count()
+		if layer < layer_vbox_child_count:
+			var layer_button = Global.layer_vbox.get_child(layer_vbox_child_count - 1 - layer)
+			layer_button.pressed = true  # Press selected layer buttons
+
+		var cel_vbox_child_count: int = Global.cel_vbox.get_child_count()
+		if layer < cel_vbox_child_count:
+			var cel_hbox: Container = Global.cel_vbox.get_child(cel_vbox_child_count - 1 - layer)
 			if frame < cel_hbox.get_child_count():
-				var cel_button = cel_hbox.get_child(frame)
-				cel_button.pressed = true
+				var cel_button: BaseButton = cel_hbox.get_child(frame)
+				cel_button.pressed = true  # Press selected cel buttons
 
-	if current_frame < frames.size():
+	if new_frame != current_frame:  # If the frame has changed
+		current_frame = new_frame
+		Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
+		toggle_frame_buttons()
+
+	if new_layer != current_layer:  # If the layer has changed
+		current_layer = new_layer
+		toggle_layer_buttons()
+
+	if current_frame < frames.size():  # Set opacity slider
 		var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
 		Global.layer_opacity_slider.value = cel_opacity * 100
-
-	toggle_frame_buttons()
 	Global.canvas.update()
 	Global.transparent_checker.update_rect()
-
-
-func _layer_changed(value: int) -> void:
-	Global.canvas.selection.transform_content_confirm()
-	current_layer = value
-
-	toggle_layer_buttons()
-
-	yield(Global.get_tree().create_timer(0.01), "timeout")
-	self.current_frame = current_frame  # Call frame_changed to update UI
-	for layer_button in Global.layer_vbox.get_children():
-		layer_button.pressed = false
-
-	for cel in selected_cels:
-		var layer: int = cel[1]
-		if layer < Global.layer_vbox.get_child_count():
-			var layer_button = Global.layer_vbox.get_child(
-				Global.layer_vbox.get_child_count() - 1 - layer
-			)
-			layer_button.pressed = true
 
 
 func toggle_frame_buttons() -> void:
