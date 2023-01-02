@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2023-01-02 03:43\n"
+"PO-Revision-Date: 2023-01-02 04:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1371,15 +1371,15 @@ msgstr "Si se activa esta opción, cuando la ventana de la aplicación pierde el
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
-msgstr ""
+msgstr "Procesador:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr ""
+msgstr "Especifica el procesador/controlador de video que se está usando. GLES2 es mejor para dispositivos antiguos y de gama baja, pero GLES3 puede ofrecer más funciones."
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
-msgstr ""
+msgstr "Controlador de tableta:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
