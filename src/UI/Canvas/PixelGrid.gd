@@ -1,6 +1,10 @@
 extends Node2D
 
 
+func _ready() -> void:
+	Global.camera.connect("zoom_changed", self, "update")
+
+
 func _draw() -> void:
 	if not Global.draw_pixel_grid:
 		return

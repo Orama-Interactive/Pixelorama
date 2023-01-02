@@ -140,7 +140,6 @@ func selection_map_changed() -> void:
 func _selection_offset_changed(value: Vector2) -> void:
 	selection_offset = value
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset
-	Global.canvas.selection.update_on_zoom(Global.camera.zoom.x)
 
 
 func change_project() -> void:
@@ -246,8 +245,8 @@ func change_project() -> void:
 		camera.rotation = cameras_rotation[i]
 		camera.zoom = cameras_zoom[i]
 		camera.offset = cameras_offset[i]
-		camera.rotation_changed()
-		camera.zoom_changed()
+		camera.emit_signal("rotation_changed")
+		camera.emit_signal("zoom_changed")
 		i += 1
 
 

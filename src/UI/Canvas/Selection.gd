@@ -60,6 +60,7 @@ class Gizmo:
 
 
 func _ready() -> void:
+	Global.camera.connect("zoom_changed", self, "_update_on_zoom")
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, -1)))  # Top left
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(0, -1)))  # Center top
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(1, -1)))  # Top right
@@ -282,7 +283,8 @@ func _update_gizmos() -> void:
 	update()
 
 
-func update_on_zoom(zoom: float) -> void:
+func _update_on_zoom() -> void:
+	var zoom := Global.camera.zoom.x
 	var size := max(
 		Global.current_project.selection_map.get_size().x,
 		Global.current_project.selection_map.get_size().y
