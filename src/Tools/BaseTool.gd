@@ -88,8 +88,7 @@ func _get_draw_rect() -> Rect2:
 
 
 func _get_draw_image() -> Image:
-	var project: Project = Global.current_project
-	return project.frames[project.current_frame].cels[project.current_layer].get_image()
+	return Global.current_project.get_current_cel().get_image()
 
 
 func _get_selected_draw_images() -> Array:  # Array of Images

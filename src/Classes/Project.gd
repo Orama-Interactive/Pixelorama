@@ -127,6 +127,10 @@ func new_empty_frame() -> Frame:
 	return frame
 
 
+func get_current_cel() -> BaseCel:
+	return frames[current_frame].cels[current_layer]
+
+
 func selection_map_changed() -> void:
 	var image_texture := ImageTexture.new()
 	has_selection = !selection_map.is_invisible()

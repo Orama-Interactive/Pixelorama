@@ -567,7 +567,7 @@ func transform_content_cancel() -> void:
 	project.selection_map_changed()
 	preview_image = original_preview_image
 	if !is_pasting:
-		var cel_image: Image = project.frames[project.current_frame].cels[project.current_layer].image
+		var cel_image: Image = project.get_current_cel().get_image()
 		cel_image.blit_rect_mask(
 			preview_image,
 			preview_image,
@@ -669,7 +669,7 @@ func copy() -> void:
 	var cl_big_bounding_rectangle := Rect2()
 	var cl_selection_offset := Vector2.ZERO
 
-	var image: Image = project.frames[project.current_frame].cels[project.current_layer].get_image()
+	var image: Image = project.get_current_cel().get_image()
 	var to_copy := Image.new()
 	if !project.has_selection:
 		to_copy.copy_from(image)
@@ -805,7 +805,7 @@ func delete(selected_cels := true) -> void:
 	if selected_cels:
 		images = _get_selected_draw_images()
 	else:
-		images = [project.frames[project.current_frame].cels[project.current_layer].image]
+		images = [project.get_current_cel().get_image()]
 
 	if project.has_selection:
 		var blank := Image.new()
@@ -829,7 +829,7 @@ func new_brush() -> void:
 	if !project.has_selection:
 		return
 
-	var image: Image = project.frames[project.current_frame].cels[project.current_layer].image
+	var image: Image = project.get_current_cel().get_image()
 	var brush := Image.new()
 	if is_moving_content:
 		brush.copy_from(preview_image)
@@ -911,7 +911,7 @@ func clear_selection(use_undo := false) -> void:
 
 func _get_preview_image() -> void:
 	var project: Project = Global.current_project
-	var cel_image: Image = project.frames[project.current_frame].cels[project.current_layer].image
+	var cel_image: Image = project.get_current_cel().get_image()
 	if original_preview_image.is_empty():
 #		original_preview_image.copy_from(cel_image)
 		original_preview_image = cel_image.get_rect(big_bounding_rectangle)
