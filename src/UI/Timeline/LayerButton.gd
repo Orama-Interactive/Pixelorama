@@ -119,13 +119,13 @@ func _on_LayerContainer_gui_input(event: InputEvent) -> void:
 					var frame_layer := [i, j]
 					if !project.selected_cels.has(frame_layer):
 						project.selected_cels.append(frame_layer)
-			project.emit_signal("cel_changed", -1, layer)
+			project.change_cel(-1, layer)
 		elif Input.is_action_pressed("ctrl"):
 			for i in range(0, project.frames.size()):
 				var frame_layer := [i, layer]
 				if !project.selected_cels.has(frame_layer):
 					project.selected_cels.append(frame_layer)
-			project.emit_signal("cel_changed", -1, layer)
+			project.change_cel(-1, layer)
 		else:  # If the button is pressed without Shift or Control
 			_select_current_layer()
 
@@ -181,7 +181,7 @@ func _select_current_layer() -> void:
 	if !Global.current_project.selected_cels.has(frame_layer):
 		Global.current_project.selected_cels.append(frame_layer)
 
-	Global.current_project.emit_signal("cel_changed", -1, layer)
+	Global.current_project.change_cel(-1, layer)
 
 
 func get_drag_data(_position) -> Array:
@@ -339,10 +339,10 @@ func drop_data(_pos, data) -> void:
 			project, "move_layers", drop_to_indices, drop_from_indices, drop_from_parents
 		)
 	if project.current_layer == drop_layer:
-		project.undo_redo.add_do_method(project, "_cel_changed", -1, layer)
+		project.undo_redo.add_do_method(project, "change_cel", -1, layer)
 	else:
-		project.undo_redo.add_do_method(project, "_cel_changed", -1, project.current_layer)
-	project.undo_redo.add_undo_method(project, "_cel_changed", -1, project.current_layer)
+		project.undo_redo.add_do_method(project, "change_cel", -1, project.current_layer)
+	project.undo_redo.add_undo_method(project, "change_cel", -1, project.current_layer)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()

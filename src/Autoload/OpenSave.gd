@@ -549,14 +549,14 @@ func open_image_as_spritesheet_layer(
 	project.undo_redo.add_do_method(project, "add_frames", frames, frame_indices)
 	project.undo_redo.add_do_method(project, "add_layers", [layer], [project.layers.size()], [cels])
 	project.undo_redo.add_do_method(
-		project, "_cel_changed", new_frames_size - 1, project.layers.size()
+		project, "change_cel", new_frames_size - 1, project.layers.size()
 	)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 
 	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
 	project.undo_redo.add_undo_method(project, "remove_frames", frame_indices)
 	project.undo_redo.add_undo_method(
-		project, "_cel_changed", project.current_frame, project.current_layer
+		project, "change_cel", project.current_frame, project.current_layer
 	)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -576,12 +576,12 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 			project.undo_redo.add_undo_property(cel, "image", cel.image)
 
 	project.undo_redo.add_do_property(project, "selected_cels", [])
-	project.undo_redo.add_do_method(project, "_cel_changed", frame_index, layer_index)
+	project.undo_redo.add_do_method(project, "change_cel", frame_index, layer_index)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 
 	project.undo_redo.add_undo_property(project, "selected_cels", [])
 	project.undo_redo.add_undo_method(
-		project, "_cel_changed", project.current_frame, project.current_layer
+		project, "change_cel", project.current_frame, project.current_layer
 	)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -603,12 +603,12 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_do_method(project, "add_frames", [frame], [project.frames.size()])
-	project.undo_redo.add_do_method(project, "_cel_changed", project.frames.size(), layer_index)
+	project.undo_redo.add_do_method(project, "change_cel", project.frames.size(), layer_index)
 
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_undo_method(project, "remove_frames", [project.frames.size()])
 	project.undo_redo.add_undo_method(
-		project, "_cel_changed", project.current_frame, project.current_layer
+		project, "change_cel", project.current_frame, project.current_layer
 	)
 	project.undo_redo.commit_action()
 
@@ -629,11 +629,11 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 			cels.append(layer.new_empty_cel())
 
 	project.undo_redo.add_do_method(project, "add_layers", [layer], [project.layers.size()], [cels])
-	project.undo_redo.add_do_method(project, "_cel_changed", frame_index, project.layers.size())
+	project.undo_redo.add_do_method(project, "change_cel", frame_index, project.layers.size())
 
 	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
 	project.undo_redo.add_undo_method(
-		project, "_cel_changed", project.current_frame, project.current_layer
+		project, "change_cel", project.current_frame, project.current_layer
 	)
 
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)

@@ -160,8 +160,8 @@ func add_frame() -> void:
 	project.undo_redo.add_undo_method(project, "remove_frames", [frame_add_index])
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
-	project.undo_redo.add_do_method(project, "_cel_changed", project.current_frame + 1)
-	project.undo_redo.add_undo_method(project, "_cel_changed", project.current_frame)
+	project.undo_redo.add_do_method(project, "change_cel", project.current_frame + 1)
+	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
 	project.undo_redo.commit_action()
 
 
@@ -225,8 +225,8 @@ func delete_frames(indices := []) -> void:
 	project.undo_redo.add_undo_method(project, "add_frames", frames, indices)
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
-	project.undo_redo.add_do_method(project, "_cel_changed", current_frame)
-	project.undo_redo.add_undo_method(project, "_cel_changed", project.current_frame)
+	project.undo_redo.add_do_method(project, "change_cel", current_frame)
+	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -301,8 +301,8 @@ func copy_frames(indices := []) -> void:
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(project, "add_frames", copied_frames, copied_indices)
 	project.undo_redo.add_undo_method(project, "remove_frames", copied_indices)
-	project.undo_redo.add_do_method(project, "_cel_changed", indices[-1] + 1)
-	project.undo_redo.add_undo_method(project, "_cel_changed", indices[-1])
+	project.undo_redo.add_do_method(project, "change_cel", indices[-1] + 1)
+	project.undo_redo.add_undo_method(project, "change_cel", indices[-1])
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.commit_action()
@@ -396,7 +396,7 @@ func _on_AnimationTimer_timeout() -> void:
 	if animation_forward:
 		if project.current_frame < last_frame:
 			project.selected_cels.clear()
-			project.emit_signal("cel_changed", project.current_frame + 1, -1)
+			project.change_cel(project.current_frame + 1, -1)
 			Global.animation_timer.wait_time = (
 				project.frames[project.current_frame].duration
 				* (1 / fps)
@@ -411,7 +411,7 @@ func _on_AnimationTimer_timeout() -> void:
 					is_animation_running = false
 				1:  # Cycle loop
 					project.selected_cels.clear()
-					project.emit_signal("cel_changed", first_frame, -1)
+					project.change_cel(first_frame, -1)
 					Global.animation_timer.wait_time = (
 						project.frames[project.current_frame].duration
 						* (1 / fps)
@@ -424,7 +424,7 @@ func _on_AnimationTimer_timeout() -> void:
 	else:
 		if project.current_frame > first_frame:
 			project.selected_cels.clear()
-			project.emit_signal("cel_changed", project.current_frame - 1, -1)
+			project.change_cel(project.current_frame - 1, -1)
 			Global.animation_timer.wait_time = (
 				project.frames[project.current_frame].duration
 				* (1 / fps)
@@ -439,7 +439,7 @@ func _on_AnimationTimer_timeout() -> void:
 					is_animation_running = false
 				1:  # Cycle loop
 					project.selected_cels.clear()
-					project.emit_signal("cel_changed", last_frame, -1)
+					project.change_cel(last_frame, -1)
 					Global.animation_timer.wait_time = (
 						project.frames[project.current_frame].duration
 						* (1 / fps)
@@ -501,7 +501,7 @@ func _on_NextFrame_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	project.selected_cels.clear()
 	if project.current_frame < project.frames.size() - 1:
-		project.emit_signal("cel_changed", project.current_frame + 1, -1)
+		project.change_cel(project.current_frame + 1, -1)
 
 
 func _on_PreviousFrame_pressed() -> void:
@@ -509,19 +509,19 @@ func _on_PreviousFrame_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	project.selected_cels.clear()
 	if project.current_frame > 0:
-		project.emit_signal("cel_changed", project.current_frame - 1, -1)
+		project.change_cel(project.current_frame - 1, -1)
 
 
 func _on_LastFrame_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.selected_cels.clear()
-	Global.current_project.emit_signal("cel_changed", Global.current_project.frames.size() - 1, -1)
+	Global.current_project.change_cel(Global.current_project.frames.size() - 1, -1)
 
 
 func _on_FirstFrame_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.selected_cels.clear()
-	Global.current_project.emit_signal("cel_changed", 0, -1)
+	Global.current_project.change_cel(0, -1)
 
 
 func _on_FPSValue_value_changed(value: float) -> void:
@@ -591,8 +591,8 @@ func add_layer(type: int) -> void:
 	project.undo_redo.create_action("Add Layer")
 	project.undo_redo.add_do_method(project, "add_layers", [l], [new_layer_idx], [cels])
 	project.undo_redo.add_undo_method(project, "remove_layers", [new_layer_idx])
-	project.undo_redo.add_do_method(project, "_cel_changed", -1, new_layer_idx)
-	project.undo_redo.add_undo_method(project, "_cel_changed", -1, project.current_layer)
+	project.undo_redo.add_do_method(project, "change_cel", -1, new_layer_idx)
+	project.undo_redo.add_undo_method(project, "change_cel", -1, project.current_layer)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -651,9 +651,9 @@ func _on_CloneLayer_pressed() -> void:
 	project.undo_redo.add_do_method(project, "add_layers", clones, indices, cels)
 	project.undo_redo.add_undo_method(project, "remove_layers", indices)
 	project.undo_redo.add_do_method(
-		project, "_cel_changed", -1, project.current_layer + clones.size()
+		project, "change_cel", -1, project.current_layer + clones.size()
 	)
-	project.undo_redo.add_undo_method(project, "_cel_changed", -1, project.current_layer)
+	project.undo_redo.add_undo_method(project, "change_cel", -1, project.current_layer)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -680,8 +680,8 @@ func _on_RemoveLayer_pressed() -> void:
 	project.undo_redo.create_action("Remove Layer")
 	project.undo_redo.add_do_method(project, "remove_layers", indices)
 	project.undo_redo.add_undo_method(project, "add_layers", layers, indices, cels)
-	project.undo_redo.add_do_method(project, "_cel_changed", -1, max(indices[0] - 1, 0))
-	project.undo_redo.add_undo_method(project, "_cel_changed", -1, project.current_layer)
+	project.undo_redo.add_do_method(project, "change_cel", -1, max(indices[0] - 1, 0))
+	project.undo_redo.add_undo_method(project, "change_cel", -1, project.current_layer)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -737,8 +737,8 @@ func change_layer_order(up: bool) -> void:
 	project.undo_redo.add_undo_method(
 		project, "move_layers", to_indices, from_indices, from_parents
 	)
-	project.undo_redo.add_do_method(project, "_cel_changed", -1, to_index + child_count)
-	project.undo_redo.add_undo_method(project, "_cel_changed", -1, project.current_layer)
+	project.undo_redo.add_do_method(project, "change_cel", -1, to_index + child_count)
+	project.undo_redo.add_undo_method(project, "change_cel", -1, project.current_layer)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
@@ -797,8 +797,8 @@ func _on_MergeDownLayer_pressed() -> void:
 	project.undo_redo.add_undo_method(
 		project, "add_layers", [top_layer], [top_layer.index], [top_cels]
 	)
-	project.undo_redo.add_do_method(project, "_cel_changed", -1, bottom_layer.index)
-	project.undo_redo.add_undo_method(project, "_cel_changed", -1, top_layer.index)
+	project.undo_redo.add_do_method(project, "change_cel", -1, bottom_layer.index)
+	project.undo_redo.add_undo_method(project, "change_cel", -1, top_layer.index)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()

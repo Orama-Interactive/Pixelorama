@@ -3,8 +3,7 @@ class_name Project
 extends Reference
 # A class for project properties.
 
-# warning-ignore:unused_signal
-signal cel_changed(frame, layer)
+signal cel_changed
 
 var name := "" setget _name_changed
 var size: Vector2 setget _size_changed
@@ -62,7 +61,6 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	size = _size
 	tiles = Tiles.new(size)
 	selection_map.create(size.x, size.y, false, Image.FORMAT_LA8)
-	connect("cel_changed", self, "_cel_changed")
 
 	Global.tabs.add_tab(name)
 	OpenSave.current_save_paths.append("")
@@ -468,7 +466,7 @@ func _size_changed(value: Vector2) -> void:
 	size = value
 
 
-func _cel_changed(new_frame: int, new_layer := -1) -> void:
+func change_cel(new_frame: int, new_layer := -1) -> void:
 	if new_frame < 0:
 		new_frame = current_frame
 	if new_layer < 0:
@@ -520,6 +518,7 @@ func _cel_changed(new_frame: int, new_layer := -1) -> void:
 		Global.layer_opacity_slider.value = cel_opacity * 100
 	Global.canvas.update()
 	Global.transparent_checker.update_rect()
+	emit_signal("cel_changed")
 
 
 func toggle_frame_buttons() -> void:

@@ -78,11 +78,9 @@ func _on_CelButton_pressed() -> void:
 				project.selected_cels.append(frame_layer)
 
 		if change_cel:
-			project.emit_signal("cel_changed", frame, layer)
+			project.change_cel(frame, layer)
 		else:
-			project.emit_signal(
-				"cel_changed", project.selected_cels[0][0], project.selected_cels[0][1]
-			)
+			project.change_cel(project.selected_cels[0][0], project.selected_cels[0][1])
 			release_focus()
 
 	elif Input.is_action_just_released("right_mouse"):
@@ -264,9 +262,9 @@ func drop_data(_pos, data) -> void:
 		project.undo_redo.add_do_method(project, "move_cel", drop_frame, to_frame, layer)
 		project.undo_redo.add_undo_method(project, "move_cel", to_frame, drop_frame, layer)
 
-	project.undo_redo.add_do_method(project, "_cel_changed", frame, layer)
+	project.undo_redo.add_do_method(project, "change_cel", frame, layer)
 	project.undo_redo.add_undo_method(
-		project, "_cel_changed", project.current_frame, project.current_layer
+		project, "change_cel", project.current_frame, project.current_layer
 	)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
