@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2022-12-02 00:33\n"
+"PO-Revision-Date: 2023-01-02 03:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -175,7 +175,7 @@ msgid "Smear options:"
 msgstr "Opciones de Smear:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Tolerancia:"
 
 msgid "Initial angle:"
 msgstr "Ángulo inicial:"
@@ -229,7 +229,7 @@ msgid "Use Current Frame"
 msgstr "Utilizar Fotograma actual"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Restablecer máscara"
 
 msgid "Window Opacity"
 msgstr "Opacidad de Ventana"
@@ -337,7 +337,7 @@ msgid "New layer"
 msgstr "Nueva capa"
 
 msgid "New reference image"
-msgstr ""
+msgstr "Nueva imagen de referencia"
 
 msgid "New palette"
 msgstr "Nueva paleta"
@@ -389,7 +389,7 @@ msgstr "Archivo existente, ¿Sobrescribir?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "Los siguientes archivos ya existen. ¿Deseas sobreescribirlos? %s"
 
 msgid "Directory path is not valid!"
 msgstr "¡Ruta de directorio no válida!"
@@ -463,26 +463,26 @@ msgstr "Fondo:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Fotogramas seleccionados"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Capas:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Capas visibles"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Capas seleccionadas"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Capa de píxeles:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Capa de grupo:"
 
 msgid "Direction:"
 msgstr "Dirección:"
@@ -510,7 +510,7 @@ msgstr "Filas:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Exportar dimensiones:"
 
 msgid "Path:"
 msgstr "Ruta:"
@@ -526,7 +526,7 @@ msgstr "Archivo:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Opciones avanzadas"
 
 msgid "Interpolation:"
 msgstr "Interpolación:"
@@ -578,7 +578,7 @@ msgstr "Rendimiento"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Controladores"
 
 msgid "Extensions"
 msgstr "Extensiones"
@@ -591,7 +591,7 @@ msgstr "Indicadores"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Pixelorama debe ser reiniciado para que los cambios surtan efecto."
 
 msgid "On"
 msgstr "Activar"
@@ -744,17 +744,18 @@ msgid "Gradient Map"
 msgstr "Mapa de degradado"
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "Dividir en partes iguales"
 
 msgid "Parts:"
-msgstr ""
+msgstr "Partes:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "Añadir punto al final"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr ""
+msgstr "Si está activado, el último punto se añade al final del gradiente.\n"
+"Desactiva esto si deseas convertir el gradiente para tener interpolación constante, para que el último color sea tomado en cuenta."
 
 msgid "Linear"
 msgstr "Lineal"
@@ -973,7 +974,7 @@ msgid "Dutch"
 msgstr "Holandés"
 
 msgid "Belarusian"
-msgstr ""
+msgstr "Bielorruso"
 
 msgid "Development Team"
 msgstr "Equipo de desarrollo"
@@ -1450,7 +1451,7 @@ msgstr "0: Color del propio pincel, 100: el color seleccionado actualmente"
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Rellenar área:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
@@ -2187,5 +2188,5 @@ msgid "Right Tool Options"
 msgstr "Opciones de Herramienta Derecha"
 
 msgid "Reference Images"
-msgstr ""
+msgstr "Imágenes de referencia"
 
