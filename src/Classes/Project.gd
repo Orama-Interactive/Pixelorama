@@ -3,8 +3,6 @@ class_name Project
 extends Reference
 # A class for project properties.
 
-signal cel_changed
-
 var name := "" setget _name_changed
 var size: Vector2 setget _size_changed
 var undo_redo := UndoRedo.new()
@@ -518,7 +516,7 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 		Global.layer_opacity_slider.value = cel_opacity * 100
 	Global.canvas.update()
 	Global.transparent_checker.update_rect()
-	emit_signal("cel_changed")
+	Global.emit_signal("cel_changed")
 
 
 func toggle_frame_buttons() -> void:

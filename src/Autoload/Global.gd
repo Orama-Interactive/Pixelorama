@@ -1,6 +1,7 @@
 extends Node
 
 signal project_changed
+signal cel_changed
 
 enum LayerTypes { PIXEL, GROUP }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
@@ -491,6 +492,7 @@ func _project_changed(value: int) -> void:
 	connect("project_changed", current_project, "change_project")
 	emit_signal("project_changed")
 	disconnect("project_changed", current_project, "change_project")
+	emit_signal("cel_changed")
 
 
 func _renderer_changed(value: int) -> void:
