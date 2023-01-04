@@ -33,7 +33,7 @@ func get_current_cel_info() -> Dictionary:
 	# E.g the extension may try to use a GroupCel as a PixelCel (if it doesn't know the difference)
 	# So it's encouraged to use this function to access cels
 	var project = get_current_project()
-	var cel = project.frames[project.current_frame].cels[project.current_layer]
+	var cel = project.get_current_cel()
 	# Add cel types as we have more and more cels
 	if cel is PixelCel:
 		return {"cel": cel, "type": "PixelCel"}
