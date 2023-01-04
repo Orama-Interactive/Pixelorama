@@ -5,7 +5,7 @@ enum { FILE, EDIT, SELECT, IMAGE, VIEW, WINDOW, HELP }
 
 
 func show_error(text :String) -> void:
-	# usefull for displaying messages like "Incompatible API" etc...
+	# useful for displaying messages like "Incompatible API" etc...
 	Global.error_dialog.set_text(text)
 	Global.error_dialog.popup_centered()
 	Global.dialog_open(true)
