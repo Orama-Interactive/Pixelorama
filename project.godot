@@ -172,12 +172,12 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "ReferenceImage",
 "language": "GDScript",
-"path": "res://src/UI/Canvas/ReferenceImage.gd"
+"path": "res://src/UI/ReferenceImages/ReferenceImage.gd"
 }, {
 "base": "VBoxContainer",
 "class": "ReferencesPanel",
 "language": "GDScript",
-"path": "res://src/UI/ReferencesPanel.gd"
+"path": "res://src/UI/ReferenceImages/ReferencesPanel.gd"
 }, {
 "base": "Image",
 "class": "SelectionMap",

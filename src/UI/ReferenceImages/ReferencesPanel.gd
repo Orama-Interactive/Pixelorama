@@ -16,6 +16,6 @@ func project_changed():
 	# And update.
 	for ref in Global.current_project.reference_images:
 		ref.visible = true
-		var l = preload("res://src/UI/ReferenceImageButton.tscn").instance()
+		var l = preload("res://src/UI/ReferenceImages/ReferenceImageButton.tscn").instance()
 		l.element = ref
 		list.add_child(l)
