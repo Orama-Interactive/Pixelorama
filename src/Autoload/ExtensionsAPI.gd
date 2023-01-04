@@ -4,6 +4,13 @@ extends Node
 enum { FILE, EDIT, SELECT, IMAGE, VIEW, WINDOW, HELP }
 
 
+func show_error(text :String) -> void:
+	# usefull for displaying messages like "Incompatible API" etc...
+	Global.error_dialog.set_text(text)
+	Global.error_dialog.popup_centered()
+	Global.dialog_open(true)
+
+
 func get_api_version() -> int:
 	return ProjectSettings.get_setting("application/config/ExtensionsAPI_Version")
 
@@ -29,11 +36,11 @@ func get_current_cel_info() -> Dictionary:
 	var cel = project.frames[project.current_frame].cels[project.current_layer]
 	# Add cel types as we have more and more cels
 	if cel is PixelCel:
-		return {"cel" : cel, "type": "PixelCel"}
+		return {"cel": cel, "type": "PixelCel"}
 	elif cel is GroupCel:
-		return {"cel" : cel, "type": "GroupCel"}
+		return {"cel": cel, "type": "GroupCel"}
 	else:
-		return {"cel" : cel, "type": "BaseCel"}
+		return {"cel": cel, "type": "BaseCel"}
 
 
 func get_global() -> Global:
