@@ -20,6 +20,22 @@ func get_current_project() -> Project:
 	return Global.current_project
 
 
+func get_current_cel_info() -> Dictionary:
+	# As types of cel are added to Pixelorama,
+	# then the old extension would have no idea how to identify the types they use
+	# E.g the extension may try to use a GroupCel as a PixelCel (if it doesn't know the difference)
+	# So it's encouraged to use this function to access cels
+	var project = get_current_project()
+	var cel = project.frames[project.current_frame].cels[project.current_layer]
+	# Add cel types as we have more and more cels
+	if cel is PixelCel:
+		return {"cel" : cel, "type": "PixelCel"}
+	elif cel is GroupCel:
+		return {"cel" : cel, "type": "GroupCel"}
+	else:
+		return {"cel" : cel, "type": "BaseCel"}
+
+
 func get_global() -> Global:
 	return Global
 
@@ -160,7 +176,6 @@ func add_menu_item(menu_type: int, item_name: String, item_metadata, item_id := 
 	if item_id == -1:
 		idx = popup_menu.get_item_count() - 1
 	popup_menu.set_item_metadata(idx, item_metadata)
-
 	return idx
 
 
@@ -188,6 +203,9 @@ func add_tool(
 
 
 func remove_tool(tool_name: String) -> void:
+	# Re-assigning the tools in case the tool to be removed is also Active
+	Tools.assign_tool("Pencil", BUTTON_LEFT)
+	Tools.assign_tool("Eraser", BUTTON_RIGHT)
 	var tool_class: Tools.Tool = Tools.tools[tool_name]
 	if tool_class:
 		Tools.remove_tool(tool_class)
