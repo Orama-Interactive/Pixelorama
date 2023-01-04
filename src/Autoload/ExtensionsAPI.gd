@@ -4,7 +4,7 @@ extends Node
 enum { FILE, EDIT, SELECT, IMAGE, VIEW, WINDOW, HELP }
 
 
-func show_error(text :String) -> void:
+func show_error(text: String) -> void:
 	# useful for displaying messages like "Incompatible API" etc...
 	Global.error_dialog.set_text(text)
 	Global.error_dialog.popup_centered()
