@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/UI/PatternButton.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/Buttons/PatternButton.gd" type="Script" id=2]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 1, 1, 1 )
@@ -41,4 +41,5 @@ stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="." to="." method="_on_PatternButton_pressed"]

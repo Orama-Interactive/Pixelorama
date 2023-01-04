@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/ResizeCanvas.gd" type="Script" id=2]
 
 [node name="ResizeCanvas" type="ConfirmationDialog"]

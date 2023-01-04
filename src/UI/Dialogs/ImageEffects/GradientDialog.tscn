@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/GradientDialog.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="GradientDialog" type="ConfirmationDialog"]
 margin_right = 334.0

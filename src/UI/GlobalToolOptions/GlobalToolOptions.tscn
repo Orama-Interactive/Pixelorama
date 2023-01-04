@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/graphics/misc/horizontal_mirror_off.png" type="Texture" id=1]
 [ext_resource path="res://assets/graphics/misc/vertical_mirror_off.png" type="Texture" id=2]
-[ext_resource path="res://src/UI/GlobalToolOptions.gd" type="Script" id=3]
+[ext_resource path="res://src/UI/GlobalToolOptions/GlobalToolOptions.gd" type="Script" id=3]
 [ext_resource path="res://assets/graphics/misc/pixel_perfect_off.png" type="Texture" id=4]
 
 [node name="Global Tool Options" type="PanelContainer"]
