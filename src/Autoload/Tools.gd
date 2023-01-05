@@ -58,15 +58,15 @@ var tools := {
 		"paint_selection",
 		preload("res://src/Tools/SelectionTools/PaintSelect.tscn")
 	),
-	"Move": Tool.new("Move", "Move", "move", preload("res://src/Tools/Move.tscn")),
-	"Zoom": Tool.new("Zoom", "Zoom", "zoom", preload("res://src/Tools/Zoom.tscn")),
-	"Pan": Tool.new("Pan", "Pan", "pan", preload("res://src/Tools/Pan.tscn")),
+	"Move": Tool.new("Move", "Move", "move", preload("res://src/Tools/Move/Move.tscn")),
+	"Zoom": Tool.new("Zoom", "Zoom", "zoom", preload("res://src/Tools/Zoom/Zoom.tscn")),
+	"Pan": Tool.new("Pan", "Pan", "pan", preload("res://src/Tools/Pan/Pan.tscn")),
 	"ColorPicker":
 	Tool.new(
 		"ColorPicker",
 		"Color Picker",
 		"colorpicker",
-		preload("res://src/Tools/ColorPicker.tscn"),
+		preload("res://src/Tools/ColorPicker/ColorPicker.tscn"),
 		"Select a color from a pixel of the sprite"
 	),
 	"Pencil":
@@ -74,7 +74,7 @@ var tools := {
 		"Pencil",
 		"Pencil",
 		"pencil",
-		preload("res://src/Tools/Pencil.tscn"),
+		preload("res://src/Tools/Pencil/Pencil.tscn"),
 		"Hold %s to make a line",
 		["draw_create_line"]
 	),
@@ -83,19 +83,19 @@ var tools := {
 		"Eraser",
 		"Eraser",
 		"eraser",
-		preload("res://src/Tools/Eraser.tscn"),
+		preload("res://src/Tools/Eraser/Eraser.tscn"),
 		"Hold %s to make a line",
 		["draw_create_line"]
 	),
-	"Bucket": Tool.new("Bucket", "Bucket", "fill", preload("res://src/Tools/Bucket.tscn")),
+	"Bucket": Tool.new("Bucket", "Bucket", "fill", preload("res://src/Tools/Bucket/Bucket.tscn")),
 	"Shading":
-	Tool.new("Shading", "Shading Tool", "shading", preload("res://src/Tools/Shading.tscn")),
+	Tool.new("Shading", "Shading Tool", "shading", preload("res://src/Tools/Shading/Shading.tscn")),
 	"LineTool":
 	Tool.new(
 		"LineTool",
 		"Line Tool",
 		"linetool",
-		preload("res://src/Tools/LineTool.tscn"),
+		preload("res://src/Tools/Line/LineTool.tscn"),
 		"""Hold %s to snap the angle of the line
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
@@ -106,7 +106,7 @@ Hold %s to displace the shape's origin""",
 		"RectangleTool",
 		"Rectangle Tool",
 		"rectangletool",
-		preload("res://src/Tools/RectangleTool.tscn"),
+		preload("res://src/Tools/Rectangle/RectangleTool.tscn"),
 		"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
@@ -117,7 +117,7 @@ Hold %s to displace the shape's origin""",
 		"EllipseTool",
 		"Ellipse Tool",
 		"ellipsetool",
-		preload("res://src/Tools/EllipseTool.tscn"),
+		preload("res://src/Tools/Ellipse/EllipseTool.tscn"),
 		"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",

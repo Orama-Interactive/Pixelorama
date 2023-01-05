@@ -1,4 +1,4 @@
-extends "res://src/Tools/Draw.gd"
+extends "res://src/Tools/Draw/Draw.gd"
 
 var _prev_mode := false
 var _last_position := Vector2.INF
