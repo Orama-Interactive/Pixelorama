@@ -401,8 +401,8 @@ margin_bottom = 716.0
 [node name="Reference Images" parent="DockableContainer" instance=ExtResource( 11 )]
 visible = false
 margin_left = 1079.0
-margin_right = -80.0
-margin_bottom = -684.0
+margin_right = 1080.0
+margin_bottom = 1004.0
 
 [connection signal="item_rect_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_item_rect_changed"]
 [connection signal="visibility_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_visibility_changed"]
