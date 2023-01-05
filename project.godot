@@ -67,7 +67,7 @@ _global_script_classes=[ {
 "base": "Popup",
 "class": "Brushes",
 "language": "GDScript",
-"path": "res://src/UI/BrushesPopup.gd"
+"path": "res://src/UI/Buttons/BrushesPopup.gd"
 }, {
 "base": "Node2D",
 "class": "Canvas",
@@ -152,7 +152,7 @@ _global_script_classes=[ {
 "base": "PopupPanel",
 "class": "Patterns",
 "language": "GDScript",
-"path": "res://src/UI/PatternsPopup.gd"
+"path": "res://src/UI/Buttons/PatternsPopup.gd"
 }, {
 "base": "BaseCel",
 "class": "PixelCel",
@@ -172,12 +172,12 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "ReferenceImage",
 "language": "GDScript",
-"path": "res://src/UI/Canvas/ReferenceImage.gd"
+"path": "res://src/UI/ReferenceImages/ReferenceImage.gd"
 }, {
 "base": "VBoxContainer",
 "class": "ReferencesPanel",
 "language": "GDScript",
-"path": "res://src/UI/ReferencesPanel.gd"
+"path": "res://src/UI/ReferenceImages/ReferencesPanel.gd"
 }, {
 "base": "Image",
 "class": "SelectionMap",

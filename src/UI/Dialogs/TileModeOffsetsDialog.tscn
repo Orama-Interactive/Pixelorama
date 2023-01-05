@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Canvas/TileMode.gd" type="Script" id=2]
 [ext_resource path="res://src/UI/Dialogs/TileModeOffsetsDialog.gd" type="Script" id=3]
 

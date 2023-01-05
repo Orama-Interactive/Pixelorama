@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Nodes/GradientEdit.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/GradientMapDialog.gd" type="Script" id=3]
 

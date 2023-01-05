@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/UI/BrushButton.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/Buttons/BrushButton.gd" type="Script" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -47,6 +47,7 @@ text = "X"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="mouse_entered" from="." to="." method="_on_BrushButton_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_BrushButton_mouse_exited"]
 [connection signal="pressed" from="." to="." method="_on_BrushButton_pressed"]

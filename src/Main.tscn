@@ -2,10 +2,10 @@
 
 [ext_resource path="res://assets/themes/dark/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
-[ext_resource path="res://src/UI/TopMenuContainer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/UI/TopMenuContainer/TopMenuContainer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/UI/UI.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/UI/PatternsPopup.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/UI/BrushesPopup.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/UI/Buttons/PatternsPopup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/UI/Buttons/BrushesPopup.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/ImageEffects.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/Dialogs/SaveSpriteHTML5.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/UI/Timeline/FrameProperties.tscn" type="PackedScene" id=9]
@@ -86,6 +86,7 @@ margin_bottom = 388.0
 [node name="UnsavedCanvasDialog" type="ConfirmationDialog" parent="Dialogs"]
 margin_right = 467.0
 margin_bottom = 70.0
+rect_min_size = Vector2( 180, 63 )
 window_title = "Unsaved Image"
 dialog_text = "You have unsaved changes. If you proceed, the progress you have made will be lost."
 
@@ -155,5 +156,5 @@ visible = false
 [connection signal="custom_action" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_custom_action"]
 [connection signal="popup_hide" from="Dialogs/QuitAndSaveDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/ErrorDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/BackupConfirmation" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/BackupConfirmation" to="." method="_on_BackupConfirmation_popup_hide"]
+[connection signal="popup_hide" from="Dialogs/BackupConfirmation" to="." method="_can_draw_true"]
