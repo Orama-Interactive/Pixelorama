@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=1]
+[ext_resource path="res://src/UI/TransparentChecker.gd" type="Script" id=2]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/size = 10.0
-shader_param/alpha = 1.0
 shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
 shader_param/color2 = Color( 1, 1, 1, 1 )
 shader_param/offset = Vector2( 0, 0 )
@@ -14,62 +14,13 @@ shader_param/rect_size = Vector2( 0, 0 )
 shader_param/follow_movement = false
 shader_param/follow_scale = false
 
-[sub_resource type="GDScript" id=2]
-script/source = "extends ColorRect
-
-
-func _ready() -> void:
-	update_rect()
-
-
-func update_rect() -> void:
-	rect_size = Global.current_project.size
-	if self == Global.transparent_checker:
-		fit_rect(Global.current_project.tiles.get_bounding_rect())
-		Global.second_viewport.get_node(\"Viewport/TransparentChecker\").update_rect()
-		Global.small_preview_viewport.get_node(\"Viewport/TransparentChecker\").update_rect()
-	material.set_shader_param(\"size\", Global.checker_size)
-	material.set_shader_param(\"color1\", Global.checker_color_1)
-	material.set_shader_param(\"color2\", Global.checker_color_2)
-	material.set_shader_param(\"follow_movement\", Global.checker_follow_movement)
-	material.set_shader_param(\"follow_scale\", Global.checker_follow_scale)
-
-
-func update_offset(offset: Vector2, scale: Vector2) -> void:
-	material.set_shader_param(\"offset\", offset)
-	material.set_shader_param(\"scale\", scale)
-
-
-func _on_TransparentChecker_resized() -> void:
-	material.set_shader_param(\"rect_size\", rect_size)
-
-
-func fit_rect(rect: Rect2) -> void:
-	rect_position = rect.position
-	rect_size = rect.size
-
-
-func update_transparency(value: float) -> void:
-	# Change the transparency status of the parent viewport and the root viewport
-	if value == 1.0:
-		get_parent().transparent_bg = false
-		get_tree().get_root().transparent_bg = false
-	else:
-		get_parent().transparent_bg = true
-		get_tree().get_root().transparent_bg = true
-
-	# Set a minimum amount for the fade so the canvas won't disappear
-	material.set(\"shader_param/alpha\", clamp(value, 0.1, 1))
-"
-
 [node name="TransparentChecker" type="ColorRect"]
 material = SubResource( 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
-script = SubResource( 2 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
 [connection signal="resized" from="." to="." method="_on_TransparentChecker_resized"]
