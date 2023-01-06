@@ -31,14 +31,13 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		var tmp_transform = get_canvas_transform().affine_inverse()
 		var tmp_position = Global.main_viewport.get_local_mouse_position()
-		var mouse_point = (
-			tmp_transform.basis_xform(tmp_position) +
-			tmp_transform.origin
-		).snapped(Vector2(0.5, 0.5))
+		var mouse_point = (tmp_transform.basis_xform(tmp_position) + tmp_transform.origin).snapped(
+			Vector2(0.5, 0.5)
+		)
 
 		var project_size = Global.current_project.size
 		if Rect2(Vector2.ZERO, project_size).has_point(mouse_point):
-				visible = true
+			visible = true
 		else:
 			visible = false
 			return
