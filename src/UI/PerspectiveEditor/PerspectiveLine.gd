@@ -40,7 +40,8 @@ func hide_perspective_line():
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if track_mouse:
-			if !Global.can_draw:
+			if !Global.can_draw or !Global.has_focus:
+				hide_perspective_line()
 				return
 			default_color.a = 0.5
 			var tmp_transform = get_canvas_transform().affine_inverse()
@@ -68,20 +69,16 @@ func _input(event: InputEvent) -> void:
 				)
 			else:
 				hide_perspective_line()
-
 		update()
 
 
 func _draw() -> void:
 	draw_circle(_data.start, Global.camera.zoom.x * 5, default_color)
 	width = Global.camera.zoom.x * 2
-
 	if hidden:  # Hidden line
 		return
-
 	var viewport_size: Vector2 = Global.main_viewport.rect_size
 	var zoom: Vector2 = Global.camera.zoom
-
 	# viewport_poly is an array of the points that make up the corners of the viewport
 	var viewport_poly := [
 		Vector2.ZERO, Vector2(viewport_size.x, 0), viewport_size, Vector2(0, viewport_size.y)
@@ -101,6 +98,5 @@ func _draw() -> void:
 				)
 			)
 		)
-
 	# If there's no intersection with a viewport edge, show string in top left corner
 	draw_set_transform(viewport_poly[0], Global.camera.rotation, zoom * 2)
