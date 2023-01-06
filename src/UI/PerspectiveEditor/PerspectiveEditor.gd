@@ -3,6 +3,7 @@ extends Control
 var axes: Node2D
 var do_pool = []  # A pool that stores data of points removed by undo
 var delete_pool = []  # A pool that containg deleted data and their index
+var vanishing_point_res := preload("res://src/UI/PerspectiveEditor/VanishingPoint.tscn")
 
 onready var vanishing_point_container = $"%VanishingPointContainer"
 
@@ -22,13 +23,13 @@ func update():
 		c.queue_free()
 	for idx in Global.current_project.vanishing_points.size():
 		var point_data = Global.current_project.vanishing_points[idx]
-		var vanishing_point := preload("res://src/UI/PerspectiveEditor/VanishingPoint.tscn").instance()
+		var vanishing_point := vanishing_point_res.instance()
 		vanishing_point_container.add_child(vanishing_point)
 		vanishing_point.initiate(point_data, idx)
 
 
 func add_vanishing_point(is_redo := false):
-	var vanishing_point := preload("res://src/UI/PerspectiveEditor/VanishingPoint.tscn").instance()
+	var vanishing_point := vanishing_point_res.instance()
 	vanishing_point_container.add_child(vanishing_point)
 	if is_redo and !do_pool.empty():
 		vanishing_point.initiate(do_pool.pop_back())
