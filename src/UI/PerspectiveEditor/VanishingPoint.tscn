@@ -105,20 +105,24 @@ margin_right = 261.0
 margin_bottom = 44.0
 
 [node name="Spacer" type="Control" parent="CollapsibleContainer/HBoxContainer"]
-margin_right = 60.0
+margin_right = 20.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 60, 0 )
+rect_min_size = Vector2( 20, 0 )
+
+[node name="VSeparator" type="VSeparator" parent="CollapsibleContainer/HBoxContainer"]
+margin_right = 4.0
+margin_bottom = 40.0
 
 [node name="LinesContainer" type="VBoxContainer" parent="CollapsibleContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 64.0
+margin_left = 24.0
 margin_right = 261.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="AddLine" type="Button" parent="CollapsibleContainer/HBoxContainer/LinesContainer"]
-margin_right = 197.0
+margin_right = 237.0
 margin_bottom = 20.0
 text = "Add Line"
 

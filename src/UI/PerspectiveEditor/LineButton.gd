@@ -1,10 +1,8 @@
 extends Button
 
-onready var properties = $DialogContainer/Properties
+onready var length_slider = $"%LengthSlider"
 
-
-func _on_LineButton_pressed():
-	var pop_position = rect_global_position
-	pop_position.y += rect_size.y * 2
-	properties.popup(Rect2(pop_position, properties.rect_size))
-	properties.window_title = str("Line ", get_index() + 1, " Properties")
+func _ready():
+	var p_size = Global.current_project.size
+	var suitable_length = sqrt(pow(p_size.x, 2) + pow(p_size.y, 2))
+	length_slider.max_value = suitable_length

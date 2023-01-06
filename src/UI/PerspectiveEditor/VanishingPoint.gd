@@ -4,7 +4,7 @@ onready var color_picker_button = $"%ColorPickerButton"
 onready var title = $"%Title"
 onready var pos_x = $"%X"
 onready var pos_y = $"%Y"
-onready var lines_container = $"%LinesContainer"
+onready var line_buttons_container = $"%LinesContainer"
 
 var perspective_lines = []
 var tracker_line :PerspectiveLine
@@ -92,22 +92,27 @@ func _remove_line_pressed(line_button):
 
 # Methods
 func add_line(loaded_line_data = null ,is_tracker := false):
+	var p_size = Global.current_project.size
 	var default_line_data = {
 		"start": Vector2(data.position_x, data.position_y),
 		"angle": 0,
 		"length": 19999,
 		"color" : Color(data.color)
 	}
-	# Check if we want the data to be something else
+	if default_line_data.start.x > p_size.x:
+		# If new line is created ahed of half project distance then
+		# reverse it's angle (for beautification)
+		default_line_data.angle = 180
+
+	# Check if we have loading data instead of creating line
+	# Then THAT should be our data
 	if loaded_line_data:
 		default_line_data = loaded_line_data
 
-	if is_tracker:
-		if tracker_line != null:
-		# if we want tracker line and it's already present
+	if is_tracker: # if we are creating tracker line then length adjustment is not required
+		if tracker_line != null: # Also if the tracker line already exists then cancel creation
 			return
-	else:
-		var p_size = Global.current_project.size
+	else: # If we are not creating a perspective line then adjust it's length
 		var suitable_length = sqrt(pow(p_size.x, 2) + pow(p_size.y, 2))
 		default_line_data.length = suitable_length
 
@@ -117,19 +122,22 @@ func add_line(loaded_line_data = null ,is_tracker := false):
 	).instance()
 	line.initiate(default_line_data)
 
-	if is_tracker: # It is a line which always follow the mouse
+	# Set it's mode accordingly
+	if is_tracker: # Settings for Tracker mode
 		line.track_mouse = true
 		tracker_line = line
 		tracker_line.hide_perspective_line()
-	else: # Follow the usuall procedure
+	else: # Settings for Normal mode
 		var line_button = preload("res://src/UI/PerspectiveEditor/LineButton.tscn").instance()
-		lines_container.add_child(line_button)
+		line_buttons_container.add_child(line_button)
 		var index = line_button.get_parent().get_child_count() - 2
 		line_button.get_parent().move_child(line_button, index)
-		line_button.text = str("Line", line_button.get_index() + 1)
+
+		var line_name = str("Line", line_button.get_index() + 1, " (", int(default_line_data.angle), "°)")
+		line_button.text = line_name
 
 		var properties = line_button.find_node("Properties")
-		var remove_button = properties.add_button("Delete", false, "Delete")
+		var remove_button = properties.find_node("Delete")
 		var angle_slider = properties.find_node("AngleSlider")
 		var length_slider = properties.find_node("LengthSlider")
 
@@ -182,6 +190,9 @@ func refresh_line(index :int):
 		"length": data.lengths[index],
 		"color" : Color(data.color)
 	}
+	var line_button = line_buttons_container.get_child(index)
+	var line_name = str("Line", line_button.get_index() + 1, " (", int(line_data.angle), "°)")
+	line_button.text = line_name
 	perspective_lines[index].refresh(line_data)
 
 
