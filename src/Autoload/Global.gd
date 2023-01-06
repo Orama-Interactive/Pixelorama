@@ -20,6 +20,7 @@ enum ViewMenu {
 	SHOW_PIXEL_GRID,
 	SHOW_RULERS,
 	SHOW_GUIDES,
+	SHOW_MOUSE_GUIDES,
 }
 enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, MOVABLE_PANELS, ZEN_MODE, FULLSCREEN_MODE }
 enum ImageMenu {
@@ -137,6 +138,7 @@ var draw_grid := false
 var draw_pixel_grid := false
 var show_rulers := true
 var show_guides := true
+var show_mouse_guides := false
 
 # Onion skinning options
 var onion_skinning := false
