@@ -21,9 +21,7 @@ func update():
 		c.queue_free()
 	for idx in Global.current_project.vanishing_points.size():
 		var point_data = Global.current_project.vanishing_points[idx]
-		var vanishing_point := preload(
-			"res://src/UI/PerspectiveEditor/VanishingPoint.tscn"
-		).instance()
+		var vanishing_point := preload("res://src/UI/PerspectiveEditor/VanishingPoint.tscn").instance()
 		vanishing_point_container.add_child(vanishing_point)
 		vanishing_point.initiate(point_data, idx)
 
