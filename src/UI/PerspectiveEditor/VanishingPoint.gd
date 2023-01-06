@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 onready var color_picker_button = $"%ColorPickerButton"
-onready var title = $"%Title"
+onready var title = $"%PointCollapseContainer"
 onready var pos_x = $"%X"
 onready var pos_y = $"%Y"
 onready var line_buttons_container = $"%LinesContainer"
@@ -17,7 +17,7 @@ var data = {
 	}
 
 
-func initiate(start_data = null) -> void:
+func initiate(start_data = null, idx = -1) -> void:
 	if start_data:
 		data = start_data.duplicate()
 	add_line(null ,true)
@@ -29,7 +29,10 @@ func initiate(start_data = null) -> void:
 			"color" : Color(data.color)
 		}
 		add_line(loaded_line_data)
-	title.text = str("Point: ",get_parent().get_child_count())
+	if idx != -1:
+		title.point_text = str("Point: ",idx + 1)
+	else:
+		title.point_text = str("Point: ",get_parent().get_child_count())
 	pos_x.value = data.position_x
 	pos_y.value = data.position_y
 	color_picker_button.color = Color(data.color)
@@ -47,8 +50,7 @@ func _on_AddLine_pressed() -> void:
 
 
 func _on_Delete_pressed() -> void:
-	queue_free()
-	update_data_to_project(true)
+	Global.perspective_editor.delete_point(get_index())
 
 
 func _on_color_changed(_color :Color):
