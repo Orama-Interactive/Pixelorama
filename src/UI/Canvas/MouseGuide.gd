@@ -10,10 +10,10 @@ func _ready() -> void:
 	# Add a subtle difference to the normal guide color by mixing in some green
 	default_color = Global.guide_color.linear_interpolate(Color(0.2, 0.92, 0.2), .6)
 	width = Global.camera.zoom.x * 2
-	Draw_Perspective_line()
+	draw_guide_line()
 
 
-func Draw_Perspective_line():
+func draw_guide_line():
 	if type == Types.HORIZONTAL:
 		points[0] = Vector2(-19999, 0)
 		points[1] = Vector2(19999, 0)
