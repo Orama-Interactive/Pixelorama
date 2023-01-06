@@ -16,6 +16,7 @@ onready var grid = $Grid
 onready var selection = $Selection
 onready var indicators = $Indicators
 onready var previews = $Previews
+onready var mouse_guide_container = $MouseGuideContainer
 
 
 func _ready() -> void:

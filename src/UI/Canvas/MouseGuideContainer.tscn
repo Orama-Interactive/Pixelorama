@@ -9,7 +9,6 @@ atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 8, 1 )
 
 [node name="MouseGuideContainer" type="Node2D"]
-visible = false
 
 [node name="Vertical" type="Line2D" parent="."]
 points = PoolVector2Array( 0, 19999, 0, -19999 )
