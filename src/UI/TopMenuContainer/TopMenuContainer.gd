@@ -158,8 +158,13 @@ func _setup_view_menu() -> void:
 	var show_guides: bool = Global.config_cache.get_value(
 		"view_menu", "show_guides", Global.show_guides
 	)
+	var show_mouse_guides: bool = Global.config_cache.get_value(
+		"view_menu", "show_mouse_guides", Global.show_mouse_guides
+	)
 	if show_guides != Global.show_guides:
 		_toggle_show_guides()
+	if show_mouse_guides != Global.show_mouse_guides:
+		_toggle_show_mouse_guides()
 
 
 func _setup_tile_mode_submenu(item: String) -> void:
@@ -584,8 +589,9 @@ func _toggle_show_mouse_guides() -> void:
 	Global.show_mouse_guides = !Global.show_mouse_guides
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_MOUSE_GUIDES, Global.show_mouse_guides)
 	if Global.show_mouse_guides:
-		Global.canvas.mouse_guide_container.get_child(0).update()
-		Global.canvas.mouse_guide_container.get_child(1).update()
+		if Global.canvas.mouse_guide_container:
+			Global.canvas.mouse_guide_container.get_child(0).update()
+			Global.canvas.mouse_guide_container.get_child(1).update()
 
 
 func _toggle_zen_mode() -> void:
