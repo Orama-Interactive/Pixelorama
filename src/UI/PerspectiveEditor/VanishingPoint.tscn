@@ -50,24 +50,40 @@ margin_right = 261.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="Content" type="VBoxContainer" parent="."]
+[node name="Content" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 margin_top = 24.0
 margin_right = 261.0
 margin_bottom = 124.0
 
-[node name="PointInfo" type="HBoxContainer" parent="Content"]
+[node name="Spacer" type="Control" parent="Content"]
+margin_right = 5.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 5, 0 )
+
+[node name="VSeparator" type="VSeparator" parent="Content"]
+margin_left = 9.0
+margin_right = 13.0
+margin_bottom = 100.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content"]
+margin_left = 17.0
 margin_right = 261.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+
+[node name="PointInfo" type="HBoxContainer" parent="Content/VBoxContainer"]
+margin_right = 244.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 0, 45 )
 
-[node name="Panel" type="Panel" parent="Content/PointInfo"]
+[node name="Panel" type="Panel" parent="Content/VBoxContainer/PointInfo"]
 self_modulate = Color( 1, 1, 1, 0.862745 )
 margin_right = 105.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 105, 0 )
 
-[node name="Label" type="Label" parent="Content/PointInfo/Panel"]
+[node name="Label" type="Label" parent="Content/VBoxContainer/PointInfo/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 5
@@ -75,52 +91,52 @@ text = "Position:"
 align = 1
 valign = 1
 
-[node name="Position" type="VBoxContainer" parent="Content/PointInfo"]
+[node name="Position" type="VBoxContainer" parent="Content/VBoxContainer/PointInfo"]
 margin_left = 109.0
-margin_right = 261.0
+margin_right = 244.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 
-[node name="X" parent="Content/PointInfo/Position" instance=ExtResource( 1 )]
+[node name="X" parent="Content/VBoxContainer/PointInfo/Position" instance=ExtResource( 1 )]
 unique_name_in_owner = true
-margin_right = 152.0
+margin_right = 135.0
 step = 0.5
 allow_greater = true
 allow_lesser = true
 prefix = "X :"
 
-[node name="Y" parent="Content/PointInfo/Position" instance=ExtResource( 1 )]
+[node name="Y" parent="Content/VBoxContainer/PointInfo/Position" instance=ExtResource( 1 )]
 unique_name_in_owner = true
 margin_top = 28.0
-margin_right = 152.0
+margin_right = 135.0
 margin_bottom = 52.0
 step = 0.5
 allow_greater = true
 allow_lesser = true
 prefix = "Y :"
 
-[node name="CollapsibleContainer" parent="Content" instance=ExtResource( 3 )]
+[node name="CollapsibleContainer" parent="Content/VBoxContainer" instance=ExtResource( 3 )]
 margin_top = 56.0
-margin_right = 261.0
+margin_right = 244.0
 margin_bottom = 76.0
 text = "Lines"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Content/CollapsibleContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/VBoxContainer/CollapsibleContainer"]
 visible = false
 margin_top = 24.0
 margin_right = 261.0
 margin_bottom = 44.0
 
-[node name="Spacer" type="Control" parent="Content/CollapsibleContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="Content/VBoxContainer/CollapsibleContainer/HBoxContainer"]
 margin_right = 20.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 0 )
 
-[node name="VSeparator" type="VSeparator" parent="Content/CollapsibleContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Content/VBoxContainer/CollapsibleContainer/HBoxContainer"]
 margin_right = 4.0
 margin_bottom = 40.0
 
-[node name="LinesContainer" type="VBoxContainer" parent="Content/CollapsibleContainer/HBoxContainer"]
+[node name="LinesContainer" type="VBoxContainer" parent="Content/VBoxContainer/CollapsibleContainer/HBoxContainer"]
 unique_name_in_owner = true
 margin_left = 24.0
 margin_right = 261.0
@@ -128,14 +144,14 @@ margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="AddLine" type="Button" parent="Content/CollapsibleContainer/HBoxContainer/LinesContainer"]
+[node name="AddLine" type="Button" parent="Content/VBoxContainer/CollapsibleContainer/HBoxContainer/LinesContainer"]
 margin_right = 237.0
 margin_bottom = 20.0
 text = "Add Line"
 
-[node name="Delete" type="Button" parent="Content"]
+[node name="Delete" type="Button" parent="Content/VBoxContainer"]
 margin_top = 80.0
-margin_right = 261.0
+margin_right = 244.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 40, 0 )
 text = "Delete Point"
@@ -147,5 +163,5 @@ margin_bottom = 138.0
 custom_constants/separation = 10
 
 [connection signal="toggled" from="TitleContainer/PointCollapseContainer" to="TitleContainer/PointCollapseContainer" method="_on_Button_toggled"]
-[connection signal="pressed" from="Content/CollapsibleContainer/HBoxContainer/LinesContainer/AddLine" to="." method="_on_AddLine_pressed"]
-[connection signal="pressed" from="Content/Delete" to="." method="_on_Delete_pressed"]
+[connection signal="pressed" from="Content/VBoxContainer/CollapsibleContainer/HBoxContainer/LinesContainer/AddLine" to="." method="_on_AddLine_pressed"]
+[connection signal="pressed" from="Content/VBoxContainer/Delete" to="." method="_on_Delete_pressed"]

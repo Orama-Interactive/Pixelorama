@@ -24,55 +24,49 @@ __meta__ = {
 
 [node name="Header" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 262.0
-margin_bottom = 14.0
+margin_bottom = 30.0
 custom_constants/separation = 0
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/Header"]
-margin_right = 73.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-
 [node name="Label" type="Label" parent="VBoxContainer/Header"]
-margin_left = 73.0
-margin_right = 189.0
-margin_bottom = 14.0
+margin_top = 8.0
+margin_right = 232.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
 theme_type_variation = "Header"
 text = "Perspective Editor"
+align = 1
+valign = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Header"]
-margin_left = 189.0
+[node name="AddPoint" type="Button" parent="VBoxContainer/Header"]
+margin_left = 232.0
 margin_right = 262.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+text = "+"
+clip_text = true
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 18.0
+margin_top = 34.0
 margin_right = 262.0
-margin_bottom = 22.0
+margin_bottom = 38.0
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+margin_top = 42.0
+margin_right = 262.0
+margin_bottom = 46.0
 
 [node name="Content" type="ScrollContainer" parent="VBoxContainer"]
-margin_top = 26.0
+margin_top = 50.0
 margin_right = 262.0
-margin_bottom = 178.0
+margin_bottom = 210.0
 size_flags_vertical = 3
 
 [node name="VanishingPointContainer" type="VBoxContainer" parent="VBoxContainer/Content"]
 unique_name_in_owner = true
 margin_right = 262.0
-margin_bottom = 152.0
+margin_bottom = 160.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 5
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 182.0
-margin_right = 262.0
-margin_bottom = 186.0
-
-[node name="AddPoint" type="Button" parent="VBoxContainer"]
-margin_top = 190.0
-margin_right = 262.0
-margin_bottom = 210.0
-text = "Add new Vanishing Point"
-
-[connection signal="pressed" from="VBoxContainer/AddPoint" to="." method="_on_AddPoint_pressed"]
+[connection signal="pressed" from="VBoxContainer/Header/AddPoint" to="." method="_on_AddPoint_pressed"]
