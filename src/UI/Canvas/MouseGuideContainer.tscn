@@ -18,6 +18,7 @@ script = ExtResource( 2 )
 
 [node name="Horizontal" type="Line2D" parent="."]
 points = PoolVector2Array( -19999, 0, 19999, 0 )
+default_color = Color( 1, 1, 1, 1 )
 texture = SubResource( 1 )
 texture_mode = 1
 script = ExtResource( 2 )
