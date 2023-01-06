@@ -1,11 +1,8 @@
 extends Line2D
 
-const INPUT_WIDTH := 4
-
 enum Types { VERTICAL, HORIZONTAL }
-
+const INPUT_WIDTH := 4
 export var type := 0
-
 var track_mouse := true
 
 
