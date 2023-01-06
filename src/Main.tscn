@@ -64,7 +64,6 @@ __meta__ = {
 [node name="CreateNewImage" parent="Dialogs" instance=ExtResource( 28 )]
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource( 12 )]
-rect_min_size = Vector2( 180, 63 )
 window_title = "Open File(s)"
 mode = 1
 
@@ -73,13 +72,10 @@ margin_left = 108.0
 margin_top = 40.0
 margin_right = 623.0
 margin_bottom = 388.0
-rect_min_size = Vector2( 180, 63 )
 
 [node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource( 8 )]
-rect_min_size = Vector2( 180, 63 )
 
 [node name="ExportDialog" parent="Dialogs" instance=ExtResource( 39 )]
-rect_min_size = Vector2( 180, 63 )
 
 [node name="PreferencesDialog" parent="Dialogs" instance=ExtResource( 32 )]
 
@@ -97,14 +93,12 @@ dialog_text = "You have unsaved changes. If you proceed, the progress you have m
 [node name="QuitDialog" type="ConfirmationDialog" parent="Dialogs"]
 margin_right = 243.0
 margin_bottom = 70.0
-rect_min_size = Vector2( 180, 63 )
 resizable = true
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
 [node name="QuitAndSaveDialog" type="ConfirmationDialog" parent="Dialogs"]
 margin_right = 330.0
 margin_bottom = 70.0
-rect_min_size = Vector2( 180, 63 )
 window_title = "Save before exiting?"
 resizable = true
 dialog_text = "You have unsaved progress. How do you wish to proceed?"
@@ -121,7 +115,6 @@ dialog_text = "This is an error message!"
 [node name="BackupConfirmation" type="ConfirmationDialog" parent="Dialogs"]
 margin_right = 200.0
 margin_bottom = 88.0
-rect_min_size = Vector2( 180, 63 )
 popup_exclusive = true
 resizable = true
 dialog_text = "Autosaved project(s) from a crashed session were found.
@@ -129,7 +122,6 @@ Do you want to recover the data?"
 dialog_autowrap = true
 
 [node name="FrameProperties" parent="Dialogs" instance=ExtResource( 9 )]
-rect_min_size = Vector2( 180, 63 )
 
 [node name="WindowOpacityDialog" parent="Dialogs" instance=ExtResource( 10 )]
 
@@ -164,5 +156,5 @@ visible = false
 [connection signal="custom_action" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_custom_action"]
 [connection signal="popup_hide" from="Dialogs/QuitAndSaveDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/ErrorDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/BackupConfirmation" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/BackupConfirmation" to="." method="_on_BackupConfirmation_popup_hide"]
+[connection signal="popup_hide" from="Dialogs/BackupConfirmation" to="." method="_can_draw_true"]
