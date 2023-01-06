@@ -194,4 +194,3 @@ func _exit_tree() -> void:
 		tracker_line = null
 	for idx in perspective_lines.size():
 		perspective_lines[idx].queue_free()
-		perspective_lines.remove(idx)
