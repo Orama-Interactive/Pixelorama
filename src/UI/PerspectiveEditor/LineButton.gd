@@ -4,9 +4,7 @@ onready var properties = $DialogContainer/Properties
 
 
 func _on_LineButton_pressed():
-	properties.popup(Rect2(rect_global_position, properties.rect_size))
-	Global.dialog_open(true)
-
-
-func _on_Properties_popup_hide():
-	Global.dialog_open(false)
+	var pop_position = rect_global_position
+	pop_position.y += rect_size.y * 2
+	properties.popup(Rect2(pop_position, properties.rect_size))
+	properties.window_title = str("Line ", get_index() + 1, " Properties")

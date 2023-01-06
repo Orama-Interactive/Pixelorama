@@ -7,7 +7,7 @@ var track_mouse := false
 var _data = {
 	"start": Vector2.ZERO,
 	"angle": 0,
-	"radius": 19999,
+	"length": 19999,
 	"color": Color.black
 }
 
@@ -21,18 +21,21 @@ func initiate(data :Dictionary):
 func refresh(data :Dictionary):
 	_data = data
 	default_color = data.color
-	Draw_Perspective_line()
+	draw_perspective_line()
 
 
-func Draw_Perspective_line():
+func draw_perspective_line():
 	points[0] = _data.start
 	if hidden:
 		points[1] = _data.start
 	else:
-		points[1] = _data.start + Vector2(_data.radius * cos(deg2rad(_data.angle)), _data.radius * sin(deg2rad(_data.angle)))
+		points[1] = _data.start + Vector2(
+			_data.length * cos(deg2rad(_data.angle)),
+			 _data.length * sin(deg2rad(_data.angle))
+			)
 
 
-func Hide_Perspective_line():
+func hide_perspective_line():
 	points[1] = _data.start
 	hidden = true
 
@@ -49,7 +52,7 @@ func _input(event: InputEvent) -> void:
 			var project_size = Global.current_project.size
 			if Rect2(Vector2.ZERO, project_size).has_point(mouse_point):
 				hidden = false
-				Draw_Perspective_line()
+				draw_perspective_line()
 				var rel_vector = mouse_point - _data.start
 				var test_vector = Vector2(_data.start.x, 0)
 				if sign(test_vector.x) == 0:
@@ -59,9 +62,9 @@ func _input(event: InputEvent) -> void:
 				if sign(test_vector.x) == -1:
 					_data.angle += 180
 
-				points[1] = _data.start + Vector2(_data.radius * cos(deg2rad(_data.angle)), _data.radius * sin(deg2rad(_data.angle)))
+				points[1] = _data.start + Vector2(_data.length * cos(deg2rad(_data.angle)), _data.length * sin(deg2rad(_data.angle)))
 			else:
-				Hide_Perspective_line()
+				hide_perspective_line()
 
 		update()
 
