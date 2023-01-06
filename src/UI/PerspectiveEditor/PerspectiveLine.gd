@@ -20,6 +20,7 @@ func refresh(data: Dictionary):
 
 
 func draw_perspective_line():
+	var angle = -_data.angle
 	points[0] = _data.start
 	if hidden:
 		points[1] = _data.start
@@ -27,7 +28,7 @@ func draw_perspective_line():
 		points[1] = (
 			_data.start
 			+ Vector2(
-				_data.length * cos(deg2rad(_data.angle)), _data.length * sin(deg2rad(_data.angle))
+				_data.length * cos(deg2rad(angle)), _data.length * sin(deg2rad(angle))
 			)
 		)
 

@@ -138,10 +138,9 @@ func add_line(loaded_line_data = null, is_tracker := false):
 		)
 		line_button.text = line_name
 
-		var properties = line_button.find_node("Properties")
-		var remove_button = properties.find_node("Delete")
-		var angle_slider = properties.find_node("AngleSlider")
-		var length_slider = properties.find_node("LengthSlider")
+		var remove_button = line_button.find_node("Delete")
+		var angle_slider = line_button.find_node("AngleSlider")
+		var length_slider = line_button.find_node("LengthSlider")
 
 		angle_slider.value = default_line_data.angle
 		length_slider.value = default_line_data.length
