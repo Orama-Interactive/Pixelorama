@@ -99,7 +99,7 @@ func add_line(loaded_line_data = null ,is_tracker := false):
 		"length": 19999,
 		"color" : Color(data.color)
 	}
-	if default_line_data.start.x > p_size.x:
+	if default_line_data.start.x > p_size.x / 2:
 		# If new line is created ahed of half project distance then
 		# reverse it's angle (for beautification)
 		default_line_data.angle = 180
