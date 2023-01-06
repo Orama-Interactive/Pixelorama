@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/PerspectiveEditor/PerspectiveLine.gd" type="Script" id=1]
+
+[node name="PerspectiveLine" type="Line2D"]
+points = PoolVector2Array( 0, 0, 64, 0 )
+script = ExtResource( 1 )
