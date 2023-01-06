@@ -1,11 +1,5 @@
 extends VBoxContainer
 
-onready var color_picker_button = $"%ColorPickerButton"
-onready var title = $"%PointCollapseContainer"
-onready var pos_x = $"%X"
-onready var pos_y = $"%Y"
-onready var line_buttons_container = $"%LinesContainer"
-
 var perspective_lines = []
 var tracker_line: PerspectiveLine
 var data = {
@@ -15,6 +9,12 @@ var data = {
 	"lengths": [],
 	"color": Color(randf(), randf(), randf(), 0.9).to_html(),
 }
+
+onready var color_picker_button = $"%ColorPickerButton"
+onready var title = $"%PointCollapseContainer"
+onready var pos_x = $"%X"
+onready var pos_y = $"%Y"
+onready var line_buttons_container = $"%LinesContainer"
 
 
 func initiate(start_data = null, idx = -1) -> void:
