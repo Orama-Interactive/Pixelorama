@@ -25,7 +25,7 @@ func Draw_Perspective_line():
 
 
 func _input(event: InputEvent) -> void:
-	if !Global.show_mouse_guides:
+	if !Global.show_mouse_guides or !Global.can_draw:
 		return
 	if event is InputEventMouseMotion:
 		var tmp_transform = get_canvas_transform().affine_inverse()
