@@ -7,32 +7,32 @@ onready var pos_y = $"%Y"
 onready var line_buttons_container = $"%LinesContainer"
 
 var perspective_lines = []
-var tracker_line :PerspectiveLine
+var tracker_line: PerspectiveLine
 var data = {
 	"position_x": 0,
 	"position_y": 0,
 	"angles": [],
 	"lengths": [],
 	"color": Color(randf(), randf(), randf(), 0.9).to_html(),
-	}
+}
 
 
 func initiate(start_data = null, idx = -1) -> void:
 	if start_data:
 		data = start_data.duplicate()
-	add_line(null ,true)
+	add_line(null, true)
 	for i in data.angles.size():
 		var loaded_line_data = {
 			"start": Vector2(data.position_x, data.position_y),
 			"angle": data.angles[i],
 			"length": data.lengths[i],
-			"color" : Color(data.color)
+			"color": Color(data.color)
 		}
 		add_line(loaded_line_data)
 	if idx != -1:
-		title.point_text = str("Point: ",idx + 1)
+		title.point_text = str("Point: ", idx + 1)
 	else:
-		title.point_text = str("Point: ",get_parent().get_child_count())
+		title.point_text = str("Point: ", get_parent().get_child_count())
 	pos_x.value = data.position_x
 	pos_y.value = data.position_y
 	color_picker_button.color = Color(data.color)
@@ -53,7 +53,7 @@ func _on_Delete_pressed() -> void:
 	Global.perspective_editor.delete_point(get_index())
 
 
-func _on_color_changed(_color :Color):
+func _on_color_changed(_color: Color):
 	data.color = _color.to_html()
 	refresh(-1)
 	update_data_to_project()
@@ -93,13 +93,13 @@ func _remove_line_pressed(line_button):
 
 
 # Methods
-func add_line(loaded_line_data = null ,is_tracker := false):
+func add_line(loaded_line_data = null, is_tracker := false):
 	var p_size = Global.current_project.size
 	var default_line_data = {
 		"start": Vector2(data.position_x, data.position_y),
 		"angle": 0,
 		"length": 19999,
-		"color" : Color(data.color)
+		"color": Color(data.color)
 	}
 	if default_line_data.start.x > p_size.x / 2:
 		# If new line is created ahed of half project distance then
@@ -111,31 +111,31 @@ func add_line(loaded_line_data = null ,is_tracker := false):
 	if loaded_line_data:
 		default_line_data = loaded_line_data
 
-	if is_tracker: # if we are creating tracker line then length adjustment is not required
-		if tracker_line != null: # Also if the tracker line already exists then cancel creation
+	if is_tracker:  # if we are creating tracker line then length adjustment is not required
+		if tracker_line != null:  # Also if the tracker line already exists then cancel creation
 			return
-	else: # If we are not creating a perspective line then adjust it's length
+	else:  # If we are not creating a perspective line then adjust it's length
 		var suitable_length = sqrt(pow(p_size.x, 2) + pow(p_size.y, 2))
 		default_line_data.length = suitable_length
 
 	# Create the visual line
-	var line = preload(
-		"res://src/UI/PerspectiveEditor/PerspectiveLine.tscn"
-	).instance()
+	var line = preload("res://src/UI/PerspectiveEditor/PerspectiveLine.tscn").instance()
 	line.initiate(default_line_data)
 
 	# Set it's mode accordingly
-	if is_tracker: # Settings for Tracker mode
+	if is_tracker:  # Settings for Tracker mode
 		line.track_mouse = true
 		tracker_line = line
 		tracker_line.hide_perspective_line()
-	else: # Settings for Normal mode
+	else:  # Settings for Normal mode
 		var line_button = preload("res://src/UI/PerspectiveEditor/LineButton.tscn").instance()
 		line_buttons_container.add_child(line_button)
 		var index = line_button.get_parent().get_child_count() - 2
 		line_button.get_parent().move_child(line_button, index)
 
-		var line_name = str("Line", line_button.get_index() + 1, " (", int(default_line_data.angle), "°)")
+		var line_name = str(
+			"Line", line_button.get_index() + 1, " (", int(default_line_data.angle), "°)"
+		)
 		line_button.text = line_name
 
 		var properties = line_button.find_node("Properties")
@@ -176,8 +176,8 @@ func update_data_to_project(removal := false):
 	Global.current_project.has_changed = true
 
 
-func refresh(index :int):
-	if index == -1: # means all lines should be refreshed
+func refresh(index: int):
+	if index == -1:  # means all lines should be refreshed
 		refresh_tracker()
 		for i in data.angles.size():
 			refresh_line(i)
@@ -185,12 +185,12 @@ func refresh(index :int):
 		refresh_line(index)
 
 
-func refresh_line(index :int):
+func refresh_line(index: int):
 	var line_data = {
 		"start": Vector2(data.position_x, data.position_y),
 		"angle": data.angles[index],
 		"length": data.lengths[index],
-		"color" : Color(data.color)
+		"color": Color(data.color)
 	}
 	var line_button = line_buttons_container.get_child(index)
 	var line_name = str("Line", line_button.get_index() + 1, " (", int(line_data.angle), "°)")
@@ -203,7 +203,7 @@ func refresh_tracker():
 		"start": Vector2(data.position_x, data.position_y),
 		"angle": tracker_line._data.angle,
 		"length": tracker_line._data.length,
-		"color" : Color(data.color)
+		"color": Color(data.color)
 	}
 	tracker_line.refresh(line_data)
 

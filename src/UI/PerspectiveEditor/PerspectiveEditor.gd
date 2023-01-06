@@ -1,7 +1,7 @@
 extends Control
 
 onready var vanishing_point_container = $"%VanishingPointContainer"
-var axes :Node2D
+var axes: Node2D
 var do_pool = []  # A pool that stores data of points removed by undo
 var delete_pool = []  # A pool that containg deleted data and their index
 
@@ -29,9 +29,7 @@ func update():
 
 
 func add_vanishing_point(is_redo := false):
-	var vanishing_point := preload(
-		"res://src/UI/PerspectiveEditor/VanishingPoint.tscn"
-	).instance()
+	var vanishing_point := preload("res://src/UI/PerspectiveEditor/VanishingPoint.tscn").instance()
 	vanishing_point_container.add_child(vanishing_point)
 	if is_redo and !do_pool.empty():
 		vanishing_point.initiate(do_pool.pop_back())

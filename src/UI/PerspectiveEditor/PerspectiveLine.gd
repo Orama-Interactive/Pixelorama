@@ -4,21 +4,16 @@ extends Line2D
 const INPUT_WIDTH := 4
 var hidden = false
 var track_mouse := false
-var _data = {
-	"start": Vector2.ZERO,
-	"angle": 0,
-	"length": 19999,
-	"color": Color.black
-}
+var _data = {"start": Vector2.ZERO, "angle": 0, "length": 19999, "color": Color.black}
 
 
-func initiate(data :Dictionary):
+func initiate(data: Dictionary):
 	width = Global.camera.zoom.x * 2
 	Global.canvas.add_child(self)
 	refresh(data)
 
 
-func refresh(data :Dictionary):
+func refresh(data: Dictionary):
 	_data = data
 	default_color = data.color
 	draw_perspective_line()
@@ -29,10 +24,12 @@ func draw_perspective_line():
 	if hidden:
 		points[1] = _data.start
 	else:
-		points[1] = _data.start + Vector2(
-			_data.length * cos(deg2rad(_data.angle)),
-			 _data.length * sin(deg2rad(_data.angle))
+		points[1] = (
+			_data.start
+			+ Vector2(
+				_data.length * cos(deg2rad(_data.angle)), _data.length * sin(deg2rad(_data.angle))
 			)
+		)
 
 
 func hide_perspective_line():
@@ -62,7 +59,13 @@ func _input(event: InputEvent) -> void:
 				if sign(test_vector.x) == -1:
 					_data.angle += 180
 
-				points[1] = _data.start + Vector2(_data.length * cos(deg2rad(_data.angle)), _data.length * sin(deg2rad(_data.angle)))
+				points[1] = (
+					_data.start
+					+ Vector2(
+						_data.length * cos(deg2rad(_data.angle)),
+						_data.length * sin(deg2rad(_data.angle))
+					)
+				)
 			else:
 				hide_perspective_line()
 
@@ -73,7 +76,7 @@ func _draw() -> void:
 	draw_circle(_data.start, Global.camera.zoom.x * 5, default_color)
 	width = Global.camera.zoom.x * 2
 
-	if hidden: # Hidden line
+	if hidden:  # Hidden line
 		return
 
 	var viewport_size: Vector2 = Global.main_viewport.rect_size
