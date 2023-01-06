@@ -3,20 +3,9 @@ extends Control
 onready var vanishing_point_container = $"%VanishingPointContainer"
 var axes :Node2D
 
-func _ready():
-	axes = preload("res://src/UI/PerspectiveEditor/Axes.tscn").instance()
-	Global.canvas.add_child(axes)
-
 
 func _on_AddPoint_pressed() -> void:
 	add_vanishing_point()
-
-
-func _on_CheckButton_toggled(button_pressed):
-	if button_pressed:
-		axes.visible = true
-	else:
-		axes.visible = false
 
 
 func update():

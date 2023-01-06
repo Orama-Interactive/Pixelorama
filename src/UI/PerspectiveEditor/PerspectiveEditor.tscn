@@ -45,26 +45,20 @@ margin_right = 262.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
-[node name="MouseGuidesCheckButton" type="CheckButton" parent="VBoxContainer"]
+[node name="AddPoint" type="Button" parent="VBoxContainer"]
 margin_top = 18.0
 margin_right = 262.0
-margin_bottom = 58.0
-text = "Enable Mouse Guides"
-
-[node name="AddPoint" type="Button" parent="VBoxContainer"]
-margin_top = 62.0
-margin_right = 262.0
-margin_bottom = 82.0
+margin_bottom = 38.0
 custom_colors/font_color = Color( 0.415686, 1, 0, 1 )
 text = "Add new Vanishing Point"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 86.0
+margin_top = 42.0
 margin_right = 262.0
-margin_bottom = 90.0
+margin_bottom = 46.0
 
 [node name="Content" type="ScrollContainer" parent="VBoxContainer"]
-margin_top = 94.0
+margin_top = 50.0
 margin_right = 262.0
 margin_bottom = 210.0
 size_flags_vertical = 3
@@ -72,10 +66,9 @@ size_flags_vertical = 3
 [node name="VanishingPointContainer" type="VBoxContainer" parent="VBoxContainer/Content"]
 unique_name_in_owner = true
 margin_right = 262.0
-margin_bottom = 116.0
+margin_bottom = 160.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 5
 
-[connection signal="toggled" from="VBoxContainer/MouseGuidesCheckButton" to="." method="_on_CheckButton_toggled"]
 [connection signal="pressed" from="VBoxContainer/AddPoint" to="." method="_on_AddPoint_pressed"]
