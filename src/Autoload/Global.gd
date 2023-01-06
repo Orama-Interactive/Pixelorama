@@ -178,6 +178,7 @@ onready var patterns_popup: Popup = control.find_node("PatternsPopup")
 onready var palette_panel: PalettePanel = control.find_node("Palettes")
 
 onready var references_panel: ReferencesPanel = control.find_node("Reference Images")
+onready var perspective_editor := control.find_node("Perspective Editor")
 
 onready var top_menu_container: Panel = control.find_node("TopMenuContainer")
 onready var rotation_level_button: Button = control.find_node("RotationLevel")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://src/UI/Tools/Tools.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=9]
 [ext_resource path="res://src/UI/GlobalToolOptions/GlobalToolOptions.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/UI/ReferenceImages/ReferencesPanel.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/UI/PerspectiveEditor/PerspectiveEditor.tscn" type="PackedScene" id=12]
 [ext_resource path="res://addons/dockable_container/layout.gd" type="Script" id=14]
 [ext_resource path="res://src/UI/CanvasPreviewContainer/CanvasPreviewContainer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/UI/ColorPickers/ColorPickers.tscn" type="PackedScene" id=17]
@@ -34,7 +35,7 @@ shader_param/size = Vector2( 100, 100 )
 [sub_resource type="Resource" id=1]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "Tools" )
+names = PoolStringArray( "Tools", "Perspective Editor" )
 current_tab = 0
 
 [sub_resource type="Resource" id=8]
@@ -401,8 +402,13 @@ margin_bottom = 716.0
 [node name="Reference Images" parent="DockableContainer" instance=ExtResource( 11 )]
 visible = false
 margin_left = 1079.0
-margin_right = 1080.0
-margin_bottom = 1004.0
+margin_right = -80.0
+margin_bottom = -684.0
+
+[node name="Perspective Editor" parent="DockableContainer" instance=ExtResource( 12 )]
+visible = false
+margin_right = -1010.0
+margin_bottom = -710.0
 
 [connection signal="item_rect_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_item_rect_changed"]
 [connection signal="visibility_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_visibility_changed"]

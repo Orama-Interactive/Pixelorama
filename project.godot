@@ -154,6 +154,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/Buttons/PatternsPopup.gd"
 }, {
+"base": "Line2D",
+"class": "PerspectiveLine",
+"language": "GDScript",
+"path": "res://src/UI/PerspectiveEditor/PerspectiveLine.gd"
+}, {
 "base": "BaseCel",
 "class": "PixelCel",
 "language": "GDScript",
@@ -244,6 +249,7 @@ _global_script_class_icons={
 "PalettePanel": "",
 "PaletteSwatch": "",
 "Patterns": "",
+"PerspectiveLine": "",
 "PixelCel": "",
 "PixelLayer": "",
 "Project": "",

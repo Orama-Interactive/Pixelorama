@@ -1,0 +1,152 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/PerspectiveEditor/VanishingPoint.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = color;
+	vec3 inverted = vec3(1.0) - color.rgb;
+	vec3 screen_color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0).rgb;
+	float screen_avg = (screen_color.r + screen_color.g + screen_color.b) / 3.0;
+	
+	COLOR.rgb = inverted * step(0.5, screen_avg) + color.rgb * step(screen_avg, 0.5);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[node name="VanishingPoint" type="VBoxContainer" groups=["Entry"]]
+margin_right = 261.0
+margin_bottom = 145.0
+script = ExtResource( 2 )
+
+[node name="TitleColor" type="ColorRect" parent="."]
+unique_name_in_owner = true
+margin_right = 261.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="TitleColor"]
+unique_name_in_owner = true
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+text = "Point: a"
+valign = 1
+
+[node name="TitleContainer" type="HBoxContainer" parent="."]
+margin_top = 29.0
+margin_right = 261.0
+margin_bottom = 49.0
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="TitleContainer"]
+unique_name_in_owner = true
+margin_right = 165.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_horizontal = 3
+
+[node name="Delete" type="Button" parent="TitleContainer"]
+margin_left = 169.0
+margin_right = 261.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 40, 0 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "Delete Point"
+
+[node name="PointInfo" type="HBoxContainer" parent="."]
+margin_top = 53.0
+margin_right = 261.0
+margin_bottom = 105.0
+rect_min_size = Vector2( 0, 45 )
+
+[node name="Panel" type="Panel" parent="PointInfo"]
+self_modulate = Color( 1, 1, 1, 0.862745 )
+margin_right = 105.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 105, 0 )
+
+[node name="Label" type="Label" parent="PointInfo/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 5
+text = "Position:"
+align = 1
+valign = 1
+
+[node name="Position" type="VBoxContainer" parent="PointInfo"]
+margin_left = 109.0
+margin_right = 261.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+
+[node name="X" parent="PointInfo/Position" instance=ExtResource( 1 )]
+unique_name_in_owner = true
+margin_right = 152.0
+step = 0.5
+allow_greater = true
+allow_lesser = true
+prefix = "X ="
+
+[node name="Y" parent="PointInfo/Position" instance=ExtResource( 1 )]
+unique_name_in_owner = true
+margin_top = 28.0
+margin_right = 152.0
+margin_bottom = 52.0
+step = 0.5
+allow_greater = true
+allow_lesser = true
+prefix = "Y ="
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 109.0
+margin_right = 261.0
+margin_bottom = 133.0
+
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0.862745 )
+margin_right = 105.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 105, 0 )
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Line Angles:"
+align = 1
+valign = 1
+
+[node name="Angles" type="ScrollContainer" parent="HBoxContainer"]
+margin_left = 109.0
+margin_right = 261.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+scroll_vertical_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Angles"]
+margin_right = 152.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AddLine" type="Button" parent="HBoxContainer/Angles/HBoxContainer"]
+margin_right = 20.0
+margin_bottom = 24.0
+text = "+"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 137.0
+margin_right = 261.0
+margin_bottom = 147.0
+custom_constants/separation = 10
+
+[connection signal="pressed" from="TitleContainer/Delete" to="." method="_on_Delete_pressed"]
+[connection signal="pressed" from="HBoxContainer/Angles/HBoxContainer/AddLine" to="." method="_on_AddLine_pressed"]
