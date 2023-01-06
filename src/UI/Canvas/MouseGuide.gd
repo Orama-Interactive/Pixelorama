@@ -23,8 +23,10 @@ func draw_guide_line():
 
 
 func _input(event: InputEvent) -> void:
-	if !Global.show_mouse_guides or !Global.can_draw:
+	if !Global.show_mouse_guides or !Global.can_draw or !Global.has_focus:
+		visible = false
 		return
+	visible = true
 	if event is InputEventMouseMotion:
 		var tmp_transform = get_canvas_transform().affine_inverse()
 		var tmp_position = Global.main_viewport.get_local_mouse_position()
@@ -48,11 +50,6 @@ func _input(event: InputEvent) -> void:
 
 
 func _draw() -> void:
-	if !Global.show_mouse_guides:
-		visible = false
-		return
-	if !visible:
-		visible = false
 	width = Global.camera.zoom.x * 2
 	var viewport_size: Vector2 = Global.main_viewport.rect_size
 	var zoom: Vector2 = Global.camera.zoom
