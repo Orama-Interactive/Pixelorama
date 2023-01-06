@@ -37,8 +37,14 @@ margin_bottom = 32.0
 text = "When opening an image, it may be imported as a reference."
 autowrap = true
 
-[node name="Scroll" type="ScrollContainer" parent="."]
+[node name="Button" type="Button" parent="."]
 margin_top = 36.0
+margin_right = 1280.0
+margin_bottom = 56.0
+text = "Import Reference Image"
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+margin_top = 60.0
 margin_right = 1280.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
@@ -46,6 +52,8 @@ size_flags_vertical = 3
 
 [node name="List" type="VBoxContainer" parent="Scroll"]
 margin_right = 1280.0
-margin_bottom = 684.0
+margin_bottom = 660.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

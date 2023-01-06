@@ -1,4 +1,4 @@
-extends "res://src/Tools/Shape/ShapeDrawer.gd"
+extends "res://src/Tools/DrawTools/ShapeTools/ShapeDrawer.gd"
 
 
 func _get_shape_points_filled(size: Vector2) -> PoolVector2Array:

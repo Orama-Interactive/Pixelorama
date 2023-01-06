@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Tools/DrawTools/ShapeTools/EllipseTool.gd" type="Script" id=1]
+[ext_resource path="res://src/Tools/DrawTools/ShapeTools/ShapeDrawer.tscn" type="PackedScene" id=2]
+
+[node name="ToolOptions" instance=ExtResource( 2 )]
+script = ExtResource( 1 )

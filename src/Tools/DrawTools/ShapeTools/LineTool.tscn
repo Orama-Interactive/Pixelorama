@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Tools/Line/LineTool.gd" type="Script" id=2]
-[ext_resource path="res://src/Tools/Draw/Draw.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Tools/DrawTools/ShapeTools/LineTool.gd" type="Script" id=2]
+[ext_resource path="res://src/Tools/DrawTools/Draw.tscn" type="PackedScene" id=3]
 
 [node name="ToolOptions" instance=ExtResource( 3 )]
 script = ExtResource( 2 )
