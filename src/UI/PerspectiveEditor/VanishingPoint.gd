@@ -159,6 +159,7 @@ func update_data_to_project(removal := false):
 		project.vanishing_points[idx] = data
 	else:
 		project.vanishing_points.append(data)
+	Global.current_project.has_changed = true
 
 
 func refresh(index :int):
