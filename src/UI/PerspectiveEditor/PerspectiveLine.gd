@@ -40,6 +40,8 @@ func Hide_Perspective_line():
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if track_mouse:
+			if !Global.can_draw:
+				return
 			default_color.a = 0.5
 			var tmp_transform = get_canvas_transform().affine_inverse()
 			var tmp_position = Global.main_viewport.get_local_mouse_position()
