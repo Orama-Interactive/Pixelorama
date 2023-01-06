@@ -2,7 +2,7 @@ extends Line2D
 
 const INPUT_WIDTH := 4
 
-enum Types {VERTICAL, HORIZONTAL}
+enum Types { VERTICAL, HORIZONTAL }
 
 export var type := 0
 
