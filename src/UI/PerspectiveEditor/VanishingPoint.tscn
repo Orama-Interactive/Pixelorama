@@ -25,46 +25,39 @@ margin_right = 261.0
 margin_bottom = 145.0
 script = ExtResource( 2 )
 
-[node name="TitleColor" type="ColorRect" parent="."]
-unique_name_in_owner = true
+[node name="TitleContainer" type="HBoxContainer" parent="."]
 margin_right = 261.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 0, 25 )
-size_flags_horizontal = 3
+margin_bottom = 20.0
 
-[node name="Title" type="Label" parent="TitleColor"]
+[node name="Title" type="Label" parent="TitleContainer"]
 unique_name_in_owner = true
 material = SubResource( 2 )
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_top = 3.0
+margin_right = 111.0
+margin_bottom = 17.0
 size_flags_horizontal = 3
+theme_type_variation = "Header"
 text = "Point: a"
 valign = 1
 
-[node name="TitleContainer" type="HBoxContainer" parent="."]
-margin_top = 29.0
-margin_right = 261.0
-margin_bottom = 49.0
+[node name="Delete" type="Button" parent="TitleContainer"]
+margin_left = 115.0
+margin_right = 207.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 40, 0 )
+text = "Delete Point"
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="TitleContainer"]
 unique_name_in_owner = true
-margin_right = 165.0
+margin_left = 211.0
+margin_right = 261.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 50, 0 )
-size_flags_horizontal = 3
-
-[node name="Delete" type="Button" parent="TitleContainer"]
-margin_left = 169.0
-margin_right = 261.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 40, 0 )
-custom_colors/font_color = Color( 1, 0, 0, 1 )
-text = "Delete Point"
 
 [node name="PointInfo" type="HBoxContainer" parent="."]
-margin_top = 53.0
+margin_top = 24.0
 margin_right = 261.0
-margin_bottom = 105.0
+margin_bottom = 76.0
 rect_min_size = Vector2( 0, 45 )
 
 [node name="Panel" type="Panel" parent="PointInfo"]
@@ -93,7 +86,7 @@ margin_right = 152.0
 step = 0.5
 allow_greater = true
 allow_lesser = true
-prefix = "X ="
+prefix = "X :"
 
 [node name="Y" parent="PointInfo/Position" instance=ExtResource( 1 )]
 unique_name_in_owner = true
@@ -103,12 +96,12 @@ margin_bottom = 52.0
 step = 0.5
 allow_greater = true
 allow_lesser = true
-prefix = "Y ="
+prefix = "Y :"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_top = 109.0
+margin_top = 80.0
 margin_right = 261.0
-margin_bottom = 133.0
+margin_bottom = 104.0
 
 [node name="Panel" type="Panel" parent="HBoxContainer"]
 self_modulate = Color( 1, 1, 1, 0.862745 )
@@ -143,9 +136,9 @@ margin_bottom = 24.0
 text = "+"
 
 [node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 137.0
+margin_top = 108.0
 margin_right = 261.0
-margin_bottom = 147.0
+margin_bottom = 118.0
 custom_constants/separation = 10
 
 [connection signal="pressed" from="TitleContainer/Delete" to="." method="_on_Delete_pressed"]

@@ -73,7 +73,6 @@ margin_bottom = 186.0
 margin_top = 190.0
 margin_right = 262.0
 margin_bottom = 210.0
-custom_colors/font_color = Color( 0.415686, 1, 0, 1 )
 text = "Add new Vanishing Point"
 
 [connection signal="pressed" from="VBoxContainer/AddPoint" to="." method="_on_AddPoint_pressed"]

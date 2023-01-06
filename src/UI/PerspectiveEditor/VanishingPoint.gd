@@ -1,6 +1,5 @@
 extends VBoxContainer
 
-onready var title_color = $"%TitleColor"
 onready var color_picker_button = $"%ColorPickerButton"
 onready var title = $"%Title"
 onready var pos_x = $"%X"
@@ -32,7 +31,6 @@ func initiate(start_data = null) -> void:
 	title.text = str("Point: ",get_parent().get_child_count())
 	pos_x.value = data.position_x
 	pos_y.value = data.position_y
-	title_color.color = Color(data.color)
 	color_picker_button.color = Color(data.color)
 	color_picker_button.connect("color_changed", self, "_on_color_changed")
 	pos_x.connect("value_changed", self, "_on_X_value_changed")
@@ -54,7 +52,6 @@ func _on_Delete_pressed() -> void:
 
 func _on_color_changed(_color :Color):
 	data.color = _color.to_html()
-	title_color.color = Color(data.color)
 	refresh(-1)
 	update_data_to_project()
 
