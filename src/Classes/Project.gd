@@ -416,10 +416,10 @@ func deserialize(dict: Dictionary) -> void:
 			guide.project = self
 			Global.canvas.add_child(guide)
 	if dict.has("reference_images"):
-		for v in dict.reference_images:
+		for g in dict.reference_images:
 			var ri := ReferenceImage.new()
 			ri.project = self
-			ri.deserialize(v)
+			ri.deserialize(g)
 			Global.canvas.add_child(ri)
 	if dict.has("vanishing_points"):
 		vanishing_points = dict.vanishing_points
