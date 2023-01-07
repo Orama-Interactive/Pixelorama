@@ -1,4 +1,4 @@
-extends "res://src/Tools/Draw.gd"
+extends "res://src/Tools/DrawTools/Draw.gd"
 
 var _start := Vector2.ZERO
 var _offset := Vector2.ZERO
