@@ -15,6 +15,9 @@ onready var title = $"%PointCollapseContainer"
 onready var pos_x = $"%X"
 onready var pos_y = $"%Y"
 onready var line_buttons_container = $"%LinesContainer"
+onready var boundary_l = $Content/BoundaryL
+onready var boundary_r = $Content/BoundaryR
+onready var boundary_b = $Content/VBoxContainer/BoundaryB
 
 
 func initiate(start_data = null, idx = -1) -> void:
@@ -36,6 +39,9 @@ func initiate(start_data = null, idx = -1) -> void:
 	pos_x.value = data.position_x
 	pos_y.value = data.position_y
 	color_picker_button.color = Color(data.color)
+	boundary_l.color = color_picker_button.color
+	boundary_r.color = color_picker_button.color
+	boundary_b.color = color_picker_button.color
 	color_picker_button.connect("color_changed", self, "_on_color_changed")
 	pos_x.connect("value_changed", self, "_on_X_value_changed")
 	pos_y.connect("value_changed", self, "_on_Y_value_changed")
@@ -54,6 +60,9 @@ func _on_Delete_pressed() -> void:
 
 
 func _on_color_changed(_color: Color):
+	boundary_l.color = _color
+	boundary_r.color = _color
+	boundary_b.color = _color
 	data.color = _color.to_html()
 	refresh(-1)
 	update_data_to_project()

@@ -54,26 +54,27 @@ rect_min_size = Vector2( 50, 0 )
 unique_name_in_owner = true
 margin_top = 24.0
 margin_right = 261.0
-margin_bottom = 124.0
+margin_bottom = 130.0
 
 [node name="Spacer" type="Control" parent="Content"]
 margin_right = 5.0
-margin_bottom = 100.0
+margin_bottom = 106.0
 rect_min_size = Vector2( 5, 0 )
 
-[node name="VSeparator" type="VSeparator" parent="Content"]
+[node name="BoundaryL" type="ColorRect" parent="Content"]
 margin_left = 9.0
-margin_right = 13.0
-margin_bottom = 100.0
+margin_right = 11.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 2, 0 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Content"]
-margin_left = 17.0
-margin_right = 253.0
-margin_bottom = 100.0
+margin_left = 15.0
+margin_right = 255.0
+margin_bottom = 106.0
 size_flags_horizontal = 3
 
 [node name="PointInfo" type="HBoxContainer" parent="Content/VBoxContainer"]
-margin_right = 236.0
+margin_right = 240.0
 margin_bottom = 52.0
 
 [node name="Label" type="Label" parent="Content/VBoxContainer/PointInfo"]
@@ -84,13 +85,13 @@ text = "Position:"
 
 [node name="Position" type="VBoxContainer" parent="Content/VBoxContainer/PointInfo"]
 margin_left = 60.0
-margin_right = 236.0
+margin_right = 240.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 
 [node name="X" parent="Content/VBoxContainer/PointInfo/Position" instance=ExtResource( 1 )]
 unique_name_in_owner = true
-margin_right = 176.0
+margin_right = 180.0
 step = 0.5
 allow_greater = true
 allow_lesser = true
@@ -99,7 +100,7 @@ prefix = "X :"
 [node name="Y" parent="Content/VBoxContainer/PointInfo/Position" instance=ExtResource( 1 )]
 unique_name_in_owner = true
 margin_top = 28.0
-margin_right = 176.0
+margin_right = 180.0
 margin_bottom = 52.0
 step = 0.5
 allow_greater = true
@@ -108,7 +109,7 @@ prefix = "Y :"
 
 [node name="CollapsibleContainer" parent="Content/VBoxContainer" instance=ExtResource( 3 )]
 margin_top = 56.0
-margin_right = 236.0
+margin_right = 240.0
 margin_bottom = 76.0
 text = "Lines"
 
@@ -142,20 +143,27 @@ text = "Add Line"
 
 [node name="Delete" type="Button" parent="Content/VBoxContainer"]
 margin_top = 80.0
-margin_right = 236.0
+margin_right = 240.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 40, 0 )
 text = "Delete Point"
 
-[node name="VSeparator2" type="VSeparator" parent="Content"]
-margin_left = 257.0
+[node name="BoundaryB" type="ColorRect" parent="Content/VBoxContainer"]
+margin_top = 104.0
+margin_right = 240.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 0, 2 )
+
+[node name="BoundaryR" type="ColorRect" parent="Content"]
+margin_left = 259.0
 margin_right = 261.0
-margin_bottom = 100.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 2, 0 )
 
 [node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 128.0
+margin_top = 134.0
 margin_right = 261.0
-margin_bottom = 138.0
+margin_bottom = 144.0
 custom_constants/separation = 10
 
 [connection signal="toggled" from="TitleContainer/PointCollapseContainer" to="TitleContainer/PointCollapseContainer" method="_on_Button_toggled"]
