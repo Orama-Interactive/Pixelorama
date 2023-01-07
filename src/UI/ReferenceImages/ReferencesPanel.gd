@@ -19,7 +19,3 @@ func project_changed():
 		var l = preload("res://src/UI/ReferenceImages/ReferenceImageButton.tscn").instance()
 		l.element = ref
 		list.add_child(l)
-
-
-func _on_Button_pressed():
-	print('Import ref image clicked')
