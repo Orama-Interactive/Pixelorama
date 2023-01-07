@@ -7,7 +7,7 @@ var data = {
 	"position_y": 0,
 	"angles": [],
 	"lengths": [],
-	"color": Color(randf(), randf(), randf(), 0.9).to_html(),
+	"color": Color(randf(), randf(), randf(), 1).to_html(),
 }
 
 onready var color_picker_button = $"%ColorPickerButton"
