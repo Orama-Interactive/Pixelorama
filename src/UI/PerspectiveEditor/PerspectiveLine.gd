@@ -39,7 +39,7 @@ func hide_perspective_line():
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouse:
 		if track_mouse:
 			if !Global.can_draw or !Global.has_focus:
 				hide_perspective_line()
