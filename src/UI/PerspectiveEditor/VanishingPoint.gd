@@ -39,14 +39,20 @@ func initiate(start_data = null, idx = -1) -> void:
 	pos_x.value = data.position_x
 	pos_y.value = data.position_y
 	color_picker_button.color = Color(data.color)
-	boundary_l.color = color_picker_button.color
-	boundary_r.color = color_picker_button.color
-	boundary_b.color = color_picker_button.color
+	update_boundary_color(color_picker_button.color)
 	color_picker_button.connect("color_changed", self, "_on_color_changed")
 	pos_x.connect("value_changed", self, "_on_X_value_changed")
 	pos_y.connect("value_changed", self, "_on_Y_value_changed")
 	if !start_data:
 		update_data_to_project()
+
+
+func update_boundary_color(color :Color):
+	var luminance = ((0.2126 * color.r) + (0.7152 * color.g) + (0.0722 * color.b))
+	color.a = 1 - luminance * 0.4  # Interpolates between 0.5 to 0.9
+	boundary_l.color = color
+	boundary_r.color = color
+	boundary_b.color = color
 
 
 # Signals
@@ -60,9 +66,7 @@ func _on_Delete_pressed() -> void:
 
 
 func _on_color_changed(_color: Color):
-	boundary_l.color = _color
-	boundary_r.color = _color
-	boundary_b.color = _color
+	update_boundary_color(_color)
 	data.color = _color.to_html()
 	refresh(-1)
 	update_data_to_project()
