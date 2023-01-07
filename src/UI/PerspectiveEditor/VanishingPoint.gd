@@ -49,7 +49,7 @@ func initiate(start_data = null, idx = -1) -> void:
 
 func update_boundary_color(color :Color):
 	var luminance = ((0.2126 * color.r) + (0.7152 * color.g) + (0.0722 * color.b))
-	color.a = 1 - luminance * 0.4  # Interpolates between 0.5 to 0.9
+	color.a = 0.9 - luminance * 0.4  # Interpolates between 0.5 to 0.9
 	boundary_l.color = color
 	boundary_r.color = color
 	boundary_b.color = color
