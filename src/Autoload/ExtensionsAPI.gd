@@ -6,30 +6,30 @@ func get_api_version() -> int:
 	return ProjectSettings.get_setting("application/config/ExtensionsAPI_Version")
 
 
-class GeneralAPI  extends Resource:
+class GeneralAPI:
+	extends Resource
+
 	# Version And Config
 	func get_pixelorama_version() -> String:
 		return ProjectSettings.get_setting("application/config/Version")
 
-
 	func get_config_file() -> ConfigFile:
 		return Global.config_cache
-
 
 	# Nodes
 	func get_global() -> Global:
 		return Global
 
-
 	func get_extensions_node() -> Node:
 		return Global.control.get_node("Extensions")
-
 
 	func get_canvas() -> Canvas:
 		return Global.canvas
 
 
-class MenuAPI  extends Resource:
+class MenuAPI:
+	extends Resource
+
 	enum { FILE, EDIT, SELECT, IMAGE, VIEW, WINDOW, HELP }
 
 	# Menu methods
@@ -51,7 +51,6 @@ class MenuAPI  extends Resource:
 				return Global.top_menu_container.help_menu_button.get_popup()
 		return null
 
-
 	func add_menu_item(menu_type: int, item_name: String, item_metadata, item_id := -1) -> int:
 		# item_metadata is usually a popup node you want to appear when you click the item_name
 		# that popup should also have an (menu_item_clicked) function inside it's script
@@ -65,7 +64,6 @@ class MenuAPI  extends Resource:
 		popup_menu.set_item_metadata(idx, item_metadata)
 		return idx
 
-
 	func remove_menu_item(menu_type: int, item_idx: int) -> void:
 		var popup_menu: PopupMenu = _get_popup_menu(menu_type)
 		if not popup_menu:
@@ -73,7 +71,9 @@ class MenuAPI  extends Resource:
 		popup_menu.remove_item(item_idx)
 
 
-class DialogAPI extends Resource:
+class DialogAPI:
+	extends Resource
+
 	func show_error(text: String) -> void:
 		# useful for displaying messages like "Incompatible API" etc...
 		Global.error_dialog.set_text(text)
@@ -87,16 +87,16 @@ class DialogAPI extends Resource:
 		Global.dialog_open(open)
 
 
-class PanelAPI extends Resource:
+class PanelAPI:
+	extends Resource
+
 	func set_tabs_visible(visible: bool) -> void:
 		var dockable := _get_dockable_container_ui()
 		dockable.set_tabs_visible(visible)
 
-
 	func get_tabs_visible() -> bool:
 		var dockable := _get_dockable_container_ui()
 		return dockable.get_tabs_visible()
-
 
 	func add_node_as_tab(node: Node, alongside_node: String) -> void:
 		var dockable := _get_dockable_container_ui()
@@ -110,7 +110,6 @@ class PanelAPI extends Resource:
 		# After this check if tabs are invisible, if they are, then make tabs visible
 		# and after doing yield(get_tree(), "idle_frame") twice make them invisible again
 
-
 	func remove_node_from_tab(node: Node) -> void:
 		if node == null:
 			return
@@ -123,12 +122,9 @@ class PanelAPI extends Resource:
 		node.get_parent().remove_child(node)
 		node.queue_free()
 
-
-
 	# PRIVATE METHODS
 	func _get_dockable_container_ui() -> Node:
 		return Global.control.find_node("DockableContainer")
-
 
 	func _find_tab_with_node(node_name: String, dockable_container):
 		var root = dockable_container.layout.root
@@ -139,16 +135,13 @@ class PanelAPI extends Resource:
 				return tab
 		return null
 
-
 	func _get_tabs_in_root(parent_resource):
 		var parents := []  # Resources have no get_parent_resource() so this is an alternative
 		var scanned := []  # To keep track of already discovered layout_split resources
 		var child_number := 0
 		parents.append(parent_resource)
 		var scan_target = parent_resource
-
 		var tabs := []
-
 		# Get children in the parent, the initial parent is the node we entered as "parent"
 		while child_number < 2:
 			# If parent isn't a (layout_split) resource then there is no point
@@ -185,21 +178,20 @@ class PanelAPI extends Resource:
 					return tabs
 
 
-class ThemeApi extends Resource:
+class ThemeApi:
+	extends Resource
+
 	func add_theme(theme: Theme) -> void:
 		var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
 		themes.themes.append(theme)
 		themes.add_theme(theme)
 
-
 	func find_theme_index(theme: Theme) -> int:
 		var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
 		return themes.themes.find(theme)
 
-
 	func get_theme() -> Theme:
 		return Global.control.theme
-
 
 	func set_theme(idx: int) -> bool:
 		var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
@@ -209,12 +201,13 @@ class ThemeApi extends Resource:
 		else:
 			return false
 
-
 	func remove_theme(theme: Theme) -> void:
 		Global.preferences_dialog.themes.remove_theme(theme)
 
 
-class ToolAPI extends Resource:
+class ToolAPI:
+	extends Resource
+
 	# Tool methods
 	func add_tool(
 		tool_name: String,
@@ -230,7 +223,6 @@ class ToolAPI extends Resource:
 		Tools.tools[tool_name] = tool_class
 		Tools.add_tool_button(tool_class)
 
-
 	func remove_tool(tool_name: String) -> void:
 		# Re-assigning the tools in case the tool to be removed is also Active
 		Tools.assign_tool("Pencil", BUTTON_LEFT)
@@ -240,10 +232,11 @@ class ToolAPI extends Resource:
 			Tools.remove_tool(tool_class)
 
 
-class ProjectAPI extends Resource:
+class ProjectAPI:
+	extends Resource
+
 	func get_current_project() -> Project:
 		return Global.current_project
-
 
 	func get_current_cel_info() -> Dictionary:
 		# As types of cel are added to Pixelorama,
