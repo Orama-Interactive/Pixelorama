@@ -156,7 +156,10 @@ func _add_extension(file_name: String) -> void:
 		var supported_api_versions = extension_json["supported_api_versions"]
 		if typeof(supported_api_versions) == TYPE_ARRAY:
 			if !supported_api_versions.has(ExtensionsApi.get_api_version()):
-				var err_text = "The extension %s will not work on this version of Pixelorama \n" % file_name_no_ext
+				var err_text = (
+					"The extension %s will not work on this version of Pixelorama \n"
+					% file_name_no_ext
+				)
 				var required_text = "Requires Api : %s" % str(supported_api_versions)
 				Global.error_dialog.set_text(str(err_text, required_text))
 				Global.error_dialog.popup_centered()
