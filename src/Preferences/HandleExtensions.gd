@@ -152,6 +152,21 @@ func _add_extension(file_name: String) -> void:
 		print("No JSON data found.")
 		return
 
+	if extension_json.has("supported_api_versions"):
+		var supported_api_versions = extension_json["supported_api_versions"]
+		if typeof(supported_api_versions) == TYPE_ARRAY:
+			if !ExtensionsApi.get_api_version() in supported_api_versions:
+				var err_text = (
+					"The extension %s will not work on this version of Pixelorama \n"
+					% file_name_no_ext
+				)
+				var required_text = "Requires Api : %s" % str(supported_api_versions)
+				Global.error_dialog.set_text(str(err_text, required_text))
+				Global.error_dialog.popup_centered()
+				Global.dialog_open(true)
+				print("Incompatible API")
+				return
+
 	var extension := Extension.new()
 	extension.serialize(extension_json)
 	extensions[file_name] = extension
