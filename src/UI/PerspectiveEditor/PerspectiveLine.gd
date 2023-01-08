@@ -27,9 +27,7 @@ func draw_perspective_line():
 	else:
 		points[1] = (
 			_data.start
-			+ Vector2(
-				_data.length * cos(deg2rad(angle)), _data.length * sin(deg2rad(angle))
-			)
+			+ Vector2(_data.length * cos(deg2rad(angle)), _data.length * sin(deg2rad(angle)))
 		)
 
 
