@@ -7,8 +7,6 @@ func get_api_version() -> int:
 
 
 class GeneralAPI:
-	extends Resource
-
 	# Version And Config
 	func get_pixelorama_version() -> String:
 		return ProjectSettings.get_setting("application/config/Version")
@@ -28,8 +26,6 @@ class GeneralAPI:
 
 
 class MenuAPI:
-	extends Resource
-
 	enum { FILE, EDIT, SELECT, IMAGE, VIEW, WINDOW, HELP }
 
 	# Menu methods
@@ -72,8 +68,6 @@ class MenuAPI:
 
 
 class DialogAPI:
-	extends Resource
-
 	func show_error(text: String) -> void:
 		# useful for displaying messages like "Incompatible API" etc...
 		Global.error_dialog.set_text(text)
@@ -88,8 +82,6 @@ class DialogAPI:
 
 
 class PanelAPI:
-	extends Resource
-
 	func set_tabs_visible(visible: bool) -> void:
 		var dockable := _get_dockable_container_ui()
 		dockable.set_tabs_visible(visible)
@@ -179,8 +171,6 @@ class PanelAPI:
 
 
 class ThemeApi:
-	extends Resource
-
 	func add_theme(theme: Theme) -> void:
 		var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
 		themes.themes.append(theme)
@@ -206,8 +196,6 @@ class ThemeApi:
 
 
 class ToolAPI:
-	extends Resource
-
 	# Tool methods
 	func add_tool(
 		tool_name: String,
@@ -233,8 +221,6 @@ class ToolAPI:
 
 
 class ProjectAPI:
-	extends Resource
-
 	func get_current_project() -> Project:
 		return Global.current_project
 
