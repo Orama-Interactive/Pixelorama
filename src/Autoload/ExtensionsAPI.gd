@@ -284,7 +284,7 @@ func _add_action(action: String):
 		if extension_name in _action_history.keys():
 			var extension_history: Array = _action_history[extension_name]
 			extension_history.append(action)
-		else: # If the extension history does'nt exist yet then creat it
+		else:  # If the extension history does'nt exist yet then creat it
 			_action_history[extension_name] = [action]
 
 
@@ -299,7 +299,7 @@ func _get_caller_extension_name() -> String:
 	var stack = get_stack()
 	for trace in stack:
 		# Get extension name that called the action
-		var _arr :Array = trace["source"].split("/")
+		var _arr: Array = trace["source"].split("/")
 		var idx = _arr.find("Extensions")
 		if idx != -1:
 			return _arr[idx + 1]
