@@ -54,8 +54,8 @@ func _get_caller_extension_name() -> String:
 	var stack = get_stack()
 	for trace in stack:
 		# Get extension name that called the action
-		var _arr: Array = trace["source"].split("/")
-		var idx = _arr.find("Extensions")
+		var arr: Array = trace["source"].split("/")
+		var idx = arr.find("Extensions")
 		if idx != -1:
 			return _arr[idx + 1]
 	return "Unknown"
