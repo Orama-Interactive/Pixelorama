@@ -1,9 +1,7 @@
 # gdlint: ignore=max-public-methods
 extends Node
 
-# This fail-safe is designed to work ONLY if Pixelorama is launched in Godot Editor
-var _action_history: Dictionary = {}
-
+# use these variables in your extension to access the api
 var general = GeneralAPI.new()
 var menu = MenuAPI.new()
 var dialog = DialogAPI.new()
@@ -12,9 +10,8 @@ var theme = ThemeAPI.new()
 var tools = ToolAPI.new()
 var project = ProjectAPI.new()
 
-
-func get_api_version() -> int:
-	return ProjectSettings.get_setting("application/config/ExtensionsAPI_Version")
+# This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
+var _action_history: Dictionary = {}
 
 
 func check_sanity(extension_name: String):
@@ -34,6 +31,44 @@ func check_sanity(extension_name: String):
 func clear_history(extension_name: String):
 	if extension_name in _action_history.keys():
 		_action_history.erase(extension_name)
+
+
+func add_action(action: String):
+	var extension_name = _get_caller_extension_name()
+	if extension_name != "Unknown":
+		if extension_name in _action_history.keys():
+			var extension_history: Array = _action_history[extension_name]
+			extension_history.append(action)
+		else:  # If the extension history does'nt exist yet then creat it
+			_action_history[extension_name] = [action]
+
+
+func remove_action(action: String):
+	var extension_name = _get_caller_extension_name()
+	if extension_name != "Unknown":
+		if extension_name in _action_history.keys():
+			_action_history[extension_name].erase(action)
+
+
+func _get_caller_extension_name() -> String:
+	var stack = get_stack()
+	for trace in stack:
+		# Get extension name that called the action
+		var _arr: Array = trace["source"].split("/")
+		var idx = _arr.find("Extensions")
+		if idx != -1:
+			return _arr[idx + 1]
+	return "Unknown"
+
+
+func _exit_tree():
+	for keys in _action_history.keys():
+		check_sanity(keys)
+
+
+# The Api Methods Start Here
+func get_api_version() -> int:
+	return ProjectSettings.get_setting("application/config/ExtensionsAPI_Version")
 
 
 class GeneralAPI:
@@ -88,7 +123,7 @@ class MenuAPI:
 		if item_id == -1:
 			idx = popup_menu.get_item_count() - 1
 		popup_menu.set_item_metadata(idx, item_metadata)
-		ExtensionsApi._add_action("add_menu")
+		ExtensionsApi.add_action("add_menu")
 		return idx
 
 	func remove_menu_item(menu_type: int, item_idx: int) -> void:
@@ -96,7 +131,7 @@ class MenuAPI:
 		if not popup_menu:
 			return
 		popup_menu.remove_item(item_idx)
-		ExtensionsApi._remove_action("add_menu")
+		ExtensionsApi.remove_action("add_menu")
 
 
 class DialogAPI:
@@ -130,7 +165,7 @@ class PanelAPI:
 			push_error("Tab not found")
 			return
 		tab.insert_node(0, node)  # Insert at the beginning
-		ExtensionsApi._add_action("add_tab")
+		ExtensionsApi.add_action("add_tab")
 		# INSTRUCTION
 		# After this check if tabs are invisible, if they are, then make tabs visible
 		# and after doing yield(get_tree(), "idle_frame") twice make them invisible again
@@ -146,7 +181,7 @@ class PanelAPI:
 		tab.remove_node(node)
 		node.get_parent().remove_child(node)
 		node.queue_free()
-		ExtensionsApi._remove_action("add_tab")
+		ExtensionsApi.remove_action("add_tab")
 
 	# PRIVATE METHODS
 	func _get_dockable_container_ui() -> Node:
@@ -209,7 +244,7 @@ class ThemeAPI:
 		var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
 		themes.themes.append(theme)
 		themes.add_theme(theme)
-		ExtensionsApi._add_action("add_theme")
+		ExtensionsApi.add_action("add_theme")
 
 	func find_theme_index(theme: Theme) -> int:
 		var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
@@ -228,7 +263,7 @@ class ThemeAPI:
 
 	func remove_theme(theme: Theme) -> void:
 		Global.preferences_dialog.themes.remove_theme(theme)
-		ExtensionsApi._remove_action("add_theme")
+		ExtensionsApi.remove_action("add_theme")
 
 
 class ToolAPI:
@@ -246,7 +281,7 @@ class ToolAPI:
 		)
 		Tools.tools[tool_name] = tool_class
 		Tools.add_tool_button(tool_class)
-		ExtensionsApi._add_action("add_tool")
+		ExtensionsApi.add_action("add_tool")
 
 	func remove_tool(tool_name: String) -> void:
 		# Re-assigning the tools in case the tool to be removed is also Active
@@ -255,7 +290,7 @@ class ToolAPI:
 		var tool_class: Tools.Tool = Tools.tools[tool_name]
 		if tool_class:
 			Tools.remove_tool(tool_class)
-		ExtensionsApi._remove_action("add_tool")
+		ExtensionsApi.remove_action("add_tool")
 
 
 class ProjectAPI:
@@ -276,37 +311,3 @@ class ProjectAPI:
 			return {"cel": cel, "type": "GroupCel"}
 		else:
 			return {"cel": cel, "type": "BaseCel"}
-
-
-# Private methods
-func _add_action(action: String):
-	var extension_name = _get_caller_extension_name()
-	if extension_name != "Unknown":
-		if extension_name in _action_history.keys():
-			var extension_history: Array = _action_history[extension_name]
-			extension_history.append(action)
-		else:  # If the extension history does'nt exist yet then creat it
-			_action_history[extension_name] = [action]
-
-
-func _remove_action(action: String):
-	var extension_name = _get_caller_extension_name()
-	if extension_name != "Unknown":
-		if extension_name in _action_history.keys():
-			_action_history[extension_name].erase(action)
-
-
-func _get_caller_extension_name() -> String:
-	var stack = get_stack()
-	for trace in stack:
-		# Get extension name that called the action
-		var _arr: Array = trace["source"].split("/")
-		var idx = _arr.find("Extensions")
-		if idx != -1:
-			return _arr[idx + 1]
-	return "Unknown"
-
-
-func _exit_tree():
-	for keys in _action_history.keys():
-		check_sanity(keys)
