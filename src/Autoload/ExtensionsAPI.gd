@@ -55,7 +55,6 @@ class GeneralAPI:
 
 
 class MenuAPI:
-	var _actions = []  # Array of actions done so far
 	enum { FILE, EDIT, SELECT, IMAGE, VIEW, WINDOW, HELP }
 
 	# Menu methods
