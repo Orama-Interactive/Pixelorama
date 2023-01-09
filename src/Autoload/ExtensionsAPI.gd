@@ -1,6 +1,7 @@
 # gdlint: ignore=max-public-methods
 extends Node
 
+# This fail-safe is designed to work if pixelorama is launched in Godot Editor
 var _action_history: Dictionary = {}
 
 var general = GeneralAPI.new()
