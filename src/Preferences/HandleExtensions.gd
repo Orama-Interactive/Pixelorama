@@ -165,6 +165,8 @@ func _add_extension(file_name: String) -> void:
 				Global.error_dialog.popup_centered()
 				Global.dialog_open(true)
 				print("Incompatible API")
+				# Don't put it in faulty, (it's merely incompatible)
+				remover_directory.remove(EXTENSIONS_PATH.plus_file("Faulty.txt"))
 				return
 
 	var extension := Extension.new()
@@ -192,6 +194,7 @@ func _enable_extension(extension: Extension, save_to_config := true) -> void:
 	var id: String = extension.file_name
 
 	if extension.enabled:
+		ExtensionsApi.clear_history(extension.file_name)
 		for node in extension.nodes:
 			var scene_path: String = extension_path.plus_file(node)
 			var extension_scene: PackedScene = load(scene_path)
@@ -206,6 +209,7 @@ func _enable_extension(extension: Extension, save_to_config := true) -> void:
 			if ext_node.is_in_group(id):  # Node for extention found
 				extension_parent.remove_child(ext_node)
 				ext_node.queue_free()
+		ExtensionsApi.check_sanity(extension.file_name)
 
 	if save_to_config:
 		Global.config_cache.set_value("extensions", extension.file_name, extension.enabled)
