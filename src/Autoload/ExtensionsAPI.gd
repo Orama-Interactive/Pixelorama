@@ -57,7 +57,7 @@ func _get_caller_extension_name() -> String:
 		var arr: Array = trace["source"].split("/")
 		var idx = arr.find("Extensions")
 		if idx != -1:
-			return _arr[idx + 1]
+			return arr[idx + 1]
 	return "Unknown"
 
 
