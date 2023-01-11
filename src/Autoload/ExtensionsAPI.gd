@@ -317,12 +317,12 @@ class ProjectAPI:
 class ExportAPI:
 	var ExportTab := Export.ExportTab
 
-	func add_export_option(file_format_string: String, tab: int, exporter: AImgIOBaseExporter, is_animated := true):
+	func add_export_option(file_format_string: String, tab: int, exporter_generator, is_animated := true):
 		#  add enum
 		var format_enum = file_format_string.to_upper().replace(".", "")
 		var id = Export.add_file_format(format_enum)
-		#  add exporter
-		Export.custom_exporters.merge({id: exporter})
+		#  add exporter generator
+		Export.custom_exporters.merge({id: exporter_generator})
 		#  add to animated (or not)
 		if is_animated:
 			Export.animated_formats.append(id)
@@ -339,7 +339,7 @@ class ExportAPI:
 	func remove_export_option(id: int):
 		# remove enum
 		Export.remove_file_format(id)
-		# remove exporter
+		# remove exporter generator
 		Export.custom_exporters.erase(id)
 		#  remove from animated (or not)
 		Export.animated_formats.erase(id)

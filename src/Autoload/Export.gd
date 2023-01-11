@@ -8,8 +8,8 @@ enum FileFormat { PNG = 0, GIF = 1, APNG = 2 }
 
 var animated_formats := [FileFormat.GIF, FileFormat.APNG]
 
-# A dictionary of custom exporters (Recieved from extensions)
-var custom_exporters := {}
+# A dictionary of custom exporter generators (Recieved from extensions)
+var custom_exporter_generators := {}
 
 var current_tab: int = ExportTab.IMAGE
 # All frames and their layers processed/blended into images
@@ -211,8 +211,11 @@ func export_processed_images(
 
 	if is_single_file_format(project):
 		var exporter: AImgIOBaseExporter
-		if project.file_format in custom_exporters.keys():
-			exporter = custom_exporters[project.file_format]
+		if project.file_format in custom_exporter_generators.keys():
+			var exporter_gen = custom_exporter_generators[project.file_format]
+			if exporter_gen.has_method("get_exporter"):
+				# request an exporter given all the required data
+				exporter_gen.call("get_exporter", processed_images)
 		elif project.file_format == FileFormat.APNG:
 			exporter = AImgIOAPNGExporter.new()
 		else:
