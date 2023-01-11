@@ -5,6 +5,8 @@ extends VBoxContainer
 export var text := "" setget _set_text
 export var visible_content := false setget _set_visible_content
 
+onready var texture_rect: TextureRect = $Button/TextureRect
+
 
 func _ready() -> void:
 	_set_visible($Button.pressed)
@@ -29,10 +31,9 @@ func _on_Button_toggled(button_pressed: bool) -> void:
 
 
 func _set_visible(pressed: bool) -> void:
-	if pressed:
-		$Button/TextureRect.rect_rotation = 0
-	else:
-		$Button/TextureRect.rect_rotation = -90
+	var angle := 0.0 if pressed else -90.0
+	var tween := create_tween()
+	tween.tween_property(texture_rect, "rect_rotation", angle, 0.05)
 	for child in get_children():
 		if not child is CanvasItem or child == $Button:
 			continue
