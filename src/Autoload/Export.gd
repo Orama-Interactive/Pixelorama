@@ -45,7 +45,7 @@ func _exit_tree() -> void:
 		gif_export_thread.wait_to_finish()
 
 
-func add_file_format(name :String) -> int:
+func add_file_format(name: String) -> int:
 	var id = FileFormat.size()
 	FileFormat.merge({name: id})
 	return id
@@ -53,9 +53,9 @@ func add_file_format(name :String) -> int:
 
 func remove_file_format(id: int) -> void:
 	for key in Export.FileFormat.keys():
-			if Export.FileFormat[key] == id:
-				Export.FileFormat.erase(key)
-				return
+		if Export.FileFormat[key] == id:
+			Export.FileFormat.erase(key)
+			return
 
 
 func external_export(project := Global.current_project) -> void:
@@ -330,7 +330,7 @@ func file_format_string(format_enum: int) -> String:
 			# If a file format is not found, try generating one
 			var keys = FileFormat.keys()
 			if format_enum < keys.size():
-				var key :String = keys[format_enum]
+				var key: String = keys[format_enum]
 				return str(".", key.to_lower())
 			return ""
 
@@ -349,7 +349,7 @@ func file_format_description(format_enum: int) -> String:
 			# If a file format description is not found, try generating one
 			var keys = FileFormat.keys()
 			if format_enum < keys.size():
-				var key :String = keys[format_enum]
+				var key: String = keys[format_enum]
 				return str(key, "Image")
 			return ""
 
