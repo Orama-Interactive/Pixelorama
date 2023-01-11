@@ -210,6 +210,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          single-commit: true
           folder: build/web # The folder the action should deploy.
       - name: Upload Release Assets to itch.io 🎮
         run: |
