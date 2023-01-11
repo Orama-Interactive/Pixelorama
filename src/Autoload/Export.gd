@@ -212,7 +212,7 @@ func export_processed_images(
 	if is_single_file_format(project):
 		var exporter: AImgIOBaseExporter
 		if project.file_format in custom_exporter_generators.keys():
-			var exporter_gen = custom_exporter_generators[project.file_format]
+			var exporter_gen = custom_exporter_generators[project.file_format][0]
 			if exporter_gen.has_method("get_exporter"):
 				# request an exporter given all the required data
 				exporter_gen.call("get_exporter", processed_images)
