@@ -10,6 +10,19 @@ onready var interpolation_type: OptionButton = find_node("InterpolationType")
 onready var ratio_box: BaseButton = find_node("AspectRatioButton")
 
 
+func _ready() -> void:
+	interpolation_type.add_item("Nearest", Image.INTERPOLATE_NEAREST)
+	interpolation_type.add_item("Bilinear", Image.INTERPOLATE_BILINEAR)
+	interpolation_type.add_item("Cubic", Image.INTERPOLATE_CUBIC)
+	interpolation_type.add_item("Trilinear", Image.INTERPOLATE_TRILINEAR)
+	interpolation_type.add_item("Lanczos", Image.INTERPOLATE_LANCZOS)
+	interpolation_type.add_item("Scale3X", DrawingAlgos.Interpolation.SCALE3X)
+	interpolation_type.add_item("cleanEdge", DrawingAlgos.Interpolation.CLEANEDGE)
+	interpolation_type.add_item("OmniScale", DrawingAlgos.Interpolation.OMNISCALE)
+	if not DrawingAlgos.omniscale_shader:
+		interpolation_type.set_item_disabled(DrawingAlgos.Interpolation.OMNISCALE, true)
+
+
 func _on_ScaleImage_about_to_show() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	aspect_ratio = Global.current_project.size.x / Global.current_project.size.y
