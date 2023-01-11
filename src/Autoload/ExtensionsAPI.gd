@@ -317,7 +317,9 @@ class ProjectAPI:
 class ExportAPI:
 	var ExportTab := Export.ExportTab
 
-	func add_export_option(file_format_string: String, tab: int, exporter_generator, is_animated := true):
+	func add_export_option(
+		file_format_string: String, tab: int, exporter_generator, is_animated := true
+	):
 		#  add enum
 		var format_enum = file_format_string.to_upper().replace(".", "")
 		var id = Export.add_file_format(format_enum)
@@ -334,7 +336,6 @@ class ExportAPI:
 				Global.export_dialog.spritesheet_exports.append(id)
 		ExtensionsApi.add_action("add_exporter")
 		return id
-
 
 	func remove_export_option(id: int):
 		# remove enum
