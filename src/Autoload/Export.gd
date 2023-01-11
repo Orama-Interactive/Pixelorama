@@ -215,7 +215,7 @@ func export_processed_images(
 			var exporter_gen = custom_exporter_generators[project.file_format][0]
 			if exporter_gen.has_method("get_exporter"):
 				# request an exporter given all the required data
-				exporter_gen.call("get_exporter", processed_images)
+				exporter = exporter_gen.call("get_exporter", processed_images)
 		elif project.file_format == FileFormat.APNG:
 			exporter = AImgIOAPNGExporter.new()
 		else:
