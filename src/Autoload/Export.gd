@@ -327,11 +327,9 @@ func file_format_string(format_enum: int) -> String:
 		FileFormat.APNG:
 			return ".apng"
 		_:
-			# If a file format is not found, try generating one
-			var keys = FileFormat.keys()
-			if format_enum < keys.size():
-				var key: String = keys[format_enum]
-				return str(".", key.to_lower())
+			# If a file format description is not found, try generating one
+			if custom_exporter_generators.has(format_enum):
+				return custom_exporter_generators[format_enum][1]
 			return ""
 
 
@@ -347,10 +345,9 @@ func file_format_description(format_enum: int) -> String:
 			return "APNG Image"
 		_:
 			# If a file format description is not found, try generating one
-			var keys = FileFormat.keys()
-			if format_enum < keys.size():
-				var key: String = keys[format_enum]
-				return str(key, "Image")
+			for key in FileFormat.keys():
+				if FileFormat[key] == format_enum:
+					return str(key.capitalize())
 			return ""
 
 

@@ -318,13 +318,19 @@ class ExportAPI:
 	var ExportTab := Export.ExportTab
 
 	func add_export_option(
-		file_format_string: String, tab: int, exporter_generator, is_animated := true
+		format_info: Dictionary, exporter_generator, tab := ExportTab.IMAGE, is_animated := true
 	):
+		# separate enum name and file name
+		var format = ""
+		var format_name = ""
+		if format_info.has("format"):
+			format = format_info["format"]
+		if format_info.has("description"):
+			format_name = format_info["description"].to_upper().replace(" ", "_")
 		#  add enum
-		var format_enum = file_format_string.to_upper().replace(".", "")
-		var id = Export.add_file_format(format_enum)
+		var id = Export.add_file_format(format_name)
 		#  add exporter generator
-		Export.custom_exporters.merge({id: exporter_generator})
+		Export.custom_exporter_generators.merge({id: [exporter_generator, format]})
 		#  add to animated (or not)
 		if is_animated:
 			Export.animated_formats.append(id)
@@ -341,7 +347,7 @@ class ExportAPI:
 		# remove enum
 		Export.remove_file_format(id)
 		# remove exporter generator
-		Export.custom_exporters.erase(id)
+		Export.custom_exporter_generators.erase(id)
 		#  remove from animated (or not)
 		Export.animated_formats.erase(id)
 		#  add to export dialog
