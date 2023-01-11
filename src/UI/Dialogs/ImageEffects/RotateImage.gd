@@ -2,7 +2,7 @@ extends ImageEffect
 
 var live_preview: bool = true
 var rotxel_shader: Shader
-var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeightbour.shader")
+var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeighbour.shader")
 var clean_edge_shader: Shader = DrawingAlgos.clean_edge_shader
 var pivot := Vector2.INF
 var drag_pivot := false
