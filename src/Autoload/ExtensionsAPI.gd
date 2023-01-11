@@ -9,6 +9,7 @@ var panel = PanelAPI.new()
 var theme = ThemeAPI.new()
 var tools = ToolAPI.new()
 var project = ProjectAPI.new()
+var exports = ExportAPI.new()
 
 # This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
 var _action_history: Dictionary = {}
@@ -311,3 +312,38 @@ class ProjectAPI:
 			return {"cel": cel, "type": "GroupCel"}
 		else:
 			return {"cel": cel, "type": "BaseCel"}
+
+
+class ExportAPI:
+	var ExportTab := Export.ExportTab
+
+	func add_export_option(file_format_string: String, tab: int, exporter: AImgIOBaseExporter, is_animated := true):
+		#  add enum
+		var format_enum = file_format_string.to_upper().replace(".", "")
+		var id = Export.add_file_format(format_enum)
+		#  add exporter
+		Export.custom_exporters.merge({id: exporter})
+		#  add to animated (or not)
+		if is_animated:
+			Export.animated_formats.append(id)
+		#  add to export dialog
+		match tab:
+			ExportTab.IMAGE:
+				Global.export_dialog.image_exports.append(id)
+			ExportTab.SPRITESHEET:
+				Global.export_dialog.spritesheet_exports.append(id)
+		ExtensionsApi.add_action("add_exporter")
+		return id
+
+
+	func remove_export_option(id: int):
+		# remove enum
+		Export.remove_file_format(id)
+		# remove exporter
+		Export.custom_exporters.erase(id)
+		#  remove from animated (or not)
+		Export.animated_formats.erase(id)
+		#  add to export dialog
+		Global.export_dialog.image_exports.erase(id)
+		Global.export_dialog.spritesheet_exports.erase(id)
+		ExtensionsApi.remove_action("add_exporter")

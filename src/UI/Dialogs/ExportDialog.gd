@@ -6,6 +6,9 @@ signal resume_export_function
 var preview_current_frame := 0
 var preview_frames := []
 
+var image_exports := [Export.FileFormat.PNG, Export.FileFormat.GIF, Export.FileFormat.APNG]
+var spritesheet_exports := [Export.FileFormat.PNG]
+
 onready var tabs: Tabs = $VBoxContainer/Tabs
 onready var checker: ColorRect = $"%TransparentChecker"
 onready var previews: GridContainer = $"%Previews"
@@ -155,11 +158,9 @@ func remove_previews() -> void:
 func set_file_format_selector() -> void:
 	match Export.current_tab:
 		Export.ExportTab.IMAGE:
-			_set_file_format_selector_suitable_file_formats(
-				[Export.FileFormat.PNG, Export.FileFormat.GIF, Export.FileFormat.APNG]
-			)
+			_set_file_format_selector_suitable_file_formats(image_exports)
 		Export.ExportTab.SPRITESHEET:
-			_set_file_format_selector_suitable_file_formats([Export.FileFormat.PNG])
+			_set_file_format_selector_suitable_file_formats(spritesheet_exports)
 
 
 # Updates the suitable list of file formats. First is preferred.
