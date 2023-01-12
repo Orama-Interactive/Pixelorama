@@ -324,15 +324,15 @@ void fragment() {
 	vec2 size = 1.0/TEXTURE_PIXEL_SIZE+0.0001; //fix for some sort of rounding error
 	vec2 pivot = selection_pivot / size; // Normalize pivot position
 	float ratio = size.x / size.y; // Resolution ratio
-	vec2 pixelated_uv = floor(UV * size) / (size - 1.0); // Pixelate UV to fit resolution
-//	vec2 px = UV * size;
-	vec2 px;
+	vec2 pixelated_uv = floor(UV * size) / (size - 1.0); // Pixelate UV to fit resolutio
+	vec2 rotated_uv;
 	if (preview) {
-		px = rotate(pixelated_uv, pivot, ratio) * size;
+		rotated_uv = rotate(pixelated_uv, pivot, ratio);
 	}
 	else {
-		px = rotate(UV, pivot, ratio) * size;
+		rotated_uv = rotate(UV, pivot, ratio);
 	}
+	vec2 px = rotated_uv * size;
 	vec2 local = fract(px);
 	px = ceil(px);
 
@@ -387,9 +387,9 @@ void fragment() {
 	}
 
 	// Taken from NearestNeighbour shader
-	col.a *= texture(selection_tex, rotate(pixelated_uv, pivot, ratio)).a; // Combine with selection mask
+	col.a *= texture(selection_tex, rotated_uv).a; // Combine with selection mask
 	// Make a border to prevent stretching pixels on the edge
-	vec2 border_uv = rotate(pixelated_uv, pivot, ratio);
+	vec2 border_uv = rotated_uv;
 
 	// Center the border
 	border_uv -= 0.5;
@@ -406,6 +406,4 @@ void fragment() {
 	COLOR.rgb = mix(mix(original.rgb, col.rgb, col.a * border), col.rgb, mask);
 	COLOR.a = mix(original.a, 0.0, selection); // Remove alpha on the selected area
 	COLOR.a = mix(COLOR.a, 1.0, col.a * border); // Combine alpha of original image and rotated
-
-//	COLOR = col;
 }
