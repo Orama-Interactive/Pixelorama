@@ -1,35 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://src/UI/Nodes/CollapsibleContainer.gd" type="Script" id=2]
-[ext_resource path="res://assets/graphics/misc/value_arrow.svg" type="Texture" id=3]
 
 [node name="CollapsibleContainer" type="VBoxContainer"]
 margin_right = 40.0
 margin_bottom = 20.0
+theme_type_variation = "CollapsibleContainer"
 script = ExtResource( 2 )
-
-[node name="Button" type="Button" parent="."]
-margin_right = 40.0
-margin_bottom = 20.0
-mouse_default_cursor_shape = 2
-theme_type_variation = "CollapsibleCheckBox"
-toggle_mode = true
-
-[node name="TextureRect" type="TextureRect" parent="Button" groups=["UIButtons"]]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 2.0
-margin_top = -6.0
-margin_right = 14.0
-margin_bottom = 6.0
-rect_rotation = -90.0
-rect_pivot_offset = Vector2( 6, 6 )
-texture = ExtResource( 3 )
-
-[node name="Label" type="Label" parent="Button"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 14.0
-valign = 1
-
-[connection signal="toggled" from="Button" to="." method="_on_Button_toggled"]
