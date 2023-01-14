@@ -32,7 +32,6 @@ func _draw() -> void:
 	Global.small_preview_viewport.get_child(0).get_node("CanvasPreview").update()
 
 	var current_cels: Array = Global.current_project.frames[Global.current_project.current_frame].cels
-	var current_layer: int = Global.current_project.current_layer
 	var position_tmp := position
 	var scale_tmp := scale
 	if Global.mirror_view:
@@ -52,9 +51,7 @@ func _draw() -> void:
 						selected_layers.append(cel_pos[1])
 			if i in selected_layers:
 				if Global.current_project.layers[i].can_layer_get_drawn():
-					draw_texture(
-						current_cels[i].image_texture, move_preview_location, modulate_color
-					)
+					draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
 				else:
 					draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
 			else:
