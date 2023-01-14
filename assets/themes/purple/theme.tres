@@ -1,7 +1,11 @@
-[gd_resource type="Theme" load_steps=173 format=2]
+[gd_resource type="Theme" load_steps=177 format=2]
 
 [ext_resource path="res://assets/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/Roboto-Big.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/graphics/misc/value_arrow_hover.svg" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/misc/value_slider.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/misc/value_arrow_press.svg" type="Texture" id=5]
+[ext_resource path="res://assets/graphics/misc/value_arrow.svg" type="Texture" id=6]
 
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 6.0
@@ -1504,6 +1508,7 @@ CheckButton/styles/disabled = SubResource( 22 )
 CheckButton/styles/hover = SubResource( 22 )
 CheckButton/styles/normal = SubResource( 22 )
 CheckButton/styles/pressed = SubResource( 22 )
+CollapsibleContainer/icons/arrow_normal = ExtResource( 6 )
 ColorPicker/constants/h_width = 30
 ColorPicker/constants/label_width = 10
 ColorPicker/constants/margin = 8
@@ -1787,6 +1792,12 @@ VSplitContainer/icons/grabber = SubResource( 166 )
 VSplitContainer/styles/bg = SubResource( 169 )
 ValueSlider/colors/progress_color = Color( 0.396078, 0.341176, 0.462745, 1 )
 ValueSlider/colors/under_color = Color( 0.0980392, 0.0588235, 0.141176, 1 )
+ValueSlider/icons/arrow_hover = ExtResource( 3 )
+ValueSlider/icons/arrow_normal = ExtResource( 6 )
+ValueSlider/icons/arrow_pressed = ExtResource( 5 )
+ValueSlider/icons/texture_over = null
+ValueSlider/icons/texture_progress = ExtResource( 4 )
+ValueSlider/icons/texture_under = ExtResource( 4 )
 WindowDialog/colors/title_color = Color( 0.79902, 0.780392, 0.820588, 1 )
 WindowDialog/constants/close_h_ofs = 22
 WindowDialog/constants/close_v_ofs = 20

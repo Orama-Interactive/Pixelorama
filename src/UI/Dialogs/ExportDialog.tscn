@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/UI/Dialogs/ExportDialog.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/UI/Nodes/CollapsibleContainer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/UI/Nodes/CollapsibleContainer.gd" type="Script" id=3]
 
 [node name="ExportDialog" type="ConfirmationDialog"]
 margin_right = 532.0
@@ -281,10 +281,12 @@ margin_top = 234.0
 margin_right = 516.0
 margin_bottom = 238.0
 
-[node name="CollapsibleContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer" instance=ExtResource( 3 )]
+[node name="CollapsibleContainer" type="VBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
 margin_top = 242.0
 margin_right = 516.0
 margin_bottom = 262.0
+theme_type_variation = "CollapsibleContainer"
+script = ExtResource( 3 )
 text = "Advanced options"
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer"]
