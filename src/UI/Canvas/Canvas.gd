@@ -48,14 +48,10 @@ func _draw() -> void:
 			if move_preview_location != Vector2.ZERO:
 				for cel_pos in Global.current_project.selected_cels:
 					if cel_pos[0] == Global.current_project.current_frame:
-						selected_layers.append(cel_pos[1])
+						if Global.current_project.layers[cel_pos[1]].can_layer_get_drawn():
+							selected_layers.append(cel_pos[1])
 			if i in selected_layers:
-				if Global.current_project.layers[i].can_layer_get_drawn():
-					draw_texture(
-						current_cels[i].image_texture, move_preview_location, modulate_color
-					)
-				else:
-					draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
+				draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
 			else:
 				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
 
