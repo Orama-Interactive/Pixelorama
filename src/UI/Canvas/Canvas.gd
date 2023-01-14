@@ -51,7 +51,9 @@ func _draw() -> void:
 						selected_layers.append(cel_pos[1])
 			if i in selected_layers:
 				if Global.current_project.layers[i].can_layer_get_drawn():
-					draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
+					draw_texture(
+						current_cels[i].image_texture, move_preview_location, modulate_color
+					)
 				else:
 					draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
 			else:
