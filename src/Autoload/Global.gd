@@ -148,7 +148,6 @@ var onion_skinning_blue_red := false
 var palettes := {}
 
 # Nodes
-var notification_label_node := preload("res://src/UI/NotificationLabel/NotificationLabel.tscn")
 var pixel_layer_button_node: PackedScene = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
 var group_layer_button_node: PackedScene = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
 var pixel_cel_button_node: PackedScene = preload("res://src/UI/Timeline/PixelCelButton.tscn")
@@ -411,7 +410,7 @@ func _initialize_keychain() -> void:
 
 
 func notification_label(text: String) -> void:
-	var notification: Label = notification_label_node.instance()
+	var notification := NotificationLabel.new()
 	notification.text = tr(text)
 	notification.rect_position = main_viewport.rect_global_position
 	notification.rect_position.y += main_viewport.rect_size.y
