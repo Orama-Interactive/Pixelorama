@@ -275,30 +275,7 @@ func _on_size_value_changed(value: float, horizontal: bool) -> void:
 		selection_node.big_bounding_rectangle.size.x = value
 	else:
 		selection_node.big_bounding_rectangle.size.y = value
-	resize_selection()
-
-
-func resize_selection() -> void:
-	var project: Project = Global.current_project
-	var image: SelectionMap = project.selection_map
-	if selection_node.is_moving_content:
-		image = selection_node.original_bitmap
-		var preview_image: Image = selection_node.preview_image
-		preview_image.copy_from(selection_node.original_preview_image)
-		preview_image.resize(
-			selection_node.big_bounding_rectangle.size.x,
-			selection_node.big_bounding_rectangle.size.y,
-			Image.INTERPOLATE_NEAREST
-		)
-		selection_node.preview_image_texture.create_from_image(preview_image, 0)
-
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(image)
-	selection_map_copy.resize_bitmap_values(
-		project, selection_node.big_bounding_rectangle.size, false, false
-	)
-	project.selection_map = selection_map_copy
-	project.selection_map_changed()
+	selection_node.resize_selection()
 
 
 func _on_Timer_timeout() -> void:
