@@ -123,7 +123,6 @@ func draw_start(position: Vector2) -> void:
 				selection_node.undo_data = selection_node.get_undo_data(true)
 			else:
 				selection_node.transform_content_start()
-				selection_node.clear_in_selected_cels = false
 				for image in _get_selected_draw_images():
 					image.blit_rect_mask(
 						selection_node.preview_image,

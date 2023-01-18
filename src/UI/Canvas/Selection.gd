@@ -28,7 +28,6 @@ var gizmos := []  # Array of Gizmos
 var dragged_gizmo: Gizmo = null
 var prev_angle := 0
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
-var clear_in_selected_cels := true
 
 onready var canvas: Canvas = get_parent()
 onready var marching_ants_outline: Sprite = $MarchingAntsOutline
@@ -507,20 +506,13 @@ func transform_content_confirm() -> void:
 	if not is_moving_content:
 		return
 	var project: Project = Global.current_project
-	for cel_index in project.selected_cels:
-		var frame: int = cel_index[0]
-		var layer: int = cel_index[1]
-		if frame >= project.frames.size() or layer >= project.layers.size():
-			continue
-		if not Global.current_project.layers[layer].can_layer_get_drawn():
-			continue
-		var cel_image: Image = project.frames[frame].cels[layer].image
+	for cel in _get_selected_draw_cels():
+		var cel_image: Image = cel.get_image()
 		var src: Image = preview_image
-		if (
-			not is_pasting
-			and not (frame == project.current_frame and layer == project.current_layer)
-		):
-			src = _get_selected_image(cel_image, clear_in_selected_cels)
+		if not is_pasting:
+			src = Image.new()
+			src.copy_from(cel.transformed_content)
+			cel.transformed_content = null
 			src.resize(
 				big_bounding_rectangle.size.x,
 				big_bounding_rectangle.size.y,
@@ -548,7 +540,6 @@ func transform_content_confirm() -> void:
 	original_bitmap = SelectionMap.new()
 	is_moving_content = false
 	is_pasting = false
-	clear_in_selected_cels = true
 	update()
 
 
@@ -563,15 +554,18 @@ func transform_content_cancel() -> void:
 	project.selection_map = original_bitmap
 	project.selection_map_changed()
 	preview_image = original_preview_image
-	if !is_pasting:
-		var cel_image: Image = project.get_current_cel().get_image()
-		cel_image.blit_rect_mask(
-			preview_image,
-			preview_image,
-			Rect2(Vector2.ZERO, Global.current_project.selection_map.get_size()),
-			big_bounding_rectangle.position
-		)
-		canvas.update_texture(project.current_layer)
+	for cel in _get_selected_draw_cels():
+		var cel_image: Image = cel.get_image()
+		if !is_pasting:
+			cel_image.blit_rect_mask(
+				cel.transformed_content,
+				cel.transformed_content,
+				Rect2(Vector2.ZERO, Global.current_project.selection_map.get_size()),
+				big_bounding_rectangle.position
+			)
+			cel.transformed_content = null
+	for cel_index in project.selected_cels:
+		canvas.update_texture(cel_index[1])
 	original_preview_image = Image.new()
 	preview_image = Image.new()
 	original_bitmap = SelectionMap.new()
@@ -639,7 +633,19 @@ func get_undo_data(undo_image: bool) -> Dictionary:
 	return data
 
 
-func _get_selected_draw_images() -> Array:  # Array of Images
+func _get_selected_draw_cels() -> Array:  # Array of BaseCel(s)
+	var cels := []
+	var project: Project = Global.current_project
+	for cel_index in project.selected_cels:
+		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+		if not cel is PixelCel:
+			continue
+		if project.layers[cel_index[1]].can_layer_get_drawn():
+			cels.append(cel)
+	return cels
+
+
+func _get_selected_draw_images() -> Array:  # Array of Image(s)
 	var images := []
 	var project: Project = Global.current_project
 	for cel_index in project.selected_cels:
@@ -908,9 +914,11 @@ func clear_selection(use_undo := false) -> void:
 
 func _get_preview_image() -> void:
 	var project: Project = Global.current_project
-	var cel_image: Image = project.get_current_cel().get_image()
+	var blended_image := Image.new()
+	blended_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	Export.blend_selected_cels(blended_image, project.frames[project.current_frame])
 	if original_preview_image.is_empty():
-		original_preview_image = cel_image.get_rect(big_bounding_rectangle)
+		original_preview_image = blended_image.get_rect(big_bounding_rectangle)
 		original_preview_image.lock()
 		# For non-rectangular selections
 		for x in range(0, big_bounding_rectangle.size.x):
@@ -933,44 +941,30 @@ func _get_preview_image() -> void:
 		false,
 		Image.FORMAT_RGBA8
 	)
-	cel_image.blit_rect_mask(
-		clear_image,
-		original_preview_image,
-		Rect2(Vector2.ZERO, Global.current_project.selection_map.get_size()),
-		big_bounding_rectangle.position
-	)
-	canvas.update_texture(project.current_layer)
+	for cel in _get_selected_draw_cels():
+		var cel_image: Image = cel.get_image()
+		cel.transformed_content = _get_selected_image(cel_image)
+		cel_image.blit_rect_mask(
+			clear_image,
+			cel.transformed_content,
+			Rect2(Vector2.ZERO, Global.current_project.selection_map.get_size()),
+			big_bounding_rectangle.position
+		)
+	for cel_index in project.selected_cels:
+		canvas.update_texture(cel_index[1])
 
 
-func _get_selected_image(cel_image: Image, clear := true) -> Image:
+func _get_selected_image(cel_image: Image) -> Image:
 	var project: Project = Global.current_project
 	var image := Image.new()
-	image = cel_image.get_rect(original_big_bounding_rectangle)
+	image = cel_image.get_rect(big_bounding_rectangle)
 	image.lock()
 	# For non-rectangular selections
-	for x in range(0, original_big_bounding_rectangle.size.x):
-		for y in range(0, original_big_bounding_rectangle.size.y):
+	for x in range(0, big_bounding_rectangle.size.x):
+		for y in range(0, big_bounding_rectangle.size.y):
 			var pos := Vector2(x, y)
-			if !project.can_pixel_get_drawn(
-				pos + original_big_bounding_rectangle.position,
-				original_bitmap,
-				original_big_bounding_rectangle.position
-			):
+			if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
 				image.set_pixelv(pos, Color(0, 0, 0, 0))
 
 	image.unlock()
-	if image.is_invisible():
-		return image
-
-	if clear:
-		var clear_image := Image.new()
-		clear_image.create(image.get_width(), image.get_height(), false, Image.FORMAT_RGBA8)
-		cel_image.blit_rect_mask(
-			clear_image,
-			image,
-			Rect2(Vector2.ZERO, Global.current_project.selection_map.get_size()),
-			original_big_bounding_rectangle.position
-		)
-		canvas.update_texture(project.current_layer)
-
 	return image
