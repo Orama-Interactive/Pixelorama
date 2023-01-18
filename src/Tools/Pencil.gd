@@ -6,7 +6,7 @@ var _changed := false
 var _overwrite := false
 var _fill_inside := false
 var _draw_points := Array()
-
+var _old_snap_mode := false  # needed to reset snap mode in case we change it during some cases
 
 class PencilOp:
 	extends Drawer.ColorOp
@@ -37,6 +37,23 @@ func _on_FillInside_toggled(button_pressed):
 	save_config()
 
 
+func _on_SnapMode_toggled(button_pressed):
+	# This acts as an interface to access the intrinsic snap_mode feature
+	# BaseTool holds the snaping system but for a tool to access them i recommend we do it in
+	# their own script
+	_snap_mode = button_pressed
+	update_config()
+	save_config()
+
+
+func _on_StrokeX_value_changed(value):
+	_stroke_gap.x = value
+
+
+func _on_StrokeY_value_changed(value):
+	_stroke_gap.y = value
+
+
 func _input(event: InputEvent) -> void:
 	var overwrite_button: CheckBox = $Overwrite
 
@@ -54,6 +71,8 @@ func get_config() -> Dictionary:
 	var config := .get_config()
 	config["overwrite"] = _overwrite
 	config["fill_inside"] = _fill_inside
+	config["snap_mode"] = _snap_mode
+	config["stroke_gap"] = _stroke_gap
 	return config
 
 
@@ -61,15 +80,22 @@ func set_config(config: Dictionary) -> void:
 	.set_config(config)
 	_overwrite = config.get("overwrite", _overwrite)
 	_fill_inside = config.get("fill_inside", _fill_inside)
+	_snap_mode = config.get("snap_mode", _snap_mode)
+	_stroke_gap = config.get("stroke_gap", _stroke_gap)
 
 
 func update_config() -> void:
 	.update_config()
 	$Overwrite.pressed = _overwrite
 	$FillInside.pressed = _fill_inside
+	$SnapMode.pressed = _snap_mode
+	$StrokeGap.visible = _snap_mode
+	$StrokeGap/StrokeX.value = _stroke_gap.x
+	$StrokeGap/StrokeY.value = _stroke_gap.y
 
 
 func draw_start(position: Vector2) -> void:
+	_old_snap_mode = _snap_mode
 	.draw_start(position)
 	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
@@ -92,6 +118,7 @@ func draw_start(position: Vector2) -> void:
 
 	_draw_line = Input.is_action_pressed("draw_create_line")
 	if _draw_line:
+		_snap_mode = false
 		_line_start = position
 		_line_end = position
 		update_line_polylines(_line_start, _line_end)
@@ -112,6 +139,7 @@ func draw_move(position: Vector2) -> void:
 		return
 
 	if _draw_line:
+		_snap_mode = false
 		var d = _line_angle_constraint(_line_start, position)
 		_line_end = d.position
 		cursor_text = d.text
@@ -131,6 +159,7 @@ func draw_end(position: Vector2) -> void:
 		return
 
 	if _draw_line:
+		_snap_mode = false
 		draw_tool(_line_start)
 		draw_fill_gap(_line_start, _line_end)
 		_draw_line = false
@@ -145,11 +174,14 @@ func draw_end(position: Vector2) -> void:
 					for y in image_size.y:
 						v.y = y
 						if Geometry.is_point_in_polygon(v, _draw_points):
+							if _snap_mode:
+								v = get_snapped_position(v)
 							draw_tool(v)
 
 	commit_undo()
 	cursor_text = ""
 	update_random_image()
+	_snap_mode = _old_snap_mode
 
 
 func _draw_brush_image(image: Image, src_rect: Rect2, dst: Vector2) -> void:

@@ -13,6 +13,7 @@ var _for_frame := 0  # cache for which frame?
 var _snap_mode := false
 var _snap_vector := Vector2.ONE
 var _snap_offset := Vector2.ZERO
+var _stroke_gap := Vector2.ZERO
 onready var color_rect: ColorRect = $ColorRect
 
 
@@ -54,7 +55,7 @@ func draw_start(position: Vector2) -> void:
 	_draw_cache = []
 	is_moving = true
 	Global.current_project.can_undo = false
-	_snap_offset = position - position.snapped(_snap_vector)
+	_snap_offset = _get_snapped_offset(position)
 
 
 func draw_move(position: Vector2) -> void:
@@ -73,7 +74,15 @@ func draw_end(_position: Vector2) -> void:
 func cursor_move(position: Vector2) -> void:
 	_cursor = position
 	if _snap_mode and is_moving:
-		_cursor = position.snapped(_snap_vector) + _snap_offset
+		_cursor = get_snapped_position(position)
+
+
+func get_snapped_position(position: Vector2) -> Vector2:
+	return position.snapped(_snap_vector + _stroke_gap) + _snap_offset
+
+
+func _get_snapped_offset(position: Vector2) -> Vector2:
+	return position - position.snapped(_snap_vector + _stroke_gap)
 
 
 func draw_indicator(left: bool) -> void:

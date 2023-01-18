@@ -106,10 +106,6 @@ func set_config(config: Dictionary) -> void:
 func update_config() -> void:
 	$Brush/BrushSize.value = _brush_size
 	$ColorInterpolation.value = _brush_interpolate
-	if _brush_image.get_size() != Vector2.ZERO:
-		_snap_vector = (_brush_image.get_size() * _brush_size)
-	else:
-		_snap_vector = Vector2.ONE * _brush_size
 	update_brush()
 
 
@@ -135,6 +131,11 @@ func update_brush() -> void:
 	_polylines = _create_polylines(_indicator)
 	$Brush/Type/Texture.texture = _brush_texture
 	$ColorInterpolation.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
+
+	if _brush_image.get_size() != Vector2.ZERO:
+		_snap_vector = (_brush_image.get_size())
+	else:
+		_snap_vector = Vector2.ONE * _brush_size
 
 
 func update_random_image() -> void:
@@ -283,7 +284,10 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 			err += dx
 			y += sy
 		#coords_to_draw.append_array(_draw_tool(Vector2(x, y)))
-		for coord in _draw_tool(Vector2(x, y)):
+		var current_pixel_coord = Vector2(x, y)
+		if _snap_mode:
+			current_pixel_coord = get_snapped_position(current_pixel_coord)
+		for coord in _draw_tool(current_pixel_coord):
 			coords_to_draw[coord] = 0
 	for c in coords_to_draw.keys():
 		_set_pixel_no_cache(c)
