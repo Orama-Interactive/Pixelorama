@@ -114,10 +114,13 @@ func update_brush() -> void:
 	match _brush.type:
 		Brushes.PIXEL:
 			_brush_texture.create_from_image(load("res://assets/graphics/pixel_image.png"), 0)
+			_snap_vector = Vector2.ONE * _brush_size
 		Brushes.CIRCLE:
 			_brush_texture.create_from_image(load("res://assets/graphics/circle_9x9.png"), 0)
+			_snap_vector = Vector2.ONE * _brush_size
 		Brushes.FILLED_CIRCLE:
 			_brush_texture.create_from_image(load("res://assets/graphics/circle_filled_9x9.png"), 0)
+			_snap_vector = Vector2.ONE * _brush_size
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			$Brush/BrushSize.suffix = "00 %"  # Use a different size convention on images
 			if _brush.random.size() <= 1:
@@ -127,14 +130,11 @@ func update_brush() -> void:
 				_brush_image = _create_blended_brush_image(_brush.random[random])
 			_brush_texture.create_from_image(_brush_image, 0)
 			update_mirror_brush()
+			_snap_vector = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
 	$Brush/Type/Texture.texture = _brush_texture
 	$ColorInterpolation.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
-	if _brush_image.get_size() != Vector2.ZERO:
-		_snap_vector = _brush_image.get_size()
-	else:
-		_snap_vector = Vector2.ONE * _brush_size
 
 
 func update_random_image() -> void:
