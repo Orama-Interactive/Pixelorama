@@ -7,11 +7,43 @@
 [node name="ToolOptions" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="SimilaritySlider" parent="." index="9" instance=ExtResource( 3 )]
-margin_top = 174.0
+[node name="SimilaritySlider" parent="." index="2" instance=ExtResource( 3 )]
+margin_top = 26.0
 margin_right = 116.0
-margin_bottom = 198.0
+margin_bottom = 50.0
 value = 100.0
 prefix = "Similarity:"
+
+[node name="ModeLabel" parent="." index="3"]
+margin_top = 54.0
+margin_bottom = 68.0
+
+[node name="Modes" parent="." index="4"]
+margin_top = 72.0
+margin_bottom = 92.0
+
+[node name="PositionLabel" parent="." index="5"]
+margin_top = 96.0
+margin_bottom = 110.0
+
+[node name="XSpinBox" parent="." index="6"]
+margin_top = 114.0
+margin_bottom = 138.0
+
+[node name="YSpinBox" parent="." index="7"]
+margin_top = 142.0
+margin_bottom = 166.0
+
+[node name="SizeLabel" parent="." index="8"]
+margin_top = 170.0
+margin_bottom = 184.0
+
+[node name="WSpinBox" parent="." index="9"]
+margin_top = 188.0
+margin_bottom = 212.0
+
+[node name="HSpinBox" parent="." index="10"]
+margin_top = 216.0
+margin_bottom = 240.0
 
 [connection signal="value_changed" from="SimilaritySlider" to="." method="_on_Similarity_value_changed"]

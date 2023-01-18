@@ -69,7 +69,14 @@ value = 1.0
 allow_greater = true
 prefix = "H:"
 
-[node name="Timer" type="Timer" parent="." index="10"]
+[node name="NewBrush" type="Button" parent="." index="10"]
+visible = false
+margin_top = 216.0
+margin_right = 117.0
+margin_bottom = 236.0
+text = "Make new Brush"
+
+[node name="Timer" type="Timer" parent="." index="11"]
 wait_time = 0.2
 one_shot = true
 
@@ -78,4 +85,5 @@ one_shot = true
 [connection signal="value_changed" from="YSpinBox" to="." method="_on_position_value_changed" binds= [ false ]]
 [connection signal="value_changed" from="WSpinBox" to="." method="_on_size_value_changed" binds= [ true ]]
 [connection signal="value_changed" from="HSpinBox" to="." method="_on_size_value_changed" binds= [ false ]]
+[connection signal="pressed" from="NewBrush" to="." method="_on_NewBrush_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

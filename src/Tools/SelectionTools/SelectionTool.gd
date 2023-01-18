@@ -45,6 +45,10 @@ func refresh_options():
 	$Modes.select(_mode_selected)
 
 
+func _on_NewBrush_pressed():
+	Global.canvas.selection.new_brush()
+
+
 func get_config() -> Dictionary:
 	var config := .get_config()
 	config["mode_selected"] = _mode_selected
@@ -65,6 +69,7 @@ func set_spinbox_values() -> void:
 	yspinbox.editable = xspinbox.editable
 	wspinbox.editable = xspinbox.editable
 	hspinbox.editable = xspinbox.editable
+	$NewBrush.visible = xspinbox.editable
 
 	xspinbox.value = select_rect.position.x
 	yspinbox.value = select_rect.position.y
