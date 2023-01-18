@@ -8,6 +8,7 @@ var _fill_inside := false
 var _draw_points := Array()
 var _old_snap_mode := false  # needed to reset snap mode in case we change it during some cases
 
+
 class PencilOp:
 	extends Drawer.ColorOp
 	var changed := false
