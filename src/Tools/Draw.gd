@@ -106,6 +106,10 @@ func set_config(config: Dictionary) -> void:
 func update_config() -> void:
 	$Brush/BrushSize.value = _brush_size
 	$ColorInterpolation.value = _brush_interpolate
+	if _brush_image.get_size() != Vector2.ZERO:
+		_snap_vector = (_brush_image.get_size() * _brush_size)
+	else:
+		_snap_vector = Vector2.ONE * _brush_size
 	update_brush()
 
 

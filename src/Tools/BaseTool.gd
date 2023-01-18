@@ -10,6 +10,9 @@ var _cursor := Vector2.INF
 var _draw_cache: PoolVector2Array = []  # for storing already drawn pixels
 var _for_frame := 0  # cache for which frame?
 
+var _snap_mode := false
+var _snap_vector := Vector2.ONE
+var _snap_offset := Vector2.ZERO
 onready var color_rect: ColorRect = $ColorRect
 
 
@@ -47,10 +50,11 @@ func update_config() -> void:
 	pass
 
 
-func draw_start(_position: Vector2) -> void:
+func draw_start(position: Vector2) -> void:
 	_draw_cache = []
 	is_moving = true
 	Global.current_project.can_undo = false
+	_snap_offset = position - position.snapped(_snap_vector)
 
 
 func draw_move(position: Vector2) -> void:
@@ -68,6 +72,8 @@ func draw_end(_position: Vector2) -> void:
 
 func cursor_move(position: Vector2) -> void:
 	_cursor = position
+	if _snap_mode and is_moving:
+		_cursor = position.snapped(_snap_vector) + _snap_offset
 
 
 func draw_indicator(left: bool) -> void:
