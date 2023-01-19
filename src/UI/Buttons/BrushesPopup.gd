@@ -75,13 +75,17 @@ static func add_project_brush(image: Image, hint := "") -> void:
 	button.brush.type = CUSTOM
 	button.brush.image = image
 	button.hint_tooltip = hint
-	var container = Global.brushes_popup.get_node("Background/TabContainer/Project/ProjectBrushContainer")
+	var container = Global.brushes_popup.get_node(
+		"Background/TabContainer/Project/ProjectBrushContainer"
+	)
 	container.add_child(button)
 	button.brush.index = button.get_index()
 
 
 static func clear_project_brush() -> void:
-	var container = Global.brushes_popup.get_node("Background/TabContainer/Project/ProjectBrushContainer")
+	var container = Global.brushes_popup.get_node(
+		"Background/TabContainer/Project/ProjectBrushContainer"
+	)
 	for child in container.get_children():
 		child.queue_free()
 		Global.brushes_popup.emit_signal("brush_removed", child.brush)
