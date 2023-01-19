@@ -39,20 +39,13 @@ func _on_BrushType_pressed() -> void:
 		Global.brushes_popup.connect(
 			"brush_selected", self, "_on_Brush_selected", [], CONNECT_ONESHOT
 		)
-	# Now we set position and tab allignment considering certain conditions
-	var pop_size := Vector2(226, 72)
-	var pop_position: Vector2 = $Brush/Type.rect_global_position
-	var off_limit: float = Global.shrink * (pop_position.x + pop_size.x) - OS.get_window_size().x
-	if off_limit <= 72 and off_limit > 0:  # Some space left "Leftward"
-		pop_position -= Vector2(pop_size.x / 2.0 - 48, -32)
-		Global.brushes_popup.get_node("TabContainer").tab_align = TabContainer.ALIGN_CENTER
-	elif off_limit >= 72:  # No space left "Leftward"
-		pop_position -= Vector2(pop_size.x / 2.0 + 16, -32)
-		Global.brushes_popup.get_node("TabContainer").tab_align = TabContainer.ALIGN_RIGHT
-	else:
-		pop_position -= Vector2(0, -32)  # Plenty of space left "Leftward"
-		Global.brushes_popup.get_node("TabContainer").tab_align = TabContainer.ALIGN_LEFT
-	Global.brushes_popup.popup(Rect2(pop_position, pop_size))
+	# Now we set position
+	var tool_option_container = get_node("../../")
+	var brush_button = $Brush/Type
+	var pop_position = brush_button.rect_global_position + Vector2(0, brush_button.rect_size.y)
+	var size_x = tool_option_container.rect_size.x
+	var size_y = tool_option_container.rect_size.y - $Brush.rect_position.y - $Brush.rect_size.y
+	Global.brushes_popup.popup(Rect2(pop_position, Vector2(size_x, size_y)))
 
 
 func _on_Brush_selected(brush: Brushes.Brush) -> void:
