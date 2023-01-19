@@ -11,7 +11,6 @@ var is_pasting := false
 var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
 
 var temp_rect := Rect2()
-var temp_bitmap := SelectionMap.new()
 var rect_aspect_ratio := 0.0
 var temp_rect_size := Vector2.ZERO
 var temp_rect_pivot := Vector2.ZERO
@@ -108,7 +107,6 @@ func _input(event: InputEvent) -> void:
 					if Input.is_action_pressed("transform_move_selection_only"):
 						undo_data = get_undo_data(false)
 						temp_rect = big_bounding_rectangle
-						temp_bitmap = project.selection_map
 					else:
 						transform_content_start()
 					project.selection_offset = Vector2.ZERO
@@ -364,7 +362,9 @@ func _resize_rect(pos: Vector2, dir: Vector2) -> void:
 
 func resize_selection() -> void:
 	var size := big_bounding_rectangle.size.abs()
+	var selection_map: SelectionMap = Global.current_project.selection_map
 	if is_moving_content:
+		selection_map = original_bitmap
 		preview_image.copy_from(original_preview_image)
 		preview_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
 		if temp_rect.size.x < 0:
@@ -373,12 +373,12 @@ func resize_selection() -> void:
 			preview_image.flip_y()
 		preview_image_texture.create_from_image(preview_image, 0)
 
-	var temp_bitmap_copy := SelectionMap.new()
-	temp_bitmap_copy.copy_from(temp_bitmap)
-	temp_bitmap_copy.resize_bitmap_values(
+	var selection_map_copy := SelectionMap.new()
+	selection_map_copy.copy_from(selection_map)
+	selection_map_copy.resize_bitmap_values(
 		Global.current_project, size, temp_rect.size.x < 0, temp_rect.size.y < 0
 	)
-	Global.current_project.selection_map = temp_bitmap_copy
+	Global.current_project.selection_map = selection_map_copy
 	Global.current_project.selection_map_changed()
 	update()
 
@@ -486,7 +486,6 @@ func transform_content_start() -> void:
 		return
 	undo_data = get_undo_data(true)
 	temp_rect = big_bounding_rectangle
-	temp_bitmap = Global.current_project.selection_map
 	_get_preview_image()
 	if original_preview_image.is_empty():
 		undo_data = get_undo_data(false)
@@ -510,7 +509,6 @@ func transform_content_confirm() -> void:
 		var cel_image: Image = cel.get_image()
 		var src: Image = preview_image
 		if not is_pasting:
-			src = Image.new()
 			src.copy_from(cel.transformed_content)
 			cel.transformed_content = null
 			src.resize(
@@ -778,14 +776,12 @@ func paste(in_place := false) -> void:
 		project.selection_map.move_bitmap_values(Global.current_project, false)
 
 	self.big_bounding_rectangle = big_bounding_rectangle
-	temp_bitmap = project.selection_map
 	temp_rect = big_bounding_rectangle
 	is_moving_content = true
 	is_pasting = true
 	original_preview_image = clipboard.image
 	preview_image.copy_from(original_preview_image)
 	preview_image_texture.create_from_image(preview_image, 0)
-
 	project.selection_map_changed()
 
 
@@ -840,8 +836,7 @@ func new_brush() -> void:
 		selection_map_copy.copy_from(project.selection_map)
 		selection_map_copy.move_bitmap_values(project, false)
 		var clipboard = str2var(OS.get_clipboard())
-		if typeof(clipboard) == TYPE_DICTIONARY:
-			# A sanity check
+		if typeof(clipboard) == TYPE_DICTIONARY:  # A sanity check
 			if not clipboard.has_all(
 				["image", "selection_map", "big_bounding_rectangle", "selection_offset"]
 			):
@@ -854,7 +849,7 @@ func new_brush() -> void:
 		for x in brush.get_size().x:
 			for y in brush.get_size().y:
 				var pos := Vector2(x, y)
-				var offset_pos = big_bounding_rectangle.position
+				var offset_pos := big_bounding_rectangle.position
 				if offset_pos.x < 0:
 					offset_pos.x = 0
 				if offset_pos.y < 0:
@@ -870,10 +865,9 @@ func new_brush() -> void:
 
 
 func select_all() -> void:
-	var project: Project = Global.current_project
 	var undo_data_tmp := get_undo_data(false)
 	clear_selection()
-	var full_rect := Rect2(Vector2.ZERO, project.size)
+	var full_rect := Rect2(Vector2.ZERO, Global.current_project.size)
 	select_rect(full_rect)
 	commit_undo("Select", undo_data_tmp)
 
@@ -947,7 +941,7 @@ func _get_preview_image() -> void:
 		cel_image.blit_rect_mask(
 			clear_image,
 			cel.transformed_content,
-			Rect2(Vector2.ZERO, Global.current_project.selection_map.get_size()),
+			Rect2(Vector2.ZERO, project.selection_map.get_size()),
 			big_bounding_rectangle.position
 		)
 	for cel_index in project.selected_cels:
