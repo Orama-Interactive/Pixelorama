@@ -88,9 +88,8 @@ static func add_project_brush(image: Image, hint := "") -> void:
 	)
 	container.add_child(button)
 	button.brush.index = button.get_index()
+	container.visible = true
 	Global.brushes_popup.get_node("Background/Brushes/Categories/ProjectLabel").visible = true
-	Global.brushes_popup.get_node("Background/Brushes/Categories/ProjectBrushContainer").visible = true
-
 
 
 static func clear_project_brush() -> void:
@@ -126,8 +125,11 @@ func remove_brush(brush_button: Node) -> void:
 	project.brushes.erase(brush_button.brush.image)
 
 	if project.brushes.size() == 0:
+		var container = Global.brushes_popup.get_node(
+			"Background/Brushes/Categories/ProjectBrushContainer"
+		)
+		container.visible = false
 		Global.brushes_popup.get_node("Background/Brushes/Categories/ProjectLabel").visible = false
-		Global.brushes_popup.get_node("Background/Brushes/Categories/ProjectBrushContainer").visible = false
 
 	project.undos += 1
 	project.undo_redo.create_action("Delete Custom Brush")
