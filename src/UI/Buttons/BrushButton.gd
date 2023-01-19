@@ -3,12 +3,20 @@ extends BaseButton
 var brush = Global.brushes_popup.Brush.new()
 
 
-func _on_BrushButton_item_rect_changed():
+func _ready():
+	update_name()
+
+
+func update_name():
 	$HBoxContainer/Name.text = hint_tooltip
 	if brush.type == Global.brushes_popup.RANDOM_FILE:
 		$HBoxContainer/Name.text += " (Random)"
 	if brush.type == Global.brushes_popup.CUSTOM:
 		$HBoxContainer/Name.text = "Project Brush %s" % str(get_index() + 1)
+
+
+func _on_BrushButton_item_rect_changed():
+	update_name()
 
 
 func _on_BrushButton_pressed() -> void:
