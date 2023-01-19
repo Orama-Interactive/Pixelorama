@@ -18,7 +18,7 @@ class Brush:
 
 
 func _ready() -> void:
-	var container = get_node("Background/TabContainer/File/FileBrushContainer")
+	var container = get_node("Background/TabContainer/File/Categories/DefaultBrushContainer")
 	var button := create_button(pixel_image)
 	button.brush.type = PIXEL
 	button.hint_tooltip = "Pixel brush"
@@ -54,7 +54,7 @@ static func create_button(image: Image) -> Node:
 	var button: BaseButton = preload("res://src/UI/Buttons/BrushButton.tscn").instance()
 	var tex := ImageTexture.new()
 	tex.create_from_image(image, 0)
-	button.get_node("HBoxContainer/TransparentChecker/BrushTexture").texture = tex
+	button.get_node("BrushTexture").texture = tex
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	return button
 
@@ -65,7 +65,15 @@ static func add_file_brush(images: Array, hint := "") -> void:
 	button.brush.image = images[0]
 	button.brush.random = images
 	button.hint_tooltip = hint
-	var container = Global.brushes_popup.get_node("Background/TabContainer/File/FileBrushContainer")
+	var container
+	if button.brush.type == RANDOM_FILE:
+		container = Global.brushes_popup.get_node(
+			"Background/TabContainer/File/Categories/RandomFileBrushContainer"
+		)
+	else:
+		container = Global.brushes_popup.get_node(
+			"Background/TabContainer/File/Categories/FileBrushContainer"
+		)
 	container.add_child(button)
 	button.brush.index = button.get_index()
 
@@ -96,7 +104,7 @@ func get_brush(type: int, index: int) -> Brush:
 	if type == CUSTOM:
 		container = get_node("Background/TabContainer/Project/ProjectBrushContainer")
 	else:
-		container = get_node("Background/TabContainer/File/FileBrushContainer")
+		container = get_node("Background/TabContainer/File/Categories/FileBrushContainer")
 	var brush := get_default_brush()
 	if index < container.get_child_count():
 		brush = container.get_child(index).brush

@@ -39,12 +39,21 @@ func _on_BrushType_pressed() -> void:
 		Global.brushes_popup.connect(
 			"brush_selected", self, "_on_Brush_selected", [], CONNECT_ONESHOT
 		)
-	# Now we set position
+	# Now we set position and columns
 	var tool_option_container = get_node("../../")
 	var brush_button = $Brush/Type
 	var pop_position = brush_button.rect_global_position + Vector2(0, brush_button.rect_size.y)
 	var size_x = tool_option_container.rect_size.x
 	var size_y = tool_option_container.rect_size.y - $Brush.rect_position.y - $Brush.rect_size.y
+	var columns = int(size_x / 36) - 1 # 36 is the rect_size of BrushButton.tscn
+	var categories = Global.brushes_popup.get_node("Background/TabContainer/File/Categories")
+	for child in categories.get_children():
+		if child is GridContainer:
+			child.columns = columns
+	#  Use a separate tab for project brushes
+	Global.brushes_popup.get_node(
+		"Background/TabContainer/Project/ProjectBrushContainer"
+	).columns = columns
 	Global.brushes_popup.popup(Rect2(pop_position, Vector2(size_x, size_y)))
 
 
