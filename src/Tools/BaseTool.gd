@@ -78,7 +78,22 @@ func cursor_move(position: Vector2) -> void:
 
 
 func get_snapped_position(position: Vector2) -> Vector2:
-	return position.snapped(_snap_vector + _stroke_gap) + _snap_offset
+	var snap_factor = _snap_vector + _stroke_gap
+	var snap_position = position.snapped(snap_factor) + _snap_offset
+	var t_c = snap_position + Vector2(0, -snap_factor.y)
+	var t_r = snap_position + Vector2(snap_factor.x, -snap_factor.y)
+	var t_r_r = snap_position + Vector2(2 * snap_factor.x, -snap_factor.y)
+	var m_c = snap_position
+	var m_r = snap_position + Vector2(snap_factor.x, 0)
+	var m_r_r = snap_position + Vector2(2 * snap_factor.x, 0)
+	var b_c = snap_position + Vector2(0, snap_factor.y)
+	var b_r = snap_position + Vector2(snap_factor.x, snap_factor.y)
+	var b_r_r = snap_position + Vector2(2 * snap_factor.x, snap_factor.y)
+	var vec_arr := [t_c, t_r, t_r_r, m_c, m_r, m_r_r, b_c, b_r, b_r_r]
+	for vec in vec_arr:
+		if vec.distance_to(position) < snap_position.distance_to(position):
+			snap_position = vec
+	return snap_position
 
 
 func _get_snapped_offset(position: Vector2) -> Vector2:
