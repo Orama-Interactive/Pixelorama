@@ -3,6 +3,7 @@
 [ext_resource path="res://src/UI/Buttons/BrushesPopup.gd" type="Script" id=1]
 
 [node name="BrushesPopup" type="Popup"]
+visible = true
 margin_right = 225.0
 margin_bottom = 271.0
 rect_min_size = Vector2( 0, 144 )
@@ -12,84 +13,89 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="TabContainer" type="TabContainer" parent="Background"]
+[node name="Brushes" type="ScrollContainer" parent="Background"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 218.0
 margin_bottom = 264.0
-size_flags_vertical = 3
-tab_align = 0
-drag_to_rearrange_enabled = true
-
-[node name="File" type="ScrollContainer" parent="Background/TabContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
 rect_min_size = Vector2( 0, 36 )
 size_flags_horizontal = 3
 scroll_horizontal_enabled = false
 
-[node name="Categories" type="VBoxContainer" parent="Background/TabContainer/File"]
-margin_right = 203.0
-margin_bottom = 221.0
+[node name="Categories" type="VBoxContainer" parent="Background/Brushes"]
+margin_right = 211.0
+margin_bottom = 257.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="DefaultLabel" type="Label" parent="Background/TabContainer/File/Categories"]
-margin_right = 40.0
+[node name="Label" type="Label" parent="Background/Brushes/Categories"]
+margin_right = 211.0
 margin_bottom = 14.0
 text = "Default Brushes"
+
+[node name="HSeparator" type="HSeparator" parent="Background/Brushes/Categories/Label"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -4.0
+
+[node name="DefaultBrushContainer" type="GridContainer" parent="Background/Brushes/Categories"]
+margin_top = 18.0
+margin_right = 211.0
+margin_bottom = 18.0
+
+[node name="ProjectLabel" type="Label" parent="Background/Brushes/Categories"]
+visible = false
+margin_top = 22.0
+margin_right = 211.0
+margin_bottom = 36.0
+text = "Project Brushes"
 autowrap = true
 
-[node name="DefaultBrushContainer" type="GridContainer" parent="Background/TabContainer/File/Categories"]
-margin_right = 203.0
-size_flags_horizontal = 3
+[node name="HSeparator" type="HSeparator" parent="Background/Brushes/Categories/ProjectLabel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -4.0
 
-[node name="HSeparator" type="HSeparator" parent="Background/TabContainer/File/Categories"]
-margin_right = 40.0
-margin_bottom = 4.0
+[node name="ProjectBrushContainer" type="GridContainer" parent="Background/Brushes/Categories"]
+visible = false
+margin_top = 22.0
+margin_right = 211.0
+margin_bottom = 22.0
 
-[node name="FileLabel" type="Label" parent="Background/TabContainer/File/Categories"]
-margin_right = 102.0
-margin_bottom = 14.0
+[node name="FileLabel" type="Label" parent="Background/Brushes/Categories"]
+margin_top = 22.0
+margin_right = 211.0
+margin_bottom = 36.0
 text = "File Brushes"
 autowrap = true
 
-[node name="FileBrushContainer" type="GridContainer" parent="Background/TabContainer/File/Categories"]
-margin_right = 203.0
-size_flags_horizontal = 3
+[node name="HSeparator" type="HSeparator" parent="Background/Brushes/Categories/FileLabel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -4.0
 
-[node name="HSeparator2" type="HSeparator" parent="Background/TabContainer/File/Categories"]
-margin_right = 40.0
-margin_bottom = 4.0
+[node name="FileBrushContainer" type="GridContainer" parent="Background/Brushes/Categories"]
+margin_top = 40.0
+margin_right = 211.0
+margin_bottom = 40.0
 
-[node name="RandomFileLabel" type="Label" parent="Background/TabContainer/File/Categories"]
-margin_right = 102.0
-margin_bottom = 14.0
+[node name="RandomFileLabel" type="Label" parent="Background/Brushes/Categories"]
+margin_top = 44.0
+margin_right = 211.0
+margin_bottom = 58.0
 text = "Random File Brushes"
 autowrap = true
 
-[node name="RandomFileBrushContainer" type="GridContainer" parent="Background/TabContainer/File/Categories"]
-margin_right = 203.0
-size_flags_horizontal = 3
-
-[node name="Project" type="ScrollContainer" parent="Background/TabContainer"]
-visible = false
+[node name="HSeparator" type="HSeparator" parent="Background/Brushes/Categories/RandomFileLabel"]
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-rect_min_size = Vector2( 0, 36 )
-size_flags_horizontal = 3
-scroll_horizontal_enabled = false
+margin_top = -4.0
 
-[node name="ProjectBrushContainer" type="GridContainer" parent="Background/TabContainer/Project"]
-margin_right = 203.0
-margin_bottom = 221.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="RandomFileBrushContainer" type="GridContainer" parent="Background/Brushes/Categories"]
+margin_top = 62.0
+margin_right = 211.0
+margin_bottom = 62.0

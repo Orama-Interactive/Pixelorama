@@ -18,7 +18,7 @@ class Brush:
 
 
 func _ready() -> void:
-	var container = get_node("Background/TabContainer/File/Categories/DefaultBrushContainer")
+	var container = get_node("Background/Brushes/Categories/DefaultBrushContainer")
 	var button := create_button(pixel_image)
 	button.brush.type = PIXEL
 	button.hint_tooltip = "Pixel brush"
@@ -68,11 +68,11 @@ static func add_file_brush(images: Array, hint := "") -> void:
 	var container
 	if button.brush.type == RANDOM_FILE:
 		container = Global.brushes_popup.get_node(
-			"Background/TabContainer/File/Categories/RandomFileBrushContainer"
+			"Background/Brushes/Categories/RandomFileBrushContainer"
 		)
 	else:
 		container = Global.brushes_popup.get_node(
-			"Background/TabContainer/File/Categories/FileBrushContainer"
+			"Background/Brushes/Categories/FileBrushContainer"
 		)
 	container.add_child(button)
 	button.brush.index = button.get_index()
@@ -84,15 +84,22 @@ static func add_project_brush(image: Image, hint := "") -> void:
 	button.brush.image = image
 	button.hint_tooltip = hint
 	var container = Global.brushes_popup.get_node(
-		"Background/TabContainer/Project/ProjectBrushContainer"
-	)
+			"Background/Brushes/Categories/ProjectBrushContainer"
+		)
 	container.add_child(button)
 	button.brush.index = button.get_index()
+	Global.brushes_popup.get_node(
+		"Background/Brushes/Categories/ProjectLabel"
+	).visible = true
+	Global.brushes_popup.get_node(
+		"Background/Brushes/Categories/ProjectBrushContainer"
+	).visible = true
+
 
 
 static func clear_project_brush() -> void:
 	var container = Global.brushes_popup.get_node(
-		"Background/TabContainer/Project/ProjectBrushContainer"
+		"Background/Brushes/Categories/ProjectBrushContainer"
 	)
 	for child in container.get_children():
 		child.queue_free()
@@ -100,11 +107,15 @@ static func clear_project_brush() -> void:
 
 
 func get_brush(type: int, index: int) -> Brush:
-	var container
-	if type == CUSTOM:
-		container = get_node("Background/TabContainer/Project/ProjectBrushContainer")
-	else:
-		container = get_node("Background/TabContainer/File/Categories/FileBrushContainer")
+	var container = get_node("Background/Brushes/Categories/DefaultBrushContainer")
+	match type:
+		CUSTOM:
+			container = get_node("Background/Brushes/Categories/ProjectBrushContainer")
+		FILE:
+			container = get_node("Background/Brushes/Categories/FileBrushContainer")
+		RANDOM_FILE:
+			container = get_node("Background/Brushes/Categories/RandomFileBrushContainer")
+
 	var brush := get_default_brush()
 	if index < container.get_child_count():
 		brush = container.get_child(index).brush
@@ -117,6 +128,14 @@ func remove_brush(brush_button: Node) -> void:
 	var project = Global.current_project
 	var undo_brushes: Array = project.brushes.duplicate()
 	project.brushes.erase(brush_button.brush.image)
+
+	if project.brushes.size() == 0:
+		Global.brushes_popup.get_node(
+			"Background/Brushes/Categories/ProjectLabel"
+		).visible = false
+		Global.brushes_popup.get_node(
+			"Background/Brushes/Categories/ProjectBrushContainer"
+		).visible = false
 
 	project.undos += 1
 	project.undo_redo.create_action("Delete Custom Brush")
