@@ -1,56 +1,65 @@
 [gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Buttons/BrushButton.gd" type="Script" id=2]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 1, 1, 1, 1 )
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-anti_aliasing = false
-
 [node name="BrushButton" type="Button"]
-margin_right = 32.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 1 )
-custom_styles/focus = SubResource( 1 )
-custom_styles/disabled = SubResource( 1 )
-custom_styles/normal = SubResource( 1 )
+margin_right = 129.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 0, 36 )
 button_mask = 7
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_editor_description_": ""
 }
 
-[node name="BrushTexture" type="TextureRect" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 2.0
+margin_right = -3.0
+margin_bottom = -2.0
+
+[node name="TransparentChecker" parent="HBoxContainer" instance=ExtResource( 1 )]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+
+[node name="BrushTexture" type="TextureRect" parent="HBoxContainer/TransparentChecker"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+rect_min_size = Vector2( 28, 28 )
 expand = true
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="DeleteButton" type="Button" parent="."]
+[node name="Name" type="Label" parent="HBoxContainer"]
+margin_left = 36.0
+margin_top = 9.0
+margin_right = 123.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+clip_text = true
+
+[node name="DeleteButton" type="Button" parent="HBoxContainer"]
 visible = false
-modulate = Color( 1, 0.00392157, 0.00392157, 0.709804 )
-margin_left = 24.0
-margin_right = 44.0
-margin_bottom = 20.0
-rect_scale = Vector2( 0.4, 0.4 )
+margin_left = 103.0
+margin_right = 123.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "X"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="item_rect_changed" from="." to="." method="_on_BrushButton_item_rect_changed"]
 [connection signal="mouse_entered" from="." to="." method="_on_BrushButton_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_BrushButton_mouse_exited"]
 [connection signal="pressed" from="." to="." method="_on_BrushButton_pressed"]
-[connection signal="mouse_entered" from="DeleteButton" to="." method="_on_BrushButton_mouse_entered"]
-[connection signal="mouse_exited" from="DeleteButton" to="." method="_on_BrushButton_mouse_exited"]
-[connection signal="pressed" from="DeleteButton" to="." method="_on_DeleteButton_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/DeleteButton" to="." method="_on_BrushButton_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/DeleteButton" to="." method="_on_BrushButton_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]

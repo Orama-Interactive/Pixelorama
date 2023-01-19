@@ -3,18 +3,25 @@
 [ext_resource path="res://src/UI/Buttons/BrushesPopup.gd" type="Script" id=1]
 
 [node name="BrushesPopup" type="Popup"]
-margin_right = 226.0
-margin_bottom = 144.0
+margin_right = 225.0
+margin_bottom = 271.0
 rect_min_size = Vector2( 0, 144 )
 script = ExtResource( 1 )
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="Background" type="PanelContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="TabContainer" type="TabContainer" parent="Background"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 218.0
+margin_bottom = 264.0
 size_flags_vertical = 3
+tab_align = 0
 drag_to_rearrange_enabled = true
 
-[node name="File" type="ScrollContainer" parent="TabContainer"]
+[node name="File" type="ScrollContainer" parent="Background/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -25,10 +32,13 @@ rect_min_size = Vector2( 0, 36 )
 size_flags_horizontal = 3
 scroll_horizontal_enabled = false
 
-[node name="FileBrushContainer" type="GridContainer" parent="TabContainer/File"]
-columns = 6
+[node name="FileBrushContainer" type="VBoxContainer" parent="Background/TabContainer/File"]
+margin_right = 203.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Project" type="ScrollContainer" parent="TabContainer"]
+[node name="Project" type="ScrollContainer" parent="Background/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -40,5 +50,8 @@ rect_min_size = Vector2( 0, 36 )
 size_flags_horizontal = 3
 scroll_horizontal_enabled = false
 
-[node name="ProjectBrushContainer" type="GridContainer" parent="TabContainer/Project"]
-columns = 5
+[node name="ProjectBrushContainer" type="VBoxContainer" parent="Background/TabContainer/Project"]
+margin_right = 203.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
