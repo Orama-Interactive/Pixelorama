@@ -3,7 +3,6 @@
 [ext_resource path="res://src/UI/Buttons/BrushesPopup.gd" type="Script" id=1]
 
 [node name="BrushesPopup" type="Popup"]
-visible = true
 margin_right = 225.0
 margin_bottom = 271.0
 rect_min_size = Vector2( 0, 144 )
