@@ -16,7 +16,7 @@ func _ready() -> void:
 
 
 func _input(event):
-	if event is InputEventMouseButton or event is InputEventKey:
+	if event is InputEventMouseMotion or event is InputEventKey:
 		var image = $CelTexture.texture.get_data()
 		if image != null:
 			if image.get_used_rect().size != Vector2.ZERO:
