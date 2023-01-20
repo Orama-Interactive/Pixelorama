@@ -601,16 +601,8 @@ func _pick_color(position: Vector2) -> void:
 	if position.x > image.get_width() - 1 or position.y > image.get_height() - 1:
 		return
 
-	var color := Color(0, 0, 0, 0)
-	var curr_frame :Frame = project.frames[project.current_frame]
-	for layer in project.layers.size():
-		var idx = (project.layers.size() - 1) - layer
-		if project.layers[idx].can_layer_get_drawn():
-			image = curr_frame.cels[idx].get_image()
-			image.lock()
-			color = image.get_pixelv(position)
-			image.unlock()
-			if color != Color(0, 0, 0, 0):
-				break
+	image.lock()
+	var color := image.get_pixelv(position)
+	image.unlock()
 	var button := BUTTON_LEFT if Tools._slots[BUTTON_LEFT].tool_node == self else BUTTON_RIGHT
 	Tools.assign_color(color, button, false)
