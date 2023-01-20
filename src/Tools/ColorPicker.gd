@@ -33,10 +33,7 @@ func _on_ExtractFrom_item_selected(index):
 
 
 func get_config() -> Dictionary:
-	return {
-		"color_slot": _color_slot,
-		"mode": _mode
-	}
+	return {"color_slot": _color_slot, "mode": _mode}
 
 
 func set_config(config: Dictionary) -> void:
@@ -77,7 +74,7 @@ func _pick_color(position: Vector2) -> void:
 		return
 	match _mode:
 		TOP_COLOR:
-			var curr_frame :Frame = project.frames[project.current_frame]
+			var curr_frame: Frame = project.frames[project.current_frame]
 			for layer in project.layers.size():
 				var idx = (project.layers.size() - 1) - layer
 				if project.layers[idx].can_layer_get_drawn():
@@ -93,6 +90,3 @@ func _pick_color(position: Vector2) -> void:
 			image.unlock()
 	var button := BUTTON_LEFT if _color_slot == 0 else BUTTON_RIGHT
 	Tools.assign_color(color, button, false)
-
-
-
