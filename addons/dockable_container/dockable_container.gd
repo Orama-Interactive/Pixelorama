@@ -32,8 +32,11 @@ var _current_split_index = 0
 var _children_names = {}
 var _layout_dirty = false
 
+var windows :Control
 
 func _ready() -> void:
+	windows = Control.new()
+	get_parent().call_deferred("add_child", windows)
 	set_process_input(false)
 	_panel_container.name = "_panel_container"
 	.add_child(_panel_container)
@@ -82,6 +85,39 @@ func _input(event: InputEvent) -> void:
 		if not panel:
 			return
 		fit_child_in_rect(_drag_n_drop_panel, panel.get_child_rect())
+
+
+func convert_to_window(node: Node):
+	var old_layout = get_layout().clone()
+	remove_child(node)
+	node.rect_global_position = Vector2.ZERO
+	var window = WindowDialog.new()
+	window.rect_min_size = node.rect_min_size
+	window.rect_size = node.rect_size
+	window.rect_position = OS.get_screen_size() / 2 - window.rect_size / 2
+	window.popup_exclusive = true
+	window.resizable = true
+	window.add_child(node)
+	windows.add_child(window)
+	window.show()
+	window.connect("visibility_changed", self, "_convert_to_pannel", [node, old_layout])
+	window.connect("item_rect_changed", self, "_change_content_rect", [node])
+
+
+func _change_content_rect(content):
+	content.rect_size = content.get_parent().rect_size
+	content.rect_position = Vector2.ZERO
+
+
+func _convert_to_pannel(content, old_layout):
+	var window = content.get_parent()
+	if window.visible:
+		return
+	content.get_parent().remove_child(content)
+	add_child(content)
+	window.queue_free()
+	yield(get_tree(), "idle_frame")
+	Global.top_menu_container.ui.layout = old_layout
 
 
 func add_child(node: Node, legible_unique_name: bool = false) -> void:

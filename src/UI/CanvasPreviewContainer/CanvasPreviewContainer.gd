@@ -1,13 +1,8 @@
-extends WindowDialog
+extends PanelContainer
 
 onready var canvas_preview = $HBoxContainer/PreviewViewportContainer/Viewport/CanvasPreview
 onready var camera: Camera2D = $HBoxContainer/PreviewViewportContainer/Viewport/CameraPreview
 onready var play_button: Button = $HBoxContainer/PanelContainer/VBoxContainer/PlayButton
-
-
-func _on_CanvasPreviewContainer_visibility_changed():
-	get_close_button().visible = false
-	rect_position = OS.get_screen_size() / 2 - rect_size / 2
 
 
 func _on_PreviewZoomSlider_value_changed(value: float) -> void:
@@ -26,3 +21,13 @@ func _on_PlayButton_toggled(button_pressed: bool) -> void:
 	else:
 		canvas_preview.animation_timer.stop()
 		Global.change_button_texturerect(play_button.get_child(0), "play.png")
+
+
+func _on_MakeWindow_toggled(button_pressed):
+	if button_pressed:
+		$HBoxContainer/VBoxContainer/MakeWindow.text = "Panel"
+		Global.control.ui.convert_to_window(self)
+	else:
+		if get_parent() is WindowDialog:
+			$HBoxContainer/VBoxContainer/MakeWindow.text = "Window"
+			get_parent().hide()
