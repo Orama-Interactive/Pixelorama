@@ -104,6 +104,12 @@ func _input(event: InputEvent) -> void:
 	if !Rect2(Vector2.ZERO, viewport_size).has_point(mouse_pos):
 		drag = false
 		return
+	# Check if a window preview also has that point (if it does then prefer it)
+	if index != Cameras.SMALL:
+		if Global.canvas_preview_container.visible:
+			if Global.canvas_preview_container.get_rect().has_point(mouse_pos):
+				drag = false
+				return
 
 	var get_velocity := false
 	for action in KEY_MOVE_ACTION_NAMES:

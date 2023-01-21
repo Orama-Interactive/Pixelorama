@@ -14,6 +14,8 @@ var zen_mode := false
 
 onready var ui: Container = Global.control.find_node("DockableContainer")
 onready var ui_elements: Array = ui.get_children()
+onready var windows: Control = Global.control.find_node("Windows")
+onready var windows_elements: Array = windows.get_children()
 onready var file_menu_button := $MenuItems/FileMenu
 onready var edit_menu_button := $MenuItems/EditMenu
 onready var select_menu_button := $MenuItems/SelectMenu
@@ -27,6 +29,7 @@ onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("Cre
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
 onready var tile_mode_submenu := PopupMenu.new()
 onready var panels_submenu := PopupMenu.new()
+onready var windows_submenu := PopupMenu.new()
 onready var layouts_submenu := PopupMenu.new()
 onready var recent_projects_submenu := PopupMenu.new()
 
@@ -180,6 +183,7 @@ func _setup_window_menu() -> void:
 	var window_menu_items := [
 		"Window Opacity",
 		"Panels",
+		"Windows",
 		"Layouts",
 		"Moveable Panels",
 		"Zen Mode",
@@ -190,6 +194,8 @@ func _setup_window_menu() -> void:
 	for item in window_menu_items:
 		if item == "Panels":
 			_setup_panels_submenu(item)
+		elif item == "Windows":
+			_setup_windows_submenu(item)
 		elif item == "Layouts":
 			_setup_layouts_submenu(item)
 		elif item == "Window Opacity":
@@ -217,6 +223,19 @@ func _setup_panels_submenu(item: String) -> void:
 	panels_submenu.connect("id_pressed", self, "_panels_submenu_id_pressed")
 	window_menu.add_child(panels_submenu)
 	window_menu.add_submenu_item(item, panels_submenu.get_name())
+
+
+func _setup_windows_submenu(item: String) -> void:
+	windows_submenu.set_name("panels_submenu")
+	windows_submenu.hide_on_checkable_item_selection = false
+	for element in windows_elements:
+		windows_submenu.add_check_item(element.name)
+		var is_hidden: bool = element.visible
+		windows_submenu.set_item_checked(windows_elements.find(element), !is_hidden)
+
+	windows_submenu.connect("id_pressed", self, "_windows_submenu_id_pressed")
+	window_menu.add_child(windows_submenu)
+	window_menu.add_submenu_item(item, windows_submenu.get_name())
 
 
 func _setup_layouts_submenu(item: String) -> void:
@@ -488,6 +507,12 @@ func _panels_submenu_id_pressed(id: int) -> void:
 	var element_visible = panels_submenu.is_item_checked(id)
 	ui.set_control_hidden(ui_elements[id], element_visible)
 	panels_submenu.set_item_checked(id, !element_visible)
+
+
+func _windows_submenu_id_pressed(id: int) -> void:
+	var element_visible = windows_submenu.is_item_checked(id)
+	windows.get_child(id).visible = !element_visible
+	windows_submenu.set_item_checked(id, !element_visible)
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:

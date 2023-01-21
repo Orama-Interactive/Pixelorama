@@ -1,8 +1,13 @@
-extends PanelContainer
+extends WindowDialog
 
 onready var canvas_preview = $HBoxContainer/PreviewViewportContainer/Viewport/CanvasPreview
 onready var camera: Camera2D = $HBoxContainer/PreviewViewportContainer/Viewport/CameraPreview
-onready var play_button: Button = $HBoxContainer/VBoxContainer/PlayButton
+onready var play_button: Button = $HBoxContainer/PanelContainer/VBoxContainer/PlayButton
+
+
+func _on_CanvasPreviewContainer_visibility_changed():
+	get_close_button().visible = false
+	rect_position = OS.get_screen_size() / 2 - rect_size / 2
 
 
 func _on_PreviewZoomSlider_value_changed(value: float) -> void:
