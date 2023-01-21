@@ -74,7 +74,7 @@ second = SubResource( 9 )
 [sub_resource type="Resource" id=11]
 resource_name = "Tabs"
 script = ExtResource( 36 )
-names = PoolStringArray( "Reference Images" )
+names = PoolStringArray( "Canvas Preview", "Reference Images" )
 current_tab = 0
 
 [sub_resource type="Resource" id=20]
@@ -344,20 +344,26 @@ margin_top = 666.5
 margin_right = 1063.0
 margin_bottom = 716.0
 
+[node name="Canvas Preview" parent="DockableContainer" instance=ExtResource( 16 )]
+margin_left = 1083.0
+margin_top = 8.0
+margin_right = 1276.0
+margin_bottom = 98.0
+
 [node name="Color Pickers" parent="DockableContainer" instance=ExtResource( 17 )]
 margin_left = 1083.0
-margin_top = 109.062
-margin_bottom = 155.062
+margin_top = 122.0
+margin_bottom = 168.0
 
 [node name="Global Tool Options" parent="DockableContainer" instance=ExtResource( 10 )]
 margin_left = 1083.0
-margin_top = 179.062
+margin_top = 192.0
 margin_right = 1276.0
-margin_bottom = 229.062
+margin_bottom = 242.0
 
 [node name="Left Tool Options" type="ScrollContainer" parent="DockableContainer"]
 margin_left = 1083.0
-margin_top = 253.062
+margin_top = 266.0
 margin_right = 1169.5
 margin_bottom = 592.0
 rect_min_size = Vector2( 72, 72 )
@@ -367,21 +373,21 @@ __meta__ = {
 
 [node name="LeftPanelContainer" type="PanelContainer" parent="DockableContainer/Left Tool Options"]
 margin_right = 130.0
-margin_bottom = 326.938
+margin_bottom = 314.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Right Tool Options" type="ScrollContainer" parent="DockableContainer"]
 margin_left = 1189.5
-margin_top = 253.062
+margin_top = 266.0
 margin_right = 1276.0
 margin_bottom = 592.0
 rect_min_size = Vector2( 72, 72 )
 
 [node name="RightPanelContainer" type="PanelContainer" parent="DockableContainer/Right Tool Options"]
 margin_right = 130.0
-margin_bottom = 326.938
+margin_bottom = 314.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -393,23 +399,10 @@ margin_right = 1276.0
 margin_bottom = 716.0
 
 [node name="Reference Images" parent="DockableContainer" instance=ExtResource( 11 )]
-margin_left = 1083.0
-margin_top = 8.0
-margin_right = -4.0
-margin_bottom = -634.938
-
-[node name="Windows" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -1280.0
-margin_bottom = -720.0
-mouse_filter = 2
-
-[node name="Canvas Preview" parent="Windows" instance=ExtResource( 16 )]
 visible = false
-margin_right = 313.0
-margin_bottom = 239.0
-resizable = true
+margin_left = 1079.0
+margin_right = 1080.0
+margin_bottom = 1004.0
 
 [connection signal="item_rect_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_item_rect_changed"]
 [connection signal="visibility_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_visibility_changed"]
