@@ -27,7 +27,6 @@ onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("Cre
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
 onready var tile_mode_submenu := PopupMenu.new()
 onready var panels_submenu := PopupMenu.new()
-onready var windows_submenu := PopupMenu.new()
 onready var layouts_submenu := PopupMenu.new()
 onready var recent_projects_submenu := PopupMenu.new()
 
