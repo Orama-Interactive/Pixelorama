@@ -231,7 +231,7 @@ func _setup_windows_submenu(item: String) -> void:
 	for element in windows_elements:
 		windows_submenu.add_check_item(element.name)
 		var is_hidden: bool = element.visible
-		windows_submenu.set_item_checked(windows_elements.find(element), !is_hidden)
+		windows_submenu.set_item_checked(windows_elements.find(element), is_hidden)
 
 	windows_submenu.connect("id_pressed", self, "_windows_submenu_id_pressed")
 	window_menu.add_child(windows_submenu)
