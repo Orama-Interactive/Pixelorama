@@ -34,6 +34,7 @@ var _layout_dirty = false
 
 var windows :Control
 
+
 func _ready() -> void:
 	windows = Control.new()
 	get_parent().call_deferred("add_child", windows)
