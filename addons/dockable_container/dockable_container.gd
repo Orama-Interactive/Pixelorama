@@ -19,7 +19,7 @@ export(Resource) var layout = Layout.new() setget set_layout, get_layout
 # restore layout to its default later.
 export(bool) var clone_layout_on_ready = true
 
-var windows :Control
+var windows: Control
 
 var _layout = Layout.new()
 var _panel_container = Container.new()
