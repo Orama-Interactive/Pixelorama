@@ -16,15 +16,15 @@ func _ready() -> void:
 	width = Global.camera.zoom.x * 2
 	default_color = Global.guide_color
 	project.guides.append(self)
-	if outside_canvas():
+	if _outside_canvas():
 		modulate.a = 0.5
 
 
 func _input(_event: InputEvent) -> void:
 	if !visible:
 		return
-	var tmp_transform = get_canvas_transform().affine_inverse()
-	var tmp_position = Global.main_viewport.get_local_mouse_position()
+	var tmp_transform := get_canvas_transform().affine_inverse()
+	var tmp_position: Vector2 = Global.main_viewport.get_local_mouse_position()
 	mouse_pos = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
 
 	var point0 := points[0]
@@ -35,14 +35,17 @@ func _input(_event: InputEvent) -> void:
 	else:
 		point0.x -= width * INPUT_WIDTH
 		point1.x += width * INPUT_WIDTH
+	var rect := Rect2()
+	rect.position = point0
+	rect.end = point1
 	if (
-		Global.can_draw
+		Input.is_action_just_pressed("left_mouse")
+		and Global.can_draw
 		and Global.has_focus
-		and point_in_rectangle(mouse_pos, point0, point1)
-		and Input.is_action_just_pressed("left_mouse")
+		and rect.has_point(mouse_pos)
 	):
 		if (
-			!point_in_rectangle(Global.canvas.current_pixel, Vector2.ZERO, project.size)
+			!Rect2(Vector2.ZERO, project.size).has_point(Global.canvas.current_pixel)
 			or Global.move_guides_on_canvas
 		):
 			has_focus = true
@@ -51,21 +54,18 @@ func _input(_event: InputEvent) -> void:
 	if has_focus:
 		if Input.is_action_pressed("left_mouse"):
 			if type == Types.HORIZONTAL:
-				var yy = stepify(mouse_pos.y, 0.5)
+				var yy := stepify(mouse_pos.y, 0.5)
 				points[0].y = yy
 				points[1].y = yy
 			else:
-				var xx = stepify(mouse_pos.x, 0.5)
+				var xx := stepify(mouse_pos.x, 0.5)
 				points[0].x = xx
 				points[1].x = xx
-			if outside_canvas():
-				modulate.a = 0.5
-			else:
-				modulate.a = 1
-		if Input.is_action_just_released("left_mouse"):
+			modulate.a = 0.5 if _outside_canvas() else 1.0
+		elif Input.is_action_just_released("left_mouse"):
 			Global.has_focus = true
 			has_focus = false
-			if outside_canvas():
+			if _outside_canvas():
 				project.guides.erase(self)
 				queue_free()
 			else:
@@ -160,12 +160,8 @@ func _draw() -> void:
 	draw_string(font, Vector2(x_offset, font_height), string, color)
 
 
-func outside_canvas() -> bool:
+func _outside_canvas() -> bool:
 	if type == Types.HORIZONTAL:
 		return points[0].y < 0 || points[0].y > project.size.y
 	else:
 		return points[0].x < 0 || points[0].x > project.size.x
-
-
-func point_in_rectangle(p: Vector2, coord1: Vector2, coord2: Vector2) -> bool:
-	return p.x > coord1.x && p.y > coord1.y && p.x < coord2.x && p.y < coord2.y
