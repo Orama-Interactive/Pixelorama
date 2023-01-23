@@ -2,8 +2,9 @@ extends Node2D
 
 
 func _input(event: InputEvent) -> void:
-	if Global.has_focus and event is InputEventMouseMotion:
-		update()
+	if Global.has_focus:
+		if event is InputEventMouse or event is InputEventKey:
+			update()
 
 
 func _draw() -> void:
