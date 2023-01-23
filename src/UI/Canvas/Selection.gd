@@ -74,6 +74,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if not Global.can_draw:
+		return
 	if is_moving_content:
 		if Input.is_action_just_pressed("transformation_confirm"):
 			transform_content_confirm()
@@ -83,7 +85,7 @@ func _input(event: InputEvent) -> void:
 	var project: Project = Global.current_project
 	if not project.layers[project.current_layer].can_layer_get_drawn():
 		return
-	if event is InputEventKey and Global.can_draw:
+	if event is InputEventKey:
 		_move_with_arrow_keys(event)
 
 	if not event is InputEventMouse:
