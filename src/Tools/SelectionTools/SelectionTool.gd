@@ -73,6 +73,7 @@ func set_spinbox_values() -> void:
 
 
 func draw_start(position: Vector2) -> void:
+	position = snap_position(position)
 	.draw_start(position)
 	if selection_node.arrow_key_move:
 		return
@@ -147,6 +148,7 @@ func draw_start(position: Vector2) -> void:
 
 
 func draw_move(position: Vector2) -> void:
+	position = snap_position(position)
 	.draw_move(position)
 	if selection_node.arrow_key_move:
 		return
@@ -173,7 +175,7 @@ func draw_move(position: Vector2) -> void:
 			- prev_pos
 		)
 		position = position.snapped(grid_size)
-		var grid_offset = Vector2(Global.grid_offset_x, Global.grid_offset_y)
+		var grid_offset := Vector2(Global.grid_offset_x, Global.grid_offset_y)
 		grid_offset = Vector2(fmod(grid_offset.x, grid_size.x), fmod(grid_offset.y, grid_size.y))
 		position += grid_offset
 
@@ -187,6 +189,7 @@ func draw_move(position: Vector2) -> void:
 
 
 func draw_end(position: Vector2) -> void:
+	position = snap_position(position)
 	.draw_end(position)
 	if selection_node.arrow_key_move:
 		return

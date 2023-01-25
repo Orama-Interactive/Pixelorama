@@ -137,6 +137,9 @@ var draw_grid := false
 var draw_pixel_grid := false
 var show_rulers := true
 var show_guides := true
+var snapping_distance := 10.0
+var snap_to_rectangular_grid := false
+var snap_to_guides := false
 
 # Onion skinning options
 var onion_skinning := false
