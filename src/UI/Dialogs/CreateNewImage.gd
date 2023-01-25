@@ -109,9 +109,7 @@ func _create_recent_list() -> void:
 	recent_templates_list.clear()
 	for size in recent_sizes:
 		recent_templates_list.add_item(
-			"{width}x{height}".format(
-				{"width": size.x, "height": size.y}
-			)
+			"{width}x{height}".format({"width": size.x, "height": size.y})
 		)
 
 
