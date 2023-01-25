@@ -370,13 +370,13 @@ func remove_unselected_parts_of_brush(brush: Image, dst: Vector2) -> Image:
 
 func draw_indicator(left: bool) -> void:
 	var color := Global.left_tool_color if left else Global.right_tool_color
-	draw_indicator_at(_cursor, Vector2.ZERO, color)
+	draw_indicator_at(snap_position(_cursor), Vector2.ZERO, color)
 	if Global.current_project.tiles.mode and Global.current_project.tiles.has_point(_cursor):
 		var position := _line_start if _draw_line else _cursor
 		var nearest_tile := Global.current_project.tiles.get_nearest_tile(position)
 		if nearest_tile.position != Vector2.ZERO:
 			var offset := nearest_tile.position
-			draw_indicator_at(_cursor, offset, Color.green)
+			draw_indicator_at(snap_position(_cursor), offset, Color.green)
 
 
 func draw_indicator_at(position: Vector2, offset: Vector2, color: Color) -> void:

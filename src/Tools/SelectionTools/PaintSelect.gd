@@ -33,6 +33,7 @@ func update_config() -> void:
 
 
 func draw_start(position: Vector2) -> void:
+	position = snap_position(position)
 	.draw_start(position)
 	if !_move:
 		_draw_points.append_array(draw_tool(position))
@@ -42,6 +43,7 @@ func draw_start(position: Vector2) -> void:
 func draw_move(position: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
+	position = snap_position(position)
 	.draw_move(position)
 	if !_move:
 		append_gap(_last_position, position)
@@ -53,6 +55,7 @@ func draw_move(position: Vector2) -> void:
 func draw_end(position: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
+	position = snap_position(position)
 	if !_move:
 		_draw_points.append_array(draw_tool(position))
 	.draw_end(position)

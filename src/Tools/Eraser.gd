@@ -35,6 +35,7 @@ func set_config(config: Dictionary) -> void:
 
 
 func draw_start(position: Vector2) -> void:
+	position = snap_position(position)
 	.draw_start(position)
 	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
@@ -63,6 +64,7 @@ func draw_start(position: Vector2) -> void:
 
 
 func draw_move(position: Vector2) -> void:
+	position = snap_position(position)
 	.draw_move(position)
 	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("draw_color_picker"):
@@ -70,7 +72,7 @@ func draw_move(position: Vector2) -> void:
 		return
 
 	if _draw_line:
-		var d = _line_angle_constraint(_line_start, position)
+		var d := _line_angle_constraint(_line_start, position)
 		_line_end = d.position
 		cursor_text = d.text
 		update_line_polylines(_line_start, _line_end)
@@ -82,6 +84,7 @@ func draw_move(position: Vector2) -> void:
 
 
 func draw_end(position: Vector2) -> void:
+	position = snap_position(position)
 	.draw_end(position)
 	if _picking_color:
 		return
