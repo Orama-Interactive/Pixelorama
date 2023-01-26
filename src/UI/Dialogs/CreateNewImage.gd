@@ -120,6 +120,8 @@ func _on_CreateNewImage_confirmed() -> void:
 	if size in recent_sizes:
 		recent_sizes.erase(size)
 	recent_sizes.insert(0, size)
+	if recent_sizes.size() > 10:
+		recent_sizes.resize(10)
 	Global.config_cache.set_value("templates", "recent_sizes", recent_sizes)
 	var fill_color: Color = fill_color_node.color
 
