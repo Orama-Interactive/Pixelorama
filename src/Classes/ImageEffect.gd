@@ -178,3 +178,7 @@ func update_transparent_background_size() -> void:
 
 func _popup_hide() -> void:
 	Global.dialog_open(false)
+
+
+func _is_webgl1() -> bool:
+	return OS.get_name() == "HTML5" and OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2
