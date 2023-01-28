@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-01-28 16:59\n"
+"PO-Revision-Date: 2023-01-28 19:20\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -25,7 +25,7 @@ msgid "Save"
 msgstr "Kaydet"
 
 msgid "Please Confirm..."
-msgstr "Lütfen Onaylayın..."
+msgstr "Lütfen Doğrulayın..."
 
 msgid "File Name:"
 msgstr "Dosya Adı:"
@@ -759,7 +759,7 @@ msgstr "Bu etkinleştirilirse, son nokta gradnayın sonuna eklenir.\n"
 "Son rengin dikkate alınması için, gradyanı sabit ara değerlemeye dönüştürmek istiyorsanız bunu devre dışı bırakın."
 
 msgid "Shape:"
-msgstr ""
+msgstr "Şekil:"
 
 msgid "Linear"
 msgstr "Doğrusal"
@@ -769,19 +769,19 @@ msgstr "Radyal"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "Yinele:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "Yinele"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "Ayna"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Buda"
 
 msgid "Transition size:"
 msgstr "Geçiş boyutu:"
