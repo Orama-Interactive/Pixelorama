@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-01-28 16:59\n"
+"PO-Revision-Date: 2023-01-28 19:20\n"
 
 msgid "OK"
 msgstr "OK"
@@ -758,7 +758,7 @@ msgstr "Wenn diese Option aktiviert ist, wird der letzte Punkt am Ende des Farbv
 "Deaktiviere dies, wenn du den Farbverlauf für eine konstante Interpolation konvertieren möchtest, so, dass die letzte Farbe berücksichtigt wird."
 
 msgid "Shape:"
-msgstr ""
+msgstr "Form:"
 
 msgid "Linear"
 msgstr "Linear"
@@ -768,19 +768,19 @@ msgstr "Radial"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "Wiederholend:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "Wiederholend"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "Gespiegelt"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Abgeschnitten"
 
 msgid "Transition size:"
 msgstr "Übergangsgröße:"
