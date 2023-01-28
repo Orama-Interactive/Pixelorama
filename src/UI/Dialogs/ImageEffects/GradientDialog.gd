@@ -3,9 +3,7 @@ extends ImageEffect
 enum { LINEAR, RADIAL, LINEAR_DITHERING, RADIAL_DITHERING }
 
 var shader_linear: Shader = preload("res://src/Shaders/Gradients/Linear.gdshader")
-var shader_radial: Shader = preload("res://src/Shaders/Gradients/Radial.gdshader")
 var shader_linear_dither: Shader
-var shader_radial_dither: Shader
 
 var shader: Shader = shader_linear
 var dither_matrices := [
@@ -18,14 +16,17 @@ var selected_dither_matrix: DitherMatrix = dither_matrices[0]
 
 onready var options_cont: Container = $VBoxContainer/OptionsContainer
 onready var gradient_edit: GradientEditNode = $VBoxContainer/GradientEdit
-onready var type_option_button: OptionButton = options_cont.get_node("TypeOptionButton")
+onready var shape_option_button: OptionButton = $"%ShapeOptionButton"
+onready var dithering_label: Label = $"%DitheringLabel"
+onready var dithering_option_button: OptionButton = $"%DitheringOptionButton"
+onready var repeat_option_button: OptionButton = $"%RepeatOptionButton"
 onready var position: ValueSlider = $"%PositionSlider"
+onready var size_slider: ValueSlider = $"%SizeSlider"
 onready var angle: ValueSlider = $"%AngleSlider"
 onready var center_x: ValueSlider = $"%XCenterSlider"
 onready var center_y: ValueSlider = $"%YCenterSlider"
 onready var radius_x: ValueSlider = $"%XRadiusSlider"
 onready var radius_y: ValueSlider = $"%YRadiusSlider"
-onready var dithering_option_button: OptionButton = options_cont.get_node("DitheringOptionButton")
 
 
 class DitherMatrix:
@@ -42,11 +43,10 @@ func _ready() -> void:
 	sm.shader = shader
 	preview.set_material(sm)
 	if _is_webgl1():
-		type_option_button.set_item_disabled(LINEAR_DITHERING, true)
-		type_option_button.set_item_disabled(RADIAL_DITHERING, true)
+		dithering_label.visible = false
+		dithering_option_button.visible = false
 	else:
 		shader_linear_dither = load("res://src/Shaders/Gradients/LinearDithering.gdshader")
-		shader_radial_dither = load("res://src/Shaders/Gradients/RadialDithering.gdshader")
 
 	for matrix in dither_matrices:
 		dithering_option_button.add_item(matrix.name)
@@ -88,13 +88,16 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"gradient_texture": gradient_edit.texture,
 		"offset_texture": offsets_tex,
 		"selection": selection_tex,
+		"repeat": repeat_option_button.selected,
 		"position": (position.value / 100.0) - 0.5,
+		"size": size_slider.value / 100.0,
 		"angle": angle.value,
 		"center": Vector2(center_x.value / 100.0, center_y.value / 100.0),
 		"radius": Vector2(radius_x.value, radius_y.value),
 		"dither_texture": dither_texture,
 		"image_size": project.size,
 		"pixel_size": pixel_size,
+		"shape": shape_option_button.selected,
 		"n_of_colors": n_of_colors
 	}
 
@@ -108,24 +111,16 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		yield(gen, "done")
 
 
-func _on_TypeOptionButton_item_selected(index: int) -> void:
+func _on_ShapeOptionButton_item_selected(index: int) -> void:
 	for child in options_cont.get_children():
 		if not child.is_in_group("gradient_common"):
 			child.visible = false
 
 	match index:
 		LINEAR:
-			shader = shader_linear
 			get_tree().set_group("gradient_linear", "visible", true)
 		RADIAL:
-			shader = shader_radial
 			get_tree().set_group("gradient_radial", "visible", true)
-		LINEAR_DITHERING:
-			shader = shader_linear_dither
-			get_tree().set_group("gradient_dithering", "visible", true)
-		RADIAL_DITHERING:
-			shader = shader_radial_dither
-			get_tree().set_group("gradient_radial_dithering", "visible", true)
 	update_preview()
 
 
@@ -134,9 +129,17 @@ func _value_changed(_value: float) -> void:
 
 
 func _on_DitheringOptionButton_item_selected(index: int) -> void:
-	selected_dither_matrix = dither_matrices[index]
+	if index > 0:
+		shader = shader_linear_dither
+		selected_dither_matrix = dither_matrices[index - 1]
+	else:
+		shader = shader_linear
 	update_preview()
 
 
 func _on_GradientEdit_updated(_gradient, _cc) -> void:
+	update_preview()
+
+
+func _on_RepeatOptionButton_item_selected(_index: int) -> void:
 	update_preview()
