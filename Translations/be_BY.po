@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2022-12-06 13:01\n"
+"PO-Revision-Date: 2023-01-28 16:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -754,23 +754,30 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr "Калі выбраны гэты пункт, у канец градыента дадаецца апошняя кропка. Адключыце гэты пункт, калі вы хочаце, каб у градыента была канстантная інтэрпаляцыя і апошні колер браўся да ўвагі."
 
+msgid "Shape:"
+msgstr ""
+
 msgid "Linear"
 msgstr "Лінейны"
 
 msgid "Radial"
 msgstr "Радыяльны"
 
-msgid "Linear Step"
-msgstr "Лінейны па кроках"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
+msgstr ""
 
-msgid "Radial Step"
-msgstr "Радыяльны па кроках"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
+msgstr ""
 
-msgid "Linear Dithering"
-msgstr "Лінейны кропкамі"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
+msgstr ""
 
-msgid "Radial Dithering"
-msgstr "Радыяльны кропкамі"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
+msgstr ""
 
 msgid "Transition size:"
 msgstr "Памер пераходу:"
