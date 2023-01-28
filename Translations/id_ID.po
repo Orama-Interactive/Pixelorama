@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-12-02 05:10\n"
+"PO-Revision-Date: 2023-01-28 16:59\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -758,23 +758,30 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr "Jika dinyalakan, titik yang terakhir akan ditambah ke ujung gradien.\n"
 "Matikan ini jika ingin mengubah interpolasi gradien tetap konstan, sehingga warna yang terakhir juga akan disertakan."
 
+msgid "Shape:"
+msgstr ""
+
 msgid "Linear"
 msgstr "Linier"
 
 msgid "Radial"
 msgstr "Radial"
 
-msgid "Linear Step"
-msgstr "Langkah Linier"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
+msgstr ""
 
-msgid "Radial Step"
-msgstr "Langkah Radial"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
+msgstr ""
 
-msgid "Linear Dithering"
-msgstr "Bauran Galat Linier"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
+msgstr ""
 
-msgid "Radial Dithering"
-msgstr "Bauran Galat Radial"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
+msgstr ""
 
 msgid "Transition size:"
 msgstr "Ukuran peralihan:"
