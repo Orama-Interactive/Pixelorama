@@ -14,7 +14,7 @@ uniform int repeat = 0; // 0 = none, 1 = repeat, 2 = mirrored, 3 = truncate
 
 float modify_uv(vec2 uv) {
 	float modified_uv;
-	if (shape == 0) {
+	if (shape == 0) { // Linear
 		vec2 uv_offsetted = uv - 0.5;
 		float angle_cos = cos(radians(angle));
 		float angle_sin = sin(radians(angle));
@@ -24,7 +24,7 @@ float modify_uv(vec2 uv) {
 		float pivot = position / size;
 		modified_uv -= pivot - 0.5;
 	}
-	else {
+	else { // Radial
 		vec2 uv_offsetted = uv * 2.0 - 1.0;
 		uv_offsetted -= (center * 2.0) - vec2(1.0);
 		uv_offsetted *= radius;
@@ -32,6 +32,7 @@ float modify_uv(vec2 uv) {
 	}
 	return modified_uv;
 }
+
 
 float mirror_fract(float uv) {
 	int sign_uv = (int(sign(uv)) - 1) / 2;

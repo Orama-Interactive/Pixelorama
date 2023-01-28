@@ -70,22 +70,34 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 
 	var dither_texture: Texture = selected_dither_matrix.texture
 	var pixel_size := dither_texture.get_width()
-	var gradient: Gradient = gradient_edit.texture.gradient
+	var gradient: Gradient = gradient_edit.gradient
 	var n_of_colors := gradient.offsets.size()
 	# Pass the gradient offsets as an array to the shader
 	# ...but since Godot 3.x doesn't support uniform arrays, instead we construct
 	# a nx1 grayscale texture with each offset stored in each pixel, and pass it to the shader
 	var offsets_image := Image.new()
 	offsets_image.create(n_of_colors, 1, false, Image.FORMAT_L8)
+	# Construct an image that contains the selected colors of the gradient without interpolation
+	var gradient_image := Image.new()
+	gradient_image.create(n_of_colors, 1, false, Image.FORMAT_RGBA8)
 	offsets_image.lock()
+	gradient_image.lock()
 	for i in n_of_colors:
 		var c := gradient.offsets[i]
 		offsets_image.set_pixel(i, 0, Color(c, c, c, c))
+		gradient_image.set_pixel(i, 0, gradient.colors[i])
 	offsets_image.unlock()
+	gradient_image.unlock()
 	var offsets_tex := ImageTexture.new()
 	offsets_tex.create_from_image(offsets_image, 0)
+	var gradient_tex: Texture
+	if shader == shader_linear:
+		gradient_tex = gradient_edit.texture
+	else:
+		gradient_tex = ImageTexture.new()
+		gradient_tex.create_from_image(gradient_image, 0)
 	var params := {
-		"gradient_texture": gradient_edit.texture,
+		"gradient_texture": gradient_tex,
 		"offset_texture": offsets_tex,
 		"selection": selection_tex,
 		"repeat": repeat_option_button.selected,

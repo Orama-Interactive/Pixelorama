@@ -19,7 +19,7 @@ uniform int n_of_colors = 2;
 
 float modify_uv(vec2 uv) {
 	float modified_uv;
-	if (shape == 0) {
+	if (shape == 0) { // Linear
 		vec2 uv_offsetted = uv - 0.5;
 		float angle_cos = cos(radians(angle));
 		float angle_sin = sin(radians(angle));
@@ -29,7 +29,7 @@ float modify_uv(vec2 uv) {
 		float pivot = position / size;
 		modified_uv -= pivot - 0.5;
 	}
-	else {
+	else { // Radial
 		vec2 uv_offsetted = uv * 2.0 - 1.0;
 		uv_offsetted -= (center * 2.0) - vec2(1.0);
 		uv_offsetted *= radius;
@@ -52,7 +52,7 @@ float mirror_fract(float uv) {
 // Logic taken from https://godotshaders.com/shader/dither-gradient-shader/
 float dither(vec2 uv, float modified_uv) {
 	float uv_lower = floor(modified_uv);
-	float uv_upper = (floor(modified_uv) + 1.0);
+	float uv_upper = floor(modified_uv) + 1.0;
 	float threshold = texture(dither_texture, uv * (image_size / float(pixel_size))).r;
 	float ramp_val = modified_uv < threshold ? 0.0 : 1.0;
 	// sample at the lower bound colour if ramp_val is 0.0, upper bound color if 1.0
