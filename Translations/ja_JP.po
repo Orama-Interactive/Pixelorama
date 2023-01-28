@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-12-02 05:10\n"
+"PO-Revision-Date: 2023-01-28 16:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -758,23 +758,30 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr "これが有効な場合、最後のポイントはグラデーションの最後に追加されます。\n"
 "グラデーションを一定の補間に変換したい場合は、これを無効にします。"
 
+msgid "Shape:"
+msgstr ""
+
 msgid "Linear"
 msgstr "線形"
 
 msgid "Radial"
 msgstr "放射状"
 
-msgid "Linear Step"
-msgstr "線形ステップ"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
+msgstr ""
 
-msgid "Radial Step"
-msgstr "放射状ステップ"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
+msgstr ""
 
-msgid "Linear Dithering"
-msgstr "線形ディザリング"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
+msgstr ""
 
-msgid "Radial Dithering"
-msgstr "放射状ディザリング"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
+msgstr ""
 
 msgid "Transition size:"
 msgstr "トランジションサイズ:"
