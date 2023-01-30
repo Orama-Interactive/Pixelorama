@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2023-01-30 13:05\n"
+"PO-Revision-Date: 2023-01-30 14:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -389,16 +389,17 @@ msgstr "Файл існуе. Перазапісаць?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "Наступныя файлы ўжо існуюць. Перапісаць іх?\n"
+"%s"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Шлях да каталога няправільны!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Імя файла няправільнае!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Шлях да каталога і імя файла няправільныя!"
 
 msgid "Exporting in progress..."
 msgstr ""
@@ -454,7 +455,7 @@ msgid "Select Current Folder"
 msgstr ""
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Адкрыць каталог"
 
 msgid "Background:"
 msgstr "Фон:"
@@ -582,7 +583,7 @@ msgid "Extensions"
 msgstr ""
 
 msgid "Cursors"
-msgstr ""
+msgstr "Курсоры"
 
 msgid "Indicators"
 msgstr ""
