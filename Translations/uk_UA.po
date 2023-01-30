@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-01-28 16:59\n"
+"PO-Revision-Date: 2023-01-30 13:05\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -759,7 +759,7 @@ msgstr "Якщо увімкнено, останню точку буде дода
 "Вимкніть, щоб перетворити градієнт таким чином, щоб в ньому була константна інтерполяція, щоб останній колір враховувався."
 
 msgid "Shape:"
-msgstr ""
+msgstr "Форма:"
 
 msgid "Linear"
 msgstr "Лінійний"
@@ -769,19 +769,19 @@ msgstr "Радіальний"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "Повтор:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "Повтор"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "Віддзеркалення"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Усічення"
 
 msgid "Transition size:"
 msgstr "Розмір переходу:"
