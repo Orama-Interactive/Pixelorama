@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2023-01-28 16:59\n"
+"PO-Revision-Date: 2023-01-30 13:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -758,7 +758,7 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr "Если включено, последняя точка добавляется в конце градиента. Отключите, если вы хотите, чтобы у градиента была константная интерполяция, чтобы учитывался последний цвет."
 
 msgid "Shape:"
-msgstr ""
+msgstr "Форма:"
 
 msgid "Linear"
 msgstr "Линейный"
@@ -768,19 +768,19 @@ msgstr "Радиальный"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "Повтор:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "Повтор"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "Отражение"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Усечение"
 
 msgid "Transition size:"
 msgstr "Размер перехода:"
