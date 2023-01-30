@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2023-01-28 16:58\n"
+"PO-Revision-Date: 2023-01-30 13:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -199,7 +199,7 @@ msgid "Flip Vertical"
 msgstr ""
 
 msgid "Preferences"
-msgstr ""
+msgstr "Налады"
 
 msgid "Tile Mode"
 msgstr "Бясшоўны рэжым"
@@ -226,10 +226,10 @@ msgid "Reset"
 msgstr "Скід"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "З бягучага кадра"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Скінуць маску"
 
 msgid "Window Opacity"
 msgstr "Непразорасць акна"
@@ -274,7 +274,7 @@ msgid "Tallscreen"
 msgstr "Высокаэкранны"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Люстраны від"
 
 msgid "Show Grid"
 msgstr "Паказваць сетку"
@@ -298,7 +298,7 @@ msgid "Fullscreen Mode"
 msgstr "Паўнаэкранны рэжым"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Заліць колерам:"
 
 msgid "Open a File"
 msgstr "Адкрыць файл"
@@ -307,7 +307,7 @@ msgid "Open File(s)"
 msgstr "Адкрыць файл(ы)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Параметры імпарту"
 
 msgid "Import as:"
 msgstr "Імпарт як:"
