@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2023-01-28 16:59\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "예"
@@ -2100,9 +2100,6 @@ msgstr "팔레트를 더 이상 지울 수 없습니다!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "팔레트가 존재하지 않기 때문에, 팔레트를 지울 수 없었습니다!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "팔레트를 제거하던 도중 오류가 발생했습니다! 오류 코드: %s"
 
 msgid "and"
 msgstr "그리고"
