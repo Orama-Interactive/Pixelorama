@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-01-28 19:20\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2106,9 +2106,6 @@ msgstr "これ以上のパレットは削除できません！"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "パレットが存在しないため、削除できません！"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "パレットの削除中にエラーが発生しました！エラーコード: %s"
 
 msgid "and"
 msgstr "と"
