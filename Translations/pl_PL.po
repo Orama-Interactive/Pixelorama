@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-01-28 16:59\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2105,9 +2105,6 @@ msgstr "Nie możesz usunąć więcej palet!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Nie można usunąć palety, ponieważ nie istnieje!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Wystąpił błąd podczas usuwania palety! Kod błędu: %s"
 
 msgid "and"
 msgstr "i"
