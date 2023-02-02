@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-01-30 13:05\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -2106,9 +2106,6 @@ msgstr "Неможливо видалити більш палітр!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Неможливо видалити палітру, бо вона не існує!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Помилка при видаленні палітри! Код помилки: %s"
 
 msgid "and"
 msgstr "і"
