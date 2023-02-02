@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-01-28 16:58\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2106,9 +2106,6 @@ msgstr "Nu poți elimina mai multe palete!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Paleta nu poate fi eliminată, deoarece nu există!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "A apărut o eroare la ștergerea paletei! Cod de eroare: %s"
 
 msgid "and"
 msgstr "și"
