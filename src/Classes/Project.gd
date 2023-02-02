@@ -12,7 +12,7 @@ var can_undo = true
 var fill_color := Color(0)
 var has_changed := false setget _has_changed_changed
 # frames and layers Arrays should generally only be modified directly when
-# opening/creating a project. When modifiying the current project, use
+# opening/creating a project. When modifying the current project, use
 # the add/remove/move/swap_frames/layers methods
 var frames := []  # Array of Frames (that contain Cels)
 var layers := []  # Array of Layers
@@ -648,7 +648,7 @@ func can_pixel_get_drawn(
 # through these methods.
 # These allow you to add/remove/move/swap frames/layers/cels. It updates the Animation Timeline
 # UI, and updates indices. These are designed to be reversible, meaning that to undo an add, you
-# use remove, and vise versa. To undo a move or swap, use move or swap with the paramaters swapped.
+# use remove, and vice versa. To undo a move or swap, use move or swap with the parameters swapped.
 
 
 func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be in ascending order

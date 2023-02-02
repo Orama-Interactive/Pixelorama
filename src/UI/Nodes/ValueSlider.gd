@@ -219,7 +219,7 @@ func _on_value_changed(_value: float) -> void:
 	_reset_display()
 
 
-func _on_LineEdit_text_entered(_new_text) -> void:
+func _on_LineEdit_text_entered(_new_text: String) -> void:
 	# When pressing enter, release focus, which will call _confirm_text on focus_exited signal
 	_line_edit.release_focus()
 
@@ -234,14 +234,14 @@ func _confirm_text(confirm := true) -> void:
 		var expression := Expression.new()
 		var error := expression.parse(_line_edit.text, [])
 		if error != OK:
-			_reset_display()
+			_reset_display(true)
 			return
 		var result = expression.execute([], null, true)
 		if expression.has_execute_failed() or not (result is int or result is float):
-			_reset_display()
+			_reset_display(true)
 			return
 		value = result
-	_reset_display()
+	_reset_display(true)
 
 
 func _reset_display(theme_changed := false) -> void:

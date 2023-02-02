@@ -14,7 +14,7 @@ var transformed_content: Image  # Used in transformations (moving, scaling etc w
 
 # The content methods deal with the unique content of each cel type. For example, an Image for
 # PixelLayers, or a Dictionary of settings for a procedural layer type, and null for Groups.
-# Can be used fo linking/unlinking cels, copying, and deleting content
+# Can be used for linking/unlinking cels, copying, and deleting content
 func get_content():
 	return null
 

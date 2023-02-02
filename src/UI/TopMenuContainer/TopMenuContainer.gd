@@ -26,6 +26,7 @@ onready var greyscale_vision: ColorRect = ui.find_node("GreyscaleVision")
 onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("CreateNewImage")
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
 onready var tile_mode_submenu := PopupMenu.new()
+onready var snap_to_submenu := PopupMenu.new()
 onready var panels_submenu := PopupMenu.new()
 onready var layouts_submenu := PopupMenu.new()
 onready var recent_projects_submenu := PopupMenu.new()
@@ -123,17 +124,19 @@ func _setup_view_menu() -> void:
 		"Show Rulers",
 		"Show Guides",
 		"Show Mouse Guides",
+		"Snap To",
 	]
 	view_menu = view_menu_button.get_popup()
-	var i := 0
-	for item in view_menu_items:
+	for i in view_menu_items.size():
+		var item: String = view_menu_items[i]
 		if item == "Tile Mode":
 			_setup_tile_mode_submenu(item)
+		elif item == "Snap To":
+			_setup_snap_to_submenu(item)
 		elif item == "Tile Mode Offsets":
 			view_menu.add_item(item, i)
 		else:
 			view_menu.add_check_item(item, i)
-		i += 1
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GUIDES, true)
 	view_menu.hide_on_checkable_item_selection = false
@@ -179,6 +182,15 @@ func _setup_tile_mode_submenu(item: String) -> void:
 	tile_mode_submenu.connect("id_pressed", self, "_tile_mode_submenu_id_pressed")
 	view_menu.add_child(tile_mode_submenu)
 	view_menu.add_submenu_item(item, tile_mode_submenu.get_name())
+
+
+func _setup_snap_to_submenu(item: String) -> void:
+	snap_to_submenu.set_name("snap_to_submenu")
+	snap_to_submenu.add_check_item("Snap to Rectangular Grid")
+	snap_to_submenu.add_check_item("Snap to Guides")
+	snap_to_submenu.connect("id_pressed", self, "_snap_to_submenu_id_pressed")
+	view_menu.add_child(snap_to_submenu)
+	view_menu.add_submenu_item(item, snap_to_submenu.get_name())
 
 
 func _setup_window_menu() -> void:
@@ -470,6 +482,15 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.canvas.tile_mode.update()
 	Global.canvas.pixel_grid.update()
 	Global.canvas.grid.update()
+
+
+func _snap_to_submenu_id_pressed(id: int) -> void:
+	if id == 0:
+		Global.snap_to_rectangular_grid = !Global.snap_to_rectangular_grid
+		snap_to_submenu.set_item_checked(id, Global.snap_to_rectangular_grid)
+	elif id == 1:
+		Global.snap_to_guides = !Global.snap_to_guides
+		snap_to_submenu.set_item_checked(id, Global.snap_to_guides)
 
 
 func window_menu_id_pressed(id: int) -> void:

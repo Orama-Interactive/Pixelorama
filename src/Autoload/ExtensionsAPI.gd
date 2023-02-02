@@ -39,7 +39,7 @@ func add_action(action: String):
 		if extension_name in _action_history.keys():
 			var extension_history: Array = _action_history[extension_name]
 			extension_history.append(action)
-		else:  # If the extension history does'nt exist yet then creat it
+		else:  # If the extension history doesn't exist yet, create it
 			_action_history[extension_name] = [action]
 
 
