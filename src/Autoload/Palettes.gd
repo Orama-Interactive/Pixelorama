@@ -510,7 +510,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 		elif line.begins_with("Name: "):
 			palette_name = line.replace("Name: ", "")
 		elif line.begins_with("Columns: "):
-			# Number of colors in this palette. Unecessary and often wrong
+			# Number of colors in this palette. Unnecessary and often wrong
 			continue
 		elif line_number > 0 && line.length() >= 9:
 			line = line.replace("\t", " ")
@@ -567,7 +567,7 @@ func _import_image_palette(path: String, image: Image) -> Palette:
 	var height: int = image.get_height()
 	var width: int = image.get_width()
 
-	# Iterate all pixels and store unique colors to palete
+	# Iterate all pixels and store unique colors to palette
 	image.lock()
 	for y in range(0, height):
 		for x in range(0, width):

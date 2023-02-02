@@ -39,7 +39,7 @@ func _update_scroll() -> void:
 func ensure_control_visible(control: Control):
 	if not is_instance_valid(control):
 		return
-	# Based on Godot's implemenation in ScrollContainer
+	# Based on Godot's implementation in ScrollContainer
 	var global_rect := get_global_rect()
 	var other_rect := control.get_global_rect()
 	var diff: float = max(

@@ -31,7 +31,7 @@ func set_palette(new_palette: Palette) -> void:
 
 
 func setup_swatches() -> void:
-	# Colums cannot be 0
+	# Columns cannot be 0
 	columns = 1.0 if grid_size.x == 0.0 else grid_size.x
 	if grid_size.x * grid_size.y > swatches.size():
 		for i in range(swatches.size(), grid_size.x * grid_size.y):

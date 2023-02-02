@@ -229,7 +229,7 @@ func can_drop_data(_pos, data) -> bool:
 					Global.current_project.layers[layer].accepts_child(data[1])
 					and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
 				):
-					# Drawn regions are adusted a bit from actual to clearify drop position
+					# Drawn regions are adjusted a bit from actual to clarify drop position
 					region = _get_region_rect(0.15, 0.85)
 					depth += 1
 				else:
