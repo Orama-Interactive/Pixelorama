@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-01-28 19:20\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -2106,9 +2106,6 @@ msgstr "Daha fazla palet kaldıramazsın!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Olmayan paleti kaldıramazsın!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Palet kaldırılırken hata oldu! Hata kodu: %s"
 
 msgid "and"
 msgstr "ve"
