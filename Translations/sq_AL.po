@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Albanian\n"
 "Language: sq_AL\n"
-"PO-Revision-Date: 2023-01-28 16:59\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "Ne rregull"
@@ -2042,9 +2042,6 @@ msgid "You can't remove more palettes!"
 msgstr ""
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
-
-msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 
 msgid "and"
