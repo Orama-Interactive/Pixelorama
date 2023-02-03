@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-02-02 01:11\n"
+"PO-Revision-Date: 2023-02-03 06:55\n"
 
 msgid "OK"
 msgstr "确定"
@@ -759,7 +759,7 @@ msgstr "如果启用此功能，则最后一个点将添加到渐变的末尾。
 "如果您希望将渐变转换为具有恒定插值，请禁用此选项，以便将最后一种颜色考虑在内。"
 
 msgid "Shape:"
-msgstr ""
+msgstr "形状："
 
 msgid "Linear"
 msgstr "线性"
@@ -769,19 +769,19 @@ msgstr "径向"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "重复："
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "重复"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "镜像"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "截断"
 
 msgid "Transition size:"
 msgstr "过渡大小："
