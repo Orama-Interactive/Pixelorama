@@ -6,7 +6,7 @@ var _changed := false
 var _overwrite := false
 var _fill_inside := false
 var _draw_points := Array()
-var _old_spacing_mode := false  # needed to reset spacing mode in case we change it during some cases
+var _old_spacing_mode := false  # needed to reset spacing mode in case we change it
 
 
 class PencilOp:

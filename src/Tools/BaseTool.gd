@@ -11,7 +11,7 @@ var _draw_cache: PoolVector2Array = []  # for storing already drawn pixels
 var _for_frame := 0  # cache for which frame?
 
 # Only use "_spacing_mode" and "_spacing" variables (the others are set automatically)
-# The _spacing_mode and _spacing values are to be CHANGED only in the tool scripts (e.g Pencil.gd etc)
+# The _spacing_mode and _spacing values are to be CHANGED only in the tool scripts (e.g Pencil.gd)
 var _spacing_mode := false  # Enables spacing (continuos gaps between two strokes)
 var _spacing := Vector2.ZERO  # Spacing between two strokes
 var _stroke_dimensions := Vector2.ONE  # 2d vector containing _brush_size from Draw.gd
