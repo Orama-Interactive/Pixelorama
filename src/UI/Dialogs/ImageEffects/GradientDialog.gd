@@ -3,7 +3,7 @@ extends ImageEffect
 enum { LINEAR, RADIAL, LINEAR_DITHERING, RADIAL_DITHERING }
 
 var shader_linear: Shader = preload("res://src/Shaders/Gradients/Linear.gdshader")
-var shader_linear_dither: Shader
+var shader_linear_dither: Shader = preload("res://src/Shaders/Gradients/LinearDithering.gdshader")
 
 var shader: Shader = shader_linear
 var dither_matrices := [
@@ -42,11 +42,6 @@ func _ready() -> void:
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
 	preview.set_material(sm)
-	if _is_webgl1():
-		dithering_label.visible = false
-		dithering_option_button.visible = false
-	else:
-		shader_linear_dither = load("res://src/Shaders/Gradients/LinearDithering.gdshader")
 
 	for matrix in dither_matrices:
 		dithering_option_button.add_item(matrix.name)

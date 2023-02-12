@@ -97,8 +97,6 @@ func _get_auto_display_scale() -> float:
 		return 2.0  # hiDPI display.
 	elif smallest_dimension >= 1700:
 		return 1.5  # Likely a hiDPI display, but we aren't certain due to the returned DPI.
-	elif smallest_dimension <= 800:
-		return 0.75  # Small loDPI display.
 	return 1.0
 
 

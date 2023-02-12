@@ -71,7 +71,12 @@ void fragment() {
 		modified_uv = mirror_fract(modified_uv);
 
 	vec4 output;
-	for (int i = 1; i <= n_of_colors; i++) {
+	// Note for the future, please remember to change 100 to n_of_colors when we
+	// use GLES3 for the Web version. A constant number is used to make it work in WebGL 1.0.
+	for (int i = 1; i <= 100; i++) {
+		if(i > n_of_colors) {
+			break;
+		}
 		float colors_minus = float(n_of_colors - 1);
 		float off = texture(offset_texture, vec2(float(i) / colors_minus)).r;
 		float off_prev = texture(offset_texture, vec2(float(i - 1) / colors_minus)).r;
