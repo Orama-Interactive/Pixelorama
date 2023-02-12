@@ -128,6 +128,22 @@ func snap_position(position: Vector2) -> Vector2:
 		var grid_offset := Vector2(Global.grid_offset_x, Global.grid_offset_y)
 		var grid_pos := position.snapped(grid_size)
 		grid_pos += grid_offset
+		# keeping grid_pos as is would have been fine but this adds extra accuracy as to
+		# which snap point (from the list below) is closest to mouse and occupy THAT point
+		var t_l := grid_pos + Vector2(-grid_size.x, -grid_size.y)
+		var t_c := grid_pos + Vector2(0, -grid_size.y)  # t_c is for "top centre" and so on
+		var t_r := grid_pos + Vector2(grid_size.x, -grid_size.y)
+		var m_l := grid_pos + Vector2(-grid_size.x, 0)
+		var m_c := grid_pos
+		var m_r := grid_pos + Vector2(grid_size.x, 0)
+		var b_l := grid_pos + Vector2(-grid_size.x, grid_size.y)
+		var b_c := grid_pos + Vector2(0, grid_size.y)
+		var b_r := grid_pos + Vector2(grid_size.x, grid_size.y)
+		var vec_arr := [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
+		for vec in vec_arr:
+			if vec.distance_to(position) < grid_pos.distance_to(position):
+				grid_pos = vec
+
 		var closest_point_grid := _get_closest_point_to_grid(position, snap_distance, grid_pos)
 		if closest_point_grid != Vector2.INF:
 			position = closest_point_grid.floor()
