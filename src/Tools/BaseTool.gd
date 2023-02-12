@@ -82,21 +82,21 @@ func cursor_move(position: Vector2) -> void:
 func get_spacing_position(position: Vector2) -> Vector2:
 	# spacing_factor is the distance the mouse needs to get snapped by in order
 	# to keep a space "_spacing" between two strokes of dimensions "_stroke_dimensions"
-	var spacing_factor = _stroke_dimensions + _spacing
-	var snap_position = position.snapped(spacing_factor) + _spacing_offset
+	var spacing_factor := _stroke_dimensions + _spacing
+	var snap_position := position.snapped(spacing_factor) + _spacing_offset
 
 	# keeping snap_position as is would have been fine but this adds extra accuracy as to
 	# which snap point (from the list below) is closest to mouse and occupy THAT point
-	var t_c = snap_position + Vector2(0, -spacing_factor.y)  # t_c is for "top centre" and so on...
-	var t_r = snap_position + Vector2(spacing_factor.x, -spacing_factor.y)
-	var t_r_r = snap_position + Vector2(2 * spacing_factor.x, -spacing_factor.y)
-	var m_c = snap_position
-	var m_r = snap_position + Vector2(spacing_factor.x, 0)
-	var m_r_r = snap_position + Vector2(2 * spacing_factor.x, 0)
-	var b_c = snap_position + Vector2(0, spacing_factor.y)
-	var b_r = snap_position + Vector2(spacing_factor.x, spacing_factor.y)
-	var b_r_r = snap_position + Vector2(2 * spacing_factor.x, spacing_factor.y)
-	var vec_arr := [t_c, t_r, t_r_r, m_c, m_r, m_r_r, b_c, b_r, b_r_r]
+	var t_l := snap_position + Vector2(-spacing_factor.x, -spacing_factor.y)
+	var t_c := snap_position + Vector2(0, -spacing_factor.y)  # t_c is for "top centre" and so on...
+	var t_r := snap_position + Vector2(spacing_factor.x, -spacing_factor.y)
+	var m_l := snap_position + Vector2(-spacing_factor.x, 0)
+	var m_c := snap_position
+	var m_r := snap_position + Vector2(spacing_factor.x, 0)
+	var b_l := snap_position + Vector2(-spacing_factor.x, spacing_factor.y)
+	var b_c := snap_position + Vector2(0, spacing_factor.y)
+	var b_r := snap_position + Vector2(spacing_factor.x, spacing_factor.y)
+	var vec_arr := [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
 	for vec in vec_arr:
 		if vec.distance_to(position) < snap_position.distance_to(position):
 			snap_position = vec
