@@ -188,6 +188,7 @@ func _setup_snap_to_submenu(item: String) -> void:
 	snap_to_submenu.set_name("snap_to_submenu")
 	snap_to_submenu.add_check_item("Snap to Rectangular Grid")
 	snap_to_submenu.add_check_item("Snap to Guides")
+	snap_to_submenu.add_check_item("Snap to Perspective Guides")
 	snap_to_submenu.connect("id_pressed", self, "_snap_to_submenu_id_pressed")
 	view_menu.add_child(snap_to_submenu)
 	view_menu.add_submenu_item(item, snap_to_submenu.get_name())
@@ -491,6 +492,9 @@ func _snap_to_submenu_id_pressed(id: int) -> void:
 	elif id == 1:
 		Global.snap_to_guides = !Global.snap_to_guides
 		snap_to_submenu.set_item_checked(id, Global.snap_to_guides)
+	elif id == 2:
+		Global.snap_to_perspective_guides = !Global.snap_to_perspective_guides
+		snap_to_submenu.set_item_checked(id, Global.snap_to_perspective_guides)
 
 
 func window_menu_id_pressed(id: int) -> void:

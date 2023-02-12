@@ -132,24 +132,32 @@ func snap_position(position: Vector2) -> Vector2:
 		if closest_point_grid != Vector2.INF:
 			position = closest_point_grid.floor()
 
+	var snap_to := Vector2.INF
 	if Global.snap_to_guides:
-		var snap_to := Vector2.INF
 		for guide in Global.current_project.guides:
 			if guide is SymmetryGuide:
 				continue
-			var closest_point := _get_closest_point_to_segment(
-				position, snap_distance, guide.points[0], guide.points[1]
-			)
-			if closest_point == Vector2.INF:  # Is not close to a guide
+			var s1: Vector2 = guide.points[0]
+			var s2: Vector2 = guide.points[1]
+			var snap := _snap_to_guide(snap_to, position, snap_distance, s1, s2)
+			if snap == Vector2.INF:
 				continue
-			# Snap to the closest guide
-			if (
-				snap_to == Vector2.INF
-				or (snap_to - position).length() > (closest_point - position).length()
-			):
-				snap_to = closest_point
-		if snap_to != Vector2.INF:
-			position = snap_to.floor()
+			snap_to = snap
+
+	if Global.snap_to_perspective_guides:
+		for point in Global.current_project.vanishing_points:
+			for i in point.angles.size():
+				var angle: float = -deg2rad(point.angles[i])
+				var length: float = point.lengths[i]
+				var s1 := Vector2(point.position_x, point.position_y)
+				var s2 := s1 + Vector2(length * cos(angle), length * sin(angle))
+				var snap := _snap_to_guide(snap_to, position, snap_distance, s1, s2)
+				if snap == Vector2.INF:
+					continue
+				snap_to = snap
+	if snap_to != Vector2.INF:
+		position = snap_to.floor()
+
 	return position
 
 
@@ -196,6 +204,22 @@ func _get_closest_point_to_segment(
 	if Geometry.segment_intersects_segment_2d(position - distance, position + distance, s1, s2):
 		closest_point = Geometry.get_closest_point_to_segment_2d(position, s1, s2)
 	return closest_point
+
+
+func _snap_to_guide(
+	snap_to: Vector2, position: Vector2, distance: Vector2, s1: Vector2, s2: Vector2
+) -> Vector2:
+	var closest_point := _get_closest_point_to_segment(position, distance, s1, s2)
+	if closest_point == Vector2.INF:  # Is not close to a guide
+		return Vector2.INF
+	# Snap to the closest guide
+	if (
+		snap_to == Vector2.INF
+		or (snap_to - position).length() > (closest_point - position).length()
+	):
+		snap_to = closest_point
+
+	return snap_to
 
 
 func _get_draw_rect() -> Rect2:

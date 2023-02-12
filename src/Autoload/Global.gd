@@ -143,6 +143,7 @@ var show_mouse_guides := false
 var snapping_distance := 10.0
 var snap_to_rectangular_grid := false
 var snap_to_guides := false
+var snap_to_perspective_guides := false
 
 # Onion skinning options
 var onion_skinning := false
