@@ -91,8 +91,8 @@ func update_config() -> void:
 	$FillInside.pressed = _fill_inside
 	$SpacingMode.pressed = _spacing_mode
 	$StrokeGap.visible = _spacing_mode
-	$StrokeGap/StrokeX.value = _spacing.x
-	$StrokeGap/StrokeY.value = _spacing.y
+	$StrokeGap/SpacingX.value = _spacing.x
+	$StrokeGap/SpacingY.value = _spacing.y
 
 
 func draw_start(position: Vector2) -> void:
