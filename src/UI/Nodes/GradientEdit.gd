@@ -197,3 +197,4 @@ func _on_DivideConfirmationDialog_confirmed() -> void:
 	for i in parts + end_point:
 		gradient.add_point(i / parts, colors[i])
 	_create_cursors()
+	emit_signal("updated", gradient, continuous_change)

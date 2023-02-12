@@ -206,7 +206,7 @@ func _enable_extension(extension: Extension, save_to_config := true) -> void:
 				print("Failed to load extension %s" % id)
 	else:
 		for ext_node in extension_parent.get_children():
-			if ext_node.is_in_group(id):  # Node for extention found
+			if ext_node.is_in_group(id):  # Node for extension found
 				extension_parent.remove_child(ext_node)
 				ext_node.queue_free()
 		ExtensionsApi.check_sanity(extension.file_name)

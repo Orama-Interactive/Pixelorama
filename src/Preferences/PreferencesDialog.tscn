@@ -114,26 +114,6 @@ margin_bottom = 52.0
 mouse_default_cursor_shape = 2
 text = "On"
 
-[node name="PressureSentivity" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Startup"]
-visible = false
-margin_top = 28.0
-margin_right = 498.0
-margin_bottom = 48.0
-
-[node name="PressureSensitivityLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Startup/PressureSentivity"]
-margin_top = 3.0
-margin_right = 173.0
-margin_bottom = 17.0
-text = "Tablet pressure sensitivity:"
-
-[node name="PressureSensitivityOptionButton" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Startup/PressureSentivity"]
-margin_left = 177.0
-margin_right = 334.0
-margin_bottom = 20.0
-text = "Affect Brush's Alpha"
-items = [ "None", null, false, 0, null, "Affect Brush's Alpha", null, false, 1, null ]
-selected = 1
-
 [node name="Language" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide"]
 visible = false
 margin_top = 184.0

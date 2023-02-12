@@ -110,6 +110,83 @@ func draw_preview() -> void:
 	pass
 
 
+func snap_position(position: Vector2) -> Vector2:
+	var snap_distance := Global.snapping_distance * Vector2.ONE
+	if Global.snap_to_rectangular_grid:
+		var grid_size := Vector2(Global.grid_width, Global.grid_height)
+		var grid_offset := Vector2(Global.grid_offset_x, Global.grid_offset_y)
+		var grid_pos := position.snapped(grid_size)
+		grid_pos += grid_offset
+		var closest_point_grid := _get_closest_point_to_grid(position, snap_distance, grid_pos)
+		if closest_point_grid != Vector2.INF:
+			position = closest_point_grid.floor()
+
+	if Global.snap_to_guides:
+		var snap_to := Vector2.INF
+		for guide in Global.current_project.guides:
+			if guide is SymmetryGuide:
+				continue
+			var closest_point := _get_closest_point_to_segment(
+				position, snap_distance, guide.points[0], guide.points[1]
+			)
+			if closest_point == Vector2.INF:  # Is not close to a guide
+				continue
+			# Snap to the closest guide
+			if (
+				snap_to == Vector2.INF
+				or (snap_to - position).length() > (closest_point - position).length()
+			):
+				snap_to = closest_point
+		if snap_to != Vector2.INF:
+			position = snap_to.floor()
+	return position
+
+
+func _get_closest_point_to_grid(
+	position: Vector2, snap_distance: Vector2, grid_pos: Vector2
+) -> Vector2:
+	# If the cursor is close to the start/origin of a grid cell, snap to that
+	var closest_point := Vector2.INF
+	var rect := Rect2()
+	rect.position = position - (snap_distance / 4.0)
+	rect.end = position + (snap_distance / 4.0)
+	if rect.has_point(grid_pos):
+		closest_point = grid_pos
+		return closest_point
+	# If the cursor is far from the grid cell origin but still close to a grid line
+	# Look for a point close to a horizontal grid line
+	var grid_start_hor := Vector2(0, grid_pos.y)
+	var grid_end_hor := Vector2(Global.current_project.size.x, grid_pos.y)
+	var closest_point_hor := _get_closest_point_to_segment(
+		position, snap_distance, grid_start_hor, grid_end_hor
+	)
+	# Look for a point close to a vertical grid line
+	var grid_start_ver := Vector2(grid_pos.x, 0)
+	var grid_end_ver := Vector2(grid_pos.x, Global.current_project.size.y)
+	var closest_point_ver := _get_closest_point_to_segment(
+		position, snap_distance, grid_start_ver, grid_end_ver
+	)
+	# Snap to the closest point to the closest grid line
+	var horizontal_distance := (closest_point_hor - position).length()
+	var vertical_distance := (closest_point_ver - position).length()
+	if horizontal_distance < vertical_distance:
+		closest_point = closest_point_hor
+	elif horizontal_distance > vertical_distance:
+		closest_point = closest_point_ver
+	elif horizontal_distance == vertical_distance and closest_point_hor != Vector2.INF:
+		closest_point = grid_pos
+	return closest_point
+
+
+func _get_closest_point_to_segment(
+	position: Vector2, distance: Vector2, s1: Vector2, s2: Vector2
+) -> Vector2:
+	var closest_point := Vector2.INF
+	if Geometry.segment_intersects_segment_2d(position - distance, position + distance, s1, s2):
+		closest_point = Geometry.get_closest_point_to_segment_2d(position, s1, s2)
+	return closest_point
+
+
 func _get_draw_rect() -> Rect2:
 	if Global.current_project.has_selection:
 		return Global.current_project.selection_map.get_used_rect()

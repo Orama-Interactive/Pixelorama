@@ -82,6 +82,7 @@ func _input(event: InputEvent) -> void:
 
 
 func draw_start(position: Vector2) -> void:
+	position = snap_position(position)
 	.draw_start(position)
 	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
@@ -99,6 +100,7 @@ func draw_start(position: Vector2) -> void:
 
 
 func draw_move(position: Vector2) -> void:
+	position = snap_position(position)
 	.draw_move(position)
 	if _picking_color:  # Still return even if we released draw_color_picker (Alt)
 		if Input.is_action_pressed("draw_color_picker"):
@@ -114,6 +116,7 @@ func draw_move(position: Vector2) -> void:
 
 
 func draw_end(position: Vector2) -> void:
+	position = snap_position(position)
 	.draw_end(position)
 	if _picking_color:
 		return

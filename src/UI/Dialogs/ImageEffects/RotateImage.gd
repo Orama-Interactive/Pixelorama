@@ -22,7 +22,7 @@ onready var wait_time_slider: ValueSlider = $VBoxContainer/WaitTime
 
 
 func _ready() -> void:
-	if OS.get_name() != "HTML5":
+	if not _is_webgl1():
 		type_option_button.add_item("Rotxel with Smear", ROTXEL_SMEAR)
 		rotxel_shader = load("res://src/Shaders/Rotation/SmearRotxel.shader")
 	type_option_button.add_item("cleanEdge", CLEANEDGE)

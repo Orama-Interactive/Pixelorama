@@ -14,11 +14,6 @@ var preferences := [
 		"tool_button_size", "Interface/ButtonOptions/ToolButtonSizeOptionButton", "selected"
 	),
 	Preference.new(
-		"pressure_sensitivity_mode",
-		"Startup/PressureSentivity/PressureSensitivityOptionButton",
-		"selected"
-	),
-	Preference.new(
 		"show_left_tool_icon", "Cursors/CursorsContainer/LeftToolIconCheckbox", "pressed"
 	),
 	Preference.new(

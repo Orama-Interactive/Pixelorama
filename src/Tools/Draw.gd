@@ -39,20 +39,18 @@ func _on_BrushType_pressed() -> void:
 		Global.brushes_popup.connect(
 			"brush_selected", self, "_on_Brush_selected", [], CONNECT_ONESHOT
 		)
-	# Now we set position and tab allignment considering certain conditions
-	var pop_size := Vector2(226, 72)
-	var pop_position: Vector2 = $Brush/Type.rect_global_position
-	var off_limit: float = Global.shrink * (pop_position.x + pop_size.x) - OS.get_window_size().x
-	if off_limit <= 72 and off_limit > 0:  # Some space left "Leftward"
-		pop_position -= Vector2(pop_size.x / 2.0 - 48, -32)
-		Global.brushes_popup.get_node("TabContainer").tab_align = TabContainer.ALIGN_CENTER
-	elif off_limit >= 72:  # No space left "Leftward"
-		pop_position -= Vector2(pop_size.x / 2.0 + 16, -32)
-		Global.brushes_popup.get_node("TabContainer").tab_align = TabContainer.ALIGN_RIGHT
-	else:
-		pop_position -= Vector2(0, -32)  # Plenty of space left "Leftward"
-		Global.brushes_popup.get_node("TabContainer").tab_align = TabContainer.ALIGN_LEFT
-	Global.brushes_popup.popup(Rect2(pop_position, pop_size))
+	# Now we set position and columns
+	var tool_option_container = get_node("../../")
+	var brush_button = $Brush/Type
+	var pop_position = brush_button.rect_global_position + Vector2(0, brush_button.rect_size.y)
+	var size_x = tool_option_container.rect_size.x
+	var size_y = tool_option_container.rect_size.y - $Brush.rect_position.y - $Brush.rect_size.y
+	var columns = int(size_x / 36) - 1  # 36 is the rect_size of BrushButton.tscn
+	var categories = Global.brushes_popup.get_node("Background/Brushes/Categories")
+	for child in categories.get_children():
+		if child is GridContainer:
+			child.columns = columns
+	Global.brushes_popup.popup(Rect2(pop_position, Vector2(size_x, size_y)))
 
 
 func _on_Brush_selected(brush: Brushes.Brush) -> void:
@@ -379,13 +377,13 @@ func remove_unselected_parts_of_brush(brush: Image, dst: Vector2) -> Image:
 
 func draw_indicator(left: bool) -> void:
 	var color := Global.left_tool_color if left else Global.right_tool_color
-	draw_indicator_at(_cursor, Vector2.ZERO, color)
+	draw_indicator_at(snap_position(_cursor), Vector2.ZERO, color)
 	if Global.current_project.tiles.mode and Global.current_project.tiles.has_point(_cursor):
 		var position := _line_start if _draw_line else _cursor
 		var nearest_tile := Global.current_project.tiles.get_nearest_tile(position)
 		if nearest_tile.position != Vector2.ZERO:
 			var offset := nearest_tile.position
-			draw_indicator_at(_cursor, offset, Color.green)
+			draw_indicator_at(snap_position(_cursor), offset, Color.green)
 
 
 func draw_indicator_at(position: Vector2, offset: Vector2, color: Color) -> void:
@@ -608,8 +606,16 @@ func _pick_color(position: Vector2) -> void:
 	if position.x > image.get_width() - 1 or position.y > image.get_height() - 1:
 		return
 
-	image.lock()
-	var color := image.get_pixelv(position)
-	image.unlock()
+	var color := Color(0, 0, 0, 0)
+	var curr_frame: Frame = project.frames[project.current_frame]
+	for layer in project.layers.size():
+		var idx = (project.layers.size() - 1) - layer
+		if project.layers[idx].can_layer_get_drawn():
+			image = curr_frame.cels[idx].get_image()
+			image.lock()
+			color = image.get_pixelv(position)
+			image.unlock()
+			if color != Color(0, 0, 0, 0):
+				break
 	var button := BUTTON_LEFT if Tools._slots[BUTTON_LEFT].tool_node == self else BUTTON_RIGHT
 	Tools.assign_color(color, button, false)
