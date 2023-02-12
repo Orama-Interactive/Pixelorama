@@ -55,14 +55,8 @@ margin_top = 146.0
 margin_right = 128.0
 margin_bottom = 198.0
 
-[node name="StrokeX" parent="StrokeGap" index="0"]
-margin_right = 128.0
-
-[node name="StrokeY" parent="StrokeGap" index="1"]
-margin_right = 128.0
-
 [connection signal="toggled" from="Overwrite" to="." method="_on_Overwrite_toggled"]
 [connection signal="toggled" from="FillInside" to="." method="_on_FillInside_toggled"]
 [connection signal="toggled" from="SpacingMode" to="." method="_on_SpacingMode_toggled"]
-[connection signal="value_changed" from="StrokeGap/StrokeX" to="." method="_on_StrokeX_value_changed"]
-[connection signal="value_changed" from="StrokeGap/StrokeY" to="." method="_on_StrokeY_value_changed"]
+[connection signal="value_changed" from="StrokeGap/SpacingX" to="." method="_on_SpacingX_value_changed"]
+[connection signal="value_changed" from="StrokeGap/SpacingY" to="." method="_on_SpacingY_value_changed"]

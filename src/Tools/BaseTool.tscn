@@ -38,7 +38,7 @@ margin_top = 26.0
 margin_right = 116.0
 margin_bottom = 78.0
 
-[node name="StrokeX" parent="StrokeGap" instance=ExtResource( 2 )]
+[node name="SpacingX" parent="StrokeGap" instance=ExtResource( 2 )]
 margin_right = 116.0
 __meta__ = {
 "_editor_description_": ""
@@ -46,7 +46,7 @@ __meta__ = {
 prefix = "Gap X:"
 suffix = "px"
 
-[node name="StrokeY" parent="StrokeGap" instance=ExtResource( 2 )]
+[node name="SpacingY" parent="StrokeGap" instance=ExtResource( 2 )]
 margin_top = 28.0
 margin_right = 116.0
 margin_bottom = 52.0

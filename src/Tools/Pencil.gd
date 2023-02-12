@@ -47,11 +47,11 @@ func _on_SpacingMode_toggled(button_pressed):
 	save_config()
 
 
-func _on_StrokeX_value_changed(value):
+func _on_SpacingX_value_changed(value):
 	_spacing.x = value
 
 
-func _on_StrokeY_value_changed(value):
+func _on_SpacingY_value_changed(value):
 	_spacing.y = value
 
 
