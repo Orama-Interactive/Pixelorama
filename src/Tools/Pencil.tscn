@@ -49,7 +49,7 @@ __meta__ = {
 margin_top = 118.0
 margin_right = 128.0
 margin_bottom = 142.0
-text = "Snap Mode"
+text = "Spacing"
 
 [node name="StrokeGap" type="VBoxContainer" parent="." index="7"]
 visible = false
