@@ -20,6 +20,7 @@ enum ViewMenu {
 	SHOW_PIXEL_GRID,
 	SHOW_RULERS,
 	SHOW_GUIDES,
+	SHOW_MOUSE_GUIDES,
 	SNAP_TO,
 }
 enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, MOVABLE_PANELS, ZEN_MODE, FULLSCREEN_MODE }
@@ -138,6 +139,7 @@ var draw_grid := false
 var draw_pixel_grid := false
 var show_rulers := true
 var show_guides := true
+var show_mouse_guides := false
 var snapping_distance := 10.0
 var snap_to_rectangular_grid := false
 var snap_to_guides := false
@@ -181,6 +183,7 @@ onready var patterns_popup: Popup = control.find_node("PatternsPopup")
 onready var palette_panel: PalettePanel = control.find_node("Palettes")
 
 onready var references_panel: ReferencesPanel = control.find_node("Reference Images")
+onready var perspective_editor := control.find_node("Perspective Editor")
 
 onready var top_menu_container: Panel = control.find_node("TopMenuContainer")
 onready var rotation_level_button: Button = control.find_node("RotationLevel")
