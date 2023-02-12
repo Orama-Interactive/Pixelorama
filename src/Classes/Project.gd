@@ -12,7 +12,7 @@ var can_undo = true
 var fill_color := Color(0)
 var has_changed := false setget _has_changed_changed
 # frames and layers Arrays should generally only be modified directly when
-# opening/creating a project. When modifiying the current project, use
+# opening/creating a project. When modifying the current project, use
 # the add/remove/move/swap_frames/layers methods
 var frames := []  # Array of Frames (that contain Cels)
 var layers := []  # Array of Layers
@@ -24,6 +24,7 @@ var animation_tags := [] setget _animation_tags_changed  # Array of AnimationTag
 var guides := []  # Array of Guides
 var brushes := []  # Array of Images
 var reference_images := []  # Array of ReferenceImages
+var vanishing_points := []  # Array of Vanishing Points
 var fps := 6.0
 
 var x_symmetry_point
@@ -91,6 +92,12 @@ func remove() -> void:
 	undo_redo.free()
 	for ri in reference_images:
 		ri.queue_free()
+	if self == Global.current_project:
+		# If the project is not current_project then the points need not be removed
+		for point_idx in vanishing_points.size():
+			var editor = Global.perspective_editor
+			for c in editor.vanishing_point_container.get_children():
+				c.queue_free()
 	for guide in guides:
 		guide.queue_free()
 	# Prevents memory leak (due to the layers' project reference stopping ref counting from freeing)
@@ -186,6 +193,7 @@ func change_project() -> void:
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
 	Global.references_panel.project_changed()
+	Global.perspective_editor.update()
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 
 	Global.window_title = "%s - Pixelorama %s" % [name, Global.current_version]
@@ -325,6 +333,7 @@ func serialize() -> Dictionary:
 		"frames": frame_data,
 		"brushes": brush_data,
 		"reference_images": reference_image_data,
+		"vanishing_points": vanishing_points,
 		"export_directory_path": directory_path,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
@@ -412,6 +421,9 @@ func deserialize(dict: Dictionary) -> void:
 			ri.project = self
 			ri.deserialize(g)
 			Global.canvas.add_child(ri)
+	if dict.has("vanishing_points"):
+		vanishing_points = dict.vanishing_points
+		Global.perspective_editor.update()
 	if dict.has("symmetry_points"):
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]
@@ -636,7 +648,7 @@ func can_pixel_get_drawn(
 # through these methods.
 # These allow you to add/remove/move/swap frames/layers/cels. It updates the Animation Timeline
 # UI, and updates indices. These are designed to be reversible, meaning that to undo an add, you
-# use remove, and vise versa. To undo a move or swap, use move or swap with the paramaters swapped.
+# use remove, and vice versa. To undo a move or swap, use move or swap with the parameters swapped.
 
 
 func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be in ascending order

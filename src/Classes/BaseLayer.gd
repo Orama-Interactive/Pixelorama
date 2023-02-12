@@ -84,7 +84,7 @@ func get_layer_path() -> String:
 
 
 # Links a cel to link_set if its a Dictionary, or unlinks if null.
-# Content/image_texture are handled seperately for undo related reasons
+# Content/image_texture are handled separately for undo related reasons
 func link_cel(cel: BaseCel, link_set = null) -> void:
 	# Erase from the cel's current link_set
 	if cel.link_set != null:

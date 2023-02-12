@@ -53,7 +53,7 @@ bool is_different(vec4 a, vec4 b)
 }
 
 // This define could've made code a ton more readable if godot shaders supported it, but it doesn't.
-// 55 occurances of this in code;  use regexp to turn it back once supported?
+// 55 occurrences of this in code;  use regexp to turn it back once supported?
 // #define P(m, r) ((pattern & (m)) == (r))
 
 
@@ -66,7 +66,7 @@ vec4 scale(sampler2D image, vec2 coord, vec2 pxSize) {
     vec2 o = pxSize;
     vec2 texCoord = coord;
 
-    // We always calculate the top left quarter.  If we need a different quarter, we flip our co-ordinates */
+    // We always calculate the top left quarter.  If we need a different quarter, we flip our coordinates */
 
     // p = the position within a pixel [0...1]
     vec2 p = fract(texCoord / pxSize);

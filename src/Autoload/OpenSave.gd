@@ -61,7 +61,7 @@ func handle_loading_file(file: String) -> void:
 		# Attempt to load as a regular image.
 		var image := Image.new()
 		var err := image.load(file)
-		if err != OK:  # An error occured
+		if err != OK:  # An error occurred
 			var file_name: String = file.get_file()
 			Global.error_dialog.set_text(
 				tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)]
@@ -210,8 +210,8 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 	# In the above example, the major version would return "0",
 	# the minor version would return "7", the patch "10"
 	# and the status would return "beta"
-	var file_major_version = int(file_ver_splitted_numbers[0].replace("v", ""))
-	var file_minor_version = int(file_ver_splitted_numbers[1])
+	var file_major_version := int(file_ver_splitted_numbers[0].replace("v", ""))
+	var file_minor_version := int(file_ver_splitted_numbers[1])
 	var file_patch_version := 0
 
 	if file_ver_splitted_numbers.size() > 2:
@@ -744,7 +744,7 @@ func remove_backup_by_path(project_path: String, backup_path: String) -> void:
 
 func reload_backup_file(project_paths: Array, backup_paths: Array) -> void:
 	assert(project_paths.size() == backup_paths.size())
-	# Clear non-existant backups
+	# Clear non-existent backups
 	var existing_backups_count := 0
 	var dir := Directory.new()
 	for i in range(backup_paths.size()):

@@ -97,8 +97,6 @@ func _get_auto_display_scale() -> float:
 		return 2.0  # hiDPI display.
 	elif smallest_dimension >= 1700:
 		return 1.5  # Likely a hiDPI display, but we aren't certain due to the returned DPI.
-	elif smallest_dimension <= 800:
-		return 0.75  # Small loDPI display.
 	return 1.0
 
 
@@ -418,6 +416,7 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value("view_menu", "draw_pixel_grid", Global.draw_pixel_grid)
 	Global.config_cache.set_value("view_menu", "show_rulers", Global.show_rulers)
 	Global.config_cache.set_value("view_menu", "show_guides", Global.show_guides)
+	Global.config_cache.set_value("view_menu", "show_mouse_guides", Global.show_mouse_guides)
 	Global.config_cache.save("user://cache.ini")
 
 	var i := 0

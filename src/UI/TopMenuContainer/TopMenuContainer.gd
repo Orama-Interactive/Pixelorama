@@ -123,6 +123,7 @@ func _setup_view_menu() -> void:
 		"Show Pixel Grid",
 		"Show Rulers",
 		"Show Guides",
+		"Show Mouse Guides",
 		"Snap To",
 	]
 	view_menu = view_menu_button.get_popup()
@@ -160,8 +161,13 @@ func _setup_view_menu() -> void:
 	var show_guides: bool = Global.config_cache.get_value(
 		"view_menu", "show_guides", Global.show_guides
 	)
+	var show_mouse_guides: bool = Global.config_cache.get_value(
+		"view_menu", "show_mouse_guides", Global.show_mouse_guides
+	)
 	if show_guides != Global.show_guides:
 		_toggle_show_guides()
+	if show_mouse_guides != Global.show_mouse_guides:
+		_toggle_show_mouse_guides()
 
 
 func _setup_tile_mode_submenu(item: String) -> void:
@@ -460,6 +466,8 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_rulers()
 		Global.ViewMenu.SHOW_GUIDES:
 			_toggle_show_guides()
+		Global.ViewMenu.SHOW_MOUSE_GUIDES:
+			_toggle_show_mouse_guides()
 		_:
 			_handle_metadata(id, view_menu_button)
 
@@ -574,8 +582,6 @@ func _toggle_show_grid() -> void:
 func _toggle_show_pixel_grid() -> void:
 	Global.draw_pixel_grid = !Global.draw_pixel_grid
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_PIXEL_GRID, Global.draw_pixel_grid)
-	if Global.canvas.pixel_grid:
-		Global.canvas.pixel_grid.update()
 
 
 func _toggle_show_rulers() -> void:
@@ -596,6 +602,15 @@ func _toggle_show_guides() -> void:
 					guide.visible = Global.show_x_symmetry_axis and Global.show_guides
 				else:
 					guide.visible = Global.show_y_symmetry_axis and Global.show_guides
+
+
+func _toggle_show_mouse_guides() -> void:
+	Global.show_mouse_guides = !Global.show_mouse_guides
+	view_menu.set_item_checked(Global.ViewMenu.SHOW_MOUSE_GUIDES, Global.show_mouse_guides)
+	if Global.show_mouse_guides:
+		if Global.canvas.mouse_guide_container:
+			Global.canvas.mouse_guide_container.get_child(0).update()
+			Global.canvas.mouse_guide_container.get_child(1).update()
 
 
 func _toggle_zen_mode() -> void:

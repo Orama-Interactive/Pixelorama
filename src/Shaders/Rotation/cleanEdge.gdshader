@@ -29,7 +29,7 @@ shader_type canvas_item;
 //enables 2:1 slopes. otherwise only uses 45 degree slopes
 //#define SLOPE
 //cleans up small detail slope transitions (if SLOPE is enabled)
-//if only using for rotation, CLEANUP has negligable effect and should be disabled for speed
+//if only using for rotation, CLEANUP has negligible effect and should be disabled for speed
 //#define CLEANUP
 // The commented out defines exposed as uniforms
 uniform bool slope;

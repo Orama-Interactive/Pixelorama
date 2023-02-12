@@ -6,6 +6,7 @@ var _changed := false
 var _overwrite := false
 var _fill_inside := false
 var _draw_points := Array()
+var _old_spacing_mode := false  # needed to reset spacing mode in case we change it
 
 
 class PencilOp:
@@ -37,6 +38,23 @@ func _on_FillInside_toggled(button_pressed):
 	save_config()
 
 
+func _on_SpacingMode_toggled(button_pressed):
+	# This acts as an interface to access the intrinsic spacing_mode feature
+	# BaseTool holds the spacing system but for a tool to access them i recommend we do it in
+	# their own script
+	_spacing_mode = button_pressed
+	update_config()
+	save_config()
+
+
+func _on_SpacingX_value_changed(value):
+	_spacing.x = value
+
+
+func _on_SpacingY_value_changed(value):
+	_spacing.y = value
+
+
 func _input(event: InputEvent) -> void:
 	var overwrite_button: CheckBox = $Overwrite
 
@@ -54,6 +72,8 @@ func get_config() -> Dictionary:
 	var config := .get_config()
 	config["overwrite"] = _overwrite
 	config["fill_inside"] = _fill_inside
+	config["spacing_mode"] = _spacing_mode
+	config["spacing"] = _spacing
 	return config
 
 
@@ -61,15 +81,22 @@ func set_config(config: Dictionary) -> void:
 	.set_config(config)
 	_overwrite = config.get("overwrite", _overwrite)
 	_fill_inside = config.get("fill_inside", _fill_inside)
+	_spacing_mode = config.get("spacing_mode", _spacing_mode)
+	_spacing = config.get("spacing", _spacing)
 
 
 func update_config() -> void:
 	.update_config()
 	$Overwrite.pressed = _overwrite
 	$FillInside.pressed = _fill_inside
+	$SpacingMode.pressed = _spacing_mode
+	$StrokeGap.visible = _spacing_mode
+	$StrokeGap/SpacingX.value = _spacing.x
+	$StrokeGap/SpacingY.value = _spacing.y
 
 
 func draw_start(position: Vector2) -> void:
+	_old_spacing_mode = _spacing_mode
 	position = snap_position(position)
 	.draw_start(position)
 	if Input.is_action_pressed("draw_color_picker"):
@@ -93,6 +120,7 @@ func draw_start(position: Vector2) -> void:
 
 	_draw_line = Input.is_action_pressed("draw_create_line")
 	if _draw_line:
+		_spacing_mode = false  # spacing mode is disabled during line mode
 		_line_start = position
 		_line_end = position
 		update_line_polylines(_line_start, _line_end)
@@ -114,6 +142,7 @@ func draw_move(position: Vector2) -> void:
 		return
 
 	if _draw_line:
+		_spacing_mode = false  # spacing mode is disabled during line mode
 		var d := _line_angle_constraint(_line_start, position)
 		_line_end = d.position
 		cursor_text = d.text
@@ -134,6 +163,7 @@ func draw_end(position: Vector2) -> void:
 		return
 
 	if _draw_line:
+		_spacing_mode = false  # spacing mode is disabled during line mode
 		draw_tool(_line_start)
 		draw_fill_gap(_line_start, _line_end)
 		_draw_line = false
@@ -148,11 +178,16 @@ func draw_end(position: Vector2) -> void:
 					for y in image_size.y:
 						v.y = y
 						if Geometry.is_point_in_polygon(v, _draw_points):
+							if _spacing_mode:
+								# use of get_spacing_position() in Pencil.gd is a rare case
+								# (you would ONLY need _spacing_mode and _spacing in most cases)
+								v = get_spacing_position(v)
 							draw_tool(v)
 
 	commit_undo()
 	cursor_text = ""
 	update_random_image()
+	_spacing_mode = _old_spacing_mode
 
 
 func _draw_brush_image(image: Image, src_rect: Rect2, dst: Vector2) -> void:
