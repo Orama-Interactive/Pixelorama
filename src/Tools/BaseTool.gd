@@ -10,6 +10,12 @@ var _cursor := Vector2.INF
 var _draw_cache: PoolVector2Array = []  # for storing already drawn pixels
 var _for_frame := 0  # cache for which frame?
 
+# Only use "_spacing_mode" and "_spacing" variables (the others are set automatically)
+# The _spacing_mode and _spacing values are to be CHANGED only in the tool scripts (e.g Pencil.gd)
+var _spacing_mode := false  # Enables spacing (continuos gaps between two strokes)
+var _spacing := Vector2.ZERO  # Spacing between two strokes
+var _stroke_dimensions := Vector2.ONE  # 2d vector containing _brush_size from Draw.gd
+var _spacing_offset := Vector2.ZERO  # The "INITIAL" error between position and position.snapped()
 onready var color_rect: ColorRect = $ColorRect
 
 
@@ -47,10 +53,11 @@ func update_config() -> void:
 	pass
 
 
-func draw_start(_position: Vector2) -> void:
+func draw_start(position: Vector2) -> void:
 	_draw_cache = []
 	is_moving = true
 	Global.current_project.can_undo = false
+	_spacing_offset = _get_spacing_offset(position)
 
 
 func draw_move(position: Vector2) -> void:
@@ -68,6 +75,40 @@ func draw_end(_position: Vector2) -> void:
 
 func cursor_move(position: Vector2) -> void:
 	_cursor = position
+	if _spacing_mode and is_moving:
+		_cursor = get_spacing_position(position)
+
+
+func get_spacing_position(position: Vector2) -> Vector2:
+	# spacing_factor is the distance the mouse needs to get snapped by in order
+	# to keep a space "_spacing" between two strokes of dimensions "_stroke_dimensions"
+	var spacing_factor = _stroke_dimensions + _spacing
+	var snap_position = position.snapped(spacing_factor) + _spacing_offset
+
+	# keeping snap_position as is would have been fine but this adds extra accuracy as to
+	# which snap point (from the list below) is closest to mouse and occupy THAT point
+	var t_c = snap_position + Vector2(0, -spacing_factor.y)  # t_c is for "top centre" and so on...
+	var t_r = snap_position + Vector2(spacing_factor.x, -spacing_factor.y)
+	var t_r_r = snap_position + Vector2(2 * spacing_factor.x, -spacing_factor.y)
+	var m_c = snap_position
+	var m_r = snap_position + Vector2(spacing_factor.x, 0)
+	var m_r_r = snap_position + Vector2(2 * spacing_factor.x, 0)
+	var b_c = snap_position + Vector2(0, spacing_factor.y)
+	var b_r = snap_position + Vector2(spacing_factor.x, spacing_factor.y)
+	var b_r_r = snap_position + Vector2(2 * spacing_factor.x, spacing_factor.y)
+	var vec_arr := [t_c, t_r, t_r_r, m_c, m_r, m_r_r, b_c, b_r, b_r_r]
+	for vec in vec_arr:
+		if vec.distance_to(position) < snap_position.distance_to(position):
+			snap_position = vec
+
+	return snap_position
+
+
+func _get_spacing_offset(position: Vector2) -> Vector2:
+	var spacing_factor = _stroke_dimensions + _spacing  # spacing_factor is explained above
+	# since we just started drawing, the "position" is our intended location so the error
+	# (_spacing_offset) is measured by subtracting both quantities
+	return position - position.snapped(spacing_factor)
 
 
 func draw_indicator(left: bool) -> void:
