@@ -12,7 +12,7 @@ onready var linked_indicator: Polygon2D = get_node_or_null("LinkedIndicator")
 
 func _ready() -> void:
 	button_setup()
-	$CelTexture/TransparentChecker.visible = false
+	$CelTexture/TransparentChecker.self_modulate.a = 0.5
 
 
 func _input(event):
@@ -20,9 +20,9 @@ func _input(event):
 		var image = $CelTexture.texture.get_data()
 		if image != null:
 			if image.get_used_rect().size != Vector2.ZERO:
-				$CelTexture/TransparentChecker.visible = true
+				$CelTexture/TransparentChecker.self_modulate.a = 1
 			else:
-				$CelTexture/TransparentChecker.visible = false
+				$CelTexture/TransparentChecker.self_modulate.a = 0.5
 
 
 func button_setup() -> void:
