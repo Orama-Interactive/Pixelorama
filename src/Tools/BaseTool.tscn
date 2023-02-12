@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Tools/BaseTool.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=2]
 
 [node name="ToolOptions" type="VBoxContainer"]
 margin_left = 7.0
@@ -23,3 +24,34 @@ theme_type_variation = "Header"
 text = "Tool Name"
 align = 1
 autowrap = true
+
+[node name="SpacingMode" type="CheckBox" parent="."]
+visible = false
+margin_top = 26.0
+margin_right = 116.0
+margin_bottom = 50.0
+text = "Spacing"
+
+[node name="StrokeGap" type="VBoxContainer" parent="."]
+visible = false
+margin_top = 26.0
+margin_right = 116.0
+margin_bottom = 78.0
+
+[node name="StrokeX" parent="StrokeGap" instance=ExtResource( 2 )]
+margin_right = 116.0
+__meta__ = {
+"_editor_description_": ""
+}
+prefix = "Gap X:"
+suffix = "px"
+
+[node name="StrokeY" parent="StrokeGap" instance=ExtResource( 2 )]
+margin_top = 28.0
+margin_right = 116.0
+margin_bottom = 52.0
+__meta__ = {
+"_editor_description_": ""
+}
+prefix = "Gap Y:"
+suffix = "px"
