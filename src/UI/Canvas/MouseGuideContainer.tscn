@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/graphics/dotted_line.png" type="Texture" id=1]
+[ext_resource path="res://src/UI/Canvas/MouseGuide.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 2
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 8, 1 )
+
+[node name="MouseGuideContainer" type="Node2D"]
+
+[node name="Vertical" type="Line2D" parent="."]
+visible = false
+points = PoolVector2Array( 0, 19999, 0, -19999 )
+default_color = Color( 1, 1, 1, 1 )
+texture = SubResource( 1 )
+texture_mode = 1
+script = ExtResource( 2 )
+
+[node name="Horizontal" type="Line2D" parent="."]
+visible = false
+points = PoolVector2Array( -19999, 0, 19999, 0 )
+default_color = Color( 1, 1, 1, 1 )
+texture = SubResource( 1 )
+texture_mode = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+type = 1

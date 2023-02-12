@@ -24,6 +24,7 @@ var animation_tags := [] setget _animation_tags_changed  # Array of AnimationTag
 var guides := []  # Array of Guides
 var brushes := []  # Array of Images
 var reference_images := []  # Array of ReferenceImages
+var vanishing_points := []  # Array of Vanishing Points
 var fps := 6.0
 
 var x_symmetry_point
@@ -91,6 +92,12 @@ func remove() -> void:
 	undo_redo.free()
 	for ri in reference_images:
 		ri.queue_free()
+	if self == Global.current_project:
+		# If the project is not current_project then the points need not be removed
+		for point_idx in vanishing_points.size():
+			var editor = Global.perspective_editor
+			for c in editor.vanishing_point_container.get_children():
+				c.queue_free()
 	for guide in guides:
 		guide.queue_free()
 	# Prevents memory leak (due to the layers' project reference stopping ref counting from freeing)
@@ -186,6 +193,7 @@ func change_project() -> void:
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
 	Global.references_panel.project_changed()
+	Global.perspective_editor.update()
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 
 	Global.window_title = "%s - Pixelorama %s" % [name, Global.current_version]
@@ -325,6 +333,7 @@ func serialize() -> Dictionary:
 		"frames": frame_data,
 		"brushes": brush_data,
 		"reference_images": reference_image_data,
+		"vanishing_points": vanishing_points,
 		"export_directory_path": directory_path,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
@@ -412,6 +421,9 @@ func deserialize(dict: Dictionary) -> void:
 			ri.project = self
 			ri.deserialize(g)
 			Global.canvas.add_child(ri)
+	if dict.has("vanishing_points"):
+		vanishing_points = dict.vanishing_points
+		Global.perspective_editor.update()
 	if dict.has("symmetry_points"):
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]

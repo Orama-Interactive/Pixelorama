@@ -1,0 +1,171 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/PerspectiveEditor/VanishingPoint.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/Nodes/CollapsibleContainer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/graphics/misc/value_arrow.svg" type="Texture" id=4]
+[ext_resource path="res://src/UI/PerspectiveEditor/PointCollapseContainer.gd" type="Script" id=5]
+
+[node name="VanishingPoint" type="VBoxContainer" groups=["Entry"]]
+margin_right = 261.0
+margin_bottom = 145.0
+script = ExtResource( 2 )
+
+[node name="TitleContainer" type="HBoxContainer" parent="."]
+margin_right = 261.0
+margin_bottom = 20.0
+
+[node name="PointCollapseContainer" type="Button" parent="TitleContainer"]
+unique_name_in_owner = true
+margin_right = 207.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme_type_variation = "CollapsibleCheckBox"
+toggle_mode = true
+script = ExtResource( 5 )
+
+[node name="TextureRect" type="TextureRect" parent="TitleContainer/PointCollapseContainer" groups=["UIButtons"]]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 2.0
+margin_top = -6.0
+margin_right = 14.0
+margin_bottom = 6.0
+rect_rotation = -90.0
+rect_pivot_offset = Vector2( 6, 6 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="TitleContainer/PointCollapseContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+theme_type_variation = "Header"
+valign = 1
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="TitleContainer"]
+unique_name_in_owner = true
+margin_left = 211.0
+margin_right = 261.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="Content" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 24.0
+margin_right = 261.0
+margin_bottom = 130.0
+
+[node name="Spacer" type="Control" parent="Content"]
+margin_right = 5.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 5, 0 )
+
+[node name="BoundaryL" type="ColorRect" parent="Content"]
+margin_left = 9.0
+margin_right = 11.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 2, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content"]
+margin_left = 15.0
+margin_right = 255.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+
+[node name="PointInfo" type="HBoxContainer" parent="Content/VBoxContainer"]
+margin_right = 240.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="Content/VBoxContainer/PointInfo"]
+margin_right = 56.0
+margin_bottom = 52.0
+size_flags_vertical = 5
+text = "Position:"
+
+[node name="Position" type="VBoxContainer" parent="Content/VBoxContainer/PointInfo"]
+margin_left = 60.0
+margin_right = 240.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+
+[node name="X" parent="Content/VBoxContainer/PointInfo/Position" instance=ExtResource( 1 )]
+unique_name_in_owner = true
+margin_right = 180.0
+step = 0.5
+allow_greater = true
+allow_lesser = true
+prefix = "X :"
+
+[node name="Y" parent="Content/VBoxContainer/PointInfo/Position" instance=ExtResource( 1 )]
+unique_name_in_owner = true
+margin_top = 28.0
+margin_right = 180.0
+margin_bottom = 52.0
+step = 0.5
+allow_greater = true
+allow_lesser = true
+prefix = "Y :"
+
+[node name="CollapsibleContainer" parent="Content/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 56.0
+margin_right = 240.0
+margin_bottom = 76.0
+text = "Lines"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/VBoxContainer/CollapsibleContainer"]
+visible = false
+margin_top = 24.0
+margin_right = 261.0
+margin_bottom = 44.0
+
+[node name="Spacer" type="Control" parent="Content/VBoxContainer/CollapsibleContainer/HBoxContainer"]
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="VSeparator" type="VSeparator" parent="Content/VBoxContainer/CollapsibleContainer/HBoxContainer"]
+margin_right = 4.0
+margin_bottom = 40.0
+
+[node name="LinesContainer" type="VBoxContainer" parent="Content/VBoxContainer/CollapsibleContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 24.0
+margin_right = 261.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AddLine" type="Button" parent="Content/VBoxContainer/CollapsibleContainer/HBoxContainer/LinesContainer"]
+margin_right = 237.0
+margin_bottom = 20.0
+text = "Add Line"
+
+[node name="Delete" type="Button" parent="Content/VBoxContainer"]
+margin_top = 80.0
+margin_right = 240.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 40, 0 )
+text = "Delete Point"
+
+[node name="BoundaryB" type="ColorRect" parent="Content/VBoxContainer"]
+margin_top = 104.0
+margin_right = 240.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 0, 2 )
+
+[node name="BoundaryR" type="ColorRect" parent="Content"]
+margin_left = 259.0
+margin_right = 261.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 2, 0 )
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 134.0
+margin_right = 261.0
+margin_bottom = 144.0
+custom_constants/separation = 10
+
+[connection signal="toggled" from="TitleContainer/PointCollapseContainer" to="TitleContainer/PointCollapseContainer" method="_on_Button_toggled"]
+[connection signal="pressed" from="Content/VBoxContainer/CollapsibleContainer/HBoxContainer/LinesContainer/AddLine" to="." method="_on_AddLine_pressed"]
+[connection signal="pressed" from="Content/VBoxContainer/Delete" to="." method="_on_Delete_pressed"]
