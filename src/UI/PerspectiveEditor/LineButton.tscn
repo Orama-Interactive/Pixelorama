@@ -1,39 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/graphics/misc/value_arrow.svg" type="Texture" id=2]
 [ext_resource path="res://src/UI/Nodes/CollapsibleContainer.gd" type="Script" id=3]
-[ext_resource path="res://src/UI/PerspectiveEditor/LineButton.gd" type="Script" id=4]
 
 [node name="LineButton" type="VBoxContainer"]
 margin_right = 159.0
 margin_bottom = 20.0
+theme_type_variation = "CollapsibleContainer"
 script = ExtResource( 3 )
-
-[node name="Button" type="Button" parent="."]
-margin_right = 159.0
-margin_bottom = 20.0
-mouse_default_cursor_shape = 2
-theme_type_variation = "CollapsibleCheckBox"
-toggle_mode = true
-script = ExtResource( 4 )
-
-[node name="TextureRect" type="TextureRect" parent="Button" groups=["UIButtons"]]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 2.0
-margin_top = -6.0
-margin_right = 14.0
-margin_bottom = 6.0
-rect_rotation = -90.0
-rect_pivot_offset = Vector2( 6, 6 )
-texture = ExtResource( 2 )
-
-[node name="Label" type="Label" parent="Button"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 14.0
-valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 visible = false
@@ -85,5 +59,3 @@ text = "Remove"
 margin_left = 155.0
 margin_right = 159.0
 margin_bottom = 52.0
-
-[connection signal="toggled" from="Button" to="." method="_on_Button_toggled"]

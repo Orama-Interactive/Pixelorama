@@ -1,5 +1,7 @@
 extends Button
 
+# This is NOT related to the CollapsibleContainer class (though it behaves similarly)
+# i did it like this because the "Content" is part of a different node
 export var point_text := "" setget _set_text
 export var visible_content := false setget _set_visible_content
 onready var content = $"%Content"
@@ -32,7 +34,7 @@ func _set_visible(pressed: bool) -> void:
 	content.visible = pressed
 
 
-# Checks if a child becomes visible from another sure and ensures
+# Checks if a child becomes visible from another source and ensures
 # it remains invisible if the button is not pressed
 func _child_visibility_changed() -> void:
 	if not pressed:
