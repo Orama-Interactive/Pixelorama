@@ -216,8 +216,11 @@ func _get_closest_point_to_grid(
 func _get_closest_point_to_segment(
 	position: Vector2, distance: Vector2, s1: Vector2, s2: Vector2
 ) -> Vector2:
+	var test_line := (s2 - s1).rotated(deg2rad(90)).normalized()
+	var from_a := position - test_line * distance.length()
+	var from_b := position + test_line * distance.length()
 	var closest_point := Vector2.INF
-	if Geometry.segment_intersects_segment_2d(position - distance, position + distance, s1, s2):
+	if Geometry.segment_intersects_segment_2d(from_a, from_b, s1, s2):
 		closest_point = Geometry.get_closest_point_to_segment_2d(position, s1, s2)
 	return closest_point
 
