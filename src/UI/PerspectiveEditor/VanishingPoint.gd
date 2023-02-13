@@ -193,8 +193,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 func remove_line(line_index):
 	var line_to_remove = perspective_lines[line_index]
 	perspective_lines.remove(line_index)
-	data.angles.remove(line_index)
-	data.lengths.remove(line_index)
+	data.lines.remove(line_index)
 	line_to_remove.queue_free()
 
 
