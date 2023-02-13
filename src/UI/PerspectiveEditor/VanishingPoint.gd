@@ -44,7 +44,6 @@ class PerspectiveLineData:
 
 
 func initiate(start_data: Dictionary = {}, idx = -1) -> void:
-
 	# If an initial vanishing point data is provided by project
 	if start_data:
 		data = start_data.duplicate()
@@ -173,9 +172,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 		var index = line_button.get_parent().get_child_count() - 2
 		line_button.get_parent().move_child(line_button, index)
 
-		var line_name = str(
-			"Line", line_button.get_index() + 1, " (", int(line_data.angle), "°)"
-		)
+		var line_name = str("Line", line_button.get_index() + 1, " (", int(line_data.angle), "°)")
 		line_button.text = line_name
 
 		var remove_button = line_button.find_node("Delete")
