@@ -1,14 +1,16 @@
 extends VBoxContainer
 
-var perspective_lines = []
-var tracker_line: PerspectiveLine
+# The main data for the vanishing point is kept in "data" dictionary
+# whenever you want to make the project aware of a change to the
 var data = {
 	"position_x": 0,
 	"position_y": 0,
-	"angles": [],
-	"lengths": [],
+	"lines": [],
 	"color": Color(randf(), randf(), randf(), 1).to_html(),
 }
+
+var perspective_lines = []
+var tracker_line: PerspectiveLine
 
 onready var color_picker_button = $"%ColorPickerButton"
 onready var title = $"%PointCollapseContainer"
@@ -20,22 +22,50 @@ onready var boundary_r = $Content/BoundaryR
 onready var boundary_b = $Content/VBoxContainer/BoundaryB
 
 
-func initiate(start_data = null, idx = -1) -> void:
+class PerspectiveLineData:
+	var angle: float = 0
+	var length: float = 19999
+
+	func _init(data: Dictionary = {}):
+		deserialize(data)
+
+	func serialize() -> Dictionary:
+		var data = {
+			"angle": angle,
+			"length": length,
+		}
+		return data
+
+	func deserialize(data) -> void:
+		if data.has("angle"):
+			angle = data["angle"]
+		if data.has("length"):
+			length = data["length"]
+
+
+func initiate(start_data: Dictionary = {}, idx = -1) -> void:
+
+	# If an initial vanishing point data is provided by project
 	if start_data:
 		data = start_data.duplicate()
-	add_line(null, true)
-	for i in data.angles.size():
-		var loaded_line_data = {
-			"start": Vector2(data.position_x, data.position_y),
-			"angle": data.angles[i],
-			"length": data.lengths[i],
-			"color": Color(data.color)
-		}
-		add_line(loaded_line_data)
-	if idx != -1:
+		if data.has("lines"):
+			for line in data["lines"]:
+				# Get data from the line resource
+				var loaded_line_data = line.serialize()
+				# Construct a line using this information
+				add_line(loaded_line_data)
+	else:  # We are the ones sending the data
+		update_data_to_project()
+
+	add_line({}, true)  # This is a tracker line (Always follows mouse)
+
+	# Title of Vanishing point button
+	if idx != -1:  # If the initialization is part of a Redo
 		title.point_text = str("Point: ", idx + 1)
 	else:
 		title.point_text = str("Point: ", get_parent().get_child_count())
+
+	# Set-up the properties pannel of the vanishing point
 	pos_x.value = data.position_x
 	pos_y.value = data.position_y
 	color_picker_button.color = Color(data.color)
@@ -43,8 +73,6 @@ func initiate(start_data = null, idx = -1) -> void:
 	color_picker_button.connect("color_changed", self, "_on_color_changed")
 	pos_x.connect("value_changed", self, "_on_X_value_changed")
 	pos_y.connect("value_changed", self, "_on_Y_value_changed")
-	if !start_data:
-		update_data_to_project()
 
 
 func update_boundary_color(color: Color):
@@ -86,14 +114,14 @@ func _on_Y_value_changed(value):
 
 func _angle_changed(value: float, line_button):
 	var line_index = line_button.get_index()
-	data.angles[line_index] = value
+	data.lines[line_index].angle = value
 	refresh(line_index)
 	update_data_to_project()
 
 
 func _length_changed(value: float, line_button):
 	var line_index = line_button.get_index()
-	data.lengths[line_index] = value
+	data.lines[line_index].length = value
 	refresh(line_index)
 	update_data_to_project()
 
@@ -106,34 +134,33 @@ func _remove_line_pressed(line_button):
 
 
 # Methods
-func add_line(loaded_line_data = null, is_tracker := false):
-	var p_size = Global.current_project.size
-	var default_line_data = {
-		"start": Vector2(data.position_x, data.position_y),
-		"angle": 0,
-		"length": 19999,
-		"color": Color(data.color)
-	}
-	if default_line_data.start.x > p_size.x / 2:
-		# If new line is created ahed of half project distance then
-		# reverse it's angle (for beautification)
-		default_line_data.angle = 180
+func add_line(loaded_line_data := {}, is_tracker := false):
+	var p_size = Global.current_project.size  # for use later in function
 
-	# Check if we have loading data instead of creating line
-	# Then THAT should be our data
-	if loaded_line_data:
-		default_line_data = loaded_line_data
+	var line_resource = PerspectiveLineData.new(loaded_line_data)
+	# Note: line_data will automatically get default values if loaded_line_data = {}
+	var line_data = line_resource.serialize()
+	# add som keys that are part of vanishing point (start point and color)
+	line_data["start"] = Vector2(data.position_x, data.position_y)
+	line_data["color"] = Color(data.color)
+
+	# This code in if block is purely for beautification
+	if line_data.start.x > p_size.x / 2:
+		# If new line is created ahed of half project distance then
+		# reverse it's angle
+		line_data.angle = 180
+		line_resource.deserialize(line_data)
 
 	if is_tracker:  # if we are creating tracker line then length adjustment is not required
 		if tracker_line != null:  # Also if the tracker line already exists then cancel creation
 			return
 	else:  # If we are not creating a perspective line then adjust it's length
 		var suitable_length = sqrt(pow(p_size.x, 2) + pow(p_size.y, 2))
-		default_line_data.length = suitable_length
+		line_data.length = suitable_length
 
 	# Create the visual line
 	var line = preload("res://src/UI/PerspectiveEditor/PerspectiveLine.tscn").instance()
-	line.initiate(default_line_data)
+	line.initiate(line_data)
 
 	# Set it's mode accordingly
 	if is_tracker:  # Settings for Tracker mode
@@ -147,7 +174,7 @@ func add_line(loaded_line_data = null, is_tracker := false):
 		line_button.get_parent().move_child(line_button, index)
 
 		var line_name = str(
-			"Line", line_button.get_index() + 1, " (", int(default_line_data.angle), "°)"
+			"Line", line_button.get_index() + 1, " (", int(line_data.angle), "°)"
 		)
 		line_button.text = line_name
 
@@ -155,11 +182,10 @@ func add_line(loaded_line_data = null, is_tracker := false):
 		var angle_slider = line_button.find_node("AngleSlider")
 		var length_slider = line_button.find_node("LengthSlider")
 
-		angle_slider.value = default_line_data.angle
-		length_slider.value = default_line_data.length
+		angle_slider.value = line_data.angle
+		length_slider.value = line_data.length
 		if !loaded_line_data:
-			data.angles.append(angle_slider.value)
-			data.lengths.append(length_slider.value)
+			data.lines.append(line_resource)
 
 		angle_slider.connect("value_changed", self, "_angle_changed", [line_button])
 		length_slider.connect("value_changed", self, "_length_changed", [line_button])
@@ -178,11 +204,14 @@ func remove_line(line_index):
 func update_data_to_project(removal := false):
 	var project = Global.current_project
 	var idx = get_index()
+	# If deletion is requested
 	if removal:
 		project.vanishing_points.remove(idx)
 		return
+	# If project knows about this vanishing point then update it
 	if idx < project.vanishing_points.size():
 		project.vanishing_points[idx] = data
+	# If project doesn't know about this vanishing point then NOW it knows
 	else:
 		project.vanishing_points.append(data)
 	Global.current_project.has_changed = true
@@ -191,19 +220,18 @@ func update_data_to_project(removal := false):
 func refresh(index: int):
 	if index == -1:  # means all lines should be refreshed
 		refresh_tracker()
-		for i in data.angles.size():
+		for i in data.lines.size():
 			refresh_line(i)
 	else:
 		refresh_line(index)
 
 
 func refresh_line(index: int):
-	var line_data = {
-		"start": Vector2(data.position_x, data.position_y),
-		"angle": data.angles[index],
-		"length": data.lengths[index],
-		"color": Color(data.color)
-	}
+	var line_resource = data.lines[index]
+	var line_data = line_resource.serialize()
+	# add some keys that are part of vanishing point (start point and color)
+	line_data["start"] = Vector2(data.position_x, data.position_y)
+	line_data["color"] = Color(data.color)
 	var line_button = line_buttons_container.get_child(index)
 	var line_name = str("Line", line_button.get_index() + 1, " (", int(line_data.angle), "°)")
 	line_button.text = line_name
@@ -211,6 +239,7 @@ func refresh_line(index: int):
 
 
 func refresh_tracker():
+	# tracker line has it's own data system (best leave it alone)
 	var line_data = {
 		"start": Vector2(data.position_x, data.position_y),
 		"angle": tracker_line._data.angle,

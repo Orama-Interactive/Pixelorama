@@ -9,7 +9,7 @@ onready var vanishing_point_container = $"%VanishingPointContainer"
 
 
 func _on_AddPoint_pressed() -> void:
-	do_pool.clear()  # Reset
+	do_pool.clear()  # Reset (clears Redo history of vanishing points)
 	var project = Global.current_project
 	project.undos += 1
 	project.undo_redo.create_action("Add Vanishing Point")
@@ -18,20 +18,11 @@ func _on_AddPoint_pressed() -> void:
 	project.undo_redo.commit_action()
 
 
-func update():
-	for c in vanishing_point_container.get_children():
-		c.queue_free()
-	for idx in Global.current_project.vanishing_points.size():
-		var point_data = Global.current_project.vanishing_points[idx]
-		var vanishing_point := vanishing_point_res.instance()
-		vanishing_point_container.add_child(vanishing_point)
-		vanishing_point.initiate(point_data, idx)
-
-
 func add_vanishing_point(is_redo := false):
 	var vanishing_point := vanishing_point_res.instance()
 	vanishing_point_container.add_child(vanishing_point)
 	if is_redo and !do_pool.empty():
+		# if it's a redo then initialize it with the redo data
 		vanishing_point.initiate(do_pool.pop_back())
 		vanishing_point.update_data_to_project()
 	else:
@@ -64,4 +55,18 @@ func do_delete_point(idx):
 func undo_delete_point(idx):
 	var point = delete_pool.pop_back()
 	Global.current_project.vanishing_points.insert(idx, point)
-	update()
+	update_points()
+
+
+func update_points():
+	# Delete old vanishing points
+	for c in vanishing_point_container.get_children():
+		c.queue_free()
+	# Add the "updated" vanising points from the current_project
+	for idx in Global.current_project.vanishing_points.size():
+		# Create the point
+		var vanishing_point := vanishing_point_res.instance()
+		vanishing_point_container.add_child(vanishing_point)
+		# Initialize it
+		var point_data = Global.current_project.vanishing_points[idx]
+		vanishing_point.initiate(point_data, idx)
