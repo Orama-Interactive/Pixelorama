@@ -32,7 +32,7 @@ func add_vanishing_point(is_redo := false):
 func undo_add_vanishing_point():
 	var point = vanishing_point_container.get_child(vanishing_point_container.get_child_count() - 1)
 	point.queue_free()
-	do_pool.append(point.data.duplicate())
+	do_pool.append(point.serialize())
 	point.update_data_to_project(true)
 
 
@@ -47,7 +47,7 @@ func delete_point(idx):
 
 func do_delete_point(idx):
 	var point = vanishing_point_container.get_child(idx)
-	delete_pool.append(point.data)
+	delete_pool.append(point.serialize())
 	point.queue_free()
 	point.update_data_to_project(true)
 
