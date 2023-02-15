@@ -44,6 +44,7 @@ unique_name_in_owner = true
 margin_top = 28.0
 margin_right = 51.0
 margin_bottom = 52.0
+min_value = 1.0
 max_value = 19999.0
 value = 19999.0
 allow_greater = true

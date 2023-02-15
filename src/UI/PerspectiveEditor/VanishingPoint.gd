@@ -1,9 +1,6 @@
 extends VBoxContainer
 
-# The main data for the vanishing point is kept in "data" dictionary
-# whenever you want to make the project aware of a change to the
-
-
+var has_focus := false
 var perspective_lines = []
 var color := Color(randf(), randf(), randf(), 1)
 
@@ -71,6 +68,33 @@ func update_boundary_color():
 	boundary_b.color = color
 
 
+func _input(_event):
+	var mouse_point = Global.canvas.current_pixel
+	var project_size = Global.current_project.size
+	var start = Vector2(pos_x.value, pos_y.value)
+	if (
+		Input.is_action_just_pressed("left_mouse")
+		and Global.can_draw
+		and Global.has_focus
+		and mouse_point.distance_to(start) < Global.camera.zoom.x * 8
+	):
+		if (
+			!Rect2(Vector2.ZERO, project_size).has_point(Global.canvas.current_pixel)
+			or Global.move_guides_on_canvas
+		):
+			has_focus = true
+			Global.has_focus = false
+	if has_focus:
+		if Input.is_action_pressed("left_mouse"):
+			# rotation code here
+			pos_x.value = mouse_point.x
+			pos_y.value = mouse_point.y
+
+		elif Input.is_action_just_released("left_mouse"):
+			Global.has_focus = true
+			has_focus = false
+
+
 # Signals
 func _on_AddLine_pressed() -> void:
 	add_line()
@@ -93,22 +117,27 @@ func _on_pos_value_changed(_value: float) -> void:
 	update_data_to_project()
 
 
-func angle_changed(value: float, line_button): # value is always positive
+func angle_changed(value: float, line_button):
 	# check if the properties are changing the line or is the line changing properties
 	var angle_slider = line_button.find_node("AngleSlider")
-	if angle_slider.value != value: # the line is changing the properties
+	if angle_slider.value != value:  # the line is changing the properties
 		angle_slider.value = value
 	else:
 		var line_index = line_button.get_index()
-		perspective_lines[line_index].angle = -value
+		perspective_lines[line_index].angle = value
 		refresh(line_index)
 	update_data_to_project()
 
 
-func _length_changed(value: float, line_button):
-	var line_index = line_button.get_index()
-	perspective_lines[line_index].length = value
-	refresh(line_index)
+func length_changed(value: float, line_button):
+	# check if the properties are changing the line or is the line changing properties
+	var length_slider = line_button.find_node("LengthSlider")
+	if length_slider.value != value:  # the line is changing the properties
+		length_slider.value = value
+	else:
+		var line_index = line_button.get_index()
+		perspective_lines[line_index].length = value
+		refresh(line_index)
 	update_data_to_project()
 
 
@@ -165,7 +194,9 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 		var index = line_button.get_parent().get_child_count() - 2
 		line_button.get_parent().move_child(line_button, index)
 
-		var line_name = str("Line", line_button.get_index() + 1, " (", int(abs(line_data.angle)), "°)")
+		var line_name = str(
+			"Line", line_button.get_index() + 1, " (", int(abs(line_data.angle)), "°)"
+		)
 		line_button.text = line_name
 
 		var remove_button = line_button.find_node("Delete")
@@ -177,7 +208,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 
 		line.line_button = line_button  # In case we need to change properties from line
 		angle_slider.connect("value_changed", self, "angle_changed", [line_button])
-		length_slider.connect("value_changed", self, "_length_changed", [line_button])
+		length_slider.connect("value_changed", self, "length_changed", [line_button])
 		remove_button.connect("pressed", self, "_remove_line_pressed", [line_button])
 		perspective_lines.append(line)
 
@@ -217,7 +248,7 @@ func refresh(index: int):
 func refresh_line(index: int):
 	var line_button = line_buttons_container.get_child(index)
 	var line_data = perspective_lines[index].serialize()
-	var line_name = str("Line", line_button.get_index() + 1, " (", int(-line_data.angle), "°)")
+	var line_name = str("Line", line_button.get_index() + 1, " (", int(abs(line_data.angle)), "°)")
 	line_button.text = line_name
 	perspective_lines[index].refresh()
 

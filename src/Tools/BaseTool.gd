@@ -165,7 +165,7 @@ func snap_position(position: Vector2) -> Vector2:
 			if point.has("pos_x") and point.has("pos_y"):  # Sanity check
 				for i in point.lines.size():
 					if point.lines[i].has("angle") and point.lines[i].has("length"):  # Sanity check
-						var angle: float = deg2rad(point.lines[i].angle)
+						var angle: float = -deg2rad(point.lines[i].angle)
 						var length: float = point.lines[i].length
 						var start = Vector2(point.pos_x, point.pos_y)
 						var s1: Vector2 = start
