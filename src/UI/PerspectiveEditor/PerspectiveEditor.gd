@@ -8,7 +8,6 @@ var tracker_disabled := false
 onready var vanishing_point_container = $"%VanishingPointContainer"
 
 
-
 func _on_AddPoint_pressed() -> void:
 	do_pool.clear()  # Reset (clears Redo history of vanishing points)
 	var project = Global.current_project
