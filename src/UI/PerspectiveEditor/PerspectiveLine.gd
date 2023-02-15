@@ -1,17 +1,19 @@
 class_name PerspectiveLine
 extends Line2D
 
-var has_focus := false
-var change_length = false
 const LINE_WIDTH := 2
 const CIRCLE_RAD := 4
-var _vanishing_point: Node
-var hidden = false
-var track_mouse := false
-var line_button: Node
 
 var angle := 0
 var length := 19999
+
+var hidden = false
+var has_focus := false
+var track_mouse := false
+var change_length = false
+
+var line_button: Node
+var _vanishing_point: Node
 
 
 func serialize() -> Dictionary:
@@ -89,11 +91,7 @@ func try_rotate_scale():
 	var test_line := (points[1] - points[0]).rotated(deg2rad(90)).normalized()
 	var from_a = mouse_point - test_line * Global.camera.zoom.x * LINE_WIDTH * 2
 	var from_b = mouse_point + test_line * Global.camera.zoom.x * LINE_WIDTH * 2
-	if (
-		Input.is_action_just_pressed("left_mouse")
-		and Global.can_draw
-		and Global.has_focus
-	):
+	if Input.is_action_just_pressed("left_mouse") and Global.can_draw and Global.has_focus:
 		if (
 			Geometry.segment_intersects_segment_2d(from_a, from_b, points[0], points[1])
 			or mouse_point.distance_to(points[1]) < Global.camera.zoom.x * CIRCLE_RAD * 2
@@ -102,7 +100,7 @@ func try_rotate_scale():
 				!Rect2(Vector2.ZERO, project_size).has_point(mouse_point)
 				or Global.move_guides_on_canvas
 			):
-				if (mouse_point.distance_to(points[1]) < Global.camera.zoom.x * CIRCLE_RAD * 2):
+				if mouse_point.distance_to(points[1]) < Global.camera.zoom.x * CIRCLE_RAD * 2:
 					change_length = true
 				has_focus = true
 				Global.has_focus = false
@@ -130,9 +128,7 @@ func _draw() -> void:
 	var mouse_point = Global.canvas.current_pixel
 	var arc_points = []
 	draw_circle(points[0], Global.camera.zoom.x * CIRCLE_RAD, default_color)  # Starting circle
-	if(
-		!track_mouse and mouse_point.distance_to(points[0]) < Global.camera.zoom.x * CIRCLE_RAD * 2
-	):
+	if !track_mouse and mouse_point.distance_to(points[0]) < Global.camera.zoom.x * CIRCLE_RAD * 2:
 		if (
 			!Rect2(Vector2.ZERO, Global.current_project.size).has_point(mouse_point)
 			or Global.move_guides_on_canvas
@@ -153,13 +149,7 @@ func _draw() -> void:
 			arc_points.append(points[1])
 
 	for point in arc_points:
-		draw_arc(point,
-				Global.camera.zoom.x * CIRCLE_RAD * 2,
-				0,
-				360,
-				360,
-				default_color,
-				0.5)  # Starting circle
+		draw_arc(point, Global.camera.zoom.x * CIRCLE_RAD * 2, 0, 360, 360, default_color, 0.5)
 
 	width = Global.camera.zoom.x * LINE_WIDTH
 	if hidden:  # Hidden line
