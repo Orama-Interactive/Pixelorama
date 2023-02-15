@@ -176,8 +176,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 		if tracker_line != null:  # Also if the tracker line already exists then cancel creation
 			return
 	else:  # If we are not creating a perspective line then adjust it's length
-		var suitable_length = sqrt(pow(p_size.x, 2) + pow(p_size.y, 2))
-		line_data.length = suitable_length
+		line_data.length = p_size.x
 
 	# Create the visual line
 	var line = preload("res://src/UI/PerspectiveEditor/PerspectiveLine.tscn").instance()

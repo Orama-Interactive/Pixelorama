@@ -45,18 +45,25 @@ rect_min_size = Vector2( 30, 30 )
 text = "+"
 clip_text = true
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="TrackerLines" type="CheckButton" parent="VBoxContainer"]
 margin_top = 34.0
 margin_right = 262.0
-margin_bottom = 38.0
+margin_bottom = 74.0
+pressed = true
+text = "Tracker Lines"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 78.0
+margin_right = 262.0
+margin_bottom = 82.0
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 42.0
+margin_top = 86.0
 margin_right = 262.0
-margin_bottom = 46.0
+margin_bottom = 90.0
 
 [node name="Content" type="ScrollContainer" parent="VBoxContainer"]
-margin_top = 50.0
+margin_top = 94.0
 margin_right = 262.0
 margin_bottom = 210.0
 size_flags_vertical = 3
@@ -64,9 +71,10 @@ size_flags_vertical = 3
 [node name="VanishingPointContainer" type="VBoxContainer" parent="VBoxContainer/Content"]
 unique_name_in_owner = true
 margin_right = 262.0
-margin_bottom = 160.0
+margin_bottom = 116.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 5
 
 [connection signal="pressed" from="VBoxContainer/Header/AddPoint" to="." method="_on_AddPoint_pressed"]
+[connection signal="toggled" from="VBoxContainer/TrackerLines" to="." method="_on_TrackerLines_toggled"]

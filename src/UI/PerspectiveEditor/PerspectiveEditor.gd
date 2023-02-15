@@ -4,7 +4,9 @@ var axes: Node2D
 var do_pool = []  # A pool that stores data of points removed by undo
 var delete_pool = []  # A pool that containg deleted data and their index
 var vanishing_point_res := preload("res://src/UI/PerspectiveEditor/VanishingPoint.tscn")
+var tracker_disabled := false
 onready var vanishing_point_container = $"%VanishingPointContainer"
+
 
 
 func _on_AddPoint_pressed() -> void:
@@ -15,6 +17,11 @@ func _on_AddPoint_pressed() -> void:
 	project.undo_redo.add_do_method(self, "add_vanishing_point", true)
 	project.undo_redo.add_undo_method(self, "undo_add_vanishing_point")
 	project.undo_redo.commit_action()
+
+
+func _on_TrackerLines_toggled(button_pressed):
+	for point in vanishing_point_container.get_children():
+		tracker_disabled = !button_pressed
 
 
 func add_vanishing_point(is_redo := false):
