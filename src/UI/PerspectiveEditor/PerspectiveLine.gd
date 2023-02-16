@@ -154,24 +154,3 @@ func _draw() -> void:
 	width = Global.camera.zoom.x * LINE_WIDTH
 	if hidden:  # Hidden line
 		return
-	var viewport_size: Vector2 = Global.main_viewport.rect_size
-	var zoom: Vector2 = Global.camera.zoom
-	# viewport_poly is an array of the points that make up the corners of the viewport
-	var viewport_poly := [
-		Vector2.ZERO, Vector2(viewport_size.x, 0), viewport_size, Vector2(0, viewport_size.y)
-	]
-	# Adjusting viewport_poly to take into account the camera offset, zoom, and rotation
-	for p in range(viewport_poly.size()):
-		viewport_poly[p] = (
-			viewport_poly[p].rotated(Global.camera.rotation) * zoom
-			+ Vector2(
-				(
-					Global.camera.offset.x
-					- (viewport_size.rotated(Global.camera.rotation).x / 2) * zoom.x
-				),
-				(
-					Global.camera.offset.y
-					- (viewport_size.rotated(Global.camera.rotation).y / 2) * zoom.y
-				)
-			)
-		)
