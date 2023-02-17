@@ -19,7 +19,6 @@ onready var start_button = $"%Start"
 onready var path_field = $"%Path"
 
 
-
 func _ready() -> void:
 	refresh_projects_list()
 	project = Global.current_project
