@@ -84,7 +84,7 @@ func capture_frame() -> void:
 	if mode == Mode.CANVAS:
 		if resize != 100:
 			image.unlock()
-			image.resize(image.get_size().x * resize / 100, image.get_size().y * resize / 100)
+			image.resize(image.get_size().x * resize / 100, image.get_size().y * resize / 100, 0)
 
 	cache.append(image)
 
