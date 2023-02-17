@@ -13,9 +13,12 @@ var frame_captured = 0  # A variable used to visualize frames captured
 var skip_amount = 1  # No of "do" actions after which a frame can be captured
 var current_frame_no = 0  # used to compare with skip_amount to see if it can be captured
 
+var resize := 100
+
 onready var project_list = $"%TargetProjectOption"
 onready var folder_button: Button = $"%Folder"
 onready var start_button = $"%Start"
+onready var size: Label = $"%Size"
 onready var path_field = $"%Path"
 
 
@@ -28,6 +31,7 @@ func _ready() -> void:
 	chosen_dir = Global.directory_module.xdg_data_home.plus_file("Recordings")
 	dir.make_dir_recursive(chosen_dir)
 	path_field.text = chosen_dir
+	size.text = str("(", project.size.x, "×", project.size.y, ")")
 
 
 func initialize_recording():
@@ -76,6 +80,12 @@ func capture_frame() -> void:
 		var frame = project.frames[project.current_frame]
 		image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 		Export.blend_selected_cels(image, frame, Vector2(0, 0), project)
+
+	if mode == Mode.CANVAS:
+		if resize != 100:
+			image.unlock()
+			image.resize(image.get_size().x * resize / 100, image.get_size().y * resize / 100)
+
 	cache.append(image)
 
 
@@ -108,6 +118,8 @@ func finalize_recording():
 	$ScrollContainer/CenterContainer/GridContainer/Captured.visible = false
 	for child in $Dialogs/Options/PanelContainer/VBoxContainer.get_children():
 		child.visible = true
+	if mode == Mode.PIXELORAMA:
+		size.get_parent().visible = false
 
 
 func disconnect_undo() -> void:
@@ -154,8 +166,17 @@ func _on_SkipAmount_value_changed(value: float) -> void:
 func _on_Mode_toggled(button_pressed) -> void:
 	if button_pressed:
 		mode = Mode.PIXELORAMA
+		size.get_parent().visible = false
 	else:
 		mode = Mode.CANVAS
+		size.get_parent().visible = true
+
+
+
+func _on_SpinBox_value_changed(value: float) -> void:
+	resize = value
+	var new_size: Vector2 = project.size * (resize / 100.0)
+	size.text = str("(", new_size.x, "×", new_size.y, ")")
 
 
 func _on_Choose_pressed() -> void:
@@ -175,5 +196,5 @@ func _on_Path_dir_selected(dir: String) -> void:
 
 func _on_Fps_value_changed(value: float) -> void:
 	var dur_label = $Dialogs/Options/PanelContainer/VBoxContainer/Fps/Duration
-	var duration = 1.0 / value
-	dur_label.text = str("= ", duration, " sec duration")
+	var duration = stepify(1.0 / value, 0.0001)
+	dur_label.text = str("= ", duration, " sec")
