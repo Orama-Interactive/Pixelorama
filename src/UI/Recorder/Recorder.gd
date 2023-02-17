@@ -1,16 +1,14 @@
 extends PanelContainer
 
+signal frame_saved
 
 enum Mode {CANVAS, PIXELORAMA}
 
 var mode = 0
-
-var chosen_dir = "" #
+var chosen_dir = ""
 var save_dir = ""
-
 var project: Project
-
-var cache :Array = []  # Array of images stored during recording
+var cache: Array = []  # Array of images stored during recording
 var frame_captured = 0  # A variable used to visualize frames captured
 var skip_amount = 1  # No of "do" actions after which a frame can be captured
 var current_frame_no = 0  # used to compare with skip_amount to see if it can be captured
@@ -20,7 +18,6 @@ onready var folder_button: Button = $"%Folder"
 onready var start_button = $"%Start"
 onready var path_field = $"%Path"
 
-signal frame_saved
 
 
 func _ready() -> void:
@@ -54,17 +51,16 @@ func initialize_recording():
 		save_dir[-1] = ""
 
 	# Create a new directory based on time
-	var folder = str(project.name,
-				 OS.get_time().hour,
-				 "_", OS.get_time().minute,
-				 "_", OS.get_time().second)
+	var folder = str(
+		project.name, OS.get_time().hour, "_", OS.get_time().minute, "_", OS.get_time().second
+	)
 	save_dir = save_dir.plus_file(folder)
 	var dir := Directory.new()
 
 # warning-ignore:return_value_discarded
 	dir.make_dir_recursive(save_dir)
 
-	capture_frame() # capture first frame
+	capture_frame()  # capture first frame
 	$Timer.start()
 
 
@@ -79,9 +75,7 @@ func capture_frame() -> void:
 		image.flip_y()
 	else:
 		var frame = project.frames[project.current_frame]
-		image.create(
-				project.size.x, project.size.y, false, Image.FORMAT_RGBA8
-			)
+		image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 		Export.blend_selected_cels(image, frame, Vector2(0, 0), project)
 	cache.append(image)
 
@@ -93,7 +87,7 @@ func _on_Timer_timeout() -> void:
 		cache.remove(0)
 
 
-func save_frame(img :Image) -> void:
+func save_frame(img: Image) -> void:
 	var save_file = str(project.name, "_", frame_captured, ".png")
 	img.save_png(save_dir.plus_file(save_file))
 	emit_signal("frame_saved")
@@ -180,8 +174,7 @@ func _on_Path_dir_selected(dir: String) -> void:
 	start_button.disabled = false
 
 
-
 func _on_Fps_value_changed(value: float) -> void:
 	var dur_label = $Dialogs/Options/PanelContainer/VBoxContainer/Fps/Duration
-	var duration = 1.0/value
+	var duration = 1.0 / value
 	dur_label.text = str("= ", duration, " sec duration")
