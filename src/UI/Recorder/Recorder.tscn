@@ -117,7 +117,6 @@ texture = ExtResource( 4 )
 stretch_mode = 6
 
 [node name="Dialogs" type="Control" parent="."]
-visible = false
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 187.0
@@ -125,9 +124,8 @@ margin_bottom = 43.0
 mouse_filter = 2
 
 [node name="Options" type="WindowDialog" parent="Dialogs"]
-visible = true
 margin_right = 293.0
-margin_bottom = 197.0
+margin_bottom = 210.0
 window_title = "Options"
 
 [node name="PanelContainer" type="PanelContainer" parent="Dialogs/Options"]
@@ -142,7 +140,7 @@ margin_bottom = -9.0
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 268.0
-margin_bottom = 172.0
+margin_bottom = 186.0
 
 [node name="IntervalHeader" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
 margin_right = 261.0
@@ -186,10 +184,38 @@ margin_right = 260.0
 margin_bottom = 19.0
 text = "Actions"
 
-[node name="ModeHeader" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer" groups=["visible during recording"]]
+[node name="Fps" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
 margin_top = 46.0
 margin_right = 261.0
-margin_bottom = 60.0
+margin_bottom = 70.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/Fps"]
+margin_left = 15.0
+margin_top = 5.0
+margin_right = 41.0
+margin_bottom = 19.0
+text = "Fps:"
+
+[node name="Fps" type="SpinBox" parent="Dialogs/Options/PanelContainer/VBoxContainer/Fps"]
+margin_left = 45.0
+margin_right = 119.0
+margin_bottom = 24.0
+min_value = 1.0
+value = 30.0
+allow_greater = true
+
+[node name="Duration" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/Fps"]
+margin_left = 123.0
+margin_top = 5.0
+margin_right = 246.0
+margin_bottom = 19.0
+text = "= 0.03 sec duration"
+
+[node name="ModeHeader" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer" groups=["visible during recording"]]
+margin_top = 74.0
+margin_right = 261.0
+margin_bottom = 88.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeHeader"]
@@ -205,9 +231,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="ModeType" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer" groups=["visible during recording"]]
-margin_top = 64.0
+margin_top = 92.0
 margin_right = 261.0
-margin_bottom = 104.0
+margin_bottom = 132.0
 alignment = 1
 
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeType"]
@@ -231,9 +257,9 @@ margin_bottom = 27.0
 text = "Pixelorama"
 
 [node name="PathHeader" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
-margin_top = 108.0
+margin_top = 136.0
 margin_right = 261.0
-margin_bottom = 122.0
+margin_bottom = 150.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathHeader"]
@@ -249,9 +275,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="PathContainer" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
-margin_top = 126.0
+margin_top = 154.0
 margin_right = 261.0
-margin_bottom = 151.0
+margin_bottom = 179.0
 
 [node name="Path" type="LineEdit" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer"]
 unique_name_in_owner = true
@@ -301,6 +327,7 @@ access = 2
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Folder" to="." method="_on_Open_pressed"]
 [connection signal="value_changed" from="Dialogs/Options/PanelContainer/VBoxContainer/ActionGap/SkipAmount" to="." method="_on_SkipAmount_value_changed"]
+[connection signal="value_changed" from="Dialogs/Options/PanelContainer/VBoxContainer/Fps/Fps" to="." method="_on_Fps_value_changed"]
 [connection signal="toggled" from="Dialogs/Options/PanelContainer/VBoxContainer/ModeType/Mode" to="." method="_on_Mode_toggled"]
 [connection signal="pressed" from="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer/Open" to="." method="_on_Open_pressed"]
 [connection signal="pressed" from="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer/Choose" to="." method="_on_Choose_pressed"]

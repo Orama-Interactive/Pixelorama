@@ -179,3 +179,9 @@ func _on_Path_dir_selected(dir: String) -> void:
 	path_field.text = chosen_dir
 	start_button.disabled = false
 
+
+
+func _on_Fps_value_changed(value: float) -> void:
+	var dur_label = $Dialogs/Options/PanelContainer/VBoxContainer/Fps/Duration
+	var duration = 1.0/value
+	dur_label.text = str("= ", duration, " sec duration")
