@@ -124,7 +124,6 @@ margin_bottom = 43.0
 mouse_filter = 2
 
 [node name="Options" type="WindowDialog" parent="Dialogs"]
-visible = true
 margin_right = 293.0
 margin_bottom = 259.0
 rect_min_size = Vector2( 295, 260 )
