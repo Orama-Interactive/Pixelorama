@@ -5,7 +5,6 @@ signal cel_changed
 
 enum LayerTypes { PIXEL, GROUP }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
-enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
 enum ColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
@@ -74,7 +73,6 @@ var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
 
 # Preferences
-var pressure_sensitivity_mode = PressureSensitivity.NONE
 var open_last_project := false
 var quit_confirmation := false
 var smooth_zoom := true
