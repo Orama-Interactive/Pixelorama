@@ -162,15 +162,18 @@ func snap_position(position: Vector2) -> Vector2:
 
 	if Global.snap_to_perspective_guides:
 		for point in Global.current_project.vanishing_points:
-			for i in point.angles.size():
-				var angle: float = -deg2rad(point.angles[i])
-				var length: float = point.lengths[i]
-				var s1 := Vector2(point.position_x, point.position_y)
-				var s2 := s1 + Vector2(length * cos(angle), length * sin(angle))
-				var snap := _snap_to_guide(snap_to, position, snap_distance, s1, s2)
-				if snap == Vector2.INF:
-					continue
-				snap_to = snap
+			if point.has("pos_x") and point.has("pos_y"):  # Sanity check
+				for i in point.lines.size():
+					if point.lines[i].has("angle") and point.lines[i].has("length"):  # Sanity check
+						var angle: float = deg2rad(point.lines[i].angle)
+						var length: float = point.lines[i].length
+						var start = Vector2(point.pos_x, point.pos_y)
+						var s1: Vector2 = start
+						var s2 := s1 + Vector2(length * cos(angle), length * sin(angle))
+						var snap := _snap_to_guide(snap_to, position, snap_distance, s1, s2)
+						if snap == Vector2.INF:
+							continue
+						snap_to = snap
 	if snap_to != Vector2.INF:
 		position = snap_to.floor()
 
