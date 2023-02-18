@@ -2,7 +2,7 @@ extends PanelContainer
 
 signal frame_saved
 
-enum Mode {CANVAS, PIXELORAMA}
+enum Mode { CANVAS, PIXELORAMA }
 
 var mode = 0
 var chosen_dir = ""
@@ -170,7 +170,6 @@ func _on_Mode_toggled(button_pressed) -> void:
 	else:
 		mode = Mode.CANVAS
 		size.get_parent().visible = true
-
 
 
 func _on_SpinBox_value_changed(value: float) -> void:
