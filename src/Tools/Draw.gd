@@ -316,7 +316,6 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 
 # Compute the array of coordinates that should be drawn
 func _compute_draw_tool_pixel(position: Vector2) -> PoolVector2Array:
-
 	var result := PoolVector2Array()
 	var start := position - Vector2.ONE * (_brush_size_dynamics >> 1)
 	var end := start + Vector2.ONE * _brush_size_dynamics
