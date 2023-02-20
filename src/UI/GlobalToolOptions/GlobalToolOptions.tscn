@@ -5,7 +5,7 @@
 [ext_resource path="res://src/UI/GlobalToolOptions/GlobalToolOptions.gd" type="Script" id=3]
 [ext_resource path="res://assets/graphics/misc/pixel_perfect_off.png" type="Texture" id=4]
 [ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=5]
-[ext_resource path="res://assets/graphics/misc/Dynamics.png" type="Texture" id=6]
+[ext_resource path="res://assets/graphics/misc/dynamics.png" type="Texture" id=6]
 [ext_resource path="res://assets/graphics/misc/uncheck.png" type="Texture" id=7]
 [ext_resource path="res://src/UI/Nodes/MaxMinEdit.tscn" type="PackedScene" id=8]
 
