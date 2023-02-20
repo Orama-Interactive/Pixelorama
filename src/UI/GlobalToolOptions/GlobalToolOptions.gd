@@ -12,10 +12,10 @@ onready var pixel_perfect: BaseButton = grid_container.get_node("PixelPerfect")
 onready var dynamics: Button = $"%Dynamics"
 
 onready var dynamics_panel: PopupPanel = $DynamicsPanel
-onready var alpha_pressure_button: CheckButton = $"%AlphaPressureButton"
-onready var alpha_velocity_button: CheckButton = $"%AlphaVelocityButton"
-onready var size_pressure_button: CheckButton = $"%SizePressureButton"
-onready var size_velocity_button: CheckButton = $"%SizeVelocityButton"
+onready var alpha_pressure_button: Button = $"%AlphaPressureButton"
+onready var alpha_velocity_button: Button = $"%AlphaVelocityButton"
+onready var size_pressure_button: Button = $"%SizePressureButton"
+onready var size_velocity_button: Button = $"%SizeVelocityButton"
 onready var alpha_group: ButtonGroup = alpha_pressure_button.group
 onready var size_group: ButtonGroup = size_pressure_button.group
 
@@ -141,6 +141,12 @@ func _on_Dynamics_toggled(
 		SIZE:
 			Tools.dynamics_size = final_dynamic
 
+	var texture_button: TextureRect = button.get_node("TextureRect")
+	var file_name := "check.png"
+	if !button.pressed:
+		file_name = "uncheck.png"
+	Global.change_button_texturerect(texture_button, file_name)
+
 
 func _set_last_pressed_button(prop: int, value: BaseButton) -> void:
 	match prop:
@@ -150,20 +156,14 @@ func _set_last_pressed_button(prop: int, value: BaseButton) -> void:
 			size_last_pressed = value
 
 
-func _on_ThresholdPressureMin_value_changed(value: float) -> void:
-	Tools.pen_pressure_min = value
+func _on_ThresholdPressure_updated(value_1, value_2) -> void:
+	Tools.pen_pressure_min = min(value_1, value_2)
+	Tools.pen_pressure_max = max(value_1, value_2)
 
 
-func _on_ThresholdPressureMax_value_changed(value: float) -> void:
-	Tools.pen_pressure_max = value
-
-
-func _on_ThresholdVelocityMin_value_changed(value: float) -> void:
-	Tools.mouse_velocity_min_thres = value
-
-
-func _on_ThresholdVelocityMax_value_changed(value: float) -> void:
-	Tools.mouse_velocity_max_thres = value
+func _on_ThresholdVelocity_updated(value_1, value_2) -> void:
+	Tools.mouse_velocity_min_thres = min(value_1, value_2)
+	Tools.mouse_velocity_max_thres = max(value_1, value_2)
 
 
 func _on_AlphaMin_value_changed(value: float) -> void:

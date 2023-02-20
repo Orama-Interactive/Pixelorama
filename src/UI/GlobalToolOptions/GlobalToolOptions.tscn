@@ -1,14 +1,28 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/graphics/misc/horizontal_mirror_off.png" type="Texture" id=1]
 [ext_resource path="res://assets/graphics/misc/vertical_mirror_off.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/GlobalToolOptions/GlobalToolOptions.gd" type="Script" id=3]
 [ext_resource path="res://assets/graphics/misc/pixel_perfect_off.png" type="Texture" id=4]
 [ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=5]
+[ext_resource path="res://assets/graphics/misc/dynamics.png" type="Texture" id=6]
+[ext_resource path="res://assets/graphics/misc/uncheck.png" type="Texture" id=7]
+[ext_resource path="res://src/UI/Nodes/MaxMinEdit.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ButtonGroup" id=1]
 
 [sub_resource type="ButtonGroup" id=2]
+
+[sub_resource type="Gradient" id=3]
+interpolation_mode = 1
+offsets = PoolRealArray( 0, 0, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 3 )
 
 [node name="Global Tool Options" type="PanelContainer"]
 margin_left = 1.0
@@ -25,14 +39,16 @@ margin_bottom = 43.0
 rect_min_size = Vector2( 36, 36 )
 
 [node name="CenterContainer" type="CenterContainer" parent="ScrollContainer"]
-margin_right = 183.0
-margin_bottom = 32.0
+margin_right = 180.0
+margin_bottom = 36.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer/CenterContainer"]
-margin_right = 183.0
-margin_bottom = 32.0
+margin_left = 20.0
+margin_top = 2.0
+margin_right = 160.0
+margin_bottom = 34.0
 size_flags_vertical = 0
 columns = 4
 
@@ -54,9 +70,6 @@ margin_top = -10.5
 margin_right = 10.0
 margin_bottom = 10.5
 texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Vertical" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 margin_left = 36.0
@@ -77,9 +90,6 @@ margin_top = -10.0
 margin_right = 10.0
 margin_bottom = 10.0
 texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PixelPerfect" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 margin_left = 72.0
@@ -102,13 +112,29 @@ margin_right = 11.0
 margin_bottom = 10.0
 texture = ExtResource( 4 )
 
-[node name="Dynamics" type="Button" parent="ScrollContainer/CenterContainer/GridContainer"]
+[node name="Dynamics" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 unique_name_in_owner = true
 margin_left = 108.0
-margin_right = 183.0
+margin_right = 140.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Pixel Perfect
+Makes lines smooth by removing the extra pixels on the edges"
 mouse_default_cursor_shape = 2
-text = "Dynamics"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Dynamics"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -10.0
+margin_right = 11.0
+margin_bottom = 10.0
+texture = ExtResource( 6 )
 
 [node name="DynamicsPanel" type="PopupPanel" parent="."]
 margin_left = 7.0
@@ -125,7 +151,7 @@ margin_bottom = 256.0
 
 [node name="DynamicsOptions" type="GridContainer" parent="DynamicsPanel/VBoxContainer"]
 margin_right = 252.0
-margin_bottom = 108.0
+margin_bottom = 68.0
 columns = 3
 
 [node name="Control" type="Control" parent="DynamicsPanel/VBoxContainer/DynamicsOptions"]
@@ -153,57 +179,87 @@ text = "Velocity"
 align = 1
 
 [node name="AlphaLabel" type="Label" parent="DynamicsPanel/VBoxContainer/DynamicsOptions"]
-margin_top = 37.0
+margin_top = 27.0
 margin_right = 82.0
-margin_bottom = 51.0
+margin_bottom = 41.0
 text = "Alpha"
 
-[node name="AlphaPressureButton" type="CheckButton" parent="DynamicsPanel/VBoxContainer/DynamicsOptions"]
+[node name="AlphaPressureButton" type="Button" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" groups=["UIButtons"]]
 unique_name_in_owner = true
 margin_left = 86.0
 margin_top = 24.0
 margin_right = 167.0
-margin_bottom = 64.0
+margin_bottom = 44.0
 mouse_default_cursor_shape = 2
+toggle_mode = true
 group = SubResource( 1 )
+icon_align = 1
+expand_icon = true
 
-[node name="AlphaVelocityButton" type="CheckButton" parent="DynamicsPanel/VBoxContainer/DynamicsOptions"]
+[node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/AlphaPressureButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="AlphaVelocityButton" type="Button" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" groups=["UIButtons"]]
 unique_name_in_owner = true
 margin_left = 171.0
 margin_top = 24.0
 margin_right = 252.0
-margin_bottom = 64.0
+margin_bottom = 44.0
 mouse_default_cursor_shape = 2
+toggle_mode = true
 group = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/AlphaVelocityButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
 
 [node name="SizeLabel" type="Label" parent="DynamicsPanel/VBoxContainer/DynamicsOptions"]
-margin_top = 81.0
+margin_top = 51.0
 margin_right = 82.0
-margin_bottom = 95.0
+margin_bottom = 65.0
 text = "Size"
 
-[node name="SizePressureButton" type="CheckButton" parent="DynamicsPanel/VBoxContainer/DynamicsOptions"]
+[node name="SizePressureButton" type="Button" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" groups=["UIButtons"]]
 unique_name_in_owner = true
 margin_left = 86.0
-margin_top = 68.0
+margin_top = 48.0
 margin_right = 167.0
-margin_bottom = 108.0
+margin_bottom = 68.0
 mouse_default_cursor_shape = 2
+toggle_mode = true
 group = SubResource( 2 )
 
-[node name="SizeVelocityButton" type="CheckButton" parent="DynamicsPanel/VBoxContainer/DynamicsOptions"]
+[node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/SizePressureButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="SizeVelocityButton" type="Button" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" groups=["UIButtons"]]
 unique_name_in_owner = true
 margin_left = 171.0
-margin_top = 68.0
+margin_top = 48.0
 margin_right = 252.0
-margin_bottom = 108.0
+margin_bottom = 68.0
 mouse_default_cursor_shape = 2
+toggle_mode = true
 group = SubResource( 2 )
 
+[node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/SizeVelocityButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
 [node name="LimitsHeader" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer"]
-margin_top = 112.0
+margin_top = 72.0
 margin_right = 252.0
-margin_bottom = 126.0
+margin_bottom = 86.0
 
 [node name="Label" type="Label" parent="DynamicsPanel/VBoxContainer/LimitsHeader"]
 margin_right = 76.0
@@ -218,9 +274,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="LimitContainer" type="GridContainer" parent="DynamicsPanel/VBoxContainer"]
-margin_top = 130.0
+margin_top = 90.0
 margin_right = 252.0
-margin_bottom = 162.0
+margin_bottom = 122.0
 columns = 3
 
 [node name="AlphaLabel" type="Label" parent="DynamicsPanel/VBoxContainer/LimitContainer"]
@@ -313,9 +369,9 @@ script = ExtResource( 5 )
 prefix = "Max"
 
 [node name="ThresholdsHeader" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer"]
-margin_top = 166.0
+margin_top = 126.0
 margin_right = 252.0
-margin_bottom = 180.0
+margin_bottom = 140.0
 
 [node name="Label" type="Label" parent="DynamicsPanel/VBoxContainer/ThresholdsHeader"]
 margin_right = 70.0
@@ -330,101 +386,52 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="ThresholdContainer" type="GridContainer" parent="DynamicsPanel/VBoxContainer"]
-margin_top = 184.0
+margin_top = 144.0
 margin_right = 252.0
-margin_bottom = 216.0
-columns = 3
+margin_bottom = 208.0
+columns = 2
 
 [node name="ThresholdPressureLabel" type="Label" parent="DynamicsPanel/VBoxContainer/ThresholdContainer"]
-margin_right = 82.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
+margin_top = 8.0
+margin_right = 56.0
+margin_bottom = 22.0
 text = "Pressure"
 
-[node name="ThresholdPressureMin" type="TextureProgress" parent="DynamicsPanel/VBoxContainer/ThresholdContainer"]
-margin_left = 86.0
-margin_right = 167.0
-margin_bottom = 14.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-theme_type_variation = "ValueSlider"
-max_value = 1.0
-step = 0.01
-value = 0.2
-nine_patch_stretch = true
-stretch_margin_left = 3
-stretch_margin_top = 3
-stretch_margin_right = 3
-stretch_margin_bottom = 3
-script = ExtResource( 5 )
-prefix = "Min"
-snap_step = 0.1
-
-[node name="ThresholdPressureMax" type="TextureProgress" parent="DynamicsPanel/VBoxContainer/ThresholdContainer"]
-margin_left = 171.0
+[node name="ThresholdPressure" parent="DynamicsPanel/VBoxContainer/ThresholdContainer" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 60.0
 margin_right = 252.0
-margin_bottom = 14.0
-mouse_default_cursor_shape = 2
+margin_bottom = 30.0
 size_flags_horizontal = 3
-theme_type_variation = "ValueSlider"
-max_value = 1.0
-step = 0.01
-value = 0.8
-nine_patch_stretch = true
-stretch_margin_left = 3
-stretch_margin_top = 3
-stretch_margin_right = 3
-stretch_margin_bottom = 3
-script = ExtResource( 5 )
-prefix = "Max"
-snap_step = 0.1
+start = 0.2
+end = 0.8
+
+[node name="TextureRect" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure" index="0"]
+margin_right = 192.0
+margin_bottom = 30.0
+texture = SubResource( 4 )
 
 [node name="ThresholdVelocityLabel" type="Label" parent="DynamicsPanel/VBoxContainer/ThresholdContainer"]
-margin_top = 18.0
-margin_right = 82.0
-margin_bottom = 32.0
-size_flags_horizontal = 3
+margin_top = 42.0
+margin_right = 56.0
+margin_bottom = 56.0
 text = "Velocity"
 
-[node name="ThresholdVelocityMin" type="TextureProgress" parent="DynamicsPanel/VBoxContainer/ThresholdContainer"]
-margin_left = 86.0
-margin_top = 18.0
-margin_right = 167.0
-margin_bottom = 32.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-theme_type_variation = "ValueSlider"
-max_value = 1.0
-step = 0.01
-value = 0.2
-nine_patch_stretch = true
-stretch_margin_left = 3
-stretch_margin_top = 3
-stretch_margin_right = 3
-stretch_margin_bottom = 3
-script = ExtResource( 5 )
-prefix = "Min"
-snap_step = 0.1
-
-[node name="ThresholdVelocityMax" type="TextureProgress" parent="DynamicsPanel/VBoxContainer/ThresholdContainer"]
-margin_left = 171.0
-margin_top = 18.0
+[node name="ThresholdVelocity" parent="DynamicsPanel/VBoxContainer/ThresholdContainer" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 60.0
+margin_top = 34.0
 margin_right = 252.0
-margin_bottom = 32.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-theme_type_variation = "ValueSlider"
-max_value = 1.0
-step = 0.01
-value = 0.8
-nine_patch_stretch = true
-stretch_margin_left = 3
-stretch_margin_top = 3
-stretch_margin_right = 3
-stretch_margin_bottom = 3
-script = ExtResource( 5 )
-prefix = "Max"
-snap_step = 0.1
+margin_bottom = 64.0
+start = 0.2
+end = 0.8
+
+[node name="TextureRect" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" index="0"]
+margin_right = 192.0
+margin_bottom = 30.0
+texture = SubResource( 5 )
 
 [connection signal="resized" from="." to="." method="_on_resized"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Horizontal" to="." method="_on_Horizontal_toggled"]
@@ -435,7 +442,8 @@ snap_step = 0.1
 [connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/AlphaMax" to="." method="_on_AlphaMax_value_changed"]
 [connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/SizeMin" to="." method="_on_SizeMin_value_changed"]
 [connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/SizeMax" to="." method="_on_SizeMax_value_changed"]
-[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressureMin" to="." method="_on_ThresholdPressureMin_value_changed"]
-[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressureMax" to="." method="_on_ThresholdPressureMax_value_changed"]
-[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocityMin" to="." method="_on_ThresholdVelocityMin_value_changed"]
-[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocityMax" to="." method="_on_ThresholdVelocityMax_value_changed"]
+[connection signal="updated" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure" to="." method="_on_ThresholdPressure_updated"]
+[connection signal="updated" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" to="." method="_on_ThresholdVelocity_updated"]
+
+[editable path="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure"]
+[editable path="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity"]

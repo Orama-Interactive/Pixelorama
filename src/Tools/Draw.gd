@@ -63,6 +63,7 @@ func _on_Brush_selected(brush: Brushes.Brush) -> void:
 func _on_BrushSize_value_changed(value: float) -> void:
 	if _brush_size != int(value):
 		_brush_size = int(value)
+		_brush_size_dynamics = _brush_size
 		_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
 		update_config()
 		save_config()
@@ -99,6 +100,7 @@ func set_config(config: Dictionary) -> void:
 	var index: int = config.get("brush_index", _brush.index)
 	_brush = Global.brushes_popup.get_brush(type, index)
 	_brush_size = config.get("brush_size", _brush_size)
+	_brush_size_dynamics = _brush_size
 	_brush_interpolate = config.get("brush_interpolate", _brush_interpolate)
 
 
@@ -209,6 +211,16 @@ func draw_tool(position: Vector2) -> void:
 		_set_pixel_no_cache(coord)
 
 
+func draw_end(position: Vector2) -> void:
+	.draw_end(position)
+	if Tools.dynamics_size == Tools.Dynamics.PRESSURE:
+		_brush_size_dynamics = Tools.brush_size_min
+	else:
+		_brush_size_dynamics = _brush_size
+	_indicator = _create_brush_indicator()
+	_polylines = _create_polylines(_indicator)
+
+
 func _prepare_tool() -> void:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
@@ -231,6 +243,8 @@ func _prepare_tool() -> void:
 	# Memorize the frame/layer we are drawing on rather than fetching it on every pixel
 	_stroke_images = _get_selected_draw_images()
 	# This may prevent a few tests when setting pixels
+	_indicator = _create_brush_indicator()
+	_polylines = _create_polylines(_indicator)
 	_is_mask_size_zero = _mask.size() == 0
 	match _brush.type:
 		Brushes.CIRCLE:
@@ -489,11 +503,11 @@ func _blend_image(image: Image, color: Color, factor: float) -> Image:
 func _create_brush_indicator() -> BitMap:
 	match _brush.type:
 		Brushes.PIXEL:
-			return _create_pixel_indicator(_brush_size)
+			return _create_pixel_indicator(_brush_size_dynamics)
 		Brushes.CIRCLE:
-			return _create_circle_indicator(_brush_size, false)
+			return _create_circle_indicator(_brush_size_dynamics, false)
 		Brushes.FILLED_CIRCLE:
-			return _create_circle_indicator(_brush_size, true)
+			return _create_circle_indicator(_brush_size_dynamics, true)
 		_:
 			return _create_image_indicator(_brush_image)
 

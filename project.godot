@@ -124,6 +124,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/Timeline/LayerButton.gd"
 }, {
+"base": "Control",
+"class": "MaxMinEdit",
+"language": "GDScript",
+"path": "res://src/UI/Nodes/MaxMinEdit.gd"
+}, {
 "base": "Label",
 "class": "NotificationLabel",
 "language": "GDScript",
@@ -248,6 +253,7 @@ _global_script_class_icons={
 "Guide": "",
 "ImageEffect": "",
 "LayerButton": "",
+"MaxMinEdit": "",
 "NotificationLabel": "",
 "Palette": "",
 "PaletteColor": "",
