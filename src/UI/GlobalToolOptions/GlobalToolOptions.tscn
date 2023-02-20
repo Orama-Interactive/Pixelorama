@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/graphics/misc/horizontal_mirror_off.png" type="Texture" id=1]
 [ext_resource path="res://assets/graphics/misc/vertical_mirror_off.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/GlobalToolOptions/GlobalToolOptions.gd" type="Script" id=3]
 [ext_resource path="res://assets/graphics/misc/pixel_perfect_off.png" type="Texture" id=4]
 [ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=5]
+[ext_resource path="res://assets/graphics/misc/Dynamics.png" type="Texture" id=6]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -25,14 +26,16 @@ margin_bottom = 43.0
 rect_min_size = Vector2( 36, 36 )
 
 [node name="CenterContainer" type="CenterContainer" parent="ScrollContainer"]
-margin_right = 183.0
-margin_bottom = 32.0
+margin_right = 180.0
+margin_bottom = 36.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer/CenterContainer"]
-margin_right = 183.0
-margin_bottom = 32.0
+margin_left = 20.0
+margin_top = 2.0
+margin_right = 160.0
+margin_bottom = 34.0
 size_flags_vertical = 0
 columns = 4
 
@@ -77,9 +80,6 @@ margin_top = -10.0
 margin_right = 10.0
 margin_bottom = 10.0
 texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PixelPerfect" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 margin_left = 72.0
@@ -102,13 +102,29 @@ margin_right = 11.0
 margin_bottom = 10.0
 texture = ExtResource( 4 )
 
-[node name="Dynamics" type="Button" parent="ScrollContainer/CenterContainer/GridContainer"]
+[node name="Dynamics" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 unique_name_in_owner = true
 margin_left = 108.0
-margin_right = 183.0
+margin_right = 140.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Pixel Perfect
+Makes lines smooth by removing the extra pixels on the edges"
 mouse_default_cursor_shape = 2
-text = "Dynamics"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Dynamics"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -10.0
+margin_right = 11.0
+margin_bottom = 10.0
+texture = ExtResource( 6 )
 
 [node name="DynamicsPanel" type="PopupPanel" parent="."]
 margin_left = 7.0
