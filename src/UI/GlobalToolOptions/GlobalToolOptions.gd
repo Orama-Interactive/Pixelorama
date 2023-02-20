@@ -156,20 +156,14 @@ func _set_last_pressed_button(prop: int, value: BaseButton) -> void:
 			size_last_pressed = value
 
 
-func _on_ThresholdPressureMin_value_changed(value: float) -> void:
-	Tools.pen_pressure_min = value
+func _on_ThresholdPressure_updated(value_1, value_2) -> void:
+	Tools.pen_pressure_min = min(value_1, value_2)
+	Tools.pen_pressure_max = max(value_1, value_2)
 
 
-func _on_ThresholdPressureMax_value_changed(value: float) -> void:
-	Tools.pen_pressure_max = value
-
-
-func _on_ThresholdVelocityMin_value_changed(value: float) -> void:
-	Tools.mouse_velocity_min_thres = value
-
-
-func _on_ThresholdVelocityMax_value_changed(value: float) -> void:
-	Tools.mouse_velocity_max_thres = value
+func _on_ThresholdVelocity_updated(value_1, value_2) -> void:
+	Tools.mouse_velocity_min_thres = min(value_1, value_2)
+	Tools.mouse_velocity_max_thres = max(value_1, value_2)
 
 
 func _on_AlphaMin_value_changed(value: float) -> void:
