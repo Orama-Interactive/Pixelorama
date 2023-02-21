@@ -1,5 +1,7 @@
 extends PanelContainer
 
+signal changed
+
 enum { ALPHA, SIZE }
 
 var alpha_last_pressed: BaseButton = null
@@ -19,7 +21,6 @@ onready var size_velocity_button: Button = $"%SizeVelocityButton"
 onready var alpha_group: ButtonGroup = alpha_pressure_button.group
 onready var size_group: ButtonGroup = size_pressure_button.group
 
-signal changed
 
 func _ready() -> void:
 	# Resize tools panel when window gets resized
@@ -170,15 +171,19 @@ func _on_ThresholdVelocity_updated(value_1, value_2) -> void:
 
 func _on_AlphaMin_value_changed(value: float) -> void:
 	Tools.alpha_min = value
+	emit_signal("changed")
 
 
 func _on_AlphaMax_value_changed(value: float) -> void:
 	Tools.alpha_max = value
+	emit_signal("changed")
 
 
 func _on_SizeMin_value_changed(value: float) -> void:
 	Tools.brush_size_min = int(value)
+	emit_signal("changed")
 
 
 func _on_SizeMax_value_changed(value: float) -> void:
 	Tools.brush_size_max = int(value)
+	emit_signal("changed")
