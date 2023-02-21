@@ -18,6 +18,8 @@ onready var alpha_pressure_button: Button = $"%AlphaPressureButton"
 onready var alpha_velocity_button: Button = $"%AlphaVelocityButton"
 onready var size_pressure_button: Button = $"%SizePressureButton"
 onready var size_velocity_button: Button = $"%SizeVelocityButton"
+onready var pressure_preview: ProgressBar = $"%PressurePreview"
+onready var velocity_preview: ProgressBar = $"%VelocityPreview"
 onready var alpha_group: ButtonGroup = alpha_pressure_button.group
 onready var size_group: ButtonGroup = size_pressure_button.group
 
@@ -53,6 +55,19 @@ func _ready() -> void:
 		"_on_Dynamics_toggled",
 		[size_velocity_button, SIZE, Tools.Dynamics.VELOCITY]
 	)
+
+
+func _input(event: InputEvent) -> void:
+	var pressure_rect := pressure_preview.get_global_rect()
+	var velocity_rect := velocity_preview.get_global_rect()
+	pressure_preview.value = 0
+	velocity_preview.value = 0
+	if event is InputEventMouseMotion:
+		if Input.is_action_pressed("left_mouse"):
+			if pressure_rect.has_point(get_global_mouse_position()):
+				pressure_preview.value = event.pressure
+			if velocity_rect.has_point(get_global_mouse_position()):
+				velocity_preview.value = event.speed.length() / Tools.mouse_velocity_max
 
 
 func _on_resized() -> void:
