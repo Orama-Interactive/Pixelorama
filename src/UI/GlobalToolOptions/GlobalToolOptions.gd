@@ -19,6 +19,7 @@ onready var size_velocity_button: Button = $"%SizeVelocityButton"
 onready var alpha_group: ButtonGroup = alpha_pressure_button.group
 onready var size_group: ButtonGroup = size_pressure_button.group
 
+signal changed
 
 func _ready() -> void:
 	# Resize tools panel when window gets resized
@@ -146,6 +147,7 @@ func _on_Dynamics_toggled(
 	if !button.pressed:
 		file_name = "uncheck.png"
 	Global.change_button_texturerect(texture_button, file_name)
+	emit_signal("changed")
 
 
 func _set_last_pressed_button(prop: int, value: BaseButton) -> void:

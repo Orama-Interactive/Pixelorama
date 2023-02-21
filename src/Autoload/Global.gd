@@ -165,6 +165,7 @@ onready var tabs: Tabs = control.find_node("Tabs")
 onready var main_viewport: ViewportContainer = control.find_node("ViewportContainer")
 onready var second_viewport: ViewportContainer = control.find_node("Second Canvas")
 onready var canvas_preview_container: Container = control.find_node("Canvas Preview")
+onready var global_tool_options: PanelContainer = control.find_node("Global Tool Options")
 onready var small_preview_viewport: ViewportContainer = canvas_preview_container.find_node(
 	"PreviewViewportContainer"
 )

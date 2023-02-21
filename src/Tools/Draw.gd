@@ -32,6 +32,7 @@ var _circle_tool_shortcut: PoolVector2Array
 
 
 func _ready() -> void:
+	Global.global_tool_options.connect("changed", self, "_reset_dynamics")
 	Tools.connect("color_changed", self, "_on_Color_changed")
 	Global.brushes_popup.connect("brush_removed", self, "_on_Brush_removed")
 
@@ -70,6 +71,15 @@ func _on_BrushSize_value_changed(value: float) -> void:
 		_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
 		update_config()
 		save_config()
+
+
+func _reset_dynamics() -> void:
+	_brush_size_dynamics = _brush_size
+	if Tools.dynamics_size != Tools.Dynamics.NONE:
+			_brush_size_dynamics = Tools.brush_size_min
+	_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
+	update_config()
+	save_config()
 
 
 func _on_InterpolateFactor_value_changed(value: float) -> void:
