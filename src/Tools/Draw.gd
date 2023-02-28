@@ -32,7 +32,7 @@ var _circle_tool_shortcut: PoolVector2Array
 
 
 func _ready() -> void:
-	Global.global_tool_options.connect("changed", self, "_reset_dynamics")
+	Global.global_tool_options.connect("dynamics_changed", self, "_reset_dynamics")
 	Tools.connect("color_changed", self, "_on_Color_changed")
 	Global.brushes_popup.connect("brush_removed", self, "_on_Brush_removed")
 
