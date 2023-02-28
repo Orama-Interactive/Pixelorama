@@ -6,6 +6,7 @@ var _brush_size_dynamics := 1
 var _cache_limit := 3
 var _brush_interpolate := 0
 var _brush_image := Image.new()
+var _orignal_brush_image := Image.new()  # contains the orignal _brush_image (whithout resizing)
 var _brush_texture := ImageTexture.new()
 var _strength := 1.0
 var _picking_color := false
@@ -31,6 +32,7 @@ var _circle_tool_shortcut: PoolVector2Array
 
 
 func _ready() -> void:
+	Global.global_tool_options.connect("dynamics_changed", self, "_reset_dynamics")
 	Tools.connect("color_changed", self, "_on_Color_changed")
 	Global.brushes_popup.connect("brush_removed", self, "_on_Brush_removed")
 
@@ -64,9 +66,20 @@ func _on_BrushSize_value_changed(value: float) -> void:
 	if _brush_size != int(value):
 		_brush_size = int(value)
 		_brush_size_dynamics = _brush_size
+		if Tools.dynamics_size != Tools.Dynamics.NONE:
+			_brush_size_dynamics = Tools.brush_size_min
 		_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
 		update_config()
 		save_config()
+
+
+func _reset_dynamics() -> void:
+	_brush_size_dynamics = _brush_size
+	if Tools.dynamics_size != Tools.Dynamics.NONE:
+		_brush_size_dynamics = Tools.brush_size_min
+	_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
+	update_config()
+	save_config()
 
 
 func _on_InterpolateFactor_value_changed(value: float) -> void:
@@ -101,6 +114,8 @@ func set_config(config: Dictionary) -> void:
 	_brush = Global.brushes_popup.get_brush(type, index)
 	_brush_size = config.get("brush_size", _brush_size)
 	_brush_size_dynamics = _brush_size
+	if Tools.dynamics_size != Tools.Dynamics.NONE:
+		_brush_size_dynamics = Tools.brush_size_min
 	_brush_interpolate = config.get("brush_interpolate", _brush_interpolate)
 
 
@@ -125,10 +140,11 @@ func update_brush() -> void:
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			$Brush/BrushSize.suffix = "00 %"  # Use a different size convention on images
 			if _brush.random.size() <= 1:
-				_brush_image = _create_blended_brush_image(_brush.image)
+				_orignal_brush_image = _brush.image
 			else:
 				var random := randi() % _brush.random.size()
-				_brush_image = _create_blended_brush_image(_brush.random[random])
+				_orignal_brush_image = _brush.random[random]
+			_brush_image = _create_blended_brush_image(_orignal_brush_image)
 			_brush_texture.create_from_image(_brush_image, 0)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
@@ -213,10 +229,15 @@ func draw_tool(position: Vector2) -> void:
 
 func draw_end(position: Vector2) -> void:
 	.draw_end(position)
-	if Tools.dynamics_size == Tools.Dynamics.PRESSURE:
+	_brush_size_dynamics = _brush_size
+	if Tools.dynamics_size != Tools.Dynamics.NONE:
 		_brush_size_dynamics = Tools.brush_size_min
-	else:
-		_brush_size_dynamics = _brush_size
+	match _brush.type:
+		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
+			_brush_image = _create_blended_brush_image(_orignal_brush_image)
+			_brush_texture.create_from_image(_brush_image, 0)
+			update_mirror_brush()
+			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
 
@@ -238,19 +259,25 @@ func _prepare_tool() -> void:
 	_drawer.horizontal_mirror = Tools.horizontal_mirror
 	_drawer.vertical_mirror = Tools.vertical_mirror
 	_drawer.color_op.strength = strength
+	_indicator = _create_brush_indicator()
+	_polylines = _create_polylines(_indicator)
 	# Memorize current project
 	_stroke_project = Global.current_project
 	# Memorize the frame/layer we are drawing on rather than fetching it on every pixel
 	_stroke_images = _get_selected_draw_images()
 	# This may prevent a few tests when setting pixels
-	_indicator = _create_brush_indicator()
-	_polylines = _create_polylines(_indicator)
 	_is_mask_size_zero = _mask.size() == 0
 	match _brush.type:
 		Brushes.CIRCLE:
 			_prepare_circle_tool(false)
 		Brushes.FILLED_CIRCLE:
 			_prepare_circle_tool(true)
+		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
+			# save _brush_image for safe keeping
+			_brush_image = _create_blended_brush_image(_orignal_brush_image)
+			_brush_texture.create_from_image(_brush_image, 0)
+			update_mirror_brush()
+			_stroke_dimensions = _brush_image.get_size()
 
 
 func _prepare_circle_tool(fill: bool) -> void:

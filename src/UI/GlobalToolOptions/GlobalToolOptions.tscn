@@ -301,7 +301,7 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
-prefix = "Min"
+prefix = "Start"
 snap_step = 0.1
 
 [node name="AlphaMax" type="TextureProgress" parent="DynamicsPanel/VBoxContainer/LimitContainer"]
@@ -320,7 +320,7 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
-prefix = "Max"
+prefix = "End"
 snap_step = 0.1
 
 [node name="SizeLabel" type="Label" parent="DynamicsPanel/VBoxContainer/LimitContainer"]
@@ -347,7 +347,7 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
-prefix = "Min"
+prefix = "Start"
 
 [node name="SizeMax" type="TextureProgress" parent="DynamicsPanel/VBoxContainer/LimitContainer"]
 margin_left = 171.0
@@ -366,7 +366,7 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
-prefix = "Max"
+prefix = "End"
 
 [node name="ThresholdsHeader" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer"]
 margin_top = 126.0
@@ -412,6 +412,16 @@ margin_right = 192.0
 margin_bottom = 30.0
 texture = SubResource( 4 )
 
+[node name="PressurePreview" type="ProgressBar" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure/TextureRect" index="0"]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0.294118 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 1.0
+step = 0.001
+value = 0.497
+percent_visible = false
+
 [node name="ThresholdVelocityLabel" type="Label" parent="DynamicsPanel/VBoxContainer/ThresholdContainer"]
 margin_top = 42.0
 margin_right = 56.0
@@ -432,6 +442,15 @@ end = 0.8
 margin_right = 192.0
 margin_bottom = 30.0
 texture = SubResource( 5 )
+
+[node name="VelocityPreview" type="ProgressBar" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity/TextureRect" index="0"]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0.294118 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 1.0
+step = 0.001
+percent_visible = false
 
 [connection signal="resized" from="." to="." method="_on_resized"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Horizontal" to="." method="_on_Horizontal_toggled"]

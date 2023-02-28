@@ -1,5 +1,7 @@
 extends PanelContainer
 
+signal dynamics_changed
+
 enum { ALPHA, SIZE }
 
 var alpha_last_pressed: BaseButton = null
@@ -16,6 +18,8 @@ onready var alpha_pressure_button: Button = $"%AlphaPressureButton"
 onready var alpha_velocity_button: Button = $"%AlphaVelocityButton"
 onready var size_pressure_button: Button = $"%SizePressureButton"
 onready var size_velocity_button: Button = $"%SizeVelocityButton"
+onready var pressure_preview: ProgressBar = $"%PressurePreview"
+onready var velocity_preview: ProgressBar = $"%VelocityPreview"
 onready var alpha_group: ButtonGroup = alpha_pressure_button.group
 onready var size_group: ButtonGroup = size_pressure_button.group
 
@@ -51,6 +55,14 @@ func _ready() -> void:
 		"_on_Dynamics_toggled",
 		[size_velocity_button, SIZE, Tools.Dynamics.VELOCITY]
 	)
+
+
+func _input(event: InputEvent) -> void:
+	pressure_preview.value = 0
+	velocity_preview.value = 0
+	if event is InputEventMouseMotion:
+		pressure_preview.value = event.pressure
+		velocity_preview.value = event.speed.length() / Tools.mouse_velocity_max
 
 
 func _on_resized() -> void:
@@ -146,6 +158,7 @@ func _on_Dynamics_toggled(
 	if !button.pressed:
 		file_name = "uncheck.png"
 	Global.change_button_texturerect(texture_button, file_name)
+	emit_signal("dynamics_changed")
 
 
 func _set_last_pressed_button(prop: int, value: BaseButton) -> void:
@@ -168,15 +181,19 @@ func _on_ThresholdVelocity_updated(value_1, value_2) -> void:
 
 func _on_AlphaMin_value_changed(value: float) -> void:
 	Tools.alpha_min = value
+	emit_signal("dynamics_changed")
 
 
 func _on_AlphaMax_value_changed(value: float) -> void:
 	Tools.alpha_max = value
+	emit_signal("dynamics_changed")
 
 
 func _on_SizeMin_value_changed(value: float) -> void:
 	Tools.brush_size_min = int(value)
+	emit_signal("dynamics_changed")
 
 
 func _on_SizeMax_value_changed(value: float) -> void:
 	Tools.brush_size_max = int(value)
+	emit_signal("dynamics_changed")
