@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-02-02 01:11\n"
+"PO-Revision-Date: 2023-03-08 12:50\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -759,7 +759,7 @@ msgstr "Αν αυτό είναι ενεργοποιημένο, το τελευτ
 "Απενεργοποιήστε το αν θέλετε να μετατρέψετε τη διαβάθμιση για συνεχή παρεμβολή, έτσι ώστε το τελευταίο χρώμα να ληφθεί υπόψη."
 
 msgid "Shape:"
-msgstr ""
+msgstr "Σχήμα:"
 
 msgid "Linear"
 msgstr "Γραμμική"
@@ -769,19 +769,19 @@ msgstr "Ακτινική"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "Επανάληψη:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "Επανάληψη"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "Κατοπτρισμός"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Περικοπή"
 
 msgid "Transition size:"
 msgstr "Μέγεθος μετάβασης:"
@@ -1379,19 +1379,19 @@ msgstr "Αν είναι ενεργοποιημένο, όταν το παράθυ
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
-msgstr ""
+msgstr "Οδηγός βίντεο:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr ""
+msgstr "Καθορίζει το πρόγραμμα οδήγησης βίντεο που χρησιμοποιείται. Το GLES2 είναι καλύτερο για παλαιότερες και χαμηλού επιπέδου συσκευές, αλλά το GLES3 μπορεί να προσφέρει περισσότερες δυνατότητες."
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
-msgstr ""
+msgstr "Οδηγός ταμπλέτας:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr ""
+msgstr "Καθορίζει το πρόγραμμα οδήγησης ταμπλέτας που χρησιμοποιείται στα Windows. Εάν έχετε ενεργοποιημένο το Windows Ink, επιλέξτε winink."
 
 msgid "Add Extension"
 msgstr "Προσθήκη επέκτασης"
