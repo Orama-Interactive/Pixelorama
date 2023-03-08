@@ -3,38 +3,38 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: pixelorama\n"
 "X-Crowdin-Project-ID: 385497\n"
-"X-Crowdin-Language: si-LK\n"
+"X-Crowdin-Language: sq\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
 "X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Language-Team: Sinhala\n"
-"Language: si_LK\n"
+"Language-Team: Albanian\n"
+"Language: sq_AL\n"
 "PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
-msgstr "හරි"
+msgstr "Ne rregull"
 
 msgid "Cancel"
-msgstr "අවලංගු"
+msgstr "Anulo"
 
 msgid "Open"
-msgstr "විවෘත"
+msgstr "Hapur"
 
 msgid "Save"
-msgstr "සුරකින්න"
+msgstr "Ruaj"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Ju lutemi konfirmoni..."
 
 msgid "File Name:"
-msgstr "ගොනුවේ නම:"
+msgstr "Emri i skedarit:"
 
 msgid "Project Name:"
-msgstr "ව්‍යාපෘතියේ නම:"
+msgstr "Emri i Projektit:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Madhësia e imazhit"
 
 msgid "Canvas Size"
 msgstr ""
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr ""
 
 msgid "Size:"
-msgstr "ප්‍රමාණය:"
+msgstr ""
 
 msgid "Width:"
 msgstr ""
@@ -76,37 +76,37 @@ msgid "Effects"
 msgstr ""
 
 msgid "Help"
-msgstr "උදව්"
+msgstr ""
 
 msgid "New"
-msgstr "නව"
+msgstr ""
 
 msgid "New..."
-msgstr "නව..."
+msgstr ""
 
 msgid "Open..."
-msgstr "විවෘත..."
+msgstr ""
 
 msgid "Save..."
-msgstr "සුරකින්න..."
+msgstr ""
 
 msgid "Save as..."
-msgstr "ලෙස සුරකින්න..."
+msgstr ""
 
 msgid "Use ZSTD Compression"
 msgstr ""
 
 msgid "Import"
-msgstr "ආයාත කරන්න"
+msgstr ""
 
 msgid "Export"
-msgstr "නිර්යාත කරන්න"
+msgstr ""
 
 msgid "Overwrite"
 msgstr ""
 
 msgid "Export..."
-msgstr "නිර්යාත..."
+msgstr ""
 
 msgid "Export as..."
 msgstr ""
@@ -118,22 +118,22 @@ msgid "Export PNG as..."
 msgstr ""
 
 msgid "Quit"
-msgstr "ඉවත් වන්න"
+msgstr ""
 
 msgid "Undo"
-msgstr "පෙරසේ"
+msgstr ""
 
 msgid "Redo"
-msgstr "පසුසේ"
+msgstr ""
 
 msgid "Copy"
-msgstr "පිටපත්"
+msgstr ""
 
 msgid "Cut"
-msgstr "කපන්න"
+msgstr ""
 
 msgid "Paste"
-msgstr "අලවන්න"
+msgstr ""
 
 msgid "Paste in Place"
 msgstr ""
@@ -430,7 +430,7 @@ msgid "Animation"
 msgstr ""
 
 msgid "Preview:"
-msgstr "පෙරදසුන:"
+msgstr ""
 
 msgid "Frame:"
 msgstr ""
@@ -439,7 +439,7 @@ msgid "Orientation:"
 msgstr ""
 
 msgid "Browse"
-msgstr "පිරික්සන්න"
+msgstr ""
 
 msgid "Resize:"
 msgstr ""
@@ -457,7 +457,7 @@ msgid "Open a Directory"
 msgstr ""
 
 msgid "Background:"
-msgstr "පසුබිම:"
+msgstr ""
 
 #. Found in the export dialog
 msgid "Selected frames"
@@ -495,7 +495,7 @@ msgid "Ping-Pong"
 msgstr ""
 
 msgid "Columns"
-msgstr "තීරු"
+msgstr ""
 
 msgid "Columns:"
 msgstr ""
@@ -520,7 +520,7 @@ msgid "Create Folder"
 msgstr ""
 
 msgid "File:"
-msgstr "ගොනුව:"
+msgstr ""
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -551,13 +551,13 @@ msgid "Startup"
 msgstr ""
 
 msgid "Language"
-msgstr "භාෂාව"
+msgstr ""
 
 msgid "Interface"
-msgstr "අතුරුමුහුණත"
+msgstr ""
 
 msgid "Themes"
-msgstr "තේමා"
+msgstr ""
 
 msgid "Canvas"
 msgstr ""
@@ -566,10 +566,10 @@ msgid "Selection"
 msgstr ""
 
 msgid "Shortcuts"
-msgstr "කෙටිමං"
+msgstr ""
 
 msgid "Backup"
-msgstr "උපස්ථය"
+msgstr ""
 
 msgid "Performance"
 msgstr ""
@@ -619,7 +619,7 @@ msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
-msgstr "පද්ධතියේ භාෂාව"
+msgstr ""
 
 msgid "Display Scale"
 msgstr ""
@@ -628,13 +628,13 @@ msgid "Dim interface on dialog popup"
 msgstr ""
 
 msgid "Dark"
-msgstr "අඳුරු"
+msgstr ""
 
 msgid "Gray"
-msgstr "අළු"
+msgstr ""
 
 msgid "Blue"
-msgstr "නිල්"
+msgstr ""
 
 msgid "Caramel"
 msgstr ""
@@ -643,10 +643,10 @@ msgid "Light"
 msgstr ""
 
 msgid "Purple"
-msgstr "දම්"
+msgstr ""
 
 msgid "Theme"
-msgstr "තේමාව"
+msgstr ""
 
 msgid "Buttons"
 msgstr ""
@@ -807,10 +807,10 @@ msgid "Saturation:"
 msgstr ""
 
 msgid "Value:"
-msgstr "අගය:"
+msgstr ""
 
 msgid "Apply"
-msgstr "යොදන්න"
+msgstr ""
 
 msgid "Diagonal"
 msgstr ""
@@ -825,7 +825,7 @@ msgid "Colors:"
 msgstr ""
 
 msgid "Steps:"
-msgstr "පියවර:"
+msgstr ""
 
 msgid "Top to Bottom"
 msgstr ""
@@ -867,40 +867,40 @@ msgid "©2019-present by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
-msgstr "වියමන අඩවිය"
+msgstr ""
 
 msgid "GitHub Repo"
 msgstr ""
 
 msgid "Donate"
-msgstr "පරිත්‍යාග"
+msgstr ""
 
 msgid "Developers"
-msgstr "සංවර්ධකයින්"
+msgstr ""
 
 msgid "Contributors"
-msgstr "දායකයින්"
+msgstr ""
 
 msgid "Donors"
 msgstr ""
 
 msgid "Translators"
-msgstr "පරිවර්තකයින්"
+msgstr ""
 
 msgid "Licenses"
 msgstr ""
 
 msgid "English"
-msgstr "ඉංග්‍රීසි"
+msgstr ""
 
 msgid "Greek"
-msgstr "ග්‍රීක"
+msgstr ""
 
 msgid "French"
-msgstr "ප්‍රංශ"
+msgstr ""
 
 msgid "German"
-msgstr "ජර්මානු"
+msgstr ""
 
 msgid "Polish"
 msgstr ""
@@ -912,22 +912,22 @@ msgid "Brazilian Portuguese"
 msgstr ""
 
 msgid "Russian"
-msgstr "රුසියානු"
+msgstr ""
 
 msgid "Chinese Simplified"
-msgstr "සරල චීන"
+msgstr ""
 
 msgid "Chinese Traditional"
-msgstr "සාම්ප්‍රදායික චීන"
+msgstr ""
 
 msgid "Italian"
-msgstr "ඉතාලි"
+msgstr ""
 
 msgid "Latvian"
 msgstr ""
 
 msgid "Spanish"
-msgstr "ස්පාඤ්ඤ"
+msgstr ""
 
 msgid "Catalan"
 msgstr ""
@@ -936,31 +936,31 @@ msgid "Esperanto"
 msgstr ""
 
 msgid "Indonesian"
-msgstr "ඉන්දුනීසියානු"
+msgstr ""
 
 msgid "Czech"
 msgstr ""
 
 msgid "Arabic"
-msgstr "අරාබි"
+msgstr ""
 
 msgid "Turkish"
-msgstr "තුර්කි"
+msgstr ""
 
 msgid "Norwegian Bokmål"
-msgstr "නෝර්වේජියානු බොක්මාල්"
+msgstr ""
 
 msgid "Korean"
-msgstr "කොරියානු"
+msgstr ""
 
 msgid "Hungarian"
-msgstr "හංගේරියානු"
+msgstr ""
 
 msgid "Romanian"
 msgstr ""
 
 msgid "Japanese"
-msgstr "ජපන්"
+msgstr ""
 
 msgid "Ukrainian"
 msgstr ""
@@ -1203,7 +1203,7 @@ msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr "සියල්ල"
+msgstr ""
 
 msgid "Rectangular grid width:"
 msgstr ""

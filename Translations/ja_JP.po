@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2022-09-20 05:39\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,8 +165,11 @@ msgstr "画像を中央に"
 msgid "Rotate Image"
 msgstr "画像を回転"
 
-msgid "Pivot (x, y):"
-msgstr "原点 (x, y):"
+msgid "Pivot x:"
+msgstr "中心 x:"
+
+msgid "Pivot y:"
+msgstr "中心 y:"
 
 msgid "Smear options:"
 msgstr "スミアオプション:"
@@ -327,11 +330,14 @@ msgstr "スプライトシート (新規レイヤー)"
 msgid "New frame"
 msgstr "新しいフレーム"
 
-msgid "Replace frame"
-msgstr "フレームを置換"
+msgid "Replace cel"
+msgstr "セルを置換"
 
 msgid "New layer"
 msgstr "新規レイヤー"
+
+msgid "New reference image"
+msgstr "新しい参照画像"
 
 msgid "New palette"
 msgstr "新しいパレット"
@@ -381,8 +387,10 @@ msgstr "スプライトをエクスポート"
 msgid "File Exists, Overwrite?"
 msgstr "ファイルが存在します。上書きしますか？"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "ファイル %s は既に存在しています。上書きしますか？"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr "以下のファイルは既に存在します。上書きしますか？\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "ディレクトリパスが有効ではありません！"
@@ -451,14 +459,31 @@ msgstr "現在のフォルダを選択"
 msgid "Open a Directory"
 msgstr "ディレクトリを開く"
 
-msgid "All frames as multiple files"
-msgstr "すべてのフレームを複数のファイルとしてエクスポート"
-
-msgid "All frames as a single file animation"
-msgstr "すべてのフレームを単一のアニメーションファイルとしてエクスポート"
-
 msgid "Background:"
 msgstr "バックグラウンド:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr "選択したフレーム"
+
+msgid "Layers:"
+msgstr "レイヤー:"
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr "表示レイヤー"
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr "選択したレイヤー"
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr "ピクセルレイヤー:"
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr "グループレイヤー:"
 
 msgid "Direction:"
 msgstr "方向:"
@@ -484,6 +509,10 @@ msgstr "行"
 msgid "Rows:"
 msgstr "行:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr "寸法をエクスポート:"
+
 msgid "Path:"
 msgstr "パス:"
 
@@ -495,6 +524,10 @@ msgstr "フォルダーを作成"
 
 msgid "File:"
 msgstr "ファイル:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr "詳細設定"
 
 msgid "Interpolation:"
 msgstr "補間:"
@@ -544,6 +577,10 @@ msgstr "バックアップ"
 msgid "Performance"
 msgstr "パフォーマンス"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr "ドライバー"
+
 msgid "Extensions"
 msgstr "拡張機能"
 
@@ -552,6 +589,10 @@ msgstr "カーソル"
 
 msgid "Indicators"
 msgstr "インジケーター"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr "変更を有効にするには、Pixeloramaを再起動する必要があります。"
 
 msgid "On"
 msgstr "オン"
@@ -717,23 +758,30 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr "これが有効な場合、最後のポイントはグラデーションの最後に追加されます。\n"
 "グラデーションを一定の補間に変換したい場合は、これを無効にします。"
 
+msgid "Shape:"
+msgstr "形状："
+
 msgid "Linear"
 msgstr "線形"
 
 msgid "Radial"
 msgstr "放射状"
 
-msgid "Linear Step"
-msgstr "線形ステップ"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
+msgstr "リピート："
 
-msgid "Radial Step"
-msgstr "放射状ステップ"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
+msgstr "リピート"
 
-msgid "Linear Dithering"
-msgstr "線形ディザリング"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
+msgstr "反転"
 
-msgid "Radial Dithering"
-msgstr "放射状ディザリング"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
+msgstr "切り捨て"
 
 msgid "Transition size:"
 msgstr "トランジションサイズ:"
@@ -932,6 +980,9 @@ msgstr "セルビア語 (キリル文字)"
 
 msgid "Dutch"
 msgstr "オランダ語"
+
+msgid "Belarusian"
+msgstr "ベラルーシ語"
 
 msgid "Development Team"
 msgstr "Development Team"
@@ -1326,6 +1377,22 @@ msgstr "アプリケーションのフレーム/秒の制限を設定します�
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "これをオンにすると、アプリケーションのウィンドウがフォーカスを失ったときに一時停止します。 これはアイドル時のCPU使用率を低下させるのに役立ちます。マウスがアプリケーションのウィンドウに入ったとき、アプリケーションは一時停止を解除します。"
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr "レンダラー:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr "使用するレンダラー/ビデオドライバーを指定します。古いデバイスやローエンドデバイスでは、GLES2が優れていますが、GLES3にはより多くの機能が提供される可能性があります。"
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr "タブレットドライバー:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr "Windowsで使用されているタブレットドライバを指定します。Windows Inkが有効になっている場合は、wininkを選択してください。"
+
 msgid "Add Extension"
 msgstr "拡張機能を追加"
 
@@ -1410,9 +1477,11 @@ msgstr "全て選択"
 msgid "Fill with:"
 msgstr "次で塗りつぶし:"
 
-msgid "Selected Color"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
 msgstr "選択中の色"
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "パターン"
 
@@ -1609,10 +1678,10 @@ msgstr "右へ移動"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cel"
-msgstr "セルをリンク"
+msgid "Link Cels to"
+msgstr "セルをリンクする"
 
-msgid "Unlink Cel"
+msgid "Unlink Cels"
 msgstr "セルのリンクを解除"
 
 msgid "Frame Properties"
@@ -1624,11 +1693,17 @@ msgstr "フレームのプロパティ"
 msgid "Layer"
 msgstr "レイヤー"
 
+msgid "Group"
+msgstr "グループ"
+
 msgid "Layers"
 msgstr "レイヤー"
 
 msgid "Create a new layer"
 msgstr "新しいレイヤーを作成"
+
+msgid "Create a new group layer"
+msgstr "新しいグループレイヤーを作成"
 
 msgid "Remove current layer"
 msgstr "現在のレイヤーを削除"
@@ -1660,10 +1735,13 @@ msgstr "レイヤーのロック/ロック解除"
 msgid "Frame: %s, Layer: %s"
 msgstr "フレーム: %s, レイヤー: %s"
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
-msgstr "セルリンクを有効/無効にする\n\n"
-"リンクされたセルは複数のフレームで共有されています"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr "新しいフレームを作成するときに、新しいセルの自動リンクを有効/無効にしま\n\n"
+"リンクされたセルは、複数のフレームでコンテンツを共有します"
+
+msgid "Expand/collapse group"
+msgstr "グループを展開/閉じる"
 
 msgid "Palette"
 msgstr "パレット"
@@ -1995,11 +2073,13 @@ msgstr "自動保存の間隔:"
 msgid "minute(s)"
 msgstr "分"
 
-msgid "Create new directory for each frame tag"
-msgstr "フレームタグごとに新しいディレクトリを作成"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr "フレームタグごとに新しいフォルダを作成"
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "複数のファイルを作成しますが、各ファイルはフレームタグに対応する異なるディレクトリに保存されます。"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr "複数のファイルを作成しますが、各ファイルはフレームタグに対応する異なるフォルダに保存されます。"
 
 msgid "Close"
 msgstr "閉じる"
@@ -2026,9 +2106,6 @@ msgstr "これ以上のパレットは削除できません！"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "パレットが存在しないため、削除できません！"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "パレットの削除中にエラーが発生しました！エラーコード: %s"
 
 msgid "and"
 msgstr "と"
@@ -2116,4 +2193,7 @@ msgstr "左ツールオプション"
 
 msgid "Right Tool Options"
 msgstr "右ツールオプション"
+
+msgid "Reference Images"
+msgstr "参照画像"
 

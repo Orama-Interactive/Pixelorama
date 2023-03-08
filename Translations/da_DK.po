@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,7 +165,10 @@ msgstr "Centralisér Billede"
 msgid "Rotate Image"
 msgstr "Rotér Billede"
 
-msgid "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
 msgstr ""
 
 msgid "Smear options:"
@@ -327,11 +330,14 @@ msgstr "Spritesheet (nyt lag)"
 msgid "New frame"
 msgstr "Ny ramme"
 
-msgid "Replace frame"
-msgstr "Erstat ramme"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nyt lag"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "Ny palet"
@@ -381,8 +387,9 @@ msgstr "Eksportér Sprite"
 msgid "File Exists, Overwrite?"
 msgstr "Fil Eksisterer. Vil du overskrive?"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "Fil %s eksisterer allerede. Vil du overskrive?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr ""
 
 msgid "Directory path is not valid!"
 msgstr "Mappestien er ikke gyldig!"
@@ -451,14 +458,31 @@ msgstr "Vælg Nuværende Mappe"
 msgid "Open a Directory"
 msgstr "Åbn en Mappe"
 
-msgid "All frames as multiple files"
-msgstr "Alle rammer som flere filer"
-
-msgid "All frames as a single file animation"
-msgstr "Alle rammer som en enkelt filanimation"
-
 msgid "Background:"
 msgstr "Baggrund:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr ""
+
+msgid "Layers:"
+msgstr "Lag:"
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr "Synlige lag"
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr ""
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr ""
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr ""
 
 msgid "Direction:"
 msgstr "Retning:"
@@ -484,6 +508,10 @@ msgstr "Rækker"
 msgid "Rows:"
 msgstr "Rækker:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr ""
+
 msgid "Path:"
 msgstr "Sti:"
 
@@ -495,6 +523,10 @@ msgstr "Opret Mappe"
 
 msgid "File:"
 msgstr "Fil:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr "Avancerede indstillinger"
 
 msgid "Interpolation:"
 msgstr "Interpolation:"
@@ -544,6 +576,10 @@ msgstr "Backup"
 msgid "Performance"
 msgstr "Ydeevne"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr "Drivere"
+
 msgid "Extensions"
 msgstr "Udvidelser"
 
@@ -552,6 +588,10 @@ msgstr "Markører"
 
 msgid "Indicators"
 msgstr "Indikatorer"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr "Pixelorama skal genstartes før ændringer træder i kraft."
 
 msgid "On"
 msgstr "Slået til"
@@ -611,7 +651,7 @@ msgid "Theme"
 msgstr "Tema"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Knapper"
 
 msgid "Icon color from:"
 msgstr "Ikonfarve fra:"
@@ -620,13 +660,13 @@ msgid "Icon color:"
 msgstr "Ikonfarve:"
 
 msgid "Background"
-msgstr ""
+msgstr "Baggrund"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Baggrundsfarve fra:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Baggrundsfarve:"
 
 msgid "Left tool color:"
 msgstr "Venstre værktøjsfarve:"
@@ -716,22 +756,29 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
+msgid "Shape:"
+msgstr ""
+
 msgid "Linear"
 msgstr "Lineær"
 
 msgid "Radial"
 msgstr "Radial"
 
-msgid "Linear Step"
-msgstr "Lineært Trin"
-
-msgid "Radial Step"
-msgstr "Radialt Trin"
-
-msgid "Linear Dithering"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
 msgstr ""
 
-msgid "Radial Dithering"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
+msgstr ""
+
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
+msgstr ""
+
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
 msgstr ""
 
 msgid "Transition size:"
@@ -931,6 +978,9 @@ msgstr "Serbisk (Kyrillisk)"
 
 msgid "Dutch"
 msgstr "Hollandsk"
+
+msgid "Belarusian"
+msgstr "Belarussisk"
 
 msgid "Development Team"
 msgstr "Udviklingsteam"
@@ -1325,6 +1375,22 @@ msgstr ""
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr "Renderer:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr "Angiver rendereren/videodriveren, der anvendes. GLES2 er bedre for ældre og low-end enheder, men GLES3 kan tilbyde flere funktioner."
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr "Tablet driver:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr "Angiver tabletdriveren, der bruges på Windows. Hvis du har Windows Ink aktiveret, skal du vælge winink."
+
 msgid "Add Extension"
 msgstr "Tilføj Udvidelse"
 
@@ -1391,7 +1457,7 @@ msgstr ""
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Udfyld område:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
@@ -1408,9 +1474,11 @@ msgstr ""
 msgid "Fill with:"
 msgstr "Udfyld med:"
 
-msgid "Selected Color"
-msgstr "Valgt Farve"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr "Valgt farve"
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Mønster"
 
@@ -1601,11 +1669,11 @@ msgstr "Flyt til Højre"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cel"
-msgstr "Forbind Celler"
+msgid "Link Cels to"
+msgstr ""
 
-msgid "Unlink Cel"
-msgstr "Adskil Celler"
+msgid "Unlink Cels"
+msgstr ""
 
 msgid "Frame Properties"
 msgstr ""
@@ -1616,11 +1684,17 @@ msgstr ""
 msgid "Layer"
 msgstr "Lag"
 
+msgid "Group"
+msgstr "Gruppe"
+
 msgid "Layers"
 msgstr "Lag"
 
 msgid "Create a new layer"
 msgstr "Opret et nyt lag"
+
+msgid "Create a new group layer"
+msgstr "Opret et nyt gruppelag"
 
 msgid "Remove current layer"
 msgstr "Fjern nuværende lag"
@@ -1652,10 +1726,12 @@ msgstr ""
 msgid "Frame: %s, Layer: %s"
 msgstr ""
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
-msgstr "Aktivér/deaktivér celleforbinding\n\n"
-"Forbundne celler bliver delt på flere rammer"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr ""
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Palet"
@@ -1987,10 +2063,12 @@ msgstr ""
 msgid "minute(s)"
 msgstr "minut(ter)"
 
-msgid "Create new directory for each frame tag"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
 msgstr ""
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 msgstr ""
 
 msgid "Close"
@@ -2017,9 +2095,6 @@ msgstr "Du kan ikke fjerne flere paletter!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Kan ikke fjerne paletten, fordi den ikke eksisterer!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Der opstod en fejl under fjernelse af paletten! Fejlkode: %s"
 
 msgid "and"
 msgstr "og"
@@ -2106,5 +2181,8 @@ msgid "Left Tool Options"
 msgstr ""
 
 msgid "Right Tool Options"
+msgstr ""
+
+msgid "Reference Images"
 msgstr ""
 

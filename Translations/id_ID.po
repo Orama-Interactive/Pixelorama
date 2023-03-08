@@ -10,10 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2022-09-21 07:04\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
-msgstr "Sip"
+msgstr "Oke"
 
 msgid "Cancel"
 msgstr "Batal"
@@ -165,8 +165,11 @@ msgstr "Tengahkan Gambar"
 msgid "Rotate Image"
 msgstr "Putar Gambar"
 
-msgid "Pivot (x, y):"
-msgstr "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr "Paksi x:"
+
+msgid "Pivot y:"
+msgstr "Paksi y:"
 
 msgid "Smear options:"
 msgstr "Opsi melumur:"
@@ -327,11 +330,14 @@ msgstr "Lembar sprite (lapisan baru)"
 msgid "New frame"
 msgstr "Bingkai Baru"
 
-msgid "Replace frame"
-msgstr "Gantikan bingkai"
+msgid "Replace cel"
+msgstr "Timpa cel"
 
 msgid "New layer"
 msgstr "Lapisan baru"
+
+msgid "New reference image"
+msgstr "Gambar rujukan baru"
 
 msgid "New palette"
 msgstr "Palet baru"
@@ -381,8 +387,10 @@ msgstr "Ekspor \"sprite\""
 msgid "File Exists, Overwrite?"
 msgstr "Ada berkasnya. Timpa saja?"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "Berkas %s sudah ada. Timpa saja?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr "Berkas tersebut sudah ada. Apakah ingin ditimpa saja?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Jalur direktori tidak absah!"
@@ -451,14 +459,31 @@ msgstr "Pilih Folder Saat Ini"
 msgid "Open a Directory"
 msgstr "Buka direktori"
 
-msgid "All frames as multiple files"
-msgstr "Semua bingkai sebagai banyak berkas"
-
-msgid "All frames as a single file animation"
-msgstr "Semua bingkai sebagai satu animasi"
-
 msgid "Background:"
 msgstr "Latar belakang:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr "Bingkai yang dipilih"
+
+msgid "Layers:"
+msgstr "Lapisan:"
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr "Lapisan terlihat"
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr "Lapisan yang dipilih"
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr "Lapisan piksel:"
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr "Lapisan kelompok:"
 
 msgid "Direction:"
 msgstr "Arah:"
@@ -484,6 +509,10 @@ msgstr "Baris"
 msgid "Rows:"
 msgstr "Baris:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr "Ukuran saat ekspor:"
+
 msgid "Path:"
 msgstr "Jalur:"
 
@@ -495,6 +524,10 @@ msgstr "Buat Folder"
 
 msgid "File:"
 msgstr "Berkas:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr "Opsi lanjutan"
 
 msgid "Interpolation:"
 msgstr "Interpolasi:"
@@ -544,6 +577,10 @@ msgstr "Cadangan"
 msgid "Performance"
 msgstr "Kinerja"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr "Pengandar"
+
 msgid "Extensions"
 msgstr "Ekstensi"
 
@@ -552,6 +589,10 @@ msgstr "Kursor"
 
 msgid "Indicators"
 msgstr "Indikator"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr "Pixelorama harus dibuka ulang agar pengaturan ini berjalan."
 
 msgid "On"
 msgstr "Nyala"
@@ -717,23 +758,30 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr "Jika dinyalakan, titik yang terakhir akan ditambah ke ujung gradien.\n"
 "Matikan ini jika ingin mengubah interpolasi gradien tetap konstan, sehingga warna yang terakhir juga akan disertakan."
 
+msgid "Shape:"
+msgstr ""
+
 msgid "Linear"
 msgstr "Linier"
 
 msgid "Radial"
 msgstr "Radial"
 
-msgid "Linear Step"
-msgstr "Langkah Linier"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
+msgstr ""
 
-msgid "Radial Step"
-msgstr "Langkah Radial"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
+msgstr ""
 
-msgid "Linear Dithering"
-msgstr "Bauran Galat Linier"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
+msgstr ""
 
-msgid "Radial Dithering"
-msgstr "Bauran Galat Radial"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
+msgstr ""
 
 msgid "Transition size:"
 msgstr "Ukuran peralihan:"
@@ -932,6 +980,9 @@ msgstr "Bhs. Serbia (Kiril)"
 
 msgid "Dutch"
 msgstr "Bhs. Belanda"
+
+msgid "Belarusian"
+msgstr "Bahasa Belarus"
 
 msgid "Development Team"
 msgstr "Regu Pengembangan"
@@ -1326,6 +1377,22 @@ msgstr "Menetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah a
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Jika dinyalakan, ketika jendela aplikasi hilang fokus nanti akan dijedakan. Ini membantu mengurangi penggunaan CPU saat terbiar. Aplikasi akan tidak dijeda ketika tetikus ada pada jendela aplikasi."
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr "Renderer:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr "Menentukan renderer/pengandar video yang dipakai. GLES2 lebih bagus untuk perangkat lawas atau kelas bawah, tapi GLES3 punya lebih banyak fitur."
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr "Pengandar tablet:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr "Menentukan pengandar tablet yang dipakai pada Windows. Jika Windows Ink sudah diaktifkan, pilih winink."
+
 msgid "Add Extension"
 msgstr "Tambah Ekstensi"
 
@@ -1410,9 +1477,11 @@ msgstr "Seluruh seleksi"
 msgid "Fill with:"
 msgstr "Isi dengan:"
 
-msgid "Selected Color"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
 msgstr "Warna yang dipilih"
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Pola"
 
@@ -1609,10 +1678,10 @@ msgstr "Geser ke kanan"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cel"
-msgstr "Tautkan Cel"
+msgid "Link Cels to"
+msgstr "Tautkan Cel ke"
 
-msgid "Unlink Cel"
+msgid "Unlink Cels"
 msgstr "Putuskan Cel"
 
 msgid "Frame Properties"
@@ -1624,11 +1693,17 @@ msgstr "Rincian sifat bingkai"
 msgid "Layer"
 msgstr "Lapisan"
 
+msgid "Group"
+msgstr "Kelompok"
+
 msgid "Layers"
 msgstr "Lapisan"
 
 msgid "Create a new layer"
 msgstr "Tambah lapisan baru"
+
+msgid "Create a new group layer"
+msgstr "Tambah lapisan kelompok baru"
 
 msgid "Remove current layer"
 msgstr "Hapus lapisan saat ini"
@@ -1660,10 +1735,13 @@ msgstr "Mengunci/buka lapisan"
 msgid "Frame: %s, Layer: %s"
 msgstr "Bingkai: %s, Lapisan: %s"
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
-msgstr "Mampukan/lumpuhkan penautan cel\n\n"
-"Cel ditautkan ke banyak bingkai agar bisa digambar bersamaan"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr "Mampukan/lumpuhkan penautan otomatis cel baru ketika membuat bingkai baru\n\n"
+"Cel tertaut akan membagi isinya di seluruh bingkai"
+
+msgid "Expand/collapse group"
+msgstr "Bentang/ciutkan kelompok"
 
 msgid "Palette"
 msgstr "Palet"
@@ -1995,11 +2073,13 @@ msgstr "Selang waktu simpan otomatis:"
 msgid "minute(s)"
 msgstr "menit"
 
-msgid "Create new directory for each frame tag"
-msgstr "Buat direktori baru untuk setiap tag bingkai"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr "Buat folder baru untuk setiap tag bingkai"
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Membuat banyak berkas, tapi setiap berkas ditampung di direktori berbeda sesuai dengan tag bingkainya"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr "Membuat banyak berkas, tapi setiap berkas ditampung di folder berbeda sesuai dengan tag bingkainya"
 
 msgid "Close"
 msgstr "Tutup"
@@ -2026,9 +2106,6 @@ msgstr "Tidak bisa menghapus palet lagi!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Tidak bisa menghapus palet, karena palet tidak ada!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Terjadi kegalatan ketika menghapus palet! Kode galat: %s"
 
 msgid "and"
 msgstr "dan"
@@ -2116,4 +2193,7 @@ msgstr "Opsi Alat Di Kiri"
 
 msgid "Right Tool Options"
 msgstr "Opsi Alat Di Kanan"
+
+msgid "Reference Images"
+msgstr "Gambar Rujukan"
 

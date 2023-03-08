@@ -1,190 +1,190 @@
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || n%10>=5 && n%10<=9 || n%100>=11 && n%100<=14 ? 2 : 3);\n"
 "X-Crowdin-Project: pixelorama\n"
 "X-Crowdin-Project-ID: 385497\n"
-"X-Crowdin-Language: si-LK\n"
+"X-Crowdin-Language: be\n"
 "X-Crowdin-File: /master/Translations/Translations.pot\n"
 "X-Crowdin-File-ID: 5\n"
 "Project-Id-Version: pixelorama\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Language-Team: Sinhala\n"
-"Language: si_LK\n"
+"Language-Team: Belarusian\n"
+"Language: be_BY\n"
 "PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
-msgstr "හරි"
+msgstr "OK"
 
 msgid "Cancel"
-msgstr "අවලංගු"
+msgstr "Скасаваць"
 
 msgid "Open"
-msgstr "විවෘත"
+msgstr "Адкрыць"
 
 msgid "Save"
-msgstr "සුරකින්න"
+msgstr "Захаваць"
 
 msgid "Please Confirm..."
-msgstr ""
+msgstr "Пацвердзіце..."
 
 msgid "File Name:"
-msgstr "ගොනුවේ නම:"
+msgstr "Імя файла:"
 
 msgid "Project Name:"
-msgstr "ව්‍යාපෘතියේ නම:"
+msgstr "Імя праекта:"
 
 msgid "Image Size"
-msgstr ""
+msgstr "Памер выявы"
 
 msgid "Canvas Size"
-msgstr ""
+msgstr "Памер палатна"
 
 msgid "Frame Size"
-msgstr ""
+msgstr "Памер кадра"
 
 msgid "Size:"
-msgstr "ප්‍රමාණය:"
+msgstr "Памер:"
 
 msgid "Width:"
-msgstr ""
+msgstr "Шырыня:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Высата:"
 
 msgid "Center"
-msgstr ""
+msgstr "Па цэнтру"
 
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 msgid "Edit"
-msgstr ""
+msgstr "Рэдагаваць"
 
 msgid "Select"
-msgstr ""
+msgstr "Выбар"
 
 msgid "View"
-msgstr ""
+msgstr "Прагляд"
 
 msgid "Window"
-msgstr ""
+msgstr "Акно"
 
 msgid "Image"
-msgstr ""
+msgstr "Выява"
 
 msgid "Effects"
-msgstr ""
+msgstr "Эфекты"
 
 msgid "Help"
-msgstr "උදව්"
+msgstr "Даведка"
 
 msgid "New"
-msgstr "නව"
+msgstr "Новы"
 
 msgid "New..."
-msgstr "නව..."
+msgstr "Новы..."
 
 msgid "Open..."
-msgstr "විවෘත..."
+msgstr "Адкрыць..."
 
 msgid "Save..."
-msgstr "සුරකින්න..."
+msgstr "Захаваць..."
 
 msgid "Save as..."
-msgstr "ලෙස සුරකින්න..."
+msgstr "Захаваць як..."
 
 msgid "Use ZSTD Compression"
-msgstr ""
+msgstr "Сціскаць праз ZSTD"
 
 msgid "Import"
-msgstr "ආයාත කරන්න"
+msgstr "Імпарт"
 
 msgid "Export"
-msgstr "නිර්යාත කරන්න"
+msgstr "Экспарт"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Перазапіс"
 
 msgid "Export..."
-msgstr "නිර්යාත..."
+msgstr "Экспарт..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Экспарт як..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Экспарт PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Экспарт PNG як..."
 
 msgid "Quit"
-msgstr "ඉවත් වන්න"
+msgstr "Выхад"
 
 msgid "Undo"
-msgstr "පෙරසේ"
+msgstr "Адмяніць"
 
 msgid "Redo"
-msgstr "පසුසේ"
+msgstr "Вярнуць"
 
 msgid "Copy"
-msgstr "පිටපත්"
+msgstr "Капіяваць"
 
 msgid "Cut"
-msgstr "කපන්න"
+msgstr "Выразаць"
 
 msgid "Paste"
-msgstr "අලවන්න"
+msgstr "Уставіць"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Уставіць на месцы"
 
 msgid "Delete"
-msgstr ""
+msgstr "Выдаліць"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Новы пэндзаль"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Масштаб выявы"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Пікселі"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Працэнт"
 
 msgid "Crop Image"
-msgstr ""
+msgstr "Абрэзаць выяву"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Змяніць памер палатна"
 
 msgid "Centralize Image"
-msgstr ""
+msgstr "Выяву ў цэнтр"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Паварот выявы"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "X цэнтра:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Y цэнтра:"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Налады мазка:"
 
 msgid "Tolerance:"
 msgstr ""
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Пачатковы вугал:"
 
 msgid "Clear"
-msgstr ""
+msgstr "Скінуць"
 
 msgid "Invert"
-msgstr ""
+msgstr "Інвертаваць"
 
 msgid "Grayscale View"
 msgstr ""
@@ -199,13 +199,13 @@ msgid "Flip Vertical"
 msgstr ""
 
 msgid "Preferences"
-msgstr ""
+msgstr "Налады"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Бясшоўны рэжым"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Зрух бясшоўнага рэжыму"
 
 msgid "X-basis x:"
 msgstr ""
@@ -223,67 +223,67 @@ msgid "Tile Mask"
 msgstr ""
 
 msgid "Reset"
-msgstr ""
+msgstr "Скід"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "З бягучага кадра"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Скінуць маску"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Непразорасць акна"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "Непразорасць акна не ўлічваецца ў паўнаэкранным рэжыме."
 
 msgid "Panel Layout"
-msgstr ""
+msgstr "Макет панэляў"
 
 msgid "Panels"
-msgstr ""
+msgstr "Панэлі"
 
 msgid "Layouts"
-msgstr ""
+msgstr "Макеты"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Рухомыя панэлі"
 
 msgid "Manage Layouts"
-msgstr ""
+msgstr "Кіраванне макетамі"
 
 msgid "Add"
-msgstr ""
+msgstr "Дадаць"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Дадаць макет"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Рэдагаваць макет"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Вы сапраўды хочаце выдаліць гэты макет?"
 
 msgid "Auto"
-msgstr ""
+msgstr "Аўта"
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Шырокаэкранны"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Высокаэкранны"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Люстраны від"
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Паказваць сетку"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Паказваць піксельную сетку"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Паказваць лінейкі"
 
 msgid "Show Guides"
 msgstr ""
@@ -292,34 +292,34 @@ msgid "Show Animation Timeline"
 msgstr ""
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Дзэн-рэжым"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Паўнаэкранны рэжым"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Заліць колерам:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Адкрыць файл"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Адкрыць файл(ы)"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Параметры імпарту"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Імпарт як:"
 
 msgid "Apply to all"
-msgstr ""
+msgstr "Прымяніць да ўсіх"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Нядаўнія праекты"
 
 msgid "New project"
-msgstr ""
+msgstr "Новы праект"
 
 msgid "Spritesheet (new project)"
 msgstr ""
@@ -328,52 +328,52 @@ msgid "Spritesheet (new layer)"
 msgstr ""
 
 msgid "New frame"
-msgstr ""
+msgstr "Новы кадр"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Замяніць кель"
 
 msgid "New layer"
-msgstr ""
+msgstr "Новы слой"
 
 msgid "New reference image"
 msgstr ""
 
 msgid "New palette"
-msgstr ""
+msgstr "Новая палітра"
 
 msgid "New brush"
-msgstr ""
+msgstr "Новы пэндзаль"
 
 msgid "New pattern"
 msgstr ""
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Кадры па гарызанталі:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Кадры па вертыкалі:"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Пачатковы кадр:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "На кадры:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "На слоі:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Тып пэндзля:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Пэндзаль файла"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Пэндзаль праекта"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Выпадковы пэндзаль"
 
 msgid "Save Sprite as .pxo"
 msgstr ""
@@ -385,20 +385,21 @@ msgid "Export Sprite"
 msgstr ""
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Файл існуе. Перазапісаць?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "Наступныя файлы ўжо існуюць. Перапісаць іх?\n"
+"%s"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Шлях да каталога няправільны!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Імя файла няправільнае!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Шлях да каталога і імя файла няправільныя!"
 
 msgid "Exporting in progress..."
 msgstr ""
@@ -415,37 +416,37 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
-msgstr ""
+msgstr "Кадр"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Кадры:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Усе кадры"
 
 msgid "Spritesheet"
 msgstr ""
 
 msgid "Animation"
-msgstr ""
+msgstr "Анімацыя"
 
 msgid "Preview:"
-msgstr "පෙරදසුන:"
+msgstr "Папярэдні перагляд:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Кадр:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Арыентацыя:"
 
 msgid "Browse"
-msgstr "පිරික්සන්න"
+msgstr "Агляд"
 
 msgid "Resize:"
 msgstr ""
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Скасаваць экспарт"
 
 msgid "Alert!"
 msgstr ""
@@ -454,64 +455,64 @@ msgid "Select Current Folder"
 msgstr ""
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Адкрыць каталог"
 
 msgid "Background:"
-msgstr "පසුබිම:"
+msgstr "Фон:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Выбраныя кадры"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Шары:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Бачныя шары"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Выбраныя шары"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Шар пікселяў:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Групавы шар:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Напрамак:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Уперад"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Назад"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Папераменны"
 
 msgid "Columns"
-msgstr "තීරු"
+msgstr "Слупкі"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Слупкі:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Радкі"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Радкі:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
 msgstr ""
 
 msgid "Path:"
-msgstr ""
+msgstr "Шлях:"
 
 msgid "Directories & Files:"
 msgstr ""
@@ -520,7 +521,7 @@ msgid "Create Folder"
 msgstr ""
 
 msgid "File:"
-msgstr "ගොනුව:"
+msgstr "Файл:"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -545,44 +546,44 @@ msgid "Constant"
 msgstr ""
 
 msgid "General"
-msgstr ""
+msgstr "Агульнае"
 
 msgid "Startup"
-msgstr ""
+msgstr "Запуск"
 
 msgid "Language"
-msgstr "භාෂාව"
+msgstr "Мова"
 
 msgid "Interface"
-msgstr "අතුරුමුහුණත"
+msgstr "Інтэрфейс"
 
 msgid "Themes"
-msgstr "තේමා"
+msgstr "Тэмы"
 
 msgid "Canvas"
-msgstr ""
+msgstr "Палатно"
 
 msgid "Selection"
-msgstr ""
+msgstr "Выбар"
 
 msgid "Shortcuts"
-msgstr "කෙටිමං"
+msgstr ""
 
 msgid "Backup"
-msgstr "උපස්ථය"
+msgstr ""
 
 msgid "Performance"
 msgstr ""
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Драйверы"
 
 msgid "Extensions"
 msgstr ""
 
 msgid "Cursors"
-msgstr ""
+msgstr "Курсоры"
 
 msgid "Indicators"
 msgstr ""
@@ -592,7 +593,7 @@ msgid "Pixelorama must be restarted for changes to take effect."
 msgstr ""
 
 msgid "On"
-msgstr ""
+msgstr "Укл."
 
 msgid "Restore default value"
 msgstr ""
@@ -607,19 +608,19 @@ msgid "Tablet pressure sensitivity:"
 msgstr ""
 
 msgid "None"
-msgstr ""
+msgstr "Адсутнічае"
 
 msgid "Affect Brush's Alpha"
 msgstr ""
 
 msgid "Color:"
-msgstr ""
+msgstr "Колер:"
 
 msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
-msgstr "පද්ධතියේ භාෂාව"
+msgstr "Мова сістэмы"
 
 msgid "Display Scale"
 msgstr ""
@@ -628,67 +629,67 @@ msgid "Dim interface on dialog popup"
 msgstr ""
 
 msgid "Dark"
-msgstr "අඳුරු"
+msgstr "Цёмная"
 
 msgid "Gray"
-msgstr "අළු"
+msgstr "Серая"
 
 msgid "Blue"
-msgstr "නිල්"
+msgstr "Сіняя"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Карамельная"
 
 msgid "Light"
-msgstr ""
+msgstr "Светлая"
 
 msgid "Purple"
-msgstr "දම්"
+msgstr "Фіялетавая"
 
 msgid "Theme"
-msgstr "තේමාව"
+msgstr "Тэма"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Кнопкі"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Колер значка з:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Колер значка:"
 
 msgid "Background"
-msgstr ""
+msgstr "Фон"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Колер фона з:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Колер фона:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Колер левага інструмента:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Колер правага інструмента:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "Памер кнопак інструментаў:"
 
 msgid "Small"
-msgstr ""
+msgstr "Маленькія"
 
 msgid "Big"
-msgstr ""
+msgstr "Вялікія"
 
 msgid "Only affect selection"
 msgstr ""
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Выбраныя келі"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Бягучы кель"
 
 msgid "Current frame"
 msgstr ""
@@ -700,7 +701,7 @@ msgid "All projects"
 msgstr ""
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Інвертаваць колеры"
 
 msgid "Modify Red Channel"
 msgstr ""
@@ -742,26 +743,26 @@ msgid "Gradient Map"
 msgstr ""
 
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "Падзяліць на роўныя часткі"
 
 msgid "Parts:"
-msgstr ""
+msgstr "Часткі:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "Дадаць кропку ў канцы"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr ""
+msgstr "Калі выбраны гэты пункт, у канец градыента дадаецца апошняя кропка. Адключыце гэты пункт, калі вы хочаце, каб у градыента была канстантная інтэрпаляцыя і апошні колер браўся да ўвагі."
 
 msgid "Shape:"
 msgstr ""
 
 msgid "Linear"
-msgstr ""
+msgstr "Лінейны"
 
 msgid "Radial"
-msgstr ""
+msgstr "Радыяльны"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
@@ -780,13 +781,13 @@ msgid "Truncate"
 msgstr ""
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Памер пераходу:"
 
 msgid "Center:"
-msgstr ""
+msgstr "Цэнтр:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "Радыус:"
 
 msgid "Dithering pattern:"
 msgstr ""
@@ -795,10 +796,10 @@ msgid "Adjust HSV"
 msgstr ""
 
 msgid "Type:"
-msgstr ""
+msgstr "Тып:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "Кут:"
 
 msgid "Hue:"
 msgstr ""
@@ -807,10 +808,10 @@ msgid "Saturation:"
 msgstr ""
 
 msgid "Value:"
-msgstr "අගය:"
+msgstr ""
 
 msgid "Apply"
-msgstr "යොදන්න"
+msgstr "Прымяніць"
 
 msgid "Diagonal"
 msgstr ""
@@ -822,28 +823,28 @@ msgid "Thickness:"
 msgstr ""
 
 msgid "Colors:"
-msgstr ""
+msgstr "Колеры:"
 
 msgid "Steps:"
-msgstr "පියවර:"
+msgstr "Крокі:"
 
 msgid "Top to Bottom"
-msgstr ""
+msgstr "Зверху ўніз"
 
 msgid "Bottom to Top"
-msgstr ""
+msgstr "Знізу ўверх"
 
 msgid "Left to Right"
-msgstr ""
+msgstr "Злева направа"
 
 msgid "Right to Left"
-msgstr ""
+msgstr "Справа налева"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Паказваць загрузачны экран"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Анлайн-дакументацыя"
 
 msgid "Issue Tracker"
 msgstr ""
@@ -852,55 +853,55 @@ msgid "Open Logs Folder"
 msgstr ""
 
 msgid "Changelog"
-msgstr ""
+msgstr "Спіс змен"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "Пра праграму Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama — Pixelate your dreams!"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Распрацавалі Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019—наш час, Orama Interactive і іншыя аўтары"
 
 msgid "Website"
-msgstr "වියමන අඩවිය"
+msgstr "Сайт"
 
 msgid "GitHub Repo"
-msgstr ""
+msgstr "Рэпазіторый GitHub"
 
 msgid "Donate"
-msgstr "පරිත්‍යාග"
+msgstr ""
 
 msgid "Developers"
-msgstr "සංවර්ධකයින්"
+msgstr "Распрацоўшчыкі"
 
 msgid "Contributors"
-msgstr "දායකයින්"
+msgstr "Удзельнікі"
 
 msgid "Donors"
-msgstr ""
+msgstr "Спонсары"
 
 msgid "Translators"
-msgstr "පරිවර්තකයින්"
+msgstr "Перакладчыкі"
 
 msgid "Licenses"
-msgstr ""
+msgstr "Ліцэнзіі"
 
 msgid "English"
-msgstr "ඉංග්‍රීසි"
+msgstr "Англійская"
 
 msgid "Greek"
-msgstr "ග්‍රීක"
+msgstr "Грэцкая"
 
 msgid "French"
-msgstr "ප්‍රංශ"
+msgstr "Французская"
 
 msgid "German"
-msgstr "ජර්මානු"
+msgstr ""
 
 msgid "Polish"
 msgstr ""
@@ -912,22 +913,22 @@ msgid "Brazilian Portuguese"
 msgstr ""
 
 msgid "Russian"
-msgstr "රුසියානු"
+msgstr ""
 
 msgid "Chinese Simplified"
-msgstr "සරල චීන"
+msgstr ""
 
 msgid "Chinese Traditional"
-msgstr "සාම්ප්‍රදායික චීන"
+msgstr ""
 
 msgid "Italian"
-msgstr "ඉතාලි"
+msgstr ""
 
 msgid "Latvian"
 msgstr ""
 
 msgid "Spanish"
-msgstr "ස්පාඤ්ඤ"
+msgstr ""
 
 msgid "Catalan"
 msgstr ""
@@ -936,31 +937,31 @@ msgid "Esperanto"
 msgstr ""
 
 msgid "Indonesian"
-msgstr "ඉන්දුනීසියානු"
+msgstr ""
 
 msgid "Czech"
 msgstr ""
 
 msgid "Arabic"
-msgstr "අරාබි"
+msgstr ""
 
 msgid "Turkish"
-msgstr "තුර්කි"
+msgstr ""
 
 msgid "Norwegian Bokmål"
-msgstr "නෝර්වේජියානු බොක්මාල්"
+msgstr ""
 
 msgid "Korean"
-msgstr "කොරියානු"
+msgstr ""
 
 msgid "Hungarian"
-msgstr "හංගේරියානු"
+msgstr ""
 
 msgid "Romanian"
 msgstr ""
 
 msgid "Japanese"
-msgstr "ජපන්"
+msgstr ""
 
 msgid "Ukrainian"
 msgstr ""
@@ -1017,13 +1018,13 @@ msgid "Save before exiting?"
 msgstr ""
 
 msgid "You have unsaved progress. How do you wish to proceed?"
-msgstr ""
+msgstr "Ёсць незапісаныя змены. Працягнуць?"
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "Захаваць і выйсці"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "Выйсці без захавання"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
@@ -1188,10 +1189,10 @@ msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
 
 msgid "Grid"
-msgstr ""
+msgstr "Сетка"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Тып сеткі:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
 msgstr ""
@@ -1203,7 +1204,7 @@ msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr "සියල්ල"
+msgstr ""
 
 msgid "Rectangular grid width:"
 msgstr ""
@@ -1672,7 +1673,7 @@ msgid "Lock/unlock layer"
 msgstr ""
 
 msgid "Frame: %s, Layer: %s"
-msgstr ""
+msgstr "Кадр: %s, Слой: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
@@ -1691,7 +1692,7 @@ msgid "Add a new palette"
 msgstr ""
 
 msgid "Edit currently selected palette"
-msgstr ""
+msgstr "Рэдагаваць выбраную палітру"
 
 msgid "Choose a palette"
 msgstr ""
@@ -1829,7 +1830,7 @@ msgid "Invalid Palette file!"
 msgstr ""
 
 msgid "Edit Palette"
-msgstr ""
+msgstr "Рэдагаваць палітру"
 
 msgid "Create colors with alpha component"
 msgstr ""

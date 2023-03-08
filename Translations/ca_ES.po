@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -165,7 +165,10 @@ msgstr "Centrar Imatge"
 msgid "Rotate Image"
 msgstr "Rotar l'imatge"
 
-msgid "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
 msgstr ""
 
 msgid "Smear options:"
@@ -327,11 +330,14 @@ msgstr "Full de sprites (nova capa)"
 msgid "New frame"
 msgstr "Nou fotograma"
 
-msgid "Replace frame"
-msgstr "Reemplaça el fotograma"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nova capa"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "Nova paleta"
@@ -381,8 +387,9 @@ msgstr "Exportar Sprite"
 msgid "File Exists, Overwrite?"
 msgstr "El fitxer existeix, sobrescriure?"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "El fitxer \"%s\" ja existeix. El vos sobreescriure?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr ""
 
 msgid "Directory path is not valid!"
 msgstr ""
@@ -451,14 +458,31 @@ msgstr "Seleccionar carpeta actual"
 msgid "Open a Directory"
 msgstr "Obrir directori"
 
-msgid "All frames as multiple files"
-msgstr "Tots els fotogrames com a mútliples fitxers"
-
-msgid "All frames as a single file animation"
-msgstr "Tots els fotogrames com a un fitxer d'animació únic"
-
 msgid "Background:"
 msgstr "Fons:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr ""
+
+msgid "Layers:"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr ""
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr ""
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr ""
 
 msgid "Direction:"
 msgstr "Direcció:"
@@ -484,6 +508,10 @@ msgstr "Files"
 msgid "Rows:"
 msgstr "Files:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr ""
+
 msgid "Path:"
 msgstr "Ruta:"
 
@@ -495,6 +523,10 @@ msgstr "Crear una carpeta"
 
 msgid "File:"
 msgstr "Fitxer:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr ""
 
 msgid "Interpolation:"
 msgstr "Interpolació:"
@@ -544,6 +576,10 @@ msgstr "Còpia de seguretat"
 msgid "Performance"
 msgstr "Rendiment"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr ""
+
 msgid "Extensions"
 msgstr "Extensions"
 
@@ -552,6 +588,10 @@ msgstr "Cursors"
 
 msgid "Indicators"
 msgstr "Indicadors"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr ""
 
 msgid "On"
 msgstr "Encès"
@@ -716,22 +756,29 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
+msgid "Shape:"
+msgstr ""
+
 msgid "Linear"
 msgstr ""
 
 msgid "Radial"
 msgstr ""
 
-msgid "Linear Step"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
 msgstr ""
 
-msgid "Radial Step"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
 msgstr ""
 
-msgid "Linear Dithering"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
 msgstr ""
 
-msgid "Radial Dithering"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
 msgstr ""
 
 msgid "Transition size:"
@@ -931,6 +978,9 @@ msgstr "Serbi (ciríl·lic)"
 
 msgid "Dutch"
 msgstr "Neerlandès"
+
+msgid "Belarusian"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Equip desenvolupador"
@@ -1325,6 +1375,22 @@ msgstr "Estableix el límit de fotogrames per segon de l'aplicació. Com més ba
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Si això està activat quan l'aplicació perd el focus, es posa en pausa. Això ajuda a reduir l'ús de la CPU mentre no estàs actiu. L'aplicació es resumeix quan el ratolí entra a la finestra de l'aplicació."
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr ""
+
 msgid "Add Extension"
 msgstr "Afegeix una extensió"
 
@@ -1409,9 +1475,11 @@ msgstr ""
 msgid "Fill with:"
 msgstr "Omplir amb:"
 
-msgid "Selected Color"
-msgstr "Color seleccionat"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr ""
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Patró"
 
@@ -1607,11 +1675,11 @@ msgstr "Moure a la Dreta"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cel"
-msgstr "Vincular Cel·la"
+msgid "Link Cels to"
+msgstr ""
 
-msgid "Unlink Cel"
-msgstr "Desvincular Cel·la"
+msgid "Unlink Cels"
+msgstr ""
 
 msgid "Frame Properties"
 msgstr "Propietats del fotograma"
@@ -1622,11 +1690,17 @@ msgstr "Propietats del fotograma"
 msgid "Layer"
 msgstr "Capa"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Capes"
 
 msgid "Create a new layer"
 msgstr "Crear una nova capa"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Esborrar la capa actual"
@@ -1658,8 +1732,11 @@ msgstr ""
 msgid "Frame: %s, Layer: %s"
 msgstr ""
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr ""
+
+msgid "Expand/collapse group"
 msgstr ""
 
 msgid "Palette"
@@ -1992,10 +2069,12 @@ msgstr "Interval de desat automàtic:"
 msgid "minute(s)"
 msgstr "minut(s)"
 
-msgid "Create new directory for each frame tag"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
 msgstr ""
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 msgstr ""
 
 msgid "Close"
@@ -2022,9 +2101,6 @@ msgstr "No es pot eliminar més paletes!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "No es pot eliminar la paleta, perquè no existeix!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Ha hagut un error quan es va intentar eliminar la paleta! Codi de error: %s"
 
 msgid "and"
 msgstr ""
@@ -2111,5 +2187,8 @@ msgid "Left Tool Options"
 msgstr ""
 
 msgid "Right Tool Options"
+msgstr ""
+
+msgid "Reference Images"
 msgstr ""
 
