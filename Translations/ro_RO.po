@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-02-02 01:11\n"
+"PO-Revision-Date: 2023-03-08 12:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -759,7 +759,7 @@ msgstr "Dacă această opțiune este activată, ultimul punct este adăugat la s
 "Dezactivează opțiunea dacă dorești să convertești degradeul pentru a avea interpolare constantă, astfel încât să fie luată în considerare ultima culoare."
 
 msgid "Shape:"
-msgstr ""
+msgstr "Formă:"
 
 msgid "Linear"
 msgstr "Liniar"
@@ -769,19 +769,19 @@ msgstr "Radial"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "Repetare:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "Repetare"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "Oglindire"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Trunchiere"
 
 msgid "Transition size:"
 msgstr "Dimensiunea tranziției:"
@@ -2195,5 +2195,5 @@ msgid "Right Tool Options"
 msgstr "Opțiuni pentru instrumentul din dreapta"
 
 msgid "Reference Images"
-msgstr ""
+msgstr "Imagini de referință"
 
