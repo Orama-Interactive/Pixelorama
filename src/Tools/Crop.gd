@@ -28,7 +28,7 @@ func draw_move(position: Vector2) -> void:
 	$"%Bottom".value = _bottom
 	$"%Left".value = _left
 	$"%Right".value = _right
-	_update_crop_rect_indicator()
+	_update_display()
 
 
 func apply() -> void:
@@ -36,38 +36,39 @@ func apply() -> void:
 	Global.canvas.crop_rect.hide()
 
 
-func _update_crop_rect_indicator():
+func _update_display():
 	Global.canvas.crop_rect.show()
 	Global.canvas.crop_rect.top = _top
 	Global.canvas.crop_rect.bottom = _bottom
 	Global.canvas.crop_rect.left = _left
 	Global.canvas.crop_rect.right = _right
 	Global.canvas.crop_rect.update()
+	$"%DimensionsLabel".text = str(_right - _left, " x ", _bottom - _top)
 
 
 func _on_Top_value_changed(value: float) -> void:
 	_top = value
 	_bottom = max(_top + 1, _bottom)
 	$"%Bottom".value = _bottom
-	_update_crop_rect_indicator()
+	_update_display()
 
 
 func _on_Bottom_value_changed(value: float) -> void:
 	_bottom = value
 	_top = min(_bottom - 1, _top)
 	$"%Top".value = _top
-	_update_crop_rect_indicator()
+	_update_display()
 
 
 func _on_Left_value_changed(value: float) -> void:
 	_left = value
 	_right = max(_left + 1, _right)
 	$"%Right".value = _right
-	_update_crop_rect_indicator()
+	_update_display()
 
 
 func _on_Right_value_changed(value: float) -> void:
 	_right = value
 	_left = min(_right - 1, _left)
 	$"%Left".value = _left
-	_update_crop_rect_indicator()
+	_update_display()

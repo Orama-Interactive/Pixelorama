@@ -49,6 +49,13 @@ margin_right = 116.0
 margin_bottom = 158.0
 text = "Apply"
 
+[node name="DimensionsLabel" type="Label" parent="." index="9"]
+unique_name_in_owner = true
+margin_top = 162.0
+margin_right = 116.0
+margin_bottom = 176.0
+align = 1
+
 [connection signal="value_changed" from="Top" to="." method="_on_Top_value_changed"]
 [connection signal="value_changed" from="Bottom" to="." method="_on_Bottom_value_changed"]
 [connection signal="value_changed" from="Left" to="." method="_on_Left_value_changed"]
