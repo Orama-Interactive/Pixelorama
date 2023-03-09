@@ -2122,3 +2122,18 @@ msgstr ""
 
 msgid "Reference Images"
 msgstr ""
+
+msgid "Crop"
+msgstr ""
+
+msgid "Top:"
+msgstr ""
+
+msgid "Bottom:"
+msgstr ""
+
+msgid "Left:"
+msgstr ""
+
+msgid "Right:"
+msgstr ""

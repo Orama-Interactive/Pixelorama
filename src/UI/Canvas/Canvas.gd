@@ -14,6 +14,7 @@ onready var tile_mode = $TileMode
 onready var pixel_grid = $PixelGrid
 onready var grid = $Grid
 onready var selection = $Selection
+onready var crop_rect = $CropRect
 onready var indicators = $Indicators
 onready var previews = $Previews
 onready var mouse_guide_container = $MouseGuideContainer
