@@ -118,8 +118,7 @@ margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-hint_tooltip = "Pixel Perfect
-Makes lines smooth by removing the extra pixels on the edges"
+hint_tooltip = "Dynamics"
 mouse_default_cursor_shape = 2
 __meta__ = {
 "_editor_description_": ""
