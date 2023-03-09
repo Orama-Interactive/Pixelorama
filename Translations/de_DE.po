@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-03-09 20:39\n"
+"PO-Revision-Date: 2023-03-09 21:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1433,7 +1433,7 @@ msgstr "Wertgrenzen"
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
-msgstr "Schwellwert"
+msgstr "Schwellenwerte"
 
 #. Noun, the start of something.
 msgid "Start"
