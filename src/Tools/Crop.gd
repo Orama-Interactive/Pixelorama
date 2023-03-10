@@ -8,10 +8,18 @@ var _right := 0
 var _start_pos: Vector2
 
 func _ready():
+	_setup()
+
+func _setup():
 	$"%Top".max_value = Global.current_project.size.y - 1
 	$"%Bottom".max_value = Global.current_project.size.y
 	$"%Left".max_value = Global.current_project.size.x - 1
 	$"%Right".max_value = Global.current_project.size.x
+
+	$"%Top".value = 0
+	$"%Bottom".value = Global.current_project.size.y
+	$"%Left".value = 0
+	$"%Right".value = Global.current_project.size.x
 
 
 func _exit_tree():
@@ -38,6 +46,7 @@ func draw_move(position: Vector2) -> void:
 
 func apply() -> void:
 	DrawingAlgos.resize_canvas((_right - _left), (_bottom - _top), -_left, -_top)
+	_setup()  # Resets the crop to entire canvas
 	Global.canvas.crop_rect.hide()
 
 
