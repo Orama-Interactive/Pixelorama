@@ -2,6 +2,7 @@ extends Node
 
 signal project_changed
 signal cel_changed
+signal crop_changed
 
 enum LayerTypes { PIXEL, GROUP }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
@@ -151,6 +152,12 @@ var onion_skinning_blue_red := false
 
 # Palettes
 var palettes := {}
+
+# Crop Options:
+var crop_top := 0
+var crop_bottom := 0
+var crop_left := 0
+var crop_right := 0
 
 # Nodes
 var pixel_layer_button_node: PackedScene = preload("res://src/UI/Timeline/PixelLayerButton.tscn")

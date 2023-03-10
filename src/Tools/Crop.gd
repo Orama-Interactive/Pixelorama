@@ -1,29 +1,30 @@
 extends BaseTool
+# Crop Tool, allows you to resize the canvas interactively
 
-var _top := 0
-var _bottom := 0
-var _left := 0
-var _right := 0
-
+var _crop_rect: CropRect
 var _start_pos: Vector2
 
 func _ready():
-	_setup()
+	_crop_rect = Global.canvas.crop_rect
+	_crop_rect.connect("updated", self, "_rect_updated")
+	_crop_rect.tool_count += 1
+	_rect_updated()
 
-func _setup():
+
+func _exit_tree():
+	_crop_rect.tool_count -= 1
+
+
+func _rect_updated():
 	$"%Top".max_value = Global.current_project.size.y - 1
 	$"%Bottom".max_value = Global.current_project.size.y
 	$"%Left".max_value = Global.current_project.size.x - 1
 	$"%Right".max_value = Global.current_project.size.x
-
-	$"%Top".value = 0
-	$"%Bottom".value = Global.current_project.size.y
-	$"%Left".value = 0
-	$"%Right".value = Global.current_project.size.x
-
-
-func _exit_tree():
-	Global.canvas.crop_rect.hide()
+	$"%Top".value = _crop_rect.top
+	$"%Bottom".value = _crop_rect.bottom
+	$"%Left".value = _crop_rect.left
+	$"%Right".value = _crop_rect.right
+	$"%DimensionsLabel".text = str(_crop_rect.right - _crop_rect.left, " x ", _crop_rect.bottom - _crop_rect.top)
 
 
 func draw_start(position: Vector2) -> void:
@@ -33,56 +34,38 @@ func draw_start(position: Vector2) -> void:
 
 func draw_move(position: Vector2) -> void:
 	.draw_move(position)
-	_top = min(_start_pos.y, position.y)
-	_bottom = max(_start_pos.y, position.y)
-	_left = min(_start_pos.x, position.x)
-	_right = max(_start_pos.x, position.x)
-	$"%Top".value = _top
-	$"%Bottom".value = _bottom
-	$"%Left".value = _left
-	$"%Right".value = _right
-	_update_display()
+	_crop_rect.top = min(_start_pos.y, position.y)
+	_crop_rect.bottom = max(_start_pos.y, position.y)
+	_crop_rect.left = min(_start_pos.x, position.x)
+	_crop_rect.right = max(_start_pos.x, position.x)
+	_crop_rect.emit_signal("updated")
 
 
-func apply() -> void:
-	DrawingAlgos.resize_canvas((_right - _left), (_bottom - _top), -_left, -_top)
-	_setup()  # Resets the crop to entire canvas
-	Global.canvas.crop_rect.hide()
-
-
-func _update_display():
-	Global.canvas.crop_rect.show()
-	Global.canvas.crop_rect.top = _top
-	Global.canvas.crop_rect.bottom = _bottom
-	Global.canvas.crop_rect.left = _left
-	Global.canvas.crop_rect.right = _right
-	Global.canvas.crop_rect.update()
-	$"%DimensionsLabel".text = str(_right - _left, " x ", _bottom - _top)
-
+# UI Signals:
 
 func _on_Top_value_changed(value: float) -> void:
-	_top = value
-	_bottom = max(_top + 1, _bottom)
-	$"%Bottom".value = _bottom
-	_update_display()
+	_crop_rect.top = value
+	_crop_rect.bottom = max(_crop_rect.top + 1, _crop_rect.bottom)
+	_crop_rect.emit_signal("updated")
 
 
 func _on_Bottom_value_changed(value: float) -> void:
-	_bottom = value
-	_top = min(_bottom - 1, _top)
-	$"%Top".value = _top
-	_update_display()
+	_crop_rect.bottom = value
+	_crop_rect.top = min(_crop_rect.bottom - 1, _crop_rect.top)
+	_crop_rect.emit_signal("updated")
 
 
 func _on_Left_value_changed(value: float) -> void:
-	_left = value
-	_right = max(_left + 1, _right)
-	$"%Right".value = _right
-	_update_display()
+	_crop_rect.left = value
+	_crop_rect.right = max(_crop_rect.left + 1, _crop_rect.right)
+	_crop_rect.emit_signal("updated")
 
 
 func _on_Right_value_changed(value: float) -> void:
-	_right = value
-	_left = min(_right - 1, _left)
-	$"%Left".value = _left
-	_update_display()
+	_crop_rect.right = value
+	_crop_rect.left = min(_crop_rect.right - 1, _crop_rect.left)
+	_crop_rect.emit_signal("updated")
+
+
+func _on_Apply_pressed():
+	_crop_rect.apply()

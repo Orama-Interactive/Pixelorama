@@ -60,4 +60,4 @@ align = 1
 [connection signal="value_changed" from="Bottom" to="." method="_on_Bottom_value_changed"]
 [connection signal="value_changed" from="Left" to="." method="_on_Left_value_changed"]
 [connection signal="value_changed" from="Right" to="." method="_on_Right_value_changed"]
-[connection signal="pressed" from="Apply" to="." method="apply"]
+[connection signal="pressed" from="Apply" to="." method="_on_Apply_pressed"]
