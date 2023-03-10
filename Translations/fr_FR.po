@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-03-09 13:26\n"
+"PO-Revision-Date: 2023-03-10 15:55\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1426,11 +1426,11 @@ msgstr ""
 
 #. Refers to the size of a value, for example the size of a brush.
 msgid "Size"
-msgstr ""
+msgstr "Taille"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
-msgstr ""
+msgstr "Valeurs limites"
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
@@ -1438,11 +1438,11 @@ msgstr ""
 
 #. Noun, the start of something.
 msgid "Start"
-msgstr ""
+msgstr "Début"
 
 #. Noun, the end of something.
 msgid "End"
-msgstr ""
+msgstr "Fin"
 
 msgid "Brush:"
 msgstr "Brosse :"
