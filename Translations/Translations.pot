@@ -2126,6 +2126,9 @@ msgstr ""
 msgid "Crop"
 msgstr ""
 
+msgid "Resize the canvas"
+msgstr ""
+
 msgid "Top:"
 msgstr ""
 
