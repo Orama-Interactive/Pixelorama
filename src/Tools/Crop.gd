@@ -13,6 +13,11 @@ func _ready():
 	$"%Left".max_value = Global.current_project.size.x - 1
 	$"%Right".max_value = Global.current_project.size.x
 
+
+func _exit_tree():
+	Global.canvas.crop_rect.hide()
+
+
 func draw_start(position: Vector2) -> void:
 	.draw_start(position)
 	_start_pos = position
