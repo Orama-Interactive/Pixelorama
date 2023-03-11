@@ -7,57 +7,145 @@
 [node name="ToolOptions" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
-[node name="Top" parent="." index="4" instance=ExtResource( 2 )]
+[node name="CropMode" type="OptionButton" parent="." index="4"]
 unique_name_in_owner = true
 margin_top = 26.0
 margin_right = 116.0
-margin_bottom = 50.0
+margin_bottom = 46.0
+text = "Sides"
+items = [ "Sides", null, false, 0, null, "Resolution", null, false, 1, null, "Locked Resolution", null, false, 2, null, "Locked Aspect Ratio", null, false, 3, null ]
+selected = 0
+
+[node name="SidesContainer" type="VBoxContainer" parent="." index="5"]
+unique_name_in_owner = true
+margin_top = 50.0
+margin_right = 116.0
+margin_bottom = 158.0
+
+[node name="Top" parent="SidesContainer" index="0" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_right = 116.0
 allow_greater = true
 allow_lesser = true
 prefix = "Top:"
 
-[node name="Bottom" parent="." index="5" instance=ExtResource( 2 )]
+[node name="Bottom" parent="SidesContainer" index="1" instance=ExtResource( 2 )]
 unique_name_in_owner = true
-margin_top = 54.0
+margin_top = 28.0
 margin_right = 116.0
-margin_bottom = 78.0
+margin_bottom = 52.0
 allow_greater = true
 allow_lesser = true
 prefix = "Bottom:"
 
-[node name="Left" parent="." index="6" instance=ExtResource( 2 )]
+[node name="Left" parent="SidesContainer" index="2" instance=ExtResource( 2 )]
 unique_name_in_owner = true
-margin_top = 82.0
+margin_top = 56.0
 margin_right = 116.0
-margin_bottom = 106.0
+margin_bottom = 80.0
 allow_greater = true
 allow_lesser = true
 prefix = "Left:"
 
-[node name="Right" parent="." index="7" instance=ExtResource( 2 )]
+[node name="Right" parent="SidesContainer" index="3" instance=ExtResource( 2 )]
 unique_name_in_owner = true
-margin_top = 110.0
+margin_top = 84.0
 margin_right = 116.0
-margin_bottom = 134.0
+margin_bottom = 108.0
 allow_greater = true
 allow_lesser = true
 prefix = "Right:"
 
-[node name="Apply" type="Button" parent="." index="8"]
-margin_top = 138.0
+[node name="RatioContainer" type="HBoxContainer" parent="." index="6"]
+unique_name_in_owner = true
+margin_top = 162.0
 margin_right = 116.0
-margin_bottom = 158.0
+margin_bottom = 186.0
+
+[node name="RatioX" parent="RatioContainer" index="0" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_right = 52.0
+min_value = 1.0
+allow_greater = true
+
+[node name="Label" type="Label" parent="RatioContainer" index="1"]
+margin_left = 56.0
+margin_top = 5.0
+margin_right = 60.0
+margin_bottom = 19.0
+text = ":"
+
+[node name="RatioY" parent="RatioContainer" index="2" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_left = 64.0
+margin_right = 116.0
+min_value = 1.0
+allow_greater = true
+
+[node name="ResolutionContainer" type="VBoxContainer" parent="." index="7"]
+unique_name_in_owner = true
+margin_top = 190.0
+margin_right = 116.0
+margin_bottom = 298.0
+
+[node name="PositionX" parent="ResolutionContainer" index="0" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_right = 116.0
+allow_greater = true
+allow_lesser = true
+prefix = "X:"
+
+[node name="PositionY" parent="ResolutionContainer" index="1" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_top = 28.0
+margin_right = 116.0
+margin_bottom = 52.0
+allow_greater = true
+allow_lesser = true
+prefix = "Y:"
+
+[node name="Width" parent="ResolutionContainer" index="2" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_top = 56.0
+margin_right = 116.0
+margin_bottom = 80.0
+min_value = 1.0
+value = 1.0
+allow_greater = true
+prefix = "Width:"
+
+[node name="Height" parent="ResolutionContainer" index="3" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_top = 84.0
+margin_right = 116.0
+margin_bottom = 108.0
+min_value = 1.0
+value = 1.0
+allow_greater = true
+prefix = "Height:"
+
+[node name="Apply" type="Button" parent="." index="8"]
+margin_top = 302.0
+margin_right = 116.0
+margin_bottom = 322.0
 text = "Apply"
 
 [node name="DimensionsLabel" type="Label" parent="." index="9"]
 unique_name_in_owner = true
-margin_top = 162.0
+margin_top = 326.0
 margin_right = 116.0
-margin_bottom = 176.0
+margin_bottom = 340.0
 align = 1
 
-[connection signal="value_changed" from="Top" to="." method="_on_Top_value_changed"]
-[connection signal="value_changed" from="Bottom" to="." method="_on_Bottom_value_changed"]
-[connection signal="value_changed" from="Left" to="." method="_on_Left_value_changed"]
-[connection signal="value_changed" from="Right" to="." method="_on_Right_value_changed"]
+[connection signal="item_selected" from="CropMode" to="." method="_on_CropMode_item_selected"]
+[connection signal="value_changed" from="SidesContainer/Top" to="." method="_on_Top_value_changed"]
+[connection signal="value_changed" from="SidesContainer/Bottom" to="." method="_on_Bottom_value_changed"]
+[connection signal="value_changed" from="SidesContainer/Left" to="." method="_on_Left_value_changed"]
+[connection signal="value_changed" from="SidesContainer/Right" to="." method="_on_Right_value_changed"]
+[connection signal="value_changed" from="RatioContainer/RatioX" to="." method="_on_RatioX_value_changed"]
+[connection signal="value_changed" from="RatioContainer/RatioY" to="." method="_on_RatioY_value_changed"]
+[connection signal="value_changed" from="ResolutionContainer/PositionX" to="." method="_on_PositionX_value_changed"]
+[connection signal="value_changed" from="ResolutionContainer/PositionY" to="." method="_on_PositionY_value_changed"]
+[connection signal="value_changed" from="ResolutionContainer/Width" to="." method="_on_Width_value_changed"]
+[connection signal="value_changed" from="ResolutionContainer/Height" to="." method="_on_Height_value_changed"]
 [connection signal="pressed" from="Apply" to="." method="_on_Apply_pressed"]

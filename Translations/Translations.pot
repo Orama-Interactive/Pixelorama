@@ -2129,6 +2129,18 @@ msgstr ""
 msgid "Resize the canvas"
 msgstr ""
 
+msgid "Sides"
+msgstr ""
+
+msgid "Resolution"
+msgstr ""
+
+msgid "Locked Resolution"
+msgstr ""
+
+msgid "Locked Aspect Ratio"
+msgstr ""
+
 msgid "Top:"
 msgstr ""
 
