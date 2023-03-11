@@ -55,7 +55,8 @@ func apply() -> void:
 func reset() -> void:
 	rect.position = Vector2.ZERO
 	rect.size = Global.current_project.size
-	_auto_ratio_from_resolution()
+	if mode == Mode.LOCKED_ASPECT_RATIO:
+		_auto_ratio_from_resolution()
 	emit_signal("updated")
 
 
