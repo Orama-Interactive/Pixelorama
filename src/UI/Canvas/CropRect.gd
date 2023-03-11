@@ -1,4 +1,4 @@
-class_name CropRect # TODO: Rename to just Crop
+class_name CropRect
 extends Node2D
 # Draws the rectangle overlay for the crop tool
 # Stores the shared settings between left and right crop tools
@@ -83,4 +83,3 @@ func _set_tool_count(value: int) -> void:
 		reset() # Reset once 1 tool becomes the crop tool
 	tool_count = value
 	visible = tool_count
-

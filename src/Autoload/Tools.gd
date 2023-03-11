@@ -91,10 +91,9 @@ var tools := {
 		"Crop",
 		"Crop",
 		"crop",
-		preload("res://src/Tools/Crop.tscn"),
+		preload("res://src/Tools/CropTool.tscn"),
 		"Resize the canvas"
 	),
-
 	"Pencil":
 	Tool.new(
 		"Pencil",

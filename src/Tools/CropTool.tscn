@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/Tools/BaseTool.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Tools/Crop.gd" type="Script" id=3]
+[ext_resource path="res://src/Tools/CropTool.gd" type="Script" id=3]
 
 [node name="ToolOptions" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -66,6 +66,7 @@ margin_bottom = 186.0
 unique_name_in_owner = true
 margin_right = 52.0
 min_value = 1.0
+value = 1.0
 allow_greater = true
 
 [node name="Label" type="Label" parent="RatioContainer" index="1"]
@@ -80,6 +81,7 @@ unique_name_in_owner = true
 margin_left = 64.0
 margin_right = 116.0
 min_value = 1.0
+value = 1.0
 allow_greater = true
 
 [node name="ResolutionContainer" type="VBoxContainer" parent="." index="7"]
