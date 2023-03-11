@@ -26,11 +26,11 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	# Darken the background by drawing very big rectangles around the crop rect:
-	draw_rect(Rect2(rect.end.x - BIG, rect.position.y - BIG, BIG, BIG), DARKEN_COLOR)
-	draw_rect(Rect2(rect.end.x, rect.end.y - BIG, BIG, BIG), DARKEN_COLOR)
-	draw_rect(Rect2(rect.position.x, rect.end.y, BIG, BIG), DARKEN_COLOR)
-	draw_rect(Rect2(rect.position.x - BIG, rect.position.y, BIG, BIG), DARKEN_COLOR)
+	# Darken the background by drawing big rectangles around it (top/bottomm/left/right):
+	draw_rect(Rect2(rect.position.x - BIG, rect.position.y - BIG, BIG * 2 + rect.size.x, BIG), DARKEN_COLOR)
+	draw_rect(Rect2(rect.position.x - BIG, rect.end.y, BIG * 2 + rect.size.x, BIG), DARKEN_COLOR)
+	draw_rect(Rect2(rect.position.x - BIG, rect.position.y, BIG, rect.size.y), DARKEN_COLOR)
+	draw_rect(Rect2(rect.end.x, rect.position.y, BIG, rect.size.y), DARKEN_COLOR)
 
 	# Rect:
 	draw_rect(rect, LINE_COLOR, false)
