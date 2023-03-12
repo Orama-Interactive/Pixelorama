@@ -1,8 +1,6 @@
 class_name SelectionMap
 extends Image
 
-enum Behavior {SIMPLE, TILEMODE}
-var behaviour = Behavior.SIMPLE
 var invert_shader: Shader = preload("res://src/Shaders/Invert.shader")
 
 
@@ -16,8 +14,9 @@ func is_pixel_selected(pixel: Vector2) -> bool:
 
 
 func get_nearest_position(pixel: Vector2) -> Vector2:
+	var behaviour = Global.canvas.selection.behaviour
 	match behaviour:
-		Behavior.TILEMODE:
+		Global.canvas.selection.Behavior.TILEMODE:
 			# functions more or less the same way as the tilemode
 			var size = Global.current_project.size
 			var selection_rect = get_used_rect()
@@ -44,8 +43,9 @@ func get_nearest_position(pixel: Vector2) -> Vector2:
 
 
 func get_canon_position(position) -> Vector2:
+	var behaviour = Global.canvas.selection.behaviour
 	match behaviour:
-		Behavior.TILEMODE:
+		Global.canvas.selection.Behavior.TILEMODE:
 			return position - get_nearest_position(position)
 		_:
 			return position
@@ -145,3 +145,4 @@ func resize_bitmap_values(project, new_size: Vector2, flip_x: bool, flip_y: bool
 	if new_bitmap_size != size:
 		crop(new_bitmap_size.x, new_bitmap_size.y)
 	blit_rect(smaller_image, Rect2(Vector2.ZERO, new_bitmap_size), dst)
+

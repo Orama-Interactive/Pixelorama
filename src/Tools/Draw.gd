@@ -429,6 +429,14 @@ func remove_unselected_parts_of_brush(brush: Image, dst: Vector2) -> Image:
 func draw_indicator(left: bool) -> void:
 	var color := Global.left_tool_color if left else Global.right_tool_color
 	draw_indicator_at(snap_position(_cursor), Vector2.ZERO, color)
+	if Global.current_project.has_selection:
+		var position := _line_start if _draw_line else _cursor
+		var nearest_pos := Global.current_project.selection_map.get_nearest_position(position)
+		if nearest_pos != Vector2.ZERO:
+			var offset := nearest_pos
+			draw_indicator_at(snap_position(_cursor), offset, Color.green)
+			return
+
 	if Global.current_project.tiles.mode and Global.current_project.tiles.has_point(_cursor):
 		var position := _line_start if _draw_line else _cursor
 		var nearest_tile := Global.current_project.tiles.get_nearest_tile(position)
@@ -470,6 +478,8 @@ func _set_pixel(position: Vector2, ignore_mirroring := false) -> void:
 
 func _set_pixel_no_cache(position: Vector2, ignore_mirroring := false) -> void:
 	position = _stroke_project.tiles.get_canon_position(position)
+	if Global.current_project.has_selection:
+		position = Global.current_project.selection_map.get_canon_position(position)
 	if !_stroke_project.can_pixel_get_drawn(position):
 		return
 
