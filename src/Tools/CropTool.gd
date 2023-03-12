@@ -136,7 +136,7 @@ func _on_Right_value_changed(value: float) -> void:
 func _on_RatioX_value_changed(value: float) -> void:
 	if _syncing:
 		return
-	_crop.rect.size.x = _crop.rect.size.y / _crop.ratio.y * value
+	_crop.rect.size.x = round(max(1, _crop.rect.size.y / _crop.ratio.y * value))
 	_crop.ratio.x = value
 	_crop.emit_signal("updated")
 
@@ -144,7 +144,7 @@ func _on_RatioX_value_changed(value: float) -> void:
 func _on_RatioY_value_changed(value: float) -> void:
 	if _syncing:
 		return
-	_crop.rect.size.y = _crop.rect.size.x / _crop.ratio.x * value
+	_crop.rect.size.y = round(max(1, _crop.rect.size.x / _crop.ratio.x * value))
 	_crop.ratio.y = value
 	_crop.emit_signal("updated")
 
