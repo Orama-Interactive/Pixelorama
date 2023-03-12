@@ -102,33 +102,34 @@ func _on_CropMode_item_selected(index: int) -> void:
 func _on_Top_value_changed(value: float) -> void:
 	if _syncing:
 		return
+	var difference := value - _crop.rect.position.y
+	_crop.rect.size.y = max(1, _crop.rect.size.y - difference)
 	_crop.rect.position.y = value
-	# TODO: Fix this:
-	_crop.rect.end.y = max(_crop.rect.position.y + 1, _crop.rect.end.y)
 	_crop.emit_signal("updated")
 
 
 func _on_Bottom_value_changed(value: float) -> void:
 	if _syncing:
 		return
+	_crop.rect.position.y = min(value - 1, _crop.rect.position.y)
 	_crop.rect.end.y = value
-	_crop.rect.position.y = min(_crop.rect.end.y - 1, _crop.rect.position.y)
 	_crop.emit_signal("updated")
 
 
 func _on_Left_value_changed(value: float) -> void:
 	if _syncing:
 		return
+	var difference := value - _crop.rect.position.x
+	_crop.rect.size.x = max(1, _crop.rect.size.x - difference)
 	_crop.rect.position.x = value
-	_crop.rect.end.x = max(_crop.rect.position.x + 1, _crop.rect.end.x)
 	_crop.emit_signal("updated")
 
 
 func _on_Right_value_changed(value: float) -> void:
 	if _syncing:
 		return
+	_crop.rect.position.x = min(value - 1, _crop.rect.position.x)
 	_crop.rect.end.x = value
-	_crop.rect.position.x = min(_crop.rect.end.x - 1, _crop.rect.position.x)
 	_crop.emit_signal("updated")
 
 
