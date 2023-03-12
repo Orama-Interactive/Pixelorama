@@ -81,12 +81,20 @@ func draw_move(position: Vector2) -> void:
 		CropRect.Mode.LOCKED_RESOLUTION:
 			_crop.rect.position = position
 		CropRect.Mode.LOCKED_ASPECT_RATIO:
-			_crop.rect.position.x = min(_start_pos.x, position.x)
-			_crop.rect.position.y = min(_start_pos.y, position.y)
-			var width := abs(_start_pos.x - position.x)
-			var height := abs(_start_pos.y - position.y)
-			_crop.rect.size.x = max(width, height * _crop.ratio.x / _crop.ratio.y)
-			_crop.rect.size.y = max(height, width * _crop.ratio.y / _crop.ratio.x)
+			var distance = abs(_start_pos.x - position.x) + abs(_start_pos.y - position.y)
+			_crop.rect.size.x = round(distance * _crop.ratio.x / (_crop.ratio.x + _crop.ratio.y))
+			_crop.rect.size.y = round(distance * _crop.ratio.y / (_crop.ratio.x + _crop.ratio.y))
+			if _start_pos.x < position.x:
+				_crop.rect.position.x = _start_pos.x
+			else:
+				_crop.rect.position.x = _start_pos.x - _crop.rect.size.x
+			if _start_pos.y < position.y:
+				_crop.rect.position.y = _start_pos.y
+			else:
+				_crop.rect.position.y = _start_pos.y - _crop.rect.size.y
+	# Ensure that the size is at least 1:
+	_crop.rect.size.x = max(1, _crop.rect.size.x)
+	_crop.rect.size.y = max(1, _crop.rect.size.y)
 	_crop.emit_signal("updated")
 
 
