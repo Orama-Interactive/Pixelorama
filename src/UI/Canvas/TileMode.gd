@@ -49,5 +49,4 @@ func get_tile_positions() -> Array:
 				continue
 			var position: Vector2 = r * y_basis + c * x_basis
 			positions.append(position)
-	print(positions)
 	return positions
