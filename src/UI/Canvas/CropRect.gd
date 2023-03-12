@@ -22,7 +22,12 @@ var tool_count := 0 setget _set_tool_count
 func _ready() -> void:
 	connect("updated", self, "update")
 	Global.connect("project_changed", self, "reset")
+	mode = Global.config_cache.get_value("preferences", "crop_mode", 0)
 	reset()
+
+
+func _exit_tree():
+	Global.config_cache.set_value("preferences", "crop_mode", mode)
 
 
 func _draw() -> void:
