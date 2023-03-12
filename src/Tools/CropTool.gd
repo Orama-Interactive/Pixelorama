@@ -167,9 +167,7 @@ func _on_Width_value_changed(value: float) -> void:
 	if _syncing:
 		return
 	if _crop.mode == CropRect.Mode.LOCKED_ASPECT_RATIO:
-		# TODO: May need to be rounded to int
-		# TODO: May need to have a min value of 1 set using max(..., 1)
-		_crop.rect.size.y = (value / _crop.ratio.x) * _crop.ratio.y
+		_crop.rect.size.y = round(max(1, (value / _crop.ratio.x) * _crop.ratio.y))
 	_crop.rect.size.x = value
 	_crop.emit_signal("updated")
 
@@ -178,9 +176,7 @@ func _on_Height_value_changed(value: float) -> void:
 	if _syncing:
 		return
 	if _crop.mode == CropRect.Mode.LOCKED_ASPECT_RATIO:
-		# TODO: May need to be rounded to int
-		# TODO: May need to have a min value of 1 set using max(..., 1)
-		_crop.rect.size.x = (value / _crop.ratio.y) * _crop.ratio.x
+		_crop.rect.size.x = round(max(1, (value / _crop.ratio.y) * _crop.ratio.x))
 	_crop.rect.size.y = value
 	_crop.emit_signal("updated")
 
