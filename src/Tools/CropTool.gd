@@ -5,6 +5,7 @@ var _crop: CropRect
 var _start_pos: Vector2
 var _syncing := false
 
+
 func _ready() -> void:
 	_crop = Global.canvas.crop_rect
 	_crop.connect("updated", self, "_sync_ui")
@@ -83,8 +84,12 @@ func draw_move(position: Vector2) -> void:
 				_crop.rect.end.y = max(_start_pos.y, position.y)
 			CropRect.Mode.LOCKED_ASPECT_RATIO:
 				var distance = abs(_start_pos.x - position.x) + abs(_start_pos.y - position.y)
-				_crop.rect.size.x = round(distance * _crop.ratio.x / (_crop.ratio.x + _crop.ratio.y))
-				_crop.rect.size.y = round(distance * _crop.ratio.y / (_crop.ratio.x + _crop.ratio.y))
+				_crop.rect.size.x = round(
+					distance * _crop.ratio.x / (_crop.ratio.x + _crop.ratio.y)
+				)
+				_crop.rect.size.y = round(
+					distance * _crop.ratio.y / (_crop.ratio.x + _crop.ratio.y)
+				)
 				if _start_pos.x < position.x:
 					_crop.rect.position.x = _start_pos.x
 				else:
@@ -100,6 +105,7 @@ func draw_move(position: Vector2) -> void:
 
 
 # UI Signals:
+
 
 func _on_CropMode_item_selected(index: int) -> void:
 	if _syncing:

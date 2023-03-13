@@ -87,13 +87,7 @@ var tools := {
 		"Select a color from a pixel of the sprite"
 	),
 	"Crop":
-	Tool.new(
-		"Crop",
-		"Crop",
-		"crop",
-		preload("res://src/Tools/CropTool.tscn"),
-		"Resize the canvas"
-	),
+	Tool.new("Crop", "Crop", "crop", preload("res://src/Tools/CropTool.tscn"), "Resize the canvas"),
 	"Pencil":
 	Tool.new(
 		"Pencil",
