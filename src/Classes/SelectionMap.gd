@@ -30,7 +30,12 @@ func get_nearest_position(pixel: Vector2) -> Vector2:
 					test_image.create(size.x, size.y, false, Image.FORMAT_LA8)
 					test_image.blit_rect(self, selection_rect, Vector2(x, y))
 					test_image.lock()
-					if pixel.x < 0 or pixel.y < 0 or pixel.x >= test_image.get_width() or pixel.y >= test_image.get_height():
+					if (
+						pixel.x < 0
+						or pixel.y < 0
+						or pixel.x >= test_image.get_width()
+						or pixel.y >= test_image.get_height()
+					):
 						continue
 					var selected: bool = test_image.get_pixelv(pixel).a > 0
 					test_image.unlock()
@@ -163,4 +168,3 @@ func resize_bitmap_values(project, new_size: Vector2, flip_x: bool, flip_y: bool
 	if new_bitmap_size != size:
 		crop(new_bitmap_size.x, new_bitmap_size.y)
 	blit_rect(smaller_image, Rect2(Vector2.ZERO, new_bitmap_size), dst)
-
