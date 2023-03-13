@@ -374,38 +374,44 @@ func _draw_tool_circle_from_map(position: Vector2) -> PoolVector2Array:
 	return result
 
 
-func draw_tool_brush(position: Vector2) -> void:
+func draw_tool_brush(brush_position: Vector2) -> void:
 	var project: Project = Global.current_project
-	position = project.tiles.get_canon_position(position)
+	# image brushes work differently, (we have to consider all 8 surrounding points)
+	var central_point = project.tiles.get_canon_position(brush_position)
+	var positions = project.tiles.get_point_in_tiles(central_point)
+	if Global.current_project.has_selection and project.tiles.mode == Tiles.MODE.NONE:
+		positions = Global.current_project.selection_map.get_point_in_tile_mode(central_point)
 
 	var size := _brush_image.get_size()
-	var dst := position - (size / 2).floor()
-	var dst_rect := Rect2(dst, size)
-	var draw_rect := _get_draw_rect()
-	dst_rect = dst_rect.clip(draw_rect)
-	if dst_rect.size == Vector2.ZERO:
-		return
-	var src_rect := Rect2(dst_rect.position - dst, dst_rect.size)
-	dst = dst_rect.position
-	var brush_image: Image = remove_unselected_parts_of_brush(_brush_image, dst)
-	_draw_brush_image(brush_image, src_rect, dst)
+	for i in positions.size():
+		var position: Vector2 = positions[i]
+		var dst: Vector2 = position - (size / 2).floor()
+		var dst_rect := Rect2(dst, size)
+		var draw_rect := _get_draw_rect()
+		dst_rect = dst_rect.clip(draw_rect)
+		if dst_rect.size == Vector2.ZERO:
+			continue
+		var src_rect := Rect2(dst_rect.position - dst, dst_rect.size)
+		dst = dst_rect.position
+		var brush_image: Image = remove_unselected_parts_of_brush(_brush_image, dst)
+		_draw_brush_image(brush_image, src_rect, dst)
 
-	# Handle Mirroring
-	var mirror_x = (project.x_symmetry_point + 1) - dst.x - src_rect.size.x
-	var mirror_y = (project.y_symmetry_point + 1) - dst.y - src_rect.size.y
+		# Handle Mirroring
+		var mirror_x = (project.x_symmetry_point + 1) - dst.x - src_rect.size.x
+		var mirror_y = (project.y_symmetry_point + 1) - dst.y - src_rect.size.y
 
-	if Tools.horizontal_mirror:
-		var x_dst := Vector2(mirror_x, dst.y)
-		var mirror_brush_x: Image = remove_unselected_parts_of_brush(_mirror_brushes.x, x_dst)
-		_draw_brush_image(mirror_brush_x, _flip_rect(src_rect, size, true, false), x_dst)
+		if Tools.horizontal_mirror:
+			var x_dst := Vector2(mirror_x, dst.y)
+			var mirror_brush_x: Image = remove_unselected_parts_of_brush(_mirror_brushes.x, x_dst)
+			_draw_brush_image(mirror_brush_x, _flip_rect(src_rect, size, true, false), x_dst)
+			if Tools.vertical_mirror:
+				var xy_dst := Vector2(mirror_x, mirror_y)
+				var mirror_brush_xy := remove_unselected_parts_of_brush(_mirror_brushes.xy, xy_dst)
+				_draw_brush_image(mirror_brush_xy, _flip_rect(src_rect, size, true, true), xy_dst)
 		if Tools.vertical_mirror:
-			var xy_dst := Vector2(mirror_x, mirror_y)
-			var mirror_brush_xy := remove_unselected_parts_of_brush(_mirror_brushes.xy, xy_dst)
-			_draw_brush_image(mirror_brush_xy, _flip_rect(src_rect, size, true, true), xy_dst)
-	if Tools.vertical_mirror:
-		var y_dst := Vector2(dst.x, mirror_y)
-		var mirror_brush_y: Image = remove_unselected_parts_of_brush(_mirror_brushes.y, y_dst)
-		_draw_brush_image(mirror_brush_y, _flip_rect(src_rect, size, false, true), y_dst)
+			var y_dst := Vector2(dst.x, mirror_y)
+			var mirror_brush_y: Image = remove_unselected_parts_of_brush(_mirror_brushes.y, y_dst)
+			_draw_brush_image(mirror_brush_y, _flip_rect(src_rect, size, false, true), y_dst)
 
 
 func remove_unselected_parts_of_brush(brush: Image, dst: Vector2) -> Image:
@@ -429,7 +435,10 @@ func remove_unselected_parts_of_brush(brush: Image, dst: Vector2) -> Image:
 func draw_indicator(left: bool) -> void:
 	var color := Global.left_tool_color if left else Global.right_tool_color
 	draw_indicator_at(snap_position(_cursor), Vector2.ZERO, color)
-	if Global.current_project.has_selection:
+	if (
+		Global.current_project.has_selection
+		and Global.current_project.tiles.mode == Tiles.MODE.NONE
+	):
 		var position := _line_start if _draw_line else _cursor
 		var nearest_pos := Global.current_project.selection_map.get_nearest_position(position)
 		if nearest_pos != Vector2.ZERO:

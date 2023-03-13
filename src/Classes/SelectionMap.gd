@@ -42,6 +42,24 @@ func get_nearest_position(pixel: Vector2) -> Vector2:
 			return Vector2.ZERO
 
 
+func get_point_in_tile_mode(pixel: Vector2) -> Array:
+	var result = []
+	var behaviour = Global.canvas.selection.behaviour
+	match behaviour:
+		Global.canvas.selection.Behavior.TILEMODE:
+			var selection_rect = get_used_rect()
+			var start_x = selection_rect.position.x - selection_rect.size.x
+			var end_x = selection_rect.position.x + 2 * selection_rect.size.x
+			var start_y = selection_rect.position.y - selection_rect.size.y
+			var end_y = selection_rect.position.y + 2 * selection_rect.size.y
+			for x in range(start_x, end_x, selection_rect.size.x):
+				for y in range(start_y, end_y, selection_rect.size.y):
+					result.append(Vector2(x, y) + pixel - selection_rect.position)
+		_:
+			result.append(pixel)
+	return result
+
+
 func get_canon_position(position) -> Vector2:
 	var behaviour = Global.canvas.selection.behaviour
 	match behaviour:
