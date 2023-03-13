@@ -1660,6 +1660,9 @@ msgstr ""
 msgid "Group"
 msgstr ""
 
+msgid "Vector"
+msgstr ""
+
 msgid "Layers"
 msgstr ""
 
