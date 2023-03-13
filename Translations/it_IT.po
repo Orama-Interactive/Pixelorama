@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-03-09 21:38\n"
+"PO-Revision-Date: 2023-03-13 15:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -389,7 +389,8 @@ msgstr "Il file esiste già, vuoi sovrascrivere?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "I seguenti file sono già esistenti. Vuoi sovrascriverli?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Il percorso directory non è valido!"
@@ -578,7 +579,7 @@ msgstr "Prestazioni"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Drivers"
 
 msgid "Extensions"
 msgstr "Estensioni"
@@ -591,7 +592,7 @@ msgstr "Indicatori"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Pixelorama deve essere riavviato affinché i cambiamenti abbiano effetto."
 
 msgid "On"
 msgstr "Acceso"
