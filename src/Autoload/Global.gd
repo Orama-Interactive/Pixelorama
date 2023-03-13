@@ -2,7 +2,6 @@ extends Node
 
 signal project_changed
 signal cel_changed
-signal crop_changed
 
 enum LayerTypes { PIXEL, GROUP }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
