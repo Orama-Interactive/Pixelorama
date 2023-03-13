@@ -306,7 +306,6 @@ func _setup_select_menu() -> void:
 	for i in select_menu_items.size():
 		var item: String = select_menu_items[i]
 		if item == "Behavior":
-			print("a")
 			_setup_behavior_submenu(item)
 		else:
 			select_menu.add_item(item, i)
@@ -316,9 +315,9 @@ func _setup_select_menu() -> void:
 func _setup_behavior_submenu(item: String) -> void:
 	var select_menu = select_menu_button.get_popup()
 	behavior_submenu.set_name("behavior_submenu")
-	behavior_submenu.add_radio_check_item("Default", 0) # SIMPLE
+	behavior_submenu.add_radio_check_item("Default", 0)  # SIMPLE
 	behavior_submenu.set_item_checked(Tiles.MODE.NONE, true)
-	behavior_submenu.add_radio_check_item("Tile Mode", 1) # TILEMODE
+	behavior_submenu.add_radio_check_item("Tile Mode", 1)  # TILEMODE
 	behavior_submenu.hide_on_checkable_item_selection = false
 
 	behavior_submenu.connect("id_pressed", self, "_behavior_submenu_id_pressed")
