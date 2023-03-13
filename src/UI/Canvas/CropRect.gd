@@ -3,7 +3,7 @@ extends Node2D
 # Draws the rectangle overlay for the crop tool
 # Stores the shared settings between left and right crop tools
 
-enum Mode { SIDES, RESOLUTION, LOCKED_RESOLUTION, LOCKED_ASPECT_RATIO }
+enum Mode { MARGINS, POSITION_SIZE, LOCKED_ASPECT_RATIO }
 
 signal updated
 
@@ -12,6 +12,7 @@ const DARKEN_COLOR = Color(0, 0, 0, 0.5)
 const LINE_COLOR = Color.white
 
 var mode := 0 setget _set_mode
+var locked_size := false
 var rect := Rect2(0, 0, 1, 1)
 var ratio := Vector2.ONE
 
@@ -23,11 +24,13 @@ func _ready() -> void:
 	connect("updated", self, "update")
 	Global.connect("project_changed", self, "reset")
 	mode = Global.config_cache.get_value("preferences", "crop_mode", 0)
+	locked_size = Global.config_cache.get_value("preferences", "crop_locked_size", false)
 	reset()
 
 
 func _exit_tree():
 	Global.config_cache.set_value("preferences", "crop_mode", mode)
+	Global.config_cache.set_value("preferences", "crop_locked_size", locked_size)
 
 
 func _draw() -> void:
