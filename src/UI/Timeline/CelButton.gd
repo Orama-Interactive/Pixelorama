@@ -18,7 +18,8 @@ func button_setup() -> void:
 	rect_min_size.x = Global.animation_timeline.cel_size
 	rect_min_size.y = Global.animation_timeline.cel_size
 
-	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, layer]
+	var base_layer: BaseLayer = Global.current_project.layers[layer]
+	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, base_layer.name]
 	cel = Global.current_project.frames[frame].cels[layer]
 	$CelTexture.texture = cel.image_texture
 	if is_instance_valid(linked_indicator):
@@ -77,11 +78,9 @@ func _on_CelButton_pressed() -> void:
 				project.selected_cels.append(frame_layer)
 
 		if change_cel:
-			project.current_frame = frame
-			project.current_layer = layer
+			project.change_cel(frame, layer)
 		else:
-			project.current_frame = project.selected_cels[0][0]
-			project.current_layer = project.selected_cels[0][1]
+			project.change_cel(project.selected_cels[0][0], project.selected_cels[0][1])
 			release_focus()
 
 	elif Input.is_action_just_released("right_mouse"):
@@ -178,7 +177,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 
 func _delete_cel_content() -> void:
-	var project = Global.current_project
+	var project: Project = Global.current_project
 	var empty_content = cel.create_empty_content()
 	var old_content = cel.get_content()
 	project.undos += 1
@@ -187,7 +186,7 @@ func _delete_cel_content() -> void:
 		project.undo_redo.add_do_method(cel, "set_content", empty_content)
 		project.undo_redo.add_undo_method(cel, "set_content", old_content)
 	else:
-		for linked_cel in cel.link_set:
+		for linked_cel in cel.link_set["cels"]:
 			project.undo_redo.add_do_method(linked_cel, "set_content", empty_content)
 			project.undo_redo.add_undo_method(linked_cel, "set_content", old_content)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer, project)
@@ -263,11 +262,10 @@ func drop_data(_pos, data) -> void:
 		project.undo_redo.add_do_method(project, "move_cel", drop_frame, to_frame, layer)
 		project.undo_redo.add_undo_method(project, "move_cel", to_frame, drop_frame, layer)
 
-	project.undo_redo.add_do_property(project, "current_layer", layer)
-	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	if frame != drop_frame:  # If the cel moved to a different frame
-		project.undo_redo.add_do_property(project, "current_frame", frame)
-		project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_do_method(project, "change_cel", frame, layer)
+	project.undo_redo.add_undo_method(
+		project, "change_cel", project.current_frame, project.current_layer
+	)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()

@@ -27,6 +27,7 @@ func _input(event: InputEvent) -> void:
 func draw_start(position: Vector2) -> void:
 	if !$DoubleClickTimer.is_stopped():
 		return
+	position = snap_position(position)
 	.draw_start(position)
 	if !_move and !_draw_points:
 		_ongoing_selection = true
@@ -37,12 +38,14 @@ func draw_start(position: Vector2) -> void:
 func draw_move(position: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
+	position = snap_position(position)
 	.draw_move(position)
 
 
 func draw_end(position: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
+	position = snap_position(position)
 	if !_move and _draw_points:
 		append_gap(_draw_points[-1], position, _draw_points)
 		if position == _draw_points[0] and _draw_points.size() > 1:
@@ -105,6 +108,7 @@ func draw_preview() -> void:
 
 
 func apply_selection(_position) -> void:
+	.apply_selection(_position)
 	if !_ready_to_apply:
 		return
 	var project: Project = Global.current_project

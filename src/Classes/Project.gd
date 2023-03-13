@@ -12,17 +12,19 @@ var can_undo = true
 var fill_color := Color(0)
 var has_changed := false setget _has_changed_changed
 # frames and layers Arrays should generally only be modified directly when
-# opening/creating a project. When modifiying the current project, use
+# opening/creating a project. When modifying the current project, use
 # the add/remove/move/swap_frames/layers methods
 var frames := []  # Array of Frames (that contain Cels)
 var layers := []  # Array of Layers
-var current_frame := 0 setget _frame_changed
-var current_layer := 0 setget _layer_changed
+var current_frame := 0
+var current_layer := 0
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
 
 var animation_tags := [] setget _animation_tags_changed  # Array of AnimationTags
 var guides := []  # Array of Guides
 var brushes := []  # Array of Images
+var reference_images := []  # Array of ReferenceImages
+var vanishing_points := []  # Array of Vanishing Points
 var fps := 6.0
 
 var x_symmetry_point
@@ -88,6 +90,14 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 
 func remove() -> void:
 	undo_redo.free()
+	for ri in reference_images:
+		ri.queue_free()
+	if self == Global.current_project:
+		# If the project is not current_project then the points need not be removed
+		for point_idx in vanishing_points.size():
+			var editor = Global.perspective_editor
+			for c in editor.vanishing_point_container.get_children():
+				c.queue_free()
 	for guide in guides:
 		guide.queue_free()
 	# Prevents memory leak (due to the layers' project reference stopping ref counting from freeing)
@@ -124,6 +134,10 @@ func new_empty_frame() -> Frame:
 	return frame
 
 
+func get_current_cel() -> BaseCel:
+	return frames[current_frame].cels[current_layer]
+
+
 func selection_map_changed() -> void:
 	var image_texture := ImageTexture.new()
 	has_selection = !selection_map.is_invisible()
@@ -137,7 +151,6 @@ func selection_map_changed() -> void:
 func _selection_offset_changed(value: Vector2) -> void:
 	selection_offset = value
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset
-	Global.canvas.selection.update_on_zoom(Global.camera.zoom.x)
 
 
 func change_project() -> void:
@@ -179,6 +192,8 @@ func change_project() -> void:
 	Global.animation_timeline.fps_spinbox.value = fps
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
+	Global.references_panel.project_changed()
+	Global.perspective_editor.update_points()
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 
 	Global.window_title = "%s - Pixelorama %s" % [name, Global.current_version]
@@ -190,26 +205,23 @@ func change_project() -> void:
 		Global.open_sprites_dialog.current_path = save_path
 		Global.save_sprites_dialog.current_path = save_path
 		Global.top_menu_container.file_menu.set_item_text(
-			4, tr("Save") + " %s" % save_path.get_file()
+			Global.FileMenu.SAVE, tr("Save") + " %s" % save_path.get_file()
 		)
 	else:
-		Global.top_menu_container.file_menu.set_item_text(4, tr("Save"))
-
-	Export.directory_path = directory_path
-	Export.file_name = file_name
-	Export.file_format = file_format
-	Export.was_exported = was_exported
+		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save"))
 
 	if !was_exported:
-		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
+		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
 	else:
 		if export_overwrite:
 			Global.top_menu_container.file_menu.set_item_text(
-				6, tr("Overwrite") + " %s" % (file_name + Export.file_format_string(file_format))
+				Global.FileMenu.EXPORT,
+				tr("Overwrite") + " %s" % (file_name + Export.file_format_string(file_format))
 			)
 		else:
 			Global.top_menu_container.file_menu.set_item_text(
-				6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format))
+				Global.FileMenu.EXPORT,
+				tr("Export") + " %s" % (file_name + Export.file_format_string(file_format))
 			)
 
 	for j in Tiles.MODE.values():
@@ -245,8 +257,8 @@ func change_project() -> void:
 		camera.rotation = cameras_rotation[i]
 		camera.zoom = cameras_zoom[i]
 		camera.offset = cameras_offset[i]
-		camera.rotation_changed()
-		camera.zoom_changed()
+		camera.emit_signal("rotation_changed")
+		camera.emit_signal("zoom_changed")
 		i += 1
 
 
@@ -292,6 +304,10 @@ func serialize() -> Dictionary:
 	for brush in brushes:
 		brush_data.append({"size_x": brush.get_size().x, "size_y": brush.get_size().y})
 
+	var reference_image_data := []
+	for reference_image in reference_images:
+		reference_image_data.append(reference_image.serialize())
+
 	var tile_mask_data := {
 		"size_x": tiles.tile_mask.get_size().x, "size_y": tiles.tile_mask.get_size().y
 	}
@@ -316,6 +332,8 @@ func serialize() -> Dictionary:
 		"symmetry_points": [x_symmetry_point, y_symmetry_point],
 		"frames": frame_data,
 		"brushes": brush_data,
+		"reference_images": reference_image_data,
+		"vanishing_points": vanishing_points,
 		"export_directory_path": directory_path,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
@@ -397,6 +415,15 @@ func deserialize(dict: Dictionary) -> void:
 			guide.has_focus = false
 			guide.project = self
 			Global.canvas.add_child(guide)
+	if dict.has("reference_images"):
+		for g in dict.reference_images:
+			var ri := ReferenceImage.new()
+			ri.project = self
+			ri.deserialize(g)
+			Global.canvas.add_child(ri)
+	if dict.has("vanishing_points"):
+		vanishing_points = dict.vanishing_points
+		Global.perspective_editor.update()
 	if dict.has("symmetry_points"):
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]
@@ -449,62 +476,59 @@ func _size_changed(value: Vector2) -> void:
 	size = value
 
 
-func _frame_changed(value: int) -> void:
+func change_cel(new_frame: int, new_layer := -1) -> void:
+	if new_frame < 0:
+		new_frame = current_frame
+	if new_layer < 0:
+		new_layer = current_layer
 	Global.canvas.selection.transform_content_confirm()
-	current_frame = value
-	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
-
+	# Unpress all buttons
 	for i in frames.size():
 		var frame_button: BaseButton = Global.frame_hbox.get_child(i)
-		frame_button.pressed = false
-		for cel_hbox in Global.cel_vbox.get_children():  # De-select all the other cels
+		frame_button.pressed = false  # Unpress all frame buttons
+		for cel_hbox in Global.cel_vbox.get_children():
 			if i < cel_hbox.get_child_count():
-				cel_hbox.get_child(i).pressed = false
+				cel_hbox.get_child(i).pressed = false  # Unpress all cel buttons
+
+	for layer_button in Global.layer_vbox.get_children():
+		layer_button.pressed = false  # Unpress all layer buttons
 
 	if selected_cels.empty():
-		selected_cels.append([current_frame, current_layer])
-	# Select the new frame
-	for cel in selected_cels:
+		selected_cels.append([new_frame, new_layer])
+	for cel in selected_cels:  # Press selected buttons
 		var frame: int = cel[0]
 		var layer: int = cel[1]
 		if frame < Global.frame_hbox.get_child_count():
 			var frame_button: BaseButton = Global.frame_hbox.get_child(frame)
-			frame_button.pressed = true
+			frame_button.pressed = true  # Press selected frame buttons
 
-		var vbox_child_count: int = Global.cel_vbox.get_child_count()
-		if layer < vbox_child_count:
-			var cel_hbox: Container = Global.cel_vbox.get_child(vbox_child_count - 1 - layer)
+		var layer_vbox_child_count: int = Global.layer_vbox.get_child_count()
+		if layer < layer_vbox_child_count:
+			var layer_button = Global.layer_vbox.get_child(layer_vbox_child_count - 1 - layer)
+			layer_button.pressed = true  # Press selected layer buttons
+
+		var cel_vbox_child_count: int = Global.cel_vbox.get_child_count()
+		if layer < cel_vbox_child_count:
+			var cel_hbox: Container = Global.cel_vbox.get_child(cel_vbox_child_count - 1 - layer)
 			if frame < cel_hbox.get_child_count():
-				var cel_button = cel_hbox.get_child(frame)
-				cel_button.pressed = true
+				var cel_button: BaseButton = cel_hbox.get_child(frame)
+				cel_button.pressed = true  # Press selected cel buttons
 
-	if current_frame < frames.size():
+	if new_frame != current_frame:  # If the frame has changed
+		current_frame = new_frame
+		Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
+		toggle_frame_buttons()
+
+	if new_layer != current_layer:  # If the layer has changed
+		current_layer = new_layer
+		toggle_layer_buttons()
+
+	if current_frame < frames.size():  # Set opacity slider
 		var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
 		Global.layer_opacity_slider.value = cel_opacity * 100
-
-	toggle_frame_buttons()
 	Global.canvas.update()
 	Global.transparent_checker.update_rect()
-
-
-func _layer_changed(value: int) -> void:
-	Global.canvas.selection.transform_content_confirm()
-	current_layer = value
-
-	toggle_layer_buttons()
-
-	yield(Global.get_tree().create_timer(0.01), "timeout")
-	self.current_frame = current_frame  # Call frame_changed to update UI
-	for layer_button in Global.layer_vbox.get_children():
-		layer_button.pressed = false
-
-	for cel in selected_cels:
-		var layer: int = cel[1]
-		if layer < Global.layer_vbox.get_child_count():
-			var layer_button = Global.layer_vbox.get_child(
-				Global.layer_vbox.get_child_count() - 1 - layer
-			)
-			layer_button.pressed = true
+	Global.emit_signal("cel_changed")
 
 
 func toggle_frame_buttons() -> void:
@@ -624,7 +648,7 @@ func can_pixel_get_drawn(
 # through these methods.
 # These allow you to add/remove/move/swap frames/layers/cels. It updates the Animation Timeline
 # UI, and updates indices. These are designed to be reversible, meaning that to undo an add, you
-# use remove, and vise versa. To undo a move or swap, use move or swap with the paramaters swapped.
+# use remove, and vice versa. To undo a move or swap, use move or swap with the parameters swapped.
 
 
 func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be in ascending order

@@ -207,9 +207,6 @@ margin_right = 234.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
-text = "Nearest"
-items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, false, 4, null, "Scale3X", null, false, 5, null ]
-selected = 0
 
 [connection signal="about_to_show" from="." to="." method="_on_ScaleImage_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ScaleImage_confirmed"]

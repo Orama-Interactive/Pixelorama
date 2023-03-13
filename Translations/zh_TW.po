@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "確定"
@@ -165,7 +165,10 @@ msgstr ""
 msgid "Rotate Image"
 msgstr "旋轉圖片"
 
-msgid "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
 msgstr ""
 
 msgid "Smear options:"
@@ -327,11 +330,14 @@ msgstr ""
 msgid "New frame"
 msgstr "新增影格"
 
-msgid "Replace frame"
+msgid "Replace cel"
 msgstr ""
 
 msgid "New layer"
 msgstr "新增圖層"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "新增調色盤"
@@ -381,8 +387,9 @@ msgstr "輸出圖片"
 msgid "File Exists, Overwrite?"
 msgstr "檔案已存在，要覆寫嗎？"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "檔案 %s 已經存在，要覆寫嗎？"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr ""
 
 msgid "Directory path is not valid!"
 msgstr ""
@@ -449,14 +456,31 @@ msgstr "選擇當前資料夾"
 msgid "Open a Directory"
 msgstr "開啟資料夾"
 
-msgid "All frames as multiple files"
-msgstr "影格各自為獨立檔案"
-
-msgid "All frames as a single file animation"
-msgstr "所有影格為一個動畫檔"
-
 msgid "Background:"
 msgstr "背景："
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr ""
+
+msgid "Layers:"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr ""
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr ""
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr ""
 
 msgid "Direction:"
 msgstr "方向："
@@ -482,6 +506,10 @@ msgstr "列"
 msgid "Rows:"
 msgstr "列："
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr ""
+
 msgid "Path:"
 msgstr "路徑："
 
@@ -493,6 +521,10 @@ msgstr "創建資料夾"
 
 msgid "File:"
 msgstr "檔案："
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr ""
 
 msgid "Interpolation:"
 msgstr "插值："
@@ -542,6 +574,10 @@ msgstr "備份"
 msgid "Performance"
 msgstr ""
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr ""
+
 msgid "Extensions"
 msgstr ""
 
@@ -550,6 +586,10 @@ msgstr ""
 
 msgid "Indicators"
 msgstr "指標"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr ""
 
 msgid "On"
 msgstr "開啟"
@@ -714,22 +754,29 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
+msgid "Shape:"
+msgstr ""
+
 msgid "Linear"
 msgstr ""
 
 msgid "Radial"
 msgstr ""
 
-msgid "Linear Step"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
 msgstr ""
 
-msgid "Radial Step"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
 msgstr ""
 
-msgid "Linear Dithering"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
 msgstr ""
 
-msgid "Radial Dithering"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
 msgstr ""
 
 msgid "Transition size:"
@@ -928,6 +975,9 @@ msgid "Serbian (Cyrillic)"
 msgstr ""
 
 msgid "Dutch"
+msgstr ""
+
+msgid "Belarusian"
 msgstr ""
 
 msgid "Development Team"
@@ -1286,6 +1336,22 @@ msgstr ""
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr ""
+
 msgid "Add Extension"
 msgstr ""
 
@@ -1369,9 +1435,11 @@ msgstr ""
 msgid "Fill with:"
 msgstr "填滿："
 
-msgid "Selected Color"
-msgstr "已選取顏色"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr ""
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "圖樣"
 
@@ -1567,11 +1635,11 @@ msgstr "右移"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cel"
-msgstr "連結Cel"
+msgid "Link Cels to"
+msgstr ""
 
-msgid "Unlink Cel"
-msgstr "取消Cel連結"
+msgid "Unlink Cels"
+msgstr ""
 
 msgid "Frame Properties"
 msgstr ""
@@ -1582,11 +1650,17 @@ msgstr "影格屬性"
 msgid "Layer"
 msgstr "圖層"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "圖層"
 
 msgid "Create a new layer"
 msgstr "新增圖層"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "刪除此圖層"
@@ -1618,10 +1692,12 @@ msgstr "鎖住/解鎖圖層"
 msgid "Frame: %s, Layer: %s"
 msgstr "影格：%s，圖層：%s"
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
-msgstr "開關 Cel 連結\n\n"
-"連結的 Cel 會在多個影格重複"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr ""
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "色盤"
@@ -1953,11 +2029,13 @@ msgstr "自動儲存間隔："
 msgid "minute(s)"
 msgstr "分鐘"
 
-msgid "Create new directory for each frame tag"
-msgstr "為每個影格標籤創建資料夾"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr ""
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "根據影格標籤在不同的資料夾創建多個獨立檔案"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr ""
 
 msgid "Close"
 msgstr "關閉"
@@ -1983,9 +2061,6 @@ msgstr "不能刪除色盤"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "無法刪除不存在的色盤"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "刪除色盤出錯! 錯誤代碼：%s"
 
 msgid "and"
 msgstr "和"
@@ -2072,5 +2147,8 @@ msgid "Left Tool Options"
 msgstr ""
 
 msgid "Right Tool Options"
+msgstr ""
+
+msgid "Reference Images"
 msgstr ""
 

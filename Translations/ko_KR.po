@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "예"
@@ -165,7 +165,10 @@ msgstr "이미지 중앙 집중화"
 msgid "Rotate Image"
 msgstr "이미지 회전"
 
-msgid "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
 msgstr ""
 
 msgid "Smear options:"
@@ -327,11 +330,14 @@ msgstr "스프레드시트 (새 레이어)"
 msgid "New frame"
 msgstr "새 프레임"
 
-msgid "Replace frame"
-msgstr "프레임 변경"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "새 레이어"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "새 팔레트"
@@ -381,8 +387,9 @@ msgstr "스프라이트 내보내기"
 msgid "File Exists, Overwrite?"
 msgstr "파일이 이미 존재합니다, 덮어씌우시겠습니까?"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "파일 %s이(가) 이미 존재합니다. 덮어씌우시겠습니까?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr ""
 
 msgid "Directory path is not valid!"
 msgstr "경로가 유효 하지 않습니다."
@@ -451,14 +458,31 @@ msgstr "현 폴더 선택"
 msgid "Open a Directory"
 msgstr "디렉토리 열기"
 
-msgid "All frames as multiple files"
-msgstr "모든 프레임을 여러 파일로"
-
-msgid "All frames as a single file animation"
-msgstr "모든 프레임을 하나의 파일로"
-
 msgid "Background:"
 msgstr "배경:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr ""
+
+msgid "Layers:"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr ""
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr ""
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr ""
 
 msgid "Direction:"
 msgstr "방향:"
@@ -484,6 +508,10 @@ msgstr "행"
 msgid "Rows:"
 msgstr "행:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr ""
+
 msgid "Path:"
 msgstr "경로:"
 
@@ -495,6 +523,10 @@ msgstr "폴더 생성"
 
 msgid "File:"
 msgstr "파일:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr ""
 
 msgid "Interpolation:"
 msgstr "보간:"
@@ -544,6 +576,10 @@ msgstr "백업"
 msgid "Performance"
 msgstr "성능"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr ""
+
 msgid "Extensions"
 msgstr "확장"
 
@@ -552,6 +588,10 @@ msgstr "마우스 커서"
 
 msgid "Indicators"
 msgstr "표기 아이콘"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr ""
 
 msgid "On"
 msgstr "켜짐"
@@ -716,23 +756,30 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
+msgid "Shape:"
+msgstr ""
+
 msgid "Linear"
 msgstr "선형"
 
 msgid "Radial"
 msgstr "반지름"
 
-msgid "Linear Step"
-msgstr "선형 단계"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
+msgstr ""
 
-msgid "Radial Step"
-msgstr "반지름 단계"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
+msgstr ""
 
-msgid "Linear Dithering"
-msgstr "선형 디더링"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
+msgstr ""
 
-msgid "Radial Dithering"
-msgstr "반지름 디더링"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
+msgstr ""
 
 msgid "Transition size:"
 msgstr "전환 크기:"
@@ -931,6 +978,9 @@ msgstr "세르비아어 (키릴 문자)"
 
 msgid "Dutch"
 msgstr "네덜란드어"
+
+msgid "Belarusian"
+msgstr ""
 
 msgid "Development Team"
 msgstr "개발팀"
@@ -1323,6 +1373,22 @@ msgstr "프로그램의 FPS를 제한합니다. 숫자가 낮을수록, CPU 사�
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "이 옵션을 켜면 프로그램 창의 관심이 없을때 정지하게 됩니다. 이 옵션은 프로그램을 안 쓰고 있을때 CPU 사용량을 줄일 수 있습니다. 마우스가 프로그램의 창에 들어갈때 정지를 해제 합니다"
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr ""
+
 msgid "Add Extension"
 msgstr "확장 추가"
 
@@ -1407,9 +1473,11 @@ msgstr ""
 msgid "Fill with:"
 msgstr "이것으로 채우기:"
 
-msgid "Selected Color"
-msgstr "선택된 색상"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr ""
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "패턴"
 
@@ -1606,11 +1674,11 @@ msgstr "오른쪽으로 이동"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cel"
-msgstr "셀 연결"
+msgid "Link Cels to"
+msgstr ""
 
-msgid "Unlink Cel"
-msgstr "셀 연결 해제"
+msgid "Unlink Cels"
+msgstr ""
 
 msgid "Frame Properties"
 msgstr "프레임 속성"
@@ -1621,11 +1689,17 @@ msgstr "프레임 속성"
 msgid "Layer"
 msgstr "레이어"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "레이어"
 
 msgid "Create a new layer"
 msgstr "새 레이어 생성"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "현재 레이어 제거"
@@ -1657,10 +1731,12 @@ msgstr "레이어 잠금/잠금 해제"
 msgid "Frame: %s, Layer: %s"
 msgstr "프레임: %s, 레이어: %s"
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
-msgstr "셀 연결 활성화/비활성화\n\n"
-"연결된 셀들은 여러 프레임에 공유 됩니다"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr ""
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "팔레트"
@@ -1992,11 +2068,13 @@ msgstr "자동 저장 주기:"
 msgid "minute(s)"
 msgstr "분"
 
-msgid "Create new directory for each frame tag"
-msgstr "각 프레임 태그 마다 새로운 폴더 만들기."
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr ""
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "여러 파일을 만들지만 프레임 태그로 분류되어 다른 폴더에 저장됩니다"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr ""
 
 msgid "Close"
 msgstr "닫기"
@@ -2022,9 +2100,6 @@ msgstr "팔레트를 더 이상 지울 수 없습니다!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "팔레트가 존재하지 않기 때문에, 팔레트를 지울 수 없었습니다!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "팔레트를 제거하던 도중 오류가 발생했습니다! 오류 코드: %s"
 
 msgid "and"
 msgstr "그리고"
@@ -2112,4 +2187,7 @@ msgstr "왼쪽 툴 설정"
 
 msgid "Right Tool Options"
 msgstr "오른쪽 툴 설정"
+
+msgid "Reference Images"
+msgstr ""
 

@@ -14,11 +14,6 @@ var preferences := [
 		"tool_button_size", "Interface/ButtonOptions/ToolButtonSizeOptionButton", "selected"
 	),
 	Preference.new(
-		"pressure_sensitivity_mode",
-		"Startup/PressureSentivity/PressureSensitivityOptionButton",
-		"selected"
-	),
-	Preference.new(
 		"show_left_tool_icon", "Cursors/CursorsContainer/LeftToolIconCheckbox", "pressed"
 	),
 	Preference.new(
@@ -79,6 +74,10 @@ var preferences := [
 	Preference.new(
 		"pause_when_unfocused", "Performance/PerformanceContainer/PauseAppFocus", "pressed"
 	),
+	Preference.new(
+		"renderer", "Drivers/DriversContainer/Renderer", "selected", true, OS.VIDEO_DRIVER_GLES2
+	),
+	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", true, 0)
 ]
 
 var content_list := []
@@ -86,31 +85,46 @@ var selected_item := 0
 var restore_default_button_tcsn := preload("res://src/Preferences/RestoreDefaultButton.tscn")
 
 onready var list: ItemList = $HSplitContainer/List
-onready var right_side: VBoxContainer = $HSplitContainer/ScrollContainer/VBoxContainer
+onready var right_side: VBoxContainer = $"%RightSide"
 onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
 onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
 onready var shrink_slider: ValueSlider = $"%ShrinkSlider"
 onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
 onready var shortcuts: Control = right_side.get_node("Shortcuts/ShortcutEdit")
+onready var tablet_driver_label: Label = $"%TabletDriverLabel"
+onready var tablet_driver: OptionButton = $"%TabletDriver"
 onready var extensions: BoxContainer = right_side.get_node("Extensions")
+onready var must_restart: BoxContainer = $"%MustRestart"
 
 
 class Preference:
 	var prop_name: String
 	var node_path: String
 	var value_type: String
+	var require_restart := false
 	var default_value
 
-	func _init(_prop_name: String, _node_path: String, _value_type: String) -> void:
+	func _init(
+		_prop_name: String,
+		_node_path: String,
+		_value_type: String,
+		_require_restart := false,
+		_default_value = null
+	) -> void:
 		prop_name = _prop_name
 		node_path = _node_path
 		value_type = _value_type
-		default_value = Global.get(prop_name)
+		require_restart = _require_restart
+		if _default_value != null:
+			default_value = _default_value
+		else:
+			default_value = Global.get(prop_name)
 
 
 func _ready() -> void:
 	# Replace OK since preference changes are being applied immediately, not after OK confirmation
 	get_ok().text = "Close"
+	get_ok().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	shrink_slider.value = Global.shrink  # In case shrink is not equal to 1
 
 	for child in shortcuts.get_children():
@@ -126,14 +140,20 @@ func _ready() -> void:
 		right_side.get_node("Startup").queue_free()
 		right_side.get_node("Language").visible = true
 		Global.open_last_project = false
+	elif OS.get_name() == "Windows":
+		tablet_driver_label.visible = true
+		tablet_driver.visible = true
+		for driver in OS.get_tablet_driver_count():
+			var driver_name := OS.get_tablet_driver_name(driver)
+			tablet_driver.add_item(driver_name, driver)
 
 	for pref in preferences:
 		var node: Node = right_side.get_node(pref.node_path)
-
 		var restore_default_button: BaseButton = restore_default_button_tcsn.instance()
 		restore_default_button.setting_name = pref.prop_name
 		restore_default_button.value_type = pref.value_type
 		restore_default_button.default_value = pref.default_value
+		restore_default_button.require_restart = pref.require_restart
 		restore_default_button.node = node
 		if pref.node_path == "%ShrinkSlider":
 			# Add the default button to the shrink slider's grandparent
@@ -148,92 +168,73 @@ func _ready() -> void:
 		match pref.value_type:
 			"pressed":
 				node.connect(
-					"toggled",
-					self,
-					"_on_Preference_toggled",
-					[pref.prop_name, pref.default_value, restore_default_button]
+					"toggled", self, "_on_Preference_value_changed", [pref, restore_default_button]
 				)
 			"value":
 				node.connect(
 					"value_changed",
 					self,
 					"_on_Preference_value_changed",
-					[pref.prop_name, pref.default_value, restore_default_button]
+					[pref, restore_default_button]
 				)
 			"color":
 				node.get_picker().presets_visible = false
 				node.connect(
 					"color_changed",
 					self,
-					"_on_Preference_color_changed",
-					[pref.prop_name, pref.default_value, restore_default_button]
+					"_on_Preference_value_changed",
+					[pref, restore_default_button]
 				)
 			"selected":
 				node.connect(
 					"item_selected",
 					self,
-					"_on_Preference_item_selected",
-					[pref.prop_name, pref.default_value, restore_default_button]
+					"_on_Preference_value_changed",
+					[pref, restore_default_button]
 				)
 
+		var global_value = Global.get(pref.prop_name)
 		if Global.config_cache.has_section_key("preferences", pref.prop_name):
 			var value = Global.config_cache.get_value("preferences", pref.prop_name)
 			Global.set(pref.prop_name, value)
 			node.set(pref.value_type, value)
+			global_value = Global.get(pref.prop_name)
 
-			var global_value = Global.get(pref.prop_name)
 			# This is needed because color_changed doesn't fire if the color changes in code
 			if pref.value_type == "color":
-				preference_update(pref.prop_name)
+				preference_update(pref.prop_name, pref.require_restart)
 				disable_restore_default_button(
 					restore_default_button, global_value.is_equal_approx(pref.default_value)
 				)
 			elif pref.value_type == "selected":
-				preference_update(pref.prop_name)
+				preference_update(pref.prop_name, pref.require_restart)
 				disable_restore_default_button(
 					restore_default_button, global_value == pref.default_value
 				)
+		else:
+			node.set(pref.value_type, global_value)
+			disable_restore_default_button(
+				restore_default_button, global_value == pref.default_value
+			)
 
 
-func _on_Preference_toggled(
-	button_pressed: bool, prop: String, default_value, restore_default_button: BaseButton
-) -> void:
-	Global.set(prop, button_pressed)
-	Global.config_cache.set_value("preferences", prop, button_pressed)
-	preference_update(prop)
-	disable_restore_default_button(restore_default_button, Global.get(prop) == default_value)
-
-
-func _on_Preference_value_changed(
-	value: float, prop: String, default_value, restore_default_button: BaseButton
-) -> void:
+func _on_Preference_value_changed(value, pref: Preference, restore_default: BaseButton) -> void:
+	var prop := pref.prop_name
+	var default_value = pref.default_value
 	Global.set(prop, value)
-	Global.config_cache.set_value("preferences", prop, value)
-	preference_update(prop)
-	disable_restore_default_button(restore_default_button, Global.get(prop) == default_value)
+	if not pref.require_restart:
+		Global.config_cache.set_value("preferences", prop, value)
+	preference_update(prop, pref.require_restart)
+	var disable: bool = Global.get(prop) == default_value
+	if typeof(value) == TYPE_COLOR:
+		disable = Global.get(prop).is_equal_approx(default_value)
+	disable_restore_default_button(restore_default, disable)
 
 
-func _on_Preference_color_changed(
-	color: Color, prop: String, default_value, restore_default_button: BaseButton
-) -> void:
-	Global.set(prop, color)
-	Global.config_cache.set_value("preferences", prop, color)
-	preference_update(prop)
-	disable_restore_default_button(
-		restore_default_button, Global.get(prop).is_equal_approx(default_value)
-	)
-
-
-func _on_Preference_item_selected(
-	id: int, prop: String, default_value, restore_default_button: BaseButton
-) -> void:
-	Global.set(prop, id)
-	Global.config_cache.set_value("preferences", prop, id)
-	preference_update(prop)
-	disable_restore_default_button(restore_default_button, Global.get(prop) == default_value)
-
-
-func preference_update(prop: String) -> void:
+func preference_update(prop: String, require_restart := false) -> void:
+	if require_restart:
+		must_restart.visible = true
+		return
 	if prop in ["autosave_interval", "enable_autosave"]:
 		OpenSave.update_autosave()
 		autosave_interval.editable = Global.enable_autosave

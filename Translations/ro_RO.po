@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2022-09-19 22:59\n"
+"PO-Revision-Date: 2023-03-08 12:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,8 +165,11 @@ msgstr "Centralizare imagine"
 msgid "Rotate Image"
 msgstr "Rotire imagine"
 
-msgid "Pivot (x, y):"
-msgstr "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr "Pivot x:"
+
+msgid "Pivot y:"
+msgstr "Pivot y:"
 
 msgid "Smear options:"
 msgstr "Animație prin efect de neclaritate:"
@@ -327,11 +330,14 @@ msgstr "Foaie cu grafice bidimensionale (strat nou)"
 msgid "New frame"
 msgstr "Cadru nou"
 
-msgid "Replace frame"
-msgstr "Înlocuire cadru"
+msgid "Replace cel"
+msgstr "Înlocuire cel"
 
 msgid "New layer"
 msgstr "Strat nou"
+
+msgid "New reference image"
+msgstr "Imagine de referință nouă"
 
 msgid "New palette"
 msgstr "Paletă nouă"
@@ -381,8 +387,10 @@ msgstr "Exportare grafic bidimensional"
 msgid "File Exists, Overwrite?"
 msgstr "Fișierul există deja. Suprascrii?"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "Fișierul %s există deja. Suprascrii?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr "Următoarele fișiere există deja. Dorești să le suprascrii?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Calea directorului nu este validă!"
@@ -451,14 +459,31 @@ msgstr "Selectează dosarul actual"
 msgid "Open a Directory"
 msgstr "Deschide un director"
 
-msgid "All frames as multiple files"
-msgstr "Toate cadrele sub formă de fișiere multiple"
-
-msgid "All frames as a single file animation"
-msgstr "Toate cadrele sub formă de animație într-un singur fișier"
-
 msgid "Background:"
 msgstr "Fundal:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr "Cadre selectate"
+
+msgid "Layers:"
+msgstr "Straturi:"
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr "Straturi vizibile"
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr "Straturi selectate"
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr "Strat de pixeli:"
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr "Strat de grup:"
 
 msgid "Direction:"
 msgstr "Direcție:"
@@ -484,6 +509,10 @@ msgstr "Rânduri"
 msgid "Rows:"
 msgstr "Rânduri:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr "Dimensiuni de export:"
+
 msgid "Path:"
 msgstr "Cale:"
 
@@ -495,6 +524,10 @@ msgstr "Creare dosar"
 
 msgid "File:"
 msgstr "Fișier:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr "Opțiuni avansate"
 
 msgid "Interpolation:"
 msgstr "Interpolare:"
@@ -544,6 +577,10 @@ msgstr "Copie de rezervă"
 msgid "Performance"
 msgstr "Performanță"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr "Drivere"
+
 msgid "Extensions"
 msgstr "Extensii"
 
@@ -552,6 +589,10 @@ msgstr "Cursoare"
 
 msgid "Indicators"
 msgstr "Indicatori"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr "Pixelorama trebuie repornit pentru ca setările să aibă efect."
 
 msgid "On"
 msgstr "Pornit"
@@ -717,23 +758,30 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr "Dacă această opțiune este activată, ultimul punct este adăugat la sfârșitul degradeului.\n"
 "Dezactivează opțiunea dacă dorești să convertești degradeul pentru a avea interpolare constantă, astfel încât să fie luată în considerare ultima culoare."
 
+msgid "Shape:"
+msgstr "Formă:"
+
 msgid "Linear"
 msgstr "Liniar"
 
 msgid "Radial"
 msgstr "Radial"
 
-msgid "Linear Step"
-msgstr "Pas liniar"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
+msgstr "Repetare:"
 
-msgid "Radial Step"
-msgstr "Pas radial"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
+msgstr "Repetare"
 
-msgid "Linear Dithering"
-msgstr "Intercalare liniară a nuanțelor"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
+msgstr "Oglindire"
 
-msgid "Radial Dithering"
-msgstr "Intercalare radială a nuanțelor"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
+msgstr "Trunchiere"
 
 msgid "Transition size:"
 msgstr "Dimensiunea tranziției:"
@@ -932,6 +980,9 @@ msgstr "Sârbă (alfabet chirilic)"
 
 msgid "Dutch"
 msgstr "Neerlandeză"
+
+msgid "Belarusian"
+msgstr "Belarusă"
 
 msgid "Development Team"
 msgstr "Echipa de dezvoltare"
@@ -1326,6 +1377,22 @@ msgstr "Setează limita de cadre pe secundă a aplicației. Cu cât numărul est
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Dacă această opțiune este activată, în momentul în care fereastra aplicației pierde focalizarea, aceasta este întreruptă. Acest lucru ajută la reducerea utilizării procesorului pe durata perioadei de inactivitate. Aplicația își reia activitatea atunci când mausul intră în fereastra aplicației."
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr "Randator:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr "Specifică randatorul/driverul video utilizat. GLES2 este mai bun pentru dispozitivele mai vechi și cu o performanță mai redusă, dar GLES3 poate oferi mai multe caracteristici."
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr "Driver tabletă:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr "Specifică driverul tabletei utilizat pe Windows. Dacă ai Windows Ink activat, selectează winink."
+
 msgid "Add Extension"
 msgstr "Adăugare extensie"
 
@@ -1410,9 +1477,11 @@ msgstr "Selecția completă"
 msgid "Fill with:"
 msgstr "Umplere cu:"
 
-msgid "Selected Color"
-msgstr "Culoarea selectată"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr "Culoare selectată"
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Model"
 
@@ -1609,11 +1678,11 @@ msgstr "Deplasare la dreapta"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cel"
-msgstr "Conectare cel"
+msgid "Link Cels to"
+msgstr "Conectare celuri la"
 
-msgid "Unlink Cel"
-msgstr "Deconectare cel"
+msgid "Unlink Cels"
+msgstr "Deconectare celuri"
 
 msgid "Frame Properties"
 msgstr "Proprietățile cadrului"
@@ -1624,11 +1693,17 @@ msgstr "Proprietățile cadrului"
 msgid "Layer"
 msgstr "Strat"
 
+msgid "Group"
+msgstr "Grup"
+
 msgid "Layers"
 msgstr "Straturi"
 
 msgid "Create a new layer"
 msgstr "Creează un strat nou"
+
+msgid "Create a new group layer"
+msgstr "Creează un nou strat de grup"
 
 msgid "Remove current layer"
 msgstr "Elimină stratul actual"
@@ -1660,10 +1735,13 @@ msgstr "Blochează/deblochează stratul"
 msgid "Frame: %s, Layer: %s"
 msgstr "Cadru: %s, strat: %s"
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
-msgstr "Activează/dezactivează conectarea celurilor\n\n"
-"Celurile conectate sunt distribuite pe mai multe cadre"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr "Activează/dezactivează automat conectarea de celuri noi la crearea de cadre noi\n\n"
+"Celurile conectate împărtășesc conținut între mai multe cadre"
+
+msgid "Expand/collapse group"
+msgstr "Extindere/restrânge grup"
 
 msgid "Palette"
 msgstr "Paletă"
@@ -1995,11 +2073,13 @@ msgstr "Interval de autosalvare:"
 msgid "minute(s)"
 msgstr "minut(e)"
 
-msgid "Create new directory for each frame tag"
-msgstr "Creează un director nou pentru fiecare etichetă de cadru"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr "Creează un dosar nou pentru fiecare etichetă de cadru"
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Creează mai multe fișiere, dar fiecare fișier este stocat în alt director care corespunde cu eticheta de cadru a acestuia"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr "Creează mai multe fișiere, dar fiecare fișier este stocat în alt dosar care corespunde cu eticheta de cadru a acestuia"
 
 msgid "Close"
 msgstr "Închide"
@@ -2026,9 +2106,6 @@ msgstr "Nu poți elimina mai multe palete!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Paleta nu poate fi eliminată, deoarece nu există!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "A apărut o eroare la ștergerea paletei! Cod de eroare: %s"
 
 msgid "and"
 msgstr "și"
@@ -2116,4 +2193,7 @@ msgstr "Opțiuni pentru instrumentul din stânga"
 
 msgid "Right Tool Options"
 msgstr "Opțiuni pentru instrumentul din dreapta"
+
+msgid "Reference Images"
+msgstr "Imagini de referință"
 

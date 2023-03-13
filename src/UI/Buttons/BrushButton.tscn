@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/Buttons/BrushButton.gd" type="Script" id=2]
+
+[node name="BrushButton" type="Button"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+button_mask = 7
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="TransparentChecker" parent="." instance=ExtResource( 1 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+
+[node name="BrushTexture" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+rect_min_size = Vector2( 32, 32 )
+expand = true
+stretch_mode = 6
+
+[node name="DeleteButton" type="Button" parent="."]
+visible = false
+modulate = Color( 1, 0.00392157, 0.00392157, 0.878431 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -12.0
+margin_top = 2.0
+margin_right = 8.0
+margin_bottom = 22.0
+rect_scale = Vector2( 0.5, 0.5 )
+text = "X"
+
+[connection signal="mouse_entered" from="." to="." method="_on_BrushButton_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_BrushButton_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_BrushButton_pressed"]
+[connection signal="mouse_entered" from="DeleteButton" to="." method="_on_BrushButton_mouse_entered"]
+[connection signal="mouse_exited" from="DeleteButton" to="." method="_on_BrushButton_mouse_exited"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_DeleteButton_pressed"]

@@ -2,8 +2,6 @@ tool
 extends Container
 # Control that mimics its own visibility and rect into another Control.
 
-signal moved_in_parent(control)
-
 var reference_to: Control setget set_reference_to, get_reference_to
 
 var _reference_to: Control = null
@@ -30,11 +28,11 @@ func set_reference_to(control: Control) -> void:
 			_reference_to.disconnect("renamed", self, "_on_reference_to_renamed")
 			_reference_to.disconnect("minimum_size_changed", self, "minimum_size_changed")
 		_reference_to = control
-		_reference_to.connect("minimum_size_changed", self, "minimum_size_changed")
 		minimum_size_changed()
 		if not _reference_to:
 			return
 		_reference_to.connect("renamed", self, "_on_reference_to_renamed")
+		_reference_to.connect("minimum_size_changed", self, "minimum_size_changed")
 		_reference_to.visible = visible
 
 

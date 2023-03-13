@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "שם קובץ:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "שם הפרויקט:"
 
 msgid "Image Size"
 msgstr "גודל תמונה"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "גודל פריים"
 
 msgid "Size:"
-msgstr ""
+msgstr "גודל:"
 
 msgid "Width:"
 msgstr "רוחב:"
@@ -61,13 +61,13 @@ msgid "Edit"
 msgstr "עריכה"
 
 msgid "Select"
-msgstr ""
+msgstr "בחירה"
 
 msgid "View"
 msgstr "תצוגה"
 
 msgid "Window"
-msgstr ""
+msgstr "חלון"
 
 msgid "Image"
 msgstr "תמונה"
@@ -130,19 +130,19 @@ msgid "Copy"
 msgstr "העתק"
 
 msgid "Cut"
-msgstr ""
+msgstr "גזירה"
 
 msgid "Paste"
 msgstr "הדבק"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "הדבקה במקום"
 
 msgid "Delete"
 msgstr "מחק"
 
 msgid "New Brush"
-msgstr ""
+msgstr "מברשת חדשה"
 
 msgid "Scale Image"
 msgstr "הגדל/ הקטן תמונה"
@@ -151,7 +151,7 @@ msgid "Pixels"
 msgstr "פיקסלים"
 
 msgid "Percentage"
-msgstr ""
+msgstr "אחוזים"
 
 msgid "Crop Image"
 msgstr "חתוך תמונה"
@@ -165,7 +165,10 @@ msgstr ""
 msgid "Rotate Image"
 msgstr "סובב תמונה"
 
-msgid "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
 msgstr ""
 
 msgid "Smear options:"
@@ -181,7 +184,7 @@ msgid "Clear"
 msgstr ""
 
 msgid "Invert"
-msgstr ""
+msgstr "היפוך"
 
 msgid "Grayscale View"
 msgstr ""
@@ -220,7 +223,7 @@ msgid "Tile Mask"
 msgstr ""
 
 msgid "Reset"
-msgstr ""
+msgstr "איפוס"
 
 msgid "Use Current Frame"
 msgstr ""
@@ -229,10 +232,10 @@ msgid "Reset Mask"
 msgstr ""
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "אטימות חלון"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "אטימות חלון אינה עובדת במצב מסך מלא."
 
 msgid "Panel Layout"
 msgstr ""
@@ -250,7 +253,7 @@ msgid "Manage Layouts"
 msgstr ""
 
 msgid "Add"
-msgstr ""
+msgstr "הוספה"
 
 msgid "Add Layout"
 msgstr ""
@@ -262,7 +265,7 @@ msgid "Are you sure you want to delete this layout?"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
+msgstr "אוטומטי"
 
 msgid "Widescreen"
 msgstr ""
@@ -304,7 +307,7 @@ msgid "Open File(s)"
 msgstr ""
 
 msgid "Import Options"
-msgstr ""
+msgstr "ייבוא אפשרויות"
 
 msgid "Import as:"
 msgstr ""
@@ -327,10 +330,13 @@ msgstr ""
 msgid "New frame"
 msgstr ""
 
-msgid "Replace frame"
+msgid "Replace cel"
 msgstr ""
 
 msgid "New layer"
+msgstr ""
+
+msgid "New reference image"
 msgstr ""
 
 msgid "New palette"
@@ -352,19 +358,19 @@ msgid "Start frame:"
 msgstr ""
 
 msgid "At frame:"
-msgstr ""
+msgstr "בפריים:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "בשכבה:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "סוג מברשת:"
 
 msgid "File brush"
-msgstr ""
+msgstr "מברשת קובץ"
 
 msgid "Project brush"
-msgstr ""
+msgstr "מברשת פרויקט"
 
 msgid "Random brush"
 msgstr "מברשת אקראית"
@@ -381,7 +387,8 @@ msgstr ""
 msgid "File Exists, Overwrite?"
 msgstr "הקובץ קיים. להחליף?"
 
-msgid "File %s already exists. Overwrite?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
 msgstr ""
 
 msgid "Directory path is not valid!"
@@ -408,100 +415,125 @@ msgid "Can't load file '%s'.\n"
 msgstr ""
 
 msgid "Frame"
-msgstr ""
+msgstr "פריים"
 
 msgid "Frames:"
-msgstr ""
+msgstr "פריימים:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "כל הפריימים"
 
 msgid "Spritesheet"
 msgstr ""
 
 msgid "Animation"
-msgstr ""
+msgstr "אנימציה"
 
 msgid "Preview:"
-msgstr ""
+msgstr "תצוגה מקדימה:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "פריים:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "כיוון:"
 
 msgid "Browse"
-msgstr ""
+msgstr "עיון"
 
 msgid "Resize:"
-msgstr ""
+msgstr "שינוי גודל:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "ביטול ייצוא"
 
 msgid "Alert!"
-msgstr ""
+msgstr "התראה!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "בחירת התיקייה הנוכחית"
 
 msgid "Open a Directory"
-msgstr ""
-
-msgid "All frames as multiple files"
-msgstr ""
-
-msgid "All frames as a single file animation"
-msgstr ""
+msgstr "פתיחת תיקייה"
 
 msgid "Background:"
+msgstr "רקע:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr ""
+
+msgid "Layers:"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr ""
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr ""
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
 msgstr ""
 
 msgid "Direction:"
-msgstr ""
+msgstr "כיוון:"
 
 msgid "Forward"
-msgstr ""
+msgstr "קדימה"
 
 msgid "Backwards"
-msgstr ""
+msgstr "אחורה"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "פינג-פונג"
 
 msgid "Columns"
-msgstr ""
+msgstr "עמודות"
 
 msgid "Columns:"
-msgstr ""
+msgstr "עמודות:"
 
 msgid "Rows"
-msgstr ""
+msgstr "שורות"
 
 msgid "Rows:"
+msgstr "שורות:"
+
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
 msgstr ""
 
 msgid "Path:"
-msgstr ""
+msgstr "נתיב:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "תיקיות וקבצים:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "יצירת תיקייה"
 
 msgid "File:"
+msgstr "קובץ:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
 msgstr ""
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "אינטרפולציה:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "הקרוב ביותר"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "ביליניארי"
 
 msgid "Cubic"
 msgstr ""
@@ -542,6 +574,10 @@ msgstr ""
 msgid "Performance"
 msgstr ""
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr ""
+
 msgid "Extensions"
 msgstr ""
 
@@ -549,6 +585,10 @@ msgid "Cursors"
 msgstr ""
 
 msgid "Indicators"
+msgstr ""
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
 msgstr ""
 
 msgid "On"
@@ -615,31 +655,31 @@ msgid "Icon color from:"
 msgstr ""
 
 msgid "Icon color:"
-msgstr ""
+msgstr "צבע הסמל:"
 
 msgid "Background"
-msgstr ""
+msgstr "רקע"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "צבע רקע מ:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "צבע רקע:"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "צבע כלי שמאלי:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "צבע כלי ימני:"
 
 msgid "Tool button size:"
-msgstr ""
+msgstr "גודל כפתורי כלים:"
 
 msgid "Small"
-msgstr ""
+msgstr "קטן"
 
 msgid "Big"
-msgstr ""
+msgstr "גדול"
 
 msgid "Only affect selection"
 msgstr ""
@@ -651,16 +691,16 @@ msgid "Current cel"
 msgstr ""
 
 msgid "Current frame"
-msgstr ""
+msgstr "פריים נוכחי"
 
 msgid "All frames"
-msgstr ""
+msgstr "כל הפריימים"
 
 msgid "All projects"
-msgstr ""
+msgstr "כל הפרויקטים"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "היפוך צבעים"
 
 msgid "Modify Red Channel"
 msgstr ""
@@ -678,10 +718,10 @@ msgid "Desaturation"
 msgstr ""
 
 msgid "Outline"
-msgstr ""
+msgstr "קו מתאר"
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "הצללה"
 
 msgid "Offset X:"
 msgstr ""
@@ -690,7 +730,7 @@ msgid "Offset Y:"
 msgstr ""
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "צבע צל:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
@@ -714,32 +754,39 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
-msgid "Linear"
+msgid "Shape:"
 msgstr ""
+
+msgid "Linear"
+msgstr "קווי"
 
 msgid "Radial"
+msgstr "מעגלי"
+
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
 msgstr ""
 
-msgid "Linear Step"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
 msgstr ""
 
-msgid "Radial Step"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
 msgstr ""
 
-msgid "Linear Dithering"
-msgstr ""
-
-msgid "Radial Dithering"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
 msgstr ""
 
 msgid "Transition size:"
 msgstr ""
 
 msgid "Center:"
-msgstr ""
+msgstr "מרכז:"
 
 msgid "Radius:"
-msgstr ""
+msgstr "רדיוס:"
 
 msgid "Dithering pattern:"
 msgstr ""
@@ -748,10 +795,10 @@ msgid "Adjust HSV"
 msgstr ""
 
 msgid "Type:"
-msgstr ""
+msgstr "סוג:"
 
 msgid "Angle:"
-msgstr ""
+msgstr "זווית:"
 
 msgid "Hue:"
 msgstr ""
@@ -835,103 +882,106 @@ msgid "Contributors"
 msgstr ""
 
 msgid "Donors"
-msgstr ""
+msgstr "תורמות ותורמים"
 
 msgid "Translators"
 msgstr ""
 
 msgid "Licenses"
-msgstr ""
+msgstr "רשיונות"
 
 msgid "English"
-msgstr ""
+msgstr "אנגלית"
 
 msgid "Greek"
-msgstr ""
+msgstr "יוונית"
 
 msgid "French"
-msgstr ""
+msgstr "צרפתית"
 
 msgid "German"
-msgstr ""
+msgstr "גרמנית"
 
 msgid "Polish"
-msgstr ""
+msgstr "פולנית"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "פורטוגזית"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "פורטוגזית ברזילאית"
 
 msgid "Russian"
-msgstr ""
+msgstr "רוסית"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "סינית מופשטת"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "סינית מסורתית"
 
 msgid "Italian"
-msgstr ""
+msgstr "איטלקית"
 
 msgid "Latvian"
-msgstr ""
+msgstr "לטבית"
 
 msgid "Spanish"
-msgstr ""
+msgstr "ספרדית"
 
 msgid "Catalan"
-msgstr ""
+msgstr "קטלאנית"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "אספרנטו"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "אינדונזית"
 
 msgid "Czech"
-msgstr ""
+msgstr "צ'כית"
 
 msgid "Arabic"
-msgstr ""
+msgstr "ערבית"
 
 msgid "Turkish"
-msgstr ""
+msgstr "טורקית"
 
 msgid "Norwegian Bokmål"
 msgstr ""
 
 msgid "Korean"
-msgstr ""
+msgstr "קוריאנית"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "הונגרית"
 
 msgid "Romanian"
-msgstr ""
+msgstr "רומנית"
 
 msgid "Japanese"
-msgstr ""
+msgstr "יפנית"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "אוקראינית"
 
 msgid "Danish"
-msgstr ""
+msgstr "דנית"
 
 msgid "Swedish"
-msgstr ""
+msgstr "שוודית"
 
 msgid "Serbian (Cyrillic)"
 msgstr ""
 
 msgid "Dutch"
+msgstr "הולנדית"
+
+msgid "Belarusian"
 msgstr ""
 
 msgid "Development Team"
-msgstr ""
+msgstr "קבוצת פיתוח"
 
 msgid "Lead Programmer"
 msgstr ""
@@ -946,44 +996,48 @@ msgid "Art by: %s"
 msgstr ""
 
 msgid "untitled"
-msgstr ""
+msgstr "ללא כותרת"
 
 msgid "imported"
-msgstr ""
+msgstr "מיובא"
 
 msgid "copy"
-msgstr ""
+msgstr "העתק"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "האם את/ה בטוח/ה שברצונך לצאת מ-Pixelorama?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "תמונה לא שמורה"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
 msgstr ""
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "לשמור לפני יציאה?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
 msgstr ""
 
 msgid "Save & Exit"
-msgstr ""
+msgstr "שמירה ויציאה"
 
 msgid "Exit without saving"
-msgstr ""
+msgstr "יציאה ללא שמירה"
 
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "סימון ריבועי\n\n"
+"%s לכפתור עכבר שמאלי\n"
+"%s לכפתור עכבר ימני"
 
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "סימון אליפטי\n\n"
+"%s לכפתור עכבר שמאלי\n"
+"%s לכפתור עכבר ימני"
 
 msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
@@ -1153,7 +1207,7 @@ msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "הכל"
 
 msgid "Rectangular grid width:"
 msgstr ""
@@ -1219,7 +1273,7 @@ msgid "A color of the pixel grid"
 msgstr ""
 
 msgid "Transparency"
-msgstr ""
+msgstr "שקיפות"
 
 msgid "Checker size:"
 msgstr ""
@@ -1275,6 +1329,22 @@ msgstr ""
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr ""
+
 msgid "Add Extension"
 msgstr ""
 
@@ -1285,19 +1355,19 @@ msgid "Disable"
 msgstr ""
 
 msgid "Uninstall"
-msgstr ""
+msgstr "הסרת התקנה"
 
 msgid "Open Folder"
-msgstr ""
+msgstr "פתיחת תיקייה"
 
 msgid "Brush:"
-msgstr ""
+msgstr "מברשת:"
 
 msgid "Select a brush"
-msgstr ""
+msgstr "בחירת מברשת"
 
 msgid "Pixel brush"
-msgstr ""
+msgstr "מברשת פיקסל"
 
 msgid "Circle brush"
 msgstr ""
@@ -1321,51 +1391,53 @@ msgid "Pixel Perfect"
 msgstr ""
 
 msgid "Fill inside"
-msgstr ""
+msgstr "מילוי בפנים"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
 msgstr ""
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "מילוי צורה"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "ממלא את הצורה המצוירת בצבע, במקום לצייר צורה חלולה"
 
 msgid "Brush color from"
-msgstr ""
+msgstr "צבע מברשת מ"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: צבע מהמברשת עצמה, 100: הצבע המסומן"
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "מילוי אזור:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "אזורים דומים"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "צבעים דומים"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
 msgstr ""
 
 msgid "Fill with:"
-msgstr ""
+msgstr "מילוי עם:"
 
-msgid "Selected Color"
-msgstr ""
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr "הצבע הנבחר"
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
-msgstr ""
+msgstr "תבנית"
 
 msgid "Offset"
-msgstr ""
+msgstr "הסטה"
 
 msgid "Simple Shading"
 msgstr ""
@@ -1380,7 +1452,7 @@ msgid "Darken"
 msgstr ""
 
 msgid "Amount:"
-msgstr ""
+msgstr "כמות:"
 
 msgid "Lighten/Darken amount"
 msgstr ""
@@ -1389,34 +1461,34 @@ msgid "Pick for:"
 msgstr ""
 
 msgid "Left Color"
-msgstr ""
+msgstr "צבע שמאלי"
 
 msgid "Right Color"
-msgstr ""
+msgstr "צבע ימני"
 
 msgid "Mode:"
-msgstr ""
+msgstr "מצב:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "התקרבות"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "התרחקות"
 
 msgid "Options:"
-msgstr ""
+msgstr "אפשרויות:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "התאמה לפריים"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "זום 100%"
 
 msgid "Mirroring"
 msgstr ""
 
 msgid "Horizontal"
-msgstr ""
+msgstr "אופקי"
 
 msgid "Enable horizontal mirrored drawing"
 msgstr ""
@@ -1425,34 +1497,40 @@ msgid "Enable vertical mirrored drawing"
 msgstr ""
 
 msgid "Vertical"
-msgstr ""
+msgstr "אנכי"
 
 msgid "Current frame:"
-msgstr ""
+msgstr "פריים נוכחי:"
 
 msgid "Jump to the first frame\n"
 "(%s)"
-msgstr ""
+msgstr "קפיצה לפריים הראשון\n"
+"(%s)"
 
 msgid "Go to the previous frame\n"
 "(%s)"
-msgstr ""
+msgstr "מעבר לפריים הקודם\n"
+"(%s)"
 
 msgid "Play the animation backwards (from end to beginning)\n"
 "(%s)"
-msgstr ""
+msgstr "ניגון האנימציה לאחור (מהסוף להתחלה)\n"
+"(%s)"
 
 msgid "Play the animation forward (from beginning to end)\n"
 "(%s)"
-msgstr ""
+msgstr "ניגון האנימציה קדימה (מההתחלה לסוף)\n"
+"(%s)"
 
 msgid "Go to the next frame\n"
 "(%s)"
-msgstr ""
+msgstr "מעבר לפריים הבא\n"
+"(%s)"
 
 msgid "Jump to the last frame\n"
 "(%s)"
-msgstr ""
+msgstr "קפיצה לפריים האחרון\n"
+"(%s)"
 
 msgid "Onion Skinning settings"
 msgstr ""
@@ -1462,7 +1540,8 @@ msgstr ""
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr ""
+msgstr "בכמה פריימים לשנייה התצוגה המקדימה לאנימציה אמורה להתנגן?\n"
+"ככל שיש יותר פריימים לשנייה, האנימציה תתנגן מהר יותר."
 
 msgid "No loop"
 msgstr ""
@@ -1549,10 +1628,10 @@ msgstr ""
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cel"
+msgid "Link Cels to"
 msgstr ""
 
-msgid "Unlink Cel"
+msgid "Unlink Cels"
 msgstr ""
 
 msgid "Frame Properties"
@@ -1564,10 +1643,16 @@ msgstr ""
 msgid "Layer"
 msgstr ""
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr ""
 
 msgid "Create a new layer"
+msgstr ""
+
+msgid "Create a new group layer"
 msgstr ""
 
 msgid "Remove current layer"
@@ -1580,13 +1665,13 @@ msgid "Move down the current layer"
 msgstr ""
 
 msgid "Clone current layer"
-msgstr ""
+msgstr "שכפול השכבה הנוכחית"
 
 msgid "Merge current layer with the one below"
-msgstr ""
+msgstr "איחוד השכבה הנוכחית עם השכבה מתחת"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "אטימות:"
 
 msgid "Tile mode opacity:"
 msgstr ""
@@ -1600,8 +1685,11 @@ msgstr ""
 msgid "Frame: %s, Layer: %s"
 msgstr ""
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr ""
+
+msgid "Expand/collapse group"
 msgstr ""
 
 msgid "Palette"
@@ -1734,7 +1822,7 @@ msgid "Palette Name:"
 msgstr ""
 
 msgid "Color Name:"
-msgstr ""
+msgstr "שם צבע:"
 
 msgid "Use current left & right colors"
 msgstr ""
@@ -1934,10 +2022,12 @@ msgstr ""
 msgid "minute(s)"
 msgstr ""
 
-msgid "Create new directory for each frame tag"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
 msgstr ""
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 msgstr ""
 
 msgid "Close"
@@ -1963,9 +2053,6 @@ msgid "You can't remove more palettes!"
 msgstr ""
 
 msgid "Cannot remove the palette, because it doesn't exist!"
-msgstr ""
-
-msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 
 msgid "and"
@@ -2053,5 +2140,8 @@ msgid "Left Tool Options"
 msgstr ""
 
 msgid "Right Tool Options"
+msgstr ""
+
+msgid "Reference Images"
 msgstr ""
 

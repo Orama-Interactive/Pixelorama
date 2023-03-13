@@ -1,8 +1,11 @@
 extends ImageEffect
 
+enum { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, URD }
+
 var live_preview: bool = true
 var rotxel_shader: Shader
-var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeightbour.shader")
+var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeighbour.shader")
+var clean_edge_shader: Shader = DrawingAlgos.clean_edge_shader
 var pivot := Vector2.INF
 var drag_pivot := false
 
@@ -19,14 +22,16 @@ onready var wait_time_slider: ValueSlider = $VBoxContainer/WaitTime
 
 
 func _ready() -> void:
-	# Algorithms are arranged according to their speed
-	if OS.get_name() != "HTML5":
-		type_option_button.add_item("Rotxel with Smear")
+	if not _is_webgl1():
+		type_option_button.add_item("Rotxel with Smear", ROTXEL_SMEAR)
 		rotxel_shader = load("res://src/Shaders/Rotation/SmearRotxel.shader")
-	type_option_button.add_item("Nearest neighbour (Shader)")
-	type_option_button.add_item("Nearest neighbour")
-	type_option_button.add_item("Rotxel")
-	type_option_button.add_item("Upscale, Rotate and Downscale")
+	type_option_button.add_item("cleanEdge", CLEANEDGE)
+	type_option_button.add_item("OmniScale", OMNISCALE)
+	type_option_button.set_item_disabled(OMNISCALE, not DrawingAlgos.omniscale_shader)
+	type_option_button.add_item("Nearest neighbour (Shader)", NNS)
+	type_option_button.add_item("Nearest neighbour", NN)
+	type_option_button.add_item("Rotxel", ROTXEL)
+	type_option_button.add_item("Upscale, Rotate and Downscale", URD)
 	type_option_button.emit_signal("item_selected", 0)
 
 
@@ -39,19 +44,23 @@ func set_nodes() -> void:
 func _about_to_show() -> void:
 	drag_pivot = false
 	if pivot == Vector2.INF:
-		decide_pivot()
+		_calculate_pivot()
 	confirmed = false
 	._about_to_show()
 	wait_apply_timer.wait_time = wait_time_slider.value / 1000.0
 	angle_slider.value = 0
 
 
-func decide_pivot() -> void:
+func _calculate_pivot() -> void:
 	var size := Global.current_project.size
 	pivot = size / 2
 
 	# Pivot correction in case of even size
-	if type_option_button.text != "Nearest neighbour (Shader)":
+	if (
+		type_option_button.get_selected_id() != NNS
+		and type_option_button.get_selected_id() != CLEANEDGE
+		and type_option_button.get_selected_id() != OMNISCALE
+	):
 		if int(size.x) % 2 == 0:
 			pivot.x -= 0.5
 		if int(size.y) % 2 == 0:
@@ -63,7 +72,11 @@ func decide_pivot() -> void:
 			selection_rectangle.position
 			+ ((selection_rectangle.end - selection_rectangle.position) / 2)
 		)
-		if type_option_button.text != "Nearest neighbour (Shader)":
+		if (
+			type_option_button.get_selected_id() != NNS
+			and type_option_button.get_selected_id() != CLEANEDGE
+			and type_option_button.get_selected_id() != OMNISCALE
+		):
 			# Pivot correction in case of even size
 			if int(selection_rectangle.end.x - selection_rectangle.position.x) % 2 == 0:
 				pivot.x -= 0.5
@@ -101,8 +114,8 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 						cel.set_pixelv(pos, Color(0, 0, 0, 0))
 			image.unlock()
 			cel.unlock()
-	match type_option_button.text:
-		"Rotxel with Smear":
+	match type_option_button.get_selected_id():
+		ROTXEL_SMEAR:
 			var params := {
 				"initial_angle": init_angle_slider.value,
 				"ending_angle": angle_slider.value,
@@ -119,7 +132,41 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				gen.generate_image(cel, rotxel_shader, params, _project.size)
 				yield(gen, "done")
 
-		"Nearest neighbour (Shader)":
+		CLEANEDGE:
+			var params := {
+				"angle": angle,
+				"selection_tex": selection_tex,
+				"selection_pivot": pivot,
+				"selection_size": selection_size,
+				"slope": true,
+				"cleanup": false,
+				"preview": true
+			}
+			if !confirmed:
+				for param in params:
+					preview.material.set_shader_param(param, params[param])
+			else:
+				params["preview"] = false
+				var gen := ShaderImageEffect.new()
+				gen.generate_image(cel, clean_edge_shader, params, _project.size)
+				yield(gen, "done")
+		OMNISCALE:
+			var params := {
+				"angle": angle,
+				"selection_tex": selection_tex,
+				"selection_pivot": pivot,
+				"selection_size": selection_size,
+				"preview": true
+			}
+			if !confirmed:
+				for param in params:
+					preview.material.set_shader_param(param, params[param])
+			else:
+				params["preview"] = false
+				var gen := ShaderImageEffect.new()
+				gen.generate_image(cel, DrawingAlgos.omniscale_shader, params, _project.size)
+				yield(gen, "done")
+		NNS:
 			var params := {
 				"angle": angle,
 				"selection_tex": selection_tex,
@@ -133,11 +180,11 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				var gen := ShaderImageEffect.new()
 				gen.generate_image(cel, nn_shader, params, _project.size)
 				yield(gen, "done")
-		"Rotxel":
+		ROTXEL:
 			DrawingAlgos.rotxel(image, angle, pivot)
-		"Nearest neighbour":
+		NN:
 			DrawingAlgos.nn_rotate(image, angle, pivot)
-		"Upscale, Rotate and Downscale":
+		URD:
 			DrawingAlgos.fake_rotsprite(image, angle, pivot)
 
 	if _project.has_selection and selection_checkbox.pressed and !_type_is_shader():
@@ -147,26 +194,34 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 
 
 func _type_is_shader() -> bool:
-	return (
-		type_option_button.text == "Nearest neighbour (Shader)"
-		or type_option_button.text == "Rotxel with Smear"
-	)
+	return type_option_button.get_selected_id() <= NNS
 
 
 func _on_TypeOptionButton_item_selected(_id: int) -> void:
-	if type_option_button.text == "Rotxel with Smear":
-		var sm := ShaderMaterial.new()
-		sm.shader = rotxel_shader
-		preview.set_material(sm)
-		smear_options.visible = true
-	elif type_option_button.text == "Nearest neighbour (Shader)":
-		var sm := ShaderMaterial.new()
-		sm.shader = nn_shader
-		preview.set_material(sm)
-		smear_options.visible = false
-	else:
-		preview.set_material(null)
-		smear_options.visible = false
+	match type_option_button.get_selected_id():
+		ROTXEL_SMEAR:
+			var sm := ShaderMaterial.new()
+			sm.shader = rotxel_shader
+			preview.set_material(sm)
+			smear_options.visible = true
+		CLEANEDGE:
+			var sm := ShaderMaterial.new()
+			sm.shader = clean_edge_shader
+			preview.set_material(sm)
+			smear_options.visible = false
+		OMNISCALE:
+			var sm := ShaderMaterial.new()
+			sm.shader = DrawingAlgos.omniscale_shader
+			preview.set_material(sm)
+			smear_options.visible = false
+		NNS:
+			var sm := ShaderMaterial.new()
+			sm.shader = nn_shader
+			preview.set_material(sm)
+			smear_options.visible = false
+		_:
+			preview.set_material(null)
+			smear_options.visible = false
 	update_preview()
 
 
@@ -221,7 +276,7 @@ func _on_quick_change_angle_pressed(angle_value: int) -> void:
 
 
 func _on_Centre_pressed() -> void:
-	decide_pivot()
+	_calculate_pivot()
 
 
 func _on_Pivot_value_changed(value: float, is_x: bool) -> void:

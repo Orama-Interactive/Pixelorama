@@ -306,7 +306,7 @@ func _add_new_segment(y: int = 0) -> void:
 	_allegro_flood_segments.append(segment)
 
 
-# fill an horizontal segment around the specifid position, and adds it to the
+# fill an horizontal segment around the specified position, and adds it to the
 # list of segments filled. Returns the first x coordinate after the part of the
 # line that has been filled.
 func _flood_line_around_point(

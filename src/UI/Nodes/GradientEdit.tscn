@@ -47,12 +47,13 @@ margin_bottom = 696.0
 
 [node name="Label" type="Label" parent="InterpolationContainer"]
 margin_top = 3.0
-margin_right = 87.0
+margin_right = 638.0
 margin_bottom = 17.0
+size_flags_horizontal = 3
 text = "Interpolation:"
 
 [node name="InterpolationOptionButton" type="OptionButton" parent="InterpolationContainer"]
-margin_left = 91.0
+margin_left = 642.0
 margin_right = 1280.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
@@ -72,6 +73,7 @@ text = "Divide into equal parts"
 margin_top = 650.0
 margin_right = 200.0
 margin_bottom = 746.0
+rect_min_size = Vector2( 180, 63 )
 resizable = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DivideConfirmationDialog"]

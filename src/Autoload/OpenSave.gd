@@ -1,3 +1,4 @@
+# gdlint: ignore=max-public-methods
 extends Node
 
 var current_save_paths := []  # Array of strings
@@ -19,48 +20,56 @@ func _ready() -> void:
 	update_autosave()
 
 
-func handle_loading_files(files: PoolStringArray) -> void:
-	for file in files:
-		file = file.replace("\\", "/")
-		var file_ext: String = file.get_extension().to_lower()
-		if file_ext == "pxo":  # Pixelorama project file
-			open_pxo_file(file)
+func handle_loading_file(file: String) -> void:
+	file = file.replace("\\", "/")
+	var file_ext: String = file.get_extension().to_lower()
+	if file_ext == "pxo":  # Pixelorama project file
+		open_pxo_file(file)
 
-		elif file_ext == "tres":  # Godot resource file
-			var resource = load(file)
-			if resource is Palette:
-				Palettes.import_palette(resource, file.get_file())
-			else:
-				var file_name: String = file.get_file()
-				Global.error_dialog.set_text(tr("Can't load file '%s'.") % [file_name])
-				Global.error_dialog.popup_centered()
-				Global.dialog_open(true)
+	elif file_ext == "tres":  # Godot resource file
+		var resource = load(file)
+		if resource is Palette:
+			Palettes.import_palette(resource, file.get_file())
+		else:
+			var file_name: String = file.get_file()
+			Global.error_dialog.set_text(tr("Can't load file '%s'.") % [file_name])
+			Global.error_dialog.popup_centered()
+			Global.dialog_open(true)
 
-		elif file_ext == "gpl" or file_ext == "pal" or file_ext == "json":
-			Palettes.import_palette_from_path(file)
+	elif file_ext == "gpl" or file_ext == "pal" or file_ext == "json":
+		Palettes.import_palette_from_path(file)
 
-		elif file_ext in ["pck", "zip"]:  # Godot resource pack file
-			Global.preferences_dialog.extensions.install_extension(file)
+	elif file_ext in ["pck", "zip"]:  # Godot resource pack file
+		Global.preferences_dialog.extensions.install_extension(file)
 
-		elif file_ext == "shader" or file_ext == "gdshader":  # Godot shader file
-			var shader = load(file)
-			if !shader is Shader:
-				continue
-			var file_name: String = file.get_file().get_basename()
-			Global.control.find_node("ShaderEffect").change_shader(shader, file_name)
+	elif file_ext == "shader" or file_ext == "gdshader":  # Godot shader file
+		var shader = load(file)
+		if !shader is Shader:
+			return
+		var file_name: String = file.get_file().get_basename()
+		Global.control.find_node("ShaderEffect").change_shader(shader, file_name)
 
-		else:  # Image files
-			var image := Image.new()
-			var err := image.load(file)
-			if err != OK:  # An error occured
-				var file_name: String = file.get_file()
-				Global.error_dialog.set_text(
-					tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)]
-				)
-				Global.error_dialog.popup_centered()
-				Global.dialog_open(true)
-				continue
-			handle_loading_image(file, image)
+	else:  # Image files
+		# Attempt to load as APNG.
+		# Note that the APNG importer will *only* succeed for *animated* PNGs.
+		# This is intentional as still images should still act normally.
+		var apng_res := AImgIOAPNGImporter.load_from_file(file)
+		if apng_res[0] == null:
+			# No error - this is an APNG!
+			handle_loading_aimg(file, apng_res[1])
+			return
+		# Attempt to load as a regular image.
+		var image := Image.new()
+		var err := image.load(file)
+		if err != OK:  # An error occurred
+			var file_name: String = file.get_file()
+			Global.error_dialog.set_text(
+				tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)]
+			)
+			Global.error_dialog.popup_centered()
+			Global.dialog_open(true)
+			return
+		handle_loading_image(file, image)
 
 
 func handle_loading_image(file: String, image: Image) -> void:
@@ -71,6 +80,37 @@ func handle_loading_image(file: String, image: Image) -> void:
 	Global.control.add_child(preview_dialog)
 	preview_dialog.popup_centered()
 	Global.dialog_open(true)
+
+
+# For loading the output of AImgIO as a project
+func handle_loading_aimg(path: String, frames: Array) -> void:
+	var project := Project.new([], path.get_file(), frames[0].content.get_size())
+	project.layers.append(PixelLayer.new(project))
+	Global.projects.append(project)
+
+	# Determine FPS as 1, unless all frames agree.
+	project.fps = 1
+	var first_duration = frames[0].duration
+	var frames_agree = true
+	for v in frames:
+		var aimg_frame: AImgIOFrame = v
+		if aimg_frame.duration != first_duration:
+			frames_agree = false
+			break
+	if frames_agree and (first_duration > 0.0):
+		project.fps = 1.0 / first_duration
+	# Convert AImgIO frames to Pixelorama frames
+	for v in frames:
+		var aimg_frame: AImgIOFrame = v
+		var frame := Frame.new()
+		if not frames_agree:
+			frame.duration = aimg_frame.duration * project.fps
+		var content := aimg_frame.content
+		content.convert(Image.FORMAT_RGBA8)
+		frame.cels.append(PixelCel.new(content, 1))
+		project.frames.append(frame)
+
+	set_new_imported_tab(project, path)
 
 
 func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: bool = true) -> void:
@@ -149,13 +189,13 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 		# Set last opened project path and save
 		Global.config_cache.set_value("preferences", "last_project_path", path)
 		Global.config_cache.save("user://cache.ini")
-		Export.file_name = path.get_file().trim_suffix(".pxo")
-		Export.directory_path = path.get_base_dir()
-		new_project.directory_path = Export.directory_path
-		new_project.file_name = Export.file_name
-		Export.was_exported = false
-		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
-		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
+		new_project.directory_path = path.get_base_dir()
+		new_project.file_name = path.get_file().trim_suffix(".pxo")
+		new_project.was_exported = false
+		Global.top_menu_container.file_menu.set_item_text(
+			Global.FileMenu.SAVE, tr("Save") + " %s" % path.get_file()
+		)
+		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
 
 	save_project_to_recent_list(path)
 
@@ -170,8 +210,8 @@ func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> 
 	# In the above example, the major version would return "0",
 	# the minor version would return "7", the patch "10"
 	# and the status would return "beta"
-	var file_major_version = int(file_ver_splitted_numbers[0].replace("v", ""))
-	var file_minor_version = int(file_ver_splitted_numbers[1])
+	var file_major_version := int(file_ver_splitted_numbers[0].replace("v", ""))
+	var file_minor_version := int(file_ver_splitted_numbers[1])
 	var file_patch_version := 0
 
 	if file_ver_splitted_numbers.size() > 2:
@@ -397,9 +437,11 @@ func save_pxo_file(
 		Global.config_cache.set_value("preferences", "last_project_path", path)
 		Global.config_cache.save("user://cache.ini")
 		if !project.was_exported:
-			Export.file_name = path.get_file().trim_suffix(".pxo")
-			Export.directory_path = path.get_base_dir()
-		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
+			project.file_name = path.get_file().trim_suffix(".pxo")
+			project.directory_path = path.get_base_dir()
+		Global.top_menu_container.file_menu.set_item_text(
+			Global.FileMenu.SAVE, tr("Save") + " %s" % path.get_file()
+		)
 
 	save_project_to_recent_list(path)
 
@@ -504,16 +546,18 @@ func open_image_as_spritesheet_layer(
 		else:
 			cels.append(layer.new_empty_cel())
 
-	project.undo_redo.add_do_property(project, "current_frame", new_frames_size - 1)
-	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
 	project.undo_redo.add_do_method(project, "add_frames", frames, frame_indices)
 	project.undo_redo.add_do_method(project, "add_layers", [layer], [project.layers.size()], [cels])
+	project.undo_redo.add_do_method(
+		project, "change_cel", new_frames_size - 1, project.layers.size()
+	)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 
-	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
 	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
 	project.undo_redo.add_undo_method(project, "remove_frames", frame_indices)
+	project.undo_redo.add_undo_method(
+		project, "change_cel", project.current_frame, project.current_layer
+	)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
@@ -532,13 +576,13 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 			project.undo_redo.add_undo_property(cel, "image", cel.image)
 
 	project.undo_redo.add_do_property(project, "selected_cels", [])
-	project.undo_redo.add_do_property(project, "current_layer", layer_index)
-	project.undo_redo.add_do_property(project, "current_frame", frame_index)
+	project.undo_redo.add_do_method(project, "change_cel", frame_index, layer_index)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 
 	project.undo_redo.add_undo_property(project, "selected_cels", [])
-	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_method(
+		project, "change_cel", project.current_frame, project.current_layer
+	)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 
@@ -559,13 +603,13 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 	project.undo_redo.create_action("Add Frame")
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_do_method(project, "add_frames", [frame], [project.frames.size()])
-	project.undo_redo.add_do_property(project, "current_layer", layer_index)
-	project.undo_redo.add_do_property(project, "current_frame", project.frames.size())
+	project.undo_redo.add_do_method(project, "change_cel", project.frames.size(), layer_index)
 
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_undo_method(project, "remove_frames", [project.frames.size()])
-	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
-	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_method(
+		project, "change_cel", project.current_frame, project.current_layer
+	)
 	project.undo_redo.commit_action()
 
 
@@ -584,17 +628,36 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 		else:
 			cels.append(layer.new_empty_cel())
 
-	project.undo_redo.add_do_property(project, "current_layer", project.layers.size())
 	project.undo_redo.add_do_method(project, "add_layers", [layer], [project.layers.size()], [cels])
-	project.undo_redo.add_do_property(project, "current_frame", frame_index)
+	project.undo_redo.add_do_method(project, "change_cel", frame_index, project.layers.size())
 
-	project.undo_redo.add_undo_property(project, "current_layer", project.current_layer)
 	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
-	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_method(
+		project, "change_cel", project.current_frame, project.current_layer
+	)
 
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
+
+
+func import_reference_image_from_path(path: String) -> void:
+	var project: Project = Global.current_project
+	var ri := ReferenceImage.new()
+	ri.project = project
+	ri.deserialize({"image_path": path})
+	Global.canvas.add_child(ri)
+	project.change_project()
+
+
+# Useful for HTML5
+func import_reference_image_from_image(image: Image) -> void:
+	var project: Project = Global.current_project
+	var ri := ReferenceImage.new()
+	ri.project = project
+	ri.create_from_image(image)
+	Global.canvas.add_child(ri)
+	project.change_project()
 
 
 func set_new_imported_tab(project: Project, path: String) -> void:
@@ -617,9 +680,6 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 	project.was_exported = true
 	if path.get_extension().to_lower() == "png":
 		project.export_overwrite = true
-	Export.directory_path = directory_path
-	Export.file_name = file_name
-	Export.was_exported = true
 
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
@@ -684,7 +744,7 @@ func remove_backup_by_path(project_path: String, backup_path: String) -> void:
 
 func reload_backup_file(project_paths: Array, backup_paths: Array) -> void:
 	assert(project_paths.size() == backup_paths.size())
-	# Clear non-existant backups
+	# Clear non-existent backups
 	var existing_backups_count := 0
 	var dir := Directory.new()
 	for i in range(backup_paths.size()):

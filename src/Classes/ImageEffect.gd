@@ -1,5 +1,5 @@
 class_name ImageEffect
-extends AcceptDialog
+extends ConfirmationDialog
 # Parent class for all image effects
 # Methods that have "pass" are meant to be replaced by the inherited Scripts
 
@@ -18,6 +18,8 @@ var confirmed := false
 
 func _ready() -> void:
 	set_nodes()
+	get_ok().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	get_cancel().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	current_frame.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
@@ -42,7 +44,7 @@ func _about_to_show() -> void:
 	Export.blend_selected_cels(selected_cels, frame)
 	current_frame.resize(Global.current_project.size.x, Global.current_project.size.y)
 	current_frame.fill(Color(0, 0, 0, 0))
-	Export.blend_layers(current_frame, frame)
+	Export.blend_all_layers(current_frame, frame)
 	update_preview()
 	update_transparent_background_size()
 
@@ -176,3 +178,7 @@ func update_transparent_background_size() -> void:
 
 func _popup_hide() -> void:
 	Global.dialog_open(false)
+
+
+func _is_webgl1() -> bool:
+	return OS.get_name() == "HTML5" and OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2

@@ -130,7 +130,7 @@ func _on_LoadMask_pressed() -> void:
 	var size = tiles.tile_size
 	var image := Image.new()
 	image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-	Export.blend_layers(image, current_frame)
+	Export.blend_all_layers(image, current_frame)
 	if image.get_used_rect().size == Vector2.ZERO:
 		reset_mask.disabled = true
 		tiles.reset_mask()

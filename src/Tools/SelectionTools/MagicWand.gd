@@ -7,6 +7,7 @@ var _allegro_image_segments: Array
 
 
 func apply_selection(position: Vector2) -> void:
+	.apply_selection(position)
 	var project: Project = Global.current_project
 	var size: Vector2 = project.size
 	if position.x < 0 or position.y < 0 or position.x >= size.x or position.y >= size.y:
@@ -56,7 +57,7 @@ func _add_new_segment(y: int = 0) -> void:
 	_allegro_flood_segments.append(segment)
 
 
-# fill an horizontal segment around the specifid position, and adds it to the
+# fill an horizontal segment around the specified position, and adds it to the
 # list of segments filled. Returns the first x coordinate after the part of the
 # line that has been filled.
 func _flood_line_around_point(

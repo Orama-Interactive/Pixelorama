@@ -2,10 +2,27 @@ extends Node
 
 signal color_changed(color, button)
 
-var pen_pressure := 1.0
+enum Dynamics { NONE, PRESSURE, VELOCITY }
+
 var horizontal_mirror := false
 var vertical_mirror := false
 var pixel_perfect := false
+
+# Dynamics
+var dynamics_alpha: int = Dynamics.NONE
+var dynamics_size: int = Dynamics.NONE
+var pen_pressure := 1.0
+var pen_pressure_min := 0.2
+var pen_pressure_max := 0.8
+var pressure_buf := [0, 0]  # past pressure value buffer
+var mouse_velocity := 1.0
+var mouse_velocity_min_thres := 0.2
+var mouse_velocity_max_thres := 0.8
+var mouse_velocity_max := 1000.0
+var alpha_min := 0.1
+var alpha_max := 1.0
+var brush_size_min := 1
+var brush_size_max := 4
 
 var tools := {
 	"RectSelect":
@@ -50,6 +67,13 @@ var tools := {
 		"Lasso / Free Select Tool",
 		"lasso",
 		preload("res://src/Tools/SelectionTools/Lasso.tscn")
+	),
+	"PaintSelect":
+	Tool.new(
+		"PaintSelect",
+		"Select by Drawing",
+		"paint_selection",
+		preload("res://src/Tools/SelectionTools/PaintSelect.tscn")
 	),
 	"Move": Tool.new("Move", "Move", "move", preload("res://src/Tools/Move.tscn")),
 	"Zoom": Tool.new("Zoom", "Zoom", "zoom", preload("res://src/Tools/Zoom.tscn")),
@@ -211,7 +235,7 @@ func _ready() -> void:
 	_tool_buttons = Global.control.find_node("ToolButtons")
 	for t in tools:
 		add_tool_button(tools[t])
-		var tool_shortcut: String = Tools.tools[t].shortcut
+		var tool_shortcut: String = tools[t].shortcut
 		var left_tool_shortcut := "left_%s_tool" % tool_shortcut
 		var right_tool_shortcut := "right_%s_tool" % tool_shortcut
 		Keychain.actions[left_tool_shortcut] = Keychain.InputAction.new("", "Left")
@@ -392,9 +416,27 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 
 	if event is InputEventMouseMotion:
 		pen_pressure = event.pressure
-		if Global.pressure_sensitivity_mode == Global.PressureSensitivity.NONE:
-			pen_pressure = 1.0
+		# Workaround https://github.com/godotengine/godot/issues/53033#issuecomment-930409407
+		# If a pressure value of 1 is encountered, "correct" the value by
+		# extrapolating from the delta of the past two values. This will
+		# correct the jumping to 1 error while also allowing values that
+		# are "supposed" to be 1.
+		if pen_pressure == 1 && pressure_buf[0] != 0:
+			pen_pressure = min(1, pressure_buf[0] + pressure_buf[0] - pressure_buf[1])
+		pressure_buf.pop_back()
+		pressure_buf.push_front(pen_pressure)
+		pen_pressure = range_lerp(pen_pressure, pen_pressure_min, pen_pressure_max, 0.0, 1.0)
+		pen_pressure = clamp(pen_pressure, 0.0, 1.0)
 
+		mouse_velocity = event.speed.length() / mouse_velocity_max
+		mouse_velocity = range_lerp(
+			mouse_velocity, mouse_velocity_min_thres, mouse_velocity_max_thres, 0.0, 1.0
+		)
+		mouse_velocity = clamp(mouse_velocity, 0.0, 1.0)
+		if dynamics_alpha != Dynamics.PRESSURE and dynamics_size != Dynamics.PRESSURE:
+			pen_pressure = 1.0
+		if dynamics_alpha != Dynamics.VELOCITY and dynamics_size != Dynamics.VELOCITY:
+			mouse_velocity = 1.0
 		if not position.is_equal_approx(_last_position):
 			_last_position = position
 			_slots[BUTTON_LEFT].tool_node.cursor_move(position)
@@ -411,3 +453,11 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 	if not _slots[BUTTON_RIGHT].tool_node.cursor_text.empty():
 		text += "    %s" % _slots[BUTTON_RIGHT].tool_node.cursor_text
 	Global.cursor_position_label.text = text
+
+
+func get_alpha_dynamic(strength := 1.0) -> float:
+	if dynamics_alpha == Dynamics.PRESSURE:
+		strength *= lerp(alpha_min, alpha_max, pen_pressure)
+	elif dynamics_alpha == Dynamics.VELOCITY:
+		strength *= lerp(alpha_min, alpha_max, mouse_velocity)
+	return strength

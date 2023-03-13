@@ -68,10 +68,7 @@ func _ready() -> void:
 
 	_handle_backup()
 
-	# If the user wants to run Pixelorama with arguments in terminal mode
-	# or open files with Pixelorama directly, then handle that
-	if OS.get_cmdline_args():
-		OpenSave.handle_loading_files(OS.get_cmdline_args())
+	_handle_cmdline_arguments()
 	get_tree().connect("files_dropped", self, "_on_files_dropped")
 
 	if OS.get_name() == "Android":
@@ -100,8 +97,6 @@ func _get_auto_display_scale() -> float:
 		return 2.0  # hiDPI display.
 	elif smallest_dimension >= 1700:
 		return 1.5  # Likely a hiDPI display, but we aren't certain due to the returned DPI.
-	elif smallest_dimension <= 800:
-		return 0.75  # Small loDPI display.
 	return 1.0
 
 
@@ -197,6 +192,19 @@ func _handle_backup() -> void:
 			load_last_project()
 
 
+func _handle_cmdline_arguments() -> void:
+	var args := OS.get_cmdline_args()
+	if args.empty():
+		return
+
+	for arg in args:
+		if arg.begins_with("-") or arg.begins_with("--"):
+			# TODO: Add code to handle custom command line arguments
+			continue
+		else:
+			OpenSave.handle_loading_file(arg)
+
+
 func _notification(what: int) -> void:
 	match what:
 		MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
@@ -224,7 +232,8 @@ func _notification(what: int) -> void:
 
 
 func _on_files_dropped(files: PoolStringArray, _screen: int) -> void:
-	OpenSave.handle_loading_files(files)
+	for file in files:
+		OpenSave.handle_loading_file(file)
 	var splash_dialog = Global.control.get_node("Dialogs/SplashDialog")
 	if splash_dialog.visible:
 		splash_dialog.hide()
@@ -258,7 +267,7 @@ func load_recent_project_file(path: String) -> void:
 	# Check if file still exists on disk
 	var file_check := File.new()
 	if file_check.file_exists(path):  # If yes then load the file
-		OpenSave.handle_loading_files([path])
+		OpenSave.handle_loading_file(path)
 		# Sync file dialogs
 		Global.save_sprites_dialog.current_dir = path.get_base_dir()
 		Global.open_sprites_dialog.current_dir = path.get_base_dir()
@@ -271,7 +280,8 @@ func load_recent_project_file(path: String) -> void:
 
 
 func _on_OpenSprite_files_selected(paths: PoolStringArray) -> void:
-	OpenSave.handle_loading_files(paths)
+	for path in paths:
+		OpenSave.handle_loading_file(path)
 	Global.save_sprites_dialog.current_dir = paths[0].get_base_dir()
 	Global.config_cache.set_value("data", "current_dir", paths[0].get_base_dir())
 
@@ -352,13 +362,13 @@ func _quit() -> void:
 
 func _on_BackupConfirmation_confirmed(project_paths: Array, backup_paths: Array) -> void:
 	OpenSave.reload_backup_file(project_paths, backup_paths)
-	Export.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
-	Export.directory_path = OpenSave.current_save_paths[0].get_base_dir()
-	Export.was_exported = false
+	Global.current_project.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
+	Global.current_project.directory_path = OpenSave.current_save_paths[0].get_base_dir()
+	Global.current_project.was_exported = false
 	Global.top_menu_container.file_menu.set_item_text(
-		4, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file()
+		Global.FileMenu.SAVE, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file()
 	)
-	Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
+	Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
 
 
 func _on_BackupConfirmation_custom_action(
@@ -406,6 +416,7 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value("view_menu", "draw_pixel_grid", Global.draw_pixel_grid)
 	Global.config_cache.set_value("view_menu", "show_rulers", Global.show_rulers)
 	Global.config_cache.set_value("view_menu", "show_guides", Global.show_guides)
+	Global.config_cache.set_value("view_menu", "show_mouse_guides", Global.show_mouse_guides)
 	Global.config_cache.save("user://cache.ini")
 
 	var i := 0

@@ -16,6 +16,7 @@ onready var grid = $Grid
 onready var selection = $Selection
 onready var indicators = $Indicators
 onready var previews = $Previews
+onready var mouse_guide_container = $MouseGuideContainer
 
 
 func _ready() -> void:
@@ -32,7 +33,6 @@ func _draw() -> void:
 	Global.small_preview_viewport.get_child(0).get_node("CanvasPreview").update()
 
 	var current_cels: Array = Global.current_project.frames[Global.current_project.current_frame].cels
-	var current_layer: int = Global.current_project.current_layer
 	var position_tmp := position
 	var scale_tmp := scale
 	if Global.mirror_view:
@@ -45,7 +45,13 @@ func _draw() -> void:
 			continue
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
 		if Global.current_project.layers[i].is_visible_in_hierarchy():
-			if i == current_layer:
+			var selected_layers = []
+			if move_preview_location != Vector2.ZERO:
+				for cel_pos in Global.current_project.selected_cels:
+					if cel_pos[0] == Global.current_project.current_frame:
+						if Global.current_project.layers[cel_pos[1]].can_layer_get_drawn():
+							selected_layers.append(cel_pos[1])
+			if i in selected_layers:
 				draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
 			else:
 				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)

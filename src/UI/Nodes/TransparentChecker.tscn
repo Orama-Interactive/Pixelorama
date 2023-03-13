@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=1]
+[ext_resource path="res://src/UI/Nodes/TransparentChecker.gd" type="Script" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/size = 10.0
+shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
+shader_param/color2 = Color( 1, 1, 1, 1 )
+shader_param/offset = Vector2( 0, 0 )
+shader_param/scale = Vector2( 0, 0 )
+shader_param/rect_size = Vector2( 0, 0 )
+shader_param/follow_movement = false
+shader_param/follow_scale = false
+
+[node name="TransparentChecker" type="ColorRect"]
+material = SubResource( 1 )
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="resized" from="." to="." method="_on_TransparentChecker_resized"]

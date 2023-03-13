@@ -1,6 +1,8 @@
 class_name SelectionTool
 extends BaseTool
 
+enum Mode { DEFAULT, ADD, SUBTRACT, INTERSECT }
+
 var undo_data: Dictionary
 var _move := false
 var _move_content := true
@@ -10,6 +12,7 @@ var _offset := Vector2.ZERO
 # click multiple times to create a selection
 var _ongoing_selection := false
 
+var _mode_selected := 0
 var _add := false  # Shift + Mouse Click
 var _subtract := false  # Ctrl + Mouse Click
 var _intersect := false  # Shift + Ctrl + Mouse Click
@@ -28,6 +31,32 @@ onready var timer: Timer = $Timer
 
 func _ready() -> void:
 	set_spinbox_values()
+	refresh_options()
+
+
+func refresh_options():
+	# The existence of this function is to ensure all items
+	# are added when we are selecting an option (Bad things will happen if i dont do this...)
+	$Modes.clear()
+	$Modes.add_item("Default (New Selection)")
+	$Modes.add_item("Add to Selection")
+	$Modes.add_item("Subtract from Selection")
+	$Modes.add_item("Intersection of Selections")
+	$Modes.select(_mode_selected)
+
+
+func get_config() -> Dictionary:
+	var config := .get_config()
+	config["mode_selected"] = _mode_selected
+	return config
+
+
+func set_config(config: Dictionary) -> void:
+	_mode_selected = config.get("mode_selected", 0)
+
+
+func update_config() -> void:
+	refresh_options()
 
 
 func set_spinbox_values() -> void:
@@ -44,6 +73,7 @@ func set_spinbox_values() -> void:
 
 
 func draw_start(position: Vector2) -> void:
+	position = snap_position(position)
 	.draw_start(position)
 	if selection_node.arrow_key_move:
 		return
@@ -94,7 +124,6 @@ func draw_start(position: Vector2) -> void:
 				selection_node.undo_data = selection_node.get_undo_data(true)
 			else:
 				selection_node.transform_content_start()
-				selection_node.clear_in_selected_cels = false
 				for image in _get_selected_draw_images():
 					image.blit_rect_mask(
 						selection_node.preview_image,
@@ -119,6 +148,7 @@ func draw_start(position: Vector2) -> void:
 
 
 func draw_move(position: Vector2) -> void:
+	position = snap_position(position)
 	.draw_move(position)
 	if selection_node.arrow_key_move:
 		return
@@ -145,7 +175,7 @@ func draw_move(position: Vector2) -> void:
 			- prev_pos
 		)
 		position = position.snapped(grid_size)
-		var grid_offset = Vector2(Global.grid_offset_x, Global.grid_offset_y)
+		var grid_offset := Vector2(Global.grid_offset_x, Global.grid_offset_y)
 		grid_offset = Vector2(fmod(grid_offset.x, grid_size.x), fmod(grid_offset.y, grid_size.y))
 		position += grid_offset
 
@@ -159,6 +189,7 @@ func draw_move(position: Vector2) -> void:
 
 
 func draw_end(position: Vector2) -> void:
+	position = snap_position(position)
 	.draw_end(position)
 	if selection_node.arrow_key_move:
 		return
@@ -173,7 +204,22 @@ func draw_end(position: Vector2) -> void:
 
 
 func apply_selection(_position: Vector2) -> void:
-	pass
+	# if a shortcut is activated then that will be obeyed instead
+	match _mode_selected:
+		Mode.ADD:
+			if !_subtract && !_intersect:
+				_add = true
+		Mode.SUBTRACT:
+			if !_add && !_intersect:
+				_subtract = true
+		Mode.INTERSECT:
+			if !_add && !_subtract:
+				_intersect = true
+
+
+func _on_Modes_item_selected(index: int) -> void:
+	_mode_selected = index
+	save_config()
 
 
 func _set_cursor_text(rect: Rect2) -> void:
@@ -231,30 +277,7 @@ func _on_size_value_changed(value: float, horizontal: bool) -> void:
 		selection_node.big_bounding_rectangle.size.x = value
 	else:
 		selection_node.big_bounding_rectangle.size.y = value
-	resize_selection()
-
-
-func resize_selection() -> void:
-	var project: Project = Global.current_project
-	var image: SelectionMap = project.selection_map
-	if selection_node.is_moving_content:
-		image = selection_node.original_bitmap
-		var preview_image: Image = selection_node.preview_image
-		preview_image.copy_from(selection_node.original_preview_image)
-		preview_image.resize(
-			selection_node.big_bounding_rectangle.size.x,
-			selection_node.big_bounding_rectangle.size.y,
-			Image.INTERPOLATE_NEAREST
-		)
-		selection_node.preview_image_texture.create_from_image(preview_image, 0)
-
-	var selection_map_copy := SelectionMap.new()
-	selection_map_copy.copy_from(image)
-	selection_map_copy.resize_bitmap_values(
-		project, selection_node.big_bounding_rectangle.size, false, false
-	)
-	project.selection_map = selection_map_copy
-	project.selection_map_changed()
+	selection_node.resize_selection()
 
 
 func _on_Timer_timeout() -> void:

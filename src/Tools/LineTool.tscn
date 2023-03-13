@@ -15,6 +15,7 @@ min_value = 1.0
 value = 1.0
 prefix = "Size:"
 suffix = "px"
+is_global = true
 
 [node name="Brush" parent="." index="3"]
 visible = false

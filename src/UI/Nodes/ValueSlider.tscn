@@ -1,12 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/misc/value_slider.png" type="Texture" id=2]
-[ext_resource path="res://assets/graphics/misc/value_arrow.svg" type="Texture" id=3]
-[ext_resource path="res://assets/graphics/misc/value_arrow_hover.svg" type="Texture" id=4]
-[ext_resource path="res://assets/graphics/misc/value_arrow_press.svg" type="Texture" id=5]
-
-[sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="ValueSlider" type="TextureProgress"]
 margin_right = 24.0
@@ -26,56 +21,3 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 1 )
-
-[node name="LineEdit" type="LineEdit" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_styles/read_only = SubResource( 1 )
-custom_styles/normal = SubResource( 1 )
-text = "0"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="ValueUp" type="TextureButton" parent="." groups=["UIButtons"]]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-mouse_default_cursor_shape = 2
-size_flags_vertical = 3
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 5 )
-texture_hover = ExtResource( 4 )
-stretch_mode = 3
-
-[node name="ValueDown" type="TextureButton" parent="." groups=["UIButtons"]]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-mouse_default_cursor_shape = 2
-size_flags_vertical = 3
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 5 )
-texture_hover = ExtResource( 4 )
-stretch_mode = 3
-
-[node name="Timer" type="Timer" parent="."]
-
-[connection signal="value_changed" from="." to="." method="_on_value_changed"]
-[connection signal="focus_exited" from="LineEdit" to="." method="_confirm_text"]
-[connection signal="gui_input" from="LineEdit" to="." method="_on_LineEdit_gui_input"]
-[connection signal="text_entered" from="LineEdit" to="." method="_on_LineEdit_text_entered"]
-[connection signal="button_down" from="ValueUp" to="." method="_on_Value_button_down" binds= [ 1 ]]
-[connection signal="button_up" from="ValueUp" to="." method="_on_Value_button_up"]
-[connection signal="button_down" from="ValueDown" to="." method="_on_Value_button_down" binds= [ -1 ]]
-[connection signal="button_up" from="ValueDown" to="." method="_on_Value_button_up"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

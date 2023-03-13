@@ -1,11 +1,11 @@
 extends Node
 
 signal project_changed
+signal cel_changed
 
 enum LayerTypes { PIXEL, GROUP, VECTOR }
 enum VectorShapeTypes { TEXT }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
-enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
 enum ColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
@@ -20,6 +20,8 @@ enum ViewMenu {
 	SHOW_PIXEL_GRID,
 	SHOW_RULERS,
 	SHOW_GUIDES,
+	SHOW_MOUSE_GUIDES,
+	SNAP_TO,
 }
 enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, MOVABLE_PANELS, ZEN_MODE, FULLSCREEN_MODE }
 enum ImageMenu {
@@ -48,6 +50,8 @@ enum HelpMenu {
 	ABOUT_PIXELORAMA
 }
 
+const OVERRIDE_FILE := "override.cfg"
+
 var root_directory := "."
 var window_title := "" setget _title_changed  # Why doesn't Godot have get_window_title()?
 var config_cache := ConfigFile.new()
@@ -70,7 +74,6 @@ var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
 
 # Preferences
-var pressure_sensitivity_mode = PressureSensitivity.NONE
 var open_last_project := false
 var quit_confirmation := false
 var smooth_zoom := true
@@ -117,6 +120,8 @@ var fps_limit := 0
 
 var autosave_interval := 1.0
 var enable_autosave := true
+var renderer := OS.get_current_video_driver() setget _renderer_changed
+var tablet_driver := 0 setget _tablet_driver_changed
 
 # Tools & options
 var show_left_tool_icon := true
@@ -133,6 +138,11 @@ var draw_grid := false
 var draw_pixel_grid := false
 var show_rulers := true
 var show_guides := true
+var show_mouse_guides := false
+var snapping_distance := 10.0
+var snap_to_rectangular_grid := false
+var snap_to_guides := false
+var snap_to_perspective_guides := false
 
 # Onion skinning options
 var onion_skinning := false
@@ -144,7 +154,6 @@ var onion_skinning_blue_red := false
 var palettes := {}
 
 # Nodes
-var notification_label_node: PackedScene = preload("res://src/UI/NotificationLabel.tscn")
 var pixel_layer_button_node: PackedScene = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
 var group_layer_button_node: PackedScene = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
 var pixel_cel_button_node: PackedScene = preload("res://src/UI/Timeline/PixelCelButton.tscn")
@@ -157,6 +166,7 @@ onready var tabs: Tabs = control.find_node("Tabs")
 onready var main_viewport: ViewportContainer = control.find_node("ViewportContainer")
 onready var second_viewport: ViewportContainer = control.find_node("Second Canvas")
 onready var canvas_preview_container: Container = control.find_node("Canvas Preview")
+onready var global_tool_options: PanelContainer = control.find_node("Global Tool Options")
 onready var small_preview_viewport: ViewportContainer = canvas_preview_container.find_node(
 	"PreviewViewportContainer"
 )
@@ -172,6 +182,9 @@ onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider"
 onready var brushes_popup: Popup = control.find_node("BrushesPopup")
 onready var patterns_popup: Popup = control.find_node("PatternsPopup")
 onready var palette_panel: PalettePanel = control.find_node("Palettes")
+
+onready var references_panel: ReferencesPanel = control.find_node("Reference Images")
+onready var perspective_editor := control.find_node("Perspective Editor")
 
 onready var top_menu_container: Panel = control.find_node("TopMenuContainer")
 onready var rotation_level_button: Button = control.find_node("RotationLevel")
@@ -206,6 +219,11 @@ onready var preferences_dialog: AcceptDialog = control.find_node("PreferencesDia
 onready var error_dialog: AcceptDialog = control.find_node("ErrorDialog")
 
 onready var current_version: String = ProjectSettings.get_setting("application/config/Version")
+
+
+func _init() -> void:
+	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
+		tablet_driver = 1
 
 
 func _ready() -> void:
@@ -400,9 +418,10 @@ func _initialize_keychain() -> void:
 
 
 func notification_label(text: String) -> void:
-	var notification: Label = notification_label_node.instance()
+	var notification := NotificationLabel.new()
 	notification.text = tr(text)
-	notification.rect_position = Vector2(70, animation_timeline.rect_position.y)
+	notification.rect_position = main_viewport.rect_global_position
+	notification.rect_position.y += main_viewport.rect_size.y
 	control.add_child(notification)
 
 
@@ -480,6 +499,29 @@ func _project_changed(value: int) -> void:
 	connect("project_changed", current_project, "change_project")
 	emit_signal("project_changed")
 	disconnect("project_changed", current_project, "change_project")
+	emit_signal("cel_changed")
+
+
+func _renderer_changed(value: int) -> void:
+	renderer = value
+	if OS.has_feature("editor"):
+		return
+
+	# Sets GLES2 as the default value in `override.cfg`.
+	# Without this, switching to GLES3 does not work, because it will default to GLES2.
+	ProjectSettings.set_initial_value("rendering/quality/driver/driver_name", "GLES2")
+	var renderer_name := OS.get_video_driver_name(renderer)
+	ProjectSettings.set_setting("rendering/quality/driver/driver_name", renderer_name)
+	ProjectSettings.save_custom(OVERRIDE_FILE)
+
+
+func _tablet_driver_changed(value: int) -> void:
+	tablet_driver = value
+	if OS.has_feature("editor"):
+		return
+	var tablet_driver_name := OS.get_tablet_driver_name(tablet_driver)
+	ProjectSettings.set_setting("display/window/tablet_driver", tablet_driver_name)
+	ProjectSettings.save_custom(OVERRIDE_FILE)
 
 
 func dialog_open(open: bool) -> void:

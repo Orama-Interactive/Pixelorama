@@ -1,6 +1,15 @@
 extends Node
 
 enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
+# Continuation from Image.Interpolation
+enum Interpolation { SCALE3X = 5, CLEANEDGE = 6, OMNISCALE = 7 }
+var clean_edge_shader: Shader = preload("res://src/Shaders/Rotation/cleanEdge.gdshader")
+var omniscale_shader: Shader
+
+
+func _ready() -> void:
+	if OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES3:
+		omniscale_shader = load("res://src/Shaders/Rotation/OmniScale.gdshader")
 
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
@@ -427,8 +436,7 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 				continue
 			var sprite := Image.new()
 			sprite.copy_from(f.cels[i].image)
-			# Different method for scale_3x
-			if interpolation == 5:
+			if interpolation == Interpolation.SCALE3X:
 				var times: Vector2 = Vector2(
 					ceil(width / (3.0 * sprite.get_width())),
 					ceil(height / (3.0 * sprite.get_height()))
@@ -436,6 +444,14 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 				for _j in range(max(times.x, times.y)):
 					sprite.copy_from(scale_3x(sprite))
 				sprite.resize(width, height, 0)
+			elif interpolation == Interpolation.CLEANEDGE:
+				var params := {"angle": 0, "slope": true, "cleanup": true, "preview": false}
+				var gen := ShaderImageEffect.new()
+				gen.generate_image(sprite, clean_edge_shader, params, Vector2(width, height))
+			elif interpolation == Interpolation.OMNISCALE and omniscale_shader:
+				var params := {"angle": 0, "preview": false}
+				var gen := ShaderImageEffect.new()
+				gen.generate_image(sprite, omniscale_shader, params, Vector2(width, height))
 			else:
 				sprite.resize(width, height, interpolation)
 			Global.current_project.undo_redo.add_do_property(f.cels[i].image, "data", sprite.data)

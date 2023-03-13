@@ -1,0 +1,164 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/ReferenceImages/ReferenceImageButton.gd" type="Script" id=2]
+
+[node name="ReferenceImageButton" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -969.0
+margin_bottom = -581.0
+size_flags_horizontal = 3
+script = ExtResource( 2 )
+
+[node name="Interior" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 304.0
+margin_bottom = 133.0
+
+[node name="PathHeader" type="HBoxContainer" parent="Interior"]
+margin_right = 297.0
+margin_bottom = 14.0
+custom_constants/separation = 0
+
+[node name="Path" type="LinkButton" parent="Interior/PathHeader"]
+modulate = Color( 0.552941, 1, 0.298039, 1 )
+margin_right = 99.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+underline = 1
+
+[node name="PathHTML" type="Label" parent="Interior/PathHeader"]
+self_modulate = Color( 0.552941, 1, 0.298039, 1 )
+margin_left = 99.0
+margin_right = 198.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="Interior/PathHeader"]
+margin_left = 198.0
+margin_right = 297.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="PreviewAndOptions" type="HBoxContainer" parent="Interior"]
+margin_top = 18.0
+margin_right = 297.0
+margin_bottom = 98.0
+
+[node name="Options" type="GridContainer" parent="Interior/PreviewAndOptions"]
+margin_right = 213.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+columns = 2
+
+[node name="PosLabel" type="Label" parent="Interior/PreviewAndOptions/Options"]
+margin_top = 5.0
+margin_right = 56.0
+margin_bottom = 19.0
+text = "Position:"
+align = 2
+
+[node name="Position" type="HBoxContainer" parent="Interior/PreviewAndOptions/Options"]
+margin_left = 60.0
+margin_right = 213.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="X" parent="Interior/PreviewAndOptions/Options/Position" instance=ExtResource( 1 )]
+margin_right = 74.0
+allow_greater = true
+allow_lesser = true
+
+[node name="Y" parent="Interior/PreviewAndOptions/Options/Position" instance=ExtResource( 1 )]
+margin_left = 78.0
+margin_right = 153.0
+allow_greater = true
+allow_lesser = true
+
+[node name="ScaleLabel" type="Label" parent="Interior/PreviewAndOptions/Options"]
+margin_top = 33.0
+margin_right = 56.0
+margin_bottom = 47.0
+text = "Scale:"
+align = 2
+
+[node name="Scale" parent="Interior/PreviewAndOptions/Options" instance=ExtResource( 1 )]
+margin_left = 60.0
+margin_top = 28.0
+margin_right = 213.0
+margin_bottom = 52.0
+allow_greater = true
+allow_lesser = true
+
+[node name="OpacityLabel" type="Label" parent="Interior/PreviewAndOptions/Options"]
+margin_top = 61.0
+margin_right = 56.0
+margin_bottom = 75.0
+text = "Opacity:"
+align = 2
+
+[node name="Opacity" parent="Interior/PreviewAndOptions/Options" instance=ExtResource( 1 )]
+margin_left = 60.0
+margin_top = 56.0
+margin_right = 213.0
+margin_bottom = 80.0
+
+[node name="PreviewPanel" type="Panel" parent="Interior/PreviewAndOptions"]
+margin_left = 217.0
+margin_right = 297.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+
+[node name="Warning" type="Label" parent="Interior/PreviewAndOptions/PreviewPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Preview" type="TextureRect" parent="Interior/PreviewAndOptions/PreviewPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+expand = true
+
+[node name="OtherOptions" type="HBoxContainer" parent="Interior"]
+margin_top = 102.0
+margin_right = 297.0
+margin_bottom = 126.0
+alignment = 2
+
+[node name="ApplyFilter" type="CheckBox" parent="Interior/OtherOptions"]
+margin_left = 76.0
+margin_right = 177.0
+margin_bottom = 24.0
+hint_tooltip = "Uses a magnifying filter, to enable smooth zooming in of the texture."
+text = "Apply Filter"
+align = 1
+
+[node name="Reset" type="Button" parent="Interior/OtherOptions"]
+margin_left = 181.0
+margin_right = 229.0
+margin_bottom = 24.0
+text = "Reset"
+
+[node name="Remove" type="Button" parent="Interior/OtherOptions"]
+margin_left = 233.0
+margin_right = 297.0
+margin_bottom = 24.0
+custom_colors/font_color = Color( 1, 0.266667, 0.266667, 1 )
+text = "Remove"
+
+[connection signal="pressed" from="Interior/PathHeader/Path" to="." method="_on_Path_pressed"]
+[connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Position/X" to="." method="_on_X_value_changed"]
+[connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Position/Y" to="." method="_on_Y_value_changed"]
+[connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Scale" to="." method="_on_Scale_value_changed"]
+[connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Opacity" to="." method="_on_Opacity_value_changed"]
+[connection signal="toggled" from="Interior/OtherOptions/ApplyFilter" to="." method="_on_ApplyFilter_toggled"]
+[connection signal="pressed" from="Interior/OtherOptions/Reset" to="." method="_on_Reset_pressed"]
+[connection signal="pressed" from="Interior/OtherOptions/Remove" to="." method="_on_Remove_pressed"]

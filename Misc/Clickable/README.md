@@ -31,4 +31,4 @@ $ CLICKABLE_ARCH=arm64 clickable build
 
 ### Important gotcha: File loading and saving
 
-Due to AppArmor policy restrictions, you are not able to save to anywhere outside of the user data directroy.
+Due to AppArmor policy restrictions, you are not able to save to anywhere outside of the user data directory.

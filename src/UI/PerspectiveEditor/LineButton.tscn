@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/Nodes/CollapsibleContainer.gd" type="Script" id=3]
+
+[node name="LineButton" type="VBoxContainer"]
+margin_right = 159.0
+margin_bottom = 20.0
+theme_type_variation = "CollapsibleContainer"
+script = ExtResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+visible = false
+margin_top = 24.0
+margin_right = 159.0
+margin_bottom = 76.0
+
+[node name="Spacer" type="Control" parent="HBoxContainer"]
+margin_right = 20.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+margin_left = 24.0
+margin_right = 28.0
+margin_bottom = 52.0
+
+[node name="Properties" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 32.0
+margin_right = 83.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+
+[node name="AngleSlider" parent="HBoxContainer/Properties" instance=ExtResource( 1 )]
+margin_right = 51.0
+max_value = 359.999
+step = 0.001
+allow_greater = true
+prefix = "Angle:"
+suffix = "°"
+
+[node name="LengthSlider" parent="HBoxContainer/Properties" instance=ExtResource( 1 )]
+unique_name_in_owner = true
+margin_top = 28.0
+margin_right = 51.0
+margin_bottom = 52.0
+min_value = 1.0
+max_value = 19999.0
+value = 19999.0
+allow_greater = true
+prefix = "Length:"
+suffix = "px"
+
+[node name="Delete" type="Button" parent="HBoxContainer"]
+margin_left = 87.0
+margin_right = 151.0
+margin_bottom = 52.0
+text = "Remove"
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+margin_left = 155.0
+margin_right = 159.0
+margin_bottom = 52.0

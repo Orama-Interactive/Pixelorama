@@ -74,7 +74,10 @@ func _on_tab_selected(tab: int) -> void:
 func _on_tab_changed(tab: int) -> void:
 	if not _leaf:
 		return
-	var tab_name = get_tab_control(tab).name
+	var control = get_tab_control(tab)
+	if not control:
+		return
+	var tab_name = control.name
 	var name_index_in_leaf = _leaf.find_name(tab_name)
 	if name_index_in_leaf != tab:  # NOTE: this handles added tabs (index == -1)
 		emit_signal("tab_layout_changed", tab)

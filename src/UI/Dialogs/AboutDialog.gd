@@ -231,6 +231,7 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Martin Novák (novhack)")
 	contributors.create_item(contributor_root).set_text(0, "  Laurenz Reinthaler (Schweini07)")
 	contributors.create_item(contributor_root).set_text(0, "  Darshan Phaldesai (luiq54)")
+	contributors.create_item(contributor_root).set_text(0, "  mrtripie")
 	contributors.create_item(contributor_root).set_text(0, "  kleonc")
 	contributors.create_item(contributor_root).set_text(0, "  azagaya")
 	contributors.create_item(contributor_root).set_text(0, "  Kinwailo")
@@ -244,6 +245,7 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  dasimonde")
 	contributors.create_item(contributor_root).set_text(0, "  Matthew Paul (matthewpaul-us)")
 	contributors.create_item(contributor_root).set_text(0, "  danielnaoexiste")
+	contributors.create_item(contributor_root).set_text(0, "  20kdc")
 	contributors.create_item(contributor_root).set_text(0, "  PinyaColada")
 	contributors.create_item(contributor_root).set_text(0, "  Subhang Nanduri (SbNanduri)")
 	contributors.create_item(contributor_root).set_text(0, "  Dávid Gábor BODOR (dragonfi)")
@@ -260,7 +262,6 @@ func create_contributors() -> void:
 	contributors.create_item(contributor_root).set_text(0, "  Kawan Weege (Dwahgon)")
 	contributors.create_item(contributor_root).set_text(0, "  kevinms")
 	contributors.create_item(contributor_root).set_text(0, "  Álex Román Núñez (EIREXE)")
-	contributors.create_item(contributor_root).set_text(0, "  mrtripie")
 	contributors.create_item(contributor_root).set_text(0, "  Jeremy Behreandt (behreajj)")
 	contributors.create_item(contributor_root).set_text(0, "  Marquis Kurt (alicerunsonfedora)")
 	contributors.create_item(contributor_root).set_text(0, "  Silent Orb (silentorb)")
@@ -272,6 +273,7 @@ func create_contributors() -> void:
 	)
 	contributors.create_item(contributor_root).set_text(0, "  Haoyu Qiu (timothyqiu)")
 	contributors.create_item(contributor_root).set_text(0, "  GrantMoyer")
+	contributors.create_item(contributor_root).set_text(0, "  Arron Washington (radicaled)")
 
 
 func create_translators() -> void:

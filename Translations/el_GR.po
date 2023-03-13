@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2022-09-21 15:33\n"
+"PO-Revision-Date: 2023-03-08 12:50\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -163,10 +163,13 @@ msgid "Centralize Image"
 msgstr "Μετακίνηση εικόνας στο κέντρο"
 
 msgid "Rotate Image"
-msgstr "Περιστροφή Εικόνας"
+msgstr "Περιστροφή εικόνας"
 
-msgid "Pivot (x, y):"
-msgstr "Άξονας (x, y):"
+msgid "Pivot x:"
+msgstr "Άξονας x:"
+
+msgid "Pivot y:"
+msgstr "Άξονας y:"
 
 msgid "Smear options:"
 msgstr "Επιλογές απλώματος:"
@@ -187,7 +190,7 @@ msgid "Grayscale View"
 msgstr "Προβολή σε κλίμακα γκρι"
 
 msgid "Mirror Image"
-msgstr "Αναστροφή Εικόνας"
+msgstr "Αναστροφή εικόνας"
 
 msgid "Flip Horizontal"
 msgstr "Οριζόντια αναστροφή"
@@ -229,7 +232,7 @@ msgid "Reset Mask"
 msgstr "Επαναφορά μάσκας"
 
 msgid "Window Opacity"
-msgstr "Αδιαφάνεια Παραθύρου"
+msgstr "Αδιαφάνεια παραθύρου"
 
 msgid "Window opacity does not work on fullscreen mode."
 msgstr "Η αδιαφάνεια παραθύρου δε λειτουργεί σε λειτουργία πλήρους οθόνης."
@@ -271,7 +274,7 @@ msgid "Tallscreen"
 msgstr "Κάθετη"
 
 msgid "Mirror View"
-msgstr "Αναστροφή Προβολής"
+msgstr "Αναστροφή προβολής"
 
 msgid "Show Grid"
 msgstr "Εμφάνιση πλέγματος"
@@ -289,10 +292,10 @@ msgid "Show Animation Timeline"
 msgstr "Εμφάνιση χρονοδιαγράμματος"
 
 msgid "Zen Mode"
-msgstr "Λειτουργία Zεν"
+msgstr "Λειτουργία ζεν"
 
 msgid "Fullscreen Mode"
-msgstr "Λειτουργία Πλήρους Οθόνης"
+msgstr "Λειτουργία πλήρους οθόνης"
 
 msgid "Fill with color:"
 msgstr "Γέμισμα με χρώμα:"
@@ -327,11 +330,14 @@ msgstr "Φύλλο καρέ (νέα στρώση)"
 msgid "New frame"
 msgstr "Νέο καρέ"
 
-msgid "Replace frame"
-msgstr "Αντικατάσταση καρέ"
+msgid "Replace cel"
+msgstr "Αντικατάσταση cel"
 
 msgid "New layer"
 msgstr "Νέα στρώση"
+
+msgid "New reference image"
+msgstr "Νέα εικόνα αναφοράς"
 
 msgid "New palette"
 msgstr "Νέα παλέτα"
@@ -381,8 +387,10 @@ msgstr "Εξαγωγή εικόνας"
 msgid "File Exists, Overwrite?"
 msgstr "Το άρχειο υπάρχει, να γίνει αντικατάσταση;"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "Το αρχείο \"%s\" υπάρχει ήδη. Αντικατάσταση;"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr "Τα ακόλουθα αρχεία υπάρχουν ήδη. Θέλετε να τα αντικαταστήσετε;\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Η διαδρομή του φακέλου δεν είναι έγκυρη!"
@@ -451,14 +459,31 @@ msgstr "Επιλογή του τρέχοντα φακέλου"
 msgid "Open a Directory"
 msgstr "Άνοιγμα Φακέλου"
 
-msgid "All frames as multiple files"
-msgstr "Όλα τα καρέ ως ξεχωριστά αρχεία"
-
-msgid "All frames as a single file animation"
-msgstr "Όλα τα καρέ ως ένα αρχείο κίνησης"
-
 msgid "Background:"
 msgstr "Υπόβαθρο:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr "Επιλεγμένα καρέ"
+
+msgid "Layers:"
+msgstr "Στρώσεις:"
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr "Ορατές στρώσεις"
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr "Επιλεγμένες στρώσεις"
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr "Στρώση εικονοστοιχείων:"
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr "Στρώση ομάδας:"
 
 msgid "Direction:"
 msgstr "Κατεύθυνση:"
@@ -484,6 +509,10 @@ msgstr "Σειρές"
 msgid "Rows:"
 msgstr "Σειρές:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr "Διαστάσεις εξαγωγής:"
+
 msgid "Path:"
 msgstr "Διαδρομή:"
 
@@ -495,6 +524,10 @@ msgstr "Δημιουργία Φακέλου"
 
 msgid "File:"
 msgstr "Αρχείο:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr "Σύνθετες επιλογές"
 
 msgid "Interpolation:"
 msgstr "Παρεμβολή:"
@@ -544,6 +577,10 @@ msgstr "Αντίγραφο ασφαλείας"
 msgid "Performance"
 msgstr "Επίδοση"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr "Οδηγοί"
+
 msgid "Extensions"
 msgstr "Επεκτάσεις"
 
@@ -553,6 +590,10 @@ msgstr "Κέρσορες"
 msgid "Indicators"
 msgstr "Δείκτες"
 
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr "Το Pixelorama πρέπει να επανεκκινηθεί για να τεθούν σε ισχύ οι αλλαγές."
+
 msgid "On"
 msgstr "Ενεργό"
 
@@ -560,7 +601,7 @@ msgid "Restore default value"
 msgstr "Επαναφορά εργοστασιακής τιμής"
 
 msgid "Smooth Zoom"
-msgstr "Ομαλό Ζουμ"
+msgstr "Ομαλό ζουμ"
 
 msgid "Adds a smoother transition when zooming in or out"
 msgstr "Κάνει την μετάβαση στην μεγέθυνση ή σμίκρυνση πιο ομαλή"
@@ -701,7 +742,7 @@ msgid "Gradient"
 msgstr "Διαβάθμιση"
 
 msgid "Gradient Map"
-msgstr "Χάρτης Διαβαθμίσεων"
+msgstr "Χάρτης διαβαθμίσεων"
 
 msgid "Divide into equal parts"
 msgstr "Χωρίστε σε ίσα τμήματα"
@@ -717,23 +758,30 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr "Αν αυτό είναι ενεργοποιημένο, το τελευταίο σημείο προστίθεται στο τέλος της διαβάθμισης.\n"
 "Απενεργοποιήστε το αν θέλετε να μετατρέψετε τη διαβάθμιση για συνεχή παρεμβολή, έτσι ώστε το τελευταίο χρώμα να ληφθεί υπόψη."
 
+msgid "Shape:"
+msgstr "Σχήμα:"
+
 msgid "Linear"
 msgstr "Γραμμική"
 
 msgid "Radial"
 msgstr "Ακτινική"
 
-msgid "Linear Step"
-msgstr "Γραμμικό Βήμα"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
+msgstr "Επανάληψη:"
 
-msgid "Radial Step"
-msgstr "Ακτινικό Βήμα"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
+msgstr "Επανάληψη"
 
-msgid "Linear Dithering"
-msgstr "Γραμμική χρωματική αντιπαράθεση"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
+msgstr "Κατοπτρισμός"
 
-msgid "Radial Dithering"
-msgstr "Ακτινική χρωματική αντιπαράθεση"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
+msgstr "Περικοπή"
 
 msgid "Transition size:"
 msgstr "Μέγεθος μετάβασης:"
@@ -932,6 +980,9 @@ msgstr "Σερβικά (Κυριλλικά)"
 
 msgid "Dutch"
 msgstr "Ολλανδικά"
+
+msgid "Belarusian"
+msgstr "Λευκορωσικά"
 
 msgid "Development Team"
 msgstr "Ομάδα Ανάπτυξης"
@@ -1326,6 +1377,22 @@ msgstr "Ορίζει το όριο των καρέ της εφαρμογής α�
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Αν είναι ενεργοποιημένο, όταν το παράθυρο της εφαρμογής χάνει την εστίαση του, γίνεται παύση της εφαρμογής. Αυτό βοηθά στη μείωση της χρήσης του επεξεργαστή (CPU) όταν βρίσκεται σε αδράνεια. Η εφαρμογή συνεχίζεται όταν το ποντίκι εισέρχεται στο παράθυρο της."
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr "Οδηγός βίντεο:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr "Καθορίζει το πρόγραμμα οδήγησης βίντεο που χρησιμοποιείται. Το GLES2 είναι καλύτερο για παλαιότερες και χαμηλού επιπέδου συσκευές, αλλά το GLES3 μπορεί να προσφέρει περισσότερες δυνατότητες."
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr "Οδηγός ταμπλέτας:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr "Καθορίζει το πρόγραμμα οδήγησης ταμπλέτας που χρησιμοποιείται στα Windows. Εάν έχετε ενεργοποιημένο το Windows Ink, επιλέξτε winink."
+
 msgid "Add Extension"
 msgstr "Προσθήκη επέκτασης"
 
@@ -1410,9 +1477,11 @@ msgstr "Ολόκληρη επιλογή"
 msgid "Fill with:"
 msgstr "Γέμισμα με:"
 
-msgid "Selected Color"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
 msgstr "Επιλεγμένο χρώμα"
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Μοτίβο"
 
@@ -1609,11 +1678,11 @@ msgstr "Μετακίνηση Δεξιά"
 msgid "Add Frame Tag"
 msgstr "Προσθήκη Ετικέτας Καρέ"
 
-msgid "Link Cel"
-msgstr "Σύνδεση Cel"
+msgid "Link Cels to"
+msgstr "Σύνδεση cels με"
 
-msgid "Unlink Cel"
-msgstr "Αποσύνδεση Cel"
+msgid "Unlink Cels"
+msgstr "Αποσύνδεση cels"
 
 msgid "Frame Properties"
 msgstr "Ιδιότητες Καρέ"
@@ -1624,11 +1693,17 @@ msgstr "Ιδιότητες καρέ"
 msgid "Layer"
 msgstr "Στρώση"
 
+msgid "Group"
+msgstr "Ομάδα"
+
 msgid "Layers"
 msgstr "Στρώσεις"
 
 msgid "Create a new layer"
 msgstr "Δημιουργία νέας στρώσης"
+
+msgid "Create a new group layer"
+msgstr "Δημιουργία νέας ομάδας στρώσεων"
 
 msgid "Remove current layer"
 msgstr "Διαγραφή της τρέχουσας στρώσης"
@@ -1660,10 +1735,13 @@ msgstr "Κλείδωμα/ξεκλείδωμα της στρώσης"
 msgid "Frame: %s, Layer: %s"
 msgstr "Καρέ: %s, Στρώση: %s"
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
-msgstr "Ενεργοποίηση/Απενεργοποίηση σύνδεσης cel\n\n"
-"Τα συνδεδεμένα cels μοιράζονται ανάμεσα σε πολλά καρέ"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr "Ενεργοποίηση/απενεργοποίηση αυτόματης σύνδεσης νέων cels κατά τη δημιουργία νέων καρέ\n\n"
+"Τα συνδεδεμένα cels κάνουν κοινή χρήση περιεχομένου σε πολλαπλά καρέ"
+
+msgid "Expand/collapse group"
+msgstr "Ανάπτυξη/σύμπτυξη ομάδας"
 
 msgid "Palette"
 msgstr "Παλέτα"
@@ -1995,10 +2073,12 @@ msgstr "Χρονικό διάστημα αυτόματης αποθήκευση�
 msgid "minute(s)"
 msgstr "λεπτό(ά)"
 
-msgid "Create new directory for each frame tag"
-msgstr "Δημιουργήστε νέο φάκελο για κάθε ετικέτα καρέ"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr "Δημιουργία νέου φακέλου για κάθε ετικέτα καρέ"
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 msgstr "Δημιουργεί πολλά αρχεία, αλλά κάθε αρχείο αποθηκεύεται σε διαφορετικό φάκελο που αντιστοιχεί σε κάθε ετικέτα καρέ"
 
 msgid "Close"
@@ -2027,9 +2107,6 @@ msgstr "Δεν μπορείτε να διαγράψετε άλλες παλέτ�
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Δεν γίνεται να διαγραφεί η παλέτα, επειδή δεν υπάρχει!"
 
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Παρουσιάστηκε σφάλμα κατά την αφαίρεση της παλέτας. Κωδικός σφάλματος: %s"
-
 msgid "and"
 msgstr "και"
 
@@ -2049,10 +2126,10 @@ msgid "Tiled In Both Axis"
 msgstr "Επανάληψη και στους 2 άξονες"
 
 msgid "Tiled In X Axis"
-msgstr "Επανάληψη στον Άξονα Χ"
+msgstr "Επανάληψη στον άξονα Χ"
 
 msgid "Tiled In Y Axis"
-msgstr "Επανάληψη στον Άξονα Υ"
+msgstr "Επανάληψη στον άξονα Y"
 
 msgid "Create a new palette"
 msgstr "Δημιουργία νέας παλέτας"
@@ -2116,4 +2193,7 @@ msgstr "Επιλογές αριστερού εργαλείου"
 
 msgid "Right Tool Options"
 msgstr "Επιλογές δεξιού εργαλείου"
+
+msgid "Reference Images"
+msgstr "Εικόνες αναφοράς"
 

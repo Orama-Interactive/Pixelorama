@@ -46,7 +46,7 @@ func _button_pressed() -> void:
 			if !Global.current_project.selected_cels.has(frame_layer):
 				Global.current_project.selected_cels.append(frame_layer)
 
-		Global.current_project.current_frame = frame
+		Global.current_project.change_cel(frame, -1)
 
 	elif Input.is_action_just_released("right_mouse"):
 		if Global.current_project.frames.size() == 1:
@@ -94,11 +94,11 @@ func change_frame_order(rate: int) -> void:
 	project.undo_redo.add_undo_method(project, "move_frame", change, frame)
 
 	if project.current_frame == frame:
-		project.undo_redo.add_do_property(project, "current_frame", change)
+		project.undo_redo.add_do_method(project, "change_cel", change)
 	else:
-		project.undo_redo.add_do_property(project, "current_frame", project.current_frame)
+		project.undo_redo.add_do_method(project, "change_cel", project.current_frame)
 
-	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
@@ -155,10 +155,10 @@ func drop_data(_pos, data) -> void:
 		project.undo_redo.add_undo_method(project, "move_frame", to_frame, drop_frame)
 
 	if project.current_frame == drop_frame:
-		project.undo_redo.add_do_property(project, "current_frame", frame)
+		project.undo_redo.add_do_method(project, "change_cel", frame)
 	else:
-		project.undo_redo.add_do_property(project, "current_frame", project.current_frame)
-	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+		project.undo_redo.add_do_method(project, "change_cel", project.current_frame)
+	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()

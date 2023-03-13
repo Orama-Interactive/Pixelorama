@@ -1,19 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ExportDialog.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/TransparentChecker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/Nodes/CollapsibleContainer.gd" type="Script" id=3]
 
-[node name="ExportDialog" type="AcceptDialog"]
+[node name="ExportDialog" type="ConfirmationDialog"]
 margin_right = 532.0
 margin_bottom = 530.0
-rect_min_size = Vector2( 456, 530 )
 window_title = "Export..."
 resizable = true
 dialog_hide_on_ok = false
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
@@ -39,172 +36,136 @@ margin_right = 516.0
 margin_bottom = 50.0
 text = "Preview:"
 
-[node name="PreviewPanel" type="Panel" parent="VBoxContainer"]
+[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer"]
 margin_top = 54.0
 margin_right = 516.0
-margin_bottom = 260.0
+margin_bottom = 486.0
+size_flags_vertical = 3
+
+[node name="PreviewPanel" type="Panel" parent="VBoxContainer/VSplitContainer"]
+margin_right = 516.0
+margin_bottom = 158.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TransparentChecker" parent="VBoxContainer/PreviewPanel" instance=ExtResource( 2 )]
+[node name="TransparentChecker" parent="VBoxContainer/VSplitContainer/PreviewPanel" instance=ExtResource( 2 )]
+unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
 
-[node name="PreviewScroll" type="ScrollContainer" parent="VBoxContainer/PreviewPanel"]
+[node name="PreviewScroll" type="ScrollContainer" parent="VBoxContainer/VSplitContainer/PreviewPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Previews" type="GridContainer" parent="VBoxContainer/PreviewPanel/PreviewScroll"]
+[node name="Previews" type="GridContainer" parent="VBoxContainer/VSplitContainer/PreviewPanel/PreviewScroll"]
+unique_name_in_owner = true
 margin_right = 516.0
-margin_bottom = 206.0
+margin_bottom = 158.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 
-[node name="FrameOptions" type="VBoxContainer" parent="VBoxContainer"]
-visible = false
-margin_top = 278.0
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VSplitContainer"]
+margin_top = 170.0
 margin_right = 516.0
-margin_bottom = 302.0
+margin_bottom = 432.0
+size_flags_vertical = 3
 
-[node name="FrameNumber" type="HBoxContainer" parent="VBoxContainer/FrameOptions"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
 margin_right = 516.0
-margin_bottom = 24.0
+margin_bottom = 166.0
+columns = 2
 
-[node name="FrameNumberLabel" type="Label" parent="VBoxContainer/FrameOptions/FrameNumber"]
-margin_top = 5.0
-margin_right = 44.0
-margin_bottom = 19.0
-text = "Frame:"
-
-[node name="FrameNumber" type="SpinBox" parent="VBoxContainer/FrameOptions/FrameNumber"]
-margin_left = 48.0
-margin_right = 516.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 100, 0 )
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-min_value = 1.0
-page = 1.0
-value = 1.0
-rounded = true
-align = 2
-
-[node name="SpritesheetOptions" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 264.0
-margin_right = 516.0
-margin_bottom = 312.0
-
-[node name="Frames" type="HBoxContainer" parent="VBoxContainer/SpritesheetOptions"]
-margin_right = 516.0
-margin_bottom = 20.0
-
-[node name="FramesLabel" type="Label" parent="VBoxContainer/SpritesheetOptions/Frames"]
+[node name="OrientationLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
 margin_top = 3.0
-margin_right = 51.0
+margin_right = 256.0
 margin_bottom = 17.0
-text = "Frames:"
-
-[node name="Frames" type="OptionButton" parent="VBoxContainer/SpritesheetOptions/Frames"]
-margin_left = 55.0
-margin_right = 516.0
-margin_bottom = 20.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-text = "All Frames"
-items = [ "All Frames", null, false, 0, null ]
-selected = 0
-
-[node name="Orientation" type="HBoxContainer" parent="VBoxContainer/SpritesheetOptions"]
-margin_top = 24.0
-margin_right = 516.0
-margin_bottom = 48.0
-alignment = 1
-
-[node name="OrientationLabel" type="Label" parent="VBoxContainer/SpritesheetOptions/Orientation"]
-margin_top = 5.0
-margin_right = 77.0
-margin_bottom = 19.0
 text = "Orientation:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Orientation" type="OptionButton" parent="VBoxContainer/SpritesheetOptions/Orientation"]
-margin_left = 81.0
-margin_right = 264.0
-margin_bottom = 24.0
+[node name="Orientation" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
+unique_name_in_owner = true
+margin_left = 260.0
+margin_right = 516.0
+margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Rows"
 items = [ "Rows", null, false, 0, null, "Columns", null, false, 1, null ]
 selected = 0
 
-[node name="LinesCountLabel" type="Label" parent="VBoxContainer/SpritesheetOptions/Orientation"]
-margin_left = 268.0
-margin_top = 5.0
-margin_right = 328.0
-margin_bottom = 19.0
+[node name="LinesCountLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
+unique_name_in_owner = true
+margin_top = 29.0
+margin_right = 256.0
+margin_bottom = 43.0
 text = "Columns:"
 
-[node name="LinesCount" type="SpinBox" parent="VBoxContainer/SpritesheetOptions/Orientation"]
-margin_left = 332.0
+[node name="LinesCount" type="SpinBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
+unique_name_in_owner = true
+margin_left = 260.0
+margin_top = 24.0
 margin_right = 516.0
-margin_bottom = 24.0
+margin_bottom = 48.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 min_value = 1.0
 max_value = 1000.0
 value = 1.0
-align = 2
 
-[node name="AnimationOptions" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 316.0
-margin_right = 516.0
-margin_bottom = 368.0
+[node name="FramesLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+margin_top = 55.0
+margin_right = 256.0
+margin_bottom = 69.0
+size_flags_horizontal = 3
+text = "Frames:"
 
-[node name="AnimationType" type="OptionButton" parent="VBoxContainer/AnimationOptions"]
+[node name="Frames" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+margin_left = 260.0
+margin_top = 52.0
 margin_right = 516.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 0, 24 )
+margin_bottom = 72.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
-text = "All frames as multiple files"
-items = [ "All frames as multiple files", null, false, 0, null, "All frames as a single file animation", null, false, 1, null ]
+text = "All frames"
+items = [ "All frames", null, false, 0, null, "Selected frames", null, false, 1, null ]
 selected = 0
 
-[node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/AnimationOptions"]
-visible = false
-margin_top = 28.0
+[node name="LayersLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+margin_top = 79.0
+margin_right = 256.0
+margin_bottom = 93.0
+text = "Layers:"
+
+[node name="Layers" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+margin_left = 260.0
+margin_top = 76.0
 margin_right = 516.0
-margin_bottom = 52.0
-hint_tooltip = "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
+margin_bottom = 96.0
 mouse_default_cursor_shape = 2
-text = "Create new directory for each frame tag"
+text = "Visible layers"
+items = [ "Visible layers", null, false, 0, null, "Selected layers", null, false, 1, null ]
+selected = 0
 
-[node name="AnimatedOptions" type="HBoxContainer" parent="VBoxContainer/AnimationOptions"]
-margin_top = 28.0
-margin_right = 516.0
-margin_bottom = 52.0
-rect_min_size = Vector2( 0, 24 )
-
-[node name="DirectionLabel" type="Label" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
-margin_top = 5.0
-margin_right = 63.0
-margin_bottom = 19.0
+[node name="DirectionLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+margin_top = 103.0
+margin_right = 256.0
+margin_bottom = 117.0
 text = "Direction:"
 
-[node name="Direction" type="OptionButton" parent="VBoxContainer/AnimationOptions/AnimatedOptions"]
-margin_left = 67.0
+[node name="Direction" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+margin_left = 260.0
+margin_top = 100.0
 margin_right = 516.0
-margin_bottom = 24.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 100, 0 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -215,139 +176,157 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 372.0
-margin_right = 516.0
-margin_bottom = 376.0
-
-[node name="Options" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 380.0
-margin_right = 516.0
-margin_bottom = 404.0
-
-[node name="ResizeLabel" type="Label" parent="VBoxContainer/Options"]
-margin_top = 5.0
-margin_right = 46.0
-margin_bottom = 19.0
+[node name="ResizeLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+margin_top = 129.0
+margin_right = 256.0
+margin_bottom = 143.0
 rect_min_size = Vector2( 30, 0 )
 text = "Resize:"
-align = 2
 
-[node name="Resize" type="SpinBox" parent="VBoxContainer/Options"]
-margin_left = 50.0
-margin_right = 235.0
-margin_bottom = 24.0
+[node name="Resize" type="SpinBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+margin_left = 260.0
+margin_top = 124.0
+margin_right = 516.0
+margin_bottom = 148.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 min_value = 50.0
 max_value = 1000.0
 step = 100.0
 value = 100.0
-align = 2
 suffix = "%"
 
-[node name="InterpolationLabel" type="Label" parent="VBoxContainer/Options"]
-margin_left = 239.0
-margin_top = 5.0
-margin_right = 326.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 30, 0 )
-text = "Interpolation:"
-align = 2
-
-[node name="Interpolation" type="OptionButton" parent="VBoxContainer/Options"]
-margin_left = 330.0
-margin_right = 516.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-text = "Nearest"
-align = 2
-items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, false, 4, null ]
-selected = 0
-
-[node name="Dimensions" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 408.0
-margin_right = 516.0
-margin_bottom = 422.0
-
-[node name="DimensionLabel" type="Label" parent="VBoxContainer/Dimensions"]
+[node name="DimensionLabelText" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+margin_top = 152.0
 margin_right = 256.0
-margin_bottom = 14.0
+margin_bottom = 166.0
 size_flags_horizontal = 3
-text = "Export Dimensions : "
-align = 1
-valign = 1
+text = "Export dimensions:"
 
-[node name="Spacer" type="Control" parent="VBoxContainer/Dimensions"]
+[node name="DimensionLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
 margin_left = 260.0
+margin_top = 152.0
 margin_right = 516.0
-margin_bottom = 14.0
+margin_bottom = 166.0
 size_flags_horizontal = 3
+text = "64×64"
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
-margin_top = 426.0
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
+margin_top = 170.0
 margin_right = 516.0
-margin_bottom = 430.0
+margin_bottom = 174.0
 
-[node name="Path" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 434.0
+[node name="FilePath" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
+margin_top = 178.0
 margin_right = 516.0
-margin_bottom = 458.0
+margin_bottom = 230.0
+columns = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Path"]
+[node name="Label" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" groups=["NotHTML5"]]
 margin_top = 5.0
 margin_right = 32.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 30, 0 )
 text = "Path:"
 
-[node name="PathLineEdit" type="LineEdit" parent="VBoxContainer/Path"]
+[node name="PathLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" groups=["NotHTML5"]]
+unique_name_in_owner = true
 margin_left = 36.0
-margin_right = 453.0
+margin_right = 382.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 align = 2
+caret_blink = true
+caret_blink_speed = 0.5
 
-[node name="PathButton" type="Button" parent="VBoxContainer/Path"]
-margin_left = 457.0
+[node name="PathButton" type="Button" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" groups=["NotHTML5"]]
+margin_left = 386.0
 margin_right = 516.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 text = "Browse"
 
-[node name="File" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 462.0
-margin_right = 516.0
-margin_bottom = 486.0
-
-[node name="Label" type="Label" parent="VBoxContainer/File"]
-margin_top = 5.0
-margin_right = 30.0
-margin_bottom = 19.0
+[node name="Label2" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath"]
+margin_top = 33.0
+margin_right = 32.0
+margin_bottom = 47.0
 rect_min_size = Vector2( 30, 0 )
 text = "File:"
 
-[node name="FileLineEdit" type="LineEdit" parent="VBoxContainer/File"]
-margin_left = 34.0
-margin_right = 376.0
-margin_bottom = 24.0
+[node name="FileLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath"]
+unique_name_in_owner = true
+margin_left = 36.0
+margin_top = 28.0
+margin_right = 382.0
+margin_bottom = 52.0
 size_flags_horizontal = 3
 text = "untitled"
 align = 2
+caret_blink = true
+caret_blink_speed = 0.5
 
-[node name="FileFormat" type="OptionButton" parent="VBoxContainer/File"]
-margin_left = 380.0
+[node name="FileFormat" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath"]
+unique_name_in_owner = true
+margin_left = 386.0
+margin_top = 28.0
 margin_right = 516.0
-margin_bottom = 24.0
+margin_bottom = 52.0
 rect_min_size = Vector2( 130, 0 )
-mouse_default_cursor_shape = 8
-disabled = true
-text = ".png; PNG Image"
-items = [ ".png; PNG Image", null, false, 0, null, ".gif; GIF Image", null, false, 1, null ]
+mouse_default_cursor_shape = 2
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
+margin_top = 234.0
+margin_right = 516.0
+margin_bottom = 238.0
+
+[node name="CollapsibleContainer" type="VBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
+margin_top = 242.0
+margin_right = 516.0
+margin_bottom = 262.0
+theme_type_variation = "CollapsibleContainer"
+script = ExtResource( 3 )
+text = "Advanced options"
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer"]
+visible = false
+margin_top = 24.0
+margin_right = 516.0
+margin_bottom = 44.0
+columns = 2
+
+[node name="InterpolationLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer"]
+margin_top = 3.0
+margin_right = 256.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 30, 0 )
+size_flags_horizontal = 3
+text = "Interpolation:"
+
+[node name="Interpolation" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer"]
+unique_name_in_owner = true
+margin_left = 260.0
+margin_right = 516.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "Nearest"
+items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, false, 4, null ]
 selected = 0
 
-[node name="Popups" type="Node" parent="."]
+[node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer" groups=["ExportImageOptions"]]
+unique_name_in_owner = true
+visible = false
+margin_top = 48.0
+margin_right = 516.0
+margin_bottom = 72.0
+hint_tooltip = "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+mouse_default_cursor_shape = 2
+text = "Create new folder for each frame tag"
+
+[node name="Popups" type="Control" parent="."]
+mouse_filter = 2
 
 [node name="PathDialog" type="FileDialog" parent="Popups"]
 margin_left = 8.0
@@ -361,8 +340,7 @@ window_title = "Open a Directory"
 resizable = true
 mode = 2
 access = 2
-current_dir = "/home/variable/Documents/Godot/Godot projects/Pixelorama-play_improvements"
-current_path = "/home/variable/Documents/Godot/Godot projects/Pixelorama-play_improvements/"
+show_hidden_files = true
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
 margin_left = 8.0
@@ -430,22 +408,20 @@ __meta__ = {
 
 [connection signal="about_to_show" from="." to="." method="_on_ExportDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ExportDialog_confirmed"]
-[connection signal="custom_action" from="." to="." method="_on_ExportDialog_custom_action"]
 [connection signal="popup_hide" from="." to="." method="_on_ExportDialog_popup_hide"]
 [connection signal="tab_clicked" from="VBoxContainer/Tabs" to="." method="_on_Tabs_tab_clicked"]
-[connection signal="value_changed" from="VBoxContainer/FrameOptions/FrameNumber/FrameNumber" to="." method="_on_Frame_value_changed"]
-[connection signal="item_selected" from="VBoxContainer/SpritesheetOptions/Frames/Frames" to="." method="_on_Frames_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/SpritesheetOptions/Orientation/Orientation" to="." method="_on_Orientation_item_selected"]
-[connection signal="value_changed" from="VBoxContainer/SpritesheetOptions/Orientation/LinesCount" to="." method="_on_LinesCount_value_changed"]
-[connection signal="item_selected" from="VBoxContainer/AnimationOptions/AnimationType" to="." method="_on_AnimationType_item_selected"]
-[connection signal="toggled" from="VBoxContainer/AnimationOptions/MultipleAnimationsDirectories" to="." method="_on_MultipleAnimationsDirectories_toggled"]
-[connection signal="item_selected" from="VBoxContainer/AnimationOptions/AnimatedOptions/Direction" to="." method="_on_Direction_item_selected"]
-[connection signal="value_changed" from="VBoxContainer/Options/Resize" to="." method="_on_Resize_value_changed"]
-[connection signal="item_selected" from="VBoxContainer/Options/Interpolation" to="." method="_on_Interpolation_item_selected"]
-[connection signal="text_changed" from="VBoxContainer/Path/PathLineEdit" to="." method="_on_PathLineEdit_text_changed"]
-[connection signal="pressed" from="VBoxContainer/Path/PathButton" to="." method="_on_PathButton_pressed"]
-[connection signal="text_changed" from="VBoxContainer/File/FileLineEdit" to="." method="_on_FileLineEdit_text_changed"]
-[connection signal="item_selected" from="VBoxContainer/File/FileFormat" to="." method="_on_FileFormat_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Orientation" to="." method="_on_Orientation_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/LinesCount" to="." method="_on_LinesCount_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Frames" to="." method="_on_Frames_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Layers" to="." method="_on_Layers_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Direction" to="." method="_on_Direction_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Resize" to="." method="_on_Resize_value_changed"]
+[connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathLineEdit" to="." method="_on_PathLineEdit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathButton" to="." method="_on_PathButton_pressed"]
+[connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/FileLineEdit" to="." method="_on_FileLineEdit_text_changed"]
+[connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/FileFormat" to="." method="_on_FileFormat_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer/Interpolation" to="." method="_on_Interpolation_item_selected"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/MultipleAnimationsDirectories" to="." method="_on_MultipleAnimationsDirectories_toggled"]
 [connection signal="dir_selected" from="Popups/PathDialog" to="." method="_on_FileDialog_dir_selected"]
 [connection signal="confirmed" from="Popups/FileExistsAlert" to="." method="_on_FileExistsAlert_confirmed"]
 [connection signal="custom_action" from="Popups/FileExistsAlert" to="." method="_on_FileExistsAlert_custom_action"]

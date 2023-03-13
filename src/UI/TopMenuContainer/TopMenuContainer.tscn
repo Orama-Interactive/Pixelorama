@@ -1,0 +1,167 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/TopMenuContainer/TopMenuContainer.gd" type="Script" id=2]
+
+[node name="TopMenuContainer" type="Panel"]
+margin_right = 1280.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 28 )
+theme_type_variation = "TopMenuPanel"
+script = ExtResource( 2 )
+
+[node name="MenuItems" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 4.0
+margin_right = 1010.0
+
+[node name="FileMenu" type="MenuButton" parent="MenuItems"]
+margin_right = 35.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "File"
+switch_on_hover = true
+
+[node name="EditMenu" type="MenuButton" parent="MenuItems"]
+margin_left = 39.0
+margin_right = 75.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Edit"
+switch_on_hover = true
+
+[node name="SelectMenu" type="MenuButton" parent="MenuItems"]
+margin_left = 79.0
+margin_right = 130.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Select"
+switch_on_hover = true
+
+[node name="ImageMenu" type="MenuButton" parent="MenuItems"]
+margin_left = 134.0
+margin_right = 186.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Image"
+switch_on_hover = true
+
+[node name="ViewMenu" type="MenuButton" parent="MenuItems"]
+margin_left = 190.0
+margin_right = 232.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "View"
+switch_on_hover = true
+
+[node name="WindowMenu" type="MenuButton" parent="MenuItems"]
+margin_left = 236.0
+margin_right = 299.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Window"
+switch_on_hover = true
+
+[node name="HelpMenu" type="MenuButton" parent="MenuItems"]
+margin_left = 303.0
+margin_right = 345.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Help"
+switch_on_hover = true
+
+[node name="TopLabels" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -65.5
+margin_right = 65.5
+custom_constants/separation = 20
+
+[node name="RotationStats" type="CenterContainer" parent="TopLabels"]
+margin_right = 60.0
+margin_bottom = 28.0
+
+[node name="RotationLevel" type="Button" parent="TopLabels/RotationStats"]
+margin_top = 4.0
+margin_right = 60.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 60, 0 )
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "0 °"
+align = 2
+
+[node name="RotationSpinbox" type="SpinBox" parent="TopLabels/RotationStats"]
+visible = false
+margin_left = -7.0
+margin_top = 2.0
+margin_right = 67.0
+margin_bottom = 26.0
+min_value = -1e+07
+max_value = 1e+07
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+
+[node name="ZoomStats" type="CenterContainer" parent="TopLabels"]
+margin_left = 80.0
+margin_right = 140.0
+margin_bottom = 28.0
+
+[node name="ZoomLevel" type="Button" parent="TopLabels/ZoomStats"]
+margin_top = 4.0
+margin_right = 60.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 60, 0 )
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "781 %"
+align = 2
+
+[node name="ZoomSpinbox" type="SpinBox" parent="TopLabels/ZoomStats"]
+visible = false
+margin_left = -7.0
+margin_top = 2.0
+margin_right = 67.0
+margin_bottom = 26.0
+min_value = 100.0
+max_value = 2000.0
+value = 100.0
+suffix = "%"
+
+[node name="CursorPosition" type="Label" parent="TopLabels"]
+margin_left = 160.0
+margin_top = 7.0
+margin_right = 208.0
+margin_bottom = 21.0
+text = "[64×64]"
+align = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -330.0
+margin_top = -10.0
+margin_right = 0.00012207
+margin_bottom = 13.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="CurrentFrame" type="Label" parent="HBoxContainer"]
+margin_left = 106.0
+margin_right = 198.0
+margin_bottom = 23.0
+size_flags_vertical = 1
+text = "Current frame:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentFrameMark" type="Label" parent="HBoxContainer"]
+margin_left = 202.0
+margin_right = 223.0
+margin_bottom = 23.0
+size_flags_vertical = 1
+text = "1/1"

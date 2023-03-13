@@ -1,0 +1,100 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/Buttons/BrushesPopup.gd" type="Script" id=1]
+
+[node name="BrushesPopup" type="Popup"]
+margin_right = 183.0
+margin_bottom = 271.0
+rect_min_size = Vector2( 0, 144 )
+script = ExtResource( 1 )
+
+[node name="Background" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Brushes" type="ScrollContainer" parent="Background"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 176.0
+margin_bottom = 264.0
+rect_min_size = Vector2( 0, 36 )
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+
+[node name="Categories" type="VBoxContainer" parent="Background/Brushes"]
+margin_right = 169.0
+margin_bottom = 257.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Background/Brushes/Categories"]
+margin_right = 169.0
+margin_bottom = 14.0
+text = "Default Brushes"
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Background/Brushes/Categories/Label"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -4.0
+
+[node name="DefaultBrushContainer" type="GridContainer" parent="Background/Brushes/Categories"]
+margin_top = 18.0
+margin_right = 169.0
+margin_bottom = 18.0
+
+[node name="ProjectLabel" type="Label" parent="Background/Brushes/Categories"]
+visible = false
+margin_top = 56.0
+margin_right = 49.0
+margin_bottom = 104.0
+text = "Project Brushes"
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Background/Brushes/Categories/ProjectLabel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -4.0
+
+[node name="ProjectBrushContainer" type="GridContainer" parent="Background/Brushes/Categories"]
+margin_top = 22.0
+margin_right = 169.0
+margin_bottom = 22.0
+
+[node name="FileLabel" type="Label" parent="Background/Brushes/Categories"]
+margin_top = 26.0
+margin_right = 169.0
+margin_bottom = 40.0
+text = "File Brushes"
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Background/Brushes/Categories/FileLabel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -4.0
+
+[node name="FileBrushContainer" type="GridContainer" parent="Background/Brushes/Categories"]
+margin_top = 44.0
+margin_right = 169.0
+margin_bottom = 44.0
+
+[node name="RandomFileLabel" type="Label" parent="Background/Brushes/Categories"]
+margin_top = 48.0
+margin_right = 169.0
+margin_bottom = 62.0
+text = "Random File Brushes"
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Background/Brushes/Categories/RandomFileLabel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -4.0
+
+[node name="RandomFileBrushContainer" type="GridContainer" parent="Background/Brushes/Categories"]
+margin_top = 66.0
+margin_right = 169.0
+margin_bottom = 66.0

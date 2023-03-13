@@ -3,6 +3,7 @@ extends Container
 
 const SplitHandle = preload("split_handle.gd")
 const DockablePanel = preload("dockable_panel.gd")
+const ReferenceControl = preload("dockable_panel_reference_control.gd")
 const DragNDropPanel = preload("drag_n_drop_panel.gd")
 const Layout = preload("layout.gd")
 
@@ -60,10 +61,10 @@ func _notification(what: int) -> void:
 		what == NOTIFICATION_DRAG_BEGIN
 		and _can_handle_drag_data(get_viewport().gui_get_drag_data())
 	):
-		_drag_n_drop_panel.visible = true
+		_drag_n_drop_panel.set_enabled(true, not _layout.root.empty())
 		set_process_input(true)
 	elif what == NOTIFICATION_DRAG_END:
-		_drag_n_drop_panel.visible = false
+		_drag_n_drop_panel.set_enabled(false)
 		set_process_input(false)
 
 
@@ -107,17 +108,22 @@ func can_drop_data_fw(_position: Vector2, data, from_control) -> bool:
 func drop_data_fw(_position: Vector2, data, from_control) -> void:
 	assert(from_control == _drag_n_drop_panel, "FIXME")
 
-	var from_node: DockablePanel = get_node(data.from_path)
-	if _drag_panel == null or (from_node == _drag_panel and _drag_panel.get_child_count() == 1):
+	var from_node: TabContainer = get_node(data.from_path)
+	if from_node == _drag_panel and _drag_panel.get_child_count() == 1:
 		return
 
 	var moved_tab = from_node.get_tab_control(data.tabc_element)
-	var moved_reference = moved_tab.reference_to
+	if moved_tab is ReferenceControl:
+		moved_tab = moved_tab.reference_to
+	if not _is_managed_node(moved_tab):
+		moved_tab.get_parent().remove_child(moved_tab)
+		add_child(moved_tab)
 
-	var margin = _drag_n_drop_panel.get_hover_margin()
-	_layout.split_leaf_with_node(_drag_panel.leaf, moved_reference, margin)
+	if _drag_panel != null:
+		var margin = _drag_n_drop_panel.get_hover_margin()
+		_layout.split_leaf_with_node(_drag_panel.leaf, moved_tab, margin)
+
 	_layout_dirty = true
-
 	queue_sort()
 
 
@@ -239,7 +245,8 @@ func _can_handle_drag_data(data):
 
 func _is_managed_node(node: Node) -> bool:
 	return (
-		node != _panel_container
+		node.get_parent() == self
+		and node != _panel_container
 		and node != _drag_n_drop_panel
 		and node is Control
 		and not node.is_set_as_toplevel()
@@ -415,8 +422,13 @@ static func _untrack_children_after(node, idx: int) -> void:
 func _on_panel_tab_layout_changed(tab: int, panel: DockablePanel) -> void:
 	"""Handler for `DockablePanel.tab_layout_changed`, update its LayoutPanel"""
 	_layout_dirty = true
-	var tab_reference = panel.get_tab_control(tab)
-	_layout.move_node_to_leaf(tab_reference.reference_to, panel.leaf, tab)
+	var control = panel.get_tab_control(tab)
+	if control is ReferenceControl:
+		control = control.reference_to
+	if not _is_managed_node(control):
+		control.get_parent().remove_child(control)
+		add_child(control)
+	_layout.move_node_to_leaf(control, panel.leaf, tab)
 	queue_sort()
 
 

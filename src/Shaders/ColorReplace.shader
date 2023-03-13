@@ -16,17 +16,17 @@ uniform sampler2D pattern;
 uniform vec2 pattern_size;
 uniform vec2 pattern_uv_offset;
 
-void fragment() { // applies on each pixel seperately
+void fragment() { // applies on each pixel separately
 	vec4 original_color = texture(TEXTURE, UV);  // The drawing we have to use on
 	vec4 selection_color = texture(selection, UV);  // use its alpha to get portion we can ignore
 
-	vec4 col = original_color;  // Innocent till proven Guilty
+	vec4 col = original_color;  // Innocent till proven guilty
 
 	float max_diff = distance(original_color, old_color);  // How much this pixel matches our description 
 	
 	float similarity = abs(2.0 - ((similarity_percent/100.0) * 2.0));
 
-	if (max_diff <= similarity)  // We found our match and pixel is proven Guilty (small is precise)
+	if (max_diff <= similarity)  // We found our match and pixel is proven guilty (small is precise)
 		if (has_pattern)
 			col = textureLod(pattern, UV * (size / pattern_size) + pattern_uv_offset, 0.0);
 		else

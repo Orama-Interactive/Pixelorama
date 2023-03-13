@@ -9,6 +9,41 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "AImgIOBaseExporter",
+"class": "AImgIOAPNGExporter",
+"language": "GDScript",
+"path": "res://addons/aimg_io/apng_exporter.gd"
+}, {
+"base": "EditorImportPlugin",
+"class": "AImgIOAPNGImportPlugin",
+"language": "GDScript",
+"path": "res://addons/aimg_io/apng_import_plugin.gd"
+}, {
+"base": "Reference",
+"class": "AImgIOAPNGImporter",
+"language": "GDScript",
+"path": "res://addons/aimg_io/apng_importer.gd"
+}, {
+"base": "Reference",
+"class": "AImgIOAPNGStream",
+"language": "GDScript",
+"path": "res://addons/aimg_io/apng_stream.gd"
+}, {
+"base": "Reference",
+"class": "AImgIOBaseExporter",
+"language": "GDScript",
+"path": "res://addons/aimg_io/base_exporter.gd"
+}, {
+"base": "Resource",
+"class": "AImgIOCRC32",
+"language": "GDScript",
+"path": "res://addons/aimg_io/crc32.gd"
+}, {
+"base": "Reference",
+"class": "AImgIOFrame",
+"language": "GDScript",
+"path": "res://addons/aimg_io/frame.gd"
+}, {
 "base": "Reference",
 "class": "AnimationTag",
 "language": "GDScript",
@@ -32,12 +67,17 @@ _global_script_classes=[ {
 "base": "Popup",
 "class": "Brushes",
 "language": "GDScript",
-"path": "res://src/UI/BrushesPopup.gd"
+"path": "res://src/UI/Buttons/BrushesPopup.gd"
 }, {
 "base": "Node2D",
 "class": "Canvas",
 "language": "GDScript",
 "path": "res://src/UI/Canvas/Canvas.gd"
+}, {
+"base": "VBoxContainer",
+"class": "CollapsibleContainer",
+"language": "GDScript",
+"path": "res://src/UI/Nodes/CollapsibleContainer.gd"
 }, {
 "base": "Reference",
 "class": "Drawer",
@@ -48,6 +88,11 @@ _global_script_classes=[ {
 "class": "Frame",
 "language": "GDScript",
 "path": "res://src/Classes/Frame.gd"
+}, {
+"base": "AImgIOBaseExporter",
+"class": "GIFAnimationExporter",
+"language": "GDScript",
+"path": "res://src/Classes/AnimationExporters/GIFAnimationExporter.gd"
 }, {
 "base": "Control",
 "class": "GradientEditNode",
@@ -69,7 +114,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/Canvas/Rulers/Guide.gd"
 }, {
-"base": "AcceptDialog",
+"base": "ConfirmationDialog",
 "class": "ImageEffect",
 "language": "GDScript",
 "path": "res://src/Classes/ImageEffect.gd"
@@ -78,6 +123,16 @@ _global_script_classes=[ {
 "class": "LayerButton",
 "language": "GDScript",
 "path": "res://src/UI/Timeline/LayerButton.gd"
+}, {
+"base": "Control",
+"class": "MaxMinEdit",
+"language": "GDScript",
+"path": "res://src/UI/Nodes/MaxMinEdit.gd"
+}, {
+"base": "Label",
+"class": "NotificationLabel",
+"language": "GDScript",
+"path": "res://src/UI/Nodes/NotificationLabel.gd"
 }, {
 "base": "Resource",
 "class": "Palette",
@@ -107,7 +162,12 @@ _global_script_classes=[ {
 "base": "PopupPanel",
 "class": "Patterns",
 "language": "GDScript",
-"path": "res://src/UI/PatternsPopup.gd"
+"path": "res://src/UI/Buttons/PatternsPopup.gd"
+}, {
+"base": "Line2D",
+"class": "PerspectiveLine",
+"language": "GDScript",
+"path": "res://src/UI/PerspectiveEditor/PerspectiveLine.gd"
 }, {
 "base": "BaseCel",
 "class": "PixelCel",
@@ -123,6 +183,16 @@ _global_script_classes=[ {
 "class": "Project",
 "language": "GDScript",
 "path": "res://src/Classes/Project.gd"
+}, {
+"base": "Sprite",
+"class": "ReferenceImage",
+"language": "GDScript",
+"path": "res://src/UI/ReferenceImages/ReferenceImage.gd"
+}, {
+"base": "VBoxContainer",
+"class": "ReferencesPanel",
+"language": "GDScript",
+"path": "res://src/UI/ReferenceImages/ReferencesPanel.gd"
 }, {
 "base": "Image",
 "class": "SelectionMap",
@@ -180,29 +250,43 @@ _global_script_classes=[ {
 "path": "res://src/Classes/VectorShapes/VectorTextShape.gd"
 } ]
 _global_script_class_icons={
+"AImgIOAPNGExporter": "",
+"AImgIOAPNGImportPlugin": "",
+"AImgIOAPNGImporter": "",
+"AImgIOAPNGStream": "",
+"AImgIOBaseExporter": "",
+"AImgIOCRC32": "",
+"AImgIOFrame": "",
 "AnimationTag": "",
 "BaseCel": "",
 "BaseLayer": "",
 "BaseTool": "",
 "Brushes": "",
 "Canvas": "",
+"CollapsibleContainer": "",
 "Drawer": "",
 "Frame": "",
+"GIFAnimationExporter": "",
 "GradientEditNode": "",
 "GroupCel": "",
 "GroupLayer": "",
 "Guide": "",
 "ImageEffect": "",
 "LayerButton": "",
+"MaxMinEdit": "",
+"NotificationLabel": "",
 "Palette": "",
 "PaletteColor": "",
 "PaletteGrid": "",
 "PalettePanel": "",
 "PaletteSwatch": "",
 "Patterns": "",
+"PerspectiveLine": "",
 "PixelCel": "",
 "PixelLayer": "",
 "Project": "",
+"ReferenceImage": "",
+"ReferencesPanel": "",
 "SelectionMap": "",
 "SelectionTool": "",
 "ShaderImageEffect": "",
@@ -230,7 +314,7 @@ config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
 config/custom_user_dir_name.X11="pixelorama"
 config/Version="v0.11-dev"
-config/ExtensionsAPI_Version=2
+config/ExtensionsAPI_Version=3
 
 [audio]
 
@@ -268,7 +352,7 @@ window/per_pixel_transparency/enabled.Android=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dockable_container/plugin.cfg", "res://addons/keychain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/aimg_io/plugin.cfg", "res://addons/dockable_container/plugin.cfg", "res://addons/keychain/plugin.cfg" )
 
 [importer_defaults]
 
@@ -909,6 +993,16 @@ gradient_map={
 "deadzone": 0.5,
 "events": [  ]
 }
+left_paint_selection_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":73,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right_paint_selection_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":73,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [locale]
 
@@ -922,6 +1016,7 @@ file_logging/enable_file_logging=true
 [rendering]
 
 quality/driver/driver_name="GLES2"
+quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 threads/thread_model=2

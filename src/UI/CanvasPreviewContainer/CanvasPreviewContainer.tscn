@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=2]
+[ext_resource path="res://src/UI/Canvas/CameraMovement.gd" type="Script" id=3]
+[ext_resource path="res://src/UI/CanvasPreviewContainer/CanvasPreviewContainer.gd" type="Script" id=4]
+[ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/graphics/timeline/play.png" type="Texture" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/size = 10.0
+shader_param/alpha = 1.0
+shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
+shader_param/color2 = Color( 1, 1, 1, 1 )
+shader_param/offset = Vector2( 0, 0 )
+shader_param/scale = Vector2( 0, 0 )
+shader_param/rect_size = Vector2( 0, 0 )
+shader_param/follow_movement = false
+shader_param/follow_scale = false
+
+[node name="CanvasPreviewContainer" type="PanelContainer"]
+margin_right = 328.0
+margin_bottom = 174.0
+size_flags_vertical = 0
+script = ExtResource( 4 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 321.0
+margin_bottom = 167.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 20.0
+margin_bottom = 160.0
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_left = 6.0
+margin_right = 14.0
+margin_bottom = 14.0
+size_flags_horizontal = 4
+text = "+"
+align = 1
+
+[node name="PreviewZoomSlider" type="VSlider" parent="HBoxContainer/VBoxContainer"]
+margin_left = 2.0
+margin_top = 18.0
+margin_right = 18.0
+margin_bottom = 118.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+step = 0.01
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_left = 7.0
+margin_top = 122.0
+margin_right = 12.0
+margin_bottom = 136.0
+size_flags_horizontal = 4
+text = "-"
+align = 1
+
+[node name="PlayButton" type="Button" parent="HBoxContainer/VBoxContainer" groups=["UIButtons"]]
+margin_top = 140.0
+margin_right = 20.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 20, 0 )
+mouse_default_cursor_shape = 2
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/PlayButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -3.5
+margin_top = -6.0
+margin_right = 3.5
+margin_bottom = 6.0
+mouse_default_cursor_shape = 2
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PreviewViewportContainer" type="ViewportContainer" parent="HBoxContainer"]
+margin_left = 24.0
+margin_right = 314.0
+margin_bottom = 160.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="HBoxContainer/PreviewViewportContainer"]
+size = Vector2( 290, 160 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="TransparentChecker" parent="HBoxContainer/PreviewViewportContainer/Viewport" instance=ExtResource( 1 )]
+material = SubResource( 1 )
+
+[node name="CanvasPreview" parent="HBoxContainer/PreviewViewportContainer/Viewport" instance=ExtResource( 5 )]
+
+[node name="CameraPreview" type="Camera2D" parent="HBoxContainer/PreviewViewportContainer/Viewport"]
+offset = Vector2( 32, 32 )
+current = true
+zoom = Vector2( 0.15, 0.15 )
+script = ExtResource( 3 )
+
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/PreviewZoomSlider" to="." method="_on_PreviewZoomSlider_value_changed"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_toggled"]

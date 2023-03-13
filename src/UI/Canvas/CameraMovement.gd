@@ -1,5 +1,8 @@
 extends Camera2D
 
+signal zoom_changed
+signal rotation_changed
+
 enum Cameras { MAIN, SECOND, SMALL }
 
 const KEY_MOVE_ACTION_NAMES := ["camera_left", "camera_right", "camera_up", "camera_down"]
@@ -15,6 +18,8 @@ var index := 0
 
 
 func _ready() -> void:
+	connect("zoom_changed", self, "_zoom_changed")
+	connect("rotation_changed", self, "_rotation_changed")
 	rotating = true
 	viewport_container = get_parent().get_parent()
 	transparent_checker = get_parent().get_node("TransparentChecker")
@@ -115,9 +120,9 @@ func _input(event: InputEvent) -> void:
 		drag = true
 	elif event.is_action_released("pan"):
 		drag = false
-	elif event.is_action_pressed("zoom_in"):  # Wheel Up Event
+	elif event.is_action_pressed("zoom_in", false, true):  # Wheel Up Event
 		zoom_camera(-1)
-	elif event.is_action_pressed("zoom_out"):  # Wheel Down Event
+	elif event.is_action_pressed("zoom_out", false, true):  # Wheel Down Event
 		zoom_camera(1)
 
 	elif event is InputEventMagnifyGesture:  # Zoom Gesture on a Laptop touchpad
@@ -147,7 +152,7 @@ func _has_selection_tool() -> bool:
 func _rotate_camera_around_point(degrees: float, point: Vector2) -> void:
 	offset = (offset - point).rotated(deg2rad(degrees)) + point
 	rotation_degrees = wrapf(rotation_degrees + degrees, -180, 180)
-	rotation_changed()
+	emit_signal("rotation_changed")
 
 
 func _set_camera_rotation_degrees(degrees: float) -> void:
@@ -155,10 +160,10 @@ func _set_camera_rotation_degrees(degrees: float) -> void:
 	var canvas_center: Vector2 = Global.current_project.size / 2
 	offset = (offset - canvas_center).rotated(deg2rad(difference)) + canvas_center
 	rotation_degrees = wrapf(degrees, -180, 180)
-	rotation_changed()
+	emit_signal("rotation_changed")
 
 
-func rotation_changed() -> void:
+func _rotation_changed() -> void:
 	if index == Cameras.MAIN:
 		# Negative to make going up in value clockwise, and match the spinbox which does the same
 		Global.rotation_level_button.text = str(wrapi(round(-rotation_degrees), -180, 180)) + " °"
@@ -192,7 +197,7 @@ func zoom_camera(dir: int) -> void:
 			zoom = zoom_max
 
 		offset = offset + (-0.5 * viewport_size + mouse_pos).rotated(rotation) * (prev_zoom - zoom)
-		zoom_changed()
+		emit_signal("zoom_changed")
 
 
 func zoom_camera_percent(value: float) -> void:
@@ -204,19 +209,16 @@ func zoom_camera_percent(value: float) -> void:
 		tween.tween_property(self, "zoom", new_zoom, 0.05)
 	else:
 		zoom = new_zoom
-		zoom_changed()
+		emit_signal("zoom_changed")
 
 
-func zoom_changed() -> void:
+func _zoom_changed() -> void:
 	update_transparent_checker_offset()
 	if index == Cameras.MAIN:
 		Global.zoom_level_button.text = str(round(100 / zoom.x)) + " %"
-		Global.canvas.pixel_grid.update()
 		_update_rulers()
 		for guide in Global.current_project.guides:
 			guide.width = zoom.x * 2
-
-		Global.canvas.selection.update_on_zoom(zoom.x)
 
 	elif index == Cameras.SMALL:
 		Global.preview_zoom_slider.value = -zoom.x
@@ -228,13 +230,13 @@ func _update_rulers() -> void:
 
 
 func _on_tween_step(_idx: int) -> void:
-	zoom_changed()
+	emit_signal("zoom_changed")
 
 
 func zoom_100() -> void:
 	zoom = Vector2.ONE
 	offset = Global.current_project.size / 2
-	zoom_changed()
+	emit_signal("zoom_changed")
 
 
 func fit_to_frame(size: Vector2) -> void:
@@ -271,7 +273,7 @@ func fit_to_frame(size: Vector2) -> void:
 
 	ratio = clamp(ratio, 0.1, ratio)
 	zoom = Vector2(1 / ratio, 1 / ratio)
-	zoom_changed()
+	emit_signal("zoom_changed")
 
 
 func save_values_to_project() -> void:

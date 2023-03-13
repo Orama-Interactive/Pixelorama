@@ -10,7 +10,7 @@ onready var outline_color = $VBoxContainer/OptionsContainer/OutlineColor
 
 
 func _ready() -> void:
-	if OS.get_name() == "HTML5" and OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2:
+	if _is_webgl1():
 		$VBoxContainer/OptionsContainer/PatternOptionButton.disabled = true
 	else:
 		shader = load("res://src/Shaders/OutlineInline.gdshader")
