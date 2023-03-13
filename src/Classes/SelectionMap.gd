@@ -14,8 +14,8 @@ func is_pixel_selected(pixel: Vector2) -> bool:
 
 
 func get_nearest_position(pixel: Vector2) -> Vector2:
-	var behaviour = Global.canvas.selection.behaviour
-	match behaviour:
+	var behavior = Global.canvas.selection.behavior
+	match behavior:
 		Global.canvas.selection.Behavior.TILEMODE:
 			# functions more or less the same way as the tilemode
 			var size = Global.current_project.size
@@ -44,8 +44,8 @@ func get_nearest_position(pixel: Vector2) -> Vector2:
 
 func get_point_in_tile_mode(pixel: Vector2) -> Array:
 	var result = []
-	var behaviour = Global.canvas.selection.behaviour
-	match behaviour:
+	var behavior = Global.canvas.selection.behavior
+	match behavior:
 		Global.canvas.selection.Behavior.TILEMODE:
 			var selection_rect = get_used_rect()
 			var start_x = selection_rect.position.x - selection_rect.size.x
@@ -61,8 +61,8 @@ func get_point_in_tile_mode(pixel: Vector2) -> Array:
 
 
 func get_canon_position(position) -> Vector2:
-	var behaviour = Global.canvas.selection.behaviour
-	match behaviour:
+	var behavior = Global.canvas.selection.behavior
+	match behavior:
 		Global.canvas.selection.Behavior.TILEMODE:
 			return position - get_nearest_position(position)
 		_:

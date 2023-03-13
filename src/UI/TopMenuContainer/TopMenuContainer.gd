@@ -25,6 +25,7 @@ onready var help_menu_button := $MenuItems/HelpMenu
 onready var greyscale_vision: ColorRect = ui.find_node("GreyscaleVision")
 onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("CreateNewImage")
 onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
+onready var behavior_submenu := PopupMenu.new()
 onready var tile_mode_submenu := PopupMenu.new()
 onready var snap_to_submenu := PopupMenu.new()
 onready var panels_submenu := PopupMenu.new()
@@ -300,14 +301,29 @@ func _setup_image_menu() -> void:
 
 func _setup_select_menu() -> void:
 	# Order as in Global.SelectMenu enum
-	var select_menu_items := ["All", "Clear", "Invert"]
+	var select_menu_items := ["All", "Clear", "Invert", "Behavior"]
 	var select_menu: PopupMenu = select_menu_button.get_popup()
-	var i := 0
-	for item in select_menu_items:
-		select_menu.add_item(item, i)
-		i += 1
-
+	for i in select_menu_items.size():
+		var item: String = select_menu_items[i]
+		if item == "Behavior":
+			print("a")
+			_setup_behavior_submenu(item)
+		else:
+			select_menu.add_item(item, i)
 	select_menu.connect("id_pressed", self, "select_menu_id_pressed")
+
+
+func _setup_behavior_submenu(item: String) -> void:
+	var select_menu = select_menu_button.get_popup()
+	behavior_submenu.set_name("behavior_submenu")
+	behavior_submenu.add_radio_check_item("Default", 0) # SIMPLE
+	behavior_submenu.set_item_checked(Tiles.MODE.NONE, true)
+	behavior_submenu.add_radio_check_item("Tile Mode", 1) # TILEMODE
+	behavior_submenu.hide_on_checkable_item_selection = false
+
+	behavior_submenu.connect("id_pressed", self, "_behavior_submenu_id_pressed")
+	select_menu.add_child(behavior_submenu)
+	select_menu.add_submenu_item(item, behavior_submenu.get_name())
 
 
 func _setup_help_menu() -> void:
@@ -475,28 +491,6 @@ func view_menu_id_pressed(id: int) -> void:
 	Global.canvas.update()
 
 
-func _tile_mode_submenu_id_pressed(id: int) -> void:
-	Global.current_project.tiles.mode = id
-	Global.transparent_checker.fit_rect(Global.current_project.tiles.get_bounding_rect())
-	for i in Tiles.MODE.values():
-		tile_mode_submenu.set_item_checked(i, i == id)
-	Global.canvas.tile_mode.update()
-	Global.canvas.pixel_grid.update()
-	Global.canvas.grid.update()
-
-
-func _snap_to_submenu_id_pressed(id: int) -> void:
-	if id == 0:
-		Global.snap_to_rectangular_grid = !Global.snap_to_rectangular_grid
-		snap_to_submenu.set_item_checked(id, Global.snap_to_rectangular_grid)
-	elif id == 1:
-		Global.snap_to_guides = !Global.snap_to_guides
-		snap_to_submenu.set_item_checked(id, Global.snap_to_guides)
-	elif id == 2:
-		Global.snap_to_perspective_guides = !Global.snap_to_perspective_guides
-		snap_to_submenu.set_item_checked(id, Global.snap_to_perspective_guides)
-
-
 func window_menu_id_pressed(id: int) -> void:
 	if not Global.can_draw:
 		return
@@ -512,6 +506,34 @@ func window_menu_id_pressed(id: int) -> void:
 			_toggle_fullscreen()
 		_:
 			_handle_metadata(id, window_menu_button)
+
+
+func _tile_mode_submenu_id_pressed(id: int) -> void:
+	Global.current_project.tiles.mode = id
+	Global.transparent_checker.fit_rect(Global.current_project.tiles.get_bounding_rect())
+	for i in Tiles.MODE.values():
+		tile_mode_submenu.set_item_checked(i, i == id)
+	Global.canvas.tile_mode.update()
+	Global.canvas.pixel_grid.update()
+	Global.canvas.grid.update()
+
+
+func _behavior_submenu_id_pressed(id: int) -> void:
+	Global.canvas.selection.behavior = id
+	for i in Global.canvas.selection.Behavior.values():
+		behavior_submenu.set_item_checked(i, i == id)
+
+
+func _snap_to_submenu_id_pressed(id: int) -> void:
+	if id == 0:
+		Global.snap_to_rectangular_grid = !Global.snap_to_rectangular_grid
+		snap_to_submenu.set_item_checked(id, Global.snap_to_rectangular_grid)
+	elif id == 1:
+		Global.snap_to_guides = !Global.snap_to_guides
+		snap_to_submenu.set_item_checked(id, Global.snap_to_guides)
+	elif id == 2:
+		Global.snap_to_perspective_guides = !Global.snap_to_perspective_guides
+		snap_to_submenu.set_item_checked(id, Global.snap_to_perspective_guides)
 
 
 func _panels_submenu_id_pressed(id: int) -> void:

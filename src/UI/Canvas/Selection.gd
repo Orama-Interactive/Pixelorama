@@ -5,7 +5,7 @@ enum Behavior {SIMPLE, TILEMODE}
 const KEY_MOVE_ACTION_NAMES := ["ui_up", "ui_down", "ui_left", "ui_right"]
 const CLIPBOARD_FILE_PATH := "user://clipboard.txt"
 
-var behaviour = Behavior.SIMPLE
+var behavior = Behavior.SIMPLE
 var is_moving_content := false
 var arrow_key_move := false
 var is_pasting := false
