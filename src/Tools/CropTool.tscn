@@ -34,15 +34,16 @@ unique_name_in_owner = true
 margin_left = 88.0
 margin_right = 116.0
 margin_bottom = 22.0
-focus_mode = 0
-toggle_mode = true
-icon = ExtResource( 4 )
-__meta__ = {
-"_editor_description_": "Locked size
+hint_tooltip = "Locked size
 
 When enabled using the tool on the canvas will only move the cropping rectangle.
 
 When disabled using the tool on the canvas will draw the rectangle."
+focus_mode = 0
+toggle_mode = true
+icon = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
 }
 
 [node name="MarginsContainer" type="VBoxContainer" parent="." index="6"]

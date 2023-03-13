@@ -2155,3 +2155,8 @@ msgstr ""
 
 msgid "Right:"
 msgstr ""
+
+msgid "Locked size\n\n"
+"When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
+"When disabled using the tool on the canvas will draw the rectangle."
+msgstr ""
