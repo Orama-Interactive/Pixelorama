@@ -45,10 +45,6 @@ func refresh_options():
 	$Modes.select(_mode_selected)
 
 
-func _input(_event: InputEvent) -> void:
-	$TileMode.pressed = Global.canvas.selection.behaviour
-
-
 func get_config() -> Dictionary:
 	var config := .get_config()
 	config["mode_selected"] = _mode_selected
@@ -287,11 +283,3 @@ func _on_size_value_changed(value: float, horizontal: bool) -> void:
 func _on_Timer_timeout() -> void:
 	if !selection_node.is_moving_content:
 		selection_node.commit_undo("Move Selection", undo_data)
-
-
-func _on_TileMode_toggled(button_pressed: bool) -> void:
-	var selection = Global.canvas.selection
-	if button_pressed:
-		selection.behaviour = selection.Behavior.TILEMODE
-	else:
-		selection.behaviour = selection.Behavior.SIMPLE
