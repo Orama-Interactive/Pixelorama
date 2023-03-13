@@ -3,9 +3,9 @@ extends Node2D
 # Draws the rectangle overlay for the crop tool
 # Stores the shared settings between left and right crop tools
 
-enum Mode { MARGINS, POSITION_SIZE, LOCKED_ASPECT_RATIO }
-
 signal updated
+
+enum Mode { MARGINS, POSITION_SIZE, LOCKED_ASPECT_RATIO }
 
 const BIG = 100000  # Size of big rectangles used to darken background.
 const DARKEN_COLOR = Color(0, 0, 0, 0.5)
