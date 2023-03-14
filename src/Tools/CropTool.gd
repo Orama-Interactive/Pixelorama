@@ -1,6 +1,7 @@
 extends BaseTool
 # Crop Tool, allows you to resize the canvas interactively
 
+var _offset = Vector2.ZERO
 var _crop: CropRect
 var _start_pos: Vector2
 var _syncing := false
@@ -15,6 +16,45 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	_crop.tool_count -= 1
+
+
+func draw_start(position: Vector2) -> void:
+	.draw_start(position)
+	_offset = position - _crop.rect.position
+	_start_pos = position
+
+
+func draw_move(position: Vector2) -> void:
+	.draw_move(position)
+	if _crop.locked_size:
+		_crop.rect.position = position - _offset
+	else:
+		match _crop.mode:
+			CropRect.Mode.MARGINS, CropRect.Mode.POSITION_SIZE:
+				_crop.rect.position.x = min(_start_pos.x, position.x)
+				_crop.rect.position.y = min(_start_pos.y, position.y)
+				_crop.rect.end.x = max(_start_pos.x, position.x)
+				_crop.rect.end.y = max(_start_pos.y, position.y)
+			CropRect.Mode.LOCKED_ASPECT_RATIO:
+				var distance = abs(_start_pos.x - position.x) + abs(_start_pos.y - position.y)
+				_crop.rect.size.x = round(
+					distance * _crop.ratio.x / (_crop.ratio.x + _crop.ratio.y)
+				)
+				_crop.rect.size.y = round(
+					distance * _crop.ratio.y / (_crop.ratio.x + _crop.ratio.y)
+				)
+				if _start_pos.x < position.x:
+					_crop.rect.position.x = _start_pos.x
+				else:
+					_crop.rect.position.x = _start_pos.x - _crop.rect.size.x
+				if _start_pos.y < position.y:
+					_crop.rect.position.y = _start_pos.y
+				else:
+					_crop.rect.position.y = _start_pos.y - _crop.rect.size.y
+		# Ensure that the size is at least 1:
+		_crop.rect.size.x = max(1, _crop.rect.size.x)
+		_crop.rect.size.y = max(1, _crop.rect.size.y)
+	_crop.emit_signal("updated")
 
 
 func _sync_ui() -> void:
@@ -61,47 +101,6 @@ func _sync_ui() -> void:
 
 	$"%DimensionsLabel".text = str(_crop.rect.size.x, " x ", _crop.rect.size.y)
 	_syncing = false
-
-
-func draw_start(position: Vector2) -> void:
-	.draw_start(position)
-	_start_pos = position
-	if _crop.locked_size:
-		_crop.rect.position = position
-		_crop.emit_signal("updated")
-
-
-func draw_move(position: Vector2) -> void:
-	.draw_move(position)
-	if _crop.locked_size:
-		_crop.rect.position = position
-	else:
-		match _crop.mode:
-			CropRect.Mode.MARGINS, CropRect.Mode.POSITION_SIZE:
-				_crop.rect.position.x = min(_start_pos.x, position.x)
-				_crop.rect.position.y = min(_start_pos.y, position.y)
-				_crop.rect.end.x = max(_start_pos.x, position.x)
-				_crop.rect.end.y = max(_start_pos.y, position.y)
-			CropRect.Mode.LOCKED_ASPECT_RATIO:
-				var distance = abs(_start_pos.x - position.x) + abs(_start_pos.y - position.y)
-				_crop.rect.size.x = round(
-					distance * _crop.ratio.x / (_crop.ratio.x + _crop.ratio.y)
-				)
-				_crop.rect.size.y = round(
-					distance * _crop.ratio.y / (_crop.ratio.x + _crop.ratio.y)
-				)
-				if _start_pos.x < position.x:
-					_crop.rect.position.x = _start_pos.x
-				else:
-					_crop.rect.position.x = _start_pos.x - _crop.rect.size.x
-				if _start_pos.y < position.y:
-					_crop.rect.position.y = _start_pos.y
-				else:
-					_crop.rect.position.y = _start_pos.y - _crop.rect.size.y
-		# Ensure that the size is at least 1:
-		_crop.rect.size.x = max(1, _crop.rect.size.x)
-		_crop.rect.size.y = max(1, _crop.rect.size.y)
-	_crop.emit_signal("updated")
 
 
 # UI Signals:
