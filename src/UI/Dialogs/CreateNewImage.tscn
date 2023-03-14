@@ -8,28 +8,24 @@
 [ext_resource path="res://assets/graphics/misc/lock_aspect_guides.png" type="Texture" id=6]
 
 [node name="CreateNewImage" type="ConfirmationDialog"]
-margin_right = 375.0
-margin_bottom = 222.0
+margin_right = 471.0
+margin_bottom = 284.0
 rect_min_size = Vector2( 375, 222 )
 window_title = "New..."
 resizable = true
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 367.0
-margin_bottom = 186.0
+margin_right = -8.0
+margin_bottom = -36.0
 size_flags_horizontal = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ProjectName" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 359.0
+margin_right = 455.0
 margin_bottom = 24.0
 
 [node name="NameLabel" type="Label" parent="VBoxContainer/ProjectName"]
@@ -41,37 +37,47 @@ text = "Project Name:"
 
 [node name="NameInput" type="LineEdit" parent="VBoxContainer/ProjectName"]
 margin_left = 104.0
-margin_right = 359.0
+margin_right = 455.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 placeholder_text = "Enter name... (Default \"untitled\")"
 
 [node name="ImageSize" type="Label" parent="VBoxContainer"]
 margin_top = 28.0
-margin_right = 359.0
+margin_right = 455.0
 margin_bottom = 42.0
 text = "Image Size"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 margin_top = 46.0
-margin_right = 359.0
+margin_right = 455.0
 margin_bottom = 50.0
 
-[node name="TemplatesContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 54.0
-margin_right = 359.0
-margin_bottom = 74.0
+margin_right = 455.0
+margin_bottom = 192.0
+size_flags_vertical = 3
 
-[node name="TemplatesLabel" type="Label" parent="VBoxContainer/TemplatesContainer"]
+[node name="Templates" type="VBoxContainer" parent="VBoxContainer/VBoxContainer"]
+margin_right = 293.0
+margin_bottom = 138.0
+size_flags_horizontal = 3
+
+[node name="TemplatesContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Templates"]
+margin_right = 293.0
+margin_bottom = 20.0
+
+[node name="TemplatesLabel" type="Label" parent="VBoxContainer/VBoxContainer/Templates/TemplatesContainer"]
 margin_top = 3.0
 margin_right = 100.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 100, 0 )
 text = "Templates:"
 
-[node name="TemplatesOptions" type="OptionButton" parent="VBoxContainer/TemplatesContainer"]
+[node name="TemplatesOptions" type="OptionButton" parent="VBoxContainer/VBoxContainer/Templates/TemplatesContainer"]
 margin_left = 104.0
-margin_right = 359.0
+margin_right = 293.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -80,30 +86,30 @@ text = "Default"
 items = [ "Default", null, false, 0, null ]
 selected = 0
 
-[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 78.0
-margin_right = 359.0
-margin_bottom = 130.0
+[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Templates"]
+margin_top = 24.0
+margin_right = 293.0
+margin_bottom = 76.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SizeContainer"]
-margin_right = 346.0
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer"]
+margin_right = 280.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 
-[node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
-margin_right = 346.0
+[node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer"]
+margin_right = 280.0
 margin_bottom = 24.0
 
-[node name="WidthLabel" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
+[node name="WidthLabel" type="Label" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer/WidthContainer"]
 margin_top = 5.0
 margin_right = 100.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 100, 0 )
 text = "Width:"
 
-[node name="WidthValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
+[node name="WidthValue" type="SpinBox" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer/WidthContainer"]
 margin_left = 104.0
-margin_right = 346.0
+margin_right = 280.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -112,21 +118,21 @@ max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
+[node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer"]
 margin_top = 28.0
-margin_right = 346.0
+margin_right = 280.0
 margin_bottom = 52.0
 
-[node name="HeightLabel" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
+[node name="HeightLabel" type="Label" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer/HeightContainer"]
 margin_top = 5.0
 margin_right = 100.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 100, 0 )
 text = "Height:"
 
-[node name="HeightValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
+[node name="HeightValue" type="SpinBox" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer/HeightContainer"]
 margin_left = 104.0
-margin_right = 346.0
+margin_right = 280.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -135,13 +141,13 @@ max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer" groups=["UIButtons"]]
-margin_left = 350.0
-margin_right = 359.0
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer" groups=["UIButtons"]]
+margin_left = 284.0
+margin_right = 293.0
 margin_bottom = 52.0
 texture = ExtResource( 6 )
 
-[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/TextureRect" groups=["UIButtons"]]
+[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/TextureRect" groups=["UIButtons"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -159,10 +165,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/VBoxContainer"]
+margin_left = 297.0
+margin_right = 301.0
+margin_bottom = 138.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer"]
+margin_left = 305.0
+margin_right = 455.0
+margin_bottom = 138.0
+rect_min_size = Vector2( 150, 0 )
+rect_clip_content = true
+focus_mode = 2
+mouse_filter = 0
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/VBoxContainer"]
+margin_right = 150.0
+margin_bottom = 14.0
+text = "Recent:"
+
+[node name="RecentTemplates" type="ItemList" parent="VBoxContainer/VBoxContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 150.0
+margin_bottom = 138.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+allow_reselect = true
+
 [node name="SizeButtonsContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 134.0
-margin_right = 359.0
-margin_bottom = 154.0
+margin_top = 196.0
+margin_right = 455.0
+margin_bottom = 216.0
 
 [node name="PortraitButton" type="Button" parent="VBoxContainer/SizeButtonsContainer" groups=["UIButtons"]]
 margin_right = 20.0
@@ -212,9 +248,9 @@ __meta__ = {
 }
 
 [node name="FillColorContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 158.0
-margin_right = 359.0
-margin_bottom = 178.0
+margin_top = 220.0
+margin_right = 455.0
+margin_bottom = 240.0
 
 [node name="FillColorLabel" type="Label" parent="VBoxContainer/FillColorContainer"]
 margin_top = 3.0
@@ -225,17 +261,19 @@ text = "Fill with color:"
 
 [node name="FillColor" type="ColorPickerButton" parent="VBoxContainer/FillColorContainer"]
 margin_left = 104.0
-margin_right = 359.0
+margin_right = 455.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 color = Color( 0, 0, 0, 0 )
 
+[connection signal="about_to_show" from="." to="." method="_on_CreateNewImage_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_CreateNewImage_confirmed"]
-[connection signal="item_selected" from="VBoxContainer/TemplatesContainer/TemplatesOptions" to="." method="_on_TemplatesOptions_item_selected"]
-[connection signal="value_changed" from="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer/WidthValue" to="." method="_on_SizeValue_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer/HeightValue" to="." method="_on_SizeValue_value_changed"]
-[connection signal="toggled" from="VBoxContainer/SizeContainer/TextureRect/AspectRatioButton" to="." method="_on_AspectRatioButton_toggled"]
+[connection signal="item_selected" from="VBoxContainer/VBoxContainer/Templates/TemplatesContainer/TemplatesOptions" to="." method="_on_TemplatesOptions_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer/WidthContainer/WidthValue" to="." method="_on_SizeValue_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer/HeightContainer/HeightValue" to="." method="_on_SizeValue_value_changed"]
+[connection signal="toggled" from="VBoxContainer/VBoxContainer/Templates/SizeContainer/TextureRect/AspectRatioButton" to="." method="_on_AspectRatioButton_toggled"]
+[connection signal="item_selected" from="VBoxContainer/VBoxContainer/VBoxContainer/RecentTemplates" to="." method="_on_RecentTemplates_item_selected"]
 [connection signal="toggled" from="VBoxContainer/SizeButtonsContainer/PortraitButton" to="." method="_on_PortraitButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/SizeButtonsContainer/LandscapeButton" to="." method="_on_LandscapeButton_toggled"]
