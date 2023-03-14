@@ -393,7 +393,7 @@ func draw_tool_brush(brush_position: Vector2) -> void:
 			continue
 		var src_rect := Rect2(dst_rect.position - dst, dst_rect.size)
 		var brush_image: Image = remove_unselected_parts_of_brush(_brush_image, dst)
-    dst = dst_rect.position
+		dst = dst_rect.position
 		_draw_brush_image(brush_image, src_rect, dst)
 
 		# Handle Mirroring
