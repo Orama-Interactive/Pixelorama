@@ -43,13 +43,11 @@ func set_nodes() -> void:
 
 func _about_to_show() -> void:
 	drag_pivot = false
+	if pivot == Vector2.INF:
+		_calculate_pivot()
 	confirmed = false
 	._about_to_show()
 	wait_apply_timer.wait_time = wait_time_slider.value / 1000.0
-	# setting angle_slider to zero is too much pressure on windows so pixelorama crashes
-#	angle_slider.value = 0
-	if pivot == Vector2.INF:
-		_calculate_pivot()
 
 
 func _calculate_pivot() -> void:
