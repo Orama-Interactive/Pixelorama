@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-03-16 17:55\n"
+"PO-Revision-Date: 2023-03-16 21:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2233,40 +2233,42 @@ msgid "Reference Images"
 msgstr "Imagens de Referência"
 
 msgid "Crop"
-msgstr ""
+msgstr "Cortar"
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "Redimensionar tela"
 
 msgid "Margins"
-msgstr ""
+msgstr "Margens"
 
 msgid "Position + Size"
-msgstr ""
+msgstr "Posição + Tamanho"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "Proporção Bloqueada"
 
 msgid "Margins:"
-msgstr ""
+msgstr "Margens:"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "Proporção:"
 
 msgid "Top:"
-msgstr ""
+msgstr "Topo:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "Base:"
 
 msgid "Left:"
-msgstr ""
+msgstr "Esquerda:"
 
 msgid "Right:"
-msgstr ""
+msgstr "Direita:"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Tamanho bloqueado\n\n"
+"Quando habilitado usando a ferramenta na tela só irá mover o retângulo de corte.\n\n"
+"Quando desativado usando a ferramenta da tela irá desenhar o retângulo."
 
