@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-03-16 17:55\n"
+"PO-Revision-Date: 2023-03-16 21:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2239,16 +2239,16 @@ msgid "Resize the canvas"
 msgstr ""
 
 msgid "Margins"
-msgstr ""
+msgstr "Marges"
 
 msgid "Position + Size"
-msgstr ""
+msgstr "Position + Taille"
 
 msgid "Locked Aspect Ratio"
 msgstr ""
 
 msgid "Margins:"
-msgstr ""
+msgstr "Marges :"
 
 msgid "Aspect Ratio:"
 msgstr ""
