@@ -82,21 +82,21 @@ func cursor_move(position: Vector2) -> void:
 func get_spacing_position(position: Vector2) -> Vector2:
 	# spacing_factor is the distance the mouse needs to get snapped by in order
 	# to keep a space "_spacing" between two strokes of dimensions "_stroke_dimensions"
-	var spacing_factor = _stroke_dimensions + _spacing
-	var snap_position = position.snapped(spacing_factor) + _spacing_offset
+	var spacing_factor := _stroke_dimensions + _spacing
+	var snap_position := position.snapped(spacing_factor) + _spacing_offset
 
 	# keeping snap_position as is would have been fine but this adds extra accuracy as to
 	# which snap point (from the list below) is closest to mouse and occupy THAT point
-	var t_c = snap_position + Vector2(0, -spacing_factor.y)  # t_c is for "top centre" and so on...
-	var t_r = snap_position + Vector2(spacing_factor.x, -spacing_factor.y)
-	var t_r_r = snap_position + Vector2(2 * spacing_factor.x, -spacing_factor.y)
-	var m_c = snap_position
-	var m_r = snap_position + Vector2(spacing_factor.x, 0)
-	var m_r_r = snap_position + Vector2(2 * spacing_factor.x, 0)
-	var b_c = snap_position + Vector2(0, spacing_factor.y)
-	var b_r = snap_position + Vector2(spacing_factor.x, spacing_factor.y)
-	var b_r_r = snap_position + Vector2(2 * spacing_factor.x, spacing_factor.y)
-	var vec_arr := [t_c, t_r, t_r_r, m_c, m_r, m_r_r, b_c, b_r, b_r_r]
+	var t_l := snap_position + Vector2(-spacing_factor.x, -spacing_factor.y)
+	var t_c := snap_position + Vector2(0, -spacing_factor.y)  # t_c is for "top centre" and so on...
+	var t_r := snap_position + Vector2(spacing_factor.x, -spacing_factor.y)
+	var m_l := snap_position + Vector2(-spacing_factor.x, 0)
+	var m_c := snap_position
+	var m_r := snap_position + Vector2(spacing_factor.x, 0)
+	var b_l := snap_position + Vector2(-spacing_factor.x, spacing_factor.y)
+	var b_c := snap_position + Vector2(0, spacing_factor.y)
+	var b_r := snap_position + Vector2(spacing_factor.x, spacing_factor.y)
+	var vec_arr := [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
 	for vec in vec_arr:
 		if vec.distance_to(position) < snap_position.distance_to(position):
 			snap_position = vec
@@ -128,28 +128,55 @@ func snap_position(position: Vector2) -> Vector2:
 		var grid_offset := Vector2(Global.grid_offset_x, Global.grid_offset_y)
 		var grid_pos := position.snapped(grid_size)
 		grid_pos += grid_offset
+		# keeping grid_pos as is would have been fine but this adds extra accuracy as to
+		# which snap point (from the list below) is closest to mouse and occupy THAT point
+		var t_l := grid_pos + Vector2(-grid_size.x, -grid_size.y)
+		var t_c := grid_pos + Vector2(0, -grid_size.y)  # t_c is for "top centre" and so on
+		var t_r := grid_pos + Vector2(grid_size.x, -grid_size.y)
+		var m_l := grid_pos + Vector2(-grid_size.x, 0)
+		var m_c := grid_pos
+		var m_r := grid_pos + Vector2(grid_size.x, 0)
+		var b_l := grid_pos + Vector2(-grid_size.x, grid_size.y)
+		var b_c := grid_pos + Vector2(0, grid_size.y)
+		var b_r := grid_pos + Vector2(grid_size.x, grid_size.y)
+		var vec_arr := [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
+		for vec in vec_arr:
+			if vec.distance_to(position) < grid_pos.distance_to(position):
+				grid_pos = vec
+
 		var closest_point_grid := _get_closest_point_to_grid(position, snap_distance, grid_pos)
 		if closest_point_grid != Vector2.INF:
 			position = closest_point_grid.floor()
 
+	var snap_to := Vector2.INF
 	if Global.snap_to_guides:
-		var snap_to := Vector2.INF
 		for guide in Global.current_project.guides:
 			if guide is SymmetryGuide:
 				continue
-			var closest_point := _get_closest_point_to_segment(
-				position, snap_distance, guide.points[0], guide.points[1]
-			)
-			if closest_point == Vector2.INF:  # Is not close to a guide
+			var s1: Vector2 = guide.points[0]
+			var s2: Vector2 = guide.points[1]
+			var snap := _snap_to_guide(snap_to, position, snap_distance, s1, s2)
+			if snap == Vector2.INF:
 				continue
-			# Snap to the closest guide
-			if (
-				snap_to == Vector2.INF
-				or (snap_to - position).length() > (closest_point - position).length()
-			):
-				snap_to = closest_point
-		if snap_to != Vector2.INF:
-			position = snap_to.floor()
+			snap_to = snap
+
+	if Global.snap_to_perspective_guides:
+		for point in Global.current_project.vanishing_points:
+			if point.has("pos_x") and point.has("pos_y"):  # Sanity check
+				for i in point.lines.size():
+					if point.lines[i].has("angle") and point.lines[i].has("length"):  # Sanity check
+						var angle: float = deg2rad(point.lines[i].angle)
+						var length: float = point.lines[i].length
+						var start = Vector2(point.pos_x, point.pos_y)
+						var s1: Vector2 = start
+						var s2 := s1 + Vector2(length * cos(angle), length * sin(angle))
+						var snap := _snap_to_guide(snap_to, position, snap_distance, s1, s2)
+						if snap == Vector2.INF:
+							continue
+						snap_to = snap
+	if snap_to != Vector2.INF:
+		position = snap_to.floor()
+
 	return position
 
 
@@ -192,10 +219,29 @@ func _get_closest_point_to_grid(
 func _get_closest_point_to_segment(
 	position: Vector2, distance: Vector2, s1: Vector2, s2: Vector2
 ) -> Vector2:
+	var test_line := (s2 - s1).rotated(deg2rad(90)).normalized()
+	var from_a := position - test_line * distance.length()
+	var from_b := position + test_line * distance.length()
 	var closest_point := Vector2.INF
-	if Geometry.segment_intersects_segment_2d(position - distance, position + distance, s1, s2):
+	if Geometry.segment_intersects_segment_2d(from_a, from_b, s1, s2):
 		closest_point = Geometry.get_closest_point_to_segment_2d(position, s1, s2)
 	return closest_point
+
+
+func _snap_to_guide(
+	snap_to: Vector2, position: Vector2, distance: Vector2, s1: Vector2, s2: Vector2
+) -> Vector2:
+	var closest_point := _get_closest_point_to_segment(position, distance, s1, s2)
+	if closest_point == Vector2.INF:  # Is not close to a guide
+		return Vector2.INF
+	# Snap to the closest guide
+	if (
+		snap_to == Vector2.INF
+		or (snap_to - position).length() > (closest_point - position).length()
+	):
+		snap_to = closest_point
+
+	return snap_to
 
 
 func _get_draw_rect() -> Rect2:

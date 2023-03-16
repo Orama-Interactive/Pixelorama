@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2022-09-20 12:11\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -165,8 +165,11 @@ msgstr "Централізувати зображення"
 msgid "Rotate Image"
 msgstr "Повернути зображення"
 
-msgid "Pivot (x, y):"
-msgstr "Центр обертання (x, y):"
+msgid "Pivot x:"
+msgstr "X центра:"
+
+msgid "Pivot y:"
+msgstr "Y центра:"
 
 msgid "Smear options:"
 msgstr "Параметри мазку:"
@@ -327,11 +330,14 @@ msgstr "Таблиця спрайтів (новий шар)"
 msgid "New frame"
 msgstr "Новий кадр"
 
-msgid "Replace frame"
-msgstr "Замінити кадр"
+msgid "Replace cel"
+msgstr "Замінити клітинку"
 
 msgid "New layer"
 msgstr "Новий шар"
+
+msgid "New reference image"
+msgstr "Нове еталонне зображення"
 
 msgid "New palette"
 msgstr "Нова палітра"
@@ -381,8 +387,10 @@ msgstr "Експортувати спрайт"
 msgid "File Exists, Overwrite?"
 msgstr "Файл існує, перезаписати?"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "Файл \"%s\" вже існує. Перезаписати?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr "Вказані нижче файли вже існують. Перезаписати їх?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Шлях до директорії неправильний!"
@@ -451,14 +459,31 @@ msgstr "Виберіть поточний каталог"
 msgid "Open a Directory"
 msgstr "Відкрити каталог"
 
-msgid "All frames as multiple files"
-msgstr "Усі кадри як декілька файлів"
-
-msgid "All frames as a single file animation"
-msgstr "Всі кадри як один файл анімації"
-
 msgid "Background:"
 msgstr "Фон:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr "Вибрані кадри"
+
+msgid "Layers:"
+msgstr "Шари:"
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr "Видимі шари"
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr "Вибрані шари"
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr "Шар пікселів:"
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr "Груповий шар:"
 
 msgid "Direction:"
 msgstr "Напрямок:"
@@ -484,6 +509,10 @@ msgstr "Рядки"
 msgid "Rows:"
 msgstr "Рядки:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr "Розміри для експорту:"
+
 msgid "Path:"
 msgstr "Шлях:"
 
@@ -495,6 +524,10 @@ msgstr "Створити каталог"
 
 msgid "File:"
 msgstr "Файл:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr "Розширені опції"
 
 msgid "Interpolation:"
 msgstr "Інтерполяція:"
@@ -544,6 +577,10 @@ msgstr "Резервна копія"
 msgid "Performance"
 msgstr "Продуктивність"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr "Драйвери"
+
 msgid "Extensions"
 msgstr "Розширення"
 
@@ -552,6 +589,10 @@ msgstr "Курсори"
 
 msgid "Indicators"
 msgstr "Індикатори"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr "Треба перезапустити Pixeloram’у, щоб зміни набули чинності."
 
 msgid "On"
 msgstr "Вкл"
@@ -717,23 +758,30 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr "Якщо увімкнено, останню точку буде додано в кінець градієнту.\n"
 "Вимкніть, щоб перетворити градієнт таким чином, щоб в ньому була константна інтерполяція, щоб останній колір враховувався."
 
+msgid "Shape:"
+msgstr "Форма:"
+
 msgid "Linear"
 msgstr "Лінійний"
 
 msgid "Radial"
 msgstr "Радіальний"
 
-msgid "Linear Step"
-msgstr "Лінійний кроками"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
+msgstr "Повтор:"
 
-msgid "Radial Step"
-msgstr "Радіальний кроками"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
+msgstr "Повтор"
 
-msgid "Linear Dithering"
-msgstr "Лінійний крапками"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
+msgstr "Віддзеркалення"
 
-msgid "Radial Dithering"
-msgstr "Радіальний крапками"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
+msgstr "Усічення"
 
 msgid "Transition size:"
 msgstr "Розмір переходу:"
@@ -932,6 +980,9 @@ msgstr "Сербська (кирилиця)"
 
 msgid "Dutch"
 msgstr "Голландська"
+
+msgid "Belarusian"
+msgstr "Білоруська"
 
 msgid "Development Team"
 msgstr "Команда розробників"
@@ -1326,6 +1377,22 @@ msgstr "Встановлює обмеження кадрів в секунду. 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Якщо вибрано цей параметр, коли вікно програми губитиме фокус, програма призупинятиметься. Це допомагає не використовувати процесор дарма. Програма буде знов активована, коли курсор миші буде рухатися в вікні програми."
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr "Рендерер:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr "Вказує, який використовуватиметься рендерер/відеодрайвер. GLES2 кращий для старіших та менш потужних пристроїв, а в GLES3 більше можливостей."
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr "Драйвер планшету:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr "В Windows вказує, який використовується драйвер планшета. Якщо увімкнено Windows Ink, оберіть winink."
+
 msgid "Add Extension"
 msgstr "Додати розширення"
 
@@ -1410,9 +1477,11 @@ msgstr "Все виділення"
 msgid "Fill with:"
 msgstr "Чим залити:"
 
-msgid "Selected Color"
-msgstr "Вибраний колір"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr "Вибраній колір"
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Шаблон"
 
@@ -1609,11 +1678,11 @@ msgstr "Перейти вправо"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cel"
-msgstr "З’єднати клітинки"
+msgid "Link Cels to"
+msgstr "Пов'язати клітинки з"
 
-msgid "Unlink Cel"
-msgstr "Від’єднати клітинки"
+msgid "Unlink Cels"
+msgstr "Відв'язати клітинки"
 
 msgid "Frame Properties"
 msgstr "Властивості кадру"
@@ -1624,11 +1693,17 @@ msgstr "Властивості кадру"
 msgid "Layer"
 msgstr "Шар"
 
+msgid "Group"
+msgstr "Група"
+
 msgid "Layers"
 msgstr "Шари"
 
 msgid "Create a new layer"
 msgstr "Створити новий шар"
+
+msgid "Create a new group layer"
+msgstr "Створити груповий шар"
 
 msgid "Remove current layer"
 msgstr "Видалити поточний шар"
@@ -1660,10 +1735,13 @@ msgstr "Заблокувати/розблокувати шар"
 msgid "Frame: %s, Layer: %s"
 msgstr "Кадр: %s, шар: %s"
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
-msgstr "Дозволити/заборонити з’єднання клітинок\n\n"
-"З’єднані клітинки використовуються в декількох шарах"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr "Увімкнути/вимкнути автоматичне зв'язання нових клітинок при створенні нових кадрів\n\n"
+"Пов'язані клітинки будуть одночасно використовуватися в різних кадрах"
+
+msgid "Expand/collapse group"
+msgstr "Розгорнути/згорнути групу"
 
 msgid "Palette"
 msgstr "Палітра"
@@ -1995,11 +2073,13 @@ msgstr "Інтервал автозбереження:"
 msgid "minute(s)"
 msgstr "хв."
 
-msgid "Create new directory for each frame tag"
-msgstr "Створити новий каталог для кожного тегу кадрів"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr "Створити по каталогу для тегу кадрів"
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Ствоює декілька файлів, але кожен файл зберігатиметься в каталозі, який відповідає тегу кадрів"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr "Створює декілька файлів, але кожен файл буде зберігатися в окремому каталозі, відповідно до тегу кадрів"
 
 msgid "Close"
 msgstr "Закрити"
@@ -2026,9 +2106,6 @@ msgstr "Неможливо видалити більш палітр!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Неможливо видалити палітру, бо вона не існує!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Помилка при видаленні палітри! Код помилки: %s"
 
 msgid "and"
 msgstr "і"
@@ -2116,4 +2193,7 @@ msgstr "Параметри лівого інструмента"
 
 msgid "Right Tool Options"
 msgstr "Параметри правого інструмента"
+
+msgid "Reference Images"
+msgstr "Еталонні зображення"
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,8 +165,11 @@ msgstr "Wyśrodkuj obraz"
 msgid "Rotate Image"
 msgstr "Obróć obraz"
 
-msgid "Pivot (x, y):"
-msgstr "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr "Oś X:"
+
+msgid "Pivot y:"
+msgstr "Oś Y:"
 
 msgid "Smear options:"
 msgstr "Opcje rozmazywania:"
@@ -327,11 +330,14 @@ msgstr "Spritesheet (nowa warstwa)"
 msgid "New frame"
 msgstr "Nowa klatka"
 
-msgid "Replace frame"
-msgstr "Zamień klatkę"
+msgid "Replace cel"
+msgstr "Zastąp kalkę"
 
 msgid "New layer"
 msgstr "Nowa warstwa"
+
+msgid "New reference image"
+msgstr "Nowy obraz odniesienia"
 
 msgid "New palette"
 msgstr "Nowa paleta"
@@ -381,8 +387,10 @@ msgstr "Eksportuj obraz"
 msgid "File Exists, Overwrite?"
 msgstr "Plik istnieje! Nadpisać?"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "Plik %s już istnieje. Nadpisać?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr "Następujące pliki już istnieją, czy chcesz je nadpisać?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Ścieżka jest nieprawidłowa!"
@@ -450,14 +458,31 @@ msgstr "Wybierz obecny folder"
 msgid "Open a Directory"
 msgstr "Otwórz katalog"
 
-msgid "All frames as multiple files"
-msgstr "Wszystkie klatki w animacji jako osobne pliki"
-
-msgid "All frames as a single file animation"
-msgstr "Wszystkie klatki w animacji jako jeden plik"
-
 msgid "Background:"
 msgstr "Tło:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr "Wybrane klatki"
+
+msgid "Layers:"
+msgstr "Warstwy:"
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr "Widoczne warstwy"
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr "Wybrane Warstwy"
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr "Warstwa pikselowa:"
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr "Warstwa grupowania:"
 
 msgid "Direction:"
 msgstr "Kierunek:"
@@ -483,6 +508,10 @@ msgstr "Rzędy"
 msgid "Rows:"
 msgstr "Rzędy:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr "Wymiary Exportu:"
+
 msgid "Path:"
 msgstr "Ścieżka:"
 
@@ -494,6 +523,10 @@ msgstr "Utwórz folder"
 
 msgid "File:"
 msgstr "Plik:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr "Zaawansowane opcje"
 
 msgid "Interpolation:"
 msgstr "Interpolacja:"
@@ -543,6 +576,10 @@ msgstr "Utwórz kopię zapasową"
 msgid "Performance"
 msgstr "Wydajność"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr "Sterowniki"
+
 msgid "Extensions"
 msgstr "Rozszerzenia"
 
@@ -551,6 +588,10 @@ msgstr "Kursory"
 
 msgid "Indicators"
 msgstr "Wskaźniki"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr "Pixelorama musi zostać uruchomiona ponownie, aby zastosować zmiany."
 
 msgid "On"
 msgstr "Włączone"
@@ -610,7 +651,7 @@ msgid "Theme"
 msgstr "Motyw"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Przyciski"
 
 msgid "Icon color from:"
 msgstr "Kolor ikony z:"
@@ -619,7 +660,7 @@ msgid "Icon color:"
 msgstr "Kolor ikony:"
 
 msgid "Background"
-msgstr ""
+msgstr "Tło"
 
 msgid "Background color from:"
 msgstr "Kolor tła z:"
@@ -646,10 +687,10 @@ msgid "Only affect selection"
 msgstr "Wpływ tylko na zaznaczenie"
 
 msgid "Selected cels"
-msgstr "Wybrane komórki"
+msgstr "Wybrane kalki"
 
 msgid "Current cel"
-msgstr "Bieżąca komórka"
+msgstr "Bieżąca kalka"
 
 msgid "Current frame"
 msgstr "Aktualna klatka"
@@ -716,23 +757,30 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr "Gdy włączone, ostatni punkt będzie dodawany na końcu gradientu.\n"
 "Wyłącz, jeśli chcesz gradient ze stałą interpolacją, aby ostatni kolor był brany pod uwagę."
 
+msgid "Shape:"
+msgstr ""
+
 msgid "Linear"
 msgstr "Prosty"
 
 msgid "Radial"
 msgstr "Promienisty"
 
-msgid "Linear Step"
-msgstr "Prosty, krokowy"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
+msgstr ""
 
-msgid "Radial Step"
-msgstr "Promienisty, krokowy"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
+msgstr ""
 
-msgid "Linear Dithering"
-msgstr "Proste ditherowanie"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
+msgstr ""
 
-msgid "Radial Dithering"
-msgstr "Promieniste Ditherowanie"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
+msgstr ""
 
 msgid "Transition size:"
 msgstr "Rozmiar zmiany:"
@@ -931,6 +979,9 @@ msgstr "Serbski (Cyrylica)"
 
 msgid "Dutch"
 msgstr "Niderlandzki"
+
+msgid "Belarusian"
+msgstr "Białoruski"
 
 msgid "Development Team"
 msgstr "Zespół developerski"
@@ -1325,6 +1376,22 @@ msgstr "Ustawia limit klatek aplikacji na sekundę. Im niższa liczba, tym niżs
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Jeśli ta opcja jest włączona i okno aplikacji traci skupienie, to program zostanie zapauzowany. To pomaga zmniejszyć użycie procesora, kiedy aplikacja działa w tle. Aplikacja zostaje odpauzowana, kiedy myszka pojawi się na oknie aplikacji."
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr "Renderowanie:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr "Wybiera sterownik renderowania, GLES2 jest lepsze dla starszych i słabszych urządzeń, a GLES3 posiada więcej funkcji."
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr "Sterownik tabletu:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr "Wybiera sterownik tabletu na Windowsie, jeżeli masz włączony \"Windows Ink\", wybierz \"winink\"."
+
 msgid "Add Extension"
 msgstr "Dodaj rozszerzenie"
 
@@ -1409,9 +1476,11 @@ msgstr "Całe zaznaczenie"
 msgid "Fill with:"
 msgstr "Wypełnij za pomocą:"
 
-msgid "Selected Color"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
 msgstr "Wybrany kolor"
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Wzorzec"
 
@@ -1608,11 +1677,11 @@ msgstr "Przesuń w prawo"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cel"
-msgstr "Połącz komórkę"
+msgid "Link Cels to"
+msgstr "Połącz kalki do"
 
-msgid "Unlink Cel"
-msgstr "Odłącz komórkę"
+msgid "Unlink Cels"
+msgstr "Rozłącz kalki"
 
 msgid "Frame Properties"
 msgstr "Właściwości klatki"
@@ -1623,11 +1692,17 @@ msgstr "Właściwości klatki"
 msgid "Layer"
 msgstr "Warstwa"
 
+msgid "Group"
+msgstr "Grupa"
+
 msgid "Layers"
 msgstr "Warstwy"
 
 msgid "Create a new layer"
 msgstr "Stwórz nową warstwę"
+
+msgid "Create a new group layer"
+msgstr "Stwórz nową grupę warstw"
 
 msgid "Remove current layer"
 msgstr "Usuń obecną warstwę"
@@ -1659,10 +1734,13 @@ msgstr "Zablokuj/odblokuj warstwę"
 msgid "Frame: %s, Layer: %s"
 msgstr "Klatka: %s, Warstwa: %s"
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
-msgstr "Włącz/wyłącz łączenie komórek\n\n"
-"Złączone komórki są współdzielone przez wiele komórek"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr "Włącz/Wyłącz automatyczne łączenie nowych kalk, gdy są tworzone nowe klatki\n\n"
+"Połączone kalki dzielą zawartość pomiędzy wieloma klatkami"
+
+msgid "Expand/collapse group"
+msgstr "Rozwiń/zwiń grupę"
 
 msgid "Palette"
 msgstr "Paleta kolorów"
@@ -1994,11 +2072,13 @@ msgstr "Częstotliwość automatycznego zapisu:"
 msgid "minute(s)"
 msgstr "minuta(y)"
 
-msgid "Create new directory for each frame tag"
-msgstr "Utwórz nowy katalog dla każdego tagu klatek"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr "Stwórz nowy folder dla każdego tagu animacji"
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Tworzy wiele plików, ale każdy plik jest przechowywany w innym katalogu, który odpowiada tagowi klatek"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr "Tworzy wiele plików, lecz każdy jest zapisywany w innym folderze, odpowiadającym tagowi animacji"
 
 msgid "Close"
 msgstr "Zamknij"
@@ -2025,9 +2105,6 @@ msgstr "Nie możesz usunąć więcej palet!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Nie można usunąć palety, ponieważ nie istnieje!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Wystąpił błąd podczas usuwania palety! Kod błędu: %s"
 
 msgid "and"
 msgstr "i"
@@ -2115,4 +2192,7 @@ msgstr "Opcje lewego narzędzia"
 
 msgid "Right Tool Options"
 msgstr "Opcje prawego narzędzia"
+
+msgid "Reference Images"
+msgstr "Obrazy odniesienia"
 

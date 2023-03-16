@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: pip3 install gdtoolkit
+      - run: pip3 install "gdtoolkit==3.*"
       - run: gdformat --diff .
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: pip3 install gdtoolkit
+      - run: pip3 install "gdtoolkit==3.*"
       - run: gdlint .
   codespell:
       runs-on: ubuntu-latest

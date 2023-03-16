@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -165,7 +165,10 @@ msgstr "Vycentrovat obrázek"
 msgid "Rotate Image"
 msgstr "Otočit obrázek"
 
-msgid "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
 msgstr ""
 
 msgid "Smear options:"
@@ -327,11 +330,14 @@ msgstr "Spritesheet (nová vrstva)"
 msgid "New frame"
 msgstr "Nový snímek"
 
-msgid "Replace frame"
-msgstr "Nahradit snímek"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Nová vrstva"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "Nová paleta"
@@ -381,8 +387,9 @@ msgstr "Exportovat obrázek"
 msgid "File Exists, Overwrite?"
 msgstr "Soubor existuje, přepsat?"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "Soubor %s již existuje. Přepsat?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr ""
 
 msgid "Directory path is not valid!"
 msgstr ""
@@ -450,14 +457,31 @@ msgstr "Vybrat aktuální složku"
 msgid "Open a Directory"
 msgstr "Otevřít složku"
 
-msgid "All frames as multiple files"
-msgstr "Všechny snímky jako více souborů"
-
-msgid "All frames as a single file animation"
-msgstr "Všechny snímky jako jeden soubor animace"
-
 msgid "Background:"
 msgstr "Pozadí:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr ""
+
+msgid "Layers:"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr ""
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr ""
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr ""
 
 msgid "Direction:"
 msgstr "Směr:"
@@ -483,6 +507,10 @@ msgstr "Řádky"
 msgid "Rows:"
 msgstr "Řádky:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr ""
+
 msgid "Path:"
 msgstr "Cesta:"
 
@@ -494,6 +522,10 @@ msgstr "Vytvořit složku"
 
 msgid "File:"
 msgstr "Soubor:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr ""
 
 msgid "Interpolation:"
 msgstr "Interpolace:"
@@ -543,6 +575,10 @@ msgstr "Zálohování"
 msgid "Performance"
 msgstr "Výkon"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr ""
+
 msgid "Extensions"
 msgstr ""
 
@@ -551,6 +587,10 @@ msgstr ""
 
 msgid "Indicators"
 msgstr "Indikátory"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr ""
 
 msgid "On"
 msgstr "Zapnuto"
@@ -715,22 +755,29 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
+msgid "Shape:"
+msgstr ""
+
 msgid "Linear"
 msgstr ""
 
 msgid "Radial"
 msgstr ""
 
-msgid "Linear Step"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
 msgstr ""
 
-msgid "Radial Step"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
 msgstr ""
 
-msgid "Linear Dithering"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
 msgstr ""
 
-msgid "Radial Dithering"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
 msgstr ""
 
 msgid "Transition size:"
@@ -930,6 +977,9 @@ msgstr "Srbština (Cyrilice)"
 
 msgid "Dutch"
 msgstr "Nizozemština"
+
+msgid "Belarusian"
+msgstr ""
 
 msgid "Development Team"
 msgstr "Vývojářský tým"
@@ -1319,6 +1369,22 @@ msgstr "Nastaví limit snímků za vteřinu aplikace. Čím nižší číslo, t�
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Pokud je tato možnost vybrána, tak je aplikace pozastavena, když je okno aplikace v pozadí. Dojde tak ke snížení využití procesoru při nečinnosti. Aplikace se automaticky obnoví, když kurzor myši vstoupí zpět do okna aplikace."
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr ""
+
 msgid "Add Extension"
 msgstr ""
 
@@ -1402,9 +1468,11 @@ msgstr ""
 msgid "Fill with:"
 msgstr "Vyplnit pomocí:"
 
-msgid "Selected Color"
-msgstr "Vybraná barva"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr ""
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Šablona"
 
@@ -1601,11 +1669,11 @@ msgstr "Přesunout doprava"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cel"
-msgstr "Připojit buňku"
+msgid "Link Cels to"
+msgstr ""
 
-msgid "Unlink Cel"
-msgstr "Odpojit buňku"
+msgid "Unlink Cels"
+msgstr ""
 
 msgid "Frame Properties"
 msgstr "Vlastnosti snímku"
@@ -1616,11 +1684,17 @@ msgstr "Vlastnosti snímku"
 msgid "Layer"
 msgstr "Vrstva"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Vrstvy"
 
 msgid "Create a new layer"
 msgstr "Vytvořit novou vrstvu"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Odstranit aktuální vrstvu"
@@ -1652,10 +1726,12 @@ msgstr "Zamknout/odemknout vrstvu"
 msgid "Frame: %s, Layer: %s"
 msgstr "Snímek: %s, Vrstva: %s"
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
-msgstr "Povolit/zakázat propojení buněk\n\n"
-"Propojené buňky jsou sdíleny přes vícero snímků"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr ""
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Paleta"
@@ -1907,7 +1983,7 @@ msgid "Pan"
 msgstr "Posun plátna"
 
 msgid "Color Picker"
-msgstr "Kapátko"
+msgstr "Výběr barvy"
 
 msgid "Pencil"
 msgstr "Tužka"
@@ -1987,11 +2063,13 @@ msgstr "Interval automatického ukládání:"
 msgid "minute(s)"
 msgstr "minuta(y)"
 
-msgid "Create new directory for each frame tag"
-msgstr "Vytvořit novou složku pro každý snímkový štítek"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr ""
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Vytvoří více souborů, ale každý soubor je uložen v jiném adresáři, který odpovídá snímkovému štítku"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr ""
 
 msgid "Close"
 msgstr "Zavřít"
@@ -2018,9 +2096,6 @@ msgstr "Nelze odstranit více palet!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Nelze odstranit paletu, protože neexistuje!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Při odstraňování palety došlo k chybě! Kód chyby: %s"
 
 msgid "and"
 msgstr "a"
@@ -2083,29 +2158,32 @@ msgid "Position:"
 msgstr "Pozice:"
 
 msgid "Tools"
-msgstr ""
+msgstr "Nástroje"
 
 msgid "Main Canvas"
-msgstr ""
+msgstr "Hlavní plátno"
 
 msgid "Second Canvas"
-msgstr ""
+msgstr "Druhé plátno"
 
 msgid "Animation Timeline"
 msgstr ""
 
 msgid "Canvas Preview"
-msgstr ""
+msgstr "Náhled plátna"
 
 msgid "Color Pickers"
-msgstr ""
+msgstr "Výběry barvy"
 
 msgid "Global Tool Options"
-msgstr ""
+msgstr "Globální možnosti nástrojů"
 
 msgid "Left Tool Options"
-msgstr ""
+msgstr "Možnosti levého nástroje"
 
 msgid "Right Tool Options"
+msgstr "Možnosti pravého nástroje"
+
+msgid "Reference Images"
 msgstr ""
 

@@ -48,7 +48,6 @@ func _about_to_show() -> void:
 	confirmed = false
 	._about_to_show()
 	wait_apply_timer.wait_time = wait_time_slider.value / 1000.0
-	angle_slider.value = 0
 
 
 func _calculate_pivot() -> void:

@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/Nodes/CollapsibleContainer.gd"
 }, {
+"base": "Node2D",
+"class": "CropRect",
+"language": "GDScript",
+"path": "res://src/UI/Canvas/CropRect.gd"
+}, {
 "base": "Reference",
 "class": "Drawer",
 "language": "GDScript",
@@ -123,6 +128,11 @@ _global_script_classes=[ {
 "class": "LayerButton",
 "language": "GDScript",
 "path": "res://src/UI/Timeline/LayerButton.gd"
+}, {
+"base": "Control",
+"class": "MaxMinEdit",
+"language": "GDScript",
+"path": "res://src/UI/Nodes/MaxMinEdit.gd"
 }, {
 "base": "Label",
 "class": "NotificationLabel",
@@ -239,6 +249,7 @@ _global_script_class_icons={
 "Brushes": "",
 "Canvas": "",
 "CollapsibleContainer": "",
+"CropRect": "",
 "Drawer": "",
 "Frame": "",
 "GIFAnimationExporter": "",
@@ -248,6 +259,7 @@ _global_script_class_icons={
 "Guide": "",
 "ImageEffect": "",
 "LayerButton": "",
+"MaxMinEdit": "",
 "NotificationLabel": "",
 "Palette": "",
 "PaletteColor": "",
@@ -962,6 +974,16 @@ about_pixelorama={
 gradient_map={
 "deadzone": 0.5,
 "events": [  ]
+}
+left_paint_selection_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":73,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right_paint_selection_tool={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":73,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
 }
 
 [locale]

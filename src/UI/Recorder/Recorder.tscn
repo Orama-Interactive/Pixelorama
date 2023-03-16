@@ -1,0 +1,373 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/graphics/recorder/start.png" type="Texture" id=1]
+[ext_resource path="res://src/UI/Recorder/Recorder.gd" type="Script" id=2]
+[ext_resource path="res://assets/graphics/timeline/expandable.png" type="Texture" id=3]
+[ext_resource path="res://addons/keychain/assets/folder.svg" type="Texture" id=4]
+
+[node name="Recorder" type="PanelContainer"]
+margin_left = 1.0
+margin_right = 195.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 36 )
+script = ExtResource( 2 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 187.0
+margin_bottom = 43.0
+rect_min_size = Vector2( 36, 36 )
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer"]
+margin_right = 180.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer/CenterContainer"]
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 176.0
+margin_bottom = 34.0
+size_flags_vertical = 0
+columns = 4
+
+[node name="Captured" type="Label" parent="ScrollContainer/CenterContainer/GridContainer"]
+visible = false
+margin_top = 9.0
+margin_right = 32.0
+margin_bottom = 23.0
+
+[node name="TargetProjectOption" type="OptionButton" parent="ScrollContainer/CenterContainer/GridContainer"]
+unique_name_in_owner = true
+margin_right = 100.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 100, 0 )
+hint_tooltip = "Choose project"
+clip_text = true
+
+[node name="Start" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
+unique_name_in_owner = true
+margin_left = 104.0
+margin_right = 136.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Capture .png frames"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Start"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -10.0
+margin_top = -10.5
+margin_right = 10.0
+margin_bottom = 10.5
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="Settings" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
+unique_name_in_owner = true
+margin_left = 140.0
+margin_right = 172.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Settings"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Settings"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -10.0
+margin_top = -10.5
+margin_right = 10.0
+margin_bottom = 10.5
+texture = ExtResource( 3 )
+stretch_mode = 6
+
+[node name="Folder" type="Button" parent="ScrollContainer/CenterContainer/GridContainer"]
+unique_name_in_owner = true
+visible = false
+margin_left = 176.0
+margin_right = 208.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Open Folder"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Folder"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
+texture = ExtResource( 4 )
+stretch_mode = 6
+
+[node name="Dialogs" type="Control" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 187.0
+margin_bottom = 43.0
+mouse_filter = 2
+
+[node name="Options" type="WindowDialog" parent="Dialogs"]
+margin_right = 293.0
+margin_bottom = 259.0
+rect_min_size = Vector2( 295, 260 )
+window_title = "Options"
+
+[node name="PanelContainer" type="PanelContainer" parent="Dialogs/Options"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 9.0
+margin_top = 9.0
+margin_right = -9.0
+margin_bottom = -9.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dialogs/Options/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 270.0
+margin_bottom = 235.0
+
+[node name="IntervalHeader" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
+margin_right = 263.0
+margin_bottom = 14.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/IntervalHeader"]
+margin_right = 49.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Interval"
+
+[node name="HSeparator" type="HSeparator" parent="Dialogs/Options/PanelContainer/VBoxContainer/IntervalHeader"]
+margin_left = 49.0
+margin_right = 263.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="ActionGap" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 263.0
+margin_bottom = 42.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ActionGap"]
+margin_left = 2.0
+margin_top = 5.0
+margin_right = 131.0
+margin_bottom = 19.0
+text = "Capture frame every"
+
+[node name="SkipAmount" type="SpinBox" parent="Dialogs/Options/PanelContainer/VBoxContainer/ActionGap"]
+margin_left = 135.0
+margin_right = 209.0
+margin_bottom = 24.0
+
+[node name="Label2" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ActionGap"]
+margin_left = 213.0
+margin_top = 5.0
+margin_right = 261.0
+margin_bottom = 19.0
+text = "Actions"
+
+[node name="Fps" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
+margin_top = 46.0
+margin_right = 263.0
+margin_bottom = 70.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/Fps"]
+margin_left = 36.0
+margin_top = 5.0
+margin_right = 62.0
+margin_bottom = 19.0
+text = "Fps:"
+
+[node name="Fps" type="SpinBox" parent="Dialogs/Options/PanelContainer/VBoxContainer/Fps"]
+margin_left = 66.0
+margin_right = 140.0
+margin_bottom = 24.0
+min_value = 1.0
+value = 30.0
+allow_greater = true
+
+[node name="Duration" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/Fps"]
+margin_left = 144.0
+margin_top = 5.0
+margin_right = 226.0
+margin_bottom = 19.0
+text = "= 0.0333 sec"
+
+[node name="ModeHeader" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer" groups=["visible during recording"]]
+margin_top = 74.0
+margin_right = 263.0
+margin_bottom = 88.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeHeader"]
+margin_right = 36.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Mode"
+
+[node name="HSeparator" type="HSeparator" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeHeader"]
+margin_left = 36.0
+margin_right = 263.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="ModeType" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer" groups=["visible during recording"]]
+margin_top = 92.0
+margin_right = 263.0
+margin_bottom = 132.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeType"]
+margin_left = 15.0
+margin_top = 13.0
+margin_right = 93.0
+margin_bottom = 27.0
+text = "Canvas Only"
+
+[node name="Mode" type="CheckButton" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeType"]
+margin_left = 97.0
+margin_right = 173.0
+margin_bottom = 40.0
+align = 1
+
+[node name="Label2" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeType"]
+margin_left = 177.0
+margin_top = 13.0
+margin_right = 248.0
+margin_bottom = 27.0
+text = "Pixelorama"
+
+[node name="ExportDimentions" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
+margin_top = 136.0
+margin_right = 263.0
+margin_bottom = 160.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ExportDimentions"]
+margin_left = 47.0
+margin_top = 5.0
+margin_right = 133.0
+margin_bottom = 19.0
+text = "Optput Scale:"
+align = 1
+
+[node name="Size" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ExportDimentions"]
+unique_name_in_owner = true
+margin_left = 137.0
+margin_top = 5.0
+margin_right = 137.0
+margin_bottom = 19.0
+
+[node name="Resize" type="SpinBox" parent="Dialogs/Options/PanelContainer/VBoxContainer/ExportDimentions"]
+margin_left = 141.0
+margin_right = 215.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+min_value = 50.0
+max_value = 1000.0
+step = 100.0
+value = 100.0
+allow_greater = true
+suffix = "%"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="PathHeader" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
+margin_top = 164.0
+margin_right = 263.0
+margin_bottom = 178.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathHeader"]
+margin_right = 28.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Path"
+
+[node name="HSeparator" type="HSeparator" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathHeader"]
+margin_left = 28.0
+margin_right = 263.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="PathContainer" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
+margin_top = 182.0
+margin_right = 263.0
+margin_bottom = 207.0
+
+[node name="Path" type="LineEdit" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer"]
+unique_name_in_owner = true
+margin_right = 171.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+align = 1
+editable = false
+placeholder_text = "Choose Destination --->"
+
+[node name="Open" type="Button" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer"]
+margin_left = 175.0
+margin_right = 200.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 25, 25 )
+
+[node name="TextureRect" type="TextureRect" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer/Open"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+texture = ExtResource( 4 )
+stretch_mode = 6
+
+[node name="Choose" type="Button" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer"]
+margin_left = 204.0
+margin_right = 263.0
+margin_bottom = 25.0
+text = "Choose"
+
+[node name="Path" type="FileDialog" parent="Dialogs"]
+margin_right = 445.0
+margin_bottom = 290.0
+rect_min_size = Vector2( 315, 290 )
+window_title = "Open a Directory"
+resizable = true
+mode = 2
+access = 2
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="item_selected" from="ScrollContainer/CenterContainer/GridContainer/TargetProjectOption" to="." method="_on_TargetProjectOption_item_selected"]
+[connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/TargetProjectOption" to="." method="_on_TargetProjectOption_pressed"]
+[connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Start" to="." method="_on_Start_toggled"]
+[connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Folder" to="." method="_on_Open_pressed"]
+[connection signal="value_changed" from="Dialogs/Options/PanelContainer/VBoxContainer/ActionGap/SkipAmount" to="." method="_on_SkipAmount_value_changed"]
+[connection signal="value_changed" from="Dialogs/Options/PanelContainer/VBoxContainer/Fps/Fps" to="." method="_on_Fps_value_changed"]
+[connection signal="toggled" from="Dialogs/Options/PanelContainer/VBoxContainer/ModeType/Mode" to="." method="_on_Mode_toggled"]
+[connection signal="value_changed" from="Dialogs/Options/PanelContainer/VBoxContainer/ExportDimentions/Resize" to="." method="_on_SpinBox_value_changed"]
+[connection signal="pressed" from="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer/Open" to="." method="_on_Open_pressed"]
+[connection signal="pressed" from="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer/Choose" to="." method="_on_Choose_pressed"]
+[connection signal="dir_selected" from="Dialogs/Path" to="." method="_on_Path_dir_selected"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -165,7 +165,10 @@ msgstr ""
 msgid "Rotate Image"
 msgstr "Kép forgatása"
 
-msgid "Pivot (x, y):"
+msgid "Pivot x:"
+msgstr ""
+
+msgid "Pivot y:"
 msgstr ""
 
 msgid "Smear options:"
@@ -327,11 +330,14 @@ msgstr "Képsorozat (új réteg)"
 msgid "New frame"
 msgstr "Új képkocka"
 
-msgid "Replace frame"
-msgstr "Képkocka kicserélése"
+msgid "Replace cel"
+msgstr ""
 
 msgid "New layer"
 msgstr "Új réteg"
+
+msgid "New reference image"
+msgstr ""
 
 msgid "New palette"
 msgstr "Új paletta"
@@ -381,8 +387,9 @@ msgstr "Kép exportálása"
 msgid "File Exists, Overwrite?"
 msgstr "Fájl létezik, fölülírja?"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "\"%s\" fájl már létezik. Felülírja?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr ""
 
 msgid "Directory path is not valid!"
 msgstr ""
@@ -450,14 +457,31 @@ msgstr "Jelenlegi mappa kiválasztása"
 msgid "Open a Directory"
 msgstr "Könyvtár megnyitása"
 
-msgid "All frames as multiple files"
-msgstr "Összes képkocka mint fájlok"
-
-msgid "All frames as a single file animation"
-msgstr "Minden képkocka egyetlen animációs fájlként"
-
 msgid "Background:"
 msgstr "Háttér:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr ""
+
+msgid "Layers:"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr ""
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr ""
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr ""
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr ""
 
 msgid "Direction:"
 msgstr "Irány:"
@@ -483,6 +507,10 @@ msgstr "Sorok"
 msgid "Rows:"
 msgstr "Sorok:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr ""
+
 msgid "Path:"
 msgstr "Útvonal:"
 
@@ -494,6 +522,10 @@ msgstr "Mappa létrehozása"
 
 msgid "File:"
 msgstr "Fájl:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr ""
 
 msgid "Interpolation:"
 msgstr "Interpoláció:"
@@ -543,6 +575,10 @@ msgstr "Biztonsági mentés"
 msgid "Performance"
 msgstr "Teljesítmény"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr ""
+
 msgid "Extensions"
 msgstr ""
 
@@ -551,6 +587,10 @@ msgstr ""
 
 msgid "Indicators"
 msgstr "Indikátorok"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr ""
 
 msgid "On"
 msgstr "Bekapcsolva"
@@ -715,22 +755,29 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 msgstr ""
 
+msgid "Shape:"
+msgstr ""
+
 msgid "Linear"
 msgstr ""
 
 msgid "Radial"
 msgstr ""
 
-msgid "Linear Step"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
 msgstr ""
 
-msgid "Radial Step"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
 msgstr ""
 
-msgid "Linear Dithering"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
 msgstr ""
 
-msgid "Radial Dithering"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
 msgstr ""
 
 msgid "Transition size:"
@@ -929,6 +976,9 @@ msgid "Serbian (Cyrillic)"
 msgstr ""
 
 msgid "Dutch"
+msgstr ""
+
+msgid "Belarusian"
 msgstr ""
 
 msgid "Development Team"
@@ -1287,6 +1337,22 @@ msgstr ""
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr ""
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr ""
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr ""
+
 msgid "Add Extension"
 msgstr ""
 
@@ -1370,9 +1436,11 @@ msgstr ""
 msgid "Fill with:"
 msgstr "Kitöltés ezzel:"
 
-msgid "Selected Color"
-msgstr "Kiválasztott szín"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr ""
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Minta"
 
@@ -1569,11 +1637,11 @@ msgstr "Mozgás jobbra"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cel"
-msgstr "Cella összekapcsolása"
+msgid "Link Cels to"
+msgstr ""
 
-msgid "Unlink Cel"
-msgstr "Cella szétkapcsolása"
+msgid "Unlink Cels"
+msgstr ""
 
 msgid "Frame Properties"
 msgstr "Képkocka tulajdonságai"
@@ -1584,11 +1652,17 @@ msgstr "Képkocka tulajdonságai"
 msgid "Layer"
 msgstr "Réteg"
 
+msgid "Group"
+msgstr ""
+
 msgid "Layers"
 msgstr "Rétegek"
 
 msgid "Create a new layer"
 msgstr "Új réteg létrehozása"
+
+msgid "Create a new group layer"
+msgstr ""
 
 msgid "Remove current layer"
 msgstr "Aktuális réteg eltávolítása"
@@ -1620,10 +1694,12 @@ msgstr "Réteg Bezárása/Kinyitása"
 msgid "Frame: %s, Layer: %s"
 msgstr "Képkocka: %s, Réteg: %s"
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
-msgstr "A cella-összekapcsolás be/ki kapcsolása\n\n"
-"Az összekapcsolt cellák több képkockáig tartanak"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr ""
+
+msgid "Expand/collapse group"
+msgstr ""
 
 msgid "Palette"
 msgstr "Paletta"
@@ -1955,11 +2031,13 @@ msgstr "Időköz az automatikus mentések között:"
 msgid "minute(s)"
 msgstr "perc(ek)"
 
-msgid "Create new directory for each frame tag"
-msgstr "Új könyvtár létrehozása minden címkéhez"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr ""
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Több fájlt hoz létre, de minden fájlt külön könyvtárban tárol, amely megfelel a képkocka címkének"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr ""
 
 msgid "Close"
 msgstr "Bezárás"
@@ -1985,9 +2063,6 @@ msgstr "Nem lehet több palettát eltávolítani!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Nem lehet eltávolítani a palettát, mert nem létezik!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Hiba történt a paletta eltávolítása közben! Error kód: %s"
 
 msgid "and"
 msgstr "és"
@@ -2074,5 +2149,8 @@ msgid "Left Tool Options"
 msgstr ""
 
 msgid "Right Tool Options"
+msgstr ""
+
+msgid "Reference Images"
 msgstr ""
 

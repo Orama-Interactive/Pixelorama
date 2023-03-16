@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/UI/Canvas/Canvas.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Canvas/Grid.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://src/Shaders/AutoInvertColors.shader" type="Shader" id=10]
 [ext_resource path="res://src/UI/Canvas/MouseGuideContainer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/Canvas/OnionSkinning.gd" type="Script" id=12]
+[ext_resource path="res://src/UI/Canvas/CropRect.gd" type="Script" id=13]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 4
@@ -60,6 +61,10 @@ script = ExtResource( 8 )
 [node name="MarchingAntsOutline" type="Sprite" parent="Selection"]
 material = SubResource( 2 )
 centered = false
+
+[node name="CropRect" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 13 )
 
 [node name="Indicators" type="Node2D" parent="."]
 script = ExtResource( 3 )

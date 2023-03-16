@@ -5,7 +5,6 @@ signal cel_changed
 
 enum LayerTypes { PIXEL, GROUP }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
-enum PressureSensitivity { NONE, ALPHA, SIZE, ALPHA_AND_SIZE }
 enum ColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 
@@ -74,7 +73,6 @@ var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
 
 # Preferences
-var pressure_sensitivity_mode = PressureSensitivity.NONE
 var open_last_project := false
 var quit_confirmation := false
 var smooth_zoom := true
@@ -143,6 +141,7 @@ var show_mouse_guides := false
 var snapping_distance := 10.0
 var snap_to_rectangular_grid := false
 var snap_to_guides := false
+var snap_to_perspective_guides := false
 
 # Onion skinning options
 var onion_skinning := false
@@ -152,6 +151,12 @@ var onion_skinning_blue_red := false
 
 # Palettes
 var palettes := {}
+
+# Crop Options:
+var crop_top := 0
+var crop_bottom := 0
+var crop_left := 0
+var crop_right := 0
 
 # Nodes
 var pixel_layer_button_node: PackedScene = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
@@ -166,6 +171,7 @@ onready var tabs: Tabs = control.find_node("Tabs")
 onready var main_viewport: ViewportContainer = control.find_node("ViewportContainer")
 onready var second_viewport: ViewportContainer = control.find_node("Second Canvas")
 onready var canvas_preview_container: Container = control.find_node("Canvas Preview")
+onready var global_tool_options: PanelContainer = control.find_node("Global Tool Options")
 onready var small_preview_viewport: ViewportContainer = canvas_preview_container.find_node(
 	"PreviewViewportContainer"
 )
@@ -210,6 +216,7 @@ onready var move_down_layer_button: BaseButton = animation_timeline.find_node("M
 onready var merge_down_layer_button: BaseButton = animation_timeline.find_node("MergeDownLayer")
 onready var layer_opacity_slider: ValueSlider = animation_timeline.find_node("OpacitySlider")
 
+onready var tile_mode_offset_dialog: AcceptDialog = control.find_node("TileModeOffsetsDialog")
 onready var open_sprites_dialog: FileDialog = control.find_node("OpenSprite")
 onready var save_sprites_dialog: FileDialog = control.find_node("SaveSprite")
 onready var save_sprites_html5_dialog: ConfirmationDialog = control.find_node("SaveSpriteHTML5")

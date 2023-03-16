@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2022-09-19 21:29\n"
+"PO-Revision-Date: 2023-02-03 06:55\n"
 
 msgid "OK"
 msgstr "确定"
@@ -165,8 +165,11 @@ msgstr "集成图像"
 msgid "Rotate Image"
 msgstr "旋转图像"
 
-msgid "Pivot (x, y):"
-msgstr "支点 (x, y):"
+msgid "Pivot x:"
+msgstr "位置 X 轴："
+
+msgid "Pivot y:"
+msgstr "位置 Y 轴："
 
 msgid "Smear options:"
 msgstr "涂抹选项："
@@ -327,11 +330,14 @@ msgstr "纸张（新建图层）"
 msgid "New frame"
 msgstr "新建帧"
 
-msgid "Replace frame"
-msgstr "替换帧"
+msgid "Replace cel"
+msgstr "替换新的cel"
 
 msgid "New layer"
 msgstr "新建图层"
+
+msgid "New reference image"
+msgstr "添加参考图像"
 
 msgid "New palette"
 msgstr "新建调色板"
@@ -381,8 +387,10 @@ msgstr "导出 Sprite"
 msgid "File Exists, Overwrite?"
 msgstr "文件已存在，覆盖吗?"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "文件 %s 已经存在。覆盖吗?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr "下列文件已经存在。你想要覆盖它们吗？\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "目录路径无效！"
@@ -451,14 +459,31 @@ msgstr "选择当前文件夹"
 msgid "Open a Directory"
 msgstr "打开目录"
 
-msgid "All frames as multiple files"
-msgstr "所有帧作为多个文件"
-
-msgid "All frames as a single file animation"
-msgstr "所有帧作为单个文件动画"
-
 msgid "Background:"
 msgstr "背景："
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr "所选帧"
+
+msgid "Layers:"
+msgstr "图层："
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr "可见图层"
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr "所选图层"
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr "像素图层："
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr "组图层："
 
 msgid "Direction:"
 msgstr "方向："
@@ -484,6 +509,10 @@ msgstr "行"
 msgid "Rows:"
 msgstr "行:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr "导出尺寸："
+
 msgid "Path:"
 msgstr "路径:"
 
@@ -495,6 +524,10 @@ msgstr "创建文件夹"
 
 msgid "File:"
 msgstr "文件:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr "高级选项"
 
 msgid "Interpolation:"
 msgstr "插值："
@@ -544,6 +577,10 @@ msgstr "备份"
 msgid "Performance"
 msgstr "性能"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr "驱动程序"
+
 msgid "Extensions"
 msgstr "扩展"
 
@@ -552,6 +589,10 @@ msgstr "光标"
 
 msgid "Indicators"
 msgstr "指示"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr "必须重启Pixelorama才能使更改生效。"
 
 msgid "On"
 msgstr "开启"
@@ -611,7 +652,7 @@ msgid "Theme"
 msgstr "主题"
 
 msgid "Buttons"
-msgstr ""
+msgstr "按钮"
 
 msgid "Icon color from:"
 msgstr "图标颜色从："
@@ -620,7 +661,7 @@ msgid "Icon color:"
 msgstr "图标颜色："
 
 msgid "Background"
-msgstr ""
+msgstr "背景"
 
 msgid "Background color from:"
 msgstr "背景颜色从："
@@ -717,23 +758,30 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr "如果启用此功能，则最后一个点将添加到渐变的末尾。\n"
 "如果您希望将渐变转换为具有恒定插值，请禁用此选项，以便将最后一种颜色考虑在内。"
 
+msgid "Shape:"
+msgstr "形状："
+
 msgid "Linear"
 msgstr "线性"
 
 msgid "Radial"
 msgstr "径向"
 
-msgid "Linear Step"
-msgstr "线性步骤"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
+msgstr "重复："
 
-msgid "Radial Step"
-msgstr "径向步骤"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
+msgstr "重复"
 
-msgid "Linear Dithering"
-msgstr "线性抖动"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
+msgstr "镜像"
 
-msgid "Radial Dithering"
-msgstr "径向抖动"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
+msgstr "截断"
 
 msgid "Transition size:"
 msgstr "过渡大小："
@@ -933,6 +981,9 @@ msgstr "塞尔维亚语（西里尔语）"
 msgid "Dutch"
 msgstr "荷兰语"
 
+msgid "Belarusian"
+msgstr "白俄罗斯语"
+
 msgid "Development Team"
 msgstr "开发团队"
 
@@ -1032,7 +1083,7 @@ msgstr "移动\n\n"
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "油漆桶\n\n"
+msgstr "放大镜\n\n"
 "%s 为鼠标左键\n"
 "%s 为鼠标右键"
 
@@ -1326,6 +1377,22 @@ msgstr "设置应用程序帧每秒的限制。 数字越低，CPU 使用率越�
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "如果打开此选项，当应用程序的窗口失去焦点时，它会暂停。 这有助于在空闲时降低 CPU 使用率。 当鼠标进入应用程序的窗口时，应用程序被取消暂停。"
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr "渲染器："
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr "指定正在使用的渲染器/视频驱动。GLES2 更适合于旧的和低端的设备，但 GLES3 可能提供更多的功能。"
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr "平板电脑驱动程序："
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr "指定在 Windows 上使用的平板电脑驱动程序。如果你启用了 Windows Ink，选择 winink。"
+
 msgid "Add Extension"
 msgstr "添加扩展"
 
@@ -1410,9 +1477,11 @@ msgstr "全部选区"
 msgid "Fill with:"
 msgstr "填充使用："
 
-msgid "Selected Color"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
 msgstr "选择颜色"
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "模式"
 
@@ -1609,11 +1678,11 @@ msgstr "向右移动"
 msgid "Add Frame Tag"
 msgstr "添加帧标签"
 
-msgid "Link Cel"
-msgstr "取消链接单元"
+msgid "Link Cels to"
+msgstr "链接单元格到"
 
-msgid "Unlink Cel"
-msgstr "取消链接单元"
+msgid "Unlink Cels"
+msgstr "取消链接单元格"
 
 msgid "Frame Properties"
 msgstr "帧属性"
@@ -1624,11 +1693,17 @@ msgstr "帧属性"
 msgid "Layer"
 msgstr "图层"
 
+msgid "Group"
+msgstr "组"
+
 msgid "Layers"
 msgstr "图层"
 
 msgid "Create a new layer"
 msgstr "创建一个新的图层"
+
+msgid "Create a new group layer"
+msgstr "创建新的组图层"
 
 msgid "Remove current layer"
 msgstr "移除当前图层"
@@ -1660,10 +1735,13 @@ msgstr "锁定/解锁图层"
 msgid "Frame: %s, Layer: %s"
 msgstr "帧： %s, 图层：%s"
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
-msgstr "启用/禁用链接\n\n"
-"链接的单元格正在多个帧之间共享"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr "在创建新的帧时，启用/禁用自动链接新的帧\n\n"
+"链接的模型在多个帧中共享内容"
+
+msgid "Expand/collapse group"
+msgstr "展开/折叠组"
 
 msgid "Palette"
 msgstr "调色板"
@@ -1995,11 +2073,13 @@ msgstr "自动保存间隔："
 msgid "minute(s)"
 msgstr "分钟"
 
-msgid "Create new directory for each frame tag"
-msgstr "为每个帧标签创建新的目录"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr "为每个帧标签创建新文件夹"
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "创建多个文件，但每个文件都存储在与其帧标签相对应的不同目录"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr "创建多个文件，但每个文件都存储在与其帧标签相对应的不同文件夹中"
 
 msgid "Close"
 msgstr "关闭"
@@ -2026,9 +2106,6 @@ msgstr "您无法删除更多调色板！"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "无法删除调色板，因为它不存在！"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "删除调色板时发生错误！ 错误代码：%s"
 
 msgid "and"
 msgstr "和"
@@ -2116,4 +2193,7 @@ msgstr "左键工具选项"
 
 msgid "Right Tool Options"
 msgstr "右键工具选项"
+
+msgid "Reference Images"
+msgstr "参考图像"
 

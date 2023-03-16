@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2022-09-20 00:00\n"
+"PO-Revision-Date: 2023-02-02 01:11\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -25,7 +25,7 @@ msgid "Save"
 msgstr "Kaydet"
 
 msgid "Please Confirm..."
-msgstr "Lütfen Onaylayın..."
+msgstr "Lütfen Doğrulayın..."
 
 msgid "File Name:"
 msgstr "Dosya Adı:"
@@ -165,8 +165,11 @@ msgstr "Resmi Ortala"
 msgid "Rotate Image"
 msgstr "Resmi Döndür"
 
-msgid "Pivot (x, y):"
-msgstr "Eksen (x, y):"
+msgid "Pivot x:"
+msgstr "Pivot X:"
+
+msgid "Pivot y:"
+msgstr "Pivot Y:"
 
 msgid "Smear options:"
 msgstr "Smear seçenekleri:"
@@ -327,11 +330,14 @@ msgstr "Hareketli sayfa (yeni katman)"
 msgid "New frame"
 msgstr "Yeni kare"
 
-msgid "Replace frame"
-msgstr "Kareyi değiştir"
+msgid "Replace cel"
+msgstr "Hücreyi değiştir"
 
 msgid "New layer"
 msgstr "Yeni katman"
+
+msgid "New reference image"
+msgstr "Yeni referans resmi"
 
 msgid "New palette"
 msgstr "Yeni palet"
@@ -381,8 +387,10 @@ msgstr "Sprite'ı Dışa Aktar"
 msgid "File Exists, Overwrite?"
 msgstr "Dosya Zaten Var, Üzerine Yazılsın mı?"
 
-msgid "File %s already exists. Overwrite?"
-msgstr "%s dosyası zaten var. Üzerine yazılsın mı?"
+msgid "The following files already exist. Do you wish to overwrite them?\n"
+"%s"
+msgstr "Aşağıdaki dosyalar zaten mevcut. Var olan dosyaların üzerine yazmak ister misiniz?\n"
+"%s"
 
 msgid "Directory path is not valid!"
 msgstr "Dizin yolu geçersiz!"
@@ -451,14 +459,31 @@ msgstr "Geçerli Klasörü Seç"
 msgid "Open a Directory"
 msgstr "Dizin Aç"
 
-msgid "All frames as multiple files"
-msgstr "Çoklu dosyalar olarak tüm kareler"
-
-msgid "All frames as a single file animation"
-msgstr "Tüm kareler tek bir dosya animasyonu olarak"
-
 msgid "Background:"
 msgstr "Arka plan:"
+
+#. Found in the export dialog
+msgid "Selected frames"
+msgstr "Seçili kareler"
+
+msgid "Layers:"
+msgstr "Katmanlar:"
+
+#. Found in the export dialog
+msgid "Visible layers"
+msgstr "Görünür katmanlar"
+
+#. Found in the export dialog
+msgid "Selected layers"
+msgstr "Seçili katmanlar"
+
+#. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
+msgid "Pixel layer:"
+msgstr "Piksel katmanı:"
+
+#. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
+msgid "Group layer:"
+msgstr "Grup katmanı:"
 
 msgid "Direction:"
 msgstr "Yön:"
@@ -484,6 +509,10 @@ msgstr "Satırlar"
 msgid "Rows:"
 msgstr "Sıralar:"
 
+#. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
+msgid "Export dimensions:"
+msgstr "Dışa aktarma boyutları:"
+
 msgid "Path:"
 msgstr "Yol:"
 
@@ -495,6 +524,10 @@ msgstr "Klasör Oluştur"
 
 msgid "File:"
 msgstr "Dosya:"
+
+#. Found in the export dialog. It is a button that when pressed, shows more options.
+msgid "Advanced options"
+msgstr "Gelişmiş seçenekler"
 
 msgid "Interpolation:"
 msgstr "İnterpolasyon:"
@@ -544,6 +577,10 @@ msgstr "Yedekleme"
 msgid "Performance"
 msgstr "Performans"
 
+#. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
+msgid "Drivers"
+msgstr "Sürücüler"
+
 msgid "Extensions"
 msgstr "Uzantılar"
 
@@ -552,6 +589,10 @@ msgstr "İmleçler"
 
 msgid "Indicators"
 msgstr "Göstergeler"
+
+#. Found in the preferences. Used for options that require restart when they are changed.
+msgid "Pixelorama must be restarted for changes to take effect."
+msgstr "Değişikliklerin etkili olabilmesi için Pixeloroma yeniden başlatılmalıdır."
 
 msgid "On"
 msgstr "Açık"
@@ -717,23 +758,30 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr "Bu etkinleştirilirse, son nokta gradnayın sonuna eklenir.\n"
 "Son rengin dikkate alınması için, gradyanı sabit ara değerlemeye dönüştürmek istiyorsanız bunu devre dışı bırakın."
 
+msgid "Shape:"
+msgstr "Şekil:"
+
 msgid "Linear"
 msgstr "Doğrusal"
 
 msgid "Radial"
 msgstr "Radyal"
 
-msgid "Linear Step"
-msgstr "Doğrusal Aşama"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat:"
+msgstr "Yinele:"
 
-msgid "Radial Step"
-msgstr "Radyal Aşama"
+#. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
+msgid "Repeat"
+msgstr "Yinele"
 
-msgid "Linear Dithering"
-msgstr "Doğrusal Titreme"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
+msgid "Mirror"
+msgstr "Ayna"
 
-msgid "Radial Dithering"
-msgstr "Radyal Titreme"
+#. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
+msgid "Truncate"
+msgstr "Buda"
 
 msgid "Transition size:"
 msgstr "Geçiş boyutu:"
@@ -932,6 +980,9 @@ msgstr "Sırpça (Kiril)"
 
 msgid "Dutch"
 msgstr "Flemenkçe"
+
+msgid "Belarusian"
+msgstr "Belarusça"
 
 msgid "Development Team"
 msgstr "Geliştirme Takımı"
@@ -1326,6 +1377,22 @@ msgstr "Uygulamanın saniyedeki kare sınırını ayarlar. Rakam ne kadar düş�
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
 msgstr "Bu açılırsa, uygulamanın penceresi odağı kaybettiğinde duraklatılır. Bu, boştayken CPU kullanımını düşürmeye yardımcı olur. Fare uygulamanın penceresine girdiğinde uygulamanın duraklatılması kaldırılır."
 
+#. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
+msgid "Renderer:"
+msgstr "İşleyici:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
+msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
+msgstr "Kullanılan işleyiciyi/video sürücüsünü belirtir. GLES2, eski ve düşük özellikli cihazlar için daha iyidir, ancak GLES3 daha fazla özellik sunabilir."
+
+#. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
+msgid "Tablet driver:"
+msgstr "Table sürücüsü:"
+
+#. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
+msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr "Windows'ta kullanılan tablet sürücüsünü belirtir. Windows Ink'i etkinleştirdiyseniz, winnk'i seçin."
+
 msgid "Add Extension"
 msgstr "Uzantı Ekle"
 
@@ -1410,9 +1477,11 @@ msgstr "Tam seçim"
 msgid "Fill with:"
 msgstr "Şununla doldur:"
 
-msgid "Selected Color"
-msgstr "Seçilen Renk"
+#. Found in the bucket tool options, one of the fill with options.
+msgid "Selected color"
+msgstr "Seçilen renk"
 
+#. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
 msgstr "Kalıp"
 
@@ -1609,11 +1678,11 @@ msgstr "Sağa Taşı"
 msgid "Add Frame Tag"
 msgstr ""
 
-msgid "Link Cel"
-msgstr "Hücreye Köprüle"
+msgid "Link Cels to"
+msgstr "Hücreleri şuraya bağla"
 
-msgid "Unlink Cel"
-msgstr "Hücre Köprüsünü Kaldır"
+msgid "Unlink Cels"
+msgstr "Hücre bağlantısını kaldır"
 
 msgid "Frame Properties"
 msgstr "Kare Özellikleri"
@@ -1624,11 +1693,17 @@ msgstr "Kare özellikleri"
 msgid "Layer"
 msgstr "Katman"
 
+msgid "Group"
+msgstr "Grup"
+
 msgid "Layers"
 msgstr "Katmanlar"
 
 msgid "Create a new layer"
 msgstr "Yeni katman oluştur"
+
+msgid "Create a new group layer"
+msgstr "Yeni grup katmanı oluştur"
 
 msgid "Remove current layer"
 msgstr "Geçerli katmanı kaldır"
@@ -1660,10 +1735,13 @@ msgstr "Katmanı kilitle/kilidini kaldır"
 msgid "Frame: %s, Layer: %s"
 msgstr "Kare: %s, Katman: %s"
 
-msgid "Enable/disable cel linking\n\n"
-"Linked cels are being shared across multiple frames"
-msgstr "Hücre köprülemesini etkinleştir/devre dışı bırak\n\n"
-"Köprülenmiş hücreler birçok kare tarafından paylaşılır"
+msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
+"Linked cels share content across multiple frames"
+msgstr "Yeni kare oluştururken yeni hücrelerin otomatik olarak bağlanmasını etkinleştirin/devre dışı bırakın\n\n"
+"Bağlantısı olan hücreler, içeriği birden fazla çerçeve arasında paylaşır"
+
+msgid "Expand/collapse group"
+msgstr "Grubu genişlet/daralt"
 
 msgid "Palette"
 msgstr "Palet"
@@ -1995,11 +2073,13 @@ msgstr "Otomatik kaydetme sıklığı:"
 msgid "minute(s)"
 msgstr "dakika"
 
-msgid "Create new directory for each frame tag"
-msgstr "Her kare etiketi için yeni dizin oluştur"
+#. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr "Her kare etiketi için yeni klasör oluştur"
 
-msgid "Creates multiple files but every file is stored in different directory that corresponds to its frame tag"
-msgstr "Birden çok dosya oluşturur ancak her dosya, kare etiketine karşılık gelen farklı dizinde depolanır"
+#. Found in the export dialog.
+msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr "Birden çok dosya oluşturur ancak her dosya, kare etiketine karşılık gelen farklı klasörde depolanır"
 
 msgid "Close"
 msgstr "Kapat"
@@ -2026,9 +2106,6 @@ msgstr "Daha fazla palet kaldıramazsın!"
 
 msgid "Cannot remove the palette, because it doesn't exist!"
 msgstr "Olmayan paleti kaldıramazsın!"
-
-msgid "An error occured while removing the palette! Error code: %s"
-msgstr "Palet kaldırılırken hata oldu! Hata kodu: %s"
 
 msgid "and"
 msgstr "ve"
@@ -2116,4 +2193,7 @@ msgstr "Sol Araç Seçenekleri"
 
 msgid "Right Tool Options"
 msgstr "Sağ Araç Seçenekleri"
+
+msgid "Reference Images"
+msgstr "Referans Resimler"
 
