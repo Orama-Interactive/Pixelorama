@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-03-16 17:55\n"
+"PO-Revision-Date: 2023-03-16 21:14\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -2234,40 +2234,42 @@ msgid "Reference Images"
 msgstr "Referans Resimler"
 
 msgid "Crop"
-msgstr ""
+msgstr "Kırp"
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "Tuvali yeniden boyutlandır"
 
 msgid "Margins"
-msgstr ""
+msgstr "Kenar boşlukları"
 
 msgid "Position + Size"
-msgstr ""
+msgstr "Konum ve Boyut"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "Kilitli En Boy Oranı"
 
 msgid "Margins:"
-msgstr ""
+msgstr "Kenar boşlukları:"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "En-Boy Oranı:"
 
 msgid "Top:"
-msgstr ""
+msgstr "Üst:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "Alt:"
 
 msgid "Left:"
-msgstr ""
+msgstr "Sol:"
 
 msgid "Right:"
-msgstr ""
+msgstr "Sağ:"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Kilitli boyut\n\n"
+"Aracın tuval üzerinde kullanılması etkinleştirildiğinde, yalnızca kırpma dikdörtgenini hareket ettirir.\n\n"
+"Devre dışı bırakıldığında aracı kullanarak tuval üzerine dikdörtgen çizer."
 
