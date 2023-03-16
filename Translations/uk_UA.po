@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-03-09 15:58\n"
+"PO-Revision-Date: 2023-03-16 17:55\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -2232,4 +2232,42 @@ msgstr "Параметри правого інструмента"
 
 msgid "Reference Images"
 msgstr "Еталонні зображення"
+
+msgid "Crop"
+msgstr ""
+
+msgid "Resize the canvas"
+msgstr ""
+
+msgid "Margins"
+msgstr ""
+
+msgid "Position + Size"
+msgstr ""
+
+msgid "Locked Aspect Ratio"
+msgstr ""
+
+msgid "Margins:"
+msgstr ""
+
+msgid "Aspect Ratio:"
+msgstr ""
+
+msgid "Top:"
+msgstr ""
+
+msgid "Bottom:"
+msgstr ""
+
+msgid "Left:"
+msgstr ""
+
+msgid "Right:"
+msgstr ""
+
+msgid "Locked size\n\n"
+"When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
+"When disabled using the tool on the canvas will draw the rectangle."
+msgstr ""
 
