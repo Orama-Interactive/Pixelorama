@@ -474,6 +474,7 @@ func _size_changed(value: Vector2) -> void:
 	tiles.tile_size = value
 	tiles.reset_mask()
 	size = value
+	Global.canvas.crop_rect.reset()
 
 
 func change_cel(new_frame: int, new_layer := -1) -> void:
