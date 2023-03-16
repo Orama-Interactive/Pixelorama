@@ -260,6 +260,7 @@ func change_project() -> void:
 		camera.emit_signal("rotation_changed")
 		camera.emit_signal("zoom_changed")
 		i += 1
+	Global.tile_mode_offset_dialog.change_mask()
 
 
 func serialize() -> Dictionary:
@@ -308,10 +309,6 @@ func serialize() -> Dictionary:
 	for reference_image in reference_images:
 		reference_image_data.append(reference_image.serialize())
 
-	var tile_mask_data := {
-		"size_x": tiles.tile_mask.get_size().x, "size_y": tiles.tile_mask.get_size().y
-	}
-
 	var metadata := _serialize_metadata(self)
 
 	var project_data := {
@@ -319,8 +316,6 @@ func serialize() -> Dictionary:
 		"name": name,
 		"size_x": size.x,
 		"size_y": size.y,
-		"has_mask": tiles.has_mask,
-		"tile_mask": tile_mask_data,
 		"tile_mode_x_basis_x": tiles.x_basis.x,
 		"tile_mode_x_basis_y": tiles.x_basis.y,
 		"tile_mode_y_basis_x": tiles.y_basis.x,
@@ -352,8 +347,6 @@ func deserialize(dict: Dictionary) -> void:
 		size.y = dict.size_y
 		tiles.tile_size = size
 		selection_map.crop(size.x, size.y)
-	if dict.has("has_mask"):
-		tiles.has_mask = dict.has_mask
 	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
 		tiles.x_basis.x = dict.tile_mode_x_basis_x
 		tiles.x_basis.y = dict.tile_mode_x_basis_y
@@ -472,7 +465,7 @@ func _size_changed(value: Vector2) -> void:
 	else:
 		tiles.y_basis = Vector2(0, value.y)
 	tiles.tile_size = value
-	tiles.reset_mask()
+	Global.tile_mode_offset_dialog.change_mask()
 	size = value
 	Global.canvas.crop_rect.reset()
 

@@ -29,11 +29,11 @@ text = "Tile Mode Offsets"
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 18.0
 margin_right = 285.0
-margin_bottom = 174.0
+margin_bottom = 150.0
 
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer"]
 margin_right = 137.0
-margin_bottom = 156.0
+margin_bottom = 132.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 2
 columns = 2
@@ -111,72 +111,25 @@ text = "Reset"
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
 margin_left = 141.0
 margin_right = 145.0
-margin_bottom = 156.0
-
-[node name="Mask" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 149.0
-margin_right = 285.0
-margin_bottom = 156.0
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Mask"]
-margin_right = 136.0
-margin_bottom = 14.0
-text = "Tile Mask"
-align = 1
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer/Mask"]
-margin_top = 18.0
-margin_right = 136.0
-margin_bottom = 22.0
-
-[node name="MaskHint" type="TextureRect" parent="VBoxContainer/HBoxContainer/Mask"]
-margin_top = 26.0
-margin_right = 136.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 136, 74 )
-hint_tooltip = "Mask will only allow the drawing to remain within it's bounds
-(Used for custom tiles)"
-size_flags_vertical = 3
-expand = true
-stretch_mode = 6
-
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/HBoxContainer/Mask"]
-margin_top = 104.0
-margin_right = 136.0
-margin_bottom = 108.0
-
-[node name="LoadMask" type="Button" parent="VBoxContainer/HBoxContainer/Mask"]
-margin_top = 112.0
-margin_right = 136.0
 margin_bottom = 132.0
-rect_min_size = Vector2( 100, 0 )
-hint_tooltip = "Create the Tile Mask from Current Frame"
-mouse_default_cursor_shape = 2
-text = "Use Current Frame"
-clip_text = true
 
-[node name="ResetMask" type="Button" parent="VBoxContainer/HBoxContainer/Mask"]
-margin_top = 136.0
-margin_right = 136.0
-margin_bottom = 156.0
-rect_min_size = Vector2( 100, 0 )
-hint_tooltip = "Create the Tile Mask from Current Frame"
-mouse_default_cursor_shape = 2
-disabled = true
-text = "Reset Mask"
-clip_text = true
+[node name="Masking" type="CheckButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 149.0
+margin_right = 281.0
+margin_bottom = 40.0
+size_flags_vertical = 0
+text = "Masking"
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_top = 178.0
+margin_top = 154.0
 margin_right = 285.0
 margin_bottom = 378.0
 size_flags_vertical = 3
 
 [node name="Preview" type="Control" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 42.5
-margin_right = 242.5
-margin_bottom = 200.0
+margin_left = 30.5
+margin_right = 254.5
+margin_bottom = 224.0
 rect_min_size = Vector2( 200, 200 )
 
 [node name="TileMode" type="Node2D" parent="VBoxContainer/AspectRatioContainer/Preview"]
@@ -199,5 +152,4 @@ margin_bottom = 0.0
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/OptionsContainer/YBasisX" to="." method="_on_YBasisX_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/OptionsContainer/YBasisY" to="." method="_on_YBasisY_value_changed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/OptionsContainer/Reset" to="." method="_on_Reset_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Mask/LoadMask" to="." method="_on_LoadMask_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Mask/ResetMask" to="." method="_on_ResetMask_pressed"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/Masking" to="." method="_on_Masking_toggled"]
