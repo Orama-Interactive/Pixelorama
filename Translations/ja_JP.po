@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-03-16 17:55\n"
+"PO-Revision-Date: 2023-03-16 18:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2234,40 +2234,42 @@ msgid "Reference Images"
 msgstr "参照画像"
 
 msgid "Crop"
-msgstr ""
+msgstr "切り取り"
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "キャンバスのサイズを変更"
 
 msgid "Margins"
-msgstr ""
+msgstr "マージン"
 
 msgid "Position + Size"
-msgstr ""
+msgstr "位置 + サイズ"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "ロックされたアスペクト比"
 
 msgid "Margins:"
-msgstr ""
+msgstr "マージン:"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "アスペクト比:"
 
 msgid "Top:"
-msgstr ""
+msgstr "上:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "下:"
 
 msgid "Left:"
-msgstr ""
+msgstr "左:"
 
 msgid "Right:"
-msgstr ""
+msgstr "右:"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "ロックされたサイズ\n\n"
+"有効な場合、キャンバス上でツールを使用すると、切り抜き範囲の矩形が移動します。\n\n"
+"無効の場合、キャンバス上でツールを使用すると、長方形が描画されます。"
 
