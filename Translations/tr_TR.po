@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-03-16 21:14\n"
+"PO-Revision-Date: 2023-03-16 23:25\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -251,6 +251,18 @@ msgstr "Taşınır Paneller"
 
 msgid "Manage Layouts"
 msgstr "Düzenleri Yönet"
+
+#. Noun, a preview of something
+msgid "Preview"
+msgstr ""
+
+#. Found in the manage layouts dialog
+msgid "This is a preview, changing this won't change the layout"
+msgstr ""
+
+#. Found in the manage layouts dialog
+msgid "Double click to set as new startup layout"
+msgstr ""
 
 msgid "Add"
 msgstr "Ekle"
