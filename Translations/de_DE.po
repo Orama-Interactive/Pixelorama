@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-03-16 17:55\n"
+"PO-Revision-Date: 2023-03-16 19:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2232,40 +2232,42 @@ msgid "Reference Images"
 msgstr "Referenzbilder"
 
 msgid "Crop"
-msgstr ""
+msgstr "Zuschneiden"
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "Canvas skalieren"
 
 msgid "Margins"
-msgstr ""
+msgstr "Abstände"
 
 msgid "Position + Size"
-msgstr ""
+msgstr "Position + Größe"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "Gesperrtes Seitenverhältnis"
 
 msgid "Margins:"
-msgstr ""
+msgstr "Abstände:"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "Seitenverhältnis:"
 
 msgid "Top:"
-msgstr ""
+msgstr "Oben:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "Unten:"
 
 msgid "Left:"
-msgstr ""
+msgstr "Links:"
 
 msgid "Right:"
-msgstr ""
+msgstr "Rechts:"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Gesperrte Größe\n\n"
+"Wenn das Werkzeug auf dem Canvas aktiviert ist, verschiebt sich nur das Zuschneid-Rechteck.\n\n"
+"Wenn das Werkzeug auf dem Canvas deaktiviert wird, wird das Rechteck gezeichnet."
 
