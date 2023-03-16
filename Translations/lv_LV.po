@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2023-03-16 17:55\n"
+"PO-Revision-Date: 2023-03-16 23:25\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -250,6 +250,18 @@ msgid "Moveable Panels"
 msgstr ""
 
 msgid "Manage Layouts"
+msgstr ""
+
+#. Noun, a preview of something
+msgid "Preview"
+msgstr ""
+
+#. Found in the manage layouts dialog
+msgid "This is a preview, changing this won't change the layout"
+msgstr ""
+
+#. Found in the manage layouts dialog
+msgid "Double click to set as new startup layout"
 msgstr ""
 
 msgid "Add"
