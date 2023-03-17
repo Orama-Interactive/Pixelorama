@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-03-16 23:25\n"
+"PO-Revision-Date: 2023-03-17 06:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -254,15 +254,15 @@ msgstr "Zarządzaj szablonami"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Podgląd"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "To jest podgląd, zmienianie go nie zmieni szablonu"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr ""
+msgstr "Kliknij dwukrotnie, aby ustawić jako nowy szablon domyślny"
 
 msgid "Add"
 msgstr "Dodaj"
@@ -770,7 +770,7 @@ msgstr "Gdy włączone, ostatni punkt będzie dodawany na końcu gradientu.\n"
 "Wyłącz, jeśli chcesz gradient ze stałą interpolacją, aby ostatni kolor był brany pod uwagę."
 
 msgid "Shape:"
-msgstr ""
+msgstr "Kształt:"
 
 msgid "Linear"
 msgstr "Prosty"
@@ -780,15 +780,15 @@ msgstr "Promienisty"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "Powtarzaj:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "Powtarzaj"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "Lustrzane odbicie"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
@@ -1421,39 +1421,39 @@ msgstr "Otwórz folder"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
-msgstr ""
+msgstr "Dynamika"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
-msgstr ""
+msgstr "Nacisk"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
-msgstr ""
+msgstr "Prędkość"
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
-msgstr ""
+msgstr "Przezroczystość"
 
 #. Refers to the size of a value, for example the size of a brush.
 msgid "Size"
-msgstr ""
+msgstr "Rozmiar"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
-msgstr ""
+msgstr "Limity wartości"
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
-msgstr ""
+msgstr "Progi"
 
 #. Noun, the start of something.
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #. Noun, the end of something.
 msgid "End"
-msgstr ""
+msgstr "Koniec"
 
 msgid "Brush:"
 msgstr "Pędzel:"
@@ -2245,40 +2245,42 @@ msgid "Reference Images"
 msgstr "Obrazy odniesienia"
 
 msgid "Crop"
-msgstr ""
+msgstr "Przytnij"
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "Zmień rozmiar płótna"
 
 msgid "Margins"
-msgstr ""
+msgstr "Marginesy"
 
 msgid "Position + Size"
-msgstr ""
+msgstr "Pozycja + Rozmiar"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "Zablokowany współczynnik proporcji"
 
 msgid "Margins:"
-msgstr ""
+msgstr "Marginesy:"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "Współczynnik proporcji:"
 
 msgid "Top:"
-msgstr ""
+msgstr "Góra:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "Dół:"
 
 msgid "Left:"
-msgstr ""
+msgstr "Lewa:"
 
 msgid "Right:"
-msgstr ""
+msgstr "Prawa:"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Zablokowany rozmiar\n\n"
+"Gdy włączone, używanie narzędzia na płótnie będzie jedynie ruszać prostokąt przycinania.\n\n"
+"Gdy wyłączone, używanie narzędzia na płótnie narysuje prostokąt."
 
