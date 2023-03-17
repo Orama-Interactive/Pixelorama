@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-03-17 10:38\n"
+"PO-Revision-Date: 2023-03-17 11:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2246,40 +2246,42 @@ msgid "Reference Images"
 msgstr "Imagini de referință"
 
 msgid "Crop"
-msgstr ""
+msgstr "Decupare"
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "Redimensionare pânză"
 
 msgid "Margins"
-msgstr ""
+msgstr "Margini"
 
 msgid "Position + Size"
-msgstr ""
+msgstr "Poziție + dimensiune"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "Raport aspect blocat"
 
 msgid "Margins:"
-msgstr ""
+msgstr "Margini:"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "Raport aspect:"
 
 msgid "Top:"
-msgstr ""
+msgstr "Sus:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "Jos:"
 
 msgid "Left:"
-msgstr ""
+msgstr "Stânga:"
 
 msgid "Right:"
-msgstr ""
+msgstr "Dreapta:"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Dimensiune blocată\n\n"
+"Când este activată opțiunea, folosirea instrumentului pe pânză doar va muta dreptunghiul de decupare.\n\n"
+"Când este dezactivată opțiunea, folosirea uneltei pe pânză va desena dreptunghiul."
 
