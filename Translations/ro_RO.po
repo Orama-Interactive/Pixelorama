@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-03-16 23:25\n"
+"PO-Revision-Date: 2023-03-17 10:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -254,15 +254,15 @@ msgstr "Gestionare dispuneri"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Previzualizare"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Aceasta este o previzualizare, modificarea acestei opțiuni nu va schimba aspectul"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr ""
+msgstr "Dublu clic pentru a seta ca dispunere de pornire nouă"
 
 msgid "Add"
 msgstr "Adăugare"
