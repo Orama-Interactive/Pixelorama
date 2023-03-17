@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2023-03-16 23:25\n"
+"PO-Revision-Date: 2023-03-17 08:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -254,11 +254,11 @@ msgstr "Управление слоями"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Предпросмотр"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Это предварительный просмотр, изменение не изменит макет"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
@@ -1433,11 +1433,11 @@ msgstr ""
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
-msgstr ""
+msgstr "Прозрачность"
 
 #. Refers to the size of a value, for example the size of a brush.
 msgid "Size"
-msgstr ""
+msgstr "Размер"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
@@ -2248,7 +2248,7 @@ msgid "Crop"
 msgstr ""
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "Изменить размер холста"
 
 msgid "Margins"
 msgstr ""
