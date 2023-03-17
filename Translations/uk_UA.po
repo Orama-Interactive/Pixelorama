@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-03-16 23:25\n"
+"PO-Revision-Date: 2023-03-17 08:36\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -254,15 +254,15 @@ msgstr "Керування розміщеннями"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Перегляд"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Це попередній перегляд, він не змінить розміщення"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr ""
+msgstr "Двічі натисніть, щоб встановити розміщення як початкове"
 
 msgid "Add"
 msgstr "Додати"
@@ -2246,37 +2246,37 @@ msgid "Reference Images"
 msgstr "Еталонні зображення"
 
 msgid "Crop"
-msgstr ""
+msgstr "Обрізати"
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "Змінити розмір полотна"
 
 msgid "Margins"
-msgstr ""
+msgstr "Поля"
 
 msgid "Position + Size"
-msgstr ""
+msgstr "Положення + розмір"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "Фіксовані пропорції"
 
 msgid "Margins:"
-msgstr ""
+msgstr "Поля:"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "Пропорції:"
 
 msgid "Top:"
-msgstr ""
+msgstr "Верх:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "Низ:"
 
 msgid "Left:"
-msgstr ""
+msgstr "Ліво:"
 
 msgid "Right:"
-msgstr ""
+msgstr "Право:"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
