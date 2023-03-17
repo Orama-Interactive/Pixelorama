@@ -515,6 +515,7 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.canvas.tile_mode.update()
 	Global.canvas.pixel_grid.update()
 	Global.canvas.grid.update()
+	Global.tile_mode_offset_dialog.change_mask()
 
 
 func _behavior_submenu_id_pressed(id: int) -> void:

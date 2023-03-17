@@ -1,7 +1,9 @@
 class_name BaseCel
 extends Reference
-# Base class for cel properties.
-# The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
+## Base class for cel properties.
+## The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
+
+signal texture_changed
 
 var opacity: float
 var image_texture: ImageTexture
@@ -41,6 +43,7 @@ func get_image() -> Image:
 
 
 func update_texture() -> void:
+	emit_signal("texture_changed")
 	return
 
 

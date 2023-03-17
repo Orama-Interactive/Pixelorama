@@ -56,6 +56,7 @@ func get_image() -> Image:
 
 func update_texture() -> void:
 	image_texture.set_data(image)
+	.update_texture()
 
 
 func save_image_data_to_pxo(file: File) -> void:

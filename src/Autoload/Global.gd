@@ -152,6 +152,12 @@ var onion_skinning_blue_red := false
 # Palettes
 var palettes := {}
 
+# Crop Options:
+var crop_top := 0
+var crop_bottom := 0
+var crop_left := 0
+var crop_right := 0
+
 # Nodes
 var pixel_layer_button_node: PackedScene = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
 var group_layer_button_node: PackedScene = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
@@ -210,6 +216,7 @@ onready var move_down_layer_button: BaseButton = animation_timeline.find_node("M
 onready var merge_down_layer_button: BaseButton = animation_timeline.find_node("MergeDownLayer")
 onready var layer_opacity_slider: ValueSlider = animation_timeline.find_node("OpacitySlider")
 
+onready var tile_mode_offset_dialog: AcceptDialog = control.find_node("TileModeOffsetsDialog")
 onready var open_sprites_dialog: FileDialog = control.find_node("OpenSprite")
 onready var save_sprites_dialog: FileDialog = control.find_node("SaveSprite")
 onready var save_sprites_html5_dialog: ConfirmationDialog = control.find_node("SaveSpriteHTML5")
