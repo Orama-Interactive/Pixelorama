@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-03-16 23:25\n"
+"PO-Revision-Date: 2023-03-17 00:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -254,15 +254,15 @@ msgstr "Gestione dei livelli"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Anteprima"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Questa è un'anteprima, cambiando questo non cambierà la disposizione"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr ""
+msgstr "Doppio clic per impostare come nuova disposizione di avvio"
 
 msgid "Add"
 msgstr "Aggiungi"
