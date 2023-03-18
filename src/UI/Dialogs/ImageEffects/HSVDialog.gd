@@ -1,5 +1,6 @@
 extends ImageEffect
 
+enum Animate { HUE, SATURATION, VALUE }
 var shader: Shader = preload("res://src/Shaders/HSV.shader")
 var live_preview := true
 
@@ -25,17 +26,30 @@ func set_nodes() -> void:
 	preview = $VBoxContainer/AspectRatioContainer/Preview
 	selection_checkbox = $VBoxContainer/AffectHBoxContainer/SelectionCheckBox
 	affect_option_button = $VBoxContainer/AffectHBoxContainer/AffectOptionButton
+	animate_menu = $"%AnimateOptions".get_popup()
+
+
+func set_animate_menu(_elements) -> void:
+	# set as in enum
+	animate_menu.add_check_item("Hue", Animate.HUE)
+	animate_menu.add_check_item("Saturation", Animate.SATURATION)
+	animate_menu.add_check_item("Value", Animate.VALUE)
+	.set_animate_menu(Animate.size())
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
+	.commit_action(cel, project)
+	var hue = _get_animated_value(project, hue_slider.value / 360, Animate.HUE)
+	var sat = _get_animated_value(project, sat_slider.value / 360, Animate.SATURATION)
+	var val = _get_animated_value(project, val_slider.value / 360, Animate.VALUE)
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
 		selection_tex.create_from_image(project.selection_map, 0)
 
 	var params := {
-		"hue_shift_amount": hue_slider.value / 360,
-		"sat_shift_amount": sat_slider.value / 100,
-		"val_shift_amount": val_slider.value / 100,
+		"hue_shift_amount": hue,
+		"sat_shift_amount": sat,
+		"val_shift_amount": val,
 		"selection": selection_tex,
 		"affect_selection": selection_checkbox.pressed,
 		"has_selection": project.has_selection
