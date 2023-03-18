@@ -114,24 +114,24 @@ text = "Selected cels"
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="AnimationOptions" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 344.0
 margin_right = 332.0
 margin_bottom = 378.0
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/AnimationOptions"]
 margin_top = 10.0
 margin_right = 132.0
 margin_bottom = 24.0
 text = "Animate Properties :"
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/AnimationOptions"]
 margin_left = 136.0
 margin_right = 332.0
 margin_bottom = 34.0
 size_flags_horizontal = 3
 
-[node name="AnimateOptions" type="MenuButton" parent="VBoxContainer/HBoxContainer/PanelContainer"]
+[node name="AnimateMenu" type="MenuButton" parent="VBoxContainer/AnimationOptions/PanelContainer"]
 unique_name_in_owner = true
 margin_left = 7.0
 margin_top = 7.0

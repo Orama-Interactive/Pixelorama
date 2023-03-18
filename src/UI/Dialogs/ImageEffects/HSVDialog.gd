@@ -26,7 +26,8 @@ func set_nodes() -> void:
 	preview = $VBoxContainer/AspectRatioContainer/Preview
 	selection_checkbox = $VBoxContainer/AffectHBoxContainer/SelectionCheckBox
 	affect_option_button = $VBoxContainer/AffectHBoxContainer/AffectOptionButton
-	animate_menu = $"%AnimateOptions".get_popup()
+	animate_options_container = $VBoxContainer/AnimationOptions
+	animate_menu = $"%AnimateMenu".get_popup()
 
 
 func set_animate_menu(_elements) -> void:
