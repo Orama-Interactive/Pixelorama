@@ -13,6 +13,9 @@ var preview_texture := ImageTexture.new()
 var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
+var animate_menu: PopupMenu
+var animate_bool = []
+var selected_idx: int = 0
 var confirmed := false
 
 
@@ -33,6 +36,9 @@ func _ready() -> void:
 		selection_checkbox.connect("toggled", self, "_on_SelectionCheckBox_toggled")
 	if affect_option_button:
 		affect_option_button.connect("item_selected", self, "_on_AffectOptionButton_item_selected")
+	if animate_menu:
+		set_animate_menu(0)
+		animate_menu.connect("id_pressed", self, "_update_animate_flags")
 
 
 func _about_to_show() -> void:
@@ -50,6 +56,7 @@ func _about_to_show() -> void:
 
 
 func _confirmed() -> void:
+	selected_idx = 0
 	confirmed = true
 	var project: Project = Global.current_project
 	if affect == SELECTED_CELS:
@@ -94,11 +101,29 @@ func _confirmed() -> void:
 
 
 func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
-	pass
+	if confirmed:
+		selected_idx += 1
 
 
 func set_nodes() -> void:
 	pass
+
+
+func set_animate_menu(elements: int) -> void:
+	animate_bool.resize(elements)
+	animate_bool.fill(false)
+
+
+func _update_animate_flags(id: int) -> void:
+	animate_bool[id] = !animate_bool[id]
+	animate_menu.set_item_checked(id, animate_bool[id])
+
+
+func _get_animated_value(project: Project, original: float, property_idx: int):
+	if animate_bool[property_idx] == true and confirmed:
+		return (original / project.selected_cels.size()) * selected_idx
+	else:
+		return original
 
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
