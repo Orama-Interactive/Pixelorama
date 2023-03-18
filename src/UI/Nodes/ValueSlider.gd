@@ -62,7 +62,7 @@ func _notification(what: int) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not editable:
+	if not editable or not is_visible_in_tree():
 		return
 	# Hardcode Control + Wheel as a global shortcut, if is_global is true
 	# In Godot 4.x this will change into two is_action() checks for incrementing and decrementing
