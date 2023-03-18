@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-03-16 23:25\n"
+"PO-Revision-Date: 2023-03-18 03:54\n"
 
 msgid "OK"
 msgstr "确定"
@@ -254,15 +254,15 @@ msgstr "管理布局"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "预览"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "这是一个预览，更改此选项不会改变布局"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr ""
+msgstr "双击设置为新的启动布局"
 
 msgid "Add"
 msgstr "添加"
@@ -2246,40 +2246,42 @@ msgid "Reference Images"
 msgstr "参考图像"
 
 msgid "Crop"
-msgstr ""
+msgstr "裁剪"
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "调整画布大小"
 
 msgid "Margins"
-msgstr ""
+msgstr "边距"
 
 msgid "Position + Size"
-msgstr ""
+msgstr "位置和大小"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "锁定长宽比"
 
 msgid "Margins:"
-msgstr ""
+msgstr "边距:"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "长宽比:"
 
 msgid "Top:"
-msgstr ""
+msgstr "顶部："
 
 msgid "Bottom:"
-msgstr ""
+msgstr "底部："
 
 msgid "Left:"
-msgstr ""
+msgstr "左侧："
 
 msgid "Right:"
-msgstr ""
+msgstr "右侧："
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "锁定大小\n\n"
+"启用时使用画布上的工具将只移动裁剪矩形。\n\n"
+"当禁用使用画布上的工具时，将绘制矩形。"
 
