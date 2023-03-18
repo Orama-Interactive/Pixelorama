@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2023-03-16 23:25\n"
+"PO-Revision-Date: 2023-03-18 14:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -254,15 +254,15 @@ msgstr "Gestionar Diseños"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Vista previa"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Esto es una vista previa, cambiar esto no cambiará la apariencia"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr ""
+msgstr "Doble clic para establecer como nueva apariencia de inicio"
 
 msgid "Add"
 msgstr "Añadir"
@@ -788,11 +788,11 @@ msgstr ""
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "Espejo"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Truncar"
 
 msgid "Transition size:"
 msgstr "Tamaño de transición:"
