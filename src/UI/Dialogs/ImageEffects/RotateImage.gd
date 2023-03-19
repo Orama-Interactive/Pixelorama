@@ -1,7 +1,7 @@
 extends ImageEffect
 
 enum { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, URD }
-enum Animate { ANGLE, INITIAL_ANGLE}
+enum Animate { ANGLE, INITIAL_ANGLE }
 
 var live_preview: bool = true
 var rotxel_shader: Shader
@@ -42,6 +42,7 @@ func set_nodes() -> void:
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 	animate_options_container = $VBoxContainer/AnimationOptions
 	animate_menu = $"%AnimateMenu".get_popup()
+	initial_button = $"%InitalButton"
 
 
 func set_animate_menu(_elements) -> void:
@@ -49,6 +50,11 @@ func set_animate_menu(_elements) -> void:
 	animate_menu.add_check_item("Angle", Animate.ANGLE)
 	animate_menu.add_check_item("Initial Angle", Animate.INITIAL_ANGLE)
 	.set_animate_menu(Animate.size())
+
+
+func set_initial_values() -> void:
+	initial_values[Animate.ANGLE] = deg2rad(angle_slider.value)
+	initial_values[Animate.INITIAL_ANGLE] = init_angle_slider.value
 
 
 func _about_to_show() -> void:
@@ -98,8 +104,10 @@ func _calculate_pivot() -> void:
 
 func commit_action(cel: Image, _project: Project = Global.current_project) -> void:
 	.commit_action(cel, _project)
-	var angle: float = _get_animated_value(_project, deg2rad(angle_slider.value), Animate.ANGLE)
-	var init_angle: float = _get_animated_value(_project, init_angle_slider.value, Animate.INITIAL_ANGLE)
+	var angle: float = get_animated_value(_project, deg2rad(angle_slider.value), Animate.ANGLE)
+	var init_angle: float = get_animated_value(
+		_project, init_angle_slider.value, Animate.INITIAL_ANGLE
+	)
 
 	var selection_size := cel.get_size()
 	var selection_tex := ImageTexture.new()

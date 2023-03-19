@@ -252,13 +252,13 @@ margin_bottom = 422.0
 
 [node name="Label" type="Label" parent="VBoxContainer/AnimationOptions"]
 margin_top = 10.0
-margin_right = 132.0
+margin_right = 62.0
 margin_bottom = 24.0
-text = "Animate Properties :"
+text = "Animate :"
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/AnimationOptions"]
-margin_left = 136.0
-margin_right = 326.0
+margin_left = 66.0
+margin_right = 205.0
 margin_bottom = 34.0
 size_flags_horizontal = 3
 
@@ -266,10 +266,17 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 183.0
+margin_right = 132.0
 margin_bottom = 27.0
 text = "Properties"
 flat = false
+
+[node name="InitalButton" type="Button" parent="VBoxContainer/AnimationOptions"]
+unique_name_in_owner = true
+margin_left = 209.0
+margin_right = 326.0
+margin_bottom = 34.0
+text = "Set initial values"
 
 [node name="WaitApply" type="Timer" parent="."]
 

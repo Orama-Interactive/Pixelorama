@@ -28,6 +28,7 @@ func set_nodes() -> void:
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 	animate_options_container = $VBoxContainer/AnimationOptions
 	animate_menu = $"%AnimateMenu".get_popup()
+	initial_button = $"%InitalButton"
 
 
 func set_animate_menu(_elements) -> void:
@@ -35,10 +36,13 @@ func set_animate_menu(_elements) -> void:
 	animate_menu.add_check_item("Thickness", Animate.THICKNESS)
 	.set_animate_menu(Animate.size())
 
+func set_initial_values() -> void:
+	initial_values[Animate.THICKNESS] = thickness
+
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	.commit_action(cel, project)
-	var anim_thickness = _get_animated_value(project, thickness, Animate.THICKNESS)
+	var anim_thickness = get_animated_value(project, thickness, Animate.THICKNESS)
 
 	if !shader:  # Web version
 		DrawingAlgos.generate_outline(

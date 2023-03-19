@@ -24,6 +24,7 @@ func set_nodes() -> void:
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 	animate_options_container = $VBoxContainer/AnimationOptions
 	animate_menu = $"%AnimateMenu".get_popup()
+	initial_button = $"%InitalButton"
 
 
 func set_animate_menu(_elements) -> void:
@@ -33,10 +34,15 @@ func set_animate_menu(_elements) -> void:
 	.set_animate_menu(Animate.size())
 
 
+func set_initial_values() -> void:
+	initial_values[Animate.OFFSET_X] = offset.x
+	initial_values[Animate.OFFSET_Y] = offset.y
+
+
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	.commit_action(cel, project)
-	var offset_x = _get_animated_value(project, offset.x, Animate.OFFSET_X)
-	var offset_y = _get_animated_value(project, offset.y, Animate.OFFSET_Y)
+	var offset_x = get_animated_value(project, offset.x, Animate.OFFSET_X)
+	var offset_y = get_animated_value(project, offset.y, Animate.OFFSET_Y)
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
 		selection_tex.create_from_image(project.selection_map, 0)

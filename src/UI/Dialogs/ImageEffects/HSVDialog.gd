@@ -28,6 +28,7 @@ func set_nodes() -> void:
 	affect_option_button = $VBoxContainer/AffectHBoxContainer/AffectOptionButton
 	animate_options_container = $VBoxContainer/AnimationOptions
 	animate_menu = $"%AnimateMenu".get_popup()
+	initial_button = $"%InitalButton"
 
 
 func set_animate_menu(_elements) -> void:
@@ -38,11 +39,17 @@ func set_animate_menu(_elements) -> void:
 	.set_animate_menu(Animate.size())
 
 
+func set_initial_values() -> void:
+	initial_values[Animate.HUE] = hue_slider.value
+	initial_values[Animate.SATURATION] = sat_slider.value
+	initial_values[Animate.VALUE] = val_slider.value
+
+
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	.commit_action(cel, project)
-	var hue = _get_animated_value(project, hue_slider.value / 360, Animate.HUE)
-	var sat = _get_animated_value(project, sat_slider.value / 360, Animate.SATURATION)
-	var val = _get_animated_value(project, val_slider.value / 360, Animate.VALUE)
+	var hue = get_animated_value(project, hue_slider.value / 360, Animate.HUE)
+	var sat = get_animated_value(project, sat_slider.value / 360, Animate.SATURATION)
+	var val = get_animated_value(project, val_slider.value / 360, Animate.VALUE)
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
 		selection_tex.create_from_image(project.selection_map, 0)
