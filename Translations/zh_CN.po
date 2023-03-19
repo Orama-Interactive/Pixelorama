@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-03-18 03:54\n"
+"PO-Revision-Date: 2023-03-19 23:05\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1580,6 +1580,22 @@ msgstr "适合帧率"
 
 msgid "100% Zoom"
 msgstr "100% 缩放"
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Replace selection"
+msgstr ""
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Add to selection"
+msgstr ""
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Subtract from selection"
+msgstr ""
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Intersection of selections"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "镜像"
