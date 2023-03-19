@@ -69,6 +69,7 @@ func _set_editable(val: bool) -> void:
 	editable = val
 	for slider in get_sliders():
 		slider.editable = val
+	$Ratio/RatioButton.disabled = not val
 
 
 func _set_value(val: Vector2) -> void:
