@@ -36,6 +36,7 @@ func set_animate_menu(_elements) -> void:
 	animate_menu.add_check_item("Thickness", Animate.THICKNESS)
 	.set_animate_menu(Animate.size())
 
+
 func set_initial_values() -> void:
 	initial_values[Animate.THICKNESS] = thickness
 
