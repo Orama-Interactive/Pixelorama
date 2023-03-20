@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2023-03-20 18:36\n"
+"PO-Revision-Date: 2023-03-20 21:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -598,7 +598,7 @@ msgid "Cursors"
 msgstr "Курсоры"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Індыкатары"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
@@ -710,22 +710,22 @@ msgid "All frames"
 msgstr ""
 
 msgid "All projects"
-msgstr ""
+msgstr "Усе праекты"
 
 msgid "Invert Colors"
 msgstr "Інвертаваць колеры"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Мяняць чырвоны канал"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Мяняць зялёны канал"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Мяняць сіні канал"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Мяняць альфа-канал"
 
 msgid "Desaturation"
 msgstr ""
@@ -737,19 +737,19 @@ msgid "Drop Shadow"
 msgstr ""
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Зрух па X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Зрух па Y:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Колер цені:"
 
 msgid "Adjust Hue/Saturation/Value"
 msgstr ""
 
 msgid "Gradient"
-msgstr ""
+msgstr "Градыент"
 
 msgid "Gradient Map"
 msgstr ""
@@ -768,7 +768,7 @@ msgid "If this is enabled, the last point gets added at the end of the gradient.
 msgstr "Калі выбраны гэты пункт, у канец градыента дадаецца апошняя кропка. Адключыце гэты пункт, калі вы хочаце, каб у градыента была канстантная інтэрпаляцыя і апошні колер браўся да ўвагі."
 
 msgid "Shape:"
-msgstr ""
+msgstr "Форма:"
 
 msgid "Linear"
 msgstr "Лінейны"
@@ -778,19 +778,19 @@ msgstr "Радыяльны"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "Паўтор:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "Паўтараць"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "Адлюстраванне"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Абразанне"
 
 msgid "Transition size:"
 msgstr "Памер пераходу:"
@@ -982,43 +982,43 @@ msgid "Danish"
 msgstr "Дацкая"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Шведская"
 
 msgid "Serbian (Cyrillic)"
-msgstr ""
+msgstr "Сербская кірыліцай"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Нідэрландская"
 
 msgid "Belarusian"
-msgstr ""
+msgstr "Беларуская"
 
 msgid "Development Team"
-msgstr ""
+msgstr "Каманда распрацоўкі"
 
 msgid "Lead Programmer"
-msgstr ""
+msgstr "Галоўны праграміст"
 
 msgid "UI Designer"
-msgstr ""
+msgstr "Дызайнер інтэрфейсу"
 
 msgid "GitHub Contributors"
 msgstr ""
 
 msgid "Art by: %s"
-msgstr ""
+msgstr "Мастак: %s"
 
 msgid "untitled"
-msgstr ""
+msgstr "без назвы"
 
 msgid "imported"
-msgstr ""
+msgstr "імпарт"
 
 msgid "copy"
-msgstr ""
+msgstr "копія"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr ""
+msgstr "Вы сапраўды хочаце выйсці з Pixelorama?"
 
 msgid "Unsaved Image"
 msgstr ""
@@ -1226,7 +1226,7 @@ msgid "Isometric"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "Усе"
 
 msgid "Rectangular grid width:"
 msgstr ""
@@ -1437,7 +1437,7 @@ msgid "Brush size:"
 msgstr ""
 
 msgid "Overwrite color"
-msgstr ""
+msgstr "Перазапіс колеру"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr ""
@@ -1450,15 +1450,15 @@ msgstr ""
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
-msgstr ""
+msgstr "Інтэрвал"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
-msgstr ""
+msgstr "Пропуск X:"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
-msgstr ""
+msgstr "Пропуск Y:"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
