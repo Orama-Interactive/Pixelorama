@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2023-03-19 23:05\n"
+"PO-Revision-Date: 2023-03-20 09:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -254,11 +254,11 @@ msgstr "Кіраванне макетамі"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Папярэдні перагляд"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Гэта папярэдні перагляд, змены у якім не зменяць макет"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
