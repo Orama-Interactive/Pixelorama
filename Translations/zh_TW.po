@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2023-03-19 23:05\n"
+"PO-Revision-Date: 2023-03-20 18:36\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1436,8 +1436,8 @@ msgstr "自訂畫筆"
 msgid "Brush size:"
 msgstr "畫筆大小："
 
-msgid "Overwrite Color"
-msgstr "覆寫顏色"
+msgid "Overwrite color"
+msgstr ""
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "覆寫顏色而不是混合顏色，此選項只適用於半透明的顏色"
@@ -1446,6 +1446,18 @@ msgid "Pixel Perfect"
 msgstr "完美像素"
 
 msgid "Fill inside"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
+msgid "Spacing"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
+msgid "Gap X:"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
+msgid "Gap Y:"
 msgstr ""
 
 msgid "Pixel Perfect\n"
