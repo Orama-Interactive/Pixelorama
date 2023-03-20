@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-03-20 18:36\n"
+"PO-Revision-Date: 2023-03-20 21:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1477,7 +1477,7 @@ msgid "Brush size:"
 msgstr "Pinselgröße:"
 
 msgid "Overwrite color"
-msgstr ""
+msgstr "Farbe überschreiben"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "Überschreibt die Farbe anstatt sie zu mischen. Diese Option ist nur für nicht vollständig transparente Farben relevant"
@@ -1490,15 +1490,15 @@ msgstr "Einfüllen"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
-msgstr ""
+msgstr "Abstand"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
-msgstr ""
+msgstr "Abstand X:"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
-msgstr ""
+msgstr "Abstand Y:"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
