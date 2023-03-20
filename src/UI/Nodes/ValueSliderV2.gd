@@ -6,8 +6,8 @@ signal value_changed(value)
 
 export var editable := true setget _set_editable
 export var value := Vector2.ZERO setget _set_value
-export var min_value := 0.0 setget _set_min_value
-export var max_value := 100.0 setget _set_max_value
+export var min_value := Vector2.ZERO setget _set_min_value
+export var max_value := Vector2(100.0, 100.0) setget _set_max_value
 export var step := 1.0 setget _set_step
 export var allow_greater := false setget _set_allow_greater
 export var allow_lesser := false setget _set_allow_lesser
@@ -43,7 +43,7 @@ func _gcd(a: int, b: int) -> int:
 func _on_X_value_changed(val: float) -> void:
 	value.x = val
 	if _locked_ratio:
-		self.value.y = max(min_value, (value.x / ratio.x) * ratio.y)
+		self.value.y = max(min_value.y, (value.x / ratio.x) * ratio.y)
 	if _can_emit_signal:
 		emit_signal("value_changed", value)
 
@@ -51,7 +51,7 @@ func _on_X_value_changed(val: float) -> void:
 func _on_Y_value_changed(val: float) -> void:
 	value.y = val
 	if _locked_ratio:
-		self.value.x = max(min_value, (value.y / ratio.y) * ratio.x)
+		self.value.x = max(min_value.x, (value.y / ratio.y) * ratio.x)
 	if _can_emit_signal:
 		emit_signal("value_changed", value)
 
@@ -83,16 +83,16 @@ func _set_value(val: Vector2) -> void:
 	_can_emit_signal = true
 
 
-func _set_min_value(val: float) -> void:
+func _set_min_value(val: Vector2) -> void:
 	min_value = val
-	for slider in get_sliders():
-		slider.min_value = val
+	$GridContainer/X.min_value = val.x
+	$GridContainer/Y.min_value = val.y
 
 
-func _set_max_value(val: float) -> void:
+func _set_max_value(val: Vector2) -> void:
 	max_value = val
-	for slider in get_sliders():
-		slider.max_value = val
+	$GridContainer/X.max_value = val.x
+	$GridContainer/Y.max_value = val.y
 
 
 func _set_step(val: float) -> void:
