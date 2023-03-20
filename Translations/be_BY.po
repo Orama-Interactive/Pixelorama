@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2023-03-20 09:12\n"
+"PO-Revision-Date: 2023-03-20 10:16\n"
 
 msgid "OK"
 msgstr "OK"
@@ -61,7 +61,7 @@ msgid "Edit"
 msgstr "Рэдагаваць"
 
 msgid "Select"
-msgstr "Выбар"
+msgstr "Вылучэнне"
 
 msgid "View"
 msgstr "Прагляд"
@@ -190,13 +190,13 @@ msgid "Grayscale View"
 msgstr ""
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Адлюстраванне"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Адлюстраваць па гарызанталі"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Адлюстраваць па вертыкалі"
 
 msgid "Preferences"
 msgstr "Налады"
@@ -262,7 +262,7 @@ msgstr "Гэта папярэдні перагляд, змены у якім н�
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr ""
+msgstr "Націсніце двойчы, каб устанавіць як новы стартавы макет"
 
 msgid "Add"
 msgstr "Дадаць"
@@ -464,7 +464,7 @@ msgid "Alert!"
 msgstr ""
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Выбраць бягучую папку"
 
 msgid "Open a Directory"
 msgstr "Адкрыць каталог"
@@ -530,7 +530,7 @@ msgid "Directories & Files:"
 msgstr ""
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Стварыць папку"
 
 msgid "File:"
 msgstr "Файл:"
@@ -576,7 +576,7 @@ msgid "Canvas"
 msgstr "Палатно"
 
 msgid "Selection"
-msgstr "Выбар"
+msgstr "Вылучэнне"
 
 msgid "Shortcuts"
 msgstr ""
@@ -695,7 +695,7 @@ msgid "Big"
 msgstr "Вялікія"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Закрануць толькі вылучэнне"
 
 msgid "Selected cels"
 msgstr "Выбраныя келі"
@@ -862,7 +862,7 @@ msgid "Issue Tracker"
 msgstr ""
 
 msgid "Open Logs Folder"
-msgstr ""
+msgstr "Адкрыць папку журналаў"
 
 msgid "Changelog"
 msgstr "Спіс змен"
@@ -913,73 +913,73 @@ msgid "French"
 msgstr "Французская"
 
 msgid "German"
-msgstr ""
+msgstr "Нямецкая"
 
 msgid "Polish"
-msgstr ""
+msgstr "Польская"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Партугальская"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Бразільская партугальская"
 
 msgid "Russian"
-msgstr ""
+msgstr "Руская"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Кітайская спрошчанымі іерогліфамі"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Кітайская традыцыйнымі іерогліфамі"
 
 msgid "Italian"
-msgstr ""
+msgstr "Італьянская"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Латышская"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Іспанская"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Каталонская"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Эсперанта"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Інданэзійская"
 
 msgid "Czech"
-msgstr ""
+msgstr "Чэшская"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Арабская"
 
 msgid "Turkish"
-msgstr ""
+msgstr "Турэцкая"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "Нарвежская, букмол"
 
 msgid "Korean"
-msgstr ""
+msgstr "Карэйская"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Венгерская"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Румынская"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Японская"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Украінская"
 
 msgid "Danish"
-msgstr ""
+msgstr "Дацкая"
 
 msgid "Swedish"
 msgstr ""
@@ -1041,18 +1041,25 @@ msgstr "Выйсці без захавання"
 msgid "Rectangular Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Прамакутнае вылучэнне\n\n"
+"%s для левай кнопкі мышы\n"
+"%s для правай кнопкі мышы"
 
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Эліптычнае вылучэнне\n\n"
+"%s для левай кнопкі мышы\n"
+"%s для правай кнопкі мышы"
 
 msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Double-click to connect the last point to the starting point"
-msgstr ""
+msgstr "Многавугольнае вылучэнне\n\n"
+"%s для левай кнопкі мышы\n"
+"%s для правай кнопкі мышы\n\n"
+"Двайное націсканне злучае апошнюю кропку з пачатковай"
 
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
@@ -1094,7 +1101,10 @@ msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Аловак\n\n"
+"%s для левай кнопкі мышы\n"
+"%s для правай кнопкі мышы\n\n"
+"Утрымлівайце %s, каб намаляваць лінію"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
@@ -1315,7 +1325,7 @@ msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Анімацыя меж вылучэння"
 
 msgid "Border color 1:"
 msgstr ""
@@ -1367,7 +1377,7 @@ msgid "Uninstall"
 msgstr ""
 
 msgid "Open Folder"
-msgstr ""
+msgstr "Адкрыць папку"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
@@ -1468,7 +1478,7 @@ msgstr ""
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "Усё вылучэнне"
 
 msgid "Fill with:"
 msgstr ""
@@ -1531,19 +1541,19 @@ msgstr ""
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
-msgstr ""
+msgstr "Замяніць вылучэнне"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
-msgstr ""
+msgstr "Дадаць да вылучэння"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Subtract from selection"
-msgstr ""
+msgstr "Адняць ад вылучэння"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
-msgstr ""
+msgstr "Перасячэнне вылучэнняў"
 
 msgid "Mirroring"
 msgstr ""
@@ -1900,7 +1910,7 @@ msgid "Create colors with alpha component"
 msgstr ""
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Браць колеры толькі з вылучэння"
 
 msgid "Get colors from"
 msgstr ""
@@ -1969,13 +1979,13 @@ msgid "Custom"
 msgstr ""
 
 msgid "Rectangular Selection"
-msgstr ""
+msgstr "Прамакутнае вылучэнне"
 
 msgid "Elliptical Selection"
-msgstr ""
+msgstr "Эліптычнае вылучэнне"
 
 msgid "Polygonal Selection"
-msgstr ""
+msgstr "Многавугольнае вылучэнне"
 
 msgid "Select By Color"
 msgstr ""
@@ -2078,11 +2088,11 @@ msgstr ""
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "Ствараць па папцы для кожнага цэтліка кадраў"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr ""
+msgstr "Стварае шмат файлаў, але кожны з іх запісваецца ў папку згодна з яго цэтлікам кадра"
 
 msgid "Close"
 msgstr ""
@@ -2149,7 +2159,7 @@ msgid "From Current Sprite"
 msgstr ""
 
 msgid "From Current Selection"
-msgstr ""
+msgstr "З бягучага вылучэння"
 
 msgid "Add a new color"
 msgstr ""
