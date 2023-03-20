@@ -26,33 +26,29 @@ func _init() -> void:
 	_drawer.color_op = PencilOp.new()
 
 
-func _on_Overwrite_toggled(button_pressed: bool):
+func _on_Overwrite_toggled(button_pressed: bool) -> void:
 	_overwrite = button_pressed
 	update_config()
 	save_config()
 
 
-func _on_FillInside_toggled(button_pressed):
+func _on_FillInside_toggled(button_pressed: bool) -> void:
 	_fill_inside = button_pressed
 	update_config()
 	save_config()
 
 
-func _on_SpacingMode_toggled(button_pressed):
+func _on_SpacingMode_toggled(button_pressed: bool) -> void:
 	# This acts as an interface to access the intrinsic spacing_mode feature
-	# BaseTool holds the spacing system but for a tool to access them i recommend we do it in
+	# BaseTool holds the spacing system, but for a tool to access them it's recommended to do it in
 	# their own script
 	_spacing_mode = button_pressed
 	update_config()
 	save_config()
 
 
-func _on_SpacingX_value_changed(value):
-	_spacing.x = value
-
-
-func _on_SpacingY_value_changed(value):
-	_spacing.y = value
+func _on_Spacing_value_changed(value: Vector2) -> void:
+	_spacing = value
 
 
 func _input(event: InputEvent) -> void:
@@ -90,9 +86,8 @@ func update_config() -> void:
 	$Overwrite.pressed = _overwrite
 	$FillInside.pressed = _fill_inside
 	$SpacingMode.pressed = _spacing_mode
-	$StrokeGap.visible = _spacing_mode
-	$StrokeGap/SpacingX.value = _spacing.x
-	$StrokeGap/SpacingY.value = _spacing.y
+	$Spacing.visible = _spacing_mode
+	$Spacing.value = _spacing
 
 
 func draw_start(position: Vector2) -> void:

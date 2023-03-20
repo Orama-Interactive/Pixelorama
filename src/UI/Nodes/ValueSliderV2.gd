@@ -43,7 +43,7 @@ func _gcd(a: int, b: int) -> int:
 func _on_X_value_changed(val: float) -> void:
 	value.x = val
 	if _locked_ratio:
-		value.y = max(min_value, (value.x / ratio.x) * ratio.y)
+		self.value.y = max(min_value, (value.x / ratio.x) * ratio.y)
 	if _can_emit_signal:
 		emit_signal("value_changed", value)
 
@@ -51,7 +51,7 @@ func _on_X_value_changed(val: float) -> void:
 func _on_Y_value_changed(val: float) -> void:
 	value.y = val
 	if _locked_ratio:
-		value.x = max(min_value, (value.y / ratio.y) * ratio.x)
+		self.value.x = max(min_value, (value.y / ratio.y) * ratio.x)
 	if _can_emit_signal:
 		emit_signal("value_changed", value)
 
@@ -59,7 +59,10 @@ func _on_Y_value_changed(val: float) -> void:
 func _on_RatioButton_toggled(button_pressed: bool) -> void:
 	_locked_ratio = button_pressed
 	var divisor := _gcd(value.x, value.y)
-	ratio = value / divisor
+	if divisor == 0:
+		ratio = Vector2.ONE
+	else:
+		ratio = value / divisor
 
 
 # Setters

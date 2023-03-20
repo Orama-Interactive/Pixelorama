@@ -1414,7 +1414,7 @@ msgstr ""
 msgid "Brush size:"
 msgstr ""
 
-msgid "Overwrite Color"
+msgid "Overwrite color"
 msgstr ""
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
@@ -1424,6 +1424,18 @@ msgid "Pixel Perfect"
 msgstr ""
 
 msgid "Fill inside"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
+msgid "Spacing"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
+msgid "Gap X:"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
+msgid "Gap Y:"
 msgstr ""
 
 msgid "Pixel Perfect\n"
