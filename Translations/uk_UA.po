@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-03-19 23:05\n"
+"PO-Revision-Date: 2023-03-20 09:12\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1583,19 +1583,19 @@ msgstr "100% масштаб"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
-msgstr ""
+msgstr "Замінити виділення"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
-msgstr ""
+msgstr "Додати до виділення"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Subtract from selection"
-msgstr ""
+msgstr "Відняти від виділення"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
-msgstr ""
+msgstr "Перетинання виділень"
 
 msgid "Mirroring"
 msgstr "Віддзеркалення"
@@ -2297,5 +2297,7 @@ msgstr "Право:"
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Фіксований розмір\n\n"
+"Якщо вибрано, при використанні цього інструменту на полотні, він лише пересуне прямокутник, вибраний для обрізання.\n\n"
+"Якщо не вибрано, при використанні інструменту на полотні буде намальований прямокутник."
 
