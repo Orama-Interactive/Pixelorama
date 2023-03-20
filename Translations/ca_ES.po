@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2023-03-19 23:05\n"
+"PO-Revision-Date: 2023-03-20 18:36\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1475,8 +1475,8 @@ msgstr "Pinzell personalitzat"
 msgid "Brush size:"
 msgstr "Mida del pinzell:"
 
-msgid "Overwrite Color"
-msgstr "Sobreescriure el color"
+msgid "Overwrite color"
+msgstr ""
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "Sobreescriu el color en comptes de barrejar-lo. Aquesta opció només és rellevant amb colors que no són completament opacs"
@@ -1486,6 +1486,18 @@ msgstr "Pixel Perfect"
 
 msgid "Fill inside"
 msgstr "Omple l'interior"
+
+#. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
+msgid "Spacing"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
+msgid "Gap X:"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
+msgid "Gap Y:"
+msgstr ""
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
