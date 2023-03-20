@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2023-03-19 23:05\n"
+"PO-Revision-Date: 2023-03-20 18:36\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -1427,8 +1427,8 @@ msgstr "Propra peniklo"
 msgid "Brush size:"
 msgstr "Grandeco de la peniko:"
 
-msgid "Overwrite Color"
-msgstr "Superskribi koloron"
+msgid "Overwrite color"
+msgstr ""
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "Superskribas koloron anstataŭ miksi ĝin kun suba koloro. La opcio nur estas konsiderata, kiam la koloroj ne estas tute opakaj"
@@ -1437,6 +1437,18 @@ msgid "Pixel Perfect"
 msgstr "Rastumera precizemo"
 
 msgid "Fill inside"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
+msgid "Spacing"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
+msgid "Gap X:"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
+msgid "Gap Y:"
 msgstr ""
 
 msgid "Pixel Perfect\n"
