@@ -64,6 +64,7 @@ patch_margin_top = 15
 patch_margin_bottom = 13
 
 [node name="RatioButton" type="TextureButton" parent="Ratio" groups=["UIButtons"]]
+unique_name_in_owner = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

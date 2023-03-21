@@ -20,6 +20,7 @@ var _intersect := false  # Shift + Ctrl + Mouse Click
 # Used to check if the state of content transformation has been changed
 # while draw_move() is being called. For example, pressing Enter while still moving content
 var _content_transformation_check := false
+var _skip_slider_logic := false
 
 onready var selection_node: Node2D = Global.canvas.selection
 onready var position_sliders := $Position as ValueSliderV2
@@ -58,11 +59,16 @@ func update_config() -> void:
 
 
 func set_spinbox_values() -> void:
+	_skip_slider_logic = true
 	var select_rect: Rect2 = selection_node.big_bounding_rectangle
-	position_sliders.editable = !select_rect.has_no_area()
+	var has_selection := not select_rect.has_no_area()
+	if not has_selection:
+		size_sliders.press_ratio_button(false)
+	position_sliders.editable = has_selection
 	position_sliders.value = select_rect.position
-	size_sliders.editable = position_sliders.editable
+	size_sliders.editable = has_selection
 	size_sliders.value = select_rect.size
+	_skip_slider_logic = false
 
 
 func draw_start(position: Vector2) -> void:
@@ -222,6 +228,8 @@ func _set_cursor_text(rect: Rect2) -> void:
 
 
 func _on_Position_value_changed(value: Vector2) -> void:
+	if _skip_slider_logic:
+		return
 	var project: Project = Global.current_project
 	if !project.has_selection:
 		return
@@ -239,6 +247,8 @@ func _on_Position_value_changed(value: Vector2) -> void:
 
 
 func _on_Size_value_changed(value: Vector2) -> void:
+	if _skip_slider_logic:
+		return
 	if !Global.current_project.has_selection:
 		return
 
@@ -247,6 +257,10 @@ func _on_Size_value_changed(value: Vector2) -> void:
 	timer.start()
 	selection_node.big_bounding_rectangle.size = value
 	selection_node.resize_selection()
+
+
+func _on_Size_ratio_toggled(button_pressed: bool) -> void:
+	selection_node.resize_keep_ratio = button_pressed
 
 
 func _on_Timer_timeout() -> void:

@@ -56,5 +56,6 @@ one_shot = true
 
 [connection signal="item_selected" from="Modes" to="." method="_on_Modes_item_selected"]
 [connection signal="value_changed" from="Position" to="." method="_on_Position_value_changed"]
+[connection signal="ratio_toggled" from="Size" to="." method="_on_Size_ratio_toggled"]
 [connection signal="value_changed" from="Size" to="." method="_on_Size_value_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -3,6 +3,7 @@ class_name ValueSliderV2
 extends HBoxContainer
 
 signal value_changed(value)
+signal ratio_toggled(button_pressed)
 
 export var editable := true setget _set_editable
 export var value := Vector2.ZERO setget _set_value
@@ -35,6 +36,10 @@ func get_sliders() -> Array:
 	return [$GridContainer/X, $GridContainer/Y]
 
 
+func press_ratio_button(pressed: bool) -> void:
+	$"%RatioButton".pressed = pressed
+
+
 # Greatest common divisor
 func _gcd(a: int, b: int) -> int:
 	return a if b == 0 else _gcd(b, a % b)
@@ -63,6 +68,7 @@ func _on_RatioButton_toggled(button_pressed: bool) -> void:
 		ratio = Vector2.ONE
 	else:
 		ratio = value / divisor
+	emit_signal("ratio_toggled", button_pressed)
 
 
 # Setters
@@ -72,7 +78,7 @@ func _set_editable(val: bool) -> void:
 	editable = val
 	for slider in get_sliders():
 		slider.editable = val
-	$Ratio/RatioButton.disabled = not val
+	$"%RatioButton".disabled = not val
 
 
 func _set_value(val: Vector2) -> void:
