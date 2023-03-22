@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-03-20 21:07\n"
+"PO-Revision-Date: 2023-03-22 14:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1595,19 +1595,19 @@ msgstr "Transfocare 100%"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
-msgstr ""
+msgstr "Înlocuire selecție"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
-msgstr ""
+msgstr "Adăugare la selecție"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Subtract from selection"
-msgstr ""
+msgstr "Scădere din selecție"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
-msgstr ""
+msgstr "Intersecția selecțiilor"
 
 msgid "Mirroring"
 msgstr "Oglindire"
