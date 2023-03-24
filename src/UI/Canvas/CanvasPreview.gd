@@ -16,7 +16,7 @@ onready var animation_timer: Timer = $AnimationTimer
 
 func _draw() -> void:
 	var current_project: Project = Global.current_project
-	var texture_to_draw := ImageTexture.new()
+	var texture_to_draw: Texture
 	var modulate_color := Color.white
 	match mode:
 		Mode.TIMELINE:
@@ -61,7 +61,9 @@ func _draw() -> void:
 				frame = start_sprite_sheet_frame - 1
 			texture_to_draw = sprite_frames[frame]
 
-	var rect = Rect2(Vector2.ZERO, texture_to_draw.get_data().get_size())
+	if not texture_to_draw:
+		return
+	var rect := Rect2(Vector2.ZERO, texture_to_draw.get_data().get_size())
 	get_parent().get_node("TransparentChecker").fit_rect(rect)
 	draw_texture(texture_to_draw, Vector2.ZERO, modulate_color)
 
