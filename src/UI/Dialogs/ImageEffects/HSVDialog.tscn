@@ -25,13 +25,13 @@ margin_bottom = 380.0
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
 margin_right = 332.0
-margin_bottom = 232.0
+margin_bottom = 200.0
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 50.0
-margin_right = 282.0
-margin_bottom = 232.0
+margin_left = 66.0
+margin_right = 266.0
+margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
 expand = true
 stretch_mode = 5
@@ -44,9 +44,9 @@ margin_right = 0.0
 margin_bottom = 0.0
 
 [node name="LiveSettings" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 236.0
+margin_top = 204.0
 margin_right = 332.0
-margin_bottom = 260.0
+margin_bottom = 228.0
 alignment = 1
 
 [node name="LiveCheckbox" type="CheckBox" parent="VBoxContainer/LiveSettings"]
@@ -70,31 +70,31 @@ prefix = "Preview delay:"
 suffix = "ms"
 
 [node name="HueSlider" parent="VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 264.0
+margin_top = 232.0
 margin_right = 332.0
-margin_bottom = 288.0
+margin_bottom = 256.0
 min_value = -180.0
 max_value = 180.0
 prefix = "Hue:"
 
 [node name="SaturationSlider" parent="VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 292.0
+margin_top = 260.0
 margin_right = 332.0
-margin_bottom = 316.0
+margin_bottom = 284.0
 min_value = -100.0
 prefix = "Saturation:"
 
 [node name="ValueSlider" parent="VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 320.0
+margin_top = 288.0
 margin_right = 332.0
-margin_bottom = 344.0
+margin_bottom = 312.0
 min_value = -100.0
 prefix = "Value:"
 
 [node name="AffectHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 348.0
+margin_top = 316.0
 margin_right = 332.0
-margin_bottom = 372.0
+margin_bottom = 340.0
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/AffectHBoxContainer"]
 margin_right = 164.0
@@ -113,6 +113,40 @@ size_flags_horizontal = 3
 text = "Selected cels"
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
+
+[node name="AnimationOptions" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 388.0
+margin_right = 326.0
+margin_bottom = 422.0
+
+[node name="Label" type="Label" parent="VBoxContainer/AnimationOptions"]
+margin_top = 10.0
+margin_right = 62.0
+margin_bottom = 24.0
+text = "Animate :"
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/AnimationOptions"]
+margin_left = 66.0
+margin_right = 205.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+
+[node name="AnimateMenu" type="MenuButton" parent="VBoxContainer/AnimationOptions/PanelContainer"]
+unique_name_in_owner = true
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 132.0
+margin_bottom = 27.0
+focus_mode = 2
+text = "Properties"
+flat = false
+
+[node name="InitalButton" type="Button" parent="VBoxContainer/AnimationOptions"]
+unique_name_in_owner = true
+margin_left = 209.0
+margin_right = 326.0
+margin_bottom = 34.0
+text = "Set initial values"
 
 [node name="WaitApply" type="Timer" parent="."]
 wait_time = 0.1

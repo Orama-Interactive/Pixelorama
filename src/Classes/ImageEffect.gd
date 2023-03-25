@@ -13,6 +13,12 @@ var preview_texture := ImageTexture.new()
 var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
+var animate_options_container: Node
+var animate_menu: PopupMenu
+var initial_button: Button
+var animate_bool = []
+var initial_values: PoolRealArray = []
+var selected_idx: int = 0  # the current selected cel to apply animation to
 var confirmed := false
 
 
@@ -33,6 +39,11 @@ func _ready() -> void:
 		selection_checkbox.connect("toggled", self, "_on_SelectionCheckBox_toggled")
 	if affect_option_button:
 		affect_option_button.connect("item_selected", self, "_on_AffectOptionButton_item_selected")
+	if animate_menu:
+		set_animate_menu(0)
+		animate_menu.connect("id_pressed", self, "_update_animate_flags")
+	if initial_button:
+		initial_button.connect("pressed", self, "set_initial_values")
 
 
 func _about_to_show() -> void:
@@ -50,6 +61,7 @@ func _about_to_show() -> void:
 
 
 func _confirmed() -> void:
+	selected_idx = 0
 	confirmed = true
 	var project: Project = Global.current_project
 	if affect == SELECTED_CELS:
@@ -94,11 +106,38 @@ func _confirmed() -> void:
 
 
 func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
-	pass
+	if confirmed and affect == SELECTED_CELS:
+		selected_idx += 1
 
 
 func set_nodes() -> void:
 	pass
+
+
+func set_animate_menu(elements: int) -> void:
+	initial_values.resize(elements)
+	initial_values.fill(0)
+	animate_bool.resize(elements)
+	animate_bool.fill(false)
+
+
+func set_initial_values() -> void:
+	pass
+
+
+func get_animated_value(project: Project, final: float, property_idx: int):
+	if animate_bool[property_idx] == true and confirmed:
+		var first: Vector2 = Vector2(initial_values[property_idx], 0)
+		var second: Vector2 = Vector2(final, 0)
+		var interpolation = float(selected_idx) / project.selected_cels.size()
+		return first.linear_interpolate(second, interpolation).x
+	else:
+		return final
+
+
+func _update_animate_flags(id: int) -> void:
+	animate_bool[id] = !animate_bool[id]
+	animate_menu.set_item_checked(id, animate_bool[id])
 
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
@@ -145,6 +184,7 @@ func _on_SelectionCheckBox_toggled(_button_pressed: bool) -> void:
 
 func _on_AffectOptionButton_item_selected(index: int) -> void:
 	affect = index
+	animate_options_container.visible = bool(affect == SELECTED_CELS)
 	update_preview()
 
 
