@@ -43,7 +43,7 @@ func _ready() -> void:
 		set_animate_menu(0)
 		animate_menu.connect("id_pressed", self, "_update_animate_flags")
 	if initial_button:
-		initial_button.connect("pressed", self, "set_initial_values" )
+		initial_button.connect("pressed", self, "set_initial_values")
 
 
 func _about_to_show() -> void:
@@ -127,8 +127,8 @@ func set_initial_values() -> void:
 
 func get_animated_value(project: Project, final: float, property_idx: int):
 	if animate_bool[property_idx] == true and confirmed:
-		var first :Vector2 = Vector2(initial_values[property_idx], 0)
-		var second :Vector2 = Vector2(final, 0)
+		var first: Vector2 = Vector2(initial_values[property_idx], 0)
+		var second: Vector2 = Vector2(final, 0)
 		var interpolation = float(selected_idx) / project.selected_cels.size()
 		return first.linear_interpolate(second, interpolation).x
 	else:
