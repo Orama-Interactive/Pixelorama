@@ -184,7 +184,7 @@ func _select_current_layer() -> void:
 	Global.current_project.change_cel(-1, layer)
 
 
-func get_drag_data(_position) -> Array:
+func get_drag_data(_position: Vector2) -> Array:
 	var layers := range(
 		layer - Global.current_project.layers[layer].get_child_count(true), layer + 1
 	)
@@ -201,57 +201,59 @@ func get_drag_data(_position) -> Array:
 	return ["Layer", layer]
 
 
-func can_drop_data(_pos, data) -> bool:
-	if typeof(data) == TYPE_ARRAY:
-		if data[0] == "Layer":
-			var curr_layer: BaseLayer = Global.current_project.layers[layer]
-			var drag_layer: BaseLayer = Global.current_project.layers[data[1]]
+func can_drop_data(_pos: Vector2, data) -> bool:
+	if typeof(data) != TYPE_ARRAY:
+		Global.animation_timeline.drag_highlight.visible = false
+		return false
+	if data[0] != "Layer":
+		Global.animation_timeline.drag_highlight.visible = false
+		return false
+	var curr_layer: BaseLayer = Global.current_project.layers[layer]
+	var drag_layer: BaseLayer = Global.current_project.layers[data[1]]
 
-			if curr_layer == drag_layer:
-				Global.animation_timeline.drag_highlight.visible = false
-				return false
+	if curr_layer == drag_layer:
+		Global.animation_timeline.drag_highlight.visible = false
+		return false
 
-			var region: Rect2
-			var depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
+	var region: Rect2
+	var depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
 
-			if Input.is_action_pressed("ctrl"):  # Swap layers
-				if drag_layer.is_a_parent_of(curr_layer) or curr_layer.is_a_parent_of(drag_layer):
-					Global.animation_timeline.drag_highlight.visible = false
-					return false
-				region = get_global_rect()
+	if Input.is_action_pressed("ctrl"):  # Swap layers
+		if drag_layer.is_a_parent_of(curr_layer) or curr_layer.is_a_parent_of(drag_layer):
+			Global.animation_timeline.drag_highlight.visible = false
+			return false
+		region = get_global_rect()
 
-			else:  # Shift layers
-				if drag_layer.is_a_parent_of(curr_layer):
-					Global.animation_timeline.drag_highlight.visible = false
-					return false
-				# If accepted as a child, is it in the center region?
-				if (
-					Global.current_project.layers[layer].accepts_child(data[1])
-					and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
-				):
-					# Drawn regions are adjusted a bit from actual to clarify drop position
-					region = _get_region_rect(0.15, 0.85)
-					depth += 1
-				else:
-					# Top or bottom region?
-					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
-						region = _get_region_rect(-0.1, 0.15)
-					else:
-						region = _get_region_rect(0.85, 1.1)
-			# Shift drawn region to the right a bit for hierarchy depth visualization:
-			region.position.x += depth * HIERARCHY_DEPTH_PIXEL_SHIFT
-			region.size.x -= depth * HIERARCHY_DEPTH_PIXEL_SHIFT
-			Global.animation_timeline.drag_highlight.rect_global_position = region.position
-			Global.animation_timeline.drag_highlight.rect_size = region.size
-			Global.animation_timeline.drag_highlight.visible = true
-			return true
-	Global.animation_timeline.drag_highlight.visible = false
-	return false
+	else:  # Shift layers
+		if drag_layer.is_a_parent_of(curr_layer):
+			Global.animation_timeline.drag_highlight.visible = false
+			return false
+		# If accepted as a child, is it in the center region?
+		if (
+			Global.current_project.layers[layer].accepts_child(drag_layer)
+			and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
+		):
+			# Drawn regions are adjusted a bit from actual to clarify drop position
+			region = _get_region_rect(0.15, 0.85)
+			depth += 1
+		else:
+			# Top or bottom region?
+			if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
+				region = _get_region_rect(-0.1, 0.15)
+			else:
+				region = _get_region_rect(0.85, 1.1)
+	# Shift drawn region to the right a bit for hierarchy depth visualization:
+	region.position.x += depth * HIERARCHY_DEPTH_PIXEL_SHIFT
+	region.size.x -= depth * HIERARCHY_DEPTH_PIXEL_SHIFT
+	Global.animation_timeline.drag_highlight.rect_global_position = region.position
+	Global.animation_timeline.drag_highlight.rect_size = region.size
+	Global.animation_timeline.drag_highlight.visible = true
+	return true
 
 
-func drop_data(_pos, data) -> void:
+func drop_data(_pos: Vector2, data) -> void:
 	var drop_layer: int = data[1]
-	var project = Global.current_project
+	var project: Project = Global.current_project
 
 	project.undo_redo.create_action("Change Layer Order")
 	var layers: Array = project.layers  # This shouldn't be modified directly
@@ -303,7 +305,7 @@ func drop_data(_pos, data) -> void:
 
 		# If accepted as a child, is it in the center region?
 		if (
-			layers[layer].accepts_child(data[1])
+			layers[layer].accepts_child(layers[drop_layer])
 			and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
 		):
 			to_index = layer
