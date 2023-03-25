@@ -233,6 +233,11 @@ _global_script_classes=[ {
 "class": "ValueSlider",
 "language": "GDScript",
 "path": "res://src/UI/Nodes/ValueSlider.gd"
+}, {
+"base": "HBoxContainer",
+"class": "ValueSliderV2",
+"language": "GDScript",
+"path": "res://src/UI/Nodes/ValueSliderV2.gd"
 } ]
 _global_script_class_icons={
 "AImgIOAPNGExporter": "",
@@ -279,7 +284,8 @@ _global_script_class_icons={
 "ShortcutProfile": "",
 "SymmetryGuide": "",
 "Tiles": "",
-"ValueSlider": ""
+"ValueSlider": "",
+"ValueSliderV2": ""
 }
 
 [application]

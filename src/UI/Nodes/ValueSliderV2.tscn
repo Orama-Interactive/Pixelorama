@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Nodes/ValueSliderV2.gd" type="Script" id=2]
+[ext_resource path="res://assets/graphics/misc/lock_aspect_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/misc/lock_aspect_guides.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/misc/lock_aspect.png" type="Texture" id=5]
+
+[node name="ValueSliderV2" type="HBoxContainer"]
+margin_right = 45.0
+margin_bottom = 52.0
+script = ExtResource( 2 )
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_right = 45.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+
+[node name="X" type="TextureProgress" parent="GridContainer"]
+margin_right = 45.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 32, 24 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme_type_variation = "ValueSlider"
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 1 )
+prefix = "X:"
+
+[node name="Y" type="TextureProgress" parent="GridContainer"]
+margin_top = 28.0
+margin_right = 45.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 32, 24 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme_type_variation = "ValueSlider"
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 1 )
+prefix = "Y:"
+
+[node name="Ratio" type="Control" parent="."]
+visible = false
+margin_left = 36.0
+margin_right = 52.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="RatioGuides" type="NinePatchRect" parent="Ratio" groups=["UIButtons"]]
+anchor_bottom = 1.0
+margin_right = 9.0
+rect_min_size = Vector2( 9, 0 )
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 9, 44 )
+patch_margin_top = 15
+patch_margin_bottom = 13
+
+[node name="RatioButton" type="TextureButton" parent="Ratio" groups=["UIButtons"]]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+hint_tooltip = "Lock aspect ratio"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 5 )
+
+[connection signal="value_changed" from="GridContainer/X" to="." method="_on_X_value_changed"]
+[connection signal="value_changed" from="GridContainer/Y" to="." method="_on_Y_value_changed"]
+[connection signal="toggled" from="Ratio/RatioButton" to="." method="_on_RatioButton_toggled"]

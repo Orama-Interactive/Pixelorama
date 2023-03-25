@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/UI/CanvasPreviewContainer/CanvasPreviewContainer.gd" type="Script" id=4]
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/graphics/timeline/play.png" type="Texture" id=6]
+[ext_resource path="res://src/UI/Nodes/CollapsibleContainer.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -25,52 +26,89 @@ margin_bottom = 174.0
 rect_min_size = Vector2( 0, 90 )
 script = ExtResource( 4 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 321.0
 margin_bottom = 167.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 20.0
-margin_bottom = 160.0
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+margin_right = 314.0
+margin_bottom = 136.0
+size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_left = 6.0
-margin_right = 14.0
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/HBox"]
+margin_right = 16.0
+margin_bottom = 136.0
+
+[node name="Label" type="Label" parent="VBox/HBox/VBoxContainer"]
+margin_left = 4.0
+margin_right = 12.0
 margin_bottom = 14.0
 size_flags_horizontal = 4
 text = "+"
 align = 1
 
-[node name="PreviewZoomSlider" type="VSlider" parent="HBoxContainer/VBoxContainer"]
-margin_left = 2.0
+[node name="PreviewZoomSlider" type="VSlider" parent="VBox/HBox/VBoxContainer"]
 margin_top = 18.0
-margin_right = 18.0
+margin_right = 16.0
 margin_bottom = 118.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 step = 0.01
 
-[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_left = 7.0
+[node name="Label2" type="Label" parent="VBox/HBox/VBoxContainer"]
+margin_left = 5.0
 margin_top = 122.0
-margin_right = 12.0
+margin_right = 10.0
 margin_bottom = 136.0
 size_flags_horizontal = 4
 text = "-"
 align = 1
 
-[node name="PlayButton" type="Button" parent="HBoxContainer/VBoxContainer" groups=["UIButtons"]]
+[node name="PreviewViewportContainer" type="ViewportContainer" parent="VBox/HBox"]
+margin_left = 20.0
+margin_right = 314.0
+margin_bottom = 136.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="VBox/HBox/PreviewViewportContainer"]
+size = Vector2( 294, 136 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="TransparentChecker" parent="VBox/HBox/PreviewViewportContainer/Viewport" instance=ExtResource( 1 )]
+material = SubResource( 1 )
+
+[node name="CanvasPreview" parent="VBox/HBox/PreviewViewportContainer/Viewport" instance=ExtResource( 5 )]
+unique_name_in_owner = true
+
+[node name="CameraPreview" type="Camera2D" parent="VBox/HBox/PreviewViewportContainer/Viewport"]
+unique_name_in_owner = true
+offset = Vector2( 32, 32 )
+current = true
+zoom = Vector2( 0.15, 0.15 )
+script = ExtResource( 3 )
+
+[node name="Animation" type="HBoxContainer" parent="VBox"]
 margin_top = 140.0
-margin_right = 20.0
+margin_right = 314.0
 margin_bottom = 160.0
+
+[node name="PlayButton" type="Button" parent="VBox/Animation" groups=["UIButtons"]]
+unique_name_in_owner = true
+margin_right = 20.0
+margin_bottom = 20.0
 rect_min_size = Vector2( 20, 0 )
 mouse_default_cursor_shape = 2
+size_flags_vertical = 0
 toggle_mode = true
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/PlayButton"]
+[node name="TextureRect" type="TextureRect" parent="VBox/Animation/PlayButton"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -85,30 +123,121 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PreviewViewportContainer" type="ViewportContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/Animation"]
 margin_left = 24.0
 margin_right = 314.0
-margin_bottom = 160.0
+margin_bottom = 20.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
 
-[node name="Viewport" type="Viewport" parent="HBoxContainer/PreviewViewportContainer"]
-size = Vector2( 290, 160 )
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 3
+[node name="Mode" type="HBoxContainer" parent="VBox/Animation/VBoxContainer"]
+margin_right = 290.0
+margin_bottom = 20.0
 
-[node name="TransparentChecker" parent="HBoxContainer/PreviewViewportContainer/Viewport" instance=ExtResource( 1 )]
-material = SubResource( 1 )
+[node name="Label" type="Label" parent="VBox/Animation/VBoxContainer/Mode"]
+margin_top = 3.0
+margin_right = 114.0
+margin_bottom = 17.0
+text = "Animation Mode: "
 
-[node name="CanvasPreview" parent="HBoxContainer/PreviewViewportContainer/Viewport" instance=ExtResource( 5 )]
+[node name="OptionButton" type="OptionButton" parent="VBox/Animation/VBoxContainer/Mode"]
+margin_left = 118.0
+margin_right = 290.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Timeline Frames"
+clip_text = true
+align = 1
+items = [ "Timeline Frames", null, false, 0, null, "Current Frame (As Spritesheet)", null, false, 1, null ]
+selected = 0
 
-[node name="CameraPreview" type="Camera2D" parent="HBoxContainer/PreviewViewportContainer/Viewport"]
-offset = Vector2( 32, 32 )
-current = true
-zoom = Vector2( 0.15, 0.15 )
-script = ExtResource( 3 )
+[node name="Options" parent="VBox/Animation/VBoxContainer" instance=ExtResource( 7 )]
+visible = false
+margin_top = 24.0
+margin_right = 290.0
+margin_bottom = 44.0
+text = "Spritesheet Options"
 
-[connection signal="value_changed" from="HBoxContainer/VBoxContainer/PreviewZoomSlider" to="." method="_on_PreviewZoomSlider_value_changed"]
-[connection signal="toggled" from="HBoxContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_toggled"]
+[node name="GridContainer" type="GridContainer" parent="VBox/Animation/VBoxContainer/Options"]
+visible = false
+margin_right = 290.0
+margin_bottom = 52.0
+columns = 4
+
+[node name="Label" type="Label" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+margin_top = 5.0
+margin_right = 65.0
+margin_bottom = 19.0
+text = "HFrames: "
+align = 2
+
+[node name="HFrames" type="SpinBox" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+unique_name_in_owner = true
+margin_left = 69.0
+margin_right = 143.0
+margin_bottom = 24.0
+min_value = 1.0
+value = 1.0
+allow_greater = true
+
+[node name="Label2" type="Label" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+margin_left = 147.0
+margin_top = 5.0
+margin_right = 210.0
+margin_bottom = 19.0
+text = "VFrames: "
+align = 2
+
+[node name="VFrames" type="SpinBox" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+unique_name_in_owner = true
+margin_left = 214.0
+margin_right = 288.0
+margin_bottom = 24.0
+min_value = 1.0
+value = 1.0
+allow_greater = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label3" type="Label" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+margin_top = 33.0
+margin_right = 65.0
+margin_bottom = 47.0
+text = "Start: "
+align = 2
+
+[node name="Start" type="SpinBox" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+unique_name_in_owner = true
+margin_left = 69.0
+margin_top = 28.0
+margin_right = 143.0
+margin_bottom = 52.0
+min_value = 1.0
+max_value = 1.0
+value = 1.0
+
+[node name="Label4" type="Label" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+margin_left = 147.0
+margin_top = 33.0
+margin_right = 210.0
+margin_bottom = 47.0
+text = "End: "
+align = 2
+
+[node name="End" type="SpinBox" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+unique_name_in_owner = true
+margin_left = 214.0
+margin_top = 28.0
+margin_right = 288.0
+margin_bottom = 52.0
+min_value = 1.0
+max_value = 1.0
+value = 1.0
+
+[connection signal="value_changed" from="VBox/HBox/VBoxContainer/PreviewZoomSlider" to="." method="_on_PreviewZoomSlider_value_changed"]
+[connection signal="toggled" from="VBox/Animation/PlayButton" to="." method="_on_PlayButton_toggled"]
+[connection signal="item_selected" from="VBox/Animation/VBoxContainer/Mode/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="value_changed" from="VBox/Animation/VBoxContainer/Options/GridContainer/HFrames" to="." method="_on_HFrames_value_changed"]
+[connection signal="value_changed" from="VBox/Animation/VBoxContainer/Options/GridContainer/VFrames" to="." method="_on_VFrames_value_changed"]
+[connection signal="value_changed" from="VBox/Animation/VBoxContainer/Options/GridContainer/Start" to="." method="_on_Start_value_changed"]
+[connection signal="value_changed" from="VBox/Animation/VBoxContainer/Options/GridContainer/End" to="." method="_on_End_value_changed"]

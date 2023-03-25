@@ -5,16 +5,15 @@ extends Node2D
 
 signal updated
 
-enum Mode { MARGINS, POSITION_SIZE, LOCKED_ASPECT_RATIO }
+enum Mode { MARGINS, POSITION_SIZE }
 
 const BIG = 100000  # Size of big rectangles used to darken background.
 const DARKEN_COLOR = Color(0, 0, 0, 0.5)
 const LINE_COLOR = Color.white
 
-var mode := 0 setget _set_mode
+var mode: int = Mode.MARGINS setget _set_mode
 var locked_size := false
 var rect := Rect2(0, 0, 1, 1)
-var ratio := Vector2.ONE
 
 # How many crop tools are active (0-2), setter makes this visible if not 0
 var tool_count := 0 setget _set_tool_count
@@ -66,27 +65,13 @@ func apply() -> void:
 func reset() -> void:
 	rect.position = Vector2.ZERO
 	rect.size = Global.current_project.size
-	if mode == Mode.LOCKED_ASPECT_RATIO:
-		_auto_ratio_from_resolution()
 	emit_signal("updated")
-
-
-func _auto_ratio_from_resolution() -> void:
-	var divisor := _gcd(rect.size.x, rect.size.y)
-	ratio = rect.size / divisor
-
-
-# Greatest common divisor
-func _gcd(a: int, b: int) -> int:
-	return a if b == 0 else _gcd(b, a % b)
 
 
 # Setters
 
 
 func _set_mode(value: int) -> void:
-	if value == Mode.LOCKED_ASPECT_RATIO and mode != Mode.LOCKED_ASPECT_RATIO:
-		_auto_ratio_from_resolution()
 	mode = value
 
 
