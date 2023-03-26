@@ -5,9 +5,7 @@ var offset := Vector2(5, 5)
 var color := Color.black
 var shader: Shader = load("res://src/Shaders/DropShadow.tres")
 
-onready var x_spinbox: SpinBox = $VBoxContainer/OptionsContainer/XSpinBox
-onready var y_spinbox: SpinBox = $VBoxContainer/OptionsContainer/YSpinBox
-onready var shadow_color = $VBoxContainer/OptionsContainer/ShadowColor
+onready var shadow_color := $VBoxContainer/OptionsContainer/ShadowColor as ColorPickerButton
 
 
 func _ready() -> void:
@@ -61,20 +59,11 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		yield(gen, "done")
 
 
-func _on_XSpinBox_value_changed(value) -> void:
-	x_spinbox.max_value = value + 1
-	x_spinbox.min_value = value - 1
-	offset.x = value
+func _on_OffsetSliders_value_changed(value: Vector2) -> void:
+	offset = value
 	update_preview()
 
 
-func _on_YSpinBox_value_changed(value) -> void:
-	y_spinbox.max_value = value + 1
-	y_spinbox.min_value = value - 1
-	offset.y = value
-	update_preview()
-
-
-func _on_OutlineColor_color_changed(_color: Color) -> void:
-	color = _color
+func _on_OutlineColor_color_changed(value: Color) -> void:
+	color = value
 	update_preview()
