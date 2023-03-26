@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-03-20 18:36\n"
+"PO-Revision-Date: 2023-03-26 16:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -792,7 +792,7 @@ msgstr "Lustrzane odbicie"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Przycinanie"
 
 msgid "Transition size:"
 msgstr "Rozmiar zmiany:"
@@ -1477,7 +1477,7 @@ msgid "Brush size:"
 msgstr "Rozmiar pędzla:"
 
 msgid "Overwrite color"
-msgstr ""
+msgstr "Nadpisz kolor"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "Zastępuje kolor zamiast zmieszać się z nim. Ta opcja zadziała tylko dla kolorów, które nie są w pełni przezroczyste"
@@ -1490,15 +1490,15 @@ msgstr "Wypełnij wnętrze"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
-msgstr ""
+msgstr "Odstęp"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
-msgstr ""
+msgstr "Odstęp X:"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
-msgstr ""
+msgstr "Odstęp Y:"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
@@ -1594,11 +1594,11 @@ msgstr "Przybliżenie 100%"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
-msgstr ""
+msgstr "Nadpisz zaznaczenie"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
-msgstr ""
+msgstr "Dodaj do zaznaczenia"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Subtract from selection"
