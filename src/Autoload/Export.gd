@@ -399,9 +399,11 @@ func blend_all_layers(
 	var layer_i := 0
 	for cel in frame.cels:
 		if not project.layers[layer_i].is_visible_in_hierarchy():
-			return
+			layer_i += 1
+			continue
 		if cel is GroupCel:
-			return
+			layer_i += 1
+			continue
 		var cel_image := Image.new()
 		cel_image.copy_from(cel.get_image())
 		if cel.opacity < 1:  # If we have cel transparency
