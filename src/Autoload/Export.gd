@@ -417,31 +417,28 @@ func blend_all_layers(
 func blend_selected_cels(
 	image: Image, frame: Frame, origin := Vector2(0, 0), project := Global.current_project
 ) -> void:
-	var layer_i := 0
 	for cel_ind in frame.cels.size():
 		var test_array := [project.current_frame, cel_ind]
 		if not test_array in project.selected_cels:
 			continue
 		if not frame.cels[cel_ind] is PixelCel:
 			continue
-
+		if not project.layers[cel_ind].is_visible_in_hierarchy():
+			continue
 		var cel: PixelCel = frame.cels[cel_ind]
-
-		if project.layers[layer_i].is_visible_in_hierarchy():
-			var cel_image := Image.new()
-			cel_image.copy_from(cel.image)
-			if cel.opacity < 1:  # If we have cel transparency
-				cel_image.lock()
-				for xx in cel_image.get_size().x:
-					for yy in cel_image.get_size().y:
-						var pixel_color := cel_image.get_pixel(xx, yy)
-						var alpha: float = pixel_color.a * cel.opacity
-						cel_image.set_pixel(
-							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-						)
-				cel_image.unlock()
-			image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
-		layer_i += 1
+		var cel_image := Image.new()
+		cel_image.copy_from(cel.image)
+		if cel.opacity < 1:  # If we have cel transparency
+			cel_image.lock()
+			for xx in cel_image.get_size().x:
+				for yy in cel_image.get_size().y:
+					var pixel_color := cel_image.get_pixel(xx, yy)
+					var alpha: float = pixel_color.a * cel.opacity
+					cel_image.set_pixel(
+						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
+					)
+			cel_image.unlock()
+		image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
 
 
 func frames_divided_by_spritesheet_lines() -> int:
