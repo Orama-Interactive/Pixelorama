@@ -1,11 +1,25 @@
 extends BaseTool
 
-var cel: Cel3D
-var can_start_timer := true
+var _cel: Cel3D
+var _can_start_timer := true
 var _hovering: Cel3DObject = null
 var _dragging := false
 var _has_been_dragged := false
 var _prev_mouse_pos := Vector2.ZERO
+var _object_names := {
+	Cel3DObject.Type.BOX: "Box",
+	Cel3DObject.Type.SPHERE: "Sphere",
+	Cel3DObject.Type.CAPSULE: "Capsule",
+	Cel3DObject.Type.CYLINDER: "Cylinder",
+	Cel3DObject.Type.PRISM: "Prism",
+	Cel3DObject.Type.TORUS: "Torus",
+	Cel3DObject.Type.PLANE: "Plane",
+	Cel3DObject.Type.TEXT: "Text",
+	Cel3DObject.Type.DIR_LIGHT: "Directional light",
+	Cel3DObject.Type.SPOT_LIGHT: "Spotlight",
+	Cel3DObject.Type.OMNI_LIGHT: "Point light",
+	Cel3DObject.Type.IMPORTED: "Custom model",
+}
 
 onready var object_option_button := $"%ObjectOptionButton" as OptionButton
 onready var new_object_menu_button := $"%NewObjectMenuButton" as MenuButton
@@ -60,18 +74,10 @@ func _ready() -> void:
 	Global.connect("cel_changed", self, "_cel_changed")
 	_cel_changed()
 	var new_object_popup := new_object_menu_button.get_popup()
-	new_object_popup.add_item("Box", Cel3DObject.Type.BOX)
-	new_object_popup.add_item("Sphere", Cel3DObject.Type.SPHERE)
-	new_object_popup.add_item("Capsule", Cel3DObject.Type.CAPSULE)
-	new_object_popup.add_item("Cylinder", Cel3DObject.Type.CYLINDER)
-	new_object_popup.add_item("Prism", Cel3DObject.Type.PRISM)
-#	new_object_popup.add_item("Torus", Cel3DObject.Type.TORUS)
-	new_object_popup.add_item("Plane", Cel3DObject.Type.PLANE)
-	new_object_popup.add_item("Text", Cel3DObject.Type.TEXT)
-	new_object_popup.add_item("Directional light", Cel3DObject.Type.DIR_LIGHT)
-	new_object_popup.add_item("Spotlight", Cel3DObject.Type.SPOT_LIGHT)
-	new_object_popup.add_item("Omnidirectional (point) light", Cel3DObject.Type.OMNI_LIGHT)
-	new_object_popup.add_item("Load model from file", Cel3DObject.Type.IMPORTED)
+	for object in _object_names:
+		if object == Cel3DObject.Type.TORUS:  # Remove when Godot 3.6 or 4.0 is used
+			continue
+		new_object_popup.add_item(_object_names[object], object)
 	new_object_popup.connect("id_pressed", self, "_add_new_object")
 	for prop in layer_properties:
 		var node: Control = layer_properties[prop]
@@ -107,25 +113,25 @@ func _ready() -> void:
 func draw_start(position: Vector2) -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
-	if not cel.layer.can_layer_get_drawn():
+	if not _cel.layer.can_layer_get_drawn():
 		return
 	var found_cel := false
 	for frame_layer in Global.current_project.selected_cels:
-		if cel == Global.current_project.frames[frame_layer[0]].cels[frame_layer[1]]:
+		if _cel == Global.current_project.frames[frame_layer[0]].cels[frame_layer[1]]:
 			found_cel = true
 	if not found_cel:
 		return
 
 	if is_instance_valid(_hovering):
-		cel.selected = _hovering
+		_cel.selected = _hovering
 		_dragging = true
 		_prev_mouse_pos = position
 	else:
 		# We're not hovering
-		if is_instance_valid(cel.selected):
+		if is_instance_valid(_cel.selected):
 			# If we're not clicking on a gizmo, unselect
-			if cel.selected.applying_gizmos == Cel3DObject.Gizmos.NONE:
-				cel.selected = null
+			if _cel.selected.applying_gizmos == Cel3DObject.Gizmos.NONE:
+				_cel.selected = null
 			else:
 				_dragging = true
 				_prev_mouse_pos = position
@@ -134,12 +140,12 @@ func draw_start(position: Vector2) -> void:
 func draw_move(position: Vector2) -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
-	var camera: Camera = cel.camera
+	var camera: Camera = _cel.camera
 	if _dragging:
 		_has_been_dragged = true
 		var proj_mouse_pos := camera.project_position(position, camera.translation.z)
 		var proj_prev_mouse_pos := camera.project_position(_prev_mouse_pos, camera.translation.z)
-		cel.selected.change_transform(proj_mouse_pos, proj_prev_mouse_pos)
+		_cel.selected.change_transform(proj_mouse_pos, proj_prev_mouse_pos)
 		_prev_mouse_pos = position
 
 
@@ -147,8 +153,8 @@ func draw_end(_position: Vector2) -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
 	_dragging = false
-	if is_instance_valid(cel.selected) and _has_been_dragged:
-		cel.selected.finish_changing_property()
+	if is_instance_valid(_cel.selected) and _has_been_dragged:
+		_cel.selected.finish_changing_property()
 	_has_been_dragged = false
 
 
@@ -157,7 +163,7 @@ func cursor_move(position: Vector2) -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
 	# Hover logic
-	var camera: Camera = cel.camera
+	var camera: Camera = _cel.camera
 	var ray_from := camera.project_ray_origin(position)
 	var ray_to := ray_from + camera.project_ray_normal(position) * 20
 	var space_state := camera.get_world().direct_space_state
@@ -174,14 +180,14 @@ func cursor_move(position: Vector2) -> void:
 
 
 func _on_ObjectOptionButton_item_selected(index: int) -> void:
-	if not cel is Cel3D:
+	if not _cel is Cel3D:
 		return
 	var id := object_option_button.get_item_id(index) - 1
-	var object := cel.get_object_from_id(id)
+	var object := _cel.get_object_from_id(id)
 	if not is_instance_valid(object):
-		cel.selected = null
+		_cel.selected = null
 		return
-	cel.selected = object
+	_cel.selected = object
 
 
 func _cel_changed() -> void:
@@ -189,14 +195,14 @@ func _cel_changed() -> void:
 		get_child(0).visible = false  # Just to ensure that the content of the tool is hidden
 		return
 	get_child(0).visible = true
-	cel = Global.current_project.get_current_cel()
-	cel.selected = null
-	var layer: Layer3D = cel.layer
+	_cel = Global.current_project.get_current_cel()
+	_cel.selected = null
+	var layer: Layer3D = _cel.layer
 	if not layer.is_connected("property_changed", self, "_set_layer_node_values"):
 		layer.connect("property_changed", self, "_set_layer_node_values")
 		layer.connect("objects_changed", self, "_fill_object_option_button")
-	if not cel.is_connected("selected_object", self, "_selected_object"):
-		cel.connect("selected_object", self, "_selected_object")
+	if not _cel.is_connected("selected_object", self, "_selected_object"):
+		_cel.connect("selected_object", self, "_selected_object")
 	layer_options.visible = true
 	object_options.visible = false
 	_set_layer_node_values()
@@ -208,13 +214,13 @@ func _add_new_object(id: int) -> void:
 		load_model_dialog.popup_centered()
 		Global.dialog_open(true)
 	else:
-		cel.layer.add_object(id)
+		_cel.layer.add_object(id)
 
 
 func _on_RemoveObject_pressed() -> void:
-	if is_instance_valid(cel.selected):
-		cel.selected.delete()
-		cel.selected = null
+	if is_instance_valid(_cel.selected):
+		_cel.selected.delete()
+		_cel.selected = null
 
 
 func _selected_object(object: Cel3DObject) -> void:
@@ -252,18 +258,18 @@ func _selected_object(object: Cel3DObject) -> void:
 
 
 func _set_layer_node_values() -> void:
-	can_start_timer = false
-	_set_node_values(cel, layer_properties)
-	can_start_timer = true
+	_can_start_timer = false
+	_set_node_values(_cel, layer_properties)
+	_can_start_timer = true
 
 
 func _set_object_node_values() -> void:
-	var object: Cel3DObject = cel.selected
+	var object: Cel3DObject = _cel.selected
 	if not is_instance_valid(object):
 		return
-	can_start_timer = false
+	_can_start_timer = false
 	_set_node_values(object, object_properties)
-	can_start_timer = true
+	_can_start_timer = true
 
 
 func _set_node_values(to_edit: Object, properties: Dictionary) -> void:
@@ -301,91 +307,91 @@ func _set_value_from_node(to_edit: Object, value, prop: String) -> void:
 
 
 func _layer_property_vector3_changed(value: Vector3, prop: String) -> void:
-	_set_value_from_node(cel, value, prop)
+	_set_value_from_node(_cel, value, prop)
 	_value_handle_change()
 	Global.canvas.gizmos_3d.update()
 
 
 func _layer_property_value_changed(value: float, prop: String) -> void:
-	_set_value_from_node(cel, value, prop)
+	_set_value_from_node(_cel, value, prop)
 	_value_handle_change()
 	Global.canvas.gizmos_3d.update()
 
 
 func _layer_property_item_selected(value: int, prop: String) -> void:
-	_set_value_from_node(cel, value, prop)
+	_set_value_from_node(_cel, value, prop)
 	_value_handle_change()
 	Global.canvas.gizmos_3d.update()
 
 
 func _layer_property_color_changed(value: Color, prop: String) -> void:
-	_set_value_from_node(cel, value, prop)
+	_set_value_from_node(_cel, value, prop)
 	_value_handle_change()
 	Global.canvas.gizmos_3d.update()
 
 
 func _object_property_vector3_changed(value: Vector3, prop: String) -> void:
-	_set_value_from_node(cel.selected, value, prop)
+	_set_value_from_node(_cel.selected, value, prop)
 	_value_handle_change()
 
 
 func _object_property_vector2_changed(value: Vector2, prop: String) -> void:
-	_set_value_from_node(cel.selected, value, prop)
+	_set_value_from_node(_cel.selected, value, prop)
 	_value_handle_change()
 
 
 func _object_property_value_changed(value: float, prop: String) -> void:
-	_set_value_from_node(cel.selected, value, prop)
+	_set_value_from_node(_cel.selected, value, prop)
 	_value_handle_change()
 
 
 func _object_property_item_selected(value: int, prop: String) -> void:
-	_set_value_from_node(cel.selected, value, prop)
+	_set_value_from_node(_cel.selected, value, prop)
 	_value_handle_change()
 
 
 func _object_property_color_changed(value: Color, prop: String) -> void:
-	_set_value_from_node(cel.selected, value, prop)
+	_set_value_from_node(_cel.selected, value, prop)
 	_value_handle_change()
 
 
 func _object_property_toggled(value: bool, prop: String) -> void:
-	_set_value_from_node(cel.selected, value, prop)
+	_set_value_from_node(_cel.selected, value, prop)
 	_value_handle_change()
 
 
 func _object_property_text_changed(value: String, prop: String) -> void:
-	_set_value_from_node(cel.selected, value, prop)
+	_set_value_from_node(_cel.selected, value, prop)
 	_value_handle_change()
 
 
 func _value_handle_change() -> void:
-	if can_start_timer:
+	if _can_start_timer:
 		undo_redo_timer.start()
 
 
 func _fill_object_option_button() -> void:
-	if not cel is Cel3D:
+	if not _cel is Cel3D:
 		return
-	var layer: Layer3D = cel.layer
+	var layer: Layer3D = _cel.layer
 	object_option_button.clear()
 	object_option_button.add_item("None", 0)
 	for id in layer.objects:
-		var item_name: String = Cel3DObject.Type.keys()[layer.objects[id]]
+		var item_name: String = _object_names[layer.objects[id]]
 		object_option_button.add_item(item_name, id + 1)
 
 
 func _on_UndoRedoTimer_timeout() -> void:
-	if is_instance_valid(cel.selected):
-		cel.selected.finish_changing_property()
+	if is_instance_valid(_cel.selected):
+		_cel.selected.finish_changing_property()
 	else:
-		var new_properties := cel.serialize_layer_properties()
-		cel.layer.change_properties(new_properties)
+		var new_properties := _cel.serialize_layer_properties()
+		_cel.layer.change_properties(new_properties)
 
 
 func _on_LoadModelDialog_files_selected(paths: PoolStringArray) -> void:
 	for path in paths:
-		cel.layer.add_object(Cel3DObject.Type.IMPORTED, true, path)
+		_cel.layer.add_object(Cel3DObject.Type.IMPORTED, true, path)
 
 
 func _on_LoadModelDialog_popup_hide() -> void:
