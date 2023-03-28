@@ -107,6 +107,12 @@ var tools := {
 	"Bucket": Tool.new("Bucket", "Bucket", "fill", preload("res://src/Tools/Bucket.tscn")),
 	"Shading":
 	Tool.new("Shading", "Shading Tool", "shading", preload("res://src/Tools/Shading.tscn")),
+	"Text": Tool.new(
+		"Text",
+		"Text",
+		"text",
+		preload("res://src/Tools/Text.tscn")
+	),
 	"LineTool":
 	Tool.new(
 		"LineTool",

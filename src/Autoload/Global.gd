@@ -458,7 +458,8 @@ func undo_or_redo(
 			"Centralize",
 			"Merge Layer",
 			"Link Cel",
-			"Unlink Cel"
+			"Unlink Cel",
+			"Add Text"
 		]
 	):
 		if layer_index > -1 and frame_index > -1:
