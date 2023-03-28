@@ -596,5 +596,5 @@ func convert_dictionary_values(dict: Dictionary) -> void:
 			dict[key] = str2var("Color(" + dict[key] + ")")
 		elif "v2" in key:  # Convert a String to a Vector2
 			dict[key] = str2var("Vector2" + dict[key])
-		elif "size" in key:  # Convert a String to a Vector3
+		elif "size" in key or "center_offset" in key:  # Convert a String to a Vector3
 			dict[key] = str2var("Vector3" + dict[key])

@@ -120,7 +120,11 @@ func serialize() -> Dictionary:
 func deserialize(dict: Dictionary) -> void:
 	.deserialize(dict)
 	properties = dict["properties"]
-	objects = dict["objects"]
+	var objects_copy = dict["objects"]
+	for object in objects_copy:
+		if typeof(object) != TYPE_STRING:
+			return
+		objects[int(object)] = int(objects_copy[object])
 #	new_cels_linked = dict.new_cels_linked
 	current_object_id = objects.size()
 	Global.convert_dictionary_values(properties)
