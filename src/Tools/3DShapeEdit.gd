@@ -25,6 +25,7 @@ onready var layer_properties := {
 }
 
 onready var object_properties := {
+	"visible": $"%VisibleCheckBox",
 	"translation": $"%ObjectPosition",
 	"rotation_degrees": $"%ObjectRotation",
 	"scale": $"%ObjectScale",
@@ -226,7 +227,6 @@ func _selected_object(object: Cel3DObject) -> void:
 			var property_path: String = prop
 			if property_path.ends_with("v2"):
 				property_path = property_path.replace("v2", "")
-			var prev_node: Control = node.get_parent().get_child(node.get_index() - 1)
 			var property = object.get_indexed(property_path)
 			var property_exists: bool = property != null
 			# Differentiate between the mesh size of a box/prism (Vector3) and a plane (Vector2)
@@ -234,7 +234,9 @@ func _selected_object(object: Cel3DObject) -> void:
 				property_exists = false
 			elif node is ValueSliderV2 and typeof(property) != TYPE_VECTOR2:
 				property_exists = false
-			prev_node.visible = property_exists
+			if node.get_index() > 0:
+				var prev_node: Control = node.get_parent().get_child(node.get_index() - 1)
+				prev_node.visible = property_exists
 			node.visible = property_exists
 		mesh_options.visible = object.node3d_type is MeshInstance
 		light_options.visible = object.node3d_type is Light

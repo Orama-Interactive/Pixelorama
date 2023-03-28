@@ -56,6 +56,7 @@ focus_mode = 2
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Add new object"
+align = 0
 
 [node name="RemoveObject" type="Button" parent="HandleObjects" index="3"]
 unique_name_in_owner = true
@@ -185,7 +186,14 @@ margin_right = 1266.0
 margin_bottom = 800.0
 size_flags_vertical = 3
 
-[node name="TransformOptions" type="VBoxContainer" parent="ObjectOptions" index="0"]
+[node name="VisibleCheckBox" type="CheckBox" parent="ObjectOptions" index="0"]
+unique_name_in_owner = true
+margin_right = 24.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+text = "Visible"
+
+[node name="TransformOptions" type="VBoxContainer" parent="ObjectOptions" index="1"]
 margin_right = 1266.0
 margin_bottom = 272.0
 theme_type_variation = "CollapsibleContainer"
@@ -260,7 +268,7 @@ suffix_x = "%"
 suffix_y = "%"
 suffix_z = "%"
 
-[node name="MeshOptions" type="VBoxContainer" parent="ObjectOptions" index="1"]
+[node name="MeshOptions" type="VBoxContainer" parent="ObjectOptions" index="2"]
 unique_name_in_owner = true
 margin_top = 276.0
 margin_right = 1266.0
@@ -626,7 +634,7 @@ text = "Center"
 items = [ "Left", null, false, 0, null, "Center", null, false, 1, null, "Right", null, false, 2, null ]
 selected = 1
 
-[node name="LightOptions" type="VBoxContainer" parent="ObjectOptions" index="2"]
+[node name="LightOptions" type="VBoxContainer" parent="ObjectOptions" index="3"]
 unique_name_in_owner = true
 margin_top = 276.0
 margin_right = 1266.0
