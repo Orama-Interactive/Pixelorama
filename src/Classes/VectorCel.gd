@@ -9,8 +9,6 @@ var vshapes := [] # Array[VectorBaseShape]
 func _init(_vshapes := [], _opacity := 1.0, _image_texture: ImageTexture = null) -> void:
 	vshapes = _vshapes
 
-	create_test_vshapes()
-
 	if _image_texture:
 		image_texture = _image_texture
 	else:
@@ -20,36 +18,6 @@ func _init(_vshapes := [], _opacity := 1.0, _image_texture: ImageTexture = null)
 		update_texture()
 	opacity = _opacity
 	process_test_tools()
-
-
-func create_test_vshapes():  # TODO: This method should be removed once integration with actual tools begins
-	var test_font =  preload("res://assets/fonts/Roboto-Regular.tres").duplicate(true)
-	test_font.font_data.override_oversampling = 1
-
-	var text_vshape := VectorTextShape.new()
-	text_vshape.pos = Vector2(1, 5)
-	text_vshape.text = "Hello\nworld"
-	text_vshape.font = test_font
-	text_vshape.font_size = 12
-	text_vshape.outline_size = 1
-	text_vshape.extra_spacing = Vector2(0, 3)
-	text_vshape.color = Color.red
-	text_vshape.outline_color = Color.white
-	text_vshape.antialiased = false
-	vshapes.append(text_vshape)
-
-	test_font = test_font.duplicate(true)
-	text_vshape = VectorTextShape.new()
-	text_vshape.pos = Vector2(5, 40)
-	text_vshape.text = "Another\nTest!"
-	text_vshape.font = test_font
-	text_vshape.font_size = 8
-	text_vshape.outline_size = 3
-	text_vshape.extra_spacing = Vector2(3, 0)
-	text_vshape.color = Color.white
-	text_vshape.outline_color = Color.blue
-	text_vshape.antialiased = true
-	vshapes.append(text_vshape)
 
 
 func process_test_tools():  # TODO: This method should be removed once integration with actual tools begins
