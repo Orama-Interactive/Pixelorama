@@ -45,7 +45,6 @@ onready var object_properties := {
 	"scale": $"%ObjectScale",
 	"node3d_type:mesh:size": $"%MeshSize",
 	"node3d_type:mesh:sizev2": $"%MeshSizeV2",
-	"node3d_type:mesh:center_offset": $"%MeshCenterOffset",
 	"node3d_type:mesh:left_to_right": $"%MeshLeftToRight",
 	"node3d_type:mesh:radius": $"%MeshRadius",
 	"node3d_type:mesh:height": $"%MeshHeight",

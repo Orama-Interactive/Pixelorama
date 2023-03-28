@@ -42,7 +42,7 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 
 
 func serialize() -> Dictionary:
-	var data = .serialize()
+	var data := .serialize()
 	data["type"] = get_layer_type()
 	data["expanded"] = expanded
 	return data

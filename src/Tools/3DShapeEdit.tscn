@@ -327,30 +327,14 @@ allow_greater = true
 show_ratio = true
 snap_step = 0.01
 
-[node name="MeshCenterOffsetLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="4"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
-size_flags_horizontal = 3
-text = "Center offset:"
-
-[node name="MeshCenterOffset" parent="ObjectOptions/MeshOptions/GridContainer" index="5" instance=ExtResource( 7 )]
-unique_name_in_owner = true
-size_flags_horizontal = 3
-max_value = Vector3( 10, 10, 10 )
-step = 0.01
-allow_greater = true
-allow_lesser = true
-show_ratio = true
-
-[node name="MeshLeftToRightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="6"]
+[node name="MeshLeftToRightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="4"]
 margin_top = 33.0
 margin_right = 631.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
 text = "Left to right:"
 
-[node name="MeshLeftToRight" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="7"]
+[node name="MeshLeftToRight" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="5"]
 unique_name_in_owner = true
 margin_right = 6.0
 margin_bottom = 6.0
@@ -368,14 +352,14 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="MeshRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="8"]
+[node name="MeshRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="6"]
 margin_top = 33.0
 margin_right = 631.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
 text = "Radius:"
 
-[node name="MeshRadius" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="9"]
+[node name="MeshRadius" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="7"]
 unique_name_in_owner = true
 margin_right = 6.0
 margin_bottom = 6.0
@@ -394,14 +378,14 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="MeshHeightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="10"]
+[node name="MeshHeightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="8"]
 margin_top = 33.0
 margin_right = 631.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
 text = "Height:"
 
-[node name="MeshHeight" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="11"]
+[node name="MeshHeight" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="9"]
 unique_name_in_owner = true
 margin_right = 6.0
 margin_bottom = 6.0
@@ -420,14 +404,14 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="MeshRadialSegmentsLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="12"]
+[node name="MeshRadialSegmentsLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="10"]
 margin_top = 33.0
 margin_right = 631.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
 text = "Radial segments:"
 
-[node name="MeshRadialSegments" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="13"]
+[node name="MeshRadialSegments" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="11"]
 unique_name_in_owner = true
 margin_right = 6.0
 margin_bottom = 6.0
@@ -445,14 +429,14 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="MeshRingsLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="14"]
+[node name="MeshRingsLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="12"]
 margin_top = 33.0
 margin_right = 631.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
 text = "Rings:"
 
-[node name="MeshRings" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="15"]
+[node name="MeshRings" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="13"]
 unique_name_in_owner = true
 margin_right = 6.0
 margin_bottom = 6.0
@@ -470,14 +454,14 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="MeshIsHemisphereLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="16"]
+[node name="MeshIsHemisphereLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="14"]
 margin_top = 33.0
 margin_right = 631.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
 text = "Is hemisphere:"
 
-[node name="MeshIsHemisphere" type="CheckBox" parent="ObjectOptions/MeshOptions/GridContainer" index="17"]
+[node name="MeshIsHemisphere" type="CheckBox" parent="ObjectOptions/MeshOptions/GridContainer" index="15"]
 unique_name_in_owner = true
 margin_right = 24.0
 margin_bottom = 24.0
@@ -485,14 +469,14 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "On"
 
-[node name="MeshMidHeightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="18"]
+[node name="MeshMidHeightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="16"]
 margin_top = 33.0
 margin_right = 631.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
-text = "Mid height:"
+text = "Height:"
 
-[node name="MeshMidHeight" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="19"]
+[node name="MeshMidHeight" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="17"]
 unique_name_in_owner = true
 margin_right = 6.0
 margin_bottom = 6.0
@@ -511,14 +495,14 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="MeshTopRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="20"]
+[node name="MeshTopRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="18"]
 margin_top = 33.0
 margin_right = 631.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
 text = "Top radius:"
 
-[node name="MeshTopRadius" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="21"]
+[node name="MeshTopRadius" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="19"]
 unique_name_in_owner = true
 margin_right = 6.0
 margin_bottom = 6.0
@@ -536,14 +520,14 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="MeshBottomRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="22"]
+[node name="MeshBottomRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="20"]
 margin_top = 33.0
 margin_right = 631.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
 text = "Bottom radius:"
 
-[node name="MeshBottomRadius" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="23"]
+[node name="MeshBottomRadius" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="21"]
 unique_name_in_owner = true
 margin_right = 6.0
 margin_bottom = 6.0
@@ -561,27 +545,27 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="MeshTextLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24"]
+[node name="MeshTextLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="22"]
 margin_top = 33.0
 margin_right = 631.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
 text = "Text:"
 
-[node name="MeshText" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer" index="25"]
+[node name="MeshText" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer" index="23"]
 unique_name_in_owner = true
 margin_right = 58.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
-[node name="MeshPixelSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="26"]
+[node name="MeshPixelSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24"]
 margin_top = 33.0
 margin_right = 631.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
 text = "Pixel size:"
 
-[node name="MeshPixelSize" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="27"]
+[node name="MeshPixelSize" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="25"]
 unique_name_in_owner = true
 margin_right = 6.0
 margin_bottom = 6.0
@@ -601,14 +585,14 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 snap_step = 0.01
 
-[node name="MeshCurveStepLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="28"]
+[node name="MeshCurveStepLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="26"]
 margin_top = 33.0
 margin_right = 631.0
 margin_bottom = 47.0
 size_flags_horizontal = 3
 text = "Curve step:"
 
-[node name="MeshCurveStep" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="29"]
+[node name="MeshCurveStep" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="27"]
 unique_name_in_owner = true
 margin_right = 6.0
 margin_bottom = 6.0
@@ -627,14 +611,14 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="MeshHorizontalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="30"]
+[node name="MeshHorizontalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="28"]
 margin_top = -583.0
 margin_right = 631.0
 margin_bottom = -569.0
 size_flags_horizontal = 3
 text = "Horizontal alignment:"
 
-[node name="MeshHorizontalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="31"]
+[node name="MeshHorizontalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="29"]
 unique_name_in_owner = true
 margin_left = 635.0
 margin_top = -586.0

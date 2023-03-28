@@ -202,6 +202,8 @@ func create_layer_list() -> void:
 		var layer_name := tr("Pixel layer:")
 		if layer is GroupLayer:
 			layer_name = tr("Group layer:")
+		elif layer is Layer3D:
+			layer_name = tr("3D layer:")
 		layer_name += " %s" % layer.get_layer_path()
 		layers_option_button.add_item(layer_name)
 
