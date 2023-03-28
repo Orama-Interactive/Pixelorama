@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Tools/BaseTool.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Tools/3DShapeEdit.gd" type="Script" id=2]
@@ -13,66 +13,6 @@ action = "delete"
 
 [sub_resource type="ShortCut" id=34]
 shortcut = SubResource( 33 )
-
-[sub_resource type="StyleBoxEmpty" id=3]
-
-[sub_resource type="StyleBoxEmpty" id=4]
-
-[sub_resource type="StyleBoxEmpty" id=5]
-
-[sub_resource type="StyleBoxEmpty" id=6]
-
-[sub_resource type="StyleBoxEmpty" id=7]
-
-[sub_resource type="StyleBoxEmpty" id=8]
-
-[sub_resource type="StyleBoxEmpty" id=9]
-
-[sub_resource type="StyleBoxEmpty" id=10]
-
-[sub_resource type="StyleBoxEmpty" id=11]
-
-[sub_resource type="StyleBoxEmpty" id=12]
-
-[sub_resource type="StyleBoxEmpty" id=13]
-
-[sub_resource type="StyleBoxEmpty" id=14]
-
-[sub_resource type="StyleBoxEmpty" id=15]
-
-[sub_resource type="StyleBoxEmpty" id=16]
-
-[sub_resource type="StyleBoxEmpty" id=17]
-
-[sub_resource type="StyleBoxEmpty" id=18]
-
-[sub_resource type="StyleBoxEmpty" id=19]
-
-[sub_resource type="StyleBoxEmpty" id=20]
-
-[sub_resource type="StyleBoxEmpty" id=21]
-
-[sub_resource type="StyleBoxEmpty" id=22]
-
-[sub_resource type="StyleBoxEmpty" id=23]
-
-[sub_resource type="StyleBoxEmpty" id=24]
-
-[sub_resource type="StyleBoxEmpty" id=25]
-
-[sub_resource type="StyleBoxEmpty" id=26]
-
-[sub_resource type="StyleBoxEmpty" id=27]
-
-[sub_resource type="StyleBoxEmpty" id=28]
-
-[sub_resource type="StyleBoxEmpty" id=29]
-
-[sub_resource type="StyleBoxEmpty" id=30]
-
-[sub_resource type="StyleBoxEmpty" id=31]
-
-[sub_resource type="StyleBoxEmpty" id=32]
 
 [node name="3DShapeEdit" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -236,38 +176,6 @@ max_value = 16.0
 step = 0.01
 value = 1.0
 allow_greater = true
-
-[node name="LineEdit" type="LineEdit" parent="LayerOptions/EnvironmentOptions/GridContainer/AmbientEnergy" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-text = "1"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="LayerOptions/EnvironmentOptions/GridContainer/AmbientEnergy" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="LayerOptions/EnvironmentOptions/GridContainer/AmbientEnergy" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="LayerOptions/EnvironmentOptions/GridContainer/AmbientEnergy" index="3"]
 
 [node name="ObjectOptions" type="VBoxContainer" parent="." index="4"]
 unique_name_in_owner = true
@@ -440,38 +348,6 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer/MeshLeftToRight" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
-text = "0.5"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshLeftToRight" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshLeftToRight" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/MeshOptions/GridContainer/MeshLeftToRight" index="3"]
-
 [node name="MeshRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="8"]
 margin_top = 33.0
 margin_right = 631.0
@@ -497,38 +373,6 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
-
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer/MeshRadius" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 7 )
-custom_styles/normal = SubResource( 8 )
-text = "1"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshRadius" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshRadius" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/MeshOptions/GridContainer/MeshRadius" index="3"]
 
 [node name="MeshHeightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="10"]
 margin_top = 33.0
@@ -556,38 +400,6 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer/MeshHeight" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 9 )
-custom_styles/normal = SubResource( 10 )
-text = "2"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshHeight" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshHeight" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/MeshOptions/GridContainer/MeshHeight" index="3"]
-
 [node name="MeshRadialSegmentsLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="12"]
 margin_top = 33.0
 margin_right = 631.0
@@ -613,38 +425,6 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer/MeshRadialSegments" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 11 )
-custom_styles/normal = SubResource( 12 )
-text = "64"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshRadialSegments" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshRadialSegments" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/MeshOptions/GridContainer/MeshRadialSegments" index="3"]
-
 [node name="MeshRingsLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="14"]
 margin_top = 33.0
 margin_right = 631.0
@@ -669,38 +449,6 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
-
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer/MeshRings" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 13 )
-custom_styles/normal = SubResource( 14 )
-text = "32"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshRings" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshRings" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/MeshOptions/GridContainer/MeshRings" index="3"]
 
 [node name="MeshIsHemisphereLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="16"]
 margin_top = 33.0
@@ -743,38 +491,6 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer/MeshMidHeight" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 15 )
-custom_styles/normal = SubResource( 16 )
-text = "1"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshMidHeight" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshMidHeight" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/MeshOptions/GridContainer/MeshMidHeight" index="3"]
-
 [node name="MeshTopRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="20"]
 margin_top = 33.0
 margin_right = 631.0
@@ -800,38 +516,6 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer/MeshTopRadius" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 17 )
-custom_styles/normal = SubResource( 18 )
-text = "1"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshTopRadius" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshTopRadius" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/MeshOptions/GridContainer/MeshTopRadius" index="3"]
-
 [node name="MeshBottomRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="22"]
 margin_top = 33.0
 margin_right = 631.0
@@ -856,38 +540,6 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
-
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer/MeshBottomRadius" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 19 )
-custom_styles/normal = SubResource( 20 )
-text = "1"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshBottomRadius" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshBottomRadius" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/MeshOptions/GridContainer/MeshBottomRadius" index="3"]
 
 [node name="MeshTextLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24"]
 margin_top = 33.0
@@ -929,38 +581,6 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 snap_step = 0.01
 
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer/MeshPixelSize" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 21 )
-custom_styles/normal = SubResource( 22 )
-text = "0.01"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshPixelSize" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshPixelSize" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/MeshOptions/GridContainer/MeshPixelSize" index="3"]
-
 [node name="MeshCurveStepLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="28"]
 margin_top = 33.0
 margin_right = 631.0
@@ -986,38 +606,6 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
-
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer/MeshCurveStep" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 23 )
-custom_styles/normal = SubResource( 24 )
-text = "0.5"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshCurveStep" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/MeshOptions/GridContainer/MeshCurveStep" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/MeshOptions/GridContainer/MeshCurveStep" index="3"]
 
 [node name="MeshHorizontalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="30"]
 margin_top = -583.0
@@ -1089,38 +677,6 @@ step = 0.01
 value = 1.0
 allow_greater = true
 
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/LightOptions/GridContainer/LightEnergy" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 25 )
-custom_styles/normal = SubResource( 26 )
-text = "1"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/LightOptions/GridContainer/LightEnergy" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/LightOptions/GridContainer/LightEnergy" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/LightOptions/GridContainer/LightEnergy" index="3"]
-
 [node name="LightNegativeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="4"]
 margin_top = 33.0
 margin_right = 631.0
@@ -1191,38 +747,6 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/LightOptions/GridContainer/OmniRange" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 27 )
-custom_styles/normal = SubResource( 28 )
-text = "5"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/LightOptions/GridContainer/OmniRange" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/LightOptions/GridContainer/OmniRange" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/LightOptions/GridContainer/OmniRange" index="3"]
-
 [node name="SpotRangeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="12"]
 margin_top = 33.0
 margin_right = 631.0
@@ -1247,38 +771,6 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/LightOptions/GridContainer/SpotRange" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 29 )
-custom_styles/normal = SubResource( 30 )
-text = "5"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/LightOptions/GridContainer/SpotRange" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/LightOptions/GridContainer/SpotRange" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/LightOptions/GridContainer/SpotRange" index="3"]
-
 [node name="SpotAngleLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="14"]
 margin_top = 33.0
 margin_right = 631.0
@@ -1302,38 +794,6 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 5 )
-
-[node name="LineEdit" type="LineEdit" parent="ObjectOptions/LightOptions/GridContainer/SpotAngle" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 1 )
-custom_styles/read_only = SubResource( 31 )
-custom_styles/normal = SubResource( 32 )
-text = "45"
-align = 1
-editable = false
-selecting_enabled = false
-
-[node name="TextureButton" type="TextureButton" parent="ObjectOptions/LightOptions/GridContainer/SpotAngle" index="1"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -15.0
-margin_top = 12.0
-margin_right = -3.0
-margin_bottom = 24.0
-rect_scale = Vector2( 1, -1 )
-
-[node name="TextureButton2" type="TextureButton" parent="ObjectOptions/LightOptions/GridContainer/SpotAngle" index="2"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -15.0
-margin_top = -12.0
-margin_right = -3.0
-
-[node name="Timer" type="Timer" parent="ObjectOptions/LightOptions/GridContainer/SpotAngle" index="3"]
 
 [node name="UndoRedoTimer" type="Timer" parent="." index="5"]
 wait_time = 0.2
