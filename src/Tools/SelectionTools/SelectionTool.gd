@@ -20,13 +20,12 @@ var _intersect := false  # Shift + Ctrl + Mouse Click
 # Used to check if the state of content transformation has been changed
 # while draw_move() is being called. For example, pressing Enter while still moving content
 var _content_transformation_check := false
+var _skip_slider_logic := false
 
 onready var selection_node: Node2D = Global.canvas.selection
-onready var xspinbox: ValueSlider = $XSpinBox
-onready var yspinbox: ValueSlider = $YSpinBox
-onready var wspinbox: ValueSlider = $WSpinBox
-onready var hspinbox: ValueSlider = $HSpinBox
-onready var timer: Timer = $Timer
+onready var position_sliders := $Position as ValueSliderV2
+onready var size_sliders := $Size as ValueSliderV2
+onready var timer := $Timer as Timer
 
 
 func _ready() -> void:
@@ -34,14 +33,14 @@ func _ready() -> void:
 	refresh_options()
 
 
-func refresh_options():
+func refresh_options() -> void:
 	# The existence of this function is to ensure all items
-	# are added when we are selecting an option (Bad things will happen if i dont do this...)
+	# are added when we are selecting an option (bad things will happen otherwise)
 	$Modes.clear()
-	$Modes.add_item("Default (New Selection)")
-	$Modes.add_item("Add to Selection")
-	$Modes.add_item("Subtract from Selection")
-	$Modes.add_item("Intersection of Selections")
+	$Modes.add_item("Replace selection")
+	$Modes.add_item("Add to selection")
+	$Modes.add_item("Subtract from selection")
+	$Modes.add_item("Intersection of selections")
 	$Modes.select(_mode_selected)
 
 
@@ -60,16 +59,16 @@ func update_config() -> void:
 
 
 func set_spinbox_values() -> void:
+	_skip_slider_logic = true
 	var select_rect: Rect2 = selection_node.big_bounding_rectangle
-	xspinbox.editable = !select_rect.has_no_area()
-	yspinbox.editable = xspinbox.editable
-	wspinbox.editable = xspinbox.editable
-	hspinbox.editable = xspinbox.editable
-
-	xspinbox.value = select_rect.position.x
-	yspinbox.value = select_rect.position.y
-	wspinbox.value = select_rect.size.x
-	hspinbox.value = select_rect.size.y
+	var has_selection := not select_rect.has_no_area()
+	if not has_selection:
+		size_sliders.press_ratio_button(false)
+	position_sliders.editable = has_selection
+	position_sliders.value = select_rect.position
+	size_sliders.editable = has_selection
+	size_sliders.value = select_rect.size
+	_skip_slider_logic = false
 
 
 func draw_start(position: Vector2) -> void:
@@ -228,13 +227,9 @@ func _set_cursor_text(rect: Rect2) -> void:
 	cursor_text += " (%s, %s)" % [rect.size.x, rect.size.y]
 
 
-func _on_position_value_changed(value: float, horizontal: bool) -> void:
-	if horizontal:
-		if selection_node.big_bounding_rectangle.position.x == value:
-			return
-	else:
-		if selection_node.big_bounding_rectangle.position.y == value:
-			return
+func _on_Position_value_changed(value: Vector2) -> void:
+	if _skip_slider_logic:
+		return
 	var project: Project = Global.current_project
 	if !project.has_selection:
 		return
@@ -242,10 +237,7 @@ func _on_position_value_changed(value: float, horizontal: bool) -> void:
 	if timer.is_stopped():
 		undo_data = selection_node.get_undo_data(false)
 	timer.start()
-	if horizontal:
-		selection_node.big_bounding_rectangle.position.x = value
-	else:
-		selection_node.big_bounding_rectangle.position.y = value
+	selection_node.big_bounding_rectangle.position = value
 
 	var selection_map_copy := SelectionMap.new()
 	selection_map_copy.copy_from(project.selection_map)
@@ -254,30 +246,21 @@ func _on_position_value_changed(value: float, horizontal: bool) -> void:
 	project.selection_map_changed()
 
 
-func _on_size_value_changed(value: float, horizontal: bool) -> void:
-	if horizontal:
-		if (
-			selection_node.big_bounding_rectangle.size.x == value
-			or selection_node.big_bounding_rectangle.size.x <= 0
-		):
-			return
-	else:
-		if (
-			selection_node.big_bounding_rectangle.size.y == value
-			or selection_node.big_bounding_rectangle.size.y <= 0
-		):
-			return
+func _on_Size_value_changed(value: Vector2) -> void:
+	if _skip_slider_logic:
+		return
 	if !Global.current_project.has_selection:
 		return
 
 	if timer.is_stopped():
 		undo_data = selection_node.get_undo_data(false)
 	timer.start()
-	if horizontal:
-		selection_node.big_bounding_rectangle.size.x = value
-	else:
-		selection_node.big_bounding_rectangle.size.y = value
+	selection_node.big_bounding_rectangle.size = value
 	selection_node.resize_selection()
+
+
+func _on_Size_ratio_toggled(button_pressed: bool) -> void:
+	selection_node.resize_keep_ratio = button_pressed
 
 
 func _on_Timer_timeout() -> void:

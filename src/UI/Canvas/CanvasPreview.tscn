@@ -6,4 +6,5 @@
 script = ExtResource( 1 )
 
 [node name="AnimationTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]

@@ -198,7 +198,7 @@ func _delete_cel_content() -> void:
 
 
 func _dim_checker() -> void:
-	var image := cel_texture.texture.get_data()
+	var image := cel.get_image()
 	if image == null:
 		return
 	if image.is_empty() or image.is_invisible():
@@ -207,7 +207,7 @@ func _dim_checker() -> void:
 		transparent_checker.self_modulate.a = 1.0
 
 
-func get_drag_data(_position) -> Array:
+func get_drag_data(_position: Vector2) -> Array:
 	var button := Button.new()
 	button.rect_size = rect_size
 	button.theme = Global.control.theme
@@ -222,7 +222,7 @@ func get_drag_data(_position) -> Array:
 	return ["Cel", frame, layer]
 
 
-func can_drop_data(_pos, data) -> bool:
+func can_drop_data(_pos: Vector2, data) -> bool:
 	var project: Project = Global.current_project
 	if typeof(data) == TYPE_ARRAY and data[0] == "Cel":
 		var drag_frame = data[1]
@@ -255,7 +255,7 @@ func can_drop_data(_pos, data) -> bool:
 	return false
 
 
-func drop_data(_pos, data) -> void:
+func drop_data(_pos: Vector2, data) -> void:
 	var drop_frame = data[1]
 	var drop_layer = data[2]
 	var project = Global.current_project

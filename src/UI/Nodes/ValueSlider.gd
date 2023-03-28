@@ -62,7 +62,7 @@ func _notification(what: int) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not editable:
+	if not editable or not is_visible_in_tree():
 		return
 	# Hardcode Control + Wheel as a global shortcut, if is_global is true
 	# In Godot 4.x this will change into two is_action() checks for incrementing and decrementing
@@ -259,18 +259,18 @@ func _reset_display(theme_changed := false) -> void:
 		_value_down_button.texture_pressed = get_icon("arrow_pressed", "ValueSlider")
 		_value_down_button.texture_hover = get_icon("arrow_hover", "ValueSlider")
 
-		var line_edit_color := _line_edit.get_color("font_color")
-		var line_edit_disabled_col: Color = get_color("read_only", "LineEdit")
-		if editable:
-			_line_edit.add_color_override("font_color_uneditable", line_edit_color)
-		else:
-			_line_edit.add_color_override("font_color_uneditable", line_edit_disabled_col)
 		tint_under = get_color("under_color", "ValueSlider")
 		if show_progress:
 			tint_progress = get_color("progress_color", "ValueSlider")
 		else:
 			tint_progress = Color.transparent
 	_line_edit.text = str(tr(prefix), " ", value, " ", tr(suffix)).strip_edges()
+	var line_edit_color := _line_edit.get_color("font_color")
+	var line_edit_disabled_col: Color = get_color("read_only", "LineEdit")
+	if editable:
+		_line_edit.add_color_override("font_color_uneditable", line_edit_color)
+	else:
+		_line_edit.add_color_override("font_color_uneditable", line_edit_disabled_col)
 
 
 func _on_Value_button_down(direction: int) -> void:

@@ -498,16 +498,16 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 func _on_NextFrame_pressed() -> void:
 	var project := Global.current_project
 	Global.canvas.selection.transform_content_confirm()
-	project.selected_cels.clear()
 	if project.current_frame < project.frames.size() - 1:
+		project.selected_cels.clear()
 		project.change_cel(project.current_frame + 1, -1)
 
 
 func _on_PreviousFrame_pressed() -> void:
 	var project := Global.current_project
 	Global.canvas.selection.transform_content_confirm()
-	project.selected_cels.clear()
 	if project.current_frame > 0:
+		project.selected_cels.clear()
 		project.change_cel(project.current_frame - 1, -1)
 
 

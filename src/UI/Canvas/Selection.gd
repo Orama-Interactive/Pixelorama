@@ -28,6 +28,7 @@ var gizmos := []  # Array of Gizmos
 var dragged_gizmo: Gizmo = null
 var prev_angle := 0
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
+var resize_keep_ratio := false
 
 onready var canvas: Canvas = get_parent()
 onready var marching_ants_outline: Sprite = $MarchingAntsOutline
@@ -311,7 +312,7 @@ func _gizmo_resize() -> void:
 	else:
 		_resize_rect(canvas.current_pixel, dir)
 
-	if Input.is_action_pressed("shape_perfect"):  # Maintain aspect ratio
+	if Input.is_action_pressed("shape_perfect") or resize_keep_ratio:  # Maintain aspect ratio
 		var end_y := temp_rect.end.y
 		if dir == Vector2(1, -1) or dir.x == 0:  # Top right corner, center top and center bottom
 			var size := temp_rect.size.y
