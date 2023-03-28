@@ -103,6 +103,8 @@ func _ready() -> void:
 
 
 func draw_start(position: Vector2) -> void:
+	if not Global.current_project.get_current_cel() is Cel3D:
+		return
 	if not cel.layer.can_layer_get_drawn():
 		return
 	var found_cel := false
@@ -128,6 +130,8 @@ func draw_start(position: Vector2) -> void:
 
 
 func draw_move(position: Vector2) -> void:
+	if not Global.current_project.get_current_cel() is Cel3D:
+		return
 	var camera: Camera = cel.camera
 	if _dragging:
 		_has_been_dragged = true
@@ -138,6 +142,8 @@ func draw_move(position: Vector2) -> void:
 
 
 func draw_end(_position: Vector2) -> void:
+	if not Global.current_project.get_current_cel() is Cel3D:
+		return
 	_dragging = false
 	if is_instance_valid(cel.selected) and _has_been_dragged:
 		cel.selected.finish_changing_property()
@@ -146,6 +152,8 @@ func draw_end(_position: Vector2) -> void:
 
 func cursor_move(position: Vector2) -> void:
 	.cursor_move(position)
+	if not Global.current_project.get_current_cel() is Cel3D:
+		return
 	# Hover logic
 	var camera: Camera = cel.camera
 	var ray_from := camera.project_ray_origin(position)
