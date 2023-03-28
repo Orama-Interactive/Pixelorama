@@ -1,11 +1,13 @@
 extends Node2D
 
 enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
-enum Behavior { SIMPLE, TILEMODE }
+enum SelectionFlags { TILE_MODE }
 const KEY_MOVE_ACTION_NAMES := ["ui_up", "ui_down", "ui_left", "ui_right"]
 const CLIPBOARD_FILE_PATH := "user://clipboard.txt"
 
-var behavior = Behavior.SIMPLE
+# flags (additional properties of selection that can be toggled)
+var flag_tilemode = false
+
 var is_moving_content := false
 var arrow_key_move := false
 var is_pasting := false

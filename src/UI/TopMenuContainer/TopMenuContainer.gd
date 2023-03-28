@@ -315,9 +315,7 @@ func _setup_select_menu() -> void:
 func _setup_behavior_submenu(item: String) -> void:
 	var select_menu = select_menu_button.get_popup()
 	behavior_submenu.set_name("behavior_submenu")
-	behavior_submenu.add_radio_check_item("Default", 0)  # SIMPLE
-	behavior_submenu.set_item_checked(Tiles.MODE.NONE, true)
-	behavior_submenu.add_radio_check_item("Tile Mode", 1)  # TILEMODE
+	behavior_submenu.add_check_item("Tile Mode", 0)  # TILEMODE
 	behavior_submenu.hide_on_checkable_item_selection = false
 
 	behavior_submenu.connect("id_pressed", self, "_behavior_submenu_id_pressed")
@@ -519,9 +517,11 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 
 
 func _behavior_submenu_id_pressed(id: int) -> void:
-	Global.canvas.selection.behavior = id
-	for i in Global.canvas.selection.Behavior.values():
-		behavior_submenu.set_item_checked(i, i == id)
+	var state = behavior_submenu.is_item_checked(id)
+	match id:
+		Global.canvas.selection.SelectionFlags.TILE_MODE:
+			Global.canvas.selection.flag_tilemode = !state
+	behavior_submenu.set_item_checked(id, !state)
 
 
 func _snap_to_submenu_id_pressed(id: int) -> void:
