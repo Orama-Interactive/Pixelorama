@@ -10,6 +10,7 @@ enum Type {
 	CAPSULE,
 	CYLINDER,
 	PRISM,
+	TORUS,
 	PLANE,
 	TEXT,
 	DIR_LIGHT,
