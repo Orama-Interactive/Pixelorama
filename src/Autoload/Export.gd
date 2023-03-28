@@ -383,11 +383,9 @@ func blend_layers(
 	else:
 		var layer: BaseLayer = project.layers[export_layers - 2]
 		var layer_image := Image.new()
-		if layer is PixelLayer:
-			layer_image.copy_from(frame.cels[export_layers - 2].image)
-		elif layer is GroupLayer:
+		if layer is GroupLayer:
 			layer_image.copy_from(layer.blend_children(frame, Vector2.ZERO))
-		elif layer is Layer3D:
+		else:
 			layer_image.copy_from(frame.cels[export_layers - 2].get_image())
 		image.blend_rect(layer_image, Rect2(Vector2.ZERO, project.size), origin)
 

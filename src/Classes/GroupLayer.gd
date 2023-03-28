@@ -18,10 +18,10 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 	for layer in children:
 		if not layer.is_visible_in_hierarchy():
 			continue
-		if layer is PixelLayer:
-			var cel: PixelCel = frame.cels[layer.index]
+		if layer is PixelLayer or layer is Layer3D:
+			var cel: BaseCel = frame.cels[layer.index]
 			var cel_image := Image.new()
-			cel_image.copy_from(cel.image)
+			cel_image.copy_from(cel.get_image())
 			if cel.opacity < 1:  # If we have cel transparency
 				cel_image.lock()
 				for xx in cel_image.get_size().x:
