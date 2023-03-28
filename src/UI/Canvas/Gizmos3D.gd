@@ -174,8 +174,9 @@ func _draw() -> void:
 		var back: Vector3 = object.translation - object.transform.basis.z
 		var back_proj: Vector2 = object.camera.unproject_position(back) - pos
 		back_proj = _resize_vector(back_proj, LIGHT_ARROW_LENGTH)
-		draw_set_transform(pos, 0, draw_scale / 2)
+		draw_set_transform(pos, 0, draw_scale / 4)
 		draw_texture(texture, -center)
+		draw_set_transform(pos, 0, draw_scale / 2)
 		if object.type == Cel3DObject.Type.DIR_LIGHT:
 			draw_line(Vector2.ZERO, back_proj, Color.white)
 			var arrow := _find_arrow(back_proj)
@@ -203,6 +204,11 @@ func _draw() -> void:
 				Z:
 					draw_line(gizmos_origin, Global.canvas.current_pixel, Color.blue)
 
+			if (
+				object.applying_gizmos >= Cel3DObject.Gizmos.X_ROT
+				and object.applying_gizmos <= Cel3DObject.Gizmos.Z_ROT
+			):
+				continue
 			draw_set_transform(gizmos_origin, 0, draw_scale)
 			# Draw position arrows
 			draw_line(Vector2.ZERO, proj_right_local, Color.red)
