@@ -497,7 +497,6 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 func _on_NextFrame_pressed() -> void:
 	var project := Global.current_project
-	Global.canvas.selection.transform_content_confirm()
 	if project.current_frame < project.frames.size() - 1:
 		project.selected_cels.clear()
 		project.change_cel(project.current_frame + 1, -1)
@@ -505,20 +504,17 @@ func _on_NextFrame_pressed() -> void:
 
 func _on_PreviousFrame_pressed() -> void:
 	var project := Global.current_project
-	Global.canvas.selection.transform_content_confirm()
 	if project.current_frame > 0:
 		project.selected_cels.clear()
 		project.change_cel(project.current_frame - 1, -1)
 
 
 func _on_LastFrame_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.selected_cels.clear()
 	Global.current_project.change_cel(Global.current_project.frames.size() - 1, -1)
 
 
 func _on_FirstFrame_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.selected_cels.clear()
 	Global.current_project.change_cel(0, -1)
 
