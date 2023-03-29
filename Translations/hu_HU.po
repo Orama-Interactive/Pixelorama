@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2023-03-20 18:36\n"
+"PO-Revision-Date: 2023-03-29 15:57\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -67,7 +67,7 @@ msgid "View"
 msgstr "Nézet"
 
 msgid "Window"
-msgstr ""
+msgstr "Ablak"
 
 msgid "Image"
 msgstr "Kép"
@@ -103,7 +103,7 @@ msgid "Export"
 msgstr "Exportálás"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Felülírás"
 
 msgid "Export..."
 msgstr "Exportálás..."
@@ -136,7 +136,7 @@ msgid "Paste"
 msgstr "Beillesztés"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Beillesztés a helyére"
 
 msgid "Delete"
 msgstr "Törlés"
@@ -175,7 +175,7 @@ msgid "Smear options:"
 msgstr ""
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Tűréshatár:"
 
 msgid "Initial angle:"
 msgstr ""
@@ -254,7 +254,7 @@ msgstr ""
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Előnézet"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
@@ -265,10 +265,10 @@ msgid "Double click to set as new startup layout"
 msgstr ""
 
 msgid "Add"
-msgstr ""
+msgstr "Hozzáadás"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Elrendezés hozzáadása"
 
 msgid "Edit Layout"
 msgstr ""
@@ -331,7 +331,7 @@ msgid "Recent projects"
 msgstr "Utoljára megnyitott projektek"
 
 msgid "New project"
-msgstr ""
+msgstr "Új projekt"
 
 msgid "Spritesheet (new project)"
 msgstr ""
@@ -477,11 +477,11 @@ msgid "Selected frames"
 msgstr ""
 
 msgid "Layers:"
-msgstr ""
+msgstr "Rétegek:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Aktív rétegek"
 
 #. Found in the export dialog
 msgid "Selected layers"
@@ -662,7 +662,7 @@ msgid "Theme"
 msgstr "Téma"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Gombok"
 
 msgid "Icon color from:"
 msgstr ""
@@ -671,13 +671,13 @@ msgid "Icon color:"
 msgstr "Ikon színe:"
 
 msgid "Background"
-msgstr ""
+msgstr "Háttér"
 
 msgid "Background color from:"
 msgstr ""
 
 msgid "Background color:"
-msgstr ""
+msgstr "Háttér színe:"
 
 msgid "Left tool color:"
 msgstr ""
