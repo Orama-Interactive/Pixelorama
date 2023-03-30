@@ -653,7 +653,8 @@ func _get_selected_draw_images() -> Array:  # Array of Image(s)
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 		if not cel is PixelCel:
 			continue
-		images.append(cel.image)
+		if project.layers[cel_index[1]].can_layer_get_drawn():
+			images.append(cel.get_image())
 	return images
 
 
