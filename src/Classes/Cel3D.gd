@@ -5,7 +5,6 @@ signal selected_object(object)
 signal scene_property_changed
 signal objects_changed
 
-var layer
 var size: Vector2
 var viewport: Viewport
 var parent_node: Spatial
@@ -14,17 +13,13 @@ var scene_properties := {}
 # Key = Cel3DObject's id, Value = Dictionary containing the properties of the Cel3DObject
 var object_properties := {}
 var selected: Cel3DObject = null setget _set_selected
+var current_object_id := 0  # Its value never decreases
 
-var _current_object_id := 0  # Its value never decreases
 
-
-func _init(
-	_layer, _size: Vector2, from_pxo := false, _object_properties := {}, _scene_properties := {}
-) -> void:
-	layer = _layer
+func _init(_size: Vector2, from_pxo := false, _object_prop := {}, _scene_prop := {}) -> void:
 	size = _size
-	object_properties = _object_properties
-	scene_properties = _scene_properties
+	object_properties = _object_prop
+	scene_properties = _scene_prop
 	if scene_properties.empty():
 		var camera_transform := Transform()
 		camera_transform.origin = Vector3(0, 0, 3)
@@ -37,10 +32,13 @@ func _init(
 	_add_nodes()
 	if not from_pxo:
 		if object_properties.empty():
-			add_object(Cel3DObject.Type.DIR_LIGHT, false)
-			add_object(Cel3DObject.Type.BOX, false)
-		else:
-			_current_object_id = object_properties.size()
+			var transform := Transform()
+			transform.origin = Vector3(-2.5, 0, 0)
+			object_properties[0] = {"type": Cel3DObject.Type.DIR_LIGHT, "transform": transform}
+			_add_object_node(0)
+			object_properties[1] = {"type": Cel3DObject.Type.BOX}
+			_add_object_node(1)
+		current_object_id = object_properties.size()
 
 
 func _add_nodes() -> void:
@@ -72,7 +70,7 @@ func _get_image_texture() -> Texture:
 	return image_texture
 
 
-func serialize_scene_properties() -> Dictionary:  # To layer
+func serialize_scene_properties() -> Dictionary:
 	if not is_instance_valid(camera):
 		return {}
 	return {
@@ -114,41 +112,6 @@ func size_changed(new_size: Vector2) -> void:
 	image_texture = viewport.get_texture()
 
 
-func add_object(type: int, undoredo := true, file_path := "") -> void:
-	var dict := {"type": type, "file_path": file_path}
-	if undoredo:
-		var new_objects := object_properties.duplicate()
-		new_objects[_current_object_id] = dict
-		var undo_redo: UndoRedo = layer.project.undo_redo
-		undo_redo.create_action("Add 3D object")
-		undo_redo.add_do_property(self, "object_properties", new_objects)
-		undo_redo.add_undo_property(self, "object_properties", object_properties)
-		undo_redo.add_do_method(self, "_add_object_node", _current_object_id)
-		undo_redo.add_undo_method(self, "_remove_object_node", _current_object_id)
-		undo_redo.add_do_method(Global, "undo_or_redo", false)
-		undo_redo.add_undo_method(Global, "undo_or_redo", true)
-		undo_redo.commit_action()
-	else:
-		object_properties[_current_object_id] = dict
-		_add_object_node(_current_object_id)
-
-	_current_object_id += 1
-
-
-func remove_object(id: int) -> void:
-	var new_objects := object_properties.duplicate()
-	new_objects.erase(id)
-	var undo_redo: UndoRedo = layer.project.undo_redo
-	undo_redo.create_action("Remove 3D object")
-	undo_redo.add_do_property(self, "object_properties", new_objects)
-	undo_redo.add_undo_property(self, "object_properties", object_properties)
-	undo_redo.add_do_method(self, "_remove_object_node", id)
-	undo_redo.add_undo_method(self, "_add_object_node", id)
-	undo_redo.add_do_method(Global, "undo_or_redo", false)
-	undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	undo_redo.commit_action()
-
-
 func _scene_property_changed() -> void:  # Called by undo/redo
 	deserialize_scene_properties()
 	emit_signal("scene_property_changed")
@@ -159,16 +122,16 @@ func _add_object_node(id: int) -> void:
 	node3d.id = id
 	node3d.cel = self
 	parent_node.add_child(node3d)
-	node3d.type = object_properties[node3d.id]["type"]
-	if _current_object_id == 0:  # Directional light
-		node3d.translation = Vector3(-2.5, 0, 0)
-		node3d.rotate_y(-PI / 4)
-	if object_properties.has(node3d.id) and object_properties[node3d.id].has("id"):
-		node3d.deserialize(object_properties[node3d.id])
-	else:
-		if object_properties.has(node3d.id) and object_properties[node3d.id].has("file_path"):
-			node3d.file_path = object_properties[node3d.id]["file_path"]
-		object_properties[node3d.id] = node3d.serialize()
+	node3d.type = object_properties[id]["type"]
+	if object_properties.has(id):
+		if object_properties[id].has("id"):
+			node3d.deserialize(object_properties[id])
+		else:
+			if object_properties[id].has("transform"):
+				node3d.transform = object_properties[id]["transform"]
+			if object_properties[id].has("file_path"):
+				node3d.file_path = object_properties[id]["file_path"]
+		object_properties[id] = node3d.serialize()
 	emit_signal("objects_changed")
 
 
@@ -213,7 +176,7 @@ func deserialize(dict: Dictionary) -> void:
 			return
 		Global.convert_dictionary_values(objects_copy[object])
 		object_properties[int(object)] = objects_copy[object]
-	_current_object_id = object_properties.size()
+	current_object_id = object_properties.size()
 	Global.convert_dictionary_values(scene_properties)
 	deserialize_scene_properties()
 	for object in object_properties:

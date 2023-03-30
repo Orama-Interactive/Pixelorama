@@ -278,11 +278,7 @@ func copy_frames(indices := []) -> void:
 			var new_cel: BaseCel
 			if src_cel is Cel3D:
 				new_cel = src_cel.get_script().new(
-					src_cel.layer,
-					src_cel.size,
-					false,
-					src_cel.object_properties,
-					src_cel.scene_properties
+					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
 				)
 			else:
 				new_cel = src_cel.get_script().new()
@@ -635,11 +631,7 @@ func _on_CloneLayer_pressed() -> void:
 			var new_cel: BaseCel
 			if src_cel is Cel3D:
 				new_cel = src_cel.get_script().new(
-					src_cel.layer,
-					src_cel.size,
-					false,
-					src_cel.object_properties,
-					src_cel.scene_properties
+					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
 				)
 			else:
 				new_cel = src_cel.get_script().new()

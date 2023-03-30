@@ -23,7 +23,7 @@ var _object_names := {
 
 onready var object_option_button := $"%ObjectOptionButton" as OptionButton
 onready var new_object_menu_button := $"%NewObjectMenuButton" as MenuButton
-onready var remove_object := $"%RemoveObject" as Button
+onready var remove_object_button := $"%RemoveObject" as Button
 onready var cel_options := $"%CelOptions" as Container
 onready var object_options := $"%ObjectOptions" as Container
 onready var mesh_options := $"%MeshOptions" as VBoxContainer
@@ -77,7 +77,7 @@ func _ready() -> void:
 		if object == Cel3DObject.Type.TORUS:  # Remove when Godot 3.6 or 4.0 is used
 			continue
 		new_object_popup.add_item(_object_names[object], object)
-	new_object_popup.connect("id_pressed", self, "_add_new_object")
+	new_object_popup.connect("id_pressed", self, "_new_object_popup_id_pressed")
 	for prop in cel_properties:
 		var node: Control = cel_properties[prop]
 		if node is ValueSliderV3:
@@ -212,17 +212,43 @@ func _cel_changed() -> void:
 	_fill_object_option_button()
 
 
-func _add_new_object(id: int) -> void:
+func _new_object_popup_id_pressed(id: int) -> void:
 	if id == Cel3DObject.Type.IMPORTED:
 		load_model_dialog.popup_centered()
 		Global.dialog_open(true)
 	else:
-		_cel.add_object(id)
+		_add_object(id)
+
+
+func _add_object(type: int, file_path := "") -> void:
+	var dict := {"type": type, "file_path": file_path}
+	var new_objects := _cel.object_properties.duplicate()
+	new_objects[_cel.current_object_id] = dict
+	var undo_redo: UndoRedo = Global.current_project.undo_redo
+	undo_redo.create_action("Add 3D object")
+	undo_redo.add_do_property(_cel, "object_properties", new_objects)
+	undo_redo.add_undo_property(_cel, "object_properties", _cel.object_properties)
+	undo_redo.add_do_method(_cel, "_add_object_node", _cel.current_object_id)
+	undo_redo.add_undo_method(_cel, "_remove_object_node", _cel.current_object_id)
+	undo_redo.add_do_method(Global, "undo_or_redo", false)
+	undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	undo_redo.commit_action()
+	_cel.current_object_id += 1
 
 
 func _on_RemoveObject_pressed() -> void:
 	if is_instance_valid(_cel.selected):
-		_cel.selected.delete()
+		var new_objects := _cel.object_properties.duplicate()
+		new_objects.erase(_cel.selected.id)
+		var undo_redo: UndoRedo = Global.current_project.undo_redo
+		undo_redo.create_action("Remove 3D object")
+		undo_redo.add_do_property(_cel, "object_properties", new_objects)
+		undo_redo.add_undo_property(_cel, "object_properties", _cel.object_properties)
+		undo_redo.add_do_method(_cel, "_remove_object_node", _cel.selected.id)
+		undo_redo.add_undo_method(_cel, "_add_object_node", _cel.selected.id)
+		undo_redo.add_do_method(Global, "undo_or_redo", false)
+		undo_redo.add_undo_method(Global, "undo_or_redo", true)
+		undo_redo.commit_action()
 		_cel.selected = null
 
 
@@ -244,7 +270,7 @@ func _selected_object(object: Cel3DObject) -> void:
 	if is_instance_valid(object):
 		cel_options.visible = false
 		object_options.visible = true
-		remove_object.disabled = false
+		remove_object_button.disabled = false
 		for prop in object_properties:  # Hide irrelevant nodes
 			var node: Control = object_properties[prop]
 			var property_path: String = prop
@@ -270,7 +296,7 @@ func _selected_object(object: Cel3DObject) -> void:
 	else:
 		cel_options.visible = true
 		object_options.visible = false
-		remove_object.disabled = true
+		remove_object_button.disabled = true
 		object_option_button.select(0)
 
 
@@ -414,7 +440,7 @@ func _on_UndoRedoTimer_timeout() -> void:
 
 func _on_LoadModelDialog_files_selected(paths: PoolStringArray) -> void:
 	for path in paths:
-		_cel.add_object(Cel3DObject.Type.IMPORTED, true, path)
+		_add_object(Cel3DObject.Type.IMPORTED, path)
 
 
 func _on_LoadModelDialog_popup_hide() -> void:

@@ -381,7 +381,7 @@ func deserialize(dict: Dictionary) -> void:
 					Global.LayerTypes.GROUP:
 						cels.append(GroupCel.new())
 					Global.LayerTypes.THREE_D:
-						cels.append(Cel3D.new(layers[cel_i], size, true))
+						cels.append(Cel3D.new(size, true))
 				cels[cel_i].deserialize(cel)
 				_deserialize_metadata(cels[cel_i], cel)
 				cel_i += 1

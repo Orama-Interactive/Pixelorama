@@ -21,7 +21,7 @@ func get_layer_type() -> int:
 
 
 func new_empty_cel() -> BaseCel:
-	return Cel3D.new(self, project.size)
+	return Cel3D.new(project.size)
 
 
 func can_layer_get_drawn() -> bool:

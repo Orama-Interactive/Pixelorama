@@ -252,11 +252,6 @@ func unhover() -> void:
 	gizmos_3d.clear_points(self)
 
 
-func delete() -> void:
-	cel.remove_object(id)
-	queue_free()
-
-
 func change_transform(a: Vector3, b: Vector3) -> void:
 	var diff := a - b
 	match applying_gizmos:
