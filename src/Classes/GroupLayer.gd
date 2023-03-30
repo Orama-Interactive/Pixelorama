@@ -18,8 +18,10 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 	for layer in children:
 		if not layer.is_visible_in_hierarchy():
 			continue
-		# Checks if layer is not GroupLayer, cannot define this due to cyclic reference error
-		if not layer is get_script():
+		# Checks if layer is GroupLayer, cannot define this due to cyclic reference error
+		if layer is get_script():
+			image.blend_rect(layer.blend_children(frame, origin), blend_rect, origin)
+		else:
 			var cel: BaseCel = frame.cels[layer.index]
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.get_image())
@@ -34,8 +36,6 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 						)
 				cel_image.unlock()
 			image.blend_rect(cel_image, blend_rect, origin)
-		else:
-			image.blend_rect(layer.blend_children(frame, origin), blend_rect, origin)
 	return image
 
 
