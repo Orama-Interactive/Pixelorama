@@ -2,7 +2,6 @@ class_name Cel3DObject
 extends Spatial
 
 signal property_changed
-signal property_finished_changing
 
 enum Type {
 	BOX,
@@ -331,8 +330,3 @@ func change_property() -> void:
 		if is_instance_valid(gizmos_3d):
 			gizmos_3d.update()
 	emit_signal("property_changed")
-
-
-func finish_changing_property() -> void:
-	select()
-	emit_signal("property_finished_changing")

@@ -28,7 +28,6 @@ var gizmo_pos_z := PoolVector2Array()
 var gizmo_rot_x := PoolVector2Array()
 var gizmo_rot_y := PoolVector2Array()
 var gizmo_rot_z := PoolVector2Array()
-var is_rotating := -1
 
 
 func _ready() -> void:
@@ -37,57 +36,35 @@ func _ready() -> void:
 	Global.camera.connect("zoom_changed", self, "update")
 
 
-func _input(event: InputEvent) -> void:
-	if not event is InputEventMouseButton:
-		return
-	if points_per_object.empty():
-		return
-	if gizmo_rot_x.empty() or gizmo_pos_y.empty() or gizmo_pos_z.empty():
-		return
-	if not event.button_index == BUTTON_LEFT:
-		return
-	if not Global.current_project.get_current_cel().layer.can_layer_get_drawn():
-		return
-	var pos: Vector2 = Global.canvas.current_pixel - gizmos_origin
-	var selected_obj := _find_selected_object()
-	if not is_instance_valid(selected_obj):
-		return
-	if event.pressed:
-		var draw_scale := Global.camera.zoom * 10
-		# Scale the position based on the zoom, has the same effect as enlarging the shapes
-		pos /= draw_scale
-		# Inflate the rotation polylines by one to make them easier to click
-		var rot_x_offset: PoolVector2Array = Geometry.offset_polyline_2d(gizmo_rot_x, 1)[0]
-		var rot_y_offset: PoolVector2Array = Geometry.offset_polyline_2d(gizmo_rot_y, 1)[0]
-		var rot_z_offset: PoolVector2Array = Geometry.offset_polyline_2d(gizmo_rot_z, 1)[0]
+func get_hovering_gizmo(pos: Vector2) -> int:
+	var draw_scale := Global.camera.zoom * 10
+	pos -= gizmos_origin
+	# Scale the position based on the zoom, has the same effect as enlarging the shapes
+	pos /= draw_scale
+	# Inflate the rotation polylines by one to make them easier to click
+	var rot_x_offset: PoolVector2Array = Geometry.offset_polyline_2d(gizmo_rot_x, 1)[0]
+	var rot_y_offset: PoolVector2Array = Geometry.offset_polyline_2d(gizmo_rot_y, 1)[0]
+	var rot_z_offset: PoolVector2Array = Geometry.offset_polyline_2d(gizmo_rot_z, 1)[0]
 
-		if Geometry.point_is_inside_triangle(pos, gizmo_pos_x[0], gizmo_pos_x[1], gizmo_pos_x[2]):
-			selected_obj.applying_gizmos = Cel3DObject.Gizmos.X_POS
-		elif Geometry.point_is_inside_triangle(pos, gizmo_pos_y[0], gizmo_pos_y[1], gizmo_pos_y[2]):
-			selected_obj.applying_gizmos = Cel3DObject.Gizmos.Y_POS
-		elif Geometry.point_is_inside_triangle(pos, gizmo_pos_z[0], gizmo_pos_z[1], gizmo_pos_z[2]):
-			selected_obj.applying_gizmos = Cel3DObject.Gizmos.Z_POS
-		elif Geometry.is_point_in_circle(pos, proj_right_local_scale, SCALE_CIRCLE_RADIUS):
-			selected_obj.applying_gizmos = Cel3DObject.Gizmos.X_SCALE
-		elif Geometry.is_point_in_circle(pos, proj_up_local_scale, SCALE_CIRCLE_RADIUS):
-			selected_obj.applying_gizmos = Cel3DObject.Gizmos.Y_SCALE
-		elif Geometry.is_point_in_circle(pos, proj_back_local_scale, SCALE_CIRCLE_RADIUS):
-			selected_obj.applying_gizmos = Cel3DObject.Gizmos.Z_SCALE
-		elif Geometry.is_point_in_polygon(pos, rot_x_offset):
-			selected_obj.applying_gizmos = Cel3DObject.Gizmos.X_ROT
-			is_rotating = X
-		elif Geometry.is_point_in_polygon(pos, rot_y_offset):
-			selected_obj.applying_gizmos = Cel3DObject.Gizmos.Y_ROT
-			is_rotating = Y
-		elif Geometry.is_point_in_polygon(pos, rot_z_offset):
-			selected_obj.applying_gizmos = Cel3DObject.Gizmos.Z_ROT
-			is_rotating = Z
-	else:
-		if selected_obj.applying_gizmos == Cel3DObject.Gizmos.NONE:
-			return
-		selected_obj.applying_gizmos = Cel3DObject.Gizmos.NONE
-		is_rotating = -1
-		update()
+	if Geometry.point_is_inside_triangle(pos, gizmo_pos_x[0], gizmo_pos_x[1], gizmo_pos_x[2]):
+		return Cel3DObject.Gizmos.X_POS
+	elif Geometry.point_is_inside_triangle(pos, gizmo_pos_y[0], gizmo_pos_y[1], gizmo_pos_y[2]):
+		return Cel3DObject.Gizmos.Y_POS
+	elif Geometry.point_is_inside_triangle(pos, gizmo_pos_z[0], gizmo_pos_z[1], gizmo_pos_z[2]):
+		return Cel3DObject.Gizmos.Z_POS
+	elif Geometry.is_point_in_circle(pos, proj_right_local_scale, SCALE_CIRCLE_RADIUS):
+		return Cel3DObject.Gizmos.X_SCALE
+	elif Geometry.is_point_in_circle(pos, proj_up_local_scale, SCALE_CIRCLE_RADIUS):
+		return Cel3DObject.Gizmos.Y_SCALE
+	elif Geometry.is_point_in_circle(pos, proj_back_local_scale, SCALE_CIRCLE_RADIUS):
+		return Cel3DObject.Gizmos.Z_SCALE
+	elif Geometry.is_point_in_polygon(pos, rot_x_offset):
+		return Cel3DObject.Gizmos.X_ROT
+	elif Geometry.is_point_in_polygon(pos, rot_y_offset):
+		return Cel3DObject.Gizmos.Y_ROT
+	elif Geometry.is_point_in_polygon(pos, rot_z_offset):
+		return Cel3DObject.Gizmos.Z_ROT
+	return Cel3DObject.Gizmos.NONE
 
 
 func _cel_changed() -> void:
@@ -196,18 +173,14 @@ func _draw() -> void:
 		if object.selected:
 			# Draw bounding box outline
 			draw_multiline(points, selected_color, 1.0, true)
-			match is_rotating:
-				X:
-					draw_line(gizmos_origin, Global.canvas.current_pixel, Color.red)
-				Y:
-					draw_line(gizmos_origin, Global.canvas.current_pixel, Color.green)
-				Z:
-					draw_line(gizmos_origin, Global.canvas.current_pixel, Color.blue)
-
-			if (
-				object.applying_gizmos >= Cel3DObject.Gizmos.X_ROT
-				and object.applying_gizmos <= Cel3DObject.Gizmos.Z_ROT
-			):
+			if object.applying_gizmos == Cel3DObject.Gizmos.X_ROT:
+				draw_line(gizmos_origin, Global.canvas.current_pixel, Color.red)
+				continue
+			elif object.applying_gizmos == Cel3DObject.Gizmos.Y_ROT:
+				draw_line(gizmos_origin, Global.canvas.current_pixel, Color.green)
+				continue
+			elif object.applying_gizmos == Cel3DObject.Gizmos.Z_ROT:
+				draw_line(gizmos_origin, Global.canvas.current_pixel, Color.blue)
 				continue
 			draw_set_transform(gizmos_origin, 0, draw_scale)
 			# Draw position arrows

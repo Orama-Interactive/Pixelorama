@@ -72,18 +72,6 @@ func _get_image_texture() -> Texture:
 	return image_texture
 
 
-func change_scene_properties() -> void:
-	var undo_redo: UndoRedo = layer.project.undo_redo
-	undo_redo.create_action("Change 3D layer properties")
-	undo_redo.add_do_property(self, "scene_properties", serialize_scene_properties())
-	undo_redo.add_undo_property(self, "scene_properties", scene_properties)
-	undo_redo.add_do_method(self, "_scene_property_changed")
-	undo_redo.add_undo_method(self, "_scene_property_changed")
-	undo_redo.add_do_method(Global, "undo_or_redo", false)
-	undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	undo_redo.commit_action()
-
-
 func serialize_scene_properties() -> Dictionary:  # To layer
 	if not is_instance_valid(camera):
 		return {}
@@ -100,20 +88,6 @@ func deserialize_scene_properties() -> void:
 	camera.projection = scene_properties["camera_projection"]
 	viewport.world.environment.ambient_light_color = scene_properties["ambient_light_color"]
 	viewport.world.environment.ambient_light_energy = scene_properties["ambient_light_energy"]
-
-
-func _object_property_changed(object: Cel3DObject) -> void:
-	var undo_redo: UndoRedo = layer.project.undo_redo
-	var new_properties := object_properties.duplicate()
-	new_properties[object.id] = object.serialize()
-	undo_redo.create_action("Change object transform")
-	undo_redo.add_do_property(self, "object_properties", new_properties)
-	undo_redo.add_undo_property(self, "object_properties", object_properties)
-	undo_redo.add_do_method(self, "_update_objects_transform", object.id)
-	undo_redo.add_undo_method(self, "_update_objects_transform", object.id)
-	undo_redo.add_do_method(Global, "undo_or_redo", false)
-	undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	undo_redo.commit_action()
 
 
 func _update_objects_transform(id: int) -> void:  # Called by undo/redo
@@ -184,7 +158,6 @@ func _add_object_node(id: int) -> void:
 	var node3d := Cel3DObject.new()
 	node3d.id = id
 	node3d.cel = self
-	node3d.connect("property_finished_changing", self, "_object_property_changed", [node3d])
 	parent_node.add_child(node3d)
 	node3d.type = object_properties[node3d.id]["type"]
 	if _current_object_id == 0:  # Directional light

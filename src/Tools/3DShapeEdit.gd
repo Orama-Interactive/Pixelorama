@@ -122,12 +122,16 @@ func draw_start(position: Vector2) -> void:
 	if not found_cel:
 		return
 
+	if is_instance_valid(_cel.selected):
+		# Needs canvas.current_pixel, because draw_start()'s position is floored
+		_cel.selected.applying_gizmos = Global.canvas.gizmos_3d.get_hovering_gizmo(
+			Global.canvas.current_pixel
+		)
 	if is_instance_valid(_hovering):
 		_cel.selected = _hovering
 		_dragging = true
 		_prev_mouse_pos = position
-	else:
-		# We're not hovering
+	else:  # We're not hovering
 		if is_instance_valid(_cel.selected):
 			# If we're not clicking on a gizmo, unselect
 			if _cel.selected.applying_gizmos == Cel3DObject.Gizmos.NONE:
@@ -154,7 +158,8 @@ func draw_end(_position: Vector2) -> void:
 		return
 	_dragging = false
 	if is_instance_valid(_cel.selected) and _has_been_dragged:
-		_cel.selected.finish_changing_property()
+		_cel.selected.applying_gizmos = Cel3DObject.Gizmos.NONE
+		_object_property_changed(_cel.selected)
 	_has_been_dragged = false
 
 
@@ -219,6 +224,20 @@ func _on_RemoveObject_pressed() -> void:
 	if is_instance_valid(_cel.selected):
 		_cel.selected.delete()
 		_cel.selected = null
+
+
+func _object_property_changed(object: Cel3DObject) -> void:
+	var undo_redo: UndoRedo = Global.current_project.undo_redo
+	var new_properties := _cel.object_properties.duplicate()
+	new_properties[object.id] = object.serialize()
+	undo_redo.create_action("Change object transform")
+	undo_redo.add_do_property(_cel, "object_properties", new_properties)
+	undo_redo.add_undo_property(_cel, "object_properties", _cel.object_properties)
+	undo_redo.add_do_method(_cel, "_update_objects_transform", object.id)
+	undo_redo.add_undo_method(_cel, "_update_objects_transform", object.id)
+	undo_redo.add_do_method(Global, "undo_or_redo", false)
+	undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	undo_redo.commit_action()
 
 
 func _selected_object(object: Cel3DObject) -> void:
@@ -380,9 +399,17 @@ func _fill_object_option_button() -> void:
 
 func _on_UndoRedoTimer_timeout() -> void:
 	if is_instance_valid(_cel.selected):
-		_cel.selected.finish_changing_property()
+		_object_property_changed(_cel.selected)
 	else:
-		_cel.change_scene_properties()
+		var undo_redo: UndoRedo = Global.current_project.undo_redo
+		undo_redo.create_action("Change 3D layer properties")
+		undo_redo.add_do_property(_cel, "scene_properties", _cel.serialize_scene_properties())
+		undo_redo.add_undo_property(_cel, "scene_properties", _cel.scene_properties)
+		undo_redo.add_do_method(_cel, "_scene_property_changed")
+		undo_redo.add_undo_method(_cel, "_scene_property_changed")
+		undo_redo.add_do_method(Global, "undo_or_redo", false)
+		undo_redo.add_undo_method(Global, "undo_or_redo", true)
+		undo_redo.commit_action()
 
 
 func _on_LoadModelDialog_files_selected(paths: PoolStringArray) -> void:
