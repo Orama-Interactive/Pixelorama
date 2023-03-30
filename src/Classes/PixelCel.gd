@@ -59,11 +59,11 @@ func update_texture() -> void:
 	.update_texture()
 
 
-func save_cel_data_to_pxo(file: File) -> void:
+func save_image_data_to_pxo(file: File) -> void:
 	file.store_buffer(image.get_data())
 
 
-func load_cel_data_from_pxo(file: File, project_size: Vector2) -> void:
+func load_image_data_from_pxo(file: File, project_size: Vector2) -> void:
 	var buffer := file.get_buffer(project_size.x * project_size.y * 4)
 	image.create_from_data(project_size.x, project_size.y, false, Image.FORMAT_RGBA8, buffer)
 	image_changed(image)

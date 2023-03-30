@@ -5,7 +5,7 @@ extends Reference
 
 signal texture_changed
 
-var opacity: float
+var opacity := 1.0
 var image_texture: Texture setget , _get_image_texture
 # If the cel is linked a ref to the link set Dictionary this cel is in, or null if not linked:
 var link_set = null  # { "cels": Array, "hue": float } or null
@@ -51,11 +51,19 @@ func update_texture() -> void:
 	return
 
 
-func save_cel_data_to_pxo(_file: File) -> void:
+func serialize() -> Dictionary:
+	return {"opacity": opacity}
+
+
+func deserialize(dict: Dictionary) -> void:
+	opacity = dict["opacity"]
+
+
+func save_image_data_to_pxo(_file: File) -> void:
 	return
 
 
-func load_cel_data_from_pxo(_file: File, _project_size: Vector2) -> void:
+func load_image_data_from_pxo(_file: File, _project_size: Vector2) -> void:
 	return
 
 

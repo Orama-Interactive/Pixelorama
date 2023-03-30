@@ -300,7 +300,8 @@ func serialize() -> Dictionary:
 	for frame in frames:
 		var cel_data := []
 		for cel in frame.cels:
-			cel_data.append({"opacity": cel.opacity, "metadata": _serialize_metadata(cel)})
+			cel_data.append(cel.serialize())
+			cel_data[-1]["metadata"] = _serialize_metadata(cel)
 
 		frame_data.append(
 			{"cels": cel_data, "duration": frame.duration, "metadata": _serialize_metadata(frame)}
@@ -376,11 +377,12 @@ func deserialize(dict: Dictionary) -> void:
 			for cel in frame.cels:
 				match int(dict.layers[cel_i].get("type", Global.LayerTypes.PIXEL)):
 					Global.LayerTypes.PIXEL:
-						cels.append(PixelCel.new(Image.new(), cel.opacity))
+						cels.append(PixelCel.new(Image.new()))
 					Global.LayerTypes.GROUP:
-						cels.append(GroupCel.new(cel.opacity))
+						cels.append(GroupCel.new())
 					Global.LayerTypes.THREE_D:
 						cels.append(Cel3D.new(layers[cel_i], size, true))
+				cels[cel_i].deserialize(cel)
 				_deserialize_metadata(cels[cel_i], cel)
 				cel_i += 1
 			var duration := 1.0

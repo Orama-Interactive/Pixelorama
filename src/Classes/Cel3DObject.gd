@@ -254,7 +254,7 @@ func unhover() -> void:
 
 
 func delete() -> void:
-	cel.layer.remove_object(id)
+	cel.remove_object(id)
 	queue_free()
 
 

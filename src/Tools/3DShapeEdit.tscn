@@ -70,14 +70,14 @@ disabled = true
 shortcut = SubResource( 34 )
 text = "Remove object"
 
-[node name="LayerOptions" type="VBoxContainer" parent="." index="3"]
+[node name="CelOptions" type="VBoxContainer" parent="." index="3"]
 unique_name_in_owner = true
 margin_top = 74.0
 margin_right = 223.0
 margin_bottom = 226.0
 size_flags_vertical = 3
 
-[node name="CameraOptions" type="VBoxContainer" parent="LayerOptions" index="0"]
+[node name="CameraOptions" type="VBoxContainer" parent="CelOptions" index="0"]
 margin_right = 223.0
 margin_bottom = 128.0
 theme_type_variation = "CollapsibleContainer"
@@ -85,20 +85,20 @@ script = ExtResource( 6 )
 text = "Camera"
 visible_content = true
 
-[node name="GridContainer" type="GridContainer" parent="LayerOptions/CameraOptions" index="1"]
+[node name="GridContainer" type="GridContainer" parent="CelOptions/CameraOptions" index="1"]
 margin_top = 24.0
 margin_right = 223.0
 margin_bottom = 128.0
 columns = 2
 
-[node name="ProjectionLabel" type="Label" parent="LayerOptions/CameraOptions/GridContainer" index="0"]
+[node name="ProjectionLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="0"]
 margin_top = 3.0
 margin_right = 110.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "Projection:"
 
-[node name="ProjectionOptionButton" type="OptionButton" parent="LayerOptions/CameraOptions/GridContainer" index="1"]
+[node name="ProjectionOptionButton" type="OptionButton" parent="CelOptions/CameraOptions/GridContainer" index="1"]
 unique_name_in_owner = true
 margin_left = 114.0
 margin_right = 223.0
@@ -109,7 +109,7 @@ text = "Perspective"
 items = [ "Perspective", null, false, 0, null, "Orthogonal", null, false, 1, null, "Frustum", null, false, 2, null ]
 selected = 0
 
-[node name="RotationLabel" type="Label" parent="LayerOptions/CameraOptions/GridContainer" index="2"]
+[node name="RotationLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="2"]
 margin_top = 24.0
 margin_right = 110.0
 margin_bottom = 38.0
@@ -117,7 +117,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Rotation:"
 
-[node name="CameraRotation" parent="LayerOptions/CameraOptions/GridContainer" index="3" instance=ExtResource( 7 )]
+[node name="CameraRotation" parent="CelOptions/CameraOptions/GridContainer" index="3" instance=ExtResource( 7 )]
 unique_name_in_owner = true
 margin_left = 114.0
 margin_top = 24.0
@@ -131,7 +131,7 @@ suffix_x = "°"
 suffix_y = "°"
 suffix_z = "°"
 
-[node name="EnvironmentOptions" type="VBoxContainer" parent="LayerOptions" index="1"]
+[node name="EnvironmentOptions" type="VBoxContainer" parent="CelOptions" index="1"]
 margin_top = 132.0
 margin_right = 223.0
 margin_bottom = 152.0
@@ -139,20 +139,20 @@ theme_type_variation = "CollapsibleContainer"
 script = ExtResource( 6 )
 text = "Environment"
 
-[node name="GridContainer" type="GridContainer" parent="LayerOptions/EnvironmentOptions" index="1"]
+[node name="GridContainer" type="GridContainer" parent="CelOptions/EnvironmentOptions" index="1"]
 visible = false
 margin_right = 1266.0
 margin_bottom = 48.0
 columns = 2
 
-[node name="AmbientColorLabel" type="Label" parent="LayerOptions/EnvironmentOptions/GridContainer" index="0"]
+[node name="AmbientColorLabel" type="Label" parent="CelOptions/EnvironmentOptions/GridContainer" index="0"]
 margin_top = 3.0
 margin_right = 631.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "Ambient color:"
 
-[node name="AmbientColorPickerButton" type="ColorPickerButton" parent="LayerOptions/EnvironmentOptions/GridContainer" index="1"]
+[node name="AmbientColorPickerButton" type="ColorPickerButton" parent="CelOptions/EnvironmentOptions/GridContainer" index="1"]
 unique_name_in_owner = true
 margin_left = 635.0
 margin_right = 1266.0
@@ -160,14 +160,14 @@ margin_bottom = 20.0
 size_flags_horizontal = 3
 edit_alpha = false
 
-[node name="AmbientEnergyLabel" type="Label" parent="LayerOptions/EnvironmentOptions/GridContainer" index="2"]
+[node name="AmbientEnergyLabel" type="Label" parent="CelOptions/EnvironmentOptions/GridContainer" index="2"]
 margin_top = 29.0
 margin_right = 631.0
 margin_bottom = 43.0
 size_flags_horizontal = 3
 text = "Ambient color energy:"
 
-[node name="AmbientEnergy" parent="LayerOptions/EnvironmentOptions/GridContainer" index="3" instance=ExtResource( 4 )]
+[node name="AmbientEnergy" parent="CelOptions/EnvironmentOptions/GridContainer" index="3" instance=ExtResource( 4 )]
 unique_name_in_owner = true
 margin_left = 635.0
 margin_top = 24.0

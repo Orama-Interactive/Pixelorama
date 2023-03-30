@@ -24,14 +24,14 @@ var _object_names := {
 onready var object_option_button := $"%ObjectOptionButton" as OptionButton
 onready var new_object_menu_button := $"%NewObjectMenuButton" as MenuButton
 onready var remove_object := $"%RemoveObject" as Button
-onready var layer_options := $"%LayerOptions" as Container
+onready var cel_options := $"%CelOptions" as Container
 onready var object_options := $"%ObjectOptions" as Container
 onready var mesh_options := $"%MeshOptions" as VBoxContainer
 onready var light_options := $"%LightOptions" as VBoxContainer
 onready var undo_redo_timer := $UndoRedoTimer as Timer
 onready var load_model_dialog := $LoadModelDialog as FileDialog
 
-onready var layer_properties := {
+onready var cel_properties := {
 	"camera:projection": $"%ProjectionOptionButton",
 	"camera:rotation_degrees": $"%CameraRotation",
 	"viewport:world:environment:ambient_light_color": $"%AmbientColorPickerButton",
@@ -78,16 +78,16 @@ func _ready() -> void:
 			continue
 		new_object_popup.add_item(_object_names[object], object)
 	new_object_popup.connect("id_pressed", self, "_add_new_object")
-	for prop in layer_properties:
-		var node: Control = layer_properties[prop]
+	for prop in cel_properties:
+		var node: Control = cel_properties[prop]
 		if node is ValueSliderV3:
-			node.connect("value_changed", self, "_layer_property_vector3_changed", [prop])
+			node.connect("value_changed", self, "_cel_property_vector3_changed", [prop])
 		elif node is Range:
-			node.connect("value_changed", self, "_layer_property_value_changed", [prop])
+			node.connect("value_changed", self, "_cel_property_value_changed", [prop])
 		elif node is OptionButton:
-			node.connect("item_selected", self, "_layer_property_item_selected", [prop])
+			node.connect("item_selected", self, "_cel_property_item_selected", [prop])
 		elif node is ColorPickerButton:
-			node.connect("color_changed", self, "_layer_property_color_changed", [prop])
+			node.connect("color_changed", self, "_cel_property_color_changed", [prop])
 	for prop in object_properties:
 		var node: Control = object_properties[prop]
 		if node is ValueSliderV3:
@@ -110,13 +110,14 @@ func _ready() -> void:
 
 
 func draw_start(position: Vector2) -> void:
-	if not Global.current_project.get_current_cel() is Cel3D:
+	var project: Project = Global.current_project
+	if not project.get_current_cel() is Cel3D:
 		return
-	if not _cel.layer.can_layer_get_drawn():
+	if not project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	var found_cel := false
-	for frame_layer in Global.current_project.selected_cels:
-		if _cel == Global.current_project.frames[frame_layer[0]].cels[frame_layer[1]]:
+	for frame_layer in project.selected_cels:
+		if _cel == project.frames[frame_layer[0]].cels[frame_layer[1]]:
 			found_cel = true
 	if not found_cel:
 		return
@@ -196,15 +197,13 @@ func _cel_changed() -> void:
 	get_child(0).visible = true
 	_cel = Global.current_project.get_current_cel()
 	_cel.selected = null
-	var layer: Layer3D = _cel.layer
-	if not layer.is_connected("property_changed", self, "_set_layer_node_values"):
-		layer.connect("property_changed", self, "_set_layer_node_values")
-		layer.connect("objects_changed", self, "_fill_object_option_button")
-	if not _cel.is_connected("selected_object", self, "_selected_object"):
+	if not _cel.is_connected("scene_property_changed", self, "_set_cel_node_values"):
+		_cel.connect("scene_property_changed", self, "_set_cel_node_values")
+		_cel.connect("objects_changed", self, "_fill_object_option_button")
 		_cel.connect("selected_object", self, "_selected_object")
-	layer_options.visible = true
+	cel_options.visible = true
 	object_options.visible = false
-	_set_layer_node_values()
+	_set_cel_node_values()
 	_fill_object_option_button()
 
 
@@ -213,7 +212,7 @@ func _add_new_object(id: int) -> void:
 		load_model_dialog.popup_centered()
 		Global.dialog_open(true)
 	else:
-		_cel.layer.add_object(id)
+		_cel.add_object(id)
 
 
 func _on_RemoveObject_pressed() -> void:
@@ -224,7 +223,7 @@ func _on_RemoveObject_pressed() -> void:
 
 func _selected_object(object: Cel3DObject) -> void:
 	if is_instance_valid(object):
-		layer_options.visible = false
+		cel_options.visible = false
 		object_options.visible = true
 		remove_object.disabled = false
 		for prop in object_properties:  # Hide irrelevant nodes
@@ -250,15 +249,15 @@ func _selected_object(object: Cel3DObject) -> void:
 			object.connect("property_changed", self, "_set_object_node_values")
 		object_option_button.select(object_option_button.get_item_index(object.id + 1))
 	else:
-		layer_options.visible = true
+		cel_options.visible = true
 		object_options.visible = false
 		remove_object.disabled = true
 		object_option_button.select(0)
 
 
-func _set_layer_node_values() -> void:
+func _set_cel_node_values() -> void:
 	_can_start_timer = false
-	_set_node_values(_cel, layer_properties)
+	_set_node_values(_cel, cel_properties)
 	_can_start_timer = true
 
 
@@ -305,25 +304,25 @@ func _set_value_from_node(to_edit: Object, value, prop: String) -> void:
 	to_edit.set_indexed(prop, value)
 
 
-func _layer_property_vector3_changed(value: Vector3, prop: String) -> void:
+func _cel_property_vector3_changed(value: Vector3, prop: String) -> void:
 	_set_value_from_node(_cel, value, prop)
 	_value_handle_change()
 	Global.canvas.gizmos_3d.update()
 
 
-func _layer_property_value_changed(value: float, prop: String) -> void:
+func _cel_property_value_changed(value: float, prop: String) -> void:
 	_set_value_from_node(_cel, value, prop)
 	_value_handle_change()
 	Global.canvas.gizmos_3d.update()
 
 
-func _layer_property_item_selected(value: int, prop: String) -> void:
+func _cel_property_item_selected(value: int, prop: String) -> void:
 	_set_value_from_node(_cel, value, prop)
 	_value_handle_change()
 	Global.canvas.gizmos_3d.update()
 
 
-func _layer_property_color_changed(value: Color, prop: String) -> void:
+func _cel_property_color_changed(value: Color, prop: String) -> void:
 	_set_value_from_node(_cel, value, prop)
 	_value_handle_change()
 	Global.canvas.gizmos_3d.update()
@@ -372,11 +371,10 @@ func _value_handle_change() -> void:
 func _fill_object_option_button() -> void:
 	if not _cel is Cel3D:
 		return
-	var layer: Layer3D = _cel.layer
 	object_option_button.clear()
 	object_option_button.add_item("None", 0)
-	for id in layer.objects:
-		var item_name: String = _object_names[layer.objects[id]]
+	for id in _cel.object_properties:
+		var item_name: String = _object_names[_cel.object_properties[id]["type"]]
 		object_option_button.add_item(item_name, id + 1)
 
 
@@ -384,13 +382,12 @@ func _on_UndoRedoTimer_timeout() -> void:
 	if is_instance_valid(_cel.selected):
 		_cel.selected.finish_changing_property()
 	else:
-		var new_properties := _cel.serialize_layer_properties()
-		_cel.layer.change_properties(new_properties)
+		_cel.change_scene_properties()
 
 
 func _on_LoadModelDialog_files_selected(paths: PoolStringArray) -> void:
 	for path in paths:
-		_cel.layer.add_object(Cel3DObject.Type.IMPORTED, true, path)
+		_cel.add_object(Cel3DObject.Type.IMPORTED, true, path)
 
 
 func _on_LoadModelDialog_popup_hide() -> void:

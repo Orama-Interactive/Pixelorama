@@ -587,6 +587,8 @@ func update_hint_tooltips() -> void:
 # Used in case some of the values in a dictionary are Strings, when they should be something else
 func convert_dictionary_values(dict: Dictionary) -> void:
 	for key in dict:
+		if key == "id" or key == "type":
+			dict[key] = int(dict[key])
 		if typeof(dict[key]) != TYPE_STRING:
 			continue
 		if "transform" in key:  # Convert a String to a Transform
