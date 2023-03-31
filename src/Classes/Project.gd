@@ -318,6 +318,7 @@ func serialize() -> Dictionary:
 
 	var project_data := {
 		"pixelorama_version": Global.current_version,
+		"pxo_version": ProjectSettings.get_setting("application/config/Pxo_Version"),
 		"name": name,
 		"size_x": size.x,
 		"size_y": size.y,
