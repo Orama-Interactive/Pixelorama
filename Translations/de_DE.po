@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-03-31 19:07\n"
+"PO-Revision-Date: 2023-03-31 21:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -498,7 +498,7 @@ msgstr "Gruppenebene:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "3D-Ebene:"
 
 msgid "Direction:"
 msgstr "Richtung:"
@@ -1784,15 +1784,15 @@ msgstr "Erstelle eine neue Ebene"
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "Pixelebene hinzufügen"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr ""
+msgstr "Gruppenebene hinzufügen"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "3D-Ebene hinzufügen"
 
 msgid "Remove current layer"
 msgstr "Entferne aktuelle Ebene"
