@@ -10,7 +10,7 @@ func _init(_opacity := 1.0) -> void:
 
 
 func get_image() -> Image:
-	var image = Image.new()
+	var image := Image.new()
 	image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)

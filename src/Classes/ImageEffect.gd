@@ -69,7 +69,9 @@ func _confirmed() -> void:
 		for cel_index in project.selected_cels:
 			if !project.layers[cel_index[1]].can_layer_get_drawn():
 				continue
-			var cel: PixelCel = project.frames[cel_index[0]].cels[cel_index[1]]
+			var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+			if not cel is PixelCel:
+				continue
 			var cel_image: Image = cel.image
 			commit_action(cel_image)
 		_commit_undo("Draw", undo_data, project)
@@ -78,6 +80,9 @@ func _confirmed() -> void:
 		var undo_data := _get_undo_data(project)
 		var i := 0
 		for cel in project.frames[project.current_frame].cels:
+			if not cel is PixelCel:
+				i += 1
+				continue
 			if project.layers[i].can_layer_get_drawn():
 				commit_action(cel.image)
 			i += 1
@@ -88,6 +93,9 @@ func _confirmed() -> void:
 		for frame in project.frames:
 			var i := 0
 			for cel in frame.cels:
+				if not cel is PixelCel:
+					i += 1
+					continue
 				if project.layers[i].can_layer_get_drawn():
 					commit_action(cel.image)
 				i += 1
@@ -99,6 +107,9 @@ func _confirmed() -> void:
 			for frame in _project.frames:
 				var i := 0
 				for cel in frame.cels:
+					if not cel is PixelCel:
+						i += 1
+						continue
 					if _project.layers[i].can_layer_get_drawn():
 						commit_action(cel.image, _project)
 					i += 1

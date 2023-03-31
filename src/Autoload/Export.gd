@@ -383,10 +383,10 @@ func blend_layers(
 	else:
 		var layer: BaseLayer = project.layers[export_layers - 2]
 		var layer_image := Image.new()
-		if layer is PixelLayer:
-			layer_image.copy_from(frame.cels[export_layers - 2].image)
-		elif layer is GroupLayer:
+		if layer is GroupLayer:
 			layer_image.copy_from(layer.blend_children(frame, Vector2.ZERO))
+		else:
+			layer_image.copy_from(frame.cels[export_layers - 2].get_image())
 		image.blend_rect(layer_image, Rect2(Vector2.ZERO, project.size), origin)
 
 
@@ -396,20 +396,25 @@ func blend_all_layers(
 ) -> void:
 	var layer_i := 0
 	for cel in frame.cels:
-		if project.layers[layer_i].is_visible_in_hierarchy() and cel is PixelCel:
-			var cel_image := Image.new()
-			cel_image.copy_from(cel.image)
-			if cel.opacity < 1:  # If we have cel transparency
-				cel_image.lock()
-				for xx in cel_image.get_size().x:
-					for yy in cel_image.get_size().y:
-						var pixel_color := cel_image.get_pixel(xx, yy)
-						var alpha: float = pixel_color.a * cel.opacity
-						cel_image.set_pixel(
-							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-						)
-				cel_image.unlock()
-			image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
+		if not project.layers[layer_i].is_visible_in_hierarchy():
+			layer_i += 1
+			continue
+		if cel is GroupCel:
+			layer_i += 1
+			continue
+		var cel_image := Image.new()
+		cel_image.copy_from(cel.get_image())
+		if cel.opacity < 1:  # If we have cel transparency
+			cel_image.lock()
+			for xx in cel_image.get_size().x:
+				for yy in cel_image.get_size().y:
+					var pixel_color := cel_image.get_pixel(xx, yy)
+					var alpha: float = pixel_color.a * cel.opacity
+					cel_image.set_pixel(
+						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
+					)
+			cel_image.unlock()
+		image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
 		layer_i += 1
 
 
@@ -421,13 +426,13 @@ func blend_selected_cels(
 		var test_array := [project.current_frame, cel_ind]
 		if not test_array in project.selected_cels:
 			continue
-		if not frame.cels[cel_ind] is PixelCel:
+		if frame.cels[cel_ind] is GroupCel:
 			continue
 		if not project.layers[cel_ind].is_visible_in_hierarchy():
 			continue
-		var cel: PixelCel = frame.cels[cel_ind]
+		var cel: BaseCel = frame.cels[cel_ind]
 		var cel_image := Image.new()
-		cel_image.copy_from(cel.image)
+		cel_image.copy_from(cel.get_image())
 		if cel.opacity < 1:  # If we have cel transparency
 			cel_image.lock()
 			for xx in cel_image.get_size().x:
