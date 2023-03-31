@@ -194,7 +194,7 @@ func save_image_data_to_pxo(file: File) -> void:
 
 func load_image_data_from_pxo(file: File, project_size: Vector2) -> void:
 	# Don't do anything with it, just read it so that the file can move on
-	var _buffer := file.get_buffer(project_size.x * project_size.y * 4)
+	file.get_buffer(project_size.x * project_size.y * 4)
 
 
 func instantiate_cel_button() -> Node:
