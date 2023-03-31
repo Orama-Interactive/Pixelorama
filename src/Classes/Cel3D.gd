@@ -138,6 +138,8 @@ func _add_object_node(id: int) -> void:
 func _remove_object_node(id: int) -> void:  # Called by undo/redo
 	var object := get_object_from_id(id)
 	if is_instance_valid(object):
+		if selected == object:
+			self.selected = null
 		object.queue_free()
 	emit_signal("objects_changed")
 

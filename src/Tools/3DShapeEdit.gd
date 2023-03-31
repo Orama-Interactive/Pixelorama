@@ -341,6 +341,8 @@ func _set_node_values(to_edit: Object, properties: Dictionary) -> void:
 
 
 func _set_value_from_node(to_edit: Object, value, prop: String) -> void:
+	if not is_instance_valid(to_edit):
+		return
 	if "mesh_" in prop:
 		prop = prop.replace("mesh_", "")
 		to_edit = to_edit.node3d_type.mesh
