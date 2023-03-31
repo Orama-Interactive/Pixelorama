@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-03-31 19:07\n"
+"PO-Revision-Date: 2023-03-31 23:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -499,7 +499,7 @@ msgstr "Livello di gruppo:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "Livello 3D:"
 
 msgid "Direction:"
 msgstr "Direzione:"
@@ -1785,15 +1785,15 @@ msgstr "Crea un nuovo livello"
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "Aggiungi Livello Pixel"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr ""
+msgstr "Aggiungi Livello Gruppo"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "Aggiungi Livello 3D"
 
 msgid "Remove current layer"
 msgstr "Rimuovi il livello corrente"
@@ -2288,211 +2288,213 @@ msgid "Reference Images"
 msgstr "Immagini Di Riferimento"
 
 msgid "Crop"
-msgstr ""
+msgstr "Ritaglia"
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "Ridimensiona la superficie"
 
 msgid "Margins"
-msgstr ""
+msgstr "Margini"
 
 msgid "Position + Size"
-msgstr ""
+msgstr "Posizione + Dimensione"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "Rapporto Dimensioni Bloccate"
 
 msgid "Margins:"
-msgstr ""
+msgstr "Margini:"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "Rapporto Aspetto:"
 
 msgid "Top:"
-msgstr ""
+msgstr "Alto:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "Basso:"
 
 msgid "Left:"
-msgstr ""
+msgstr "Sinistra:"
 
 msgid "Right:"
-msgstr ""
+msgstr "Destra:"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Dimensione bloccata\n\n"
+"Quando abilitata usando lo strumento sulla superficie di disegno sposterà solo il rettangolo di ritaglio.\n\n"
+"Quando disabilitato usando lo strumento sulla superficie disegnerà il rettangolo."
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
-msgstr ""
+msgstr "Modifica Forma 3D"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "Riquadro"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
-msgstr ""
+msgstr "Sfera"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "Capsula"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
-msgstr ""
+msgstr "Cilindro"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
-msgstr ""
+msgstr "Prisma"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
-msgstr ""
+msgstr "Toro"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "Piano"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
-msgstr ""
+msgstr "Luce direzionale"
 
 #. Used in 3D layers. A type of light.
 msgid "Spotlight"
-msgstr ""
+msgstr "Riflettore"
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
-msgstr ""
+msgstr "Punto luce"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
-msgstr ""
+msgstr "Modello personalizzato"
 
 msgid "Selected object:"
-msgstr ""
+msgstr "Oggetto selezionato:"
 
 msgid "Add new object"
-msgstr ""
+msgstr "Aggiungi nuovo oggetto"
 
 msgid "Remove object"
-msgstr ""
+msgstr "Rimuovi oggetto"
 
 msgid "Camera"
-msgstr ""
+msgstr "Camera"
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
-msgstr ""
+msgstr "Proiezione:"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
-msgstr ""
+msgstr "Prospettiva"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Orthogonal"
-msgstr ""
+msgstr "Ortogonale"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
-msgstr ""
+msgstr "Frustum"
 
 msgid "Rotation:"
-msgstr ""
+msgstr "Rotazione:"
 
 msgid "Scale:"
-msgstr ""
+msgstr "Scala:"
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
-msgstr ""
+msgstr "Ambiente"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
-msgstr ""
+msgstr "Colore ambiente:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color energy:"
-msgstr ""
+msgstr "Energia del colore ambiente:"
 
 msgid "Visible:"
-msgstr ""
+msgstr "Visibile:"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr ""
+msgstr "Trasforma"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
-msgstr ""
+msgstr "Mesh"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
-msgstr ""
+msgstr "Da sinistra a destra:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "Raggio:"
 
 msgid "Height:"
 msgstr "Altezza:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
-msgstr ""
+msgstr "Segmenti radiali:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
 msgid "Rings:"
-msgstr ""
+msgstr "Anelli:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
-msgstr ""
+msgstr "È emisfero:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
-msgstr ""
+msgstr "Raggio superiore:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Bottom radius:"
-msgstr ""
+msgstr "Raggio inferiore:"
 
 msgid "Text:"
-msgstr ""
+msgstr "Testo:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
-msgstr ""
+msgstr "Dimensione pixel:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
-msgstr ""
+msgstr "Passaggio curva:"
 
 msgid "Horizontal alignment:"
-msgstr ""
+msgstr "Allineamento orizzontale:"
 
 msgid "Left"
-msgstr ""
+msgstr "Sinistra"
 
 msgid "Right"
-msgstr ""
+msgstr "Destra"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
-msgstr ""
+msgstr "Energia:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. If true, the light's effect is reversed, darkening areas and casting bright shadows.
 msgid "Negative:"
-msgstr ""
+msgstr "Negativo:"
 
 msgid "Shadow:"
-msgstr ""
+msgstr "Ombra:"
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
-msgstr ""
+msgstr "Portata:"
 
