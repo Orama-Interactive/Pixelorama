@@ -118,19 +118,22 @@ func _scene_property_changed() -> void:  # Called by undo/redo
 
 
 func _add_object_node(id: int) -> void:
+	if not object_properties.has(id):
+		print("Object id not found.")
+		return
 	var node3d := Cel3DObject.new()
 	node3d.id = id
 	node3d.cel = self
 	parent_node.add_child(node3d)
-	node3d.type = object_properties[id]["type"]
-	if object_properties.has(id):
-		if object_properties[id].has("id"):
-			node3d.deserialize(object_properties[id])
-		else:
-			if object_properties[id].has("transform"):
-				node3d.transform = object_properties[id]["transform"]
-			if object_properties[id].has("file_path"):
-				node3d.file_path = object_properties[id]["file_path"]
+	if object_properties[id].has("id"):
+		node3d.deserialize(object_properties[id])
+	else:
+		if object_properties[id].has("transform"):
+			node3d.transform = object_properties[id]["transform"]
+		if object_properties[id].has("file_path"):
+			node3d.file_path = object_properties[id]["file_path"]
+		if object_properties[id].has("type"):
+			node3d.type = object_properties[id]["type"]
 		object_properties[id] = node3d.serialize()
 	emit_signal("objects_changed")
 

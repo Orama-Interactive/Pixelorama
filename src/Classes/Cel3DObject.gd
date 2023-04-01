@@ -107,10 +107,10 @@ func serialize() -> Dictionary:
 
 func deserialize(dict: Dictionary) -> void:
 	id = dict["id"]
+	file_path = dict["file_path"]
 	self.type = dict["type"]
 	transform = dict["transform"]
 	visible = dict["visible"]
-	self.file_path = dict["file_path"]
 	if _is_mesh():
 		var mesh: Mesh = node3d_type.mesh
 		match type:
@@ -164,6 +164,8 @@ func _is_mesh() -> bool:
 
 
 func _set_type(value: int) -> void:
+	if type == value and is_instance_valid(node3d_type):  # No reason to set the same type twice
+		return
 	type = value
 	if is_instance_valid(node3d_type):
 		node3d_type.queue_free()
