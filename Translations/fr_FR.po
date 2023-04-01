@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-03-31 19:07\n"
+"PO-Revision-Date: 2023-04-01 19:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -254,7 +254,7 @@ msgstr "Gérer les dispositions"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Aperçu"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
@@ -2314,10 +2314,10 @@ msgid "Bottom:"
 msgstr ""
 
 msgid "Left:"
-msgstr ""
+msgstr "Gauche :"
 
 msgid "Right:"
-msgstr ""
+msgstr "Droite :"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
@@ -2334,7 +2334,7 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
-msgstr ""
+msgstr "Sphère"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
@@ -2342,11 +2342,11 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
-msgstr ""
+msgstr "Cylindre"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
-msgstr ""
+msgstr "Prisme"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
@@ -2358,11 +2358,11 @@ msgstr ""
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
-msgstr ""
+msgstr "Lumière directionnelle"
 
 #. Used in 3D layers. A type of light.
 msgid "Spotlight"
-msgstr ""
+msgstr "Projecteur"
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
@@ -2370,38 +2370,38 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
-msgstr ""
+msgstr "Modèle personnalisé"
 
 msgid "Selected object:"
-msgstr ""
+msgstr "Objet sélectionné :"
 
 msgid "Add new object"
-msgstr ""
+msgstr "Ajouter un nouvel objet"
 
 msgid "Remove object"
-msgstr ""
+msgstr "Supprimer l'objet"
 
 msgid "Camera"
-msgstr ""
+msgstr "Caméra"
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
-msgstr ""
+msgstr "Projection :"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
-msgstr ""
+msgstr "Perspective"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Orthogonal"
-msgstr ""
+msgstr "Orthogonale"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
 msgstr ""
 
 msgid "Rotation:"
-msgstr ""
+msgstr "Rotation :"
 
 msgid "Scale:"
 msgstr ""
@@ -2412,14 +2412,14 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
-msgstr ""
+msgstr "Couleur ambiante :"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color energy:"
-msgstr ""
+msgstr "Énergie de couleur ambiante :"
 
 msgid "Visible:"
-msgstr ""
+msgstr "Visible :"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
@@ -2435,7 +2435,7 @@ msgstr ""
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "Rayon :"
 
 msgid "Height:"
 msgstr "Hauteur :"
@@ -2450,18 +2450,18 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
-msgstr ""
+msgstr "Est un hémisphère :"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
-msgstr ""
+msgstr "Rayon supérieur :"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Bottom radius:"
-msgstr ""
+msgstr "Rayon inférieur :"
 
 msgid "Text:"
-msgstr ""
+msgstr "Texte :"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -2472,26 +2472,26 @@ msgid "Curve step:"
 msgstr ""
 
 msgid "Horizontal alignment:"
-msgstr ""
+msgstr "Alignement horizontal :"
 
 msgid "Left"
-msgstr ""
+msgstr "Gauche"
 
 msgid "Right"
-msgstr ""
+msgstr "Droite"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
-msgstr ""
+msgstr "Énergie :"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. If true, the light's effect is reversed, darkening areas and casting bright shadows.
 msgid "Negative:"
-msgstr ""
+msgstr "Négative :"
 
 msgid "Shadow:"
-msgstr ""
+msgstr "Ombre :"
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
-msgstr ""
+msgstr "Portée :"
 
