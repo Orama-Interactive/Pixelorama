@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-04-03 17:51\n"
+"PO-Revision-Date: 2023-04-03 18:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2495,5 +2495,5 @@ msgstr "Sombra:"
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
-msgstr ""
+msgstr "Alcance:"
 
