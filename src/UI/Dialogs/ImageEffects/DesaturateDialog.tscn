@@ -1,57 +1,27 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/DesaturateDialog.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" type="PackedScene" id=2]
 
-[node name="DesaturateDialog" type="ConfirmationDialog"]
-margin_right = 294.0
-margin_bottom = 296.0
-rect_min_size = Vector2( 172, 60.2 )
+[node name="DesaturateDialog" instance=ExtResource( 2 )]
 window_title = "Desaturation"
-resizable = true
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 286.0
-margin_bottom = 260.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
+[node name="AspectRatioContainer" parent="VBoxContainer" index="0"]
 margin_right = 278.0
-margin_bottom = 200.0
-size_flags_vertical = 3
 
-[node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
+[node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
 margin_left = 39.0
 margin_right = 239.0
-margin_bottom = 200.0
-rect_min_size = Vector2( 200, 200 )
-expand = true
-stretch_mode = 5
 
-[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 2 )]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 0.0
-margin_bottom = 0.0
-
-[node name="RGBAContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="RGBAContainer" type="HBoxContainer" parent="VBoxContainer" index="1"]
 margin_top = 204.0
 margin_right = 278.0
 margin_bottom = 224.0
 alignment = 1
 
-[node name="RButton" type="Button" parent="VBoxContainer/RGBAContainer"]
-margin_left = 91.0
-margin_right = 111.0
+[node name="RButton" type="Button" parent="VBoxContainer/RGBAContainer" index="0"]
+margin_right = 66.0
 margin_bottom = 20.0
 hint_tooltip = "Modify Red Channel"
 mouse_default_cursor_shape = 2
@@ -60,8 +30,8 @@ toggle_mode = true
 pressed = true
 text = "R"
 
-[node name="GButton" type="Button" parent="VBoxContainer/RGBAContainer"]
-margin_left = 115.0
+[node name="GButton" type="Button" parent="VBoxContainer/RGBAContainer" index="1"]
+margin_left = 70.0
 margin_right = 137.0
 margin_bottom = 20.0
 hint_tooltip = "Modify Green Channel"
@@ -71,9 +41,9 @@ toggle_mode = true
 pressed = true
 text = "G"
 
-[node name="BButton" type="Button" parent="VBoxContainer/RGBAContainer"]
+[node name="BButton" type="Button" parent="VBoxContainer/RGBAContainer" index="2"]
 margin_left = 141.0
-margin_right = 162.0
+margin_right = 207.0
 margin_bottom = 20.0
 hint_tooltip = "Modify Blue Channel"
 mouse_default_cursor_shape = 2
@@ -82,9 +52,9 @@ toggle_mode = true
 pressed = true
 text = "B"
 
-[node name="AButton" type="Button" parent="VBoxContainer/RGBAContainer"]
-margin_left = 166.0
-margin_right = 187.0
+[node name="AButton" type="Button" parent="VBoxContainer/RGBAContainer" index="3"]
+margin_left = 211.0
+margin_right = 278.0
 margin_bottom = 20.0
 hint_tooltip = "Modify Alpha Channel"
 mouse_default_cursor_shape = 2
@@ -92,28 +62,29 @@ size_flags_horizontal = 3
 toggle_mode = true
 text = "A"
 
-[node name="OptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="OptionsContainer" parent="VBoxContainer" index="2"]
 margin_top = 228.0
 margin_right = 278.0
 margin_bottom = 252.0
 
-[node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
-margin_right = 160.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-pressed = true
-text = "Only affect selection"
-
-[node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 164.0
+[node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
 margin_right = 278.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-text = "Selected cels"
-items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
-selected = 0
+
+[node name="AnimationOptions" parent="VBoxContainer" index="3"]
+visible = false
+margin_top = 256.0
+margin_right = 278.0
+margin_bottom = 290.0
+
+[node name="PanelContainer" parent="VBoxContainer/AnimationOptions" index="1"]
+margin_right = 157.0
+
+[node name="AnimateMenu" parent="VBoxContainer/AnimationOptions/PanelContainer" index="0"]
+margin_right = 88.0
+
+[node name="InitalButton" parent="VBoxContainer/AnimationOptions" index="2"]
+margin_left = 161.0
+margin_right = 278.0
 
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/RButton" to="." method="_on_RButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/GButton" to="." method="_on_GButton_toggled"]

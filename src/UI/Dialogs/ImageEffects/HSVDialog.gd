@@ -2,13 +2,10 @@ extends ImageEffect
 
 enum Animate { HUE, SATURATION, VALUE }
 var shader: Shader = preload("res://src/Shaders/HSV.shader")
-var live_preview := true
 
-onready var hue_slider: ValueSlider = $VBoxContainer/HueSlider
-onready var sat_slider: ValueSlider = $VBoxContainer/SaturationSlider
-onready var val_slider: ValueSlider = $VBoxContainer/ValueSlider
-onready var wait_apply_timer: Timer = $WaitApply
-onready var wait_time_slider: ValueSlider = $VBoxContainer/WaitTime
+onready var hue_slider := $VBoxContainer/HueSlider as ValueSlider
+onready var sat_slider := $VBoxContainer/SaturationSlider as ValueSlider
+onready var val_slider := $VBoxContainer/ValueSlider as ValueSlider
 
 
 func _ready() -> void:
@@ -24,8 +21,8 @@ func _about_to_show() -> void:
 
 func set_nodes() -> void:
 	preview = $VBoxContainer/AspectRatioContainer/Preview
-	selection_checkbox = $VBoxContainer/AffectHBoxContainer/SelectionCheckBox
-	affect_option_button = $VBoxContainer/AffectHBoxContainer/AffectOptionButton
+	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
+	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 	animate_options_container = $VBoxContainer/AnimationOptions
 	animate_menu = $"%AnimateMenu".get_popup()
 	initial_button = $"%InitalButton"
@@ -72,7 +69,6 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 
 
 func _reset() -> void:
-	wait_apply_timer.wait_time = wait_time_slider.value / 1000.0
 	hue_slider.value = 0
 	sat_slider.value = 0
 	val_slider.value = 0
@@ -80,35 +76,12 @@ func _reset() -> void:
 
 
 func _on_HueSlider_value_changed(_value: float) -> void:
-	if live_preview:
-		update_preview()
-	else:
-		wait_apply_timer.start()
-
-
-func _on_SaturationSlider_value_changed(_value: float) -> void:
-	if live_preview:
-		update_preview()
-	else:
-		wait_apply_timer.start()
-
-
-func _on_ValueSlider_value_changed(_value: float) -> void:
-	if live_preview:
-		update_preview()
-	else:
-		wait_apply_timer.start()
-
-
-func _on_WaitApply_timeout() -> void:
 	update_preview()
 
 
-func _on_WaitTime_value_changed(value: float) -> void:
-	wait_apply_timer.wait_time = value / 1000.0
+func _on_SaturationSlider_value_changed(_value: float) -> void:
+	update_preview()
 
 
-func _on_LiveCheckbox_toggled(button_pressed: bool) -> void:
-	live_preview = button_pressed
-	wait_time_slider.editable = !live_preview
-	wait_time_slider.visible = !live_preview
+func _on_ValueSlider_value_changed(_value: float) -> void:
+	update_preview()

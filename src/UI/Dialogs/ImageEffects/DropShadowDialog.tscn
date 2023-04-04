@@ -1,47 +1,27 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/DropShadowDialog.gd" type="Script" id=2]
 [ext_resource path="res://src/UI/Nodes/ValueSliderV2.tscn" type="PackedScene" id=3]
 
-[node name="DropShadowDialog" type="ConfirmationDialog"]
-margin_right = 294.0
-margin_bottom = 352.0
-rect_min_size = Vector2( 172, 60.2 )
+[node name="DropShadowDialog" instance=ExtResource( 1 )]
 window_title = "Drop Shadow"
-resizable = true
 script = ExtResource( 2 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 286.0
+[node name="VBoxContainer" parent="." index="3"]
 margin_bottom = 340.0
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_right = 279.0
-margin_bottom = 200.0
-size_flags_vertical = 3
+[node name="AspectRatioContainer" parent="VBoxContainer" index="0"]
+margin_right = 278.0
 
-[node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 39.5
-margin_right = 239.5
-margin_bottom = 200.0
-rect_min_size = Vector2( 200, 200 )
-expand = true
-stretch_mode = 5
+[node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
+margin_left = 39.0
+margin_right = 239.0
 
-[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 1 )]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 0.0
-margin_bottom = 0.0
-
-[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="ShadowOptions" type="GridContainer" parent="VBoxContainer" index="1"]
 margin_top = 204.0
-margin_right = 279.0
-margin_bottom = 308.0
+margin_right = 278.0
+margin_bottom = 280.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 2
@@ -49,16 +29,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/ShadowOptions" index="0"]
 margin_top = 19.0
-margin_right = 160.0
+margin_right = 137.0
 margin_bottom = 33.0
 size_flags_horizontal = 3
 text = "Offset:"
 
-[node name="OffsetSliders" parent="VBoxContainer/OptionsContainer" instance=ExtResource( 3 )]
-margin_left = 164.0
-margin_right = 279.0
+[node name="OffsetSliders" parent="VBoxContainer/ShadowOptions" index="1" instance=ExtResource( 3 )]
+margin_left = 141.0
+margin_right = 278.0
 value = Vector2( 5, 5 )
 min_value = Vector2( -64, -64 )
 max_value = Vector2( 64, 64 )
@@ -68,75 +48,45 @@ show_ratio = true
 suffix_x = "px"
 suffix_y = "px"
 
-[node name="ShadowColorLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="ShadowColorLabel" type="Label" parent="VBoxContainer/ShadowOptions" index="2"]
 margin_top = 59.0
-margin_right = 160.0
+margin_right = 137.0
 margin_bottom = 73.0
 size_flags_horizontal = 3
 text = "Shadow color:"
 
-[node name="ShadowColor" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 164.0
+[node name="ShadowColor" type="ColorPickerButton" parent="VBoxContainer/ShadowOptions" index="3"]
+margin_left = 141.0
 margin_top = 56.0
-margin_right = 279.0
+margin_right = 278.0
 margin_bottom = 76.0
 rect_min_size = Vector2( 64, 20 )
 size_flags_horizontal = 3
 color = Color( 0.0823529, 0.0823529, 0.0823529, 0.627451 )
 
-[node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
-margin_top = 80.0
-margin_right = 160.0
-margin_bottom = 104.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-pressed = true
-text = "Only affect selection"
+[node name="OptionsContainer" parent="VBoxContainer" index="2"]
+margin_top = 284.0
+margin_right = 278.0
+margin_bottom = 308.0
 
-[node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 164.0
-margin_top = 80.0
-margin_right = 279.0
-margin_bottom = 104.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-text = "Selected cels"
+[node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
+margin_right = 278.0
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
-selected = 0
 
-[node name="AnimationOptions" type="HBoxContainer" parent="VBoxContainer"]
+[node name="AnimationOptions" parent="VBoxContainer" index="3"]
 margin_top = 312.0
-margin_right = 279.0
+margin_right = 278.0
 margin_bottom = 346.0
 
-[node name="Label" type="Label" parent="VBoxContainer/AnimationOptions"]
-margin_top = 10.0
-margin_right = 62.0
-margin_bottom = 24.0
-text = "Animate :"
+[node name="PanelContainer" parent="VBoxContainer/AnimationOptions" index="1"]
+margin_right = 157.0
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/AnimationOptions"]
-margin_left = 66.0
-margin_right = 158.0
-margin_bottom = 34.0
-size_flags_horizontal = 3
+[node name="AnimateMenu" parent="VBoxContainer/AnimationOptions/PanelContainer" index="0"]
+margin_right = 88.0
 
-[node name="AnimateMenu" type="MenuButton" parent="VBoxContainer/AnimationOptions/PanelContainer"]
-unique_name_in_owner = true
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 85.0
-margin_bottom = 27.0
-focus_mode = 2
-text = "Properties"
-flat = false
+[node name="InitalButton" parent="VBoxContainer/AnimationOptions" index="2"]
+margin_left = 161.0
+margin_right = 278.0
 
-[node name="InitalButton" type="Button" parent="VBoxContainer/AnimationOptions"]
-unique_name_in_owner = true
-margin_left = 162.0
-margin_right = 279.0
-margin_bottom = 34.0
-text = "Set initial values"
-
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/OffsetSliders" to="." method="_on_OffsetSliders_value_changed"]
-[connection signal="color_changed" from="VBoxContainer/OptionsContainer/ShadowColor" to="." method="_on_OutlineColor_color_changed"]
+[connection signal="value_changed" from="VBoxContainer/ShadowOptions/OffsetSliders" to="." method="_on_OffsetSliders_value_changed"]
+[connection signal="color_changed" from="VBoxContainer/ShadowOptions/ShadowColor" to="." method="_on_ShadowColor_color_changed"]

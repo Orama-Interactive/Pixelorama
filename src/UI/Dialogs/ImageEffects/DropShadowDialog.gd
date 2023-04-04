@@ -5,7 +5,7 @@ var offset := Vector2(5, 5)
 var color := Color.black
 var shader: Shader = load("res://src/Shaders/DropShadow.tres")
 
-onready var shadow_color := $VBoxContainer/OptionsContainer/ShadowColor as ColorPickerButton
+onready var shadow_color := $VBoxContainer/ShadowOptions/ShadowColor as ColorPickerButton
 
 
 func _ready() -> void:
@@ -64,6 +64,6 @@ func _on_OffsetSliders_value_changed(value: Vector2) -> void:
 	update_preview()
 
 
-func _on_OutlineColor_color_changed(value: Color) -> void:
+func _on_ShadowColor_color_changed(value: Color) -> void:
 	color = value
 	update_preview()

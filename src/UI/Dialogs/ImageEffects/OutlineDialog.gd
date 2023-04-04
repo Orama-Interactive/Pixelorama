@@ -1,13 +1,13 @@
 extends ImageEffect
 
 enum Animate { THICKNESS }
-var color := Color.red
+var color := Color.black
 var thickness := 1
 var pattern := 0
 var inside_image := false
 var shader: Shader
 
-onready var outline_color = $VBoxContainer/OptionsContainer/OutlineColor
+onready var outline_color := $VBoxContainer/OutlineOptions/OutlineColor as ColorPickerButton
 
 
 func _ready() -> void:
