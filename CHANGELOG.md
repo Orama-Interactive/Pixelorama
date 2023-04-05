@@ -12,18 +12,24 @@ This update has been brought to you by the contributions of:
 - Layer groups in the timeline, for better organization. [#698](https://github.com/Orama-Interactive/Pixelorama/pull/698)
 - Support for reference images has been implemented. [#771](https://github.com/Orama-Interactive/Pixelorama/pull/771)
 - Specific layer exporting is now possible as part of the export dialog overhaul. [#781](https://github.com/Orama-Interactive/Pixelorama/pull/781)
+- 3D layers have now been implemented, which allows for non-destructive usage of 3D geometry inside Pixelorama. The 3D objects get automatically rasterized (pixelated) depending on the size of the canvas. [#840](https://github.com/Orama-Interactive/Pixelorama/pull/840)
 - A perspective editor has been added, that aims to help artists use perspective in their work. [#806](https://github.com/Orama-Interactive/Pixelorama/pull/806)
 - Dynamics are finally here! You can now use tablet pen pressure and/or mouse/pen velocity to affect the size and the alpha of the brush. More options will come in the future!
+- A new crop tool has been added. It can resize the canvas without resizing the content.[#830](https://github.com/Orama-Interactive/Pixelorama/pull/830)
 - The pencil tool now has a spacing option. [#813](https://github.com/Orama-Interactive/Pixelorama/pull/813)
 - Exporting and loading APNG files is now possible. [#772](https://github.com/Orama-Interactive/Pixelorama/pull/772) and [#797](https://github.com/Orama-Interactive/Pixelorama/pull/797)
 - Implemented [cleanEdge](http://torcado.com/cleanEdge/) as a new rotation and scaling algorithm. [#794](https://github.com/Orama-Interactive/Pixelorama/pull/794)
 - [GLES 3 only] Implemented [OmniScale](https://github.com/nobuyukinyuu/godot-omniscale) as a new rotation and scaling algorithm. [08e00d3](https://github.com/Orama-Interactive/Pixelorama/commit/08e00d3c31dd134be037b672b7ac1d192400ac4d)
 - A new select by drawing tool has been added. [#792](https://github.com/Orama-Interactive/Pixelorama/pull/792)
+- Some image effect properties can now be animated for multiple cels. [#836](https://github.com/Orama-Interactive/Pixelorama/pull/836)
 - It is now possible to change the selection creation behavior (replace, add, subtract or intersect) from the tool settings. [#798](https://github.com/Orama-Interactive/Pixelorama/pull/798)
 - Your art progress inside Pixelorama can now be recorded and saved as screenshots, for you to combine into a video. Useful for art timelapses. [#823](https://github.com/Orama-Interactive/Pixelorama/pull/823)
 - Control + Mouse wheel can now be used to adjust the brush size and shape thickness. Unfortunately, this shortcut cannot be edited at the moment, but it will be in the future (most likely once we port to Godot 4.x). [#776](https://github.com/Orama-Interactive/Pixelorama/discussions/776)
 - Snapping to the grid and guides has been implemented.
 - Changing the renderer from GLES2 to GLES3 and vice versa is now possible in the preferences.
+- A way to easily preview an animation that has frames drawn in the form of a spritesheet/atlas has been added in the canvas preview. [#835](https://github.com/Orama-Interactive/Pixelorama/pull/835)
+- The average color between the two selected colors is now shown in the color pickers, and can be easily picked. [#822](https://github.com/Orama-Interactive/Pixelorama/pull/822)
+- A list of the recently used project sizes now appears on the new project dialog. [#819](https://github.com/Orama-Interactive/Pixelorama/pull/819)
 - [Windows only] Changing the tablet driver is now possible in the preferences.
 
 ### Changed
@@ -37,9 +43,11 @@ This update has been brought to you by the contributions of:
 - A single popup appears when exporting multiple files that already exist, instead of showing one popup for each file to overwrite. [#585](https://github.com/Orama-Interactive/Pixelorama/discussions/585)
 - Most dialogs received some UI changes, such as making their elements expand vertically, and making their Cancel and OK buttons a little bigger.
 - The look of the brushes popup has been improved. [#815](https://github.com/Orama-Interactive/Pixelorama/pull/815)
+- The cel buttons on the timeline are now dimmed if the cel is empty/transparent.
 - The manage layout dialog now has a preview for the selected layout. [#787](https://github.com/Orama-Interactive/Pixelorama/pull/787)
 - Layer adding behavior has been changed. [#767](https://github.com/Orama-Interactive/Pixelorama/pull/767)
 - The canvas rulers can now display floating point numbers. [#800](https://github.com/Orama-Interactive/Pixelorama/pull/800)
+- The tile mask, used in tile mode, is now being set automatically. [#833](https://github.com/Orama-Interactive/Pixelorama/pull/833)
 
 ### Fixed
 - The timeline has been refactored behind the scenes, and its performance has been massively improved for projects with a lot of frames and layers. [#698](https://github.com/Orama-Interactive/Pixelorama/pull/698)
@@ -47,11 +55,14 @@ This update has been brought to you by the contributions of:
 - [macOS] Fixed issue where tool shortcuts changed tools. [#784](https://github.com/Orama-Interactive/Pixelorama/pull/784)
 - The movement preview now works as intended for all selected cels [#811](https://github.com/Orama-Interactive/Pixelorama/pull/811) for the move tool, [5cb0edd](https://github.com/Orama-Interactive/Pixelorama/commit/5cb0eddae5983b29a378a34ad4919116f911a403) for the selected content.
 - The UI scale no longer is 0.75 by default. This fixes blurry fonts on small monitors.
+- Opening the rotate image dialog twice on large canvases no longer results in a crash. [ad61ddc](https://github.com/Orama-Interactive/Pixelorama/commit/ad61ddc2c0c251e8e20da3369c072e48380c0cd3)
 - Pasted content should no longer get placed in sub-pixel positions. [403539b](https://github.com/Orama-Interactive/Pixelorama/commit/403539bb4794d81289214c4eda5226e70b9af19a)
 - The notifications always appear on the bottom left of the main canvas and are no longer dependent on the position of the timeline.
 - The recent files option in the File menu is now disabled in the Web version, instead of save.
+- Drawing with image brushes no longer results in pixels outside the selection, if it exists. [30d279c](https://github.com/Orama-Interactive/Pixelorama/commit/30d279c4948b5712dac87bf6575932ca30d1c4dc)
 - Using the selection gizmos when an overlay window is directly on top of them is no longer possible.
 - Fix bug where the tool changes from a draw tool to a non-draw tool, while having an image brush selected. The bug was that the indicator was appearing as a white square, until the user moved their mouse.
+- Fix bug where clicking on previous/next frame when only one frame exists makes the cel unselected. [6b58768](https://github.com/Orama-Interactive/Pixelorama/commit/6b587688f12dcc027c2f43832f179e4dca73a702)
 - The right tool gets activated only if the right mouse button (or whatever input action is assigned) is first pressed. [cc332c6](https://github.com/Orama-Interactive/Pixelorama/commit/cc332c6cbf3f9265a95a4bdc4998c9ca6c4f750a)
 - No more errors in the debugger or the terminal appear when attempting to undo/redo while drawing. [af2b1fe](https://github.com/Orama-Interactive/Pixelorama/commit/af2b1feb1f63144ebce00520ea2f8ee832dc49bd)
 
