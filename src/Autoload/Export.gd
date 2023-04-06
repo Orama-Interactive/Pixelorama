@@ -218,11 +218,13 @@ func export_processed_images(
 					"image/png"
 				)
 			else:
-				var err = processed_images[i].save_png(export_paths[i])
+				var err: int = processed_images[i].save_png(export_paths[i])
 				if err != OK:
 					Global.error_dialog.set_text(tr("File failed to save. Error code %s") % err)
 					Global.error_dialog.popup_centered()
 					Global.dialog_open(true)
+				else:
+					Global.notification_label("File(s) exported")
 
 	# Store settings for quick export and when the dialog is opened again
 	var file_name_with_ext := project.file_name + file_format_string(project.file_format)
@@ -235,10 +237,6 @@ func export_processed_images(
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.EXPORT, tr("Export") + " %s" % file_name_with_ext
 		)
-
-	# Only show when not exporting gif - gif export finishes in thread
-	if not is_single_file_format(project):
-		Global.notification_label("File(s) exported")
 	return true
 
 
