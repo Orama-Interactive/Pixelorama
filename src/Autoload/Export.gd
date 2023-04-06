@@ -210,6 +210,7 @@ func export_processed_images(
 				gif_export_thread.wait_to_finish()
 			gif_export_thread.start(self, "export_animated", details)
 	else:
+		var succeeded := true
 		for i in range(processed_images.size()):
 			if OS.get_name() == "HTML5":
 				JavaScript.download_buffer(
@@ -223,8 +224,9 @@ func export_processed_images(
 					Global.error_dialog.set_text(tr("File failed to save. Error code %s") % err)
 					Global.error_dialog.popup_centered()
 					Global.dialog_open(true)
-				else:
-					Global.notification_label("File(s) exported")
+					succeeded = false
+		if succeeded:
+			Global.notification_label("File(s) exported")
 
 	# Store settings for quick export and when the dialog is opened again
 	var file_name_with_ext := project.file_name + file_format_string(project.file_format)
