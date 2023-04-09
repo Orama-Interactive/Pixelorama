@@ -18,6 +18,7 @@ onready var crop_rect: CropRect = $CropRect
 onready var indicators = $Indicators
 onready var previews = $Previews
 onready var mouse_guide_container = $MouseGuideContainer
+onready var gizmos_3d: Node2D = $Gizmos3D
 
 
 func _ready() -> void:

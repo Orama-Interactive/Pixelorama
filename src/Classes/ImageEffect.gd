@@ -16,7 +16,7 @@ var affect_option_button: OptionButton
 var animate_options_container: Node
 var animate_menu: PopupMenu
 var initial_button: Button
-var animate_bool = []
+var animate_bool := []
 var initial_values: PoolRealArray = []
 var selected_idx: int = 0  # the current selected cel to apply animation to
 var confirmed := false
@@ -69,7 +69,9 @@ func _confirmed() -> void:
 		for cel_index in project.selected_cels:
 			if !project.layers[cel_index[1]].can_layer_get_drawn():
 				continue
-			var cel: PixelCel = project.frames[cel_index[0]].cels[cel_index[1]]
+			var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+			if not cel is PixelCel:
+				continue
 			var cel_image: Image = cel.image
 			commit_action(cel_image)
 		_commit_undo("Draw", undo_data, project)
@@ -78,6 +80,9 @@ func _confirmed() -> void:
 		var undo_data := _get_undo_data(project)
 		var i := 0
 		for cel in project.frames[project.current_frame].cels:
+			if not cel is PixelCel:
+				i += 1
+				continue
 			if project.layers[i].can_layer_get_drawn():
 				commit_action(cel.image)
 			i += 1
@@ -88,6 +93,9 @@ func _confirmed() -> void:
 		for frame in project.frames:
 			var i := 0
 			for cel in frame.cels:
+				if not cel is PixelCel:
+					i += 1
+					continue
 				if project.layers[i].can_layer_get_drawn():
 					commit_action(cel.image)
 				i += 1
@@ -99,6 +107,9 @@ func _confirmed() -> void:
 			for frame in _project.frames:
 				var i := 0
 				for cel in frame.cels:
+					if not cel is PixelCel:
+						i += 1
+						continue
 					if _project.layers[i].can_layer_get_drawn():
 						commit_action(cel.image, _project)
 					i += 1
@@ -125,12 +136,11 @@ func set_initial_values() -> void:
 	pass
 
 
-func get_animated_value(project: Project, final: float, property_idx: int):
+func get_animated_value(project: Project, final: float, property_idx: int) -> float:
 	if animate_bool[property_idx] == true and confirmed:
-		var first: Vector2 = Vector2(initial_values[property_idx], 0)
-		var second: Vector2 = Vector2(final, 0)
-		var interpolation = float(selected_idx) / project.selected_cels.size()
-		return first.linear_interpolate(second, interpolation).x
+		var first := initial_values[property_idx]
+		var interpolation := float(selected_idx) / project.selected_cels.size()
+		return lerp(first, final, interpolation)
 	else:
 		return final
 
@@ -142,7 +152,6 @@ func _update_animate_flags(id: int) -> void:
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
 	var redo_data := _get_undo_data(project)
-
 	project.undos += 1
 	project.undo_redo.create_action(action)
 	for image in redo_data:

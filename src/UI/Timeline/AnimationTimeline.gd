@@ -17,6 +17,7 @@ var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
 onready var old_scroll: int = 0  # The previous scroll state of $ScrollContainer
 onready var tag_spacer = find_node("TagSpacer")
 onready var start_spacer = find_node("StartSpacer")
+onready var add_layer_list: MenuButton = $"%AddLayerList"
 
 onready var timeline_scroll: ScrollContainer = find_node("TimelineScroll")
 onready var frame_scroll_container: Control = find_node("FrameScrollContainer")
@@ -30,6 +31,7 @@ onready var drag_highlight: ColorRect = find_node("DragHighlight")
 
 
 func _ready() -> void:
+	add_layer_list.get_popup().connect("id_pressed", self, "add_layer")
 	frame_scroll_bar.connect("value_changed", self, "_frame_scroll_changed")
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
@@ -273,7 +275,13 @@ func copy_frames(indices := []) -> void:
 		new_frame.duration = src_frame.duration
 		for l in range(project.layers.size()):
 			var src_cel: BaseCel = project.frames[f].cels[l]  # Cel we're copying from, the source
-			var new_cel: BaseCel = src_cel.get_script().new()
+			var new_cel: BaseCel
+			if src_cel is Cel3D:
+				new_cel = src_cel.get_script().new(
+					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
+				)
+			else:
+				new_cel = src_cel.get_script().new()
 			if project.layers[l].new_cels_linked:
 				if src_cel.link_set == null:
 					src_cel.link_set = {}
@@ -497,7 +505,6 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 func _on_NextFrame_pressed() -> void:
 	var project := Global.current_project
-	Global.canvas.selection.transform_content_confirm()
 	if project.current_frame < project.frames.size() - 1:
 		project.selected_cels.clear()
 		project.change_cel(project.current_frame + 1, -1)
@@ -505,20 +512,17 @@ func _on_NextFrame_pressed() -> void:
 
 func _on_PreviousFrame_pressed() -> void:
 	var project := Global.current_project
-	Global.canvas.selection.transform_content_confirm()
 	if project.current_frame > 0:
 		project.selected_cels.clear()
 		project.change_cel(project.current_frame - 1, -1)
 
 
 func _on_LastFrame_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.selected_cels.clear()
 	Global.current_project.change_cel(Global.current_project.frames.size() - 1, -1)
 
 
 func _on_FirstFrame_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.selected_cels.clear()
 	Global.current_project.change_cel(0, -1)
 
@@ -565,6 +569,8 @@ func add_layer(type: int) -> void:
 			l = PixelLayer.new(project)
 		Global.LayerTypes.GROUP:
 			l = GroupLayer.new(project)
+		Global.LayerTypes.THREE_D:
+			l = Layer3D.new(project)
 
 	var cels := []
 	for f in project.frames:
@@ -618,7 +624,13 @@ func _on_CloneLayer_pressed() -> void:
 
 		for frame in project.frames:
 			var src_cel: BaseCel = frame.cels[src_layer.index]
-			var new_cel: BaseCel = src_cel.get_script().new()
+			var new_cel: BaseCel
+			if src_cel is Cel3D:
+				new_cel = src_cel.get_script().new(
+					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
+				)
+			else:
+				new_cel = src_cel.get_script().new()
 
 			if src_cel.link_set == null:
 				new_cel.set_content(src_cel.copy_content())
@@ -745,7 +757,7 @@ func change_layer_order(up: bool) -> void:
 
 func _on_MergeDownLayer_pressed() -> void:
 	var project: Project = Global.current_project
-	var top_layer: PixelLayer = project.layers[project.current_layer]
+	var top_layer: BaseLayer = project.layers[project.current_layer]
 	var bottom_layer: PixelLayer = project.layers[project.current_layer - 1]
 	var top_cels := []
 
@@ -756,7 +768,7 @@ func _on_MergeDownLayer_pressed() -> void:
 		top_cels.append(frame.cels[top_layer.index])  # Store for undo purposes
 
 		var top_image := Image.new()
-		top_image.copy_from(frame.cels[top_layer.index].image)
+		top_image.copy_from(frame.cels[top_layer.index].get_image())
 
 		top_image.lock()
 		if frame.cels[top_layer.index].opacity < 1:  # If we have layer transparency

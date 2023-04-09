@@ -274,10 +274,11 @@ class ToolAPI:
 		shortcut: String,
 		scene: PackedScene,
 		extra_hint := "",
-		extra_shortucts := []
+		extra_shortucts := [],
+		layer_types: PoolIntArray = []
 	) -> void:
 		var tool_class := Tools.Tool.new(
-			tool_name, display_name, shortcut, scene, extra_hint, extra_shortucts
+			tool_name, display_name, shortcut, scene, layer_types, extra_hint, extra_shortucts
 		)
 		Tools.tools[tool_name] = tool_class
 		Tools.add_tool_button(tool_class)

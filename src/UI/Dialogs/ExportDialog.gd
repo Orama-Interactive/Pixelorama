@@ -16,7 +16,7 @@ onready var spritesheet_lines_count_label: Label = $"%LinesCountLabel"
 
 onready var frames_option_button: OptionButton = $"%Frames"
 onready var layers_option_button: OptionButton = $"%Layers"
-onready var options_resize: SpinBox = $"%Resize"
+onready var options_resize: ValueSlider = $"%Resize"
 onready var dimension_label: Label = $"%DimensionLabel"
 
 onready var path_line_edit: LineEdit = $"%PathLineEdit"
@@ -202,6 +202,8 @@ func create_layer_list() -> void:
 		var layer_name := tr("Pixel layer:")
 		if layer is GroupLayer:
 			layer_name = tr("Group layer:")
+		elif layer is Layer3D:
+			layer_name = tr("3D layer:")
 		layer_name += " %s" % layer.get_layer_path()
 		layers_option_button.add_item(layer_name)
 

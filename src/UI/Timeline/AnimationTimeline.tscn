@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/graphics/layers/clone.png" type="Texture" id=7]
 [ext_resource path="res://assets/graphics/timeline/move_arrow.png" type="Texture" id=8]
 [ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/graphics/layers/group_new.png" type="Texture" id=10]
+[ext_resource path="res://assets/graphics/misc/value_arrow.svg" type="Texture" id=10]
 [ext_resource path="res://src/UI/Timeline/FrameScrollContainer.gd" type="Script" id=11]
 [ext_resource path="res://assets/graphics/timeline/new_frame.png" type="Texture" id=19]
 [ext_resource path="res://assets/graphics/timeline/remove_frame.png" type="Texture" id=20]
@@ -99,67 +99,66 @@ margin_bottom = 74.0
 size_flags_horizontal = 3
 
 [node name="LayerTools" type="PanelContainer" parent="TimelineContainer/TimelineButtons"]
-margin_right = 222.0
+margin_right = 221.0
 margin_bottom = 74.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 215.0
+margin_right = 214.0
 margin_bottom = 67.0
 
 [node name="LayerButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer"]
-margin_right = 208.0
+margin_right = 207.0
 margin_bottom = 22.0
 size_flags_vertical = 0
 custom_constants/separation = 9
 
 [node name="AddLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
-margin_right = 22.0
+margin_right = 44.0
 margin_bottom = 22.0
-rect_min_size = Vector2( 22, 22 )
+rect_min_size = Vector2( 44, 22 )
 hint_tooltip = "Create a new layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddLayer"]
-anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -11.0
 margin_top = -11.0
-margin_right = 11.0
+margin_right = 22.0
 margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 2 )
 
-[node name="AddGroup" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 31.0
-margin_right = 53.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 22, 22 )
-hint_tooltip = "Create a new group layer"
-focus_mode = 0
+[node name="AddLayerList" type="MenuButton" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddLayer"]
+unique_name_in_owner = true
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -22.0
+margin_top = -10.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 22, 0 )
 mouse_default_cursor_shape = 2
+items = [ "Add Pixel Layer", null, 0, false, false, 0, 0, null, "", false, "Add Group Layer", null, 0, false, false, 1, 0, null, "", false, "Add 3D Layer", null, 0, false, false, 2, 0, null, "", false ]
 
-[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddGroup"]
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddLayer/AddLayerList"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -11.0
-margin_top = -11.0
-margin_right = 11.0
-margin_bottom = 11.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
+margin_left = -6.0
+margin_top = -6.0
+margin_right = 6.0
+margin_bottom = 6.0
 texture = ExtResource( 10 )
 
 [node name="RemoveLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 62.0
-margin_right = 84.0
+margin_left = 53.0
+margin_right = 75.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Remove current layer"
@@ -184,8 +183,8 @@ __meta__ = {
 }
 
 [node name="MoveUpLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 93.0
-margin_right = 115.0
+margin_left = 84.0
+margin_right = 106.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Move up the current layer"
@@ -210,8 +209,8 @@ __meta__ = {
 }
 
 [node name="MoveDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 124.0
-margin_right = 146.0
+margin_left = 115.0
+margin_right = 137.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Move down the current layer"
@@ -236,8 +235,8 @@ __meta__ = {
 }
 
 [node name="CloneLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 155.0
-margin_right = 177.0
+margin_left = 146.0
+margin_right = 168.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Clone current layer"
@@ -261,8 +260,8 @@ __meta__ = {
 }
 
 [node name="MergeDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
-margin_left = 186.0
-margin_right = 208.0
+margin_left = 177.0
+margin_right = 199.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Merge current layer with the one below"
@@ -288,7 +287,7 @@ __meta__ = {
 
 [node name="BlendingHBox" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer"]
 margin_top = 36.0
-margin_right = 208.0
+margin_right = 207.0
 margin_bottom = 60.0
 size_flags_vertical = 10
 
@@ -301,21 +300,21 @@ value = 100.0
 prefix = "Opacity:"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TimelineContainer/TimelineButtons"]
-margin_left = 226.0
+margin_left = 225.0
 margin_right = 902.0
 margin_bottom = 74.0
 size_flags_horizontal = 3
 
 [node name="AnimationToolsScrollContainer" type="ScrollContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer"]
-margin_right = 676.0
+margin_right = 677.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 theme = SubResource( 20 )
 scroll_vertical_enabled = false
 
 [node name="AnimationTools" type="PanelContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer"]
-margin_left = 156.0
-margin_right = 676.0
+margin_left = 157.0
+margin_right = 677.0
 margin_bottom = 38.0
 size_flags_horizontal = 10
 
@@ -760,7 +759,7 @@ suffix = "FPS"
 
 [node name="TagScroll" type="ScrollContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer"]
 margin_top = 42.0
-margin_right = 676.0
+margin_right = 677.0
 margin_bottom = 74.0
 rect_min_size = Vector2( 0, 32 )
 mouse_filter = 2
@@ -769,7 +768,7 @@ theme = SubResource( 20 )
 scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/TagScroll"]
-margin_right = 676.0
+margin_right = 677.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -779,7 +778,7 @@ custom_constants/separation = 0
 margin_bottom = 32.0
 
 [node name="TagContainer" type="Control" parent="TimelineContainer/TimelineButtons/VBoxContainer/TagScroll/HBoxContainer"]
-margin_right = 676.0
+margin_right = 677.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 
@@ -980,7 +979,6 @@ mouse_filter = 2
 color = Color( 0, 0.741176, 1, 0.501961 )
 
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [ 0 ]]
-[connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddGroup" to="." method="add_layer" binds= [ 1 ]]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ true ]]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MoveDownLayer" to="." method="change_layer_order" binds= [ false ]]

@@ -266,7 +266,7 @@ func _reset_display(theme_changed := false) -> void:
 			tint_progress = Color.transparent
 	_line_edit.text = str(tr(prefix), " ", value, " ", tr(suffix)).strip_edges()
 	var line_edit_color := _line_edit.get_color("font_color")
-	var line_edit_disabled_col: Color = get_color("read_only", "LineEdit")
+	var line_edit_disabled_col := get_color("read_only", "LineEdit")
 	if editable:
 		_line_edit.add_color_override("font_color_uneditable", line_edit_color)
 	else:

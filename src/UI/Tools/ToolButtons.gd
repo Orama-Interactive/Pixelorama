@@ -11,6 +11,8 @@ func _input(event: InputEvent) -> void:
 			return
 
 	for tool_name in Tools.tools:  # Handle tool shortcuts
+		if not get_node(tool_name).visible:
+			continue
 		var t: Tools.Tool = Tools.tools[tool_name]
 		if InputMap.has_action("right_" + t.shortcut + "_tool"):
 			if (

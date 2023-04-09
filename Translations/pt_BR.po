@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-02-02 01:11\n"
+"PO-Revision-Date: 2023-03-31 22:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -252,6 +252,18 @@ msgstr "Painéis Móveis"
 msgid "Manage Layouts"
 msgstr "Gerenciar Layouts"
 
+#. Noun, a preview of something
+msgid "Preview"
+msgstr ""
+
+#. Found in the manage layouts dialog
+msgid "This is a preview, changing this won't change the layout"
+msgstr ""
+
+#. Found in the manage layouts dialog
+msgid "Double click to set as new startup layout"
+msgstr ""
+
 msgid "Add"
 msgstr "Adicionar"
 
@@ -483,6 +495,10 @@ msgstr "Camada de pixel:"
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
 msgstr "Camada de grupo:"
+
+#. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
+msgid "3D layer:"
+msgstr "Camada 3D:"
 
 msgid "Direction:"
 msgstr "Direção:"
@@ -1407,6 +1423,42 @@ msgstr "Desinstalar"
 msgid "Open Folder"
 msgstr "Abrir Pasta"
 
+#. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
+msgid "Dynamics"
+msgstr "Dinâmicas"
+
+#. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
+msgid "Pressure"
+msgstr "Pressão"
+
+#. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
+msgid "Velocity"
+msgstr "Velocidade"
+
+#. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
+msgid "Alpha"
+msgstr "Alpha"
+
+#. Refers to the size of a value, for example the size of a brush.
+msgid "Size"
+msgstr "Tamanho"
+
+#. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
+msgid "Value limits"
+msgstr "Limites de valor"
+
+#. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
+msgid "Thresholds"
+msgstr "Limiares"
+
+#. Noun, the start of something.
+msgid "Start"
+msgstr "Iniciar"
+
+#. Noun, the end of something.
+msgid "End"
+msgstr "Fim"
+
 msgid "Brush:"
 msgstr "Pincel:"
 
@@ -1428,8 +1480,8 @@ msgstr "Pincel customizado"
 msgid "Brush size:"
 msgstr "Tamanho do pincel:"
 
-msgid "Overwrite Color"
-msgstr "Substituir Cor"
+msgid "Overwrite color"
+msgstr ""
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "Substitui a cor ao invés de misturá-la. Esta opção é relevante apenas com cores que não são totalmente opacas"
@@ -1439,6 +1491,18 @@ msgstr "Pixel Perfeito"
 
 msgid "Fill inside"
 msgstr "Preenchimento interno"
+
+#. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
+msgid "Spacing"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
+msgid "Gap X:"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
+msgid "Gap Y:"
+msgstr ""
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
@@ -1531,6 +1595,22 @@ msgstr "Ajustar à moldura"
 
 msgid "100% Zoom"
 msgstr "Zoom 100%"
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Replace selection"
+msgstr "Substituir seleção"
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Add to selection"
+msgstr "Adicionar à seleção"
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Subtract from selection"
+msgstr "Subtrair da seleção"
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Intersection of selections"
+msgstr "Interseção de seleções"
 
 msgid "Mirroring"
 msgstr "Espelhamento"
@@ -1698,11 +1778,21 @@ msgstr "Grupo"
 msgid "Layers"
 msgstr "Camadas"
 
+#. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
 msgstr "Criar nova camada"
 
-msgid "Create a new group layer"
-msgstr "Criar um novo grupo de camada"
+#. One of the options of the create new layer button.
+msgid "Add Pixel Layer"
+msgstr "Adicionar Camada de Pixel"
+
+#. One of the options of the create new layer button.
+msgid "Add Group Layer"
+msgstr "Adicionar Camada de Grupo"
+
+#. One of the options of the create new layer button.
+msgid "Add 3D Layer"
+msgstr "Adicionar Camada 3D"
 
 msgid "Remove current layer"
 msgstr "Remover camada atual"
@@ -2195,4 +2285,215 @@ msgstr "Opções da Ferramenta Direita"
 
 msgid "Reference Images"
 msgstr "Imagens de Referência"
+
+msgid "Crop"
+msgstr "Cortar"
+
+msgid "Resize the canvas"
+msgstr "Redimensionar tela"
+
+msgid "Margins"
+msgstr "Margens"
+
+msgid "Position + Size"
+msgstr "Posição + Tamanho"
+
+msgid "Locked Aspect Ratio"
+msgstr "Proporção Bloqueada"
+
+msgid "Margins:"
+msgstr "Margens:"
+
+msgid "Aspect Ratio:"
+msgstr "Proporção:"
+
+msgid "Top:"
+msgstr "Topo:"
+
+msgid "Bottom:"
+msgstr "Base:"
+
+msgid "Left:"
+msgstr "Esquerda:"
+
+msgid "Right:"
+msgstr "Direita:"
+
+msgid "Locked size\n\n"
+"When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
+"When disabled using the tool on the canvas will draw the rectangle."
+msgstr "Tamanho bloqueado\n\n"
+"Quando habilitado usando a ferramenta na tela só irá mover o retângulo de corte.\n\n"
+"Quando desativado usando a ferramenta da tela irá desenhar o retângulo."
+
+#. A tool used in 3D layers, that edits 3D objects.
+msgid "3D Shape Edit"
+msgstr "Editar Forma 3D"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Box"
+msgstr "Caixa"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Sphere"
+msgstr "Esfera"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Capsule"
+msgstr "Cápsula"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Cylinder"
+msgstr "Cilindro"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Prism"
+msgstr "Prisma"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Torus"
+msgstr "Torus"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Plane"
+msgstr "Plano"
+
+#. Used in 3D layers. A type of light.
+msgid "Directional light"
+msgstr "Luz direcional"
+
+#. Used in 3D layers. A type of light.
+msgid "Spotlight"
+msgstr "Holofote"
+
+#. Used in 3D layers. A type of light.
+msgid "Point light"
+msgstr "Ponto de luz"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Custom model"
+msgstr "Modelo personalizado"
+
+msgid "Selected object:"
+msgstr "Objeto selecionado:"
+
+msgid "Add new object"
+msgstr "Adicionar um novo objeto"
+
+msgid "Remove object"
+msgstr "Remover objeto"
+
+msgid "Camera"
+msgstr "Câmera"
+
+#. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
+msgid "Projection:"
+msgstr "Projeção:"
+
+#. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
+msgid "Perspective"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
+msgid "Orthogonal"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
+msgid "Frustum"
+msgstr ""
+
+msgid "Rotation:"
+msgstr ""
+
+msgid "Scale:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool.
+msgid "Environment"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
+msgid "Ambient color:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
+msgid "Ambient color energy:"
+msgstr ""
+
+msgid "Visible:"
+msgstr ""
+
+#. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
+msgid "Transform"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
+msgid "Mesh"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
+msgid "Left to right:"
+msgstr ""
+
+#. Radius of a circle/spherical object.
+msgid "Radius:"
+msgstr ""
+
+msgid "Height:"
+msgstr "Altura:"
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
+msgid "Radial segments:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
+msgid "Rings:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
+msgid "Is hemisphere:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
+msgid "Top radius:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
+msgid "Bottom radius:"
+msgstr ""
+
+msgid "Text:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
+msgid "Pixel size:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
+msgid "Curve step:"
+msgstr ""
+
+msgid "Horizontal alignment:"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
+msgid "Energy:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. If true, the light's effect is reversed, darkening areas and casting bright shadows.
+msgid "Negative:"
+msgstr ""
+
+msgid "Shadow:"
+msgstr ""
+
+#. Refers to the range of something, like the range of a spotlight.
+msgid "Range:"
+msgstr ""
 

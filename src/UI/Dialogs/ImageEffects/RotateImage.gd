@@ -12,8 +12,7 @@ var drag_pivot := false
 
 onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
 onready var pivot_indicator: Control = $VBoxContainer/AspectRatioContainer/Indicator
-onready var x_pivot: ValueSlider = $VBoxContainer/PivotOptions/XPivot
-onready var y_pivot: ValueSlider = $VBoxContainer/PivotOptions/YPivot
+onready var pivot_sliders := $VBoxContainer/PivotOptions/Pivot as ValueSliderV2
 onready var angle_slider: ValueSlider = $VBoxContainer/AngleSlider
 onready var smear_options: Container = $VBoxContainer/SmearOptions
 onready var init_angle_slider: ValueSlider = smear_options.get_node("InitialAngleSlider")
@@ -98,8 +97,8 @@ func _calculate_pivot() -> void:
 			if int(selection_rectangle.end.y - selection_rectangle.position.y) % 2 == 0:
 				pivot.y -= 0.5
 
-	x_pivot.value = pivot.x
-	y_pivot.value = pivot.y
+	pivot_sliders.value = pivot
+	_on_Pivot_value_changed(pivot)
 
 
 func commit_action(cel: Image, _project: Project = Global.current_project) -> void:
@@ -298,11 +297,8 @@ func _on_Centre_pressed() -> void:
 	_calculate_pivot()
 
 
-func _on_Pivot_value_changed(value: float, is_x: bool) -> void:
-	if is_x:
-		pivot.x = value
-	else:
-		pivot.y = value
+func _on_Pivot_value_changed(value: Vector2) -> void:
+	pivot = value
 	# Refresh the indicator
 	pivot_indicator.update()
 	if angle_slider.value != 0:
@@ -346,6 +342,5 @@ func _on_Indicator_gui_input(event: InputEvent) -> void:
 		else:
 			conversion_scale = ratio.y
 		var new_pos := mouse_pos * conversion_scale
-		x_pivot.value = new_pos.x
-		y_pivot.value = new_pos.y
-		pivot_indicator.update()
+		pivot_sliders.value = new_pos
+		_on_Pivot_value_changed(new_pos)

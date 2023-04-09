@@ -1,7 +1,7 @@
 extends ImageEffect
 
-onready var flip_h: CheckBox = $VBoxContainer/OptionsContainer/FlipHorizontal
-onready var flip_v: CheckBox = $VBoxContainer/OptionsContainer/FlipVertical
+onready var flip_h := $VBoxContainer/FlipOptions/FlipHorizontal as CheckBox
+onready var flip_v := $VBoxContainer/FlipOptions/FlipVertical as CheckBox
 
 
 func set_nodes() -> void:
