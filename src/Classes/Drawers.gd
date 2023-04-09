@@ -76,8 +76,8 @@ func set_pixel(image: Image, position: Vector2, color: Color, ignore_mirroring :
 		return
 
 	# Handle Mirroring
-	var mirror_x = project.x_symmetry_point - position.x
-	var mirror_y = project.y_symmetry_point - position.y
+	var mirror_x = project.x_symmetry_point - position.x - 1
+	var mirror_y = project.y_symmetry_point - position.y - 1
 
 	if horizontal_mirror and project.can_pixel_get_drawn(Vector2(mirror_x, position.y)):
 		drawers[1].set_pixel(image, Vector2(mirror_x, position.y), color, color_op)
