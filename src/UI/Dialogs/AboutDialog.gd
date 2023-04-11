@@ -172,31 +172,38 @@ const DONORS := [
 
 export(Array, String, MULTILINE) var licenses: Array
 
-onready var credits = $AboutUI/Credits
-onready var groups: Tree = $AboutUI/Credits/Groups
-onready var developer_container = $AboutUI/Credits/Developers
-onready var contributors_container = $AboutUI/Credits/Contributors
-onready var donors_container = $AboutUI/Credits/Donors
-onready var translators_container = $AboutUI/Credits/Translators
-onready var licenses_container = $AboutUI/Credits/Licenses
+onready var credits := $AboutUI/Credits as HSplitContainer
+onready var groups := $AboutUI/Credits/Groups as Tree
+onready var developer_container := $AboutUI/Credits/Developers as VBoxContainer
+onready var contributors_container := $AboutUI/Credits/Contributors as VBoxContainer
+onready var donors_container := $AboutUI/Credits/Donors as VBoxContainer
+onready var translators_container := $AboutUI/Credits/Translators as VBoxContainer
+onready var licenses_container := $AboutUI/Credits/Licenses as VBoxContainer
 
-onready var developers: Tree = $AboutUI/Credits/Developers/DeveloperTree
-onready var contributors: Tree = $AboutUI/Credits/Contributors/ContributorTree
-onready var donors: Tree = $AboutUI/Credits/Donors/DonorTree
-onready var translators: Tree = $AboutUI/Credits/Translators/TranslatorTree
-
-onready var license_text: TextEdit = $AboutUI/Credits/Licenses/LicenseText
-
-onready var slogan: Label = $AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/PixeloramaSlogan
-onready var copyright_label: Label = $AboutUI/Copyright
+onready var developers := $AboutUI/Credits/Developers/DeveloperTree as Tree
+onready var contributors := $AboutUI/Credits/Contributors/ContributorTree as Tree
+onready var donors := $AboutUI/Credits/Donors/DonorTree as Tree
+onready var translators := $AboutUI/Credits/Translators/TranslatorTree as Tree
+onready var license_tabs := $AboutUI/Credits/Licenses/LicenseTabs as Tabs
+onready var license_text := $AboutUI/Credits/Licenses/LicenseText as TextEdit
 
 
 func _ready() -> void:
 	create_donors()
 	create_contributors()
-	var license_buttons_container = $AboutUI/Credits/Licenses/LicenseButtonsContainer
-	for button in license_buttons_container.get_children():
-		button.connect("pressed", self, "_on_LicenseButton_pressed", [button.get_index()])
+	license_tabs.add_tab("Pixelorama")
+	license_tabs.add_tab("Godot")
+	license_tabs.add_tab("FreeType")
+	license_tabs.add_tab("mbed TLS")
+	license_tabs.add_tab("Keychain")
+	license_tabs.add_tab("Roboto")
+	license_tabs.add_tab("DroidSansFallback")
+	license_tabs.add_tab("Dockable Container")
+	license_tabs.add_tab("aimgio")
+	license_tabs.add_tab("godot-gdgifexporter")
+	license_tabs.add_tab("cleanEdge")
+	license_tabs.add_tab("OmniScale")
+	license_tabs.add_tab("gd-obj")
 	license_text.text = licenses[0]
 
 
@@ -263,10 +270,6 @@ func _on_Donate_pressed() -> void:
 	OS.shell_open("https://www.patreon.com/OramaInteractive")
 
 
-func _on_LicenseButton_pressed(index: int) -> void:
-	license_text.text = licenses[index]
-
-
 func create_developers() -> void:
 	var dev_root := developers.create_item()
 	developers.create_item(dev_root).set_text(
@@ -301,3 +304,7 @@ func create_translators() -> void:
 
 		var text := "  %s - %s" % [translator, language_string]
 		translators.create_item(translators_root).set_text(0, text)
+
+
+func _on_LicenseTabs_tab_changed(tab: int) -> void:
+	license_text.text = licenses[tab]
