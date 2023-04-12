@@ -42,6 +42,7 @@ func _draw() -> void:
 					and current_project.layers[i].is_visible_in_hierarchy()
 				):
 					texture_to_draw = current_cels[i].image_texture
+					draw_texture(texture_to_draw, Vector2.ZERO, modulate_color)
 		Mode.SPRITESHEET:
 			var target_frame = current_project.frames[current_project.current_frame]
 			var frame_image = Image.new()
@@ -60,12 +61,12 @@ func _draw() -> void:
 			if frame >= end_sprite_sheet_frame:
 				frame = start_sprite_sheet_frame - 1
 			texture_to_draw = sprite_frames[frame]
+			draw_texture(texture_to_draw, Vector2.ZERO, modulate_color)
 
 	if not texture_to_draw:
 		return
 	var rect := Rect2(Vector2.ZERO, texture_to_draw.get_data().get_size())
 	get_parent().get_node("TransparentChecker").fit_rect(rect)
-	draw_texture(texture_to_draw, Vector2.ZERO, modulate_color)
 
 
 func _on_AnimationTimer_timeout() -> void:
