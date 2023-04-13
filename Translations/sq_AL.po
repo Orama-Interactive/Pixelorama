@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Albanian\n"
 "Language: sq_AL\n"
-"PO-Revision-Date: 2023-03-31 19:07\n"
+"PO-Revision-Date: 2023-04-13 16:16\n"
 
 msgid "OK"
 msgstr "Ne rregull"
@@ -298,6 +298,26 @@ msgid "Show Rulers"
 msgstr ""
 
 msgid "Show Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
 msgstr ""
 
 msgid "Show Animation Timeline"
@@ -1885,7 +1905,7 @@ msgstr ""
 msgid "File failed to save. Error code %s"
 msgstr ""
 
-msgid "File exported"
+msgid "File(s) exported"
 msgstr ""
 
 msgid "New Empty Palette"
@@ -2224,6 +2244,12 @@ msgstr ""
 msgid "Reference Images"
 msgstr ""
 
+msgid "Perspective Editor"
+msgstr ""
+
+msgid "Recorder"
+msgstr ""
+
 msgid "Crop"
 msgstr ""
 
@@ -2292,6 +2318,9 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
+msgstr ""
+
+msgid "Text"
 msgstr ""
 
 #. Used in 3D layers. A type of light.
