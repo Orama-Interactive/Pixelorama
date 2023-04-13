@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-04-13 16:15\n"
+"PO-Revision-Date: 2023-04-13 19:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1812,7 +1812,7 @@ msgstr ""
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "Dodaj warstwę 3D"
 
 msgid "Remove current layer"
 msgstr "Usuń obecną warstwę"
@@ -2413,7 +2413,7 @@ msgid "Remove object"
 msgstr ""
 
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
@@ -2492,7 +2492,7 @@ msgid "Bottom radius:"
 msgstr ""
 
 msgid "Text:"
-msgstr ""
+msgstr "Tekst:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
