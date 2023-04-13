@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2023-04-13 16:15\n"
+"PO-Revision-Date: 2023-04-13 22:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -302,23 +302,23 @@ msgstr "Mostrar guías"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Mostrar guías de ratón"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Ajustar a"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid"
-msgstr ""
+msgstr "Ajustar a una cuadrícula rectangular"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Ajustar a las guías"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Ajustar a las guías de perspectiva"
 
 msgid "Show Animation Timeline"
 msgstr "Mostrar timeline de animación"
@@ -363,7 +363,7 @@ msgid "New frame"
 msgstr "Nuevo fotograma"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Remplazar celda"
 
 msgid "New layer"
 msgstr "Nueva capa"
@@ -518,7 +518,7 @@ msgstr "Capa de grupo:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "Capa 3D:"
 
 msgid "Direction:"
 msgstr "Dirección:"
@@ -794,7 +794,7 @@ msgstr "Si está activado, el último punto se añade al final del gradiente.\n"
 "Desactiva esto si deseas convertir el gradiente para tener interpolación constante, para que el último color sea tomado en cuenta."
 
 msgid "Shape:"
-msgstr ""
+msgstr "Forma:"
 
 msgid "Linear"
 msgstr "Lineal"
@@ -804,11 +804,11 @@ msgstr "Radial"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "Repetir:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "Repetir"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
@@ -1457,27 +1457,27 @@ msgstr "Velocidad"
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #. Refers to the size of a value, for example the size of a brush.
 msgid "Size"
-msgstr ""
+msgstr "Dimensión"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
-msgstr ""
+msgstr "Límites del valor"
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
-msgstr ""
+msgstr "Límites"
 
 #. Noun, the start of something.
 msgid "Start"
-msgstr ""
+msgstr "Inicio"
 
 #. Noun, the end of something.
 msgid "End"
-msgstr ""
+msgstr "Final"
 
 msgid "Brush:"
 msgstr "Pincel:"
@@ -1501,7 +1501,7 @@ msgid "Brush size:"
 msgstr "Tamaño del pincel:"
 
 msgid "Overwrite color"
-msgstr ""
+msgstr "Sobrescribir color"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "Sobrescribe el color en lugar de mezclarlo. Esta opción solo es relevante con colores que no son totalmente opacos"
@@ -1514,15 +1514,15 @@ msgstr "Rellenar el interior"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
-msgstr ""
+msgstr "Espaciado"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
-msgstr ""
+msgstr "Espacio X:"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
-msgstr ""
+msgstr "Espacio Y:"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
@@ -1546,7 +1546,7 @@ msgstr "Rellenar área:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "Área Similar"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
@@ -1554,7 +1554,7 @@ msgstr "Colores similares"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "Selección completa"
 
 msgid "Fill with:"
 msgstr "Rellenar con:"
@@ -1617,19 +1617,19 @@ msgstr "100% de zoom"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
-msgstr ""
+msgstr "Reemplazar selección"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
-msgstr ""
+msgstr "Añadir a la selección"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Subtract from selection"
-msgstr ""
+msgstr "Restar a la selección"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
-msgstr ""
+msgstr "Intersección de las selecciones"
 
 msgid "Mirroring"
 msgstr "Espejar"
@@ -1777,10 +1777,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Enlazar celdas a"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Desvincular celdas"
 
 msgid "Frame Properties"
 msgstr "Propiedades de los Fotogramas"
@@ -1792,7 +1792,7 @@ msgid "Layer"
 msgstr "Capa"
 
 msgid "Group"
-msgstr ""
+msgstr "Agrupar"
 
 msgid "Layers"
 msgstr "Capas"
@@ -1803,15 +1803,15 @@ msgstr "Crear nueva capa"
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "Agregar nueva capa"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr ""
+msgstr "Agregar capa de grupo"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "Agregar nueva capa 3D"
 
 msgid "Remove current layer"
 msgstr "Eliminar capa actual"
@@ -1845,10 +1845,11 @@ msgstr "Fotograma: %s, Capa: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Activar/desactivar el enlace automático de nuevas celdas al crear nuevos fotogramas\n\n"
+"Las celdas enlazadas comparten contenido a través de múltiples fotogramas"
 
 msgid "Expand/collapse group"
-msgstr ""
+msgstr "Expandir/contraer grupo"
 
 msgid "Palette"
 msgstr "Paleta"
@@ -1965,7 +1966,7 @@ msgid "File failed to save. Error code %s"
 msgstr "No se pudo guardar el archivo. Código de error %s"
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "Archivo(s) exportado(s)"
 
 msgid "New Empty Palette"
 msgstr "Nueva Paleta Vacía"
@@ -2182,11 +2183,11 @@ msgstr "minuto(s)"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
-msgstr ""
+msgstr "Crear un nuevo directorio para cada etiqueta de fotograma"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr ""
+msgstr "Crea múltiples archivos, pero cada archivo se almacena en un directorio diferente que corresponde a su etiqueta de fotograma"
 
 msgid "Close"
 msgstr "Cerrar"
@@ -2305,43 +2306,43 @@ msgid "Reference Images"
 msgstr "Imágenes de referencia"
 
 msgid "Perspective Editor"
-msgstr ""
+msgstr "Editor de perspectiva"
 
 msgid "Recorder"
-msgstr ""
+msgstr "Grabador"
 
 msgid "Crop"
-msgstr ""
+msgstr "Recortar"
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "Redimensionar el lienzo"
 
 msgid "Margins"
-msgstr ""
+msgstr "Márgenes"
 
 msgid "Position + Size"
-msgstr ""
+msgstr "Posición + Dimensiones"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "Bloquear proporción"
 
 msgid "Margins:"
-msgstr ""
+msgstr "Márgenes:"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "Proporción:"
 
 msgid "Top:"
-msgstr ""
+msgstr "Parte superior:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "Parte Inferior:"
 
 msgid "Left:"
-msgstr ""
+msgstr "Izquierda:"
 
 msgid "Right:"
-msgstr ""
+msgstr "Derecha:"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
@@ -2450,7 +2451,7 @@ msgstr ""
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr ""
+msgstr "Transformar"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
