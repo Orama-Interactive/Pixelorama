@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-03-31 22:18\n"
+"PO-Revision-Date: 2023-04-13 16:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -299,6 +299,26 @@ msgstr "Zeige Lineale"
 
 msgid "Show Guides"
 msgstr "Zeige Guides"
+
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr ""
 
 msgid "Show Animation Timeline"
 msgstr "Zeige Animations-Zeitleiste"
@@ -1946,8 +1966,8 @@ msgstr "Datei konnte nicht geöffnet werden. Fehlercode %s"
 msgid "File failed to save. Error code %s"
 msgstr "Datei konnte nicht gespeichert werden. Fehlercode %s"
 
-msgid "File exported"
-msgstr "Datei exportiert"
+msgid "File(s) exported"
+msgstr ""
 
 msgid "New Empty Palette"
 msgstr "Neue leere Palette"
@@ -2285,6 +2305,12 @@ msgstr "Optionen des rechten Werkzeugs"
 msgid "Reference Images"
 msgstr "Referenzbilder"
 
+msgid "Perspective Editor"
+msgstr ""
+
+msgid "Recorder"
+msgstr ""
+
 msgid "Crop"
 msgstr "Zuschneiden"
 
@@ -2356,6 +2382,9 @@ msgstr "Torus"
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
 msgstr "Ebene"
+
+msgid "Text"
+msgstr ""
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
@@ -2439,7 +2468,7 @@ msgid "Radius:"
 msgstr "Radius:"
 
 msgid "Height:"
-msgstr "Höhe:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
