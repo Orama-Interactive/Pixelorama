@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-04-13 16:15\n"
+"PO-Revision-Date: 2023-04-13 17:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1967,7 +1967,7 @@ msgid "File failed to save. Error code %s"
 msgstr "Enregistrement du fichier échoué. Code d’erreur %s"
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "Fichier(s) exporté(s)"
 
 msgid "New Empty Palette"
 msgstr "Nouvelle palette vide"
@@ -2307,7 +2307,7 @@ msgid "Reference Images"
 msgstr "Images de référence"
 
 msgid "Perspective Editor"
-msgstr ""
+msgstr "Éditeur de perspective"
 
 msgid "Recorder"
 msgstr ""
@@ -2383,7 +2383,7 @@ msgid "Plane"
 msgstr ""
 
 msgid "Text"
-msgstr ""
+msgstr "Texte"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
@@ -2467,7 +2467,7 @@ msgid "Radius:"
 msgstr "Rayon :"
 
 msgid "Height:"
-msgstr ""
+msgstr "Hauteur :"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
