@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2023-03-31 19:08\n"
+"PO-Revision-Date: 2023-04-13 16:16\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -299,6 +299,26 @@ msgstr "Montri liniilojn"
 
 msgid "Show Guides"
 msgstr "Montri direktliniojn"
+
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr ""
 
 msgid "Show Animation Timeline"
 msgstr "Montri animacian kronologion"
@@ -1887,8 +1907,8 @@ msgstr ""
 msgid "File failed to save. Error code %s"
 msgstr ""
 
-msgid "File exported"
-msgstr "Dosiero elportitas"
+msgid "File(s) exported"
+msgstr ""
 
 msgid "New Empty Palette"
 msgstr "Nova malplena paletro"
@@ -2226,6 +2246,12 @@ msgstr ""
 msgid "Reference Images"
 msgstr ""
 
+msgid "Perspective Editor"
+msgstr ""
+
+msgid "Recorder"
+msgstr ""
+
 msgid "Crop"
 msgstr ""
 
@@ -2294,6 +2320,9 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
+msgstr ""
+
+msgid "Text"
 msgstr ""
 
 #. Used in 3D layers. A type of light.
@@ -2378,7 +2407,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr "Alto:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
