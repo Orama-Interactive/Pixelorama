@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-03-31 19:08\n"
+"PO-Revision-Date: 2023-04-13 16:16\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -299,6 +299,26 @@ msgstr "Pakai Penggaris"
 
 msgid "Show Guides"
 msgstr "Tampilkan Panduan"
+
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr ""
 
 msgid "Show Animation Timeline"
 msgstr "Tampilkan Bingkai Animasi"
@@ -1947,8 +1967,8 @@ msgstr "Berkas gagal dibuka. Kode galat %s"
 msgid "File failed to save. Error code %s"
 msgstr "Berkas gagal disimpan. Kode galat %s"
 
-msgid "File exported"
-msgstr "Berkas terekspor"
+msgid "File(s) exported"
+msgstr ""
 
 msgid "New Empty Palette"
 msgstr "Palet Kosong Baru"
@@ -2287,6 +2307,12 @@ msgstr "Opsi Alat Di Kanan"
 msgid "Reference Images"
 msgstr "Gambar Rujukan"
 
+msgid "Perspective Editor"
+msgstr ""
+
+msgid "Recorder"
+msgstr ""
+
 msgid "Crop"
 msgstr ""
 
@@ -2355,6 +2381,9 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
+msgstr ""
+
+msgid "Text"
 msgstr ""
 
 #. Used in 3D layers. A type of light.
@@ -2439,7 +2468,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr "Tinggi:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
