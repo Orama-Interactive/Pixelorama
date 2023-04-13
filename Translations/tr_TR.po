@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-04-13 16:16\n"
+"PO-Revision-Date: 2023-04-13 21:57\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -302,23 +302,23 @@ msgstr "Kılavuzları Göster"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Faker Kılavuzlarını Göster"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Yapış"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid"
-msgstr ""
+msgstr "Dikdörtgen Izgaraya Yapış"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Kılavuzlara Yapış"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Perspektif Kılavuzlarına Yapış"
 
 msgid "Show Animation Timeline"
 msgstr "Animasyon Çizelgesini Göster"
@@ -1968,7 +1968,7 @@ msgid "File failed to save. Error code %s"
 msgstr "Dosya kaydedilemedi. Hata kodu %s"
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "Dosya(lar) dışa aktarıldı"
 
 msgid "New Empty Palette"
 msgstr "Yeni Boş Palet"
@@ -2308,10 +2308,10 @@ msgid "Reference Images"
 msgstr "Referans Resimler"
 
 msgid "Perspective Editor"
-msgstr ""
+msgstr "Perspektif düzenleyici"
 
 msgid "Recorder"
-msgstr ""
+msgstr "Kaydedici"
 
 msgid "Crop"
 msgstr "Kırp"
@@ -2386,7 +2386,7 @@ msgid "Plane"
 msgstr "Uçak"
 
 msgid "Text"
-msgstr ""
+msgstr "Metin"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
@@ -2470,7 +2470,7 @@ msgid "Radius:"
 msgstr "Yarıçap:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Yükseklik:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
