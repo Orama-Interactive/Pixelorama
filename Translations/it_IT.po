@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-04-13 16:15\n"
+"PO-Revision-Date: 2023-04-13 17:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -302,23 +302,23 @@ msgstr "Mostra le guide"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Mostra Guide Mouse"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Aggancia A"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid"
-msgstr ""
+msgstr "Aggancia alla griglia rettangolare"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Aggancia alle Guide"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Aggancia alle guide prospettiche"
 
 msgid "Show Animation Timeline"
 msgstr "Mostra la Timeline di animazione"
@@ -1968,7 +1968,7 @@ msgid "File failed to save. Error code %s"
 msgstr "Impossibile salvare il file. Codice errore %s"
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "File esportato/i"
 
 msgid "New Empty Palette"
 msgstr "Nuova palette vuota"
@@ -2308,10 +2308,10 @@ msgid "Reference Images"
 msgstr "Immagini Di Riferimento"
 
 msgid "Perspective Editor"
-msgstr ""
+msgstr "Editor Prospettiva"
 
 msgid "Recorder"
-msgstr ""
+msgstr "Registratore"
 
 msgid "Crop"
 msgstr "Ritaglia"
@@ -2386,7 +2386,7 @@ msgid "Plane"
 msgstr "Piano"
 
 msgid "Text"
-msgstr ""
+msgstr "Testo"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
@@ -2470,7 +2470,7 @@ msgid "Radius:"
 msgstr "Raggio:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Altezza:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
