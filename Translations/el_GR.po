@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-03-31 23:40\n"
+"PO-Revision-Date: 2023-04-13 16:15\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -299,6 +299,26 @@ msgstr "Εμφάνιση χαράκων"
 
 msgid "Show Guides"
 msgstr "Εμφάνιση οδηγών"
+
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr ""
 
 msgid "Show Animation Timeline"
 msgstr "Εμφάνιση χρονοδιαγράμματος"
@@ -1947,8 +1967,8 @@ msgstr "Απέτυχε το άνοιγμα του αρχείου. Κωδικός
 msgid "File failed to save. Error code %s"
 msgstr "Απέτυχε η αποθήκευση του αρχείου. Κωδικός σφάλματος %s"
 
-msgid "File exported"
-msgstr "Έγινε εξαγωγή αρχείου"
+msgid "File(s) exported"
+msgstr ""
 
 msgid "New Empty Palette"
 msgstr "Νέα Κενή Παλέτα"
@@ -2287,6 +2307,12 @@ msgstr "Επιλογές δεξιού εργαλείου"
 msgid "Reference Images"
 msgstr "Εικόνες αναφοράς"
 
+msgid "Perspective Editor"
+msgstr ""
+
+msgid "Recorder"
+msgstr ""
+
 msgid "Crop"
 msgstr "Περικοπή"
 
@@ -2358,6 +2384,9 @@ msgstr "Τόρος"
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
 msgstr "Επίπεδο"
+
+msgid "Text"
+msgstr ""
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
@@ -2441,7 +2470,7 @@ msgid "Radius:"
 msgstr "Ακτίνα:"
 
 msgid "Height:"
-msgstr "Ύψος:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
