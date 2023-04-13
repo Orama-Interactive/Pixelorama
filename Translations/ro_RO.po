@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-04-13 16:15\n"
+"PO-Revision-Date: 2023-04-13 19:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -302,23 +302,23 @@ msgstr "Afișare ghidaje"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Afișare ghiduri maus"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Fixare la"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid"
-msgstr ""
+msgstr "Fixare la grilă dreptunghiulară"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Fixare la ghiduri"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Fixare la ghiduri de perspectivă"
 
 msgid "Show Animation Timeline"
 msgstr "Afișare cronologia animației"
@@ -1968,7 +1968,7 @@ msgid "File failed to save. Error code %s"
 msgstr "Fișierul nu a putut fi salvat. Cod de eroare %s"
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "Fișier(e) exportat(e)"
 
 msgid "New Empty Palette"
 msgstr "Paletă nouă goală"
@@ -2308,10 +2308,10 @@ msgid "Reference Images"
 msgstr "Imagini de referință"
 
 msgid "Perspective Editor"
-msgstr ""
+msgstr "Editor perspectivă"
 
 msgid "Recorder"
-msgstr ""
+msgstr "Înregistrator"
 
 msgid "Crop"
 msgstr "Decupare"
@@ -2386,7 +2386,7 @@ msgid "Plane"
 msgstr "Plan"
 
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
@@ -2470,7 +2470,7 @@ msgid "Radius:"
 msgstr "Rază:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Înălțime:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
