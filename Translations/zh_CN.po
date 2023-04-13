@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-03-31 19:08\n"
+"PO-Revision-Date: 2023-04-13 16:16\n"
 
 msgid "OK"
 msgstr "确定"
@@ -299,6 +299,26 @@ msgstr "显示标尺"
 
 msgid "Show Guides"
 msgstr "显示参考线"
+
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr ""
 
 msgid "Show Animation Timeline"
 msgstr "显示动画时间轴"
@@ -1947,8 +1967,8 @@ msgstr "打开文件失败。错误代码 %s"
 msgid "File failed to save. Error code %s"
 msgstr "保存文件失败。错误代码 %s"
 
-msgid "File exported"
-msgstr "文件已导出"
+msgid "File(s) exported"
+msgstr ""
 
 msgid "New Empty Palette"
 msgstr "新建空的调色板"
@@ -2287,6 +2307,12 @@ msgstr "右键工具选项"
 msgid "Reference Images"
 msgstr "参考图像"
 
+msgid "Perspective Editor"
+msgstr ""
+
+msgid "Recorder"
+msgstr ""
+
 msgid "Crop"
 msgstr "裁剪"
 
@@ -2357,6 +2383,9 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
+msgstr ""
+
+msgid "Text"
 msgstr ""
 
 #. Used in 3D layers. A type of light.
@@ -2441,7 +2470,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr "高度:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
