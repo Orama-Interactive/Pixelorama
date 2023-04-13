@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-03-31 20:16\n"
+"PO-Revision-Date: 2023-04-13 16:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -299,6 +299,26 @@ msgstr "ルーラーを表示"
 
 msgid "Show Guides"
 msgstr "ガイドを表示"
+
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr ""
 
 msgid "Show Animation Timeline"
 msgstr "アニメーションのタイムラインを表示"
@@ -1947,8 +1967,8 @@ msgstr "ファイルを開けませんでした。エラーコード %s"
 msgid "File failed to save. Error code %s"
 msgstr "ファイルを保存できませんでした。エラーコード %s"
 
-msgid "File exported"
-msgstr "ファイルをエクスポートしました"
+msgid "File(s) exported"
+msgstr ""
 
 msgid "New Empty Palette"
 msgstr "新しい空のパレット"
@@ -2287,6 +2307,12 @@ msgstr "右ツールオプション"
 msgid "Reference Images"
 msgstr "参照画像"
 
+msgid "Perspective Editor"
+msgstr ""
+
+msgid "Recorder"
+msgstr ""
+
 msgid "Crop"
 msgstr "切り取り"
 
@@ -2358,6 +2384,9 @@ msgstr "円環"
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
 msgstr "面"
+
+msgid "Text"
+msgstr ""
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
@@ -2441,7 +2470,7 @@ msgid "Radius:"
 msgstr "半径:"
 
 msgid "Height:"
-msgstr "高さ:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
