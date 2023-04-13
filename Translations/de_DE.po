@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-04-13 16:15\n"
+"PO-Revision-Date: 2023-04-13 20:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -254,15 +254,15 @@ msgstr "Layouts verwalten"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Vorschau"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Dies ist eine Vorschau, sie zu modifizieren ändert das Layout nicht"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr ""
+msgstr "Doppelklicken, um als neues Startup-Layout zu setzen"
 
 msgid "Add"
 msgstr "Hinzufügen"
@@ -302,23 +302,23 @@ msgstr "Zeige Guides"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Zeige Maus Guides"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Einrasten an"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid"
-msgstr ""
+msgstr "An rechteckiges Raster einrasten"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "An Guides einrasten"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "An perspektivische Guides einrasten"
 
 msgid "Show Animation Timeline"
 msgstr "Zeige Animations-Zeitleiste"
@@ -1618,19 +1618,19 @@ msgstr "100% Zoom"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
-msgstr ""
+msgstr "Auswahl ersetzen"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
-msgstr ""
+msgstr "Zur Auswahl hinzufügen"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Subtract from selection"
-msgstr ""
+msgstr "Von Auswahl entfernen"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
-msgstr ""
+msgstr "Schnittpunkt der Auswahlen"
 
 msgid "Mirroring"
 msgstr "Spiegeln"
@@ -1952,7 +1952,7 @@ msgid "Redo: Change frame duration"
 msgstr "Wiederholen: Frame-Dauer ändern"
 
 msgid "Move Guide"
-msgstr "Bewegungsanleitung"
+msgstr "Guide verschieben"
 
 msgid "File saved"
 msgstr "Datei gespeichert"
@@ -1967,7 +1967,7 @@ msgid "File failed to save. Error code %s"
 msgstr "Datei konnte nicht gespeichert werden. Fehlercode %s"
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "Datei(en) exportiert"
 
 msgid "New Empty Palette"
 msgstr "Neue leere Palette"
@@ -2306,10 +2306,10 @@ msgid "Reference Images"
 msgstr "Referenzbilder"
 
 msgid "Perspective Editor"
-msgstr ""
+msgstr "Perspektiven-Editor"
 
 msgid "Recorder"
-msgstr ""
+msgstr "Zeichnungsaufnahme"
 
 msgid "Crop"
 msgstr "Zuschneiden"
@@ -2384,7 +2384,7 @@ msgid "Plane"
 msgstr "Ebene"
 
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
@@ -2468,7 +2468,7 @@ msgid "Radius:"
 msgstr "Radius:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Höhe:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
