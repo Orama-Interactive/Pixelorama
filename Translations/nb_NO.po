@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2023-04-13 16:16\n"
+"PO-Revision-Date: 2023-04-15 10:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -389,6 +389,9 @@ msgstr "Vertikale bilder:"
 msgid "Start frame:"
 msgstr "Startbilde:"
 
+msgid "End frame:"
+msgstr ""
+
 msgid "At frame:"
 msgstr "På bilde:"
 
@@ -658,8 +661,8 @@ msgstr "Guide farge:"
 msgid "System Language"
 msgstr "Systemspråk"
 
-msgid "Display Scale"
-msgstr "Skalering av Grensesnitt"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Mørklegg grensesnittet bak dialogvindu"
@@ -1646,6 +1649,12 @@ msgstr "Vertikal"
 msgid "Current frame:"
 msgstr "Gjeldende bilde:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Gå til det første bildet\n"
@@ -2460,7 +2469,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Høyde:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
