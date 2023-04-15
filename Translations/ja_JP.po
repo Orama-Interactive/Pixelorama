@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-04-15 12:15\n"
+"PO-Revision-Date: 2023-04-15 14:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2319,6 +2319,7 @@ msgstr "参照画像"
 msgid "Perspective Editor"
 msgstr "透視投影エディター"
 
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
 msgstr "レコーダー"
 
@@ -2479,7 +2480,7 @@ msgid "Radius:"
 msgstr "半径:"
 
 msgid "Height:"
-msgstr "高さ:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
