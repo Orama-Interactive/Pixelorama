@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2023-04-13 16:15\n"
+"PO-Revision-Date: 2023-04-15 10:50\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -389,6 +389,9 @@ msgstr "Függőleges képkockák:"
 msgid "Start frame:"
 msgstr "Kezdő képkocka:"
 
+msgid "End frame:"
+msgstr ""
+
 msgid "At frame:"
 msgstr ""
 
@@ -658,8 +661,8 @@ msgstr "Segítő szín:"
 msgid "System Language"
 msgstr "Rendszer nyelv"
 
-msgid "Display Scale"
-msgstr "Skála megjelenítése"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr ""
@@ -1610,6 +1613,12 @@ msgstr "Függőleges"
 msgid "Current frame:"
 msgstr "Jelenlegi képkocka:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Ugrás az első képkockához \n"
@@ -2425,7 +2434,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Magasság:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
