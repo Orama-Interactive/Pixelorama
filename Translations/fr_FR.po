@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-04-15 10:50\n"
+"PO-Revision-Date: 2023-04-15 14:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2318,6 +2318,7 @@ msgstr "Images de référence"
 msgid "Perspective Editor"
 msgstr "Éditeur de perspective"
 
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
 msgstr ""
 
@@ -2476,7 +2477,7 @@ msgid "Radius:"
 msgstr "Rayon :"
 
 msgid "Height:"
-msgstr "Hauteur :"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
