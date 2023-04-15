@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-04-13 19:52\n"
+"PO-Revision-Date: 2023-04-15 10:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -389,6 +389,9 @@ msgstr "Klatki pionowe:"
 msgid "Start frame:"
 msgstr "Klatka początkowa:"
 
+msgid "End frame:"
+msgstr ""
+
 msgid "At frame:"
 msgstr "W klatce:"
 
@@ -659,8 +662,8 @@ msgstr "Kolor prowadnicy:"
 msgid "System Language"
 msgstr "Język systemowy"
 
-msgid "Display Scale"
-msgstr "Pokaż skalę"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Przyciemnij interfejs, kiedy pojawia się okno dialogowe"
@@ -1650,6 +1653,12 @@ msgstr "Pionowe"
 msgid "Current frame:"
 msgstr "Obecna klatka:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Skocz do pierwszej klatki\n"
@@ -2469,7 +2478,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Wysokość:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
