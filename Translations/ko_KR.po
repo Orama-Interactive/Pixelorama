@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2023-04-13 16:15\n"
+"PO-Revision-Date: 2023-04-15 10:50\n"
 
 msgid "OK"
 msgstr "예"
@@ -389,6 +389,9 @@ msgstr "세로축 프레임:"
 msgid "Start frame:"
 msgstr "시작 프레임:"
 
+msgid "End frame:"
+msgstr ""
+
 msgid "At frame:"
 msgstr "프레임:"
 
@@ -659,8 +662,8 @@ msgstr "안내선 색:"
 msgid "System Language"
 msgstr "시스템 언어"
 
-msgid "Display Scale"
-msgstr "디스플레이 크기"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "대화 상자 팝업에 인터페이스를 희미하"
@@ -1647,6 +1650,12 @@ msgstr "수직"
 msgid "Current frame:"
 msgstr "현재 프레임:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "첫 프레임으로 이동\n"
@@ -2462,7 +2471,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "높이:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
