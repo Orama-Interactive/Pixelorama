@@ -2245,6 +2245,7 @@ msgstr ""
 msgid "Perspective Editor"
 msgstr ""
 
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
 msgstr ""
 
