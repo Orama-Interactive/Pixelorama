@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Shaders/TransparentChecker.shader" type="Shader" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/graphics/timeline/play.png" type="Texture" id=6]
 [ext_resource path="res://src/UI/Nodes/CollapsibleContainer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -119,9 +120,6 @@ margin_right = 3.5
 margin_bottom = 6.0
 mouse_default_cursor_shape = 2
 texture = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBox/Animation"]
 margin_left = 24.0
@@ -135,19 +133,20 @@ margin_bottom = 20.0
 
 [node name="Label" type="Label" parent="VBox/Animation/VBoxContainer/Mode"]
 margin_top = 3.0
-margin_right = 114.0
+margin_right = 111.0
 margin_bottom = 17.0
-text = "Animation Mode: "
+text = "Animation mode:"
 
 [node name="OptionButton" type="OptionButton" parent="VBox/Animation/VBoxContainer/Mode"]
-margin_left = 118.0
+margin_left = 115.0
 margin_right = 290.0
 margin_bottom = 20.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
-text = "Timeline Frames"
+text = "All frames"
 clip_text = true
 align = 1
-items = [ "Timeline Frames", null, false, 0, null, "Current Frame (As Spritesheet)", null, false, 1, null ]
+items = [ "All frames", null, false, 0, null, "Current frame as spritesheet", null, false, 1, null ]
 selected = 0
 
 [node name="Options" parent="VBox/Animation/VBoxContainer" instance=ExtResource( 7 )]
@@ -155,89 +154,92 @@ visible = false
 margin_top = 24.0
 margin_right = 290.0
 margin_bottom = 44.0
-text = "Spritesheet Options"
+text = "Spritesheet options"
 
 [node name="GridContainer" type="GridContainer" parent="VBox/Animation/VBoxContainer/Options"]
 visible = false
 margin_right = 290.0
 margin_bottom = 52.0
-columns = 4
+columns = 2
 
-[node name="Label" type="Label" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
-margin_top = 5.0
-margin_right = 65.0
-margin_bottom = 19.0
-text = "HFrames: "
-align = 2
-
-[node name="HFrames" type="SpinBox" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
-unique_name_in_owner = true
-margin_left = 69.0
-margin_right = 143.0
-margin_bottom = 24.0
+[node name="HFrames" type="TextureProgress" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+margin_right = 6.0
+margin_bottom = 6.0
+rect_min_size = Vector2( 0, 24 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme_type_variation = "ValueSlider"
 min_value = 1.0
 value = 1.0
 allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 8 )
+prefix = "Horizontal frames:"
 
-[node name="Label2" type="Label" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
-margin_left = 147.0
-margin_top = 5.0
-margin_right = 210.0
-margin_bottom = 19.0
-text = "VFrames: "
-align = 2
-
-[node name="VFrames" type="SpinBox" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
-unique_name_in_owner = true
-margin_left = 214.0
-margin_right = 288.0
-margin_bottom = 24.0
+[node name="VFrames" type="TextureProgress" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+margin_right = 6.0
+margin_bottom = 6.0
+rect_min_size = Vector2( 0, 24 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme_type_variation = "ValueSlider"
 min_value = 1.0
 value = 1.0
 allow_greater = true
-__meta__ = {
-"_editor_description_": ""
-}
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 8 )
+prefix = "Vertical frames:"
 
-[node name="Label3" type="Label" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
-margin_top = 33.0
-margin_right = 65.0
-margin_bottom = 47.0
-text = "Start: "
-align = 2
-
-[node name="Start" type="SpinBox" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+[node name="StartFrame" type="TextureProgress" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
 unique_name_in_owner = true
-margin_left = 69.0
-margin_top = 28.0
-margin_right = 143.0
-margin_bottom = 52.0
+margin_right = 6.0
+margin_bottom = 6.0
+rect_min_size = Vector2( 0, 24 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme_type_variation = "ValueSlider"
 min_value = 1.0
 max_value = 1.0
 value = 1.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 8 )
+prefix = "Start frame:"
 
-[node name="Label4" type="Label" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
-margin_left = 147.0
-margin_top = 33.0
-margin_right = 210.0
-margin_bottom = 47.0
-text = "End: "
-align = 2
-
-[node name="End" type="SpinBox" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+[node name="EndFrame" type="TextureProgress" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
 unique_name_in_owner = true
-margin_left = 214.0
-margin_top = 28.0
-margin_right = 288.0
-margin_bottom = 52.0
+margin_right = 6.0
+margin_bottom = 6.0
+rect_min_size = Vector2( 0, 24 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme_type_variation = "ValueSlider"
 min_value = 1.0
 max_value = 1.0
 value = 1.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 8 )
+prefix = "End frame:"
 
 [connection signal="value_changed" from="VBox/HBox/VBoxContainer/PreviewZoomSlider" to="." method="_on_PreviewZoomSlider_value_changed"]
 [connection signal="toggled" from="VBox/Animation/PlayButton" to="." method="_on_PlayButton_toggled"]
 [connection signal="item_selected" from="VBox/Animation/VBoxContainer/Mode/OptionButton" to="." method="_on_OptionButton_item_selected"]
 [connection signal="value_changed" from="VBox/Animation/VBoxContainer/Options/GridContainer/HFrames" to="." method="_on_HFrames_value_changed"]
 [connection signal="value_changed" from="VBox/Animation/VBoxContainer/Options/GridContainer/VFrames" to="." method="_on_VFrames_value_changed"]
-[connection signal="value_changed" from="VBox/Animation/VBoxContainer/Options/GridContainer/Start" to="." method="_on_Start_value_changed"]
-[connection signal="value_changed" from="VBox/Animation/VBoxContainer/Options/GridContainer/End" to="." method="_on_End_value_changed"]
+[connection signal="value_changed" from="VBox/Animation/VBoxContainer/Options/GridContainer/StartFrame" to="." method="_on_StartFrame_value_changed"]
+[connection signal="value_changed" from="VBox/Animation/VBoxContainer/Options/GridContainer/EndFrame" to="." method="_on_EndFrame_value_changed"]
