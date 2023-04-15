@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-04-15 10:50\n"
+"PO-Revision-Date: 2023-04-15 12:15\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -664,7 +664,7 @@ msgid "System Language"
 msgstr "Sistem Dili"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Ekran ölçeği:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Diyalog penceresinde arayüzü karart"
@@ -1655,7 +1655,7 @@ msgid "Current frame:"
 msgstr "Geçerli kare:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "Animasyon kipi:"
 
 msgid "Current frame as spritesheet"
 msgstr ""
