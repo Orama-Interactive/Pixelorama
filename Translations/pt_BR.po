@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-04-15 10:50\n"
+"PO-Revision-Date: 2023-04-15 12:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -390,7 +390,7 @@ msgid "Start frame:"
 msgstr "Quadro inicial:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Quadro final:"
 
 msgid "At frame:"
 msgstr "Na moldura:"
@@ -663,7 +663,7 @@ msgid "System Language"
 msgstr "Linguagem do Sistema"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Mostrar escala:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Escurecer a interface em um pop-up de diálogo"
@@ -1654,10 +1654,10 @@ msgid "Current frame:"
 msgstr "Quadro atual:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "Modo de animação:"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Quadro atual como spritesheet"
 
 msgid "Jump to the first frame\n"
 "(%s)"
