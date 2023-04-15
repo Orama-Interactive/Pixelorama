@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2023-04-13 16:16\n"
+"PO-Revision-Date: 2023-04-15 10:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -389,6 +389,9 @@ msgstr "Fotogramas verticais:"
 msgid "Start frame:"
 msgstr "Fotograma inicial:"
 
+msgid "End frame:"
+msgstr ""
+
 msgid "At frame:"
 msgstr "No fotograma:"
 
@@ -658,8 +661,8 @@ msgstr "Cor Guia:"
 msgid "System Language"
 msgstr "Linguagem de Sistema"
 
-msgid "Display Scale"
-msgstr "Escala de Display"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Escurecer interface durante uma caixa de diálogo"
@@ -1640,6 +1643,12 @@ msgstr "Vertical"
 msgid "Current frame:"
 msgstr "Fotograma atual:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Saltar para o primeiro fotograma\n"
@@ -2455,7 +2464,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Altura:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
