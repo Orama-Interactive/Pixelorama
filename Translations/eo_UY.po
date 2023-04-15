@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2023-04-13 16:16\n"
+"PO-Revision-Date: 2023-04-15 10:50\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -389,6 +389,9 @@ msgstr "Vertikalaj filmeroj:"
 msgid "Start frame:"
 msgstr "Komenca filmero:"
 
+msgid "End frame:"
+msgstr ""
+
 msgid "At frame:"
 msgstr "En filmero:"
 
@@ -659,7 +662,7 @@ msgstr "Koloro de direktlinioj:"
 msgid "System Language"
 msgstr "Sistema lingvo"
 
-msgid "Display Scale"
+msgid "Display scale:"
 msgstr ""
 
 msgid "Dim interface on dialog popup"
@@ -1600,6 +1603,12 @@ msgstr "Vertikala"
 msgid "Current frame:"
 msgstr "Aktuala filmero:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr ""
@@ -2407,7 +2416,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Alto:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
