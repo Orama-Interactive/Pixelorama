@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-04-15 10:50\n"
+"PO-Revision-Date: 2023-04-15 14:37\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -302,23 +302,23 @@ msgstr "Εμφάνιση οδηγών"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Εμφάνιση οδηγών ποντικιού"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Προσκόλληση σε"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid"
-msgstr ""
+msgstr "Προσκόλληση στο ορθογώνιο πλέγμα"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Προσκόλληση στους οδηγούς"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Προσκόλληση στους οδηγούς προοπτικής"
 
 msgid "Show Animation Timeline"
 msgstr "Εμφάνιση χρονοδιαγράμματος"
@@ -390,7 +390,7 @@ msgid "Start frame:"
 msgstr "Καρέ έναρξης:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Τελικό καρέ:"
 
 msgid "At frame:"
 msgstr "Στο καρέ:"
@@ -664,7 +664,7 @@ msgid "System Language"
 msgstr "Γλώσσα Συστήματος"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Κλίμακα εμφάνισης:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Σκοτείνιασμα περιβάλλοντος όταν εμφανίζεται αναδυόμενο παράθυρο"
@@ -1655,10 +1655,10 @@ msgid "Current frame:"
 msgstr "Τρέχον καρέ:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "Λειτουργία κίνησης:"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Τρέχον πλαίσιο ως φύλλο καρέ"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -1977,7 +1977,7 @@ msgid "File failed to save. Error code %s"
 msgstr "Απέτυχε η αποθήκευση του αρχείου. Κωδικός σφάλματος %s"
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "Έγινε εξαγωγή αρχείων"
 
 msgid "New Empty Palette"
 msgstr "Νέα Κενή Παλέτα"
@@ -2317,10 +2317,11 @@ msgid "Reference Images"
 msgstr "Εικόνες αναφοράς"
 
 msgid "Perspective Editor"
-msgstr ""
+msgstr "Επεξεργαστής προοπτικής"
 
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
-msgstr ""
+msgstr "Καταγραφή"
 
 msgid "Crop"
 msgstr "Περικοπή"
@@ -2395,7 +2396,7 @@ msgid "Plane"
 msgstr "Επίπεδο"
 
 msgid "Text"
-msgstr ""
+msgstr "Κείμενο"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
