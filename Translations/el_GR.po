@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-04-13 16:15\n"
+"PO-Revision-Date: 2023-04-15 10:50\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -389,6 +389,9 @@ msgstr "Κάθετα καρέ:"
 msgid "Start frame:"
 msgstr "Καρέ έναρξης:"
 
+msgid "End frame:"
+msgstr ""
+
 msgid "At frame:"
 msgstr "Στο καρέ:"
 
@@ -660,8 +663,8 @@ msgstr "Χρώμα οδηγών:"
 msgid "System Language"
 msgstr "Γλώσσα Συστήματος"
 
-msgid "Display Scale"
-msgstr "Κλίμακα Εμφάνισης"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Σκοτείνιασμα περιβάλλοντος όταν εμφανίζεται αναδυόμενο παράθυρο"
@@ -1651,6 +1654,12 @@ msgstr "Κάθετα"
 msgid "Current frame:"
 msgstr "Τρέχον καρέ:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Μετάβαση στο πρώτο καρέ\n"
@@ -2470,7 +2479,7 @@ msgid "Radius:"
 msgstr "Ακτίνα:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Ύψος:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
