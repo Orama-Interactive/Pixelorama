@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-04-15 10:50\n"
+"PO-Revision-Date: 2023-04-15 12:15\n"
 
 msgid "OK"
 msgstr "OK"
@@ -390,7 +390,7 @@ msgid "Start frame:"
 msgstr "Startframe:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "End-Frame:"
 
 msgid "At frame:"
 msgstr "Bei dem Frame:"
@@ -663,7 +663,7 @@ msgid "System Language"
 msgstr "Systemsprache"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Bildschirmmaße:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Oberfläche abdunkeln wenn ein Popup sich öffnet"
@@ -1654,10 +1654,10 @@ msgid "Current frame:"
 msgstr "Aktueller Frame"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "Animationsmodus:"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Aktueller Frame als Spritesheet"
 
 msgid "Jump to the first frame\n"
 "(%s)"
