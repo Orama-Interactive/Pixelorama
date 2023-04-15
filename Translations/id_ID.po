@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-04-13 16:16\n"
+"PO-Revision-Date: 2023-04-15 10:50\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -389,6 +389,9 @@ msgstr "Bingkai menegak:"
 msgid "Start frame:"
 msgstr "Bingkai awal:"
 
+msgid "End frame:"
+msgstr ""
+
 msgid "At frame:"
 msgstr "Di bingkai:"
 
@@ -660,8 +663,8 @@ msgstr "Warna panduan:"
 msgid "System Language"
 msgstr "Bahasa Sistem"
 
-msgid "Display Scale"
-msgstr "Skala Tampilan"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Redupkan antarmuka pada sembulan dialog"
@@ -1651,6 +1654,12 @@ msgstr "Menegak"
 msgid "Current frame:"
 msgstr "Bingkai saat ini:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Lompat ke bingkai pertama\n"
@@ -2468,7 +2477,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Tinggi:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
