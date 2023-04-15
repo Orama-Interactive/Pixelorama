@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-04-13 22:59\n"
+"PO-Revision-Date: 2023-04-15 10:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -389,6 +389,9 @@ msgstr "垂直フレーム"
 msgid "Start frame:"
 msgstr "開始フレーム:"
 
+msgid "End frame:"
+msgstr ""
+
 msgid "At frame:"
 msgstr "すべてのフレーム:"
 
@@ -660,8 +663,8 @@ msgstr "ガイドの色:"
 msgid "System Language"
 msgstr "システム言語"
 
-msgid "Display Scale"
-msgstr "表示スケール"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "ダイアログポップアップ時にインターフェースを薄暗くする"
@@ -1650,6 +1653,12 @@ msgstr "垂直方向"
 
 msgid "Current frame:"
 msgstr "現在のフレーム:"
+
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
 
 msgid "Jump to the first frame\n"
 "(%s)"
