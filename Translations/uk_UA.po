@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-04-13 16:16\n"
+"PO-Revision-Date: 2023-04-15 10:50\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -389,6 +389,9 @@ msgstr "Вертикальні кадри:"
 msgid "Start frame:"
 msgstr "Початковий кадр:"
 
+msgid "End frame:"
+msgstr ""
+
 msgid "At frame:"
 msgstr "До кадру:"
 
@@ -660,8 +663,8 @@ msgstr "Колір напрямних:"
 msgid "System Language"
 msgstr "Мова системи"
 
-msgid "Display Scale"
-msgstr "Масштаб екрану"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Затемнити інтерфейс під діалоговими вікнами"
@@ -1651,6 +1654,12 @@ msgstr "Вертикально"
 msgid "Current frame:"
 msgstr "Поточний кадр:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Перейти до першого кадру\n"
@@ -2470,7 +2479,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Висота:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
