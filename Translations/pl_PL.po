@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-04-15 10:50\n"
+"PO-Revision-Date: 2023-04-15 14:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -302,23 +302,23 @@ msgstr "Pokaż prowadnice"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Pokaż Prowadnice Myszki"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Przyciągaj do"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid"
-msgstr ""
+msgstr "Przyciągaj do Siatki Prostokątnej"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Przyciągaj do Prowadnic"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Przyciągaj do Prowadnic Perspektywy"
 
 msgid "Show Animation Timeline"
 msgstr "Pokaż linię czasu animacji"
@@ -390,7 +390,7 @@ msgid "Start frame:"
 msgstr "Klatka początkowa:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Koniec klatki:"
 
 msgid "At frame:"
 msgstr "W klatce:"
@@ -521,7 +521,7 @@ msgstr "Warstwa grupowania:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "Warstwa 3D:"
 
 msgid "Direction:"
 msgstr "Kierunek:"
@@ -663,7 +663,7 @@ msgid "System Language"
 msgstr "Język systemowy"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Pokaż Skalę:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Przyciemnij interfejs, kiedy pojawia się okno dialogowe"
@@ -1654,10 +1654,10 @@ msgid "Current frame:"
 msgstr "Obecna klatka:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "Tryb Animacji:"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Obecna klatka jako spritesheet"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -1813,11 +1813,11 @@ msgstr "Stwórz nową warstwę"
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "Dodaj warstwę pikselową"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr ""
+msgstr "Dodaj grupę warstw"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
@@ -1976,7 +1976,7 @@ msgid "File failed to save. Error code %s"
 msgstr "Nie udało się zapisać pliku. Kod błędu %s"
 
 msgid "File(s) exported"
-msgstr ""
+msgstr "Plik(i) wyeksportowane"
 
 msgid "New Empty Palette"
 msgstr "Nowa pusta paleta kolorów"
@@ -2316,10 +2316,11 @@ msgid "Reference Images"
 msgstr "Obrazy odniesienia"
 
 msgid "Perspective Editor"
-msgstr ""
+msgstr "Edytor Perspektywy"
 
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
-msgstr ""
+msgstr "Nagrywanie"
 
 msgid "Crop"
 msgstr "Przytnij"
@@ -2363,175 +2364,175 @@ msgstr "Zablokowany rozmiar\n\n"
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
-msgstr ""
+msgstr "Edycja kształtu 3D"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "Prostopadłościan"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
-msgstr ""
+msgstr "Kula"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "Kapsuła"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
-msgstr ""
+msgstr "Cylinder"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
-msgstr ""
+msgstr "Pryzmat"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
-msgstr ""
+msgstr "Torus"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "Płaszczyzna"
 
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
-msgstr ""
+msgstr "Światło Ukierunkowane"
 
 #. Used in 3D layers. A type of light.
 msgid "Spotlight"
-msgstr ""
+msgstr "Światło miejscowe"
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
-msgstr ""
+msgstr "Światło punktowe"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
-msgstr ""
+msgstr "Własny model"
 
 msgid "Selected object:"
-msgstr ""
+msgstr "Wybrany obiekt:"
 
 msgid "Add new object"
-msgstr ""
+msgstr "Dodaj nowy obiekt"
 
 msgid "Remove object"
-msgstr ""
+msgstr "Usuń obiekt"
 
 msgid "Camera"
 msgstr "Kamera"
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
-msgstr ""
+msgstr "Projekcja:"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
-msgstr ""
+msgstr "Perspektywiczna"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Orthogonal"
-msgstr ""
+msgstr "Ortograficzna"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
-msgstr ""
+msgstr "Frustum"
 
 msgid "Rotation:"
-msgstr ""
+msgstr "Rotacja:"
 
 msgid "Scale:"
-msgstr ""
+msgstr "Skala:"
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
-msgstr ""
+msgstr "Środowisko"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
-msgstr ""
+msgstr "Kolor Środowiska:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color energy:"
-msgstr ""
+msgstr "Energia koloru środowiska:"
 
 msgid "Visible:"
-msgstr ""
+msgstr "Widoczny:"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr ""
+msgstr "Przekształcenie"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
-msgstr ""
+msgstr "Siatka"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
-msgstr ""
+msgstr "Od lewej do prawej:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "Promień:"
 
 msgid "Height:"
 msgstr "Wysokość:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
-msgstr ""
+msgstr "Segmenty radialne:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
 msgid "Rings:"
-msgstr ""
+msgstr "Rzędy:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
-msgstr ""
+msgstr "Jest półkulą:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
-msgstr ""
+msgstr "Górny promień:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Bottom radius:"
-msgstr ""
+msgstr "Dolny promień:"
 
 msgid "Text:"
 msgstr "Tekst:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
-msgstr ""
+msgstr "Rozmiar piksela:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
-msgstr ""
+msgstr "Krok krzywej:"
 
 msgid "Horizontal alignment:"
-msgstr ""
+msgstr "Poziome wyrównanie:"
 
 msgid "Left"
-msgstr ""
+msgstr "Lewo"
 
 msgid "Right"
-msgstr ""
+msgstr "Prawo"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
-msgstr ""
+msgstr "Siła:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. If true, the light's effect is reversed, darkening areas and casting bright shadows.
 msgid "Negative:"
-msgstr ""
+msgstr "Negatyw:"
 
 msgid "Shadow:"
-msgstr ""
+msgstr "Cień:"
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
-msgstr ""
+msgstr "Zasięg:"
 
