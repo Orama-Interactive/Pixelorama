@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-04-13 19:52\n"
+"PO-Revision-Date: 2023-04-15 10:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -389,6 +389,9 @@ msgstr "Cadre verticale:"
 msgid "Start frame:"
 msgstr "Cadru de pornire:"
 
+msgid "End frame:"
+msgstr ""
+
 msgid "At frame:"
 msgstr "La cadrul:"
 
@@ -660,8 +663,8 @@ msgstr "Culoarea ghidajului:"
 msgid "System Language"
 msgstr "Limba sistemului"
 
-msgid "Display Scale"
-msgstr "Scala de afișare"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Întunecă interfața la apariția ferestrei de dialog"
@@ -1650,6 +1653,12 @@ msgstr "Vertical"
 
 msgid "Current frame:"
 msgstr "Cadrul actual:"
+
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
 
 msgid "Jump to the first frame\n"
 "(%s)"
