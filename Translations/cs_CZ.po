@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2023-04-13 16:15\n"
+"PO-Revision-Date: 2023-04-15 10:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -389,6 +389,9 @@ msgstr "Svislé snímky:"
 msgid "Start frame:"
 msgstr "První snímek:"
 
+msgid "End frame:"
+msgstr ""
+
 msgid "At frame:"
 msgstr "Na snímku:"
 
@@ -658,8 +661,8 @@ msgstr "Barva vodítka:"
 msgid "System Language"
 msgstr "Systémový jazyk"
 
-msgid "Display Scale"
-msgstr "Měřítko rozhraní"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Ztmavit rozhraní při vyskakovacím okně"
@@ -1642,6 +1645,12 @@ msgstr "Svisle"
 msgid "Current frame:"
 msgstr "Aktuální snímek:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Přeskočit na první snímek\n"
@@ -2458,7 +2467,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Výška:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
