@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2023-04-13 16:15\n"
+"PO-Revision-Date: 2023-04-15 10:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -389,6 +389,9 @@ msgstr "Vertikale rammer:"
 msgid "Start frame:"
 msgstr "Startramme:"
 
+msgid "End frame:"
+msgstr ""
+
 msgid "At frame:"
 msgstr "Ved ramme:"
 
@@ -659,8 +662,8 @@ msgstr "Guide farve:"
 msgid "System Language"
 msgstr "Systemsprog"
 
-msgid "Display Scale"
-msgstr "Skærmskalering"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Dæmp brugerflades lysstyrke ved popup-dialog"
@@ -1648,6 +1651,12 @@ msgstr "Vertikal"
 msgid "Current frame:"
 msgstr "Nuværende ramme:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Gå til den første ramme\n"
@@ -2457,7 +2466,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Højde:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
