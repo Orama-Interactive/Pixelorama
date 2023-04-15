@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2023-04-15 10:50\n"
+"PO-Revision-Date: 2023-04-15 14:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2318,6 +2318,7 @@ msgstr "Эталонные изображения"
 msgid "Perspective Editor"
 msgstr ""
 
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
 msgstr ""
 
@@ -2473,10 +2474,10 @@ msgstr ""
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "Радиус:"
 
 msgid "Height:"
-msgstr "Высота:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
