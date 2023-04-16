@@ -94,6 +94,7 @@ offset = Vector2( 32, 32 )
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 3 )
+index = 2
 
 [node name="Animation" type="HBoxContainer" parent="VBox"]
 margin_top = 140.0

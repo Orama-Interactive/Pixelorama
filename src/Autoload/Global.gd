@@ -193,10 +193,6 @@ onready var references_panel: ReferencesPanel = control.find_node("Reference Ima
 onready var perspective_editor := control.find_node("Perspective Editor")
 
 onready var top_menu_container: Panel = control.find_node("TopMenuContainer")
-onready var rotation_level_button: Button = control.find_node("RotationLevel")
-onready var rotation_level_spinbox: SpinBox = control.find_node("RotationSpinbox")
-onready var zoom_level_button: Button = control.find_node("ZoomLevel")
-onready var zoom_level_spinbox: SpinBox = control.find_node("ZoomSpinbox")
 onready var cursor_position_label: Label = control.find_node("CursorPosition")
 onready var current_frame_mark_label: Label = control.find_node("CurrentFrameMark")
 
