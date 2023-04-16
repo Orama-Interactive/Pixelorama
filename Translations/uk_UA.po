@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-04-15 14:37\n"
+"PO-Revision-Date: 2023-04-16 00:31\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -390,7 +390,7 @@ msgid "Start frame:"
 msgstr "Початковий кадр:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Кінцевий кадр:"
 
 msgid "At frame:"
 msgstr "До кадру:"
@@ -664,7 +664,7 @@ msgid "System Language"
 msgstr "Мова системи"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Масштаб екрану:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Затемнити інтерфейс під діалоговими вікнами"
@@ -1655,10 +1655,10 @@ msgid "Current frame:"
 msgstr "Поточний кадр:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "Режим анімації:"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Поточний кадр як таблиця спрайтів"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -2480,7 +2480,7 @@ msgid "Radius:"
 msgstr "Радіус:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Висота:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
@@ -2535,5 +2535,5 @@ msgstr ""
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
-msgstr ""
+msgstr "Діапазон:"
 
