@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-04-16 01:38\n"
+"PO-Revision-Date: 2023-04-16 02:56\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -2400,15 +2400,15 @@ msgstr "Текст"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
-msgstr ""
+msgstr "Спрямоване світло"
 
 #. Used in 3D layers. A type of light.
 msgid "Spotlight"
-msgstr ""
+msgstr "Прожектор"
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
-msgstr ""
+msgstr "Світлова точка"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
@@ -2465,11 +2465,11 @@ msgstr "Видимий:"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr ""
+msgstr "Трансформація"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
-msgstr ""
+msgstr "Сітка"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
