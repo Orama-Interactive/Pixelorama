@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-04-15 14:37\n"
+"PO-Revision-Date: 2023-04-16 10:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2479,7 +2479,7 @@ msgid "Radius:"
 msgstr "Raio:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Altura:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
