@@ -8,7 +8,7 @@ enum Cameras { MAIN, SECOND, SMALL }
 const KEY_MOVE_ACTION_NAMES := ["camera_left", "camera_right", "camera_up", "camera_down"]
 const CAMERA_SPEED_RATE := 15.0
 
-export var index := 0
+export(Cameras) var index := 0
 
 var zoom_min := Vector2(0.005, 0.005)
 var zoom_max := Vector2.ONE
@@ -18,6 +18,7 @@ var mouse_pos := Vector2.ZERO
 var drag := false
 var rotation_slider: ValueSlider
 var zoom_slider: ValueSlider
+var should_tween := true
 
 
 func _ready() -> void:
@@ -56,7 +57,7 @@ func _zoom_value_changed(value: float) -> void:
 	var new_zoom := Vector2(percent, percent)
 	if zoom == new_zoom:
 		return
-	if Global.smooth_zoom:
+	if Global.smooth_zoom and should_tween:
 		var tween := create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
 		tween.connect("step_finished", self, "_on_tween_step")
 		tween.tween_property(self, "zoom", new_zoom, 0.05)
@@ -66,8 +67,8 @@ func _zoom_value_changed(value: float) -> void:
 
 
 func update_transparent_checker_offset() -> void:
-	var o = get_global_transform_with_canvas().get_origin()
-	var s = get_global_transform_with_canvas().get_scale()
+	var o := get_global_transform_with_canvas().get_origin()
+	var s := get_global_transform_with_canvas().get_scale()
 	o.y = get_viewport_rect().size.y - o.y
 	transparent_checker.update_offset(o, s)
 
@@ -144,10 +145,10 @@ func _rotation_changed() -> void:
 func zoom_camera(dir: int) -> void:
 	var viewport_size := viewport_container.rect_size
 	if Global.smooth_zoom:
-		var zoom_margin = zoom * dir / 5
-		var new_zoom = zoom + zoom_margin
+		var zoom_margin := zoom * dir / 5
+		var new_zoom := zoom + zoom_margin
 		if new_zoom > zoom_min && new_zoom < zoom_max:
-			var new_offset = (
+			var new_offset := (
 				offset
 				+ (-0.5 * viewport_size + mouse_pos).rotated(rotation) * (zoom - new_zoom)
 			)
@@ -156,16 +157,13 @@ func zoom_camera(dir: int) -> void:
 			tween.connect("step_finished", self, "_on_tween_step")
 			tween.tween_property(self, "zoom", new_zoom, 0.05)
 			tween.tween_property(self, "offset", new_offset, 0.05)
-
 	else:
 		var prev_zoom := zoom
-		var zoom_margin = zoom * dir / 10
+		var zoom_margin := zoom * dir / 10
 		if zoom + zoom_margin > zoom_min:
 			zoom += zoom_margin
-
 		if zoom > zoom_max:
 			zoom = zoom_max
-
 		offset = offset + (-0.5 * viewport_size + mouse_pos).rotated(rotation) * (prev_zoom - zoom)
 		emit_signal("zoom_changed")
 
@@ -188,7 +186,9 @@ func _update_rulers() -> void:
 
 
 func _on_tween_step(_idx: int) -> void:
+	should_tween = false
 	emit_signal("zoom_changed")
+	should_tween = true
 
 
 func zoom_100() -> void:
