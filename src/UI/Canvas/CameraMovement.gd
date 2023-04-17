@@ -8,16 +8,25 @@ enum Cameras { MAIN, SECOND, SMALL }
 const KEY_MOVE_ACTION_NAMES := ["camera_left", "camera_right", "camera_up", "camera_down"]
 const CAMERA_SPEED_RATE := 15.0
 
+export var index := 0
+
 var zoom_min := Vector2(0.005, 0.005)
 var zoom_max := Vector2.ONE
 var viewport_container: ViewportContainer
 var transparent_checker: ColorRect
 var mouse_pos := Vector2.ZERO
 var drag := false
-var index := 0
+var rotation_slider: ValueSlider
+var zoom_slider: ValueSlider
 
 
 func _ready() -> void:
+	if index == Cameras.MAIN:
+		rotation_slider = Global.top_menu_container.get_node("%RotationSlider")
+		rotation_slider.connect("value_changed", self, "_rotation_value_changed")
+		zoom_slider = Global.top_menu_container.get_node("%ZoomSlider")
+		zoom_slider.connect("value_changed", self, "_zoom_value_changed")
+		set_zoom_max_value()
 	connect("zoom_changed", self, "_zoom_changed")
 	connect("rotation_changed", self, "_rotation_changed")
 	rotating = true
@@ -25,67 +34,35 @@ func _ready() -> void:
 	transparent_checker = get_parent().get_node("TransparentChecker")
 	update_transparent_checker_offset()
 
-	# signals regarding rotation stats
-	Global.rotation_level_button.connect("pressed", self, "_rotation_button_pressed")
-	Global.rotation_level_spinbox.connect("value_changed", self, "_rotation_value_changed")
-	Global.rotation_level_spinbox.get_child(0).connect(
-		"focus_exited", self, "_rotation_focus_exited"
-	)
 
-	# signals regarding zoom stats
-	Global.zoom_level_button.connect("pressed", self, "_zoom_button_pressed")
-	Global.zoom_level_spinbox.connect("value_changed", self, "_zoom_value_changed")
-	Global.zoom_level_spinbox.max_value = 100.0 / zoom_min.x
-	Global.zoom_level_spinbox.get_child(0).connect("focus_exited", self, "_zoom_focus_exited")
+func set_zoom_max_value() -> void:
+	zoom_slider.max_value = 100.0 / zoom_min.x
 
 
-func _rotation_button_pressed() -> void:
-	Global.rotation_level_button.visible = false
-	Global.rotation_level_spinbox.visible = true
-	Global.rotation_level_spinbox.editable = true
-	Global.rotation_level_spinbox.value = str2var(
-		Global.rotation_level_button.text.replace("°", "")
-	)
-	# Since the actual LineEdit is the first child of SpinBox
-	Global.rotation_level_spinbox.get_child(0).grab_focus()
+func _rotation_value_changed(value: float) -> void:
+	# Negative makes going up rotate clockwise
+	var degrees := -value
+	var difference := degrees - rotation_degrees
+	var canvas_center: Vector2 = Global.current_project.size / 2
+	offset = (offset - canvas_center).rotated(deg2rad(difference)) + canvas_center
+	rotation_degrees = wrapf(degrees, -180, 180)
+	emit_signal("rotation_changed")
 
 
-func _rotation_value_changed(value) -> void:
-	if index == Cameras.MAIN:
-		_set_camera_rotation_degrees(-value)  # Negative makes going up rotate clockwise
-
-
-func _rotation_focus_exited() -> void:
-	if Global.rotation_level_spinbox.value != rotation:  # If user pressed enter while editing
-		if index == Cameras.MAIN:
-			# Negative makes going up rotate clockwise
-			_set_camera_rotation_degrees(-Global.rotation_level_spinbox.value)
-	Global.rotation_level_button.visible = true
-	Global.rotation_level_spinbox.visible = false
-	Global.rotation_level_spinbox.editable = false
-
-
-func _zoom_button_pressed() -> void:
-	Global.zoom_level_button.visible = false
-	Global.zoom_level_spinbox.visible = true
-	Global.zoom_level_spinbox.editable = true
-	Global.zoom_level_spinbox.value = str2var(Global.zoom_level_button.text.replace("%", ""))
-	# Since the actual LineEdit is the first child of SpinBox
-	Global.zoom_level_spinbox.get_child(0).grab_focus()
-
-
-func _zoom_value_changed(value) -> void:
-	if index == Cameras.MAIN:
-		zoom_camera_percent(value)
-
-
-func _zoom_focus_exited() -> void:
-	if Global.zoom_level_spinbox.value != round(100 / zoom.x):  # If user pressed enter while editing
-		if index == Cameras.MAIN:
-			zoom_camera_percent(Global.zoom_level_spinbox.value)
-	Global.zoom_level_button.visible = true
-	Global.zoom_level_spinbox.visible = false
-	Global.zoom_level_spinbox.editable = false
+func _zoom_value_changed(value: float) -> void:
+	if value <= 0:
+		value = 1
+	var percent := 100.0 / value
+	var new_zoom := Vector2(percent, percent)
+	if zoom == new_zoom:
+		return
+	if Global.smooth_zoom:
+		var tween := create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
+		tween.connect("step_finished", self, "_on_tween_step")
+		tween.tween_property(self, "zoom", new_zoom, 0.05)
+	else:
+		zoom = new_zoom
+		emit_signal("zoom_changed")
 
 
 func update_transparent_checker_offset() -> void:
@@ -155,18 +132,11 @@ func _rotate_camera_around_point(degrees: float, point: Vector2) -> void:
 	emit_signal("rotation_changed")
 
 
-func _set_camera_rotation_degrees(degrees: float) -> void:
-	var difference := degrees - rotation_degrees
-	var canvas_center: Vector2 = Global.current_project.size / 2
-	offset = (offset - canvas_center).rotated(deg2rad(difference)) + canvas_center
-	rotation_degrees = wrapf(degrees, -180, 180)
-	emit_signal("rotation_changed")
-
-
 func _rotation_changed() -> void:
 	if index == Cameras.MAIN:
 		# Negative to make going up in value clockwise, and match the spinbox which does the same
-		Global.rotation_level_button.text = str(wrapi(round(-rotation_degrees), -180, 180)) + " °"
+		var degrees := wrapf(-rotation_degrees, -180, 180)
+		rotation_slider.value = degrees
 		_update_rulers()
 
 
@@ -200,22 +170,10 @@ func zoom_camera(dir: int) -> void:
 		emit_signal("zoom_changed")
 
 
-func zoom_camera_percent(value: float) -> void:
-	var percent: float = 100.0 / value
-	var new_zoom = Vector2(percent, percent)
-	if Global.smooth_zoom:
-		var tween := create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
-		tween.connect("step_finished", self, "_on_tween_step")
-		tween.tween_property(self, "zoom", new_zoom, 0.05)
-	else:
-		zoom = new_zoom
-		emit_signal("zoom_changed")
-
-
 func _zoom_changed() -> void:
 	update_transparent_checker_offset()
 	if index == Cameras.MAIN:
-		Global.zoom_level_button.text = str(round(100 / zoom.x)) + " %"
+		zoom_slider.value = round(100 / zoom.x)
 		_update_rulers()
 		for guide in Global.current_project.guides:
 			guide.width = zoom.x * 2

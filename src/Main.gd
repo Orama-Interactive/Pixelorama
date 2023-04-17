@@ -54,11 +54,6 @@ func _ready() -> void:
 		Global.open_sprites_dialog.current_dir = OS.get_user_data_dir()
 		Global.save_sprites_dialog.current_dir = OS.get_user_data_dir()
 
-	var i := 0
-	for camera in Global.cameras:
-		camera.index = i
-		i += 1
-
 	var zstd_checkbox := CheckBox.new()
 	zstd_checkbox.name = "ZSTDCompression"
 	zstd_checkbox.pressed = true

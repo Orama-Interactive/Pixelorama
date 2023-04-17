@@ -369,6 +369,7 @@ material = SubResource( 3 )
 current = true
 zoom = Vector2( 0.15, 0.15 )
 script = ExtResource( 7 )
+index = 1
 
 [node name="Animation Timeline" parent="DockableContainer" instance=ExtResource( 18 )]
 margin_left = 60.0

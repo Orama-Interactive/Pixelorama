@@ -138,7 +138,7 @@ var draw_pixel_grid := false
 var show_rulers := true
 var show_guides := true
 var show_mouse_guides := false
-var snapping_distance := 10.0
+var snapping_distance := 32.0
 var snap_to_rectangular_grid := false
 var snap_to_guides := false
 var snap_to_perspective_guides := false
@@ -193,10 +193,6 @@ onready var references_panel: ReferencesPanel = control.find_node("Reference Ima
 onready var perspective_editor := control.find_node("Perspective Editor")
 
 onready var top_menu_container: Panel = control.find_node("TopMenuContainer")
-onready var rotation_level_button: Button = control.find_node("RotationLevel")
-onready var rotation_level_spinbox: SpinBox = control.find_node("RotationSpinbox")
-onready var zoom_level_button: Button = control.find_node("ZoomLevel")
-onready var zoom_level_spinbox: SpinBox = control.find_node("ZoomSpinbox")
 onready var cursor_position_label: Label = control.find_node("CursorPosition")
 onready var current_frame_mark_label: Label = control.find_node("CurrentFrameMark")
 

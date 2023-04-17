@@ -65,8 +65,8 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	OpenSave.current_save_paths.append("")
 	OpenSave.backup_save_paths.append("")
 
-	x_symmetry_point = size.x
-	y_symmetry_point = size.y
+	x_symmetry_point = size.x - 1
+	y_symmetry_point = size.y - 1
 
 	x_symmetry_axis.type = x_symmetry_axis.Types.HORIZONTAL
 	x_symmetry_axis.project = self
@@ -257,7 +257,7 @@ func change_project() -> void:
 			)
 
 		if camera == Global.camera:
-			Global.zoom_level_spinbox.min_value = 100.0 / camera.zoom_max.x
+			camera.set_zoom_max_value()
 		camera.rotation = cameras_rotation[i]
 		camera.zoom = cameras_zoom[i]
 		camera.offset = cameras_offset[i]
