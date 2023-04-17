@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-04-15 14:37\n"
+"PO-Revision-Date: 2023-04-17 02:18\n"
 
 msgid "OK"
 msgstr "确定"
@@ -390,7 +390,7 @@ msgid "Start frame:"
 msgstr "开始帧："
 
 msgid "End frame:"
-msgstr ""
+msgstr "结束帧："
 
 msgid "At frame:"
 msgstr "在帧："
@@ -664,7 +664,7 @@ msgid "System Language"
 msgstr "系统语言"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "显示比例："
 
 msgid "Dim interface on dialog popup"
 msgstr "对话框弹出时变暗界面"
@@ -1655,10 +1655,10 @@ msgid "Current frame:"
 msgstr "当前帧:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "动画模式："
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "当前帧为精灵表"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -2480,7 +2480,7 @@ msgid "Radius:"
 msgstr "半径："
 
 msgid "Height:"
-msgstr ""
+msgstr "高度："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
