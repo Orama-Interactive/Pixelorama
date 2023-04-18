@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Sinhala\n"
 "Language: si_LK\n"
-"PO-Revision-Date: 2023-04-18 13:48\n"
+"PO-Revision-Date: 2023-04-18 14:46\n"
 
 msgid "OK"
 msgstr "හරි"
@@ -1224,6 +1224,18 @@ msgid "Guides color:"
 msgstr ""
 
 msgid "A color of ruler guides displayed on the canvas"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
 msgstr ""
 
 msgid "Grid"
