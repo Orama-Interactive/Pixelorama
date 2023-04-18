@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-04-15 14:37\n"
+"PO-Revision-Date: 2023-04-18 13:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1296,41 +1296,21 @@ msgstr "Izometrică"
 msgid "All"
 msgstr "Toate"
 
-msgid "Rectangular grid width:"
-msgstr "Lățimea grilei dreptunghiulare:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Setează cât de departe sunt una de cealaltă liniile verticale ale grilei dreptunghiulare"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Înălțimea grilei dreptunghiulare:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Setează cât de departe sunt una de cealaltă liniile orizontale ale grilei dreptunghiulare"
-
-msgid "Isometric cell bounds width:"
-msgstr "Lățimea limitelor celulelor izometrice:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Setează lățimea casetei de delimitare aliniate axial a celulei izometrice"
-
-msgid "Isometric cell bounds height:"
-msgstr "Înălțimea limitelor celulelor izometrice:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Setează înălțimea casetei de delimitare aliniate axial a celulei izometrice"
-
-msgid "Grid offset x:"
-msgstr "Decalaj grilă x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Setează decalajul x al grilei față de punctul de pornire al pânzei (colțul din partea din stânga sus a imaginii)"
-
-msgid "Grid offset y:"
-msgstr "Decalaj grilă y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Setează decalajul y al grilei față de punctul de pornire al pânzei (colțul din partea din stânga sus a imaginii)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Afișare peste modul mozaic:"
@@ -2460,6 +2440,7 @@ msgstr "Culoare ambientală:"
 msgid "Ambient color energy:"
 msgstr "Energia ambientală a culorii:"
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr "Vizibil:"
 
@@ -2477,10 +2458,10 @@ msgstr "De la stânga la dreapta:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Rază:"
+msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Înălțime:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
