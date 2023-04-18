@@ -13,28 +13,27 @@ onready var selection_node: Node2D = Global.canvas.selection
 
 
 func _input(event: InputEvent) -> void:
-	if _start_pos != Vector2.INF:
-		if event.is_action_pressed("transform_snap_grid"):
-			_snap_to_grid = true
-			var grid_size := Vector2(Global.grid_width, Global.grid_height)
-			_offset = _offset.snapped(grid_size)
-			if Global.current_project.has_selection:
-				if selection_node.is_moving_content:
-					var prev_pos: Vector2 = selection_node.big_bounding_rectangle.position
-					selection_node.big_bounding_rectangle.position = prev_pos.snapped(grid_size)
-					# The first time transform_snap_grid is enabled then _snap_position() is not called
-					# and the selection had wrong offset, so do selection offsetting here
-					var grid_offset := Vector2(Global.grid_offset_x, Global.grid_offset_y)
-					grid_offset = Vector2(
-						fmod(grid_offset.x, grid_size.x), fmod(grid_offset.y, grid_size.y)
-					)
-					selection_node.big_bounding_rectangle.position += grid_offset
-					selection_node.marching_ants_outline.offset += (
-						selection_node.big_bounding_rectangle.position
-						- prev_pos
-					)
-		elif event.is_action_released("transform_snap_grid"):
-			_snap_to_grid = false
+	if _start_pos == Vector2.INF:
+		return
+	if event.is_action_pressed("transform_snap_grid"):
+		_snap_to_grid = true
+		_offset = _offset.snapped(Global.grid_size)
+		if Global.current_project.has_selection and selection_node.is_moving_content:
+			var prev_pos: Vector2 = selection_node.big_bounding_rectangle.position
+			selection_node.big_bounding_rectangle.position = prev_pos.snapped(Global.grid_size)
+			# The first time transform_snap_grid is enabled then _snap_position() is not called
+			# and the selection had wrong offset, so do selection offsetting here
+			var grid_offset := Global.grid_offset
+			grid_offset = Vector2(
+				fmod(grid_offset.x, Global.grid_size.x), fmod(grid_offset.y, Global.grid_size.y)
+			)
+			selection_node.big_bounding_rectangle.position += grid_offset
+			selection_node.marching_ants_outline.offset += (
+				selection_node.big_bounding_rectangle.position
+				- prev_pos
+			)
+	elif event.is_action_released("transform_snap_grid"):
+		_snap_to_grid = false
 
 
 func draw_start(position: Vector2) -> void:
@@ -103,19 +102,18 @@ func _snap_position(position: Vector2) -> Vector2:
 		else:
 			position.x = _start_pos.x
 	if _snap_to_grid:  # Snap to grid
-		var grid_size := Vector2(Global.grid_width, Global.grid_height)
-		position = position.snapped(grid_size)
+		position = position.snapped(Global.grid_size)
 		# The part below only corrects the offset for situations when there is no selection
 		# Offsets when there is selection is controlled in _input() function
 		if !Global.current_project.has_selection:
 			var move_offset := Vector2.ZERO
 			move_offset.x = (
 				_start_pos.x
-				- int(_start_pos.x / Global.grid_width) * Global.grid_width
+				- int(_start_pos.x / Global.grid_size.x) * Global.grid_size.x
 			)
 			move_offset.y = (
 				_start_pos.y
-				- int(_start_pos.y / Global.grid_height) * Global.grid_height
+				- int(_start_pos.y / Global.grid_size.y) * Global.grid_size.y
 			)
 			position += move_offset
 

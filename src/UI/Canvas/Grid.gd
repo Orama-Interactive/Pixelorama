@@ -30,21 +30,21 @@ func _draw_cartesian_grid(target_rect: Rect2) -> void:
 
 	var x: float = (
 		target_rect.position.x
-		+ fposmod(Global.grid_offset_x - target_rect.position.x, Global.grid_width)
+		+ fposmod(Global.grid_offset.x - target_rect.position.x, Global.grid_size.x)
 	)
 	while x <= target_rect.end.x:
 		grid_multiline_points.push_back(Vector2(x, target_rect.position.y))
 		grid_multiline_points.push_back(Vector2(x, target_rect.end.y))
-		x += Global.grid_width
+		x += Global.grid_size.x
 
 	var y: float = (
 		target_rect.position.y
-		+ fposmod(Global.grid_offset_y - target_rect.position.y, Global.grid_height)
+		+ fposmod(Global.grid_offset.y - target_rect.position.y, Global.grid_size.y)
 	)
 	while y <= target_rect.end.y:
 		grid_multiline_points.push_back(Vector2(target_rect.position.x, y))
 		grid_multiline_points.push_back(Vector2(target_rect.end.x, y))
-		y += Global.grid_height
+		y += Global.grid_size.y
 
 	if not grid_multiline_points.empty():
 		draw_multiline(grid_multiline_points, Global.grid_color)
@@ -57,13 +57,9 @@ func _draw_isometric_grid(target_rect: Rect2) -> void:
 	# It will be converted to PoolVector2Array before being sent to be rendered.
 	var grid_multiline_points := []
 
-	var cell_size := Vector2(
-		Global.grid_isometric_cell_bounds_width, Global.grid_isometric_cell_bounds_height
-	)
+	var cell_size := Global.isometric_grid_size
 	var max_cell_count: Vector2 = target_rect.size / cell_size
-
-	var origin := Vector2(Global.grid_offset_x, Global.grid_offset_y)
-	var origin_offset: Vector2 = (origin - target_rect.position).posmodv(cell_size)
+	var origin_offset: Vector2 = (Global.grid_offset - target_rect.position).posmodv(cell_size)
 
 	# lines ↗↗↗ (from bottom-left to top-right)
 	var per_cell_offset := cell_size * Vector2(1, -1)
