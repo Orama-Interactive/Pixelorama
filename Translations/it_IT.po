@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-04-18 14:46\n"
+"PO-Revision-Date: 2023-04-18 16:55\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1280,15 +1280,15 @@ msgstr "Un colore di guide per righello visualizzate sulla tela"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "Aggancio"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "Distanza di aggancio:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grip snapping gets activated."
-msgstr ""
+msgstr "Questa è la distanza in pixel in cui la guida e l'aderenza dell'aggancio vengono attivate."
 
 msgid "Grid"
 msgstr "Griglia"
@@ -1310,19 +1310,19 @@ msgstr "Tutte"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "Dimensione della griglia rettangolare:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Dimensione della griglia isotometrica:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Spostamento griglia:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Imposta lo spostamento della griglia dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Disegna sulla modalità piastrelle:"
@@ -2473,7 +2473,7 @@ msgid "Radius:"
 msgstr "Raggio:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Altezza:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
