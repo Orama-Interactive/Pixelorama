@@ -26,6 +26,8 @@ func _init(_size: Vector2, from_pxo := false, _object_prop := {}, _scene_prop :=
 		scene_properties = {
 			"camera_transform": camera_transform,
 			"camera_projection": Camera.PROJECTION_PERSPECTIVE,
+			"camera_fov": 70.0,
+			"camera_size": 1.0,
 			"ambient_light_color": Color.black,
 			"ambient_light_energy": 1,
 		}
@@ -76,6 +78,8 @@ func serialize_scene_properties() -> Dictionary:
 	return {
 		"camera_transform": camera.transform,
 		"camera_projection": camera.projection,
+		"camera_fov": camera.fov,
+		"camera_size": camera.size,
 		"ambient_light_color": viewport.world.environment.ambient_light_color,
 		"ambient_light_energy": viewport.world.environment.ambient_light_energy
 	}
@@ -84,6 +88,8 @@ func serialize_scene_properties() -> Dictionary:
 func deserialize_scene_properties() -> void:
 	camera.transform = scene_properties["camera_transform"]
 	camera.projection = scene_properties["camera_projection"]
+	camera.fov = scene_properties["camera_fov"]
+	camera.size = scene_properties["camera_size"]
 	viewport.world.environment.ambient_light_color = scene_properties["ambient_light_color"]
 	viewport.world.environment.ambient_light_energy = scene_properties["ambient_light_energy"]
 
