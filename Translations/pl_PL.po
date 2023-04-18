@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-04-15 14:37\n"
+"PO-Revision-Date: 2023-04-18 13:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1295,41 +1295,21 @@ msgstr "Izometryczna"
 msgid "All"
 msgstr "Wszystkie"
 
-msgid "Rectangular grid width:"
-msgstr "Szerokość siatki:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Ustawia jak daleko od siebie są pionowe linie siatki"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Długość siatki:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Ustawia jak daleko od siebie są pionowe linie siatki"
-
-msgid "Isometric cell bounds width:"
-msgstr "Szerokość granic komórki izometrycznej:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Ustawia szerokość osi komórki izometrycznej położonej na granicy pola"
-
-msgid "Isometric cell bounds height:"
-msgstr "Długość granic komórki izometrycznej:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Ustawia długość osi komórki izometrycznej położonej na granicy pola"
-
-msgid "Grid offset x:"
-msgstr "Przesunięcie siatki x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Ustawia przesunięcie siatki na osi x od pozycji płótna (lewy górny róg obrazu)"
-
-msgid "Grid offset y:"
-msgstr "Przesunięcie siatki y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Ustawia przesunięcie siatki na osi y od pozycji płótna (lewy górny róg obrazu)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Rysuj nad trybem kafelkowym:"
@@ -2459,6 +2439,7 @@ msgstr "Kolor Środowiska:"
 msgid "Ambient color energy:"
 msgstr "Energia koloru środowiska:"
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr "Widoczny:"
 
@@ -2476,7 +2457,7 @@ msgstr "Od lewej do prawej:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Promień:"
+msgstr ""
 
 msgid "Height:"
 msgstr "Wysokość:"
