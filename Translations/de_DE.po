@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-04-15 15:35\n"
+"PO-Revision-Date: 2023-04-18 13:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1295,41 +1295,21 @@ msgstr "Isometrisch"
 msgid "All"
 msgstr "Alle"
 
-msgid "Rectangular grid width:"
-msgstr "Breite des Rechteckrasters:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Legt fest, wie weit die vertikalen Linien des rechteckigen Rasters entfernt sind"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Höhe des Rechteckrasters:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Legt fest, wie weit sich die horizontalen Linien des rechteckigen Rasters voneinander unterscheiden"
-
-msgid "Isometric cell bounds width:"
-msgstr "Isometrische Zellengrenzbreite:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Legt die Breite der Achse der isometrischen Zelle mit Ausrichtung der Begrenzungsbox fest"
-
-msgid "Isometric cell bounds height:"
-msgstr "Isometrische Zellgrenzenhöhe:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Legt die Höhe der Achse der isometrischen Zelle mit Ausrichtung der Begrenzungsbox fest"
-
-msgid "Grid offset x:"
-msgstr "X-Rasteroffset:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Legt den X-Offset des Rasters vom Ursprung der Leinwand fest (linke obere Ecke des Bildes)"
-
-msgid "Grid offset y:"
-msgstr "Y-Rasteroffset:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Legt den Y-Offset vom Ursprung der Leinwand fest (linke obere Ecke des Bilds)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Über Kachelmodus zeichnen:"
@@ -2458,6 +2438,7 @@ msgstr "Ambient-Farbe:"
 msgid "Ambient color energy:"
 msgstr "Ambient-Farbenergie:"
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr "Sichtbar:"
 
@@ -2475,7 +2456,7 @@ msgstr "Links nach rechts:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Radius:"
+msgstr ""
 
 msgid "Height:"
 msgstr "Höhe:"
