@@ -470,6 +470,63 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 color = Color( 0.63, 0.13, 0.94, 1 )
 
+[node name="SnappingHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
+margin_top = 88.0
+margin_right = 486.0
+margin_bottom = 102.0
+custom_constants/separation = 0
+
+[node name="SnappingLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/SnappingHeader"]
+margin_right = 27.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Snapping"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/SnappingHeader"]
+margin_left = 27.0
+margin_right = 486.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="SnappingOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
+margin_top = 64.0
+margin_right = 486.0
+margin_bottom = 84.0
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
+columns = 3
+
+[node name="DistanceLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/SnappingOptions"]
+margin_top = 3.0
+margin_right = 161.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 110, 0 )
+hint_tooltip = "This is the distance in pixels where guide and grip snapping gets activated."
+mouse_filter = 0
+size_flags_horizontal = 3
+text = "Snapping distance:"
+
+[node name="DistanceValue" type="TextureProgress" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/SnappingOptions"]
+margin_top = 294.0
+margin_right = 6.0
+margin_bottom = 300.0
+hint_tooltip = "This is the distance in pixels where guide and grip snapping gets activated."
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme_type_variation = "ValueSlider"
+min_value = 1.0
+max_value = 255.0
+value = 32.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 8 )
+suffix = "px"
+snap_step = 10.0
+
 [node name="GridHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
 margin_top = 88.0
 margin_right = 486.0
