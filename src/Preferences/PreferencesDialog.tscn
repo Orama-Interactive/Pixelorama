@@ -5,8 +5,8 @@
 [ext_resource path="res://addons/keychain/ShortcutEdit.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Preferences/HandleLanguages.gd" type="Script" id=4]
 [ext_resource path="res://src/Preferences/HandleThemes.gd" type="Script" id=5]
-[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/Nodes/ValueSliderV2.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=8]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -189,14 +189,23 @@ margin_top = 18.0
 margin_right = 498.0
 margin_bottom = 42.0
 
-[node name="ShrinkSlider" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/ShrinkContainer" instance=ExtResource( 6 )]
+[node name="ShrinkSlider" type="TextureProgress" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/ShrinkContainer"]
 unique_name_in_owner = true
-margin_left = 92.0
-margin_right = 293.0
+margin_right = 6.0
+margin_bottom = 6.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme_type_variation = "ValueSlider"
 min_value = 0.5
 max_value = 4.0
 step = 0.25
 value = 1.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 8 )
 
 [node name="ShrinkApplyButton" type="Button" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/ShrinkContainer"]
 margin_left = 297.0
@@ -523,6 +532,7 @@ text = "Rectangular grid size:"
 margin_top = 24.0
 margin_right = 171.0
 margin_bottom = 76.0
+size_flags_horizontal = 3
 value = Vector2( 2, 2 )
 min_value = Vector2( 1, 1 )
 allow_greater = true
@@ -546,6 +556,7 @@ margin_left = 350.0
 margin_top = 24.0
 margin_right = 486.0
 margin_bottom = 76.0
+size_flags_horizontal = 3
 value = Vector2( 16, 8 )
 min_value = Vector2( 2, 2 )
 allow_greater = true
@@ -570,6 +581,7 @@ margin_top = 80.0
 margin_right = 346.0
 margin_bottom = 132.0
 hint_tooltip = "Sets grid's offset from the canvas origin (top left corner of the image)"
+size_flags_horizontal = 3
 allow_greater = true
 allow_lesser = true
 suffix_x = "px"
@@ -647,21 +659,26 @@ mouse_filter = 0
 size_flags_horizontal = 3
 text = "Show at zoom:"
 
-[node name="ShowAtZoom" type="SpinBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/PixelGridOptions"]
-margin_left = 194.0
-margin_right = 383.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 80, 0 )
+[node name="ShowAtZoom" type="TextureProgress" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/PixelGridOptions"]
+margin_right = 6.0
+margin_bottom = 6.0
 hint_tooltip = "Sets the minimal zoom at which pixel grid will be shown"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
-min_value = 500.0
-max_value = 16384.0
-step = 100.0
+theme_type_variation = "ValueSlider"
+min_value = 50.0
+max_value = 15000.0
+step = 50.0
 value = 1500.0
-rounded = true
-align = 2
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 8 )
 suffix = "%"
+snap_step = 100.0
 
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/PixelGridOptions"]
 margin_left = 387.0
@@ -679,6 +696,7 @@ margin_bottom = 48.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "A color of the pixel grid"
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
 
 [node name="TransparencyHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
 margin_top = 340.0
@@ -716,19 +734,24 @@ mouse_filter = 0
 size_flags_horizontal = 3
 text = "Checker size:"
 
-[node name="CheckerSizeValue" type="SpinBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
-margin_left = 166.0
-margin_right = 314.0
-margin_bottom = 24.0
+[node name="CheckerSizeValue" type="TextureProgress" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
+margin_right = 6.0
+margin_bottom = 6.0
 hint_tooltip = "Size of the transparent checker background"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
+theme_type_variation = "ValueSlider"
 min_value = 1.0
-max_value = 16384.0
+max_value = 1000.0
 value = 10.0
-rounded = true
-align = 2
-suffix = "px"
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 8 )
+snap_step = 10.0
 
 [node name="CheckerColor1Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
 margin_left = 318.0
@@ -808,16 +831,22 @@ rect_min_size = Vector2( 110, 0 )
 mouse_filter = 0
 text = "Tile mode opacity:"
 
-[node name="TileModeOpacity" type="SpinBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
-margin_left = 318.0
-margin_top = 80.0
-margin_right = 486.0
-margin_bottom = 104.0
+[node name="TileModeOpacity" type="TextureProgress" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
+margin_right = 6.0
+margin_bottom = 6.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+theme_type_variation = "ValueSlider"
 max_value = 1.0
-step = 0.1
+step = 0.01
 value = 1.0
-align = 2
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 8 )
+snap_step = 0.1
 
 [node name="BackgroundHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
 margin_top = 466.0
