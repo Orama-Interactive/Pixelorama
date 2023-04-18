@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Afrikaans\n"
 "Language: af_ZA\n"
-"PO-Revision-Date: 2023-04-15 14:37\n"
+"PO-Revision-Date: 2023-04-18 13:48\n"
 
 msgid "OK"
 msgstr "Goed"
@@ -1244,40 +1244,20 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-msgid "Rectangular grid width:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
 msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
 msgstr ""
 
-msgid "Rectangular grid height:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
 msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
-
-msgid "Isometric cell bounds width:"
-msgstr ""
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
-
-msgid "Isometric cell bounds height:"
-msgstr ""
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
-
-msgid "Grid offset x:"
-msgstr ""
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
-
-msgid "Grid offset y:"
-msgstr ""
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
 msgid "Draw over Tile Mode:"
@@ -2395,6 +2375,7 @@ msgstr ""
 msgid "Ambient color energy:"
 msgstr ""
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr ""
 
@@ -2415,7 +2396,7 @@ msgid "Radius:"
 msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Hoogte:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
