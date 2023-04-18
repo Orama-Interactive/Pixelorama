@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-04-18 13:48\n"
+"PO-Revision-Date: 2023-04-18 14:46\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1278,6 +1278,18 @@ msgstr "参考线颜色："
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "显示在画布上标尺参考线的颜色"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr ""
+
 msgid "Grid"
 msgstr "网格"
 
@@ -2458,10 +2470,10 @@ msgstr ""
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "半径："
 
 msgid "Height:"
-msgstr "高度:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
