@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-04-15 14:37\n"
+"PO-Revision-Date: 2023-04-18 13:48\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1296,41 +1296,21 @@ msgstr "Ισομετρικό"
 msgid "All"
 msgstr "Όλα"
 
-msgid "Rectangular grid width:"
-msgstr "Πλάτος ορθογωνίου πλέγματος:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Ορίζει το πόσο μακριά είναι οι κάθετες γραμμές του ορθογώνιου πλέγματος"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Ύψος ορθογωνίου πλέγματος:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Ορίζει το πόσο μακριά είναι οι οριζόντιες γραμμές του ορθογώνιου πλέγματος"
-
-msgid "Isometric cell bounds width:"
-msgstr "Πλάτος ισομετρικού κελιού:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Ορίζει το πλάτος του ευθυγραμμισμένου πλαισίου οριοθέτησης του ισομετρικού κελιού"
-
-msgid "Isometric cell bounds height:"
-msgstr "Ύψος ισομετρικού κελιού:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Ορίζει το ύψος του ευθυγραμμισμένου πλαισίου οριοθέτησης του ισομετρικού κελιού"
-
-msgid "Grid offset x:"
-msgstr "Μετατόπιση πλέγματος x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Ορίζει την μετατόπιση x του πλέγματος από την προέλευση του καμβά (πάνω αριστερή γωνία της εικόνας)"
-
-msgid "Grid offset y:"
-msgstr "Μετατόπιση πλέγματος y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Ορίζει την μετατόπιση y του πλέγματος από την προέλευση του καμβά (πάνω αριστερή γωνία της εικόνας)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Εμφάνιση πάνω από τη λειτουργία μοτίβου:"
@@ -2460,6 +2440,7 @@ msgstr "Χρώμα περιβάλλοντος:"
 msgid "Ambient color energy:"
 msgstr "Ενέργεια χρώματος περιβάλλοντος:"
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr "Ορατό:"
 
@@ -2477,7 +2458,7 @@ msgstr "Αριστερά προς δεξιά:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Ακτίνα:"
+msgstr ""
 
 msgid "Height:"
 msgstr "Ύψος:"
