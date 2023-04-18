@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-04-18 14:46\n"
+"PO-Revision-Date: 2023-04-18 17:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1310,19 +1310,19 @@ msgstr "Toate"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "Dimensiunea grilei dreptunghiulare:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Dimensiunea grei izometrice:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Decalaj grilă:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Setează decalajul grilei față de punctul de pornire al pânzei (colțul din partea din stânga sus a imaginii)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Afișare peste modul mozaic:"
