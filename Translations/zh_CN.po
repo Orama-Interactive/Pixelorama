@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-04-17 02:18\n"
+"PO-Revision-Date: 2023-04-18 13:48\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1296,41 +1296,21 @@ msgstr "几何体"
 msgid "All"
 msgstr "全部"
 
-msgid "Rectangular grid width:"
-msgstr "矩形网格宽度："
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "设置矩形网格垂直线之间的距离"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "矩形网格高度："
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "设置矩形网格水平线之间的距离"
-
-msgid "Isometric cell bounds width:"
-msgstr "几何单元格边界宽度："
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "设置等深单元轴对齐边界框的宽度"
-
-msgid "Isometric cell bounds height:"
-msgstr "几何单元格边界高度："
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "设置等深单元轴对齐边界框的高度"
-
-msgid "Grid offset x:"
-msgstr "网格偏移 X:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "设置等距网格相对于画布原点的 x 偏移量(图像左上角)"
-
-msgid "Grid offset y:"
-msgstr "网格偏移 Y："
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "设置等距网格相对于画布原点的 y 偏移量(图像左上角)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "在平铺模式绘制："
@@ -2460,6 +2440,7 @@ msgstr ""
 msgid "Ambient color energy:"
 msgstr ""
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr ""
 
@@ -2477,10 +2458,10 @@ msgstr ""
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "半径："
+msgstr ""
 
 msgid "Height:"
-msgstr "高度："
+msgstr "高度:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
