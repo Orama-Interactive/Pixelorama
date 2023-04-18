@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-04-18 14:46\n"
+"PO-Revision-Date: 2023-04-18 17:53\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1280,15 +1280,15 @@ msgstr "Το χρώμα των οδηγών που φαίνεται στο κα�
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "Προσκόλληση"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "Απόσταση προσκόλλησης:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grip snapping gets activated."
-msgstr ""
+msgstr "Αυτή είναι η απόσταση σε εικονοστοιχεία όπου ενεργοποιείται η προσκόλληση στους οδηγούς και στο πλέγμα."
 
 msgid "Grid"
 msgstr "Πλέγμα"
@@ -1310,19 +1310,19 @@ msgstr "Όλα"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "Μέγεθος ορθογώνιου πλέγματος:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Μέγεθος ισομετρικού πλέγματος:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Μετατόπιση πλέγματος:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Ορίζει τη μετατόπιση του πλέγματος από την προέλευση του καμβά (πάνω αριστερή γωνία της εικόνας)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Εμφάνιση πάνω από τη λειτουργία μοτίβου:"
@@ -2473,7 +2473,7 @@ msgid "Radius:"
 msgstr "Ακτίνα:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Ύψος:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
