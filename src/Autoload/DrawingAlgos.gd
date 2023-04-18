@@ -3,7 +3,7 @@ extends Node
 enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
 # Continuation from Image.Interpolation
 enum Interpolation { SCALE3X = 5, CLEANEDGE = 6, OMNISCALE = 7 }
-var clean_edge_shader: Shader = preload("res://src/Shaders/Rotation/cleanEdge.gdshader")
+var clean_edge_shader: Shader
 var omniscale_shader: Shader
 
 
