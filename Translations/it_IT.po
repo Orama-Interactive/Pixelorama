@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-04-15 16:49\n"
+"PO-Revision-Date: 2023-04-18 13:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1296,41 +1296,21 @@ msgstr "Isometrica"
 msgid "All"
 msgstr "Tutte"
 
-msgid "Rectangular grid width:"
-msgstr "Larghezza della griglia rettangolare:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Imposta la distanza tra le linee verticali della griglia rettangolare"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Altezza della griglia rettangolare:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Imposta la distanza tra le linee orizzontali della griglia rettangolare"
-
-msgid "Isometric cell bounds width:"
-msgstr "Larghezza dei limiti delle celle isometrice:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Imposta la larghezza del riquadro di delimitazione dell'asse isometrico allineato"
-
-msgid "Isometric cell bounds height:"
-msgstr "Altezza dei limiti delle celle isometrice:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Imposta l'altezza del riquadro di delimitazione dell'asse isometrico allineato"
-
-msgid "Grid offset x:"
-msgstr "Spostamento griglia x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Imposta lo spostamento x della griglia dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
-
-msgid "Grid offset y:"
-msgstr "Spostamento griglia y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Imposta lo spostamento y della griglia dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Disegna sulla modalità piastrelle:"
@@ -2460,6 +2440,7 @@ msgstr "Colore ambiente:"
 msgid "Ambient color energy:"
 msgstr "Energia del colore ambiente:"
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr "Visibile:"
 
@@ -2477,7 +2458,7 @@ msgstr "Da sinistra a destra:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Raggio:"
+msgstr ""
 
 msgid "Height:"
 msgstr "Altezza:"
