@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-04-15 14:37\n"
+"PO-Revision-Date: 2023-04-18 13:48\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1296,41 +1296,21 @@ msgstr "Isometrik"
 msgid "All"
 msgstr "Semua"
 
-msgid "Rectangular grid width:"
-msgstr "Lebar kisi persegi panjang:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Menetapkan seberapa jauh garis menegak kisi persegi panjang"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Tinggi kisi persegi panjang:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Menetapkan seberapa jauh garis mendatar kisi persegi panjang"
-
-msgid "Isometric cell bounds width:"
-msgstr "Lebar batas sel isometrik:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Menetapkan lebar kotak pembatas yang disejajarkan sumbu sel isometrik"
-
-msgid "Isometric cell bounds height:"
-msgstr "Tinggi batas sel isometrik:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Menetapkan tinggi kotak pembatas yang disejajarkan sumbu sel isometrik"
-
-msgid "Grid offset x:"
-msgstr "Offset kisi X:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Menetapkan offset kisi X dari kanvas aslinya (Di pojok kiri atas gambar)"
-
-msgid "Grid offset y:"
-msgstr "Offset kisi Y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Menetapkan offset kisi Y dari kanvas aslinya (Di pojok kiri atas gambar)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Gambar di atas Mode Ubin:"
@@ -2458,6 +2438,7 @@ msgstr ""
 msgid "Ambient color energy:"
 msgstr ""
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr ""
 
@@ -2475,10 +2456,10 @@ msgstr ""
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Jari-jari:"
+msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Tinggi:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
