@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-04-18 13:48\n"
+"PO-Revision-Date: 2023-04-18 14:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1278,6 +1278,18 @@ msgstr "ガイドの色:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "キャンバスに表示されるルーラーガイドの色"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr "スナップ"
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr "スナップ距離:"
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr "これは、ガイドとグリップのスナップが有効になるピクセル単位の距離です。"
+
 msgid "Grid"
 msgstr "グリッド"
 
@@ -1298,19 +1310,19 @@ msgstr "すべて"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "矩形グリッドのサイズ:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "等角グリッドのサイズ:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "グリッドオフセット:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "キャンバスの原点 (画像の左上隅) からのグリッドのオフセットを設定します。"
 
 msgid "Draw over Tile Mode:"
 msgstr "タイルモードの上に表示:"
@@ -2458,7 +2470,7 @@ msgstr "左から右:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "半径:"
 
 msgid "Height:"
 msgstr "高さ:"
