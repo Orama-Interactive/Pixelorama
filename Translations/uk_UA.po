@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-04-16 02:56\n"
+"PO-Revision-Date: 2023-04-18 13:48\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1296,41 +1296,21 @@ msgstr "Ізометрична"
 msgid "All"
 msgstr "Усі"
 
-msgid "Rectangular grid width:"
-msgstr "Ширина прямокутної сітки:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Вказує відлеглість поміж вертикальними лініями прямокутної сітки"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Висота прямокутної сітки:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Вказує відлеглість поміж горизонтальними лініями прямокутної сітки"
-
-msgid "Isometric cell bounds width:"
-msgstr "Ширина меж ізометричної клітини:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Вказує ширину прямокутника навколо ізометричної клітини"
-
-msgid "Isometric cell bounds height:"
-msgstr "Висота меж ізометричної клітини:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Вказує висоту прямокутника навколо ізометричної клітини"
-
-msgid "Grid offset x:"
-msgstr "Зсув сітки за X:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Вказує зсування сітки за віссю X від початку координат (верхнього лівого краю зображення)"
-
-msgid "Grid offset y:"
-msgstr "Зсув сітки за Y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Вказує зсування сітки за віссю Y від початку координат (верхнього лівого краю зображення)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Малювати в безшовному режимі:"
@@ -2460,6 +2440,7 @@ msgstr "Колір оточення:"
 msgid "Ambient color energy:"
 msgstr "Енергія кольору оточення:"
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr "Видимий:"
 
@@ -2477,7 +2458,7 @@ msgstr "Зліва направо:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Радіус:"
+msgstr ""
 
 msgid "Height:"
 msgstr "Висота:"
