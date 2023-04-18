@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-04-15 14:37\n"
+"PO-Revision-Date: 2023-04-18 13:48\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -1296,41 +1296,21 @@ msgstr "İzometrik"
 msgid "All"
 msgstr "Tümü"
 
-msgid "Rectangular grid width:"
-msgstr "Dikdörtgen ızgara genişliği:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Dikdörtgen ızgaranın dikey çizgilerinin birbirinden ne kadar uzakta olduğunu ayarlar"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Dikdörtgen ızgara yüksekliği:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Dikdörtgen ızgaranın yatay çizgilerinin birbirinden ne kadar uzakta olduğunu ayarlar"
-
-msgid "Isometric cell bounds width:"
-msgstr "İzometrik hücre sınırları genişliği:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "İzometrik hücrenin eksen hizalı sınırlayıcı kutusunun genişliğini ayarlar"
-
-msgid "Isometric cell bounds height:"
-msgstr "İzometrik hücre sınırları yüksekliği:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "İzometrik hücrenin eksen hizalı sınırlayıcı kutusunun yüksekliğini ayarlar"
-
-msgid "Grid offset x:"
-msgstr "Izgara konumu x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Izgaranın tuval orijininden x konumunu ayarlar (resmin sol üst köşesi)"
-
-msgid "Grid offset y:"
-msgstr "Izgara konumu y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Izgaranın tuval orijininden y konumunu ayarlar (resmin sol üst köşesi)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Döşeme Kipinde Çizim:"
@@ -2460,6 +2440,7 @@ msgstr "Ortam rengi:"
 msgid "Ambient color energy:"
 msgstr "Ortam renk enerjisi:"
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr "Görünür:"
 
@@ -2477,10 +2458,10 @@ msgstr "Soldan sağa:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Yarıçap:"
+msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Yükseklik:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
