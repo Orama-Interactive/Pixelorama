@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2023-04-15 14:37\n"
+"PO-Revision-Date: 2023-04-18 13:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1295,41 +1295,21 @@ msgstr "Isométrico"
 msgid "All"
 msgstr "Todo"
 
-msgid "Rectangular grid width:"
-msgstr "Ancho de la cuadrícula rectangular:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Establece la distancia entre las líneas verticales de la cuadrícula rectangular"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Altura de la cuadrícula rectangular:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Establece la distancia entre las líneas horizontales de la cuadrícula rectangular"
-
-msgid "Isometric cell bounds width:"
-msgstr "Ancho de los límites de la celda isométrica:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Establece el ancho de la caja delimitadora alineada con el eje de la celda isométrica"
-
-msgid "Isometric cell bounds height:"
-msgstr "Altura de los límites de la celda isométrica:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Establece la altura del recuadro delimitador alineado con los ejes de la celda isométrica"
-
-msgid "Grid offset x:"
-msgstr "Desplazamiento de cuadrícula en x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Establece el desplazamiento en x de la cuadrícula desde el origen del lienzo (esquina superior izquierda de la imagen)"
-
-msgid "Grid offset y:"
-msgstr "Desplazamiento de cuadrícula en y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Establece el desplazamiento en y de la cuadrícula desde el origen del lienzo (esquina superior izquierda de la imagen)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Dibujar en el Modo Mosaico:"
@@ -2456,6 +2436,7 @@ msgstr ""
 msgid "Ambient color energy:"
 msgstr ""
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr ""
 
@@ -2473,10 +2454,10 @@ msgstr ""
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Radio:"
+msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Alto:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
