@@ -23,10 +23,8 @@ onready var repeat_option_button: OptionButton = $"%RepeatOptionButton"
 onready var position: ValueSlider = $"%PositionSlider"
 onready var size_slider: ValueSlider = $"%SizeSlider"
 onready var angle: ValueSlider = $"%AngleSlider"
-onready var center_x: ValueSlider = $"%XCenterSlider"
-onready var center_y: ValueSlider = $"%YCenterSlider"
-onready var radius_x: ValueSlider = $"%XRadiusSlider"
-onready var radius_y: ValueSlider = $"%YRadiusSlider"
+onready var center_slider := $"%CenterSlider" as ValueSliderV2
+onready var radius_slider := $"%RadiusSlider" as ValueSliderV2
 
 
 class DitherMatrix:
@@ -99,8 +97,8 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"position": (position.value / 100.0) - 0.5,
 		"size": size_slider.value / 100.0,
 		"angle": angle.value,
-		"center": Vector2(center_x.value / 100.0, center_y.value / 100.0),
-		"radius": Vector2(radius_x.value, radius_y.value),
+		"center": center_slider.value / 100.0,
+		"radius": radius_slider.value,
 		"dither_texture": dither_texture,
 		"image_size": project.size,
 		"pixel_size": pixel_size,
@@ -132,6 +130,10 @@ func _on_ShapeOptionButton_item_selected(index: int) -> void:
 
 
 func _value_changed(_value: float) -> void:
+	update_preview()
+
+
+func _value_v2_changed(_value: Vector2) -> void:
 	update_preview()
 
 
