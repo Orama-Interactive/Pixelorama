@@ -484,6 +484,8 @@ func undo_or_redo(
 			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	canvas.update()
+	second_viewport.get_child(0).get_node("CanvasPreview").update()
+	canvas_preview_container.canvas_preview.update()
 	if !project.has_changed:
 		project.has_changed = true
 		if project == current_project:

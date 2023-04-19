@@ -31,9 +31,6 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	Global.second_viewport.get_child(0).get_node("CanvasPreview").update()
-	Global.small_preview_viewport.get_child(0).get_node("CanvasPreview").update()
-
 	var current_cels: Array = Global.current_project.frames[Global.current_project.current_frame].cels
 	var position_tmp := position
 	var scale_tmp := scale
@@ -91,7 +88,7 @@ func _input(event: InputEvent) -> void:
 			Global.main_viewport.warp_mouse(tmp_position)
 	# Do not use self.get_local_mouse_position() because it return unexpected
 	# value when shrink parameter is not equal to one. At godot version 3.2.3
-	var tmp_transform = get_canvas_transform().affine_inverse()
+	var tmp_transform := get_canvas_transform().affine_inverse()
 	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
 
 	if Global.has_focus:

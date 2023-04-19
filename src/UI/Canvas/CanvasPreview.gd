@@ -14,6 +14,10 @@ onready var animation_timer := $AnimationTimer as Timer
 onready var transparent_checker = get_parent().get_node("TransparentChecker") as ColorRect
 
 
+func _ready() -> void:
+	Global.connect("cel_changed", self, "_cel_changed")
+
+
 func _draw() -> void:
 	var current_project: Project = Global.current_project
 	match mode:
@@ -24,7 +28,7 @@ func _draw() -> void:
 			if animation_timer.is_stopped():
 				frame_index = current_project.current_frame
 			var frame: Frame = current_project.frames[frame_index]
-			animation_timer.wait_time = frame.duration * (1 / current_project.fps)
+			animation_timer.wait_time = frame.duration * (1.0 / current_project.fps)
 			var current_cels: Array = frame.cels
 
 			# Draw current frame layers
@@ -46,7 +50,7 @@ func _draw() -> void:
 				current_project.size.x, current_project.size.y, false, Image.FORMAT_RGBA8
 			)
 			Export.blend_all_layers(frame_image, target_frame)
-			sprite_frames = split_spritesheet(frame_image, h_frames, v_frames)
+			sprite_frames = _split_spritesheet(frame_image, h_frames, v_frames)
 
 			# limit start and end
 			if end_sprite_sheet_frame > sprite_frames.size():
@@ -86,18 +90,22 @@ func _on_AnimationTimer_timeout() -> void:
 
 			animation_timer.wait_time = (
 				current_project.frames[frame_index].duration
-				* (1 / current_project.fps)
+				* (1.0 / current_project.fps)
 			)
 
 		Mode.SPRITESHEET:
 			frame_index += 1
-			animation_timer.wait_time = (1 / Global.current_project.fps)
+			animation_timer.wait_time = (1.0 / Global.current_project.fps)
 	animation_timer.set_one_shot(true)
 	animation_timer.start()
 	update()
 
 
-func split_spritesheet(image: Image, horiz: int, vert: int) -> Array:
+func _cel_changed() -> void:
+	update()
+
+
+func _split_spritesheet(image: Image, horiz: int, vert: int) -> Array:
 	var result := []
 	horiz = min(horiz, image.get_size().x)
 	vert = min(vert, image.get_size().y)
