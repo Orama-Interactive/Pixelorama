@@ -238,6 +238,8 @@ script = ExtResource( 8 )
 prefix = "End frame:"
 
 [connection signal="value_changed" from="VBox/HBox/VBoxContainer/PreviewZoomSlider" to="." method="_on_PreviewZoomSlider_value_changed"]
+[connection signal="mouse_entered" from="VBox/HBox/PreviewViewportContainer" to="." method="_on_PreviewViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="VBox/HBox/PreviewViewportContainer" to="." method="_on_PreviewViewportContainer_mouse_exited"]
 [connection signal="toggled" from="VBox/Animation/PlayButton" to="." method="_on_PlayButton_toggled"]
 [connection signal="item_selected" from="VBox/Animation/VBoxContainer/Mode/OptionButton" to="." method="_on_OptionButton_item_selected"]
 [connection signal="value_changed" from="VBox/Animation/VBoxContainer/Options/GridContainer/HFrames" to="." method="_on_HFrames_value_changed"]

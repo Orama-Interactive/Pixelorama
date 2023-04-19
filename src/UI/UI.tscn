@@ -317,6 +317,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 script = ExtResource( 23 )
+camera_path = NodePath("Viewport/Camera2D")
 
 [node name="Viewport" type="Viewport" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/ViewportContainer"]
 size = Vector2( 901, 576 )
@@ -354,6 +355,7 @@ margin_bottom = 350.0
 size_flags_vertical = 3
 stretch = true
 script = ExtResource( 23 )
+camera_path = NodePath("Viewport/Camera2D2")
 
 [node name="Viewport" type="Viewport" parent="DockableContainer/Second Canvas"]
 size = Vector2( 2, 342 )

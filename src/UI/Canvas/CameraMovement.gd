@@ -5,7 +5,6 @@ signal rotation_changed
 
 enum Cameras { MAIN, SECOND, SMALL }
 
-const KEY_MOVE_ACTION_NAMES := ["camera_left", "camera_right", "camera_up", "camera_down"]
 const CAMERA_SPEED_RATE := 15.0
 
 export(Cameras) var index := 0
@@ -22,6 +21,7 @@ var should_tween := true
 
 
 func _ready() -> void:
+	set_process_input(false)
 	if index == Cameras.MAIN:
 		rotation_slider = Global.top_menu_container.get_node("%RotationSlider")
 		rotation_slider.connect("value_changed", self, "_rotation_value_changed")
@@ -78,22 +78,6 @@ func _input(event: InputEvent) -> void:
 		drag = false
 		return
 	mouse_pos = viewport_container.get_local_mouse_position()
-	var viewport_size := viewport_container.rect_size
-	if !Rect2(Vector2.ZERO, viewport_size).has_point(mouse_pos):
-		drag = false
-		return
-
-	var get_velocity := false
-	for action in KEY_MOVE_ACTION_NAMES:
-		if event.is_action(action):
-			get_velocity = true
-
-	if get_velocity:
-		var velocity := Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
-		if velocity != Vector2.ZERO and !_has_selection_tool():
-			offset += velocity.rotated(rotation) * zoom * CAMERA_SPEED_RATE
-			_update_rulers()
-
 	if event.is_action_pressed("pan"):
 		drag = true
 	elif event.is_action_released("pan"):
@@ -103,18 +87,24 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("zoom_out", false, true):  # Wheel Down Event
 		zoom_camera(1)
 
-	elif event is InputEventMagnifyGesture:  # Zoom Gesture on a Laptop touchpad
+	elif event is InputEventMagnifyGesture:  # Zoom Gesture on a laptop touchpad
 		if event.factor < 1:
 			zoom_camera(1)
 		else:
 			zoom_camera(-1)
 	elif event is InputEventPanGesture and OS.get_name() != "Android":
-		# Pan Gesture on a Latop touchpad
-		offset = offset + event.delta.rotated(rotation) * zoom * 7  # for moving the canvas
-	elif event is InputEventMouseMotion && drag:
-		offset = offset - event.relative.rotated(rotation) * zoom
-		update_transparent_checker_offset()
-		_update_rulers()
+		# Pan Gesture on a laptop touchpad
+		offset = offset + event.delta.rotated(rotation) * zoom * 7
+	elif event is InputEventMouseMotion:
+		if drag:
+			offset = offset - event.relative.rotated(rotation) * zoom
+			update_transparent_checker_offset()
+			_update_rulers()
+	else:
+		var velocity := Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
+		if velocity != Vector2.ZERO and !_has_selection_tool():
+			offset += velocity.rotated(rotation) * zoom * CAMERA_SPEED_RATE
+			_update_rulers()
 
 	save_values_to_project()
 

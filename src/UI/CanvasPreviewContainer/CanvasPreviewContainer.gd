@@ -73,3 +73,11 @@ func _on_EndFrame_value_changed(value: float) -> void:
 		start_frame.value = value
 		canvas_preview.frame = value - 1
 	canvas_preview.update()
+
+
+func _on_PreviewViewportContainer_mouse_entered() -> void:
+	camera.set_process_input(true)
+
+
+func _on_PreviewViewportContainer_mouse_exited() -> void:
+	camera.set_process_input(false)
