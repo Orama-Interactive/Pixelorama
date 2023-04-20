@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-04-18 14:46\n"
+"PO-Revision-Date: 2023-04-20 13:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -870,17 +870,17 @@ msgstr "色:"
 msgid "Steps:"
 msgstr "手順:"
 
-msgid "Top to Bottom"
-msgstr "上から下"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr ""
 
-msgid "Bottom to Top"
-msgstr "下から上へ"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr ""
 
-msgid "Left to Right"
-msgstr "左から右"
-
-msgid "Right to Left"
-msgstr "右から左"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "スプラッシュ スクリーンを表示"
@@ -2470,7 +2470,7 @@ msgstr "左から右:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "半径:"
+msgstr ""
 
 msgid "Height:"
 msgstr "高さ:"
