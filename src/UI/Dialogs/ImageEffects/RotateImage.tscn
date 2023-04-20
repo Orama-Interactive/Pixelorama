@@ -10,7 +10,7 @@ window_title = "Rotate Image"
 script = ExtResource( 1 )
 
 [node name="VBoxContainer" parent="." index="3"]
-margin_bottom = 458.0
+margin_bottom = 416.0
 
 [node name="AspectRatioContainer" parent="VBoxContainer" index="0"]
 margin_right = 278.0

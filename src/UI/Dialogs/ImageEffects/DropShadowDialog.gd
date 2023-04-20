@@ -16,15 +16,6 @@ func _ready() -> void:
 	preview.set_material(sm)
 
 
-func set_nodes() -> void:
-	preview = $VBoxContainer/AspectRatioContainer/Preview
-	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
-	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
-	animate_options_container = $VBoxContainer/AnimationOptions
-	animate_menu = $"%AnimateMenu".get_popup()
-	initial_button = $"%InitalButton"
-
-
 func set_animate_menu(_elements) -> void:
 	# set as in enum
 	animate_menu.add_check_item("Offset X", Animate.OFFSET_X)
