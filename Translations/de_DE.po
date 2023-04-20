@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-04-18 14:46\n"
+"PO-Revision-Date: 2023-04-20 11:03\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1279,7 +1279,7 @@ msgstr "Eine Farbe der Lineal-Guides, die auf dem Canvas angezeigt werden"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "Einrasten"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
@@ -1309,19 +1309,19 @@ msgstr "Alle"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "Rechtecksrastergröße:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Isometrische Rastergröße:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Raster-Offset:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Legt den Offset des Rasters vom Ursprung des Canvas fest (linke obere Ecke des Bilds)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Über Kachelmodus zeichnen:"
