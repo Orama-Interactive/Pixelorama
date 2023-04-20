@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-04-18 14:46\n"
+"PO-Revision-Date: 2023-04-20 09:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -390,7 +390,7 @@ msgid "Start frame:"
 msgstr "Frame de début:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Frame de fin :"
 
 msgid "At frame:"
 msgstr "À la frame:"
@@ -1310,7 +1310,7 @@ msgstr "Tous"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "Taille de la grille rectangulaire :"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
@@ -1647,7 +1647,7 @@ msgid "Current frame:"
 msgstr "Frame actuelle :"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "Mode d'animation :"
 
 msgid "Current frame as spritesheet"
 msgstr ""
