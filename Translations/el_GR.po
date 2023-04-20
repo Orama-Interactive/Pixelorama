@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-04-20 13:26\n"
+"PO-Revision-Date: 2023-04-20 14:40\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -872,15 +872,15 @@ msgstr "Βαθμίδες:"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "Αφίσα"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "Επίπεδα αφίσας:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "Ένταση χρωματικής αντιπαράθεσης:"
 
 msgid "View Splash Screen"
 msgstr "Εμφάνιση οθόνης εκκίνησης"
@@ -2470,7 +2470,7 @@ msgstr "Αριστερά προς δεξιά:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "Ακτίνα:"
 
 msgid "Height:"
 msgstr "Ύψος:"
