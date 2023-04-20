@@ -292,8 +292,6 @@ func _setup_image_menu() -> void:
 	var i := 0
 	for item in image_menu_items:
 		image_menu.add_item(item, i)
-		if i == Global.ImageMenu.RESIZE_CANVAS:
-			image_menu.add_separator()
 		i += 1
 
 	image_menu.connect("id_pressed", self, "image_menu_id_pressed")
