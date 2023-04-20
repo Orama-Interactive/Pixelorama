@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-04-18 17:53\n"
+"PO-Revision-Date: 2023-04-20 13:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -870,17 +870,17 @@ msgstr "Culori:"
 msgid "Steps:"
 msgstr "Pași:"
 
-msgid "Top to Bottom"
-msgstr "De sus în jos"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr ""
 
-msgid "Bottom to Top"
-msgstr "De jos în sus"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr ""
 
-msgid "Left to Right"
-msgstr "De la stânga la dreapta"
-
-msgid "Right to Left"
-msgstr "De la dreapta la stânga"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Vizualizare ecran de întâmpinare"
@@ -2470,10 +2470,10 @@ msgstr "De la stânga la dreapta:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Rază:"
+msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Înălțime:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
