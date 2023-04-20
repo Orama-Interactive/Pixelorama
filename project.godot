@@ -988,6 +988,14 @@ gradient={
 "deadzone": 0.5,
 "events": [  ]
 }
+gradient_map={
+"deadzone": 0.5,
+"events": [  ]
+}
+posterize={
+"deadzone": 0.5,
+"events": [  ]
+}
 view_splash_screen={
 "deadzone": 0.5,
 "events": [  ]
@@ -1005,10 +1013,6 @@ changelog={
 "events": [  ]
 }
 about_pixelorama={
-"deadzone": 0.5,
-"events": [  ]
-}
-gradient_map={
 "deadzone": 0.5,
 "events": [  ]
 }
