@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-04-18 14:46\n"
+"PO-Revision-Date: 2023-04-20 13:27\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -870,17 +870,17 @@ msgstr "Warna:"
 msgid "Steps:"
 msgstr "Langkah:"
 
-msgid "Top to Bottom"
-msgstr "Atas ke Bawah"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr ""
 
-msgid "Bottom to Top"
-msgstr "Bawah ke Atas"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr ""
 
-msgid "Left to Right"
-msgstr "Kiri ke Kanan"
-
-msgid "Right to Left"
-msgstr "Kanan ke Kiri"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Tampilkan \"Splash Screen\""
@@ -2468,10 +2468,10 @@ msgstr ""
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Jari-jari:"
+msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Tinggi:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
