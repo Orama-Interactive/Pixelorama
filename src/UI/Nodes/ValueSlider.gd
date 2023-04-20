@@ -277,7 +277,10 @@ func _on_Value_button_down(direction: int) -> void:
 	if not editable:
 		return
 	# Direction is either 1 or -1
-	value += (snap_step if Input.is_action_pressed("ctrl") else step) * direction
+	if snap_by_default:
+		value += (step if Input.is_action_pressed("ctrl") else snap_step) * direction
+	else:
+		value += (snap_step if Input.is_action_pressed("ctrl") else step) * direction
 	arrow_is_held = direction
 	_timer.wait_time = echo_arrow_time * 8  # 0.6 with the default value
 	_timer.one_shot = true
