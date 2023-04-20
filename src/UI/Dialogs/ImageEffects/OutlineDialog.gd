@@ -60,9 +60,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"width": anim_thickness,
 		"pattern": pattern,
 		"inside": inside_image,
-		"selection": selection_tex,
-		"affect_selection": selection_checkbox.pressed,
-		"has_selection": project.has_selection
+		"selection": selection_tex
 	}
 	if !confirmed:
 		for param in params:

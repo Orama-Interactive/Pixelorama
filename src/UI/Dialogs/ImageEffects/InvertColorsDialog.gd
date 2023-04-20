@@ -26,13 +26,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		selection_tex.create_from_image(project.selection_map, 0)
 
 	var params := {
-		"red": red,
-		"blue": blue,
-		"green": green,
-		"alpha": alpha,
-		"selection": selection_tex,
-		"affect_selection": selection_checkbox.pressed,
-		"has_selection": project.has_selection
+		"red": red, "blue": blue, "green": green, "alpha": alpha, "selection": selection_tex
 	}
 
 	if !confirmed:
