@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-04-20 11:03\n"
+"PO-Revision-Date: 2023-04-20 13:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -869,17 +869,17 @@ msgstr "Farben:"
 msgid "Steps:"
 msgstr "Schritte:"
 
-msgid "Top to Bottom"
-msgstr "Von oben nach unten"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr ""
 
-msgid "Bottom to Top"
-msgstr "Von unten nach oben"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr ""
 
-msgid "Left to Right"
-msgstr "Von links nach rechts"
-
-msgid "Right to Left"
-msgstr "Von rechts nach links"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Zeige Splash Screen"
@@ -1283,11 +1283,11 @@ msgstr "Einrasten"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "Einrastungs-Distanz:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grip snapping gets activated."
-msgstr ""
+msgstr "Dies ist die Distanz in Pixeln, in der Guide- und Rastereinrastung aktiviert werden."
 
 msgid "Grid"
 msgstr "Raster"
@@ -2468,10 +2468,10 @@ msgstr "Links nach rechts:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Radius:"
+msgstr ""
 
 msgid "Height:"
-msgstr ""
+msgstr "Höhe:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
