@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-04-20 13:26\n"
+"PO-Revision-Date: 2023-04-20 17:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -872,15 +872,15 @@ msgstr "Passaggi:"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "Posterizzazione"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "Livelli di posterizzazione:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "Intensità del ditere:"
 
 msgid "View Splash Screen"
 msgstr "Visualizza la schermata iniziale"
@@ -2470,7 +2470,7 @@ msgstr "Da sinistra a destra:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "Raggio:"
 
 msgid "Height:"
 msgstr "Altezza:"
