@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-04-20 09:00\n"
+"PO-Revision-Date: 2023-04-20 10:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1314,15 +1314,15 @@ msgstr "Taille de la grille rectangulaire :"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Taille de la grille isométrique :"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Décalage de la grille :"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Définit le décalage depuis l'origine du canevas (en haut à gauche de l'image)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Afficher par dessus le mode tuile:"
@@ -2293,7 +2293,7 @@ msgid "Canvas Preview"
 msgstr "Aperçu du canevas"
 
 msgid "Color Pickers"
-msgstr ""
+msgstr "Sélecteurs de couleurs"
 
 msgid "Global Tool Options"
 msgstr ""
@@ -2318,7 +2318,7 @@ msgid "Crop"
 msgstr ""
 
 msgid "Resize the canvas"
-msgstr ""
+msgstr "Redimensionner le canevas"
 
 msgid "Margins"
 msgstr "Marges"
@@ -2470,7 +2470,7 @@ msgid "Radius:"
 msgstr "Rayon :"
 
 msgid "Height:"
-msgstr ""
+msgstr "Hauteur :"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
