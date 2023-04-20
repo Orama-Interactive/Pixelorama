@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-04-18 14:46\n"
+"PO-Revision-Date: 2023-04-20 03:46\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1310,19 +1310,19 @@ msgstr "全部"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "矩形网格大小："
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "几何网格大小："
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "网格偏移："
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "设置画布来源的网格偏移量(图像左上角)"
 
 msgid "Draw over Tile Mode:"
 msgstr "在平铺模式绘制："
