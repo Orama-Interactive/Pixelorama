@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-04-20 13:26\n"
+"PO-Revision-Date: 2023-04-21 10:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2467,7 +2467,7 @@ msgstr ""
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "Rayon :"
 
 msgid "Height:"
 msgstr "Hauteur :"
