@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-04-21 02:23\n"
+"PO-Revision-Date: 2023-04-21 08:03\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -522,7 +522,7 @@ msgstr "Lapisan kelompok:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "Lapisan 3D:"
 
 msgid "Direction:"
 msgstr "Arah:"
@@ -664,7 +664,7 @@ msgid "System Language"
 msgstr "Bahasa Sistem"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Skala tampilan:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Redupkan antarmuka pada sembulan dialog"
