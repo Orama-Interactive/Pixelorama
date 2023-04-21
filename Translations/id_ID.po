@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-04-20 13:27\n"
+"PO-Revision-Date: 2023-04-21 02:23\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -254,11 +254,11 @@ msgstr "Atur Tata Letak"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Pratayang"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Ini pratayang, mengubah ini tidak akan mengubah tata letak"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
