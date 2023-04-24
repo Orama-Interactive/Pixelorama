@@ -15,3 +15,4 @@ Icon=pixelorama
 Terminal=false
 Type=Application
 Categories=Graphics;2DGraphics;RasterGraphics;
+MimeType=image/pxo;image/png;image/bmp;image/vnd.radiance;image/jpeg;image/svg+xml;image/x-tga;image/webp;
