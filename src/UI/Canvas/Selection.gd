@@ -195,7 +195,7 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 	if _is_action_direction(event) and arrow_key_move:
 		var step := Vector2.ONE
 		if Input.is_key_pressed(KEY_CONTROL):
-			step = Vector2(Global.grid_width, Global.grid_height)
+			step = Global.grid_size
 		var input := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		var move := input.rotated(stepify(Global.camera.rotation, PI / 2))
 		# These checks are needed to fix a bug where the selection got stuck

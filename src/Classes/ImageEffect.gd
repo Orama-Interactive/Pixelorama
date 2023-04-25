@@ -122,7 +122,12 @@ func commit_action(_cel: Image, _project: Project = Global.current_project) -> v
 
 
 func set_nodes() -> void:
-	pass
+	preview = $VBoxContainer/AspectRatioContainer/Preview
+	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
+	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
+	animate_options_container = $VBoxContainer/AnimationOptions
+	animate_menu = $"%AnimateMenu".get_popup()
+	initial_button = $"%InitalButton"
 
 
 func set_animate_menu(elements: int) -> void:

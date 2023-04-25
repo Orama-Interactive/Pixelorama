@@ -286,14 +286,13 @@ func _setup_image_menu() -> void:
 		"Adjust Hue/Saturation/Value",
 		"Gradient",
 		"Gradient Map",
+		"Posterize",
 		# "Shader"
 	]
 	var image_menu: PopupMenu = image_menu_button.get_popup()
 	var i := 0
 	for item in image_menu_items:
 		image_menu.add_item(item, i)
-		if i == Global.ImageMenu.RESIZE_CANVAS:
-			image_menu.add_separator()
 		i += 1
 
 	image_menu.connect("id_pressed", self, "image_menu_id_pressed")
@@ -700,6 +699,9 @@ func image_menu_id_pressed(id: int) -> void:
 
 		Global.ImageMenu.GRADIENT_MAP:
 			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/GradientMapDialog"))
+
+		Global.ImageMenu.POSTERIZE:
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/Posterize"))
 
 #		Global.ImageMenu.SHADER:
 #			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ShaderEffect"))

@@ -37,6 +37,7 @@ enum ImageMenu {
 	HSV,
 	GRADIENT,
 	GRADIENT_MAP,
+	POSTERIZE,
 	SHADER
 }
 enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT }
@@ -91,13 +92,11 @@ var right_tool_color := Color("fd6d14")
 var default_width := 64
 var default_height := 64
 var default_fill_color := Color(0, 0, 0, 0)
+var snapping_distance := 32.0
 var grid_type = GridTypes.CARTESIAN
-var grid_width := 2
-var grid_height := 2
-var grid_isometric_cell_bounds_width := 16
-var grid_isometric_cell_bounds_height := 8
-var grid_offset_x := 0
-var grid_offset_y := 0
+var grid_size := Vector2(2, 2)
+var isometric_grid_size := Vector2(16, 8)
+var grid_offset := Vector2.ZERO
 var grid_draw_over_tile_mode := false
 var grid_color := Color.black
 var pixel_grid_show_at_zoom := 1500.0  # percentage
@@ -138,7 +137,6 @@ var draw_pixel_grid := false
 var show_rulers := true
 var show_guides := true
 var show_mouse_guides := false
-var snapping_distance := 32.0
 var snap_to_rectangular_grid := false
 var snap_to_guides := false
 var snap_to_perspective_guides := false
@@ -313,6 +311,8 @@ func _initialize_keychain() -> void:
 		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.GRADIENT),
 		"gradient_map":
 		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.GRADIENT_MAP),
+		"posterize":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.POSTERIZE),
 		"mirror_view":
 		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.MIRROR_VIEW),
 		"show_grid":
@@ -487,6 +487,8 @@ func undo_or_redo(
 			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
 	canvas.update()
+	second_viewport.get_child(0).get_node("CanvasPreview").update()
+	canvas_preview_container.canvas_preview.update()
 	if !project.has_changed:
 		project.has_changed = true
 		if project == current_project:

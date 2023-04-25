@@ -4,12 +4,6 @@ onready var flip_h := $VBoxContainer/FlipOptions/FlipHorizontal as CheckBox
 onready var flip_v := $VBoxContainer/FlipOptions/FlipVertical as CheckBox
 
 
-func set_nodes() -> void:
-	preview = $VBoxContainer/AspectRatioContainer/Preview
-	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
-	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
-
-
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	_flip_image(cel, selection_checkbox.pressed, project)
 

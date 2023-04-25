@@ -1,11 +1,8 @@
 extends ImageEffect
 
-var red := true
-var green := true
-var blue := true
-var alpha := false
-
-var shader: Shader = preload("res://src/Shaders/Desaturate.shader")
+var shader: Shader = preload("res://src/Shaders/Posterize.gdshader")
+var levels := 2.0
+var dither := 0.0
 
 
 func _ready() -> void:
@@ -19,9 +16,8 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	if selection_checkbox.pressed and project.has_selection:
 		selection_tex.create_from_image(project.selection_map, 0)
 
-	var params := {
-		"red": red, "blue": blue, "green": green, "alpha": alpha, "selection": selection_tex
-	}
+	var params := {"colors": levels, "dither": dither, "selection": selection_tex}
+
 	if !confirmed:
 		for param in params:
 			preview.material.set_shader_param(param, params[param])
@@ -31,21 +27,11 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		yield(gen, "done")
 
 
-func _on_RButton_toggled(button_pressed: bool) -> void:
-	red = button_pressed
+func _on_LevelsSlider_value_changed(value: float) -> void:
+	levels = value - 1.0
 	update_preview()
 
 
-func _on_GButton_toggled(button_pressed: bool) -> void:
-	green = button_pressed
-	update_preview()
-
-
-func _on_BButton_toggled(button_pressed: bool) -> void:
-	blue = button_pressed
-	update_preview()
-
-
-func _on_AButton_toggled(button_pressed: bool) -> void:
-	alpha = button_pressed
+func _on_DitherSlider_value_changed(value: float) -> void:
+	dither = value
 	update_preview()

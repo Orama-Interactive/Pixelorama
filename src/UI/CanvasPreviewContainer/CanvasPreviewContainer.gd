@@ -1,9 +1,8 @@
 extends PanelContainer
 
-onready var canvas_preview: Node2D = $"%CanvasPreview"
-onready var camera: Camera2D = $"%CameraPreview"
-onready var play_button: Button = $"%PlayButton"
-
+onready var canvas_preview := $"%CanvasPreview" as Node2D
+onready var camera := $"%CameraPreview" as Camera2D
+onready var play_button := $"%PlayButton" as Button
 onready var start_frame := $"%StartFrame" as ValueSlider
 onready var end_frame := $"%EndFrame" as ValueSlider
 
@@ -34,7 +33,13 @@ func _on_PlayButton_toggled(button_pressed: bool) -> void:
 func _on_OptionButton_item_selected(index: int) -> void:
 	play_button.pressed = false
 	canvas_preview.mode = index
-	$VBox/Animation/VBoxContainer/Options.visible = bool(index == 1)
+	if index == 0:
+		$VBox/Animation/VBoxContainer/Options.visible = false
+		canvas_preview.transparent_checker.fit_rect(
+			Rect2(Vector2.ZERO, Global.current_project.size)
+		)
+	else:
+		$VBox/Animation/VBoxContainer/Options.visible = true
 	canvas_preview.update()
 
 
@@ -68,3 +73,11 @@ func _on_EndFrame_value_changed(value: float) -> void:
 		start_frame.value = value
 		canvas_preview.frame = value - 1
 	canvas_preview.update()
+
+
+func _on_PreviewViewportContainer_mouse_entered() -> void:
+	camera.set_process_input(true)
+
+
+func _on_PreviewViewportContainer_mouse_exited() -> void:
+	camera.set_process_input(false)

@@ -855,16 +855,16 @@ msgstr ""
 msgid "Steps:"
 msgstr ""
 
-msgid "Top to Bottom"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
 msgstr ""
 
-msgid "Bottom to Top"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
 msgstr ""
 
-msgid "Left to Right"
-msgstr ""
-
-msgid "Right to Left"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
 msgstr ""
 
 msgid "View Splash Screen"
@@ -1215,6 +1215,18 @@ msgstr ""
 msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr ""
+
 msgid "Grid"
 msgstr ""
 
@@ -1233,40 +1245,20 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-msgid "Rectangular grid width:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
 msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
 msgstr ""
 
-msgid "Rectangular grid height:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
 msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr ""
-
-msgid "Isometric cell bounds width:"
-msgstr ""
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr ""
-
-msgid "Isometric cell bounds height:"
-msgstr ""
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr ""
-
-msgid "Grid offset x:"
-msgstr ""
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr ""
-
-msgid "Grid offset y:"
-msgstr ""
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
 msgid "Draw over Tile Mode:"
@@ -2384,6 +2376,7 @@ msgstr ""
 msgid "Ambient color energy:"
 msgstr ""
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr ""
 

@@ -74,12 +74,12 @@ text = "Remove object"
 unique_name_in_owner = true
 margin_top = 74.0
 margin_right = 223.0
-margin_bottom = 226.0
+margin_bottom = 244.0
 size_flags_vertical = 3
 
 [node name="CameraOptions" type="VBoxContainer" parent="CelOptions" index="0"]
 margin_right = 223.0
-margin_bottom = 128.0
+margin_bottom = 146.0
 theme_type_variation = "CollapsibleContainer"
 script = ExtResource( 6 )
 text = "Camera"
@@ -88,7 +88,7 @@ visible_content = true
 [node name="GridContainer" type="GridContainer" parent="CelOptions/CameraOptions" index="1"]
 margin_top = 24.0
 margin_right = 223.0
-margin_bottom = 128.0
+margin_bottom = 146.0
 columns = 2
 
 [node name="ProjectionLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="0"]
@@ -131,10 +131,62 @@ suffix_x = "°"
 suffix_y = "°"
 suffix_z = "°"
 
-[node name="EnvironmentOptions" type="VBoxContainer" parent="CelOptions" index="1"]
-margin_top = 132.0
+[node name="CameraFOVLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="4"]
+margin_top = 108.0
+margin_right = 110.0
+margin_bottom = 122.0
+text = "FOV:"
+
+[node name="CameraFOV" type="TextureProgress" parent="CelOptions/CameraOptions/GridContainer" index="5"]
+unique_name_in_owner = true
+margin_left = 114.0
+margin_top = 108.0
 margin_right = 223.0
-margin_bottom = 152.0
+margin_bottom = 122.0
+mouse_default_cursor_shape = 2
+theme_type_variation = "ValueSlider"
+min_value = 1.0
+max_value = 179.0
+value = 70.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 5 )
+suffix = "°"
+
+[node name="CameraSizeLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="6"]
+visible = false
+margin_top = 126.0
+margin_right = 110.0
+margin_bottom = 140.0
+text = "Size:"
+
+[node name="CameraSize" type="TextureProgress" parent="CelOptions/CameraOptions/GridContainer" index="7"]
+unique_name_in_owner = true
+visible = false
+margin_top = 126.0
+margin_right = 110.0
+margin_bottom = 132.0
+mouse_default_cursor_shape = 2
+theme_type_variation = "ValueSlider"
+min_value = 0.001
+max_value = 32.0
+step = 0.001
+value = 1.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 5 )
+
+[node name="EnvironmentOptions" type="VBoxContainer" parent="CelOptions" index="1"]
+margin_top = 150.0
+margin_right = 223.0
+margin_bottom = 170.0
 theme_type_variation = "CollapsibleContainer"
 script = ExtResource( 6 )
 text = "Environment"

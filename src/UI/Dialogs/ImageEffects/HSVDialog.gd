@@ -19,15 +19,6 @@ func _about_to_show() -> void:
 	._about_to_show()
 
 
-func set_nodes() -> void:
-	preview = $VBoxContainer/AspectRatioContainer/Preview
-	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
-	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
-	animate_options_container = $VBoxContainer/AnimationOptions
-	animate_menu = $"%AnimateMenu".get_popup()
-	initial_button = $"%InitalButton"
-
-
 func set_animate_menu(_elements) -> void:
 	# set as in enum
 	animate_menu.add_check_item("Hue", Animate.HUE)
@@ -51,14 +42,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	if selection_checkbox.pressed and project.has_selection:
 		selection_tex.create_from_image(project.selection_map, 0)
 
-	var params := {
-		"hue_shift_amount": hue,
-		"sat_shift_amount": sat,
-		"val_shift_amount": val,
-		"selection": selection_tex,
-		"affect_selection": selection_checkbox.pressed,
-		"has_selection": project.has_selection
-	}
+	var params := {"hue_shift": hue, "sat_shift": sat, "val_shift": val, "selection": selection_tex}
 	if !confirmed:
 		for param in params:
 			preview.material.set_shader_param(param, params[param])

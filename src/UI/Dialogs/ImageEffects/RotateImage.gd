@@ -6,7 +6,6 @@ enum Animate { ANGLE, INITIAL_ANGLE }
 var live_preview: bool = true
 var rotxel_shader: Shader
 var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeighbour.shader")
-var clean_edge_shader: Shader = DrawingAlgos.clean_edge_shader
 var pivot := Vector2.INF
 var drag_pivot := false
 
@@ -35,15 +34,6 @@ func _ready() -> void:
 	type_option_button.emit_signal("item_selected", 0)
 
 
-func set_nodes() -> void:
-	preview = $VBoxContainer/AspectRatioContainer/Preview
-	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
-	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
-	animate_options_container = $VBoxContainer/AnimationOptions
-	animate_menu = $"%AnimateMenu".get_popup()
-	initial_button = $"%InitalButton"
-
-
 func set_animate_menu(_elements) -> void:
 	# set as in enum
 	animate_menu.add_check_item("Angle", Animate.ANGLE)
@@ -57,6 +47,8 @@ func set_initial_values() -> void:
 
 
 func _about_to_show() -> void:
+	if DrawingAlgos.clean_edge_shader == null:
+		DrawingAlgos.clean_edge_shader = load("res://src/Shaders/Rotation/cleanEdge.gdshader")
 	drag_pivot = false
 	if pivot == Vector2.INF:
 		_calculate_pivot()
@@ -166,7 +158,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 			else:
 				params["preview"] = false
 				var gen := ShaderImageEffect.new()
-				gen.generate_image(cel, clean_edge_shader, params, _project.size)
+				gen.generate_image(cel, DrawingAlgos.clean_edge_shader, params, _project.size)
 				yield(gen, "done")
 		OMNISCALE:
 			var params := {
@@ -224,7 +216,7 @@ func _on_TypeOptionButton_item_selected(_id: int) -> void:
 			smear_options.visible = true
 		CLEANEDGE:
 			var sm := ShaderMaterial.new()
-			sm.shader = clean_edge_shader
+			sm.shader = DrawingAlgos.clean_edge_shader
 			preview.set_material(sm)
 			smear_options.visible = false
 		OMNISCALE:

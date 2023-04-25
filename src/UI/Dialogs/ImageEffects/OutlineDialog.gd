@@ -22,15 +22,6 @@ func _ready() -> void:
 	color = outline_color.color
 
 
-func set_nodes() -> void:
-	preview = $VBoxContainer/AspectRatioContainer/Preview
-	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
-	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
-	animate_options_container = $VBoxContainer/AnimationOptions
-	animate_menu = $"%AnimateMenu".get_popup()
-	initial_button = $"%InitalButton"
-
-
 func set_animate_menu(_elements) -> void:
 	# set as in enum
 	animate_menu.add_check_item("Thickness", Animate.THICKNESS)
@@ -60,9 +51,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"width": anim_thickness,
 		"pattern": pattern,
 		"inside": inside_image,
-		"selection": selection_tex,
-		"affect_selection": selection_checkbox.pressed,
-		"has_selection": project.has_selection
+		"selection": selection_tex
 	}
 	if !confirmed:
 		for param in params:

@@ -34,6 +34,8 @@ onready var load_model_dialog := $LoadModelDialog as FileDialog
 onready var cel_properties := {
 	"camera:projection": $"%ProjectionOptionButton",
 	"camera:rotation_degrees": $"%CameraRotation",
+	"camera:fov": $"%CameraFOV",
+	"camera:size": $"%CameraSize",
 	"viewport:world:environment:ambient_light_color": $"%AmbientColorPickerButton",
 	"viewport:world:environment:ambient_light_energy": $"%AmbientEnergy",
 }
@@ -284,8 +286,7 @@ func _selected_object(object: Cel3DObject) -> void:
 			elif node is ValueSliderV2 and typeof(property) != TYPE_VECTOR2:
 				property_exists = false
 			if node.get_index() > 0:
-				var prev_node: Control = node.get_parent().get_child(node.get_index() - 1)
-				prev_node.visible = property_exists
+				_get_previous_node(node).visible = property_exists
 			node.visible = property_exists
 		mesh_options.visible = object.node3d_type is MeshInstance
 		light_options.visible = object.node3d_type is Light
@@ -301,6 +302,16 @@ func _selected_object(object: Cel3DObject) -> void:
 
 
 func _set_cel_node_values() -> void:
+	if _cel.camera.projection == Camera.PROJECTION_PERSPECTIVE:
+		_get_previous_node(cel_properties["camera:fov"]).visible = true
+		_get_previous_node(cel_properties["camera:size"]).visible = false
+		cel_properties["camera:fov"].visible = true
+		cel_properties["camera:size"].visible = false
+	else:
+		_get_previous_node(cel_properties["camera:size"]).visible = true
+		_get_previous_node(cel_properties["camera:fov"]).visible = false
+		cel_properties["camera:size"].visible = true
+		cel_properties["camera:fov"].visible = false
 	_can_start_timer = false
 	_set_node_values(_cel, cel_properties)
 	_can_start_timer = true
@@ -338,6 +349,10 @@ func _set_node_values(to_edit: Object, properties: Dictionary) -> void:
 			node.pressed = value
 		elif node is LineEdit:
 			node.text = value
+
+
+func _get_previous_node(node: Node) -> Node:
+	return node.get_parent().get_child(node.get_index() - 1)
 
 
 func _set_value_from_node(to_edit: Object, value, prop: String) -> void:
