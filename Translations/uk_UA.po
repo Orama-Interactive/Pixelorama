@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-04-20 18:05\n"
+"PO-Revision-Date: 2023-04-26 05:59\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -880,7 +880,7 @@ msgstr ""
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "Інтенсивність коливання:"
 
 msgid "View Splash Screen"
 msgstr "Переглянути екран привітання"
