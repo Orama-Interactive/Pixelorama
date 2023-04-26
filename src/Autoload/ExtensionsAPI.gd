@@ -285,7 +285,7 @@ class ToolAPI:
 		ExtensionsApi.add_action("add_tool")
 
 	func remove_tool(tool_name: String) -> void:
-		# Re-assigning the tools in case the tool to be removed is also Active
+		# Re-assigning the tools in case the tool to be removed is also active
 		Tools.assign_tool("Pencil", BUTTON_LEFT)
 		Tools.assign_tool("Eraser", BUTTON_RIGHT)
 		var tool_class: Tools.Tool = Tools.tools[tool_name]
@@ -310,5 +310,7 @@ class ProjectAPI:
 			return {"cel": cel, "type": "PixelCel"}
 		elif cel is GroupCel:
 			return {"cel": cel, "type": "GroupCel"}
+		elif cel is Cel3D:
+			return {"cel": cel, "type": "Cel3D"}
 		else:
 			return {"cel": cel, "type": "BaseCel"}
