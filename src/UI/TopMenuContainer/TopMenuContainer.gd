@@ -299,13 +299,14 @@ func _setup_image_menu() -> void:
 
 func _setup_select_menu() -> void:
 	# Order as in Global.SelectMenu enum
-	var select_menu_items := ["All", "Clear", "Invert"]
+	var select_menu_items := ["All", "Clear", "Invert", "Tile Mode"]
 	var select_menu: PopupMenu = select_menu_button.get_popup()
-	var i := 0
-	for item in select_menu_items:
-		select_menu.add_item(item, i)
-		i += 1
-
+	for i in select_menu_items.size():
+		var item: String = select_menu_items[i]
+		if item == "Tile Mode":
+			select_menu.add_check_item(item, i)
+		else:
+			select_menu.add_item(item, i)
 	select_menu.connect("id_pressed", self, "select_menu_id_pressed")
 
 
@@ -474,6 +475,23 @@ func view_menu_id_pressed(id: int) -> void:
 	Global.canvas.update()
 
 
+func window_menu_id_pressed(id: int) -> void:
+	if not Global.can_draw:
+		return
+	match id:
+		Global.WindowMenu.WINDOW_OPACITY:
+			_popup_dialog(window_opacity_dialog)
+		Global.WindowMenu.MOVABLE_PANELS:
+			ui.tabs_visible = !ui.tabs_visible
+			window_menu.set_item_checked(id, ui.tabs_visible)
+		Global.WindowMenu.ZEN_MODE:
+			_toggle_zen_mode()
+		Global.WindowMenu.FULLSCREEN_MODE:
+			_toggle_fullscreen()
+		_:
+			_handle_metadata(id, window_menu_button)
+
+
 func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.current_project.tiles.mode = id
 	Global.transparent_checker.fit_rect(Global.current_project.tiles.get_bounding_rect())
@@ -495,23 +513,6 @@ func _snap_to_submenu_id_pressed(id: int) -> void:
 	elif id == 2:
 		Global.snap_to_perspective_guides = !Global.snap_to_perspective_guides
 		snap_to_submenu.set_item_checked(id, Global.snap_to_perspective_guides)
-
-
-func window_menu_id_pressed(id: int) -> void:
-	if not Global.can_draw:
-		return
-	match id:
-		Global.WindowMenu.WINDOW_OPACITY:
-			_popup_dialog(window_opacity_dialog)
-		Global.WindowMenu.MOVABLE_PANELS:
-			ui.tabs_visible = !ui.tabs_visible
-			window_menu.set_item_checked(id, ui.tabs_visible)
-		Global.WindowMenu.ZEN_MODE:
-			_toggle_zen_mode()
-		Global.WindowMenu.FULLSCREEN_MODE:
-			_toggle_fullscreen()
-		_:
-			_handle_metadata(id, window_menu_button)
 
 
 func _panels_submenu_id_pressed(id: int) -> void:
@@ -699,6 +700,10 @@ func select_menu_id_pressed(id: int) -> void:
 			Global.canvas.selection.clear_selection(true)
 		Global.SelectMenu.INVERT:
 			Global.canvas.selection.invert()
+		Global.SelectMenu.TILE_MODE:
+			var state = select_menu_button.get_popup().is_item_checked(id)
+			Global.canvas.selection.flag_tilemode = !state
+			select_menu_button.get_popup().set_item_checked(id, !state)
 		_:
 			_handle_metadata(id, select_menu_button)
 

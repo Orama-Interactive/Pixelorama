@@ -86,6 +86,15 @@ func get_canon_position(position: Vector2) -> Vector2:
 	return position
 
 
+func get_point_in_tiles(pixel: Vector2) -> Array:
+	var positions = Global.canvas.tile_mode.get_tile_positions()
+	positions.append(Vector2.ZERO)
+	var result = []
+	for pos in positions:
+		result.append(pos + pixel)
+	return result
+
+
 func has_point(point: Vector2) -> bool:
 	var positions = Global.canvas.tile_mode.get_tile_positions()
 	positions.append(Vector2.ZERO)  # The central tile is included manually
