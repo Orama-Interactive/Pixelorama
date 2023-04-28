@@ -1,7 +1,6 @@
 extends Node2D
 
 enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
-enum SelectionFlags { TILE_MODE }
 const KEY_MOVE_ACTION_NAMES := ["ui_up", "ui_down", "ui_left", "ui_right"]
 const CLIPBOARD_FILE_PATH := "user://clipboard.txt"
 
