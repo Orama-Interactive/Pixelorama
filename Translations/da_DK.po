@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2023-03-31 19:07\n"
+"PO-Revision-Date: 2023-04-20 13:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -300,6 +300,26 @@ msgstr "Vis Linealer"
 msgid "Show Guides"
 msgstr "Vis Guider"
 
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr ""
+
 msgid "Show Animation Timeline"
 msgstr "Vis Animationstidslinje"
 
@@ -368,6 +388,9 @@ msgstr "Vertikale rammer:"
 
 msgid "Start frame:"
 msgstr "Startramme:"
+
+msgid "End frame:"
+msgstr ""
 
 msgid "At frame:"
 msgstr "Ved ramme:"
@@ -639,8 +662,8 @@ msgstr "Guide farve:"
 msgid "System Language"
 msgstr "Systemsprog"
 
-msgid "Display Scale"
-msgstr "Skærmskalering"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Dæmp brugerflades lysstyrke ved popup-dialog"
@@ -845,17 +868,17 @@ msgstr "Farver:"
 msgid "Steps:"
 msgstr "Trin:"
 
-msgid "Top to Bottom"
-msgstr "Top til Bund"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr ""
 
-msgid "Bottom to Top"
-msgstr "Bund til Top"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr ""
 
-msgid "Left to Right"
-msgstr "Venstre mod Højre"
-
-msgid "Right to Left"
-msgstr "Højre mod Venstre"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Vis Splash Screen"
@@ -1253,6 +1276,18 @@ msgstr "Guiders farve:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "En farve på linealguider, som vises på lærredet"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr ""
+
 msgid "Grid"
 msgstr "Gitter"
 
@@ -1271,41 +1306,21 @@ msgstr "Isometrisk"
 msgid "All"
 msgstr "Alle"
 
-msgid "Rectangular grid width:"
-msgstr "Rektangulær gitter-bredde:"
-
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Indstiller hvor langt fra hinanden vertikale linjer er i det rektangulære gitter"
-
-msgid "Rectangular grid height:"
-msgstr "Rektangulær gitter-højde:"
-
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Indstiller hvor langt fra hinanden horisontale linjer er i det rektangulære gitter"
-
-msgid "Isometric cell bounds width:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
 msgstr ""
 
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
 msgstr ""
 
-msgid "Isometric cell bounds height:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
 msgstr ""
 
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr ""
-
-msgid "Grid offset x:"
-msgstr "Gitterforskydning x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Indstiller gitterets x-forskydning fra lærredets begyndelsespunkt (øverste venstre hjørne af billedet)"
-
-msgid "Grid offset y:"
-msgstr "Gitterforskydning y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Indstiller gitterets y-forskydning fra lærredets begyndelsespunkt (øverste venstre hjørne af billedet)"
 
 msgid "Draw over Tile Mode:"
 msgstr ""
@@ -1628,6 +1643,12 @@ msgstr "Vertikal"
 msgid "Current frame:"
 msgstr "Nuværende ramme:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Gå til den første ramme\n"
@@ -1937,8 +1958,8 @@ msgstr "Filen kunne ikke åbnes. Fejlkode %s"
 msgid "File failed to save. Error code %s"
 msgstr "Filen kunne ikke gemmes. Fejlkode %s"
 
-msgid "File exported"
-msgstr "Fil eksporteret"
+msgid "File(s) exported"
+msgstr ""
 
 msgid "New Empty Palette"
 msgstr "Ny Tom Palet"
@@ -2276,6 +2297,13 @@ msgstr ""
 msgid "Reference Images"
 msgstr ""
 
+msgid "Perspective Editor"
+msgstr ""
+
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
+msgid "Recorder"
+msgstr ""
+
 msgid "Crop"
 msgstr ""
 
@@ -2346,6 +2374,9 @@ msgstr ""
 msgid "Plane"
 msgstr ""
 
+msgid "Text"
+msgstr ""
+
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
 msgstr ""
@@ -2408,6 +2439,7 @@ msgstr ""
 msgid "Ambient color energy:"
 msgstr ""
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr ""
 

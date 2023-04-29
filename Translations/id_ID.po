@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-03-31 19:08\n"
+"PO-Revision-Date: 2023-04-21 08:03\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -254,11 +254,11 @@ msgstr "Atur Tata Letak"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Pratayang"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Ini pratayang, mengubah ini tidak akan mengubah tata letak"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
@@ -299,6 +299,26 @@ msgstr "Pakai Penggaris"
 
 msgid "Show Guides"
 msgstr "Tampilkan Panduan"
+
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr ""
 
 msgid "Show Animation Timeline"
 msgstr "Tampilkan Bingkai Animasi"
@@ -368,6 +388,9 @@ msgstr "Bingkai menegak:"
 
 msgid "Start frame:"
 msgstr "Bingkai awal:"
+
+msgid "End frame:"
+msgstr ""
 
 msgid "At frame:"
 msgstr "Di bingkai:"
@@ -499,7 +522,7 @@ msgstr "Lapisan kelompok:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "Lapisan 3D:"
 
 msgid "Direction:"
 msgstr "Arah:"
@@ -640,8 +663,8 @@ msgstr "Warna panduan:"
 msgid "System Language"
 msgstr "Bahasa Sistem"
 
-msgid "Display Scale"
-msgstr "Skala Tampilan"
+msgid "Display scale:"
+msgstr "Skala tampilan:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Redupkan antarmuka pada sembulan dialog"
@@ -847,17 +870,17 @@ msgstr "Warna:"
 msgid "Steps:"
 msgstr "Langkah:"
 
-msgid "Top to Bottom"
-msgstr "Atas ke Bawah"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr ""
 
-msgid "Bottom to Top"
-msgstr "Bawah ke Atas"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr ""
 
-msgid "Left to Right"
-msgstr "Kiri ke Kanan"
-
-msgid "Right to Left"
-msgstr "Kanan ke Kiri"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Tampilkan \"Splash Screen\""
@@ -1255,6 +1278,18 @@ msgstr "Warna panduan:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Warna dari penggaris yang ditunjukkan di kanvas"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr ""
+
 msgid "Grid"
 msgstr "Kisi"
 
@@ -1273,41 +1308,21 @@ msgstr "Isometrik"
 msgid "All"
 msgstr "Semua"
 
-msgid "Rectangular grid width:"
-msgstr "Lebar kisi persegi panjang:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Menetapkan seberapa jauh garis menegak kisi persegi panjang"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Tinggi kisi persegi panjang:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Menetapkan seberapa jauh garis mendatar kisi persegi panjang"
-
-msgid "Isometric cell bounds width:"
-msgstr "Lebar batas sel isometrik:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Menetapkan lebar kotak pembatas yang disejajarkan sumbu sel isometrik"
-
-msgid "Isometric cell bounds height:"
-msgstr "Tinggi batas sel isometrik:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Menetapkan tinggi kotak pembatas yang disejajarkan sumbu sel isometrik"
-
-msgid "Grid offset x:"
-msgstr "Offset kisi X:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Menetapkan offset kisi X dari kanvas aslinya (Di pojok kiri atas gambar)"
-
-msgid "Grid offset y:"
-msgstr "Offset kisi Y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Menetapkan offset kisi Y dari kanvas aslinya (Di pojok kiri atas gambar)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Gambar di atas Mode Ubin:"
@@ -1631,6 +1646,12 @@ msgstr "Menegak"
 msgid "Current frame:"
 msgstr "Bingkai saat ini:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Lompat ke bingkai pertama\n"
@@ -1947,8 +1968,8 @@ msgstr "Berkas gagal dibuka. Kode galat %s"
 msgid "File failed to save. Error code %s"
 msgstr "Berkas gagal disimpan. Kode galat %s"
 
-msgid "File exported"
-msgstr "Berkas terekspor"
+msgid "File(s) exported"
+msgstr ""
 
 msgid "New Empty Palette"
 msgstr "Palet Kosong Baru"
@@ -2287,6 +2308,13 @@ msgstr "Opsi Alat Di Kanan"
 msgid "Reference Images"
 msgstr "Gambar Rujukan"
 
+msgid "Perspective Editor"
+msgstr ""
+
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
+msgid "Recorder"
+msgstr ""
+
 msgid "Crop"
 msgstr ""
 
@@ -2357,6 +2385,9 @@ msgstr ""
 msgid "Plane"
 msgstr ""
 
+msgid "Text"
+msgstr ""
+
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
 msgstr ""
@@ -2419,6 +2450,7 @@ msgstr ""
 msgid "Ambient color energy:"
 msgstr ""
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr ""
 

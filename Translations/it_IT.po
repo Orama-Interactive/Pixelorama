@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-03-31 23:40\n"
+"PO-Revision-Date: 2023-04-20 17:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -300,6 +300,26 @@ msgstr "Mostra i righelli"
 msgid "Show Guides"
 msgstr "Mostra le guide"
 
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr "Mostra Guide Mouse"
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr "Aggancia A"
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr "Aggancia alla griglia rettangolare"
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr "Aggancia alle Guide"
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr "Aggancia alle guide prospettiche"
+
 msgid "Show Animation Timeline"
 msgstr "Mostra la Timeline di animazione"
 
@@ -368,6 +388,9 @@ msgstr "Frame verticali:"
 
 msgid "Start frame:"
 msgstr "Fotogramma iniziale:"
+
+msgid "End frame:"
+msgstr "Telaio finale:"
 
 msgid "At frame:"
 msgstr "Al fotogramma:"
@@ -640,8 +663,8 @@ msgstr "Colore della guida:"
 msgid "System Language"
 msgstr "Lingua di sistema"
 
-msgid "Display Scale"
-msgstr "Scala Schermo"
+msgid "Display scale:"
+msgstr "Scala di visualizzazione:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Oscura l'interfaccia nella finestra di dialogo"
@@ -847,17 +870,17 @@ msgstr "Colori:"
 msgid "Steps:"
 msgstr "Passaggi:"
 
-msgid "Top to Bottom"
-msgstr "Dall'alto in basso"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr "Posterizzazione"
 
-msgid "Bottom to Top"
-msgstr "Dal basso verso l'alto"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr "Livelli di posterizzazione:"
 
-msgid "Left to Right"
-msgstr "Da sinistra a destra"
-
-msgid "Right to Left"
-msgstr "Da destra a sinistra"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr "Intensità del ditere:"
 
 msgid "View Splash Screen"
 msgstr "Visualizza la schermata iniziale"
@@ -1255,6 +1278,18 @@ msgstr "Colore delle guide:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Un colore di guide per righello visualizzate sulla tela"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr "Aggancio"
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr "Distanza di aggancio:"
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr "Questa è la distanza in pixel in cui la guida e l'aderenza dell'aggancio vengono attivate."
+
 msgid "Grid"
 msgstr "Griglia"
 
@@ -1273,41 +1308,21 @@ msgstr "Isometrica"
 msgid "All"
 msgstr "Tutte"
 
-msgid "Rectangular grid width:"
-msgstr "Larghezza della griglia rettangolare:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr "Dimensione della griglia rettangolare:"
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Imposta la distanza tra le linee verticali della griglia rettangolare"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr "Dimensione della griglia isotometrica:"
 
-msgid "Rectangular grid height:"
-msgstr "Altezza della griglia rettangolare:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr "Spostamento griglia:"
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Imposta la distanza tra le linee orizzontali della griglia rettangolare"
-
-msgid "Isometric cell bounds width:"
-msgstr "Larghezza dei limiti delle celle isometrice:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Imposta la larghezza del riquadro di delimitazione dell'asse isometrico allineato"
-
-msgid "Isometric cell bounds height:"
-msgstr "Altezza dei limiti delle celle isometrice:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Imposta l'altezza del riquadro di delimitazione dell'asse isometrico allineato"
-
-msgid "Grid offset x:"
-msgstr "Spostamento griglia x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Imposta lo spostamento x della griglia dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
-
-msgid "Grid offset y:"
-msgstr "Spostamento griglia y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Imposta lo spostamento y della griglia dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr "Imposta lo spostamento della griglia dall'origine della superficie (angolo in alto a sinistra dell'immagine)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Disegna sulla modalità piastrelle:"
@@ -1631,6 +1646,12 @@ msgstr "Verticale"
 msgid "Current frame:"
 msgstr "Frame corrente:"
 
+msgid "Animation mode:"
+msgstr "Modalità Animazione:"
+
+msgid "Current frame as spritesheet"
+msgstr "Telaio corrente come foglio sprite"
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Salta al primo frame\n"
@@ -1947,8 +1968,8 @@ msgstr "Impossibile aprire il file. Codice errore %s"
 msgid "File failed to save. Error code %s"
 msgstr "Impossibile salvare il file. Codice errore %s"
 
-msgid "File exported"
-msgstr "File esportato"
+msgid "File(s) exported"
+msgstr "File esportato/i"
 
 msgid "New Empty Palette"
 msgstr "Nuova palette vuota"
@@ -2287,6 +2308,13 @@ msgstr "Opzioni Dello Strumento Destra"
 msgid "Reference Images"
 msgstr "Immagini Di Riferimento"
 
+msgid "Perspective Editor"
+msgstr "Editor Prospettiva"
+
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
+msgid "Recorder"
+msgstr "Registratore"
+
 msgid "Crop"
 msgstr "Ritaglia"
 
@@ -2359,6 +2387,9 @@ msgstr "Toro"
 msgid "Plane"
 msgstr "Piano"
 
+msgid "Text"
+msgstr "Testo"
+
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
 msgstr "Luce direzionale"
@@ -2421,6 +2452,7 @@ msgstr "Colore ambiente:"
 msgid "Ambient color energy:"
 msgstr "Energia del colore ambiente:"
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr "Visibile:"
 

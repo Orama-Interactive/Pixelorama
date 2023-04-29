@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-03-31 19:08\n"
+"PO-Revision-Date: 2023-04-26 05:59\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -300,6 +300,26 @@ msgstr "Показати лінійки"
 msgid "Show Guides"
 msgstr "Показати посібники"
 
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr "Показати посібники з миші"
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr "Притягнути до"
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr "Зафіксувати до прямокутної сітки"
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr "Зафіксувати до напрямних"
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr "Зафіксувати до перспективних напрямних"
+
 msgid "Show Animation Timeline"
 msgstr "Показувати шкалу часу анімацій"
 
@@ -368,6 +388,9 @@ msgstr "Вертикальні кадри:"
 
 msgid "Start frame:"
 msgstr "Початковий кадр:"
+
+msgid "End frame:"
+msgstr "Кінцевий кадр:"
 
 msgid "At frame:"
 msgstr "До кадру:"
@@ -499,7 +522,7 @@ msgstr "Груповий шар:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "3D-шар:"
 
 msgid "Direction:"
 msgstr "Напрямок:"
@@ -640,8 +663,8 @@ msgstr "Колір напрямних:"
 msgid "System Language"
 msgstr "Мова системи"
 
-msgid "Display Scale"
-msgstr "Масштаб екрану"
+msgid "Display scale:"
+msgstr "Масштаб екрану:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Затемнити інтерфейс під діалоговими вікнами"
@@ -847,17 +870,17 @@ msgstr "Кольори:"
 msgid "Steps:"
 msgstr "Кроки:"
 
-msgid "Top to Bottom"
-msgstr "Зверху донизу"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr ""
 
-msgid "Bottom to Top"
-msgstr "Знизу вгору"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr ""
 
-msgid "Left to Right"
-msgstr "Зліва направо"
-
-msgid "Right to Left"
-msgstr "Справа наліво"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr "Інтенсивність коливання:"
 
 msgid "View Splash Screen"
 msgstr "Переглянути екран привітання"
@@ -1255,6 +1278,18 @@ msgstr "Колір напрямних:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Колір напрямних ліній на полотні"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr ""
+
 msgid "Grid"
 msgstr "Сітка"
 
@@ -1273,41 +1308,21 @@ msgstr "Ізометрична"
 msgid "All"
 msgstr "Усі"
 
-msgid "Rectangular grid width:"
-msgstr "Ширина прямокутної сітки:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Вказує відлеглість поміж вертикальними лініями прямокутної сітки"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Висота прямокутної сітки:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Вказує відлеглість поміж горизонтальними лініями прямокутної сітки"
-
-msgid "Isometric cell bounds width:"
-msgstr "Ширина меж ізометричної клітини:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Вказує ширину прямокутника навколо ізометричної клітини"
-
-msgid "Isometric cell bounds height:"
-msgstr "Висота меж ізометричної клітини:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Вказує висоту прямокутника навколо ізометричної клітини"
-
-msgid "Grid offset x:"
-msgstr "Зсув сітки за X:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Вказує зсування сітки за віссю X від початку координат (верхнього лівого краю зображення)"
-
-msgid "Grid offset y:"
-msgstr "Зсув сітки за Y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Вказує зсування сітки за віссю Y від початку координат (верхнього лівого краю зображення)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Малювати в безшовному режимі:"
@@ -1631,6 +1646,12 @@ msgstr "Вертикально"
 msgid "Current frame:"
 msgstr "Поточний кадр:"
 
+msgid "Animation mode:"
+msgstr "Режим анімації:"
+
+msgid "Current frame as spritesheet"
+msgstr "Поточний кадр як таблиця спрайтів"
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Перейти до першого кадру\n"
@@ -1785,15 +1806,15 @@ msgstr "Створити новий шар"
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "Додати шар пікселів"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr ""
+msgstr "Додати груповий шар"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "Додати 3D-шар"
 
 msgid "Remove current layer"
 msgstr "Видалити поточний шар"
@@ -1947,8 +1968,8 @@ msgstr "Не вдалося відкрити файл. Код помилки %s"
 msgid "File failed to save. Error code %s"
 msgstr "Не вдалося зберегти файл. Код помилки %s"
 
-msgid "File exported"
-msgstr "Файл експортовано"
+msgid "File(s) exported"
+msgstr "Файл(и) експортовано"
 
 msgid "New Empty Palette"
 msgstr "Нова пуста палітра"
@@ -2287,6 +2308,13 @@ msgstr "Параметри правого інструмента"
 msgid "Reference Images"
 msgstr "Еталонні зображення"
 
+msgid "Perspective Editor"
+msgstr "Редактор перспективи"
+
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
+msgid "Recorder"
+msgstr "Записувач"
+
 msgid "Crop"
 msgstr "Обрізати"
 
@@ -2329,172 +2357,176 @@ msgstr "Фіксований розмір\n\n"
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
-msgstr ""
+msgstr "Редагування 3D-форми"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "Куб"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
-msgstr ""
+msgstr "Сфера"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "Капсула"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
-msgstr ""
+msgstr "Циліндр"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
-msgstr ""
+msgstr "Призма"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
-msgstr ""
+msgstr "Тор"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "Площина"
+
+msgid "Text"
+msgstr "Текст"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
-msgstr ""
+msgstr "Спрямоване світло"
 
 #. Used in 3D layers. A type of light.
 msgid "Spotlight"
-msgstr ""
+msgstr "Прожектор"
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
-msgstr ""
+msgstr "Світлова точка"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
-msgstr ""
+msgstr "Користувацька модель"
 
 msgid "Selected object:"
-msgstr ""
+msgstr "Виділений об'єкт:"
 
 msgid "Add new object"
-msgstr ""
+msgstr "Додати новий об'єкт"
 
 msgid "Remove object"
-msgstr ""
+msgstr "Видалити об'єкт"
 
 msgid "Camera"
-msgstr ""
+msgstr "Камера"
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
-msgstr ""
+msgstr "Проєкція:"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
-msgstr ""
+msgstr "Перспектива"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Orthogonal"
-msgstr ""
+msgstr "Ортогональне"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
-msgstr ""
+msgstr "Пірамідальна"
 
 msgid "Rotation:"
-msgstr ""
+msgstr "Поворот:"
 
 msgid "Scale:"
-msgstr ""
+msgstr "Масштаб:"
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
-msgstr ""
+msgstr "Навколишнє середовище"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
-msgstr ""
+msgstr "Колір оточення:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color energy:"
-msgstr ""
+msgstr "Енергія кольору оточення:"
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
-msgstr ""
+msgstr "Видимий:"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr ""
+msgstr "Трансформація"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
-msgstr ""
+msgstr "Сітка"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
-msgstr ""
+msgstr "Зліва направо:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "Радіус:"
 
 msgid "Height:"
 msgstr "Висота:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
-msgstr ""
+msgstr "Радіальні сегменти:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
 msgid "Rings:"
-msgstr ""
+msgstr "Кільця:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
-msgstr ""
+msgstr "Це півкуля:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
-msgstr ""
+msgstr "Верхній радіус:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Bottom radius:"
-msgstr ""
+msgstr "Нижній радіус:"
 
 msgid "Text:"
-msgstr ""
+msgstr "Текст:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
-msgstr ""
+msgstr "Розмір пікселя:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
-msgstr ""
+msgstr "Крок кривої:"
 
 msgid "Horizontal alignment:"
-msgstr ""
+msgstr "Горизонтальне вирівнювання:"
 
 msgid "Left"
-msgstr ""
+msgstr "Вліво"
 
 msgid "Right"
-msgstr ""
+msgstr "Вправо"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
-msgstr ""
+msgstr "Енергія:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. If true, the light's effect is reversed, darkening areas and casting bright shadows.
 msgid "Negative:"
-msgstr ""
+msgstr "Негативне:"
 
 msgid "Shadow:"
-msgstr ""
+msgstr "Тінь:"
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
-msgstr ""
+msgstr "Діапазон:"
 

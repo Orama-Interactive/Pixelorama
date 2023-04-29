@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-03-31 20:16\n"
+"PO-Revision-Date: 2023-04-20 14:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -300,6 +300,26 @@ msgstr "ルーラーを表示"
 msgid "Show Guides"
 msgstr "ガイドを表示"
 
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr "マウスガイドを表示"
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr "スナップ先"
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr "矩形グリッドにスナップ"
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr "ガイドにスナップ"
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr "視点ガイドにスナップ"
+
 msgid "Show Animation Timeline"
 msgstr "アニメーションのタイムラインを表示"
 
@@ -368,6 +388,9 @@ msgstr "垂直フレーム"
 
 msgid "Start frame:"
 msgstr "開始フレーム:"
+
+msgid "End frame:"
+msgstr "終了フレーム:"
 
 msgid "At frame:"
 msgstr "すべてのフレーム:"
@@ -640,8 +663,8 @@ msgstr "ガイドの色:"
 msgid "System Language"
 msgstr "システム言語"
 
-msgid "Display Scale"
-msgstr "表示スケール"
+msgid "Display scale:"
+msgstr "表示スケール:"
 
 msgid "Dim interface on dialog popup"
 msgstr "ダイアログポップアップ時にインターフェースを薄暗くする"
@@ -847,17 +870,17 @@ msgstr "色:"
 msgid "Steps:"
 msgstr "手順:"
 
-msgid "Top to Bottom"
-msgstr "上から下"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr "ポスタライズ"
 
-msgid "Bottom to Top"
-msgstr "下から上へ"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr "ポスタライズレベル:"
 
-msgid "Left to Right"
-msgstr "左から右"
-
-msgid "Right to Left"
-msgstr "右から左"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr "ディザー強度:"
 
 msgid "View Splash Screen"
 msgstr "スプラッシュ スクリーンを表示"
@@ -1255,6 +1278,18 @@ msgstr "ガイドの色:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "キャンバスに表示されるルーラーガイドの色"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr "スナップ"
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr "スナップ距離:"
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr "これは、ガイドとグリップのスナップが有効になるピクセル単位の距離です。"
+
 msgid "Grid"
 msgstr "グリッド"
 
@@ -1273,41 +1308,21 @@ msgstr "アイソメトリック"
 msgid "All"
 msgstr "すべて"
 
-msgid "Rectangular grid width:"
-msgstr "矩形グリッドの幅:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr "矩形グリッドのサイズ:"
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "矩形グリッドの垂直方向の線の間隔を設定します"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr "等角グリッドのサイズ:"
 
-msgid "Rectangular grid height:"
-msgstr "矩形グリッドの高さ:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr "グリッドオフセット:"
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "矩形グリッドの水平方向の線の間隔を設定します"
-
-msgid "Isometric cell bounds width:"
-msgstr "等角セルの境界の幅:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "等角セルの軸揃えの境界ボックスの幅を設定します"
-
-msgid "Isometric cell bounds height:"
-msgstr "等角セルの境界の高さ:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "等角セルの軸揃えの境界ボックスの高さを設定します"
-
-msgid "Grid offset x:"
-msgstr "グリッドオフセット x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "キャンバスの原点 (画像の左上隅) からのグリッドの x オフセットを設定します。"
-
-msgid "Grid offset y:"
-msgstr "グリッドオフセット y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "キャンバスの原点 (画像の左上隅) からのグリッドの y オフセットを設定します。"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr "キャンバスの原点 (画像の左上隅) からのグリッドのオフセットを設定します。"
 
 msgid "Draw over Tile Mode:"
 msgstr "タイルモードの上に表示:"
@@ -1631,6 +1646,12 @@ msgstr "垂直方向"
 msgid "Current frame:"
 msgstr "現在のフレーム:"
 
+msgid "Animation mode:"
+msgstr "アニメーションモード:"
+
+msgid "Current frame as spritesheet"
+msgstr "スプライトシートとしての現在のフレーム"
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "最初のフレームにジャンプ\n"
@@ -1947,7 +1968,7 @@ msgstr "ファイルを開けませんでした。エラーコード %s"
 msgid "File failed to save. Error code %s"
 msgstr "ファイルを保存できませんでした。エラーコード %s"
 
-msgid "File exported"
+msgid "File(s) exported"
 msgstr "ファイルをエクスポートしました"
 
 msgid "New Empty Palette"
@@ -2287,6 +2308,13 @@ msgstr "右ツールオプション"
 msgid "Reference Images"
 msgstr "参照画像"
 
+msgid "Perspective Editor"
+msgstr "透視投影エディター"
+
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
+msgid "Recorder"
+msgstr "レコーダー"
+
 msgid "Crop"
 msgstr "切り取り"
 
@@ -2359,6 +2387,9 @@ msgstr "円環"
 msgid "Plane"
 msgstr "面"
 
+msgid "Text"
+msgstr "テキスト"
+
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
 msgstr "方向ライト"
@@ -2421,6 +2452,7 @@ msgstr "環境色:"
 msgid "Ambient color energy:"
 msgstr "環境色エネルギー:"
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr "可視:"
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-04-03 09:52\n"
+"PO-Revision-Date: 2023-04-20 18:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -300,6 +300,26 @@ msgstr "Afișare rigle"
 msgid "Show Guides"
 msgstr "Afișare ghidaje"
 
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr "Afișare ghiduri maus"
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr "Fixare la"
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr "Fixare la grilă dreptunghiulară"
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr "Fixare la ghiduri"
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr "Fixare la ghiduri de perspectivă"
+
 msgid "Show Animation Timeline"
 msgstr "Afișare cronologia animației"
 
@@ -368,6 +388,9 @@ msgstr "Cadre verticale:"
 
 msgid "Start frame:"
 msgstr "Cadru de pornire:"
+
+msgid "End frame:"
+msgstr "Cadru de final:"
 
 msgid "At frame:"
 msgstr "La cadrul:"
@@ -640,8 +663,8 @@ msgstr "Culoarea ghidajului:"
 msgid "System Language"
 msgstr "Limba sistemului"
 
-msgid "Display Scale"
-msgstr "Scala de afișare"
+msgid "Display scale:"
+msgstr "Scară de afișare:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Întunecă interfața la apariția ferestrei de dialog"
@@ -847,17 +870,17 @@ msgstr "Culori:"
 msgid "Steps:"
 msgstr "Pași:"
 
-msgid "Top to Bottom"
-msgstr "De sus în jos"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr "Posterizare"
 
-msgid "Bottom to Top"
-msgstr "De jos în sus"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr "Niveluri de posterizare:"
 
-msgid "Left to Right"
-msgstr "De la stânga la dreapta"
-
-msgid "Right to Left"
-msgstr "De la dreapta la stânga"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr "Intensitate granulare:"
 
 msgid "View Splash Screen"
 msgstr "Vizualizare ecran de întâmpinare"
@@ -1255,6 +1278,18 @@ msgstr "Culoare pentru ghidaje:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Culoarea ghidajelor de riglă afișate pe pânză"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr ""
+
 msgid "Grid"
 msgstr "Grilă"
 
@@ -1273,41 +1308,21 @@ msgstr "Izometrică"
 msgid "All"
 msgstr "Toate"
 
-msgid "Rectangular grid width:"
-msgstr "Lățimea grilei dreptunghiulare:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr "Dimensiunea grilei dreptunghiulare:"
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Setează cât de departe sunt una de cealaltă liniile verticale ale grilei dreptunghiulare"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr "Dimensiunea grei izometrice:"
 
-msgid "Rectangular grid height:"
-msgstr "Înălțimea grilei dreptunghiulare:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr "Decalaj grilă:"
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Setează cât de departe sunt una de cealaltă liniile orizontale ale grilei dreptunghiulare"
-
-msgid "Isometric cell bounds width:"
-msgstr "Lățimea limitelor celulelor izometrice:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Setează lățimea casetei de delimitare aliniate axial a celulei izometrice"
-
-msgid "Isometric cell bounds height:"
-msgstr "Înălțimea limitelor celulelor izometrice:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Setează înălțimea casetei de delimitare aliniate axial a celulei izometrice"
-
-msgid "Grid offset x:"
-msgstr "Decalaj grilă x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Setează decalajul x al grilei față de punctul de pornire al pânzei (colțul din partea din stânga sus a imaginii)"
-
-msgid "Grid offset y:"
-msgstr "Decalaj grilă y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Setează decalajul y al grilei față de punctul de pornire al pânzei (colțul din partea din stânga sus a imaginii)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr "Setează decalajul grilei față de punctul de pornire al pânzei (colțul din partea din stânga sus a imaginii)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Afișare peste modul mozaic:"
@@ -1631,6 +1646,12 @@ msgstr "Vertical"
 msgid "Current frame:"
 msgstr "Cadrul actual:"
 
+msgid "Animation mode:"
+msgstr "Mod de animație:"
+
+msgid "Current frame as spritesheet"
+msgstr "Cadrul curent ca foaie cu grafice bidimensionale"
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Sari la primul cadru\n"
@@ -1947,8 +1968,8 @@ msgstr "Fișierul nu a putut fi deschis. Cod de eroare %s"
 msgid "File failed to save. Error code %s"
 msgstr "Fișierul nu a putut fi salvat. Cod de eroare %s"
 
-msgid "File exported"
-msgstr "Fișier exportat"
+msgid "File(s) exported"
+msgstr "Fișier(e) exportat(e)"
 
 msgid "New Empty Palette"
 msgstr "Paletă nouă goală"
@@ -2287,6 +2308,13 @@ msgstr "Opțiuni pentru instrumentul din dreapta"
 msgid "Reference Images"
 msgstr "Imagini de referință"
 
+msgid "Perspective Editor"
+msgstr "Editor perspectivă"
+
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
+msgid "Recorder"
+msgstr "Înregistrator"
+
 msgid "Crop"
 msgstr "Decupare"
 
@@ -2359,6 +2387,9 @@ msgstr "Tor"
 msgid "Plane"
 msgstr "Plan"
 
+msgid "Text"
+msgstr "Text"
+
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
 msgstr "Lumină direcțională"
@@ -2421,6 +2452,7 @@ msgstr "Culoare ambientală:"
 msgid "Ambient color energy:"
 msgstr "Energia ambientală a culorii:"
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr "Vizibil:"
 

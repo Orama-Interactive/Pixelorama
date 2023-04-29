@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2023-03-31 19:07\n"
+"PO-Revision-Date: 2023-04-20 13:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -300,6 +300,26 @@ msgstr "Mostrar Réguas"
 msgid "Show Guides"
 msgstr "Mostrar Guias"
 
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr ""
+
 msgid "Show Animation Timeline"
 msgstr "Mostrar Linha de Tempo da Animação"
 
@@ -368,6 +388,9 @@ msgstr "Fotogramas verticais:"
 
 msgid "Start frame:"
 msgstr "Fotograma inicial:"
+
+msgid "End frame:"
+msgstr ""
 
 msgid "At frame:"
 msgstr "No fotograma:"
@@ -638,8 +661,8 @@ msgstr "Cor Guia:"
 msgid "System Language"
 msgstr "Linguagem de Sistema"
 
-msgid "Display Scale"
-msgstr "Escala de Display"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Escurecer interface durante uma caixa de diálogo"
@@ -845,17 +868,17 @@ msgstr "Cores:"
 msgid "Steps:"
 msgstr "Passos:"
 
-msgid "Top to Bottom"
-msgstr "De Cima para Baixo"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr ""
 
-msgid "Bottom to Top"
-msgstr "De Baixo para Cima"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr ""
 
-msgid "Left to Right"
-msgstr "De Esquerda para a Direita"
-
-msgid "Right to Left"
-msgstr "De Direita para a Esquerda"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Ver o ecrã inicial"
@@ -1245,6 +1268,18 @@ msgstr "Cor das Guias:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Cor das réguas de guia mostradas na tela"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr ""
+
 msgid "Grid"
 msgstr "Grelha"
 
@@ -1263,41 +1298,21 @@ msgstr "Isométrica"
 msgid "All"
 msgstr "Ambas"
 
-msgid "Rectangular grid width:"
-msgstr "Largura da grelha retangular:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Define quão distantes estão as linhas verticais da grelha retangular"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Altura da grelha retangular:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Define quão distantes estão as linhas horizontais da grelha retangular"
-
-msgid "Isometric cell bounds width:"
-msgstr "Largura das bordas das células isométricas:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Define a largura dos eixos das células isométricas alinhadas na caixa que as circunda"
-
-msgid "Isometric cell bounds height:"
-msgstr "Altura das bordas das células isométricas:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Define a altura dos eixos das células isométricas alinhadas na caixa que as circunda"
-
-msgid "Grid offset x:"
-msgstr "Deslocamento da grelha por x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Define o deslocamento da grelha por x a partir da origem da tela (canto superior esquerdo da imagem)"
-
-msgid "Grid offset y:"
-msgstr "Deslocamento da grelha por y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Define o deslocamento da grelha por y a partir da origem da tela (canto superior esquerdo da imagem)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Desenhar por cima do modo de Azuleijo"
@@ -1620,6 +1635,12 @@ msgstr "Vertical"
 msgid "Current frame:"
 msgstr "Fotograma atual:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Saltar para o primeiro fotograma\n"
@@ -1934,8 +1955,8 @@ msgstr "Problema ao abrir ficheiro. Código de erro %s"
 msgid "File failed to save. Error code %s"
 msgstr "Problema ao gravar ficheiro. Código de erro %s"
 
-msgid "File exported"
-msgstr "Ficheiro Exportado"
+msgid "File(s) exported"
+msgstr ""
 
 msgid "New Empty Palette"
 msgstr "Nova Palete Vazia"
@@ -2274,6 +2295,13 @@ msgstr "Opções da Ferramenta Direita"
 msgid "Reference Images"
 msgstr ""
 
+msgid "Perspective Editor"
+msgstr ""
+
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
+msgid "Recorder"
+msgstr ""
+
 msgid "Crop"
 msgstr ""
 
@@ -2344,6 +2372,9 @@ msgstr ""
 msgid "Plane"
 msgstr ""
 
+msgid "Text"
+msgstr ""
+
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
 msgstr ""
@@ -2406,6 +2437,7 @@ msgstr ""
 msgid "Ambient color energy:"
 msgstr ""
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr ""
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-03-31 22:18\n"
+"PO-Revision-Date: 2023-04-20 14:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -254,15 +254,15 @@ msgstr "Layouts verwalten"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Vorschau"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Dies ist eine Vorschau, sie zu modifizieren ändert das Layout nicht"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr ""
+msgstr "Doppelklicken, um als neues Startup-Layout zu setzen"
 
 msgid "Add"
 msgstr "Hinzufügen"
@@ -299,6 +299,26 @@ msgstr "Zeige Lineale"
 
 msgid "Show Guides"
 msgstr "Zeige Guides"
+
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr "Zeige Maus Guides"
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr "Einrasten an"
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr "An rechteckiges Raster einrasten"
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr "An Guides einrasten"
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr "An perspektivische Guides einrasten"
 
 msgid "Show Animation Timeline"
 msgstr "Zeige Animations-Zeitleiste"
@@ -368,6 +388,9 @@ msgstr "Vertikale Frames:"
 
 msgid "Start frame:"
 msgstr "Startframe:"
+
+msgid "End frame:"
+msgstr "End-Frame:"
 
 msgid "At frame:"
 msgstr "Bei dem Frame:"
@@ -639,8 +662,8 @@ msgstr "Guidefarbe"
 msgid "System Language"
 msgstr "Systemsprache"
 
-msgid "Display Scale"
-msgstr "Bildschirmgröße"
+msgid "Display scale:"
+msgstr "Bildschirmmaße:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Oberfläche abdunkeln wenn ein Popup sich öffnet"
@@ -846,17 +869,17 @@ msgstr "Farben:"
 msgid "Steps:"
 msgstr "Schritte:"
 
-msgid "Top to Bottom"
-msgstr "Von oben nach unten"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr "Posterizen"
 
-msgid "Bottom to Top"
-msgstr "Von unten nach oben"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr "Posterize-Level:"
 
-msgid "Left to Right"
-msgstr "Von links nach rechts"
-
-msgid "Right to Left"
-msgstr "Von rechts nach links"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr "Dither-Intensität:"
 
 msgid "View Splash Screen"
 msgstr "Zeige Splash Screen"
@@ -1254,6 +1277,18 @@ msgstr "Guide-Farbe:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Eine Farbe der Lineal-Guides, die auf dem Canvas angezeigt werden"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr "Einrasten"
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr "Einrastungs-Distanz:"
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr "Dies ist die Distanz in Pixeln, in der Guide- und Rastereinrastung aktiviert werden."
+
 msgid "Grid"
 msgstr "Raster"
 
@@ -1272,41 +1307,21 @@ msgstr "Isometrisch"
 msgid "All"
 msgstr "Alle"
 
-msgid "Rectangular grid width:"
-msgstr "Breite des Rechteckrasters:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr "Rechtecksrastergröße:"
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Legt fest, wie weit die vertikalen Linien des rechteckigen Rasters entfernt sind"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr "Isometrische Rastergröße:"
 
-msgid "Rectangular grid height:"
-msgstr "Höhe des Rechteckrasters:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr "Raster-Offset:"
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Legt fest, wie weit sich die horizontalen Linien des rechteckigen Rasters voneinander unterscheiden"
-
-msgid "Isometric cell bounds width:"
-msgstr "Isometrische Zellengrenzbreite:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Legt die Breite der Achse der isometrischen Zelle mit Ausrichtung der Begrenzungsbox fest"
-
-msgid "Isometric cell bounds height:"
-msgstr "Isometrische Zellgrenzenhöhe:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Legt die Höhe der Achse der isometrischen Zelle mit Ausrichtung der Begrenzungsbox fest"
-
-msgid "Grid offset x:"
-msgstr "X-Rasteroffset:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Legt den X-Offset des Rasters vom Ursprung der Leinwand fest (linke obere Ecke des Bildes)"
-
-msgid "Grid offset y:"
-msgstr "Y-Rasteroffset:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Legt den Y-Offset vom Ursprung der Leinwand fest (linke obere Ecke des Bilds)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr "Legt den Offset des Rasters vom Ursprung des Canvas fest (linke obere Ecke des Bilds)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Über Kachelmodus zeichnen:"
@@ -1598,19 +1613,19 @@ msgstr "100% Zoom"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
-msgstr ""
+msgstr "Auswahl ersetzen"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
-msgstr ""
+msgstr "Zur Auswahl hinzufügen"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Subtract from selection"
-msgstr ""
+msgstr "Von Auswahl entfernen"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
-msgstr ""
+msgstr "Schnittpunkt der Auswahlen"
 
 msgid "Mirroring"
 msgstr "Spiegeln"
@@ -1629,6 +1644,12 @@ msgstr "Vertikal"
 
 msgid "Current frame:"
 msgstr "Aktueller Frame"
+
+msgid "Animation mode:"
+msgstr "Animationsmodus:"
+
+msgid "Current frame as spritesheet"
+msgstr "Aktueller Frame als Spritesheet"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -1932,7 +1953,7 @@ msgid "Redo: Change frame duration"
 msgstr "Wiederholen: Frame-Dauer ändern"
 
 msgid "Move Guide"
-msgstr "Bewegungsanleitung"
+msgstr "Guide verschieben"
 
 msgid "File saved"
 msgstr "Datei gespeichert"
@@ -1946,8 +1967,8 @@ msgstr "Datei konnte nicht geöffnet werden. Fehlercode %s"
 msgid "File failed to save. Error code %s"
 msgstr "Datei konnte nicht gespeichert werden. Fehlercode %s"
 
-msgid "File exported"
-msgstr "Datei exportiert"
+msgid "File(s) exported"
+msgstr "Datei(en) exportiert"
 
 msgid "New Empty Palette"
 msgstr "Neue leere Palette"
@@ -2285,6 +2306,13 @@ msgstr "Optionen des rechten Werkzeugs"
 msgid "Reference Images"
 msgstr "Referenzbilder"
 
+msgid "Perspective Editor"
+msgstr "Perspektiven-Editor"
+
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
+msgid "Recorder"
+msgstr "Zeichnungsaufnahme"
+
 msgid "Crop"
 msgstr "Zuschneiden"
 
@@ -2357,6 +2385,9 @@ msgstr "Torus"
 msgid "Plane"
 msgstr "Ebene"
 
+msgid "Text"
+msgstr "Text"
+
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
 msgstr "Richtungslicht"
@@ -2419,6 +2450,7 @@ msgstr "Ambient-Farbe:"
 msgid "Ambient color energy:"
 msgstr "Ambient-Farbenergie:"
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr "Sichtbar:"
 
