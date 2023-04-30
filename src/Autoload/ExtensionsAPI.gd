@@ -314,6 +314,21 @@ class ProjectAPI:
 		else:
 			return {"cel": cel, "type": "BaseCel"}
 
+	func get_cel_info_at(project: Project, layer: int, frame: int) -> Dictionary:
+		# frames from left to right, layers from bottomn to top
+		clamp(layer, 0, project.layers.size() - 1)
+		clamp(frame, 0, project.frames.size() - 1)
+		var cel = project.frames[frame].cels[layer]
+		# Add cel types as we have more and more cels
+		if cel is PixelCel:
+			return {"cel": cel, "type": "PixelCel"}
+		elif cel is GroupCel:
+			return {"cel": cel, "type": "GroupCel"}
+		elif cel is Cel3D:
+			return {"cel": cel, "type": "Cel3D"}
+		else:
+			return {"cel": cel, "type": "BaseCel"}
+
 
 class SignalsAPI:
 	signal _texture_changed
