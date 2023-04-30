@@ -378,10 +378,10 @@ class SignalsAPI:
 
 	# updater signals
 	func connect_current_cel_texture_changed(target: Object, method: String):
-		connect("_texture_changed", target, method)
+		connect("texture_changed", target, method)
 		_update_texture_signal()
 		ExtensionsApi.add_action("texture_changed")
 
 	func disconnect_current_cel_texture_changed(target: Object, method: String):
-		disconnect("_texture_changed", target, method)
+		disconnect("texture_changed", target, method)
 		ExtensionsApi.remove_action("texture_changed")
