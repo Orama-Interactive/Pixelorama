@@ -344,9 +344,9 @@ class SignalsAPI:
 	func _update_texture_signal():
 		if _last_cel:
 			_last_cel.disconnect("texture_changed", self, "_on_texture_changed")
-		if Global.current_project:
-			_last_cel = Global.current_project.get_current_cel()
-			_last_cel.connect("texture_changed", self, "_on_texture_changed")
+		print(Global.current_project.frames)
+		_last_cel = Global.current_project.get_current_cel()
+		_last_cel.connect("texture_changed", self, "_on_texture_changed")
 
 	func _on_texture_changed():
 		emit_signal("texture_changed")
@@ -380,7 +380,6 @@ class SignalsAPI:
 	# updater signals
 	func connect_current_cel_texture_changed(target: Object, method: String):
 		connect("texture_changed", target, method)
-		_update_texture_signal()
 		ExtensionsApi.add_action("texture_changed")
 
 	func disconnect_current_cel_texture_changed(target: Object, method: String):
