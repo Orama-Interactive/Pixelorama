@@ -9,6 +9,7 @@ var panel = PanelAPI.new()
 var theme = ThemeAPI.new()
 var tools = ToolAPI.new()
 var project = ProjectAPI.new()
+var signals = SignalsAPI.new()
 
 # This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
 var _action_history: Dictionary = {}
@@ -312,3 +313,57 @@ class ProjectAPI:
 			return {"cel": cel, "type": "GroupCel"}
 		else:
 			return {"cel": cel, "type": "BaseCel"}
+
+
+class SignalsAPI:
+	signal _texture_changed
+	var _last_cel: BaseCel
+
+	func _init() -> void:
+		Global.connect("project_changed", self, "_update_texture_signal")
+		Global.connect("cel_changed", self, "_update_texture_signal")
+
+	func _update_texture_signal():
+		if _last_cel:
+			_last_cel.disconnect("texture_changed", self, "_on_texture_changed")
+		_last_cel = Global.current_project.get_current_cel()
+		_last_cel.connect("texture_changed", self, "_on_texture_changed")
+
+	func _on_texture_changed():
+		emit_signal("_texture_changed")
+
+	# Global signals
+	func connect_project_changed(target: Object, method: String):
+		Global.connect("project_changed", target, method)
+		ExtensionsApi.add_action("project_changed")
+
+	func disconnect_project_changed(target: Object, method: String):
+		Global.disconnect("project_changed", target, method)
+		ExtensionsApi.remove_action("project_changed")
+
+	func connect_cel_changed(target: Object, method: String):
+		Global.connect("cel_changed", target, method)
+		ExtensionsApi.add_action("cel_changed")
+
+	func disconnect_cel_changed(target: Object, method: String):
+		Global.disconnect("cel_changed", target, method)
+		ExtensionsApi.remove_action("cel_changed")
+
+	# Tool Signal
+	func connect_tool_color_changed(target: Object, method: String):
+		Tools.connect("color_changed", target, method)
+		ExtensionsApi.add_action("color_changed")
+
+	func disconnect_tool_color_changed(target: Object, method: String):
+		Tools.disconnect("color_changed", target, method)
+		ExtensionsApi.remove_action("color_changed")
+
+	# updater signals
+	func connect_current_cel_texture_changed(target: Object, method: String):
+		connect("_texture_changed", target, method)
+		_update_texture_signal()
+		ExtensionsApi.add_action("texture_changed")
+
+	func disconnect_current_cel_texture_changed(target: Object, method: String):
+		disconnect("_texture_changed", target, method)
+		ExtensionsApi.remove_action("texture_changed")
