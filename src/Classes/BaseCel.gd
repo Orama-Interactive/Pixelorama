@@ -73,3 +73,7 @@ func on_remove() -> void:
 
 func instantiate_cel_button() -> Node:
 	return null
+
+
+func get_class_name() -> String:
+	return "BaseCel"
