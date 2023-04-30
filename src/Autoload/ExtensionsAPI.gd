@@ -303,14 +303,5 @@ class ProjectAPI:
 		# then the old extension would have no idea how to identify the types they use
 		# E.g the extension may try to use a GroupCel as a PixelCel (if it doesn't know the difference)
 		# So it's encouraged to use this function to access cels
-		var project = get_current_project()
-		var cel = project.get_current_cel()
-		# Add cel types as we have more and more cels
-		if cel is PixelCel:
-			return {"cel": cel, "type": "PixelCel"}
-		elif cel is GroupCel:
-			return {"cel": cel, "type": "GroupCel"}
-		elif cel is Cel3D:
-			return {"cel": cel, "type": "Cel3D"}
-		else:
-			return {"cel": cel, "type": "BaseCel"}
+		var cel := get_current_project().get_current_cel()
+		return {"cel": cel, "type": cel.get_class_name()}

@@ -210,3 +210,7 @@ func load_image_data_from_pxo(file: File, project_size: Vector2) -> void:
 
 func instantiate_cel_button() -> Node:
 	return Global.pixel_cel_button_node.instance()
+
+
+func get_class_name() -> String:
+	return "Cel3D"
