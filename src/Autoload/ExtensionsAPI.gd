@@ -286,7 +286,7 @@ class ToolAPI:
 		ExtensionsApi.add_action("add_tool")
 
 	func remove_tool(tool_name: String) -> void:
-		# Re-assigning the tools in case the tool to be removed is also active
+		# Re-assigning the tools in case the tool to be removed is also Active
 		Tools.assign_tool("Pencil", BUTTON_LEFT)
 		Tools.assign_tool("Eraser", BUTTON_RIGHT)
 		var tool_class: Tools.Tool = Tools.tools[tool_name]
@@ -311,8 +311,6 @@ class ProjectAPI:
 			return {"cel": cel, "type": "PixelCel"}
 		elif cel is GroupCel:
 			return {"cel": cel, "type": "GroupCel"}
-		elif cel is Cel3D:
-			return {"cel": cel, "type": "Cel3D"}
 		else:
 			return {"cel": cel, "type": "BaseCel"}
 
@@ -333,7 +331,8 @@ class ProjectAPI:
 
 
 class SignalsAPI:
-	signal _texture_changed
+	# system to auto-adjust texture_changed to the "current cel"
+	signal texture_changed
 	var _last_cel: BaseCel
 
 	func _init() -> void:
@@ -347,7 +346,7 @@ class SignalsAPI:
 		_last_cel.connect("texture_changed", self, "_on_texture_changed")
 
 	func _on_texture_changed():
-		emit_signal("_texture_changed")
+		emit_signal("texture_changed")
 
 	# Global signals
 	func connect_project_changed(target: Object, method: String):
