@@ -344,8 +344,9 @@ class SignalsAPI:
 	func _update_texture_signal():
 		if _last_cel:
 			_last_cel.disconnect("texture_changed", self, "_on_texture_changed")
-		_last_cel = Global.current_project.get_current_cel()
-		_last_cel.connect("texture_changed", self, "_on_texture_changed")
+		if Global.current_project:
+			_last_cel = Global.current_project.get_current_cel()
+			_last_cel.connect("texture_changed", self, "_on_texture_changed")
 
 	func _on_texture_changed():
 		emit_signal("texture_changed")
