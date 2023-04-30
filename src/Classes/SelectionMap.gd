@@ -13,6 +13,61 @@ func is_pixel_selected(pixel: Vector2) -> bool:
 	return selected
 
 
+func get_nearest_position(pixel: Vector2) -> Vector2:
+	if Global.canvas.selection.flag_tilemode:
+		# functions more or less the same way as the tilemode
+		var size = Global.current_project.size
+		var selection_rect = get_used_rect()
+		var start_x = selection_rect.position.x - selection_rect.size.x
+		var end_x = selection_rect.position.x + 2 * selection_rect.size.x
+		var start_y = selection_rect.position.y - selection_rect.size.y
+		var end_y = selection_rect.position.y + 2 * selection_rect.size.y
+		for x in range(start_x, end_x, selection_rect.size.x):
+			for y in range(start_y, end_y, selection_rect.size.y):
+				var test_image = Image.new()
+				test_image.create(size.x, size.y, false, Image.FORMAT_LA8)
+				test_image.blit_rect(self, selection_rect, Vector2(x, y))
+				test_image.lock()
+				if (
+					pixel.x < 0
+					or pixel.y < 0
+					or pixel.x >= test_image.get_width()
+					or pixel.y >= test_image.get_height()
+				):
+					continue
+				var selected: bool = test_image.get_pixelv(pixel).a > 0
+				test_image.unlock()
+				if selected:
+					var offset = Vector2(x, y) - selection_rect.position
+					return offset
+		return Vector2.ZERO
+	else:
+		return Vector2.ZERO
+
+
+func get_point_in_tile_mode(pixel: Vector2) -> Array:
+	var result = []
+	if Global.canvas.selection.flag_tilemode:
+		var selection_rect = get_used_rect()
+		var start_x = selection_rect.position.x - selection_rect.size.x
+		var end_x = selection_rect.position.x + 2 * selection_rect.size.x
+		var start_y = selection_rect.position.y - selection_rect.size.y
+		var end_y = selection_rect.position.y + 2 * selection_rect.size.y
+		for x in range(start_x, end_x, selection_rect.size.x):
+			for y in range(start_y, end_y, selection_rect.size.y):
+				result.append(Vector2(x, y) + pixel - selection_rect.position)
+	else:
+		result.append(pixel)
+	return result
+
+
+func get_canon_position(position) -> Vector2:
+	if Global.canvas.selection.flag_tilemode:
+		return position - get_nearest_position(position)
+	else:
+		return position
+
+
 func select_pixel(pixel: Vector2, select := true) -> void:
 	lock()
 	if select:

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-03-31 23:40\n"
+"PO-Revision-Date: 2023-04-20 13:26\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -300,6 +300,26 @@ msgstr "Cetvelleri Göster"
 msgid "Show Guides"
 msgstr "Kılavuzları Göster"
 
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr "Faker Kılavuzlarını Göster"
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr "Yapış"
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr "Dikdörtgen Izgaraya Yapış"
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr "Kılavuzlara Yapış"
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr "Perspektif Kılavuzlarına Yapış"
+
 msgid "Show Animation Timeline"
 msgstr "Animasyon Çizelgesini Göster"
 
@@ -368,6 +388,9 @@ msgstr "Dikey kareler:"
 
 msgid "Start frame:"
 msgstr "Başlangıç karesi:"
+
+msgid "End frame:"
+msgstr ""
 
 msgid "At frame:"
 msgstr "Karede:"
@@ -640,8 +663,8 @@ msgstr "Kılavuz rengi:"
 msgid "System Language"
 msgstr "Sistem Dili"
 
-msgid "Display Scale"
-msgstr "Görüntü Ölçeği"
+msgid "Display scale:"
+msgstr "Ekran ölçeği:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Diyalog penceresinde arayüzü karart"
@@ -847,17 +870,17 @@ msgstr "Renkler:"
 msgid "Steps:"
 msgstr "Adımlar:"
 
-msgid "Top to Bottom"
-msgstr "Yukarıdan Aşağıya"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr ""
 
-msgid "Bottom to Top"
-msgstr "Aşağıdan Yukarıya"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr ""
 
-msgid "Left to Right"
-msgstr "Soldan Sağa"
-
-msgid "Right to Left"
-msgstr "Sağdan Sola"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Açılış Ekranını Göster"
@@ -1255,6 +1278,18 @@ msgstr "Kılavuzların rengi:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Tuvalde görüntülenen cetvel kılavuzlarının rengi"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr ""
+
 msgid "Grid"
 msgstr "Izgara"
 
@@ -1273,41 +1308,21 @@ msgstr "İzometrik"
 msgid "All"
 msgstr "Tümü"
 
-msgid "Rectangular grid width:"
-msgstr "Dikdörtgen ızgara genişliği:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Dikdörtgen ızgaranın dikey çizgilerinin birbirinden ne kadar uzakta olduğunu ayarlar"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Dikdörtgen ızgara yüksekliği:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Dikdörtgen ızgaranın yatay çizgilerinin birbirinden ne kadar uzakta olduğunu ayarlar"
-
-msgid "Isometric cell bounds width:"
-msgstr "İzometrik hücre sınırları genişliği:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "İzometrik hücrenin eksen hizalı sınırlayıcı kutusunun genişliğini ayarlar"
-
-msgid "Isometric cell bounds height:"
-msgstr "İzometrik hücre sınırları yüksekliği:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "İzometrik hücrenin eksen hizalı sınırlayıcı kutusunun yüksekliğini ayarlar"
-
-msgid "Grid offset x:"
-msgstr "Izgara konumu x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Izgaranın tuval orijininden x konumunu ayarlar (resmin sol üst köşesi)"
-
-msgid "Grid offset y:"
-msgstr "Izgara konumu y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Izgaranın tuval orijininden y konumunu ayarlar (resmin sol üst köşesi)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Döşeme Kipinde Çizim:"
@@ -1631,6 +1646,12 @@ msgstr "Dikey"
 msgid "Current frame:"
 msgstr "Geçerli kare:"
 
+msgid "Animation mode:"
+msgstr "Animasyon kipi:"
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "İlk kareye atla\n"
@@ -1947,8 +1968,8 @@ msgstr "Dosya açılamadı. Hata kodu %s"
 msgid "File failed to save. Error code %s"
 msgstr "Dosya kaydedilemedi. Hata kodu %s"
 
-msgid "File exported"
-msgstr "Dosya dışa aktarıldı"
+msgid "File(s) exported"
+msgstr "Dosya(lar) dışa aktarıldı"
 
 msgid "New Empty Palette"
 msgstr "Yeni Boş Palet"
@@ -2287,6 +2308,13 @@ msgstr "Sağ Araç Seçenekleri"
 msgid "Reference Images"
 msgstr "Referans Resimler"
 
+msgid "Perspective Editor"
+msgstr "Perspektif düzenleyici"
+
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
+msgid "Recorder"
+msgstr "Kaydedici"
+
 msgid "Crop"
 msgstr "Kırp"
 
@@ -2359,6 +2387,9 @@ msgstr "Halka"
 msgid "Plane"
 msgstr "Uçak"
 
+msgid "Text"
+msgstr "Metin"
+
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
 msgstr "Doğrusal ışık"
@@ -2421,6 +2452,7 @@ msgstr "Ortam rengi:"
 msgid "Ambient color energy:"
 msgstr "Ortam renk enerjisi:"
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr "Görünür:"
 
@@ -2438,7 +2470,7 @@ msgstr "Soldan sağa:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Yarıçap:"
+msgstr ""
 
 msgid "Height:"
 msgstr "Yükseklik:"

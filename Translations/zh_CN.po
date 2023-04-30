@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-03-31 19:08\n"
+"PO-Revision-Date: 2023-04-20 13:26\n"
 
 msgid "OK"
 msgstr "确定"
@@ -300,6 +300,26 @@ msgstr "显示标尺"
 msgid "Show Guides"
 msgstr "显示参考线"
 
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr "显示鼠标向导"
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr "吸附到"
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr "吸附到方形网格"
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr "吸附到网格"
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr "吸附到透视指南"
+
 msgid "Show Animation Timeline"
 msgstr "显示动画时间轴"
 
@@ -368,6 +388,9 @@ msgstr "垂直帧："
 
 msgid "Start frame:"
 msgstr "开始帧："
+
+msgid "End frame:"
+msgstr "结束帧："
 
 msgid "At frame:"
 msgstr "在帧："
@@ -640,8 +663,8 @@ msgstr "辅助线颜色:"
 msgid "System Language"
 msgstr "系统语言"
 
-msgid "Display Scale"
-msgstr "显示缩放"
+msgid "Display scale:"
+msgstr "显示比例："
 
 msgid "Dim interface on dialog popup"
 msgstr "对话框弹出时变暗界面"
@@ -847,17 +870,17 @@ msgstr "颜色:"
 msgid "Steps:"
 msgstr "步骤："
 
-msgid "Top to Bottom"
-msgstr "从上到下"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr ""
 
-msgid "Bottom to Top"
-msgstr "从下到上"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr ""
 
-msgid "Left to Right"
-msgstr "从左到右"
-
-msgid "Right to Left"
-msgstr "从右到左"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "查看启动画面"
@@ -1255,6 +1278,18 @@ msgstr "参考线颜色："
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "显示在画布上标尺参考线的颜色"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr ""
+
 msgid "Grid"
 msgstr "网格"
 
@@ -1273,41 +1308,21 @@ msgstr "几何体"
 msgid "All"
 msgstr "全部"
 
-msgid "Rectangular grid width:"
-msgstr "矩形网格宽度："
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr "矩形网格大小："
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "设置矩形网格垂直线之间的距离"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr "几何网格大小："
 
-msgid "Rectangular grid height:"
-msgstr "矩形网格高度："
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr "网格偏移："
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "设置矩形网格水平线之间的距离"
-
-msgid "Isometric cell bounds width:"
-msgstr "几何单元格边界宽度："
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "设置等深单元轴对齐边界框的宽度"
-
-msgid "Isometric cell bounds height:"
-msgstr "几何单元格边界高度："
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "设置等深单元轴对齐边界框的高度"
-
-msgid "Grid offset x:"
-msgstr "网格偏移 X:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "设置等距网格相对于画布原点的 x 偏移量(图像左上角)"
-
-msgid "Grid offset y:"
-msgstr "网格偏移 Y："
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "设置等距网格相对于画布原点的 y 偏移量(图像左上角)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr "设置画布来源的网格偏移量(图像左上角)"
 
 msgid "Draw over Tile Mode:"
 msgstr "在平铺模式绘制："
@@ -1631,6 +1646,12 @@ msgstr "垂直"
 msgid "Current frame:"
 msgstr "当前帧:"
 
+msgid "Animation mode:"
+msgstr "动画模式："
+
+msgid "Current frame as spritesheet"
+msgstr "当前帧为精灵表"
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "跳转到第一帧\n"
@@ -1947,7 +1968,7 @@ msgstr "打开文件失败。错误代码 %s"
 msgid "File failed to save. Error code %s"
 msgstr "保存文件失败。错误代码 %s"
 
-msgid "File exported"
+msgid "File(s) exported"
 msgstr "文件已导出"
 
 msgid "New Empty Palette"
@@ -2287,6 +2308,13 @@ msgstr "右键工具选项"
 msgid "Reference Images"
 msgstr "参考图像"
 
+msgid "Perspective Editor"
+msgstr "透视编辑器"
+
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
+msgid "Recorder"
+msgstr "录制器"
+
 msgid "Crop"
 msgstr "裁剪"
 
@@ -2359,6 +2387,9 @@ msgstr ""
 msgid "Plane"
 msgstr ""
 
+msgid "Text"
+msgstr "文本"
+
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
 msgstr ""
@@ -2421,6 +2452,7 @@ msgstr ""
 msgid "Ambient color energy:"
 msgstr ""
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr ""
 

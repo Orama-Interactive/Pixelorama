@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2023-03-31 19:07\n"
+"PO-Revision-Date: 2023-04-20 13:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -300,6 +300,26 @@ msgstr "Показывать линейки"
 msgid "Show Guides"
 msgstr "Показывать направляющие"
 
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr ""
+
 msgid "Show Animation Timeline"
 msgstr "Показать таймлайн анимации"
 
@@ -368,6 +388,9 @@ msgstr "Кадров по вертикали:"
 
 msgid "Start frame:"
 msgstr "Начальный кадр:"
+
+msgid "End frame:"
+msgstr ""
 
 msgid "At frame:"
 msgstr "В кадре:"
@@ -640,8 +663,8 @@ msgstr "Цвет направляющих:"
 msgid "System Language"
 msgstr "Системный язык"
 
-msgid "Display Scale"
-msgstr "Масштаб экрана"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "Затемнять интерфейс при появлении диалога"
@@ -846,17 +869,17 @@ msgstr "Цвета:"
 msgid "Steps:"
 msgstr "Шаги:"
 
-msgid "Top to Bottom"
-msgstr "Сверху вниз"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr ""
 
-msgid "Bottom to Top"
-msgstr "Снизу вверх"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr ""
 
-msgid "Left to Right"
-msgstr "Слева направо"
-
-msgid "Right to Left"
-msgstr "Справа налево"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "Экран приветствия"
@@ -1254,6 +1277,18 @@ msgstr "Цвет направляющих:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Цвет направляющих линейки, отображаемых на холсте"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgstr ""
+
 msgid "Grid"
 msgstr "Сетка"
 
@@ -1272,41 +1307,21 @@ msgstr "Изометрическая"
 msgid "All"
 msgstr "Обе"
 
-msgid "Rectangular grid width:"
-msgstr "Ширина прямоугольной сетки:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Устанавливает расстояние между вертикальными линиями прямоугольной сетки"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "Высота прямоугольной сетки:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Устанавливает расстояние между горизонтальными линиями сетки"
-
-msgid "Isometric cell bounds width:"
-msgstr "Ширина границ изометрической клетки:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Устанавливает ширину границ, в которые вписывается изометрическая клетка"
-
-msgid "Isometric cell bounds height:"
-msgstr "Высота границ изометрической клетки:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Устанавливает высоту границ, в которые вписывается изометрическая клетка"
-
-msgid "Grid offset x:"
-msgstr "Сдвиг сетки по X:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Устанавливает смещение сетки по X от начала координат холста (верхнего левого угла изображения)"
-
-msgid "Grid offset y:"
-msgstr "Сдвиг сетки по Y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Устанавливает смещение сетки по Y от начала координат холста (верхнего левого угла изображения)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "Показывать в бесшовном режиме:"
@@ -1630,6 +1645,12 @@ msgstr "Вертикально"
 msgid "Current frame:"
 msgstr "Текущий кадр:"
 
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
+
 msgid "Jump to the first frame\n"
 "(%s)"
 msgstr "Перейти к первому кадру\n"
@@ -1946,8 +1967,8 @@ msgstr "Не удалось открыть файл. Код ошибки %s"
 msgid "File failed to save. Error code %s"
 msgstr "Не удалось сохранить файл. Код ошибки %s"
 
-msgid "File exported"
-msgstr "Файл экспортирован"
+msgid "File(s) exported"
+msgstr ""
 
 msgid "New Empty Palette"
 msgstr "Создать пустую палитру"
@@ -2286,6 +2307,13 @@ msgstr "Настройки правого инструмента"
 msgid "Reference Images"
 msgstr "Эталонные изображения"
 
+msgid "Perspective Editor"
+msgstr ""
+
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
+msgid "Recorder"
+msgstr ""
+
 msgid "Crop"
 msgstr ""
 
@@ -2356,6 +2384,9 @@ msgstr ""
 msgid "Plane"
 msgstr ""
 
+msgid "Text"
+msgstr ""
+
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
 msgstr ""
@@ -2418,6 +2449,7 @@ msgstr ""
 msgid "Ambient color energy:"
 msgstr ""
 
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
 msgstr ""
 
