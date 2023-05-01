@@ -252,6 +252,8 @@ func _ready() -> void:
 		var tooltip: String = node.hint_tooltip
 		if !tooltip.empty() and node.shortcut:
 			ui_tooltips[node] = tooltip
+	yield(get_tree(), "idle_frame")
+	emit_signal("project_changed")
 
 
 func _initialize_keychain() -> void:
