@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-05-04 18:18\n"
+"PO-Revision-Date: 2023-05-04 19:24\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1287,7 +1287,7 @@ msgstr "Odległość przyciągania:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grip snapping gets activated."
-msgstr ""
+msgstr "To jest odległość w pikselach, gdzie przyciąganie do prowadnic i siatki jest aktywowana."
 
 msgid "Grid"
 msgstr "Siatka"
@@ -1309,19 +1309,19 @@ msgstr "Wszystkie"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "Rozmiar siatki prostokątnej:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Rozmiar siatki izometrycznej:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Przesunięcie siatki:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Przesuwa siatkę od początku płótna (lewy górny róg obrazu)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Rysuj nad trybem kafelkowym:"
@@ -2469,7 +2469,7 @@ msgstr "Od lewej do prawej:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "Promień:"
 
 msgid "Height:"
 msgstr "Wysokość:"
