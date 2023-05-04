@@ -1224,7 +1224,7 @@ msgid "Snapping distance:"
 msgstr ""
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
-msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgid "This is the distance in pixels where guide and grid snapping gets activated."
 msgstr ""
 
 msgid "Grid"
