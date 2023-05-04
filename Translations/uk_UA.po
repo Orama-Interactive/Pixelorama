@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-04-26 05:59\n"
+"PO-Revision-Date: 2023-05-04 22:50\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -1287,7 +1287,7 @@ msgid "Snapping distance:"
 msgstr ""
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
-msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgid "This is the distance in pixels where guide and grid snapping gets activated."
 msgstr ""
 
 msgid "Grid"
@@ -2473,7 +2473,7 @@ msgid "Radius:"
 msgstr "Радіус:"
 
 msgid "Height:"
-msgstr "Висота:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
