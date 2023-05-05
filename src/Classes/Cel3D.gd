@@ -186,8 +186,11 @@ func deserialize(dict: Dictionary) -> void:
 		if typeof(object) != TYPE_STRING:
 			return
 		Global.convert_dictionary_values(objects_copy[object])
-		object_properties[int(object)] = objects_copy[object]
-	current_object_id = object_properties.size()
+		var id := int(object)
+		if current_object_id < id:
+			current_object_id = id
+		object_properties[id] = objects_copy[object]
+	current_object_id += 1
 	Global.convert_dictionary_values(scene_properties)
 	deserialize_scene_properties()
 	for object in object_properties:
