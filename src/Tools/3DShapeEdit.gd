@@ -348,7 +348,8 @@ func _set_node_values(to_edit: Object, properties: Dictionary) -> void:
 		elif node is CheckBox:
 			node.pressed = value
 		elif node is LineEdit:
-			node.text = value
+			if node.text != value:
+				node.text = value
 
 
 func _get_previous_node(node: Node) -> Node:
