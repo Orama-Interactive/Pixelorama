@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-05-04 22:50\n"
+"PO-Revision-Date: 2023-05-05 22:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1287,7 +1287,7 @@ msgstr "Einrastungs-Distanz:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Dies ist die Distanz in Pixeln, in der Guide- und Rasterseinrastung aktiviert werden."
 
 msgid "Grid"
 msgstr "Raster"
@@ -2471,7 +2471,7 @@ msgid "Radius:"
 msgstr "Radius:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Höhe:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
