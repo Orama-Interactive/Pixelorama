@@ -102,8 +102,11 @@ func get_points(camera: Camera, object3d: Cel3DObject) -> void:
 		gizmos_origin = camera.unproject_position(object3d.translation)
 
 		var right: Vector3 = object3d.translation + object3d.transform.basis.x
+		var left: Vector3 = object3d.translation - object3d.transform.basis.x
 		var up: Vector3 = object3d.translation + object3d.transform.basis.y
+		var down: Vector3 = object3d.translation - object3d.transform.basis.y
 		var back: Vector3 = object3d.translation + object3d.transform.basis.z
+		var front: Vector3 = object3d.translation - object3d.transform.basis.z
 
 		var proj_right: Vector2 = object3d.camera.unproject_position(right)
 		var proj_up: Vector2 = object3d.camera.unproject_position(up)
@@ -112,6 +115,16 @@ func get_points(camera: Camera, object3d: Cel3DObject) -> void:
 		proj_right_local = proj_right - gizmos_origin
 		proj_up_local = proj_up - gizmos_origin
 		proj_back_local = proj_back - gizmos_origin
+
+		var curve_right_local := proj_right_local
+		var curve_up_local := proj_up_local
+		var curve_back_local := proj_back_local
+		if right.distance_to(camera.translation) > left.distance_to(camera.translation):
+			curve_right_local = object3d.camera.unproject_position(left) - gizmos_origin
+		if up.distance_to(camera.translation) > down.distance_to(camera.translation):
+			curve_up_local = object3d.camera.unproject_position(down) - gizmos_origin
+		if back.distance_to(camera.translation) > front.distance_to(camera.translation):
+			curve_back_local = object3d.camera.unproject_position(front) - gizmos_origin
 
 		proj_right_local = _resize_vector(proj_right_local, ARROW_LENGTH)
 		proj_up_local = _resize_vector(proj_up_local, ARROW_LENGTH)
@@ -126,9 +139,9 @@ func get_points(camera: Camera, object3d: Cel3DObject) -> void:
 		gizmo_pos_y = _find_arrow(proj_up_local)
 		gizmo_pos_z = _find_arrow(proj_back_local)
 		# Calculate rotation gizmos
-		gizmo_rot_x = _find_curve(proj_up_local, proj_back_local)
-		gizmo_rot_y = _find_curve(proj_right_local, proj_back_local)
-		gizmo_rot_z = _find_curve(proj_right_local, proj_up_local)
+		gizmo_rot_x = _find_curve(curve_up_local, curve_back_local)
+		gizmo_rot_y = _find_curve(curve_right_local, curve_back_local)
+		gizmo_rot_z = _find_curve(curve_right_local, curve_up_local)
 
 	update()
 
