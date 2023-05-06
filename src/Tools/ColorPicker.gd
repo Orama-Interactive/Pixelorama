@@ -77,7 +77,7 @@ func _pick_color(position: Vector2) -> void:
 			var curr_frame: Frame = project.frames[project.current_frame]
 			for layer in project.layers.size():
 				var idx = (project.layers.size() - 1) - layer
-				if project.layers[idx].can_layer_get_drawn():
+				if project.layers[idx].is_visible_in_hierarchy():
 					image = curr_frame.cels[idx].get_image()
 					image.lock()
 					color = image.get_pixelv(position)
