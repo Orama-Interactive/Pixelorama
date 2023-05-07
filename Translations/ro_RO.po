@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-05-04 22:49\n"
+"PO-Revision-Date: 2023-05-07 15:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1288,7 +1288,7 @@ msgstr ""
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Aceasta este distanța în pixeli unde ghidul și fixarea la grilă sunt activate."
 
 msgid "Grid"
 msgstr "Grilă"
@@ -2473,7 +2473,7 @@ msgid "Radius:"
 msgstr "Rază:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Înălțime:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
