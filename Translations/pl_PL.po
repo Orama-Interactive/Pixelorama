@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-05-04 22:50\n"
+"PO-Revision-Date: 2023-05-07 19:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -681,7 +681,7 @@ msgid "Caramel"
 msgstr "Karmelowy"
 
 msgid "Light"
-msgstr "Jasny"
+msgstr "Światło"
 
 msgid "Purple"
 msgstr "Fioletowy"
@@ -1287,7 +1287,7 @@ msgstr "Odległość przyciągania:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "To jest odległość w pikselach, gdzie przyciąganie do prowadnic i siatki jest aktywowane."
 
 msgid "Grid"
 msgstr "Siatka"
@@ -2472,7 +2472,7 @@ msgid "Radius:"
 msgstr "Promień:"
 
 msgid "Height:"
-msgstr ""
+msgstr "Wysokość:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
