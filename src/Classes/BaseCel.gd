@@ -48,6 +48,9 @@ func get_image() -> Image:
 
 func update_texture() -> void:
 	emit_signal("texture_changed")
+	if link_set != null:
+		for cel in link_set["cels"]:
+			cel.emit_signal("texture_changed")
 	return
 
 
