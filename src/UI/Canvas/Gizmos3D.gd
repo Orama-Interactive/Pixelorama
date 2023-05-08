@@ -96,7 +96,8 @@ func get_points(camera: Camera, object3d: Cel3DObject) -> void:
 	for vertex in arrays[ArrayMesh.ARRAY_VERTEX]:
 		var x_vertex: Vector3 = object3d.transform.xform(vertex)
 		var point := camera.unproject_position(x_vertex)
-		points.append(point)
+		if not camera.is_position_behind(x_vertex):
+			points.append(point)
 	points_per_object[object3d] = points
 	if object3d.selected:
 		gizmos_origin = camera.unproject_position(object3d.translation)
