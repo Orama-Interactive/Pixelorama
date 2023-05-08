@@ -49,8 +49,11 @@ func get_image() -> Image:
 func update_texture() -> void:
 	emit_signal("texture_changed")
 	if link_set != null:
-		for cel in link_set["cels"]:
-			cel.emit_signal("texture_changed")
+		var frame: int = Global.current_project.current_frame
+		# This check is needed in case the user has selected multiple cels that are also linked
+		if self in Global.current_project.frames[frame].cels:
+			for cel in link_set["cels"]:
+				cel.emit_signal("texture_changed")
 	return
 
 
