@@ -80,10 +80,12 @@ custom_constants/separation = 20
 
 [node name="RotationSlider" type="TextureProgress" parent="TopLabels"]
 unique_name_in_owner = true
+margin_top = 4.0
 margin_right = 70.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 70, 0 )
+margin_bottom = 24.0
+rect_min_size = Vector2( 70, 20 )
 mouse_default_cursor_shape = 2
+size_flags_vertical = 4
 theme_type_variation = "ValueSlider"
 min_value = -180.0
 max_value = 180.0
@@ -101,13 +103,16 @@ suffix = "°"
 [node name="ZoomSlider" type="TextureProgress" parent="TopLabels"]
 unique_name_in_owner = true
 margin_left = 90.0
+margin_top = 4.0
 margin_right = 160.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 70, 0 )
+margin_bottom = 24.0
+rect_min_size = Vector2( 70, 20 )
 mouse_default_cursor_shape = 2
+size_flags_vertical = 4
 theme_type_variation = "ValueSlider"
 min_value = 50.0
 max_value = 2000.0
+value = 50.0
 allow_greater = true
 allow_lesser = true
 nine_patch_stretch = true
