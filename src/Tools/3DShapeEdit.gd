@@ -153,6 +153,7 @@ func draw_move(position: Vector2) -> void:
 		var proj_prev_mouse_pos := camera.project_position(_prev_mouse_pos, camera.translation.z)
 		_cel.selected.change_transform(proj_mouse_pos, proj_prev_mouse_pos)
 		_prev_mouse_pos = position
+	Global.canvas.sprite_changed_this_frame = true
 
 
 func draw_end(_position: Vector2) -> void:
@@ -163,6 +164,7 @@ func draw_end(_position: Vector2) -> void:
 		_cel.selected.applying_gizmos = Cel3DObject.Gizmos.NONE
 		_object_property_changed(_cel.selected)
 	_has_been_dragged = false
+	Global.canvas.sprite_changed_this_frame = true
 
 
 func cursor_move(position: Vector2) -> void:
