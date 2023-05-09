@@ -214,6 +214,8 @@ func _cel_changed() -> void:
 	_set_cel_node_values()
 	_fill_object_option_button()
 
+	# two yields are required
+	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	_cel.selected = selected
 
