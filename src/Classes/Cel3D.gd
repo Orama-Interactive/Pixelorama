@@ -38,8 +38,6 @@ func _init(_size: Vector2, from_pxo := false, _object_prop := {}, _scene_prop :=
 			transform.origin = Vector3(-2.5, 0, 0)
 			object_properties[0] = {"type": Cel3DObject.Type.DIR_LIGHT, "transform": transform}
 			_add_object_node(0)
-			object_properties[1] = {"type": Cel3DObject.Type.BOX}
-			_add_object_node(1)
 		current_object_id = object_properties.size()
 
 
