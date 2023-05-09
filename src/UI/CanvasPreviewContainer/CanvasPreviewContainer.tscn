@@ -24,7 +24,7 @@ shader_param/follow_scale = false
 [node name="CanvasPreviewContainer" type="PanelContainer"]
 margin_right = 328.0
 margin_bottom = 174.0
-rect_min_size = Vector2( 0, 90 )
+rect_min_size = Vector2( 0, 110 )
 script = ExtResource( 4 )
 
 [node name="VBox" type="VBoxContainer" parent="."]

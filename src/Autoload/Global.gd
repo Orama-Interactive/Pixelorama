@@ -162,6 +162,7 @@ var pixel_layer_button_node: PackedScene = preload("res://src/UI/Timeline/PixelL
 var group_layer_button_node: PackedScene = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
 var pixel_cel_button_node: PackedScene = preload("res://src/UI/Timeline/PixelCelButton.tscn")
 var group_cel_button_node: PackedScene = preload("res://src/UI/Timeline/GroupCelButton.tscn")
+var cel_3d_button_node: PackedScene = preload("res://src/UI/Timeline/Cel3DButton.tscn")
 
 onready var control: Node = get_tree().current_scene
 
