@@ -35,8 +35,36 @@ func _ready() -> void:
 	frame_scroll_bar.connect("value_changed", self, "_frame_scroll_changed")
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
+
+	# config loading
 	layer_frame_h_split.split_offset = Global.config_cache.get_value("timeline", "layer_size", 0)
 	self.cel_size = Global.config_cache.get_value("timeline", "cel_size", cel_size)  # Call setter
+	var past_rate = Global.config_cache.get_value(
+		"timeline", "past_rate", Global.onion_skinning_past_rate
+	)
+	var future_rate = Global.config_cache.get_value(
+		"timeline", "future_rate", Global.onion_skinning_future_rate
+	)
+	var blue_red = Global.config_cache.get_value(
+		"timeline", "blue_red", Global.onion_skinning_blue_red
+	)
+	var past_above = Global.config_cache.get_value(
+		"timeline", "past_above_canvas", past_above_canvas
+	)
+	var future_above = Global.config_cache.get_value(
+		"timeline", "future_above_canvas", future_above_canvas
+	)
+	$"%PastOnionSkinning".value = past_rate
+	$"%FutureOnionSkinning".value = future_rate
+	$"%BlueRedMode".pressed = blue_red
+	$"%PastPlacement".select(0 if past_above else 1)
+	$"%FuturePlacement".select(0 if future_above else 1)
+	# emit signals that vere supposed to be emitted
+	$"%PastOnionSkinning".emit_signal("value_changed", past_rate)
+	$"%FutureOnionSkinning".emit_signal("value_changed", future_rate)
+	$"%BlueRedMode".emit_signal("toggled", blue_red)
+	$"%PastPlacement".emit_signal("item_selected", 0 if past_above else 1)
+	$"%FuturePlacement".emit_signal("item_selected", 0 if future_above else 1)
 
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	Global.layer_vbox.call_deferred("emit_signal", "resized")
@@ -541,26 +569,32 @@ func _on_FPSValue_value_changed(value: float) -> void:
 
 func _on_PastOnionSkinning_value_changed(value: float) -> void:
 	Global.onion_skinning_past_rate = int(value)
+	Global.config_cache.set_value("timeline", "past_rate", Global.onion_skinning_past_rate)
 	Global.canvas.update()
 
 
 func _on_FutureOnionSkinning_value_changed(value: float) -> void:
 	Global.onion_skinning_future_rate = int(value)
+	Global.config_cache.set_value("timeline", "future_rate", Global.onion_skinning_future_rate)
 	Global.canvas.update()
 
 
 func _on_BlueRedMode_toggled(button_pressed: bool) -> void:
 	Global.onion_skinning_blue_red = button_pressed
+	Global.config_cache.set_value("timeline", "blue_red", Global.onion_skinning_blue_red)
 	Global.canvas.update()
+
 
 
 func _on_PastPlacement_item_selected(index: int) -> void:
 	past_above_canvas = (index == 0)
+	Global.config_cache.set_value("timeline", "past_above_canvas", past_above_canvas)
 	Global.canvas.get_node("OnionPast").set("show_behind_parent", !past_above_canvas)
 
 
 func _on_FuturePlacement_item_selected(index: int) -> void:
 	future_above_canvas = (index == 0)
+	Global.config_cache.set_value("timeline", "future_above_canvas", future_above_canvas)
 	Global.canvas.get_node("OnionFuture").set("show_behind_parent", !future_above_canvas)
 
 
