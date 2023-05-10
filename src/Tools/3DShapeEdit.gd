@@ -219,6 +219,7 @@ func _cel_changed() -> void:
 		return
 	get_child(0).visible = true
 	_cel = Global.current_project.get_current_cel()
+	var selected = _cel.selected
 	_cel.selected = null
 	if not _cel.is_connected("scene_property_changed", self, "_set_cel_node_values"):
 		_cel.connect("scene_property_changed", self, "_set_cel_node_values")
@@ -229,6 +230,11 @@ func _cel_changed() -> void:
 	_set_cel_node_values()
 	_fill_object_option_button()
 	sprite_changed_this_frame()
+
+	# two yields are required
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	_cel.selected = selected
 
 
 func _new_object_popup_id_pressed(id: int) -> void:
