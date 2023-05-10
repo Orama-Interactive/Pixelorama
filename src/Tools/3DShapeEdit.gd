@@ -82,7 +82,7 @@ func _input(_event: InputEvent) -> void:
 	if _checker_update_qued:
 		if _old_cel_image != _cel.get_image():
 			_checker_update_qued = false
-			Global.canvas.sprite_changed_this_frame = true
+			_cel.update_texture()
 
 
 func _ready() -> void:
