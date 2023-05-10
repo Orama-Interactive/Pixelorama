@@ -6,6 +6,8 @@ var _hovering: Cel3DObject = null
 var _dragging := false
 var _has_been_dragged := false
 var _prev_mouse_pos := Vector2.ZERO
+var _old_cel_image = null
+var _checker_update_qued := false
 var _object_names := {
 	Cel3DObject.Type.BOX: "Box",
 	Cel3DObject.Type.SPHERE: "Sphere",
@@ -69,6 +71,18 @@ onready var object_properties := {
 	"node3d_type:spot_range": $"%SpotRange",
 	"node3d_type:spot_angle": $"%SpotAngle",
 }
+
+
+func sprite_changed_this_frame():
+	_checker_update_qued = true
+	_old_cel_image = _cel.get_image()
+
+
+func _input(_event: InputEvent) -> void:
+	if _checker_update_qued:
+		if _old_cel_image != _cel.get_image():
+			_checker_update_qued = false
+			Global.canvas.sprite_changed_this_frame = true
 
 
 func _ready() -> void:
@@ -153,7 +167,7 @@ func draw_move(position: Vector2) -> void:
 		var proj_prev_mouse_pos := camera.project_position(_prev_mouse_pos, camera.translation.z)
 		_cel.selected.change_transform(proj_mouse_pos, proj_prev_mouse_pos)
 		_prev_mouse_pos = position
-	Global.canvas.sprite_changed_this_frame = true
+	sprite_changed_this_frame()
 
 
 func draw_end(_position: Vector2) -> void:
@@ -164,7 +178,7 @@ func draw_end(_position: Vector2) -> void:
 		_cel.selected.applying_gizmos = Cel3DObject.Gizmos.NONE
 		_object_property_changed(_cel.selected)
 	_has_been_dragged = false
-	Global.canvas.sprite_changed_this_frame = true
+	sprite_changed_this_frame()
 
 
 func cursor_move(position: Vector2) -> void:
@@ -214,6 +228,7 @@ func _cel_changed() -> void:
 	object_options.visible = false
 	_set_cel_node_values()
 	_fill_object_option_button()
+	sprite_changed_this_frame()
 
 
 func _new_object_popup_id_pressed(id: int) -> void:
@@ -237,6 +252,7 @@ func _add_object(type: int, file_path := "") -> void:
 	undo_redo.add_do_method(Global, "undo_or_redo", false)
 	undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	undo_redo.commit_action()
+	sprite_changed_this_frame()
 	_cel.current_object_id += 1
 
 
@@ -254,6 +270,7 @@ func _on_RemoveObject_pressed() -> void:
 		undo_redo.add_undo_method(Global, "undo_or_redo", true)
 		undo_redo.commit_action()
 		_cel.selected = null
+		sprite_changed_this_frame()
 
 
 func _object_property_changed(object: Cel3DObject) -> void:
