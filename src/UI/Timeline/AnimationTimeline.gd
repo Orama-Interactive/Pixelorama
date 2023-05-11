@@ -304,7 +304,7 @@ func copy_frames(indices := []) -> void:
 		for l in range(project.layers.size()):
 			var src_cel: BaseCel = project.frames[f].cels[l]  # Cel we're copying from, the source
 			var new_cel: BaseCel
-			var selected_id := 0
+			var selected_id := -1
 			if src_cel is Cel3D:
 				new_cel = src_cel.get_script().new(
 					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
@@ -328,7 +328,8 @@ func copy_frames(indices := []) -> void:
 			new_cel.opacity = src_cel.opacity
 			if new_cel is Cel3D:
 				if selected_id in new_cel.object_properties.keys():
-					new_cel.selected = new_cel.get_object_from_id(selected_id)
+					if selected_id != -1:
+						new_cel.selected = new_cel.get_object_from_id(selected_id)
 			new_frame.cels.append(new_cel)
 
 		# Loop through the tags to see if the frame is in one
