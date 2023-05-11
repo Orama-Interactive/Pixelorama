@@ -586,7 +586,6 @@ func _on_BlueRedMode_toggled(button_pressed: bool) -> void:
 	Global.canvas.update()
 
 
-
 func _on_PastPlacement_item_selected(index: int) -> void:
 	past_above_canvas = (index == 0)
 	Global.config_cache.set_value("timeline", "past_above_canvas", past_above_canvas)
