@@ -746,8 +746,10 @@ func paste(in_place := false) -> void:
 	if clipboard.image.is_empty():
 		return
 
-	clear_selection()
+	if is_moving_content:
+		transform_content_confirm()
 	undo_data = get_undo_data(true)
+	clear_selection()
 	var project: Project = Global.current_project
 
 	var clip_map := SelectionMap.new()
