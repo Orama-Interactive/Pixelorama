@@ -519,9 +519,14 @@ func _panels_submenu_id_pressed(id: int) -> void:
 	if zen_mode:
 		return
 
-	var element_visible = panels_submenu.is_item_checked(id)
+	var element_visible := panels_submenu.is_item_checked(id)
 	ui.set_control_hidden(ui_elements[id], element_visible)
 	panels_submenu.set_item_checked(id, !element_visible)
+	if ui.tabs_visible == false:
+		ui.tabs_visible = true
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
+		ui.tabs_visible = false
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:
