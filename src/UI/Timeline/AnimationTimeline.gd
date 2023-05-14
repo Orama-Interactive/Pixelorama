@@ -59,10 +59,7 @@ func _ready() -> void:
 	$"%BlueRedMode".pressed = blue_red
 	$"%PastPlacement".select(0 if past_above else 1)
 	$"%FuturePlacement".select(0 if future_above else 1)
-	# emit signals that vere supposed to be emitted
-	$"%PastOnionSkinning".emit_signal("value_changed", past_rate)
-	$"%FutureOnionSkinning".emit_signal("value_changed", future_rate)
-	$"%BlueRedMode".emit_signal("toggled", blue_red)
+	# emit signals that were supposed to be emitted (Check if it's still required in godot 4)
 	$"%PastPlacement".emit_signal("item_selected", 0 if past_above else 1)
 	$"%FuturePlacement".emit_signal("item_selected", 0 if future_above else 1)
 
