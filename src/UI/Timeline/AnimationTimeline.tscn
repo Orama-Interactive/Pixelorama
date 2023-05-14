@@ -313,7 +313,7 @@ theme = SubResource( 20 )
 scroll_vertical_enabled = false
 
 [node name="AnimationTools" type="PanelContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer"]
-margin_left = 157.0
+margin_left = 159.0
 margin_right = 677.0
 margin_bottom = 38.0
 size_flags_horizontal = 10
@@ -321,7 +321,7 @@ size_flags_horizontal = 10
 [node name="AnimationButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 513.0
+margin_right = 511.0
 margin_bottom = 31.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
@@ -664,7 +664,7 @@ __meta__ = {
 
 [node name="LoopButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons"]
 margin_left = 360.0
-margin_right = 506.0
+margin_right = 504.0
 margin_bottom = 24.0
 
 [node name="OnionSkinningSettings" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons" groups=["UIButtons"]]
@@ -739,22 +739,18 @@ margin_top = -7.0
 margin_right = 7.0
 margin_bottom = 7.0
 texture = ExtResource( 31 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="FPSValue" type="SpinBox" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons"]
+[node name="FPSValue" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons" instance=ExtResource( 9 )]
 margin_left = 72.0
-margin_right = 146.0
-margin_bottom = 24.0
+margin_right = 144.0
+rect_min_size = Vector2( 72, 24 )
 hint_tooltip = "How many frames per second should the animation preview be?
 The more FPS, the faster the animation plays."
-mouse_default_cursor_shape = 2
+size_flags_horizontal = 1
 size_flags_vertical = 4
 min_value = 0.1
 step = 0.1
 value = 6.0
-align = 1
 suffix = "FPS"
 
 [node name="TagScroll" type="ScrollContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer"]
@@ -885,13 +881,13 @@ margin_right = 292.0
 margin_bottom = 14.0
 text = "Past Frames"
 
-[node name="PastOnionSkinning" type="SpinBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
-margin_top = 18.0
-margin_right = 292.0
-margin_bottom = 42.0
-mouse_default_cursor_shape = 2
+[node name="PastOnionSkinning" parent="OnionSkinningSettings/OnionSkinningButtons" instance=ExtResource( 9 )]
+unique_name_in_owner = true
+margin_left = 819.0
+margin_right = 891.0
+size_flags_horizontal = 1
 value = 1.0
-align = 1
+suffix = "Frames"
 
 [node name="OnionSkinningFuture" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 46.0
@@ -899,15 +895,16 @@ margin_right = 292.0
 margin_bottom = 60.0
 text = "Future Frames"
 
-[node name="FutureOnionSkinning" type="SpinBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
-margin_top = 64.0
-margin_right = 292.0
-margin_bottom = 88.0
-mouse_default_cursor_shape = 2
+[node name="FutureOnionSkinning" parent="OnionSkinningSettings/OnionSkinningButtons" instance=ExtResource( 9 )]
+unique_name_in_owner = true
+margin_left = 819.0
+margin_right = 891.0
+size_flags_horizontal = 1
 value = 1.0
-align = 1
+suffix = "Frames"
 
 [node name="BlueRedMode" type="CheckBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
+unique_name_in_owner = true
 margin_top = 92.0
 margin_right = 126.0
 margin_bottom = 116.0
@@ -930,6 +927,7 @@ text = "Show past frames:"
 valign = 1
 
 [node name="PastPlacement" type="OptionButton" parent="OnionSkinningSettings/OnionSkinningButtons/GridContainer"]
+unique_name_in_owner = true
 margin_left = 135.0
 margin_right = 292.0
 margin_bottom = 20.0
@@ -951,6 +949,7 @@ align = 2
 valign = 1
 
 [node name="FuturePlacement" type="OptionButton" parent="OnionSkinningSettings/OnionSkinningButtons/GridContainer"]
+unique_name_in_owner = true
 margin_left = 135.0
 margin_top = 24.0
 margin_right = 292.0
