@@ -746,13 +746,11 @@ func paste(in_place := false) -> void:
 	if clipboard.image.is_empty():
 		return
 
-	clear_selection()
+	if is_moving_content:
+		transform_content_confirm()
 	undo_data = get_undo_data(true)
+	clear_selection()
 	var project: Project = Global.current_project
-
-	original_bitmap.copy_from(project.selection_map)
-	original_big_bounding_rectangle = big_bounding_rectangle
-	original_offset = project.selection_offset
 
 	var clip_map := SelectionMap.new()
 	clip_map.data = clipboard.selection_map
@@ -785,6 +783,9 @@ func paste(in_place := false) -> void:
 	is_moving_content = true
 	is_pasting = true
 	original_preview_image = clipboard.image
+	original_big_bounding_rectangle = big_bounding_rectangle
+	original_offset = project.selection_offset
+	original_bitmap.copy_from(project.selection_map)
 	preview_image.copy_from(original_preview_image)
 	preview_image_texture.create_from_image(preview_image, 0)
 	project.selection_map_changed()
