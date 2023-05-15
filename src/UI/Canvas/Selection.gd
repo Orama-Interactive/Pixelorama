@@ -32,7 +32,6 @@ var prev_angle := 0
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
 var resize_keep_ratio := false
 
-
 onready var canvas: Canvas = get_parent()
 onready var marching_ants_outline: Sprite = $MarchingAntsOutline
 
@@ -87,7 +86,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	image_current_pixel = canvas.current_pixel
 	if Global.mirror_view:
-		image_current_pixel.x = Global.current_project.size.x - image_current_pixel.x
+		image_current_pixel.x = (Global.current_project.size.x) - image_current_pixel.x
 	if not Global.can_draw:
 		return
 	if is_moving_content:
