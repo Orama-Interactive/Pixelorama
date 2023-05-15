@@ -11,6 +11,7 @@ var is_moving_content := false
 var arrow_key_move := false
 var is_pasting := false
 var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
+var image_current_pixel := Vector2.ZERO  # The ACTUAL pixel coordinate of image
 
 var temp_rect := Rect2()
 var rect_aspect_ratio := 0.0
@@ -30,6 +31,7 @@ var dragged_gizmo: Gizmo = null
 var prev_angle := 0
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
 var resize_keep_ratio := false
+
 
 onready var canvas: Canvas = get_parent()
 onready var marching_ants_outline: Sprite = $MarchingAntsOutline
@@ -51,9 +53,15 @@ class Gizmo:
 		if direction == Vector2.ZERO:
 			return Input.CURSOR_POINTING_HAND
 		elif direction == Vector2(-1, -1) or direction == Vector2(1, 1):  # Top left or bottom right
-			cursor = Input.CURSOR_FDIAGSIZE
+			if Global.mirror_view:
+				cursor = Input.CURSOR_BDIAGSIZE
+			else:
+				cursor = Input.CURSOR_FDIAGSIZE
 		elif direction == Vector2(1, -1) or direction == Vector2(-1, 1):  # Top right or bottom left
-			cursor = Input.CURSOR_BDIAGSIZE
+			if Global.mirror_view:
+				cursor = Input.CURSOR_FDIAGSIZE
+			else:
+				cursor = Input.CURSOR_BDIAGSIZE
 		elif direction == Vector2(0, -1) or direction == Vector2(0, 1):  # Center top or center bottom
 			cursor = Input.CURSOR_VSIZE
 		elif direction == Vector2(-1, 0) or direction == Vector2(1, 0):  # Center left or center right
@@ -77,6 +85,9 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	image_current_pixel = canvas.current_pixel
+	if Global.mirror_view:
+		image_current_pixel.x = Global.current_project.size.x - image_current_pixel.x
 	if not Global.can_draw:
 		return
 	if is_moving_content:
@@ -96,7 +107,7 @@ func _input(event: InputEvent) -> void:
 	var gizmo_hover: Gizmo
 	if big_bounding_rectangle.size != Vector2.ZERO:
 		for g in gizmos:
-			if g.rect.has_point(canvas.current_pixel):
+			if g.rect.has_point(image_current_pixel):
 				gizmo_hover = Gizmo.new(g.type, g.direction)
 				break
 
@@ -104,7 +115,7 @@ func _input(event: InputEvent) -> void:
 		if event.pressed:
 			if gizmo_hover and not dragged_gizmo:  # Select a gizmo
 				Global.has_focus = false
-				mouse_pos_on_gizmo_drag = canvas.current_pixel
+				mouse_pos_on_gizmo_drag = image_current_pixel
 				dragged_gizmo = gizmo_hover
 				if Input.is_action_pressed("transform_move_selection_only"):
 					transform_content_confirm()
@@ -304,14 +315,14 @@ func _gizmo_resize() -> void:
 	if Input.is_action_pressed("shape_center"):
 		# Code inspired from https://github.com/GDQuest/godot-open-rpg
 		if dir.x != 0 and dir.y != 0:  # Border gizmos
-			temp_rect.size = ((canvas.current_pixel - temp_rect_pivot) * 2.0 * dir)
+			temp_rect.size = ((image_current_pixel - temp_rect_pivot) * 2.0 * dir)
 		elif dir.y == 0:  # Center left and right gizmos
-			temp_rect.size.x = (canvas.current_pixel.x - temp_rect_pivot.x) * 2.0 * dir.x
+			temp_rect.size.x = (image_current_pixel.x - temp_rect_pivot.x) * 2.0 * dir.x
 		elif dir.x == 0:  # Center top and bottom gizmos
-			temp_rect.size.y = (canvas.current_pixel.y - temp_rect_pivot.y) * 2.0 * dir.y
+			temp_rect.size.y = (image_current_pixel.y - temp_rect_pivot.y) * 2.0 * dir.y
 		temp_rect = Rect2(-1.0 * temp_rect.size / 2 + temp_rect_pivot, temp_rect.size)
 	else:
-		_resize_rect(canvas.current_pixel, dir)
+		_resize_rect(image_current_pixel, dir)
 
 	if Input.is_action_pressed("shape_perfect") or resize_keep_ratio:  # Maintain aspect ratio
 		var end_y := temp_rect.end.y
@@ -389,7 +400,7 @@ func resize_selection() -> void:
 
 
 func _gizmo_rotate() -> void:  # Does not work properly yet
-	var angle := canvas.current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
+	var angle := image_current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
 	angle = deg2rad(floor(rad2deg(angle)))
 	if angle == prev_angle:
 		return
