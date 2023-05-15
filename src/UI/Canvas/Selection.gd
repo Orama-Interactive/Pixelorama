@@ -86,7 +86,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	image_current_pixel = canvas.current_pixel
 	if Global.mirror_view:
-		image_current_pixel.x = (Global.current_project.size.x) - image_current_pixel.x
+		image_current_pixel.x = Global.current_project.size.x - image_current_pixel.x
 	if not Global.can_draw:
 		return
 	if is_moving_content:
