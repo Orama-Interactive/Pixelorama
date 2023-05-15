@@ -224,6 +224,9 @@ func draw_start(position: Vector2) -> void:
 
 	_draw_line = Input.is_action_pressed("draw_create_line")
 	if _draw_line:
+		if Global.mirror_view:
+			# mirroring position is ONLY required by "Preview"
+			position.x = (Global.current_project.size.x - 1) - position.x
 		_line_start = position
 		_line_end = position
 		update_line_polylines(_line_start, _line_end)
@@ -243,6 +246,9 @@ func draw_move(position: Vector2) -> void:
 		return
 
 	if _draw_line:
+		if Global.mirror_view:
+			# mirroring position is ONLY required by "Preview"
+			position.x = (Global.current_project.size.x - 1) - position.x
 		var d := _line_angle_constraint(_line_start, position)
 		_line_end = d.position
 		cursor_text = d.text
@@ -261,6 +267,10 @@ func draw_end(position: Vector2) -> void:
 		return
 
 	if _draw_line:
+		if Global.mirror_view:
+			# now we revert back the coordinates from their mirror form so that line can be drawn
+			_line_start.x = (Global.current_project.size.x - 1) - _line_start.x
+			_line_end.x = (Global.current_project.size.x - 1) - _line_end.x
 		draw_tool(_line_start)
 		draw_fill_gap(_line_start, _line_end)
 		_draw_line = false

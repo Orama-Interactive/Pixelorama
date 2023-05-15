@@ -78,6 +78,9 @@ func draw_start(position: Vector2) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	update_mask()
 
+	if Global.mirror_view:
+		# mirroring position is ONLY required by "Preview"
+		position.x = Global.current_project.size.x - position.x - 1
 	_original_pos = position
 	_start = position
 	_offset = position
@@ -94,6 +97,9 @@ func draw_move(position: Vector2) -> void:
 		return
 
 	if _drawing:
+		if Global.mirror_view:
+			# mirroring position is ONLY required by "Preview"
+			position.x = Global.current_project.size.x - position.x - 1
 		if _displace_origin:
 			_original_pos += position - _offset
 		var d := _line_angle_constraint(_original_pos, position)
@@ -114,6 +120,17 @@ func draw_end(position: Vector2) -> void:
 		return
 
 	if _drawing:
+		if Global.mirror_view:
+			# now we revert back the coordinates from their mirror form so that line can be drawn
+			_original_pos.x = (Global.current_project.size.x - 1) - _original_pos.x
+			_start.x = (Global.current_project.size.x - 1) - _start.x
+			_offset.x = (Global.current_project.size.x - 1) - _offset.x
+			_dest.x = (Global.current_project.size.x - 1) - _dest.x
+			if _thickness % 2 == 0:
+				_original_pos.x += 1
+				_start.x += 1
+				_offset.x += 1
+				_dest.x += 1
 		_draw_shape()
 
 		_original_pos = Vector2.ZERO
