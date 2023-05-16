@@ -35,8 +35,9 @@ func _draw() -> void:
 					if not (layer.name.to_lower().ends_with("_io")):
 						color.a = 0.6 / i
 						if [change, layer_i] in project.selected_cels:
-							var move_preview_location = Global.canvas.move_preview_location
-							draw_texture(cel.image_texture, move_preview_location, color)
+							draw_texture(
+								cel.image_texture, Global.canvas.move_preview_location, color
+							)
 						else:
 							draw_texture(cel.image_texture, Vector2.ZERO, color)
 				layer_i += 1
