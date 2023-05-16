@@ -347,6 +347,21 @@ func copy_frames(indices := []) -> void:
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.commit_action()
 
+	# Select all the new frames so that it is easier to move/offset collectively if user wants
+	# For ease in animation workflow, the new current frame will be the first duplicated frame
+	# instead of the last
+	var range_start: int = indices[-1] + indices.size()
+	var range_end = indices[0] + indices.size()
+	var frame_diff_sign = sign(range_end - range_start)
+	if frame_diff_sign == 0:
+		frame_diff_sign = 1
+	for i in range(range_start, range_end + frame_diff_sign, frame_diff_sign):
+		for j in range(0, Global.current_project.layers.size()):
+			var frame_layer := [i, j]
+			if !Global.current_project.selected_cels.has(frame_layer):
+				Global.current_project.selected_cels.append(frame_layer)
+	Global.current_project.change_cel(range_end, -1)
+
 
 func _on_FrameTagButton_pressed() -> void:
 	find_node("FrameTagDialog").popup_centered()
