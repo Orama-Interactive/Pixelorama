@@ -280,7 +280,6 @@ func _on_CopyFrame_pressed() -> void:
 
 func copy_frames(indices := [], destination := -1) -> void:
 	var project: Project = Global.current_project
-
 	if indices.size() == 0:
 		indices.append(project.current_frame)
 
@@ -290,7 +289,6 @@ func copy_frames(indices := [], destination := -1) -> void:
 		copied_indices = range(destination + 1, (destination + 1) + indices.size())
 	else:
 		copied_indices = range(indices[-1] + 1, indices[-1] + 1 + indices.size())
-
 	var new_animation_tags := project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
 	# as project.animation_tags's classes. Needed for undo/redo to work properly.
@@ -301,10 +299,8 @@ func copy_frames(indices := [], destination := -1) -> void:
 			new_animation_tags[i].from,
 			new_animation_tags[i].to
 		)
-
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
-
 	for f in indices:
 		var new_frame := Frame.new()
 		copied_frames.append(new_frame)
@@ -495,8 +491,7 @@ func _on_AnimationTimer_timeout() -> void:
 				project.frames[project.current_frame].duration
 				* (1 / fps)
 			)
-			# Change the frame, change the wait time and start a cycle
-			Global.animation_timer.start()
+			Global.animation_timer.start()  # Change the frame, change the wait time and start a cycle
 		else:
 			match animation_loop:
 				0:  # No loop
@@ -580,7 +575,9 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 	if play:
 		Global.animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
-		var duration: float = Global.current_project.frames[Global.current_project.current_frame].duration
+		var duration: float = (
+			Global.current_project.frames[Global.current_project.current_frame].duration
+		)
 		var fps = Global.current_project.fps
 		Global.animation_timer.wait_time = duration * (1 / fps)
 		Global.animation_timer.start()
