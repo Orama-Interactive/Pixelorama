@@ -395,7 +395,7 @@ func _on_TagList_id_pressed(id: int) -> void:
 	var frames = []
 	for i in range(tag.from - 1, tag.to):
 		frames.append(i)
-	copy_frames(frames, Global.current_project.current_frame - 1)
+	copy_frames(frames, Global.current_project.current_frame)
 
 
 func _on_FrameTagButton_pressed() -> void:

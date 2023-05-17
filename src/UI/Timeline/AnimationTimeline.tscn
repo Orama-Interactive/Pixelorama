@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/layers/new.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/graphics/misc/value_arrow.svg" type="Texture" id=10]
 [ext_resource path="res://src/UI/Timeline/FrameScrollContainer.gd" type="Script" id=11]
+[ext_resource path="res://assets/graphics/timeline/copy_tag.png" type="Texture" id=12]
 [ext_resource path="res://assets/graphics/timeline/new_frame.png" type="Texture" id=19]
 [ext_resource path="res://assets/graphics/timeline/remove_frame.png" type="Texture" id=20]
 [ext_resource path="res://assets/graphics/timeline/go_to_first_frame.png" type="Texture" id=21]
@@ -427,11 +428,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -5.0
+margin_left = -10.0
 margin_top = -7.0
-margin_right = 5.0
+margin_right = 10.0
 margin_bottom = 7.0
-texture = ExtResource( 27 )
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
 
 [node name="TagList" type="PopupMenu" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/CopyTag"]
 unique_name_in_owner = true

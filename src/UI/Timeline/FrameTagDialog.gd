@@ -57,6 +57,7 @@ func _on_FrameTagDialog_about_to_show() -> void:
 
 func _on_FrameTagDialog_popup_hide() -> void:
 	Global.dialog_open(false)
+	Global.current_project.toggle_frame_buttons()
 
 
 func _on_AddTag_pressed() -> void:
