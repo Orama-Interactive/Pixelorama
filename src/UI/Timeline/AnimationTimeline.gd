@@ -580,9 +580,7 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 	if play:
 		Global.animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
-		var duration: float = (
-			Global.current_project.frames[Global.current_project.current_frame].duration
-		)
+		var duration: float = Global.current_project.frames[Global.current_project.current_frame].duration
 		var fps = Global.current_project.fps
 		Global.animation_timer.wait_time = duration * (1 / fps)
 		Global.animation_timer.start()
