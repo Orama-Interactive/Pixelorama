@@ -388,7 +388,10 @@ func _on_CopyTag_pressed() -> void:
 		img.fill(tag.color)
 		var tex = ImageTexture.new()
 		tex.create_from_image(img)
-		$"%TagList".add_icon_item(tex, tag.name)
+		var title = tag.name
+		if title == "":
+			title = "(Untitled)"
+		$"%TagList".add_icon_item(tex, title)
 
 	if not $"%TagList".is_connected("id_pressed", self, "_on_TagList_id_pressed"):
 		$"%TagList".connect("id_pressed", self, "_on_TagList_id_pressed")
