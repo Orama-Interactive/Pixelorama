@@ -196,6 +196,7 @@ func add_frame() -> void:
 	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
 	project.undo_redo.commit_action()
 	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 	adjust_scroll_container()
 
 
@@ -264,6 +265,7 @@ func delete_frames(indices := []) -> void:
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
+	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	adjust_scroll_container()
 
@@ -371,6 +373,9 @@ func copy_frames(indices := [], destination := -1) -> void:
 			if !Global.current_project.selected_cels.has(frame_layer):
 				Global.current_project.selected_cels.append(frame_layer)
 	Global.current_project.change_cel(range_end, -1)
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	adjust_scroll_container()
 
 
 func _on_CopyTag_pressed() -> void:
