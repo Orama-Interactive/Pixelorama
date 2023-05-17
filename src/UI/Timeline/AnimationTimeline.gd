@@ -1,5 +1,6 @@
 extends Panel
 
+# gdlint: ignore=max-file-lines
 var is_animation_running := false
 var animation_loop := 1  # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
