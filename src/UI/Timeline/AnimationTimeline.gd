@@ -104,13 +104,9 @@ func adjust_scroll_container():
 		frame_scroll_container.rect_global_position.x
 		- tag_scroll_container.rect_global_position.x
 	)
-	print("    ")
 	tag_scroll_container.get_child(0).rect_min_size.x = Global.frame_hbox.rect_size.x
 	Global.tag_container.rect_min_size = Global.frame_hbox.rect_size
 	tag_scroll_container.scroll_horizontal = frame_scroll_bar.value
-	print(tag_scroll_container.get_child(0).rect_min_size.x)
-	print(Global.tag_container.rect_min_size)
-	print(tag_scroll_container.scroll_horizontal)
 
 
 func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
@@ -499,7 +495,8 @@ func _on_AnimationTimer_timeout() -> void:
 				project.frames[project.current_frame].duration
 				* (1 / fps)
 			)
-			Global.animation_timer.start()  # Change the frame, change the wait time and start a cycle
+			# Change the frame, change the wait time and start a cycle
+			Global.animation_timer.start()
 		else:
 			match animation_loop:
 				0:  # No loop
@@ -583,7 +580,9 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 	if play:
 		Global.animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
-		var duration: float = Global.current_project.frames[Global.current_project.current_frame].duration
+		var duration: float = (
+			Global.current_project.frames[Global.current_project.current_frame].duration
+		)
 		var fps = Global.current_project.fps
 		Global.animation_timer.wait_time = duration * (1 / fps)
 		Global.animation_timer.start()
