@@ -60,7 +60,7 @@ func _on_VFrames_value_changed(value: float) -> void:
 
 
 func _on_StartFrame_value_changed(value: float) -> void:
-	canvas_preview.frame = value - 1
+	canvas_preview.frame_index = value - 1
 	canvas_preview.start_sprite_sheet_frame = value
 	if end_frame.value < value:
 		end_frame.value = value
@@ -71,7 +71,7 @@ func _on_EndFrame_value_changed(value: float) -> void:
 	canvas_preview.end_sprite_sheet_frame = value
 	if start_frame.value > value:
 		start_frame.value = value
-		canvas_preview.frame = value - 1
+		canvas_preview.frame_index = value - 1
 	canvas_preview.update()
 
 
