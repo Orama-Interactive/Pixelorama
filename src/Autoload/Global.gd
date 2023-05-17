@@ -206,7 +206,6 @@ onready var play_backwards: BaseButton = animation_timeline.find_node("PlayBackw
 onready var remove_frame_button: BaseButton = animation_timeline.find_node("DeleteFrame")
 onready var move_left_frame_button: BaseButton = animation_timeline.find_node("MoveLeft")
 onready var move_right_frame_button: BaseButton = animation_timeline.find_node("MoveRight")
-onready var copy_tag_button: BaseButton = animation_timeline.find_node("CopyTag")
 onready var remove_layer_button: BaseButton = animation_timeline.find_node("RemoveLayer")
 onready var move_up_layer_button: BaseButton = animation_timeline.find_node("MoveUpLayer")
 onready var move_down_layer_button: BaseButton = animation_timeline.find_node("MoveDownLayer")

@@ -135,8 +135,6 @@ func _on_TagOptions_confirmed() -> void:
 	Global.current_project.undo_redo.add_undo_property(
 		Global.current_project, "animation_tags", Global.current_project.animation_tags
 	)
-	Global.current_project.undo_redo.add_do_method(Global.current_project, "toggle_frame_buttons")
-	Global.current_project.undo_redo.add_undo_method(Global.current_project, "toggle_frame_buttons")
 	Global.current_project.undo_redo.commit_action()
 	_on_FrameTagDialog_about_to_show()
 
@@ -155,12 +153,6 @@ func _on_TagOptions_custom_action(action: String) -> void:
 		)
 		Global.current_project.undo_redo.add_undo_property(
 			Global.current_project, "animation_tags", Global.current_project.animation_tags
-		)
-		Global.current_project.undo_redo.add_do_method(
-			Global.current_project, "toggle_frame_buttons"
-		)
-		Global.current_project.undo_redo.add_undo_method(
-			Global.current_project, "toggle_frame_buttons"
 		)
 		Global.current_project.undo_redo.commit_action()
 

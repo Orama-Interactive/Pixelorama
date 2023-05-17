@@ -161,7 +161,7 @@ func change_project() -> void:
 	Global.animation_timeline.project_changed()
 
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
-	Global.disable_button(Global.copy_tag_button, animation_tags.size() == 0)
+
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
 	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
 	Global.disable_button(
@@ -540,7 +540,6 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 func toggle_frame_buttons() -> void:
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
 	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
-	Global.disable_button(Global.copy_tag_button, animation_tags.size() == 0)
 	Global.disable_button(
 		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
 	)
