@@ -997,7 +997,6 @@ func project_layer_added(layer: int) -> void:
 		cel_hbox.add_child(cel_button)
 
 	layer_button.visible = Global.current_project.layers[layer].is_expanded_in_hierarchy()
-# gdlint: ignore=max-file-lines
 	cel_hbox.visible = layer_button.visible
 
 	Global.layer_vbox.add_child(layer_button)
