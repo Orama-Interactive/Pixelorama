@@ -313,7 +313,7 @@ theme = SubResource( 20 )
 scroll_vertical_enabled = false
 
 [node name="AnimationTools" type="PanelContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer"]
-margin_left = 159.0
+margin_left = 135.0
 margin_right = 677.0
 margin_bottom = 38.0
 size_flags_horizontal = 10
@@ -321,7 +321,7 @@ size_flags_horizontal = 10
 [node name="AnimationButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 511.0
+margin_right = 535.0
 margin_bottom = 31.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
@@ -332,7 +332,7 @@ __meta__ = {
 }
 
 [node name="FrameButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons"]
-margin_right = 140.0
+margin_right = 164.0
 margin_bottom = 24.0
 
 [node name="AddFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
@@ -411,10 +411,37 @@ margin_right = 5.0
 margin_bottom = 7.0
 texture = ExtResource( 27 )
 
-[node name="FrameTagButton" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
+[node name="CopyTag" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 72.0
 margin_top = 2.0
 margin_right = 92.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "Clone an Existing Tag"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/CopyTag"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -5.0
+margin_top = -7.0
+margin_right = 5.0
+margin_bottom = 7.0
+texture = ExtResource( 27 )
+
+[node name="TagList" type="PopupMenu" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/CopyTag"]
+unique_name_in_owner = true
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="FrameTagButton" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
+margin_left = 96.0
+margin_top = 2.0
+margin_right = 116.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
 hint_tooltip = "Manage frame tags"
@@ -438,9 +465,9 @@ __meta__ = {
 }
 
 [node name="MoveLeft" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
-margin_left = 96.0
+margin_left = 120.0
 margin_top = 2.0
-margin_right = 116.0
+margin_right = 140.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
 hint_tooltip = "Move the selected frame to the left."
@@ -465,9 +492,9 @@ __meta__ = {
 }
 
 [node name="MoveRight" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
-margin_left = 120.0
+margin_left = 144.0
 margin_top = 2.0
-margin_right = 140.0
+margin_right = 164.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
 hint_tooltip = "Move the selected frame to the right."
@@ -488,8 +515,8 @@ margin_bottom = 5.5
 texture = ExtResource( 8 )
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons"]
-margin_left = 180.0
-margin_right = 320.0
+margin_left = 204.0
+margin_right = 344.0
 margin_bottom = 24.0
 
 [node name="FirstFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
@@ -663,8 +690,8 @@ __meta__ = {
 }
 
 [node name="LoopButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons"]
-margin_left = 360.0
-margin_right = 504.0
+margin_left = 384.0
+margin_right = 528.0
 margin_bottom = 24.0
 
 [node name="OnionSkinningSettings" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons" groups=["UIButtons"]]
@@ -987,6 +1014,7 @@ color = Color( 0, 0.741176, 1, 0.501961 )
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/AddFrame" to="." method="add_frame"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/DeleteFrame" to="." method="_on_DeleteFrame_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/CopyFrame" to="." method="_on_CopyFrame_pressed"]
+[connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/CopyTag" to="." method="_on_CopyTag_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/FrameTagButton" to="." method="_on_FrameTagButton_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveLeft" to="." method="_on_MoveLeft_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveRight" to="." method="_on_MoveRight_pressed"]

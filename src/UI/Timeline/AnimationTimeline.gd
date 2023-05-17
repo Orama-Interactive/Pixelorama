@@ -99,7 +99,7 @@ func _on_LayerVBox_resized() -> void:
 	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x
 	tag_spacer.rect_min_size.x = (
 		frame_scroll_container.rect_global_position.x
-		- tag_spacer.rect_global_position.x
+		- tag_scroll_container.rect_global_position.x
 	)
 
 
@@ -268,14 +268,18 @@ func _on_CopyFrame_pressed() -> void:
 	copy_frames(indices)
 
 
-func copy_frames(indices := []) -> void:
+func copy_frames(indices := [], destination := -1) -> void:
 	var project: Project = Global.current_project
 
 	if indices.size() == 0:
 		indices.append(project.current_frame)
 
 	var copied_frames := []
-	var copied_indices := range(indices[-1] + 1, indices[-1] + 1 + indices.size())
+	var copied_indices := []  # the indices of newly copied frames
+	if destination != -1:
+		copied_indices = range((destination + 1), (destination + 1) + indices.size())
+	else:
+		copied_indices = range(indices[-1] + 1, indices[-1] + 1 + indices.size())
 
 	var new_animation_tags := project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
@@ -331,9 +335,9 @@ func copy_frames(indices := []) -> void:
 
 		# Loop through the tags to see if the frame is in one
 		for tag in new_animation_tags:
-			if indices[-1] + 1 >= tag.from && indices[-1] + 1 <= tag.to:
+			if copied_indices[0] >= tag.from && copied_indices[0] <= tag.to:
 				tag.to += 1
-			elif indices[-1] + 1 < tag.from:
+			elif copied_indices[0] < tag.from:
 				tag.from += 1
 				tag.to += 1
 
@@ -341,8 +345,8 @@ func copy_frames(indices := []) -> void:
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(project, "add_frames", copied_frames, copied_indices)
 	project.undo_redo.add_undo_method(project, "remove_frames", copied_indices)
-	project.undo_redo.add_do_method(project, "change_cel", indices[-1] + 1)
-	project.undo_redo.add_undo_method(project, "change_cel", indices[-1])
+	project.undo_redo.add_do_method(project, "change_cel", copied_indices[0])
+	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.commit_action()
@@ -350,8 +354,8 @@ func copy_frames(indices := []) -> void:
 	# Select all the new frames so that it is easier to move/offset collectively if user wants
 	# For ease in animation workflow, the new current frame will be the first duplicated frame
 	# instead of the last
-	var range_start: int = indices[-1] + indices.size()
-	var range_end = indices[0] + indices.size()
+	var range_start: int = copied_indices[-1]
+	var range_end = copied_indices[0]
 	var frame_diff_sign = sign(range_end - range_start)
 	if frame_diff_sign == 0:
 		frame_diff_sign = 1
@@ -361,6 +365,31 @@ func copy_frames(indices := []) -> void:
 			if !Global.current_project.selected_cels.has(frame_layer):
 				Global.current_project.selected_cels.append(frame_layer)
 	Global.current_project.change_cel(range_end, -1)
+
+
+func _on_CopyTag_pressed() -> void:
+	$"%TagList".clear()
+	if Global.current_project.animation_tags.empty():
+		return
+	for tag in Global.current_project.animation_tags:
+		var img = Image.new()
+		img.create(5, 5, true, Image.FORMAT_RGBA8)
+		img.fill(tag.color)
+		var tex = ImageTexture.new()
+		tex.create_from_image(img)
+		$"%TagList".add_icon_item(tex, tag.name)
+
+	if not $"%TagList".is_connected("id_pressed", self, "_on_TagList_id_pressed"):
+		$"%TagList".connect("id_pressed", self, "_on_TagList_id_pressed")
+	$"%TagList".popup(Rect2(get_global_mouse_position(), Vector2.ONE))
+
+
+func _on_TagList_id_pressed(id: int) -> void:
+	var tag: AnimationTag = Global.current_project.animation_tags[id]
+	var frames = []
+	for i in range(tag.from - 1, tag.to):
+		frames.append(i)
+	copy_frames(frames, Global.current_project.current_frame)
 
 
 func _on_FrameTagButton_pressed() -> void:
