@@ -1,6 +1,5 @@
 extends Panel
 
-# gdlint: ignore=max-file-lines
 var is_animation_running := false
 var animation_loop := 1  # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
@@ -998,6 +997,7 @@ func project_layer_added(layer: int) -> void:
 		cel_hbox.add_child(cel_button)
 
 	layer_button.visible = Global.current_project.layers[layer].is_expanded_in_hierarchy()
+# gdlint: ignore=max-file-lines
 	cel_hbox.visible = layer_button.visible
 
 	Global.layer_vbox.add_child(layer_button)
