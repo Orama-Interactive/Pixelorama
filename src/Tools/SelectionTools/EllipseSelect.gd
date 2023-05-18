@@ -52,14 +52,16 @@ func draw_preview() -> void:
 		var canvas: Node2D = Global.canvas.previews
 		var position := canvas.position
 		var scale := canvas.scale
+		var temp_rect = _rect
 		if Global.mirror_view:
 			position.x = position.x + Global.current_project.size.x
+			temp_rect.position.x = Global.current_project.size.x - temp_rect.position.x
 			scale.x = -1
 
-		var border := _get_shape_points_filled(_rect.size)
-		var indicator := _fill_bitmap_with_points(border, _rect.size)
+		var border := _get_shape_points_filled(temp_rect.size)
+		var indicator := _fill_bitmap_with_points(border, temp_rect.size)
 
-		canvas.draw_set_transform(_rect.position, canvas.rotation, scale)
+		canvas.draw_set_transform(temp_rect.position, canvas.rotation, scale)
 		for line in _create_polylines(indicator):
 			canvas.draw_polyline(PoolVector2Array(line), Color.black)
 
