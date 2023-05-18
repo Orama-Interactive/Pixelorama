@@ -196,8 +196,7 @@ func add_frame() -> void:
 	project.undo_redo.add_do_method(project, "change_cel", project.current_frame + 1)
 	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
 	project.undo_redo.commit_action()
-
-  # it doesn't update properly without yields
+	# it doesn't update properly without yields
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	adjust_scroll_container()
@@ -268,7 +267,6 @@ func delete_frames(indices := []) -> void:
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
-
 	# it doesn't update properly without yields
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
@@ -287,6 +285,7 @@ func _on_CopyFrame_pressed() -> void:
 
 func copy_frames(indices := [], destination := -1) -> void:
 	var project: Project = Global.current_project
+
 	if indices.size() == 0:
 		indices.append(project.current_frame)
 
@@ -296,6 +295,7 @@ func copy_frames(indices := [], destination := -1) -> void:
 		copied_indices = range(destination + 1, (destination + 1) + indices.size())
 	else:
 		copied_indices = range(indices[-1] + 1, indices[-1] + 1 + indices.size())
+
 	var new_animation_tags := project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
 	# as project.animation_tags's classes. Needed for undo/redo to work properly.
@@ -306,8 +306,10 @@ func copy_frames(indices := [], destination := -1) -> void:
 			new_animation_tags[i].from,
 			new_animation_tags[i].to
 		)
+
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
+
 	for f in indices:
 		var new_frame := Frame.new()
 		copied_frames.append(new_frame)
