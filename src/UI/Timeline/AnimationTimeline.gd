@@ -89,18 +89,24 @@ func _get_minimum_size() -> Vector2:
 	return Vector2(Global.layer_vbox.rect_size.x + cel_size + 26, cel_size + 105)
 
 
-func _frame_scroll_changed(value: float) -> void:
+func _frame_scroll_changed(_value: float) -> void:
 	# Update the tag scroll as well:
-	tag_scroll_container.get_child(0).rect_min_size.x = Global.frame_hbox.rect_size.x
-	tag_scroll_container.scroll_horizontal = value
+	adjust_scroll_container()
 
 
 func _on_LayerVBox_resized() -> void:
 	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x
+	adjust_scroll_container()
+
+
+func adjust_scroll_container():
 	tag_spacer.rect_min_size.x = (
 		frame_scroll_container.rect_global_position.x
-		- tag_spacer.rect_global_position.x
+		- tag_scroll_container.rect_global_position.x
 	)
+	tag_scroll_container.get_child(0).rect_min_size.x = Global.frame_hbox.rect_size.x
+	Global.tag_container.rect_min_size = Global.frame_hbox.rect_size
+	tag_scroll_container.scroll_horizontal = frame_scroll_bar.value
 
 
 func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
@@ -189,6 +195,10 @@ func add_frame() -> void:
 	project.undo_redo.add_do_method(project, "change_cel", project.current_frame + 1)
 	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
 	project.undo_redo.commit_action()
+	# it doesn't update properly without yields
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	adjust_scroll_container()
 
 
 func _on_DeleteFrame_pressed() -> void:
@@ -256,6 +266,10 @@ func delete_frames(indices := []) -> void:
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
+	# it doesn't update properly without yields
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	adjust_scroll_container()
 
 
 func _on_CopyFrame_pressed() -> void:
