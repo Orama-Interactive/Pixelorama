@@ -196,6 +196,8 @@ func add_frame() -> void:
 	project.undo_redo.add_do_method(project, "change_cel", project.current_frame + 1)
 	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
 	project.undo_redo.commit_action()
+
+  # it doesn't update properly without yields
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	adjust_scroll_container()
@@ -266,6 +268,8 @@ func delete_frames(indices := []) -> void:
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
+
+	# it doesn't update properly without yields
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	adjust_scroll_container()

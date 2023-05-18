@@ -6,7 +6,7 @@ var _brush_size_dynamics := 1
 var _cache_limit := 3
 var _brush_interpolate := 0
 var _brush_image := Image.new()
-var _orignal_brush_image := Image.new()  # contains the orignal _brush_image (whithout resizing)
+var _orignal_brush_image := Image.new()  # contains the original _brush_image, without resizing
 var _brush_texture := ImageTexture.new()
 var _strength := 1.0
 var _picking_color := false
@@ -221,6 +221,10 @@ func commit_undo() -> void:
 
 
 func draw_tool(position: Vector2) -> void:
+	if Global.mirror_view:
+		# Even brushes are not perfectly centred and are offsetted by 1 px so we add it
+		if int(_stroke_dimensions.x) % 2 == 0:
+			position.x += 1
 	_prepare_tool()
 	var coords_to_draw := _draw_tool(position)
 	for coord in coords_to_draw:
@@ -313,6 +317,11 @@ func _draw_tool(position: Vector2) -> PoolVector2Array:
 # Bresenham's Algorithm
 # Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
 func draw_fill_gap(start: Vector2, end: Vector2) -> void:
+	if Global.mirror_view:
+		# Even brushes are not perfectly centred and are offsetted by 1 px so we add it
+		if int(_stroke_dimensions.x) % 2 == 0:
+			start.x += 1
+			end.x += 1
 	var dx := int(abs(end.x - start.x))
 	var dy := int(-abs(end.y - start.y))
 	var err := dx + dy

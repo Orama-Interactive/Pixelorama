@@ -1,15 +1,14 @@
-# gdlint: ignore=max-public-methods
 extends Node
 
 # use these variables in your extension to access the api
-var general = GeneralAPI.new()
-var menu = MenuAPI.new()
-var dialog = DialogAPI.new()
-var panel = PanelAPI.new()
-var theme = ThemeAPI.new()
-var tools = ToolAPI.new()
-var project = ProjectAPI.new()
-var signals = SignalsAPI.new()
+var general := GeneralAPI.new()
+var menu := MenuAPI.new()
+var dialog := DialogAPI.new()
+var panel := PanelAPI.new()
+var theme := ThemeAPI.new()
+var tools := ToolAPI.new()
+var project := ProjectAPI.new()
+var signals := SignalsAPI.new()
 
 # This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
 var _action_history: Dictionary = {}
@@ -49,6 +48,12 @@ func remove_action(action: String):
 	if extension_name != "Unknown":
 		if extension_name in _action_history.keys():
 			_action_history[extension_name].erase(action)
+
+
+func wait_frame():  # as yield is not available to classes below, so this is the solution
+	# use by yield(ExtensionsApi.wait_frame(), "completed")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 
 
 func _get_caller_extension_name() -> String:
@@ -158,30 +163,63 @@ class PanelAPI:
 		var dockable := _get_dockable_container_ui()
 		return dockable.get_tabs_visible()
 
-	func add_node_as_tab(node: Node, alongside_node: String) -> void:
+	func add_node_as_tab(node: Node) -> void:
 		var dockable := _get_dockable_container_ui()
-		dockable.add_child(node)
-		var tab = _find_tab_with_node(alongside_node, dockable)
-		if not tab:
-			push_error("Tab not found")
+		var top_menu_container = Global.top_menu_container
+		var panels_submenu: PopupMenu = top_menu_container.panels_submenu
+		# adding the node to the first tab we find, it'll be re-ordered by layout anyway
+		var tabs = _get_tabs_in_root(dockable.layout.root)
+		if tabs.size() != 0:
+			dockable.add_child(node)
+			tabs[0].insert_node(0, node)  # Insert at the beginning
+		else:
+			push_error("No tabs found!")
 			return
-		tab.insert_node(0, node)  # Insert at the beginning
+		top_menu_container.ui_elements.append(node)
+		# refreshing Panels submenu
+		var new_elements = top_menu_container.ui_elements
+		panels_submenu.clear()
+		for element in new_elements:
+			panels_submenu.add_check_item(element.name)
+			var is_hidden: bool = dockable.is_control_hidden(element)
+			panels_submenu.set_item_checked(new_elements.find(element), !is_hidden)
+		# re-assigning layout
+		top_menu_container.set_layout(top_menu_container.selected_layout)
+		# we must make tabs_visible = true for a few moments if it is false
+		if dockable.tabs_visible == false:
+			dockable.tabs_visible = true
+			yield(ExtensionsApi.wait_frame(), "completed")
+			dockable.tabs_visible = false
 		ExtensionsApi.add_action("add_tab")
-		# INSTRUCTION
-		# After this check if tabs are invisible, if they are, then make tabs visible
-		# and after doing yield(get_tree(), "idle_frame") twice make them invisible again
 
 	func remove_node_from_tab(node: Node) -> void:
+		var top_menu_container = Global.top_menu_container
+		var dockable = Global.control.find_node("DockableContainer")
+		var panels_submenu: PopupMenu = top_menu_container.panels_submenu
+		# find the tab that contains the node
 		if node == null:
 			return
-		var dockable = Global.control.find_node("DockableContainer")
 		var tab = _find_tab_with_node(node.name, dockable)
 		if not tab:
 			push_error("Tab not found")
 			return
+		# remove node from that tab
 		tab.remove_node(node)
 		node.get_parent().remove_child(node)
+		top_menu_container.ui_elements.erase(node)
 		node.queue_free()
+		# refreshing Panels submenu
+		var new_elements = top_menu_container.ui_elements
+		panels_submenu.clear()
+		for element in new_elements:
+			panels_submenu.add_check_item(element.name)
+			var is_hidden: bool = dockable.is_control_hidden(element)
+			panels_submenu.set_item_checked(new_elements.find(element), !is_hidden)
+		# we must make tabs_visible = true for a few moments if it is false
+		if dockable.tabs_visible == false:
+			dockable.tabs_visible = true
+			yield(ExtensionsApi.wait_frame(), "completed")
+			dockable.tabs_visible = false
 		ExtensionsApi.remove_action("add_tab")
 
 	# PRIVATE METHODS
@@ -197,7 +235,7 @@ class PanelAPI:
 				return tab
 		return null
 
-	func _get_tabs_in_root(parent_resource):
+	func _get_tabs_in_root(parent_resource) -> Array:
 		var parents := []  # Resources have no get_parent_resource() so this is an alternative
 		var scanned := []  # To keep track of already discovered layout_split resources
 		var child_number := 0
@@ -207,7 +245,7 @@ class PanelAPI:
 		# Get children in the parent, the initial parent is the node we entered as "parent"
 		while child_number < 2:
 			# If parent isn't a (layout_split) resource then there is no point
-			# in continuing (This is just a Sanity Check and should always pass)
+			# in continuing (this is just a sanity check and should always pass)
 			if !scan_target.has_method("get_first"):
 				break
 
@@ -238,6 +276,7 @@ class PanelAPI:
 				# If there is no parent left to get scanned
 				if scan_target == null:
 					return tabs
+		return tabs
 
 
 class ThemeAPI:
@@ -308,7 +347,7 @@ class ProjectAPI:
 		return {"cel": cel, "type": cel.get_class_name()}
 
 	func get_cel_info_at(project: Project, frame: int, layer: int) -> Dictionary:
-		# frames from left to right, layers from bottomn to top
+		# frames from left to right, layers from bottom to top
 		clamp(frame, 0, project.frames.size() - 1)
 		clamp(layer, 0, project.layers.size() - 1)
 		var cel = project.frames[frame].cels[layer]
