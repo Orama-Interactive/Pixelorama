@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://src/UI/Timeline/AnimationTimeline.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/layers/new.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/graphics/misc/value_arrow.svg" type="Texture" id=10]
 [ext_resource path="res://src/UI/Timeline/FrameScrollContainer.gd" type="Script" id=11]
+[ext_resource path="res://src/UI/Timeline/PasteTagPopup.gd" type="Script" id=12]
 [ext_resource path="res://assets/graphics/timeline/new_frame.png" type="Texture" id=19]
 [ext_resource path="res://assets/graphics/timeline/remove_frame.png" type="Texture" id=20]
 [ext_resource path="res://assets/graphics/timeline/go_to_first_frame.png" type="Texture" id=21]
@@ -974,12 +975,12 @@ margin_bottom = 40.0
 mouse_filter = 2
 color = Color( 0, 0.741176, 1, 0.501961 )
 
-[node name="TagList" type="PopupMenu" parent="."]
-unique_name_in_owner = true
+[node name="PasteTagPopup" type="PopupMenu" parent="."]
 margin_left = 439.0
 margin_top = 9.0
 margin_right = 459.0
 margin_bottom = 29.0
+script = ExtResource( 12 )
 
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [ 0 ]]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
@@ -1004,7 +1005,6 @@ margin_bottom = 29.0
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/OnionSkinning" to="." method="_on_OnionSkinning_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="value_changed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
-[connection signal="gui_input" from="TimelineContainer/TimelineButtons/VBoxContainer/TagScroll/HBoxContainer/TagContainer" to="." method="_on_TagContainer_gui_input"]
 [connection signal="gui_input" from="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit" to="." method="_on_LayerFrameSplitContainer_gui_input"]
 [connection signal="resized" from="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit/VBoxContainer/LayerVBox" to="." method="_on_LayerVBox_resized"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
