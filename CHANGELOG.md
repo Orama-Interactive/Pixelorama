@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This update has been brought to you by the contributions of:
 [@mrtripie](https://github.com/mrtripie), Martin Novák ([@novhack](https://github.com/novhack)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@20kdc](https://github.com/20kdc), Arron Washington ([@radicaled](https://github.com/radicaled)), Christos Tsoychlakis ([@ChrisTs8920](https://github.com/ChrisTs8920))
 
+Built using Godot 3.5.2.
+
 ### Added
 - Layer groups in the timeline, for better organization. [#698](https://github.com/Orama-Interactive/Pixelorama/pull/698)
 - Support for reference images has been implemented. [#771](https://github.com/Orama-Interactive/Pixelorama/pull/771)
@@ -76,6 +78,8 @@ This update has been brought to you by the contributions of:
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
+Built using Godot 3.5.
+
 ### Added
 - The UI now automatically gets scaled, based on the dpi and resolution of the monitor. Resolves [#643](https://github.com/Orama-Interactive/Pixelorama/issues/643).
 - A "Divide into equal parts" button has been added in Gradient Map. This is meant for easy gradient bisecting, which is helpful for converting Linear/Cubic interpolated gradients into Constant. This will eventually be used in gradient generation as well, once multi-color gradient generation support gets implemented.
@@ -112,6 +116,8 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@GrantMoyer](https://github.com/GrantMoyer)
 
+Built using Godot 3.5.
+
 ### Added
 - A gradient map image effect. Addresses the second half of [#595](https://github.com/Orama-Interactive/Pixelorama/discussions/595).
 - A new rotation type, Rotxel with smear. Thanks to [azagaya](https://github.com/azagaya) for the shader code.
@@ -130,7 +136,6 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@GrantMoyer](h
 - On quit, the "Save & Exit" button is now focused by default.
 - The icon for onion skinning options has changed. [#711](https://github.com/Orama-Interactive/Pixelorama/pull/711)
 - Extensions are now being automatically reloaded if the user installs an already-existing extension, without the need to restart Pixelorama.
-- Updated to Godot 3.5.
 
 ### Fixed
 - Fixed a macOS crash on startup. [90d2473](https://github.com/Orama-Interactive/Pixelorama/commit/90d2473f5256425146a8c10f539b7737aa37fd23)
