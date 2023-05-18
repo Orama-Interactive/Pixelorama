@@ -26,27 +26,6 @@
 [ext_resource path="res://assets/graphics/timeline/loop.png" type="Texture" id=31]
 [ext_resource path="res://src/UI/Timeline/FrameTagDialog.tscn" type="PackedScene" id=42]
 
-[sub_resource type="StyleBoxEmpty" id=15]
-
-[sub_resource type="StyleBoxEmpty" id=16]
-
-[sub_resource type="StyleBoxEmpty" id=17]
-
-[sub_resource type="StyleBoxEmpty" id=18]
-
-[sub_resource type="StyleBoxEmpty" id=19]
-
-[sub_resource type="Theme" id=20]
-HScrollBar/icons/decrement = null
-HScrollBar/icons/decrement_highlight = null
-HScrollBar/icons/increment = null
-HScrollBar/icons/increment_highlight = null
-HScrollBar/styles/grabber = SubResource( 15 )
-HScrollBar/styles/grabber_highlight = SubResource( 16 )
-HScrollBar/styles/grabber_pressed = SubResource( 17 )
-HScrollBar/styles/scroll = SubResource( 18 )
-HScrollBar/styles/scroll_focus = SubResource( 19 )
-
 [sub_resource type="InputEventAction" id=21]
 action = "go_to_first_frame"
 
@@ -82,6 +61,27 @@ action = "go_to_last_frame"
 
 [sub_resource type="ShortCut" id=14]
 shortcut = SubResource( 22 )
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
+[sub_resource type="StyleBoxEmpty" id=18]
+
+[sub_resource type="StyleBoxEmpty" id=19]
+
+[sub_resource type="Theme" id=20]
+HScrollBar/icons/decrement = null
+HScrollBar/icons/decrement_highlight = null
+HScrollBar/icons/increment = null
+HScrollBar/icons/increment_highlight = null
+HScrollBar/styles/grabber = SubResource( 15 )
+HScrollBar/styles/grabber_highlight = SubResource( 16 )
+HScrollBar/styles/grabber_pressed = SubResource( 17 )
+HScrollBar/styles/scroll = SubResource( 18 )
+HScrollBar/styles/scroll_focus = SubResource( 19 )
 
 [node name="AnimationTimeline" type="Panel"]
 margin_right = 902.0
@@ -309,7 +309,6 @@ size_flags_horizontal = 3
 margin_right = 677.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
-theme = SubResource( 20 )
 scroll_vertical_enabled = false
 
 [node name="AnimationTools" type="PanelContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer"]
