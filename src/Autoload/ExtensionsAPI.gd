@@ -1,4 +1,3 @@
-# gdlint: ignore=max-public-methods
 extends Node
 
 # use these variables in your extension to access the api
@@ -174,7 +173,7 @@ class PanelAPI:
 			dockable.add_child(node)
 			tabs[0].insert_node(0, node)  # Insert at the beginning
 		else:
-			push_error("No Tabs Found!!!")
+			push_error("No tabs found!")
 			return
 		top_menu_container.ui_elements.append(node)
 		# refreshing Panels submenu
@@ -246,7 +245,7 @@ class PanelAPI:
 		# Get children in the parent, the initial parent is the node we entered as "parent"
 		while child_number < 2:
 			# If parent isn't a (layout_split) resource then there is no point
-			# in continuing (This is just a Sanity Check and should always pass)
+			# in continuing (this is just a sanity check and should always pass)
 			if !scan_target.has_method("get_first"):
 				break
 
@@ -348,7 +347,7 @@ class ProjectAPI:
 		return {"cel": cel, "type": cel.get_class_name()}
 
 	func get_cel_info_at(project: Project, frame: int, layer: int) -> Dictionary:
-		# frames from left to right, layers from bottomn to top
+		# frames from left to right, layers from bottom to top
 		clamp(frame, 0, project.frames.size() - 1)
 		clamp(layer, 0, project.layers.size() - 1)
 		var cel = project.frames[frame].cels[layer]

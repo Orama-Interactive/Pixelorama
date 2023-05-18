@@ -2,7 +2,7 @@ extends Control
 
 var axes: Node2D
 var do_pool = []  # A pool that stores data of points removed by undo
-var delete_pool = []  # A pool that containg deleted data and their index
+var delete_pool = []  # A pool that containing deleted data and their index
 var vanishing_point_res := preload("res://src/UI/PerspectiveEditor/VanishingPoint.tscn")
 var tracker_disabled := false
 onready var vanishing_point_container = $"%VanishingPointContainer"

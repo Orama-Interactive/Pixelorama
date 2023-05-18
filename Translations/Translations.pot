@@ -2396,9 +2396,6 @@ msgstr ""
 msgid "Radius:"
 msgstr ""
 
-msgid "Height:"
-msgstr ""
-
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
 msgstr ""
