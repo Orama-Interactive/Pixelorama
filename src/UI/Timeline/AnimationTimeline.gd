@@ -1,4 +1,3 @@
-# gdlint: ignore=max-file-lines
 extends Panel
 
 var is_animation_running := false
