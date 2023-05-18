@@ -380,11 +380,17 @@ func copy_frames(indices := [], destination := -1) -> void:
 
 
 func _on_FrameTagButton_pressed() -> void:
+	find_node("FrameTagDialog").popup_centered()
+
+
+func _on_TagContainer_gui_input(event: InputEvent) -> void:
+	if !event is InputEventMouseButton:
+		return
 	if Input.is_action_just_released("right_mouse"):
 		$"%TagList".clear()
 		if Global.current_project.animation_tags.empty():
 			return
-		$"%TagList".add_separator("Copy Tag to Current Frame")
+		$"%TagList".add_separator("Paste content from tag:")
 		for tag in Global.current_project.animation_tags:
 			var img = Image.new()
 			img.create(5, 5, true, Image.FORMAT_RGBA8)
@@ -395,12 +401,9 @@ func _on_FrameTagButton_pressed() -> void:
 			if title == "":
 				title = "(Untitled)"
 			$"%TagList".add_icon_item(tex, title)
-
 		if not $"%TagList".is_connected("id_pressed", self, "_on_TagList_id_pressed"):
 			$"%TagList".connect("id_pressed", self, "_on_TagList_id_pressed")
 		$"%TagList".popup(Rect2(get_global_mouse_position(), Vector2.ONE))
-	else:
-		find_node("FrameTagDialog").popup_centered()
 
 
 func _on_TagList_id_pressed(id: int) -> void:

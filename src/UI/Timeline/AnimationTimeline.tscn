@@ -417,13 +417,11 @@ margin_top = 2.0
 margin_right = 92.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 0 )
-hint_tooltip = "Left click: Manage frame tags
-Right click: Copy an existing tag to current frame"
+hint_tooltip = "Manage frame tags"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-button_mask = 3
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/FrameTagButton"]
 anchor_left = 0.5
@@ -435,12 +433,6 @@ margin_top = -7.0
 margin_right = 7.0
 margin_bottom = 7.0
 texture = ExtResource( 28 )
-
-[node name="TagList" type="PopupMenu" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/FrameTagButton"]
-unique_name_in_owner = true
-margin_left = -24.0
-margin_right = -4.0
-margin_bottom = 20.0
 
 [node name="MoveLeft" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons" groups=["UIButtons"]]
 margin_left = 96.0
@@ -982,6 +974,13 @@ margin_bottom = 40.0
 mouse_filter = 2
 color = Color( 0, 0.741176, 1, 0.501961 )
 
+[node name="TagList" type="PopupMenu" parent="."]
+unique_name_in_owner = true
+margin_left = 439.0
+margin_top = 9.0
+margin_right = 459.0
+margin_bottom = 29.0
+
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddLayer" to="." method="add_layer" binds= [ 0 ]]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/RemoveLayer" to="." method="_on_RemoveLayer_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MoveUpLayer" to="." method="change_layer_order" binds= [ true ]]
@@ -1005,6 +1004,7 @@ color = Color( 0, 0.741176, 1, 0.501961 )
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/OnionSkinning" to="." method="_on_OnionSkinning_pressed"]
 [connection signal="pressed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/LoopAnim" to="." method="_on_LoopAnim_pressed"]
 [connection signal="value_changed" from="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/FPSValue" to="." method="_on_FPSValue_value_changed"]
+[connection signal="gui_input" from="TimelineContainer/TimelineButtons/VBoxContainer/TagScroll/HBoxContainer/TagContainer" to="." method="_on_TagContainer_gui_input"]
 [connection signal="gui_input" from="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit" to="." method="_on_LayerFrameSplitContainer_gui_input"]
 [connection signal="resized" from="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit/VBoxContainer/LayerVBox" to="." method="_on_LayerVBox_resized"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
