@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-05-07 15:22\n"
+"PO-Revision-Date: 2023-05-18 12:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2470,10 +2470,7 @@ msgstr "De la stânga la dreapta:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Rază:"
-
-msgid "Height:"
-msgstr "Înălțime:"
+msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
