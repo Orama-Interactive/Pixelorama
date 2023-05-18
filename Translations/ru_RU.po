@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2023-05-04 22:50\n"
+"PO-Revision-Date: 2023-05-18 12:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2467,9 +2467,6 @@ msgstr ""
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr "Радиус:"
-
-msgid "Height:"
 msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
