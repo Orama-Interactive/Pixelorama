@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-04-20 14:40\n"
+"PO-Revision-Date: 2023-05-18 12:26\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1287,7 +1287,7 @@ msgid "Snapping distance:"
 msgstr "Απόσταση προσκόλλησης:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
-msgid "This is the distance in pixels where guide and grip snapping gets activated."
+msgid "This is the distance in pixels where guide and grid snapping gets activated."
 msgstr "Αυτή είναι η απόσταση σε εικονοστοιχεία όπου ενεργοποιείται η προσκόλληση στους οδηγούς και στο πλέγμα."
 
 msgid "Grid"
@@ -2471,9 +2471,6 @@ msgstr "Αριστερά προς δεξιά:"
 #. Radius of a circle/spherical object.
 msgid "Radius:"
 msgstr "Ακτίνα:"
-
-msgid "Height:"
-msgstr "Ύψος:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
