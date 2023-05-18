@@ -5,11 +5,11 @@ on:
     branches: [ release ]
 
 env:
-  GODOT_VERSION: 3.5
-  GODOT_VERSION_MAC: 3.5
-  RASPBERRY_PI_BUILDS_VERSION: 1.13.0
+  GODOT_VERSION: 3.5.2
+  GODOT_VERSION_MAC: 3.5.2
+  RASPBERRY_PI_BUILDS_VERSION: 1.15.0
   EXPORT_NAME: Pixelorama
-  TAG: v0.10.3
+  TAG: v0.11
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.5
+      image: docker://barichello/godot-ci:3.5.2
     steps:
       - name: Setup WINE, rcedit and NSIS 🍷
         run: |
@@ -78,7 +78,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.5
+      image: docker://barichello/godot-ci:3.5.2
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
@@ -191,7 +191,7 @@ jobs:
     name: Web Export 🌐
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.5
+      image: docker://barichello/godot-ci:3.5.2
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2

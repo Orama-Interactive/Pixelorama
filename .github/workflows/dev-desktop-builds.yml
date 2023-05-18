@@ -11,9 +11,9 @@ on:
     - "installer/po/*"
 
 env:
-  GODOT_VERSION: 3.5
-  GODOT_VERSION_MAC: 3.5
-  RASPBERRY_PI_BUILDS_VERSION: 1.13.0
+  GODOT_VERSION: 3.5.2
+  GODOT_VERSION_MAC: 3.5.2
+  RASPBERRY_PI_BUILDS_VERSION: 1.15.0
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.5
+      image: docker://barichello/godot-ci:3.5.2
     steps:
       - name: Setup WINE and rcedit 🍷
         run: |
@@ -58,7 +58,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.5
+      image: docker://barichello/godot-ci:3.5.2
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
