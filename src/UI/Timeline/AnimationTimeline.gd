@@ -357,7 +357,7 @@ func copy_frames(indices := [], destination := -1) -> void:
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.commit_action()
 	# Select all the new frames so that it is easier to move/offset collectively if user wants
-	# For ease in animation workflow, the new current frame will be the first duplicated frame instead of the last
+	# To ease animation workflow, new current frame is the first copied frame instead of the last
 	var range_start: int = copied_indices[-1]
 	var range_end = copied_indices[0]
 	var frame_diff_sign = sign(range_end - range_start)
