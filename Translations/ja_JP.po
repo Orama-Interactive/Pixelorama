@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-04-20 14:40\n"
+"PO-Revision-Date: 2023-05-18 15:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1287,8 +1287,8 @@ msgid "Snapping distance:"
 msgstr "スナップ距離:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
-msgid "This is the distance in pixels where guide and grip snapping gets activated."
-msgstr "これは、ガイドとグリップのスナップが有効になるピクセル単位の距離です。"
+msgid "This is the distance in pixels where guide and grid snapping gets activated."
+msgstr "これは、ガイドとグリッドのスナップが有効になるピクセル単位の距離です。"
 
 msgid "Grid"
 msgstr "グリッド"
@@ -2471,9 +2471,6 @@ msgstr "左から右:"
 #. Radius of a circle/spherical object.
 msgid "Radius:"
 msgstr "半径:"
-
-msgid "Height:"
-msgstr "高さ:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
