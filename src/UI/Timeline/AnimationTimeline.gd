@@ -1,3 +1,4 @@
+# gdlint:ignore = max-file-lines
 extends Panel
 
 var is_animation_running := false
@@ -35,6 +36,7 @@ func _ready() -> void:
 	frame_scroll_bar.connect("value_changed", self, "_frame_scroll_changed")
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
+
 	# config loading
 	layer_frame_h_split.split_offset = Global.config_cache.get_value("timeline", "layer_size", 0)
 	self.cel_size = Global.config_cache.get_value("timeline", "cel_size", cel_size)  # Call setter
@@ -61,6 +63,7 @@ func _ready() -> void:
 	# emit signals that were supposed to be emitted (Check if it's still required in godot 4)
 	$"%PastPlacement".emit_signal("item_selected", 0 if past_above else 1)
 	$"%FuturePlacement".emit_signal("item_selected", 0 if future_above else 1)
+
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	Global.layer_vbox.call_deferred("emit_signal", "resized")
 
@@ -282,11 +285,13 @@ func _on_CopyFrame_pressed() -> void:
 
 func copy_frames(indices := [], destination := -1) -> void:
 	var project: Project = Global.current_project
+
 	if indices.size() == 0:
 		indices.append(project.current_frame)
 
 	var copied_frames := []
 	var copied_indices := []  # the indices of newly copied frames
+
 	if destination != -1:
 		copied_indices = range(destination + 1, (destination + 1) + indices.size())
 	else:
