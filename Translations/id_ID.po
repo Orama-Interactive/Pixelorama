@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-05-22 09:48\n"
+"PO-Revision-Date: 2023-05-22 20:13\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -2325,76 +2325,78 @@ msgid "Margins"
 msgstr ""
 
 msgid "Position + Size"
-msgstr ""
+msgstr "Posisi + Ukuran"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "Nisbah Aspek Terkunci"
 
 msgid "Margins:"
 msgstr ""
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "Nisbah Aspek:"
 
 msgid "Top:"
-msgstr ""
+msgstr "Atas:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "Bawah:"
 
 msgid "Left:"
-msgstr ""
+msgstr "Kiri:"
 
 msgid "Right:"
-msgstr ""
+msgstr "Kanan:"
 
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Ukuran terkunci\n\n"
+"Ketika diaktifkan dengan alat hanya akan memindahkan persegi pangkas di kanvas.\n\n"
+"Ketika dinonaktifkan dengan alat hanya akan membuat persegi di kanvas."
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
-msgstr ""
+msgstr "Ubah Bentuk 3D"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "Kotak"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
-msgstr ""
+msgstr "Bola"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "Kapsul"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
-msgstr ""
+msgstr "Tabung"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
-msgstr ""
+msgstr "Prisma"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
-msgstr ""
+msgstr "Torus"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "Bidang"
 
 msgid "Text"
-msgstr ""
+msgstr "Teks"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
-msgstr ""
+msgstr "Cahaya berarah"
 
 #. Used in 3D layers. A type of light.
 msgid "Spotlight"
-msgstr ""
+msgstr "Lampu sorot"
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
@@ -2484,11 +2486,11 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
-msgstr ""
+msgstr "Jari-jari atas:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Bottom radius:"
-msgstr ""
+msgstr "Jari-jari bawah:"
 
 msgid "Text:"
 msgstr ""
@@ -2519,9 +2521,9 @@ msgid "Negative:"
 msgstr ""
 
 msgid "Shadow:"
-msgstr ""
+msgstr "Bayangan:"
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
-msgstr ""
+msgstr "Rentang:"
 
