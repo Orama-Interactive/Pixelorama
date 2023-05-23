@@ -345,7 +345,7 @@ class ProjectAPI:
 	func get_current_project() -> Project:
 		return Global.current_project
 
-	func get_project_info(project: Project):
+	func get_project_info(project: Project) -> Dictionary:
 		return project.serialize()
 
 	func get_current_cel() -> BaseCel:
@@ -357,7 +357,7 @@ class ProjectAPI:
 		clamp(layer, 0, project.layers.size() - 1)
 		return project.frames[frame].cels[layer]
 
-	func set_pixelcel_image(image: Image, frame: int, layer: int):
+	func set_pixelcel_image(image: Image, frame: int, layer: int) -> void:
 		# frames from left to right, layers from bottom to top
 		if get_cel_at(get_current_project(), frame, layer).get_class_name() == "PixelCel":
 			OpenSave.open_image_at_cel(image, layer, frame)
