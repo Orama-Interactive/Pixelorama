@@ -91,6 +91,15 @@ func set_preview() -> void:
 			for i in range(Export.processed_images.size()):
 				add_image_preview(Export.processed_images[i], i + 1)
 
+	if Global.current_project.file_format == Export.FileFormat.GIF:
+		$"%GifWarning".visible = true
+	else:
+		$"%GifWarning".visible = false
+
+
+func _on_GifWarning_meta_clicked(meta) -> void:
+	OS.shell_open(meta)
+
 
 func add_image_preview(image: Image, canvas_number: int = -1) -> void:
 	var container := create_preview_container()
