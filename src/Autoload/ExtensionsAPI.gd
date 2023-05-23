@@ -92,6 +92,9 @@ class GeneralAPI:
 	func get_drawing_algos() -> DrawingAlgos:
 		return DrawingAlgos
 
+	func get_shader_image_effect() -> ShaderImageEffect:
+		return ShaderImageEffect.new()
+
 	func get_extensions_node() -> Node:
 		# node where the nodes listed in "nodes" from extension.json gets placed
 		return Global.control.get_node("Extensions")
