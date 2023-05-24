@@ -6,6 +6,10 @@ signal resume_export_function
 var preview_current_frame := 0
 var preview_frames := []
 
+# allow custom exporters to be added
+var image_exports := [Export.FileFormat.PNG, Export.FileFormat.GIF, Export.FileFormat.APNG]
+var spritesheet_exports := [Export.FileFormat.PNG]
+
 onready var tabs: Tabs = $VBoxContainer/Tabs
 onready var checker: ColorRect = $"%TransparentChecker"
 onready var previews: GridContainer = $"%Previews"
@@ -91,15 +95,6 @@ func set_preview() -> void:
 			for i in range(Export.processed_images.size()):
 				add_image_preview(Export.processed_images[i], i + 1)
 
-	if Global.current_project.file_format == Export.FileFormat.GIF:
-		$"%GifWarning".visible = true
-	else:
-		$"%GifWarning".visible = false
-
-
-func _on_GifWarning_meta_clicked(meta) -> void:
-	OS.shell_open(meta)
-
 
 func add_image_preview(image: Image, canvas_number: int = -1) -> void:
 	var container := create_preview_container()
@@ -164,11 +159,9 @@ func remove_previews() -> void:
 func set_file_format_selector() -> void:
 	match Export.current_tab:
 		Export.ExportTab.IMAGE:
-			_set_file_format_selector_suitable_file_formats(
-				[Export.FileFormat.PNG, Export.FileFormat.GIF, Export.FileFormat.APNG]
-			)
+			_set_file_format_selector_suitable_file_formats(image_exports)
 		Export.ExportTab.SPRITESHEET:
-			_set_file_format_selector_suitable_file_formats([Export.FileFormat.PNG])
+			_set_file_format_selector_suitable_file_formats(spritesheet_exports)
 
 
 # Updates the suitable list of file formats. First is preferred.

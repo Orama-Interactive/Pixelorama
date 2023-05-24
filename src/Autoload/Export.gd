@@ -6,6 +6,12 @@ enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
 # See file_format_string, file_format_description, and ExportDialog.gd
 enum FileFormat { PNG = 0, GIF = 1, APNG = 2 }
 
+# list of animated formats
+var animated_formats := [FileFormat.GIF, FileFormat.APNG]
+
+# A dictionary of custom exporter generators (Recieved from extensions)
+var custom_exporter_generators := {}
+
 var current_tab: int = ExportTab.IMAGE
 # All frames and their layers processed/blended into images
 var processed_images := []  # Image[]
@@ -38,6 +44,19 @@ onready var gif_export_thread := Thread.new()
 func _exit_tree() -> void:
 	if gif_export_thread.is_active():
 		gif_export_thread.wait_to_finish()
+
+
+func add_file_format(name: String) -> int:
+	var id = FileFormat.size()
+	FileFormat.merge({name: id})
+	return id
+
+
+func remove_file_format(id: int) -> void:
+	for key in Export.FileFormat.keys():
+		if Export.FileFormat[key] == id:
+			Export.FileFormat.erase(key)
+			return
 
 
 func external_export(project := Global.current_project) -> void:
@@ -191,6 +210,20 @@ func export_processed_images(
 
 	scale_processed_images()
 
+	# override if a custom export is chosen
+	if project.file_format in custom_exporter_generators.keys():
+		# Divert the path to the custom exporter instead
+		var custom_exporter = custom_exporter_generators[project.file_format][0]
+		if custom_exporter.has_method("override_export"):
+			var details := {
+				"processed_images": processed_images,
+				"export_dialog": export_dialog,
+				"export_paths": export_paths,
+				"project": project
+			}
+			var result: bool = custom_exporter.call("override_export", details)
+			return result
+
 	if is_single_file_format(project):
 		var exporter: AImgIOBaseExporter
 		if project.file_format == FileFormat.APNG:
@@ -304,11 +337,16 @@ func file_format_string(format_enum: int) -> String:
 		FileFormat.APNG:
 			return ".apng"
 		_:
+			# If a file format description is not found, try generating one
+			if custom_exporter_generators.has(format_enum):
+				return custom_exporter_generators[format_enum][1]
 			return ""
 
 
 func file_format_description(format_enum: int) -> String:
 	match format_enum:
+		#  these are overrides
+		#  (if they are not given, they will generate themselves based on the enum key name)
 		FileFormat.PNG:
 			return "PNG Image"
 		FileFormat.GIF:
@@ -316,13 +354,17 @@ func file_format_description(format_enum: int) -> String:
 		FileFormat.APNG:
 			return "APNG Image"
 		_:
+			# If a file format description is not found, try generating one
+			for key in FileFormat.keys():
+				if FileFormat[key] == format_enum:
+					return str(key.capitalize())
 			return ""
 
 
 func is_single_file_format(project := Global.current_project) -> bool:
 	# True when exporting to .gif and .apng (and potentially video formats in the future)
 	# False when exporting to .png, and other non-animated formats in the future
-	return project.file_format == FileFormat.GIF or project.file_format == FileFormat.APNG
+	return animated_formats.has(project.file_format)
 
 
 func create_export_path(multifile: bool, project: Project, frame: int = 0) -> String:
