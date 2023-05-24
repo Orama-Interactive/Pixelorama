@@ -218,6 +218,7 @@ func export_processed_images(
 			var result := true
 			var details := {
 				"processed_images": processed_images,
+				"durations": durations,
 				"export_dialog": export_dialog,
 				"export_paths": export_paths,
 				"project": project
