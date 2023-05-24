@@ -213,15 +213,23 @@ func export_processed_images(
 	# override if a custom export is chosen
 	if project.file_format in custom_exporter_generators.keys():
 		# Divert the path to the custom exporter instead
-		var custom_exporter = custom_exporter_generators[project.file_format][0]
+		var custom_exporter: Object = custom_exporter_generators[project.file_format][0]
 		if custom_exporter.has_method("override_export"):
+			var result := true
 			var details := {
 				"processed_images": processed_images,
 				"export_dialog": export_dialog,
 				"export_paths": export_paths,
 				"project": project
 			}
-			var result: bool = custom_exporter.call("override_export", details)
+			if OS.get_name() != "HTML5" and is_single_file_format(project):
+				if gif_export_thread.is_active():
+					gif_export_thread.wait_to_finish()
+				var error = gif_export_thread.start(custom_exporter, "override_export", details)
+				if error == OK:
+					result = gif_export_thread.wait_to_finish()
+			else:
+				result = custom_exporter.call("override_export", details)
 			return result
 
 	if is_single_file_format(project):
