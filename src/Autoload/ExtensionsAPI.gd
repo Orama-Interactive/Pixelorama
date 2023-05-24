@@ -367,6 +367,7 @@ class ProjectAPI:
 
 
 class ExportAPI:
+	# gdlint: ignore=class-variable-name
 	var ExportTab := Export.ExportTab
 
 	func add_export_option(
