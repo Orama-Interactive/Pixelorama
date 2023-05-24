@@ -8,6 +8,7 @@
 [node name="ExportDialog" type="ConfirmationDialog"]
 margin_right = 532.0
 margin_bottom = 530.0
+rect_min_size = Vector2( 170, 59.5 )
 window_title = "Export..."
 resizable = true
 dialog_hide_on_ok = false
@@ -289,6 +290,17 @@ margin_top = 224.0
 margin_right = 516.0
 margin_bottom = 228.0
 
+[node name="GifWarning" type="RichTextLabel" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_top = 232.0
+margin_right = 516.0
+margin_bottom = 262.0
+bbcode_enabled = true
+bbcode_text = "[center]If exported GIF is distorted, it is recommended to convert to APNG and then use any online tool like [color=blue][url]https://ezgif.com/apng-to-gif[/url][/color] to turn it to GIF[/center]"
+text = "If exported GIF is distorted, it is recommended to convert to APNG and then use any online tool like https://ezgif.com/apng-to-gif to turn it to GIF"
+fit_content_height = true
+
 [node name="CollapsibleContainer" type="VBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
 margin_top = 232.0
 margin_right = 516.0
@@ -334,6 +346,10 @@ mouse_default_cursor_shape = 2
 text = "Create new folder for each frame tag"
 
 [node name="Popups" type="Control" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 524.0
+margin_bottom = 494.0
 mouse_filter = 2
 
 [node name="PathDialog" type="FileDialog" parent="Popups"]
@@ -428,6 +444,7 @@ __meta__ = {
 [connection signal="pressed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathButton" to="." method="_on_PathButton_pressed"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/FileLineEdit" to="." method="_on_FileLineEdit_text_changed"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/FileFormat" to="." method="_on_FileFormat_item_selected"]
+[connection signal="meta_clicked" from="VBoxContainer/VSplitContainer/VBoxContainer/GifWarning" to="." method="_on_GifWarning_meta_clicked"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer/Interpolation" to="." method="_on_Interpolation_item_selected"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/MultipleAnimationsDirectories" to="." method="_on_MultipleAnimationsDirectories_toggled"]
 [connection signal="dir_selected" from="Popups/PathDialog" to="." method="_on_FileDialog_dir_selected"]
