@@ -380,6 +380,8 @@ class ExportAPI:
 			extension = format_info["extension"]
 		if format_info.has("description"):
 			format_name = format_info["description"].to_upper().replace(" ", "_")
+		if format_name in Export.FileFormat:  # Format of the same type is already added
+			return -1
 		#  add enum
 		var id = Export.add_file_format(format_name)
 		#  add exporter generator
