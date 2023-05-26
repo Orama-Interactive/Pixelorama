@@ -89,7 +89,14 @@ class GeneralAPI:
 	func get_global() -> Global:
 		return Global
 
+	func get_drawing_algos() -> DrawingAlgos:
+		return DrawingAlgos
+
+	func get_shader_image_effect() -> ShaderImageEffect:
+		return ShaderImageEffect.new()
+
 	func get_extensions_node() -> Node:
+		# node where the nodes listed in "nodes" from extension.json gets placed
 		return Global.control.get_node("Extensions")
 
 	func get_canvas() -> Canvas:
@@ -338,20 +345,24 @@ class ProjectAPI:
 	func get_current_project() -> Project:
 		return Global.current_project
 
-	func get_current_cel_info() -> Dictionary:
-		# As types of cel are added to Pixelorama,
-		# then the old extension would have no idea how to identify the types they use
-		# E.g the extension may try to use a GroupCel as a PixelCel (if it doesn't know the difference)
-		# So it's encouraged to use this function to access cels
-		var cel := get_current_project().get_current_cel()
-		return {"cel": cel, "type": cel.get_class_name()}
+	func get_project_info(project: Project) -> Dictionary:
+		return project.serialize()
 
-	func get_cel_info_at(project: Project, frame: int, layer: int) -> Dictionary:
+	func get_current_cel() -> BaseCel:
+		return get_current_project().get_current_cel()
+
+	func get_cel_at(project: Project, frame: int, layer: int) -> BaseCel:
 		# frames from left to right, layers from bottom to top
 		clamp(frame, 0, project.frames.size() - 1)
 		clamp(layer, 0, project.layers.size() - 1)
-		var cel = project.frames[frame].cels[layer]
-		return {"cel": cel, "type": cel.get_class_name()}
+		return project.frames[frame].cels[layer]
+
+	func set_pixelcel_image(image: Image, frame: int, layer: int) -> void:
+		# frames from left to right, layers from bottom to top
+		if get_cel_at(get_current_project(), frame, layer).get_class_name() == "PixelCel":
+			OpenSave.open_image_at_cel(image, layer, frame)
+		else:
+			print("cel at frame ", frame, ", layer ", layer, " is not a PixelCel")
 
 
 class SignalsAPI:

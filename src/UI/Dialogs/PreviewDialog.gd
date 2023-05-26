@@ -270,6 +270,7 @@ func _on_ImportOption_item_selected(id: int) -> void:
 		new_frame_options.visible = true
 		# Fill the at layer option button:
 		var at_layer_option: OptionButton = new_frame_options.get_node("AtLayerOption")
+		at_layer_option.clear()
 		var layers := Global.current_project.layers.duplicate()
 		layers.invert()
 		var i := 0
@@ -284,6 +285,7 @@ func _on_ImportOption_item_selected(id: int) -> void:
 		replace_cel_options.visible = true
 		# Fill the at layer option button:
 		var at_layer_option: OptionButton = replace_cel_options.get_node("AtLayerOption")
+		at_layer_option.clear()
 		var layers := Global.current_project.layers.duplicate()
 		layers.invert()
 		var i := 0

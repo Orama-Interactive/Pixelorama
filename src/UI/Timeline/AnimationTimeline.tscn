@@ -884,7 +884,9 @@ unique_name_in_owner = true
 margin_left = 819.0
 margin_right = 891.0
 size_flags_horizontal = 1
+max_value = 10.0
 value = 1.0
+allow_greater = true
 suffix = "Frames"
 
 [node name="OnionSkinningFuture" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
@@ -898,7 +900,9 @@ unique_name_in_owner = true
 margin_left = 819.0
 margin_right = 891.0
 size_flags_horizontal = 1
+max_value = 10.0
 value = 1.0
+allow_greater = true
 suffix = "Frames"
 
 [node name="BlueRedMode" type="CheckBox" parent="OnionSkinningSettings/OnionSkinningButtons"]
