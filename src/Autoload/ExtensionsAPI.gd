@@ -380,10 +380,20 @@ class ExportAPI:
 			extension = format_info["extension"]
 		if format_info.has("description"):
 			format_name = format_info["description"].to_upper().replace(" ", "_")
-		if format_name in Export.FileFormat:  # Format of the same type is already added
-			return -1
-		#  add enum
-		var id = Export.add_file_format(format_name)
+		# change format name if another one uses the same name
+		for i in range(Export.FileFormat.size()):
+			var test_name = format_name
+			if i != 0:
+				test_name = str(test_name, "_", i)
+			if !Export.FileFormat.keys().has(test_name):
+				format_name = test_name
+				break
+		#  add to FileFormat enum
+		var id := Export.FileFormat.size()
+		for i in Export.FileFormat.size():  # use an empty id if it's available
+			if !Export.FileFormat.values().has(i):
+				id = i
+		Export.FileFormat.merge({format_name: id})
 		#  add exporter generator
 		Export.custom_exporter_generators.merge({id: [exporter_generator, extension]})
 		#  add to animated (or not)
