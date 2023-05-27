@@ -101,6 +101,10 @@ func set_preview() -> void:
 		$"%GifWarning".visible = false
 
 
+func _on_GifWarning_meta_clicked(meta) -> void:
+	OS.shell_open(meta)
+
+
 func add_image_preview(image: Image, canvas_number: int = -1) -> void:
 	var container := create_preview_container()
 	var preview := create_preview_rect()
