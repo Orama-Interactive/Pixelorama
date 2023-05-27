@@ -8,6 +8,7 @@ var panel := PanelAPI.new()
 var theme := ThemeAPI.new()
 var tools := ToolAPI.new()
 var project := ProjectAPI.new()
+var exports := ExportAPI.new()
 var signals := SignalsAPI.new()
 
 # This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
@@ -363,6 +364,65 @@ class ProjectAPI:
 			OpenSave.open_image_at_cel(image, layer, frame)
 		else:
 			print("cel at frame ", frame, ", layer ", layer, " is not a PixelCel")
+
+
+class ExportAPI:
+	# gdlint: ignore=class-variable-name
+	var ExportTab := Export.ExportTab
+
+	func add_export_option(
+		format_info: Dictionary, exporter_generator, tab := ExportTab.IMAGE, is_animated := true
+	) -> int:
+		# separate enum name and file name
+		var extension = ""
+		var format_name = ""
+		if format_info.has("extension"):
+			extension = format_info["extension"]
+		if format_info.has("description"):
+			format_name = format_info["description"].to_upper().replace(" ", "_")
+		# change format name if another one uses the same name
+		for i in range(Export.FileFormat.size()):
+			var test_name = format_name
+			if i != 0:
+				test_name = str(test_name, "_", i)
+			if !Export.FileFormat.keys().has(test_name):
+				format_name = test_name
+				break
+		#  add to FileFormat enum
+		var id := Export.FileFormat.size()
+		for i in Export.FileFormat.size():  # use an empty id if it's available
+			if !Export.FileFormat.values().has(i):
+				id = i
+		Export.FileFormat.merge({format_name: id})
+		#  add exporter generator
+		Export.custom_exporter_generators.merge({id: [exporter_generator, extension]})
+		#  add to animated (or not)
+		if is_animated:
+			Export.animated_formats.append(id)
+		#  add to export dialog
+		match tab:
+			ExportTab.IMAGE:
+				Global.export_dialog.image_exports.append(id)
+			ExportTab.SPRITESHEET:
+				Global.export_dialog.spritesheet_exports.append(id)
+			_:  # Both
+				Global.export_dialog.image_exports.append(id)
+				Global.export_dialog.spritesheet_exports.append(id)
+		ExtensionsApi.add_action("add_exporter")
+		return id
+
+	func remove_export_option(id: int):
+		if Export.custom_exporter_generators.has(id):
+			# remove enum
+			Export.remove_file_format(id)
+			# remove exporter generator
+			Export.custom_exporter_generators.erase(id)
+			#  remove from animated (or not)
+			Export.animated_formats.erase(id)
+			#  add to export dialog
+			Global.export_dialog.image_exports.erase(id)
+			Global.export_dialog.spritesheet_exports.erase(id)
+			ExtensionsApi.remove_action("add_exporter")
 
 
 class SignalsAPI:
