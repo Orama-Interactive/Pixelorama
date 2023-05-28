@@ -510,6 +510,7 @@ func get_extensions_node() -> Node:
 
 # legacy method (The methods is DEPRECATED and will not be in newer versions)
 func get_dockable_container_ui() -> Node:
+	# gdlint:ignore = private-method-call
 	return panel._get_dockable_container_ui()
 
 
