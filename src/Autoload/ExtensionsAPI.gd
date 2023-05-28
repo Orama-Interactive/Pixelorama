@@ -1,3 +1,4 @@
+# gdlint: ignore=max-public-methods
 extends Node
 
 # legacy enum (This is DEPRECATED and will not be in newer versions)
