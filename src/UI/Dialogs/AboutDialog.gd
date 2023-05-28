@@ -167,6 +167,7 @@ const DONORS := [
 	"BasicIncomePlz",
 	"Benedikt",
 	"David Maziarka",
+	"David Snopek",
 	"Guillaume Gautier",
 	"Hugo Locurcio",
 	"Jérôme P.",
