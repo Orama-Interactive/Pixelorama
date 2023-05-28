@@ -546,7 +546,7 @@ func add_menu_item(menu_type: int, item_name: String, item_metadata, item_id := 
 
 # legacy method (The methods is DEPRECATED and will not be in newer versions)
 func remove_menu_item(menu_type: int, item_idx: int) -> void:
-	var idx = menu.remove_menu_item(menu_type, item_idx)
+	menu.remove_menu_item(menu_type, item_idx)
 
 
 # legacy method (The methods is DEPRECATED and will not be in newer versions)
@@ -569,13 +569,13 @@ func remove_tool(tool_name: String) -> void:
 
 
 # legacy method (The methods is DEPRECATED and will not be in newer versions)
-func add_theme(theme: Theme) -> void:
-	theme.add_theme(theme)
+func add_theme(theme_res: Theme) -> void:
+	theme.add_theme(theme_res)
 
 
 # legacy method (The methods is DEPRECATED and will not be in newer versions)
-func find_theme_index(theme: Theme) -> int:
-	return theme.find_theme_index(theme)
+func find_theme_index(theme_res: Theme) -> int:
+	return theme.find_theme_index(theme_res)
 
 
 # legacy method (The methods is DEPRECATED and will not be in newer versions)
@@ -589,5 +589,5 @@ func set_theme(idx: int) -> bool:
 
 
 # legacy method (The methods is DEPRECATED and will not be in newer versions)
-func remove_theme(theme: Theme) -> void:
-	ExtensionsApi.theme.remove_theme(theme)
+func remove_theme(theme_res: Theme) -> void:
+	theme.remove_theme(theme_res)
