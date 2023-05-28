@@ -1,5 +1,8 @@
 extends Node
 
+# legacy enum (This is DEPRECATED and will not be in newer versions)
+enum { FILE, EDIT, SELECT, IMAGE, VIEW, WINDOW, HELP }
+
 # use these variables in your extension to access the api
 var general := GeneralAPI.new()
 var menu := MenuAPI.new()
@@ -478,3 +481,113 @@ class SignalsAPI:
 	func disconnect_current_cel_texture_changed(target: Object, method: String):
 		disconnect("texture_changed", target, method)
 		ExtensionsApi.remove_action("texture_changed")
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func get_pixelorama_version() -> String:
+	return general.get_pixelorama_version()
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func dialog_open(open: bool) -> void:
+	dialog.dialog_open(open)
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func get_current_project() -> Project:
+	return project.get_current_project()
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func get_global() -> Global:
+	return general.get_global()
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func get_extensions_node() -> Node:
+	return general.get_extensions_node()
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func get_dockable_container_ui() -> Node:
+	return panel._get_dockable_container_ui()
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func get_config_file() -> ConfigFile:
+	return general.get_config_file()
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func get_canvas() -> Canvas:
+	return general.get_canvas()
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func get_dialogs_parent_node() -> Node:
+	return dialog.get_dialogs_parent_node()
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func add_node_as_tab(node: Node, _alongside_node: String) -> void:
+	panel.add_node_as_tab(node)
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func remove_node_from_tab(node: Node) -> void:
+	panel.remove_node_from_tab(node)
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func add_menu_item(menu_type: int, item_name: String, item_metadata, item_id := -1) -> int:
+	var idx = menu.add_menu_item(menu_type, item_name, item_metadata, item_id)
+	return idx
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func remove_menu_item(menu_type: int, item_idx: int) -> void:
+	var idx = menu.remove_menu_item(menu_type, item_idx)
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func add_tool(
+	tool_name: String,
+	display_name: String,
+	shortcut: String,
+	scene: PackedScene,
+	extra_hint := "",
+	extra_shortucts := []
+) -> void:
+	tools.add_tool(
+		tool_name, display_name, shortcut, scene, extra_hint, extra_shortucts, PoolIntArray()
+	)
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func remove_tool(tool_name: String) -> void:
+	tools.remove_tool(tool_name)
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func add_theme(theme: Theme) -> void:
+	theme.add_theme(theme)
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func find_theme_index(theme: Theme) -> int:
+	return theme.find_theme_index(theme)
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func get_theme() -> Theme:
+	return theme.get_theme()
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func set_theme(idx: int) -> bool:
+	return theme.set_theme(idx)
+
+
+# legacy method (The methods is DEPRECATED and will not be in newer versions)
+func remove_theme(theme: Theme) -> void:
+	ExtensionsApi.theme.remove_theme(theme)
