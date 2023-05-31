@@ -3,8 +3,8 @@
 [ext_resource path="res://src/UI/Buttons/PatternsPopup.gd" type="Script" id=1]
 
 [node name="PatternsPopup" type="PopupPanel"]
-margin_right = 226.0
-margin_bottom = 104.0
+offset_right = 226.0
+offset_bottom = 104.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -13,11 +13,11 @@ __meta__ = {
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
-rect_min_size = Vector2( 0, 36 )
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+custom_minimum_size = Vector2( 0, 36 )
 size_flags_horizontal = 3
 scroll_horizontal_enabled = false
 

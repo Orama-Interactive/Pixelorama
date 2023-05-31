@@ -9,27 +9,27 @@ window_title = "Adjust HSV"
 script = ExtResource( 1 )
 
 [node name="VBoxContainer" parent="." index="3"]
-margin_bottom = 344.0
+offset_bottom = 344.0
 
 [node name="HueSlider" parent="VBoxContainer" index="1" instance=ExtResource( 3 )]
-margin_top = 232.0
-margin_right = 332.0
-margin_bottom = 256.0
+offset_top = 232.0
+offset_right = 332.0
+offset_bottom = 256.0
 min_value = -180.0
 max_value = 180.0
 prefix = "Hue:"
 
 [node name="SaturationSlider" parent="VBoxContainer" index="2" instance=ExtResource( 3 )]
-margin_top = 260.0
-margin_right = 332.0
-margin_bottom = 284.0
+offset_top = 260.0
+offset_right = 332.0
+offset_bottom = 284.0
 min_value = -100.0
 prefix = "Saturation:"
 
 [node name="ValueSlider" parent="VBoxContainer" index="3" instance=ExtResource( 3 )]
-margin_top = 288.0
-margin_right = 332.0
-margin_bottom = 312.0
+offset_top = 288.0
+offset_right = 332.0
+offset_bottom = 312.0
 min_value = -100.0
 prefix = "Value:"
 

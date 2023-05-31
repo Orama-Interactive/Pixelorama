@@ -1,7 +1,7 @@
 extends ConfirmationDialog
 
-onready var frame_num = $VBoxContainer/GridContainer/FrameNum
-onready var frame_dur = $VBoxContainer/GridContainer/FrameTime
+@onready var frame_num = $VBoxContainer/GridContainer/FrameNum
+@onready var frame_dur = $VBoxContainer/GridContainer/FrameTime
 
 
 func set_frame_label(frame: int) -> void:

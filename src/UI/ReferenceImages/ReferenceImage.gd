@@ -1,5 +1,5 @@
 class_name ReferenceImage
-extends Sprite
+extends Sprite2D
 # A class describing a reference image
 
 signal properties_changed
@@ -61,7 +61,7 @@ func deserialize(d: Dictionary) -> void:
 		if img.load(image_path) == OK:
 			var itex := ImageTexture.new()
 			# don't do FLAG_REPEAT - it could cause visual issues
-			itex.create_from_image(img, Texture.FLAG_MIPMAPS)
+			itex.create_from_image(img) #,Texture2D.FLAG_MIPMAPS
 			texture = itex
 	# Now that the image may have been established...
 	position_reset()
@@ -90,6 +90,6 @@ func deserialize(d: Dictionary) -> void:
 func create_from_image(image: Image) -> void:
 	var itex := ImageTexture.new()
 	# don't do FLAG_REPEAT - it could cause visual issues
-	itex.create_from_image(image, Texture.FLAG_MIPMAPS | Texture.FLAG_FILTER)
+	itex.create_from_image(image) #,Texture2D.FLAG_MIPMAPS | Texture2D.FLAG_FILTER
 	texture = itex
 	position_reset()

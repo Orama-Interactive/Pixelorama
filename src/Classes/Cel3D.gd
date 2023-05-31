@@ -6,13 +6,13 @@ signal scene_property_changed
 signal objects_changed
 
 var size: Vector2
-var viewport: Viewport
-var parent_node: Spatial
-var camera: Camera
+var viewport: SubViewport
+var parent_node: Node3D
+var camera: Camera3D
 var scene_properties := {}
 # Key = Cel3DObject's id, Value = Dictionary containing the properties of the Cel3DObject
 var object_properties := {}
-var selected: Cel3DObject = null setget _set_selected
+var selected: Cel3DObject = null: set = _set_selected
 var current_object_id := 0  # Its value never decreases
 
 
@@ -20,21 +20,21 @@ func _init(_size: Vector2, from_pxo := false, _object_prop := {}, _scene_prop :=
 	size = _size
 	object_properties = _object_prop
 	scene_properties = _scene_prop
-	if scene_properties.empty():
-		var camera_transform := Transform()
+	if scene_properties.is_empty():
+		var camera_transform := Transform3D()
 		camera_transform.origin = Vector3(0, 0, 3)
 		scene_properties = {
 			"camera_transform": camera_transform,
-			"camera_projection": Camera.PROJECTION_PERSPECTIVE,
+			"camera_projection": Camera3D.PROJECTION_PERSPECTIVE,
 			"camera_fov": 70.0,
 			"camera_size": 1.0,
-			"ambient_light_color": Color.black,
+			"ambient_light_color": Color.BLACK,
 			"ambient_light_energy": 1,
 		}
 	_add_nodes()
 	if not from_pxo:
-		if object_properties.empty():
-			var transform := Transform()
+		if object_properties.is_empty():
+			var transform := Transform3D()
 			transform.origin = Vector3(-2.5, 0, 0)
 			object_properties[0] = {"type": Cel3DObject.Type.DIR_LIGHT, "transform": transform}
 			_add_object_node(0)
@@ -42,7 +42,7 @@ func _init(_size: Vector2, from_pxo := false, _object_prop := {}, _scene_prop :=
 
 
 func _add_nodes() -> void:
-	viewport = Viewport.new()
+	viewport = SubViewport.new()
 	viewport.size = size
 	viewport.own_world = true
 	viewport.transparent_bg = true
@@ -51,8 +51,8 @@ func _add_nodes() -> void:
 	var environment := Environment.new()
 	world.environment = environment
 	viewport.world = world
-	parent_node = Spatial.new()
-	camera = Camera.new()
+	parent_node = Node3D.new()
+	camera = Camera3D.new()
 	camera.current = true
 	deserialize_scene_properties()
 	viewport.add_child(camera)
@@ -64,7 +64,7 @@ func _add_nodes() -> void:
 	image_texture = viewport.get_texture()
 
 
-func _get_image_texture() -> Texture:
+func _get_image_texture() -> Texture2D:
 	if not is_instance_valid(viewport):
 		_add_nodes()
 	return image_texture
@@ -155,7 +155,7 @@ func _set_selected(value: Cel3DObject) -> void:
 	if value == selected:
 		return
 	if is_instance_valid(selected):  # Unselect previous object if we selected something else
-		selected.unselect()
+		selected.deselect()
 	selected = value
 	if is_instance_valid(selected):  # Select new object
 		selected.select()
@@ -170,14 +170,14 @@ func get_image() -> Image:
 
 
 func serialize() -> Dictionary:
-	var dict := .serialize()
+	var dict := super.serialize()
 	dict["scene_properties"] = scene_properties
 	dict["object_properties"] = object_properties
 	return dict
 
 
 func deserialize(dict: Dictionary) -> void:
-	.deserialize(dict)
+	super.deserialize(dict)
 	scene_properties = dict["scene_properties"]
 	var objects_copy = dict["object_properties"]
 	for object in objects_copy:
@@ -210,7 +210,7 @@ func load_image_data_from_pxo(file: File, project_size: Vector2) -> void:
 
 
 func instantiate_cel_button() -> Node:
-	return Global.cel_3d_button_node.instance()
+	return Global.cel_3d_button_node.instantiate()
 
 
 func get_class_name() -> String:

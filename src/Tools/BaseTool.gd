@@ -7,7 +7,7 @@ var tool_slot = null  # Tools.Slot, can't have static typing due to cyclic error
 var cursor_text := ""
 var _cursor := Vector2.INF
 
-var _draw_cache: PoolVector2Array = []  # for storing already drawn pixels
+var _draw_cache: PackedVector2Array = []  # for storing already drawn pixels
 var _for_frame := 0  # cache for which frame?
 
 # Only use "_spacing_mode" and "_spacing" variables (the others are set automatically)
@@ -16,7 +16,7 @@ var _spacing_mode := false  # Enables spacing (continuous gaps between two strok
 var _spacing := Vector2.ZERO  # Spacing between two strokes
 var _stroke_dimensions := Vector2.ONE  # 2d vector containing _brush_size from Draw.gd
 var _spacing_offset := Vector2.ZERO  # The "INITIAL" error between position and position.snapped()
-onready var color_rect: ColorRect = $ColorRect
+@onready var color_rect: ColorRect = $ColorRect
 
 
 func _ready() -> void:
@@ -164,7 +164,7 @@ func snap_position(position: Vector2) -> Vector2:
 				continue
 			for i in point.lines.size():
 				if point.lines[i].has("angle") and point.lines[i].has("length"):  # Sanity check
-					var angle: float = deg2rad(point.lines[i].angle)
+					var angle: float = deg_to_rad(point.lines[i].angle)
 					var length: float = point.lines[i].length
 					var start = Vector2(point.pos_x, point.pos_y)
 					var s1: Vector2 = start
@@ -217,12 +217,12 @@ func _get_closest_point_to_grid(position: Vector2, distance: float, grid_pos: Ve
 func _get_closest_point_to_segment(
 	position: Vector2, distance: float, s1: Vector2, s2: Vector2
 ) -> Vector2:
-	var test_line := (s2 - s1).rotated(deg2rad(90)).normalized()
+	var test_line := (s2 - s1).rotated(deg_to_rad(90)).normalized()
 	var from_a := position - test_line * distance
 	var from_b := position + test_line * distance
 	var closest_point := Vector2.INF
-	if Geometry.segment_intersects_segment_2d(from_a, from_b, s1, s2):
-		closest_point = Geometry.get_closest_point_to_segment_2d(position, s1, s2)
+	if Geometry.segment_intersects_segment(from_a, from_b, s1, s2):
+		closest_point = Geometry.get_closest_point_to_segment(position, s1, s2)
 	return closest_point
 
 

@@ -3,30 +3,30 @@
 [ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=2]
 
 [node name="ImageEffectParent" type="ConfirmationDialog"]
-margin_right = 294.0
-margin_bottom = 296.0
-rect_min_size = Vector2( 172, 60.2 )
+offset_right = 294.0
+offset_bottom = 296.0
+custom_minimum_size = Vector2( 172, 60.2 )
 resizable = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 286.0
-margin_bottom = 260.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 286.0
+offset_bottom = 260.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_right = 279.0
-margin_bottom = 200.0
+offset_right = 279.0
+offset_bottom = 200.0
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 39.5
-margin_right = 239.5
-margin_bottom = 200.0
-rect_min_size = Vector2( 200, 200 )
+offset_left = 39.5
+offset_right = 239.5
+offset_bottom = 200.0
+custom_minimum_size = Vector2( 200, 200 )
 expand = true
 stretch_mode = 5
 
@@ -34,26 +34,26 @@ stretch_mode = 5
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 0.0
-margin_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="OptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 204.0
-margin_right = 279.0
-margin_bottom = 228.0
+offset_top = 204.0
+offset_right = 279.0
+offset_bottom = 228.0
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
-margin_right = 160.0
-margin_bottom = 24.0
+offset_right = 160.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 pressed = true
 text = "Only affect selection"
 
 [node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 164.0
-margin_right = 279.0
-margin_bottom = 24.0
+offset_left = 164.0
+offset_right = 279.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Selected cels"
@@ -61,35 +61,35 @@ items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1
 selected = 0
 
 [node name="AnimationOptions" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 232.0
-margin_right = 279.0
-margin_bottom = 266.0
+offset_top = 232.0
+offset_right = 279.0
+offset_bottom = 266.0
 
 [node name="Label" type="Label" parent="VBoxContainer/AnimationOptions"]
-margin_top = 10.0
-margin_right = 58.0
-margin_bottom = 24.0
+offset_top = 10.0
+offset_right = 58.0
+offset_bottom = 24.0
 text = "Animate:"
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/AnimationOptions"]
-margin_left = 62.0
-margin_right = 158.0
-margin_bottom = 34.0
+offset_left = 62.0
+offset_right = 158.0
+offset_bottom = 34.0
 size_flags_horizontal = 3
 
 [node name="AnimateMenu" type="MenuButton" parent="VBoxContainer/AnimationOptions/PanelContainer"]
 unique_name_in_owner = true
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 89.0
-margin_bottom = 27.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 89.0
+offset_bottom = 27.0
 focus_mode = 2
 text = "Properties"
 flat = false
 
 [node name="InitalButton" type="Button" parent="VBoxContainer/AnimationOptions"]
 unique_name_in_owner = true
-margin_left = 162.0
-margin_right = 279.0
-margin_bottom = 34.0
+offset_left = 162.0
+offset_right = 279.0
+offset_bottom = 34.0
 text = "Set initial values"

@@ -1,12 +1,12 @@
 class_name BaseCel
-extends Reference
+extends RefCounted
 ## Base class for cel properties.
 ## The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
 
 signal texture_changed
 
 var opacity := 1.0
-var image_texture: Texture setget , _get_image_texture
+var image_texture: Texture2D: get = _get_image_texture
 # If the cel is linked a ref to the link set Dictionary this cel is in, or null if not linked:
 var link_set = null  # { "cels": Array, "hue": float } or null
 var transformed_content: Image  # Used in transformations (moving, scaling etc with selections)
@@ -14,7 +14,7 @@ var transformed_content: Image  # Used in transformations (moving, scaling etc w
 # Methods to Override:
 
 
-func _get_image_texture() -> Texture:
+func _get_image_texture() -> Texture2D:
 	return image_texture
 
 

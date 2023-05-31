@@ -1,7 +1,7 @@
 extends "res://src/Tools/ShapeDrawer.gd"
 
 
-func _get_shape_points_filled(size: Vector2) -> PoolVector2Array:
+func _get_shape_points_filled(size: Vector2) -> PackedVector2Array:
 	var array := []
 	var t_of := _thickness - 1
 
@@ -9,12 +9,12 @@ func _get_shape_points_filled(size: Vector2) -> PoolVector2Array:
 		for x in range(size.x + t_of):
 			array.append(Vector2(x, y))
 
-	return PoolVector2Array(array)
+	return PackedVector2Array(array)
 
 
-func _get_shape_points(size: Vector2) -> PoolVector2Array:
+func _get_shape_points(size: Vector2) -> PackedVector2Array:
 	if _thickness == 1:
-		return PoolVector2Array(_get_rectangle_points(Vector2(0, 0), size))
+		return PackedVector2Array(_get_rectangle_points(Vector2(0, 0), size))
 
 	var array := []
 	var t_of := _thickness - 1
@@ -22,7 +22,7 @@ func _get_shape_points(size: Vector2) -> PoolVector2Array:
 		var point_size := size + Vector2(2, 2) * (t_of - i) - Vector2.ONE * t_of
 		array += _get_rectangle_points(Vector2(i, i), point_size)
 
-	return PoolVector2Array(array)
+	return PackedVector2Array(array)
 
 
 func _get_rectangle_points(pos: Vector2, size: Vector2) -> Array:

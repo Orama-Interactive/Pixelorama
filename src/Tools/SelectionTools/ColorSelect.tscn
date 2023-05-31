@@ -8,9 +8,9 @@
 script = ExtResource( 2 )
 
 [node name="SimilaritySlider" parent="." index="9" instance=ExtResource( 3 )]
-margin_top = 174.0
-margin_right = 116.0
-margin_bottom = 198.0
+offset_top = 174.0
+offset_right = 116.0
+offset_bottom = 198.0
 value = 100.0
 prefix = "Similarity:"
 

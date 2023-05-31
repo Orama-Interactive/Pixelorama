@@ -1,5 +1,5 @@
 class_name Frame
-extends Reference
+extends RefCounted
 # A class for frame properties.
 # A frame is a collection of cels, for each layer.
 

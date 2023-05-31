@@ -15,19 +15,19 @@ var current_frame_no := 0  # used to compare with skip_amount to see if it can b
 
 var resize := 100
 
-onready var project_list := $"%TargetProjectOption" as OptionButton
-onready var folder_button := $"%Folder" as Button
-onready var start_button := $"%Start" as Button
-onready var size_label := $"%Size" as Label
-onready var path_field := $"%Path" as LineEdit
+@onready var project_list := $"%TargetProjectOption" as OptionButton
+@onready var folder_button := $"%Folder" as Button
+@onready var start_button := $"%Start" as Button
+@onready var size_label := $"%Size" as Label
+@onready var path_field := $"%Path3D" as LineEdit
 
 
 func _ready() -> void:
 	refresh_projects_list()
 	project = Global.current_project
-	connect("frame_saved", self, "_on_frame_saved")
+	connect("frame_saved", Callable(self, "_on_frame_saved"))
 	# Make a recordings folder if there isn't one
-	var dir := Directory.new()
+	var dir := DirAccess.new()
 	chosen_dir = Global.directory_module.xdg_data_home.plus_file("Recordings")
 	dir.make_dir_recursive(chosen_dir)
 	path_field.text = chosen_dir
@@ -58,7 +58,7 @@ func initialize_recording() -> void:
 		project.name, OS.get_time().hour, "_", OS.get_time().minute, "_", OS.get_time().second
 	)
 	save_dir = save_dir.plus_file(folder)
-	var dir := Directory.new()
+	var dir := DirAccess.new()
 
 # warning-ignore:return_value_discarded
 	dir.make_dir_recursive(save_dir)
@@ -83,7 +83,7 @@ func capture_frame() -> void:
 
 	if mode == Mode.CANVAS:
 		if resize != 100:
-			image.unlock()
+			false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			image.resize(image.get_size().x * resize / 100, image.get_size().y * resize / 100, 0)
 
 	cache.append(image)
@@ -123,11 +123,11 @@ func finalize_recording() -> void:
 
 
 func disconnect_undo() -> void:
-	project.undo_redo.disconnect("version_changed", self, "capture_frame")
+	project.undo_redo.disconnect("version_changed", Callable(self, "capture_frame"))
 
 
 func connect_undo() -> void:
-	project.undo_redo.connect("version_changed", self, "capture_frame")
+	project.undo_redo.connect("version_changed", Callable(self, "capture_frame"))
 
 
 func _on_TargetProjectOption_item_selected(index: int) -> void:
@@ -154,9 +154,9 @@ func _on_Start_toggled(button_pressed: bool) -> void:
 
 
 func _on_Settings_pressed() -> void:
-	var settings := $Dialogs/Options as WindowDialog
-	var pos := rect_position
-	settings.popup(Rect2(pos, settings.rect_size))
+	var settings := $Dialogs/Options as Window
+	var pos := position
+	settings.popup(Rect2(pos, settings.size))
 
 
 func _on_SkipAmount_value_changed(value: float) -> void:
@@ -179,8 +179,8 @@ func _on_SpinBox_value_changed(value: float) -> void:
 
 
 func _on_Choose_pressed() -> void:
-	$Dialogs/Path.popup_centered()
-	$Dialogs/Path.current_dir = chosen_dir
+	$Dialogs/Path3D.popup_centered()
+	$Dialogs/Path3D.current_dir = chosen_dir
 
 
 func _on_Open_pressed() -> void:
@@ -195,5 +195,5 @@ func _on_Path_dir_selected(dir: String) -> void:
 
 func _on_Fps_value_changed(value: float) -> void:
 	var dur_label := $Dialogs/Options/PanelContainer/VBoxContainer/Fps/Duration as Label
-	var duration := stepify(1.0 / value, 0.0001)
+	var duration := snapped(1.0 / value, 0.0001)
 	dur_label.text = str("= ", duration, " sec")

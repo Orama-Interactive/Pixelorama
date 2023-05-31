@@ -47,30 +47,30 @@ func _on_FillCheckbox_toggled(button_pressed: bool) -> void:
 
 
 func get_config() -> Dictionary:
-	var config := .get_config()
+	var config := super.get_config()
 	config["fill"] = _fill
 	config["thickness"] = _thickness
 	return config
 
 
 func set_config(config: Dictionary) -> void:
-	.set_config(config)
+	super.set_config(config)
 	_fill = config.get("fill", _fill)
 	_thickness = config.get("thickness", _thickness)
 
 
 func update_config() -> void:
-	.update_config()
-	$FillCheckbox.pressed = _fill
+	super.update_config()
+	$FillCheckbox.button_pressed = _fill
 	$ThicknessSlider.value = _thickness
 
 
-func _get_shape_points(_size: Vector2) -> PoolVector2Array:
-	return PoolVector2Array()
+func _get_shape_points(_size: Vector2) -> PackedVector2Array:
+	return PackedVector2Array()
 
 
-func _get_shape_points_filled(_size: Vector2) -> PoolVector2Array:
-	return PoolVector2Array()
+func _get_shape_points_filled(_size: Vector2) -> PackedVector2Array:
+	return PackedVector2Array()
 
 
 func _input(event: InputEvent) -> void:
@@ -83,7 +83,7 @@ func _input(event: InputEvent) -> void:
 
 func draw_start(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_start(position)
+	super.draw_start(position)
 	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
 		_pick_color(position)
@@ -104,7 +104,7 @@ func draw_start(position: Vector2) -> void:
 
 func draw_move(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_move(position)
+	super.draw_move(position)
 	if _picking_color:  # Still return even if we released draw_color_picker (Alt)
 		if Input.is_action_pressed("draw_color_picker"):
 			_pick_color(position)
@@ -123,7 +123,7 @@ func draw_move(position: Vector2) -> void:
 
 func draw_end(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_end(position)
+	super.draw_end(position)
 	if _picking_color:
 		return
 
@@ -163,7 +163,7 @@ func draw_preview() -> void:
 		canvas.draw_set_transform(transform_pos.ceil(), canvas.rotation, canvas.scale)
 
 		for line in _create_polylines(indicator):
-			canvas.draw_polyline(PoolVector2Array(line), Color.black)
+			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
@@ -171,7 +171,7 @@ func draw_preview() -> void:
 func _draw_shape(origin: Vector2, dest: Vector2) -> void:
 	var rect := _get_result_rect(origin, dest)
 	var points := _get_points(rect.size)
-	prepare_undo("Draw Shape")
+	prepare_undo("Draw Shape3D")
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
@@ -213,7 +213,7 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 	return rect
 
 
-func _get_points(size: Vector2) -> PoolVector2Array:
+func _get_points(size: Vector2) -> PackedVector2Array:
 	return _get_shape_points_filled(size) if _fill else _get_shape_points(size)
 
 

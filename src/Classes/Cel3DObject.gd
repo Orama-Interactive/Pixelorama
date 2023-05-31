@@ -1,5 +1,5 @@
 class_name Cel3DObject
-extends Spatial
+extends Node3D
 
 signal property_changed
 
@@ -21,28 +21,28 @@ enum Gizmos { NONE, X_POS, Y_POS, Z_POS, X_ROT, Y_ROT, Z_ROT, X_SCALE, Y_SCALE, 
 
 var cel
 var id := -1
-var type: int = Type.BOX setget _set_type
+var type: int = Type.BOX: set = _set_type
 var selected := false
 var hovered := false
-var box_shape: BoxShape
-var camera: Camera
-var file_path := "" setget _set_file_path  # Only useful for Type.IMPORTED
+var box_shape: BoxShape3D
+var camera: Camera3D
+var file_path := "": set = _set_file_path
 var applying_gizmos: int = Gizmos.NONE
-var node3d_type: VisualInstance
+var node3d_type: VisualInstance3D
 
 var dir_light_texture := preload("res://assets/graphics/gizmos/directional_light.svg")
 var spot_light_texture := preload("res://assets/graphics/gizmos/spot_light.svg")
 var omni_light_texture := preload("res://assets/graphics/gizmos/omni_light.svg")
 
-onready var gizmos_3d: Node2D = Global.canvas.gizmos_3d
+@onready var gizmos_3d: Node2D = Global.canvas.gizmos_3d
 
 
 func _ready() -> void:
-	camera = get_viewport().get_camera()
-	var static_body := StaticBody.new()
-	var collision_shape := CollisionShape.new()
-	box_shape = BoxShape.new()
-	box_shape.extents = scale
+	camera = get_viewport().get_camera_3d()
+	var static_body := StaticBody3D.new()
+	var collision_shape := CollisionShape3D.new()
+	box_shape = BoxShape3D.new()
+	box_shape.size = scale
 	collision_shape.shape = box_shape
 	static_body.add_child(collision_shape)
 	add_child(static_body)
@@ -76,7 +76,7 @@ func serialize() -> Dictionary:
 				dict["mesh_is_hemisphere"] = mesh.is_hemisphere
 			Type.CAPSULE:
 				dict["mesh_radius"] = mesh.radius
-				dict["mesh_mid_height"] = mesh.mid_height
+				dict["mesh_mid_height"] = mesh.height
 				dict["mesh_radial_segments"] = mesh.radial_segments
 				dict["mesh_rings"] = mesh.rings
 			Type.CYLINDER:
@@ -130,7 +130,7 @@ func deserialize(dict: Dictionary) -> void:
 				mesh.is_hemisphere = dict["mesh_is_hemisphere"]
 			Type.CAPSULE:
 				mesh.radius = dict["mesh_radius"]
-				mesh.mid_height = dict["mesh_mid_height"]
+				mesh.height = dict["mesh_mid_height"]
 				mesh.radial_segments = dict["mesh_radial_segments"]
 				mesh.rings = dict["mesh_rings"]
 			Type.CYLINDER:
@@ -160,7 +160,7 @@ func deserialize(dict: Dictionary) -> void:
 
 
 func _is_mesh() -> bool:
-	return node3d_type is MeshInstance
+	return node3d_type is MeshInstance3D
 
 
 func _set_type(value: int) -> void:
@@ -171,42 +171,42 @@ func _set_type(value: int) -> void:
 		node3d_type.queue_free()
 	match type:
 		Type.BOX:
-			node3d_type = MeshInstance.new()
-			node3d_type.mesh = CubeMesh.new()
+			node3d_type = MeshInstance3D.new()
+			node3d_type.mesh = BoxMesh.new()
 		Type.SPHERE:
-			node3d_type = MeshInstance.new()
+			node3d_type = MeshInstance3D.new()
 			node3d_type.mesh = SphereMesh.new()
 		Type.CAPSULE:
-			node3d_type = MeshInstance.new()
+			node3d_type = MeshInstance3D.new()
 			node3d_type.mesh = CapsuleMesh.new()
 		Type.CYLINDER:
-			node3d_type = MeshInstance.new()
+			node3d_type = MeshInstance3D.new()
 			node3d_type.mesh = CylinderMesh.new()
 		Type.PRISM:
-			node3d_type = MeshInstance.new()
+			node3d_type = MeshInstance3D.new()
 			node3d_type.mesh = PrismMesh.new()
 		Type.PLANE:
-			node3d_type = MeshInstance.new()
+			node3d_type = MeshInstance3D.new()
 			node3d_type.mesh = PlaneMesh.new()
 		Type.TEXT:
-			node3d_type = MeshInstance.new()
+			node3d_type = MeshInstance3D.new()
 			var mesh := TextMesh.new()
 			mesh.font = Global.control.theme.default_font
 			mesh.text = "Sample"
 			node3d_type.mesh = mesh
 		Type.DIR_LIGHT:
-			node3d_type = DirectionalLight.new()
+			node3d_type = DirectionalLight3D.new()
 			gizmos_3d.add_always_visible(self, dir_light_texture)
 		Type.SPOT_LIGHT:
-			node3d_type = SpotLight.new()
+			node3d_type = SpotLight3D.new()
 			gizmos_3d.add_always_visible(self, spot_light_texture)
 		Type.OMNI_LIGHT:
-			node3d_type = OmniLight.new()
+			node3d_type = OmniLight3D.new()
 			gizmos_3d.add_always_visible(self, omni_light_texture)
 		Type.IMPORTED:
-			node3d_type = MeshInstance.new()
+			node3d_type = MeshInstance3D.new()
 			var mesh: Mesh
-			if not file_path.empty():
+			if not file_path.is_empty():
 				mesh = ObjParse.load_obj(file_path)
 			node3d_type.mesh = mesh
 	add_child(node3d_type)
@@ -214,7 +214,7 @@ func _set_type(value: int) -> void:
 
 func _set_file_path(value: String) -> void:
 	file_path = value
-	if file_path.empty():
+	if file_path.is_empty():
 		return
 	if type == Type.IMPORTED:
 		node3d_type.mesh = ObjParse.load_obj(file_path)
@@ -222,7 +222,7 @@ func _set_file_path(value: String) -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_EXIT_TREE:
-		unselect()
+		deselect()
 		gizmos_3d.remove_always_visible(self)
 
 
@@ -231,7 +231,7 @@ func select() -> void:
 	gizmos_3d.get_points(camera, self)
 
 
-func unselect() -> void:
+func deselect() -> void:
 	selected = false
 	gizmos_3d.clear_points(self)
 
@@ -280,7 +280,7 @@ func change_transform(a: Vector3, b: Vector3) -> void:
 
 
 func move(position: Vector3) -> void:
-	translation += position
+	position += position
 	change_property()
 
 
@@ -290,14 +290,14 @@ func move_axis(diff: Vector3, axis: Vector3) -> void:
 	if axis_v2 == Vector2.ZERO:
 		axis_v2 = Vector2(axis.y, axis.z).normalized()
 	var diff_v2 := Vector2(diff.x, diff.y).normalized()
-	translation += axis * axis_v2.dot(diff_v2) * diff.length()
+	position += axis * axis_v2.dot(diff_v2) * diff.length()
 	change_property()
 
 
 func change_rotation(a: Vector3, b: Vector3, axis: Vector3) -> void:
-	var a_local := a - translation
+	var a_local := a - position
 	var a_local_v2 := Vector2(a_local.x, a_local.y)
-	var b_local := b - translation
+	var b_local := b - position
 	var b_local_v2 := Vector2(b_local.x, b_local.y)
 	var angle := b_local_v2.angle_to(a_local_v2)
 	# Rotate the object around a basis axis, instead of a fixed axis, such as

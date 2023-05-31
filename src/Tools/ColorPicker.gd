@@ -47,17 +47,17 @@ func update_config() -> void:
 
 
 func draw_start(position: Vector2) -> void:
-	.draw_start(position)
+	super.draw_start(position)
 	_pick_color(position)
 
 
 func draw_move(position: Vector2) -> void:
-	.draw_move(position)
+	super.draw_move(position)
 	_pick_color(position)
 
 
 func draw_end(position: Vector2) -> void:
-	.draw_end(position)
+	super.draw_end(position)
 
 
 func _pick_color(position: Vector2) -> void:
@@ -79,14 +79,14 @@ func _pick_color(position: Vector2) -> void:
 				var idx = (project.layers.size() - 1) - layer
 				if project.layers[idx].is_visible_in_hierarchy():
 					image = curr_frame.cels[idx].get_image()
-					image.lock()
+					false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 					color = image.get_pixelv(position)
-					image.unlock()
+					false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 					if color != Color(0, 0, 0, 0):
 						break
 		CURRENT_LAYER:
-			image.lock()
+			false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			color = image.get_pixelv(position)
-			image.unlock()
-	var button := BUTTON_LEFT if _color_slot == 0 else BUTTON_RIGHT
+			false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	var button := MOUSE_BUTTON_LEFT if _color_slot == 0 else MOUSE_BUTTON_RIGHT
 	Tools.assign_color(color, button, false)

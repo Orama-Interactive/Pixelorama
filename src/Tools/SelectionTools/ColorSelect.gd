@@ -5,7 +5,7 @@ var _similarity := 100
 
 
 func get_config() -> Dictionary:
-	var config := .get_config()
+	var config := super.get_config()
 	config["similarity"] = _similarity
 	return config
 
@@ -25,7 +25,7 @@ func _on_Similarity_value_changed(value: float) -> void:
 
 
 func apply_selection(position: Vector2) -> void:
-	.apply_selection(position)
+	super.apply_selection(position)
 	var project: Project = Global.current_project
 	if position.x < 0 or position.y < 0:
 		return
@@ -34,9 +34,9 @@ func apply_selection(position: Vector2) -> void:
 
 	var cel_image := Image.new()
 	cel_image.copy_from(_get_draw_image())
-	cel_image.lock()
+	false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var color := cel_image.get_pixelv(position)
-	cel_image.unlock()
+	false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var operation := 0
 	if _subtract:
 		operation = 1
@@ -46,7 +46,7 @@ func apply_selection(position: Vector2) -> void:
 	var params := {"color": color, "similarity_percent": _similarity, "operation": operation}
 	if _add or _subtract or _intersect:
 		var selection_tex := ImageTexture.new()
-		selection_tex.create_from_image(project.selection_map, 0)
+		selection_tex.create_from_image(project.selection_map) #,0
 		params["selection"] = selection_tex
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(cel_image, shader, params, project.size)

@@ -2,15 +2,15 @@ extends Button
 
 var frame := 0
 
-onready var popup_menu: PopupMenu = $PopupMenu
-onready var frame_properties: ConfirmationDialog = Global.control.find_node("FrameProperties")
+@onready var popup_menu: PopupMenu = $PopupMenu
+@onready var frame_properties: ConfirmationDialog = Global.control.find_child("FrameProperties")
 
 
 func _ready() -> void:
-	rect_min_size.x = Global.animation_timeline.cel_size
+	custom_minimum_size.x = Global.animation_timeline.cel_size
 	text = str(frame + 1)
-	connect("pressed", self, "_button_pressed")
-	connect("mouse_entered", self, "_update_tooltip")
+	connect("pressed", Callable(self, "_button_pressed"))
+	connect("mouse_entered", Callable(self, "_update_tooltip"))
 
 
 func _update_tooltip() -> void:
@@ -19,7 +19,7 @@ func _update_tooltip() -> void:
 	var duration_str := str(duration_sec)
 	if "." in duration_str:  # If its a decimal value
 		duration_str = "%.2f" % duration_sec  # Up to 2 decimal places
-	hint_tooltip = "%s: %sx (%s sec)" % [tr("Duration"), str(duration), duration_str]
+	tooltip_text = "%s: %sx (%s sec)" % [tr("Duration"), str(duration), duration_str]
 
 
 func _button_pressed() -> void:
@@ -104,9 +104,9 @@ func change_frame_order(rate: int) -> void:
 	project.undo_redo.commit_action()
 
 
-func get_drag_data(_position) -> Array:
+func _get_drag_data(_position) -> Array:
 	var button := Button.new()
-	button.rect_size = rect_size
+	button.size = size
 	button.theme = Global.control.theme
 	button.text = text
 	set_drag_preview(button)
@@ -114,7 +114,7 @@ func get_drag_data(_position) -> Array:
 	return ["Frame", frame]
 
 
-func can_drop_data(_pos, data) -> bool:
+func _can_drop_data(_pos, data) -> bool:
 	if typeof(data) == TYPE_ARRAY:
 		if data[0] == "Frame":
 			if data[1] != frame:  # Can't move to same frame
@@ -128,15 +128,15 @@ func can_drop_data(_pos, data) -> bool:
 					else:
 						region = _get_region_rect(0.875, 1.125)
 						region.position.x += 2  # Container spacing
-				Global.animation_timeline.drag_highlight.rect_global_position = region.position
-				Global.animation_timeline.drag_highlight.rect_size = region.size
+				Global.animation_timeline.drag_highlight.global_position = region.position
+				Global.animation_timeline.drag_highlight.size = region.size
 				Global.animation_timeline.drag_highlight.visible = true
 				return true
 	Global.animation_timeline.drag_highlight.visible = false
 	return false
 
 
-func drop_data(_pos, data) -> void:
+func _drop_data(_pos, data) -> void:
 	var drop_frame = data[1]
 	var project = Global.current_project
 	project.undo_redo.create_action("Change Frame Order")

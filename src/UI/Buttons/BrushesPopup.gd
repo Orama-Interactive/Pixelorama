@@ -21,19 +21,19 @@ func _ready() -> void:
 	var container = get_node("Background/Brushes/Categories/DefaultBrushContainer")
 	var button := create_button(pixel_image)
 	button.brush.type = PIXEL
-	button.hint_tooltip = "Pixel brush"
+	button.tooltip_text = "Pixel brush"
 	container.add_child(button)
 	button.brush.index = button.get_index()
 
 	button = create_button(circle_image)
 	button.brush.type = CIRCLE
-	button.hint_tooltip = "Circle brush"
+	button.tooltip_text = "Circle brush"
 	container.add_child(button)
 	button.brush.index = button.get_index()
 
 	button = create_button(circle_filled_image)
 	button.brush.type = FILLED_CIRCLE
-	button.hint_tooltip = "Filled circle brush"
+	button.tooltip_text = "Filled circle brush"
 	container.add_child(button)
 	button.brush.index = button.get_index()
 
@@ -51,9 +51,9 @@ static func get_default_brush() -> Brush:
 
 
 static func create_button(image: Image) -> Node:
-	var button: BaseButton = preload("res://src/UI/Buttons/BrushButton.tscn").instance()
+	var button: BaseButton = preload("res://src/UI/Buttons/BrushButton.tscn").instantiate()
 	var tex := ImageTexture.new()
-	tex.create_from_image(image, 0)
+	tex.create_from_image(image) #,0
 	button.get_node("BrushTexture").texture = tex
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	return button
@@ -64,7 +64,7 @@ static func add_file_brush(images: Array, hint := "") -> void:
 	button.brush.type = FILE if images.size() == 1 else RANDOM_FILE
 	button.brush.image = images[0]
 	button.brush.random = images
-	button.hint_tooltip = hint
+	button.tooltip_text = hint
 	var container
 	if button.brush.type == RANDOM_FILE:
 		container = Global.brushes_popup.get_node(
@@ -82,7 +82,7 @@ static func add_project_brush(image: Image, hint := "") -> void:
 	var button := create_button(image)
 	button.brush.type = CUSTOM
 	button.brush.image = image
-	button.hint_tooltip = hint
+	button.tooltip_text = hint
 	var container = Global.brushes_popup.get_node(
 		"Background/Brushes/Categories/ProjectBrushContainer"
 	)

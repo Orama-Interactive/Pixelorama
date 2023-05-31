@@ -1,26 +1,26 @@
-tool
+@tool
 class_name ValueSliderV2
 extends HBoxContainer
 
 signal value_changed(value)
 signal ratio_toggled(button_pressed)
 
-export var editable := true setget _set_editable
-export var value := Vector2.ZERO setget _set_value
-export var min_value := Vector2.ZERO setget _set_min_value
-export var max_value := Vector2(100.0, 100.0) setget _set_max_value
-export var step := 1.0 setget _set_step
-export var allow_greater := false setget _set_allow_greater
-export var allow_lesser := false setget _set_allow_lesser
-export var show_ratio := false setget _set_show_ratio
-export(int, 1, 2) var grid_columns := 1 setget _set_grid_columns
-export var slider_min_size := Vector2(32, 24) setget _set_slider_min_size
-export var snap_step := 1.0 setget _set_snap_step
-export var snap_by_default := false setget _set_snap_by_default
-export var prefix_x := "X:" setget _set_prefix_x
-export var prefix_y := "Y:" setget _set_prefix_y
-export var suffix_x := "" setget _set_suffix_x
-export var suffix_y := "" setget _set_suffix_y
+@export var editable := true: set = _set_editable
+@export var value := Vector2.ZERO: set = _set_value
+@export var min_value := Vector2.ZERO: set = _set_min_value
+@export var max_value := Vector2(100.0, 100.0): set = _set_max_value
+@export var step := 1.0: set = _set_step
+@export var allow_greater := false: set = _set_allow_greater
+@export var allow_lesser := false: set = _set_allow_lesser
+@export var show_ratio := false: set = _set_show_ratio
+@export var grid_columns := 1: set = _set_grid_columns
+@export var slider_min_size := Vector2(32, 24): set = _set_slider_min_size
+@export var snap_step := 1.0: set = _set_snap_step
+@export var snap_by_default := false: set = _set_snap_by_default
+@export var prefix_x := "X:": set = _set_prefix_x
+@export var prefix_y := "Y:": set = _set_prefix_y
+@export var suffix_x := "": set = _set_suffix_x
+@export var suffix_y := "": set = _set_suffix_y
 
 var ratio := Vector2.ONE
 var _locked_ratio := false
@@ -28,7 +28,7 @@ var _can_emit_signal := true
 
 
 func _ready() -> void:
-	if not Engine.editor_hint:  # Pixelorama specific code
+	if not Engine.is_editor_hint():  # Pixelorama specific code
 		$Ratio.modulate = Global.modulate_icon_color
 
 
@@ -37,7 +37,7 @@ func get_sliders() -> Array:
 
 
 func press_ratio_button(pressed: bool) -> void:
-	$"%RatioButton".pressed = pressed
+	$"%RatioButton".button_pressed = pressed
 
 
 # Greatest common divisor
@@ -132,7 +132,7 @@ func _set_grid_columns(val: int) -> void:
 func _set_slider_min_size(val: Vector2) -> void:
 	slider_min_size = val
 	for slider in get_sliders():
-		slider.rect_min_size = val
+		slider.custom_minimum_size = val
 
 
 func _set_snap_step(val: float) -> void:

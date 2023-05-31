@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func _notification(notification: int) -> void:
-	if notification == MainLoop.NOTIFICATION_WM_FOCUS_IN:
+	if notification == MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
 		emit_signal("in_focus")
 
 
@@ -80,9 +80,9 @@ func load_image(load_directly := true):
 	# Execute JS function
 	JavaScript.eval("upload_image();", true)  # Opens prompt for choosing file
 
-	yield(self, "in_focus")  # Wait until JS prompt is closed
+	await self.in_focus  # Wait until JS prompt is closed
 
-	yield(get_tree().create_timer(0.5), "timeout")  # Give some time for async JS data load
+	await get_tree().create_timer(0.5).timeout  # Give some time for async JS data load
 
 	if JavaScript.eval("canceled;", true):  # If File Dialog closed w/o file
 		return
@@ -93,7 +93,7 @@ func load_image(load_directly := true):
 		image_data = JavaScript.eval("fileData;", true)
 		if image_data != null:
 			break
-		yield(get_tree().create_timer(1.0), "timeout")  # Need more time to load data
+		await get_tree().create_timer(1.0).timeout  # Need more time to load data
 
 	var image_type = JavaScript.eval("fileType;", true)
 	var image_name = JavaScript.eval("fileName;", true)
@@ -137,9 +137,9 @@ func load_shader() -> void:
 	# Execute JS function
 	JavaScript.eval("upload_shader();", true)  # Opens prompt for choosing file
 
-	yield(self, "in_focus")  # Wait until JS prompt is closed
+	await self.in_focus  # Wait until JS prompt is closed
 
-	yield(get_tree().create_timer(0.5), "timeout")  # Give some time for async JS data load
+	await get_tree().create_timer(0.5).timeout  # Give some time for async JS data load
 
 	if JavaScript.eval("canceled;", true):  # If File Dialog closed w/o file
 		return
@@ -150,7 +150,7 @@ func load_shader() -> void:
 		file_data = JavaScript.eval("fileData;", true)
 		if file_data != null:
 			break
-		yield(get_tree().create_timer(1.0), "timeout")  # Need more time to load data
+		await get_tree().create_timer(1.0).timeout  # Need more time to load data
 
 #	var file_type = JavaScript.eval("fileType;", true)
 	var file_name = JavaScript.eval("fileName;", true)

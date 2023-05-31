@@ -12,14 +12,14 @@ func _init(_project, _name := "") -> void:
 
 
 func serialize() -> Dictionary:
-	var dict := .serialize()
+	var dict := super.serialize()
 	dict["type"] = get_layer_type()
 	dict["new_cels_linked"] = new_cels_linked
 	return dict
 
 
 func deserialize(dict: Dictionary) -> void:
-	.deserialize(dict)
+	super.deserialize(dict)
 	new_cels_linked = dict.new_cels_linked
 
 
@@ -38,4 +38,4 @@ func can_layer_get_drawn() -> bool:
 
 
 func instantiate_layer_button() -> Node:
-	return Global.pixel_layer_button_node.instance()
+	return Global.pixel_layer_button_node.instantiate()

@@ -7,17 +7,17 @@ var _ignore_spinbox_changes = false
 
 func _ready():
 	if OS.get_name() == "HTML5":
-		$Interior/PathHeader/Path.visible = false
+		$Interior/PathHeader/Path3D.visible = false
 		$Interior/PathHeader/PathHTML.text = element.image_path
 	else:
 		$Interior/PathHeader/PathHTML.visible = false
-		$Interior/PathHeader/Path.text = element.image_path
+		$Interior/PathHeader/Path3D.text = element.image_path
 
 	if !element.texture:
 		$Interior/PreviewAndOptions/PreviewPanel/Warning.text = "Image Not Found!!!"
 	else:
 		$Interior/PreviewAndOptions/PreviewPanel/Preview.texture = element.texture
-	element.connect("properties_changed", self, "_update_properties")
+	element.connect("properties_changed", Callable(self, "_update_properties"))
 	_update_properties()
 
 
@@ -31,7 +31,7 @@ func _update_properties():
 	$Interior/PreviewAndOptions/Options/Position/X.max_value = element.project.size.x
 	$Interior/PreviewAndOptions/Options/Position/Y.max_value = element.project.size.y
 	$Interior/PreviewAndOptions/Options/Opacity.value = element.modulate.a * 100
-	$Interior/OtherOptions/ApplyFilter.pressed = element.filter
+	$Interior/OtherOptions/ApplyFilter.button_pressed = element.filter
 	_ignore_spinbox_changes = false
 
 
@@ -79,14 +79,14 @@ func _on_Opacity_value_changed(value):
 
 
 func _on_Path_pressed() -> void:
-	OS.shell_open($Interior/PathHeader/Path.text.get_base_dir())
+	OS.shell_open($Interior/PathHeader/Path3D.text.get_base_dir())
 
 
 func _on_ApplyFilter_toggled(button_pressed: bool) -> void:
 	element.filter = button_pressed
 	if element.texture:
 		if element.filter:
-			element.texture.flags = Texture.FLAG_MIPMAPS | Texture.FLAG_FILTER
+			element.texture.flags = Texture2D.FLAG_MIPMAPS | Texture2D.FLAG_FILTER
 		else:
-			element.texture.flags = Texture.FLAG_MIPMAPS
+			element.texture.flags = Texture2D.FLAG_MIPMAPS
 	element.change_properties()

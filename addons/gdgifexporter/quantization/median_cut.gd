@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 
 var converter = preload("../converter.gd").new()
 var transparency := false
@@ -73,16 +73,16 @@ func average_colors(buckets: Array) -> Dictionary:
 
 
 func pixels_to_colors(image: Image) -> Array:
-	image.lock()
+	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var result := []
-	var data: PoolByteArray = image.get_data()
+	var data: PackedByteArray = image.get_data()
 
 	for i in range(0, data.size(), 4):
 		if data[i + 3] == 0:
 			transparency = true
 			continue
 		result.append([data[i], data[i + 1], data[i + 2]])
-	image.unlock()
+	false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return result
 
 
@@ -158,6 +158,6 @@ func quantize(image: Image) -> Array:
 	if transparency:
 		color_array = [[0, 0, 0]] + color_array
 
-	var data: PoolByteArray = converter.get_similar_indexed_datas(image, color_array)
+	var data: PackedByteArray = converter.get_similar_indexed_datas(image, color_array)
 
 	return [data, color_array, transparency]

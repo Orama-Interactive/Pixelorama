@@ -33,7 +33,7 @@ __meta__ = {
 [node name="MenuAndUI" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -43,9 +43,9 @@ __meta__ = {
 [node name="UI" parent="MenuAndUI" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 28.0
-margin_right = 1280.0
-margin_bottom = 720.0
+offset_top = 28.0
+offset_right = 1280.0
+offset_bottom = 720.0
 
 [node name="Dialogs" type="Control" parent="."]
 mouse_filter = 2
@@ -68,10 +68,10 @@ window_title = "Open File(s)"
 mode = 1
 
 [node name="SaveSprite" parent="Dialogs" instance=ExtResource( 11 )]
-margin_left = 108.0
-margin_top = 40.0
-margin_right = 623.0
-margin_bottom = 388.0
+offset_left = 108.0
+offset_top = 40.0
+offset_right = 623.0
+offset_bottom = 388.0
 
 [node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource( 8 )]
 
@@ -84,21 +84,21 @@ margin_bottom = 388.0
 [node name="AboutDialog" parent="Dialogs" instance=ExtResource( 34 )]
 
 [node name="UnsavedCanvasDialog" type="ConfirmationDialog" parent="Dialogs"]
-margin_right = 467.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 180, 63 )
+offset_right = 467.0
+offset_bottom = 70.0
+custom_minimum_size = Vector2( 180, 63 )
 window_title = "Unsaved Image"
 dialog_text = "You have unsaved changes. If you proceed, the progress you have made will be lost."
 
 [node name="QuitDialog" type="ConfirmationDialog" parent="Dialogs"]
-margin_right = 243.0
-margin_bottom = 70.0
+offset_right = 243.0
+offset_bottom = 70.0
 resizable = true
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
 [node name="QuitAndSaveDialog" type="ConfirmationDialog" parent="Dialogs"]
-margin_right = 330.0
-margin_bottom = 70.0
+offset_right = 330.0
+offset_bottom = 70.0
 window_title = "Save before exiting?"
 resizable = true
 dialog_text = "You have unsaved progress. How do you wish to proceed?"
@@ -107,15 +107,15 @@ __meta__ = {
 }
 
 [node name="ErrorDialog" type="AcceptDialog" parent="Dialogs"]
-margin_right = 151.0
-margin_bottom = 60.0
+offset_right = 151.0
+offset_bottom = 60.0
 window_title = "Error"
 dialog_text = "This is an error message!"
 
 [node name="BackupConfirmation" type="ConfirmationDialog" parent="Dialogs"]
-margin_right = 200.0
-margin_bottom = 88.0
-popup_exclusive = true
+offset_right = 200.0
+offset_bottom = 88.0
+exclusive = true
 resizable = true
 dialog_text = "Autosaved project(s) from a crashed session were found.
 Do you want to recover the data?"
@@ -132,10 +132,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LeftCursor" type="Sprite" parent="."]
+[node name="LeftCursor" type="Sprite2D" parent="."]
 visible = false
 
-[node name="RightCursor" type="Sprite" parent="."]
+[node name="RightCursor" type="Sprite2D" parent="."]
 visible = false
 
 [connection signal="popup_hide" from="Dialogs/SplashDialog" to="." method="_can_draw_true"]

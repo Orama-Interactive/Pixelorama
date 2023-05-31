@@ -3,7 +3,7 @@ extends Node
 var theme_index := 0
 var theme_button_group := ButtonGroup.new()
 
-onready var themes := [
+@onready var themes := [
 	preload("res://assets/themes/dark/theme.tres"),
 	preload("res://assets/themes/gray/theme.tres"),
 	preload("res://assets/themes/blue/theme.tres"),
@@ -12,25 +12,25 @@ onready var themes := [
 	preload("res://assets/themes/purple/theme.tres"),
 ]
 
-onready var buttons_container: BoxContainer = $ThemeButtons
-onready var colors_container: BoxContainer = $ThemeColorsSpacer/ThemeColors
-onready var theme_color_preview_scene := preload("res://src/Preferences/ThemeColorPreview.tscn")
+@onready var buttons_container: BoxContainer = $ThemeButtons
+@onready var colors_container: BoxContainer = $ThemeColorsSpacer/ThemeColors
+@onready var theme_color_preview_scene := preload("res://src/Preferences/ThemeColorPreview.tscn")
 
 
 func _ready() -> void:
 	for theme in themes:
 		add_theme(theme)
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 
 	var theme_id: int = Global.config_cache.get_value("preferences", "theme", 0)
 	if theme_id >= themes.size():
 		theme_id = 0
 	change_theme(theme_id)
-	buttons_container.get_child(theme_id).pressed = true
+	buttons_container.get_child(theme_id).button_pressed = true
 
 
 func _on_Theme_pressed(index: int) -> void:
-	buttons_container.get_child(index).pressed = true
+	buttons_container.get_child(index).button_pressed = true
 	change_theme(index)
 
 	Global.config_cache.set_value("preferences", "theme", index)
@@ -45,12 +45,12 @@ func add_theme(theme: Theme) -> void:
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	button.group = theme_button_group
 	buttons_container.add_child(button)
-	button.connect("pressed", self, "_on_Theme_pressed", [button.get_index()])
+	button.connect("pressed", Callable(self, "_on_Theme_pressed").bind(button.get_index()))
 
 	var panel_stylebox: StyleBox = theme.get_stylebox("panel", "Panel")
 	var panel_container_stylebox: StyleBox = theme.get_stylebox("panel", "PanelContainer")
 	if panel_stylebox is StyleBoxFlat and panel_container_stylebox is StyleBoxFlat:
-		var theme_color_preview: ColorRect = theme_color_preview_scene.instance()
+		var theme_color_preview: ColorRect = theme_color_preview_scene.instantiate()
 		var color1: Color = panel_stylebox.bg_color
 		var color2: Color = panel_container_stylebox.bg_color
 		theme_color_preview.get_child(0).get_child(0).color = color1
@@ -88,7 +88,7 @@ func change_theme(id: int) -> void:
 		if panel_stylebox is StyleBoxFlat:
 			clear_color = panel_stylebox.bg_color
 		else:
-			clear_color = Color.gray
+			clear_color = Color.GRAY
 
 	for child in Global.preferences_dialog.get_node("Popups").get_children():
 		child.theme = theme
@@ -104,11 +104,11 @@ func change_clear_color() -> void:
 		if panel_stylebox is StyleBoxFlat:
 			clear_color = panel_stylebox.bg_color
 		else:
-			clear_color = Color.gray
+			clear_color = Color.GRAY
 	if Global.clear_color_from == Global.ColorFrom.THEME:
-		VisualServer.set_default_clear_color(clear_color)
+		RenderingServer.set_default_clear_color(clear_color)
 	else:
-		VisualServer.set_default_clear_color(Global.modulate_clear_color)
+		RenderingServer.set_default_clear_color(Global.modulate_clear_color)
 
 
 func change_icon_colors() -> void:
@@ -128,5 +128,5 @@ func change_icon_colors() -> void:
 				texture.modulate = Global.modulate_icon_color
 				if node.disabled:
 					texture.modulate.a = 0.5
-		elif node is TextureRect or node is Sprite:
+		elif node is TextureRect or node is Sprite2D:
 			node.modulate = Global.modulate_icon_color

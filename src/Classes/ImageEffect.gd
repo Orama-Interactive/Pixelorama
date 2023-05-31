@@ -17,36 +17,36 @@ var animate_options_container: Node
 var animate_menu: PopupMenu
 var initial_button: Button
 var animate_bool := []
-var initial_values: PoolRealArray = []
+var initial_values: PackedFloat32Array = []
 var selected_idx: int = 0  # the current selected cel to apply animation to
 var confirmed := false
 
 
 func _ready() -> void:
 	set_nodes()
-	get_ok().size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	get_cancel().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	get_cancel_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	current_frame.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
 	selected_cels.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
-	connect("about_to_show", self, "_about_to_show")
-	connect("popup_hide", self, "_popup_hide")
-	connect("confirmed", self, "_confirmed")
+	connect("about_to_popup", Callable(self, "_about_to_popup"))
+	connect("popup_hide", Callable(self, "_popup_hide"))
+	connect("confirmed", Callable(self, "_confirmed"))
 	if selection_checkbox:
-		selection_checkbox.connect("toggled", self, "_on_SelectionCheckBox_toggled")
+		selection_checkbox.connect("toggled", Callable(self, "_on_SelectionCheckBox_toggled"))
 	if affect_option_button:
-		affect_option_button.connect("item_selected", self, "_on_AffectOptionButton_item_selected")
+		affect_option_button.connect("item_selected", Callable(self, "_on_AffectOptionButton_item_selected"))
 	if animate_menu:
 		set_animate_menu(0)
-		animate_menu.connect("id_pressed", self, "_update_animate_flags")
+		animate_menu.connect("id_pressed", Callable(self, "_update_animate_flags"))
 	if initial_button:
-		initial_button.connect("pressed", self, "set_initial_values")
+		initial_button.connect("pressed", Callable(self, "set_initial_values"))
 
 
-func _about_to_show() -> void:
+func _about_to_popup() -> void:
 	confirmed = false
 	Global.canvas.selection.transform_content_confirm()
 	var frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
@@ -172,7 +172,7 @@ func _get_undo_data(project: Project) -> Dictionary:
 	var data := {}
 	var images := _get_selected_draw_images(project)
 	for image in images:
-		image.unlock()
+		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		data[image] = image.data
 	return data
 
@@ -209,16 +209,16 @@ func update_preview() -> void:
 		_:
 			preview_image.copy_from(current_frame)
 	commit_action(preview_image)
-	preview_image.unlock()
-	preview_texture.create_from_image(preview_image, 0)
+	false # preview_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	preview_texture.create_from_image(preview_image) #,0
 	preview.texture = preview_texture
 
 
 func update_transparent_background_size() -> void:
 	if !preview:
 		return
-	var image_size_y := preview.rect_size.y
-	var image_size_x := preview.rect_size.x
+	var image_size_y := preview.size.y
+	var image_size_x := preview.size.x
 	if preview_image.get_size().x > preview_image.get_size().y:
 		var scale_ratio = preview_image.get_size().x / image_size_x
 		image_size_y = preview_image.get_size().y / scale_ratio
@@ -226,8 +226,8 @@ func update_transparent_background_size() -> void:
 		var scale_ratio = preview_image.get_size().y / image_size_y
 		image_size_x = preview_image.get_size().x / scale_ratio
 
-	preview.get_node("TransparentChecker").rect_size.x = image_size_x
-	preview.get_node("TransparentChecker").rect_size.y = image_size_y
+	preview.get_node("TransparentChecker").size.x = image_size_x
+	preview.get_node("TransparentChecker").size.y = image_size_y
 
 
 func _popup_hide() -> void:

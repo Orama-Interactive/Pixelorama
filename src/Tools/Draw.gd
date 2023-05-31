@@ -13,7 +13,7 @@ var _picking_color := false
 
 var _undo_data := {}
 var _drawer := Drawer.new()
-var _mask := PoolRealArray()
+var _mask := PackedFloat32Array()
 var _mirror_brushes := {}
 
 var _draw_line := false
@@ -28,27 +28,27 @@ var _line_polylines := []
 var _stroke_project: Project
 var _stroke_images := []  # Array of Images
 var _is_mask_size_zero := true
-var _circle_tool_shortcut: PoolVector2Array
+var _circle_tool_shortcut: PackedVector2Array
 
 
 func _ready() -> void:
-	Global.global_tool_options.connect("dynamics_changed", self, "_reset_dynamics")
-	Tools.connect("color_changed", self, "_on_Color_changed")
-	Global.brushes_popup.connect("brush_removed", self, "_on_Brush_removed")
+	Global.global_tool_options.connect("dynamics_changed", Callable(self, "_reset_dynamics"))
+	Tools.connect("color_changed", Callable(self, "_on_Color_changed"))
+	Global.brushes_popup.connect("brush_removed", Callable(self, "_on_Brush_removed"))
 
 
 func _on_BrushType_pressed() -> void:
-	if not Global.brushes_popup.is_connected("brush_selected", self, "_on_Brush_selected"):
+	if not Global.brushes_popup.is_connected("brush_selected", Callable(self, "_on_Brush_selected")):
 		Global.brushes_popup.connect(
-			"brush_selected", self, "_on_Brush_selected", [], CONNECT_ONESHOT
+			"brush_selected", self, "_on_Brush_selected", [], CONNECT_ONE_SHOT
 		)
 	# Now we set position and columns
 	var tool_option_container = get_node("../../")
 	var brush_button = $Brush/Type
-	var pop_position = brush_button.rect_global_position + Vector2(0, brush_button.rect_size.y)
-	var size_x = tool_option_container.rect_size.x
-	var size_y = tool_option_container.rect_size.y - $Brush.rect_position.y - $Brush.rect_size.y
-	var columns = int(size_x / 36) - 1  # 36 is the rect_size of BrushButton.tscn
+	var pop_position = brush_button.global_position + Vector2(0, brush_button.size.y)
+	var size_x = tool_option_container.size.x
+	var size_y = tool_option_container.size.y - $Brush.position.y - $Brush.size.y
+	var columns = int(size_x / 36) - 1  # 36 is the size of BrushButton.tscn
 	var categories = Global.brushes_popup.get_node("Background/Brushes/Categories")
 	for child in categories.get_children():
 		if child is GridContainer:
@@ -129,13 +129,13 @@ func update_brush() -> void:
 	$Brush/BrushSize.suffix = "px"  # Assume we are using default brushes
 	match _brush.type:
 		Brushes.PIXEL:
-			_brush_texture.create_from_image(load("res://assets/graphics/pixel_image.png"), 0)
+			_brush_texture.create_from_image(load("res://assets/graphics/pixel_image.png")) #,0
 			_stroke_dimensions = Vector2.ONE * _brush_size
 		Brushes.CIRCLE:
-			_brush_texture.create_from_image(load("res://assets/graphics/circle_9x9.png"), 0)
+			_brush_texture.create_from_image(load("res://assets/graphics/circle_9x9.png")) #,0
 			_stroke_dimensions = Vector2.ONE * _brush_size
 		Brushes.FILLED_CIRCLE:
-			_brush_texture.create_from_image(load("res://assets/graphics/circle_filled_9x9.png"), 0)
+			_brush_texture.create_from_image(load("res://assets/graphics/circle_filled_9x9.png")) #,0
 			_stroke_dimensions = Vector2.ONE * _brush_size
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			$Brush/BrushSize.suffix = "00 %"  # Use a different size convention on images
@@ -145,12 +145,12 @@ func update_brush() -> void:
 				var random := randi() % _brush.random.size()
 				_orignal_brush_image = _brush.random[random]
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
-			_brush_texture.create_from_image(_brush_image, 0)
+			_brush_texture.create_from_image(_brush_image) #,0
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
-	$Brush/Type/Texture.texture = _brush_texture
+	$Brush/Type/Texture2D.texture = _brush_texture
 	$ColorInterpolation.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
 
 
@@ -159,7 +159,7 @@ func update_random_image() -> void:
 		return
 	var random = randi() % _brush.random.size()
 	_brush_image = _create_blended_brush_image(_brush.random[random])
-	_brush_texture.create_from_image(_brush_image, 0)
+	_brush_texture.create_from_image(_brush_image) #,0
 	_indicator = _create_brush_indicator()
 	update_mirror_brush()
 
@@ -176,7 +176,7 @@ func update_mirror_brush() -> void:
 func update_mask(can_skip := true) -> void:
 	if can_skip and Tools.dynamics_alpha == Tools.Dynamics.NONE:
 		if _mask:
-			_mask = PoolRealArray()
+			_mask = PackedFloat32Array()
 		return
 	var size: Vector2 = Global.current_project.size
 	_is_mask_size_zero = false
@@ -184,7 +184,7 @@ func update_mask(can_skip := true) -> void:
 	# See: https://github.com/Orama-Interactive/Pixelorama/pull/439
 	var nulled_array := []
 	nulled_array.resize(size.x * size.y)
-	_mask = PoolRealArray(nulled_array)
+	_mask = PackedFloat32Array(nulled_array)
 
 
 func update_line_polylines(start: Vector2, end: Vector2) -> void:
@@ -210,7 +210,7 @@ func commit_undo() -> void:
 	project.undos += 1
 	for image in redo_data:
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
-		image.unlock()
+		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for image in _undo_data:
 		project.undo_redo.add_undo_property(image, "data", _undo_data[image])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer)
@@ -232,14 +232,14 @@ func draw_tool(position: Vector2) -> void:
 
 
 func draw_end(position: Vector2) -> void:
-	.draw_end(position)
+	super.draw_end(position)
 	_brush_size_dynamics = _brush_size
 	if Tools.dynamics_size != Tools.Dynamics.NONE:
 		_brush_size_dynamics = Tools.brush_size_min
 	match _brush.type:
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
-			_brush_texture.create_from_image(_brush_image, 0)
+			_brush_texture.create_from_image(_brush_image) #,0
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
@@ -279,7 +279,7 @@ func _prepare_tool() -> void:
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			# save _brush_image for safe keeping
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
-			_brush_texture.create_from_image(_brush_image, 0)
+			_brush_texture.create_from_image(_brush_image) #,0
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
 
@@ -299,9 +299,9 @@ func _prepare_circle_tool(fill: bool) -> void:
 
 # Make sure to always have invoked _prepare_tool() before this. This computes the coordinates to be
 # drawn if it can (except for the generic brush, when it's actually drawing them)
-func _draw_tool(position: Vector2) -> PoolVector2Array:
+func _draw_tool(position: Vector2) -> PackedVector2Array:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
-		return PoolVector2Array()  # empty fallback
+		return PackedVector2Array()  # empty fallback
 	match _brush.type:
 		Brushes.PIXEL:
 			return _compute_draw_tool_pixel(position)
@@ -311,7 +311,7 @@ func _draw_tool(position: Vector2) -> PoolVector2Array:
 			return _compute_draw_tool_circle(position, true)
 		_:
 			draw_tool_brush(position)
-	return PoolVector2Array()  # empty fallback
+	return PackedVector2Array()  # empty fallback
 
 
 # Bresenham's Algorithm
@@ -351,8 +351,8 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 
 
 # Compute the array of coordinates that should be drawn
-func _compute_draw_tool_pixel(position: Vector2) -> PoolVector2Array:
-	var result := PoolVector2Array()
+func _compute_draw_tool_pixel(position: Vector2) -> PackedVector2Array:
+	var result := PackedVector2Array()
 	var start := position - Vector2.ONE * (_brush_size_dynamics >> 1)
 	var end := start + Vector2.ONE * _brush_size_dynamics
 	for y in range(start.y, end.y):
@@ -362,13 +362,13 @@ func _compute_draw_tool_pixel(position: Vector2) -> PoolVector2Array:
 
 
 # Compute the array of coordinates that should be drawn
-func _compute_draw_tool_circle(position: Vector2, fill := false) -> PoolVector2Array:
+func _compute_draw_tool_circle(position: Vector2, fill := false) -> PackedVector2Array:
 	var size := Vector2(_brush_size_dynamics, _brush_size_dynamics)
 	var pos = position - (size / 2).floor()
 	if _circle_tool_shortcut:
 		return _draw_tool_circle_from_map(position)
 
-	var result := PoolVector2Array()
+	var result := PackedVector2Array()
 	if fill:
 		result = DrawingAlgos.get_ellipse_points_filled(pos, size)
 	else:
@@ -376,8 +376,8 @@ func _compute_draw_tool_circle(position: Vector2, fill := false) -> PoolVector2A
 	return result
 
 
-func _draw_tool_circle_from_map(position: Vector2) -> PoolVector2Array:
-	var result := PoolVector2Array()
+func _draw_tool_circle_from_map(position: Vector2) -> PackedVector2Array:
+	var result := PackedVector2Array()
 	for displacement in _circle_tool_shortcut:
 		result.append(position + displacement)
 	return result
@@ -431,13 +431,13 @@ func remove_unselected_parts_of_brush(brush: Image, dst: Vector2) -> Image:
 	var new_brush := Image.new()
 	new_brush.copy_from(brush)
 
-	new_brush.lock()
+	false # new_brush.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for x in size.x:
 		for y in size.y:
 			var pos := Vector2(x, y) + dst
 			if !project.selection_map.is_pixel_selected(pos):
 				new_brush.set_pixel(x, y, Color(0))
-	new_brush.unlock()
+	false # new_brush.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return new_brush
 
 
@@ -452,7 +452,7 @@ func draw_indicator(left: bool) -> void:
 		var nearest_pos := Global.current_project.selection_map.get_nearest_position(position)
 		if nearest_pos != Vector2.ZERO:
 			var offset := nearest_pos
-			draw_indicator_at(snap_position(_cursor), offset, Color.green)
+			draw_indicator_at(snap_position(_cursor), offset, Color.GREEN)
 			return
 
 	if Global.current_project.tiles.mode and Global.current_project.tiles.has_point(_cursor):
@@ -460,7 +460,7 @@ func draw_indicator(left: bool) -> void:
 		var nearest_tile := Global.current_project.tiles.get_nearest_tile(position)
 		if nearest_tile.position != Vector2.ZERO:
 			var offset := nearest_tile.position
-			draw_indicator_at(snap_position(_cursor), offset, Color.green)
+			draw_indicator_at(snap_position(_cursor), offset, Color.GREEN)
 
 
 func draw_indicator_at(position: Vector2, offset: Vector2, color: Color) -> void:
@@ -478,7 +478,7 @@ func draw_indicator_at(position: Vector2, offset: Vector2, color: Color) -> void
 		canvas.draw_set_transform(position, canvas.rotation, canvas.scale)
 		var polylines := _line_polylines if _draw_line else _polylines
 		for line in polylines:
-			var pool := PoolVector2Array(line)
+			var pool := PackedVector2Array(line)
 			canvas.draw_polyline(pool, color)
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
@@ -543,15 +543,15 @@ func _create_blended_brush_image(image: Image) -> Image:
 
 func _blend_image(image: Image, color: Color, factor: float) -> Image:
 	var size := image.get_size()
-	image.lock()
+	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for y in size.y:
 		for x in size.x:
 			var color_old := image.get_pixel(x, y)
 			if color_old.a > 0:
-				var color_new := color_old.linear_interpolate(color, factor)
+				var color_new := color_old.lerp(color, factor)
 				color_new.a = color_old.a
 				image.set_pixel(x, y, color_new)
-	image.unlock()
+	false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return image
 
 
@@ -581,7 +581,7 @@ func _create_pixel_indicator(size: int) -> BitMap:
 
 
 func _create_circle_indicator(size: int, fill := false) -> BitMap:
-	_circle_tool_shortcut = PoolVector2Array()
+	_circle_tool_shortcut = PackedVector2Array()
 	var diameter := Vector2(size, size) * 2 + Vector2.ONE
 	return _fill_bitmap_with_points(_compute_draw_tool_circle(Vector2(size, size), fill), diameter)
 
@@ -636,26 +636,26 @@ func _blit_indicator(dst: BitMap, indicator: BitMap, position: Vector2) -> void:
 
 func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 	var result := {}
-	var angle := rad2deg(end.angle_to_point(start))
+	var angle := rad_to_deg(end.angle_to_point(start))
 	var distance := start.distance_to(end)
 	if Input.is_action_pressed("draw_snap_angle"):
 		if Tools.pixel_perfect:
-			angle = stepify(angle, 22.5)
+			angle = snapped(angle, 22.5)
 			if step_decimals(angle) != 0:
 				var diff := end - start
 				var v := Vector2(2, 1) if abs(diff.x) > abs(diff.y) else Vector2(1, 2)
 				var p := diff.project(diff.sign() * v).abs().round()
 				var f := p.y if abs(diff.x) > abs(diff.y) else p.x
 				end = start + diff.sign() * v * f - diff.sign()
-				angle = rad2deg(atan2(sign(diff.y) * v.y, sign(diff.x) * v.x))
+				angle = rad_to_deg(atan2(sign(diff.y) * v.y, sign(diff.x) * v.x))
 			else:
-				end = start + Vector2.RIGHT.rotated(deg2rad(angle)) * distance
+				end = start + Vector2.RIGHT.rotated(deg_to_rad(angle)) * distance
 		else:
-			angle = stepify(angle, 15)
-			end = start + Vector2.RIGHT.rotated(deg2rad(angle)) * distance
+			angle = snapped(angle, 15)
+			end = start + Vector2.RIGHT.rotated(deg_to_rad(angle)) * distance
 	angle *= -1
 	angle += 360 if angle < 0 else 0
-	result.text = str(stepify(angle, 0.01)) + "°"
+	result.text = str(snapped(angle, 0.01)) + "°"
 	result.position = end.round()
 	return result
 
@@ -677,9 +677,9 @@ func _get_undo_data() -> Dictionary:
 		if not cel is PixelCel:
 			continue
 		var image: Image = cel.image
-		image.unlock()
+		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		data[image] = image.data
-		image.lock()
+		false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return data
 
 
@@ -701,10 +701,10 @@ func _pick_color(position: Vector2) -> void:
 		var idx = (project.layers.size() - 1) - layer
 		if project.layers[idx].is_visible_in_hierarchy():
 			image = curr_frame.cels[idx].get_image()
-			image.lock()
+			false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			color = image.get_pixelv(position)
-			image.unlock()
+			false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			if color != Color(0, 0, 0, 0):
 				break
-	var button := BUTTON_LEFT if Tools._slots[BUTTON_LEFT].tool_node == self else BUTTON_RIGHT
+	var button := MOUSE_BUTTON_LEFT if Tools._slots[MOUSE_BUTTON_LEFT].tool_node == self else MOUSE_BUTTON_RIGHT
 	Tools.assign_color(color, button, false)

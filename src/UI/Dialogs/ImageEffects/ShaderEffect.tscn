@@ -6,9 +6,9 @@
 [sub_resource type="ShaderMaterial" id=1]
 
 [node name="ShaderEffect" type="ConfirmationDialog"]
-margin_right = 200.0
-margin_bottom = 228.0
-rect_min_size = Vector2( 400, 300 )
+offset_right = 200.0
+offset_bottom = 228.0
+custom_minimum_size = Vector2( 400, 300 )
 window_title = "Shader"
 resizable = true
 script = ExtResource( 1 )
@@ -19,29 +19,29 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -36.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -36.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_right = 442.0
-margin_bottom = 31.0
+offset_right = 442.0
+offset_bottom = 31.0
 text = "This is an experimental feature and may not be included in the stable version"
 autowrap = true
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_top = 35.0
-margin_right = 442.0
-margin_bottom = 235.0
+offset_top = 35.0
+offset_right = 442.0
+offset_bottom = 235.0
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
 material = SubResource( 1 )
-margin_left = 121.0
-margin_right = 321.0
-margin_bottom = 200.0
-rect_min_size = Vector2( 200, 200 )
+offset_left = 121.0
+offset_right = 321.0
+offset_bottom = 200.0
+custom_minimum_size = Vector2( 200, 200 )
 expand = true
 stretch_mode = 5
 
@@ -49,38 +49,38 @@ stretch_mode = 5
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 0.0
-margin_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="ChooseShader" type="Button" parent="VBoxContainer"]
-margin_top = 239.0
-margin_right = 442.0
-margin_bottom = 259.0
+offset_top = 239.0
+offset_right = 442.0
+offset_bottom = 259.0
 mouse_default_cursor_shape = 2
 text = "Choose Shader"
 
 [node name="ShaderLoadedLabel" type="Label" parent="VBoxContainer"]
-margin_top = 263.0
-margin_right = 442.0
-margin_bottom = 277.0
+offset_top = 263.0
+offset_right = 442.0
+offset_bottom = 277.0
 text = "No shader loaded!"
 autowrap = true
 
 [node name="ShaderParams" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 281.0
-margin_right = 442.0
-margin_bottom = 281.0
+offset_top = 281.0
+offset_right = 442.0
+offset_bottom = 281.0
 
 [node name="FileDialog" type="FileDialog" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 450.0
-margin_bottom = 289.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 450.0
+offset_bottom = 289.0
 window_title = "Open a File"
 resizable = true
 mode = 0
 access = 2
-filters = PoolStringArray( "*shader; Godot Shader File" )
+filters = PackedStringArray( "*shader; Godot Shader File" )
 show_hidden_files = true
 
 [connection signal="pressed" from="VBoxContainer/ChooseShader" to="." method="_on_ChooseShader_pressed"]

@@ -9,14 +9,14 @@ window_title = "Gradient Map"
 script = ExtResource( 3 )
 
 [node name="VBoxContainer" parent="." index="3"]
-margin_bottom = 318.0
+offset_bottom = 318.0
 
 [node name="GradientEdit" parent="VBoxContainer" index="1" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 204.0
-margin_right = 278.0
-margin_bottom = 282.0
+offset_top = 204.0
+offset_right = 278.0
+offset_bottom = 282.0
 
 [node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]

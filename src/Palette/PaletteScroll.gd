@@ -4,22 +4,22 @@ var scroll := Vector2.ZERO
 var drag_started := false
 var drag_start_position := Vector2.ZERO
 
-onready var h_slider := $"%HScrollBar"
-onready var v_slider := $"%VScrollBar"
-onready var palette_grid := $"%PaletteGrid"
-onready var scroll_container := $"%ScrollContainer"
+@onready var h_slider := $"%HScrollBar"
+@onready var v_slider := $"%VScrollBar"
+@onready var palette_grid := $"%PaletteGrid"
+@onready var scroll_container := $"%ScrollContainer"
 
 
 func _ready() -> void:
 	# Hide default scollbars
-	scroll_container.get_h_scrollbar().rect_scale = Vector2.ZERO
-	scroll_container.get_v_scrollbar().rect_scale = Vector2.ZERO
+	scroll_container.get_h_scroll_bar().scale = Vector2.ZERO
+	scroll_container.get_v_scroll_bar().scale = Vector2.ZERO
 
 
 func _input(event) -> void:
 	# Stops dragging even if middle mouse is released outside of this container
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_MIDDLE and not event.pressed:
+		if event.button_index == MOUSE_BUTTON_MIDDLE and not event.pressed:
 			drag_started = false
 
 
@@ -40,7 +40,7 @@ func reset_sliders() -> void:
 
 
 func resize_grid() -> void:
-	palette_grid.resize_grid(rect_size - Vector2(v_slider.rect_size.x, h_slider.rect_size.y))
+	palette_grid.resize_grid(size - Vector2(v_slider.size.x, h_slider.size.y))
 
 
 func scroll_grid() -> void:
@@ -59,7 +59,7 @@ func _on_HSlider_value_changed(value: int) -> void:
 
 func _on_PaletteGrid_gui_input(event) -> void:
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_MIDDLE and event.pressed:
+		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
 			drag_started = true
 			# Keeps position where the dragging started
 			drag_start_position = (
@@ -80,12 +80,12 @@ func _on_PaletteScroll_resized() -> void:
 func _on_PaletteScroll_gui_input(event) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		var scroll_vector = Vector2.ZERO
-		if event.button_index == BUTTON_WHEEL_UP:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			if event.control:
 				palette_grid.change_swatch_size(Vector2.ONE)
 			else:
 				scroll_vector = Vector2.LEFT if event.shift else Vector2.UP
-		if event.button_index == BUTTON_WHEEL_DOWN:
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			if event.control:
 				palette_grid.change_swatch_size(-Vector2.ONE)
 			else:

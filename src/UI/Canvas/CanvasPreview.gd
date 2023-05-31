@@ -10,19 +10,19 @@ var end_sprite_sheet_frame := 1
 var sprite_frames := []
 var frame_index := 0
 
-onready var animation_timer := $AnimationTimer as Timer
-onready var transparent_checker = get_parent().get_node("TransparentChecker") as ColorRect
+@onready var animation_timer := $AnimationTimer as Timer
+@onready var transparent_checker = get_parent().get_node("TransparentChecker") as ColorRect
 
 
 func _ready() -> void:
-	Global.connect("cel_changed", self, "_cel_changed")
+	Global.connect("cel_changed", Callable(self, "_cel_changed"))
 
 
 func _draw() -> void:
 	var current_project: Project = Global.current_project
 	match mode:
 		Mode.TIMELINE:
-			var modulate_color := Color.white
+			var modulate_color := Color.WHITE
 			if frame_index >= current_project.frames.size():
 				frame_index = current_project.current_frame
 			if animation_timer.is_stopped():
@@ -118,6 +118,6 @@ func _split_spritesheet(image: Image, horiz: int, vert: int) -> Array:
 			var rect := Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			cropped_image = image.get_rect(rect)
 			cropped_image.convert(Image.FORMAT_RGBA8)
-			tex.create_from_image(cropped_image, 0)
+			tex.create_from_image(cropped_image) #,0
 			result.append(tex)
 	return result

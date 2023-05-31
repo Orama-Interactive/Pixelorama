@@ -8,60 +8,60 @@ window_title = "Mirror Image"
 script = ExtResource( 1 )
 
 [node name="VBoxContainer" parent="." index="3"]
-margin_bottom = 288.0
+offset_bottom = 288.0
 
 [node name="AspectRatioContainer" parent="VBoxContainer" index="0"]
-margin_right = 278.0
+offset_right = 278.0
 
 [node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-margin_left = 39.0
-margin_right = 239.0
+offset_left = 39.0
+offset_right = 239.0
 
 [node name="FlipOptions" type="GridContainer" parent="VBoxContainer" index="1"]
-margin_top = 204.0
-margin_right = 278.0
-margin_bottom = 228.0
+offset_top = 204.0
+offset_right = 278.0
+offset_bottom = 228.0
 columns = 2
 
 [node name="FlipHorizontal" type="CheckBox" parent="VBoxContainer/FlipOptions" index="0"]
-margin_right = 137.0
-margin_bottom = 24.0
+offset_right = 137.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 pressed = true
 text = "Horizontal"
 
 [node name="FlipVertical" type="CheckBox" parent="VBoxContainer/FlipOptions" index="1"]
-margin_left = 141.0
-margin_right = 278.0
-margin_bottom = 24.0
+offset_left = 141.0
+offset_right = 278.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Vertical"
 
 [node name="OptionsContainer" parent="VBoxContainer" index="2"]
-margin_top = 232.0
-margin_right = 278.0
-margin_bottom = 256.0
+offset_top = 232.0
+offset_right = 278.0
+offset_bottom = 256.0
 
 [node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
-margin_right = 278.0
+offset_right = 278.0
 
 [node name="AnimationOptions" parent="VBoxContainer" index="3"]
 visible = false
-margin_top = 260.0
-margin_right = 278.0
-margin_bottom = 294.0
+offset_top = 260.0
+offset_right = 278.0
+offset_bottom = 294.0
 
 [node name="PanelContainer" parent="VBoxContainer/AnimationOptions" index="1"]
-margin_right = 157.0
+offset_right = 157.0
 
 [node name="AnimateMenu" parent="VBoxContainer/AnimationOptions/PanelContainer" index="0"]
-margin_right = 88.0
+offset_right = 88.0
 
 [node name="InitalButton" parent="VBoxContainer/AnimationOptions" index="2"]
-margin_left = 161.0
-margin_right = 278.0
+offset_left = 161.0
+offset_right = 278.0
 
 [connection signal="toggled" from="VBoxContainer/FlipOptions/FlipHorizontal" to="." method="_on_FlipHorizontal_toggled"]
 [connection signal="toggled" from="VBoxContainer/FlipOptions/FlipVertical" to="." method="_on_FlipVertical_toggled"]

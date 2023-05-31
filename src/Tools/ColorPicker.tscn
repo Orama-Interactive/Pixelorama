@@ -7,38 +7,38 @@
 script = ExtResource( 2 )
 
 [node name="ColorPicker" type="VBoxContainer" parent="." index="2"]
-margin_top = 26.0
-margin_right = 116.0
-margin_bottom = 106.0
+offset_top = 26.0
+offset_right = 116.0
+offset_bottom = 106.0
 
 [node name="Label" type="Label" parent="ColorPicker" index="0"]
-margin_right = 116.0
-margin_bottom = 14.0
+offset_right = 116.0
+offset_bottom = 14.0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 1
 text = "Pick for:"
 
 [node name="Options" type="OptionButton" parent="ColorPicker" index="1"]
-margin_top = 18.0
-margin_right = 116.0
-margin_bottom = 38.0
+offset_top = 18.0
+offset_right = 116.0
+offset_bottom = 38.0
 mouse_default_cursor_shape = 2
 text = "Left Color"
 items = [ "Left Color", null, false, 0, null, "Right Color", null, false, 1, null ]
 selected = 0
 
 [node name="Label2" type="Label" parent="ColorPicker" index="2"]
-margin_top = 42.0
-margin_right = 116.0
-margin_bottom = 56.0
+offset_top = 42.0
+offset_right = 116.0
+offset_bottom = 56.0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 1
 text = "Pick mode:"
 
 [node name="ExtractFrom" type="OptionButton" parent="ColorPicker" index="3"]
-margin_top = 60.0
-margin_right = 116.0
-margin_bottom = 80.0
+offset_top = 60.0
+offset_right = 116.0
+offset_bottom = 80.0
 mouse_default_cursor_shape = 2
 text = "Top Color"
 items = [ "Top Color", null, false, 0, null, "Current Layer", null, false, 1, null ]

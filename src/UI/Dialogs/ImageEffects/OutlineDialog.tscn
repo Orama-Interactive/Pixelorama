@@ -9,36 +9,36 @@ window_title = "Outline"
 script = ExtResource( 1 )
 
 [node name="VBoxContainer" parent="." index="3"]
-margin_bottom = 354.0
+offset_bottom = 354.0
 
 [node name="AspectRatioContainer" parent="VBoxContainer" index="0"]
-margin_right = 278.0
+offset_right = 278.0
 
 [node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-margin_left = 39.0
-margin_right = 239.0
+offset_left = 39.0
+offset_right = 239.0
 
 [node name="OutlineOptions" type="GridContainer" parent="VBoxContainer" index="1"]
-margin_top = 204.0
-margin_right = 278.0
-margin_bottom = 294.0
-custom_constants/vseparation = 4
-custom_constants/hseparation = 4
+offset_top = 204.0
+offset_right = 278.0
+offset_bottom = 294.0
+theme_override_constants/v_separation = 4
+theme_override_constants/h_separation = 4
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ThickLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="0"]
-margin_right = 137.0
-margin_bottom = 14.0
+offset_right = 137.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 text = "Thickness:"
 
-[node name="ThickValue" type="TextureProgress" parent="VBoxContainer/OutlineOptions" index="1"]
-margin_left = 141.0
-margin_right = 278.0
-margin_bottom = 14.0
+[node name="ThickValue" type="TextureProgressBar" parent="VBoxContainer/OutlineOptions" index="1"]
+offset_left = 141.0
+offset_right = 278.0
+offset_bottom = 14.0
 mouse_default_cursor_shape = 2
 theme_type_variation = "ValueSlider"
 min_value = 1.0
@@ -53,32 +53,32 @@ script = ExtResource( 2 )
 suffix = "px"
 
 [node name="OutlineColorLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="2"]
-margin_top = 21.0
-margin_right = 137.0
-margin_bottom = 35.0
+offset_top = 21.0
+offset_right = 137.0
+offset_bottom = 35.0
 size_flags_horizontal = 3
 text = "Fill with color:"
 
 [node name="OutlineColor" type="ColorPickerButton" parent="VBoxContainer/OutlineOptions" index="3"]
-margin_left = 141.0
-margin_top = 18.0
-margin_right = 278.0
-margin_bottom = 38.0
-rect_min_size = Vector2( 64, 20 )
+offset_left = 141.0
+offset_top = 18.0
+offset_right = 278.0
+offset_bottom = 38.0
+custom_minimum_size = Vector2( 64, 20 )
 size_flags_horizontal = 3
 
 [node name="PatternLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="4"]
-margin_top = 45.0
-margin_right = 137.0
-margin_bottom = 59.0
+offset_top = 45.0
+offset_right = 137.0
+offset_bottom = 59.0
 size_flags_horizontal = 3
 text = "Pattern:"
 
 [node name="PatternOptionButton" type="OptionButton" parent="VBoxContainer/OutlineOptions" index="5"]
-margin_left = 141.0
-margin_top = 42.0
-margin_right = 278.0
-margin_bottom = 62.0
+offset_left = 141.0
+offset_top = 42.0
+offset_right = 278.0
+offset_bottom = 62.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Diamond"
@@ -86,44 +86,44 @@ items = [ "Diamond", null, false, 0, null, "Circle", null, false, 1, null, "Squa
 selected = 0
 
 [node name="InsideImageLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="6"]
-margin_top = 71.0
-margin_right = 137.0
-margin_bottom = 85.0
+offset_top = 71.0
+offset_right = 137.0
+offset_bottom = 85.0
 size_flags_horizontal = 3
 text = "Place inside image"
 
 [node name="InsideImageCheckBox" type="CheckBox" parent="VBoxContainer/OutlineOptions" index="7"]
-margin_left = 141.0
-margin_top = 66.0
-margin_right = 278.0
-margin_bottom = 90.0
+offset_left = 141.0
+offset_top = 66.0
+offset_right = 278.0
+offset_bottom = 90.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "On"
 
 [node name="OptionsContainer" parent="VBoxContainer" index="2"]
-margin_top = 298.0
-margin_right = 278.0
-margin_bottom = 322.0
+offset_top = 298.0
+offset_right = 278.0
+offset_bottom = 322.0
 
 [node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
-margin_right = 278.0
+offset_right = 278.0
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 
 [node name="AnimationOptions" parent="VBoxContainer" index="3"]
-margin_top = 326.0
-margin_right = 278.0
-margin_bottom = 360.0
+offset_top = 326.0
+offset_right = 278.0
+offset_bottom = 360.0
 
 [node name="PanelContainer" parent="VBoxContainer/AnimationOptions" index="1"]
-margin_right = 157.0
+offset_right = 157.0
 
 [node name="AnimateMenu" parent="VBoxContainer/AnimationOptions/PanelContainer" index="0"]
-margin_right = 88.0
+offset_right = 88.0
 
 [node name="InitalButton" parent="VBoxContainer/AnimationOptions" index="2"]
-margin_left = 161.0
-margin_right = 278.0
+offset_left = 161.0
+offset_right = 278.0
 
 [connection signal="value_changed" from="VBoxContainer/OutlineOptions/ThickValue" to="." method="_on_ThickValue_value_changed"]
 [connection signal="color_changed" from="VBoxContainer/OutlineOptions/OutlineColor" to="." method="_on_OutlineColor_color_changed"]

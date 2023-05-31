@@ -3,7 +3,7 @@ extends BaseTool
 enum FillArea { AREA, COLORS, SELECTION }
 enum FillWith { COLOR, PATTERN }
 
-const COLOR_REPLACE_SHADER := preload("res://src/Shaders/ColorReplace.shader")
+const COLOR_REPLACE_SHADER := preload("res://src/Shaders/ColorReplace.gdshader")
 const PATTERN_FILL_SHADER := preload("res://src/Shaders/PatternFill.gdshader")
 
 var _prev_mode := 0
@@ -62,9 +62,9 @@ func _on_SimilaritySlider_value_changed(value: float) -> void:
 
 func _on_PatternType_pressed() -> void:
 	var popup: Popup = Global.patterns_popup
-	if !popup.is_connected("pattern_selected", self, "_on_Pattern_selected"):
-		popup.connect("pattern_selected", self, "_on_Pattern_selected", [], CONNECT_ONESHOT)
-	popup.popup(Rect2($FillPattern/Type.rect_global_position, Vector2(226, 72)))
+	if !popup.is_connected("pattern_selected", Callable(self, "_on_Pattern_selected")):
+		popup.connect("pattern_selected", Callable(self, "_on_Pattern_selected").bind(), CONNECT_ONE_SHOT)
+	popup.popup(Rect2($FillPattern/Type.global_position, Vector2(226, 72)))
 
 
 func _on_Pattern_selected(pattern: Patterns.Pattern) -> void:
@@ -127,15 +127,15 @@ func update_pattern() -> void:
 			_pattern = Global.patterns_popup.default_pattern
 	var tex := ImageTexture.new()
 	if !_pattern.image.is_empty():
-		tex.create_from_image(_pattern.image, 0)
-	$FillPattern/Type/Texture.texture = tex
+		tex.create_from_image(_pattern.image) #,0
+	$FillPattern/Type/Texture2D.texture = tex
 	var size := _pattern.image.get_size()
 	$FillPattern/OffsetX.max_value = size.x - 1
 	$FillPattern/OffsetY.max_value = size.y - 1
 
 
 func draw_start(position: Vector2) -> void:
-	.draw_start(position)
+	super.draw_start(position)
 	if Input.is_action_pressed("draw_color_picker"):
 		_pick_color(position)
 		return
@@ -163,11 +163,11 @@ func draw_start(position: Vector2) -> void:
 
 
 func draw_move(position: Vector2) -> void:
-	.draw_move(position)
+	super.draw_move(position)
 
 
 func draw_end(position: Vector2) -> void:
-	.draw_end(position)
+	super.draw_end(position)
 
 
 func fill_in_color(position: Vector2) -> void:
@@ -466,11 +466,11 @@ func _color_segments(image: Image) -> void:
 
 
 func _set_pixel_pattern(image: Image, x: int, y: int, pattern_size: Vector2) -> void:
-	_pattern.image.lock()
+	false # _pattern.image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var px := int(x + _offset_x) % int(pattern_size.x)
 	var py := int(y + _offset_y) % int(pattern_size.y)
 	var pc := _pattern.image.get_pixel(px, py)
-	_pattern.image.unlock()
+	false # _pattern.image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	image.set_pixel(x, y, pc)
 
 
@@ -487,7 +487,7 @@ func commit_undo(action: String, undo_data: Dictionary) -> void:
 	project.undo_redo.create_action(action)
 	for image in redo_data:
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
-		image.unlock()
+		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for image in undo_data:
 		project.undo_redo.add_undo_property(image, "data", undo_data[image])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer)
@@ -499,9 +499,9 @@ func _get_undo_data() -> Dictionary:
 	var data := {}
 	var images := _get_selected_draw_images()
 	for image in images:
-		image.unlock()
+		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		data[image] = image.data
-		image.lock()
+		false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return data
 
 
@@ -517,8 +517,8 @@ func _pick_color(position: Vector2) -> void:
 	if position.x > image.get_width() - 1 or position.y > image.get_height() - 1:
 		return
 
-	image.lock()
+	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var color := image.get_pixelv(position)
-	image.unlock()
-	var button := BUTTON_LEFT if Tools._slots[BUTTON_LEFT].tool_node == self else BUTTON_RIGHT
+	false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	var button := MOUSE_BUTTON_LEFT if Tools._slots[MOUSE_BUTTON_LEFT].tool_node == self else MOUSE_BUTTON_RIGHT
 	Tools.assign_color(color, button, false)

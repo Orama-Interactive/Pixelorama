@@ -8,22 +8,22 @@ window_title = "Desaturation"
 script = ExtResource( 1 )
 
 [node name="AspectRatioContainer" parent="VBoxContainer" index="0"]
-margin_right = 278.0
+offset_right = 278.0
 
 [node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-margin_left = 39.0
-margin_right = 239.0
+offset_left = 39.0
+offset_right = 239.0
 
 [node name="RGBAContainer" type="HBoxContainer" parent="VBoxContainer" index="1"]
-margin_top = 204.0
-margin_right = 278.0
-margin_bottom = 224.0
+offset_top = 204.0
+offset_right = 278.0
+offset_bottom = 224.0
 alignment = 1
 
 [node name="RButton" type="Button" parent="VBoxContainer/RGBAContainer" index="0"]
-margin_right = 66.0
-margin_bottom = 20.0
-hint_tooltip = "Modify Red Channel"
+offset_right = 66.0
+offset_bottom = 20.0
+tooltip_text = "Modify Red Channel"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 toggle_mode = true
@@ -31,10 +31,10 @@ pressed = true
 text = "R"
 
 [node name="GButton" type="Button" parent="VBoxContainer/RGBAContainer" index="1"]
-margin_left = 70.0
-margin_right = 137.0
-margin_bottom = 20.0
-hint_tooltip = "Modify Green Channel"
+offset_left = 70.0
+offset_right = 137.0
+offset_bottom = 20.0
+tooltip_text = "Modify Green Channel"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 toggle_mode = true
@@ -42,10 +42,10 @@ pressed = true
 text = "G"
 
 [node name="BButton" type="Button" parent="VBoxContainer/RGBAContainer" index="2"]
-margin_left = 141.0
-margin_right = 207.0
-margin_bottom = 20.0
-hint_tooltip = "Modify Blue Channel"
+offset_left = 141.0
+offset_right = 207.0
+offset_bottom = 20.0
+tooltip_text = "Modify Blue Channel"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 toggle_mode = true
@@ -53,39 +53,39 @@ pressed = true
 text = "B"
 
 [node name="AButton" type="Button" parent="VBoxContainer/RGBAContainer" index="3"]
-margin_left = 211.0
-margin_right = 278.0
-margin_bottom = 20.0
-hint_tooltip = "Modify Alpha Channel"
+offset_left = 211.0
+offset_right = 278.0
+offset_bottom = 20.0
+tooltip_text = "Modify Alpha Channel"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 toggle_mode = true
 text = "A"
 
 [node name="OptionsContainer" parent="VBoxContainer" index="2"]
-margin_top = 228.0
-margin_right = 278.0
-margin_bottom = 252.0
+offset_top = 228.0
+offset_right = 278.0
+offset_bottom = 252.0
 
 [node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
-margin_right = 278.0
+offset_right = 278.0
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 
 [node name="AnimationOptions" parent="VBoxContainer" index="3"]
 visible = false
-margin_top = 256.0
-margin_right = 278.0
-margin_bottom = 290.0
+offset_top = 256.0
+offset_right = 278.0
+offset_bottom = 290.0
 
 [node name="PanelContainer" parent="VBoxContainer/AnimationOptions" index="1"]
-margin_right = 157.0
+offset_right = 157.0
 
 [node name="AnimateMenu" parent="VBoxContainer/AnimationOptions/PanelContainer" index="0"]
-margin_right = 88.0
+offset_right = 88.0
 
 [node name="InitalButton" parent="VBoxContainer/AnimationOptions" index="2"]
-margin_left = 161.0
-margin_right = 278.0
+offset_left = 161.0
+offset_right = 278.0
 
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/RButton" to="." method="_on_RButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/GButton" to="." method="_on_GButton_toggled"]

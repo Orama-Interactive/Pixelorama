@@ -8,129 +8,129 @@
 blend_mode = 4
 
 [node name="TileModeOffsetsDialog" type="ConfirmationDialog"]
-margin_right = 301.0
-margin_bottom = 422.0
-rect_min_size = Vector2( 172, 422 )
+offset_right = 301.0
+offset_bottom = 422.0
+custom_minimum_size = Vector2( 172, 422 )
 window_title = "Tile Mode Offsets"
 resizable = true
 script = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 293.0
-margin_bottom = 386.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 293.0
+offset_bottom = 386.0
 
 [node name="TileModeOffsets" type="Label" parent="VBoxContainer"]
-margin_right = 285.0
-margin_bottom = 14.0
+offset_right = 285.0
+offset_bottom = 14.0
 text = "Tile Mode Offsets"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 18.0
-margin_right = 285.0
-margin_bottom = 150.0
+offset_top = 18.0
+offset_right = 285.0
+offset_bottom = 150.0
 
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer"]
-margin_right = 137.0
-margin_bottom = 132.0
-custom_constants/vseparation = 4
-custom_constants/hseparation = 2
+offset_right = 137.0
+offset_bottom = 132.0
+theme_override_constants/v_separation = 4
+theme_override_constants/h_separation = 2
 columns = 2
 
 [node name="XBasisXLabel" type="Label" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
-margin_top = 5.0
-margin_right = 61.0
-margin_bottom = 19.0
+offset_top = 5.0
+offset_right = 61.0
+offset_bottom = 19.0
 text = "X-basis x:"
 
 [node name="XBasisX" type="SpinBox" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
-margin_left = 63.0
-margin_right = 137.0
-margin_bottom = 24.0
+offset_left = 63.0
+offset_right = 137.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 min_value = -16384.0
 max_value = 16384.0
 suffix = "px"
 
 [node name="XBasisYLabel" type="Label" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
-margin_top = 33.0
-margin_right = 61.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 61.0
+offset_bottom = 47.0
 text = "X-basis y:"
 
 [node name="XBasisY" type="SpinBox" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
-margin_left = 63.0
-margin_top = 28.0
-margin_right = 137.0
-margin_bottom = 52.0
+offset_left = 63.0
+offset_top = 28.0
+offset_right = 137.0
+offset_bottom = 52.0
 mouse_default_cursor_shape = 2
 min_value = -16384.0
 max_value = 16384.0
 suffix = "px"
 
 [node name="YBasisXLabel" type="Label" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
-margin_top = 61.0
-margin_right = 61.0
-margin_bottom = 75.0
+offset_top = 61.0
+offset_right = 61.0
+offset_bottom = 75.0
 text = "Y-basis x:"
 
 [node name="YBasisX" type="SpinBox" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
-margin_left = 63.0
-margin_top = 56.0
-margin_right = 137.0
-margin_bottom = 80.0
+offset_left = 63.0
+offset_top = 56.0
+offset_right = 137.0
+offset_bottom = 80.0
 mouse_default_cursor_shape = 2
 min_value = -16384.0
 max_value = 16384.0
 suffix = "px"
 
 [node name="YBasisYLabel" type="Label" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
-margin_top = 89.0
-margin_right = 61.0
-margin_bottom = 103.0
+offset_top = 89.0
+offset_right = 61.0
+offset_bottom = 103.0
 text = "Y-basis y:"
 
 [node name="YBasisY" type="SpinBox" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
-margin_left = 63.0
-margin_top = 84.0
-margin_right = 137.0
-margin_bottom = 108.0
+offset_left = 63.0
+offset_top = 84.0
+offset_right = 137.0
+offset_bottom = 108.0
 mouse_default_cursor_shape = 2
 min_value = -16384.0
 max_value = 16384.0
 suffix = "px"
 
 [node name="Reset" type="Button" parent="VBoxContainer/HBoxContainer/OptionsContainer"]
-margin_top = 112.0
-margin_right = 61.0
-margin_bottom = 132.0
+offset_top = 112.0
+offset_right = 61.0
+offset_bottom = 132.0
 mouse_default_cursor_shape = 2
 text = "Reset"
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
-margin_left = 141.0
-margin_right = 145.0
-margin_bottom = 132.0
+offset_left = 141.0
+offset_right = 145.0
+offset_bottom = 132.0
 
 [node name="Masking" type="CheckButton" parent="VBoxContainer/HBoxContainer"]
-margin_left = 149.0
-margin_right = 281.0
-margin_bottom = 40.0
+offset_left = 149.0
+offset_right = 281.0
+offset_bottom = 40.0
 size_flags_vertical = 0
 text = "Masking"
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_top = 154.0
-margin_right = 285.0
-margin_bottom = 378.0
+offset_top = 154.0
+offset_right = 285.0
+offset_bottom = 378.0
 size_flags_vertical = 3
 
 [node name="Preview" type="Control" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 30.5
-margin_right = 254.5
-margin_bottom = 224.0
-rect_min_size = Vector2( 200, 200 )
+offset_left = 30.5
+offset_right = 254.5
+offset_bottom = 224.0
+custom_minimum_size = Vector2( 200, 200 )
 
 [node name="TileMode" type="Node2D" parent="VBoxContainer/AspectRatioContainer/Preview"]
 material = SubResource( 1 )
@@ -140,10 +140,10 @@ script = ExtResource( 2 )
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 0.0
-margin_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
-[connection signal="about_to_show" from="." to="." method="_on_TileModeOffsetsDialog_about_to_show"]
+[connection signal="about_to_popup" from="." to="." method="_on_TileModeOffsetsDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_TileModeOffsetsDialog_confirmed"]
 [connection signal="item_rect_changed" from="." to="." method="_on_TileModeOffsetsDialog_item_rect_changed"]
 [connection signal="popup_hide" from="." to="." method="_on_TileModeOffsetsDialog_popup_hide"]

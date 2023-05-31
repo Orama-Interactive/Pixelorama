@@ -8,9 +8,9 @@
 script = ExtResource( 2 )
 
 [node name="ThicknessSlider" parent="." index="2" instance=ExtResource( 3 )]
-margin_top = 26.0
-margin_right = 116.0
-margin_bottom = 50.0
+offset_top = 26.0
+offset_right = 116.0
+offset_bottom = 50.0
 min_value = 1.0
 value = 1.0
 prefix = "Size:"
@@ -21,7 +21,7 @@ is_global = true
 visible = false
 
 [node name="ColorInterpolation" parent="." index="4"]
-margin_top = 66.0
-margin_bottom = 128.0
+offset_top = 66.0
+offset_bottom = 128.0
 
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]

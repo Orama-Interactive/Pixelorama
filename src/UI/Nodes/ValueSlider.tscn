@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/misc/value_slider.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/misc/value_slider.png" type="Texture2D" id=2]
 
-[node name="ValueSlider" type="TextureProgress"]
-margin_right = 24.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 32, 24 )
+[node name="ValueSlider" type="TextureProgressBar"]
+offset_right = 24.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 32, 24 )
 mouse_filter = 0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3

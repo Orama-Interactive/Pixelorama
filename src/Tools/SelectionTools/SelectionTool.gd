@@ -22,10 +22,10 @@ var _intersect := false  # Shift + Ctrl + Mouse Click
 var _content_transformation_check := false
 var _skip_slider_logic := false
 
-onready var selection_node: Node2D = Global.canvas.selection
-onready var position_sliders := $Position as ValueSliderV2
-onready var size_sliders := $Size as ValueSliderV2
-onready var timer := $Timer as Timer
+@onready var selection_node: Node2D = Global.canvas.selection
+@onready var position_sliders := $Position as ValueSliderV2
+@onready var size_sliders := $Size as ValueSliderV2
+@onready var timer := $Timer as Timer
 
 
 func _ready() -> void:
@@ -45,7 +45,7 @@ func refresh_options() -> void:
 
 
 func get_config() -> Dictionary:
-	var config := .get_config()
+	var config := super.get_config()
 	config["mode_selected"] = _mode_selected
 	return config
 
@@ -73,7 +73,7 @@ func set_spinbox_values() -> void:
 
 func draw_start(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_start(position)
+	super.draw_start(position)
 	if selection_node.arrow_key_move:
 		return
 	var project: Project = Global.current_project
@@ -148,7 +148,7 @@ func draw_start(position: Vector2) -> void:
 
 func draw_move(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_move(position)
+	super.draw_move(position)
 	if selection_node.arrow_key_move:
 		return
 	# This is true if content transformation has been confirmed (pressed Enter for example)
@@ -190,7 +190,7 @@ func draw_move(position: Vector2) -> void:
 
 func draw_end(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_end(position)
+	super.draw_end(position)
 	if selection_node.arrow_key_move:
 		return
 	if _content_transformation_check == selection_node.is_moving_content:

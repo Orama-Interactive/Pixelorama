@@ -3,13 +3,13 @@
 ## aimgio
 
 - Upstream: https://gitlab.com/20kdc/20kdc_godot_addons
-- Version: Presently git commit b6a1411758c856ad543f4f661ca4105aa7c0ab6d
+- Version: Presently git commit 515f5c37323c7c70299f31f658e30783c775ca47
 - License: [Unlicense](https://gitlab.com/20kdc/20kdc_godot_addons/-/blob/b6a1411758c856ad543f4f661ca4105aa7c0ab6d/addons/aimg_io/COPYING.txt)
 
 ## Keychain
 
 - Upstream: https://github.com/Orama-Interactive/Keychain
-- Version: Based on git commit 22539c2b9b9e781c0cd54f32d92c77b6f36837e0 with slight modifications in Keychain.gd and ShortcutEdit.tscn.
+- Version: Based on git commit ad2c9b50981a86e41866b5f8512519d1568cf6dc with slight modifications in Keychain.gd and ShortcutEdit.tscn.
 - License: [MIT](https://github.com/Orama-Interactive/Keychain/blob/main/LICENSE)
 
 ## gdgifexporter
@@ -24,6 +24,6 @@ Files extracted from source:
 ## godot-dockable-container
 
 - Upstream: https://github.com/gilzoide/godot-dockable-container
-- Version: Based on git commit e5df60ed1d53246e03dba36053ff009846ba5174 with a modification on dockable_container.gd (lines 187-191).
+- Version: Based on git commit 379a4a4e1c94f0020f513336dcd7d741f75fa22b with a modification on dockable_container.gd (lines 33-36).
 - License: [CC0-1.0](https://github.com/gilzoide/godot-dockable-container/blob/main/LICENSE)
 

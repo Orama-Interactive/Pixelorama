@@ -1,6 +1,6 @@
-tool
+@tool
 class_name AImgIOAPNGImporter
-extends Reference
+extends RefCounted
 # Will NOT import regular, unanimated PNGs - use Image.load_png_from_buffer
 # This is because we don't want to import the default image as a frame
 # Therefore it just uses the rule:
@@ -10,7 +10,7 @@ extends Reference
 # Imports an APNG PoolByteArray into an animation as an Array of frames.
 # Returns [error, frames] similar to some read functions.
 # However, error is a string.
-static func load_from_buffer(buffer: PoolByteArray) -> Array:
+static func load_from_buffer(buffer: PackedByteArray) -> Array:
 	var stream := AImgIOAPNGStream.new(buffer)
 	var magic_str = stream.read_magic()
 	if magic_str != null:
@@ -35,14 +35,14 @@ static func load_from_buffer(buffer: PoolByteArray) -> Array:
 	# So to convert an APNG frame to a PNG for reading, we need to stitch:
 	# IHDR (modified), PLTE (if present), tRNS (if present), IDAT (from fdAT),
 	#  and IEND (generated).
-	var ihdr := PoolByteArray()
-	var plte := PoolByteArray()
-	var trns := PoolByteArray()
+	var ihdr := PackedByteArray()
+	var plte := PackedByteArray()
+	var trns := PackedByteArray()
 	# stored full width/height for buffer
 	var width := 0
 	var height := 0
 	# parse chunks
-	var frames := []
+	var frames: Array[BFrame] = []
 	while stream.read_chunk() == OK:
 		if stream.chunk_type == "IHDR":
 			ihdr = stream.chunk_data
@@ -78,17 +78,16 @@ static func load_from_buffer(buffer: PoolByteArray) -> Array:
 			if len(frames) > 0:
 				var f: BFrame = frames[len(frames) - 1]
 				if len(stream.chunk_data) >= 4:
-					var data := stream.chunk_data.subarray(4, len(stream.chunk_data) - 1)
+					var data := stream.chunk_data.slice(4, len(stream.chunk_data))
 					f.add_data(data)
 	# theoretically we *could* store the default frame somewhere, but *why*?
 	# just use Image functions if you want that
 	if len(frames) == 0:
 		return ["No frames", null]
 	# prepare initial operating buffer
-	var operating := Image.new()
-	operating.create(width, height, false, Image.FORMAT_RGBA8)
+	var operating := Image.create(width, height, false, Image.FORMAT_RGBA8)
 	operating.fill(Color(0, 0, 0, 0))
-	var finished := []
+	var finished: Array[AImgIOFrame] = []
 	for v in frames:
 		var fv: BFrame = v
 		# Ok, so to avoid having to deal with filters and stuff,
@@ -106,9 +105,9 @@ static func load_from_buffer(buffer: PoolByteArray) -> Array:
 		var blit_target := operating
 		var copy_blit_target := true
 		# rectangles and such
-		var blit_src := Rect2(Vector2.ZERO, intermediary_img.get_size())
-		var blit_pos := Vector2(fv.x, fv.y)
-		var blit_tgt := Rect2(blit_pos, intermediary_img.get_size())
+		var blit_src := Rect2i(Vector2i.ZERO, intermediary_img.get_size())
+		var blit_pos := Vector2i(fv.x, fv.y)
+		var blit_tgt := Rect2i(blit_pos, intermediary_img.get_size())
 		# early dispose ops
 		if fv.dispose_op == 2:
 			# previous
@@ -118,10 +117,11 @@ static func load_from_buffer(buffer: PoolByteArray) -> Array:
 			blit_target.copy_from(operating)
 			copy_blit_target = false
 		# actually blit
-		if fv.blend_op == 0:
-			blit_target.blit_rect(intermediary_img, blit_src, blit_pos)
-		else:
-			blit_target.blend_rect(intermediary_img, blit_src, blit_pos)
+		if blit_src.size != Vector2i.ZERO:
+			if fv.blend_op == 0:
+				blit_target.blit_rect(intermediary_img, blit_src, blit_pos)
+			else:
+				blit_target.blend_rect(intermediary_img, blit_src, blit_pos)
 		# insert as frame
 		var ffin := AImgIOFrame.new()
 		ffin.duration = fv.duration
@@ -143,10 +143,10 @@ static func load_from_buffer(buffer: PoolByteArray) -> Array:
 # Imports an APNG file into an animation as an array of frames.
 # Returns null on error.
 static func load_from_file(path: String) -> Array:
-	var o := File.new()
-	if o.open(path, File.READ) != OK:
+	var o := FileAccess.open(path, FileAccess.READ)
+	if o == null:
 		return [null, "Unable to open file: " + path]
-	var l = o.get_len()
+	var l = o.get_length()
 	var data = o.get_buffer(l)
 	o.close()
 	return load_from_buffer(data)
@@ -154,7 +154,7 @@ static func load_from_file(path: String) -> Array:
 
 # Intermediate frame structure
 class BFrame:
-	extends Reference
+	extends RefCounted
 	var dispose_op: int
 	var blend_op: int
 	var x: int
@@ -162,9 +162,9 @@ class BFrame:
 	var w: int
 	var h: int
 	var duration: float
-	var data: PoolByteArray
+	var data: PackedByteArray
 
-	func setup(fctl: PoolByteArray):
+	func setup(fctl: PackedByteArray):
 		if len(fctl) < 26:
 			return ""
 		var sp := StreamPeerBuffer.new()
@@ -191,8 +191,8 @@ class BFrame:
 	# This can be loaded by Godot directly.
 	# This basically skips most of the APNG decoding process.
 	func intermediary(
-		ihdr: PoolByteArray, plte: PoolByteArray, trns: PoolByteArray
-	) -> PoolByteArray:
+		ihdr: PackedByteArray, plte: PackedByteArray, trns: PackedByteArray
+	) -> PackedByteArray:
 		# Might be important to note this operates on a copy of ihdr (by-value).
 		var sp := StreamPeerBuffer.new()
 		sp.data_array = ihdr
@@ -207,8 +207,8 @@ class BFrame:
 		if len(trns) > 0:
 			intermed.write_chunk("tRNS", trns)
 		intermed.write_chunk("IDAT", data)
-		intermed.write_chunk("IEND", PoolByteArray())
+		intermed.write_chunk("IEND", PackedByteArray())
 		return intermed.finish()
 
-	func add_data(d: PoolByteArray):
+	func add_data(d: PackedByteArray):
 		data.append_array(d)
