@@ -1,15 +1,14 @@
+# gdlint: ignore=max-public-methods
 extends Node
 
 # use these variables in your extension to access the api
-var general := GeneralAPI.new()
-var menu := MenuAPI.new()
-var dialog := DialogAPI.new()
-var panel := PanelAPI.new()
-var theme := ThemeAPI.new()
-var tools := ToolAPI.new()
-var project := ProjectAPI.new()
-var exports := ExportAPI.new()
-var signals := SignalsAPI.new()
+var general = GeneralAPI.new()
+var menu = MenuAPI.new()
+var dialog = DialogAPI.new()
+var panel = PanelAPI.new()
+var theme = ThemeAPI.new()
+var tools = ToolAPI.new()
+var project = ProjectAPI.new()
 
 # This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
 var _action_history: Dictionary = {}
@@ -51,12 +50,6 @@ func remove_action(action: String):
 			_action_history[extension_name].erase(action)
 
 
-func wait_frame():  # as yield is not available to classes below, so this is the solution
-	# use by yield(ExtensionsApi.wait_frame(), "completed")
-	await get_tree().idle_frame
-	await get_tree().idle_frame
-
-
 func _get_caller_extension_name() -> String:
 	var stack = get_stack()
 	for trace in stack:
@@ -90,14 +83,7 @@ class GeneralAPI:
 	func get_global() -> Global:
 		return Global
 
-	func get_drawing_algos() -> DrawingAlgos:
-		return DrawingAlgos
-
-	func get_shader_image_effect() -> ShaderImageEffect:
-		return ShaderImageEffect.new()
-
 	func get_extensions_node() -> Node:
-		# node where the nodes listed in "nodes" from extension.json gets placed
 		return Global.control.get_node("Extensions")
 
 	func get_canvas() -> Canvas:
@@ -171,63 +157,30 @@ class PanelAPI:
 		var dockable := _get_dockable_container_ui()
 		return dockable.get_tabs_visible()
 
-	func add_node_as_tab(node: Node) -> void:
+	func add_node_as_tab(node: Node, alongside_node: String) -> void:
 		var dockable := _get_dockable_container_ui()
-		var top_menu_container = Global.top_menu_container
-		var panels_submenu: PopupMenu = top_menu_container.panels_submenu
-		# adding the node to the first tab we find, it'll be re-ordered by layout anyway
-		var tabs = _get_tabs_in_root(dockable.layout.root)
-		if tabs.size() != 0:
-			dockable.add_child(node)
-			tabs[0].insert_node(0, node)  # Insert at the beginning
-		else:
-			push_error("No tabs found!")
+		dockable.add_child(node)
+		var tab = _find_tab_with_node(alongside_node, dockable)
+		if not tab:
+			push_error("Tab not found")
 			return
-		top_menu_container.ui_elements.append(node)
-		# refreshing Panels submenu
-		var new_elements = top_menu_container.ui_elements
-		panels_submenu.clear()
-		for element in new_elements:
-			panels_submenu.add_check_item(element.name)
-			var is_hidden: bool = dockable.is_control_hidden(element)
-			panels_submenu.set_item_checked(new_elements.find(element), !is_hidden)
-		# re-assigning layout
-		top_menu_container.set_layout(top_menu_container.selected_layout)
-		# we must make tabs_visible = true for a few moments if it is false
-		if dockable.tabs_visible == false:
-			dockable.tabs_visible = true
-			await ExtensionsApi.wait_frame().completed
-			dockable.tabs_visible = false
+		tab.insert_node(0, node)  # Insert at the beginning
 		ExtensionsApi.add_action("add_tab")
+		# INSTRUCTION
+		# After this check if tabs are invisible, if they are, then make tabs visible
+		# and after doing await get_tree().process_frame twice make them invisible again
 
 	func remove_node_from_tab(node: Node) -> void:
-		var top_menu_container = Global.top_menu_container
-		var dockable = Global.control.find_child("DockableContainer")
-		var panels_submenu: PopupMenu = top_menu_container.panels_submenu
-		# find the tab that contains the node
 		if node == null:
 			return
+		var dockable = Global.control.find_child("DockableContainer")
 		var tab = _find_tab_with_node(node.name, dockable)
 		if not tab:
 			push_error("Tab not found")
 			return
-		# remove node from that tab
 		tab.remove_node(node)
 		node.get_parent().remove_child(node)
-		top_menu_container.ui_elements.erase(node)
 		node.queue_free()
-		# refreshing Panels submenu
-		var new_elements = top_menu_container.ui_elements
-		panels_submenu.clear()
-		for element in new_elements:
-			panels_submenu.add_check_item(element.name)
-			var is_hidden: bool = dockable.is_control_hidden(element)
-			panels_submenu.set_item_checked(new_elements.find(element), !is_hidden)
-		# we must make tabs_visible = true for a few moments if it is false
-		if dockable.tabs_visible == false:
-			dockable.tabs_visible = true
-			await ExtensionsApi.wait_frame().completed
-			dockable.tabs_visible = false
 		ExtensionsApi.remove_action("add_tab")
 
 	# PRIVATE METHODS
@@ -243,7 +196,7 @@ class PanelAPI:
 				return tab
 		return null
 
-	func _get_tabs_in_root(parent_resource) -> Array:
+	func _get_tabs_in_root(parent_resource):
 		var parents := []  # Resources have no get_parent_resource() so this is an alternative
 		var scanned := []  # To keep track of already discovered layout_split resources
 		var child_number := 0
@@ -253,7 +206,7 @@ class PanelAPI:
 		# Get children in the parent, the initial parent is the node we entered as "parent"
 		while child_number < 2:
 			# If parent isn't a (layout_split) resource then there is no point
-			# in continuing (this is just a sanity check and should always pass)
+			# in continuing (This is just a Sanity Check and should always pass)
 			if !scan_target.has_method("get_first"):
 				break
 
@@ -284,7 +237,6 @@ class PanelAPI:
 				# If there is no parent left to get scanned
 				if scan_target == null:
 					return tabs
-		return tabs
 
 
 class ThemeAPI:
@@ -322,18 +274,17 @@ class ToolAPI:
 		shortcut: String,
 		scene: PackedScene,
 		extra_hint := "",
-		extra_shortucts := [],
-		layer_types: PackedInt32Array = []
+		extra_shortucts := []
 	) -> void:
 		var tool_class := Tools.Tool.new(
-			tool_name, display_name, shortcut, scene, layer_types, extra_hint, extra_shortucts
+			tool_name, display_name, shortcut, scene, extra_hint, extra_shortucts
 		)
 		Tools.tools[tool_name] = tool_class
 		Tools.add_tool_button(tool_class)
 		ExtensionsApi.add_action("add_tool")
 
 	func remove_tool(tool_name: String) -> void:
-		# Re-assigning the tools in case the tool to be removed is also active
+		# Re-assigning the tools in case the @tool to be removed is also Active
 		Tools.assign_tool("Pencil", MOUSE_BUTTON_LEFT)
 		Tools.assign_tool("Eraser", MOUSE_BUTTON_RIGHT)
 		var tool_class: Tools.Tool = Tools.tools[tool_name]
@@ -346,135 +297,17 @@ class ProjectAPI:
 	func get_current_project() -> Project:
 		return Global.current_project
 
-	func get_project_info(project: Project) -> Dictionary:
-		return project.serialize()
-
-	func get_current_cel() -> BaseCel:
-		return get_current_project().get_current_cel()
-
-	func get_cel_at(project: Project, frame: int, layer: int) -> BaseCel:
-		# frames from left to right, layers from bottom to top
-		clamp(frame, 0, project.frames.size() - 1)
-		clamp(layer, 0, project.layers.size() - 1)
-		return project.frames[frame].cels[layer]
-
-	func set_pixelcel_image(image: Image, frame: int, layer: int) -> void:
-		# frames from left to right, layers from bottom to top
-		if get_cel_at(get_current_project(), frame, layer).get_class_name() == "PixelCel":
-			OpenSave.open_image_at_cel(image, layer, frame)
+	func get_current_cel_info() -> Dictionary:
+		# As types of cel are added to Pixelorama,
+		# then the old extension would have no idea how to identify the types they use
+		# E.g the extension may try to use a GroupCel as a PixelCel (if it doesn't know the difference)
+		# So it's encouraged to use this function to access cels
+		var project = get_current_project()
+		var cel = project.get_current_cel()
+		# Add cel types as we have more and more cels
+		if cel is PixelCel:
+			return {"cel": cel, "type": "PixelCel"}
+		elif cel is GroupCel:
+			return {"cel": cel, "type": "GroupCel"}
 		else:
-			print("cel at frame ", frame, ", layer ", layer, " is not a PixelCel")
-
-
-class ExportAPI:
-	# gdlint: ignore=class-variable-name
-	var ExportTab := Export.ExportTab
-
-	func add_export_option(
-		format_info: Dictionary, exporter_generator, tab := ExportTab.IMAGE, is_animated := true
-	) -> int:
-		# separate enum name and file name
-		var extension = ""
-		var format_name = ""
-		if format_info.has("extension"):
-			extension = format_info["extension"]
-		if format_info.has("description"):
-			format_name = format_info["description"].to_upper().replace(" ", "_")
-		# change format name if another one uses the same name
-		for i in range(Export.FileFormat.size()):
-			var test_name = format_name
-			if i != 0:
-				test_name = str(test_name, "_", i)
-			if !Export.FileFormat.keys().has(test_name):
-				format_name = test_name
-				break
-		#  add to FileFormat enum
-		var id := Export.FileFormat.size()
-		for i in Export.FileFormat.size():  # use an empty id if it's available
-			if !Export.FileFormat.values().has(i):
-				id = i
-		Export.FileFormat.merge({format_name: id})
-		#  add exporter generator
-		Export.custom_exporter_generators.merge({id: [exporter_generator, extension]})
-		#  add to animated (or not)
-		if is_animated:
-			Export.animated_formats.append(id)
-		#  add to export dialog
-		match tab:
-			ExportTab.IMAGE:
-				Global.export_dialog.image_exports.append(id)
-			ExportTab.SPRITESHEET:
-				Global.export_dialog.spritesheet_exports.append(id)
-			_:  # Both
-				Global.export_dialog.image_exports.append(id)
-				Global.export_dialog.spritesheet_exports.append(id)
-		ExtensionsApi.add_action("add_exporter")
-		return id
-
-	func remove_export_option(id: int):
-		if Export.custom_exporter_generators.has(id):
-			# remove enum
-			Export.remove_file_format(id)
-			# remove exporter generator
-			Export.custom_exporter_generators.erase(id)
-			#  remove from animated (or not)
-			Export.animated_formats.erase(id)
-			#  add to export dialog
-			Global.export_dialog.image_exports.erase(id)
-			Global.export_dialog.spritesheet_exports.erase(id)
-			ExtensionsApi.remove_action("add_exporter")
-
-
-class SignalsAPI:
-	# system to auto-adjust texture_changed to the "current cel"
-	signal texture_changed
-	var _last_cel: BaseCel
-
-	func _init() -> void:
-		Global.connect("project_changed", Callable(self, "_update_texture_signal"))
-		Global.connect("cel_changed", Callable(self, "_update_texture_signal"))
-
-	func _update_texture_signal():
-		if _last_cel:
-			_last_cel.disconnect("texture_changed", Callable(self, "_on_texture_changed"))
-		if Global.current_project:
-			_last_cel = Global.current_project.get_current_cel()
-			_last_cel.connect("texture_changed", Callable(self, "_on_texture_changed"))
-
-	func _on_texture_changed():
-		emit_signal("texture_changed")
-
-	# Global signals
-	func connect_project_changed(target: Object, method: String):
-		Global.connect("project_changed", Callable(target, method))
-		ExtensionsApi.add_action("project_changed")
-
-	func disconnect_project_changed(target: Object, method: String):
-		Global.disconnect("project_changed", Callable(target, method))
-		ExtensionsApi.remove_action("project_changed")
-
-	func connect_cel_changed(target: Object, method: String):
-		Global.connect("cel_changed", Callable(target, method))
-		ExtensionsApi.add_action("cel_changed")
-
-	func disconnect_cel_changed(target: Object, method: String):
-		Global.disconnect("cel_changed", Callable(target, method))
-		ExtensionsApi.remove_action("cel_changed")
-
-	# Tool Signal
-	func connect_tool_color_changed(target: Object, method: String):
-		Tools.connect("color_changed", Callable(target, method))
-		ExtensionsApi.add_action("color_changed")
-
-	func disconnect_tool_color_changed(target: Object, method: String):
-		Tools.disconnect("color_changed", Callable(target, method))
-		ExtensionsApi.remove_action("color_changed")
-
-	# updater signals
-	func connect_current_cel_texture_changed(target: Object, method: String):
-		connect("texture_changed", Callable(target, method))
-		ExtensionsApi.add_action("texture_changed")
-
-	func disconnect_current_cel_texture_changed(target: Object, method: String):
-		disconnect("texture_changed", Callable(target, method))
-		ExtensionsApi.remove_action("texture_changed")
+			return {"cel": cel, "type": "BaseCel"}

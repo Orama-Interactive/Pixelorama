@@ -11,15 +11,17 @@ func _ready() -> void:
 		_define_js()
 
 
-func _notification(notification: int) -> void:
-	if notification == MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
+func _notification(notific: int) -> void:
+	if notific == MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
 		emit_signal("in_focus")
 
 
 func _define_js() -> void:
 	# Define JS script
-	JavaScript.eval(
-		"""
+	(
+		JavaScriptBridge
+		. eval(
+			"""
 	var fileData;
 	var fileType;
 	var fileName;
@@ -67,7 +69,8 @@ func _define_js() -> void:
 		});
 	}
 	""",
-		true
+			true
+		)
 	)
 
 
@@ -78,25 +81,25 @@ func load_image(load_directly := true):
 		return
 
 	# Execute JS function
-	JavaScript.eval("upload_image();", true)  # Opens prompt for choosing file
+	JavaScriptBridge.eval("upload_image();", true)  # Opens prompt for choosing file
 
 	await self.in_focus  # Wait until JS prompt is closed
 
 	await get_tree().create_timer(0.5).timeout  # Give some time for async JS data load
 
-	if JavaScript.eval("canceled;", true):  # If File Dialog closed w/o file
+	if JavaScriptBridge.eval("canceled;", true):  # If File Dialog closed w/o file
 		return
 
 	# Use data from png data
 	var image_data
 	while true:
-		image_data = JavaScript.eval("fileData;", true)
+		image_data = JavaScriptBridge.eval("fileData;", true)
 		if image_data != null:
 			break
 		await get_tree().create_timer(1.0).timeout  # Need more time to load data
 
-	var image_type = JavaScript.eval("fileType;", true)
-	var image_name = JavaScript.eval("fileName;", true)
+	var image_type = JavaScriptBridge.eval("fileType;", true)
+	var image_name = JavaScriptBridge.eval("fileName;", true)
 
 	var image = Image.new()
 	var image_error
@@ -135,25 +138,25 @@ func load_shader() -> void:
 		return
 
 	# Execute JS function
-	JavaScript.eval("upload_shader();", true)  # Opens prompt for choosing file
+	JavaScriptBridge.eval("upload_shader();", true)  # Opens prompt for choosing file
 
 	await self.in_focus  # Wait until JS prompt is closed
 
 	await get_tree().create_timer(0.5).timeout  # Give some time for async JS data load
 
-	if JavaScript.eval("canceled;", true):  # If File Dialog closed w/o file
+	if JavaScriptBridge.eval("canceled;", true):  # If File Dialog closed w/o file
 		return
 
 	# Use data from png data
 	var file_data
 	while true:
-		file_data = JavaScript.eval("fileData;", true)
+		file_data = JavaScriptBridge.eval("fileData;", true)
 		if file_data != null:
 			break
 		await get_tree().create_timer(1.0).timeout  # Need more time to load data
 
-#	var file_type = JavaScript.eval("fileType;", true)
-	var file_name = JavaScript.eval("fileName;", true)
+#	var file_type = JavaScriptBridge.eval("fileType;", true)
+	var file_name = JavaScriptBridge.eval("fileName;", true)
 
 	var shader = Shader.new()
 	shader.code = file_data

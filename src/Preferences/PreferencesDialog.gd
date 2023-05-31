@@ -35,11 +35,21 @@ var preferences := [
 	Preference.new("default_height", "Image/ImageOptions/ImageDefaultHeight", "value"),
 	Preference.new("default_fill_color", "Image/ImageOptions/DefaultFillColor", "color"),
 	Preference.new("smooth_zoom", "Canvas/ZoomOptions/SmoothZoom", "pressed"),
-	Preference.new("snapping_distance", "Canvas/SnappingOptions/DistanceValue", "value"),
 	Preference.new("grid_type", "Canvas/GridOptions/GridType", "selected"),
-	Preference.new("grid_size", "Canvas/GridOptions/GridSizeValue", "value"),
-	Preference.new("isometric_grid_size", "Canvas/GridOptions/IsometricGridSizeValue", "value"),
-	Preference.new("grid_offset", "Canvas/GridOptions/GridOffsetValue", "value"),
+	Preference.new("grid_width", "Canvas/GridOptions/GridWidthValue", "value"),
+	Preference.new("grid_height", "Canvas/GridOptions/GridHeightValue", "value"),
+	Preference.new(
+		"grid_isometric_cell_bounds_width",
+		"Canvas/GridOptions/IsometricCellBoundsWidthValue",
+		"value"
+	),
+	Preference.new(
+		"grid_isometric_cell_bounds_height",
+		"Canvas/GridOptions/IsometricCellBoundsHeightValue",
+		"value"
+	),
+	Preference.new("grid_offset_x", "Canvas/GridOptions/GridOffsetXValue", "value"),
+	Preference.new("grid_offset_y", "Canvas/GridOptions/GridOffsetYValue", "value"),
 	Preference.new(
 		"grid_draw_over_tile_mode", "Canvas/GridOptions/GridDrawOverTileMode", "pressed"
 	),
@@ -64,10 +74,12 @@ var preferences := [
 	Preference.new(
 		"pause_when_unfocused", "Performance/PerformanceContainer/PauseAppFocus", "pressed"
 	),
-	Preference.new(
-		"renderer", "Drivers/DriversContainer/Renderer", "selected", true, OS.VIDEO_DRIVER_GLES2
-	),
-	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", true, 0)
+	# Disabled by Variable (Cause: no OS.get_current_video_driver())
+	#	Preference.new(
+	#		"renderer", "Drivers/DriversContainer/Renderer", "selected", true, OS.VIDEO_DRIVER_GLES2
+	#	),
+	# Disabled by Variable (Cause: no OS.get_tablet_driver_name(tablet_driver))
+	#	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", true, 0)
 ]
 
 var content_list := []
@@ -130,12 +142,14 @@ func _ready() -> void:
 		right_side.get_node("Startup").queue_free()
 		right_side.get_node("Language").visible = true
 		Global.open_last_project = false
-	elif OS.get_name() == "Windows":
-		tablet_driver_label.visible = true
-		tablet_driver.visible = true
-		for driver in OS.get_tablet_driver_count():
-			var driver_name := OS.get_tablet_driver_name(driver)
-			tablet_driver.add_item(driver_name, driver)
+
+	# Disabled by Variable (Cause: no OS.get_tablet_driver_name(tablet_driver))
+#	elif OS.get_name() == "Windows":
+#		tablet_driver_label.visible = true
+#		tablet_driver.visible = true
+#		for driver in OS.get_tablet_driver_count():
+#			var driver_name := OS.get_tablet_driver_name(driver)
+#			tablet_driver.add_item(driver_name, driver)
 
 	for pref in preferences:
 		var node: Node = right_side.get_node(pref.node_path)
@@ -158,29 +172,53 @@ func _ready() -> void:
 		match pref.value_type:
 			"pressed":
 				node.connect(
-					"toggled", self, "_on_Preference_value_changed", [pref, restore_default_button]
+					"toggled",
+					Callable(self, "_on_Preference_value_changed").bindv(
+						[pref, restore_default_button]
+					)
 				)
 			"value":
-				node.connect(
-					"value_changed",
-					self,
-					"_on_Preference_value_changed",
-					[pref, restore_default_button]
+				(
+					node
+					. connect(
+						"value_changed",
+						(
+							Callable(
+								self,
+								"_on_Preference_value_changed",
+							)
+							. bindv([pref, restore_default_button])
+						)
+					)
 				)
 			"color":
 				node.get_picker().presets_visible = false
-				node.connect(
-					"color_changed",
-					self,
-					"_on_Preference_value_changed",
-					[pref, restore_default_button]
+				(
+					node
+					. connect(
+						"color_changed",
+						(
+							Callable(
+								self,
+								"_on_Preference_value_changed",
+							)
+							. bindv([pref, restore_default_button])
+						)
+					)
 				)
 			"selected":
-				node.connect(
-					"item_selected",
-					self,
-					"_on_Preference_value_changed",
-					[pref, restore_default_button]
+				(
+					node
+					. connect(
+						"item_selected",
+						(
+							Callable(
+								self,
+								"_on_Preference_value_changed",
+							)
+							. bindv([pref, restore_default_button])
+						)
+					)
 				)
 
 		var global_value = Global.get(pref.prop_name)
@@ -191,7 +229,7 @@ func _ready() -> void:
 			global_value = Global.get(pref.prop_name)
 
 			# This is needed because color_changed doesn't fire if the color changes in code
-			if typeof(value) == TYPE_VECTOR2 or typeof(value) == TYPE_COLOR:
+			if pref.value_type == "color":
 				preference_update(pref.prop_name, pref.require_restart)
 				disable_restore_default_button(
 					restore_default_button, global_value.is_equal_approx(pref.default_value)
@@ -234,10 +272,10 @@ func preference_update(prop: String, require_restart := false) -> void:
 			autosave_interval.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
 	elif "grid" in prop:
-		Global.canvas.grid.update()
+		Global.canvas.grid.queue_redraw()
 
 	elif prop in ["pixel_grid_show_at_zoom", "pixel_grid_color"]:
-		Global.canvas.pixel_grid.update()
+		Global.canvas.pixel_grid.queue_redraw()
 
 	elif "checker" in prop:
 		Global.transparent_checker.update_rect()
@@ -251,14 +289,14 @@ func preference_update(prop: String, require_restart := false) -> void:
 				guide.default_color = Global.guide_color
 
 	elif prop in ["fps_limit"]:
-		Engine.set_target_fps(Global.fps_limit)
+		Engine.set_max_fps(Global.fps_limit)
 
 	elif "selection" in prop:
 		var marching_ants: Sprite2D = Global.canvas.selection.marching_ants_outline
 		marching_ants.material.set_shader_parameter("animated", Global.selection_animated_borders)
 		marching_ants.material.set_shader_parameter("first_color", Global.selection_border_color_1)
 		marching_ants.material.set_shader_parameter("second_color", Global.selection_border_color_2)
-		Global.canvas.selection.update()
+		Global.canvas.selection.queue_redraw()
 
 	elif prop in ["icon_color_from", "custom_icon_color"]:
 		if Global.icon_color_from == Global.ColorFrom.THEME:
@@ -324,7 +362,7 @@ func add_tabs(changed_language := false) -> void:
 	autosave_interval.suffix = tr("minute(s)")
 
 
-func _on_PreferencesDialog_popup_hide() -> void:
+func _on_PreferencesDialog_close_requested() -> void:
 	list.clear()
 
 
@@ -335,15 +373,23 @@ func _on_List_item_selected(index: int) -> void:
 
 
 func _on_ShrinkApplyButton_pressed() -> void:
-	get_tree().set_screen_stretch(
-		SceneTree.STRETCH_MODE_DISABLED,
-		SceneTree.STRETCH_ASPECT_IGNORE,
-		Vector2(1024, 576),
-		Global.shrink
-	)
+	# an alternative way
+	var root = get_tree().root
+	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
+	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
+	root.min_size = Vector2(1024, 576)
+	root.content_scale_factor = Global.shrink
+
+	# Disabled by Variable (Cause: no set_screen_stretch())
+#	get_tree().root.set_screen_stretch(
+#		SceneTree.STRETCH_MODE_DISABLED,
+#		SceneTree.STRETCH_ASPECT_IGNORE,
+#		Vector2(1024, 576),
+#		Global.shrink
+#	)
 	Global.control.set_custom_cursor()
 	hide()
 	popup_centered(Vector2(600, 400))
 	Global.dialog_open(true)
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	Global.camera.fit_to_frame(Global.current_project.size)

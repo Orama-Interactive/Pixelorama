@@ -6,12 +6,6 @@ enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
 # See file_format_string, file_format_description, and ExportDialog.gd
 enum FileFormat { PNG = 0, GIF = 1, APNG = 2 }
 
-# list of animated formats
-var animated_formats := [FileFormat.GIF, FileFormat.APNG]
-
-# A dictionary of custom exporter generators (Recieved from extensions)
-var custom_exporter_generators := {}
-
 var current_tab: int = ExportTab.IMAGE
 # All frames and their layers processed/blended into images
 var processed_images := []  # Image[]
@@ -42,21 +36,8 @@ var export_progress := 0.0
 
 
 func _exit_tree() -> void:
-	if gif_export_thread.is_active():
+	if gif_export_thread.is_started():
 		gif_export_thread.wait_to_finish()
-
-
-func add_file_format(name: String) -> int:
-	var id = FileFormat.size()
-	FileFormat.merge({name: id})
-	return id
-
-
-func remove_file_format(id: int) -> void:
-	for key in Export.FileFormat.keys():
-		if Export.FileFormat[key] == id:
-			Export.FileFormat.erase(key)
-			return
 
 
 func external_export(project := Global.current_project) -> void:
@@ -81,21 +62,16 @@ func process_spritesheet(project := Global.current_project) -> void:
 
 	# If rows mode selected calculate columns count and vice versa
 	var spritesheet_columns := (
-		lines_count
-		if orientation == Orientation.ROWS
-		else frames_divided_by_spritesheet_lines()
+		lines_count if orientation == Orientation.ROWS else frames_divided_by_spritesheet_lines()
 	)
 	var spritesheet_rows := (
-		lines_count
-		if orientation == Orientation.COLUMNS
-		else frames_divided_by_spritesheet_lines()
+		lines_count if orientation == Orientation.COLUMNS else frames_divided_by_spritesheet_lines()
 	)
 
 	var width := project.size.x * spritesheet_columns
 	var height := project.size.y * spritesheet_rows
 
-	var whole_image := Image.new()
-	whole_image.create(width, height, false, Image.FORMAT_RGBA8)
+	var whole_image := Image.create(width, height, false, Image.FORMAT_RGBA8)
 	var origin := Vector2.ZERO
 	var hh := 0
 	var vv := 0
@@ -129,8 +105,7 @@ func process_animation(project := Global.current_project) -> void:
 	durations.clear()
 	var frames := calculate_frames(project)
 	for frame in frames:
-		var image := Image.new()
-		image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 		blend_layers(image, frame)
 		processed_images.append(image)
 		durations.append(frame.duration * (1.0 / project.fps))
@@ -149,11 +124,11 @@ func calculate_frames(project := Global.current_project) -> Array:
 		frames = project.frames.duplicate()
 
 	if direction == AnimationDirection.BACKWARDS:
-		frames.invert()
+		frames.reverse()
 	elif direction == AnimationDirection.PING_PONG:
 		var inverted_frames := frames.duplicate()
-		inverted_frames.invert()
-		inverted_frames.remove(0)
+		inverted_frames.reverse()
+		inverted_frames.remove_at(0)
 		frames.append_array(inverted_frames)
 	return frames
 
@@ -162,11 +137,19 @@ func export_processed_images(
 	ignore_overwrites: bool, export_dialog: ConfirmationDialog, project := Global.current_project
 ) -> bool:
 	# Stop export if directory path or file name are not valid
-	var dir := DirAccess.new()
-	if not dir.dir_exists(project.directory_path) or not project.file_name.is_valid_filename():
-		if not dir.dir_exists(project.directory_path) and project.file_name.is_valid_filename():
+	if (
+		not DirAccess.dir_exists_absolute(project.directory_path)
+		or not project.file_name.is_valid_filename()
+	):
+		if (
+			not DirAccess.dir_exists_absolute(project.directory_path)
+			and project.file_name.is_valid_filename()
+		):
 			export_dialog.open_path_validation_alert_popup(0)
-		elif not project.file_name.is_valid_filename() and dir.dir_exists(project.directory_path):
+		elif (
+			not project.file_name.is_valid_filename()
+			and DirAccess.dir_exists_absolute(project.directory_path)
+		):
 			export_dialog.open_path_validation_alert_popup(1)
 		else:
 			export_dialog.open_path_validation_alert_popup()
@@ -184,14 +167,12 @@ func export_processed_images(
 		# If the user wants to create a new directory for each animation tag then check
 		# if directories exist, and create them if not
 		if multiple_files and new_dir_for_each_frame_tag:
-			var frame_tag_directory := DirAccess.new()
-			if not frame_tag_directory.dir_exists(export_path.get_base_dir()):
-				frame_tag_directory.open(project.directory_path)
+			if not DirAccess.dir_exists_absolute(export_path.get_base_dir()):
+				var frame_tag_directory := DirAccess.open(project.directory_path)
 				frame_tag_directory.make_dir(export_path.get_base_dir().get_file())
 
 		if not ignore_overwrites:  # Check if the files already exist
-			var file_check: File = File.new()
-			if file_check.file_exists(export_path):
+			if FileAccess.file_exists(export_path):
 				if not paths_of_existing_files.is_empty():
 					paths_of_existing_files += "\n"
 				paths_of_existing_files += export_path
@@ -206,32 +187,9 @@ func export_processed_images(
 		# Stops the function until the user decides if they want to overwrite
 		await export_dialog.resume_export_function
 		if stop_export:  # User decided to stop export
-			return
+			return false
 
 	scale_processed_images()
-
-	# override if a custom export is chosen
-	if project.file_format in custom_exporter_generators.keys():
-		# Divert the path to the custom exporter instead
-		var custom_exporter: Object = custom_exporter_generators[project.file_format][0]
-		if custom_exporter.has_method("override_export"):
-			var result := true
-			var details := {
-				"processed_images": processed_images,
-				"durations": durations,
-				"export_dialog": export_dialog,
-				"export_paths": export_paths,
-				"project": project
-			}
-			if OS.get_name() != "HTML5" and is_single_file_format(project):
-				if gif_export_thread.is_active():
-					gif_export_thread.wait_to_finish()
-				var error = gif_export_thread.start(Callable(custom_exporter, "override_export").bind(details))
-				if error == OK:
-					result = gif_export_thread.wait_to_finish()
-			else:
-				result = custom_exporter.call("override_export", details)
-			return result
 
 	if is_single_file_format(project):
 		var exporter: AImgIOBaseExporter
@@ -248,27 +206,23 @@ func export_processed_images(
 		if OS.get_name() == "HTML5":
 			export_animated(details)
 		else:
-			if gif_export_thread.is_active():
+			if gif_export_thread.is_started():
 				gif_export_thread.wait_to_finish()
 			gif_export_thread.start(Callable(self, "export_animated").bind(details))
 	else:
-		var succeeded := true
 		for i in range(processed_images.size()):
 			if OS.get_name() == "HTML5":
-				JavaScript.download_buffer(
+				JavaScriptBridge.download_buffer(
 					processed_images[i].save_png_to_buffer(),
 					export_paths[i].get_file(),
 					"image/png"
 				)
 			else:
-				var err: int = processed_images[i].save_png(export_paths[i])
+				var err = processed_images[i].save_png(export_paths[i])
 				if err != OK:
 					Global.error_dialog.set_text(tr("File failed to save. Error code %s") % err)
 					Global.error_dialog.popup_centered()
 					Global.dialog_open(true)
-					succeeded = false
-		if succeeded:
-			Global.notification_label("File(s) exported")
 
 	# Store settings for quick export and when the dialog is opened again
 	var file_name_with_ext := project.file_name + file_format_string(project.file_format)
@@ -281,6 +235,10 @@ func export_processed_images(
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.EXPORT, tr("Export") + " %s" % file_name_with_ext
 		)
+
+	# Only show when not exporting gif - gif export finishes in thread
+	if not is_single_file_format(project):
+		Global.notification_label("File(s) exported")
 	return true
 
 
@@ -297,7 +255,7 @@ func export_animated(args: Dictionary) -> void:
 	export_dialog.set_export_progress_bar(export_progress)
 	export_dialog.toggle_export_progress_popup(true)
 
-	# Transform into AImgIO form
+	# Transform3D into AImgIO form
 	var frames := []
 	for i in range(len(processed_images)):
 		var frame: AImgIOFrame = AImgIOFrame.new()
@@ -311,10 +269,9 @@ func export_animated(args: Dictionary) -> void:
 	)
 
 	if OS.get_name() == "HTML5":
-		JavaScript.download_buffer(file_data, args["export_paths"][0], exporter.mime_type)
+		JavaScriptBridge.download_buffer(file_data, args["export_paths"][0], exporter.mime_type)
 	else:
-		var file: File = File.new()
-		file.open(args["export_paths"][0], File.WRITE)
+		var file := FileAccess.open(args["export_paths"][0], FileAccess.WRITE)
 		file.store_buffer(file_data)
 		file.close()
 	export_dialog.toggle_export_progress_popup(false)
@@ -329,7 +286,6 @@ func increase_export_progress(export_dialog: Node) -> void:
 func scale_processed_images() -> void:
 	for processed_image in processed_images:
 		if resize != 100:
-			false # processed_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			processed_image.resize(
 				processed_image.get_size().x * resize / 100,
 				processed_image.get_size().y * resize / 100,
@@ -346,16 +302,11 @@ func file_format_string(format_enum: int) -> String:
 		FileFormat.APNG:
 			return ".apng"
 		_:
-			# If a file format description is not found, try generating one
-			if custom_exporter_generators.has(format_enum):
-				return custom_exporter_generators[format_enum][1]
 			return ""
 
 
 func file_format_description(format_enum: int) -> String:
 	match format_enum:
-		#  these are overrides
-		#  (if they are not given, they will generate themselves based on the enum key name)
 		FileFormat.PNG:
 			return "PNG Image"
 		FileFormat.GIF:
@@ -363,17 +314,13 @@ func file_format_description(format_enum: int) -> String:
 		FileFormat.APNG:
 			return "APNG Image"
 		_:
-			# If a file format description is not found, try generating one
-			for key in FileFormat.keys():
-				if FileFormat[key] == format_enum:
-					return str(key.capitalize())
 			return ""
 
 
 func is_single_file_format(project := Global.current_project) -> bool:
-	# True when exporting to .gif and .apng (and potentially video formats in the future)
+	# True when exporting to super.gif and super.apng (and potentially video formats in the future)
 	# False when exporting to .png, and other non-animated formats in the future
-	return animated_formats.has(project.file_format)
+	return project.file_format == FileFormat.GIF or project.file_format == FileFormat.APNG
 
 
 func create_export_path(multifile: bool, project: Project, frame: int = 0) -> String:
@@ -394,18 +341,18 @@ func create_export_path(multifile: bool, project: Project, frame: int = 0) -> St
 			if new_dir_for_each_frame_tag:
 				# Add frame tag if frame has one
 				# (frame - start_id + 1) Makes frames id to start from 1 in each frame tag directory
-				path += "_" + frame_tag_dir + "_" + String(frame - start_id + 1)
-				return project.directory_path.plus_file(frame_tag_dir).plus_file(
+				path += "_" + frame_tag_dir + "_" + str(frame - start_id + 1)
+				return project.directory_path.path_join(frame_tag_dir).path_join(
 					path + file_format_string(project.file_format)
 				)
 			else:
 				# Add frame tag if frame has one
 				# (frame - start_id + 1) Makes frames id to start from 1 in each frame tag
-				path += "_" + frame_tag_dir + "_" + String(frame - start_id + 1)
+				path += "_" + frame_tag_dir + "_" + str(frame - start_id + 1)
 		else:
-			path += "_" + String(frame)
+			path += "_" + str(frame)
 
-	return project.directory_path.plus_file(path + file_format_string(project.file_format))
+	return project.directory_path.path_join(path + file_format_string(project.file_format))
 
 
 func get_proccessed_image_animation_tag_and_start_id(
@@ -434,10 +381,10 @@ func blend_layers(
 	else:
 		var layer: BaseLayer = project.layers[export_layers - 2]
 		var layer_image := Image.new()
-		if layer is GroupLayer:
+		if layer is PixelLayer:
+			layer_image.copy_from(frame.cels[export_layers - 2].image)
+		elif layer is GroupLayer:
 			layer_image.copy_from(layer.blend_children(frame, Vector2.ZERO))
-		else:
-			layer_image.copy_from(frame.cels[export_layers - 2].get_image())
 		image.blend_rect(layer_image, Rect2(Vector2.ZERO, project.size), origin)
 
 
@@ -447,25 +394,18 @@ func blend_all_layers(
 ) -> void:
 	var layer_i := 0
 	for cel in frame.cels:
-		if not project.layers[layer_i].is_visible_in_hierarchy():
-			layer_i += 1
-			continue
-		if cel is GroupCel:
-			layer_i += 1
-			continue
-		var cel_image := Image.new()
-		cel_image.copy_from(cel.get_image())
-		if cel.opacity < 1:  # If we have cel transparency
-			false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-			for xx in cel_image.get_size().x:
-				for yy in cel_image.get_size().y:
-					var pixel_color := cel_image.get_pixel(xx, yy)
-					var alpha: float = pixel_color.a * cel.opacity
-					cel_image.set_pixel(
-						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-					)
-			false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-		image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
+		if project.layers[layer_i].is_visible_in_hierarchy() and cel is PixelCel:
+			var cel_image := Image.new()
+			cel_image.copy_from(cel.image)
+			if cel.opacity < 1:  # If we have cel transparency
+				for xx in cel_image.get_size().x:
+					for yy in cel_image.get_size().y:
+						var pixel_color := cel_image.get_pixel(xx, yy)
+						var alpha: float = pixel_color.a * cel.opacity
+						cel_image.set_pixel(
+							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
+						)
+			image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
 		layer_i += 1
 
 
@@ -473,28 +413,29 @@ func blend_all_layers(
 func blend_selected_cels(
 	image: Image, frame: Frame, origin := Vector2(0, 0), project := Global.current_project
 ) -> void:
+	var layer_i := 0
 	for cel_ind in frame.cels.size():
 		var test_array := [project.current_frame, cel_ind]
 		if not test_array in project.selected_cels:
 			continue
-		if frame.cels[cel_ind] is GroupCel:
+		if not frame.cels[cel_ind] is PixelCel:
 			continue
-		if not project.layers[cel_ind].is_visible_in_hierarchy():
-			continue
-		var cel: BaseCel = frame.cels[cel_ind]
-		var cel_image := Image.new()
-		cel_image.copy_from(cel.get_image())
-		if cel.opacity < 1:  # If we have cel transparency
-			false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-			for xx in cel_image.get_size().x:
-				for yy in cel_image.get_size().y:
-					var pixel_color := cel_image.get_pixel(xx, yy)
-					var alpha: float = pixel_color.a * cel.opacity
-					cel_image.set_pixel(
-						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-					)
-			false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-		image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
+
+		var cel: PixelCel = frame.cels[cel_ind]
+
+		if project.layers[layer_i].is_visible_in_hierarchy():
+			var cel_image := Image.new()
+			cel_image.copy_from(cel.image)
+			if cel.opacity < 1:  # If we have cel transparency
+				for xx in cel_image.get_size().x:
+					for yy in cel_image.get_size().y:
+						var pixel_color := cel_image.get_pixel(xx, yy)
+						var alpha: float = pixel_color.a * cel.opacity
+						cel_image.set_pixel(
+							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
+						)
+			image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
+		layer_i += 1
 
 
 func frames_divided_by_spritesheet_lines() -> int:

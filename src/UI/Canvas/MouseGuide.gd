@@ -9,7 +9,7 @@ var track_mouse := true
 func _ready() -> void:
 	# Add a subtle difference to the normal guide color by mixing in some green
 	default_color = Global.guide_color.lerp(Color(0.2, 0.92, 0.2), .6)
-	width = Global.camera.zoom.x * 2
+	width = 1 / Global.camera.zoom.x * 2
 	draw_guide_line()
 
 
@@ -46,11 +46,11 @@ func _input(event: InputEvent) -> void:
 		else:
 			points[0].x = mouse_point.x
 			points[1].x = mouse_point.x
-	update()
+	queue_redraw()
 
 
 func _draw() -> void:
-	width = Global.camera.zoom.x * 2
+	width = 1 / Global.camera.zoom.x * 2
 	var viewport_size: Vector2 = Global.main_viewport.size
 	var zoom: Vector2 = Global.camera.zoom
 

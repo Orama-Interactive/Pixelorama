@@ -14,11 +14,9 @@ var move_preview_location := Vector2.ZERO
 @onready var pixel_grid = $PixelGrid
 @onready var grid = $Grid
 @onready var selection = $Selection
-@onready var crop_rect: CropRect = $CropRect
 @onready var indicators = $Indicators
 @onready var previews = $Previews
 @onready var mouse_guide_container = $MouseGuideContainer
-@onready var gizmos_3d: Node2D = $Gizmos3D
 
 
 func _ready() -> void:
@@ -26,12 +24,17 @@ func _ready() -> void:
 	$OnionPast.blue_red_color = Color.BLUE
 	$OnionFuture.type = $OnionFuture.FUTURE
 	$OnionFuture.blue_red_color = Color.RED
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	camera_zoom()
 
 
 func _draw() -> void:
-	var current_cels: Array = Global.current_project.frames[Global.current_project.current_frame].cels
+	Global.second_viewport.get_child(0).get_node("CanvasPreview").queue_redraw()
+	Global.small_preview_viewport.get_child(0).get_node("CanvasPreview").queue_redraw()
+
+	var current_cels: Array = (
+		Global.current_project.frames[Global.current_project.current_frame].cels
+	)
 	var position_tmp := position
 	var scale_tmp := scale
 	if Global.mirror_view:
@@ -58,10 +61,14 @@ func _draw() -> void:
 	if Global.onion_skinning:
 		refresh_onion()
 	currently_visible_frame.size = Global.current_project.size
-	current_frame_drawer.update()
+	current_frame_drawer.queue_redraw()
 	if Global.current_project.tiles.mode != Tiles.MODE.NONE:
-		tile_mode.update()
+		tile_mode.queue_redraw()
 	draw_set_transform(position, rotation, scale)
+
+
+func force_input(event: InputEvent) -> void:
+	_input(event)
 
 
 func _input(event: InputEvent) -> void:
@@ -88,11 +95,11 @@ func _input(event: InputEvent) -> void:
 			Global.main_viewport.warp_mouse(tmp_position)
 	# Do not use self.get_local_mouse_position() because it return unexpected
 	# value when shrink parameter is not equal to one. At godot version 3.2.3
-	var tmp_transform := get_canvas_transform().affine_inverse()
+	var tmp_transform = get_canvas_transform().affine_inverse()
 	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
 
 	if Global.has_focus:
-		update()
+		queue_redraw()
 
 	sprite_changed_this_frame = false
 
@@ -105,17 +112,17 @@ func _input(event: InputEvent) -> void:
 func camera_zoom() -> void:
 	# Set camera zoom based on the sprite size
 	var bigger_canvas_axis = max(Global.current_project.size.x, Global.current_project.size.y)
-	var zoom_max := Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.01
+	var zoom_out_max := Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.01
 
 	for camera in Global.cameras:
-		if zoom_max > Vector2.ONE:
-			camera.zoom_max = zoom_max
+		if zoom_out_max > Vector2.ONE:
+			camera.zoom_out_max = zoom_out_max
 		else:
-			camera.zoom_max = Vector2.ONE
+			camera.zoom_out_max = Vector2.ONE
 
 		if camera == Global.camera_preview:
-			Global.preview_zoom_slider.max_value = -camera.zoom_min.x
-			Global.preview_zoom_slider.min_value = -camera.zoom_max.x
+			Global.preview_zoom_slider.max_value = camera.zoom_in_max.x
+			Global.preview_zoom_slider.min_value = camera.zoom_out_max.x
 
 		camera.fit_to_frame(Global.current_project.size)
 		camera.save_values_to_project()
@@ -142,5 +149,5 @@ func update_selected_cels_textures(project: Project = Global.current_project) ->
 
 
 func refresh_onion() -> void:
-	$OnionPast.update()
-	$OnionFuture.update()
+	$OnionPast.queue_redraw()
+	$OnionFuture.queue_redraw()

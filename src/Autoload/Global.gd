@@ -3,7 +3,7 @@ extends Node
 signal project_changed
 signal cel_changed
 
-enum LayerTypes { PIXEL, GROUP, THREE_D }
+enum LayerTypes { PIXEL, GROUP }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum ColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
@@ -37,30 +37,28 @@ enum ImageMenu {
 	HSV,
 	GRADIENT,
 	GRADIENT_MAP,
-	POSTERIZE,
 	SHADER
 }
-enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, TILE_MODE }
+enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT }
 enum HelpMenu {
-	VIEW_SPLASH_SCREEN,
-	ONLINE_DOCS,
-	ISSUE_TRACKER,
-	OPEN_LOGS_FOLDER,
-	CHANGELOG,
-	ABOUT_PIXELORAMA
+	VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, OPEN_LOGS_FOLDER, CHANGELOG, ABOUT_PIXELORAMA
 }
 
 const OVERRIDE_FILE := "override.cfg"
 
 var root_directory := "."
-var window_title := "": set = _title_changed
+var window_title := "":  # Why doesn't Godot have get_window_title()?
+	set(value):
+		window_title = value
+		get_window().set_title(value)
 var config_cache := ConfigFile.new()
 var XDGDataPaths = preload("res://src/XDGDataPaths.gd")
 var directory_module: RefCounted
 
 var projects := []  # Array of Projects
 var current_project: Project
-var current_project_index := 0: set = _project_changed
+var current_project_index := 0:
+	set = _project_changed
 
 var ui_tooltips := {}
 
@@ -92,11 +90,13 @@ var right_tool_color := Color("fd6d14")
 var default_width := 64
 var default_height := 64
 var default_fill_color := Color(0, 0, 0, 0)
-var snapping_distance := 32.0
 var grid_type = GridTypes.CARTESIAN
-var grid_size := Vector2(2, 2)
-var isometric_grid_size := Vector2(16, 8)
-var grid_offset := Vector2.ZERO
+var grid_width := 2
+var grid_height := 2
+var grid_isometric_cell_bounds_width := 16
+var grid_isometric_cell_bounds_height := 8
+var grid_offset_x := 0
+var grid_offset_y := 0
 var grid_draw_over_tile_mode := false
 var grid_color := Color.BLACK
 var pixel_grid_show_at_zoom := 1500.0  # percentage
@@ -118,8 +118,14 @@ var fps_limit := 0
 
 var autosave_interval := 1.0
 var enable_autosave := true
-var renderer := OS.get_current_video_driver(): set = _renderer_changed
-var tablet_driver := 0: set = _tablet_driver_changed
+# Disabled by Variable (Cause: no OS.get_current_video_driver())
+#var renderer := OS.get_current_video_driver():
+#	set(value):
+#		_renderer_changed(value)
+# Disabled by Variable (Cause: no OS.get_tablet_driver_name(tablet_driver))
+#var tablet_driver := 0:
+#	set(value):
+#		_tablet_driver_changed(value)
 
 # Tools & options
 var show_left_tool_icon := true
@@ -137,6 +143,7 @@ var draw_pixel_grid := false
 var show_rulers := true
 var show_guides := true
 var show_mouse_guides := false
+var snapping_distance := 10.0
 var snap_to_rectangular_grid := false
 var snap_to_guides := false
 var snap_to_perspective_guides := false
@@ -150,19 +157,12 @@ var onion_skinning_blue_red := false
 # Palettes
 var palettes := {}
 
-# Crop Options:
-var crop_top := 0
-var crop_bottom := 0
-var crop_left := 0
-var crop_right := 0
-
 # Nodes
-var base_layer_button_node: PackedScene = preload("res://src/UI/Timeline/BaseLayerButton.tscn")
 var pixel_layer_button_node: PackedScene = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
-var group_layer_button_node: PackedScene = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
+# a hacky solution (if i add it's preload here then pixelorama crashes so i added it in _ready)
+var group_layer_button_node: PackedScene
 var pixel_cel_button_node: PackedScene = preload("res://src/UI/Timeline/PixelCelButton.tscn")
 var group_cel_button_node: PackedScene = preload("res://src/UI/Timeline/GroupCelButton.tscn")
-var cel_3d_button_node: PackedScene = preload("res://src/UI/Timeline/Cel3DButton.tscn")
 
 @onready var control: Node = get_tree().current_scene
 
@@ -192,6 +192,10 @@ var cel_3d_button_node: PackedScene = preload("res://src/UI/Timeline/Cel3DButton
 @onready var perspective_editor := control.find_child("Perspective Editor")
 
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
+@onready var rotation_level_button: Button = control.find_child("RotationLevel")
+@onready var rotation_level_spinbox: SpinBox = control.find_child("RotationSpinbox")
+@onready var zoom_level_button: Button = control.find_child("ZoomLevel")
+@onready var zoom_level_spinbox: SpinBox = control.find_child("ZoomSpinbox")
 @onready var cursor_position_label: Label = control.find_child("CursorPosition")
 @onready var current_frame_mark_label: Label = control.find_child("CurrentFrameMark")
 
@@ -212,7 +216,6 @@ var cel_3d_button_node: PackedScene = preload("res://src/UI/Timeline/Cel3DButton
 @onready var merge_down_layer_button: BaseButton = animation_timeline.find_child("MergeDownLayer")
 @onready var layer_opacity_slider: ValueSlider = animation_timeline.find_child("OpacitySlider")
 
-@onready var tile_mode_offset_dialog: AcceptDialog = control.find_child("TileModeOffsetsDialog")
 @onready var open_sprites_dialog: FileDialog = control.find_child("OpenSprite")
 @onready var save_sprites_dialog: FileDialog = control.find_child("SaveSprite")
 @onready var save_sprites_html5_dialog: ConfirmationDialog = control.find_child("SaveSpriteHTML5")
@@ -222,13 +225,14 @@ var cel_3d_button_node: PackedScene = preload("res://src/UI/Timeline/Cel3DButton
 
 @onready var current_version: String = ProjectSettings.get_setting("application/config/Version")
 
-
-func _init() -> void:
-	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
-		tablet_driver = 1
+# Disabled by Variable (Cause: no OS.get_tablet_driver_name(tablet_driver))
+#func _init():
+#	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
+#		tablet_driver = 1
 
 
 func _ready() -> void:
+	group_layer_button_node = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
 	_initialize_keychain()
 
 	if OS.has_feature("standalone"):
@@ -253,8 +257,6 @@ func _ready() -> void:
 		var tooltip: String = node.tooltip_text
 		if !tooltip.is_empty() and node.shortcut:
 			ui_tooltips[node] = tooltip
-	await get_tree().idle_frame
-	emit_signal("project_changed")
 
 
 func _initialize_keychain() -> void:
@@ -314,8 +316,6 @@ func _initialize_keychain() -> void:
 		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.GRADIENT),
 		"gradient_map":
 		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.GRADIENT_MAP),
-		"posterize":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.POSTERIZE),
 		"mirror_view":
 		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.MIRROR_VIEW),
 		"show_grid":
@@ -424,11 +424,11 @@ func _initialize_keychain() -> void:
 
 
 func notification_label(text: String) -> void:
-	var notification := NotificationLabel.new()
-	notification.text = tr(text)
-	notification.position = main_viewport.global_position
-	notification.position.y += main_viewport.size.y
-	control.add_child(notification)
+	var _notification := NotificationLabel.new()
+	_notification.text = tr(text)
+	_notification.position = main_viewport.global_position
+	_notification.position.y += main_viewport.size.y
+	control.add_child(_notification)
 
 
 func general_undo(project: Project = current_project) -> void:
@@ -474,65 +474,59 @@ func undo_or_redo(
 				for j in project.layers.size():
 					canvas.update_texture(j, i, project)
 
-		canvas.selection.update()
+		canvas.selection.queue_redraw()
 		if action_name == "Scale":
 			for i in project.frames.size():
 				for j in project.layers.size():
 					var current_cel: BaseCel = project.frames[i].cels[j]
-					if current_cel is Cel3D:
-						current_cel.size_changed(project.size)
-					else:
-						current_cel.image_texture.create_from_image(current_cel.get_image()) #,0
+					current_cel.image_texture = ImageTexture.create_from_image(
+						current_cel.get_image()
+					)
 			canvas.camera_zoom()
-			canvas.grid.update()
-			canvas.pixel_grid.update()
+			canvas.grid.queue_redraw()
+			canvas.pixel_grid.queue_redraw()
 			project.selection_map_changed()
 			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
-	canvas.update()
-	second_viewport.get_child(0).get_node("CanvasPreview").update()
-	canvas_preview_container.canvas_preview.update()
+	canvas.queue_redraw()
 	if !project.has_changed:
 		project.has_changed = true
 		if project == current_project:
 			self.window_title = window_title + "(*)"
 
 
-func _title_changed(value: String) -> void:
-	window_title = value
-	get_window().set_title(value)
-
-
 func _project_changed(value: int) -> void:
-	canvas.selection.transform_content_confirm()
-	current_project_index = value
-	current_project = projects[value]
-	connect("project_changed", Callable(current_project, "change_project"))
-	emit_signal("project_changed")
-	disconnect("project_changed", Callable(current_project, "change_project"))
-	emit_signal("cel_changed")
+	if canvas.selection != null:
+		canvas.selection.transform_content_confirm()
+		current_project_index = value
+		current_project = projects[value]
+		connect("project_changed", Callable(current_project, "change_project"))
+		emit_signal("project_changed")
+		disconnect("project_changed", Callable(current_project, "change_project"))
+		emit_signal("cel_changed")
 
 
-func _renderer_changed(value: int) -> void:
-	renderer = value
-	if OS.has_feature("editor"):
-		return
+# Disabled by Variable (Cause: no OS.get_current_video_driver())
+#func _renderer_changed(value: int) -> void:
+#	renderer = value
+#	if OS.has_feature("editor"):
+#		return
+#
+#	# Sets GLES2 as the default value in `override.cfg`.
+#	# Without this, switching to GLES3 does not work, because it will default to GLES2.
+#	ProjectSettings.set_initial_value("rendering/quality/driver/driver_name", "GLES2")
+#	var renderer_name := OS.get_video_driver_name(renderer)
+#	ProjectSettings.set_setting("rendering/quality/driver/driver_name", renderer_name)
+#	ProjectSettings.save_custom(OVERRIDE_FILE)
 
-	# Sets GLES2 as the default value in `override.cfg`.
-	# Without this, switching to GLES3 does not work, because it will default to GLES2.
-	ProjectSettings.set_initial_value("rendering/quality/driver/driver_name", "GLES2")
-	var renderer_name := OS.get_video_driver_name(renderer)
-	ProjectSettings.set_setting("rendering/quality/driver/driver_name", renderer_name)
-	ProjectSettings.save_custom(OVERRIDE_FILE)
-
-
-func _tablet_driver_changed(value: int) -> void:
-	tablet_driver = value
-	if OS.has_feature("editor"):
-		return
-	var tablet_driver_name := OS.get_tablet_driver_name(tablet_driver)
-	ProjectSettings.set_setting("display/window/tablet_driver", tablet_driver_name)
-	ProjectSettings.save_custom(OVERRIDE_FILE)
+# Disabled by Variable (Cause: no OS.get_tablet_driver_name(tablet_driver))
+#func _tablet_driver_changed(value: int) -> void:
+#	tablet_driver = value
+#	if OS.has_feature("editor"):
+#		return
+#	var tablet_driver_name := OS.get_tablet_driver_name(tablet_driver)
+#	ProjectSettings.set_setting("display/window/tablet_driver", tablet_driver_name)
+#	ProjectSettings.save_custom(OVERRIDE_FILE)
 
 
 func dialog_open(open: bool) -> void:
@@ -567,37 +561,21 @@ func change_button_texturerect(texture_button: TextureRect, new_file_name: Strin
 		return
 	var file_name := texture_button.texture.resource_path.get_basename().get_file()
 	var directory_path := texture_button.texture.resource_path.get_basename().replace(file_name, "")
-	texture_button.texture = load(directory_path.plus_file(new_file_name))
+	texture_button.texture = load(directory_path.path_join(new_file_name))
 
 
 func update_hint_tooltips() -> void:
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	Tools.update_hint_tooltips()
 
 	for tip in ui_tooltips:
 		var hint := "None"
-		var event_type: InputEvent = tip.shortcut.shortcut
-		if event_type is InputEventKey:
-			hint = event_type.as_text()
-		elif event_type is InputEventAction:
-			var first_key: InputEventKey = Keychain.action_get_first_key(event_type.action)
-			hint = first_key.as_text() if first_key else "None"
-		tip.tooltip_text = tr(ui_tooltips[tip]) % hint
-
-
-# Used in case some of the values in a dictionary are Strings, when they should be something else
-func convert_dictionary_values(dict: Dictionary) -> void:
-	for key in dict:
-		if key == "id" or key == "type":
-			dict[key] = int(dict[key])
-		if typeof(dict[key]) != TYPE_STRING:
-			continue
-		if "transform" in key:  # Convert a String to a Transform3D
-			var transform_string: String = dict[key].replace(" - ", ", ")
-			dict[key] = str_to_var("Transform3D(" + transform_string + ")")
-		elif "color" in key:  # Convert a String to a Color
-			dict[key] = str_to_var("Color(" + dict[key] + ")")
-		elif "v2" in key:  # Convert a String to a Vector2
-			dict[key] = str_to_var("Vector2" + dict[key])
-		elif "size" in key or "center_offset" in key:  # Convert a String to a Vector3
-			dict[key] = str_to_var("Vector3" + dict[key])
+		var event_array: Array = tip.shortcut.events
+		if event_array.size() > 0:
+			var event_type: InputEvent = tip.shortcut.events[0]
+			if event_type is InputEventKey:
+				hint = event_type.as_text()
+			elif event_type is InputEventAction:
+				var first_key: InputEventKey = Keychain.action_get_first_key(event_type.action)
+				hint = first_key.as_text() if first_key else "None"
+			tip.tooltip_text = tr(ui_tooltips[tip]) % hint

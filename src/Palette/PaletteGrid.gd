@@ -39,7 +39,9 @@ func setup_swatches() -> void:
 			swatch.index = i
 			init_swatch(swatch)
 			swatch.connect("pressed", Callable(self, "_on_PaletteSwatch_pressed").bind(i))
-			swatch.connect("double_clicked", Callable(self, "_on_PaletteSwatch_double_clicked").bind(i))
+			swatch.connect(
+				"double_clicked", Callable(self, "_on_PaletteSwatch_double_clicked").bind(i)
+			)
 			swatch.connect("dropped", Callable(self, "_on_PaletteSwatch_dropped"))
 			add_child(swatch)
 			swatches.push_back(swatch)
@@ -149,9 +151,9 @@ func convert_palette_index_to_grid_index(palette_index: int) -> int:
 	return int((x - grid_window_origin.x) + (y - grid_window_origin.y) * grid_size.x)
 
 
-func resize_grid(new_rect_size: Vector2) -> void:
-	var grid_x: int = new_rect_size.x / (swatch_size.x + get("theme_override_constants/h_separation"))
-	var grid_y: int = new_rect_size.y / (swatch_size.y + get("theme_override_constants/v_separation"))
+func resize_grid(new_size: Vector2) -> void:
+	var grid_x: int = new_size.x / (swatch_size.x + get("theme_override_constants/h_separation"))
+	var grid_y: int = new_size.y / (swatch_size.y + get("theme_override_constants/v_separation"))
 	grid_size.x = min(grid_x, current_palette.width)
 	grid_size.y = min(grid_y, current_palette.height)
 	setup_swatches()
@@ -176,9 +178,9 @@ func _on_PaletteSwatch_pressed(mouse_button: int, index: int) -> void:
 	emit_signal("swatch_pressed", mouse_button, palette_index)
 
 
-func _on_PaletteSwatch_double_clicked(mouse_button: int, position: Vector2, index: int) -> void:
+func _on_PaletteSwatch_double_clicked(mouse_button: int, pos: Vector2, index: int) -> void:
 	var palette_index = convert_grid_index_to_palette_index(index)
-	emit_signal("swatch_double_clicked", mouse_button, palette_index, position)
+	emit_signal("swatch_double_clicked", mouse_button, palette_index, pos)
 
 
 func _on_PaletteSwatch_dropped(source_index: int, target_index: int) -> void:

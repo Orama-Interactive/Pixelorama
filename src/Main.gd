@@ -13,13 +13,16 @@ var cursor_image: Texture2D = preload("res://assets/graphics/cursor.png")
 @onready var right_cursor: Sprite2D = $RightCursor
 
 
-func _init() -> void:
+func _init():
 	Global.shrink = _get_auto_display_scale()
 	if OS.get_name() == "OSX":
 		_use_osx_shortcuts()
 
 
 func _ready() -> void:
+	# make windows real
+#	get_tree().root.gui_embed_subwindows = false
+
 	randomize()
 	get_tree().set_auto_accept_quit(false)
 	_setup_application_window_size()
@@ -54,6 +57,11 @@ func _ready() -> void:
 		Global.open_sprites_dialog.current_dir = OS.get_user_data_dir()
 		Global.save_sprites_dialog.current_dir = OS.get_user_data_dir()
 
+	var i := 0
+	for camera in Global.cameras:
+		camera.index = i
+		i += 1
+
 	var zstd_checkbox := CheckBox.new()
 	zstd_checkbox.name = "ZSTDCompression"
 	zstd_checkbox.button_pressed = true
@@ -64,7 +72,7 @@ func _ready() -> void:
 	_handle_backup()
 
 	_handle_cmdline_arguments()
-	get_tree().connect("files_dropped", Callable(self, "_on_files_dropped"))
+	get_window().connect("files_dropped", Callable(self, "_on_files_dropped"))
 
 	if OS.get_name() == "Android":
 		OS.request_permissions()
@@ -87,7 +95,9 @@ func _get_auto_display_scale() -> float:
 		return DisplayServer.screen_get_max_scale()
 
 	var dpi := DisplayServer.screen_get_dpi()
-	var smallest_dimension: int = min(DisplayServer.screen_get_size().x, DisplayServer.screen_get_size().y)
+	var smallest_dimension: int = min(
+		DisplayServer.screen_get_size().x, DisplayServer.screen_get_size().y
+	)
 	if dpi >= 192 && smallest_dimension >= 1400:
 		return 2.0  # hiDPI display.
 	elif smallest_dimension >= 1700:
@@ -96,12 +106,18 @@ func _get_auto_display_scale() -> float:
 
 
 func _setup_application_window_size() -> void:
-	get_tree().set_screen_stretch(
-		SceneTree.STRETCH_MODE_DISABLED,
-		SceneTree.STRETCH_ASPECT_IGNORE,
-		Vector2(1024, 576),
-		Global.shrink
-	)
+	var root = get_tree().root
+	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
+	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
+	root.min_size = Vector2(1024, 576)
+	root.content_scale_factor = Global.shrink
+	# Disabled by Variable (Cause: no set_screen_stretch())
+#	get_tree().set_screen_stretch(
+#		SceneTree.STRETCH_MODE_DISABLED,
+#		SceneTree.STRETCH_ASPECT_IGNORE,
+#		Vector2(1024, 576),
+#		Global.shrink
+#	)
 	set_custom_cursor()
 
 	if OS.get_name() == "HTML5":
@@ -113,7 +129,11 @@ func _setup_application_window_size() -> void:
 	if Global.config_cache.has_section_key("window", "screen"):
 		get_window().current_screen = Global.config_cache.get_value("window", "screen")
 	if Global.config_cache.has_section_key("window", "maximized"):
-		get_window().mode = Window.MODE_MAXIMIZED if (Global.config_cache.get_value("window", "maximized")) else Window.MODE_WINDOWED
+		get_window().mode = (
+			Window.MODE_MAXIMIZED
+			if (Global.config_cache.get_value("window", "maximized"))
+			else Window.MODE_WINDOWED
+		)
 
 	if !(get_window().mode == Window.MODE_MAXIMIZED):
 		if Global.config_cache.has_section_key("window", "position"):
@@ -129,12 +149,13 @@ func set_custom_cursor() -> void:
 	if Global.shrink == 1.0:
 		Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 	else:
-		var cursor_data := cursor_image.get_data()
+		var cursor_data := cursor_image.get_image()
 		cursor_data.resize(
-			cursor_data.get_width() * Global.shrink, cursor_data.get_height() * Global.shrink, 0
+			cursor_data.get_width() * Global.shrink,
+			cursor_data.get_height() * Global.shrink,
+			Image.INTERPOLATE_NEAREST
 		)
-		var new_cursor_tex := ImageTexture.new()
-		new_cursor_tex.create_from_image(cursor_data) #,0
+		var new_cursor_tex := ImageTexture.create_from_image(cursor_data)
 		Input.set_custom_mouse_cursor(
 			new_cursor_tex, Input.CURSOR_CROSS, Vector2(15, 15) * Global.shrink
 		)
@@ -146,8 +167,8 @@ func _show_splash_screen() -> void:
 
 	if Global.config_cache.get_value("preferences", "startup"):
 		# Wait for the window to adjust itself, so the popup is correctly centered
-		await get_tree().idle_frame
-		await get_tree().idle_frame
+		await get_tree().process_frame
+		await get_tree().process_frame
 
 		$Dialogs/SplashDialog.popup_centered()  # Splash screen
 		modulate = Color(0.5, 0.5, 0.5)
@@ -168,13 +189,23 @@ func _handle_backup() -> void:
 			# Temporatily stop autosave until user confirms backup
 			OpenSave.autosave_timer.stop()
 			backup_confirmation.connect(
-				"confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths, backup_paths]
+				"confirmed",
+				Callable(self, "_on_BackupConfirmation_confirmed").bindv(
+					[project_paths, backup_paths]
+				)
 			)
-			backup_confirmation.connect(
-				"custom_action",
-				self,
-				"_on_BackupConfirmation_custom_action",
-				[project_paths, backup_paths]
+			(
+				backup_confirmation
+				. connect(
+					"custom_action",
+					(
+						Callable(
+							self,
+							"_on_BackupConfirmation_custom_action",
+						)
+						. bindv([project_paths, backup_paths])
+					)
+				)
 			)
 			backup_confirmation.popup_centered()
 			Global.can_draw = false
@@ -193,6 +224,8 @@ func _handle_cmdline_arguments() -> void:
 		return
 
 	for arg in args:
+		if arg == "res://src/Main.tscn":
+			continue
 		if arg.begins_with("-") or arg.begins_with("--"):
 			# TODO: Add code to handle custom command line arguments
 			continue
@@ -202,21 +235,21 @@ func _handle_cmdline_arguments() -> void:
 
 func _notification(what: int) -> void:
 	match what:
-		MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		NOTIFICATION_WM_CLOSE_REQUEST:
 			show_quit_dialog()
 		# If the mouse exits the window and another application has the focus,
 		# pause the application
-		MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT:
+		NOTIFICATION_APPLICATION_FOCUS_OUT:
 			Global.has_focus = false
 			if Global.pause_when_unfocused:
 				get_tree().paused = true
-		MainLoop.NOTIFICATION_WM_MOUSE_EXIT:
+		NOTIFICATION_WM_MOUSE_EXIT:
 			if !get_window().has_focus() and Global.pause_when_unfocused:
 				get_tree().paused = true
 		# Unpause it when the mouse enters the window or when it gains focus
-		MainLoop.NOTIFICATION_WM_MOUSE_ENTER:
+		NOTIFICATION_WM_MOUSE_ENTER:
 			get_tree().paused = false
-		MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
+		NOTIFICATION_APPLICATION_FOCUS_IN:
 			get_tree().paused = false
 			var mouse_pos := get_global_mouse_position()
 			var viewport_rect := Rect2(
@@ -226,7 +259,7 @@ func _notification(what: int) -> void:
 				Global.has_focus = true
 
 
-func _on_files_dropped(files: PackedStringArray, _screen: int) -> void:
+func _on_files_dropped(files: PackedStringArray) -> void:
 	for file in files:
 		OpenSave.handle_loading_file(file)
 	var splash_dialog = Global.control.get_node("Dialogs/SplashDialog")
@@ -241,8 +274,7 @@ func load_last_project() -> void:
 	if Global.config_cache.has_section_key("preferences", "last_project_path"):
 		# Check if file still exists on disk
 		var file_path = Global.config_cache.get_value("preferences", "last_project_path")
-		var file_check := File.new()
-		if file_check.file_exists(file_path):  # If yes then load the file
+		if FileAccess.file_exists(file_path):  # If yes then load the file
 			OpenSave.open_pxo_file(file_path)
 			# Sync file dialogs
 			Global.save_sprites_dialog.current_dir = file_path.get_base_dir()
@@ -260,8 +292,7 @@ func load_recent_project_file(path: String) -> void:
 		return
 
 	# Check if file still exists on disk
-	var file_check := File.new()
-	if file_check.file_exists(path):  # If yes then load the file
+	if FileAccess.file_exists(path):  # If yes then load the file
 		OpenSave.handle_loading_file(path)
 		# Sync file dialogs
 		Global.save_sprites_dialog.current_dir = path.get_base_dir()
@@ -286,7 +317,9 @@ func _on_SaveSprite_file_selected(path: String) -> void:
 
 
 func save_project(path: String) -> void:
-	var zstd: bool = Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").pressed
+	var zstd: bool = (
+		Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").button_pressed
+	)
 	OpenSave.save_pxo_file(path, false, zstd)
 	Global.open_sprites_dialog.current_dir = path.get_base_dir()
 	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
@@ -296,15 +329,15 @@ func save_project(path: String) -> void:
 
 
 func _on_SaveSpriteHTML5_confirmed() -> void:
-	var file_name = Global.save_sprites_html5_dialog.get_node(
-		"FileNameContainer/FileNameLineEdit"
-	).text
+	var file_name = (
+		Global.save_sprites_html5_dialog.get_node("FileNameContainer/FileNameLineEdit").text
+	)
 	file_name += ".pxo"
-	var path = "user://".plus_file(file_name)
+	var path = "user://".path_join(file_name)
 	OpenSave.save_pxo_file(path, false, false)
 
 
-func _on_OpenSprite_popup_hide() -> void:
+func _on_OpenSprite_close_requested() -> void:
 	if !opensprite_file_selected:
 		_can_draw_true()
 
@@ -379,7 +412,7 @@ func _on_BackupConfirmation_custom_action(
 		load_last_project()
 
 
-func _on_BackupConfirmation_popup_hide() -> void:
+func _on_BackupConfirmation_close_requested() -> void:
 	if Global.enable_autosave:
 		OpenSave.autosave_timer.start()
 
@@ -392,18 +425,28 @@ func _use_osx_shortcuts() -> void:
 		var event: InputEvent = action_list[0]
 
 		if event.is_action("show_pixel_grid"):
-			event.shift = true
+			event.shift_pressed = true
 
-		if event.control:
-			event.control = false
-			event.command = true
+		if event.ctrl_pressed:
+			event.ctrl_pressed = false
+
+
+#			event.command = true  # (Cause: command not found)
 
 
 func _exit_tree() -> void:
 	Global.config_cache.set_value("window", "layout", Global.top_menu_container.selected_layout)
 	Global.config_cache.set_value("window", "screen", get_window().current_screen)
 	Global.config_cache.set_value(
-		"window", "maximized", (get_window().mode == Window.MODE_MAXIMIZED) || ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))
+		"window",
+		"maximized",
+		(
+			(get_window().mode == Window.MODE_MAXIMIZED)
+			|| (
+				(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
+				or (get_window().mode == Window.MODE_FULLSCREEN)
+			)
+		)
 	)
 	Global.config_cache.set_value("window", "position", get_window().position)
 	Global.config_cache.set_value("window", "size", get_window().size)

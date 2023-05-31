@@ -6,13 +6,19 @@ extends AcceptDialog
 
 
 func _ready() -> void:
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	Global.control.ui.connect("sort_children", Callable(self, "_recalculate_opacity"))
 
 
 func _on_WindowOpacityDialog_about_to_show() -> void:
-	OS.window_per_pixel_transparency_enabled = true
-	slider.editable = !((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))
+	# Disabled by Variable (Cause: confusion on OS.window_per_pixel_transparency_enabled)
+#	OS.window_per_pixel_transparency_enabled = true
+	get_tree().root.transparent = true
+	get_tree().root.transparent_bg = true
+	slider.editable = !(
+		(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
+		or (get_window().mode == Window.MODE_FULLSCREEN)
+	)
 	fullscreen_warning.visible = !slider.editable
 
 
@@ -21,7 +27,10 @@ func _recalculate_opacity() -> void:
 
 
 func set_window_opacity(value: float) -> void:
-	if ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)):
+	if (
+		(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
+		or (get_window().mode == Window.MODE_FULLSCREEN)
+	):
 		value = 100.0
 		slider.value = value
 
@@ -36,5 +45,5 @@ func set_window_opacity(value: float) -> void:
 	Global.transparent_checker.update_transparency(value)
 
 
-func _on_WindowOpacityDialog_popup_hide() -> void:
+func _on_WindowOpacityDialog_close_requested() -> void:
 	Global.dialog_open(false)

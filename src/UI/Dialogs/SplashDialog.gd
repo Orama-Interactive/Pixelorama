@@ -44,8 +44,10 @@ func _on_SplashDialog_about_to_show() -> void:
 	var show_on_startup_button: CheckBox = find_child("ShowOnStartup")
 
 	if Global.config_cache.has_section_key("preferences", "startup"):
-		show_on_startup_button.button_pressed = !Global.config_cache.get_value("preferences", "startup")
-	window_title = "Pixelorama" + " " + Global.current_version
+		show_on_startup_button.button_pressed = !Global.config_cache.get_value(
+			"preferences", "startup"
+		)
+	title = "Pixelorama" + " " + Global.current_version
 
 	chosen_artwork = randi() % artworks.size()
 	change_artwork(0)

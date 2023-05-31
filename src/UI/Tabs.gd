@@ -1,8 +1,7 @@
 extends TabBar
 
-@onready var unsaved_changes_dialog: ConfirmationDialog = Global.control.find_child(
-	"UnsavedCanvasDialog"
-)
+@onready
+var unsaved_changes_dialog: ConfirmationDialog = Global.control.find_child("UnsavedCanvasDialog")
 
 
 # Thanks to https://github.com/godotengine/godot/issues/64498#issuecomment-1217992089
@@ -58,10 +57,10 @@ func _on_Tabs_reposition_active_tab_request(idx_to: int) -> void:
 
 func delete_tab(tab: int) -> void:
 	remove_tab(tab)
-	Global.projects[tab].remove()
+	Global.projects[tab].remove_at()
 	OpenSave.remove_backup(tab)
-	OpenSave.current_save_paths.remove(tab)
-	OpenSave.backup_save_paths.remove(tab)
+	OpenSave.current_save_paths.remove_at(tab)
+	OpenSave.backup_save_paths.remove_at(tab)
 	if Global.current_project_index == tab:
 		if tab > 0:
 			Global.current_project_index -= 1

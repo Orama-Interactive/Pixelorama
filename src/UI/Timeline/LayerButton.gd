@@ -87,11 +87,7 @@ func _draw() -> void:
 	if hierarchy_spacer.size.x > 0.1:
 		var color := Color(1, 1, 1, 0.33)
 		color.v = round(Global.control.theme.get_color("font_color", "Button").v)
-		var x = (
-			hierarchy_spacer.global_position.x
-			- global_position.x
-			+ hierarchy_spacer.size.x
-		)
+		var x = hierarchy_spacer.global_position.x - global_position.x + hierarchy_spacer.size.x
 		draw_line(Vector2(x, 0), Vector2(x, size.y), color)
 
 
@@ -129,7 +125,7 @@ func _on_LayerContainer_gui_input(event: InputEvent) -> void:
 		else:  # If the button is pressed without Shift or Control
 			_select_current_layer()
 
-		if event.doubleclick:
+		if event.double_click:
 			label.visible = false
 			line_edit.visible = true
 			line_edit.editable = true
@@ -156,7 +152,7 @@ func _on_ExpandButton_pressed():
 func _on_VisibilityButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].visible = !Global.current_project.layers[layer].visible
-	Global.canvas.update()
+	Global.canvas.queue_redraw()
 	_select_current_layer()
 	_update_buttons_all_layers()
 
@@ -184,7 +180,7 @@ func _select_current_layer() -> void:
 	Global.current_project.change_cel(-1, layer)
 
 
-func _get_drag_data(_position: Vector2) -> Array:
+func _get_drag_data(_position):
 	var layers := range(
 		layer - Global.current_project.layers[layer].get_child_count(true), layer + 1
 	)
@@ -201,59 +197,57 @@ func _get_drag_data(_position: Vector2) -> Array:
 	return ["Layer", layer]
 
 
-func _can_drop_data(_pos: Vector2, data) -> bool:
-	if typeof(data) != TYPE_ARRAY:
-		Global.animation_timeline.drag_highlight.visible = false
-		return false
-	if data[0] != "Layer":
-		Global.animation_timeline.drag_highlight.visible = false
-		return false
-	var curr_layer: BaseLayer = Global.current_project.layers[layer]
-	var drag_layer: BaseLayer = Global.current_project.layers[data[1]]
+func _can_drop_data(_pos, data) -> bool:
+	if typeof(data) == TYPE_ARRAY:
+		if data[0] == "Layer":
+			var curr_layer: BaseLayer = Global.current_project.layers[layer]
+			var drag_layer: BaseLayer = Global.current_project.layers[data[1]]
 
-	if curr_layer == drag_layer:
-		Global.animation_timeline.drag_highlight.visible = false
-		return false
+			if curr_layer == drag_layer:
+				Global.animation_timeline.drag_highlight.visible = false
+				return false
 
-	var region: Rect2
-	var depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
+			var region: Rect2
+			var depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
 
-	if Input.is_action_pressed("ctrl"):  # Swap layers
-		if drag_layer.is_ancestor_of(curr_layer) or curr_layer.is_ancestor_of(drag_layer):
-			Global.animation_timeline.drag_highlight.visible = false
-			return false
-		region = get_global_rect()
+			if Input.is_action_pressed("ctrl"):  # Swap layers
+				if drag_layer.is_ancestor_of(curr_layer) or curr_layer.is_ancestor_of(drag_layer):
+					Global.animation_timeline.drag_highlight.visible = false
+					return false
+				region = get_global_rect()
 
-	else:  # Shift layers
-		if drag_layer.is_ancestor_of(curr_layer):
-			Global.animation_timeline.drag_highlight.visible = false
-			return false
-		# If accepted as a child, is it in the center region?
-		if (
-			Global.current_project.layers[layer].accepts_child(drag_layer)
-			and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
-		):
-			# Drawn regions are adjusted a bit from actual to clarify drop position
-			region = _get_region_rect(0.15, 0.85)
-			depth += 1
-		else:
-			# Top or bottom region?
-			if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
-				region = _get_region_rect(-0.1, 0.15)
-			else:
-				region = _get_region_rect(0.85, 1.1)
-	# Shift drawn region to the right a bit for hierarchy depth visualization:
-	region.position.x += depth * HIERARCHY_DEPTH_PIXEL_SHIFT
-	region.size.x -= depth * HIERARCHY_DEPTH_PIXEL_SHIFT
-	Global.animation_timeline.drag_highlight.global_position = region.position
-	Global.animation_timeline.drag_highlight.size = region.size
-	Global.animation_timeline.drag_highlight.visible = true
-	return true
+			else:  # Shift layers
+				if drag_layer.is_ancestor_of(curr_layer):
+					Global.animation_timeline.drag_highlight.visible = false
+					return false
+				# If accepted as a child, is it in the center region?
+				if (
+					Global.current_project.layers[layer].accepts_child(data[1])
+					and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
+				):
+					# Drawn regions are adjusted a bit from actual to clarify drop position
+					region = _get_region_rect(0.15, 0.85)
+					depth += 1
+				else:
+					# Top or bottom region?
+					if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
+						region = _get_region_rect(-0.1, 0.15)
+					else:
+						region = _get_region_rect(0.85, 1.1)
+			# Shift drawn region to the right a bit for hierarchy depth visualization:
+			region.position.x += depth * HIERARCHY_DEPTH_PIXEL_SHIFT
+			region.size.x -= depth * HIERARCHY_DEPTH_PIXEL_SHIFT
+			Global.animation_timeline.drag_highlight.global_position = region.position
+			Global.animation_timeline.drag_highlight.size = region.size
+			Global.animation_timeline.drag_highlight.visible = true
+			return true
+	Global.animation_timeline.drag_highlight.visible = false
+	return false
 
 
-func _drop_data(_pos: Vector2, data) -> void:
+func _drop_data(_pos, data) -> void:
 	var drop_layer: int = data[1]
-	var project: Project = Global.current_project
+	var project = Global.current_project
 
 	project.undo_redo.create_action("Change Layer Order")
 	var layers: Array = project.layers  # This shouldn't be modified directly
@@ -291,12 +285,12 @@ func _drop_data(_pos: Vector2, data) -> void:
 		a.to_parents[-1] = drop_from_parents[-1]
 		b.to_parents[-1] = a_from_parents[-1]
 
-		project.undo_redo.add_do_method(project, "swap_layers", a, b)
+		project.undo_redo.add_do_method(Callable(project, "swap_layers").bind(a, b))
 		project.undo_redo.add_undo_method(
-			project,
-			"swap_layers",
-			{"from": a.to, "to": a.from, "to_parents": a_from_parents},
-			{"from": b.to, "to": drop_from_indices, "to_parents": drop_from_parents}
+			Callable(project, "swap_layers").bind(
+				{"from": a.to, "to": a.from, "to_parents": a_from_parents},
+				{"from": b.to, "to": drop_from_indices, "to_parents": drop_from_parents}
+			)
 		)
 
 	else:  # Move layers
@@ -305,7 +299,7 @@ func _drop_data(_pos: Vector2, data) -> void:
 
 		# If accepted as a child, is it in the center region?
 		if (
-			layers[layer].accepts_child(layers[drop_layer])
+			layers[layer].accepts_child(data[1])
 			and _get_region_rect(0.25, 0.75).has_point(get_global_mouse_position())
 		):
 			to_index = layer
@@ -335,18 +329,24 @@ func _drop_data(_pos: Vector2, data) -> void:
 		to_parents[-1] = to_parent
 
 		project.undo_redo.add_do_method(
-			project, "move_layers", drop_from_indices, drop_to_indices, to_parents
+			Callable(project, "move_layers").bind(drop_from_indices, drop_to_indices, to_parents)
 		)
 		project.undo_redo.add_undo_method(
-			project, "move_layers", drop_to_indices, drop_from_indices, drop_from_parents
+			Callable(project, "move_layers").bind(
+				drop_to_indices, drop_from_indices, drop_from_parents
+			)
 		)
 	if project.current_layer == drop_layer:
-		project.undo_redo.add_do_method(project, "change_cel", -1, layer)
+		project.undo_redo.add_do_method(Callable(project, "change_cel").bind(-1, layer))
 	else:
-		project.undo_redo.add_do_method(project, "change_cel", -1, project.current_layer)
-	project.undo_redo.add_undo_method(project, "change_cel", -1, project.current_layer)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+		project.undo_redo.add_do_method(
+			Callable(project, "change_cel").bind(-1, project.current_layer)
+		)
+	project.undo_redo.add_undo_method(
+		Callable(project, "change_cel").bind(-1, project.current_layer)
+	)
+	project.undo_redo.add_undo_method(Callable(Global, "undo_or_redo").bind(true))
+	project.undo_redo.add_do_method(Callable(Global, "undo_or_redo").bind(false))
 	project.undo_redo.commit_action()
 
 

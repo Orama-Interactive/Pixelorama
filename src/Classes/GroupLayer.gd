@@ -5,28 +5,23 @@ extends BaseLayer
 var expanded := true
 
 
-func _init(_project, _name := "") -> void:
+func _init(_project, _name := ""):
 	project = _project
 	name = _name
 
 
 func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
-	var image := Image.new()
-	image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	var children := get_children(false)
 	var blend_rect := Rect2(Vector2.ZERO, project.size)
 	for layer in children:
 		if not layer.is_visible_in_hierarchy():
 			continue
-		# Checks if layer is GroupLayer, cannot define this due to cyclic reference error
-		if layer is get_script():
-			image.blend_rect(layer.blend_children(frame, origin), blend_rect, origin)
-		else:
-			var cel: BaseCel = frame.cels[layer.index]
+		if layer is PixelLayer:
+			var cel: PixelCel = frame.cels[layer.index]
 			var cel_image := Image.new()
-			cel_image.copy_from(cel.get_image())
+			cel_image.copy_from(cel.image)
 			if cel.opacity < 1:  # If we have cel transparency
-				false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 				for xx in cel_image.get_size().x:
 					for yy in cel_image.get_size().y:
 						var pixel_color := cel_image.get_pixel(xx, yy)
@@ -34,8 +29,9 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 						cel_image.set_pixel(
 							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 						)
-				false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			image.blend_rect(cel_image, blend_rect, origin)
+		else:  # Only if layer is GroupLayer, cannot define this due to cyclic reference error
+			image.blend_rect(layer.blend_children(frame, origin), blend_rect, origin)
 	return image
 
 
@@ -43,8 +39,8 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 
 
 func serialize() -> Dictionary:
-	var data := super.serialize()
-	data["type"] = get_layer_type()
+	var data = super.serialize()
+	data["type"] = Global.LayerTypes.GROUP
 	data["expanded"] = expanded
 	return data
 
@@ -52,10 +48,6 @@ func serialize() -> Dictionary:
 func deserialize(dict: Dictionary) -> void:
 	super.deserialize(dict)
 	expanded = dict.expanded
-
-
-func get_layer_type() -> int:
-	return Global.LayerTypes.GROUP
 
 
 func new_empty_cel() -> BaseCel:
@@ -66,7 +58,8 @@ func set_name_to_default(number: int) -> void:
 	name = tr("Group") + " %s" % number
 
 
-func accepts_child(_layer: BaseLayer) -> bool:
+#func accepts_child(_layer: BaseLayer) -> bool:
+func accepts_child(_layer) -> bool:
 	return true
 
 

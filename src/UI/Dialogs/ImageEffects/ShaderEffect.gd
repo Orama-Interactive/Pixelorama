@@ -14,7 +14,7 @@ func _about_to_popup() -> void:
 	Export.blend_selected_cels(selected_cels, frame)
 
 	preview_image.copy_from(selected_cels)
-	preview_texture.create_from_image(preview_image) #,0
+	preview_texture = ImageTexture.create_from_image(preview_image)
 	preview.texture = preview_texture
 	super._about_to_popup()
 
@@ -29,7 +29,6 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		params[param] = param_data
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(cel, shader, params, project.size)
-	false # selected_cels.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	await gen.done
 
 
@@ -51,10 +50,10 @@ func set_nodes() -> void:
 	preview = $VBoxContainer/AspectRatioContainer/Preview
 
 
-func change_shader(shader_tmp: Shader, name: String) -> void:
+func change_shader(shader_tmp: Shader, nam: String) -> void:
 	shader = shader_tmp
 	preview.material.gdshader = shader_tmp
-	shader_loaded_label.text = tr("Shader loaded:") + " " + name
+	shader_loaded_label.text = tr("Shader loaded:") + " " + nam
 	param_names.clear()
 	for child in shader_params.get_children():
 		child.queue_free()
@@ -143,10 +142,14 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			var vector2 := _vec2str_to_vector2(u_value)
 			var slider1: ValueSlider = value_slider_tscn.instantiate()
 			slider1.value = vector2.x
-			slider1.connect("value_changed", Callable(self, "_set_vector2_shader_param").bind(u_name, true))
+			slider1.connect(
+				"value_changed", Callable(self, "_set_vector2_shader_param").bind(u_name, true)
+			)
 			var slider2: ValueSlider = value_slider_tscn.instantiate()
 			slider2.value = vector2.y
-			slider2.connect("value_changed", Callable(self, "_set_vector2_shader_param").bind(u_name, false))
+			slider2.connect(
+				"value_changed", Callable(self, "_set_vector2_shader_param").bind(u_name, false)
+			)
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
 			hbox.add_child(slider1)
@@ -161,7 +164,9 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 				var color_button := ColorPickerButton.new()
 				color_button.custom_minimum_size = Vector2(20, 20)
 				color_button.color = color
-				color_button.connect("color_changed", Callable(self, "set_shader_parameter").bind(u_name))
+				color_button.connect(
+					"color_changed", Callable(self, "set_shader_parameter").bind(u_name)
+				)
 				color_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				var hbox := HBoxContainer.new()
 				hbox.add_child(label)
@@ -172,7 +177,7 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			label.text = u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var file_dialog := FileDialog.new()
-			file_dialog.mode = FileDialog.FILE_MODE_OPEN_FILE
+			file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 			file_dialog.access = FileDialog.ACCESS_FILESYSTEM
 			file_dialog.resizable = true
 			file_dialog.custom_minimum_size = Vector2(200, 70)
@@ -267,7 +272,7 @@ func _load_texture(path: String, param: String) -> void:
 	if !image:
 		print("Error loading texture")
 		return
-	var image_tex := ImageTexture.new()
-	image_tex.create_from_image(image) #,0
-	image_tex.flags = ImageTexture.FLAG_REPEAT
+	var image_tex := ImageTexture.create_from_image(image)
+	# Disabled by variable (Cause: confusi0n on ImageTexture.FLAG_REPEAT)
+#	image_tex.flags = ImageTexture.FLAG_REPEAT
 	set_shader_parameter(image_tex, param)

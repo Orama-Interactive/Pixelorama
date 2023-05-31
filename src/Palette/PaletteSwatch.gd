@@ -10,12 +10,13 @@ const DEFAULT_COLOR := Color(0.0, 0.0, 0.0, 0.0)
 var index := -1
 var show_left_highlight := false
 var show_right_highlight := false
-var empty := true: set = set_empty
+var empty := true:
+	set = set_empty
 
 
-func set_swatch_size(size: Vector2) -> void:
-	custom_minimum_size = size
-	size = size
+func set_swatch_size(new_size: Vector2) -> void:
+	custom_minimum_size = new_size
+	size = new_size
 
 
 func _draw() -> void:
@@ -33,10 +34,7 @@ func _draw() -> void:
 		var margin := size / 4
 		draw_rect(Rect2(margin, size - margin * 2), Color.BLACK, false, 1)
 		draw_rect(
-			Rect2(margin - Vector2.ONE, size - margin * 2 + Vector2(2, 2)),
-			Color.WHITE,
-			false,
-			1
+			Rect2(margin - Vector2.ONE, size - margin * 2 + Vector2(2, 2)), Color.WHITE, false, 1
 		)
 
 
@@ -48,7 +46,7 @@ func show_selected_highlight(new_value: bool, mouse_button: int) -> void:
 				show_left_highlight = new_value
 			MOUSE_BUTTON_RIGHT:
 				show_right_highlight = new_value
-		update()
+		queue_redraw()
 
 
 # Empties the swatch and displays disabled color from theme
@@ -83,7 +81,7 @@ func _drop_data(_position, data) -> void:
 
 func _on_PaletteSlot_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and not empty:
-		if event.doubleclick:
+		if event.double_click:
 			emit_signal("double_clicked", event.button_index, get_global_rect().position)
 		else:
 			emit_signal("pressed", event.button_index)

@@ -198,7 +198,7 @@ func has_theme_color(color: Color) -> bool:
 # Sets name that is used to save the palette to disk
 func set_resource_name(new_resource_name: String) -> void:
 	# Store palette path name only with valid path characters
-	resource_name = strip_unvalid_characters(new_resource_name)
+	resource_name = Palette.strip_unvalid_characters(new_resource_name)
 
 
 static func strip_unvalid_characters(string_to_strip: String) -> String:

@@ -3,7 +3,7 @@ extends ConfirmationDialog
 # Emitted when user confirms their changes
 signal saved(preset, name, comment, width, height, add_alpha_colors, colors_from)
 
-# Reference to current palette stored when dialog opens
+# RefCounted to current palette stored when dialog opens
 var current_palette: Palette
 
 @onready var preset_input := $VBoxContainer/PaletteMetadata/Preset
@@ -56,8 +56,8 @@ func set_default_values() -> void:
 
 
 # Shows/hides a warning when palette already exists
-func toggle_already_exists_warning(visible: bool) -> void:
-	already_exists_warning.visible = visible
+func toggle_already_exists_warning(visiblity: bool) -> void:
+	already_exists_warning.visible = visiblity
 
 	# Required to resize window to correct size if warning causes content overflow
 	size = size
@@ -68,7 +68,7 @@ func toggle_ok_button_disability(disable: bool) -> void:
 	enter_name_warning.visible = disable
 
 
-func _on_CreatePaletteDialog_popup_hide() -> void:
+func _on_CreatePaletteDialog_close_requested() -> void:
 	Global.dialog_open(false)
 
 

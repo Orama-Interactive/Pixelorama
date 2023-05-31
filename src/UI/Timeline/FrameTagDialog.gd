@@ -33,7 +33,9 @@ func _on_FrameTagDialog_about_to_show() -> void:
 		var edit_button := Button.new()
 		edit_button.text = "Edit"
 		edit_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		edit_button.connect("pressed", Callable(self, "_on_EditButton_pressed").bind(i, edit_button))
+		edit_button.connect(
+			"pressed", Callable(self, "_on_EditButton_pressed").bind(i, edit_button)
+		)
 		hbox_cont.add_child(edit_button)
 		vbox_cont.add_child(hbox_cont)
 
@@ -43,7 +45,7 @@ func _on_FrameTagDialog_about_to_show() -> void:
 		vbox_cont.add_child(name_label)
 
 		var hsep := HSeparator.new()
-		hsep.size_flags_horizontal = SIZE_EXPAND_FILL
+		hsep.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		vbox_cont.add_child(hsep)
 
 		main_vbox_cont.add_child(vbox_cont)
@@ -55,7 +57,7 @@ func _on_FrameTagDialog_about_to_show() -> void:
 	main_vbox_cont.move_child(add_tag_button, main_vbox_cont.get_child_count() - 1)
 
 
-func _on_FrameTagDialog_popup_hide() -> void:
+func _on_FrameTagDialog_close_requested() -> void:
 	Global.dialog_open(false)
 
 
@@ -127,8 +129,8 @@ func _on_TagOptions_confirmed() -> void:
 	# Handle Undo/Redo
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Modify Frame Tag")
-	Global.current_project.undo_redo.add_do_method(Global, "general_redo")
-	Global.current_project.undo_redo.add_undo_method(Global, "general_undo")
+	Global.current_project.undo_redo.add_do_method(Callable(Global, "general_redo"))
+	Global.current_project.undo_redo.add_undo_method(Callable(Global, "general_undo"))
 	Global.current_project.undo_redo.add_do_property(
 		Global.current_project, "animation_tags", new_animation_tags
 	)
@@ -142,12 +144,12 @@ func _on_TagOptions_confirmed() -> void:
 func _on_TagOptions_custom_action(action: String) -> void:
 	if action == "delete_tag":
 		var new_animation_tags := Global.current_project.animation_tags.duplicate()
-		new_animation_tags.remove(current_tag_id)
+		new_animation_tags.remove_at(current_tag_id)
 		# Handle Undo/Redo
 		Global.current_project.undos += 1
 		Global.current_project.undo_redo.create_action("Delete Frame Tag")
-		Global.current_project.undo_redo.add_do_method(Global, "general_redo")
-		Global.current_project.undo_redo.add_undo_method(Global, "general_undo")
+		Global.current_project.undo_redo.add_do_method(Callable(Global, "general_redo"))
+		Global.current_project.undo_redo.add_undo_method(Callable(Global, "general_undo"))
 		Global.current_project.undo_redo.add_do_property(
 			Global.current_project, "animation_tags", new_animation_tags
 		)
@@ -160,7 +162,7 @@ func _on_TagOptions_custom_action(action: String) -> void:
 		_on_FrameTagDialog_about_to_show()
 
 
-func _on_TagOptions_popup_hide() -> void:
+func _on_TagOptions_close_requested() -> void:
 	if delete_tag_button:
 		delete_tag_button.visible = false
 

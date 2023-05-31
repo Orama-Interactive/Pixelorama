@@ -13,41 +13,32 @@ var preview_texture := ImageTexture.new()
 var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
-var animate_options_container: Node
-var animate_menu: PopupMenu
-var initial_button: Button
-var animate_bool := []
-var initial_values: PackedFloat32Array = []
-var selected_idx: int = 0  # the current selected cel to apply animation to
-var confirmed := false
+var is_confirmed := false
 
 
 func _ready() -> void:
 	set_nodes()
 	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	get_cancel_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	current_frame.create(
+	current_frame = Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
-	selected_cels.create(
+	selected_cels = Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
 	connect("about_to_popup", Callable(self, "_about_to_popup"))
-	connect("popup_hide", Callable(self, "_popup_hide"))
+	connect("close_requested", Callable(self, "_close_requested"))
 	connect("confirmed", Callable(self, "_confirmed"))
 	if selection_checkbox:
 		selection_checkbox.connect("toggled", Callable(self, "_on_SelectionCheckBox_toggled"))
 	if affect_option_button:
-		affect_option_button.connect("item_selected", Callable(self, "_on_AffectOptionButton_item_selected"))
-	if animate_menu:
-		set_animate_menu(0)
-		animate_menu.connect("id_pressed", Callable(self, "_update_animate_flags"))
-	if initial_button:
-		initial_button.connect("pressed", Callable(self, "set_initial_values"))
+		affect_option_button.connect(
+			"item_selected", Callable(self, "_on_AffectOptionButton_item_selected")
+		)
 
 
 func _about_to_popup() -> void:
-	confirmed = false
+	is_confirmed = false
 	Global.canvas.selection.transform_content_confirm()
 	var frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
 	selected_cels.resize(Global.current_project.size.x, Global.current_project.size.y)
@@ -61,17 +52,14 @@ func _about_to_popup() -> void:
 
 
 func _confirmed() -> void:
-	selected_idx = 0
-	confirmed = true
+	is_confirmed = true
 	var project: Project = Global.current_project
 	if affect == SELECTED_CELS:
 		var undo_data := _get_undo_data(project)
 		for cel_index in project.selected_cels:
 			if !project.layers[cel_index[1]].can_layer_get_drawn():
 				continue
-			var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
-			if not cel is PixelCel:
-				continue
+			var cel: PixelCel = project.frames[cel_index[0]].cels[cel_index[1]]
 			var cel_image: Image = cel.image
 			commit_action(cel_image)
 		_commit_undo("Draw", undo_data, project)
@@ -80,9 +68,6 @@ func _confirmed() -> void:
 		var undo_data := _get_undo_data(project)
 		var i := 0
 		for cel in project.frames[project.current_frame].cels:
-			if not cel is PixelCel:
-				i += 1
-				continue
 			if project.layers[i].can_layer_get_drawn():
 				commit_action(cel.image)
 			i += 1
@@ -93,9 +78,6 @@ func _confirmed() -> void:
 		for frame in project.frames:
 			var i := 0
 			for cel in frame.cels:
-				if not cel is PixelCel:
-					i += 1
-					continue
 				if project.layers[i].can_layer_get_drawn():
 					commit_action(cel.image)
 				i += 1
@@ -107,9 +89,6 @@ func _confirmed() -> void:
 			for frame in _project.frames:
 				var i := 0
 				for cel in frame.cels:
-					if not cel is PixelCel:
-						i += 1
-						continue
 					if _project.layers[i].can_layer_get_drawn():
 						commit_action(cel.image, _project)
 					i += 1
@@ -117,54 +96,24 @@ func _confirmed() -> void:
 
 
 func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
-	if confirmed and affect == SELECTED_CELS:
-		selected_idx += 1
-
-
-func set_nodes() -> void:
-	preview = $VBoxContainer/AspectRatioContainer/Preview
-	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
-	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
-	animate_options_container = $VBoxContainer/AnimationOptions
-	animate_menu = $"%AnimateMenu".get_popup()
-	initial_button = $"%InitalButton"
-
-
-func set_animate_menu(elements: int) -> void:
-	initial_values.resize(elements)
-	initial_values.fill(0)
-	animate_bool.resize(elements)
-	animate_bool.fill(false)
-
-
-func set_initial_values() -> void:
 	pass
 
 
-func get_animated_value(project: Project, final: float, property_idx: int) -> float:
-	if animate_bool[property_idx] == true and confirmed:
-		var first := initial_values[property_idx]
-		var interpolation := float(selected_idx) / project.selected_cels.size()
-		return lerp(first, final, interpolation)
-	else:
-		return final
-
-
-func _update_animate_flags(id: int) -> void:
-	animate_bool[id] = !animate_bool[id]
-	animate_menu.set_item_checked(id, animate_bool[id])
+func set_nodes() -> void:
+	pass
 
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
 	var redo_data := _get_undo_data(project)
+
 	project.undos += 1
 	project.undo_redo.create_action(action)
 	for image in redo_data:
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
 	for image in undo_data:
 		project.undo_redo.add_undo_property(image, "data", undo_data[image])
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false, -1, -1, project)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, -1, -1, project)
+	project.undo_redo.add_do_method(Callable(Global, "undo_or_redo").bind(false, -1, -1, project))
+	project.undo_redo.add_undo_method(Callable(Global, "undo_or_redo").bind(true, -1, -1, project))
 	project.undo_redo.commit_action()
 
 
@@ -172,7 +121,6 @@ func _get_undo_data(project: Project) -> Dictionary:
 	var data := {}
 	var images := _get_selected_draw_images(project)
 	for image in images:
-		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		data[image] = image.data
 	return data
 
@@ -198,7 +146,6 @@ func _on_SelectionCheckBox_toggled(_button_pressed: bool) -> void:
 
 func _on_AffectOptionButton_item_selected(index: int) -> void:
 	affect = index
-	animate_options_container.visible = bool(affect == SELECTED_CELS)
 	update_preview()
 
 
@@ -209,8 +156,7 @@ func update_preview() -> void:
 		_:
 			preview_image.copy_from(current_frame)
 	commit_action(preview_image)
-	false # preview_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	preview_texture.create_from_image(preview_image) #,0
+	preview_texture = ImageTexture.create_from_image(preview_image)
 	preview.texture = preview_texture
 
 
@@ -230,9 +176,9 @@ func update_transparent_background_size() -> void:
 	preview.get_node("TransparentChecker").size.y = image_size_y
 
 
-func _popup_hide() -> void:
+func _close_requested() -> void:
 	Global.dialog_open(false)
 
-
-func _is_webgl1() -> bool:
-	return OS.get_name() == "HTML5" and OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2
+# Disabled by Variable (Cause: no OS.get_current_video_driver())
+#func _is_webgl1() -> bool:
+#	return OS.get_name() == "HTML5" and OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2

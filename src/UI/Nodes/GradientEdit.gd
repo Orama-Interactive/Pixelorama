@@ -26,16 +26,16 @@ class GradientCursor:
 	var color: Color
 	var sliding := false
 
-	onready var parent: TextureRect = get_parent()
-	onready var grand_parent: Container = parent.get_parent()
-	onready var label: Label = parent.get_node("Value")
+	@onready var parent: TextureRect = get_parent()
+	@onready var grand_parent: Container = parent.get_parent()
+	@onready var label: Label = parent.get_node("Value")
 
 	func _ready() -> void:
 		position = Vector2(0, 15)
 		size = Vector2(WIDTH, 15)
 
 	func _draw() -> void:
-# warning-ignore:integer_division
+		@warning_ignore("integer_division")
 		var polygon := PackedVector2Array(
 			[
 				Vector2(0, 5),
@@ -54,7 +54,7 @@ class GradientCursor:
 	func _gui_input(ev: InputEvent) -> void:
 		if ev is InputEventMouseButton:
 			if ev.button_index == MOUSE_BUTTON_LEFT:
-				if ev.doubleclick:
+				if ev.double_click:
 					grand_parent.select_color(self, ev.global_position)
 				elif ev.pressed:
 					grand_parent.continuous_change = false
@@ -87,7 +87,7 @@ class GradientCursor:
 	func set_color(c: Color) -> void:
 		color = c
 		grand_parent.update_from_value()
-		update()
+		queue_redraw()
 
 	static func sort(a, b) -> bool:
 		return a.get_position() < b.get_position()
@@ -138,14 +138,14 @@ func add_cursor(x: float, color: Color) -> void:
 	cursor.color = color
 
 
-func select_color(cursor: GradientCursor, position: Vector2) -> void:
+func select_color(cursor: GradientCursor, pos: Vector2) -> void:
 	active_cursor = cursor
 	color_picker.color = cursor.color
-	if position.x > global_position.x + (size.x / 2.0):
-		position.x = global_position.x + size.x
+	if pos.x > global_position.x + (size.x / 2.0):
+		pos.x = global_position.x + size.x
 	else:
-		position.x = global_position.x - $Popup.size.x
-	$Popup.position = position
+		pos.x = global_position.x - $Popup.size.x
+	$Popup.position = pos
 	$Popup.popup()
 
 
@@ -154,7 +154,7 @@ func get_sorted_cursors() -> Array:
 	for c in texture_rect.get_children():
 		if c is GradientCursor:
 			array.append(c)
-	array.sort_custom(Callable(GradientCursor, "sort"))
+	array.sort_custom(Callable(GradientCursor,"sort"))
 	return array
 
 
@@ -174,7 +174,12 @@ func _on_GradientEdit_resized() -> void:
 
 
 func _on_InterpolationOptionButton_item_selected(index: int) -> void:
-	gradient.interpolation_mode = index
+	if index == Gradient.GRADIENT_INTERPOLATE_LINEAR:
+		gradient.interpolation_mode = Gradient.GRADIENT_INTERPOLATE_LINEAR
+	if index == Gradient.GRADIENT_INTERPOLATE_CONSTANT:
+		gradient.interpolation_mode = Gradient.GRADIENT_INTERPOLATE_CONSTANT
+	if index == Gradient.GRADIENT_INTERPOLATE_CUBIC:
+		gradient.interpolation_mode = Gradient.GRADIENT_INTERPOLATE_CUBIC
 
 
 func _on_DivideButton_pressed() -> void:
@@ -182,7 +187,7 @@ func _on_DivideButton_pressed() -> void:
 
 
 func _on_DivideConfirmationDialog_confirmed() -> void:
-	var add_point_to_end := add_point_end_check_box.pressed
+	var add_point_to_end := add_point_end_check_box.button_pressed
 	var parts := number_of_parts_spin_box.value
 	var colors := []
 	var end_point = 1 if add_point_to_end else 0

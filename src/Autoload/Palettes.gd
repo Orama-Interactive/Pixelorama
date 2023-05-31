@@ -3,10 +3,7 @@ extends Node
 
 # Presets for creating a new palette
 enum NewPalettePresetType {
-	EMPTY = 0,
-	FROM_CURRENT_PALETTE = 1,
-	FROM_CURRENT_SPRITE = 2,
-	FROM_CURRENT_SELECTION = 3
+	EMPTY = 0, FROM_CURRENT_PALETTE = 1, FROM_CURRENT_SPRITE = 2, FROM_CURRENT_SELECTION = 3
 }
 
 # Color options when user creates a new palette from current sprite or selection
@@ -74,13 +71,13 @@ func _save_palette(palette: Palette) -> String:
 
 	# If resource name changed remove the old palette file
 	if old_resource_name != palette.resource_name:
-		var old_palette = palettes_write_path.plus_file(old_resource_name) + ".tres"
+		var old_palette = palettes_write_path.path_join(old_resource_name) + ".tres"
 		_delete_palette(old_palette)
 
 	# Save palette
-	var save_path = palettes_write_path.plus_file(palette.resource_name) + ".tres"
+	var save_path = palettes_write_path.path_join(palette.resource_name) + ".tres"
 	palette.resource_path = save_path
-	var err = ResourceSaver.save(save_path, palette)
+	var err = ResourceSaver.save(palette, save_path)
 	if err != OK:
 		Global.notification_label("Failed to save palette")
 	return save_path
@@ -88,57 +85,57 @@ func _save_palette(palette: Palette) -> String:
 
 func create_new_palette(
 	preset: int,
-	name: String,
+	nam: String,
 	comment: String,
 	width: int,
 	height: int,
 	add_alpha_colors: bool,
 	get_colors_from: int
 ) -> void:
-	_check_palette_settings_values(name, width, height)
+	_check_palette_settings_values(nam, width, height)
 	match preset:
 		NewPalettePresetType.EMPTY:
-			_create_new_empty_palette(name, comment, width, height)
+			_create_new_empty_palette(nam, comment, width, height)
 		NewPalettePresetType.FROM_CURRENT_PALETTE:
-			_create_new_palette_from_current_palette(name, comment)
+			_create_new_palette_from_current_palette(nam, comment)
 		NewPalettePresetType.FROM_CURRENT_SPRITE:
 			_create_new_palette_from_current_sprite(
-				name, comment, width, height, add_alpha_colors, get_colors_from
+				nam, comment, width, height, add_alpha_colors, get_colors_from
 			)
 		NewPalettePresetType.FROM_CURRENT_SELECTION:
 			_create_new_palette_from_current_selection(
-				name, comment, width, height, add_alpha_colors, get_colors_from
+				nam, comment, width, height, add_alpha_colors, get_colors_from
 			)
 
 
-func _create_new_empty_palette(name: String, comment: String, width: int, height: int) -> void:
-	var new_palette: Palette = Palette.new(name, width, height, comment)
+func _create_new_empty_palette(nam: String, comment: String, width: int, height: int) -> void:
+	var new_palette: Palette = Palette.new(nam, width, height, comment)
 	var palette_path := _save_palette(new_palette)
 	palettes[palette_path] = new_palette
 	select_palette(palette_path)
 
 
-func _create_new_palette_from_current_palette(name: String, comment: String) -> void:
+func _create_new_palette_from_current_palette(nam: String, comment: String) -> void:
 	if !current_palette:
 		return
 	var new_palette: Palette = current_palette.duplicate()
-	new_palette.name = name
+	new_palette.name = nam
 	new_palette.comment = comment
-	new_palette.set_resource_name(name)
+	new_palette.set_resource_name(nam)
 	var palette_path := _save_palette(new_palette)
 	palettes[palette_path] = new_palette
 	select_palette(palette_path)
 
 
 func _create_new_palette_from_current_selection(
-	name: String,
+	nam: String,
 	comment: String,
 	width: int,
 	height: int,
 	add_alpha_colors: bool,
 	get_colors_from: int
 ):
-	var new_palette: Palette = Palette.new(name, width, height, comment)
+	var new_palette: Palette = Palette.new(nam, width, height, comment)
 	var current_project = Global.current_project
 	var pixels := []
 	for x in current_project.size.x:
@@ -150,14 +147,14 @@ func _create_new_palette_from_current_selection(
 
 
 func _create_new_palette_from_current_sprite(
-	name: String,
+	nam: String,
 	comment: String,
 	width: int,
 	height: int,
 	add_alpha_colors: bool,
 	get_colors_from: int
 ):
-	var new_palette: Palette = Palette.new(name, width, height, comment)
+	var new_palette: Palette = Palette.new(nam, width, height, comment)
 	var current_project = Global.current_project
 	var pixels := []
 	for x in current_project.size.x:
@@ -187,7 +184,6 @@ func _fill_new_palette_with_colors(
 	for cel in cels:
 		var cel_image := Image.new()
 		cel_image.copy_from(cel.image)
-		false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		if cel_image.is_invisible():
 			continue
 		for i in pixels:
@@ -197,23 +193,21 @@ func _fill_new_palette_with_colors(
 					color.a = 1
 				if not new_palette.has_theme_color(color):
 					new_palette.add_color(color)
-		false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 	var palette_path := _save_palette(new_palette)
 	palettes[palette_path] = new_palette
 	select_palette(palette_path)
 
 
-func current_palette_edit(name: String, comment: String, width: int, height: int) -> void:
-	_check_palette_settings_values(name, width, height)
-	current_palette.edit(name, width, height, comment)
+func current_palette_edit(nam: String, comment: String, width: int, height: int) -> void:
+	_check_palette_settings_values(nam, width, height)
+	current_palette.edit(nam, width, height, comment)
 	var palette_path = _current_palette_save()
 	palettes[palette_path] = current_palette
 
 
 func _delete_palette(path: String) -> void:
-	var dir = DirAccess.new()
-	dir.remove(path)
+	DirAccess.remove_absolute(path)
 	palettes.erase(path)
 
 
@@ -231,7 +225,7 @@ func current_palette_add_color(mouse_button: int, start_index: int = 0) -> void:
 		not current_palette.is_full()
 		and (mouse_button == MOUSE_BUTTON_LEFT or mouse_button == MOUSE_BUTTON_RIGHT)
 	):
-		# Get color on left or right tool
+		# Get color on left or right @tool
 		var color = Tools.get_assigned_color(mouse_button)
 		current_palette.add_color(color, start_index)
 		_current_palette_save()
@@ -314,9 +308,9 @@ func current_palette_is_full() -> bool:
 	return current_palette.is_full()
 
 
-func _check_palette_settings_values(name: String, width: int, height: int) -> bool:
+func _check_palette_settings_values(nam: String, width: int, height: int) -> bool:
 	# Just in case. These values should be not allowed in gui.
-	if name.length() <= 0 or width <= 0 or height <= 0:
+	if nam.length() <= 0 or width <= 0 or height <= 0:
 		printerr("Palette width, height and name length must be greater than 0!")
 		return false
 	return true
@@ -330,8 +324,8 @@ func _load_palettes() -> void:
 
 	# Iterate backwards, so any palettes defined in default files
 	# get overwritten by those of the same name in user files
-	search_locations.invert()
-	priority_ordered_files.invert()
+	search_locations.reverse()
+	priority_ordered_files.reverse()
 	var default_palette_name = Global.config_cache.get_value(
 		"data", "last_palette", DEFAULT_PALETTE_NAME
 	)
@@ -344,7 +338,7 @@ func _load_palettes() -> void:
 		var base_directory: String = search_locations[i]
 		var palette_files: Array = priority_ordered_files[i]
 		for file_name in palette_files:
-			var palette: Palette = load(base_directory.plus_file(file_name))
+			var palette: Palette = load(base_directory.path_join(file_name))
 			if palette:
 				if make_copy:
 					# Makes a copy of the palette
@@ -395,14 +389,15 @@ func _get_palette_priority_file_map(looking_paths: Array) -> Array:
 # Get the palette files in a single directory.
 # if it does not exist, return []
 func _get_palette_files(path: String) -> Array:
-	var dir := DirAccess.new()
 	var results = []
 
-	if not dir.dir_exists(path):
+	if not DirAccess.dir_exists_absolute(path):
 		return []
 
-	dir.open(path)
-	dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+	var dir := DirAccess.open(path)
+	dir.include_hidden = true  # alternative of skip_hidden: bool = false in Godot 3.x
+	dir.include_navigational = true  # alternative of include_hidden: bool = false in Godot 3.x
+	dir.list_dir_begin()  # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 
 	while true:
 		var file_name = dir.get_next()
@@ -427,7 +422,7 @@ func _get_best_palette_file_location(looking_paths: Array, fname: String):  # ->
 		var base_path: String = looking_paths[i]
 		var the_files: Array = priority_fmap[i]
 		if the_files.has(fname):
-			return base_path.plus_file(fname)
+			return base_path.path_join(fname)
 	return null
 
 
@@ -439,16 +434,14 @@ func import_palette_from_path(path: String) -> void:
 	var palette: Palette = null
 	match path.to_lower().get_extension():
 		"gpl":
-			var file = File.new()
-			if file.file_exists(path):
-				file.open(path, File.READ)
+			if FileAccess.file_exists(path):
+				var file = FileAccess.open(path, FileAccess.READ)
 				var text = file.get_as_text()
 				file.close()
 				palette = _import_gpl(path, text)
 		"pal":
-			var file = File.new()
-			if file.file_exists(path):
-				file.open(path, File.READ)
+			if FileAccess.file_exists(path):
+				var file = FileAccess.open(path, FileAccess.READ)
 				var text = file.get_as_text()
 				file.close()
 				palette = _import_pal_palette(path, text)
@@ -458,9 +451,8 @@ func import_palette_from_path(path: String) -> void:
 			if !err:
 				palette = _import_image_palette(path, image)
 		"json":
-			var file = File.new()
-			if file.file_exists(path):
-				file.open(path, File.READ)
+			if FileAccess.file_exists(path):
+				var file = FileAccess.open(path, FileAccess.READ)
 				var text = file.get_as_text()
 				file.close()
 				palette = _import_json_palette(text)
@@ -568,13 +560,11 @@ func _import_image_palette(path: String, image: Image) -> Palette:
 	var width: int = image.get_width()
 
 	# Iterate all pixels and store unique colors to palette
-	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for y in range(0, height):
 		for x in range(0, width):
 			var color: Color = image.get_pixel(x, y)
 			if !colors.has(color):
 				colors.append(color)
-	false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 	var palette_height: int = ceil(colors.size() / 8.0)
 	var result: Palette = Palette.new(path.get_basename().get_file(), 8, palette_height)

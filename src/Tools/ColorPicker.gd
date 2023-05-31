@@ -46,47 +46,43 @@ func update_config() -> void:
 	$ColorPicker/ExtractFrom.selected = _mode
 
 
-func draw_start(position: Vector2) -> void:
-	super.draw_start(position)
-	_pick_color(position)
+func draw_start(pos: Vector2) -> void:
+	super.draw_start(pos)
+	_pick_color(pos)
 
 
-func draw_move(position: Vector2) -> void:
-	super.draw_move(position)
-	_pick_color(position)
+func draw_move(pos: Vector2) -> void:
+	super.draw_move(pos)
+	_pick_color(pos)
 
 
-func draw_end(position: Vector2) -> void:
-	super.draw_end(position)
+func draw_end(pos: Vector2) -> void:
+	super.draw_end(pos)
 
 
-func _pick_color(position: Vector2) -> void:
+func _pick_color(pos: Vector2) -> void:
 	var project: Project = Global.current_project
-	position = project.tiles.get_canon_position(position)
+	pos = project.tiles.get_canon_position(pos)
 
-	if position.x < 0 or position.y < 0:
+	if pos.x < 0 or pos.y < 0:
 		return
 
 	var color := Color(0, 0, 0, 0)
 	var image := Image.new()
 	image.copy_from(_get_draw_image())
-	if position.x > image.get_width() - 1 or position.y > image.get_height() - 1:
+	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
 		return
 	match _mode:
 		TOP_COLOR:
 			var curr_frame: Frame = project.frames[project.current_frame]
 			for layer in project.layers.size():
 				var idx = (project.layers.size() - 1) - layer
-				if project.layers[idx].is_visible_in_hierarchy():
+				if project.layers[idx].can_layer_get_drawn():
 					image = curr_frame.cels[idx].get_image()
-					false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-					color = image.get_pixelv(position)
-					false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+					color = image.get_pixelv(pos)
 					if color != Color(0, 0, 0, 0):
 						break
 		CURRENT_LAYER:
-			false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-			color = image.get_pixelv(position)
-			false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+			color = image.get_pixelv(pos)
 	var button := MOUSE_BUTTON_LEFT if _color_slot == 0 else MOUSE_BUTTON_RIGHT
 	Tools.assign_color(color, button, false)

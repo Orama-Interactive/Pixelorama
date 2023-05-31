@@ -20,7 +20,7 @@ func _on_ManageLayouts_about_to_show() -> void:
 		layout_list.select(layout_selected)
 
 
-func _on_ManageLayouts_popup_hide() -> void:
+func _on_close_requested() -> void:
 	layout_list.clear()
 	Global.dialog_open(false)
 
@@ -36,7 +36,7 @@ func _on_SavedLayouts_item_selected(index: int) -> void:
 	refresh_preview()
 
 
-func _on_SavedLayouts_nothing_selected() -> void:
+func _on_SavedLayouts_empty_clicked(_at_position: Vector2, _mouse_button_index: int) -> void:
 	edit_layout.disabled = true
 	delete_layout.disabled = true
 
@@ -44,14 +44,14 @@ func _on_SavedLayouts_nothing_selected() -> void:
 func _on_AddLayout_pressed() -> void:
 	is_editing = false
 	layout_name.text = "New Layout"
-	layout_settings.window_title = "Add Layout"
+	layout_settings.title = "Add Layout"
 	layout_settings.popup_centered()
 
 
 func _on_EditLayout_pressed() -> void:
 	is_editing = true
 	layout_name.text = layout_list.get_item_text(layout_selected)
-	layout_settings.window_title = "Edit Layout"
+	layout_settings.title = "Edit Layout"
 	layout_settings.popup_centered()
 
 
@@ -61,9 +61,9 @@ func _on_DeleteLayout_pressed() -> void:
 
 func _on_LayoutSettings_confirmed() -> void:
 	var file_name := layout_name.text + ".tres"
-	var path := "user://layouts/".plus_file(file_name)
+	var path := "user://layouts/".path_join(file_name)
 	var layout = Global.control.ui.get_layout()
-	var err := ResourceSaver.save(path, layout)
+	var err := ResourceSaver.save(layout, path)
 	if err != OK:
 		print(err)
 	else:
@@ -86,13 +86,12 @@ func _on_LayoutSettings_confirmed() -> void:
 
 
 func delete_layout_file(file_name: String) -> void:
-	var dir := DirAccess.new()
-	dir.remove("user://layouts/".plus_file(file_name))
+	DirAccess.remove_absolute("user://layouts/".path_join(file_name))
 
 
 func _on_DeleteConfirmation_confirmed() -> void:
 	delete_layout_file(layout_list.get_item_text(layout_selected) + ".tres")
-	Global.top_menu_container.layouts.remove(layout_selected)
+	Global.top_menu_container.layouts.remove_at(layout_selected)
 	layout_list.remove_item(layout_selected)
 	Global.top_menu_container.populate_layouts_submenu()
 	layout_selected = -1
@@ -108,8 +107,8 @@ func refresh_preview():
 		var box := TextEdit.new()
 		box.name = item.name
 		box.text = item.name
-		box.wrap_enabled = true
-		box.readonly = true
+		box.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
+		box.editable = true
 		mimic_ui.add_child(box)
 	if layout_selected == -1:
 		mimic_ui.visible = false

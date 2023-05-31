@@ -4,14 +4,13 @@ extends BaseCel
 # The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
 
 
-func _init(_opacity := 1.0) -> void:
+func _init(_opacity := 1.0):
 	opacity = _opacity
 	image_texture = ImageTexture.new()
 
 
 func get_image() -> Image:
-	var image := Image.new()
-	image.create(
+	var image = Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
 	return image
@@ -19,7 +18,3 @@ func get_image() -> Image:
 
 func instantiate_cel_button() -> Node:
 	return Global.group_cel_button_node.instantiate()
-
-
-func get_class_name() -> String:
-	return "GroupCel"

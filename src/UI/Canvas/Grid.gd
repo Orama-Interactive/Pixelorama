@@ -10,7 +10,7 @@ func _draw() -> void:
 		target_rect = Global.current_project.tiles.get_bounding_rect()
 	else:
 		target_rect = Rect2(Vector2.ZERO, Global.current_project.size)
-	if target_rect.has_no_area():
+	if !target_rect.has_area():
 		return
 
 	var grid_type: int = Global.grid_type
@@ -22,44 +22,48 @@ func _draw() -> void:
 
 
 func _draw_cartesian_grid(target_rect: Rect2) -> void:
-	# Using Array instead of PoolVector2Array to avoid kinda
+	# Using Array instead of PackedVector2Array to avoid kinda
 	# random "resize: Can't resize PoolVector if locked" errors.
 	#  See: https://github.com/Orama-Interactive/Pixelorama/issues/331
-	# It will be converted to PoolVector2Array before being sent to be rendered.
+	# It will be converted to PackedVector2Array before being sent to be rendered.
 	var grid_multiline_points := []
 
 	var x: float = (
 		target_rect.position.x
-		+ fposmod(Global.grid_offset.x - target_rect.position.x, Global.grid_size.x)
+		+ fposmod(Global.grid_offset_x - target_rect.position.x, Global.grid_width)
 	)
 	while x <= target_rect.end.x:
 		grid_multiline_points.push_back(Vector2(x, target_rect.position.y))
 		grid_multiline_points.push_back(Vector2(x, target_rect.end.y))
-		x += Global.grid_size.x
+		x += Global.grid_width
 
 	var y: float = (
 		target_rect.position.y
-		+ fposmod(Global.grid_offset.y - target_rect.position.y, Global.grid_size.y)
+		+ fposmod(Global.grid_offset_y - target_rect.position.y, Global.grid_height)
 	)
 	while y <= target_rect.end.y:
 		grid_multiline_points.push_back(Vector2(target_rect.position.x, y))
 		grid_multiline_points.push_back(Vector2(target_rect.end.x, y))
-		y += Global.grid_size.y
+		y += Global.grid_height
 
 	if not grid_multiline_points.is_empty():
 		draw_multiline(grid_multiline_points, Global.grid_color)
 
 
 func _draw_isometric_grid(target_rect: Rect2) -> void:
-	# Using Array instead of PoolVector2Array to avoid kinda
+	# Using Array instead of PackedVector2Array to avoid kinda
 	# random "resize: Can't resize PoolVector if locked" errors.
 	#  See: https://github.com/Orama-Interactive/Pixelorama/issues/331
-	# It will be converted to PoolVector2Array before being sent to be rendered.
+	# It will be converted to PackedVector2Array before being sent to be rendered.
 	var grid_multiline_points := []
 
-	var cell_size := Global.isometric_grid_size
+	var cell_size := Vector2(
+		Global.grid_isometric_cell_bounds_width, Global.grid_isometric_cell_bounds_height
+	)
 	var max_cell_count: Vector2 = target_rect.size / cell_size
-	var origin_offset: Vector2 = (Global.grid_offset - target_rect.position).posmodv(cell_size)
+
+	var origin := Vector2(Global.grid_offset_x, Global.grid_offset_y)
+	var origin_offset: Vector2 = (origin - target_rect.position).posmodv(cell_size)
 
 	# lines ↗↗↗ (from bottom-left to top-right)
 	var per_cell_offset := cell_size * Vector2(1, -1)
@@ -70,8 +74,8 @@ func _draw_isometric_grid(target_rect: Rect2) -> void:
 	)
 	while y < target_rect.size.y:
 		var start: Vector2 = target_rect.position + Vector2(0, y)
-		var cells_to_rect_bounds: float = min(max_cell_count.x, y / cell_size.y)
-		var end: Vector2 = start + cells_to_rect_bounds * per_cell_offset
+		var cells_to_bounds: float = min(max_cell_count.x, y / cell_size.y)
+		var end: Vector2 = start + cells_to_bounds * per_cell_offset
 		grid_multiline_points.push_back(start)
 		grid_multiline_points.push_back(end)
 		y += cell_size.y
@@ -80,8 +84,8 @@ func _draw_isometric_grid(target_rect: Rect2) -> void:
 	var x: float = (y - target_rect.size.y) / cell_size.y * cell_size.x
 	while x < target_rect.size.x:
 		var start: Vector2 = target_rect.position + Vector2(x, target_rect.size.y)
-		var cells_to_rect_bounds: float = min(max_cell_count.y, max_cell_count.x - x / cell_size.x)
-		var end: Vector2 = start + cells_to_rect_bounds * per_cell_offset
+		var cells_to_bounds: float = min(max_cell_count.y, max_cell_count.x - x / cell_size.x)
+		var end: Vector2 = start + cells_to_bounds * per_cell_offset
 		grid_multiline_points.push_back(start)
 		grid_multiline_points.push_back(end)
 		x += cell_size.x
@@ -93,8 +97,8 @@ func _draw_isometric_grid(target_rect: Rect2) -> void:
 	y = fposmod(origin_offset.y - cell_size.y * (0.5 + origin_offset.x / cell_size.x), cell_size.y)
 	while y < target_rect.size.y:
 		var start: Vector2 = target_rect.position + Vector2(0, y)
-		var cells_to_rect_bounds: float = min(max_cell_count.x, max_cell_count.y - y / cell_size.y)
-		var end: Vector2 = start + cells_to_rect_bounds * per_cell_offset
+		var cells_to_bounds: float = min(max_cell_count.x, max_cell_count.y - y / cell_size.y)
+		var end: Vector2 = start + cells_to_bounds * per_cell_offset
 		grid_multiline_points.push_back(start)
 		grid_multiline_points.push_back(end)
 		y += cell_size.y
@@ -103,8 +107,8 @@ func _draw_isometric_grid(target_rect: Rect2) -> void:
 	x = fposmod(origin_offset.x - cell_size.x * (0.5 + origin_offset.y / cell_size.y), cell_size.x)
 	while x < target_rect.size.x:
 		var start: Vector2 = target_rect.position + Vector2(x, 0)
-		var cells_to_rect_bounds: float = min(max_cell_count.y, max_cell_count.x - x / cell_size.x)
-		var end: Vector2 = start + cells_to_rect_bounds * per_cell_offset
+		var cells_to_bounds: float = min(max_cell_count.y, max_cell_count.x - x / cell_size.x)
+		var end: Vector2 = start + cells_to_bounds * per_cell_offset
 		grid_multiline_points.push_back(start)
 		grid_multiline_points.push_back(end)
 		x += cell_size.x

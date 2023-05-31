@@ -2,25 +2,25 @@ extends Node2D
 
 
 func _ready() -> void:
-	Global.camera.connect("zoom_changed", Callable(self, "update"))
+	Global.camera.connect("zoom_changed", Callable(self, "queue_redraw"))
 
 
 func _draw() -> void:
 	if not Global.draw_pixel_grid:
 		return
 
-	var zoom_percentage := 100.0 / Global.camera.zoom.x
+	var zoom_percentage := 100.0 * Global.camera.zoom.x
 	if zoom_percentage < Global.pixel_grid_show_at_zoom:
 		return
 
 	var target_rect: Rect2 = Global.current_project.tiles.get_bounding_rect()
-	if target_rect.has_no_area():
+	if !target_rect.has_area():
 		return
 
-	# Using Array instead of PoolVector2Array to avoid kinda
+	# Using Array instead of PackedVector2Array to avoid kinda
 	# random "resize: Can't resize PoolVector if locked" errors.
 	#  See: https://github.com/Orama-Interactive/Pixelorama/issues/331
-	# It will be converted to PoolVector2Array before being sent to be rendered.
+	# It will be converted to PackedVector2Array before being sent to be rendered.
 	var grid_multiline_points := []
 
 	for x in range(ceil(target_rect.position.x), floor(target_rect.end.x) + 1):

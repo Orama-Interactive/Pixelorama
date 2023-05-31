@@ -1,59 +1,56 @@
 extends ImageEffect
 
-enum Animate { THICKNESS }
-var color := Color.BLACK
+var color := Color.RED
 var thickness := 1
 var pattern := 0
 var inside_image := false
 var shader: Shader
 
-@onready var outline_color := $VBoxContainer/OutlineOptions/OutlineColor as ColorPickerButton
+@onready var outline_color = $VBoxContainer/OptionsContainer/OutlineColor
 
 
 func _ready() -> void:
-	if _is_webgl1():
-		$VBoxContainer/OptionsContainer/PatternOptionButton.disabled = true
-	else:
-		shader = load("res://src/Shaders/OutlineInline.gdshader")
-		var sm := ShaderMaterial.new()
-		sm.gdshader = shader
-		preview.set_material(sm)
+	super._ready()
+	# Disabled by Variable (Cause: no OS.get_current_video_driver())
+#	if _is_webgl1():
+#		$VBoxContainer/OptionsContainer/PatternOptionButton.disabled = true
+#	else:
+#		shader = load("res://src/Shaders/OutlineInline.gdshader")
+#		var sm := ShaderMaterial.new()
+#		sm.gdshader = shader
+#		preview.set_material(sm)
+
 	outline_color.get_picker().presets_visible = false
 	color = outline_color.color
 
 
-func set_animate_menu(_elements) -> void:
-	# set as in enum
-	animate_menu.add_check_item("Thickness", Animate.THICKNESS)
-	super.set_animate_menu(Animate.size())
-
-
-func set_initial_values() -> void:
-	initial_values[Animate.THICKNESS] = thickness
+func set_nodes() -> void:
+	preview = $VBoxContainer/AspectRatioContainer/Preview
+	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
+	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	super.commit_action(cel, project)
-	var anim_thickness = get_animated_value(project, thickness, Animate.THICKNESS)
-
 	if !shader:  # Web version
 		DrawingAlgos.generate_outline(
-			cel, selection_checkbox.pressed, project, color, anim_thickness, false, inside_image
+			cel, selection_checkbox.button_pressed, project, color, thickness, false, inside_image
 		)
 		return
 
-	var selection_tex := ImageTexture.new()
-	if selection_checkbox.pressed and project.has_selection:
-		selection_tex.create_from_image(project.selection_map) #,0
+	var selection_tex: ImageTexture
+	if selection_checkbox.button_pressed and project.has_selection:
+		selection_tex = ImageTexture.create_from_image(project.selection_map)
 
 	var params := {
 		"color": color,
-		"width": anim_thickness,
+		"width": thickness,
 		"pattern": pattern,
 		"inside": inside_image,
-		"selection": selection_tex
+		"selection": selection_tex,
+		"affect_selection": selection_checkbox.button_pressed,
+		"has_selection": project.has_selection
 	}
-	if !confirmed:
+	if !is_confirmed:
 		for param in params:
 			preview.material.set_shader_parameter(param, params[param])
 	else:

@@ -19,19 +19,19 @@ class Brush:
 
 func _ready() -> void:
 	var container = get_node("Background/Brushes/Categories/DefaultBrushContainer")
-	var button := create_button(pixel_image)
+	var button := Brushes.create_button(pixel_image)
 	button.brush.type = PIXEL
 	button.tooltip_text = "Pixel brush"
 	container.add_child(button)
 	button.brush.index = button.get_index()
 
-	button = create_button(circle_image)
+	button = Brushes.create_button(circle_image)
 	button.brush.type = CIRCLE
 	button.tooltip_text = "Circle brush"
 	container.add_child(button)
 	button.brush.index = button.get_index()
 
-	button = create_button(circle_filled_image)
+	button = Brushes.create_button(circle_filled_image)
 	button.brush.type = FILLED_CIRCLE
 	button.tooltip_text = "Filled circle brush"
 	container.add_child(button)
@@ -52,8 +52,7 @@ static func get_default_brush() -> Brush:
 
 static func create_button(image: Image) -> Node:
 	var button: BaseButton = preload("res://src/UI/Buttons/BrushButton.tscn").instantiate()
-	var tex := ImageTexture.new()
-	tex.create_from_image(image) #,0
+	var tex := ImageTexture.create_from_image(image)
 	button.get_node("BrushTexture").texture = tex
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	return button
@@ -111,7 +110,7 @@ func get_brush(type: int, index: int) -> Brush:
 		RANDOM_FILE:
 			container = get_node("Background/Brushes/Categories/RandomFileBrushContainer")
 
-	var brush := get_default_brush()
+	var brush := Brushes.get_default_brush()
 	if index < container.get_child_count():
 		brush = container.get_child(index).brush
 	return brush
@@ -135,8 +134,8 @@ func remove_brush(brush_button: Node) -> void:
 	project.undo_redo.create_action("Delete Custom Brush")
 	project.undo_redo.add_do_property(project, "brushes", project.brushes)
 	project.undo_redo.add_undo_property(project, "brushes", undo_brushes)
-	project.undo_redo.add_do_method(self, "redo_custom_brush", brush_button)
-	project.undo_redo.add_undo_method(self, "undo_custom_brush", brush_button)
+	project.undo_redo.add_do_method(Callable(self, "redo_custom_brush").bind(brush_button))
+	project.undo_redo.add_undo_method(Callable(self, "undo_custom_brush").bind(brush_button))
 	project.undo_redo.add_undo_reference(brush_button)
 	project.undo_redo.commit_action()
 

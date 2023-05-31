@@ -45,7 +45,7 @@ func _on_Remove_pressed():
 	if index != -1:
 		queue_free()
 		element.queue_free()
-		Global.current_project.reference_images.remove(index)
+		Global.current_project.reference_images.remove_at(index)
 		Global.current_project.change_project()
 
 
@@ -81,12 +81,12 @@ func _on_Opacity_value_changed(value):
 func _on_Path_pressed() -> void:
 	OS.shell_open($Interior/PathHeader/Path3D.text.get_base_dir())
 
-
-func _on_ApplyFilter_toggled(button_pressed: bool) -> void:
-	element.filter = button_pressed
-	if element.texture:
-		if element.filter:
-			element.texture.flags = Texture2D.FLAG_MIPMAPS | Texture2D.FLAG_FILTER
-		else:
-			element.texture.flags = Texture2D.FLAG_MIPMAPS
-	element.change_properties()
+# Disabled by Variable (Cause: Confusion on flags)
+#func _on_ApplyFilter_toggled(button_pressed: bool) -> void:
+#	element.filter = button_pressed
+#	if element.texture:
+#		if element.filter:
+#			element.texture.flags = Texture2D.FLAG_MIPMAPS | Texture2D.FLAG_FILTER
+#		else:
+#			element.texture.flags = Texture2D.FLAG_MIPMAPS
+#	element.change_properties()

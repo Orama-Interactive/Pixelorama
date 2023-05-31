@@ -14,46 +14,55 @@ var dither_matrices := [
 ]
 var selected_dither_matrix: DitherMatrix = dither_matrices[0]
 
-@onready var options_cont: Container = $VBoxContainer/GradientOptions
+@onready var options_cont: Container = $VBoxContainer/OptionsContainer
 @onready var gradient_edit: GradientEditNode = $VBoxContainer/GradientEdit
 @onready var shape_option_button: OptionButton = $"%ShapeOptionButton"
 @onready var dithering_label: Label = $"%DitheringLabel"
 @onready var dithering_option_button: OptionButton = $"%DitheringOptionButton"
 @onready var repeat_option_button: OptionButton = $"%RepeatOptionButton"
-@onready var position: ValueSlider = $"%PositionSlider"
+@onready var pos: ValueSlider = $"%PositionSlider"
 @onready var size_slider: ValueSlider = $"%SizeSlider"
 @onready var angle: ValueSlider = $"%AngleSlider"
-@onready var center_slider := $"%CenterSlider" as ValueSliderV2
-@onready var radius_slider := $"%RadiusSlider" as ValueSliderV2
+@onready var center_x: ValueSlider = $"%XCenterSlider"
+@onready var center_y: ValueSlider = $"%YCenterSlider"
+@onready var radius_x: ValueSlider = $"%XRadiusSlider"
+@onready var radius_y: ValueSlider = $"%YRadiusSlider"
 
 
 class DitherMatrix:
 	var texture: Texture2D
 	var name: String
 
-	func _init(_texture: Texture2D, _name: String) -> void:
+	func _init(_texture: Texture2D, _name: String):
 		texture = _texture
 		name = _name
 
 
 func _ready() -> void:
+	super._ready()
 	var sm := ShaderMaterial.new()
-	sm.gdshader = shader
-	preview.set_material(sm)
+	sm.shader = shader
+	if preview:
+		preview.set_material(sm)
 
 	for matrix in dither_matrices:
 		dithering_option_button.add_item(matrix.name)
 
 
+func set_nodes() -> void:
+	preview = $VBoxContainer/AspectRatioContainer/Preview
+	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
+	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
+
+
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	var selection: Image
-	var selection_tex := ImageTexture.new()
-	if selection_checkbox.pressed and project.has_selection:
+	var selection_tex: ImageTexture
+	if selection_checkbox.button_pressed and project.has_selection:
 		selection = project.selection_map
 	else:  # This is needed to prevent a weird bug with the dithering shaders and GLES2
-		selection = Image.new()
-		selection.create(project.size.x, project.size.y, false, Image.FORMAT_L8)
-	selection_tex.create_from_image(selection) #,0
+		selection = Image.create(project.size.x, project.size.y, false, Image.FORMAT_L8)
+	selection_tex = ImageTexture.create_from_image(selection)
 
 	var dither_texture: Texture2D = selected_dither_matrix.texture
 	var pixel_size := dither_texture.get_width()
@@ -62,37 +71,29 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	# Pass the gradient offsets as an array to the shader
 	# ...but since Godot 3.x doesn't support uniform arrays, instead we construct
 	# a nx1 grayscale texture with each offset stored in each pixel, and pass it to the shader
-	var offsets_image := Image.new()
-	offsets_image.create(n_of_colors, 1, false, Image.FORMAT_L8)
+	var offsets_image := Image.create(n_of_colors, 1, false, Image.FORMAT_L8)
 	# Construct an image that contains the selected colors of the gradient without interpolation
-	var gradient_image := Image.new()
-	gradient_image.create(n_of_colors, 1, false, Image.FORMAT_RGBA8)
-	false # offsets_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	false # gradient_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	var gradient_image := Image.create(n_of_colors, 1, false, Image.FORMAT_RGBA8)
 	for i in n_of_colors:
 		var c := gradient.offsets[i]
 		offsets_image.set_pixel(i, 0, Color(c, c, c, c))
 		gradient_image.set_pixel(i, 0, gradient.colors[i])
-	false # offsets_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	false # gradient_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	var offsets_tex := ImageTexture.new()
-	offsets_tex.create_from_image(offsets_image) #,0
+	var offsets_tex := ImageTexture.create_from_image(offsets_image)
 	var gradient_tex: Texture2D
 	if shader == shader_linear:
 		gradient_tex = gradient_edit.texture
 	else:
-		gradient_tex = ImageTexture.new()
-		gradient_tex.create_from_image(gradient_image) #,0
+		gradient_tex = ImageTexture.create_from_image(gradient_image)
 	var params := {
 		"gradient_texture": gradient_tex,
 		"offset_texture": offsets_tex,
 		"selection": selection_tex,
 		"repeat": repeat_option_button.selected,
-		"position": (position.value / 100.0) - 0.5,
+		"position": (pos.value / 100.0) - 0.5,
 		"size": size_slider.value / 100.0,
 		"angle": angle.value,
-		"center": center_slider.value / 100.0,
-		"radius": radius_slider.value,
+		"center": Vector2(center_x.value / 100.0, center_y.value / 100.0),
+		"radius": Vector2(radius_x.value, radius_y.value),
 		"dither_texture": dither_texture,
 		"image_size": project.size,
 		"pixel_size": pixel_size,
@@ -100,7 +101,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"n_of_colors": n_of_colors
 	}
 
-	if !confirmed:
+	if !is_confirmed:
 		preview.material.gdshader = shader
 		for param in params:
 			preview.material.set_shader_parameter(param, params[param])
@@ -124,10 +125,6 @@ func _on_ShapeOptionButton_item_selected(index: int) -> void:
 
 
 func _value_changed(_value: float) -> void:
-	update_preview()
-
-
-func _value_v2_changed(_value: Vector2) -> void:
 	update_preview()
 
 

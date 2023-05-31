@@ -164,10 +164,6 @@ func deserialize(dict: Dictionary) -> void:
 			cel_link_sets.append(link_set)
 
 
-func get_layer_type() -> int:
-	return -1
-
-
 func new_empty_cel() -> BaseCel:
 	return null
 
@@ -180,7 +176,8 @@ func can_layer_get_drawn() -> bool:
 	return false
 
 
-func accepts_child(_layer: BaseLayer) -> bool:
+#func accepts_child(_layer: BaseLayer) -> bool:
+func accepts_child(_layer) -> bool:
 	return false
 
 

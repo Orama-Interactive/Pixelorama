@@ -20,7 +20,7 @@ var theme_button_group := ButtonGroup.new()
 func _ready() -> void:
 	for theme in themes:
 		add_theme(theme)
-	await get_tree().idle_frame
+	await get_tree().process_frame
 
 	var theme_id: int = Global.config_cache.get_value("preferences", "theme", 0)
 	if theme_id >= themes.size():
@@ -43,7 +43,7 @@ func add_theme(theme: Theme) -> void:
 	button.name = theme_name
 	button.text = theme_name
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	button.group = theme_button_group
+	button.button_group = theme_button_group
 	buttons_container.add_child(button)
 	button.connect("pressed", Callable(self, "_on_Theme_pressed").bind(button.get_index()))
 
@@ -81,14 +81,15 @@ func change_theme(id: int) -> void:
 	change_clear_color()
 	change_icon_colors()
 
-	# Temporary code
-	var clear_color: Color = theme.get_color("clear_color", "Misc")
-	if !clear_color:
-		var panel_stylebox: StyleBox = theme.get_stylebox("panel", "PanelContainer")
-		if panel_stylebox is StyleBoxFlat:
-			clear_color = panel_stylebox.bg_color
-		else:
-			clear_color = Color.GRAY
+	# Disabled by Variable (Cause: use unknown, code is possibly redundant)
+#	# Temporary code
+#	var clear_color: Color = theme.get_color("clear_color", "Misc")
+#	if !theme.has_color("clear_color", "Misc"):
+#		var panel_stylebox: StyleBox = theme.get_stylebox("panel", "PanelContainer")
+#		if panel_stylebox is StyleBoxFlat:
+#			clear_color = panel_stylebox.bg_color
+#		else:
+#			clear_color = Color.GRAY
 
 	for child in Global.preferences_dialog.get_node("Popups").get_children():
 		child.theme = theme
@@ -99,7 +100,7 @@ func change_theme(id: int) -> void:
 
 func change_clear_color() -> void:
 	var clear_color: Color = Global.control.theme.get_color("clear_color", "Misc")
-	if !clear_color:
+	if !Global.control.theme.has_color("clear_color", "Misc"):
 		var panel_stylebox: StyleBox = Global.control.theme.get_stylebox("panel", "PanelContainer")
 		if panel_stylebox is StyleBoxFlat:
 			clear_color = panel_stylebox.bg_color

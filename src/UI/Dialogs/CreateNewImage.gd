@@ -1,7 +1,6 @@
 extends ConfirmationDialog
 
 var aspect_ratio := 1.0
-var recent_sizes := []
 var templates := [
 	# Basic
 	Template.new(Vector2(16, 16)),
@@ -46,7 +45,6 @@ var templates := [
 	Template.new(Vector2(256, 192), "ZX Spectrum"),
 ]
 
-@onready var recent_templates_list = find_child("RecentTemplates")
 @onready var templates_options = find_child("TemplatesOptions")
 @onready var ratio_box = find_child("AspectRatioButton")
 @onready var width_value = find_child("WidthValue")
@@ -60,7 +58,7 @@ class Template:
 	var resolution: Vector2
 	var name: String
 
-	func _init(_resolution: Vector2, _name := "") -> void:
+	func _init(_resolution: Vector2, _name := ""):
 		resolution = _resolution
 		name = _name
 
@@ -73,11 +71,6 @@ func _ready() -> void:
 	fill_color_node.get_picker().presets_visible = false
 
 	_create_option_list()
-
-
-func _on_CreateNewImage_about_to_show():
-	recent_sizes = Global.config_cache.get_value("templates", "recent_sizes", [])
-	_create_recent_list()
 
 
 func _create_option_list() -> void:
@@ -105,24 +98,9 @@ func _create_option_list() -> void:
 		i += 1
 
 
-func _create_recent_list() -> void:
-	recent_templates_list.clear()
-	for size in recent_sizes:
-		recent_templates_list.add_item(
-			"{width}x{height}".format({"width": size.x, "height": size.y})
-		)
-
-
 func _on_CreateNewImage_confirmed() -> void:
 	var width: int = width_value.value
 	var height: int = height_value.value
-	var size = Vector2(width, height)
-	if size in recent_sizes:
-		recent_sizes.erase(size)
-	recent_sizes.insert(0, size)
-	if recent_sizes.size() > 10:
-		recent_sizes.resize(10)
-	Global.config_cache.set_value("templates", "recent_sizes", recent_sizes)
 	var fill_color: Color = fill_color_node.color
 
 	var proj_name: String = $VBoxContainer/ProjectName/NameInput.text
@@ -143,7 +121,7 @@ func _on_AspectRatioButton_toggled(_button_pressed: bool) -> void:
 
 
 func _on_SizeValue_value_changed(value: float) -> void:
-	if ratio_box.pressed:
+	if ratio_box.button_pressed:
 		if width_value.value == value:
 			height_value.value = width_value.value / aspect_ratio
 		if height_value.value == value:
@@ -165,7 +143,7 @@ func toggle_size_buttons() -> void:
 func _on_TemplatesOptions_item_selected(id: int) -> void:
 	#if a template is chosen while "ratio button" is pressed then temporarily release it
 	var temporary_release = false
-	if ratio_box.pressed:
+	if ratio_box.button_pressed:
 		ratio_box.button_pressed = false
 		temporary_release = true
 
@@ -175,20 +153,6 @@ func _on_TemplatesOptions_item_selected(id: int) -> void:
 	else:
 		width_value.value = Global.default_width
 		height_value.value = Global.default_height
-
-	if temporary_release:
-		ratio_box.button_pressed = true
-
-
-func _on_RecentTemplates_item_selected(id):
-	#if a template is chosen while "ratio button" is pressed then temporarily release it
-	var temporary_release = false
-	if ratio_box.pressed:
-		ratio_box.button_pressed = false
-		temporary_release = true
-
-	width_value.value = recent_sizes[id].x
-	height_value.value = recent_sizes[id].y
 
 	if temporary_release:
 		ratio_box.button_pressed = true

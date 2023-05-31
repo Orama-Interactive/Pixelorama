@@ -51,24 +51,24 @@ func open(current_palette: Palette) -> void:
 
 
 # Shows/hides a warning when palette size is being reduced
-func toggle_size_reduced_warning(visible: bool) -> void:
-	size_reduced_warning.visible = visible
+func toggle_size_reduced_warning(visiblity: bool) -> void:
+	size_reduced_warning.visible = visiblity
 	# Required to resize window to correct size if warning causes content overflow
 	size = size
 
 
 # Shows/hides a warning when palette already exists
-func toggle_already_exists_warning(visible: bool) -> void:
-	already_exists_warning.visible = visible
+func toggle_already_exists_warning(visiblity: bool) -> void:
+	already_exists_warning.visible = visiblity
 
 	# Disable confirm button so user cannot save
-	get_ok_button().disabled = visible
+	get_ok_button().disabled = visiblity
 
 	# Required to resize window to correct size if warning causes content overflow
 	size = size
 
 
-func _on_EditPaletteDialog_popup_hide() -> void:
+func _on_EditPaletteDialog_close_requested() -> void:
 	Global.dialog_open(false)
 
 
@@ -85,8 +85,7 @@ func _on_EditPaletteDialog_custom_action(action: String) -> void:
 func _on_size_value_changed(_value):
 	# Toggle resize warning label if palette size was reduced
 	var size_decreased: bool = (
-		height_input.value < origin_height
-		or width_input.value < origin_width
+		height_input.value < origin_height or width_input.value < origin_width
 	)
 	toggle_size_reduced_warning(size_decreased)
 

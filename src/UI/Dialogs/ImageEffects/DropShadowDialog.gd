@@ -1,47 +1,41 @@
 extends ImageEffect
 
-enum Animate { OFFSET_X, OFFSET_Y }
 var offset := Vector2(5, 5)
 var color := Color.BLACK
 var shader: Shader = load("res://src/Shaders/DropShadow.tres")
 
-@onready var shadow_color := $VBoxContainer/ShadowOptions/ShadowColor as ColorPickerButton
+@onready var x_spinbox: SpinBox = $VBoxContainer/OptionsContainer/XSpinBox
+@onready var y_spinbox: SpinBox = $VBoxContainer/OptionsContainer/YSpinBox
+@onready var shadow_color = $VBoxContainer/OptionsContainer/ShadowColor
 
 
 func _ready() -> void:
+	super._ready()
 	shadow_color.get_picker().presets_visible = false
 	color = shadow_color.color
 	var sm := ShaderMaterial.new()
-	sm.gdshader = shader
-	preview.set_material(sm)
+	sm.shader = shader
+	if preview:
+		preview.set_material(sm)
 
 
-func set_animate_menu(_elements) -> void:
-	# set as in enum
-	animate_menu.add_check_item("Offset X", Animate.OFFSET_X)
-	animate_menu.add_check_item("Offset Y", Animate.OFFSET_Y)
-	super.set_animate_menu(Animate.size())
-
-
-func set_initial_values() -> void:
-	initial_values[Animate.OFFSET_X] = offset.x
-	initial_values[Animate.OFFSET_Y] = offset.y
+func set_nodes() -> void:
+	preview = $VBoxContainer/AspectRatioContainer/Preview
+	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
+	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	super.commit_action(cel, project)
-	var offset_x = get_animated_value(project, offset.x, Animate.OFFSET_X)
-	var offset_y = get_animated_value(project, offset.y, Animate.OFFSET_Y)
-	var selection_tex := ImageTexture.new()
-	if selection_checkbox.pressed and project.has_selection:
-		selection_tex.create_from_image(project.selection_map) #,0
+	var selection_tex: ImageTexture
+	if selection_checkbox.button_pressed and project.has_selection:
+		selection_tex = ImageTexture.create_from_image(project.selection_map)
 
 	var params := {
-		"shadow_offset": Vector2(offset_x, offset_y),
+		"shadow_offset": offset,
 		"shadow_color": color,
 		"selection": selection_tex,
 	}
-	if !confirmed:
+	if !is_confirmed:
 		for param in params:
 			preview.material.set_shader_parameter(param, params[param])
 	else:
@@ -50,11 +44,20 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		await gen.done
 
 
-func _on_OffsetSliders_value_changed(value: Vector2) -> void:
-	offset = value
+func _on_XSpinBox_value_changed(value) -> void:
+	x_spinbox.max_value = value + 1
+	x_spinbox.min_value = value - 1
+	offset.x = value
 	update_preview()
 
 
-func _on_ShadowColor_color_changed(value: Color) -> void:
-	color = value
+func _on_YSpinBox_value_changed(value) -> void:
+	y_spinbox.max_value = value + 1
+	y_spinbox.min_value = value - 1
+	offset.y = value
+	update_preview()
+
+
+func _on_OutlineColor_color_changed(_color: Color) -> void:
+	color = _color
 	update_preview()

@@ -167,7 +167,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 	var line_data = generate_line_data(loaded_line_data)
 
 	# This code in if block is purely for beautification
-	if pos_x.value > p_size.x / 2 and !loaded_line_data:
+	if pos_x.value > p_size.x / 2 and loaded_line_data.is_empty():
 		# If new line is created ahed of half project distance then
 		# reverse it's angle
 		line_data.angle = 180
@@ -176,7 +176,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 		if tracker_line != null:  # Also if the tracker line already exists then cancel creation
 			return
 	else:  # If we are not creating a perspective line then adjust it's length
-		if !loaded_line_data:
+		if loaded_line_data.is_empty():
 			line_data.length = p_size.x
 
 	# Create the visual line
@@ -215,7 +215,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 
 func remove_line(line_index):
 	var line_to_remove = perspective_lines[line_index]
-	perspective_lines.remove(line_index)
+	perspective_lines.remove_at(line_index)
 	line_to_remove.queue_free()
 
 
@@ -224,7 +224,7 @@ func update_data_to_project(removal := false):
 	var idx = get_index()
 	# If deletion is requested
 	if removal:
-		project.vanishing_points.remove(idx)
+		project.vanishing_points.remove_at(idx)
 		return
 	# If project knows about this vanishing point then update it
 	var data = serialize()

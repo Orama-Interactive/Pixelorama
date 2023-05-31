@@ -59,8 +59,7 @@ func _on_PreviewDialog_about_to_show() -> void:
 	import_options.select(OpenSave.last_dialog_option)
 	import_options.emit_signal("item_selected", OpenSave.last_dialog_option)
 
-	var img_texture := ImageTexture.new()
-	img_texture.create_from_image(image) #,0
+	var img_texture := ImageTexture.create_from_image(image)
 	texture_rect.texture = img_texture
 	spritesheet_tab_options.get_node("HorizontalFrames").max_value = min(
 		spritesheet_tab_options.get_node("HorizontalFrames").max_value, image.get_size().x
@@ -69,24 +68,16 @@ func _on_PreviewDialog_about_to_show() -> void:
 		spritesheet_tab_options.get_node("VerticalFrames").max_value, image.get_size().y
 	)
 	image_size_label.text = (
-		tr("Image Size")
-		+ ": "
-		+ str(image.get_size().x)
-		+ "×"
-		+ str(image.get_size().y)
+		tr("Image Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
 	)
 	frame_size_label.text = (
-		tr("Frame Size")
-		+ ": "
-		+ str(image.get_size().x)
-		+ "×"
-		+ str(image.get_size().y)
+		tr("Frame Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
 	)
 	if OpenSave.preview_dialogs.size() > 1:
 		apply_all.visible = true
 
 
-func _on_PreviewDialog_popup_hide() -> void:
+func _on_PreviewDialog_close_requested() -> void:
 	if hiding:  # if the popup is hiding because of master
 		return
 	elif is_master:  # if the master is closed then close others too
@@ -163,18 +154,17 @@ func _on_PreviewDialog_confirmed() -> void:
 			Global.patterns_popup.add(image, file_name)
 
 			# Copy the image file into the "pixelorama/Patterns" directory
-			var location := "Patterns".plus_file(file_name_ext)
-			var dir = DirAccess.new()
-			dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+			var location := "Patterns".path_join(file_name_ext)
+			DirAccess.copy_absolute(path, Global.directory_module.xdg_data_home.path_join(location))
 
 
 func _on_ApplyAll_toggled(pressed) -> void:
 	is_master = pressed
 	# below 4 (and the last) line is needed for correct popup placement
-	var old_rect = get_rect()
-	disconnect("popup_hide", Callable(self, "_on_PreviewDialog_popup_hide"))
+	var old_rect = Rect2i(position, size)
+	disconnect("close_requested", Callable(self, "_on_PreviewDialog_close_requested"))
 	hide()
-	connect("popup_hide", Callable(self, "_on_PreviewDialog_popup_hide"))
+	connect("close_requested", Callable(self, "_on_PreviewDialog_close_requested"))
 	for child in Global.control.get_children():
 		if child != self and "PreviewDialog" in child.name:
 			child.hiding = pressed
@@ -207,27 +197,27 @@ func synchronize() -> void:
 					spritesheet_tab_options.get_node("VerticalFrames").value, image.get_size().y
 				)
 				if id == ImageImportOptions.SPRITESHEET_LAYER:
-					dialog.spritesheet_lay_opt.get_node("AtFrameSpinbox").value = (spritesheet_lay_opt.get_node(
-						"AtFrameSpinbox"
-					).value)
+					dialog.spritesheet_lay_opt.get_node("AtFrameSpinbox").value = (
+						spritesheet_lay_opt.get_node("AtFrameSpinbox").value
+					)
 
 			elif id == ImageImportOptions.NEW_FRAME:
-				dialog.new_frame_options.get_node("AtLayerOption").selected = (new_frame_options.get_node(
-					"AtLayerOption"
-				).selected)
+				dialog.new_frame_options.get_node("AtLayerOption").selected = (
+					new_frame_options.get_node("AtLayerOption").selected
+				)
 
 			elif id == ImageImportOptions.REPLACE_CEL:
-				dialog.replace_cel_options.get_node("AtLayerOption").selected = (replace_cel_options.get_node(
-					"AtLayerOption"
-				).selected)
-				dialog.replace_cel_options.get_node("AtFrameSpinbox").value = (replace_cel_options.get_node(
-					"AtFrameSpinbox"
-				).value)
+				dialog.replace_cel_options.get_node("AtLayerOption").selected = (
+					replace_cel_options.get_node("AtLayerOption").selected
+				)
+				dialog.replace_cel_options.get_node("AtFrameSpinbox").value = (
+					replace_cel_options.get_node("AtFrameSpinbox").value
+				)
 
 			elif id == ImageImportOptions.NEW_LAYER:
-				dialog.new_layer_options.get_node("AtFrameSpinbox").value = (new_layer_options.get_node(
-					"AtFrameSpinbox"
-				).value)
+				dialog.new_layer_options.get_node("AtFrameSpinbox").value = (
+					new_layer_options.get_node("AtFrameSpinbox").value
+				)
 
 			elif id == ImageImportOptions.BRUSH:
 				var type = new_brush_options.get_node("BrushTypeOption").selected
@@ -270,9 +260,8 @@ func _on_ImportOption_item_selected(id: int) -> void:
 		new_frame_options.visible = true
 		# Fill the at layer option button:
 		var at_layer_option: OptionButton = new_frame_options.get_node("AtLayerOption")
-		at_layer_option.clear()
 		var layers := Global.current_project.layers.duplicate()
-		layers.invert()
+		layers.reverse()
 		var i := 0
 		for l in layers:
 			if not l is PixelLayer:
@@ -285,9 +274,8 @@ func _on_ImportOption_item_selected(id: int) -> void:
 		replace_cel_options.visible = true
 		# Fill the at layer option button:
 		var at_layer_option: OptionButton = replace_cel_options.get_node("AtLayerOption")
-		at_layer_option.clear()
 		var layers := Global.current_project.layers.duplicate()
-		layers.invert()
+		layers.reverse()
 		var i := 0
 		for l in layers:
 			if not l is PixelLayer:
@@ -301,7 +289,9 @@ func _on_ImportOption_item_selected(id: int) -> void:
 
 	elif id == ImageImportOptions.NEW_LAYER:
 		new_layer_options.visible = true
-		new_layer_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
+		new_layer_options.get_node("AtFrameSpinbox").max_value = (
+			Global.current_project.frames.size()
+		)
 
 	elif id == ImageImportOptions.BRUSH:
 		new_brush_options.visible = true
@@ -356,8 +346,8 @@ func spritesheet_frame_value_changed(value: int, vertical: bool) -> void:
 				line_2d.add_point(Vector2(i * line_distance + offset_x, image_size_y + offset_y))
 				texture_rect.get_node("HorizLines").add_child(line_2d)
 
-	var frame_width = floor(image.get_size().x / spritesheet_horizontal)
-	var frame_height = floor(image.get_size().y / spritesheet_vertical)
+	var frame_width = floor(image.get_size().x / float(spritesheet_horizontal))
+	var frame_height = floor(image.get_size().y / float(spritesheet_vertical))
 	frame_size_label.text = tr("Frame Size") + ": " + str(frame_width) + "×" + str(frame_height)
 
 
@@ -378,9 +368,8 @@ func add_brush() -> void:
 		Brushes.add_file_brush([image], file_name)
 
 		# Copy the image file into the "pixelorama/Brushes" directory
-		var location := "Brushes".plus_file(file_name_ext)
-		var dir = DirAccess.new()
-		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+		var location := "Brushes".path_join(file_name_ext)
+		DirAccess.copy_absolute(path, Global.directory_module.xdg_data_home.path_join(location))
 
 	elif brush_type == BrushTypes.PROJECT:
 		var file_name: String = path.get_file().get_basename()
@@ -391,14 +380,15 @@ func add_brush() -> void:
 		var brush_name = new_brush_name.get_node("BrushNameLineEdit").text.to_lower()
 		if !brush_name.is_valid_filename():
 			return
-		var dir := DirAccess.new()
-		dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes"))
+		var dir := DirAccess.open(Global.directory_module.xdg_data_home.path_join("Brushes"))
 		if !dir.dir_exists(brush_name):
 			dir.make_dir(brush_name)
 
-		dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes").plus_file(brush_name))
+		dir = DirAccess.open(
+			Global.directory_module.xdg_data_home.path_join("Brushes").path_join(brush_name)
+		)
 		var random_brushes := []
-		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+		dir.list_dir_begin()  # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var curr_file := dir.get_next()
 		while curr_file != "":
 			if curr_file.begins_with("~") and brush_name in curr_file:
@@ -409,22 +399,21 @@ func add_brush() -> void:
 		var file_ext: String = path.get_file().get_extension()
 		var index: int = random_brushes.size() + 1
 		var file_name = "~" + brush_name + str(index) + "." + file_ext
-		var location := "Brushes".plus_file(brush_name).plus_file(file_name)
-		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+		var location := "Brushes".path_join(brush_name).path_join(file_name)
+		dir.copy(path, Global.directory_module.xdg_data_home.path_join(location))
 
 
 # Checks if the file already exists
 # If it does, add a number to its name, for example
 # "Brush_Name" will become "Brush_Name (2)", "Brush_Name (3)", etc.
-func file_name_replace(name: String, folder: String) -> String:
+func file_name_replace(nam: String, folder: String) -> String:
 	var i := 1
-	var file_ext = name.get_extension()
-	var temp_name := name
-	var dir := DirAccess.new()
-	dir.open(Global.directory_module.xdg_data_home.plus_file(folder))
+	var file_ext = nam.get_extension()
+	var temp_name := nam
+	var dir := DirAccess.open(Global.directory_module.xdg_data_home.path_join(folder))
 	while dir.file_exists(temp_name):
 		i += 1
-		temp_name = name.get_basename() + " (%s)" % i
+		temp_name = nam.get_basename() + " (%s)" % i
 		temp_name += "." + file_ext
-	name = temp_name
-	return name
+	nam = temp_name
+	return nam

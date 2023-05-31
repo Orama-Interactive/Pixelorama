@@ -10,23 +10,15 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed(action):
 			return
 
-	for tool_name in Tools.tools:  # Handle tool shortcuts
-		if not get_node(tool_name).visible:
-			continue
+	for tool_name in Tools.tools:  # Handle @tool shortcuts
 		var t: Tools.Tool = Tools.tools[tool_name]
 		if InputMap.has_action("right_" + t.shortcut + "_tool"):
-			if (
-				event.is_action_pressed("right_" + t.shortcut + "_tool")
-				and (!event.control and !event.command)
-			):
+			if event.is_action_pressed("right_" + t.shortcut + "_tool") and (!event.ctrl_pressed):  # and !event.command)  # (Cause: command not found)
 				# Shortcut for right button (with Alt)
 				Tools.assign_tool(t.name, MOUSE_BUTTON_RIGHT)
 				return
 		if InputMap.has_action("left_" + t.shortcut + "_tool"):
-			if (
-				event.is_action_pressed("left_" + t.shortcut + "_tool")
-				and (!event.control and !event.command)
-			):
+			if event.is_action_pressed("left_" + t.shortcut + "_tool") and (!event.ctrl_pressed):  # and !event.command)  # (Cause: command not found)
 				# Shortcut for left button
 				Tools.assign_tool(t.name, MOUSE_BUTTON_LEFT)
 				return

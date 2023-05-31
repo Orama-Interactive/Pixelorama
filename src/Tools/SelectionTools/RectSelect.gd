@@ -8,7 +8,7 @@ var _displace_origin = false  # Mouse Click + Alt
 
 
 func _input(event: InputEvent) -> void:
-	if !_move and !_rect.has_no_area():
+	if !_move and _rect.has_area():
 		if event.is_action_pressed("shape_perfect"):
 			_square = true
 		elif event.is_action_released("shape_perfect"):
@@ -23,24 +23,24 @@ func _input(event: InputEvent) -> void:
 			_displace_origin = false
 
 
-func draw_move(position: Vector2) -> void:
+func draw_move(pos: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
-	position = snap_position(position)
-	super.draw_move(position)
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if !_move:
 		if _displace_origin:
-			_start_pos += position - _offset
-		_rect = _get_result_rect(_start_pos, position)
+			_start_pos += pos - _offset
+		_rect = _get_result_rect(_start_pos, pos)
 		_set_cursor_text(_rect)
-		_offset = position
+		_offset = pos
 
 
-func draw_end(position: Vector2) -> void:
+func draw_end(pos: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
-	position = snap_position(position)
-	super.draw_end(position)
+	pos = snap_position(pos)
+	super.draw_end(pos)
 	_rect = Rect2(0, 0, 0, 0)
 	_square = false
 	_expand_from_center = false
@@ -50,39 +50,33 @@ func draw_end(position: Vector2) -> void:
 func draw_preview() -> void:
 	if !_move:
 		var canvas: Node2D = Global.canvas.previews
-		var position := canvas.position
-		var scale := canvas.scale
+		var pos := canvas.position
+		var _scale := canvas.scale
 		if Global.mirror_view:
-			position.x = position.x + Global.current_project.size.x
-			scale.x = -1
-		canvas.draw_set_transform(position, canvas.rotation, scale)
+			pos.x = pos.x + Global.current_project.size.x
+			_scale.x = -1
+		canvas.draw_set_transform(pos, canvas.rotation, _scale)
 		canvas.draw_rect(_rect, Color.BLACK, false)
 
 		# Handle mirroring
 		if Tools.horizontal_mirror:
 			var mirror_x_rect := _rect
 			mirror_x_rect.position.x = (
-				Global.current_project.x_symmetry_point
-				- _rect.position.x
-				+ 1
+				Global.current_project.x_symmetry_point - _rect.position.x + 1
 			)
 			mirror_x_rect.end.x = Global.current_project.x_symmetry_point - _rect.end.x + 1
 			canvas.draw_rect(mirror_x_rect, Color.BLACK, false)
 			if Tools.vertical_mirror:
 				var mirror_xy_rect := mirror_x_rect
 				mirror_xy_rect.position.y = (
-					Global.current_project.y_symmetry_point
-					- _rect.position.y
-					+ 1
+					Global.current_project.y_symmetry_point - _rect.position.y + 1
 				)
 				mirror_xy_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 				canvas.draw_rect(mirror_xy_rect, Color.BLACK, false)
 		if Tools.vertical_mirror:
 			var mirror_y_rect := _rect
 			mirror_y_rect.position.y = (
-				Global.current_project.y_symmetry_point
-				- _rect.position.y
-				+ 1
+				Global.current_project.y_symmetry_point - _rect.position.y + 1
 			)
 			mirror_y_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 			canvas.draw_rect(mirror_y_rect, Color.BLACK, false)
@@ -135,7 +129,7 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 		var new_size := (dest - origin).floor()
 		# Make rect 1:1 while centering it on the mouse
 		if _square:
-			var square_size := max(abs(new_size.x), abs(new_size.y))
+			var square_size := maxf(abs(new_size.x), abs(new_size.y))
 			new_size = Vector2(square_size, square_size)
 
 		origin -= new_size
@@ -143,7 +137,7 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 
 	# Make rect 1:1 while not trying to center it
 	if _square:
-		var square_size := min(abs(origin.x - dest.x), abs(origin.y - dest.y))
+		var square_size := minf(abs(origin.x - dest.x), abs(origin.y - dest.y))
 		rect.position.x = origin.x if origin.x < dest.x else origin.x - square_size
 		rect.position.y = origin.y if origin.y < dest.y else origin.y - square_size
 		rect.size = Vector2(square_size, square_size)

@@ -7,6 +7,6 @@ const UNSET_INDEX := -1
 @export var index := UNSET_INDEX
 
 
-func _init(init_color: Color = Color.BLACK, init_index: int = UNSET_INDEX) -> void:
+func _init(init_color: Color = Color.BLACK, init_index: int = UNSET_INDEX):
 	color = init_color
 	index = init_index
