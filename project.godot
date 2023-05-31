@@ -61,7 +61,7 @@ window/per_pixel_transparency/enabled.Android=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/aimg_io/plugin.cfg", "res://addons/keychain/plugin.cfg")
+enabled=PackedStringArray("res://addons/aimg_io/plugin.cfg", "res://addons/keychain/plugin.cfg", "res://addons/dockable_container/plugin.cfg")
 
 [importer_defaults]
 
