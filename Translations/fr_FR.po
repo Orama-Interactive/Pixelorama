@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-05-18 19:51\n"
+"PO-Revision-Date: 2023-06-01 16:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -175,7 +175,7 @@ msgid "Smear options:"
 msgstr ""
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Tolérance :"
 
 msgid "Initial angle:"
 msgstr "Angle initial :"
@@ -187,7 +187,7 @@ msgid "Invert"
 msgstr "Inverser"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Affichage en niveaux de gris"
 
 msgid "Mirror Image"
 msgstr ""
