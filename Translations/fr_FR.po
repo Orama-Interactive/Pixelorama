@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-06-01 22:08\n"
+"PO-Revision-Date: 2023-06-01 23:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -112,10 +112,10 @@ msgid "Export as..."
 msgstr "Exporter en tant que..."
 
 msgid "Export PNG..."
-msgstr "Exporter sous format PNG..."
+msgstr "Exporter au format PNG..."
 
 msgid "Export PNG as..."
-msgstr "Exporter une image PNG sous..."
+msgstr "Exporter une image PNG comme..."
 
 msgid "Quit"
 msgstr "Quitter"
@@ -154,7 +154,7 @@ msgid "Percentage"
 msgstr "Pourcentage"
 
 msgid "Crop Image"
-msgstr "Rogner l'image"
+msgstr "Recadrer l'Image"
 
 msgid "Resize Canvas"
 msgstr "Redimensionner le canevas"
@@ -172,7 +172,7 @@ msgid "Pivot y:"
 msgstr "Pivot y:"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Options Smear:"
 
 msgid "Tolerance:"
 msgstr "Tolérance :"
@@ -584,7 +584,7 @@ msgid "Trilinear"
 msgstr "Trilinéaire"
 
 msgid "Constant"
-msgstr ""
+msgstr "Constant"
 
 msgid "General"
 msgstr "Général"
@@ -664,7 +664,7 @@ msgid "System Language"
 msgstr "Langue système"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Taille d'Affichage:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Assombrir l'arrière-plan derrière une boite de dialogue"
@@ -703,7 +703,7 @@ msgid "Background"
 msgstr "Arrière-plan"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Couleur d'arrière-plan à partir de :"
 
 msgid "Background color:"
 msgstr "Couleur d'arrière-plan :"
@@ -727,10 +727,10 @@ msgid "Only affect selection"
 msgstr "Affecter uniquement la sélection"
 
 msgid "Selected cels"
-msgstr "Cellule sélectionnée"
+msgstr "Cellulo sélectionné"
 
 msgid "Current cel"
-msgstr "Cellule actuelle"
+msgstr "Cellulo actuel"
 
 msgid "Current frame"
 msgstr "Frame actuelle"
@@ -832,7 +832,7 @@ msgid "Radius:"
 msgstr "Rayon :"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Motif de Tramage:"
 
 msgid "Adjust HSV"
 msgstr "Ajuster TSV"
@@ -880,7 +880,7 @@ msgstr "Niveaux de postérisation:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "Densité du Tramage:"
 
 msgid "View Splash Screen"
 msgstr "Voir l'écran d'accueil"
@@ -1780,10 +1780,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cels to"
-msgstr "Lier la Cellule à"
+msgstr "Lier le Cellulo à"
 
 msgid "Unlink Cels"
-msgstr "Délier la Cellule"
+msgstr "Délier le Cellulo"
 
 msgid "Frame Properties"
 msgstr "Propriétés de la frame"
@@ -1848,8 +1848,8 @@ msgstr "Frame : %s, Calque : %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr "Activer/désactiver la liaison automatique des nouvelles Cellules lors de la création de nouvelles Frames.\n\n"
-"Les cellules liées partagent le contenu sur plusieurs Frames"
+msgstr "Activer/désactiver la liaison automatique des nouveaux Cellulos lors de la création de nouvelles Frames.\n\n"
+"Les Cellulos liés partagent le contenu sur plusieurs Frames"
 
 msgid "Expand/collapse group"
 msgstr "Développer / réduire le groupe"
@@ -2351,7 +2351,9 @@ msgstr "Droite :"
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Taille verrouillée\n\n"
+"Lorsqu'il est activé, l'utilisation de l'outil sur le canevas ne fera que déplacer le rectangle de recadrage.\n\n"
+"Lorsqu'il est désactivé, l'utilisation de l'outil sur le canevas dessine le rectangle."
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
@@ -2430,7 +2432,7 @@ msgstr "Orthogonale"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
-msgstr ""
+msgstr "Tronc"
 
 msgid "Rotation:"
 msgstr "Rotation :"
@@ -2472,7 +2474,7 @@ msgstr "Rayon :"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
-msgstr ""
+msgstr "Segments Radiaux:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
 msgid "Rings:"
@@ -2495,11 +2497,11 @@ msgstr "Texte :"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
-msgstr ""
+msgstr "Taille des Pixels:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
-msgstr ""
+msgstr "Étape de Courbe:"
 
 msgid "Horizontal alignment:"
 msgstr "Alignement horizontal :"
