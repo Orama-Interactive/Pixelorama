@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-06-01 17:42\n"
+"PO-Revision-Date: 2023-06-01 18:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -205,7 +205,7 @@ msgid "Tile Mode"
 msgstr "Mode tuile"
 
 msgid "Tile Mode Offsets"
-msgstr "Mode Tuile Décalée"
+msgstr "Mode Tuiles Décalées"
 
 msgid "X-basis x:"
 msgstr ""
@@ -220,7 +220,7 @@ msgid "Y-basis y:"
 msgstr ""
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Masque de Tuile"
 
 msgid "Reset"
 msgstr "Réinitialiser"
@@ -229,7 +229,7 @@ msgid "Use Current Frame"
 msgstr "Utiliser l'image actuelle"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Réinitialiser Masque"
 
 msgid "Window Opacity"
 msgstr "Opacité de la fenêtre"
@@ -302,23 +302,23 @@ msgstr "Afficher les guides"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Afficher les Guides de Souris"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Aimanter à"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid"
-msgstr ""
+msgstr "Aimanter à la Grille Rectangulaire"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Aimanter aux Guides"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Aimanter aux Guides de Perspective"
 
 msgid "Show Animation Timeline"
 msgstr "Afficher la Timeline d'Animation"
@@ -354,10 +354,10 @@ msgid "New project"
 msgstr "Nouveau projet"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Spritesheet (nouveau projet)"
 
 msgid "Spritesheet (new layer)"
-msgstr "Grille de sprite (nouveau calque)"
+msgstr "Spritesheet (nouveau calque)"
 
 msgid "New frame"
 msgstr "Nouvelle frame"
@@ -414,7 +414,7 @@ msgid "Save Sprite as .pxo"
 msgstr "Enregistrer le sprite au format .pxo"
 
 msgid "Export Sprite as .png"
-msgstr "Exporter le Sprite sous format .png"
+msgstr "Exporter le Sprite en .png"
 
 msgid "Export Sprite"
 msgstr "Exporter le sprite"
@@ -1280,11 +1280,11 @@ msgstr "Une couleur des guides de règle affichée sur le canevas"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "Aimantation"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "Force d'Aimantation:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grid snapping gets activated."
@@ -2354,7 +2354,7 @@ msgstr ""
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
-msgstr ""
+msgstr "Éditeur 3D"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
@@ -2475,7 +2475,7 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
 msgid "Rings:"
-msgstr ""
+msgstr "Anneaux:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
