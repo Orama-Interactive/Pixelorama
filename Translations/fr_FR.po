@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-06-01 16:45\n"
+"PO-Revision-Date: 2023-06-01 17:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -166,10 +166,10 @@ msgid "Rotate Image"
 msgstr "Pivoter l'image"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Pivot x:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Pivot y:"
 
 msgid "Smear options:"
 msgstr ""
@@ -190,7 +190,7 @@ msgid "Grayscale View"
 msgstr "Affichage en niveaux de gris"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Retourner l'Image"
 
 msgid "Flip Horizontal"
 msgstr "Miroir horizontal"
@@ -205,7 +205,7 @@ msgid "Tile Mode"
 msgstr "Mode tuile"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Mode Tuile Décalée"
 
 msgid "X-basis x:"
 msgstr ""
@@ -247,7 +247,7 @@ msgid "Layouts"
 msgstr "Dispositions"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Panneaux Amovibles"
 
 msgid "Manage Layouts"
 msgstr "Gérer les dispositions"
@@ -258,23 +258,23 @@ msgstr "Aperçu"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Ceci est un aperçu, le changer n'affectera pas la disposition"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr ""
+msgstr "Double-cliquez pour la définir comme disposition de démarrage"
 
 msgid "Add"
 msgstr "Ajouter"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Ajouter Disposition"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Éditer Disposition"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette disposition ?"
 
 msgid "Auto"
 msgstr "Automatique"
@@ -522,7 +522,7 @@ msgstr "Groupe de calque :"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "Calque 3D:"
 
 msgid "Direction:"
 msgstr "Direction :"
@@ -709,7 +709,7 @@ msgid "Background color:"
 msgstr "Couleur d'arrière-plan :"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Couleur de l'outil gauche :"
 
 msgid "Right tool color:"
 msgstr ""
@@ -1445,15 +1445,15 @@ msgstr ""
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
-msgstr ""
+msgstr "Pression"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
-msgstr ""
+msgstr "Vélocité"
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
-msgstr ""
+msgstr "Alpha"
 
 #. Refers to the size of a value, for example the size of a brush.
 msgid "Size"
@@ -1465,7 +1465,7 @@ msgstr "Valeurs limites"
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
-msgstr ""
+msgstr "Seuils"
 
 #. Noun, the start of something.
 msgid "Start"
@@ -1510,15 +1510,15 @@ msgstr "Remplir à l’intérieur"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
-msgstr ""
+msgstr "Espacement"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
-msgstr ""
+msgstr "Espace X:"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
-msgstr ""
+msgstr "Espace Y:"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
@@ -1806,15 +1806,15 @@ msgstr "Créer un calque"
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "Ajouter un Calque de Pixel"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr ""
+msgstr "Ajouter un Calque de Groupe"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "Ajouter un Calque 3D"
 
 msgid "Remove current layer"
 msgstr "Supprimer le calque"
@@ -2299,10 +2299,10 @@ msgid "Global Tool Options"
 msgstr ""
 
 msgid "Left Tool Options"
-msgstr ""
+msgstr "Options de l'Outil Gauche"
 
 msgid "Right Tool Options"
-msgstr ""
+msgstr "Options de l'Outil Droit"
 
 msgid "Reference Images"
 msgstr "Images de référence"
@@ -2312,10 +2312,10 @@ msgstr "Éditeur de perspective"
 
 #. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
-msgstr ""
+msgstr "Capture Vidéo"
 
 msgid "Crop"
-msgstr ""
+msgstr "Recadrer"
 
 msgid "Resize the canvas"
 msgstr "Redimensionner le canevas"
@@ -2336,10 +2336,10 @@ msgid "Aspect Ratio:"
 msgstr ""
 
 msgid "Top:"
-msgstr ""
+msgstr "Haut:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "Bas:"
 
 msgid "Left:"
 msgstr "Gauche :"
@@ -2358,7 +2358,7 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "Boîte"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
@@ -2366,7 +2366,7 @@ msgstr "Sphère"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "Capsule"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
@@ -2378,11 +2378,11 @@ msgstr "Prisme"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
-msgstr ""
+msgstr "Tore"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "Plan"
 
 msgid "Text"
 msgstr "Texte"
@@ -2397,7 +2397,7 @@ msgstr "Projecteur"
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
-msgstr ""
+msgstr "Point de lumière"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
@@ -2435,11 +2435,11 @@ msgid "Rotation:"
 msgstr "Rotation :"
 
 msgid "Scale:"
-msgstr ""
+msgstr "Échelle:"
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
-msgstr ""
+msgstr "Environnement"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
@@ -2455,15 +2455,15 @@ msgstr "Visible :"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr ""
+msgstr "Modifier"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
-msgstr ""
+msgstr "Mesh"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
-msgstr ""
+msgstr "De gauche à droite :"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
