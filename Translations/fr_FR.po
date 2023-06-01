@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-06-01 19:53\n"
+"PO-Revision-Date: 2023-06-01 22:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -208,16 +208,16 @@ msgid "Tile Mode Offsets"
 msgstr "Mode Tuiles Décalées"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X-base x:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "X-base y:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "Y-base x:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y-base y:"
 
 msgid "Tile Mask"
 msgstr "Masque de Tuile"
@@ -1497,7 +1497,7 @@ msgid "Brush size:"
 msgstr "Taille de la brosse :"
 
 msgid "Overwrite color"
-msgstr ""
+msgstr "Recouvrir couleur"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "Écrase la couleur au lieu de la mélanger. Cette option n'est pertinente que pour les couleurs qui ne sont pas totalement opaques"
