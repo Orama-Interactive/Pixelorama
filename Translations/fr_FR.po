@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-06-01 18:46\n"
+"PO-Revision-Date: 2023-06-01 19:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -709,10 +709,10 @@ msgid "Background color:"
 msgstr "Couleur d'arrière-plan :"
 
 msgid "Left tool color:"
-msgstr "Couleur de l'outil gauche :"
+msgstr "Couleur de l'outil gauche:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Couleur de l’outil droit:"
 
 msgid "Tool button size:"
 msgstr "Taille des outils:"
@@ -781,7 +781,7 @@ msgid "Gradient"
 msgstr "Dégradé"
 
 msgid "Gradient Map"
-msgstr ""
+msgstr "Carte de dégradés"
 
 msgid "Divide into equal parts"
 msgstr "Diviser en parties égales"
@@ -872,11 +872,11 @@ msgstr "Étapes:"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "Postériser"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "Niveaux de postérisation:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
@@ -1284,11 +1284,11 @@ msgstr "Aimantation"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr "Force d'Aimantation:"
+msgstr "Distance d'Aimantation:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "C'est la distance en pixels de l'effet d'aimantation des guides et des grilles."
 
 msgid "Grid"
 msgstr "Grille"
@@ -1650,7 +1650,7 @@ msgid "Animation mode:"
 msgstr "Mode d'animation :"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Frame actuelle en spritesheet"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -1780,10 +1780,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Lier la Cellule à"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Délier la Cellule"
 
 msgid "Frame Properties"
 msgstr "Propriétés de la frame"
@@ -1848,7 +1848,8 @@ msgstr "Frame : %s, Calque : %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Activer/désactiver la liaison automatique des nouvelles Cellules lors de la création de nouvelles Frames.\n\n"
+"Les cellules liées partagent le contenu sur plusieurs Frames"
 
 msgid "Expand/collapse group"
 msgstr "Développer / réduire le groupe"
@@ -2287,7 +2288,7 @@ msgid "Second Canvas"
 msgstr "Canevas secondaire"
 
 msgid "Animation Timeline"
-msgstr ""
+msgstr "Timeline d'Animation"
 
 msgid "Canvas Preview"
 msgstr "Aperçu du canevas"
@@ -2296,7 +2297,7 @@ msgid "Color Pickers"
 msgstr "Sélecteurs de couleurs"
 
 msgid "Global Tool Options"
-msgstr ""
+msgstr "Options Générales des Outils"
 
 msgid "Left Tool Options"
 msgstr "Options de l'Outil Gauche"
