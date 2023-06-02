@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-06-01 23:19\n"
+"PO-Revision-Date: 2023-06-02 00:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -363,7 +363,7 @@ msgid "New frame"
 msgstr "Nouvelle frame"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Remplacer le Cellulo"
 
 msgid "New layer"
 msgstr "Nouveau calque"
@@ -1441,7 +1441,7 @@ msgstr "Ouvrir le dossier"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
-msgstr ""
+msgstr "Dynamiques"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
@@ -2328,13 +2328,13 @@ msgid "Position + Size"
 msgstr "Position + Taille"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "Verrouiller le Rapport d'Aspect"
 
 msgid "Margins:"
 msgstr "Marges :"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "Rapport d'Aspect:"
 
 msgid "Top:"
 msgstr "Haut:"
