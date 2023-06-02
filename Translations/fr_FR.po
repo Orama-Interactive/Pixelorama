@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-05-18 19:51\n"
+"PO-Revision-Date: 2023-06-02 08:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -112,10 +112,10 @@ msgid "Export as..."
 msgstr "Exporter en tant que..."
 
 msgid "Export PNG..."
-msgstr "Exporter sous format PNG..."
+msgstr "Exporter au format PNG..."
 
 msgid "Export PNG as..."
-msgstr "Exporter une image PNG sous..."
+msgstr "Exporter une image PNG comme..."
 
 msgid "Quit"
 msgstr "Quitter"
@@ -154,7 +154,7 @@ msgid "Percentage"
 msgstr "Pourcentage"
 
 msgid "Crop Image"
-msgstr "Rogner l'image"
+msgstr "Recadrer l'Image"
 
 msgid "Resize Canvas"
 msgstr "Redimensionner le canevas"
@@ -166,16 +166,16 @@ msgid "Rotate Image"
 msgstr "Pivoter l'image"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Pivot x:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Pivot y:"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Options Smear:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Tolérance :"
 
 msgid "Initial angle:"
 msgstr "Angle initial :"
@@ -187,10 +187,10 @@ msgid "Invert"
 msgstr "Inverser"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Affichage en niveaux de gris"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Retourner l'Image"
 
 msgid "Flip Horizontal"
 msgstr "Miroir horizontal"
@@ -205,31 +205,31 @@ msgid "Tile Mode"
 msgstr "Mode tuile"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Mode Tuiles Décalées"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X-base x:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "X-base y:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "Y-base x:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y-base y:"
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Masque de Tuile"
 
 msgid "Reset"
 msgstr "Réinitialiser"
 
 msgid "Use Current Frame"
-msgstr "Utiliser l'image actuelle"
+msgstr "Utiliser la Frame actuelle"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Réinitialiser Masque"
 
 msgid "Window Opacity"
 msgstr "Opacité de la fenêtre"
@@ -247,7 +247,7 @@ msgid "Layouts"
 msgstr "Dispositions"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Panneaux Amovibles"
 
 msgid "Manage Layouts"
 msgstr "Gérer les dispositions"
@@ -258,23 +258,23 @@ msgstr "Aperçu"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Ceci est un aperçu, le changer n'affectera pas la disposition"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr ""
+msgstr "Double-cliquez pour la définir comme disposition de démarrage"
 
 msgid "Add"
 msgstr "Ajouter"
 
 msgid "Add Layout"
-msgstr ""
+msgstr "Ajouter Disposition"
 
 msgid "Edit Layout"
-msgstr ""
+msgstr "Éditer Disposition"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette disposition ?"
 
 msgid "Auto"
 msgstr "Automatique"
@@ -302,23 +302,23 @@ msgstr "Afficher les guides"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Afficher les Guides de Souris"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Aimanter à"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid"
-msgstr ""
+msgstr "Aimanter à la Grille Rectangulaire"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Aimanter aux Guides"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Aimanter aux Guides de Perspective"
 
 msgid "Show Animation Timeline"
 msgstr "Afficher la Timeline d'Animation"
@@ -354,16 +354,16 @@ msgid "New project"
 msgstr "Nouveau projet"
 
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Spritesheet (nouveau projet)"
 
 msgid "Spritesheet (new layer)"
-msgstr "Grille de sprite (nouveau calque)"
+msgstr "Spritesheet (nouveau calque)"
 
 msgid "New frame"
 msgstr "Nouvelle frame"
 
 msgid "Replace cel"
-msgstr ""
+msgstr "Remplacer le Cellulo"
 
 msgid "New layer"
 msgstr "Nouveau calque"
@@ -381,10 +381,10 @@ msgid "New pattern"
 msgstr "Nouveau motif"
 
 msgid "Horizontal frames:"
-msgstr "Frames horizontaux :"
+msgstr "Frames horizontales :"
 
 msgid "Vertical frames:"
-msgstr "Frames verticaux :"
+msgstr "Frames verticales :"
 
 msgid "Start frame:"
 msgstr "Frame de début:"
@@ -414,7 +414,7 @@ msgid "Save Sprite as .pxo"
 msgstr "Enregistrer le sprite au format .pxo"
 
 msgid "Export Sprite as .png"
-msgstr "Exporter le Sprite sous format .png"
+msgstr "Exporter le Sprite en .png"
 
 msgid "Export Sprite"
 msgstr "Exporter le sprite"
@@ -514,15 +514,15 @@ msgstr "Calques sélectionnés"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr "Calque de pixel :"
+msgstr "Calque de pixel:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr "Groupe de calque :"
+msgstr "Calque de Groupe:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "Calque 3D:"
 
 msgid "Direction:"
 msgstr "Direction :"
@@ -584,7 +584,7 @@ msgid "Trilinear"
 msgstr "Trilinéaire"
 
 msgid "Constant"
-msgstr ""
+msgstr "Constant"
 
 msgid "General"
 msgstr "Général"
@@ -664,7 +664,7 @@ msgid "System Language"
 msgstr "Langue système"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Taille d'Affichage:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Assombrir l'arrière-plan derrière une boite de dialogue"
@@ -703,16 +703,16 @@ msgid "Background"
 msgstr "Arrière-plan"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Couleur d'arrière-plan à partir de :"
 
 msgid "Background color:"
 msgstr "Couleur d'arrière-plan :"
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Couleur de l'outil gauche:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Couleur de l’outil droit:"
 
 msgid "Tool button size:"
 msgstr "Taille des outils:"
@@ -727,10 +727,10 @@ msgid "Only affect selection"
 msgstr "Affecter uniquement la sélection"
 
 msgid "Selected cels"
-msgstr "Cellule sélectionnée"
+msgstr "Cellulo sélectionné"
 
 msgid "Current cel"
-msgstr "Cellule actuelle"
+msgstr "Cellulo actuel"
 
 msgid "Current frame"
 msgstr "Frame actuelle"
@@ -781,7 +781,7 @@ msgid "Gradient"
 msgstr "Dégradé"
 
 msgid "Gradient Map"
-msgstr ""
+msgstr "Carte de dégradés"
 
 msgid "Divide into equal parts"
 msgstr "Diviser en parties égales"
@@ -832,7 +832,7 @@ msgid "Radius:"
 msgstr "Rayon :"
 
 msgid "Dithering pattern:"
-msgstr ""
+msgstr "Motif de Tramage:"
 
 msgid "Adjust HSV"
 msgstr "Ajuster TSV"
@@ -872,15 +872,15 @@ msgstr "Étapes:"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "Postériser"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "Niveaux de postérisation:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "Densité du Tramage:"
 
 msgid "View Splash Screen"
 msgstr "Voir l'écran d'accueil"
@@ -1237,7 +1237,7 @@ msgid "Left tool"
 msgstr "Outil gauche"
 
 msgid "Right tool"
-msgstr "Outil de droite"
+msgstr "Outil droit"
 
 msgid "Left pixel indicator"
 msgstr "Indicateur de pixel gauche"
@@ -1280,15 +1280,15 @@ msgstr "Une couleur des guides de règle affichée sur le canevas"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "Aimantation"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "Distance d'Aimantation:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "C'est la distance en pixels de l'effet d'aimantation des guides et des grilles."
 
 msgid "Grid"
 msgstr "Grille"
@@ -1400,13 +1400,13 @@ msgid "Set application FPS limit:"
 msgstr "Définir la limite FPS de l'application :"
 
 msgid "Pause application when it loses focus"
-msgstr "Suspend l'application quand elle perd le focus"
+msgstr "Met l'application en pause quand elle perd le focus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Définit la limite d'images par seconde de l'application. Plus le nombre est bas, plus l'utilisation du processeur est faible, mais l'application devient plus lente, saccadée et non réactive. 0 signifie qu'il n'y a pas de limite."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr "Si c'est activé, quand l'application perd le focus, elle est suspendue. Cela aide à réduire l'usage du processeur en période d'inactivité. Elle est ensuite actualisée quand la souris entre dans la fenêtre."
+msgstr "Si activé, l'application est mise en pause quand le focus est perdu. Cela aide à réduire l'usage du processeur en période d'inactivité. L'application sort de pause quand la souris entre à nouveau dans sa fenêtre."
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -1441,19 +1441,19 @@ msgstr "Ouvrir le dossier"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
-msgstr ""
+msgstr "Dynamiques"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
-msgstr ""
+msgstr "Pression"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
-msgstr ""
+msgstr "Vélocité"
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
-msgstr ""
+msgstr "Alpha"
 
 #. Refers to the size of a value, for example the size of a brush.
 msgid "Size"
@@ -1465,7 +1465,7 @@ msgstr "Valeurs limites"
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
-msgstr ""
+msgstr "Seuils"
 
 #. Noun, the start of something.
 msgid "Start"
@@ -1497,7 +1497,7 @@ msgid "Brush size:"
 msgstr "Taille de la brosse :"
 
 msgid "Overwrite color"
-msgstr ""
+msgstr "Recouvrir couleur"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "Écrase la couleur au lieu de la mélanger. Cette option n'est pertinente que pour les couleurs qui ne sont pas totalement opaques"
@@ -1510,15 +1510,15 @@ msgstr "Remplir à l’intérieur"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
-msgstr ""
+msgstr "Espacement"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
-msgstr ""
+msgstr "Espace X:"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
-msgstr ""
+msgstr "Espace Y:"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
@@ -1650,7 +1650,7 @@ msgid "Animation mode:"
 msgstr "Mode d'animation :"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Frame actuelle en spritesheet"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -1706,10 +1706,10 @@ msgid "Onion Skinning:"
 msgstr "Peau d'oignon :"
 
 msgid "Past Frames"
-msgstr "Frames passées"
+msgstr "Frames précédentes"
 
 msgid "Future Frames"
-msgstr "Frames futures"
+msgstr "Frames suivantes"
 
 msgid "Manage frame tags"
 msgstr "Gérer les tags de la frame"
@@ -1780,10 +1780,10 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cels to"
-msgstr ""
+msgstr "Lier le Cellulo à"
 
 msgid "Unlink Cels"
-msgstr ""
+msgstr "Délier le Cellulo"
 
 msgid "Frame Properties"
 msgstr "Propriétés de la frame"
@@ -1806,15 +1806,15 @@ msgstr "Créer un calque"
 
 #. One of the options of the create new layer button.
 msgid "Add Pixel Layer"
-msgstr ""
+msgstr "Ajouter un Calque de Pixel"
 
 #. One of the options of the create new layer button.
 msgid "Add Group Layer"
-msgstr ""
+msgstr "Ajouter un Calque de Groupe"
 
 #. One of the options of the create new layer button.
 msgid "Add 3D Layer"
-msgstr ""
+msgstr "Ajouter un Calque 3D"
 
 msgid "Remove current layer"
 msgstr "Supprimer le calque"
@@ -1848,7 +1848,8 @@ msgstr "Frame : %s, Calque : %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr ""
+msgstr "Activer/désactiver la liaison automatique des nouveaux Cellulos lors de la création de nouvelles Frames.\n\n"
+"Les Cellulos liés partagent le contenu sur plusieurs Frames"
 
 msgid "Expand/collapse group"
 msgstr "Développer / réduire le groupe"
@@ -2139,13 +2140,13 @@ msgid "Already assigned"
 msgstr "Déjà attribué"
 
 msgid "Left Tool:"
-msgstr "Outil gauche:"
+msgstr "Outil Gauche:"
 
 msgid "A tool assigned to the left mouse button"
 msgstr "Un outil assigné au bouton gauche de la souris"
 
 msgid "Right Tool:"
-msgstr "Outil de droite:"
+msgstr "Outil Droit:"
 
 msgid "A tool assigned to the right mouse button"
 msgstr "Un outil assigné au bouton droit de la souris"
@@ -2189,7 +2190,7 @@ msgstr "Créer un nouveau dossier pour chaque tag de frame"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr "Créé plusieurs fichiers, mais chaque fichier est stocké dans un dossier qui correspond aux tags de frame"
+msgstr "Créé plusieurs fichiers, mais chaque fichier est stocké dans le dossier correspondant à leurs tags de frame"
 
 msgid "Close"
 msgstr "Fermer"
@@ -2287,7 +2288,7 @@ msgid "Second Canvas"
 msgstr "Canevas secondaire"
 
 msgid "Animation Timeline"
-msgstr ""
+msgstr "Timeline d'Animation"
 
 msgid "Canvas Preview"
 msgstr "Aperçu du canevas"
@@ -2296,13 +2297,13 @@ msgid "Color Pickers"
 msgstr "Sélecteurs de couleurs"
 
 msgid "Global Tool Options"
-msgstr ""
+msgstr "Options Générales des Outils"
 
 msgid "Left Tool Options"
-msgstr ""
+msgstr "Options de l'Outil Gauche"
 
 msgid "Right Tool Options"
-msgstr ""
+msgstr "Options de l'Outil Droit"
 
 msgid "Reference Images"
 msgstr "Images de référence"
@@ -2312,10 +2313,10 @@ msgstr "Éditeur de perspective"
 
 #. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
-msgstr ""
+msgstr "Capture Vidéo"
 
 msgid "Crop"
-msgstr ""
+msgstr "Recadrer"
 
 msgid "Resize the canvas"
 msgstr "Redimensionner le canevas"
@@ -2327,19 +2328,19 @@ msgid "Position + Size"
 msgstr "Position + Taille"
 
 msgid "Locked Aspect Ratio"
-msgstr ""
+msgstr "Verrouiller le Rapport d'Aspect"
 
 msgid "Margins:"
 msgstr "Marges :"
 
 msgid "Aspect Ratio:"
-msgstr ""
+msgstr "Rapport d'Aspect:"
 
 msgid "Top:"
-msgstr ""
+msgstr "Haut:"
 
 msgid "Bottom:"
-msgstr ""
+msgstr "Bas:"
 
 msgid "Left:"
 msgstr "Gauche :"
@@ -2350,15 +2351,17 @@ msgstr "Droite :"
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Taille verrouillée\n\n"
+"Lorsqu'il est activé, l'utilisation de l'outil sur le canevas ne fera que déplacer le rectangle de recadrage.\n\n"
+"Lorsqu'il est désactivé, l'utilisation de l'outil sur le canevas dessine le rectangle."
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
-msgstr ""
+msgstr "Éditeur 3D"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "Boîte"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
@@ -2366,7 +2369,7 @@ msgstr "Sphère"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "Capsule"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
@@ -2378,11 +2381,11 @@ msgstr "Prisme"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
-msgstr ""
+msgstr "Tore"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "Plan"
 
 msgid "Text"
 msgstr "Texte"
@@ -2397,7 +2400,7 @@ msgstr "Projecteur"
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
-msgstr ""
+msgstr "Point de lumière"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
@@ -2429,17 +2432,17 @@ msgstr "Orthogonale"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
-msgstr ""
+msgstr "Tronc"
 
 msgid "Rotation:"
 msgstr "Rotation :"
 
 msgid "Scale:"
-msgstr ""
+msgstr "Scale:"
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
-msgstr ""
+msgstr "Environnement"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
@@ -2455,15 +2458,15 @@ msgstr "Visible :"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr ""
+msgstr "Modifier"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
-msgstr ""
+msgstr "Mesh"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
-msgstr ""
+msgstr "De gauche à droite :"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
@@ -2471,11 +2474,11 @@ msgstr "Rayon :"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
-msgstr ""
+msgstr "Segments Radiaux:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
 msgid "Rings:"
-msgstr ""
+msgstr "Anneaux:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
@@ -2494,11 +2497,11 @@ msgstr "Texte :"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
-msgstr ""
+msgstr "Taille des Pixels:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
-msgstr ""
+msgstr "Étape de Courbe:"
 
 msgid "Horizontal alignment:"
 msgstr "Alignement horizontal :"
