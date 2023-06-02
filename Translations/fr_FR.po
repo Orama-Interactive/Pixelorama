@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-06-02 00:41\n"
+"PO-Revision-Date: 2023-06-02 07:50\n"
 
 msgid "OK"
 msgstr "OK"
@@ -226,7 +226,7 @@ msgid "Reset"
 msgstr "Réinitialiser"
 
 msgid "Use Current Frame"
-msgstr "Utiliser l'image actuelle"
+msgstr "Utiliser la Frame actuelle"
 
 msgid "Reset Mask"
 msgstr "Réinitialiser Masque"
@@ -381,10 +381,10 @@ msgid "New pattern"
 msgstr "Nouveau motif"
 
 msgid "Horizontal frames:"
-msgstr "Frames horizontaux :"
+msgstr "Frames horizontales :"
 
 msgid "Vertical frames:"
-msgstr "Frames verticaux :"
+msgstr "Frames verticales :"
 
 msgid "Start frame:"
 msgstr "Frame de début:"
@@ -514,11 +514,11 @@ msgstr "Calques sélectionnés"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr "Calque de pixel :"
+msgstr "Calque de pixel:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr "Groupe de calque :"
+msgstr "Calque de Groupe:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
@@ -1237,7 +1237,7 @@ msgid "Left tool"
 msgstr "Outil gauche"
 
 msgid "Right tool"
-msgstr "Outil de droite"
+msgstr "Outil droit"
 
 msgid "Left pixel indicator"
 msgstr "Indicateur de pixel gauche"
