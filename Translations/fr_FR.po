@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-06-02 07:50\n"
+"PO-Revision-Date: 2023-06-02 08:56\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1400,13 +1400,13 @@ msgid "Set application FPS limit:"
 msgstr "Définir la limite FPS de l'application :"
 
 msgid "Pause application when it loses focus"
-msgstr "Suspend l'application quand elle perd le focus"
+msgstr "Met l'application en pause quand elle perd le focus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Définit la limite d'images par seconde de l'application. Plus le nombre est bas, plus l'utilisation du processeur est faible, mais l'application devient plus lente, saccadée et non réactive. 0 signifie qu'il n'y a pas de limite."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr "Si c'est activé, quand l'application perd le focus, elle est suspendue. Cela aide à réduire l'usage du processeur en période d'inactivité. Elle est ensuite actualisée quand la souris entre dans la fenêtre."
+msgstr "Si activé, l'application est mise en pause quand le focus est perdu. Cela aide à réduire l'usage du processeur en période d'inactivité. L'application sort de pause quand la souris entre à nouveau dans sa fenêtre."
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -1706,10 +1706,10 @@ msgid "Onion Skinning:"
 msgstr "Peau d'oignon :"
 
 msgid "Past Frames"
-msgstr "Frames passées"
+msgstr "Frames précédentes"
 
 msgid "Future Frames"
-msgstr "Frames futures"
+msgstr "Frames suivantes"
 
 msgid "Manage frame tags"
 msgstr "Gérer les tags de la frame"
@@ -2140,13 +2140,13 @@ msgid "Already assigned"
 msgstr "Déjà attribué"
 
 msgid "Left Tool:"
-msgstr "Outil gauche:"
+msgstr "Outil Gauche:"
 
 msgid "A tool assigned to the left mouse button"
 msgstr "Un outil assigné au bouton gauche de la souris"
 
 msgid "Right Tool:"
-msgstr "Outil de droite:"
+msgstr "Outil Droit:"
 
 msgid "A tool assigned to the right mouse button"
 msgstr "Un outil assigné au bouton droit de la souris"
@@ -2190,7 +2190,7 @@ msgstr "Créer un nouveau dossier pour chaque tag de frame"
 
 #. Found in the export dialog.
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
-msgstr "Créé plusieurs fichiers, mais chaque fichier est stocké dans un dossier qui correspond aux tags de frame"
+msgstr "Créé plusieurs fichiers, mais chaque fichier est stocké dans le dossier correspondant à leurs tags de frame"
 
 msgid "Close"
 msgstr "Fermer"
@@ -2438,7 +2438,7 @@ msgid "Rotation:"
 msgstr "Rotation :"
 
 msgid "Scale:"
-msgstr "Échelle:"
+msgstr "Scale:"
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
