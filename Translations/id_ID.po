@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-06-03 00:12\n"
+"PO-Revision-Date: 2023-06-03 09:06\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -262,7 +262,7 @@ msgstr "Ini pratayang, mengubah ini tidak akan mengubah tata letak"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr "Pencet dua kali, jadi tata letak awal buka baru"
+msgstr "Pencet dua kali agar jadi tata letak baru di awal buka"
 
 msgid "Add"
 msgstr "Tambah"
