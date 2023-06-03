@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-06-02 22:52\n"
+"PO-Revision-Date: 2023-06-03 00:12\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -584,7 +584,7 @@ msgid "Trilinear"
 msgstr "\"Trilinear\""
 
 msgid "Constant"
-msgstr "Konstanta"
+msgstr "Tetapan"
 
 msgid "General"
 msgstr "Umum"
@@ -1048,13 +1048,13 @@ msgid "copy"
 msgstr "salinan"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr "Apakah yakin ingin keluar?"
+msgstr "Apakah yakin ingin keluar Pixelorama?"
 
 msgid "Unsaved Image"
 msgstr "Gambar belum disimpan"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr "Perubahan belum disimpan, perubahan akan hilang jika kamu melanjutkan."
+msgstr "Perubahan belum disimpan, perubahan tadi akan hilang jika tetap lanjut."
 
 msgid "Save before exiting?"
 msgstr "Simpan sebelum keluar?"
@@ -1690,7 +1690,7 @@ msgstr "Mampukan/lumpuhkan Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "Ingin berapa banyak bingkai animasi diputar setiap detiknya?\n"
+msgstr "Berapa bingkai yang harus diputar setiap detik di pratayang?\n"
 "Semakin banyak FPS, semakin cepat animasinya."
 
 msgid "No loop"
@@ -1730,7 +1730,7 @@ msgid "To:"
 msgstr "Ke:"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr "Animasi diputar hanya pada bingkai yang memiliki tag sama"
+msgstr "Animasi diputar hanya pada bingkai dengan tag sama"
 
 msgid "Tag %s (Frame %s)"
 msgstr "Tag %s (Bingkai %s)"
@@ -1740,7 +1740,7 @@ msgstr "Tag %s (Bingkai %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr "Jika dipilih, animasi akan diputar hanya pada bingkai yang memiliki tag sama.\n"
+msgstr "Jika dipilih, animasi akan diputar hanya pada bingkai dengan tag sama.\n"
 "Jika tidak, maka animasi akan diputar untuk semua bingkai."
 
 msgid "Blue-Red Mode"
@@ -2158,7 +2158,7 @@ msgid "Cannot find project file."
 msgstr "Berkas proyek tidak ditemukan."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr "Kamu belum menyimpan atau membuka proyek apa pun di Pixelorama!"
+msgstr "Belum ada proyek yang disimpan atau dibuka di Pixelorama!"
 
 msgid "Open Last Project"
 msgstr "Buka Proyek Terakhir"
@@ -2462,7 +2462,7 @@ msgstr "Ubah"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
-msgstr ""
+msgstr "Jala"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
@@ -2474,7 +2474,7 @@ msgstr "Jari-jari:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
-msgstr "Ruas meruji:"
+msgstr "Ruas radial:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
 msgid "Rings:"
@@ -2482,7 +2482,7 @@ msgstr "Cincin:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
-msgstr ""
+msgstr "Is hemisphere:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
