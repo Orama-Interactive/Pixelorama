@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-06-03 09:06\n"
+"PO-Revision-Date: 2023-06-03 10:16\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -2446,11 +2446,11 @@ msgstr "Lingkungan"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
-msgstr "Warna sekeliling:"
+msgstr "Warna ambien:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color energy:"
-msgstr "Tenaga warna sekeliling:"
+msgstr "Tenaga warna ambien:"
 
 #. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
