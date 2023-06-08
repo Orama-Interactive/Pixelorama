@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-05-22 21:24\n"
+"PO-Revision-Date: 2023-06-03 10:16\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -262,7 +262,7 @@ msgstr "Ini pratayang, mengubah ini tidak akan mengubah tata letak"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr "Pencet dua kali, jadi tata letak awal buka baru"
+msgstr "Pencet dua kali agar jadi tata letak baru di awal buka"
 
 msgid "Add"
 msgstr "Tambah"
@@ -274,7 +274,7 @@ msgid "Edit Layout"
 msgstr "Sunting Tata Letak"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr "Apa kamu yakin ingin menghapus tata letak ini?"
+msgstr "Apakah yakin ingin menghapus tata letak ini?"
 
 msgid "Auto"
 msgstr "Otomatis"
@@ -295,14 +295,14 @@ msgid "Show Pixel Grid"
 msgstr "Tampilkan Kisi Piksel"
 
 msgid "Show Rulers"
-msgstr "Pakai Penggaris"
+msgstr "Tampilkan Penggaris"
 
 msgid "Show Guides"
 msgstr "Tampilkan Panduan"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Tampilkan Panduan Tetikus"
 
 #. Found under the View menu.
 msgid "Snap To"
@@ -584,7 +584,7 @@ msgid "Trilinear"
 msgstr "\"Trilinear\""
 
 msgid "Constant"
-msgstr "Konstanta"
+msgstr "Tetapan"
 
 msgid "General"
 msgstr "Umum"
@@ -820,7 +820,7 @@ msgstr "Cerminkan"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Potong Pendek"
 
 msgid "Transition size:"
 msgstr "Ukuran peralihan:"
@@ -872,15 +872,15 @@ msgstr "Langkah:"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "Posterisasi"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "Tingkat posterisasi:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "Intensitas baur galat:"
 
 msgid "View Splash Screen"
 msgstr "Tampilkan \"Splash Screen\""
@@ -1048,13 +1048,13 @@ msgid "copy"
 msgstr "salinan"
 
 msgid "Are you sure you want to exit Pixelorama?"
-msgstr "Apa kamu yakin ingin keluar?"
+msgstr "Apakah yakin ingin keluar Pixelorama?"
 
 msgid "Unsaved Image"
 msgstr "Gambar belum disimpan"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr "Perubahan belum disimpan, perubahan akan hilang jika kamu melanjutkan."
+msgstr "Perubahan belum disimpan, perubahan tadi akan hilang jika tetap lanjut."
 
 msgid "Save before exiting?"
 msgstr "Simpan sebelum keluar?"
@@ -1288,7 +1288,7 @@ msgstr "Jarak pencantolan:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Ini adalah jarak berukuran piksel saat pencatolan kisi dan panduan diaktifkan."
 
 msgid "Grid"
 msgstr "Kisi"
@@ -1314,15 +1314,15 @@ msgstr "Ukuran kisi persegi panjang:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Ukuran kisi isometrik:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Offset kisi:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Menetapkan offset kisi dari kanvas aslinya (di pojok kiri atas gambar)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Gambar di atas Mode Ubin:"
@@ -1441,7 +1441,7 @@ msgstr "Buka Folder"
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
-msgstr ""
+msgstr "Dinamika"
 
 #. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
 msgid "Pressure"
@@ -1453,7 +1453,7 @@ msgstr "Kecepatan"
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #. Refers to the size of a value, for example the size of a brush.
 msgid "Size"
@@ -1510,7 +1510,7 @@ msgstr "Warnai dalamnya"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
-msgstr ""
+msgstr "Jarak Baris"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
@@ -1618,15 +1618,15 @@ msgstr "Ganti yang dipilih"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
-msgstr ""
+msgstr "Tambah ke seleksi"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Subtract from selection"
-msgstr ""
+msgstr "Kurangi dari seleksi"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
-msgstr ""
+msgstr "Persimpangan seleksi"
 
 msgid "Mirroring"
 msgstr "Pencerminan"
@@ -1650,7 +1650,7 @@ msgid "Animation mode:"
 msgstr "Mode animasi:"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Bingkai ini jadikan lembar sprite"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -1690,7 +1690,7 @@ msgstr "Mampukan/lumpuhkan Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
-msgstr "Ingin berapa banyak bingkai animasi diputar setiap detiknya?\n"
+msgstr "Berapa bingkai yang harus diputar setiap detik di pratayang?\n"
 "Semakin banyak FPS, semakin cepat animasinya."
 
 msgid "No loop"
@@ -1730,7 +1730,7 @@ msgid "To:"
 msgstr "Ke:"
 
 msgid "Animation plays only on frames of the same tag"
-msgstr "Animasi diputar hanya pada bingkai yang memiliki tag sama"
+msgstr "Animasi diputar hanya pada bingkai dengan tag sama"
 
 msgid "Tag %s (Frame %s)"
 msgstr "Tag %s (Bingkai %s)"
@@ -1740,7 +1740,7 @@ msgstr "Tag %s (Bingkai %s-%s)"
 
 msgid "If it's selected, the animation plays only on the frames that have the same tag.\n"
 "If it's not, the animation will play for all frames, ignoring tags."
-msgstr "Jika dipilih, animasi akan diputar hanya pada bingkai yang memiliki tag sama.\n"
+msgstr "Jika dipilih, animasi akan diputar hanya pada bingkai dengan tag sama.\n"
 "Jika tidak, maka animasi akan diputar untuk semua bingkai."
 
 msgid "Blue-Red Mode"
@@ -1759,7 +1759,7 @@ msgid "Below canvas"
 msgstr "Di bawah kanvas"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr "Jika ingin lapisannya tidak usah onion skinning, tulis saja \"_io\" di ujung namanya."
+msgstr "Jika ingin lapisannya tidak onion skinning, tulis saja \"_io\" di ujung namanya."
 
 msgid "Add a new frame"
 msgstr "Tambah bingkai baru"
@@ -1888,10 +1888,10 @@ msgid "Redo: Scale"
 msgstr "Ulangi: Ubah besar"
 
 msgid "Undo: Add Layer"
-msgstr "Urungkan: Tambah lapisan"
+msgstr "Urungkan: Tambah Lapisan"
 
 msgid "Redo: Add Layer"
-msgstr "Ulangi: Tambah lapisan"
+msgstr "Ulangi: Tambah Lapisan"
 
 msgid "Undo: Remove Layer"
 msgstr "Urungkan: Hapus lapisan"
@@ -2017,7 +2017,7 @@ msgid "Patrons:"
 msgstr "Patron:"
 
 msgid "Want your name or your company to be shown on the splash screen?"
-msgstr "Ingin ada nama atau perusahaan ditampilkan pada layar splash?"
+msgstr "Apakah ingin ada nama diri atau perusahaan pada layar splash?"
 
 msgid "Become a Platinum Sponsor"
 msgstr "Jadi Sponsor Platinum"
@@ -2158,7 +2158,7 @@ msgid "Cannot find project file."
 msgstr "Berkas proyek tidak ditemukan."
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
-msgstr "Kamu belum menyimpan atau membuka proyek apa pun di Pixelorama!"
+msgstr "Belum ada proyek yang disimpan atau dibuka di Pixelorama!"
 
 msgid "Open Last Project"
 msgstr "Buka Proyek Terakhir"
@@ -2201,7 +2201,7 @@ msgstr "Buang Semua"
 msgid "Autosaved project(s) from a crashed session were found.\n"
 "Do you want to recover the data?"
 msgstr "Ditemukan proyek yang disimpan otomatis dari sesi kena mogok.\n"
-"Apa kamu ingin memulihkan datanya?"
+"Apakah datanya ingin dipulihkan?"
 
 msgid "Backup reloaded"
 msgstr "Cadangan dimuat ulang"
@@ -2210,7 +2210,7 @@ msgid "Remove currently selected palette"
 msgstr "Hapus palet yang sedang dipilih"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr "Apa kamu yakin ingin menghapus palet ini? (Tak bisa diurungkan)"
+msgstr "Apakah yakin ingin menghapus palet ini? (Tidak bisa di urung)"
 
 msgid "You can't remove more palettes!"
 msgstr "Tidak bisa menghapus palet lagi!"
@@ -2322,7 +2322,7 @@ msgid "Resize the canvas"
 msgstr "Ubah ukuran kanvas"
 
 msgid "Margins"
-msgstr ""
+msgstr "Pias Tepi"
 
 msgid "Position + Size"
 msgstr "Posisi + Ukuran"
@@ -2331,7 +2331,7 @@ msgid "Locked Aspect Ratio"
 msgstr "Nisbah Aspek Terkunci"
 
 msgid "Margins:"
-msgstr ""
+msgstr "Pias tepi:"
 
 msgid "Aspect Ratio:"
 msgstr "Nisbah Aspek:"
@@ -2446,11 +2446,11 @@ msgstr "Lingkungan"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
-msgstr "Warna sekeliling:"
+msgstr "Warna ambien:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color energy:"
-msgstr "Tenaga warna sekeliling:"
+msgstr "Tenaga warna ambien:"
 
 #. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
@@ -2462,7 +2462,7 @@ msgstr "Ubah"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
-msgstr ""
+msgstr "Jala"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
@@ -2474,7 +2474,7 @@ msgstr "Jari-jari:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
-msgstr ""
+msgstr "Ruas radial:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
 msgid "Rings:"
@@ -2482,7 +2482,7 @@ msgstr "Cincin:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
-msgstr ""
+msgstr "Is hemisphere:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
