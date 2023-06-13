@@ -343,6 +343,7 @@ func _on_QuitAndSaveDialog_custom_action(action: String) -> void:
 
 func _on_QuitAndSaveDialog_confirmed() -> void:
 	is_quitting_on_save = true
+	Global.save_sprites_dialog.get_ok().text = "Save & Exit"
 	Global.save_sprites_dialog.popup_centered()
 	quit_dialog.hide()
 	Global.dialog_open(true)
