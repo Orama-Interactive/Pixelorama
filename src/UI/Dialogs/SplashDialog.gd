@@ -1,17 +1,17 @@
 extends AcceptDialog
 
 var artworks := [
-	[  # Licensed under CC BY-NC-ND, https://creativecommons.org/licenses/by-nc-nd/4.0/
+	[  # Licensed under CC-BY-NC-ND, https://creativecommons.org/licenses/by-nc-nd/4.0/
 		"Roroto Sic",
-		preload("res://assets/graphics/splash_screen/artworks/roroto.tres"),
+		preload("res://assets/graphics/splash_screen/artworks/roroto.png"),
 		"https://linktr.ee/Roroto_Sic",
-		Color.black
-	],
-	[  # Licensed under CC BY-NC, https://creativecommons.org/licenses/by-nc/3.0/
-		"Kalpar",
-		preload("res://assets/graphics/splash_screen/artworks/kalpar.png"),
-		"https://resite.link/Kalpar",
 		Color.white
+	],
+	[  # Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/
+		"Exuvita",
+		preload("res://assets/graphics/splash_screen/artworks/exuvita.png"),
+		"",
+		Color.black
 	],
 	[  # Licensed under CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/
 		"Uch",

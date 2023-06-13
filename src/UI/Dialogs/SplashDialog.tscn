@@ -235,7 +235,7 @@ autowrap = true
 [node name="PatronsLabel2" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
 margin_top = 18.0
 margin_right = 284.0
-margin_bottom = 83.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 230, 0 )
 size_flags_vertical = 8
 text = "ShikadiGum
