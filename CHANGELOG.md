@@ -71,7 +71,7 @@ Built using Godot 3.5.2.
 - Fix bug where the tool changes from a draw tool to a non-draw tool, while having an image brush selected. The bug was that the indicator was appearing as a white square, until the user moved their mouse.
 - Fix bug where clicking on previous/next frame when only one frame exists makes the cel unselected. [6b58768](https://github.com/Orama-Interactive/Pixelorama/commit/6b587688f12dcc027c2f43832f179e4dca73a702)
 - Mirror symmetry axes are now properly centered by default. [#843](https://github.com/Orama-Interactive/Pixelorama/pull/843)
-- The "File(s) exported" notification now only appears on succesful export.
+- The "File(s) exported" notification now only appears on successful export.
 - Fix selection handles and shape tool previews not working properly when mirror view is enabled. [#860](https://github.com/Orama-Interactive/Pixelorama/pull/860)
 - Undoing after pasting now shows the previous selection as normal.
 - The right tool gets activated only if the right mouse button (or whatever input action is assigned) is first pressed. [cc332c6](https://github.com/Orama-Interactive/Pixelorama/commit/cc332c6cbf3f9265a95a4bdc4998c9ca6c4f750a)

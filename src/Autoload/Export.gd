@@ -9,7 +9,7 @@ enum FileFormat { PNG = 0, GIF = 1, APNG = 2 }
 # list of animated formats
 var animated_formats := [FileFormat.GIF, FileFormat.APNG]
 
-# A dictionary of custom exporter generators (Recieved from extensions)
+# A dictionary of custom exporter generators (received from extensions)
 var custom_exporter_generators := {}
 
 var current_tab: int = ExportTab.IMAGE
