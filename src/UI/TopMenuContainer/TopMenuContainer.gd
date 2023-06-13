@@ -404,6 +404,7 @@ func _save_project_file_as() -> void:
 		save_dialog.popup_centered()
 		save_filename.text = Global.current_project.name
 	else:
+		Global.save_sprites_dialog.get_ok().text = "Save"
 		Global.save_sprites_dialog.popup_centered()
 		yield(get_tree(), "idle_frame")
 		yield(get_tree(), "idle_frame")
