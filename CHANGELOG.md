@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v0.11] - Unreleased
+## [v0.11] - 2023-06-13
 This update has been brought to you by the contributions of:
 [@mrtripie](https://github.com/mrtripie), Martin Novák ([@novhack](https://github.com/novhack)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@20kdc](https://github.com/20kdc), Arron Washington ([@radicaled](https://github.com/radicaled)), Christos Tsoychlakis ([@ChrisTs8920](https://github.com/ChrisTs8920))
 
@@ -17,7 +17,7 @@ Built using Godot 3.5.2.
 - 3D layers have now been implemented, which allows for non-destructive usage of 3D geometry inside Pixelorama. The 3D objects get automatically rasterized (pixelated) depending on the size of the canvas. [#840](https://github.com/Orama-Interactive/Pixelorama/pull/840)
 - A perspective editor has been added, that aims to help artists use perspective in their work. [#806](https://github.com/Orama-Interactive/Pixelorama/pull/806)
 - Dynamics are finally here! You can now use tablet pen pressure and/or mouse/pen velocity to affect the size and the alpha of the brush. More options will come in the future!
-- A new crop tool has been added. It can resize the canvas without resizing the content.[#830](https://github.com/Orama-Interactive/Pixelorama/pull/830)
+- A new crop tool has been added. It can resize the canvas without resizing the content. [#830](https://github.com/Orama-Interactive/Pixelorama/pull/830)
 - The pencil tool now has a spacing option. [#813](https://github.com/Orama-Interactive/Pixelorama/pull/813)
 - Exporting and loading APNG files is now possible. [#772](https://github.com/Orama-Interactive/Pixelorama/pull/772) and [#797](https://github.com/Orama-Interactive/Pixelorama/pull/797)
 - Implemented [cleanEdge](http://torcado.com/cleanEdge/) as a new rotation and scaling algorithm. [#794](https://github.com/Orama-Interactive/Pixelorama/pull/794)

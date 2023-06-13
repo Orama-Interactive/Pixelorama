@@ -729,7 +729,7 @@ func help_menu_id_pressed(id: int) -> void:
 			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		Global.HelpMenu.CHANGELOG:
 			OS.shell_open(
-				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v0103---2022-09-26"
+				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v011---2023-06-13"
 			)
 		Global.HelpMenu.ABOUT_PIXELORAMA:
 			_popup_dialog(Global.control.get_node("Dialogs/AboutDialog"))
