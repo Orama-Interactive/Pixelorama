@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2023-06-01 17:42\n"
+"PO-Revision-Date: 2023-06-14 01:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -390,7 +390,7 @@ msgid "Start frame:"
 msgstr "Fotograma inicial:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Fotograma final:"
 
 msgid "At frame:"
 msgstr "En el fotograma:"
@@ -663,7 +663,7 @@ msgid "System Language"
 msgstr "Idioma del sistema"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Escala de la interfaz:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Atenuar interface al abrir ventana emergente"
@@ -871,15 +871,15 @@ msgstr "Pasos:"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "Posterizar"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "Posterizar niveles:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "Intensidad de difuminado:"
 
 msgid "View Splash Screen"
 msgstr "Mostrar Pantalla de bienvenida"
@@ -1287,7 +1287,7 @@ msgstr ""
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Esta es la distancia en píxeles donde se activa el ajuste de guía y cuadrícula."
 
 msgid "Grid"
 msgstr "Cuadrícula"
@@ -1309,19 +1309,19 @@ msgstr "Todo"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "Ancho de la cuadrícula rectangular:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Tamaño de cuadrícula isométrica:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Desplazamiento de cuadrícula:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Establece el desplazamiento de la cuadrícula desde el origen del lienzo (esquina superior izquierda de la imagen)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Dibujar en el Modo Mosaico:"
@@ -1645,10 +1645,10 @@ msgid "Current frame:"
 msgstr "Fotograma actual:"
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "Modo de animación:"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Fotograma actual como hoja de sprites"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -2349,31 +2349,33 @@ msgstr "Derecha:"
 msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
-msgstr ""
+msgstr "Tamaño bloqueado\n\n"
+"Cuando está habilitado, usar la herramienta en el lienzo solo moverá el rectángulo de recorte.\n\n"
+"Cuando está deshabilitado, usar la herramienta en el lienzo dibujará el rectángulo."
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
-msgstr ""
+msgstr "Editar forma 3D"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
-msgstr ""
+msgstr "Cuadro"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
-msgstr ""
+msgstr "Esfera"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "Cápsula"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
-msgstr ""
+msgstr "Cilindro"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
-msgstr ""
+msgstr "Prisma"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
@@ -2381,76 +2383,76 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "Plano"
 
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
-msgstr ""
+msgstr "Luz direccional"
 
 #. Used in 3D layers. A type of light.
 msgid "Spotlight"
-msgstr ""
+msgstr "Destacar"
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
-msgstr ""
+msgstr "Punto de luz"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
-msgstr ""
+msgstr "Modelo personalizado"
 
 msgid "Selected object:"
-msgstr ""
+msgstr "Objetos seleccionados:"
 
 msgid "Add new object"
-msgstr ""
+msgstr "Añadir un nuevo objeto"
 
 msgid "Remove object"
-msgstr ""
+msgstr "Remover objeto"
 
 msgid "Camera"
-msgstr ""
+msgstr "Cámara"
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
-msgstr ""
+msgstr "Proyección:"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
-msgstr ""
+msgstr "Perspectiva"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Orthogonal"
-msgstr ""
+msgstr "Ortogonal"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
 msgstr ""
 
 msgid "Rotation:"
-msgstr ""
+msgstr "Rotación:"
 
 msgid "Scale:"
-msgstr ""
+msgstr "Escala:"
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
-msgstr ""
+msgstr "Ambiente"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
-msgstr ""
+msgstr "Color de ambiente:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color energy:"
-msgstr ""
+msgstr "Energía de color ambiental:"
 
 #. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
-msgstr ""
+msgstr "Visible:"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
@@ -2458,35 +2460,35 @@ msgstr "Transformar"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
-msgstr ""
+msgstr "Malla"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
-msgstr ""
+msgstr "Izquierda a derecha:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "Radio:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
-msgstr ""
+msgstr "Segmentos radiales:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
 msgid "Rings:"
-msgstr ""
+msgstr "Anillos:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
-msgstr ""
+msgstr "Es hemisferio:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
-msgstr ""
+msgstr "Radio superior:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Bottom radius:"
-msgstr ""
+msgstr "Radio inferior:"
 
 msgid "Text:"
 msgstr ""
