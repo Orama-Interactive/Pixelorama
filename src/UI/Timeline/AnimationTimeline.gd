@@ -35,7 +35,6 @@ func _ready() -> void:
 	frame_scroll_bar.connect("value_changed", self, "_frame_scroll_changed")
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
-
 	# config loading
 	layer_frame_h_split.split_offset = Global.config_cache.get_value("timeline", "layer_size", 0)
 	self.cel_size = Global.config_cache.get_value("timeline", "cel_size", cel_size)  # Call setter
@@ -62,7 +61,6 @@ func _ready() -> void:
 	# emit signals that were supposed to be emitted (Check if it's still required in godot 4)
 	$"%PastPlacement".emit_signal("item_selected", 0 if past_above else 1)
 	$"%FuturePlacement".emit_signal("item_selected", 0 if future_above else 1)
-
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	Global.layer_vbox.call_deferred("emit_signal", "resized")
 
@@ -151,10 +149,8 @@ func add_frame() -> void:
 	var project: Project = Global.current_project
 	var frame_add_index := project.current_frame + 1
 	var frame: Frame = project.new_empty_frame()
-
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
-
 	for l in range(project.layers.size()):
 		if project.layers[l].new_cels_linked:  # If the link button is pressed
 			var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
@@ -282,15 +278,19 @@ func _on_CopyFrame_pressed() -> void:
 	copy_frames(indices)
 
 
-func copy_frames(indices := []) -> void:
+func copy_frames(indices := [], destination := -1) -> void:
 	var project: Project = Global.current_project
 
 	if indices.size() == 0:
 		indices.append(project.current_frame)
 
 	var copied_frames := []
-	var copied_indices := range(indices[-1] + 1, indices[-1] + 1 + indices.size())
+	var copied_indices := []  # the indices of newly copied frames
 
+	if destination != -1:
+		copied_indices = range(destination + 1, (destination + 1) + indices.size())
+	else:
+		copied_indices = range(indices[-1] + 1, indices[-1] + 1 + indices.size())
 	var new_animation_tags := project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
 	# as project.animation_tags's classes. Needed for undo/redo to work properly.
@@ -301,15 +301,12 @@ func copy_frames(indices := []) -> void:
 			new_animation_tags[i].from,
 			new_animation_tags[i].to
 		)
-
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
-
 	for f in indices:
+		var src_frame: Frame = project.frames[f]
 		var new_frame := Frame.new()
 		copied_frames.append(new_frame)
-
-		var src_frame: Frame = project.frames[f]
 
 		new_frame.duration = src_frame.duration
 		for l in range(project.layers.size()):
@@ -322,9 +319,9 @@ func copy_frames(indices := []) -> void:
 				)
 				if src_cel.selected != null:
 					selected_id = src_cel.selected.id
-
 			else:
 				new_cel = src_cel.get_script().new()
+
 			if project.layers[l].new_cels_linked:
 				if src_cel.link_set == null:
 					src_cel.link_set = {}
@@ -337,29 +334,44 @@ func copy_frames(indices := []) -> void:
 			else:
 				new_cel.set_content(src_cel.copy_content())
 			new_cel.opacity = src_cel.opacity
+
 			if new_cel is Cel3D:
 				if selected_id in new_cel.object_properties.keys():
 					if selected_id != -1:
 						new_cel.selected = new_cel.get_object_from_id(selected_id)
 			new_frame.cels.append(new_cel)
 
-		# Loop through the tags to see if the frame is in one
-		for tag in new_animation_tags:
-			if indices[-1] + 1 >= tag.from && indices[-1] + 1 <= tag.to:
+		for tag in new_animation_tags:  # Loop through the tags to see if the frame is in one
+			if copied_indices[0] >= tag.from && copied_indices[0] <= tag.to:
 				tag.to += 1
-			elif indices[-1] + 1 < tag.from:
+			elif copied_indices[0] < tag.from:
 				tag.from += 1
 				tag.to += 1
-
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(project, "add_frames", copied_frames, copied_indices)
 	project.undo_redo.add_undo_method(project, "remove_frames", copied_indices)
-	project.undo_redo.add_do_method(project, "change_cel", indices[-1] + 1)
-	project.undo_redo.add_undo_method(project, "change_cel", indices[-1])
+	project.undo_redo.add_do_method(project, "change_cel", copied_indices[0])
+	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.commit_action()
+	# Select all the new frames so that it is easier to move/offset collectively if user wants
+	# To ease animation workflow, new current frame is the first copied frame instead of the last
+	var range_start: int = copied_indices[-1]
+	var range_end = copied_indices[0]
+	var frame_diff_sign = sign(range_end - range_start)
+	if frame_diff_sign == 0:
+		frame_diff_sign = 1
+	for i in range(range_start, range_end + frame_diff_sign, frame_diff_sign):
+		for j in range(0, Global.current_project.layers.size()):
+			var frame_layer := [i, j]
+			if !Global.current_project.selected_cels.has(frame_layer):
+				Global.current_project.selected_cels.append(frame_layer)
+	Global.current_project.change_cel(range_end, -1)
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	adjust_scroll_container()
 
 
 func _on_FrameTagButton_pressed() -> void:
@@ -423,7 +435,6 @@ func _on_PlayForward_toggled(button_pressed: bool) -> void:
 		Global.change_button_texturerect(Global.play_forward.get_child(0), "pause.png")
 	else:
 		Global.change_button_texturerect(Global.play_forward.get_child(0), "play.png")
-
 	play_animation(button_pressed, true)
 
 
@@ -432,7 +443,6 @@ func _on_PlayBackwards_toggled(button_pressed: bool) -> void:
 		Global.change_button_texturerect(Global.play_backwards.get_child(0), "pause.png")
 	else:
 		Global.change_button_texturerect(Global.play_backwards.get_child(0), "play_backwards.png")
-
 	play_animation(button_pressed, false)
 
 
@@ -932,7 +942,6 @@ func project_frame_added(frame: int) -> void:
 	frame_scroll_container.call_deferred(  # Make it visible, yes 3 call_deferreds are required
 		"call_deferred", "call_deferred", "ensure_control_visible", button
 	)
-
 	var layer := Global.cel_vbox.get_child_count() - 1
 	for cel_hbox in Global.cel_vbox.get_children():
 		var cel_button = project.frames[frame].cels[layer].instantiate_cel_button()
