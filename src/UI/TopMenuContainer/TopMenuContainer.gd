@@ -272,20 +272,20 @@ func populate_layouts_submenu() -> void:
 func _setup_image_menu() -> void:
 	# Order as in Global.ImageMenu enum
 	var image_menu_items := [
-		"Scale Image",
-		"Centralize Image",
-		"Crop Image",
 		"Resize Canvas",
+		"Scale Image",
+		"Crop Image",
 		"Mirror Image",
+		"Centralize Image",
 		"Rotate Image",
-		"Invert Colors",
-		"Desaturation",
 		"Outline",
 		"Drop Shadow",
+		"Invert Colors",
+		"Desaturation",
 		"Adjust Hue/Saturation/Value",
+		"Posterize",
 		"Gradient",
 		"Gradient Map",
-		"Posterize",
 		# "Shader"
 	]
 	var image_menu: PopupMenu = image_menu_button.get_popup()
