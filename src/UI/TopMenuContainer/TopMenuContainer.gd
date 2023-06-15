@@ -404,6 +404,7 @@ func _save_project_file_as() -> void:
 		save_dialog.popup_centered()
 		save_filename.text = Global.current_project.name
 	else:
+		Global.save_sprites_dialog.get_ok().text = "Save"
 		Global.save_sprites_dialog.popup_centered()
 		yield(get_tree(), "idle_frame")
 		yield(get_tree(), "idle_frame")
@@ -729,7 +730,7 @@ func help_menu_id_pressed(id: int) -> void:
 			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		Global.HelpMenu.CHANGELOG:
 			OS.shell_open(
-				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v0103---2022-09-26"
+				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v011---2023-06-13"
 			)
 		Global.HelpMenu.ABOUT_PIXELORAMA:
 			_popup_dialog(Global.control.get_node("Dialogs/AboutDialog"))

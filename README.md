@@ -51,7 +51,6 @@ Stable versions:
 - [GitHub Pages (Web)](https://orama-interactive.github.io/Pixelorama/)
 - [Flathub (Linux)](https://flathub.org/apps/details/com.orama_interactive.Pixelorama)
 - [Snap Store (Linux)](https://snapcraft.io/pixelorama)
-- [OpenStore (Ubuntu Touch)](https://open-store.io/app/pixelorama.orama-interactive)
 
 You can also find early access builds in the [GitHub Actions page](https://github.com/Orama-Interactive/Pixelorama/actions). There's also a [Web version available](https://orama-interactive.github.io/Pixelorama/early_access/).
 Keep in mind that these versions will have bugs and are unstable. Unless you're interested in testing the main branch of Pixelorama, it's recommended that you stick to a stable version.
@@ -66,19 +65,23 @@ Pixelorama uses Godot 3.5, so you will need to have it in order to run the proje
 As of right now, most of the code is written using GDScript, so the mono version of Godot is not required, but Pixelorama should also work with it.
 
 ## Current features:
-
 - A variety of different tools to help you draw, with the ability to map a different tool in each left and right mouse buttons.
 - Are you an animator? Pixelorama has its own animation timeline just for you! You can work at an individual cel level, where each cel refers to a unique layer and frame. Supports onion skinning, cel linking, motion drawing and frame grouping with tags.
 - Custom brushes, including random brushes.
 - Create or import custom palettes.
 - Import images and edit them inside Pixelorama. If you import multiple files, they will be added as individual animation frames. Importing spritesheets is also supported.
-- Export your gorgeous art as `PNG`, as a single file, a spritesheet or multiple files, or `GIF` file.
+- Export your gorgeous art as `PNG`, as a single file, a spritesheet or multiple files, or `GIF` and `APNG` animated file.
 - Pixel perfect mode for perfect lines, for the pencil, eraser & lighten/darken tools.
+- Dynamics, such as tablet pen pressure.
 - Autosave support, with data recovery in case of a software crash.
+- 3D layers that allow you to bring 3D shapes and models into your 2D canvas.
+- Load reference images to help you draw.
 - Horizontal & vertical mirrored drawing.
 - Tile Mode for pattern creation.
 - Rectangular & isometric grid types.
-- Scale, rotate and apply multiple image effects to your drawings.
+- Guides that can be snapped to.
+- A perspective editor to help you create artwork with depth.
+- Scale, rotate and apply multiple image effects to your drawings. Rotation offers multiple algorithms, tailored for pixel art.
 - Multi-language localization support! See our [Crowdin page](https://crowdin.com/project/pixelorama) for more details.
 
 

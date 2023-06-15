@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2023-05-18 12:26\n"
+"PO-Revision-Date: 2023-05-20 00:30\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -872,11 +872,11 @@ msgstr "Кроки:"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "Постеризація"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "Рівні постеризації:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
@@ -1280,15 +1280,15 @@ msgstr "Колір напрямних ліній на полотні"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "Прив'язка"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "Відстань прив'язки:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Це відстань у пікселях, де напрямні й прив'язка до сітки активуються."
 
 msgid "Grid"
 msgstr "Сітка"
@@ -1310,19 +1310,19 @@ msgstr "Усі"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "Розмір прямокутної сітки:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Ізометричний розмір сітки:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Зміщення сітки:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Встановлює зсув сітки від початку координат (верхній лівий кут зображення)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Малювати в безшовному режимі:"
@@ -2470,7 +2470,7 @@ msgstr "Зліва направо:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "Радіус:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"

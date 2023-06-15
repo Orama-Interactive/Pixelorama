@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2023-05-18 12:25\n"
+"PO-Revision-Date: 2023-06-01 17:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -190,7 +190,7 @@ msgid "Grayscale View"
 msgstr "Ver en Escala de Grises"
 
 msgid "Mirror Image"
-msgstr "Reflejar Imagen"
+msgstr "Voltear Imagen"
 
 msgid "Flip Horizontal"
 msgstr "Voltear Horizontalmente"

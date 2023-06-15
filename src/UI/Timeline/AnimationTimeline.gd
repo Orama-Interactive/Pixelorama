@@ -877,10 +877,15 @@ func _on_MergeDownLayer_pressed() -> void:
 	project.undo_redo.commit_action()
 
 
-func _on_OpacitySlider_value_changed(value) -> void:
-	var current_frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
-	var cel: BaseCel = current_frame.cels[Global.current_project.current_layer]
-	cel.opacity = value / 100
+func _on_OpacitySlider_value_changed(value: float) -> void:
+	var new_opacity := value / 100
+	var current_layer_idx := Global.current_project.current_layer
+	# Also update all selected frames.
+	for idx_pair in Global.current_project.selected_cels:
+		if idx_pair[1] == current_layer_idx:
+			var frame: Frame = Global.current_project.frames[idx_pair[0]]
+			var cel: BaseCel = frame.cels[current_layer_idx]
+			cel.opacity = new_opacity
 	Global.canvas.update()
 
 
