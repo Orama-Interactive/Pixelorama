@@ -128,7 +128,7 @@ class MenuAPI:
 
 	func add_menu_item(menu_type: int, item_name: String, item_metadata, item_id := -1) -> int:
 		# item_metadata is usually a popup node you want to appear when you click the item_name
-		# that popup should also have an (menu_item_clicked) function inside it's script
+		# that popup should also have an (menu_item_clicked) function inside its script
 		var popup_menu: PopupMenu = _get_popup_menu(menu_type)
 		if not popup_menu:
 			return -1

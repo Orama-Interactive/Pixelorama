@@ -12,7 +12,7 @@ export var comment: String = ""
 export var width := DEFAULT_WIDTH
 export var height := DEFAULT_HEIGHT
 
-# Sparse colors dictionary - actual color position in the palette is determined by it's index
+# Sparse colors dictionary - actual color position in the palette is determined by its index
 export var colors: Dictionary = {}
 
 # How many colors fit in palette grid
@@ -66,7 +66,7 @@ func reindex_colors_on_size_reduce(remove_trailing: bool) -> void:
 		if remove_trailing and new_index >= colors_max:
 			colors.erase(old_index)
 
-		# Move color to new lower index - erase it from it's original index
+		# Move color to new lower index - erase it from its original index
 		elif new_index < old_index:
 			colors[new_index] = colors[old_index]
 			colors[new_index].index = new_index
@@ -129,7 +129,7 @@ func remove_color(index: int) -> void:
 func insert_color(index: int, new_color: Color) -> void:
 	var c := PaletteColor.new(new_color, index)
 	# If insert happens on non empty swatch recursively move the original color
-	# and every other color to it's right one swatch to right
+	# and every other color to its right one swatch to right
 	if colors.get(index) != null:
 		move_right(index)
 	colors[index] = c

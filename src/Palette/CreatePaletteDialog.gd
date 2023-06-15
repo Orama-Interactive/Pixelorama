@@ -98,7 +98,7 @@ func _on_Preset_item_selected(index: int) -> void:
 			set_default_values()
 		Palettes.NewPalettePresetType.FROM_CURRENT_PALETTE:
 			colors_settings.hide()
-			# If any palette was selected copy it's settings to dialog
+			# If any palette was selected, copy its settings to dialog
 			if current_palette:
 				name_input.text = current_palette.name
 				comment_input.text = current_palette.comment
