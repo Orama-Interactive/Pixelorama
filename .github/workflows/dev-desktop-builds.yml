@@ -1,4 +1,4 @@
-name: "dev-desktop-builds"
+name: Development desktop builds
 
 on:
   push:
@@ -9,6 +9,11 @@ on:
     - "Translations/*"
     - "installer/*.pot"
     - "installer/po/*"
+
+
+concurrency:
+  group: ci-${{github.actor}}-${{github.head_ref || github.run_number}}-${{github.ref}}-devdesktop
+  cancel-in-progress: true
 
 env:
   GODOT_VERSION: 3.5.2
@@ -34,7 +39,7 @@ jobs:
           echo 'export/windows/wine = "/usr/bin/wine"' >> ~/.config/godot/editor_settings-3.tres
           echo 'export/windows/rcedit = "/github/home/.local/share/rcedit/rcedit-x64.exe"' >> ~/.config/godot/editor_settings-3.tres
       - name: Checkout 🛎️
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
       - name: Setup 💻
@@ -48,7 +53,7 @@ jobs:
           cp -R ./pixelorama_data ./build/windows-64bit
           rm ./build/windows-64bit/pixelorama_data/.gdignore
       - name: Upload Artifact 🚀
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Windows-64bit
           path: ./build/windows-64bit/
@@ -61,7 +66,7 @@ jobs:
       image: docker://barichello/godot-ci:3.5.2
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
       - name: Setup 💻
@@ -82,21 +87,22 @@ jobs:
           chmod +x ./build/linux-rpi4/$EXPORT_NAME.rpi4
       - name: Copy pixelorama_data folder 📁
         run: |
+          rm ./pixelorama_data/.gdignore
           cp -R ./pixelorama_data ./build/linux-64bit
-          rm ./build/linux-64bit/pixelorama_data/.gdignore
+          cp -R ./pixelorama_data ./build/linux-rpi4
       - name: Create tar.gz archive 🗜️
         run: |
           cd build
           tar zcvf linux-64bit.tar.gz linux-64bit
           tar zcvf linux-rpi4.tar.gz linux-rpi4
       - name: Upload Artifact 🚀
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Linux-64bit
           path: ./build/linux-64bit.tar.gz
           retention-days: 14
       - name: Upload Raspberry Pi 4 Artifact 🚀
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Linux-rpi4
           path: ./build/linux-rpi4.tar.gz
@@ -107,7 +113,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
       - name: Setup environment 🔧
@@ -147,7 +153,7 @@ jobs:
       - name: Create DMG archive 🔧
         run: hdiutil create -srcfolder ./build/mac -fs HFS+ -volname Pixelorama ./build/mac/Pixelorama.dmg
       - name: Upload Artifact 🚀
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Mac
           path: ./build/mac/Pixelorama.dmg
