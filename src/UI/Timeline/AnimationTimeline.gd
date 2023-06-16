@@ -198,13 +198,7 @@ func add_frame() -> void:
 
 
 func _on_DeleteFrame_pressed() -> void:
-	var indices := []
-	for cel in Global.current_project.selected_cels:
-		var f: int = cel[0]
-		if not f in indices:
-			indices.append(f)
-	indices.sort()
-	delete_frames(indices)
+	delete_frames()
 
 
 func delete_frames(indices := []) -> void:
@@ -212,10 +206,15 @@ func delete_frames(indices := []) -> void:
 	if project.frames.size() == 1:
 		return
 
+	if indices.size() == 0:
+		for cel in Global.current_project.selected_cels:
+			var f: int = cel[0]
+			if not f in indices:
+				indices.append(f)
+		indices.sort()
+
 	if indices.size() == project.frames.size():
 		indices.remove(indices.size() - 1)  # Ensure the project has at least 1 frame
-	elif indices.size() == 0:
-		indices.append(project.current_frame)
 
 	var current_frame: int = min(project.current_frame, project.frames.size() - indices.size() - 1)
 	var frames := []
@@ -269,20 +268,18 @@ func delete_frames(indices := []) -> void:
 
 
 func _on_CopyFrame_pressed() -> void:
-	var indices := []
-	for cel in Global.current_project.selected_cels:
-		var f: int = cel[0]
-		if not f in indices:
-			indices.append(f)
-	indices.sort()
-	copy_frames(indices)
+	copy_frames()
 
 
 func copy_frames(indices := [], destination := -1) -> void:
 	var project: Project = Global.current_project
 
 	if indices.size() == 0:
-		indices.append(project.current_frame)
+		for cel in Global.current_project.selected_cels:
+			var f: int = cel[0]
+			if not f in indices:
+				indices.append(f)
+		indices.sort()
 
 	var copied_frames := []
 	var copied_indices := []  # the indices of newly copied frames

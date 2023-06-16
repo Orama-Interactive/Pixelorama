@@ -63,7 +63,7 @@ func _button_pressed() -> void:
 		pressed = !pressed
 	elif Input.is_action_just_released("middle_mouse"):
 		pressed = !pressed
-		Global.animation_timeline.delete_frames([frame])
+		Global.animation_timeline.delete_frames()
 	else:  # An example of this would be Space
 		pressed = !pressed
 
@@ -71,9 +71,9 @@ func _button_pressed() -> void:
 func _on_PopupMenu_id_pressed(id: int) -> void:
 	match id:
 		0:  # Remove Frame
-			Global.animation_timeline.delete_frames([frame])
+			Global.animation_timeline.delete_frames()
 		1:  # Clone Frame
-			Global.animation_timeline.copy_frames([frame])
+			Global.animation_timeline.copy_frames()
 		2:  # Move Left
 			change_frame_order(-1)
 		3:  # Move Right
@@ -86,7 +86,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 
 func change_frame_order(rate: int) -> void:
-	var change = frame + rate
+	var change := frame + rate
 	var project = Global.current_project
 
 	project.undo_redo.create_action("Change Frame Order")
@@ -104,7 +104,7 @@ func change_frame_order(rate: int) -> void:
 	project.undo_redo.commit_action()
 
 
-func get_drag_data(_position) -> Array:
+func get_drag_data(_position: Vector2) -> Array:
 	var button := Button.new()
 	button.rect_size = rect_size
 	button.theme = Global.control.theme
@@ -114,7 +114,7 @@ func get_drag_data(_position) -> Array:
 	return ["Frame", frame]
 
 
-func can_drop_data(_pos, data) -> bool:
+func can_drop_data(_pos: Vector2, data) -> bool:
 	if typeof(data) == TYPE_ARRAY:
 		if data[0] == "Frame":
 			if data[1] != frame:  # Can't move to same frame
@@ -136,7 +136,7 @@ func can_drop_data(_pos, data) -> bool:
 	return false
 
 
-func drop_data(_pos, data) -> void:
+func drop_data(_pos: Vector2, data) -> void:
 	var drop_frame = data[1]
 	var project = Global.current_project
 	project.undo_redo.create_action("Change Frame Order")
