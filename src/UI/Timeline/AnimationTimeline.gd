@@ -389,6 +389,22 @@ func _on_MoveRight_pressed() -> void:
 	Global.frame_hbox.get_child(frame).change_frame_order(1)
 
 
+func reverse_frames() -> void:
+	var project = Global.current_project
+	var indices := []
+	for cel in Global.current_project.selected_cels:
+		var f: int = cel[0]
+		if not f in indices:
+			indices.append(f)
+	indices.sort()
+	project.undo_redo.create_action("Change Frame Order")
+	project.undo_redo.add_do_method(project, "reverse_frames", indices)
+	project.undo_redo.add_undo_method(project, "reverse_frames", indices)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.commit_action()
+
+
 func _on_OnionSkinning_pressed() -> void:
 	Global.onion_skinning = !Global.onion_skinning
 	Global.canvas.refresh_onion()

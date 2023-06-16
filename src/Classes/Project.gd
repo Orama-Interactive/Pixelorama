@@ -672,17 +672,7 @@ func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be
 		# Add frame
 		frames.insert(indices[i], new_frames[i])
 		Global.animation_timeline.project_frame_added(indices[i])
-	# Update the frames and frame buttons:
-	for f in frames.size():
-		Global.frame_hbox.get_child(f).frame = f
-		Global.frame_hbox.get_child(f).text = str(f + 1)
-	# Update the cel buttons:
-	for l in layers.size():
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).frame = f
-			cel_hbox.get_child(f).button_setup()
-	_set_timeline_first_and_last_frames()
+	_update_frame_ui()
 
 
 func remove_frames(indices: Array) -> void:  # indices should be in ascending order
@@ -701,17 +691,7 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 		# Remove frame
 		frames.remove(indices[i] - i)
 		Global.animation_timeline.project_frame_removed(indices[i] - i)
-	# Update the frames and frame buttons:
-	for f in frames.size():
-		Global.frame_hbox.get_child(f).frame = f
-		Global.frame_hbox.get_child(f).text = str(f + 1)
-	# Update the cel buttons:
-	for l in layers.size():
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).frame = f
-			cel_hbox.get_child(f).button_setup()
-	_set_timeline_first_and_last_frames()
+	_update_frame_ui()
 
 
 func move_frame(from_index: int, to_index: int) -> void:
@@ -722,17 +702,7 @@ func move_frame(from_index: int, to_index: int) -> void:
 	Global.animation_timeline.project_frame_removed(from_index)
 	frames.insert(to_index, frame)
 	Global.animation_timeline.project_frame_added(to_index)
-	# Update the frames and frame buttons:
-	for f in frames.size():
-		Global.frame_hbox.get_child(f).frame = f
-		Global.frame_hbox.get_child(f).text = str(f + 1)
-	# Update the cel buttons:
-	for l in layers.size():
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).frame = f
-			cel_hbox.get_child(f).button_setup()
-	_set_timeline_first_and_last_frames()
+	_update_frame_ui()
 
 
 func swap_frame(a_index: int, b_index: int) -> void:
@@ -745,6 +715,22 @@ func swap_frame(a_index: int, b_index: int) -> void:
 	Global.animation_timeline.project_frame_added(a_index)
 	Global.animation_timeline.project_frame_removed(b_index)
 	Global.animation_timeline.project_frame_added(b_index)
+	_set_timeline_first_and_last_frames()
+
+
+func reverse_frames(frame_indices: Array) -> void:
+	Global.canvas.selection.transform_content_confirm()
+# warning-ignore:integer_division
+	for i in frame_indices.size() / 2:
+		var index: int = frame_indices[i]
+		var reverse_index: int = frame_indices[-i - 1]
+		var temp: Frame = frames[index]
+		frames[index] = frames[reverse_index]
+		frames[reverse_index] = temp
+		Global.animation_timeline.project_frame_removed(index)
+		Global.animation_timeline.project_frame_added(index)
+		Global.animation_timeline.project_frame_removed(reverse_index)
+		Global.animation_timeline.project_frame_added(reverse_index)
 	_set_timeline_first_and_last_frames()
 
 
@@ -899,3 +885,16 @@ func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:
 	Global.animation_timeline.project_cel_added(a_frame, a_layer)
 	Global.animation_timeline.project_cel_removed(b_frame, b_layer)
 	Global.animation_timeline.project_cel_added(b_frame, b_layer)
+
+
+func _update_frame_ui() -> void:
+	for f in frames.size():  # Update the frames and frame buttons
+		Global.frame_hbox.get_child(f).frame = f
+		Global.frame_hbox.get_child(f).text = str(f + 1)
+
+	for l in layers.size():  # Update the cel buttons
+		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
+		for f in frames.size():
+			cel_hbox.get_child(f).frame = f
+			cel_hbox.get_child(f).button_setup()
+	_set_timeline_first_and_last_frames()
