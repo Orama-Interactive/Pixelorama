@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-06-16 15:39\n"
+"PO-Revision-Date: 2023-06-16 17:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1790,7 +1790,7 @@ msgstr "フレームのプロパティ"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
-msgstr ""
+msgstr "フレームをリバース"
 
 msgid "Layer"
 msgstr "レイヤー"
@@ -2187,7 +2187,7 @@ msgstr "分"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
-msgstr ""
+msgstr "ファイル名にフレームタグを含める"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
@@ -2199,11 +2199,11 @@ msgstr "複数のファイルを作成しますが、各ファイルはフレー
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr ""
+msgstr "区切り文字:"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
-msgstr ""
+msgstr "ファイル名とフレーム番号を区切る文字"
 
 msgid "Close"
 msgstr "閉じる"
