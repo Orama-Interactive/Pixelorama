@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2023-05-18 12:26\n"
+"PO-Revision-Date: 2023-06-16 01:27\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -825,9 +825,6 @@ msgstr ""
 
 msgid "Center:"
 msgstr "Centro:"
-
-msgid "Radius:"
-msgstr "Radiuso:"
 
 msgid "Dithering pattern:"
 msgstr "Ŝablono de punktismo:"
@@ -2125,11 +2122,23 @@ msgid "minute(s)"
 msgstr "minuto(j)"
 
 #. Found in the export dialog.
-msgid "Create new folder for each frame tag"
+msgid "Include frame tags in the file name"
 msgstr ""
 
 #. Found in the export dialog.
+msgid "Create new folder for each frame tag"
+msgstr ""
+
+#. Found in the export dialog, as a hint tooltip of the "Create new folder for each frame tag" button
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
+msgstr ""
+
+#. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
+msgid "Separator character(s):"
+msgstr ""
+
+#. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
+msgid "The character(s) that separate the file name and the frame number"
 msgstr ""
 
 msgid "Close"
@@ -2407,7 +2416,7 @@ msgstr ""
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "Radiuso:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
