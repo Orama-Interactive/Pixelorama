@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-05-19 11:53\n"
+"PO-Revision-Date: 2023-06-16 01:27\n"
 
 msgid "OK"
 msgstr "OK"
@@ -827,9 +827,6 @@ msgstr "Dimensiunea tranziției:"
 
 msgid "Center:"
 msgstr "Centru:"
-
-msgid "Radius:"
-msgstr "Rază:"
 
 msgid "Dithering pattern:"
 msgstr "Model de intercalare a nuanțelor:"
@@ -2185,12 +2182,24 @@ msgid "minute(s)"
 msgstr "minut(e)"
 
 #. Found in the export dialog.
+msgid "Include frame tags in the file name"
+msgstr ""
+
+#. Found in the export dialog.
 msgid "Create new folder for each frame tag"
 msgstr "Creează un dosar nou pentru fiecare etichetă de cadru"
 
-#. Found in the export dialog.
+#. Found in the export dialog, as a hint tooltip of the "Create new folder for each frame tag" button
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 msgstr "Creează mai multe fișiere, dar fiecare fișier este stocat în alt dosar care corespunde cu eticheta de cadru a acestuia"
+
+#. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
+msgid "Separator character(s):"
+msgstr ""
+
+#. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
+msgid "The character(s) that separate the file name and the frame number"
+msgstr ""
 
 msgid "Close"
 msgstr "Închide"
