@@ -70,28 +70,28 @@ func _button_pressed() -> void:
 		pressed = !pressed
 	elif Input.is_action_just_released("middle_mouse"):
 		pressed = !pressed
-		Global.animation_timeline.delete_frames()
+		Global.animation_timeline.delete_frames(_get_frame_indices())
 	else:  # An example of this would be Space
 		pressed = !pressed
 
 
 func _on_PopupMenu_id_pressed(id: int) -> void:
+	var indices := _get_frame_indices()
 	match id:
 		REMOVE:
-			Global.animation_timeline.delete_frames()
+			Global.animation_timeline.delete_frames(indices)
 		CLONE:
-			Global.animation_timeline.copy_frames()
+			Global.animation_timeline.copy_frames(indices)
 		MOVE_LEFT:
 			change_frame_order(-1)
 		MOVE_RIGHT:
 			change_frame_order(1)
 		PROPERTIES:
+			frame_properties.frame_indices = indices
 			frame_properties.popup_centered()
 			Global.dialog_open(true)
-			frame_properties.set_frame_label(frame)
-			frame_properties.set_frame_dur(Global.current_project.frames[frame].duration)
 		REVERSE:
-			Global.animation_timeline.reverse_frames()
+			Global.animation_timeline.reverse_frames(indices)
 
 
 func change_frame_order(rate: int) -> void:
@@ -178,3 +178,15 @@ func _get_region_rect(x_begin: float, x_end: float) -> Rect2:
 	rect.position.x += rect.size.x * x_begin
 	rect.size.x *= x_end - x_begin
 	return rect
+
+
+func _get_frame_indices() -> Array:
+	var indices := []
+	for cel in Global.current_project.selected_cels:
+		var f: int = cel[0]
+		if not f in indices:
+			indices.append(f)
+	indices.sort()
+	if not frame in indices:
+		indices = [frame]
+	return indices

@@ -65,5 +65,6 @@ value = 2.0
 allow_greater = true
 suffix = "x"
 
+[connection signal="about_to_show" from="." to="." method="_on_FrameProperties_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_FrameProperties_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_FrameProperties_popup_hide"]
