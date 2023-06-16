@@ -27,7 +27,6 @@ onready var path_line_edit: LineEdit = $"%PathLineEdit"
 onready var file_line_edit: LineEdit = $"%FileLineEdit"
 onready var file_format_options: OptionButton = $"%FileFormat"
 
-onready var multiple_animations_directories: CheckBox = $"%MultipleAnimationsDirectories"
 onready var options_interpolation: OptionButton = $"%Interpolation"
 
 onready var file_exists_alert_popup: AcceptDialog = $Popups/FileExistsAlert
@@ -64,7 +63,12 @@ func show_tab() -> void:
 		Export.ExportTab.IMAGE:
 			Export.process_animation()
 			get_tree().call_group("ExportImageOptions", "show")
-			multiple_animations_directories.disabled = Export.is_single_file_format()
+			get_tree().set_group(
+				"ExportMultipleFilesOptions", "disabled", Export.is_single_file_format()
+			)
+			get_tree().set_group(
+				"ExportMultipleFilesEditableOptions", "editable", !Export.is_single_file_format()
+			)
 		Export.ExportTab.SPRITESHEET:
 			frame_timer.stop()
 			Export.process_spritesheet()
@@ -348,10 +352,12 @@ func _on_FileFormat_item_selected(idx: int) -> void:
 	var id := file_format_options.get_item_id(idx)
 	Global.current_project.file_format = id
 	if not Export.is_single_file_format():
-		multiple_animations_directories.disabled = false
+		get_tree().set_group("ExportMultipleFilesOptions", "disabled", false)
+		get_tree().set_group("ExportMultipleFilesEditableOptions", "editable", true)
 		frame_timer.stop()
 	else:
-		multiple_animations_directories.disabled = true
+		get_tree().set_group("ExportMultipleFilesOptions", "disabled", true)
+		get_tree().set_group("ExportMultipleFilesEditableOptions", "editable", false)
 	set_preview()
 
 
@@ -390,6 +396,10 @@ func _on_ExportDialog_popup_hide() -> void:
 	frame_timer.stop()
 
 
+func _on_IncludeTagsInFilename_toggled(button_pressed: bool) -> void:
+	Export.include_tag_in_filename = button_pressed
+
+
 func _on_MultipleAnimationsDirectories_toggled(button_pressed: bool) -> void:
 	Export.new_dir_for_each_frame_tag = button_pressed
 
@@ -406,3 +416,7 @@ func _on_Layers_item_selected(id: int) -> void:
 	Export.export_layers = id
 	Export.process_data()
 	set_preview()
+
+
+func _on_SeparatorCharacter_text_changed(new_text: String) -> void:
+	Export.separator_character = new_text

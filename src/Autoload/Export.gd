@@ -28,7 +28,10 @@ var number_of_frames := 1
 var direction: int = AnimationDirection.FORWARD
 var resize := 100
 var interpolation := 0  # Image.Interpolation
+var include_tag_in_filename := false
 var new_dir_for_each_frame_tag := false  # we don't need to store this after export
+var number_of_digits := 4
+var separator_character := "_"
 
 # Export coroutine signal
 var stop_export := false
@@ -47,7 +50,7 @@ func _exit_tree() -> void:
 
 
 func add_file_format(name: String) -> int:
-	var id = FileFormat.size()
+	var id := FileFormat.size()
 	FileFormat.merge({name: id})
 	return id
 
@@ -380,6 +383,7 @@ func create_export_path(multifile: bool, project: Project, frame: int = 0) -> St
 	var path := project.file_name
 	# Only append frame number when there are multiple files exported
 	if multifile:
+		var path_extras := separator_character + String(frame).pad_zeros(number_of_digits)
 		var frame_tag_and_start_id := get_proccessed_image_animation_tag_and_start_id(
 			project, frame - 1
 		)
@@ -391,19 +395,21 @@ func create_export_path(multifile: bool, project: Project, frame: int = 0) -> St
 			var regex := RegEx.new()
 			regex.compile("[^a-zA-Z0-9_]+")
 			var frame_tag_dir := regex.sub(frame_tag, "", true)
+			if include_tag_in_filename:
+				# (frame - start_id + 1) makes frames id to start from 1
+				var tag_frame_number := String(frame - start_id + 1).pad_zeros(number_of_digits)
+				path_extras = (
+					separator_character
+					+ frame_tag_dir
+					+ separator_character
+					+ tag_frame_number
+				)
 			if new_dir_for_each_frame_tag:
-				# Add frame tag if frame has one
-				# (frame - start_id + 1) Makes frames id to start from 1 in each frame tag directory
-				path += "_" + frame_tag_dir + "_" + String(frame - start_id + 1)
+				path += path_extras
 				return project.directory_path.plus_file(frame_tag_dir).plus_file(
 					path + file_format_string(project.file_format)
 				)
-			else:
-				# Add frame tag if frame has one
-				# (frame - start_id + 1) Makes frames id to start from 1 in each frame tag
-				path += "_" + frame_tag_dir + "_" + String(frame - start_id + 1)
-		else:
-			path += "_" + String(frame)
+		path += path_extras
 
 	return project.directory_path.plus_file(path + file_format_string(project.file_format))
 
