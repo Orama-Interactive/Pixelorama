@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2023-06-16 01:27\n"
+"PO-Revision-Date: 2023-06-16 15:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1785,6 +1785,10 @@ msgstr "Propiedades de los Fotogramas"
 
 msgid "Frame properties"
 msgstr "Propiedades de los fotogramas"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
+msgid "Reverse Frames"
+msgstr ""
 
 msgid "Layer"
 msgstr "Capa"
