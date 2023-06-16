@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-06-16 01:27\n"
+"PO-Revision-Date: 2023-06-16 10:42\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -2183,7 +2183,7 @@ msgstr "λεπτό(ά)"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
-msgstr ""
+msgstr "Συμπερίληψη ετικετών καρέ στο όνομα αρχείου"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
@@ -2195,11 +2195,11 @@ msgstr "Δημιουργεί πολλά αρχεία, αλλά κάθε αρχε
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr ""
+msgstr "Διαχωριστικοί χαρακτήρες:"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
-msgstr ""
+msgstr "Οι χαρακτήρες που διαχωρίζουν το όνομα του αρχείου και τον αριθμό του καρέ"
 
 msgid "Close"
 msgstr "Κλείσιμο"
