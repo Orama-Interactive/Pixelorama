@@ -732,6 +732,7 @@ func reverse_frames(frame_indices: Array) -> void:
 		Global.animation_timeline.project_frame_removed(reverse_index)
 		Global.animation_timeline.project_frame_added(reverse_index)
 	_set_timeline_first_and_last_frames()
+	change_cel(-1)
 
 
 func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels is 2d Array of cels
