@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-06-02 08:56\n"
+"PO-Revision-Date: 2023-06-16 01:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -827,9 +827,6 @@ msgstr "Taille de transition :"
 
 msgid "Center:"
 msgstr "Centre :"
-
-msgid "Radius:"
-msgstr "Rayon :"
 
 msgid "Dithering pattern:"
 msgstr "Motif de Tramage:"
@@ -2185,12 +2182,24 @@ msgid "minute(s)"
 msgstr "minute(s)"
 
 #. Found in the export dialog.
+msgid "Include frame tags in the file name"
+msgstr ""
+
+#. Found in the export dialog.
 msgid "Create new folder for each frame tag"
 msgstr "Créer un nouveau dossier pour chaque tag de frame"
 
-#. Found in the export dialog.
+#. Found in the export dialog, as a hint tooltip of the "Create new folder for each frame tag" button
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 msgstr "Créé plusieurs fichiers, mais chaque fichier est stocké dans le dossier correspondant à leurs tags de frame"
+
+#. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
+msgid "Separator character(s):"
+msgstr ""
+
+#. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
+msgid "The character(s) that separate the file name and the frame number"
+msgstr ""
 
 msgid "Close"
 msgstr "Fermer"
