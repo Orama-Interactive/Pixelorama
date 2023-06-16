@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-06-16 01:27\n"
+"PO-Revision-Date: 2023-06-16 02:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2183,7 +2183,7 @@ msgstr "minuto(i)"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
-msgstr ""
+msgstr "Includi le etichette dei quadri nel nome del file"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
@@ -2195,11 +2195,11 @@ msgstr "Crea file multipli, ma ogni file viene memorizzato in cartelle diverse c
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr ""
+msgstr "Carattere(i) separatore(i):"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
-msgstr ""
+msgstr "I caratteri che separano il nome del file e il numero di fotogramma"
 
 msgid "Close"
 msgstr "Chiudi"
