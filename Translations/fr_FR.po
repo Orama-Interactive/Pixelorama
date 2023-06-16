@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-06-16 01:26\n"
+"PO-Revision-Date: 2023-06-16 07:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2183,7 +2183,7 @@ msgstr "minute(s)"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
-msgstr ""
+msgstr "Inclure les tags de frame dans le nom du fichier"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
@@ -2195,11 +2195,11 @@ msgstr "Créé plusieurs fichiers, mais chaque fichier est stocké dans le dossi
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr ""
+msgstr "Caractère(s) de séparation :"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
-msgstr ""
+msgstr "Le ou les caractères qui séparent le nom du fichier et le numéro de frame"
 
 msgid "Close"
 msgstr "Fermer"
