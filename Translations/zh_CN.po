@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-06-16 01:27\n"
+"PO-Revision-Date: 2023-06-16 15:39\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1787,6 +1787,10 @@ msgstr "帧属性"
 
 msgid "Frame properties"
 msgstr "帧属性"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
+msgid "Reverse Frames"
+msgstr ""
 
 msgid "Layer"
 msgstr "图层"
