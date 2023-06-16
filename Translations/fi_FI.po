@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Finnish\n"
 "Language: fi_FI\n"
-"PO-Revision-Date: 2023-06-16 01:27\n"
+"PO-Revision-Date: 2023-06-16 15:39\n"
 
 msgid "OK"
 msgstr ""
@@ -1725,6 +1725,10 @@ msgid "Frame Properties"
 msgstr ""
 
 msgid "Frame properties"
+msgstr ""
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
+msgid "Reverse Frames"
 msgstr ""
 
 msgid "Layer"
