@@ -743,15 +743,7 @@ func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels
 			frames[f].cels.insert(indices[i], cels[i][f])
 		new_layers[i].project = self
 		Global.animation_timeline.project_layer_added(indices[i])
-	# Update the layer indices and layer/cel buttons:
-	for l in layers.size():
-		layers[l].index = l
-		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).layer = l
-			cel_hbox.get_child(f).button_setup()
-	toggle_layer_buttons()
+	_update_layer_ui()
 
 
 func remove_layers(indices: Array) -> void:
@@ -764,15 +756,7 @@ func remove_layers(indices: Array) -> void:
 			frame.cels[indices[i] - i].on_remove()
 			frame.cels.remove(indices[i] - i)
 		Global.animation_timeline.project_layer_removed(indices[i] - i)
-	# Update the layer indices and layer/cel buttons:
-	for l in layers.size():
-		layers[l].index = l
-		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).layer = l
-			cel_hbox.get_child(f).button_setup()
-	toggle_layer_buttons()
+	_update_layer_ui()
 
 
 # from_indices and to_indicies should be in ascending order
@@ -795,15 +779,7 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 		for f in frames.size():
 			frames[f].cels.insert(to_indices[i], removed_cels[i][f])
 		Global.animation_timeline.project_layer_added(to_indices[i])
-	# Update the layer indices and layer/cel buttons:
-	for l in layers.size():
-		layers[l].index = l
-		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).layer = l
-			cel_hbox.get_child(f).button_setup()
-	toggle_layer_buttons()
+	_update_layer_ui()
 
 
 # "a" and "b" should both contain "from", "to", and "to_parents" arrays.
@@ -842,16 +818,7 @@ func swap_layers(a: Dictionary, b: Dictionary) -> void:
 		for f in frames.size():
 			frames[f].cels.insert(b.to[i], b_cels[i][f])
 		Global.animation_timeline.project_layer_added(b.to[i])
-
-	# Update the layer indices and layer/cel buttons:
-	for l in layers.size():
-		layers[l].index = l
-		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).layer = l
-			cel_hbox.get_child(f).button_setup()
-	toggle_layer_buttons()
+	_update_layer_ui()
 
 
 func move_cel(from_frame: int, to_frame: int, layer: int) -> void:
@@ -898,3 +865,15 @@ func _update_frame_ui() -> void:
 			cel_hbox.get_child(f).frame = f
 			cel_hbox.get_child(f).button_setup()
 	_set_timeline_first_and_last_frames()
+
+
+## Update the layer indices and layer/cel buttons
+func _update_layer_ui() -> void:
+	for l in layers.size():
+		layers[l].index = l
+		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
+		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
+		for f in frames.size():
+			cel_hbox.get_child(f).layer = l
+			cel_hbox.get_child(f).button_setup()
+	toggle_layer_buttons()
