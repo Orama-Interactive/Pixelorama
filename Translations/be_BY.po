@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2023-06-17 10:17\n"
+"PO-Revision-Date: 2023-06-17 11:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -866,11 +866,11 @@ msgstr "Крокі:"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "Пастэрызацыя"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "Узроўні пастэрызацыі:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
@@ -910,7 +910,7 @@ msgid "GitHub Repo"
 msgstr "Рэпазіторый GitHub"
 
 msgid "Donate"
-msgstr ""
+msgstr "Падтрымаць грашыма"
 
 msgid "Developers"
 msgstr "Распрацоўшчыкі"
@@ -1045,13 +1045,13 @@ msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Вы сапраўды хочаце выйсці з Pixelorama?"
 
 msgid "Unsaved Image"
-msgstr ""
+msgstr "Незахаваная выява"
 
 msgid "You have unsaved changes. If you proceed, the progress you have made will be lost."
-msgstr ""
+msgstr "У вас ёсць незахаваныя змены. Калі працягнуць, яны будуць загубленыя."
 
 msgid "Save before exiting?"
-msgstr ""
+msgstr "Захаваць перад выхадам?"
 
 msgid "You have unsaved progress. How do you wish to proceed?"
 msgstr "Ёсць незапісаныя змены. Працягнуць?"
@@ -1299,7 +1299,7 @@ msgid "Show at zoom:"
 msgstr "Паказваць на маштабе:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Указвае мінімальны маштаб, на якім бачна піксельную сетку"
 
 msgid "Pixel grid color:"
 msgstr ""
@@ -1550,13 +1550,13 @@ msgid "Right Color"
 msgstr ""
 
 msgid "Mode:"
-msgstr ""
+msgstr "Рэжым:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Павялічыць"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Зменшыць"
 
 msgid "Options:"
 msgstr ""
@@ -1565,7 +1565,7 @@ msgid "Fit to frame"
 msgstr ""
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "Маштаб 100%"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
@@ -1907,16 +1907,16 @@ msgid "Move Guide"
 msgstr "Перасунуць кіроўную"
 
 msgid "File saved"
-msgstr ""
+msgstr "Файл захаваны"
 
 msgid "File autosaved"
-msgstr ""
+msgstr "Файл аўтаматычна захаваны"
 
 msgid "File failed to open. Error code %s"
 msgstr ""
 
 msgid "File failed to save. Error code %s"
-msgstr ""
+msgstr "Не атрымалася захаваць файл. Код памылкі %s"
 
 msgid "File(s) exported"
 msgstr ""
@@ -2048,7 +2048,7 @@ msgid "Move"
 msgstr ""
 
 msgid "Zoom"
-msgstr ""
+msgstr "Маштаб"
 
 msgid "Pan"
 msgstr ""
@@ -2123,13 +2123,13 @@ msgid "Opens last opened project on startup"
 msgstr ""
 
 msgid "Quit confirmation"
-msgstr ""
+msgstr "Пацвярджэнне выхаду"
 
 msgid "Enable autosave"
-msgstr ""
+msgstr "Дазволіць аўтазахаванне"
 
 msgid "Autosave interval:"
-msgstr ""
+msgstr "Інтэрвал аўтазахавання:"
 
 msgid "minute(s)"
 msgstr ""
