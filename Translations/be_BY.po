@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2023-06-16 15:38\n"
+"PO-Revision-Date: 2023-06-17 10:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -220,7 +220,7 @@ msgid "Y-basis y:"
 msgstr ""
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Тайлавая маска"
 
 msgid "Reset"
 msgstr "Скід"
@@ -298,27 +298,27 @@ msgid "Show Rulers"
 msgstr "Паказваць лінейкі"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Паказваць кіроўныя"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Паказваць кіроўныя мышы"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Прыцяжвацца да"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid"
-msgstr ""
+msgstr "Прыцяжэнне да прамакутнай сеткі"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Прыцяжэнне да кіроўных"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Прыцяжэнне да кіроўных перспектывы"
 
 msgid "Show Animation Timeline"
 msgstr ""
@@ -478,7 +478,7 @@ msgid "Browse"
 msgstr "Агляд"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Змена памеру:"
 
 msgid "Cancel Export"
 msgstr "Скасаваць экспарт"
@@ -520,7 +520,7 @@ msgstr "Групавы шар:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "3D-слой:"
 
 msgid "Direction:"
 msgstr "Напрамак:"
@@ -548,13 +548,13 @@ msgstr "Радкі:"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Памеры экспарту:"
 
 msgid "Path:"
 msgstr "Шлях:"
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Дырэкторыі і файлы:"
 
 msgid "Create Folder"
 msgstr "Стварыць папку"
@@ -567,22 +567,22 @@ msgid "Advanced options"
 msgstr ""
 
 msgid "Interpolation:"
-msgstr ""
+msgstr "Інтэрпаляцыя:"
 
 msgid "Nearest"
-msgstr ""
+msgstr "Найбліжэйшая"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Білінейная"
 
 msgid "Cubic"
-msgstr ""
+msgstr "Кубічныя"
 
 msgid "Trilinear"
-msgstr ""
+msgstr "Трылінейная"
 
 msgid "Constant"
-msgstr ""
+msgstr "Канстанта"
 
 msgid "General"
 msgstr "Агульнае"
@@ -606,20 +606,20 @@ msgid "Selection"
 msgstr "Вылучэнне"
 
 msgid "Shortcuts"
-msgstr ""
+msgstr "Спалучэнні клавіш"
 
 msgid "Backup"
-msgstr ""
+msgstr "Рэзервовае капіраванне"
 
 msgid "Performance"
-msgstr ""
+msgstr "Хуткадзеянне"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
 msgstr "Драйверы"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Пашырэнні"
 
 msgid "Cursors"
 msgstr "Курсоры"
@@ -629,19 +629,19 @@ msgstr "Індыкатары"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Для таго, каб дастасаваць змены, патрэбна перазагрузіць Pixelorama."
 
 msgid "On"
 msgstr "Укл."
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Павярнуць стандартнае"
 
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Плаўны маштаб"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Дадае плаўны пераход падчас змены маштабу"
 
 msgid "Tablet pressure sensitivity:"
 msgstr ""
@@ -656,13 +656,13 @@ msgid "Color:"
 msgstr "Колер:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Колер кіроўнай:"
 
 msgid "System Language"
 msgstr "Мова сістэмы"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Экранны маштаб:"
 
 msgid "Dim interface on dialog popup"
 msgstr ""
@@ -731,10 +731,10 @@ msgid "Current cel"
 msgstr "Бягучы кель"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Бягучы кадр"
 
 msgid "All frames"
-msgstr ""
+msgstr "Усе кадры"
 
 msgid "All projects"
 msgstr "Усе праекты"
@@ -761,7 +761,7 @@ msgid "Outline"
 msgstr ""
 
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Цень"
 
 msgid "Offset X:"
 msgstr "Зрух па X:"
@@ -1226,25 +1226,25 @@ msgid "Use cross cursor for the canvas"
 msgstr ""
 
 msgid "Guides"
-msgstr ""
+msgstr "Кіроўныя"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Колер кіроўных:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Колер кіроўных лінеек на палатне"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "Прыцяжэнне"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "Адлегласць прыцяжэння:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Гэта адлегласць у пікселях, на якой уключаецца прыцяжэнне да кіроўнай."
 
 msgid "Grid"
 msgstr "Сетка"
@@ -1281,7 +1281,7 @@ msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
 msgstr ""
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Маляваць паверх бясшоўнага рэжыму:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
@@ -1296,7 +1296,7 @@ msgid "Pixel Grid"
 msgstr ""
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Паказваць на маштабе:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr ""
@@ -1786,7 +1786,7 @@ msgid "Opacity:"
 msgstr ""
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Непразрыстасць бясшоўнага рэжыму:"
 
 msgid "Toggle layer's visibility"
 msgstr ""
@@ -1904,7 +1904,7 @@ msgid "Redo: Change frame duration"
 msgstr ""
 
 msgid "Move Guide"
-msgstr ""
+msgstr "Перасунуць кіроўную"
 
 msgid "File saved"
 msgstr ""
@@ -2195,13 +2195,13 @@ msgid "Duration"
 msgstr ""
 
 msgid "Tiled In Both Axis"
-msgstr ""
+msgstr "Паўтор па абодвух восях"
 
 msgid "Tiled In X Axis"
-msgstr ""
+msgstr "Паўтор па восі X"
 
 msgid "Tiled In Y Axis"
-msgstr ""
+msgstr "Паўтор па восі Y"
 
 msgid "Create a new palette"
 msgstr ""
