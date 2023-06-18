@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v0.11.1] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@20kdc](https://github.com/20kdc)
+
+Built using Godot 3.5.2
+
+### Added
+- Fast way to clone frames of a tag. [#861](https://github.com/Orama-Interactive/Pixelorama/pull/861)
+- Added a reverse frames option on the right click menu of the frame buttons, to easily reverse the order of the selected frames.
+- It is now possible to disable saving frames that have a tag to a different folder, as well as specifying a separator character in the file names.
+
+### Changed
+- The cel opacity slider now affects all of the selected cels. [#865](https://github.com/Orama-Interactive/Pixelorama/pull/865)
+- The right click menu of the frame buttons now works for all selected frames, besides "move left" and "move right".
+- The canvas is automatically enlarged when importing an image of a larger size to the project.
+- Newly cloned frames are now automatically selected. [#861](https://github.com/Orama-Interactive/Pixelorama/pull/861)
+- The image menu has been re-arranged. [#878](https://github.com/Orama-Interactive/Pixelorama/pull/878)
+- The "OK" button of the save and export dialogs are now named "Save" and "Export" respectively. [#876](https://github.com/Orama-Interactive/Pixelorama/pull/876)
+
 ## [v0.11] - 2023-06-13
 This update has been brought to you by the contributions of:
 [@mrtripie](https://github.com/mrtripie), Martin Novák ([@novhack](https://github.com/novhack)), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@20kdc](https://github.com/20kdc), Arron Washington ([@radicaled](https://github.com/radicaled)), Christos Tsoychlakis ([@ChrisTs8920](https://github.com/ChrisTs8920))
