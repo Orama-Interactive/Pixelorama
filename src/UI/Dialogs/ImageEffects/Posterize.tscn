@@ -9,19 +9,23 @@ window_title = "Posterize"
 script = ExtResource( 3 )
 
 [node name="VBoxContainer" parent="." index="3"]
-margin_bottom = 292.0
+margin_bottom = 316.0
 
-[node name="AspectRatioContainer" parent="VBoxContainer" index="0"]
-margin_right = 278.0
+[node name="ShowAnimate" parent="VBoxContainer" index="0"]
+visible = false
+
+[node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
+margin_bottom = 224.0
 
 [node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-margin_left = 39.0
-margin_right = 239.0
+margin_left = 80.0
+margin_right = 280.0
+margin_bottom = 200.0
 
-[node name="LevelsSlider" type="TextureProgress" parent="VBoxContainer" index="1"]
-margin_top = 204.0
-margin_right = 278.0
-margin_bottom = 228.0
+[node name="LevelsSlider" type="TextureProgress" parent="VBoxContainer" index="2"]
+margin_top = 228.0
+margin_right = 360.0
+margin_bottom = 252.0
 rect_min_size = Vector2( 0, 24 )
 mouse_default_cursor_shape = 2
 theme_type_variation = "ValueSlider"
@@ -38,10 +42,10 @@ script = ExtResource( 2 )
 prefix = "Posterize levels:"
 snap_by_default = true
 
-[node name="DitherSlider" type="TextureProgress" parent="VBoxContainer" index="2"]
-margin_top = 232.0
-margin_right = 278.0
-margin_bottom = 256.0
+[node name="DitherSlider" type="TextureProgress" parent="VBoxContainer" index="3"]
+margin_top = 256.0
+margin_right = 360.0
+margin_bottom = 280.0
 rect_min_size = Vector2( 0, 24 )
 mouse_default_cursor_shape = 2
 theme_type_variation = "ValueSlider"
@@ -56,28 +60,15 @@ script = ExtResource( 2 )
 prefix = "Dither intensity:"
 snap_step = 0.1
 
-[node name="OptionsContainer" parent="VBoxContainer" index="3"]
-margin_top = 260.0
-margin_right = 278.0
-margin_bottom = 284.0
+[node name="OptionsContainer" parent="VBoxContainer" index="4"]
+margin_top = 284.0
+margin_bottom = 308.0
 
 [node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
-margin_right = 278.0
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 
-[node name="AnimationOptions" parent="VBoxContainer" index="4"]
-visible = false
-margin_right = 278.0
-
-[node name="PanelContainer" parent="VBoxContainer/AnimationOptions" index="1"]
-margin_right = 157.0
-
-[node name="AnimateMenu" parent="VBoxContainer/AnimationOptions/PanelContainer" index="0"]
-margin_right = 88.0
-
-[node name="InitalButton" parent="VBoxContainer/AnimationOptions" index="2"]
-margin_left = 161.0
-margin_right = 278.0
+[node name="AnimateDialog" parent="." index="4"]
+margin_bottom = 316.0
 
 [connection signal="value_changed" from="VBoxContainer/LevelsSlider" to="." method="_on_LevelsSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/DitherSlider" to="." method="_on_DitherSlider_value_changed"]

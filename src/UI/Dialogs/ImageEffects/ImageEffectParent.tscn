@@ -1,31 +1,53 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://src/UI/Nodes/AnimatePanel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Classes/ImageEffect.gd" type="Script" id=3]
+[ext_resource path="res://assets/graphics/misc/Animate.png" type="Texture" id=4]
 
 [node name="ImageEffectParent" type="ConfirmationDialog"]
 margin_right = 294.0
-margin_bottom = 296.0
+margin_bottom = 334.0
 rect_min_size = Vector2( 172, 60.2 )
 resizable = true
+script = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 286.0
-margin_bottom = 260.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_right = 368.0
+margin_bottom = 298.0
+
+[node name="ShowAnimate" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+margin_left = 340.0
+margin_right = 360.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+size_flags_horizontal = 8
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ShowAnimate"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_right = 279.0
-margin_bottom = 200.0
+margin_top = 24.0
+margin_right = 360.0
+margin_bottom = 262.0
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 39.5
-margin_right = 239.5
-margin_bottom = 200.0
+margin_left = 61.0
+margin_right = 299.0
+margin_bottom = 238.0
 rect_min_size = Vector2( 200, 200 )
 expand = true
 stretch_mode = 5
@@ -38,12 +60,12 @@ margin_right = 0.0
 margin_bottom = 0.0
 
 [node name="OptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 204.0
-margin_right = 279.0
-margin_bottom = 228.0
+margin_top = 266.0
+margin_right = 360.0
+margin_bottom = 290.0
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
-margin_right = 160.0
+margin_right = 178.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -51,8 +73,8 @@ pressed = true
 text = "Only affect selection"
 
 [node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 164.0
-margin_right = 279.0
+margin_left = 182.0
+margin_right = 360.0
 margin_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -60,36 +82,16 @@ text = "Selected cels"
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 selected = 0
 
-[node name="AnimationOptions" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 232.0
-margin_right = 279.0
-margin_bottom = 266.0
+[node name="AnimateDialog" type="Popup" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 368.0
+margin_bottom = 298.0
+rect_min_size = Vector2( 360, 270 )
 
-[node name="Label" type="Label" parent="VBoxContainer/AnimationOptions"]
-margin_top = 10.0
-margin_right = 58.0
-margin_bottom = 24.0
-text = "Animate:"
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/AnimationOptions"]
-margin_left = 62.0
-margin_right = 158.0
-margin_bottom = 34.0
-size_flags_horizontal = 3
-
-[node name="AnimateMenu" type="MenuButton" parent="VBoxContainer/AnimationOptions/PanelContainer"]
+[node name="AnimatePanel" parent="AnimateDialog" instance=ExtResource( 1 )]
 unique_name_in_owner = true
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 89.0
-margin_bottom = 27.0
-focus_mode = 2
-text = "Properties"
-flat = false
-
-[node name="InitalButton" type="Button" parent="VBoxContainer/AnimationOptions"]
-unique_name_in_owner = true
-margin_left = 162.0
-margin_right = 279.0
-margin_bottom = 34.0
-text = "Set initial values"
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0

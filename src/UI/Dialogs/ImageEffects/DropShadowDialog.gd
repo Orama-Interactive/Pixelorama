@@ -15,23 +15,19 @@ func _ready() -> void:
 	sm.shader = shader
 	preview.set_material(sm)
 
-
-func set_animate_menu(_elements) -> void:
 	# set as in enum
-	animate_menu.add_check_item("Offset X", Animate.OFFSET_X)
-	animate_menu.add_check_item("Offset Y", Animate.OFFSET_Y)
-	.set_animate_menu(Animate.size())
-
-
-func set_initial_values() -> void:
-	initial_values[Animate.OFFSET_X] = offset.x
-	initial_values[Animate.OFFSET_Y] = offset.y
+	animate_panel.add_float_property(
+		"Offset X", $VBoxContainer/ShadowOptions/OffsetSliders.find_node("X")
+		)
+	animate_panel.add_float_property(
+		"Offset Y", $VBoxContainer/ShadowOptions/OffsetSliders.find_node("Y")
+		)
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	.commit_action(cel, project)
-	var offset_x = get_animated_value(project, offset.x, Animate.OFFSET_X)
-	var offset_y = get_animated_value(project, offset.y, Animate.OFFSET_Y)
+	var offset_x = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.OFFSET_X]
+	var offset_y = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.OFFSET_Y]
+	.commit_action(cel, project)  # always do this once youv'e called all the "get_animated_values"
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
 		selection_tex.create_from_image(project.selection_map, 0)

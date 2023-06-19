@@ -12,6 +12,10 @@ func _ready() -> void:
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
 	preview.set_material(sm)
+	# set as in enum
+	animate_panel.add_float_property("Hue", hue_slider)
+	animate_panel.add_float_property("Saturation", sat_slider)
+	animate_panel.add_float_property("Value", val_slider)
 
 
 func _about_to_show() -> void:
@@ -19,25 +23,11 @@ func _about_to_show() -> void:
 	._about_to_show()
 
 
-func set_animate_menu(_elements) -> void:
-	# set as in enum
-	animate_menu.add_check_item("Hue", Animate.HUE)
-	animate_menu.add_check_item("Saturation", Animate.SATURATION)
-	animate_menu.add_check_item("Value", Animate.VALUE)
-	.set_animate_menu(Animate.size())
-
-
-func set_initial_values() -> void:
-	initial_values[Animate.HUE] = hue_slider.value
-	initial_values[Animate.SATURATION] = sat_slider.value
-	initial_values[Animate.VALUE] = val_slider.value
-
-
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	.commit_action(cel, project)
-	var hue = get_animated_value(project, hue_slider.value / 360, Animate.HUE)
-	var sat = get_animated_value(project, sat_slider.value / 360, Animate.SATURATION)
-	var val = get_animated_value(project, val_slider.value / 360, Animate.VALUE)
+	var hue = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.HUE]
+	var sat = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.SATURATION]
+	var val = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.VALUE]
+	.commit_action(cel, project)  # always do this once youv'e called all the "get_animated_values"
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
 		selection_tex.create_from_image(project.selection_map, 0)

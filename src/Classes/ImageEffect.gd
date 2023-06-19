@@ -13,11 +13,7 @@ var preview_texture := ImageTexture.new()
 var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
-var animate_options_container: Node
-var animate_menu: PopupMenu
-var initial_button: Button
-var animate_bool := []
-var initial_values: PoolRealArray = []
+var animate_panel: AnimatePanel
 var selected_idx: int = 0  # the current selected cel to apply animation to
 var confirmed := false
 
@@ -39,14 +35,12 @@ func _ready() -> void:
 		selection_checkbox.connect("toggled", self, "_on_SelectionCheckBox_toggled")
 	if affect_option_button:
 		affect_option_button.connect("item_selected", self, "_on_AffectOptionButton_item_selected")
-	if animate_menu:
-		set_animate_menu(0)
-		animate_menu.connect("id_pressed", self, "_update_animate_flags")
-	if initial_button:
-		initial_button.connect("pressed", self, "set_initial_values")
+	if animate_panel:
+		$"%ShowAnimate".connect("pressed", self, "display_animate_dialog")
 
 
 func _about_to_show() -> void:
+	selected_idx = 0
 	confirmed = false
 	Global.canvas.selection.transform_content_confirm()
 	var frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
@@ -125,35 +119,14 @@ func set_nodes() -> void:
 	preview = $VBoxContainer/AspectRatioContainer/Preview
 	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
-	animate_options_container = $VBoxContainer/AnimationOptions
-	animate_menu = $"%AnimateMenu".get_popup()
-	initial_button = $"%InitalButton"
+	animate_panel = $"%AnimatePanel"
 
 
-func set_animate_menu(elements: int) -> void:
-	initial_values.resize(elements)
-	initial_values.fill(0)
-	animate_bool.resize(elements)
-	animate_bool.fill(false)
-
-
-func set_initial_values() -> void:
-	pass
-
-
-func get_animated_value(project: Project, final: float, property_idx: int) -> float:
-	if animate_bool[property_idx] == true and confirmed:
-		var first := initial_values[property_idx]
-		var interpolation := float(selected_idx) / project.selected_cels.size()
-		return lerp(first, final, interpolation)
-	else:
-		return final
-
-
-func _update_animate_flags(id: int) -> void:
-	animate_bool[id] = !animate_bool[id]
-	animate_menu.set_item_checked(id, animate_bool[id])
-
+func display_animate_dialog():
+	var animate_dialog: Popup = animate_panel.get_parent()
+	var pos = Vector2(rect_global_position.x + rect_size.x, rect_global_position.y)
+	var animate_dialog_rect := Rect2(pos, rect_size)
+	animate_dialog.popup(animate_dialog_rect)
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
 	var redo_data := _get_undo_data(project)
@@ -198,7 +171,7 @@ func _on_SelectionCheckBox_toggled(_button_pressed: bool) -> void:
 
 func _on_AffectOptionButton_item_selected(index: int) -> void:
 	affect = index
-	animate_options_container.visible = bool(affect == SELECTED_CELS)
+	$"%ShowAnimate".visible = bool(affect == SELECTED_CELS and animate_panel.properties.size() != 0)
 	update_preview()
 
 

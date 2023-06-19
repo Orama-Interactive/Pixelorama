@@ -5,36 +5,49 @@
 [ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=3]
 
 [node name="HSVDialog" instance=ExtResource( 2 )]
+visible = false
 window_title = "Adjust HSV"
 script = ExtResource( 1 )
 
 [node name="VBoxContainer" parent="." index="3"]
 margin_bottom = 344.0
 
-[node name="HueSlider" parent="VBoxContainer" index="1" instance=ExtResource( 3 )]
-margin_top = 232.0
-margin_right = 332.0
-margin_bottom = 256.0
+[node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
+margin_bottom = 224.0
+
+[node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
+margin_left = 80.0
+margin_right = 280.0
+margin_bottom = 200.0
+
+[node name="HueSlider" parent="VBoxContainer" index="2" instance=ExtResource( 3 )]
+margin_top = 228.0
+margin_right = 360.0
+margin_bottom = 252.0
 min_value = -180.0
 max_value = 180.0
 prefix = "Hue:"
 
-[node name="SaturationSlider" parent="VBoxContainer" index="2" instance=ExtResource( 3 )]
-margin_top = 260.0
-margin_right = 332.0
-margin_bottom = 284.0
+[node name="SaturationSlider" parent="VBoxContainer" index="3" instance=ExtResource( 3 )]
+margin_top = 256.0
+margin_right = 360.0
+margin_bottom = 280.0
 min_value = -100.0
 prefix = "Saturation:"
 
-[node name="ValueSlider" parent="VBoxContainer" index="3" instance=ExtResource( 3 )]
-margin_top = 288.0
-margin_right = 332.0
-margin_bottom = 312.0
+[node name="ValueSlider" parent="VBoxContainer" index="4" instance=ExtResource( 3 )]
+margin_top = 284.0
+margin_right = 360.0
+margin_bottom = 308.0
 min_value = -100.0
 prefix = "Value:"
 
-[node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
-items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
+[node name="OptionsContainer" parent="VBoxContainer" index="5"]
+margin_top = 312.0
+margin_bottom = 336.0
+
+[node name="AnimateDialog" parent="." index="4"]
+margin_bottom = 344.0
 
 [connection signal="value_changed" from="VBoxContainer/HueSlider" to="." method="_on_HueSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/SaturationSlider" to="." method="_on_SaturationSlider_value_changed"]
