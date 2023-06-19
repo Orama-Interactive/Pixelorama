@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-06-16 15:38\n"
+"PO-Revision-Date: 2023-06-19 18:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1790,7 +1790,7 @@ msgstr "Proprietățile cadrului"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
-msgstr ""
+msgstr "Inversare cadre"
 
 msgid "Layer"
 msgstr "Strat"
