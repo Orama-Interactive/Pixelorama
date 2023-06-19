@@ -55,7 +55,7 @@ margin_right = 40.0
 margin_bottom = 4.0
 size_flags_horizontal = 3
 
-[node name="CanAnimate" type="CheckButton" parent="VBoxContainer/HBoxContainer/Options"]
+[node name="CanAnimate" type="CheckBox" parent="VBoxContainer/HBoxContainer/Options"]
 unique_name_in_owner = true
 margin_left = 108.0
 margin_top = 18.0

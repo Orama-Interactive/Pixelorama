@@ -2,7 +2,7 @@ class_name AnimatePanel
 extends PanelContainer
 
 
-onready var can_animate_button: CheckButton = $"%CanAnimate"
+onready var can_animate_button: CheckBox = $"%CanAnimate"
 onready var property_list: ItemList = $"%PropertyList"
 onready var initial_value: ValueSlider = $"%Initial"
 onready var final_value: ValueSlider = $"%Final"

@@ -128,6 +128,7 @@ func display_animate_dialog():
 	var animate_dialog_rect := Rect2(pos, rect_size)
 	animate_dialog.popup(animate_dialog_rect)
 
+
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
 	var redo_data := _get_undo_data(project)
 	project.undos += 1
