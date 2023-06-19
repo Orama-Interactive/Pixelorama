@@ -24,9 +24,9 @@ func _about_to_show() -> void:
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	var hue = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.HUE]
-	var sat = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.SATURATION]
-	var val = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.VALUE]
+	var hue = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.HUE] / 360
+	var sat = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.SATURATION] / 100
+	var val = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.VALUE] / 100
 	.commit_action(cel, project)  # always do this once youv'e called all the "get_animated_values"
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
