@@ -95,7 +95,6 @@ margin_left = 84.0
 margin_top = 28.0
 margin_right = 242.0
 margin_bottom = 52.0
-editable = false
 
 [node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values"]
 margin_top = 59.0
@@ -132,5 +131,7 @@ clip_text = true
 
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/PropertyList" to="." method="_on_PropertyList_item_selected"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/Options/CanAnimate" to="." method="_on_CanAnimate_toggled"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/Options/Values/Initial" to="." method="_on_Initial_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/Options/Values/Final" to="." method="_on_Final_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/Options/Values/EaseType" to="." method="_on_EaseType_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/Options/Values/TransitionType" to="." method="_on_TransitionType_item_selected"]

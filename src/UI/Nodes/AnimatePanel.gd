@@ -18,9 +18,6 @@ func _ready() -> void:
 
 
 func add_float_property(name: String, property_node: Range):
-	var id = properties.size()
-	property_node.connect("value_changed", self, "_update_final", [id])
-
 	var info = {
 		"range_node": property_node,
 		"can_animate": false,
@@ -30,6 +27,7 @@ func add_float_property(name: String, property_node: Range):
 	}
 	properties.append(info)
 	property_list.add_item(name)
+	property_node.connect("value_changed", self, "_on_range_node_value_changed")
 
 
 func get_animated_values(selected_idx: int, animation_allowed := true) -> Dictionary:
@@ -56,15 +54,17 @@ func get_animated_values(selected_idx: int, animation_allowed := true) -> Dictio
 	return animated
 
 
-func _set_initial_float_value(_value, id: int):
-	if id < properties.size():  # will always be true
-		if id == _current_id:
-			properties[id]["initial_value"] = initial_value.value
+func _on_Initial_value_changed(value):
+	properties[_current_id]["initial_value"] = value
 
 
-func _update_final(_value, id: int) -> void:
-	if id == _current_id:
-		_display_properties(_current_id)
+func _on_Final_value_changed(value: float) -> void:
+	if properties[_current_id]["range_node"].value != value:
+		properties[_current_id]["range_node"].value = value
+
+
+func _on_range_node_value_changed(_value) -> void:
+	_refresh_properties(_current_id)
 
 
 func _on_CanAnimate_toggled(button_pressed: bool) -> void:
@@ -76,10 +76,14 @@ func _on_PropertyList_item_selected(index: int) -> void:
 	if not $"%Options".visible:
 		$"%Options".visible = true
 	$"%Options".visible = true
-	_display_properties(_current_id)
+	_refresh_properties(_current_id)
 
 
-func _display_properties(idx):
+func _refresh_properties(idx):
+	if initial_value.is_connected("value_changed", self, "_on_Initial_value_changed"):
+		initial_value.disconnect("value_changed", self, "_on_Initial_value_changed")
+	if final_value.is_connected("value_changed", self, "_on_Final_value_changed"):
+		final_value.disconnect("value_changed", self, "_on_Final_value_changed")
 	can_animate_button.pressed = properties[idx]["can_animate"]
 	# nodes setup
 	var property_node = properties[idx]["range_node"]
@@ -93,12 +97,12 @@ func _display_properties(idx):
 	initial_value.min_value = property_node.min_value
 	initial_value.step = property_node.step
 
-	if initial_value.is_connected("value_changed", self, "_set_initial_float_value"):
-		initial_value.disconnect("value_changed", self, "_set_initial_float_value")
 	initial_value.value = properties[idx]["initial_value"]
-	initial_value.connect("value_changed", self, "_set_initial_float_value", [idx])
-	final_value.value = properties[idx]["range_node"].value
+	if properties[_current_id]["range_node"].value != final_value.value:
+		final_value.value = properties[idx]["range_node"].value
 	$"%Name".text = property_list.get_item_text(idx)
+	initial_value.connect("value_changed", self, "_on_Initial_value_changed")
+	final_value.connect("value_changed", self, "_on_Final_value_changed")
 
 
 func _populate_ease_type():
