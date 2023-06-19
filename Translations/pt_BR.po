@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-06-16 15:39\n"
+"PO-Revision-Date: 2023-06-19 23:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1789,7 +1789,7 @@ msgstr "Propriedades do quadro"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
-msgstr ""
+msgstr "Inverter Quadros"
 
 msgid "Layer"
 msgstr "Camada"
@@ -2186,7 +2186,7 @@ msgstr "minuto(s)"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
-msgstr ""
+msgstr "Incluir tags do quadro no nome do arquivo"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
@@ -2198,11 +2198,11 @@ msgstr "Cria vários arquivos, mas cada arquivo é armazenado em um diretório d
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr ""
+msgstr "Usar caracter(es) de separação:"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
-msgstr ""
+msgstr "O(s) caractere(s) que separam o nome do arquivo e o número do quadro"
 
 msgid "Close"
 msgstr "Fechar"
