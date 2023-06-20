@@ -7,6 +7,7 @@ onready var property_list: ItemList = $"%PropertyList"
 onready var initial_value: ValueSlider = $"%Initial"
 onready var final_value: ValueSlider = $"%Final"
 
+var frames := []  # set this value before calling "get_animated_values"
 var _current_id: int = 0
 var properties := [] # contains dictionary of properties
 
@@ -30,20 +31,13 @@ func add_float_property(name: String, property_node: Range):
 	property_node.connect("value_changed", self, "_on_range_node_value_changed")
 
 
-func get_animated_values(selected_idx: int, animation_allowed := true) -> Dictionary:
-	var selected_cels = Global.current_project.selected_cels
-	var frames = []
-	for x_y in selected_cels:
-		if not x_y[0] in frames:
-			frames.append(x_y[0])
-	frames.sort()  # To always start animating from left side of the timeline
-
+func get_animated_values(frame_idx: int, animation_allowed := true) -> Dictionary:
 	var animated = {}
 	var tween = SceneTreeTween.new()
 	for property_idx in properties.size():
 		if properties[property_idx]["can_animate"] and animation_allowed and frames.size() > 1:
 			var duration = frames.size() - 1
-			var elapsed = frames.find(selected_cels[selected_idx][0])
+			var elapsed = frames.find(frame_idx)
 			var initial = properties[property_idx]["initial_value"]
 			var delta = properties[property_idx]["range_node"].value - initial
 			var transition_type = properties[property_idx]["transition_type"]

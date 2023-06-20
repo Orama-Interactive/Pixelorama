@@ -14,7 +14,7 @@ var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
 var animate_panel: AnimatePanel
-var selected_idx: int = 0  # the current selected cel to apply animation to
+var frame_idx: int = -1  # the current frame, image effect is applied to
 var confirmed := false
 
 
@@ -40,7 +40,7 @@ func _ready() -> void:
 
 
 func _about_to_show() -> void:
-	selected_idx = 0
+	frame_idx = -1
 	confirmed = false
 	Global.canvas.selection.transform_content_confirm()
 	var frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
@@ -55,10 +55,17 @@ func _about_to_show() -> void:
 
 
 func _confirmed() -> void:
-	selected_idx = 0
 	confirmed = true
+	frame_idx = -1
+	var frames = []
 	var project: Project = Global.current_project
 	if affect == SELECTED_CELS:
+		for fram_layer in project.selected_cels:
+			if not fram_layer[0] in frames:
+				frames.append(fram_layer[0])
+		frames.sort()  # To always start animating from left side of the timeline
+		animate_panel.frames = frames
+
 		var undo_data := _get_undo_data(project)
 		for cel_index in project.selected_cels:
 			if !project.layers[cel_index[1]].can_layer_get_drawn():
@@ -67,12 +74,16 @@ func _confirmed() -> void:
 			if not cel is PixelCel:
 				continue
 			var cel_image: Image = cel.image
+			frame_idx = cel_index[0]  # frame is cel_index[0] in this mode
 			commit_action(cel_image)
 		_commit_undo("Draw", undo_data, project)
 
 	elif affect == FRAME:
 		var undo_data := _get_undo_data(project)
 		var i := 0
+		frames.append(project.current_frame)
+		animate_panel.frames = frames
+		frame_idx = project.current_frame
 		for cel in project.frames[project.current_frame].cels:
 			if not cel is PixelCel:
 				i += 1
@@ -83,9 +94,14 @@ func _confirmed() -> void:
 		_commit_undo("Draw", undo_data, project)
 
 	elif affect == ALL_FRAMES:
+		for i in project.frames.size():
+			frames.append(i)
+		animate_panel.frames = frames
+
 		var undo_data := _get_undo_data(project)
 		for frame in project.frames:
 			var i := 0
+			frame_idx += 1  # frames are simply increasing by 1 in this mode
 			for cel in frame.cels:
 				if not cel is PixelCel:
 					i += 1
@@ -97,9 +113,16 @@ func _confirmed() -> void:
 
 	elif affect == ALL_PROJECTS:
 		for _project in Global.projects:
+			frames.clear()
+			frame_idx = -1
+			for i in _project.frames.size():
+				frames.append(i)
+			animate_panel.frames = frames
+
 			var undo_data := _get_undo_data(_project)
 			for frame in _project.frames:
 				var i := 0
+				frame_idx += 1  # frames are simply increasing by 1 in this mode
 				for cel in frame.cels:
 					if not cel is PixelCel:
 						i += 1
@@ -111,8 +134,7 @@ func _confirmed() -> void:
 
 
 func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
-	if confirmed and affect == SELECTED_CELS:
-		selected_idx += 1
+	pass
 
 
 func set_nodes() -> void:

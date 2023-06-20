@@ -25,9 +25,8 @@ func _ready() -> void:
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	var offset_x = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.OFFSET_X]
-	var offset_y = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.OFFSET_Y]
-	.commit_action(cel, project)  # always do this once youv'e called all the "get_animated_values"
+	var offset_x = animate_panel.get_animated_values(frame_idx, confirmed)[Animate.OFFSET_X]
+	var offset_y = animate_panel.get_animated_values(frame_idx, confirmed)[Animate.OFFSET_Y]
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
 		selection_tex.create_from_image(project.selection_map, 0)

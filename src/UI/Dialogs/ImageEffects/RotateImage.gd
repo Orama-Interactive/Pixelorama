@@ -86,10 +86,9 @@ func _calculate_pivot() -> void:
 
 func commit_action(cel: Image, _project: Project = Global.current_project) -> void:
 	var angle: float = deg2rad(
-		animate_panel.get_animated_values(selected_idx, confirmed)[Animate.ANGLE]
+		animate_panel.get_animated_values(frame_idx, confirmed)[Animate.ANGLE]
 	)
-	var init_angle: float = animate_panel.get_animated_values(selected_idx, confirmed)[Animate.INITIAL_ANGLE]
-	.commit_action(cel, _project)  # always do this once youv'e called all the "get_animated_values"
+	var init_angle: float = animate_panel.get_animated_values(frame_idx, confirmed)[Animate.INITIAL_ANGLE]
 
 	var selection_size := cel.get_size()
 	var selection_tex := ImageTexture.new()

@@ -163,5 +163,5 @@ visible = false
 [connection signal="custom_action" from="Dialogs/QuitAndSaveDialog" to="." method="_on_QuitAndSaveDialog_custom_action"]
 [connection signal="popup_hide" from="Dialogs/QuitAndSaveDialog" to="." method="_can_draw_true"]
 [connection signal="popup_hide" from="Dialogs/ErrorDialog" to="." method="_can_draw_true"]
-[connection signal="popup_hide" from="Dialogs/BackupConfirmation" to="." method="_on_BackupConfirmation_popup_hide"]
 [connection signal="popup_hide" from="Dialogs/BackupConfirmation" to="." method="_can_draw_true"]
+[connection signal="popup_hide" from="Dialogs/BackupConfirmation" to="." method="_on_BackupConfirmation_popup_hide"]
