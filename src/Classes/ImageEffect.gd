@@ -14,9 +14,9 @@ var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
 var animate_panel: AnimatePanel
-var _preview_idx := 0  # the current frame, being previewed
 var commit_idx := -1  # the current frame, image effect is applied to
 var confirmed := false
+var _preview_idx := 0  # the current frame, being previewed
 
 
 func _ready() -> void:

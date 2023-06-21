@@ -9,9 +9,9 @@ onready var preview_slider: TextureProgress = $"%PreviewSlider"
 var image_effect_node: ConfirmationDialog
 
 var frames := []  # Set this value before calling "get_animated_values"
-var _current_id: int = 0  # The property currently selected in "property_list"
 var properties := []  # Contains dictionary of properties
 var resetter_values := []  # Contains the Original properties without any change
+var _current_id: int = 0  # The property currently selected in "property_list"
 
 
 func _ready() -> void:
