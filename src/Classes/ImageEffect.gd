@@ -43,8 +43,7 @@ func _about_to_show() -> void:
 	commit_idx = -1
 	confirmed = false
 	Global.canvas.selection.transform_content_confirm()
-	_set_preview_image(Global.current_project.current_frame)
-	update_preview()
+	_set_and_update_preview_image(Global.current_project.current_frame)
 	update_transparent_background_size()
 
 
@@ -198,7 +197,7 @@ func _on_AffectOptionButton_item_selected(index: int) -> void:
 	update_preview()
 
 
-func _set_preview_image(frame_idx: int):
+func _set_and_update_preview_image(frame_idx: int) -> void:
 	var frame: Frame = Global.current_project.frames[frame_idx]
 	selected_cels.resize(Global.current_project.size.x, Global.current_project.size.y)
 	selected_cels.fill(Color(0, 0, 0, 0))
@@ -206,6 +205,7 @@ func _set_preview_image(frame_idx: int):
 	current_frame.resize(Global.current_project.size.x, Global.current_project.size.y)
 	current_frame.fill(Color(0, 0, 0, 0))
 	Export.blend_all_layers(current_frame, frame)
+	update_preview()
 
 
 func update_preview() -> void:

@@ -6,12 +6,12 @@ onready var can_animate_button: CheckBox = $"%CanAnimate"
 onready var property_list: ItemList = $"%PropertyList"
 onready var initial_value: ValueSlider = $"%Initial"
 onready var final_value: ValueSlider = $"%Final"
-var image_effect_node :ImageEffect
+var image_effect_node :ConfirmationDialog
 
 var frames := []  # Set this value before calling "get_animated_values"
 var _current_id: int = 0  # The property currently selected in "property_list"
 var properties := []  # Contains dictionary of properties
-
+var zero_properties := []  # Contains the Original properties without any change
 
 func _ready() -> void:
 	_populate_ease_type()
@@ -27,25 +27,34 @@ func add_float_property(name: String, property_node: Range):
 		"transition_type": Tween.TRANS_LINEAR,
 		"ease_type": Tween.EASE_IN,
 	}
+	var info_2 = {
+		properties.size(): property_node.value
+	}
 	properties.append(info)
+	zero_properties.append(info_2)
 	property_list.add_item(name)
 	property_node.connect("value_changed", self, "_on_range_node_value_changed")
 
 
 func get_animated_values(frame_idx: int, animation_allowed := true) -> Dictionary:
 	var animated = {}
-	var tween = SceneTreeTween.new()
-	for property_idx in properties.size():
-		if properties[property_idx]["can_animate"] and animation_allowed and frames.size() > 1:
-			var duration = frames.size() - 1
-			var elapsed = frames.find(frame_idx)
-			var initial = properties[property_idx]["initial_value"]
-			var delta = properties[property_idx]["range_node"].value - initial
-			var transition_type = properties[property_idx]["transition_type"]
-			var ease_type = properties[property_idx]["ease_type"]
-			animated[property_idx] = tween.interpolate_value(initial, delta, elapsed, duration, transition_type, ease_type)
-		else:
-			animated[property_idx] = properties[property_idx]["range_node"].value
+	if frame_idx in frames:
+		var tween = SceneTreeTween.new()
+		for property_idx in properties.size():
+			if properties[property_idx]["can_animate"] and animation_allowed and frames.size() > 1:
+				var duration = frames.size() - 1
+				var elapsed = frames.find(frame_idx)
+				var initial = properties[property_idx]["initial_value"]
+				var delta = properties[property_idx]["range_node"].value - initial
+				var transition_type = properties[property_idx]["transition_type"]
+				var ease_type = properties[property_idx]["ease_type"]
+				animated[property_idx] = tween.interpolate_value(initial, delta, elapsed, duration, transition_type, ease_type)
+			else:
+				animated[property_idx] = properties[property_idx]["range_node"].value
+	else:
+		# the frame isn't meant for the effect to be apploed to
+		for property_idx in zero_properties.size():
+			animated[property_idx] = zero_properties[property_idx]
 	return animated
 
 
