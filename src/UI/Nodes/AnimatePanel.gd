@@ -23,9 +23,11 @@ func _ready() -> void:
 
 
 func re_calibrate_preview_slider():
+	preview_slider.visible = false
 	preview_slider.max_value = frames[-1] + 1
 	preview_slider.min_value = frames[0] + 1
-	preview_slider.value = Global.current_project.current_frame + 1
+	preview_slider.value = image_effect_node.commit_idx + 1
+	preview_slider.visible = true
 
 
 func add_float_property(name: String, property_node: Range):
@@ -65,6 +67,7 @@ func get_animated_values(frame_idx: int, property_idx := 0) -> float:
 
 func _on_Initial_value_changed(value) -> void:
 	properties[_current_id]["initial_value"] = value
+	image_effect_node.update_preview()
 
 
 func _on_Final_value_changed(value: float) -> void:
@@ -74,7 +77,11 @@ func _on_Final_value_changed(value: float) -> void:
 
 func _on_range_node_value_changed(_value) -> void:
 	# Value is changed from outside the Animate Panel
-	_refresh_properties(_current_id)
+	if properties[_current_id]["range_node"].value != final_value.value:
+		if final_value.is_connected("value_changed", self, "_on_Final_value_changed"):
+			final_value.disconnect("value_changed", self, "_on_Final_value_changed")
+		final_value.value = properties[_current_id]["range_node"].value
+		final_value.connect("value_changed", self, "_on_Final_value_changed")
 
 
 func _on_CanAnimate_toggled(button_pressed: bool) -> void:
@@ -90,7 +97,7 @@ func _on_PropertyList_item_selected(index: int) -> void:
 	_refresh_properties(_current_id)
 
 
-func _refresh_properties(idx):
+func _refresh_properties(idx: int):
 	if initial_value.is_connected("value_changed", self, "_on_Initial_value_changed"):
 		initial_value.disconnect("value_changed", self, "_on_Initial_value_changed")
 	if final_value.is_connected("value_changed", self, "_on_Final_value_changed"):
@@ -111,7 +118,7 @@ func _refresh_properties(idx):
 	# now update values
 	can_animate_button.pressed = properties[idx]["can_animate"]
 	initial_value.value = properties[idx]["initial_value"]
-	if properties[_current_id]["range_node"].value != final_value.value:
+	if properties[idx]["range_node"].value != final_value.value:
 		final_value.value = properties[idx]["range_node"].value
 	$"%Name".text = property_list.get_item_text(idx)
 
@@ -142,10 +149,12 @@ func _populate_transition_type():
 
 func _on_EaseType_item_selected(index: int) -> void:
 	properties[_current_id]["ease_type"] = $"%EaseType".get_item_id(index)
+	image_effect_node.update_preview()
 
 
 func _on_TransitionType_item_selected(index: int) -> void:
 	properties[_current_id]["transition_type"] = $"%TransitionType".get_item_id(index)
+	image_effect_node.update_preview()
 
 
 func _on_PreviewSlider_value_changed(value: float) -> void:

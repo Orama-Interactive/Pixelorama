@@ -29,6 +29,9 @@ text = "Animatable Properties"
 unique_name_in_owner = true
 margin_left = 147.0
 margin_right = 346.0
+min_value = 1.0
+max_value = 1.0
+value = 1.0
 prefix = "Preview Frame:"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]

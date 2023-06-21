@@ -45,7 +45,6 @@ func _about_to_show() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	prepare_animator(Global.current_project)
 	set_and_update_preview_image(Global.current_project.current_frame)
-	animate_panel.re_calibrate_preview_slider()
 	update_transparent_background_size()
 
 
@@ -148,8 +147,9 @@ func set_nodes() -> void:
 func display_animate_dialog():
 	var animate_dialog: Popup = animate_panel.get_parent()
 	var pos = Vector2(rect_global_position.x + rect_size.x, rect_global_position.y)
-	var animate_dialog_rect := Rect2(pos, rect_size)
+	var animate_dialog_rect := Rect2(pos, Vector2(animate_dialog.rect_size.x, rect_size.y))
 	animate_dialog.popup(animate_dialog_rect)
+	animate_panel.re_calibrate_preview_slider()
 
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
