@@ -85,9 +85,7 @@ func _calculate_pivot() -> void:
 
 
 func commit_action(cel: Image, _project: Project = Global.current_project) -> void:
-	var angle: float = deg2rad(
-		animate_panel.get_animated_values(commit_idx, Animate.ANGLE)
-	)
+	var angle: float = deg2rad(animate_panel.get_animated_values(commit_idx, Animate.ANGLE))
 	var init_angle: float = animate_panel.get_animated_values(commit_idx, Animate.INITIAL_ANGLE)
 
 	var selection_size := cel.get_size()

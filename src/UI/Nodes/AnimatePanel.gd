@@ -1,14 +1,12 @@
 class_name AnimatePanel
 extends PanelContainer
 
-
 onready var can_animate_button: CheckBox = $"%CanAnimate"
 onready var property_list: ItemList = $"%PropertyList"
 onready var initial_value: ValueSlider = $"%Initial"
 onready var final_value: ValueSlider = $"%Final"
 onready var preview_slider: TextureProgress = $"%PreviewSlider"
-
-var image_effect_node :ConfirmationDialog
+var image_effect_node: ConfirmationDialog
 
 var frames := []  # Set this value before calling "get_animated_values"
 var _current_id: int = 0  # The property currently selected in "property_list"
@@ -55,7 +53,9 @@ func get_animated_values(frame_idx: int, property_idx := 0) -> float:
 				var delta = properties[property_idx]["range_node"].value - initial
 				var transition_type = properties[property_idx]["transition_type"]
 				var ease_type = properties[property_idx]["ease_type"]
-				return tween.interpolate_value(initial, delta, elapsed, duration, transition_type, ease_type)
+				return tween.interpolate_value(
+					initial, delta, elapsed, duration, transition_type, ease_type
+				)
 			else:
 				return properties[property_idx]["range_node"].value
 		else:

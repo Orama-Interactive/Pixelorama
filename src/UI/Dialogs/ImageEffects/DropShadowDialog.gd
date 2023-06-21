@@ -18,10 +18,10 @@ func _ready() -> void:
 	# set as in enum
 	animate_panel.add_float_property(
 		"Offset X", $VBoxContainer/ShadowOptions/OffsetSliders.find_node("X")
-		)
+	)
 	animate_panel.add_float_property(
 		"Offset Y", $VBoxContainer/ShadowOptions/OffsetSliders.find_node("Y")
-		)
+	)
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:

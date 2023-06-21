@@ -5,7 +5,7 @@ extends ConfirmationDialog
 
 enum { SELECTED_CELS, FRAME, ALL_FRAMES, ALL_PROJECTS }
 
-var affect: int = SELECTED_CELS
+var affect := SELECTED_CELS
 var selected_cels := Image.new()
 var current_frame := Image.new()
 var preview_image := Image.new()
@@ -14,8 +14,8 @@ var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
 var animate_panel: AnimatePanel
-var _preview_idx: int = 0  # the current frame, being previewed
-var commit_idx: int = -1  # the current frame, image effect is applied to
+var _preview_idx := 0  # the current frame, being previewed
+var commit_idx := -1  # the current frame, image effect is applied to
 var confirmed := false
 
 
@@ -195,7 +195,7 @@ func _on_SelectionCheckBox_toggled(_button_pressed: bool) -> void:
 
 func _on_AffectOptionButton_item_selected(index: int) -> void:
 	affect = index
-	$"%ShowAnimate".visible = bool(affect == SELECTED_CELS and animate_panel.properties.size() != 0)
+	$"%ShowAnimate".visible = bool(affect != FRAME and animate_panel.properties.size() != 0)
 	prepare_animator(Global.current_project)  # for use in preview
 	animate_panel.re_calibrate_preview_slider()
 	update_preview()
