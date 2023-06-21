@@ -6,17 +6,26 @@ onready var can_animate_button: CheckBox = $"%CanAnimate"
 onready var property_list: ItemList = $"%PropertyList"
 onready var initial_value: ValueSlider = $"%Initial"
 onready var final_value: ValueSlider = $"%Final"
+onready var preview_slider: TextureProgress = $"%PreviewSlider"
+
 var image_effect_node :ConfirmationDialog
 
 var frames := []  # Set this value before calling "get_animated_values"
 var _current_id: int = 0  # The property currently selected in "property_list"
 var properties := []  # Contains dictionary of properties
-var zero_properties := []  # Contains the Original properties without any change
+var resetter_values := []  # Contains the Original properties without any change
+
 
 func _ready() -> void:
 	_populate_ease_type()
 	_populate_transition_type()
 	$"%Options".visible = false
+
+
+func re_calibrate_preview_slider():
+	preview_slider.max_value = frames[-1] + 1
+	preview_slider.min_value = frames[0] + 1
+	preview_slider.value = Global.current_project.current_frame + 1
 
 
 func add_float_property(name: String, property_node: Range):
@@ -27,35 +36,31 @@ func add_float_property(name: String, property_node: Range):
 		"transition_type": Tween.TRANS_LINEAR,
 		"ease_type": Tween.EASE_IN,
 	}
-	var info_2 = {
-		properties.size(): property_node.value
-	}
 	properties.append(info)
-	zero_properties.append(info_2)
+	resetter_values.append(property_node.value)
 	property_list.add_item(name)
 	property_node.connect("value_changed", self, "_on_range_node_value_changed")
 
 
-func get_animated_values(frame_idx: int, animation_allowed := true) -> Dictionary:
-	var animated = {}
-	if frame_idx in frames:
-		var tween = SceneTreeTween.new()
-		for property_idx in properties.size():
-			if properties[property_idx]["can_animate"] and animation_allowed and frames.size() > 1:
+func get_animated_values(frame_idx: int, property_idx := 0) -> float:
+	var tween = SceneTreeTween.new()
+	if property_idx <= 0 or property_idx < properties.size():
+		if frame_idx in frames:
+			if properties[property_idx]["can_animate"] and frames.size() > 1:
 				var duration = frames.size() - 1
 				var elapsed = frames.find(frame_idx)
 				var initial = properties[property_idx]["initial_value"]
 				var delta = properties[property_idx]["range_node"].value - initial
 				var transition_type = properties[property_idx]["transition_type"]
 				var ease_type = properties[property_idx]["ease_type"]
-				animated[property_idx] = tween.interpolate_value(initial, delta, elapsed, duration, transition_type, ease_type)
+				return tween.interpolate_value(initial, delta, elapsed, duration, transition_type, ease_type)
 			else:
-				animated[property_idx] = properties[property_idx]["range_node"].value
+				return properties[property_idx]["range_node"].value
+		else:
+			return resetter_values[property_idx]
 	else:
-		# the frame isn't meant for the effect to be apploed to
-		for property_idx in zero_properties.size():
-			animated[property_idx] = zero_properties[property_idx]
-	return animated
+		printerr("something is wrong")
+		return 0.0
 
 
 func _on_Initial_value_changed(value) -> void:
@@ -74,6 +79,7 @@ func _on_range_node_value_changed(_value) -> void:
 
 func _on_CanAnimate_toggled(button_pressed: bool) -> void:
 	properties[_current_id]["can_animate"] = button_pressed
+	image_effect_node.update_preview()
 
 
 func _on_PropertyList_item_selected(index: int) -> void:
@@ -140,3 +146,7 @@ func _on_EaseType_item_selected(index: int) -> void:
 
 func _on_TransitionType_item_selected(index: int) -> void:
 	properties[_current_id]["transition_type"] = $"%TransitionType".get_item_id(index)
+
+
+func _on_PreviewSlider_value_changed(value: float) -> void:
+	image_effect_node.set_and_update_preview_image(value - 1)

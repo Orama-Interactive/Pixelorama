@@ -14,14 +14,25 @@ margin_top = 7.0
 margin_right = 353.0
 margin_bottom = 219.0
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="TopOptions" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 346.0
-margin_bottom = 14.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/TopOptions"]
+margin_top = 5.0
+margin_right = 143.0
+margin_bottom = 19.0
 theme_type_variation = "Header"
 text = "Animatable Properties"
 
+[node name="PreviewSlider" parent="VBoxContainer/TopOptions" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_left = 147.0
+margin_right = 346.0
+prefix = "Preview Frame:"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 18.0
+margin_top = 28.0
 margin_right = 346.0
 margin_bottom = 212.0
 size_flags_vertical = 3
@@ -29,7 +40,7 @@ size_flags_vertical = 3
 [node name="PropertyList" type="ItemList" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 margin_right = 100.0
-margin_bottom = 194.0
+margin_bottom = 184.0
 rect_min_size = Vector2( 100, 0 )
 
 [node name="Options" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
@@ -129,6 +140,7 @@ hint_tooltip = "How the value changes while moving from initial to final value"
 size_flags_vertical = 4
 clip_text = true
 
+[connection signal="value_changed" from="VBoxContainer/TopOptions/PreviewSlider" to="." method="_on_PreviewSlider_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/PropertyList" to="." method="_on_PropertyList_item_selected"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/Options/CanAnimate" to="." method="_on_CanAnimate_toggled"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/Options/Values/Initial" to="." method="_on_Initial_value_changed"]

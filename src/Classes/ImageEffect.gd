@@ -14,6 +14,7 @@ var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
 var animate_panel: AnimatePanel
+var _preview_idx: int = 0  # the current frame, being previewed
 var commit_idx: int = -1  # the current frame, image effect is applied to
 var confirmed := false
 
@@ -40,10 +41,11 @@ func _ready() -> void:
 
 
 func _about_to_show() -> void:
-	commit_idx = -1
 	confirmed = false
 	Global.canvas.selection.transform_content_confirm()
-	_set_and_update_preview_image(Global.current_project.current_frame)
+	prepare_animator(Global.current_project)
+	set_and_update_preview_image(Global.current_project.current_frame)
+	animate_panel.re_calibrate_preview_slider()
 	update_transparent_background_size()
 
 
@@ -194,10 +196,13 @@ func _on_SelectionCheckBox_toggled(_button_pressed: bool) -> void:
 func _on_AffectOptionButton_item_selected(index: int) -> void:
 	affect = index
 	$"%ShowAnimate".visible = bool(affect == SELECTED_CELS and animate_panel.properties.size() != 0)
+	prepare_animator(Global.current_project)  # for use in preview
+	animate_panel.re_calibrate_preview_slider()
 	update_preview()
 
 
-func _set_and_update_preview_image(frame_idx: int) -> void:
+func set_and_update_preview_image(frame_idx: int) -> void:
+	_preview_idx = frame_idx
 	var frame: Frame = Global.current_project.frames[frame_idx]
 	selected_cels.resize(Global.current_project.size.x, Global.current_project.size.y)
 	selected_cels.fill(Color(0, 0, 0, 0))
@@ -214,6 +219,7 @@ func update_preview() -> void:
 			preview_image.copy_from(selected_cels)
 		_:
 			preview_image.copy_from(current_frame)
+	commit_idx = _preview_idx
 	commit_action(preview_image)
 	preview_image.unlock()
 	preview_texture.create_from_image(preview_image, 0)
