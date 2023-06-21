@@ -272,7 +272,6 @@ margin_right = 382.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 text = "untitled"
-align = 2
 caret_blink = true
 caret_blink_speed = 0.5
 
