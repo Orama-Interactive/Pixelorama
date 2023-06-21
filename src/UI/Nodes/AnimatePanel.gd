@@ -6,10 +6,11 @@ onready var can_animate_button: CheckBox = $"%CanAnimate"
 onready var property_list: ItemList = $"%PropertyList"
 onready var initial_value: ValueSlider = $"%Initial"
 onready var final_value: ValueSlider = $"%Final"
+var image_effect_node :ImageEffect
 
-var frames := []  # set this value before calling "get_animated_values"
-var _current_id: int = 0
-var properties := [] # contains dictionary of properties
+var frames := []  # Set this value before calling "get_animated_values"
+var _current_id: int = 0  # The property currently selected in "property_list"
+var properties := []  # Contains dictionary of properties
 
 
 func _ready() -> void:
@@ -48,7 +49,7 @@ func get_animated_values(frame_idx: int, animation_allowed := true) -> Dictionar
 	return animated
 
 
-func _on_Initial_value_changed(value):
+func _on_Initial_value_changed(value) -> void:
 	properties[_current_id]["initial_value"] = value
 
 
@@ -58,6 +59,7 @@ func _on_Final_value_changed(value: float) -> void:
 
 
 func _on_range_node_value_changed(_value) -> void:
+	# Value is changed from outside the Animate Panel
 	_refresh_properties(_current_id)
 
 
@@ -78,7 +80,7 @@ func _refresh_properties(idx):
 		initial_value.disconnect("value_changed", self, "_on_Initial_value_changed")
 	if final_value.is_connected("value_changed", self, "_on_Final_value_changed"):
 		final_value.disconnect("value_changed", self, "_on_Final_value_changed")
-	can_animate_button.pressed = properties[idx]["can_animate"]
+
 	# nodes setup
 	var property_node = properties[idx]["range_node"]
 	if property_node is ValueSlider:
@@ -91,10 +93,13 @@ func _refresh_properties(idx):
 	initial_value.min_value = property_node.min_value
 	initial_value.step = property_node.step
 
+	# now update values
+	can_animate_button.pressed = properties[idx]["can_animate"]
 	initial_value.value = properties[idx]["initial_value"]
 	if properties[_current_id]["range_node"].value != final_value.value:
 		final_value.value = properties[idx]["range_node"].value
 	$"%Name".text = property_list.get_item_text(idx)
+
 	initial_value.connect("value_changed", self, "_on_Initial_value_changed")
 	final_value.connect("value_changed", self, "_on_Final_value_changed")
 

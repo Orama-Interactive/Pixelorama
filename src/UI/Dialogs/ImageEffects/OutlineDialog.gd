@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	var anim_thickness = animate_panel.get_animated_values(frame_idx, confirmed)[Animate.THICKNESS]
+	var anim_thickness = animate_panel.get_animated_values(commit_idx, confirmed)[Animate.THICKNESS]
 
 	if !shader:  # Web version
 		DrawingAlgos.generate_outline(
