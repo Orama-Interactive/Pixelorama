@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-06-16 15:38\n"
+"PO-Revision-Date: 2023-06-23 09:17\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -94,7 +94,7 @@ msgid "Save as..."
 msgstr "Simpan sebagai..."
 
 msgid "Use ZSTD Compression"
-msgstr "Gunakan pampatan ZSTD"
+msgstr "Gunakan kompresi ZSTD"
 
 msgid "Import"
 msgstr "Impor"
@@ -193,10 +193,10 @@ msgid "Mirror Image"
 msgstr "Cerminkan Gambar"
 
 msgid "Flip Horizontal"
-msgstr "Dibalik Mendatar"
+msgstr "Balikkan Horizontal"
 
 msgid "Flip Vertical"
-msgstr "Dibalik Menegak"
+msgstr "Balikkan Vertikal"
 
 msgid "Preferences"
 msgstr "Preferensi"
@@ -254,15 +254,15 @@ msgstr "Atur Tata Letak"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr "Pratayang"
+msgstr "Pratinjau"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr "Ini pratayang, mengubah ini tidak akan mengubah tata letak"
+msgstr "Ini pratinjau, mengubah ini tidak akan mengubah tata letak"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr "Pencet dua kali agar jadi tata letak baru di awal buka"
+msgstr "Klik dua kali agar jadi tata letak baru di awal buka"
 
 msgid "Add"
 msgstr "Tambah"
@@ -274,7 +274,7 @@ msgid "Edit Layout"
 msgstr "Sunting Tata Letak"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr "Apakah yakin ingin menghapus tata letak ini?"
+msgstr "Apakah anda yakin ingin menghapus tata letak ini?"
 
 msgid "Auto"
 msgstr "Otomatis"
