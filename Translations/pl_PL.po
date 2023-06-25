@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-06-16 15:39\n"
+"PO-Revision-Date: 2023-06-25 21:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1789,7 +1789,7 @@ msgstr "Właściwości klatki"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
-msgstr ""
+msgstr "Odwróć Klatki"
 
 msgid "Layer"
 msgstr "Warstwa"
@@ -2198,11 +2198,11 @@ msgstr "Tworzy wiele plików, lecz każdy jest zapisywany w innym folderze, odpo
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr ""
+msgstr "Znak(i) rozdzielające:"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
-msgstr ""
+msgstr "Znak(i) oddzielające nazwę pliku od numeru klatki"
 
 msgid "Close"
 msgstr "Zamknij"
