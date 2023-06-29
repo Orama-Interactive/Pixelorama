@@ -95,6 +95,7 @@ align = 2
 unique_name_in_owner = true
 margin_left = 84.0
 margin_right = 242.0
+editable = false
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values"]
 margin_top = 33.0
@@ -109,6 +110,7 @@ margin_left = 84.0
 margin_top = 28.0
 margin_right = 242.0
 margin_bottom = 52.0
+editable = false
 
 [node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values"]
 margin_top = 59.0
@@ -124,6 +126,7 @@ margin_top = 56.0
 margin_right = 242.0
 margin_bottom = 76.0
 size_flags_vertical = 4
+disabled = true
 clip_text = true
 
 [node name="Label5" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values"]
@@ -141,6 +144,7 @@ margin_right = 242.0
 margin_bottom = 100.0
 hint_tooltip = "How the value changes while moving from initial to final value"
 size_flags_vertical = 4
+disabled = true
 clip_text = true
 
 [connection signal="value_changed" from="VBoxContainer/TopOptions/PreviewSlider" to="." method="_on_PreviewSlider_value_changed"]

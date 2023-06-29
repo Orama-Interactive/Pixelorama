@@ -86,6 +86,10 @@ func _on_range_node_value_changed(_value) -> void:
 
 func _on_CanAnimate_toggled(button_pressed: bool) -> void:
 	properties[_current_id]["can_animate"] = button_pressed
+	$"%Initial".editable = button_pressed
+	$"%Final".editable = button_pressed
+	$"%EaseType".disabled = !button_pressed
+	$"%TransitionType".disabled = !button_pressed
 	image_effect_node.update_preview()
 
 
