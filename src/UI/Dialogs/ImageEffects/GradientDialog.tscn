@@ -11,39 +11,43 @@ window_title = "Gradient"
 script = ExtResource( 1 )
 
 [node name="VBoxContainer" parent="." index="3"]
-margin_bottom = 444.0
+margin_bottom = 468.0
 
-[node name="AspectRatioContainer" parent="VBoxContainer" index="0"]
-margin_right = 278.0
+[node name="ShowAnimate" parent="VBoxContainer" index="0"]
+visible = false
+
+[node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
+margin_bottom = 224.0
 
 [node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-margin_left = 39.0
-margin_right = 239.0
+margin_left = 80.0
+margin_right = 280.0
+margin_bottom = 200.0
 
-[node name="GradientEdit" parent="VBoxContainer" index="1" instance=ExtResource( 3 )]
+[node name="GradientEdit" parent="VBoxContainer" index="2" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 204.0
-margin_right = 278.0
-margin_bottom = 282.0
+margin_top = 228.0
+margin_right = 360.0
+margin_bottom = 306.0
 
-[node name="GradientOptions" type="GridContainer" parent="VBoxContainer" index="2"]
-margin_top = 286.0
-margin_right = 278.0
-margin_bottom = 408.0
+[node name="GradientOptions" type="GridContainer" parent="VBoxContainer" index="3"]
+margin_top = 310.0
+margin_right = 360.0
+margin_bottom = 432.0
 columns = 2
 
 [node name="ShapeLabel" type="Label" parent="VBoxContainer/GradientOptions" index="0" groups=["gradient_common"]]
 margin_top = 3.0
-margin_right = 137.0
+margin_right = 178.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "Shape:"
 
 [node name="ShapeOptionButton" type="OptionButton" parent="VBoxContainer/GradientOptions" index="1" groups=["gradient_common"]]
 unique_name_in_owner = true
-margin_left = 141.0
-margin_right = 278.0
+margin_left = 182.0
+margin_right = 360.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -54,15 +58,15 @@ selected = 0
 [node name="DitheringLabel" type="Label" parent="VBoxContainer/GradientOptions" index="2" groups=["gradient_common"]]
 unique_name_in_owner = true
 margin_top = 27.0
-margin_right = 137.0
+margin_right = 178.0
 margin_bottom = 41.0
 text = "Dithering pattern:"
 
 [node name="DitheringOptionButton" type="OptionButton" parent="VBoxContainer/GradientOptions" index="3" groups=["gradient_common"]]
 unique_name_in_owner = true
-margin_left = 141.0
+margin_left = 182.0
 margin_top = 24.0
-margin_right = 278.0
+margin_right = 360.0
 margin_bottom = 44.0
 mouse_default_cursor_shape = 2
 text = "None"
@@ -71,15 +75,15 @@ selected = 0
 
 [node name="RepeatLabel" type="Label" parent="VBoxContainer/GradientOptions" index="4" groups=["gradient_common"]]
 margin_top = 51.0
-margin_right = 137.0
+margin_right = 178.0
 margin_bottom = 65.0
 text = "Repeat:"
 
 [node name="RepeatOptionButton" type="OptionButton" parent="VBoxContainer/GradientOptions" index="5" groups=["gradient_common"]]
 unique_name_in_owner = true
-margin_left = 141.0
+margin_left = 182.0
 margin_top = 48.0
-margin_right = 278.0
+margin_right = 360.0
 margin_bottom = 68.0
 mouse_default_cursor_shape = 2
 text = "None"
@@ -88,15 +92,15 @@ selected = 0
 
 [node name="PositionLabel" type="Label" parent="VBoxContainer/GradientOptions" index="6" groups=["gradient_linear"]]
 margin_top = 72.0
-margin_right = 137.0
+margin_right = 178.0
 margin_bottom = 86.0
 text = "Position:"
 
 [node name="PositionSlider" type="TextureProgress" parent="VBoxContainer/GradientOptions" index="7" groups=["gradient_linear"]]
 unique_name_in_owner = true
-margin_left = 141.0
+margin_left = 182.0
 margin_top = 72.0
-margin_right = 278.0
+margin_right = 360.0
 margin_bottom = 86.0
 mouse_default_cursor_shape = 2
 theme_type_variation = "ValueSlider"
@@ -114,15 +118,15 @@ snap_step = 10.0
 
 [node name="SizeLabel" type="Label" parent="VBoxContainer/GradientOptions" index="8" groups=["gradient_linear"]]
 margin_top = 90.0
-margin_right = 137.0
+margin_right = 178.0
 margin_bottom = 104.0
 text = "Size:"
 
 [node name="SizeSlider" type="TextureProgress" parent="VBoxContainer/GradientOptions" index="9" groups=["gradient_linear"]]
 unique_name_in_owner = true
-margin_left = 141.0
+margin_left = 182.0
 margin_top = 90.0
-margin_right = 278.0
+margin_right = 360.0
 margin_bottom = 104.0
 mouse_default_cursor_shape = 2
 theme_type_variation = "ValueSlider"
@@ -141,15 +145,15 @@ snap_step = 10.0
 
 [node name="AngleLabel" type="Label" parent="VBoxContainer/GradientOptions" index="10" groups=["gradient_linear"]]
 margin_top = 108.0
-margin_right = 137.0
+margin_right = 178.0
 margin_bottom = 122.0
 text = "Angle:"
 
 [node name="AngleSlider" type="TextureProgress" parent="VBoxContainer/GradientOptions" index="11" groups=["gradient_linear"]]
 unique_name_in_owner = true
-margin_left = 141.0
+margin_left = 182.0
 margin_top = 108.0
-margin_right = 278.0
+margin_right = 360.0
 margin_bottom = 122.0
 mouse_default_cursor_shape = 2
 theme_type_variation = "ValueSlider"
@@ -200,30 +204,15 @@ step = 0.01
 allow_greater = true
 show_ratio = true
 
-[node name="OptionsContainer" parent="VBoxContainer" index="3"]
-margin_top = 412.0
-margin_right = 278.0
-margin_bottom = 436.0
+[node name="OptionsContainer" parent="VBoxContainer" index="4"]
+margin_top = 436.0
+margin_bottom = 460.0
 
 [node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
-margin_right = 278.0
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 
-[node name="AnimationOptions" parent="VBoxContainer" index="4"]
-visible = false
-margin_top = 440.0
-margin_right = 278.0
-margin_bottom = 474.0
-
-[node name="PanelContainer" parent="VBoxContainer/AnimationOptions" index="1"]
-margin_right = 157.0
-
-[node name="AnimateMenu" parent="VBoxContainer/AnimationOptions/PanelContainer" index="0"]
-margin_right = 88.0
-
-[node name="InitalButton" parent="VBoxContainer/AnimationOptions" index="2"]
-margin_left = 161.0
-margin_right = 278.0
+[node name="AnimateDialog" parent="." index="4"]
+margin_bottom = 468.0
 
 [connection signal="updated" from="VBoxContainer/GradientEdit" to="." method="_on_GradientEdit_updated"]
 [connection signal="item_selected" from="VBoxContainer/GradientOptions/ShapeOptionButton" to="." method="_on_ShapeOptionButton_item_selected"]

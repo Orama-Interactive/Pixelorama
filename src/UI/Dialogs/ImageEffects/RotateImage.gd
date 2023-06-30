@@ -21,6 +21,9 @@ onready var wait_time_slider: ValueSlider = $VBoxContainer/WaitTime
 
 
 func _ready() -> void:
+	# set as in enum
+	animate_panel.add_float_property("Angle", angle_slider)
+	animate_panel.add_float_property("Initial Angle", init_angle_slider)
 	if not _is_webgl1():
 		type_option_button.add_item("Rotxel with Smear", ROTXEL_SMEAR)
 		rotxel_shader = load("res://src/Shaders/Rotation/SmearRotxel.shader")
@@ -32,18 +35,6 @@ func _ready() -> void:
 	type_option_button.add_item("Rotxel", ROTXEL)
 	type_option_button.add_item("Upscale, Rotate and Downscale", URD)
 	type_option_button.emit_signal("item_selected", 0)
-
-
-func set_animate_menu(_elements) -> void:
-	# set as in enum
-	animate_menu.add_check_item("Angle", Animate.ANGLE)
-	animate_menu.add_check_item("Initial Angle", Animate.INITIAL_ANGLE)
-	.set_animate_menu(Animate.size())
-
-
-func set_initial_values() -> void:
-	initial_values[Animate.ANGLE] = deg2rad(angle_slider.value)
-	initial_values[Animate.INITIAL_ANGLE] = init_angle_slider.value
 
 
 func _about_to_show() -> void:
@@ -94,11 +85,8 @@ func _calculate_pivot() -> void:
 
 
 func commit_action(cel: Image, _project: Project = Global.current_project) -> void:
-	.commit_action(cel, _project)
-	var angle: float = get_animated_value(_project, deg2rad(angle_slider.value), Animate.ANGLE)
-	var init_angle: float = get_animated_value(
-		_project, init_angle_slider.value, Animate.INITIAL_ANGLE
-	)
+	var angle: float = deg2rad(animate_panel.get_animated_values(commit_idx, Animate.ANGLE))
+	var init_angle: float = animate_panel.get_animated_values(commit_idx, Animate.INITIAL_ANGLE)
 
 	var selection_size := cel.get_size()
 	var selection_tex := ImageTexture.new()

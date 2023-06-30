@@ -20,21 +20,12 @@ func _ready() -> void:
 		preview.set_material(sm)
 	outline_color.get_picker().presets_visible = false
 	color = outline_color.color
-
-
-func set_animate_menu(_elements) -> void:
 	# set as in enum
-	animate_menu.add_check_item("Thickness", Animate.THICKNESS)
-	.set_animate_menu(Animate.size())
-
-
-func set_initial_values() -> void:
-	initial_values[Animate.THICKNESS] = thickness
+	animate_panel.add_float_property("Thickness", $VBoxContainer/OutlineOptions/ThickValue)
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	.commit_action(cel, project)
-	var anim_thickness = get_animated_value(project, thickness, Animate.THICKNESS)
+	var anim_thickness = animate_panel.get_animated_values(commit_idx, Animate.THICKNESS)
 
 	if !shader:  # Web version
 		DrawingAlgos.generate_outline(

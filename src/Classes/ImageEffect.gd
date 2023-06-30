@@ -5,7 +5,7 @@ extends ConfirmationDialog
 
 enum { SELECTED_CELS, FRAME, ALL_FRAMES, ALL_PROJECTS }
 
-var affect: int = SELECTED_CELS
+var affect := SELECTED_CELS
 var selected_cels := Image.new()
 var current_frame := Image.new()
 var preview_image := Image.new()
@@ -13,13 +13,10 @@ var preview_texture := ImageTexture.new()
 var preview: TextureRect
 var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
-var animate_options_container: Node
-var animate_menu: PopupMenu
-var initial_button: Button
-var animate_bool := []
-var initial_values: PoolRealArray = []
-var selected_idx: int = 0  # the current selected cel to apply animation to
+var animate_panel: AnimatePanel
+var commit_idx := -1  # the current frame, image effect is applied to
 var confirmed := false
+var _preview_idx := 0  # the current frame, being previewed
 
 
 func _ready() -> void:
@@ -39,32 +36,42 @@ func _ready() -> void:
 		selection_checkbox.connect("toggled", self, "_on_SelectionCheckBox_toggled")
 	if affect_option_button:
 		affect_option_button.connect("item_selected", self, "_on_AffectOptionButton_item_selected")
-	if animate_menu:
-		set_animate_menu(0)
-		animate_menu.connect("id_pressed", self, "_update_animate_flags")
-	if initial_button:
-		initial_button.connect("pressed", self, "set_initial_values")
+	if animate_panel:
+		$"%ShowAnimate".connect("pressed", self, "display_animate_dialog")
 
 
 func _about_to_show() -> void:
 	confirmed = false
 	Global.canvas.selection.transform_content_confirm()
-	var frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
-	selected_cels.resize(Global.current_project.size.x, Global.current_project.size.y)
-	selected_cels.fill(Color(0, 0, 0, 0))
-	Export.blend_selected_cels(selected_cels, frame)
-	current_frame.resize(Global.current_project.size.x, Global.current_project.size.y)
-	current_frame.fill(Color(0, 0, 0, 0))
-	Export.blend_all_layers(current_frame, frame)
-	update_preview()
+	prepare_animator(Global.current_project)
+	set_and_update_preview_image(Global.current_project.current_frame)
 	update_transparent_background_size()
 
 
+# prepares "animate_panel.frames" according to affect
+func prepare_animator(project: Project) -> void:
+	var frames = []
+	if affect == SELECTED_CELS:
+		for fram_layer in project.selected_cels:
+			if not fram_layer[0] in frames:
+				frames.append(fram_layer[0])
+		frames.sort()  # To always start animating from left side of the timeline
+		animate_panel.frames = frames
+	elif affect == FRAME:
+		frames.append(project.current_frame)
+		animate_panel.frames = frames
+	elif (affect == ALL_FRAMES) or (affect == ALL_PROJECTS):
+		for i in project.frames.size():
+			frames.append(i)
+		animate_panel.frames = frames
+
+
 func _confirmed() -> void:
-	selected_idx = 0
 	confirmed = true
+	commit_idx = -1
 	var project: Project = Global.current_project
 	if affect == SELECTED_CELS:
+		prepare_animator(project)
 		var undo_data := _get_undo_data(project)
 		for cel_index in project.selected_cels:
 			if !project.layers[cel_index[1]].can_layer_get_drawn():
@@ -73,12 +80,15 @@ func _confirmed() -> void:
 			if not cel is PixelCel:
 				continue
 			var cel_image: Image = cel.image
+			commit_idx = cel_index[0]  # frame is cel_index[0] in this mode
 			commit_action(cel_image)
 		_commit_undo("Draw", undo_data, project)
 
 	elif affect == FRAME:
+		prepare_animator(project)
 		var undo_data := _get_undo_data(project)
 		var i := 0
+		commit_idx = project.current_frame
 		for cel in project.frames[project.current_frame].cels:
 			if not cel is PixelCel:
 				i += 1
@@ -89,9 +99,11 @@ func _confirmed() -> void:
 		_commit_undo("Draw", undo_data, project)
 
 	elif affect == ALL_FRAMES:
+		prepare_animator(project)
 		var undo_data := _get_undo_data(project)
 		for frame in project.frames:
 			var i := 0
+			commit_idx += 1  # frames are simply increasing by 1 in this mode
 			for cel in frame.cels:
 				if not cel is PixelCel:
 					i += 1
@@ -103,9 +115,13 @@ func _confirmed() -> void:
 
 	elif affect == ALL_PROJECTS:
 		for _project in Global.projects:
+			prepare_animator(_project)
+			commit_idx = -1
+
 			var undo_data := _get_undo_data(_project)
 			for frame in _project.frames:
 				var i := 0
+				commit_idx += 1  # frames are simply increasing by 1 in this mode
 				for cel in frame.cels:
 					if not cel is PixelCel:
 						i += 1
@@ -117,42 +133,23 @@ func _confirmed() -> void:
 
 
 func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
-	if confirmed and affect == SELECTED_CELS:
-		selected_idx += 1
+	pass
 
 
 func set_nodes() -> void:
 	preview = $VBoxContainer/AspectRatioContainer/Preview
 	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
 	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
-	animate_options_container = $VBoxContainer/AnimationOptions
-	animate_menu = $"%AnimateMenu".get_popup()
-	initial_button = $"%InitalButton"
+	animate_panel = $"%AnimatePanel"
+	animate_panel.image_effect_node = self
 
 
-func set_animate_menu(elements: int) -> void:
-	initial_values.resize(elements)
-	initial_values.fill(0)
-	animate_bool.resize(elements)
-	animate_bool.fill(false)
-
-
-func set_initial_values() -> void:
-	pass
-
-
-func get_animated_value(project: Project, final: float, property_idx: int) -> float:
-	if animate_bool[property_idx] == true and confirmed:
-		var first := initial_values[property_idx]
-		var interpolation := float(selected_idx) / project.selected_cels.size()
-		return lerp(first, final, interpolation)
-	else:
-		return final
-
-
-func _update_animate_flags(id: int) -> void:
-	animate_bool[id] = !animate_bool[id]
-	animate_menu.set_item_checked(id, animate_bool[id])
+func display_animate_dialog():
+	var animate_dialog: Popup = animate_panel.get_parent()
+	var pos = Vector2(rect_global_position.x + rect_size.x, rect_global_position.y)
+	var animate_dialog_rect := Rect2(pos, Vector2(animate_dialog.rect_size.x, rect_size.y))
+	animate_dialog.popup(animate_dialog_rect)
+	animate_panel.re_calibrate_preview_slider()
 
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
@@ -198,7 +195,21 @@ func _on_SelectionCheckBox_toggled(_button_pressed: bool) -> void:
 
 func _on_AffectOptionButton_item_selected(index: int) -> void:
 	affect = index
-	animate_options_container.visible = bool(affect == SELECTED_CELS)
+	$"%ShowAnimate".visible = bool(affect != FRAME and animate_panel.properties.size() != 0)
+	prepare_animator(Global.current_project)  # for use in preview
+	animate_panel.re_calibrate_preview_slider()
+	update_preview()
+
+
+func set_and_update_preview_image(frame_idx: int) -> void:
+	_preview_idx = frame_idx
+	var frame: Frame = Global.current_project.frames[frame_idx]
+	selected_cels.resize(Global.current_project.size.x, Global.current_project.size.y)
+	selected_cels.fill(Color(0, 0, 0, 0))
+	Export.blend_selected_cels(selected_cels, frame)
+	current_frame.resize(Global.current_project.size.x, Global.current_project.size.y)
+	current_frame.fill(Color(0, 0, 0, 0))
+	Export.blend_all_layers(current_frame, frame)
 	update_preview()
 
 
@@ -208,6 +219,7 @@ func update_preview() -> void:
 			preview_image.copy_from(selected_cels)
 		_:
 			preview_image.copy_from(current_frame)
+	commit_idx = _preview_idx
 	commit_action(preview_image)
 	preview_image.unlock()
 	preview_texture.create_from_image(preview_image, 0)
