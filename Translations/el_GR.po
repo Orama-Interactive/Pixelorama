@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-06-16 15:39\n"
+"PO-Revision-Date: 2023-07-02 19:25\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -603,6 +603,10 @@ msgstr "Θέματα"
 
 msgid "Canvas"
 msgstr "Καμβάς"
+
+#. Refers to the animation timeline.
+msgid "Timeline"
+msgstr ""
 
 msgid "Selection"
 msgstr "Επιλογή"
@@ -1381,6 +1385,18 @@ msgstr "Να ακολουθεί το επίπεδο μεγέθυνσης (ζου
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Το διάφανο υπόβαθρο - σκακιέρα να ακολουθεί το επίπεδο μεγέθυνσης (ζουμ) του καμβά"
 
+#. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
+msgid "Select layer when clicking on one of its buttons:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning past color:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning future color:"
+msgstr ""
+
 msgid "Animated selection borders"
 msgstr "Κίνηση περιγράμματος επιλογής"
 
@@ -1740,8 +1756,9 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Αν είναι επιλεγμένο, η κίνηση παίζει μόνο σε καρέ που έχουν την ίδια καρτέλα.\n"
 "Αλλιώς, η κίνηση θα παίζει σε όλα τα καρέ, αγνοώντας τις καρτέλες."
 
-msgid "Blue-Red Mode"
-msgstr "Μπλε-Κόκκινη λειτουργία"
+#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+msgid "Color mode"
+msgstr ""
 
 msgid "Show past frames:"
 msgstr "Εμφάνιση προηγούμενων καρέ:"
