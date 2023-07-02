@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2023-06-16 15:39\n"
+"PO-Revision-Date: 2023-07-02 19:26\n"
 
 msgid "OK"
 msgstr "예"
@@ -602,6 +602,10 @@ msgstr "테마"
 
 msgid "Canvas"
 msgstr "캔버스"
+
+#. Refers to the animation timeline.
+msgid "Timeline"
+msgstr ""
 
 msgid "Selection"
 msgstr "선택"
@@ -1377,6 +1381,18 @@ msgstr "캔버스 확대 레벨을 따라감"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "투명 배경 체크 무늬가 캔버스 확대 레벨을 따라감"
 
+#. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
+msgid "Select layer when clicking on one of its buttons:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning past color:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning future color:"
+msgstr ""
+
 msgid "Animated selection borders"
 msgstr "움직이는 선택 테두리"
 
@@ -1736,8 +1752,9 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "선택 되었다면, 같은 태그의 프레임만 애니메이션이 재생 됩니다.\n"
 "그렇지 않다면, 태그를 무시하고 모든 프레임의 애니메이션이 재생 됩니다."
 
-msgid "Blue-Red Mode"
-msgstr "청-적 모드"
+#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+msgid "Color mode"
+msgstr ""
 
 msgid "Show past frames:"
 msgstr "이전 프래임 보기"
