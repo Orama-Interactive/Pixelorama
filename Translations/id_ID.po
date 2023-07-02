@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-06-23 09:17\n"
+"PO-Revision-Date: 2023-07-02 19:25\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -603,6 +603,10 @@ msgstr "Tema"
 
 msgid "Canvas"
 msgstr "Kanvas"
+
+#. Refers to the animation timeline.
+msgid "Timeline"
+msgstr ""
 
 msgid "Selection"
 msgstr "Seleksi"
@@ -1381,6 +1385,18 @@ msgstr "Ikuti Tingkat Kekeran Kanvas"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Pola catur transparan mengikuti tingkat kekeran kanvas"
 
+#. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
+msgid "Select layer when clicking on one of its buttons:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning past color:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning future color:"
+msgstr ""
+
 msgid "Animated selection borders"
 msgstr "Tepian seleksi dianimasikan"
 
@@ -1740,8 +1756,9 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Jika dipilih, animasi akan diputar hanya pada bingkai dengan tag sama.\n"
 "Jika tidak, maka animasi akan diputar untuk semua bingkai."
 
-msgid "Blue-Red Mode"
-msgstr "Mode Biru-Merah"
+#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+msgid "Color mode"
+msgstr ""
 
 msgid "Show past frames:"
 msgstr "Muncul bingkai sebelum:"
