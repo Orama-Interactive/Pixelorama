@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-06-25 22:06\n"
+"PO-Revision-Date: 2023-07-02 19:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -603,6 +603,10 @@ msgstr "Teme"
 
 msgid "Canvas"
 msgstr "Pânză"
+
+#. Refers to the animation timeline.
+msgid "Timeline"
+msgstr ""
 
 msgid "Selection"
 msgstr "Selecție"
@@ -1381,6 +1385,18 @@ msgstr "Urmărește nivelul de transfocare al pânzei"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Carourile transparente urmăresc nivelul de transfocare al pânzei"
 
+#. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
+msgid "Select layer when clicking on one of its buttons:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning past color:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning future color:"
+msgstr ""
+
 msgid "Animated selection borders"
 msgstr "Margini de selecție animate"
 
@@ -1740,8 +1756,9 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Dacă opțiunea este selectată, animația va rula doar pe cadrele cu aceeași etichetă.\n"
 "În caz contrar, animația va rula pentru toate cadrele, ignorând etichetele."
 
-msgid "Blue-Red Mode"
-msgstr "Mod albastru-roșu"
+#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+msgid "Color mode"
+msgstr ""
 
 msgid "Show past frames:"
 msgstr "Arată cadrele trecute:"
