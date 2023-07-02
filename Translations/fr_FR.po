@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-07-02 19:25\n"
+"PO-Revision-Date: 2023-07-02 22:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -606,7 +606,7 @@ msgstr "Canevas"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Timeline"
 
 msgid "Selection"
 msgstr "Sélection"
@@ -1387,15 +1387,15 @@ msgstr "Le damier transparent suit le niveau de zoom du canevas"
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
-msgstr ""
+msgstr "Sélectionner le calque en cliquant sur l'un de ses boutons :"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr ""
+msgstr "Peau d'oignon couleur passée :"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr ""
+msgstr "Peau d'oignon couleur future :"
 
 msgid "Animated selection borders"
 msgstr "Bords de sélection animés"
@@ -1758,7 +1758,7 @@ msgstr "Si sélectionné, l'animation ne joue que sur les frames partageant le m
 
 #. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "Mode couleur"
 
 msgid "Show past frames:"
 msgstr "Afficher les frames précédentes:"
