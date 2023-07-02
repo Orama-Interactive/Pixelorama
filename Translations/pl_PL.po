@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-06-25 21:05\n"
+"PO-Revision-Date: 2023-07-02 19:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -602,6 +602,10 @@ msgstr "Motywy"
 
 msgid "Canvas"
 msgstr "Płótno"
+
+#. Refers to the animation timeline.
+msgid "Timeline"
+msgstr ""
 
 msgid "Selection"
 msgstr "Zaznaczanie"
@@ -1380,6 +1384,18 @@ msgstr "Śledź poziom przybliżenia płótna"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Przezroczysta siatka śledzi poziom przybliżenia płótna"
 
+#. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
+msgid "Select layer when clicking on one of its buttons:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning past color:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning future color:"
+msgstr ""
+
 msgid "Animated selection borders"
 msgstr "Animowana ramka obszaru zaznaczenia"
 
@@ -1739,8 +1755,9 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Jeśli jest zaznaczone, animacja odtwarza się tylko na klatkach z tym samym tagiem.\n"
 "W przeciwnym wypadku, animacja odtworzy się na wszystkich klatkach, ignorując tagi."
 
-msgid "Blue-Red Mode"
-msgstr "Niebiesko-czerwone prześwity"
+#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+msgid "Color mode"
+msgstr ""
 
 msgid "Show past frames:"
 msgstr "Pokaż poprzednie klatki:"
