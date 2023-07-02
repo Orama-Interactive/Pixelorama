@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-06-17 00:27\n"
+"PO-Revision-Date: 2023-07-02 19:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -603,6 +603,10 @@ msgstr "Temi"
 
 msgid "Canvas"
 msgstr "Canvas"
+
+#. Refers to the animation timeline.
+msgid "Timeline"
+msgstr ""
 
 msgid "Selection"
 msgstr "Selezione"
@@ -1381,6 +1385,18 @@ msgstr "Segui il Livello di Zoom del canvas"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Il checker trasparente segue il livello di zoom del canvas"
 
+#. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
+msgid "Select layer when clicking on one of its buttons:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning past color:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning future color:"
+msgstr ""
+
 msgid "Animated selection borders"
 msgstr "Bordi selezione animati"
 
@@ -1740,8 +1756,9 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Se è selezionato, l'animazione viene eseguita solo sui fotogrammi che hanno lo stesso tag.\n"
 "Se non lo è, l'animazione verrà riprodotta per tutti i fotogrammi, ignorando i tag."
 
-msgid "Blue-Red Mode"
-msgstr "Modalità Blu-Rosso"
+#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+msgid "Color mode"
+msgstr ""
 
 msgid "Show past frames:"
 msgstr "Mostra fotogrammi precedenti:"
