@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-07-02 19:25\n"
+"PO-Revision-Date: 2023-07-02 20:26\n"
 
 msgid "OK"
 msgstr "OK"
@@ -606,7 +606,7 @@ msgstr "Pânză"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Cronologie"
 
 msgid "Selection"
 msgstr "Selecție"
@@ -1387,15 +1387,15 @@ msgstr "Carourile transparente urmăresc nivelul de transfocare al pânzei"
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
-msgstr ""
+msgstr "Selectează stratul atunci când dai clic pe unul din butoanele acestuia:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr ""
+msgstr "Culoarea trecută a cadrelor multiple simultane:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr ""
+msgstr "Culoarea viitoare a cadrelor multiple simultane:"
 
 msgid "Animated selection borders"
 msgstr "Margini de selecție animate"
@@ -1758,7 +1758,7 @@ msgstr "Dacă opțiunea este selectată, animația va rula doar pe cadrele cu ac
 
 #. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "Mod culoare"
 
 msgid "Show past frames:"
 msgstr "Arată cadrele trecute:"
@@ -2204,7 +2204,7 @@ msgstr "minut(e)"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
-msgstr ""
+msgstr "Include etichetele cadrelor în numele fișierului"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
@@ -2216,11 +2216,11 @@ msgstr "Creează mai multe fișiere, dar fiecare fișier este stocat în alt dos
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr ""
+msgstr "Caractere separatoare:"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
-msgstr ""
+msgstr "Caracterele care separă numele fișierului și numărul cadrului"
 
 msgid "Close"
 msgstr "Închide"
