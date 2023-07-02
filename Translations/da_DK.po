@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2023-06-16 15:38\n"
+"PO-Revision-Date: 2023-07-02 19:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -602,6 +602,10 @@ msgstr "Temaer"
 
 msgid "Canvas"
 msgstr "Lærred"
+
+#. Refers to the animation timeline.
+msgid "Timeline"
+msgstr ""
 
 msgid "Selection"
 msgstr "Markering"
@@ -1379,6 +1383,18 @@ msgstr ""
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Den gennemsigtige tern-baggrund følger lærredets zoom-niveau"
 
+#. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
+msgid "Select layer when clicking on one of its buttons:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning past color:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning future color:"
+msgstr ""
+
 msgid "Animated selection borders"
 msgstr ""
 
@@ -1731,8 +1747,9 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 "If it's not, the animation will play for all frames, ignoring tags."
 msgstr ""
 
-msgid "Blue-Red Mode"
-msgstr "Blå-Rød Tilstand"
+#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+msgid "Color mode"
+msgstr ""
 
 msgid "Show past frames:"
 msgstr "Vis tidligere rammer:"
