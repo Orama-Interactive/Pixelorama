@@ -109,6 +109,10 @@ var checker_follow_movement := false
 var checker_follow_scale := false
 var tilemode_opacity := 1.0
 
+var select_layer_on_button_click := false
+var onion_skinning_past_color := Color.red
+var onion_skinning_future_color := Color.blue
+
 var selection_animated_borders := true
 var selection_border_color_1 := Color.white
 var selection_border_color_2 := Color.black

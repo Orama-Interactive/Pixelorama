@@ -911,7 +911,7 @@ margin_right = 126.0
 margin_bottom = 116.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
-text = "Blue-Red Mode"
+text = "Color mode"
 
 [node name="GridContainer" type="GridContainer" parent="OnionSkinningSettings/OnionSkinningButtons"]
 margin_top = 120.0

@@ -966,6 +966,87 @@ rect_min_size = Vector2( 64, 20 )
 mouse_default_cursor_shape = 2
 color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
+[node name="Timeline" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide"]
+visible = false
+margin_top = 28.0
+margin_right = 498.0
+margin_bottom = 94.0
+
+[node name="TimelineHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline"]
+margin_top = 108.0
+margin_right = 498.0
+margin_bottom = 122.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineHeader"]
+margin_right = 51.0
+margin_bottom = 14.0
+theme_type_variation = "Header"
+text = "Timeline"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineHeader"]
+margin_left = 51.0
+margin_right = 498.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="TimelineOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline"]
+margin_right = 498.0
+margin_bottom = 48.0
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
+columns = 3
+
+[node name="SelectLayerOnButtonLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions"]
+margin_top = 5.0
+margin_right = 176.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 110, 0 )
+mouse_filter = 0
+size_flags_horizontal = 3
+text = "Select layer when clicking on one of its buttons:"
+
+[node name="SelectLayerOnButton" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions"]
+margin_left = 180.0
+margin_right = 275.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "On"
+
+[node name="OnionSkinningPastColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions"]
+margin_left = 279.0
+margin_top = 5.0
+margin_right = 374.0
+margin_bottom = 19.0
+mouse_filter = 0
+text = "Onion skinning past color:"
+
+[node name="OnionSkinningPastColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions"]
+margin_top = 28.0
+margin_right = 176.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 64, 20 )
+mouse_default_cursor_shape = 2
+color = Color( 1, 0, 0, 1 )
+
+[node name="OnionSkinningFutureColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions"]
+margin_left = 180.0
+margin_top = 31.0
+margin_right = 275.0
+margin_bottom = 45.0
+mouse_filter = 0
+text = "Onion skinning future color:"
+
+[node name="OnionSkinningFutureColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions"]
+margin_left = 279.0
+margin_top = 28.0
+margin_right = 374.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 64, 20 )
+mouse_default_cursor_shape = 2
+color = Color( 0, 0, 1, 1 )
+
 [node name="Selection" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide"]
 visible = false
 margin_top = 28.0

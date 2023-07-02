@@ -74,7 +74,7 @@ func update_buttons() -> void:
 			lock_button.modulate.a = 0.33
 
 
-# Used when pressing a button on this changes the appearnce of other layers (ie: expand or visible)
+# When pressing a button, change the appearance of other layers (ie: expand or visible)
 func _update_buttons_all_layers() -> void:
 	for layer_button in Global.layer_vbox.get_children():
 		layer_button.update_buttons()
@@ -148,7 +148,7 @@ func _save_layer_name(new_name: String) -> void:
 	Global.current_project.layers[layer].name = new_name
 
 
-func _on_ExpandButton_pressed():
+func _on_ExpandButton_pressed() -> void:
 	Global.current_project.layers[layer].expanded = !Global.current_project.layers[layer].expanded
 	_update_buttons_all_layers()
 
@@ -157,14 +157,16 @@ func _on_VisibilityButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].visible = !Global.current_project.layers[layer].visible
 	Global.canvas.update()
-	_select_current_layer()
+	if Global.select_layer_on_button_click:
+		_select_current_layer()
 	_update_buttons_all_layers()
 
 
 func _on_LockButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].locked = !Global.current_project.layers[layer].locked
-	_select_current_layer()
+	if Global.select_layer_on_button_click:
+		_select_current_layer()
 	_update_buttons_all_layers()
 
 
@@ -173,6 +175,8 @@ func _on_LinkButton_pressed() -> void:
 	var layer_class: PixelLayer = Global.current_project.layers[layer]
 	layer_class.new_cels_linked = !layer_class.new_cels_linked
 	update_buttons()
+	if Global.select_layer_on_button_click:
+		_select_current_layer()
 
 
 func _select_current_layer() -> void:
