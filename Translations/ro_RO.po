@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-07-02 20:26\n"
+"PO-Revision-Date: 2023-07-02 21:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -881,7 +881,7 @@ msgstr "Niveluri de posterizare:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr "Intensitate granulare:"
+msgstr "Intensitate de intercalare a nuanțelor:"
 
 msgid "View Splash Screen"
 msgstr "Vizualizare ecran de întâmpinare"
