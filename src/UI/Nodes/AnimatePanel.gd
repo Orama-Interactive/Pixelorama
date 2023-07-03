@@ -5,7 +5,7 @@ var image_effect_node: ConfirmationDialog
 var frames := []  # Set this value before calling "get_animated_values"
 var properties := []  # Contains dictionary of properties
 var resetter_values := []  # Contains the Original properties without any change
-var _current_id: int = 0  # The property currently selected in "property_list"
+var _current_id := 0  # The property currently selected in "property_list"
 
 onready var can_animate_button: CheckBox = $"%CanAnimate"
 onready var property_list: ItemList = $"%PropertyList"
@@ -28,8 +28,8 @@ func re_calibrate_preview_slider():
 	preview_slider.visible = true
 
 
-func add_float_property(name: String, property_node: Range):
-	var info = {
+func add_float_property(prop_name: String, property_node: Range):
+	var info := {
 		"range_node": property_node,
 		"can_animate": false,
 		"initial_value": property_node.value,
@@ -38,17 +38,17 @@ func add_float_property(name: String, property_node: Range):
 	}
 	properties.append(info)
 	resetter_values.append(property_node.value)
-	property_list.add_item(name)
+	property_list.add_item(prop_name)
 	property_node.connect("value_changed", self, "_on_range_node_value_changed")
 
 
 func get_animated_values(frame_idx: int, property_idx := 0) -> float:
-	var tween = SceneTreeTween.new()
+	var tween := SceneTreeTween.new()
 	if property_idx <= 0 or property_idx < properties.size():
 		if frame_idx in frames:
 			if properties[property_idx]["can_animate"] and frames.size() > 1:
-				var duration = frames.size() - 1
-				var elapsed = frames.find(frame_idx)
+				var duration := frames.size() - 1
+				var elapsed := frames.find(frame_idx)
 				var initial = properties[property_idx]["initial_value"]
 				var delta = properties[property_idx]["range_node"].value - initial
 				var transition_type = properties[property_idx]["transition_type"]
@@ -61,7 +61,7 @@ func get_animated_values(frame_idx: int, property_idx := 0) -> float:
 		else:
 			return resetter_values[property_idx]
 	else:
-		printerr("something is wrong")
+		printerr("Property index is exceeding the bounds of the number of properties")
 		return 0.0
 
 
@@ -131,20 +131,20 @@ func _refresh_properties(idx: int):
 
 
 func _populate_ease_type():
-	$"%EaseType".add_item("Start slowly and speeds up towards the end", Tween.EASE_IN)
-	$"%EaseType".add_item("Starts quickly and slows down towards the end.", Tween.EASE_OUT)
-	$"%EaseType".add_item("Slowest at both ends fast at middle", Tween.EASE_IN_OUT)
-	$"%EaseType".add_item("Fast at both ends slow at middle", Tween.EASE_OUT_IN)
+	$"%EaseType".add_item("Starts slowly and speeds up towards the end", Tween.EASE_IN)
+	$"%EaseType".add_item("Starts quickly and slows down towards the end", Tween.EASE_OUT)
+	$"%EaseType".add_item("Slowest at both ends, fast at middle", Tween.EASE_IN_OUT)
+	$"%EaseType".add_item("Fast at both ends, slow at middle", Tween.EASE_OUT_IN)
 
 
 func _populate_transition_type():
 	$"%TransitionType".add_item("Linear", Tween.TRANS_LINEAR)
-	$"%TransitionType".add_item("Quadratic (to the power of 2)", Tween.TRANS_QUAD)
-	$"%TransitionType".add_item("Cubic (to the power of 3)", Tween.TRANS_CUBIC)
-	$"%TransitionType".add_item("Quartic (to the power of 4)", Tween.TRANS_QUART)
-	$"%TransitionType".add_item("Quintic (to the power of 5)", Tween.TRANS_QUINT)
-	$"%TransitionType".add_item("Exponential (to the power of x)", Tween.TRANS_EXPO)
-	$"%TransitionType".add_item("Square Root", Tween.TRANS_CIRC)
+	$"%TransitionType".add_item("Quadratic (power of 2)", Tween.TRANS_QUAD)
+	$"%TransitionType".add_item("Cubic (power of 3)", Tween.TRANS_CUBIC)
+	$"%TransitionType".add_item("Quartic (power of 4)", Tween.TRANS_QUART)
+	$"%TransitionType".add_item("Quintic (power of 5)", Tween.TRANS_QUINT)
+	$"%TransitionType".add_item("Exponential (power of x)", Tween.TRANS_EXPO)
+	$"%TransitionType".add_item("Square root", Tween.TRANS_CIRC)
 	$"%TransitionType".add_item("Sine", Tween.TRANS_SINE)
 	$"%TransitionType".add_item("Wiggling around the edges", Tween.TRANS_ELASTIC)
 	$"%TransitionType".add_item("Bouncing at the end", Tween.TRANS_BOUNCE)

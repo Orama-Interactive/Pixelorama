@@ -32,7 +32,7 @@ margin_right = 346.0
 min_value = 1.0
 max_value = 1.0
 value = 1.0
-prefix = "Preview Frame:"
+prefix = "Preview frame:"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 28.0
@@ -51,62 +51,63 @@ unique_name_in_owner = true
 visible = false
 margin_left = 104.0
 margin_right = 346.0
-margin_bottom = 194.0
+margin_bottom = 184.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Options"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 242.0
+margin_bottom = 14.0
 
 [node name="Name" type="Label" parent="VBoxContainer/HBoxContainer/Options/HBoxContainer"]
 unique_name_in_owner = true
-margin_right = 242.0
 margin_bottom = 14.0
 theme_type_variation = "Header"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer/Options/HBoxContainer"]
-margin_right = 40.0
-margin_bottom = 4.0
+margin_left = 4.0
+margin_right = 242.0
+margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="CanAnimate" type="CheckBox" parent="VBoxContainer/HBoxContainer/Options"]
 unique_name_in_owner = true
-margin_left = 108.0
+margin_left = 160.0
 margin_top = 18.0
 margin_right = 242.0
-margin_bottom = 58.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 8
 text = "Animate"
 
 [node name="Values" type="GridContainer" parent="VBoxContainer/HBoxContainer/Options"]
-margin_top = 62.0
+margin_top = 46.0
 margin_right = 242.0
-margin_bottom = 162.0
+margin_bottom = 146.0
 columns = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values"]
 margin_top = 5.0
-margin_right = 80.0
+margin_right = 87.0
 margin_bottom = 19.0
-text = "Initial Value:"
+text = "Initial value:"
 align = 2
 
 [node name="Initial" parent="VBoxContainer/HBoxContainer/Options/Values" instance=ExtResource( 2 )]
 unique_name_in_owner = true
-margin_left = 84.0
+margin_left = 91.0
 margin_right = 242.0
 editable = false
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values"]
 margin_top = 33.0
-margin_right = 80.0
+margin_right = 87.0
 margin_bottom = 47.0
-text = "Final Value: "
+text = "Final value:"
 align = 2
 
 [node name="Final" parent="VBoxContainer/HBoxContainer/Options/Values" instance=ExtResource( 2 )]
 unique_name_in_owner = true
-margin_left = 84.0
+margin_left = 91.0
 margin_top = 28.0
 margin_right = 242.0
 margin_bottom = 52.0
@@ -114,35 +115,37 @@ editable = false
 
 [node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values"]
 margin_top = 59.0
-margin_right = 80.0
+margin_right = 87.0
 margin_bottom = 73.0
-text = "Ease Type:"
+text = "Ease type:"
 align = 2
 
 [node name="EaseType" type="OptionButton" parent="VBoxContainer/HBoxContainer/Options/Values"]
 unique_name_in_owner = true
-margin_left = 84.0
+margin_left = 91.0
 margin_top = 56.0
 margin_right = 242.0
 margin_bottom = 76.0
+mouse_default_cursor_shape = 2
 size_flags_vertical = 4
 disabled = true
 clip_text = true
 
 [node name="Label5" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values"]
 margin_top = 83.0
-margin_right = 80.0
+margin_right = 87.0
 margin_bottom = 97.0
-text = "Interpolate :"
+text = "Interpolation:"
 align = 2
 
 [node name="TransitionType" type="OptionButton" parent="VBoxContainer/HBoxContainer/Options/Values"]
 unique_name_in_owner = true
-margin_left = 84.0
+margin_left = 91.0
 margin_top = 80.0
 margin_right = 242.0
 margin_bottom = 100.0
 hint_tooltip = "How the value changes while moving from initial to final value"
+mouse_default_cursor_shape = 2
 size_flags_vertical = 4
 disabled = true
 clip_text = true
