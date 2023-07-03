@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-07-03 19:27\n"
+"PO-Revision-Date: 2023-07-03 23:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2559,81 +2559,81 @@ msgstr "Portata:"
 
 #. Found under certain image effects that support properties that can be animated.
 msgid "Animatable Properties"
-msgstr ""
+msgstr "Proprietà Animabili"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
 msgid "Preview frame:"
-msgstr ""
+msgstr "Quadro di anteprima:"
 
 #. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
 msgid "Animate"
-msgstr ""
+msgstr "Anima"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
 msgid "Initial value:"
-msgstr ""
+msgstr "Valore iniziale:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the final value of the property.
 msgid "Final value:"
-msgstr ""
+msgstr "Valore finale:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
 msgid "Ease type:"
-msgstr ""
+msgstr "Tipo di facilità:"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
-msgstr ""
+msgstr "Inizia lentamente e accelera verso la fine"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts quickly and slows down towards the end"
-msgstr ""
+msgstr "Inizia rapidamente e rallenta verso la fine"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
-msgstr ""
+msgstr "Più lento ad entrambe le estremità, veloce al centro"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Fast at both ends, slow at middle"
-msgstr ""
+msgstr "Veloce ad entrambe le estremità, lenta al centro"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
-msgstr ""
+msgstr "Quadratico (potenza di 2)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Cubic (power of 3)"
-msgstr ""
+msgstr "Cubico (potenza di 3)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quartic (power of 4)"
-msgstr ""
+msgstr "Quartico (potenza di 4)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quintic (power of 5)"
-msgstr ""
+msgstr "Quintica (potenza di 5)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Exponential (power of x)"
-msgstr ""
+msgstr "Esponenziale (potenza di x)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Square root"
-msgstr ""
+msgstr "Radice quadrata"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Sine"
-msgstr ""
+msgstr "Seno"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Wiggling around the edges"
-msgstr ""
+msgstr "Distorcendo i bordi"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
-msgstr ""
+msgstr "Rimbalzo alla fine"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends)"
-msgstr ""
+msgstr "Rimozione alle estremità)"
 
