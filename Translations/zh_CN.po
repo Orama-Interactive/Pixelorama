@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-07-02 19:26\n"
+"PO-Revision-Date: 2023-07-03 03:03\n"
 
 msgid "OK"
 msgstr "确定"
@@ -606,7 +606,7 @@ msgstr "画布"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "时间轴"
 
 msgid "Selection"
 msgstr "选区"
@@ -1387,15 +1387,15 @@ msgstr "透明检查器跟随画布缩放级别"
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
-msgstr ""
+msgstr "单击其中一个按钮时选择图层："
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr ""
+msgstr "洋葱皮经过颜色："
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr ""
+msgstr "洋葱皮未来颜色："
 
 msgid "Animated selection borders"
 msgstr "动画选择边框"
@@ -1758,7 +1758,7 @@ msgstr "如果选中，动画仅在具有相同标签的帧上播放。\n"
 
 #. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "颜色模式"
 
 msgid "Show past frames:"
 msgstr "显示过去的帧："
