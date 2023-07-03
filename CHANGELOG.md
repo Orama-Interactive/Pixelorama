@@ -13,15 +13,22 @@ Built using Godot 3.5.2
 ### Added
 - Fast way to clone frames of a tag. [#861](https://github.com/Orama-Interactive/Pixelorama/pull/861)
 - Added a reverse frames option on the right click menu of the frame buttons, to easily reverse the order of the selected frames.
+- A new Timeline category in the Preferences with options such as the colors of onion skinning's color mode, and whether a layer should be selected when a layer button (such as lock, visibility etc) gets pressed.
 - It is now possible to disable saving frames that have a tag to a different folder, as well as specifying a separator character in the file names.
 
 ### Changed
+- The image effect animation system introduced in v0.11 has been overhauled with a better user interface, and with tweening options. [#879](https://github.com/Orama-Interactive/Pixelorama/pull/879)
 - The cel opacity slider now affects all of the selected cels. [#865](https://github.com/Orama-Interactive/Pixelorama/pull/865)
 - The right click menu of the frame buttons now works for all selected frames, besides "move left" and "move right".
 - The canvas is automatically enlarged when importing an image of a larger size to the project.
 - Newly cloned frames are now automatically selected. [#861](https://github.com/Orama-Interactive/Pixelorama/pull/861)
+- Clicking on a layer button (such as lock, visibility etc) no longer selects the layer by default. This behavior can now be changed in the Preferences.
 - The image menu has been re-arranged. [#878](https://github.com/Orama-Interactive/Pixelorama/pull/878)
 - The "OK" button of the save and export dialogs are now named "Save" and "Export" respectively. [#876](https://github.com/Orama-Interactive/Pixelorama/pull/876)
+
+### Fixed
+- Fixed wrong saturation and value values. They were divided by 360, while they should have been divided by 100. [#879](https://github.com/Orama-Interactive/Pixelorama/pull/879)
+- Fixed image effect animations appearing when changing the affected option, even if that image effect had no animatable properties. [#879](https://github.com/Orama-Interactive/Pixelorama/pull/879)
 
 ## [v0.11] - 2023-06-13
 This update has been brought to you by the contributions of:
