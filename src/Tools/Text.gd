@@ -104,7 +104,7 @@ func draw_start(position : Vector2) -> void:
 	text_label.text = current_text
 	text_edit_pos = position
 	text_label.rect_min_size = Vector2(32, max(32, font.get_height()))
-	text_label.rect_position = position - Vector2(0, text_label.rect_min_size.y / 2)
+	text_label.rect_position = position# - Vector2(0, text_label.rect_min_size.y / 2)
 	text_label.add_font_override("font", font)
 	text_label.add_constant_override("line_spacing", 0)
 	text_label.add_stylebox_override("normal", TEXT_EDIT_STYLEBOX)
@@ -275,7 +275,7 @@ func _on_ApplyText_pressed():
 
 		# TODO: this vshape shouldn't always be new:
 		var text_vshape := VectorTextShape.new()
-		text_vshape.pos = text_label.rect_position# + Vector2(1, font.get_ascent())
+		text_vshape.pos = text_label.rect_position# - Vector2(0, text_label.rect_min_size.y / 2)
 		text_vshape.text = text_label.text
 		text_vshape.font = shape_font
 		text_vshape.font_size = text_size

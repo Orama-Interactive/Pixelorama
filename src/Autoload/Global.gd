@@ -459,7 +459,7 @@ func undo_or_redo(
 			"Merge Layer",
 			"Link Cel",
 			"Unlink Cel",
-			"Add Text"
+			"Add Text" # TODO: probably shouldn't add more stuff here
 		]
 	):
 		if layer_index > -1 and frame_index > -1:
