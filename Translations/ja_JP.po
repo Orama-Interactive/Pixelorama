@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-07-02 19:26\n"
+"PO-Revision-Date: 2023-07-03 04:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -606,7 +606,7 @@ msgstr "キャンバス"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "タイムライン"
 
 msgid "Selection"
 msgstr "選択範囲"
@@ -1387,15 +1387,15 @@ msgstr "透明なチェッカーはキャンバスのズームレベルに従い
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
-msgstr ""
+msgstr "いずれかのボタンをクリックしたときにレイヤーを選択:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr ""
+msgstr "オニオンスキンの前の色："
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr ""
+msgstr "オニオンスキンの後の色："
 
 msgid "Animated selection borders"
 msgstr "アニメーション化された範囲"
@@ -1758,7 +1758,7 @@ msgstr "選択した場合、同じタグを持つフレームでのみのアニ
 
 #. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "カラーモード"
 
 msgid "Show past frames:"
 msgstr "過去のフレームを表示:"
