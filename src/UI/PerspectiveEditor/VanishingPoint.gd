@@ -168,14 +168,14 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 
 	# This code in if block is purely for beautification
 	if pos_x.value > p_size.x / 2 and !loaded_line_data:
-		# If new line is created ahed of half project distance then
-		# reverse it's angle
+		# If new line is created ahead of half project distance then
+		# reverse its angle
 		line_data.angle = 180
 
 	if is_tracker:  # if we are creating tracker line then length adjustment is not required
 		if tracker_line != null:  # Also if the tracker line already exists then cancel creation
 			return
-	else:  # If we are not creating a perspective line then adjust it's length
+	else:  # If we are not creating a perspective line then adjust its length
 		if !loaded_line_data:
 			line_data.length = p_size.x
 
@@ -183,7 +183,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 	var line = preload("res://src/UI/PerspectiveEditor/PerspectiveLine.tscn").instance()
 	line.initiate(line_data, self)
 
-	# Set it's mode accordingly
+	# Set its mode accordingly
 	if is_tracker:  # Settings for Tracker mode
 		line.track_mouse = true
 		tracker_line = line

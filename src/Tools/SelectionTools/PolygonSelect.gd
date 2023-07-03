@@ -10,6 +10,8 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseMotion:
 		_last_position = Global.canvas.current_pixel.floor()
+		if Global.mirror_view:
+			_last_position.x = (Global.current_project.size.x - 1) - _last_position.x
 	elif event is InputEventMouseButton:
 		if event.doubleclick and event.button_index == tool_slot.button and _draw_points:
 			$DoubleClickTimer.start()

@@ -1,0 +1,200 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/Tools/BaseTool.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Tools/CropTool.gd" type="Script" id=3]
+[ext_resource path="res://assets/graphics/misc/unlocked_size.png" type="Texture" id=4]
+[ext_resource path="res://src/UI/Nodes/ValueSliderV2.tscn" type="PackedScene" id=5]
+
+[node name="ToolOptions" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="ModeLabel" type="Label" parent="." index="2"]
+margin_top = 26.0
+margin_right = 116.0
+margin_bottom = 40.0
+text = "Mode:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." index="3"]
+margin_top = 44.0
+margin_right = 116.0
+margin_bottom = 66.0
+
+[node name="CropMode" type="OptionButton" parent="HBoxContainer" index="0"]
+unique_name_in_owner = true
+margin_right = 84.0
+margin_bottom = 22.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "Margins"
+clip_text = true
+items = [ "Margins", null, false, 0, null, "Position + Size", null, false, 1, null ]
+selected = 0
+
+[node name="SizeLock" type="Button" parent="HBoxContainer" index="1"]
+unique_name_in_owner = true
+margin_left = 88.0
+margin_right = 116.0
+margin_bottom = 22.0
+hint_tooltip = "Locked size
+
+When enabled using the tool on the canvas will only move the cropping rectangle.
+
+When disabled using the tool on the canvas will draw the rectangle."
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+icon = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="MarginsContainer" type="VBoxContainer" parent="." index="4"]
+unique_name_in_owner = true
+margin_top = 70.0
+margin_right = 116.0
+margin_bottom = 196.0
+
+[node name="MarginsLabel" type="Label" parent="MarginsContainer" index="0"]
+margin_right = 116.0
+margin_bottom = 14.0
+text = "Margins:"
+
+[node name="Top" parent="MarginsContainer" index="1" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_top = 18.0
+margin_right = 116.0
+margin_bottom = 42.0
+allow_greater = true
+allow_lesser = true
+prefix = "Top:"
+
+[node name="Bottom" parent="MarginsContainer" index="2" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_top = 46.0
+margin_right = 116.0
+margin_bottom = 70.0
+allow_greater = true
+allow_lesser = true
+prefix = "Bottom:"
+
+[node name="Left" parent="MarginsContainer" index="3" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_top = 74.0
+margin_right = 116.0
+margin_bottom = 98.0
+allow_greater = true
+allow_lesser = true
+prefix = "Left:"
+
+[node name="Right" parent="MarginsContainer" index="4" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_top = 102.0
+margin_right = 116.0
+margin_bottom = 126.0
+allow_greater = true
+allow_lesser = true
+prefix = "Right:"
+
+[node name="RatioContainer" type="VBoxContainer" parent="." index="5"]
+unique_name_in_owner = true
+visible = false
+margin_top = 200.0
+margin_right = 116.0
+margin_bottom = 242.0
+
+[node name="AspectRatioLabel" type="Label" parent="RatioContainer" index="0"]
+margin_right = 116.0
+margin_bottom = 14.0
+text = "Aspect Ratio:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RatioContainer" index="1"]
+margin_top = 18.0
+margin_right = 116.0
+margin_bottom = 42.0
+
+[node name="RatioX" parent="RatioContainer/HBoxContainer" index="0" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_right = 52.0
+min_value = 1.0
+value = 1.0
+allow_greater = true
+
+[node name="Label" type="Label" parent="RatioContainer/HBoxContainer" index="1"]
+margin_left = 56.0
+margin_top = 5.0
+margin_right = 60.0
+margin_bottom = 19.0
+text = ":"
+
+[node name="RatioY" parent="RatioContainer/HBoxContainer" index="2" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+margin_left = 64.0
+margin_right = 116.0
+min_value = 1.0
+value = 1.0
+allow_greater = true
+
+[node name="PosSizeContainer" type="VBoxContainer" parent="." index="6"]
+unique_name_in_owner = true
+margin_top = 200.0
+margin_right = 116.0
+margin_bottom = 344.0
+
+[node name="PositionLabel" type="Label" parent="PosSizeContainer" index="0"]
+margin_right = 116.0
+margin_bottom = 14.0
+text = "Position:"
+
+[node name="Position" parent="PosSizeContainer" index="1" instance=ExtResource( 5 )]
+unique_name_in_owner = true
+margin_top = 18.0
+margin_right = 116.0
+margin_bottom = 70.0
+allow_greater = true
+allow_lesser = true
+
+[node name="SizeLabel" type="Label" parent="PosSizeContainer" index="2"]
+margin_top = 74.0
+margin_right = 116.0
+margin_bottom = 88.0
+text = "Size:"
+
+[node name="Size" parent="PosSizeContainer" index="3" instance=ExtResource( 5 )]
+unique_name_in_owner = true
+margin_top = 92.0
+margin_right = 116.0
+margin_bottom = 144.0
+value = Vector2( 1, 1 )
+min_value = Vector2( 1, 1 )
+allow_greater = true
+show_ratio = true
+prefix_x = "Width:"
+prefix_y = "Height:"
+
+[node name="Apply" type="Button" parent="." index="7"]
+margin_top = 348.0
+margin_right = 116.0
+margin_bottom = 368.0
+mouse_default_cursor_shape = 2
+text = "Apply"
+
+[node name="DimensionsLabel" type="Label" parent="." index="8"]
+unique_name_in_owner = true
+margin_top = 372.0
+margin_right = 116.0
+margin_bottom = 386.0
+align = 1
+
+[connection signal="item_selected" from="HBoxContainer/CropMode" to="." method="_on_CropMode_item_selected"]
+[connection signal="toggled" from="HBoxContainer/SizeLock" to="." method="_on_SizeLock_toggled"]
+[connection signal="value_changed" from="MarginsContainer/Top" to="." method="_on_Top_value_changed"]
+[connection signal="value_changed" from="MarginsContainer/Bottom" to="." method="_on_Bottom_value_changed"]
+[connection signal="value_changed" from="MarginsContainer/Left" to="." method="_on_Left_value_changed"]
+[connection signal="value_changed" from="MarginsContainer/Right" to="." method="_on_Right_value_changed"]
+[connection signal="value_changed" from="RatioContainer/HBoxContainer/RatioX" to="." method="_on_RatioX_value_changed"]
+[connection signal="value_changed" from="RatioContainer/HBoxContainer/RatioY" to="." method="_on_RatioY_value_changed"]
+[connection signal="value_changed" from="PosSizeContainer/Position" to="." method="_on_Position_value_changed"]
+[connection signal="ratio_toggled" from="PosSizeContainer/Size" to="." method="_on_Size_ratio_toggled"]
+[connection signal="value_changed" from="PosSizeContainer/Size" to="." method="_on_Size_value_changed"]
+[connection signal="pressed" from="Apply" to="." method="_on_Apply_pressed"]

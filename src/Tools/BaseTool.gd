@@ -12,7 +12,7 @@ var _for_frame := 0  # cache for which frame?
 
 # Only use "_spacing_mode" and "_spacing" variables (the others are set automatically)
 # The _spacing_mode and _spacing values are to be CHANGED only in the tool scripts (e.g Pencil.gd)
-var _spacing_mode := false  # Enables spacing (continuos gaps between two strokes)
+var _spacing_mode := false  # Enables spacing (continuous gaps between two strokes)
 var _spacing := Vector2.ZERO  # Spacing between two strokes
 var _stroke_dimensions := Vector2.ONE  # 2d vector containing _brush_size from Draw.gd
 var _spacing_offset := Vector2.ZERO  # The "INITIAL" error between position and position.snapped()
@@ -122,31 +122,29 @@ func draw_preview() -> void:
 
 
 func snap_position(position: Vector2) -> Vector2:
-	var snap_distance := Global.snapping_distance * Vector2.ONE
+	var snapping_distance := Global.snapping_distance * Global.camera.zoom.x
 	if Global.snap_to_rectangular_grid:
-		var grid_size := Vector2(Global.grid_width, Global.grid_height)
-		var grid_offset := Vector2(Global.grid_offset_x, Global.grid_offset_y)
-		var grid_pos := position.snapped(grid_size)
-		grid_pos += grid_offset
+		var grid_pos := position.snapped(Global.grid_size)
+		grid_pos += Global.grid_offset
 		# keeping grid_pos as is would have been fine but this adds extra accuracy as to
 		# which snap point (from the list below) is closest to mouse and occupy THAT point
-		var t_l := grid_pos + Vector2(-grid_size.x, -grid_size.y)
-		var t_c := grid_pos + Vector2(0, -grid_size.y)  # t_c is for "top centre" and so on
-		var t_r := grid_pos + Vector2(grid_size.x, -grid_size.y)
-		var m_l := grid_pos + Vector2(-grid_size.x, 0)
+		var t_l := grid_pos + Vector2(-Global.grid_size.x, -Global.grid_size.y)
+		var t_c := grid_pos + Vector2(0, -Global.grid_size.y)  # t_c is for "top centre" and so on
+		var t_r := grid_pos + Vector2(Global.grid_size.x, -Global.grid_size.y)
+		var m_l := grid_pos + Vector2(-Global.grid_size.x, 0)
 		var m_c := grid_pos
-		var m_r := grid_pos + Vector2(grid_size.x, 0)
-		var b_l := grid_pos + Vector2(-grid_size.x, grid_size.y)
-		var b_c := grid_pos + Vector2(0, grid_size.y)
-		var b_r := grid_pos + Vector2(grid_size.x, grid_size.y)
+		var m_r := grid_pos + Vector2(Global.grid_size.x, 0)
+		var b_l := grid_pos + Vector2(-Global.grid_size.x, Global.grid_size.y)
+		var b_c := grid_pos + Vector2(0, Global.grid_size.y)
+		var b_r := grid_pos + Global.grid_size
 		var vec_arr := [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
 		for vec in vec_arr:
 			if vec.distance_to(position) < grid_pos.distance_to(position):
 				grid_pos = vec
 
-		var closest_point_grid := _get_closest_point_to_grid(position, snap_distance, grid_pos)
-		if closest_point_grid != Vector2.INF:
-			position = closest_point_grid.floor()
+		var grid_point := _get_closest_point_to_grid(position, snapping_distance, grid_pos)
+		if grid_point != Vector2.INF:
+			position = grid_point.floor()
 
 	var snap_to := Vector2.INF
 	if Global.snap_to_guides:
@@ -155,35 +153,35 @@ func snap_position(position: Vector2) -> Vector2:
 				continue
 			var s1: Vector2 = guide.points[0]
 			var s2: Vector2 = guide.points[1]
-			var snap := _snap_to_guide(snap_to, position, snap_distance, s1, s2)
+			var snap := _snap_to_guide(snap_to, position, snapping_distance, s1, s2)
 			if snap == Vector2.INF:
 				continue
 			snap_to = snap
 
 	if Global.snap_to_perspective_guides:
 		for point in Global.current_project.vanishing_points:
-			if point.has("pos_x") and point.has("pos_y"):  # Sanity check
-				for i in point.lines.size():
-					if point.lines[i].has("angle") and point.lines[i].has("length"):  # Sanity check
-						var angle: float = deg2rad(point.lines[i].angle)
-						var length: float = point.lines[i].length
-						var start = Vector2(point.pos_x, point.pos_y)
-						var s1: Vector2 = start
-						var s2 := s1 + Vector2(length * cos(angle), length * sin(angle))
-						var snap := _snap_to_guide(snap_to, position, snap_distance, s1, s2)
-						if snap == Vector2.INF:
-							continue
-						snap_to = snap
+			if not (point.has("pos_x") and point.has("pos_y")):  # Sanity check
+				continue
+			for i in point.lines.size():
+				if point.lines[i].has("angle") and point.lines[i].has("length"):  # Sanity check
+					var angle: float = deg2rad(point.lines[i].angle)
+					var length: float = point.lines[i].length
+					var start = Vector2(point.pos_x, point.pos_y)
+					var s1: Vector2 = start
+					var s2 := s1 + Vector2(length * cos(angle), length * sin(angle))
+					var snap := _snap_to_guide(snap_to, position, snapping_distance, s1, s2)
+					if snap == Vector2.INF:
+						continue
+					snap_to = snap
 	if snap_to != Vector2.INF:
 		position = snap_to.floor()
 
 	return position
 
 
-func _get_closest_point_to_grid(
-	position: Vector2, snap_distance: Vector2, grid_pos: Vector2
-) -> Vector2:
+func _get_closest_point_to_grid(position: Vector2, distance: float, grid_pos: Vector2) -> Vector2:
 	# If the cursor is close to the start/origin of a grid cell, snap to that
+	var snap_distance := distance * Vector2.ONE
 	var closest_point := Vector2.INF
 	var rect := Rect2()
 	rect.position = position - (snap_distance / 4.0)
@@ -196,13 +194,13 @@ func _get_closest_point_to_grid(
 	var grid_start_hor := Vector2(0, grid_pos.y)
 	var grid_end_hor := Vector2(Global.current_project.size.x, grid_pos.y)
 	var closest_point_hor := _get_closest_point_to_segment(
-		position, snap_distance, grid_start_hor, grid_end_hor
+		position, distance, grid_start_hor, grid_end_hor
 	)
 	# Look for a point close to a vertical grid line
 	var grid_start_ver := Vector2(grid_pos.x, 0)
 	var grid_end_ver := Vector2(grid_pos.x, Global.current_project.size.y)
 	var closest_point_ver := _get_closest_point_to_segment(
-		position, snap_distance, grid_start_ver, grid_end_ver
+		position, distance, grid_start_ver, grid_end_ver
 	)
 	# Snap to the closest point to the closest grid line
 	var horizontal_distance := (closest_point_hor - position).length()
@@ -217,11 +215,11 @@ func _get_closest_point_to_grid(
 
 
 func _get_closest_point_to_segment(
-	position: Vector2, distance: Vector2, s1: Vector2, s2: Vector2
+	position: Vector2, distance: float, s1: Vector2, s2: Vector2
 ) -> Vector2:
 	var test_line := (s2 - s1).rotated(deg2rad(90)).normalized()
-	var from_a := position - test_line * distance.length()
-	var from_b := position + test_line * distance.length()
+	var from_a := position - test_line * distance
+	var from_b := position + test_line * distance
 	var closest_point := Vector2.INF
 	if Geometry.segment_intersects_segment_2d(from_a, from_b, s1, s2):
 		closest_point = Geometry.get_closest_point_to_segment_2d(position, s1, s2)
@@ -229,7 +227,7 @@ func _get_closest_point_to_segment(
 
 
 func _snap_to_guide(
-	snap_to: Vector2, position: Vector2, distance: Vector2, s1: Vector2, s2: Vector2
+	snap_to: Vector2, position: Vector2, distance: float, s1: Vector2, s2: Vector2
 ) -> Vector2:
 	var closest_point := _get_closest_point_to_segment(position, distance, s1, s2)
 	if closest_point == Vector2.INF:  # Is not close to a guide
@@ -260,8 +258,10 @@ func _get_selected_draw_images() -> Array:  # Array of Images
 	var project: Project = Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+		if not cel is PixelCel:
+			continue
 		if project.layers[cel_index[1]].can_layer_get_drawn():
-			images.append(cel.image)
+			images.append(cel.get_image())
 	return images
 
 

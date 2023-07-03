@@ -1,0 +1,17 @@
+[remap]
+
+importer="aimgio.apng_animatedtexture"
+type="AnimatedTexture"
+path="res://.import/roroto.png-5bb796ce1a0c5bb768b883a88b3da539.res"
+
+[deps]
+
+source_file="res://assets/graphics/splash_screen/artworks/roroto.png"
+dest_files=[ "res://.import/roroto.png-5bb796ce1a0c5bb768b883a88b3da539.res" ]
+
+[params]
+
+image_texture_storage=2
+image_texture_lossy_quality=0.7
+texture_flags=3
+texture_flags_add=0

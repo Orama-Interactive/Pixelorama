@@ -1,71 +1,53 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/GradientDialog.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/Nodes/GradientEdit.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=4]
+[ext_resource path="res://src/UI/Nodes/ValueSliderV2.tscn" type="PackedScene" id=5]
 
-[node name="GradientDialog" type="ConfirmationDialog"]
-margin_right = 334.0
-margin_bottom = 444.0
-rect_min_size = Vector2( 334, 444 )
+[node name="GradientDialog" instance=ExtResource( 2 )]
 window_title = "Gradient"
-resizable = true
 script = ExtResource( 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -36.0
+[node name="VBoxContainer" parent="." index="3"]
+margin_bottom = 468.0
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_right = 318.0
-margin_bottom = 164.0
-size_flags_vertical = 3
+[node name="ShowAnimate" parent="VBoxContainer" index="0"]
+visible = false
 
-[node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 77.0
-margin_right = 241.0
-margin_bottom = 164.0
-size_flags_horizontal = 5
-size_flags_vertical = 3
-expand = true
-stretch_mode = 5
+[node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
+margin_bottom = 224.0
 
-[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 2 )]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 0.0
-margin_bottom = 0.0
+[node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
+margin_left = 80.0
+margin_right = 280.0
+margin_bottom = 200.0
 
-[node name="GradientEdit" parent="VBoxContainer" instance=ExtResource( 3 )]
+[node name="GradientEdit" parent="VBoxContainer" index="2" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 168.0
-margin_right = 318.0
-margin_bottom = 246.0
+margin_top = 228.0
+margin_right = 360.0
+margin_bottom = 306.0
 
-[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
-margin_top = 250.0
-margin_right = 318.0
-margin_bottom = 400.0
+[node name="GradientOptions" type="GridContainer" parent="VBoxContainer" index="3"]
+margin_top = 310.0
+margin_right = 360.0
+margin_bottom = 432.0
 columns = 2
 
-[node name="ShapeLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
+[node name="ShapeLabel" type="Label" parent="VBoxContainer/GradientOptions" index="0" groups=["gradient_common"]]
 margin_top = 3.0
-margin_right = 160.0
+margin_right = 178.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "Shape:"
 
-[node name="ShapeOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
+[node name="ShapeOptionButton" type="OptionButton" parent="VBoxContainer/GradientOptions" index="1" groups=["gradient_common"]]
 unique_name_in_owner = true
-margin_left = 164.0
-margin_right = 318.0
+margin_left = 182.0
+margin_right = 360.0
 margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -73,52 +55,52 @@ text = "Linear"
 items = [ "Linear", null, false, 0, null, "Radial", null, false, 1, null ]
 selected = 0
 
-[node name="DitheringLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
+[node name="DitheringLabel" type="Label" parent="VBoxContainer/GradientOptions" index="2" groups=["gradient_common"]]
 unique_name_in_owner = true
 margin_top = 27.0
-margin_right = 160.0
+margin_right = 178.0
 margin_bottom = 41.0
 text = "Dithering pattern:"
 
-[node name="DitheringOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
+[node name="DitheringOptionButton" type="OptionButton" parent="VBoxContainer/GradientOptions" index="3" groups=["gradient_common"]]
 unique_name_in_owner = true
-margin_left = 164.0
+margin_left = 182.0
 margin_top = 24.0
-margin_right = 318.0
+margin_right = 360.0
 margin_bottom = 44.0
 mouse_default_cursor_shape = 2
 text = "None"
 items = [ "None", null, false, 0, null ]
 selected = 0
 
-[node name="RepeatLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
+[node name="RepeatLabel" type="Label" parent="VBoxContainer/GradientOptions" index="4" groups=["gradient_common"]]
 margin_top = 51.0
-margin_right = 160.0
+margin_right = 178.0
 margin_bottom = 65.0
 text = "Repeat:"
 
-[node name="RepeatOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
+[node name="RepeatOptionButton" type="OptionButton" parent="VBoxContainer/GradientOptions" index="5" groups=["gradient_common"]]
 unique_name_in_owner = true
-margin_left = 164.0
+margin_left = 182.0
 margin_top = 48.0
-margin_right = 318.0
+margin_right = 360.0
 margin_bottom = 68.0
 mouse_default_cursor_shape = 2
 text = "None"
 items = [ "None", null, false, 0, null, "Repeat", null, false, 1, null, "Mirror", null, false, 2, null, "Truncate", null, false, 3, null ]
 selected = 0
 
-[node name="PositionLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear", "gradient_step"]]
+[node name="PositionLabel" type="Label" parent="VBoxContainer/GradientOptions" index="6" groups=["gradient_linear"]]
 margin_top = 72.0
-margin_right = 160.0
+margin_right = 178.0
 margin_bottom = 86.0
 text = "Position:"
 
-[node name="PositionSlider" type="TextureProgress" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear"]]
+[node name="PositionSlider" type="TextureProgress" parent="VBoxContainer/GradientOptions" index="7" groups=["gradient_linear"]]
 unique_name_in_owner = true
-margin_left = 164.0
+margin_left = 182.0
 margin_top = 72.0
-margin_right = 318.0
+margin_right = 360.0
 margin_bottom = 86.0
 mouse_default_cursor_shape = 2
 theme_type_variation = "ValueSlider"
@@ -132,18 +114,19 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 4 )
 suffix = "%"
+snap_step = 10.0
 
-[node name="SizeLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear", "gradient_step"]]
+[node name="SizeLabel" type="Label" parent="VBoxContainer/GradientOptions" index="8" groups=["gradient_linear"]]
 margin_top = 90.0
-margin_right = 160.0
+margin_right = 178.0
 margin_bottom = 104.0
 text = "Size:"
 
-[node name="SizeSlider" type="TextureProgress" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear"]]
+[node name="SizeSlider" type="TextureProgress" parent="VBoxContainer/GradientOptions" index="9" groups=["gradient_linear"]]
 unique_name_in_owner = true
-margin_left = 164.0
+margin_left = 182.0
 margin_top = 90.0
-margin_right = 318.0
+margin_right = 360.0
 margin_bottom = 104.0
 mouse_default_cursor_shape = 2
 theme_type_variation = "ValueSlider"
@@ -158,18 +141,19 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 4 )
 suffix = "%"
+snap_step = 10.0
 
-[node name="AngleLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear", "gradient_step"]]
+[node name="AngleLabel" type="Label" parent="VBoxContainer/GradientOptions" index="10" groups=["gradient_linear"]]
 margin_top = 108.0
-margin_right = 160.0
+margin_right = 178.0
 margin_bottom = 122.0
 text = "Angle:"
 
-[node name="AngleSlider" type="TextureProgress" parent="VBoxContainer/OptionsContainer" groups=["gradient_dithering", "gradient_linear"]]
+[node name="AngleSlider" type="TextureProgress" parent="VBoxContainer/GradientOptions" index="11" groups=["gradient_linear"]]
 unique_name_in_owner = true
-margin_left = 164.0
+margin_left = 182.0
 margin_top = 108.0
-margin_right = 318.0
+margin_right = 360.0
 margin_bottom = 122.0
 mouse_default_cursor_shape = 2
 theme_type_variation = "ValueSlider"
@@ -181,140 +165,61 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource( 4 )
 suffix = "°"
+snap_step = 45.0
 
-[node name="CenterLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_radial", "gradient_radial_dithering", "gradient_radial_step"]]
+[node name="CenterLabel" type="Label" parent="VBoxContainer/GradientOptions" index="12" groups=["gradient_radial"]]
 visible = false
 margin_top = 60.0
 margin_right = 160.0
 margin_bottom = 74.0
+size_flags_vertical = 1
 text = "Center:"
 
-[node name="CenterContainer" type="HBoxContainer" parent="VBoxContainer/OptionsContainer" groups=["gradient_radial", "gradient_radial_dithering", "gradient_radial_step"]]
+[node name="CenterSlider" parent="VBoxContainer/GradientOptions" index="13" groups=["gradient_radial"] instance=ExtResource( 5 )]
+unique_name_in_owner = true
 visible = false
-margin_top = 60.0
-margin_right = 154.0
-margin_bottom = 84.0
-
-[node name="XCenterSlider" type="TextureProgress" parent="VBoxContainer/OptionsContainer/CenterContainer"]
-unique_name_in_owner = true
-margin_right = 75.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-theme_type_variation = "ValueSlider"
-value = 50.0
+value = Vector2( 50, 50 )
 allow_greater = true
 allow_lesser = true
-nine_patch_stretch = true
-stretch_margin_left = 3
-stretch_margin_top = 3
-stretch_margin_right = 3
-stretch_margin_bottom = 3
-script = ExtResource( 4 )
-prefix = "X:"
-suffix = "%"
+snap_step = 10.0
+suffix_x = "%"
+suffix_y = "%"
 
-[node name="YCenterSlider" type="TextureProgress" parent="VBoxContainer/OptionsContainer/CenterContainer"]
-unique_name_in_owner = true
-margin_left = 79.0
-margin_right = 154.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-theme_type_variation = "ValueSlider"
-value = 50.0
-allow_greater = true
-allow_lesser = true
-nine_patch_stretch = true
-stretch_margin_left = 3
-stretch_margin_top = 3
-stretch_margin_right = 3
-stretch_margin_bottom = 3
-script = ExtResource( 4 )
-prefix = "Y:"
-suffix = "%"
-
-[node name="RadiusLabel" type="Label" parent="VBoxContainer/OptionsContainer" groups=["gradient_radial", "gradient_radial_dithering", "gradient_radial_step"]]
+[node name="RadiusLabel" type="Label" parent="VBoxContainer/GradientOptions" index="14" groups=["gradient_radial"]]
 visible = false
 margin_top = 193.0
 margin_right = 160.0
 margin_bottom = 207.0
+size_flags_vertical = 1
 text = "Radius:"
 
-[node name="RadiusContainer" type="HBoxContainer" parent="VBoxContainer/OptionsContainer" groups=["gradient_radial", "gradient_radial_dithering", "gradient_radial_step"]]
+[node name="RadiusSlider" parent="VBoxContainer/GradientOptions" index="15" groups=["gradient_radial"] instance=ExtResource( 5 )]
+unique_name_in_owner = true
 visible = false
-margin_top = 60.0
-margin_right = 154.0
-margin_bottom = 84.0
-size_flags_vertical = 3
-
-[node name="XRadiusSlider" type="TextureProgress" parent="VBoxContainer/OptionsContainer/RadiusContainer"]
-unique_name_in_owner = true
-margin_right = 75.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-theme_type_variation = "ValueSlider"
-min_value = 0.01
-max_value = 10.0
+margin_right = 52.0
+value = Vector2( 1, 1 )
+min_value = Vector2( 0.01, 0.01 )
+max_value = Vector2( 10, 10 )
 step = 0.01
-value = 1.0
 allow_greater = true
-nine_patch_stretch = true
-stretch_margin_left = 3
-stretch_margin_top = 3
-stretch_margin_right = 3
-stretch_margin_bottom = 3
-script = ExtResource( 4 )
-prefix = "X:"
+show_ratio = true
 
-[node name="YRadiusSlider" type="TextureProgress" parent="VBoxContainer/OptionsContainer/RadiusContainer"]
-unique_name_in_owner = true
-margin_left = 79.0
-margin_right = 154.0
-margin_bottom = 24.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-theme_type_variation = "ValueSlider"
-min_value = 0.01
-max_value = 10.0
-step = 0.01
-value = 1.0
-allow_greater = true
-nine_patch_stretch = true
-stretch_margin_left = 3
-stretch_margin_top = 3
-stretch_margin_right = 3
-stretch_margin_bottom = 3
-script = ExtResource( 4 )
-prefix = "Y:"
+[node name="OptionsContainer" parent="VBoxContainer" index="4"]
+margin_top = 436.0
+margin_bottom = 460.0
 
-[node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
-margin_top = 126.0
-margin_right = 160.0
-margin_bottom = 150.0
-mouse_default_cursor_shape = 2
-pressed = true
-text = "Only affect selection"
-
-[node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer" groups=["gradient_common"]]
-margin_left = 164.0
-margin_top = 126.0
-margin_right = 318.0
-margin_bottom = 150.0
-mouse_default_cursor_shape = 2
-text = "Selected cels"
+[node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
-selected = 0
+
+[node name="AnimateDialog" parent="." index="4"]
+margin_bottom = 468.0
 
 [connection signal="updated" from="VBoxContainer/GradientEdit" to="." method="_on_GradientEdit_updated"]
-[connection signal="item_selected" from="VBoxContainer/OptionsContainer/ShapeOptionButton" to="." method="_on_ShapeOptionButton_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/OptionsContainer/DitheringOptionButton" to="." method="_on_DitheringOptionButton_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/OptionsContainer/RepeatOptionButton" to="." method="_on_RepeatOptionButton_item_selected"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/PositionSlider" to="." method="_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/SizeSlider" to="." method="_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/AngleSlider" to="." method="_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/CenterContainer/XCenterSlider" to="." method="_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/CenterContainer/YCenterSlider" to="." method="_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/RadiusContainer/XRadiusSlider" to="." method="_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/RadiusContainer/YRadiusSlider" to="." method="_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/GradientOptions/ShapeOptionButton" to="." method="_on_ShapeOptionButton_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/GradientOptions/DitheringOptionButton" to="." method="_on_DitheringOptionButton_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/GradientOptions/RepeatOptionButton" to="." method="_on_RepeatOptionButton_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/GradientOptions/PositionSlider" to="." method="_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/GradientOptions/SizeSlider" to="." method="_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/GradientOptions/AngleSlider" to="." method="_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/GradientOptions/CenterSlider" to="." method="_value_v2_changed"]
+[connection signal="value_changed" from="VBoxContainer/GradientOptions/RadiusSlider" to="." method="_value_v2_changed"]

@@ -3,7 +3,7 @@ extends Node
 signal project_changed
 signal cel_changed
 
-enum LayerTypes { PIXEL, GROUP, VECTOR }
+enum LayerTypes { PIXEL, GROUP, THREE_D, VECTOR }
 enum VectorShapeTypes { TEXT }
 enum GridTypes { CARTESIAN, ISOMETRIC, ALL }
 enum ColorFrom { THEME, CUSTOM }
@@ -25,22 +25,23 @@ enum ViewMenu {
 }
 enum WindowMenu { WINDOW_OPACITY, PANELS, LAYOUTS, MOVABLE_PANELS, ZEN_MODE, FULLSCREEN_MODE }
 enum ImageMenu {
-	SCALE_IMAGE,
-	CENTRALIZE_IMAGE,
-	CROP_IMAGE,
 	RESIZE_CANVAS,
+	SCALE_IMAGE,
+	CROP_IMAGE,
 	FLIP,
+	CENTRALIZE_IMAGE,
 	ROTATE,
-	INVERT_COLORS,
-	DESATURATION,
 	OUTLINE,
 	DROP_SHADOW,
+	INVERT_COLORS,
+	DESATURATION,
 	HSV,
+	POSTERIZE,
 	GRADIENT,
 	GRADIENT_MAP,
 	SHADER
 }
-enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT }
+enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, TILE_MODE }
 enum HelpMenu {
 	VIEW_SPLASH_SCREEN,
 	ONLINE_DOCS,
@@ -92,13 +93,11 @@ var right_tool_color := Color("fd6d14")
 var default_width := 64
 var default_height := 64
 var default_fill_color := Color(0, 0, 0, 0)
+var snapping_distance := 32.0
 var grid_type = GridTypes.CARTESIAN
-var grid_width := 2
-var grid_height := 2
-var grid_isometric_cell_bounds_width := 16
-var grid_isometric_cell_bounds_height := 8
-var grid_offset_x := 0
-var grid_offset_y := 0
+var grid_size := Vector2(2, 2)
+var isometric_grid_size := Vector2(16, 8)
+var grid_offset := Vector2.ZERO
 var grid_draw_over_tile_mode := false
 var grid_color := Color.black
 var pixel_grid_show_at_zoom := 1500.0  # percentage
@@ -110,6 +109,10 @@ var checker_color_2 := Color(0.34, 0.35, 0.34, 1)
 var checker_follow_movement := false
 var checker_follow_scale := false
 var tilemode_opacity := 1.0
+
+var select_layer_on_button_click := false
+var onion_skinning_past_color := Color.red
+var onion_skinning_future_color := Color.blue
 
 var selection_animated_borders := true
 var selection_border_color_1 := Color.white
@@ -139,7 +142,6 @@ var draw_pixel_grid := false
 var show_rulers := true
 var show_guides := true
 var show_mouse_guides := false
-var snapping_distance := 10.0
 var snap_to_rectangular_grid := false
 var snap_to_guides := false
 var snap_to_perspective_guides := false
@@ -153,11 +155,19 @@ var onion_skinning_blue_red := false
 # Palettes
 var palettes := {}
 
+# Crop Options:
+var crop_top := 0
+var crop_bottom := 0
+var crop_left := 0
+var crop_right := 0
+
 # Nodes
+var base_layer_button_node: PackedScene = preload("res://src/UI/Timeline/BaseLayerButton.tscn")
 var pixel_layer_button_node: PackedScene = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
 var group_layer_button_node: PackedScene = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
 var pixel_cel_button_node: PackedScene = preload("res://src/UI/Timeline/PixelCelButton.tscn")
 var group_cel_button_node: PackedScene = preload("res://src/UI/Timeline/GroupCelButton.tscn")
+var cel_3d_button_node: PackedScene = preload("res://src/UI/Timeline/Cel3DButton.tscn")
 
 onready var control: Node = get_tree().current_scene
 
@@ -187,10 +197,6 @@ onready var references_panel: ReferencesPanel = control.find_node("Reference Ima
 onready var perspective_editor := control.find_node("Perspective Editor")
 
 onready var top_menu_container: Panel = control.find_node("TopMenuContainer")
-onready var rotation_level_button: Button = control.find_node("RotationLevel")
-onready var rotation_level_spinbox: SpinBox = control.find_node("RotationSpinbox")
-onready var zoom_level_button: Button = control.find_node("ZoomLevel")
-onready var zoom_level_spinbox: SpinBox = control.find_node("ZoomSpinbox")
 onready var cursor_position_label: Label = control.find_node("CursorPosition")
 onready var current_frame_mark_label: Label = control.find_node("CurrentFrameMark")
 
@@ -211,6 +217,7 @@ onready var move_down_layer_button: BaseButton = animation_timeline.find_node("M
 onready var merge_down_layer_button: BaseButton = animation_timeline.find_node("MergeDownLayer")
 onready var layer_opacity_slider: ValueSlider = animation_timeline.find_node("OpacitySlider")
 
+onready var tile_mode_offset_dialog: AcceptDialog = control.find_node("TileModeOffsetsDialog")
 onready var open_sprites_dialog: FileDialog = control.find_node("OpenSprite")
 onready var save_sprites_dialog: FileDialog = control.find_node("SaveSprite")
 onready var save_sprites_html5_dialog: ConfirmationDialog = control.find_node("SaveSpriteHTML5")
@@ -251,6 +258,8 @@ func _ready() -> void:
 		var tooltip: String = node.hint_tooltip
 		if !tooltip.empty() and node.shortcut:
 			ui_tooltips[node] = tooltip
+	yield(get_tree(), "idle_frame")
+	emit_signal("project_changed")
 
 
 func _initialize_keychain() -> void:
@@ -310,6 +319,8 @@ func _initialize_keychain() -> void:
 		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.GRADIENT),
 		"gradient_map":
 		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.GRADIENT_MAP),
+		"posterize":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.POSTERIZE),
 		"mirror_view":
 		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.MIRROR_VIEW),
 		"show_grid":
@@ -459,9 +470,9 @@ func undo_or_redo(
 			"Merge Layer",
 			"Link Cel",
 			"Unlink Cel",
-			"Add Text" # TODO: probably shouldn't add more stuff here
+			"Add Text"
 		]
-	):
+	):  # TODO: probably shouldn't add more stuff here
 		if layer_index > -1 and frame_index > -1:
 			canvas.update_texture(layer_index, frame_index, project)
 		else:
@@ -474,14 +485,19 @@ func undo_or_redo(
 			for i in project.frames.size():
 				for j in project.layers.size():
 					var current_cel: BaseCel = project.frames[i].cels[j]
-					current_cel.image_texture.create_from_image(current_cel.get_image(), 0)
+					if current_cel is Cel3D:
+						current_cel.size_changed(project.size)
+					else:
+						current_cel.image_texture.create_from_image(current_cel.get_image(), 0)
 			canvas.camera_zoom()
 			canvas.grid.update()
 			canvas.pixel_grid.update()
 			project.selection_map_changed()
-			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
+			cursor_position_label.text = "[%s�%s]" % [project.size.x, project.size.y]
 
 	canvas.update()
+	second_viewport.get_child(0).get_node("CanvasPreview").update()
+	canvas_preview_container.canvas_preview.update()
 	if !project.has_changed:
 		project.has_changed = true
 		if project == current_project:
@@ -573,3 +589,21 @@ func update_hint_tooltips() -> void:
 			var first_key: InputEventKey = Keychain.action_get_first_key(event_type.action)
 			hint = first_key.as_text() if first_key else "None"
 		tip.hint_tooltip = tr(ui_tooltips[tip]) % hint
+
+
+# Used in case some of the values in a dictionary are Strings, when they should be something else
+func convert_dictionary_values(dict: Dictionary) -> void:
+	for key in dict:
+		if key == "id" or key == "type":
+			dict[key] = int(dict[key])
+		if typeof(dict[key]) != TYPE_STRING:
+			continue
+		if "transform" in key:  # Convert a String to a Transform
+			var transform_string: String = dict[key].replace(" - ", ", ")
+			dict[key] = str2var("Transform(" + transform_string + ")")
+		elif "color" in key:  # Convert a String to a Color
+			dict[key] = str2var("Color(" + dict[key] + ")")
+		elif "v2" in key:  # Convert a String to a Vector2
+			dict[key] = str2var("Vector2" + dict[key])
+		elif "size" in key or "center_offset" in key:  # Convert a String to a Vector3
+			dict[key] = str2var("Vector3" + dict[key])

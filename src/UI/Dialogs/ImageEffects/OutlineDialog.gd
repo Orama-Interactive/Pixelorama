@@ -1,12 +1,13 @@
 extends ImageEffect
 
-var color := Color.red
+enum Animate { THICKNESS }
+var color := Color.black
 var thickness := 1
 var pattern := 0
 var inside_image := false
 var shader: Shader
 
-onready var outline_color = $VBoxContainer/OptionsContainer/OutlineColor
+onready var outline_color := $VBoxContainer/OutlineOptions/OutlineColor as ColorPickerButton
 
 
 func _ready() -> void:
@@ -19,18 +20,16 @@ func _ready() -> void:
 		preview.set_material(sm)
 	outline_color.get_picker().presets_visible = false
 	color = outline_color.color
-
-
-func set_nodes() -> void:
-	preview = $VBoxContainer/AspectRatioContainer/Preview
-	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
-	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
+	# set as in enum
+	animate_panel.add_float_property("Thickness", $VBoxContainer/OutlineOptions/ThickValue)
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
+	var anim_thickness = animate_panel.get_animated_values(commit_idx, Animate.THICKNESS)
+
 	if !shader:  # Web version
 		DrawingAlgos.generate_outline(
-			cel, selection_checkbox.pressed, project, color, thickness, false, inside_image
+			cel, selection_checkbox.pressed, project, color, anim_thickness, false, inside_image
 		)
 		return
 
@@ -40,12 +39,10 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 
 	var params := {
 		"color": color,
-		"width": thickness,
+		"width": anim_thickness,
 		"pattern": pattern,
 		"inside": inside_image,
-		"selection": selection_tex,
-		"affect_selection": selection_checkbox.pressed,
-		"has_selection": project.has_selection
+		"selection": selection_tex
 	}
 	if !confirmed:
 		for param in params:

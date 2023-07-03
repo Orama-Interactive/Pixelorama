@@ -4,22 +4,22 @@ signal frame_saved
 
 enum Mode { CANVAS, PIXELORAMA }
 
-var mode = 0
-var chosen_dir = ""
-var save_dir = ""
+var mode: int = Mode.CANVAS
+var chosen_dir := ""
+var save_dir := ""
 var project: Project
-var cache: Array = []  # Array of images stored during recording
-var frame_captured = 0  # A variable used to visualize frames captured
-var skip_amount = 1  # No of "do" actions after which a frame can be captured
-var current_frame_no = 0  # used to compare with skip_amount to see if it can be captured
+var cache := []  # Array of images stored during recording
+var frame_captured := 0  # A variable used to visualize frames captured
+var skip_amount := 1  # No of "do" actions after which a frame can be captured
+var current_frame_no := 0  # used to compare with skip_amount to see if it can be captured
 
 var resize := 100
 
-onready var project_list = $"%TargetProjectOption"
-onready var folder_button: Button = $"%Folder"
-onready var start_button = $"%Start"
-onready var size: Label = $"%Size"
-onready var path_field = $"%Path"
+onready var project_list := $"%TargetProjectOption" as OptionButton
+onready var folder_button := $"%Folder" as Button
+onready var start_button := $"%Start" as Button
+onready var size_label := $"%Size" as Label
+onready var path_field := $"%Path" as LineEdit
 
 
 func _ready() -> void:
@@ -27,14 +27,14 @@ func _ready() -> void:
 	project = Global.current_project
 	connect("frame_saved", self, "_on_frame_saved")
 	# Make a recordings folder if there isn't one
-	var dir = Directory.new()
+	var dir := Directory.new()
 	chosen_dir = Global.directory_module.xdg_data_home.plus_file("Recordings")
 	dir.make_dir_recursive(chosen_dir)
 	path_field.text = chosen_dir
-	size.text = str("(", project.size.x, "×", project.size.y, ")")
+	size_label.text = str("(", project.size.x, "×", project.size.y, ")")
 
 
-func initialize_recording():
+func initialize_recording() -> void:
 	connect_undo()  # connect to detect changes in project
 	cache.clear()  # clear the cache array to store new images
 	frame_captured = 0
@@ -79,7 +79,7 @@ func capture_frame() -> void:
 	else:
 		var frame = project.frames[project.current_frame]
 		image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		Export.blend_selected_cels(image, frame, Vector2(0, 0), project)
+		Export.blend_all_layers(image, frame, Vector2(0, 0), project)
 
 	if mode == Mode.CANVAS:
 		if resize != 100:
@@ -90,7 +90,7 @@ func capture_frame() -> void:
 
 
 func _on_Timer_timeout() -> void:
-	# Saves frames little by little During recording
+	# Saves frames little by little during recording
 	if cache.size() > 0:
 		save_frame(cache[0])
 		cache.remove(0)
@@ -102,12 +102,12 @@ func save_frame(img: Image) -> void:
 	emit_signal("frame_saved")
 
 
-func _on_frame_saved():
+func _on_frame_saved() -> void:
 	frame_captured += 1
 	$ScrollContainer/CenterContainer/GridContainer/Captured.text = str("Saved: ", frame_captured)
 
 
-func finalize_recording():
+func finalize_recording() -> void:
 	$Timer.stop()
 	for img in cache:
 		save_frame(img)
@@ -119,7 +119,7 @@ func finalize_recording():
 	for child in $Dialogs/Options/PanelContainer/VBoxContainer.get_children():
 		child.visible = true
 	if mode == Mode.PIXELORAMA:
-		size.get_parent().visible = false
+		size_label.get_parent().visible = false
 
 
 func disconnect_undo() -> void:
@@ -153,9 +153,9 @@ func _on_Start_toggled(button_pressed: bool) -> void:
 		Global.change_button_texturerect(start_button.get_child(0), "start.png")
 
 
-func _on_Settings_pressed():
-	var settings = $Dialogs/Options
-	var pos = rect_position
+func _on_Settings_pressed() -> void:
+	var settings := $Dialogs/Options as WindowDialog
+	var pos := rect_position
 	settings.popup(Rect2(pos, settings.rect_size))
 
 
@@ -163,19 +163,19 @@ func _on_SkipAmount_value_changed(value: float) -> void:
 	skip_amount = value
 
 
-func _on_Mode_toggled(button_pressed) -> void:
+func _on_Mode_toggled(button_pressed: bool) -> void:
 	if button_pressed:
 		mode = Mode.PIXELORAMA
-		size.get_parent().visible = false
+		size_label.get_parent().visible = false
 	else:
 		mode = Mode.CANVAS
-		size.get_parent().visible = true
+		size_label.get_parent().visible = true
 
 
 func _on_SpinBox_value_changed(value: float) -> void:
 	resize = value
 	var new_size: Vector2 = project.size * (resize / 100.0)
-	size.text = str("(", new_size.x, "×", new_size.y, ")")
+	size_label.text = str("(", new_size.x, "×", new_size.y, ")")
 
 
 func _on_Choose_pressed() -> void:
@@ -194,6 +194,6 @@ func _on_Path_dir_selected(dir: String) -> void:
 
 
 func _on_Fps_value_changed(value: float) -> void:
-	var dur_label = $Dialogs/Options/PanelContainer/VBoxContainer/Fps/Duration
-	var duration = stepify(1.0 / value, 0.0001)
+	var dur_label := $Dialogs/Options/PanelContainer/VBoxContainer/Fps/Duration as Label
+	var duration := stepify(1.0 / value, 0.0001)
 	dur_label.text = str("= ", duration, " sec")

@@ -1,11 +1,15 @@
-name: "dev-web"
+name: Development Web build
 
 on:
   push:
     branches: [ master ]
 
+concurrency:
+  group: ci-${{github.actor}}-${{github.head_ref || github.run_number}}-${{github.ref}}-devweb
+  cancel-in-progress: true
+
 env:
-  GODOT_VERSION: 3.5
+  GODOT_VERSION: 3.5.2
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -13,10 +17,10 @@ jobs:
     name: Web Export 🌐
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.5
+      image: docker://barichello/godot-ci:3.5.2
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
       - name: Setup 💻

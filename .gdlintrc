@@ -1,3 +1,5 @@
 disable:
   - no-elif-return
   - no-else-return
+  
+max-file-lines: 2000

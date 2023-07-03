@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-03-08 12:50\n"
+"PO-Revision-Date: 2023-05-18 12:26\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -252,6 +252,18 @@ msgstr "Κινητά πλαίσια"
 msgid "Manage Layouts"
 msgstr "Διαχείριση διατάξεων"
 
+#. Noun, a preview of something
+msgid "Preview"
+msgstr "Προεπισκόπηση"
+
+#. Found in the manage layouts dialog
+msgid "This is a preview, changing this won't change the layout"
+msgstr "Αυτή είναι μια προεπισκόπηση, οι αλλαγές που γίνονται εδώ δεν έχουν κάποιο αποτέλεσμα στη διάταξη"
+
+#. Found in the manage layouts dialog
+msgid "Double click to set as new startup layout"
+msgstr "Διπλό κλικ για ορισμό νέας διάταξης εκκίνησης"
+
 msgid "Add"
 msgstr "Προσθήκη"
 
@@ -287,6 +299,26 @@ msgstr "Εμφάνιση χαράκων"
 
 msgid "Show Guides"
 msgstr "Εμφάνιση οδηγών"
+
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr "Εμφάνιση οδηγών ποντικιού"
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr "Προσκόλληση σε"
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr "Προσκόλληση στο ορθογώνιο πλέγμα"
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr "Προσκόλληση στους οδηγούς"
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr "Προσκόλληση στους οδηγούς προοπτικής"
 
 msgid "Show Animation Timeline"
 msgstr "Εμφάνιση χρονοδιαγράμματος"
@@ -356,6 +388,9 @@ msgstr "Κάθετα καρέ:"
 
 msgid "Start frame:"
 msgstr "Καρέ έναρξης:"
+
+msgid "End frame:"
+msgstr "Τελικό καρέ:"
 
 msgid "At frame:"
 msgstr "Στο καρέ:"
@@ -484,6 +519,10 @@ msgstr "Στρώση εικονοστοιχείων:"
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
 msgstr "Στρώση ομάδας:"
+
+#. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
+msgid "3D layer:"
+msgstr "Στρώση 3Δ:"
 
 msgid "Direction:"
 msgstr "Κατεύθυνση:"
@@ -624,8 +663,8 @@ msgstr "Χρώμα οδηγών:"
 msgid "System Language"
 msgstr "Γλώσσα Συστήματος"
 
-msgid "Display Scale"
-msgstr "Κλίμακα Εμφάνισης"
+msgid "Display scale:"
+msgstr "Κλίμακα εμφάνισης:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Σκοτείνιασμα περιβάλλοντος όταν εμφανίζεται αναδυόμενο παράθυρο"
@@ -831,17 +870,17 @@ msgstr "Χρώματα:"
 msgid "Steps:"
 msgstr "Βαθμίδες:"
 
-msgid "Top to Bottom"
-msgstr "Πάνω-κάτω"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr "Αφίσα"
 
-msgid "Bottom to Top"
-msgstr "Κάτω-πάνω"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr "Επίπεδα αφίσας:"
 
-msgid "Left to Right"
-msgstr "Αριστερά-δεξιά"
-
-msgid "Right to Left"
-msgstr "Δεξιά-αριστερά"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr "Ένταση χρωματικής αντιπαράθεσης:"
 
 msgid "View Splash Screen"
 msgstr "Εμφάνιση οθόνης εκκίνησης"
@@ -1239,6 +1278,18 @@ msgstr "Χρώμα οδηγών:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "Το χρώμα των οδηγών που φαίνεται στο καμβά"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr "Προσκόλληση"
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr "Απόσταση προσκόλλησης:"
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grid snapping gets activated."
+msgstr "Αυτή είναι η απόσταση σε εικονοστοιχεία όπου ενεργοποιείται η προσκόλληση στους οδηγούς και στο πλέγμα."
+
 msgid "Grid"
 msgstr "Πλέγμα"
 
@@ -1257,41 +1308,21 @@ msgstr "Ισομετρικό"
 msgid "All"
 msgstr "Όλα"
 
-msgid "Rectangular grid width:"
-msgstr "Πλάτος ορθογωνίου πλέγματος:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr "Μέγεθος ορθογώνιου πλέγματος:"
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "Ορίζει το πόσο μακριά είναι οι κάθετες γραμμές του ορθογώνιου πλέγματος"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr "Μέγεθος ισομετρικού πλέγματος:"
 
-msgid "Rectangular grid height:"
-msgstr "Ύψος ορθογωνίου πλέγματος:"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr "Μετατόπιση πλέγματος:"
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "Ορίζει το πόσο μακριά είναι οι οριζόντιες γραμμές του ορθογώνιου πλέγματος"
-
-msgid "Isometric cell bounds width:"
-msgstr "Πλάτος ισομετρικού κελιού:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "Ορίζει το πλάτος του ευθυγραμμισμένου πλαισίου οριοθέτησης του ισομετρικού κελιού"
-
-msgid "Isometric cell bounds height:"
-msgstr "Ύψος ισομετρικού κελιού:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "Ορίζει το ύψος του ευθυγραμμισμένου πλαισίου οριοθέτησης του ισομετρικού κελιού"
-
-msgid "Grid offset x:"
-msgstr "Μετατόπιση πλέγματος x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "Ορίζει την μετατόπιση x του πλέγματος από την προέλευση του καμβά (πάνω αριστερή γωνία της εικόνας)"
-
-msgid "Grid offset y:"
-msgstr "Μετατόπιση πλέγματος y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "Ορίζει την μετατόπιση y του πλέγματος από την προέλευση του καμβά (πάνω αριστερή γωνία της εικόνας)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr "Ορίζει τη μετατόπιση του πλέγματος από την προέλευση του καμβά (πάνω αριστερή γωνία της εικόνας)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Εμφάνιση πάνω από τη λειτουργία μοτίβου:"
@@ -1408,6 +1439,42 @@ msgstr "Απεγκατάσταση"
 msgid "Open Folder"
 msgstr "Άνοιγμα φακέλου"
 
+#. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
+msgid "Dynamics"
+msgstr "Δυναμικές"
+
+#. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
+msgid "Pressure"
+msgstr "Πίεση"
+
+#. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
+msgid "Velocity"
+msgstr "Ταχύτητα"
+
+#. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
+msgid "Alpha"
+msgstr "Διαφάνεια"
+
+#. Refers to the size of a value, for example the size of a brush.
+msgid "Size"
+msgstr "Μέγεθος"
+
+#. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
+msgid "Value limits"
+msgstr "Όρια τιμών"
+
+#. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
+msgid "Thresholds"
+msgstr "Όρια"
+
+#. Noun, the start of something.
+msgid "Start"
+msgstr "Αρχή"
+
+#. Noun, the end of something.
+msgid "End"
+msgstr "Τέλος"
+
 msgid "Brush:"
 msgstr "Πινέλο:"
 
@@ -1429,7 +1496,7 @@ msgstr "Προσαρμοσμένο πινέλο"
 msgid "Brush size:"
 msgstr "Μέγεθος πινέλου:"
 
-msgid "Overwrite Color"
+msgid "Overwrite color"
 msgstr "Αντικατάσταση χρώματος"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
@@ -1440,6 +1507,18 @@ msgstr "Pixel Perfect"
 
 msgid "Fill inside"
 msgstr "Εσωτερικό γέμισμα"
+
+#. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
+msgid "Spacing"
+msgstr "Απόσταση"
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
+msgid "Gap X:"
+msgstr "Κενό X:"
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
+msgid "Gap Y:"
+msgstr "Κενό Y:"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
@@ -1533,6 +1612,22 @@ msgstr "Προσαρμογή στην οθόνη"
 msgid "100% Zoom"
 msgstr "100% Ζουμ"
 
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Replace selection"
+msgstr "Αντικατάσταση επιλογής"
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Add to selection"
+msgstr "Προσθήκη στην επιλογή"
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Subtract from selection"
+msgstr "Αφαίρεση από την επιλογή"
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Intersection of selections"
+msgstr "Διασύνδεση των επιλογών"
+
 msgid "Mirroring"
 msgstr "Κατοπτρισμός"
 
@@ -1550,6 +1645,12 @@ msgstr "Κάθετα"
 
 msgid "Current frame:"
 msgstr "Τρέχον καρέ:"
+
+msgid "Animation mode:"
+msgstr "Λειτουργία κίνησης:"
+
+msgid "Current frame as spritesheet"
+msgstr "Τρέχον πλαίσιο ως φύλλο καρέ"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -1699,11 +1800,21 @@ msgstr "Ομάδα"
 msgid "Layers"
 msgstr "Στρώσεις"
 
+#. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
 msgstr "Δημιουργία νέας στρώσης"
 
-msgid "Create a new group layer"
-msgstr "Δημιουργία νέας ομάδας στρώσεων"
+#. One of the options of the create new layer button.
+msgid "Add Pixel Layer"
+msgstr "Προσθήκη στρώσης εικονοστοιχείων"
+
+#. One of the options of the create new layer button.
+msgid "Add Group Layer"
+msgstr "Προσθήκη στρώσης ομάδας"
+
+#. One of the options of the create new layer button.
+msgid "Add 3D Layer"
+msgstr "Προσθήκη τρισδιάστατης στρώσης"
 
 msgid "Remove current layer"
 msgstr "Διαγραφή της τρέχουσας στρώσης"
@@ -1857,8 +1968,8 @@ msgstr "Απέτυχε το άνοιγμα του αρχείου. Κωδικός
 msgid "File failed to save. Error code %s"
 msgstr "Απέτυχε η αποθήκευση του αρχείου. Κωδικός σφάλματος %s"
 
-msgid "File exported"
-msgstr "Έγινε εξαγωγή αρχείου"
+msgid "File(s) exported"
+msgstr "Έγινε εξαγωγή αρχείων"
 
 msgid "New Empty Palette"
 msgstr "Νέα Κενή Παλέτα"
@@ -2196,4 +2307,223 @@ msgstr "Επιλογές δεξιού εργαλείου"
 
 msgid "Reference Images"
 msgstr "Εικόνες αναφοράς"
+
+msgid "Perspective Editor"
+msgstr "Επεξεργαστής προοπτικής"
+
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
+msgid "Recorder"
+msgstr "Καταγραφή"
+
+msgid "Crop"
+msgstr "Περικοπή"
+
+msgid "Resize the canvas"
+msgstr "Αλλαγή μεγέθους καμβά"
+
+msgid "Margins"
+msgstr "Περιθώρια"
+
+msgid "Position + Size"
+msgstr "Θέση και μέγεθος"
+
+msgid "Locked Aspect Ratio"
+msgstr "Κλείδωμα αναλογίας διαστάσεων"
+
+msgid "Margins:"
+msgstr "Περιθώρια:"
+
+msgid "Aspect Ratio:"
+msgstr "Αναλογία διαστάσεων:"
+
+msgid "Top:"
+msgstr "Πάνω:"
+
+msgid "Bottom:"
+msgstr "Κάτω:"
+
+msgid "Left:"
+msgstr "Αριστερά:"
+
+msgid "Right:"
+msgstr "Δεξιά:"
+
+msgid "Locked size\n\n"
+"When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
+"When disabled using the tool on the canvas will draw the rectangle."
+msgstr "Κλειδωμένο μέγεθος\n\n"
+"Όταν είναι ενεργοποιημένο, η χρήση του εργαλείου στον καμβά μετακινεί το ορθογώνιο περικοπής.\n\n"
+"Όταν είναι απενεργοποιημένο, η χρήση του εργαλείου στον καμβά σχεδιάζει το ορθογώνιο."
+
+#. A tool used in 3D layers, that edits 3D objects.
+msgid "3D Shape Edit"
+msgstr "Επεξεργασία 3Δ σχημάτων"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Box"
+msgstr "Κουτί"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Sphere"
+msgstr "Σφαίρα"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Capsule"
+msgstr "Κάψουλα"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Cylinder"
+msgstr "Κύλινδρος"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Prism"
+msgstr "Πρίσμα"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Torus"
+msgstr "Τόρος"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Plane"
+msgstr "Επίπεδο"
+
+msgid "Text"
+msgstr "Κείμενο"
+
+#. Used in 3D layers. A type of light.
+msgid "Directional light"
+msgstr "Κατευθυντήριο φως"
+
+#. Used in 3D layers. A type of light.
+msgid "Spotlight"
+msgstr "Φακός"
+
+#. Used in 3D layers. A type of light.
+msgid "Point light"
+msgstr "Φως σημείου"
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Custom model"
+msgstr "Προσαρμοσμένο μοντέλο"
+
+msgid "Selected object:"
+msgstr "Επιλεγμένο αντικείμενο:"
+
+msgid "Add new object"
+msgstr "Προσθήκη αντικειμένου"
+
+msgid "Remove object"
+msgstr "Αφαίρεση αντικειμένου"
+
+msgid "Camera"
+msgstr "Κάμερα"
+
+#. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
+msgid "Projection:"
+msgstr "Προβολή:"
+
+#. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
+msgid "Perspective"
+msgstr "Προοπτική"
+
+#. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
+msgid "Orthogonal"
+msgstr "Ορθογώνια"
+
+#. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
+msgid "Frustum"
+msgstr "Frustum"
+
+msgid "Rotation:"
+msgstr "Περιστροφή:"
+
+msgid "Scale:"
+msgstr "Κλιμάκωση:"
+
+#. Found in the tool options of the 3D Shape Edit tool.
+msgid "Environment"
+msgstr "Περιβάλλον"
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
+msgid "Ambient color:"
+msgstr "Χρώμα περιβάλλοντος:"
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
+msgid "Ambient color energy:"
+msgstr "Ενέργεια χρώματος περιβάλλοντος:"
+
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
+msgid "Visible:"
+msgstr "Ορατό:"
+
+#. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
+msgid "Transform"
+msgstr "Μετασχηματισμός"
+
+#. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
+msgid "Mesh"
+msgstr "Πλέγμα"
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
+msgid "Left to right:"
+msgstr "Αριστερά προς δεξιά:"
+
+#. Radius of a circle/spherical object.
+msgid "Radius:"
+msgstr "Ακτίνα:"
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
+msgid "Radial segments:"
+msgstr "Ακτινικά τμήματα:"
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
+msgid "Rings:"
+msgstr "Δακτύλιοι:"
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
+msgid "Is hemisphere:"
+msgstr "Είναι ημισφαίριο:"
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
+msgid "Top radius:"
+msgstr "Πάνω ακτίνα:"
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
+msgid "Bottom radius:"
+msgstr "Κάτω ακτίνα:"
+
+msgid "Text:"
+msgstr "Κείμενο:"
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
+msgid "Pixel size:"
+msgstr "Μέγεθος εικονοστοιχείου:"
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
+msgid "Curve step:"
+msgstr "Βήμα καμπυλότητας:"
+
+msgid "Horizontal alignment:"
+msgstr "Οριζόντια στοίχιση:"
+
+msgid "Left"
+msgstr "Αριστερά"
+
+msgid "Right"
+msgstr "Δεξιά"
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
+msgid "Energy:"
+msgstr "Ενέργεια:"
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. If true, the light's effect is reversed, darkening areas and casting bright shadows.
+msgid "Negative:"
+msgstr "Αρνητικό:"
+
+msgid "Shadow:"
+msgstr "Σκιά:"
+
+#. Refers to the range of something, like the range of a spotlight.
+msgid "Range:"
+msgstr "Εμβέλεια:"
 

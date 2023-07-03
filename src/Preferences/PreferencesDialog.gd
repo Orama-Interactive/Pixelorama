@@ -35,21 +35,11 @@ var preferences := [
 	Preference.new("default_height", "Image/ImageOptions/ImageDefaultHeight", "value"),
 	Preference.new("default_fill_color", "Image/ImageOptions/DefaultFillColor", "color"),
 	Preference.new("smooth_zoom", "Canvas/ZoomOptions/SmoothZoom", "pressed"),
+	Preference.new("snapping_distance", "Canvas/SnappingOptions/DistanceValue", "value"),
 	Preference.new("grid_type", "Canvas/GridOptions/GridType", "selected"),
-	Preference.new("grid_width", "Canvas/GridOptions/GridWidthValue", "value"),
-	Preference.new("grid_height", "Canvas/GridOptions/GridHeightValue", "value"),
-	Preference.new(
-		"grid_isometric_cell_bounds_width",
-		"Canvas/GridOptions/IsometricCellBoundsWidthValue",
-		"value"
-	),
-	Preference.new(
-		"grid_isometric_cell_bounds_height",
-		"Canvas/GridOptions/IsometricCellBoundsHeightValue",
-		"value"
-	),
-	Preference.new("grid_offset_x", "Canvas/GridOptions/GridOffsetXValue", "value"),
-	Preference.new("grid_offset_y", "Canvas/GridOptions/GridOffsetYValue", "value"),
+	Preference.new("grid_size", "Canvas/GridOptions/GridSizeValue", "value"),
+	Preference.new("isometric_grid_size", "Canvas/GridOptions/IsometricGridSizeValue", "value"),
+	Preference.new("grid_offset", "Canvas/GridOptions/GridOffsetValue", "value"),
 	Preference.new(
 		"grid_draw_over_tile_mode", "Canvas/GridOptions/GridDrawOverTileMode", "pressed"
 	),
@@ -67,6 +57,15 @@ var preferences := [
 	Preference.new("tilemode_opacity", "Canvas/CheckerOptions/TileModeOpacity", "value"),
 	Preference.new("clear_color_from", "Canvas/BackgroundOptions/ColorOptionButton", "selected"),
 	Preference.new("modulate_clear_color", "Canvas/BackgroundOptions/BackgroundColor", "color"),
+	Preference.new(
+		"select_layer_on_button_click", "Timeline/TimelineOptions/SelectLayerOnButton", "pressed"
+	),
+	Preference.new(
+		"onion_skinning_past_color", "Timeline/TimelineOptions/OnionSkinningPastColor", "color"
+	),
+	Preference.new(
+		"onion_skinning_future_color", "Timeline/TimelineOptions/OnionSkinningFutureColor", "color"
+	),
 	Preference.new("selection_animated_borders", "Selection/SelectionOptions/Animate", "pressed"),
 	Preference.new("selection_border_color_1", "Selection/SelectionOptions/BorderColor1", "color"),
 	Preference.new("selection_border_color_2", "Selection/SelectionOptions/BorderColor2", "color"),
@@ -201,7 +200,7 @@ func _ready() -> void:
 			global_value = Global.get(pref.prop_name)
 
 			# This is needed because color_changed doesn't fire if the color changes in code
-			if pref.value_type == "color":
+			if typeof(value) == TYPE_VECTOR2 or typeof(value) == TYPE_COLOR:
 				preference_update(pref.prop_name, pref.require_restart)
 				disable_restore_default_button(
 					restore_default_button, global_value.is_equal_approx(pref.default_value)
@@ -307,6 +306,13 @@ func preference_update(prop: String, require_restart := false) -> void:
 			Global.main_viewport.mouse_default_cursor_shape = Control.CURSOR_CROSS
 		else:
 			Global.main_viewport.mouse_default_cursor_shape = Control.CURSOR_ARROW
+
+	elif prop == "onion_skinning_past_color":
+		Global.canvas.onion_past.blue_red_color = Global.onion_skinning_past_color
+		Global.canvas.refresh_onion()
+	elif prop == "onion_skinning_future_color":
+		Global.canvas.onion_future.blue_red_color = Global.onion_skinning_future_color
+		Global.canvas.refresh_onion()
 
 	Global.config_cache.save("user://cache.ini")
 

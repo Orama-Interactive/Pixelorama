@@ -54,11 +54,6 @@ func _ready() -> void:
 		Global.open_sprites_dialog.current_dir = OS.get_user_data_dir()
 		Global.save_sprites_dialog.current_dir = OS.get_user_data_dir()
 
-	var i := 0
-	for camera in Global.cameras:
-		camera.index = i
-		i += 1
-
 	var zstd_checkbox := CheckBox.new()
 	zstd_checkbox.name = "ZSTDCompression"
 	zstd_checkbox.pressed = true
@@ -348,6 +343,7 @@ func _on_QuitAndSaveDialog_custom_action(action: String) -> void:
 
 func _on_QuitAndSaveDialog_confirmed() -> void:
 	is_quitting_on_save = true
+	Global.save_sprites_dialog.get_ok().text = "Save & Exit"
 	Global.save_sprites_dialog.popup_centered()
 	quit_dialog.hide()
 	Global.dialog_open(true)

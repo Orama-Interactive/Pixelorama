@@ -1,15 +1,21 @@
 class_name BaseCel
 extends Reference
-# Base class for cel properties.
-# The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
+## Base class for cel properties.
+## The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
 
-var opacity: float
-var image_texture: ImageTexture
+signal texture_changed
+
+var opacity := 1.0
+var image_texture: Texture setget , _get_image_texture
 # If the cel is linked a ref to the link set Dictionary this cel is in, or null if not linked:
 var link_set = null  # { "cels": Array, "hue": float } or null
 var transformed_content: Image  # Used in transformations (moving, scaling etc with selections)
 
 # Methods to Override:
+
+
+func _get_image_texture() -> Texture:
+	return image_texture
 
 
 # The content methods deal with the unique content of each cel type. For example, an
@@ -41,7 +47,22 @@ func get_image() -> Image:
 
 
 func update_texture() -> void:
+	emit_signal("texture_changed")
+	if link_set != null:
+		var frame: int = Global.current_project.current_frame
+		# This check is needed in case the user has selected multiple cels that are also linked
+		if self in Global.current_project.frames[frame].cels:
+			for cel in link_set["cels"]:
+				cel.emit_signal("texture_changed")
 	return
+
+
+func serialize() -> Dictionary:
+	return {"opacity": opacity}
+
+
+func deserialize(dict: Dictionary) -> void:
+	opacity = dict["opacity"]
 
 
 func save_image_data_to_pxo(_file: File) -> void:
@@ -52,5 +73,13 @@ func load_image_data_from_pxo(_file: File, _project_size: Vector2) -> void:
 	return
 
 
+func on_remove() -> void:
+	pass
+
+
 func instantiate_cel_button() -> Node:
 	return null
+
+
+func get_class_name() -> String:
+	return "BaseCel"

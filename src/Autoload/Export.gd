@@ -6,6 +6,12 @@ enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
 # See file_format_string, file_format_description, and ExportDialog.gd
 enum FileFormat { PNG = 0, GIF = 1, APNG = 2 }
 
+# list of animated formats
+var animated_formats := [FileFormat.GIF, FileFormat.APNG]
+
+# A dictionary of custom exporter generators (received from extensions)
+var custom_exporter_generators := {}
+
 var current_tab: int = ExportTab.IMAGE
 # All frames and their layers processed/blended into images
 var processed_images := []  # Image[]
@@ -22,7 +28,10 @@ var number_of_frames := 1
 var direction: int = AnimationDirection.FORWARD
 var resize := 100
 var interpolation := 0  # Image.Interpolation
+var include_tag_in_filename := false
 var new_dir_for_each_frame_tag := false  # we don't need to store this after export
+var number_of_digits := 4
+var separator_character := "_"
 
 # Export coroutine signal
 var stop_export := false
@@ -38,6 +47,19 @@ onready var gif_export_thread := Thread.new()
 func _exit_tree() -> void:
 	if gif_export_thread.is_active():
 		gif_export_thread.wait_to_finish()
+
+
+func add_file_format(name: String) -> int:
+	var id := FileFormat.size()
+	FileFormat.merge({name: id})
+	return id
+
+
+func remove_file_format(id: int) -> void:
+	for key in Export.FileFormat.keys():
+		if Export.FileFormat[key] == id:
+			Export.FileFormat.erase(key)
+			return
 
 
 func external_export(project := Global.current_project) -> void:
@@ -191,6 +213,29 @@ func export_processed_images(
 
 	scale_processed_images()
 
+	# override if a custom export is chosen
+	if project.file_format in custom_exporter_generators.keys():
+		# Divert the path to the custom exporter instead
+		var custom_exporter: Object = custom_exporter_generators[project.file_format][0]
+		if custom_exporter.has_method("override_export"):
+			var result := true
+			var details := {
+				"processed_images": processed_images,
+				"durations": durations,
+				"export_dialog": export_dialog,
+				"export_paths": export_paths,
+				"project": project
+			}
+			if OS.get_name() != "HTML5" and is_single_file_format(project):
+				if gif_export_thread.is_active():
+					gif_export_thread.wait_to_finish()
+				var error = gif_export_thread.start(custom_exporter, "override_export", details)
+				if error == OK:
+					result = gif_export_thread.wait_to_finish()
+			else:
+				result = custom_exporter.call("override_export", details)
+			return result
+
 	if is_single_file_format(project):
 		var exporter: AImgIOBaseExporter
 		if project.file_format == FileFormat.APNG:
@@ -210,6 +255,7 @@ func export_processed_images(
 				gif_export_thread.wait_to_finish()
 			gif_export_thread.start(self, "export_animated", details)
 	else:
+		var succeeded := true
 		for i in range(processed_images.size()):
 			if OS.get_name() == "HTML5":
 				JavaScript.download_buffer(
@@ -218,11 +264,14 @@ func export_processed_images(
 					"image/png"
 				)
 			else:
-				var err = processed_images[i].save_png(export_paths[i])
+				var err: int = processed_images[i].save_png(export_paths[i])
 				if err != OK:
 					Global.error_dialog.set_text(tr("File failed to save. Error code %s") % err)
 					Global.error_dialog.popup_centered()
 					Global.dialog_open(true)
+					succeeded = false
+		if succeeded:
+			Global.notification_label("File(s) exported")
 
 	# Store settings for quick export and when the dialog is opened again
 	var file_name_with_ext := project.file_name + file_format_string(project.file_format)
@@ -235,10 +284,6 @@ func export_processed_images(
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.EXPORT, tr("Export") + " %s" % file_name_with_ext
 		)
-
-	# Only show when not exporting gif - gif export finishes in thread
-	if not is_single_file_format(project):
-		Global.notification_label("File(s) exported")
 	return true
 
 
@@ -304,11 +349,16 @@ func file_format_string(format_enum: int) -> String:
 		FileFormat.APNG:
 			return ".apng"
 		_:
+			# If a file format description is not found, try generating one
+			if custom_exporter_generators.has(format_enum):
+				return custom_exporter_generators[format_enum][1]
 			return ""
 
 
 func file_format_description(format_enum: int) -> String:
 	match format_enum:
+		#  these are overrides
+		#  (if they are not given, they will generate themselves based on the enum key name)
 		FileFormat.PNG:
 			return "PNG Image"
 		FileFormat.GIF:
@@ -316,19 +366,24 @@ func file_format_description(format_enum: int) -> String:
 		FileFormat.APNG:
 			return "APNG Image"
 		_:
+			# If a file format description is not found, try generating one
+			for key in FileFormat.keys():
+				if FileFormat[key] == format_enum:
+					return str(key.capitalize())
 			return ""
 
 
 func is_single_file_format(project := Global.current_project) -> bool:
 	# True when exporting to .gif and .apng (and potentially video formats in the future)
 	# False when exporting to .png, and other non-animated formats in the future
-	return project.file_format == FileFormat.GIF or project.file_format == FileFormat.APNG
+	return animated_formats.has(project.file_format)
 
 
 func create_export_path(multifile: bool, project: Project, frame: int = 0) -> String:
 	var path := project.file_name
 	# Only append frame number when there are multiple files exported
 	if multifile:
+		var path_extras := separator_character + String(frame).pad_zeros(number_of_digits)
 		var frame_tag_and_start_id := get_proccessed_image_animation_tag_and_start_id(
 			project, frame - 1
 		)
@@ -340,19 +395,21 @@ func create_export_path(multifile: bool, project: Project, frame: int = 0) -> St
 			var regex := RegEx.new()
 			regex.compile("[^a-zA-Z0-9_]+")
 			var frame_tag_dir := regex.sub(frame_tag, "", true)
+			if include_tag_in_filename:
+				# (frame - start_id + 1) makes frames id to start from 1
+				var tag_frame_number := String(frame - start_id + 1).pad_zeros(number_of_digits)
+				path_extras = (
+					separator_character
+					+ frame_tag_dir
+					+ separator_character
+					+ tag_frame_number
+				)
 			if new_dir_for_each_frame_tag:
-				# Add frame tag if frame has one
-				# (frame - start_id + 1) Makes frames id to start from 1 in each frame tag directory
-				path += "_" + frame_tag_dir + "_" + String(frame - start_id + 1)
+				path += path_extras
 				return project.directory_path.plus_file(frame_tag_dir).plus_file(
 					path + file_format_string(project.file_format)
 				)
-			else:
-				# Add frame tag if frame has one
-				# (frame - start_id + 1) Makes frames id to start from 1 in each frame tag
-				path += "_" + frame_tag_dir + "_" + String(frame - start_id + 1)
-		else:
-			path += "_" + String(frame)
+		path += path_extras
 
 	return project.directory_path.plus_file(path + file_format_string(project.file_format))
 
@@ -383,10 +440,10 @@ func blend_layers(
 	else:
 		var layer: BaseLayer = project.layers[export_layers - 2]
 		var layer_image := Image.new()
-		if layer is PixelLayer:
-			layer_image.copy_from(frame.cels[export_layers - 2].image)
-		elif layer is GroupLayer:
+		if layer is GroupLayer:
 			layer_image.copy_from(layer.blend_children(frame, Vector2.ZERO))
+		else:
+			layer_image.copy_from(frame.cels[export_layers - 2].get_image())
 		image.blend_rect(layer_image, Rect2(Vector2.ZERO, project.size), origin)
 
 
@@ -396,20 +453,25 @@ func blend_all_layers(
 ) -> void:
 	var layer_i := 0
 	for cel in frame.cels:
-		if project.layers[layer_i].is_visible_in_hierarchy() and cel is PixelCel:
-			var cel_image := Image.new()
-			cel_image.copy_from(cel.image)
-			if cel.opacity < 1:  # If we have cel transparency
-				cel_image.lock()
-				for xx in cel_image.get_size().x:
-					for yy in cel_image.get_size().y:
-						var pixel_color := cel_image.get_pixel(xx, yy)
-						var alpha: float = pixel_color.a * cel.opacity
-						cel_image.set_pixel(
-							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-						)
-				cel_image.unlock()
-			image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
+		if not project.layers[layer_i].is_visible_in_hierarchy():
+			layer_i += 1
+			continue
+		if cel is GroupCel:
+			layer_i += 1
+			continue
+		var cel_image := Image.new()
+		cel_image.copy_from(cel.get_image())
+		if cel.opacity < 1:  # If we have cel transparency
+			cel_image.lock()
+			for xx in cel_image.get_size().x:
+				for yy in cel_image.get_size().y:
+					var pixel_color := cel_image.get_pixel(xx, yy)
+					var alpha: float = pixel_color.a * cel.opacity
+					cel_image.set_pixel(
+						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
+					)
+			cel_image.unlock()
+		image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
 		layer_i += 1
 
 
@@ -417,31 +479,28 @@ func blend_all_layers(
 func blend_selected_cels(
 	image: Image, frame: Frame, origin := Vector2(0, 0), project := Global.current_project
 ) -> void:
-	var layer_i := 0
 	for cel_ind in frame.cels.size():
 		var test_array := [project.current_frame, cel_ind]
 		if not test_array in project.selected_cels:
 			continue
-		if not frame.cels[cel_ind] is PixelCel:
+		if frame.cels[cel_ind] is GroupCel:
 			continue
-
-		var cel: PixelCel = frame.cels[cel_ind]
-
-		if project.layers[layer_i].is_visible_in_hierarchy():
-			var cel_image := Image.new()
-			cel_image.copy_from(cel.image)
-			if cel.opacity < 1:  # If we have cel transparency
-				cel_image.lock()
-				for xx in cel_image.get_size().x:
-					for yy in cel_image.get_size().y:
-						var pixel_color := cel_image.get_pixel(xx, yy)
-						var alpha: float = pixel_color.a * cel.opacity
-						cel_image.set_pixel(
-							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-						)
-				cel_image.unlock()
-			image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
-		layer_i += 1
+		if not project.layers[cel_ind].is_visible_in_hierarchy():
+			continue
+		var cel: BaseCel = frame.cels[cel_ind]
+		var cel_image := Image.new()
+		cel_image.copy_from(cel.get_image())
+		if cel.opacity < 1:  # If we have cel transparency
+			cel_image.lock()
+			for xx in cel_image.get_size().x:
+				for yy in cel_image.get_size().y:
+					var pixel_color := cel_image.get_pixel(xx, yy)
+					var alpha: float = pixel_color.a * cel.opacity
+					cel_image.set_pixel(
+						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
+					)
+			cel_image.unlock()
+		image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
 
 
 func frames_divided_by_spritesheet_lines() -> int:

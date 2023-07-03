@@ -9,25 +9,24 @@ on:
       - "addons/**"
       - "src/**"
 
+concurrency:
+  group: ci-${{github.actor}}-${{github.head_ref || github.run_number}}-${{github.ref}}-static
+  cancel-in-progress: true
+
 jobs:
-  format:
+  static-checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: pip3 install "gdtoolkit==3.*"
-      - run: gdformat --diff .
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: pip3 install "gdtoolkit==3.*"
-      - run: gdlint .
-  codespell:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: codespell-project/actions-codespell@v1
-          with:
-            skip: ./addons,*.po
-            check_hidden: false
-            ignore_words_list: cello,doubleclick
-            only_warn: true
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install gdtoolkit
+        run: pip3 install "gdtoolkit==3.*"
+      - name: Formatting checks
+        run: gdformat --diff .
+      - name: Linting checks
+        run: gdlint .
+      - name: Spell checks via codespell
+        uses: codespell-project/actions-codespell@v1
+        with:
+          skip: ./addons,*.po
+          ignore_words_list: chello,doubleclick

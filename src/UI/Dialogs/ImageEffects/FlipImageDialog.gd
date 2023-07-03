@@ -1,13 +1,7 @@
 extends ImageEffect
 
-onready var flip_h: CheckBox = $VBoxContainer/OptionsContainer/FlipHorizontal
-onready var flip_v: CheckBox = $VBoxContainer/OptionsContainer/FlipVertical
-
-
-func set_nodes() -> void:
-	preview = $VBoxContainer/AspectRatioContainer/Preview
-	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
-	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
+onready var flip_h := $VBoxContainer/FlipOptions/FlipHorizontal as CheckBox
+onready var flip_v := $VBoxContainer/FlipOptions/FlipVertical as CheckBox
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:

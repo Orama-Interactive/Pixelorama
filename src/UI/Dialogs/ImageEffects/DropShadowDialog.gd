@@ -1,12 +1,11 @@
 extends ImageEffect
 
+enum Animate { OFFSET_X, OFFSET_Y }
 var offset := Vector2(5, 5)
 var color := Color.black
 var shader: Shader = load("res://src/Shaders/DropShadow.tres")
 
-onready var x_spinbox: SpinBox = $VBoxContainer/OptionsContainer/XSpinBox
-onready var y_spinbox: SpinBox = $VBoxContainer/OptionsContainer/YSpinBox
-onready var shadow_color = $VBoxContainer/OptionsContainer/ShadowColor
+onready var shadow_color := $VBoxContainer/ShadowOptions/ShadowColor as ColorPickerButton
 
 
 func _ready() -> void:
@@ -16,20 +15,24 @@ func _ready() -> void:
 	sm.shader = shader
 	preview.set_material(sm)
 
-
-func set_nodes() -> void:
-	preview = $VBoxContainer/AspectRatioContainer/Preview
-	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
-	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
+	# set as in enum
+	animate_panel.add_float_property(
+		"Offset X", $VBoxContainer/ShadowOptions/OffsetSliders.find_node("X")
+	)
+	animate_panel.add_float_property(
+		"Offset Y", $VBoxContainer/ShadowOptions/OffsetSliders.find_node("Y")
+	)
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
+	var offset_x = animate_panel.get_animated_values(commit_idx, Animate.OFFSET_X)
+	var offset_y = animate_panel.get_animated_values(commit_idx, Animate.OFFSET_Y)
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
 		selection_tex.create_from_image(project.selection_map, 0)
 
 	var params := {
-		"shadow_offset": offset,
+		"shadow_offset": Vector2(offset_x, offset_y),
 		"shadow_color": color,
 		"selection": selection_tex,
 	}
@@ -42,20 +45,11 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		yield(gen, "done")
 
 
-func _on_XSpinBox_value_changed(value) -> void:
-	x_spinbox.max_value = value + 1
-	x_spinbox.min_value = value - 1
-	offset.x = value
+func _on_OffsetSliders_value_changed(value: Vector2) -> void:
+	offset = value
 	update_preview()
 
 
-func _on_YSpinBox_value_changed(value) -> void:
-	y_spinbox.max_value = value + 1
-	y_spinbox.min_value = value - 1
-	offset.y = value
-	update_preview()
-
-
-func _on_OutlineColor_color_changed(_color: Color) -> void:
-	color = _color
+func _on_ShadowColor_color_changed(value: Color) -> void:
+	color = value
 	update_preview()

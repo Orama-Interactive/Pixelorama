@@ -9,7 +9,7 @@
 resource_name = "Tabs"
 script = ExtResource( 2 )
 names = PoolStringArray(  )
-current_tab = -1
+current_tab = 0
 
 [sub_resource type="Resource" id=2]
 resource_name = "Layout"
@@ -51,11 +51,10 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="PreviewInstruction" type="Label" parent="VBoxContainer"]
-self_modulate = Color( 0.658824, 1, 0.286275, 1 )
 margin_top = 18.0
 margin_right = 527.0
 margin_bottom = 32.0
-text = "This is a preview (changing this won't change the Layout)"
+text = "This is a preview, changing this won't change the layout"
 align = 1
 autowrap = true
 
@@ -93,7 +92,6 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="LayoutInstruction" type="Label" parent="VBoxContainer"]
-self_modulate = Color( 0.658824, 1, 0.286275, 1 )
 margin_top = 376.0
 margin_right = 527.0
 margin_bottom = 390.0
@@ -139,8 +137,8 @@ text = "Delete"
 [node name="LayoutSettings" type="ConfirmationDialog" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 535.0
-margin_bottom = 526.0
+margin_right = 180.0
+margin_bottom = 76.0
 rect_min_size = Vector2( 172, 60.2 )
 resizable = true
 
@@ -149,17 +147,17 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_left = 8.0
-margin_top = -251.0
+margin_top = -26.0
 margin_right = -8.0
-margin_bottom = 223.0
+margin_bottom = -2.0
 size_flags_horizontal = 3
 placeholder_text = "Insert name"
 
 [node name="DeleteConfirmation" type="ConfirmationDialog" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 535.0
-margin_bottom = 526.0
+margin_right = 305.0
+margin_bottom = 68.2
 rect_min_size = Vector2( 172, 60.2 )
 dialog_text = "Are you sure you want to delete this layout?"
 

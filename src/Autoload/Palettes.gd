@@ -336,7 +336,7 @@ func _load_palettes() -> void:
 		"data", "last_palette", DEFAULT_PALETTE_NAME
 	)
 	for i in range(len(search_locations)):
-		# If palette is not in palettes write path - make it's copy in the write path
+		# If palette is not in palettes write path - make its copy in the write path
 		var make_copy := false
 		if search_locations[i] != palettes_write_path:
 			make_copy = true
@@ -347,8 +347,7 @@ func _load_palettes() -> void:
 			var palette: Palette = load(base_directory.plus_file(file_name))
 			if palette:
 				if make_copy:
-					# Makes a copy of the palette
-					_save_palette(palette)
+					_save_palette(palette)  # Makes a copy of the palette
 				palette.resource_name = palette.resource_path.get_file().trim_suffix(".tres")
 				# On Windows for some reason paths can contain "res://" in front of them which breaks saving
 				palette.resource_path = palette.resource_path.trim_prefix("res://")

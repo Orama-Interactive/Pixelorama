@@ -272,17 +272,18 @@ func populate_layouts_submenu() -> void:
 func _setup_image_menu() -> void:
 	# Order as in Global.ImageMenu enum
 	var image_menu_items := [
-		"Scale Image",
-		"Centralize Image",
-		"Crop Image",
 		"Resize Canvas",
+		"Scale Image",
+		"Crop Image",
 		"Mirror Image",
+		"Centralize Image",
 		"Rotate Image",
-		"Invert Colors",
-		"Desaturation",
 		"Outline",
 		"Drop Shadow",
+		"Invert Colors",
+		"Desaturation",
 		"Adjust Hue/Saturation/Value",
+		"Posterize",
 		"Gradient",
 		"Gradient Map",
 		# "Shader"
@@ -291,8 +292,6 @@ func _setup_image_menu() -> void:
 	var i := 0
 	for item in image_menu_items:
 		image_menu.add_item(item, i)
-		if i == Global.ImageMenu.RESIZE_CANVAS:
-			image_menu.add_separator()
 		i += 1
 
 	image_menu.connect("id_pressed", self, "image_menu_id_pressed")
@@ -300,13 +299,14 @@ func _setup_image_menu() -> void:
 
 func _setup_select_menu() -> void:
 	# Order as in Global.SelectMenu enum
-	var select_menu_items := ["All", "Clear", "Invert"]
+	var select_menu_items := ["All", "Clear", "Invert", "Tile Mode"]
 	var select_menu: PopupMenu = select_menu_button.get_popup()
-	var i := 0
-	for item in select_menu_items:
-		select_menu.add_item(item, i)
-		i += 1
-
+	for i in select_menu_items.size():
+		var item: String = select_menu_items[i]
+		if item == "Tile Mode":
+			select_menu.add_check_item(item, i)
+		else:
+			select_menu.add_item(item, i)
 	select_menu.connect("id_pressed", self, "select_menu_id_pressed")
 
 
@@ -404,6 +404,7 @@ func _save_project_file_as() -> void:
 		save_dialog.popup_centered()
 		save_filename.text = Global.current_project.name
 	else:
+		Global.save_sprites_dialog.get_ok().text = "Save"
 		Global.save_sprites_dialog.popup_centered()
 		yield(get_tree(), "idle_frame")
 		yield(get_tree(), "idle_frame")
@@ -475,28 +476,6 @@ func view_menu_id_pressed(id: int) -> void:
 	Global.canvas.update()
 
 
-func _tile_mode_submenu_id_pressed(id: int) -> void:
-	Global.current_project.tiles.mode = id
-	Global.transparent_checker.fit_rect(Global.current_project.tiles.get_bounding_rect())
-	for i in Tiles.MODE.values():
-		tile_mode_submenu.set_item_checked(i, i == id)
-	Global.canvas.tile_mode.update()
-	Global.canvas.pixel_grid.update()
-	Global.canvas.grid.update()
-
-
-func _snap_to_submenu_id_pressed(id: int) -> void:
-	if id == 0:
-		Global.snap_to_rectangular_grid = !Global.snap_to_rectangular_grid
-		snap_to_submenu.set_item_checked(id, Global.snap_to_rectangular_grid)
-	elif id == 1:
-		Global.snap_to_guides = !Global.snap_to_guides
-		snap_to_submenu.set_item_checked(id, Global.snap_to_guides)
-	elif id == 2:
-		Global.snap_to_perspective_guides = !Global.snap_to_perspective_guides
-		snap_to_submenu.set_item_checked(id, Global.snap_to_perspective_guides)
-
-
 func window_menu_id_pressed(id: int) -> void:
 	if not Global.can_draw:
 		return
@@ -514,13 +493,41 @@ func window_menu_id_pressed(id: int) -> void:
 			_handle_metadata(id, window_menu_button)
 
 
+func _tile_mode_submenu_id_pressed(id: int) -> void:
+	Global.current_project.tiles.mode = id
+	Global.transparent_checker.fit_rect(Global.current_project.tiles.get_bounding_rect())
+	for i in Tiles.MODE.values():
+		tile_mode_submenu.set_item_checked(i, i == id)
+	Global.canvas.tile_mode.update()
+	Global.canvas.pixel_grid.update()
+	Global.canvas.grid.update()
+	Global.tile_mode_offset_dialog.change_mask()
+
+
+func _snap_to_submenu_id_pressed(id: int) -> void:
+	if id == 0:
+		Global.snap_to_rectangular_grid = !Global.snap_to_rectangular_grid
+		snap_to_submenu.set_item_checked(id, Global.snap_to_rectangular_grid)
+	elif id == 1:
+		Global.snap_to_guides = !Global.snap_to_guides
+		snap_to_submenu.set_item_checked(id, Global.snap_to_guides)
+	elif id == 2:
+		Global.snap_to_perspective_guides = !Global.snap_to_perspective_guides
+		snap_to_submenu.set_item_checked(id, Global.snap_to_perspective_guides)
+
+
 func _panels_submenu_id_pressed(id: int) -> void:
 	if zen_mode:
 		return
 
-	var element_visible = panels_submenu.is_item_checked(id)
+	var element_visible := panels_submenu.is_item_checked(id)
 	ui.set_control_hidden(ui_elements[id], element_visible)
 	panels_submenu.set_item_checked(id, !element_visible)
+	if ui.tabs_visible == false:
+		ui.tabs_visible = true
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
+		ui.tabs_visible = false
 
 
 func _layouts_submenu_id_pressed(id: int) -> void:
@@ -679,6 +686,9 @@ func image_menu_id_pressed(id: int) -> void:
 		Global.ImageMenu.GRADIENT_MAP:
 			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/GradientMapDialog"))
 
+		Global.ImageMenu.POSTERIZE:
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/Posterize"))
+
 #		Global.ImageMenu.SHADER:
 #			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ShaderEffect"))
 
@@ -696,6 +706,10 @@ func select_menu_id_pressed(id: int) -> void:
 			Global.canvas.selection.clear_selection(true)
 		Global.SelectMenu.INVERT:
 			Global.canvas.selection.invert()
+		Global.SelectMenu.TILE_MODE:
+			var state = select_menu_button.get_popup().is_item_checked(id)
+			Global.canvas.selection.flag_tilemode = !state
+			select_menu_button.get_popup().set_item_checked(id, !state)
 		_:
 			_handle_metadata(id, select_menu_button)
 
@@ -716,7 +730,7 @@ func help_menu_id_pressed(id: int) -> void:
 			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		Global.HelpMenu.CHANGELOG:
 			OS.shell_open(
-				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v0103---2022-09-26"
+				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v011---2023-06-13"
 			)
 		Global.HelpMenu.ABOUT_PIXELORAMA:
 			_popup_dialog(Global.control.get_node("Dialogs/AboutDialog"))

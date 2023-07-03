@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2023-02-02 01:11\n"
+"PO-Revision-Date: 2023-05-18 12:26\n"
 
 msgid "OK"
 msgstr "예"
@@ -252,6 +252,18 @@ msgstr "가동 패널"
 msgid "Manage Layouts"
 msgstr "레이아웃 관리"
 
+#. Noun, a preview of something
+msgid "Preview"
+msgstr ""
+
+#. Found in the manage layouts dialog
+msgid "This is a preview, changing this won't change the layout"
+msgstr ""
+
+#. Found in the manage layouts dialog
+msgid "Double click to set as new startup layout"
+msgstr ""
+
 msgid "Add"
 msgstr "추가"
 
@@ -287,6 +299,26 @@ msgstr "눈금자 표시"
 
 msgid "Show Guides"
 msgstr "안내선 표시"
+
+#. Found under the View menu.
+msgid "Show Mouse Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap To"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Perspective Guides"
+msgstr ""
 
 msgid "Show Animation Timeline"
 msgstr "애니메이션 타임라인 보기"
@@ -356,6 +388,9 @@ msgstr "세로축 프레임:"
 
 msgid "Start frame:"
 msgstr "시작 프레임:"
+
+msgid "End frame:"
+msgstr ""
 
 msgid "At frame:"
 msgstr "프레임:"
@@ -482,6 +517,10 @@ msgstr ""
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
+msgstr ""
+
+#. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
+msgid "3D layer:"
 msgstr ""
 
 msgid "Direction:"
@@ -623,8 +662,8 @@ msgstr "안내선 색:"
 msgid "System Language"
 msgstr "시스템 언어"
 
-msgid "Display Scale"
-msgstr "디스플레이 크기"
+msgid "Display scale:"
+msgstr ""
 
 msgid "Dim interface on dialog popup"
 msgstr "대화 상자 팝업에 인터페이스를 희미하"
@@ -829,17 +868,17 @@ msgstr "색상:"
 msgid "Steps:"
 msgstr "단계:"
 
-msgid "Top to Bottom"
-msgstr "위에서 아래로"
+#. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize"
+msgstr ""
 
-msgid "Bottom to Top"
-msgstr "아래서 위로"
+#. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
+msgid "Posterize levels:"
+msgstr ""
 
-msgid "Left to Right"
-msgstr "왼쪽에서 오른쪽으로"
-
-msgid "Right to Left"
-msgstr "오른쪽에서 왼쪽으로"
+#. An option for the posterize image effect.
+msgid "Dither intensity:"
+msgstr ""
 
 msgid "View Splash Screen"
 msgstr "시작 로고 화면 보기"
@@ -1235,6 +1274,18 @@ msgstr "안내선 색:"
 msgid "A color of ruler guides displayed on the canvas"
 msgstr "캔버스에 표시되는 줄자 안내선의 색상"
 
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
+msgid "Snapping distance:"
+msgstr ""
+
+#. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
+msgid "This is the distance in pixels where guide and grid snapping gets activated."
+msgstr ""
+
 msgid "Grid"
 msgstr "격자"
 
@@ -1253,41 +1304,21 @@ msgstr "아이소메트릭"
 msgid "All"
 msgstr "전체"
 
-msgid "Rectangular grid width:"
-msgstr "직사각형 격자 폭"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Rectangular grid size:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the rectangular grid"
-msgstr "직사각형 격자의 수직선 간격 설정"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Isometric grid size:"
+msgstr ""
 
-msgid "Rectangular grid height:"
-msgstr "직사각형 격자 높이"
+#. Found in the Preferences, in the Canvas tab.
+msgid "Grid offset:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the rectangular grid"
-msgstr "직사각형 격자의 수평선 간격 설정"
-
-msgid "Isometric cell bounds width:"
-msgstr "아이소메트릭 셀 경계 너비:"
-
-msgid "Sets the width of the isometric cell's axis aligned bounding box"
-msgstr "아이소메트릭 셀의 너비를 설정합니다"
-
-msgid "Isometric cell bounds height:"
-msgstr "아이소메트릭 셀 경계 높이:"
-
-msgid "Sets the height of the isometric cell's axis aligned bounding box"
-msgstr "아이소메트릭 셀의 높이를 설정합니다"
-
-msgid "Grid offset x:"
-msgstr "격자 오프셋 x:"
-
-msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
-msgstr "캔버스 원점에서 격자의 x 오프셋을 설정합니다 (이미지의 왼쪽 상단 모서리)"
-
-msgid "Grid offset y:"
-msgstr "격자 오프셋 y:"
-
-msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
-msgstr "캔버스 원점에서 격자의 y 오프셋을 설정합니다 (이미지의 왼쪽 상단 모서리)"
+#. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
+msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
+msgstr ""
 
 msgid "Draw over Tile Mode:"
 msgstr "타일 모드 위에 그리기"
@@ -1404,6 +1435,42 @@ msgstr "삭제"
 msgid "Open Folder"
 msgstr "폴더 열기"
 
+#. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
+msgid "Dynamics"
+msgstr ""
+
+#. Found in the Dynamics options menu. Pressure refers to tablet pen pressure.
+msgid "Pressure"
+msgstr ""
+
+#. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
+msgid "Velocity"
+msgstr ""
+
+#. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
+msgid "Alpha"
+msgstr ""
+
+#. Refers to the size of a value, for example the size of a brush.
+msgid "Size"
+msgstr ""
+
+#. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
+msgid "Value limits"
+msgstr ""
+
+#. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
+msgid "Thresholds"
+msgstr ""
+
+#. Noun, the start of something.
+msgid "Start"
+msgstr ""
+
+#. Noun, the end of something.
+msgid "End"
+msgstr ""
+
 msgid "Brush:"
 msgstr "브러시:"
 
@@ -1425,8 +1492,8 @@ msgstr "커스텀 브러시"
 msgid "Brush size:"
 msgstr "브러시 크기:"
 
-msgid "Overwrite Color"
-msgstr "색 덮어쓰기"
+msgid "Overwrite color"
+msgstr ""
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "색을 섞는 대신 덮어씁니다. 이 옵션은 완전 불투명한 색을 쓰지 않을 때만 의미가 있습니다."
@@ -1436,6 +1503,18 @@ msgstr "픽셀 퍼펙트"
 
 msgid "Fill inside"
 msgstr "안에 채우기"
+
+#. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
+msgid "Spacing"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
+msgid "Gap X:"
+msgstr ""
+
+#. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
+msgid "Gap Y:"
+msgstr ""
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
@@ -1529,6 +1608,22 @@ msgstr "프레임에 맞추기"
 msgid "100% Zoom"
 msgstr "100% 줌"
 
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Replace selection"
+msgstr ""
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Add to selection"
+msgstr ""
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Subtract from selection"
+msgstr ""
+
+#. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
+msgid "Intersection of selections"
+msgstr ""
+
 msgid "Mirroring"
 msgstr "미러링"
 
@@ -1546,6 +1641,12 @@ msgstr "수직"
 
 msgid "Current frame:"
 msgstr "현재 프레임:"
+
+msgid "Animation mode:"
+msgstr ""
+
+msgid "Current frame as spritesheet"
+msgstr ""
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -1695,10 +1796,20 @@ msgstr ""
 msgid "Layers"
 msgstr "레이어"
 
+#. Hint tooltip of the create new layer button, found on the left side of the timeline.
 msgid "Create a new layer"
 msgstr "새 레이어 생성"
 
-msgid "Create a new group layer"
+#. One of the options of the create new layer button.
+msgid "Add Pixel Layer"
+msgstr ""
+
+#. One of the options of the create new layer button.
+msgid "Add Group Layer"
+msgstr ""
+
+#. One of the options of the create new layer button.
+msgid "Add 3D Layer"
 msgstr ""
 
 msgid "Remove current layer"
@@ -1852,8 +1963,8 @@ msgstr "코드 에러. 파일을 여는것을 실패힜읍니다"
 msgid "File failed to save. Error code %s"
 msgstr "코드 에러. 파일을 저장을 실패했읍니다"
 
-msgid "File exported"
-msgstr "파일이 내보내졌습니다"
+msgid "File(s) exported"
+msgstr ""
 
 msgid "New Empty Palette"
 msgstr "새 빈 팔레트"
@@ -2189,5 +2300,222 @@ msgid "Right Tool Options"
 msgstr "오른쪽 툴 설정"
 
 msgid "Reference Images"
+msgstr ""
+
+msgid "Perspective Editor"
+msgstr ""
+
+#. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
+msgid "Recorder"
+msgstr ""
+
+msgid "Crop"
+msgstr ""
+
+msgid "Resize the canvas"
+msgstr ""
+
+msgid "Margins"
+msgstr ""
+
+msgid "Position + Size"
+msgstr ""
+
+msgid "Locked Aspect Ratio"
+msgstr ""
+
+msgid "Margins:"
+msgstr ""
+
+msgid "Aspect Ratio:"
+msgstr ""
+
+msgid "Top:"
+msgstr ""
+
+msgid "Bottom:"
+msgstr ""
+
+msgid "Left:"
+msgstr ""
+
+msgid "Right:"
+msgstr ""
+
+msgid "Locked size\n\n"
+"When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
+"When disabled using the tool on the canvas will draw the rectangle."
+msgstr ""
+
+#. A tool used in 3D layers, that edits 3D objects.
+msgid "3D Shape Edit"
+msgstr ""
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Box"
+msgstr ""
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Sphere"
+msgstr ""
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Capsule"
+msgstr ""
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Cylinder"
+msgstr ""
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Prism"
+msgstr ""
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Torus"
+msgstr ""
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Plane"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+#. Used in 3D layers. A type of light.
+msgid "Directional light"
+msgstr ""
+
+#. Used in 3D layers. A type of light.
+msgid "Spotlight"
+msgstr ""
+
+#. Used in 3D layers. A type of light.
+msgid "Point light"
+msgstr ""
+
+#. Used in 3D layers. A type of 3D object.
+msgid "Custom model"
+msgstr ""
+
+msgid "Selected object:"
+msgstr ""
+
+msgid "Add new object"
+msgstr ""
+
+msgid "Remove object"
+msgstr ""
+
+msgid "Camera"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
+msgid "Projection:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
+msgid "Perspective"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
+msgid "Orthogonal"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
+msgid "Frustum"
+msgstr ""
+
+msgid "Rotation:"
+msgstr ""
+
+msgid "Scale:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool.
+msgid "Environment"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
+msgid "Ambient color:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
+msgid "Ambient color energy:"
+msgstr ""
+
+#. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
+msgid "Visible:"
+msgstr ""
+
+#. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
+msgid "Transform"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
+msgid "Mesh"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
+msgid "Left to right:"
+msgstr ""
+
+#. Radius of a circle/spherical object.
+msgid "Radius:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
+msgid "Radial segments:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
+msgid "Rings:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
+msgid "Is hemisphere:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
+msgid "Top radius:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
+msgid "Bottom radius:"
+msgstr ""
+
+msgid "Text:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
+msgid "Pixel size:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
+msgid "Curve step:"
+msgstr ""
+
+msgid "Horizontal alignment:"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
+msgid "Energy:"
+msgstr ""
+
+#. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. If true, the light's effect is reversed, darkening areas and casting bright shadows.
+msgid "Negative:"
+msgstr ""
+
+msgid "Shadow:"
+msgstr ""
+
+#. Refers to the range of something, like the range of a spotlight.
+msgid "Range:"
 msgstr ""
 

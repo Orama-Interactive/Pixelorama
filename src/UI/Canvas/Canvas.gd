@@ -14,24 +14,25 @@ onready var tile_mode = $TileMode
 onready var pixel_grid = $PixelGrid
 onready var grid = $Grid
 onready var selection = $Selection
+onready var onion_past := $OnionPast as Node2D
+onready var onion_future := $OnionFuture as Node2D
+onready var crop_rect := $CropRect as CropRect
 onready var indicators = $Indicators
 onready var previews = $Previews
 onready var mouse_guide_container = $MouseGuideContainer
+onready var gizmos_3d: Node2D = $Gizmos3D
 
 
 func _ready() -> void:
-	$OnionPast.type = $OnionPast.PAST
-	$OnionPast.blue_red_color = Color.blue
-	$OnionFuture.type = $OnionFuture.FUTURE
-	$OnionFuture.blue_red_color = Color.red
+	onion_past.type = onion_past.PAST
+	onion_past.blue_red_color = Global.onion_skinning_past_color
+	onion_future.type = onion_future.FUTURE
+	onion_future.blue_red_color = Global.onion_skinning_future_color
 	yield(get_tree(), "idle_frame")
 	camera_zoom()
 
 
 func _draw() -> void:
-	Global.second_viewport.get_child(0).get_node("CanvasPreview").update()
-	Global.small_preview_viewport.get_child(0).get_node("CanvasPreview").update()
-
 	var current_cels: Array = Global.current_project.frames[Global.current_project.current_frame].cels
 	var position_tmp := position
 	var scale_tmp := scale
@@ -89,7 +90,7 @@ func _input(event: InputEvent) -> void:
 			Global.main_viewport.warp_mouse(tmp_position)
 	# Do not use self.get_local_mouse_position() because it return unexpected
 	# value when shrink parameter is not equal to one. At godot version 3.2.3
-	var tmp_transform = get_canvas_transform().affine_inverse()
+	var tmp_transform := get_canvas_transform().affine_inverse()
 	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
 
 	if Global.has_focus:
@@ -143,5 +144,5 @@ func update_selected_cels_textures(project: Project = Global.current_project) ->
 
 
 func refresh_onion() -> void:
-	$OnionPast.update()
-	$OnionFuture.update()
+	onion_past.update()
+	onion_future.update()

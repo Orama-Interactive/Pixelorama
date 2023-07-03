@@ -181,7 +181,7 @@ func _add_extension(file_name: String) -> void:
 		_enable_extension(extension)
 
 	# If an extension doesn't crash pixelorama then it is proven innocent
-	# And we should now delete it's "Faulty.txt" file
+	# And we should now delete its "Faulty.txt" file
 	remover_directory.remove(EXTENSIONS_PATH.plus_file("Faulty.txt"))
 
 

@@ -1,5 +1,9 @@
 extends ViewportContainer
 
+export(NodePath) var camera_path
+
+onready var camera := get_node(camera_path) as Camera2D
+
 
 func _ready() -> void:
 	material = CanvasItemMaterial.new()
@@ -7,12 +11,14 @@ func _ready() -> void:
 
 
 func _on_ViewportContainer_mouse_entered() -> void:
+	camera.set_process_input(true)
 	Global.has_focus = true
 	Global.control.left_cursor.visible = Global.show_left_tool_icon
 	Global.control.right_cursor.visible = Global.show_right_tool_icon
 
 
 func _on_ViewportContainer_mouse_exited() -> void:
+	camera.set_process_input(false)
 	Global.has_focus = false
 	Global.control.left_cursor.visible = false
 	Global.control.right_cursor.visible = false

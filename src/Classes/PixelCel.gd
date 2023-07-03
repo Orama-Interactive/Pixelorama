@@ -56,6 +56,7 @@ func get_image() -> Image:
 
 func update_texture() -> void:
 	image_texture.set_data(image)
+	.update_texture()
 
 
 func save_image_data_to_pxo(file: File) -> void:
@@ -69,5 +70,8 @@ func load_image_data_from_pxo(file: File, project_size: Vector2) -> void:
 
 
 func instantiate_cel_button() -> Node:
-	var cel_button = Global.pixel_cel_button_node.instance()
-	return cel_button
+	return Global.pixel_cel_button_node.instance()
+
+
+func get_class_name() -> String:
+	return "PixelCel"

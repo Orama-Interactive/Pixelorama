@@ -17,25 +17,50 @@ var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
 onready var old_scroll: int = 0  # The previous scroll state of $ScrollContainer
 onready var tag_spacer = find_node("TagSpacer")
 onready var start_spacer = find_node("StartSpacer")
+onready var add_layer_list: MenuButton = $"%AddLayerList"
 
 onready var timeline_scroll: ScrollContainer = find_node("TimelineScroll")
 onready var frame_scroll_container: Control = find_node("FrameScrollContainer")
 onready var frame_scroll_bar: HScrollBar = find_node("FrameScrollBar")
 onready var tag_scroll_container: ScrollContainer = find_node("TagScroll")
 onready var layer_frame_h_split: HSplitContainer = find_node("LayerFrameHSplit")
-onready var fps_spinbox: SpinBox = find_node("FPSValue")
+onready var fps_spinbox: ValueSlider = find_node("FPSValue")
 onready var onion_skinning_button: BaseButton = find_node("OnionSkinning")
 onready var loop_animation_button: BaseButton = find_node("LoopAnim")
 onready var drag_highlight: ColorRect = find_node("DragHighlight")
 
 
 func _ready() -> void:
+	add_layer_list.get_popup().connect("id_pressed", self, "add_layer")
 	frame_scroll_bar.connect("value_changed", self, "_frame_scroll_changed")
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
+	# config loading
 	layer_frame_h_split.split_offset = Global.config_cache.get_value("timeline", "layer_size", 0)
 	self.cel_size = Global.config_cache.get_value("timeline", "cel_size", cel_size)  # Call setter
-
+	var past_rate = Global.config_cache.get_value(
+		"timeline", "past_rate", Global.onion_skinning_past_rate
+	)
+	var future_rate = Global.config_cache.get_value(
+		"timeline", "future_rate", Global.onion_skinning_future_rate
+	)
+	var blue_red = Global.config_cache.get_value(
+		"timeline", "blue_red", Global.onion_skinning_blue_red
+	)
+	var past_above = Global.config_cache.get_value(
+		"timeline", "past_above_canvas", past_above_canvas
+	)
+	var future_above = Global.config_cache.get_value(
+		"timeline", "future_above_canvas", future_above_canvas
+	)
+	$"%PastOnionSkinning".value = past_rate
+	$"%FutureOnionSkinning".value = future_rate
+	$"%BlueRedMode".pressed = blue_red
+	$"%PastPlacement".select(0 if past_above else 1)
+	$"%FuturePlacement".select(0 if future_above else 1)
+	# emit signals that were supposed to be emitted (Check if it's still required in godot 4)
+	$"%PastPlacement".emit_signal("item_selected", 0 if past_above else 1)
+	$"%FuturePlacement".emit_signal("item_selected", 0 if future_above else 1)
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	Global.layer_vbox.call_deferred("emit_signal", "resized")
 
@@ -62,19 +87,24 @@ func _get_minimum_size() -> Vector2:
 	return Vector2(Global.layer_vbox.rect_size.x + cel_size + 26, cel_size + 105)
 
 
-func _frame_scroll_changed(value: float) -> void:
+func _frame_scroll_changed(_value: float) -> void:
 	# Update the tag scroll as well:
-	tag_scroll_container.get_child(0).rect_min_size.x = Global.frame_hbox.rect_size.x
-	tag_scroll_container.scroll_horizontal = value
+	adjust_scroll_container()
 
 
 func _on_LayerVBox_resized() -> void:
-	# TODO: BUG Layers resizing doesn't update the tags!
 	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x
+	adjust_scroll_container()
+
+
+func adjust_scroll_container():
 	tag_spacer.rect_min_size.x = (
 		frame_scroll_container.rect_global_position.x
-		- tag_spacer.rect_global_position.x
+		- tag_scroll_container.rect_global_position.x
 	)
+	tag_scroll_container.get_child(0).rect_min_size.x = Global.frame_hbox.rect_size.x
+	Global.tag_container.rect_min_size = Global.frame_hbox.rect_size
+	tag_scroll_container.scroll_horizontal = frame_scroll_bar.value
 
 
 func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
@@ -119,10 +149,8 @@ func add_frame() -> void:
 	var project: Project = Global.current_project
 	var frame_add_index := project.current_frame + 1
 	var frame: Frame = project.new_empty_frame()
-
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
-
 	for l in range(project.layers.size()):
 		if project.layers[l].new_cels_linked:  # If the link button is pressed
 			var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
@@ -163,16 +191,14 @@ func add_frame() -> void:
 	project.undo_redo.add_do_method(project, "change_cel", project.current_frame + 1)
 	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
 	project.undo_redo.commit_action()
+	# it doesn't update properly without yields
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	adjust_scroll_container()
 
 
 func _on_DeleteFrame_pressed() -> void:
-	var indices := []
-	for cel in Global.current_project.selected_cels:
-		var f: int = cel[0]
-		if not f in indices:
-			indices.append(f)
-	indices.sort()
-	delete_frames(indices)
+	delete_frames()
 
 
 func delete_frames(indices := []) -> void:
@@ -180,10 +206,15 @@ func delete_frames(indices := []) -> void:
 	if project.frames.size() == 1:
 		return
 
+	if indices.size() == 0:
+		for cel in Global.current_project.selected_cels:
+			var f: int = cel[0]
+			if not f in indices:
+				indices.append(f)
+		indices.sort()
+
 	if indices.size() == project.frames.size():
 		indices.remove(indices.size() - 1)  # Ensure the project has at least 1 frame
-	elif indices.size() == 0:
-		indices.append(project.current_frame)
 
 	var current_frame: int = min(project.current_frame, project.frames.size() - indices.size() - 1)
 	var frames := []
@@ -230,27 +261,33 @@ func delete_frames(indices := []) -> void:
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
+	# it doesn't update properly without yields
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	adjust_scroll_container()
 
 
 func _on_CopyFrame_pressed() -> void:
-	var indices := []
-	for cel in Global.current_project.selected_cels:
-		var f: int = cel[0]
-		if not f in indices:
-			indices.append(f)
-	indices.sort()
-	copy_frames(indices)
+	copy_frames()
 
 
-func copy_frames(indices := []) -> void:
+func copy_frames(indices := [], destination := -1) -> void:
 	var project: Project = Global.current_project
 
 	if indices.size() == 0:
-		indices.append(project.current_frame)
+		for cel in Global.current_project.selected_cels:
+			var f: int = cel[0]
+			if not f in indices:
+				indices.append(f)
+		indices.sort()
 
 	var copied_frames := []
-	var copied_indices := range(indices[-1] + 1, indices[-1] + 1 + indices.size())
+	var copied_indices := []  # the indices of newly copied frames
 
+	if destination != -1:
+		copied_indices = range(destination + 1, (destination + 1) + indices.size())
+	else:
+		copied_indices = range(indices[-1] + 1, indices[-1] + 1 + indices.size())
 	var new_animation_tags := project.animation_tags.duplicate()
 	# Loop through the tags to create new classes for them, so that they won't be the same
 	# as project.animation_tags's classes. Needed for undo/redo to work properly.
@@ -261,20 +298,27 @@ func copy_frames(indices := []) -> void:
 			new_animation_tags[i].from,
 			new_animation_tags[i].to
 		)
-
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
-
 	for f in indices:
+		var src_frame: Frame = project.frames[f]
 		var new_frame := Frame.new()
 		copied_frames.append(new_frame)
-
-		var src_frame: Frame = project.frames[f]
 
 		new_frame.duration = src_frame.duration
 		for l in range(project.layers.size()):
 			var src_cel: BaseCel = project.frames[f].cels[l]  # Cel we're copying from, the source
-			var new_cel: BaseCel = src_cel.get_script().new()
+			var new_cel: BaseCel
+			var selected_id := -1
+			if src_cel is Cel3D:
+				new_cel = src_cel.get_script().new(
+					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
+				)
+				if src_cel.selected != null:
+					selected_id = src_cel.selected.id
+			else:
+				new_cel = src_cel.get_script().new()
+
 			if project.layers[l].new_cels_linked:
 				if src_cel.link_set == null:
 					src_cel.link_set = {}
@@ -287,25 +331,44 @@ func copy_frames(indices := []) -> void:
 			else:
 				new_cel.set_content(src_cel.copy_content())
 			new_cel.opacity = src_cel.opacity
+
+			if new_cel is Cel3D:
+				if selected_id in new_cel.object_properties.keys():
+					if selected_id != -1:
+						new_cel.selected = new_cel.get_object_from_id(selected_id)
 			new_frame.cels.append(new_cel)
 
-		# Loop through the tags to see if the frame is in one
-		for tag in new_animation_tags:
-			if indices[-1] + 1 >= tag.from && indices[-1] + 1 <= tag.to:
+		for tag in new_animation_tags:  # Loop through the tags to see if the frame is in one
+			if copied_indices[0] >= tag.from && copied_indices[0] <= tag.to:
 				tag.to += 1
-			elif indices[-1] + 1 < tag.from:
+			elif copied_indices[0] < tag.from:
 				tag.from += 1
 				tag.to += 1
-
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(project, "add_frames", copied_frames, copied_indices)
 	project.undo_redo.add_undo_method(project, "remove_frames", copied_indices)
-	project.undo_redo.add_do_method(project, "change_cel", indices[-1] + 1)
-	project.undo_redo.add_undo_method(project, "change_cel", indices[-1])
+	project.undo_redo.add_do_method(project, "change_cel", copied_indices[0])
+	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.commit_action()
+	# Select all the new frames so that it is easier to move/offset collectively if user wants
+	# To ease animation workflow, new current frame is the first copied frame instead of the last
+	var range_start: int = copied_indices[-1]
+	var range_end = copied_indices[0]
+	var frame_diff_sign = sign(range_end - range_start)
+	if frame_diff_sign == 0:
+		frame_diff_sign = 1
+	for i in range(range_start, range_end + frame_diff_sign, frame_diff_sign):
+		for j in range(0, Global.current_project.layers.size()):
+			var frame_layer := [i, j]
+			if !Global.current_project.selected_cels.has(frame_layer):
+				Global.current_project.selected_cels.append(frame_layer)
+	Global.current_project.change_cel(range_end, -1)
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	adjust_scroll_container()
 
 
 func _on_FrameTagButton_pressed() -> void:
@@ -324,6 +387,16 @@ func _on_MoveRight_pressed() -> void:
 	if frame == Global.current_project.frames.size() - 1:  # using last_frame caused problems
 		return
 	Global.frame_hbox.get_child(frame).change_frame_order(1)
+
+
+func reverse_frames(indices := []) -> void:
+	var project = Global.current_project
+	project.undo_redo.create_action("Change Frame Order")
+	project.undo_redo.add_do_method(project, "reverse_frames", indices)
+	project.undo_redo.add_undo_method(project, "reverse_frames", indices)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.commit_action()
 
 
 func _on_OnionSkinning_pressed() -> void:
@@ -369,7 +442,6 @@ func _on_PlayForward_toggled(button_pressed: bool) -> void:
 		Global.change_button_texturerect(Global.play_forward.get_child(0), "pause.png")
 	else:
 		Global.change_button_texturerect(Global.play_forward.get_child(0), "play.png")
-
 	play_animation(button_pressed, true)
 
 
@@ -378,7 +450,6 @@ func _on_PlayBackwards_toggled(button_pressed: bool) -> void:
 		Global.change_button_texturerect(Global.play_backwards.get_child(0), "pause.png")
 	else:
 		Global.change_button_texturerect(Global.play_backwards.get_child(0), "play_backwards.png")
-
 	play_animation(button_pressed, false)
 
 
@@ -498,28 +569,24 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 func _on_NextFrame_pressed() -> void:
 	var project := Global.current_project
-	Global.canvas.selection.transform_content_confirm()
-	project.selected_cels.clear()
 	if project.current_frame < project.frames.size() - 1:
+		project.selected_cels.clear()
 		project.change_cel(project.current_frame + 1, -1)
 
 
 func _on_PreviousFrame_pressed() -> void:
 	var project := Global.current_project
-	Global.canvas.selection.transform_content_confirm()
-	project.selected_cels.clear()
 	if project.current_frame > 0:
+		project.selected_cels.clear()
 		project.change_cel(project.current_frame - 1, -1)
 
 
 func _on_LastFrame_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.selected_cels.clear()
 	Global.current_project.change_cel(Global.current_project.frames.size() - 1, -1)
 
 
 func _on_FirstFrame_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.selected_cels.clear()
 	Global.current_project.change_cel(0, -1)
 
@@ -531,26 +598,31 @@ func _on_FPSValue_value_changed(value: float) -> void:
 
 func _on_PastOnionSkinning_value_changed(value: float) -> void:
 	Global.onion_skinning_past_rate = int(value)
+	Global.config_cache.set_value("timeline", "past_rate", Global.onion_skinning_past_rate)
 	Global.canvas.update()
 
 
 func _on_FutureOnionSkinning_value_changed(value: float) -> void:
 	Global.onion_skinning_future_rate = int(value)
+	Global.config_cache.set_value("timeline", "future_rate", Global.onion_skinning_future_rate)
 	Global.canvas.update()
 
 
 func _on_BlueRedMode_toggled(button_pressed: bool) -> void:
 	Global.onion_skinning_blue_red = button_pressed
+	Global.config_cache.set_value("timeline", "blue_red", Global.onion_skinning_blue_red)
 	Global.canvas.update()
 
 
 func _on_PastPlacement_item_selected(index: int) -> void:
 	past_above_canvas = (index == 0)
+	Global.config_cache.set_value("timeline", "past_above_canvas", past_above_canvas)
 	Global.canvas.get_node("OnionPast").set("show_behind_parent", !past_above_canvas)
 
 
 func _on_FuturePlacement_item_selected(index: int) -> void:
 	future_above_canvas = (index == 0)
+	Global.config_cache.set_value("timeline", "future_above_canvas", future_above_canvas)
 	Global.canvas.get_node("OnionFuture").set("show_behind_parent", !future_above_canvas)
 
 
@@ -568,6 +640,8 @@ func add_layer(type: int) -> void:
 			l = GroupLayer.new(project)
 		Global.LayerTypes.VECTOR:
 			l = VectorLayer.new(project)
+		Global.LayerTypes.THREE_D:
+			l = Layer3D.new(project)
 
 	var cels := []
 	for f in project.frames:
@@ -621,7 +695,13 @@ func _on_CloneLayer_pressed() -> void:
 
 		for frame in project.frames:
 			var src_cel: BaseCel = frame.cels[src_layer.index]
-			var new_cel: BaseCel = src_cel.get_script().new()
+			var new_cel: BaseCel
+			if src_cel is Cel3D:
+				new_cel = src_cel.get_script().new(
+					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
+				)
+			else:
+				new_cel = src_cel.get_script().new()
 
 			if src_cel.link_set == null:
 				new_cel.set_content(src_cel.copy_content())
@@ -748,7 +828,7 @@ func change_layer_order(up: bool) -> void:
 
 func _on_MergeDownLayer_pressed() -> void:
 	var project: Project = Global.current_project
-	var top_layer: PixelLayer = project.layers[project.current_layer]
+	var top_layer: BaseLayer = project.layers[project.current_layer]
 	var bottom_layer: PixelLayer = project.layers[project.current_layer - 1]
 	var top_cels := []
 
@@ -759,7 +839,7 @@ func _on_MergeDownLayer_pressed() -> void:
 		top_cels.append(frame.cels[top_layer.index])  # Store for undo purposes
 
 		var top_image := Image.new()
-		top_image.copy_from(frame.cels[top_layer.index].image)
+		top_image.copy_from(frame.cels[top_layer.index].get_image())
 
 		top_image.lock()
 		if frame.cels[top_layer.index].opacity < 1:  # If we have layer transparency
@@ -806,10 +886,15 @@ func _on_MergeDownLayer_pressed() -> void:
 	project.undo_redo.commit_action()
 
 
-func _on_OpacitySlider_value_changed(value) -> void:
-	var current_frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
-	var cel: BaseCel = current_frame.cels[Global.current_project.current_layer]
-	cel.opacity = value / 100
+func _on_OpacitySlider_value_changed(value: float) -> void:
+	var new_opacity := value / 100
+	var current_layer_idx := Global.current_project.current_layer
+	# Also update all selected frames.
+	for idx_pair in Global.current_project.selected_cels:
+		if idx_pair[1] == current_layer_idx:
+			var frame: Frame = Global.current_project.frames[idx_pair[0]]
+			var cel: BaseCel = frame.cels[current_layer_idx]
+			cel.opacity = new_opacity
 	Global.canvas.update()
 
 
@@ -866,7 +951,6 @@ func project_frame_added(frame: int) -> void:
 	frame_scroll_container.call_deferred(  # Make it visible, yes 3 call_deferreds are required
 		"call_deferred", "call_deferred", "ensure_control_visible", button
 	)
-
 	var layer := Global.cel_vbox.get_child_count() - 1
 	for cel_hbox in Global.cel_vbox.get_children():
 		var cel_button = project.frames[frame].cels[layer].instantiate_cel_button()

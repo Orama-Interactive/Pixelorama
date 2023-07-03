@@ -65,8 +65,8 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	OpenSave.current_save_paths.append("")
 	OpenSave.backup_save_paths.append("")
 
-	x_symmetry_point = size.x
-	y_symmetry_point = size.y
+	x_symmetry_point = size.x - 1
+	y_symmetry_point = size.y - 1
 
 	x_symmetry_axis.type = x_symmetry_axis.Types.HORIZONTAL
 	x_symmetry_axis.project = self
@@ -100,6 +100,10 @@ func remove() -> void:
 				c.queue_free()
 	for guide in guides:
 		guide.queue_free()
+	for frame in frames:
+		for l in layers.size():
+			var cel: BaseCel = frame.cels[l]
+			cel.on_remove()
 	# Prevents memory leak (due to the layers' project reference stopping ref counting from freeing)
 	layers.clear()
 	Global.projects.erase(self)
@@ -253,13 +257,14 @@ func change_project() -> void:
 			)
 
 		if camera == Global.camera:
-			Global.zoom_level_spinbox.min_value = 100.0 / camera.zoom_max.x
+			camera.set_zoom_max_value()
 		camera.rotation = cameras_rotation[i]
 		camera.zoom = cameras_zoom[i]
 		camera.offset = cameras_offset[i]
 		camera.emit_signal("rotation_changed")
 		camera.emit_signal("zoom_changed")
 		i += 1
+	Global.tile_mode_offset_dialog.change_mask()
 
 
 func serialize() -> Dictionary:
@@ -295,7 +300,8 @@ func serialize() -> Dictionary:
 	for frame in frames:
 		var cel_data := []
 		for cel in frame.cels:
-			cel_data.append({"opacity": cel.opacity, "metadata": _serialize_metadata(cel)})
+			cel_data.append(cel.serialize())
+			cel_data[-1]["metadata"] = _serialize_metadata(cel)
 
 		frame_data.append(
 			{"cels": cel_data, "duration": frame.duration, "metadata": _serialize_metadata(frame)}
@@ -308,19 +314,14 @@ func serialize() -> Dictionary:
 	for reference_image in reference_images:
 		reference_image_data.append(reference_image.serialize())
 
-	var tile_mask_data := {
-		"size_x": tiles.tile_mask.get_size().x, "size_y": tiles.tile_mask.get_size().y
-	}
-
 	var metadata := _serialize_metadata(self)
 
 	var project_data := {
 		"pixelorama_version": Global.current_version,
+		"pxo_version": ProjectSettings.get_setting("application/config/Pxo_Version"),
 		"name": name,
 		"size_x": size.x,
 		"size_y": size.y,
-		"has_mask": tiles.has_mask,
-		"tile_mask": tile_mask_data,
 		"tile_mode_x_basis_x": tiles.x_basis.x,
 		"tile_mode_x_basis_y": tiles.x_basis.y,
 		"tile_mode_y_basis_x": tiles.y_basis.x,
@@ -352,8 +353,6 @@ func deserialize(dict: Dictionary) -> void:
 		size.y = dict.size_y
 		tiles.tile_size = size
 		selection_map.crop(size.x, size.y)
-	if dict.has("has_mask"):
-		tiles.has_mask = dict.has_mask
 	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
 		tiles.x_basis.x = dict.tile_mode_x_basis_x
 		tiles.x_basis.y = dict.tile_mode_x_basis_y
@@ -363,6 +362,15 @@ func deserialize(dict: Dictionary) -> void:
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
 	if dict.has("frames") and dict.has("layers"):
+		for saved_layer in dict.layers:
+			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
+				Global.LayerTypes.PIXEL:
+					layers.append(PixelLayer.new(self))
+				Global.LayerTypes.GROUP:
+					layers.append(GroupLayer.new(self))
+				Global.LayerTypes.THREE_D:
+					layers.append(Layer3D.new(self))
+
 		var frame_i := 0
 		for frame in dict.frames:
 			var cels := []
@@ -370,9 +378,12 @@ func deserialize(dict: Dictionary) -> void:
 			for cel in frame.cels:
 				match int(dict.layers[cel_i].get("type", Global.LayerTypes.PIXEL)):
 					Global.LayerTypes.PIXEL:
-						cels.append(PixelCel.new(Image.new(), cel.opacity))
+						cels.append(PixelCel.new(Image.new()))
 					Global.LayerTypes.GROUP:
-						cels.append(GroupCel.new(cel.opacity))
+						cels.append(GroupCel.new())
+					Global.LayerTypes.THREE_D:
+						cels.append(Cel3D.new(size, true))
+				cels[cel_i].deserialize(cel)
 				_deserialize_metadata(cels[cel_i], cel)
 				cel_i += 1
 			var duration := 1.0
@@ -386,12 +397,6 @@ func deserialize(dict: Dictionary) -> void:
 			frames.append(frame_class)
 			frame_i += 1
 
-		for saved_layer in dict.layers:
-			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
-				Global.LayerTypes.PIXEL:
-					layers.append(PixelLayer.new(self))
-				Global.LayerTypes.GROUP:
-					layers.append(GroupLayer.new(self))
 		# Parent references to other layers are created when deserializing
 		# a layer, so loop again after creating them:
 		for layer_i in dict.layers.size():
@@ -472,8 +477,9 @@ func _size_changed(value: Vector2) -> void:
 	else:
 		tiles.y_basis = Vector2(0, value.y)
 	tiles.tile_size = value
-	tiles.reset_mask()
+	Global.tile_mode_offset_dialog.change_mask()
 	size = value
+	Global.canvas.crop_rect.reset()
 
 
 func change_cel(new_frame: int, new_layer := -1) -> void:
@@ -559,6 +565,7 @@ func toggle_layer_buttons() -> void:
 			current_layer == child_count
 			or layers[current_layer] is GroupLayer
 			or layers[current_layer - 1] is GroupLayer
+			or layers[current_layer - 1] is Layer3D
 		)
 	)
 
@@ -665,17 +672,7 @@ func add_frames(new_frames: Array, indices: Array) -> void:  # indices should be
 		# Add frame
 		frames.insert(indices[i], new_frames[i])
 		Global.animation_timeline.project_frame_added(indices[i])
-	# Update the frames and frame buttons:
-	for f in frames.size():
-		Global.frame_hbox.get_child(f).frame = f
-		Global.frame_hbox.get_child(f).text = str(f + 1)
-	# Update the cel buttons:
-	for l in layers.size():
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).frame = f
-			cel_hbox.get_child(f).button_setup()
-	_set_timeline_first_and_last_frames()
+	_update_frame_ui()
 
 
 func remove_frames(indices: Array) -> void:  # indices should be in ascending order
@@ -686,6 +683,7 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 		# For each linked cel in the frame, update its layer's cel_link_sets
 		for l in layers.size():
 			var cel: BaseCel = frames[indices[i] - i].cels[l]
+			cel.on_remove()
 			if cel.link_set != null:
 				cel.link_set["cels"].erase(cel)
 				if cel.link_set["cels"].empty():
@@ -693,17 +691,7 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 		# Remove frame
 		frames.remove(indices[i] - i)
 		Global.animation_timeline.project_frame_removed(indices[i] - i)
-	# Update the frames and frame buttons:
-	for f in frames.size():
-		Global.frame_hbox.get_child(f).frame = f
-		Global.frame_hbox.get_child(f).text = str(f + 1)
-	# Update the cel buttons:
-	for l in layers.size():
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).frame = f
-			cel_hbox.get_child(f).button_setup()
-	_set_timeline_first_and_last_frames()
+	_update_frame_ui()
 
 
 func move_frame(from_index: int, to_index: int) -> void:
@@ -714,17 +702,7 @@ func move_frame(from_index: int, to_index: int) -> void:
 	Global.animation_timeline.project_frame_removed(from_index)
 	frames.insert(to_index, frame)
 	Global.animation_timeline.project_frame_added(to_index)
-	# Update the frames and frame buttons:
-	for f in frames.size():
-		Global.frame_hbox.get_child(f).frame = f
-		Global.frame_hbox.get_child(f).text = str(f + 1)
-	# Update the cel buttons:
-	for l in layers.size():
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).frame = f
-			cel_hbox.get_child(f).button_setup()
-	_set_timeline_first_and_last_frames()
+	_update_frame_ui()
 
 
 func swap_frame(a_index: int, b_index: int) -> void:
@@ -740,6 +718,23 @@ func swap_frame(a_index: int, b_index: int) -> void:
 	_set_timeline_first_and_last_frames()
 
 
+func reverse_frames(frame_indices: Array) -> void:
+	Global.canvas.selection.transform_content_confirm()
+# warning-ignore:integer_division
+	for i in frame_indices.size() / 2:
+		var index: int = frame_indices[i]
+		var reverse_index: int = frame_indices[-i - 1]
+		var temp: Frame = frames[index]
+		frames[index] = frames[reverse_index]
+		frames[reverse_index] = temp
+		Global.animation_timeline.project_frame_removed(index)
+		Global.animation_timeline.project_frame_added(index)
+		Global.animation_timeline.project_frame_removed(reverse_index)
+		Global.animation_timeline.project_frame_added(reverse_index)
+	_set_timeline_first_and_last_frames()
+	change_cel(-1)
+
+
 func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels is 2d Array of cels
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
@@ -749,15 +744,7 @@ func add_layers(new_layers: Array, indices: Array, cels: Array) -> void:  # cels
 			frames[f].cels.insert(indices[i], cels[i][f])
 		new_layers[i].project = self
 		Global.animation_timeline.project_layer_added(indices[i])
-	# Update the layer indices and layer/cel buttons:
-	for l in layers.size():
-		layers[l].index = l
-		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).layer = l
-			cel_hbox.get_child(f).button_setup()
-	toggle_layer_buttons()
+	_update_layer_ui()
 
 
 func remove_layers(indices: Array) -> void:
@@ -767,17 +754,10 @@ func remove_layers(indices: Array) -> void:
 		# With each removed index, future indices need to be lowered, so subtract by i
 		layers.remove(indices[i] - i)
 		for frame in frames:
+			frame.cels[indices[i] - i].on_remove()
 			frame.cels.remove(indices[i] - i)
 		Global.animation_timeline.project_layer_removed(indices[i] - i)
-	# Update the layer indices and layer/cel buttons:
-	for l in layers.size():
-		layers[l].index = l
-		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).layer = l
-			cel_hbox.get_child(f).button_setup()
-	toggle_layer_buttons()
+	_update_layer_ui()
 
 
 # from_indices and to_indicies should be in ascending order
@@ -800,15 +780,7 @@ func move_layers(from_indices: Array, to_indices: Array, to_parents: Array) -> v
 		for f in frames.size():
 			frames[f].cels.insert(to_indices[i], removed_cels[i][f])
 		Global.animation_timeline.project_layer_added(to_indices[i])
-	# Update the layer indices and layer/cel buttons:
-	for l in layers.size():
-		layers[l].index = l
-		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).layer = l
-			cel_hbox.get_child(f).button_setup()
-	toggle_layer_buttons()
+	_update_layer_ui()
 
 
 # "a" and "b" should both contain "from", "to", and "to_parents" arrays.
@@ -847,16 +819,7 @@ func swap_layers(a: Dictionary, b: Dictionary) -> void:
 		for f in frames.size():
 			frames[f].cels.insert(b.to[i], b_cels[i][f])
 		Global.animation_timeline.project_layer_added(b.to[i])
-
-	# Update the layer indices and layer/cel buttons:
-	for l in layers.size():
-		layers[l].index = l
-		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).layer = l
-			cel_hbox.get_child(f).button_setup()
-	toggle_layer_buttons()
+	_update_layer_ui()
 
 
 func move_cel(from_frame: int, to_frame: int, layer: int) -> void:
@@ -890,3 +853,28 @@ func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:
 	Global.animation_timeline.project_cel_added(a_frame, a_layer)
 	Global.animation_timeline.project_cel_removed(b_frame, b_layer)
 	Global.animation_timeline.project_cel_added(b_frame, b_layer)
+
+
+func _update_frame_ui() -> void:
+	for f in frames.size():  # Update the frames and frame buttons
+		Global.frame_hbox.get_child(f).frame = f
+		Global.frame_hbox.get_child(f).text = str(f + 1)
+
+	for l in layers.size():  # Update the cel buttons
+		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
+		for f in frames.size():
+			cel_hbox.get_child(f).frame = f
+			cel_hbox.get_child(f).button_setup()
+	_set_timeline_first_and_last_frames()
+
+
+## Update the layer indices and layer/cel buttons
+func _update_layer_ui() -> void:
+	for l in layers.size():
+		layers[l].index = l
+		Global.layer_vbox.get_child(layers.size() - 1 - l).layer = l
+		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
+		for f in frames.size():
+			cel_hbox.get_child(f).layer = l
+			cel_hbox.get_child(f).button_setup()
+	toggle_layer_buttons()

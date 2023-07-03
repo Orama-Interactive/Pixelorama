@@ -8,10 +8,15 @@ var cel: BaseCel
 
 onready var popup_menu: PopupMenu = get_node_or_null("PopupMenu")
 onready var linked_indicator: Polygon2D = get_node_or_null("LinkedIndicator")
+onready var cel_texture: TextureRect = $CelTexture
+onready var transparent_checker: ColorRect = $CelTexture/TransparentChecker
 
 
 func _ready() -> void:
+	cel = Global.current_project.frames[frame].cels[layer]
 	button_setup()
+	_dim_checker()
+	cel.connect("texture_changed", self, "_dim_checker")
 
 
 func button_setup() -> void:
@@ -20,21 +25,19 @@ func button_setup() -> void:
 
 	var base_layer: BaseLayer = Global.current_project.layers[layer]
 	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, base_layer.name]
-	cel = Global.current_project.frames[frame].cels[layer]
-	$CelTexture.texture = cel.image_texture
+	cel_texture.texture = cel.image_texture
 	if is_instance_valid(linked_indicator):
 		linked_indicator.visible = cel.link_set != null
 		if cel.link_set != null:
 			linked_indicator.color.h = cel.link_set["hue"]
 
 	# Reset the checkers size because it assumes you want the same size as the canvas
-	var checker = $CelTexture/TransparentChecker
-	checker.rect_size = checker.get_parent().rect_size
+	transparent_checker.rect_size = transparent_checker.get_parent().rect_size
 
 
 func _on_CelButton_resized() -> void:
-	get_node("CelTexture").rect_min_size.x = rect_min_size.x - 4
-	get_node("CelTexture").rect_min_size.y = rect_min_size.y - 4
+	cel_texture.rect_min_size.x = rect_min_size.x - 4
+	cel_texture.rect_min_size.y = rect_min_size.y - 4
 
 	if is_instance_valid(linked_indicator):
 		linked_indicator.polygon[1].x = rect_min_size.x
@@ -194,22 +197,32 @@ func _delete_cel_content() -> void:
 	project.undo_redo.commit_action()
 
 
-func get_drag_data(_position) -> Array:
+func _dim_checker() -> void:
+	var image := cel.get_image()
+	if image == null:
+		return
+	if image.is_empty() or image.is_invisible():
+		transparent_checker.self_modulate.a = 0.5
+	else:
+		transparent_checker.self_modulate.a = 1.0
+
+
+func get_drag_data(_position: Vector2) -> Array:
 	var button := Button.new()
 	button.rect_size = rect_size
 	button.theme = Global.control.theme
 	var texture_rect := TextureRect.new()
-	texture_rect.rect_size = $CelTexture.rect_size
-	texture_rect.rect_position = $CelTexture.rect_position
+	texture_rect.rect_size = cel_texture.rect_size
+	texture_rect.rect_position = cel_texture.rect_position
 	texture_rect.expand = true
-	texture_rect.texture = $CelTexture.texture
+	texture_rect.texture = cel_texture.texture
 	button.add_child(texture_rect)
 	set_drag_preview(button)
 
 	return ["Cel", frame, layer]
 
 
-func can_drop_data(_pos, data) -> bool:
+func can_drop_data(_pos: Vector2, data) -> bool:
 	var project: Project = Global.current_project
 	if typeof(data) == TYPE_ARRAY and data[0] == "Cel":
 		var drag_frame = data[1]
@@ -242,7 +255,7 @@ func can_drop_data(_pos, data) -> bool:
 	return false
 
 
-func drop_data(_pos, data) -> void:
+func drop_data(_pos: Vector2, data) -> void:
 	var drop_frame = data[1]
 	var drop_layer = data[2]
 	var project = Global.current_project

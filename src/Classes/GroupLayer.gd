@@ -18,10 +18,13 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 	for layer in children:
 		if not layer.is_visible_in_hierarchy():
 			continue
-		if layer is PixelLayer:
-			var cel: PixelCel = frame.cels[layer.index]
+		# Checks if layer is GroupLayer, cannot define this due to cyclic reference error
+		if layer is get_script():
+			image.blend_rect(layer.blend_children(frame, origin), blend_rect, origin)
+		else:
+			var cel: BaseCel = frame.cels[layer.index]
 			var cel_image := Image.new()
-			cel_image.copy_from(cel.image)
+			cel_image.copy_from(cel.get_image())
 			if cel.opacity < 1:  # If we have cel transparency
 				cel_image.lock()
 				for xx in cel_image.get_size().x:
@@ -33,8 +36,6 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 						)
 				cel_image.unlock()
 			image.blend_rect(cel_image, blend_rect, origin)
-		else:  # Only if layer is GroupLayer, cannot define this due to cyclic reference error
-			image.blend_rect(layer.blend_children(frame, origin), blend_rect, origin)
 	return image
 
 
@@ -42,8 +43,8 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 
 
 func serialize() -> Dictionary:
-	var data = .serialize()
-	data["type"] = Global.LayerTypes.GROUP
+	var data := .serialize()
+	data["type"] = get_layer_type()
 	data["expanded"] = expanded
 	return data
 
@@ -51,6 +52,10 @@ func serialize() -> Dictionary:
 func deserialize(dict: Dictionary) -> void:
 	.deserialize(dict)
 	expanded = dict.expanded
+
+
+func get_layer_type() -> int:
+	return Global.LayerTypes.GROUP
 
 
 func new_empty_cel() -> BaseCel:

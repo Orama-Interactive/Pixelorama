@@ -1,5 +1,7 @@
 extends Button
 
+enum { REMOVE, CLONE, MOVE_LEFT, MOVE_RIGHT, PROPERTIES, REVERSE }
+
 var frame := 0
 
 onready var popup_menu: PopupMenu = $PopupMenu
@@ -15,7 +17,7 @@ func _ready() -> void:
 
 func _update_tooltip() -> void:
 	var duration: float = Global.current_project.frames[frame].duration
-	var duration_sec: float = duration * (1.0 / Global.current_project.fps)
+	var duration_sec := duration * (1.0 / Global.current_project.fps)
 	var duration_str := str(duration_sec)
 	if "." in duration_str:  # If its a decimal value
 		duration_str = "%.2f" % duration_sec  # Up to 2 decimal places
@@ -25,9 +27,9 @@ func _update_tooltip() -> void:
 func _button_pressed() -> void:
 	if Input.is_action_just_released("left_mouse"):
 		Global.canvas.selection.transform_content_confirm()
-		var prev_curr_frame: int = Global.current_project.current_frame
+		var prev_curr_frame := Global.current_project.current_frame
 		if Input.is_action_pressed("shift"):
-			var frame_diff_sign = sign(frame - prev_curr_frame)
+			var frame_diff_sign := sign(frame - prev_curr_frame)
 			if frame_diff_sign == 0:
 				frame_diff_sign = 1
 			for i in range(prev_curr_frame, frame + frame_diff_sign, frame_diff_sign):
@@ -50,43 +52,50 @@ func _button_pressed() -> void:
 
 	elif Input.is_action_just_released("right_mouse"):
 		if Global.current_project.frames.size() == 1:
-			popup_menu.set_item_disabled(0, true)
-			popup_menu.set_item_disabled(2, true)
-			popup_menu.set_item_disabled(3, true)
+			popup_menu.set_item_disabled(REMOVE, true)
+			popup_menu.set_item_disabled(MOVE_LEFT, true)
+			popup_menu.set_item_disabled(MOVE_RIGHT, true)
+			popup_menu.set_item_disabled(REVERSE, true)
 		else:
-			popup_menu.set_item_disabled(0, false)
+			popup_menu.set_item_disabled(REMOVE, false)
+			if Global.current_project.selected_cels.size() > 1:
+				popup_menu.set_item_disabled(REVERSE, false)
+			else:
+				popup_menu.set_item_disabled(REVERSE, true)
 			if frame > 0:
-				popup_menu.set_item_disabled(2, false)
+				popup_menu.set_item_disabled(MOVE_LEFT, false)
 			if frame < Global.current_project.frames.size() - 1:
-				popup_menu.set_item_disabled(3, false)
+				popup_menu.set_item_disabled(MOVE_RIGHT, false)
 		popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
 		pressed = !pressed
 	elif Input.is_action_just_released("middle_mouse"):
 		pressed = !pressed
-		Global.animation_timeline.delete_frames([frame])
+		Global.animation_timeline.delete_frames(_get_frame_indices())
 	else:  # An example of this would be Space
 		pressed = !pressed
 
 
 func _on_PopupMenu_id_pressed(id: int) -> void:
+	var indices := _get_frame_indices()
 	match id:
-		0:  # Remove Frame
-			Global.animation_timeline.delete_frames([frame])
-		1:  # Clone Frame
-			Global.animation_timeline.copy_frames([frame])
-		2:  # Move Left
+		REMOVE:
+			Global.animation_timeline.delete_frames(indices)
+		CLONE:
+			Global.animation_timeline.copy_frames(indices)
+		MOVE_LEFT:
 			change_frame_order(-1)
-		3:  # Move Right
+		MOVE_RIGHT:
 			change_frame_order(1)
-		4:  # Frame Properties
+		PROPERTIES:
+			frame_properties.frame_indices = indices
 			frame_properties.popup_centered()
 			Global.dialog_open(true)
-			frame_properties.set_frame_label(frame)
-			frame_properties.set_frame_dur(Global.current_project.frames[frame].duration)
+		REVERSE:
+			Global.animation_timeline.reverse_frames(indices)
 
 
 func change_frame_order(rate: int) -> void:
-	var change = frame + rate
+	var change := frame + rate
 	var project = Global.current_project
 
 	project.undo_redo.create_action("Change Frame Order")
@@ -104,7 +113,7 @@ func change_frame_order(rate: int) -> void:
 	project.undo_redo.commit_action()
 
 
-func get_drag_data(_position) -> Array:
+func get_drag_data(_position: Vector2) -> Array:
 	var button := Button.new()
 	button.rect_size = rect_size
 	button.theme = Global.control.theme
@@ -114,7 +123,7 @@ func get_drag_data(_position) -> Array:
 	return ["Frame", frame]
 
 
-func can_drop_data(_pos, data) -> bool:
+func can_drop_data(_pos: Vector2, data) -> bool:
 	if typeof(data) == TYPE_ARRAY:
 		if data[0] == "Frame":
 			if data[1] != frame:  # Can't move to same frame
@@ -136,7 +145,7 @@ func can_drop_data(_pos, data) -> bool:
 	return false
 
 
-func drop_data(_pos, data) -> void:
+func drop_data(_pos: Vector2, data) -> void:
 	var drop_frame = data[1]
 	var project = Global.current_project
 	project.undo_redo.create_action("Change Frame Order")
@@ -169,3 +178,15 @@ func _get_region_rect(x_begin: float, x_end: float) -> Rect2:
 	rect.position.x += rect.size.x * x_begin
 	rect.size.x *= x_end - x_begin
 	return rect
+
+
+func _get_frame_indices() -> Array:
+	var indices := []
+	for cel in Global.current_project.selected_cels:
+		var f: int = cel[0]
+		if not f in indices:
+			indices.append(f)
+	indices.sort()
+	if not frame in indices:
+		indices = [frame]
+	return indices

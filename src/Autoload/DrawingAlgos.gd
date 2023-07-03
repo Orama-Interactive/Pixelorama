@@ -3,7 +3,7 @@ extends Node
 enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
 # Continuation from Image.Interpolation
 enum Interpolation { SCALE3X = 5, CLEANEDGE = 6, OMNISCALE = 7 }
-var clean_edge_shader: Shader = preload("res://src/Shaders/Rotation/cleanEdge.gdshader")
+var clean_edge_shader: Shader
 var omniscale_shader: Shader
 
 
@@ -432,7 +432,7 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 
 	for f in Global.current_project.frames:
 		for i in range(f.cels.size() - 1, -1, -1):
-			if f.cels[i] is GroupCel:
+			if not f.cels[i] is PixelCel:
 				continue
 			var sprite := Image.new()
 			sprite.copy_from(f.cels[i].image)

@@ -17,7 +17,7 @@ onready var delete_color_button := $"%DeleteColor"
 onready var edit_palette_dialog := $"%EditPaletteDialog"
 onready var create_palette_dialog := $"%CreatePaletteDialog"
 
-# Color picker button itself is hidden but it's popup is used to edit color swatches
+# Color picker button itself is hidden but its popup is used to edit color swatches
 onready var hidden_color_picker := $"%HiddenColorPickerButton"
 
 
@@ -162,8 +162,9 @@ func _on_PaletteGrid_swatch_double_clicked(_mb: int, index: int, click_position:
 	var color = Palettes.current_palette_get_color(index)
 	edited_swatch_index = index
 	hidden_color_picker.color = color
+	hidden_color_picker.emit_signal("color_changed", hidden_color_picker.color)
 
-	# Open color picker popup with it's right bottom corner next to swatch
+	# Open color picker popup with its right bottom corner next to swatch
 	var popup = hidden_color_picker.get_popup()
 	popup.rect_position = click_position - popup.rect_size
 	popup.popup()

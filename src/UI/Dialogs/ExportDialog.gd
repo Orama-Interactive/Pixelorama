@@ -6,6 +6,10 @@ signal resume_export_function
 var preview_current_frame := 0
 var preview_frames := []
 
+# allow custom exporters to be added
+var image_exports := [Export.FileFormat.PNG, Export.FileFormat.GIF, Export.FileFormat.APNG]
+var spritesheet_exports := [Export.FileFormat.PNG]
+
 onready var tabs: Tabs = $VBoxContainer/Tabs
 onready var checker: ColorRect = $"%TransparentChecker"
 onready var previews: GridContainer = $"%Previews"
@@ -16,14 +20,13 @@ onready var spritesheet_lines_count_label: Label = $"%LinesCountLabel"
 
 onready var frames_option_button: OptionButton = $"%Frames"
 onready var layers_option_button: OptionButton = $"%Layers"
-onready var options_resize: SpinBox = $"%Resize"
+onready var options_resize: ValueSlider = $"%Resize"
 onready var dimension_label: Label = $"%DimensionLabel"
 
 onready var path_line_edit: LineEdit = $"%PathLineEdit"
 onready var file_line_edit: LineEdit = $"%FileLineEdit"
 onready var file_format_options: OptionButton = $"%FileFormat"
 
-onready var multiple_animations_directories: CheckBox = $"%MultipleAnimationsDirectories"
 onready var options_interpolation: OptionButton = $"%Interpolation"
 
 onready var file_exists_alert_popup: AcceptDialog = $Popups/FileExistsAlert
@@ -60,7 +63,12 @@ func show_tab() -> void:
 		Export.ExportTab.IMAGE:
 			Export.process_animation()
 			get_tree().call_group("ExportImageOptions", "show")
-			multiple_animations_directories.disabled = Export.is_single_file_format()
+			get_tree().set_group(
+				"ExportMultipleFilesOptions", "disabled", Export.is_single_file_format()
+			)
+			get_tree().set_group(
+				"ExportMultipleFilesEditableOptions", "editable", !Export.is_single_file_format()
+			)
 		Export.ExportTab.SPRITESHEET:
 			frame_timer.stop()
 			Export.process_spritesheet()
@@ -90,6 +98,15 @@ func set_preview() -> void:
 			previews.columns = ceil(sqrt(Export.processed_images.size()))
 			for i in range(Export.processed_images.size()):
 				add_image_preview(Export.processed_images[i], i + 1)
+
+	if Global.current_project.file_format == Export.FileFormat.GIF:
+		$"%GifWarning".visible = true
+	else:
+		$"%GifWarning".visible = false
+
+
+func _on_GifWarning_meta_clicked(meta) -> void:
+	OS.shell_open(meta)
 
 
 func add_image_preview(image: Image, canvas_number: int = -1) -> void:
@@ -155,11 +172,9 @@ func remove_previews() -> void:
 func set_file_format_selector() -> void:
 	match Export.current_tab:
 		Export.ExportTab.IMAGE:
-			_set_file_format_selector_suitable_file_formats(
-				[Export.FileFormat.PNG, Export.FileFormat.GIF, Export.FileFormat.APNG]
-			)
+			_set_file_format_selector_suitable_file_formats(image_exports)
 		Export.ExportTab.SPRITESHEET:
-			_set_file_format_selector_suitable_file_formats([Export.FileFormat.PNG])
+			_set_file_format_selector_suitable_file_formats(spritesheet_exports)
 
 
 # Updates the suitable list of file formats. First is preferred.
@@ -202,6 +217,8 @@ func create_layer_list() -> void:
 		var layer_name := tr("Pixel layer:")
 		if layer is GroupLayer:
 			layer_name = tr("Group layer:")
+		elif layer is Layer3D:
+			layer_name = tr("3D layer:")
 		layer_name += " %s" % layer.get_layer_path()
 		layers_option_button.add_item(layer_name)
 
@@ -242,6 +259,7 @@ func set_export_progress_bar(value: float) -> void:
 
 
 func _on_ExportDialog_about_to_show() -> void:
+	get_ok().text = "Export"
 	Global.canvas.selection.transform_content_confirm()
 	var project: Project = Global.current_project
 	# If we're on HTML5, don't let the user change the directory path
@@ -334,10 +352,12 @@ func _on_FileFormat_item_selected(idx: int) -> void:
 	var id := file_format_options.get_item_id(idx)
 	Global.current_project.file_format = id
 	if not Export.is_single_file_format():
-		multiple_animations_directories.disabled = false
+		get_tree().set_group("ExportMultipleFilesOptions", "disabled", false)
+		get_tree().set_group("ExportMultipleFilesEditableOptions", "editable", true)
 		frame_timer.stop()
 	else:
-		multiple_animations_directories.disabled = true
+		get_tree().set_group("ExportMultipleFilesOptions", "disabled", true)
+		get_tree().set_group("ExportMultipleFilesEditableOptions", "editable", false)
 	set_preview()
 
 
@@ -376,6 +396,10 @@ func _on_ExportDialog_popup_hide() -> void:
 	frame_timer.stop()
 
 
+func _on_IncludeTagsInFilename_toggled(button_pressed: bool) -> void:
+	Export.include_tag_in_filename = button_pressed
+
+
 func _on_MultipleAnimationsDirectories_toggled(button_pressed: bool) -> void:
 	Export.new_dir_for_each_frame_tag = button_pressed
 
@@ -392,3 +416,7 @@ func _on_Layers_item_selected(id: int) -> void:
 	Export.export_layers = id
 	Export.process_data()
 	set_preview()
+
+
+func _on_SeparatorCharacter_text_changed(new_text: String) -> void:
+	Export.separator_character = new_text

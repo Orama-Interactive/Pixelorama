@@ -13,8 +13,14 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <developer_name>Orama Interactive</developer_name>
-  <url type="homepage">https://orama-interactive.itch.io/pixelorama</url>
+  <url type="homepage">https://www.oramainteractive.com/</url>
   <url type="bugtracker">https://github.com/Orama-Interactive/Pixelorama/issues</url>
+  <url type="faq">https://www.oramainteractive.com/Pixelorama-Docs/faq</url>
+  <url type="help">https://www.oramainteractive.com/Pixelorama-Docs/</url>
+  <url type="donation">https://patreon.com/OramaInteractive</url>
+  <url type="translate">https://crowdin.com/project/pixelorama</url>
+  <url type="vcs-browser">https://github.com/Orama-Interactive/Pixelorama/</url>
+  <url type="contribute">https://www.oramainteractive.com/Pixelorama-Docs/development_and_contributing</url>
   <screenshots>
     <screenshot type="default" width="1920" height="1080">
       <image type="source">https://img.itch.zone/aW1hZ2UvNDcwMzY3LzcwMTE1NzEucG5n/original/CyAplX.png</image>
@@ -31,6 +37,7 @@
   </screenshots>
   <content_rating type="oars-1.1"/>
   <releases>
+	<release version="0.11" date="2023-06-13"/>
 	<release version="0.10.3" date="2022-09-26"/>
 	<release version="0.10.2" date="2022-08-18"/>
 	<release version="0.10.1" date="2022-06-06"/>

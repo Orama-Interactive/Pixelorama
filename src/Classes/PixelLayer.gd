@@ -12,8 +12,8 @@ func _init(_project, _name := "") -> void:
 
 
 func serialize() -> Dictionary:
-	var dict = .serialize()
-	dict["type"] = Global.LayerTypes.PIXEL
+	var dict := .serialize()
+	dict["type"] = get_layer_type()
 	dict["new_cels_linked"] = new_cels_linked
 	return dict
 
@@ -21,6 +21,10 @@ func serialize() -> Dictionary:
 func deserialize(dict: Dictionary) -> void:
 	.deserialize(dict)
 	new_cels_linked = dict.new_cels_linked
+
+
+func get_layer_type() -> int:
+	return Global.LayerTypes.PIXEL
 
 
 func new_empty_cel() -> BaseCel:

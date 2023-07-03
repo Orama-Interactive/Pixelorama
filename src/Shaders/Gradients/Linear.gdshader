@@ -27,7 +27,7 @@ float modify_uv(vec2 uv) {
 	else { // Radial
 		vec2 uv_offsetted = uv * 2.0 - 1.0;
 		uv_offsetted -= (center * 2.0) - vec2(1.0);
-		uv_offsetted *= radius;
+		uv_offsetted /= radius;
 		modified_uv = length(uv_offsetted);
 	}
 	return modified_uv;

@@ -1,52 +1,29 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/OutlineDialog.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" type="PackedScene" id=3]
 
-[node name="OutlineDialog" type="ConfirmationDialog"]
-margin_right = 543.0
-margin_bottom = 511.0
-rect_min_size = Vector2( 172, 60.2 )
+[node name="OutlineDialog" instance=ExtResource( 3 )]
+visible = false
 window_title = "Outline"
-resizable = true
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 535.0
-margin_bottom = 475.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="VBoxContainer" parent="." index="3"]
+margin_bottom = 354.0
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_right = 527.0
-margin_bottom = 339.0
-size_flags_vertical = 3
+[node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
+margin_bottom = 224.0
 
-[node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 94.0
-margin_right = 433.0
-margin_bottom = 339.0
-rect_min_size = Vector2( 200, 200 )
-expand = true
-stretch_mode = 5
+[node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
+margin_left = 80.0
+margin_right = 280.0
+margin_bottom = 200.0
 
-[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 2 )]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 0.0
-margin_bottom = 0.0
-
-[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
-margin_top = 343.0
-margin_right = 527.0
-margin_bottom = 467.0
+[node name="OutlineOptions" type="GridContainer" parent="VBoxContainer" index="2"]
+margin_top = 228.0
+margin_right = 360.0
+margin_bottom = 318.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 2
@@ -54,87 +31,86 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ThickLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
-margin_top = 5.0
-margin_right = 262.0
-margin_bottom = 19.0
+[node name="ThickLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="0"]
+margin_right = 178.0
+margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Thickness:"
 
-[node name="ThickValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-margin_left = 266.0
-margin_right = 527.0
-margin_bottom = 24.0
+[node name="ThickValue" type="TextureProgress" parent="VBoxContainer/OutlineOptions" index="1"]
+margin_left = 182.0
+margin_right = 360.0
+margin_bottom = 14.0
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
+theme_type_variation = "ValueSlider"
 min_value = 1.0
-max_value = 16384.0
 value = 1.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource( 2 )
 suffix = "px"
 
-[node name="OutlineColorLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
-margin_top = 31.0
-margin_right = 262.0
-margin_bottom = 45.0
+[node name="OutlineColorLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="2"]
+margin_top = 21.0
+margin_right = 178.0
+margin_bottom = 35.0
 size_flags_horizontal = 3
 text = "Fill with color:"
 
-[node name="OutlineColor" type="ColorPickerButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 266.0
-margin_top = 28.0
-margin_right = 527.0
-margin_bottom = 48.0
+[node name="OutlineColor" type="ColorPickerButton" parent="VBoxContainer/OutlineOptions" index="3"]
+margin_left = 182.0
+margin_top = 18.0
+margin_right = 360.0
+margin_bottom = 38.0
 rect_min_size = Vector2( 64, 20 )
 size_flags_horizontal = 3
-color = Color( 1, 0, 0, 1 )
 
-[node name="PatternLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
-margin_top = 55.0
-margin_right = 262.0
-margin_bottom = 69.0
+[node name="PatternLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="4"]
+margin_top = 45.0
+margin_right = 178.0
+margin_bottom = 59.0
 size_flags_horizontal = 3
 text = "Pattern:"
 
-[node name="PatternOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 266.0
-margin_top = 52.0
-margin_right = 527.0
-margin_bottom = 72.0
+[node name="PatternOptionButton" type="OptionButton" parent="VBoxContainer/OutlineOptions" index="5"]
+margin_left = 182.0
+margin_top = 42.0
+margin_right = 360.0
+margin_bottom = 62.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Diamond"
 items = [ "Diamond", null, false, 0, null, "Circle", null, false, 1, null, "Square", null, false, 2, null ]
 selected = 0
 
-[node name="InsideImageCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
-margin_top = 76.0
-margin_right = 262.0
-margin_bottom = 100.0
-mouse_default_cursor_shape = 2
+[node name="InsideImageLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="6"]
+margin_top = 71.0
+margin_right = 178.0
+margin_bottom = 85.0
 size_flags_horizontal = 3
 text = "Place inside image"
 
-[node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
-margin_left = 266.0
-margin_top = 76.0
-margin_right = 527.0
-margin_bottom = 100.0
+[node name="InsideImageCheckBox" type="CheckBox" parent="VBoxContainer/OutlineOptions" index="7"]
+margin_left = 182.0
+margin_top = 66.0
+margin_right = 360.0
+margin_bottom = 90.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
-pressed = true
-text = "Only affect selection"
+text = "On"
 
-[node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_top = 104.0
-margin_right = 262.0
-margin_bottom = 124.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-text = "Selected cels"
-items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
-selected = 0
+[node name="OptionsContainer" parent="VBoxContainer" index="3"]
+margin_top = 322.0
+margin_bottom = 346.0
 
-[connection signal="value_changed" from="VBoxContainer/OptionsContainer/ThickValue" to="." method="_on_ThickValue_value_changed"]
-[connection signal="color_changed" from="VBoxContainer/OptionsContainer/OutlineColor" to="." method="_on_OutlineColor_color_changed"]
-[connection signal="item_selected" from="VBoxContainer/OptionsContainer/PatternOptionButton" to="." method="_on_PatternOptionButton_item_selected"]
-[connection signal="toggled" from="VBoxContainer/OptionsContainer/InsideImageCheckBox" to="." method="_on_InsideImageCheckBox_toggled"]
+[node name="AnimateDialog" parent="." index="4"]
+margin_bottom = 354.0
+
+[connection signal="value_changed" from="VBoxContainer/OutlineOptions/ThickValue" to="." method="_on_ThickValue_value_changed"]
+[connection signal="color_changed" from="VBoxContainer/OutlineOptions/OutlineColor" to="." method="_on_OutlineColor_color_changed"]
+[connection signal="item_selected" from="VBoxContainer/OutlineOptions/PatternOptionButton" to="." method="_on_PatternOptionButton_item_selected"]
+[connection signal="toggled" from="VBoxContainer/OutlineOptions/InsideImageCheckBox" to="." method="_on_InsideImageCheckBox_toggled"]

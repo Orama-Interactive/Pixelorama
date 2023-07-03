@@ -176,6 +176,8 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 	file.close()
 	if empty_project:
 		new_project.change_project()
+		Global.emit_signal("project_changed")
+		Global.emit_signal("cel_changed")
 	else:
 		Global.projects.append(new_project)
 		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
@@ -564,12 +566,15 @@ func open_image_as_spritesheet_layer(
 
 func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void:
 	var project: Project = Global.current_project
+	var project_width: int = max(image.get_width(), project.size.x)
+	var project_height: int = max(image.get_height(), project.size.y)
+	if project.size < Vector2(project_width, project_height):
+		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 	project.undos += 1
 	project.undo_redo.create_action("Replaced Cel")
 
 	for i in project.frames.size():
 		if i == frame_index:
-			image.crop(project.size.x, project.size.y)
 			image.convert(Image.FORMAT_RGBA8)
 			var cel: PixelCel = project.frames[i].cels[layer_index]
 			project.undo_redo.add_do_property(cel, "image", image)
@@ -589,7 +594,10 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 
 func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 	var project: Project = Global.current_project
-	image.crop(project.size.x, project.size.y)
+	var project_width: int = max(image.get_width(), project.size.x)
+	var project_height: int = max(image.get_height(), project.size.y)
+	if project.size < Vector2(project_width, project_height):
+		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 
 	var frame := Frame.new()
 	for i in project.layers.size():
@@ -615,7 +623,10 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 
 func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) -> void:
 	var project: Project = Global.current_project
-	image.crop(project.size.x, project.size.y)
+	var project_width: int = max(image.get_width(), project.size.x)
+	var project_height: int = max(image.get_height(), project.size.y)
+	if project.size < Vector2(project_width, project_height):
+		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 	var layer := PixelLayer.new(project, file_name)
 	var cels := []
 

@@ -1,18 +1,17 @@
 extends ImageEffect
 
 enum { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, URD }
+enum Animate { ANGLE, INITIAL_ANGLE }
 
 var live_preview: bool = true
 var rotxel_shader: Shader
 var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeighbour.shader")
-var clean_edge_shader: Shader = DrawingAlgos.clean_edge_shader
 var pivot := Vector2.INF
 var drag_pivot := false
 
 onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
 onready var pivot_indicator: Control = $VBoxContainer/AspectRatioContainer/Indicator
-onready var x_pivot: ValueSlider = $VBoxContainer/PivotOptions/XPivot
-onready var y_pivot: ValueSlider = $VBoxContainer/PivotOptions/YPivot
+onready var pivot_sliders := $VBoxContainer/PivotOptions/Pivot as ValueSliderV2
 onready var angle_slider: ValueSlider = $VBoxContainer/AngleSlider
 onready var smear_options: Container = $VBoxContainer/SmearOptions
 onready var init_angle_slider: ValueSlider = smear_options.get_node("InitialAngleSlider")
@@ -22,6 +21,9 @@ onready var wait_time_slider: ValueSlider = $VBoxContainer/WaitTime
 
 
 func _ready() -> void:
+	# set as in enum
+	animate_panel.add_float_property("Angle", angle_slider)
+	animate_panel.add_float_property("Initial Angle", init_angle_slider)
 	if not _is_webgl1():
 		type_option_button.add_item("Rotxel with Smear", ROTXEL_SMEAR)
 		rotxel_shader = load("res://src/Shaders/Rotation/SmearRotxel.shader")
@@ -35,20 +37,15 @@ func _ready() -> void:
 	type_option_button.emit_signal("item_selected", 0)
 
 
-func set_nodes() -> void:
-	preview = $VBoxContainer/AspectRatioContainer/Preview
-	selection_checkbox = $VBoxContainer/OptionsContainer/SelectionCheckBox
-	affect_option_button = $VBoxContainer/OptionsContainer/AffectOptionButton
-
-
 func _about_to_show() -> void:
+	if DrawingAlgos.clean_edge_shader == null:
+		DrawingAlgos.clean_edge_shader = load("res://src/Shaders/Rotation/cleanEdge.gdshader")
 	drag_pivot = false
 	if pivot == Vector2.INF:
 		_calculate_pivot()
 	confirmed = false
 	._about_to_show()
 	wait_apply_timer.wait_time = wait_time_slider.value / 1000.0
-	angle_slider.value = 0
 
 
 func _calculate_pivot() -> void:
@@ -83,12 +80,13 @@ func _calculate_pivot() -> void:
 			if int(selection_rectangle.end.y - selection_rectangle.position.y) % 2 == 0:
 				pivot.y -= 0.5
 
-	x_pivot.value = pivot.x
-	y_pivot.value = pivot.y
+	pivot_sliders.value = pivot
+	_on_Pivot_value_changed(pivot)
 
 
 func commit_action(cel: Image, _project: Project = Global.current_project) -> void:
-	var angle: float = deg2rad(angle_slider.value)
+	var angle: float = deg2rad(animate_panel.get_animated_values(commit_idx, Animate.ANGLE))
+	var init_angle: float = animate_panel.get_animated_values(commit_idx, Animate.INITIAL_ANGLE)
 
 	var selection_size := cel.get_size()
 	var selection_tex := ImageTexture.new()
@@ -117,8 +115,8 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 	match type_option_button.get_selected_id():
 		ROTXEL_SMEAR:
 			var params := {
-				"initial_angle": init_angle_slider.value,
-				"ending_angle": angle_slider.value,
+				"initial_angle": init_angle,
+				"ending_angle": rad2deg(angle),
 				"tolerance": tolerance_slider.value,
 				"selection_tex": selection_tex,
 				"origin": pivot / cel.get_size(),
@@ -148,7 +146,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 			else:
 				params["preview"] = false
 				var gen := ShaderImageEffect.new()
-				gen.generate_image(cel, clean_edge_shader, params, _project.size)
+				gen.generate_image(cel, DrawingAlgos.clean_edge_shader, params, _project.size)
 				yield(gen, "done")
 		OMNISCALE:
 			var params := {
@@ -206,7 +204,7 @@ func _on_TypeOptionButton_item_selected(_id: int) -> void:
 			smear_options.visible = true
 		CLEANEDGE:
 			var sm := ShaderMaterial.new()
-			sm.shader = clean_edge_shader
+			sm.shader = DrawingAlgos.clean_edge_shader
 			preview.set_material(sm)
 			smear_options.visible = false
 		OMNISCALE:
@@ -279,11 +277,8 @@ func _on_Centre_pressed() -> void:
 	_calculate_pivot()
 
 
-func _on_Pivot_value_changed(value: float, is_x: bool) -> void:
-	if is_x:
-		pivot.x = value
-	else:
-		pivot.y = value
+func _on_Pivot_value_changed(value: Vector2) -> void:
+	pivot = value
 	# Refresh the indicator
 	pivot_indicator.update()
 	if angle_slider.value != 0:
@@ -327,6 +322,5 @@ func _on_Indicator_gui_input(event: InputEvent) -> void:
 		else:
 			conversion_scale = ratio.y
 		var new_pos := mouse_pos * conversion_scale
-		x_pivot.value = new_pos.x
-		y_pivot.value = new_pos.y
-		pivot_indicator.update()
+		pivot_sliders.value = new_pos
+		_on_Pivot_value_changed(new_pos)
