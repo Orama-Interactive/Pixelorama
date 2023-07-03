@@ -8,7 +8,7 @@
 [node name="ToolOptions" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="Editor" type="VBoxContainer" parent="." index="4"]
+[node name="Editor" type="VBoxContainer" parent="." index="2"]
 margin_top = 26.0
 margin_right = 116.0
 margin_bottom = 150.0
@@ -25,13 +25,13 @@ margin_right = 116.0
 margin_bottom = 124.0
 text = "Apply Text"
 
-[node name="FontLabel" type="Label" parent="." index="5"]
+[node name="FontLabel" type="Label" parent="." index="3"]
 margin_top = 154.0
 margin_right = 116.0
 margin_bottom = 168.0
 text = "Font:"
 
-[node name="Font" type="HBoxContainer" parent="." index="6"]
+[node name="Font" type="HBoxContainer" parent="." index="4"]
 margin_top = 172.0
 margin_right = 116.0
 margin_bottom = 194.0
@@ -53,7 +53,7 @@ margin_bottom = 22.0
 mouse_default_cursor_shape = 2
 icon = ExtResource( 3 )
 
-[node name="TextSizeSlider" parent="." index="7" instance=ExtResource( 4 )]
+[node name="TextSizeSlider" parent="." index="5" instance=ExtResource( 4 )]
 margin_top = 198.0
 margin_right = 116.0
 margin_bottom = 222.0
@@ -63,7 +63,7 @@ value = 16.0
 allow_greater = true
 prefix = "Size:"
 
-[node name="FontFileDialog" type="FileDialog" parent="." index="8"]
+[node name="FontFileDialog" type="FileDialog" parent="." index="6"]
 unique_name_in_owner = true
 margin_right = 400.0
 margin_bottom = 400.0
@@ -75,13 +75,13 @@ access = 2
 filters = PoolStringArray( "*.ttf", "*.otf" )
 show_hidden_files = true
 
-[node name="OutlineLabel" type="Label" parent="." index="9"]
+[node name="OutlineLabel" type="Label" parent="." index="7"]
 margin_top = 226.0
 margin_right = 116.0
 margin_bottom = 240.0
 text = "Outline:"
 
-[node name="OutlineContainer" type="HBoxContainer" parent="." index="10"]
+[node name="OutlineContainer" type="HBoxContainer" parent="." index="8"]
 margin_top = 244.0
 margin_right = 116.0
 margin_bottom = 268.0
@@ -99,7 +99,7 @@ margin_left = 28.0
 margin_right = 116.0
 allow_greater = true
 
-[node name="AACheckBox" type="CheckBox" parent="." index="11"]
+[node name="AACheckBox" type="CheckBox" parent="." index="9"]
 margin_top = 272.0
 margin_right = 116.0
 margin_bottom = 296.0

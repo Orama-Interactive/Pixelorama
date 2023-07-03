@@ -40,6 +40,10 @@ func deserialize(dict: Dictionary) -> void:
 			cel.vshapes.append(vshape)
 
 
+func get_layer_type() -> int:
+	return Global.LayerTypes.VECTOR
+
+
 func set_name_to_default(number: int) -> void:
 	name = tr("Vector") + " %s" % number
 

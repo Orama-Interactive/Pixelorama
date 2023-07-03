@@ -1765,7 +1765,8 @@ msgstr ""
 msgid "Add 3D Layer"
 msgstr ""
 
-msgid "Create a new vector layer"
+#. One of the options of the create new layer button.
+msgid "Add Vector Layer"
 msgstr ""
 
 msgid "Remove current layer"

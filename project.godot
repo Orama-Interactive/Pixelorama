@@ -259,6 +259,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/UI/Nodes/ValueSlider.gd"
 }, {
+"base": "HBoxContainer",
+"class": "ValueSliderV2",
+"language": "GDScript",
+"path": "res://src/UI/Nodes/ValueSliderV2.gd"
+}, {
+"base": "HBoxContainer",
+"class": "ValueSliderV3",
+"language": "GDScript",
+"path": "res://src/UI/Nodes/ValueSliderV3.gd"
+}, {
 "base": "Reference",
 "class": "VectorBaseShape",
 "language": "GDScript",
@@ -278,16 +288,6 @@ _global_script_classes=[ {
 "class": "VectorTextShape",
 "language": "GDScript",
 "path": "res://src/Classes/VectorShapes/VectorTextShape.gd"
-}, {
-"base": "HBoxContainer",
-"class": "ValueSliderV2",
-"language": "GDScript",
-"path": "res://src/UI/Nodes/ValueSliderV2.gd"
-}, {
-"base": "HBoxContainer",
-"class": "ValueSliderV3",
-"language": "GDScript",
-"path": "res://src/UI/Nodes/ValueSliderV3.gd"
 } ]
 _global_script_class_icons={
 "AImgIOAPNGExporter": "",
@@ -340,12 +340,12 @@ _global_script_class_icons={
 "SymmetryGuide": "",
 "Tiles": "",
 "ValueSlider": "",
+"ValueSliderV2": "",
+"ValueSliderV3": "",
 "VectorBaseShape": "",
 "VectorCel": "",
 "VectorLayer": "",
-"VectorTextShape": "",
-"ValueSliderV2": "",
-"ValueSliderV3": ""
+"VectorTextShape": ""
 }
 
 [application]

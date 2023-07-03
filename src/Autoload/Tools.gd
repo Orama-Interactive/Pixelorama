@@ -133,7 +133,7 @@ var tools := {
 	),
 	"Text":
 	Tool.new(
-		"Text", "Text", "text", preload("res://src/Tools/Text.tscn")[Global.LayerTypes.VECTOR]
+		"Text", "Text", "text", preload("res://src/Tools/Text.tscn"),[Global.LayerTypes.VECTOR]
 	),
 	"LineTool":
 	Tool.new(
@@ -188,10 +188,12 @@ var _curr_layer_type: int = Global.LayerTypes.PIXEL
 var _left_tools_per_layer_type := {
 	Global.LayerTypes.PIXEL: "Pencil",
 	Global.LayerTypes.THREE_D: "3DShapeEdit",
+	Global.LayerTypes.VECTOR: "Text",
 }
 var _right_tools_per_layer_type := {
 	Global.LayerTypes.PIXEL: "Eraser",
 	Global.LayerTypes.THREE_D: "Pan",
+	Global.LayerTypes.VECTOR: "Pan",
 }
 var _tool_buttons: Node
 var _active_button := -1
