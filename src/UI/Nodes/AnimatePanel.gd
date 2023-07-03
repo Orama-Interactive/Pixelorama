@@ -107,19 +107,23 @@ func _refresh_properties(idx: int):
 	if final_value.is_connected("value_changed", self, "_on_Final_value_changed"):
 		final_value.disconnect("value_changed", self, "_on_Final_value_changed")
 
-	# nodes setup
-	var property_node = properties[idx]["range_node"]
+	# Nodes setup
+	var property_node: Range = properties[idx]["range_node"]
 	if property_node is ValueSlider:
 		final_value.snap_step = property_node.snap_step
 		initial_value.snap_step = property_node.snap_step
+	final_value.allow_greater = property_node.allow_greater
+	final_value.allow_lesser = property_node.allow_lesser
 	final_value.max_value = property_node.max_value
 	final_value.min_value = property_node.min_value
 	final_value.step = property_node.step
+	initial_value.allow_greater = property_node.allow_greater
+	initial_value.allow_lesser = property_node.allow_lesser
 	initial_value.max_value = property_node.max_value
 	initial_value.min_value = property_node.min_value
 	initial_value.step = property_node.step
 
-	# now update values
+	# Update values
 	can_animate_button.pressed = properties[idx]["can_animate"]
 	initial_value.value = properties[idx]["initial_value"]
 	if properties[idx]["range_node"].value != final_value.value:
