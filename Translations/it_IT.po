@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-07-02 19:26\n"
+"PO-Revision-Date: 2023-07-03 16:30\n"
 
 msgid "OK"
 msgstr "OK"
@@ -606,7 +606,7 @@ msgstr "Canvas"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Sequenza"
 
 msgid "Selection"
 msgstr "Selezione"
@@ -1387,15 +1387,15 @@ msgstr "Il checker trasparente segue il livello di zoom del canvas"
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
-msgstr ""
+msgstr "Selezionare il livello quando si fa clic su uno dei suoi pulsanti:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr ""
+msgstr "Colore passato per skinning cipolla:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr ""
+msgstr "Colore futuro skinning cipolla:"
 
 msgid "Animated selection borders"
 msgstr "Bordi selezione animati"
@@ -1758,7 +1758,7 @@ msgstr "Se è selezionato, l'animazione viene eseguita solo sui fotogrammi che h
 
 #. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "Modalità colore"
 
 msgid "Show past frames:"
 msgstr "Mostra fotogrammi precedenti:"
