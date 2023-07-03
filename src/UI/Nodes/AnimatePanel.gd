@@ -2,7 +2,7 @@ class_name AnimatePanel
 extends PanelContainer
 
 var image_effect_node: ConfirmationDialog
-var frames := []  # Set this value before calling "get_animated_values"
+var frames := []  # Set this value before calling "get_animated_value"
 var properties := []  # Contains dictionary of properties
 var resetter_values := []  # Contains the Original properties without any change
 var _current_id := 0  # The property currently selected in "property_list"
@@ -42,7 +42,7 @@ func add_float_property(prop_name: String, property_node: Range):
 	property_node.connect("value_changed", self, "_on_range_node_value_changed")
 
 
-func get_animated_values(frame_idx: int, property_idx := 0) -> float:
+func get_animated_value(frame_idx: int, property_idx := 0) -> float:
 	var tween := SceneTreeTween.new()
 	if property_idx <= 0 or property_idx < properties.size():
 		if frame_idx in frames:

@@ -24,9 +24,9 @@ func _about_to_show() -> void:
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	var hue = animate_panel.get_animated_values(commit_idx, Animate.HUE) / 360
-	var sat = animate_panel.get_animated_values(commit_idx, Animate.SATURATION) / 100
-	var val = animate_panel.get_animated_values(commit_idx, Animate.VALUE) / 100
+	var hue = animate_panel.get_animated_value(commit_idx, Animate.HUE) / 360
+	var sat = animate_panel.get_animated_value(commit_idx, Animate.SATURATION) / 100
+	var val = animate_panel.get_animated_value(commit_idx, Animate.VALUE) / 100
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
 		selection_tex.create_from_image(project.selection_map, 0)
