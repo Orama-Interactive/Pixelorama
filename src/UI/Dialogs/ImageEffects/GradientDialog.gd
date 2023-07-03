@@ -1,6 +1,7 @@
 extends ImageEffect
 
 enum { LINEAR, RADIAL, LINEAR_DITHERING, RADIAL_DITHERING }
+enum Animate { POSITION, SIZE, ANGLE, CENTER_X, CENTER_Y, RADIUS_X, RADIUS_Y }
 
 var shader_linear: Shader = preload("res://src/Shaders/Gradients/Linear.gdshader")
 var shader_linear_dither: Shader = preload("res://src/Shaders/Gradients/LinearDithering.gdshader")
@@ -17,12 +18,11 @@ var selected_dither_matrix: DitherMatrix = dither_matrices[0]
 onready var options_cont: Container = $VBoxContainer/GradientOptions
 onready var gradient_edit: GradientEditNode = $VBoxContainer/GradientEdit
 onready var shape_option_button: OptionButton = $"%ShapeOptionButton"
-onready var dithering_label: Label = $"%DitheringLabel"
 onready var dithering_option_button: OptionButton = $"%DitheringOptionButton"
 onready var repeat_option_button: OptionButton = $"%RepeatOptionButton"
-onready var position: ValueSlider = $"%PositionSlider"
+onready var position_slider: ValueSlider = $"%PositionSlider"
 onready var size_slider: ValueSlider = $"%SizeSlider"
-onready var angle: ValueSlider = $"%AngleSlider"
+onready var angle_slider: ValueSlider = $"%AngleSlider"
 onready var center_slider := $"%CenterSlider" as ValueSliderV2
 onready var radius_slider := $"%RadiusSlider" as ValueSliderV2
 
@@ -43,6 +43,15 @@ func _ready() -> void:
 
 	for matrix in dither_matrices:
 		dithering_option_button.add_item(matrix.name)
+
+	# Set as in the Animate enum
+	animate_panel.add_float_property("Position", position_slider)
+	animate_panel.add_float_property("Size", size_slider)
+	animate_panel.add_float_property("Angle", angle_slider)
+	animate_panel.add_float_property("Center X", center_slider.get_sliders()[0])
+	animate_panel.add_float_property("Center Y", center_slider.get_sliders()[1])
+	animate_panel.add_float_property("Radius X", radius_slider.get_sliders()[0])
+	animate_panel.add_float_property("Radius Y", radius_slider.get_sliders()[1])
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
@@ -83,16 +92,24 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	else:
 		gradient_tex = ImageTexture.new()
 		gradient_tex.create_from_image(gradient_image, 0)
+	var center := Vector2(
+		animate_panel.get_animated_value(commit_idx, Animate.CENTER_X),
+		animate_panel.get_animated_value(commit_idx, Animate.CENTER_Y)
+	)
+	var radius := Vector2(
+		animate_panel.get_animated_value(commit_idx, Animate.RADIUS_X),
+		animate_panel.get_animated_value(commit_idx, Animate.RADIUS_Y)
+	)
 	var params := {
 		"gradient_texture": gradient_tex,
 		"offset_texture": offsets_tex,
 		"selection": selection_tex,
 		"repeat": repeat_option_button.selected,
-		"position": (position.value / 100.0) - 0.5,
-		"size": size_slider.value / 100.0,
-		"angle": angle.value,
-		"center": center_slider.value / 100.0,
-		"radius": radius_slider.value,
+		"position": (animate_panel.get_animated_value(commit_idx, Animate.POSITION) / 100.0) - 0.5,
+		"size": animate_panel.get_animated_value(commit_idx, Animate.SIZE) / 100.0,
+		"angle": animate_panel.get_animated_value(commit_idx, Animate.ANGLE),
+		"center": center / 100.0,
+		"radius": radius,
 		"dither_texture": dither_texture,
 		"image_size": project.size,
 		"pixel_size": pixel_size,
