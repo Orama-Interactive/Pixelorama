@@ -485,9 +485,7 @@ func centralize(indices: Array) -> void:
 			if not cel is PixelCel:
 				continue
 			var sprite := Image.new()
-			sprite.create(
-				project.size.x, project.size.y, false, Image.FORMAT_RGBA8
-			)
+			sprite.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			sprite.blend_rect(cel.image, used_rect, offset)
 			project.undo_redo.add_do_property(cel.image, "data", sprite.data)
 			project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
