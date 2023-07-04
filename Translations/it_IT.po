@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-07-04 11:08\n"
+"PO-Revision-Date: 2023-07-04 12:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -160,14 +160,14 @@ msgid "Resize Canvas"
 msgstr "Ridimensiona Canvas"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Scostamento Immagine"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Scostamento:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Avvolgi intorno:"
 
 msgid "Centralize Image"
 msgstr "Centralizza Immagine"
@@ -2645,5 +2645,5 @@ msgstr "Rimbalzo alla fine"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
-msgstr ""
+msgstr "Rimozione alle estremità"
 
