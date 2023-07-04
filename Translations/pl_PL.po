@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-07-04 11:08\n"
+"PO-Revision-Date: 2023-07-04 13:08\n"
 
 msgid "OK"
 msgstr "OK"
@@ -160,14 +160,14 @@ msgid "Resize Canvas"
 msgstr "Zmień rozmiar płótna"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Przesuń Obraz"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Przesunięcie:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Zawijaj wokół:"
 
 msgid "Centralize Image"
 msgstr "Wyśrodkuj obraz"
@@ -615,7 +615,7 @@ msgstr "Płótno"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Oś czasu"
 
 msgid "Selection"
 msgstr "Zaznaczanie"
@@ -1396,15 +1396,15 @@ msgstr "Przezroczysta siatka śledzi poziom przybliżenia płótna"
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
-msgstr ""
+msgstr "Wybierz warstwę, klikając na jeden z jej przycisków:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr ""
+msgstr "Kolor przenikania przeszłych ujęć:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr ""
+msgstr "Kolor przenikania następnych ujęć:"
 
 msgid "Animated selection borders"
 msgstr "Animowana ramka obszaru zaznaczenia"
