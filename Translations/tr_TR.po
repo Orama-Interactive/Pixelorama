@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-07-03 19:27\n"
+"PO-Revision-Date: 2023-07-04 01:12\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -158,6 +158,16 @@ msgstr "Resmi Kırp"
 
 msgid "Resize Canvas"
 msgstr "Tuvali Yeniden Boyutlandır"
+
+msgid "Offset Image"
+msgstr ""
+
+msgid "Offset:"
+msgstr ""
+
+#. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
+msgid "Wrap around:"
+msgstr ""
 
 msgid "Centralize Image"
 msgstr "Resmi Ortala"
