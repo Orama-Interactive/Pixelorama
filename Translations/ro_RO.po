@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-07-04 01:11\n"
+"PO-Revision-Date: 2023-07-04 06:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2577,15 +2577,15 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
 msgid "Animate"
-msgstr ""
+msgstr "Animare"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
 msgid "Initial value:"
-msgstr ""
+msgstr "Valoare inițială:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the final value of the property.
 msgid "Final value:"
-msgstr ""
+msgstr "Valoare finală:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
 msgid "Ease type:"
@@ -2593,27 +2593,27 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
-msgstr ""
+msgstr "Pornește lent și accelerează spre final"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts quickly and slows down towards the end"
-msgstr ""
+msgstr "Pornește repede și încetinește spre final"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
-msgstr ""
+msgstr "Lent la ambele capete, rapid la mijloc"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Fast at both ends, slow at middle"
-msgstr ""
+msgstr "Rapid la ambele capete, lent la mijloc"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
-msgstr ""
+msgstr "Pătratic (puterea lui 2)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Cubic (power of 3)"
-msgstr ""
+msgstr "Cubic (puterea lui 3)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quartic (power of 4)"
