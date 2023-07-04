@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-07-04 11:08\n"
+"PO-Revision-Date: 2023-07-04 12:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -160,14 +160,14 @@ msgid "Resize Canvas"
 msgstr "Redimensionar Tela"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Deslocar Imagem"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Deslocamento:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Envolver em torno:"
 
 msgid "Centralize Image"
 msgstr "Centralizar Imagem"
@@ -176,10 +176,10 @@ msgid "Rotate Image"
 msgstr "Girar imagem"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Eixo X:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Eixo Y:"
 
 msgid "Smear options:"
 msgstr "Opções de Mancha:"
@@ -264,15 +264,15 @@ msgstr "Gerenciar Layouts"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Pré-visualização"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr ""
+msgstr "Esta é uma pré-visualização, mudar isto não mudará o layout"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr ""
+msgstr "Clique duas vezes para definir como novo layout de inicialização"
 
 msgid "Add"
 msgstr "Adicionar"
@@ -704,7 +704,7 @@ msgid "Theme"
 msgstr "Tema"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Botões"
 
 msgid "Icon color from:"
 msgstr "Cor do ícone de:"
@@ -713,7 +713,7 @@ msgid "Icon color:"
 msgstr "Cor do ícone:"
 
 msgid "Background"
-msgstr ""
+msgstr "Plano de fundo"
 
 msgid "Background color from:"
 msgstr "Cor de fundo de:"
@@ -1320,15 +1320,15 @@ msgstr "Tudo"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "Largura da grade retangular:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Tamanho da grade Isométrica:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Deslocamento da grade:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
@@ -1519,7 +1519,7 @@ msgid "Brush size:"
 msgstr "Tamanho do pincel:"
 
 msgid "Overwrite color"
-msgstr ""
+msgstr "Substituir Cor"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "Substitui a cor ao invés de misturá-la. Esta opção é relevante apenas com cores que não são totalmente opacas"
@@ -1532,7 +1532,7 @@ msgstr "Preenchimento interno"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
-msgstr ""
+msgstr "Espaçamento"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
@@ -2624,25 +2624,25 @@ msgstr "Quintica (potência de 5)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Exponential (power of x)"
-msgstr ""
+msgstr "Exponencial (potência de x)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Square root"
-msgstr ""
+msgstr "Raiz quadrada"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Sine"
-msgstr ""
+msgstr "Seno"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Wiggling around the edges"
-msgstr ""
+msgstr "Balançando nas bordas"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
-msgstr ""
+msgstr "Quicando no final"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
-msgstr ""
+msgstr "Recuando nos finais"
 
