@@ -1,7 +1,7 @@
 class_name ImageEffect
 extends ConfirmationDialog
-# Parent class for all image effects
-# Methods that have "pass" are meant to be replaced by the inherited Scripts
+## Parent class for all image effects
+## Methods that have "pass" are meant to be replaced by the inherited scripts
 
 enum { SELECTED_CELS, FRAME, ALL_FRAMES, ALL_PROJECTS }
 

@@ -273,6 +273,7 @@ func _setup_image_menu() -> void:
 	# Order as in Global.ImageMenu enum
 	var image_menu_items := [
 		"Resize Canvas",
+		"Offset Image",
 		"Scale Image",
 		"Crop Image",
 		"Mirror Image",
@@ -649,6 +650,9 @@ func image_menu_id_pressed(id: int) -> void:
 	match id:
 		Global.ImageMenu.SCALE_IMAGE:
 			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/ScaleImage"))
+
+		Global.ImageMenu.OFFSET_IMAGE:
+			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/OffsetImage"))
 
 		Global.ImageMenu.CENTRALIZE_IMAGE:
 			DrawingAlgos.centralize()
