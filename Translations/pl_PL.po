@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-07-04 13:08\n"
+"PO-Revision-Date: 2023-07-04 14:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1767,7 +1767,7 @@ msgstr "Jeśli jest zaznaczone, animacja odtwarza się tylko na klatkach z tym s
 
 #. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "Tryb koloru"
 
 msgid "Show past frames:"
 msgstr "Pokaż poprzednie klatki:"
@@ -2213,7 +2213,7 @@ msgstr "minuta(y)"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
-msgstr ""
+msgstr "Dołącz tagi klatki w nazwie pliku"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
@@ -2568,81 +2568,81 @@ msgstr "Zasięg:"
 
 #. Found under certain image effects that support properties that can be animated.
 msgid "Animatable Properties"
-msgstr ""
+msgstr "Właściwości, które można animować"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
 msgid "Preview frame:"
-msgstr ""
+msgstr "Podgląd klatki:"
 
 #. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
 msgid "Animate"
-msgstr ""
+msgstr "Animuj"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
 msgid "Initial value:"
-msgstr ""
+msgstr "Wartość początkowa:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the final value of the property.
 msgid "Final value:"
-msgstr ""
+msgstr "Wartość końcowa:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
 msgid "Ease type:"
-msgstr ""
+msgstr "Typ przejść:"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
-msgstr ""
+msgstr "Zaczyna powoli i przyśpiesza do końca"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts quickly and slows down towards the end"
-msgstr ""
+msgstr "Zaczyna szybko i spowalnia do końca"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
-msgstr ""
+msgstr "Najwolniej na obu końcach, najszybsza w połowie"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Fast at both ends, slow at middle"
-msgstr ""
+msgstr "Najszybsza na obu końcach, najwolniejsza w połowie"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
-msgstr ""
+msgstr "Kwadratowy (do potęgi 2.)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Cubic (power of 3)"
-msgstr ""
+msgstr "Sześcienny (do potęgi 3.)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quartic (power of 4)"
-msgstr ""
+msgstr "(do potęgi 4)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quintic (power of 5)"
-msgstr ""
+msgstr "(do potęgi 5)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Exponential (power of x)"
-msgstr ""
+msgstr "Wykładniczy (do potęgi x)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Square root"
-msgstr ""
+msgstr "Pierwiastkowy"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Sine"
-msgstr ""
+msgstr "Sinusoidalny"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Wiggling around the edges"
-msgstr ""
+msgstr "Drgania na krawędziach"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
-msgstr ""
+msgstr "Odbijanie na końcach"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
-msgstr ""
+msgstr "Wycofująca się na końcach"
 
