@@ -2568,5 +2568,5 @@ msgid "Bouncing at the end"
 msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
-msgid "Backing out at ends)"
+msgid "Backing out at ends"
 msgstr ""
