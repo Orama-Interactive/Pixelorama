@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-07-04 08:58\n"
+"PO-Revision-Date: 2023-07-04 11:08\n"
 
 msgid "OK"
 msgstr "确定"
@@ -2644,6 +2644,6 @@ msgid "Bouncing at the end"
 msgstr "结束时的反弹"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
-msgid "Backing out at ends)"
-msgstr "在线束时倒退)"
+msgid "Backing out at ends"
+msgstr ""
 
