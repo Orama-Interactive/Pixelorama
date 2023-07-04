@@ -129,6 +129,8 @@ func _refresh_properties(idx: int):
 	if properties[idx]["range_node"].value != final_value.value:
 		final_value.value = properties[idx]["range_node"].value
 	$"%Name".text = property_list.get_item_text(idx)
+	$"%EaseType".select($"%EaseType".get_item_index(properties[idx]["ease_type"]))
+	$"%TransitionType".select($"%TransitionType".get_item_index(properties[idx]["transition_type"]))
 
 	initial_value.connect("value_changed", self, "_on_Initial_value_changed")
 	final_value.connect("value_changed", self, "_on_Final_value_changed")
