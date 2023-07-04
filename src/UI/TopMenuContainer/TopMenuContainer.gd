@@ -277,7 +277,6 @@ func _setup_image_menu() -> void:
 		"Scale Image",
 		"Crop Image",
 		"Mirror Image",
-		"Centralize Image",
 		"Rotate Image",
 		"Outline",
 		"Drop Shadow",
@@ -653,9 +652,6 @@ func image_menu_id_pressed(id: int) -> void:
 
 		Global.ImageMenu.OFFSET_IMAGE:
 			_popup_dialog(Global.control.get_node("Dialogs/ImageEffects/OffsetImage"))
-
-		Global.ImageMenu.CENTRALIZE_IMAGE:
-			DrawingAlgos.centralize()
 
 		Global.ImageMenu.CROP_IMAGE:
 			DrawingAlgos.crop_image()

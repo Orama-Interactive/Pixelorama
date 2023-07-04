@@ -29,7 +29,6 @@ enum ImageMenu {
 	SCALE_IMAGE,
 	CROP_IMAGE,
 	FLIP,
-	CENTRALIZE_IMAGE,
 	ROTATE,
 	OUTLINE,
 	DROP_SHADOW,
@@ -293,10 +292,6 @@ func _initialize_keychain() -> void:
 		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.PREFERENCES),
 		"scale_image":
 		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.SCALE_IMAGE),
-		"centralize_image":
-		Keychain.MenuInputAction.new(
-			"", "Image menu", true, "ImageMenu", ImageMenu.CENTRALIZE_IMAGE
-		),
 		"crop_image":
 		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.CROP_IMAGE),
 		"resize_canvas":
