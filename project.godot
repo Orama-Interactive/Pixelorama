@@ -946,6 +946,14 @@ preferences={
 "deadzone": 0.5,
 "events": [  ]
 }
+resize_canvas={
+"deadzone": 0.5,
+"events": [  ]
+}
+offset_image={
+"deadzone": 0.5,
+"events": [  ]
+}
 scale_image={
 "deadzone": 0.5,
 "events": [  ]
@@ -955,10 +963,6 @@ centralize_image={
 "events": [  ]
 }
 crop_image={
-"deadzone": 0.5,
-"events": [  ]
-}
-resize_canvas={
 "deadzone": 0.5,
 "events": [  ]
 }

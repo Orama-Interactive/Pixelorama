@@ -301,6 +301,8 @@ func _initialize_keychain() -> void:
 		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.CROP_IMAGE),
 		"resize_canvas":
 		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.RESIZE_CANVAS),
+		"offset_image":
+		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.OFFSET_IMAGE),
 		"mirror_image":
 		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.FLIP),
 		"rotate_image":
