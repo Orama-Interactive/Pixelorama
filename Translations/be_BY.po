@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2023-07-03 19:26\n"
+"PO-Revision-Date: 2023-07-04 01:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -158,6 +158,16 @@ msgstr "Абрэзаць выяву"
 
 msgid "Resize Canvas"
 msgstr "Змяніць памер палатна"
+
+msgid "Offset Image"
+msgstr ""
+
+msgid "Offset:"
+msgstr ""
+
+#. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
+msgid "Wrap around:"
+msgstr ""
 
 msgid "Centralize Image"
 msgstr "Выяву ў цэнтр"
