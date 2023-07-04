@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-07-04 06:52\n"
+"PO-Revision-Date: 2023-07-04 07:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2569,11 +2569,11 @@ msgstr "Rază de acțiune:"
 
 #. Found under certain image effects that support properties that can be animated.
 msgid "Animatable Properties"
-msgstr ""
+msgstr "Proprietățiile animării"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
 msgid "Preview frame:"
-msgstr ""
+msgstr "Ramă previzualizată:"
 
 #. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
 msgid "Animate"
@@ -2589,7 +2589,7 @@ msgstr "Valoare finală:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
 msgid "Ease type:"
-msgstr ""
+msgstr "Tip de tranziție pentru animare:"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
@@ -2617,33 +2617,33 @@ msgstr "Cubic (puterea lui 3)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quartic (power of 4)"
-msgstr ""
+msgstr "Cvartic (puterea lui 4)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quintic (power of 5)"
-msgstr ""
+msgstr "Cvintic (puterea lui 6)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Exponential (power of x)"
-msgstr ""
+msgstr "Exponențial (puterea lui x)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Square root"
-msgstr ""
+msgstr "Rădăcină pătrată"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Sine"
-msgstr ""
+msgstr "Sinus"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Wiggling around the edges"
-msgstr ""
+msgstr "Balans în jurul marginilor"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
-msgstr ""
+msgstr "În salt la capăt"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends)"
-msgstr ""
+msgstr "În retragere la capete"
 
