@@ -1,6 +1,6 @@
 extends Button
 
-enum { REMOVE, CLONE, MOVE_LEFT, MOVE_RIGHT, PROPERTIES, REVERSE }
+enum { REMOVE, CLONE, MOVE_LEFT, MOVE_RIGHT, PROPERTIES, REVERSE, CENTRALIZE}
 
 var frame := 0
 
@@ -92,6 +92,8 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			Global.dialog_open(true)
 		REVERSE:
 			Global.animation_timeline.reverse_frames(indices)
+		CENTRALIZE:
+			DrawingAlgos.centralize(indices)
 
 
 func change_frame_order(rate: int) -> void:

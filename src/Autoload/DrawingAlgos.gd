@@ -462,32 +462,38 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 	general_undo_scale()
 
 
-func centralize() -> void:
+func centralize(indices: Array) -> void:
+	var project: Project = Global.current_project
 	Global.canvas.selection.transform_content_confirm()
-	# Find used rect of the current frame (across all of the layers)
-	var used_rect := Rect2()
-	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
-		if not cel is PixelCel:
+	project.undos += 1
+	project.undo_redo.create_action("Centralize")
+	for frame in indices:
+		# Find used rect of the current frame (across all of the layers)
+		var used_rect := Rect2()
+		for cel in project.frames[frame].cels:
+			if not cel is PixelCel:
+				continue
+			var cel_rect: Rect2 = cel.image.get_used_rect()
+			if not cel_rect.has_no_area():
+				used_rect = cel_rect if used_rect.has_no_area() else used_rect.merge(cel_rect)
+		if used_rect.has_no_area():
 			continue
-		var cel_rect: Rect2 = cel.image.get_used_rect()
-		if not cel_rect.has_no_area():
-			used_rect = cel_rect if used_rect.has_no_area() else used_rect.merge(cel_rect)
-	if used_rect.has_no_area():
-		return
 
-	var offset: Vector2 = (0.5 * (Global.current_project.size - used_rect.size)).floor()
-	general_do_centralize()
-	for cel in Global.current_project.frames[Global.current_project.current_frame].cels:
-		if not cel is PixelCel:
-			continue
-		var sprite := Image.new()
-		sprite.create(
-			Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
-		)
-		sprite.blend_rect(cel.image, used_rect, offset)
-		Global.current_project.undo_redo.add_do_property(cel.image, "data", sprite.data)
-		Global.current_project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
-	general_undo_centralize()
+		# Now apply Centralization
+		var offset: Vector2 = (0.5 * (project.size - used_rect.size)).floor()
+		for cel in project.frames[frame].cels:
+			if not cel is PixelCel:
+				continue
+			var sprite := Image.new()
+			sprite.create(
+				project.size.x, project.size.y, false, Image.FORMAT_RGBA8
+			)
+			sprite.blend_rect(cel.image, used_rect, offset)
+			project.undo_redo.add_do_property(cel.image, "data", sprite.data)
+			project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
+	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.commit_action()
 
 
 func crop_image() -> void:
@@ -586,19 +592,6 @@ func general_undo_scale() -> void:
 	project.undo_redo.add_undo_property(
 		project.y_symmetry_axis, "points", project.y_symmetry_axis.points
 	)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.commit_action()
-
-
-func general_do_centralize() -> void:
-	var project: Project = Global.current_project
-	project.undos += 1
-	project.undo_redo.create_action("Centralize")
-
-
-func general_undo_centralize() -> void:
-	var project: Project = Global.current_project
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
 	project.undo_redo.commit_action()
