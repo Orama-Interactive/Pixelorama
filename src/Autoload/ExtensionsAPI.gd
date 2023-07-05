@@ -7,6 +7,7 @@ var dialog := DialogAPI.new()
 var panel := PanelAPI.new()
 var theme := ThemeAPI.new()
 var tools := ToolAPI.new()
+var selection := SelectionAPI.new()
 var project := ProjectAPI.new()
 var exports := ExportAPI.new()
 var signals := SignalsAPI.new()
@@ -340,6 +341,47 @@ class ToolAPI:
 		if tool_class:
 			Tools.remove_tool(tool_class)
 		ExtensionsApi.remove_action("add_tool")
+
+
+class SelectionAPI:
+	func clear_selection() -> void:
+		Global.canvas.selection.clear_selection(true)
+
+	func select_all() -> void:
+		Global.canvas.selection.select_all()
+
+	func select_rect(select_rect: Rect2, operation := 0) -> void:
+		Global.canvas.selection.transform_content_confirm()
+		var undo_data_tmp = Global.canvas.selection.get_undo_data(false)
+		Global.canvas.selection.select_rect(select_rect, operation)
+		Global.canvas.selection.commit_undo("Select", undo_data_tmp)
+
+	func move_selection(destination: Vector2, with_content := true, transform_standby := false):
+		if not with_content:
+			Global.canvas.selection.transform_content_confirm()
+			Global.canvas.selection.move_borders_start()
+		else:
+			Global.canvas.selection.transform_content_start()
+		var rel_direction = destination - Global.canvas.selection.big_bounding_rectangle.position
+		Global.canvas.selection.move_content(rel_direction.floor())
+		Global.canvas.selection.move_borders_end()
+		if not transform_standby and with_content:
+			Global.canvas.selection.transform_content_confirm()
+
+	func invert() -> void:
+		Global.canvas.selection.clear_selection(true)
+
+	func make_brush() -> void:
+		Global.canvas.selection.new_brush()
+
+	func copy() -> void:
+		Global.canvas.selection.copy()
+
+	func paste() -> void:
+		Global.canvas.selection.paste()
+
+	func delete_content() -> void:
+		Global.canvas.selection.delete()
 
 
 class ProjectAPI:
