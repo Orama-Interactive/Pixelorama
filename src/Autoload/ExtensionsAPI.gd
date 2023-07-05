@@ -403,10 +403,10 @@ class ProjectAPI:
 		name := tr("untitled"),
 		size := Vector2(64, 64),
 		fill_color := Color.transparent
-		) -> Project:
+	) -> Project:
 		if !name.is_valid_filename():
 			name = tr("untitled")
-		if size.x <= 0 or size.y <=0:
+		if size.x <= 0 or size.y <= 0:
 			size.x = 1
 			size.y = 1
 		var new_project := Project.new(frames, name, size.floor())
