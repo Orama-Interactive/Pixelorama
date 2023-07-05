@@ -351,6 +351,7 @@ class SelectionAPI:
 		Global.canvas.selection.select_all()
 
 	func select_rect(select_rect: Rect2, operation := 0) -> void:
+		# 0 for adding, 1 for subtracting, 2 for intersection
 		Global.canvas.selection.transform_content_confirm()
 		var undo_data_tmp = Global.canvas.selection.get_undo_data(false)
 		Global.canvas.selection.select_rect(select_rect, operation)
@@ -364,6 +365,18 @@ class SelectionAPI:
 			Global.canvas.selection.transform_content_start()
 		var rel_direction = destination - Global.canvas.selection.big_bounding_rectangle.position
 		Global.canvas.selection.move_content(rel_direction.floor())
+		Global.canvas.selection.move_borders_end()
+		if not transform_standby and with_content:
+			Global.canvas.selection.transform_content_confirm()
+
+	func resize_selection(new_size: Vector2, with_content := true, transform_standby := false):
+		if not with_content:
+			Global.canvas.selection.transform_content_confirm()
+			Global.canvas.selection.move_borders_start()
+		else:
+			Global.canvas.selection.transform_content_start()
+		Global.canvas.selection.big_bounding_rectangle.size = new_size
+		Global.canvas.selection.resize_selection()
 		Global.canvas.selection.move_borders_end()
 		if not transform_standby and with_content:
 			Global.canvas.selection.transform_content_confirm()
