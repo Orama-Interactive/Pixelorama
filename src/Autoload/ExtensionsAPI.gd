@@ -7,6 +7,7 @@ var dialog := DialogAPI.new()
 var panel := PanelAPI.new()
 var theme := ThemeAPI.new()
 var tools := ToolAPI.new()
+var selection := SelectionAPI.new()
 var project := ProjectAPI.new()
 var exports := ExportAPI.new()
 var signals := SignalsAPI.new()
@@ -342,7 +343,82 @@ class ToolAPI:
 		ExtensionsApi.remove_action("add_tool")
 
 
+class SelectionAPI:
+	func clear_selection() -> void:
+		Global.canvas.selection.clear_selection(true)
+
+	func select_all() -> void:
+		Global.canvas.selection.select_all()
+
+	func select_rect(select_rect: Rect2, operation := 0) -> void:
+		# 0 for adding, 1 for subtracting, 2 for intersection
+		Global.canvas.selection.transform_content_confirm()
+		var undo_data_tmp = Global.canvas.selection.get_undo_data(false)
+		Global.canvas.selection.select_rect(select_rect, operation)
+		Global.canvas.selection.commit_undo("Select", undo_data_tmp)
+
+	func move_selection(destination: Vector2, with_content := true, transform_standby := false):
+		if not with_content:
+			Global.canvas.selection.transform_content_confirm()
+			Global.canvas.selection.move_borders_start()
+		else:
+			Global.canvas.selection.transform_content_start()
+		var rel_direction = destination - Global.canvas.selection.big_bounding_rectangle.position
+		Global.canvas.selection.move_content(rel_direction.floor())
+		Global.canvas.selection.move_borders_end()
+		if not transform_standby and with_content:
+			Global.canvas.selection.transform_content_confirm()
+
+	func resize_selection(new_size: Vector2, with_content := true, transform_standby := false):
+		if not with_content:
+			Global.canvas.selection.transform_content_confirm()
+			Global.canvas.selection.move_borders_start()
+		else:
+			Global.canvas.selection.transform_content_start()
+		Global.canvas.selection.big_bounding_rectangle.size = new_size
+		Global.canvas.selection.resize_selection()
+		Global.canvas.selection.move_borders_end()
+		if not transform_standby and with_content:
+			Global.canvas.selection.transform_content_confirm()
+
+	func invert() -> void:
+		Global.canvas.selection.invert()
+
+	func make_brush() -> void:
+		Global.canvas.selection.new_brush()
+
+	func copy() -> void:
+		Global.canvas.selection.copy()
+
+	func paste(in_place := false) -> void:
+		Global.canvas.selection.paste(in_place)
+
+	func delete_content() -> void:
+		Global.canvas.selection.delete()
+
+
 class ProjectAPI:
+	func new_project(
+		frames := [],
+		name := tr("untitled"),
+		size := Vector2(64, 64),
+		fill_color := Color.transparent
+	) -> Project:
+		if !name.is_valid_filename():
+			name = tr("untitled")
+		if size.x <= 0 or size.y <= 0:
+			size.x = 1
+			size.y = 1
+		var new_project := Project.new(frames, name, size.floor())
+		new_project.layers.append(PixelLayer.new(new_project))
+		new_project.fill_color = fill_color
+		new_project.frames.append(new_project.new_empty_frame())
+		Global.projects.append(new_project)
+		return new_project
+
+	func switch_to(project: Project):
+		Global.tabs.current_tab = Global.projects.find(project)
+
 	func get_current_project() -> Project:
 		return Global.current_project
 
@@ -364,6 +440,35 @@ class ProjectAPI:
 			OpenSave.open_image_at_cel(image, layer, frame)
 		else:
 			print("cel at frame ", frame, ", layer ", layer, " is not a PixelCel")
+
+	func add_new_frame(after_frame: int):
+		var project = Global.current_project
+		if after_frame < project.frames.size() and after_frame >= 0:
+			var old_current = project.current_frame
+			project.current_frame = after_frame  # temporary assignment
+			Global.animation_timeline.add_frame()
+			project.current_frame = old_current
+		else:
+			print("invalid (after_frame)")
+
+	func add_new_layer(above_layer: int, name := "", type := Global.LayerTypes.PIXEL):
+		# type = 0 --> PixelLayer, type = 1 --> GroupLayer, type = 2 --> 3DLayer
+		# above_layer = 0 is the bottom-most layer and so on
+		var project = ExtensionsApi.project.get_current_project()
+		if above_layer < project.layers.size() and above_layer >= 0:
+			var old_current = project.current_layer
+			project.current_layer = above_layer  # temporary assignment
+			if type >= 0 and type < Global.LayerTypes.size():
+				Global.animation_timeline.add_layer(type)
+				if name != "":
+					project.layers[above_layer + 1].name = name
+					var l_idx = Global.layer_vbox.get_child_count() - (above_layer + 2)
+					Global.layer_vbox.get_child(l_idx).label.text = name
+				project.current_layer = old_current
+			else:
+				print("invalid (type)")
+		else:
+			print("invalid (above_layer)")
 
 
 class ExportAPI:
