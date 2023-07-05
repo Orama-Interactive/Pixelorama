@@ -382,7 +382,7 @@ class SelectionAPI:
 			Global.canvas.selection.transform_content_confirm()
 
 	func invert() -> void:
-		Global.canvas.selection.clear_selection(true)
+		Global.canvas.selection.invert()
 
 	func make_brush() -> void:
 		Global.canvas.selection.new_brush()
@@ -390,8 +390,8 @@ class SelectionAPI:
 	func copy() -> void:
 		Global.canvas.selection.copy()
 
-	func paste() -> void:
-		Global.canvas.selection.paste()
+	func paste(in_place := false) -> void:
+		Global.canvas.selection.paste(in_place)
 
 	func delete_content() -> void:
 		Global.canvas.selection.delete()
