@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-05-18 15:14\n"
+"PO-Revision-Date: 2023-07-04 12:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -158,6 +158,16 @@ msgstr "画像のトリミング"
 
 msgid "Resize Canvas"
 msgstr "キャンバスサイズを変更"
+
+msgid "Offset Image"
+msgstr "オフセット画像"
+
+msgid "Offset:"
+msgstr "オフセット:"
+
+#. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
+msgid "Wrap around:"
+msgstr "ラップアラウンド"
 
 msgid "Centralize Image"
 msgstr "画像を中央に"
@@ -604,6 +614,10 @@ msgstr "テーマ"
 msgid "Canvas"
 msgstr "キャンバス"
 
+#. Refers to the animation timeline.
+msgid "Timeline"
+msgstr "タイムライン"
+
 msgid "Selection"
 msgstr "選択範囲"
 
@@ -827,9 +841,6 @@ msgstr "トランジションサイズ:"
 
 msgid "Center:"
 msgstr "中心:"
-
-msgid "Radius:"
-msgstr "半径:"
 
 msgid "Dithering pattern:"
 msgstr "ディザリングパターン:"
@@ -1384,6 +1395,18 @@ msgstr "キャンバスのズームレベルをフォロー"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "透明なチェッカーはキャンバスのズームレベルに従います"
 
+#. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
+msgid "Select layer when clicking on one of its buttons:"
+msgstr "いずれかのボタンをクリックしたときにレイヤーを選択:"
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning past color:"
+msgstr "オニオンスキンの前の色："
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning future color:"
+msgstr "オニオンスキンの後の色："
+
 msgid "Animated selection borders"
 msgstr "アニメーション化された範囲"
 
@@ -1743,8 +1766,9 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "選択した場合、同じタグを持つフレームでのみのアニメーションが再生されます。\n"
 "そうでない場合、タグを無視してすべてのフレームでのアニメーションが再生されます。"
 
-msgid "Blue-Red Mode"
-msgstr "青-赤モード"
+#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+msgid "Color mode"
+msgstr "カラーモード"
 
 msgid "Show past frames:"
 msgstr "過去のフレームを表示:"
@@ -1790,6 +1814,10 @@ msgstr "フレームのプロパティ"
 
 msgid "Frame properties"
 msgstr "フレームのプロパティ"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
+msgid "Reverse Frames"
+msgstr "フレームをリバース"
 
 msgid "Layer"
 msgstr "レイヤー"
@@ -2185,12 +2213,24 @@ msgid "minute(s)"
 msgstr "分"
 
 #. Found in the export dialog.
+msgid "Include frame tags in the file name"
+msgstr "ファイル名にフレームタグを含める"
+
+#. Found in the export dialog.
 msgid "Create new folder for each frame tag"
 msgstr "フレームタグごとに新しいフォルダを作成"
 
-#. Found in the export dialog.
+#. Found in the export dialog, as a hint tooltip of the "Create new folder for each frame tag" button
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 msgstr "複数のファイルを作成しますが、各ファイルはフレームタグに対応する異なるフォルダに保存されます。"
+
+#. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
+msgid "Separator character(s):"
+msgstr "区切り文字:"
+
+#. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
+msgid "The character(s) that separate the file name and the frame number"
+msgstr "ファイル名とフレーム番号を区切る文字"
 
 msgid "Close"
 msgstr "閉じる"
@@ -2526,4 +2566,84 @@ msgstr "影:"
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
 msgstr "範囲:"
+
+#. Found under certain image effects that support properties that can be animated.
+msgid "Animatable Properties"
+msgstr "アニメーション可能プロパティ"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
+msgid "Preview frame:"
+msgstr "前のフレーム:"
+
+#. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
+msgid "Animate"
+msgstr "アニメート"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
+msgid "Initial value:"
+msgstr "初期値:"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the final value of the property.
+msgid "Final value:"
+msgstr "最終値"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type:"
+msgstr "イースタイプ:"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts slowly and speeds up towards the end"
+msgstr "ゆっくり開始し、終わりに向かってスピードアップします"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts quickly and slows down towards the end"
+msgstr "素早く開始し、終わりに向かってスローダウンします"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Slowest at both ends, fast at middle"
+msgstr "両端で最も遅く、中央で速く"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Fast at both ends, slow at middle"
+msgstr "両端で最も速く、中央で遅く"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Quadratic (power of 2)"
+msgstr "二次(2乗)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Cubic (power of 3)"
+msgstr "三次(3乗)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Quartic (power of 4)"
+msgstr "四次(4乗)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Quintic (power of 5)"
+msgstr "五次(5乗)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Exponential (power of x)"
+msgstr "指数関数(xの出力)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Square root"
+msgstr "平方根"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Sine"
+msgstr "サイン"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Wiggling around the edges"
+msgstr "エッジの周りをウィグリング"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Bouncing at the end"
+msgstr "終了時にバウンス"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Backing out at ends"
+msgstr "終了時にバックアウト"
 

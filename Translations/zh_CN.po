@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-05-18 12:26\n"
+"PO-Revision-Date: 2023-07-04 11:08\n"
 
 msgid "OK"
 msgstr "确定"
@@ -158,6 +158,16 @@ msgstr "裁剪图像"
 
 msgid "Resize Canvas"
 msgstr "调整画布尺寸"
+
+msgid "Offset Image"
+msgstr "偏移图像"
+
+msgid "Offset:"
+msgstr "偏移："
+
+#. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
+msgid "Wrap around:"
+msgstr "环绕："
 
 msgid "Centralize Image"
 msgstr "集成图像"
@@ -604,6 +614,10 @@ msgstr "主题"
 msgid "Canvas"
 msgstr "画布"
 
+#. Refers to the animation timeline.
+msgid "Timeline"
+msgstr "时间轴"
+
 msgid "Selection"
 msgstr "选区"
 
@@ -827,9 +841,6 @@ msgstr "过渡大小："
 
 msgid "Center:"
 msgstr "中心："
-
-msgid "Radius:"
-msgstr "半径："
 
 msgid "Dithering pattern:"
 msgstr "抖动模式："
@@ -1384,6 +1395,18 @@ msgstr "跟随画布缩放级别"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "透明检查器跟随画布缩放级别"
 
+#. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
+msgid "Select layer when clicking on one of its buttons:"
+msgstr "单击其中一个按钮时选择图层："
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning past color:"
+msgstr "洋葱皮经过颜色："
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning future color:"
+msgstr "洋葱皮未来颜色："
+
 msgid "Animated selection borders"
 msgstr "动画选择边框"
 
@@ -1743,8 +1766,9 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "如果选中，动画仅在具有相同标签的帧上播放。\n"
 "如果没有，动画将播放所有帧，忽略标签。"
 
-msgid "Blue-Red Mode"
-msgstr "蓝红模式"
+#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+msgid "Color mode"
+msgstr "颜色模式"
 
 msgid "Show past frames:"
 msgstr "显示过去的帧："
@@ -1790,6 +1814,10 @@ msgstr "帧属性"
 
 msgid "Frame properties"
 msgstr "帧属性"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
+msgid "Reverse Frames"
+msgstr ""
 
 msgid "Layer"
 msgstr "图层"
@@ -2185,12 +2213,24 @@ msgid "minute(s)"
 msgstr "分钟"
 
 #. Found in the export dialog.
+msgid "Include frame tags in the file name"
+msgstr ""
+
+#. Found in the export dialog.
 msgid "Create new folder for each frame tag"
 msgstr "为每个帧标签创建新文件夹"
 
-#. Found in the export dialog.
+#. Found in the export dialog, as a hint tooltip of the "Create new folder for each frame tag" button
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 msgstr "创建多个文件，但每个文件都存储在与其帧标签相对应的不同文件夹中"
+
+#. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
+msgid "Separator character(s):"
+msgstr ""
+
+#. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
+msgid "The character(s) that separate the file name and the frame number"
+msgstr ""
 
 msgid "Close"
 msgstr "关闭"
@@ -2470,7 +2510,7 @@ msgstr ""
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
-msgstr ""
+msgstr "半径："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
@@ -2525,5 +2565,85 @@ msgstr ""
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated.
+msgid "Animatable Properties"
+msgstr "动画属性"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
+msgid "Preview frame:"
+msgstr "预览帧："
+
+#. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
+msgid "Animate"
+msgstr "动画"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
+msgid "Initial value:"
+msgstr "初始值："
+
+#. Found under certain image effects that support properties that can be animated. Refers to the final value of the property.
+msgid "Final value:"
+msgstr "最终值："
+
+#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type:"
+msgstr "简易类型："
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts slowly and speeds up towards the end"
+msgstr "缓慢开始并加速接近结束"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts quickly and slows down towards the end"
+msgstr "快速开始并减慢到终点"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Slowest at both ends, fast at middle"
+msgstr "两端最慢，中间很快"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Fast at both ends, slow at middle"
+msgstr "两端快速，中间缓慢"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Quadratic (power of 2)"
+msgstr "二次曲线(2次)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Cubic (power of 3)"
+msgstr "立方体(3次)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Quartic (power of 4)"
+msgstr "二次曲线(4次)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Quintic (power of 5)"
+msgstr "二次曲线(5次)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Exponential (power of x)"
+msgstr "指数(x 次)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Square root"
+msgstr "平方根"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Sine"
+msgstr "正弦"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Wiggling around the edges"
+msgstr "在边缘徘徊"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Bouncing at the end"
+msgstr "结束时的反弹"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Backing out at ends"
 msgstr ""
 

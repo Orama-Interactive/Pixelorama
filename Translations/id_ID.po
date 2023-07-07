@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-06-03 10:16\n"
+"PO-Revision-Date: 2023-07-04 11:08\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -94,7 +94,7 @@ msgid "Save as..."
 msgstr "Simpan sebagai..."
 
 msgid "Use ZSTD Compression"
-msgstr "Gunakan pampatan ZSTD"
+msgstr "Gunakan kompresi ZSTD"
 
 msgid "Import"
 msgstr "Impor"
@@ -159,6 +159,16 @@ msgstr "Potong Gambar"
 msgid "Resize Canvas"
 msgstr "Ubah Ukuran Kanvas"
 
+msgid "Offset Image"
+msgstr ""
+
+msgid "Offset:"
+msgstr ""
+
+#. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
+msgid "Wrap around:"
+msgstr ""
+
 msgid "Centralize Image"
 msgstr "Tengahkan Gambar"
 
@@ -193,10 +203,10 @@ msgid "Mirror Image"
 msgstr "Cerminkan Gambar"
 
 msgid "Flip Horizontal"
-msgstr "Dibalik Mendatar"
+msgstr "Balikkan Horizontal"
 
 msgid "Flip Vertical"
-msgstr "Dibalik Menegak"
+msgstr "Balikkan Vertikal"
 
 msgid "Preferences"
 msgstr "Preferensi"
@@ -254,15 +264,15 @@ msgstr "Atur Tata Letak"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr "Pratayang"
+msgstr "Pratinjau"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr "Ini pratayang, mengubah ini tidak akan mengubah tata letak"
+msgstr "Ini pratinjau, mengubah ini tidak akan mengubah tata letak"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
-msgstr "Pencet dua kali agar jadi tata letak baru di awal buka"
+msgstr "Klik dua kali agar jadi tata letak baru di awal buka"
 
 msgid "Add"
 msgstr "Tambah"
@@ -274,7 +284,7 @@ msgid "Edit Layout"
 msgstr "Sunting Tata Letak"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr "Apakah yakin ingin menghapus tata letak ini?"
+msgstr "Apakah anda yakin ingin menghapus tata letak ini?"
 
 msgid "Auto"
 msgstr "Otomatis"
@@ -604,6 +614,10 @@ msgstr "Tema"
 msgid "Canvas"
 msgstr "Kanvas"
 
+#. Refers to the animation timeline.
+msgid "Timeline"
+msgstr ""
+
 msgid "Selection"
 msgstr "Seleksi"
 
@@ -827,9 +841,6 @@ msgstr "Ukuran peralihan:"
 
 msgid "Center:"
 msgstr "Tengah:"
-
-msgid "Radius:"
-msgstr "Jari-jari:"
 
 msgid "Dithering pattern:"
 msgstr "Pola bauran galat:"
@@ -1384,6 +1395,18 @@ msgstr "Ikuti Tingkat Kekeran Kanvas"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Pola catur transparan mengikuti tingkat kekeran kanvas"
 
+#. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
+msgid "Select layer when clicking on one of its buttons:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning past color:"
+msgstr ""
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning future color:"
+msgstr ""
+
 msgid "Animated selection borders"
 msgstr "Tepian seleksi dianimasikan"
 
@@ -1743,8 +1766,9 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Jika dipilih, animasi akan diputar hanya pada bingkai dengan tag sama.\n"
 "Jika tidak, maka animasi akan diputar untuk semua bingkai."
 
-msgid "Blue-Red Mode"
-msgstr "Mode Biru-Merah"
+#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+msgid "Color mode"
+msgstr ""
 
 msgid "Show past frames:"
 msgstr "Muncul bingkai sebelum:"
@@ -1790,6 +1814,10 @@ msgstr "Rincian Sifat Bingkai"
 
 msgid "Frame properties"
 msgstr "Rincian sifat bingkai"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
+msgid "Reverse Frames"
+msgstr ""
 
 msgid "Layer"
 msgstr "Lapisan"
@@ -2185,12 +2213,24 @@ msgid "minute(s)"
 msgstr "menit"
 
 #. Found in the export dialog.
+msgid "Include frame tags in the file name"
+msgstr ""
+
+#. Found in the export dialog.
 msgid "Create new folder for each frame tag"
 msgstr "Buat folder baru untuk setiap tag bingkai"
 
-#. Found in the export dialog.
+#. Found in the export dialog, as a hint tooltip of the "Create new folder for each frame tag" button
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 msgstr "Membuat banyak berkas, tapi setiap berkas ditampung di folder berbeda sesuai dengan tag bingkainya"
+
+#. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
+msgid "Separator character(s):"
+msgstr ""
+
+#. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
+msgid "The character(s) that separate the file name and the frame number"
+msgstr ""
 
 msgid "Close"
 msgstr "Tutup"
@@ -2526,4 +2566,84 @@ msgstr "Bayangan:"
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
 msgstr "Rentang:"
+
+#. Found under certain image effects that support properties that can be animated.
+msgid "Animatable Properties"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
+msgid "Preview frame:"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
+msgid "Animate"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
+msgid "Initial value:"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. Refers to the final value of the property.
+msgid "Final value:"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type:"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts slowly and speeds up towards the end"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts quickly and slows down towards the end"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Slowest at both ends, fast at middle"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Fast at both ends, slow at middle"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Quadratic (power of 2)"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Cubic (power of 3)"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Quartic (power of 4)"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Quintic (power of 5)"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Exponential (power of x)"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Square root"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Sine"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Wiggling around the edges"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Bouncing at the end"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Backing out at ends"
+msgstr ""
 

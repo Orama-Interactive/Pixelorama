@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-05-18 18:19\n"
+"PO-Revision-Date: 2023-07-04 12:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -158,6 +158,16 @@ msgstr "Ritaglia l'immagine"
 
 msgid "Resize Canvas"
 msgstr "Ridimensiona Canvas"
+
+msgid "Offset Image"
+msgstr "Scostamento Immagine"
+
+msgid "Offset:"
+msgstr "Scostamento:"
+
+#. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
+msgid "Wrap around:"
+msgstr "Avvolgi intorno:"
 
 msgid "Centralize Image"
 msgstr "Centralizza Immagine"
@@ -604,6 +614,10 @@ msgstr "Temi"
 msgid "Canvas"
 msgstr "Canvas"
 
+#. Refers to the animation timeline.
+msgid "Timeline"
+msgstr "Sequenza"
+
 msgid "Selection"
 msgstr "Selezione"
 
@@ -827,9 +841,6 @@ msgstr "Dimensione della transizione:"
 
 msgid "Center:"
 msgstr "Centro:"
-
-msgid "Radius:"
-msgstr "Raggio:"
 
 msgid "Dithering pattern:"
 msgstr "Motivo dithering:"
@@ -1384,6 +1395,18 @@ msgstr "Segui il Livello di Zoom del canvas"
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Il checker trasparente segue il livello di zoom del canvas"
 
+#. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
+msgid "Select layer when clicking on one of its buttons:"
+msgstr "Selezionare il livello quando si fa clic su uno dei suoi pulsanti:"
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning past color:"
+msgstr "Colore passato per skinning cipolla:"
+
+#. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
+msgid "Onion skinning future color:"
+msgstr "Colore futuro skinning cipolla:"
+
 msgid "Animated selection borders"
 msgstr "Bordi selezione animati"
 
@@ -1743,8 +1766,9 @@ msgid "If it's selected, the animation plays only on the frames that have the sa
 msgstr "Se è selezionato, l'animazione viene eseguita solo sui fotogrammi che hanno lo stesso tag.\n"
 "Se non lo è, l'animazione verrà riprodotta per tutti i fotogrammi, ignorando i tag."
 
-msgid "Blue-Red Mode"
-msgstr "Modalità Blu-Rosso"
+#. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
+msgid "Color mode"
+msgstr "Modalità colore"
 
 msgid "Show past frames:"
 msgstr "Mostra fotogrammi precedenti:"
@@ -1790,6 +1814,10 @@ msgstr "Proprietà Del Frame"
 
 msgid "Frame properties"
 msgstr "Proprietà del frame"
+
+#. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
+msgid "Reverse Frames"
+msgstr "Inverti i quadri"
 
 msgid "Layer"
 msgstr "Livello"
@@ -2185,12 +2213,24 @@ msgid "minute(s)"
 msgstr "minuto(i)"
 
 #. Found in the export dialog.
+msgid "Include frame tags in the file name"
+msgstr "Includi le etichette dei quadri nel nome del file"
+
+#. Found in the export dialog.
 msgid "Create new folder for each frame tag"
 msgstr "Crea una nuova cartella per ogni tag frame"
 
-#. Found in the export dialog.
+#. Found in the export dialog, as a hint tooltip of the "Create new folder for each frame tag" button
 msgid "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 msgstr "Crea file multipli, ma ogni file viene memorizzato in cartelle diverse che corrispondono al suo tag frame"
+
+#. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
+msgid "Separator character(s):"
+msgstr "Carattere(i) separatore(i):"
+
+#. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
+msgid "The character(s) that separate the file name and the frame number"
+msgstr "I caratteri che separano il nome del file e il numero di fotogramma"
 
 msgid "Close"
 msgstr "Chiudi"
@@ -2526,4 +2566,84 @@ msgstr "Ombra:"
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
 msgstr "Portata:"
+
+#. Found under certain image effects that support properties that can be animated.
+msgid "Animatable Properties"
+msgstr "Proprietà Animabili"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
+msgid "Preview frame:"
+msgstr "Quadro di anteprima:"
+
+#. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
+msgid "Animate"
+msgstr "Anima"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
+msgid "Initial value:"
+msgstr "Valore iniziale:"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the final value of the property.
+msgid "Final value:"
+msgstr "Valore finale:"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type:"
+msgstr "Tipo di facilità:"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts slowly and speeds up towards the end"
+msgstr "Inizia lentamente e accelera verso la fine"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts quickly and slows down towards the end"
+msgstr "Inizia rapidamente e rallenta verso la fine"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Slowest at both ends, fast at middle"
+msgstr "Più lento ad entrambe le estremità, veloce al centro"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Fast at both ends, slow at middle"
+msgstr "Veloce ad entrambe le estremità, lenta al centro"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Quadratic (power of 2)"
+msgstr "Quadratico (potenza di 2)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Cubic (power of 3)"
+msgstr "Cubico (potenza di 3)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Quartic (power of 4)"
+msgstr "Quartico (potenza di 4)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Quintic (power of 5)"
+msgstr "Quintica (potenza di 5)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Exponential (power of x)"
+msgstr "Esponenziale (potenza di x)"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Square root"
+msgstr "Radice quadrata"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Sine"
+msgstr "Seno"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Wiggling around the edges"
+msgstr "Distorcendo i bordi"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Bouncing at the end"
+msgstr "Rimbalzo alla fine"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Backing out at ends"
+msgstr "Rimozione alle estremità"
 
