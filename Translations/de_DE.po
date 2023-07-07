@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-07-04 11:08\n"
+"PO-Revision-Date: 2023-07-07 20:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -160,14 +160,14 @@ msgid "Resize Canvas"
 msgstr "Canvas skalieren"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Bild offseten"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Offset:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Umwickeln:"
 
 msgid "Centralize Image"
 msgstr "Bild zentrieren"
@@ -615,7 +615,7 @@ msgstr "Canvas"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Zeitachse"
 
 msgid "Selection"
 msgstr "Auswahl"
@@ -1396,15 +1396,15 @@ msgstr "Die transparenten Checker folgen dem Canvas-Zoom-Level"
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
-msgstr ""
+msgstr "Wählen Sie die Ebene aus, wenn Sie auf einen ihrer Buttons klicken:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr ""
+msgstr "Onion Skinning vorige Farbe:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr ""
+msgstr "Onion Skinning zukünftige Farbe:"
 
 msgid "Animated selection borders"
 msgstr "Animierte Auswahlrahmen"
@@ -1767,7 +1767,7 @@ msgstr "Wenn diese Option ausgewählt ist, wird die Animation nur auf den Frames
 
 #. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "Farbmodus"
 
 msgid "Show past frames:"
 msgstr "Vorherige Frames anzeigen:"
@@ -1816,7 +1816,7 @@ msgstr "Frame-Eigenschaften"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
-msgstr ""
+msgstr "Frames umkehren"
 
 msgid "Layer"
 msgstr "Ebene"
