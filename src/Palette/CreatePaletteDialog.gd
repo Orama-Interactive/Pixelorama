@@ -80,7 +80,7 @@ func _on_CreatePaletteDialog_confirmed() -> void:
 		comment_input.text,
 		width_input.value,
 		height_input.value,
-		alpha_colors_input.pressed,
+		alpha_colors_input.button_pressed,
 		get_colors_from_input.selected
 	)
 

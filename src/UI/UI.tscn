@@ -339,7 +339,7 @@ camera_path = NodePath("SubViewport/Camera2D2")
 
 [node name="SubViewport" type="SubViewport" parent="DockableContainer/Second Canvas"]
 handle_input_locally = false
-size = Vector2i(2, 342)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="TransparentChecker" parent="DockableContainer/Second Canvas/SubViewport" instance=ExtResource("5")]

@@ -49,7 +49,7 @@ func _ready() -> void:
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		button.group = button_group
 		add_child(button)
-		button.connect("pressed", Callable(self, "_on_Language_pressed").bind(button.get_index()))
+		button.pressed.connect(_on_Language_pressed.bind(button.get_index()))
 	get_child(locale_index + 2).button_pressed = true  # Select the appropriate button
 
 

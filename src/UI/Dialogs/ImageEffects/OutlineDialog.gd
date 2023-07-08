@@ -24,7 +24,7 @@ func _ready() -> void:
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	var anim_thickness = animate_panel.get_animated_value(commit_idx, Animate.THICKNESS)
 	var selection_tex := ImageTexture.new()
-	if selection_checkbox.pressed and project.has_selection:
+	if selection_checkbox.button_pressed and project.has_selection:
 		selection_tex.create_from_image(project.selection_map) #,0
 
 	var params := {

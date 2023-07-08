@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8dsi6ggkqa7a" path="res://src/UI/UI.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://src/UI/Buttons/PatternsPopup.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://c5x85ysdouh4t" path="res://src/UI/Buttons/BrushesPopup.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/ImageEffects.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://cfihuvhy4ocx7" path="res://src/UI/Dialogs/ImageEffects/ImageEffects.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/SaveSpriteHTML5.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://src/UI/Timeline/FrameProperties.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/WindowOpacityDialog.tscn" id="10"]
@@ -48,7 +48,6 @@ anchors_preset = 0
 mouse_filter = 2
 
 [node name="ImageEffects" parent="Dialogs" instance=ExtResource("7")]
-anchors_preset = 0
 
 [node name="BrushesPopup" parent="Dialogs" instance=ExtResource("6")]
 

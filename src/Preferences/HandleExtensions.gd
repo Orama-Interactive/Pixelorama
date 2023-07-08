@@ -44,10 +44,10 @@ func _ready() -> void:
 		$HBoxContainer/AddExtensionButton.disabled = true
 		$HBoxContainer/OpenFolderButton.visible = false
 
-	var dir := DirAccess.new()
 	var file_names := []  # Array of String(s)
+	var dir := DirAccess.open(EXTENSIONS_PATH)
 	dir.make_dir(EXTENSIONS_PATH)
-	if dir.open(EXTENSIONS_PATH) == OK:
+	if DirAccess.get_open_error() == OK:
 		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var file_name = dir.get_next()
 		while file_name != "":
@@ -64,15 +64,15 @@ func _ready() -> void:
 
 
 func install_extension(path: String) -> void:
-	var dir := DirAccess.new()
 	var file_name: String = path.get_file()
+	var dir := DirAccess.open(path)
 	dir.copy(path, EXTENSIONS_PATH.path_join(file_name))
 	_add_extension(file_name)
 
 
 func _uninstall_extension(file_name := "", remove_file := true, item := extension_selected) -> void:
 	if remove_file:
-		var dir := DirAccess.new()
+		var dir := DirAccess.open(EXTENSIONS_PATH.path_join(file_name))
 		var err := dir.remove(EXTENSIONS_PATH.path_join(file_name))
 		if err != OK:
 			print(err)
@@ -90,13 +90,13 @@ func _uninstall_extension(file_name := "", remove_file := true, item := extensio
 
 
 func _add_extension(file_name: String) -> void:
-	var tester_file := File.new()  # For testing and deleting damaged extensions
-	var remover_directory := DirAccess.new()
+	var tester_file: FileAccess  # For testing and deleting damaged extensions
+	var remover_directory := DirAccess.open(EXTENSIONS_PATH)
 	# Remove any extension that was proven guilty before this extension is loaded
-	if tester_file.file_exists(EXTENSIONS_PATH.path_join("Faulty.txt")):
+	if remover_directory.file_exists(EXTENSIONS_PATH.path_join("Faulty.txt")):
 		# This code will only run if pixelorama crashed
-		var faulty_path = EXTENSIONS_PATH.path_join("Faulty.txt")
-		tester_file.open(faulty_path, File.READ)
+		var faulty_path := EXTENSIONS_PATH.path_join("Faulty.txt")
+		tester_file.open(faulty_path, FileAccess.READ)
 		damaged_extension = tester_file.get_as_text()
 		tester_file.close()
 		remover_directory.remove(EXTENSIONS_PATH.path_join(damaged_extension))
@@ -109,7 +109,7 @@ func _add_extension(file_name: String) -> void:
 		return
 
 	# The new (about to load) extension will be considered guilty till it's proven innocent
-	tester_file.open(EXTENSIONS_PATH.path_join("Faulty.txt"), File.WRITE)
+	tester_file.open(EXTENSIONS_PATH.path_join("Faulty.txt"), FileAccess.WRITE)
 	tester_file.store_string(file_name)  # Guilty till proven innocent ;)
 	tester_file.close()
 
@@ -132,14 +132,14 @@ func _add_extension(file_name: String) -> void:
 	var success := ProjectSettings.load_resource_pack(file_path)
 	if !success:
 		print("Failed loading resource pack.")
-		var dir := DirAccess.new()
+		var dir := DirAccess.open(file_path)
 		dir.remove(file_path)
 		return
 
 	var extension_path: String = "res://src/Extensions/%s/" % file_name_no_ext
 	var extension_config_file_path: String = extension_path.path_join("extension.json")
-	var extension_config_file := File.new()
-	var err := extension_config_file.open(extension_config_file_path, File.READ)
+	var extension_config_file := FileAccess.open(extension_config_file_path, FileAccess.READ)
+	var err := FileAccess.get_open_error()
 	if err != OK:
 		print("Error loading config file: ", err, ErrorManager.parse(err, " (", ")"))
 		extension_config_file.close()

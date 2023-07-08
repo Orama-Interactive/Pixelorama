@@ -227,7 +227,7 @@ func _ready() -> void:
 
 
 func _on_AboutDialog_about_to_show() -> void:
-	window_title = tr("About Pixelorama") + " " + Global.current_version
+	title = tr("About Pixelorama") + " " + Global.current_version
 
 	var groups_root := groups.create_item()
 	var developers_button := groups.create_item(groups_root)

@@ -45,7 +45,7 @@ func add_theme(theme: Theme) -> void:
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	button.group = theme_button_group
 	buttons_container.add_child(button)
-	button.connect("pressed", Callable(self, "_on_Theme_pressed").bind(button.get_index()))
+	button.pressed.connect(_on_Theme_pressed.bind(button.get_index()))
 
 	var panel_stylebox: StyleBox = theme.get_stylebox("panel", "Panel")
 	var panel_container_stylebox: StyleBox = theme.get_stylebox("panel", "PanelContainer")

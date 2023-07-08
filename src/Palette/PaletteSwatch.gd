@@ -78,12 +78,12 @@ func _can_drop_data(_position, _data) -> bool:
 
 
 func _drop_data(_position, data) -> void:
-	emit_signal("dropped", data.source_index, index)
+	dropped.emit(data.source_index, index)
 
 
 func _on_PaletteSlot_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and not empty:
 		if event.doubleclick:
-			emit_signal("double_clicked", event.button_index, get_global_rect().position)
+			double_clicked.emit(event.button_index, get_global_rect().position)
 		else:
-			emit_signal("pressed", event.button_index)
+			pressed.emit(event.button_index)

@@ -133,7 +133,7 @@ func _on_Dynamics_toggled(
 		else:
 			_set_last_pressed_button(property, button)
 	var final_dynamic := dynamic
-	if not button.pressed:
+	if not button.button_pressed:
 		final_dynamic = Tools.Dynamics.NONE
 	match property:
 		ALPHA:
@@ -143,7 +143,7 @@ func _on_Dynamics_toggled(
 
 	var texture_button: TextureRect = button.get_node("TextureRect")
 	var file_name := "check.png"
-	if !button.pressed:
+	if !button.button_pressed:
 		file_name = "uncheck.png"
 	Global.change_button_texturerect(texture_button, file_name)
 	emit_signal("dynamics_changed")
