@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bioh4shobg442"
+uid="uid://ca58ufal2ufd8"
 path="res://.godot/imported/joy_button.svg-df5663c6f296cab556e81b9c770699d0.ctex"
 metadata={
 "vram_texture": false
@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/joy_button.svg-df5663c6f296cab556e81b9c770699
 [params]
 
 compress/mode=0
-compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
+compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

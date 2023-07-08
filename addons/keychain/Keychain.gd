@@ -25,7 +25,7 @@ class InputAction:
 	var group := ""
 	var global := true
 
-	func _init(_display_name := "", _group := "", _global := true) -> void:
+	func _init(_display_name := "",_group := "",_global := true):
 		display_name = _display_name
 		group = _group
 		global = _global
@@ -118,15 +118,14 @@ func _ready() -> void:
 	set_process_input(multiple_menu_accelerators)
 
 	# Load shortcut profiles
-	var profile_dir := DirAccess.new()
-	profile_dir.make_dir(PROFILES_PATH)
-	profile_dir.open(PROFILES_PATH)
+	DirAccess.make_dir_recursive_absolute(PROFILES_PATH)
+	var profile_dir := DirAccess.open(PROFILES_PATH)
 	profile_dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	var file_name = profile_dir.get_next()
 	while file_name != "":
 		if !profile_dir.current_is_dir():
 			if file_name.get_extension() == "tres":
-				var file = load(PROFILES_PATH.plus_file(file_name))
+				var file = load(PROFILES_PATH.path_join(file_name))
 				if file is ShortcutProfile:
 					profiles.append(file)
 		file_name = profile_dir.get_next()
@@ -135,7 +134,7 @@ func _ready() -> void:
 	if profiles.size() == 1:
 		var profile := ShortcutProfile.new()
 		profile.name = "Custom"
-		profile.resource_path = PROFILES_PATH.plus_file("custom.tres")
+		profile.resource_path = PROFILES_PATH.path_join("custom.tres")
 		var saved := profile.save()
 		if saved:
 			profiles.append(profile)
@@ -143,14 +142,13 @@ func _ready() -> void:
 	for profile in profiles:
 		profile.fill_bindings()
 
-	var l18n_dir := DirAccess.new()
-	l18n_dir.open(TRANSLATIONS_PATH)
+	var l18n_dir := DirAccess.open(TRANSLATIONS_PATH)
 	l18n_dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	file_name = l18n_dir.get_next()
 	while file_name != "":
 		if !l18n_dir.current_is_dir():
 			if file_name.get_extension() == "po":
-				var t: Translation = load(TRANSLATIONS_PATH.plus_file(file_name))
+				var t: Translation = load(TRANSLATIONS_PATH.path_join(file_name))
 				TranslationServer.add_translation(t)
 		file_name = l18n_dir.get_next()
 
@@ -160,8 +158,7 @@ func _ready() -> void:
 	for action in actions:
 		var input_action: InputAction = actions[action]
 		if input_action is MenuInputAction:
-			# Below line has been modified
-			input_action.get_node(Global.top_menu_container.get_node("MenuItems"))
+			input_action.get_node(get_tree().current_scene)
 
 
 func _input(event: InputEvent) -> void:
@@ -184,8 +181,6 @@ func change_profile(index: int) -> void:
 		action_erase_events(action)
 		for event in selected_profile.bindings[action]:
 			action_add_event(action, event)
-	# NOTE: Following line not present in the plugin itself, be careful not to overwrite
-	Global.update_hint_tooltips()
 
 
 func action_add_event(action: String, event: InputEvent) -> void:
