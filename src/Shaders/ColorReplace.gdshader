@@ -3,7 +3,7 @@ render_mode unshaded;
 
 uniform vec2 size;
 
-uniform vec4 old_color;  //Our description
+uniform vec4 old_color;
 uniform vec4 new_color;
 uniform float similarity_percent : hint_range(0.0, 100.0);
 
@@ -22,8 +22,8 @@ void fragment() { // applies on each pixel separately
 
 	vec4 col = original_color;  // Innocent till proven guilty
 
-	float max_diff = distance(original_color, old_color);  // How much this pixel matches our description 
-	
+	float max_diff = distance(original_color, old_color);  // How much this pixel matches our description
+
 	float similarity = abs(2.0 - ((similarity_percent/100.0) * 2.0));
 
 	if (max_diff <= similarity)  // We found our match and pixel is proven guilty (small is precise)

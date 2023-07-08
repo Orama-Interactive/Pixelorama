@@ -27,24 +27,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 shader_type canvas_item;
 
 //enables 2:1 slopes. otherwise only uses 45 degree slopes
-//#define SLOPE
+#define SLOPE
 //cleans up small detail slope transitions (if SLOPE is enabled)
-//if only using for rotation, CLEANUP has negligible effect and should be disabled for speed
-//#define CLEANUP
-// The commented out defines exposed as uniforms
-uniform bool slope;
-uniform bool cleanup;
-
-// This shader has been modified to work for Pixelorama
-// Godot 3.x does not support #defines, so we will uncomment them when we port to Godot 4.x
-// NearestNeighbor rotation logic has also been added into the code
-// The original file can be found at
-// https://gist.github.com/torcado194/e2794f5a4b22049ac0a41f972d14c329#file-cleanedge-gdshader
-uniform float angle;
-uniform sampler2D selection_tex;
-uniform vec2 selection_pivot;
-uniform vec2 selection_size;
-uniform bool preview;
+//if only using for rotation, CLEANUP has negligable effect and should be disabled for speed
+#define CLEANUP
 
 //the color with the highest priority.
 // other colors will be tested based on distance to this
@@ -55,9 +41,17 @@ uniform vec3 highestColor = vec3(1.,1.,1.);
 // can group shapes of visually similar colors, but creates
 // some artifacting and should be kept as low as possible.
 uniform float similarThreshold = 0.0;
+
 uniform float lineWidth = 1.0;
 
+const float scale = 4.0;
 const mat3 yuv_matrix = mat3(vec3(0.299, 0.587, 0.114), vec3(-0.169, -0.331, 0.5), vec3(0.5, -0.419, -0.081));
+// Edited for Pixelorama
+uniform float angle;
+uniform sampler2D selection_tex;
+uniform vec2 selection_pivot;
+uniform vec2 selection_size;
+uniform bool preview;
 
 vec3 yuv(vec3 col){
 	mat3 yuv = transpose(yuv_matrix);
@@ -112,17 +106,13 @@ float distToLine(vec2 testPt, vec2 pt1, vec2 pt2, vec2 dir){
 
 //based on down-forward direction
 vec4 sliceDist(vec2 point, vec2 mainDir, vec2 pointDir, vec4 u, vec4 uf, vec4 uff, vec4 b, vec4 c, vec4 f, vec4 ff, vec4 db, vec4 d, vec4 df, vec4 dff, vec4 ddb, vec4 dd, vec4 ddf){
-	float minWidth;
-	float maxWidth;
-	if (slope) {
-		minWidth = 0.44;
-		maxWidth = 1.142;
-	}
-	else {
-		minWidth = 0.0;
-		maxWidth = 1.4;
-	}
-//	#endif
+	#ifdef SLOPE
+	float minWidth = 0.44;
+	float maxWidth = 1.142;
+	#else
+	float minWidth = 0.0;
+	float maxWidth = 1.4;
+	#endif
 	float _lineWidth = max(minWidth, min(maxWidth, lineWidth));
 	point = mainDir * (point - 0.5) + 0.5; //flip point
 
@@ -145,8 +135,8 @@ vec4 sliceDist(vec2 point, vec2 mainDir, vec2 pointDir, vec4 u, vec4 uf, vec4 uf
 	bool flip = false;
 	vec2 center = vec2(0.5,0.5);
 
-//	#ifdef SLOPE
-	if(slope && similar3(f, d, db) && !similar3(f, d, b) && !similar(uf, db)){ //lower shallow 2:1 slant
+	#ifdef SLOPE
+	if(similar3(f, d, db) && !similar3(f, d, b) && !similar(uf, db)){ //lower shallow 2:1 slant
 		if(similar(c, df) && higher(c, f)){ //single pixel wide diagonal, dont flip
 
 		} else {
@@ -166,17 +156,16 @@ vec4 sliceDist(vec2 point, vec2 mainDir, vec2 pointDir, vec4 u, vec4 uf, vec4 uf
 		}
 
 		//cleanup slant transitions
-		if (cleanup) {
-			if(!flip && similar(c, uf) && !(similar3(c, uf, uff) && !similar3(c, uf, ff) && !similar(d, uff))){ //shallow
-				float dist2 = distToLine(point, center+vec2(2.0, -1.0)*pointDir, center+vec2(-0.0, 1.0)*pointDir, pointDir);
-				dist = min(dist, dist2);
-			}
+		#ifdef CLEANUP
+		if(!flip && similar(c, uf) && !(similar3(c, uf, uff) && !similar3(c, uf, ff) && !similar(d, uff))){ //shallow
+			float dist2 = distToLine(point, center+vec2(2.0, -1.0)*pointDir, center+vec2(-0.0, 1.0)*pointDir, pointDir);
+			dist = min(dist, dist2);
 		}
-//		#endif
+		#endif
 
 		dist -= (_lineWidth/2.0);
 		return dist <= 0.0 ? ((cd(c,f) <= cd(c,d)) ? f : d) : vec4(-1.0);
-	} else if(slope && similar3(uf, f, d) && !similar3(u, f, d) && !similar(uf, db)){ //forward steep 2:1 slant
+	} else if(similar3(uf, f, d) && !similar3(u, f, d) && !similar(uf, db)){ //forward steep 2:1 slant
 		if(similar(c, df) && higher(c, d)){ //single pixel wide diagonal, dont flip
 
 		} else {
@@ -196,18 +185,17 @@ vec4 sliceDist(vec2 point, vec2 mainDir, vec2 pointDir, vec4 u, vec4 uf, vec4 uf
 		}
 
 		//cleanup slant transitions
-		if (cleanup) {
-			if(!flip && similar(c, db) && !(similar3(c, db, ddb) && !similar3(c, db, dd) && !similar(f, ddb))){ //steep
-				float dist2 = distToLine(point, center+vec2(1.0, 0.0)*pointDir, center+vec2(-1.0, 2.0)*pointDir, pointDir);
-				dist = min(dist, dist2);
-			}
+		#ifdef CLEANUP
+		if(!flip && similar(c, db) && !(similar3(c, db, ddb) && !similar3(c, db, dd) && !similar(f, ddb))){ //steep
+			float dist2 = distToLine(point, center+vec2(1.0, 0.0)*pointDir, center+vec2(-1.0, 2.0)*pointDir, pointDir);
+			dist = min(dist, dist2);
 		}
-//		#endif
+		#endif
 
 		dist -= (_lineWidth/2.0);
 		return dist <= 0.0 ? ((cd(c,f) <= cd(c,d)) ? f : d) : vec4(-1.0);
 	} else
-//	#endif
+	#endif
 	if(similar(f, d)) { //45 diagonal
 		if(similar(c, df) && higher(c, f)){ //single pixel diagonal along neighbors, dont flip
 			if(!similar(c, dd) && !similar(c, ff)){ //line against triple color stripe edge case
@@ -227,32 +215,32 @@ vec4 sliceDist(vec2 point, vec2 mainDir, vec2 pointDir, vec4 u, vec4 uf, vec4 uf
 			flip = true;
 		}
 
-		if (flip) {
+		if(flip){
 			dist = _lineWidth-distToLine(point, center+vec2(1.0, -1.0)*pointDir, center+vec2(-1.0, 1.0)*pointDir, -pointDir); //midpoints of own diagonal pixels
 		} else {
 			dist = distToLine(point, center+vec2(1.0, 0.0)*pointDir, center+vec2(0.0, 1.0)*pointDir, pointDir); //midpoints of corner neighbor pixels
 		}
 
 		//cleanup slant transitions
-		if (slope && cleanup) {
-			if(!flip && similar3(c, uf, uff) && !similar3(c, uf, ff) && !similar(d, uff)){ //shallow
-				float dist2 = distToLine(point, center+vec2(1.5, 0.0)*pointDir, center+vec2(-0.5, 1.0)*pointDir, pointDir);
-				dist = max(dist, dist2);
-			}
-
-			if(!flip && similar3(ddb, db, c) && !similar3(dd, db, c) && !similar(ddb, f)){ //steep
-				float dist2 = distToLine(point, center+vec2(1.0, -0.5)*pointDir, center+vec2(0.0, 1.5)*pointDir, pointDir);
-				dist = max(dist, dist2);
-			}
+		#ifdef SLOPE
+		#ifdef CLEANUP
+		if(!flip && similar3(c, uf, uff) && !similar3(c, uf, ff) && !similar(d, uff)){ //shallow
+			float dist2 = distToLine(point, center+vec2(1.5, 0.0)*pointDir, center+vec2(-0.5, 1.0)*pointDir, pointDir);
+			dist = max(dist, dist2);
 		}
-//		#endif
-//		#endif
+
+		if(!flip && similar3(ddb, db, c) && !similar3(dd, db, c) && !similar(ddb, f)){ //steep
+			float dist2 = distToLine(point, center+vec2(1.0, -0.5)*pointDir, center+vec2(0.0, 1.5)*pointDir, pointDir);
+			dist = max(dist, dist2);
+		}
+		#endif
+		#endif
 
 		dist -= (_lineWidth/2.0);
 		return dist <= 0.0 ? ((cd(c,f) <= cd(c,d)) ? f : d) : vec4(-1.0);
 	}
-//	#ifdef SLOPE
-	else if(slope && similar3(ff, df, d) && !similar3(ff, df, c) && !similar(uff, d)){ //far corner of shallow slant
+	#ifdef SLOPE
+	else if(similar3(ff, df, d) && !similar3(ff, df, c) && !similar(uff, d)){ //far corner of shallow slant
 
 		if(similar(f, dff) && higher(f, ff)){ //single pixel wide diagonal, dont flip
 
@@ -273,7 +261,7 @@ vec4 sliceDist(vec2 point, vec2 mainDir, vec2 pointDir, vec4 u, vec4 uf, vec4 uf
 
 		dist -= (_lineWidth/2.0);
 		return dist <= 0.0 ? ((cd(f,ff) <= cd(f,df)) ? ff : df) : vec4(-1.0);
-	} else if(slope && similar3(f, df, dd) && !similar3(c, df, dd) && !similar(f, ddb)){ //far corner of steep slant
+	} else if(similar3(f, df, dd) && !similar3(c, df, dd) && !similar(f, ddb)){ //far corner of steep slant
 		if(similar(d, ddf) && higher(d, dd)){ //single pixel wide diagonal, dont flip
 
 		} else {
@@ -298,11 +286,12 @@ vec4 sliceDist(vec2 point, vec2 mainDir, vec2 pointDir, vec4 u, vec4 uf, vec4 uf
 		dist -= (_lineWidth/2.0);
 		return dist <= 0.0 ? ((cd(d,df) <= cd(d,dd)) ? df : dd) : vec4(-1.0);
 	}
-//	#endif
+	#endif
 	return vec4(-1.0);
 }
 
-vec2 rotate(vec2 uv, vec2 pivot, float ratio) {  // Taken from NearestNeighbour shader
+// Pixelorama edit, taken from NearestNeighbour shader
+vec2 rotate(vec2 uv, vec2 pivot, float ratio) {
 	// Scale and center image
 	uv.x -= pivot.x;
 	uv.x *= ratio;
@@ -319,9 +308,10 @@ vec2 rotate(vec2 uv, vec2 pivot, float ratio) {  // Taken from NearestNeighbour 
 }
 
 void fragment() {
+	vec2 size = 1.0/TEXTURE_PIXEL_SIZE+0.0001; //fix for some sort of rounding error
+	// Pixelorama edit
 	vec4 original = texture(TEXTURE, UV);
 	float selection = texture(selection_tex, UV).a;
-	vec2 size = 1.0/TEXTURE_PIXEL_SIZE+0.0001; //fix for some sort of rounding error
 	vec2 pivot = selection_pivot / size; // Normalize pivot position
 	float ratio = size.x / size.y; // Resolution ratio
 	vec2 pixelated_uv = floor(UV * size) / (size - 1.0); // Pixelate UV to fit resolutio
@@ -386,7 +376,7 @@ void fragment() {
 		col = u_col;
 	}
 
-	// Taken from NearestNeighbour shader
+    // Pixelorama edit, taken from NearestNeighbour shader
 	col.a *= texture(selection_tex, rotated_uv).a; // Combine with selection mask
 	// Make a border to prevent stretching pixels on the edge
 	vec2 border_uv = rotated_uv;
