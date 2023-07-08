@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://dbylw5k04ulp8"]
 
-[ext_resource type="Theme" path="res://assets/themes/dark/theme.tres" id="1"]
+[ext_resource type="Theme" uid="uid://w1q3piojx08s" path="res://assets/themes/dark/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/Main.gd" id="2"]
 [ext_resource type="PackedScene" path="res://src/UI/TopMenuContainer/TopMenuContainer.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://src/UI/UI.tscn" id="4"]
@@ -25,6 +25,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1")
 script = ExtResource("2")
 __meta__ = {
@@ -75,6 +77,7 @@ mode = 1
 
 [node name="AboutDialog" parent="Dialogs" instance=ExtResource("34")]
 position = Vector2i(0, 24)
+visible = false
 
 [node name="UnsavedCanvasDialog" type="ConfirmationDialog" parent="Dialogs"]
 dialog_text = "You have unsaved changes. If you proceed, the progress you have made will be lost."
