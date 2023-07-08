@@ -1,18 +1,18 @@
 extends Container
 
-onready var left_picker := $ColorPickersHorizontal/LeftColorPickerButton
-onready var right_picker := $ColorPickersHorizontal/RightColorPickerButton
-onready var average_color = $"%AverageColor"
-onready var transparent_checker = $"%TransparentChecker"
+@onready var left_picker := $ColorPickersHorizontal/LeftColorPickerButton
+@onready var right_picker := $ColorPickersHorizontal/RightColorPickerButton
+@onready var average_color = $"%AverageColor"
+@onready var transparent_checker = $"%TransparentChecker"
 
 
 func _ready() -> void:
-	Tools.connect("color_changed", self, "update_color")
+	Tools.connect("color_changed", Callable(self, "update_color"))
 	left_picker.get_picker().presets_visible = false
 	right_picker.get_picker().presets_visible = false
 	_average(left_picker.color, right_picker.color)
-	transparent_checker.rect_position = average_color.rect_position
-	transparent_checker.rect_size = average_color.rect_size
+	transparent_checker.position = average_color.position
+	transparent_checker.size = average_color.size
 
 
 func _on_ColorSwitch_pressed() -> void:
@@ -20,27 +20,27 @@ func _on_ColorSwitch_pressed() -> void:
 
 
 func _on_ColorPickerButton_color_changed(color: Color, right: bool):
-	var button := BUTTON_RIGHT if right else BUTTON_LEFT
+	var button := MOUSE_BUTTON_RIGHT if right else MOUSE_BUTTON_LEFT
 	Tools.assign_color(color, button)
 	_average(left_picker.color, right_picker.color)
 
 
 func _on_ToLeft_pressed():
-	Tools.assign_color(average_color.color, BUTTON_LEFT)
+	Tools.assign_color(average_color.color, MOUSE_BUTTON_LEFT)
 
 
 func _on_ToRight_pressed():
-	Tools.assign_color(average_color.color, BUTTON_RIGHT)
+	Tools.assign_color(average_color.color, MOUSE_BUTTON_RIGHT)
 
 
 func _on_ColorPickerButton_pressed() -> void:
 	Global.can_draw = false
-	Tools.disconnect("color_changed", self, "update_color")
+	Tools.disconnect("color_changed", Callable(self, "update_color"))
 
 
 func _on_ColorPickerButton_popup_closed() -> void:
 	Global.can_draw = true
-	Tools.connect("color_changed", self, "update_color")
+	Tools.connect("color_changed", Callable(self, "update_color"))
 
 
 func _on_ColorDefaults_pressed() -> void:
@@ -48,7 +48,7 @@ func _on_ColorDefaults_pressed() -> void:
 
 
 func update_color(color: Color, button: int) -> void:
-	if button == BUTTON_LEFT:
+	if button == MOUSE_BUTTON_LEFT:
 		left_picker.color = color
 	else:
 		right_picker.color = color
@@ -63,7 +63,7 @@ func _average(color_1: Color, color_2: Color) -> void:
 	var average := Color(average_r, average_g, average_b, average_a)
 
 	var copy_button = average_color.get_parent()
-	copy_button.hint_tooltip = str("Average Color:\n#", average.to_html(), "\n(Press to Copy)")
+	copy_button.tooltip_text = str("Average Color:\n#", average.to_html(), "\n(Press to Copy)")
 	average_color.color = average
 
 

@@ -3,27 +3,27 @@
 [ext_resource path="res://src/UI/Nodes/AnimatePanel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Classes/ImageEffect.gd" type="Script" id=3]
-[ext_resource path="res://assets/graphics/misc/animate.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/misc/animate.png" type="Texture2D" id=4]
 
 [node name="ImageEffectParent" type="ConfirmationDialog"]
-margin_right = 294.0
-margin_bottom = 334.0
-rect_min_size = Vector2( 172, 60.2 )
+offset_right = 294.0
+offset_bottom = 334.0
+custom_minimum_size = Vector2( 172, 60.2 )
 resizable = true
 script = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 368.0
-margin_bottom = 298.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 368.0
+offset_bottom = 298.0
 
 [node name="ShowAnimate" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
-margin_left = 340.0
-margin_right = 360.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 0 )
+offset_left = 340.0
+offset_right = 360.0
+offset_bottom = 20.0
+custom_minimum_size = Vector2( 20, 0 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 8
 toggle_mode = true
@@ -31,25 +31,25 @@ toggle_mode = true
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/ShowAnimate"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = -2.0
-margin_bottom = -2.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 6
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_top = 24.0
-margin_right = 360.0
-margin_bottom = 262.0
+offset_top = 24.0
+offset_right = 360.0
+offset_bottom = 262.0
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 61.0
-margin_right = 299.0
-margin_bottom = 238.0
-rect_min_size = Vector2( 200, 200 )
+offset_left = 61.0
+offset_right = 299.0
+offset_bottom = 238.0
+custom_minimum_size = Vector2( 200, 200 )
 expand = true
 stretch_mode = 5
 
@@ -57,26 +57,26 @@ stretch_mode = 5
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 0.0
-margin_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="OptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 266.0
-margin_right = 360.0
-margin_bottom = 290.0
+offset_top = 266.0
+offset_right = 360.0
+offset_bottom = 290.0
 
 [node name="SelectionCheckBox" type="CheckBox" parent="VBoxContainer/OptionsContainer"]
-margin_right = 178.0
-margin_bottom = 24.0
+offset_right = 178.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 pressed = true
 text = "Only affect selection"
 
 [node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
-margin_left = 182.0
-margin_right = 360.0
-margin_bottom = 24.0
+offset_left = 182.0
+offset_right = 360.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Selected cels"
@@ -84,15 +84,15 @@ items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1
 selected = 0
 
 [node name="AnimateDialog" type="Popup" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 368.0
-margin_bottom = 298.0
-rect_min_size = Vector2( 360, 270 )
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 368.0
+offset_bottom = 298.0
+custom_minimum_size = Vector2( 360, 270 )
 
 [node name="AnimatePanel" parent="AnimateDialog" instance=ExtResource( 1 )]
 unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 0.0
-margin_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 0.0

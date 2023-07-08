@@ -9,32 +9,32 @@ window_title = "Offset Image"
 script = ExtResource( 3 )
 
 [node name="VBoxContainer" parent="." index="3"]
-margin_bottom = 344.0
+offset_bottom = 344.0
 
 [node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
-margin_bottom = 224.0
+offset_bottom = 224.0
 
 [node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-margin_left = 80.0
-margin_right = 280.0
-margin_bottom = 200.0
+offset_left = 80.0
+offset_right = 280.0
+offset_bottom = 200.0
 
 [node name="OffsetOptions" type="GridContainer" parent="VBoxContainer" index="2"]
-margin_top = 228.0
-margin_right = 360.0
-margin_bottom = 308.0
+offset_top = 228.0
+offset_right = 360.0
+offset_bottom = 308.0
 columns = 2
 
 [node name="OffsetLabel" type="Label" parent="VBoxContainer/OffsetOptions" index="0"]
-margin_top = 19.0
-margin_right = 178.0
-margin_bottom = 33.0
+offset_top = 19.0
+offset_right = 178.0
+offset_bottom = 33.0
 size_flags_horizontal = 3
 text = "Offset:"
 
 [node name="OffsetSliders" parent="VBoxContainer/OffsetOptions" index="1" instance=ExtResource( 2 )]
-margin_left = 182.0
-margin_right = 360.0
+offset_left = 182.0
+offset_right = 360.0
 size_flags_horizontal = 3
 min_value = Vector2( -64, -64 )
 max_value = Vector2( 64, 64 )
@@ -45,27 +45,27 @@ suffix_x = "px"
 suffix_y = "px"
 
 [node name="WrapLabel" type="Label" parent="VBoxContainer/OffsetOptions" index="2"]
-margin_top = 61.0
-margin_right = 178.0
-margin_bottom = 75.0
+offset_top = 61.0
+offset_right = 178.0
+offset_bottom = 75.0
 size_flags_horizontal = 3
 text = "Wrap around:"
 
 [node name="WrapCheckBox" type="CheckBox" parent="VBoxContainer/OffsetOptions" index="3"]
-margin_left = 182.0
-margin_top = 56.0
-margin_right = 360.0
-margin_bottom = 80.0
+offset_left = 182.0
+offset_top = 56.0
+offset_right = 360.0
+offset_bottom = 80.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "On"
 
 [node name="OptionsContainer" parent="VBoxContainer" index="3"]
-margin_top = 312.0
-margin_bottom = 336.0
+offset_top = 312.0
+offset_bottom = 336.0
 
 [node name="AnimateDialog" parent="." index="4"]
-margin_bottom = 344.0
+offset_bottom = 344.0
 
 [connection signal="value_changed" from="VBoxContainer/OffsetOptions/OffsetSliders" to="." method="_on_OffsetSliders_value_changed"]
 [connection signal="toggled" from="VBoxContainer/OffsetOptions/WrapCheckBox" to="." method="_on_WrapCheckBox_toggled"]

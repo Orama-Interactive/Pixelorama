@@ -5,19 +5,19 @@ enum Animate { ANGLE, INITIAL_ANGLE }
 
 var live_preview: bool = true
 var rotxel_shader: Shader
-var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeighbour.shader")
+var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeighbour.gdshader")
 var pivot := Vector2.INF
 var drag_pivot := false
 
-onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
-onready var pivot_indicator: Control = $VBoxContainer/AspectRatioContainer/Indicator
-onready var pivot_sliders := $VBoxContainer/PivotOptions/Pivot as ValueSliderV2
-onready var angle_slider: ValueSlider = $VBoxContainer/AngleSlider
-onready var smear_options: Container = $VBoxContainer/SmearOptions
-onready var init_angle_slider: ValueSlider = smear_options.get_node("InitialAngleSlider")
-onready var tolerance_slider: ValueSlider = smear_options.get_node("ToleranceSlider")
-onready var wait_apply_timer: Timer = $WaitApply
-onready var wait_time_slider: ValueSlider = $VBoxContainer/WaitTime
+@onready var type_option_button: OptionButton = $VBoxContainer/HBoxContainer2/TypeOptionButton
+@onready var pivot_indicator: Control = $VBoxContainer/AspectRatioContainer/Indicator
+@onready var pivot_sliders := $VBoxContainer/PivotOptions/Pivot as ValueSliderV2
+@onready var angle_slider: ValueSlider = $VBoxContainer/AngleSlider
+@onready var smear_options: Container = $VBoxContainer/SmearOptions
+@onready var init_angle_slider: ValueSlider = smear_options.get_node("InitialAngleSlider")
+@onready var tolerance_slider: ValueSlider = smear_options.get_node("ToleranceSlider")
+@onready var wait_apply_timer: Timer = $WaitApply
+@onready var wait_time_slider: ValueSlider = $VBoxContainer/WaitTime
 
 
 func _ready() -> void:
@@ -26,7 +26,7 @@ func _ready() -> void:
 	animate_panel.add_float_property("Initial Angle", init_angle_slider)
 	if not _is_webgl1():
 		type_option_button.add_item("Rotxel with Smear", ROTXEL_SMEAR)
-		rotxel_shader = load("res://src/Shaders/Rotation/SmearRotxel.shader")
+		rotxel_shader = load("res://src/Shaders/Rotation/SmearRotxel.gdshader")
 	type_option_button.add_item("cleanEdge", CLEANEDGE)
 	type_option_button.add_item("OmniScale", OMNISCALE)
 	type_option_button.set_item_disabled(OMNISCALE, not DrawingAlgos.omniscale_shader)
@@ -37,14 +37,14 @@ func _ready() -> void:
 	type_option_button.emit_signal("item_selected", 0)
 
 
-func _about_to_show() -> void:
+func _about_to_popup() -> void:
 	if DrawingAlgos.clean_edge_shader == null:
 		DrawingAlgos.clean_edge_shader = load("res://src/Shaders/Rotation/cleanEdge.gdshader")
 	drag_pivot = false
 	if pivot == Vector2.INF:
 		_calculate_pivot()
 	confirmed = false
-	._about_to_show()
+	super._about_to_popup()
 	wait_apply_timer.wait_time = wait_time_slider.value / 1000.0
 
 
@@ -85,7 +85,7 @@ func _calculate_pivot() -> void:
 
 
 func commit_action(cel: Image, _project: Project = Global.current_project) -> void:
-	var angle: float = deg2rad(animate_panel.get_animated_value(commit_idx, Animate.ANGLE))
+	var angle: float = deg_to_rad(animate_panel.get_animated_value(commit_idx, Animate.ANGLE))
 	var init_angle: float = animate_panel.get_animated_value(commit_idx, Animate.INITIAL_ANGLE)
 
 	var selection_size := cel.get_size()
@@ -98,11 +98,11 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 		selection_size = selection_rectangle.size
 
 		var selection: Image = _project.selection_map
-		selection_tex.create_from_image(selection, 0)
+		selection_tex.create_from_image(selection) #,0
 
 		if !_type_is_shader():
-			image.lock()
-			cel.lock()
+			false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+			false # cel.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			for x in _project.size.x:
 				for y in _project.size.y:
 					var pos := Vector2(x, y)
@@ -110,13 +110,13 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 						image.set_pixelv(pos, Color(0, 0, 0, 0))
 					else:
 						cel.set_pixelv(pos, Color(0, 0, 0, 0))
-			image.unlock()
-			cel.unlock()
+			false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+			false # cel.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	match type_option_button.get_selected_id():
 		ROTXEL_SMEAR:
 			var params := {
 				"initial_angle": init_angle,
-				"ending_angle": rad2deg(angle),
+				"ending_angle": rad_to_deg(angle),
 				"tolerance": tolerance_slider.value,
 				"selection_tex": selection_tex,
 				"origin": pivot / cel.get_size(),
@@ -124,11 +124,11 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 			}
 			if !confirmed:
 				for param in params:
-					preview.material.set_shader_param(param, params[param])
+					preview.material.set_shader_parameter(param, params[param])
 			else:
 				var gen := ShaderImageEffect.new()
 				gen.generate_image(cel, rotxel_shader, params, _project.size)
-				yield(gen, "done")
+				await gen.done
 
 		CLEANEDGE:
 			var params := {
@@ -142,12 +142,12 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 			}
 			if !confirmed:
 				for param in params:
-					preview.material.set_shader_param(param, params[param])
+					preview.material.set_shader_parameter(param, params[param])
 			else:
 				params["preview"] = false
 				var gen := ShaderImageEffect.new()
 				gen.generate_image(cel, DrawingAlgos.clean_edge_shader, params, _project.size)
-				yield(gen, "done")
+				await gen.done
 		OMNISCALE:
 			var params := {
 				"angle": angle,
@@ -158,12 +158,12 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 			}
 			if !confirmed:
 				for param in params:
-					preview.material.set_shader_param(param, params[param])
+					preview.material.set_shader_parameter(param, params[param])
 			else:
 				params["preview"] = false
 				var gen := ShaderImageEffect.new()
 				gen.generate_image(cel, DrawingAlgos.omniscale_shader, params, _project.size)
-				yield(gen, "done")
+				await gen.done
 		NNS:
 			var params := {
 				"angle": angle,
@@ -173,11 +173,11 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 			}
 			if !confirmed:
 				for param in params:
-					preview.material.set_shader_param(param, params[param])
+					preview.material.set_shader_parameter(param, params[param])
 			else:
 				var gen := ShaderImageEffect.new()
 				gen.generate_image(cel, nn_shader, params, _project.size)
-				yield(gen, "done")
+				await gen.done
 		ROTXEL:
 			DrawingAlgos.rotxel(image, angle, pivot)
 		NN:
@@ -199,22 +199,22 @@ func _on_TypeOptionButton_item_selected(_id: int) -> void:
 	match type_option_button.get_selected_id():
 		ROTXEL_SMEAR:
 			var sm := ShaderMaterial.new()
-			sm.shader = rotxel_shader
+			sm.gdshader = rotxel_shader
 			preview.set_material(sm)
 			smear_options.visible = true
 		CLEANEDGE:
 			var sm := ShaderMaterial.new()
-			sm.shader = DrawingAlgos.clean_edge_shader
+			sm.gdshader = DrawingAlgos.clean_edge_shader
 			preview.set_material(sm)
 			smear_options.visible = false
 		OMNISCALE:
 			var sm := ShaderMaterial.new()
-			sm.shader = DrawingAlgos.omniscale_shader
+			sm.gdshader = DrawingAlgos.omniscale_shader
 			preview.set_material(sm)
 			smear_options.visible = false
 		NNS:
 			var sm := ShaderMaterial.new()
-			sm.shader = nn_shader
+			sm.gdshader = nn_shader
 			preview.set_material(sm)
 			smear_options.visible = false
 		_:
@@ -257,7 +257,7 @@ func _on_LiveCheckbox_toggled(button_pressed: bool) -> void:
 	wait_time_slider.editable = !live_preview
 	wait_time_slider.visible = !live_preview
 	if !button_pressed:
-		rect_size.y += 1  # Reset rect_size of dialog
+		size.y += 1  # Reset size of dialog
 
 
 func _on_quick_change_angle_pressed(angle_value: int) -> void:
@@ -288,7 +288,7 @@ func _on_Pivot_value_changed(value: Vector2) -> void:
 func _on_Indicator_draw() -> void:
 	var img_size := preview_image.get_size()
 	# find the scale using the larger measurement
-	var ratio := pivot_indicator.rect_size / img_size
+	var ratio := pivot_indicator.size / img_size
 	# we need to set the scale according to the larger side
 	var conversion_scale: float
 	if img_size.x > img_size.y:
@@ -296,13 +296,13 @@ func _on_Indicator_draw() -> void:
 	else:
 		conversion_scale = ratio.y
 	var pivot_position := pivot * conversion_scale
-	pivot_indicator.draw_arc(pivot_position, 2, 0, 360, 360, Color.yellow, 0.5)
-	pivot_indicator.draw_arc(pivot_position, 6, 0, 360, 360, Color.white, 0.5)
+	pivot_indicator.draw_arc(pivot_position, 2, 0, 360, 360, Color.YELLOW, 0.5)
+	pivot_indicator.draw_arc(pivot_position, 6, 0, 360, 360, Color.WHITE, 0.5)
 	pivot_indicator.draw_line(
-		pivot_position - Vector2.UP * 10, pivot_position - Vector2.DOWN * 10, Color.white, 0.5
+		pivot_position - Vector2.UP * 10, pivot_position - Vector2.DOWN * 10, Color.WHITE, 0.5
 	)
 	pivot_indicator.draw_line(
-		pivot_position - Vector2.RIGHT * 10, pivot_position - Vector2.LEFT * 10, Color.white, 0.5
+		pivot_position - Vector2.RIGHT * 10, pivot_position - Vector2.LEFT * 10, Color.WHITE, 0.5
 	)
 
 
@@ -313,8 +313,8 @@ func _on_Indicator_gui_input(event: InputEvent) -> void:
 		drag_pivot = false
 	if drag_pivot:
 		var img_size := preview_image.get_size()
-		var mouse_pos := get_local_mouse_position() - pivot_indicator.rect_position
-		var ratio := img_size / pivot_indicator.rect_size
+		var mouse_pos := get_local_mouse_position() - pivot_indicator.position
+		var ratio := img_size / pivot_indicator.size
 		# we need to set the scale according to the larger side
 		var conversion_scale: float
 		if img_size.x > img_size.y:

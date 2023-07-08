@@ -5,24 +5,24 @@ var palettes_path_id := {}
 var palettes_id_path := {}
 
 var edited_swatch_index := -1
-var edited_swatch_color := Color.transparent
+var edited_swatch_color := Color.TRANSPARENT
 
-onready var palette_select := $"%PaletteSelect"
-onready var palette_grid := $"%PaletteGrid"
-onready var palette_scroll := $"%PaletteScroll"
+@onready var palette_select := $"%PaletteSelect"
+@onready var palette_grid := $"%PaletteGrid"
+@onready var palette_scroll := $"%PaletteScroll"
 
-onready var add_color_button := $"%AddColor"
-onready var delete_color_button := $"%DeleteColor"
+@onready var add_color_button := $"%AddColor"
+@onready var delete_color_button := $"%DeleteColor"
 
-onready var edit_palette_dialog := $"%EditPaletteDialog"
-onready var create_palette_dialog := $"%CreatePaletteDialog"
+@onready var edit_palette_dialog := $"%EditPaletteDialog"
+@onready var create_palette_dialog := $"%CreatePaletteDialog"
 
 # Color picker button itself is hidden but its popup is used to edit color swatches
-onready var hidden_color_picker := $"%HiddenColorPickerButton"
+@onready var hidden_color_picker := $"%HiddenColorPickerButton"
 
 
 func _ready() -> void:
-	Tools.connect("color_changed", self, "_color_changed")
+	Tools.connect("color_changed", Callable(self, "_color_changed"))
 
 	setup_palettes_selector()
 	redraw_current_palette()
@@ -58,10 +58,10 @@ func select_palette(palette_path: String) -> void:
 		palette_scroll.resize_grid()
 		palette_scroll.set_sliders(Palettes.get_current_palette(), palette_grid.grid_window_origin)
 
-		var left_selected = Palettes.current_palette_get_selected_color_index(BUTTON_LEFT)
-		var right_selected = Palettes.current_palette_get_selected_color_index(BUTTON_RIGHT)
-		palette_grid.select_swatch(BUTTON_LEFT, left_selected, left_selected)
-		palette_grid.select_swatch(BUTTON_RIGHT, right_selected, right_selected)
+		var left_selected = Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_LEFT)
+		var right_selected = Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_RIGHT)
+		palette_grid.select_swatch(MOUSE_BUTTON_LEFT, left_selected, left_selected)
+		palette_grid.select_swatch(MOUSE_BUTTON_RIGHT, right_selected, right_selected)
 
 		toggle_add_delete_buttons()
 
@@ -114,7 +114,7 @@ func _on_AddColor_gui_input(event: InputEvent) -> void:
 		if (
 			event is InputEventMouseButton
 			and event.pressed
-			and (event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT)
+			and (event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT)
 		):
 			# Gets the grid index that corresponds to the top left of current grid window
 			# Color will be added at the start of the currently scrolled part of palette
@@ -166,14 +166,14 @@ func _on_PaletteGrid_swatch_double_clicked(_mb: int, index: int, click_position:
 
 	# Open color picker popup with its right bottom corner next to swatch
 	var popup = hidden_color_picker.get_popup()
-	popup.rect_position = click_position - popup.rect_size
+	popup.position = click_position - popup.size
 	popup.popup()
 
 
 func _on_PaletteGrid_swatch_dropped(source_index: int, target_index: int) -> void:
 	if Input.is_key_pressed(KEY_SHIFT):
 		Palettes.current_palette_insert_color(source_index, target_index)
-	elif Input.is_key_pressed(KEY_CONTROL):
+	elif Input.is_key_pressed(KEY_CTRL):
 		Palettes.current_palette_copy_colors(source_index, target_index)
 	else:
 		Palettes.current_palette_swap_colors(source_index, target_index)
@@ -193,10 +193,10 @@ func _on_ColorPicker_color_changed(color: Color) -> void:
 		edited_swatch_color = color
 		palette_grid.set_swatch_color(edited_swatch_index, color)
 
-		if edited_swatch_index == Palettes.current_palette_get_selected_color_index(BUTTON_LEFT):
-			Tools.assign_color(color, BUTTON_LEFT)
-		if edited_swatch_index == Palettes.current_palette_get_selected_color_index(BUTTON_RIGHT):
-			Tools.assign_color(color, BUTTON_RIGHT)
+		if edited_swatch_index == Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_LEFT):
+			Tools.assign_color(color, MOUSE_BUTTON_LEFT)
+		if edited_swatch_index == Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_RIGHT):
+			Tools.assign_color(color, MOUSE_BUTTON_RIGHT)
 
 
 func _on_HiddenColorPickerButton_popup_closed():
@@ -215,10 +215,10 @@ func _color_changed(_color: Color, button: int) -> void:
 		# Unselect swatches when tools color is changed
 		var swatch_to_unselect = -1
 
-		if button == BUTTON_LEFT:
+		if button == MOUSE_BUTTON_LEFT:
 			swatch_to_unselect = Palettes.left_selected_color
 			Palettes.left_selected_color = -1
-		elif button == BUTTON_RIGHT:
+		elif button == MOUSE_BUTTON_RIGHT:
 			swatch_to_unselect = Palettes.right_selected_color
 			Palettes.right_selected_color = -1
 

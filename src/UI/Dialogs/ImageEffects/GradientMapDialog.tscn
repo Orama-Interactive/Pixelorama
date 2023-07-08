@@ -9,32 +9,32 @@ window_title = "Gradient Map"
 script = ExtResource( 3 )
 
 [node name="VBoxContainer" parent="." index="3"]
-margin_bottom = 342.0
+offset_bottom = 342.0
 
 [node name="ShowAnimate" parent="VBoxContainer" index="0"]
 visible = false
 
 [node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
-margin_bottom = 224.0
+offset_bottom = 224.0
 
 [node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-margin_left = 80.0
-margin_right = 280.0
-margin_bottom = 200.0
+offset_left = 80.0
+offset_right = 280.0
+offset_bottom = 200.0
 
 [node name="GradientEdit" parent="VBoxContainer" index="2" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 228.0
-margin_right = 360.0
-margin_bottom = 306.0
+offset_top = 228.0
+offset_right = 360.0
+offset_bottom = 306.0
 
 [node name="OptionsContainer" parent="VBoxContainer" index="3"]
-margin_top = 310.0
-margin_bottom = 334.0
+offset_top = 310.0
+offset_bottom = 334.0
 
 [node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 
 [node name="AnimateDialog" parent="." index="4"]
-margin_bottom = 342.0
+offset_bottom = 342.0

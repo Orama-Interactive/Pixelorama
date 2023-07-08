@@ -7,11 +7,11 @@ enum Cameras { MAIN, SECOND, SMALL }
 
 const CAMERA_SPEED_RATE := 15.0
 
-export(Cameras) var index := 0
+@export var index := 0
 
 var zoom_min := Vector2(0.005, 0.005)
 var zoom_max := Vector2.ONE
-var viewport_container: ViewportContainer
+var viewport_container: SubViewportContainer
 var transparent_checker: ColorRect
 var mouse_pos := Vector2.ZERO
 var drag := false
@@ -24,13 +24,13 @@ func _ready() -> void:
 	set_process_input(false)
 	if index == Cameras.MAIN:
 		rotation_slider = Global.top_menu_container.get_node("%RotationSlider")
-		rotation_slider.connect("value_changed", self, "_rotation_value_changed")
+		rotation_slider.connect("value_changed", Callable(self, "_rotation_value_changed"))
 		zoom_slider = Global.top_menu_container.get_node("%ZoomSlider")
-		zoom_slider.connect("value_changed", self, "_zoom_value_changed")
+		zoom_slider.connect("value_changed", Callable(self, "_zoom_value_changed"))
 		set_zoom_max_value()
-	connect("zoom_changed", self, "_zoom_changed")
-	connect("rotation_changed", self, "_rotation_changed")
-	rotating = true
+	connect("zoom_changed", Callable(self, "_zoom_changed"))
+	connect("rotation_changed", Callable(self, "_rotation_changed"))
+	ignore_rotation =true # reversed "rotating" for Camera2D
 	viewport_container = get_parent().get_parent()
 	transparent_checker = get_parent().get_node("TransparentChecker")
 	update_transparent_checker_offset()
@@ -45,7 +45,7 @@ func _rotation_value_changed(value: float) -> void:
 	var degrees := -value
 	var difference := degrees - rotation_degrees
 	var canvas_center: Vector2 = Global.current_project.size / 2
-	offset = (offset - canvas_center).rotated(deg2rad(difference)) + canvas_center
+	offset = (offset - canvas_center).rotated(deg_to_rad(difference)) + canvas_center
 	rotation_degrees = wrapf(degrees, -180, 180)
 	emit_signal("rotation_changed")
 
@@ -59,7 +59,7 @@ func _zoom_value_changed(value: float) -> void:
 		return
 	if Global.smooth_zoom and should_tween:
 		var tween := create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
-		tween.connect("step_finished", self, "_on_tween_step")
+		tween.connect("step_finished", Callable(self, "_on_tween_step"))
 		tween.tween_property(self, "zoom", new_zoom, 0.05)
 	else:
 		zoom = new_zoom
@@ -118,7 +118,7 @@ func _has_selection_tool() -> bool:
 
 # Rotate Camera
 func _rotate_camera_around_point(degrees: float, point: Vector2) -> void:
-	offset = (offset - point).rotated(deg2rad(degrees)) + point
+	offset = (offset - point).rotated(deg_to_rad(degrees)) + point
 	rotation_degrees = wrapf(rotation_degrees + degrees, -180, 180)
 	emit_signal("rotation_changed")
 
@@ -133,7 +133,7 @@ func _rotation_changed() -> void:
 
 # Zoom Camera
 func zoom_camera(dir: int) -> void:
-	var viewport_size := viewport_container.rect_size
+	var viewport_size := viewport_container.size
 	if Global.smooth_zoom:
 		var zoom_margin := zoom * dir / 5
 		var new_zoom := zoom + zoom_margin
@@ -148,7 +148,7 @@ func zoom_camera(dir: int) -> void:
 			)
 			var tween := create_tween().set_parallel()
 			tween.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
-			tween.connect("step_finished", self, "_on_tween_step")
+			tween.connect("step_finished", Callable(self, "_on_tween_step"))
 			tween.tween_property(self, "zoom", new_zoom, 0.05)
 			tween.tween_property(self, "offset", new_offset, 0.05)
 	else:
@@ -215,20 +215,20 @@ func fit_to_frame(size: Vector2) -> void:
 		size.y = max(abs(a.y - d.y), abs(b.y - c.y))
 
 	viewport_container = get_parent().get_parent()
-	var h_ratio := viewport_container.rect_size.x / size.x
-	var v_ratio := viewport_container.rect_size.y / size.y
+	var h_ratio := viewport_container.size.x / size.x
+	var v_ratio := viewport_container.size.y / size.y
 	var ratio := min(h_ratio, v_ratio)
 	if ratio == 0 or !viewport_container.visible:
 		ratio = 0.1  # Set it to a non-zero value just in case
 		# If the ratio is 0, it means that the viewport container is hidden
 		# in that case, use the other viewport to get the ratio
 		if index == Cameras.MAIN:
-			h_ratio = Global.second_viewport.rect_size.x / size.x
-			v_ratio = Global.second_viewport.rect_size.y / size.y
+			h_ratio = Global.second_viewport.size.x / size.x
+			v_ratio = Global.second_viewport.size.y / size.y
 			ratio = min(h_ratio, v_ratio)
 		elif index == Cameras.SECOND:
-			h_ratio = Global.main_viewport.rect_size.x / size.x
-			v_ratio = Global.main_viewport.rect_size.y / size.y
+			h_ratio = Global.main_viewport.size.x / size.x
+			v_ratio = Global.main_viewport.size.y / size.y
 			ratio = min(h_ratio, v_ratio)
 
 	ratio = clamp(ratio, 0.1, ratio)

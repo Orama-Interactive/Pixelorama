@@ -26,34 +26,34 @@ anti_aliasing = false
 script = ExtResource( 2 )
 
 [node name="Brush" type="HBoxContainer" parent="." index="2"]
-margin_top = 26.0
-margin_right = 116.0
-margin_bottom = 58.0
+offset_top = 26.0
+offset_right = 116.0
+offset_bottom = 58.0
 alignment = 1
 
 [node name="Type" type="Button" parent="Brush" index="0"]
-margin_right = 32.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-hint_tooltip = "Select a brush"
+offset_right = 32.0
+offset_bottom = 32.0
+custom_minimum_size = Vector2( 32, 32 )
+tooltip_text = "Select a brush"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 1 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/disabled = SubResource( 2 )
-custom_styles/normal = SubResource( 1 )
+theme_override_styles/hover = SubResource( 1 )
+theme_override_styles/pressed = SubResource( 1 )
+theme_override_styles/focus = SubResource( 2 )
+theme_override_styles/disabled = SubResource( 2 )
+theme_override_styles/normal = SubResource( 1 )
 
-[node name="Texture" type="TextureRect" parent="Brush/Type" index="0"]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="Texture2D" type="TextureRect" parent="Brush/Type" index="0"]
+offset_right = 32.0
+offset_bottom = 32.0
 expand = true
 stretch_mode = 6
 
 [node name="BrushSize" parent="Brush" index="1" instance=ExtResource( 3 )]
-margin_left = 36.0
-margin_right = 116.0
-margin_bottom = 32.0
+offset_left = 36.0
+offset_right = 116.0
+offset_bottom = 32.0
 min_value = 1.0
 max_value = 25.0
 value = 1.0
@@ -63,28 +63,28 @@ suffix = "px"
 is_global = true
 
 [node name="PositionLabel" parent="." index="3"]
-margin_top = 62.0
-margin_bottom = 76.0
+offset_top = 62.0
+offset_bottom = 76.0
 
 [node name="XSpinBox" parent="." index="4"]
-margin_top = 80.0
-margin_bottom = 104.0
+offset_top = 80.0
+offset_bottom = 104.0
 
 [node name="YSpinBox" parent="." index="5"]
-margin_top = 108.0
-margin_bottom = 132.0
+offset_top = 108.0
+offset_bottom = 132.0
 
 [node name="SizeLabel" parent="." index="6"]
-margin_top = 136.0
-margin_bottom = 150.0
+offset_top = 136.0
+offset_bottom = 150.0
 
 [node name="WSpinBox" parent="." index="7"]
-margin_top = 154.0
-margin_bottom = 178.0
+offset_top = 154.0
+offset_bottom = 178.0
 
 [node name="HSpinBox" parent="." index="8"]
-margin_top = 182.0
-margin_bottom = 206.0
+offset_top = 182.0
+offset_bottom = 206.0
 
 [connection signal="pressed" from="Brush/Type" to="." method="_on_BrushType_pressed"]
 [connection signal="value_changed" from="Brush/BrushSize" to="." method="_on_BrushSize_value_changed"]

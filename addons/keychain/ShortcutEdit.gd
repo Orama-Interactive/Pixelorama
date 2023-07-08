@@ -66,29 +66,29 @@ const JOY_AXIS_NAMES := [
 var currently_editing_tree_item: TreeItem
 var is_editing := false
 # Textures taken from Godot https://github.com/godotengine/godot/tree/master/editor/icons
-var add_tex: Texture = preload("assets/add.svg")
-var edit_tex: Texture = preload("assets/edit.svg")
-var delete_tex: Texture = preload("assets/close.svg")
-var joy_axis_tex: Texture = preload("assets/joy_axis.svg")
-var joy_button_tex: Texture = preload("assets/joy_button.svg")
-var key_tex: Texture = preload("assets/keyboard.svg")
-var key_phys_tex: Texture = preload("assets/keyboard_physical.svg")
-var mouse_tex: Texture = preload("assets/mouse.svg")
-var shortcut_tex: Texture = preload("assets/shortcut.svg")
-var folder_tex: Texture = preload("assets/folder.svg")
+var add_tex: Texture2D = preload("assets/add.svg")
+var edit_tex: Texture2D = preload("assets/edit.svg")
+var delete_tex: Texture2D = preload("assets/close.svg")
+var joy_axis_tex: Texture2D = preload("assets/joy_axis.svg")
+var joy_button_tex: Texture2D = preload("assets/joy_button.svg")
+var key_tex: Texture2D = preload("assets/keyboard.svg")
+var key_phys_tex: Texture2D = preload("assets/keyboard_physical.svg")
+var mouse_tex: Texture2D = preload("assets/mouse.svg")
+var shortcut_tex: Texture2D = preload("assets/shortcut.svg")
+var folder_tex: Texture2D = preload("assets/folder.svg")
 
-onready var tree: Tree = $VBoxContainer/ShortcutTree
-onready var profile_option_button: OptionButton = find_node("ProfileOptionButton")
-onready var rename_profile_button: Button = find_node("RenameProfile")
-onready var delete_profile_button: Button = find_node("DeleteProfile")
-onready var shortcut_type_menu: PopupMenu = $ShortcutTypeMenu
-onready var keyboard_shortcut_selector: ConfirmationDialog = $KeyboardShortcutSelectorDialog
-onready var mouse_shortcut_selector: ConfirmationDialog = $MouseShortcutSelectorDialog
-onready var joy_key_shortcut_selector: ConfirmationDialog = $JoyKeyShortcutSelectorDialog
-onready var joy_axis_shortcut_selector: ConfirmationDialog = $JoyAxisShortcutSelectorDialog
-onready var profile_settings: ConfirmationDialog = $ProfileSettings
-onready var profile_name: LineEdit = $ProfileSettings/ProfileName
-onready var delete_confirmation: ConfirmationDialog = $DeleteConfirmation
+@onready var tree: Tree = $VBoxContainer/ShortcutTree
+@onready var profile_option_button: OptionButton = find_child("ProfileOptionButton")
+@onready var rename_profile_button: Button = find_child("RenameProfile")
+@onready var delete_profile_button: Button = find_child("DeleteProfile")
+@onready var shortcut_type_menu: PopupMenu = $ShortcutTypeMenu
+@onready var keyboard_shortcut_selector: ConfirmationDialog = $KeyboardShortcutSelectorDialog
+@onready var mouse_shortcut_selector: ConfirmationDialog = $MouseShortcutSelectorDialog
+@onready var joy_key_shortcut_selector: ConfirmationDialog = $JoyKeyShortcutSelectorDialog
+@onready var joy_axis_shortcut_selector: ConfirmationDialog = $JoyAxisShortcutSelectorDialog
+@onready var profile_settings: ConfirmationDialog = $ProfileSettings
+@onready var profile_name: LineEdit = $ProfileSettings/ProfileName
+@onready var delete_confirmation: ConfirmationDialog = $DeleteConfirmation
 
 
 func _ready() -> void:
@@ -142,7 +142,7 @@ func _construct_tree() -> void:
 		tree_item.set_text(0, display_name)
 		tree_item.set_metadata(0, action)
 		tree_item.set_icon(0, shortcut_tex)
-		for event in InputMap.get_action_list(action):
+		for event in InputMap.action_get_events(action):
 			add_event_tree_item(event, tree_item)
 
 		tree_item.add_button(0, add_tex, 0, buttons_disabled, "Add")
@@ -200,7 +200,7 @@ func get_action_name(action: String) -> String:
 	if action in Keychain.actions:
 		display_name = Keychain.actions[action].display_name
 
-	if display_name.empty():
+	if display_name.is_empty():
 		display_name = _humanize_snake_case(action)
 	return display_name
 
@@ -236,8 +236,8 @@ func add_event_tree_item(event: InputEvent, action_tree_item: TreeItem) -> void:
 	event_tree_item.set_metadata(0, event)
 	match event_class:
 		"InputEventKey":
-			var scancode: int = event.get_scancode_with_modifiers()
-			if scancode > 0:
+			var keycode: int = event.get_keycode_with_modifiers()
+			if keycode > 0:
 				event_tree_item.set_icon(0, key_tex)
 			else:
 				event_tree_item.set_icon(0, key_phys_tex)
@@ -254,12 +254,12 @@ func add_event_tree_item(event: InputEvent, action_tree_item: TreeItem) -> void:
 func event_to_str(event: InputEvent) -> String:
 	var output := ""
 	if event is InputEventKey:
-		var scancode: int = event.get_scancode_with_modifiers()
+		var keycode: int = event.get_keycode_with_modifiers()
 		var physical_str := ""
-		if scancode == 0:
-			scancode = event.get_physical_scancode_with_modifiers()
+		if keycode == 0:
+			keycode = event.get_physical_keycode_with_modifiers()
 			physical_str = " " + tr("(Physical)")
-		output = OS.get_scancode_string(scancode) + physical_str
+		output = OS.get_keycode_string(keycode) + physical_str
 
 	elif event is InputEventMouseButton:
 		output = tr(MOUSE_BUTTON_NAMES[event.button_index - 1])
@@ -289,7 +289,7 @@ func _on_ShortcutTree_button_pressed(item: TreeItem, _column: int, id: int) -> v
 			var rect: Rect2 = tree.get_item_area_rect(item, 0)
 			rect.position.x = rect.end.x - 42
 			rect.position.y += 42 - tree.get_scroll().y
-			rect.position += rect_global_position
+			rect.position += global_position
 			rect.size = Vector2(110, 23 * shortcut_type_menu.get_item_count())
 			shortcut_type_menu.popup(rect)
 		elif id == 1:  # Delete
@@ -397,7 +397,7 @@ func _on_ProfileSettings_confirmed() -> void:
 
 
 func _delete_profile_file(file_name: String) -> void:
-	var dir := Directory.new()
+	var dir := DirAccess.new()
 	dir.remove(file_name)
 
 

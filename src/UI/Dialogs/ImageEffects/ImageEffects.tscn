@@ -19,15 +19,15 @@
 mouse_filter = 2
 
 [node name="OffsetImage" parent="." instance=ExtResource( 7 )]
-margin_right = 376.0
-margin_bottom = 370.0
+offset_right = 376.0
+offset_bottom = 370.0
 
 [node name="ScaleImage" parent="." instance=ExtResource( 14 )]
-margin_bottom = 127.0
+offset_bottom = 127.0
 
 [node name="ResizeCanvas" parent="." instance=ExtResource( 8 )]
-margin_right = 216.0
-margin_bottom = 392.0
+offset_right = 216.0
+offset_bottom = 392.0
 
 [node name="RotateImage" parent="." instance=ExtResource( 9 )]
 
@@ -38,15 +38,15 @@ margin_bottom = 392.0
 [node name="DesaturateDialog" parent="." instance=ExtResource( 3 )]
 
 [node name="OutlineDialog" parent="." instance=ExtResource( 13 )]
-margin_right = 217.0
-margin_bottom = 106.0
+offset_right = 217.0
+offset_bottom = 106.0
 
 [node name="DropShadowDialog" parent="." instance=ExtResource( 4 )]
 
 [node name="HSVDialog" parent="." instance=ExtResource( 11 )]
 
 [node name="GradientDialog" parent="." instance=ExtResource( 12 )]
-margin_bottom = 214.0
+offset_bottom = 214.0
 
 [node name="GradientMapDialog" parent="." instance=ExtResource( 5 )]
 

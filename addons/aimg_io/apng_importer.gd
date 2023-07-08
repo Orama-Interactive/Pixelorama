@@ -1,6 +1,6 @@
-tool
+@tool
 class_name AImgIOAPNGImporter
-extends Reference
+extends RefCounted
 # Will NOT import regular, unanimated PNGs - use Image.load_png_from_buffer
 # This is because we don't want to import the default image as a frame
 # Therefore it just uses the rule:
@@ -10,7 +10,7 @@ extends Reference
 # Imports an APNG PoolByteArray into an animation as an Array of frames.
 # Returns [error, frames] similar to some read functions.
 # However, error is a string.
-static func load_from_buffer(buffer: PoolByteArray) -> Array:
+static func load_from_buffer(buffer: PackedByteArray) -> Array:
 	var stream := AImgIOAPNGStream.new(buffer)
 	var magic_str = stream.read_magic()
 	if magic_str != null:
@@ -35,9 +35,9 @@ static func load_from_buffer(buffer: PoolByteArray) -> Array:
 	# So to convert an APNG frame to a PNG for reading, we need to stitch:
 	# IHDR (modified), PLTE (if present), tRNS (if present), IDAT (from fdAT),
 	#  and IEND (generated).
-	var ihdr := PoolByteArray()
-	var plte := PoolByteArray()
-	var trns := PoolByteArray()
+	var ihdr := PackedByteArray()
+	var plte := PackedByteArray()
+	var trns := PackedByteArray()
 	# stored full width/height for buffer
 	var width := 0
 	var height := 0
@@ -146,7 +146,7 @@ static func load_from_file(path: String) -> Array:
 	var o := File.new()
 	if o.open(path, File.READ) != OK:
 		return [null, "Unable to open file: " + path]
-	var l = o.get_len()
+	var l = o.get_length()
 	var data = o.get_buffer(l)
 	o.close()
 	return load_from_buffer(data)
@@ -154,7 +154,7 @@ static func load_from_file(path: String) -> Array:
 
 # Intermediate frame structure
 class BFrame:
-	extends Reference
+	extends RefCounted
 	var dispose_op: int
 	var blend_op: int
 	var x: int
@@ -162,9 +162,9 @@ class BFrame:
 	var w: int
 	var h: int
 	var duration: float
-	var data: PoolByteArray
+	var data: PackedByteArray
 
-	func setup(fctl: PoolByteArray):
+	func setup(fctl: PackedByteArray):
 		if len(fctl) < 26:
 			return ""
 		var sp := StreamPeerBuffer.new()
@@ -191,8 +191,8 @@ class BFrame:
 	# This can be loaded by Godot directly.
 	# This basically skips most of the APNG decoding process.
 	func intermediary(
-		ihdr: PoolByteArray, plte: PoolByteArray, trns: PoolByteArray
-	) -> PoolByteArray:
+		ihdr: PackedByteArray, plte: PackedByteArray, trns: PackedByteArray
+	) -> PackedByteArray:
 		# Might be important to note this operates on a copy of ihdr (by-value).
 		var sp := StreamPeerBuffer.new()
 		sp.data_array = ihdr
@@ -207,8 +207,8 @@ class BFrame:
 		if len(trns) > 0:
 			intermed.write_chunk("tRNS", trns)
 		intermed.write_chunk("IDAT", data)
-		intermed.write_chunk("IEND", PoolByteArray())
+		intermed.write_chunk("IEND", PackedByteArray())
 		return intermed.finish()
 
-	func add_data(d: PoolByteArray):
+	func add_data(d: PackedByteArray):
 		data.append_array(d)

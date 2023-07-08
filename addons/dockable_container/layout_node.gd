@@ -1,4 +1,4 @@
-tool
+@tool
 extends Resource
 # Base class for Layout tree nodes
 
@@ -21,10 +21,10 @@ func clone():
 
 
 # Returns whether there are any nodes
-func empty() -> bool:
+func is_empty() -> bool:
 	return true
 
 
 # Returns all tab names in this node
-func get_names() -> PoolStringArray:
-	return PoolStringArray()
+func get_names() -> PackedStringArray:
+	return PackedStringArray()

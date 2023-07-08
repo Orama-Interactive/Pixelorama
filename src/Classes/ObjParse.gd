@@ -77,7 +77,7 @@ static func search_mtl_path(obj_path: String) -> String:
 	var mtl_path := obj_path.get_base_dir().plus_file(
 		obj_path.get_file().rsplit(".", false, 1)[0] + ".mtl"
 	)
-	var dir: Directory = Directory.new()
+	var dir: DirAccess = DirAccess.new()
 	if !dir.file_exists(mtl_path):
 		mtl_path = obj_path.get_base_dir().plus_file(obj_path.get_file() + ".mtl")
 	if !dir.file_exists(mtl_path):
@@ -90,7 +90,7 @@ static func search_mtl_path(obj_path: String) -> String:
 
 static func _create_mtl(obj: String, textures: Dictionary) -> Dictionary:
 	var mats := {}
-	var current_mat: SpatialMaterial = null
+	var current_mat: StandardMaterial3D = null
 
 	var lines := obj.split("\n", false)
 	for line in lines:
@@ -104,7 +104,7 @@ static func _create_mtl(obj: String, textures: Dictionary) -> Dictionary:
 				# Create a new material
 				if DEBUG:
 					print("Adding new material " + parts[1])
-				current_mat = SpatialMaterial.new()
+				current_mat = StandardMaterial3D.new()
 				mats[parts[1]] = current_mat
 			"Ka":
 				# Ambient color
@@ -138,7 +138,7 @@ static func _get_image(mtl_filepath: String, tex_filename: String) -> Image:
 	return img
 
 
-static func _create_texture(data: PoolByteArray) -> ImageTexture:
+static func _create_texture(data: PackedByteArray) -> ImageTexture:
 	var img: Image = Image.new()
 	var tex: ImageTexture = ImageTexture.new()
 	img.load_png_from_buffer(data)
@@ -149,9 +149,9 @@ static func _create_texture(data: PoolByteArray) -> ImageTexture:
 static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 	# Setup
 	var mesh := ArrayMesh.new()
-	var vertices := PoolVector3Array()
-	var normals := PoolVector3Array()
-	var uvs := PoolVector2Array()
+	var vertices := PackedVector3Array()
+	var normals := PackedVector3Array()
+	var uvs := PackedVector2Array()
 	var faces := {}
 
 	var mat_name := "default"
@@ -256,25 +256,25 @@ static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 		var st = SurfaceTool.new()
 		st.begin(Mesh.PRIMITIVE_TRIANGLES)
 		if !mats.has(matgroup):
-			mats[matgroup] = SpatialMaterial.new()
+			mats[matgroup] = StandardMaterial3D.new()
 		st.set_material(mats[matgroup])
 		for face in faces[matgroup]:
 			if face["v"].size() == 3:
 				# Vertices
-				var fan_v = PoolVector3Array()
+				var fan_v = PackedVector3Array()
 				fan_v.append(vertices[face["v"][0]])
 				fan_v.append(vertices[face["v"][2]])
 				fan_v.append(vertices[face["v"][1]])
 
 				# Normals
-				var fan_vn = PoolVector3Array()
+				var fan_vn = PackedVector3Array()
 				if face["vn"].size() > 0:
 					fan_vn.append(normals[face["vn"][0]])
 					fan_vn.append(normals[face["vn"][2]])
 					fan_vn.append(normals[face["vn"][1]])
 
 				# Textures
-				var fan_vt = PoolVector2Array()
+				var fan_vt = PackedVector2Array()
 				if face["vt"].size() > 0:
 					for k in [0, 2, 1]:
 						var f = face["vt"][k]
@@ -282,7 +282,7 @@ static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 							var uv = uvs[f]
 							fan_vt.append(uv)
 
-				st.add_triangle_fan(fan_v, fan_vt, PoolColorArray(), PoolVector2Array(), fan_vn, [])
+				st.add_triangle_fan(fan_v, fan_vt, PackedColorArray(), PackedVector2Array(), fan_vn, [])
 		mesh = st.commit(mesh)
 	for k in mesh.get_surface_count():
 		var mat = mesh.surface_get_material(k)

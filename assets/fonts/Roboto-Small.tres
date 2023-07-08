@@ -1,7 +1,7 @@
-[gd_resource type="DynamicFont" load_steps=3 format=2]
+[gd_resource type="FontFile" load_steps=3 format=2]
 
-[ext_resource path="res://assets/fonts/Roboto-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/fonts/DroidSansFallback.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/fonts/Roboto-Regular.ttf" type="FontFile" id=1]
+[ext_resource path="res://assets/fonts/DroidSansFallback.ttf" type="FontFile" id=2]
 
 [resource]
 size = 10

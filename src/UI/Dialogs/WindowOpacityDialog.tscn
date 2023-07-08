@@ -4,9 +4,9 @@
 [ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=2]
 
 [node name="WindowOpacityDialog" type="AcceptDialog"]
-margin_right = 204.0
-margin_bottom = 68.0
-rect_min_size = Vector2( 240, 0 )
+offset_right = 204.0
+offset_bottom = 68.0
+custom_minimum_size = Vector2( 240, 0 )
 window_title = "Window Opacity"
 resizable = true
 script = ExtResource( 1 )
@@ -17,23 +17,23 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -36.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -36.0
 
 [node name="ValueSlider" parent="VBoxContainer" instance=ExtResource( 2 )]
-margin_right = 327.0
-margin_bottom = 24.0
+offset_right = 327.0
+offset_bottom = 24.0
 value = 100.0
 
 [node name="FullscreenWarning" type="Label" parent="VBoxContainer"]
-margin_top = 28.0
-margin_right = 327.0
-margin_bottom = 42.0
-custom_colors/font_color = Color( 1, 0.364706, 0.364706, 1 )
+offset_top = 28.0
+offset_right = 327.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color( 1, 0.364706, 0.364706, 1 )
 text = "Window opacity does not work on fullscreen mode."
 
-[connection signal="about_to_show" from="." to="." method="_on_WindowOpacityDialog_about_to_show"]
+[connection signal="about_to_popup" from="." to="." method="_on_WindowOpacityDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_WindowOpacityDialog_popup_hide"]
 [connection signal="value_changed" from="VBoxContainer/ValueSlider" to="." method="set_window_opacity"]

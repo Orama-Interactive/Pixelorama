@@ -46,14 +46,14 @@ var templates := [
 	Template.new(Vector2(256, 192), "ZX Spectrum"),
 ]
 
-onready var recent_templates_list = find_node("RecentTemplates")
-onready var templates_options = find_node("TemplatesOptions")
-onready var ratio_box = find_node("AspectRatioButton")
-onready var width_value = find_node("WidthValue")
-onready var height_value = find_node("HeightValue")
-onready var portrait_button = find_node("PortraitButton")
-onready var landscape_button = find_node("LandscapeButton")
-onready var fill_color_node = find_node("FillColor")
+@onready var recent_templates_list = find_child("RecentTemplates")
+@onready var templates_options = find_child("TemplatesOptions")
+@onready var ratio_box = find_child("AspectRatioButton")
+@onready var width_value = find_child("WidthValue")
+@onready var height_value = find_child("HeightValue")
+@onready var portrait_button = find_child("PortraitButton")
+@onready var landscape_button = find_child("LandscapeButton")
+@onready var fill_color_node = find_child("FillColor")
 
 
 class Template:
@@ -153,20 +153,20 @@ func _on_SizeValue_value_changed(value: float) -> void:
 
 
 func toggle_size_buttons() -> void:
-	portrait_button.disconnect("toggled", self, "_on_PortraitButton_toggled")
-	landscape_button.disconnect("toggled", self, "_on_LandscapeButton_toggled")
-	portrait_button.pressed = width_value.value < height_value.value
-	landscape_button.pressed = width_value.value > height_value.value
+	portrait_button.disconnect("toggled", Callable(self, "_on_PortraitButton_toggled"))
+	landscape_button.disconnect("toggled", Callable(self, "_on_LandscapeButton_toggled"))
+	portrait_button.button_pressed = width_value.value < height_value.value
+	landscape_button.button_pressed = width_value.value > height_value.value
 
-	portrait_button.connect("toggled", self, "_on_PortraitButton_toggled")
-	landscape_button.connect("toggled", self, "_on_LandscapeButton_toggled")
+	portrait_button.connect("toggled", Callable(self, "_on_PortraitButton_toggled"))
+	landscape_button.connect("toggled", Callable(self, "_on_LandscapeButton_toggled"))
 
 
 func _on_TemplatesOptions_item_selected(id: int) -> void:
 	#if a template is chosen while "ratio button" is pressed then temporarily release it
 	var temporary_release = false
 	if ratio_box.pressed:
-		ratio_box.pressed = false
+		ratio_box.button_pressed = false
 		temporary_release = true
 
 	if id > 0:
@@ -177,21 +177,21 @@ func _on_TemplatesOptions_item_selected(id: int) -> void:
 		height_value.value = Global.default_height
 
 	if temporary_release:
-		ratio_box.pressed = true
+		ratio_box.button_pressed = true
 
 
 func _on_RecentTemplates_item_selected(id):
 	#if a template is chosen while "ratio button" is pressed then temporarily release it
 	var temporary_release = false
 	if ratio_box.pressed:
-		ratio_box.pressed = false
+		ratio_box.button_pressed = false
 		temporary_release = true
 
 	width_value.value = recent_sizes[id].x
 	height_value.value = recent_sizes[id].y
 
 	if temporary_release:
-		ratio_box.pressed = true
+		ratio_box.button_pressed = true
 
 
 func _on_PortraitButton_toggled(button_pressed: bool) -> void:
@@ -209,13 +209,13 @@ func _on_LandscapeButton_toggled(button_pressed: bool) -> void:
 
 
 func switch_width_height() -> void:
-	width_value.disconnect("value_changed", self, "_on_SizeValue_value_changed")
-	height_value.disconnect("value_changed", self, "_on_SizeValue_value_changed")
+	width_value.disconnect("value_changed", Callable(self, "_on_SizeValue_value_changed"))
+	height_value.disconnect("value_changed", Callable(self, "_on_SizeValue_value_changed"))
 
 	var height = height_value.value
 	height_value.value = width_value.value
 	width_value.value = height
 	toggle_size_buttons()
 
-	width_value.connect("value_changed", self, "_on_SizeValue_value_changed")
-	height_value.connect("value_changed", self, "_on_SizeValue_value_changed")
+	width_value.connect("value_changed", Callable(self, "_on_SizeValue_value_changed"))
+	height_value.connect("value_changed", Callable(self, "_on_SizeValue_value_changed"))

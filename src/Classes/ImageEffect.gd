@@ -21,26 +21,26 @@ var _preview_idx := 0  # the current frame, being previewed
 
 func _ready() -> void:
 	set_nodes()
-	get_ok().size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	get_cancel().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	get_cancel_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	current_frame.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
 	selected_cels.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
-	connect("about_to_show", self, "_about_to_show")
-	connect("popup_hide", self, "_popup_hide")
-	connect("confirmed", self, "_confirmed")
+	connect("about_to_popup", Callable(self, "_about_to_popup"))
+	connect("popup_hide", Callable(self, "_popup_hide"))
+	connect("confirmed", Callable(self, "_confirmed"))
 	if selection_checkbox:
-		selection_checkbox.connect("toggled", self, "_on_SelectionCheckBox_toggled")
+		selection_checkbox.connect("toggled", Callable(self, "_on_SelectionCheckBox_toggled"))
 	if affect_option_button:
-		affect_option_button.connect("item_selected", self, "_on_AffectOptionButton_item_selected")
+		affect_option_button.connect("item_selected", Callable(self, "_on_AffectOptionButton_item_selected"))
 	if animate_panel:
-		$"%ShowAnimate".connect("pressed", self, "display_animate_dialog")
+		$"%ShowAnimate".connect("pressed", Callable(self, "display_animate_dialog"))
 
 
-func _about_to_show() -> void:
+func _about_to_popup() -> void:
 	confirmed = false
 	Global.canvas.selection.transform_content_confirm()
 	prepare_animator(Global.current_project)
@@ -146,8 +146,8 @@ func set_nodes() -> void:
 
 func display_animate_dialog():
 	var animate_dialog: Popup = animate_panel.get_parent()
-	var pos = Vector2(rect_global_position.x + rect_size.x, rect_global_position.y)
-	var animate_dialog_rect := Rect2(pos, Vector2(animate_dialog.rect_size.x, rect_size.y))
+	var pos = Vector2(global_position.x + size.x, global_position.y)
+	var animate_dialog_rect := Rect2(pos, Vector2(animate_dialog.size.x, size.y))
 	animate_dialog.popup(animate_dialog_rect)
 	animate_panel.re_calibrate_preview_slider()
 
@@ -169,7 +169,7 @@ func _get_undo_data(project: Project) -> Dictionary:
 	var data := {}
 	var images := _get_selected_draw_images(project)
 	for image in images:
-		image.unlock()
+		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		data[image] = image.data
 	return data
 
@@ -221,16 +221,16 @@ func update_preview() -> void:
 			preview_image.copy_from(current_frame)
 	commit_idx = _preview_idx
 	commit_action(preview_image)
-	preview_image.unlock()
-	preview_texture.create_from_image(preview_image, 0)
+	false # preview_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	preview_texture.create_from_image(preview_image) #,0
 	preview.texture = preview_texture
 
 
 func update_transparent_background_size() -> void:
 	if !preview:
 		return
-	var image_size_y := preview.rect_size.y
-	var image_size_x := preview.rect_size.x
+	var image_size_y := preview.size.y
+	var image_size_x := preview.size.x
 	if preview_image.get_size().x > preview_image.get_size().y:
 		var scale_ratio = preview_image.get_size().x / image_size_x
 		image_size_y = preview_image.get_size().y / scale_ratio
@@ -238,8 +238,8 @@ func update_transparent_background_size() -> void:
 		var scale_ratio = preview_image.get_size().y / image_size_y
 		image_size_x = preview_image.get_size().x / scale_ratio
 
-	preview.get_node("TransparentChecker").rect_size.x = image_size_x
-	preview.get_node("TransparentChecker").rect_size.y = image_size_y
+	preview.get_node("TransparentChecker").size.x = image_size_x
+	preview.get_node("TransparentChecker").size.y = image_size_y
 
 
 func _popup_hide() -> void:

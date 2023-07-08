@@ -9,24 +9,24 @@ window_title = "Posterize"
 script = ExtResource( 3 )
 
 [node name="VBoxContainer" parent="." index="3"]
-margin_bottom = 316.0
+offset_bottom = 316.0
 
 [node name="ShowAnimate" parent="VBoxContainer" index="0"]
 visible = false
 
 [node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
-margin_bottom = 224.0
+offset_bottom = 224.0
 
 [node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-margin_left = 80.0
-margin_right = 280.0
-margin_bottom = 200.0
+offset_left = 80.0
+offset_right = 280.0
+offset_bottom = 200.0
 
-[node name="LevelsSlider" type="TextureProgress" parent="VBoxContainer" index="2"]
-margin_top = 228.0
-margin_right = 360.0
-margin_bottom = 252.0
-rect_min_size = Vector2( 0, 24 )
+[node name="LevelsSlider" type="TextureProgressBar" parent="VBoxContainer" index="2"]
+offset_top = 228.0
+offset_right = 360.0
+offset_bottom = 252.0
+custom_minimum_size = Vector2( 0, 24 )
 mouse_default_cursor_shape = 2
 theme_type_variation = "ValueSlider"
 min_value = 2.0
@@ -42,11 +42,11 @@ script = ExtResource( 2 )
 prefix = "Posterize levels:"
 snap_by_default = true
 
-[node name="DitherSlider" type="TextureProgress" parent="VBoxContainer" index="3"]
-margin_top = 256.0
-margin_right = 360.0
-margin_bottom = 280.0
-rect_min_size = Vector2( 0, 24 )
+[node name="DitherSlider" type="TextureProgressBar" parent="VBoxContainer" index="3"]
+offset_top = 256.0
+offset_right = 360.0
+offset_bottom = 280.0
+custom_minimum_size = Vector2( 0, 24 )
 mouse_default_cursor_shape = 2
 theme_type_variation = "ValueSlider"
 max_value = 0.5
@@ -61,14 +61,14 @@ prefix = "Dither intensity:"
 snap_step = 0.1
 
 [node name="OptionsContainer" parent="VBoxContainer" index="4"]
-margin_top = 284.0
-margin_bottom = 308.0
+offset_top = 284.0
+offset_bottom = 308.0
 
 [node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 
 [node name="AnimateDialog" parent="." index="4"]
-margin_bottom = 316.0
+offset_bottom = 316.0
 
 [connection signal="value_changed" from="VBoxContainer/LevelsSlider" to="." method="_on_LevelsSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/DitherSlider" to="." method="_on_DitherSlider_value_changed"]

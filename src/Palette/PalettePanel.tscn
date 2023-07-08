@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Palette/EditPaletteDialog.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/graphics/palette/edit.png" type="Texture" id=2]
-[ext_resource path="res://assets/graphics/palette/add.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/palette/edit.png" type="Texture2D" id=2]
+[ext_resource path="res://assets/graphics/palette/add.png" type="Texture2D" id=3]
 [ext_resource path="res://src/Palette/CreatePaletteDialog.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Palette/PaletteGrid.gd" type="Script" id=5]
 [ext_resource path="res://src/Palette/PaletteScroll.gd" type="Script" id=6]
@@ -14,33 +14,33 @@ size_flags_vertical = 3
 script = ExtResource( 8 )
 
 [node name="PaletteVBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 159.0
-margin_bottom = 93.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 159.0
+offset_bottom = 93.0
 size_flags_horizontal = 3
 
 [node name="PaletteButtons" type="HBoxContainer" parent="PaletteVBoxContainer"]
-margin_right = 152.0
-margin_bottom = 22.0
+offset_right = 152.0
+offset_bottom = 22.0
 
 [node name="PaletteSelect" type="OptionButton" parent="PaletteVBoxContainer/PaletteButtons"]
 unique_name_in_owner = true
-margin_right = 100.0
-margin_bottom = 22.0
+offset_right = 100.0
+offset_bottom = 22.0
 grow_horizontal = 0
-rect_min_size = Vector2( 100, 0 )
-hint_tooltip = "Choose a palette"
+custom_minimum_size = Vector2( 100, 0 )
+tooltip_text = "Choose a palette"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 clip_text = true
 
 [node name="EditPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
-margin_left = 104.0
-margin_right = 126.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 22, 22 )
-hint_tooltip = "Edit currently selected palette"
+offset_left = 104.0
+offset_right = 126.0
+offset_bottom = 22.0
+custom_minimum_size = Vector2( 22, 22 )
+tooltip_text = "Edit currently selected palette"
 mouse_default_cursor_shape = 2
 __meta__ = {
 "_edit_group_": true
@@ -51,20 +51,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -11.0
-margin_top = -11.0
-margin_right = 11.0
-margin_bottom = 11.0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 2 )
 
 [node name="AddPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
-margin_left = 130.0
-margin_right = 152.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 22, 22 )
-hint_tooltip = "Create a new palette"
+offset_left = 130.0
+offset_right = 152.0
+offset_bottom = 22.0
+custom_minimum_size = Vector2( 22, 22 )
+tooltip_text = "Create a new palette"
 mouse_default_cursor_shape = 2
 __meta__ = {
 "_edit_group_": true
@@ -75,137 +75,137 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -11.0
-margin_top = -11.0
-margin_right = 11.0
-margin_bottom = 11.0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 3 )
 
 [node name="HSeparator" type="HSeparator" parent="PaletteVBoxContainer"]
-margin_top = 26.0
-margin_right = 152.0
-margin_bottom = 30.0
+offset_top = 26.0
+offset_right = 152.0
+offset_bottom = 30.0
 
 [node name="SwatchesContainer" type="HBoxContainer" parent="PaletteVBoxContainer"]
-margin_top = 34.0
-margin_right = 152.0
-margin_bottom = 86.0
+offset_top = 34.0
+offset_right = 152.0
+offset_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ColorButtons" type="VBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer"]
-margin_right = 24.0
-margin_bottom = 52.0
+offset_right = 24.0
+offset_bottom = 52.0
 
 [node name="AddColor" type="Button" parent="PaletteVBoxContainer/SwatchesContainer/ColorButtons"]
 unique_name_in_owner = true
-margin_right = 24.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Add a new color"
+offset_right = 24.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 24, 24 )
+tooltip_text = "Add a new color"
 mouse_default_cursor_shape = 2
 text = "+"
 
 [node name="DeleteColor" type="Button" parent="PaletteVBoxContainer/SwatchesContainer/ColorButtons"]
 unique_name_in_owner = true
-margin_top = 28.0
-margin_right = 24.0
-margin_bottom = 52.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Remove a selected color"
+offset_top = 28.0
+offset_right = 24.0
+offset_bottom = 52.0
+custom_minimum_size = Vector2( 24, 24 )
+tooltip_text = "Remove a selected color"
 mouse_default_cursor_shape = 2
 text = "-"
 
 [node name="PaletteScroll" type="VBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer"]
 unique_name_in_owner = true
-margin_left = 28.0
-margin_right = 152.0
-margin_bottom = 52.0
+offset_left = 28.0
+offset_right = 152.0
+offset_bottom = 52.0
 size_flags_horizontal = 3
 script = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll"]
-margin_right = 124.0
-margin_bottom = 52.0
+offset_right = 124.0
+offset_bottom = 52.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer"]
-margin_right = 120.0
-margin_bottom = 52.0
+offset_right = 120.0
+offset_bottom = 52.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_right = 120.0
-margin_bottom = 52.0
+offset_right = 120.0
+offset_bottom = 52.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PaletteGrid" type="GridContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
-margin_right = 120.0
-margin_bottom = 52.0
+offset_right = 120.0
+offset_bottom = 52.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/vseparation = 3
-custom_constants/hseparation = 3
+theme_override_constants/v_separation = 3
+theme_override_constants/h_separation = 3
 script = ExtResource( 5 )
 
 [node name="HScrollBar" type="HScrollBar" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
-margin_left = -132.0
-margin_top = 4.0
-margin_right = 118.0
-margin_bottom = 16.0
+offset_left = -132.0
+offset_top = 4.0
+offset_right = 118.0
+offset_bottom = 16.0
 step = 1.0
 page = 8.0
 custom_step = 1.0
 
 [node name="MarginContainer" type="MarginContainer" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer"]
-margin_left = 124.0
-margin_right = 124.0
-margin_bottom = 52.0
-custom_constants/margin_bottom = 15
+offset_left = 124.0
+offset_right = 124.0
+offset_bottom = 52.0
+theme_override_constants/margin_bottom = 15
 
 [node name="VScrollBar" type="VScrollBar" parent="PaletteVBoxContainer/SwatchesContainer/PaletteScroll/HBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 visible = false
-margin_right = 12.0
-margin_bottom = 37.0
+offset_right = 12.0
+offset_bottom = 37.0
 step = 1.0
 page = 8.0
 custom_step = 1.0
 
 [node name="EditPaletteDialog" parent="." instance=ExtResource( 1 )]
 unique_name_in_owner = true
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 317.0
-margin_bottom = 442.0
-rect_min_size = Vector2( 250, 87.5 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 317.0
+offset_bottom = 442.0
+custom_minimum_size = Vector2( 250, 87.5 )
 
 [node name="CreatePaletteDialog" parent="." instance=ExtResource( 4 )]
 unique_name_in_owner = true
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 317.0
-margin_bottom = 312.0
-rect_min_size = Vector2( 250, 87.5 )
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 317.0
+offset_bottom = 312.0
+custom_minimum_size = Vector2( 250, 87.5 )
 
 [node name="HiddenColorPickerButton" type="ColorPickerButton" parent="."]
 unique_name_in_owner = true
 visible = false
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 311.0
-margin_bottom = 111.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 311.0
+offset_bottom = 111.0
 
 [connection signal="item_selected" from="PaletteVBoxContainer/PaletteButtons/PaletteSelect" to="." method="_on_PaletteSelect_item_selected"]
 [connection signal="pressed" from="PaletteVBoxContainer/PaletteButtons/EditPalette" to="." method="_on_EditPalette_pressed"]

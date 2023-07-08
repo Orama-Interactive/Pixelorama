@@ -6,11 +6,11 @@ var offset_x := 0
 var offset_y := 0
 var image: Image
 
-onready var width_spinbox: SpinBox = $VBoxContainer/OptionsContainer/WidthValue
-onready var height_spinbox: SpinBox = $VBoxContainer/OptionsContainer/HeightValue
-onready var x_spinbox: SpinBox = $VBoxContainer/OptionsContainer/XSpinBox
-onready var y_spinbox: SpinBox = $VBoxContainer/OptionsContainer/YSpinBox
-onready var preview_rect: TextureRect = $VBoxContainer/AspectRatioContainer/Preview
+@onready var width_spinbox: SpinBox = $VBoxContainer/OptionsContainer/WidthValue
+@onready var height_spinbox: SpinBox = $VBoxContainer/OptionsContainer/HeightValue
+@onready var x_spinbox: SpinBox = $VBoxContainer/OptionsContainer/XSpinBox
+@onready var y_spinbox: SpinBox = $VBoxContainer/OptionsContainer/YSpinBox
+@onready var preview_rect: TextureRect = $VBoxContainer/AspectRatioContainer/Preview
 
 
 func _on_ResizeCanvas_about_to_show() -> void:
@@ -25,7 +25,7 @@ func _on_ResizeCanvas_about_to_show() -> void:
 		if cel is PixelCel and Global.current_project.layers[layer_i].is_visible_in_hierarchy():
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.image)
-			cel_image.lock()
+			false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			if cel.opacity < 1:  # If we have cel transparency
 				for xx in cel_image.get_size().x:
 					for yy in cel_image.get_size().y:
@@ -34,7 +34,7 @@ func _on_ResizeCanvas_about_to_show() -> void:
 						cel_image.set_pixel(
 							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 						)
-			cel_image.unlock()
+			false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			image.blend_rect(
 				cel_image, Rect2(Vector2.ZERO, Global.current_project.size), Vector2.ZERO
 			)
@@ -88,14 +88,14 @@ func update_preview() -> void:
 		image, Rect2(Vector2.ZERO, Global.current_project.size), Vector2(offset_x, offset_y)
 	)
 	var preview_texture := ImageTexture.new()
-	preview_texture.create_from_image(preview_image, 0)
+	preview_texture.create_from_image(preview_image) #,0
 	preview_rect.texture = preview_texture
 	update_transparent_background_size(preview_image)
 
 
 func update_transparent_background_size(preview_image: Image) -> void:
-	var image_size_y = preview_rect.rect_size.y
-	var image_size_x = preview_rect.rect_size.x
+	var image_size_y = preview_rect.size.y
+	var image_size_x = preview_rect.size.x
 	if preview_image.get_size().x > preview_image.get_size().y:
 		var scale_ratio = preview_image.get_size().x / image_size_x
 		image_size_y = preview_image.get_size().y / scale_ratio
@@ -103,8 +103,8 @@ func update_transparent_background_size(preview_image: Image) -> void:
 		var scale_ratio = preview_image.get_size().y / image_size_y
 		image_size_x = preview_image.get_size().x / scale_ratio
 
-	preview_rect.get_node("TransparentChecker").rect_size.x = image_size_x
-	preview_rect.get_node("TransparentChecker").rect_size.y = image_size_y
+	preview_rect.get_node("TransparentChecker").size.x = image_size_x
+	preview_rect.get_node("TransparentChecker").size.y = image_size_y
 
 
 func _on_ResizeCanvas_popup_hide() -> void:

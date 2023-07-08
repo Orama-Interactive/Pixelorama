@@ -1,14 +1,14 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/SplashDialog.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/splash_screen/artworks/wishdream.png" type="Texture" id=2]
-[ext_resource path="res://assets/graphics/timeline/move_arrow.png" type="Texture" id=3]
-[ext_resource path="res://assets/graphics/icons/icon.png" type="Texture" id=4]
-[ext_resource path="res://assets/graphics/splash_screen/version.png" type="Texture" id=5]
-[ext_resource path="res://assets/fonts/Roboto-Small.tres" type="DynamicFont" id=7]
-[ext_resource path="res://assets/graphics/splash_screen/discord.png" type="Texture" id=9]
-[ext_resource path="res://assets/graphics/splash_screen/github_32px.png" type="Texture" id=10]
-[ext_resource path="res://assets/graphics/splash_screen/patreon_mark_white.png" type="Texture" id=11]
+[ext_resource path="res://assets/graphics/splash_screen/artworks/wishdream.png" type="Texture2D" id=2]
+[ext_resource path="res://assets/graphics/timeline/move_arrow.png" type="Texture2D" id=3]
+[ext_resource path="res://assets/graphics/icons/icon.png" type="Texture2D" id=4]
+[ext_resource path="res://assets/graphics/splash_screen/version.png" type="Texture2D" id=5]
+[ext_resource path="res://assets/fonts/Roboto-Small.tres" type="FontFile" id=7]
+[ext_resource path="res://assets/graphics/splash_screen/discord.png" type="Texture2D" id=9]
+[ext_resource path="res://assets/graphics/splash_screen/github_32px.png" type="Texture2D" id=10]
+[ext_resource path="res://assets/graphics/splash_screen/patreon_mark_white.png" type="Texture2D" id=11]
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -23,26 +23,26 @@ bg_color = Color( 1, 1, 1, 0 )
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [node name="SplashDialog" type="AcceptDialog"]
-margin_right = 656.0
-margin_bottom = 611.0
+offset_right = 656.0
+offset_bottom = 611.0
 resizable = true
 script = ExtResource( 1 )
 
 [node name="Contents" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -36.0
-custom_constants/separation = 8
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -36.0
+theme_override_constants/separation = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SplashArt" type="TextureRect" parent="Contents"]
-margin_right = 640.0
-margin_bottom = 406.0
+offset_right = 640.0
+offset_bottom = 406.0
 size_flags_vertical = 3
 texture = ExtResource( 2 )
 expand = true
@@ -51,15 +51,15 @@ stretch_mode = 7
 [node name="ChangeArtBtnLeft" type="Button" parent="Contents/SplashArt" groups=["UIButtons"]]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 5.0
-margin_top = -10.0
-margin_right = 30.0
-margin_bottom = 10.0
+offset_left = 5.0
+offset_top = -10.0
+offset_right = 30.0
+offset_bottom = 10.0
 mouse_default_cursor_shape = 2
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 2 )
+theme_override_styles/hover = SubResource( 4 )
+theme_override_styles/pressed = SubResource( 5 )
+theme_override_styles/focus = SubResource( 5 )
+theme_override_styles/normal = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -69,10 +69,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -10.0
-margin_top = -7.0
-margin_right = 10.0
-margin_bottom = 7.0
+offset_left = -10.0
+offset_top = -7.0
+offset_right = 10.0
+offset_bottom = 7.0
 texture = ExtResource( 3 )
 expand = true
 flip_h = true
@@ -85,15 +85,15 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -30.0
-margin_top = -10.0
-margin_right = -5.0
-margin_bottom = 10.0
+offset_left = -30.0
+offset_top = -10.0
+offset_right = -5.0
+offset_bottom = 10.0
 mouse_default_cursor_shape = 2
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 3 )
+theme_override_styles/hover = SubResource( 5 )
+theme_override_styles/pressed = SubResource( 5 )
+theme_override_styles/focus = SubResource( 5 )
+theme_override_styles/normal = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -103,10 +103,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -10.0
-margin_top = -7.0
-margin_right = 10.0
-margin_bottom = 7.0
+offset_left = -10.0
+offset_top = -7.0
+offset_right = 10.0
+offset_bottom = 7.0
 texture = ExtResource( 3 )
 expand = true
 __meta__ = {
@@ -114,96 +114,96 @@ __meta__ = {
 }
 
 [node name="Overlay" type="HBoxContainer" parent="Contents/SplashArt"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 128.0
-margin_bottom = 40.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 128.0
+offset_bottom = 40.0
 
 [node name="PixeloramaIcon" type="TextureRect" parent="Contents/SplashArt/Overlay"]
-margin_right = 24.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 24, 24 )
+offset_right = 24.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 24, 24 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 4 )
 expand = true
 
 [node name="VersionText" type="TextureRect" parent="Contents/SplashArt/Overlay"]
-margin_left = 28.0
-margin_top = 6.0
-margin_right = 112.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 84, 12 )
+offset_left = 28.0
+offset_top = 6.0
+offset_right = 112.0
+offset_bottom = 18.0
+custom_minimum_size = Vector2( 84, 12 )
 size_flags_vertical = 4
 texture = ExtResource( 5 )
 expand = true
 
 [node name="ArtBy" type="HBoxContainer" parent="Contents"]
-margin_top = 414.0
-margin_right = 640.0
-margin_bottom = 434.0
+offset_top = 414.0
+offset_right = 640.0
+offset_bottom = 434.0
 grow_horizontal = 0
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SpacerControl" type="Control" parent="Contents/ArtBy"]
-margin_right = 4.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 4, 0 )
+offset_right = 4.0
+offset_bottom = 20.0
+custom_minimum_size = Vector2( 4, 0 )
 
 [node name="ArtistName" type="Button" parent="Contents/ArtBy"]
-margin_left = 4.0
-margin_right = 81.0
-margin_bottom = 20.0
-hint_tooltip = "https://twitter.com/WishdreamStar"
+offset_left = 4.0
+offset_right = 81.0
+offset_bottom = 20.0
+tooltip_text = "https://twitter.com/WishdreamStar"
 mouse_default_cursor_shape = 2
 text = "Art by: %s"
 flat = true
 
 [node name="ButtonsPatronsLogos" type="HBoxContainer" parent="Contents"]
-margin_top = 442.0
-margin_right = 640.0
-margin_bottom = 546.0
+offset_top = 442.0
+offset_right = 640.0
+offset_bottom = 546.0
 
 [node name="SpacerControl" type="Control" parent="Contents/ButtonsPatronsLogos"]
-margin_right = 4.0
-margin_bottom = 104.0
-rect_min_size = Vector2( 4, 0 )
+offset_right = 4.0
+offset_bottom = 104.0
+custom_minimum_size = Vector2( 4, 0 )
 
 [node name="Buttons" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos"]
-margin_left = 8.0
-margin_right = 298.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 290, 0 )
+offset_left = 8.0
+offset_right = 298.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 290, 0 )
 size_flags_vertical = 0
-custom_constants/separation = 10
+theme_override_constants/separation = 10
 
 [node name="NewBtn" type="Button" parent="Contents/ButtonsPatronsLogos/Buttons"]
-margin_right = 290.0
-margin_bottom = 20.0
+offset_right = 290.0
+offset_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "New"
 
 [node name="OpenBtn" type="Button" parent="Contents/ButtonsPatronsLogos/Buttons"]
-margin_top = 30.0
-margin_right = 290.0
-margin_bottom = 50.0
+offset_top = 30.0
+offset_right = 290.0
+offset_bottom = 50.0
 mouse_default_cursor_shape = 2
 text = "Open"
 
 [node name="OpenLastBtn" type="Button" parent="Contents/ButtonsPatronsLogos/Buttons"]
-margin_top = 60.0
-margin_right = 290.0
-margin_bottom = 80.0
+offset_top = 60.0
+offset_right = 290.0
+offset_bottom = 80.0
 mouse_default_cursor_shape = 2
 text = "Open Last Project"
 
 [node name="Info" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos"]
-margin_left = 302.0
-margin_right = 640.0
-margin_bottom = 104.0
+offset_left = 302.0
+offset_right = 640.0
+offset_bottom = 104.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -211,32 +211,32 @@ __meta__ = {
 }
 
 [node name="SpacerControl" type="Control" parent="Contents/ButtonsPatronsLogos/Info"]
-margin_right = 6.0
-margin_bottom = 104.0
-rect_min_size = Vector2( 6, 0 )
+offset_right = 6.0
+offset_bottom = 104.0
+custom_minimum_size = Vector2( 6, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PatronContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
-margin_left = 10.0
-margin_right = 294.0
-margin_bottom = 104.0
+offset_left = 10.0
+offset_right = 294.0
+offset_bottom = 104.0
 size_flags_horizontal = 3
 
 [node name="PatronsLabel" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
-margin_right = 284.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 230, 0 )
+offset_right = 284.0
+offset_bottom = 14.0
+custom_minimum_size = Vector2( 230, 0 )
 size_flags_vertical = 8
 text = "Patrons:"
 autowrap = true
 
 [node name="PatronsLabel2" type="Label" parent="Contents/ButtonsPatronsLogos/Info/PatronContainer"]
-margin_top = 18.0
-margin_right = 284.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 230, 0 )
+offset_top = 18.0
+offset_right = 284.0
+offset_bottom = 100.0
+custom_minimum_size = Vector2( 230, 0 )
 size_flags_vertical = 8
 text = "ShikadiGum
 Hugo Locurcio
@@ -246,84 +246,84 @@ David Snopek"
 autowrap = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info"]
-margin_left = 298.0
-margin_right = 330.0
-margin_bottom = 104.0
+offset_left = 298.0
+offset_right = 330.0
+offset_bottom = 104.0
 size_flags_vertical = 3
-custom_constants/separation = 5
+theme_override_constants/separation = 5
 alignment = 2
 
 [node name="Branding" type="HBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer"]
-margin_right = 32.0
-margin_bottom = 104.0
+offset_right = 32.0
+offset_bottom = 104.0
 size_flags_vertical = 3
 alignment = 2
 
 [node name="Links" type="VBoxContainer" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding"]
-margin_right = 32.0
-margin_bottom = 104.0
+offset_right = 32.0
+offset_bottom = 104.0
 
 [node name="GithubButton" type="TextureButton" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
-margin_right = 32.0
-margin_bottom = 32.0
+offset_right = 32.0
+offset_bottom = 32.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 10 )
 
 [node name="DiscordButton" type="TextureButton" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
-margin_top = 36.0
-margin_right = 32.0
-margin_bottom = 68.0
+offset_top = 36.0
+offset_right = 32.0
+offset_bottom = 68.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 9 )
 
 [node name="PatreonButton" type="TextureButton" parent="Contents/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
-margin_top = 72.0
-margin_right = 32.0
-margin_bottom = 104.0
+offset_top = 72.0
+offset_right = 32.0
+offset_bottom = 104.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 11 )
 
 [node name="EmptySpacer" type="Control" parent="Contents/ButtonsPatronsLogos/Info"]
-margin_left = 334.0
-margin_right = 338.0
-margin_bottom = 104.0
-rect_min_size = Vector2( 4, 0 )
+offset_left = 334.0
+offset_right = 338.0
+offset_bottom = 104.0
+custom_minimum_size = Vector2( 4, 0 )
 
 [node name="CopyrightLabel" type="Label" parent="Contents"]
-margin_top = 554.0
-margin_right = 640.0
-margin_bottom = 567.0
+offset_top = 554.0
+offset_right = 640.0
+offset_bottom = 567.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 7 )
+theme_override_fonts/font = ExtResource( 7 )
 text = "©2019-present by Orama Interactive and contributors"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Contents/CopyrightLabel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -6.0
-margin_right = -2.0
-margin_bottom = 5.0
+offset_top = -6.0
+offset_right = -2.0
+offset_bottom = 5.0
 size_flags_vertical = 0
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ShowOnStartup" type="CheckBox" parent="Contents/CopyrightLabel/HBoxContainer"]
-margin_left = 533.0
-margin_right = 638.0
-margin_bottom = 24.0
+offset_left = 533.0
+offset_right = 638.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 7 )
+theme_override_fonts/font = ExtResource( 7 )
 text = "Don't show again"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="about_to_show" from="." to="." method="_on_SplashDialog_about_to_show"]
+[connection signal="about_to_popup" from="." to="." method="_on_SplashDialog_about_to_show"]
 [connection signal="pressed" from="Contents/SplashArt/ChangeArtBtnLeft" to="." method="_on_ChangeArtBtnLeft_pressed"]
 [connection signal="pressed" from="Contents/SplashArt/ChangeArtBtnRight" to="." method="_on_ChangeArtBtnRight_pressed"]
 [connection signal="pressed" from="Contents/ArtBy/ArtistName" to="." method="_on_ArtCredits_pressed"]

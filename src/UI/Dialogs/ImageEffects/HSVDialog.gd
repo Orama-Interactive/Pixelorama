@@ -1,16 +1,16 @@
 extends ImageEffect
 
 enum Animate { HUE, SATURATION, VALUE }
-var shader: Shader = preload("res://src/Shaders/HSV.shader")
+var shader: Shader = preload("res://src/Shaders/HSV.gdshader")
 
-onready var hue_slider := $VBoxContainer/HueSlider as ValueSlider
-onready var sat_slider := $VBoxContainer/SaturationSlider as ValueSlider
-onready var val_slider := $VBoxContainer/ValueSlider as ValueSlider
+@onready var hue_slider := $VBoxContainer/HueSlider as ValueSlider
+@onready var sat_slider := $VBoxContainer/SaturationSlider as ValueSlider
+@onready var val_slider := $VBoxContainer/ValueSlider as ValueSlider
 
 
 func _ready() -> void:
 	var sm := ShaderMaterial.new()
-	sm.shader = shader
+	sm.gdshader = shader
 	preview.set_material(sm)
 	# set as in enum
 	animate_panel.add_float_property("Hue", hue_slider)
@@ -18,9 +18,9 @@ func _ready() -> void:
 	animate_panel.add_float_property("Value", val_slider)
 
 
-func _about_to_show() -> void:
+func _about_to_popup() -> void:
 	_reset()
-	._about_to_show()
+	super._about_to_popup()
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
@@ -29,16 +29,16 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	var val = animate_panel.get_animated_value(commit_idx, Animate.VALUE) / 100
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
-		selection_tex.create_from_image(project.selection_map, 0)
+		selection_tex.create_from_image(project.selection_map) #,0
 
 	var params := {"hue_shift": hue, "sat_shift": sat, "val_shift": val, "selection": selection_tex}
 	if !confirmed:
 		for param in params:
-			preview.material.set_shader_param(param, params[param])
+			preview.material.set_shader_parameter(param, params[param])
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		yield(gen, "done")
+		await gen.done
 
 
 func _reset() -> void:

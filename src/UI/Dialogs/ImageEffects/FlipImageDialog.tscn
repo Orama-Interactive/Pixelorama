@@ -4,56 +4,56 @@
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" type="PackedScene" id=2]
 
 [node name="FlipImageDialog" instance=ExtResource( 2 )]
-margin_right = 376.0
-margin_bottom = 324.0
+offset_right = 376.0
+offset_bottom = 324.0
 window_title = "Mirror Image"
 script = ExtResource( 1 )
 
 [node name="VBoxContainer" parent="." index="3"]
-margin_bottom = 288.0
+offset_bottom = 288.0
 
 [node name="ShowAnimate" parent="VBoxContainer" index="0"]
 visible = false
 
 [node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
-margin_bottom = 224.0
+offset_bottom = 224.0
 
 [node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-margin_left = 80.0
-margin_right = 280.0
-margin_bottom = 200.0
+offset_left = 80.0
+offset_right = 280.0
+offset_bottom = 200.0
 
 [node name="FlipOptions" type="GridContainer" parent="VBoxContainer" index="2"]
-margin_top = 228.0
-margin_right = 360.0
-margin_bottom = 252.0
+offset_top = 228.0
+offset_right = 360.0
+offset_bottom = 252.0
 columns = 2
 
 [node name="FlipHorizontal" type="CheckBox" parent="VBoxContainer/FlipOptions" index="0"]
-margin_right = 178.0
-margin_bottom = 24.0
+offset_right = 178.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 pressed = true
 text = "Horizontal"
 
 [node name="FlipVertical" type="CheckBox" parent="VBoxContainer/FlipOptions" index="1"]
-margin_left = 182.0
-margin_right = 360.0
-margin_bottom = 24.0
+offset_left = 182.0
+offset_right = 360.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Vertical"
 
 [node name="OptionsContainer" parent="VBoxContainer" index="3"]
-margin_top = 256.0
-margin_bottom = 280.0
+offset_top = 256.0
+offset_bottom = 280.0
 
 [node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 
 [node name="AnimateDialog" parent="." index="4"]
-margin_bottom = 288.0
+offset_bottom = 288.0
 
 [connection signal="toggled" from="VBoxContainer/FlipOptions/FlipHorizontal" to="." method="_on_FlipHorizontal_toggled"]
 [connection signal="toggled" from="VBoxContainer/FlipOptions/FlipVertical" to="." method="_on_FlipVertical_toggled"]

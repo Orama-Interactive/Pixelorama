@@ -84,17 +84,17 @@ var content_list := []
 var selected_item := 0
 var restore_default_button_tcsn := preload("res://src/Preferences/RestoreDefaultButton.tscn")
 
-onready var list: ItemList = $HSplitContainer/List
-onready var right_side: VBoxContainer = $"%RightSide"
-onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
-onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
-onready var shrink_slider: ValueSlider = $"%ShrinkSlider"
-onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
-onready var shortcuts: Control = right_side.get_node("Shortcuts/ShortcutEdit")
-onready var tablet_driver_label: Label = $"%TabletDriverLabel"
-onready var tablet_driver: OptionButton = $"%TabletDriver"
-onready var extensions: BoxContainer = right_side.get_node("Extensions")
-onready var must_restart: BoxContainer = $"%MustRestart"
+@onready var list: ItemList = $HSplitContainer/List
+@onready var right_side: VBoxContainer = $"%RightSide"
+@onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
+@onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
+@onready var shrink_slider: ValueSlider = $"%ShrinkSlider"
+@onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
+@onready var shortcuts: Control = right_side.get_node("Shortcuts/ShortcutEdit")
+@onready var tablet_driver_label: Label = $"%TabletDriverLabel"
+@onready var tablet_driver: OptionButton = $"%TabletDriver"
+@onready var extensions: BoxContainer = right_side.get_node("Extensions")
+@onready var must_restart: BoxContainer = $"%MustRestart"
 
 
 class Preference:
@@ -123,14 +123,14 @@ class Preference:
 
 func _ready() -> void:
 	# Replace OK since preference changes are being applied immediately, not after OK confirmation
-	get_ok().text = "Close"
-	get_ok().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	get_ok_button().text = "Close"
+	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	shrink_slider.value = Global.shrink  # In case shrink is not equal to 1
 
 	for child in shortcuts.get_children():
 		if not child is AcceptDialog:
 			continue
-		child.connect("confirmed", Global, "update_hint_tooltips")
+		child.connect("confirmed", Callable(Global, "update_hint_tooltips"))
 
 	for child in right_side.get_children():
 		content_list.append(child.name)
@@ -149,7 +149,7 @@ func _ready() -> void:
 
 	for pref in preferences:
 		var node: Node = right_side.get_node(pref.node_path)
-		var restore_default_button: BaseButton = restore_default_button_tcsn.instance()
+		var restore_default_button: BaseButton = restore_default_button_tcsn.instantiate()
 		restore_default_button.setting_name = pref.prop_name
 		restore_default_button.value_type = pref.value_type
 		restore_default_button.default_value = pref.default_value
@@ -256,7 +256,7 @@ func preference_update(prop: String, require_restart := false) -> void:
 		for guide in Global.canvas.get_children():
 			if guide is SymmetryGuide:
 				# Add a subtle difference to the normal guide color by mixing in some blue
-				guide.default_color = Global.guide_color.linear_interpolate(Color(.2, .2, .65), .6)
+				guide.default_color = Global.guide_color.lerp(Color(.2, .2, .65), .6)
 			elif guide is Guide:
 				guide.default_color = Global.guide_color
 
@@ -264,10 +264,10 @@ func preference_update(prop: String, require_restart := false) -> void:
 		Engine.set_target_fps(Global.fps_limit)
 
 	elif "selection" in prop:
-		var marching_ants: Sprite = Global.canvas.selection.marching_ants_outline
-		marching_ants.material.set_shader_param("animated", Global.selection_animated_borders)
-		marching_ants.material.set_shader_param("first_color", Global.selection_border_color_1)
-		marching_ants.material.set_shader_param("second_color", Global.selection_border_color_2)
+		var marching_ants: Sprite2D = Global.canvas.selection.marching_ants_outline
+		marching_ants.material.set_shader_parameter("animated", Global.selection_animated_borders)
+		marching_ants.material.set_shader_parameter("first_color", Global.selection_border_color_1)
+		marching_ants.material.set_shader_parameter("second_color", Global.selection_border_color_2)
 		Global.canvas.selection.update()
 
 	elif prop in ["icon_color_from", "custom_icon_color"]:
@@ -285,13 +285,13 @@ func preference_update(prop: String, require_restart := false) -> void:
 		for child in Tools._tool_buttons.get_children():
 			var left_background: NinePatchRect = child.get_node("BackgroundLeft")
 			left_background.modulate = Global.left_tool_color
-		Tools._slots[BUTTON_LEFT].tool_node.color_rect.color = Global.left_tool_color
+		Tools._slots[MOUSE_BUTTON_LEFT].tool_node.color_rect.color = Global.left_tool_color
 
 	elif prop == "right_tool_color":
 		for child in Tools._tool_buttons.get_children():
 			var left_background: NinePatchRect = child.get_node("BackgroundRight")
 			left_background.modulate = Global.right_tool_color
-		Tools._slots[BUTTON_RIGHT].tool_node.color_rect.color = Global.right_tool_color
+		Tools._slots[MOUSE_BUTTON_RIGHT].tool_node.color_rect.color = Global.right_tool_color
 
 	elif prop == "tool_button_size":
 		Tools.set_button_size(Global.tool_button_size)
@@ -322,10 +322,10 @@ func disable_restore_default_button(button: BaseButton, disable: bool) -> void:
 	button.disabled = disable
 	if disable:
 		button.mouse_default_cursor_shape = Control.CURSOR_ARROW
-		button.hint_tooltip = ""
+		button.tooltip_text = ""
 	else:
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		button.hint_tooltip = "Restore default value"
+		button.tooltip_text = "Restore default value"
 
 
 func _on_PreferencesDialog_about_to_show() -> void:
@@ -362,5 +362,5 @@ func _on_ShrinkApplyButton_pressed() -> void:
 	hide()
 	popup_centered(Vector2(600, 400))
 	Global.dialog_open(true)
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	Global.camera.fit_to_frame(Global.current_project.size)

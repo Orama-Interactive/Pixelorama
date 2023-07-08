@@ -53,14 +53,14 @@ enum HelpMenu {
 const OVERRIDE_FILE := "override.cfg"
 
 var root_directory := "."
-var window_title := "" setget _title_changed  # Why doesn't Godot have get_window_title()?
+var window_title := "": set = _title_changed
 var config_cache := ConfigFile.new()
 var XDGDataPaths = preload("res://src/XDGDataPaths.gd")
-var directory_module: Reference
+var directory_module: RefCounted
 
 var projects := []  # Array of Projects
 var current_project: Project
-var current_project_index := 0 setget _project_changed
+var current_project_index := 0: set = _project_changed
 
 var ui_tooltips := {}
 
@@ -81,11 +81,11 @@ var integer_zoom := false setget set_integer_zoom
 
 var shrink := 1.0
 var dim_on_popup := true
-var modulate_icon_color := Color.gray
+var modulate_icon_color := Color.GRAY
 var icon_color_from: int = ColorFrom.THEME
-var modulate_clear_color := Color.gray
+var modulate_clear_color := Color.GRAY
 var clear_color_from: int = ColorFrom.THEME
-var custom_icon_color := Color.gray
+var custom_icon_color := Color.GRAY
 var tool_button_size: int = ButtonSize.SMALL
 var left_tool_color := Color("0086cf")
 var right_tool_color := Color("fd6d14")
@@ -99,10 +99,10 @@ var grid_size := Vector2(2, 2)
 var isometric_grid_size := Vector2(16, 8)
 var grid_offset := Vector2.ZERO
 var grid_draw_over_tile_mode := false
-var grid_color := Color.black
+var grid_color := Color.BLACK
 var pixel_grid_show_at_zoom := 1500.0  # percentage
 var pixel_grid_color := Color("91212121")
-var guide_color := Color.purple
+var guide_color := Color.PURPLE
 var checker_size := 10
 var checker_color_1 := Color(0.47, 0.47, 0.47, 1)
 var checker_color_2 := Color(0.34, 0.35, 0.34, 1)
@@ -111,20 +111,20 @@ var checker_follow_scale := false
 var tilemode_opacity := 1.0
 
 var select_layer_on_button_click := false
-var onion_skinning_past_color := Color.red
-var onion_skinning_future_color := Color.blue
+var onion_skinning_past_color := Color.RED
+var onion_skinning_future_color := Color.BLUE
 
 var selection_animated_borders := true
-var selection_border_color_1 := Color.white
-var selection_border_color_2 := Color.black
+var selection_border_color_1 := Color.WHITE
+var selection_border_color_2 := Color.BLACK
 
 var pause_when_unfocused := true
 var fps_limit := 0
 
 var autosave_interval := 1.0
 var enable_autosave := true
-var renderer := OS.get_current_video_driver() setget _renderer_changed
-var tablet_driver := 0 setget _tablet_driver_changed
+var renderer := OS.get_current_video_driver(): set = _renderer_changed
+var tablet_driver := 0: set = _tablet_driver_changed
 
 # Tools & options
 var show_left_tool_icon := true
@@ -169,63 +169,63 @@ var pixel_cel_button_node: PackedScene = preload("res://src/UI/Timeline/PixelCel
 var group_cel_button_node: PackedScene = preload("res://src/UI/Timeline/GroupCelButton.tscn")
 var cel_3d_button_node: PackedScene = preload("res://src/UI/Timeline/Cel3DButton.tscn")
 
-onready var control: Node = get_tree().current_scene
+@onready var control: Node = get_tree().current_scene
 
-onready var canvas: Canvas = control.find_node("Canvas")
-onready var tabs: Tabs = control.find_node("Tabs")
-onready var main_viewport: ViewportContainer = control.find_node("ViewportContainer")
-onready var second_viewport: ViewportContainer = control.find_node("Second Canvas")
-onready var canvas_preview_container: Container = control.find_node("Canvas Preview")
-onready var global_tool_options: PanelContainer = control.find_node("Global Tool Options")
-onready var small_preview_viewport: ViewportContainer = canvas_preview_container.find_node(
+@onready var canvas: Canvas = control.find_child("Canvas")
+@onready var tabs: TabBar = control.find_child("TabBar")
+@onready var main_viewport: SubViewportContainer = control.find_child("SubViewportContainer")
+@onready var second_viewport: SubViewportContainer = control.find_child("Second Canvas")
+@onready var canvas_preview_container: Container = control.find_child("Canvas Preview")
+@onready var global_tool_options: PanelContainer = control.find_child("Global Tool Options")
+@onready var small_preview_viewport: SubViewportContainer = canvas_preview_container.find_child(
 	"PreviewViewportContainer"
 )
-onready var camera: Camera2D = main_viewport.find_node("Camera2D")
-onready var camera2: Camera2D = second_viewport.find_node("Camera2D2")
-onready var camera_preview: Camera2D = control.find_node("CameraPreview")
-onready var cameras := [camera, camera2, camera_preview]
-onready var horizontal_ruler: BaseButton = control.find_node("HorizontalRuler")
-onready var vertical_ruler: BaseButton = control.find_node("VerticalRuler")
-onready var transparent_checker: ColorRect = control.find_node("TransparentChecker")
-onready var preview_zoom_slider: VSlider = control.find_node("PreviewZoomSlider")
+@onready var camera: Camera2D = main_viewport.find_child("Camera2D")
+@onready var camera2: Camera2D = second_viewport.find_child("Camera2D2")
+@onready var camera_preview: Camera2D = control.find_child("CameraPreview")
+@onready var cameras := [camera, camera2, camera_preview]
+@onready var horizontal_ruler: BaseButton = control.find_child("HorizontalRuler")
+@onready var vertical_ruler: BaseButton = control.find_child("VerticalRuler")
+@onready var transparent_checker: ColorRect = control.find_child("TransparentChecker")
+@onready var preview_zoom_slider: VSlider = control.find_child("PreviewZoomSlider")
 
-onready var brushes_popup: Popup = control.find_node("BrushesPopup")
-onready var patterns_popup: Popup = control.find_node("PatternsPopup")
-onready var palette_panel: PalettePanel = control.find_node("Palettes")
+@onready var brushes_popup: Popup = control.find_child("BrushesPopup")
+@onready var patterns_popup: Popup = control.find_child("PatternsPopup")
+@onready var palette_panel: PalettePanel = control.find_child("Palettes")
 
-onready var references_panel: ReferencesPanel = control.find_node("Reference Images")
-onready var perspective_editor := control.find_node("Perspective Editor")
+@onready var references_panel: ReferencesPanel = control.find_child("RefCounted Images")
+@onready var perspective_editor := control.find_child("Perspective Editor")
 
-onready var top_menu_container: Panel = control.find_node("TopMenuContainer")
-onready var cursor_position_label: Label = control.find_node("CursorPosition")
-onready var current_frame_mark_label: Label = control.find_node("CurrentFrameMark")
+@onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
+@onready var cursor_position_label: Label = control.find_child("CursorPosition")
+@onready var current_frame_mark_label: Label = control.find_child("CurrentFrameMark")
 
-onready var animation_timeline: Panel = control.find_node("Animation Timeline")
-onready var animation_timer: Timer = animation_timeline.find_node("AnimationTimer")
-onready var frame_hbox: HBoxContainer = animation_timeline.find_node("FrameHBox")
-onready var layer_vbox: VBoxContainer = animation_timeline.find_node("LayerVBox")
-onready var cel_vbox: VBoxContainer = animation_timeline.find_node("CelVBox")
-onready var tag_container: Control = animation_timeline.find_node("TagContainer")
-onready var play_forward: BaseButton = animation_timeline.find_node("PlayForward")
-onready var play_backwards: BaseButton = animation_timeline.find_node("PlayBackwards")
-onready var remove_frame_button: BaseButton = animation_timeline.find_node("DeleteFrame")
-onready var move_left_frame_button: BaseButton = animation_timeline.find_node("MoveLeft")
-onready var move_right_frame_button: BaseButton = animation_timeline.find_node("MoveRight")
-onready var remove_layer_button: BaseButton = animation_timeline.find_node("RemoveLayer")
-onready var move_up_layer_button: BaseButton = animation_timeline.find_node("MoveUpLayer")
-onready var move_down_layer_button: BaseButton = animation_timeline.find_node("MoveDownLayer")
-onready var merge_down_layer_button: BaseButton = animation_timeline.find_node("MergeDownLayer")
-onready var layer_opacity_slider: ValueSlider = animation_timeline.find_node("OpacitySlider")
+@onready var animation_timeline: Panel = control.find_child("Animation Timeline")
+@onready var animation_timer: Timer = animation_timeline.find_child("AnimationTimer")
+@onready var frame_hbox: HBoxContainer = animation_timeline.find_child("FrameHBox")
+@onready var layer_vbox: VBoxContainer = animation_timeline.find_child("LayerVBox")
+@onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
+@onready var tag_container: Control = animation_timeline.find_child("TagContainer")
+@onready var play_forward: BaseButton = animation_timeline.find_child("PlayForward")
+@onready var play_backwards: BaseButton = animation_timeline.find_child("PlayBackwards")
+@onready var remove_frame_button: BaseButton = animation_timeline.find_child("DeleteFrame")
+@onready var move_left_frame_button: BaseButton = animation_timeline.find_child("MoveLeft")
+@onready var move_right_frame_button: BaseButton = animation_timeline.find_child("MoveRight")
+@onready var remove_layer_button: BaseButton = animation_timeline.find_child("RemoveLayer")
+@onready var move_up_layer_button: BaseButton = animation_timeline.find_child("MoveUpLayer")
+@onready var move_down_layer_button: BaseButton = animation_timeline.find_child("MoveDownLayer")
+@onready var merge_down_layer_button: BaseButton = animation_timeline.find_child("MergeDownLayer")
+@onready var layer_opacity_slider: ValueSlider = animation_timeline.find_child("OpacitySlider")
 
-onready var tile_mode_offset_dialog: AcceptDialog = control.find_node("TileModeOffsetsDialog")
-onready var open_sprites_dialog: FileDialog = control.find_node("OpenSprite")
-onready var save_sprites_dialog: FileDialog = control.find_node("SaveSprite")
-onready var save_sprites_html5_dialog: ConfirmationDialog = control.find_node("SaveSpriteHTML5")
-onready var export_dialog: AcceptDialog = control.find_node("ExportDialog")
-onready var preferences_dialog: AcceptDialog = control.find_node("PreferencesDialog")
-onready var error_dialog: AcceptDialog = control.find_node("ErrorDialog")
+@onready var tile_mode_offset_dialog: AcceptDialog = control.find_child("TileModeOffsetsDialog")
+@onready var open_sprites_dialog: FileDialog = control.find_child("OpenSprite")
+@onready var save_sprites_dialog: FileDialog = control.find_child("SaveSprite")
+@onready var save_sprites_html5_dialog: ConfirmationDialog = control.find_child("SaveSpriteHTML5")
+@onready var export_dialog: AcceptDialog = control.find_child("ExportDialog")
+@onready var preferences_dialog: AcceptDialog = control.find_child("PreferencesDialog")
+@onready var error_dialog: AcceptDialog = control.find_child("ErrorDialog")
 
-onready var current_version: String = ProjectSettings.get_setting("application/config/Version")
+@onready var current_version: String = ProjectSettings.get_setting("application/config/Version")
 
 
 func _init() -> void:
@@ -255,10 +255,10 @@ func _ready() -> void:
 	current_project.fill_color = default_fill_color
 
 	for node in get_tree().get_nodes_in_group("UIButtons"):
-		var tooltip: String = node.hint_tooltip
-		if !tooltip.empty() and node.shortcut:
+		var tooltip: String = node.tooltip_text
+		if !tooltip.is_empty() and node.shortcut:
 			ui_tooltips[node] = tooltip
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	emit_signal("project_changed")
 
 
@@ -397,9 +397,9 @@ func _initialize_keychain() -> void:
 		"draw_create_line": Keychain.InputAction.new("", "Draw tools", false),
 		"draw_snap_angle": Keychain.InputAction.new("", "Draw tools", false),
 		"draw_color_picker": Keychain.InputAction.new("Quick color picker", "Draw tools", false),
-		"shape_perfect": Keychain.InputAction.new("", "Shape tools", false),
-		"shape_center": Keychain.InputAction.new("", "Shape tools", false),
-		"shape_displace": Keychain.InputAction.new("", "Shape tools", false),
+		"shape_perfect": Keychain.InputAction.new("", "Shape3D tools", false),
+		"shape_center": Keychain.InputAction.new("", "Shape3D tools", false),
+		"shape_displace": Keychain.InputAction.new("", "Shape3D tools", false),
 		"selection_add": Keychain.InputAction.new("", "Selection tools", false),
 		"selection_subtract": Keychain.InputAction.new("", "Selection tools", false),
 		"selection_intersect": Keychain.InputAction.new("", "Selection tools", false),
@@ -430,7 +430,7 @@ func _initialize_keychain() -> void:
 		"Help menu": Keychain.InputGroup.new("Menu"),
 		"Tool modifiers": Keychain.InputGroup.new(),
 		"Draw tools": Keychain.InputGroup.new("Tool modifiers"),
-		"Shape tools": Keychain.InputGroup.new("Tool modifiers"),
+		"Shape3D tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Selection tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Transformation tools": Keychain.InputGroup.new("Tool modifiers"),
 	}
@@ -441,8 +441,8 @@ func _initialize_keychain() -> void:
 func notification_label(text: String) -> void:
 	var notification := NotificationLabel.new()
 	notification.text = tr(text)
-	notification.rect_position = main_viewport.rect_global_position
-	notification.rect_position.y += main_viewport.rect_size.y
+	notification.position = main_viewport.global_position
+	notification.position.y += main_viewport.size.y
 	control.add_child(notification)
 
 
@@ -472,7 +472,7 @@ func undo_or_redo(
 		action_name
 		in [
 			"Draw",
-			"Draw Shape",
+			"Draw Shape3D",
 			"Select",
 			"Move Selection",
 			"Scale",
@@ -497,7 +497,7 @@ func undo_or_redo(
 					if current_cel is Cel3D:
 						current_cel.size_changed(project.size)
 					else:
-						current_cel.image_texture.create_from_image(current_cel.get_image(), 0)
+						current_cel.image_texture.create_from_image(current_cel.get_image()) #,0
 			canvas.camera_zoom()
 			canvas.grid.update()
 			canvas.pixel_grid.update()
@@ -515,16 +515,16 @@ func undo_or_redo(
 
 func _title_changed(value: String) -> void:
 	window_title = value
-	OS.set_window_title(value)
+	get_window().set_title(value)
 
 
 func _project_changed(value: int) -> void:
 	canvas.selection.transform_content_confirm()
 	current_project_index = value
 	current_project = projects[value]
-	connect("project_changed", current_project, "change_project")
+	connect("project_changed", Callable(current_project, "change_project"))
 	emit_signal("project_changed")
-	disconnect("project_changed", current_project, "change_project")
+	disconnect("project_changed", Callable(current_project, "change_project"))
 	emit_signal("cel_changed")
 
 
@@ -551,7 +551,7 @@ func _tablet_driver_changed(value: int) -> void:
 
 
 func dialog_open(open: bool) -> void:
-	var dim_color := Color.white
+	var dim_color := Color.WHITE
 	if open:
 		can_draw = false
 		if dim_on_popup:
@@ -586,7 +586,7 @@ func change_button_texturerect(texture_button: TextureRect, new_file_name: Strin
 
 
 func update_hint_tooltips() -> void:
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	Tools.update_hint_tooltips()
 
 	for tip in ui_tooltips:
@@ -597,7 +597,7 @@ func update_hint_tooltips() -> void:
 		elif event_type is InputEventAction:
 			var first_key: InputEventKey = Keychain.action_get_first_key(event_type.action)
 			hint = first_key.as_text() if first_key else "None"
-		tip.hint_tooltip = tr(ui_tooltips[tip]) % hint
+		tip.tooltip_text = tr(ui_tooltips[tip]) % hint
 
 
 # Used in case some of the values in a dictionary are Strings, when they should be something else
@@ -607,12 +607,12 @@ func convert_dictionary_values(dict: Dictionary) -> void:
 			dict[key] = int(dict[key])
 		if typeof(dict[key]) != TYPE_STRING:
 			continue
-		if "transform" in key:  # Convert a String to a Transform
+		if "transform" in key:  # Convert a String to a Transform3D
 			var transform_string: String = dict[key].replace(" - ", ", ")
-			dict[key] = str2var("Transform(" + transform_string + ")")
+			dict[key] = str_to_var("Transform3D(" + transform_string + ")")
 		elif "color" in key:  # Convert a String to a Color
-			dict[key] = str2var("Color(" + dict[key] + ")")
+			dict[key] = str_to_var("Color(" + dict[key] + ")")
 		elif "v2" in key:  # Convert a String to a Vector2
-			dict[key] = str2var("Vector2" + dict[key])
+			dict[key] = str_to_var("Vector2" + dict[key])
 		elif "size" in key or "center_offset" in key:  # Convert a String to a Vector3
-			dict[key] = str2var("Vector3" + dict[key])
+			dict[key] = str_to_var("Vector3" + dict[key])

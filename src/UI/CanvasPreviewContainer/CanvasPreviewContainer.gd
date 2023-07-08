@@ -1,10 +1,10 @@
 extends PanelContainer
 
-onready var canvas_preview := $"%CanvasPreview" as Node2D
-onready var camera := $"%CameraPreview" as Camera2D
-onready var play_button := $"%PlayButton" as Button
-onready var start_frame := $"%StartFrame" as ValueSlider
-onready var end_frame := $"%EndFrame" as ValueSlider
+@onready var canvas_preview := $"%CanvasPreview" as Node2D
+@onready var camera := $"%CameraPreview" as Camera2D
+@onready var play_button := $"%PlayButton" as Button
+@onready var start_frame := $"%StartFrame" as ValueSlider
+@onready var end_frame := $"%EndFrame" as ValueSlider
 
 
 func _on_PreviewZoomSlider_value_changed(value: float) -> void:
@@ -17,11 +17,11 @@ func _on_PlayButton_toggled(button_pressed: bool) -> void:
 	if button_pressed:
 		if canvas_preview.mode == canvas_preview.Mode.TIMELINE:
 			if Global.current_project.frames.size() <= 1:
-				play_button.pressed = false
+				play_button.button_pressed = false
 				return
 		else:
 			if start_frame.value == end_frame.value:
-				play_button.pressed = false
+				play_button.button_pressed = false
 				return
 		canvas_preview.animation_timer.start()
 		Global.change_button_texturerect(play_button.get_child(0), "pause.png")
@@ -31,7 +31,7 @@ func _on_PlayButton_toggled(button_pressed: bool) -> void:
 
 
 func _on_OptionButton_item_selected(index: int) -> void:
-	play_button.pressed = false
+	play_button.button_pressed = false
 	canvas_preview.mode = index
 	if index == 0:
 		$VBox/Animation/VBoxContainer/Options.visible = false

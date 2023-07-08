@@ -7,11 +7,11 @@ code = "shader_type canvas_item;
 render_mode unshaded;
 
 uniform float size = 10.0;
-uniform vec4 color1 : hint_color = vec4(0.7, 0.7, 0.7, 1.0);
-uniform vec4 color2 : hint_color = vec4(1.0);
+uniform vec4 color1 : source_color = vec4(0.7, 0.7, 0.7, 1.0);
+uniform vec4 color2 : source_color = vec4(1.0);
 uniform vec2 offset = vec2(0.0);
 uniform vec2 scale = vec2(0.0);
-uniform vec2 rect_size = vec2(0.0);
+uniform vec2 size = vec2(0.0);
 uniform bool follow_movement = false;
 uniform bool follow_scale = false;
 
@@ -21,7 +21,7 @@ void fragment() {
 		if (!follow_movement)
 			ref_pos /= scale;
 		else
-			ref_pos = UV * rect_size;
+			ref_pos = UV * size;
 	}
 	else if (follow_movement)
 		ref_pos -= mod(offset, size * 2.0);
@@ -42,7 +42,7 @@ shader_param/color1 = Color( 0.878431, 0.878431, 0.878431, 1 )
 shader_param/color2 = Color( 1, 1, 1, 1 )
 shader_param/offset = Vector2( 0, 0 )
 shader_param/scale = Vector2( 0.8, 0.8 )
-shader_param/rect_size = Vector2( 0, 0 )
+shader_param/size = Vector2( 0, 0 )
 shader_param/follow_movement = false
 shader_param/follow_scale = true
 
@@ -51,11 +51,11 @@ anchor_left = 2.60711e-05
 anchor_top = -2.75612e-05
 anchor_right = 2.60711e-05
 anchor_bottom = -2.75612e-05
-margin_left = -0.033371
-margin_top = 0.0198441
-margin_right = 25.9666
-margin_bottom = 26.0198
-rect_min_size = Vector2( 8, 8 )
+offset_left = -0.033371
+offset_top = 0.0198441
+offset_right = 25.9666
+offset_bottom = 26.0198
+custom_minimum_size = Vector2( 8, 8 )
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 color = Color( 0, 0, 0, 0 )

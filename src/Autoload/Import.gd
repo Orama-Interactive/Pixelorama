@@ -28,14 +28,14 @@ func get_brush_files_from_directory(directory: String):  # -> Array
 	var randomised_subdir_files_map: Dictionary = {}
 	var nonrandomised_subdir_files_map: Dictionary = {}
 
-	var main_directory: Directory = Directory.new()
+	var main_directory: DirAccess = DirAccess.new()
 	var err := main_directory.open(directory)
 	if err != OK:
 		return null
 
 	# Build first the list of base png files and all subdirectories to
 	# scan later (skip navigational . and ..)
-	main_directory.list_dir_begin(true)
+	main_directory.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	var fname: String = main_directory.get_next()
 	while fname != "":
 		if main_directory.current_is_dir():
@@ -50,7 +50,7 @@ func get_brush_files_from_directory(directory: String):  # -> Array
 
 	# Now we iterate over subdirectories!
 	for subdirectory in subdirectories:
-		var the_directory: Directory = Directory.new()
+		var the_directory: DirAccess = DirAccess.new()
 
 		# Holds names of files that make this
 		# a component of a randomised brush ^.^
@@ -60,7 +60,7 @@ func get_brush_files_from_directory(directory: String):  # -> Array
 		var non_randomised_files := []
 
 		the_directory.open(directory.plus_file(subdirectory))
-		the_directory.list_dir_begin(true)
+		the_directory.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var curr_file := the_directory.get_next()
 
 		while curr_file != "":
@@ -204,9 +204,9 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 func import_patterns(priority_ordered_search_path: Array) -> void:
 	for path in priority_ordered_search_path:
 		var pattern_list := []
-		var dir := Directory.new()
+		var dir := DirAccess.new()
 		dir.open(path)
-		dir.list_dir_begin()
+		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var curr_file := dir.get_next()
 		while curr_file != "":
 			if curr_file.get_extension().to_lower() == "png":

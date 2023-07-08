@@ -2,8 +2,8 @@
 // Also thanks to https://andreashackel.de/tech-art/stripes-shader-1/ for the stripe tutorial
 shader_type canvas_item;
 
-uniform vec4 first_color : hint_color = vec4(1.0);
-uniform vec4 second_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec4 first_color : source_color = vec4(1.0);
+uniform vec4 second_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform bool animated = true;
 uniform float width : hint_range(0, 2) = 0.05;
 uniform float frequency = 50.0;

@@ -1,13 +1,13 @@
-extends Reference
+extends RefCounted
 
 
 class LSBLZWBitUnpacker:
-	var chunk_stream: PoolByteArray
+	var chunk_stream: PackedByteArray
 	var bit_index: int = 0
 	var byte: int
 	var byte_index: int = 0
 
-	func _init(_chunk_stream: PoolByteArray):
+	func _init(_chunk_stream: PackedByteArray):
 		chunk_stream = _chunk_stream
 		self.get_byte()
 

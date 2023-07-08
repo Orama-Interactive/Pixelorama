@@ -26,7 +26,7 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.get_image())
 			if cel.opacity < 1:  # If we have cel transparency
-				cel_image.lock()
+				false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 				for xx in cel_image.get_size().x:
 					for yy in cel_image.get_size().y:
 						var pixel_color := cel_image.get_pixel(xx, yy)
@@ -34,7 +34,7 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 						cel_image.set_pixel(
 							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 						)
-				cel_image.unlock()
+				false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			image.blend_rect(cel_image, blend_rect, origin)
 	return image
 
@@ -43,14 +43,14 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 
 
 func serialize() -> Dictionary:
-	var data := .serialize()
+	var data := super.serialize()
 	data["type"] = get_layer_type()
 	data["expanded"] = expanded
 	return data
 
 
 func deserialize(dict: Dictionary) -> void:
-	.deserialize(dict)
+	super.deserialize(dict)
 	expanded = dict.expanded
 
 
@@ -71,4 +71,4 @@ func accepts_child(_layer: BaseLayer) -> bool:
 
 
 func instantiate_layer_button() -> Node:
-	return Global.group_layer_button_node.instance()
+	return Global.group_layer_button_node.instantiate()

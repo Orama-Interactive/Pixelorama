@@ -2,24 +2,24 @@
 
 [ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Nodes/ValueSliderV3.gd" type="Script" id=2]
-[ext_resource path="res://assets/graphics/misc/lock_aspect_2.png" type="Texture" id=3]
-[ext_resource path="res://assets/graphics/misc/lock_aspect_guides.png" type="Texture" id=4]
-[ext_resource path="res://assets/graphics/misc/lock_aspect.png" type="Texture" id=5]
+[ext_resource path="res://assets/graphics/misc/lock_aspect_2.png" type="Texture2D" id=3]
+[ext_resource path="res://assets/graphics/misc/lock_aspect_guides.png" type="Texture2D" id=4]
+[ext_resource path="res://assets/graphics/misc/lock_aspect.png" type="Texture2D" id=5]
 
 [node name="ValueSliderV3" type="HBoxContainer"]
-margin_right = 45.0
-margin_bottom = 52.0
+offset_right = 45.0
+offset_bottom = 52.0
 script = ExtResource( 2 )
 
 [node name="GridContainer" type="GridContainer" parent="."]
-margin_right = 45.0
-margin_bottom = 80.0
+offset_right = 45.0
+offset_bottom = 80.0
 size_flags_horizontal = 3
 
-[node name="X" type="TextureProgress" parent="GridContainer"]
-margin_right = 45.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 32, 24 )
+[node name="X" type="TextureProgressBar" parent="GridContainer"]
+offset_right = 45.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 32, 24 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -31,11 +31,11 @@ stretch_margin_bottom = 3
 script = ExtResource( 1 )
 prefix = "X:"
 
-[node name="Y" type="TextureProgress" parent="GridContainer"]
-margin_top = 28.0
-margin_right = 45.0
-margin_bottom = 52.0
-rect_min_size = Vector2( 32, 24 )
+[node name="Y" type="TextureProgressBar" parent="GridContainer"]
+offset_top = 28.0
+offset_right = 45.0
+offset_bottom = 52.0
+custom_minimum_size = Vector2( 32, 24 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -47,11 +47,11 @@ stretch_margin_bottom = 3
 script = ExtResource( 1 )
 prefix = "Y:"
 
-[node name="Z" type="TextureProgress" parent="GridContainer"]
-margin_top = 56.0
-margin_right = 45.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 32, 24 )
+[node name="Z" type="TextureProgressBar" parent="GridContainer"]
+offset_top = 56.0
+offset_right = 45.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 32, 24 )
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -65,15 +65,15 @@ prefix = "Z:"
 
 [node name="Ratio" type="Control" parent="."]
 visible = false
-margin_left = 36.0
-margin_right = 52.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 16, 0 )
+offset_left = 36.0
+offset_right = 52.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 16, 0 )
 
 [node name="RatioGuides" type="NinePatchRect" parent="Ratio" groups=["UIButtons"]]
 anchor_bottom = 1.0
-margin_right = 9.0
-rect_min_size = Vector2( 9, 0 )
+offset_right = 9.0
+custom_minimum_size = Vector2( 9, 0 )
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 9, 44 )
 patch_margin_top = 15
@@ -85,11 +85,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -8.0
-margin_top = -8.0
-margin_right = 8.0
-margin_bottom = 8.0
-hint_tooltip = "Lock aspect ratio"
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+tooltip_text = "Lock aspect ratio"
 mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 3 )

@@ -1,5 +1,5 @@
 class_name AImgIOBaseExporter
-extends Reference
+extends RefCounted
 # Represents a method for exporting animations.
 
 var mime_type: String
@@ -17,5 +17,5 @@ func export_animation(
 	_progress_report_obj: Object,
 	_progress_report_method,
 	_progress_report_args
-) -> PoolByteArray:
-	return PoolByteArray()
+) -> PackedByteArray:
+	return PackedByteArray()

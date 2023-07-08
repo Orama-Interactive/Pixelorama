@@ -2,26 +2,26 @@ extends ConfirmationDialog
 
 enum InputTypes { KEYBOARD, MOUSE, JOY_BUTTON, JOY_AXIS }
 
-export(InputTypes) var input_type: int = InputTypes.KEYBOARD
+@export var input_type: InputTypes = InputTypes.KEYBOARD
 var listened_input: InputEvent
 
-onready var root: Node = get_parent()
-onready var input_type_l: Label = $VBoxContainer/InputTypeLabel
-onready var entered_shortcut: LineEdit = $VBoxContainer/EnteredShortcut
-onready var option_button: OptionButton = $VBoxContainer/OptionButton
-onready var already_exists: Label = $VBoxContainer/AlreadyExistsLabel
+@onready var root: Node = get_parent()
+@onready var input_type_l: Label = $VBoxContainer/InputTypeLabel
+@onready var entered_shortcut: LineEdit = $VBoxContainer/EnteredShortcut
+@onready var option_button: OptionButton = $VBoxContainer/OptionButton
+@onready var already_exists: Label = $VBoxContainer/AlreadyExistsLabel
 
 
 func _ready() -> void:
 	set_process_input(false)
 	if input_type == InputTypes.KEYBOARD:
-		get_ok().focus_neighbour_top = entered_shortcut.get_path()
-		get_cancel().focus_neighbour_top = entered_shortcut.get_path()
-		entered_shortcut.focus_neighbour_bottom = get_ok().get_path()
+		get_ok_button().focus_neighbor_top = entered_shortcut.get_path()
+		get_cancel_button().focus_neighbor_top = entered_shortcut.get_path()
+		entered_shortcut.focus_neighbor_bottom = get_ok_button().get_path()
 	else:
-		get_ok().focus_neighbour_top = option_button.get_path()
-		get_cancel().focus_neighbour_top = option_button.get_path()
-		option_button.focus_neighbour_bottom = get_ok().get_path()
+		get_ok_button().focus_neighbor_top = option_button.get_path()
+		get_cancel_button().focus_neighbor_top = option_button.get_path()
+		option_button.focus_neighbor_bottom = get_ok_button().get_path()
 
 	get_close_button().focus_mode = Control.FOCUS_NONE
 
@@ -31,7 +31,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.pressed:
 		listened_input = event
-		entered_shortcut.text = OS.get_scancode_string(event.get_scancode_with_modifiers())
+		entered_shortcut.text = OS.get_keycode_string(event.get_keycode_with_modifiers())
 		_show_assigned_state(event)
 
 
@@ -95,7 +95,7 @@ func _set_shortcut(action: String, old_event: InputEvent, new_event: InputEvent)
 		while tree_item != null:  # Loop through Tree's TreeItems...
 			var metadata = tree_item.get_metadata(0)
 			if metadata is InputEvent:
-				if input_to_replace.shortcut_match(metadata):
+				if input_to_replace.is_match(metadata):
 					var map_action: String = tree_item.get_parent().get_metadata(0)
 					if map_action == action_to_replace:
 						tree_item.free()
@@ -132,8 +132,8 @@ func _find_matching_event_in_map(action: String, event: InputEvent) -> Array:
 			continue
 		if Keychain.ignore_ui_actions and map_action.begins_with("ui_"):
 			continue
-		for map_event in InputMap.get_action_list(map_action):
-			if !event.shortcut_match(map_event):
+		for map_event in InputMap.action_get_events(map_action):
+			if !event.is_match(map_event):
 				continue
 
 			if map_action in Keychain.actions:
@@ -152,7 +152,7 @@ func _on_ShortcutSelectorDialog_about_to_show() -> void:
 		listened_input = null
 		already_exists.text = ""
 		entered_shortcut.text = ""
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 		entered_shortcut.grab_focus()
 	else:
 		var metadata = root.currently_editing_tree_item.get_metadata(0)

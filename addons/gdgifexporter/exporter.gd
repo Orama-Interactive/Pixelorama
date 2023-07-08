@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 
 enum Error { OK = 0, EMPTY_IMAGE = 1, BAD_IMAGE_FORMAT = 2 }
 
@@ -10,7 +10,7 @@ var last_color_table := []
 var last_transparency_index := -1
 
 # File data and Header
-var data := PoolByteArray([])
+var data := PackedByteArray([])
 
 
 func _init(_width: int, _height: int):
@@ -19,12 +19,12 @@ func _init(_width: int, _height: int):
 	add_application_ext("NETSCAPE", "2.0", [1, 0, 0])
 
 
-func export_file_data() -> PoolByteArray:
-	return data + PoolByteArray([0x3b])
+func export_file_data() -> PackedByteArray:
+	return data + PackedByteArray([0x3b])
 
 
 func add_header() -> void:
-	data += "GIF".to_ascii() + "89a".to_ascii()
+	data += "GIF".to_ascii_buffer() + "89a".to_ascii_buffer()
 
 
 func add_logical_screen_descriptor(width: int, height: int) -> void:
@@ -53,18 +53,18 @@ func add_application_ext(app_iden: String, app_auth_code: String, _data: Array) 
 	data.append(extension_introducer)
 	data.append(extension_label)
 	data.append(block_size)
-	data += app_iden.to_ascii()
-	data += app_auth_code.to_ascii()
+	data += app_iden.to_ascii_buffer()
+	data += app_auth_code.to_ascii_buffer()
 	data.append(_data.size())
-	data += PoolByteArray(_data)
+	data += PackedByteArray(_data)
 	data.append(0)
 
 
 # finds the image color table. Stops if the size gets larger than 256.
 func find_color_table(image: Image) -> Dictionary:
-	image.lock()
+	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var result: Dictionary = {}
-	var image_data: PoolByteArray = image.get_data()
+	var image_data: PackedByteArray = image.get_data()
 
 	for i in range(0, image_data.size(), 4):
 		var color: Array = [
@@ -78,7 +78,7 @@ func find_color_table(image: Image) -> Dictionary:
 		if result.size() > 256:
 			break
 
-	image.unlock()
+	false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return result
 
 
@@ -89,10 +89,10 @@ func find_transparency_color_index(color_table: Dictionary) -> int:
 	return -1
 
 
-func colors_to_codes(img: Image, col_palette: Dictionary, transp_color_index: int) -> PoolByteArray:
-	img.lock()
-	var image_data: PoolByteArray = img.get_data()
-	var result: PoolByteArray = PoolByteArray([])
+func colors_to_codes(img: Image, col_palette: Dictionary, transp_color_index: int) -> PackedByteArray:
+	false # img.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	var image_data: PackedByteArray = img.get_data()
+	var result: PackedByteArray = PackedByteArray([])
 
 	for i in range(0, image_data.size(), 4):
 		var color: Array = [image_data[i], image_data[i + 1], image_data[i + 2], image_data[i + 3]]
@@ -106,7 +106,7 @@ func colors_to_codes(img: Image, col_palette: Dictionary, transp_color_index: in
 			result.append(0)
 			push_warning("colors_to_codes: color not found! [%d, %d, %d, %d]" % color)
 
-	img.unlock()
+	false # img.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return result
 
 
@@ -123,8 +123,8 @@ func calc_delay_time(frame_delay: float) -> int:
 	return int(ceil(frame_delay / 0.01))
 
 
-func color_table_to_indexes(colors: Array) -> PoolByteArray:
-	var result: PoolByteArray = PoolByteArray([])
+func color_table_to_indexes(colors: Array) -> PackedByteArray:
+	var result: PackedByteArray = PackedByteArray([])
 	for i in range(colors.size()):
 		result.append(i)
 	return result
@@ -141,7 +141,7 @@ func add_frame(image: Image, frame_delay: float, quantizator: Script) -> int:
 
 	var found_color_table: Dictionary = find_color_table(image)
 
-	var image_converted_to_codes: PoolByteArray
+	var image_converted_to_codes: PackedByteArray
 	var transparency_color_index: int = -1
 	var color_table: Array
 	if found_color_table.size() <= 256:  # we don't need to quantize the image.
@@ -172,7 +172,7 @@ func add_frame(image: Image, frame_delay: float, quantizator: Script) -> int:
 	var compressed_image_result: Array = lzw.compress_lzw(
 		image_converted_to_codes, color_table_indexes
 	)
-	var compressed_image_data: PoolByteArray = compressed_image_result[0]
+	var compressed_image_data: PackedByteArray = compressed_image_result[0]
 	var lzw_min_code_size: int = compressed_image_result[1]
 
 	add_graphic_constrol_ext(delay_time, transparency_color_index)
@@ -193,7 +193,7 @@ func add_frame_with_lci(image: Image, frame_delay: float) -> int:
 	if image.is_empty():
 		return Error.EMPTY_IMAGE
 
-	var image_converted_to_codes: PoolByteArray = converter.new().get_similar_indexed_datas(
+	var image_converted_to_codes: PackedByteArray = converter.new().get_similar_indexed_datas(
 		image, last_color_table
 	)
 
@@ -201,7 +201,7 @@ func add_frame_with_lci(image: Image, frame_delay: float) -> int:
 	var compressed_image_result: Array = lzw.compress_lzw(
 		image_converted_to_codes, color_table_indexes
 	)
-	var compressed_image_data: PoolByteArray = compressed_image_result[0]
+	var compressed_image_data: PackedByteArray = compressed_image_result[0]
 	var lzw_min_code_size: int = compressed_image_result[1]
 
 	var delay_time := calc_delay_time(frame_delay)
@@ -268,7 +268,7 @@ func add_local_color_table(color_table: Array) -> void:
 			data.append_array([0, 0, 0])
 
 
-func add_image_data_block(lzw_min_code_size: int, frame_data: PoolByteArray) -> void:
+func add_image_data_block(lzw_min_code_size: int, frame_data: PackedByteArray) -> void:
 	var max_block_size = 254
 	data.append(lzw_min_code_size)
 	# the amount of blocks which will be stored
@@ -291,5 +291,5 @@ func add_image_data_block(lzw_min_code_size: int, frame_data: PoolByteArray) -> 
 		data.append(block_size)
 		data.append_array(block)
 
-	if not frame_data.empty():
+	if not frame_data.is_empty():
 		data.append(0)

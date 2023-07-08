@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 const DockableContainer = preload("dockable_container.gd")

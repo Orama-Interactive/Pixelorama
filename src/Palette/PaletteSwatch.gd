@@ -10,31 +10,31 @@ const DEFAULT_COLOR := Color(0.0, 0.0, 0.0, 0.0)
 var index := -1
 var show_left_highlight := false
 var show_right_highlight := false
-var empty := true setget set_empty
+var empty := true: set = set_empty
 
 
 func set_swatch_size(size: Vector2) -> void:
-	rect_min_size = size
-	rect_size = size
+	custom_minimum_size = size
+	size = size
 
 
 func _draw() -> void:
 	if not empty:
 		# Black border around swatches with a color
-		draw_rect(Rect2(Vector2.ZERO, rect_size), Color.black, false, 1)
+		draw_rect(Rect2(Vector2.ZERO, size), Color.BLACK, false, 1)
 
 	if show_left_highlight:
 		# Display outer border highlight
-		draw_rect(Rect2(Vector2.ZERO, rect_size), Color.white, false, 1)
-		draw_rect(Rect2(Vector2.ONE, rect_size - Vector2(2, 2)), Color.black, false, 1)
+		draw_rect(Rect2(Vector2.ZERO, size), Color.WHITE, false, 1)
+		draw_rect(Rect2(Vector2.ONE, size - Vector2(2, 2)), Color.BLACK, false, 1)
 
 	if show_right_highlight:
 		# Display inner border highlight
-		var margin := rect_size / 4
-		draw_rect(Rect2(margin, rect_size - margin * 2), Color.black, false, 1)
+		var margin := size / 4
+		draw_rect(Rect2(margin, size - margin * 2), Color.BLACK, false, 1)
 		draw_rect(
-			Rect2(margin - Vector2.ONE, rect_size - margin * 2 + Vector2(2, 2)),
-			Color.white,
+			Rect2(margin - Vector2.ONE, size - margin * 2 + Vector2(2, 2)),
+			Color.WHITE,
 			false,
 			1
 		)
@@ -44,9 +44,9 @@ func _draw() -> void:
 func show_selected_highlight(new_value: bool, mouse_button: int) -> void:
 	if not empty:
 		match mouse_button:
-			BUTTON_LEFT:
+			MOUSE_BUTTON_LEFT:
 				show_left_highlight = new_value
-			BUTTON_RIGHT:
+			MOUSE_BUTTON_RIGHT:
 				show_right_highlight = new_value
 		update()
 
@@ -61,7 +61,7 @@ func set_empty(new_value: bool) -> void:
 		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
-func get_drag_data(_position):
+func _get_drag_data(_position):
 	var data = null
 	if not empty:
 		var drag_icon: PaletteSwatch = self.duplicate()
@@ -73,11 +73,11 @@ func get_drag_data(_position):
 	return data
 
 
-func can_drop_data(_position, _data) -> bool:
+func _can_drop_data(_position, _data) -> bool:
 	return true
 
 
-func drop_data(_position, data) -> void:
+func _drop_data(_position, data) -> void:
 	emit_signal("dropped", data.source_index, index)
 
 

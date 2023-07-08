@@ -54,11 +54,11 @@ func _input(_event: InputEvent) -> void:
 	if has_focus:
 		if Input.is_action_pressed("left_mouse"):
 			if type == Types.HORIZONTAL:
-				var yy := stepify(mouse_pos.y, 0.5)
+				var yy := snapped(mouse_pos.y, 0.5)
 				points[0].y = yy
 				points[1].y = yy
 			else:
-				var xx := stepify(mouse_pos.x, 0.5)
+				var xx := snapped(mouse_pos.x, 0.5)
 				points[0].x = xx
 				points[1].x = xx
 			modulate.a = 0.5 if _outside_canvas() else 1.0
@@ -75,7 +75,7 @@ func _input(_event: InputEvent) -> void:
 func _draw() -> void:
 	if !has_focus:
 		return
-	var viewport_size: Vector2 = Global.main_viewport.rect_size
+	var viewport_size: Vector2 = Global.main_viewport.size
 	var zoom: Vector2 = Global.camera.zoom
 
 	# viewport_poly is an array of the points that make up the corners of the viewport
@@ -100,7 +100,7 @@ func _draw() -> void:
 
 	var string := (
 		"%spx"
-		% str(stepify(mouse_pos.y if type == Types.HORIZONTAL else mouse_pos.x, 0.5))
+		% str(snapped(mouse_pos.y if type == Types.HORIZONTAL else mouse_pos.x, 0.5))
 	)
 	var color: Color = Global.control.theme.get_color("font_color", "Label")
 	# X and Y offsets for nicer looking spacing
@@ -111,7 +111,7 @@ func _draw() -> void:
 	var font_height := font.get_height()
 	# Draw the string where the guide intersects with the viewport poly
 	# Priority is top edge, then left, then right
-	var intersection = Geometry.segment_intersects_segment_2d(
+	var intersection = Geometry.segment_intersects_segment(
 		points[0], points[1], viewport_poly[0], viewport_poly[1]
 	)
 
@@ -126,7 +126,7 @@ func _draw() -> void:
 			draw_string(font, Vector2(-font_string_size.x - x_offset, font_height), string, color)
 		return
 
-	intersection = Geometry.segment_intersects_segment_2d(
+	intersection = Geometry.segment_intersects_segment(
 		points[0], points[1], viewport_poly[3], viewport_poly[0]
 	)
 	if intersection:
@@ -140,7 +140,7 @@ func _draw() -> void:
 			draw_string(font, Vector2(x_offset, font_height), string, color)
 		return
 
-	intersection = Geometry.segment_intersects_segment_2d(
+	intersection = Geometry.segment_intersects_segment(
 		points[0], points[1], viewport_poly[1], viewport_poly[2]
 	)
 

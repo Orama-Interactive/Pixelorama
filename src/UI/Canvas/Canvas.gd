@@ -8,19 +8,19 @@ var current_pixel := Vector2.ZERO
 var sprite_changed_this_frame := false  # For optimization purposes
 var move_preview_location := Vector2.ZERO
 
-onready var currently_visible_frame: Viewport = $CurrentlyVisibleFrame
-onready var current_frame_drawer = $CurrentlyVisibleFrame/CurrentFrameDrawer
-onready var tile_mode = $TileMode
-onready var pixel_grid = $PixelGrid
-onready var grid = $Grid
-onready var selection = $Selection
-onready var onion_past := $OnionPast as Node2D
-onready var onion_future := $OnionFuture as Node2D
-onready var crop_rect := $CropRect as CropRect
-onready var indicators = $Indicators
-onready var previews = $Previews
-onready var mouse_guide_container = $MouseGuideContainer
-onready var gizmos_3d: Node2D = $Gizmos3D
+@onready var currently_visible_frame: SubViewport = $CurrentlyVisibleFrame
+@onready var current_frame_drawer = $CurrentlyVisibleFrame/CurrentFrameDrawer
+@onready var tile_mode = $TileMode
+@onready var pixel_grid = $PixelGrid
+@onready var grid = $Grid
+@onready var selection = $Selection
+@onready var onion_past := $OnionPast as Node2D
+@onready var onion_future := $OnionFuture as Node2D
+@onready var crop_rect := $CropRect as CropRect
+@onready var indicators = $Indicators
+@onready var previews = $Previews
+@onready var mouse_guide_container = $MouseGuideContainer
+@onready var gizmos_3d: Node2D = $Gizmos3D
 
 
 func _ready() -> void:
@@ -28,7 +28,7 @@ func _ready() -> void:
 	onion_past.blue_red_color = Global.onion_skinning_past_color
 	onion_future.type = onion_future.FUTURE
 	onion_future.blue_red_color = Global.onion_skinning_future_color
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	camera_zoom()
 
 

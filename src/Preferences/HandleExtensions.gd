@@ -6,10 +6,10 @@ var extensions := {}  # Extension name : Extension class
 var extension_selected := -1
 var damaged_extension: String
 
-onready var extension_list: ItemList = $InstalledExtensions
-onready var enable_button: Button = $HBoxContainer/EnableButton
-onready var uninstall_button: Button = $HBoxContainer/UninstallButton
-onready var extension_parent: Node = Global.control.get_node("Extensions")
+@onready var extension_list: ItemList = $InstalledExtensions
+@onready var enable_button: Button = $HBoxContainer/EnableButton
+@onready var uninstall_button: Button = $HBoxContainer/UninstallButton
+@onready var extension_parent: Node = Global.control.get_node("Extensions")
 
 
 class Extension:
@@ -44,11 +44,11 @@ func _ready() -> void:
 		$HBoxContainer/AddExtensionButton.disabled = true
 		$HBoxContainer/OpenFolderButton.visible = false
 
-	var dir := Directory.new()
+	var dir := DirAccess.new()
 	var file_names := []  # Array of String(s)
 	dir.make_dir(EXTENSIONS_PATH)
 	if dir.open(EXTENSIONS_PATH) == OK:
-		dir.list_dir_begin()
+		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var file_name = dir.get_next()
 		while file_name != "":
 			var ext: String = file_name.to_lower().get_extension()
@@ -56,7 +56,7 @@ func _ready() -> void:
 				file_names.append(file_name)
 			file_name = dir.get_next()
 
-	if file_names.empty():
+	if file_names.is_empty():
 		return
 
 	for file_name in file_names:
@@ -64,7 +64,7 @@ func _ready() -> void:
 
 
 func install_extension(path: String) -> void:
-	var dir := Directory.new()
+	var dir := DirAccess.new()
 	var file_name: String = path.get_file()
 	dir.copy(path, EXTENSIONS_PATH.plus_file(file_name))
 	_add_extension(file_name)
@@ -72,7 +72,7 @@ func install_extension(path: String) -> void:
 
 func _uninstall_extension(file_name := "", remove_file := true, item := extension_selected) -> void:
 	if remove_file:
-		var dir := Directory.new()
+		var dir := DirAccess.new()
 		var err := dir.remove(EXTENSIONS_PATH.plus_file(file_name))
 		if err != OK:
 			print(err)
@@ -91,7 +91,7 @@ func _uninstall_extension(file_name := "", remove_file := true, item := extensio
 
 func _add_extension(file_name: String) -> void:
 	var tester_file := File.new()  # For testing and deleting damaged extensions
-	var remover_directory := Directory.new()
+	var remover_directory := DirAccess.new()
 	# Remove any extension that was proven guilty before this extension is loaded
 	if tester_file.file_exists(EXTENSIONS_PATH.plus_file("Faulty.txt")):
 		# This code will only run if pixelorama crashed
@@ -124,15 +124,15 @@ func _add_extension(file_name: String) -> void:
 			return
 		_uninstall_extension(file_name, false, item)
 		# Wait two frames so the previous nodes can get freed
-		yield(get_tree(), "idle_frame")
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
+		await get_tree().idle_frame
 
 	var file_name_no_ext: String = file_name.get_basename()
 	var file_path: String = EXTENSIONS_PATH.plus_file(file_name)
 	var success := ProjectSettings.load_resource_pack(file_path)
 	if !success:
 		print("Failed loading resource pack.")
-		var dir := Directory.new()
+		var dir := DirAccess.new()
 		dir.remove(file_path)
 		return
 
@@ -145,7 +145,9 @@ func _add_extension(file_name: String) -> void:
 		extension_config_file.close()
 		return
 
-	var extension_json = parse_json(extension_config_file.get_as_text())
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(extension_config_file.get_as_text())
+	var extension_json = test_json_conv.get_data()
 	extension_config_file.close()
 
 	if !extension_json:
@@ -199,7 +201,7 @@ func _enable_extension(extension: Extension, save_to_config := true) -> void:
 			var scene_path: String = extension_path.plus_file(node)
 			var extension_scene: PackedScene = load(scene_path)
 			if extension_scene:
-				var extension_node: Node = extension_scene.instance()
+				var extension_node: Node = extension_scene.instantiate()
 				extension_parent.add_child(extension_node)
 				extension_node.add_to_group(id)  # Keep track of what to remove later
 			else:
@@ -256,6 +258,6 @@ func _on_OpenFolderButton_pressed() -> void:
 	OS.shell_open(ProjectSettings.globalize_path(EXTENSIONS_PATH))
 
 
-func _on_AddExtensionFileDialog_files_selected(paths: PoolStringArray) -> void:
+func _on_AddExtensionFileDialog_files_selected(paths: PackedStringArray) -> void:
 	for path in paths:
 		install_extension(path)

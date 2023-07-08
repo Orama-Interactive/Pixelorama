@@ -6,7 +6,7 @@ var animation_forward := true
 var first_frame := 0
 var last_frame := 0
 var is_mouse_hover := false
-var cel_size := 36 setget cel_size_changed
+var cel_size := 36: set = cel_size_changed
 var min_cel_size := 36
 var max_cel_size := 144
 var past_above_canvas := true
@@ -14,25 +14,25 @@ var future_above_canvas := true
 
 var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
 
-onready var old_scroll: int = 0  # The previous scroll state of $ScrollContainer
-onready var tag_spacer = find_node("TagSpacer")
-onready var start_spacer = find_node("StartSpacer")
-onready var add_layer_list: MenuButton = $"%AddLayerList"
+@onready var old_scroll: int = 0  # The previous scroll state of $ScrollContainer
+@onready var tag_spacer = find_child("TagSpacer")
+@onready var start_spacer = find_child("StartSpacer")
+@onready var add_layer_list: MenuButton = $"%AddLayerList"
 
-onready var timeline_scroll: ScrollContainer = find_node("TimelineScroll")
-onready var frame_scroll_container: Control = find_node("FrameScrollContainer")
-onready var frame_scroll_bar: HScrollBar = find_node("FrameScrollBar")
-onready var tag_scroll_container: ScrollContainer = find_node("TagScroll")
-onready var layer_frame_h_split: HSplitContainer = find_node("LayerFrameHSplit")
-onready var fps_spinbox: ValueSlider = find_node("FPSValue")
-onready var onion_skinning_button: BaseButton = find_node("OnionSkinning")
-onready var loop_animation_button: BaseButton = find_node("LoopAnim")
-onready var drag_highlight: ColorRect = find_node("DragHighlight")
+@onready var timeline_scroll: ScrollContainer = find_child("TimelineScroll")
+@onready var frame_scroll_container: Control = find_child("FrameScrollContainer")
+@onready var frame_scroll_bar: HScrollBar = find_child("FrameScrollBar")
+@onready var tag_scroll_container: ScrollContainer = find_child("TagScroll")
+@onready var layer_frame_h_split: HSplitContainer = find_child("LayerFrameHSplit")
+@onready var fps_spinbox: ValueSlider = find_child("FPSValue")
+@onready var onion_skinning_button: BaseButton = find_child("OnionSkinning")
+@onready var loop_animation_button: BaseButton = find_child("LoopAnim")
+@onready var drag_highlight: ColorRect = find_child("DragHighlight")
 
 
 func _ready() -> void:
-	add_layer_list.get_popup().connect("id_pressed", self, "add_layer")
-	frame_scroll_bar.connect("value_changed", self, "_frame_scroll_changed")
+	add_layer_list.get_popup().connect("id_pressed", Callable(self, "add_layer"))
+	frame_scroll_bar.connect("value_changed", Callable(self, "_frame_scroll_changed"))
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
 	# config loading
@@ -55,7 +55,7 @@ func _ready() -> void:
 	)
 	$"%PastOnionSkinning".value = past_rate
 	$"%FutureOnionSkinning".value = future_rate
-	$"%BlueRedMode".pressed = blue_red
+	$"%BlueRedMode".button_pressed = blue_red
 	$"%PastPlacement".select(0 if past_above else 1)
 	$"%FuturePlacement".select(0 if future_above else 1)
 	# emit signals that were supposed to be emitted (Check if it's still required in godot 4)
@@ -72,9 +72,9 @@ func _notification(what: int) -> void:
 
 func _input(event: InputEvent) -> void:
 	var mouse_pos := get_global_mouse_position()
-	var timeline_rect := Rect2(rect_global_position, rect_size)
+	var timeline_rect := Rect2(global_position, size)
 	if timeline_rect.has_point(mouse_pos):
-		if Input.is_key_pressed(KEY_CONTROL):
+		if Input.is_key_pressed(KEY_CTRL):
 			self.cel_size += (
 				2 * int(event.is_action("zoom_in"))
 				- 2 * int(event.is_action("zoom_out"))
@@ -84,7 +84,7 @@ func _input(event: InputEvent) -> void:
 func _get_minimum_size() -> Vector2:
 	# X targets enough to see layers, 1 frame, vertical scrollbar, and padding
 	# Y targets engough to see 1 layer
-	return Vector2(Global.layer_vbox.rect_size.x + cel_size + 26, cel_size + 105)
+	return Vector2(Global.layer_vbox.size.x + cel_size + 26, cel_size + 105)
 
 
 func _frame_scroll_changed(_value: float) -> void:
@@ -93,23 +93,23 @@ func _frame_scroll_changed(_value: float) -> void:
 
 
 func _on_LayerVBox_resized() -> void:
-	frame_scroll_bar.margin_left = frame_scroll_container.rect_position.x
+	frame_scroll_bar.offset_left = frame_scroll_container.position.x
 	adjust_scroll_container()
 
 
 func adjust_scroll_container():
-	tag_spacer.rect_min_size.x = (
-		frame_scroll_container.rect_global_position.x
-		- tag_scroll_container.rect_global_position.x
+	tag_spacer.custom_minimum_size.x = (
+		frame_scroll_container.global_position.x
+		- tag_scroll_container.global_position.x
 	)
-	tag_scroll_container.get_child(0).rect_min_size.x = Global.frame_hbox.rect_size.x
-	Global.tag_container.rect_min_size = Global.frame_hbox.rect_size
+	tag_scroll_container.get_child(0).custom_minimum_size.x = Global.frame_hbox.size.x
+	Global.tag_container.custom_minimum_size = Global.frame_hbox.size
 	tag_scroll_container.scroll_horizontal = frame_scroll_bar.value
 
 
 func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
 	Global.config_cache.set_value("timeline", "layer_size", layer_frame_h_split.split_offset)
-	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and not event.pressed:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		minimum_size_changed()  # After you're done resizing the layers, update min size
 
 
@@ -118,31 +118,31 @@ func cel_size_changed(value: int) -> void:
 	minimum_size_changed()
 	Global.config_cache.set_value("timeline", "cel_size", cel_size)
 	for layer_button in Global.layer_vbox.get_children():
-		layer_button.rect_min_size.y = cel_size
-		layer_button.rect_size.y = cel_size
+		layer_button.custom_minimum_size.y = cel_size
+		layer_button.size.y = cel_size
 	for cel_hbox in Global.cel_vbox.get_children():
 		for cel_button in cel_hbox.get_children():
-			cel_button.rect_min_size.x = cel_size
-			cel_button.rect_min_size.y = cel_size
-			cel_button.rect_size.x = cel_size
-			cel_button.rect_size.y = cel_size
+			cel_button.custom_minimum_size.x = cel_size
+			cel_button.custom_minimum_size.y = cel_size
+			cel_button.size.x = cel_size
+			cel_button.size.y = cel_size
 
 	for frame_id in Global.frame_hbox.get_children():
-		frame_id.rect_min_size.x = cel_size
-		frame_id.rect_size.x = cel_size
+		frame_id.custom_minimum_size.x = cel_size
+		frame_id.size.x = cel_size
 
 	for tag_c in Global.tag_container.get_children():
 		var tag_base_size = cel_size + 4
 		var tag: AnimationTag = tag_c.tag
 		# Added 1 to answer to get starting position of next cel
-		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + 1
+		tag_c.position.x = (tag.from - 1) * tag_base_size + 1
 		var tag_size: int = tag.to - tag.from
 		# We dont need the 4 pixels at the end of last cel
-		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 4
+		tag_c.custom_minimum_size.x = (tag_size + 1) * tag_base_size - 4
 		# We dont need the 4 pixels at the end of last cel
-		tag_c.rect_size.x = (tag_size + 1) * tag_base_size - 4
-		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
-		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
+		tag_c.size.x = (tag_size + 1) * tag_base_size - 4
+		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.custom_minimum_size.x, 0)
+		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.custom_minimum_size.x, 32)
 
 
 func add_frame() -> void:
@@ -192,8 +192,8 @@ func add_frame() -> void:
 	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
 	project.undo_redo.commit_action()
 	# it doesn't update properly without yields
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
+	await get_tree().idle_frame
 	adjust_scroll_container()
 
 
@@ -262,8 +262,8 @@ func delete_frames(indices := []) -> void:
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
 	project.undo_redo.commit_action()
 	# it doesn't update properly without yields
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
+	await get_tree().idle_frame
 	adjust_scroll_container()
 
 
@@ -366,13 +366,13 @@ func copy_frames(indices := [], destination := -1) -> void:
 			if !Global.current_project.selected_cels.has(frame_layer):
 				Global.current_project.selected_cels.append(frame_layer)
 	Global.current_project.change_cel(range_end, -1)
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
+	await get_tree().idle_frame
 	adjust_scroll_container()
 
 
 func _on_FrameTagButton_pressed() -> void:
-	find_node("FrameTagDialog").popup_centered()
+	find_child("FrameTagDialog").popup_centered()
 
 
 func _on_MoveLeft_pressed() -> void:
@@ -412,8 +412,8 @@ func _on_OnionSkinning_pressed() -> void:
 func _on_OnionSkinningSettings_pressed() -> void:
 	$OnionSkinningSettings.popup(
 		Rect2(
-			onion_skinning_button.rect_global_position.x - $OnionSkinningSettings.rect_size.x - 16,
-			onion_skinning_button.rect_global_position.y - 106,
+			onion_skinning_button.global_position.x - $OnionSkinningSettings.size.x - 16,
+			onion_skinning_button.global_position.y - 106,
 			136,
 			126
 		)
@@ -426,15 +426,15 @@ func _on_LoopAnim_pressed() -> void:
 		0:  # Make it loop
 			animation_loop = 1
 			Global.change_button_texturerect(texture_button, "loop.png")
-			loop_animation_button.hint_tooltip = "Cycle loop"
+			loop_animation_button.tooltip_text = "Cycle loop"
 		1:  # Make it ping-pong
 			animation_loop = 2
 			Global.change_button_texturerect(texture_button, "loop_pingpong.png")
-			loop_animation_button.hint_tooltip = "Ping-pong loop"
+			loop_animation_button.tooltip_text = "Ping-pong loop"
 		2:  # Make it stop
 			animation_loop = 0
 			Global.change_button_texturerect(texture_button, "loop_none.png")
-			loop_animation_button.hint_tooltip = "No loop"
+			loop_animation_button.tooltip_text = "No loop"
 
 
 func _on_PlayForward_toggled(button_pressed: bool) -> void:
@@ -456,8 +456,8 @@ func _on_PlayBackwards_toggled(button_pressed: bool) -> void:
 # Called on each frame of the animation
 func _on_AnimationTimer_timeout() -> void:
 	if first_frame == last_frame:
-		Global.play_forward.pressed = false
-		Global.play_backwards.pressed = false
+		Global.play_forward.button_pressed = false
+		Global.play_backwards.button_pressed = false
 		Global.animation_timer.stop()
 		return
 
@@ -476,8 +476,8 @@ func _on_AnimationTimer_timeout() -> void:
 		else:
 			match animation_loop:
 				0:  # No loop
-					Global.play_forward.pressed = false
-					Global.play_backwards.pressed = false
+					Global.play_forward.button_pressed = false
+					Global.play_backwards.button_pressed = false
 					Global.animation_timer.stop()
 					is_animation_running = false
 				1:  # Cycle loop
@@ -504,8 +504,8 @@ func _on_AnimationTimer_timeout() -> void:
 		else:
 			match animation_loop:
 				0:  # No loop
-					Global.play_backwards.pressed = false
-					Global.play_forward.pressed = false
+					Global.play_backwards.button_pressed = false
+					Global.play_forward.button_pressed = false
 					Global.animation_timer.stop()
 					is_animation_running = false
 				1:  # Cycle loop
@@ -538,21 +538,21 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 	if first_frame == last_frame:
 		if forward_dir:
-			Global.play_forward.pressed = false
+			Global.play_forward.button_pressed = false
 		else:
-			Global.play_backwards.pressed = false
+			Global.play_backwards.button_pressed = false
 		return
 
 	if forward_dir:
-		Global.play_backwards.disconnect("toggled", self, "_on_PlayBackwards_toggled")
-		Global.play_backwards.pressed = false
+		Global.play_backwards.disconnect("toggled", Callable(self, "_on_PlayBackwards_toggled"))
+		Global.play_backwards.button_pressed = false
 		Global.change_button_texturerect(Global.play_backwards.get_child(0), "play_backwards.png")
-		Global.play_backwards.connect("toggled", self, "_on_PlayBackwards_toggled")
+		Global.play_backwards.connect("toggled", Callable(self, "_on_PlayBackwards_toggled"))
 	else:
-		Global.play_forward.disconnect("toggled", self, "_on_PlayForward_toggled")
-		Global.play_forward.pressed = false
+		Global.play_forward.disconnect("toggled", Callable(self, "_on_PlayForward_toggled"))
+		Global.play_forward.button_pressed = false
 		Global.change_button_texturerect(Global.play_forward.get_child(0), "play.png")
-		Global.play_forward.connect("toggled", self, "_on_PlayForward_toggled")
+		Global.play_forward.connect("toggled", Callable(self, "_on_PlayForward_toggled"))
 
 	if play:
 		Global.animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
@@ -839,7 +839,7 @@ func _on_MergeDownLayer_pressed() -> void:
 		var top_image := Image.new()
 		top_image.copy_from(frame.cels[top_layer.index].get_image())
 
-		top_image.lock()
+		false # top_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		if frame.cels[top_layer.index].opacity < 1:  # If we have layer transparency
 			for xx in top_image.get_size().x:
 				for yy in top_image.get_size().y:
@@ -848,7 +848,7 @@ func _on_MergeDownLayer_pressed() -> void:
 					top_image.set_pixel(
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
-		top_image.unlock()
+		false # top_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		var bottom_cel: BaseCel = frame.cels[bottom_layer.index]
 		var bottom_image := Image.new()
 		bottom_image.copy_from(bottom_cel.image)
@@ -917,7 +917,7 @@ func project_changed() -> void:
 	for i in project.layers.size():
 		project_layer_added(i)
 	for f in project.frames.size():
-		var button: Button = frame_button_node.instance()
+		var button: Button = frame_button_node.instantiate()
 		button.frame = f
 		Global.frame_hbox.add_child(button)
 
@@ -927,22 +927,22 @@ func project_changed() -> void:
 		var layer: int = cel_index[1]
 		if frame < Global.frame_hbox.get_child_count():
 			var frame_button: BaseButton = Global.frame_hbox.get_child(frame)
-			frame_button.pressed = true
+			frame_button.button_pressed = true
 
 		var vbox_child_count: int = Global.cel_vbox.get_child_count()
 		if layer < vbox_child_count:
 			var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(vbox_child_count - 1 - layer)
 			if frame < cel_hbox.get_child_count():
 				var cel_button = cel_hbox.get_child(frame)
-				cel_button.pressed = true
+				cel_button.button_pressed = true
 
 			var layer_button = Global.layer_vbox.get_child(vbox_child_count - 1 - layer)
-			layer_button.pressed = true
+			layer_button.button_pressed = true
 
 
 func project_frame_added(frame: int) -> void:
 	var project: Project = Global.current_project
-	var button: Button = frame_button_node.instance()
+	var button: Button = frame_button_node.instantiate()
 	button.frame = frame
 	Global.frame_hbox.add_child(button)
 	Global.frame_hbox.move_child(button, frame)

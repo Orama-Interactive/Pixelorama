@@ -4,19 +4,19 @@ var shader: Shader
 var param_names := []  # String[]
 var value_slider_tscn := preload("res://src/UI/Nodes/ValueSlider.tscn")
 
-onready var shader_loaded_label: Label = $VBoxContainer/ShaderLoadedLabel
-onready var shader_params: BoxContainer = $VBoxContainer/ShaderParams
+@onready var shader_loaded_label: Label = $VBoxContainer/ShaderLoadedLabel
+@onready var shader_params: BoxContainer = $VBoxContainer/ShaderParams
 
 
-func _about_to_show() -> void:
+func _about_to_popup() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
 	Export.blend_selected_cels(selected_cels, frame)
 
 	preview_image.copy_from(selected_cels)
-	preview_texture.create_from_image(preview_image, 0)
+	preview_texture.create_from_image(preview_image) #,0
 	preview.texture = preview_texture
-	._about_to_show()
+	super._about_to_popup()
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
@@ -25,12 +25,12 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 
 	var params := {}
 	for param in param_names:
-		var param_data = preview.material.get_shader_param(param)
+		var param_data = preview.material.get_shader_parameter(param)
 		params[param] = param_data
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(cel, shader, params, project.size)
-	selected_cels.unlock()
-	yield(gen, "done")
+	false # selected_cels.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	await gen.done
 
 
 func _on_ChooseShader_pressed() -> void:
@@ -53,7 +53,7 @@ func set_nodes() -> void:
 
 func change_shader(shader_tmp: Shader, name: String) -> void:
 	shader = shader_tmp
-	preview.material.shader = shader_tmp
+	preview.material.gdshader = shader_tmp
 	shader_loaded_label.text = tr("Shader loaded:") + " " + name
 	param_names.clear()
 	for child in shader_params.get_children():
@@ -68,20 +68,20 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 	for uniform in uniforms:
 		# Example uniform:
 		# uniform float parameter_name : hint_range(0, 255) = 100.0;
-		var uniform_split: PoolStringArray = uniform.split("=")
+		var uniform_split: PackedStringArray = uniform.split("=")
 		var u_value := ""
 		if uniform_split.size() > 1:
 			u_value = uniform_split[1].replace(";", "").strip_edges()
 		else:
 			uniform_split[0] = uniform_split[0].replace(";", "").strip_edges()
 
-		var u_left_side: PoolStringArray = uniform_split[0].split(":")
+		var u_left_side: PackedStringArray = uniform_split[0].split(":")
 		var u_hint := ""
 		if u_left_side.size() > 1:
 			u_hint = u_left_side[1].strip_edges()
 			u_hint = u_hint.replace(";", "")
 
-		var u_init: PoolStringArray = u_left_side[0].split(" ")
+		var u_init: PackedStringArray = u_left_side[0].split(" ")
 		var u_type: String = u_init[1]
 		var u_name: String = u_init[2]
 		param_names.append(u_name)
@@ -90,11 +90,11 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			var label := Label.new()
 			label.text = u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var slider: ValueSlider = value_slider_tscn.instance()
+			var slider: ValueSlider = value_slider_tscn.instantiate()
 			var min_value := 0.0
 			var max_value := 255.0
 			var step := 1.0
-			var range_values_array: PoolStringArray
+			var range_values_array: PackedStringArray
 			if "hint_range" in u_hint:
 				var range_values: String = u_hint.replace("hint_range(", "")
 				range_values = range_values.replace(")", "").strip_edges()
@@ -131,7 +131,7 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			slider.min_value = min_value
 			slider.max_value = max_value
 			slider.step = step
-			slider.connect("value_changed", self, "set_shader_param", [u_name])
+			slider.connect("value_changed", Callable(self, "set_shader_parameter").bind(u_name))
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
 			hbox.add_child(slider)
@@ -141,27 +141,27 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			label.text = u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var vector2 := _vec2str_to_vector2(u_value)
-			var slider1: ValueSlider = value_slider_tscn.instance()
+			var slider1: ValueSlider = value_slider_tscn.instantiate()
 			slider1.value = vector2.x
-			slider1.connect("value_changed", self, "_set_vector2_shader_param", [u_name, true])
-			var slider2: ValueSlider = value_slider_tscn.instance()
+			slider1.connect("value_changed", Callable(self, "_set_vector2_shader_param").bind(u_name, true))
+			var slider2: ValueSlider = value_slider_tscn.instantiate()
 			slider2.value = vector2.y
-			slider2.connect("value_changed", self, "_set_vector2_shader_param", [u_name, false])
+			slider2.connect("value_changed", Callable(self, "_set_vector2_shader_param").bind(u_name, false))
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
 			hbox.add_child(slider1)
 			hbox.add_child(slider2)
 			shader_params.add_child(hbox)
 		elif u_type == "vec4":
-			if "hint_color" in u_hint:
+			if "source_color" in u_hint:
 				var label := Label.new()
 				label.text = u_name
 				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				var color := _vec4str_to_color(u_value)
 				var color_button := ColorPickerButton.new()
-				color_button.rect_min_size = Vector2(20, 20)
+				color_button.custom_minimum_size = Vector2(20, 20)
 				color_button.color = color
-				color_button.connect("color_changed", self, "set_shader_param", [u_name])
+				color_button.connect("color_changed", Callable(self, "set_shader_parameter").bind(u_name))
 				color_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				var hbox := HBoxContainer.new()
 				hbox.add_child(label)
@@ -172,15 +172,15 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			label.text = u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var file_dialog := FileDialog.new()
-			file_dialog.mode = FileDialog.MODE_OPEN_FILE
+			file_dialog.mode = FileDialog.FILE_MODE_OPEN_FILE
 			file_dialog.access = FileDialog.ACCESS_FILESYSTEM
 			file_dialog.resizable = true
-			file_dialog.rect_min_size = Vector2(200, 70)
-			file_dialog.rect_size = Vector2(384, 281)
-			file_dialog.connect("file_selected", self, "_load_texture", [u_name])
+			file_dialog.custom_minimum_size = Vector2(200, 70)
+			file_dialog.size = Vector2(384, 281)
+			file_dialog.connect("file_selected", Callable(self, "_load_texture").bind(u_name))
 			var button := Button.new()
 			button.text = "Load texture"
-			button.connect("pressed", file_dialog, "popup_centered")
+			button.connect("pressed", Callable(file_dialog, "popup_centered"))
 			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
@@ -194,8 +194,8 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			var checkbox := CheckBox.new()
 			checkbox.text = "On"
 			if u_value == "true":
-				checkbox.pressed = true
-			checkbox.connect("toggled", self, "set_shader_param", [u_name])
+				checkbox.button_pressed = true
+			checkbox.connect("toggled", Callable(self, "set_shader_parameter").bind(u_name))
 			checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
@@ -212,25 +212,25 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 #		print("--")
 
 
-func set_shader_param(value, param: String) -> void:
+func set_shader_parameter(value, param: String) -> void:
 	var mat: ShaderMaterial = preview.material
-	mat.set_shader_param(param, value)
+	mat.set_shader_parameter(param, value)
 
 
 func _set_vector2_shader_param(value: float, param: String, x: bool) -> void:
 	var mat: ShaderMaterial = preview.material
-	var vector2: Vector2 = mat.get_shader_param(param)
+	var vector2: Vector2 = mat.get_shader_parameter(param)
 	if x:
 		vector2.x = value
 	else:
 		vector2.y = value
-	set_shader_param(vector2, param)
+	set_shader_parameter(vector2, param)
 
 
 func _vec2str_to_vector2(vec2: String) -> Vector2:
 	vec2 = vec2.replace("vec2(", "")
 	vec2 = vec2.replace(")", "")
-	var vec_values: PoolStringArray = vec2.split(",")
+	var vec_values: PackedStringArray = vec2.split(",")
 	if vec_values.size() == 0:
 		return Vector2.ZERO
 	var y := float(vec_values[0])
@@ -243,7 +243,7 @@ func _vec2str_to_vector2(vec2: String) -> Vector2:
 func _vec4str_to_color(vec4: String) -> Color:
 	vec4 = vec4.replace("vec4(", "")
 	vec4 = vec4.replace(")", "")
-	var rgba_values: PoolStringArray = vec4.split(",")
+	var rgba_values: PackedStringArray = vec4.split(",")
 	var red := float(rgba_values[0])
 
 	var green := float(rgba_values[0])
@@ -268,6 +268,6 @@ func _load_texture(path: String, param: String) -> void:
 		print("Error loading texture")
 		return
 	var image_tex := ImageTexture.new()
-	image_tex.create_from_image(image, 0)
+	image_tex.create_from_image(image) #,0
 	image_tex.flags = ImageTexture.FLAG_REPEAT
-	set_shader_param(image_tex, param)
+	set_shader_parameter(image_tex, param)

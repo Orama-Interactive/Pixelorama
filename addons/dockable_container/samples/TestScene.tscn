@@ -7,15 +7,15 @@
 [ext_resource path="res://addons/dockable_container/layout_panel.gd" type="Script" id=5]
 
 [sub_resource type="Resource" id=5]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 5 )
-names = PoolStringArray( "Control0" )
+names = PackedStringArray( "Control0" )
 current_tab = 0
 
 [sub_resource type="Resource" id=1]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 5 )
-names = PoolStringArray( "Control1", "Control2" )
+names = PackedStringArray( "Control1", "Control2" )
 current_tab = 0
 
 [sub_resource type="Resource" id=6]
@@ -34,15 +34,15 @@ hidden_tabs = {
 }
 
 [sub_resource type="Resource" id=3]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 5 )
-names = PoolStringArray( "Control3" )
+names = PackedStringArray( "Control3" )
 current_tab = 0
 
 [sub_resource type="Resource" id=7]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 5 )
-names = PoolStringArray( "Control4" )
+names = PackedStringArray( "Control4" )
 current_tab = 0
 
 [sub_resource type="Resource" id=8]
@@ -54,9 +54,9 @@ first = SubResource( 3 )
 second = SubResource( 7 )
 
 [sub_resource type="Resource" id=9]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 5 )
-names = PoolStringArray( "Control5" )
+names = PackedStringArray( "Control5" )
 current_tab = 0
 
 [sub_resource type="Resource" id=10]
@@ -80,41 +80,41 @@ anchor_bottom = 1.0
 script = ExtResource( 4 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_right = 1024.0
-margin_bottom = 20.0
-custom_constants/separation = 16
+offset_right = 1024.0
+offset_bottom = 20.0
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="AddControlButton" type="Button" parent="HBoxContainer"]
-margin_left = 345.0
-margin_right = 472.0
-margin_bottom = 20.0
+offset_left = 345.0
+offset_right = 472.0
+offset_bottom = 20.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "(+) ADD CONTROL"
 
 [node name="SaveLayoutButton" type="Button" parent="HBoxContainer"]
-margin_left = 488.0
-margin_right = 575.0
-margin_bottom = 20.0
+offset_left = 488.0
+offset_right = 575.0
+offset_bottom = 20.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "Save Layout"
 
 [node name="LoadLayoutButton" type="Button" parent="HBoxContainer"]
-margin_left = 591.0
-margin_right = 679.0
-margin_bottom = 20.0
+offset_left = 591.0
+offset_right = 679.0
+offset_bottom = 20.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "Load Layout"
 
 [node name="ControlPrefab" type="ColorRect" parent="HBoxContainer"]
 visible = false
-margin_left = 677.0
-margin_right = 697.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 20 )
+offset_left = 677.0
+offset_right = 697.0
+offset_bottom = 20.0
+custom_minimum_size = Vector2( 20, 20 )
 color = Color( 0.129412, 0.121569, 0.121569, 1 )
 
 [node name="Buttons" type="VBoxContainer" parent="HBoxContainer/ControlPrefab"]
@@ -122,41 +122,41 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -65.5
-margin_top = -22.0
-margin_right = 65.5
-margin_bottom = 22.0
+offset_left = -65.5
+offset_top = -22.0
+offset_right = 65.5
+offset_bottom = 22.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Rename" type="Button" parent="HBoxContainer/ControlPrefab/Buttons"]
-margin_right = 131.0
-margin_bottom = 20.0
+offset_right = 131.0
+offset_bottom = 20.0
 text = "Rename"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Remove" type="Button" parent="HBoxContainer/ControlPrefab/Buttons"]
-margin_top = 24.0
-margin_right = 131.0
-margin_bottom = 44.0
+offset_top = 24.0
+offset_right = 131.0
+offset_bottom = 44.0
 text = "REMOVE"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="DockableContainers" type="HBoxContainer" parent="."]
-margin_top = 24.0
-margin_right = 1024.0
-margin_bottom = 600.0
+offset_top = 24.0
+offset_right = 1024.0
+offset_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="DockableContainer" type="Container" parent="DockableContainers"]
-margin_right = 483.0
-margin_bottom = 576.0
+offset_right = 483.0
+offset_bottom = 576.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
@@ -166,39 +166,39 @@ __meta__ = {
 layout = SubResource( 2 )
 
 [node name="Control0" type="ColorRect" parent="DockableContainers/DockableContainer"]
-margin_left = 4.0
-margin_top = 32.0
-margin_right = 479.0
-margin_bottom = 278.0
-rect_min_size = Vector2( 64, 64 )
+offset_left = 4.0
+offset_top = 32.0
+offset_right = 479.0
+offset_bottom = 278.0
+custom_minimum_size = Vector2( 64, 64 )
 
 [node name="Control1" type="ColorRect" parent="DockableContainers/DockableContainer"]
-margin_left = 4.0
-margin_top = 326.0
-margin_right = 479.0
-margin_bottom = 572.0
-rect_min_size = Vector2( 128, 128 )
+offset_left = 4.0
+offset_top = 326.0
+offset_right = 479.0
+offset_bottom = 572.0
+custom_minimum_size = Vector2( 128, 128 )
 color = Color( 0.141176, 0.0745098, 0.603922, 1 )
 
 [node name="Control2" type="ColorRect" parent="DockableContainers/DockableContainer"]
 visible = false
-margin_top = 294.0
-margin_right = 64.0
-margin_bottom = 358.0
-rect_min_size = Vector2( 64, 64 )
+offset_top = 294.0
+offset_right = 64.0
+offset_bottom = 358.0
+custom_minimum_size = Vector2( 64, 64 )
 color = Color( 0.533333, 0.380392, 0.380392, 1 )
 
 [node name="Separator" type="ColorRect" parent="DockableContainers"]
-margin_left = 487.0
-margin_right = 537.0
-margin_bottom = 576.0
-rect_min_size = Vector2( 50, 0 )
+offset_left = 487.0
+offset_right = 537.0
+offset_bottom = 576.0
+custom_minimum_size = Vector2( 50, 0 )
 color = Color( 0, 0, 0, 1 )
 
 [node name="DockableContainer2" type="Container" parent="DockableContainers"]
-margin_left = 541.0
-margin_right = 1024.0
-margin_bottom = 576.0
+offset_left = 541.0
+offset_right = 1024.0
+offset_bottom = 576.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
@@ -208,27 +208,27 @@ __meta__ = {
 layout = SubResource( 4 )
 
 [node name="Control3" type="ColorRect" parent="DockableContainers/DockableContainer2"]
-margin_left = 4.0
-margin_top = 32.0
-margin_right = 231.5
-margin_bottom = 152.0
-rect_min_size = Vector2( 64, 64 )
+offset_left = 4.0
+offset_top = 32.0
+offset_right = 231.5
+offset_bottom = 152.0
+custom_minimum_size = Vector2( 64, 64 )
 color = Color( 0, 1, 0.905882, 1 )
 
 [node name="Control4" type="ColorRect" parent="DockableContainers/DockableContainer2"]
-margin_left = 4.0
-margin_top = 200.0
-margin_right = 231.5
-margin_bottom = 572.0
-rect_min_size = Vector2( 128, 128 )
+offset_left = 4.0
+offset_top = 200.0
+offset_right = 231.5
+offset_bottom = 572.0
+custom_minimum_size = Vector2( 128, 128 )
 color = Color( 0, 0.698039, 0.0588235, 1 )
 
 [node name="Control5" type="ColorRect" parent="DockableContainers/DockableContainer2"]
-margin_left = 251.5
-margin_top = 32.0
-margin_right = 479.0
-margin_bottom = 572.0
-rect_min_size = Vector2( 64, 64 )
+offset_left = 251.5
+offset_top = 32.0
+offset_right = 479.0
+offset_bottom = 572.0
+custom_minimum_size = Vector2( 64, 64 )
 color = Color( 1, 0.937255, 0, 1 )
 
 [connection signal="pressed" from="HBoxContainer/AddControlButton" to="." method="_on_add_pressed"]

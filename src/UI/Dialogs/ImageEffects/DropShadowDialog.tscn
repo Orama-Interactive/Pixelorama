@@ -9,37 +9,37 @@ window_title = "Drop Shadow"
 script = ExtResource( 2 )
 
 [node name="VBoxContainer" parent="." index="3"]
-margin_bottom = 340.0
+offset_bottom = 340.0
 
 [node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
-margin_bottom = 224.0
+offset_bottom = 224.0
 
 [node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-margin_left = 80.0
-margin_right = 280.0
-margin_bottom = 200.0
+offset_left = 80.0
+offset_right = 280.0
+offset_bottom = 200.0
 
 [node name="ShadowOptions" type="GridContainer" parent="VBoxContainer" index="2"]
-margin_top = 228.0
-margin_right = 360.0
-margin_bottom = 304.0
-custom_constants/vseparation = 4
-custom_constants/hseparation = 4
+offset_top = 228.0
+offset_right = 360.0
+offset_bottom = 304.0
+theme_override_constants/v_separation = 4
+theme_override_constants/h_separation = 4
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="VBoxContainer/ShadowOptions" index="0"]
-margin_top = 19.0
-margin_right = 178.0
-margin_bottom = 33.0
+offset_top = 19.0
+offset_right = 178.0
+offset_bottom = 33.0
 size_flags_horizontal = 3
 text = "Offset:"
 
 [node name="OffsetSliders" parent="VBoxContainer/ShadowOptions" index="1" instance=ExtResource( 3 )]
-margin_left = 182.0
-margin_right = 360.0
+offset_left = 182.0
+offset_right = 360.0
 value = Vector2( 5, 5 )
 min_value = Vector2( -64, -64 )
 max_value = Vector2( 64, 64 )
@@ -50,30 +50,30 @@ suffix_x = "px"
 suffix_y = "px"
 
 [node name="ShadowColorLabel" type="Label" parent="VBoxContainer/ShadowOptions" index="2"]
-margin_top = 59.0
-margin_right = 178.0
-margin_bottom = 73.0
+offset_top = 59.0
+offset_right = 178.0
+offset_bottom = 73.0
 size_flags_horizontal = 3
 text = "Shadow color:"
 
 [node name="ShadowColor" type="ColorPickerButton" parent="VBoxContainer/ShadowOptions" index="3"]
-margin_left = 182.0
-margin_top = 56.0
-margin_right = 360.0
-margin_bottom = 76.0
-rect_min_size = Vector2( 64, 20 )
+offset_left = 182.0
+offset_top = 56.0
+offset_right = 360.0
+offset_bottom = 76.0
+custom_minimum_size = Vector2( 64, 20 )
 size_flags_horizontal = 3
 color = Color( 0.0823529, 0.0823529, 0.0823529, 0.627451 )
 
 [node name="OptionsContainer" parent="VBoxContainer" index="3"]
-margin_top = 308.0
-margin_bottom = 332.0
+offset_top = 308.0
+offset_bottom = 332.0
 
 [node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
 items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 
 [node name="AnimateDialog" parent="." index="4"]
-margin_bottom = 340.0
+offset_bottom = 340.0
 
 [connection signal="value_changed" from="VBoxContainer/ShadowOptions/OffsetSliders" to="." method="_on_OffsetSliders_value_changed"]
 [connection signal="color_changed" from="VBoxContainer/ShadowOptions/ShadowColor" to="." method="_on_ShadowColor_color_changed"]

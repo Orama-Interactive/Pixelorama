@@ -5,14 +5,14 @@ var perspective_lines = []
 var color := Color(randf(), randf(), randf(), 1)
 
 var tracker_line: PerspectiveLine
-onready var color_picker_button = $"%ColorPickerButton"
-onready var title := $"%PointCollapseContainer"
-onready var pos_x := $"%X"
-onready var pos_y := $"%Y"
-onready var line_buttons_container := $"%LinesContainer"
-onready var boundary_l := $Content/BoundaryL
-onready var boundary_r := $Content/BoundaryR
-onready var boundary_b := $Content/VBoxContainer/BoundaryB
+@onready var color_picker_button = $"%ColorPickerButton"
+@onready var title := $"%PointCollapseContainer"
+@onready var pos_x := $"%X"
+@onready var pos_y := $"%Y"
+@onready var line_buttons_container := $"%LinesContainer"
+@onready var boundary_l := $Content/BoundaryL
+@onready var boundary_r := $Content/BoundaryR
+@onready var boundary_b := $Content/VBoxContainer/BoundaryB
 
 
 func serialize() -> Dictionary:
@@ -55,9 +55,9 @@ func initiate(start_data: Dictionary = {}, idx = -1) -> void:
 	else:
 		title.point_text = str("Point: ", get_parent().get_child_count())
 	# connect signals
-	color_picker_button.connect("color_changed", self, "_on_color_changed")
-	pos_x.connect("value_changed", self, "_on_pos_value_changed")
-	pos_y.connect("value_changed", self, "_on_pos_value_changed")
+	color_picker_button.connect("color_changed", Callable(self, "_on_color_changed"))
+	pos_x.connect("value_changed", Callable(self, "_on_pos_value_changed"))
+	pos_y.connect("value_changed", Callable(self, "_on_pos_value_changed"))
 
 
 func update_boundary_color():
@@ -119,7 +119,7 @@ func _on_pos_value_changed(_value: float) -> void:
 
 func angle_changed(value: float, line_button):
 	# check if the properties are changing the line or is the line changing properties
-	var angle_slider = line_button.find_node("AngleSlider")
+	var angle_slider = line_button.find_child("AngleSlider")
 	if angle_slider.value != value:  # the line is changing the properties
 		angle_slider.value = value
 	else:
@@ -131,7 +131,7 @@ func angle_changed(value: float, line_button):
 
 func length_changed(value: float, line_button):
 	# check if the properties are changing the line or is the line changing properties
-	var length_slider = line_button.find_node("LengthSlider")
+	var length_slider = line_button.find_child("LengthSlider")
 	if length_slider.value != value:  # the line is changing the properties
 		length_slider.value = value
 	else:
@@ -180,7 +180,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 			line_data.length = p_size.x
 
 	# Create the visual line
-	var line = preload("res://src/UI/PerspectiveEditor/PerspectiveLine.tscn").instance()
+	var line = preload("res://src/UI/PerspectiveEditor/PerspectiveLine.tscn").instantiate()
 	line.initiate(line_data, self)
 
 	# Set its mode accordingly
@@ -189,7 +189,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 		tracker_line = line
 		tracker_line.hide_perspective_line()
 	else:  # Settings for Normal mode
-		var line_button = preload("res://src/UI/PerspectiveEditor/LineButton.tscn").instance()
+		var line_button = preload("res://src/UI/PerspectiveEditor/LineButton.tscn").instantiate()
 		line_buttons_container.add_child(line_button)
 		var index = line_button.get_parent().get_child_count() - 2
 		line_button.get_parent().move_child(line_button, index)
@@ -199,17 +199,17 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 		)
 		line_button.text = line_name
 
-		var remove_button = line_button.find_node("Delete")
-		var angle_slider = line_button.find_node("AngleSlider")
-		var length_slider = line_button.find_node("LengthSlider")
+		var remove_button = line_button.find_child("Delete")
+		var angle_slider = line_button.find_child("AngleSlider")
+		var length_slider = line_button.find_child("LengthSlider")
 
 		angle_slider.value = abs(line_data.angle)
 		length_slider.value = line_data.length
 
 		line.line_button = line_button  # In case we need to change properties from line
-		angle_slider.connect("value_changed", self, "angle_changed", [line_button])
-		length_slider.connect("value_changed", self, "length_changed", [line_button])
-		remove_button.connect("pressed", self, "_remove_line_pressed", [line_button])
+		angle_slider.connect("value_changed", Callable(self, "angle_changed").bind(line_button))
+		length_slider.connect("value_changed", Callable(self, "length_changed").bind(line_button))
+		remove_button.connect("pressed", Callable(self, "_remove_line_pressed").bind(line_button))
 		perspective_lines.append(line)
 
 

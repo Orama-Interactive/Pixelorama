@@ -2,9 +2,9 @@ extends VBoxContainer
 
 const SAVED_LAYOUT_PATH = "user://layout.tres"
 
-onready var _container = $DockableContainers/DockableContainer
-onready var _clone_control = $HBoxContainer/ControlPrefab
-onready var _checkbox_container = $HBoxContainer
+@onready var _container = $DockableContainers/DockableContainer
+@onready var _clone_control = $HBoxContainer/ControlPrefab
+@onready var _checkbox_container = $HBoxContainer
 
 
 func _ready() -> void:
@@ -16,8 +16,8 @@ func _ready() -> void:
 	for i in tabs.size():
 		var checkbox = CheckBox.new()
 		checkbox.text = str(i)
-		checkbox.pressed = not _container.is_control_hidden(tabs[i])
-		checkbox.connect("toggled", self, "_on_CheckButton_toggled", [tabs[i]])
+		checkbox.button_pressed = not _container.is_control_hidden(tabs[i])
+		checkbox.connect("toggled", Callable(self, "_on_CheckButton_toggled").bind(tabs[i))
 		_checkbox_container.add_child(checkbox)
 
 
@@ -33,7 +33,7 @@ func _on_add_pressed() -> void:
 	control.name = "Control0"
 
 	_container.add_child(control, true)
-	yield(_container, "sort_children")
+	await _container.sort_children
 	_container.set_control_as_current_tab(control)
 
 

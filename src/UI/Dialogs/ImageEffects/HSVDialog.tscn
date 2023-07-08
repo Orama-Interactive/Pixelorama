@@ -10,44 +10,44 @@ window_title = "Adjust HSV"
 script = ExtResource( 1 )
 
 [node name="VBoxContainer" parent="." index="3"]
-margin_bottom = 344.0
+offset_bottom = 344.0
 
 [node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
-margin_bottom = 224.0
+offset_bottom = 224.0
 
 [node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-margin_left = 80.0
-margin_right = 280.0
-margin_bottom = 200.0
+offset_left = 80.0
+offset_right = 280.0
+offset_bottom = 200.0
 
 [node name="HueSlider" parent="VBoxContainer" index="2" instance=ExtResource( 3 )]
-margin_top = 228.0
-margin_right = 360.0
-margin_bottom = 252.0
+offset_top = 228.0
+offset_right = 360.0
+offset_bottom = 252.0
 min_value = -180.0
 max_value = 180.0
 prefix = "Hue:"
 
 [node name="SaturationSlider" parent="VBoxContainer" index="3" instance=ExtResource( 3 )]
-margin_top = 256.0
-margin_right = 360.0
-margin_bottom = 280.0
+offset_top = 256.0
+offset_right = 360.0
+offset_bottom = 280.0
 min_value = -100.0
 prefix = "Saturation:"
 
 [node name="ValueSlider" parent="VBoxContainer" index="4" instance=ExtResource( 3 )]
-margin_top = 284.0
-margin_right = 360.0
-margin_bottom = 308.0
+offset_top = 284.0
+offset_right = 360.0
+offset_bottom = 308.0
 min_value = -100.0
 prefix = "Value:"
 
 [node name="OptionsContainer" parent="VBoxContainer" index="5"]
-margin_top = 312.0
-margin_bottom = 336.0
+offset_top = 312.0
+offset_bottom = 336.0
 
 [node name="AnimateDialog" parent="." index="4"]
-margin_bottom = 344.0
+offset_bottom = 344.0
 
 [connection signal="value_changed" from="VBoxContainer/HueSlider" to="." method="_on_HueSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/SaturationSlider" to="." method="_on_SaturationSlider_value_changed"]

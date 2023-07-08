@@ -20,7 +20,7 @@ func _input(event: InputEvent) -> void:
 				and (!event.control and !event.command)
 			):
 				# Shortcut for right button (with Alt)
-				Tools.assign_tool(t.name, BUTTON_RIGHT)
+				Tools.assign_tool(t.name, MOUSE_BUTTON_RIGHT)
 				return
 		if InputMap.has_action("left_" + t.shortcut + "_tool"):
 			if (
@@ -28,13 +28,13 @@ func _input(event: InputEvent) -> void:
 				and (!event.control and !event.command)
 			):
 				# Shortcut for left button
-				Tools.assign_tool(t.name, BUTTON_LEFT)
+				Tools.assign_tool(t.name, MOUSE_BUTTON_LEFT)
 				return
 
 
 func _on_Tool_pressed(tool_pressed: BaseButton) -> void:
 	var button := -1
-	button = BUTTON_LEFT if Input.is_action_just_released("left_mouse") else button
-	button = BUTTON_RIGHT if Input.is_action_just_released("right_mouse") else button
+	button = MOUSE_BUTTON_LEFT if Input.is_action_just_released("left_mouse") else button
+	button = MOUSE_BUTTON_RIGHT if Input.is_action_just_released("right_mouse") else button
 	if button != -1:
 		Tools.assign_tool(tool_pressed.name, button)

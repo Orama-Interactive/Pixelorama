@@ -1,16 +1,16 @@
-tool
+@tool
 extends "layout_node.gd"
 # Layout leaf nodes, defining tabs
 
-export(PoolStringArray) var names: PoolStringArray setget set_names, get_names
-export(int) var current_tab: int setget set_current_tab, get_current_tab
+@export var names: PackedStringArray: get = get_names, set = set_names
+@export var current_tab: int: get = get_current_tab, set = set_current_tab
 
-var _names := PoolStringArray()
+var _names := PackedStringArray()
 var _current_tab := 0
 
 
 func _init() -> void:
-	resource_name = "Tabs"
+	resource_name = "TabBar"
 
 
 func clone():
@@ -30,12 +30,12 @@ func get_current_tab() -> int:
 	return int(clamp(_current_tab, 0, _names.size() - 1))
 
 
-func set_names(value: PoolStringArray) -> void:
+func set_names(value: PackedStringArray) -> void:
 	_names = value
 	emit_tree_changed()
 
 
-func get_names() -> PoolStringArray:
+func get_names() -> PackedStringArray:
 	return _names
 
 
@@ -56,12 +56,12 @@ func find_name(node_name: String) -> int:
 	return -1
 
 
-func find_node(node: Node):
+func find_child(node: Node):
 	return find_name(node.name)
 
 
 func remove_node(node: Node) -> void:
-	var i = find_node(node)
+	var i = find_child(node)
 	if i >= 0:
 		_names.remove(i)
 		emit_tree_changed()
@@ -78,11 +78,11 @@ func rename_node(previous_name: String, new_name: String) -> void:
 		push_warning("Rename failed, name '%s' was not found" % previous_name)
 
 
-func empty() -> bool:
-	return _names.empty()
+func is_empty() -> bool:
+	return _names.is_empty()
 
 
-func update_nodes(node_names: PoolStringArray, data: Dictionary):
+func update_nodes(node_names: PackedStringArray, data: Dictionary):
 	var i = 0
 	var removed_any = false
 	while i < _names.size():

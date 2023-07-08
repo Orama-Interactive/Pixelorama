@@ -3,13 +3,13 @@
 [ext_resource path="res://src/UI/Timeline/FrameButton.gd" type="Script" id=1]
 
 [node name="FrameButton" type="Button"]
-margin_right = 12.0
-margin_bottom = 20.0
+offset_right = 12.0
+offset_bottom = 20.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 button_mask = 7
-enabled_focus_mode = 0
+focus_mode = 0
 text = "1"
 script = ExtResource( 1 )
 __meta__ = {
@@ -17,8 +17,8 @@ __meta__ = {
 }
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
-margin_right = 20.0
-margin_bottom = 20.0
+offset_right = 20.0
+offset_bottom = 20.0
 mouse_default_cursor_shape = 2
 items = [ "Remove Frame", null, 0, false, true, -1, 0, null, "", false, "Clone Frame", null, 0, false, false, -1, 0, null, "", false, "Move Left", null, 0, false, true, -1, 0, null, "", false, "Move Right", null, 0, false, true, -1, 0, null, "", false, "Frame Properties", null, 0, false, false, -1, 0, null, "", false, "Reverse Frames", null, 0, false, true, 5, 0, null, "", false, "Center Frames", null, 0, false, false, 6, 0, null, "", false ]
 __meta__ = {

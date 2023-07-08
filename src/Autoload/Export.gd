@@ -41,7 +41,7 @@ var file_exists_alert := "The following files already exist. Do you wish to over
 # Export progress variables
 var export_progress_fraction := 0.0
 var export_progress := 0.0
-onready var gif_export_thread := Thread.new()
+@onready var gif_export_thread := Thread.new()
 
 
 func _exit_tree() -> void:
@@ -165,7 +165,7 @@ func export_processed_images(
 	ignore_overwrites: bool, export_dialog: ConfirmationDialog, project := Global.current_project
 ) -> bool:
 	# Stop export if directory path or file name are not valid
-	var dir := Directory.new()
+	var dir := DirAccess.new()
 	if not dir.dir_exists(project.directory_path) or not project.file_name.is_valid_filename():
 		if not dir.dir_exists(project.directory_path) and project.file_name.is_valid_filename():
 			export_dialog.open_path_validation_alert_popup(0)
@@ -187,7 +187,7 @@ func export_processed_images(
 		# If the user wants to create a new directory for each animation tag then check
 		# if directories exist, and create them if not
 		if multiple_files and new_dir_for_each_frame_tag:
-			var frame_tag_directory := Directory.new()
+			var frame_tag_directory := DirAccess.new()
 			if not frame_tag_directory.dir_exists(export_path.get_base_dir()):
 				frame_tag_directory.open(project.directory_path)
 				frame_tag_directory.make_dir(export_path.get_base_dir().get_file())
@@ -195,7 +195,7 @@ func export_processed_images(
 		if not ignore_overwrites:  # Check if the files already exist
 			var file_check: File = File.new()
 			if file_check.file_exists(export_path):
-				if not paths_of_existing_files.empty():
+				if not paths_of_existing_files.is_empty():
 					paths_of_existing_files += "\n"
 				paths_of_existing_files += export_path
 		export_paths.append(export_path)
@@ -203,11 +203,11 @@ func export_processed_images(
 		if is_single_file_format(project):
 			break
 
-	if not paths_of_existing_files.empty():  # If files already exist
+	if not paths_of_existing_files.is_empty():  # If files already exist
 		# Ask user if they want to overwrite the files
 		export_dialog.open_file_exists_alert_popup(tr(file_exists_alert) % paths_of_existing_files)
 		# Stops the function until the user decides if they want to overwrite
-		yield(export_dialog, "resume_export_function")
+		await export_dialog.resume_export_function
 		if stop_export:  # User decided to stop export
 			return
 
@@ -229,7 +229,7 @@ func export_processed_images(
 			if OS.get_name() != "HTML5" and is_single_file_format(project):
 				if gif_export_thread.is_active():
 					gif_export_thread.wait_to_finish()
-				var error = gif_export_thread.start(custom_exporter, "override_export", details)
+				var error = gif_export_thread.start(Callable(custom_exporter, "override_export").bind(details))
 				if error == OK:
 					result = gif_export_thread.wait_to_finish()
 			else:
@@ -253,7 +253,7 @@ func export_processed_images(
 		else:
 			if gif_export_thread.is_active():
 				gif_export_thread.wait_to_finish()
-			gif_export_thread.start(self, "export_animated", details)
+			gif_export_thread.start(Callable(self, "export_animated").bind(details))
 	else:
 		var succeeded := true
 		for i in range(processed_images.size()):
@@ -337,7 +337,7 @@ func increase_export_progress(export_dialog: Node) -> void:
 func scale_processed_images() -> void:
 	for processed_image in processed_images:
 		if resize != 100:
-			processed_image.unlock()
+			false # processed_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			processed_image.resize(
 				processed_image.get_size().x * resize / 100,
 				processed_image.get_size().y * resize / 100,
@@ -467,7 +467,7 @@ func blend_all_layers(
 		var cel_image := Image.new()
 		cel_image.copy_from(cel.get_image())
 		if cel.opacity < 1:  # If we have cel transparency
-			cel_image.lock()
+			false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			for xx in cel_image.get_size().x:
 				for yy in cel_image.get_size().y:
 					var pixel_color := cel_image.get_pixel(xx, yy)
@@ -475,7 +475,7 @@ func blend_all_layers(
 					cel_image.set_pixel(
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
-			cel_image.unlock()
+			false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
 		layer_i += 1
 
@@ -496,7 +496,7 @@ func blend_selected_cels(
 		var cel_image := Image.new()
 		cel_image.copy_from(cel.get_image())
 		if cel.opacity < 1:  # If we have cel transparency
-			cel_image.lock()
+			false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			for xx in cel_image.get_size().x:
 				for yy in cel_image.get_size().y:
 					var pixel_color := cel_image.get_pixel(xx, yy)
@@ -504,7 +504,7 @@ func blend_selected_cels(
 					cel_image.set_pixel(
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
-			cel_image.unlock()
+			false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
 
 

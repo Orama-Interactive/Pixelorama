@@ -6,7 +6,7 @@ var _draw_points := []
 
 func draw_start(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_start(position)
+	super.draw_start(position)
 	if !_move:
 		_draw_points.append(position)
 		_last_position = position
@@ -16,7 +16,7 @@ func draw_move(position: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
 	position = snap_position(position)
-	.draw_move(position)
+	super.draw_move(position)
 	if !_move:
 		append_gap(_last_position, position)
 		_last_position = position
@@ -30,7 +30,7 @@ func draw_end(position: Vector2) -> void:
 	position = snap_position(position)
 	if !_move:
 		_draw_points.append(position)
-	.draw_end(position)
+	super.draw_end(position)
 
 
 func draw_preview() -> void:
@@ -45,7 +45,7 @@ func draw_preview() -> void:
 		var indicator := _fill_bitmap_with_points(_draw_points, Global.current_project.size)
 
 		for line in _create_polylines(indicator):
-			canvas.draw_polyline(PoolVector2Array(line), Color.black)
+			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
 		# Handle mirroring
 		if Tools.horizontal_mirror:
@@ -54,27 +54,27 @@ func draw_preview() -> void:
 					mirror_array(_draw_points, true, false), Global.current_project.size
 				)
 			):
-				canvas.draw_polyline(PoolVector2Array(line), Color.black)
+				canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 			if Tools.vertical_mirror:
 				for line in _create_polylines(
 					_fill_bitmap_with_points(
 						mirror_array(_draw_points, true, true), Global.current_project.size
 					)
 				):
-					canvas.draw_polyline(PoolVector2Array(line), Color.black)
+					canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 		if Tools.vertical_mirror:
 			for line in _create_polylines(
 				_fill_bitmap_with_points(
 					mirror_array(_draw_points, false, true), Global.current_project.size
 				)
 			):
-				canvas.draw_polyline(PoolVector2Array(line), Color.black)
+				canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
 func apply_selection(_position) -> void:
-	.apply_selection(_position)
+	super.apply_selection(_position)
 	var project: Project = Global.current_project
 	var cleared := false
 	if !_add and !_subtract and !_intersect:
@@ -106,7 +106,7 @@ func apply_selection(_position) -> void:
 	_last_position = Vector2.INF
 
 
-func lasso_selection(selection_map: SelectionMap, points: PoolVector2Array) -> void:
+func lasso_selection(selection_map: SelectionMap, points: PackedVector2Array) -> void:
 	var project: Project = Global.current_project
 	var size := selection_map.get_size()
 	for point in points:

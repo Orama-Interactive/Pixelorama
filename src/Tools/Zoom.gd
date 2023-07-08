@@ -48,13 +48,13 @@ func update_config() -> void:
 
 
 func draw_start(position: Vector2) -> void:
-	.draw_start(position)
+	super.draw_start(position)
 	var mouse_pos := get_global_mouse_position()
 	var viewport_rect := Rect2(
-		Global.main_viewport.rect_global_position, Global.main_viewport.rect_size
+		Global.main_viewport.global_position, Global.main_viewport.size
 	)
 	var viewport_rect_2 := Rect2(
-		Global.second_viewport.rect_global_position, Global.second_viewport.rect_size
+		Global.second_viewport.global_position, Global.second_viewport.size
 	)
 
 	if viewport_rect.has_point(mouse_pos):
@@ -64,9 +64,9 @@ func draw_start(position: Vector2) -> void:
 
 
 func draw_move(position: Vector2) -> void:
-	.draw_move(position)
+	super.draw_move(position)
 	Global.camera.zoom_camera(-_relative.x / 3)
 
 
 func draw_end(position: Vector2) -> void:
-	.draw_end(position)
+	super.draw_end(position)

@@ -2,12 +2,12 @@ extends ConfirmationDialog
 
 var aspect_ratio := 1.0
 
-onready var width_value: SpinBox = find_node("WidthValue")
-onready var height_value: SpinBox = find_node("HeightValue")
-onready var width_value_perc: SpinBox = find_node("WidthValuePerc")
-onready var height_value_perc: SpinBox = find_node("HeightValuePerc")
-onready var interpolation_type: OptionButton = find_node("InterpolationType")
-onready var ratio_box: BaseButton = find_node("AspectRatioButton")
+@onready var width_value: SpinBox = find_child("WidthValue")
+@onready var height_value: SpinBox = find_child("HeightValue")
+@onready var width_value_perc: SpinBox = find_child("WidthValuePerc")
+@onready var height_value_perc: SpinBox = find_child("HeightValuePerc")
+@onready var interpolation_type: OptionButton = find_child("InterpolationType")
+@onready var ratio_box: BaseButton = find_child("AspectRatioButton")
 
 
 func _ready() -> void:

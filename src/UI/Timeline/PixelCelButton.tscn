@@ -4,12 +4,12 @@
 [ext_resource path="res://src/UI/Timeline/CelButton.gd" type="Script" id=2]
 
 [node name="PixelCelButton" instance=ExtResource( 1 )]
-rect_pivot_offset = Vector2( -18, 6 )
+pivot_offset = Vector2( -18, 6 )
 script = ExtResource( 2 )
 
 [node name="PopupMenu" type="PopupMenu" parent="." index="1"]
-margin_right = 20.0
-margin_bottom = 20.0
+offset_right = 20.0
+offset_bottom = 20.0
 mouse_default_cursor_shape = 2
 items = [ "Delete", null, 0, false, false, -1, 0, null, "", false, "Link Cels to", null, 0, false, false, -1, 0, null, "", false, "Unlink Cels", null, 0, false, false, 2, 0, null, "", false ]
 __meta__ = {
@@ -18,8 +18,8 @@ __meta__ = {
 
 [node name="LinkedIndicator" type="Polygon2D" parent="." index="2"]
 color = Color( 0, 1, 0, 1 )
-invert_enable = true
+invert_enabled = true
 invert_border = 1.0
-polygon = PoolVector2Array( 0, 0, 36, 0, 36, 36, 0, 36 )
+polygon = PackedVector2Array( 0, 0, 36, 0, 36, 36, 0, 36 )
 
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]

@@ -1,5 +1,5 @@
-extends Reference
+extends RefCounted
 
 
-func int_to_2bytes(value: int) -> PoolByteArray:
-	return PoolByteArray([value & 255, (value >> 8) & 255])
+func int_to_2bytes(value: int) -> PackedByteArray:
+	return PackedByteArray([value & 255, (value >> 8) & 255])

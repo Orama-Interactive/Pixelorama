@@ -10,7 +10,7 @@ var _locked_ratio := false
 
 func _ready() -> void:
 	_crop = Global.canvas.crop_rect
-	_crop.connect("updated", self, "_sync_ui")
+	_crop.connect("updated", Callable(self, "_sync_ui"))
 	_crop.tool_count += 1
 	_sync_ui()
 
@@ -20,13 +20,13 @@ func _exit_tree() -> void:
 
 
 func draw_start(position: Vector2) -> void:
-	.draw_start(position)
+	super.draw_start(position)
 	_offset = position - _crop.rect.position
 	_start_pos = position
 
 
 func draw_move(position: Vector2) -> void:
-	.draw_move(position)
+	super.draw_move(position)
 	if _crop.locked_size:
 		_crop.rect.position = position - _offset
 	else:
@@ -57,7 +57,7 @@ func draw_move(position: Vector2) -> void:
 func _sync_ui() -> void:
 	_syncing = true
 	$"%CropMode".selected = _crop.mode
-	$"%SizeLock".pressed = _crop.locked_size
+	$"%SizeLock".button_pressed = _crop.locked_size
 	match _crop.mode:
 		CropRect.Mode.MARGINS:
 			$"%MarginsContainer".show()

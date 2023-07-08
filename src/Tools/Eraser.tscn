@@ -8,13 +8,13 @@
 script = ExtResource( 2 )
 
 [node name="ColorInterpolation" parent="." index="3"]
-margin_top = 134.0
-margin_bottom = 196.0
+offset_top = 134.0
+offset_bottom = 196.0
 
 [node name="OpacitySlider" parent="." index="4" instance=ExtResource( 3 )]
-margin_top = 62.0
-margin_right = 116.0
-margin_bottom = 86.0
+offset_top = 62.0
+offset_right = 116.0
+offset_bottom = 86.0
 max_value = 255.0
 value = 255.0
 prefix = "Opacity:"

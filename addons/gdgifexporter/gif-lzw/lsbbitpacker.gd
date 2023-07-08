@@ -1,11 +1,11 @@
-extends Reference
+extends RefCounted
 
 
 class LSBLZWBitPacker:
 	var bit_index: int = 0
 	var stream: int = 0
 
-	var chunks: PoolByteArray = PoolByteArray([])
+	var chunks: PackedByteArray = PackedByteArray([])
 
 	func put_byte():
 		chunks.append(stream & 0xff)
@@ -20,7 +20,7 @@ class LSBLZWBitPacker:
 		while bit_index >= 8:
 			self.put_byte()
 
-	func pack() -> PoolByteArray:
+	func pack() -> PackedByteArray:
 		if bit_index != 0:
 			self.put_byte()
 		return chunks
@@ -28,4 +28,4 @@ class LSBLZWBitPacker:
 	func reset() -> void:
 		bit_index = 0
 		stream = 0
-		chunks = PoolByteArray([])
+		chunks = PackedByteArray([])

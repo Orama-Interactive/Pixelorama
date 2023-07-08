@@ -54,8 +54,8 @@ func remove_action(action: String):
 
 func wait_frame():  # as yield is not available to classes below, so this is the solution
 	# use by yield(ExtensionsApi.wait_frame(), "completed")
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
+	await get_tree().idle_frame
 
 
 func _get_caller_extension_name() -> String:
@@ -197,13 +197,13 @@ class PanelAPI:
 		# we must make tabs_visible = true for a few moments if it is false
 		if dockable.tabs_visible == false:
 			dockable.tabs_visible = true
-			yield(ExtensionsApi.wait_frame(), "completed")
+			await ExtensionsApi.wait_frame().completed
 			dockable.tabs_visible = false
 		ExtensionsApi.add_action("add_tab")
 
 	func remove_node_from_tab(node: Node) -> void:
 		var top_menu_container = Global.top_menu_container
-		var dockable = Global.control.find_node("DockableContainer")
+		var dockable = Global.control.find_child("DockableContainer")
 		var panels_submenu: PopupMenu = top_menu_container.panels_submenu
 		# find the tab that contains the node
 		if node == null:
@@ -227,13 +227,13 @@ class PanelAPI:
 		# we must make tabs_visible = true for a few moments if it is false
 		if dockable.tabs_visible == false:
 			dockable.tabs_visible = true
-			yield(ExtensionsApi.wait_frame(), "completed")
+			await ExtensionsApi.wait_frame().completed
 			dockable.tabs_visible = false
 		ExtensionsApi.remove_action("add_tab")
 
 	# PRIVATE METHODS
 	func _get_dockable_container_ui() -> Node:
-		return Global.control.find_node("DockableContainer")
+		return Global.control.find_child("DockableContainer")
 
 	func _find_tab_with_node(node_name: String, dockable_container):
 		var root = dockable_container.layout.root
@@ -290,20 +290,20 @@ class PanelAPI:
 
 class ThemeAPI:
 	func add_theme(theme: Theme) -> void:
-		var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
+		var themes: BoxContainer = Global.preferences_dialog.find_child("Themes")
 		themes.themes.append(theme)
 		themes.add_theme(theme)
 		ExtensionsApi.add_action("add_theme")
 
 	func find_theme_index(theme: Theme) -> int:
-		var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
+		var themes: BoxContainer = Global.preferences_dialog.find_child("Themes")
 		return themes.themes.find(theme)
 
 	func get_theme() -> Theme:
 		return Global.control.theme
 
 	func set_theme(idx: int) -> bool:
-		var themes: BoxContainer = Global.preferences_dialog.find_node("Themes")
+		var themes: BoxContainer = Global.preferences_dialog.find_child("Themes")
 		if idx >= 0 and idx < themes.themes.size():
 			themes.buttons_container.get_child(idx).emit_signal("pressed")
 			return true
@@ -324,7 +324,7 @@ class ToolAPI:
 		scene: PackedScene,
 		extra_hint := "",
 		extra_shortucts := [],
-		layer_types: PoolIntArray = []
+		layer_types: PackedInt32Array = []
 	) -> void:
 		var tool_class := Tools.Tool.new(
 			tool_name, display_name, shortcut, scene, layer_types, extra_hint, extra_shortucts
@@ -335,8 +335,8 @@ class ToolAPI:
 
 	func remove_tool(tool_name: String) -> void:
 		# Re-assigning the tools in case the tool to be removed is also active
-		Tools.assign_tool("Pencil", BUTTON_LEFT)
-		Tools.assign_tool("Eraser", BUTTON_RIGHT)
+		Tools.assign_tool("Pencil", MOUSE_BUTTON_LEFT)
+		Tools.assign_tool("Eraser", MOUSE_BUTTON_RIGHT)
 		var tool_class: Tools.Tool = Tools.tools[tool_name]
 		if tool_class:
 			Tools.remove_tool(tool_class)
@@ -402,7 +402,7 @@ class ProjectAPI:
 		frames := [],
 		name := tr("untitled"),
 		size := Vector2(64, 64),
-		fill_color := Color.transparent
+		fill_color := Color.TRANSPARENT
 	) -> Project:
 		if !name.is_valid_filename():
 			name = tr("untitled")
@@ -536,50 +536,50 @@ class SignalsAPI:
 	var _last_cel: BaseCel
 
 	func _init() -> void:
-		Global.connect("project_changed", self, "_update_texture_signal")
-		Global.connect("cel_changed", self, "_update_texture_signal")
+		Global.connect("project_changed", Callable(self, "_update_texture_signal"))
+		Global.connect("cel_changed", Callable(self, "_update_texture_signal"))
 
 	func _update_texture_signal():
 		if _last_cel:
-			_last_cel.disconnect("texture_changed", self, "_on_texture_changed")
+			_last_cel.disconnect("texture_changed", Callable(self, "_on_texture_changed"))
 		if Global.current_project:
 			_last_cel = Global.current_project.get_current_cel()
-			_last_cel.connect("texture_changed", self, "_on_texture_changed")
+			_last_cel.connect("texture_changed", Callable(self, "_on_texture_changed"))
 
 	func _on_texture_changed():
 		emit_signal("texture_changed")
 
 	# Global signals
 	func connect_project_changed(target: Object, method: String):
-		Global.connect("project_changed", target, method)
+		Global.connect("project_changed", Callable(target, method))
 		ExtensionsApi.add_action("project_changed")
 
 	func disconnect_project_changed(target: Object, method: String):
-		Global.disconnect("project_changed", target, method)
+		Global.disconnect("project_changed", Callable(target, method))
 		ExtensionsApi.remove_action("project_changed")
 
 	func connect_cel_changed(target: Object, method: String):
-		Global.connect("cel_changed", target, method)
+		Global.connect("cel_changed", Callable(target, method))
 		ExtensionsApi.add_action("cel_changed")
 
 	func disconnect_cel_changed(target: Object, method: String):
-		Global.disconnect("cel_changed", target, method)
+		Global.disconnect("cel_changed", Callable(target, method))
 		ExtensionsApi.remove_action("cel_changed")
 
 	# Tool Signal
 	func connect_tool_color_changed(target: Object, method: String):
-		Tools.connect("color_changed", target, method)
+		Tools.connect("color_changed", Callable(target, method))
 		ExtensionsApi.add_action("color_changed")
 
 	func disconnect_tool_color_changed(target: Object, method: String):
-		Tools.disconnect("color_changed", target, method)
+		Tools.disconnect("color_changed", Callable(target, method))
 		ExtensionsApi.remove_action("color_changed")
 
 	# updater signals
 	func connect_current_cel_texture_changed(target: Object, method: String):
-		connect("texture_changed", target, method)
+		connect("texture_changed", Callable(target, method))
 		ExtensionsApi.add_action("texture_changed")
 
 	func disconnect_current_cel_texture_changed(target: Object, method: String):
-		disconnect("texture_changed", target, method)
+		disconnect("texture_changed", Callable(target, method))
 		ExtensionsApi.remove_action("texture_changed")

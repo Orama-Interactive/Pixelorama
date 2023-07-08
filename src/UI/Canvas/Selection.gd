@@ -10,7 +10,7 @@ var flag_tilemode = false
 var is_moving_content := false
 var arrow_key_move := false
 var is_pasting := false
-var big_bounding_rectangle := Rect2() setget _big_bounding_rectangle_changed
+var big_bounding_rectangle := Rect2(): set = _big_bounding_rectangle_changed
 var image_current_pixel := Vector2.ZERO  # The ACTUAL pixel coordinate of image
 
 var temp_rect := Rect2()
@@ -32,8 +32,8 @@ var prev_angle := 0
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
 var resize_keep_ratio := false
 
-onready var canvas: Canvas = get_parent()
-onready var marching_ants_outline: Sprite = $MarchingAntsOutline
+@onready var canvas: Canvas = get_parent()
+@onready var marching_ants_outline: Sprite2D = $MarchingAntsOutline
 
 
 class Gizmo:
@@ -69,7 +69,7 @@ class Gizmo:
 
 
 func _ready() -> void:
-	Global.camera.connect("zoom_changed", self, "_update_on_zoom")
+	Global.camera.connect("zoom_changed", Callable(self, "_update_on_zoom"))
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, -1)))  # Top left
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(0, -1)))  # Center top
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(1, -1)))  # Top right
@@ -110,7 +110,7 @@ func _input(event: InputEvent) -> void:
 				gizmo_hover = Gizmo.new(g.type, g.direction)
 				break
 
-	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			if gizmo_hover and not dragged_gizmo:  # Select a gizmo
 				Global.has_focus = false
@@ -152,7 +152,7 @@ func _input(event: InputEvent) -> void:
 					+ ((temp_rect.end - temp_rect.position) / 2).floor()
 				)
 
-		elif dragged_gizmo:  # Mouse released, unselect gizmo
+		elif dragged_gizmo:  # Mouse released, deselect gizmo
 			Global.has_focus = true
 			dragged_gizmo = null
 			if not is_moving_content:
@@ -203,10 +203,10 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 
 	if _is_action_direction(event) and arrow_key_move:
 		var step := Vector2.ONE
-		if Input.is_key_pressed(KEY_CONTROL):
+		if Input.is_key_pressed(KEY_CTRL):
 			step = Global.grid_size
 		var input := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-		var move := input.rotated(stepify(Global.camera.rotation, PI / 2))
+		var move := input.rotated(snapped(Global.camera.rotation, PI / 2))
 		# These checks are needed to fix a bug where the selection got stuck
 		# to the canvas boundaries when they were 1px away from them
 		if is_equal_approx(abs(move.x), 0):
@@ -301,8 +301,8 @@ func _update_on_zoom() -> void:
 		Global.current_project.selection_map.get_size().x,
 		Global.current_project.selection_map.get_size().y
 	)
-	marching_ants_outline.material.set_shader_param("width", zoom)
-	marching_ants_outline.material.set_shader_param("frequency", (1.0 / zoom) * 10 * size / 64)
+	marching_ants_outline.material.set_shader_parameter("width", zoom)
+	marching_ants_outline.material.set_shader_parameter("frequency", (1.0 / zoom) * 10 * size / 64)
 	for gizmo in gizmos:
 		if gizmo.rect.size == Vector2.ZERO:
 			return
@@ -386,7 +386,7 @@ func resize_selection() -> void:
 			preview_image.flip_x()
 		if temp_rect.size.y < 0:
 			preview_image.flip_y()
-		preview_image_texture.create_from_image(preview_image, 0)
+		preview_image_texture.create_from_image(preview_image) #,0
 
 	var selection_map_copy := SelectionMap.new()
 	selection_map_copy.copy_from(selection_map)
@@ -400,7 +400,7 @@ func resize_selection() -> void:
 
 func _gizmo_rotate() -> void:  # Does not work properly yet
 	var angle := image_current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
-	angle = deg2rad(floor(rad2deg(angle)))
+	angle = deg_to_rad(floor(rad_to_deg(angle)))
 	if angle == prev_angle:
 		return
 	prev_angle = angle
@@ -418,7 +418,7 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 			original_preview_image, Rect2(Vector2.ZERO, preview_image.get_size()), pos_diff
 		)
 	DrawingAlgos.nn_rotate(preview_image, angle, pivot)
-	preview_image_texture.create_from_image(preview_image, 0)
+	preview_image_texture.create_from_image(preview_image) #,0
 
 	var bitmap_image := original_bitmap
 	var bitmap_pivot := (
@@ -614,7 +614,7 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 			if not image is Image:
 				continue
 			project.undo_redo.add_do_property(image, "data", redo_data[image])
-			image.unlock()
+			false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		for image in undo_data_tmp:
 			if not image is Image:
 				continue
@@ -639,9 +639,9 @@ func get_undo_data(undo_image: bool) -> Dictionary:
 	if undo_image:
 		var images := _get_selected_draw_images()
 		for image in images:
-			image.unlock()
+			false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			data[image] = image.data
-			image.lock()
+			false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 	return data
 
@@ -701,7 +701,7 @@ func copy() -> void:
 			cl_selection_map = selection_map_copy
 		else:
 			to_copy = image.get_rect(big_bounding_rectangle)
-			to_copy.lock()
+			false # to_copy.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			# Remove unincluded pixels if the selection is not a single rectangle
 			var offset_pos := big_bounding_rectangle.position
 			for x in to_copy.get_size().x:
@@ -713,7 +713,7 @@ func copy() -> void:
 						offset_pos.y = 0
 					if not project.selection_map.is_pixel_selected(pos + offset_pos):
 						to_copy.set_pixelv(pos, Color(0))
-			to_copy.unlock()
+			false # to_copy.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			cl_selection_map.copy_from(project.selection_map)
 		cl_big_bounding_rectangle = big_bounding_rectangle
 
@@ -735,7 +735,7 @@ func copy() -> void:
 		var pattern: Patterns.Pattern = Global.patterns_popup.get_pattern(0)
 		pattern.image = to_copy
 		var tex := ImageTexture.new()
-		tex.create_from_image(to_copy, 0)
+		tex.create_from_image(to_copy) #,0
 		var container = Global.patterns_popup.get_node("ScrollContainer/PatternContainer")
 		container.get_child(0).get_child(0).texture = tex
 
@@ -797,7 +797,7 @@ func paste(in_place := false) -> void:
 	original_offset = project.selection_offset
 	original_bitmap.copy_from(project.selection_map)
 	preview_image.copy_from(original_preview_image)
-	preview_image_texture.create_from_image(preview_image, 0)
+	preview_image_texture.create_from_image(preview_image) #,0
 	project.selection_map_changed()
 
 
@@ -851,7 +851,7 @@ func new_brush() -> void:
 		var selection_map_copy := SelectionMap.new()
 		selection_map_copy.copy_from(project.selection_map)
 		selection_map_copy.move_bitmap_values(project, false)
-		var clipboard = str2var(OS.get_clipboard())
+		var clipboard = str_to_var(OS.get_clipboard())
 		if typeof(clipboard) == TYPE_DICTIONARY:  # A sanity check
 			if not clipboard.has_all(
 				["image", "selection_map", "big_bounding_rectangle", "selection_offset"]
@@ -860,7 +860,7 @@ func new_brush() -> void:
 			clipboard.selection_map = selection_map_copy
 	else:
 		brush = image.get_rect(big_bounding_rectangle)
-		brush.lock()
+		false # brush.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		# Remove unincluded pixels if the selection is not a single rectangle
 		for x in brush.get_size().x:
 			for y in brush.get_size().y:
@@ -872,7 +872,7 @@ func new_brush() -> void:
 					offset_pos.y = 0
 				if not project.selection_map.is_pixel_selected(pos + offset_pos):
 					brush.set_pixelv(pos, Color(0))
-		brush.unlock()
+		false # brush.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 	if !brush.is_invisible():
 		var brush_used: Image = brush.get_rect(brush.get_used_rect())
@@ -929,7 +929,7 @@ func _get_preview_image() -> void:
 	Export.blend_selected_cels(blended_image, project.frames[project.current_frame])
 	if original_preview_image.is_empty():
 		original_preview_image = blended_image.get_rect(big_bounding_rectangle)
-		original_preview_image.lock()
+		false # original_preview_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		# For non-rectangular selections
 		for x in range(0, big_bounding_rectangle.size.x):
 			for y in range(0, big_bounding_rectangle.size.y):
@@ -937,12 +937,12 @@ func _get_preview_image() -> void:
 				if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
 					original_preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
 
-		original_preview_image.unlock()
+		false # original_preview_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		if original_preview_image.is_invisible():
 			original_preview_image = Image.new()
 			return
 		preview_image.copy_from(original_preview_image)
-		preview_image_texture.create_from_image(preview_image, 0)
+		preview_image_texture.create_from_image(preview_image) #,0
 
 	var clear_image := Image.new()
 	clear_image.create(
@@ -968,7 +968,7 @@ func _get_selected_image(cel_image: Image) -> Image:
 	var project: Project = Global.current_project
 	var image := Image.new()
 	image = cel_image.get_rect(big_bounding_rectangle)
-	image.lock()
+	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	# For non-rectangular selections
 	for x in range(0, big_bounding_rectangle.size.x):
 		for y in range(0, big_bounding_rectangle.size.y):
@@ -976,5 +976,5 @@ func _get_selected_image(cel_image: Image) -> Image:
 			if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
 				image.set_pixelv(pos, Color(0, 0, 0, 0))
 
-	image.unlock()
+	false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return image

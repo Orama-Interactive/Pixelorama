@@ -11,7 +11,7 @@ var last: Vector2
 
 
 func _ready() -> void:
-	Global.main_viewport.connect("item_rect_changed", self, "update")
+	Global.main_viewport.connect("item_rect_changed", Callable(self, "update"))
 
 
 # Code taken and modified from Godot's source code
@@ -25,7 +25,7 @@ func _draw() -> void:
 
 	# This tracks the "true" top left corner of the drawing:
 	transform.origin = (
-		Global.main_viewport.rect_size / 2
+		Global.main_viewport.size / 2
 		+ Global.camera.offset.rotated(-Global.camera.rotation) * -zoom
 	)
 
@@ -61,7 +61,7 @@ func _draw() -> void:
 		Vector2.ZERO
 	)
 	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(
-		Global.main_viewport.rect_size
+		Global.main_viewport.size
 	)
 
 	for j in range(ceil(first.x), ceil(last.x)):
@@ -72,26 +72,26 @@ func _draw() -> void:
 			draw_line(
 				Vector2(position.x + RULER_WIDTH, 0),
 				Vector2(position.x + RULER_WIDTH, RULER_WIDTH),
-				Color.white
+				Color.WHITE
 			)
-			var val = (ruler_transform * major_subdivide * minor_subdivide).xform(Vector2(j, 0)).x
+			var val = (ruler_transform * major_subdivide * minor_subdivide) * (Vector2(j, 0)).x
 			draw_string(
 				font,
 				Vector2(position.x + RULER_WIDTH + 2, font.get_height() - 4),
-				str(stepify(val, 0.1))
+				str(snapped(val, 0.1))
 			)
 		else:
 			if j % minor_subdivision == 0:
 				draw_line(
 					Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.33),
 					Vector2(position.x + RULER_WIDTH, RULER_WIDTH),
-					Color.white
+					Color.WHITE
 				)
 			else:
 				draw_line(
 					Vector2(position.x + RULER_WIDTH, RULER_WIDTH * 0.66),
 					Vector2(position.x + RULER_WIDTH, RULER_WIDTH),
-					Color.white
+					Color.WHITE
 				)
 
 

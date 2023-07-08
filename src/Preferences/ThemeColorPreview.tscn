@@ -1,23 +1,23 @@
 [gd_scene format=2]
 
 [node name="ThemeColorPreview" type="ColorRect"]
-margin_right = 50.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 50, 16 )
+offset_right = 50.0
+offset_bottom = 14.0
+custom_minimum_size = Vector2( 50, 16 )
 color = Color( 0.380392, 0.384314, 0.380392, 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 3.0
-margin_top = 3.0
-margin_right = -3.0
-margin_bottom = -3.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
 
 [node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
-margin_right = 20.0
-margin_bottom = 10.0
-rect_min_size = Vector2( 20, 10 )
+offset_right = 20.0
+offset_bottom = 10.0
+custom_minimum_size = Vector2( 20, 10 )
 size_flags_horizontal = 3
 color = Color( 0.152941, 0.152941, 0.152941, 1 )
 __meta__ = {
@@ -25,10 +25,10 @@ __meta__ = {
 }
 
 [node name="ColorRect2" type="ColorRect" parent="HBoxContainer"]
-margin_left = 24.0
-margin_right = 44.0
-margin_bottom = 10.0
-rect_min_size = Vector2( 20, 10 )
+offset_left = 24.0
+offset_right = 44.0
+offset_bottom = 10.0
+custom_minimum_size = Vector2( 20, 10 )
 size_flags_horizontal = 3
 color = Color( 0.411765, 0.411765, 0.411765, 1 )
 __meta__ = {
