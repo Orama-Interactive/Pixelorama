@@ -1,37 +1,37 @@
-tool
+@tool
 class_name AImgIOAPNGImportPlugin
 extends EditorImportPlugin
 
 
-func get_importer_name() -> String:
+func _get_importer_name() -> String:
 	return "aimgio.apng_animatedtexture"
 
 
-func get_visible_name() -> String:
+func _get_visible_name() -> String:
 	return "APNG as AnimatedTexture"
 
 
-func get_save_extension() -> String:
+func _get_save_extension() -> String:
 	return "res"
 
 
-func get_resource_type() -> String:
+func _get_resource_type() -> String:
 	return "AnimatedTexture"
 
 
-func get_recognized_extensions() -> Array:
+func _get_recognized_extensions() -> Array:
 	return ["png"]
 
 
-func get_preset_count():
+func _get_preset_count():
 	return 1
 
 
-func get_preset_name(_i):
+func _get_preset_name(_i):
 	return "Default"
 
 
-func get_import_options(_i):
+func _get_import_options(_i):
 	# GDLint workaround - it really does not want this string to exist due to length.
 	var hint = "Mipmaps,Repeat,Filter,Anisotropic Filter,Convert To Linear,Mirrored Repeat"
 	return [
@@ -53,7 +53,7 @@ func get_import_options(_i):
 	]
 
 
-func get_option_visibility(_option, _options):
+func _get_option_visibility(_option, _options):
 	return true
 
 
@@ -75,6 +75,6 @@ func import(load_path: String, save_path: String, options, _platform_variants, _
 		var tx := ImageTexture.new()
 		tx.storage = options["image_texture_storage"]
 		tx.lossy_quality = options["image_texture_lossy_quality"]
-		tx.create_from_image(f.content, flags)
+		tx.create_from_image(f.content) #,flags
 		root.set_frame_texture(i, tx)
 	return ResourceSaver.save(save_path + ".res", root)

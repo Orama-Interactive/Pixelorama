@@ -10,36 +10,36 @@ var preview_frames := []
 var image_exports := [Export.FileFormat.PNG, Export.FileFormat.GIF, Export.FileFormat.APNG]
 var spritesheet_exports := [Export.FileFormat.PNG]
 
-onready var tabs: Tabs = $VBoxContainer/Tabs
-onready var checker: ColorRect = $"%TransparentChecker"
-onready var previews: GridContainer = $"%Previews"
+@onready var tabs: TabBar = $VBoxContainer/TabBar
+@onready var checker: ColorRect = $"%TransparentChecker"
+@onready var previews: GridContainer = $"%Previews"
 
-onready var spritesheet_orientation: OptionButton = $"%Orientation"
-onready var spritesheet_lines_count: SpinBox = $"%LinesCount"
-onready var spritesheet_lines_count_label: Label = $"%LinesCountLabel"
+@onready var spritesheet_orientation: OptionButton = $"%Orientation"
+@onready var spritesheet_lines_count: SpinBox = $"%LinesCount"
+@onready var spritesheet_lines_count_label: Label = $"%LinesCountLabel"
 
-onready var frames_option_button: OptionButton = $"%Frames"
-onready var layers_option_button: OptionButton = $"%Layers"
-onready var options_resize: ValueSlider = $"%Resize"
-onready var dimension_label: Label = $"%DimensionLabel"
+@onready var frames_option_button: OptionButton = $"%Frames"
+@onready var layers_option_button: OptionButton = $"%Layers"
+@onready var options_resize: ValueSlider = $"%Resize"
+@onready var dimension_label: Label = $"%DimensionLabel"
 
-onready var path_line_edit: LineEdit = $"%PathLineEdit"
-onready var file_line_edit: LineEdit = $"%FileLineEdit"
-onready var file_format_options: OptionButton = $"%FileFormat"
+@onready var path_line_edit: LineEdit = $"%PathLineEdit"
+@onready var file_line_edit: LineEdit = $"%FileLineEdit"
+@onready var file_format_options: OptionButton = $"%FileFormat"
 
-onready var options_interpolation: OptionButton = $"%Interpolation"
+@onready var options_interpolation: OptionButton = $"%Interpolation"
 
-onready var file_exists_alert_popup: AcceptDialog = $Popups/FileExistsAlert
-onready var path_validation_alert_popup: AcceptDialog = $Popups/PathValidationAlert
-onready var path_dialog_popup: FileDialog = $Popups/PathDialog
-onready var export_progress_popup: WindowDialog = $Popups/ExportProgressBar
-onready var export_progress_bar: ProgressBar = $Popups/ExportProgressBar/MarginContainer/ProgressBar
-onready var frame_timer: Timer = $FrameTimer
+@onready var file_exists_alert_popup: AcceptDialog = $Popups/FileExistsAlert
+@onready var path_validation_alert_popup: AcceptDialog = $Popups/PathValidationAlert
+@onready var path_dialog_popup: FileDialog = $Popups/PathDialog
+@onready var export_progress_popup: Window = $Popups/ExportProgressBar
+@onready var export_progress_bar: ProgressBar = $Popups/ExportProgressBar/MarginContainer/ProgressBar
+@onready var frame_timer: Timer = $FrameTimer
 
 
 func _ready() -> void:
-	get_ok().size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	get_cancel().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	get_cancel_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	tabs.add_tab("Image")
 	tabs.add_tab("Spritesheet")
 	if OS.get_name() == "Windows":
@@ -113,12 +113,12 @@ func add_image_preview(image: Image, canvas_number: int = -1) -> void:
 	var container := create_preview_container()
 	var preview := create_preview_rect()
 	preview.texture = ImageTexture.new()
-	preview.texture.create_from_image(image, 0)
+	preview.texture.create_from_image(image) #,0
 	container.add_child(preview)
 
 	if canvas_number != -1:
 		var label := Label.new()
-		label.align = Label.ALIGN_CENTER
+		label.align = Label.ALIGNMENT_CENTER
 		label.text = String(canvas_number)
 		container.add_child(label)
 
@@ -131,7 +131,7 @@ func add_animated_preview() -> void:
 
 	for processed_image in Export.processed_images:
 		var texture := ImageTexture.new()
-		texture.create_from_image(processed_image, 0)
+		texture.create_from_image(processed_image) #,0
 		preview_frames.push_back(texture)
 
 	var container := create_preview_container()
@@ -151,7 +151,7 @@ func create_preview_container() -> VBoxContainer:
 	var container := VBoxContainer.new()
 	container.size_flags_horizontal = SIZE_EXPAND_FILL
 	container.size_flags_vertical = SIZE_EXPAND_FILL
-	container.rect_min_size = Vector2(0, 128)
+	container.custom_minimum_size = Vector2(0, 128)
 	return container
 
 
@@ -231,9 +231,9 @@ func update_dimensions_label() -> void:
 
 func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
 	# 0 is invalid path, 1 is invalid name
-	var error_text := "Directory path and file name are not valid!"
+	var error_text := "DirAccess path and file name are not valid!"
 	if path_or_name == 0:
-		error_text = "Directory path is not valid!"
+		error_text = "DirAccess path is not valid!"
 	elif path_or_name == 1:
 		error_text = "File name is not valid!"
 
@@ -259,7 +259,7 @@ func set_export_progress_bar(value: float) -> void:
 
 
 func _on_ExportDialog_about_to_show() -> void:
-	get_ok().text = "Export"
+	get_ok_button().text = "Export"
 	Global.canvas.selection.transform_content_confirm()
 	var project: Project = Global.current_project
 	# If we're on HTML5, don't let the user change the directory path
@@ -267,7 +267,7 @@ func _on_ExportDialog_about_to_show() -> void:
 		get_tree().call_group("NotHTML5", "hide")
 		project.directory_path = "user://"
 
-	if project.directory_path.empty():
+	if project.directory_path.is_empty():
 		project.directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
@@ -282,7 +282,7 @@ func _on_ExportDialog_about_to_show() -> void:
 	show_tab()
 
 	# Set the size of the preview checker
-	checker.rect_size = checker.get_parent().rect_size
+	checker.size = checker.get_parent().size
 
 
 func _on_Tabs_tab_clicked(tab: int) -> void:

@@ -1,7 +1,7 @@
 class_name SelectionMap
 extends Image
 
-var invert_shader: Shader = preload("res://src/Shaders/Invert.shader")
+var invert_shader: Shader = preload("res://src/Shaders/Invert.gdshader")
 
 
 func is_pixel_selected(pixel: Vector2) -> bool:
@@ -27,7 +27,7 @@ func get_nearest_position(pixel: Vector2) -> Vector2:
 				var test_image = Image.new()
 				test_image.create(size.x, size.y, false, Image.FORMAT_LA8)
 				test_image.blit_rect(self, selection_rect, Vector2(x, y))
-				test_image.lock()
+				false # test_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 				if (
 					pixel.x < 0
 					or pixel.y < 0
@@ -36,7 +36,7 @@ func get_nearest_position(pixel: Vector2) -> Vector2:
 				):
 					continue
 				var selected: bool = test_image.get_pixelv(pixel).a > 0
-				test_image.unlock()
+				false # test_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 				if selected:
 					var offset = Vector2(x, y) - selection_rect.position
 					return offset

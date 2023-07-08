@@ -3,22 +3,22 @@
 [ext_resource path="res://src/UI/Timeline/AnimationTagUI.gd" type="Script" id=1]
 
 [node name="AnimationTagUI" type="VBoxContainer"]
-margin_right = 39.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 39, 32 )
+offset_right = 39.0
+offset_bottom = 32.0
+custom_minimum_size = Vector2( 39, 32 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PoolVector2Array( 0, 32, 0, 0, 39, 0, 39, 32 )
+points = PackedVector2Array( 0, 32, 0, 0, 39, 0, 39, 32 )
 width = 1.0
 
 [node name="Label" type="Label" parent="."]
-margin_left = 7.0
-margin_right = 32.0
-margin_bottom = 32.0
+offset_left = 7.0
+offset_right = 32.0
+offset_bottom = 32.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
 text = "Idle"

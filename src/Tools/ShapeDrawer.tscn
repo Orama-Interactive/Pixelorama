@@ -8,9 +8,9 @@
 script = ExtResource( 1 )
 
 [node name="ThicknessSlider" parent="." index="2" instance=ExtResource( 3 )]
-margin_top = 26.0
-margin_right = 116.0
-margin_bottom = 50.0
+offset_top = 26.0
+offset_right = 116.0
+offset_bottom = 50.0
 min_value = 1.0
 value = 1.0
 prefix = "Size:"
@@ -18,19 +18,19 @@ suffix = "px"
 is_global = true
 
 [node name="FillCheckbox" type="CheckBox" parent="." index="3"]
-margin_top = 54.0
-margin_right = 116.0
-margin_bottom = 78.0
-hint_tooltip = "Fills the drawn shape with color, instead of drawing a hollow shape"
+offset_top = 54.0
+offset_right = 116.0
+offset_bottom = 78.0
+tooltip_text = "Fills the drawn shape with color, instead of drawing a hollow shape"
 mouse_default_cursor_shape = 2
-text = "Fill Shape"
+text = "Fill Shape3D"
 
 [node name="Brush" parent="." index="4"]
 visible = false
 
 [node name="ColorInterpolation" parent="." index="5"]
-margin_top = 66.0
-margin_bottom = 128.0
+offset_top = 66.0
+offset_bottom = 128.0
 
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]
 [connection signal="toggled" from="FillCheckbox" to="." method="_on_FillCheckbox_toggled"]

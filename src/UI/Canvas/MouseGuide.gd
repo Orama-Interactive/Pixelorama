@@ -2,13 +2,13 @@ extends Line2D
 
 enum Types { VERTICAL, HORIZONTAL }
 const INPUT_WIDTH := 4
-export var type := 0
+@export var type := 0
 var track_mouse := true
 
 
 func _ready() -> void:
 	# Add a subtle difference to the normal guide color by mixing in some green
-	default_color = Global.guide_color.linear_interpolate(Color(0.2, 0.92, 0.2), .6)
+	default_color = Global.guide_color.lerp(Color(0.2, 0.92, 0.2), .6)
 	width = Global.camera.zoom.x * 2
 	draw_guide_line()
 
@@ -51,7 +51,7 @@ func _input(event: InputEvent) -> void:
 
 func _draw() -> void:
 	width = Global.camera.zoom.x * 2
-	var viewport_size: Vector2 = Global.main_viewport.rect_size
+	var viewport_size: Vector2 = Global.main_viewport.size
 	var zoom: Vector2 = Global.camera.zoom
 
 	# viewport_poly is an array of the points that make up the corners of the viewport

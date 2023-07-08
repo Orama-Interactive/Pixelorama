@@ -35,12 +35,12 @@ func setup_swatches() -> void:
 	columns = 1.0 if grid_size.x == 0.0 else grid_size.x
 	if grid_size.x * grid_size.y > swatches.size():
 		for i in range(swatches.size(), grid_size.x * grid_size.y):
-			var swatch: PaletteSwatch = PaletteSwatchScene.instance()
+			var swatch: PaletteSwatch = PaletteSwatchScene.instantiate()
 			swatch.index = i
 			init_swatch(swatch)
-			swatch.connect("pressed", self, "_on_PaletteSwatch_pressed", [i])
-			swatch.connect("double_clicked", self, "_on_PaletteSwatch_double_clicked", [i])
-			swatch.connect("dropped", self, "_on_PaletteSwatch_dropped")
+			swatch.connect("pressed", Callable(self, "_on_PaletteSwatch_pressed").bind(i))
+			swatch.connect("double_clicked", Callable(self, "_on_PaletteSwatch_double_clicked").bind(i))
+			swatch.connect("dropped", Callable(self, "_on_PaletteSwatch_dropped"))
 			add_child(swatch)
 			swatches.push_back(swatch)
 	else:
@@ -90,9 +90,9 @@ func find_and_select_color(mouse_button: int, target_color: Color) -> void:
 		if target_color.is_equal_approx(swatches[color_ind].color):
 			select_swatch(mouse_button, color_ind, old_index)
 			match mouse_button:
-				BUTTON_LEFT:
+				MOUSE_BUTTON_LEFT:
 					Palettes.left_selected_color = color_ind
-				BUTTON_RIGHT:
+				MOUSE_BUTTON_RIGHT:
 					Palettes.right_selected_color = color_ind
 			break
 
@@ -125,7 +125,7 @@ func get_swatch_color(palette_index: int) -> Color:
 	var index = convert_palette_index_to_grid_index(palette_index)
 	if index >= 0 and index < swatches.size():
 		return swatches[index].color
-	return Color.transparent
+	return Color.TRANSPARENT
 
 
 # Used to reload empty swatch color from a theme
@@ -150,8 +150,8 @@ func convert_palette_index_to_grid_index(palette_index: int) -> int:
 
 
 func resize_grid(new_rect_size: Vector2) -> void:
-	var grid_x: int = new_rect_size.x / (swatch_size.x + get("custom_constants/hseparation"))
-	var grid_y: int = new_rect_size.y / (swatch_size.y + get("custom_constants/vseparation"))
+	var grid_x: int = new_rect_size.x / (swatch_size.x + get("theme_override_constants/h_separation"))
+	var grid_y: int = new_rect_size.y / (swatch_size.y + get("theme_override_constants/v_separation"))
 	grid_size.x = min(grid_x, current_palette.width)
 	grid_size.y = min(grid_y, current_palette.height)
 	setup_swatches()

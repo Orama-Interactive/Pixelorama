@@ -5,21 +5,21 @@
 [ext_resource path="res://addons/dockable_container/layout.gd" type="Script" id=3]
 
 [sub_resource type="Resource" id=1]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 1 )
-names = PoolStringArray( "Tools" )
+names = PackedStringArray( "Tools" )
 current_tab = 0
 
 [sub_resource type="Resource" id=2]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 1 )
-names = PoolStringArray( "Main Canvas" )
+names = PackedStringArray( "Main Canvas" )
 current_tab = 0
 
 [sub_resource type="Resource" id=3]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 1 )
-names = PoolStringArray( "Perspective Editor" )
+names = PackedStringArray( "Perspective Editor" )
 current_tab = 0
 
 [sub_resource type="Resource" id=4]
@@ -31,9 +31,9 @@ first = SubResource( 2 )
 second = SubResource( 3 )
 
 [sub_resource type="Resource" id=5]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 1 )
-names = PoolStringArray( "Second Canvas" )
+names = PackedStringArray( "Second Canvas" )
 current_tab = 0
 
 [sub_resource type="Resource" id=6]
@@ -45,9 +45,9 @@ first = SubResource( 4 )
 second = SubResource( 5 )
 
 [sub_resource type="Resource" id=7]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 1 )
-names = PoolStringArray( "Animation Timeline" )
+names = PackedStringArray( "Animation Timeline" )
 current_tab = 0
 
 [sub_resource type="Resource" id=8]
@@ -59,27 +59,27 @@ first = SubResource( 6 )
 second = SubResource( 7 )
 
 [sub_resource type="Resource" id=9]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 1 )
-names = PoolStringArray( "Canvas Preview", "Reference Images" )
+names = PackedStringArray( "Canvas Preview", "RefCounted Images" )
 current_tab = 0
 
 [sub_resource type="Resource" id=10]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 1 )
-names = PoolStringArray( "Color Pickers" )
+names = PackedStringArray( "Color Pickers" )
 current_tab = 0
 
 [sub_resource type="Resource" id=11]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 1 )
-names = PoolStringArray( "Global Tool Options" )
+names = PackedStringArray( "Global Tool Options" )
 current_tab = 0
 
 [sub_resource type="Resource" id=12]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 1 )
-names = PoolStringArray( "Recorder" )
+names = PackedStringArray( "Recorder" )
 current_tab = 0
 
 [sub_resource type="Resource" id=13]
@@ -107,15 +107,15 @@ first = SubResource( 9 )
 second = SubResource( 14 )
 
 [sub_resource type="Resource" id=16]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 1 )
-names = PoolStringArray( "Left Tool Options" )
+names = PackedStringArray( "Left Tool Options" )
 current_tab = 0
 
 [sub_resource type="Resource" id=17]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 1 )
-names = PoolStringArray( "Right Tool Options" )
+names = PackedStringArray( "Right Tool Options" )
 current_tab = 0
 
 [sub_resource type="Resource" id=18]
@@ -127,9 +127,9 @@ first = SubResource( 16 )
 second = SubResource( 17 )
 
 [sub_resource type="Resource" id=19]
-resource_name = "Tabs"
+resource_name = "TabBar"
 script = ExtResource( 1 )
-names = PoolStringArray( "Palettes" )
+names = PackedStringArray( "Palettes" )
 current_tab = 0
 
 [sub_resource type="Resource" id=20]

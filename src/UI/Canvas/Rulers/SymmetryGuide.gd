@@ -1,7 +1,7 @@
 class_name SymmetryGuide
 extends Guide
 
-var _texture: Texture = preload("res://assets/graphics/dotted_line.png")
+var _texture: Texture2D = preload("res://assets/graphics/dotted_line.png")
 
 
 func _ready() -> void:
@@ -11,13 +11,13 @@ func _ready() -> void:
 	texture_mode = Line2D.LINE_TEXTURE_TILE
 	width = Global.camera.zoom.x * 4
 	# Add a subtle difference to the normal guide color by mixing in some blue
-	default_color = Global.guide_color.linear_interpolate(Color(0.2, 0.2, .65), .6)
+	default_color = Global.guide_color.lerp(Color(0.2, 0.2, .65), .6)
 
 
 func _input(_event: InputEvent) -> void:
 	if !visible:
 		return
-	._input(_event)
+	super._input(_event)
 	if type == Types.HORIZONTAL:
 		project.y_symmetry_point = points[0].y * 2 - 1
 		points[0].y = clamp(points[0].y, 0, Global.current_project.size.y)

@@ -1,30 +1,30 @@
+@tool
 # Initial version made by MrTriPie, has been modified by Overloaded.
-tool
 class_name ValueSlider
-extends TextureProgress
+extends TextureProgressBar
 
 enum { NORMAL, HELD, SLIDING, TYPING }
 
-export var editable := true
-export var prefix: String setget _prefix_changed
-export var suffix: String setget _suffix_changed
+@export var editable := true
+@export var prefix: String: set = _prefix_changed
+@export var suffix: String: set = _suffix_changed
 # Size of additional snapping (applied in addition to Range's step).
 # This should always be larger than step.
-export var snap_step := 1.0
+@export var snap_step := 1.0
 # If snap_by_default is true, snapping is enabled when Control is NOT held (used for sliding in
 # larger steps by default, and smaller steps when holding Control).
 # If false, snapping is enabled when Control IS held (used for sliding in smaller steps by
 # default, and larger steps when holding Control).
-export var snap_by_default := false
+@export var snap_by_default := false
 # If show_progress is true it will show the colored progress bar, good for values with a specific
 # range. False will hide it, which is good for values that can be any number.
-export var show_progress := true
-export var show_arrows := true setget _show_arrows_changed
-export var echo_arrow_time := 0.075
+@export var show_progress := true
+@export var show_arrows := true: set = _show_arrows_changed
+@export var echo_arrow_time := 0.075
 # This will be replaced with input action strings in Godot 4.x
 # Right now this is only used for changing the brush size with Control + Wheel
 # In Godot 4.x, the shortcut will be editable
-export var is_global := false
+@export var is_global := false
 
 var state := NORMAL
 var arrow_is_held := 0  # Used for arrow button echo behavior. Is 1 for ValueUp, -1 for ValueDown.
@@ -45,11 +45,11 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	connect("value_changed", self, "_on_value_changed")
+	connect("value_changed", Callable(self, "_on_value_changed"))
 	_setup_nodes()
 	set_process_input(is_global)
 	_reset_display(true)
-	if not Engine.editor_hint:  # Pixelorama specific code
+	if not Engine.is_editor_hint():  # Pixelorama specific code
 		_value_up_button.modulate = Global.modulate_icon_color
 		_value_down_button.modulate = Global.modulate_icon_color
 
@@ -72,12 +72,12 @@ func _input(event: InputEvent) -> void:
 		return
 	if not event.control:
 		return
-	if event.button_index == BUTTON_WHEEL_UP:
+	if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 		if snap_by_default:
 			value += step if event.control else snap_step
 		else:
 			value += snap_step if event.control else step
-	elif event.button_index == BUTTON_WHEEL_DOWN:
+	elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 		if snap_by_default:
 			value -= step if event.control else snap_step
 		else:
@@ -89,15 +89,15 @@ func _gui_input(event: InputEvent) -> void:
 		return
 	if state == NORMAL:
 		if event is InputEventMouseButton and event.pressed:
-			if event.button_index == BUTTON_LEFT:
+			if event.button_index == MOUSE_BUTTON_LEFT:
 				state = HELD
 				set_meta("mouse_start_position", get_local_mouse_position())
-			elif event.button_index == BUTTON_WHEEL_UP:
+			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				if snap_by_default:
 					value += step if event.control else snap_step
 				else:
 					value += snap_step if event.control else step
-			elif event.button_index == BUTTON_WHEEL_DOWN:
+			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				if snap_by_default:
 					value -= step if event.control else snap_step
 				else:
@@ -110,8 +110,8 @@ func _gui_input(event: InputEvent) -> void:
 			_line_edit.grab_focus()
 			_line_edit.selecting_enabled = true
 			_line_edit.select_all()
-			_line_edit.caret_position = _line_edit.text.length()
-			tint_progress = Color.transparent
+			_line_edit.caret_column = _line_edit.text.length()
+			tint_progress = Color.TRANSPARENT
 		elif event is InputEventMouseMotion:
 			if get_meta("mouse_start_position").distance_to(get_local_mouse_position()) > 2:
 				state = SLIDING
@@ -137,7 +137,7 @@ func _gui_input(event: InputEvent) -> void:
 			if event.shift:
 				x_delta *= 0.1
 			if show_progress:
-				ratio = get_meta("start_ratio") + x_delta / rect_size.x
+				ratio = get_meta("start_ratio") + x_delta / size.x
 			else:
 				value = get_meta("start_value") + x_delta * step
 			# Snap when snap_by_default is true, do the opposite when Control is pressed
@@ -150,43 +150,43 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func _setup_nodes() -> void:  # Only called once on _ready()
-	_line_edit.align = LineEdit.ALIGN_CENTER
+	_line_edit.align = LineEdit.ALIGNMENT_CENTER
 	_line_edit.anchor_right = 1
 	_line_edit.anchor_bottom = 1
 	_line_edit.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_line_edit.add_stylebox_override("read_only", StyleBoxEmpty.new())
-	_line_edit.add_stylebox_override("normal", StyleBoxEmpty.new())
-	_line_edit.connect("text_entered", self, "_on_LineEdit_text_entered")
-	_line_edit.connect("focus_exited", self, "_confirm_text")
-	_line_edit.connect("gui_input", self, "_on_LineEdit_gui_input")
+	_line_edit.add_theme_stylebox_override("read_only", StyleBoxEmpty.new())
+	_line_edit.add_theme_stylebox_override("normal", StyleBoxEmpty.new())
+	_line_edit.connect("text_submitted", Callable(self, "_on_LineEdit_text_entered"))
+	_line_edit.connect("focus_exited", Callable(self, "_confirm_text"))
+	_line_edit.connect("gui_input", Callable(self, "_on_LineEdit_gui_input"))
 	add_child(_line_edit)
 
-	_value_up_button.rect_scale.y = -1
+	_value_up_button.scale.y = -1
 	_value_up_button.anchor_left = 1
 	_value_up_button.anchor_right = 1
-	_value_up_button.margin_left = -15
-	_value_up_button.margin_top = 12
-	_value_up_button.margin_right = -3
-	_value_up_button.margin_bottom = 24
+	_value_up_button.offset_left = -15
+	_value_up_button.offset_top = 12
+	_value_up_button.offset_right = -3
+	_value_up_button.offset_bottom = 24
 	_value_up_button.add_to_group("UIButtons")
-	_value_up_button.connect("button_down", self, "_on_Value_button_down", [1])
-	_value_up_button.connect("button_up", self, "_on_Value_button_up")
+	_value_up_button.connect("button_down", Callable(self, "_on_Value_button_down").bind(1))
+	_value_up_button.connect("button_up", Callable(self, "_on_Value_button_up"))
 	add_child(_value_up_button)
 
 	_value_down_button.anchor_left = 1
 	_value_down_button.anchor_top = 1
 	_value_down_button.anchor_right = 1
 	_value_down_button.anchor_bottom = 1
-	_value_down_button.margin_left = -15
-	_value_down_button.margin_top = -12
-	_value_down_button.margin_right = -3
-	_value_down_button.margin_bottom = 0
+	_value_down_button.offset_left = -15
+	_value_down_button.offset_top = -12
+	_value_down_button.offset_right = -3
+	_value_down_button.offset_bottom = 0
 	_value_down_button.add_to_group("UIButtons")
-	_value_down_button.connect("button_down", self, "_on_Value_button_down", [-1])
-	_value_down_button.connect("button_up", self, "_on_Value_button_up")
+	_value_down_button.connect("button_down", Callable(self, "_on_Value_button_down").bind(-1))
+	_value_down_button.connect("button_up", Callable(self, "_on_Value_button_up"))
 	add_child(_value_down_button)
 
-	_timer.connect("timeout", self, "_on_Timer_timeout")
+	_timer.connect("timeout", Callable(self, "_on_Timer_timeout"))
 	add_child(_timer)
 
 
@@ -210,7 +210,7 @@ func _show_arrows_changed(v: bool) -> void:
 
 func _on_LineEdit_gui_input(event: InputEvent) -> void:
 	if state == TYPING:
-		if event is InputEventKey and event.scancode == KEY_ESCAPE:
+		if event is InputEventKey and event.keycode == KEY_ESCAPE:
 			_confirm_text(false)  # Cancel
 			_line_edit.release_focus()
 
@@ -247,7 +247,7 @@ func _confirm_text(confirm := true) -> void:
 func _reset_display(theme_changed := false) -> void:
 	_line_edit.selecting_enabled = false  # Remove the selection
 	_line_edit.editable = false
-	if theme_changed and not Engine.editor_hint:
+	if theme_changed and not Engine.is_editor_hint():
 		texture_under = get_icon("texture_under", "ValueSlider")
 		texture_over = get_icon("texture_over", "ValueSlider")
 		texture_progress = get_icon("texture_progress", "ValueSlider")
@@ -263,14 +263,14 @@ func _reset_display(theme_changed := false) -> void:
 		if show_progress:
 			tint_progress = get_color("progress_color", "ValueSlider")
 		else:
-			tint_progress = Color.transparent
+			tint_progress = Color.TRANSPARENT
 	_line_edit.text = str(tr(prefix), " ", value, " ", tr(suffix)).strip_edges()
 	var line_edit_color := _line_edit.get_color("font_color")
 	var line_edit_disabled_col := get_color("read_only", "LineEdit")
 	if editable:
-		_line_edit.add_color_override("font_color_uneditable", line_edit_color)
+		_line_edit.add_theme_color_override("font_color_uneditable", line_edit_color)
 	else:
-		_line_edit.add_color_override("font_color_uneditable", line_edit_disabled_col)
+		_line_edit.add_theme_color_override("font_color_uneditable", line_edit_disabled_col)
 
 
 func _on_Value_button_down(direction: int) -> void:

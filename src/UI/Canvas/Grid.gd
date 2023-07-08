@@ -46,7 +46,7 @@ func _draw_cartesian_grid(target_rect: Rect2) -> void:
 		grid_multiline_points.push_back(Vector2(target_rect.end.x, y))
 		y += Global.grid_size.y
 
-	if not grid_multiline_points.empty():
+	if not grid_multiline_points.is_empty():
 		draw_multiline(grid_multiline_points, Global.grid_color)
 
 
@@ -109,5 +109,5 @@ func _draw_isometric_grid(target_rect: Rect2) -> void:
 		grid_multiline_points.push_back(end)
 		x += cell_size.x
 
-	if not grid_multiline_points.empty():
+	if not grid_multiline_points.is_empty():
 		draw_multiline(grid_multiline_points, Global.grid_color)

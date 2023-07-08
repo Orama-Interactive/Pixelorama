@@ -27,7 +27,7 @@ func draw_move(position: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
 	position = snap_position(position)
-	.draw_move(position)
+	super.draw_move(position)
 	if !_move:
 		if _displace_origin:
 			_start_pos += position - _offset
@@ -40,7 +40,7 @@ func draw_end(position: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
 	position = snap_position(position)
-	.draw_end(position)
+	super.draw_end(position)
 	_rect = Rect2(0, 0, 0, 0)
 	_square = false
 	_expand_from_center = false
@@ -63,13 +63,13 @@ func draw_preview() -> void:
 
 		canvas.draw_set_transform(temp_rect.position, canvas.rotation, scale)
 		for line in _create_polylines(indicator):
-			canvas.draw_polyline(PoolVector2Array(line), Color.black)
+			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
 func apply_selection(_position: Vector2) -> void:
-	.apply_selection(_position)
+	super.apply_selection(_position)
 	var project: Project = Global.current_project
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()
@@ -164,7 +164,7 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 	return rect
 
 
-func _get_shape_points_filled(size: Vector2) -> PoolVector2Array:
+func _get_shape_points_filled(size: Vector2) -> PackedVector2Array:
 	var border := _get_ellipse_points(Vector2.ZERO, size)
 	var filling := []
 	var bitmap := _fill_bitmap_with_points(border, size)
@@ -192,7 +192,7 @@ func _get_shape_points_filled(size: Vector2) -> PoolVector2Array:
 			elif bit and fill:
 				break
 
-	return PoolVector2Array(border + filling)
+	return PackedVector2Array(border + filling)
 
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html

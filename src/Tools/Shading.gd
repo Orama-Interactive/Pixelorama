@@ -162,7 +162,7 @@ func _on_LightenDarken_value_value_changed(value: float) -> void:
 
 
 func get_config() -> Dictionary:
-	var config := .get_config()
+	var config := super.get_config()
 	config["shading_mode"] = _shading_mode
 	config["mode"] = _mode
 	config["amount"] = _amount
@@ -173,7 +173,7 @@ func get_config() -> Dictionary:
 
 
 func set_config(config: Dictionary) -> void:
-	.set_config(config)
+	super.set_config(config)
 	_shading_mode = config.get("shading_mode", _shading_mode)
 	_drawer.color_op.shading_mode = _shading_mode
 	_mode = config.get("mode", _mode)
@@ -185,7 +185,7 @@ func set_config(config: Dictionary) -> void:
 
 
 func update_config() -> void:
-	.update_config()
+	super.update_config()
 	$ShadingMode.selected = _shading_mode
 	$LightenDarken.selected = _mode
 	$AmountSlider.value = _amount
@@ -207,7 +207,7 @@ func update_strength() -> void:
 
 func draw_start(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_start(position)
+	super.draw_start(position)
 	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
 		_pick_color(position)
@@ -239,7 +239,7 @@ func draw_start(position: Vector2) -> void:
 
 func draw_move(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_move(position)
+	super.draw_move(position)
 	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("draw_color_picker"):
 			_pick_color(position)
@@ -262,7 +262,7 @@ func draw_move(position: Vector2) -> void:
 
 func draw_end(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_end(position)
+	super.draw_end(position)
 	if _picking_color:
 		return
 
@@ -282,15 +282,15 @@ func draw_end(position: Vector2) -> void:
 
 func _draw_brush_image(image: Image, src_rect: Rect2, dst: Vector2) -> void:
 	_changed = true
-	image.lock()
+	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for xx in image.get_size().x:
 		for yy in image.get_size().y:
 			if image.get_pixel(xx, yy).a > 0:
 				var pos := Vector2(xx, yy) + dst - src_rect.position
 				_set_pixel(pos, true)
-	image.unlock()
+	false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 
 func update_brush() -> void:
-	.update_brush()
+	super.update_brush()
 	$ColorInterpolation.visible = false

@@ -1,16 +1,16 @@
 # gdlint: ignore=max-public-methods
 class_name Project
-extends Reference
+extends RefCounted
 # A class for project properties.
 
-var name := "" setget _name_changed
-var size: Vector2 setget _size_changed
+var name := "": set = _name_changed
+var size: Vector2: set = _size_changed
 var undo_redo := UndoRedo.new()
 var tiles: Tiles
 var undos := 0  # The number of times we added undo properties
 var can_undo = true
 var fill_color := Color(0)
-var has_changed := false setget _has_changed_changed
+var has_changed := false: set = _has_changed_changed
 # frames and layers Arrays should generally only be modified directly when
 # opening/creating a project. When modifying the current project, use
 # the add/remove/move/swap_frames/layers methods
@@ -20,7 +20,7 @@ var current_frame := 0
 var current_layer := 0
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
 
-var animation_tags := [] setget _animation_tags_changed  # Array of AnimationTags
+var animation_tags := []: set = _animation_tags_changed
 var guides := []  # Array of Guides
 var brushes := []  # Array of Images
 var reference_images := []  # Array of ReferenceImages
@@ -35,7 +35,7 @@ var y_symmetry_axis := SymmetryGuide.new()
 var selection_map := SelectionMap.new()
 # This is useful for when the selection is outside of the canvas boundaries,
 # on the left and/or above (negative coords)
-var selection_offset := Vector2.ZERO setget _selection_offset_changed
+var selection_offset := Vector2.ZERO: set = _selection_offset_changed
 var has_selection := false
 
 # For every camera (currently there are 3)
@@ -146,7 +146,7 @@ func selection_map_changed() -> void:
 	var image_texture := ImageTexture.new()
 	has_selection = !selection_map.is_invisible()
 	if has_selection:
-		image_texture.create_from_image(selection_map, 0)
+		image_texture.create_from_image(selection_map) #,0
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
 	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu_button.get_popup()
 	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
@@ -488,34 +488,34 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	# Unpress all buttons
 	for i in frames.size():
 		var frame_button: BaseButton = Global.frame_hbox.get_child(i)
-		frame_button.pressed = false  # Unpress all frame buttons
+		frame_button.button_pressed = false  # Unpress all frame buttons
 		for cel_hbox in Global.cel_vbox.get_children():
 			if i < cel_hbox.get_child_count():
-				cel_hbox.get_child(i).pressed = false  # Unpress all cel buttons
+				cel_hbox.get_child(i).button_pressed = false  # Unpress all cel buttons
 
 	for layer_button in Global.layer_vbox.get_children():
-		layer_button.pressed = false  # Unpress all layer buttons
+		layer_button.button_pressed = false  # Unpress all layer buttons
 
-	if selected_cels.empty():
+	if selected_cels.is_empty():
 		selected_cels.append([new_frame, new_layer])
 	for cel in selected_cels:  # Press selected buttons
 		var frame: int = cel[0]
 		var layer: int = cel[1]
 		if frame < Global.frame_hbox.get_child_count():
 			var frame_button: BaseButton = Global.frame_hbox.get_child(frame)
-			frame_button.pressed = true  # Press selected frame buttons
+			frame_button.button_pressed = true  # Press selected frame buttons
 
 		var layer_vbox_child_count: int = Global.layer_vbox.get_child_count()
 		if layer < layer_vbox_child_count:
 			var layer_button = Global.layer_vbox.get_child(layer_vbox_child_count - 1 - layer)
-			layer_button.pressed = true  # Press selected layer buttons
+			layer_button.button_pressed = true  # Press selected layer buttons
 
 		var cel_vbox_child_count: int = Global.cel_vbox.get_child_count()
 		if layer < cel_vbox_child_count:
 			var cel_hbox: Container = Global.cel_vbox.get_child(cel_vbox_child_count - 1 - layer)
 			if frame < cel_hbox.get_child_count():
 				var cel_button: BaseButton = cel_hbox.get_child(frame)
-				cel_button.pressed = true  # Press selected cel buttons
+				cel_button.button_pressed = true  # Press selected cel buttons
 
 	if new_frame != current_frame:  # If the frame has changed
 		current_frame = new_frame
@@ -543,7 +543,7 @@ func toggle_frame_buttons() -> void:
 
 
 func toggle_layer_buttons() -> void:
-	if layers.empty() or current_layer >= layers.size():
+	if layers.is_empty() or current_layer >= layers.size():
 		return
 	var child_count: int = layers[current_layer].get_child_count(true)
 
@@ -574,7 +574,7 @@ func _animation_tags_changed(value: Array) -> void:
 
 	for tag in animation_tags:
 		var tag_base_size = Global.animation_timeline.cel_size + 4
-		var tag_c: Container = animation_tag_node.instance()
+		var tag_c: Container = animation_tag_node.instantiate()
 		Global.tag_container.add_child(tag_c)
 		tag_c.tag = tag
 		var tag_position: int = Global.tag_container.get_child_count() - 1
@@ -584,13 +584,13 @@ func _animation_tags_changed(value: Array) -> void:
 		tag_c.get_node("Line2D").default_color = tag.color
 
 		# Added 1 to answer to get starting position of next cel
-		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + 1
+		tag_c.position.x = (tag.from - 1) * tag_base_size + 1
 		var tag_size: int = tag.to - tag.from
 		# We dont need the 4 pixels at the end of last cel
-		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size - 8
-		tag_c.rect_position.y = 1  # To make top line of tag visible
-		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
-		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
+		tag_c.custom_minimum_size.x = (tag_size + 1) * tag_base_size - 8
+		tag_c.position.y = 1  # To make top line of tag visible
+		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.custom_minimum_size.x, 0)
+		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.custom_minimum_size.x, 32)
 
 	_set_timeline_first_and_last_frames()
 
@@ -683,7 +683,7 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 			cel.on_remove()
 			if cel.link_set != null:
 				cel.link_set["cels"].erase(cel)
-				if cel.link_set["cels"].empty():
+				if cel.link_set["cels"].is_empty():
 					layers[l].cel_link_sets.erase(cel.link_set)
 		# Remove frame
 		frames.remove(indices[i] - i)

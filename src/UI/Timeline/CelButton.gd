@@ -6,25 +6,25 @@ var frame := 0
 var layer := 0
 var cel: BaseCel
 
-onready var popup_menu: PopupMenu = get_node_or_null("PopupMenu")
-onready var linked_indicator: Polygon2D = get_node_or_null("LinkedIndicator")
-onready var cel_texture: TextureRect = $CelTexture
-onready var transparent_checker: ColorRect = $CelTexture/TransparentChecker
+@onready var popup_menu: PopupMenu = get_node_or_null("PopupMenu")
+@onready var linked_indicator: Polygon2D = get_node_or_null("LinkedIndicator")
+@onready var cel_texture: TextureRect = $CelTexture
+@onready var transparent_checker: ColorRect = $CelTexture/TransparentChecker
 
 
 func _ready() -> void:
 	cel = Global.current_project.frames[frame].cels[layer]
 	button_setup()
 	_dim_checker()
-	cel.connect("texture_changed", self, "_dim_checker")
+	cel.connect("texture_changed", Callable(self, "_dim_checker"))
 
 
 func button_setup() -> void:
-	rect_min_size.x = Global.animation_timeline.cel_size
-	rect_min_size.y = Global.animation_timeline.cel_size
+	custom_minimum_size.x = Global.animation_timeline.cel_size
+	custom_minimum_size.y = Global.animation_timeline.cel_size
 
 	var base_layer: BaseLayer = Global.current_project.layers[layer]
-	hint_tooltip = tr("Frame: %s, Layer: %s") % [frame + 1, base_layer.name]
+	tooltip_text = tr("Frame: %s, Layer: %s") % [frame + 1, base_layer.name]
 	cel_texture.texture = cel.image_texture
 	if is_instance_valid(linked_indicator):
 		linked_indicator.visible = cel.link_set != null
@@ -32,18 +32,18 @@ func button_setup() -> void:
 			linked_indicator.color.h = cel.link_set["hue"]
 
 	# Reset the checkers size because it assumes you want the same size as the canvas
-	transparent_checker.rect_size = transparent_checker.get_parent().rect_size
+	transparent_checker.size = transparent_checker.get_parent().size
 
 
 func _on_CelButton_resized() -> void:
-	cel_texture.rect_min_size.x = rect_min_size.x - 4
-	cel_texture.rect_min_size.y = rect_min_size.y - 4
+	cel_texture.custom_minimum_size.x = custom_minimum_size.x - 4
+	cel_texture.custom_minimum_size.y = custom_minimum_size.y - 4
 
 	if is_instance_valid(linked_indicator):
-		linked_indicator.polygon[1].x = rect_min_size.x
-		linked_indicator.polygon[2].x = rect_min_size.x
-		linked_indicator.polygon[2].y = rect_min_size.y
-		linked_indicator.polygon[3].y = rect_min_size.y
+		linked_indicator.polygon[1].x = custom_minimum_size.x
+		linked_indicator.polygon[2].x = custom_minimum_size.x
+		linked_indicator.polygon[2].y = custom_minimum_size.y
+		linked_indicator.polygon[3].y = custom_minimum_size.y
 
 
 func _on_CelButton_pressed() -> void:
@@ -207,13 +207,13 @@ func _dim_checker() -> void:
 		transparent_checker.self_modulate.a = 1.0
 
 
-func get_drag_data(_position: Vector2) -> Array:
+func _get_drag_data(_position: Vector2) -> Array:
 	var button := Button.new()
-	button.rect_size = rect_size
+	button.size = size
 	button.theme = Global.control.theme
 	var texture_rect := TextureRect.new()
-	texture_rect.rect_size = cel_texture.rect_size
-	texture_rect.rect_position = cel_texture.rect_position
+	texture_rect.size = cel_texture.size
+	texture_rect.position = cel_texture.position
 	texture_rect.expand = true
 	texture_rect.texture = cel_texture.texture
 	button.add_child(texture_rect)
@@ -222,7 +222,7 @@ func get_drag_data(_position: Vector2) -> Array:
 	return ["Cel", frame, layer]
 
 
-func can_drop_data(_pos: Vector2, data) -> bool:
+func _can_drop_data(_pos: Vector2, data) -> bool:
 	var project: Project = Global.current_project
 	if typeof(data) == TYPE_ARRAY and data[0] == "Cel":
 		var drag_frame = data[1]
@@ -246,8 +246,8 @@ func can_drop_data(_pos: Vector2, data) -> bool:
 						else:  # Right
 							region = _get_region_rect(0.875, 1.125)
 							region.position.x += 2  # Container spacing
-					Global.animation_timeline.drag_highlight.rect_global_position = region.position
-					Global.animation_timeline.drag_highlight.rect_size = region.size
+					Global.animation_timeline.drag_highlight.global_position = region.position
+					Global.animation_timeline.drag_highlight.size = region.size
 					Global.animation_timeline.drag_highlight.visible = true
 					return true
 
@@ -255,7 +255,7 @@ func can_drop_data(_pos: Vector2, data) -> bool:
 	return false
 
 
-func drop_data(_pos: Vector2, data) -> void:
+func _drop_data(_pos: Vector2, data) -> void:
 	var drop_frame = data[1]
 	var drop_layer = data[2]
 	var project = Global.current_project

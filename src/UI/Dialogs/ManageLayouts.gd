@@ -3,13 +3,13 @@ extends AcceptDialog
 var layout_selected := -1
 var is_editing := false
 
-onready var layout_list: ItemList = find_node("SavedLayouts")
-onready var edit_layout: Button = find_node("EditLayout")
-onready var delete_layout: Button = find_node("DeleteLayout")
-onready var layout_settings: ConfirmationDialog = $LayoutSettings
-onready var layout_name: LineEdit = $LayoutSettings/LayoutName
-onready var delete_confirmation: ConfirmationDialog = $DeleteConfirmation
-onready var mimic_ui = find_node("LayoutPreview")
+@onready var layout_list: ItemList = find_child("SavedLayouts")
+@onready var edit_layout: Button = find_child("EditLayout")
+@onready var delete_layout: Button = find_child("DeleteLayout")
+@onready var layout_settings: ConfirmationDialog = $LayoutSettings
+@onready var layout_name: LineEdit = $LayoutSettings/LayoutName
+@onready var delete_confirmation: ConfirmationDialog = $DeleteConfirmation
+@onready var mimic_ui = find_child("LayoutPreview")
 
 
 func _on_ManageLayouts_about_to_show() -> void:
@@ -86,7 +86,7 @@ func _on_LayoutSettings_confirmed() -> void:
 
 
 func delete_layout_file(file_name: String) -> void:
-	var dir := Directory.new()
+	var dir := DirAccess.new()
 	dir.remove("user://layouts/".plus_file(file_name))
 
 

@@ -8,73 +8,73 @@
 script = ExtResource( 2 )
 
 [node name="ColorRect" parent="." index="0"]
-margin_right = 126.0
+offset_right = 126.0
 
 [node name="Label" parent="." index="1"]
-margin_right = 126.0
+offset_right = 126.0
 
 [node name="Brush" parent="." index="2"]
-margin_right = 126.0
+offset_right = 126.0
 
 [node name="BrushSize" parent="Brush" index="1"]
-margin_right = 126.0
+offset_right = 126.0
 
 [node name="ColorInterpolation" parent="." index="3"]
-margin_top = 216.0
-margin_right = 126.0
-margin_bottom = 278.0
+offset_top = 216.0
+offset_right = 126.0
+offset_bottom = 278.0
 
 [node name="LightenDarken" type="OptionButton" parent="." index="4"]
-margin_top = 62.0
-margin_right = 126.0
-margin_bottom = 82.0
-rect_min_size = Vector2( 92, 0 )
+offset_top = 62.0
+offset_right = 126.0
+offset_bottom = 82.0
+custom_minimum_size = Vector2( 92, 0 )
 mouse_default_cursor_shape = 2
 text = "Lighten"
 items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
 selected = 0
 
 [node name="ShadingMode" type="OptionButton" parent="." index="5"]
-margin_top = 86.0
-margin_right = 126.0
-margin_bottom = 106.0
+offset_top = 86.0
+offset_right = 126.0
+offset_bottom = 106.0
 mouse_default_cursor_shape = 2
 text = "Simple Shading"
 items = [ "Simple Shading", null, false, 0, null, "Hue Shifting", null, false, 1, null ]
 selected = 0
 
 [node name="AmountSlider" parent="." index="6" instance=ExtResource( 3 )]
-margin_top = 110.0
-margin_right = 126.0
-margin_bottom = 134.0
-hint_tooltip = "Lighten/Darken amount"
+offset_top = 110.0
+offset_right = 126.0
+offset_bottom = 134.0
+tooltip_text = "Lighten/Darken amount"
 value = 10.0
 prefix = "Amount:"
 
 [node name="HueShiftingOptions" type="VBoxContainer" parent="." index="7"]
 visible = false
-margin_top = 138.0
-margin_right = 126.0
-margin_bottom = 218.0
+offset_top = 138.0
+offset_right = 126.0
+offset_bottom = 218.0
 
 [node name="HueSlider" parent="HueShiftingOptions" index="0" instance=ExtResource( 3 )]
-margin_right = 126.0
-margin_bottom = 24.0
+offset_right = 126.0
+offset_bottom = 24.0
 max_value = 180.0
 value = 10.0
 prefix = "Hue:"
 
 [node name="SatSlider" parent="HueShiftingOptions" index="1" instance=ExtResource( 3 )]
-margin_top = 28.0
-margin_right = 126.0
-margin_bottom = 52.0
+offset_top = 28.0
+offset_right = 126.0
+offset_bottom = 52.0
 value = 10.0
 prefix = "Saturation:"
 
 [node name="ValueSlider" parent="HueShiftingOptions" index="2" instance=ExtResource( 3 )]
-margin_top = 56.0
-margin_right = 126.0
-margin_bottom = 80.0
+offset_top = 56.0
+offset_right = 126.0
+offset_bottom = 80.0
 value = 10.0
 prefix = "Value:"
 

@@ -7,42 +7,42 @@
 script = ExtResource( 2 )
 
 [node name="Mode" type="Label" parent="." index="2"]
-margin_top = 26.0
-margin_right = 116.0
-margin_bottom = 40.0
+offset_top = 26.0
+offset_right = 116.0
+offset_bottom = 40.0
 mouse_default_cursor_shape = 2
 text = "Mode:"
 
 [node name="ModeOptions" type="OptionButton" parent="." index="3"]
-margin_top = 44.0
-margin_right = 116.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 92, 0 )
+offset_top = 44.0
+offset_right = 116.0
+offset_bottom = 64.0
+custom_minimum_size = Vector2( 92, 0 )
 mouse_default_cursor_shape = 2
 text = "Zoom in"
 items = [ "Zoom in", null, false, 0, null, "Zoom out", null, false, 1, null ]
 selected = 0
 
 [node name="Options" type="Label" parent="." index="4"]
-margin_top = 68.0
-margin_right = 116.0
-margin_bottom = 82.0
+offset_top = 68.0
+offset_right = 116.0
+offset_bottom = 82.0
 mouse_default_cursor_shape = 2
 text = "Options:"
 
 [node name="FitToFrame" type="Button" parent="." index="5"]
-margin_top = 86.0
-margin_right = 116.0
-margin_bottom = 106.0
-rect_min_size = Vector2( 92, 0 )
+offset_top = 86.0
+offset_right = 116.0
+offset_bottom = 106.0
+custom_minimum_size = Vector2( 92, 0 )
 mouse_default_cursor_shape = 2
 text = "Fit to frame"
 
 [node name="100%" type="Button" parent="." index="6"]
-margin_top = 110.0
-margin_right = 116.0
-margin_bottom = 130.0
-rect_min_size = Vector2( 92, 0 )
+offset_top = 110.0
+offset_right = 116.0
+offset_bottom = 130.0
+custom_minimum_size = Vector2( 92, 0 )
 mouse_default_cursor_shape = 2
 text = "100% Zoom"
 

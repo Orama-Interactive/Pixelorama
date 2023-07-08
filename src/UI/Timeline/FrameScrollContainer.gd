@@ -2,27 +2,27 @@ extends Container
 
 const PADDING = 1
 
-export var h_scroll_bar_node_path: NodePath
-onready var h_scroll_bar: HScrollBar = get_node_or_null(h_scroll_bar_node_path)
+@export var h_scroll_bar_node_path: NodePath
+@onready var h_scroll_bar: HScrollBar = get_node_or_null(h_scroll_bar_node_path)
 
 
 func _ready():
-	rect_clip_content = true
-	connect("sort_children", self, "_on_sort_children")
+	clip_contents = true
+	connect("sort_children", Callable(self, "_on_sort_children"))
 	if is_instance_valid(h_scroll_bar):
-		h_scroll_bar.connect("resized", self, "_update_scroll")
-		h_scroll_bar.connect("value_changed", self, "_on_scroll_bar_value_changed")
+		h_scroll_bar.connect("resized", Callable(self, "_update_scroll"))
+		h_scroll_bar.connect("value_changed", Callable(self, "_on_scroll_bar_value_changed"))
 
 
 func _gui_input(event: InputEvent) -> void:
 	if get_child_count():
-		var vertical_scroll: bool = get_child(0).rect_size.y >= rect_size.y
+		var vertical_scroll: bool = get_child(0).size.y >= size.y
 		if event is InputEventMouseButton and (event.shift or not vertical_scroll):
 			if is_instance_valid(h_scroll_bar):
-				if event.button_index == BUTTON_WHEEL_UP:
+				if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 					h_scroll_bar.value -= Global.animation_timeline.cel_size / 2 + 2
 					accept_event()
-				elif event.button_index == BUTTON_WHEEL_DOWN:
+				elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 					h_scroll_bar.value += Global.animation_timeline.cel_size / 2 + 2
 					accept_event()
 
@@ -30,10 +30,10 @@ func _gui_input(event: InputEvent) -> void:
 func _update_scroll() -> void:
 	if get_child_count():
 		if is_instance_valid(h_scroll_bar):
-			h_scroll_bar.max_value = get_child(0).rect_size.x
-			h_scroll_bar.page = rect_size.x
+			h_scroll_bar.max_value = get_child(0).size.x
+			h_scroll_bar.page = size.x
 			h_scroll_bar.visible = h_scroll_bar.page < h_scroll_bar.max_value
-			get_child(0).rect_position.x = -h_scroll_bar.value + PADDING
+			get_child(0).position.x = -h_scroll_bar.value + PADDING
 
 
 func ensure_control_visible(control: Control):
@@ -51,7 +51,7 @@ func ensure_control_visible(control: Control):
 
 func _on_sort_children() -> void:
 	if get_child_count():
-		get_child(0).rect_size = get_child(0).get_combined_minimum_size()
+		get_child(0).size = get_child(0).get_combined_minimum_size()
 		_update_scroll()
 
 

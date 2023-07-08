@@ -5,19 +5,19 @@ var green := true
 var blue := true
 var alpha := false
 
-var shader: Shader = preload("res://src/Shaders/Invert.shader")
+var shader: Shader = preload("res://src/Shaders/Invert.gdshader")
 
 
 func _ready() -> void:
 	var sm := ShaderMaterial.new()
-	sm.shader = shader
+	sm.gdshader = shader
 	preview.set_material(sm)
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
-		selection_tex.create_from_image(project.selection_map, 0)
+		selection_tex.create_from_image(project.selection_map) #,0
 
 	var params := {
 		"red": red, "blue": blue, "green": green, "alpha": alpha, "selection": selection_tex
@@ -25,11 +25,11 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 
 	if !confirmed:
 		for param in params:
-			preview.material.set_shader_param(param, params[param])
+			preview.material.set_shader_parameter(param, params[param])
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		yield(gen, "done")
+		await gen.done
 
 
 func _on_RButton_toggled(button_pressed: bool) -> void:

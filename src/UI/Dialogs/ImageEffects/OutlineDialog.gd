@@ -1,13 +1,13 @@
 extends ImageEffect
 
 enum Animate { THICKNESS }
-var color := Color.black
+var color := Color.BLACK
 var thickness := 1
 var pattern := 0
 var inside_image := false
 var shader: Shader
 
-onready var outline_color := $VBoxContainer/OutlineOptions/OutlineColor as ColorPickerButton
+@onready var outline_color := $VBoxContainer/OutlineOptions/OutlineColor as ColorPickerButton
 
 
 func _ready() -> void:
@@ -16,7 +16,7 @@ func _ready() -> void:
 	else:
 		shader = load("res://src/Shaders/OutlineInline.gdshader")
 		var sm := ShaderMaterial.new()
-		sm.shader = shader
+		sm.gdshader = shader
 		preview.set_material(sm)
 	outline_color.get_picker().presets_visible = false
 	color = outline_color.color
@@ -35,7 +35,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
-		selection_tex.create_from_image(project.selection_map, 0)
+		selection_tex.create_from_image(project.selection_map) #,0
 
 	var params := {
 		"color": color,
@@ -46,11 +46,11 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	}
 	if !confirmed:
 		for param in params:
-			preview.material.set_shader_param(param, params[param])
+			preview.material.set_shader_parameter(param, params[param])
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		yield(gen, "done")
+		await gen.done
 
 
 func _on_ThickValue_value_changed(value: int) -> void:

@@ -1,9 +1,9 @@
 class_name ShortcutProfile
 extends Resource
 
-export(String) var name := ""
-export(bool) var customizable := true
-export(Dictionary) var bindings := {}
+@export var name := ""
+@export var customizable := true
+@export var bindings := {}
 
 
 func _init() -> void:
@@ -14,7 +14,7 @@ func fill_bindings() -> void:
 	var unnecessary_actions = bindings.duplicate()  # Checks if the profile has any unused actions
 	for action in InputMap.get_actions():
 		if not action in bindings:
-			bindings[action] = InputMap.get_action_list(action)
+			bindings[action] = InputMap.action_get_events(action)
 		unnecessary_actions.erase(action)
 	for action in unnecessary_actions:
 		bindings.erase(action)
@@ -24,7 +24,7 @@ func fill_bindings() -> void:
 func change_action(action: String) -> void:
 	if not customizable:
 		return
-	bindings[action] = InputMap.get_action_list(action)
+	bindings[action] = InputMap.action_get_events(action)
 	save()
 
 

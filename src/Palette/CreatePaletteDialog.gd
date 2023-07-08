@@ -6,17 +6,17 @@ signal saved(preset, name, comment, width, height, add_alpha_colors, colors_from
 # Reference to current palette stored when dialog opens
 var current_palette: Palette
 
-onready var preset_input := $VBoxContainer/PaletteMetadata/Preset
-onready var name_input := $VBoxContainer/PaletteMetadata/Name
-onready var comment_input := $VBoxContainer/PaletteMetadata/Comment
-onready var width_input := $VBoxContainer/PaletteMetadata/Width
-onready var height_input := $VBoxContainer/PaletteMetadata/Height
-onready var alpha_colors_input := $VBoxContainer/ColorsSettings/AddAlphaColors
-onready var get_colors_from_input := $VBoxContainer/ColorsSettings/GetColorsFrom/GetColorsFrom
+@onready var preset_input := $VBoxContainer/PaletteMetadata/Preset
+@onready var name_input := $VBoxContainer/PaletteMetadata/Name
+@onready var comment_input := $VBoxContainer/PaletteMetadata/Comment
+@onready var width_input := $VBoxContainer/PaletteMetadata/Width
+@onready var height_input := $VBoxContainer/PaletteMetadata/Height
+@onready var alpha_colors_input := $VBoxContainer/ColorsSettings/AddAlphaColors
+@onready var get_colors_from_input := $VBoxContainer/ColorsSettings/GetColorsFrom/GetColorsFrom
 
-onready var colors_settings := $VBoxContainer/ColorsSettings
-onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
-onready var enter_name_warning := $VBoxContainer/EnterNameWarning
+@onready var colors_settings := $VBoxContainer/ColorsSettings
+@onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
+@onready var enter_name_warning := $VBoxContainer/EnterNameWarning
 
 
 # Opens dialog
@@ -51,7 +51,7 @@ func set_default_values() -> void:
 	comment_input.text = ""
 	width_input.value = Palette.DEFAULT_WIDTH
 	height_input.value = Palette.DEFAULT_HEIGHT
-	alpha_colors_input.pressed = true
+	alpha_colors_input.button_pressed = true
 	get_colors_from_input.selected = Palettes.GetColorsFrom.CURRENT_FRAME
 
 
@@ -60,11 +60,11 @@ func toggle_already_exists_warning(visible: bool) -> void:
 	already_exists_warning.visible = visible
 
 	# Required to resize window to correct size if warning causes content overflow
-	rect_size = rect_size
+	size = size
 
 
 func toggle_ok_button_disability(disable: bool) -> void:
-	get_ok().disabled = disable
+	get_ok_button().disabled = disable
 	enter_name_warning.visible = disable
 
 

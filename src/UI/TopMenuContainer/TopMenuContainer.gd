@@ -12,28 +12,28 @@ var default_layout_size := layouts.size()
 var selected_layout := 0
 var zen_mode := false
 
-onready var ui: Container = Global.control.find_node("DockableContainer")
-onready var ui_elements: Array = ui.get_children()
-onready var file_menu_button := $MenuItems/FileMenu
-onready var edit_menu_button := $MenuItems/EditMenu
-onready var select_menu_button := $MenuItems/SelectMenu
-onready var image_menu_button := $MenuItems/ImageMenu
-onready var view_menu_button := $MenuItems/ViewMenu
-onready var window_menu_button := $MenuItems/WindowMenu
-onready var help_menu_button := $MenuItems/HelpMenu
+@onready var ui: Container = Global.control.find_child("DockableContainer")
+@onready var ui_elements: Array = ui.get_children()
+@onready var file_menu_button := $MenuItems/FileMenu
+@onready var edit_menu_button := $MenuItems/EditMenu
+@onready var select_menu_button := $MenuItems/SelectMenu
+@onready var image_menu_button := $MenuItems/ImageMenu
+@onready var view_menu_button := $MenuItems/ViewMenu
+@onready var window_menu_button := $MenuItems/WindowMenu
+@onready var help_menu_button := $MenuItems/HelpMenu
 
-onready var greyscale_vision: ColorRect = ui.find_node("GreyscaleVision")
-onready var new_image_dialog: ConfirmationDialog = Global.control.find_node("CreateNewImage")
-onready var window_opacity_dialog: AcceptDialog = Global.control.find_node("WindowOpacityDialog")
-onready var tile_mode_submenu := PopupMenu.new()
-onready var snap_to_submenu := PopupMenu.new()
-onready var panels_submenu := PopupMenu.new()
-onready var layouts_submenu := PopupMenu.new()
-onready var recent_projects_submenu := PopupMenu.new()
+@onready var greyscale_vision: ColorRect = ui.find_child("GreyscaleVision")
+@onready var new_image_dialog: ConfirmationDialog = Global.control.find_child("CreateNewImage")
+@onready var window_opacity_dialog: AcceptDialog = Global.control.find_child("WindowOpacityDialog")
+@onready var tile_mode_submenu := PopupMenu.new()
+@onready var snap_to_submenu := PopupMenu.new()
+@onready var panels_submenu := PopupMenu.new()
+@onready var layouts_submenu := PopupMenu.new()
+@onready var recent_projects_submenu := PopupMenu.new()
 
 
 func _ready() -> void:
-	var dir := Directory.new()
+	var dir := DirAccess.new()
 	dir.make_dir("user://layouts")
 	_setup_file_menu()
 	_setup_edit_menu()
@@ -66,7 +66,7 @@ func _setup_file_menu() -> void:
 			file_menu.add_item(item, i)
 		i += 1
 
-	file_menu.connect("id_pressed", self, "file_menu_id_pressed")
+	file_menu.connect("id_pressed", Callable(self, "file_menu_id_pressed"))
 
 	if OS.get_name() == "HTML5":
 		file_menu.set_item_disabled(Global.FileMenu.OPEN_LAST_PROJECT, true)
@@ -75,7 +75,7 @@ func _setup_file_menu() -> void:
 
 func _setup_recent_projects_submenu(item: String) -> void:
 	recent_projects = Global.config_cache.get_value("data", "recent_projects", [])
-	recent_projects_submenu.connect("id_pressed", self, "_on_recent_projects_submenu_id_pressed")
+	recent_projects_submenu.connect("id_pressed", Callable(self, "_on_recent_projects_submenu_id_pressed"))
 	update_recent_projects_submenu()
 
 	file_menu.add_child(recent_projects_submenu)
@@ -109,7 +109,7 @@ func _setup_edit_menu() -> void:
 		i += 1
 
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, true)
-	edit_menu.connect("id_pressed", self, "edit_menu_id_pressed")
+	edit_menu.connect("id_pressed", Callable(self, "edit_menu_id_pressed"))
 
 
 func _setup_view_menu() -> void:
@@ -140,7 +140,7 @@ func _setup_view_menu() -> void:
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GUIDES, true)
 	view_menu.hide_on_checkable_item_selection = false
-	view_menu.connect("id_pressed", self, "view_menu_id_pressed")
+	view_menu.connect("id_pressed", Callable(self, "view_menu_id_pressed"))
 
 	var draw_grid: bool = Global.config_cache.get_value("view_menu", "draw_grid", Global.draw_grid)
 	if draw_grid != Global.draw_grid:
@@ -179,7 +179,7 @@ func _setup_tile_mode_submenu(item: String) -> void:
 	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", Tiles.MODE.Y_AXIS)
 	tile_mode_submenu.hide_on_checkable_item_selection = false
 
-	tile_mode_submenu.connect("id_pressed", self, "_tile_mode_submenu_id_pressed")
+	tile_mode_submenu.connect("id_pressed", Callable(self, "_tile_mode_submenu_id_pressed"))
 	view_menu.add_child(tile_mode_submenu)
 	view_menu.add_submenu_item(item, tile_mode_submenu.get_name())
 
@@ -189,7 +189,7 @@ func _setup_snap_to_submenu(item: String) -> void:
 	snap_to_submenu.add_check_item("Snap to Rectangular Grid")
 	snap_to_submenu.add_check_item("Snap to Guides")
 	snap_to_submenu.add_check_item("Snap to Perspective Guides")
-	snap_to_submenu.connect("id_pressed", self, "_snap_to_submenu_id_pressed")
+	snap_to_submenu.connect("id_pressed", Callable(self, "_snap_to_submenu_id_pressed"))
 	view_menu.add_child(snap_to_submenu)
 	view_menu.add_submenu_item(item, snap_to_submenu.get_name())
 
@@ -217,7 +217,7 @@ func _setup_window_menu() -> void:
 			window_menu.add_check_item(item, i)
 		i += 1
 	window_menu.hide_on_checkable_item_selection = false
-	window_menu.connect("id_pressed", self, "window_menu_id_pressed")
+	window_menu.connect("id_pressed", Callable(self, "window_menu_id_pressed"))
 	# Disable window opacity item if per pixel transparency is not allowed
 	window_menu.set_item_disabled(
 		Global.WindowMenu.WINDOW_OPACITY,
@@ -233,16 +233,16 @@ func _setup_panels_submenu(item: String) -> void:
 		var is_hidden: bool = ui.is_control_hidden(element)
 		panels_submenu.set_item_checked(ui_elements.find(element), !is_hidden)
 
-	panels_submenu.connect("id_pressed", self, "_panels_submenu_id_pressed")
+	panels_submenu.connect("id_pressed", Callable(self, "_panels_submenu_id_pressed"))
 	window_menu.add_child(panels_submenu)
 	window_menu.add_submenu_item(item, panels_submenu.get_name())
 
 
 func _setup_layouts_submenu(item: String) -> void:
-	var dir := Directory.new()
+	var dir := DirAccess.new()
 	var path := "user://layouts"
 	if dir.open(path) == OK:
-		dir.list_dir_begin()
+		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var file_name = dir.get_next()
 		while file_name != "":
 			if !dir.current_is_dir():
@@ -254,7 +254,7 @@ func _setup_layouts_submenu(item: String) -> void:
 	layouts_submenu.hide_on_checkable_item_selection = false
 	populate_layouts_submenu()
 
-	layouts_submenu.connect("id_pressed", self, "_layouts_submenu_id_pressed")
+	layouts_submenu.connect("id_pressed", Callable(self, "_layouts_submenu_id_pressed"))
 	window_menu.add_child(layouts_submenu)
 	window_menu.add_submenu_item(item, layouts_submenu.get_name())
 
@@ -294,7 +294,7 @@ func _setup_image_menu() -> void:
 		image_menu.add_item(item, i)
 		i += 1
 
-	image_menu.connect("id_pressed", self, "image_menu_id_pressed")
+	image_menu.connect("id_pressed", Callable(self, "image_menu_id_pressed"))
 
 
 func _setup_select_menu() -> void:
@@ -307,7 +307,7 @@ func _setup_select_menu() -> void:
 			select_menu.add_check_item(item, i)
 		else:
 			select_menu.add_item(item, i)
-	select_menu.connect("id_pressed", self, "select_menu_id_pressed")
+	select_menu.connect("id_pressed", Callable(self, "select_menu_id_pressed"))
 
 
 func _setup_help_menu() -> void:
@@ -326,7 +326,7 @@ func _setup_help_menu() -> void:
 		help_menu.add_item(item, i)
 		i += 1
 
-	help_menu.connect("id_pressed", self, "help_menu_id_pressed")
+	help_menu.connect("id_pressed", Callable(self, "help_menu_id_pressed"))
 
 
 func _handle_metadata(id: int, menu_button: MenuButton) -> void:
@@ -404,10 +404,10 @@ func _save_project_file_as() -> void:
 		save_dialog.popup_centered()
 		save_filename.text = Global.current_project.name
 	else:
-		Global.save_sprites_dialog.get_ok().text = "Save"
+		Global.save_sprites_dialog.get_ok_button().text = "Save"
 		Global.save_sprites_dialog.popup_centered()
-		yield(get_tree(), "idle_frame")
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
+		await get_tree().idle_frame
 		Global.save_sprites_dialog.get_line_edit().text = Global.current_project.name
 
 
@@ -525,8 +525,8 @@ func _panels_submenu_id_pressed(id: int) -> void:
 	panels_submenu.set_item_checked(id, !element_visible)
 	if ui.tabs_visible == false:
 		ui.tabs_visible = true
-		yield(get_tree(), "idle_frame")
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
+		await get_tree().idle_frame
 		ui.tabs_visible = false
 
 
@@ -551,13 +551,13 @@ func set_layout(id: int) -> void:
 		panels_submenu.set_item_checked(i, !is_hidden)
 
 	if zen_mode:  # Turn zen mode off
-		Global.control.find_node("TabsContainer").visible = true
+		Global.control.find_child("TabsContainer").visible = true
 		zen_mode = false
 		window_menu.set_item_checked(Global.WindowMenu.ZEN_MODE, false)
 
 	# Hacky but without 2 idle frames it doesn't work properly. Should be replaced eventually
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
+	await get_tree().idle_frame
 	# Call set_tabs_visible to keep tabs visible if there are 2 or more in the same panel
 	ui.tabs_visible = ui.tabs_visible
 
@@ -570,7 +570,7 @@ func _toggle_greyscale_view() -> void:
 
 func _toggle_mirror_view() -> void:
 	Global.mirror_view = !Global.mirror_view
-	var marching_ants_outline: Sprite = Global.canvas.selection.marching_ants_outline
+	var marching_ants_outline: Sprite2D = Global.canvas.selection.marching_ants_outline
 	marching_ants_outline.scale.x = -marching_ants_outline.scale.x
 	if Global.mirror_view:
 		marching_ants_outline.position.x = (
@@ -631,15 +631,15 @@ func _toggle_zen_mode() -> void:
 		if !panels_submenu.is_item_checked(i):
 			continue
 		ui.set_control_hidden(ui_elements[i], !zen_mode)
-	Global.control.find_node("TabsContainer").visible = zen_mode
+	Global.control.find_child("TabsContainer").visible = zen_mode
 	zen_mode = !zen_mode
 	window_menu.set_item_checked(Global.WindowMenu.ZEN_MODE, zen_mode)
 
 
 func _toggle_fullscreen() -> void:
-	OS.window_fullscreen = !OS.window_fullscreen
-	window_menu.set_item_checked(Global.WindowMenu.FULLSCREEN_MODE, OS.window_fullscreen)
-	if OS.window_fullscreen:  # If window is fullscreen then reset transparency
+	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (!((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))) else Window.MODE_WINDOWED
+	window_menu.set_item_checked(Global.WindowMenu.FULLSCREEN_MODE, ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)))
+	if ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)):  # If window is fullscreen then reset transparency
 		window_opacity_dialog.set_window_opacity(100.0)
 
 
@@ -725,7 +725,7 @@ func help_menu_id_pressed(id: int) -> void:
 		Global.HelpMenu.ISSUE_TRACKER:
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		Global.HelpMenu.OPEN_LOGS_FOLDER:
-			var dir = Directory.new()
+			var dir = DirAccess.new()
 			dir.make_dir_recursive("user://logs")  # In case someone deleted it
 			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		Global.HelpMenu.CHANGELOG:

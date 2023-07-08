@@ -11,36 +11,36 @@
 [sub_resource type="InputEventAction" id=33]
 action = "delete"
 
-[sub_resource type="ShortCut" id=34]
+[sub_resource type="Shortcut" id=34]
 shortcut = SubResource( 33 )
 
 [node name="3DShapeEdit" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="ColorRect" parent="." index="0"]
-margin_right = 223.0
+offset_right = 223.0
 
 [node name="Label" parent="." index="1"]
-margin_right = 223.0
+offset_right = 223.0
 
 [node name="HandleObjects" type="GridContainer" parent="." index="2"]
-margin_top = 26.0
-margin_right = 223.0
-margin_bottom = 70.0
+offset_top = 26.0
+offset_right = 223.0
+offset_bottom = 70.0
 columns = 2
 
 [node name="Label" type="Label" parent="HandleObjects" index="0"]
-margin_top = 3.0
-margin_right = 111.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 111.0
+offset_bottom = 17.0
 size_flags_horizontal = 3
 text = "Selected object:"
 
 [node name="ObjectOptionButton" type="OptionButton" parent="HandleObjects" index="1"]
 unique_name_in_owner = true
-margin_left = 115.0
-margin_right = 223.0
-margin_bottom = 20.0
+offset_left = 115.0
+offset_right = 223.0
+offset_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "None"
@@ -49,9 +49,9 @@ selected = 0
 
 [node name="NewObjectMenuButton" type="MenuButton" parent="HandleObjects" index="2"]
 unique_name_in_owner = true
-margin_top = 24.0
-margin_right = 111.0
-margin_bottom = 44.0
+offset_top = 24.0
+offset_right = 111.0
+offset_bottom = 44.0
 focus_mode = 2
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -60,10 +60,10 @@ align = 0
 
 [node name="RemoveObject" type="Button" parent="HandleObjects" index="3"]
 unique_name_in_owner = true
-margin_left = 115.0
-margin_top = 24.0
-margin_right = 223.0
-margin_bottom = 44.0
+offset_left = 115.0
+offset_top = 24.0
+offset_right = 223.0
+offset_bottom = 44.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 disabled = true
@@ -72,37 +72,37 @@ text = "Remove object"
 
 [node name="CelOptions" type="VBoxContainer" parent="." index="3"]
 unique_name_in_owner = true
-margin_top = 74.0
-margin_right = 223.0
-margin_bottom = 244.0
+offset_top = 74.0
+offset_right = 223.0
+offset_bottom = 244.0
 size_flags_vertical = 3
 
 [node name="CameraOptions" type="VBoxContainer" parent="CelOptions" index="0"]
-margin_right = 223.0
-margin_bottom = 146.0
+offset_right = 223.0
+offset_bottom = 146.0
 theme_type_variation = "CollapsibleContainer"
 script = ExtResource( 6 )
-text = "Camera"
+text = "Camera3D"
 visible_content = true
 
 [node name="GridContainer" type="GridContainer" parent="CelOptions/CameraOptions" index="1"]
-margin_top = 24.0
-margin_right = 223.0
-margin_bottom = 146.0
+offset_top = 24.0
+offset_right = 223.0
+offset_bottom = 146.0
 columns = 2
 
 [node name="ProjectionLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="0"]
-margin_top = 3.0
-margin_right = 110.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 110.0
+offset_bottom = 17.0
 size_flags_horizontal = 3
 text = "Projection:"
 
 [node name="ProjectionOptionButton" type="OptionButton" parent="CelOptions/CameraOptions/GridContainer" index="1"]
 unique_name_in_owner = true
-margin_left = 114.0
-margin_right = 223.0
-margin_bottom = 20.0
+offset_left = 114.0
+offset_right = 223.0
+offset_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Perspective"
@@ -110,19 +110,19 @@ items = [ "Perspective", null, false, 0, null, "Orthogonal", null, false, 1, nul
 selected = 0
 
 [node name="RotationLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="2"]
-margin_top = 24.0
-margin_right = 110.0
-margin_bottom = 38.0
+offset_top = 24.0
+offset_right = 110.0
+offset_bottom = 38.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Rotation:"
 
 [node name="CameraRotation" parent="CelOptions/CameraOptions/GridContainer" index="3" instance=ExtResource( 7 )]
 unique_name_in_owner = true
-margin_left = 114.0
-margin_top = 24.0
-margin_right = 223.0
-margin_bottom = 104.0
+offset_left = 114.0
+offset_top = 24.0
+offset_right = 223.0
+offset_bottom = 104.0
 size_flags_horizontal = 3
 min_value = Vector3( -180, -180, -180 )
 max_value = Vector3( 180, 180, 180 )
@@ -132,17 +132,17 @@ suffix_y = "°"
 suffix_z = "°"
 
 [node name="CameraFOVLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="4"]
-margin_top = 108.0
-margin_right = 110.0
-margin_bottom = 122.0
+offset_top = 108.0
+offset_right = 110.0
+offset_bottom = 122.0
 text = "FOV:"
 
-[node name="CameraFOV" type="TextureProgress" parent="CelOptions/CameraOptions/GridContainer" index="5"]
+[node name="CameraFOV" type="TextureProgressBar" parent="CelOptions/CameraOptions/GridContainer" index="5"]
 unique_name_in_owner = true
-margin_left = 114.0
-margin_top = 108.0
-margin_right = 223.0
-margin_bottom = 122.0
+offset_left = 114.0
+offset_top = 108.0
+offset_right = 223.0
+offset_bottom = 122.0
 mouse_default_cursor_shape = 2
 theme_type_variation = "ValueSlider"
 min_value = 1.0
@@ -158,17 +158,17 @@ suffix = "°"
 
 [node name="CameraSizeLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="6"]
 visible = false
-margin_top = 126.0
-margin_right = 110.0
-margin_bottom = 140.0
+offset_top = 126.0
+offset_right = 110.0
+offset_bottom = 140.0
 text = "Size:"
 
-[node name="CameraSize" type="TextureProgress" parent="CelOptions/CameraOptions/GridContainer" index="7"]
+[node name="CameraSize" type="TextureProgressBar" parent="CelOptions/CameraOptions/GridContainer" index="7"]
 unique_name_in_owner = true
 visible = false
-margin_top = 126.0
-margin_right = 110.0
-margin_bottom = 132.0
+offset_top = 126.0
+offset_right = 110.0
+offset_bottom = 132.0
 mouse_default_cursor_shape = 2
 theme_type_variation = "ValueSlider"
 min_value = 0.001
@@ -184,47 +184,47 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
 [node name="EnvironmentOptions" type="VBoxContainer" parent="CelOptions" index="1"]
-margin_top = 150.0
-margin_right = 223.0
-margin_bottom = 170.0
+offset_top = 150.0
+offset_right = 223.0
+offset_bottom = 170.0
 theme_type_variation = "CollapsibleContainer"
 script = ExtResource( 6 )
 text = "Environment"
 
 [node name="GridContainer" type="GridContainer" parent="CelOptions/EnvironmentOptions" index="1"]
 visible = false
-margin_right = 1266.0
-margin_bottom = 48.0
+offset_right = 1266.0
+offset_bottom = 48.0
 columns = 2
 
 [node name="AmbientColorLabel" type="Label" parent="CelOptions/EnvironmentOptions/GridContainer" index="0"]
-margin_top = 3.0
-margin_right = 631.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 631.0
+offset_bottom = 17.0
 size_flags_horizontal = 3
 text = "Ambient color:"
 
 [node name="AmbientColorPickerButton" type="ColorPickerButton" parent="CelOptions/EnvironmentOptions/GridContainer" index="1"]
 unique_name_in_owner = true
-margin_left = 635.0
-margin_right = 1266.0
-margin_bottom = 20.0
+offset_left = 635.0
+offset_right = 1266.0
+offset_bottom = 20.0
 size_flags_horizontal = 3
 edit_alpha = false
 
 [node name="AmbientEnergyLabel" type="Label" parent="CelOptions/EnvironmentOptions/GridContainer" index="2"]
-margin_top = 29.0
-margin_right = 631.0
-margin_bottom = 43.0
+offset_top = 29.0
+offset_right = 631.0
+offset_bottom = 43.0
 size_flags_horizontal = 3
 text = "Ambient color energy:"
 
 [node name="AmbientEnergy" parent="CelOptions/EnvironmentOptions/GridContainer" index="3" instance=ExtResource( 4 )]
 unique_name_in_owner = true
-margin_left = 635.0
-margin_top = 24.0
-margin_right = 1266.0
-margin_bottom = 48.0
+offset_left = 635.0
+offset_top = 24.0
+offset_right = 1266.0
+offset_bottom = 48.0
 max_value = 16.0
 step = 0.01
 value = 1.0
@@ -233,47 +233,47 @@ allow_greater = true
 [node name="ObjectOptions" type="VBoxContainer" parent="." index="4"]
 unique_name_in_owner = true
 visible = false
-margin_top = 408.0
-margin_right = 1266.0
-margin_bottom = 800.0
+offset_top = 408.0
+offset_right = 1266.0
+offset_bottom = 800.0
 size_flags_vertical = 3
 
 [node name="GlobalOptions" type="GridContainer" parent="ObjectOptions" index="0"]
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 columns = 2
 
 [node name="VisibleLabel" type="Label" parent="ObjectOptions/GlobalOptions" index="0"]
-margin_right = 40.0
-margin_bottom = 14.0
+offset_right = 40.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 text = "Visible:"
 
 [node name="VisibleCheckBox" type="CheckBox" parent="ObjectOptions/GlobalOptions" index="1"]
 unique_name_in_owner = true
-margin_right = 71.0
-margin_bottom = 24.0
+offset_right = 71.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "On"
 
 [node name="TransformOptions" type="VBoxContainer" parent="ObjectOptions" index="1"]
-margin_right = 1266.0
-margin_bottom = 272.0
+offset_right = 1266.0
+offset_bottom = 272.0
 theme_type_variation = "CollapsibleContainer"
 script = ExtResource( 6 )
-text = "Transform"
+text = "Transform3D"
 visible_content = true
 
 [node name="GridContainer" type="GridContainer" parent="ObjectOptions/TransformOptions" index="1"]
-margin_top = 24.0
-margin_right = 1266.0
-margin_bottom = 272.0
+offset_top = 24.0
+offset_right = 1266.0
+offset_bottom = 272.0
 columns = 2
 
 [node name="PositionLabel" type="Label" parent="ObjectOptions/TransformOptions/GridContainer" index="0"]
-margin_right = 631.0
-margin_bottom = 80.0
+offset_right = 631.0
+offset_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Position:"
@@ -291,18 +291,18 @@ suffix_y = "m"
 suffix_z = "m"
 
 [node name="RotationLabel" type="Label" parent="ObjectOptions/TransformOptions/GridContainer" index="2"]
-margin_top = 84.0
-margin_right = 631.0
-margin_bottom = 164.0
+offset_top = 84.0
+offset_right = 631.0
+offset_bottom = 164.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Rotation:"
 
 [node name="ObjectRotation" parent="ObjectOptions/TransformOptions/GridContainer" index="3" instance=ExtResource( 7 )]
 unique_name_in_owner = true
-margin_top = -226.0
-margin_right = 631.0
-margin_bottom = -146.0
+offset_top = -226.0
+offset_right = 631.0
+offset_bottom = -146.0
 size_flags_horizontal = 3
 min_value = Vector3( -180, -180, -180 )
 max_value = Vector3( 180, 180, 180 )
@@ -312,16 +312,16 @@ suffix_y = "°"
 suffix_z = "°"
 
 [node name="ScaleLabel" type="Label" parent="ObjectOptions/TransformOptions/GridContainer" index="4"]
-margin_top = 168.0
-margin_right = 631.0
-margin_bottom = 248.0
+offset_top = 168.0
+offset_right = 631.0
+offset_bottom = 248.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Scale:"
 
 [node name="ObjectScale" parent="ObjectOptions/TransformOptions/GridContainer" index="5" instance=ExtResource( 7 )]
 unique_name_in_owner = true
-margin_bottom = 80.0
+offset_bottom = 80.0
 size_flags_horizontal = 3
 value = Vector3( 100, 100, 100 )
 step = 0.01
@@ -334,24 +334,24 @@ suffix_z = "%"
 
 [node name="MeshOptions" type="VBoxContainer" parent="ObjectOptions" index="2"]
 unique_name_in_owner = true
-margin_top = 276.0
-margin_right = 1266.0
-margin_bottom = 296.0
+offset_top = 276.0
+offset_right = 1266.0
+offset_bottom = 296.0
 theme_type_variation = "CollapsibleContainer"
 script = ExtResource( 6 )
 text = "Mesh"
 
 [node name="GridContainer" type="GridContainer" parent="ObjectOptions/MeshOptions" index="1"]
 visible = false
-margin_top = 24.0
-margin_right = 1266.0
-margin_bottom = 104.0
+offset_top = 24.0
+offset_right = 1266.0
+offset_bottom = 104.0
 columns = 2
 
 [node name="MeshSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="0"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Size:"
 
@@ -364,15 +364,15 @@ allow_greater = true
 show_ratio = true
 
 [node name="MeshSizeLabel2" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="2"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Size:"
 
 [node name="MeshSizeV2" parent="ObjectOptions/MeshOptions/GridContainer" index="3" instance=ExtResource( 3 )]
 unique_name_in_owner = true
-margin_right = 52.0
+offset_right = 52.0
 size_flags_horizontal = 3
 max_value = Vector2( 10, 10 )
 allow_greater = true
@@ -380,16 +380,16 @@ show_ratio = true
 snap_step = 0.01
 
 [node name="MeshLeftToRightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="4"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Left to right:"
 
-[node name="MeshLeftToRight" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="5"]
+[node name="MeshLeftToRight" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="5"]
 unique_name_in_owner = true
-margin_right = 6.0
-margin_bottom = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -405,16 +405,16 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
 [node name="MeshRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="6"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Radius:"
 
-[node name="MeshRadius" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="7"]
+[node name="MeshRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="7"]
 unique_name_in_owner = true
-margin_right = 6.0
-margin_bottom = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -431,16 +431,16 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
 [node name="MeshHeightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="8"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Height:"
 
-[node name="MeshHeight" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="9"]
+[node name="MeshHeight" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="9"]
 unique_name_in_owner = true
-margin_right = 6.0
-margin_bottom = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -457,16 +457,16 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
 [node name="MeshRadialSegmentsLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="10"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Radial segments:"
 
-[node name="MeshRadialSegments" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="11"]
+[node name="MeshRadialSegments" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="11"]
 unique_name_in_owner = true
-margin_right = 6.0
-margin_bottom = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -482,16 +482,16 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
 [node name="MeshRingsLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="12"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Rings:"
 
-[node name="MeshRings" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="13"]
+[node name="MeshRings" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="13"]
 unique_name_in_owner = true
-margin_right = 6.0
-margin_bottom = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -507,31 +507,31 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
 [node name="MeshIsHemisphereLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="14"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Is hemisphere:"
 
 [node name="MeshIsHemisphere" type="CheckBox" parent="ObjectOptions/MeshOptions/GridContainer" index="15"]
 unique_name_in_owner = true
-margin_right = 24.0
-margin_bottom = 24.0
+offset_right = 24.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "On"
 
 [node name="MeshMidHeightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="16"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Height:"
 
-[node name="MeshMidHeight" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="17"]
+[node name="MeshMidHeight" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="17"]
 unique_name_in_owner = true
-margin_right = 6.0
-margin_bottom = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -548,16 +548,16 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
 [node name="MeshTopRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="18"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Top radius:"
 
-[node name="MeshTopRadius" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="19"]
+[node name="MeshTopRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="19"]
 unique_name_in_owner = true
-margin_right = 6.0
-margin_bottom = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -573,16 +573,16 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
 [node name="MeshBottomRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="20"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Bottom radius:"
 
-[node name="MeshBottomRadius" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="21"]
+[node name="MeshBottomRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="21"]
 unique_name_in_owner = true
-margin_right = 6.0
-margin_bottom = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -598,29 +598,29 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
 [node name="MeshTextLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="22"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Text:"
 
 [node name="MeshText" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer" index="23"]
 unique_name_in_owner = true
-margin_right = 58.0
-margin_bottom = 24.0
+offset_right = 58.0
+offset_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="MeshPixelSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Pixel size:"
 
-[node name="MeshPixelSize" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="25"]
+[node name="MeshPixelSize" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="25"]
 unique_name_in_owner = true
-margin_right = 6.0
-margin_bottom = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -638,16 +638,16 @@ script = ExtResource( 5 )
 snap_step = 0.01
 
 [node name="MeshCurveStepLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="26"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Curve step:"
 
-[node name="MeshCurveStep" type="TextureProgress" parent="ObjectOptions/MeshOptions/GridContainer" index="27"]
+[node name="MeshCurveStep" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="27"]
 unique_name_in_owner = true
-margin_right = 6.0
-margin_bottom = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -664,18 +664,18 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
 [node name="MeshHorizontalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="28"]
-margin_top = -583.0
-margin_right = 631.0
-margin_bottom = -569.0
+offset_top = -583.0
+offset_right = 631.0
+offset_bottom = -569.0
 size_flags_horizontal = 3
 text = "Horizontal alignment:"
 
 [node name="MeshHorizontalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="29"]
 unique_name_in_owner = true
-margin_left = 635.0
-margin_top = -586.0
-margin_right = 1266.0
-margin_bottom = -566.0
+offset_left = 635.0
+offset_top = -586.0
+offset_right = 1266.0
+offset_bottom = -566.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Center"
@@ -684,112 +684,112 @@ selected = 1
 
 [node name="LightOptions" type="VBoxContainer" parent="ObjectOptions" index="3"]
 unique_name_in_owner = true
-margin_top = 276.0
-margin_right = 1266.0
-margin_bottom = 296.0
+offset_top = 276.0
+offset_right = 1266.0
+offset_bottom = 296.0
 theme_type_variation = "CollapsibleContainer"
 script = ExtResource( 6 )
-text = "Light"
+text = "Light3D"
 
 [node name="GridContainer" type="GridContainer" parent="ObjectOptions/LightOptions" index="1"]
 visible = false
-margin_top = 24.0
-margin_right = 1266.0
-margin_bottom = 104.0
+offset_top = 24.0
+offset_right = 1266.0
+offset_bottom = 104.0
 columns = 2
 
 [node name="LightColorLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="0"]
-margin_top = -499.0
-margin_right = 631.0
-margin_bottom = -485.0
+offset_top = -499.0
+offset_right = 631.0
+offset_bottom = -485.0
 size_flags_horizontal = 3
 text = "Color:"
 
 [node name="LightColor" type="ColorPickerButton" parent="ObjectOptions/LightOptions/GridContainer" index="1"]
 unique_name_in_owner = true
-margin_left = 635.0
-margin_top = -502.0
-margin_right = 1266.0
-margin_bottom = -482.0
+offset_left = 635.0
+offset_top = -502.0
+offset_right = 1266.0
+offset_bottom = -482.0
 size_flags_horizontal = 3
 color = Color( 1, 1, 1, 1 )
 edit_alpha = false
 
 [node name="LightEnergyLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="2"]
-margin_top = -473.0
-margin_right = 631.0
-margin_bottom = -459.0
+offset_top = -473.0
+offset_right = 631.0
+offset_bottom = -459.0
 size_flags_horizontal = 3
 text = "Energy:"
 
 [node name="LightEnergy" parent="ObjectOptions/LightOptions/GridContainer" index="3" instance=ExtResource( 4 )]
 unique_name_in_owner = true
-margin_left = 635.0
-margin_top = -478.0
-margin_right = 1266.0
-margin_bottom = -454.0
+offset_left = 635.0
+offset_top = -478.0
+offset_right = 1266.0
+offset_bottom = -454.0
 max_value = 16.0
 step = 0.01
 value = 1.0
 allow_greater = true
 
 [node name="LightNegativeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="4"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Negative:"
 
 [node name="LightNegative" type="CheckBox" parent="ObjectOptions/LightOptions/GridContainer" index="5"]
 unique_name_in_owner = true
-margin_right = 47.0
-margin_bottom = 24.0
+offset_right = 47.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "On"
 
 [node name="ShadowEnabledLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="6"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Shadow:"
 
 [node name="ShadowEnabled" type="CheckBox" parent="ObjectOptions/LightOptions/GridContainer" index="7"]
 unique_name_in_owner = true
-margin_right = 47.0
-margin_bottom = 24.0
+offset_right = 47.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "On"
 
 [node name="ShadowColorLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="8"]
-margin_top = -499.0
-margin_right = 631.0
-margin_bottom = -485.0
+offset_top = -499.0
+offset_right = 631.0
+offset_bottom = -485.0
 size_flags_horizontal = 3
 text = "Shadow color:"
 
 [node name="ShadowColor" type="ColorPickerButton" parent="ObjectOptions/LightOptions/GridContainer" index="9"]
 unique_name_in_owner = true
-margin_left = 635.0
-margin_top = -502.0
-margin_right = 1266.0
-margin_bottom = -482.0
+offset_left = 635.0
+offset_top = -502.0
+offset_right = 1266.0
+offset_bottom = -482.0
 size_flags_horizontal = 3
 edit_alpha = false
 
 [node name="OmniRangeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="10"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Range:"
 
-[node name="OmniRange" type="TextureProgress" parent="ObjectOptions/LightOptions/GridContainer" index="11"]
+[node name="OmniRange" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="11"]
 unique_name_in_owner = true
-margin_right = 6.0
-margin_bottom = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -804,16 +804,16 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
 [node name="SpotRangeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="12"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Range:"
 
-[node name="SpotRange" type="TextureProgress" parent="ObjectOptions/LightOptions/GridContainer" index="13"]
+[node name="SpotRange" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="13"]
 unique_name_in_owner = true
-margin_right = 6.0
-margin_bottom = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -828,16 +828,16 @@ stretch_margin_bottom = 3
 script = ExtResource( 5 )
 
 [node name="SpotAngleLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="14"]
-margin_top = 33.0
-margin_right = 631.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 631.0
+offset_bottom = 47.0
 size_flags_horizontal = 3
 text = "Angle:"
 
-[node name="SpotAngle" type="TextureProgress" parent="ObjectOptions/LightOptions/GridContainer" index="15"]
+[node name="SpotAngle" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="15"]
 unique_name_in_owner = true
-margin_right = 6.0
-margin_bottom = 6.0
+offset_right = 6.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -856,15 +856,15 @@ wait_time = 0.2
 one_shot = true
 
 [node name="LoadModelDialog" type="FileDialog" parent="." index="6"]
-margin_top = 590.0
-margin_right = 515.0
-margin_bottom = 938.0
-rect_min_size = Vector2( 515, 348 )
+offset_top = 590.0
+offset_right = 515.0
+offset_bottom = 938.0
+custom_minimum_size = Vector2( 515, 348 )
 window_title = "Open File(s)"
 resizable = true
 mode = 1
 access = 2
-filters = PoolStringArray( "*.obj" )
+filters = PackedStringArray( "*.obj" )
 show_hidden_files = true
 
 [connection signal="item_selected" from="HandleObjects/ObjectOptionButton" to="." method="_on_ObjectOptionButton_item_selected"]

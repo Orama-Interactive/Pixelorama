@@ -9,7 +9,7 @@ var _offset: Vector2
 var _content_transformation_check := false
 var _snap_to_grid := false  # Mouse Click + Ctrl
 
-onready var selection_node: Node2D = Global.canvas.selection
+@onready var selection_node: Node2D = Global.canvas.selection
 
 
 func _input(event: InputEvent) -> void:
@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 
 
 func draw_start(position: Vector2) -> void:
-	.draw_start(position)
+	super.draw_start(position)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	_start_pos = position
@@ -49,7 +49,7 @@ func draw_start(position: Vector2) -> void:
 
 
 func draw_move(position: Vector2) -> void:
-	.draw_move(position)
+	super.draw_move(position)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	# This is true if content transformation has been confirmed (pressed Enter for example)
@@ -66,7 +66,7 @@ func draw_move(position: Vector2) -> void:
 
 
 func draw_end(position: Vector2) -> void:
-	.draw_end(position)
+	super.draw_end(position)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	if (
@@ -133,7 +133,7 @@ func commit_undo(action: String) -> void:
 	project.undo_redo.create_action(action)
 	for image in redo_data:
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
-		image.unlock()
+		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for image in _undo_data:
 		project.undo_redo.add_undo_property(image, "data", _undo_data[image])
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer)
@@ -158,7 +158,7 @@ func _get_undo_data() -> Dictionary:
 		if not cel is PixelCel:
 			continue
 		var image: Image = cel.image
-		image.unlock()
+		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		data[image] = image.data
-		image.lock()
+		false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return data

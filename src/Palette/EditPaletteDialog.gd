@@ -12,14 +12,14 @@ var origin_height := 0
 
 var old_name := ""
 
-onready var name_input := $VBoxContainer/PaletteMetadata/Name
-onready var comment_input := $VBoxContainer/PaletteMetadata/Comment
-onready var width_input := $VBoxContainer/PaletteMetadata/Width
-onready var height_input := $VBoxContainer/PaletteMetadata/Height
-onready var path_input := $VBoxContainer/PaletteMetadata/Path
+@onready var name_input := $VBoxContainer/PaletteMetadata/Name
+@onready var comment_input := $VBoxContainer/PaletteMetadata/Comment
+@onready var width_input := $VBoxContainer/PaletteMetadata/Width
+@onready var height_input := $VBoxContainer/PaletteMetadata/Height
+@onready var path_input := $VBoxContainer/PaletteMetadata/Path3D
 
-onready var size_reduced_warning := $VBoxContainer/SizeReducedWarning
-onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
+@onready var size_reduced_warning := $VBoxContainer/SizeReducedWarning
+@onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning
 
 
 func _ready() -> void:
@@ -54,7 +54,7 @@ func open(current_palette: Palette) -> void:
 func toggle_size_reduced_warning(visible: bool) -> void:
 	size_reduced_warning.visible = visible
 	# Required to resize window to correct size if warning causes content overflow
-	rect_size = rect_size
+	size = size
 
 
 # Shows/hides a warning when palette already exists
@@ -62,10 +62,10 @@ func toggle_already_exists_warning(visible: bool) -> void:
 	already_exists_warning.visible = visible
 
 	# Disable confirm button so user cannot save
-	get_ok().disabled = visible
+	get_ok_button().disabled = visible
 
 	# Required to resize window to correct size if warning causes content overflow
-	rect_size = rect_size
+	size = size
 
 
 func _on_EditPaletteDialog_popup_hide() -> void:
@@ -100,4 +100,4 @@ func _on_Name_text_changed(new_name):
 
 		# Disable ok button on empty name
 		if new_name == "":
-			get_ok().disabled = true
+			get_ok_button().disabled = true

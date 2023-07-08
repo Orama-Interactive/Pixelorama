@@ -9,19 +9,19 @@ enum Mode { MARGINS, POSITION_SIZE }
 
 const BIG = 100000  # Size of big rectangles used to darken background.
 const DARKEN_COLOR = Color(0, 0, 0, 0.5)
-const LINE_COLOR = Color.white
+const LINE_COLOR = Color.WHITE
 
-var mode: int = Mode.MARGINS setget _set_mode
+var mode: int = Mode.MARGINS: set = _set_mode
 var locked_size := false
 var rect := Rect2(0, 0, 1, 1)
 
 # How many crop tools are active (0-2), setter makes this visible if not 0
-var tool_count := 0 setget _set_tool_count
+var tool_count := 0: set = _set_tool_count
 
 
 func _ready() -> void:
-	connect("updated", self, "update")
-	Global.connect("project_changed", self, "reset")
+	connect("updated", Callable(self, "update"))
+	Global.connect("project_changed", Callable(self, "reset"))
 	mode = Global.config_cache.get_value("preferences", "crop_mode", 0)
 	locked_size = Global.config_cache.get_value("preferences", "crop_locked_size", false)
 	reset()

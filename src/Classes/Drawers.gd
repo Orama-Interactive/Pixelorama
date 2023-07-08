@@ -1,6 +1,6 @@
 class_name Drawer
 
-var pixel_perfect := false setget set_pixel_perfect
+var pixel_perfect := false: set = set_pixel_perfect
 var horizontal_mirror := false
 var vertical_mirror := false
 var color_op := ColorOp.new()

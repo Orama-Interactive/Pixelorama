@@ -4,7 +4,7 @@ extends BaseCel
 # The term "cel" comes from "celluloid" (https://en.wikipedia.org/wiki/Cel).
 # The "image" variable is where the image data of each cel are.
 
-var image: Image setget image_changed
+var image: Image: set = image_changed
 
 
 func _init(_image := Image.new(), _opacity := 1.0, _image_texture: ImageTexture = null) -> void:
@@ -19,7 +19,7 @@ func _init(_image := Image.new(), _opacity := 1.0, _image_texture: ImageTexture 
 func image_changed(value: Image) -> void:
 	image = value
 	if !image.is_empty():
-		image_texture.create_from_image(image, 0)
+		image_texture.create_from_image(image) #,0
 
 
 func get_content():
@@ -31,9 +31,9 @@ func set_content(content, texture: ImageTexture = null) -> void:
 	if is_instance_valid(texture):
 		image_texture = texture
 		if image_texture.get_size() != image.get_size():
-			image_texture.create_from_image(image, 0)
+			image_texture.create_from_image(image) #,0
 	else:
-		image_texture.create_from_image(image, 0)
+		image_texture.create_from_image(image) #,0
 
 
 func create_empty_content():
@@ -56,7 +56,7 @@ func get_image() -> Image:
 
 func update_texture() -> void:
 	image_texture.set_data(image)
-	.update_texture()
+	super.update_texture()
 
 
 func save_image_data_to_pxo(file: File) -> void:
@@ -70,7 +70,7 @@ func load_image_data_from_pxo(file: File, project_size: Vector2) -> void:
 
 
 func instantiate_cel_button() -> Node:
-	return Global.pixel_cel_button_node.instance()
+	return Global.pixel_cel_button_node.instantiate()
 
 
 func get_class_name() -> String:

@@ -5,7 +5,7 @@ var do_pool = []  # A pool that stores data of points removed by undo
 var delete_pool = []  # A pool that containing deleted data and their index
 var vanishing_point_res := preload("res://src/UI/PerspectiveEditor/VanishingPoint.tscn")
 var tracker_disabled := false
-onready var vanishing_point_container = $"%VanishingPointContainer"
+@onready var vanishing_point_container = $"%VanishingPointContainer"
 
 
 func _on_AddPoint_pressed() -> void:
@@ -24,9 +24,9 @@ func _on_TrackerLines_toggled(button_pressed):
 
 
 func add_vanishing_point(is_redo := false):
-	var vanishing_point := vanishing_point_res.instance()
+	var vanishing_point := vanishing_point_res.instantiate()
 	vanishing_point_container.add_child(vanishing_point)
-	if is_redo and !do_pool.empty():
+	if is_redo and !do_pool.is_empty():
 		# if it's a redo then initialize it with the redo data
 		vanishing_point.initiate(do_pool.pop_back())
 		vanishing_point.update_data_to_project()
@@ -70,7 +70,7 @@ func update_points():
 	# Add the "updated" vanising points from the current_project
 	for idx in Global.current_project.vanishing_points.size():
 		# Create the point
-		var vanishing_point := vanishing_point_res.instance()
+		var vanishing_point := vanishing_point_res.instantiate()
 		vanishing_point_container.add_child(vanishing_point)
 		# Initialize it
 		var point_data = Global.current_project.vanishing_points[idx]

@@ -13,7 +13,7 @@ func export_animation(
 	progress_report_obj: Object,
 	progress_report_method,
 	progress_report_args
-) -> PoolByteArray:
+) -> PackedByteArray:
 	var frame_count := len(frames)
 	var result := AImgIOAPNGStream.new()
 	# Magic number
@@ -74,7 +74,7 @@ func export_animation(
 		# Done with this frame!
 		progress_report_obj.callv(progress_report_method, progress_report_args)
 	# Final chunk.
-	result.write_chunk("IEND", PoolByteArray())
+	result.write_chunk("IEND", PackedByteArray())
 	return result.finish()
 
 

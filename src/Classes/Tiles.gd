@@ -1,5 +1,5 @@
 class_name Tiles
-extends Reference
+extends RefCounted
 
 enum MODE { NONE, BOTH, X_AXIS, Y_AXIS }
 
@@ -16,7 +16,7 @@ func _init(size: Vector2):
 	y_basis = Vector2(0, size.y)
 	tile_size = size
 	tile_mask.create(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
-	tile_mask.fill(Color.white)
+	tile_mask.fill(Color.WHITE)
 
 
 func get_bounding_rect() -> Rect2:
@@ -53,20 +53,20 @@ func get_nearest_tile(point: Vector2) -> Rect2:
 		var test_rect = Rect2(pos, tile_size)
 		if test_rect.has_point(point):
 			candidates.append(test_rect)
-	if candidates.empty():
+	if candidates.is_empty():
 		return Rect2(Vector2.ZERO, tile_size)
 
 	var final := []
-	tile_mask.lock()
+	false # tile_mask.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for candidate in candidates:
 		var rel_pos = point - candidate.position
 		if tile_mask.get_pixelv(rel_pos).a == 1.0:
 			final.append(candidate)
-	tile_mask.unlock()
+	false # tile_mask.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
-	if final.empty():
+	if final.is_empty():
 		return Rect2(Vector2.ZERO, tile_size)
-	final.sort_custom(self, "sort_by_height")
+	final.sort_custom(Callable(self, "sort_by_height"))
 	return final[0]
 
 
@@ -98,17 +98,17 @@ func get_point_in_tiles(pixel: Vector2) -> Array:
 func has_point(point: Vector2) -> bool:
 	var positions = Global.canvas.tile_mode.get_tile_positions()
 	positions.append(Vector2.ZERO)  # The central tile is included manually
-	tile_mask.lock()
+	false # tile_mask.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for tile_pos in positions:
 		var test_rect = Rect2(tile_pos, tile_size)
 		var rel_pos = point - tile_pos
 		if test_rect.has_point(point) and tile_mask.get_pixelv(rel_pos).a == 1.0:
 			return true
-	tile_mask.unlock()
+	false # tile_mask.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return false
 
 
 func reset_mask():
 	tile_mask.create(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
-	tile_mask.fill(Color.white)
+	tile_mask.fill(Color.WHITE)
 	has_mask = false

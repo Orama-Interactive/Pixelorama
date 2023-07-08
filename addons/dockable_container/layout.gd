@@ -1,4 +1,4 @@
-tool
+@tool
 extends Resource
 # Layout Resource definition, holding the root LayoutNode and hidden tabs.
 #
@@ -12,8 +12,8 @@ const LayoutNode = preload("layout_node.gd")
 const LayoutPanel = preload("layout_panel.gd")
 const LayoutSplit = preload("layout_split.gd")
 
-export(Resource) var root = LayoutPanel.new() setget set_root, get_root
-export(Dictionary) var hidden_tabs = {} setget set_hidden_tabs, get_hidden_tabs
+@export var root: Resource = LayoutPanel.new(): get = get_root, set = set_root
+@export var hidden_tabs: Dictionary = {}: get = get_hidden_tabs, set = set_hidden_tabs
 
 var _changed_signal_queued = false
 var _first_leaf: LayoutPanel
@@ -31,11 +31,11 @@ func set_root(value: LayoutNode, should_emit_changed = true) -> void:
 		value = LayoutPanel.new()
 	if _root == value:
 		return
-	if _root and _root.is_connected("changed", self, "_on_root_changed"):
-		_root.disconnect("changed", self, "_on_root_changed")
+	if _root and _root.is_connected("changed", Callable(self, "_on_root_changed")):
+		_root.disconnect("changed", Callable(self, "_on_root_changed"))
 	_root = value
 	_root.parent = null
-	_root.connect("changed", self, "_on_root_changed")
+	_root.connect("changed", Callable(self, "_on_root_changed"))
 	if should_emit_changed:
 		_on_root_changed()
 
@@ -61,7 +61,7 @@ func clone():
 	return new_layout
 
 
-func get_names() -> PoolStringArray:
+func get_names() -> PackedStringArray:
 	return _root.get_names()
 
 
@@ -70,7 +70,7 @@ func get_names() -> PoolStringArray:
 # _leaf_by_node_name = {
 #     (string keys) = respective Leaf that holds the node name,
 # }
-func update_nodes(names: PoolStringArray) -> void:
+func update_nodes(names: PackedStringArray) -> void:
 	_leaf_by_node_name.clear()
 	_first_leaf = null
 	var empty_leaves = []
@@ -92,7 +92,7 @@ func move_node_to_leaf(node: Node, leaf: LayoutPanel, relative_position: int) ->
 	var previous_leaf = _leaf_by_node_name.get(node_name)
 	if previous_leaf:
 		previous_leaf.remove_node(node)
-		if previous_leaf.empty():
+		if previous_leaf.is_empty():
 			_remove_leaf(previous_leaf)
 
 	leaf.insert_node(relative_position, node)
@@ -145,7 +145,7 @@ func remove_node(node: Node) -> void:
 		return
 	leaf.remove_node(node)
 	_leaf_by_node_name.erase(node_name)
-	if leaf.empty():
+	if leaf.is_empty():
 		_remove_leaf(leaf)
 	_on_root_changed()
 
@@ -190,10 +190,10 @@ func _on_root_changed() -> void:
 	call_deferred("emit_signal", "changed")
 
 
-func _ensure_names_in_node(node: LayoutNode, names: PoolStringArray, empty_leaves: Array) -> void:
+func _ensure_names_in_node(node: LayoutNode, names: PackedStringArray, empty_leaves: Array) -> void:
 	if node is LayoutPanel:
 		node.update_nodes(names, _leaf_by_node_name)
-		if node.empty():
+		if node.is_empty():
 			empty_leaves.append(node)
 		if not _first_leaf:
 			_first_leaf = node
@@ -205,7 +205,7 @@ func _ensure_names_in_node(node: LayoutNode, names: PoolStringArray, empty_leave
 
 
 func _remove_leaf(leaf: LayoutPanel) -> void:
-	assert(leaf.empty(), "FIXME: trying to remove a leaf with nodes")
+	assert(leaf.is_empty(), "FIXME: trying to remove a leaf with nodes")
 	if _root == leaf:
 		return
 	var collapsed_branch = leaf.parent

@@ -1,4 +1,4 @@
-tool
+@tool
 extends Container
 
 const SplitHandle = preload("split_handle.gd")
@@ -8,23 +8,23 @@ const DragNDropPanel = preload("drag_n_drop_panel.gd")
 const Layout = preload("layout.gd")
 
 # gdlint: ignore=max-line-length
-export(int, "Left", "Center", "Right") var tab_align = TabContainer.ALIGN_CENTER setget set_tab_align, get_tab_align
-export(bool) var tabs_visible := true setget set_tabs_visible, get_tabs_visible
+@export var tab_alignment = TabContainer.ALIGNMENT_CENTER: get = get_tab_align, set = set_tab_alignment # (int, "Left", "Center", "Right")
+@export var tabs_visible := true: get = get_tabs_visible, set = set_tabs_visible
 # gdlint: ignore=max-line-length
-export(bool) var use_hidden_tabs_for_min_size: bool setget set_use_hidden_tabs_for_min_size, get_use_hidden_tabs_for_min_size
-export(int) var rearrange_group = 0
-export(Resource) var layout = Layout.new() setget set_layout, get_layout
+@export var use_hidden_tabs_for_min_size: bool: get = get_use_hidden_tabs_for_min_size, set = set_use_hidden_tabs_for_min_size
+@export var rearrange_group: int = 0
+@export var layout: Resource = Layout.new(): get = get_layout, set = set_layout
 # If `clone_layout_on_ready` is true, `layout` will be cloned on `_ready`.
 # This is useful for leaving layout Resources untouched in case you want to
 # restore layout to its default later.
-export(bool) var clone_layout_on_ready = true
+@export var clone_layout_on_ready: bool = true
 
 var _layout = Layout.new()
 var _panel_container = Container.new()
 var _split_container = Container.new()
 var _drag_n_drop_panel = DragNDropPanel.new()
 var _drag_panel: DockablePanel
-var _tab_align = TabContainer.ALIGN_CENTER
+var _tab_align = TabContainer.ALIGNMENT_CENTER
 var _tabs_visible = true
 var _use_hidden_tabs_for_min_size = false
 var _current_panel_index = 0
@@ -36,7 +36,7 @@ var _layout_dirty = false
 func _ready() -> void:
 	set_process_input(false)
 	_panel_container.name = "_panel_container"
-	.add_child(_panel_container)
+	super.add_child(_panel_container)
 	move_child(_panel_container, 0)
 	_split_container.name = "_split_container"
 	_split_container.mouse_filter = MOUSE_FILTER_PASS
@@ -46,11 +46,11 @@ func _ready() -> void:
 	_drag_n_drop_panel.mouse_filter = MOUSE_FILTER_PASS
 	_drag_n_drop_panel.set_drag_forwarding(self)
 	_drag_n_drop_panel.visible = false
-	.add_child(_drag_n_drop_panel)
+	super.add_child(_drag_n_drop_panel)
 
 	if not _layout:
 		set_layout(null)
-	elif clone_layout_on_ready and not Engine.editor_hint:
+	elif clone_layout_on_ready and not Engine.is_editor_hint():
 		set_layout(_layout.clone())
 
 
@@ -61,7 +61,7 @@ func _notification(what: int) -> void:
 		what == NOTIFICATION_DRAG_BEGIN
 		and _can_handle_drag_data(get_viewport().gui_get_drag_data())
 	):
-		_drag_n_drop_panel.set_enabled(true, not _layout.root.empty())
+		_drag_n_drop_panel.set_enabled(true, not _layout.root.is_empty())
 		set_process_input(true)
 	elif what == NOTIFICATION_DRAG_END:
 		_drag_n_drop_panel.set_enabled(false)
@@ -85,19 +85,19 @@ func _input(event: InputEvent) -> void:
 
 
 func add_child(node: Node, legible_unique_name: bool = false) -> void:
-	.add_child(node, legible_unique_name)
+	super.add_child(node, legible_unique_name)
 	_drag_n_drop_panel.raise()
 	_track_and_add_node(node)
 
 
-func add_child_below_node(node: Node, child_node: Node, legible_unique_name: bool = false) -> void:
-	.add_child_below_node(node, child_node, legible_unique_name)
+func add_sibling(node: Node, child_node: Node, legible_unique_name: bool = false) -> void:
+	super.add_sibling(node, child_node, legible_unique_name)
 	_drag_n_drop_panel.raise()
 	_track_and_add_node(child_node)
 
 
 func remove_child(node: Node) -> void:
-	.remove_child(node)
+	super.remove_child(node)
 	_untrack_node(node)
 
 
@@ -138,7 +138,7 @@ func set_control_as_current_tab(control: Control) -> void:
 	var leaf = _layout.get_leaf_for_node(control)
 	if not leaf:
 		return
-	var position_in_leaf = leaf.find_node(control)
+	var position_in_leaf = leaf.find_child(control)
 	if position_in_leaf < 0:
 		return
 	var panel
@@ -157,10 +157,10 @@ func set_layout(value: Layout) -> void:
 		value = Layout.new()
 	if value == _layout:
 		return
-	if _layout and _layout.is_connected("changed", self, "queue_sort"):
-		_layout.disconnect("changed", self, "queue_sort")
+	if _layout and _layout.is_connected("changed", Callable(self, "queue_sort")):
+		_layout.disconnect("changed", Callable(self, "queue_sort"))
 	_layout = value
-	_layout.connect("changed", self, "queue_sort")
+	_layout.connect("changed", Callable(self, "queue_sort"))
 	_layout_dirty = true
 	queue_sort()
 
@@ -169,11 +169,11 @@ func get_layout() -> Layout:
 	return _layout
 
 
-func set_tab_align(value: int) -> void:
+func set_tab_alignment(value: int) -> void:
 	_tab_align = value
 	for i in range(1, _panel_container.get_child_count()):
 		var panel = _panel_container.get_child(i)
-		panel.tab_align = value
+		panel.tab_alignment = value
 
 
 func get_tab_align() -> int:
@@ -249,12 +249,12 @@ func _is_managed_node(node: Node) -> bool:
 		and node != _panel_container
 		and node != _drag_n_drop_panel
 		and node is Control
-		and not node.is_set_as_toplevel()
+		and not node.is_set_as_top_level()
 	)
 
 
 func _update_layout_with_children() -> void:
-	var names = PoolStringArray()
+	var names = PackedStringArray()
 	_children_names.clear()
 	for i in range(1, get_child_count() - 1):
 		var c = get_child(i)
@@ -269,10 +269,10 @@ func _track_node(node: Node) -> bool:
 		return false
 	_children_names[node] = node.name
 	_children_names[node.name] = node
-	if not node.is_connected("renamed", self, "_on_child_renamed"):
-		node.connect("renamed", self, "_on_child_renamed", [node])
-	if not node.is_connected("tree_exiting", self, "_untrack_node"):
-		node.connect("tree_exiting", self, "_untrack_node", [node])
+	if not node.is_connected("renamed", Callable(self, "_on_child_renamed")):
+		node.connect("renamed", Callable(self, "_on_child_renamed").bind(node))
+	if not node.is_connected("tree_exiting", Callable(self, "_untrack_node")):
+		node.connect("tree_exiting", Callable(self, "_untrack_node").bind(node))
 	return true
 
 
@@ -288,10 +288,10 @@ func _track_and_add_node(node: Node) -> void:
 func _untrack_node(node: Node) -> void:
 	_children_names.erase(node)
 	_children_names.erase(node.name)
-	if node.is_connected("renamed", self, "_on_child_renamed"):
-		node.disconnect("renamed", self, "_on_child_renamed")
-	if node.is_connected("tree_exiting", self, "_untrack_node"):
-		node.disconnect("tree_exiting", self, "_untrack_node")
+	if node.is_connected("renamed", Callable(self, "_on_child_renamed")):
+		node.disconnect("renamed", Callable(self, "_on_child_renamed"))
+	if node.is_connected("tree_exiting", Callable(self, "_untrack_node")):
+		node.disconnect("tree_exiting", Callable(self, "_untrack_node"))
 	_layout_dirty = true
 
 
@@ -305,7 +305,7 @@ func _resort() -> void:
 	if _layout_dirty:
 		_update_layout_with_children()
 
-	var rect = Rect2(Vector2.ZERO, rect_size)
+	var rect = Rect2(Vector2.ZERO, size)
 	fit_child_in_rect(_panel_container, rect)
 	_panel_container.fit_child_in_rect(_split_container, rect)
 
@@ -343,7 +343,7 @@ func _calculate_panel_and_split_list(result: Array, layout_node: Layout.LayoutNo
 					node.visible = false
 				else:
 					nodes.append(node)
-		if nodes.empty():
+		if nodes.is_empty():
 			return null
 		else:
 			var panel = _get_panel(_current_panel_index)
@@ -392,12 +392,12 @@ func _get_panel(idx: int) -> DockablePanel:
 	if idx < _panel_container.get_child_count():
 		return _panel_container.get_child(idx)
 	var panel = DockablePanel.new()
-	panel.tab_align = _tab_align
+	panel.tab_alignment = _tab_align
 	panel.tabs_visible = _tabs_visible
 	panel.use_hidden_tabs_for_min_size = _use_hidden_tabs_for_min_size
 	panel.set_tabs_rearrange_group(max(0, rearrange_group))
 	_panel_container.add_child(panel)
-	panel.connect("tab_layout_changed", self, "_on_panel_tab_layout_changed", [panel])
+	panel.connect("tab_layout_changed", Callable(self, "_on_panel_tab_layout_changed").bind(panel))
 	return panel
 
 

@@ -6,17 +6,17 @@ extends Control
 
 signal updated(zone)
 
-export(float) var start = 0.0
-export(float) var end = 1.0
-export(Color) var zone_col = Color.black
-export(Color) var background_col = Color.gray
+@export var start: float = 0.0
+@export var end: float = 1.0
+@export var zone_col: Color = Color.BLACK
+@export var background_col: Color = Color.GRAY
 
 var active_cursor: GradientCursor  # Showing a color picker popup to change a cursor's color
 
-onready var x_offset: float = rect_size.x - GradientCursor.WIDTH
-onready var texture_rect: TextureRect = $TextureRect
-onready var texture: Texture = $TextureRect.texture
-onready var gradient: Gradient = texture.gradient
+@onready var x_offset: float = size.x - GradientCursor.WIDTH
+@onready var texture_rect: TextureRect = $TextureRect
+@onready var texture: Texture2D = $TextureRect.texture
+@onready var gradient: Gradient = texture.gradient
 
 
 class GradientCursor:
@@ -31,12 +31,12 @@ class GradientCursor:
 	onready var label: Label = parent.get_node("Value")
 
 	func _ready() -> void:
-		rect_position = Vector2(0, 15)
-		rect_size = Vector2(WIDTH, 15)
+		position = Vector2(0, 15)
+		size = Vector2(WIDTH, 15)
 
 	func _draw() -> void:
 # warning-ignore:integer_division
-		var polygon := PoolVector2Array(
+		var polygon := PackedVector2Array(
 			[
 				Vector2(0, 5),
 				Vector2(WIDTH / 2, 0),
@@ -53,28 +53,28 @@ class GradientCursor:
 
 	func _gui_input(ev: InputEvent) -> void:
 		if ev is InputEventMouseButton:
-			if ev.button_index == BUTTON_LEFT:
+			if ev.button_index == MOUSE_BUTTON_LEFT:
 				if ev.pressed:
 					sliding = true
 					label.visible = true
-					label.text = "%.03f" % get_cursor_position()
+					label.text = "%.03f" % get_caret_column()
 				else:
 					sliding = false
 					label.visible = false
-		elif ev is InputEventMouseMotion and (ev.button_mask & BUTTON_MASK_LEFT) != 0 and sliding:
-			rect_position.x += get_local_mouse_position().x
+		elif ev is InputEventMouseMotion and (ev.button_mask & MOUSE_BUTTON_MASK_LEFT) != 0 and sliding:
+			position.x += get_local_mouse_position().x
 			if ev.control:
-				rect_position.x = (
-					round(get_cursor_position() * 20.0)
+				position.x = (
+					round(get_caret_column() * 20.0)
 					* 0.05
-					* (parent.rect_size.x - WIDTH)
+					* (parent.size.x - WIDTH)
 				)
-			rect_position.x = min(max(0, rect_position.x), parent.rect_size.x - rect_size.x)
+			position.x = min(max(0, position.x), parent.size.x - size.x)
 			grand_parent.update_from_value()
-			label.text = "%.03f" % get_cursor_position()
+			label.text = "%.03f" % get_caret_column()
 
-	func get_cursor_position() -> float:
-		return rect_position.x / (parent.rect_size.x - WIDTH)
+	func get_caret_column() -> float:
+		return position.x / (parent.size.x - WIDTH)
 
 
 func _ready() -> void:
@@ -108,9 +108,9 @@ func update_from_value() -> void:
 	for c in texture_rect.get_children():
 		if c is GradientCursor:
 			cursors.append(c)
-	var point_1: float = cursors[0].rect_position.x / x_offset
-	var point_2: float = cursors[1].rect_position.x / x_offset
-	if cursors[1].get_cursor_position() > cursors[0].get_cursor_position():
+	var point_1: float = cursors[0].position.x / x_offset
+	var point_2: float = cursors[1].position.x / x_offset
+	if cursors[1].get_caret_column() > cursors[0].get_caret_column():
 		gradient.add_point(point_1, zone_col)
 		gradient.add_point(point_2, background_col)
 	else:
@@ -122,12 +122,12 @@ func update_from_value() -> void:
 func add_cursor(x: float) -> void:
 	var cursor := GradientCursor.new()
 	texture_rect.add_child(cursor)
-	cursor.rect_position.x = x
+	cursor.position.x = x
 	cursor.color = zone_col
 
 
 func _on_GradientEdit_resized() -> void:
 	if not gradient:
 		return
-	x_offset = rect_size.x - GradientCursor.WIDTH
+	x_offset = size.x - GradientCursor.WIDTH
 	_create_cursors()

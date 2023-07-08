@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _ready() -> void:
-	Global.camera.connect("zoom_changed", self, "update")
+	Global.camera.connect("zoom_changed", Callable(self, "update"))
 
 
 func _draw() -> void:
@@ -31,5 +31,5 @@ func _draw() -> void:
 		grid_multiline_points.push_back(Vector2(target_rect.position.x, y))
 		grid_multiline_points.push_back(Vector2(target_rect.end.x, y))
 
-	if not grid_multiline_points.empty():
+	if not grid_multiline_points.is_empty():
 		draw_multiline(grid_multiline_points, Global.pixel_grid_color)

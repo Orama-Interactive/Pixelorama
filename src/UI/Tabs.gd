@@ -1,6 +1,6 @@
-extends Tabs
+extends TabBar
 
-onready var unsaved_changes_dialog: ConfirmationDialog = Global.control.find_node(
+@onready var unsaved_changes_dialog: ConfirmationDialog = Global.control.find_child(
 	"UnsavedCanvasDialog"
 )
 
@@ -9,7 +9,7 @@ onready var unsaved_changes_dialog: ConfirmationDialog = Global.control.find_nod
 func _gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
 		return
-	if !event.pressed or event.button_index != BUTTON_MIDDLE:
+	if !event.pressed or event.button_index != MOUSE_BUTTON_MIDDLE:
 		return
 	var rect := get_rect()
 	var w := rect.position.x
@@ -34,8 +34,8 @@ func _on_Tabs_tab_close(tab: int) -> void:
 		return
 
 	if Global.projects[tab].has_changed:
-		if !unsaved_changes_dialog.is_connected("confirmed", self, "delete_tab"):
-			unsaved_changes_dialog.connect("confirmed", self, "delete_tab", [tab])
+		if !unsaved_changes_dialog.is_connected("confirmed", Callable(self, "delete_tab")):
+			unsaved_changes_dialog.connect("confirmed", Callable(self, "delete_tab").bind(tab))
 		unsaved_changes_dialog.popup_centered()
 		Global.dialog_open(true)
 	else:
@@ -70,5 +70,5 @@ func delete_tab(tab: int) -> void:
 	else:
 		if tab < Global.current_project_index:
 			Global.current_project_index -= 1
-	if unsaved_changes_dialog.is_connected("confirmed", self, "delete_tab"):
-		unsaved_changes_dialog.disconnect("confirmed", self, "delete_tab")
+	if unsaved_changes_dialog.is_connected("confirmed", Callable(self, "delete_tab")):
+		unsaved_changes_dialog.disconnect("confirmed", Callable(self, "delete_tab"))

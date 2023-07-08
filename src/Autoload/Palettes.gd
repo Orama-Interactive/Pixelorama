@@ -174,7 +174,7 @@ func _fill_new_palette_with_colors(
 	match get_colors_from:
 		GetColorsFrom.CURRENT_CEL:
 			for cel_index in current_project.selected_cels:
-				var cel = current_project.frames[cel_index[0]].cels[cel_index[1]]
+				var cel: PixelCel = current_project.frames[cel_index[0]].cels[cel_index[1]]
 				cels.append(cel)
 		GetColorsFrom.CURRENT_FRAME:
 			for cel in current_project.frames[current_project.current_frame].cels:
@@ -186,8 +186,8 @@ func _fill_new_palette_with_colors(
 
 	for cel in cels:
 		var cel_image := Image.new()
-		cel_image.copy_from(cel.get_image())
-		cel_image.lock()
+		cel_image.copy_from(cel.image)
+		false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		if cel_image.is_invisible():
 			continue
 		for i in pixels:
@@ -195,9 +195,9 @@ func _fill_new_palette_with_colors(
 			if color.a > 0:
 				if not add_alpha_colors:
 					color.a = 1
-				if not new_palette.has_color(color):
+				if not new_palette.has_theme_color(color):
 					new_palette.add_color(color)
-		cel_image.unlock()
+		false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 	var palette_path := _save_palette(new_palette)
 	palettes[palette_path] = new_palette
@@ -212,7 +212,7 @@ func current_palette_edit(name: String, comment: String, width: int, height: int
 
 
 func _delete_palette(path: String) -> void:
-	var dir = Directory.new()
+	var dir = DirAccess.new()
 	dir.remove(path)
 	palettes.erase(path)
 
@@ -229,7 +229,7 @@ func current_palete_delete() -> void:
 func current_palette_add_color(mouse_button: int, start_index: int = 0) -> void:
 	if (
 		not current_palette.is_full()
-		and (mouse_button == BUTTON_LEFT or mouse_button == BUTTON_RIGHT)
+		and (mouse_button == MOUSE_BUTTON_LEFT or mouse_button == MOUSE_BUTTON_RIGHT)
 	):
 		# Get color on left or right tool
 		var color = Tools.get_assigned_color(mouse_button)
@@ -253,7 +253,7 @@ func current_palette_delete_color(index: int) -> void:
 
 func current_palette_swap_colors(source_index: int, target_index: int) -> void:
 	current_palette.swap_colors(source_index, target_index)
-	_select_color(BUTTON_LEFT, target_index)
+	_select_color(MOUSE_BUTTON_LEFT, target_index)
 	_current_palette_save()
 
 
@@ -271,9 +271,9 @@ func current_palette_insert_color(from: int, to: int) -> void:
 
 func current_palette_get_selected_color_index(mouse_button: int) -> int:
 	match mouse_button:
-		BUTTON_LEFT:
+		MOUSE_BUTTON_LEFT:
 			return left_selected_color
-		BUTTON_RIGHT:
+		MOUSE_BUTTON_RIGHT:
 			return right_selected_color
 		_:
 			return -1
@@ -285,9 +285,9 @@ func current_palette_select_color(mouse_button: int, index: int) -> void:
 		return
 
 	match mouse_button:
-		BUTTON_LEFT:
+		MOUSE_BUTTON_LEFT:
 			Tools.assign_color(color, mouse_button)
-		BUTTON_RIGHT:
+		MOUSE_BUTTON_RIGHT:
 			Tools.assign_color(color, mouse_button)
 
 	_select_color(mouse_button, index)
@@ -295,9 +295,9 @@ func current_palette_select_color(mouse_button: int, index: int) -> void:
 
 func _select_color(mouse_button: int, index: int) -> void:
 	match mouse_button:
-		BUTTON_LEFT:
+		MOUSE_BUTTON_LEFT:
 			left_selected_color = index
-		BUTTON_RIGHT:
+		MOUSE_BUTTON_RIGHT:
 			right_selected_color = index
 
 
@@ -394,14 +394,14 @@ func _get_palette_priority_file_map(looking_paths: Array) -> Array:
 # Get the palette files in a single directory.
 # if it does not exist, return []
 func _get_palette_files(path: String) -> Array:
-	var dir := Directory.new()
+	var dir := DirAccess.new()
 	var results = []
 
 	if not dir.dir_exists(path):
 		return []
 
 	dir.open(path)
-	dir.list_dir_begin()
+	dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 
 	while true:
 		var file_name = dir.get_next()
@@ -492,7 +492,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 	var line_number := 0
 	var palette_name := path.get_basename().get_file()
 	var comments := ""
-	var colors := PoolColorArray()
+	var colors := PackedColorArray()
 
 	for line in lines:
 		# Check if valid Gimp Palette Library file
@@ -513,7 +513,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 			continue
 		elif line_number > 0 && line.length() >= 9:
 			line = line.replace("\t", " ")
-			var color_data: PoolStringArray = line.split(" ", false, 4)
+			var color_data: PackedStringArray = line.split(" ", false, 4)
 			var red: float = color_data[0].to_float() / 255.0
 			var green: float = color_data[1].to_float() / 255.0
 			var blue: float = color_data[2].to_float() / 255.0
@@ -537,7 +537,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 
 func _import_pal_palette(path: String, text: String) -> Palette:
 	var result: Palette = null
-	var colors := PoolColorArray()
+	var colors := PackedColorArray()
 	var lines = text.split("\n")
 
 	if not "JASC-PAL" in lines[0] or not "0100" in lines[1]:
@@ -567,13 +567,13 @@ func _import_image_palette(path: String, image: Image) -> Palette:
 	var width: int = image.get_width()
 
 	# Iterate all pixels and store unique colors to palette
-	image.lock()
+	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for y in range(0, height):
 		for x in range(0, width):
 			var color: Color = image.get_pixel(x, y)
 			if !colors.has(color):
 				colors.append(color)
-	image.unlock()
+	false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 	var palette_height: int = ceil(colors.size() / 8.0)
 	var result: Palette = Palette.new(path.get_basename().get_file(), 8, palette_height)
@@ -586,7 +586,9 @@ func _import_image_palette(path: String, image: Image) -> Palette:
 # Import of deprecated older json palette format
 func _import_json_palette(text: String) -> Palette:
 	var result: Palette = Palette.new()
-	var result_json = JSON.parse(text)
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(text)
+	var result_json = test_json_conv.get_data()
 
 	if result_json.error != OK:  # If parse has errors
 		printerr("JSON palette import error")

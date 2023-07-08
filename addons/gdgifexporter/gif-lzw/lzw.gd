@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 
 var lsbbitpacker = preload("./lsbbitpacker.gd")
 var lsbbitunpacker = preload("./lsbbitunpacker.gd")
@@ -13,12 +13,12 @@ func get_bit_length(value: int):
 	return ceil(log(value | 0x1 + 1) / 0.6931471805599453)
 
 
-func initialize_color_code_table(colors: PoolByteArray) -> void:
+func initialize_color_code_table(colors: PackedByteArray) -> void:
 	code_table.clear()
 	entries_counter = 0
 	for color_id in colors:
 		# warning-ignore:return_value_discarded
-		code_table[PoolByteArray([color_id])] = entries_counter
+		code_table[PackedByteArray([color_id])] = entries_counter
 		entries_counter += 1
 	# move counter to the first available compression code index
 	var last_color_index: int = colors.size() - 1
@@ -30,7 +30,7 @@ func initialize_color_code_table(colors: PoolByteArray) -> void:
 # http://www.matthewflickinger.com/lab/whatsinagif/lzw_image_data.asp
 
 
-func compress_lzw(index_stream: PoolByteArray, colors: PoolByteArray) -> Array:
+func compress_lzw(index_stream: PackedByteArray, colors: PackedByteArray) -> Array:
 	# Initialize code table
 	initialize_color_code_table(colors)
 	# Clear Code index is 2**<code size>
@@ -48,7 +48,7 @@ func compress_lzw(index_stream: PoolByteArray, colors: PoolByteArray) -> Array:
 	binary_code_stream.write_bits(clear_code_index, current_code_size)
 
 	# Read first index from index stream.
-	var index_buffer := PoolByteArray([index_stream[0]])
+	var index_buffer := PackedByteArray([index_stream[0]])
 	var data_index: int = 1
 	# <LOOP POINT>
 	while data_index < index_stream.size():
@@ -56,7 +56,7 @@ func compress_lzw(index_stream: PoolByteArray, colors: PoolByteArray) -> Array:
 		var k := index_stream[data_index]
 		data_index += 1
 		# Is index buffer + k in our code table?
-		var new_index_buffer := PoolByteArray(index_buffer)
+		var new_index_buffer := PackedByteArray(index_buffer)
 		new_index_buffer.push_back(k)
 		if code_table.has(new_index_buffer):  # if YES
 			# Add k to the end of the index buffer
@@ -90,7 +90,7 @@ func compress_lzw(index_stream: PoolByteArray, colors: PoolByteArray) -> Array:
 				current_code_size = new_code_size_candidate
 
 			# Index buffer is set to k
-			index_buffer = PoolByteArray([k])
+			index_buffer = PackedByteArray([k])
 	# Output code for contents of index buffer
 	binary_code_stream.write_bits(code_table.get(index_buffer, -1), current_code_size)
 

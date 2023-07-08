@@ -23,17 +23,17 @@ var _object_names := {
 	Cel3DObject.Type.IMPORTED: "Custom model",
 }
 
-onready var object_option_button := $"%ObjectOptionButton" as OptionButton
-onready var new_object_menu_button := $"%NewObjectMenuButton" as MenuButton
-onready var remove_object_button := $"%RemoveObject" as Button
-onready var cel_options := $"%CelOptions" as Container
-onready var object_options := $"%ObjectOptions" as Container
-onready var mesh_options := $"%MeshOptions" as VBoxContainer
-onready var light_options := $"%LightOptions" as VBoxContainer
-onready var undo_redo_timer := $UndoRedoTimer as Timer
-onready var load_model_dialog := $LoadModelDialog as FileDialog
+@onready var object_option_button := $"%ObjectOptionButton" as OptionButton
+@onready var new_object_menu_button := $"%NewObjectMenuButton" as MenuButton
+@onready var remove_object_button := $"%RemoveObject" as Button
+@onready var cel_options := $"%CelOptions" as Container
+@onready var object_options := $"%ObjectOptions" as Container
+@onready var mesh_options := $"%MeshOptions" as VBoxContainer
+@onready var light_options := $"%LightOptions" as VBoxContainer
+@onready var undo_redo_timer := $UndoRedoTimer as Timer
+@onready var load_model_dialog := $LoadModelDialog as FileDialog
 
-onready var cel_properties := {
+@onready var cel_properties := {
 	"camera:projection": $"%ProjectionOptionButton",
 	"camera:rotation_degrees": $"%CameraRotation",
 	"camera:fov": $"%CameraFOV",
@@ -42,9 +42,9 @@ onready var cel_properties := {
 	"viewport:world:environment:ambient_light_energy": $"%AmbientEnergy",
 }
 
-onready var object_properties := {
+@onready var object_properties := {
 	"visible": $"%VisibleCheckBox",
-	"translation": $"%ObjectPosition",
+	"position": $"%ObjectPosition",
 	"rotation_degrees": $"%ObjectRotation",
 	"scale": $"%ObjectScale",
 	"node3d_type:mesh:size": $"%MeshSize",
@@ -55,7 +55,7 @@ onready var object_properties := {
 	"node3d_type:mesh:radial_segments": $"%MeshRadialSegments",
 	"node3d_type:mesh:rings": $"%MeshRings",
 	"node3d_type:mesh:is_hemisphere": $"%MeshIsHemisphere",
-	"node3d_type:mesh:mid_height": $"%MeshMidHeight",
+	"node3d_type:mesh:height": $"%MeshMidHeight",
 	"node3d_type:mesh:top_radius": $"%MeshTopRadius",
 	"node3d_type:mesh:bottom_radius": $"%MeshBottomRadius",
 	"node3d_type:mesh:text": $"%MeshText",
@@ -86,43 +86,43 @@ func _input(_event: InputEvent) -> void:
 
 
 func _ready() -> void:
-	Global.connect("cel_changed", self, "_cel_changed")
+	Global.connect("cel_changed", Callable(self, "_cel_changed"))
 	_cel_changed()
 	var new_object_popup := new_object_menu_button.get_popup()
 	for object in _object_names:
 		if object == Cel3DObject.Type.TORUS:  # Remove when Godot 3.6 or 4.0 is used
 			continue
 		new_object_popup.add_item(_object_names[object], object)
-	new_object_popup.connect("id_pressed", self, "_new_object_popup_id_pressed")
+	new_object_popup.connect("id_pressed", Callable(self, "_new_object_popup_id_pressed"))
 	for prop in cel_properties:
 		var node: Control = cel_properties[prop]
 		if node is ValueSliderV3:
-			node.connect("value_changed", self, "_cel_property_vector3_changed", [prop])
+			node.connect("value_changed", Callable(self, "_cel_property_vector3_changed").bind(prop))
 		elif node is Range:
-			node.connect("value_changed", self, "_cel_property_value_changed", [prop])
+			node.connect("value_changed", Callable(self, "_cel_property_value_changed").bind(prop))
 		elif node is OptionButton:
-			node.connect("item_selected", self, "_cel_property_item_selected", [prop])
+			node.connect("item_selected", Callable(self, "_cel_property_item_selected").bind(prop))
 		elif node is ColorPickerButton:
-			node.connect("color_changed", self, "_cel_property_color_changed", [prop])
+			node.connect("color_changed", Callable(self, "_cel_property_color_changed").bind(prop))
 	for prop in object_properties:
 		var node: Control = object_properties[prop]
 		if node is ValueSliderV3:
-			node.connect("value_changed", self, "_object_property_vector3_changed", [prop])
+			node.connect("value_changed", Callable(self, "_object_property_vector3_changed").bind(prop))
 		elif node is ValueSliderV2:
 			var property_path: String = prop
 			if property_path.ends_with("v2"):
 				property_path = property_path.replace("v2", "")
-			node.connect("value_changed", self, "_object_property_vector2_changed", [property_path])
+			node.connect("value_changed", Callable(self, "_object_property_vector2_changed").bind(property_path))
 		elif node is Range:
-			node.connect("value_changed", self, "_object_property_value_changed", [prop])
+			node.connect("value_changed", Callable(self, "_object_property_value_changed").bind(prop))
 		elif node is OptionButton:
-			node.connect("item_selected", self, "_object_property_item_selected", [prop])
+			node.connect("item_selected", Callable(self, "_object_property_item_selected").bind(prop))
 		elif node is ColorPickerButton:
-			node.connect("color_changed", self, "_object_property_color_changed", [prop])
+			node.connect("color_changed", Callable(self, "_object_property_color_changed").bind(prop))
 		elif node is CheckBox:
-			node.connect("toggled", self, "_object_property_toggled", [prop])
+			node.connect("toggled", Callable(self, "_object_property_toggled").bind(prop))
 		elif node is LineEdit:
-			node.connect("text_changed", self, "_object_property_text_changed", [prop])
+			node.connect("text_changed", Callable(self, "_object_property_text_changed").bind(prop))
 
 
 func draw_start(position: Vector2) -> void:
@@ -160,11 +160,11 @@ func draw_start(position: Vector2) -> void:
 func draw_move(position: Vector2) -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
-	var camera: Camera = _cel.camera
+	var camera: Camera3D = _cel.camera
 	if _dragging:
 		_has_been_dragged = true
-		var proj_mouse_pos := camera.project_position(position, camera.translation.z)
-		var proj_prev_mouse_pos := camera.project_position(_prev_mouse_pos, camera.translation.z)
+		var proj_mouse_pos := camera.project_position(position, camera.position.z)
+		var proj_prev_mouse_pos := camera.project_position(_prev_mouse_pos, camera.position.z)
 		_cel.selected.change_transform(proj_mouse_pos, proj_prev_mouse_pos)
 		_prev_mouse_pos = position
 	sprite_changed_this_frame()
@@ -182,16 +182,16 @@ func draw_end(_position: Vector2) -> void:
 
 
 func cursor_move(position: Vector2) -> void:
-	.cursor_move(position)
+	super.cursor_move(position)
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
 	# Hover logic
-	var camera: Camera = _cel.camera
+	var camera: Camera3D = _cel.camera
 	var ray_from := camera.project_ray_origin(position)
 	var ray_to := ray_from + camera.project_ray_normal(position) * 20
-	var space_state := camera.get_world().direct_space_state
+	var space_state := camera.get_world_3d().direct_space_state
 	var selection := space_state.intersect_ray(ray_from, ray_to)
-	if selection.empty():
+	if selection.is_empty():
 		if is_instance_valid(_hovering):
 			_hovering.unhover()
 			_hovering = null
@@ -221,10 +221,10 @@ func _cel_changed() -> void:
 	_cel = Global.current_project.get_current_cel()
 	var selected = _cel.selected
 	_cel.selected = null
-	if not _cel.is_connected("scene_property_changed", self, "_set_cel_node_values"):
-		_cel.connect("scene_property_changed", self, "_set_cel_node_values")
-		_cel.connect("objects_changed", self, "_fill_object_option_button")
-		_cel.connect("selected_object", self, "_selected_object")
+	if not _cel.is_connected("scene_property_changed", Callable(self, "_set_cel_node_values")):
+		_cel.connect("scene_property_changed", Callable(self, "_set_cel_node_values"))
+		_cel.connect("objects_changed", Callable(self, "_fill_object_option_button"))
+		_cel.connect("selected_object", Callable(self, "_selected_object"))
 	cel_options.visible = true
 	object_options.visible = false
 	_set_cel_node_values()
@@ -232,8 +232,8 @@ func _cel_changed() -> void:
 	sprite_changed_this_frame()
 
 	# two yields are required
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
+	await get_tree().idle_frame
 	_cel.selected = selected
 
 
@@ -313,11 +313,11 @@ func _selected_object(object: Cel3DObject) -> void:
 			if node.get_index() > 0:
 				_get_previous_node(node).visible = property_exists
 			node.visible = property_exists
-		mesh_options.visible = object.node3d_type is MeshInstance
-		light_options.visible = object.node3d_type is Light
+		mesh_options.visible = object.node3d_type is MeshInstance3D
+		light_options.visible = object.node3d_type is Light3D
 		_set_object_node_values()
-		if not object.is_connected("property_changed", self, "_set_object_node_values"):
-			object.connect("property_changed", self, "_set_object_node_values")
+		if not object.is_connected("property_changed", Callable(self, "_set_object_node_values")):
+			object.connect("property_changed", Callable(self, "_set_object_node_values"))
 		object_option_button.select(object_option_button.get_item_index(object.id + 1))
 	else:
 		cel_options.visible = true
@@ -327,7 +327,7 @@ func _selected_object(object: Cel3DObject) -> void:
 
 
 func _set_cel_node_values() -> void:
-	if _cel.camera.projection == Camera.PROJECTION_PERSPECTIVE:
+	if _cel.camera.projection == Camera3D.PROJECTION_PERSPECTIVE:
 		_get_previous_node(cel_properties["camera:fov"]).visible = true
 		_get_previous_node(cel_properties["camera:size"]).visible = false
 		cel_properties["camera:fov"].visible = true
@@ -371,7 +371,7 @@ func _set_node_values(to_edit: Object, properties: Dictionary) -> void:
 		elif node is ColorPickerButton:
 			node.color = value
 		elif node is CheckBox:
-			node.pressed = value
+			node.button_pressed = value
 		elif node is LineEdit:
 			if node.text != value:
 				node.text = value
@@ -481,7 +481,7 @@ func _on_UndoRedoTimer_timeout() -> void:
 		undo_redo.commit_action()
 
 
-func _on_LoadModelDialog_files_selected(paths: PoolStringArray) -> void:
+func _on_LoadModelDialog_files_selected(paths: PackedStringArray) -> void:
 	for path in paths:
 		_add_object(Cel3DObject.Type.IMPORTED, path)
 

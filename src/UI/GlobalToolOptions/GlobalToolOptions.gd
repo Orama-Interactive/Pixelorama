@@ -7,29 +7,29 @@ enum { ALPHA, SIZE }
 var alpha_last_pressed: BaseButton = null
 var size_last_pressed: BaseButton = null
 
-onready var grid_container: GridContainer = find_node("GridContainer")
-onready var horizontal_mirror: BaseButton = grid_container.get_node("Horizontal")
-onready var vertical_mirror: BaseButton = grid_container.get_node("Vertical")
-onready var pixel_perfect: BaseButton = grid_container.get_node("PixelPerfect")
-onready var dynamics: Button = $"%Dynamics"
+@onready var grid_container: GridContainer = find_child("GridContainer")
+@onready var horizontal_mirror: BaseButton = grid_container.get_node("Horizontal")
+@onready var vertical_mirror: BaseButton = grid_container.get_node("Vertical")
+@onready var pixel_perfect: BaseButton = grid_container.get_node("PixelPerfect")
+@onready var dynamics: Button = $"%Dynamics"
 
-onready var dynamics_panel: PopupPanel = $DynamicsPanel
-onready var alpha_pressure_button: Button = $"%AlphaPressureButton"
-onready var alpha_velocity_button: Button = $"%AlphaVelocityButton"
-onready var size_pressure_button: Button = $"%SizePressureButton"
-onready var size_velocity_button: Button = $"%SizeVelocityButton"
-onready var pressure_preview: ProgressBar = $"%PressurePreview"
-onready var velocity_preview: ProgressBar = $"%VelocityPreview"
-onready var alpha_group: ButtonGroup = alpha_pressure_button.group
-onready var size_group: ButtonGroup = size_pressure_button.group
+@onready var dynamics_panel: PopupPanel = $DynamicsPanel
+@onready var alpha_pressure_button: Button = $"%AlphaPressureButton"
+@onready var alpha_velocity_button: Button = $"%AlphaVelocityButton"
+@onready var size_pressure_button: Button = $"%SizePressureButton"
+@onready var size_velocity_button: Button = $"%SizeVelocityButton"
+@onready var pressure_preview: ProgressBar = $"%PressurePreview"
+@onready var velocity_preview: ProgressBar = $"%VelocityPreview"
+@onready var alpha_group: ButtonGroup = alpha_pressure_button.group
+@onready var size_group: ButtonGroup = size_pressure_button.group
 
 
 func _ready() -> void:
 	# Resize tools panel when window gets resized
-	get_tree().get_root().connect("size_changed", self, "_on_resized")
-	horizontal_mirror.pressed = Tools.horizontal_mirror
-	vertical_mirror.pressed = Tools.vertical_mirror
-	pixel_perfect.pressed = Tools.pixel_perfect
+	get_tree().get_root().connect("size_changed", Callable(self, "_on_resized"))
+	horizontal_mirror.button_pressed = Tools.horizontal_mirror
+	vertical_mirror.button_pressed = Tools.vertical_mirror
+	pixel_perfect.button_pressed = Tools.pixel_perfect
 
 	alpha_pressure_button.connect(
 		"toggled",
@@ -66,7 +66,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_resized() -> void:
-	var tool_panel_size := rect_size
+	var tool_panel_size := size
 	var column_n := tool_panel_size.x / 36.5
 
 	if column_n < 1:
@@ -118,8 +118,8 @@ func _on_PixelPerfect_toggled(button_pressed: bool) -> void:
 
 
 func _on_Dynamics_pressed() -> void:
-	var pos := dynamics.rect_global_position + Vector2(0, 32)
-	dynamics_panel.popup(Rect2(pos, dynamics_panel.rect_size))
+	var pos := dynamics.global_position + Vector2(0, 32)
+	dynamics_panel.popup(Rect2(pos, dynamics_panel.size))
 
 
 func _on_Dynamics_toggled(
@@ -139,7 +139,7 @@ func _on_Dynamics_toggled(
 		if last_pressed == button:
 			# The button calling the method was the last one that was selected (we clicked it twice in a row)
 			# Toggle it off and set last_pressed to null so we can click it a third time to toggle it back on
-			button.pressed = false
+			button.button_pressed = false
 			_set_last_pressed_button(property, null)
 		# Update the last button pressed if we clicked something different
 		else:

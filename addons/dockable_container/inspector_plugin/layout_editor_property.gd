@@ -6,21 +6,21 @@ const Layout = preload("../layout.gd")
 var _container = DockableContainer.new()
 var _hidden_menu_button = MenuButton.new()
 var _hidden_menu_popup: PopupMenu
-var _hidden_menu_list: PoolStringArray
+var _hidden_menu_list: PackedStringArray
 
 
 func _ready() -> void:
-	rect_min_size = Vector2(128, 256)
+	custom_minimum_size = Vector2(128, 256)
 
 	_hidden_menu_button.text = "Visible nodes"
 	add_child(_hidden_menu_button)
 	_hidden_menu_popup = _hidden_menu_button.get_popup()
 	_hidden_menu_popup.hide_on_checkable_item_selection = false
-	_hidden_menu_popup.connect("about_to_show", self, "_on_hidden_menu_popup_about_to_show")
-	_hidden_menu_popup.connect("id_pressed", self, "_on_hidden_menu_popup_id_pressed")
+	_hidden_menu_popup.connect("about_to_popup", Callable(self, "_on_hidden_menu_popup_about_to_show"))
+	_hidden_menu_popup.connect("id_pressed", Callable(self, "_on_hidden_menu_popup_id_pressed"))
 
 	_container.clone_layout_on_ready = false
-	_container.rect_min_size = rect_min_size
+	_container.custom_minimum_size = custom_minimum_size
 
 	var original_container: DockableContainer = get_edited_object()
 	var value = original_container.get(get_edited_property())
@@ -45,7 +45,7 @@ func _get_layout() -> Layout:
 func _create_child_control(named: String) -> Control:
 	var new_control = Label.new()
 	new_control.name = named
-	new_control.align = Label.ALIGN_CENTER
+	new_control.align = Label.ALIGNMENT_CENTER
 	new_control.valign = Label.VALIGN_CENTER
 	new_control.clip_text = true
 	new_control.text = named

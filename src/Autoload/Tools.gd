@@ -170,7 +170,7 @@ Hold %s to displace the shape's origin""",
 	"3DShapeEdit":
 	Tool.new(
 		"3DShapeEdit",
-		"3D Shape Edit",
+		"3D Shape3D Edit",
 		"3dshapeedit",
 		preload("res://src/Tools/3DShapeEdit.tscn"),
 		[Global.LayerTypes.THREE_D]
@@ -198,12 +198,12 @@ class Tool:
 	var name := ""
 	var display_name := ""
 	var scene: PackedScene
-	var icon: Texture
-	var cursor_icon: Texture
+	var icon: Texture2D
+	var cursor_icon: Texture2D
 	var shortcut := ""
 	var extra_hint := ""
 	var extra_shortcuts := []  # Array of String(s)
-	var layer_types: PoolIntArray = []
+	var layer_types: PackedInt32Array = []
 	var button_node: BaseButton
 
 	func _init(
@@ -211,7 +211,7 @@ class Tool:
 		_display_name: String,
 		_shortcut: String,
 		_scene: PackedScene,
-		_layer_types: PoolIntArray = [],
+		_layer_types: PackedInt32Array = [],
 		_extra_hint := "",
 		_extra_shortucts := []
 	) -> void:
@@ -231,22 +231,22 @@ class Tool:
 		var left_text := ""
 		var right_text := ""
 		if InputMap.has_action("left_" + shortcut + "_tool"):
-			var left_list := InputMap.get_action_list("left_" + shortcut + "_tool")
+			var left_list := InputMap.action_get_events("left_" + shortcut + "_tool")
 			if left_list.size() > 0:
 				var left_shortcut: String = left_list[0].as_text()
 				shortcuts.append(left_shortcut)
 				left_text = "\n%s for left mouse button"
 		if InputMap.has_action("right_" + shortcut + "_tool"):
-			var right_list := InputMap.get_action_list("right_" + shortcut + "_tool")
+			var right_list := InputMap.action_get_events("right_" + shortcut + "_tool")
 			if right_list.size() > 0:
 				var right_shortcut: String = right_list[0].as_text()
 				shortcuts.append(right_shortcut)
 				right_text = "\n%s for right mouse button"
 
-		if !shortcuts.empty():
+		if !shortcuts.is_empty():
 			hint += "\n" + left_text + right_text
 
-		if !extra_hint.empty():
+		if !extra_hint.is_empty():
 			hint += "\n\n" + extra_hint
 
 		var extra_shortcuts_mapped := []
@@ -254,12 +254,12 @@ class Tool:
 			var key: InputEventKey = Keychain.action_get_first_key(event)
 			var key_string := "None"
 			if key:
-				key_string = OS.get_scancode_string(key.get_scancode_with_modifiers())
+				key_string = OS.get_keycode_string(key.get_keycode_with_modifiers())
 			extra_shortcuts_mapped.append(key_string)
 
 		shortcuts.append_array(extra_shortcuts_mapped)
 
-		if shortcuts.empty():
+		if shortcuts.is_empty():
 			hint = tr(hint)
 		else:
 			hint = tr(hint) % shortcuts
@@ -279,8 +279,8 @@ class Slot:
 
 
 func _ready() -> void:
-	Global.connect("cel_changed", self, "_cel_changed")
-	_tool_buttons = Global.control.find_node("ToolButtons")
+	Global.connect("cel_changed", Callable(self, "_cel_changed"))
+	_tool_buttons = Global.control.find_child("ToolButtons")
 	for t in tools:
 		add_tool_button(tools[t])
 		var tool_shortcut: String = tools[t].shortcut
@@ -289,25 +289,25 @@ func _ready() -> void:
 		Keychain.actions[left_tool_shortcut] = Keychain.InputAction.new("", "Left")
 		Keychain.actions[right_tool_shortcut] = Keychain.InputAction.new("", "Right")
 
-	_slots[BUTTON_LEFT] = Slot.new("Left tool")
-	_slots[BUTTON_RIGHT] = Slot.new("Right tool")
-	_panels[BUTTON_LEFT] = Global.control.find_node("LeftPanelContainer", true, false)
-	_panels[BUTTON_RIGHT] = Global.control.find_node("RightPanelContainer", true, false)
+	_slots[MOUSE_BUTTON_LEFT] = Slot.new("Left tool")
+	_slots[MOUSE_BUTTON_RIGHT] = Slot.new("Right tool")
+	_panels[MOUSE_BUTTON_LEFT] = Global.control.find_child("LeftPanelContainer", true, false)
+	_panels[MOUSE_BUTTON_RIGHT] = Global.control.find_child("RightPanelContainer", true, false)
 
 	var default_left_tool: String = _left_tools_per_layer_type[0]
 	var default_right_tool: String = _right_tools_per_layer_type[0]
 	var tool_name: String = Global.config_cache.get_value(
-		_slots[BUTTON_LEFT].kname, "tool", default_left_tool
+		_slots[MOUSE_BUTTON_LEFT].kname, "tool", default_left_tool
 	)
 	if not tool_name in tools or not _is_tool_available(Global.LayerTypes.PIXEL, tools[tool_name]):
 		tool_name = default_left_tool
-	set_tool(tool_name, BUTTON_LEFT)
+	set_tool(tool_name, MOUSE_BUTTON_LEFT)
 	tool_name = Global.config_cache.get_value(
-		_slots[BUTTON_RIGHT].kname, "tool", default_right_tool
+		_slots[MOUSE_BUTTON_RIGHT].kname, "tool", default_right_tool
 	)
 	if not tool_name in tools or not _is_tool_available(Global.LayerTypes.PIXEL, tools[tool_name]):
 		tool_name = default_right_tool
-	set_tool(tool_name, BUTTON_RIGHT)
+	set_tool(tool_name, MOUSE_BUTTON_RIGHT)
 	update_tool_buttons()
 
 	horizontal_mirror = Global.config_cache.get_value("preferences", "horizontal_mirror", false)
@@ -315,13 +315,13 @@ func _ready() -> void:
 	pixel_perfect = Global.config_cache.get_value("preferences", "pixel_perfect", false)
 
 	# Yield is necessary for the color picker nodes to update their color values
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	var color_value: Color = Global.config_cache.get_value(
-		_slots[BUTTON_LEFT].kname, "color", Color.black
+		_slots[MOUSE_BUTTON_LEFT].kname, "color", Color.BLACK
 	)
-	assign_color(color_value, BUTTON_LEFT, false)
-	color_value = Global.config_cache.get_value(_slots[BUTTON_RIGHT].kname, "color", Color.white)
-	assign_color(color_value, BUTTON_RIGHT, false)
+	assign_color(color_value, MOUSE_BUTTON_LEFT, false)
+	color_value = Global.config_cache.get_value(_slots[MOUSE_BUTTON_RIGHT].kname, "color", Color.WHITE)
+	assign_color(color_value, MOUSE_BUTTON_RIGHT, false)
 	update_tool_cursors()
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
@@ -329,15 +329,15 @@ func _ready() -> void:
 
 
 func add_tool_button(t: Tool) -> void:
-	var tool_button: BaseButton = _tool_button_scene.instance()
+	var tool_button: BaseButton = _tool_button_scene.instantiate()
 	tool_button.name = t.name
 	tool_button.get_node("BackgroundLeft").modulate = Global.left_tool_color
 	tool_button.get_node("BackgroundRight").modulate = Global.right_tool_color
 	tool_button.get_node("ToolIcon").texture = t.icon
-	tool_button.hint_tooltip = t.generate_hint_tooltip()
+	tool_button.tooltip_text = t.generate_hint_tooltip()
 	t.button_node = tool_button
 	_tool_buttons.add_child(tool_button)
-	tool_button.connect("pressed", _tool_buttons, "_on_Tool_pressed", [tool_button])
+	tool_button.connect("pressed", Callable(_tool_buttons, "_on_Tool_pressed").bind(tool_button))
 
 
 func remove_tool(t: Tool) -> void:
@@ -348,8 +348,8 @@ func remove_tool(t: Tool) -> void:
 func set_tool(name: String, button: int) -> void:
 	var slot: Slot = _slots[button]
 	var panel: Node = _panels[button]
-	var node: Node = tools[name].scene.instance()
-	if button == BUTTON_LEFT:  # As guides are only moved with left mouse
+	var node: Node = tools[name].scene.instantiate()
+	if button == MOUSE_BUTTON_LEFT:  # As guides are only moved with left mouse
 		if name == "Pan":  # tool you want to give more access at guides
 			Global.move_guides_on_canvas = true
 		else:
@@ -362,9 +362,9 @@ func set_tool(name: String, button: int) -> void:
 
 	if _curr_layer_type == Global.LayerTypes.GROUP:
 		return
-	if button == BUTTON_LEFT:
+	if button == MOUSE_BUTTON_LEFT:
 		_left_tools_per_layer_type[_curr_layer_type] = name
-	elif button == BUTTON_RIGHT:
+	elif button == MOUSE_BUTTON_RIGHT:
 		_right_tools_per_layer_type[_curr_layer_type] = name
 
 
@@ -385,15 +385,15 @@ func assign_tool(name: String, button: int) -> void:
 
 
 func default_color() -> void:
-	assign_color(Color.black, BUTTON_LEFT)
-	assign_color(Color.white, BUTTON_RIGHT)
+	assign_color(Color.BLACK, MOUSE_BUTTON_LEFT)
+	assign_color(Color.WHITE, MOUSE_BUTTON_RIGHT)
 
 
 func swap_color() -> void:
-	var left = _slots[BUTTON_LEFT].color
-	var right = _slots[BUTTON_RIGHT].color
-	assign_color(right, BUTTON_LEFT, false)
-	assign_color(left, BUTTON_RIGHT, false)
+	var left = _slots[MOUSE_BUTTON_LEFT].color
+	var right = _slots[MOUSE_BUTTON_RIGHT].color
+	assign_color(right, MOUSE_BUTTON_LEFT, false)
+	assign_color(left, MOUSE_BUTTON_RIGHT, false)
 
 
 func assign_color(color: Color, button: int, change_alpha := true) -> void:
@@ -416,43 +416,43 @@ func get_assigned_color(button: int) -> Color:
 func set_button_size(button_size: int) -> void:
 	var size := Vector2(24, 24) if button_size == Global.ButtonSize.SMALL else Vector2(32, 32)
 	for t in _tool_buttons.get_children():
-		t.rect_min_size = size
-		t.get_node("BackgroundLeft").rect_size.x = size.x / 2
-		t.get_node("BackgroundRight").rect_size.x = size.x / 2
-		t.get_node("BackgroundRight").rect_position = size
+		t.custom_minimum_size = size
+		t.get_node("BackgroundLeft").size.x = size.x / 2
+		t.get_node("BackgroundRight").size.x = size.x / 2
+		t.get_node("BackgroundRight").position = size
 
 
 func update_tool_buttons() -> void:
 	for child in _tool_buttons.get_children():
 		var left_background: NinePatchRect = child.get_node("BackgroundLeft")
 		var right_background: NinePatchRect = child.get_node("BackgroundRight")
-		left_background.visible = _slots[BUTTON_LEFT].tool_node.name == child.name
-		right_background.visible = _slots[BUTTON_RIGHT].tool_node.name == child.name
+		left_background.visible = _slots[MOUSE_BUTTON_LEFT].tool_node.name == child.name
+		right_background.visible = _slots[MOUSE_BUTTON_RIGHT].tool_node.name == child.name
 
 
 func update_hint_tooltips() -> void:
 	for tool_name in tools:
 		var t: Tool = tools[tool_name]
-		t.button_node.hint_tooltip = t.generate_hint_tooltip()
+		t.button_node.tooltip_text = t.generate_hint_tooltip()
 
 
 func update_tool_cursors() -> void:
-	var left_tool: Tool = tools[_slots[BUTTON_LEFT].tool_node.name]
+	var left_tool: Tool = tools[_slots[MOUSE_BUTTON_LEFT].tool_node.name]
 	Global.control.left_cursor.texture = left_tool.cursor_icon
-	var right_tool: Tool = tools[_slots[BUTTON_RIGHT].tool_node.name]
+	var right_tool: Tool = tools[_slots[MOUSE_BUTTON_RIGHT].tool_node.name]
 	Global.control.right_cursor.texture = right_tool.cursor_icon
 
 
 func draw_indicator() -> void:
 	if Global.right_square_indicator_visible:
-		_slots[BUTTON_RIGHT].tool_node.draw_indicator(false)
+		_slots[MOUSE_BUTTON_RIGHT].tool_node.draw_indicator(false)
 	if Global.left_square_indicator_visible:
-		_slots[BUTTON_LEFT].tool_node.draw_indicator(true)
+		_slots[MOUSE_BUTTON_LEFT].tool_node.draw_indicator(true)
 
 
 func draw_preview() -> void:
-	_slots[BUTTON_LEFT].tool_node.draw_preview()
-	_slots[BUTTON_RIGHT].tool_node.draw_preview()
+	_slots[MOUSE_BUTTON_LEFT].tool_node.draw_preview()
+	_slots[MOUSE_BUTTON_RIGHT].tool_node.draw_preview()
 
 
 func handle_draw(position: Vector2, event: InputEvent) -> void:
@@ -464,15 +464,15 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 		draw_pos.x = Global.current_project.size.x - position.x - 1
 
 	if event.is_action_pressed("activate_left_tool") and _active_button == -1:
-		_active_button = BUTTON_LEFT
+		_active_button = MOUSE_BUTTON_LEFT
 		_slots[_active_button].tool_node.draw_start(draw_pos)
-	elif event.is_action_released("activate_left_tool") and _active_button == BUTTON_LEFT:
+	elif event.is_action_released("activate_left_tool") and _active_button == MOUSE_BUTTON_LEFT:
 		_slots[_active_button].tool_node.draw_end(draw_pos)
 		_active_button = -1
 	elif event.is_action_pressed("activate_right_tool") and _active_button == -1:
-		_active_button = BUTTON_RIGHT
+		_active_button = MOUSE_BUTTON_RIGHT
 		_slots[_active_button].tool_node.draw_start(draw_pos)
-	elif event.is_action_released("activate_right_tool") and _active_button == BUTTON_RIGHT:
+	elif event.is_action_released("activate_right_tool") and _active_button == MOUSE_BUTTON_RIGHT:
 		_slots[_active_button].tool_node.draw_end(draw_pos)
 		_active_button = -1
 
@@ -487,11 +487,11 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 			pen_pressure = min(1, pressure_buf[0] + pressure_buf[0] - pressure_buf[1])
 		pressure_buf.pop_back()
 		pressure_buf.push_front(pen_pressure)
-		pen_pressure = range_lerp(pen_pressure, pen_pressure_min, pen_pressure_max, 0.0, 1.0)
+		pen_pressure = remap(pen_pressure, pen_pressure_min, pen_pressure_max, 0.0, 1.0)
 		pen_pressure = clamp(pen_pressure, 0.0, 1.0)
 
 		mouse_velocity = event.speed.length() / mouse_velocity_max
-		mouse_velocity = range_lerp(
+		mouse_velocity = remap(
 			mouse_velocity, mouse_velocity_min_thres, mouse_velocity_max_thres, 0.0, 1.0
 		)
 		mouse_velocity = clamp(mouse_velocity, 0.0, 1.0)
@@ -501,8 +501,8 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 			mouse_velocity = 1.0
 		if not position.is_equal_approx(_last_position):
 			_last_position = position
-			_slots[BUTTON_LEFT].tool_node.cursor_move(position)
-			_slots[BUTTON_RIGHT].tool_node.cursor_move(position)
+			_slots[MOUSE_BUTTON_LEFT].tool_node.cursor_move(position)
+			_slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_move(position)
 			if _active_button != -1:
 				_slots[_active_button].tool_node.draw_move(draw_pos)
 
@@ -510,10 +510,10 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 	var text := "[%s×%s]" % [project.size.x, project.size.y]
 	if Global.has_focus:
 		text += "    %s, %s" % [position.x, position.y]
-	if not _slots[BUTTON_LEFT].tool_node.cursor_text.empty():
-		text += "    %s" % _slots[BUTTON_LEFT].tool_node.cursor_text
-	if not _slots[BUTTON_RIGHT].tool_node.cursor_text.empty():
-		text += "    %s" % _slots[BUTTON_RIGHT].tool_node.cursor_text
+	if not _slots[MOUSE_BUTTON_LEFT].tool_node.cursor_text.is_empty():
+		text += "    %s" % _slots[MOUSE_BUTTON_LEFT].tool_node.cursor_text
+	if not _slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_text.is_empty():
+		text += "    %s" % _slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_text
 	Global.cursor_position_label.text = text
 
 
@@ -545,11 +545,11 @@ func _show_relevant_tools(layer_type: int) -> void:
 	# Assign new tools if the layer type has changed
 	_curr_layer_type = layer_type
 	var new_tool_name: String = _left_tools_per_layer_type[layer_type]
-	assign_tool(new_tool_name, BUTTON_LEFT)
+	assign_tool(new_tool_name, MOUSE_BUTTON_LEFT)
 
 	new_tool_name = _right_tools_per_layer_type[layer_type]
-	assign_tool(new_tool_name, BUTTON_RIGHT)
+	assign_tool(new_tool_name, MOUSE_BUTTON_RIGHT)
 
 
 func _is_tool_available(layer_type: int, t: Tool) -> bool:
-	return t.layer_types.empty() or layer_type in t.layer_types
+	return t.layer_types.is_empty() or layer_type in t.layer_types

@@ -1,6 +1,6 @@
-tool
+@tool
 class_name AImgIOAPNGStream
-extends Reference
+extends RefCounted
 # APNG IO context. To be clear, this is still effectively magic.
 
 # Quite critical we preload this. Preloading creates static variables.
@@ -8,7 +8,7 @@ extends Reference
 var crc32: AImgIOCRC32 = preload("apng_crc32.tres")
 
 var chunk_type: String
-var chunk_data: PoolByteArray
+var chunk_data: PackedByteArray
 
 # The reason this must be a StreamPeerBuffer is simple:
 # 1. We need to support in-memory IO for HTML5 to really work
@@ -21,7 +21,7 @@ var chunk_data: PoolByteArray
 var _target: StreamPeerBuffer
 
 
-func _init(t: PoolByteArray = PoolByteArray()):
+func _init(t: PackedByteArray = PackedByteArray()):
 	crc32.ensure_ready()
 	_target = StreamPeerBuffer.new()
 	_target.big_endian = true
@@ -80,9 +80,9 @@ func start_chunk() -> StreamPeerBuffer:
 
 
 # Writes a PNG chunk.
-func write_chunk(type: String, data: PoolByteArray):
+func write_chunk(type: String, data: PackedByteArray):
 	_target.put_32(len(data))
-	var at := type.to_ascii()
+	var at := type.to_ascii_buffer()
 	_target.put_data(at)
 	_target.put_data(data)
 	var crc := crc32.update(crc32.mask, at)
@@ -91,5 +91,5 @@ func write_chunk(type: String, data: PoolByteArray):
 
 
 # Returns the data_array of the stream (to be used when you're done writing the file)
-func finish() -> PoolByteArray:
+func finish() -> PackedByteArray:
 	return _target.data_array

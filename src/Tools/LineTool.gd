@@ -35,27 +35,27 @@ func update_indicator() -> void:
 
 
 func get_config() -> Dictionary:
-	var config := .get_config()
+	var config := super.get_config()
 	config["thickness"] = _thickness
 	return config
 
 
 func set_config(config: Dictionary) -> void:
-	.set_config(config)
+	super.set_config(config)
 	_thickness = config.get("thickness", _thickness)
 
 
 func update_config() -> void:
-	.update_config()
+	super.update_config()
 	$ThicknessSlider.value = _thickness
 
 
-func _get_shape_points(_size: Vector2) -> PoolVector2Array:
-	return PoolVector2Array()
+func _get_shape_points(_size: Vector2) -> PackedVector2Array:
+	return PackedVector2Array()
 
 
-func _get_shape_points_filled(_size: Vector2) -> PoolVector2Array:
-	return PoolVector2Array()
+func _get_shape_points_filled(_size: Vector2) -> PackedVector2Array:
+	return PackedVector2Array()
 
 
 func _input(event: InputEvent) -> void:
@@ -68,7 +68,7 @@ func _input(event: InputEvent) -> void:
 
 func draw_start(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_start(position)
+	super.draw_start(position)
 	if Input.is_action_pressed("shape_displace"):
 		_picking_color = true
 		_pick_color(position)
@@ -90,7 +90,7 @@ func draw_start(position: Vector2) -> void:
 
 func draw_move(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_move(position)
+	super.draw_move(position)
 	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("shape_displace"):
 			_pick_color(position)
@@ -115,7 +115,7 @@ func draw_move(position: Vector2) -> void:
 
 func draw_end(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_end(position)
+	super.draw_end(position)
 	if _picking_color:
 		return
 
@@ -163,7 +163,7 @@ func draw_preview() -> void:
 		canvas.draw_set_transform(start - t_offsetv, canvas.rotation, canvas.scale)
 
 		for line in _create_polylines(indicator):
-			canvas.draw_polyline(PoolVector2Array(line), Color.black)
+			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
@@ -171,7 +171,7 @@ func draw_preview() -> void:
 func _draw_shape() -> void:
 #	var rect := _get_result_rect(origin, dest)
 	var points := _get_points()
-	prepare_undo("Draw Shape")
+	prepare_undo("Draw Shape3D")
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
@@ -181,7 +181,7 @@ func _draw_shape() -> void:
 	commit_undo()
 
 
-func _get_points() -> PoolVector2Array:
+func _get_points() -> PackedVector2Array:
 	var array := []
 	var dx := int(abs(_dest.x - _start.x))
 	var dy := int(-abs(_dest.y - _start.y))
@@ -214,26 +214,26 @@ func _get_points() -> PoolVector2Array:
 			for xx in range(start.x, end.x):
 				array.append(Vector2(xx, yy))
 
-	return PoolVector2Array(array)
+	return PackedVector2Array(array)
 
 
 func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 	var result := {}
-	var angle := rad2deg(end.angle_to_point(start))
+	var angle := rad_to_deg(end.angle_to_point(start))
 	var distance := start.distance_to(end)
 	if Input.is_action_pressed("shape_perfect"):
-		angle = stepify(angle, 22.5)
+		angle = snapped(angle, 22.5)
 		if step_decimals(angle) != 0:
 			var diff := end - start
 			var v := Vector2(2, 1) if abs(diff.x) > abs(diff.y) else Vector2(1, 2)
 			var p := diff.project(diff.sign() * v).abs().round()
 			var f := p.y if abs(diff.x) > abs(diff.y) else p.x
 			end = start + diff.sign() * v * f - diff.sign()
-			angle = rad2deg(atan2(sign(diff.y) * v.y, sign(diff.x) * v.x))
+			angle = rad_to_deg(atan2(sign(diff.y) * v.y, sign(diff.x) * v.x))
 		else:
-			end = start + Vector2.RIGHT.rotated(deg2rad(angle)) * distance
+			end = start + Vector2.RIGHT.rotated(deg_to_rad(angle)) * distance
 	angle *= -1
 	angle += 360 if angle < 0 else 0
-	result.text = str(stepify(angle, 0.01)) + "°"
+	result.text = str(snapped(angle, 0.01)) + "°"
 	result.position = end.round()
 	return result

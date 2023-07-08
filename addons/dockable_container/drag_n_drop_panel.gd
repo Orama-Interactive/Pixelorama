@@ -1,4 +1,4 @@
-tool
+@tool
 extends Control
 
 const DRAW_NOTHING = -1
@@ -28,17 +28,17 @@ func _draw() -> void:
 	if _draw_margin == DRAW_NOTHING:
 		return
 	elif _draw_margin == DRAW_CENTERED:
-		rect = Rect2(Vector2.ZERO, rect_size)
+		rect = Rect2(Vector2.ZERO, size)
 	elif _draw_margin == MARGIN_LEFT:
-		rect = Rect2(0, 0, rect_size.x * 0.5, rect_size.y)
+		rect = Rect2(0, 0, size.x * 0.5, size.y)
 	elif _draw_margin == MARGIN_TOP:
-		rect = Rect2(0, 0, rect_size.x, rect_size.y * 0.5)
+		rect = Rect2(0, 0, size.x, size.y * 0.5)
 	elif _draw_margin == MARGIN_RIGHT:
-		var half_width = rect_size.x * 0.5
-		rect = Rect2(half_width, 0, half_width, rect_size.y)
+		var half_width = size.x * 0.5
+		rect = Rect2(half_width, 0, half_width, size.y)
 	elif _draw_margin == MARGIN_BOTTOM:
-		var half_height = rect_size.y * 0.5
-		rect = Rect2(0, half_height, rect_size.x, half_height)
+		var half_height = size.y * 0.5
+		rect = Rect2(0, half_height, size.x, half_height)
 	var stylebox = get_stylebox("panel", "TooltipPanel")
 	draw_style_box(stylebox, rect)
 
@@ -56,7 +56,7 @@ func get_hover_margin() -> int:
 
 
 func _find_hover_margin(point: Vector2) -> int:
-	var half_size = rect_size * 0.5
+	var half_size = size * 0.5
 
 	var left = point.distance_squared_to(Vector2(0, half_size.y))
 	var lesser = left
@@ -67,12 +67,12 @@ func _find_hover_margin(point: Vector2) -> int:
 		lesser = top
 		lesser_margin = MARGIN_TOP
 
-	var right = point.distance_squared_to(Vector2(rect_size.x, half_size.y))
+	var right = point.distance_squared_to(Vector2(size.x, half_size.y))
 	if lesser > right:
 		lesser = right
 		lesser_margin = MARGIN_RIGHT
 
-	var bottom = point.distance_squared_to(Vector2(half_size.x, rect_size.y))
+	var bottom = point.distance_squared_to(Vector2(half_size.x, size.y))
 	if lesser > bottom:
 		#lesser = bottom  # unused result
 		lesser_margin = MARGIN_BOTTOM

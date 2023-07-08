@@ -1,4 +1,4 @@
-extends WindowDialog
+extends Window
 
 const CONTRIBUTORS := [
 	"20kdc",
@@ -189,22 +189,22 @@ const DONORS := [
 	"Tassos Kyriakopoulos"
 ]
 
-export(Array, String, MULTILINE) var licenses: Array
+@export var licenses: Array # (Array, String, MULTILINE)
 
-onready var credits := $AboutUI/Credits as HSplitContainer
-onready var groups := $AboutUI/Credits/Groups as Tree
-onready var developer_container := $AboutUI/Credits/Developers as VBoxContainer
-onready var contributors_container := $AboutUI/Credits/Contributors as VBoxContainer
-onready var donors_container := $AboutUI/Credits/Donors as VBoxContainer
-onready var translators_container := $AboutUI/Credits/Translators as VBoxContainer
-onready var licenses_container := $AboutUI/Credits/Licenses as VBoxContainer
+@onready var credits := $AboutUI/Credits as HSplitContainer
+@onready var groups := $AboutUI/Credits/Groups as Tree
+@onready var developer_container := $AboutUI/Credits/Developers as VBoxContainer
+@onready var contributors_container := $AboutUI/Credits/Contributors as VBoxContainer
+@onready var donors_container := $AboutUI/Credits/Donors as VBoxContainer
+@onready var translators_container := $AboutUI/Credits/Translators as VBoxContainer
+@onready var licenses_container := $AboutUI/Credits/Licenses as VBoxContainer
 
-onready var developers := $AboutUI/Credits/Developers/DeveloperTree as Tree
-onready var contributors := $AboutUI/Credits/Contributors/ContributorTree as Tree
-onready var donors := $AboutUI/Credits/Donors/DonorTree as Tree
-onready var translators := $AboutUI/Credits/Translators/TranslatorTree as Tree
-onready var license_tabs := $AboutUI/Credits/Licenses/LicenseTabs as Tabs
-onready var license_text := $AboutUI/Credits/Licenses/LicenseText as TextEdit
+@onready var developers := $AboutUI/Credits/Developers/DeveloperTree as Tree
+@onready var contributors := $AboutUI/Credits/Contributors/ContributorTree as Tree
+@onready var donors := $AboutUI/Credits/Donors/DonorTree as Tree
+@onready var translators := $AboutUI/Credits/Translators/TranslatorTree as Tree
+@onready var license_tabs := $AboutUI/Credits/Licenses/LicenseTabs as TabBar
+@onready var license_text := $AboutUI/Credits/Licenses/LicenseText as TextEdit
 
 
 func _ready() -> void:

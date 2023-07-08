@@ -15,30 +15,30 @@ var dither_matrices := [
 ]
 var selected_dither_matrix: DitherMatrix = dither_matrices[0]
 
-onready var options_cont: Container = $VBoxContainer/GradientOptions
-onready var gradient_edit: GradientEditNode = $VBoxContainer/GradientEdit
-onready var shape_option_button: OptionButton = $"%ShapeOptionButton"
-onready var dithering_option_button: OptionButton = $"%DitheringOptionButton"
-onready var repeat_option_button: OptionButton = $"%RepeatOptionButton"
-onready var position_slider: ValueSlider = $"%PositionSlider"
-onready var size_slider: ValueSlider = $"%SizeSlider"
-onready var angle_slider: ValueSlider = $"%AngleSlider"
-onready var center_slider := $"%CenterSlider" as ValueSliderV2
-onready var radius_slider := $"%RadiusSlider" as ValueSliderV2
+@onready var options_cont: Container = $VBoxContainer/GradientOptions
+@onready var gradient_edit: GradientEditNode = $VBoxContainer/GradientEdit
+@onready var shape_option_button: OptionButton = $"%ShapeOptionButton"
+@onready var dithering_option_button: OptionButton = $"%DitheringOptionButton"
+@onready var repeat_option_button: OptionButton = $"%RepeatOptionButton"
+@onready var position_slider: ValueSlider = $"%PositionSlider"
+@onready var size_slider: ValueSlider = $"%SizeSlider"
+@onready var angle_slider: ValueSlider = $"%AngleSlider"
+@onready var center_slider := $"%CenterSlider" as ValueSliderV2
+@onready var radius_slider := $"%RadiusSlider" as ValueSliderV2
 
 
 class DitherMatrix:
-	var texture: Texture
+	var texture: Texture2D
 	var name: String
 
-	func _init(_texture: Texture, _name: String) -> void:
+	func _init(_texture: Texture2D, _name: String) -> void:
 		texture = _texture
 		name = _name
 
 
 func _ready() -> void:
 	var sm := ShaderMaterial.new()
-	sm.shader = shader
+	sm.gdshader = shader
 	preview.set_material(sm)
 
 	for matrix in dither_matrices:
@@ -62,9 +62,9 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	else:  # This is needed to prevent a weird bug with the dithering shaders and GLES2
 		selection = Image.new()
 		selection.create(project.size.x, project.size.y, false, Image.FORMAT_L8)
-	selection_tex.create_from_image(selection, 0)
+	selection_tex.create_from_image(selection) #,0
 
-	var dither_texture: Texture = selected_dither_matrix.texture
+	var dither_texture: Texture2D = selected_dither_matrix.texture
 	var pixel_size := dither_texture.get_width()
 	var gradient: Gradient = gradient_edit.gradient
 	var n_of_colors := gradient.offsets.size()
@@ -76,22 +76,22 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	# Construct an image that contains the selected colors of the gradient without interpolation
 	var gradient_image := Image.new()
 	gradient_image.create(n_of_colors, 1, false, Image.FORMAT_RGBA8)
-	offsets_image.lock()
-	gradient_image.lock()
+	false # offsets_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	false # gradient_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for i in n_of_colors:
 		var c := gradient.offsets[i]
 		offsets_image.set_pixel(i, 0, Color(c, c, c, c))
 		gradient_image.set_pixel(i, 0, gradient.colors[i])
-	offsets_image.unlock()
-	gradient_image.unlock()
+	false # offsets_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	false # gradient_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var offsets_tex := ImageTexture.new()
-	offsets_tex.create_from_image(offsets_image, 0)
-	var gradient_tex: Texture
+	offsets_tex.create_from_image(offsets_image) #,0
+	var gradient_tex: Texture2D
 	if shader == shader_linear:
 		gradient_tex = gradient_edit.texture
 	else:
 		gradient_tex = ImageTexture.new()
-		gradient_tex.create_from_image(gradient_image, 0)
+		gradient_tex.create_from_image(gradient_image) #,0
 	var center := Vector2(
 		animate_panel.get_animated_value(commit_idx, Animate.CENTER_X),
 		animate_panel.get_animated_value(commit_idx, Animate.CENTER_Y)
@@ -118,13 +118,13 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	}
 
 	if !confirmed:
-		preview.material.shader = shader
+		preview.material.gdshader = shader
 		for param in params:
-			preview.material.set_shader_param(param, params[param])
+			preview.material.set_shader_parameter(param, params[param])
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
-		yield(gen, "done")
+		await gen.done
 
 
 func _on_ShapeOptionButton_item_selected(index: int) -> void:

@@ -1,16 +1,16 @@
 extends ConfirmationDialog
 
-onready var x_basis_x_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsContainer/XBasisX
-onready var x_basis_y_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsContainer/XBasisY
-onready var y_basis_x_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsContainer/YBasisX
-onready var y_basis_y_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsContainer/YBasisY
-onready var preview_rect: Control = $VBoxContainer/AspectRatioContainer/Preview
-onready var tile_mode: Node2D = $VBoxContainer/AspectRatioContainer/Preview/TileMode
+@onready var x_basis_x_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsContainer/XBasisX
+@onready var x_basis_y_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsContainer/XBasisY
+@onready var y_basis_x_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsContainer/YBasisX
+@onready var y_basis_y_spinbox: SpinBox = $VBoxContainer/HBoxContainer/OptionsContainer/YBasisY
+@onready var preview_rect: Control = $VBoxContainer/AspectRatioContainer/Preview
+@onready var tile_mode: Node2D = $VBoxContainer/AspectRatioContainer/Preview/TileMode
 
 
 func _ready() -> void:
-	Global.connect("cel_changed", self, "change_mask")
-	yield(get_tree(), "idle_frame")
+	Global.connect("cel_changed", Callable(self, "change_mask"))
+	await get_tree().idle_frame
 	change_mask()
 
 
@@ -85,16 +85,16 @@ func _on_YBasisY_value_changed(value: int) -> void:
 func update_preview() -> void:
 	var bounding_rect: Rect2 = tile_mode.tiles.get_bounding_rect()
 	var offset := -bounding_rect.position
-	var axis_scale := preview_rect.rect_size / bounding_rect.size
-	var min_scale: Vector2 = preview_rect.rect_size / (tile_mode.tiles.tile_size * 3.0)
+	var axis_scale := preview_rect.size / bounding_rect.size
+	var min_scale: Vector2 = preview_rect.size / (tile_mode.tiles.tile_size * 3.0)
 	var scale: float = [axis_scale.x, axis_scale.y, min_scale.x, min_scale.y].min()
 	var t := Transform2D.IDENTITY.translated(offset).scaled(Vector2(scale, scale))
-	var transformed_bounding_rect: Rect2 = t.xform(bounding_rect)
-	var centering_offset := (preview_rect.rect_size - transformed_bounding_rect.size) / 2.0
+	var transformed_bounding_rect: Rect2 = t * (bounding_rect)
+	var centering_offset := (preview_rect.size - transformed_bounding_rect.size) / 2.0
 	t = t.translated(centering_offset / scale)
 	tile_mode.transform = t
 	tile_mode.update()
-	preview_rect.get_node("TransparentChecker").rect_size = preview_rect.rect_size
+	preview_rect.get_node("TransparentChecker").size = preview_rect.size
 
 
 func _on_TileModeOffsetsDialog_popup_hide() -> void:

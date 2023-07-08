@@ -9,14 +9,14 @@ signal updated(gradient, cc)
 var continuous_change := true
 var active_cursor: GradientCursor  # Showing a color picker popup to change a cursor's color
 
-onready var x_offset: float = rect_size.x - GradientCursor.WIDTH
-onready var texture_rect: TextureRect = $TextureRect
-onready var texture: Texture = $TextureRect.texture
-onready var gradient: Gradient = texture.gradient
-onready var color_picker: ColorPicker = $Popup.get_node("ColorPicker")
-onready var divide_dialog: ConfirmationDialog = $DivideConfirmationDialog
-onready var number_of_parts_spin_box: SpinBox = $"%NumberOfPartsSpinBox"
-onready var add_point_end_check_box: CheckBox = $"%AddPointEndCheckBox"
+@onready var x_offset: float = size.x - GradientCursor.WIDTH
+@onready var texture_rect: TextureRect = $TextureRect
+@onready var texture: Texture2D = $TextureRect.texture
+@onready var gradient: Gradient = texture.gradient
+@onready var color_picker: ColorPicker = $Popup.get_node("ColorPicker")
+@onready var divide_dialog: ConfirmationDialog = $DivideConfirmationDialog
+@onready var number_of_parts_spin_box: SpinBox = $"%NumberOfPartsSpinBox"
+@onready var add_point_end_check_box: CheckBox = $"%AddPointEndCheckBox"
 
 
 class GradientCursor:
@@ -31,12 +31,12 @@ class GradientCursor:
 	onready var label: Label = parent.get_node("Value")
 
 	func _ready() -> void:
-		rect_position = Vector2(0, 15)
-		rect_size = Vector2(WIDTH, 15)
+		position = Vector2(0, 15)
+		size = Vector2(WIDTH, 15)
 
 	func _draw() -> void:
 # warning-ignore:integer_division
-		var polygon := PoolVector2Array(
+		var polygon := PackedVector2Array(
 			[
 				Vector2(0, 5),
 				Vector2(WIDTH / 2, 0),
@@ -53,36 +53,36 @@ class GradientCursor:
 
 	func _gui_input(ev: InputEvent) -> void:
 		if ev is InputEventMouseButton:
-			if ev.button_index == BUTTON_LEFT:
+			if ev.button_index == MOUSE_BUTTON_LEFT:
 				if ev.doubleclick:
 					grand_parent.select_color(self, ev.global_position)
 				elif ev.pressed:
 					grand_parent.continuous_change = false
 					sliding = true
 					label.visible = true
-					label.text = "%.03f" % get_cursor_position()
+					label.text = "%.03f" % get_caret_column()
 				else:
 					sliding = false
 					label.visible = false
-			elif ev.button_index == BUTTON_RIGHT and grand_parent.get_sorted_cursors().size() > 2:
+			elif ev.button_index == MOUSE_BUTTON_RIGHT and grand_parent.get_sorted_cursors().size() > 2:
 				parent.remove_child(self)
 				grand_parent.continuous_change = false
 				grand_parent.update_from_value()
 				queue_free()
-		elif ev is InputEventMouseMotion and (ev.button_mask & BUTTON_MASK_LEFT) != 0 and sliding:
-			rect_position.x += get_local_mouse_position().x
+		elif ev is InputEventMouseMotion and (ev.button_mask & MOUSE_BUTTON_MASK_LEFT) != 0 and sliding:
+			position.x += get_local_mouse_position().x
 			if ev.control:
-				rect_position.x = (
-					round(get_cursor_position() * 20.0)
+				position.x = (
+					round(get_caret_column() * 20.0)
 					* 0.05
-					* (parent.rect_size.x - WIDTH)
+					* (parent.size.x - WIDTH)
 				)
-			rect_position.x = min(max(0, rect_position.x), parent.rect_size.x - rect_size.x)
+			position.x = min(max(0, position.x), parent.size.x - size.x)
 			grand_parent.update_from_value()
-			label.text = "%.03f" % get_cursor_position()
+			label.text = "%.03f" % get_caret_column()
 
-	func get_cursor_position() -> float:
-		return rect_position.x / (parent.rect_size.x - WIDTH)
+	func get_caret_column() -> float:
+		return position.x / (parent.size.x - WIDTH)
 
 	func set_color(c: Color) -> void:
 		color = c
@@ -92,10 +92,10 @@ class GradientCursor:
 	static func sort(a, b) -> bool:
 		return a.get_position() < b.get_position()
 
-	func can_drop_data(_position, data) -> bool:
+	func _can_drop_data(_position, data) -> bool:
 		return typeof(data) == TYPE_COLOR
 
-	func drop_data(_position, data) -> void:
+	func _drop_data(_position, data) -> void:
 		set_color(data)
 
 
@@ -125,7 +125,7 @@ func update_from_value() -> void:
 	gradient.offsets = []
 	for c in texture_rect.get_children():
 		if c is GradientCursor:
-			var point: float = c.rect_position.x / x_offset
+			var point: float = c.position.x / x_offset
 			gradient.add_point(point, c.color)
 	emit_signal("updated", gradient, continuous_change)
 	continuous_change = true
@@ -134,18 +134,18 @@ func update_from_value() -> void:
 func add_cursor(x: float, color: Color) -> void:
 	var cursor := GradientCursor.new()
 	texture_rect.add_child(cursor)
-	cursor.rect_position.x = x
+	cursor.position.x = x
 	cursor.color = color
 
 
 func select_color(cursor: GradientCursor, position: Vector2) -> void:
 	active_cursor = cursor
 	color_picker.color = cursor.color
-	if position.x > rect_global_position.x + (rect_size.x / 2.0):
-		position.x = rect_global_position.x + rect_size.x
+	if position.x > global_position.x + (size.x / 2.0):
+		position.x = global_position.x + size.x
 	else:
-		position.x = rect_global_position.x - $Popup.rect_size.x
-	$Popup.rect_position = position
+		position.x = global_position.x - $Popup.size.x
+	$Popup.position = position
 	$Popup.popup()
 
 
@@ -154,12 +154,12 @@ func get_sorted_cursors() -> Array:
 	for c in texture_rect.get_children():
 		if c is GradientCursor:
 			array.append(c)
-	array.sort_custom(GradientCursor, "sort")
+	array.sort_custom(Callable(GradientCursor, "sort"))
 	return array
 
 
 func get_gradient_color(x: float) -> Color:
-	return gradient.interpolate(x / x_offset)
+	return gradient.sample(x / x_offset)
 
 
 func _on_ColorPicker_color_changed(color: Color) -> void:
@@ -169,7 +169,7 @@ func _on_ColorPicker_color_changed(color: Color) -> void:
 func _on_GradientEdit_resized() -> void:
 	if not gradient:
 		return
-	x_offset = rect_size.x - GradientCursor.WIDTH
+	x_offset = size.x - GradientCursor.WIDTH
 	_create_cursors()
 
 
@@ -190,9 +190,9 @@ func _on_DivideConfirmationDialog_confirmed() -> void:
 
 	if not add_point_to_end:
 		# Move the final color one part behind, useful for it to be in constant interpolation
-		gradient.add_point((parts - 1) / parts, gradient.interpolate(1))
+		gradient.add_point((parts - 1) / parts, gradient.sample(1))
 	for i in parts + end_point:
-		colors.append(gradient.interpolate(i / parts))
+		colors.append(gradient.sample(i / parts))
 	gradient.offsets = []
 	for i in parts + end_point:
 		gradient.add_point(i / parts, colors[i])

@@ -11,23 +11,23 @@ script = ExtResource( 1 )
 visible = false
 
 [node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
-margin_bottom = 238.0
+offset_bottom = 238.0
 
 [node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-margin_left = 73.0
-margin_right = 287.0
-margin_bottom = 214.0
+offset_left = 73.0
+offset_right = 287.0
+offset_bottom = 214.0
 
 [node name="RGBAContainer" type="HBoxContainer" parent="VBoxContainer" index="2"]
-margin_top = 242.0
-margin_right = 360.0
-margin_bottom = 262.0
+offset_top = 242.0
+offset_right = 360.0
+offset_bottom = 262.0
 alignment = 1
 
 [node name="RButton" type="Button" parent="VBoxContainer/RGBAContainer" index="0"]
-margin_right = 87.0
-margin_bottom = 20.0
-hint_tooltip = "Modify Red Channel"
+offset_right = 87.0
+offset_bottom = 20.0
+tooltip_text = "Modify Red Channel"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 toggle_mode = true
@@ -35,10 +35,10 @@ pressed = true
 text = "R"
 
 [node name="GButton" type="Button" parent="VBoxContainer/RGBAContainer" index="1"]
-margin_left = 91.0
-margin_right = 178.0
-margin_bottom = 20.0
-hint_tooltip = "Modify Green Channel"
+offset_left = 91.0
+offset_right = 178.0
+offset_bottom = 20.0
+tooltip_text = "Modify Green Channel"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 toggle_mode = true
@@ -46,10 +46,10 @@ pressed = true
 text = "G"
 
 [node name="BButton" type="Button" parent="VBoxContainer/RGBAContainer" index="2"]
-margin_left = 182.0
-margin_right = 269.0
-margin_bottom = 20.0
-hint_tooltip = "Modify Blue Channel"
+offset_left = 182.0
+offset_right = 269.0
+offset_bottom = 20.0
+tooltip_text = "Modify Blue Channel"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 toggle_mode = true
@@ -57,10 +57,10 @@ pressed = true
 text = "B"
 
 [node name="AButton" type="Button" parent="VBoxContainer/RGBAContainer" index="3"]
-margin_left = 273.0
-margin_right = 360.0
-margin_bottom = 20.0
-hint_tooltip = "Modify Alpha Channel"
+offset_left = 273.0
+offset_right = 360.0
+offset_bottom = 20.0
+tooltip_text = "Modify Alpha Channel"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 toggle_mode = true

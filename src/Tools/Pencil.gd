@@ -57,15 +57,15 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("change_tool_mode"):
 		_prev_mode = overwrite_button.pressed
 	if event.is_action("change_tool_mode"):
-		overwrite_button.pressed = !_prev_mode
+		overwrite_button.button_pressed = !_prev_mode
 		_overwrite = overwrite_button.pressed
 	if event.is_action_released("change_tool_mode"):
-		overwrite_button.pressed = _prev_mode
+		overwrite_button.button_pressed = _prev_mode
 		_overwrite = overwrite_button.pressed
 
 
 func get_config() -> Dictionary:
-	var config := .get_config()
+	var config := super.get_config()
 	config["overwrite"] = _overwrite
 	config["fill_inside"] = _fill_inside
 	config["spacing_mode"] = _spacing_mode
@@ -74,7 +74,7 @@ func get_config() -> Dictionary:
 
 
 func set_config(config: Dictionary) -> void:
-	.set_config(config)
+	super.set_config(config)
 	_overwrite = config.get("overwrite", _overwrite)
 	_fill_inside = config.get("fill_inside", _fill_inside)
 	_spacing_mode = config.get("spacing_mode", _spacing_mode)
@@ -82,10 +82,10 @@ func set_config(config: Dictionary) -> void:
 
 
 func update_config() -> void:
-	.update_config()
-	$Overwrite.pressed = _overwrite
-	$FillInside.pressed = _fill_inside
-	$SpacingMode.pressed = _spacing_mode
+	super.update_config()
+	$Overwrite.button_pressed = _overwrite
+	$FillInside.button_pressed = _fill_inside
+	$SpacingMode.button_pressed = _spacing_mode
 	$Spacing.visible = _spacing_mode
 	$Spacing.value = _spacing
 
@@ -93,7 +93,7 @@ func update_config() -> void:
 func draw_start(position: Vector2) -> void:
 	_old_spacing_mode = _spacing_mode
 	position = snap_position(position)
-	.draw_start(position)
+	super.draw_start(position)
 	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
 		_pick_color(position)
@@ -133,7 +133,7 @@ func draw_start(position: Vector2) -> void:
 
 func draw_move(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_move(position)
+	super.draw_move(position)
 	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("draw_color_picker"):
 			_pick_color(position)
@@ -159,7 +159,7 @@ func draw_move(position: Vector2) -> void:
 
 func draw_end(position: Vector2) -> void:
 	position = snap_position(position)
-	.draw_end(position)
+	super.draw_end(position)
 	if _picking_color:
 		return
 

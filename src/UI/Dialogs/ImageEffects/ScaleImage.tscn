@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/ImageEffects/ScaleImage.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/misc/lock_aspect_guides.png" type="Texture" id=2]
-[ext_resource path="res://assets/graphics/misc/lock_aspect_2.png" type="Texture" id=3]
-[ext_resource path="res://assets/graphics/misc/lock_aspect.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/misc/lock_aspect_guides.png" type="Texture2D" id=2]
+[ext_resource path="res://assets/graphics/misc/lock_aspect_2.png" type="Texture2D" id=3]
+[ext_resource path="res://assets/graphics/misc/lock_aspect.png" type="Texture2D" id=4]
 
 [node name="ScaleImage" type="ConfirmationDialog"]
-margin_right = 200.0
-margin_bottom = 114.0
-rect_min_size = Vector2( 250, 87.5 )
+offset_right = 200.0
+offset_bottom = 114.0
+custom_minimum_size = Vector2( 250, 87.5 )
 window_title = "Scale Image"
 resizable = true
 script = ExtResource( 1 )
@@ -17,56 +17,56 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 242.0
-margin_bottom = 218.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 242.0
+offset_bottom = 218.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ImageSize" type="Label" parent="VBoxContainer"]
-margin_right = 234.0
-margin_bottom = 14.0
+offset_right = 234.0
+offset_bottom = 14.0
 text = "Image Size"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 18.0
-margin_right = 234.0
-margin_bottom = 22.0
+offset_top = 18.0
+offset_right = 234.0
+offset_bottom = 22.0
 
 [node name="PixelsLabel" type="Label" parent="VBoxContainer"]
-margin_top = 26.0
-margin_right = 234.0
-margin_bottom = 40.0
+offset_top = 26.0
+offset_right = 234.0
+offset_bottom = 40.0
 text = "Pixels"
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 44.0
-margin_right = 234.0
-margin_bottom = 96.0
+offset_top = 44.0
+offset_right = 234.0
+offset_bottom = 96.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SizeContainer"]
-margin_right = 221.0
-margin_bottom = 52.0
+offset_right = 221.0
+offset_bottom = 52.0
 size_flags_horizontal = 3
 
 [node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
-margin_right = 221.0
-margin_bottom = 24.0
+offset_right = 221.0
+offset_bottom = 24.0
 
 [node name="WidthLabel" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
-margin_top = 5.0
-margin_right = 90.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 90, 0 )
+offset_top = 5.0
+offset_right = 90.0
+offset_bottom = 19.0
+custom_minimum_size = Vector2( 90, 0 )
 text = "Width:"
 
 [node name="WidthValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
-margin_left = 94.0
-margin_right = 221.0
-margin_bottom = 24.0
+offset_left = 94.0
+offset_right = 221.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 min_value = 1.0
@@ -75,21 +75,21 @@ value = 64.0
 suffix = "px"
 
 [node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
-margin_top = 28.0
-margin_right = 221.0
-margin_bottom = 52.0
+offset_top = 28.0
+offset_right = 221.0
+offset_bottom = 52.0
 
 [node name="Height" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
-margin_top = 5.0
-margin_right = 90.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 90, 0 )
+offset_top = 5.0
+offset_right = 90.0
+offset_bottom = 19.0
+custom_minimum_size = Vector2( 90, 0 )
 text = "Height:"
 
 [node name="HeightValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
-margin_left = 94.0
-margin_right = 221.0
-margin_bottom = 24.0
+offset_left = 94.0
+offset_right = 221.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 min_value = 1.0
@@ -98,9 +98,9 @@ value = 64.0
 suffix = "px"
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer" groups=["UIButtons"]]
-margin_left = 225.0
-margin_right = 234.0
-margin_bottom = 52.0
+offset_left = 225.0
+offset_right = 234.0
+offset_bottom = 52.0
 texture = ExtResource( 2 )
 
 [node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/TextureRect" groups=["UIButtons"]]
@@ -108,11 +108,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -4.5
-margin_top = -9.0
-margin_right = 11.5
-margin_bottom = 7.0
-hint_tooltip = "Lock aspect ratio"
+offset_left = -4.5
+offset_top = -9.0
+offset_right = 11.5
+offset_bottom = 7.0
+tooltip_text = "Lock aspect ratio"
 mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 3 )
@@ -122,36 +122,36 @@ __meta__ = {
 }
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 100.0
-margin_right = 234.0
-margin_bottom = 104.0
+offset_top = 100.0
+offset_right = 234.0
+offset_bottom = 104.0
 
 [node name="PercentageLabel" type="Label" parent="VBoxContainer"]
-margin_top = 108.0
-margin_right = 234.0
-margin_bottom = 122.0
+offset_top = 108.0
+offset_right = 234.0
+offset_bottom = 122.0
 text = "Percentage"
 
 [node name="PercentageContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 126.0
-margin_right = 234.0
-margin_bottom = 178.0
+offset_top = 126.0
+offset_right = 234.0
+offset_bottom = 178.0
 
 [node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/PercentageContainer"]
-margin_right = 234.0
-margin_bottom = 24.0
+offset_right = 234.0
+offset_bottom = 24.0
 
 [node name="WidthLabel" type="Label" parent="VBoxContainer/PercentageContainer/WidthContainer"]
-margin_top = 5.0
-margin_right = 90.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 90, 0 )
+offset_top = 5.0
+offset_right = 90.0
+offset_bottom = 19.0
+custom_minimum_size = Vector2( 90, 0 )
 text = "Width:"
 
 [node name="WidthValuePerc" type="SpinBox" parent="VBoxContainer/PercentageContainer/WidthContainer"]
-margin_left = 94.0
-margin_right = 234.0
-margin_bottom = 24.0
+offset_left = 94.0
+offset_right = 234.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 min_value = 1.0
@@ -161,21 +161,21 @@ value = 100.0
 suffix = "%"
 
 [node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/PercentageContainer"]
-margin_top = 28.0
-margin_right = 234.0
-margin_bottom = 52.0
+offset_top = 28.0
+offset_right = 234.0
+offset_bottom = 52.0
 
 [node name="Height" type="Label" parent="VBoxContainer/PercentageContainer/HeightContainer"]
-margin_top = 5.0
-margin_right = 90.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 90, 0 )
+offset_top = 5.0
+offset_right = 90.0
+offset_bottom = 19.0
+custom_minimum_size = Vector2( 90, 0 )
 text = "Height:"
 
 [node name="HeightValuePerc" type="SpinBox" parent="VBoxContainer/PercentageContainer/HeightContainer"]
-margin_left = 94.0
-margin_right = 234.0
-margin_bottom = 24.0
+offset_left = 94.0
+offset_right = 234.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 min_value = 1.0
@@ -185,30 +185,30 @@ value = 100.0
 suffix = "%"
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
-margin_top = 182.0
-margin_right = 234.0
-margin_bottom = 186.0
+offset_top = 182.0
+offset_right = 234.0
+offset_bottom = 186.0
 
 [node name="InterpolationContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 190.0
-margin_right = 234.0
-margin_bottom = 210.0
+offset_top = 190.0
+offset_right = 234.0
+offset_bottom = 210.0
 
 [node name="InterpolationLabel" type="Label" parent="VBoxContainer/InterpolationContainer"]
-margin_top = 3.0
-margin_right = 90.0
-margin_bottom = 17.0
-rect_min_size = Vector2( 90, 0 )
+offset_top = 3.0
+offset_right = 90.0
+offset_bottom = 17.0
+custom_minimum_size = Vector2( 90, 0 )
 text = "Interpolation:"
 
 [node name="InterpolationType" type="OptionButton" parent="VBoxContainer/InterpolationContainer"]
-margin_left = 94.0
-margin_right = 234.0
-margin_bottom = 20.0
+offset_left = 94.0
+offset_right = 234.0
+offset_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 
-[connection signal="about_to_show" from="." to="." method="_on_ScaleImage_about_to_show"]
+[connection signal="about_to_popup" from="." to="." method="_on_ScaleImage_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ScaleImage_confirmed"]
 [connection signal="popup_hide" from="." to="." method="_on_ScaleImage_popup_hide"]
 [connection signal="value_changed" from="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer/WidthValue" to="." method="_on_WidthValue_value_changed"]

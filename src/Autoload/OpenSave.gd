@@ -8,14 +8,14 @@ var preview_dialog_tscn = preload("res://src/UI/Dialogs/PreviewDialog.tscn")
 var preview_dialogs := []  # Array of preview dialogs
 var last_dialog_option: int = 0
 
-onready var autosave_timer: Timer
+@onready var autosave_timer: Timer
 
 
 func _ready() -> void:
 	autosave_timer = Timer.new()
 	autosave_timer.one_shot = false
 	autosave_timer.process_mode = Timer.TIMER_PROCESS_IDLE
-	autosave_timer.connect("timeout", self, "_on_Autosave_timeout")
+	autosave_timer.connect("timeout", Callable(self, "_on_Autosave_timeout"))
 	add_child(autosave_timer)
 	update_autosave()
 
@@ -47,7 +47,7 @@ func handle_loading_file(file: String) -> void:
 		if !shader is Shader:
 			return
 		var file_name: String = file.get_file().get_basename()
-		Global.control.find_node("ShaderEffect").change_shader(shader, file_name)
+		Global.control.find_child("ShaderEffect").change_shader(shader, file_name)
 
 	else:  # Image files
 		# Attempt to load as APNG.
@@ -76,7 +76,7 @@ func handle_loading_file(file: String) -> void:
 
 
 func handle_loading_image(file: String, image: Image) -> void:
-	var preview_dialog: ConfirmationDialog = preview_dialog_tscn.instance()
+	var preview_dialog: ConfirmationDialog = preview_dialog_tscn.instantiate()
 	preview_dialogs.append(preview_dialog)
 	preview_dialog.path = file
 	preview_dialog.image = image
@@ -143,7 +143,9 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 		new_project = Project.new([], path.get_file())
 
 	var first_line := file.get_line()
-	var dict := JSON.parse(first_line)
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(first_line)
+	var dict := test_json_conv.get_data()
 	if dict.error != OK:
 		open_old_pxo_file(file, new_project, first_line)
 	else:
@@ -372,7 +374,7 @@ func save_pxo_file(
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
 		return
-	var to_save := JSON.print(serialized_data)
+	var to_save := JSON.stringify(serialized_data)
 	if !to_save:
 		Global.error_dialog.set_text(
 			tr("File failed to save. Converting dictionary to JSON failed.")
@@ -384,7 +386,7 @@ func save_pxo_file(
 	# Check if a file with the same name exists. If it does, rename the new file temporarily.
 	# Needed in case of a crash, so that the old file won't be replaced with an empty one.
 	var temp_path := path
-	var dir := Directory.new()
+	var dir := DirAccess.new()
 	if dir.file_exists(path):
 		temp_path = path + "1"
 
@@ -427,11 +429,11 @@ func save_pxo_file(
 	if OS.get_name() == "HTML5" and OS.has_feature("JavaScript") and !autosave:
 		err = file.open(path, File.READ)
 		if err == OK:
-			var file_data := Array(file.get_buffer(file.get_len()))
+			var file_data := Array(file.get_buffer(file.get_length()))
 			JavaScript.download_buffer(file_data, path.get_file())
 		file.close()
 		# Remove the .pxo file from memory, as we don't need it anymore
-		var browser_dir := Directory.new()
+		var browser_dir := DirAccess.new()
 		browser_dir.remove(path)
 
 	if autosave:
@@ -829,7 +831,7 @@ func _on_Autosave_timeout() -> void:
 	for i in range(backup_save_paths.size()):
 		if backup_save_paths[i] == "":
 			# Create a new backup file if it doesn't exist yet
-			backup_save_paths[i] = "user://backup-" + String(OS.get_unix_time()) + "-%s" % i
+			backup_save_paths[i] = "user://backup-" + String(Time.get_unix_time_from_system()) + "-%s" % i
 
 		store_backup_path(i)
 		save_pxo_file(backup_save_paths[i], true, true, Global.projects[i])
@@ -863,7 +865,7 @@ func remove_backup(i: int) -> void:
 
 
 func remove_backup_by_path(project_path: String, backup_path: String) -> void:
-	Directory.new().remove(backup_path)
+	DirAccess.new().remove(backup_path)
 	if Global.config_cache.has_section_key("backups", project_path):
 		Global.config_cache.erase_section_key("backups", project_path)
 	elif Global.config_cache.has_section_key("backups", backup_path):
@@ -875,7 +877,7 @@ func reload_backup_file(project_paths: Array, backup_paths: Array) -> void:
 	assert(project_paths.size() == backup_paths.size())
 	# Clear non-existent backups
 	var existing_backups_count := 0
-	var dir := Directory.new()
+	var dir := DirAccess.new()
 	for i in range(backup_paths.size()):
 		if dir.file_exists(backup_paths[i]):
 			project_paths[existing_backups_count] = project_paths[i]

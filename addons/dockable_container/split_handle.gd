@@ -1,4 +1,4 @@
-tool
+@tool
 extends Control
 
 const Layout = preload("layout.gd")
@@ -29,11 +29,11 @@ func _draw() -> void:
 	if not icon or (autohide and not _mouse_hovering):
 		return
 
-	draw_texture(icon, (rect_size - icon.get_size()) * 0.5)
+	draw_texture(icon, (size - icon.get_size()) * 0.5)
 
 
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		_dragging = event.is_pressed()
 		if event.doubleclick:
 			layout_split.percent = 0.5
@@ -126,6 +126,6 @@ func get_split_rects(rect: Rect2) -> Dictionary:
 
 
 static func get_separation_with_control(control: Control) -> Vector2:
-	var hseparation = control.get_constant("separation", "HSplitContainer")
-	var vseparation = control.get_constant("separation", "VSplitContainer")
-	return Vector2(hseparation, vseparation)
+	var h_separation = control.get_constant("separation", "HSplitContainer")
+	var v_separation = control.get_constant("separation", "VSplitContainer")
+	return Vector2(h_separation, v_separation)

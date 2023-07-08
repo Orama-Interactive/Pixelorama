@@ -30,7 +30,7 @@ func draw_start(position: Vector2) -> void:
 	if !$DoubleClickTimer.is_stopped():
 		return
 	position = snap_position(position)
-	.draw_start(position)
+	super.draw_start(position)
 	if !_move and !_draw_points:
 		_ongoing_selection = true
 		_draw_points.append(position)
@@ -41,7 +41,7 @@ func draw_move(position: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
 	position = snap_position(position)
-	.draw_move(position)
+	super.draw_move(position)
 
 
 func draw_end(position: Vector2) -> void:
@@ -53,7 +53,7 @@ func draw_end(position: Vector2) -> void:
 		if position == _draw_points[0] and _draw_points.size() > 1:
 			_ready_to_apply = true
 
-	.draw_end(position)
+	super.draw_end(position)
 
 
 func draw_preview() -> void:
@@ -72,7 +72,7 @@ func draw_preview() -> void:
 		var indicator := _fill_bitmap_with_points(preview_draw_points, Global.current_project.size)
 
 		for line in _create_polylines(indicator):
-			canvas.draw_polyline(PoolVector2Array(line), Color.black)
+			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
 		var circle_radius: Vector2 = Global.camera.zoom * 10
 		circle_radius.x = clamp(circle_radius.x, 2, circle_radius.x)
@@ -80,7 +80,7 @@ func draw_preview() -> void:
 
 		if _last_position == _draw_points[0] and _draw_points.size() > 1:
 			draw_empty_circle(
-				canvas, _draw_points[0] + Vector2.ONE * 0.5, circle_radius, Color.black
+				canvas, _draw_points[0] + Vector2.ONE * 0.5, circle_radius, Color.BLACK
 			)
 
 		# Handle mirroring
@@ -90,27 +90,27 @@ func draw_preview() -> void:
 					mirror_array(preview_draw_points, true, false), Global.current_project.size
 				)
 			):
-				canvas.draw_polyline(PoolVector2Array(line), Color.black)
+				canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 			if Tools.vertical_mirror:
 				for line in _create_polylines(
 					_fill_bitmap_with_points(
 						mirror_array(preview_draw_points, true, true), Global.current_project.size
 					)
 				):
-					canvas.draw_polyline(PoolVector2Array(line), Color.black)
+					canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 		if Tools.vertical_mirror:
 			for line in _create_polylines(
 				_fill_bitmap_with_points(
 					mirror_array(preview_draw_points, false, true), Global.current_project.size
 				)
 			):
-				canvas.draw_polyline(PoolVector2Array(line), Color.black)
+				canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
 func apply_selection(_position) -> void:
-	.apply_selection(_position)
+	super.apply_selection(_position)
 	if !_ready_to_apply:
 		return
 	var project: Project = Global.current_project
@@ -146,7 +146,7 @@ func apply_selection(_position) -> void:
 	Global.canvas.previews.update()
 
 
-func lasso_selection(selection_map: SelectionMap, points: PoolVector2Array) -> void:
+func lasso_selection(selection_map: SelectionMap, points: PackedVector2Array) -> void:
 	var project: Project = Global.current_project
 	var size := selection_map.get_size()
 	for point in points:
@@ -221,10 +221,10 @@ func draw_empty_circle(
 	line_origin = circle_radius + circle_center
 
 	while draw_counter <= 360:
-		line_end = circle_radius.rotated(deg2rad(draw_counter)) + circle_center
+		line_end = circle_radius.rotated(deg_to_rad(draw_counter)) + circle_center
 		canvas.draw_line(line_origin, line_end, color)
 		draw_counter += 1
 		line_origin = line_end
 
-	line_end = circle_radius.rotated(deg2rad(360)) + circle_center
+	line_end = circle_radius.rotated(deg_to_rad(360)) + circle_center
 	canvas.draw_line(line_origin, line_end, color)

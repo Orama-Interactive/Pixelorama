@@ -1,5 +1,5 @@
 class_name AnimationTag
-extends Reference
+extends RefCounted
 # A class for frame tag properties
 
 var name: String

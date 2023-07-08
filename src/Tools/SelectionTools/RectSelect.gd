@@ -27,7 +27,7 @@ func draw_move(position: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
 	position = snap_position(position)
-	.draw_move(position)
+	super.draw_move(position)
 	if !_move:
 		if _displace_origin:
 			_start_pos += position - _offset
@@ -40,7 +40,7 @@ func draw_end(position: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
 	position = snap_position(position)
-	.draw_end(position)
+	super.draw_end(position)
 	_rect = Rect2(0, 0, 0, 0)
 	_square = false
 	_expand_from_center = false
@@ -56,7 +56,7 @@ func draw_preview() -> void:
 			position.x = position.x + Global.current_project.size.x
 			scale.x = -1
 		canvas.draw_set_transform(position, canvas.rotation, scale)
-		canvas.draw_rect(_rect, Color.black, false)
+		canvas.draw_rect(_rect, Color.BLACK, false)
 
 		# Handle mirroring
 		if Tools.horizontal_mirror:
@@ -67,7 +67,7 @@ func draw_preview() -> void:
 				+ 1
 			)
 			mirror_x_rect.end.x = Global.current_project.x_symmetry_point - _rect.end.x + 1
-			canvas.draw_rect(mirror_x_rect, Color.black, false)
+			canvas.draw_rect(mirror_x_rect, Color.BLACK, false)
 			if Tools.vertical_mirror:
 				var mirror_xy_rect := mirror_x_rect
 				mirror_xy_rect.position.y = (
@@ -76,7 +76,7 @@ func draw_preview() -> void:
 					+ 1
 				)
 				mirror_xy_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
-				canvas.draw_rect(mirror_xy_rect, Color.black, false)
+				canvas.draw_rect(mirror_xy_rect, Color.BLACK, false)
 		if Tools.vertical_mirror:
 			var mirror_y_rect := _rect
 			mirror_y_rect.position.y = (
@@ -85,12 +85,12 @@ func draw_preview() -> void:
 				+ 1
 			)
 			mirror_y_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
-			canvas.draw_rect(mirror_y_rect, Color.black, false)
+			canvas.draw_rect(mirror_y_rect, Color.BLACK, false)
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
 func apply_selection(_position: Vector2) -> void:
-	.apply_selection(_position)
+	super.apply_selection(_position)
 	var project: Project = Global.current_project
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()

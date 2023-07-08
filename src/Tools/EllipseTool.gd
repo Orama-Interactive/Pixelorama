@@ -1,14 +1,14 @@
 extends "res://src/Tools/ShapeDrawer.gd"
 
 
-func _get_shape_points_filled(size: Vector2) -> PoolVector2Array:
+func _get_shape_points_filled(size: Vector2) -> PackedVector2Array:
 	return DrawingAlgos.get_ellipse_points_filled(Vector2.ZERO, size, _thickness)
 
 
-func _get_shape_points(size: Vector2) -> PoolVector2Array:
+func _get_shape_points(size: Vector2) -> PackedVector2Array:
 	# Return ellipse with thickness 1
 	if _thickness == 1:
-		return PoolVector2Array(DrawingAlgos.get_ellipse_points(Vector2.ZERO, size))
+		return PackedVector2Array(DrawingAlgos.get_ellipse_points(Vector2.ZERO, size))
 
 	var size_offset := Vector2.ONE * (_thickness - 1)
 	var new_size := size + size_offset
@@ -72,4 +72,4 @@ func _get_shape_points(size: Vector2) -> PoolVector2Array:
 				res_array.append(pos + mirror_smallest_side)
 				res_array.append(pos + mirror_smallest_side + mirror_largest_side)
 
-	return PoolVector2Array(res_array)
+	return PackedVector2Array(res_array)
