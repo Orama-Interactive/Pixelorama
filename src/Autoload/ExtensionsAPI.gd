@@ -305,7 +305,7 @@ class ThemeAPI:
 	func set_theme(idx: int) -> bool:
 		var themes: BoxContainer = Global.preferences_dialog.find_child("Themes")
 		if idx >= 0 and idx < themes.themes.size():
-			themes.buttons_container.get_child(idx).emit_signal("pressed")
+			themes.buttons_container.get_child(idx).pressed.emit()
 			return true
 		else:
 			return false

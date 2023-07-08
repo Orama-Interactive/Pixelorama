@@ -167,30 +167,21 @@ func _ready() -> void:
 
 		match pref.value_type:
 			"pressed":
-				node.connect(
-					"toggled", self, "_on_Preference_value_changed", [pref, restore_default_button]
+				node.toggled.connect(
+					_on_Preference_value_changed.bind(pref, restore_default_button)
 				)
 			"value":
-				node.connect(
-					"value_changed",
-					self,
-					"_on_Preference_value_changed",
-					[pref, restore_default_button]
+				node.value_changed.connect(
+					_on_Preference_value_changed.bind(pref, restore_default_button)
 				)
 			"color":
 				node.get_picker().presets_visible = false
-				node.connect(
-					"color_changed",
-					self,
-					"_on_Preference_value_changed",
-					[pref, restore_default_button]
+				node.color_changed.connect(
+					_on_Preference_value_changed.bind(pref, restore_default_button)
 				)
 			"selected":
-				node.connect(
-					"item_selected",
-					self,
-					"_on_Preference_value_changed",
-					[pref, restore_default_button]
+				node.item_selected.connect(
+					_on_Preference_value_changed.bind(pref, restore_default_button)
 				)
 
 		var global_value = Global.get(pref.prop_name)
@@ -261,7 +252,7 @@ func preference_update(prop: String, require_restart := false) -> void:
 				guide.default_color = Global.guide_color
 
 	elif prop in ["fps_limit"]:
-		Engine.set_target_fps(Global.fps_limit)
+		Engine.max_fps = Global.fps_limit
 
 	elif "selection" in prop:
 		var marching_ants: Sprite2D = Global.canvas.selection.marching_ants_outline
@@ -352,12 +343,11 @@ func _on_List_item_selected(index: int) -> void:
 
 
 func _on_ShrinkApplyButton_pressed() -> void:
-	get_tree().set_screen_stretch(
-		SceneTree.STRETCH_MODE_DISABLED,
-		SceneTree.STRETCH_ASPECT_IGNORE,
-		Vector2(1024, 576),
-		Global.shrink
-	)
+	var root := get_tree().root
+	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
+	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
+	root.min_size = Vector2(1024, 576)
+	root.content_scale_factor = Global.shrink
 	Global.control.set_custom_cursor()
 	hide()
 	popup_centered(Vector2(600, 400))

@@ -337,7 +337,7 @@ func add_tool_button(t: Tool) -> void:
 	tool_button.tooltip_text = t.generate_hint_tooltip()
 	t.button_node = tool_button
 	_tool_buttons.add_child(tool_button)
-	tool_button.connect("pressed", Callable(_tool_buttons, "_on_Tool_pressed").bind(tool_button))
+	tool_button.pressed.connect(_tool_buttons._on_Tool_pressed.bind(tool_button))
 
 
 func remove_tool(t: Tool) -> void:
@@ -345,16 +345,16 @@ func remove_tool(t: Tool) -> void:
 	tools.erase(t.name)
 
 
-func set_tool(name: String, button: int) -> void:
+func set_tool(tool_name: String, button: int) -> void:
 	var slot: Slot = _slots[button]
 	var panel: Node = _panels[button]
-	var node: Node = tools[name].scene.instantiate()
+	var node: Node = tools[tool_name].scene.instantiate()
 	if button == MOUSE_BUTTON_LEFT:  # As guides are only moved with left mouse
-		if name == "Pan":  # tool you want to give more access at guides
+		if tool_name == "Pan":  # tool you want to give more access at guides
 			Global.move_guides_on_canvas = true
 		else:
 			Global.move_guides_on_canvas = false
-	node.name = name
+	node.name = tool_name
 	node.tool_slot = slot
 	slot.tool_node = node
 	slot.button = button
@@ -363,25 +363,25 @@ func set_tool(name: String, button: int) -> void:
 	if _curr_layer_type == Global.LayerTypes.GROUP:
 		return
 	if button == MOUSE_BUTTON_LEFT:
-		_left_tools_per_layer_type[_curr_layer_type] = name
+		_left_tools_per_layer_type[_curr_layer_type] = tool_name
 	elif button == MOUSE_BUTTON_RIGHT:
-		_right_tools_per_layer_type[_curr_layer_type] = name
+		_right_tools_per_layer_type[_curr_layer_type] = tool_name
 
 
-func assign_tool(name: String, button: int) -> void:
+func assign_tool(tool_name: String, button: int) -> void:
 	var slot: Slot = _slots[button]
 	var panel: Node = _panels[button]
 
 	if slot.tool_node != null:
-		if slot.tool_node.name == name:
+		if slot.tool_node.name == tool_name:
 			return
 		panel.remove_child(slot.tool_node)
 		slot.tool_node.queue_free()
 
-	set_tool(name, button)
+	set_tool(tool_name, button)
 	update_tool_buttons()
 	update_tool_cursors()
-	Global.config_cache.set_value(slot.kname, "tool", name)
+	Global.config_cache.set_value(slot.kname, "tool", tool_name)
 
 
 func default_color() -> void:

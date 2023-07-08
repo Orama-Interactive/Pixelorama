@@ -118,8 +118,8 @@ func add_image_preview(image: Image, canvas_number: int = -1) -> void:
 
 	if canvas_number != -1:
 		var label := Label.new()
-		label.align = Label.ALIGNMENT_CENTER
-		label.text = String(canvas_number)
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.text = str(canvas_number)
 		container.add_child(label)
 
 	previews.add_child(container)
@@ -149,8 +149,8 @@ func add_animated_preview() -> void:
 
 func create_preview_container() -> VBoxContainer:
 	var container := VBoxContainer.new()
-	container.size_flags_horizontal = SIZE_EXPAND_FILL
-	container.size_flags_vertical = SIZE_EXPAND_FILL
+	container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	container.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	container.custom_minimum_size = Vector2(0, 128)
 	return container
 
@@ -158,8 +158,8 @@ func create_preview_container() -> VBoxContainer:
 func create_preview_rect() -> TextureRect:
 	var preview := TextureRect.new()
 	preview.expand = true
-	preview.size_flags_horizontal = SIZE_EXPAND_FILL
-	preview.size_flags_vertical = SIZE_EXPAND_FILL
+	preview.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	preview.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	return preview
 
@@ -327,7 +327,7 @@ func _on_Interpolation_item_selected(id: int) -> void:
 
 func _on_ExportDialog_confirmed() -> void:
 	Global.current_project.export_overwrite = false
-	if Export.export_processed_images(false, self, Global.current_project):
+	if await Export.export_processed_images(false, self, Global.current_project):
 		hide()
 
 

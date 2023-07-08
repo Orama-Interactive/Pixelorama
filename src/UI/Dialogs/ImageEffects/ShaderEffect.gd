@@ -131,7 +131,7 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			slider.min_value = min_value
 			slider.max_value = max_value
 			slider.step = step
-			slider.connect("value_changed", Callable(self, "set_shader_parameter").bind(u_name))
+			slider.value_changed.connect(set_shader_parameter.bind(u_name))
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
 			hbox.add_child(slider)
@@ -143,10 +143,10 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			var vector2 := _vec2str_to_vector2(u_value)
 			var slider1: ValueSlider = value_slider_tscn.instantiate()
 			slider1.value = vector2.x
-			slider1.connect("value_changed", Callable(self, "_set_vector2_shader_param").bind(u_name, true))
+			slider1.value_changed.connect(_set_vector2_shader_param.bind(u_name, true))
 			var slider2: ValueSlider = value_slider_tscn.instantiate()
 			slider2.value = vector2.y
-			slider2.connect("value_changed", Callable(self, "_set_vector2_shader_param").bind(u_name, false))
+			slider2.value_changed.connect(_set_vector2_shader_param.bind(u_name, false))
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
 			hbox.add_child(slider1)
@@ -161,7 +161,7 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 				var color_button := ColorPickerButton.new()
 				color_button.custom_minimum_size = Vector2(20, 20)
 				color_button.color = color
-				color_button.connect("color_changed", Callable(self, "set_shader_parameter").bind(u_name))
+				color_button.color_changed.connect(set_shader_parameter.bind(u_name))
 				color_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				var hbox := HBoxContainer.new()
 				hbox.add_child(label)
@@ -172,15 +172,15 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			label.text = u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var file_dialog := FileDialog.new()
-			file_dialog.mode = FileDialog.FILE_MODE_OPEN_FILE
+			file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 			file_dialog.access = FileDialog.ACCESS_FILESYSTEM
 			file_dialog.resizable = true
 			file_dialog.custom_minimum_size = Vector2(200, 70)
 			file_dialog.size = Vector2(384, 281)
-			file_dialog.connect("file_selected", Callable(self, "_load_texture").bind(u_name))
+			file_dialog.file_selected.connect(_load_texture.bind(u_name))
 			var button := Button.new()
 			button.text = "Load texture"
-			button.connect("pressed", Callable(file_dialog, "popup_centered"))
+			button.pressed.connect(file_dialog.popup_centered)
 			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
@@ -267,7 +267,5 @@ func _load_texture(path: String, param: String) -> void:
 	if !image:
 		print("Error loading texture")
 		return
-	var image_tex := ImageTexture.new()
-	image_tex.create_from_image(image) #,0
-	image_tex.flags = ImageTexture.FLAG_REPEAT
+	var image_tex := ImageTexture.create_from_image(image)
 	set_shader_parameter(image_tex, param)

@@ -143,7 +143,7 @@ func _on_AspectRatioButton_toggled(_button_pressed: bool) -> void:
 
 
 func _on_SizeValue_value_changed(value: float) -> void:
-	if ratio_box.pressed:
+	if ratio_box.button_pressed:
 		if width_value.value == value:
 			height_value.value = width_value.value / aspect_ratio
 		if height_value.value == value:
@@ -165,7 +165,7 @@ func toggle_size_buttons() -> void:
 func _on_TemplatesOptions_item_selected(id: int) -> void:
 	#if a template is chosen while "ratio button" is pressed then temporarily release it
 	var temporary_release = false
-	if ratio_box.pressed:
+	if ratio_box.button_pressed:
 		ratio_box.button_pressed = false
 		temporary_release = true
 
@@ -183,7 +183,7 @@ func _on_TemplatesOptions_item_selected(id: int) -> void:
 func _on_RecentTemplates_item_selected(id):
 	#if a template is chosen while "ratio button" is pressed then temporarily release it
 	var temporary_release = false
-	if ratio_box.pressed:
+	if ratio_box.button_pressed:
 		ratio_box.button_pressed = false
 		temporary_release = true
 

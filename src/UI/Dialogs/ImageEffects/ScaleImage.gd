@@ -46,13 +46,13 @@ func _on_ScaleImage_popup_hide() -> void:
 
 
 func _on_WidthValue_value_changed(value: float) -> void:
-	if ratio_box.pressed:
+	if ratio_box.button_pressed:
 		height_value.value = width_value.value / aspect_ratio
 	width_value_perc.value = (value * 100) / Global.current_project.size.x
 
 
 func _on_HeightValue_value_changed(value: float) -> void:
-	if ratio_box.pressed:
+	if ratio_box.button_pressed:
 		width_value.value = height_value.value * aspect_ratio
 	height_value_perc.value = (value * 100) / Global.current_project.size.y
 

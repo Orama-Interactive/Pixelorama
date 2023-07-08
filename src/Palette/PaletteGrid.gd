@@ -38,9 +38,9 @@ func setup_swatches() -> void:
 			var swatch: PaletteSwatch = PaletteSwatchScene.instantiate()
 			swatch.index = i
 			init_swatch(swatch)
-			swatch.connect("pressed", Callable(self, "_on_PaletteSwatch_pressed").bind(i))
-			swatch.connect("double_clicked", Callable(self, "_on_PaletteSwatch_double_clicked").bind(i))
-			swatch.connect("dropped", Callable(self, "_on_PaletteSwatch_dropped"))
+			swatch.pressed.connect(_on_PaletteSwatch_pressed.bind(i))
+			swatch.double_clicked.connect(_on_PaletteSwatch_double_clicked.bind(i))
+			swatch.dropped.connect(_on_PaletteSwatch_dropped)
 			add_child(swatch)
 			swatches.push_back(swatch)
 	else:
@@ -176,9 +176,9 @@ func _on_PaletteSwatch_pressed(mouse_button: int, index: int) -> void:
 	emit_signal("swatch_pressed", mouse_button, palette_index)
 
 
-func _on_PaletteSwatch_double_clicked(mouse_button: int, position: Vector2, index: int) -> void:
+func _on_PaletteSwatch_double_clicked(mouse_button: int, pos: Vector2, index: int) -> void:
 	var palette_index = convert_grid_index_to_palette_index(index)
-	emit_signal("swatch_double_clicked", mouse_button, palette_index, position)
+	emit_signal("swatch_double_clicked", mouse_button, palette_index, pos)
 
 
 func _on_PaletteSwatch_dropped(source_index: int, target_index: int) -> void:

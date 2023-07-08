@@ -57,7 +57,7 @@ func _ready() -> void:
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	var selection: Image
 	var selection_tex := ImageTexture.new()
-	if selection_checkbox.pressed and project.has_selection:
+	if selection_checkbox.button_pressed and project.has_selection:
 		selection = project.selection_map
 	else:  # This is needed to prevent a weird bug with the dithering shaders and GLES2
 		selection = Image.new()

@@ -200,9 +200,9 @@ func _on_ApplyAll_toggled(pressed) -> void:
 	is_master = pressed
 	# below 4 (and the last) line is needed for correct popup placement
 #	var old_rect = get_rect()
-	disconnect("popup_hide", Callable(self, "_on_PreviewDialog_popup_hide"))
+	visibility_changed.disconnect(_on_PreviewDialog_popup_hide)
 	hide()
-	connect("popup_hide", Callable(self, "_on_PreviewDialog_popup_hide"))
+	visibility_changed.connect(_on_PreviewDialog_popup_hide)
 	for child in Global.control.get_children():
 		if child != self and "PreviewDialog" in child.name:
 			child.hiding = pressed

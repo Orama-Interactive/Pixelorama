@@ -63,7 +63,7 @@ func _on_LayoutSettings_confirmed() -> void:
 	var file_name := layout_name.text + ".tres"
 	var path := "user://layouts/".path_join(file_name)
 	var layout = Global.control.ui.get_layout()
-	var err := ResourceSaver.save(path, layout)
+	var err := ResourceSaver.save(layout, path)
 	if err != OK:
 		print(err)
 	else:
@@ -86,7 +86,7 @@ func _on_LayoutSettings_confirmed() -> void:
 
 
 func delete_layout_file(file_name: String) -> void:
-	var dir := DirAccess.new()
+	var dir := DirAccess.open("user://layouts/".path_join(file_name))
 	dir.remove("user://layouts/".path_join(file_name))
 
 

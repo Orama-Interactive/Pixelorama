@@ -5,7 +5,7 @@ extends ImageEffect
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	_flip_image(cel, selection_checkbox.pressed, project)
+	_flip_image(cel, selection_checkbox.button_pressed, project)
 
 
 func _on_FlipHorizontal_toggled(_button_pressed: bool) -> void:
@@ -18,9 +18,9 @@ func _on_FlipVertical_toggled(_button_pressed: bool) -> void:
 
 func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 	if !(affect_selection and project.has_selection):
-		if flip_h.pressed:
+		if flip_h.button_pressed:
 			cel.flip_x()
-		if flip_v.pressed:
+		if flip_v.button_pressed:
 			cel.flip_y()
 	else:
 		# Create a temporary image that only has the selected pixels in it
@@ -42,9 +42,9 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 
 		false # selected.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		false # cel.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-		if flip_h.pressed:
+		if flip_h.button_pressed:
 			selected.flip_x()
-		if flip_v.pressed:
+		if flip_v.button_pressed:
 			selected.flip_y()
 		cel.blend_rect(selected, Rect2(Vector2.ZERO, selected.get_size()), rectangle.position)
 
@@ -69,10 +69,10 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 		if not image is Image:
 			continue
 		project.undo_redo.add_undo_property(image, "data", undo_data[image])
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false, -1, -1, project)
-	project.undo_redo.add_do_method(project, "selection_map_changed")
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, -1, -1, project)
-	project.undo_redo.add_undo_method(project, "selection_map_changed")
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, -1, -1, project))
+	project.undo_redo.add_do_method(project.selection_map_changed)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, -1, -1, project))
+	project.undo_redo.add_undo_method(project.selection_map_changed)
 	project.undo_redo.commit_action()
 
 
@@ -92,17 +92,17 @@ func _get_undo_data(project: Project) -> Dictionary:
 
 
 func _flip_selection(project: Project = Global.current_project) -> void:
-	if !(selection_checkbox.pressed and project.has_selection):
+	if !(selection_checkbox.button_pressed and project.has_selection):
 		return
 
 	var bitmap_image := SelectionMap.new()
 	bitmap_image.copy_from(project.selection_map)
 	var selection_rect := bitmap_image.get_used_rect()
-	var smaller_bitmap_image := bitmap_image.get_rect(selection_rect)
+	var smaller_bitmap_image := bitmap_image.get_region(selection_rect)
 
-	if flip_h.pressed:
+	if flip_h.button_pressed:
 		smaller_bitmap_image.flip_x()
-	if flip_v.pressed:
+	if flip_v.button_pressed:
 		smaller_bitmap_image.flip_y()
 
 	bitmap_image.fill(Color(0, 0, 0, 0))

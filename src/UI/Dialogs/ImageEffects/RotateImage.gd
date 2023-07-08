@@ -62,7 +62,7 @@ func _calculate_pivot() -> void:
 		if int(size.y) % 2 == 0:
 			pivot.y -= 0.5
 
-	if Global.current_project.has_selection and selection_checkbox.pressed:
+	if Global.current_project.has_selection and selection_checkbox.button_pressed:
 		var selection_rectangle: Rect2 = Global.current_project.selection_map.get_used_rect()
 		pivot = (
 			selection_rectangle.position
@@ -92,7 +92,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 
 	var image := Image.new()
 	image.copy_from(cel)
-	if _project.has_selection and selection_checkbox.pressed:
+	if _project.has_selection and selection_checkbox.button_pressed:
 		var selection_rectangle: Rect2 = _project.selection_map.get_used_rect()
 		selection_size = selection_rectangle.size
 
@@ -118,7 +118,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				"ending_angle": rad_to_deg(angle),
 				"tolerance": tolerance_slider.value,
 				"selection_tex": selection_tex,
-				"origin": pivot / cel.get_size(),
+				"origin": pivot / Vector2(cel.get_size()),
 				"selection_size": selection_size
 			}
 			if !has_been_confirmed:
@@ -184,7 +184,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 		URD:
 			DrawingAlgos.fake_rotsprite(image, angle, pivot)
 
-	if _project.has_selection and selection_checkbox.pressed and !_type_is_shader():
+	if _project.has_selection and selection_checkbox.button_pressed and !_type_is_shader():
 		cel.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 	else:
 		cel.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
@@ -287,7 +287,7 @@ func _on_Pivot_value_changed(value: Vector2) -> void:
 func _on_Indicator_draw() -> void:
 	var img_size := preview_image.get_size()
 	# find the scale using the larger measurement
-	var ratio := pivot_indicator.size / img_size
+	var ratio := pivot_indicator.size / Vector2(img_size)
 	# we need to set the scale according to the larger side
 	var conversion_scale: float
 	if img_size.x > img_size.y:
@@ -312,8 +312,9 @@ func _on_Indicator_gui_input(event: InputEvent) -> void:
 		drag_pivot = false
 	if drag_pivot:
 		var img_size := preview_image.get_size()
-		var mouse_pos := get_local_mouse_position() - pivot_indicator.position
-		var ratio := img_size / pivot_indicator.size
+#		var mouse_pos := get_local_mouse_position() - pivot_indicator.position
+		var mouse_pos := pivot_indicator.position
+		var ratio := Vector2(img_size) / pivot_indicator.size
 		# we need to set the scale according to the larger side
 		var conversion_scale: float
 		if img_size.x > img_size.y:
