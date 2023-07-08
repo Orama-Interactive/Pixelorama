@@ -1,19 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://w1v6plnv6ppt"]
 
-[ext_resource path="res://src/UI/Dialogs/AboutDialog.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/icons/icon.png" type="Texture2D" id=2]
-[ext_resource path="res://assets/fonts/Roboto-Italic.tres" type="FontFile" id=3]
-[ext_resource path="res://assets/graphics/splash_screen/orama_64x64.png" type="Texture2D" id=4]
-[ext_resource path="res://assets/fonts/Roboto-Small.tres" type="FontFile" id=5]
+[ext_resource type="Script" path="res://src/UI/Dialogs/AboutDialog.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://b47r0c6auaqk6" path="res://assets/graphics/icons/icon.png" id="2"]
+[ext_resource type="FontFile" path="res://assets/fonts/Roboto-Italic.tres" id="3"]
+[ext_resource type="Texture2D" uid="uid://s25pa611bpvj" path="res://assets/graphics/splash_screen/orama_64x64.png" id="4"]
+[ext_resource type="FontFile" path="res://assets/fonts/Roboto-Small.tres" id="5"]
 
 [node name="AboutDialog" type="Window"]
-offset_right = 600.0
-offset_bottom = 400.0
-custom_minimum_size = Vector2( 600, 400 )
-window_title = "About Pixelorama"
-resizable = true
-script = ExtResource( 1 )
-licenses = [ "MIT License
+visible = false
+script = ExtResource("1")
+licenses = ["MIT License
 
 Copyright (c) 2019-present Orama Interactive and contributors
 
@@ -491,9 +487,10 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE." ]
+SOFTWARE."]
 
 [node name="AboutUI" type="VBoxContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 12.0
@@ -503,100 +500,72 @@ offset_bottom = -8.0
 alignment = 1
 
 [node name="IconsButtons" type="HBoxContainer" parent="AboutUI"]
-offset_right = 576.0
-offset_bottom = 64.0
+layout_mode = 2
 
 [node name="PixeloramaLogo" type="TextureRect" parent="AboutUI/IconsButtons"]
-offset_right = 64.0
-offset_bottom = 64.0
-custom_minimum_size = Vector2( 64, 64 )
-texture = ExtResource( 2 )
-expand = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2")
+expand_mode = 1
 
 [node name="SloganAndLinks" type="CenterContainer" parent="AboutUI/IconsButtons"]
-offset_left = 68.0
-offset_right = 508.0
-offset_bottom = 64.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="AboutUI/IconsButtons/SloganAndLinks"]
-offset_left = 108.0
-offset_top = 12.0
-offset_right = 332.0
-offset_bottom = 51.0
+layout_mode = 2
 
 [node name="PixeloramaSlogan" type="Label" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer"]
-offset_right = 224.0
-offset_bottom = 15.0
-theme_override_fonts/font = ExtResource( 3 )
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3")
 text = "Pixelorama - Pixelate your dreams!"
-align = 1
 
 [node name="LinkButtons" type="HBoxContainer" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer"]
-offset_top = 19.0
-offset_right = 224.0
-offset_bottom = 39.0
+layout_mode = 2
 
 [node name="Website" type="Button" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons"]
-offset_right = 65.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Website"
 
 [node name="GitHub" type="Button" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons"]
-offset_left = 69.0
-offset_right = 162.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "GitHub Repo"
 
 [node name="Donate" type="Button" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons"]
-offset_left = 166.0
-offset_right = 224.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Donate"
 
 [node name="OramaLogo" type="TextureRect" parent="AboutUI/IconsButtons"]
-offset_left = 512.0
-offset_right = 576.0
-offset_bottom = 64.0
-texture = ExtResource( 4 )
+layout_mode = 2
+texture = ExtResource("4")
 
 [node name="HSeparator" type="HSeparator" parent="AboutUI"]
-offset_top = 68.0
-offset_right = 576.0
-offset_bottom = 72.0
+layout_mode = 2
 
 [node name="Credits" type="HSplitContainer" parent="AboutUI"]
-offset_top = 76.0
-offset_right = 576.0
-offset_bottom = 345.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Groups" type="Tree" parent="AboutUI/Credits"]
-offset_right = 576.0
-offset_bottom = 269.0
-custom_minimum_size = Vector2( 120, 120 )
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
 theme_override_constants/item_margin = -2
 hide_root = true
 
 [node name="Developers" type="VBoxContainer" parent="AboutUI/Credits"]
 visible = false
-offset_left = 132.0
-offset_right = 576.0
-offset_bottom = 269.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="AboutUI/Credits/Developers"]
-offset_right = 444.0
-offset_bottom = 14.0
+layout_mode = 2
 text = "Development Team"
 
 [node name="DeveloperTree" type="Tree" parent="AboutUI/Credits/Developers"]
-offset_top = 18.0
-offset_right = 444.0
-offset_bottom = 269.0
+layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/item_margin = -2
 theme_override_constants/button_margin = 2
@@ -604,106 +573,75 @@ hide_root = true
 
 [node name="Contributors" type="VBoxContainer" parent="AboutUI/Credits"]
 visible = false
-offset_left = 254.0
-offset_right = 496.0
-offset_bottom = 126.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="AboutUI/Credits/Contributors"]
-offset_right = 242.0
-offset_bottom = 14.0
+layout_mode = 2
 text = "GitHub Contributors"
 
 [node name="ContributorTree" type="Tree" parent="AboutUI/Credits/Contributors"]
-offset_top = 18.0
-offset_right = 242.0
-offset_bottom = 126.0
+layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/item_margin = -2
 hide_root = true
 
 [node name="Donors" type="VBoxContainer" parent="AboutUI/Credits"]
 visible = false
-offset_left = 254.0
-offset_right = 496.0
-offset_bottom = 126.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="AboutUI/Credits/Donors"]
-offset_right = 242.0
-offset_bottom = 14.0
+layout_mode = 2
 text = "Donors"
 
 [node name="DonorTree" type="Tree" parent="AboutUI/Credits/Donors"]
-offset_top = 18.0
-offset_right = 242.0
-offset_bottom = 126.0
+layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/item_margin = -2
 hide_root = true
 
 [node name="Translators" type="VBoxContainer" parent="AboutUI/Credits"]
 visible = false
-offset_left = 254.0
-offset_right = 496.0
-offset_bottom = 126.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="AboutUI/Credits/Translators"]
-offset_right = 242.0
-offset_bottom = 14.0
+layout_mode = 2
 text = "Translators"
 
 [node name="TranslatorTree" type="Tree" parent="AboutUI/Credits/Translators"]
-offset_top = 18.0
-offset_right = 242.0
-offset_bottom = 126.0
+layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/item_margin = -2
 hide_root = true
 
 [node name="Licenses" type="VBoxContainer" parent="AboutUI/Credits"]
 visible = false
-offset_left = 132.0
-offset_right = 576.0
-offset_bottom = 269.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="LicenseTabs" type="TabBar" parent="AboutUI/Credits/Licenses"]
-offset_right = 444.0
-offset_bottom = 24.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 
 [node name="LicenseText" type="TextEdit" parent="AboutUI/Credits/Licenses"]
-offset_top = 28.0
-offset_right = 444.0
-offset_bottom = 269.0
+layout_mode = 2
 size_flags_vertical = 3
-readonly = true
-wrap_enabled = true
 
 [node name="HSeparator2" type="HSeparator" parent="AboutUI"]
-offset_top = 349.0
-offset_right = 576.0
-offset_bottom = 353.0
+layout_mode = 2
 
 [node name="MadeBy" type="Label" parent="AboutUI"]
-offset_top = 357.0
-offset_right = 576.0
-offset_bottom = 371.0
+layout_mode = 2
 text = "Developed by Orama Interactive"
-align = 1
 
 [node name="Copyright" type="Label" parent="AboutUI"]
-offset_top = 375.0
-offset_right = 576.0
-offset_bottom = 388.0
-theme_override_fonts/font = ExtResource( 5 )
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5")
 text = "©2019-present by Orama Interactive and contributors"
-align = 1
 
 [connection signal="about_to_popup" from="." to="." method="_on_AboutDialog_about_to_show"]
-[connection signal="popup_hide" from="." to="." method="_on_AboutDialog_popup_hide"]
 [connection signal="pressed" from="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons/Website" to="." method="_on_Website_pressed"]
 [connection signal="pressed" from="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons/GitHub" to="." method="_on_GitHub_pressed"]
 [connection signal="pressed" from="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer/LinkButtons/Donate" to="." method="_on_Donate_pressed"]

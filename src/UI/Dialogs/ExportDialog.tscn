@@ -1,63 +1,52 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://clgu8wb5o6oup"]
 
-[ext_resource path="res://src/UI/Dialogs/ExportDialog.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/UI/Nodes/CollapsibleContainer.gd" type="Script" id=3]
-[ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=4]
+[ext_resource type="Script" path="res://src/UI/Dialogs/ExportDialog.gd" id="1"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2"]
+[ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="3"]
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4"]
 
 [node name="ExportDialog" type="ConfirmationDialog"]
-offset_right = 532.0
-offset_bottom = 530.0
-custom_minimum_size = Vector2( 170, 59.5 )
-window_title = "Export..."
-resizable = true
 dialog_hide_on_ok = false
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(330, 0)
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 524.0
 offset_bottom = 494.0
-custom_minimum_size = Vector2( 330, 0 )
 size_flags_vertical = 3
 
 [node name="TabBar" type="TabBar" parent="VBoxContainer"]
-offset_right = 516.0
-offset_bottom = 24.0
+layout_mode = 2
 size_flags_vertical = 0
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-offset_top = 28.0
-offset_right = 516.0
-offset_bottom = 32.0
+layout_mode = 2
 
 [node name="PreviewLabel" type="Label" parent="VBoxContainer"]
-offset_top = 36.0
-offset_right = 516.0
-offset_bottom = 50.0
+layout_mode = 2
 text = "Preview:"
 
 [node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer"]
-offset_top = 54.0
-offset_right = 516.0
-offset_bottom = 486.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="PreviewPanel" type="Panel" parent="VBoxContainer/VSplitContainer"]
-offset_right = 516.0
-offset_bottom = 168.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TransparentChecker" parent="VBoxContainer/VSplitContainer/PreviewPanel" instance=ExtResource( 2 )]
+[node name="TransparentChecker" parent="VBoxContainer/VSplitContainer/PreviewPanel" instance=ExtResource("2")]
 unique_name_in_owner = true
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 0.0
 offset_bottom = 0.0
 
 [node name="PreviewScroll" type="ScrollContainer" parent="VBoxContainer/VSplitContainer/PreviewPanel"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -65,134 +54,83 @@ size_flags_vertical = 3
 
 [node name="Previews" type="GridContainer" parent="VBoxContainer/VSplitContainer/PreviewPanel/PreviewScroll"]
 unique_name_in_owner = true
-offset_right = 516.0
-offset_bottom = 168.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VSplitContainer"]
-offset_top = 180.0
-offset_right = 516.0
-offset_bottom = 432.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
-offset_right = 516.0
-offset_bottom = 156.0
+layout_mode = 2
 columns = 2
 
 [node name="OrientationLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
-offset_top = 3.0
-offset_right = 256.0
-offset_bottom = 17.0
+layout_mode = 2
 text = "Orientation:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Orientation" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
 unique_name_in_owner = true
-offset_left = 260.0
-offset_right = 516.0
-offset_bottom = 20.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
-text = "Rows"
-items = [ "Rows", null, false, 0, null, "Columns", null, false, 1, null ]
-selected = 0
+mouse_default_cursor_shape = 2
 
 [node name="LinesCountLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
 unique_name_in_owner = true
-offset_top = 29.0
-offset_right = 256.0
-offset_bottom = 43.0
+layout_mode = 2
 text = "Columns:"
 
 [node name="LinesCount" type="SpinBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
 unique_name_in_owner = true
-offset_left = 260.0
-offset_top = 24.0
-offset_right = 516.0
-offset_bottom = 48.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 1000.0
 value = 1.0
 
 [node name="FramesLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
-offset_top = 55.0
-offset_right = 256.0
-offset_bottom = 69.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Frames:"
 
 [node name="Frames" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
-offset_left = 260.0
-offset_top = 52.0
-offset_right = 516.0
-offset_bottom = 72.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
-text = "All frames"
-items = [ "All frames", null, false, 0, null, "Selected frames", null, false, 1, null ]
-selected = 0
+mouse_default_cursor_shape = 2
 
 [node name="LayersLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
-offset_top = 79.0
-offset_right = 256.0
-offset_bottom = 93.0
+layout_mode = 2
 text = "Layers:"
 
 [node name="Layers" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
-offset_left = 260.0
-offset_top = 76.0
-offset_right = 516.0
-offset_bottom = 96.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "Visible layers"
-items = [ "Visible layers", null, false, 0, null, "Selected layers", null, false, 1, null ]
-selected = 0
 
 [node name="DirectionLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
-offset_top = 103.0
-offset_right = 256.0
-offset_bottom = 117.0
+layout_mode = 2
 text = "Direction:"
 
 [node name="Direction" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
-offset_left = 260.0
-offset_top = 100.0
-offset_right = 516.0
-offset_bottom = 120.0
-custom_minimum_size = Vector2( 100, 0 )
-mouse_default_cursor_shape = 2
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 size_flags_horizontal = 3
-text = "Forward"
-items = [ "Forward", null, false, 0, null, "Backwards", null, false, 1, null, "Ping-Pong", null, false, 2, null ]
-selected = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+mouse_default_cursor_shape = 2
 
 [node name="ResizeLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
-offset_top = 124.0
-offset_right = 256.0
-offset_bottom = 138.0
-custom_minimum_size = Vector2( 30, 0 )
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
 text = "Resize:"
 
 [node name="Resize" type="TextureProgressBar" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
-offset_left = 260.0
-offset_top = 124.0
-offset_right = 516.0
-offset_bottom = 138.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
-theme_type_variation = "ValueSlider"
+theme_type_variation = &"ValueSlider"
 min_value = 50.0
 max_value = 1000.0
 step = 50.0
@@ -202,73 +140,53 @@ stretch_margin_left = 3
 stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
-script = ExtResource( 4 )
+script = ExtResource("4")
 suffix = "%"
 snap_step = 100.0
 
 [node name="DimensionLabelText" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
-offset_top = 142.0
-offset_right = 256.0
-offset_bottom = 156.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Export dimensions:"
 
 [node name="DimensionLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
-offset_left = 260.0
-offset_top = 142.0
-offset_right = 516.0
-offset_bottom = 156.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "64×64"
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
-offset_top = 160.0
-offset_right = 516.0
-offset_bottom = 164.0
+layout_mode = 2
 
 [node name="FilePath" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
-offset_top = 168.0
-offset_right = 516.0
-offset_bottom = 220.0
+layout_mode = 2
 columns = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" groups=["NotHTML5"]]
-offset_top = 5.0
-offset_right = 32.0
-offset_bottom = 19.0
-custom_minimum_size = Vector2( 30, 0 )
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
 text = "Path3D:"
 
 [node name="PathLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" groups=["NotHTML5"]]
 unique_name_in_owner = true
-offset_left = 36.0
-offset_right = 382.0
-offset_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
 caret_blink = true
 caret_blink_interval = 0.5
 
 [node name="PathButton" type="Button" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" groups=["NotHTML5"]]
-offset_left = 386.0
-offset_right = 516.0
-offset_bottom = 24.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Browse"
 
 [node name="Label2" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath"]
-offset_top = 33.0
-offset_right = 32.0
-offset_bottom = 47.0
-custom_minimum_size = Vector2( 30, 0 )
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
 text = "File:"
 
 [node name="FileLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath"]
 unique_name_in_owner = true
-offset_left = 36.0
-offset_top = 28.0
-offset_right = 382.0
-offset_bottom = 52.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "untitled"
 caret_blink = true
@@ -276,94 +194,69 @@ caret_blink_interval = 0.5
 
 [node name="FileFormat" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath"]
 unique_name_in_owner = true
-offset_left = 386.0
-offset_top = 28.0
-offset_right = 516.0
-offset_bottom = 52.0
-custom_minimum_size = Vector2( 130, 0 )
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
 mouse_default_cursor_shape = 2
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
-offset_top = 224.0
-offset_right = 516.0
-offset_bottom = 228.0
+layout_mode = 2
 
 [node name="GifWarning" type="RichTextLabel" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
-offset_top = 232.0
-offset_right = 516.0
-offset_bottom = 262.0
+layout_mode = 2
 bbcode_enabled = true
-text = "[center]If exported GIF is distorted, it is recommended to convert to APNG and then use any online tool like [color=blue][url]https://ezgif.com/apng-to-gif[/url][/color] to turn it to GIF[/center]"
 text = "If exported GIF is distorted, it is recommended to convert to APNG and then use any online tool like https://ezgif.com/apng-to-gif to turn it to GIF"
-fit_content_height = true
 
 [node name="CollapsibleContainer" type="VBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
-offset_top = 232.0
-offset_right = 516.0
-offset_bottom = 252.0
-theme_type_variation = "CollapsibleContainer"
-script = ExtResource( 3 )
+layout_mode = 2
+theme_type_variation = &"CollapsibleContainer"
+script = ExtResource("3")
 text = "Advanced options"
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer"]
 visible = false
-offset_top = 24.0
-offset_right = 516.0
-offset_bottom = 44.0
+layout_mode = 2
 columns = 2
 
 [node name="InterpolationLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer"]
-offset_top = 3.0
-offset_right = 256.0
-offset_bottom = 17.0
-custom_minimum_size = Vector2( 30, 0 )
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Interpolation:"
 
 [node name="Interpolation" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer"]
 unique_name_in_owner = true
-offset_left = 260.0
-offset_right = 516.0
-offset_bottom = 20.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
-text = "Nearest"
-items = [ "Nearest", null, false, 0, null, "Bilinear", null, false, 1, null, "Cubic", null, false, 2, null, "Trilinear", null, false, 3, null, "Lanczos", null, false, 4, null ]
-selected = 0
+mouse_default_cursor_shape = 2
 
 [node name="IncludeTagsInFilename" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
-offset_top = 24.0
-offset_right = 516.0
-offset_bottom = 48.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Include frame tags in the file name"
 
 [node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
 visible = false
-offset_top = 24.0
-offset_right = 516.0
-offset_bottom = 48.0
+layout_mode = 2
 tooltip_text = "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 mouse_default_cursor_shape = 2
 text = "Create new folder for each frame tag"
 
 [node name="SeparatorCharacterLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer" groups=["ExportImageOptions"]]
-offset_top = 3.0
-offset_right = 256.0
-offset_bottom = 17.0
-custom_minimum_size = Vector2( 30, 0 )
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Separator character(s):"
 
 [node name="SeparatorCharacter" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesEditableOptions"]]
-offset_right = 58.0
-offset_bottom = 24.0
+layout_mode = 2
 tooltip_text = "The character(s) that separate the file name and the frame number"
 text = "_"
 
 [node name="Popups" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 524.0
@@ -371,86 +264,37 @@ offset_bottom = 494.0
 mouse_filter = 2
 
 [node name="PathDialog" type="FileDialog" parent="Popups"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 448.0
-offset_bottom = 494.0
-custom_minimum_size = Vector2( 440, 300 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-window_title = "Open a DirAccess"
-resizable = true
 mode = 2
 access = 2
 show_hidden_files = true
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="Popups"]
-offset_left = 8.0
-offset_top = 180.0
-offset_right = 448.0
-offset_bottom = 280.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-window_title = "Alarm!"
-resizable = true
 dialog_text = "DirAccess path and file name are not valid!"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="FileExistsAlert" type="AcceptDialog" parent="Popups"]
-offset_left = 10.5227
-offset_top = 176.636
-offset_right = 450.523
-offset_bottom = 276.636
-size_flags_horizontal = 0
-size_flags_vertical = 0
-window_title = "Alarm!"
-resizable = true
 dialog_text = "File %s already exists. Overwrite?"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ExportProgressBar" type="Window" parent="Popups"]
-offset_left = 63.0
-offset_top = 215.0
-offset_right = 402.0
-offset_bottom = 256.0
+visible = false
 exclusive = true
-window_title = "Exporting in progress..."
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
 
 [node name="MarginContainer" type="MarginContainer" parent="Popups/ExportProgressBar"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
 offset_top = 5.0
 offset_right = -5.0
 offset_bottom = -5.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ProgressBar" type="ProgressBar" parent="Popups/ExportProgressBar/MarginContainer"]
-offset_right = 329.0
-offset_bottom = 14.0
+layout_mode = 2
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="FrameTimer" type="Timer" parent="."]
-__meta__ = {
-"_editor_description_": "Timer to advance animation frames in animation preview."
-}
 
 [connection signal="about_to_popup" from="." to="." method="_on_ExportDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ExportDialog_confirmed"]
-[connection signal="popup_hide" from="." to="." method="_on_ExportDialog_popup_hide"]
 [connection signal="tab_clicked" from="VBoxContainer/TabBar" to="." method="_on_Tabs_tab_clicked"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Orientation" to="." method="_on_Orientation_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/LinesCount" to="." method="_on_LinesCount_value_changed"]

@@ -1,63 +1,52 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://dl6ook010q86o"]
 
-[ext_resource path="res://assets/graphics/recorder/start.png" type="Texture2D" id=1]
-[ext_resource path="res://src/UI/Recorder/Recorder.gd" type="Script" id=2]
-[ext_resource path="res://assets/graphics/timeline/expandable.png" type="Texture2D" id=3]
-[ext_resource path="res://addons/keychain/assets/folder.svg" type="Texture2D" id=4]
+[ext_resource type="Texture2D" uid="uid://bgfqvkmstecr5" path="res://assets/graphics/recorder/start.png" id="1"]
+[ext_resource type="Script" path="res://src/UI/Recorder/Recorder.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://dinubfua8gqhw" path="res://assets/graphics/timeline/expandable.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cseq7ckdh0ano" path="res://addons/keychain/assets/folder.svg" id="4"]
 
 [node name="Recorder" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 36)
 offset_left = 1.0
 offset_right = 195.0
 offset_bottom = 50.0
-custom_minimum_size = Vector2( 0, 36 )
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 187.0
-offset_bottom = 43.0
-custom_minimum_size = Vector2( 36, 36 )
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="ScrollContainer"]
-offset_right = 180.0
-offset_bottom = 36.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer/CenterContainer"]
-offset_left = 4.0
-offset_top = 2.0
-offset_right = 176.0
-offset_bottom = 34.0
+layout_mode = 2
 size_flags_vertical = 0
 columns = 4
 
 [node name="Captured" type="Label" parent="ScrollContainer/CenterContainer/GridContainer"]
 visible = false
-offset_top = 9.0
-offset_right = 32.0
-offset_bottom = 23.0
+layout_mode = 2
 
 [node name="TargetProjectOption" type="OptionButton" parent="ScrollContainer/CenterContainer/GridContainer"]
 unique_name_in_owner = true
-offset_right = 100.0
-offset_bottom = 32.0
-custom_minimum_size = Vector2( 100, 0 )
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 tooltip_text = "Choose project"
 clip_text = true
 
 [node name="Start" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 unique_name_in_owner = true
-offset_left = 104.0
-offset_right = 136.0
-offset_bottom = 32.0
-custom_minimum_size = Vector2( 32, 32 )
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
 tooltip_text = "Capture .png frames"
 mouse_default_cursor_shape = 2
 toggle_mode = true
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Start"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -66,21 +55,20 @@ offset_left = -10.0
 offset_top = -10.5
 offset_right = 10.0
 offset_bottom = 10.5
-texture = ExtResource( 1 )
-expand = true
+texture = ExtResource("1")
+expand_mode = 1
 stretch_mode = 6
 
 [node name="Settings" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
 unique_name_in_owner = true
-offset_left = 140.0
-offset_right = 172.0
-offset_bottom = 32.0
-custom_minimum_size = Vector2( 32, 32 )
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
 tooltip_text = "Settings"
 mouse_default_cursor_shape = 2
 toggle_mode = true
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Settings"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -89,47 +77,38 @@ offset_left = -10.0
 offset_top = -10.5
 offset_right = 10.0
 offset_bottom = 10.5
-texture = ExtResource( 3 )
+texture = ExtResource("3")
 stretch_mode = 6
 
 [node name="Folder" type="Button" parent="ScrollContainer/CenterContainer/GridContainer"]
 unique_name_in_owner = true
 visible = false
-offset_left = 176.0
-offset_right = 208.0
-offset_bottom = 32.0
-custom_minimum_size = Vector2( 32, 32 )
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
 tooltip_text = "Open Folder"
 mouse_default_cursor_shape = 2
 toggle_mode = true
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Folder"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 3.0
 offset_top = 3.0
 offset_right = -3.0
 offset_bottom = -3.0
-texture = ExtResource( 4 )
+texture = ExtResource("4")
 stretch_mode = 6
 
 [node name="Dialogs" type="Control" parent="."]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 187.0
-offset_bottom = 43.0
+layout_mode = 2
 mouse_filter = 2
 
 [node name="Options" type="Window" parent="Dialogs"]
-offset_right = 293.0
-offset_bottom = 259.0
-custom_minimum_size = Vector2( 295, 260 )
-window_title = "Options"
+visible = false
 
 [node name="PanelContainer" type="PanelContainer" parent="Dialogs/Options"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 9.0
@@ -138,221 +117,147 @@ offset_right = -9.0
 offset_bottom = -9.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Dialogs/Options/PanelContainer"]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 270.0
-offset_bottom = 235.0
+layout_mode = 2
 
 [node name="IntervalHeader" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
-offset_right = 263.0
-offset_bottom = 14.0
+layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/IntervalHeader"]
-offset_right = 49.0
-offset_bottom = 14.0
-theme_type_variation = "Header"
+layout_mode = 2
+theme_type_variation = &"Header"
 text = "Interval"
 
 [node name="HSeparator" type="HSeparator" parent="Dialogs/Options/PanelContainer/VBoxContainer/IntervalHeader"]
-offset_left = 49.0
-offset_right = 263.0
-offset_bottom = 14.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ActionGap" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
-offset_top = 18.0
-offset_right = 263.0
-offset_bottom = 42.0
+layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ActionGap"]
-offset_left = 2.0
-offset_top = 5.0
-offset_right = 131.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Capture frame every"
 
 [node name="SkipAmount" type="SpinBox" parent="Dialogs/Options/PanelContainer/VBoxContainer/ActionGap"]
-offset_left = 135.0
-offset_right = 209.0
-offset_bottom = 24.0
+layout_mode = 2
 
 [node name="Label2" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ActionGap"]
-offset_left = 213.0
-offset_top = 5.0
-offset_right = 261.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Actions"
 
 [node name="Fps" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
-offset_top = 46.0
-offset_right = 263.0
-offset_bottom = 70.0
+layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/Fps"]
-offset_left = 36.0
-offset_top = 5.0
-offset_right = 62.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Fps:"
 
 [node name="Fps" type="SpinBox" parent="Dialogs/Options/PanelContainer/VBoxContainer/Fps"]
-offset_left = 66.0
-offset_right = 140.0
-offset_bottom = 24.0
+layout_mode = 2
 min_value = 1.0
 value = 30.0
 allow_greater = true
 
 [node name="Duration" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/Fps"]
-offset_left = 144.0
-offset_top = 5.0
-offset_right = 226.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "= 0.0333 sec"
 
 [node name="ModeHeader" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer" groups=["visible during recording"]]
-offset_top = 74.0
-offset_right = 263.0
-offset_bottom = 88.0
+layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeHeader"]
-offset_right = 36.0
-offset_bottom = 14.0
-theme_type_variation = "Header"
+layout_mode = 2
+theme_type_variation = &"Header"
 text = "Mode"
 
 [node name="HSeparator" type="HSeparator" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeHeader"]
-offset_left = 36.0
-offset_right = 263.0
-offset_bottom = 14.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ModeType" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer" groups=["visible during recording"]]
-offset_top = 92.0
-offset_right = 263.0
-offset_bottom = 132.0
+layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeType"]
-offset_left = 15.0
-offset_top = 13.0
-offset_right = 93.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Canvas Only"
 
 [node name="Mode" type="CheckButton" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeType"]
-offset_left = 97.0
-offset_right = 173.0
-offset_bottom = 40.0
-align = 1
+layout_mode = 2
 
 [node name="Label2" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeType"]
-offset_left = 177.0
-offset_top = 13.0
-offset_right = 248.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Pixelorama"
 
 [node name="ExportDimentions" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
-offset_top = 136.0
-offset_right = 263.0
-offset_bottom = 160.0
+layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ExportDimentions"]
-offset_left = 47.0
-offset_top = 5.0
-offset_right = 133.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Optput Scale:"
-align = 1
 
 [node name="Size" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ExportDimentions"]
 unique_name_in_owner = true
-offset_left = 137.0
-offset_top = 5.0
-offset_right = 137.0
-offset_bottom = 19.0
+layout_mode = 2
 
 [node name="Resize" type="SpinBox" parent="Dialogs/Options/PanelContainer/VBoxContainer/ExportDimentions"]
-offset_left = 141.0
-offset_right = 215.0
-offset_bottom = 24.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 min_value = 50.0
 max_value = 1000.0
 step = 100.0
-value = 100.0
+value = 150.0
 allow_greater = true
 suffix = "%"
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="PathHeader" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
-offset_top = 164.0
-offset_right = 263.0
-offset_bottom = 178.0
+layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathHeader"]
-offset_right = 28.0
-offset_bottom = 14.0
-theme_type_variation = "Header"
+layout_mode = 2
+theme_type_variation = &"Header"
 text = "Path3D"
 
 [node name="HSeparator" type="HSeparator" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathHeader"]
-offset_left = 28.0
-offset_right = 263.0
-offset_bottom = 14.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PathContainer" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
-offset_top = 182.0
-offset_right = 263.0
-offset_bottom = 207.0
+layout_mode = 2
 
 [node name="Path3D" type="LineEdit" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer"]
 unique_name_in_owner = true
-offset_right = 171.0
-offset_bottom = 25.0
+layout_mode = 2
 size_flags_horizontal = 3
-align = 1
-editable = false
 placeholder_text = "Choose Destination --->"
+editable = false
 
 [node name="Open" type="Button" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer"]
-offset_left = 175.0
-offset_right = 200.0
-offset_bottom = 25.0
-custom_minimum_size = Vector2( 25, 25 )
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer/Open"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
-texture = ExtResource( 4 )
+texture = ExtResource("4")
 stretch_mode = 6
 
 [node name="Choose" type="Button" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer"]
-offset_left = 204.0
-offset_right = 263.0
-offset_bottom = 25.0
+layout_mode = 2
 text = "Choose"
 
 [node name="Path3D" type="FileDialog" parent="Dialogs"]
-offset_right = 445.0
-offset_bottom = 290.0
-custom_minimum_size = Vector2( 315, 290 )
-window_title = "Open a DirAccess"
-resizable = true
 mode = 2
 access = 2
 
