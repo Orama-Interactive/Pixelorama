@@ -246,7 +246,6 @@ margin_left = 36.0
 margin_right = 382.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
-align = 2
 caret_blink = true
 caret_blink_speed = 0.5
 

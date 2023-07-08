@@ -462,11 +462,11 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 	general_undo_scale()
 
 
-func centralize(indices: Array) -> void:
+func center(indices: Array) -> void:
 	var project: Project = Global.current_project
 	Global.canvas.selection.transform_content_confirm()
 	project.undos += 1
-	project.undo_redo.create_action("Centralize")
+	project.undo_redo.create_action("Center Frames")
 	for frame in indices:
 		# Find used rect of the current frame (across all of the layers)
 		var used_rect := Rect2()
@@ -479,7 +479,7 @@ func centralize(indices: Array) -> void:
 		if used_rect.has_no_area():
 			continue
 
-		# Now apply Centralization
+		# Now apply centering
 		var offset: Vector2 = (0.5 * (project.size - used_rect.size)).floor()
 		for cel in project.frames[frame].cels:
 			if not cel is PixelCel:

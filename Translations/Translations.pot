@@ -158,7 +158,7 @@ msgstr ""
 msgid "Wrap around:"
 msgstr ""
 
-msgid "Centralize Image"
+msgid "Center Frames"
 msgstr ""
 
 msgid "Rotate Image"

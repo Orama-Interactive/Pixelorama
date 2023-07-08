@@ -463,7 +463,7 @@ func undo_or_redo(
 			"Select",
 			"Move Selection",
 			"Scale",
-			"Centralize",
+			"Center Frames",
 			"Merge Layer",
 			"Link Cel",
 			"Unlink Cel"

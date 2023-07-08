@@ -331,6 +331,7 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 	var x := start.x
 	var y := start.y
 	_prepare_tool()
+	# This needs to be a dictionary to ensure duplicate coordinates are not being added
 	var coords_to_draw := {}
 	while !(x == end.x && y == end.y):
 		e2 = err << 1
@@ -340,8 +341,7 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 		if e2 <= dx:
 			err += dx
 			y += sy
-		#coords_to_draw.append_array(_draw_tool(Vector2(x, y)))
-		var current_pixel_coord = Vector2(x, y)
+		var current_pixel_coord := Vector2(x, y)
 		if _spacing_mode:
 			current_pixel_coord = get_spacing_position(current_pixel_coord)
 		for coord in _draw_tool(current_pixel_coord):

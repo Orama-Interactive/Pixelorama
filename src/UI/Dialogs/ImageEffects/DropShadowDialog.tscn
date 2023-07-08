@@ -5,7 +5,6 @@
 [ext_resource path="res://src/UI/Nodes/ValueSliderV2.tscn" type="PackedScene" id=3]
 
 [node name="DropShadowDialog" instance=ExtResource( 1 )]
-visible = false
 window_title = "Drop Shadow"
 script = ExtResource( 2 )
 
@@ -69,6 +68,9 @@ color = Color( 0.0823529, 0.0823529, 0.0823529, 0.627451 )
 [node name="OptionsContainer" parent="VBoxContainer" index="3"]
 margin_top = 308.0
 margin_bottom = 332.0
+
+[node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
+items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 
 [node name="AnimateDialog" parent="." index="4"]
 margin_bottom = 340.0

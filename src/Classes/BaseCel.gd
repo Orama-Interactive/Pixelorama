@@ -54,7 +54,6 @@ func update_texture() -> void:
 		if self in Global.current_project.frames[frame].cels:
 			for cel in link_set["cels"]:
 				cel.emit_signal("texture_changed")
-	return
 
 
 func serialize() -> Dictionary:
