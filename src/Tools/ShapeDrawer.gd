@@ -34,7 +34,7 @@ func update_indicator() -> void:
 	var t_offsetv := Vector2(t_offset, t_offset)
 	indicator.create(rect.size + t_offsetv)
 	for point in points:
-		indicator.set_bit(point, 1)
+		indicator.set_bitv(point, 1)
 
 	_indicator = indicator
 	_polylines = _create_polylines(_indicator)
@@ -157,7 +157,7 @@ func draw_preview() -> void:
 		var t_offsetv := Vector2(t_offset, t_offset)
 		indicator.create(rect.size + t_offsetv)
 		for point in points:
-			indicator.set_bit(point, 1)
+			indicator.set_bitv(point, 1)
 
 		var transform_pos: Vector2 = rect.position - t_offsetv + Vector2(0.5, 0.5) * (t_offset - 1)
 		canvas.draw_set_transform(transform_pos.ceil(), canvas.rotation, canvas.scale)
@@ -191,7 +191,7 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 		var new_size := (dest - origin).floor()
 		# Make rect 1:1 while centering it on the mouse
 		if Input.is_action_pressed("shape_perfect"):
-			var square_size := max(abs(new_size.x), abs(new_size.y))
+			var square_size := maxf(absf(new_size.x), absf(new_size.y))
 			new_size = Vector2(square_size, square_size)
 
 		origin -= new_size
@@ -199,7 +199,7 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 
 	# Make rect 1:1 while not trying to center it
 	if Input.is_action_pressed("shape_perfect"):
-		var square_size := min(abs(origin.x - dest.x), abs(origin.y - dest.y))
+		var square_size := minf(absf(origin.x - dest.x), absf(origin.y - dest.y))
 		rect.position.x = origin.x if origin.x < dest.x else origin.x - square_size
 		rect.position.y = origin.y if origin.y < dest.y else origin.y - square_size
 		rect.size = Vector2(square_size, square_size)

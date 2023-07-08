@@ -7,7 +7,7 @@ const CIRCLE_RAD := 4
 var angle := 0
 var length := 19999
 
-var hidden = false
+var is_hidden = false
 var has_focus := false
 var track_mouse := false
 var change_length = false
@@ -44,7 +44,7 @@ func refresh():
 func draw_perspective_line():
 	var start = Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
 	points[0] = start
-	if hidden:
+	if is_hidden:
 		points[1] = start
 	else:
 		points[1] = (start + Vector2(length * cos(deg_to_rad(angle)), length * sin(deg_to_rad(angle))))
@@ -53,7 +53,7 @@ func draw_perspective_line():
 func hide_perspective_line():
 	var start = Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
 	points[1] = start
-	hidden = true
+	is_hidden = true
 
 
 func _input(event: InputEvent) -> void:
@@ -68,7 +68,7 @@ func _input(event: InputEvent) -> void:
 			default_color.a = 0.5
 			if Rect2(Vector2.ZERO, project_size).has_point(mouse_point):
 				var start = Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
-				hidden = false
+				is_hidden = false
 				draw_perspective_line()
 				angle = rad_to_deg(mouse_point.angle_to_point(points[0]))
 				if angle < 0:
@@ -82,7 +82,7 @@ func _input(event: InputEvent) -> void:
 				hide_perspective_line()
 		else:
 			try_rotate_scale()
-		update()
+		queue_redraw()
 
 
 func try_rotate_scale():
@@ -93,7 +93,7 @@ func try_rotate_scale():
 	var from_b = mouse_point + test_line * Global.camera.zoom.x * LINE_WIDTH * 2
 	if Input.is_action_just_pressed("left_mouse") and Global.can_draw and Global.has_focus:
 		if (
-			Geometry.segment_intersects_segment(from_a, from_b, points[0], points[1])
+			Geometry2D.segment_intersects_segment(from_a, from_b, points[0], points[1])
 			or mouse_point.distance_to(points[1]) < Global.camera.zoom.x * CIRCLE_RAD * 2
 		):
 			if (
@@ -104,7 +104,7 @@ func try_rotate_scale():
 					change_length = true
 				has_focus = true
 				Global.has_focus = false
-				update()
+				queue_redraw()
 	if has_focus:
 		if Input.is_action_pressed("left_mouse"):
 			# rotation code here
@@ -121,7 +121,7 @@ func try_rotate_scale():
 			Global.has_focus = true
 			has_focus = false
 			change_length = false
-			update()
+			queue_redraw()
 
 
 func _draw() -> void:
@@ -152,5 +152,5 @@ func _draw() -> void:
 		draw_arc(point, Global.camera.zoom.x * CIRCLE_RAD * 2, 0, 360, 360, default_color, 0.5)
 
 	width = Global.camera.zoom.x * LINE_WIDTH
-	if hidden:  # Hidden line
+	if is_hidden:  # Hidden line
 		return

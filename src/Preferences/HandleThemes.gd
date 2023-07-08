@@ -20,7 +20,7 @@ var theme_button_group := ButtonGroup.new()
 func _ready() -> void:
 	for theme in themes:
 		add_theme(theme)
-	await get_tree().idle_frame
+	await get_tree().process_frame
 
 	var theme_id: int = Global.config_cache.get_value("preferences", "theme", 0)
 	if theme_id >= themes.size():

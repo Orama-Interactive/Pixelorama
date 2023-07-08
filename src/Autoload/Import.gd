@@ -28,9 +28,8 @@ func get_brush_files_from_directory(directory: String):  # -> Array
 	var randomised_subdir_files_map: Dictionary = {}
 	var nonrandomised_subdir_files_map: Dictionary = {}
 
-	var main_directory: DirAccess = DirAccess.new()
-	var err := main_directory.open(directory)
-	if err != OK:
+	var main_directory := DirAccess.open(directory)
+	if DirAccess.get_open_error() != OK:
 		return null
 
 	# Build first the list of base png files and all subdirectories to
@@ -50,8 +49,6 @@ func get_brush_files_from_directory(directory: String):  # -> Array
 
 	# Now we iterate over subdirectories!
 	for subdirectory in subdirectories:
-		var the_directory: DirAccess = DirAccess.new()
-
 		# Holds names of files that make this
 		# a component of a randomised brush ^.^
 		var randomised_files := []
@@ -59,7 +56,7 @@ func get_brush_files_from_directory(directory: String):  # -> Array
 		# Non-randomise-indicated image files
 		var non_randomised_files := []
 
-		the_directory.open(directory.plus_file(subdirectory))
+		var the_directory := DirAccess.open(directory.path_join(subdirectory))
 		the_directory.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var curr_file := the_directory.get_next()
 
@@ -158,7 +155,7 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 			for subfile in main_directory_file_paths:
 				if not (subfile in processed_basedir_paths):
 					add_plain_brush(
-						current_main_directory.plus_file(subfile), subfile.get_basename()
+						current_main_directory.path_join(subfile), subfile.get_basename()
 					)
 					processed_basedir_paths[subfile] = true
 
@@ -171,7 +168,7 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 					# opened nya
 					for non_extended_path in randomised_brush_subdirectory_map[randomised_subdir]:
 						full_paths.append(
-							current_main_directory.plus_file(randomised_subdir).plus_file(
+							current_main_directory.path_join(randomised_subdir).path_join(
 								non_extended_path
 							)
 						)
@@ -190,12 +187,12 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 				for relative_path in relpaths_of_nonrandom_brushes:
 					if not (relative_path in processed_subdir_paths[nonrandomised_subdir]):
 						# We are not yet processed
-						var full_path: String = current_main_directory.plus_file(nonrandomised_subdir).plus_file(
+						var full_path: String = current_main_directory.path_join(nonrandomised_subdir).path_join(
 							relative_path
 						)
 						# Add the path with the tooltip including the directory
 						add_plain_brush(
-							full_path, nonrandomised_subdir.plus_file(relative_path).get_basename()
+							full_path, nonrandomised_subdir.path_join(relative_path).get_basename()
 						)
 						# Mark this as a processed relpath
 						processed_subdir_paths[nonrandomised_subdir][relative_path] = true
@@ -204,8 +201,7 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 func import_patterns(priority_ordered_search_path: Array) -> void:
 	for path in priority_ordered_search_path:
 		var pattern_list := []
-		var dir := DirAccess.new()
-		dir.open(path)
+		var dir := DirAccess.open(path)
 		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var curr_file := dir.get_next()
 		while curr_file != "":
@@ -216,7 +212,7 @@ func import_patterns(priority_ordered_search_path: Array) -> void:
 
 		for pattern in pattern_list:
 			var image := Image.new()
-			var err := image.load(path.plus_file(pattern))
+			var err := image.load(path.path_join(pattern))
 			if err == OK:
 				image.convert(Image.FORMAT_RGBA8)
 				var tooltip_name = pattern.get_basename()

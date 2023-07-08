@@ -23,7 +23,7 @@ float modify_uv(vec2 uv) {
 		vec2 uv_offsetted = uv - 0.5;
 		float angle_cos = cos(radians(angle));
 		float angle_sin = sin(radians(angle));
-		modified_uv = uv_offsetted.x * angle_cos - uv_offsetted.y * angle_sin; 
+		modified_uv = uv_offsetted.x * angle_cos - uv_offsetted.y * angle_sin;
 		modified_uv /= abs(angle_cos) + abs(angle_sin);
 		modified_uv /= size;
 		float pivot = position / size;
@@ -45,7 +45,7 @@ float mirror_fract(float uv) {
 		uv = fract(uv);
 	else
 		uv = fract(1.0 - uv);
-	
+
 	return uv;
 }
 
@@ -71,12 +71,7 @@ void fragment() {
 		modified_uv = mirror_fract(modified_uv);
 
 	vec4 output;
-	// Note for the future, please remember to change 100 to n_of_colors when we
-	// use GLES3 for the Web version. A constant number is used to make it work in WebGL 1.0.
-	for (int i = 1; i <= 100; i++) {
-		if(i > n_of_colors) {
-			break;
-		}
+	for (int i = 1; i <= n_of_colors; i++) {
 		float colors_minus = float(n_of_colors - 1);
 		float off = texture(offset_texture, vec2(float(i) / colors_minus)).r;
 		float off_prev = texture(offset_texture, vec2(float(i - 1) / colors_minus)).r;

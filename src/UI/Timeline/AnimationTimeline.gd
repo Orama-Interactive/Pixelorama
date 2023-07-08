@@ -110,12 +110,12 @@ func adjust_scroll_container():
 func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
 	Global.config_cache.set_value("timeline", "layer_size", layer_frame_h_split.split_offset)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-		minimum_size_changed()  # After you're done resizing the layers, update min size
+		update_minimum_size()  # After you're done resizing the layers, update min size
 
 
 func cel_size_changed(value: int) -> void:
 	cel_size = clamp(value, min_cel_size, max_cel_size)
-	minimum_size_changed()
+	update_minimum_size()
 	Global.config_cache.set_value("timeline", "cel_size", cel_size)
 	for layer_button in Global.layer_vbox.get_children():
 		layer_button.custom_minimum_size.y = cel_size
@@ -157,9 +157,9 @@ func add_frame() -> void:
 			if prev_cel.link_set == null:
 				prev_cel.link_set = {}
 				project.undo_redo.add_do_method(
-					project.layers[l], "link_cel", prev_cel, prev_cel.link_set
+					project.layers[l].link_cel.bind(prev_cel, prev_cel.link_set)
 				)
-				project.undo_redo.add_undo_method(project.layers[l], "link_cel", prev_cel, null)
+				project.undo_redo.add_undo_method(project.layers[l].link_cel.bind(prev_cel, null))
 			frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
 			frame.cels[l].link_set = prev_cel.link_set
 
@@ -182,18 +182,18 @@ func add_frame() -> void:
 			tag.from += 1
 			tag.to += 1
 
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(project, "add_frames", [frame], [frame_add_index])
-	project.undo_redo.add_undo_method(project, "remove_frames", [frame_add_index])
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(project.add_frames.bind([frame], [frame_add_index]))
+	project.undo_redo.add_undo_method(project.remove_frames.bind([frame_add_index]))
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
-	project.undo_redo.add_do_method(project, "change_cel", project.current_frame + 1)
-	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
+	project.undo_redo.add_do_method(project.change_cel.bind(project.current_frame + 1))
+	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
 	project.undo_redo.commit_action()
 	# it doesn't update properly without yields
-	await get_tree().idle_frame
-	await get_tree().idle_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
 	adjust_scroll_container()
 
 
@@ -214,7 +214,7 @@ func delete_frames(indices := []) -> void:
 		indices.sort()
 
 	if indices.size() == project.frames.size():
-		indices.remove(indices.size() - 1)  # Ensure the project has at least 1 frame
+		indices.remove_at(indices.size() - 1)  # Ensure the project has at least 1 frame
 
 	var current_frame: int = min(project.current_frame, project.frames.size() - indices.size() - 1)
 	var frames := []
@@ -252,18 +252,18 @@ func delete_frames(indices := []) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Remove Frame")
-	project.undo_redo.add_do_method(project, "remove_frames", indices)
-	project.undo_redo.add_undo_method(project, "add_frames", frames, indices)
+	project.undo_redo.add_do_method(project.remove_frames.bind(indices))
+	project.undo_redo.add_undo_method(project.add_frames.bind(frames, indices))
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
-	project.undo_redo.add_do_method(project, "change_cel", current_frame)
-	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(project.change_cel.bind(current_frame))
+	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
 	# it doesn't update properly without yields
-	await get_tree().idle_frame
-	await get_tree().idle_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
 	adjust_scroll_container()
 
 
@@ -323,9 +323,9 @@ func copy_frames(indices := [], destination := -1) -> void:
 				if src_cel.link_set == null:
 					src_cel.link_set = {}
 					project.undo_redo.add_do_method(
-						project.layers[l], "link_cel", src_cel, src_cel.link_set
+						project.layers[l].link_cel.bind(src_cel, src_cel.link_set)
 					)
-					project.undo_redo.add_undo_method(project.layers[l], "link_cel", src_cel, null)
+					project.undo_redo.add_undo_method(project.layers[l].link_cel.bind(src_cel, null))
 				new_cel.set_content(src_cel.get_content(), src_cel.image_texture)
 				new_cel.link_set = src_cel.link_set
 			else:
@@ -344,12 +344,12 @@ func copy_frames(indices := [], destination := -1) -> void:
 			elif copied_indices[0] < tag.from:
 				tag.from += 1
 				tag.to += 1
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(project, "add_frames", copied_frames, copied_indices)
-	project.undo_redo.add_undo_method(project, "remove_frames", copied_indices)
-	project.undo_redo.add_do_method(project, "change_cel", copied_indices[0])
-	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(project.add_frames.bind(copied_frames, copied_indices))
+	project.undo_redo.add_undo_method(project.remove_frames.bind(copied_indices))
+	project.undo_redo.add_do_method(project.change_cel.bind(copied_indices[0]))
+	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
 	project.undo_redo.commit_action()
@@ -366,8 +366,8 @@ func copy_frames(indices := [], destination := -1) -> void:
 			if !Global.current_project.selected_cels.has(frame_layer):
 				Global.current_project.selected_cels.append(frame_layer)
 	Global.current_project.change_cel(range_end, -1)
-	await get_tree().idle_frame
-	await get_tree().idle_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
 	adjust_scroll_container()
 
 
@@ -394,8 +394,8 @@ func reverse_frames(indices := []) -> void:
 	project.undo_redo.create_action("Change Frame Order")
 	project.undo_redo.add_do_method(project, "reverse_frames", indices)
 	project.undo_redo.add_undo_method(project, "reverse_frames", indices)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
 
 
@@ -599,19 +599,19 @@ func _on_FPSValue_value_changed(value: float) -> void:
 func _on_PastOnionSkinning_value_changed(value: float) -> void:
 	Global.onion_skinning_past_rate = int(value)
 	Global.config_cache.set_value("timeline", "past_rate", Global.onion_skinning_past_rate)
-	Global.canvas.update()
+	Global.canvas.queue_redraw()
 
 
 func _on_FutureOnionSkinning_value_changed(value: float) -> void:
 	Global.onion_skinning_future_rate = int(value)
 	Global.config_cache.set_value("timeline", "future_rate", Global.onion_skinning_future_rate)
-	Global.canvas.update()
+	Global.canvas.queue_redraw()
 
 
 func _on_BlueRedMode_toggled(button_pressed: bool) -> void:
 	Global.onion_skinning_blue_red = button_pressed
 	Global.config_cache.set_value("timeline", "blue_red", Global.onion_skinning_blue_red)
-	Global.canvas.update()
+	Global.canvas.queue_redraw()
 
 
 func _on_PastPlacement_item_selected(index: int) -> void:
@@ -663,12 +663,12 @@ func add_layer(type: int) -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
-	project.undo_redo.add_do_method(project, "add_layers", [l], [new_layer_idx], [cels])
-	project.undo_redo.add_undo_method(project, "remove_layers", [new_layer_idx])
-	project.undo_redo.add_do_method(project, "change_cel", -1, new_layer_idx)
-	project.undo_redo.add_undo_method(project, "change_cel", -1, project.current_layer)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(project.add_layers.bind([l], [new_layer_idx], [cels]))
+	project.undo_redo.add_undo_method(project.remove_layers.bind([new_layer_idx]))
+	project.undo_redo.add_do_method(project.change_cel.bind(-1, new_layer_idx))
+	project.undo_redo.add_undo_method(project.change_cel.bind(-1, project.current_layer))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
 
 
@@ -728,14 +728,14 @@ func _on_CloneLayer_pressed() -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Add Layer")
-	project.undo_redo.add_do_method(project, "add_layers", clones, indices, cels)
-	project.undo_redo.add_undo_method(project, "remove_layers", indices)
+	project.undo_redo.add_do_method(project.add_layers.bind(clones, indices, cels))
+	project.undo_redo.add_undo_method(project.remove_layers.bind(indices))
 	project.undo_redo.add_do_method(
-		project, "change_cel", -1, project.current_layer + clones.size()
+		project.change_cel.bind(-1, project.current_layer + clones.size())
 	)
-	project.undo_redo.add_undo_method(project, "change_cel", -1, project.current_layer)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_undo_method(project.change_cel.bind(-1, project.current_layer))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
 
 
@@ -758,12 +758,12 @@ func _on_RemoveLayer_pressed() -> void:
 
 	project.undos += 1
 	project.undo_redo.create_action("Remove Layer")
-	project.undo_redo.add_do_method(project, "remove_layers", indices)
-	project.undo_redo.add_undo_method(project, "add_layers", layers, indices, cels)
-	project.undo_redo.add_do_method(project, "change_cel", -1, max(indices[0] - 1, 0))
-	project.undo_redo.add_undo_method(project, "change_cel", -1, project.current_layer)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(project.remove_layers.bind(indices))
+	project.undo_redo.add_undo_method(project.add_layers.bind(layers, indices, cels))
+	project.undo_redo.add_do_method(project.change_cel.bind(-1, max(indices[0] - 1, 0)))
+	project.undo_redo.add_undo_method(project.change_cel.bind(-1, project.current_layer))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
 
 
@@ -813,14 +813,14 @@ func change_layer_order(up: bool) -> void:
 	var to_indices := range(to_index, to_index + child_count + 1)
 
 	project.undo_redo.create_action("Change Layer Order")
-	project.undo_redo.add_do_method(project, "move_layers", from_indices, to_indices, to_parents)
+	project.undo_redo.add_do_method(project.move_layers.bind(from_indices, to_indices, to_parents))
 	project.undo_redo.add_undo_method(
-		project, "move_layers", to_indices, from_indices, from_parents
+		project.move_layers.bind(to_indices, from_indices, from_parents)
 	)
-	project.undo_redo.add_do_method(project, "change_cel", -1, to_index + child_count)
-	project.undo_redo.add_undo_method(project, "change_cel", -1, project.current_layer)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(project.change_cel.bind(-1, to_index + child_count))
+	project.undo_redo.add_undo_method(project.change_cel.bind(-1, project.current_layer))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
 
 
@@ -859,9 +859,9 @@ func _on_MergeDownLayer_pressed() -> void:
 			and not top_image.is_invisible()
 		):
 			# Unlink cel:
-			project.undo_redo.add_do_method(bottom_layer, "link_cel", bottom_cel, null)
+			project.undo_redo.add_do_method(bottom_layer.link_cel.bind(bottom_cel, null))
 			project.undo_redo.add_undo_method(
-				bottom_layer, "link_cel", bottom_cel, bottom_cel.link_set
+				bottom_layer.link_cel.bind(bottom_cel, bottom_cel.link_set)
 			)
 			project.undo_redo.add_do_property(bottom_cel, "image_texture", ImageTexture.new())
 			project.undo_redo.add_undo_property(
@@ -873,14 +873,14 @@ func _on_MergeDownLayer_pressed() -> void:
 			project.undo_redo.add_do_property(bottom_cel.image, "data", bottom_image.data)
 			project.undo_redo.add_undo_property(bottom_cel.image, "data", bottom_cel.image.data)
 
-	project.undo_redo.add_do_method(project, "remove_layers", [top_layer.index])
+	project.undo_redo.add_do_method(project.remove_layers.bind([top_layer.index]))
 	project.undo_redo.add_undo_method(
-		project, "add_layers", [top_layer], [top_layer.index], [top_cels]
+		project.add_layers.bind([top_layer], [top_layer.index], [top_cels])
 	)
-	project.undo_redo.add_do_method(project, "change_cel", -1, bottom_layer.index)
-	project.undo_redo.add_undo_method(project, "change_cel", -1, top_layer.index)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_do_method(project.change_cel.bind(-1, bottom_layer.index))
+	project.undo_redo.add_undo_method(project.change_cel.bind(-1, top_layer.index))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
 
 
@@ -893,7 +893,7 @@ func _on_OpacitySlider_value_changed(value: float) -> void:
 			var frame: Frame = Global.current_project.frames[idx_pair[0]]
 			var cel: BaseCel = frame.cels[current_layer_idx]
 			cel.opacity = new_opacity
-	Global.canvas.update()
+	Global.canvas.queue_redraw()
 
 
 func _on_OnionSkinningSettings_popup_hide() -> void:

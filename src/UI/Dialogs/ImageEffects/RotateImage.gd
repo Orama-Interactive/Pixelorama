@@ -24,9 +24,8 @@ func _ready() -> void:
 	# set as in enum
 	animate_panel.add_float_property("Angle", angle_slider)
 	animate_panel.add_float_property("Initial Angle", init_angle_slider)
-	if not _is_webgl1():
-		type_option_button.add_item("Rotxel with Smear", ROTXEL_SMEAR)
-		rotxel_shader = load("res://src/Shaders/Rotation/SmearRotxel.gdshader")
+	type_option_button.add_item("Rotxel with Smear", ROTXEL_SMEAR)
+	rotxel_shader = load("res://src/Shaders/Rotation/SmearRotxel.gdshader")
 	type_option_button.add_item("cleanEdge", CLEANEDGE)
 	type_option_button.add_item("OmniScale", OMNISCALE)
 	type_option_button.set_item_disabled(OMNISCALE, not DrawingAlgos.omniscale_shader)
@@ -43,7 +42,7 @@ func _about_to_popup() -> void:
 	drag_pivot = false
 	if pivot == Vector2.INF:
 		_calculate_pivot()
-	confirmed = false
+	has_been_confirmed = false
 	super._about_to_popup()
 	wait_apply_timer.wait_time = wait_time_slider.value / 1000.0
 
@@ -122,7 +121,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				"origin": pivot / cel.get_size(),
 				"selection_size": selection_size
 			}
-			if !confirmed:
+			if !has_been_confirmed:
 				for param in params:
 					preview.material.set_shader_parameter(param, params[param])
 			else:
@@ -140,7 +139,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				"cleanup": false,
 				"preview": true
 			}
-			if !confirmed:
+			if !has_been_confirmed:
 				for param in params:
 					preview.material.set_shader_parameter(param, params[param])
 			else:
@@ -156,7 +155,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				"selection_size": selection_size,
 				"preview": true
 			}
-			if !confirmed:
+			if !has_been_confirmed:
 				for param in params:
 					preview.material.set_shader_parameter(param, params[param])
 			else:
@@ -171,7 +170,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				"selection_pivot": pivot,
 				"selection_size": selection_size
 			}
-			if !confirmed:
+			if !has_been_confirmed:
 				for param in params:
 					preview.material.set_shader_parameter(param, params[param])
 			else:
@@ -280,7 +279,7 @@ func _on_Centre_pressed() -> void:
 func _on_Pivot_value_changed(value: Vector2) -> void:
 	pivot = value
 	# Refresh the indicator
-	pivot_indicator.update()
+	pivot_indicator.queue_redraw()
 	if angle_slider.value != 0:
 		update_preview()
 

@@ -55,13 +55,13 @@ func _input(event: InputEvent) -> void:
 	var overwrite_button: CheckBox = $Overwrite
 
 	if event.is_action_pressed("change_tool_mode"):
-		_prev_mode = overwrite_button.pressed
+		_prev_mode = overwrite_button.button_pressed
 	if event.is_action("change_tool_mode"):
 		overwrite_button.button_pressed = !_prev_mode
-		_overwrite = overwrite_button.pressed
+		_overwrite = overwrite_button.button_pressed
 	if event.is_action_released("change_tool_mode"):
 		overwrite_button.button_pressed = _prev_mode
-		_overwrite = overwrite_button.pressed
+		_overwrite = overwrite_button.button_pressed
 
 
 func get_config() -> Dictionary:
@@ -182,7 +182,7 @@ func draw_end(position: Vector2) -> void:
 					v.x = x
 					for y in image_size.y:
 						v.y = y
-						if Geometry.is_point_in_polygon(v, _draw_points):
+						if Geometry2D.is_point_in_polygon(v, _draw_points):
 							if _spacing_mode:
 								# use of get_spacing_position() in Pencil.gd is a rare case
 								# (you would ONLY need _spacing_mode and _spacing in most cases)

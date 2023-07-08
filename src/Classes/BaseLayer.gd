@@ -3,7 +3,7 @@ extends RefCounted
 # Base class for layer properties. Different layer types extend from this class.
 
 var name := ""
-var project
+var project: Project
 var index: int
 var parent: BaseLayer
 var visible := true

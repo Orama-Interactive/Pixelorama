@@ -27,8 +27,8 @@ func _ready() -> void:
 	project = Global.current_project
 	connect("frame_saved", Callable(self, "_on_frame_saved"))
 	# Make a recordings folder if there isn't one
-	var dir := DirAccess.new()
-	chosen_dir = Global.directory_module.xdg_data_home.plus_file("Recordings")
+	var dir := DirAccess.open(chosen_dir)
+	chosen_dir = Global.directory_module.xdg_data_home.path_join("Recordings")
 	dir.make_dir_recursive(chosen_dir)
 	path_field.text = chosen_dir
 	size_label.text = str("(", project.size.x, "×", project.size.y, ")")
@@ -54,13 +54,12 @@ func initialize_recording() -> void:
 		save_dir[-1] = ""
 
 	# Create a new directory based on time
-	var folder = str(
-		project.name, OS.get_time().hour, "_", OS.get_time().minute, "_", OS.get_time().second
+	var time_dict := Time.get_time_dict_from_system()
+	var folder := str(
+		project.name, time_dict.hour, "_", time_dict.minute, "_", time_dict.second
 	)
-	save_dir = save_dir.plus_file(folder)
-	var dir := DirAccess.new()
-
-# warning-ignore:return_value_discarded
+	save_dir = save_dir.path_join(folder)
+	var dir := DirAccess.open(save_dir)
 	dir.make_dir_recursive(save_dir)
 
 	capture_frame()  # capture first frame
@@ -72,19 +71,18 @@ func capture_frame() -> void:
 	if current_frame_no != skip_amount:
 		return
 	current_frame_no = 0
-	var image := Image.new()
+	var image: Image
 	if mode == Mode.PIXELORAMA:
 		image = get_tree().root.get_viewport().get_texture().get_data()
 		image.flip_y()
 	else:
 		var frame = project.frames[project.current_frame]
-		image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		image = Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 		Export.blend_all_layers(image, frame, Vector2(0, 0), project)
 
 	if mode == Mode.CANVAS:
 		if resize != 100:
-			false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-			image.resize(image.get_size().x * resize / 100, image.get_size().y * resize / 100, 0)
+			image.resize(image.get_size().x * resize / 100, image.get_size().y * resize / 100, Image.INTERPOLATE_NEAREST)
 
 	cache.append(image)
 
@@ -93,12 +91,12 @@ func _on_Timer_timeout() -> void:
 	# Saves frames little by little during recording
 	if cache.size() > 0:
 		save_frame(cache[0])
-		cache.remove(0)
+		cache.remove_at(0)
 
 
 func save_frame(img: Image) -> void:
-	var save_file = str(project.name, "_", frame_captured, ".png")
-	img.save_png(save_dir.plus_file(save_file))
+	var save_file := str(project.name, "_", frame_captured, ".png")
+	img.save_png(save_dir.path_join(save_file))
 	emit_signal("frame_saved")
 
 
@@ -195,5 +193,5 @@ func _on_Path_dir_selected(dir: String) -> void:
 
 func _on_Fps_value_changed(value: float) -> void:
 	var dur_label := $Dialogs/Options/PanelContainer/VBoxContainer/Fps/Duration as Label
-	var duration := snapped(1.0 / value, 0.0001)
+	var duration := snappedf(1.0 / value, 0.0001)
 	dur_label.text = str("= ", duration, " sec")

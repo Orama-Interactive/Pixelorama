@@ -32,7 +32,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		selection_tex.create_from_image(project.selection_map) #,0
 
 	var params := {"hue_shift": hue, "sat_shift": sat, "val_shift": val, "selection": selection_tex}
-	if !confirmed:
+	if !has_been_confirmed:
 		for param in params:
 			preview.material.set_shader_parameter(param, params[param])
 	else:
@@ -45,7 +45,7 @@ func _reset() -> void:
 	hue_slider.value = 0
 	sat_slider.value = 0
 	val_slider.value = 0
-	confirmed = false
+	has_been_confirmed = false
 
 
 func _on_HueSlider_value_changed(_value: float) -> void:

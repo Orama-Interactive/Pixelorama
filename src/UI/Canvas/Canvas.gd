@@ -28,7 +28,7 @@ func _ready() -> void:
 	onion_past.blue_red_color = Global.onion_skinning_past_color
 	onion_future.type = onion_future.FUTURE
 	onion_future.blue_red_color = Global.onion_skinning_future_color
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	camera_zoom()
 
 
@@ -60,9 +60,9 @@ func _draw() -> void:
 	if Global.onion_skinning:
 		refresh_onion()
 	currently_visible_frame.size = Global.current_project.size
-	current_frame_drawer.update()
+	current_frame_drawer.queue_redraw()
 	if Global.current_project.tiles.mode != Tiles.MODE.NONE:
-		tile_mode.update()
+		tile_mode.queue_redraw()
 	draw_set_transform(position, rotation, scale)
 
 
@@ -94,7 +94,7 @@ func _input(event: InputEvent) -> void:
 	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
 
 	if Global.has_focus:
-		update()
+		queue_redraw()
 
 	sprite_changed_this_frame = false
 
@@ -144,5 +144,5 @@ func update_selected_cels_textures(project: Project = Global.current_project) ->
 
 
 func refresh_onion() -> void:
-	onion_past.update()
-	onion_future.update()
+	onion_past.queue_redraw()
+	onion_future.queue_redraw()

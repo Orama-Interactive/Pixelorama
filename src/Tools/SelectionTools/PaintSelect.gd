@@ -206,7 +206,7 @@ func _prepare_circle_tool(fill: bool) -> void:
 	var diameter := _brush_size * 2 + 1
 	for n in range(0, diameter):
 		for m in range(0, diameter):
-			if circle_tool_map.get_bit(Vector2(m, n)):
+			if circle_tool_map.get_bitv(Vector2(m, n)):
 				_circle_tool_shortcut.append(Vector2(m - _brush_size, n - _brush_size))
 
 
@@ -257,24 +257,24 @@ func _draw_tool_circle_from_map(position: Vector2) -> PackedVector2Array:
 	return result
 
 
-func _compute_draw_tool_brush(position: Vector2) -> PackedVector2Array:
+func _compute_draw_tool_brush(position: Vector2i) -> PackedVector2Array:
 	var result := PackedVector2Array()
 	var brush_mask := BitMap.new()
-	var pos = position - (_indicator.get_size() / 2).floor()
+	var pos := position - (_indicator.get_size() / 2)
 	brush_mask.create_from_image_alpha(_brush_image, 0.0)
 	for x in brush_mask.get_size().x:
 		for y in brush_mask.get_size().y:
 			if !_draw_points.has(Vector2(x, y)):
-				if brush_mask.get_bit(Vector2(x, y)):
-					result.append(pos + Vector2(x, y))
+				if brush_mask.get_bitv(Vector2i(x, y)):
+					result.append(pos + Vector2i(x, y))
 
 	return result
 
 
 func _on_BrushType_pressed() -> void:
 	if not Global.brushes_popup.is_connected("brush_selected", Callable(self, "_on_Brush_selected")):
-		Global.brushes_popup.connect(
-			"brush_selected", self, "_on_Brush_selected", [], CONNECT_ONE_SHOT
+		Global.brushes_popup.brush_selected.connect(
+			_on_Brush_selected.bind([], CONNECT_ONE_SHOT)
 		)
 	# Now we set position and columns
 	var tool_option_container = get_node("../../")
@@ -371,9 +371,9 @@ func draw_indicator(left: bool) -> void:
 	draw_indicator_at(_cursor, Vector2.ZERO, color)
 
 
-func draw_indicator_at(position: Vector2, offset: Vector2, color: Color) -> void:
+func draw_indicator_at(position: Vector2i, offset: Vector2i, color: Color) -> void:
 	var canvas = Global.canvas.indicators
-	position -= (_indicator.get_size() / 2).floor()
+	position -= _indicator.get_size() / 2
 	position -= offset
 	canvas.draw_set_transform(position, canvas.rotation, canvas.scale)
 	var polylines := _polylines

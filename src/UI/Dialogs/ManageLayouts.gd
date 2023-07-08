@@ -61,7 +61,7 @@ func _on_DeleteLayout_pressed() -> void:
 
 func _on_LayoutSettings_confirmed() -> void:
 	var file_name := layout_name.text + ".tres"
-	var path := "user://layouts/".plus_file(file_name)
+	var path := "user://layouts/".path_join(file_name)
 	var layout = Global.control.ui.get_layout()
 	var err := ResourceSaver.save(path, layout)
 	if err != OK:
@@ -87,12 +87,12 @@ func _on_LayoutSettings_confirmed() -> void:
 
 func delete_layout_file(file_name: String) -> void:
 	var dir := DirAccess.new()
-	dir.remove("user://layouts/".plus_file(file_name))
+	dir.remove("user://layouts/".path_join(file_name))
 
 
 func _on_DeleteConfirmation_confirmed() -> void:
 	delete_layout_file(layout_list.get_item_text(layout_selected) + ".tres")
-	Global.top_menu_container.layouts.remove(layout_selected)
+	Global.top_menu_container.layouts.remove_at(layout_selected)
 	layout_list.remove_item(layout_selected)
 	Global.top_menu_container.populate_layouts_submenu()
 	layout_selected = -1

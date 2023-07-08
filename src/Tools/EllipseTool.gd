@@ -26,19 +26,19 @@ func _get_shape_points(size: Vector2) -> PackedVector2Array:
 		+ DrawingAlgos.get_ellipse_points(size_offset, inner_ellipse_size)
 	)  # Outer and inner ellipses
 	var bitmap := _fill_bitmap_with_points(border_ellipses, new_size)
-	var smallest_side := min(new_size.x, new_size.y)
-	var largest_side := max(new_size.x, new_size.y)
+	var smallest_side := minf(new_size.x, new_size.y)
+	var largest_side := maxf(new_size.x, new_size.y)
 	var scan_dir := Vector2(0, 1) if smallest_side == new_size.x else Vector2(1, 0)
 	var iscan_dir := Vector2(1, 0) if smallest_side == new_size.x else Vector2(0, 1)
 	var ie_relevant_offset_side = size_offset.x if smallest_side == new_size.x else size_offset.y
-	var h_ls_c := ceil(largest_side / 2)
+	var h_ls_c := ceilf(largest_side / 2)
 
 	for s in range(ceil(smallest_side / 2)):
 		if s <= ie_relevant_offset_side:
 			var draw := false
 			for l in range(h_ls_c):
 				var pos := scan_dir * l + iscan_dir * s
-				if bitmap.get_bit(pos):
+				if bitmap.get_bitv(pos):
 					draw = true
 				if draw:
 					var mirror_smallest_side := iscan_dir * (smallest_side - 1 - 2 * s)
@@ -52,14 +52,14 @@ func _get_shape_points(size: Vector2) -> PackedVector2Array:
 			var l_o := 0
 			for l in range(h_ls_c):
 				var pos := scan_dir * l + iscan_dir * s
-				if bitmap.get_bit(pos):
+				if bitmap.get_bitv(pos):
 					l_o = l
 					break
 			# Find inner ellipse
 			var li := 0
 			for l in range(h_ls_c, 0, -1):
 				var pos := scan_dir * l + iscan_dir * s
-				if bitmap.get_bit(pos):
+				if bitmap.get_bitv(pos):
 					li = l
 					break
 			# Fill between both

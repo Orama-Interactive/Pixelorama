@@ -10,7 +10,7 @@ func _draw() -> void:
 		target_rect = Global.current_project.tiles.get_bounding_rect()
 	else:
 		target_rect = Rect2(Vector2.ZERO, Global.current_project.size)
-	if target_rect.has_no_area():
+	if not target_rect.has_area():
 		return
 
 	var grid_type: int = Global.grid_type

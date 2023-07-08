@@ -18,9 +18,9 @@ func update_rect() -> void:
 	material.set_shader_parameter("follow_scale", Global.checker_follow_scale)
 
 
-func update_offset(offset: Vector2, scale: Vector2) -> void:
+func update_offset(offset: Vector2, canvas_scale: Vector2) -> void:
 	material.set_shader_parameter("offset", offset)
-	material.set_shader_parameter("scale", scale)
+	material.set_shader_parameter("scale", canvas_scale)
 
 
 func _on_TransparentChecker_resized() -> void:

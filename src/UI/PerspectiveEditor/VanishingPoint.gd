@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 var has_focus := false
-var perspective_lines = []
+var perspective_lines := []
 var color := Color(randf(), randf(), randf(), 1)
 
 var tracker_line: PerspectiveLine
@@ -215,16 +215,16 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 
 func remove_line(line_index):
 	var line_to_remove = perspective_lines[line_index]
-	perspective_lines.remove(line_index)
+	perspective_lines.remove_at(line_index)
 	line_to_remove.queue_free()
 
 
 func update_data_to_project(removal := false):
-	var project = Global.current_project
-	var idx = get_index()
+	var project := Global.current_project
+	var idx := get_index()
 	# If deletion is requested
 	if removal:
-		project.vanishing_points.remove(idx)
+		project.vanishing_points.remove_at(idx)
 		return
 	# If project knows about this vanishing point then update it
 	var data = serialize()

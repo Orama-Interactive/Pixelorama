@@ -150,7 +150,6 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func _setup_nodes() -> void:  # Only called once on _ready()
-	_line_edit.align = LineEdit.ALIGNMENT_CENTER
 	_line_edit.anchor_right = 1
 	_line_edit.anchor_bottom = 1
 	_line_edit.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -248,25 +247,25 @@ func _reset_display(theme_changed := false) -> void:
 	_line_edit.selecting_enabled = false  # Remove the selection
 	_line_edit.editable = false
 	if theme_changed and not Engine.is_editor_hint():
-		texture_under = get_icon("texture_under", "ValueSlider")
-		texture_over = get_icon("texture_over", "ValueSlider")
-		texture_progress = get_icon("texture_progress", "ValueSlider")
-		_value_up_button.texture_normal = get_icon("arrow_normal", "ValueSlider")
-		_value_up_button.texture_pressed = get_icon("arrow_pressed", "ValueSlider")
-		_value_up_button.texture_hover = get_icon("arrow_hover", "ValueSlider")
+		texture_under = get_theme_icon("texture_under", "ValueSlider")
+		texture_over = get_theme_icon("texture_over", "ValueSlider")
+		texture_progress = get_theme_icon("texture_progress", "ValueSlider")
+		_value_up_button.texture_normal = get_theme_icon("arrow_normal", "ValueSlider")
+		_value_up_button.texture_pressed = get_theme_icon("arrow_pressed", "ValueSlider")
+		_value_up_button.texture_hover = get_theme_icon("arrow_hover", "ValueSlider")
 
-		_value_down_button.texture_normal = get_icon("arrow_normal", "ValueSlider")
-		_value_down_button.texture_pressed = get_icon("arrow_pressed", "ValueSlider")
-		_value_down_button.texture_hover = get_icon("arrow_hover", "ValueSlider")
+		_value_down_button.texture_normal = get_theme_icon("arrow_normal", "ValueSlider")
+		_value_down_button.texture_pressed = get_theme_icon("arrow_pressed", "ValueSlider")
+		_value_down_button.texture_hover = get_theme_icon("arrow_hover", "ValueSlider")
 
-		tint_under = get_color("under_color", "ValueSlider")
+		tint_under = get_theme_color("under_color", "ValueSlider")
 		if show_progress:
-			tint_progress = get_color("progress_color", "ValueSlider")
+			tint_progress = get_theme_color("progress_color", "ValueSlider")
 		else:
 			tint_progress = Color.TRANSPARENT
 	_line_edit.text = str(tr(prefix), " ", value, " ", tr(suffix)).strip_edges()
-	var line_edit_color := _line_edit.get_color("font_color")
-	var line_edit_disabled_col := get_color("read_only", "LineEdit")
+	var line_edit_color := _line_edit.get_theme_color("font_color")
+	var line_edit_disabled_col := get_theme_color("read_only", "LineEdit")
 	if editable:
 		_line_edit.add_theme_color_override("font_color_uneditable", line_edit_color)
 	else:

@@ -38,9 +38,8 @@ static func load_mtl_from_buffer(mtl_data: String, textures: Dictionary) -> Dict
 # Get data from file path
 static func get_data(path: String) -> String:
 	if path != "":
-		var file := File.new()
-		var err := file.open(path, File.READ)
-		if err == OK:
+		var file := FileAccess.open(path, FileAccess.READ)
+		if FileAccess.get_open_error() == OK:
 			var res := file.get_as_text()
 			file.close()
 			return res
@@ -58,10 +57,9 @@ static func get_mtl_tex(mtl_path: String) -> Dictionary:
 
 # Get textures paths from mtl path
 static func get_mtl_tex_paths(mtl_path: String) -> Array:
-	var file := File.new()
-	var err := file.open(mtl_path, File.READ)
+	var file := FileAccess.open(mtl_path, FileAccess.READ)
 	var paths := []
-	if err == OK:
+	if FileAccess.get_open_error() == OK:
 		var lines := file.get_as_text().split("\n", false)
 		file.close()
 		for line in lines:
@@ -74,12 +72,12 @@ static func get_mtl_tex_paths(mtl_path: String) -> Array:
 
 # Try to find mtl path from obj path
 static func search_mtl_path(obj_path: String) -> String:
-	var mtl_path := obj_path.get_base_dir().plus_file(
+	var mtl_path := obj_path.get_base_dir().path_join(
 		obj_path.get_file().rsplit(".", false, 1)[0] + ".mtl"
 	)
-	var dir: DirAccess = DirAccess.new()
+	var dir := DirAccess.open(mtl_path)
 	if !dir.file_exists(mtl_path):
-		mtl_path = obj_path.get_base_dir().plus_file(obj_path.get_file() + ".mtl")
+		mtl_path = obj_path.get_base_dir().path_join(obj_path.get_file() + ".mtl")
 	if !dir.file_exists(mtl_path):
 		return ""
 	return mtl_path
@@ -127,8 +125,8 @@ static func _get_image(mtl_filepath: String, tex_filename: String) -> Image:
 	if DEBUG:
 		print("    Debug: Mapping texture file " + tex_filename)
 	var texfilepath := tex_filename
-	if tex_filename.is_rel_path():
-		texfilepath = mtl_filepath.get_base_dir().plus_file(tex_filename)
+	if tex_filename.is_relative_path():
+		texfilepath = mtl_filepath.get_base_dir().path_join(tex_filename)
 	var filetype := texfilepath.get_extension()
 	if DEBUG:
 		print("    Debug: texture file path: " + texfilepath + " of type " + filetype)

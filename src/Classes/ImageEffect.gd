@@ -6,8 +6,8 @@ extends ConfirmationDialog
 enum { SELECTED_CELS, FRAME, ALL_FRAMES, ALL_PROJECTS }
 
 var affect := SELECTED_CELS
-var selected_cels := Image.new()
-var current_frame := Image.new()
+var selected_cels: Image
+var current_frame: Image
 var preview_image := Image.new()
 var preview_texture := ImageTexture.new()
 var preview: TextureRect
@@ -15,7 +15,7 @@ var selection_checkbox: CheckBox
 var affect_option_button: OptionButton
 var animate_panel: AnimatePanel
 var commit_idx := -1  # the current frame, image effect is applied to
-var confirmed := false
+var has_been_confirmed := false
 var _preview_idx := 0  # the current frame, being previewed
 
 
@@ -23,25 +23,25 @@ func _ready() -> void:
 	set_nodes()
 	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	get_cancel_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	current_frame.create(
+	current_frame = Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
-	selected_cels.create(
+	selected_cels = Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
-	connect("about_to_popup", Callable(self, "_about_to_popup"))
-	connect("popup_hide", Callable(self, "_popup_hide"))
-	connect("confirmed", Callable(self, "_confirmed"))
+	about_to_popup.connect(_about_to_popup)
+	close_requested.connect(_popup_hide)
+	confirmed.connect(_confirmed)
 	if selection_checkbox:
-		selection_checkbox.connect("toggled", Callable(self, "_on_SelectionCheckBox_toggled"))
+		selection_checkbox.toggled.connect(_on_SelectionCheckBox_toggled)
 	if affect_option_button:
-		affect_option_button.connect("item_selected", Callable(self, "_on_AffectOptionButton_item_selected"))
+		affect_option_button.item_selected.connect(_on_AffectOptionButton_item_selected)
 	if animate_panel:
-		$"%ShowAnimate".connect("pressed", Callable(self, "display_animate_dialog"))
+		$"%ShowAnimate".pressed.connect(display_animate_dialog)
 
 
 func _about_to_popup() -> void:
-	confirmed = false
+	has_been_confirmed = false
 	Global.canvas.selection.transform_content_confirm()
 	prepare_animator(Global.current_project)
 	set_and_update_preview_image(Global.current_project.current_frame)
@@ -67,7 +67,7 @@ func prepare_animator(project: Project) -> void:
 
 
 func _confirmed() -> void:
-	confirmed = true
+	has_been_confirmed = true
 	commit_idx = -1
 	var project: Project = Global.current_project
 	if affect == SELECTED_CELS:
@@ -146,8 +146,8 @@ func set_nodes() -> void:
 
 func display_animate_dialog():
 	var animate_dialog: Popup = animate_panel.get_parent()
-	var pos = Vector2(global_position.x + size.x, global_position.y)
-	var animate_dialog_rect := Rect2(pos, Vector2(animate_dialog.size.x, size.y))
+#	var pos = Vector2(global_position.x + size.x, global_position.y)
+	var animate_dialog_rect := Rect2(Vector2.ZERO, Vector2(animate_dialog.size.x, size.y))
 	animate_dialog.popup(animate_dialog_rect)
 	animate_panel.re_calibrate_preview_slider()
 
@@ -160,8 +160,8 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
 	for image in undo_data:
 		project.undo_redo.add_undo_property(image, "data", undo_data[image])
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false, -1, -1, project)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, -1, -1, project)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, -1, -1, project))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, -1, -1, project))
 	project.undo_redo.commit_action()
 
 
@@ -169,7 +169,6 @@ func _get_undo_data(project: Project) -> Dictionary:
 	var data := {}
 	var images := _get_selected_draw_images(project)
 	for image in images:
-		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		data[image] = image.data
 	return data
 
@@ -221,8 +220,7 @@ func update_preview() -> void:
 			preview_image.copy_from(current_frame)
 	commit_idx = _preview_idx
 	commit_action(preview_image)
-	false # preview_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	preview_texture.create_from_image(preview_image) #,0
+	preview_texture = ImageTexture.create_from_image(preview_image) #,0
 	preview.texture = preview_texture
 
 
@@ -244,7 +242,3 @@ func update_transparent_background_size() -> void:
 
 func _popup_hide() -> void:
 	Global.dialog_open(false)
-
-
-func _is_webgl1() -> bool:
-	return OS.get_name() == "HTML5" and OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2

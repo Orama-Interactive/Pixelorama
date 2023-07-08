@@ -325,5 +325,5 @@ func change_property() -> void:
 	else:
 		# Check is needed in case this runs before _ready(), and thus onready variables
 		if is_instance_valid(gizmos_3d):
-			gizmos_3d.update()
+			gizmos_3d.queue_redraw()
 	emit_signal("property_changed")

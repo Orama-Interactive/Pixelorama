@@ -8,8 +8,7 @@ var omniscale_shader: Shader
 
 
 func _ready() -> void:
-	if OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES3:
-		omniscale_shader = load("res://src/Shaders/Rotation/OmniScale.gdshader")
+	omniscale_shader = load("res://src/Shaders/Rotation/OmniScale.gdshader")
 
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
@@ -110,10 +109,7 @@ func get_ellipse_points_filled(pos: Vector2, size: Vector2, thickness := 1) -> P
 
 
 func scale_3x(sprite: Image, tol: float = 50) -> Image:
-	var scaled := Image.new()
-	scaled.create(sprite.get_width() * 3, sprite.get_height() * 3, false, Image.FORMAT_RGBA8)
-	false # scaled.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	false # sprite.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	var scaled := Image.create(sprite.get_width() * 3, sprite.get_height() * 3, false, Image.FORMAT_RGBA8)
 	var a: Color
 	var b: Color
 	var c: Color
@@ -192,8 +188,6 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 	var ox: int
 	var oy: int
 	var p: Color
-	false # aux.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	false # sprite.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for x in sprite.get_size().x:
 		for y in sprite.get_size().y:
 			var dx = 3 * (x - pivot.x)
@@ -392,8 +386,6 @@ func fake_rotsprite(sprite: Image, angle: float, pivot: Vector2) -> void:
 func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
 	var aux: Image = Image.new()
 	aux.copy_from(sprite)
-	false # sprite.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	false # aux.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var ox: int
 	var oy: int
 	for x in range(sprite.get_width()):
@@ -474,9 +466,9 @@ func center(indices: Array) -> void:
 			if not cel is PixelCel:
 				continue
 			var cel_rect: Rect2 = cel.image.get_used_rect()
-			if not cel_rect.has_no_area():
-				used_rect = cel_rect if used_rect.has_no_area() else used_rect.merge(cel_rect)
-		if used_rect.has_no_area():
+			if cel_rect.has_area():
+				used_rect = used_rect.merge(cel_rect) if used_rect.has_area() else cel_rect
+		if not used_rect.has_area():
 			continue
 
 		# Now apply centering
@@ -484,13 +476,12 @@ func center(indices: Array) -> void:
 		for cel in project.frames[frame].cels:
 			if not cel is PixelCel:
 				continue
-			var sprite := Image.new()
-			sprite.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			var sprite := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			sprite.blend_rect(cel.image, used_rect, offset)
 			project.undo_redo.add_do_property(cel.image, "data", sprite.data)
 			project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
 
 
@@ -536,8 +527,7 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 		for c in f.cels:
 			if not c is PixelCel:
 				continue
-			var sprite := Image.new()
-			sprite.create(width, height, false, Image.FORMAT_RGBA8)
+			var sprite := Image.create(width, height, false, Image.FORMAT_RGBA8)
 			sprite.blend_rect(
 				c.image,
 				Rect2(Vector2.ZERO, Global.current_project.size),
@@ -590,180 +580,6 @@ func general_undo_scale() -> void:
 	project.undo_redo.add_undo_property(
 		project.y_symmetry_axis, "points", project.y_symmetry_axis.points
 	)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
-
-
-func generate_outline(
-	image: Image,
-	affect_selection: bool,
-	project: Project,
-	outline_color: Color,
-	thickness: int,
-	diagonal: bool,
-	inside_image: bool
-) -> void:
-	if image.is_invisible():
-		return
-	var new_image := Image.new()
-	new_image.copy_from(image)
-	false # new_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-
-	for x in project.size.x:
-		for y in project.size.y:
-			var pos := Vector2(x, y)
-			var current_pixel := image.get_pixelv(pos)
-			if affect_selection and !project.can_pixel_get_drawn(pos):
-				continue
-			if current_pixel.a == 0:
-				continue
-
-			for i in range(1, thickness + 1):
-				if inside_image:
-					var outline_pos: Vector2 = pos + Vector2.LEFT  # Left
-					if outline_pos.x < 0 || image.get_pixelv(outline_pos).a == 0:
-						var new_pos: Vector2 = pos + Vector2.RIGHT * (i - 1)
-						if new_pos.x < Global.current_project.size.x:
-							var new_pixel = image.get_pixelv(new_pos)
-							if new_pixel.a > 0:
-								new_image.set_pixelv(new_pos, outline_color)
-
-					outline_pos = pos + Vector2.RIGHT  # Right
-					if (
-						outline_pos.x >= Global.current_project.size.x
-						|| image.get_pixelv(outline_pos).a == 0
-					):
-						var new_pos: Vector2 = pos + Vector2.LEFT * (i - 1)
-						if new_pos.x >= 0:
-							var new_pixel = image.get_pixelv(new_pos)
-							if new_pixel.a > 0:
-								new_image.set_pixelv(new_pos, outline_color)
-
-					outline_pos = pos + Vector2.UP  # Up
-					if outline_pos.y < 0 || image.get_pixelv(outline_pos).a == 0:
-						var new_pos: Vector2 = pos + Vector2.DOWN * (i - 1)
-						if new_pos.y < Global.current_project.size.y:
-							var new_pixel = image.get_pixelv(new_pos)
-							if new_pixel.a > 0:
-								new_image.set_pixelv(new_pos, outline_color)
-
-					outline_pos = pos + Vector2.DOWN  # Down
-					if (
-						outline_pos.y >= Global.current_project.size.y
-						|| image.get_pixelv(outline_pos).a == 0
-					):
-						var new_pos: Vector2 = pos + Vector2.UP * (i - 1)
-						if new_pos.y >= 0:
-							var new_pixel = image.get_pixelv(new_pos)
-							if new_pixel.a > 0:
-								new_image.set_pixelv(new_pos, outline_color)
-
-					if diagonal:
-						outline_pos = pos + (Vector2.LEFT + Vector2.UP)  # Top left
-						if (
-							(outline_pos.x < 0 && outline_pos.y < 0)
-							|| image.get_pixelv(outline_pos).a == 0
-						):
-							var new_pos: Vector2 = pos + (Vector2.RIGHT + Vector2.DOWN) * (i - 1)
-							if (
-								new_pos.x < Global.current_project.size.x
-								&& new_pos.y < Global.current_project.size.y
-							):
-								var new_pixel = image.get_pixelv(new_pos)
-								if new_pixel.a > 0:
-									new_image.set_pixelv(new_pos, outline_color)
-
-						outline_pos = pos + (Vector2.LEFT + Vector2.DOWN)  # Bottom left
-						if (
-							(outline_pos.x < 0 && outline_pos.y >= Global.current_project.size.y)
-							|| image.get_pixelv(outline_pos).a == 0
-						):
-							var new_pos: Vector2 = pos + (Vector2.RIGHT + Vector2.UP) * (i - 1)
-							if new_pos.x < Global.current_project.size.x && new_pos.y >= 0:
-								var new_pixel = image.get_pixelv(new_pos)
-								if new_pixel.a > 0:
-									new_image.set_pixelv(new_pos, outline_color)
-
-						outline_pos = pos + (Vector2.RIGHT + Vector2.UP)  # Top right
-						if (
-							(outline_pos.x >= Global.current_project.size.x && outline_pos.y < 0)
-							|| image.get_pixelv(outline_pos).a == 0
-						):
-							var new_pos: Vector2 = pos + (Vector2.LEFT + Vector2.DOWN) * (i - 1)
-							if new_pos.x >= 0 && new_pos.y < Global.current_project.size.y:
-								var new_pixel = image.get_pixelv(new_pos)
-								if new_pixel.a > 0:
-									new_image.set_pixelv(new_pos, outline_color)
-
-						outline_pos = pos + (Vector2.RIGHT + Vector2.DOWN)  # Bottom right
-						if (
-							(
-								outline_pos.x >= Global.current_project.size.x
-								&& outline_pos.y >= Global.current_project.size.y
-							)
-							|| image.get_pixelv(outline_pos).a == 0
-						):
-							var new_pos: Vector2 = pos + (Vector2.LEFT + Vector2.UP) * (i - 1)
-							if new_pos.x >= 0 && new_pos.y >= 0:
-								var new_pixel = image.get_pixelv(new_pos)
-								if new_pixel.a > 0:
-									new_image.set_pixelv(new_pos, outline_color)
-
-				else:
-					var new_pos: Vector2 = pos + Vector2.LEFT * i  # Left
-					if new_pos.x >= 0:
-						var new_pixel = image.get_pixelv(new_pos)
-						if new_pixel.a == 0:
-							new_image.set_pixelv(new_pos, outline_color)
-
-					new_pos = pos + Vector2.RIGHT * i  # Right
-					if new_pos.x < Global.current_project.size.x:
-						var new_pixel = image.get_pixelv(new_pos)
-						if new_pixel.a == 0:
-							new_image.set_pixelv(new_pos, outline_color)
-
-					new_pos = pos + Vector2.UP * i  # Up
-					if new_pos.y >= 0:
-						var new_pixel = image.get_pixelv(new_pos)
-						if new_pixel.a == 0:
-							new_image.set_pixelv(new_pos, outline_color)
-
-					new_pos = pos + Vector2.DOWN * i  # Down
-					if new_pos.y < Global.current_project.size.y:
-						var new_pixel = image.get_pixelv(new_pos)
-						if new_pixel.a == 0:
-							new_image.set_pixelv(new_pos, outline_color)
-
-					if diagonal:
-						new_pos = pos + (Vector2.LEFT + Vector2.UP) * i  # Top left
-						if new_pos.x >= 0 && new_pos.y >= 0:
-							var new_pixel = image.get_pixelv(new_pos)
-							if new_pixel.a == 0:
-								new_image.set_pixelv(new_pos, outline_color)
-
-						new_pos = pos + (Vector2.LEFT + Vector2.DOWN) * i  # Bottom left
-						if new_pos.x >= 0 && new_pos.y < Global.current_project.size.y:
-							var new_pixel = image.get_pixelv(new_pos)
-							if new_pixel.a == 0:
-								new_image.set_pixelv(new_pos, outline_color)
-
-						new_pos = pos + (Vector2.RIGHT + Vector2.UP) * i  # Top right
-						if new_pos.x < Global.current_project.size.x && new_pos.y >= 0:
-							var new_pixel = image.get_pixelv(new_pos)
-							if new_pixel.a == 0:
-								new_image.set_pixelv(new_pos, outline_color)
-
-						new_pos = pos + (Vector2.RIGHT + Vector2.DOWN) * i  # Bottom right
-						if (
-							new_pos.x < Global.current_project.size.x
-							&& new_pos.y < Global.current_project.size.y
-						):
-							var new_pixel = image.get_pixelv(new_pos)
-							if new_pixel.a == 0:
-								new_image.set_pixelv(new_pos, outline_color)
-
-	false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	false # new_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	image.copy_from(new_image)

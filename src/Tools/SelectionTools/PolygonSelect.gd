@@ -23,7 +23,7 @@ func _input(event: InputEvent) -> void:
 			_ongoing_selection = false
 			_draw_points.clear()
 			_ready_to_apply = false
-			Global.canvas.previews.update()
+			Global.canvas.previews.queue_redraw()
 
 
 func draw_start(position: Vector2) -> void:
@@ -143,7 +143,7 @@ func apply_selection(_position) -> void:
 	_ongoing_selection = false
 	_draw_points.clear()
 	_ready_to_apply = false
-	Global.canvas.previews.update()
+	Global.canvas.previews.queue_redraw()
 
 
 func lasso_selection(selection_map: SelectionMap, points: PackedVector2Array) -> void:
@@ -164,7 +164,7 @@ func lasso_selection(selection_map: SelectionMap, points: PackedVector2Array) ->
 		v.x = x
 		for y in image_size.y:
 			v.y = y
-			if Geometry.is_point_in_polygon(v, points):
+			if Geometry2D.is_point_in_polygon(v, points):
 				if _intersect:
 					if project.selection_map.is_pixel_selected(v):
 						selection_map.select_pixel(v, true)

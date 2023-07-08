@@ -10,7 +10,7 @@ extends ConfirmationDialog
 
 func _ready() -> void:
 	Global.connect("cel_changed", Callable(self, "change_mask"))
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	change_mask()
 
 
@@ -58,7 +58,7 @@ func _show_options():
 func _on_TileModeOffsetsDialog_confirmed() -> void:
 	Global.current_project.tiles.x_basis = tile_mode.tiles.x_basis
 	Global.current_project.tiles.y_basis = tile_mode.tiles.y_basis
-	Global.canvas.tile_mode.update()
+	Global.canvas.tile_mode.queue_redraw()
 	Global.transparent_checker.update_rect()
 
 
@@ -93,7 +93,7 @@ func update_preview() -> void:
 	var centering_offset := (preview_rect.size - transformed_bounding_rect.size) / 2.0
 	t = t.translated(centering_offset / scale)
 	tile_mode.transform = t
-	tile_mode.update()
+	tile_mode.queue_redraw()
 	preview_rect.get_node("TransparentChecker").size = preview_rect.size
 
 

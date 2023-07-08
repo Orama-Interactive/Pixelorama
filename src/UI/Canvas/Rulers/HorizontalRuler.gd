@@ -57,17 +57,11 @@ func _draw() -> void:
 		Vector2(1.0 / minor_subdivision, 1.0 / minor_subdivision)
 	)
 
-	first = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(
-		Vector2.ZERO
-	)
-	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(
-		Global.main_viewport.size
-	)
+	first = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse() * Vector2.ZERO
+	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse() * Global.main_viewport.size
 
 	for j in range(ceil(first.x), ceil(last.x)):
-		var position: Vector2 = (transform * ruler_transform * major_subdivide * minor_subdivide).xform(
-			Vector2(j, 0)
-		)
+		var position: Vector2 = (transform * ruler_transform * major_subdivide * minor_subdivide) * Vector2(j, 0)
 		if j % (major_subdivision * minor_subdivision) == 0:
 			draw_line(
 				Vector2(position.x + RULER_WIDTH, 0),
@@ -116,7 +110,7 @@ func create_guide() -> void:
 		guide.add_point(Vector2(Global.canvas.current_pixel.x, 19999))
 	Global.canvas.add_child(guide)
 	Global.has_focus = false
-	update()
+	queue_redraw()
 
 
 func _on_HorizontalRuler_mouse_entered() -> void:

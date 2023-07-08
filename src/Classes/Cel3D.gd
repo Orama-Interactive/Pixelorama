@@ -47,7 +47,7 @@ func _add_nodes() -> void:
 	viewport.own_world = true
 	viewport.transparent_bg = true
 	viewport.render_target_v_flip = true
-	var world := World.new()
+	var world := World3D.new()
 	var environment := Environment.new()
 	world.environment = environment
 	viewport.world = world
@@ -200,11 +200,11 @@ func on_remove() -> void:
 		viewport.queue_free()
 
 
-func save_image_data_to_pxo(file: File) -> void:
+func save_image_data_to_pxo(file: FileAccess) -> void:
 	file.store_buffer(get_image().get_data())
 
 
-func load_image_data_from_pxo(file: File, project_size: Vector2) -> void:
+func load_image_data_from_pxo(file: FileAccess, project_size: Vector2) -> void:
 	# Don't do anything with it, just read it so that the file can move on
 	file.get_buffer(project_size.x * project_size.y * 4)
 

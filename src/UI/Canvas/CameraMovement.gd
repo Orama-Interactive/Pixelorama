@@ -63,7 +63,7 @@ func _zoom_value_changed(value: float) -> void:
 		tween.tween_property(self, "zoom", new_zoom, 0.05)
 	else:
 		zoom = new_zoom
-		emit_signal("zoom_changed")
+		zoom_changed.emit()
 
 
 func update_transparent_checker_offset() -> void:
@@ -163,7 +163,7 @@ func zoom_camera(dir: int) -> void:
 		if zoom > zoom_max:
 			zoom = zoom_max
 		offset = offset + (-0.5 * viewport_size + mouse_pos).rotated(rotation) * (prev_zoom - zoom)
-		emit_signal("zoom_changed")
+		zoom_changed.emit()
 
 
 func _zoom_changed() -> void:
@@ -179,20 +179,20 @@ func _zoom_changed() -> void:
 
 
 func _update_rulers() -> void:
-	Global.horizontal_ruler.update()
-	Global.vertical_ruler.update()
+	Global.horizontal_ruler.queue_redraw()
+	Global.vertical_ruler.queue_redraw()
 
 
 func _on_tween_step(_idx: int) -> void:
 	should_tween = false
-	emit_signal("zoom_changed")
+	zoom_changed.emit()
 	should_tween = true
 
 
 func zoom_100() -> void:
 	zoom = Vector2.ONE
 	offset = Global.current_project.size / 2
-	emit_signal("zoom_changed")
+	zoom_changed.emit()
 
 
 func fit_to_frame(size: Vector2) -> void:
@@ -217,7 +217,7 @@ func fit_to_frame(size: Vector2) -> void:
 	viewport_container = get_parent().get_parent()
 	var h_ratio := viewport_container.size.x / size.x
 	var v_ratio := viewport_container.size.y / size.y
-	var ratio := min(h_ratio, v_ratio)
+	var ratio := minf(h_ratio, v_ratio)
 	if ratio == 0 or !viewport_container.visible:
 		ratio = 0.1  # Set it to a non-zero value just in case
 		# If the ratio is 0, it means that the viewport container is hidden
@@ -231,9 +231,9 @@ func fit_to_frame(size: Vector2) -> void:
 			v_ratio = Global.main_viewport.size.y / size.y
 			ratio = min(h_ratio, v_ratio)
 
-	ratio = clamp(ratio, 0.1, ratio)
+	ratio = clampf(ratio, 0.1, ratio)
 	zoom = Vector2(1 / ratio, 1 / ratio)
-	emit_signal("zoom_changed")
+	zoom_changed.emit()
 	if reset_integer_zoom:
 		Global.integer_zoom = !Global.integer_zoom
 

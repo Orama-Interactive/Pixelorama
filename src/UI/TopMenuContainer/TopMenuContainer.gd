@@ -33,7 +33,7 @@ var zen_mode := false
 
 
 func _ready() -> void:
-	var dir := DirAccess.new()
+	var dir := DirAccess.open("user://layouts")
 	dir.make_dir("user://layouts")
 	_setup_file_menu()
 	_setup_edit_menu()
@@ -239,15 +239,15 @@ func _setup_panels_submenu(item: String) -> void:
 
 
 func _setup_layouts_submenu(item: String) -> void:
-	var dir := DirAccess.new()
 	var path := "user://layouts"
-	if dir.open(path) == OK:
+	var dir := DirAccess.open(path)
+	if DirAccess.get_open_error() == OK:
 		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var file_name = dir.get_next()
 		while file_name != "":
 			if !dir.current_is_dir():
 				var file_name_no_tres: String = file_name.get_basename()
-				layouts.append([file_name_no_tres, ResourceLoader.load(path.plus_file(file_name))])
+				layouts.append([file_name_no_tres, ResourceLoader.load(path.path_join(file_name))])
 			file_name = dir.get_next()
 
 	layouts_submenu.set_name("layouts_submenu")
@@ -338,7 +338,7 @@ func _handle_metadata(id: int, menu_button: MenuButton) -> void:
 				metadata.call("menu_item_clicked")
 
 
-func _popup_dialog(dialog: Popup, size := Vector2.ZERO) -> void:
+func _popup_dialog(dialog: Window, size := Vector2.ZERO) -> void:
 	dialog.popup_centered(size)
 	Global.dialog_open(true)
 
@@ -406,8 +406,8 @@ func _save_project_file_as() -> void:
 	else:
 		Global.save_sprites_dialog.get_ok_button().text = "Save"
 		Global.save_sprites_dialog.popup_centered()
-		await get_tree().idle_frame
-		await get_tree().idle_frame
+		await get_tree().process_frame
+		await get_tree().process_frame
 		Global.save_sprites_dialog.get_line_edit().text = Global.current_project.name
 
 
@@ -473,7 +473,7 @@ func view_menu_id_pressed(id: int) -> void:
 		_:
 			_handle_metadata(id, view_menu_button)
 
-	Global.canvas.update()
+	Global.canvas.queue_redraw()
 
 
 func window_menu_id_pressed(id: int) -> void:
@@ -498,9 +498,9 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 	Global.transparent_checker.fit_rect(Global.current_project.tiles.get_bounding_rect())
 	for i in Tiles.MODE.values():
 		tile_mode_submenu.set_item_checked(i, i == id)
-	Global.canvas.tile_mode.update()
-	Global.canvas.pixel_grid.update()
-	Global.canvas.grid.update()
+	Global.canvas.tile_mode.queue_redraw()
+	Global.canvas.pixel_grid.queue_redraw()
+	Global.canvas.grid.queue_redraw()
 	Global.tile_mode_offset_dialog.change_mask()
 
 
@@ -525,8 +525,8 @@ func _panels_submenu_id_pressed(id: int) -> void:
 	panels_submenu.set_item_checked(id, !element_visible)
 	if ui.tabs_visible == false:
 		ui.tabs_visible = true
-		await get_tree().idle_frame
-		await get_tree().idle_frame
+		await get_tree().process_frame
+		await get_tree().process_frame
 		ui.tabs_visible = false
 
 
@@ -556,8 +556,8 @@ func set_layout(id: int) -> void:
 		window_menu.set_item_checked(Global.WindowMenu.ZEN_MODE, false)
 
 	# Hacky but without 2 idle frames it doesn't work properly. Should be replaced eventually
-	await get_tree().idle_frame
-	await get_tree().idle_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
 	# Call set_tabs_visible to keep tabs visible if there are 2 or more in the same panel
 	ui.tabs_visible = ui.tabs_visible
 
@@ -579,7 +579,7 @@ func _toggle_mirror_view() -> void:
 		)
 	else:
 		Global.canvas.selection.marching_ants_outline.position.x = 0
-	Global.canvas.selection.update()
+	Global.canvas.selection.queue_redraw()
 	view_menu.set_item_checked(Global.ViewMenu.MIRROR_VIEW, Global.mirror_view)
 
 
@@ -587,7 +587,7 @@ func _toggle_show_grid() -> void:
 	Global.draw_grid = !Global.draw_grid
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GRID, Global.draw_grid)
 	if Global.canvas.grid:
-		Global.canvas.grid.update()
+		Global.canvas.grid.queue_redraw()
 
 
 func _toggle_show_pixel_grid() -> void:
@@ -620,8 +620,8 @@ func _toggle_show_mouse_guides() -> void:
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_MOUSE_GUIDES, Global.show_mouse_guides)
 	if Global.show_mouse_guides:
 		if Global.canvas.mouse_guide_container:
-			Global.canvas.mouse_guide_container.get_child(0).update()
-			Global.canvas.mouse_guide_container.get_child(1).update()
+			Global.canvas.mouse_guide_container.get_child(0).queue_redraw()
+			Global.canvas.mouse_guide_container.get_child(1).queue_redraw()
 
 
 func _toggle_zen_mode() -> void:
@@ -725,7 +725,7 @@ func help_menu_id_pressed(id: int) -> void:
 		Global.HelpMenu.ISSUE_TRACKER:
 			OS.shell_open("https://github.com/Orama-Interactive/Pixelorama/issues")
 		Global.HelpMenu.OPEN_LOGS_FOLDER:
-			var dir = DirAccess.new()
+			var dir := DirAccess.open("user://logs")
 			dir.make_dir_recursive("user://logs")  # In case someone deleted it
 			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		Global.HelpMenu.CHANGELOG:

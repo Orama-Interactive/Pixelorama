@@ -124,7 +124,7 @@ func lasso_selection(selection_map: SelectionMap, points: PackedVector2Array) ->
 		v.x = x
 		for y in image_size.y:
 			v.y = y
-			if Geometry.is_point_in_polygon(v, points):
+			if Geometry2D.is_point_in_polygon(v, points):
 				if _intersect:
 					if project.selection_map.is_pixel_selected(v):
 						selection_map.select_pixel(v, true)

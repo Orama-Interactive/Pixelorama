@@ -3,9 +3,9 @@
 [ext_resource type="Theme" uid="uid://w1q3piojx08s" path="res://assets/themes/dark/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/Main.gd" id="2"]
 [ext_resource type="PackedScene" path="res://src/UI/TopMenuContainer/TopMenuContainer.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://src/UI/UI.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://c8dsi6ggkqa7a" path="res://src/UI/UI.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://src/UI/Buttons/PatternsPopup.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://src/UI/Buttons/BrushesPopup.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://c5x85ysdouh4t" path="res://src/UI/Buttons/BrushesPopup.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/ImageEffects.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/SaveSpriteHTML5.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://src/UI/Timeline/FrameProperties.tscn" id="9"]
@@ -29,10 +29,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1")
 script = ExtResource("2")
-__meta__ = {
-"_edit_horizontal_guides_": [],
-"_edit_vertical_guides_": []
-}
 
 [node name="MenuAndUI" type="VBoxContainer" parent="."]
 layout_mode = 0

@@ -46,7 +46,7 @@ func _input(event: InputEvent) -> void:
 		else:
 			points[0].x = mouse_point.x
 			points[1].x = mouse_point.x
-	update()
+	queue_redraw()
 
 
 func _draw() -> void:

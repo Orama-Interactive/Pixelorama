@@ -8,7 +8,7 @@ var _displace_origin = false  # Mouse Click + Alt
 
 
 func _input(event: InputEvent) -> void:
-	if !_move and !_rect.has_no_area():
+	if !_move and _rect.has_area():
 		if event.is_action_pressed("shape_perfect"):
 			_square = true
 		elif event.is_action_released("shape_perfect"):
@@ -23,24 +23,24 @@ func _input(event: InputEvent) -> void:
 			_displace_origin = false
 
 
-func draw_move(position: Vector2) -> void:
+func draw_move(pos: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
-	position = snap_position(position)
-	super.draw_move(position)
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if !_move:
 		if _displace_origin:
-			_start_pos += position - _offset
-		_rect = _get_result_rect(_start_pos, position)
+			_start_pos += pos - _offset
+		_rect = _get_result_rect(_start_pos, pos)
 		_set_cursor_text(_rect)
-		_offset = position
+		_offset = pos
 
 
-func draw_end(position: Vector2) -> void:
+func draw_end(pos: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
-	position = snap_position(position)
-	super.draw_end(position)
+	pos = snap_position(pos)
+	super.draw_end(pos)
 	_rect = Rect2(0, 0, 0, 0)
 	_square = false
 	_expand_from_center = false
@@ -48,20 +48,20 @@ func draw_end(position: Vector2) -> void:
 
 
 func draw_preview() -> void:
-	if !_move && !_rect.has_no_area():
+	if !_move && _rect.has_area():
 		var canvas: Node2D = Global.canvas.previews
-		var position := canvas.position
-		var scale := canvas.scale
-		var temp_rect = _rect
+		var pos := canvas.position
+		var _scale := canvas.scale
+		var temp_rect := _rect
 		if Global.mirror_view:
-			position.x = position.x + Global.current_project.size.x
+			pos.x = pos.x + Global.current_project.size.x
 			temp_rect.position.x = Global.current_project.size.x - temp_rect.position.x
-			scale.x = -1
+			_scale.x = -1
 
 		var border := _get_shape_points_filled(temp_rect.size)
 		var indicator := _fill_bitmap_with_points(border, temp_rect.size)
 
-		canvas.draw_set_transform(temp_rect.position, canvas.rotation, scale)
+		canvas.draw_set_transform(temp_rect.position, canvas.rotation, _scale)
 		for line in _create_polylines(indicator):
 			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
@@ -115,21 +115,21 @@ func apply_selection(_position: Vector2) -> void:
 		Global.canvas.selection.commit_undo("Select", undo_data)
 
 
-func set_ellipse(selection_map: SelectionMap, position: Vector2) -> void:
+func set_ellipse(selection_map: SelectionMap, pos: Vector2) -> void:
 	var project: Project = Global.current_project
 	var bitmap_size: Vector2 = selection_map.get_size()
 	if _intersect:
 		selection_map.clear()
 	var points := _get_shape_points_filled(_rect.size)
 	for p in points:
-		var pos: Vector2 = position + p
-		if pos.x < 0 or pos.y < 0 or pos.x >= bitmap_size.x or pos.y >= bitmap_size.y:
+		var _pos: Vector2 = pos + p
+		if _pos.x < 0 or _pos.y < 0 or _pos.x >= bitmap_size.x or _pos.y >= bitmap_size.y:
 			continue
 		if _intersect:
-			if project.selection_map.is_pixel_selected(pos):
-				selection_map.select_pixel(pos, true)
+			if project.selection_map.is_pixel_selected(_pos):
+				selection_map.select_pixel(_pos, true)
 		else:
-			selection_map.select_pixel(pos, !_subtract)
+			selection_map.select_pixel(_pos, !_subtract)
 
 
 # Given an origin point and destination point, returns a rect representing
@@ -142,7 +142,7 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 		var new_size := (dest - origin).floor()
 		# Make rect 1:1 while centering it on the mouse
 		if _square:
-			var square_size := max(abs(new_size.x), abs(new_size.y))
+			var square_size := maxf(absf(new_size.x), absf(new_size.y))
 			new_size = Vector2(square_size, square_size)
 
 		origin -= new_size
@@ -150,7 +150,7 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 
 	# Make rect 1:1 while not trying to center it
 	if _square:
-		var square_size := min(abs(origin.x - dest.x), abs(origin.y - dest.y))
+		var square_size := minf(absf(origin.x - dest.x), absf(origin.y - dest.y))
 		rect.position.x = origin.x if origin.x < dest.x else origin.x - square_size
 		rect.position.y = origin.y if origin.y < dest.y else origin.y - square_size
 		rect.size = Vector2(square_size, square_size)
@@ -164,17 +164,17 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 	return rect
 
 
-func _get_shape_points_filled(size: Vector2) -> PackedVector2Array:
-	var border := _get_ellipse_points(Vector2.ZERO, size)
+func _get_shape_points_filled(ellipse_size: Vector2) -> PackedVector2Array:
+	var border := _get_ellipse_points(Vector2.ZERO, ellipse_size)
 	var filling := []
-	var bitmap := _fill_bitmap_with_points(border, size)
+	var bitmap := _fill_bitmap_with_points(border, ellipse_size)
 
-	for x in range(1, ceil(size.x / 2)):
+	for x in range(1, ceil(ellipse_size.x / 2)):
 		var fill := false
 		var prev_is_true := false
-		for y in range(0, ceil(size.y / 2)):
-			var top_l_p := Vector2(x, y)
-			var bit := bitmap.get_bit(top_l_p)
+		for y in range(0, ceil(ellipse_size.y / 2)):
+			var top_l_p := Vector2i(x, y)
+			var bit := bitmap.get_bitv(top_l_p)
 
 			if bit and not fill:
 				prev_is_true = true
@@ -182,9 +182,9 @@ func _get_shape_points_filled(size: Vector2) -> PackedVector2Array:
 
 			if not bit and (fill or prev_is_true):
 				filling.append(top_l_p)
-				filling.append(Vector2(x, size.y - y - 1))
-				filling.append(Vector2(size.x - x - 1, y))
-				filling.append(Vector2(size.x - x - 1, size.y - y - 1))
+				filling.append(Vector2(x, ellipse_size.y - y - 1))
+				filling.append(Vector2(ellipse_size.x - x - 1, y))
+				filling.append(Vector2(ellipse_size.x - x - 1, ellipse_size.y - y - 1))
 
 				if prev_is_true:
 					fill = true
@@ -196,12 +196,12 @@ func _get_shape_points_filled(size: Vector2) -> PackedVector2Array:
 
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
-func _get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
+func _get_ellipse_points(pos: Vector2, ellipse_size: Vector2) -> Array:
 	var array := []
 	var x0 := int(pos.x)
-	var x1 := pos.x + int(size.x - 1)
+	var x1 := pos.x + int(ellipse_size.x - 1)
 	var y0 := int(pos.y)
-	var y1 := int(pos.y) + int(size.y - 1)
+	var y1 := int(pos.y) + int(ellipse_size.y - 1)
 	var a := int(abs(x1 - x0))
 	var b := int(abs(y1 - x0))
 	var b1 := b & 1

@@ -30,7 +30,7 @@ func _ready() -> void:
 	_texture_rect.pivot_offset = Vector2(6, 6)
 	_texture_rect.add_to_group("UIButtons")
 	_button.add_child(_texture_rect)
-	_label.valign = Label.VALIGN_CENTER
+	_label.valign = VERTICAL_ALIGNMENT_CENTER
 	_label.position = Vector2(14, 0)
 	_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	_button.add_child(_label)
@@ -43,7 +43,7 @@ func _ready() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_THEME_CHANGED:
-		_texture_rect.texture = get_icon("arrow_normal", "CollapsibleContainer")
+		_texture_rect.texture = get_theme_icon("arrow_normal", "CollapsibleContainer")
 
 
 func _set_text(value: String) -> void:

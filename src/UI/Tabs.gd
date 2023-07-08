@@ -34,8 +34,8 @@ func _on_Tabs_tab_close(tab: int) -> void:
 		return
 
 	if Global.projects[tab].has_changed:
-		if !unsaved_changes_dialog.is_connected("confirmed", Callable(self, "delete_tab")):
-			unsaved_changes_dialog.connect("confirmed", Callable(self, "delete_tab").bind(tab))
+		if !unsaved_changes_dialog.confirmed.is_connected(delete_tab):
+			unsaved_changes_dialog.confirmed.connect(delete_tab.bind(tab))
 		unsaved_changes_dialog.popup_centered()
 		Global.dialog_open(true)
 	else:
@@ -60,8 +60,8 @@ func delete_tab(tab: int) -> void:
 	remove_tab(tab)
 	Global.projects[tab].remove()
 	OpenSave.remove_backup(tab)
-	OpenSave.current_save_paths.remove(tab)
-	OpenSave.backup_save_paths.remove(tab)
+	OpenSave.current_save_paths.remove_at(tab)
+	OpenSave.backup_save_paths.remove_at(tab)
 	if Global.current_project_index == tab:
 		if tab > 0:
 			Global.current_project_index -= 1
@@ -70,5 +70,5 @@ func delete_tab(tab: int) -> void:
 	else:
 		if tab < Global.current_project_index:
 			Global.current_project_index -= 1
-	if unsaved_changes_dialog.is_connected("confirmed", Callable(self, "delete_tab")):
-		unsaved_changes_dialog.disconnect("confirmed", Callable(self, "delete_tab"))
+	if unsaved_changes_dialog.confirmed.is_connected(delete_tab):
+		unsaved_changes_dialog.confirmed.disconnect(delete_tab)

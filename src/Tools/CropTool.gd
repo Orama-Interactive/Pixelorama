@@ -32,7 +32,7 @@ func draw_move(position: Vector2) -> void:
 	else:
 		if _crop.mode == CropRect.Mode.POSITION_SIZE and _locked_ratio:
 			var ratio: Vector2 = $"%Size".ratio
-			var distance := abs(_start_pos.x - position.x) + abs(_start_pos.y - position.y)
+			var distance := absf(_start_pos.x - position.x) + absf(_start_pos.y - position.y)
 			_crop.rect.size.x = round(distance * ratio.x / (ratio.x + ratio.y))
 			_crop.rect.size.y = round(distance * ratio.y / (ratio.x + ratio.y))
 			if _start_pos.x < position.x:

@@ -490,8 +490,8 @@ func commit_undo(action: String, undo_data: Dictionary) -> void:
 		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for image in undo_data:
 		project.undo_redo.add_undo_property(image, "data", undo_data[image])
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, frame, layer)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
 
 

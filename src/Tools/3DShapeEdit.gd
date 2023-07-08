@@ -55,7 +55,7 @@ var _object_names := {
 	"node3d_type:mesh:radial_segments": $"%MeshRadialSegments",
 	"node3d_type:mesh:rings": $"%MeshRings",
 	"node3d_type:mesh:is_hemisphere": $"%MeshIsHemisphere",
-	"node3d_type:mesh:height": $"%MeshMidHeight",
+	"node3d_type:mesh:mid_height": $"%MeshMidHeight",
 	"node3d_type:mesh:top_radius": $"%MeshTopRadius",
 	"node3d_type:mesh:bottom_radius": $"%MeshBottomRadius",
 	"node3d_type:mesh:text": $"%MeshText",
@@ -190,7 +190,7 @@ func cursor_move(position: Vector2) -> void:
 	var ray_from := camera.project_ray_origin(position)
 	var ray_to := ray_from + camera.project_ray_normal(position) * 20
 	var space_state := camera.get_world_3d().direct_space_state
-	var selection := space_state.intersect_ray(ray_from, ray_to)
+	var selection := space_state.intersect_ray(PhysicsRayQueryParameters3D.create(ray_from, ray_to))
 	if selection.is_empty():
 		if is_instance_valid(_hovering):
 			_hovering.unhover()
@@ -232,8 +232,8 @@ func _cel_changed() -> void:
 	sprite_changed_this_frame()
 
 	# two yields are required
-	await get_tree().idle_frame
-	await get_tree().idle_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
 	_cel.selected = selected
 
 
@@ -253,10 +253,10 @@ func _add_object(type: int, file_path := "") -> void:
 	undo_redo.create_action("Add 3D object")
 	undo_redo.add_do_property(_cel, "object_properties", new_objects)
 	undo_redo.add_undo_property(_cel, "object_properties", _cel.object_properties)
-	undo_redo.add_do_method(_cel, "_add_object_node", _cel.current_object_id)
-	undo_redo.add_undo_method(_cel, "_remove_object_node", _cel.current_object_id)
-	undo_redo.add_do_method(Global, "undo_or_redo", false)
-	undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	undo_redo.add_do_method(_cel._add_object_node.bind(_cel.current_object_id))
+	undo_redo.add_undo_method(_cel._remove_object_node.bind(_cel.current_object_id))
+	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
 	sprite_changed_this_frame()
 	_cel.current_object_id += 1
@@ -270,10 +270,10 @@ func _on_RemoveObject_pressed() -> void:
 		undo_redo.create_action("Remove 3D object")
 		undo_redo.add_do_property(_cel, "object_properties", new_objects)
 		undo_redo.add_undo_property(_cel, "object_properties", _cel.object_properties)
-		undo_redo.add_do_method(_cel, "_remove_object_node", _cel.selected.id)
-		undo_redo.add_undo_method(_cel, "_add_object_node", _cel.selected.id)
-		undo_redo.add_do_method(Global, "undo_or_redo", false)
-		undo_redo.add_undo_method(Global, "undo_or_redo", true)
+		undo_redo.add_do_method(_cel._remove_object_node.bind(_cel.selected.id))
+		undo_redo.add_undo_method(_cel._add_object_node.bind(_cel.selected.id))
+		undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 		undo_redo.commit_action()
 		_cel.selected = null
 		sprite_changed_this_frame()
@@ -286,10 +286,10 @@ func _object_property_changed(object: Cel3DObject) -> void:
 	undo_redo.create_action("Change object transform")
 	undo_redo.add_do_property(_cel, "object_properties", new_properties)
 	undo_redo.add_undo_property(_cel, "object_properties", _cel.object_properties)
-	undo_redo.add_do_method(_cel, "_update_objects_transform", object.id)
-	undo_redo.add_undo_method(_cel, "_update_objects_transform", object.id)
-	undo_redo.add_do_method(Global, "undo_or_redo", false)
-	undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	undo_redo.add_do_method(_cel._update_objects_transform.bind(object.id))
+	undo_redo.add_undo_method(_cel._update_objects_transform.bind(object.id))
+	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
 
 
@@ -395,25 +395,25 @@ func _set_value_from_node(to_edit: Object, value, prop: String) -> void:
 func _cel_property_vector3_changed(value: Vector3, prop: String) -> void:
 	_set_value_from_node(_cel, value, prop)
 	_value_handle_change()
-	Global.canvas.gizmos_3d.update()
+	Global.canvas.gizmos_3d.queue_redraw()
 
 
 func _cel_property_value_changed(value: float, prop: String) -> void:
 	_set_value_from_node(_cel, value, prop)
 	_value_handle_change()
-	Global.canvas.gizmos_3d.update()
+	Global.canvas.gizmos_3d.queue_redraw()
 
 
 func _cel_property_item_selected(value: int, prop: String) -> void:
 	_set_value_from_node(_cel, value, prop)
 	_value_handle_change()
-	Global.canvas.gizmos_3d.update()
+	Global.canvas.gizmos_3d.queue_redraw()
 
 
 func _cel_property_color_changed(value: Color, prop: String) -> void:
 	_set_value_from_node(_cel, value, prop)
 	_value_handle_change()
-	Global.canvas.gizmos_3d.update()
+	Global.canvas.gizmos_3d.queue_redraw()
 
 
 func _object_property_vector3_changed(value: Vector3, prop: String) -> void:
@@ -474,10 +474,10 @@ func _on_UndoRedoTimer_timeout() -> void:
 		undo_redo.create_action("Change 3D layer properties")
 		undo_redo.add_do_property(_cel, "scene_properties", _cel.serialize_scene_properties())
 		undo_redo.add_undo_property(_cel, "scene_properties", _cel.scene_properties)
-		undo_redo.add_do_method(_cel, "_scene_property_changed")
-		undo_redo.add_undo_method(_cel, "_scene_property_changed")
-		undo_redo.add_do_method(Global, "undo_or_redo", false)
-		undo_redo.add_undo_method(Global, "undo_or_redo", true)
+		undo_redo.add_do_method(_cel._scene_property_changed)
+		undo_redo.add_undo_method(_cel._scene_property_changed)
+		undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 		undo_redo.commit_action()
 
 

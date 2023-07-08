@@ -40,7 +40,7 @@ func _on_OptionButton_item_selected(index: int) -> void:
 		)
 	else:
 		$VBox/Animation/VBoxContainer/Options.visible = true
-	canvas_preview.update()
+	canvas_preview.queue_redraw()
 
 
 func _on_HFrames_value_changed(value: float) -> void:
@@ -48,7 +48,7 @@ func _on_HFrames_value_changed(value: float) -> void:
 	var frames: int = canvas_preview.h_frames * canvas_preview.v_frames
 	start_frame.max_value = frames
 	end_frame.max_value = frames
-	canvas_preview.update()
+	canvas_preview.queue_redraw()
 
 
 func _on_VFrames_value_changed(value: float) -> void:
@@ -56,7 +56,7 @@ func _on_VFrames_value_changed(value: float) -> void:
 	var frames: int = canvas_preview.h_frames * canvas_preview.v_frames
 	start_frame.max_value = frames
 	end_frame.max_value = frames
-	canvas_preview.update()
+	canvas_preview.queue_redraw()
 
 
 func _on_StartFrame_value_changed(value: float) -> void:
@@ -64,7 +64,7 @@ func _on_StartFrame_value_changed(value: float) -> void:
 	canvas_preview.start_sprite_sheet_frame = value
 	if end_frame.value < value:
 		end_frame.value = value
-	canvas_preview.update()
+	canvas_preview.queue_redraw()
 
 
 func _on_EndFrame_value_changed(value: float) -> void:
@@ -72,7 +72,7 @@ func _on_EndFrame_value_changed(value: float) -> void:
 	if start_frame.value > value:
 		start_frame.value = value
 		canvas_preview.frame_index = value - 1
-	canvas_preview.update()
+	canvas_preview.queue_redraw()
 
 
 func _on_PreviewViewportContainer_mouse_entered() -> void:

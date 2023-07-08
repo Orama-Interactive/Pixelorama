@@ -4,7 +4,7 @@ extends Node2D
 func _input(event: InputEvent) -> void:
 	if Global.has_focus:
 		if event is InputEventMouse or event is InputEventKey:
-			update()
+			queue_redraw()
 
 
 func _draw() -> void:

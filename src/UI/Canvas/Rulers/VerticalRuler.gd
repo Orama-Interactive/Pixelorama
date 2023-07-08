@@ -57,17 +57,11 @@ func _draw() -> void:
 		Vector2(1.0 / minor_subdivision, 1.0 / minor_subdivision)
 	)
 
-	first = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(
-		Vector2.ZERO
-	)
-	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse().xform(
-		Global.main_viewport.size
-	)
+	first = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse() * Vector2.ZERO
+	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse() * Global.main_viewport.size
 
 	for j in range(ceil(first.y), ceil(last.y)):
-		var position: Vector2 = (transform * ruler_transform * major_subdivide * minor_subdivide).xform(
-			Vector2(0, j)
-		)
+		var position: Vector2 = (transform * ruler_transform * major_subdivide * minor_subdivide) * Vector2(0, j)
 		if j % (major_subdivision * minor_subdivision) == 0:
 			draw_line(Vector2(0, position.y), Vector2(RULER_WIDTH, position.y), Color.WHITE)
 			var text_xform = Transform2D(-PI / 2, Vector2(font.get_height() - 4, position.y - 2))
@@ -108,4 +102,4 @@ func create_guide() -> void:
 		guide.add_point(Vector2(19999, Global.canvas.current_pixel.y))
 	Global.canvas.add_child(guide)
 	Global.has_focus = false
-	update()
+	queue_redraw()

@@ -56,10 +56,10 @@ func update_color(color: Color, button: int) -> void:
 
 
 func _average(color_1: Color, color_2: Color) -> void:
-	var average_r = (color_1.r + color_2.r) / 2.0
-	var average_g = (color_1.g + color_2.g) / 2.0
-	var average_b = (color_1.b + color_2.b) / 2.0
-	var average_a = (color_1.a + color_2.a) / 2.0
+	var average_r := (color_1.r + color_2.r) / 2.0
+	var average_g := (color_1.g + color_2.g) / 2.0
+	var average_b := (color_1.b + color_2.b) / 2.0
+	var average_a := (color_1.a + color_2.a) / 2.0
 	var average := Color(average_r, average_g, average_b, average_a)
 
 	var copy_button = average_color.get_parent()
@@ -70,7 +70,6 @@ func _average(color_1: Color, color_2: Color) -> void:
 func _on_CopyAverage_button_down():
 	transparent_checker.visible = false
 	average_color.visible = false
-	OS.clipboard = average_color.color.to_html()
 
 
 func _on_CopyAverage_button_up():

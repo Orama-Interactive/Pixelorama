@@ -54,8 +54,8 @@ func remove_action(action: String):
 
 func wait_frame():  # as yield is not available to classes below, so this is the solution
 	# use by yield(ExtensionsApi.wait_frame(), "completed")
-	await get_tree().idle_frame
-	await get_tree().idle_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
 
 
 func _get_caller_extension_name() -> String:
@@ -197,7 +197,7 @@ class PanelAPI:
 		# we must make tabs_visible = true for a few moments if it is false
 		if dockable.tabs_visible == false:
 			dockable.tabs_visible = true
-			await ExtensionsApi.wait_frame().completed
+			await ExtensionsApi.wait_frame()
 			dockable.tabs_visible = false
 		ExtensionsApi.add_action("add_tab")
 
@@ -227,7 +227,7 @@ class PanelAPI:
 		# we must make tabs_visible = true for a few moments if it is false
 		if dockable.tabs_visible == false:
 			dockable.tabs_visible = true
-			await ExtensionsApi.wait_frame().completed
+			await ExtensionsApi.wait_frame()
 			dockable.tabs_visible = false
 		ExtensionsApi.remove_action("add_tab")
 
@@ -498,7 +498,7 @@ class ExportAPI:
 		for i in Export.FileFormat.size():  # use an empty id if it's available
 			if !Export.FileFormat.values().has(i):
 				id = i
-		Export.FileFormat.merge({format_name: id})
+#		Export.FileFormat.merge({format_name: id})
 		#  add exporter generator
 		Export.custom_exporter_generators.merge({id: [exporter_generator, extension]})
 		#  add to animated (or not)

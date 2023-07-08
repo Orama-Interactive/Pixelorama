@@ -315,7 +315,7 @@ func _ready() -> void:
 	pixel_perfect = Global.config_cache.get_value("preferences", "pixel_perfect", false)
 
 	# Yield is necessary for the color picker nodes to update their color values
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	var color_value: Color = Global.config_cache.get_value(
 		_slots[MOUSE_BUTTON_LEFT].kname, "color", Color.BLACK
 	)
