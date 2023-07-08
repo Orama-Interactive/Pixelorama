@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-07-08 15:48\n"
+"PO-Revision-Date: 2023-07-08 16:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -170,7 +170,7 @@ msgid "Wrap around:"
 msgstr "ラップアラウンド"
 
 msgid "Center Frames"
-msgstr ""
+msgstr "中央フレーム"
 
 msgid "Rotate Image"
 msgstr "画像を回転"
