@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Vietnamese\n"
 "Language: vi_VN\n"
-"PO-Revision-Date: 2023-07-08 15:48\n"
+"PO-Revision-Date: 2023-07-08 19:07\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,6 +169,7 @@ msgstr ""
 msgid "Wrap around:"
 msgstr ""
 
+#. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
 msgstr ""
 
