@@ -319,7 +319,6 @@ func serialize() -> Dictionary:
 	var project_data := {
 		"pixelorama_version": Global.current_version,
 		"pxo_version": ProjectSettings.get_setting("application/config/Pxo_Version"),
-		"name": name,
 		"size_x": size.x,
 		"size_y": size.y,
 		"tile_mode_x_basis_x": tiles.x_basis.x,
@@ -346,8 +345,6 @@ func serialize() -> Dictionary:
 
 
 func deserialize(dict: Dictionary) -> void:
-	if dict.has("name"):
-		name = dict.name
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
 		size.y = dict.size_y
