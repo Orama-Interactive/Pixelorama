@@ -11,6 +11,7 @@ Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@20kdc](https:
 Built using Godot 3.5.2
 
 ### Added
+- A new offset image effect to easily move the image around, with animation support.
 - Fast way to clone frames of a tag. [#861](https://github.com/Orama-Interactive/Pixelorama/pull/861)
 - Added a reverse frames option on the right click menu of the frame buttons, to easily reverse the order of the selected frames.
 - A new Timeline category in the Preferences with options such as the colors of onion skinning's color mode, and whether a layer should be selected when a layer button (such as lock, visibility etc) gets pressed.
@@ -22,6 +23,8 @@ Built using Godot 3.5.2
 - The right click menu of the frame buttons now works for all selected frames, besides "move left" and "move right".
 - The canvas is automatically enlarged when importing an image of a larger size to the project.
 - Newly cloned frames are now automatically selected. [#861](https://github.com/Orama-Interactive/Pixelorama/pull/861)
+- "Centralize Image" has been moved from the Image menu to the frame button right click menu. [#884](https://github.com/Orama-Interactive/Pixelorama/pull/884)
+- The project's name is no longer saved inside .pxo files. Loaded projects now get their name directly from the file name.
 - Clicking on a layer button (such as lock, visibility etc) no longer selects the layer by default. This behavior can now be changed in the Preferences.
 - The image menu has been re-arranged. [#878](https://github.com/Orama-Interactive/Pixelorama/pull/878)
 - The "OK" button of the save and export dialogs are now named "Save" and "Export" respectively. [#876](https://github.com/Orama-Interactive/Pixelorama/pull/876)
