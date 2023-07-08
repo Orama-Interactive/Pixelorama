@@ -20,8 +20,8 @@ var tool_count := 0: set = _set_tool_count
 
 
 func _ready() -> void:
-	connect("updated", Callable(self, "update"))
-	Global.connect("project_changed", Callable(self, "reset"))
+	updated.connect(queue_redraw)
+	Global.project_changed.connect(reset)
 	mode = Global.config_cache.get_value("preferences", "crop_mode", 0)
 	locked_size = Global.config_cache.get_value("preferences", "crop_locked_size", false)
 	reset()

@@ -1,345 +1,328 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=54 format=3 uid="uid://c8dsi6ggkqa7a"]
 
-[ext_resource path="res://src/UI/Tools/Tools.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/UI/Canvas/CanvasPreview.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/UI/Tabs.gd" type="Script" id=3]
-[ext_resource path="res://src/UI/Canvas/Rulers/VerticalRuler.gd" type="Script" id=4]
-[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/UI/Canvas/Rulers/HorizontalRuler.gd" type="Script" id=6]
-[ext_resource path="res://src/UI/Canvas/CameraMovement.gd" type="Script" id=7]
-[ext_resource path="res://src/Shaders/Greyscale.gdshader" type="Shader" id=8]
-[ext_resource path="res://src/Shaders/TransparentChecker.gdshader" type="Shader" id=9]
-[ext_resource path="res://src/UI/GlobalToolOptions/GlobalToolOptions.tscn" type="PackedScene" id=10]
-[ext_resource path="res://src/UI/ReferenceImages/ReferencesPanel.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/UI/PerspectiveEditor/PerspectiveEditor.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/UI/Recorder/Recorder.tscn" type="PackedScene" id=13]
-[ext_resource path="res://addons/dockable_container/layout.gd" type="Script" id=14]
-[ext_resource path="res://src/UI/CanvasPreviewContainer/CanvasPreviewContainer.tscn" type="PackedScene" id=16]
-[ext_resource path="res://src/UI/ColorPickers/ColorPickers.tscn" type="PackedScene" id=17]
-[ext_resource path="res://src/UI/Timeline/AnimationTimeline.tscn" type="PackedScene" id=18]
-[ext_resource path="res://src/UI/Canvas/Canvas.tscn" type="PackedScene" id=19]
-[ext_resource path="res://src/Palette/PalettePanel.tscn" type="PackedScene" id=20]
-[ext_resource path="res://src/UI/ViewportContainer.gd" type="Script" id=23]
-[ext_resource path="res://addons/dockable_container/layout_split.gd" type="Script" id=27]
-[ext_resource path="res://addons/dockable_container/dockable_container.gd" type="Script" id=35]
-[ext_resource path="res://addons/dockable_container/layout_panel.gd" type="Script" id=36]
-[ext_resource path="res://src/UI/UI.gd" type="Script" id=37]
-[ext_resource path="res://src/Shaders/UITransparency.gdshader" type="Shader" id=38]
+[ext_resource type="PackedScene" path="res://src/UI/Tools/Tools.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://src/UI/Canvas/CanvasPreview.tscn" id="2"]
+[ext_resource type="Script" path="res://src/UI/Tabs.gd" id="3"]
+[ext_resource type="Script" path="res://src/UI/Canvas/Rulers/VerticalRuler.gd" id="4"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/TransparentChecker.tscn" id="5"]
+[ext_resource type="Script" path="res://src/UI/Canvas/Rulers/HorizontalRuler.gd" id="6"]
+[ext_resource type="Script" path="res://src/UI/Canvas/CameraMovement.gd" id="7"]
+[ext_resource type="Shader" path="res://src/Shaders/Greyscale.gdshader" id="8"]
+[ext_resource type="Shader" path="res://src/Shaders/TransparentChecker.gdshader" id="9"]
+[ext_resource type="PackedScene" path="res://src/UI/GlobalToolOptions/GlobalToolOptions.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://src/UI/ReferenceImages/ReferencesPanel.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://src/UI/PerspectiveEditor/PerspectiveEditor.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://dl6ook010q86o" path="res://src/UI/Recorder/Recorder.tscn" id="13"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout.gd" id="14"]
+[ext_resource type="PackedScene" path="res://src/UI/CanvasPreviewContainer/CanvasPreviewContainer.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://src/UI/ColorPickers/ColorPickers.tscn" id="17"]
+[ext_resource type="PackedScene" uid="uid://dbr6mulku2qju" path="res://src/UI/Timeline/AnimationTimeline.tscn" id="18"]
+[ext_resource type="PackedScene" path="res://src/UI/Canvas/Canvas.tscn" id="19"]
+[ext_resource type="PackedScene" path="res://src/Palette/PalettePanel.tscn" id="20"]
+[ext_resource type="Script" path="res://src/UI/ViewportContainer.gd" id="23"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout_split.gd" id="27"]
+[ext_resource type="Script" path="res://addons/dockable_container/dockable_container.gd" id="35"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout_panel.gd" id="36"]
+[ext_resource type="Script" path="res://src/UI/UI.gd" id="37"]
+[ext_resource type="Shader" path="res://src/Shaders/UITransparency.gdshader" id="38"]
 
-[sub_resource type="ShaderMaterial" id=26]
-shader = ExtResource( 38 )
-shader_param/alpha = 0.0
-shader_param/screen_resolution = Vector2( 1280, 720 )
-shader_param/position = Vector2( 100, 100 )
-shader_param/size = Vector2( 100, 100 )
+[sub_resource type="ShaderMaterial" id="26"]
+shader = ExtResource("38")
+shader_parameter/alpha = 0.0
+shader_parameter/screen_resolution = Vector2(1280, 720)
+shader_parameter/position = Vector2(100, 100)
+shader_parameter/size = Vector2(100, 100)
 
-[sub_resource type="Resource" id=1]
-resource_name = "TabBar"
-script = ExtResource( 36 )
-names = PackedStringArray( "Tools" )
+[sub_resource type="Resource" id="1"]
+resource_name = "Tabs"
+script = ExtResource("36")
+names = PackedStringArray("Tools")
 current_tab = 0
 
-[sub_resource type="Resource" id=8]
-resource_name = "TabBar"
-script = ExtResource( 36 )
-names = PackedStringArray( "Main Canvas" )
+[sub_resource type="Resource" id="8"]
+resource_name = "Tabs"
+script = ExtResource("36")
+names = PackedStringArray("Main Canvas")
 current_tab = 0
 
-[sub_resource type="Resource" id=33]
-resource_name = "TabBar"
-script = ExtResource( 36 )
-names = PackedStringArray( "Perspective Editor" )
+[sub_resource type="Resource" id="33"]
+resource_name = "Tabs"
+script = ExtResource("36")
+names = PackedStringArray("Perspective Editor")
 current_tab = 0
 
-[sub_resource type="Resource" id=34]
+[sub_resource type="Resource" id="34"]
 resource_name = "Split"
-script = ExtResource( 27 )
+script = ExtResource("27")
 direction = 0
 percent = 0.5
-first = SubResource( 8 )
-second = SubResource( 33 )
+first = SubResource("8")
+second = SubResource("33")
 
-[sub_resource type="Resource" id=28]
-resource_name = "TabBar"
-script = ExtResource( 36 )
-names = PackedStringArray( "Second Canvas" )
+[sub_resource type="Resource" id="28"]
+resource_name = "Tabs"
+script = ExtResource("36")
+names = PackedStringArray("Second Canvas")
 current_tab = 0
 
-[sub_resource type="Resource" id=29]
+[sub_resource type="Resource" id="29"]
 resource_name = "Split"
-script = ExtResource( 27 )
+script = ExtResource("27")
 direction = 0
 percent = 0.980952
-first = SubResource( 34 )
-second = SubResource( 28 )
+first = SubResource("34")
+second = SubResource("28")
 
-[sub_resource type="Resource" id=9]
-resource_name = "TabBar"
-script = ExtResource( 36 )
-names = PackedStringArray( "Animation Timeline" )
+[sub_resource type="Resource" id="9"]
+resource_name = "Tabs"
+script = ExtResource("36")
+names = PackedStringArray("Animation Timeline")
 current_tab = 0
 
-[sub_resource type="Resource" id=10]
+[sub_resource type="Resource" id="10"]
 resource_name = "Split"
-script = ExtResource( 27 )
+script = ExtResource("27")
 direction = 1
 percent = 0.90625
-first = SubResource( 29 )
-second = SubResource( 9 )
+first = SubResource("29")
+second = SubResource("9")
 
-[sub_resource type="Resource" id=11]
-resource_name = "TabBar"
-script = ExtResource( 36 )
-names = PackedStringArray( "Canvas Preview", "RefCounted Images" )
+[sub_resource type="Resource" id="11"]
+resource_name = "Tabs"
+script = ExtResource("36")
+names = PackedStringArray("Canvas Preview", "RefCounted Images")
 current_tab = 0
 
-[sub_resource type="Resource" id=20]
-resource_name = "TabBar"
-script = ExtResource( 36 )
-names = PackedStringArray( "Color Pickers" )
+[sub_resource type="Resource" id="20"]
+resource_name = "Tabs"
+script = ExtResource("36")
+names = PackedStringArray("Color Pickers")
 current_tab = 0
 
-[sub_resource type="Resource" id=30]
-resource_name = "TabBar"
-script = ExtResource( 36 )
-names = PackedStringArray( "Global Tool Options" )
+[sub_resource type="Resource" id="30"]
+resource_name = "Tabs"
+script = ExtResource("36")
+names = PackedStringArray("Global Tool Options")
 current_tab = 0
 
-[sub_resource type="Resource" id=35]
-resource_name = "TabBar"
-script = ExtResource( 36 )
-names = PackedStringArray( "Recorder" )
+[sub_resource type="Resource" id="35"]
+resource_name = "Tabs"
+script = ExtResource("36")
+names = PackedStringArray("Recorder")
 current_tab = 0
 
-[sub_resource type="Resource" id=36]
+[sub_resource type="Resource" id="36"]
 resource_name = "Split"
-script = ExtResource( 27 )
+script = ExtResource("27")
 direction = 1
 percent = 0.5
-first = SubResource( 30 )
-second = SubResource( 35 )
+first = SubResource("30")
+second = SubResource("35")
 
-[sub_resource type="Resource" id=31]
+[sub_resource type="Resource" id="31"]
 resource_name = "Split"
-script = ExtResource( 27 )
+script = ExtResource("27")
 direction = 1
 percent = 0.5
-first = SubResource( 20 )
-second = SubResource( 36 )
+first = SubResource("20")
+second = SubResource("36")
 
-[sub_resource type="Resource" id=21]
+[sub_resource type="Resource" id="21"]
 resource_name = "Split"
-script = ExtResource( 27 )
+script = ExtResource("27")
 direction = 1
 percent = 0.911765
-first = SubResource( 11 )
-second = SubResource( 31 )
+first = SubResource("11")
+second = SubResource("31")
 
-[sub_resource type="Resource" id=22]
-resource_name = "TabBar"
-script = ExtResource( 36 )
-names = PackedStringArray( "Left Tool Options" )
+[sub_resource type="Resource" id="22"]
+resource_name = "Tabs"
+script = ExtResource("36")
+names = PackedStringArray("Left Tool Options")
 current_tab = 0
 
-[sub_resource type="Resource" id=23]
-resource_name = "TabBar"
-script = ExtResource( 36 )
-names = PackedStringArray( "Right Tool Options" )
+[sub_resource type="Resource" id="23"]
+resource_name = "Tabs"
+script = ExtResource("36")
+names = PackedStringArray("Right Tool Options")
 current_tab = 0
 
-[sub_resource type="Resource" id=24]
+[sub_resource type="Resource" id="24"]
 resource_name = "Split"
-script = ExtResource( 27 )
+script = ExtResource("27")
 direction = 0
 percent = 0.5
-first = SubResource( 22 )
-second = SubResource( 23 )
+first = SubResource("22")
+second = SubResource("23")
 
-[sub_resource type="Resource" id=13]
-resource_name = "TabBar"
-script = ExtResource( 36 )
-names = PackedStringArray( "Palettes" )
+[sub_resource type="Resource" id="13"]
+resource_name = "Tabs"
+script = ExtResource("36")
+names = PackedStringArray("Palettes")
 current_tab = 0
 
-[sub_resource type="Resource" id=14]
+[sub_resource type="Resource" id="14"]
 resource_name = "Split"
-script = ExtResource( 27 )
+script = ExtResource("27")
 direction = 1
 percent = 0.754808
-first = SubResource( 24 )
-second = SubResource( 13 )
+first = SubResource("24")
+second = SubResource("13")
 
-[sub_resource type="Resource" id=15]
+[sub_resource type="Resource" id="15"]
 resource_name = "Split"
-script = ExtResource( 27 )
+script = ExtResource("27")
 direction = 1
 percent = 0.332031
-first = SubResource( 21 )
-second = SubResource( 14 )
+first = SubResource("21")
+second = SubResource("14")
 
-[sub_resource type="Resource" id=16]
+[sub_resource type="Resource" id="16"]
 resource_name = "Split"
-script = ExtResource( 27 )
+script = ExtResource("27")
 direction = 0
 percent = 0.855
-first = SubResource( 10 )
-second = SubResource( 15 )
+first = SubResource("10")
+second = SubResource("15")
 
-[sub_resource type="Resource" id=5]
+[sub_resource type="Resource" id="5"]
 resource_name = "Split"
-script = ExtResource( 27 )
+script = ExtResource("27")
 direction = 0
 percent = 0.0
-first = SubResource( 1 )
-second = SubResource( 16 )
+first = SubResource("1")
+second = SubResource("16")
 
-[sub_resource type="Resource" id=37]
+[sub_resource type="Resource" id="37"]
 resource_name = "Layout"
-script = ExtResource( 14 )
-root = SubResource( 5 )
+script = ExtResource("14")
+root = SubResource("5")
 hidden_tabs = {
 "Perspective Editor": true,
 "Recorder": true,
 "Second Canvas": true
 }
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 9 )
-shader_param/size = 10.0
-shader_param/alpha = 1.0
-shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
-shader_param/color2 = Color( 1, 1, 1, 1 )
-shader_param/offset = Vector2( 0, 0 )
-shader_param/scale = Vector2( 0, 0 )
-shader_param/size = Vector2( 0, 0 )
-shader_param/follow_movement = false
-shader_param/follow_scale = false
+[sub_resource type="ShaderMaterial" id="2"]
+shader = ExtResource("9")
+shader_parameter/size = 10.0
+shader_parameter/alpha = 1.0
+shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scale = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(0, 0)
+shader_parameter/follow_movement = false
+shader_parameter/follow_scale = false
 
-[sub_resource type="ShaderMaterial" id=27]
-shader = ExtResource( 8 )
+[sub_resource type="ShaderMaterial" id="27"]
+shader = ExtResource("8")
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 9 )
-shader_param/size = 10.0
-shader_param/alpha = 1.0
-shader_param/color1 = Color( 0.7, 0.7, 0.7, 1 )
-shader_param/color2 = Color( 1, 1, 1, 1 )
-shader_param/offset = Vector2( 0, 0 )
-shader_param/scale = Vector2( 0, 0 )
-shader_param/size = Vector2( 0, 0 )
-shader_param/follow_movement = false
-shader_param/follow_scale = false
+[sub_resource type="ShaderMaterial" id="3"]
+shader = ExtResource("9")
+shader_parameter/size = 10.0
+shader_parameter/alpha = 1.0
+shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scale = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(0, 0)
+shader_parameter/follow_movement = false
+shader_parameter/follow_scale = false
 
 [node name="UI" type="Panel"]
-material = SubResource( 26 )
+material = SubResource("26")
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 37 )
+script = ExtResource("37")
 
 [node name="DockableContainer" type="Container" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 35 )
+script = ExtResource("35")
 tabs_visible = false
-layout = SubResource( 37 )
+layout = SubResource("37")
 
-[node name="Tools" parent="DockableContainer" instance=ExtResource( 1 )]
-offset_left = 4.0
-offset_top = 8.0
-offset_right = -1240.0
-offset_bottom = -4.0
+[node name="Tools" parent="DockableContainer" instance=ExtResource("1")]
+layout_mode = 2
 
 [node name="Main Canvas" type="VBoxContainer" parent="DockableContainer"]
-offset_left = 60.0
-offset_top = 8.0
-offset_right = 977.0
-offset_bottom = 642.5
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
 [node name="TabsContainer" type="PanelContainer" parent="DockableContainer/Main Canvas"]
-offset_right = 917.0
-offset_bottom = 38.0
+layout_mode = 2
 
 [node name="TabBar" type="TabBar" parent="DockableContainer/Main Canvas/TabsContainer"]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 910.0
-offset_bottom = 31.0
-tab_alignment = 0
+layout_mode = 2
 tab_close_display_policy = 2
 drag_to_rearrange_enabled = true
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="HorizontalRuler" type="Button" parent="DockableContainer/Main Canvas"]
-offset_top = 38.0
-offset_right = 917.0
-offset_bottom = 58.0
-custom_minimum_size = Vector2( 0, 16 )
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 14
-theme_type_variation = "RulerButton"
+theme_type_variation = &"RulerButton"
 action_mode = 0
-script = ExtResource( 6 )
+script = ExtResource("6")
 
 [node name="ViewportandVerticalRuler" type="HBoxContainer" parent="DockableContainer/Main Canvas"]
-offset_top = 58.0
-offset_right = 917.0
-offset_bottom = 634.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
 [node name="VerticalRuler" type="Button" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler"]
-offset_right = 16.0
-offset_bottom = 576.0
-custom_minimum_size = Vector2( 16, 0 )
-focus_mode = 0
-mouse_default_cursor_shape = 15
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
-theme_type_variation = "RulerButton"
+focus_mode = 0
+mouse_default_cursor_shape = 15
+theme_type_variation = &"RulerButton"
 action_mode = 0
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler"]
-offset_left = 16.0
-offset_right = 917.0
-offset_bottom = 576.0
-focus_mode = 2
-mouse_default_cursor_shape = 3
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+focus_mode = 2
+mouse_default_cursor_shape = 3
 stretch = true
-script = ExtResource( 23 )
+script = ExtResource("23")
 camera_path = NodePath("SubViewport/Camera2D")
 
 [node name="SubViewport" type="SubViewport" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer"]
-size = Vector2( 901, 576 )
 handle_input_locally = false
-usage = 0
-render_target_update_mode = 3
+size = Vector2i(939, 630)
+render_target_update_mode = 4
 
-[node name="TransparentChecker" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource( 5 )]
-material = SubResource( 2 )
+[node name="TransparentChecker" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource("5")]
+material = SubResource("2")
 
-[node name="Canvas" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource( 19 )]
+[node name="Canvas" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource("19")]
 
 [node name="Camera2D" type="Camera2D" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport"]
-current = true
-zoom = Vector2( 0.15, 0.15 )
-script = ExtResource( 7 )
+zoom = Vector2(0.15, 0.15)
+script = ExtResource("7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport"]
 
 [node name="GreyscaleVision" type="ColorRect" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport/CanvasLayer"]
 visible = false
-material = SubResource( 27 )
+material = SubResource("27")
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 40.0
@@ -348,116 +331,77 @@ mouse_filter = 2
 
 [node name="Second Canvas" type="SubViewportContainer" parent="DockableContainer"]
 visible = false
-offset_left = 1274.0
-offset_top = 8.0
-offset_right = 1276.0
-offset_bottom = 350.0
+layout_mode = 2
 size_flags_vertical = 3
 stretch = true
-script = ExtResource( 23 )
+script = ExtResource("23")
 camera_path = NodePath("SubViewport/Camera2D2")
 
 [node name="SubViewport" type="SubViewport" parent="DockableContainer/Second Canvas"]
-size = Vector2( 2, 342 )
 handle_input_locally = false
+size = Vector2i(2, 342)
 render_target_update_mode = 0
 
-[node name="TransparentChecker" parent="DockableContainer/Second Canvas/SubViewport" instance=ExtResource( 5 )]
-material = SubResource( 3 )
+[node name="TransparentChecker" parent="DockableContainer/Second Canvas/SubViewport" instance=ExtResource("5")]
+material = SubResource("3")
 
-[node name="CanvasPreview" parent="DockableContainer/Second Canvas/SubViewport" instance=ExtResource( 2 )]
+[node name="CanvasPreview" parent="DockableContainer/Second Canvas/SubViewport" instance=ExtResource("2")]
 
 [node name="Camera2D2" type="Camera2D" parent="DockableContainer/Second Canvas/SubViewport"]
-current = true
-zoom = Vector2( 0.15, 0.15 )
-script = ExtResource( 7 )
+zoom = Vector2(0.15, 0.15)
+script = ExtResource("7")
 index = 1
 
-[node name="Animation Timeline" parent="DockableContainer" instance=ExtResource( 18 )]
-offset_left = 60.0
-offset_top = 666.5
-offset_right = 977.0
-offset_bottom = 716.0
+[node name="Animation Timeline" parent="DockableContainer" instance=ExtResource("18")]
+layout_mode = 2
 
-[node name="Canvas Preview" parent="DockableContainer" instance=ExtResource( 16 )]
-offset_left = 997.0
-offset_top = 8.0
-offset_right = 1276.0
-offset_bottom = 98.0
+[node name="Canvas Preview" parent="DockableContainer" instance=ExtResource("16")]
+layout_mode = 2
 
-[node name="Color Pickers" parent="DockableContainer" instance=ExtResource( 17 )]
-offset_left = 997.0
-offset_top = 122.0
-offset_bottom = 184.0
+[node name="Color Pickers" parent="DockableContainer" instance=ExtResource("17")]
+layout_mode = 2
 
-[node name="Global Tool Options" parent="DockableContainer" instance=ExtResource( 10 )]
-offset_left = 997.0
-offset_top = 208.0
-offset_right = 1276.0
-offset_bottom = 258.0
+[node name="Global Tool Options" parent="DockableContainer" instance=ExtResource("10")]
+layout_mode = 2
 
 [node name="Left Tool Options" type="ScrollContainer" parent="DockableContainer"]
-offset_left = 997.0
-offset_top = 282.0
-offset_right = 1126.5
-offset_bottom = 592.0
-custom_minimum_size = Vector2( 72, 72 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
 
 [node name="LeftPanelContainer" type="PanelContainer" parent="DockableContainer/Left Tool Options"]
-offset_right = 130.0
-offset_bottom = 298.0
-custom_minimum_size = Vector2( 130, 0 )
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Right Tool Options" type="ScrollContainer" parent="DockableContainer"]
-offset_left = 1146.5
-offset_top = 282.0
-offset_right = 1276.0
-offset_bottom = 592.0
-custom_minimum_size = Vector2( 72, 72 )
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
 
 [node name="RightPanelContainer" type="PanelContainer" parent="DockableContainer/Right Tool Options"]
-offset_right = 130.0
-offset_bottom = 298.0
-custom_minimum_size = Vector2( 130, 0 )
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Palettes" parent="DockableContainer" instance=ExtResource( 20 )]
-offset_left = 997.0
-offset_top = 616.0
-offset_right = 1276.0
-offset_bottom = 716.0
+[node name="Palettes" parent="DockableContainer" instance=ExtResource("20")]
+layout_mode = 2
 
-[node name="RefCounted Images" parent="DockableContainer" instance=ExtResource( 11 )]
+[node name="RefCounted Images" parent="DockableContainer" instance=ExtResource("11")]
 visible = false
-offset_left = 993.0
-offset_right = -166.0
-offset_bottom = -684.0
+layout_mode = 2
 
-[node name="Perspective Editor" parent="DockableContainer" instance=ExtResource( 12 )]
+[node name="Perspective Editor" parent="DockableContainer" instance=ExtResource("12")]
 visible = false
-offset_left = 528.5
-offset_top = 8.0
-offset_right = -303.0
-offset_bottom = -77.5
+layout_mode = 2
 
-[node name="Recorder" parent="DockableContainer" instance=ExtResource( 13 )]
+[node name="Recorder" parent="DockableContainer" instance=ExtResource("13")]
 visible = false
-offset_left = 997.0
-offset_top = 282.0
-offset_right = 1276.0
-offset_bottom = 332.0
+layout_mode = 2
 
 [connection signal="item_rect_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_item_rect_changed"]
 [connection signal="visibility_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_visibility_changed"]
-[connection signal="reposition_active_tab_request" from="DockableContainer/Main Canvas/TabsContainer/TabBar" to="DockableContainer/Main Canvas/TabsContainer/TabBar" method="_on_Tabs_reposition_active_tab_request"]
 [connection signal="tab_changed" from="DockableContainer/Main Canvas/TabsContainer/TabBar" to="DockableContainer/Main Canvas/TabsContainer/TabBar" method="_on_Tabs_tab_changed"]
-[connection signal="tab_closed" from="DockableContainer/Main Canvas/TabsContainer/TabBar" to="DockableContainer/Main Canvas/TabsContainer/TabBar" method="_on_Tabs_tab_close"]
 [connection signal="mouse_entered" from="DockableContainer/Main Canvas/HorizontalRuler" to="DockableContainer/Main Canvas/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
 [connection signal="pressed" from="DockableContainer/Main Canvas/HorizontalRuler" to="DockableContainer/Main Canvas/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
 [connection signal="pressed" from="DockableContainer/Main Canvas/ViewportandVerticalRuler/VerticalRuler" to="DockableContainer/Main Canvas/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]

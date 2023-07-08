@@ -29,7 +29,7 @@ func _button_pressed() -> void:
 		Global.canvas.selection.transform_content_confirm()
 		var prev_curr_frame := Global.current_project.current_frame
 		if Input.is_action_pressed("shift"):
-			var frame_diff_sign := sign(frame - prev_curr_frame)
+			var frame_diff_sign := signi(frame - prev_curr_frame)
 			if frame_diff_sign == 0:
 				frame_diff_sign = 1
 			for i in range(prev_curr_frame, frame + frame_diff_sign, frame_diff_sign):
@@ -67,12 +67,12 @@ func _button_pressed() -> void:
 			if frame < Global.current_project.frames.size() - 1:
 				popup_menu.set_item_disabled(MOVE_RIGHT, false)
 		popup_menu.popup(Rect2(get_global_mouse_position(), Vector2.ONE))
-		pressed = !pressed
+		button_pressed = !button_pressed
 	elif Input.is_action_just_released("middle_mouse"):
-		pressed = !pressed
+		button_pressed = !button_pressed
 		Global.animation_timeline.delete_frames(_get_frame_indices())
 	else:  # An example of this would be Space
-		pressed = !pressed
+		button_pressed = !button_pressed
 
 
 func _on_PopupMenu_id_pressed(id: int) -> void:
@@ -110,12 +110,12 @@ func change_frame_order(rate: int) -> void:
 		project.undo_redo.add_do_method(project, "change_cel", project.current_frame)
 
 	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
 
 
-func _get_drag_data(_position: Vector2) -> Array:
+func _get_drag_data(_position: Vector2) -> Variant:
 	var button := Button.new()
 	button.size = size
 	button.theme = Global.control.theme
@@ -170,8 +170,8 @@ func _drop_data(_pos: Vector2, data) -> void:
 	else:
 		project.undo_redo.add_do_method(project, "change_cel", project.current_frame)
 	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
 
 

@@ -1,29 +1,29 @@
 # gdlint: ignore=max-public-methods
 class_name Project
 extends RefCounted
-# A class for project properties.
+## A class for project properties.
 
 var name := "": set = _name_changed
 var size: Vector2: set = _size_changed
 var undo_redo := UndoRedo.new()
 var tiles: Tiles
-var undos := 0  # The number of times we added undo properties
-var can_undo = true
+var undos := 0  ## The number of times we added undo properties
+var can_undo := true
 var fill_color := Color(0)
 var has_changed := false: set = _has_changed_changed
 # frames and layers Arrays should generally only be modified directly when
 # opening/creating a project. When modifying the current project, use
 # the add/remove/move/swap_frames/layers methods
-var frames := []  # Array of Frames (that contain Cels)
-var layers := []  # Array of Layers
+var frames: Array[Frame] = []  # Array of Frames (that contain Cels)
+var layers: Array[BaseLayer] = []  # Array of Layers
 var current_frame := 0
 var current_layer := 0
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
 
 var animation_tags := []: set = _animation_tags_changed
-var guides := []  # Array of Guides
-var brushes := []  # Array of Images
-var reference_images := []  # Array of ReferenceImages
+var guides: Array[Guide] = []
+var brushes: Array[Image] = []
+var reference_images: Array[ReferenceImage] = []
 var vanishing_points := []  # Array of Vanishing Points
 var fps := 6.0
 
@@ -39,10 +39,10 @@ var selection_offset := Vector2.ZERO: set = _selection_offset_changed
 var has_selection := false
 
 # For every camera (currently there are 3)
-var cameras_rotation := [0.0, 0.0, 0.0]  # Array of float
-var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)]
-var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
-var cameras_zoom_max := [Vector2.ONE, Vector2.ONE, Vector2.ONE]
+var cameras_rotation: PackedFloat32Array = [0.0, 0.0, 0.0]
+var cameras_zoom: PackedVector2Array = [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)]
+var cameras_offset: PackedVector2Array = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
+var cameras_zoom_max: PackedVector2Array = [Vector2.ONE, Vector2.ONE, Vector2.ONE]
 
 # Export directory path and export file name
 var directory_path := ""
@@ -51,10 +51,10 @@ var file_format: int = Export.FileFormat.PNG
 var was_exported := false
 var export_overwrite := false
 
-var animation_tag_node = preload("res://src/UI/Timeline/AnimationTagUI.tscn")
+var animation_tag_node := preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
 
-func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
+func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
 	frames = _frames
 	name = _name
 	size = _size
@@ -189,13 +189,13 @@ func change_project() -> void:
 	for brush in brushes:
 		Brushes.add_project_brush(brush)
 
-	Global.canvas.update()
-	Global.canvas.grid.update()
-	Global.canvas.tile_mode.update()
+	Global.canvas.queue_redraw()
+	Global.canvas.grid.queue_redraw()
+	Global.canvas.tile_mode.queue_redraw()
 	Global.transparent_checker.update_rect()
 	Global.animation_timeline.fps_spinbox.value = fps
-	Global.horizontal_ruler.update()
-	Global.vertical_ruler.update()
+	Global.horizontal_ruler.queue_redraw()
+	Global.vertical_ruler.queue_redraw()
 	Global.references_panel.project_changed()
 	Global.perspective_editor.update_points()
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
@@ -236,7 +236,7 @@ func change_project() -> void:
 	selection_map_changed()
 	Global.canvas.selection.big_bounding_rectangle = selection_map.get_used_rect()
 	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
-	Global.canvas.selection.update()
+	Global.canvas.selection.queue_redraw()
 	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu_button.get_popup()
 	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
 
@@ -244,16 +244,12 @@ func change_project() -> void:
 	for camera in Global.cameras:
 		camera.zoom_max = cameras_zoom_max[i]
 		if camera == Global.camera_preview:
-			Global.preview_zoom_slider.disconnect(
-				"value_changed",
-				Global.canvas_preview_container,
-				"_on_PreviewZoomSlider_value_changed"
+			Global.preview_zoom_slider.value_changed.disconnect(
+				Global.canvas_preview_container._on_PreviewZoomSlider_value_changed
 			)
 			Global.preview_zoom_slider.min_value = -camera.zoom_max.x
-			Global.preview_zoom_slider.connect(
-				"value_changed",
-				Global.canvas_preview_container,
-				"_on_PreviewZoomSlider_value_changed"
+			Global.preview_zoom_slider.value_changed.connect(
+				Global.canvas_preview_container._on_PreviewZoomSlider_value_changed
 			)
 
 		if camera == Global.camera:
@@ -425,7 +421,7 @@ func deserialize(dict: Dictionary) -> void:
 			Global.canvas.add_child(ri)
 	if dict.has("vanishing_points"):
 		vanishing_points = dict.vanishing_points
-		Global.perspective_editor.update()
+		Global.perspective_editor.queue_redraw()
 	if dict.has("symmetry_points"):
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]
@@ -529,7 +525,7 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	if current_frame < frames.size():  # Set opacity slider
 		var cel_opacity: float = frames[current_frame].cels[current_layer].opacity
 		Global.layer_opacity_slider.value = cel_opacity * 100
-	Global.canvas.update()
+	Global.canvas.queue_redraw()
 	Global.transparent_checker.update_rect()
 	Global.emit_signal("cel_changed")
 
@@ -686,7 +682,7 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 				if cel.link_set["cels"].is_empty():
 					layers[l].cel_link_sets.erase(cel.link_set)
 		# Remove frame
-		frames.remove(indices[i] - i)
+		frames.remove_at(indices[i] - i)
 		Global.animation_timeline.project_frame_removed(indices[i] - i)
 	_update_frame_ui()
 
@@ -695,7 +691,7 @@ func move_frame(from_index: int, to_index: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
 	var frame = frames[from_index]
-	frames.remove(from_index)
+	frames.remove_at(from_index)
 	Global.animation_timeline.project_frame_removed(from_index)
 	frames.insert(to_index, frame)
 	Global.animation_timeline.project_frame_added(to_index)
@@ -749,10 +745,10 @@ func remove_layers(indices: Array) -> void:
 	selected_cels.clear()
 	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
-		layers.remove(indices[i] - i)
+		layers.remove_at(indices[i] - i)
 		for frame in frames:
 			frame.cels[indices[i] - i].on_remove()
-			frame.cels.remove(indices[i] - i)
+			frame.cels.remove_at(indices[i] - i)
 		Global.animation_timeline.project_layer_removed(indices[i] - i)
 	_update_layer_ui()
 

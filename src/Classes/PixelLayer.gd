@@ -3,7 +3,7 @@ extends BaseLayer
 # A class for standard pixel layer properties.
 
 
-func _init(_project, _name := "") -> void:
+func _init(_project: Project, _name := "") -> void:
 	project = _project
 	name = _name
 
@@ -28,8 +28,7 @@ func get_layer_type() -> int:
 
 
 func new_empty_cel() -> BaseCel:
-	var image := Image.new()
-	image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	return PixelCel.new(image)
 
 

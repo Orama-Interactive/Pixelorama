@@ -18,7 +18,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 
 	var params := {"colors": levels, "dither": dither, "selection": selection_tex}
 
-	if !confirmed:
+	if !has_been_confirmed:
 		for param in params:
 			preview.material.set_shader_parameter(param, params[param])
 	else:

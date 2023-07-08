@@ -118,7 +118,7 @@ func _on_PreviewDialog_confirmed() -> void:
 		synchronize()
 		for child in Global.control.get_children():
 			if "PreviewDialog" in child.name:
-				child.emit_signal("confirmed")
+				child.confirmed.emit()
 	else:
 		if current_import_option == ImageImportOptions.NEW_TAB:
 			OpenSave.open_image_as_new_tab(path, image)
@@ -191,15 +191,15 @@ func _on_PreviewDialog_confirmed() -> void:
 			Global.patterns_popup.add(image, file_name)
 
 			# Copy the image file into the "pixelorama/Patterns" directory
-			var location := "Patterns".plus_file(file_name_ext)
-			var dir = DirAccess.new()
-			dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+			var location := "Patterns".path_join(file_name_ext)
+			var dir := DirAccess.open(path)
+			dir.copy(path, Global.directory_module.xdg_data_home.path_join(location))
 
 
 func _on_ApplyAll_toggled(pressed) -> void:
 	is_master = pressed
 	# below 4 (and the last) line is needed for correct popup placement
-	var old_rect = get_rect()
+#	var old_rect = get_rect()
 	disconnect("popup_hide", Callable(self, "_on_PreviewDialog_popup_hide"))
 	hide()
 	connect("popup_hide", Callable(self, "_on_PreviewDialog_popup_hide"))
@@ -211,7 +211,7 @@ func _on_ApplyAll_toggled(pressed) -> void:
 				synchronize()
 			else:
 				child.popup_centered()
-	popup(old_rect)  # needed for correct popup_order
+#	popup(old_rect)  # needed for correct popup_order
 
 
 func synchronize() -> void:
@@ -304,7 +304,7 @@ func _on_ImportOption_item_selected(id: int) -> void:
 		var at_layer_option: OptionButton = new_frame_options.get_node("AtLayerOption")
 		at_layer_option.clear()
 		var layers := Global.current_project.layers.duplicate()
-		layers.invert()
+		layers.reverse()
 		var i := 0
 		for l in layers:
 			if not l is PixelLayer:
@@ -319,7 +319,7 @@ func _on_ImportOption_item_selected(id: int) -> void:
 		var at_layer_option: OptionButton = replace_cel_options.get_node("AtLayerOption")
 		at_layer_option.clear()
 		var layers := Global.current_project.layers.duplicate()
-		layers.invert()
+		layers.reverse()
 		var i := 0
 		for l in layers:
 			if not l is PixelLayer:
@@ -419,9 +419,9 @@ func add_brush() -> void:
 		Brushes.add_file_brush([image], file_name)
 
 		# Copy the image file into the "pixelorama/Brushes" directory
-		var location := "Brushes".plus_file(file_name_ext)
-		var dir = DirAccess.new()
-		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+		var location := "Brushes".path_join(file_name_ext)
+		var dir := DirAccess.open(path)
+		dir.copy(path, Global.directory_module.xdg_data_home.path_join(location))
 
 	elif brush_type == BrushTypes.PROJECT:
 		var file_name: String = path.get_file().get_basename()
@@ -432,12 +432,11 @@ func add_brush() -> void:
 		var brush_name = new_brush_name.get_node("BrushNameLineEdit").text.to_lower()
 		if !brush_name.is_valid_filename():
 			return
-		var dir := DirAccess.new()
-		dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes"))
+		var dir := DirAccess.open(Global.directory_module.xdg_data_home.path_join("Brushes"))
 		if !dir.dir_exists(brush_name):
 			dir.make_dir(brush_name)
 
-		dir.open(Global.directory_module.xdg_data_home.plus_file("Brushes").plus_file(brush_name))
+		dir.open(Global.directory_module.xdg_data_home.path_join("Brushes").path_join(brush_name))
 		var random_brushes := []
 		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var curr_file := dir.get_next()
@@ -450,8 +449,8 @@ func add_brush() -> void:
 		var file_ext: String = path.get_file().get_extension()
 		var index: int = random_brushes.size() + 1
 		var file_name = "~" + brush_name + str(index) + "." + file_ext
-		var location := "Brushes".plus_file(brush_name).plus_file(file_name)
-		dir.copy(path, Global.directory_module.xdg_data_home.plus_file(location))
+		var location := "Brushes".path_join(brush_name).path_join(file_name)
+		dir.copy(path, Global.directory_module.xdg_data_home.path_join(location))
 
 
 # Checks if the file already exists
@@ -461,8 +460,7 @@ func file_name_replace(name: String, folder: String) -> String:
 	var i := 1
 	var file_ext = name.get_extension()
 	var temp_name := name
-	var dir := DirAccess.new()
-	dir.open(Global.directory_module.xdg_data_home.plus_file(folder))
+	var dir := DirAccess.open(Global.directory_module.xdg_data_home.path_join(folder))
 	while dir.file_exists(temp_name):
 		i += 1
 		temp_name = name.get_basename() + " (%s)" % i

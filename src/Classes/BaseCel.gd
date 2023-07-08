@@ -64,11 +64,11 @@ func deserialize(dict: Dictionary) -> void:
 	opacity = dict["opacity"]
 
 
-func save_image_data_to_pxo(_file: File) -> void:
+func save_image_data_to_pxo(_file: FileAccess) -> void:
 	return
 
 
-func load_image_data_from_pxo(_file: File, _project_size: Vector2) -> void:
+func load_image_data_from_pxo(_file: FileAccess, _project_size: Vector2) -> void:
 	return
 
 

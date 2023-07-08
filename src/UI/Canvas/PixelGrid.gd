@@ -14,7 +14,7 @@ func _draw() -> void:
 		return
 
 	var target_rect: Rect2 = Global.current_project.tiles.get_bounding_rect()
-	if target_rect.has_no_area():
+	if not target_rect.has_area():
 		return
 
 	# Using Array instead of PoolVector2Array to avoid kinda

@@ -4,8 +4,8 @@ extends AImgIOBaseExporter
 # Note that if the interface needs changing for new features, do just change it!
 
 # Gif exporter
-const GIFExporter = preload("res://addons/gdgifexporter/exporter.gd")
-const MedianCutQuantization = preload("res://addons/gdgifexporter/quantization/median_cut.gd")
+const GIFExporter := preload("res://addons/gdgifexporter/exporter.gd")
+const MedianCutQuantization := preload("res://addons/gdgifexporter/quantization/median_cut.gd")
 
 
 func _init():
@@ -21,7 +21,7 @@ func export_animation(
 ) -> PackedByteArray:
 	var first_frame: AImgIOFrame = frames[0]
 	var first_img := first_frame.content
-	var exporter = GIFExporter.new(first_img.get_width(), first_img.get_height())
+	var exporter := GIFExporter.new(first_img.get_width(), first_img.get_height())
 	for v in frames:
 		var frame: AImgIOFrame = v
 		exporter.add_frame(frame.content, frame.duration, MedianCutQuantization)

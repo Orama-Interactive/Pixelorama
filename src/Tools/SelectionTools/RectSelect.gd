@@ -8,7 +8,7 @@ var _displace_origin = false  # Mouse Click + Alt
 
 
 func _input(event: InputEvent) -> void:
-	if !_move and !_rect.has_no_area():
+	if !_move and _rect.has_area():
 		if event.is_action_pressed("shape_perfect"):
 			_square = true
 		elif event.is_action_released("shape_perfect"):
@@ -135,7 +135,7 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 		var new_size := (dest - origin).floor()
 		# Make rect 1:1 while centering it on the mouse
 		if _square:
-			var square_size := max(abs(new_size.x), abs(new_size.y))
+			var square_size := maxf(absf(new_size.x), absf(new_size.y))
 			new_size = Vector2(square_size, square_size)
 
 		origin -= new_size
@@ -143,7 +143,7 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 
 	# Make rect 1:1 while not trying to center it
 	if _square:
-		var square_size := min(abs(origin.x - dest.x), abs(origin.y - dest.y))
+		var square_size := minf(absf(origin.x - dest.x), absf(origin.y - dest.y))
 		rect.position.x = origin.x if origin.x < dest.x else origin.x - square_size
 		rect.position.y = origin.y if origin.y < dest.y else origin.y - square_size
 		rect.size = Vector2(square_size, square_size)

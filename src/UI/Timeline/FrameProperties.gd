@@ -31,6 +31,6 @@ func _on_FrameProperties_confirmed() -> void:
 		project.undo_redo.add_undo_property(
 			project.frames[frame], "duration", project.frames[frame].duration
 		)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()

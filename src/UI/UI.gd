@@ -18,8 +18,8 @@ func _on_main_canvas_visibility_changed() -> void:
 func update_transparent_shader() -> void:
 	# Works independently of the transparency feature
 	var canvas_size: Vector2 = (main_canvas_container.size - Vector2.DOWN * 2) * Global.shrink
-	material.set("shader_param/screen_resolution", get_viewport().size)
-	material.set(
+	material.set_shader_param("shader_param/screen_resolution", get_viewport().size)
+	material.set_shader_param(
 		"shader_param/position", main_canvas_container.global_position * Global.shrink
 	)
-	material.set("shader_param/size", canvas_size)
+	material.set_shader_param("shader_param/size", canvas_size)

@@ -21,7 +21,7 @@ void fragment() {
 	}
 	else if (follow_movement)
 		ref_pos -= mod(offset, size * 2.0);
-	
+
 	vec2 pos = mod(ref_pos, size * 2.0);
 	bool c1 = any(lessThan(pos, vec2(size)));
 	bool c2 = any(greaterThanEqual(pos, vec2(size)));

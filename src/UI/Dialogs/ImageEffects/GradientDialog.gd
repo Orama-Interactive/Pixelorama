@@ -117,7 +117,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"n_of_colors": n_of_colors
 	}
 
-	if !confirmed:
+	if !has_been_confirmed:
 		preview.material.gdshader = shader
 		for param in params:
 			preview.material.set_shader_parameter(param, params[param])

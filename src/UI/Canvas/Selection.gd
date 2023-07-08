@@ -126,7 +126,7 @@ func _input(event: InputEvent) -> void:
 						transform_content_start()
 					project.selection_offset = Vector2.ZERO
 					if dragged_gizmo.type == Gizmo.Type.ROTATE:
-						var img_size := max(
+						var img_size := maxi(
 							original_preview_image.get_width(), original_preview_image.get_height()
 						)
 						original_preview_image.crop(img_size, img_size)
@@ -292,12 +292,12 @@ func _update_gizmos() -> void:
 #	gizmos[8].rect = Rect2(
 #		Vector2((rect_end.x + rect_pos.x - size.x) / 2, rect_pos.y - size.y - (size.y * 2)), size
 #	)
-	update()
+	queue_redraw()
 
 
 func _update_on_zoom() -> void:
 	var zoom := Global.camera.zoom.x
-	var size := max(
+	var size := maxi(
 		Global.current_project.selection_map.get_size().x,
 		Global.current_project.selection_map.get_size().y
 	)
@@ -395,7 +395,7 @@ func resize_selection() -> void:
 	)
 	Global.current_project.selection_map = selection_map_copy
 	Global.current_project.selection_map_changed()
-	update()
+	queue_redraw()
 
 
 func _gizmo_rotate() -> void:  # Does not work properly yet
@@ -429,7 +429,7 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 	Global.current_project.selection_map = bitmap_image
 	Global.current_project.selection_map_changed()
 	self.big_bounding_rectangle = bitmap_image.get_used_rect()
-	update()
+	queue_redraw()
 
 
 func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
@@ -481,7 +481,7 @@ func move_borders(move: Vector2) -> void:
 		return
 	marching_ants_outline.offset += move
 	self.big_bounding_rectangle.position += move
-	update()
+	queue_redraw()
 
 
 func move_borders_end() -> void:
@@ -493,7 +493,7 @@ func move_borders_end() -> void:
 		commit_undo("Select", undo_data)
 	else:
 		Global.current_project.selection_map_changed()
-	update()
+	queue_redraw()
 
 
 func transform_content_start() -> void:
@@ -509,7 +509,7 @@ func transform_content_start() -> void:
 	original_bitmap.copy_from(Global.current_project.selection_map)
 	original_big_bounding_rectangle = big_bounding_rectangle
 	original_offset = Global.current_project.selection_offset
-	update()
+	queue_redraw()
 
 
 func move_content(move: Vector2) -> void:
@@ -553,7 +553,7 @@ func transform_content_confirm() -> void:
 	original_bitmap = SelectionMap.new()
 	is_moving_content = false
 	is_pasting = false
-	update()
+	queue_redraw()
 
 
 func transform_content_cancel() -> void:
@@ -583,7 +583,7 @@ func transform_content_cancel() -> void:
 	preview_image = Image.new()
 	original_bitmap = SelectionMap.new()
 	is_pasting = false
-	update()
+	queue_redraw()
 
 
 func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
@@ -619,10 +619,10 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 			if not image is Image:
 				continue
 			project.undo_redo.add_undo_property(image, "data", undo_data_tmp[image])
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
-	project.undo_redo.add_do_method(project, "selection_map_changed")
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_undo_method(project, "selection_map_changed")
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_do_method(project.selection_map_changed)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_undo_method(project.selection_map_changed)
 	project.undo_redo.commit_action()
 
 	undo_data.clear()
@@ -726,8 +726,7 @@ func copy() -> void:
 		"selection_offset": cl_selection_offset,
 	}
 
-	var clipboard_file := File.new()
-	clipboard_file.open(CLIPBOARD_FILE_PATH, File.WRITE)
+	var clipboard_file := FileAccess.open(CLIPBOARD_FILE_PATH, FileAccess.WRITE)
 	clipboard_file.store_var(transfer_clipboard, true)
 	clipboard_file.close()
 
@@ -741,10 +740,9 @@ func copy() -> void:
 
 
 func paste(in_place := false) -> void:
-	var clipboard_file := File.new()
-	if !clipboard_file.file_exists(CLIPBOARD_FILE_PATH):
+	if !FileAccess.file_exists(CLIPBOARD_FILE_PATH):
 		return
-	clipboard_file.open(CLIPBOARD_FILE_PATH, File.READ)
+	var clipboard_file := FileAccess.open(CLIPBOARD_FILE_PATH, FileAccess.READ)
 	var clipboard = clipboard_file.get_var(true)
 	clipboard_file.close()
 
@@ -774,7 +772,7 @@ func paste(in_place := false) -> void:
 	project.selection_offset = clipboard.selection_offset
 	big_bounding_rectangle = clipboard.big_bounding_rectangle
 	if not in_place:  # If "Paste" is selected, and not "Paste in Place"
-		var camera_center := Global.camera.get_camera_screen_center()
+		var camera_center := Global.camera.get_screen_center_position()
 		camera_center -= big_bounding_rectangle.size / 2
 		var max_pos := project.size - big_bounding_rectangle.size
 		if max_pos.x >= 0:
@@ -811,7 +809,7 @@ func delete(selected_cels := true) -> void:
 		preview_image = Image.new()
 		original_bitmap = SelectionMap.new()
 		is_pasting = false
-		update()
+		queue_redraw()
 		commit_undo("Draw", undo_data)
 		return
 
@@ -851,7 +849,7 @@ func new_brush() -> void:
 		var selection_map_copy := SelectionMap.new()
 		selection_map_copy.copy_from(project.selection_map)
 		selection_map_copy.move_bitmap_values(project, false)
-		var clipboard = str_to_var(OS.get_clipboard())
+		var clipboard = str_to_var(DisplayServer.clipboard_get())
 		if typeof(clipboard) == TYPE_DICTIONARY:  # A sanity check
 			if not clipboard.has_all(
 				["image", "selection_map", "big_bounding_rectangle", "selection_offset"]
@@ -917,7 +915,7 @@ func clear_selection(use_undo := false) -> void:
 
 	self.big_bounding_rectangle = Rect2()
 	project.selection_offset = Vector2.ZERO
-	update()
+	queue_redraw()
 	if use_undo:
 		commit_undo("Clear Selection", undo_data_tmp)
 

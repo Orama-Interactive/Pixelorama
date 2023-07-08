@@ -31,29 +31,17 @@ func _ready() -> void:
 	vertical_mirror.button_pressed = Tools.vertical_mirror
 	pixel_perfect.button_pressed = Tools.pixel_perfect
 
-	alpha_pressure_button.connect(
-		"toggled",
-		self,
-		"_on_Dynamics_toggled",
-		[alpha_pressure_button, ALPHA, Tools.Dynamics.PRESSURE]
+	alpha_pressure_button.toggled.connect(
+		_on_Dynamics_toggled.bind(alpha_pressure_button, ALPHA, Tools.Dynamics.PRESSURE)
 	)
-	alpha_velocity_button.connect(
-		"toggled",
-		self,
-		"_on_Dynamics_toggled",
-		[alpha_velocity_button, ALPHA, Tools.Dynamics.VELOCITY]
+	alpha_velocity_button.toggled.connect(
+		_on_Dynamics_toggled.bind(alpha_velocity_button, ALPHA, Tools.Dynamics.VELOCITY)
 	)
-	size_pressure_button.connect(
-		"toggled",
-		self,
-		"_on_Dynamics_toggled",
-		[size_pressure_button, SIZE, Tools.Dynamics.PRESSURE]
+	size_pressure_button.toggled.connect(
+		_on_Dynamics_toggled.bind(size_pressure_button, SIZE, Tools.Dynamics.PRESSURE)
 	)
-	size_velocity_button.connect(
-		"toggled",
-		self,
-		"_on_Dynamics_toggled",
-		[size_velocity_button, SIZE, Tools.Dynamics.VELOCITY]
+	size_velocity_button.toggled.connect(
+		_on_Dynamics_toggled.bind(size_velocity_button, SIZE, Tools.Dynamics.VELOCITY)
 	)
 
 

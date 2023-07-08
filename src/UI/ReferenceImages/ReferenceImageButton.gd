@@ -45,7 +45,7 @@ func _on_Remove_pressed():
 	if index != -1:
 		queue_free()
 		element.queue_free()
-		Global.current_project.reference_images.remove(index)
+		Global.current_project.reference_images.remove_at(index)
 		Global.current_project.change_project()
 
 

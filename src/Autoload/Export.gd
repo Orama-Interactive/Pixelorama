@@ -51,14 +51,14 @@ func _exit_tree() -> void:
 
 func add_file_format(name: String) -> int:
 	var id := FileFormat.size()
-	FileFormat.merge({name: id})
+#	FileFormat.merge({name: id})
 	return id
 
 
 func remove_file_format(id: int) -> void:
 	for key in Export.FileFormat.keys():
 		if Export.FileFormat[key] == id:
-			Export.FileFormat.erase(key)
+#			Export.FileFormat.erase(key)
 			return
 
 
@@ -152,11 +152,11 @@ func calculate_frames(project := Global.current_project) -> Array:
 		frames = project.frames.duplicate()
 
 	if direction == AnimationDirection.BACKWARDS:
-		frames.invert()
+		frames.reverse()
 	elif direction == AnimationDirection.PING_PONG:
 		var inverted_frames := frames.duplicate()
-		inverted_frames.invert()
-		inverted_frames.remove(0)
+		inverted_frames.reverse()
+		inverted_frames.remove_at(0)
 		frames.append_array(inverted_frames)
 	return frames
 
@@ -165,7 +165,7 @@ func export_processed_images(
 	ignore_overwrites: bool, export_dialog: ConfirmationDialog, project := Global.current_project
 ) -> bool:
 	# Stop export if directory path or file name are not valid
-	var dir := DirAccess.new()
+	var dir := DirAccess.open(project.directory_path)
 	if not dir.dir_exists(project.directory_path) or not project.file_name.is_valid_filename():
 		if not dir.dir_exists(project.directory_path) and project.file_name.is_valid_filename():
 			export_dialog.open_path_validation_alert_popup(0)
@@ -187,13 +187,13 @@ func export_processed_images(
 		# If the user wants to create a new directory for each animation tag then check
 		# if directories exist, and create them if not
 		if multiple_files and new_dir_for_each_frame_tag:
-			var frame_tag_directory := DirAccess.new()
+			var frame_tag_directory := DirAccess.open(export_path.get_base_dir())
 			if not frame_tag_directory.dir_exists(export_path.get_base_dir()):
 				frame_tag_directory.open(project.directory_path)
 				frame_tag_directory.make_dir(export_path.get_base_dir().get_file())
 
 		if not ignore_overwrites:  # Check if the files already exist
-			var file_check: File = File.new()
+			var file_check := DirAccess.open(export_path)
 			if file_check.file_exists(export_path):
 				if not paths_of_existing_files.is_empty():
 					paths_of_existing_files += "\n"
@@ -209,7 +209,7 @@ func export_processed_images(
 		# Stops the function until the user decides if they want to overwrite
 		await export_dialog.resume_export_function
 		if stop_export:  # User decided to stop export
-			return
+			return false
 
 	scale_processed_images()
 
@@ -258,7 +258,7 @@ func export_processed_images(
 		var succeeded := true
 		for i in range(processed_images.size()):
 			if OS.get_name() == "HTML5":
-				JavaScript.download_buffer(
+				JavaScriptBridge.download_buffer(
 					processed_images[i].save_png_to_buffer(),
 					export_paths[i].get_file(),
 					"image/png"
@@ -319,10 +319,9 @@ func export_animated(args: Dictionary) -> void:
 	)
 
 	if OS.get_name() == "HTML5":
-		JavaScript.download_buffer(file_data, args["export_paths"][0], exporter.mime_type)
+		JavaScriptBridge.download_buffer(file_data, args["export_paths"][0], exporter.mime_type)
 	else:
-		var file: File = File.new()
-		file.open(args["export_paths"][0], File.WRITE)
+		var file := FileAccess.open(args["export_paths"][0], FileAccess.WRITE)
 		file.store_buffer(file_data)
 		file.close()
 	export_dialog.toggle_export_progress_popup(false)
@@ -388,7 +387,7 @@ func create_export_path(multifile: bool, project: Project, frame: int = 0) -> St
 	var path := project.file_name
 	# Only append frame number when there are multiple files exported
 	if multifile:
-		var path_extras := separator_character + String(frame).pad_zeros(number_of_digits)
+		var path_extras := separator_character + str(frame).pad_zeros(number_of_digits)
 		var frame_tag_and_start_id := get_proccessed_image_animation_tag_and_start_id(
 			project, frame - 1
 		)
@@ -402,7 +401,7 @@ func create_export_path(multifile: bool, project: Project, frame: int = 0) -> St
 			var frame_tag_dir := regex.sub(frame_tag, "", true)
 			if include_tag_in_filename:
 				# (frame - start_id + 1) makes frames id to start from 1
-				var tag_frame_number := String(frame - start_id + 1).pad_zeros(number_of_digits)
+				var tag_frame_number := str(frame - start_id + 1).pad_zeros(number_of_digits)
 				path_extras = (
 					separator_character
 					+ frame_tag_dir
@@ -411,12 +410,12 @@ func create_export_path(multifile: bool, project: Project, frame: int = 0) -> St
 				)
 			if new_dir_for_each_frame_tag:
 				path += path_extras
-				return project.directory_path.plus_file(frame_tag_dir).plus_file(
+				return project.directory_path.path_join(frame_tag_dir).path_join(
 					path + file_format_string(project.file_format)
 				)
 		path += path_extras
 
-	return project.directory_path.plus_file(path + file_format_string(project.file_format))
+	return project.directory_path.path_join(path + file_format_string(project.file_format))
 
 
 func get_proccessed_image_animation_tag_and_start_id(

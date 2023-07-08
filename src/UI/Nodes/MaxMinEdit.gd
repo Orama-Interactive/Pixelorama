@@ -26,9 +26,9 @@ class GradientCursor:
 	var color: Color
 	var sliding := false
 
-	onready var parent: TextureRect = get_parent()
-	onready var grand_parent: Container = parent.get_parent()
-	onready var label: Label = parent.get_node("Value")
+	@onready var parent: TextureRect = get_parent()
+	@onready var grand_parent: Container = parent.get_parent()
+	@onready var label: Label = parent.get_node("Value")
 
 	func _ready() -> void:
 		position = Vector2(0, 15)

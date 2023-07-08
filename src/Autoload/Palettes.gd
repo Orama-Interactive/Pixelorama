@@ -74,13 +74,13 @@ func _save_palette(palette: Palette) -> String:
 
 	# If resource name changed remove the old palette file
 	if old_resource_name != palette.resource_name:
-		var old_palette = palettes_write_path.plus_file(old_resource_name) + ".tres"
+		var old_palette = palettes_write_path.path_join(old_resource_name) + ".tres"
 		_delete_palette(old_palette)
 
 	# Save palette
-	var save_path = palettes_write_path.plus_file(palette.resource_name) + ".tres"
+	var save_path = palettes_write_path.path_join(palette.resource_name) + ".tres"
 	palette.resource_path = save_path
-	var err = ResourceSaver.save(save_path, palette)
+	var err := ResourceSaver.save(palette, save_path)
 	if err != OK:
 		Global.notification_label("Failed to save palette")
 	return save_path
@@ -187,7 +187,6 @@ func _fill_new_palette_with_colors(
 	for cel in cels:
 		var cel_image := Image.new()
 		cel_image.copy_from(cel.image)
-		false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		if cel_image.is_invisible():
 			continue
 		for i in pixels:
@@ -197,7 +196,6 @@ func _fill_new_palette_with_colors(
 					color.a = 1
 				if not new_palette.has_theme_color(color):
 					new_palette.add_color(color)
-		false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 	var palette_path := _save_palette(new_palette)
 	palettes[palette_path] = new_palette
@@ -212,8 +210,7 @@ func current_palette_edit(name: String, comment: String, width: int, height: int
 
 
 func _delete_palette(path: String) -> void:
-	var dir = DirAccess.new()
-	dir.remove(path)
+	DirAccess.open(path).remove(path)
 	palettes.erase(path)
 
 
@@ -330,8 +327,8 @@ func _load_palettes() -> void:
 
 	# Iterate backwards, so any palettes defined in default files
 	# get overwritten by those of the same name in user files
-	search_locations.invert()
-	priority_ordered_files.invert()
+	search_locations.reverse()
+	priority_ordered_files.reverse()
 	var default_palette_name = Global.config_cache.get_value(
 		"data", "last_palette", DEFAULT_PALETTE_NAME
 	)
@@ -344,7 +341,7 @@ func _load_palettes() -> void:
 		var base_directory: String = search_locations[i]
 		var palette_files: Array = priority_ordered_files[i]
 		for file_name in palette_files:
-			var palette: Palette = load(base_directory.plus_file(file_name))
+			var palette: Palette = load(base_directory.path_join(file_name))
 			if palette:
 				if make_copy:
 					_save_palette(palette)  # Makes a copy of the palette
@@ -394,13 +391,12 @@ func _get_palette_priority_file_map(looking_paths: Array) -> Array:
 # Get the palette files in a single directory.
 # if it does not exist, return []
 func _get_palette_files(path: String) -> Array:
-	var dir := DirAccess.new()
+	var dir := DirAccess.open(path)
 	var results = []
 
 	if not dir.dir_exists(path):
 		return []
 
-	dir.open(path)
 	dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 
 	while true:
@@ -426,7 +422,7 @@ func _get_best_palette_file_location(looking_paths: Array, fname: String):  # ->
 		var base_path: String = looking_paths[i]
 		var the_files: Array = priority_fmap[i]
 		if the_files.has(fname):
-			return base_path.plus_file(fname)
+			return base_path.path_join(fname)
 	return null
 
 
@@ -438,18 +434,12 @@ func import_palette_from_path(path: String) -> void:
 	var palette: Palette = null
 	match path.to_lower().get_extension():
 		"gpl":
-			var file = File.new()
-			if file.file_exists(path):
-				file.open(path, File.READ)
-				var text = file.get_as_text()
-				file.close()
+			if FileAccess.file_exists(path):
+				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = _import_gpl(path, text)
 		"pal":
-			var file = File.new()
-			if file.file_exists(path):
-				file.open(path, File.READ)
-				var text = file.get_as_text()
-				file.close()
+			if FileAccess.file_exists(path):
+				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = _import_pal_palette(path, text)
 		"png", "bmp", "hdr", "jpg", "jpeg", "svg", "tga", "webp":
 			var image := Image.new()
@@ -457,11 +447,8 @@ func import_palette_from_path(path: String) -> void:
 			if !err:
 				palette = _import_image_palette(path, image)
 		"json":
-			var file = File.new()
-			if file.file_exists(path):
-				file.open(path, File.READ)
-				var text = file.get_as_text()
-				file.close()
+			if FileAccess.file_exists(path):
+				var text: = FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = _import_json_palette(text)
 
 	import_palette(palette, path.get_file())

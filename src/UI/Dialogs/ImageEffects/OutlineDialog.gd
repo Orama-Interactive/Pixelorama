@@ -11,13 +11,10 @@ var shader: Shader
 
 
 func _ready() -> void:
-	if _is_webgl1():
-		$VBoxContainer/OptionsContainer/PatternOptionButton.disabled = true
-	else:
-		shader = load("res://src/Shaders/OutlineInline.gdshader")
-		var sm := ShaderMaterial.new()
-		sm.gdshader = shader
-		preview.set_material(sm)
+	shader = load("res://src/Shaders/OutlineInline.gdshader")
+	var sm := ShaderMaterial.new()
+	sm.gdshader = shader
+	preview.set_material(sm)
 	outline_color.get_picker().presets_visible = false
 	color = outline_color.color
 	# set as in enum
@@ -26,13 +23,6 @@ func _ready() -> void:
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	var anim_thickness = animate_panel.get_animated_value(commit_idx, Animate.THICKNESS)
-
-	if !shader:  # Web version
-		DrawingAlgos.generate_outline(
-			cel, selection_checkbox.pressed, project, color, anim_thickness, false, inside_image
-		)
-		return
-
 	var selection_tex := ImageTexture.new()
 	if selection_checkbox.pressed and project.has_selection:
 		selection_tex.create_from_image(project.selection_map) #,0
@@ -44,7 +34,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"inside": inside_image,
 		"selection": selection_tex
 	}
-	if !confirmed:
+	if !has_been_confirmed:
 		for param in params:
 			preview.material.set_shader_parameter(param, params[param])
 	else:

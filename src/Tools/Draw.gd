@@ -38,9 +38,9 @@ func _ready() -> void:
 
 
 func _on_BrushType_pressed() -> void:
-	if not Global.brushes_popup.is_connected("brush_selected", Callable(self, "_on_Brush_selected")):
-		Global.brushes_popup.connect(
-			"brush_selected", self, "_on_Brush_selected", [], CONNECT_ONE_SHOT
+	if not Global.brushes_popup.brush_selected.is_connected(_on_Brush_selected):
+		Global.brushes_popup.brush_selected.connect(
+			_on_Brush_selected.bind([]), CONNECT_ONE_SHOT
 		)
 	# Now we set position and columns
 	var tool_option_container = get_node("../../")
@@ -212,14 +212,9 @@ func commit_undo() -> void:
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
 		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for image in _undo_data:
-		var compressed_data = _undo_data[image]
-		var buffer_size = compressed_data["data"].size()
-		compressed_data["data"] = compressed_data["data"].compress()
-		project.undo_redo.add_undo_method(
-			self, "undo_redo_draw_op", image, compressed_data, buffer_size
-		)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, frame, layer)
+		project.undo_redo.add_undo_property(image, "data", _undo_data[image])
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
 
 	_undo_data.clear()
@@ -300,7 +295,7 @@ func _prepare_circle_tool(fill: bool) -> void:
 	var diameter := _brush_size_dynamics * 2 + 1
 	for n in range(0, diameter):
 		for m in range(0, diameter):
-			if circle_tool_map.get_bit(Vector2(m, n)):
+			if circle_tool_map.get_bitv(Vector2i(m, n)):
 				_circle_tool_shortcut.append(
 					Vector2(m - _brush_size_dynamics, n - _brush_size_dynamics)
 				)
@@ -402,12 +397,12 @@ func draw_tool_brush(brush_position: Vector2) -> void:
 
 	var size := _brush_image.get_size()
 	for i in positions.size():
-		var position: Vector2 = positions[i]
-		var dst: Vector2 = position - (size / 2).floor()
-		var dst_rect := Rect2(dst, size)
+		var position: Vector2i = positions[i]
+		var dst: Vector2i = position - (size / 2)
+		var dst_rect := Rect2i(dst, size)
 		var draw_rect := _get_draw_rect()
-		dst_rect = dst_rect.clip(draw_rect)
-		if dst_rect.size == Vector2.ZERO:
+		dst_rect = dst_rect.intersection(draw_rect)
+		if dst_rect.size == Vector2i.ZERO:
 			continue
 		var src_rect := Rect2(dst_rect.position - dst, dst_rect.size)
 		var brush_image: Image = remove_unselected_parts_of_brush(_brush_image, dst)
@@ -472,17 +467,17 @@ func draw_indicator(left: bool) -> void:
 			draw_indicator_at(snap_position(_cursor), offset, Color.GREEN)
 
 
-func draw_indicator_at(position: Vector2, offset: Vector2, color: Color) -> void:
+func draw_indicator_at(position: Vector2i, offset: Vector2i, color: Color) -> void:
 	var canvas = Global.canvas.indicators
 	if _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM] and not _draw_line:
-		position -= (_brush_image.get_size() / 2).floor()
+		position -= (_brush_image.get_size() / 2)
 		position -= offset
 		canvas.draw_texture(_brush_texture, position)
 	else:
 		if _draw_line:
 			position.x = _line_end.x if _line_end.x < _line_start.x else _line_start.x
 			position.y = _line_end.y if _line_end.y < _line_start.y else _line_start.y
-		position -= (_indicator.get_size() / 2).floor()
+		position -= (_indicator.get_size() / 2)
 		position -= offset
 		canvas.draw_set_transform(position, canvas.rotation, canvas.scale)
 		var polylines := _line_polylines if _draw_line else _polylines
@@ -595,12 +590,12 @@ func _create_circle_indicator(size: int, fill := false) -> BitMap:
 	return _fill_bitmap_with_points(_compute_draw_tool_circle(Vector2(size, size), fill), diameter)
 
 
-func _create_line_indicator(indicator: BitMap, start: Vector2, end: Vector2) -> BitMap:
+func _create_line_indicator(indicator: BitMap, start: Vector2i, end: Vector2i) -> BitMap:
 	var bitmap := BitMap.new()
 	var size := (end - start).abs() + indicator.get_size()
 	bitmap.create(size)
 
-	var offset := (indicator.get_size() / 2).floor()
+	var offset := indicator.get_size() / 2
 	var diff := end - start
 	start.x = -diff.x if diff.x < 0 else 0.0
 	end.x = 0.0 if diff.x < 0 else diff.x
@@ -630,17 +625,17 @@ func _create_line_indicator(indicator: BitMap, start: Vector2, end: Vector2) -> 
 	return bitmap
 
 
-func _blit_indicator(dst: BitMap, indicator: BitMap, position: Vector2) -> void:
+func _blit_indicator(dst: BitMap, indicator: BitMap, position: Vector2i) -> void:
 	var rect := Rect2(Vector2.ZERO, dst.get_size())
 	var size := indicator.get_size()
-	position -= (size / 2).floor()
+	position -= size / 2
 	for y in size.y:
 		for x in size.x:
-			var pos := Vector2(x, y)
-			var bit := indicator.get_bit(pos)
+			var pos := Vector2i(x, y)
+			var bit := indicator.get_bitv(pos)
 			pos += position
 			if bit and rect.has_point(pos):
-				dst.set_bit(pos, bit)
+				dst.set_bitv(pos, bit)
 
 
 func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:

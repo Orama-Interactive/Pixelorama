@@ -98,11 +98,11 @@ func _on_AnimationTimer_timeout() -> void:
 			animation_timer.wait_time = (1.0 / Global.current_project.fps)
 	animation_timer.set_one_shot(true)
 	animation_timer.start()
-	update()
+	queue_redraw()
 
 
 func _cel_changed() -> void:
-	update()
+	queue_redraw()
 
 
 func _split_spritesheet(image: Image, horiz: int, vert: int) -> Array:

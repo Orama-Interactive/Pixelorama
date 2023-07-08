@@ -55,10 +55,10 @@ const OVERRIDE_FILE := "override.cfg"
 var root_directory := "."
 var window_title := "": set = _title_changed
 var config_cache := ConfigFile.new()
-var XDGDataPaths = preload("res://src/XDGDataPaths.gd")
+var XDGDataPaths := preload("res://src/XDGDataPaths.gd")
 var directory_module: RefCounted
 
-var projects := []  # Array of Projects
+var projects: Array[Project] = []
 var current_project: Project
 var current_project_index := 0: set = _project_changed
 
@@ -123,7 +123,7 @@ var fps_limit := 0
 
 var autosave_interval := 1.0
 var enable_autosave := true
-var renderer := OS.get_current_video_driver(): set = _renderer_changed
+var renderer := 0: set = _renderer_changed
 var tablet_driver := 0: set = _tablet_driver_changed
 
 # Tools & options
@@ -258,7 +258,7 @@ func _ready() -> void:
 		var tooltip: String = node.tooltip_text
 		if !tooltip.is_empty() and node.shortcut:
 			ui_tooltips[node] = tooltip
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	emit_signal("project_changed")
 
 
@@ -439,16 +439,16 @@ func _initialize_keychain() -> void:
 
 
 func notification_label(text: String) -> void:
-	var notification := NotificationLabel.new()
-	notification.text = tr(text)
-	notification.position = main_viewport.global_position
-	notification.position.y += main_viewport.size.y
-	control.add_child(notification)
+	var notif := NotificationLabel.new()
+	notif.text = tr(text)
+	notif.position = main_viewport.global_position
+	notif.position.y += main_viewport.size.y
+	control.add_child(notif)
 
 
 func general_undo(project: Project = current_project) -> void:
 	project.undos -= 1
-	var action_name: String = project.undo_redo.get_current_action_name()
+	var action_name := project.undo_redo.get_current_action_name()
 	notification_label("Undo: %s" % action_name)
 
 
@@ -456,7 +456,7 @@ func general_redo(project: Project = current_project) -> void:
 	if project.undos < project.undo_redo.get_version():  # If we did undo and then redo
 		project.undos = project.undo_redo.get_version()
 	if control.redone:
-		var action_name: String = project.undo_redo.get_current_action_name()
+		var action_name := project.undo_redo.get_current_action_name()
 		notification_label("Redo: %s" % action_name)
 
 
@@ -489,7 +489,7 @@ func undo_or_redo(
 				for j in project.layers.size():
 					canvas.update_texture(j, i, project)
 
-		canvas.selection.update()
+		canvas.selection.queue_redraw()
 		if action_name == "Scale":
 			for i in project.frames.size():
 				for j in project.layers.size():
@@ -499,14 +499,14 @@ func undo_or_redo(
 					else:
 						current_cel.image_texture.create_from_image(current_cel.get_image()) #,0
 			canvas.camera_zoom()
-			canvas.grid.update()
-			canvas.pixel_grid.update()
+			canvas.grid.queue_redraw()
+			canvas.pixel_grid.queue_redraw()
 			project.selection_map_changed()
 			cursor_position_label.text = "[%s×%s]" % [project.size.x, project.size.y]
 
-	canvas.update()
-	second_viewport.get_child(0).get_node("CanvasPreview").update()
-	canvas_preview_container.canvas_preview.update()
+	canvas.queue_redraw()
+	second_viewport.get_child(0).get_node("CanvasPreview").queue_redraw()
+	canvas_preview_container.canvas_preview.queue_redraw()
 	if !project.has_changed:
 		project.has_changed = true
 		if project == current_project:
@@ -530,22 +530,22 @@ func _project_changed(value: int) -> void:
 
 func _renderer_changed(value: int) -> void:
 	renderer = value
-	if OS.has_feature("editor"):
-		return
-
-	# Sets GLES2 as the default value in `override.cfg`.
-	# Without this, switching to GLES3 does not work, because it will default to GLES2.
-	ProjectSettings.set_initial_value("rendering/quality/driver/driver_name", "GLES2")
-	var renderer_name := OS.get_video_driver_name(renderer)
-	ProjectSettings.set_setting("rendering/quality/driver/driver_name", renderer_name)
-	ProjectSettings.save_custom(OVERRIDE_FILE)
+#	if OS.has_feature("editor"):
+#		return
+#
+#	# Sets GLES2 as the default value in `override.cfg`.
+#	# Without this, switching to GLES3 does not work, because it will default to GLES2.
+#	ProjectSettings.set_initial_value("rendering/quality/driver/driver_name", "GLES2")
+#	var renderer_name := OS.get_video_driver_name(renderer)
+#	ProjectSettings.set_setting("rendering/quality/driver/driver_name", renderer_name)
+#	ProjectSettings.save_custom(OVERRIDE_FILE)
 
 
 func _tablet_driver_changed(value: int) -> void:
 	tablet_driver = value
 	if OS.has_feature("editor"):
 		return
-	var tablet_driver_name := OS.get_tablet_driver_name(tablet_driver)
+	var tablet_driver_name := DisplayServer.tablet_get_current_driver()
 	ProjectSettings.set_setting("display/window/tablet_driver", tablet_driver_name)
 	ProjectSettings.save_custom(OVERRIDE_FILE)
 
@@ -582,11 +582,11 @@ func change_button_texturerect(texture_button: TextureRect, new_file_name: Strin
 		return
 	var file_name := texture_button.texture.resource_path.get_basename().get_file()
 	var directory_path := texture_button.texture.resource_path.get_basename().replace(file_name, "")
-	texture_button.texture = load(directory_path.plus_file(new_file_name))
+	texture_button.texture = load(directory_path.path_join(new_file_name))
 
 
 func update_hint_tooltips() -> void:
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	Tools.update_hint_tooltips()
 
 	for tip in ui_tooltips:

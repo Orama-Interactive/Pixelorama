@@ -42,33 +42,33 @@ func get_hovering_gizmo(pos: Vector2) -> int:
 	# Scale the position based on the zoom, has the same effect as enlarging the shapes
 	pos /= draw_scale
 	# Inflate the rotation polylines by one to make them easier to click
-	var rot_x_offset: PackedVector2Array = Geometry.offset_polyline(gizmo_rot_x, 1)[0]
-	var rot_y_offset: PackedVector2Array = Geometry.offset_polyline(gizmo_rot_y, 1)[0]
-	var rot_z_offset: PackedVector2Array = Geometry.offset_polyline(gizmo_rot_z, 1)[0]
+	var rot_x_offset: PackedVector2Array = Geometry2D.offset_polyline(gizmo_rot_x, 1)[0]
+	var rot_y_offset: PackedVector2Array = Geometry2D.offset_polyline(gizmo_rot_y, 1)[0]
+	var rot_z_offset: PackedVector2Array = Geometry2D.offset_polyline(gizmo_rot_z, 1)[0]
 
-	if Geometry.point_is_inside_triangle(pos, gizmo_pos_x[0], gizmo_pos_x[1], gizmo_pos_x[2]):
+	if Geometry2D.point_is_inside_triangle(pos, gizmo_pos_x[0], gizmo_pos_x[1], gizmo_pos_x[2]):
 		return Cel3DObject.Gizmos.X_POS
-	elif Geometry.point_is_inside_triangle(pos, gizmo_pos_y[0], gizmo_pos_y[1], gizmo_pos_y[2]):
+	elif Geometry2D.point_is_inside_triangle(pos, gizmo_pos_y[0], gizmo_pos_y[1], gizmo_pos_y[2]):
 		return Cel3DObject.Gizmos.Y_POS
-	elif Geometry.point_is_inside_triangle(pos, gizmo_pos_z[0], gizmo_pos_z[1], gizmo_pos_z[2]):
+	elif Geometry2D.point_is_inside_triangle(pos, gizmo_pos_z[0], gizmo_pos_z[1], gizmo_pos_z[2]):
 		return Cel3DObject.Gizmos.Z_POS
-	elif Geometry.is_point_in_circle(pos, proj_right_local_scale, SCALE_CIRCLE_RADIUS):
+	elif Geometry2D.is_point_in_circle(pos, proj_right_local_scale, SCALE_CIRCLE_RADIUS):
 		return Cel3DObject.Gizmos.X_SCALE
-	elif Geometry.is_point_in_circle(pos, proj_up_local_scale, SCALE_CIRCLE_RADIUS):
+	elif Geometry2D.is_point_in_circle(pos, proj_up_local_scale, SCALE_CIRCLE_RADIUS):
 		return Cel3DObject.Gizmos.Y_SCALE
-	elif Geometry.is_point_in_circle(pos, proj_back_local_scale, SCALE_CIRCLE_RADIUS):
+	elif Geometry2D.is_point_in_circle(pos, proj_back_local_scale, SCALE_CIRCLE_RADIUS):
 		return Cel3DObject.Gizmos.Z_SCALE
-	elif Geometry.is_point_in_polygon(pos, rot_x_offset):
+	elif Geometry2D.is_point_in_polygon(pos, rot_x_offset):
 		return Cel3DObject.Gizmos.X_ROT
-	elif Geometry.is_point_in_polygon(pos, rot_y_offset):
+	elif Geometry2D.is_point_in_polygon(pos, rot_y_offset):
 		return Cel3DObject.Gizmos.Y_ROT
-	elif Geometry.is_point_in_polygon(pos, rot_z_offset):
+	elif Geometry2D.is_point_in_polygon(pos, rot_z_offset):
 		return Cel3DObject.Gizmos.Z_ROT
 	return Cel3DObject.Gizmos.NONE
 
 
 func _cel_changed() -> void:
-	update()
+	queue_redraw()
 	set_process_input(Global.current_project.get_current_cel() is Cel3D)
 
 
@@ -81,12 +81,12 @@ func _find_selected_object() -> Cel3DObject:
 
 func add_always_visible(object3d: Cel3DObject, texture: Texture2D) -> void:
 	always_visible[object3d] = texture
-	update()
+	queue_redraw()
 
 
 func remove_always_visible(object3d: Cel3DObject) -> void:
 	always_visible.erase(object3d)
-	update()
+	queue_redraw()
 
 
 func get_points(camera: Camera3D, object3d: Cel3DObject) -> void:
@@ -144,12 +144,12 @@ func get_points(camera: Camera3D, object3d: Cel3DObject) -> void:
 		gizmo_rot_y = _find_curve(curve_right_local, curve_back_local)
 		gizmo_rot_z = _find_curve(curve_right_local, curve_up_local)
 
-	update()
+	queue_redraw()
 
 
 func clear_points(object3d: Cel3DObject) -> void:
 	points_per_object.erase(object3d)
-	update()
+	queue_redraw()
 
 
 func _draw() -> void:
@@ -186,7 +186,7 @@ func _draw() -> void:
 			continue
 		if object.selected:
 			# Draw bounding box outline
-			draw_multiline(points, selected_color, 1.0, true)
+			draw_multiline(points, selected_color, 1.0)
 			if object.applying_gizmos == Cel3DObject.Gizmos.X_ROT:
 				draw_line(gizmos_origin, Global.canvas.current_pixel, Color.RED)
 				continue
@@ -220,12 +220,12 @@ func _draw() -> void:
 			var font_height := font.get_height()
 			var char_position := Vector2(-font_height, font_height) * CHAR_SCALE / 4 * draw_scale
 			draw_set_transform(gizmos_origin + char_position, 0, draw_scale * CHAR_SCALE)
-			draw_char(font, proj_right_local_scale / CHAR_SCALE, "X", "")
-			draw_char(font, proj_up_local_scale / CHAR_SCALE, "Y", "")
-			draw_char(font, proj_back_local_scale / CHAR_SCALE, "Z", "")
+			draw_char(font, proj_right_local_scale / CHAR_SCALE, "X")
+			draw_char(font, proj_up_local_scale / CHAR_SCALE, "Y")
+			draw_char(font, proj_back_local_scale / CHAR_SCALE, "Z")
 			draw_set_transform_matrix(Transform2D())
 		elif object.hovered:
-			draw_multiline(points, hovered_color, 1.0, true)
+			draw_multiline(points, hovered_color, 1.0)
 
 
 func _resize_vector(v: Vector2, l: float) -> Vector2:

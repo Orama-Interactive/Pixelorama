@@ -50,15 +50,15 @@ func _input(_event: InputEvent) -> void:
 		):
 			has_focus = true
 			Global.has_focus = false
-			update()
+			queue_redraw()
 	if has_focus:
 		if Input.is_action_pressed("left_mouse"):
 			if type == Types.HORIZONTAL:
-				var yy := snapped(mouse_pos.y, 0.5)
+				var yy := snappedf(mouse_pos.y, 0.5)
 				points[0].y = yy
 				points[1].y = yy
 			else:
-				var xx := snapped(mouse_pos.x, 0.5)
+				var xx := snappedf(mouse_pos.x, 0.5)
 				points[0].x = xx
 				points[1].x = xx
 			modulate.a = 0.5 if _outside_canvas() else 1.0
@@ -69,7 +69,7 @@ func _input(_event: InputEvent) -> void:
 				project.guides.erase(self)
 				queue_free()
 			else:
-				update()
+				queue_redraw()
 
 
 func _draw() -> void:
@@ -111,7 +111,7 @@ func _draw() -> void:
 	var font_height := font.get_height()
 	# Draw the string where the guide intersects with the viewport poly
 	# Priority is top edge, then left, then right
-	var intersection = Geometry.segment_intersects_segment(
+	var intersection = Geometry2D.segment_intersects_segment(
 		points[0], points[1], viewport_poly[0], viewport_poly[1]
 	)
 
@@ -121,12 +121,12 @@ func _draw() -> void:
 			intersection.distance_squared_to(viewport_poly[0])
 			< intersection.distance_squared_to(viewport_poly[1])
 		):
-			draw_string(font, Vector2(x_offset, font_height), string, color)
+			draw_string(font, Vector2(x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
 		else:
-			draw_string(font, Vector2(-font_string_size.x - x_offset, font_height), string, color)
+			draw_string(font, Vector2(-font_string_size.x - x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
 		return
 
-	intersection = Geometry.segment_intersects_segment(
+	intersection = Geometry2D.segment_intersects_segment(
 		points[0], points[1], viewport_poly[3], viewport_poly[0]
 	)
 	if intersection:
@@ -135,12 +135,12 @@ func _draw() -> void:
 			intersection.distance_squared_to(viewport_poly[3])
 			< intersection.distance_squared_to(viewport_poly[0])
 		):
-			draw_string(font, Vector2(x_offset, y_offset), string, color)
+			draw_string(font, Vector2(x_offset, y_offset), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
 		else:
-			draw_string(font, Vector2(x_offset, font_height), string, color)
+			draw_string(font, Vector2(x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
 		return
 
-	intersection = Geometry.segment_intersects_segment(
+	intersection = Geometry2D.segment_intersects_segment(
 		points[0], points[1], viewport_poly[1], viewport_poly[2]
 	)
 
@@ -150,14 +150,14 @@ func _draw() -> void:
 			intersection.distance_squared_to(viewport_poly[1])
 			< intersection.distance_squared_to(viewport_poly[2])
 		):
-			draw_string(font, Vector2(-font_string_size.x - x_offset, font_height), string, color)
+			draw_string(font, Vector2(-font_string_size.x - x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
 		else:
-			draw_string(font, Vector2(-font_string_size.x - x_offset, y_offset), string, color)
+			draw_string(font, Vector2(-font_string_size.x - x_offset, y_offset), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
 		return
 
 	# If there's no intersection with a viewport edge, show string in top left corner
 	draw_set_transform(viewport_poly[0], Global.camera.rotation, zoom * 2)
-	draw_string(font, Vector2(x_offset, font_height), string, color)
+	draw_string(font, Vector2(x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
 
 
 func _outside_canvas() -> bool:

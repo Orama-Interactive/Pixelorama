@@ -50,7 +50,7 @@ func _on_X_value_changed(val: float) -> void:
 	if _locked_ratio:
 		self.value.y = max(min_value.y, (value.x / ratio.x) * ratio.y)
 	if _can_emit_signal:
-		emit_signal("value_changed", value)
+		value_changed.emit(value)
 
 
 func _on_Y_value_changed(val: float) -> void:
@@ -58,7 +58,7 @@ func _on_Y_value_changed(val: float) -> void:
 	if _locked_ratio:
 		self.value.x = max(min_value.x, (value.y / ratio.y) * ratio.x)
 	if _can_emit_signal:
-		emit_signal("value_changed", value)
+		value_changed.emit(value)
 
 
 func _on_RatioButton_toggled(button_pressed: bool) -> void:
@@ -68,7 +68,7 @@ func _on_RatioButton_toggled(button_pressed: bool) -> void:
 		ratio = Vector2.ONE
 	else:
 		ratio = value / divisor
-	emit_signal("ratio_toggled", button_pressed)
+	ratio_toggled.emit(button_pressed)
 
 
 # Setters

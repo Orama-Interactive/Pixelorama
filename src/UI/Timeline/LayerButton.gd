@@ -156,7 +156,7 @@ func _on_ExpandButton_pressed() -> void:
 func _on_VisibilityButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	Global.current_project.layers[layer].visible = !Global.current_project.layers[layer].visible
-	Global.canvas.update()
+	Global.canvas.queue_redraw()
 	if Global.select_layer_on_button_click:
 		_select_current_layer()
 	_update_buttons_all_layers()
@@ -188,7 +188,7 @@ func _select_current_layer() -> void:
 	Global.current_project.change_cel(-1, layer)
 
 
-func _get_drag_data(_position: Vector2) -> Array:
+func _get_drag_data(_position: Vector2) -> Variant:
 	var layers := range(
 		layer - Global.current_project.layers[layer].get_child_count(true), layer + 1
 	)
@@ -295,12 +295,11 @@ func _drop_data(_pos: Vector2, data) -> void:
 		a.to_parents[-1] = drop_from_parents[-1]
 		b.to_parents[-1] = a_from_parents[-1]
 
-		project.undo_redo.add_do_method(project, "swap_layers", a, b)
-		project.undo_redo.add_undo_method(
-			project,
-			"swap_layers",
+		project.undo_redo.add_do_method(project.swap_layers.bind(a, b))
+		project.undo_redo.add_undo_method(project.swap_layers.bind(
 			{"from": a.to, "to": a.from, "to_parents": a_from_parents},
 			{"from": b.to, "to": drop_from_indices, "to_parents": drop_from_parents}
+			)
 		)
 
 	else:  # Move layers
@@ -339,18 +338,18 @@ func _drop_data(_pos: Vector2, data) -> void:
 		to_parents[-1] = to_parent
 
 		project.undo_redo.add_do_method(
-			project, "move_layers", drop_from_indices, drop_to_indices, to_parents
+			project.move_layers.bind(drop_from_indices, drop_to_indices, to_parents)
 		)
 		project.undo_redo.add_undo_method(
-			project, "move_layers", drop_to_indices, drop_from_indices, drop_from_parents
+			project.move_layers.bind(drop_to_indices, drop_from_indices, drop_from_parents)
 		)
 	if project.current_layer == drop_layer:
-		project.undo_redo.add_do_method(project, "change_cel", -1, layer)
+		project.undo_redo.add_do_method(project.change_cel.bind(-1, layer))
 	else:
-		project.undo_redo.add_do_method(project, "change_cel", -1, project.current_layer)
-	project.undo_redo.add_undo_method(project, "change_cel", -1, project.current_layer)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+		project.undo_redo.add_do_method(project.change_cel.bind(-1, project.current_layer))
+	project.undo_redo.add_undo_method(project.change_cel.bind(-1, project.current_layer))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
 
 

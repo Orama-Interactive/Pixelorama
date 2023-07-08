@@ -158,7 +158,7 @@ func draw_preview() -> void:
 
 		for point in points:
 			var p: Vector2 = point - start + t_offsetv
-			indicator.set_bit(p, 1)
+			indicator.set_bitv(p, 1)
 
 		canvas.draw_set_transform(start - t_offsetv, canvas.rotation, canvas.scale)
 

@@ -48,7 +48,7 @@ func show_selected_highlight(new_value: bool, mouse_button: int) -> void:
 				show_left_highlight = new_value
 			MOUSE_BUTTON_RIGHT:
 				show_right_highlight = new_value
-		update()
+		queue_redraw()
 
 
 # Empties the swatch and displays disabled color from theme

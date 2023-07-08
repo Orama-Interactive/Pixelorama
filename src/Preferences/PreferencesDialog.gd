@@ -74,9 +74,9 @@ var preferences := [
 	Preference.new(
 		"pause_when_unfocused", "Performance/PerformanceContainer/PauseAppFocus", "pressed"
 	),
-	Preference.new(
-		"renderer", "Drivers/DriversContainer/Renderer", "selected", true, OS.VIDEO_DRIVER_GLES2
-	),
+#	Preference.new(
+#		"renderer", "Drivers/DriversContainer/Renderer", "selected", true, OS.VIDEO_DRIVER_GLES2
+#	),
 	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", true, 0)
 ]
 
@@ -130,7 +130,7 @@ func _ready() -> void:
 	for child in shortcuts.get_children():
 		if not child is AcceptDialog:
 			continue
-		child.connect("confirmed", Callable(Global, "update_hint_tooltips"))
+		child.confirmed.connect(Global.update_hint_tooltips)
 
 	for child in right_side.get_children():
 		content_list.append(child.name)
@@ -143,8 +143,8 @@ func _ready() -> void:
 	elif OS.get_name() == "Windows":
 		tablet_driver_label.visible = true
 		tablet_driver.visible = true
-		for driver in OS.get_tablet_driver_count():
-			var driver_name := OS.get_tablet_driver_name(driver)
+		for driver in DisplayServer.tablet_get_driver_count():
+			var driver_name := DisplayServer.tablet_get_driver_name(driver)
 			tablet_driver.add_item(driver_name, driver)
 
 	for pref in preferences:
@@ -244,10 +244,10 @@ func preference_update(prop: String, require_restart := false) -> void:
 			autosave_interval.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
 	elif "grid" in prop:
-		Global.canvas.grid.update()
+		Global.canvas.grid.queue_redraw()
 
 	elif prop in ["pixel_grid_show_at_zoom", "pixel_grid_color"]:
-		Global.canvas.pixel_grid.update()
+		Global.canvas.pixel_grid.queue_redraw()
 
 	elif "checker" in prop:
 		Global.transparent_checker.update_rect()
@@ -268,7 +268,7 @@ func preference_update(prop: String, require_restart := false) -> void:
 		marching_ants.material.set_shader_parameter("animated", Global.selection_animated_borders)
 		marching_ants.material.set_shader_parameter("first_color", Global.selection_border_color_1)
 		marching_ants.material.set_shader_parameter("second_color", Global.selection_border_color_2)
-		Global.canvas.selection.update()
+		Global.canvas.selection.queue_redraw()
 
 	elif prop in ["icon_color_from", "custom_icon_color"]:
 		if Global.icon_color_from == Global.ColorFrom.THEME:
@@ -362,5 +362,5 @@ func _on_ShrinkApplyButton_pressed() -> void:
 	hide()
 	popup_centered(Vector2(600, 400))
 	Global.dialog_open(true)
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	Global.camera.fit_to_frame(Global.current_project.size)

@@ -43,7 +43,7 @@ func _on_FrameTagDialog_about_to_show() -> void:
 		vbox_cont.add_child(name_label)
 
 		var hsep := HSeparator.new()
-		hsep.size_flags_horizontal = SIZE_EXPAND_FILL
+		hsep.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		vbox_cont.add_child(hsep)
 
 		main_vbox_cont.add_child(vbox_cont)
@@ -127,8 +127,8 @@ func _on_TagOptions_confirmed() -> void:
 	# Handle Undo/Redo
 	Global.current_project.undos += 1
 	Global.current_project.undo_redo.create_action("Modify Frame Tag")
-	Global.current_project.undo_redo.add_do_method(Global, "general_redo")
-	Global.current_project.undo_redo.add_undo_method(Global, "general_undo")
+	Global.current_project.undo_redo.add_do_method(Global.general_redo)
+	Global.current_project.undo_redo.add_undo_method(Global.general_undo)
 	Global.current_project.undo_redo.add_do_property(
 		Global.current_project, "animation_tags", new_animation_tags
 	)
@@ -142,12 +142,12 @@ func _on_TagOptions_confirmed() -> void:
 func _on_TagOptions_custom_action(action: String) -> void:
 	if action == "delete_tag":
 		var new_animation_tags := Global.current_project.animation_tags.duplicate()
-		new_animation_tags.remove(current_tag_id)
+		new_animation_tags.remove_at(current_tag_id)
 		# Handle Undo/Redo
 		Global.current_project.undos += 1
 		Global.current_project.undo_redo.create_action("Delete Frame Tag")
-		Global.current_project.undo_redo.add_do_method(Global, "general_redo")
-		Global.current_project.undo_redo.add_undo_method(Global, "general_undo")
+		Global.current_project.undo_redo.add_do_method(Global.general_redo)
+		Global.current_project.undo_redo.add_undo_method(Global.general_undo)
 		Global.current_project.undo_redo.add_do_property(
 			Global.current_project, "animation_tags", new_animation_tags
 		)

@@ -20,7 +20,6 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	randomize()
 	get_tree().set_auto_accept_quit(false)
 	_setup_application_window_size()
 
@@ -96,12 +95,11 @@ func _get_auto_display_scale() -> float:
 
 
 func _setup_application_window_size() -> void:
-	get_tree().set_screen_stretch(
-		SceneTree.STRETCH_MODE_DISABLED,
-		SceneTree.STRETCH_ASPECT_IGNORE,
-		Vector2(1024, 576),
-		Global.shrink
-	)
+	var root := get_tree().root
+	root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
+	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
+	root.min_size = Vector2(1024, 576)
+	root.content_scale_factor = Global.shrink
 	set_custom_cursor()
 
 	if OS.get_name() == "HTML5":
@@ -129,12 +127,11 @@ func set_custom_cursor() -> void:
 	if Global.shrink == 1.0:
 		Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 	else:
-		var cursor_data := cursor_image.get_data()
+		var cursor_data := cursor_image.get_image()
 		cursor_data.resize(
 			cursor_data.get_width() * Global.shrink, cursor_data.get_height() * Global.shrink, 0
 		)
-		var new_cursor_tex := ImageTexture.new()
-		new_cursor_tex.create_from_image(cursor_data) #,0
+		var new_cursor_tex := ImageTexture.create_from_image(cursor_data)
 		Input.set_custom_mouse_cursor(
 			new_cursor_tex, Input.CURSOR_CROSS, Vector2(15, 15) * Global.shrink
 		)
@@ -146,8 +143,8 @@ func _show_splash_screen() -> void:
 
 	if Global.config_cache.get_value("preferences", "startup"):
 		# Wait for the window to adjust itself, so the popup is correctly centered
-		await get_tree().idle_frame
-		await get_tree().idle_frame
+		await get_tree().process_frame
+		await get_tree().process_frame
 
 		$Dialogs/SplashDialog.popup_centered()  # Splash screen
 		modulate = Color(0.5, 0.5, 0.5)
@@ -167,14 +164,11 @@ func _handle_backup() -> void:
 				backup_paths.append(Global.config_cache.get_value("backups", p_path))
 			# Temporatily stop autosave until user confirms backup
 			OpenSave.autosave_timer.stop()
-			backup_confirmation.connect(
-				"confirmed", self, "_on_BackupConfirmation_confirmed", [project_paths, backup_paths]
+			backup_confirmation.confirmed.connect(
+				_on_BackupConfirmation_confirmed.bind(project_paths, backup_paths)
 			)
-			backup_confirmation.connect(
-				"custom_action",
-				self,
-				"_on_BackupConfirmation_custom_action",
-				[project_paths, backup_paths]
+			backup_confirmation.custom_action.connect(
+				_on_BackupConfirmation_custom_action.bind(project_paths, backup_paths)
 			)
 			backup_confirmation.popup_centered()
 			Global.can_draw = false
@@ -202,7 +196,7 @@ func _handle_cmdline_arguments() -> void:
 
 func _notification(what: int) -> void:
 	match what:
-		MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		NOTIFICATION_WM_CLOSE_REQUEST:
 			show_quit_dialog()
 		# If the mouse exits the window and another application has the focus,
 		# pause the application
@@ -210,11 +204,11 @@ func _notification(what: int) -> void:
 			Global.has_focus = false
 			if Global.pause_when_unfocused:
 				get_tree().paused = true
-		MainLoop.NOTIFICATION_WM_MOUSE_EXIT:
+		NOTIFICATION_WM_MOUSE_EXIT:
 			if !get_window().has_focus() and Global.pause_when_unfocused:
 				get_tree().paused = true
 		# Unpause it when the mouse enters the window or when it gains focus
-		MainLoop.NOTIFICATION_WM_MOUSE_ENTER:
+		NOTIFICATION_WM_MOUSE_ENTER:
 			get_tree().paused = false
 		MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
 			get_tree().paused = false
@@ -241,8 +235,7 @@ func load_last_project() -> void:
 	if Global.config_cache.has_section_key("preferences", "last_project_path"):
 		# Check if file still exists on disk
 		var file_path = Global.config_cache.get_value("preferences", "last_project_path")
-		var file_check := File.new()
-		if file_check.file_exists(file_path):  # If yes then load the file
+		if FileAccess.file_exists(file_path):  # If yes then load the file
 			OpenSave.open_pxo_file(file_path)
 			# Sync file dialogs
 			Global.save_sprites_dialog.current_dir = file_path.get_base_dir()
@@ -260,8 +253,7 @@ func load_recent_project_file(path: String) -> void:
 		return
 
 	# Check if file still exists on disk
-	var file_check := File.new()
-	if file_check.file_exists(path):  # If yes then load the file
+	if FileAccess.file_exists(path):  # If yes then load the file
 		OpenSave.handle_loading_file(path)
 		# Sync file dialogs
 		Global.save_sprites_dialog.current_dir = path.get_base_dir()
@@ -296,11 +288,11 @@ func save_project(path: String) -> void:
 
 
 func _on_SaveSpriteHTML5_confirmed() -> void:
-	var file_name = Global.save_sprites_html5_dialog.get_node(
+	var file_name: String = Global.save_sprites_html5_dialog.get_node(
 		"FileNameContainer/FileNameLineEdit"
 	).text
 	file_name += ".pxo"
-	var path = "user://".plus_file(file_name)
+	var path = "user://".path_join(file_name)
 	OpenSave.save_pxo_file(path, false, false)
 
 
