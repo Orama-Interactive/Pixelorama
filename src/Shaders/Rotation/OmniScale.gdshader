@@ -31,7 +31,7 @@ shader_type canvas_item;
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-// 
+//
 
 uniform int ScaleMultiplier : hint_range(0, 100) = 4;
 
@@ -285,7 +285,7 @@ vec4 scale(sampler2D image, vec2 coord, vec2 pxSize) {
         }
         return mix(r, w4, (dist + pixel_size / 2.0 - 0.5) / pixel_size>0.5?1.0:0.0);
     }
-    
+
     return w4;
 }
 
@@ -324,7 +324,7 @@ void fragment()
 	}
 	vec4 c;
 	c = scale(TEXTURE, rotated_uv, TEXTURE_PIXEL_SIZE);
-	
+
 	// Taken from NearestNeighbour shader
 	c.a *= texture(selection_tex, rotated_uv).a; // Combine with selection mask
 	// Make a border to prevent stretching pixels on the edge
@@ -347,4 +347,4 @@ void fragment()
 	COLOR.a = mix(COLOR.a, 1.0, c.a * border); // Combine alpha of original image and rotated
 	//c.a = step(0.5,c.a);
 	//COLOR = c;
-} 
+}

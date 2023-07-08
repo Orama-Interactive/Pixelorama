@@ -18,7 +18,7 @@ float modify_uv(vec2 uv) {
 		vec2 uv_offsetted = uv - 0.5;
 		float angle_cos = cos(radians(angle));
 		float angle_sin = sin(radians(angle));
-		modified_uv = uv_offsetted.x * angle_cos - uv_offsetted.y * angle_sin; 
+		modified_uv = uv_offsetted.x * angle_cos - uv_offsetted.y * angle_sin;
 		modified_uv /= abs(angle_cos) + abs(angle_sin);
 		modified_uv /= size;
 		float pivot = position / size;
@@ -40,7 +40,7 @@ float mirror_fract(float uv) {
 		uv = fract(uv);
 	else
 		uv = fract(1.0 - uv);
-	
+
 	return uv;
 }
 

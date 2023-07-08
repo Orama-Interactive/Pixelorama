@@ -8,9 +8,9 @@ uniform vec2 size = vec2(100.0, 100.0);
 
 
 void fragment(){
-	
+
 	if (
-	SCREEN_UV.x >= (position.x)/(screen_resolution.x) 
+	SCREEN_UV.x >= (position.x)/(screen_resolution.x)
 	&& (1.0 - SCREEN_UV.y) >= (position.y)/(screen_resolution.y)
 
 	&& SCREEN_UV.x <= (position.x + size.x)/(screen_resolution.x)
