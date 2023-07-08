@@ -31,7 +31,7 @@ func change_action(action: String) -> void:
 func save() -> bool:
 	if !customizable:
 		return false
-	var err := ResourceSaver.save(resource_path, self)
+	var err := ResourceSaver.save(self, resource_path)
 	if err != OK:
 		print("Error saving shortcut profile %s. Error code: %s" % [resource_path, err])
 		return false

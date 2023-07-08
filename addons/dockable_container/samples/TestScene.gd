@@ -1,10 +1,10 @@
 extends VBoxContainer
 
-const SAVED_LAYOUT_PATH = "user://layout.tres"
+const SAVED_LAYOUT_PATH := "user://layout.tres"
 
-@onready var _container = $DockableContainers/DockableContainer
-@onready var _clone_control = $HBoxContainer/ControlPrefab
-@onready var _checkbox_container = $HBoxContainer
+@onready var _container := $DockableContainers/DockableContainer as DockableContainer
+@onready var _clone_control := $HBoxContainer/ControlPrefab as ColorRect
+@onready var _checkbox_container := $HBoxContainer as HBoxContainer
 
 
 func _ready() -> void:
@@ -12,22 +12,22 @@ func _ready() -> void:
 		$HBoxContainer/SaveLayoutButton.visible = false
 		$HBoxContainer/LoadLayoutButton.visible = false
 
-	var tabs = _container.get_tabs()
+	var tabs := _container.get_tabs()
 	for i in tabs.size():
-		var checkbox = CheckBox.new()
+		var checkbox := CheckBox.new()
 		checkbox.text = str(i)
 		checkbox.button_pressed = not _container.is_control_hidden(tabs[i])
-		checkbox.connect("toggled", Callable(self, "_on_CheckButton_toggled").bind(tabs[i))
+		checkbox.toggled.connect(_on_CheckButton_toggled.bind(tabs[i]))
 		_checkbox_container.add_child(checkbox)
 
 
 func _on_add_pressed() -> void:
-	var control = _clone_control.duplicate()
-	control.get_node("Buttons/Rename").connect(
-		"pressed", self, "_on_control_rename_button_pressed", [control]
+	var control := _clone_control.duplicate()
+	control.get_node("Buttons/Rename").pressed.connect(
+		_on_control_rename_button_pressed.bind(control)
 	)
-	control.get_node("Buttons/Remove").connect(
-		"pressed", self, "_on_control_remove_button_pressed", [control]
+	control.get_node("Buttons/Remove").pressed.connect(
+		_on_control_remove_button_pressed.bind(control)
 	)
 	control.color = Color(randf(), randf(), randf())
 	control.name = "Control0"
@@ -38,7 +38,7 @@ func _on_add_pressed() -> void:
 
 
 func _on_save_pressed() -> void:
-	if ResourceSaver.save(SAVED_LAYOUT_PATH, _container.get_layout()) != OK:
+	if ResourceSaver.save(_container.layout, SAVED_LAYOUT_PATH) != OK:
 		print("ERROR")
 
 
@@ -51,11 +51,11 @@ func _on_load_pressed() -> void:
 
 
 func _on_control_rename_button_pressed(control: Control) -> void:
-	control.name += " =D"
+	control.name = StringName(str(control.name) + " =D")
 
 
 func _on_control_remove_button_pressed(control: Control) -> void:
-	_container.remove_child(control)
+	control.get_parent().remove_child(control)
 	control.queue_free()
 
 
