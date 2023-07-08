@@ -158,6 +158,7 @@ msgstr ""
 msgid "Wrap around:"
 msgstr ""
 
+#. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
 msgstr ""
 
