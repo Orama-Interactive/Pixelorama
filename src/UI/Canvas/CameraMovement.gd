@@ -83,9 +83,9 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_released("pan"):
 		drag = false
 	elif event.is_action_pressed("zoom_in", false, true):  # Wheel Up Event
-		zoom_camera(-1)
-	elif event.is_action_pressed("zoom_out", false, true):  # Wheel Down Event
 		zoom_camera(1)
+	elif event.is_action_pressed("zoom_out", false, true):  # Wheel Down Event
+		zoom_camera(-1)
 
 	elif event is InputEventMagnifyGesture:  # Zoom Gesture on a laptop touchpad
 		if event.factor < 1:

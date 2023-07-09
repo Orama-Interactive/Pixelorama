@@ -17,7 +17,7 @@ func _input(event: InputEvent) -> void:
 		if InputMap.has_action("right_" + t.shortcut + "_tool"):
 			if (
 				event.is_action_pressed("right_" + t.shortcut + "_tool")
-				and (!event.control and !event.command)
+				and (!event.is_command_or_control_pressed())
 			):
 				# Shortcut for right button (with Alt)
 				Tools.assign_tool(t.name, MOUSE_BUTTON_RIGHT)
@@ -25,7 +25,7 @@ func _input(event: InputEvent) -> void:
 		if InputMap.has_action("left_" + t.shortcut + "_tool"):
 			if (
 				event.is_action_pressed("left_" + t.shortcut + "_tool")
-				and (!event.control and !event.command)
+				and (!event.control.is_command_or_control_pressed())
 			):
 				# Shortcut for left button
 				Tools.assign_tool(t.name, MOUSE_BUTTON_LEFT)

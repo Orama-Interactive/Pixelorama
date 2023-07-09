@@ -11,7 +11,7 @@ var last: Vector2
 
 
 func _ready() -> void:
-	Global.main_viewport.connect("item_rect_changed", Callable(self, "update"))
+	Global.main_viewport.connect("item_rect_changed", Callable(self, "queue_redraw"))
 
 
 # Code taken and modified from Godot's source code
@@ -20,7 +20,7 @@ func _draw() -> void:
 	var ruler_transform := Transform2D()
 	var major_subdivide := Transform2D()
 	var minor_subdivide := Transform2D()
-	var zoom: float = 1 / Global.camera.zoom.x
+	var zoom: float = Global.camera.zoom.x
 	transform.y = Vector2(zoom, zoom)
 
 	# This tracks the "true" top left corner of the drawing:
@@ -57,30 +57,34 @@ func _draw() -> void:
 		Vector2(1.0 / minor_subdivision, 1.0 / minor_subdivision)
 	)
 
-	first = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse() * Vector2.ZERO
-	last = (transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse() * Global.main_viewport.size
+	first = (
+		(transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse()
+		* (Vector2.ZERO)
+	)
+	last = (
+		(transform * ruler_transform * major_subdivide * minor_subdivide).affine_inverse()
+		* (Global.main_viewport.size)
+	)
 
 	for j in range(ceil(first.y), ceil(last.y)):
-		var position: Vector2 = (transform * ruler_transform * major_subdivide * minor_subdivide) * Vector2(0, j)
+		var pos: Vector2 = (
+			(transform * ruler_transform * major_subdivide * minor_subdivide) * (Vector2(0, j))
+		)
 		if j % (major_subdivision * minor_subdivision) == 0:
-			draw_line(Vector2(0, position.y), Vector2(RULER_WIDTH, position.y), Color.WHITE)
-			var text_xform = Transform2D(-PI / 2, Vector2(font.get_height() - 4, position.y - 2))
+			draw_line(Vector2(0, pos.y), Vector2(RULER_WIDTH, pos.y), Color.WHITE)
+			var text_xform = Transform2D(-PI / 2, Vector2(font.get_height() - 4, pos.y - 2))
 			draw_set_transform_matrix(get_transform() * text_xform)
-			var val = (ruler_transform * major_subdivide * minor_subdivide) * (Vector2(0, j)).y
-			draw_string(font, Vector2(), str(snapped(val, 0.1)))
+			var val = ((ruler_transform * major_subdivide * minor_subdivide) * Vector2(0, j)).y
+			draw_string(font, Vector2(), str(snappedf(val, 0.1)))
 			draw_set_transform_matrix(get_transform())
 		else:
 			if j % minor_subdivision == 0:
 				draw_line(
-					Vector2(RULER_WIDTH * 0.33, position.y),
-					Vector2(RULER_WIDTH, position.y),
-					Color.WHITE
+					Vector2(RULER_WIDTH * 0.33, pos.y), Vector2(RULER_WIDTH, pos.y), Color.WHITE
 				)
 			else:
 				draw_line(
-					Vector2(RULER_WIDTH * 0.66, position.y),
-					Vector2(RULER_WIDTH, position.y),
-					Color.WHITE
+					Vector2(RULER_WIDTH * 0.66, pos.y), Vector2(RULER_WIDTH, pos.y), Color.WHITE
 				)
 
 

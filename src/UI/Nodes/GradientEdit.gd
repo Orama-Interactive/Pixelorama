@@ -71,7 +71,7 @@ class GradientCursor:
 				queue_free()
 		elif ev is InputEventMouseMotion and (ev.button_mask & MOUSE_BUTTON_MASK_LEFT) != 0 and sliding:
 			position.x += get_local_mouse_position().x
-			if ev.control:
+			if ev.ctrl_pressed:
 				position.x = (
 					round(get_caret_column() * 20.0)
 					* 0.05

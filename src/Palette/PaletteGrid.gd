@@ -150,6 +150,8 @@ func convert_palette_index_to_grid_index(palette_index: int) -> int:
 
 
 func resize_grid(new_rect_size: Vector2) -> void:
+	if not is_instance_valid(current_palette):
+		return
 	var grid_x: int = new_rect_size.x / (swatch_size.x + get("theme_override_constants/h_separation"))
 	var grid_y: int = new_rect_size.y / (swatch_size.y + get("theme_override_constants/v_separation"))
 	grid_size.x = min(grid_x, current_palette.width)

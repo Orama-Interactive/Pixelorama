@@ -50,7 +50,7 @@ func _input(event: InputEvent) -> void:
 	velocity_preview.value = 0
 	if event is InputEventMouseMotion:
 		pressure_preview.value = event.pressure
-		velocity_preview.value = event.speed.length() / Tools.mouse_velocity_max
+		velocity_preview.value = event.velocity.length() / Tools.mouse_velocity_max
 
 
 func _on_resized() -> void:
