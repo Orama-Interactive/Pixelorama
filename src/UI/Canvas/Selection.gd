@@ -400,7 +400,7 @@ func resize_selection() -> void:
 
 func _gizmo_rotate() -> void:  # Does not work properly yet
 	var angle := image_current_pixel.angle_to_point(mouse_pos_on_gizmo_drag)
-	angle = deg_to_rad(floor(rad_to_deg(angle)))
+	angle = deg_to_rad(floorf(rad_to_deg(angle)))
 	if angle == prev_angle:
 		return
 	prev_angle = angle
@@ -641,8 +641,8 @@ func get_undo_data(undo_image: bool) -> Dictionary:
 	return data
 
 
-func _get_selected_draw_cels() -> Array:  # Array of BaseCel(s)
-	var cels := []
+func _get_selected_draw_cels() -> Array[BaseCel]:
+	var cels: Array[BaseCel] = []
 	var project: Project = Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
@@ -653,8 +653,8 @@ func _get_selected_draw_cels() -> Array:  # Array of BaseCel(s)
 	return cels
 
 
-func _get_selected_draw_images() -> Array:  # Array of Image(s)
-	var images := []
+func _get_selected_draw_images() -> Array[Image]:
+	var images: Array[Image] = []
 	var project: Project = Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
