@@ -108,7 +108,7 @@ func serialize() -> Dictionary:
 func deserialize(dict: Dictionary) -> void:
 	id = dict["id"]
 	file_path = dict["file_path"]
-	self.type = dict["type"]
+	type = dict["type"]
 	transform = dict["transform"]
 	visible = dict["visible"]
 	if _is_mesh():

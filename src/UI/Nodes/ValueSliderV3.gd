@@ -50,8 +50,8 @@ func _gcd(a: int, b: int) -> int:
 func _on_X_value_changed(val: float) -> void:
 	value.x = val
 	if _locked_ratio:
-		self.value.y = maxf(min_value.y, (value.x / ratio.x) * ratio.y)
-		self.value.z = maxf(min_value.z, (value.x / ratio.x) * ratio.z)
+		value.y = maxf(min_value.y, (value.x / ratio.x) * ratio.y)
+		value.z = maxf(min_value.z, (value.x / ratio.x) * ratio.z)
 	if _can_emit_signal:
 		value_changed.emit(value)
 
@@ -59,8 +59,8 @@ func _on_X_value_changed(val: float) -> void:
 func _on_Y_value_changed(val: float) -> void:
 	value.y = val
 	if _locked_ratio:
-		self.value.x = maxf(min_value.x, (value.y / ratio.y) * ratio.x)
-		self.value.z = maxf(min_value.z, (value.y / ratio.y) * ratio.z)
+		value.x = maxf(min_value.x, (value.y / ratio.y) * ratio.x)
+		value.z = maxf(min_value.z, (value.y / ratio.y) * ratio.z)
 	if _can_emit_signal:
 		value_changed.emit(value)
 
@@ -68,8 +68,8 @@ func _on_Y_value_changed(val: float) -> void:
 func _on_Z_value_changed(val: float) -> void:
 	value.z = val
 	if _locked_ratio:
-		self.value.x = maxf(min_value.x, (value.z / ratio.z) * ratio.x)
-		self.value.y = maxf(min_value.y, (value.z / ratio.z) * ratio.y)
+		value.x = maxf(min_value.x, (value.z / ratio.z) * ratio.x)
+		value.y = maxf(min_value.y, (value.z / ratio.z) * ratio.y)
 	if _can_emit_signal:
 		value_changed.emit(value)
 

@@ -12,9 +12,9 @@ var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
 
-var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
+var frame_button_node := preload("res://src/UI/Timeline/FrameButton.tscn")
 
-@onready var old_scroll: int = 0  # The previous scroll state of $ScrollContainer
+@onready var old_scroll := 0  ## The previous scroll state of $ScrollContainer
 @onready var tag_spacer = find_child("TagSpacer")
 @onready var start_spacer = find_child("StartSpacer")
 @onready var add_layer_list: MenuButton = $"%AddLayerList"
@@ -37,7 +37,7 @@ func _ready() -> void:
 	fps_spinbox.value = Global.current_project.fps
 	# config loading
 	layer_frame_h_split.split_offset = Global.config_cache.get_value("timeline", "layer_size", 0)
-	self.cel_size = Global.config_cache.get_value("timeline", "cel_size", cel_size)  # Call setter
+	cel_size = Global.config_cache.get_value("timeline", "cel_size", cel_size)  # Call setter
 	var past_rate = Global.config_cache.get_value(
 		"timeline", "past_rate", Global.onion_skinning_past_rate
 	)
@@ -75,7 +75,7 @@ func _input(event: InputEvent) -> void:
 	var timeline_rect := Rect2(global_position, size)
 	if timeline_rect.has_point(mouse_pos):
 		if Input.is_key_pressed(KEY_CTRL):
-			self.cel_size += (
+			cel_size += (
 				2 * int(event.is_action("zoom_in"))
 				- 2 * int(event.is_action("zoom_out"))
 			)
@@ -116,7 +116,7 @@ func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
 
 
 func cel_size_changed(value: int) -> void:
-	cel_size = clamp(value, min_cel_size, max_cel_size)
+	cel_size = clampi(value, min_cel_size, max_cel_size)
 	update_minimum_size()
 	Global.config_cache.set_value("timeline", "cel_size", cel_size)
 	for layer_button in Global.layer_vbox.get_children():

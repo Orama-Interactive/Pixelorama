@@ -12,7 +12,7 @@ func _init(_image := Image.new(), _opacity := 1.0, _image_texture: ImageTexture 
 		image_texture = _image_texture
 	else:
 		image_texture = ImageTexture.new()
-	self.image = _image  # Set image and call setter
+	image = _image  # Set image and call setter
 	opacity = _opacity
 
 

@@ -273,7 +273,7 @@ func _big_bounding_rectangle_changed(value: Rect2) -> void:
 func _update_gizmos() -> void:
 	var rect_pos: Vector2 = big_bounding_rectangle.position
 	var rect_end: Vector2 = big_bounding_rectangle.end
-	var size: Vector2 = Vector2.ONE * Global.camera.zoom * 10
+	var size: Vector2 = Vector2.ONE / Global.camera.zoom * 10
 	# Clockwise, starting from top-left corner
 	gizmos[0].rect = Rect2(rect_pos - size, size)
 	gizmos[1].rect = Rect2(
@@ -301,8 +301,8 @@ func _update_on_zoom() -> void:
 		Global.current_project.selection_map.get_size().x,
 		Global.current_project.selection_map.get_size().y
 	)
-	marching_ants_outline.material.set_shader_parameter("width", zoom)
-	marching_ants_outline.material.set_shader_parameter("frequency", (1.0 / zoom) * 10 * size / 64)
+	marching_ants_outline.material.set_shader_parameter("width", 1.0 / zoom)
+	marching_ants_outline.material.set_shader_parameter("frequency", zoom * 10 * size / 64)
 	for gizmo in gizmos:
 		if gizmo.rect.size == Vector2.ZERO:
 			return
@@ -351,7 +351,7 @@ func _gizmo_resize() -> void:
 	if big_bounding_rectangle.size.y == 0:
 		big_bounding_rectangle.size.y = 1
 
-	self.big_bounding_rectangle = big_bounding_rectangle  # Call the setter method
+	big_bounding_rectangle = big_bounding_rectangle  # Call the setter method
 	resize_selection()
 
 
@@ -426,7 +426,7 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 	DrawingAlgos.nn_rotate(bitmap_image, angle, bitmap_pivot)
 	Global.current_project.selection_map = bitmap_image
 	Global.current_project.selection_map_changed()
-	self.big_bounding_rectangle = bitmap_image.get_used_rect()
+	big_bounding_rectangle = bitmap_image.get_used_rect()
 	queue_redraw()
 
 
@@ -467,7 +467,7 @@ func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
 		selection_map_copy.move_bitmap_values(project)
 
 	project.selection_map = selection_map_copy
-	self.big_bounding_rectangle = big_bounding_rectangle  # call getter method
+	big_bounding_rectangle = big_bounding_rectangle  # call getter method
 
 
 func move_borders_start() -> void:
@@ -478,7 +478,7 @@ func move_borders(move: Vector2) -> void:
 	if move == Vector2.ZERO:
 		return
 	marching_ants_outline.offset += move
-	self.big_bounding_rectangle.position += move
+	big_bounding_rectangle.position += move
 	queue_redraw()
 
 
@@ -561,7 +561,7 @@ func transform_content_cancel() -> void:
 	project.selection_offset = original_offset
 
 	is_moving_content = false
-	self.big_bounding_rectangle = original_big_bounding_rectangle
+	big_bounding_rectangle = original_big_bounding_rectangle
 	project.selection_map = original_bitmap
 	project.selection_map_changed()
 	preview_image = original_preview_image
@@ -778,7 +778,7 @@ func paste(in_place := false) -> void:
 		big_bounding_rectangle.position = camera_center.floor()
 		project.selection_map.move_bitmap_values(Global.current_project, false)
 
-	self.big_bounding_rectangle = big_bounding_rectangle
+	big_bounding_rectangle = big_bounding_rectangle
 	temp_rect = big_bounding_rectangle
 	is_moving_content = true
 	is_pasting = true
@@ -885,7 +885,7 @@ func invert() -> void:
 	selection_map_copy.invert()
 	project.selection_map = selection_map_copy
 	project.selection_map_changed()
-	self.big_bounding_rectangle = selection_map_copy.get_used_rect()
+	big_bounding_rectangle = selection_map_copy.get_used_rect()
 	project.selection_offset = Vector2.ZERO
 	commit_undo("Select", undo_data_tmp)
 
@@ -902,7 +902,7 @@ func clear_selection(use_undo := false) -> void:
 	selection_map_copy.clear()
 	project.selection_map = selection_map_copy
 
-	self.big_bounding_rectangle = Rect2()
+	big_bounding_rectangle = Rect2()
 	project.selection_offset = Vector2.ZERO
 	queue_redraw()
 	if use_undo:
