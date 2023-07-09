@@ -63,6 +63,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="VBox/HBox/PreviewViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
 size = Vector2i(308, 144)
 render_target_update_mode = 4
 
