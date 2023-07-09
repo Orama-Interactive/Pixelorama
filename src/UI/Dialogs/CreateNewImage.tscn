@@ -1,21 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://btjf3lj873q1t"]
 
-[ext_resource path="res://src/UI/Dialogs/CreateNewImage.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/misc/portrait.png" type="Texture2D" id=2]
-[ext_resource path="res://assets/graphics/misc/landscape.png" type="Texture2D" id=3]
-[ext_resource path="res://assets/graphics/misc/lock_aspect_2.png" type="Texture2D" id=4]
-[ext_resource path="res://assets/graphics/misc/lock_aspect.png" type="Texture2D" id=5]
-[ext_resource path="res://assets/graphics/misc/lock_aspect_guides.png" type="Texture2D" id=6]
+[ext_resource type="Script" path="res://src/UI/Dialogs/CreateNewImage.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://kj867tldofxi" path="res://assets/graphics/misc/portrait.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://0vc1pn1sn2ud" path="res://assets/graphics/misc/landscape.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cancw70yw0pv7" path="res://assets/graphics/misc/lock_aspect_2.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://beqermx8s5q8y" path="res://assets/graphics/misc/lock_aspect.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://kd10jfc1dxf5" path="res://assets/graphics/misc/lock_aspect_guides.png" id="6"]
 
 [node name="CreateNewImage" type="ConfirmationDialog"]
-offset_right = 471.0
-offset_bottom = 284.0
-custom_minimum_size = Vector2( 375, 222 )
-window_title = "New..."
-resizable = true
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
@@ -25,129 +21,98 @@ offset_bottom = -36.0
 size_flags_horizontal = 0
 
 [node name="ProjectName" type="HBoxContainer" parent="VBoxContainer"]
-offset_right = 455.0
-offset_bottom = 24.0
+layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="VBoxContainer/ProjectName"]
-offset_top = 5.0
-offset_right = 100.0
-offset_bottom = 19.0
-custom_minimum_size = Vector2( 100, 0 )
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 text = "Project Name:"
 
 [node name="NameInput" type="LineEdit" parent="VBoxContainer/ProjectName"]
-offset_left = 104.0
-offset_right = 455.0
-offset_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Enter name... (Default \"untitled\")"
 
 [node name="ImageSize" type="Label" parent="VBoxContainer"]
-offset_top = 28.0
-offset_right = 455.0
-offset_bottom = 42.0
+layout_mode = 2
 text = "Image Size"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-offset_top = 46.0
-offset_right = 455.0
-offset_bottom = 50.0
+layout_mode = 2
 
 [node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-offset_top = 54.0
-offset_right = 455.0
-offset_bottom = 192.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Templates" type="VBoxContainer" parent="VBoxContainer/VBoxContainer"]
-offset_right = 293.0
-offset_bottom = 138.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="TemplatesContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Templates"]
-offset_right = 293.0
-offset_bottom = 20.0
+layout_mode = 2
 
 [node name="TemplatesLabel" type="Label" parent="VBoxContainer/VBoxContainer/Templates/TemplatesContainer"]
-offset_top = 3.0
-offset_right = 100.0
-offset_bottom = 17.0
-custom_minimum_size = Vector2( 100, 0 )
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 text = "Templates:"
 
 [node name="TemplatesOptions" type="OptionButton" parent="VBoxContainer/VBoxContainer/Templates/TemplatesContainer"]
-offset_left = 104.0
-offset_right = 293.0
-offset_bottom = 20.0
-mouse_default_cursor_shape = 2
+unique_name_in_owner = true
+layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 toggle_mode = false
-text = "Default"
-items = [ "Default", null, false, 0, null ]
-selected = 0
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Templates"]
-offset_top = 24.0
-offset_right = 293.0
-offset_bottom = 76.0
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer"]
-offset_right = 280.0
-offset_bottom = 52.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer"]
-offset_right = 280.0
-offset_bottom = 24.0
+layout_mode = 2
 
 [node name="WidthLabel" type="Label" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer/WidthContainer"]
-offset_top = 5.0
-offset_right = 100.0
-offset_bottom = 19.0
-custom_minimum_size = Vector2( 100, 0 )
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 text = "Width:"
 
 [node name="WidthValue" type="SpinBox" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer/WidthContainer"]
-offset_left = 104.0
-offset_right = 280.0
-offset_bottom = 24.0
-mouse_default_cursor_shape = 2
+unique_name_in_owner = true
+layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
 [node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer"]
-offset_top = 28.0
-offset_right = 280.0
-offset_bottom = 52.0
+layout_mode = 2
 
 [node name="HeightLabel" type="Label" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer/HeightContainer"]
-offset_top = 5.0
-offset_right = 100.0
-offset_bottom = 19.0
-custom_minimum_size = Vector2( 100, 0 )
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 text = "Height:"
 
 [node name="HeightValue" type="SpinBox" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/VBoxContainer/HeightContainer"]
-offset_left = 104.0
-offset_right = 280.0
-offset_bottom = 24.0
-mouse_default_cursor_shape = 2
+unique_name_in_owner = true
+layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer" groups=["UIButtons"]]
-offset_left = 284.0
-offset_right = 293.0
-offset_bottom = 52.0
-texture = ExtResource( 6 )
+layout_mode = 2
+texture = ExtResource("6")
 
 [node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/VBoxContainer/Templates/SizeContainer/TextureRect" groups=["UIButtons"]]
+unique_name_in_owner = true
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -159,57 +124,44 @@ offset_bottom = 7.0
 tooltip_text = "Lock aspect ratio"
 mouse_default_cursor_shape = 2
 toggle_mode = true
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture_normal = ExtResource("4")
+texture_pressed = ExtResource("5")
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/VBoxContainer"]
-offset_left = 297.0
-offset_right = 301.0
-offset_bottom = 138.0
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer"]
-offset_left = 305.0
-offset_right = 455.0
-offset_bottom = 138.0
-custom_minimum_size = Vector2( 150, 0 )
 clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
 focus_mode = 2
 mouse_filter = 0
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/VBoxContainer"]
-offset_right = 150.0
-offset_bottom = 14.0
+layout_mode = 2
 text = "Recent:"
 
 [node name="RecentTemplates" type="ItemList" parent="VBoxContainer/VBoxContainer/VBoxContainer"]
-offset_top = 18.0
-offset_right = 150.0
-offset_bottom = 138.0
+unique_name_in_owner = true
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 allow_reselect = true
 
 [node name="SizeButtonsContainer" type="HBoxContainer" parent="VBoxContainer"]
-offset_top = 196.0
-offset_right = 455.0
-offset_bottom = 216.0
+layout_mode = 2
 
 [node name="PortraitButton" type="Button" parent="VBoxContainer/SizeButtonsContainer" groups=["UIButtons"]]
-offset_right = 20.0
-offset_bottom = 20.0
-custom_minimum_size = Vector2( 20, 0 )
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
 tooltip_text = "Portrait"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeButtonsContainer/PortraitButton"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -218,22 +170,19 @@ offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource("2")
 
 [node name="LandscapeButton" type="Button" parent="VBoxContainer/SizeButtonsContainer" groups=["UIButtons"]]
-offset_left = 24.0
-offset_right = 44.0
-offset_bottom = 20.0
-custom_minimum_size = Vector2( 20, 0 )
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
 tooltip_text = "Landscape"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeButtonsContainer/LandscapeButton"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -242,31 +191,23 @@ offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
-texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource("3")
 
 [node name="FillColorContainer" type="HBoxContainer" parent="VBoxContainer"]
-offset_top = 220.0
-offset_right = 455.0
-offset_bottom = 240.0
+layout_mode = 2
 
 [node name="FillColorLabel" type="Label" parent="VBoxContainer/FillColorContainer"]
-offset_top = 3.0
-offset_right = 100.0
-offset_bottom = 17.0
-custom_minimum_size = Vector2( 100, 0 )
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 text = "Fill with color:"
 
 [node name="FillColor" type="ColorPickerButton" parent="VBoxContainer/FillColorContainer"]
-offset_left = 104.0
-offset_right = 455.0
-offset_bottom = 20.0
-custom_minimum_size = Vector2( 64, 20 )
-mouse_default_cursor_shape = 2
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 20)
+layout_mode = 2
 size_flags_horizontal = 3
-color = Color( 0, 0, 0, 0 )
+mouse_default_cursor_shape = 2
+color = Color(0, 0, 0, 0)
 
 [connection signal="about_to_popup" from="." to="." method="_on_CreateNewImage_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_CreateNewImage_confirmed"]
