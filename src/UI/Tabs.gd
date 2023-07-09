@@ -21,7 +21,7 @@ func _gui_input(event: InputEvent) -> void:
 		if w_limit < w:
 			return
 		if get_tab_rect(i).has_point(event.position):
-			_on_Tabs_tab_close(i)
+			_on_tab_close_pressed(i)
 			return
 
 
@@ -29,7 +29,7 @@ func _on_Tabs_tab_changed(tab: int) -> void:
 	Global.current_project_index = tab
 
 
-func _on_Tabs_tab_close(tab: int) -> void:
+func _on_tab_close_pressed(tab: int) -> void:
 	if Global.projects.size() == 1:
 		return
 
@@ -42,16 +42,16 @@ func _on_Tabs_tab_close(tab: int) -> void:
 		delete_tab(tab)
 
 
-func _on_Tabs_reposition_active_tab_request(idx_to: int) -> void:
+func _on_active_tab_rearranged(idx_to: int) -> void:
 	var temp: Project = Global.projects[Global.current_project_index]
 	Global.projects.erase(temp)
 	Global.projects.insert(idx_to, temp)
 
 	# Change save paths
-	var temp_save_path = OpenSave.current_save_paths[Global.current_project_index]
+	var temp_save_path := OpenSave.current_save_paths[Global.current_project_index]
 	OpenSave.current_save_paths[Global.current_project_index] = OpenSave.current_save_paths[idx_to]
 	OpenSave.current_save_paths[idx_to] = temp_save_path
-	var temp_backup_path = OpenSave.backup_save_paths[Global.current_project_index]
+	var temp_backup_path := OpenSave.backup_save_paths[Global.current_project_index]
 	OpenSave.backup_save_paths[Global.current_project_index] = OpenSave.backup_save_paths[idx_to]
 	OpenSave.backup_save_paths[idx_to] = temp_backup_path
 
