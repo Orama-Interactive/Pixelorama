@@ -29,6 +29,7 @@ var _skip_slider_logic := false
 
 
 func _ready() -> void:
+	super._ready()
 	set_spinbox_values()
 	refresh_options()
 

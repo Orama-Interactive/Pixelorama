@@ -54,7 +54,7 @@ class GradientCursor:
 	func _gui_input(ev: InputEvent) -> void:
 		if ev is InputEventMouseButton:
 			if ev.button_index == MOUSE_BUTTON_LEFT:
-				if ev.doubleclick:
+				if ev.double_click:
 					grand_parent.select_color(self, ev.global_position)
 				elif ev.pressed:
 					grand_parent.continuous_change = false

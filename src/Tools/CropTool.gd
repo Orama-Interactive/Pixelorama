@@ -9,6 +9,7 @@ var _locked_ratio := false
 
 
 func _ready() -> void:
+	super._ready()
 	_crop = Global.canvas.crop_rect
 	_crop.updated.connect(_sync_ui)
 	_crop.tool_count += 1
@@ -16,6 +17,7 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
+	super._exit_tree()
 	_crop.tool_count -= 1
 
 

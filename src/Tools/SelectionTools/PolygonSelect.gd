@@ -13,7 +13,7 @@ func _input(event: InputEvent) -> void:
 		if Global.mirror_view:
 			_last_position.x = (Global.current_project.size.x - 1) - _last_position.x
 	elif event is InputEventMouseButton:
-		if event.doubleclick and event.button_index == tool_slot.button and _draw_points:
+		if event.double_click and event.button_index == tool_slot.button and _draw_points:
 			$DoubleClickTimer.start()
 			append_gap(_draw_points[-1], _draw_points[0], _draw_points)
 			_ready_to_apply = true

@@ -30,21 +30,21 @@ var tools := {
 		"RectSelect",
 		"Rectangular Selection",
 		"rectangle_select",
-		preload("res://src/Tools/SelectionTools/RectSelect.tscn")
+		load("res://src/Tools/SelectionTools/RectSelect.tscn")
 	),
 	"EllipseSelect":
 	Tool.new(
 		"EllipseSelect",
 		"Elliptical Selection",
 		"ellipse_select",
-		preload("res://src/Tools/SelectionTools/EllipseSelect.tscn")
+		load("res://src/Tools/SelectionTools/EllipseSelect.tscn")
 	),
 	"PolygonSelect":
 	Tool.new(
 		"PolygonSelect",
 		"Polygonal Selection",
 		"polygon_select",
-		preload("res://src/Tools/SelectionTools/PolygonSelect.tscn"),
+		load("res://src/Tools/SelectionTools/PolygonSelect.tscn"),
 		[],
 		"Double-click to connect the last point to the starting point"
 	),
@@ -53,54 +53,54 @@ var tools := {
 		"ColorSelect",
 		"Select By Color",
 		"color_select",
-		preload("res://src/Tools/SelectionTools/ColorSelect.tscn")
+		load("res://src/Tools/SelectionTools/ColorSelect.tscn")
 	),
 	"MagicWand":
 	Tool.new(
 		"MagicWand",
 		"Magic Wand",
 		"magic_wand",
-		preload("res://src/Tools/SelectionTools/MagicWand.tscn")
+		load("res://src/Tools/SelectionTools/MagicWand.tscn")
 	),
 	"Lasso":
 	Tool.new(
 		"Lasso",
 		"Lasso / Free Select Tool",
 		"lasso",
-		preload("res://src/Tools/SelectionTools/Lasso.tscn")
+		load("res://src/Tools/SelectionTools/Lasso.tscn")
 	),
 	"PaintSelect":
 	Tool.new(
 		"PaintSelect",
 		"Select by Drawing",
 		"paint_selection",
-		preload("res://src/Tools/SelectionTools/PaintSelect.tscn")
+		load("res://src/Tools/SelectionTools/PaintSelect.tscn")
 	),
 	"Move":
 	Tool.new(
-		"Move", "Move", "move", preload("res://src/Tools/Move.tscn"), [Global.LayerTypes.PIXEL]
+		"Move", "Move", "move", load("res://src/Tools/Move.tscn"), [Global.LayerTypes.PIXEL]
 	),
-	"Zoom": Tool.new("Zoom", "Zoom", "zoom", preload("res://src/Tools/Zoom.tscn")),
-	"Pan": Tool.new("Pan", "Pan", "pan", preload("res://src/Tools/Pan.tscn")),
+	"Zoom": Tool.new("Zoom", "Zoom", "zoom", load("res://src/Tools/Zoom.tscn")),
+	"Pan": Tool.new("Pan", "Pan", "pan", load("res://src/Tools/Pan.tscn")),
 	"ColorPicker":
 	Tool.new(
 		"ColorPicker",
 		"Color Picker",
 		"colorpicker",
-		preload("res://src/Tools/ColorPicker.tscn"),
+		load("res://src/Tools/ColorPicker.tscn"),
 		[],
 		"Select a color from a pixel of the sprite"
 	),
 	"Crop":
 	Tool.new(
-		"Crop", "Crop", "crop", preload("res://src/Tools/CropTool.tscn"), [], "Resize the canvas"
+		"Crop", "Crop", "crop", load("res://src/Tools/CropTool.tscn"), [], "Resize the canvas"
 	),
 	"Pencil":
 	Tool.new(
 		"Pencil",
 		"Pencil",
 		"pencil",
-		preload("res://src/Tools/Pencil.tscn"),
+		load("res://src/Tools/Pencil.tscn"),
 		[Global.LayerTypes.PIXEL],
 		"Hold %s to make a line",
 		["draw_create_line"]
@@ -110,7 +110,7 @@ var tools := {
 		"Eraser",
 		"Eraser",
 		"eraser",
-		preload("res://src/Tools/Eraser.tscn"),
+		load("res://src/Tools/Eraser.tscn"),
 		[Global.LayerTypes.PIXEL],
 		"Hold %s to make a line",
 		["draw_create_line"]
@@ -120,7 +120,7 @@ var tools := {
 		"Bucket",
 		"Bucket",
 		"fill",
-		preload("res://src/Tools/Bucket.tscn"),
+		load("res://src/Tools/Bucket.tscn"),
 		[Global.LayerTypes.PIXEL]
 	),
 	"Shading":
@@ -128,7 +128,7 @@ var tools := {
 		"Shading",
 		"Shading Tool",
 		"shading",
-		preload("res://src/Tools/Shading.tscn"),
+		load("res://src/Tools/Shading.tscn"),
 		[Global.LayerTypes.PIXEL]
 	),
 	"LineTool":
@@ -136,7 +136,7 @@ var tools := {
 		"LineTool",
 		"Line Tool",
 		"linetool",
-		preload("res://src/Tools/LineTool.tscn"),
+		load("res://src/Tools/LineTool.tscn"),
 		[Global.LayerTypes.PIXEL],
 		"""Hold %s to snap the angle of the line
 Hold %s to center the shape on the click origin
@@ -148,7 +148,7 @@ Hold %s to displace the shape's origin""",
 		"RectangleTool",
 		"Rectangle Tool",
 		"rectangletool",
-		preload("res://src/Tools/RectangleTool.tscn"),
+		load("res://src/Tools/RectangleTool.tscn"),
 		[Global.LayerTypes.PIXEL],
 		"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
@@ -160,7 +160,7 @@ Hold %s to displace the shape's origin""",
 		"EllipseTool",
 		"Ellipse Tool",
 		"ellipsetool",
-		preload("res://src/Tools/EllipseTool.tscn"),
+		load("res://src/Tools/EllipseTool.tscn"),
 		[Global.LayerTypes.PIXEL],
 		"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
@@ -170,9 +170,9 @@ Hold %s to displace the shape's origin""",
 	"3DShapeEdit":
 	Tool.new(
 		"3DShapeEdit",
-		"3D Shape3D Edit",
+		"3D Shape Edit",
 		"3dshapeedit",
-		preload("res://src/Tools/3DShapeEdit.tscn"),
+		load("res://src/Tools/3DShapeEdit.tscn"),
 		[Global.LayerTypes.THREE_D]
 	),
 }

@@ -129,7 +129,7 @@ func _on_LayerContainer_gui_input(event: InputEvent) -> void:
 		else:  # If the button is pressed without Shift or Control
 			_select_current_layer()
 
-		if event.doubleclick:
+		if event.double_click:
 			label.visible = false
 			line_edit.visible = true
 			line_edit.editable = true
