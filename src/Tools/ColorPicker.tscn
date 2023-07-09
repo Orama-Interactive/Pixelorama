@@ -1,17 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://2onobu8eymt8"]
 
-[ext_resource type="PackedScene" path="res://src/Tools/BaseTool.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/ColorPicker.gd" id="2"]
 
 [node name="ToolOptions" instance=ExtResource("1")]
 script = ExtResource("2")
-
-[node name="ColorRect" parent="." index="0"]
-layout_mode = 2
-
-[node name="Label" parent="." index="1"]
-layout_mode = 2
-theme_type_variation = &"Header"
 
 [node name="ColorPicker" type="VBoxContainer" parent="." index="2"]
 layout_mode = 2

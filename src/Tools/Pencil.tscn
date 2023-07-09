@@ -1,62 +1,31 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cul5mpy17ebfl"]
 
-[ext_resource path="res://src/Tools/Draw.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/UI/Nodes/ValueSliderV2.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Tools/Pencil.gd" type="Script" id=3]
+[ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/Draw.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="2"]
+[ext_resource type="Script" path="res://src/Tools/Pencil.gd" id="3"]
 
-[node name="ToolOptions" instance=ExtResource( 1 )]
-script = ExtResource( 3 )
-
-[node name="ColorRect" parent="." index="0"]
-offset_right = 127.0
-
-[node name="Label" parent="." index="1"]
-offset_right = 127.0
-
-[node name="Brush" parent="." index="2"]
-offset_right = 127.0
-
-[node name="BrushSize" parent="Brush" index="1"]
-offset_right = 127.0
-
-[node name="ColorInterpolation" parent="." index="3"]
-offset_right = 128.0
+[node name="ToolOptions" instance=ExtResource("1")]
+script = ExtResource("3")
 
 [node name="Overwrite" type="CheckBox" parent="." index="4"]
-offset_top = 62.0
-offset_right = 127.0
-offset_bottom = 86.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 tooltip_text = "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 mouse_default_cursor_shape = 2
 text = "Overwrite color"
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="FillInside" type="CheckBox" parent="." index="5"]
-offset_top = 90.0
-offset_right = 127.0
-offset_bottom = 114.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Fill inside"
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="SpacingMode" type="CheckBox" parent="." index="6"]
-offset_top = 118.0
-offset_right = 127.0
-offset_bottom = 142.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Spacing"
 
-[node name="Spacing" parent="." index="7" instance=ExtResource( 2 )]
+[node name="Spacing" parent="." index="7" instance=ExtResource("2")]
 visible = false
-offset_top = 146.0
-offset_right = 127.0
-offset_bottom = 198.0
+layout_mode = 2
 allow_greater = true
 show_ratio = true
 prefix_x = "Gap X:"

@@ -1,50 +1,44 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bd62qfjn380wf"]
 
-[ext_resource path="res://src/Tools/BaseTool.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Tools/SelectionTools/SelectionTool.gd" type="Script" id=2]
-[ext_resource path="res://src/UI/Nodes/ValueSliderV2.tscn" type="PackedScene" id=4]
+[ext_resource type="PackedScene" path="res://src/Tools/BaseTool.tscn" id="1"]
+[ext_resource type="Script" path="res://src/Tools/SelectionTools/SelectionTool.gd" id="2"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="4"]
 
-[node name="ToolOptions" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="ToolOptions" instance=ExtResource("1")]
+script = ExtResource("2")
+
+[node name="ColorRect" parent="." index="0"]
+layout_mode = 2
+
+[node name="Label" parent="." index="1"]
+layout_mode = 2
+theme_type_variation = &"Header"
 
 [node name="ModeLabel" type="Label" parent="." index="2"]
-offset_top = 26.0
-offset_right = 116.0
-offset_bottom = 40.0
+layout_mode = 2
 text = "Mode:"
 
 [node name="Modes" type="OptionButton" parent="." index="3"]
-offset_top = 44.0
-offset_right = 116.0
-offset_bottom = 64.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
-align = 1
 
 [node name="PositionLabel" type="Label" parent="." index="4"]
-offset_top = 68.0
-offset_right = 116.0
-offset_bottom = 82.0
+layout_mode = 2
 text = "Position:"
 
-[node name="Position" parent="." index="5" instance=ExtResource( 4 )]
-offset_top = 86.0
-offset_right = 116.0
-offset_bottom = 138.0
+[node name="Position" parent="." index="5" instance=ExtResource("4")]
+layout_mode = 2
 allow_greater = true
 allow_lesser = true
 
 [node name="SizeLabel" type="Label" parent="." index="6"]
-offset_top = 142.0
-offset_right = 116.0
-offset_bottom = 156.0
+layout_mode = 2
 text = "Size:"
 
-[node name="Size" parent="." index="7" instance=ExtResource( 4 )]
-offset_top = 160.0
-offset_right = 116.0
-offset_bottom = 212.0
-value = Vector2( 1, 1 )
-min_value = Vector2( 1, 1 )
+[node name="Size" parent="." index="7" instance=ExtResource("4")]
+layout_mode = 2
+value = Vector2(1, 1)
+min_value = Vector2(1, 1)
 allow_greater = true
 show_ratio = true
 prefix_x = "Width:"

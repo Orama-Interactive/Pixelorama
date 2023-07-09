@@ -1,16 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://ceahf2toaq47l"]
 
-[ext_resource path="res://src/Tools/Draw.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Tools/LineTool.gd" type="Script" id=2]
-[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=3]
+[ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/Draw.tscn" id="1"]
+[ext_resource type="Script" path="res://src/Tools/LineTool.gd" id="2"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
 
-[node name="ToolOptions" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="ToolOptions" instance=ExtResource("1")]
+script = ExtResource("2")
 
-[node name="ThicknessSlider" parent="." index="2" instance=ExtResource( 3 )]
-offset_top = 26.0
-offset_right = 116.0
-offset_bottom = 50.0
+[node name="ThicknessSlider" parent="." index="2" instance=ExtResource("3")]
+layout_mode = 2
+focus_mode = 2
+theme_type_variation = &"ValueSlider"
 min_value = 1.0
 value = 1.0
 prefix = "Size:"
@@ -19,9 +19,5 @@ is_global = true
 
 [node name="Brush" parent="." index="3"]
 visible = false
-
-[node name="ColorInterpolation" parent="." index="4"]
-offset_top = 66.0
-offset_bottom = 128.0
 
 [connection signal="value_changed" from="ThicknessSlider" to="." method="_on_Thickness_value_changed"]

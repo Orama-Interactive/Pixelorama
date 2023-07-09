@@ -1,80 +1,62 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://rbyd7i6snxjc"]
 
-[ext_resource path="res://src/Tools/Draw.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Tools/Shading.gd" type="Script" id=2]
-[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=3]
+[ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/Draw.tscn" id="1"]
+[ext_resource type="Script" path="res://src/Tools/Shading.gd" id="2"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
 
-[node name="ToolOptions" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
-
-[node name="ColorRect" parent="." index="0"]
-offset_right = 126.0
-
-[node name="Label" parent="." index="1"]
-offset_right = 126.0
-
-[node name="Brush" parent="." index="2"]
-offset_right = 126.0
-
-[node name="BrushSize" parent="Brush" index="1"]
-offset_right = 126.0
-
-[node name="ColorInterpolation" parent="." index="3"]
-offset_top = 216.0
-offset_right = 126.0
-offset_bottom = 278.0
+[node name="ToolOptions" instance=ExtResource("1")]
+script = ExtResource("2")
 
 [node name="LightenDarken" type="OptionButton" parent="." index="4"]
-offset_top = 62.0
-offset_right = 126.0
-offset_bottom = 82.0
-custom_minimum_size = Vector2( 92, 0 )
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "Lighten"
-items = [ "Lighten", null, false, 0, null, "Darken", null, false, 1, null ]
-selected = 0
+item_count = 2
+popup/item_0/text = "Lighten"
+popup/item_0/id = 0
+popup/item_1/text = "Darken"
+popup/item_1/id = 1
 
 [node name="ShadingMode" type="OptionButton" parent="." index="5"]
-offset_top = 86.0
-offset_right = 126.0
-offset_bottom = 106.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "Simple Shading"
-items = [ "Simple Shading", null, false, 0, null, "Hue Shifting", null, false, 1, null ]
-selected = 0
+item_count = 2
+popup/item_0/text = "Simple Shading"
+popup/item_0/id = 0
+popup/item_1/text = "Hue Shifting"
+popup/item_1/id = 1
 
-[node name="AmountSlider" parent="." index="6" instance=ExtResource( 3 )]
-offset_top = 110.0
-offset_right = 126.0
-offset_bottom = 134.0
+[node name="AmountSlider" parent="." index="6" instance=ExtResource("3")]
+layout_mode = 2
 tooltip_text = "Lighten/Darken amount"
+focus_mode = 2
+theme_type_variation = &"ValueSlider"
 value = 10.0
 prefix = "Amount:"
 
 [node name="HueShiftingOptions" type="VBoxContainer" parent="." index="7"]
 visible = false
-offset_top = 138.0
-offset_right = 126.0
-offset_bottom = 218.0
+layout_mode = 2
 
-[node name="HueSlider" parent="HueShiftingOptions" index="0" instance=ExtResource( 3 )]
-offset_right = 126.0
-offset_bottom = 24.0
+[node name="HueSlider" parent="HueShiftingOptions" index="0" instance=ExtResource("3")]
+layout_mode = 2
+focus_mode = 2
+theme_type_variation = &"ValueSlider"
 max_value = 180.0
 value = 10.0
 prefix = "Hue:"
 
-[node name="SatSlider" parent="HueShiftingOptions" index="1" instance=ExtResource( 3 )]
-offset_top = 28.0
-offset_right = 126.0
-offset_bottom = 52.0
+[node name="SatSlider" parent="HueShiftingOptions" index="1" instance=ExtResource("3")]
+layout_mode = 2
+focus_mode = 2
+theme_type_variation = &"ValueSlider"
 value = 10.0
 prefix = "Saturation:"
 
-[node name="ValueSlider" parent="HueShiftingOptions" index="2" instance=ExtResource( 3 )]
-offset_top = 56.0
-offset_right = 126.0
-offset_bottom = 80.0
+[node name="ValueSlider" parent="HueShiftingOptions" index="2" instance=ExtResource("3")]
+layout_mode = 2
+focus_mode = 2
+theme_type_variation = &"ValueSlider"
 value = 10.0
 prefix = "Value:"
 
