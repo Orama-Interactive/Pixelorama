@@ -17,7 +17,7 @@ func _ready():
 func _gui_input(event: InputEvent) -> void:
 	if get_child_count():
 		var vertical_scroll: bool = get_child(0).size.y >= size.y
-		if event is InputEventMouseButton and (event.shift or not vertical_scroll):
+		if event is InputEventMouseButton and (event.shift_pressed or not vertical_scroll):
 			if is_instance_valid(h_scroll_bar):
 				if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 					h_scroll_bar.value -= Global.animation_timeline.cel_size / 2 + 2

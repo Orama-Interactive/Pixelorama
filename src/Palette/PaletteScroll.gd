@@ -24,6 +24,8 @@ func _input(event) -> void:
 
 
 func set_sliders(palette: Palette, origin: Vector2) -> void:
+	if not is_instance_valid(palette):
+		return
 	h_slider.value = origin.x
 	h_slider.max_value = palette.width
 	h_slider.page = palette_grid.grid_size.x
@@ -81,14 +83,14 @@ func _on_PaletteScroll_gui_input(event) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		var scroll_vector = Vector2.ZERO
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			if event.control:
+			if event.ctrl_pressed:
 				palette_grid.change_swatch_size(Vector2.ONE)
 			else:
-				scroll_vector = Vector2.LEFT if event.shift else Vector2.UP
+				scroll_vector = Vector2.LEFT if event.shift_pressed else Vector2.UP
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			if event.control:
+			if event.ctrl_pressed:
 				palette_grid.change_swatch_size(-Vector2.ONE)
 			else:
-				scroll_vector = Vector2.RIGHT if event.shift else Vector2.DOWN
+				scroll_vector = Vector2.RIGHT if event.shift_pressed else Vector2.DOWN
 		resize_grid()
 		set_sliders(palette_grid.current_palette, palette_grid.grid_window_origin + scroll_vector)

@@ -385,11 +385,11 @@ func _use_osx_shortcuts() -> void:
 		var event: InputEvent = action_list[0]
 
 		if event.is_action("show_pixel_grid"):
-			event.shift = true
+			event.shift_pressed = true
 
-		if event.control:
-			event.control = false
-			event.command = true
+#		if event.control_pressed:
+#			event.control = false
+#			event.command = true
 
 
 func _exit_tree() -> void:

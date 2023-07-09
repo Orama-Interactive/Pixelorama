@@ -51,8 +51,8 @@ static func get_default_brush() -> Brush:
 
 
 static func create_button(image: Image) -> Node:
-	var button: BaseButton = preload("res://src/UI/Buttons/BrushButton.tscn").instantiate()
-	var tex := ImageTexture.create_from_image(image) #,0
+	var button: BaseButton = load("res://src/UI/Buttons/BrushButton.tscn").instantiate()
+	var tex := ImageTexture.create_from_image(image)
 	button.get_node("BrushTexture").texture = tex
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	return button

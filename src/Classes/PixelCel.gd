@@ -53,7 +53,7 @@ func get_image() -> Image:
 
 
 func update_texture() -> void:
-	image_texture.set_data(image)
+	image_texture.set_image(image)
 	super.update_texture()
 
 

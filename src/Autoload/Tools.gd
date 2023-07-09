@@ -490,7 +490,7 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 		pen_pressure = remap(pen_pressure, pen_pressure_min, pen_pressure_max, 0.0, 1.0)
 		pen_pressure = clamp(pen_pressure, 0.0, 1.0)
 
-		mouse_velocity = event.speed.length() / mouse_velocity_max
+		mouse_velocity = event.velocity.length() / mouse_velocity_max
 		mouse_velocity = remap(
 			mouse_velocity, mouse_velocity_min_thres, mouse_velocity_max_thres, 0.0, 1.0
 		)

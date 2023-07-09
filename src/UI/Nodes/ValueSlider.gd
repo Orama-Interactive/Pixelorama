@@ -70,18 +70,18 @@ func _input(event: InputEvent) -> void:
 		return
 	if not event.pressed:
 		return
-	if not event.control:
+	if not event.ctrl_pressed:
 		return
 	if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 		if snap_by_default:
-			value += step if event.control else snap_step
+			value += step if event.ctrl_pressed else snap_step
 		else:
-			value += snap_step if event.control else step
+			value += snap_step if event.ctrl_pressed else step
 	elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 		if snap_by_default:
-			value -= step if event.control else snap_step
+			value -= step if event.ctrl_pressed else snap_step
 		else:
-			value -= snap_step if event.control else step
+			value -= snap_step if event.ctrl_pressed else step
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -94,14 +94,14 @@ func _gui_input(event: InputEvent) -> void:
 				set_meta("mouse_start_position", get_local_mouse_position())
 			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				if snap_by_default:
-					value += step if event.control else snap_step
+					value += step if event.ctrl_pressed else snap_step
 				else:
-					value += snap_step if event.control else step
+					value += snap_step if event.ctrl_pressed else step
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				if snap_by_default:
-					value -= step if event.control else snap_step
+					value -= step if event.ctrl_pressed else snap_step
 				else:
-					value -= snap_step if event.control else step
+					value -= snap_step if event.ctrl_pressed else step
 	elif state == HELD:
 		if event.is_action_released("left_mouse"):
 			state = TYPING
@@ -115,7 +115,7 @@ func _gui_input(event: InputEvent) -> void:
 		elif event is InputEventMouseMotion:
 			if get_meta("mouse_start_position").distance_to(get_local_mouse_position()) > 2:
 				state = SLIDING
-				set_meta("shift_pressed", event.shift)
+				set_meta("shift_pressed", event.shift_pressed)
 				set_meta("start_ratio", ratio)
 				set_meta("start_value", value)
 	elif state == SLIDING:
@@ -127,14 +127,14 @@ func _gui_input(event: InputEvent) -> void:
 			remove_meta("shift_pressed")
 		if event is InputEventMouseMotion:
 			# When pressing/releasing Shift, reset starting values to prevent slider jumping around
-			if get_meta("shift_pressed") != event.shift:
+			if get_meta("shift_pressed") != event.shift_pressed:
 				set_meta("mouse_start_position", get_local_mouse_position())
 				set_meta("start_ratio", ratio)
 				set_meta("start_value", value)
-				set_meta("shift_pressed", event.shift)
+				set_meta("shift_pressed", event.shift_pressed)
 			var x_delta: float = get_local_mouse_position().x - get_meta("mouse_start_position").x
 			# Slow down to allow for more precision
-			if event.shift:
+			if event.shift_pressed:
 				x_delta *= 0.1
 			if show_progress:
 				ratio = get_meta("start_ratio") + x_delta / size.x
@@ -142,10 +142,10 @@ func _gui_input(event: InputEvent) -> void:
 				value = get_meta("start_value") + x_delta * step
 			# Snap when snap_by_default is true, do the opposite when Control is pressed
 			if snap_by_default:
-				if not event.control:
+				if not event.ctrl_pressed:
 					value = round(value / snap_step) * snap_step
 			else:
-				if event.control:
+				if event.ctrl_pressed:
 					value = round(value / snap_step) * snap_step
 
 
