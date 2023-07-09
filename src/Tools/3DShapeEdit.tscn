@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cg7d36746on67"]
 
-[ext_resource type="PackedScene" path="res://src/Tools/BaseTool.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/3DShapeEdit.gd" id="2"]
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSlider.tscn" id="4"]
@@ -12,13 +12,6 @@
 
 [node name="3DShapeEdit" instance=ExtResource("1")]
 script = ExtResource("2")
-
-[node name="ColorRect" parent="." index="0"]
-layout_mode = 2
-
-[node name="Label" parent="." index="1"]
-layout_mode = 2
-theme_type_variation = &"Header"
 
 [node name="HandleObjects" type="GridContainer" parent="." index="2"]
 layout_mode = 2
@@ -61,7 +54,7 @@ size_flags_vertical = 3
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
 script = ExtResource("6")
-text = "Camera3D"
+text = "Camera"
 visible_content = true
 
 [node name="GridContainer" type="GridContainer" parent="CelOptions/CameraOptions" index="1"]
@@ -204,7 +197,7 @@ text = "On"
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
 script = ExtResource("6")
-text = "Transform3D"
+text = "Transform"
 visible_content = true
 
 [node name="GridContainer" type="GridContainer" parent="ObjectOptions/TransformOptions" index="1"]
@@ -435,36 +428,12 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "On"
 
-[node name="MeshMidHeightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="16"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Height:"
-
-[node name="MeshMidHeight" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="17"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 2
-mouse_default_cursor_shape = 2
-theme_type_variation = &"ValueSlider"
-min_value = 0.001
-max_value = 10.0
-step = 0.01
-value = 1.001
-allow_greater = true
-nine_patch_stretch = true
-stretch_margin_left = 3
-stretch_margin_top = 3
-stretch_margin_right = 3
-stretch_margin_bottom = 3
-script = ExtResource("5")
-
-[node name="MeshTopRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="18"]
+[node name="MeshTopRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="16"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Top radius:"
 
-[node name="MeshTopRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="19"]
+[node name="MeshTopRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="17"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -482,12 +451,12 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="MeshBottomRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="20"]
+[node name="MeshBottomRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="18"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Bottom radius:"
 
-[node name="MeshBottomRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="21"]
+[node name="MeshBottomRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="19"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -505,22 +474,22 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="MeshTextLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="22"]
+[node name="MeshTextLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="20"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Text:"
 
-[node name="MeshText" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer" index="23"]
+[node name="MeshText" type="LineEdit" parent="ObjectOptions/MeshOptions/GridContainer" index="21"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MeshPixelSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24"]
+[node name="MeshPixelSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="22"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pixel size:"
 
-[node name="MeshPixelSize" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="25"]
+[node name="MeshPixelSize" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="23"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -540,12 +509,12 @@ stretch_margin_bottom = 3
 script = ExtResource("5")
 snap_step = 0.01
 
-[node name="MeshCurveStepLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="26"]
+[node name="MeshCurveStepLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Curve step:"
 
-[node name="MeshCurveStep" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="27"]
+[node name="MeshCurveStep" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="25"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -564,12 +533,12 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="MeshHorizontalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="28"]
+[node name="MeshHorizontalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="26"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Horizontal alignment:"
 
-[node name="MeshHorizontalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="29"]
+[node name="MeshHorizontalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="27"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -580,7 +549,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
 script = ExtResource("6")
-text = "Light3D"
+text = "Light"
 
 [node name="GridContainer" type="GridContainer" parent="ObjectOptions/LightOptions" index="1"]
 visible = false
@@ -638,23 +607,12 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "On"
 
-[node name="ShadowColorLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="8"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Shadow color:"
-
-[node name="ShadowColor" type="ColorPickerButton" parent="ObjectOptions/LightOptions/GridContainer" index="9"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-edit_alpha = false
-
-[node name="OmniRangeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="10"]
+[node name="OmniRangeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="8"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Range:"
 
-[node name="OmniRange" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="11"]
+[node name="OmniRange" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="9"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -671,12 +629,12 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="SpotRangeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="12"]
+[node name="SpotRangeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="10"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Range:"
 
-[node name="SpotRange" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="13"]
+[node name="SpotRange" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="11"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -693,12 +651,12 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="SpotAngleLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="14"]
+[node name="SpotAngleLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="12"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Angle:"
 
-[node name="SpotAngle" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="15"]
+[node name="SpotAngle" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="13"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

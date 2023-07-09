@@ -44,13 +44,12 @@ func _init(_size: Vector2, from_pxo := false, _object_prop := {}, _scene_prop :=
 func _add_nodes() -> void:
 	viewport = SubViewport.new()
 	viewport.size = size
-	viewport.own_world = true
+	viewport.own_world_3d = true
 	viewport.transparent_bg = true
-	viewport.render_target_v_flip = true
 	var world := World3D.new()
 	var environment := Environment.new()
 	world.environment = environment
-	viewport.world = world
+	viewport.world_3d = world
 	parent_node = Node3D.new()
 	camera = Camera3D.new()
 	camera.current = true
@@ -88,8 +87,8 @@ func deserialize_scene_properties() -> void:
 	camera.projection = scene_properties["camera_projection"]
 	camera.fov = scene_properties["camera_fov"]
 	camera.size = scene_properties["camera_size"]
-	viewport.world.environment.ambient_light_color = scene_properties["ambient_light_color"]
-	viewport.world.environment.ambient_light_energy = scene_properties["ambient_light_energy"]
+	viewport.world_3d.environment.ambient_light_color = scene_properties["ambient_light_color"]
+	viewport.world_3d.environment.ambient_light_energy = scene_properties["ambient_light_energy"]
 
 
 func _update_objects_transform(id: int) -> void:  # Called by undo/redo
@@ -166,7 +165,7 @@ func _set_selected(value: Cel3DObject) -> void:
 
 
 func get_image() -> Image:
-	return viewport.get_texture().get_data()
+	return viewport.get_texture().get_image()
 
 
 func serialize() -> Dictionary:
