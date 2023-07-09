@@ -114,7 +114,7 @@ func _split_spritesheet(image: Image, horiz: int, vert: int) -> Array:
 		for xx in range(horiz):
 			var cropped_image := Image.new()
 			var rect := Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height)
-			cropped_image = image.get_rect(rect)
+			cropped_image = image.get_region(rect)
 			cropped_image.convert(Image.FORMAT_RGBA8)
 			var tex := ImageTexture.create_from_image(cropped_image)
 			result.append(tex)

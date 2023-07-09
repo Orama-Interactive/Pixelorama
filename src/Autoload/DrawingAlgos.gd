@@ -507,7 +507,7 @@ func crop_image() -> void:
 		for cel in f.cels:
 			if not cel is PixelCel:
 				continue
-			var sprite: Image = cel.image.get_rect(used_rect)
+			var sprite := cel.get_image().get_region(used_rect)
 			Global.current_project.undo_redo.add_do_property(cel.image, "data", sprite.data)
 			Global.current_project.undo_redo.add_undo_property(cel.image, "data", cel.image.data)
 

@@ -19,19 +19,19 @@ class Brush:
 
 func _ready() -> void:
 	var container = get_node("Background/Brushes/Categories/DefaultBrushContainer")
-	var button := create_button(pixel_image)
+	var button := Brushes.create_button(pixel_image)
 	button.brush.type = PIXEL
 	button.tooltip_text = "Pixel brush"
 	container.add_child(button)
 	button.brush.index = button.get_index()
 
-	button = create_button(circle_image)
+	button = Brushes.create_button(circle_image)
 	button.brush.type = CIRCLE
 	button.tooltip_text = "Circle brush"
 	container.add_child(button)
 	button.brush.index = button.get_index()
 
-	button = create_button(circle_filled_image)
+	button = Brushes.create_button(circle_filled_image)
 	button.brush.type = FILLED_CIRCLE
 	button.tooltip_text = "Filled circle brush"
 	container.add_child(button)
@@ -110,7 +110,7 @@ func get_brush(type: int, index: int) -> Brush:
 		RANDOM_FILE:
 			container = get_node("Background/Brushes/Categories/RandomFileBrushContainer")
 
-	var brush := get_default_brush()
+	var brush := Brushes.get_default_brush()
 	if index < container.get_child_count():
 		brush = container.get_child(index).brush
 	return brush

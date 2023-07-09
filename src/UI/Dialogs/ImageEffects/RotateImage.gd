@@ -89,7 +89,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 	var init_angle: float = animate_panel.get_animated_value(commit_idx, Animate.INITIAL_ANGLE)
 
 	var selection_size := cel.get_size()
-	var selection_tex := ImageTexture.new()
+	var selection_tex: ImageTexture
 
 	var image := Image.new()
 	image.copy_from(cel)
@@ -98,7 +98,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 		selection_size = selection_rectangle.size
 
 		var selection: Image = _project.selection_map
-		selection_tex.create_from_image(selection)
+		selection_tex = ImageTexture.create_from_image(selection)
 
 		if !_type_is_shader():
 			for x in _project.size.x:

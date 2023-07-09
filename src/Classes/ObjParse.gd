@@ -138,9 +138,8 @@ static func _get_image(mtl_filepath: String, tex_filename: String) -> Image:
 
 static func _create_texture(data: PackedByteArray) -> ImageTexture:
 	var img: Image = Image.new()
-	var tex: ImageTexture = ImageTexture.new()
 	img.load_png_from_buffer(data)
-	tex.create_from_image(img)
+	var tex: ImageTexture = ImageTexture.create_from_image(img)
 	return tex
 
 

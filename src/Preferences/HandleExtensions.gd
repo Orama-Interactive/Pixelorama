@@ -96,7 +96,7 @@ func _add_extension(file_name: String) -> void:
 	if remover_directory.file_exists(EXTENSIONS_PATH.path_join("Faulty.txt")):
 		# This code will only run if pixelorama crashed
 		var faulty_path := EXTENSIONS_PATH.path_join("Faulty.txt")
-		tester_file.open(faulty_path, FileAccess.READ)
+		tester_file = FileAccess.open(faulty_path, FileAccess.READ)
 		damaged_extension = tester_file.get_as_text()
 		tester_file.close()
 		remover_directory.remove(EXTENSIONS_PATH.path_join(damaged_extension))
@@ -109,7 +109,7 @@ func _add_extension(file_name: String) -> void:
 		return
 
 	# The new (about to load) extension will be considered guilty till it's proven innocent
-	tester_file.open(EXTENSIONS_PATH.path_join("Faulty.txt"), FileAccess.WRITE)
+	tester_file = FileAccess.open(EXTENSIONS_PATH.path_join("Faulty.txt"), FileAccess.WRITE)
 	tester_file.store_string(file_name)  # Guilty till proven innocent ;)
 	tester_file.close()
 
@@ -230,7 +230,7 @@ func _on_InstalledExtensions_item_selected(index: int) -> void:
 	uninstall_button.disabled = false
 
 
-func _on_InstalledExtensions_nothing_selected() -> void:
+func _on_InstalledExtensions_empty_clicked() -> void:
 	enable_button.disabled = true
 	uninstall_button.disabled = true
 

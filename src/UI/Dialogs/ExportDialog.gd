@@ -237,8 +237,8 @@ func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
 	path_validation_alert_popup.popup_centered()
 
 
-func open_file_exists_alert_popup(dialog_text: String) -> void:
-	file_exists_alert_popup.dialog_text = dialog_text
+func open_file_exists_alert_popup(text: String) -> void:
+	file_exists_alert_popup.dialog_text = text
 	file_exists_alert_popup.popup_centered()
 
 

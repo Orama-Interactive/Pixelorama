@@ -14,8 +14,8 @@ var has_changed := false: set = _has_changed_changed
 # frames and layers Arrays should generally only be modified directly when
 # opening/creating a project. When modifying the current project, use
 # the add/remove/move/swap_frames/layers methods
-var frames: Array[Frame] = []  # Array of Frames (that contain Cels)
-var layers: Array[BaseLayer] = []  # Array of Layers
+var frames: Array[Frame] = []
+var layers: Array[BaseLayer] = []
 var current_frame := 0
 var current_layer := 0
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
@@ -59,7 +59,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	name = _name
 	size = _size
 	tiles = Tiles.new(size)
-	selection_map.create(size.x, size.y, false, Image.FORMAT_LA8)
+	selection_map.copy_from(Image.create(size.x, size.y, false, Image.FORMAT_LA8))
 
 	Global.tabs.add_tab(name)
 	OpenSave.current_save_paths.append("")
@@ -366,7 +366,7 @@ func deserialize(dict: Dictionary) -> void:
 
 		var frame_i := 0
 		for frame in dict.frames:
-			var cels := []
+			var cels: Array[BaseCel] = []
 			var cel_i := 0
 			for cel in frame.cels:
 				match int(dict.layers[cel_i].get("type", Global.LayerTypes.PIXEL)):
@@ -716,7 +716,6 @@ func swap_frame(a_index: int, b_index: int) -> void:
 
 func reverse_frames(frame_indices: Array) -> void:
 	Global.canvas.selection.transform_content_confirm()
-# warning-ignore:integer_division
 	for i in frame_indices.size() / 2:
 		var index: int = frame_indices[i]
 		var reverse_index: int = frame_indices[-i - 1]

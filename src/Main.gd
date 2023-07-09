@@ -63,7 +63,7 @@ func _ready() -> void:
 	_handle_backup()
 
 	_handle_cmdline_arguments()
-	get_tree().connect("files_dropped", Callable(self, "_on_files_dropped"))
+	get_tree().root.files_dropped.connect(_on_files_dropped)
 
 	if OS.get_name() == "Android":
 		OS.request_permissions()
@@ -220,7 +220,7 @@ func _notification(what: int) -> void:
 				Global.has_focus = true
 
 
-func _on_files_dropped(files: PackedStringArray, _screen: int) -> void:
+func _on_files_dropped(files: PackedStringArray) -> void:
 	for file in files:
 		OpenSave.handle_loading_file(file)
 	var splash_dialog = Global.control.get_node("Dialogs/SplashDialog")

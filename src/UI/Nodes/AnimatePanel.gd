@@ -43,7 +43,6 @@ func add_float_property(prop_name: String, property_node: Range):
 
 
 func get_animated_value(frame_idx: int, property_idx := 0) -> float:
-	var tween := Tween.new()
 	if property_idx <= 0 or property_idx < properties.size():
 		if frame_idx in frames:
 			if properties[property_idx]["can_animate"] and frames.size() > 1:
@@ -53,9 +52,10 @@ func get_animated_value(frame_idx: int, property_idx := 0) -> float:
 				var delta = properties[property_idx]["range_node"].value - initial
 				var transition_type = properties[property_idx]["transition_type"]
 				var ease_type = properties[property_idx]["ease_type"]
-				return tween.interpolate_value(
+				var value = Tween.interpolate_value(
 					initial, delta, elapsed, duration, transition_type, ease_type
 				)
+				return value
 			else:
 				return properties[property_idx]["range_node"].value
 		else:

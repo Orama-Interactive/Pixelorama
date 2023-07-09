@@ -350,11 +350,11 @@ class SelectionAPI:
 	func select_all() -> void:
 		Global.canvas.selection.select_all()
 
-	func select_rect(select_rect: Rect2, operation := 0) -> void:
+	func select_rect(rect: Rect2, operation := 0) -> void:
 		# 0 for adding, 1 for subtracting, 2 for intersection
 		Global.canvas.selection.transform_content_confirm()
 		var undo_data_tmp = Global.canvas.selection.get_undo_data(false)
-		Global.canvas.selection.select_rect(select_rect, operation)
+		Global.canvas.selection.select_rect(rect, operation)
 		Global.canvas.selection.commit_undo("Select", undo_data_tmp)
 
 	func move_selection(destination: Vector2, with_content := true, transform_standby := false):
@@ -409,12 +409,12 @@ class ProjectAPI:
 		if size.x <= 0 or size.y <= 0:
 			size.x = 1
 			size.y = 1
-		var new_project := Project.new(frames, name, size.floor())
-		new_project.layers.append(PixelLayer.new(new_project))
-		new_project.fill_color = fill_color
-		new_project.frames.append(new_project.new_empty_frame())
-		Global.projects.append(new_project)
-		return new_project
+		var new_proj := Project.new(frames, name, size.floor())
+		new_proj.layers.append(PixelLayer.new(new_proj))
+		new_proj.fill_color = fill_color
+		new_proj.frames.append(new_proj.new_empty_frame())
+		Global.projects.append(new_proj)
+		return new_proj
 
 	func switch_to(project: Project):
 		Global.tabs.current_tab = Global.projects.find(project)
