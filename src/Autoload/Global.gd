@@ -162,9 +162,9 @@ var crop_left := 0
 var crop_right := 0
 
 # Nodes
-var base_layer_button_node: PackedScene = preload("res://src/UI/Timeline/BaseLayerButton.tscn")
-var pixel_layer_button_node: PackedScene = preload("res://src/UI/Timeline/PixelLayerButton.tscn")
-var group_layer_button_node: PackedScene = preload("res://src/UI/Timeline/GroupLayerButton.tscn")
+var base_layer_button_node: PackedScene = load("res://src/UI/Timeline/BaseLayerButton.tscn")
+var pixel_layer_button_node: PackedScene = load("res://src/UI/Timeline/PixelLayerButton.tscn")
+var group_layer_button_node: PackedScene = load("res://src/UI/Timeline/GroupLayerButton.tscn")
 var pixel_cel_button_node: PackedScene = preload("res://src/UI/Timeline/PixelCelButton.tscn")
 var group_cel_button_node: PackedScene = preload("res://src/UI/Timeline/GroupCelButton.tscn")
 var cel_3d_button_node: PackedScene = preload("res://src/UI/Timeline/Cel3DButton.tscn")
@@ -519,13 +519,15 @@ func _title_changed(value: String) -> void:
 
 
 func _project_changed(value: int) -> void:
+	if value >= projects.size():
+		return
 	canvas.selection.transform_content_confirm()
 	current_project_index = value
 	current_project = projects[value]
-	connect("project_changed", Callable(current_project, "change_project"))
-	emit_signal("project_changed")
-	disconnect("project_changed", Callable(current_project, "change_project"))
-	emit_signal("cel_changed")
+	project_changed.connect(current_project.change_project)
+	project_changed.emit()
+	project_changed.disconnect(current_project.change_project)
+	cel_changed.emit()
 
 
 func _renderer_changed(value: int) -> void:

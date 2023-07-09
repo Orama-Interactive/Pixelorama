@@ -8,10 +8,11 @@ var shader: Shader = preload("res://src/Shaders/DropShadow.gdshader")
 
 
 func _ready() -> void:
+	super._ready()
 	shadow_color.get_picker().presets_visible = false
 	color = shadow_color.color
 	var sm := ShaderMaterial.new()
-	sm.gdshader = shader
+	sm.shader = shader
 	preview.set_material(sm)
 
 	# set as in enum

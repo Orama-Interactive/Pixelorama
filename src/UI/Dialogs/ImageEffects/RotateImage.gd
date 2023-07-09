@@ -21,6 +21,7 @@ var drag_pivot := false
 
 
 func _ready() -> void:
+	super._ready()
 	# set as in enum
 	animate_panel.add_float_property("Angle", angle_slider)
 	animate_panel.add_float_property("Initial Angle", init_angle_slider)
@@ -198,22 +199,22 @@ func _on_TypeOptionButton_item_selected(_id: int) -> void:
 	match type_option_button.get_selected_id():
 		ROTXEL_SMEAR:
 			var sm := ShaderMaterial.new()
-			sm.gdshader = rotxel_shader
+			sm.shader = rotxel_shader
 			preview.set_material(sm)
 			smear_options.visible = true
 		CLEANEDGE:
 			var sm := ShaderMaterial.new()
-			sm.gdshader = DrawingAlgos.clean_edge_shader
+			sm.shader = DrawingAlgos.clean_edge_shader
 			preview.set_material(sm)
 			smear_options.visible = false
 		OMNISCALE:
 			var sm := ShaderMaterial.new()
-			sm.gdshader = DrawingAlgos.omniscale_shader
+			sm.shader = DrawingAlgos.omniscale_shader
 			preview.set_material(sm)
 			smear_options.visible = false
 		NNS:
 			var sm := ShaderMaterial.new()
-			sm.gdshader = nn_shader
+			sm.shader = nn_shader
 			preview.set_material(sm)
 			smear_options.visible = false
 		_:

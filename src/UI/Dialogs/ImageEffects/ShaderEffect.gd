@@ -53,7 +53,7 @@ func set_nodes() -> void:
 
 func change_shader(shader_tmp: Shader, name: String) -> void:
 	shader = shader_tmp
-	preview.material.gdshader = shader_tmp
+	preview.material.shader = shader_tmp
 	shader_loaded_label.text = tr("Shader loaded:") + " " + name
 	param_names.clear()
 	for child in shader_params.get_children():

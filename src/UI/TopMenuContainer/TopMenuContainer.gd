@@ -83,8 +83,8 @@ func _setup_recent_projects_submenu(item: String) -> void:
 
 
 func update_recent_projects_submenu() -> void:
-	var reversed_recent_projects = recent_projects.duplicate()
-	reversed_recent_projects.invert()
+	var reversed_recent_projects := recent_projects.duplicate()
+	reversed_recent_projects.reverse()
 	for project in reversed_recent_projects:
 		recent_projects_submenu.add_item(project.get_file())
 
@@ -419,8 +419,8 @@ func _export_file() -> void:
 
 
 func _on_recent_projects_submenu_id_pressed(id: int) -> void:
-	var reversed_recent_projects = recent_projects.duplicate()
-	reversed_recent_projects.invert()
+	var reversed_recent_projects := recent_projects.duplicate()
+	reversed_recent_projects.reverse()
 	Global.control.load_recent_project_file(reversed_recent_projects[id])
 
 

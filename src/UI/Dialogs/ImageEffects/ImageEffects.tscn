@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/FlipImageDialog.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/InvertColorsDialog.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/DesaturateDialog.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/DropShadowDialog.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://duse1w3q7whmm" path="res://src/UI/Dialogs/ImageEffects/DropShadowDialog.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/GradientMapDialog.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/Posterize.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/OffsetImage.tscn" id="7"]

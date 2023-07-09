@@ -20,8 +20,8 @@ var size_last_pressed: BaseButton = null
 @onready var size_velocity_button: Button = $"%SizeVelocityButton"
 @onready var pressure_preview: ProgressBar = $"%PressurePreview"
 @onready var velocity_preview: ProgressBar = $"%VelocityPreview"
-@onready var alpha_group: ButtonGroup = alpha_pressure_button.group
-@onready var size_group: ButtonGroup = size_pressure_button.group
+@onready var alpha_group := alpha_pressure_button.button_group
+@onready var size_group := size_pressure_button.button_group
 
 
 func _ready() -> void:

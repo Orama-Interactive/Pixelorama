@@ -11,9 +11,10 @@ var shader: Shader
 
 
 func _ready() -> void:
+	super._ready()
 	shader = load("res://src/Shaders/OutlineInline.gdshader")
 	var sm := ShaderMaterial.new()
-	sm.gdshader = shader
+	sm.shader = shader
 	preview.set_material(sm)
 	outline_color.get_picker().presets_visible = false
 	color = outline_color.color
