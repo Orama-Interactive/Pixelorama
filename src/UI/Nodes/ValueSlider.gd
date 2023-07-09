@@ -174,7 +174,9 @@ func _setup_nodes() -> void:  # Only called once on _ready()
 	_line_edit.gui_input.connect(_on_LineEdit_gui_input)
 	add_child(_line_edit)
 
-	var value_up_texture_size := _value_up_button.texture_normal.get_size()
+	var value_up_texture_size := Vector2.ONE
+	if is_instance_valid(_value_up_button.texture_normal):
+		value_up_texture_size = _value_up_button.texture_normal.get_size()
 	_value_up_button.scale.y = -1
 	_value_up_button.anchor_left = 1
 	_value_up_button.anchor_right = 1
@@ -188,7 +190,9 @@ func _setup_nodes() -> void:  # Only called once on _ready()
 	_value_up_button.button_up.connect(_on_Value_button_up)
 	add_child(_value_up_button)
 
-	var value_down_texture_size := _value_down_button.texture_normal.get_size()
+	var value_down_texture_size := Vector2.ONE
+	if is_instance_valid(_value_down_button.texture_normal):
+		value_down_texture_size = _value_down_button.texture_normal.get_size()
 	_value_down_button.anchor_left = 1
 	_value_down_button.anchor_top = 1
 	_value_down_button.anchor_right = 1
