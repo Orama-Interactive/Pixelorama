@@ -12,20 +12,20 @@ var animated_formats := [FileFormat.GIF, FileFormat.APNG]
 # A dictionary of custom exporter generators (received from extensions)
 var custom_exporter_generators := {}
 
-var current_tab: int = ExportTab.IMAGE
+var current_tab := ExportTab.IMAGE
 # All frames and their layers processed/blended into images
-var processed_images := []  # Image[]
-var durations := []  # Array of floats
+var processed_images: Array[Image] = []
+var durations: PackedFloat32Array = []  # Array of floats
 
 # Spritesheet options
-var orientation: int = Orientation.ROWS
+var orientation := Orientation.ROWS
 var lines_count := 1  # How many rows/columns before new line is added
 
 # General options
 var frame_current_tag := 0  # Export only current frame tag
 var export_layers := 0
 var number_of_frames := 1
-var direction: int = AnimationDirection.FORWARD
+var direction := AnimationDirection.FORWARD
 var resize := 100
 var interpolation := 0  # Image.Interpolation
 var include_tag_in_filename := false
@@ -45,7 +45,7 @@ var export_progress := 0.0
 
 
 func _exit_tree() -> void:
-	if gif_export_thread.is_active():
+	if gif_export_thread.is_started():
 		gif_export_thread.wait_to_finish()
 
 
@@ -137,8 +137,8 @@ func process_animation(project := Global.current_project) -> void:
 		durations.append(frame.duration * (1.0 / project.fps))
 
 
-func calculate_frames(project := Global.current_project) -> Array:
-	var frames := []
+func calculate_frames(project := Global.current_project) -> Array[Frame]:
+	var frames: Array[Frame] = []
 	if frame_current_tag > 1:  # Specific tag
 		var frame_start: int = project.animation_tags[frame_current_tag - 2].from
 		var frame_end: int = project.animation_tags[frame_current_tag - 2].to
@@ -177,7 +177,7 @@ func export_processed_images(
 	if current_tab == ExportTab.IMAGE and not is_single_file_format(project):
 		multiple_files = true if processed_images.size() > 1 else false
 	# Check export paths
-	var export_paths := []
+	var export_paths: PackedStringArray = []
 	var paths_of_existing_files := ""
 	for i in range(processed_images.size()):
 		stop_export = false
@@ -225,7 +225,7 @@ func export_processed_images(
 				"project": project
 			}
 			if OS.get_name() != "HTML5" and is_single_file_format(project):
-				if gif_export_thread.is_active():
+				if gif_export_thread.is_started():
 					gif_export_thread.wait_to_finish()
 				var error = gif_export_thread.start(Callable(custom_exporter, "override_export").bind(details))
 				if error == OK:
@@ -249,9 +249,9 @@ func export_processed_images(
 		if OS.get_name() == "HTML5":
 			export_animated(details)
 		else:
-			if gif_export_thread.is_active():
+			if gif_export_thread.is_started():
 				gif_export_thread.wait_to_finish()
-			gif_export_thread.start(Callable(self, "export_animated").bind(details))
+			gif_export_thread.start(export_animated.bind(details))
 	else:
 		var succeeded := true
 		for i in range(processed_images.size()):
@@ -262,7 +262,7 @@ func export_processed_images(
 					"image/png"
 				)
 			else:
-				var err: int = processed_images[i].save_png(export_paths[i])
+				var err := processed_images[i].save_png(export_paths[i])
 				if err != OK:
 					Global.error_dialog.set_text(
 						(
