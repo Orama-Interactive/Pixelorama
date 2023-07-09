@@ -13,7 +13,7 @@ var selected_layout := 0
 var zen_mode := false
 
 @onready var ui: Container = Global.control.find_child("DockableContainer")
-@onready var ui_elements: Array = ui.get_children()
+@onready var ui_elements := ui.get_children()
 @onready var file_menu_button := $MenuItems/FileMenu
 @onready var edit_menu_button := $MenuItems/EditMenu
 @onready var select_menu_button := $MenuItems/SelectMenu
