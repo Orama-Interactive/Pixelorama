@@ -33,6 +33,8 @@ func handle_loading_file(file: String) -> void:
 			Global.error_dialog.set_text(tr("Can't load file '%s'.") % [file_name])
 			Global.error_dialog.popup_centered()
 			Global.dialog_open(true)
+	elif file_ext == "tscn":  # Godot scene file
+		return
 
 	elif file_ext == "gpl" or file_ext == "pal" or file_ext == "json":
 		Palettes.import_palette_from_path(file)
