@@ -20,7 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install gdtoolkit
-        run: pip3 install "gdtoolkit==3.*"
+        run: pip3 install "gdtoolkit==4.*"
       - name: Formatting checks
         run: gdformat --diff .
       - name: Linting checks
