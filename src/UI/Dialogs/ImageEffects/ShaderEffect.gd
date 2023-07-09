@@ -14,7 +14,7 @@ func _about_to_popup() -> void:
 	Export.blend_selected_cels(selected_cels, frame)
 
 	preview_image.copy_from(selected_cels)
-	preview_texture.create_from_image(preview_image) #,0
+	preview_texture = ImageTexture.create_from_image(preview_image)
 	preview.texture = preview_texture
 	super._about_to_popup()
 
@@ -29,7 +29,6 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		params[param] = param_data
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(cel, shader, params, project.size)
-	false # selected_cels.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	await gen.done
 
 

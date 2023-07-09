@@ -336,7 +336,6 @@ func increase_export_progress(export_dialog: Node) -> void:
 func scale_processed_images() -> void:
 	for processed_image in processed_images:
 		if resize != 100:
-			false # processed_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			processed_image.resize(
 				processed_image.get_size().x * resize / 100,
 				processed_image.get_size().y * resize / 100,
@@ -466,7 +465,6 @@ func blend_all_layers(
 		var cel_image := Image.new()
 		cel_image.copy_from(cel.get_image())
 		if cel.opacity < 1:  # If we have cel transparency
-			false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			for xx in cel_image.get_size().x:
 				for yy in cel_image.get_size().y:
 					var pixel_color := cel_image.get_pixel(xx, yy)
@@ -474,7 +472,6 @@ func blend_all_layers(
 					cel_image.set_pixel(
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
-			false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
 		layer_i += 1
 
@@ -495,7 +492,6 @@ func blend_selected_cels(
 		var cel_image := Image.new()
 		cel_image.copy_from(cel.get_image())
 		if cel.opacity < 1:  # If we have cel transparency
-			false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			for xx in cel_image.get_size().x:
 				for yy in cel_image.get_size().y:
 					var pixel_color := cel_image.get_pixel(xx, yy)
@@ -503,7 +499,6 @@ func blend_selected_cels(
 					cel_image.set_pixel(
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
-			false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
 
 

@@ -125,9 +125,9 @@ func update_pattern() -> void:
 			return
 		else:
 			_pattern = Global.patterns_popup.default_pattern
-	var tex := ImageTexture.new()
+	var tex: ImageTexture
 	if !_pattern.image.is_empty():
-		tex.create_from_image(_pattern.image) #,0
+		tex = ImageTexture.create_from_image(_pattern.image)
 	$FillPattern/Type/Texture2D.texture = tex
 	var size := _pattern.image.get_size()
 	$FillPattern/OffsetX.max_value = size.x - 1
@@ -466,11 +466,9 @@ func _color_segments(image: Image) -> void:
 
 
 func _set_pixel_pattern(image: Image, x: int, y: int, pattern_size: Vector2) -> void:
-	false # _pattern.image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var px := int(x + _offset_x) % int(pattern_size.x)
 	var py := int(y + _offset_y) % int(pattern_size.y)
 	var pc := _pattern.image.get_pixel(px, py)
-	false # _pattern.image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	image.set_pixel(x, y, pc)
 
 
@@ -487,7 +485,6 @@ func commit_undo(action: String, undo_data: Dictionary) -> void:
 	project.undo_redo.create_action(action)
 	for image in redo_data:
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
-		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for image in undo_data:
 		project.undo_redo.add_undo_property(image, "data", undo_data[image])
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
@@ -499,9 +496,7 @@ func _get_undo_data() -> Dictionary:
 	var data := {}
 	var images := _get_selected_draw_images()
 	for image in images:
-		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		data[image] = image.data
-		false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return data
 
 
@@ -517,8 +512,6 @@ func _pick_color(position: Vector2) -> void:
 	if position.x > image.get_width() - 1 or position.y > image.get_height() - 1:
 		return
 
-	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var color := image.get_pixelv(position)
-	false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var button := MOUSE_BUTTON_LEFT if Tools._slots[MOUSE_BUTTON_LEFT].tool_node == self else MOUSE_BUTTON_RIGHT
 	Tools.assign_color(color, button, false)

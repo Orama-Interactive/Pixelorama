@@ -133,7 +133,6 @@ func commit_undo(action: String) -> void:
 	project.undo_redo.create_action(action)
 	for image in redo_data:
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
-		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for image in _undo_data:
 		project.undo_redo.add_undo_property(image, "data", _undo_data[image])
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
@@ -158,7 +157,5 @@ func _get_undo_data() -> Dictionary:
 		if not cel is PixelCel:
 			continue
 		var image: Image = cel.image
-		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		data[image] = image.data
-		false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return data

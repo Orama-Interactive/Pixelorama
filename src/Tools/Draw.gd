@@ -129,13 +129,13 @@ func update_brush() -> void:
 	$Brush/BrushSize.suffix = "px"  # Assume we are using default brushes
 	match _brush.type:
 		Brushes.PIXEL:
-			_brush_texture.create_from_image(load("res://assets/graphics/pixel_image.png")) #,0
+			_brush_texture = ImageTexture.create_from_image(load("res://assets/graphics/pixel_image.png"))
 			_stroke_dimensions = Vector2.ONE * _brush_size
 		Brushes.CIRCLE:
-			_brush_texture.create_from_image(load("res://assets/graphics/circle_9x9.png")) #,0
+			_brush_texture = ImageTexture.create_from_image(load("res://assets/graphics/circle_9x9.png"))
 			_stroke_dimensions = Vector2.ONE * _brush_size
 		Brushes.FILLED_CIRCLE:
-			_brush_texture.create_from_image(load("res://assets/graphics/circle_filled_9x9.png")) #,0
+			_brush_texture = ImageTexture.create_from_image(load("res://assets/graphics/circle_filled_9x9.png"))
 			_stroke_dimensions = Vector2.ONE * _brush_size
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			$Brush/BrushSize.suffix = "00 %"  # Use a different size convention on images
@@ -145,7 +145,7 @@ func update_brush() -> void:
 				var random := randi() % _brush.random.size()
 				_orignal_brush_image = _brush.random[random]
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
-			_brush_texture.create_from_image(_brush_image) #,0
+			_brush_texture = ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
@@ -159,7 +159,7 @@ func update_random_image() -> void:
 		return
 	var random = randi() % _brush.random.size()
 	_brush_image = _create_blended_brush_image(_brush.random[random])
-	_brush_texture.create_from_image(_brush_image) #,0
+	_brush_texture = ImageTexture.create_from_image(_brush_image)
 	_indicator = _create_brush_indicator()
 	update_mirror_brush()
 
@@ -210,7 +210,6 @@ func commit_undo() -> void:
 	project.undos += 1
 	for image in redo_data:
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
-		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for image in _undo_data:
 		project.undo_redo.add_undo_property(image, "data", _undo_data[image])
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
@@ -243,7 +242,7 @@ func draw_end(position: Vector2) -> void:
 	match _brush.type:
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
-			_brush_texture.create_from_image(_brush_image) #,0
+			_brush_texture = ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
@@ -283,7 +282,7 @@ func _prepare_tool() -> void:
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			# save _brush_image for safe keeping
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
-			_brush_texture.create_from_image(_brush_image) #,0
+			_brush_texture =ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
 
@@ -435,13 +434,11 @@ func remove_unselected_parts_of_brush(brush: Image, dst: Vector2) -> Image:
 	var new_brush := Image.new()
 	new_brush.copy_from(brush)
 
-	false # new_brush.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for x in size.x:
 		for y in size.y:
 			var pos := Vector2(x, y) + dst
 			if !project.selection_map.is_pixel_selected(pos):
 				new_brush.set_pixel(x, y, Color(0))
-	false # new_brush.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return new_brush
 
 
@@ -547,7 +544,6 @@ func _create_blended_brush_image(image: Image) -> Image:
 
 func _blend_image(image: Image, color: Color, factor: float) -> Image:
 	var size := image.get_size()
-	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for y in size.y:
 		for x in size.x:
 			var color_old := image.get_pixel(x, y)
@@ -555,7 +551,6 @@ func _blend_image(image: Image, color: Color, factor: float) -> Image:
 				var color_new := color_old.lerp(color, factor)
 				color_new.a = color_old.a
 				image.set_pixel(x, y, color_new)
-	false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return image
 
 
@@ -681,9 +676,7 @@ func _get_undo_data() -> Dictionary:
 		if not cel is PixelCel:
 			continue
 		var image: Image = cel.image
-		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		data[image] = image.data
-		false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return data
 
 
@@ -705,9 +698,7 @@ func _pick_color(position: Vector2) -> void:
 		var idx = (project.layers.size() - 1) - layer
 		if project.layers[idx].is_visible_in_hierarchy():
 			image = curr_frame.cels[idx].get_image()
-			false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			color = image.get_pixelv(position)
-			false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			if color != Color(0, 0, 0, 0):
 				break
 	var button := MOUSE_BUTTON_LEFT if Tools._slots[MOUSE_BUTTON_LEFT].tool_node == self else MOUSE_BUTTON_RIGHT

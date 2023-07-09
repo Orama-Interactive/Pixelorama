@@ -220,7 +220,7 @@ func update_preview() -> void:
 			preview_image.copy_from(current_frame)
 	commit_idx = _preview_idx
 	commit_action(preview_image)
-	preview_texture = ImageTexture.create_from_image(preview_image) #,0
+	preview_texture = ImageTexture.create_from_image(preview_image)
 	preview.texture = preview_texture
 
 

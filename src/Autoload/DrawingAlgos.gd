@@ -172,8 +172,6 @@ func scale_3x(sprite: Image, tol: float = 50) -> Image:
 			)
 			scaled.set_pixel(xs + 1, ys + 1, f if (fh and !bf and !dh) else e)
 
-	false # scaled.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	false # sprite.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return scaled
 
 
@@ -368,8 +366,6 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 							else e
 						)
 			sprite.set_pixel(x, y, p)
-	false # sprite.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	false # aux.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 
 func fake_rotsprite(sprite: Image, angle: float, pivot: Vector2) -> void:
@@ -396,8 +392,6 @@ func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
 				sprite.set_pixel(x, y, aux.get_pixel(ox, oy))
 			else:
 				sprite.set_pixel(x, y, Color(0, 0, 0, 0))
-	false # sprite.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	false # aux.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 
 func similar_colors(c1: Color, c2: Color, tol: float = 100) -> bool:
@@ -492,7 +486,6 @@ func crop_image() -> void:
 		for cel in f.cels:
 			if not cel is PixelCel:
 				continue
-			false # cel.image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed  # May be unneeded now, but keep it just in case
 			var cel_used_rect: Rect2 = cel.image.get_used_rect()
 			if cel_used_rect == Rect2(0, 0, 0, 0):  # If the cel has no content
 				continue

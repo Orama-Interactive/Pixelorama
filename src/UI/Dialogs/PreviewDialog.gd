@@ -68,8 +68,7 @@ func _on_PreviewDialog_about_to_show() -> void:
 	import_options.select(OpenSave.last_dialog_option)
 	import_options.emit_signal("item_selected", OpenSave.last_dialog_option)
 
-	var img_texture := ImageTexture.new()
-	img_texture.create_from_image(image) #,0
+	var img_texture := ImageTexture.create_from_image(image)
 	texture_rect.texture = img_texture
 	spritesheet_manual_tab_options.get_node("HorizontalFrames").max_value = min(
 		spritesheet_manual_tab_options.get_node("HorizontalFrames").max_value, image.get_size().x
