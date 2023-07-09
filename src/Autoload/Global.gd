@@ -510,7 +510,7 @@ func undo_or_redo(
 	if !project.has_changed:
 		project.has_changed = true
 		if project == current_project:
-			self.window_title = window_title + "(*)"
+			window_title = window_title + "(*)"
 
 
 func _title_changed(value: String) -> void:

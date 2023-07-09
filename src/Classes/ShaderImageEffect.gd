@@ -30,8 +30,7 @@ func generate_image(img: Image, shader: Shader, params: Dictionary, size: Vector
 
 	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
 	RenderingServer.force_draw(false)
-	var viewport_texture := Image.new()
-	viewport_texture = RenderingServer.texture_2d_get(RenderingServer.viewport_get_texture(vp))
+	var viewport_texture := RenderingServer.texture_2d_get(RenderingServer.viewport_get_texture(vp))
 	RenderingServer.free_rid(vp)
 	RenderingServer.free_rid(canvas)
 	RenderingServer.free_rid(ci_rid)

@@ -146,7 +146,7 @@ func _remove_object_node(id: int) -> void:  # Called by undo/redo
 	var object := get_object_from_id(id)
 	if is_instance_valid(object):
 		if selected == object:
-			self.selected = null
+			selected = null
 		object.queue_free()
 	objects_changed.emit()
 
