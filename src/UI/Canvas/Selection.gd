@@ -47,24 +47,24 @@ class Gizmo:
 		type = _type
 		direction = _direction
 
-	func get_cursor() -> int:
-		var cursor := Input.CURSOR_MOVE
+	func get_cursor() -> Control.CursorShape:
+		var cursor := Control.CURSOR_MOVE
 		if direction == Vector2.ZERO:
-			return Input.CURSOR_POINTING_HAND
+			return Control.CURSOR_POINTING_HAND
 		elif direction == Vector2(-1, -1) or direction == Vector2(1, 1):  # Top left or bottom right
 			if Global.mirror_view:
-				cursor = Input.CURSOR_BDIAGSIZE
+				cursor = Control.CURSOR_BDIAGSIZE
 			else:
-				cursor = Input.CURSOR_FDIAGSIZE
+				cursor = Control.CURSOR_FDIAGSIZE
 		elif direction == Vector2(1, -1) or direction == Vector2(-1, 1):  # Top right or bottom left
 			if Global.mirror_view:
-				cursor = Input.CURSOR_FDIAGSIZE
+				cursor = Control.CURSOR_FDIAGSIZE
 			else:
-				cursor = Input.CURSOR_BDIAGSIZE
+				cursor = Control.CURSOR_BDIAGSIZE
 		elif direction == Vector2(0, -1) or direction == Vector2(0, 1):  # Center top or center bottom
-			cursor = Input.CURSOR_VSIZE
+			cursor = Control.CURSOR_VSIZE
 		elif direction == Vector2(-1, 0) or direction == Vector2(1, 0):  # Center left or center right
-			cursor = Input.CURSOR_HSIZE
+			cursor = Control.CURSOR_HSIZE
 		return cursor
 
 
