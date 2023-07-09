@@ -174,7 +174,7 @@ func _fill_new_palette_with_colors(
 	match get_colors_from:
 		GetColorsFrom.CURRENT_CEL:
 			for cel_index in current_project.selected_cels:
-				var cel: PixelCel = current_project.frames[cel_index[0]].cels[cel_index[1]]
+				var cel = current_project.frames[cel_index[0]].cels[cel_index[1]]
 				cels.append(cel)
 		GetColorsFrom.CURRENT_FRAME:
 			for cel in current_project.frames[current_project.current_frame].cels:
@@ -186,7 +186,7 @@ func _fill_new_palette_with_colors(
 
 	for cel in cels:
 		var cel_image := Image.new()
-		cel_image.copy_from(cel.image)
+		cel_image.copy_from(cel.get_image())
 		cel_image.lock()
 		if cel_image.is_invisible():
 			continue
