@@ -13,10 +13,23 @@ var _fill_area: int = FillArea.AREA
 var _fill_with: int = FillWith.COLOR
 var _offset_x := 0
 var _offset_y := 0
-# working array used as buffer for segments while flooding
-var _allegro_flood_segments: Array
-# results array per image while flooding
-var _allegro_image_segments: Array
+## Working array used as buffer for segments while flooding
+var _allegro_flood_segments: Array[Segment]
+## Results array per image while flooding
+var _allegro_image_segments: Array[Segment]
+
+
+class Segment:
+	var flooding := false
+	var todo_above := false
+	var todo_below := false
+	var left_position := -5
+	var right_position := -5
+	var y := 0
+	var next := 0
+
+	func _init(_y: int) -> void:
+		y = _y
 
 
 func _ready() -> void:
@@ -291,22 +304,14 @@ func fill_in_selection() -> void:
 			gen.generate_image(image, PATTERN_FILL_SHADER, params, project.size)
 
 
-# Add a new segment to the array
-func _add_new_segment(y: int = 0) -> void:
-	var segment := {}
-	segment.flooding = false
-	segment.todo_above = false
-	segment.todo_below = false
-	segment.left_position = -5  # anything less than -1 is ok
-	segment.right_position = -5
-	segment.y = y
-	segment.next = 0
-	_allegro_flood_segments.append(segment)
+## Add a new segment to the array
+func _add_new_segment(y := 0) -> void:
+	_allegro_flood_segments.append(Segment.new(y))
 
 
-# fill an horizontal segment around the specified position, and adds it to the
-# list of segments filled. Returns the first x coordinate after the part of the
-# line that has been filled.
+## Fill an horizontal segment around the specified position, and adds it to the
+## list of segments filled. Returns the first x coordinate after the part of the
+## line that has been filled.
 func _flood_line_around_point(
 	pos: Vector2, project: Project, image: Image, src_color: Color
 ) -> int:
@@ -334,7 +339,7 @@ func _flood_line_around_point(
 			east += Vector2.RIGHT
 	# Make a note of the stuff we processed
 	var c := int(pos.y)
-	var segment = _allegro_flood_segments[c]
+	var segment := _allegro_flood_segments[c]
 	# we may have already processed some segments on this y coordinate
 	if segment.flooding:
 		while segment.next > 0:
@@ -377,7 +382,7 @@ func _check_flooded_segment(
 	while left <= right:
 		c = y
 		while true:
-			var segment = _allegro_flood_segments[c]
+			var segment := _allegro_flood_segments[c]
 			if left >= segment.left_position and left <= segment.right_position:
 				left = segment.right_position + 2
 				break
@@ -428,7 +433,7 @@ func _compute_segments_for_image(
 		done = true
 		var max_index := _allegro_flood_segments.size()
 		for c in max_index:
-			var p = _allegro_flood_segments[c]
+			var p := _allegro_flood_segments[c]
 			if p.todo_below:  # check below the segment?
 				p.todo_below = false
 				if _check_flooded_segment(
@@ -445,20 +450,20 @@ func _compute_segments_for_image(
 
 func _color_segments(image: Image) -> void:
 	if _fill_with == FillWith.COLOR or _pattern == null:
-		var color_str = tool_slot.color.to_html()
+		var color_str: String = tool_slot.color.to_html()
 		# short circuit for flat colors
 		for c in _allegro_image_segments.size():
-			var p = _allegro_image_segments[c]
+			var p := _allegro_image_segments[c]
 			for px in range(p.left_position, p.right_position + 1):
 				# We don't have to check again whether the point being processed is within the bounds
 				image.set_pixel(px, p.y, Color(color_str))
 	else:
 		# shortcircuit tests for patternfills
-		var pattern_size = _pattern.image.get_size()
+		var pattern_size := _pattern.image.get_size()
 		# we know the pattern had a valid size when we began flooding, so we can skip testing that
 		# again for every point in the pattern.
 		for c in _allegro_image_segments.size():
-			var p = _allegro_image_segments[c]
+			var p := _allegro_image_segments[c]
 			for px in range(p.left_position, p.right_position + 1):
 				_set_pixel_pattern(image, px, p.y, pattern_size)
 
