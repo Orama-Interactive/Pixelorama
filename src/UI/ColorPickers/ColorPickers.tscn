@@ -87,15 +87,6 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 
-[node name="TransparentChecker" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/CopyAverage" instance=ExtResource("4")]
-unique_name_in_owner = true
-material = SubResource("1")
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-
 [node name="AverageColor" type="ColorRect" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/CopyAverage"]
 unique_name_in_owner = true
 layout_mode = 0
@@ -108,6 +99,15 @@ offset_top = -10.5
 offset_right = 10.5
 offset_bottom = 10.5
 mouse_filter = 2
+
+[node name="TransparentChecker" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/CopyAverage/AverageColor" instance=ExtResource("4")]
+unique_name_in_owner = true
+show_behind_parent = true
+material = SubResource("1")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Line2" type="HSeparator" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer"]
 custom_minimum_size = Vector2(10, 0)

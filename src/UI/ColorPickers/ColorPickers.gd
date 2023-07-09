@@ -3,7 +3,6 @@ extends Container
 @onready var left_picker := $ColorPickersHorizontal/LeftColorPickerButton
 @onready var right_picker := $ColorPickersHorizontal/RightColorPickerButton
 @onready var average_color = $"%AverageColor"
-@onready var transparent_checker = $"%TransparentChecker"
 
 
 func _ready() -> void:
@@ -11,8 +10,6 @@ func _ready() -> void:
 	left_picker.get_picker().presets_visible = false
 	right_picker.get_picker().presets_visible = false
 	_average(left_picker.color, right_picker.color)
-	transparent_checker.position = average_color.position
-	transparent_checker.size = average_color.size
 
 
 func _on_ColorSwitch_pressed() -> void:
@@ -68,10 +65,8 @@ func _average(color_1: Color, color_2: Color) -> void:
 
 
 func _on_CopyAverage_button_down():
-	transparent_checker.visible = false
 	average_color.visible = false
 
 
 func _on_CopyAverage_button_up():
-	transparent_checker.visible = true
 	average_color.visible = true
