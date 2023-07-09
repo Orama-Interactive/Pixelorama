@@ -170,8 +170,8 @@ func _on_TemplatesOptions_item_selected(id: int) -> void:
 		temporary_release = true
 
 	if id > 0:
-		width_value.value = templates[id].resolution.x
-		height_value.value = templates[id].resolution.y
+		width_value.value = templates[id - 1].resolution.x
+		height_value.value = templates[id - 1].resolution.y
 	else:
 		width_value.value = Global.default_width
 		height_value.value = Global.default_height

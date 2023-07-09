@@ -62,6 +62,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 toggle_mode = false
+item_count = 1
+selected = 0
+popup/item_0/text = "Default"
+popup/item_0/id = 0
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Templates"]
 layout_mode = 2
