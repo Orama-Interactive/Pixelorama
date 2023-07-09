@@ -37,14 +37,14 @@ func _ready() -> void:
 
 
 func get_hovering_gizmo(pos: Vector2) -> int:
-	var draw_scale := Global.camera.zoom * 10
+	var draw_scale := Vector2(10.0, 10.0) / Global.camera.zoom
 	pos -= gizmos_origin
 	# Scale the position based on the zoom, has the same effect as enlarging the shapes
 	pos /= draw_scale
 	# Inflate the rotation polylines by one to make them easier to click
-	var rot_x_offset: PackedVector2Array = Geometry2D.offset_polyline(gizmo_rot_x, 1)[0]
-	var rot_y_offset: PackedVector2Array = Geometry2D.offset_polyline(gizmo_rot_y, 1)[0]
-	var rot_z_offset: PackedVector2Array = Geometry2D.offset_polyline(gizmo_rot_z, 1)[0]
+	var rot_x_offset := Geometry2D.offset_polyline(gizmo_rot_x, 1)[0]
+	var rot_y_offset := Geometry2D.offset_polyline(gizmo_rot_y, 1)[0]
+	var rot_z_offset := Geometry2D.offset_polyline(gizmo_rot_z, 1)[0]
 
 	if Geometry2D.point_is_inside_triangle(pos, gizmo_pos_x[0], gizmo_pos_x[1], gizmo_pos_x[2]):
 		return Cel3DObject.Gizmos.X_POS
@@ -101,17 +101,16 @@ func get_points(camera: Camera3D, object3d: Cel3DObject) -> void:
 	points_per_object[object3d] = points
 	if object3d.selected:
 		gizmos_origin = camera.unproject_position(object3d.position)
+		var right := object3d.position + object3d.transform.basis.x
+		var left := object3d.position - object3d.transform.basis.x
+		var up := object3d.position + object3d.transform.basis.y
+		var down := object3d.position - object3d.transform.basis.y
+		var back := object3d.position + object3d.transform.basis.z
+		var front := object3d.position - object3d.transform.basis.z
 
-		var right: Vector3 = object3d.position + object3d.transform.basis.x
-		var left: Vector3 = object3d.position - object3d.transform.basis.x
-		var up: Vector3 = object3d.position + object3d.transform.basis.y
-		var down: Vector3 = object3d.position - object3d.transform.basis.y
-		var back: Vector3 = object3d.position + object3d.transform.basis.z
-		var front: Vector3 = object3d.position - object3d.transform.basis.z
-
-		var proj_right: Vector2 = object3d.camera.unproject_position(right)
-		var proj_up: Vector2 = object3d.camera.unproject_position(up)
-		var proj_back: Vector2 = object3d.camera.unproject_position(back)
+		var proj_right := object3d.camera.unproject_position(right)
+		var proj_up := object3d.camera.unproject_position(up)
+		var proj_back := object3d.camera.unproject_position(back)
 
 		proj_right_local = proj_right - gizmos_origin
 		proj_up_local = proj_up - gizmos_origin
@@ -153,7 +152,7 @@ func clear_points(object3d: Cel3DObject) -> void:
 
 
 func _draw() -> void:
-	var draw_scale := Global.camera.zoom * 10
+	var draw_scale := Vector2(10.0, 10.0) / Global.camera.zoom
 	for object in always_visible:
 		if not always_visible[object]:
 			continue

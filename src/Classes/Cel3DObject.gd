@@ -76,7 +76,7 @@ func serialize() -> Dictionary:
 				dict["mesh_is_hemisphere"] = mesh.is_hemisphere
 			Type.CAPSULE:
 				dict["mesh_radius"] = mesh.radius
-				dict["mesh_mid_height"] = mesh.height
+				dict["mesh_height"] = mesh.height
 				dict["mesh_radial_segments"] = mesh.radial_segments
 				dict["mesh_rings"] = mesh.rings
 			Type.CYLINDER:
@@ -84,6 +84,11 @@ func serialize() -> Dictionary:
 				dict["mesh_top_radius"] = mesh.top_radius
 				dict["mesh_height"] = mesh.height
 				dict["mesh_radial_segments"] = mesh.radial_segments
+				dict["mesh_rings"] = mesh.rings
+			Type.TORUS:
+				dict["mesh_inner_radius"] = mesh.inner_radius
+				dict["mesh_outer_radius"] = mesh.outer_radius
+				dict["mesh_ring_segments"] = mesh.ring_segments
 				dict["mesh_rings"] = mesh.rings
 			Type.TEXT:
 				dict["mesh_text"] = mesh.text
@@ -95,7 +100,6 @@ func serialize() -> Dictionary:
 		dict["light_energy"] = node3d_type.light_energy
 		dict["light_negative"] = node3d_type.light_negative
 		dict["shadow_enabled"] = node3d_type.shadow_enabled
-		dict["shadow_color"] = node3d_type.shadow_color
 		match type:
 			Type.OMNI_LIGHT:
 				dict["omni_range"] = node3d_type.omni_range
@@ -139,6 +143,11 @@ func deserialize(dict: Dictionary) -> void:
 				mesh.height = dict["mesh_height"]
 				mesh.radial_segments = dict["mesh_radial_segments"]
 				mesh.rings = dict["mesh_rings"]
+			Type.TORUS:
+				mesh.inner_radius = dict["mesh_inner_radius"]
+				mesh.outer_radius = dict["mesh_outer_radius"]
+				mesh.ring_segments = dict["mesh_ring_segments"]
+				mesh.rings = dict["mesh_rings"]
 			Type.TEXT:
 				mesh.text = dict["mesh_text"]
 				mesh.pixel_size = dict["mesh_pixel_size"]
@@ -149,7 +158,6 @@ func deserialize(dict: Dictionary) -> void:
 		node3d_type.light_energy = dict["light_energy"]
 		node3d_type.light_negative = dict["light_negative"]
 		node3d_type.shadow_enabled = dict["shadow_enabled"]
-		node3d_type.shadow_color = dict["shadow_color"]
 		match type:
 			Type.OMNI_LIGHT:
 				node3d_type.omni_range = dict["omni_range"]
@@ -188,6 +196,9 @@ func _set_type(value: int) -> void:
 		Type.PLANE:
 			node3d_type = MeshInstance3D.new()
 			node3d_type.mesh = PlaneMesh.new()
+		Type.TORUS:
+			node3d_type = MeshInstance3D.new()
+			node3d_type.mesh = TorusMesh.new()
 		Type.TEXT:
 			node3d_type = MeshInstance3D.new()
 			var mesh := TextMesh.new()
