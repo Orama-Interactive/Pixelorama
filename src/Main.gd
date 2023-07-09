@@ -296,7 +296,7 @@ func _on_SaveSpriteHTML5_confirmed() -> void:
 	OpenSave.save_pxo_file(path, false, false)
 
 
-func _on_OpenSprite_popup_hide() -> void:
+func _on_open_sprite_visibility_changed() -> void:
 	if !opensprite_file_selected:
 		_can_draw_true()
 
