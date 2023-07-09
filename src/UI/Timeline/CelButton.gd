@@ -16,7 +16,7 @@ func _ready() -> void:
 	cel = Global.current_project.frames[frame].cels[layer]
 	button_setup()
 	_dim_checker()
-	cel.connect("texture_changed", Callable(self, "_dim_checker"))
+	cel.texture_changed.connect(_dim_checker)
 
 
 func button_setup() -> void:

@@ -64,7 +64,7 @@ func get_nearest_tile(point: Vector2) -> Rect2:
 
 	if final.is_empty():
 		return Rect2(Vector2.ZERO, tile_size)
-	final.sort_custom(Callable(self, "sort_by_height"))
+	final.sort_custom(sort_by_height)
 	return final[0]
 
 

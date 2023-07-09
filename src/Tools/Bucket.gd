@@ -62,8 +62,8 @@ func _on_SimilaritySlider_value_changed(value: float) -> void:
 
 func _on_PatternType_pressed() -> void:
 	var popup: Popup = Global.patterns_popup
-	if !popup.is_connected("pattern_selected", Callable(self, "_on_Pattern_selected")):
-		popup.connect("pattern_selected", Callable(self, "_on_Pattern_selected").bind(), CONNECT_ONE_SHOT)
+	if !popup.pattern_selected.is_connected(_on_Pattern_selected):
+		popup.pattern_selected.connect(_on_Pattern_selected.bind(), CONNECT_ONE_SHOT)
 	popup.popup(Rect2($FillPattern/Type.global_position, Vector2(226, 72)))
 
 

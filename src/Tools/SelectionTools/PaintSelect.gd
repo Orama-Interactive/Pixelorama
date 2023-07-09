@@ -272,7 +272,7 @@ func _compute_draw_tool_brush(pos: Vector2i) -> PackedVector2Array:
 
 
 func _on_BrushType_pressed() -> void:
-	if not Global.brushes_popup.is_connected("brush_selected", Callable(self, "_on_Brush_selected")):
+	if not Global.brushes_popup.brush_selected.is_connected(_on_Brush_selected):
 		Global.brushes_popup.brush_selected.connect(
 			_on_Brush_selected.bind([], CONNECT_ONE_SHOT)
 		)

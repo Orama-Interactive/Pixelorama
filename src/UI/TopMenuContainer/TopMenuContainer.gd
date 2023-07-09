@@ -66,7 +66,7 @@ func _setup_file_menu() -> void:
 			file_menu.add_item(item, i)
 		i += 1
 
-	file_menu.connect("id_pressed", Callable(self, "file_menu_id_pressed"))
+	file_menu.id_pressed.connect(file_menu_id_pressed)
 
 	if OS.get_name() == "HTML5":
 		file_menu.set_item_disabled(Global.FileMenu.OPEN_LAST_PROJECT, true)
@@ -75,7 +75,7 @@ func _setup_file_menu() -> void:
 
 func _setup_recent_projects_submenu(item: String) -> void:
 	recent_projects = Global.config_cache.get_value("data", "recent_projects", [])
-	recent_projects_submenu.connect("id_pressed", Callable(self, "_on_recent_projects_submenu_id_pressed"))
+	recent_projects_submenu.id_pressed.connect(_on_recent_projects_submenu_id_pressed)
 	update_recent_projects_submenu()
 
 	file_menu.add_child(recent_projects_submenu)
@@ -109,7 +109,7 @@ func _setup_edit_menu() -> void:
 		i += 1
 
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, true)
-	edit_menu.connect("id_pressed", Callable(self, "edit_menu_id_pressed"))
+	edit_menu.id_pressed.connect(edit_menu_id_pressed)
 
 
 func _setup_view_menu() -> void:
@@ -140,7 +140,7 @@ func _setup_view_menu() -> void:
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GUIDES, true)
 	view_menu.hide_on_checkable_item_selection = false
-	view_menu.connect("id_pressed", Callable(self, "view_menu_id_pressed"))
+	view_menu.id_pressed.connect(view_menu_id_pressed)
 
 	var draw_grid: bool = Global.config_cache.get_value("view_menu", "draw_grid", Global.draw_grid)
 	if draw_grid != Global.draw_grid:
@@ -179,7 +179,7 @@ func _setup_tile_mode_submenu(item: String) -> void:
 	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", Tiles.MODE.Y_AXIS)
 	tile_mode_submenu.hide_on_checkable_item_selection = false
 
-	tile_mode_submenu.connect("id_pressed", Callable(self, "_tile_mode_submenu_id_pressed"))
+	tile_mode_submenu.id_pressed.connect(_tile_mode_submenu_id_pressed)
 	view_menu.add_child(tile_mode_submenu)
 	view_menu.add_submenu_item(item, tile_mode_submenu.get_name())
 
@@ -189,7 +189,7 @@ func _setup_snap_to_submenu(item: String) -> void:
 	snap_to_submenu.add_check_item("Snap to Rectangular Grid")
 	snap_to_submenu.add_check_item("Snap to Guides")
 	snap_to_submenu.add_check_item("Snap to Perspective Guides")
-	snap_to_submenu.connect("id_pressed", Callable(self, "_snap_to_submenu_id_pressed"))
+	snap_to_submenu.id_pressed.connect(_snap_to_submenu_id_pressed)
 	view_menu.add_child(snap_to_submenu)
 	view_menu.add_submenu_item(item, snap_to_submenu.get_name())
 
@@ -217,7 +217,7 @@ func _setup_window_menu() -> void:
 			window_menu.add_check_item(item, i)
 		i += 1
 	window_menu.hide_on_checkable_item_selection = false
-	window_menu.connect("id_pressed", Callable(self, "window_menu_id_pressed"))
+	window_menu.id_pressed.connect(window_menu_id_pressed)
 	# Disable window opacity item if per pixel transparency is not allowed
 	window_menu.set_item_disabled(
 		Global.WindowMenu.WINDOW_OPACITY,
@@ -233,7 +233,7 @@ func _setup_panels_submenu(item: String) -> void:
 		var is_hidden: bool = ui.is_control_hidden(element)
 		panels_submenu.set_item_checked(ui_elements.find(element), !is_hidden)
 
-	panels_submenu.connect("id_pressed", Callable(self, "_panels_submenu_id_pressed"))
+	panels_submenu.id_pressed.connect(_panels_submenu_id_pressed)
 	window_menu.add_child(panels_submenu)
 	window_menu.add_submenu_item(item, panels_submenu.get_name())
 
@@ -254,7 +254,7 @@ func _setup_layouts_submenu(item: String) -> void:
 	layouts_submenu.hide_on_checkable_item_selection = false
 	populate_layouts_submenu()
 
-	layouts_submenu.connect("id_pressed", Callable(self, "_layouts_submenu_id_pressed"))
+	layouts_submenu.id_pressed.connect(_layouts_submenu_id_pressed)
 	window_menu.add_child(layouts_submenu)
 	window_menu.add_submenu_item(item, layouts_submenu.get_name())
 
@@ -294,7 +294,7 @@ func _setup_image_menu() -> void:
 		image_menu.add_item(item, i)
 		i += 1
 
-	image_menu.connect("id_pressed", Callable(self, "image_menu_id_pressed"))
+	image_menu.id_pressed.connect(image_menu_id_pressed)
 
 
 func _setup_select_menu() -> void:
@@ -307,7 +307,7 @@ func _setup_select_menu() -> void:
 			select_menu.add_check_item(item, i)
 		else:
 			select_menu.add_item(item, i)
-	select_menu.connect("id_pressed", Callable(self, "select_menu_id_pressed"))
+	select_menu.id_pressed.connect(select_menu_id_pressed)
 
 
 func _setup_help_menu() -> void:
@@ -326,7 +326,7 @@ func _setup_help_menu() -> void:
 		help_menu.add_item(item, i)
 		i += 1
 
-	help_menu.connect("id_pressed", Callable(self, "help_menu_id_pressed"))
+	help_menu.id_pressed.connect(help_menu_id_pressed)
 
 
 func _handle_metadata(id: int, menu_button: MenuButton) -> void:

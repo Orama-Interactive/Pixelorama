@@ -17,7 +17,7 @@ func _init() -> void:
 func _ready() -> void:
 	_button.toggle_mode = true
 	_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	_button.connect("toggled", Callable(self, "_on_Button_toggled"))
+	_button.toggled.connect(_on_Button_toggled)
 	add_child(_button)
 	move_child(_button, 0)
 	_texture_rect.anchor_top = 0.5
@@ -38,7 +38,7 @@ func _ready() -> void:
 	for child in get_children():
 		if not child is CanvasItem or child == _button:
 			continue
-		child.connect("visibility_changed", Callable(self, "_child_visibility_changed").bind(child))
+		child.visibility_changed.connect(_child_visibility_changed.bind(child))
 
 
 func _notification(what: int) -> void:

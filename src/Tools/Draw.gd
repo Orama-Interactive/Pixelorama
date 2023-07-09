@@ -33,9 +33,9 @@ var _circle_tool_shortcut: PackedVector2Array
 
 
 func _ready() -> void:
-	Global.global_tool_options.connect("dynamics_changed", Callable(self, "_reset_dynamics"))
-	Tools.connect("color_changed", Callable(self, "_on_Color_changed"))
-	Global.brushes_popup.connect("brush_removed", Callable(self, "_on_Brush_removed"))
+	Global.global_tool_options.dynamics_changed.connect(_reset_dynamics)
+	Tools.color_changed.connect(_on_Color_changed)
+	Global.brushes_popup.brush_removed.connect(_on_Brush_removed)
 
 
 func _on_BrushType_pressed() -> void:

@@ -7,7 +7,7 @@ extends Container
 
 
 func _ready() -> void:
-	Tools.connect("color_changed", Callable(self, "update_color"))
+	Tools.color_changed.connect(update_color)
 	left_picker.get_picker().presets_visible = false
 	right_picker.get_picker().presets_visible = false
 	_average(left_picker.color, right_picker.color)
@@ -35,12 +35,12 @@ func _on_ToRight_pressed():
 
 func _on_ColorPickerButton_pressed() -> void:
 	Global.can_draw = false
-	Tools.disconnect("color_changed", Callable(self, "update_color"))
+	Tools.color_changed.disconnect(update_color)
 
 
 func _on_ColorPickerButton_popup_closed() -> void:
 	Global.can_draw = true
-	Tools.connect("color_changed", Callable(self, "update_color"))
+	Tools.color_changed.connect(update_color)
 
 
 func _on_ColorDefaults_pressed() -> void:

@@ -10,7 +10,7 @@ var _locked_ratio := false
 
 func _ready() -> void:
 	_crop = Global.canvas.crop_rect
-	_crop.connect("updated", Callable(self, "_sync_ui"))
+	_crop.updated.connect(_sync_ui)
 	_crop.tool_count += 1
 	_sync_ui()
 

@@ -7,7 +7,7 @@ extends AcceptDialog
 
 func _ready() -> void:
 	await get_tree().process_frame
-	Global.control.ui.connect("sort_children", Callable(self, "_recalculate_opacity"))
+	Global.control.ui.sort_children.connect(_recalculate_opacity)
 
 
 func _on_WindowOpacityDialog_about_to_show() -> void:

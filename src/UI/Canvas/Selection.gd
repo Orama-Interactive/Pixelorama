@@ -69,7 +69,7 @@ class Gizmo:
 
 
 func _ready() -> void:
-	Global.camera.connect("zoom_changed", Callable(self, "_update_on_zoom"))
+	Global.camera.zoom_changed.connect(_update_on_zoom)
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, -1)))  # Top left
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(0, -1)))  # Center top
 	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(1, -1)))  # Top right

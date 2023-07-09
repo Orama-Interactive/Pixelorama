@@ -536,50 +536,50 @@ class SignalsAPI:
 	var _last_cel: BaseCel
 
 	func _init() -> void:
-		Global.connect("project_changed", Callable(self, "_update_texture_signal"))
-		Global.connect("cel_changed", Callable(self, "_update_texture_signal"))
+		Global.project_changed.connect(_update_texture_signal)
+		Global.cel_changed.connect(_update_texture_signal)
 
 	func _update_texture_signal():
 		if _last_cel:
-			_last_cel.disconnect("texture_changed", Callable(self, "_on_texture_changed"))
+			_last_cel.texture_changed.disconnect(_on_texture_changed)
 		if Global.current_project:
 			_last_cel = Global.current_project.get_current_cel()
-			_last_cel.connect("texture_changed", Callable(self, "_on_texture_changed"))
+			_last_cel.texture_changed.connect(_on_texture_changed)
 
 	func _on_texture_changed():
-		emit_signal("texture_changed")
+		texture_changed.emit()
 
 	# Global signals
 	func connect_project_changed(target: Object, method: String):
-		Global.connect("project_changed", Callable(target, method))
+		Global.project_changed.connect(Callable(target, method))
 		ExtensionsApi.add_action("project_changed")
 
 	func disconnect_project_changed(target: Object, method: String):
-		Global.disconnect("project_changed", Callable(target, method))
+		Global.project_changed.disconnect(Callable(target, method))
 		ExtensionsApi.remove_action("project_changed")
 
 	func connect_cel_changed(target: Object, method: String):
-		Global.connect("cel_changed", Callable(target, method))
+		Global.cel_changed.connect(Callable(target, method))
 		ExtensionsApi.add_action("cel_changed")
 
 	func disconnect_cel_changed(target: Object, method: String):
-		Global.disconnect("cel_changed", Callable(target, method))
+		Global.cel_changed.disconnect(Callable(target, method))
 		ExtensionsApi.remove_action("cel_changed")
 
 	# Tool Signal
 	func connect_tool_color_changed(target: Object, method: String):
-		Tools.connect("color_changed", Callable(target, method))
+		Tools.color_changed.connect(Callable(target, method))
 		ExtensionsApi.add_action("color_changed")
 
 	func disconnect_tool_color_changed(target: Object, method: String):
-		Tools.disconnect("color_changed", Callable(target, method))
+		Tools.color_changed.disconnect(Callable(target, method))
 		ExtensionsApi.remove_action("color_changed")
 
 	# updater signals
 	func connect_current_cel_texture_changed(target: Object, method: String):
-		connect("texture_changed", Callable(target, method))
+		texture_changed.connect(Callable(target, method))
 		ExtensionsApi.add_action("texture_changed")
 
 	func disconnect_current_cel_texture_changed(target: Object, method: String):
-		disconnect("texture_changed", Callable(target, method))
+		texture_changed.disconnect(Callable(target, method))
 		ExtensionsApi.remove_action("texture_changed")

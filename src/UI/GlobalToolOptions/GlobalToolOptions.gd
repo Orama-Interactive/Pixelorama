@@ -26,7 +26,7 @@ var size_last_pressed: BaseButton = null
 
 func _ready() -> void:
 	# Resize tools panel when window gets resized
-	get_tree().get_root().connect("size_changed", Callable(self, "_on_resized"))
+	get_tree().get_root().size_changed.connect(_on_resized)
 	horizontal_mirror.button_pressed = Tools.horizontal_mirror
 	vertical_mirror.button_pressed = Tools.vertical_mirror
 	pixel_perfect.button_pressed = Tools.pixel_perfect

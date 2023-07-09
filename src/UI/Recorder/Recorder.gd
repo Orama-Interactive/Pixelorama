@@ -25,7 +25,7 @@ var resize := 100
 func _ready() -> void:
 	refresh_projects_list()
 	project = Global.current_project
-	connect("frame_saved", Callable(self, "_on_frame_saved"))
+	frame_saved.connect(_on_frame_saved)
 	# Make a recordings folder if there isn't one
 	var dir := DirAccess.open(chosen_dir)
 	chosen_dir = Global.directory_module.xdg_data_home.path_join("Recordings")
@@ -121,11 +121,11 @@ func finalize_recording() -> void:
 
 
 func disconnect_undo() -> void:
-	project.undo_redo.disconnect("version_changed", Callable(self, "capture_frame"))
+	project.undo_redo.version_changed.disconnect(capture_frame)
 
 
 func connect_undo() -> void:
-	project.undo_redo.connect("version_changed", Callable(self, "capture_frame"))
+	project.undo_redo.version_changed.connect(capture_frame)
 
 
 func _on_TargetProjectOption_item_selected(index: int) -> void:
