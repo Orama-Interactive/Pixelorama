@@ -23,16 +23,13 @@ func button_setup() -> void:
 	custom_minimum_size.x = Global.animation_timeline.cel_size
 	custom_minimum_size.y = Global.animation_timeline.cel_size
 
-	var base_layer: BaseLayer = Global.current_project.layers[layer]
+	var base_layer := Global.current_project.layers[layer]
 	tooltip_text = tr("Frame: %s, Layer: %s") % [frame + 1, base_layer.name]
 	cel_texture.texture = cel.image_texture
 	if is_instance_valid(linked_indicator):
 		linked_indicator.visible = cel.link_set != null
 		if cel.link_set != null:
 			linked_indicator.color.h = cel.link_set["hue"]
-
-	# Reset the checkers size because it assumes you want the same size as the canvas
-	transparent_checker.size = transparent_checker.get_parent().size
 
 
 func _on_CelButton_resized() -> void:

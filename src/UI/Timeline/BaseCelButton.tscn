@@ -42,11 +42,12 @@ stretch_mode = 6
 [node name="TransparentChecker" parent="CelTexture" instance=ExtResource("2")]
 show_behind_parent = true
 material = SubResource("1")
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="." to="." method="_on_CelButton_pressed"]
 [connection signal="resized" from="." to="." method="_on_CelButton_resized"]

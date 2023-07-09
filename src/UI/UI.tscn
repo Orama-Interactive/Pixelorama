@@ -311,6 +311,7 @@ render_target_update_mode = 4
 
 [node name="TransparentChecker" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource("5")]
 material = SubResource("2")
+anchors_preset = 0
 
 [node name="Canvas" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource("19")]
 
@@ -346,6 +347,7 @@ render_target_update_mode = 0
 
 [node name="TransparentChecker" parent="DockableContainer/Second Canvas/SubViewport" instance=ExtResource("5")]
 material = SubResource("3")
+anchors_preset = 0
 
 [node name="CanvasPreview" parent="DockableContainer/Second Canvas/SubViewport" instance=ExtResource("2")]
 
