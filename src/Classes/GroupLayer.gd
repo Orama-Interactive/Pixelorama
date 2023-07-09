@@ -11,8 +11,7 @@ func _init(_project, _name := "") -> void:
 
 
 func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
-	var image := Image.new()
-	image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	var children := get_children(false)
 	var blend_rect := Rect2(Vector2.ZERO, project.size)
 	for layer in children:

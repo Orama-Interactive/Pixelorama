@@ -16,11 +16,9 @@ func _on_TagContainer_gui_input(event: InputEvent) -> void:
 			return
 		add_separator("Paste content from tag:")
 		for tag in Global.current_project.animation_tags:
-			var img = Image.new()
-			img.create(5, 5, true, Image.FORMAT_RGBA8)
+			var img := Image.create(5, 5, true, Image.FORMAT_RGBA8)
 			img.fill(tag.color)
-			var tex = ImageTexture.new()
-			tex.create_from_image(img)
+			var tex := ImageTexture.create_from_image(img)
 			var title = tag.name
 			if title == "":
 				title = "(Untitled)"

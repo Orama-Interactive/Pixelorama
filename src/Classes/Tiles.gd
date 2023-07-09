@@ -15,7 +15,7 @@ func _init(size: Vector2):
 	x_basis = Vector2(size.x, 0)
 	y_basis = Vector2(0, size.y)
 	tile_size = size
-	tile_mask.create(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
+	tile_mask = Image.create(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
 	tile_mask.fill(Color.WHITE)
 
 
@@ -105,6 +105,6 @@ func has_point(point: Vector2) -> bool:
 
 
 func reset_mask():
-	tile_mask.create(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
+	tile_mask = Image.create(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
 	tile_mask.fill(Color.WHITE)
 	has_mask = false

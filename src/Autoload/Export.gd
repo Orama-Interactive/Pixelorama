@@ -97,8 +97,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 	var width := project.size.x * spritesheet_columns
 	var height := project.size.y * spritesheet_rows
 
-	var whole_image := Image.new()
-	whole_image.create(width, height, false, Image.FORMAT_RGBA8)
+	var whole_image := Image.create(width, height, false, Image.FORMAT_RGBA8)
 	var origin := Vector2.ZERO
 	var hh := 0
 	var vv := 0
@@ -132,8 +131,7 @@ func process_animation(project := Global.current_project) -> void:
 	durations.clear()
 	var frames := calculate_frames(project)
 	for frame in frames:
-		var image := Image.new()
-		image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 		blend_layers(image, frame)
 		processed_images.append(image)
 		durations.append(frame.duration * (1.0 / project.fps))
@@ -189,7 +187,7 @@ func export_processed_images(
 		if multiple_files and new_dir_for_each_frame_tag:
 			var frame_tag_directory := DirAccess.open(export_path.get_base_dir())
 			if not frame_tag_directory.dir_exists(export_path.get_base_dir()):
-				frame_tag_directory.open(project.directory_path)
+				frame_tag_directory = DirAccess.open(project.directory_path)
 				frame_tag_directory.make_dir(export_path.get_base_dir().get_file())
 
 		if not ignore_overwrites:  # Check if the files already exist

@@ -22,20 +22,20 @@ func _set_visible_content(value: bool) -> void:
 	button_pressed = value
 
 
-func _on_Button_toggled(button_pressed: bool) -> void:
-	_set_visible(button_pressed)
+func _on_Button_toggled(toggled: bool) -> void:
+	_set_visible(toggled)
 
 
-func _set_visible(pressed: bool) -> void:
-	if pressed:
+func _set_visible(toggled: bool) -> void:
+	if toggled:
 		$TextureRect.rotation = 0
 	else:
 		$TextureRect.rotation = -90
-	content.visible = pressed
+	content.visible = toggled
 
 
 # Checks if a child becomes visible from another source and ensures
 # it remains invisible if the button is not pressed
 func _child_visibility_changed() -> void:
-	if not pressed:
+	if not button_pressed:
 		content.visible = false
