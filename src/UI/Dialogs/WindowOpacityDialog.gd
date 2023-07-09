@@ -11,7 +11,12 @@ func _ready() -> void:
 
 
 func _on_WindowOpacityDialog_about_to_show() -> void:
-	slider.editable = !((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))
+	get_tree().root.transparent = true
+	get_tree().root.transparent_bg = true
+	slider.editable = !(
+		(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
+		or (get_window().mode == Window.MODE_FULLSCREEN)
+	)
 	fullscreen_warning.visible = !slider.editable
 
 
@@ -35,5 +40,5 @@ func set_window_opacity(value: float) -> void:
 	Global.transparent_checker.update_transparency(value)
 
 
-func _on_WindowOpacityDialog_popup_hide() -> void:
+func _on_visibility_changed() -> void:
 	Global.dialog_open(false)
