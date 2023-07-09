@@ -86,6 +86,7 @@ func _input(_event: InputEvent) -> void:
 
 
 func _ready() -> void:
+	super._ready()
 	Global.cel_changed.connect(_cel_changed)
 	_cel_changed()
 	var new_object_popup := new_object_menu_button.get_popup()
@@ -484,5 +485,5 @@ func _on_LoadModelDialog_files_selected(paths: PackedStringArray) -> void:
 		_add_object(Cel3DObject.Type.IMPORTED, path)
 
 
-func _on_LoadModelDialog_popup_hide() -> void:
+func _on_load_model_dialog_visibility_changed() -> void:
 	Global.dialog_open(false)

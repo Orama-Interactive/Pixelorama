@@ -20,6 +20,7 @@ var _allegro_image_segments: Array
 
 
 func _ready() -> void:
+	super._ready()
 	update_pattern()
 
 
