@@ -34,9 +34,7 @@ func apply_selection(position: Vector2) -> void:
 
 	var cel_image := Image.new()
 	cel_image.copy_from(_get_draw_image())
-	false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var color := cel_image.get_pixelv(position)
-	false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var operation := 0
 	if _subtract:
 		operation = 1
@@ -45,8 +43,7 @@ func apply_selection(position: Vector2) -> void:
 
 	var params := {"color": color, "similarity_percent": _similarity, "operation": operation}
 	if _add or _subtract or _intersect:
-		var selection_tex := ImageTexture.new()
-		selection_tex.create_from_image(project.selection_map) #,0
+		var selection_tex := ImageTexture.create_from_image(project.selection_map)
 		params["selection"] = selection_tex
 	var gen := ShaderImageEffect.new()
 	gen.generate_image(cel_image, shader, params, project.size)

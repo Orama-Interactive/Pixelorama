@@ -109,8 +109,7 @@ func _on_GifWarning_meta_clicked(meta) -> void:
 func add_image_preview(image: Image, canvas_number: int = -1) -> void:
 	var container := create_preview_container()
 	var preview := create_preview_rect()
-	preview.texture = ImageTexture.new()
-	preview.texture.create_from_image(image) #,0
+	preview.texture = ImageTexture.create_from_image(image)
 	container.add_child(preview)
 
 	if canvas_number != -1:
@@ -127,8 +126,7 @@ func add_animated_preview() -> void:
 	preview_frames = []
 
 	for processed_image in Export.processed_images:
-		var texture := ImageTexture.new()
-		texture.create_from_image(processed_image) #,0
+		var texture := ImageTexture.create_from_image(processed_image)
 		preview_frames.push_back(texture)
 
 	var container := create_preview_container()

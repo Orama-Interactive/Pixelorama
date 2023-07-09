@@ -5,7 +5,7 @@ var _brush := Brushes.get_default_brush()
 var _indicator := BitMap.new()
 var _polylines := []
 var _brush_image := Image.new()
-var _brush_texture := ImageTexture.new()
+var _brush_texture: ImageTexture
 var _circle_tool_shortcut: PackedVector2Array
 
 var _last_position := Vector2.INF
@@ -308,11 +308,11 @@ func update_brush() -> void:
 	$Brush/BrushSize.suffix = "px"  # Assume we are using default brushes
 	match _brush.type:
 		Brushes.PIXEL:
-			_brush_texture.create_from_image(load("res://assets/graphics/pixel_image.png")) #,0
+			_brush_texture = ImageTexture.create_from_image(load("res://assets/graphics/pixel_image.png"))
 		Brushes.CIRCLE:
-			_brush_texture.create_from_image(load("res://assets/graphics/circle_9x9.png")) #,0
+			_brush_texture = ImageTexture.create_from_image(load("res://assets/graphics/circle_9x9.png"))
 		Brushes.FILLED_CIRCLE:
-			_brush_texture.create_from_image(load("res://assets/graphics/circle_filled_9x9.png")) #,0
+			_brush_texture = ImageTexture.create_from_image(load("res://assets/graphics/circle_filled_9x9.png"))
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			$Brush/BrushSize.suffix = "00 %"  # Use a different size convention on images
 			if _brush.random.size() <= 1:
@@ -320,7 +320,7 @@ func update_brush() -> void:
 			else:
 				var random := randi() % _brush.random.size()
 				_brush_image = _create_blended_brush_image(_brush.random[random])
-			_brush_texture.create_from_image(_brush_image) #,0
+			_brush_texture = ImageTexture.create_from_image(_brush_image)
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
 

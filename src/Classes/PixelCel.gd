@@ -19,7 +19,7 @@ func _init(_image := Image.new(), _opacity := 1.0, _image_texture: ImageTexture 
 func image_changed(value: Image) -> void:
 	image = value
 	if !image.is_empty():
-		image_texture.create_from_image(image) #,0
+		image_texture = ImageTexture.create_from_image(image)
 
 
 func get_content():
@@ -31,9 +31,9 @@ func set_content(content, texture: ImageTexture = null) -> void:
 	if is_instance_valid(texture):
 		image_texture = texture
 		if image_texture.get_image().get_size() != image.get_size():
-			image_texture.create_from_image(image) #,0
+			image_texture = ImageTexture.create_from_image(image)
 	else:
-		image_texture.create_from_image(image) #,0
+		image_texture = ImageTexture.create_from_image(image)
 
 
 func create_empty_content():

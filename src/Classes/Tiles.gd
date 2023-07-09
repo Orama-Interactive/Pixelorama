@@ -57,12 +57,10 @@ func get_nearest_tile(point: Vector2) -> Rect2:
 		return Rect2(Vector2.ZERO, tile_size)
 
 	var final := []
-	false # tile_mask.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for candidate in candidates:
 		var rel_pos = point - candidate.position
 		if tile_mask.get_pixelv(rel_pos).a == 1.0:
 			final.append(candidate)
-	false # tile_mask.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 	if final.is_empty():
 		return Rect2(Vector2.ZERO, tile_size)
@@ -98,13 +96,11 @@ func get_point_in_tiles(pixel: Vector2) -> Array:
 func has_point(point: Vector2) -> bool:
 	var positions = Global.canvas.tile_mode.get_tile_positions()
 	positions.append(Vector2.ZERO)  # The central tile is included manually
-	false # tile_mask.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for tile_pos in positions:
 		var test_rect = Rect2(tile_pos, tile_size)
 		var rel_pos = point - tile_pos
 		if test_rect.has_point(point) and tile_mask.get_pixelv(rel_pos).a == 1.0:
 			return true
-	false # tile_mask.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return false
 
 

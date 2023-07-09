@@ -98,11 +98,9 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 		selection_size = selection_rectangle.size
 
 		var selection: Image = _project.selection_map
-		selection_tex.create_from_image(selection) #,0
+		selection_tex.create_from_image(selection)
 
 		if !_type_is_shader():
-			false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-			false # cel.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			for x in _project.size.x:
 				for y in _project.size.y:
 					var pos := Vector2(x, y)
@@ -110,8 +108,6 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 						image.set_pixelv(pos, Color(0, 0, 0, 0))
 					else:
 						cel.set_pixelv(pos, Color(0, 0, 0, 0))
-			false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-			false # cel.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	match type_option_button.get_selected_id():
 		ROTXEL_SMEAR:
 			var params := {

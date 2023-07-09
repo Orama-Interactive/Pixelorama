@@ -386,7 +386,7 @@ func resize_selection() -> void:
 			preview_image.flip_x()
 		if temp_rect.size.y < 0:
 			preview_image.flip_y()
-		preview_image_texture.create_from_image(preview_image) #,0
+		preview_image_texture = ImageTexture.create_from_image(preview_image)
 
 	var selection_map_copy := SelectionMap.new()
 	selection_map_copy.copy_from(selection_map)
@@ -418,7 +418,7 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 			original_preview_image, Rect2(Vector2.ZERO, preview_image.get_size()), pos_diff
 		)
 	DrawingAlgos.nn_rotate(preview_image, angle, pivot)
-	preview_image_texture.create_from_image(preview_image) #,0
+	preview_image_texture = ImageTexture.create_from_image(preview_image)
 
 	var bitmap_image := original_bitmap
 	var bitmap_pivot := (
@@ -614,7 +614,6 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 			if not image is Image:
 				continue
 			project.undo_redo.add_do_property(image, "data", redo_data[image])
-			false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		for image in undo_data_tmp:
 			if not image is Image:
 				continue
@@ -639,9 +638,7 @@ func get_undo_data(undo_image: bool) -> Dictionary:
 	if undo_image:
 		var images := _get_selected_draw_images()
 		for image in images:
-			false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			data[image] = image.data
-			false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 	return data
 
@@ -701,7 +698,6 @@ func copy() -> void:
 			cl_selection_map = selection_map_copy
 		else:
 			to_copy = image.get_rect(big_bounding_rectangle)
-			false # to_copy.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			# Remove unincluded pixels if the selection is not a single rectangle
 			var offset_pos := big_bounding_rectangle.position
 			for x in to_copy.get_size().x:
@@ -713,7 +709,6 @@ func copy() -> void:
 						offset_pos.y = 0
 					if not project.selection_map.is_pixel_selected(pos + offset_pos):
 						to_copy.set_pixelv(pos, Color(0))
-			false # to_copy.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			cl_selection_map.copy_from(project.selection_map)
 		cl_big_bounding_rectangle = big_bounding_rectangle
 
@@ -733,8 +728,7 @@ func copy() -> void:
 	if !to_copy.is_empty():
 		var pattern: Patterns.Pattern = Global.patterns_popup.get_pattern(0)
 		pattern.image = to_copy
-		var tex := ImageTexture.new()
-		tex.create_from_image(to_copy) #,0
+		var tex := ImageTexture.create_from_image(to_copy)
 		var container = Global.patterns_popup.get_node("ScrollContainer/PatternContainer")
 		container.get_child(0).get_child(0).texture = tex
 
@@ -795,7 +789,7 @@ func paste(in_place := false) -> void:
 	original_offset = project.selection_offset
 	original_bitmap.copy_from(project.selection_map)
 	preview_image.copy_from(original_preview_image)
-	preview_image_texture.create_from_image(preview_image) #,0
+	preview_image_texture.create_from_image(preview_image)
 	project.selection_map_changed()
 
 
@@ -858,7 +852,6 @@ func new_brush() -> void:
 			clipboard.selection_map = selection_map_copy
 	else:
 		brush = image.get_rect(big_bounding_rectangle)
-		false # brush.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		# Remove unincluded pixels if the selection is not a single rectangle
 		for x in brush.get_size().x:
 			for y in brush.get_size().y:
@@ -870,7 +863,6 @@ func new_brush() -> void:
 					offset_pos.y = 0
 				if not project.selection_map.is_pixel_selected(pos + offset_pos):
 					brush.set_pixelv(pos, Color(0))
-		false # brush.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 	if !brush.is_invisible():
 		var brush_used: Image = brush.get_rect(brush.get_used_rect())
@@ -927,7 +919,6 @@ func _get_preview_image() -> void:
 	Export.blend_selected_cels(blended_image, project.frames[project.current_frame])
 	if original_preview_image.is_empty():
 		original_preview_image = blended_image.get_rect(big_bounding_rectangle)
-		false # original_preview_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		# For non-rectangular selections
 		for x in range(0, big_bounding_rectangle.size.x):
 			for y in range(0, big_bounding_rectangle.size.y):
@@ -935,12 +926,11 @@ func _get_preview_image() -> void:
 				if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
 					original_preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
 
-		false # original_preview_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		if original_preview_image.is_invisible():
 			original_preview_image = Image.new()
 			return
 		preview_image.copy_from(original_preview_image)
-		preview_image_texture.create_from_image(preview_image) #,0
+		preview_image_texture.create_from_image(preview_image)
 
 	var clear_image := Image.new()
 	clear_image.create(
@@ -966,13 +956,10 @@ func _get_selected_image(cel_image: Image) -> Image:
 	var project: Project = Global.current_project
 	var image := Image.new()
 	image = cel_image.get_rect(big_bounding_rectangle)
-	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	# For non-rectangular selections
 	for x in range(0, big_bounding_rectangle.size.x):
 		for y in range(0, big_bounding_rectangle.size.y):
 			var pos := Vector2(x, y)
 			if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
 				image.set_pixelv(pos, Color(0, 0, 0, 0))
-
-	false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	return image

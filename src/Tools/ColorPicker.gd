@@ -79,14 +79,10 @@ func _pick_color(position: Vector2) -> void:
 				var idx = (project.layers.size() - 1) - layer
 				if project.layers[idx].is_visible_in_hierarchy():
 					image = curr_frame.cels[idx].get_image()
-					false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 					color = image.get_pixelv(position)
-					false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 					if color != Color(0, 0, 0, 0):
 						break
 		CURRENT_LAYER:
-			false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			color = image.get_pixelv(position)
-			false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var button := MOUSE_BUTTON_LEFT if _color_slot == 0 else MOUSE_BUTTON_RIGHT
 	Tools.assign_color(color, button, false)

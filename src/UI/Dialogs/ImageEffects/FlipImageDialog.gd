@@ -29,8 +29,6 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 		if project != Global.current_project:
 			rectangle = project.selection_map.get_used_rect()
 		selected = cel.get_rect(rectangle)
-		false # selected.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-		false # cel.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		for x in selected.get_width():
 			for y in selected.get_height():
 				var pos := Vector2(x, y)
@@ -40,8 +38,6 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 				else:
 					selected.set_pixelv(pos, Color(0, 0, 0, 0))
 
-		false # selected.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-		false # cel.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		if flip_h.button_pressed:
 			selected.flip_x()
 		if flip_v.button_pressed:
@@ -64,7 +60,6 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 		if not image is Image:
 			continue
 		project.undo_redo.add_do_property(image, "data", redo_data[image])
-		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for image in undo_data:
 		if not image is Image:
 			continue
@@ -85,7 +80,6 @@ func _get_undo_data(project: Project) -> Dictionary:
 
 	var images := _get_selected_draw_images(project)
 	for image in images:
-		false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		data[image] = image.data
 
 	return data

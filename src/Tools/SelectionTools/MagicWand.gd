@@ -22,7 +22,6 @@ func apply_selection(position: Vector2) -> void:
 
 	var cel_image := Image.new()
 	cel_image.copy_from(_get_draw_image())
-	false # cel_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	_flood_fill(position, cel_image, selection_map_copy)
 
 	# Handle mirroring
@@ -38,7 +37,6 @@ func apply_selection(position: Vector2) -> void:
 		var mirror_y := position
 		mirror_y.y = Global.current_project.y_symmetry_point - position.y
 		_flood_fill(mirror_y, cel_image, selection_map_copy)
-	false # cel_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	project.selection_map = selection_map_copy
 	Global.canvas.selection.big_bounding_rectangle = project.selection_map.get_used_rect()
 	Global.canvas.selection.commit_undo("Select", undo_data)

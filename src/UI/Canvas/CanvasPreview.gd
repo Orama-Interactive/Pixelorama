@@ -45,8 +45,7 @@ func _draw() -> void:
 		Mode.SPRITESHEET:
 			var texture_to_draw: ImageTexture
 			var target_frame: Frame = current_project.frames[current_project.current_frame]
-			var frame_image := Image.new()
-			frame_image.create(
+			var frame_image := Image.create(
 				current_project.size.x, current_project.size.y, false, Image.FORMAT_RGBA8
 			)
 			Export.blend_all_layers(frame_image, target_frame)
@@ -113,11 +112,10 @@ func _split_spritesheet(image: Image, horiz: int, vert: int) -> Array:
 	var frame_height := image.get_size().y / vert
 	for yy in range(vert):
 		for xx in range(horiz):
-			var tex := ImageTexture.new()
 			var cropped_image := Image.new()
 			var rect := Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			cropped_image = image.get_rect(rect)
 			cropped_image.convert(Image.FORMAT_RGBA8)
-			tex.create_from_image(cropped_image) #,0
+			var tex := ImageTexture.create_from_image(cropped_image)
 			result.append(tex)
 	return result

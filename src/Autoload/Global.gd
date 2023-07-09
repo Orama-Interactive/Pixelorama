@@ -497,7 +497,7 @@ func undo_or_redo(
 					if current_cel is Cel3D:
 						current_cel.size_changed(project.size)
 					else:
-						current_cel.image_texture.create_from_image(current_cel.get_image()) #,0
+						current_cel.image_texture = ImageTexture.create_from_image(current_cel.get_image())
 			canvas.camera_zoom()
 			canvas.grid.queue_redraw()
 			canvas.pixel_grid.queue_redraw()

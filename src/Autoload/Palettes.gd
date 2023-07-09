@@ -554,13 +554,11 @@ func _import_image_palette(path: String, image: Image) -> Palette:
 	var width: int = image.get_width()
 
 	# Iterate all pixels and store unique colors to palette
-	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for y in range(0, height):
 		for x in range(0, width):
 			var color: Color = image.get_pixel(x, y)
 			if !colors.has(color):
 				colors.append(color)
-	false # image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 
 	var palette_height: int = ceil(colors.size() / 8.0)
 	var result: Palette = Palette.new(path.get_basename().get_file(), 8, palette_height)

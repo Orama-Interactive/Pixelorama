@@ -22,9 +22,9 @@ func select_pattern(pattern: Pattern) -> void:
 
 func create_button(image: Image) -> Node:
 	var button: BaseButton = preload("res://src/UI/Buttons/PatternButton.tscn").instantiate()
-	var tex := ImageTexture.new()
+	var tex: ImageTexture
 	if !image.is_empty():
-		tex.create_from_image(image) #,0
+		tex = ImageTexture.create_from_image(image)
 	button.get_child(0).texture = tex
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	return button

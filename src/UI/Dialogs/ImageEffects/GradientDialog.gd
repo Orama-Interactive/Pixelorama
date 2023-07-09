@@ -57,13 +57,12 @@ func _ready() -> void:
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
 	var selection: Image
-	var selection_tex := ImageTexture.new()
+	var selection_tex: ImageTexture
 	if selection_checkbox.button_pressed and project.has_selection:
 		selection = project.selection_map
 	else:  # This is needed to prevent a weird bug with the dithering shaders and GLES2
-		selection = Image.new()
-		selection.create(project.size.x, project.size.y, false, Image.FORMAT_L8)
-	selection_tex.create_from_image(selection) #,0
+		selection = Image.create(project.size.x, project.size.y, false, Image.FORMAT_L8)
+	selection_tex = ImageTexture.create_from_image(selection)
 
 	var dither_texture: Texture2D = selected_dither_matrix.texture
 	var pixel_size := dither_texture.get_width()
@@ -72,27 +71,19 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	# Pass the gradient offsets as an array to the shader
 	# ...but since Godot 3.x doesn't support uniform arrays, instead we construct
 	# a nx1 grayscale texture with each offset stored in each pixel, and pass it to the shader
-	var offsets_image := Image.new()
-	offsets_image.create(n_of_colors, 1, false, Image.FORMAT_L8)
+	var offsets_image := Image.create(n_of_colors, 1, false, Image.FORMAT_L8)
 	# Construct an image that contains the selected colors of the gradient without interpolation
-	var gradient_image := Image.new()
-	gradient_image.create(n_of_colors, 1, false, Image.FORMAT_RGBA8)
-	false # offsets_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	false # gradient_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	var gradient_image := Image.create(n_of_colors, 1, false, Image.FORMAT_RGBA8)
 	for i in n_of_colors:
 		var c := gradient.offsets[i]
 		offsets_image.set_pixel(i, 0, Color(c, c, c, c))
 		gradient_image.set_pixel(i, 0, gradient.colors[i])
-	false # offsets_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	false # gradient_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-	var offsets_tex := ImageTexture.new()
-	offsets_tex.create_from_image(offsets_image) #,0
+	var offsets_tex := ImageTexture.create_from_image(offsets_image)
 	var gradient_tex: Texture2D
 	if shader == shader_linear:
 		gradient_tex = gradient_edit.texture
 	else:
-		gradient_tex = ImageTexture.new()
-		gradient_tex.create_from_image(gradient_image) #,0
+		gradient_tex = ImageTexture.create_from_image(gradient_image)
 	var center := Vector2(
 		animate_panel.get_animated_value(commit_idx, Animate.CENTER_X),
 		animate_panel.get_animated_value(commit_idx, Animate.CENTER_Y)

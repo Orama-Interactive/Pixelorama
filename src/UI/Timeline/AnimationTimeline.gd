@@ -841,7 +841,6 @@ func _on_MergeDownLayer_pressed() -> void:
 		var top_image := Image.new()
 		top_image.copy_from(frame.cels[top_layer.index].get_image())
 
-		false # top_image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		if frame.cels[top_layer.index].opacity < 1:  # If we have layer transparency
 			for xx in top_image.get_size().x:
 				for yy in top_image.get_size().y:
@@ -850,7 +849,6 @@ func _on_MergeDownLayer_pressed() -> void:
 					top_image.set_pixel(
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
-		false # top_image.unlock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 		var bottom_cel: BaseCel = frame.cels[bottom_layer.index]
 		var bottom_image := Image.new()
 		bottom_image.copy_from(bottom_cel.image)
