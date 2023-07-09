@@ -39,7 +39,7 @@ func _ready() -> void:
 
 
 func select_brush(brush: Brush) -> void:
-	emit_signal("brush_selected", brush)
+	brush_selected.emit(brush)
 	hide()
 
 
@@ -97,7 +97,7 @@ static func clear_project_brush() -> void:
 	)
 	for child in container.get_children():
 		child.queue_free()
-		Global.brushes_popup.emit_signal("brush_removed", child.brush)
+		Global.brushes_popup.brush_removed.emit(child.brush)
 
 
 func get_brush(type: int, index: int) -> Brush:
@@ -117,7 +117,7 @@ func get_brush(type: int, index: int) -> Brush:
 
 
 func remove_brush(brush_button: Node) -> void:
-	emit_signal("brush_removed", brush_button.brush)
+	brush_removed.emit(brush_button.brush)
 
 	var project = Global.current_project
 	var undo_brushes: Array = project.brushes.duplicate()

@@ -65,7 +65,7 @@ func apply() -> void:
 func reset() -> void:
 	rect.position = Vector2.ZERO
 	rect.size = Global.current_project.size
-	emit_signal("updated")
+	updated.emit()
 
 
 # Setters

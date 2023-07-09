@@ -59,10 +59,10 @@ func _ready() -> void:
 	$"%PastPlacement".select(0 if past_above else 1)
 	$"%FuturePlacement".select(0 if future_above else 1)
 	# emit signals that were supposed to be emitted (Check if it's still required in godot 4)
-	$"%PastPlacement".emit_signal("item_selected", 0 if past_above else 1)
-	$"%FuturePlacement".emit_signal("item_selected", 0 if future_above else 1)
+	$"%PastPlacement".item_selected.emit(0 if past_above else 1)
+	$"%FuturePlacement".item_selected.emit(0 if future_above else 1)
 	# Makes sure that the frame and tag scroll bars are in the right place:
-	Global.layer_vbox.call_deferred("emit_signal", "resized")
+	Global.layer_vbox.emit_signal.call_deferred("resized")
 
 
 func _notification(what: int) -> void:

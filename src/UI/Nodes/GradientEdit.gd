@@ -127,7 +127,7 @@ func update_from_value() -> void:
 		if c is GradientCursor:
 			var point: float = c.position.x / x_offset
 			gradient.add_point(point, c.color)
-	emit_signal("updated", gradient, continuous_change)
+	updated.emit(gradient, continuous_change)
 	continuous_change = true
 
 
@@ -197,4 +197,4 @@ func _on_DivideConfirmationDialog_confirmed() -> void:
 	for i in parts + end_point:
 		gradient.add_point(i / parts, colors[i])
 	_create_cursors()
-	emit_signal("updated", gradient, continuous_change)
+	updated.emit(gradient, continuous_change)

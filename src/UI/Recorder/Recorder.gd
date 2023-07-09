@@ -97,7 +97,7 @@ func _on_Timer_timeout() -> void:
 func save_frame(img: Image) -> void:
 	var save_file := str(project.name, "_", frame_captured, ".png")
 	img.save_png(save_dir.path_join(save_file))
-	emit_signal("frame_saved")
+	frame_saved.emit()
 
 
 func _on_frame_saved() -> void:

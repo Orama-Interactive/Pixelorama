@@ -177,8 +177,8 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 	file.close()
 	if empty_project:
 		new_project.change_project()
-		Global.emit_signal("project_changed")
-		Global.emit_signal("cel_changed")
+		Global.project_changed.emit()
+		Global.cel_changed.emit()
 	else:
 		Global.projects.append(new_project)
 		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
@@ -378,7 +378,7 @@ func save_pxo_file(
 	# Check if a file with the same name exists. If it does, rename the new file temporarily.
 	# Needed in case of a crash, so that the old file won't be replaced with an empty one.
 	var temp_path := path
-	var dir := DirAccess.open(path)
+	var dir := DirAccess.open("user://")
 	if dir.file_exists(path):
 		temp_path = path + "1"
 

@@ -257,8 +257,8 @@ func change_project() -> void:
 		camera.rotation = cameras_rotation[i]
 		camera.zoom = cameras_zoom[i]
 		camera.offset = cameras_offset[i]
-		camera.emit_signal("rotation_changed")
-		camera.emit_signal("zoom_changed")
+		camera.rotation_changed.emit()
+		camera.zoom_changed.emit()
 		i += 1
 	Global.tile_mode_offset_dialog.change_mask()
 
@@ -530,7 +530,7 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 		Global.layer_opacity_slider.value = cel_opacity * 100
 	Global.canvas.queue_redraw()
 	Global.transparent_checker.update_rect()
-	Global.emit_signal("cel_changed")
+	Global.cel_changed.emit()
 
 
 func toggle_frame_buttons() -> void:
