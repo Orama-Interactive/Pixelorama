@@ -9,6 +9,7 @@ var _brush_image := Image.new()
 var _orignal_brush_image := Image.new()  # contains the original _brush_image, without resizing
 var _brush_texture := ImageTexture.new()
 var _strength := 1.0
+@warning_ignore("unused_private_class_variable")
 var _picking_color := false
 
 var _undo_data := {}
@@ -592,15 +593,15 @@ func _create_line_indicator(indicator: BitMap, start: Vector2i, end: Vector2i) -
 
 	var offset := indicator.get_size() / 2
 	var diff := end - start
-	start.x = -diff.x if diff.x < 0 else 0.0
-	end.x = 0.0 if diff.x < 0 else diff.x
-	start.y = -diff.y if diff.y < 0 else 0.0
-	end.y = 0.0 if diff.y < 0 else diff.y
+	start.x = -diff.x if diff.x < 0 else 0
+	end.x = 0 if diff.x < 0 else diff.x
+	start.y = -diff.y if diff.y < 0 else 0
+	end.y = 0 if diff.y < 0 else diff.y
 	start += offset
 	end += offset
 
-	var dx := int(abs(end.x - start.x))
-	var dy := int(-abs(end.y - start.y))
+	var dx := absi(end.x - start.x)
+	var dy := -absi(end.y - start.y)
 	var err := dx + dy
 	var e2 := err << 1
 	var sx := 1 if start.x < end.x else -1

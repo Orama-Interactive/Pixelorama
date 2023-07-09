@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _ready() -> void:
-	Global.camera.connect("zoom_changed", Callable(self, "update"))
+	Global.camera.zoom_changed.connect(queue_redraw)
 
 
 func _draw() -> void:

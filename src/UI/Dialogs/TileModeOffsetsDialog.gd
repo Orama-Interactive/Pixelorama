@@ -9,7 +9,7 @@ extends ConfirmationDialog
 
 
 func _ready() -> void:
-	Global.connect("cel_changed", Callable(self, "change_mask"))
+	Global.cel_changed.connect(change_mask)
 	await get_tree().process_frame
 	change_mask()
 
@@ -101,31 +101,29 @@ func _on_TileModeOffsetsDialog_visibility_changed() -> void:
 	Global.dialog_open(false)
 
 
-func _on_TileModeOffsetsDialog_item_rect_changed():
+func _on_TileModeOffsetsDialog_size_changed():
 	if tile_mode:
 		update_preview()
 
 
 func _on_Reset_pressed():
-	var size = Global.current_project.size
-	tile_mode.tiles.x_basis = Vector2(size.x, 0)
-	tile_mode.tiles.y_basis = Vector2(0, size.y)
-	x_basis_x_spinbox.value = size.x
+	tile_mode.tiles.x_basis = Vector2(Global.current_project.size.x, 0)
+	tile_mode.tiles.y_basis = Vector2(0, Global.current_project.size.y)
+	x_basis_x_spinbox.value = Global.current_project.size.x
 	x_basis_y_spinbox.value = 0
 	y_basis_x_spinbox.value = 0
-	y_basis_y_spinbox.value = size.y
+	y_basis_y_spinbox.value = Global.current_project.size.y
 	update_preview()
 
 
 func change_mask():
 	if Global.current_project.tiles.mode == Tiles.MODE.NONE:
 		return
-	var frame_idx = Global.current_project.current_frame
-	var current_frame = Global.current_project.frames[frame_idx]
-	var tiles = Global.current_project.tiles
-	var size = tiles.tile_size
-	var image := Image.new()
-	image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+	var frame_idx := Global.current_project.current_frame
+	var current_frame := Global.current_project.frames[frame_idx]
+	var tiles := Global.current_project.tiles
+	var tiles_size := tiles.tile_size
+	var image := Image.create(tiles_size.x, tiles_size.y, false, Image.FORMAT_RGBA8)
 	Export.blend_all_layers(image, current_frame)
 	if (
 		image.get_used_rect().size == Vector2i.ZERO

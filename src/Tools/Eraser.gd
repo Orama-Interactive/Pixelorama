@@ -1,7 +1,7 @@
 extends "res://src/Tools/Draw.gd"
 
 var _last_position := Vector2.INF
-var _clear_image := Image.new()
+var _clear_image: Image
 var _changed := false
 
 
@@ -19,7 +19,7 @@ class EraseOp:
 
 func _init() -> void:
 	_drawer.color_op = EraseOp.new()
-	_clear_image.create(1, 1, false, Image.FORMAT_RGBA8)
+	_clear_image = Image.create(1, 1, false, Image.FORMAT_RGBA8)
 	_clear_image.fill(Color(0, 0, 0, 0))
 
 

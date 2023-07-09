@@ -32,8 +32,8 @@ var gizmo_rot_z := PackedVector2Array()
 
 func _ready() -> void:
 	set_process_input(false)
-	Global.connect("cel_changed", Callable(self, "_cel_changed"))
-	Global.camera.connect("zoom_changed", Callable(self, "update"))
+	Global.cel_changed.connect(_cel_changed)
+	Global.camera.zoom_changed.connect(queue_redraw)
 
 
 func get_hovering_gizmo(pos: Vector2) -> int:

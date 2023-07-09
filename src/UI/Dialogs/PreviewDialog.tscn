@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://nba3nryom3ud"]
 
 [ext_resource path="res://src/UI/Dialogs/PreviewDialog.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=2]
@@ -12,35 +12,26 @@ custom_minimum_size = Vector2( 550, 70 )
 exclusive = true
 window_title = "Import Options"
 resizable = true
-script = ExtResource( 1 )
+script = ExtResource( "1" )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
 offset_bottom = -36.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-offset_right = 534.0
-offset_bottom = 324.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer"]
-offset_left = 117.0
-offset_top = 12.0
-offset_right = 417.0
-offset_bottom = 312.0
-custom_minimum_size = Vector2( 300, 300 )
-expand = true
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+expand_mode = 1
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RowColumnLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
 unique_name_in_owner = true
@@ -54,83 +45,57 @@ script = ExtResource( 3 )
 
 [node name="ApplyAll" type="CheckBox" parent="VBoxContainer"]
 visible = false
-offset_top = 304.0
-offset_right = 534.0
-offset_bottom = 324.0
+layout_mode = 2
 text = "Apply to all"
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
-offset_top = 328.0
-offset_right = 534.0
-offset_bottom = 342.0
+layout_mode = 2
 theme_override_constants/separation = 32
 
 [node name="ImageSizeLabel" type="Label" parent="VBoxContainer/SizeContainer"]
-offset_right = 118.0
-offset_bottom = 14.0
+layout_mode = 2
 text = "Image Size: 64×64"
 
 [node name="FrameSizeLabel" type="Label" parent="VBoxContainer/SizeContainer"]
 visible = false
-offset_left = 149.0
-offset_right = 266.0
-offset_bottom = 14.0
+layout_mode = 2
 text = "Frame size: 64×64"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-offset_top = 346.0
-offset_right = 534.0
-offset_bottom = 366.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
-offset_top = 3.0
-offset_right = 66.0
-offset_bottom = 17.0
+layout_mode = 2
 text = "Import as:"
 
 [node name="ImportOption" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
-offset_left = 70.0
-offset_right = 151.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
-size_flags_vertical = 0
-text = "New tab"
 
 [node name="SpritesheetTabOptions" type="GridContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
-offset_left = 155.0
-offset_right = 533.0
-offset_bottom = 24.0
+layout_mode = 2
 
 [node name="Manual" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions"]
 margin_right = 378.0
 margin_bottom = 24.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual"]
-offset_top = 5.0
-offset_right = 118.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Horizontal frames:"
 
 [node name="HorizontalFrames" type="SpinBox" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual"]
-offset_left = 122.0
-offset_right = 196.0
-offset_bottom = 24.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual"]
-offset_left = 200.0
-offset_top = 5.0
-offset_right = 300.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Vertical frames:"
 
 [node name="VerticalFrames" type="SpinBox" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual"]
-offset_left = 304.0
-offset_right = 378.0
-offset_bottom = 24.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
@@ -175,93 +140,62 @@ text = "Smart Slice"
 
 [node name="SpritesheetLayerOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
-offset_left = 155.0
-offset_right = 307.0
-offset_bottom = 24.0
+layout_mode = 2
 
 [node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/SpritesheetLayerOptions"]
-offset_top = 5.0
-offset_right = 74.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Start frame:"
 
 [node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/SpritesheetLayerOptions"]
-offset_left = 78.0
-offset_right = 152.0
-offset_bottom = 24.0
+layout_mode = 2
 min_value = 1.0
 value = 1.0
 
 [node name="NewFrameOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
-offset_left = 155.0
-offset_right = 286.0
-offset_bottom = 24.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewFrameOptions"]
-offset_top = 5.0
-offset_right = 53.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "At layer:"
 
 [node name="AtLayerOption" type="OptionButton" parent="VBoxContainer/HBoxContainer/NewFrameOptions"]
-offset_left = 57.0
-offset_right = 86.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
-align = 2
 
 [node name="ReplaceCelOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
-offset_left = 155.0
-offset_right = 427.0
-offset_bottom = 24.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ReplaceCelOptions"]
-offset_top = 5.0
-offset_right = 53.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "At layer:"
 
 [node name="AtLayerOption" type="OptionButton" parent="VBoxContainer/HBoxContainer/ReplaceCelOptions"]
-offset_left = 57.0
-offset_right = 86.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
-align = 2
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/ReplaceCelOptions"]
-offset_left = 135.0
-offset_top = 5.0
-offset_right = 194.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "At frame:"
 
 [node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/ReplaceCelOptions"]
-offset_left = 198.0
-offset_right = 272.0
-offset_bottom = 24.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 min_value = 1.0
-max_value = 0.0
+max_value = 1.0
 value = 1.0
 
 [node name="NewLayerOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
-offset_left = 155.0
-offset_right = 292.0
-offset_bottom = 24.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewLayerOptions"]
-offset_top = 5.0
-offset_right = 59.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "At frame:"
 
 [node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/NewLayerOptions"]
-offset_left = 63.0
-offset_right = 137.0
-offset_bottom = 24.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 1.0
@@ -269,46 +203,29 @@ value = 1.0
 
 [node name="NewBrushOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
 visible = false
-offset_left = 155.0
-offset_right = 324.0
-offset_bottom = 20.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewBrushOptions"]
-offset_top = 3.0
-offset_right = 73.0
-offset_bottom = 17.0
+layout_mode = 2
 text = "Brush type:"
 
 [node name="BrushTypeOption" type="OptionButton" parent="VBoxContainer/HBoxContainer/NewBrushOptions"]
-offset_left = 77.0
-offset_right = 169.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "File brush"
-items = [ "File brush", null, false, 0, null, "Project brush", null, false, 1, null, "Random brush", null, false, 2, null ]
-selected = 0
 
 [node name="BrushName" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/NewBrushOptions"]
 visible = false
-offset_left = 173.0
-offset_right = 316.0
-offset_bottom = 24.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NewBrushOptions/BrushName"]
-offset_top = 5.0
-offset_right = 81.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Brush name:"
 
 [node name="BrushNameLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/NewBrushOptions/BrushName"]
-offset_left = 85.0
-offset_right = 143.0
-offset_bottom = 24.0
+layout_mode = 2
 
 [connection signal="about_to_popup" from="." to="." method="_on_PreviewDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_PreviewDialog_confirmed"]
-[connection signal="item_rect_changed" from="." to="." method="_on_PreviewDialog_item_rect_changed"]
-[connection signal="popup_hide" from="." to="." method="_on_PreviewDialog_popup_hide"]
 [connection signal="toggled" from="VBoxContainer/ApplyAll" to="." method="_on_ApplyAll_toggled"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/ImportOption" to="." method="_on_ImportOption_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]

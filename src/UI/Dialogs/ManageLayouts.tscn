@@ -165,7 +165,7 @@ dialog_text = "Are you sure you want to delete this layout?"
 [connection signal="visibility_changed" from="." to="." method="_on_ManageLayouts_visibility_changed"]
 [connection signal="item_activated" from="VBoxContainer/SavedLayouts" to="." method="_on_SavedLayouts_item_activated"]
 [connection signal="item_selected" from="VBoxContainer/SavedLayouts" to="." method="_on_SavedLayouts_item_selected"]
-[connection signal="nothing_selected" from="VBoxContainer/SavedLayouts" to="." method="_on_SavedLayouts_nothing_selected"]
+[connection signal="empty_clicked" from="VBoxContainer/SavedLayouts" to="." method="_on_SavedLayouts_empty_clicked"]
 [connection signal="pressed" from="VBoxContainer/ButtonsContainer/AddLayout" to="." method="_on_AddLayout_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonsContainer/EditLayout" to="." method="_on_EditLayout_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonsContainer/DeleteLayout" to="." method="_on_DeleteLayout_pressed"]

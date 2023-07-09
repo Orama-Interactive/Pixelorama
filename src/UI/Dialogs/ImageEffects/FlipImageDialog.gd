@@ -28,7 +28,7 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 		var rectangle: Rect2 = Global.canvas.selection.big_bounding_rectangle
 		if project != Global.current_project:
 			rectangle = project.selection_map.get_used_rect()
-		selected = cel.get_rect(rectangle)
+		selected = cel.get_region(rectangle)
 		for x in selected.get_width():
 			for y in selected.get_height():
 				var pos := Vector2(x, y)

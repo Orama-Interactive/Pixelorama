@@ -643,11 +643,10 @@ func open_image_as_spritesheet_layer(
 			var xx: int = (f - start_frame) % horizontal
 			var yy: int = (f - start_frame) / horizontal
 			image.convert(Image.FORMAT_RGBA8)
-			var cropped_image := Image.new()
-			cropped_image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+			var cropped_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
 			cropped_image.blit_rect(
 				image,
-				Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height),
+				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height),
 				Vector2.ZERO
 			)
 			cels.append(PixelCel.new(cropped_image))
@@ -860,7 +859,7 @@ func remove_backup(i: int) -> void:
 
 
 func remove_backup_by_path(project_path: String, backup_path: String) -> void:
-	DirAccess.open(backup_path).remove(backup_path)
+	DirAccess.open("user://").remove(backup_path)
 	if Global.config_cache.has_section_key("backups", project_path):
 		Global.config_cache.erase_section_key("backups", project_path)
 	elif Global.config_cache.has_section_key("backups", backup_path):
@@ -873,7 +872,7 @@ func reload_backup_file(project_paths: Array, backup_paths: Array) -> void:
 	# Clear non-existent backups
 	var existing_backups_count := 0
 	for i in range(backup_paths.size()):
-		var dir := DirAccess.open(backup_paths[i])
+		var dir := DirAccess.open("user://")
 		if dir.file_exists(backup_paths[i]):
 			project_paths[existing_backups_count] = project_paths[i]
 			backup_paths[existing_backups_count] = backup_paths[i]

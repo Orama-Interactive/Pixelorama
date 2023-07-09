@@ -187,19 +187,18 @@ func fill_in_color(position: Vector2) -> void:
 				return
 
 		var selection: Image
-		var selection_tex := ImageTexture.new()
+		var selection_tex: ImageTexture
 		if project.has_selection:
 			selection = project.selection_map
 		else:
-			selection = Image.new()
-			selection.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			selection = Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			selection.fill(Color(1, 1, 1, 1))
 
-		selection_tex.create_from_image(selection)
+		selection_tex = ImageTexture.create_from_image(selection)
 
-		var pattern_tex := ImageTexture.new()
+		var pattern_tex: ImageTexture
 		if _pattern and pattern_image:
-			pattern_tex.create_from_image(pattern_image)
+			pattern_tex = ImageTexture.create_from_image(pattern_image)
 
 		var params := {
 			"size": project.size,
@@ -244,8 +243,7 @@ func fill_in_selection() -> void:
 	var images := _get_selected_draw_images()
 	if _fill_with == FillWith.COLOR or _pattern == null:
 		if project.has_selection:
-			var filler := Image.new()
-			filler.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			var filler := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			filler.fill(tool_slot.color)
 			var rect: Rect2 = Global.canvas.selection.big_bounding_rectangle
 			var selection_map_copy := SelectionMap.new()
@@ -265,15 +263,14 @@ func fill_in_selection() -> void:
 			return
 
 		var selection: Image
-		var selection_tex := ImageTexture.new()
+		var selection_tex: ImageTexture
 		if project.has_selection:
 			selection = project.selection_map
 		else:
-			selection = Image.new()
-			selection.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+			selection = Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			selection.fill(Color(1, 1, 1, 1))
 
-		selection_tex.create_from_image(selection)
+		selection_tex = ImageTexture.create_from_image(selection)
 
 		var pattern_tex: ImageTexture
 		if _pattern and pattern_image:

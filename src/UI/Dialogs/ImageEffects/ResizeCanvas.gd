@@ -15,8 +15,7 @@ var image: Image
 
 func _on_ResizeCanvas_about_to_show() -> void:
 	Global.canvas.selection.transform_content_confirm()
-	image = Image.new()
-	image.create(
+	image = Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
 	)
 
@@ -80,8 +79,7 @@ func _on_CenterButton_pressed() -> void:
 
 func update_preview() -> void:
 	# preview_image is the same as image but offsetted
-	var preview_image := Image.new()
-	preview_image.create(width, height, false, Image.FORMAT_RGBA8)
+	var preview_image := Image.create(width, height, false, Image.FORMAT_RGBA8)
 	preview_image.blend_rect(
 		image, Rect2(Vector2.ZERO, Global.current_project.size), Vector2(offset_x, offset_y)
 	)

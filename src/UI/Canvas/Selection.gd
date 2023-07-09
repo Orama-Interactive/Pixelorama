@@ -697,7 +697,7 @@ func copy() -> void:
 			selection_map_copy.move_bitmap_values(project, false)
 			cl_selection_map = selection_map_copy
 		else:
-			to_copy = image.get_rect(big_bounding_rectangle)
+			to_copy = image.get_region(big_bounding_rectangle)
 			# Remove unincluded pixels if the selection is not a single rectangle
 			var offset_pos := big_bounding_rectangle.position
 			for x in to_copy.get_size().x:
@@ -789,7 +789,7 @@ func paste(in_place := false) -> void:
 	original_offset = project.selection_offset
 	original_bitmap.copy_from(project.selection_map)
 	preview_image.copy_from(original_preview_image)
-	preview_image_texture.create_from_image(preview_image)
+	preview_image_texture = ImageTexture.create_from_image(preview_image)
 	project.selection_map_changed()
 
 
@@ -815,8 +815,7 @@ func delete(selected_cels := true) -> void:
 		images = [project.get_current_cel().get_image()]
 
 	if project.has_selection:
-		var blank := Image.new()
-		blank.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+		var blank := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 		var selection_map_copy := SelectionMap.new()
 		selection_map_copy.copy_from(project.selection_map)
 		# In case the selection map is bigger than the canvas
@@ -851,7 +850,7 @@ func new_brush() -> void:
 				return
 			clipboard.selection_map = selection_map_copy
 	else:
-		brush = image.get_rect(big_bounding_rectangle)
+		brush = image.get_region(big_bounding_rectangle)
 		# Remove unincluded pixels if the selection is not a single rectangle
 		for x in brush.get_size().x:
 			for y in brush.get_size().y:
@@ -865,7 +864,7 @@ func new_brush() -> void:
 					brush.set_pixelv(pos, Color(0))
 
 	if !brush.is_invisible():
-		var brush_used: Image = brush.get_rect(brush.get_used_rect())
+		var brush_used: Image = brush.get_region(brush.get_used_rect())
 		project.brushes.append(brush_used)
 		Brushes.add_project_brush(brush_used)
 
@@ -914,11 +913,10 @@ func clear_selection(use_undo := false) -> void:
 
 func _get_preview_image() -> void:
 	var project: Project = Global.current_project
-	var blended_image := Image.new()
-	blended_image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
+	var blended_image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	Export.blend_selected_cels(blended_image, project.frames[project.current_frame])
 	if original_preview_image.is_empty():
-		original_preview_image = blended_image.get_rect(big_bounding_rectangle)
+		original_preview_image = blended_image.get_region(big_bounding_rectangle)
 		# For non-rectangular selections
 		for x in range(0, big_bounding_rectangle.size.x):
 			for y in range(0, big_bounding_rectangle.size.y):
@@ -930,10 +928,9 @@ func _get_preview_image() -> void:
 			original_preview_image = Image.new()
 			return
 		preview_image.copy_from(original_preview_image)
-		preview_image_texture.create_from_image(preview_image)
+		preview_image_texture = ImageTexture.create_from_image(preview_image)
 
-	var clear_image := Image.new()
-	clear_image.create(
+	var clear_image := Image.create(
 		original_preview_image.get_width(),
 		original_preview_image.get_height(),
 		false,
@@ -955,7 +952,7 @@ func _get_preview_image() -> void:
 func _get_selected_image(cel_image: Image) -> Image:
 	var project: Project = Global.current_project
 	var image := Image.new()
-	image = cel_image.get_rect(big_bounding_rectangle)
+	image = cel_image.get_region(big_bounding_rectangle)
 	# For non-rectangular selections
 	for x in range(0, big_bounding_rectangle.size.x):
 		for y in range(0, big_bounding_rectangle.size.y):
