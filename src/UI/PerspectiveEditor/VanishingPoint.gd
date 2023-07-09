@@ -55,9 +55,9 @@ func initiate(start_data: Dictionary = {}, idx = -1) -> void:
 	else:
 		title.point_text = str("Point: ", get_parent().get_child_count())
 	# connect signals
-	color_picker_button.connect("color_changed", Callable(self, "_on_color_changed"))
-	pos_x.connect("value_changed", Callable(self, "_on_pos_value_changed"))
-	pos_y.connect("value_changed", Callable(self, "_on_pos_value_changed"))
+	color_picker_button.color_changed.connect(_on_color_changed)
+	pos_x.value_changed.connect(_on_pos_value_changed)
+	pos_y.value_changed.connect(_on_pos_value_changed)
 
 
 func update_boundary_color():
@@ -207,9 +207,9 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 		length_slider.value = line_data.length
 
 		line.line_button = line_button  # In case we need to change properties from line
-		angle_slider.connect("value_changed", Callable(self, "angle_changed").bind(line_button))
-		length_slider.connect("value_changed", Callable(self, "length_changed").bind(line_button))
-		remove_button.connect("pressed", Callable(self, "_remove_line_pressed").bind(line_button))
+		angle_slider.value_changed.connect(angle_changed.bind(line_button))
+		length_slider.value_changed.connect(length_changed.bind(line_button))
+		remove_button.pressed.connect(_remove_line_pressed.bind(line_button))
 		perspective_lines.append(line)
 
 

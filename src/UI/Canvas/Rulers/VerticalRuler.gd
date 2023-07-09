@@ -11,7 +11,7 @@ var last: Vector2
 
 
 func _ready() -> void:
-	Global.main_viewport.connect("item_rect_changed", Callable(self, "queue_redraw"))
+	Global.main_viewport.item_rect_changed.connect(queue_redraw)
 
 
 # Code taken and modified from Godot's source code

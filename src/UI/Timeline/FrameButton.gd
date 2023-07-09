@@ -11,8 +11,8 @@ var frame := 0
 func _ready() -> void:
 	custom_minimum_size.x = Global.animation_timeline.cel_size
 	text = str(frame + 1)
-	connect("pressed", Callable(self, "_button_pressed"))
-	connect("mouse_entered", Callable(self, "_update_tooltip"))
+	pressed.connect(_button_pressed)
+	mouse_entered.connect(_update_tooltip)
 
 
 func _update_tooltip() -> void:

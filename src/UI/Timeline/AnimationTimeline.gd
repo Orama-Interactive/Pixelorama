@@ -31,8 +31,8 @@ var frame_button_node = preload("res://src/UI/Timeline/FrameButton.tscn")
 
 
 func _ready() -> void:
-	add_layer_list.get_popup().connect("id_pressed", Callable(self, "add_layer"))
-	frame_scroll_bar.connect("value_changed", Callable(self, "_frame_scroll_changed"))
+	add_layer_list.get_popup().id_pressed.connect(add_layer)
+	frame_scroll_bar.value_changed.connect(_frame_scroll_changed)
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 	fps_spinbox.value = Global.current_project.fps
 	# config loading
@@ -546,15 +546,15 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 		return
 
 	if forward_dir:
-		Global.play_backwards.disconnect("toggled", Callable(self, "_on_PlayBackwards_toggled"))
+		Global.play_backwards.toggled.disconnect(_on_PlayBackwards_toggled)
 		Global.play_backwards.button_pressed = false
 		Global.change_button_texturerect(Global.play_backwards.get_child(0), "play_backwards.png")
-		Global.play_backwards.connect("toggled", Callable(self, "_on_PlayBackwards_toggled"))
+		Global.play_backwards.toggled.connect(_on_PlayBackwards_toggled)
 	else:
-		Global.play_forward.disconnect("toggled", Callable(self, "_on_PlayForward_toggled"))
+		Global.play_forward.toggled.disconnect(_on_PlayForward_toggled)
 		Global.play_forward.button_pressed = false
 		Global.change_button_texturerect(Global.play_forward.get_child(0), "play.png")
-		Global.play_forward.connect("toggled", Callable(self, "_on_PlayForward_toggled"))
+		Global.play_forward.toggled.connect(_on_PlayForward_toggled)
 
 	if play:
 		Global.animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing

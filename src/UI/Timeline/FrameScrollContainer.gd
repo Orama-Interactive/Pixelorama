@@ -8,10 +8,10 @@ const PADDING = 1
 
 func _ready():
 	clip_contents = true
-	connect("sort_children", Callable(self, "_on_sort_children"))
+	sort_children.connect(_on_sort_children)
 	if is_instance_valid(h_scroll_bar):
-		h_scroll_bar.connect("resized", Callable(self, "_update_scroll"))
-		h_scroll_bar.connect("value_changed", Callable(self, "_on_scroll_bar_value_changed"))
+		h_scroll_bar.resized.connect(_update_scroll)
+		h_scroll_bar.value_changed.connect(_on_scroll_bar_value_changed)
 
 
 func _gui_input(event: InputEvent) -> void:

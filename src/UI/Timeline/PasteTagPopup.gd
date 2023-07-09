@@ -3,8 +3,8 @@ extends PopupMenu
 
 func _ready() -> void:
 	var tag_container: Control = Global.animation_timeline.find_child("TagContainer")
-	connect("id_pressed", Callable(self, "_on_TagList_id_pressed"))
-	tag_container.connect("gui_input", Callable(self, "_on_TagContainer_gui_input"))
+	id_pressed.connect(_on_TagList_id_pressed)
+	tag_container.gui_input.connect(_on_TagContainer_gui_input)
 
 
 func _on_TagContainer_gui_input(event: InputEvent) -> void:

@@ -279,7 +279,7 @@ class Slot:
 
 
 func _ready() -> void:
-	Global.connect("cel_changed", Callable(self, "_cel_changed"))
+	Global.cel_changed.connect(_cel_changed)
 	_tool_buttons = Global.control.find_child("ToolButtons")
 	for t in tools:
 		add_tool_button(tools[t])

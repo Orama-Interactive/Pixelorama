@@ -33,7 +33,7 @@ func _on_FrameTagDialog_about_to_show() -> void:
 		var edit_button := Button.new()
 		edit_button.text = "Edit"
 		edit_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		edit_button.connect("pressed", Callable(self, "_on_EditButton_pressed").bind(i, edit_button))
+		edit_button.pressed.connect(_on_EditButton_pressed.bind(i, edit_button))
 		hbox_cont.add_child(edit_button)
 		vbox_cont.add_child(hbox_cont)
 

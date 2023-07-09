@@ -153,13 +153,13 @@ func _on_SizeValue_value_changed(value: float) -> void:
 
 
 func toggle_size_buttons() -> void:
-	portrait_button.disconnect("toggled", Callable(self, "_on_PortraitButton_toggled"))
-	landscape_button.disconnect("toggled", Callable(self, "_on_LandscapeButton_toggled"))
+	portrait_button.toggled.disconnect(_on_PortraitButton_toggled)
+	landscape_button.toggled.disconnect(_on_LandscapeButton_toggled)
 	portrait_button.button_pressed = width_value.value < height_value.value
 	landscape_button.button_pressed = width_value.value > height_value.value
 
-	portrait_button.connect("toggled", Callable(self, "_on_PortraitButton_toggled"))
-	landscape_button.connect("toggled", Callable(self, "_on_LandscapeButton_toggled"))
+	portrait_button.toggled.connect(_on_PortraitButton_toggled)
+	landscape_button.toggled.connect(_on_LandscapeButton_toggled)
 
 
 func _on_TemplatesOptions_item_selected(id: int) -> void:
@@ -209,13 +209,13 @@ func _on_LandscapeButton_toggled(button_pressed: bool) -> void:
 
 
 func switch_width_height() -> void:
-	width_value.disconnect("value_changed", Callable(self, "_on_SizeValue_value_changed"))
-	height_value.disconnect("value_changed", Callable(self, "_on_SizeValue_value_changed"))
+	width_value.value_changed.disconnect(_on_SizeValue_value_changed)
+	height_value.value_changed.disconnect(_on_SizeValue_value_changed)
 
 	var height = height_value.value
 	height_value.value = width_value.value
 	width_value.value = height
 	toggle_size_buttons()
 
-	width_value.connect("value_changed", Callable(self, "_on_SizeValue_value_changed"))
-	height_value.connect("value_changed", Callable(self, "_on_SizeValue_value_changed"))
+	width_value.value_changed.connect(_on_SizeValue_value_changed)
+	height_value.value_changed.connect(_on_SizeValue_value_changed)

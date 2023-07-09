@@ -39,7 +39,7 @@ func add_float_property(prop_name: String, property_node: Range):
 	properties.append(info)
 	resetter_values.append(property_node.value)
 	property_list.add_item(prop_name)
-	property_node.connect("value_changed", Callable(self, "_on_range_node_value_changed"))
+	property_node.value_changed.connect(_on_range_node_value_changed)
 
 
 func get_animated_value(frame_idx: int, property_idx := 0) -> float:
@@ -78,10 +78,10 @@ func _on_Final_value_changed(value: float) -> void:
 func _on_range_node_value_changed(_value) -> void:
 	# Value is changed from outside the Animate Panel
 	if properties[_current_id]["range_node"].value != final_value.value:
-		if final_value.is_connected("value_changed", Callable(self, "_on_Final_value_changed")):
-			final_value.disconnect("value_changed", Callable(self, "_on_Final_value_changed"))
+		if final_value.value_changed.is_connected(_on_Final_value_changed):
+			final_value.value_changed.disconnect(_on_Final_value_changed)
 		final_value.value = properties[_current_id]["range_node"].value
-		final_value.connect("value_changed", Callable(self, "_on_Final_value_changed"))
+		final_value.value_changed.connect(_on_Final_value_changed)
 
 
 func _on_CanAnimate_toggled(button_pressed: bool) -> void:
@@ -102,10 +102,10 @@ func _on_PropertyList_item_selected(index: int) -> void:
 
 
 func _refresh_properties(idx: int):
-	if initial_value.is_connected("value_changed", Callable(self, "_on_Initial_value_changed")):
-		initial_value.disconnect("value_changed", Callable(self, "_on_Initial_value_changed"))
-	if final_value.is_connected("value_changed", Callable(self, "_on_Final_value_changed")):
-		final_value.disconnect("value_changed", Callable(self, "_on_Final_value_changed"))
+	if initial_value.value_changed.is_connected(_on_Initial_value_changed):
+		initial_value.value_changed.disconnect(_on_Initial_value_changed)
+	if final_value.value_changed.is_connected(_on_Final_value_changed):
+		final_value.value_changed.disconnect(_on_Final_value_changed)
 
 	# Nodes setup
 	var property_node: Range = properties[idx]["range_node"]
@@ -132,8 +132,8 @@ func _refresh_properties(idx: int):
 	$"%EaseType".select($"%EaseType".get_item_index(properties[idx]["ease_type"]))
 	$"%TransitionType".select($"%TransitionType".get_item_index(properties[idx]["transition_type"]))
 
-	initial_value.connect("value_changed", Callable(self, "_on_Initial_value_changed"))
-	final_value.connect("value_changed", Callable(self, "_on_Final_value_changed"))
+	initial_value.value_changed.connect(_on_Initial_value_changed)
+	final_value.value_changed.connect(_on_Final_value_changed)
 
 
 func _populate_ease_type():

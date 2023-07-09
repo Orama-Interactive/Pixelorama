@@ -86,43 +86,41 @@ func _input(_event: InputEvent) -> void:
 
 
 func _ready() -> void:
-	Global.connect("cel_changed", Callable(self, "_cel_changed"))
+	Global.cel_changed.connect(_cel_changed)
 	_cel_changed()
 	var new_object_popup := new_object_menu_button.get_popup()
 	for object in _object_names:
-		if object == Cel3DObject.Type.TORUS:  # Remove when Godot 3.6 or 4.0 is used
-			continue
 		new_object_popup.add_item(_object_names[object], object)
-	new_object_popup.connect("id_pressed", Callable(self, "_new_object_popup_id_pressed"))
+	new_object_popup.id_pressed.connect(_new_object_popup_id_pressed)
 	for prop in cel_properties:
 		var node: Control = cel_properties[prop]
 		if node is ValueSliderV3:
-			node.connect("value_changed", Callable(self, "_cel_property_vector3_changed").bind(prop))
+			node.value_changed.connect(_cel_property_vector3_changed.bind(prop))
 		elif node is Range:
-			node.connect("value_changed", Callable(self, "_cel_property_value_changed").bind(prop))
+			node.value_changed.connect(_cel_property_value_changed.bind(prop))
 		elif node is OptionButton:
-			node.connect("item_selected", Callable(self, "_cel_property_item_selected").bind(prop))
+			node.item_selected.connect(_cel_property_item_selected.bind(prop))
 		elif node is ColorPickerButton:
-			node.connect("color_changed", Callable(self, "_cel_property_color_changed").bind(prop))
+			node.color_changed.connect(_cel_property_color_changed.bind(prop))
 	for prop in object_properties:
 		var node: Control = object_properties[prop]
 		if node is ValueSliderV3:
-			node.connect("value_changed", Callable(self, "_object_property_vector3_changed").bind(prop))
+			node.value_changed.connect(_object_property_vector3_changed.bind(prop))
 		elif node is ValueSliderV2:
 			var property_path: String = prop
 			if property_path.ends_with("v2"):
 				property_path = property_path.replace("v2", "")
-			node.connect("value_changed", Callable(self, "_object_property_vector2_changed").bind(property_path))
+			node.value_changed.connect(_object_property_vector2_changed.bind(property_path))
 		elif node is Range:
-			node.connect("value_changed", Callable(self, "_object_property_value_changed").bind(prop))
+			node.value_changed.connect(_object_property_value_changed.bind(prop))
 		elif node is OptionButton:
-			node.connect("item_selected", Callable(self, "_object_property_item_selected").bind(prop))
+			node.item_selected.connect(_object_property_item_selected.bind(prop))
 		elif node is ColorPickerButton:
-			node.connect("color_changed", Callable(self, "_object_property_color_changed").bind(prop))
+			node.color_changed.connect(_object_property_color_changed.bind(prop))
 		elif node is CheckBox:
-			node.connect("toggled", Callable(self, "_object_property_toggled").bind(prop))
+			node.toggled.connect(_object_property_toggled.bind(prop))
 		elif node is LineEdit:
-			node.connect("text_changed", Callable(self, "_object_property_text_changed").bind(prop))
+			node.text_changed.connect(_object_property_text_changed.bind(prop))
 
 
 func draw_start(pos: Vector2) -> void:
@@ -221,10 +219,10 @@ func _cel_changed() -> void:
 	_cel = Global.current_project.get_current_cel()
 	var selected = _cel.selected
 	_cel.selected = null
-	if not _cel.is_connected("scene_property_changed", Callable(self, "_set_cel_node_values")):
-		_cel.connect("scene_property_changed", Callable(self, "_set_cel_node_values"))
-		_cel.connect("objects_changed", Callable(self, "_fill_object_option_button"))
-		_cel.connect("selected_object", Callable(self, "_selected_object"))
+	if not _cel.scene_property_changed.is_connected(_set_cel_node_values):
+		_cel.scene_property_changed.connect(_set_cel_node_values)
+		_cel.objects_changed.connect(_fill_object_option_button)
+		_cel.selected_object.connect(_selected_object)
 	cel_options.visible = true
 	object_options.visible = false
 	_set_cel_node_values()
@@ -316,8 +314,8 @@ func _selected_object(object: Cel3DObject) -> void:
 		mesh_options.visible = object.node3d_type is MeshInstance3D
 		light_options.visible = object.node3d_type is Light3D
 		_set_object_node_values()
-		if not object.is_connected("property_changed", Callable(self, "_set_object_node_values")):
-			object.connect("property_changed", Callable(self, "_set_object_node_values"))
+		if not object.property_changed.is_connected(_set_object_node_values):
+			object.property_changed.connect(_set_object_node_values)
 		object_option_button.select(object_option_button.get_item_index(object.id + 1))
 	else:
 		cel_options.visible = true

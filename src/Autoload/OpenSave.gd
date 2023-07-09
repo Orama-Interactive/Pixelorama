@@ -57,15 +57,11 @@ func handle_loading_file(file: String) -> void:
 			handle_loading_aimg(file, apng_res[1])
 			return
 		# Attempt to load as a regular image.
-		var image := Image.new()
-		var err := image.load(file)
-		if err != OK:  # An error occurred
+		var image := Image.load_from_file(file)
+		if not is_instance_valid(image):  # An error occurred
 			var file_name: String = file.get_file()
 			Global.error_dialog.set_text(
-				(
-					tr("Can't load file '%s'.\nError code: %s")
-					% [file_name, str(err, ErrorManager.parse(err, " (", ")"))]
-				)
+				tr("Can't load file '%s'.") % [file_name]
 			)
 			Global.error_dialog.popup_centered()
 			Global.dialog_open(true)

@@ -24,13 +24,13 @@ func _ready() -> void:
 	set_process_input(false)
 	if index == Cameras.MAIN:
 		rotation_slider = Global.top_menu_container.get_node("%RotationSlider")
-		rotation_slider.connect("value_changed", Callable(self, "_rotation_value_changed"))
+		rotation_slider.value_changed.connect(_rotation_value_changed)
 		zoom_slider = Global.top_menu_container.get_node("%ZoomSlider")
-		zoom_slider.connect("value_changed", Callable(self, "_zoom_value_changed"))
+		zoom_slider.value_changed.connect(_zoom_value_changed)
 		set_zoom_max_value()
-	connect("zoom_changed", Callable(self, "_zoom_changed"))
-	connect("rotation_changed", Callable(self, "_rotation_changed"))
-	ignore_rotation =true # reversed "rotating" for Camera2D
+	zoom_changed.connect(_zoom_changed)
+	rotation_changed.connect(_rotation_changed)
+	ignore_rotation = true # reversed "rotating" for Camera2D
 	viewport_container = get_parent().get_parent()
 	transparent_checker = get_parent().get_node("TransparentChecker")
 	update_transparent_checker_offset()
@@ -59,7 +59,7 @@ func _zoom_value_changed(value: float) -> void:
 		return
 	if Global.smooth_zoom and should_tween:
 		var tween := create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
-		tween.connect("step_finished", Callable(self, "_on_tween_step"))
+		tween.step_finished.connect(_on_tween_step)
 		tween.tween_property(self, "zoom", new_zoom, 0.05)
 	else:
 		zoom = new_zoom
@@ -148,7 +148,7 @@ func zoom_camera(dir: int) -> void:
 			)
 			var tween := create_tween().set_parallel()
 			tween.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
-			tween.connect("step_finished", Callable(self, "_on_tween_step"))
+			tween.step_finished.connect(_on_tween_step)
 			tween.tween_property(self, "zoom", new_zoom, 0.05)
 			tween.tween_property(self, "offset", new_offset, 0.05)
 	else:

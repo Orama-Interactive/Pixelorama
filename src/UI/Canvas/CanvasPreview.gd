@@ -15,7 +15,7 @@ var frame_index := 0
 
 
 func _ready() -> void:
-	Global.connect("cel_changed", Callable(self, "_cel_changed"))
+	Global.cel_changed.connect(_cel_changed)
 
 
 func _draw() -> void:

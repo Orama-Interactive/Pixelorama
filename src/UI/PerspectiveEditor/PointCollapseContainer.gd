@@ -9,7 +9,7 @@ extends Button
 
 func _ready() -> void:
 	_set_visible(button_pressed)
-	content.connect("visibility_changed", Callable(self, "_child_visibility_changed"))
+	content.visibility_changed.connect(_child_visibility_changed)
 
 
 func _set_text(value: String) -> void:
