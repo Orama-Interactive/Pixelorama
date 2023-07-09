@@ -435,7 +435,7 @@ func add_brush() -> void:
 		if !dir.dir_exists(brush_name):
 			dir.make_dir(brush_name)
 
-		dir.open(Global.directory_module.xdg_data_home.path_join("Brushes").path_join(brush_name))
+		dir = DirAccess.open(Global.directory_module.xdg_data_home.path_join("Brushes").path_join(brush_name))
 		var random_brushes := []
 		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var curr_file := dir.get_next()

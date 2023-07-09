@@ -20,7 +20,7 @@ var current_frame := 0
 var current_layer := 0
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
 
-var animation_tags := []: set = _animation_tags_changed
+var animation_tags: Array[AnimationTag] = []: set = _animation_tags_changed
 var guides: Array[Guide] = []
 var brushes: Array[Image] = []
 var reference_images: Array[ReferenceImage] = []

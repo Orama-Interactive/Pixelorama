@@ -275,9 +275,9 @@ func fill_in_selection() -> void:
 
 		selection_tex.create_from_image(selection)
 
-		var pattern_tex := ImageTexture.new()
+		var pattern_tex: ImageTexture
 		if _pattern and pattern_image:
-			pattern_tex.create_from_image(pattern_image)
+			pattern_tex = ImageTexture.create_from_image(pattern_image)
 
 		var params := {
 			"selection": selection_tex,
