@@ -19,35 +19,35 @@ func _exit_tree() -> void:
 	_crop.tool_count -= 1
 
 
-func draw_start(position: Vector2) -> void:
-	super.draw_start(position)
-	_offset = position - _crop.rect.position
-	_start_pos = position
+func draw_start(pos: Vector2) -> void:
+	super.draw_start(pos)
+	_offset = pos - _crop.rect.position
+	_start_pos = pos
 
 
-func draw_move(position: Vector2) -> void:
-	super.draw_move(position)
+func draw_move(pos: Vector2) -> void:
+	super.draw_move(pos)
 	if _crop.locked_size:
-		_crop.rect.position = position - _offset
+		_crop.rect.position = pos - _offset
 	else:
 		if _crop.mode == CropRect.Mode.POSITION_SIZE and _locked_ratio:
 			var ratio: Vector2 = $"%Size".ratio
-			var distance := absf(_start_pos.x - position.x) + absf(_start_pos.y - position.y)
+			var distance := absf(_start_pos.x - pos.x) + absf(_start_pos.y - pos.y)
 			_crop.rect.size.x = round(distance * ratio.x / (ratio.x + ratio.y))
 			_crop.rect.size.y = round(distance * ratio.y / (ratio.x + ratio.y))
-			if _start_pos.x < position.x:
+			if _start_pos.x < pos.x:
 				_crop.rect.position.x = _start_pos.x
 			else:
 				_crop.rect.position.x = _start_pos.x - _crop.rect.size.x
-			if _start_pos.y < position.y:
+			if _start_pos.y < pos.y:
 				_crop.rect.position.y = _start_pos.y
 			else:
 				_crop.rect.position.y = _start_pos.y - _crop.rect.size.y
 		else:
-			_crop.rect.position.x = min(_start_pos.x, position.x)
-			_crop.rect.position.y = min(_start_pos.y, position.y)
-			_crop.rect.end.x = max(_start_pos.x, position.x)
-			_crop.rect.end.y = max(_start_pos.y, position.y)
+			_crop.rect.position.x = min(_start_pos.x, pos.x)
+			_crop.rect.position.y = min(_start_pos.y, pos.y)
+			_crop.rect.end.x = max(_start_pos.x, pos.x)
+			_crop.rect.end.y = max(_start_pos.y, pos.y)
 		# Ensure that the size is at least 1:
 		_crop.rect.size.x = max(1, _crop.rect.size.x)
 		_crop.rect.size.y = max(1, _crop.rect.size.y)

@@ -1,23 +1,23 @@
 extends "res://src/Tools/ShapeDrawer.gd"
 
 
-func _get_shape_points_filled(size: Vector2) -> PackedVector2Array:
-	return DrawingAlgos.get_ellipse_points_filled(Vector2.ZERO, size, _thickness)
+func _get_shape_points_filled(shape_size: Vector2) -> PackedVector2Array:
+	return DrawingAlgos.get_ellipse_points_filled(Vector2.ZERO, shape_size, _thickness)
 
 
-func _get_shape_points(size: Vector2) -> PackedVector2Array:
+func _get_shape_points(shape_size: Vector2) -> PackedVector2Array:
 	# Return ellipse with thickness 1
 	if _thickness == 1:
-		return PackedVector2Array(DrawingAlgos.get_ellipse_points(Vector2.ZERO, size))
+		return PackedVector2Array(DrawingAlgos.get_ellipse_points(Vector2.ZERO, shape_size))
 
 	var size_offset := Vector2.ONE * (_thickness - 1)
-	var new_size := size + size_offset
+	var new_size := shape_size + size_offset
 	var inner_ellipse_size := new_size - size_offset
 
 	# The inner ellipse is to small to create a gap in the middle of the ellipse,
 	# just return a filled ellipse
 	if inner_ellipse_size.x <= 2 and inner_ellipse_size.y <= 2:
-		return _get_shape_points_filled(size)
+		return _get_shape_points_filled(shape_size)
 
 	# Adapted scanline algorithm to fill between 2 ellipses, to create a thicker ellipse
 	var res_array := []
@@ -35,12 +35,12 @@ func _get_shape_points(size: Vector2) -> PackedVector2Array:
 
 	for s in range(ceil(smallest_side / 2)):
 		if s <= ie_relevant_offset_side:
-			var draw := false
+			var can_draw := false
 			for l in range(h_ls_c):
 				var pos := scan_dir * l + iscan_dir * s
 				if bitmap.get_bitv(pos):
-					draw = true
-				if draw:
+					can_draw = true
+				if can_draw:
 					var mirror_smallest_side := iscan_dir * (smallest_side - 1 - 2 * s)
 					var mirror_largest_side := scan_dir * (largest_side - 1 - 2 * l)
 					res_array.append(pos)

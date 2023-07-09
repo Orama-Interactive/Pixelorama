@@ -1,6 +1,6 @@
 extends SelectionTool
 
-var _brush_size: int = 2
+var _brush_size := 2
 var _brush := Brushes.get_default_brush()
 var _indicator := BitMap.new()
 var _polylines := []
@@ -32,44 +32,44 @@ func update_config() -> void:
 	update_brush()
 
 
-func draw_start(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_start(position)
+func draw_start(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_start(pos)
 	if !_move:
-		_draw_points.append_array(draw_tool(position))
-		_last_position = position
+		_draw_points.append_array(draw_tool(pos))
+		_last_position = pos
 
 
-func draw_move(position: Vector2) -> void:
+func draw_move(pos: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
-	position = snap_position(position)
-	super.draw_move(position)
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if !_move:
-		append_gap(_last_position, position)
-		_last_position = position
-		_draw_points.append_array(draw_tool(position))
-		_offset = position
+		append_gap(_last_position, pos)
+		_last_position = pos
+		_draw_points.append_array(draw_tool(pos))
+		_offset = pos
 
 
-func draw_end(position: Vector2) -> void:
+func draw_end(pos: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
-	position = snap_position(position)
+	pos = snap_position(pos)
 	if !_move:
-		_draw_points.append_array(draw_tool(position))
-	super.draw_end(position)
+		_draw_points.append_array(draw_tool(pos))
+	super.draw_end(pos)
 
 
 func draw_preview() -> void:
 	if _last_position != Vector2.INF and !_move:
 		var canvas: Node2D = Global.canvas.previews
-		var position := canvas.position
-		var scale := canvas.scale
+		var pos := canvas.position
+		var _scale := canvas.scale
 		if Global.mirror_view:
-			position.x = position.x + Global.current_project.size.x
-			scale.x = -1
-		canvas.draw_set_transform(position, canvas.rotation, scale)
+			pos.x = pos.x + Global.current_project.size.x
+			_scale.x = -1
+		canvas.draw_set_transform(pos, canvas.rotation, _scale)
 		var indicator := _fill_bitmap_with_points(_draw_points, Global.current_project.size)
 
 		for line in _create_polylines(indicator):
@@ -101,8 +101,8 @@ func draw_preview() -> void:
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
-func apply_selection(_position) -> void:
-	super.apply_selection(_position)
+func apply_selection(pos) -> void:
+	super.apply_selection(pos)
 	var project: Project = Global.current_project
 	var cleared := false
 	if !_add and !_subtract and !_intersect:
@@ -137,9 +137,9 @@ func apply_selection(_position) -> void:
 
 func paint_selection(selection_map: SelectionMap, points: PackedVector2Array) -> void:
 	var project: Project = Global.current_project
-	var size := selection_map.get_size()
+	var selection_size := selection_map.get_size()
 	for point in points:
-		if point.x < 0 or point.y < 0 or point.x >= size.x or point.y >= size.y:
+		if point.x < 0 or point.y < 0 or point.x >= selection_size.x or point.y >= selection_size.y:
 			continue
 		if _intersect:
 			if project.selection_map.is_pixel_selected(point):
@@ -151,8 +151,8 @@ func paint_selection(selection_map: SelectionMap, points: PackedVector2Array) ->
 # Bresenham's Algorithm
 # Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
 func append_gap(start: Vector2, end: Vector2) -> void:
-	var dx := int(abs(end.x - start.x))
-	var dy := int(-abs(end.y - start.y))
+	var dx := absi(end.x - start.x)
+	var dy := -absi(end.y - start.y)
 	var err := dx + dy
 	var e2 := err << 1
 	var sx = 1 if start.x < end.x else -1
@@ -186,9 +186,9 @@ func mirror_array(array: Array, h: bool, v: bool) -> Array:
 	return new_array
 
 
-func draw_tool(position: Vector2) -> PackedVector2Array:
+func draw_tool(pos: Vector2) -> PackedVector2Array:
 	_prepare_tool()
-	return _draw_tool(position)
+	return _draw_tool(pos)
 
 
 func _prepare_tool() -> void:
@@ -212,21 +212,21 @@ func _prepare_circle_tool(fill: bool) -> void:
 
 # Make sure to always have invoked _prepare_tool() before this. This computes the coordinates to be
 # drawn if it can (except for the generic brush, when it's actually drawing them)
-func _draw_tool(position: Vector2) -> PackedVector2Array:
+func _draw_tool(pos: Vector2) -> PackedVector2Array:
 	match _brush.type:
 		Brushes.PIXEL:
-			return _compute_draw_tool_pixel(position)
+			return _compute_draw_tool_pixel(pos)
 		Brushes.CIRCLE:
-			return _compute_draw_tool_circle(position, false)
+			return _compute_draw_tool_circle(pos, false)
 		Brushes.FILLED_CIRCLE:
-			return _compute_draw_tool_circle(position, true)
+			return _compute_draw_tool_circle(pos, true)
 		_:
-			return _compute_draw_tool_brush(position)
+			return _compute_draw_tool_brush(pos)
 
 
-func _compute_draw_tool_pixel(position: Vector2) -> PackedVector2Array:
+func _compute_draw_tool_pixel(pos: Vector2) -> PackedVector2Array:
 	var result := PackedVector2Array()
-	var start := position - Vector2.ONE * (_brush_size >> 1)
+	var start := pos - Vector2.ONE * (_brush_size >> 1)
 	var end := start + Vector2.ONE * _brush_size
 	for y in range(start.y, end.y):
 		for x in range(start.x, end.x):
@@ -236,31 +236,31 @@ func _compute_draw_tool_pixel(position: Vector2) -> PackedVector2Array:
 
 
 # Compute the array of coordinates that should be drawn
-func _compute_draw_tool_circle(position: Vector2, fill := false) -> PackedVector2Array:
-	var size := Vector2(_brush_size, _brush_size)
-	var pos = position - (size / 2).floor()
+func _compute_draw_tool_circle(pos: Vector2, fill := false) -> PackedVector2Array:
+	var brush_size := Vector2(_brush_size, _brush_size)
+	var offset_pos := pos - (brush_size / 2).floor()
 	if _circle_tool_shortcut:
-		return _draw_tool_circle_from_map(position)
+		return _draw_tool_circle_from_map(pos)
 
 	var result := PackedVector2Array()
 	if fill:
-		result = DrawingAlgos.get_ellipse_points_filled(pos, size)
+		result = DrawingAlgos.get_ellipse_points_filled(offset_pos, brush_size)
 	else:
-		result = DrawingAlgos.get_ellipse_points(pos, size)
+		result = DrawingAlgos.get_ellipse_points(offset_pos, brush_size)
 	return result
 
 
-func _draw_tool_circle_from_map(position: Vector2) -> PackedVector2Array:
+func _draw_tool_circle_from_map(pos: Vector2) -> PackedVector2Array:
 	var result := PackedVector2Array()
 	for displacement in _circle_tool_shortcut:
-		result.append(position + displacement)
+		result.append(pos + displacement)
 	return result
 
 
-func _compute_draw_tool_brush(position: Vector2i) -> PackedVector2Array:
+func _compute_draw_tool_brush(pos: Vector2i) -> PackedVector2Array:
 	var result := PackedVector2Array()
 	var brush_mask := BitMap.new()
-	var pos := position - (_indicator.get_size() / 2)
+	pos = pos - (_indicator.get_size() / 2)
 	brush_mask.create_from_image_alpha(_brush_image, 0.0)
 	for x in brush_mask.get_size().x:
 		for y in brush_mask.get_size().y:
@@ -328,10 +328,10 @@ func update_brush() -> void:
 
 
 func _create_blended_brush_image(image: Image) -> Image:
-	var size := image.get_size() * _brush_size
+	var brush_size := image.get_size() * _brush_size
 	var brush := Image.new()
 	brush.copy_from(image)
-	brush.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+	brush.resize(brush_size.x, brush_size.y, Image.INTERPOLATE_NEAREST)
 	return brush
 
 
@@ -347,17 +347,18 @@ func _create_brush_indicator() -> BitMap:
 			return _create_image_indicator(_brush_image)
 
 
-func _create_pixel_indicator(size: int) -> BitMap:
+func _create_pixel_indicator(brush_size: int) -> BitMap:
 	var bitmap := BitMap.new()
-	bitmap.create(Vector2.ONE * size)
+	bitmap.create(Vector2.ONE * brush_size)
 	bitmap.set_bit_rect(Rect2(Vector2.ZERO, Vector2.ONE * size), true)
 	return bitmap
 
 
-func _create_circle_indicator(size: int, fill := false) -> BitMap:
+func _create_circle_indicator(brush_size: int, fill := false) -> BitMap:
 	_circle_tool_shortcut = PackedVector2Array()
-	var diameter := Vector2(size, size) * 2 + Vector2.ONE
-	return _fill_bitmap_with_points(_compute_draw_tool_circle(Vector2(size, size), fill), diameter)
+	var brush_size_v2 := Vector2(brush_size, brush_size)
+	var diameter := brush_size_v2 * 2 + Vector2.ONE
+	return _fill_bitmap_with_points(_compute_draw_tool_circle(brush_size_v2, fill), diameter)
 
 
 func _create_image_indicator(image: Image) -> BitMap:
@@ -371,11 +372,11 @@ func draw_indicator(left: bool) -> void:
 	draw_indicator_at(_cursor, Vector2.ZERO, color)
 
 
-func draw_indicator_at(position: Vector2i, offset: Vector2i, color: Color) -> void:
+func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
 	var canvas = Global.canvas.indicators
-	position -= _indicator.get_size() / 2
-	position -= offset
-	canvas.draw_set_transform(position, canvas.rotation, canvas.scale)
+	pos -= _indicator.get_size() / 2
+	pos -= offset
+	canvas.draw_set_transform(pos, canvas.rotation, canvas.scale)
 	var polylines := _polylines
 	for line in polylines:
 		var pool := PackedVector2Array(line)

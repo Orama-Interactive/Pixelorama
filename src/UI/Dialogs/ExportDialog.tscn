@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://clgu8wb5o6oup"]
 
 [ext_resource type="Script" path="res://src/UI/Dialogs/ExportDialog.gd" id="1"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2"]
 [ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="3"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4"]
 
@@ -129,6 +129,7 @@ text = "Resize:"
 [node name="Resize" type="TextureProgressBar" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 50.0

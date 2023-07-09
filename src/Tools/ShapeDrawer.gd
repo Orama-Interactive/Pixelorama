@@ -81,12 +81,12 @@ func _input(event: InputEvent) -> void:
 			_displace_origin = false
 
 
-func draw_start(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_start(position)
+func draw_start(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_start(pos)
 	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
-		_pick_color(position)
+		_pick_color(pos)
 		return
 	_picking_color = false
 
@@ -95,35 +95,35 @@ func draw_start(position: Vector2) -> void:
 
 	if Global.mirror_view:
 		# mirroring position is ONLY required by "Preview"
-		position.x = Global.current_project.size.x - position.x - 1
-	_start = position
-	_offset = position
-	_dest = position
+		pos.x = Global.current_project.size.x - pos.x - 1
+	_start = pos
+	_offset = pos
+	_dest = pos
 	_drawing = true
 
 
-func draw_move(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_move(position)
+func draw_move(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released draw_color_picker (Alt)
 		if Input.is_action_pressed("draw_color_picker"):
-			_pick_color(position)
+			_pick_color(pos)
 		return
 
 	if _drawing:
 		if Global.mirror_view:
 			# mirroring position is ONLY required by "Preview"
-			position.x = Global.current_project.size.x - position.x - 1
+			pos.x = Global.current_project.size.x - pos.x - 1
 		if _displace_origin:
-			_start += position - _offset
-		_dest = position
-		_offset = position
-		_set_cursor_text(_get_result_rect(_start, position))
+			_start += pos - _offset
+		_dest = pos
+		_offset = pos
+		_set_cursor_text(_get_result_rect(_start, pos))
 
 
-func draw_end(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_end(position)
+func draw_end(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_end(pos)
 	if _picking_color:
 		return
 
@@ -137,8 +137,8 @@ func draw_end(position: Vector2) -> void:
 				_start.x += 1
 				_offset.x += 1
 				_dest.x += 1
-				position.x += 1
-		_draw_shape(_start, position)
+				pos.x += 1
+		_draw_shape(_start, pos)
 
 		_start = Vector2.ZERO
 		_dest = Vector2.ZERO
@@ -213,8 +213,8 @@ func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
 	return rect
 
 
-func _get_points(size: Vector2) -> PackedVector2Array:
-	return _get_shape_points_filled(size) if _fill else _get_shape_points(size)
+func _get_points(shape_size: Vector2) -> PackedVector2Array:
+	return _get_shape_points_filled(shape_size) if _fill else _get_shape_points(shape_size)
 
 
 func _set_cursor_text(rect: Rect2) -> void:

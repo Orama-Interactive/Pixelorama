@@ -125,7 +125,7 @@ func _ready() -> void:
 			node.connect("text_changed", Callable(self, "_object_property_text_changed").bind(prop))
 
 
-func draw_start(position: Vector2) -> void:
+func draw_start(pos: Vector2) -> void:
 	var project: Project = Global.current_project
 	if not project.get_current_cel() is Cel3D:
 		return
@@ -146,7 +146,7 @@ func draw_start(position: Vector2) -> void:
 	if is_instance_valid(_hovering):
 		_cel.selected = _hovering
 		_dragging = true
-		_prev_mouse_pos = position
+		_prev_mouse_pos = pos
 	else:  # We're not hovering
 		if is_instance_valid(_cel.selected):
 			# If we're not clicking on a gizmo, unselect
@@ -154,19 +154,19 @@ func draw_start(position: Vector2) -> void:
 				_cel.selected = null
 			else:
 				_dragging = true
-				_prev_mouse_pos = position
+				_prev_mouse_pos = pos
 
 
-func draw_move(position: Vector2) -> void:
+func draw_move(pos: Vector2) -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
 	var camera: Camera3D = _cel.camera
 	if _dragging:
 		_has_been_dragged = true
-		var proj_mouse_pos := camera.project_position(position, camera.position.z)
+		var proj_mouse_pos := camera.project_position(pos, camera.position.z)
 		var proj_prev_mouse_pos := camera.project_position(_prev_mouse_pos, camera.position.z)
 		_cel.selected.change_transform(proj_mouse_pos, proj_prev_mouse_pos)
-		_prev_mouse_pos = position
+		_prev_mouse_pos = pos
 	sprite_changed_this_frame()
 
 
@@ -181,14 +181,14 @@ func draw_end(_position: Vector2) -> void:
 	sprite_changed_this_frame()
 
 
-func cursor_move(position: Vector2) -> void:
-	super.cursor_move(position)
+func cursor_move(pos: Vector2) -> void:
+	super.cursor_move(pos)
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
 	# Hover logic
 	var camera: Camera3D = _cel.camera
-	var ray_from := camera.project_ray_origin(position)
-	var ray_to := ray_from + camera.project_ray_normal(position) * 20
+	var ray_from := camera.project_ray_origin(pos)
+	var ray_to := ray_from + camera.project_ray_normal(pos) * 20
 	var space_state := camera.get_world_3d().direct_space_state
 	var selection := space_state.intersect_ray(PhysicsRayQueryParameters3D.create(ray_from, ray_to))
 	if selection.is_empty():

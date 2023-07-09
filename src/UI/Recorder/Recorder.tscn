@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bgfqvkmstecr5" path="res://assets/graphics/recorder/start.png" id="1"]
 [ext_resource type="Script" path="res://src/UI/Recorder/Recorder.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://dinubfua8gqhw" path="res://assets/graphics/timeline/expandable.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://cseq7ckdh0ano" path="res://addons/keychain/assets/folder.svg" id="4"]
+[ext_resource type="Texture2D" uid="uid://b0gbmkb8xwksb" path="res://addons/keychain/assets/folder.svg" id="4"]
 
 [node name="Recorder" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 36)

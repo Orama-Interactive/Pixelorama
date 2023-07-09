@@ -1,22 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bkr47ocij684y"]
 
-[ext_resource path="res://src/UI/Dialogs/ImageEffects/ShaderEffect.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=2]
+[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/ShaderEffect.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2"]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id="1"]
 
 [node name="ShaderEffect" type="ConfirmationDialog"]
-offset_right = 200.0
-offset_bottom = 228.0
-custom_minimum_size = Vector2( 400, 300 )
-window_title = "Shader"
-resizable = true
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
@@ -25,62 +18,43 @@ offset_right = -8.0
 offset_bottom = -36.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-offset_right = 442.0
-offset_bottom = 31.0
+layout_mode = 2
 text = "This is an experimental feature and may not be included in the stable version"
-autowrap = true
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-offset_top = 35.0
-offset_right = 442.0
-offset_bottom = 235.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-material = SubResource( 1 )
-offset_left = 121.0
-offset_right = 321.0
-offset_bottom = 200.0
-custom_minimum_size = Vector2( 200, 200 )
-expand = true
+material = SubResource("1")
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+expand_mode = 1
 stretch_mode = 5
 
-[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 2 )]
+[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource("2")]
 show_behind_parent = true
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 0.0
 offset_bottom = 0.0
 
 [node name="ChooseShader" type="Button" parent="VBoxContainer"]
-offset_top = 239.0
-offset_right = 442.0
-offset_bottom = 259.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Choose Shader"
 
 [node name="ShaderLoadedLabel" type="Label" parent="VBoxContainer"]
-offset_top = 263.0
-offset_right = 442.0
-offset_bottom = 277.0
+layout_mode = 2
 text = "No shader loaded!"
-autowrap = true
 
 [node name="ShaderParams" type="VBoxContainer" parent="VBoxContainer"]
-offset_top = 281.0
-offset_right = 442.0
-offset_bottom = 281.0
+layout_mode = 2
 
 [node name="FileDialog" type="FileDialog" parent="."]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 450.0
-offset_bottom = 289.0
-window_title = "Open a File"
-resizable = true
-mode = 0
 access = 2
-filters = PackedStringArray( "*shader; Godot Shader File" )
+filters = PackedStringArray("*shader; Godot Shader File")
 show_hidden_files = true
 
 [connection signal="pressed" from="VBoxContainer/ChooseShader" to="." method="_on_ChooseShader_pressed"]

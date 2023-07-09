@@ -205,12 +205,12 @@ func update_strength() -> void:
 	_drawer.color_op.value_amount = _value_amount
 
 
-func draw_start(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_start(position)
+func draw_start(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_start(pos)
 	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
-		_pick_color(position)
+		_pick_color(pos)
 		return
 	_picking_color = false
 
@@ -226,43 +226,43 @@ func draw_start(position: Vector2) -> void:
 	if _draw_line:
 		if Global.mirror_view:
 			# mirroring position is ONLY required by "Preview"
-			position.x = (Global.current_project.size.x - 1) - position.x
-		_line_start = position
-		_line_end = position
+			pos.x = (Global.current_project.size.x - 1) - pos.x
+		_line_start = pos
+		_line_end = pos
 		update_line_polylines(_line_start, _line_end)
 	else:
-		draw_tool(position)
-		_last_position = position
+		draw_tool(pos)
+		_last_position = pos
 		Global.canvas.sprite_changed_this_frame = true
 	cursor_text = ""
 
 
-func draw_move(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_move(position)
+func draw_move(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("draw_color_picker"):
-			_pick_color(position)
+			_pick_color(pos)
 		return
 
 	if _draw_line:
 		if Global.mirror_view:
 			# mirroring position is ONLY required by "Preview"
-			position.x = (Global.current_project.size.x - 1) - position.x
-		var d := _line_angle_constraint(_line_start, position)
+			pos.x = (Global.current_project.size.x - 1) - pos.x
+		var d := _line_angle_constraint(_line_start, pos)
 		_line_end = d.position
 		cursor_text = d.text
 		update_line_polylines(_line_start, _line_end)
 	else:
-		draw_fill_gap(_last_position, position)
-		_last_position = position
+		draw_fill_gap(_last_position, pos)
+		_last_position = pos
 		cursor_text = ""
 		Global.canvas.sprite_changed_this_frame = true
 
 
-func draw_end(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_end(position)
+func draw_end(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_end(pos)
 	if _picking_color:
 		return
 

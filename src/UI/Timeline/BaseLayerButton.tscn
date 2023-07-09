@@ -1,50 +1,44 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bai814sqvk68f"]
 
-[ext_resource path="res://src/UI/Timeline/LayerButton.gd" type="Script" id=1]
-[ext_resource path="res://assets/graphics/layers/layer_visible.png" type="Texture2D" id=2]
-[ext_resource path="res://assets/graphics/layers/unlock.png" type="Texture2D" id=3]
+[ext_resource type="Script" path="res://src/UI/Timeline/LayerButton.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c2b3htff5yox8" path="res://assets/graphics/layers/layer_visible.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dhc0pnnqojd2m" path="res://assets/graphics/layers/unlock.png" id="3"]
 
 [node name="BaseLayerButton" type="Button"]
+custom_minimum_size = Vector2(205, 36)
 offset_right = 200.0
 offset_bottom = 36.0
-custom_minimum_size = Vector2( 205, 36 )
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 action_mode = 0
-focus_mode = 0
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_horizontal_guides_": [  ]
-}
+script = ExtResource("1")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 0
 
 [node name="EmptySpacer" type="Control" parent="HBoxContainer"]
-offset_bottom = 36.0
+layout_mode = 2
 mouse_filter = 2
 
 [node name="LayerButtons" type="HBoxContainer" parent="HBoxContainer"]
-offset_left = 4.0
-offset_right = 122.0
-offset_bottom = 36.0
-custom_minimum_size = Vector2( 118, 0 )
+custom_minimum_size = Vector2(118, 0)
+layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="ExpandButton" type="Button" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
-offset_top = 7.0
-offset_right = 22.0
-offset_bottom = 29.0
-custom_minimum_size = Vector2( 22, 22 )
-tooltip_text = "Expand/collapse group"
-mouse_default_cursor_shape = 2
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+tooltip_text = "Expand/collapse group"
+mouse_default_cursor_shape = 2
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/LayerButtons/ExpandButton"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -55,23 +49,18 @@ offset_right = 11.0
 offset_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VisibilityButton" type="Button" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
-offset_left = 32.0
-offset_top = 7.0
-offset_right = 54.0
-offset_bottom = 29.0
-custom_minimum_size = Vector2( 22, 22 )
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 tooltip_text = "Toggle layer's visibility"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/LayerButtons/VisibilityButton"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -82,24 +71,19 @@ offset_right = 11.0
 offset_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource("2")
 
 [node name="LockButton" type="Button" parent="HBoxContainer/LayerButtons" groups=["UIButtons"]]
-offset_left = 64.0
-offset_top = 7.0
-offset_right = 86.0
-offset_bottom = 29.0
-custom_minimum_size = Vector2( 22, 22 )
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 tooltip_text = "Lock/unlock layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/LayerButtons/LockButton"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -110,39 +94,27 @@ offset_right = 11.0
 offset_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource("3")
 
 [node name="LayerName" type="HBoxContainer" parent="HBoxContainer"]
-offset_left = 126.0
-offset_right = 205.0
-offset_bottom = 36.0
-pivot_offset = Vector2( -187, -9 )
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HierarchySpacer" type="Control" parent="HBoxContainer/LayerName"]
-offset_bottom = 36.0
+layout_mode = 2
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/LayerName"]
-offset_left = 4.0
-offset_top = 11.0
-offset_right = 75.0
-offset_bottom = 25.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Layer 0"
 clip_text = true
 
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer/LayerName"]
 visible = false
-offset_left = 30.0
-offset_top = 2.0
-offset_right = 110.0
-offset_bottom = 34.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Layer 0"
@@ -151,9 +123,7 @@ caret_blink = true
 caret_blink_interval = 0.5
 
 [node name="EmptySpacer" type="Control" parent="HBoxContainer/LayerName"]
-offset_left = 79.0
-offset_right = 79.0
-offset_bottom = 36.0
+layout_mode = 2
 mouse_filter = 2
 
 [connection signal="gui_input" from="." to="." method="_on_LayerContainer_gui_input"]

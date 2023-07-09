@@ -34,12 +34,12 @@ func set_config(config: Dictionary) -> void:
 	_strength = config.get("strength", _strength)
 
 
-func draw_start(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_start(position)
+func draw_start(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_start(pos)
 	if Input.is_action_pressed("draw_color_picker"):
 		_picking_color = true
-		_pick_color(position)
+		_pick_color(pos)
 		return
 	_picking_color = false
 
@@ -55,43 +55,43 @@ func draw_start(position: Vector2) -> void:
 	if _draw_line:
 		if Global.mirror_view:
 			# mirroring position is ONLY required by "Preview"
-			position.x = (Global.current_project.size.x - 1) - position.x
-		_line_start = position
-		_line_end = position
+			pos.x = (Global.current_project.size.x - 1) - pos.x
+		_line_start = pos
+		_line_end = pos
 		update_line_polylines(_line_start, _line_end)
 	else:
-		draw_tool(position)
-		_last_position = position
+		draw_tool(pos)
+		_last_position = pos
 		Global.canvas.sprite_changed_this_frame = true
 	cursor_text = ""
 
 
-func draw_move(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_move(position)
+func draw_move(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("draw_color_picker"):
-			_pick_color(position)
+			_pick_color(pos)
 		return
 
 	if _draw_line:
 		if Global.mirror_view:
 			# mirroring position is ONLY required by "Preview"
-			position.x = (Global.current_project.size.x - 1) - position.x
-		var d := _line_angle_constraint(_line_start, position)
+			pos.x = (Global.current_project.size.x - 1) - pos.x
+		var d := _line_angle_constraint(_line_start, pos)
 		_line_end = d.position
 		cursor_text = d.text
 		update_line_polylines(_line_start, _line_end)
 	else:
-		draw_fill_gap(_last_position, position)
-		_last_position = position
+		draw_fill_gap(_last_position, pos)
+		_last_position = pos
 		cursor_text = ""
 		Global.canvas.sprite_changed_this_frame = true
 
 
-func draw_end(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_end(position)
+func draw_end(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_end(pos)
 	if _picking_color:
 		return
 
@@ -112,9 +112,9 @@ func draw_end(position: Vector2) -> void:
 func _draw_brush_image(image: Image, src_rect: Rect2, dst: Vector2) -> void:
 	_changed = true
 	if _strength == 1:
-		var size := image.get_size()
-		if _clear_image.get_size() != size:
-			_clear_image.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
+		var brush_size := image.get_size()
+		if _clear_image.get_size() != brush_size:
+			_clear_image.resize(brush_size.x, brush_size.y, Image.INTERPOLATE_NEAREST)
 
 		var images := _get_selected_draw_images()
 		for draw_image in images:

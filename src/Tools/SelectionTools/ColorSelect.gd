@@ -24,17 +24,17 @@ func _on_Similarity_value_changed(value: float) -> void:
 	save_config()
 
 
-func apply_selection(position: Vector2) -> void:
-	super.apply_selection(position)
+func apply_selection(pos: Vector2) -> void:
+	super.apply_selection(pos)
 	var project: Project = Global.current_project
-	if position.x < 0 or position.y < 0:
+	if pos.x < 0 or pos.y < 0:
 		return
-	if position.x > project.size.x - 1 or position.y > project.size.y - 1:
+	if pos.x > project.size.x - 1 or pos.y > project.size.y - 1:
 		return
 
 	var cel_image := Image.new()
 	cel_image.copy_from(_get_draw_image())
-	var color := cel_image.get_pixelv(position)
+	var color := cel_image.get_pixelv(pos)
 	var operation := 0
 	if _subtract:
 		operation = 1

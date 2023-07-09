@@ -49,8 +49,8 @@ func _about_to_popup() -> void:
 
 
 func _calculate_pivot() -> void:
-	var size := Global.current_project.size
-	pivot = size / 2
+	var project_size := Global.current_project.size
+	pivot = project_size / 2
 
 	# Pivot correction in case of even size
 	if (
@@ -58,9 +58,9 @@ func _calculate_pivot() -> void:
 		and type_option_button.get_selected_id() != CLEANEDGE
 		and type_option_button.get_selected_id() != OMNISCALE
 	):
-		if int(size.x) % 2 == 0:
+		if int(project_size.x) % 2 == 0:
 			pivot.x -= 0.5
-		if int(size.y) % 2 == 0:
+		if int(project_size.y) % 2 == 0:
 			pivot.y -= 0.5
 
 	if Global.current_project.has_selection and selection_checkbox.button_pressed:

@@ -107,19 +107,19 @@ func _create_option_list() -> void:
 
 func _create_recent_list() -> void:
 	recent_templates_list.clear()
-	for size in recent_sizes:
+	for recent_size in recent_sizes:
 		recent_templates_list.add_item(
-			"{width}x{height}".format({"width": size.x, "height": size.y})
+			"{width}x{height}".format({"width": recent_size.x, "height": recent_size.y})
 		)
 
 
 func _on_CreateNewImage_confirmed() -> void:
 	var width: int = width_value.value
 	var height: int = height_value.value
-	var size = Vector2(width, height)
-	if size in recent_sizes:
-		recent_sizes.erase(size)
-	recent_sizes.insert(0, size)
+	var image_size := Vector2i(width, height)
+	if image_size in recent_sizes:
+		recent_sizes.erase(image_size)
+	recent_sizes.insert(0, image_size)
 	if recent_sizes.size() > 10:
 		recent_sizes.resize(10)
 	Global.config_cache.set_value("templates", "recent_sizes", recent_sizes)

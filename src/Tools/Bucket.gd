@@ -129,52 +129,52 @@ func update_pattern() -> void:
 	if !_pattern.image.is_empty():
 		tex = ImageTexture.create_from_image(_pattern.image)
 	$FillPattern/Type/Texture2D.texture = tex
-	var size := _pattern.image.get_size()
-	$FillPattern/OffsetX.max_value = size.x - 1
-	$FillPattern/OffsetY.max_value = size.y - 1
+	var pattern_size := _pattern.image.get_size()
+	$FillPattern/OffsetX.max_value = pattern_size.x - 1
+	$FillPattern/OffsetY.max_value = pattern_size.y - 1
 
 
-func draw_start(position: Vector2) -> void:
-	super.draw_start(position)
+func draw_start(pos: Vector2) -> void:
+	super.draw_start(pos)
 	if Input.is_action_pressed("draw_color_picker"):
-		_pick_color(position)
+		_pick_color(pos)
 		return
 
 	Global.canvas.selection.transform_content_confirm()
 	if (
 		!Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn()
-		or !Rect2(Vector2.ZERO, Global.current_project.size).has_point(position)
+		or !Rect2(Vector2.ZERO, Global.current_project.size).has_point(pos)
 	):
 		return
 	if (
 		Global.current_project.has_selection
-		and not Global.current_project.can_pixel_get_drawn(position)
+		and not Global.current_project.can_pixel_get_drawn(pos)
 	):
 		return
 	var undo_data := _get_undo_data()
 	match _fill_area:
 		FillArea.AREA:
-			fill_in_area(position)
+			fill_in_area(pos)
 		FillArea.COLORS:
-			fill_in_color(position)
+			fill_in_color(pos)
 		FillArea.SELECTION:
 			fill_in_selection()
 	commit_undo("Draw", undo_data)
 
 
-func draw_move(position: Vector2) -> void:
-	super.draw_move(position)
+func draw_move(pos: Vector2) -> void:
+	super.draw_move(pos)
 
 
-func draw_end(position: Vector2) -> void:
-	super.draw_end(position)
+func draw_end(pos: Vector2) -> void:
+	super.draw_end(pos)
 
 
-func fill_in_color(position: Vector2) -> void:
+func fill_in_color(pos: Vector2) -> void:
 	var project: Project = Global.current_project
 	var images := _get_selected_draw_images()
 	for image in images:
-		var color: Color = image.get_pixelv(position)
+		var color: Color = image.get_pixelv(pos)
 		var pattern_image: Image
 		if _fill_with == FillWith.COLOR or _pattern == null:
 			if tool_slot.color.is_equal_approx(color):
@@ -217,25 +217,25 @@ func fill_in_color(position: Vector2) -> void:
 		gen.generate_image(image, COLOR_REPLACE_SHADER, params, project.size)
 
 
-func fill_in_area(position: Vector2) -> void:
+func fill_in_area(pos: Vector2) -> void:
 	var project: Project = Global.current_project
-	_flood_fill(position)
+	_flood_fill(pos)
 
 	# Handle Mirroring
-	var mirror_x = project.x_symmetry_point - position.x
-	var mirror_y = project.y_symmetry_point - position.y
+	var mirror_x = project.x_symmetry_point - pos.x
+	var mirror_y = project.y_symmetry_point - pos.y
 	var mirror_x_inside: bool
 	var mirror_y_inside: bool
 
-	mirror_x_inside = project.can_pixel_get_drawn(Vector2(mirror_x, position.y))
-	mirror_y_inside = project.can_pixel_get_drawn(Vector2(position.x, mirror_y))
+	mirror_x_inside = project.can_pixel_get_drawn(Vector2(mirror_x, pos.y))
+	mirror_y_inside = project.can_pixel_get_drawn(Vector2(pos.x, mirror_y))
 
 	if Tools.horizontal_mirror and mirror_x_inside:
-		_flood_fill(Vector2(mirror_x, position.y))
+		_flood_fill(Vector2(mirror_x, pos.y))
 		if Tools.vertical_mirror and mirror_y_inside:
 			_flood_fill(Vector2(mirror_x, mirror_y))
 	if Tools.vertical_mirror and mirror_y_inside:
-		_flood_fill(Vector2(position.x, mirror_y))
+		_flood_fill(Vector2(pos.x, mirror_y))
 
 
 func fill_in_selection() -> void:
@@ -307,14 +307,14 @@ func _add_new_segment(y: int = 0) -> void:
 # list of segments filled. Returns the first x coordinate after the part of the
 # line that has been filled.
 func _flood_line_around_point(
-	position: Vector2, project: Project, image: Image, src_color: Color
+	pos: Vector2, project: Project, image: Image, src_color: Color
 ) -> int:
 	# this method is called by `_flood_fill` after the required data structures
 	# have been initialized
-	if not image.get_pixelv(position).is_equal_approx(src_color):
-		return int(position.x) + 1
-	var west: Vector2 = position
-	var east: Vector2 = position
+	if not image.get_pixelv(pos).is_equal_approx(src_color):
+		return int(pos.x) + 1
+	var west: Vector2 = pos
+	var east: Vector2 = pos
 	if project.has_selection:
 		while (
 			project.can_pixel_get_drawn(west)
@@ -332,7 +332,7 @@ func _flood_line_around_point(
 		while east.x < project.size.x && image.get_pixelv(east).is_equal_approx(src_color):
 			east += Vector2.RIGHT
 	# Make a note of the stuff we processed
-	var c = int(position.y)
+	var c := int(pos.y)
 	var segment = _allegro_flood_segments[c]
 	# we may have already processed some segments on this y coordinate
 	if segment.flooding:
@@ -342,13 +342,13 @@ func _flood_line_around_point(
 		# found last current segment on this line
 		c = _allegro_flood_segments.size()
 		segment.next = c
-		_add_new_segment(position.y)
+		_add_new_segment(pos.y)
 		segment = _allegro_flood_segments[c]
 	# set the values for the current segment
 	segment.flooding = true
 	segment.left_position = west.x + 1
 	segment.right_position = east.x - 1
-	segment.y = position.y
+	segment.y = pos.y
 	segment.next = 0
 	# Should we process segments above or below this one?
 	# when there is a selected area, the pixels above and below the one we started creating this
@@ -357,8 +357,8 @@ func _flood_line_around_point(
 	# test will be performed later anyway.
 	# On the other hand, this test we described is the same `project.can_pixel_get_drawn` does if
 	# there is no selection, so we don't need branching here.
-	segment.todo_above = position.y > 0
-	segment.todo_below = position.y < project.size.y - 1
+	segment.todo_above = pos.y > 0
+	segment.todo_below = pos.y < project.size.y - 1
 	# this is an actual segment we should be coloring, so we add it to the results for the
 	# current image
 	if segment.right_position >= segment.left_position:
@@ -388,13 +388,13 @@ func _check_flooded_segment(
 	return ret
 
 
-func _flood_fill(position: Vector2) -> void:
+func _flood_fill(pos: Vector2) -> void:
 	# implements the floodfill routine by Shawn Hargreaves
 	# from https://www1.udel.edu/CIS/software/dist/allegro-4.2.1/src/flood.c
 	var project: Project = Global.current_project
 	var images := _get_selected_draw_images()
 	for image in images:
-		var color: Color = image.get_pixelv(position)
+		var color: Color = image.get_pixelv(pos)
 		if _fill_with == FillWith.COLOR or _pattern == null:
 			# end early if we are filling with the same color
 			if tool_slot.color.is_equal_approx(color):
@@ -407,25 +407,25 @@ func _flood_fill(position: Vector2) -> void:
 		# init flood data structures
 		_allegro_flood_segments = []
 		_allegro_image_segments = []
-		_compute_segments_for_image(position, project, image, color)
+		_compute_segments_for_image(pos, project, image, color)
 		# now actually color the image: since we have already checked a few things for the points
 		# we'll process here, we're going to skip a bunch of safety checks to speed things up.
 		_color_segments(image)
 
 
 func _compute_segments_for_image(
-	position: Vector2, project: Project, image: Image, src_color: Color
+	pos: Vector2, project: Project, image: Image, src_color: Color
 ) -> void:
 	# initially allocate at least 1 segment per line of image
 	for j in image.get_height():
 		_add_new_segment(j)
 	# start flood algorithm
-	_flood_line_around_point(position, project, image, src_color)
+	_flood_line_around_point(pos, project, image, src_color)
 	# test all segments while also discovering more
-	var done = false
+	var done := false
 	while not done:
 		done = true
-		var max_index = _allegro_flood_segments.size()
+		var max_index := _allegro_flood_segments.size()
 		for c in max_index:
 			var p = _allegro_flood_segments[c]
 			if p.todo_below:  # check below the segment?
@@ -497,18 +497,18 @@ func _get_undo_data() -> Dictionary:
 	return data
 
 
-func _pick_color(position: Vector2) -> void:
+func _pick_color(pos: Vector2) -> void:
 	var project: Project = Global.current_project
-	position = project.tiles.get_canon_position(position)
+	pos = project.tiles.get_canon_position(pos)
 
-	if position.x < 0 or position.y < 0:
+	if pos.x < 0 or pos.y < 0:
 		return
 
 	var image := Image.new()
 	image.copy_from(_get_draw_image())
-	if position.x > image.get_width() - 1 or position.y > image.get_height() - 1:
+	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
 		return
 
-	var color := image.get_pixelv(position)
+	var color := image.get_pixelv(pos)
 	var button := MOUSE_BUTTON_LEFT if Tools._slots[MOUSE_BUTTON_LEFT].tool_node == self else MOUSE_BUTTON_RIGHT
 	Tools.assign_color(color, button, false)

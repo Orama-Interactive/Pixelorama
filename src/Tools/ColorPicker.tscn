@@ -1,48 +1,40 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://2onobu8eymt8"]
 
-[ext_resource path="res://src/Tools/BaseTool.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Tools/ColorPicker.gd" type="Script" id=2]
+[ext_resource type="PackedScene" path="res://src/Tools/BaseTool.tscn" id="1"]
+[ext_resource type="Script" path="res://src/Tools/ColorPicker.gd" id="2"]
 
-[node name="ToolOptions" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="ToolOptions" instance=ExtResource("1")]
+script = ExtResource("2")
+
+[node name="ColorRect" parent="." index="0"]
+layout_mode = 2
+
+[node name="Label" parent="." index="1"]
+layout_mode = 2
+theme_type_variation = &"Header"
 
 [node name="ColorPicker" type="VBoxContainer" parent="." index="2"]
-offset_top = 26.0
-offset_right = 116.0
-offset_bottom = 106.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="ColorPicker" index="0"]
-offset_right = 116.0
-offset_bottom = 14.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_vertical = 1
+mouse_default_cursor_shape = 2
 text = "Pick for:"
 
 [node name="Options" type="OptionButton" parent="ColorPicker" index="1"]
-offset_top = 18.0
-offset_right = 116.0
-offset_bottom = 38.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "Left Color"
-items = [ "Left Color", null, false, 0, null, "Right Color", null, false, 1, null ]
-selected = 0
 
 [node name="Label2" type="Label" parent="ColorPicker" index="2"]
-offset_top = 42.0
-offset_right = 116.0
-offset_bottom = 56.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_vertical = 1
+mouse_default_cursor_shape = 2
 text = "Pick mode:"
 
 [node name="ExtractFrom" type="OptionButton" parent="ColorPicker" index="3"]
-offset_top = 60.0
-offset_right = 116.0
-offset_bottom = 80.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "Top Color"
-items = [ "Top Color", null, false, 0, null, "Current Layer", null, false, 1, null ]
-selected = 0
 
 [connection signal="item_selected" from="ColorPicker/Options" to="." method="_on_Options_item_selected"]
 [connection signal="item_selected" from="ColorPicker/ExtractFrom" to="." method="_on_ExtractFrom_item_selected"]

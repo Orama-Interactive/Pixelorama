@@ -36,50 +36,50 @@ func _input(event: InputEvent) -> void:
 		_snap_to_grid = false
 
 
-func draw_start(position: Vector2) -> void:
-	super.draw_start(position)
+func draw_start(pos: Vector2) -> void:
+	super.draw_start(pos)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
-	_start_pos = position
-	_offset = position
+	_start_pos = pos
+	_offset = pos
 	_undo_data = _get_undo_data()
 	if Global.current_project.has_selection:
 		selection_node.transform_content_start()
 	_content_transformation_check = selection_node.is_moving_content
 
 
-func draw_move(position: Vector2) -> void:
-	super.draw_move(position)
+func draw_move(pos: Vector2) -> void:
+	super.draw_move(pos)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	# This is true if content transformation has been confirmed (pressed Enter for example)
 	# while the content is being moved
 	if _content_transformation_check != selection_node.is_moving_content:
 		return
-	position = _snap_position(position)
+	pos = _snap_position(pos)
 
 	if Global.current_project.has_selection:
-		selection_node.move_content(position - _offset)
+		selection_node.move_content(pos - _offset)
 	else:
-		Global.canvas.move_preview_location = position - _start_pos
-	_offset = position
+		Global.canvas.move_preview_location = pos - _start_pos
+	_offset = pos
 
 
-func draw_end(position: Vector2) -> void:
-	super.draw_end(position)
+func draw_end(pos: Vector2) -> void:
+	super.draw_end(pos)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	if (
 		_start_pos != Vector2.INF
 		and _content_transformation_check == selection_node.is_moving_content
 	):
-		position = _snap_position(position)
+		pos = _snap_position(pos)
 		var project: Project = Global.current_project
 
 		if project.has_selection:
 			selection_node.move_borders_end()
 		else:
-			var pixel_diff: Vector2 = position - _start_pos
+			var pixel_diff: Vector2 = pos - _start_pos
 			Global.canvas.move_preview_location = Vector2.ZERO
 			var images := _get_selected_draw_images()
 			for image in images:
@@ -94,15 +94,15 @@ func draw_end(position: Vector2) -> void:
 	_snap_to_grid = false
 
 
-func _snap_position(position: Vector2) -> Vector2:
+func _snap_position(pos: Vector2) -> Vector2:
 	if Input.is_action_pressed("transform_snap_axis"):
-		var angle := position.angle_to_point(_start_pos)
-		if abs(angle) <= PI / 4 or abs(angle) >= 3 * PI / 4:
-			position.y = _start_pos.y
+		var angle := pos.angle_to_point(_start_pos)
+		if absf(angle) <= PI / 4 or absf(angle) >= 3 * PI / 4:
+			pos.y = _start_pos.y
 		else:
-			position.x = _start_pos.x
+			pos.x = _start_pos.x
 	if _snap_to_grid:  # Snap to grid
-		position = position.snapped(Global.grid_size)
+		pos = pos.snapped(Global.grid_size)
 		# The part below only corrects the offset for situations when there is no selection
 		# Offsets when there is selection is controlled in _input() function
 		if !Global.current_project.has_selection:
@@ -115,9 +115,9 @@ func _snap_position(position: Vector2) -> Vector2:
 				_start_pos.y
 				- int(_start_pos.y / Global.grid_size.y) * Global.grid_size.y
 			)
-			position += move_offset
+			pos += move_offset
 
-	return position
+	return pos
 
 
 func commit_undo(action: String) -> void:

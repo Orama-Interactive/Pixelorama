@@ -49,9 +49,9 @@ func _exit_tree() -> void:
 		gif_export_thread.wait_to_finish()
 
 
-func add_file_format(name: String) -> int:
+func add_file_format(format: String) -> int:
 	var id := FileFormat.size()
-#	FileFormat.merge({name: id})
+#	FileFormat.merge({format: id})
 	return id
 
 

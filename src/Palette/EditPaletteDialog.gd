@@ -50,19 +50,19 @@ func open(current_palette: Palette) -> void:
 		popup_centered()
 
 
-# Shows/hides a warning when palette size is being reduced
-func toggle_size_reduced_warning(visible: bool) -> void:
-	size_reduced_warning.visible = visible
+## Shows/hides a warning when palette size is being reduced
+func toggle_size_reduced_warning(to_show: bool) -> void:
+	size_reduced_warning.visible = to_show
 	# Required to resize window to correct size if warning causes content overflow
 	size = size
 
 
-# Shows/hides a warning when palette already exists
-func toggle_already_exists_warning(visible: bool) -> void:
-	already_exists_warning.visible = visible
+## Shows/hides a warning when palette already exists
+func toggle_already_exists_warning(to_show: bool) -> void:
+	already_exists_warning.visible = to_show
 
 	# Disable confirm button so user cannot save
-	get_ok_button().disabled = visible
+	get_ok_button().disabled = to_show
 
 	# Required to resize window to correct size if warning causes content overflow
 	size = size

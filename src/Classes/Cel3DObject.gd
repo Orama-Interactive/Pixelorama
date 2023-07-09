@@ -279,8 +279,8 @@ func change_transform(a: Vector3, b: Vector3) -> void:
 			move(diff)
 
 
-func move(position: Vector3) -> void:
-	position += position
+func move(pos: Vector3) -> void:
+	position += pos
 	change_property()
 
 

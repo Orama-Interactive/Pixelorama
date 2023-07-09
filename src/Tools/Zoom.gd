@@ -47,8 +47,8 @@ func update_config() -> void:
 	$ModeOptions.selected = _zoom_mode
 
 
-func draw_start(position: Vector2) -> void:
-	super.draw_start(position)
+func draw_start(pos: Vector2) -> void:
+	super.draw_start(pos)
 	var mouse_pos := get_global_mouse_position()
 	var viewport_rect := Rect2(
 		Global.main_viewport.global_position, Global.main_viewport.size
@@ -63,10 +63,10 @@ func draw_start(position: Vector2) -> void:
 		Global.camera2.zoom_camera(_zoom_mode * 2 - 1)
 
 
-func draw_move(position: Vector2) -> void:
-	super.draw_move(position)
+func draw_move(pos: Vector2) -> void:
+	super.draw_move(pos)
 	Global.camera.zoom_camera(-_relative.x / 3)
 
 
-func draw_end(position: Vector2) -> void:
-	super.draw_end(position)
+func draw_end(pos: Vector2) -> void:
+	super.draw_end(pos)
