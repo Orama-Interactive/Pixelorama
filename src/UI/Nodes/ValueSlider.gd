@@ -1,13 +1,19 @@
-@tool
 # Initial version made by MrTriPie, has been modified by Overloaded.
+@tool
 class_name ValueSlider
 extends TextureProgressBar
 
 enum { NORMAL, HELD, SLIDING, TYPING }
 
 @export var editable := true
-@export var prefix: String: set = _prefix_changed
-@export var suffix: String: set = _suffix_changed
+@export var prefix: String:
+	set(v):
+		prefix = v
+		_reset_display()
+@export var suffix: String:
+	set(v):
+		suffix = v
+		_reset_display()
 # Size of additional snapping (applied in addition to Range's step).
 # This should always be larger than step.
 @export var snap_step := 1.0
@@ -19,7 +25,13 @@ enum { NORMAL, HELD, SLIDING, TYPING }
 # If show_progress is true it will show the colored progress bar, good for values with a specific
 # range. False will hide it, which is good for values that can be any number.
 @export var show_progress := true
-@export var show_arrows := true: set = _show_arrows_changed
+@export var show_arrows := true:
+	set(v):
+		show_arrows = v
+		if not _line_edit:
+			return
+		_value_up_button.visible = v
+		_value_down_button.visible = v
 @export var echo_arrow_time := 0.075
 # This will be replaced with input action strings in Godot 4.x
 # Right now this is only used for changing the brush size with Control + Wheel
@@ -45,13 +57,13 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	connect("value_changed", Callable(self, "_on_value_changed"))
-	_setup_nodes()
+	value_changed.connect(_on_value_changed)
 	set_process_input(is_global)
 	_reset_display(true)
 	if not Engine.is_editor_hint():  # Pixelorama specific code
 		_value_up_button.modulate = Global.modulate_icon_color
 		_value_down_button.modulate = Global.modulate_icon_color
+	_setup_nodes()
 
 
 func _notification(what: int) -> void:
@@ -150,61 +162,49 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func _setup_nodes() -> void:  # Only called once on _ready()
+	focus_mode = Control.FOCUS_ALL
+	_line_edit.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_line_edit.anchor_right = 1
 	_line_edit.anchor_bottom = 1
 	_line_edit.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_line_edit.add_theme_stylebox_override("read_only", StyleBoxEmpty.new())
 	_line_edit.add_theme_stylebox_override("normal", StyleBoxEmpty.new())
-	_line_edit.connect("text_submitted", Callable(self, "_on_LineEdit_text_entered"))
-	_line_edit.connect("focus_exited", Callable(self, "_confirm_text"))
-	_line_edit.connect("gui_input", Callable(self, "_on_LineEdit_gui_input"))
+	_line_edit.text_submitted.connect(_on_LineEdit_text_entered)
+	_line_edit.focus_exited.connect(_confirm_text)
+	_line_edit.gui_input.connect(_on_LineEdit_gui_input)
 	add_child(_line_edit)
 
+	var value_up_texture_size := _value_up_button.texture_normal.get_size()
 	_value_up_button.scale.y = -1
 	_value_up_button.anchor_left = 1
 	_value_up_button.anchor_right = 1
-	_value_up_button.offset_left = -15
-	_value_up_button.offset_top = 12
+	_value_up_button.offset_left = -value_up_texture_size.x - 3
+	_value_up_button.offset_top = value_up_texture_size.y
 	_value_up_button.offset_right = -3
-	_value_up_button.offset_bottom = 24
+	_value_up_button.offset_bottom = value_up_texture_size.y * 2
+	_value_up_button.focus_mode = Control.FOCUS_NONE
 	_value_up_button.add_to_group("UIButtons")
-	_value_up_button.connect("button_down", Callable(self, "_on_Value_button_down").bind(1))
-	_value_up_button.connect("button_up", Callable(self, "_on_Value_button_up"))
+	_value_up_button.button_down.connect(_on_Value_button_down.bind(1))
+	_value_up_button.button_up.connect(_on_Value_button_up)
 	add_child(_value_up_button)
 
+	var value_down_texture_size := _value_down_button.texture_normal.get_size()
 	_value_down_button.anchor_left = 1
 	_value_down_button.anchor_top = 1
 	_value_down_button.anchor_right = 1
 	_value_down_button.anchor_bottom = 1
-	_value_down_button.offset_left = -15
-	_value_down_button.offset_top = -12
+	_value_down_button.offset_left = -value_down_texture_size.x - 3
+	_value_down_button.offset_top = -value_up_texture_size.y
 	_value_down_button.offset_right = -3
 	_value_down_button.offset_bottom = 0
+	_value_up_button.focus_mode = Control.FOCUS_NONE
 	_value_down_button.add_to_group("UIButtons")
-	_value_down_button.connect("button_down", Callable(self, "_on_Value_button_down").bind(-1))
-	_value_down_button.connect("button_up", Callable(self, "_on_Value_button_up"))
+	_value_down_button.button_down.connect(_on_Value_button_down.bind(-1))
+	_value_down_button.button_up.connect(_on_Value_button_up)
 	add_child(_value_down_button)
 
-	_timer.connect("timeout", Callable(self, "_on_Timer_timeout"))
+	_timer.timeout.connect(_on_Timer_timeout)
 	add_child(_timer)
-
-
-func _prefix_changed(v: String) -> void:
-	prefix = v
-	_reset_display()
-
-
-func _suffix_changed(v: String) -> void:
-	suffix = v
-	_reset_display()
-
-
-func _show_arrows_changed(v: bool) -> void:
-	show_arrows = v
-	if not _line_edit:
-		return
-	_value_up_button.visible = v
-	_value_down_button.visible = v
 
 
 func _on_LineEdit_gui_input(event: InputEvent) -> void:
@@ -243,12 +243,12 @@ func _confirm_text(confirm := true) -> void:
 	_reset_display(true)
 
 
-func _reset_display(theme_changed := false) -> void:
+func _reset_display(theme_has_changed := false) -> void:
 	_line_edit.selecting_enabled = false  # Remove the selection
 	_line_edit.editable = false
-	if theme_changed and not Engine.is_editor_hint():
+	if theme_has_changed and not Engine.is_editor_hint():
 		texture_under = get_theme_icon("texture_under", "ValueSlider")
-		texture_over = get_theme_icon("texture_over", "ValueSlider")
+#		texture_over = get_theme_icon("texture_over", "ValueSlider")
 		texture_progress = get_theme_icon("texture_progress", "ValueSlider")
 		_value_up_button.texture_normal = get_theme_icon("arrow_normal", "ValueSlider")
 		_value_up_button.texture_pressed = get_theme_icon("arrow_pressed", "ValueSlider")
@@ -258,28 +258,25 @@ func _reset_display(theme_changed := false) -> void:
 		_value_down_button.texture_pressed = get_theme_icon("arrow_pressed", "ValueSlider")
 		_value_down_button.texture_hover = get_theme_icon("arrow_hover", "ValueSlider")
 
+		var line_edit_color := _line_edit.get_theme_color("font_color")
+		var line_edit_disabled_col: Color = get_theme_color("read_only", "LineEdit")
+		if editable:
+			_line_edit.add_theme_color_override("font_color_uneditable", line_edit_color)
+		else:
+			_line_edit.add_theme_color_override("font_color_uneditable", line_edit_disabled_col)
 		tint_under = get_theme_color("under_color", "ValueSlider")
 		if show_progress:
 			tint_progress = get_theme_color("progress_color", "ValueSlider")
 		else:
 			tint_progress = Color.TRANSPARENT
 	_line_edit.text = str(tr(prefix), " ", value, " ", tr(suffix)).strip_edges()
-	var line_edit_color := _line_edit.get_theme_color("font_color")
-	var line_edit_disabled_col := get_theme_color("read_only", "LineEdit")
-	if editable:
-		_line_edit.add_theme_color_override("font_color_uneditable", line_edit_color)
-	else:
-		_line_edit.add_theme_color_override("font_color_uneditable", line_edit_disabled_col)
 
 
 func _on_Value_button_down(direction: int) -> void:
 	if not editable:
 		return
 	# Direction is either 1 or -1
-	if snap_by_default:
-		value += (step if Input.is_action_pressed("ctrl") else snap_step) * direction
-	else:
-		value += (snap_step if Input.is_action_pressed("ctrl") else step) * direction
+	value += (snap_step if Input.is_action_pressed("ctrl") else step) * direction
 	arrow_is_held = direction
 	_timer.wait_time = echo_arrow_time * 8  # 0.6 with the default value
 	_timer.one_shot = true
