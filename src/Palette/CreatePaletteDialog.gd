@@ -73,8 +73,7 @@ func _on_CreatePaletteDialog_visibility_changed() -> void:
 
 
 func _on_CreatePaletteDialog_confirmed() -> void:
-	emit_signal(
-		"saved",
+	saved.emit(
 		preset_input.selected,
 		name_input.text,
 		comment_input.text,

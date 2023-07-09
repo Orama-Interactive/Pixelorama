@@ -131,7 +131,7 @@ func load_image(load_directly := true):
 		image_info = {"image": image, "name": image_name}
 		if load_directly:
 			OpenSave.handle_loading_image(image_name, image)
-	emit_signal("image_loaded", image_info)
+	image_loaded.emit(image_info)
 
 
 func load_shader() -> void:

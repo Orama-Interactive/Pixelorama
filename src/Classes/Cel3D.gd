@@ -118,7 +118,7 @@ func size_changed(new_size: Vector2) -> void:
 
 func _scene_property_changed() -> void:  # Called by undo/redo
 	deserialize_scene_properties()
-	emit_signal("scene_property_changed")
+	scene_property_changed.emit()
 
 
 func _add_object_node(id: int) -> void:
@@ -139,7 +139,7 @@ func _add_object_node(id: int) -> void:
 		if object_properties[id].has("type"):
 			node3d.type = object_properties[id]["type"]
 		object_properties[id] = node3d.serialize()
-	emit_signal("objects_changed")
+	objects_changed.emit()
 
 
 func _remove_object_node(id: int) -> void:  # Called by undo/redo
@@ -148,7 +148,7 @@ func _remove_object_node(id: int) -> void:  # Called by undo/redo
 		if selected == object:
 			self.selected = null
 		object.queue_free()
-	emit_signal("objects_changed")
+	objects_changed.emit()
 
 
 func _set_selected(value: Cel3DObject) -> void:
@@ -159,7 +159,7 @@ func _set_selected(value: Cel3DObject) -> void:
 	selected = value
 	if is_instance_valid(selected):  # Select new object
 		selected.select()
-	emit_signal("selected_object", value)
+	selected_object.emit(value)
 
 
 # Overridden methods

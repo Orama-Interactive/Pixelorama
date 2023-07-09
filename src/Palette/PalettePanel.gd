@@ -161,7 +161,7 @@ func _on_PaletteGrid_swatch_double_clicked(_mb: int, index: int, click_position:
 	var color = Palettes.current_palette_get_color(index)
 	edited_swatch_index = index
 	hidden_color_picker.color = color
-	hidden_color_picker.emit_signal("color_changed", hidden_color_picker.color)
+	hidden_color_picker.color_changed.emit(hidden_color_picker.color)
 
 	# Open color picker popup with its right bottom corner next to swatch
 	var popup = hidden_color_picker.get_popup()

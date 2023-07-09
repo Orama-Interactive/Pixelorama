@@ -116,7 +116,7 @@ func update_from_value() -> void:
 	else:
 		gradient.add_point(point_1, background_col)
 		gradient.add_point(point_2, zone_col)
-	emit_signal("updated", gradient.offsets[1], gradient.offsets[2])
+	updated.emit(gradient.offsets[1], gradient.offsets[2])
 
 
 func add_cursor(x: float) -> void:

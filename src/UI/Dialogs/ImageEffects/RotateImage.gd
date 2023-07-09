@@ -34,7 +34,7 @@ func _ready() -> void:
 	type_option_button.add_item("Nearest neighbour", NN)
 	type_option_button.add_item("Rotxel", ROTXEL)
 	type_option_button.add_item("Upscale, Rotate and Downscale", URD)
-	type_option_button.emit_signal("item_selected", 0)
+	type_option_button.item_selected.emit(0)
 
 
 func _about_to_popup() -> void:

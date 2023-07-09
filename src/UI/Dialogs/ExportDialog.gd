@@ -360,7 +360,7 @@ func _on_FileExistsAlert_confirmed() -> void:
 	# Overwrite existing file
 	file_exists_alert_popup.dialog_text = Export.file_exists_alert
 	Export.stop_export = false
-	emit_signal("resume_export_function")
+	resume_export_function.emit()
 
 
 func _on_FileExistsAlert_custom_action(action: String) -> void:
@@ -368,7 +368,7 @@ func _on_FileExistsAlert_custom_action(action: String) -> void:
 		# Cancel export
 		file_exists_alert_popup.dialog_text = Export.file_exists_alert
 		Export.stop_export = true
-		emit_signal("resume_export_function")
+		resume_export_function.emit()
 		file_exists_alert_popup.hide()
 
 

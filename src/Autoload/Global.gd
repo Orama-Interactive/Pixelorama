@@ -259,7 +259,7 @@ func _ready() -> void:
 		if !tooltip.is_empty() and node.shortcut:
 			ui_tooltips[node] = tooltip
 	await get_tree().process_frame
-	emit_signal("project_changed")
+	project_changed.emit()
 
 
 func set_integer_zoom(enabled: bool):

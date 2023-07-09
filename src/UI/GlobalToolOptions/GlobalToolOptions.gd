@@ -146,7 +146,7 @@ func _on_Dynamics_toggled(
 	if !button.button_pressed:
 		file_name = "uncheck.png"
 	Global.change_button_texturerect(texture_button, file_name)
-	emit_signal("dynamics_changed")
+	dynamics_changed.emit()
 
 
 func _set_last_pressed_button(prop: int, value: BaseButton) -> void:
@@ -158,30 +158,30 @@ func _set_last_pressed_button(prop: int, value: BaseButton) -> void:
 
 
 func _on_ThresholdPressure_updated(value_1, value_2) -> void:
-	Tools.pen_pressure_min = min(value_1, value_2)
-	Tools.pen_pressure_max = max(value_1, value_2)
+	Tools.pen_pressure_min = minf(value_1, value_2)
+	Tools.pen_pressure_max = maxf(value_1, value_2)
 
 
 func _on_ThresholdVelocity_updated(value_1, value_2) -> void:
-	Tools.mouse_velocity_min_thres = min(value_1, value_2)
-	Tools.mouse_velocity_max_thres = max(value_1, value_2)
+	Tools.mouse_velocity_min_thres = minf(value_1, value_2)
+	Tools.mouse_velocity_max_thres = maxf(value_1, value_2)
 
 
 func _on_AlphaMin_value_changed(value: float) -> void:
 	Tools.alpha_min = value
-	emit_signal("dynamics_changed")
+	dynamics_changed.emit()
 
 
 func _on_AlphaMax_value_changed(value: float) -> void:
 	Tools.alpha_max = value
-	emit_signal("dynamics_changed")
+	dynamics_changed.emit()
 
 
 func _on_SizeMin_value_changed(value: float) -> void:
 	Tools.brush_size_min = int(value)
-	emit_signal("dynamics_changed")
+	dynamics_changed.emit()
 
 
 func _on_SizeMax_value_changed(value: float) -> void:
 	Tools.brush_size_max = int(value)
-	emit_signal("dynamics_changed")
+	dynamics_changed.emit()

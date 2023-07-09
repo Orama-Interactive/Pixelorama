@@ -47,7 +47,7 @@ func _rotation_value_changed(value: float) -> void:
 	var canvas_center: Vector2 = Global.current_project.size / 2
 	offset = (offset - canvas_center).rotated(deg_to_rad(difference)) + canvas_center
 	rotation_degrees = wrapf(degrees, -180, 180)
-	emit_signal("rotation_changed")
+	rotation_changed.emit()
 
 
 func _zoom_value_changed(value: float) -> void:
@@ -120,7 +120,7 @@ func _has_selection_tool() -> bool:
 func _rotate_camera_around_point(degrees: float, point: Vector2) -> void:
 	offset = (offset - point).rotated(deg_to_rad(degrees)) + point
 	rotation_degrees = wrapf(rotation_degrees + degrees, -180, 180)
-	emit_signal("rotation_changed")
+	rotation_changed.emit()
 
 
 func _rotation_changed() -> void:

@@ -16,7 +16,7 @@ func _ready() -> void:
 
 
 func select_pattern(pattern: Pattern) -> void:
-	emit_signal("pattern_selected", pattern)
+	pattern_selected.emit(pattern)
 	hide()
 
 

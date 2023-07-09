@@ -66,7 +66,7 @@ func _on_PreviewDialog_about_to_show() -> void:
 
 	# Select the option that the preview dialog before it had selected
 	import_options.select(OpenSave.last_dialog_option)
-	import_options.emit_signal("item_selected", OpenSave.last_dialog_option)
+	import_options.item_selected.emit(OpenSave.last_dialog_option)
 
 	var img_texture := ImageTexture.create_from_image(image)
 	texture_rect.texture = img_texture
@@ -220,7 +220,7 @@ func synchronize() -> void:
 			#sync modes
 			var id = current_import_option
 			dialog.import_options.select(id)
-			dialog.import_options.emit_signal("item_selected", id)
+			dialog.import_options.item_selected.emit(id)
 
 			#sync properties (if any)
 			if (
@@ -261,9 +261,7 @@ func synchronize() -> void:
 			elif id == ImageImportOptions.BRUSH:
 				var type = new_brush_options.get_node("BrushTypeOption").selected
 				dialog.new_brush_options.get_node("BrushTypeOption").select(type)
-				dialog.new_brush_options.get_node("BrushTypeOption").emit_signal(
-					"item_selected", type
-				)
+				dialog.new_brush_options.get_node("BrushTypeOption").item_selected.emit(type)
 
 
 func _on_ImportOption_item_selected(id: int) -> void:

@@ -175,15 +175,15 @@ func change_swatch_size(size_diff: Vector2) -> void:
 
 func _on_PaletteSwatch_pressed(mouse_button: int, index: int) -> void:
 	var palette_index = convert_grid_index_to_palette_index(index)
-	emit_signal("swatch_pressed", mouse_button, palette_index)
+	swatch_pressed.emit(mouse_button, palette_index)
 
 
 func _on_PaletteSwatch_double_clicked(mouse_button: int, pos: Vector2, index: int) -> void:
 	var palette_index = convert_grid_index_to_palette_index(index)
-	emit_signal("swatch_double_clicked", mouse_button, palette_index, pos)
+	swatch_double_clicked.emit(mouse_button, palette_index, pos)
 
 
 func _on_PaletteSwatch_dropped(source_index: int, target_index: int) -> void:
 	var palette_source_index = convert_grid_index_to_palette_index(source_index)
 	var palette_target_index = convert_grid_index_to_palette_index(target_index)
-	emit_signal("swatch_dropped", palette_source_index, palette_target_index)
+	swatch_dropped.emit(palette_source_index, palette_target_index)

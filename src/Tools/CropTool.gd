@@ -51,7 +51,7 @@ func draw_move(pos: Vector2) -> void:
 		# Ensure that the size is at least 1:
 		_crop.rect.size.x = max(1, _crop.rect.size.x)
 		_crop.rect.size.y = max(1, _crop.rect.size.y)
-	_crop.emit_signal("updated")
+	_crop.updated.emit()
 
 
 func _sync_ui() -> void:
@@ -94,7 +94,7 @@ func _on_CropMode_item_selected(index: int) -> void:
 	if _syncing:
 		return
 	_crop.mode = index
-	_crop.emit_signal("updated")
+	_crop.updated.emit()
 
 
 func _on_SizeLock_toggled(button_pressed: bool) -> void:
@@ -105,7 +105,7 @@ func _on_SizeLock_toggled(button_pressed: bool) -> void:
 	if _syncing:
 		return
 	_crop.locked_size = button_pressed
-	_crop.emit_signal("updated")
+	_crop.updated.emit()
 
 
 func _on_Top_value_changed(value: float) -> void:
@@ -114,7 +114,7 @@ func _on_Top_value_changed(value: float) -> void:
 	var difference := value - _crop.rect.position.y
 	_crop.rect.size.y = max(1, _crop.rect.size.y - difference)
 	_crop.rect.position.y = value
-	_crop.emit_signal("updated")
+	_crop.updated.emit()
 
 
 func _on_Bottom_value_changed(value: float) -> void:
@@ -122,7 +122,7 @@ func _on_Bottom_value_changed(value: float) -> void:
 		return
 	_crop.rect.position.y = min(value - 1, _crop.rect.position.y)
 	_crop.rect.end.y = value
-	_crop.emit_signal("updated")
+	_crop.updated.emit()
 
 
 func _on_Left_value_changed(value: float) -> void:
@@ -131,7 +131,7 @@ func _on_Left_value_changed(value: float) -> void:
 	var difference := value - _crop.rect.position.x
 	_crop.rect.size.x = max(1, _crop.rect.size.x - difference)
 	_crop.rect.position.x = value
-	_crop.emit_signal("updated")
+	_crop.updated.emit()
 
 
 func _on_Right_value_changed(value: float) -> void:
@@ -139,7 +139,7 @@ func _on_Right_value_changed(value: float) -> void:
 		return
 	_crop.rect.position.x = min(value - 1, _crop.rect.position.x)
 	_crop.rect.end.x = value
-	_crop.emit_signal("updated")
+	_crop.updated.emit()
 
 
 func _on_RatioX_value_changed(value: float) -> void:
@@ -148,7 +148,7 @@ func _on_RatioX_value_changed(value: float) -> void:
 	var prev_ratio: Vector2 = $"%Size".ratio
 	$"%Size".ratio.x = value
 	_crop.rect.size.x = round(max(1, _crop.rect.size.y / prev_ratio.y * value))
-	_crop.emit_signal("updated")
+	_crop.updated.emit()
 
 
 func _on_RatioY_value_changed(value: float) -> void:
@@ -157,21 +157,21 @@ func _on_RatioY_value_changed(value: float) -> void:
 	var prev_ratio: Vector2 = $"%Size".ratio
 	$"%Size".ratio.y = value
 	_crop.rect.size.y = round(max(1, _crop.rect.size.x / prev_ratio.x * value))
-	_crop.emit_signal("updated")
+	_crop.updated.emit()
 
 
 func _on_Position_value_changed(value: Vector2) -> void:
 	if _syncing:
 		return
 	_crop.rect.position = value
-	_crop.emit_signal("updated")
+	_crop.updated.emit()
 
 
 func _on_Size_value_changed(value: Vector2) -> void:
 	if _syncing:
 		return
 	_crop.rect.size = value
-	_crop.emit_signal("updated")
+	_crop.updated.emit()
 
 
 func _on_Size_ratio_toggled(button_pressed: bool) -> void:
