@@ -280,12 +280,12 @@ func _on_ExportDialog_about_to_show() -> void:
 	checker.size = checker.get_parent().size
 
 
-func _on_Tabs_tab_clicked(tab: int) -> void:
+func _on_Tabs_tab_clicked(tab: Export.ExportTab) -> void:
 	Export.current_tab = tab
 	show_tab()
 
 
-func _on_Orientation_item_selected(id: int) -> void:
+func _on_Orientation_item_selected(id: Export.Orientation) -> void:
 	Export.orientation = id
 	if Export.orientation == Export.Orientation.ROWS:
 		spritesheet_lines_count_label.text = "Columns:"
@@ -304,7 +304,7 @@ func _on_LinesCount_value_changed(value: float) -> void:
 	set_preview()
 
 
-func _on_Direction_item_selected(id: int) -> void:
+func _on_Direction_item_selected(id: Export.AnimationDirection) -> void:
 	Export.direction = id
 	preview_current_frame = 0
 	Export.process_data()

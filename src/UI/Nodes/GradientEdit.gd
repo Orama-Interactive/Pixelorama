@@ -173,7 +173,7 @@ func _on_GradientEdit_resized() -> void:
 	_create_cursors()
 
 
-func _on_InterpolationOptionButton_item_selected(index: int) -> void:
+func _on_InterpolationOptionButton_item_selected(index: Gradient.InterpolationMode) -> void:
 	gradient.interpolation_mode = index
 
 
