@@ -55,7 +55,7 @@ func _on_FrameTagDialog_about_to_show() -> void:
 	main_vbox_cont.move_child(add_tag_button, main_vbox_cont.get_child_count() - 1)
 
 
-func _on_FrameTagDialog_popup_hide() -> void:
+func _on_FrameTagDialog_visibility_changed() -> void:
 	Global.dialog_open(false)
 
 
@@ -160,7 +160,7 @@ func _on_TagOptions_custom_action(action: String) -> void:
 		_on_FrameTagDialog_about_to_show()
 
 
-func _on_TagOptions_popup_hide() -> void:
+func _on_TagOptions_visibility_changed() -> void:
 	if delete_tag_button:
 		delete_tag_button.visible = false
 

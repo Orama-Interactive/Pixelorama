@@ -42,4 +42,4 @@ func update_transparency(value: float) -> void:
 		get_tree().get_root().transparent_bg = true
 
 	# Set a minimum amount for the fade so the canvas won't disappear
-	material.set("shader_param/alpha", clamp(value, 0.1, 1))
+	material.set_shader_parameter("alpha", clampf(value, 0.1, 1))

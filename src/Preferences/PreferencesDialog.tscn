@@ -1701,8 +1701,8 @@ access = 2
 filters = PoolStringArray( "*.pck ; Godot Resource Pack File", "*.zip ;" )
 show_hidden_files = true
 
-[connection signal="about_to_show" from="." to="." method="_on_PreferencesDialog_about_to_show"]
-[connection signal="popup_hide" from="." to="." method="_on_PreferencesDialog_popup_hide"]
+[connection signal="about_to_popup" from="." to="." method="_on_PreferencesDialog_about_to_show"]
+[connection signal="visibility_changed" from="." to="." method="_on_PreferencesDialog_visibility_changed"]
 [connection signal="item_selected" from="HSplitContainer/List" to="." method="_on_List_item_selected"]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Language/System Language" to="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Language" method="_on_Language_pressed" binds= [ 1 ]]
 [connection signal="pressed" from="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/ShrinkContainer/ShrinkApplyButton" to="." method="_on_ShrinkApplyButton_pressed"]

@@ -140,7 +140,7 @@ __meta__ = {
 
 [connection signal="confirmed" from="." to="." method="_on_EditPaletteDialog_confirmed"]
 [connection signal="custom_action" from="." to="." method="_on_EditPaletteDialog_custom_action"]
-[connection signal="popup_hide" from="." to="." method="_on_EditPaletteDialog_popup_hide"]
+[connection signal="visibility_changed" from="." to="." method="_on_EditPaletteDialog_visibility_changed"]
 [connection signal="text_changed" from="VBoxContainer/PaletteMetadata/Name" to="." method="_on_Name_text_changed"]
 [connection signal="value_changed" from="VBoxContainer/PaletteMetadata/Width" to="." method="_on_size_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/PaletteMetadata/Height" to="." method="_on_size_value_changed"]
