@@ -158,7 +158,8 @@ func _ready() -> void:
 	for action in actions:
 		var input_action: InputAction = actions[action]
 		if input_action is MenuInputAction:
-			input_action.get_node(get_tree().current_scene)
+			# Below line has been modified
+			input_action.get_node(Global.top_menu_container.get_node("MenuItems"))
 
 
 func _input(event: InputEvent) -> void:
