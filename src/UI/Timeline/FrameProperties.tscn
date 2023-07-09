@@ -67,4 +67,4 @@ suffix = "x"
 
 [connection signal="about_to_popup" from="." to="." method="_on_FrameProperties_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_FrameProperties_confirmed"]
-[connection signal="popup_hide" from="." to="." method="_on_FrameProperties_popup_hide"]
+[connection signal="visibility_changed" from="." to="." method="_on_FrameProperties_visibility_changed"]

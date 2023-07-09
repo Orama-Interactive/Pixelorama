@@ -97,7 +97,7 @@ func update_preview() -> void:
 	preview_rect.get_node("TransparentChecker").size = preview_rect.size
 
 
-func _on_TileModeOffsetsDialog_popup_hide() -> void:
+func _on_TileModeOffsetsDialog_visibility_changed() -> void:
 	Global.dialog_open(false)
 
 

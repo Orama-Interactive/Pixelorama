@@ -210,7 +210,7 @@ size_flags_horizontal = 3
 
 [connection signal="about_to_popup" from="." to="." method="_on_ScaleImage_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ScaleImage_confirmed"]
-[connection signal="popup_hide" from="." to="." method="_on_ScaleImage_popup_hide"]
+[connection signal="visibility_changed" from="." to="." method="_on_ScaleImage_visibility_changed"]
 [connection signal="value_changed" from="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer/WidthValue" to="." method="_on_WidthValue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer/HeightValue" to="." method="_on_HeightValue_value_changed"]
 [connection signal="toggled" from="VBoxContainer/SizeContainer/TextureRect/AspectRatioButton" to="." method="_on_AspectRatioButton_toggled"]

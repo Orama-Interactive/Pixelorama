@@ -104,5 +104,5 @@ func update_transparent_background_size(preview_image: Image) -> void:
 	preview_rect.get_node("TransparentChecker").size.y = image_size_y
 
 
-func _on_ResizeCanvas_popup_hide() -> void:
+func _on_ResizeCanvas_visibility_changed() -> void:
 	Global.dialog_open(false)

@@ -162,7 +162,7 @@ custom_minimum_size = Vector2( 172, 60.2 )
 dialog_text = "Are you sure you want to delete this layout?"
 
 [connection signal="about_to_popup" from="." to="." method="_on_ManageLayouts_about_to_show"]
-[connection signal="popup_hide" from="." to="." method="_on_ManageLayouts_popup_hide"]
+[connection signal="visibility_changed" from="." to="." method="_on_ManageLayouts_visibility_changed"]
 [connection signal="item_activated" from="VBoxContainer/SavedLayouts" to="." method="_on_SavedLayouts_item_activated"]
 [connection signal="item_selected" from="VBoxContainer/SavedLayouts" to="." method="_on_SavedLayouts_item_selected"]
 [connection signal="nothing_selected" from="VBoxContainer/SavedLayouts" to="." method="_on_SavedLayouts_nothing_selected"]

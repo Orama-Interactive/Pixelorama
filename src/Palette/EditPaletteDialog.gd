@@ -68,7 +68,7 @@ func toggle_already_exists_warning(visible: bool) -> void:
 	size = size
 
 
-func _on_EditPaletteDialog_popup_hide() -> void:
+func _on_EditPaletteDialog_visibility_changed() -> void:
 	Global.dialog_open(false)
 
 

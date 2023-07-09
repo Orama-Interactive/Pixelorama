@@ -17,7 +17,7 @@ func _on_FrameProperties_about_to_show() -> void:
 	frame_dur.set_value(duration)
 
 
-func _on_FrameProperties_popup_hide() -> void:
+func _on_FrameProperties_visibility_changed() -> void:
 	Global.dialog_open(false)
 
 

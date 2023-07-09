@@ -194,7 +194,7 @@ func change_shader(shader_tmp: Shader, name: String) -> void:
 			checkbox.text = "On"
 			if u_value == "true":
 				checkbox.button_pressed = true
-			checkbox.connect("toggled", Callable(self, "set_shader_parameter").bind(u_name))
+			checkbox.toggled.connect(set_shader_parameter.bind(u_name))
 			checkbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
