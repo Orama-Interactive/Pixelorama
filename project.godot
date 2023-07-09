@@ -729,6 +729,7 @@ file_logging/enable_file_logging=true
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 quality/driver/driver_name="GLES2"
 quality/driver/fallback_to_gles2=true
