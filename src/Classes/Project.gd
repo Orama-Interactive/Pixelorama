@@ -457,7 +457,8 @@ func _deserialize_metadata(object: Object, dict: Dictionary) -> void:
 
 func _name_changed(value: String) -> void:
 	name = value
-	Global.tabs.set_tab_title(Global.tabs.current_tab, name)
+	if Global.tabs.tab_count < Global.tabs.current_tab:
+		Global.tabs.set_tab_title(Global.tabs.current_tab, name)
 
 
 func _size_changed(value: Vector2) -> void:
