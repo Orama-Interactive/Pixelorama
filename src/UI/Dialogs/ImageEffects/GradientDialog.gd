@@ -37,8 +37,9 @@ class DitherMatrix:
 
 
 func _ready() -> void:
+	super._ready()
 	var sm := ShaderMaterial.new()
-	sm.gdshader = shader
+	sm.shader = shader
 	preview.set_material(sm)
 
 	for matrix in dither_matrices:
@@ -118,7 +119,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 	}
 
 	if !has_been_confirmed:
-		preview.material.gdshader = shader
+		preview.material.shader = shader
 		for param in params:
 			preview.material.set_shader_parameter(param, params[param])
 	else:

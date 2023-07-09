@@ -40,14 +40,14 @@ func _ready() -> void:
 		locale_index = loaded_locales.find(saved_locale)
 	TranslationServer.set_locale(saved_locale)  # If no language is saved, OS' locale is used
 
-	var button_group: ButtonGroup = $"System Language".group
+	var button_group: ButtonGroup = $"System Language".button_group
 	for locale in loaded_locales:  # Create radiobuttons for each language
 		var button := CheckBox.new()
 		button.text = LANGUAGES_DICT[locale][0] + " [%s]" % [locale]
 		button.name = LANGUAGES_DICT[locale][1]
 		button.tooltip_text = LANGUAGES_DICT[locale][1]
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		button.group = button_group
+		button.button_group = button_group
 		add_child(button)
 		button.pressed.connect(_on_Language_pressed.bind(button.get_index()))
 	get_child(locale_index + 2).button_pressed = true  # Select the appropriate button

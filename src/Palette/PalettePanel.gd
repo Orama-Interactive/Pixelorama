@@ -79,7 +79,6 @@ func redraw_current_palette() -> void:
 		add_color_button.show()
 		delete_color_button.show()
 	else:
-		palette_grid.clear_swatches()
 		add_color_button.hide()
 		delete_color_button.hide()
 

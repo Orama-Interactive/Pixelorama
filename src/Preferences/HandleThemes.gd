@@ -43,7 +43,7 @@ func add_theme(theme: Theme) -> void:
 	button.name = theme_name
 	button.text = theme_name
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	button.group = theme_button_group
+	button.button_group = theme_button_group
 	buttons_container.add_child(button)
 	button.pressed.connect(_on_Theme_pressed.bind(button.get_index()))
 

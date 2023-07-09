@@ -1,19 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://ckg78y8l0rmf3"]
 
-[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/UI/Buttons/BrushButton.gd" type="Script" id=2]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/TransparentChecker.tscn" id="1"]
+[ext_resource type="Script" path="res://src/UI/Buttons/BrushButton.gd" id="2"]
 
 [node name="BrushButton" type="Button"]
+custom_minimum_size = Vector2(36, 36)
 offset_right = 36.0
 offset_bottom = 36.0
-custom_minimum_size = Vector2( 36, 36 )
 button_mask = 7
-script = ExtResource( 2 )
-__meta__ = {
-"_editor_description_": ""
-}
+script = ExtResource("2")
 
-[node name="TransparentChecker" parent="." instance=ExtResource( 1 )]
+[node name="TransparentChecker" parent="." instance=ExtResource("1")]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
@@ -22,26 +20,28 @@ offset_right = -2.0
 offset_bottom = -2.0
 
 [node name="BrushTexture" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
 offset_bottom = -2.0
-custom_minimum_size = Vector2( 32, 32 )
-expand = true
+expand_mode = 1
 stretch_mode = 6
 
 [node name="DeleteButton" type="Button" parent="."]
 visible = false
-modulate = Color( 1, 0.00392157, 0.00392157, 0.878431 )
+modulate = Color(1, 0.00392157, 0.00392157, 0.878431)
+layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -12.0
 offset_top = 2.0
 offset_right = 8.0
 offset_bottom = 22.0
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2(0.5, 0.5)
 text = "X"
 
 [connection signal="mouse_entered" from="." to="." method="_on_BrushButton_mouse_entered"]

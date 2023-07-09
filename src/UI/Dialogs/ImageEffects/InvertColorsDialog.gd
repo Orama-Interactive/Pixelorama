@@ -9,8 +9,9 @@ var shader: Shader = preload("res://src/Shaders/Invert.gdshader")
 
 
 func _ready() -> void:
+	super._ready()
 	var sm := ShaderMaterial.new()
-	sm.gdshader = shader
+	sm.shader = shader
 	preview.set_material(sm)
 
 

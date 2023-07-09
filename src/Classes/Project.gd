@@ -461,6 +461,9 @@ func _name_changed(value: String) -> void:
 
 
 func _size_changed(value: Vector2) -> void:
+	if not is_instance_valid(tiles):
+		size = value
+		return
 	if size.x != 0:
 		tiles.x_basis = (tiles.x_basis * value.x / size.x).round()
 	else:

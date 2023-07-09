@@ -30,7 +30,7 @@ func _ready() -> void:
 	_texture_rect.pivot_offset = Vector2(6, 6)
 	_texture_rect.add_to_group("UIButtons")
 	_button.add_child(_texture_rect)
-	_label.valign = VERTICAL_ALIGNMENT_CENTER
+	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_label.position = Vector2(14, 0)
 	_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	_button.add_child(_label)

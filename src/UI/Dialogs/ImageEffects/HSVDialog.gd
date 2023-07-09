@@ -9,8 +9,9 @@ var shader: Shader = preload("res://src/Shaders/HSV.gdshader")
 
 
 func _ready() -> void:
+	super._ready()
 	var sm := ShaderMaterial.new()
-	sm.gdshader = shader
+	sm.shader = shader
 	preview.set_material(sm)
 	# set as in enum
 	animate_panel.add_float_property("Hue", hue_slider)
