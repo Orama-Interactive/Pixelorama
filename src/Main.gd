@@ -86,7 +86,7 @@ func _get_auto_display_scale() -> float:
 		return DisplayServer.screen_get_max_scale()
 
 	var dpi := DisplayServer.screen_get_dpi()
-	var smallest_dimension: int = min(DisplayServer.screen_get_size().x, DisplayServer.screen_get_size().y)
+	var smallest_dimension := mini(DisplayServer.screen_get_size().x, DisplayServer.screen_get_size().y)
 	if dpi >= 192 && smallest_dimension >= 1400:
 		return 2.0  # hiDPI display.
 	elif smallest_dimension >= 1700:
@@ -129,7 +129,7 @@ func set_custom_cursor() -> void:
 	else:
 		var cursor_data := cursor_image.get_image()
 		cursor_data.resize(
-			cursor_data.get_width() * Global.shrink, cursor_data.get_height() * Global.shrink, 0
+			cursor_data.get_width() * Global.shrink, cursor_data.get_height() * Global.shrink, Image.INTERPOLATE_NEAREST
 		)
 		var new_cursor_tex := ImageTexture.create_from_image(cursor_data)
 		Input.set_custom_mouse_cursor(
@@ -292,7 +292,7 @@ func _on_SaveSpriteHTML5_confirmed() -> void:
 		"FileNameContainer/FileNameLineEdit"
 	).text
 	file_name += ".pxo"
-	var path = "user://".path_join(file_name)
+	var path := "user://".path_join(file_name)
 	OpenSave.save_pxo_file(path, false, false)
 
 

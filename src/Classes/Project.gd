@@ -169,7 +169,7 @@ func change_project() -> void:
 	)
 	toggle_layer_buttons()
 
-	self.animation_tags = animation_tags
+	animation_tags = animation_tags
 
 	# Change the guides
 	for guide in Global.canvas.get_children():
@@ -242,12 +242,12 @@ func change_project() -> void:
 
 	var i := 0
 	for camera in Global.cameras:
-		camera.zoom_max = cameras_zoom_max[i]
+		camera.zoom_out_max = cameras_zoom_max[i]
 		if camera == Global.camera_preview:
 			Global.preview_zoom_slider.value_changed.disconnect(
 				Global.canvas_preview_container._on_PreviewZoomSlider_value_changed
 			)
-			Global.preview_zoom_slider.min_value = -camera.zoom_max.x
+			Global.preview_zoom_slider.min_value = 100.0 * camera.zoom_out_max.x
 			Global.preview_zoom_slider.value_changed.connect(
 				Global.canvas_preview_container._on_PreviewZoomSlider_value_changed
 			)
@@ -399,7 +399,7 @@ func deserialize(dict: Dictionary) -> void:
 	if dict.has("tags"):
 		for tag in dict.tags:
 			animation_tags.append(AnimationTag.new(tag.name, Color(tag.color), tag.from, tag.to))
-		self.animation_tags = animation_tags
+		animation_tags = animation_tags
 	if dict.has("guides"):
 		for g in dict.guides:
 			var guide := Guide.new()

@@ -9,8 +9,8 @@ const CAMERA_SPEED_RATE := 15.0
 
 @export var index := 0
 
-var zoom_min := Vector2(0.005, 0.005)
-var zoom_max := Vector2.ONE
+var zoom_in_max := Vector2(500, 500)
+var zoom_out_max := Vector2.ONE
 var viewport_container: SubViewportContainer
 var transparent_checker: ColorRect
 var mouse_pos := Vector2.ZERO
@@ -37,7 +37,7 @@ func _ready() -> void:
 
 
 func set_zoom_max_value() -> void:
-	zoom_slider.max_value = 100.0 / zoom_min.x
+	zoom_slider.max_value = 100.0 * zoom_in_max.x
 
 
 func _rotation_value_changed(value: float) -> void:
@@ -53,8 +53,7 @@ func _rotation_value_changed(value: float) -> void:
 func _zoom_value_changed(value: float) -> void:
 	if value <= 0:
 		value = 1
-	var percent := 100.0 / value
-	var new_zoom := Vector2(percent, percent)
+	var new_zoom := Vector2(value, value) / 100.0
 	if zoom == new_zoom:
 		return
 	if Global.smooth_zoom and should_tween:
@@ -94,16 +93,16 @@ func _input(event: InputEvent) -> void:
 			zoom_camera(-1)
 	elif event is InputEventPanGesture and OS.get_name() != "Android":
 		# Pan Gesture on a laptop touchpad
-		offset = offset + event.delta.rotated(rotation) * zoom * 7
+		offset = offset + event.delta.rotated(rotation) * 7.0 / zoom
 	elif event is InputEventMouseMotion:
 		if drag:
-			offset = offset - event.relative.rotated(rotation) * zoom
+			offset = offset - event.relative.rotated(rotation) / zoom
 			update_transparent_checker_offset()
 			_update_rulers()
 	else:
 		var velocity := Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
 		if velocity != Vector2.ZERO and !_has_selection_tool():
-			offset += velocity.rotated(rotation) * zoom * CAMERA_SPEED_RATE
+			offset += (velocity.rotated(rotation) / zoom) * CAMERA_SPEED_RATE
 			_update_rulers()
 
 	save_values_to_project()
@@ -131,7 +130,6 @@ func _rotation_changed() -> void:
 		_update_rulers()
 
 
-# Zoom Camera
 func zoom_camera(dir: int) -> void:
 	var viewport_size := viewport_container.size
 	if Global.smooth_zoom:
@@ -141,10 +139,13 @@ func zoom_camera(dir: int) -> void:
 			new_zoom = zoom / (Vector2.ONE - dir * zoom)
 			if new_zoom == Vector2.INF:
 				return
-		if new_zoom > zoom_min && new_zoom <= zoom_max:
+		if new_zoom < zoom_in_max && new_zoom > zoom_out_max:
 			var new_offset := (
 				offset
-				+ (-0.5 * viewport_size + mouse_pos).rotated(rotation) * (zoom - new_zoom)
+				+ (
+					(-0.5 * viewport_size + mouse_pos).rotated(rotation)
+					* (Vector2.ONE / zoom - Vector2.ONE / new_zoom)
+				)
 			)
 			var tween := create_tween().set_parallel()
 			tween.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
@@ -158,24 +159,30 @@ func zoom_camera(dir: int) -> void:
 			zoom_margin = (zoom / (Vector2.ONE - dir * zoom)) - zoom
 			if zoom_margin == Vector2.INF:
 				return
-		if zoom + zoom_margin > zoom_min:
+		if zoom + zoom_margin < zoom_in_max:
 			zoom += zoom_margin
-		if zoom > zoom_max:
-			zoom = zoom_max
-		offset = offset + (-0.5 * viewport_size + mouse_pos).rotated(rotation) * (prev_zoom - zoom)
+		if zoom < zoom_out_max:
+			zoom = zoom_out_max
+		offset = (
+			offset
+			+ (
+				(-0.5 * viewport_size + mouse_pos).rotated(rotation)
+				* (Vector2.ONE / prev_zoom - Vector2.ONE / zoom)
+			)
+		)
 		zoom_changed.emit()
 
 
 func _zoom_changed() -> void:
 	update_transparent_checker_offset()
 	if index == Cameras.MAIN:
-		zoom_slider.value = round(100 / zoom.x)
+		zoom_slider.value = zoom.x * 100.0
 		_update_rulers()
 		for guide in Global.current_project.guides:
-			guide.width = zoom.x * 2
+			guide.width = 1.0 / zoom.x * 2
 
 	elif index == Cameras.SMALL:
-		Global.preview_zoom_slider.value = -zoom.x
+		Global.preview_zoom_slider.value = zoom.x
 
 
 func _update_rulers() -> void:
@@ -211,8 +218,8 @@ func fit_to_frame(size: Vector2) -> void:
 		var d := Vector2(size.x, size.y).rotated(rotation)  # Bottom right
 
 		# Find how far apart each opposite point is on each axis, and take the longer one
-		size.x = max(abs(a.x - d.x), abs(b.x - c.x))
-		size.y = max(abs(a.y - d.y), abs(b.y - c.y))
+		size.x = maxf(absf(a.x - d.x), absf(b.x - c.x))
+		size.y = maxf(absf(a.y - d.y), absf(b.y - c.y))
 
 	viewport_container = get_parent().get_parent()
 	var h_ratio := viewport_container.size.x / size.x
@@ -225,14 +232,14 @@ func fit_to_frame(size: Vector2) -> void:
 		if index == Cameras.MAIN:
 			h_ratio = Global.second_viewport.size.x / size.x
 			v_ratio = Global.second_viewport.size.y / size.y
-			ratio = min(h_ratio, v_ratio)
+			ratio = minf(h_ratio, v_ratio)
 		elif index == Cameras.SECOND:
 			h_ratio = Global.main_viewport.size.x / size.x
 			v_ratio = Global.main_viewport.size.y / size.y
-			ratio = min(h_ratio, v_ratio)
+			ratio = minf(h_ratio, v_ratio)
 
 	ratio = clampf(ratio, 0.1, ratio)
-	zoom = Vector2(1 / ratio, 1 / ratio)
+	zoom = Vector2(ratio, ratio)
 	zoom_changed.emit()
 	if reset_integer_zoom:
 		Global.integer_zoom = !Global.integer_zoom
@@ -242,4 +249,4 @@ func save_values_to_project() -> void:
 	Global.current_project.cameras_rotation[index] = rotation
 	Global.current_project.cameras_zoom[index] = zoom
 	Global.current_project.cameras_offset[index] = offset
-	Global.current_project.cameras_zoom_max[index] = zoom_max
+	Global.current_project.cameras_zoom_max[index] = zoom_out_max
