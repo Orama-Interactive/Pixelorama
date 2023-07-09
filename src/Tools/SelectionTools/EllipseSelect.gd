@@ -217,7 +217,7 @@ func _get_ellipse_points(pos: Vector2, ellipse_size: Vector2) -> Array:
 	if y0 > y1:
 		y0 = y1
 
-# warning-ignore:integer_division
+	@warning_ignore("integer_division")
 	y0 += (b + 1) / 2
 	y1 = y0 - b1
 	a *= 8 * a

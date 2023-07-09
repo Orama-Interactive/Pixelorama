@@ -13,9 +13,9 @@ var show_right_highlight := false
 var empty := true: set = set_empty
 
 
-func set_swatch_size(size: Vector2) -> void:
-	custom_minimum_size = size
-	size = size
+func set_swatch_size(swatch_size: Vector2) -> void:
+	custom_minimum_size = swatch_size
+	size = swatch_size
 
 
 func _draw() -> void:

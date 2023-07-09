@@ -88,57 +88,57 @@ func _save_palette(palette: Palette) -> String:
 
 func create_new_palette(
 	preset: int,
-	name: String,
+	palette_name: String,
 	comment: String,
 	width: int,
 	height: int,
 	add_alpha_colors: bool,
 	get_colors_from: int
 ) -> void:
-	_check_palette_settings_values(name, width, height)
+	_check_palette_settings_values(palette_name, width, height)
 	match preset:
 		NewPalettePresetType.EMPTY:
-			_create_new_empty_palette(name, comment, width, height)
+			_create_new_empty_palette(palette_name, comment, width, height)
 		NewPalettePresetType.FROM_CURRENT_PALETTE:
-			_create_new_palette_from_current_palette(name, comment)
+			_create_new_palette_from_current_palette(palette_name, comment)
 		NewPalettePresetType.FROM_CURRENT_SPRITE:
 			_create_new_palette_from_current_sprite(
-				name, comment, width, height, add_alpha_colors, get_colors_from
+				palette_name, comment, width, height, add_alpha_colors, get_colors_from
 			)
 		NewPalettePresetType.FROM_CURRENT_SELECTION:
 			_create_new_palette_from_current_selection(
-				name, comment, width, height, add_alpha_colors, get_colors_from
+				palette_name, comment, width, height, add_alpha_colors, get_colors_from
 			)
 
 
-func _create_new_empty_palette(name: String, comment: String, width: int, height: int) -> void:
-	var new_palette: Palette = Palette.new(name, width, height, comment)
+func _create_new_empty_palette(palette_name: String, comment: String, width: int, height: int) -> void:
+	var new_palette: Palette = Palette.new(palette_name, width, height, comment)
 	var palette_path := _save_palette(new_palette)
 	palettes[palette_path] = new_palette
 	select_palette(palette_path)
 
 
-func _create_new_palette_from_current_palette(name: String, comment: String) -> void:
+func _create_new_palette_from_current_palette(palette_name: String, comment: String) -> void:
 	if !current_palette:
 		return
 	var new_palette: Palette = current_palette.duplicate()
-	new_palette.name = name
+	new_palette.name = palette_name
 	new_palette.comment = comment
-	new_palette.set_resource_name(name)
+	new_palette.set_resource_name(palette_name)
 	var palette_path := _save_palette(new_palette)
 	palettes[palette_path] = new_palette
 	select_palette(palette_path)
 
 
 func _create_new_palette_from_current_selection(
-	name: String,
+	palette_name: String,
 	comment: String,
 	width: int,
 	height: int,
 	add_alpha_colors: bool,
 	get_colors_from: int
 ):
-	var new_palette: Palette = Palette.new(name, width, height, comment)
+	var new_palette: Palette = Palette.new(palette_name, width, height, comment)
 	var current_project = Global.current_project
 	var pixels := []
 	for x in current_project.size.x:
@@ -150,14 +150,14 @@ func _create_new_palette_from_current_selection(
 
 
 func _create_new_palette_from_current_sprite(
-	name: String,
+	palette_name: String,
 	comment: String,
 	width: int,
 	height: int,
 	add_alpha_colors: bool,
 	get_colors_from: int
 ):
-	var new_palette: Palette = Palette.new(name, width, height, comment)
+	var new_palette: Palette = Palette.new(palette_name, width, height, comment)
 	var current_project = Global.current_project
 	var pixels := []
 	for x in current_project.size.x:
@@ -169,12 +169,12 @@ func _create_new_palette_from_current_sprite(
 func _fill_new_palette_with_colors(
 	pixels: Array, new_palette: Palette, add_alpha_colors: bool, get_colors_from: int
 ):
-	var current_project = Global.current_project
-	var cels := []
+	var current_project := Global.current_project
+	var cels: Array[BaseCel] = []
 	match get_colors_from:
 		GetColorsFrom.CURRENT_CEL:
 			for cel_index in current_project.selected_cels:
-				var cel: PixelCel = current_project.frames[cel_index[0]].cels[cel_index[1]]
+				var cel := current_project.frames[cel_index[0]].cels[cel_index[1]]
 				cels.append(cel)
 		GetColorsFrom.CURRENT_FRAME:
 			for cel in current_project.frames[current_project.current_frame].cels:
@@ -186,7 +186,7 @@ func _fill_new_palette_with_colors(
 
 	for cel in cels:
 		var cel_image := Image.new()
-		cel_image.copy_from(cel.image)
+		cel_image.copy_from(cel.get_image())
 		if cel_image.is_invisible():
 			continue
 		for i in pixels:
@@ -202,9 +202,9 @@ func _fill_new_palette_with_colors(
 	select_palette(palette_path)
 
 
-func current_palette_edit(name: String, comment: String, width: int, height: int) -> void:
-	_check_palette_settings_values(name, width, height)
-	current_palette.edit(name, width, height, comment)
+func current_palette_edit(palette_name: String, comment: String, width: int, height: int) -> void:
+	_check_palette_settings_values(palette_name, width, height)
+	current_palette.edit(palette_name, width, height, comment)
 	var palette_path = _current_palette_save()
 	palettes[palette_path] = current_palette
 
@@ -311,9 +311,9 @@ func current_palette_is_full() -> bool:
 	return current_palette.is_full()
 
 
-func _check_palette_settings_values(name: String, width: int, height: int) -> bool:
+func _check_palette_settings_values(palette_name: String, width: int, height: int) -> bool:
 	# Just in case. These values should be not allowed in gui.
-	if name.length() <= 0 or width <= 0 or height <= 0:
+	if palette_name.length() <= 0 or width <= 0 or height <= 0:
 		printerr("Palette width, height and name length must be greater than 0!")
 		return false
 	return true

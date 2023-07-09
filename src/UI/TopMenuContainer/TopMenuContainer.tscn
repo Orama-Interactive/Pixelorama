@@ -1,76 +1,65 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://bsgwar3l6qtgv"]
 
-[ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/TopMenuContainer/TopMenuContainer.gd" type="Script" id=2]
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="1"]
+[ext_resource type="Script" path="res://src/UI/TopMenuContainer/TopMenuContainer.gd" id="2"]
 
 [node name="TopMenuContainer" type="Panel"]
+custom_minimum_size = Vector2(0, 28)
 offset_right = 1280.0
 offset_bottom = 28.0
-custom_minimum_size = Vector2( 0, 28 )
-theme_type_variation = "TopMenuPanel"
-script = ExtResource( 2 )
+theme_type_variation = &"TopMenuPanel"
+script = ExtResource("2")
 
 [node name="MenuItems" type="HBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 7.0
 offset_top = 4.0
 offset_right = 1010.0
 
 [node name="FileMenu" type="MenuButton" parent="MenuItems"]
-offset_right = 35.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "File"
 switch_on_hover = true
 
 [node name="EditMenu" type="MenuButton" parent="MenuItems"]
-offset_left = 39.0
-offset_right = 75.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Edit"
 switch_on_hover = true
 
 [node name="SelectMenu" type="MenuButton" parent="MenuItems"]
-offset_left = 79.0
-offset_right = 130.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Select"
 switch_on_hover = true
 
 [node name="ImageMenu" type="MenuButton" parent="MenuItems"]
-offset_left = 134.0
-offset_right = 186.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Image"
 switch_on_hover = true
 
 [node name="ViewMenu" type="MenuButton" parent="MenuItems"]
-offset_left = 190.0
-offset_right = 232.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "View"
 switch_on_hover = true
 
 [node name="WindowMenu" type="MenuButton" parent="MenuItems"]
-offset_left = 236.0
-offset_right = 299.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Window"
 switch_on_hover = true
 
 [node name="HelpMenu" type="MenuButton" parent="MenuItems"]
-offset_left = 303.0
-offset_right = 345.0
-offset_bottom = 20.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Help"
 switch_on_hover = true
 
 [node name="TopLabels" type="HBoxContainer" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
@@ -80,13 +69,12 @@ theme_override_constants/separation = 20
 
 [node name="RotationSlider" type="TextureProgressBar" parent="TopLabels"]
 unique_name_in_owner = true
-offset_top = 4.0
-offset_right = 70.0
-offset_bottom = 24.0
-custom_minimum_size = Vector2( 70, 20 )
-mouse_default_cursor_shape = 2
+custom_minimum_size = Vector2(70, 20)
+layout_mode = 2
 size_flags_vertical = 4
-theme_type_variation = "ValueSlider"
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
 min_value = -180.0
 max_value = 180.0
 step = 0.1
@@ -97,19 +85,17 @@ stretch_margin_left = 3
 stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
-script = ExtResource( 1 )
+script = ExtResource("1")
 suffix = "°"
 
 [node name="ZoomSlider" type="TextureProgressBar" parent="TopLabels"]
 unique_name_in_owner = true
-offset_left = 90.0
-offset_top = 4.0
-offset_right = 160.0
-offset_bottom = 24.0
-custom_minimum_size = Vector2( 70, 20 )
-mouse_default_cursor_shape = 2
+custom_minimum_size = Vector2(70, 20)
+layout_mode = 2
 size_flags_vertical = 4
-theme_type_variation = "ValueSlider"
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
 min_value = 50.0
 max_value = 2000.0
 value = 50.0
@@ -119,18 +105,15 @@ stretch_margin_left = 3
 stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
-script = ExtResource( 1 )
+script = ExtResource("1")
 suffix = "%"
 
 [node name="CursorPosition" type="Label" parent="TopLabels"]
-offset_left = 180.0
-offset_top = 7.0
-offset_right = 228.0
-offset_bottom = 21.0
+layout_mode = 2
 text = "[64×64]"
-align = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -143,18 +126,11 @@ grow_horizontal = 2
 alignment = 1
 
 [node name="CurrentFrame" type="Label" parent="HBoxContainer"]
-offset_left = 106.0
-offset_right = 198.0
-offset_bottom = 23.0
+layout_mode = 2
 size_flags_vertical = 1
 text = "Current frame:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CurrentFrameMark" type="Label" parent="HBoxContainer"]
-offset_left = 202.0
-offset_right = 223.0
-offset_bottom = 23.0
+layout_mode = 2
 size_flags_vertical = 1
 text = "1/1"

@@ -23,24 +23,24 @@ func _input(event: InputEvent) -> void:
 			_displace_origin = false
 
 
-func draw_move(position: Vector2) -> void:
+func draw_move(pos: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
-	position = snap_position(position)
-	super.draw_move(position)
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if !_move:
 		if _displace_origin:
-			_start_pos += position - _offset
-		_rect = _get_result_rect(_start_pos, position)
+			_start_pos += pos - _offset
+		_rect = _get_result_rect(_start_pos, pos)
 		_set_cursor_text(_rect)
-		_offset = position
+		_offset = pos
 
 
-func draw_end(position: Vector2) -> void:
+func draw_end(pos: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
-	position = snap_position(position)
-	super.draw_end(position)
+	pos = snap_position(pos)
+	super.draw_end(pos)
 	_rect = Rect2(0, 0, 0, 0)
 	_square = false
 	_expand_from_center = false
@@ -50,12 +50,12 @@ func draw_end(position: Vector2) -> void:
 func draw_preview() -> void:
 	if !_move:
 		var canvas: Node2D = Global.canvas.previews
-		var position := canvas.position
-		var scale := canvas.scale
+		var pos := canvas.position
+		var _scale := canvas.scale
 		if Global.mirror_view:
-			position.x = position.x + Global.current_project.size.x
-			scale.x = -1
-		canvas.draw_set_transform(position, canvas.rotation, scale)
+			pos.x = pos.x + Global.current_project.size.x
+			_scale.x = -1
+		canvas.draw_set_transform(pos, canvas.rotation, _scale)
 		canvas.draw_rect(_rect, Color.BLACK, false)
 
 		# Handle mirroring
@@ -89,8 +89,8 @@ func draw_preview() -> void:
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
-func apply_selection(_position: Vector2) -> void:
-	super.apply_selection(_position)
+func apply_selection(pos: Vector2) -> void:
+	super.apply_selection(pos)
 	var project: Project = Global.current_project
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()

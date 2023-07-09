@@ -33,7 +33,7 @@ func get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
 	if y0 > y1:
 		y0 = y1
 
-# warning-ignore:integer_division
+	@warning_ignore("integer_division")
 	y0 += (b + 1) / 2
 	y1 = y0 - b1
 	a *= 8 * a
@@ -188,18 +188,18 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 	var p: Color
 	for x in sprite.get_size().x:
 		for y in sprite.get_size().y:
-			var dx = 3 * (x - pivot.x)
-			var dy = 3 * (y - pivot.y)
+			var dx := 3 * (x - pivot.x)
+			var dy := 3 * (y - pivot.y)
 			var found_pixel: bool = false
 			for k in range(9):
-				var i = -1 + k % 3
-# warning-ignore:integer_division
-				var j = -1 + int(k / 3)
-				var dir = atan2(dy + j, dx + i)
-				var mag = sqrt(pow(dx + i, 2) + pow(dy + j, 2))
+				var i := -1 + k % 3
+				@warning_ignore("integer_division")
+				var j := -1 + int(k / 3)
+				var dir := atan2(dy + j, dx + i)
+				var mag := sqrt(pow(dx + i, 2) + pow(dy + j, 2))
 				dir -= angle
-				ox = round(pivot.x * 3 + 1 + mag * cos(dir))
-				oy = round(pivot.y * 3 + 1 + mag * sin(dir))
+				ox = roundi(pivot.x * 3 + 1 + mag * cos(dir))
+				oy = roundi(pivot.y * 3 + 1 + mag * sin(dir))
 
 				if sprite.get_width() % 2 != 0:
 					ox += 1
@@ -222,8 +222,8 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 			var col: int = ox % 3
 			var index: int = col + 3 * fil
 
-			ox = round((ox - 1) / 3.0)
-			oy = round((oy - 1) / 3.0)
+			ox = roundi((ox - 1) / 3.0)
+			oy = roundi((oy - 1) / 3.0)
 			var a: Color
 			var b: Color
 			var c: Color
@@ -373,9 +373,8 @@ func fake_rotsprite(sprite: Image, angle: float, pivot: Vector2) -> void:
 	selected_sprite.copy_from(sprite)
 	selected_sprite.copy_from(scale_3x(selected_sprite))
 	nn_rotate(selected_sprite, angle, pivot * 3)
-# warning-ignore:integer_division
-# warning-ignore:integer_division
-	selected_sprite.resize(selected_sprite.get_width() / 3, selected_sprite.get_height() / 3, 0)
+	@warning_ignore("integer_division")
+	selected_sprite.resize(selected_sprite.get_width() / 3, selected_sprite.get_height() / 3, Image.INTERPOLATE_NEAREST)
 	sprite.blit_rect(selected_sprite, Rect2(Vector2.ZERO, selected_sprite.get_size()), Vector2.ZERO)
 
 
@@ -429,6 +428,7 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 				)
 				for _j in range(max(times.x, times.y)):
 					sprite.copy_from(scale_3x(sprite))
+				@warning_ignore("int_as_enum_without_cast")
 				sprite.resize(width, height, 0)
 			elif interpolation == Interpolation.CLEANEDGE:
 				var params := {"angle": 0, "slope": true, "cleanup": true, "preview": false}

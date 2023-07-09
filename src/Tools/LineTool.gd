@@ -66,12 +66,12 @@ func _input(event: InputEvent) -> void:
 			_displace_origin = false
 
 
-func draw_start(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_start(position)
+func draw_start(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_start(pos)
 	if Input.is_action_pressed("shape_displace"):
 		_picking_color = true
-		_pick_color(position)
+		_pick_color(pos)
 		return
 	_picking_color = false
 
@@ -80,29 +80,29 @@ func draw_start(position: Vector2) -> void:
 
 	if Global.mirror_view:
 		# mirroring position is ONLY required by "Preview"
-		position.x = Global.current_project.size.x - position.x - 1
-	_original_pos = position
-	_start = position
-	_offset = position
-	_dest = position
+		pos.x = Global.current_project.size.x - pos.x - 1
+	_original_pos = pos
+	_start = pos
+	_offset = pos
+	_dest = pos
 	_drawing = true
 
 
-func draw_move(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_move(position)
+func draw_move(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
 		if Input.is_action_pressed("shape_displace"):
-			_pick_color(position)
+			_pick_color(pos)
 		return
 
 	if _drawing:
 		if Global.mirror_view:
 			# mirroring position is ONLY required by "Preview"
-			position.x = Global.current_project.size.x - position.x - 1
+			pos.x = Global.current_project.size.x - pos.x - 1
 		if _displace_origin:
-			_original_pos += position - _offset
-		var d := _line_angle_constraint(_original_pos, position)
+			_original_pos += pos - _offset
+		var d := _line_angle_constraint(_original_pos, pos)
 		_dest = d.position
 
 		if Input.is_action_pressed("shape_center"):
@@ -110,12 +110,12 @@ func draw_move(position: Vector2) -> void:
 		else:
 			_start = _original_pos
 		cursor_text = d.text
-		_offset = position
+		_offset = pos
 
 
-func draw_end(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_end(position)
+func draw_end(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_end(pos)
 	if _picking_color:
 		return
 

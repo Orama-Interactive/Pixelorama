@@ -56,8 +56,8 @@ func set_default_values() -> void:
 
 
 # Shows/hides a warning when palette already exists
-func toggle_already_exists_warning(visible: bool) -> void:
-	already_exists_warning.visible = visible
+func toggle_already_exists_warning(to_show: bool) -> void:
+	already_exists_warning.visible = to_show
 
 	# Required to resize window to correct size if warning causes content overflow
 	size = size

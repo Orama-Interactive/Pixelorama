@@ -455,17 +455,17 @@ func add_brush() -> void:
 # Checks if the file already exists
 # If it does, add a number to its name, for example
 # "Brush_Name" will become "Brush_Name (2)", "Brush_Name (3)", etc.
-func file_name_replace(name: String, folder: String) -> String:
+func file_name_replace(file_name: String, folder: String) -> String:
 	var i := 1
-	var file_ext = name.get_extension()
-	var temp_name := name
+	var file_ext := file_name.get_extension()
+	var temp_name := file_name
 	var dir := DirAccess.open(Global.directory_module.xdg_data_home.path_join(folder))
 	while dir.file_exists(temp_name):
 		i += 1
-		temp_name = name.get_basename() + " (%s)" % i
+		temp_name = file_name.get_basename() + " (%s)" % i
 		temp_name += "." + file_ext
-	name = temp_name
-	return name
+	file_name = temp_name
+	return file_name
 
 
 func _on_PreviewDialog_item_rect_changed() -> void:

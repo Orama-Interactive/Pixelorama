@@ -4,44 +4,44 @@ var _last_position := Vector2.INF
 var _draw_points := []
 
 
-func draw_start(position: Vector2) -> void:
-	position = snap_position(position)
-	super.draw_start(position)
+func draw_start(pos: Vector2) -> void:
+	pos = snap_position(pos)
+	super.draw_start(pos)
 	if !_move:
-		_draw_points.append(position)
-		_last_position = position
+		_draw_points.append(pos)
+		_last_position = pos
 
 
-func draw_move(position: Vector2) -> void:
+func draw_move(pos: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
-	position = snap_position(position)
-	super.draw_move(position)
+	pos = snap_position(pos)
+	super.draw_move(pos)
 	if !_move:
-		append_gap(_last_position, position)
-		_last_position = position
-		_draw_points.append(position)
-		_offset = position
+		append_gap(_last_position, pos)
+		_last_position = pos
+		_draw_points.append(pos)
+		_offset = pos
 
 
-func draw_end(position: Vector2) -> void:
+func draw_end(pos: Vector2) -> void:
 	if selection_node.arrow_key_move:
 		return
-	position = snap_position(position)
+	pos = snap_position(pos)
 	if !_move:
-		_draw_points.append(position)
-	super.draw_end(position)
+		_draw_points.append(pos)
+	super.draw_end(pos)
 
 
 func draw_preview() -> void:
 	if _last_position != Vector2.INF and !_move:
 		var canvas: Node2D = Global.canvas.previews
-		var position := canvas.position
-		var scale := canvas.scale
+		var pos := canvas.position
+		var _scale := canvas.scale
 		if Global.mirror_view:
-			position.x = position.x + Global.current_project.size.x
-			scale.x = -1
-		canvas.draw_set_transform(position, canvas.rotation, scale)
+			pos.x = pos.x + Global.current_project.size.x
+			_scale.x = -1
+		canvas.draw_set_transform(pos, canvas.rotation, _scale)
 		var indicator := _fill_bitmap_with_points(_draw_points, Global.current_project.size)
 
 		for line in _create_polylines(indicator):
@@ -108,9 +108,9 @@ func apply_selection(_position) -> void:
 
 func lasso_selection(selection_map: SelectionMap, points: PackedVector2Array) -> void:
 	var project: Project = Global.current_project
-	var size := selection_map.get_size()
+	var selection_size := selection_map.get_size()
 	for point in points:
-		if point.x < 0 or point.y < 0 or point.x >= size.x or point.y >= size.y:
+		if point.x < 0 or point.y < 0 or point.x >= selection_size.x or point.y >= selection_size.y:
 			continue
 		if _intersect:
 			if project.selection_map.is_pixel_selected(point):

@@ -405,8 +405,6 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 		return
 	prev_angle = angle
 #	var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
-# warning-ignore:integer_division
-# warning-ignore:integer_division
 #	var pivot = Vector2(original_preview_image.get_width()/2, original_preview_image.get_height()/2)
 	var pivot := Vector2(big_bounding_rectangle.size.x / 2, big_bounding_rectangle.size.y / 2)
 	preview_image.copy_from(original_preview_image)

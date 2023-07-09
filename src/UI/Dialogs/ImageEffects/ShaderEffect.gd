@@ -50,10 +50,10 @@ func set_nodes() -> void:
 	preview = $VBoxContainer/AspectRatioContainer/Preview
 
 
-func change_shader(shader_tmp: Shader, name: String) -> void:
+func change_shader(shader_tmp: Shader, shader_name: String) -> void:
 	shader = shader_tmp
 	preview.material.shader = shader_tmp
-	shader_loaded_label.text = tr("Shader loaded:") + " " + name
+	shader_loaded_label.text = tr("Shader loaded:") + " " + shader_name
 	param_names.clear()
 	for child in shader_params.get_children():
 		child.queue_free()

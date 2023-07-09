@@ -1,146 +1,107 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://birggxam3fjnb"]
 
-[ext_resource path="res://src/UI/Nodes/TransparentChecker.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/UI/Dialogs/ImageEffects/ResizeCanvas.gd" type="Script" id=2]
+[ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="1"]
+[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/ResizeCanvas.gd" id="2"]
 
 [node name="ResizeCanvas" type="ConfirmationDialog"]
-offset_right = 200.0
-offset_bottom = 114.0
-custom_minimum_size = Vector2( 172, 60.2 )
-window_title = "Resize Canvas"
-resizable = true
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 208.0
 offset_bottom = 380.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ImageSize" type="Label" parent="VBoxContainer"]
-offset_right = 200.0
-offset_bottom = 14.0
+layout_mode = 2
 text = "Canvas Size"
 
 [node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
-offset_top = 18.0
-offset_right = 200.0
-offset_bottom = 168.0
-theme_override_constants/v_separation = 4
+layout_mode = 2
 theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 4
 columns = 2
 
 [node name="WidthLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
-offset_top = 5.0
-offset_right = 99.0
-offset_bottom = 19.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Width:"
 
 [node name="WidthValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-offset_left = 101.0
-offset_right = 200.0
-offset_bottom = 24.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
 [node name="Height" type="Label" parent="VBoxContainer/OptionsContainer"]
-offset_top = 33.0
-offset_right = 99.0
-offset_bottom = 47.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Height:"
 
 [node name="HeightValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-offset_left = 101.0
-offset_top = 28.0
-offset_right = 200.0
-offset_bottom = 52.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
 value = 64.0
 suffix = "px"
 
 [node name="OffsetLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
-offset_top = 56.0
-offset_right = 99.0
-offset_bottom = 70.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Offset"
 
 [node name="EmptySpacer" type="Control" parent="VBoxContainer/OptionsContainer"]
-offset_left = 101.0
-offset_top = 56.0
-offset_right = 200.0
-offset_bottom = 70.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="XLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
-offset_top = 79.0
-offset_right = 99.0
-offset_bottom = 93.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "X:"
 
 [node name="XSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-offset_left = 101.0
-offset_top = 74.0
-offset_right = 200.0
-offset_bottom = 98.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 max_value = 0.0
 suffix = "px"
 
 [node name="YLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
-offset_top = 107.0
-offset_right = 99.0
-offset_bottom = 121.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Y:"
 
 [node name="YSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
-offset_left = 101.0
-offset_top = 102.0
-offset_right = 200.0
-offset_bottom = 126.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 max_value = 0.0
 suffix = "px"
 
 [node name="CenterButton" type="Button" parent="VBoxContainer/OptionsContainer"]
-offset_top = 130.0
-offset_right = 99.0
-offset_bottom = 150.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 text = "Center"
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-offset_top = 172.0
-offset_right = 200.0
-offset_bottom = 372.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
-offset_right = 200.0
-offset_bottom = 200.0
-custom_minimum_size = Vector2( 200, 200 )
-expand = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+expand_mode = 1
 stretch_mode = 5
 
-[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource( 1 )]
+[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource("1")]
 show_behind_parent = true
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 0.0
@@ -148,7 +109,6 @@ offset_bottom = 0.0
 
 [connection signal="about_to_popup" from="." to="." method="_on_ResizeCanvas_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ResizeCanvas_confirmed"]
-[connection signal="visibility_changed" from="." to="." method="_on_ResizeCanvas_visibility_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/WidthValue" to="." method="_on_WidthValue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/HeightValue" to="." method="_on_HeightValue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/XSpinBox" to="." method="_on_XSpinBox_value_changed"]

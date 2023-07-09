@@ -35,7 +35,7 @@ class GradientCursor:
 		size = Vector2(WIDTH, 15)
 
 	func _draw() -> void:
-# warning-ignore:integer_division
+		@warning_ignore("integer_division")
 		var polygon := PackedVector2Array(
 			[
 				Vector2(0, 5),
@@ -138,14 +138,14 @@ func add_cursor(x: float, color: Color) -> void:
 	cursor.color = color
 
 
-func select_color(cursor: GradientCursor, position: Vector2) -> void:
+func select_color(cursor: GradientCursor, pos: Vector2) -> void:
 	active_cursor = cursor
 	color_picker.color = cursor.color
-	if position.x > global_position.x + (size.x / 2.0):
-		position.x = global_position.x + size.x
+	if pos.x > global_position.x + (size.x / 2.0):
+		pos.x = global_position.x + size.x
 	else:
-		position.x = global_position.x - $Popup.size.x
-	$Popup.position = position
+		pos.x = global_position.x - $Popup.size.x
+	$Popup.position = pos
 	$Popup.popup()
 
 
