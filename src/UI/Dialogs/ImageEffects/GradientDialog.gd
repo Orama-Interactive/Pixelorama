@@ -6,14 +6,14 @@ enum Animate { POSITION, SIZE, ANGLE, CENTER_X, CENTER_Y, RADIUS_X, RADIUS_Y }
 var shader_linear: Shader = preload("res://src/Shaders/Gradients/Linear.gdshader")
 var shader_linear_dither: Shader = preload("res://src/Shaders/Gradients/LinearDithering.gdshader")
 
-var shader: Shader = shader_linear
-var dither_matrices := [
+var shader := shader_linear
+var dither_matrices: Array[DitherMatrix] = [
 	DitherMatrix.new(preload("res://assets/dither-matrices/bayer2.png"), "Bayer 2x2"),
 	DitherMatrix.new(preload("res://assets/dither-matrices/bayer4.png"), "Bayer 4x4"),
 	DitherMatrix.new(preload("res://assets/dither-matrices/bayer8.png"), "Bayer 8x8"),
 	DitherMatrix.new(preload("res://assets/dither-matrices/bayer16.png"), "Bayer 16x16"),
 ]
-var selected_dither_matrix: DitherMatrix = dither_matrices[0]
+var selected_dither_matrix := dither_matrices[0]
 
 @onready var options_cont: Container = $VBoxContainer/GradientOptions
 @onready var gradient_edit: GradientEditNode = $VBoxContainer/GradientEdit
@@ -64,9 +64,9 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		selection = Image.create(project.size.x, project.size.y, false, Image.FORMAT_L8)
 	selection_tex = ImageTexture.create_from_image(selection)
 
-	var dither_texture: Texture2D = selected_dither_matrix.texture
+	var dither_texture := selected_dither_matrix.texture
 	var pixel_size := dither_texture.get_width()
-	var gradient: Gradient = gradient_edit.gradient
+	var gradient := gradient_edit.gradient
 	var n_of_colors := gradient.offsets.size()
 	# Pass the gradient offsets as an array to the shader
 	# ...but since Godot 3.x doesn't support uniform arrays, instead we construct

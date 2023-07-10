@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://blrd4x0ma7b3h" path="res://assets/graphics/misc/animate.png" id="4"]
 
 [node name="ImageEffectParent" type="ConfirmationDialog"]
+canvas_item_default_texture_filter = 0
 script = ExtResource("3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -58,6 +59,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+button_pressed = true
 text = "Only affect selection"
 
 [node name="AffectOptionButton" type="OptionButton" parent="VBoxContainer/OptionsContainer"]
