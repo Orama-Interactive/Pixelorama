@@ -41,9 +41,7 @@ func _ready() -> void:
 
 func _on_BrushType_pressed() -> void:
 	if not Global.brushes_popup.brush_selected.is_connected(_on_Brush_selected):
-		Global.brushes_popup.brush_selected.connect(
-			_on_Brush_selected.bind([]), CONNECT_ONE_SHOT
-		)
+		Global.brushes_popup.brush_selected.connect(_on_Brush_selected, CONNECT_ONE_SHOT)
 	# Now we set position and columns
 	var tool_option_container = get_node("../../")
 	var brush_button = $Brush/Type
