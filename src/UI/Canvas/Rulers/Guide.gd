@@ -160,6 +160,11 @@ func _draw() -> void:
 	draw_string(font, Vector2(x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
 
 
+
+func force_input(event: InputEvent) -> void:
+	_input(event)
+
+
 func _outside_canvas() -> bool:
 	if type == Types.HORIZONTAL:
 		return points[0].y < 0 || points[0].y > project.size.y

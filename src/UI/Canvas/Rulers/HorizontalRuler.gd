@@ -15,6 +15,11 @@ func _ready() -> void:
 	Global.main_viewport.item_rect_changed.connect(queue_redraw)
 
 
+func _gui_input(event: InputEvent) -> void:
+	for guide in Global.current_project.guides:
+		guide.force_input(event)
+
+
 # Code taken and modified from Godot's source code
 func _draw() -> void:
 	var transform := Transform2D()
