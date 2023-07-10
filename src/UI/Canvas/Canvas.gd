@@ -24,6 +24,7 @@ var move_preview_location := Vector2.ZERO
 
 
 func _ready() -> void:
+	Global.project_changed.connect(queue_redraw)
 	onion_past.type = onion_past.PAST
 	onion_past.blue_red_color = Global.onion_skinning_past_color
 	onion_future.type = onion_future.FUTURE

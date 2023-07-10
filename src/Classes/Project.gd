@@ -168,7 +168,6 @@ func change_project() -> void:
 		Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1
 	)
 	toggle_layer_buttons()
-
 	animation_tags = animation_tags
 
 	# Change the guides
@@ -189,13 +188,8 @@ func change_project() -> void:
 	for brush in brushes:
 		Brushes.add_project_brush(brush)
 
-	Global.canvas.queue_redraw()
-	Global.canvas.grid.queue_redraw()
-	Global.canvas.tile_mode.queue_redraw()
 	Global.transparent_checker.update_rect()
 	Global.animation_timeline.fps_spinbox.value = fps
-	Global.horizontal_ruler.queue_redraw()
-	Global.vertical_ruler.queue_redraw()
 	Global.references_panel.project_changed()
 	Global.perspective_editor.update_points()
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
@@ -251,7 +245,6 @@ func change_project() -> void:
 		camera.rotation_changed.emit()
 		camera.zoom_changed.emit()
 		i += 1
-	Global.tile_mode_offset_dialog.change_mask()
 
 
 func serialize() -> Dictionary:
