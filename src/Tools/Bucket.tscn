@@ -37,6 +37,14 @@ text = "Fill area:"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "Similar area"
+popup/item_0/id = 0
+popup/item_1/text = "Similar colors"
+popup/item_1/id = 1
+popup/item_2/text = "Whole selection"
+popup/item_2/id = 2
 
 [node name="SimilaritySlider" parent="." index="4" instance=ExtResource("1")]
 visible = false
@@ -55,6 +63,12 @@ text = "Fill with:"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Selected color"
+popup/item_0/id = 0
+popup/item_1/text = "Pattern"
+popup/item_1/id = 1
 
 [node name="FillPattern" type="VBoxContainer" parent="." index="7"]
 visible = false
