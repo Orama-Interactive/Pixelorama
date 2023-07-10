@@ -243,15 +243,6 @@ func change_project() -> void:
 	var i := 0
 	for camera in Global.cameras:
 		camera.zoom_out_max = cameras_zoom_max[i]
-		if camera == Global.camera_preview:
-			Global.preview_zoom_slider.value_changed.disconnect(
-				Global.canvas_preview_container._on_PreviewZoomSlider_value_changed
-			)
-			Global.preview_zoom_slider.min_value = 100.0 * camera.zoom_out_max.x
-			Global.preview_zoom_slider.value_changed.connect(
-				Global.canvas_preview_container._on_PreviewZoomSlider_value_changed
-			)
-
 		if camera == Global.camera:
 			camera.set_zoom_max_value()
 		camera.rotation = cameras_rotation[i]

@@ -187,7 +187,6 @@ var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.ts
 @onready var horizontal_ruler: BaseButton = control.find_child("HorizontalRuler")
 @onready var vertical_ruler: BaseButton = control.find_child("VerticalRuler")
 @onready var transparent_checker: ColorRect = control.find_child("TransparentChecker")
-@onready var preview_zoom_slider: VSlider = control.find_child("PreviewZoomSlider")
 
 @onready var brushes_popup: Popup = control.find_child("BrushesPopup")
 @onready var patterns_popup: Popup = control.find_child("PatternsPopup")

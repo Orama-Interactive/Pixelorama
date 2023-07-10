@@ -62,7 +62,7 @@ func _draw() -> void:
 			texture_to_draw = sprite_frames[frame_index]
 			draw_texture(texture_to_draw, Vector2.ZERO)
 
-			var rect := Rect2(Vector2.ZERO, texture_to_draw.get_data().get_size())
+			var rect := Rect2(Vector2.ZERO, texture_to_draw.get_image().get_size())
 			transparent_checker.fit_rect(rect)
 
 
