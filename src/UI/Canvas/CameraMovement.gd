@@ -30,7 +30,7 @@ func _ready() -> void:
 		set_zoom_max_value()
 	zoom_changed.connect(_zoom_changed)
 	rotation_changed.connect(_rotation_changed)
-	ignore_rotation = true # reversed "rotating" for Camera2D
+	ignore_rotation = false
 	viewport_container = get_parent().get_parent()
 	transparent_checker = get_parent().get_node("TransparentChecker")
 	update_transparent_checker_offset()
