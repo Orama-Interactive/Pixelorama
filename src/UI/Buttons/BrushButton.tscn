@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckg78y8l0rmf3"]
 
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/TransparentChecker.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="1"]
 [ext_resource type="Script" path="res://src/UI/Buttons/BrushButton.gd" id="2"]
 
 [node name="BrushButton" type="Button"]
@@ -9,15 +9,6 @@ offset_right = 36.0
 offset_bottom = 36.0
 button_mask = 7
 script = ExtResource("2")
-
-[node name="TransparentChecker" parent="." instance=ExtResource("1")]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
 
 [node name="BrushTexture" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(32, 32)
@@ -30,6 +21,15 @@ offset_right = -2.0
 offset_bottom = -2.0
 expand_mode = 1
 stretch_mode = 6
+
+[node name="TransparentChecker" parent="BrushTexture" instance=ExtResource("1")]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="DeleteButton" type="Button" parent="."]
 visible = false

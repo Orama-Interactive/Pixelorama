@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/OpenSprite.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/ManageLayouts.tscn" id="13"]
 [ext_resource type="PackedScene" uid="uid://c0nuukjakmai2" path="res://src/UI/Dialogs/TileModeOffsetsDialog.tscn" id="14"]
-[ext_resource type="PackedScene" path="res://src/UI/Dialogs/SplashDialog.tscn" id="27"]
+[ext_resource type="PackedScene" uid="uid://bnpb1aip3wdvw" path="res://src/UI/Dialogs/SplashDialog.tscn" id="27"]
 [ext_resource type="PackedScene" uid="uid://btjf3lj873q1t" path="res://src/UI/Dialogs/CreateNewImage.tscn" id="28"]
 [ext_resource type="PackedScene" uid="uid://b3hkjj3s6pe4x" path="res://src/Preferences/PreferencesDialog.tscn" id="32"]
 [ext_resource type="PackedScene" uid="uid://w1v6plnv6ppt" path="res://src/UI/Dialogs/AboutDialog.tscn" id="34"]
