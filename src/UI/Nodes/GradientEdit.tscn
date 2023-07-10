@@ -1,26 +1,27 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bn4aw27dj7pwi"]
 
-[ext_resource path="res://src/UI/Nodes/GradientEdit.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://src/UI/Nodes/GradientEdit.gd" id="1"]
 
-[sub_resource type="Gradient" id=1]
+[sub_resource type="Gradient" id="1"]
 
-[sub_resource type="GradientTexture2D" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture2D" id="2"]
+gradient = SubResource("1")
 
 [node name="GradientEdit" type="VBoxContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1280.0
-offset_bottom = 672.0
-custom_minimum_size = Vector2( 0, 30 )
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 size_flags_vertical = 3
-texture = SubResource( 2 )
-expand = true
+texture = SubResource("2")
+expand_mode = 1
 
 [node name="Value" type="Label" parent="TextureRect"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -31,52 +32,43 @@ offset_right = 20.0
 offset_bottom = 7.0
 
 [node name="Popup" type="PopupPanel" parent="."]
-offset_right = 316.0
-offset_bottom = 470.0
 
 [node name="ColorPicker" type="ColorPicker" parent="Popup"]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 312.0
-offset_bottom = 466.0
+offset_right = 294.0
+offset_bottom = 572.0
 
 [node name="InterpolationContainer" type="HBoxContainer" parent="."]
-offset_top = 676.0
-offset_right = 1280.0
-offset_bottom = 696.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="InterpolationContainer"]
-offset_top = 3.0
-offset_right = 638.0
-offset_bottom = 17.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Interpolation:"
 
 [node name="InterpolationOptionButton" type="OptionButton" parent="InterpolationContainer"]
-offset_left = 642.0
-offset_right = 1280.0
-offset_bottom = 20.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
-text = "Linear"
-items = [ "Linear", null, false, 0, null, "Constant", null, false, 1, null, "Cubic", null, false, 2, null ]
+mouse_default_cursor_shape = 2
+item_count = 3
 selected = 0
+popup/item_0/text = "shader_type canvas_item;uniform float alpha = 0.0;uniform vec2 screen_resolution = vec2(1280, 720);uniform vec2 position = vec2(100.0, 100.0);uniform vec2 size = vec2(100.0, 100.0);void fragment(){if (SCREEN_UV.x >= (position.x)/(screen_resolution.x)&& (SCREEN_UV.y) >= (position.y)/(screen_resolution.y)&& SCREEN_UV.x <= (position.x + size.x)/(screen_resolution.x)&& (SCREEN_UV.y) <= (position.y + size.y)/(screen_resolution.y)){COLOR.a = alpha;}}"
+popup/item_0/id = 0
+popup/item_1/text = "Constant"
+popup/item_1/id = 1
+popup/item_2/text = "Cubic"
+popup/item_2/id = 2
 
 [node name="DivideButton" type="Button" parent="."]
-offset_top = 700.0
-offset_right = 1280.0
-offset_bottom = 720.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Divide into equal parts"
 
 [node name="DivideConfirmationDialog" type="ConfirmationDialog" parent="."]
-offset_top = 650.0
-offset_right = 200.0
-offset_bottom = 746.0
-custom_minimum_size = Vector2( 180, 63 )
-resizable = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DivideConfirmationDialog"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
@@ -85,31 +77,24 @@ offset_right = -8.0
 offset_bottom = -36.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DivideConfirmationDialog/VBoxContainer"]
-offset_right = 1280.0
-offset_bottom = 24.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="DivideConfirmationDialog/VBoxContainer/HBoxContainer"]
-offset_top = 5.0
-offset_right = 36.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Parts:"
 
 [node name="NumberOfPartsSpinBox" type="SpinBox" parent="DivideConfirmationDialog/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-offset_left = 40.0
-offset_right = 1280.0
-offset_bottom = 24.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 min_value = 2.0
 value = 3.0
 allow_greater = true
 
 [node name="AddPointEndCheckBox" type="CheckBox" parent="DivideConfirmationDialog/VBoxContainer"]
 unique_name_in_owner = true
-offset_top = 28.0
-offset_right = 1280.0
-offset_bottom = 52.0
+layout_mode = 2
 tooltip_text = "If this is enabled, the last point gets added at the end of the gradient.
 Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
 mouse_default_cursor_shape = 2

@@ -1,105 +1,81 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://u0y5xogg636e"]
 
-[ext_resource path="res://src/UI/Dialogs/ImageEffects/GradientDialog.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/UI/Nodes/GradientEdit.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=4]
-[ext_resource path="res://src/UI/Nodes/ValueSliderV2.tscn" type="PackedScene" id=5]
+[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/GradientDialog.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bn4aw27dj7pwi" path="res://src/UI/Nodes/GradientEdit.tscn" id="3"]
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4"]
+[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="5"]
 
-[node name="GradientDialog" instance=ExtResource( 2 )]
-window_title = "Gradient"
-script = ExtResource( 1 )
+[node name="GradientDialog" instance=ExtResource("2")]
+script = ExtResource("1")
 
 [node name="VBoxContainer" parent="." index="3"]
 offset_bottom = 444.0
 
-[node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
-offset_bottom = 224.0
-
-[node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-offset_left = 80.0
-offset_right = 280.0
-offset_bottom = 200.0
-
-[node name="GradientEdit" parent="VBoxContainer" index="2" instance=ExtResource( 3 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_top = 228.0
-offset_right = 360.0
-offset_bottom = 306.0
+[node name="GradientEdit" parent="VBoxContainer" index="2" instance=ExtResource("3")]
+layout_mode = 2
 
 [node name="GradientOptions" type="GridContainer" parent="VBoxContainer" index="3"]
-offset_top = 310.0
-offset_right = 360.0
-offset_bottom = 432.0
+layout_mode = 2
 columns = 2
 
 [node name="ShapeLabel" type="Label" parent="VBoxContainer/GradientOptions" index="0" groups=["gradient_common"]]
-offset_top = 3.0
-offset_right = 178.0
-offset_bottom = 17.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Shape3D:"
 
 [node name="ShapeOptionButton" type="OptionButton" parent="VBoxContainer/GradientOptions" index="1" groups=["gradient_common"]]
 unique_name_in_owner = true
-offset_left = 182.0
-offset_right = 360.0
-offset_bottom = 20.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 3
-text = "Linear"
-items = [ "Linear", null, false, 0, null, "Radial", null, false, 1, null ]
+mouse_default_cursor_shape = 2
+item_count = 2
 selected = 0
+popup/item_0/text = "Linear"
+popup/item_0/id = 0
+popup/item_1/text = "Radial"
+popup/item_1/id = 1
 
 [node name="DitheringLabel" type="Label" parent="VBoxContainer/GradientOptions" index="2" groups=["gradient_common"]]
-offset_top = 27.0
-offset_right = 178.0
-offset_bottom = 41.0
+layout_mode = 2
 text = "Dithering pattern:"
 
 [node name="DitheringOptionButton" type="OptionButton" parent="VBoxContainer/GradientOptions" index="3" groups=["gradient_common"]]
 unique_name_in_owner = true
-offset_left = 182.0
-offset_top = 24.0
-offset_right = 360.0
-offset_bottom = 44.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "None"
-items = [ "None", null, false, 0, null ]
-selected = 0
+item_count = 1
+popup/item_0/text = "None"
+popup/item_0/id = 0
 
 [node name="RepeatLabel" type="Label" parent="VBoxContainer/GradientOptions" index="4" groups=["gradient_common"]]
-offset_top = 51.0
-offset_right = 178.0
-offset_bottom = 65.0
+layout_mode = 2
 text = "Repeat:"
 
 [node name="RepeatOptionButton" type="OptionButton" parent="VBoxContainer/GradientOptions" index="5" groups=["gradient_common"]]
 unique_name_in_owner = true
-offset_left = 182.0
-offset_top = 48.0
-offset_right = 360.0
-offset_bottom = 68.0
+layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "None"
-items = [ "None", null, false, 0, null, "Repeat", null, false, 1, null, "Mirror", null, false, 2, null, "Truncate", null, false, 3, null ]
-selected = 0
+item_count = 4
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Repeat"
+popup/item_1/id = 1
+popup/item_2/text = "Mirror"
+popup/item_2/id = 2
+popup/item_3/text = "Truncate"
+popup/item_3/id = 3
 
 [node name="PositionLabel" type="Label" parent="VBoxContainer/GradientOptions" index="6" groups=["gradient_linear"]]
-offset_top = 72.0
-offset_right = 178.0
-offset_bottom = 86.0
+layout_mode = 2
 text = "Position:"
 
 [node name="PositionSlider" type="TextureProgressBar" parent="VBoxContainer/GradientOptions" index="7" groups=["gradient_linear"]]
 unique_name_in_owner = true
-offset_left = 182.0
-offset_top = 72.0
-offset_right = 360.0
-offset_bottom = 86.0
+layout_mode = 2
+focus_mode = 2
 mouse_default_cursor_shape = 2
-theme_type_variation = "ValueSlider"
+theme_type_variation = &"ValueSlider"
 value = 50.0
 allow_greater = true
 allow_lesser = true
@@ -108,73 +84,64 @@ stretch_margin_left = 3
 stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
-script = ExtResource( 4 )
+script = ExtResource("4")
 suffix = "%"
 snap_step = 10.0
 
 [node name="SizeLabel" type="Label" parent="VBoxContainer/GradientOptions" index="8" groups=["gradient_linear"]]
-offset_top = 90.0
-offset_right = 178.0
-offset_bottom = 104.0
+layout_mode = 2
 text = "Size:"
 
 [node name="SizeSlider" type="TextureProgressBar" parent="VBoxContainer/GradientOptions" index="9" groups=["gradient_linear"]]
 unique_name_in_owner = true
-offset_left = 182.0
-offset_top = 90.0
-offset_right = 360.0
-offset_bottom = 104.0
+layout_mode = 2
+focus_mode = 2
 mouse_default_cursor_shape = 2
-theme_type_variation = "ValueSlider"
+theme_type_variation = &"ValueSlider"
 min_value = 0.01
 max_value = 200.0
-value = 100.0
+value = 100.01
 allow_greater = true
 nine_patch_stretch = true
 stretch_margin_left = 3
 stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
-script = ExtResource( 4 )
+script = ExtResource("4")
 suffix = "%"
 snap_step = 10.0
 
 [node name="AngleLabel" type="Label" parent="VBoxContainer/GradientOptions" index="10" groups=["gradient_linear"]]
-offset_top = 108.0
-offset_right = 178.0
-offset_bottom = 122.0
+layout_mode = 2
 text = "Angle:"
 
 [node name="AngleSlider" type="TextureProgressBar" parent="VBoxContainer/GradientOptions" index="11" groups=["gradient_linear"]]
 unique_name_in_owner = true
-offset_left = 182.0
-offset_top = 108.0
-offset_right = 360.0
-offset_bottom = 122.0
+layout_mode = 2
+focus_mode = 2
 mouse_default_cursor_shape = 2
-theme_type_variation = "ValueSlider"
+theme_type_variation = &"ValueSlider"
 max_value = 360.0
 nine_patch_stretch = true
 stretch_margin_left = 3
 stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
-script = ExtResource( 4 )
+script = ExtResource("4")
 suffix = "°"
 snap_step = 45.0
 
 [node name="CenterLabel" type="Label" parent="VBoxContainer/GradientOptions" index="12" groups=["gradient_radial"]]
 visible = false
-offset_top = 60.0
-offset_right = 160.0
-offset_bottom = 74.0
+layout_mode = 2
 size_flags_vertical = 1
 text = "Center:"
 
-[node name="CenterSlider" parent="VBoxContainer/GradientOptions" index="13" groups=["gradient_radial"] instance=ExtResource( 5 )]
+[node name="CenterSlider" parent="VBoxContainer/GradientOptions" index="13" groups=["gradient_radial"] instance=ExtResource("5")]
 unique_name_in_owner = true
 visible = false
-value = Vector2( 50, 50 )
+layout_mode = 2
+value = Vector2(50, 50)
 allow_greater = true
 allow_lesser = true
 snap_step = 10.0
@@ -183,29 +150,20 @@ suffix_y = "%"
 
 [node name="RadiusLabel" type="Label" parent="VBoxContainer/GradientOptions" index="14" groups=["gradient_radial"]]
 visible = false
-offset_top = 193.0
-offset_right = 160.0
-offset_bottom = 207.0
+layout_mode = 2
 size_flags_vertical = 1
 text = "Radius:"
 
-[node name="RadiusSlider" parent="VBoxContainer/GradientOptions" index="15" groups=["gradient_radial"] instance=ExtResource( 5 )]
+[node name="RadiusSlider" parent="VBoxContainer/GradientOptions" index="15" groups=["gradient_radial"] instance=ExtResource("5")]
 unique_name_in_owner = true
 visible = false
-offset_right = 52.0
-value = Vector2( 1, 1 )
-min_value = Vector2( 0.01, 0.01 )
-max_value = Vector2( 10, 10 )
+layout_mode = 2
+value = Vector2(1, 1)
+min_value = Vector2(0.01, 0.01)
+max_value = Vector2(10, 10)
 step = 0.01
 allow_greater = true
 show_ratio = true
-
-[node name="OptionsContainer" parent="VBoxContainer" index="4"]
-offset_top = 436.0
-offset_bottom = 460.0
-
-[node name="AnimateDialog" parent="." index="4"]
-offset_bottom = 444.0
 
 [connection signal="updated" from="VBoxContainer/GradientEdit" to="." method="_on_GradientEdit_updated"]
 [connection signal="item_selected" from="VBoxContainer/GradientOptions/ShapeOptionButton" to="." method="_on_ShapeOptionButton_item_selected"]
