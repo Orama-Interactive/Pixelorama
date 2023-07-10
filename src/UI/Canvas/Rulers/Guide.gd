@@ -9,7 +9,7 @@ var font := preload("res://assets/fonts/Roboto-Regular.tres")
 var has_focus := true
 var mouse_pos := Vector2.ZERO
 var type: int = Types.HORIZONTAL
-var project = Global.current_project
+var project := Global.current_project
 
 
 func _ready() -> void:

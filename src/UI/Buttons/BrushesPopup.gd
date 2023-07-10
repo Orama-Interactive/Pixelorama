@@ -119,7 +119,7 @@ func get_brush(type: int, index: int) -> Brush:
 func remove_brush(brush_button: Node) -> void:
 	brush_removed.emit(brush_button.brush)
 
-	var project = Global.current_project
+	var project := Global.current_project
 	var undo_brushes: Array = project.brushes.duplicate()
 	project.brushes.erase(brush_button.brush.image)
 
@@ -134,8 +134,8 @@ func remove_brush(brush_button: Node) -> void:
 	project.undo_redo.create_action("Delete Custom Brush")
 	project.undo_redo.add_do_property(project, "brushes", project.brushes)
 	project.undo_redo.add_undo_property(project, "brushes", undo_brushes)
-	project.undo_redo.add_do_method(self, "redo_custom_brush", brush_button)
-	project.undo_redo.add_undo_method(self, "undo_custom_brush", brush_button)
+	project.undo_redo.add_do_method(redo_custom_brush.bind(brush_button))
+	project.undo_redo.add_undo_method(undo_custom_brush.bind(brush_button))
 	project.undo_redo.add_undo_reference(brush_button)
 	project.undo_redo.commit_action()
 

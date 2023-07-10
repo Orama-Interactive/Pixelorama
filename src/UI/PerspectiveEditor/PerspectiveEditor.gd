@@ -10,11 +10,11 @@ var tracker_disabled := false
 
 func _on_AddPoint_pressed() -> void:
 	do_pool.clear()  # Reset (clears Redo history of vanishing points)
-	var project = Global.current_project
+	var project := Global.current_project
 	project.undos += 1
 	project.undo_redo.create_action("Add Vanishing Point")
-	project.undo_redo.add_do_method(self, "add_vanishing_point", true)
-	project.undo_redo.add_undo_method(self, "undo_add_vanishing_point")
+	project.undo_redo.add_do_method(add_vanishing_point.bind(true))
+	project.undo_redo.add_undo_method(undo_add_vanishing_point)
 	project.undo_redo.commit_action()
 
 
@@ -42,11 +42,11 @@ func undo_add_vanishing_point():
 
 
 func delete_point(idx):
-	var project = Global.current_project
+	var project := Global.current_project
 	project.undos += 1
 	project.undo_redo.create_action("Delete Vanishing Point")
-	project.undo_redo.add_do_method(self, "do_delete_point", idx)
-	project.undo_redo.add_undo_method(self, "undo_delete_point", idx)
+	project.undo_redo.add_do_method(do_delete_point.bind(idx))
+	project.undo_redo.add_undo_method(undo_delete_point.bind(idx))
 	project.undo_redo.commit_action()
 
 
