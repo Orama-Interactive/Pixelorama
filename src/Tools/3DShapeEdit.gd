@@ -38,8 +38,8 @@ var _object_names := {
 	"camera:rotation_degrees": $"%CameraRotation",
 	"camera:fov": $"%CameraFOV",
 	"camera:size": $"%CameraSize",
-	"viewport:world:environment:ambient_light_color": $"%AmbientColorPickerButton",
-	"viewport:world:environment:ambient_light_energy": $"%AmbientEnergy",
+	"viewport:world_3d:environment:ambient_light_color": $"%AmbientColorPickerButton",
+	"viewport:world_3d:environment:ambient_light_energy": $"%AmbientEnergy",
 }
 
 @onready var object_properties := {
