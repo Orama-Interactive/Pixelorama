@@ -18,15 +18,14 @@ func _ready() -> void:
 	_button.toggle_mode = true
 	_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	_button.toggled.connect(_on_Button_toggled)
-	add_child(_button)
-	move_child(_button, 0)
+	add_child(_button, false, Node.INTERNAL_MODE_FRONT)
 	_texture_rect.anchor_top = 0.5
 	_texture_rect.anchor_bottom = 0.5
 	_texture_rect.offset_left = 2
 	_texture_rect.offset_top = -6
 	_texture_rect.offset_right = 14
 	_texture_rect.offset_bottom = 6
-	_texture_rect.rotation = -90
+	_texture_rect.rotation_degrees = -90
 	_texture_rect.pivot_offset = Vector2(6, 6)
 	_texture_rect.add_to_group("UIButtons")
 	_button.add_child(_texture_rect)
@@ -34,6 +33,7 @@ func _ready() -> void:
 	_label.position = Vector2(14, 0)
 	_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	_button.add_child(_label)
+	_button.custom_minimum_size = _label.size
 	_button.button_pressed = visible_content
 	for child in get_children():
 		if not child is CanvasItem or child == _button:
@@ -62,8 +62,7 @@ func _on_Button_toggled(button_pressed: bool) -> void:
 
 func _set_visible(pressed: bool) -> void:
 	var angle := 0.0 if pressed else -90.0
-	var tween := create_tween()
-	tween.tween_property(_texture_rect, "rotation", angle, 0.05)
+	create_tween().tween_property(_texture_rect, "rotation_degrees", angle, 0.05)
 	for child in get_children():
 		if not child is CanvasItem or child == _button:
 			continue
