@@ -181,9 +181,6 @@ func _zoom_changed() -> void:
 		for guide in Global.current_project.guides:
 			guide.width = 1.0 / zoom.x * 2
 
-	elif index == Cameras.SMALL:
-		Global.preview_zoom_slider.value = zoom.x
-
 
 func _update_rulers() -> void:
 	Global.horizontal_ruler.queue_redraw()
