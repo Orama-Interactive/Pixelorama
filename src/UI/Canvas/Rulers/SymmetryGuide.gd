@@ -5,11 +5,13 @@ var _texture: Texture2D = preload("res://assets/graphics/dotted_line.png")
 
 
 func _ready() -> void:
+	super._ready()
 	has_focus = false
 	visible = false
 	texture = _texture
+	texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	texture_mode = Line2D.LINE_TEXTURE_TILE
-	width = Global.camera.zoom.x * 4
+	width = 4.0 / Global.camera.zoom.x
 	# Add a subtle difference to the normal guide color by mixing in some blue
 	default_color = Global.guide_color.lerp(Color(0.2, 0.2, .65), .6)
 

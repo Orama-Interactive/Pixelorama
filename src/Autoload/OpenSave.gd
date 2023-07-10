@@ -684,7 +684,7 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 			var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
 			cel_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 			project.undo_redo.add_do_property(cel, "image", cel_image)
-			project.undo_redo.add_undo_property(cel, "image", cel.image)
+			project.undo_redo.add_undo_property(cel, "image", cel.get_image())
 
 	project.undo_redo.add_do_property(project, "selected_cels", [])
 	project.undo_redo.add_do_method(project.change_cel.bind(frame_index, layer_index))
