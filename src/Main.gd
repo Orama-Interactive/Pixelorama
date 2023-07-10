@@ -128,12 +128,11 @@ func set_custom_cursor() -> void:
 		Input.set_custom_mouse_cursor(cursor_image, Input.CURSOR_CROSS, Vector2(15, 15))
 	else:
 		var cursor_data := cursor_image.get_image()
-		cursor_data.resize(
-			cursor_data.get_width() * Global.shrink, cursor_data.get_height() * Global.shrink, Image.INTERPOLATE_NEAREST
-		)
-		var new_cursor_tex := ImageTexture.create_from_image(cursor_data)
+		var cursor_size := cursor_data.get_size() * Global.shrink
+		cursor_data.resize(cursor_size.x, cursor_size.y, Image.INTERPOLATE_NEAREST)
+		var cursor_tex := ImageTexture.create_from_image(cursor_data)
 		Input.set_custom_mouse_cursor(
-			new_cursor_tex, Input.CURSOR_CROSS, Vector2(15, 15) * Global.shrink
+			cursor_tex, Input.CURSOR_CROSS, Vector2(15, 15) * Global.shrink
 		)
 
 
