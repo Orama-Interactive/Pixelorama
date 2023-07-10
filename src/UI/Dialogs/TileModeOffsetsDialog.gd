@@ -9,6 +9,7 @@ extends ConfirmationDialog
 
 
 func _ready() -> void:
+	Global.project_changed.connect(change_mask)
 	Global.cel_changed.connect(change_mask)
 	await get_tree().process_frame
 	change_mask()

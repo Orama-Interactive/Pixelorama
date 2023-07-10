@@ -1,6 +1,10 @@
 extends Node2D
 
 
+func _ready() -> void:
+	Global.project_changed.connect(queue_redraw)
+
+
 func _draw() -> void:
 	if not Global.draw_grid:
 		return
