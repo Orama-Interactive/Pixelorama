@@ -26,7 +26,11 @@ func generate_image(img: Image, shader: Shader, params: Dictionary, size: Vector
 	RenderingServer.material_set_shader(mat_rid, shader.get_rid())
 	RenderingServer.canvas_item_set_material(ci_rid, mat_rid)
 	for key in params:
-		RenderingServer.material_set_param(mat_rid, key, params[key])
+		var param = params[key]
+		if param is Texture2D:
+			RenderingServer.material_set_param(mat_rid, key, [param])
+		else:
+			RenderingServer.material_set_param(mat_rid, key, param)
 
 	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
 	RenderingServer.force_draw(false)
