@@ -28,10 +28,9 @@ var artworks := [
 ]
 
 var chosen_artwork: int
-var splash_art_texturerect: TextureRect
-var art_by_label: Button
-
-@onready var version_text: TextureRect = find_child("VersionText")
+@onready var art_by_label := %ArtistName as Button
+@onready var splash_art_texturerect := %SplashArt as TextureRect
+@onready var version_text := %VersionText as TextureRect
 
 
 func _ready() -> void:
@@ -39,10 +38,7 @@ func _ready() -> void:
 
 
 func _on_SplashDialog_about_to_show() -> void:
-	splash_art_texturerect = find_child("SplashArt")
-	art_by_label = find_child("ArtistName")
 	var show_on_startup_button: CheckBox = find_child("ShowOnStartup")
-
 	if Global.config_cache.has_section_key("preferences", "startup"):
 		show_on_startup_button.button_pressed = !Global.config_cache.get_value("preferences", "startup")
 	title = "Pixelorama" + " " + Global.current_version
