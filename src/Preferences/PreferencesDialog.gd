@@ -335,6 +335,7 @@ func add_tabs(changed_language := false) -> void:
 func _on_PreferencesDialog_visibility_changed() -> void:
 	if not visible:
 		list.clear()
+		Global.dialog_open(false)
 
 
 func _on_List_item_selected(index: int) -> void:

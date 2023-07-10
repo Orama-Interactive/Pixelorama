@@ -3,7 +3,7 @@ extends VBoxContainer
 
 var is_moving = false
 var kname: String
-var tool_slot = null  # Tools.Slot, can't have static typing due to cyclic errors
+var tool_slot: Tools.Slot = null
 var cursor_text := ""
 var _cursor := Vector2.INF
 
@@ -97,7 +97,7 @@ func get_spacing_position(pos: Vector2) -> Vector2:
 	var b_l := snap_pos + Vector2(-spacing_factor.x, spacing_factor.y)
 	var b_c := snap_pos + Vector2(0, spacing_factor.y)
 	var b_r := snap_pos + Vector2(spacing_factor.x, spacing_factor.y)
-	var vec_arr := [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
+	var vec_arr: PackedVector2Array = [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
 	for vec in vec_arr:
 		if vec.distance_to(pos) < snap_pos.distance_to(pos):
 			snap_pos = vec
@@ -123,7 +123,7 @@ func draw_preview() -> void:
 
 
 func snap_position(pos: Vector2) -> Vector2:
-	var snapping_distance := Global.snapping_distance * Global.camera.zoom.x
+	var snapping_distance := Global.snapping_distance / Global.camera.zoom.x
 	if Global.snap_to_rectangular_grid:
 		var grid_pos := pos.snapped(Global.grid_size)
 		grid_pos += Global.grid_offset
@@ -138,7 +138,7 @@ func snap_position(pos: Vector2) -> Vector2:
 		var b_l := grid_pos + Vector2(-Global.grid_size.x, Global.grid_size.y)
 		var b_c := grid_pos + Vector2(0, Global.grid_size.y)
 		var b_r := grid_pos + Global.grid_size
-		var vec_arr := [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
+		var vec_arr: PackedVector2Array = [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
 		for vec in vec_arr:
 			if vec.distance_to(pos) < grid_pos.distance_to(pos):
 				grid_pos = vec

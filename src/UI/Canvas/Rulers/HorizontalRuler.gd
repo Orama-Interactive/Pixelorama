@@ -20,7 +20,7 @@ func _draw() -> void:
 	var ruler_transform := Transform2D()
 	var major_subdivide := Transform2D()
 	var minor_subdivide := Transform2D()
-	var zoom: float = Global.camera.zoom.x
+	var zoom := Global.camera.zoom.x
 	transform.x = Vector2(zoom, zoom)
 
 	# This tracks the "true" top left corner of the drawing:
@@ -36,7 +36,7 @@ func _draw() -> void:
 	var b := Vector2(proj_size.x, 0).rotated(-Global.camera.rotation)  # Top right
 	var c := Vector2(0, proj_size.y).rotated(-Global.camera.rotation)  # Bottom left
 	var d := Vector2(proj_size.x, proj_size.y).rotated(-Global.camera.rotation)  # Bottom right
-	transform.origin.x += min(min(a.x, b.x), min(c.x, d.x)) * zoom
+	transform.origin.x += minf(minf(a.x, b.x), minf(c.x, d.x)) * zoom
 
 	var basic_rule := 100.0
 	var i := 0
@@ -66,18 +66,17 @@ func _draw() -> void:
 		* (Global.main_viewport.size)
 	)
 
-	for j in range(ceil(first.x), ceil(last.x)):
+	for j in range(ceili(first.x), ceili(last.x)):
 		var pos: Vector2 = (
 			(transform * ruler_transform * major_subdivide * minor_subdivide) * (Vector2(j, 0))
 		)
 		if j % (major_subdivision * minor_subdivision) == 0:
-			pass
 			draw_line(
 				Vector2(pos.x + RULER_WIDTH, 0),
 				Vector2(pos.x + RULER_WIDTH, RULER_WIDTH),
 				Color.WHITE
 			)
-			var val = ((ruler_transform * major_subdivide * minor_subdivide) * Vector2(j, 0)).x
+			var val := ((ruler_transform * major_subdivide * minor_subdivide) * Vector2(j, 0)).x
 			draw_string(
 				font,
 				Vector2(pos.x + RULER_WIDTH + 2, font.get_height() - 4),
@@ -109,7 +108,7 @@ func create_guide() -> void:
 	if mouse_pos.x < RULER_WIDTH:  # For double guides
 		Global.vertical_ruler.create_guide()
 	var guide := Guide.new()
-	if abs(Global.camera.rotation_degrees) < 45 or abs(Global.camera.rotation_degrees) > 135:
+	if absf(Global.camera.rotation_degrees) < 45 or absf(Global.camera.rotation_degrees) > 135:
 		guide.type = guide.Types.HORIZONTAL
 		guide.add_point(Vector2(-19999, Global.canvas.current_pixel.y))
 		guide.add_point(Vector2(19999, Global.canvas.current_pixel.y))
