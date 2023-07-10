@@ -44,7 +44,7 @@ func _on_CelButton_resized() -> void:
 
 
 func _on_CelButton_pressed() -> void:
-	var project = Global.current_project
+	var project := Global.current_project
 	if Input.is_action_just_released("left_mouse"):
 		Global.canvas.selection.transform_content_confirm()
 		var change_cel := true
@@ -255,12 +255,12 @@ func _can_drop_data(_pos: Vector2, data) -> bool:
 func _drop_data(_pos: Vector2, data) -> void:
 	var drop_frame = data[1]
 	var drop_layer = data[2]
-	var project = Global.current_project
+	var project := Global.current_project
 
 	project.undo_redo.create_action("Move Cels")
 	if Input.is_action_pressed("ctrl") or layer != drop_layer:  # Swap cels
-		project.undo_redo.add_do_method(project, "swap_cel", frame, layer, drop_frame, drop_layer)
-		project.undo_redo.add_undo_method(project, "swap_cel", frame, layer, drop_frame, drop_layer)
+		project.undo_redo.add_do_method(project.swap_cel.bind(frame, layer, drop_frame, drop_layer))
+		project.undo_redo.add_undo_method(project.swap_cel.bind(frame, layer, drop_frame, drop_layer))
 	else:  # Move cels
 		var to_frame: int
 		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
@@ -269,12 +269,12 @@ func _drop_data(_pos: Vector2, data) -> void:
 			to_frame = frame + 1
 		if drop_frame < frame:
 			to_frame -= 1
-		project.undo_redo.add_do_method(project, "move_cel", drop_frame, to_frame, layer)
-		project.undo_redo.add_undo_method(project, "move_cel", to_frame, drop_frame, layer)
+		project.undo_redo.add_do_method(project.move_cel.bind(drop_frame, to_frame, layer))
+		project.undo_redo.add_undo_method(project.move_cel.bind(to_frame, drop_frame, layer))
 
-	project.undo_redo.add_do_method(project, "change_cel", frame, layer)
+	project.undo_redo.add_do_method(project.change_cel.bind(frame, layer))
 	project.undo_redo.add_undo_method(
-		project, "change_cel", project.current_frame, project.current_layer
+		project.change_cel.bind(project.current_frame, project.current_layer)
 	)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))

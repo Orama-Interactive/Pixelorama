@@ -105,7 +105,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_LayerContainer_gui_input(event: InputEvent) -> void:
-	var project = Global.current_project
+	var project := Global.current_project
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		Global.canvas.selection.transform_content_confirm()

@@ -392,10 +392,10 @@ func _on_MoveRight_pressed() -> void:
 
 
 func reverse_frames(indices := []) -> void:
-	var project = Global.current_project
+	var project := Global.current_project
 	project.undo_redo.create_action("Change Frame Order")
-	project.undo_redo.add_do_method(project, "reverse_frames", indices)
-	project.undo_redo.add_undo_method(project, "reverse_frames", indices)
+	project.undo_redo.add_do_method(project.reverse_frames.bind(indices))
+	project.undo_redo.add_undo_method(project.reverse_frames.bind(indices))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()

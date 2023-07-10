@@ -8,7 +8,7 @@ var rate := Global.onion_skinning_past_rate
 
 
 func _draw() -> void:
-	var project = Global.current_project
+	var project := Global.current_project
 	if !Global.onion_skinning:
 		return
 	rate = Global.onion_skinning_past_rate if type == PAST else Global.onion_skinning_future_rate

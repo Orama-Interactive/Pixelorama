@@ -442,7 +442,7 @@ class ProjectAPI:
 			print("cel at frame ", frame, ", layer ", layer, " is not a PixelCel")
 
 	func add_new_frame(after_frame: int):
-		var project = Global.current_project
+		var project := Global.current_project
 		if after_frame < project.frames.size() and after_frame >= 0:
 			var old_current = project.current_frame
 			project.current_frame = after_frame  # temporary assignment

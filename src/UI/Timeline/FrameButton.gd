@@ -98,18 +98,18 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 func change_frame_order(rate: int) -> void:
 	var change := frame + rate
-	var project = Global.current_project
+	var project := Global.current_project
 
 	project.undo_redo.create_action("Change Frame Order")
-	project.undo_redo.add_do_method(project, "move_frame", frame, change)
-	project.undo_redo.add_undo_method(project, "move_frame", change, frame)
+	project.undo_redo.add_do_method(project.move_frame.bind(frame, change))
+	project.undo_redo.add_undo_method(project.move_frame.bind(change, frame))
 
 	if project.current_frame == frame:
-		project.undo_redo.add_do_method(project, "change_cel", change)
+		project.undo_redo.add_do_method(project.change_cel.bind(change))
 	else:
-		project.undo_redo.add_do_method(project, "change_cel", project.current_frame)
+		project.undo_redo.add_do_method(project.change_cel.bind(project.current_frame))
 
-	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
+	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
@@ -148,12 +148,12 @@ func _can_drop_data(_pos: Vector2, data) -> bool:
 
 
 func _drop_data(_pos: Vector2, data) -> void:
-	var drop_frame = data[1]
-	var project = Global.current_project
+	var drop_frame: int = data[1]
+	var project := Global.current_project
 	project.undo_redo.create_action("Change Frame Order")
 	if Input.is_action_pressed("ctrl"):  # Swap frames
-		project.undo_redo.add_do_method(project, "swap_frame", frame, drop_frame)
-		project.undo_redo.add_undo_method(project, "swap_frame", frame, drop_frame)
+		project.undo_redo.add_do_method(project.swap_frame.bind(frame, drop_frame))
+		project.undo_redo.add_undo_method(project.swap_frame.bind(frame, drop_frame))
 	else:  # Move frames
 		var to_frame: int
 		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
@@ -162,14 +162,14 @@ func _drop_data(_pos: Vector2, data) -> void:
 			to_frame = frame + 1
 		if drop_frame < frame:
 			to_frame -= 1
-		project.undo_redo.add_do_method(project, "move_frame", drop_frame, to_frame)
-		project.undo_redo.add_undo_method(project, "move_frame", to_frame, drop_frame)
+		project.undo_redo.add_do_method(project.move_frame.bind(drop_frame, to_frame))
+		project.undo_redo.add_undo_method(project.move_frame.bind(to_frame, drop_frame))
 
 	if project.current_frame == drop_frame:
-		project.undo_redo.add_do_method(project, "change_cel", frame)
+		project.undo_redo.add_do_method(project.change_cel.bind(frame))
 	else:
-		project.undo_redo.add_do_method(project, "change_cel", project.current_frame)
-	project.undo_redo.add_undo_method(project, "change_cel", project.current_frame)
+		project.undo_redo.add_do_method(project.change_cel.bind(project.current_frame))
+	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
