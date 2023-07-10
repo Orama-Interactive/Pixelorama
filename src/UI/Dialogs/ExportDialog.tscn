@@ -136,6 +136,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 item_count = 3
+selected = 0
 popup/item_0/text = "Forward"
 popup/item_0/id = 0
 popup/item_1/text = "Backwards"
@@ -188,7 +189,7 @@ columns = 3
 [node name="Label" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" groups=["NotHTML5"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
-text = "Path3D:"
+text = "Path:"
 
 [node name="PathLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" groups=["NotHTML5"]]
 unique_name_in_owner = true
