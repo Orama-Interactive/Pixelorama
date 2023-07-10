@@ -1,6 +1,6 @@
 extends Window
 
-const CONTRIBUTORS := [
+const CONTRIBUTORS: PackedStringArray = [
 	"20kdc",
 	"Aaron Franke (aaronfranke)",
 	"AbhinavKDev (abhinav3967)",
@@ -23,6 +23,7 @@ const CONTRIBUTORS := [
 	"gschwind",
 	"Haoyu Qiu (timothyqiu)",
 	"Hugo Locurcio (Calinou)",
+	"huskee",
 	"Igor Santarek (jegor377)",
 	"Jeremy Behreandt (behreajj)",
 	"John Jerome Romero (Wishdream)",
@@ -49,12 +50,11 @@ const CONTRIBUTORS := [
 	"Subhang Nanduri (SbNanduri)",
 	"THWLF",
 	"Vriska Weaver (henlo-birb)",
-	"Xenofon Konitsas (huskee)",
 ]
 
 const TRANSLATORS_DICTIONARY := {
 	"Emmanouil Papadeas (Overloaded)": ["Greek"],
-	"Xenofon Konitsas (huskee)": ["Greek"],
+	"huskee": ["Greek"],
 	"Lena Louloudaki (Soliscital)": ["Greek"],
 	"Hugo Locurcio (Calinou)": ["French"],
 	"blackjoker77777": ["French"],
@@ -170,7 +170,7 @@ const TRANSLATORS_DICTIONARY := {
 	],
 }
 
-const DONORS := [
+const DONORS: PackedStringArray = [
 	"BasicIncomePlz",
 	"Benedikt",
 	"David Maziarka",
@@ -189,7 +189,7 @@ const DONORS := [
 	"Tassos Kyriakopoulos"
 ]
 
-@export var licenses: Array # (Array, String, MULTILINE)
+@export_multiline var licenses: PackedStringArray
 
 @onready var credits := $AboutUI/Credits as HSplitContainer
 @onready var groups := $AboutUI/Credits/Groups as Tree
@@ -253,7 +253,9 @@ func _on_AboutDialog_about_to_show() -> void:
 	create_translators()
 
 
-func _on_AboutDialog_popup_hide() -> void:
+func _on_visibility_changed() -> void:
+	if visible:
+		return
 	groups.clear()
 	developers.clear()
 	translators.clear()
@@ -327,3 +329,7 @@ func create_translators() -> void:
 
 func _on_LicenseTabs_tab_changed(tab: int) -> void:
 	license_text.text = licenses[tab]
+
+
+func _on_close_requested() -> void:
+	hide()
