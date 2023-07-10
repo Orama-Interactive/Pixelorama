@@ -20,7 +20,7 @@ func _draw() -> void:
 	var ruler_transform := Transform2D()
 	var major_subdivide := Transform2D()
 	var minor_subdivide := Transform2D()
-	var zoom: float = Global.camera.zoom.x
+	var zoom := Global.camera.zoom.x
 	transform.y = Vector2(zoom, zoom)
 
 	# This tracks the "true" top left corner of the drawing:
@@ -36,7 +36,7 @@ func _draw() -> void:
 	var b := Vector2(proj_size.x, 0).rotated(-Global.camera.rotation)  # Top right
 	var c := Vector2(0, proj_size.y).rotated(-Global.camera.rotation)  # Bottom left
 	var d := Vector2(proj_size.x, proj_size.y).rotated(-Global.camera.rotation)  # Bottom right
-	transform.origin.y += min(min(a.y, b.y), min(c.y, d.y)) * zoom
+	transform.origin.y += minf(minf(a.y, b.y), minf(c.y, d.y)) * zoom
 
 	var basic_rule := 100.0
 	var i := 0
@@ -66,15 +66,15 @@ func _draw() -> void:
 		* (Global.main_viewport.size)
 	)
 
-	for j in range(ceil(first.y), ceil(last.y)):
+	for j in range(ceili(first.y), ceili(last.y)):
 		var pos: Vector2 = (
 			(transform * ruler_transform * major_subdivide * minor_subdivide) * (Vector2(0, j))
 		)
 		if j % (major_subdivision * minor_subdivision) == 0:
 			draw_line(Vector2(0, pos.y), Vector2(RULER_WIDTH, pos.y), Color.WHITE)
-			var text_xform = Transform2D(-PI / 2, Vector2(font.get_height() - 4, pos.y - 2))
+			var text_xform := Transform2D(-PI / 2, Vector2(font.get_height() - 4, pos.y - 2))
 			draw_set_transform_matrix(get_transform() * text_xform)
-			var val = ((ruler_transform * major_subdivide * minor_subdivide) * Vector2(0, j)).y
+			var val := ((ruler_transform * major_subdivide * minor_subdivide) * Vector2(0, j)).y
 			draw_string(font, Vector2(), str(snappedf(val, 0.1)))
 			draw_set_transform_matrix(get_transform())
 		else:
@@ -96,7 +96,7 @@ func create_guide() -> void:
 	if !Global.show_guides:
 		return
 	var guide := Guide.new()
-	if abs(Global.camera.rotation_degrees) < 45 or abs(Global.camera.rotation_degrees) > 135:
+	if absf(Global.camera.rotation_degrees) < 45 or absf(Global.camera.rotation_degrees) > 135:
 		guide.type = guide.Types.VERTICAL
 		guide.add_point(Vector2(Global.canvas.current_pixel.x, -19999))
 		guide.add_point(Vector2(Global.canvas.current_pixel.x, 19999))
