@@ -22,6 +22,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 clip_text = true
+item_count = 2
+selected = 0
+popup/item_0/text = "Margins"
+popup/item_0/id = 0
+popup/item_1/text = "Position + Size"
+popup/item_1/id = 1
 
 [node name="SizeLock" type="Button" parent="HBoxContainer" index="1"]
 unique_name_in_owner = true

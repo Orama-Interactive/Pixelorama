@@ -777,6 +777,11 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+item_count = 2
+popup/item_0/text = "Above canvas"
+popup/item_0/id = 0
+popup/item_1/text = "Below canvas"
+popup/item_1/id = 1
 
 [node name="FuturePlacementLabel" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons/GridContainer"]
 layout_mode = 2
@@ -786,6 +791,11 @@ text = "Show future frames:"
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
+item_count = 2
+popup/item_0/text = "Above canvas"
+popup/item_0/id = 0
+popup/item_1/text = "Below canvas"
+popup/item_1/id = 1
 
 [node name="Label" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
 layout_mode = 2

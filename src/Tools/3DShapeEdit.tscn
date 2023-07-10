@@ -27,6 +27,10 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "None"
+popup/item_0/id = 0
 
 [node name="NewObjectMenuButton" type="MenuButton" parent="HandleObjects" index="2"]
 unique_name_in_owner = true
@@ -71,6 +75,14 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "Perspective"
+popup/item_0/id = 0
+popup/item_1/text = "Orthogonal"
+popup/item_1/id = 1
+popup/item_2/text = "Frustum"
+popup/item_2/id = 2
 
 [node name="RotationLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="2"]
 layout_mode = 2
@@ -543,6 +555,14 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "Left"
+popup/item_0/id = 0
+popup/item_1/text = "Center"
+popup/item_1/id = 1
+popup/item_2/text = "Right"
+popup/item_2/id = 2
 
 [node name="LightOptions" type="VBoxContainer" parent="ObjectOptions" index="3"]
 unique_name_in_owner = true

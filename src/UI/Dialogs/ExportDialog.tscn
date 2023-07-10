@@ -40,10 +40,9 @@ size_flags_vertical = 3
 [node name="TransparentChecker" parent="VBoxContainer/VSplitContainer/PreviewPanel" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
 
 [node name="PreviewScroll" type="ScrollContainer" parent="VBoxContainer/VSplitContainer/PreviewPanel"]
 layout_mode = 0
@@ -76,6 +75,12 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Rows"
+popup/item_0/id = 0
+popup/item_1/text = "Columns"
+popup/item_1/id = 1
 
 [node name="LinesCountLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
 unique_name_in_owner = true
@@ -101,6 +106,11 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+item_count = 2
+popup/item_0/text = "All frames"
+popup/item_0/id = 0
+popup/item_1/text = "Selected frames"
+popup/item_1/id = 1
 
 [node name="LayersLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -110,6 +120,11 @@ text = "Layers:"
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
+item_count = 2
+popup/item_0/text = "Visible layers"
+popup/item_0/id = 0
+popup/item_1/text = "Selected layers"
+popup/item_1/id = 1
 
 [node name="DirectionLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -120,6 +135,13 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+item_count = 3
+popup/item_0/text = "Forward"
+popup/item_0/id = 0
+popup/item_1/text = "Backwards"
+popup/item_1/id = 1
+popup/item_2/text = "Ping-pong"
+popup/item_2/id = 2
 
 [node name="ResizeLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(30, 0)
@@ -231,6 +253,18 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+item_count = 5
+selected = 0
+popup/item_0/text = "Nearest"
+popup/item_0/id = 0
+popup/item_1/text = "Bilinear"
+popup/item_1/id = 1
+popup/item_2/text = "Cubic"
+popup/item_2/id = 2
+popup/item_3/text = "Trilinear"
+popup/item_3/id = 3
+popup/item_4/text = "Lanczos"
+popup/item_4/id = 4
 
 [node name="IncludeTagsInFilename" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/CollapsibleContainer/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
 layout_mode = 2

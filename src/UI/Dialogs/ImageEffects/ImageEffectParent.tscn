@@ -47,10 +47,9 @@ stretch_mode = 5
 [node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource("2")]
 show_behind_parent = true
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
 
 [node name="OptionsContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -65,6 +64,16 @@ text = "Only affect selection"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "Selected cels"
+popup/item_0/id = 0
+popup/item_1/text = "Current frame"
+popup/item_1/id = 1
+popup/item_2/text = "All frames"
+popup/item_2/id = 2
+popup/item_3/text = "All projects"
+popup/item_3/id = 3
 
 [node name="AnimateDialog" type="Popup" parent="."]
 
