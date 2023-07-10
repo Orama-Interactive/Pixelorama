@@ -221,12 +221,12 @@ func fill_in_color(pos: Vector2) -> void:
 			"similarity_percent": _similarity,
 			"selection": selection_tex,
 			"pattern": pattern_tex,
-			"pattern_size": pattern_tex.get_size(),
-			# pixel offset converted to pattern uv offset
-			"pattern_uv_offset":
-			Vector2.ONE / pattern_tex.get_size() * Vector2(_offset_x, _offset_y),
 			"has_pattern": true if _fill_with == FillWith.PATTERN else false
 		}
+		if is_instance_valid(pattern_tex):
+			params["pattern_size"] = pattern_tex.get_size()
+			# pixel offset converted to pattern uv offset
+			params["pattern_uv_offset"] = Vector2.ONE / pattern_tex.get_size() * Vector2(_offset_x, _offset_y)
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(image, COLOR_REPLACE_SHADER, params, project.size)
 
