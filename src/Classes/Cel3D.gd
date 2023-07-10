@@ -47,8 +47,7 @@ func _add_nodes() -> void:
 	viewport.own_world_3d = true
 	viewport.transparent_bg = true
 	var world := World3D.new()
-	var environment := Environment.new()
-	world.environment = environment
+	world.environment = Environment.new()
 	viewport.world_3d = world
 	parent_node = Node3D.new()
 	camera = Camera3D.new()
@@ -77,8 +76,8 @@ func serialize_scene_properties() -> Dictionary:
 		"camera_projection": camera.projection,
 		"camera_fov": camera.fov,
 		"camera_size": camera.size,
-		"ambient_light_color": viewport.world.environment.ambient_light_color,
-		"ambient_light_energy": viewport.world.environment.ambient_light_energy
+		"ambient_light_color": viewport.world_3d.environment.ambient_light_color,
+		"ambient_light_energy": viewport.world_3d.environment.ambient_light_energy
 	}
 
 
