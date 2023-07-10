@@ -56,16 +56,11 @@ func _ready() -> void:
 
 
 func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	var selection: Image
 	var selection_tex: ImageTexture
 	if selection_checkbox.button_pressed and project.has_selection:
-		selection = project.selection_map
-	else:  # This is needed to prevent a weird bug with the dithering shaders and GLES2
-		selection = Image.create(project.size.x, project.size.y, false, Image.FORMAT_L8)
-	selection_tex = ImageTexture.create_from_image(selection)
+		selection_tex = ImageTexture.create_from_image(project.selection_map)
 
 	var dither_texture := selected_dither_matrix.texture
-	var pixel_size := dither_texture.get_width()
 	var gradient := gradient_edit.gradient
 	var n_of_colors := gradient.offsets.size()
 	# Pass the gradient offsets as an array to the shader
@@ -103,10 +98,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		"center": center / 100.0,
 		"radius": radius,
 		"dither_texture": dither_texture,
-		"image_size": project.size,
-		"pixel_size": pixel_size,
 		"shape": shape_option_button.selected,
-		"n_of_colors": n_of_colors
 	}
 
 	if !has_been_confirmed:

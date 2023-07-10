@@ -4,8 +4,8 @@ render_mode unshaded;
 uniform sampler2D selection;
 uniform sampler2D gradient_texture;
 uniform float position : hint_range(-0.5, 0.5) = 0.0;
-uniform float angle : hint_range(0.0, 360.0) = 0.0;
 uniform float size : hint_range(0.01, 2.0) = 1.0;
+uniform float angle : hint_range(0.0, 360.0) = 0.0;
 uniform vec2 center = vec2(0.5);
 uniform vec2 radius = vec2(1.0);
 uniform int shape = 0; // 0 = linear, 1 = radial
@@ -35,7 +35,7 @@ float modify_uv(vec2 uv) {
 
 
 float mirror_fract(float uv) {
-	int sign_uv = (int(sign(uv)) - 1) / 2;
+	int sign_uv = (int(sign(uv)) - 1) / 2; // returns -1 for negative sign and 0 for positive
 	if (int((uv)) % 2 == sign_uv)
 		uv = fract(uv);
 	else

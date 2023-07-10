@@ -1,11 +1,10 @@
 shader_type canvas_item;
 render_mode unshaded;
 
+uniform sampler2D selection;
 uniform sampler2D gradient_texture;
 uniform sampler2D dither_texture;
 uniform sampler2D offset_texture;
-uniform sampler2D selection;
-uniform vec2 image_size = vec2(64.0);
 uniform float position : hint_range(-0.5, 0.5) = 0.0;
 uniform float size : hint_range(0.01, 2.0) = 1.0;
 uniform float angle : hint_range(0.0, 360.0) = 0.0;
@@ -13,8 +12,6 @@ uniform vec2 center = vec2(0.5);
 uniform vec2 radius = vec2(1.0);
 uniform int shape = 0; // 0 = linear, 1 = radial
 uniform int repeat = 0; // 0 = none, 1 = repeat, 2 = mirrored, 3 = truncate
-uniform int pixel_size : hint_range(2, 16) = 2;
-uniform int n_of_colors = 2;
 
 
 float modify_uv(vec2 uv) {
@@ -50,10 +47,11 @@ float mirror_fract(float uv) {
 }
 
 // Logic taken from https://godotshaders.com/shader/dither-gradient-shader/
-float dither(vec2 uv, float modified_uv) {
+float dither(vec2 uv, float modified_uv, ivec2 image_size) {
 	float uv_lower = floor(modified_uv);
 	float uv_upper = floor(modified_uv) + 1.0;
-	float threshold = texture(dither_texture, uv * (image_size / float(pixel_size))).r;
+	ivec2 pixel_size = textureSize(dither_texture, 0);
+	float threshold = texture(dither_texture, uv * vec2(image_size / pixel_size.x)).r;
 	float ramp_val = modified_uv < threshold ? 0.0 : 1.0;
 	// sample at the lower bound colour if ramp_val is 0.0, upper bound color if 1.0
 	float col_sample = mix(uv_lower, uv_upper, ramp_val);
@@ -70,6 +68,7 @@ void fragment() {
 	else if (repeat == 2)
 		modified_uv = mirror_fract(modified_uv);
 
+	int n_of_colors = textureSize(offset_texture, 0).x;
 	vec4 output;
 	for (int i = 1; i <= n_of_colors; i++) {
 		float colors_minus = float(n_of_colors - 1);
@@ -90,7 +89,7 @@ void fragment() {
 			continue;
 		}
 		float uvt = (modified_uv - off_prev) / (off - off_prev);
-		float col_sample = dither(UV, uvt);
+		float col_sample = dither(UV, uvt, textureSize(TEXTURE, 0));
 		output = mix(first, second, col_sample);
 	}
 	if (repeat == 3)
