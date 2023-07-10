@@ -259,6 +259,7 @@ func _on_visibility_changed() -> void:
 	groups.clear()
 	developers.clear()
 	translators.clear()
+	Global.dialog_open(false)
 
 
 func _on_Groups_item_selected() -> void:
