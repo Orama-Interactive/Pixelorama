@@ -34,7 +34,8 @@ func get_brush_files_from_directory(directory: String):  # -> Array
 
 	# Build first the list of base png files and all subdirectories to
 	# scan later (skip navigational . and ..)
-	main_directory.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+	main_directory.include_navigational = true
+	main_directory.list_dir_begin()
 	var fname: String = main_directory.get_next()
 	while fname != "":
 		if main_directory.current_is_dir():
@@ -57,7 +58,8 @@ func get_brush_files_from_directory(directory: String):  # -> Array
 		var non_randomised_files := []
 
 		var the_directory := DirAccess.open(directory.path_join(subdirectory))
-		the_directory.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+		the_directory.include_navigational = true
+		the_directory.list_dir_begin()
 		var curr_file := the_directory.get_next()
 
 		while curr_file != "":
@@ -204,7 +206,7 @@ func import_patterns(priority_ordered_search_path: Array) -> void:
 		var dir := DirAccess.open(path)
 		if not is_instance_valid(dir):
 			continue
-		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+		dir.list_dir_begin()
 		var curr_file := dir.get_next()
 		while curr_file != "":
 			if curr_file.get_extension().to_lower() == "png":

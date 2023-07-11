@@ -437,7 +437,7 @@ func add_brush() -> void:
 
 		dir = DirAccess.open(Global.directory_module.xdg_data_home.path_join("Brushes").path_join(brush_name))
 		var random_brushes := []
-		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+		dir.list_dir_begin()
 		var curr_file := dir.get_next()
 		while curr_file != "":
 			if curr_file.begins_with("~") and brush_name in curr_file:
