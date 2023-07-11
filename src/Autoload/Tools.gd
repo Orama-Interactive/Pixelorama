@@ -481,17 +481,17 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 		# correct the jumping to 1 error while also allowing values that
 		# are "supposed" to be 1.
 		if pen_pressure == 1 && pressure_buf[0] != 0:
-			pen_pressure = min(1, pressure_buf[0] + pressure_buf[0] - pressure_buf[1])
+			pen_pressure = minf(1, pressure_buf[0] + pressure_buf[0] - pressure_buf[1])
 		pressure_buf.pop_back()
 		pressure_buf.push_front(pen_pressure)
 		pen_pressure = remap(pen_pressure, pen_pressure_min, pen_pressure_max, 0.0, 1.0)
-		pen_pressure = clamp(pen_pressure, 0.0, 1.0)
+		pen_pressure = clampf(pen_pressure, 0.0, 1.0)
 
 		mouse_velocity = event.velocity.length() / mouse_velocity_max
 		mouse_velocity = remap(
 			mouse_velocity, mouse_velocity_min_thres, mouse_velocity_max_thres, 0.0, 1.0
 		)
-		mouse_velocity = clamp(mouse_velocity, 0.0, 1.0)
+		mouse_velocity = clampf(mouse_velocity, 0.0, 1.0)
 		if dynamics_alpha != Dynamics.PRESSURE and dynamics_size != Dynamics.PRESSURE:
 			pen_pressure = 1.0
 		if dynamics_alpha != Dynamics.VELOCITY and dynamics_size != Dynamics.VELOCITY:
@@ -516,9 +516,9 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 
 func get_alpha_dynamic(strength := 1.0) -> float:
 	if dynamics_alpha == Dynamics.PRESSURE:
-		strength *= lerp(alpha_min, alpha_max, pen_pressure)
+		strength *= lerpf(alpha_min, alpha_max, pen_pressure)
 	elif dynamics_alpha == Dynamics.VELOCITY:
-		strength *= lerp(alpha_min, alpha_max, mouse_velocity)
+		strength *= lerpf(alpha_min, alpha_max, mouse_velocity)
 	return strength
 
 
