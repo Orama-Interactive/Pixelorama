@@ -18,7 +18,7 @@ var edited_swatch_color := Color.TRANSPARENT
 @onready var create_palette_dialog := $"%CreatePaletteDialog"
 
 # Color picker button itself is hidden but its popup is used to edit color swatches
-@onready var hidden_color_picker := $"%HiddenColorPickerButton"
+@onready var hidden_color_picker := $"%HiddenColorPickerButton" as ColorPickerButton
 
 
 func _ready() -> void:
@@ -158,14 +158,14 @@ func _on_EditPaletteDialog_saved(palette_name: String, comment: String, width: i
 
 
 func _on_PaletteGrid_swatch_double_clicked(_mb: int, index: int, click_position: Vector2) -> void:
-	var color = Palettes.current_palette_get_color(index)
+	var color := Palettes.current_palette_get_color(index)
 	edited_swatch_index = index
 	hidden_color_picker.color = color
 	hidden_color_picker.color_changed.emit(hidden_color_picker.color)
 
 	# Open color picker popup with its right bottom corner next to swatch
-	var popup = hidden_color_picker.get_popup()
-	popup.position = click_position - popup.size
+	var popup := hidden_color_picker.get_popup()
+	popup.position = click_position - Vector2(popup.size)
 	popup.popup()
 
 
