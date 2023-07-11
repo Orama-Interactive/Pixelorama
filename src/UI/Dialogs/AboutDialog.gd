@@ -216,7 +216,6 @@ func _ready() -> void:
 	license_tabs.add_tab("mbed TLS")
 	license_tabs.add_tab("Keychain")
 	license_tabs.add_tab("Roboto")
-	license_tabs.add_tab("DroidSansFallback")
 	license_tabs.add_tab("Dockable Container")
 	license_tabs.add_tab("aimgio")
 	license_tabs.add_tab("godot-gdgifexporter")
