@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://cfihuvhy4ocx7"]
 
-[ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/FlipImageDialog.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://c7hnynip21y6u" path="res://src/UI/Dialogs/ImageEffects/FlipImageDialog.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/InvertColorsDialog.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/DesaturateDialog.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://duse1w3q7whmm" path="res://src/UI/Dialogs/ImageEffects/DropShadowDialog.tscn" id="4"]
@@ -11,8 +11,8 @@
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/RotateImage.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://bkr47ocij684y" path="res://src/UI/Dialogs/ImageEffects/ShaderEffect.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/HSVDialog.tscn" id="11"]
-[ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/GradientDialog.tscn" id="12"]
-[ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/OutlineDialog.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://u0y5xogg636e" path="res://src/UI/Dialogs/ImageEffects/GradientDialog.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://ci2qpf6t3dyyr" path="res://src/UI/Dialogs/ImageEffects/OutlineDialog.tscn" id="13"]
 [ext_resource type="PackedScene" uid="uid://omm7xmtf5kbj" path="res://src/UI/Dialogs/ImageEffects/ScaleImage.tscn" id="14"]
 
 [node name="ImageEffects" type="Control"]

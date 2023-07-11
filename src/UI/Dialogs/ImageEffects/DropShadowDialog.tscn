@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://duse1w3q7whmm"]
 
-[ext_resource type="PackedScene" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1"]
 [ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/DropShadowDialog.gd" id="2"]
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="3"]
 
@@ -10,22 +10,17 @@ script = ExtResource("2")
 [node name="VBoxContainer" parent="." index="3"]
 offset_bottom = 340.0
 
-[node name="ShowAnimate" parent="VBoxContainer" index="0"]
-layout_mode = 2
-
 [node name="TextureRect" parent="VBoxContainer/ShowAnimate" index="0"]
-layout_mode = 0
-expand_mode = 1
-
-[node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
-layout_mode = 2
-
-[node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-layout_mode = 2
-expand_mode = 1
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" index="0"]
-layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 
 [node name="ShadowOptions" type="GridContainer" parent="VBoxContainer" index="2"]
 layout_mode = 2
@@ -60,18 +55,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0.0823529, 0.0823529, 0.0823529, 0.627451)
 
-[node name="OptionsContainer" parent="VBoxContainer" index="3"]
-layout_mode = 2
-
-[node name="SelectionCheckBox" parent="VBoxContainer/OptionsContainer" index="0"]
-layout_mode = 2
-
 [node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
-layout_mode = 2
 selected = -1
 
 [node name="AnimatePanel" parent="AnimateDialog" index="0"]
-anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="value_changed" from="VBoxContainer/ShadowOptions/OffsetSliders" to="." method="_on_OffsetSliders_value_changed"]
 [connection signal="color_changed" from="VBoxContainer/ShadowOptions/ShadowColor" to="." method="_on_ShadowColor_color_changed"]

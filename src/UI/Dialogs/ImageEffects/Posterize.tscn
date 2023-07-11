@@ -1,12 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cnryslyvxv4ye"]
 
-[ext_resource path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=2]
-[ext_resource path="res://src/UI/Dialogs/ImageEffects/Posterize.gd" type="Script" id=3]
+[ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1"]
+[ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="2"]
+[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/Posterize.gd" id="3"]
 
-[node name="Posterize" instance=ExtResource( 1 )]
-window_title = "Posterize"
-script = ExtResource( 3 )
+[node name="Posterize" instance=ExtResource("1")]
+script = ExtResource("3")
 
 [node name="VBoxContainer" parent="." index="3"]
 offset_bottom = 316.0
@@ -14,21 +13,12 @@ offset_bottom = 316.0
 [node name="ShowAnimate" parent="VBoxContainer" index="0"]
 visible = false
 
-[node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
-offset_bottom = 224.0
-
-[node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-offset_left = 80.0
-offset_right = 280.0
-offset_bottom = 200.0
-
 [node name="LevelsSlider" type="TextureProgressBar" parent="VBoxContainer" index="2"]
-offset_top = 228.0
-offset_right = 360.0
-offset_bottom = 252.0
-custom_minimum_size = Vector2( 0, 24 )
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_mode = 2
 mouse_default_cursor_shape = 2
-theme_type_variation = "ValueSlider"
+theme_type_variation = &"ValueSlider"
 min_value = 2.0
 max_value = 256.0
 step = 0.01
@@ -38,17 +28,16 @@ stretch_margin_left = 3
 stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
-script = ExtResource( 2 )
+script = ExtResource("2")
 prefix = "Posterize levels:"
 snap_by_default = true
 
 [node name="DitherSlider" type="TextureProgressBar" parent="VBoxContainer" index="3"]
-offset_top = 256.0
-offset_right = 360.0
-offset_bottom = 280.0
-custom_minimum_size = Vector2( 0, 24 )
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_mode = 2
 mouse_default_cursor_shape = 2
-theme_type_variation = "ValueSlider"
+theme_type_variation = &"ValueSlider"
 max_value = 0.5
 step = 0.01
 nine_patch_stretch = true
@@ -56,19 +45,9 @@ stretch_margin_left = 3
 stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
-script = ExtResource( 2 )
+script = ExtResource("2")
 prefix = "Dither intensity:"
 snap_step = 0.1
-
-[node name="OptionsContainer" parent="VBoxContainer" index="4"]
-offset_top = 284.0
-offset_bottom = 308.0
-
-[node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
-items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
-
-[node name="AnimateDialog" parent="." index="4"]
-offset_bottom = 316.0
 
 [connection signal="value_changed" from="VBoxContainer/LevelsSlider" to="." method="_on_LevelsSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/DitherSlider" to="." method="_on_DitherSlider_value_changed"]
