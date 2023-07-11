@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://w1v6plnv6ppt"]
+[gd_scene load_steps=7 format=3 uid="uid://w1v6plnv6ppt"]
 
 [ext_resource type="Script" path="res://src/UI/Dialogs/AboutDialog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b47r0c6auaqk6" path="res://assets/graphics/icons/icon.png" id="2"]
-[ext_resource type="FontFile" path="res://assets/fonts/Roboto-Italic.tres" id="3"]
+[ext_resource type="FontFile" uid="uid://cy5lkye8vdr5t" path="res://assets/fonts/Roboto-Italic.ttf" id="3_jqhhb"]
 [ext_resource type="Texture2D" uid="uid://s25pa611bpvj" path="res://assets/graphics/splash_screen/orama_64x64.png" id="4"]
-[ext_resource type="FontFile" path="res://assets/fonts/Roboto-Small.tres" id="5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bkh2e"]
+font = ExtResource("3_jqhhb")
+
+[sub_resource type="LabelSettings" id="LabelSettings_aewb6"]
+font_size = 12
 
 [node name="AboutDialog" type="Window"]
 size = Vector2i(700, 470)
@@ -41,8 +46,8 @@ layout_mode = 2
 
 [node name="PixeloramaSlogan" type="Label" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3")
 text = "Pixelorama - Pixelate your dreams!"
+label_settings = SubResource("LabelSettings_bkh2e")
 
 [node name="LinkButtons" type="HBoxContainer" parent="AboutUI/IconsButtons/SloganAndLinks/VBoxContainer"]
 layout_mode = 2
@@ -162,8 +167,8 @@ text = "Developed by Orama Interactive"
 
 [node name="Copyright" type="Label" parent="AboutUI"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5")
 text = "©2019-present by Orama Interactive and contributors"
+label_settings = SubResource("LabelSettings_aewb6")
 
 [connection signal="about_to_popup" from="." to="." method="_on_AboutDialog_about_to_show"]
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
