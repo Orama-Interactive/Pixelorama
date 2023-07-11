@@ -242,13 +242,14 @@ func _setup_layouts_submenu(item: String) -> void:
 	var path := "user://layouts"
 	var dir := DirAccess.open(path)
 	if DirAccess.get_open_error() == OK:
-		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
 			if !dir.current_is_dir():
 				var file_name_no_tres: String = file_name.get_basename()
 				layouts.append([file_name_no_tres, ResourceLoader.load(path.path_join(file_name))])
 			file_name = dir.get_next()
+		dir.list_dir_end()
 
 	layouts_submenu.set_name("layouts_submenu")
 	layouts_submenu.hide_on_checkable_item_selection = false

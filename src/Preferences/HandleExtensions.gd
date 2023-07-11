@@ -48,13 +48,14 @@ func _ready() -> void:
 	var dir := DirAccess.open(EXTENSIONS_PATH)
 	dir.make_dir(EXTENSIONS_PATH)
 	if DirAccess.get_open_error() == OK:
-		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
 			var ext: String = file_name.to_lower().get_extension()
 			if !dir.current_is_dir() and ext in ["pck", "zip"]:
 				file_names.append(file_name)
 			file_name = dir.get_next()
+		dir.list_dir_end()
 
 	if file_names.is_empty():
 		return

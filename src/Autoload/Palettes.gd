@@ -397,7 +397,7 @@ func _get_palette_files(path: String) -> Array:
 	if not is_instance_valid(dir) or not dir.dir_exists(path):
 		return []
 
-	dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+	dir.list_dir_begin()
 
 	while true:
 		var file_name = dir.get_next()
