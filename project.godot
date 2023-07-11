@@ -54,11 +54,8 @@ gdscript/warnings/narrowing_conversion=false
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/per_pixel_transparency/allowed=true
-window/per_pixel_transparency/enabled=true
-window/per_pixel_transparency/allowed.HTML5=false
-window/per_pixel_transparency/enabled.HTML5=false
-window/per_pixel_transparency/allowed.Android=false
-window/per_pixel_transparency/enabled.Android=false
+window/per_pixel_transparency/allowed.android=false
+window/per_pixel_transparency/allowed.web=false
 
 [editor_plugins]
 
@@ -722,22 +719,9 @@ right_paint_selection_tool={
 
 locale/translations=PackedStringArray("res://Translations/cs_CZ.po", "res://Translations/da_DK.po", "res://Translations/de_DE.po", "res://Translations/el_GR.po", "res://Translations/en_US.po", "res://Translations/eo_UY.po", "res://Translations/es_ES.po", "res://Translations/fr_FR.po", "res://Translations/hu_HU.po", "res://Translations/id_ID.po", "res://Translations/it_IT.po", "res://Translations/ja_JP.po", "res://Translations/ko_KR.po", "res://Translations/lv_LV.po", "res://Translations/nb_NO.po", "res://Translations/pl_PL.po", "res://Translations/pt_BR.po", "res://Translations/pt_PT.po", "res://Translations/ro_RO.po", "res://Translations/ru_RU.po", "res://Translations/tr_TR.po", "res://Translations/uk_UA.po", "res://Translations/zh_CN.po", "res://Translations/zh_TW.po")
 
-[locale]
-
-translations=PackedStringArray("res://Translations/zh_TW.po", "res://Translations/pt_BR.po", "res://Translations/de_DE.po", "res://Translations/el_GR.po", "res://Translations/en_US.po", "res://Translations/fr_FR.po", "res://Translations/it_IT.po", "res://Translations/pl_PL.po", "res://Translations/ru_RU.po", "res://Translations/es_ES.po", "res://Translations/zh_CN.po", "res://Translations/lv_LV.po", "res://Translations/eo_UY.po", "res://Translations/cs_CZ.po", "res://Translations/id_ID.po", "res://Translations/hu_HU.po", "res://Translations/ro_RO.po", "res://Translations/ko_KR.po", "res://Translations/tr_TR.po", "res://Translations/ja_JP.po", "res://Translations/nb_NO.po", "res://Translations/uk_UA.po", "res://Translations/pt_PT.po", "res://Translations/da_DK.po")
-locale_filter=[0, []]
-
-[logging]
-
-file_logging/enable_file_logging=true
-
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
-quality/driver/driver_name="GLES2"
-quality/driver/fallback_to_gles2=true
-quality/intended_usage/framebuffer_allocation=0
-quality/intended_usage/framebuffer_allocation.mobile=0
 threads/thread_model=2
 vram_compression/import_etc=true
