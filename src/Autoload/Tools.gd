@@ -250,11 +250,11 @@ class Tool:
 			hint += "\n\n" + extra_hint
 
 		var extra_shortcuts_mapped := []
-		for event in extra_shortcuts:
-			var key: InputEventKey = Keychain.action_get_first_key(event)
+		for action in extra_shortcuts:
 			var key_string := "None"
-			if key:
-				key_string = OS.get_keycode_string(key.get_keycode_with_modifiers())
+			var events := InputMap.action_get_events(action)
+			if events.size() > 0:
+				key_string = events[0].as_text()
 			extra_shortcuts_mapped.append(key_string)
 
 		shortcuts.append_array(extra_shortcuts_mapped)
