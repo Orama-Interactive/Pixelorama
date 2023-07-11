@@ -100,7 +100,12 @@ func draw_start(pos: Vector2) -> void:
 		and (!_add and !_subtract and !_intersect or quick_copy)
 		and !_ongoing_selection
 	):
-		if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+		if !(
+			Global
+			. current_project
+			. layers[Global.current_project.current_layer]
+			. can_layer_get_drawn()
+		):
 			return
 		# Move current selection
 		_move = true
@@ -170,8 +175,7 @@ func draw_move(pos: Vector2) -> void:
 		var prev_pos: Vector2 = selection_node.big_bounding_rectangle.position
 		selection_node.big_bounding_rectangle.position = prev_pos.snapped(Global.grid_size)
 		selection_node.marching_ants_outline.offset += (
-			selection_node.big_bounding_rectangle.position
-			- prev_pos
+			selection_node.big_bounding_rectangle.position - prev_pos
 		)
 		pos = pos.snapped(Global.grid_size)
 		var grid_offset := Global.grid_offset

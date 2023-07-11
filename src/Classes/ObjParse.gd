@@ -279,7 +279,9 @@ static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 							var uv = uvs[f]
 							fan_vt.append(uv)
 
-				st.add_triangle_fan(fan_v, fan_vt, PackedColorArray(), PackedVector2Array(), fan_vn, [])
+				st.add_triangle_fan(
+					fan_v, fan_vt, PackedColorArray(), PackedVector2Array(), fan_vn, []
+				)
 		mesh = st.commit(mesh)
 	for k in mesh.get_surface_count():
 		var mat = mesh.surface_get_material(k)

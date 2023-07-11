@@ -126,7 +126,9 @@ func move_bitmap_values(project: Project, move_offset := true) -> void:
 	blit_rect(smaller_image, Rect2(Vector2.ZERO, Vector2(nw, nh)), dst)
 
 
-func resize_bitmap_values(project: Project, new_size: Vector2, flip_hor: bool, flip_ver: bool) -> void:
+func resize_bitmap_values(
+	project: Project, new_size: Vector2, flip_hor: bool, flip_ver: bool
+) -> void:
 	var size := project.size
 	var selection_node: Node2D = Global.canvas.selection
 	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position

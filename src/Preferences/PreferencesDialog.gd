@@ -74,9 +74,9 @@ var preferences := [
 	Preference.new(
 		"pause_when_unfocused", "Performance/PerformanceContainer/PauseAppFocus", "pressed"
 	),
-#	Preference.new(
-#		"renderer", "Drivers/DriversContainer/Renderer", "selected", true, OS.VIDEO_DRIVER_GLES2
-#	),
+	#	Preference.new(
+	#		"renderer", "Drivers/DriversContainer/Renderer", "selected", true, OS.VIDEO_DRIVER_GLES2
+	#	),
 	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", true, 0)
 ]
 

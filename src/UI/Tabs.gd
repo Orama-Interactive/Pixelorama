@@ -1,8 +1,7 @@
 extends TabBar
 
-@onready var unsaved_changes_dialog: ConfirmationDialog = Global.control.find_child(
-	"UnsavedCanvasDialog"
-)
+@onready
+var unsaved_changes_dialog: ConfirmationDialog = Global.control.find_child("UnsavedCanvasDialog")
 
 
 # Thanks to https://github.com/godotengine/godot/issues/64498#issuecomment-1217992089

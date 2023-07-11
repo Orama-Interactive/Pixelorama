@@ -33,14 +33,10 @@ func get_tile_positions() -> Array:
 	var tile_mode: int = defaulted_tiles.mode
 
 	var x_range := (
-		range(-1, 2)
-		if tile_mode in [Tiles.MODE.X_AXIS, Tiles.MODE.BOTH]
-		else range(0, 1)
+		range(-1, 2) if tile_mode in [Tiles.MODE.X_AXIS, Tiles.MODE.BOTH] else range(0, 1)
 	)
 	var y_range := (
-		range(-1, 2)
-		if tile_mode in [Tiles.MODE.Y_AXIS, Tiles.MODE.BOTH]
-		else range(0, 1)
+		range(-1, 2) if tile_mode in [Tiles.MODE.Y_AXIS, Tiles.MODE.BOTH] else range(0, 1)
 	)
 	var positions := []
 	for r in y_range:

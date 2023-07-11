@@ -29,8 +29,7 @@ func _input(event: InputEvent) -> void:
 			)
 			selection_node.big_bounding_rectangle.position += grid_offset
 			selection_node.marching_ants_outline.offset += (
-				selection_node.big_bounding_rectangle.position
-				- prev_pos
+				selection_node.big_bounding_rectangle.position - prev_pos
 			)
 	elif event.is_action_released("transform_snap_grid"):
 		_snap_to_grid = false
@@ -108,12 +107,10 @@ func _snap_position(pos: Vector2) -> Vector2:
 		if !Global.current_project.has_selection:
 			var move_offset := Vector2.ZERO
 			move_offset.x = (
-				_start_pos.x
-				- int(_start_pos.x / Global.grid_size.x) * Global.grid_size.x
+				_start_pos.x - int(_start_pos.x / Global.grid_size.x) * Global.grid_size.x
 			)
 			move_offset.y = (
-				_start_pos.y
-				- int(_start_pos.y / Global.grid_size.y) * Global.grid_size.y
+				_start_pos.y - int(_start_pos.y / Global.grid_size.y) * Global.grid_size.y
 			)
 			pos += move_offset
 

@@ -34,7 +34,9 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	var current_cels: Array = Global.current_project.frames[Global.current_project.current_frame].cels
+	var current_cels: Array = (
+		Global.current_project.frames[Global.current_project.current_frame].cels
+	)
 	var position_tmp := position
 	var scale_tmp := scale
 	if Global.mirror_view:

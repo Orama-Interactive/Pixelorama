@@ -47,7 +47,9 @@ func draw_perspective_line():
 	if is_hidden:
 		points[1] = start
 	else:
-		points[1] = (start + Vector2(length * cos(deg_to_rad(angle)), length * sin(deg_to_rad(angle))))
+		points[1] = (
+			start + Vector2(length * cos(deg_to_rad(angle)), length * sin(deg_to_rad(angle)))
+		)
 
 
 func hide_perspective_line():

@@ -62,9 +62,7 @@ func handle_loading_file(file: String) -> void:
 		var image := Image.load_from_file(file)
 		if not is_instance_valid(image):  # An error occurred
 			var file_name: String = file.get_file()
-			Global.error_dialog.set_text(
-				tr("Can't load file '%s'.") % [file_name]
-			)
+			Global.error_dialog.set_text(tr("Can't load file '%s'.") % [file_name])
 			Global.error_dialog.popup_centered()
 			Global.dialog_open(true)
 			return
@@ -160,7 +158,9 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 				var b_width = brush.size_x
 				var b_height = brush.size_y
 				var buffer := file.get_buffer(b_width * b_height * 4)
-				var image := Image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
+				var image := Image.create_from_data(
+					b_width, b_height, false, Image.FORMAT_RGBA8, buffer
+				)
 				new_project.brushes.append(image)
 				Brushes.add_project_brush(image)
 
@@ -169,7 +169,9 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 				var t_width = result.tile_mask.size_x
 				var t_height = result.tile_mask.size_y
 				var buffer := file.get_buffer(t_width * t_height * 4)
-				var image := Image.create_from_data(t_width, t_height, false, Image.FORMAT_RGBA8, buffer)
+				var image := Image.create_from_data(
+					t_width, t_height, false, Image.FORMAT_RGBA8, buffer
+				)
 				new_project.tiles.tile_mask = image
 			else:
 				new_project.tiles.reset_mask()
@@ -651,7 +653,9 @@ func open_image_as_spritesheet_layer(
 			cels.append(layer.new_empty_cel())
 
 	project.undo_redo.add_do_method(project.add_frames.bind(frames, frame_indices))
-	project.undo_redo.add_do_method(project.add_layers.bind([layer], [project.layers.size()], [cels]))
+	project.undo_redo.add_do_method(
+		project.add_layers.bind([layer], [project.layers.size()], [cels])
+	)
 	project.undo_redo.add_do_method(
 		project.change_cel.bind(new_frames_size - 1, project.layers.size())
 	)
@@ -692,8 +696,8 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 
 	project.undo_redo.add_undo_property(project, "selected_cels", [])
 	project.undo_redo.add_undo_method(
-		project.change_cel.bind(project.current_frame, project.current_layer
-	))
+		project.change_cel.bind(project.current_frame, project.current_layer)
+	)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
 
@@ -751,7 +755,9 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 		else:
 			cels.append(layer.new_empty_cel())
 
-	project.undo_redo.add_do_method(project.add_layers.bind([layer], [project.layers.size()], [cels]))
+	project.undo_redo.add_do_method(
+		project.add_layers.bind([layer], [project.layers.size()], [cels])
+	)
 	project.undo_redo.add_do_method(project.change_cel.bind(frame_index, project.layers.size()))
 
 	project.undo_redo.add_undo_method(project.remove_layers.bind([project.layers.size()]))
@@ -788,11 +794,7 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 	var prev_project_pos: int = Global.current_project_index
 
 	Global.window_title = (
-		path.get_file()
-		+ " ("
-		+ tr("imported")
-		+ ") - Pixelorama "
-		+ Global.current_version
+		path.get_file() + " (" + tr("imported") + ") - Pixelorama " + Global.current_version
 	)
 	if project.has_changed:
 		Global.window_title = Global.window_title + "(*)"
@@ -823,7 +825,9 @@ func _on_Autosave_timeout() -> void:
 	for i in range(backup_save_paths.size()):
 		if backup_save_paths[i] == "":
 			# Create a new backup file if it doesn't exist yet
-			backup_save_paths[i] = "user://backup-" + str(Time.get_unix_time_from_system()) + "-%s" % i
+			backup_save_paths[i] = (
+				"user://backup-" + str(Time.get_unix_time_from_system()) + "-%s" % i
+			)
 
 		store_backup_path(i)
 		save_pxo_file(backup_save_paths[i], true, true, Global.projects[i])
@@ -891,9 +895,7 @@ func reload_backup_file(project_paths: Array, backup_paths: Array) -> void:
 		if project_paths[i] != backup_paths[i]:  # If the user has saved
 			current_save_paths[i] = project_paths[i]
 			Global.window_title = (
-				project_paths[i].get_file()
-				+ " - Pixelorama(*) "
-				+ Global.current_version
+				project_paths[i].get_file() + " - Pixelorama(*) " + Global.current_version
 			)
 			Global.current_project.has_changed = true
 

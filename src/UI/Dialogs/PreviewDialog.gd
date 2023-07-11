@@ -77,18 +77,10 @@ func _on_PreviewDialog_about_to_show() -> void:
 		spritesheet_manual_tab_options.get_node("VerticalFrames").max_value, image.get_size().y
 	)
 	image_size_label.text = (
-		tr("Image Size")
-		+ ": "
-		+ str(image.get_size().x)
-		+ "×"
-		+ str(image.get_size().y)
+		tr("Image Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
 	)
 	frame_size_label.text = (
-		tr("Frame Size")
-		+ ": "
-		+ str(image.get_size().x)
-		+ "×"
-		+ str(image.get_size().y)
+		tr("Frame Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
 	)
 	if OpenSave.preview_dialogs.size() > 1:
 		apply_all.visible = true
@@ -212,6 +204,8 @@ func _on_ApplyAll_toggled(pressed) -> void:
 				synchronize()
 			else:
 				child.popup_centered()
+
+
 #	popup(old_rect)  # needed for correct popup_order
 
 
@@ -238,27 +232,27 @@ func synchronize() -> void:
 					image.get_size().y
 				)
 				if id == ImageImportOptions.SPRITESHEET_LAYER:
-					dialog.spritesheet_lay_opt.get_node("AtFrameSpinbox").value = (spritesheet_lay_opt.get_node(
-						"AtFrameSpinbox"
-					).value)
+					dialog.spritesheet_lay_opt.get_node("AtFrameSpinbox").value = (
+						spritesheet_lay_opt.get_node("AtFrameSpinbox").value
+					)
 
 			elif id == ImageImportOptions.NEW_FRAME:
-				dialog.new_frame_options.get_node("AtLayerOption").selected = (new_frame_options.get_node(
-					"AtLayerOption"
-				).selected)
+				dialog.new_frame_options.get_node("AtLayerOption").selected = (
+					new_frame_options.get_node("AtLayerOption").selected
+				)
 
 			elif id == ImageImportOptions.REPLACE_CEL:
-				dialog.replace_cel_options.get_node("AtLayerOption").selected = (replace_cel_options.get_node(
-					"AtLayerOption"
-				).selected)
-				dialog.replace_cel_options.get_node("AtFrameSpinbox").value = (replace_cel_options.get_node(
-					"AtFrameSpinbox"
-				).value)
+				dialog.replace_cel_options.get_node("AtLayerOption").selected = (
+					replace_cel_options.get_node("AtLayerOption").selected
+				)
+				dialog.replace_cel_options.get_node("AtFrameSpinbox").value = (
+					replace_cel_options.get_node("AtFrameSpinbox").value
+				)
 
 			elif id == ImageImportOptions.NEW_LAYER:
-				dialog.new_layer_options.get_node("AtFrameSpinbox").value = (new_layer_options.get_node(
-					"AtFrameSpinbox"
-				).value)
+				dialog.new_layer_options.get_node("AtFrameSpinbox").value = (
+					new_layer_options.get_node("AtFrameSpinbox").value
+				)
 
 			elif id == ImageImportOptions.BRUSH:
 				var type = new_brush_options.get_node("BrushTypeOption").selected
@@ -332,7 +326,9 @@ func _on_ImportOption_item_selected(id: int) -> void:
 
 	elif id == ImageImportOptions.NEW_LAYER:
 		new_layer_options.visible = true
-		new_layer_options.get_node("AtFrameSpinbox").max_value = Global.current_project.frames.size()
+		new_layer_options.get_node("AtFrameSpinbox").max_value = (
+			Global.current_project.frames.size()
+		)
 
 	elif id == ImageImportOptions.BRUSH:
 		new_brush_options.visible = true
@@ -435,7 +431,9 @@ func add_brush() -> void:
 		if !dir.dir_exists(brush_name):
 			dir.make_dir(brush_name)
 
-		dir = DirAccess.open(Global.directory_module.xdg_data_home.path_join("Brushes").path_join(brush_name))
+		dir = DirAccess.open(
+			Global.directory_module.xdg_data_home.path_join("Brushes").path_join(brush_name)
+		)
 		var random_brushes := []
 		dir.list_dir_begin()
 		var curr_file := dir.get_next()

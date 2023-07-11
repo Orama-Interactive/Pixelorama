@@ -12,7 +12,8 @@ var camera: Camera3D
 var scene_properties := {}
 # Key = Cel3DObject's id, Value = Dictionary containing the properties of the Cel3DObject
 var object_properties := {}
-var selected: Cel3DObject = null: set = _set_selected
+var selected: Cel3DObject = null:
+	set = _set_selected
 var current_object_id := 0  # Its value never decreases
 
 

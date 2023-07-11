@@ -25,7 +25,10 @@ func _recalculate_opacity() -> void:
 
 
 func set_window_opacity(value: float) -> void:
-	if ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)):
+	if (
+		(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
+		or (get_window().mode == Window.MODE_FULLSCREEN)
+	):
 		value = 100.0
 		slider.value = value
 

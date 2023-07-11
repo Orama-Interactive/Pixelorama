@@ -18,8 +18,10 @@ func _notification(what: int) -> void:
 
 func _define_js() -> void:
 	# Define JS script
-	JavaScriptBridge.eval(
-		"""
+	(
+		JavaScriptBridge
+		. eval(
+			"""
 	var fileData;
 	var fileType;
 	var fileName;
@@ -67,7 +69,8 @@ func _define_js() -> void:
 		});
 	}
 	""",
-		true
+			true
+		)
 	)
 
 

@@ -8,8 +8,7 @@ var cursor_text := ""
 var _cursor := Vector2.INF
 
 var _draw_cache: PackedVector2Array = []  # for storing already drawn pixels
-@warning_ignore("unused_private_class_variable")
-var _for_frame := 0  # cache for which frame?
+@warning_ignore("unused_private_class_variable") var _for_frame := 0  # cache for which frame?
 
 # Only use "_spacing_mode" and "_spacing" variables (the others are set automatically)
 # The _spacing_mode and _spacing values are to be CHANGED only in the tool scripts (e.g Pencil.gd)
@@ -234,10 +233,7 @@ func _snap_to_guide(
 	if closest_point == Vector2.INF:  # Is not close to a guide
 		return Vector2.INF
 	# Snap to the closest guide
-	if (
-		snap_to == Vector2.INF
-		or (snap_to - pos).length() > (closest_point - pos).length()
-	):
+	if snap_to == Vector2.INF or (snap_to - pos).length() > (closest_point - pos).length():
 		snap_to = closest_point
 
 	return snap_to

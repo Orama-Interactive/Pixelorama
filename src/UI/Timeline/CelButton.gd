@@ -112,7 +112,9 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 					var s_cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 					if s_cel.link_set == null:  # Skip cels that aren't linked
 						continue
-					project.undo_redo.add_do_method(project.layers[layer].link_cel.bind(s_cel, null))
+					project.undo_redo.add_do_method(
+						project.layers[layer].link_cel.bind(s_cel, null)
+					)
 					project.undo_redo.add_undo_method(
 						project.layers[layer].link_cel.bind(s_cel, s_cel.link_set)
 					)
@@ -131,7 +133,9 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 					project.undo_redo.add_do_method(
 						project.layers[layer].link_cel.bind(cel, link_set)
 					)
-					project.undo_redo.add_undo_method(project.layers[layer].link_cel.bind(cel, null))
+					project.undo_redo.add_undo_method(
+						project.layers[layer].link_cel.bind(cel, null)
+					)
 
 				for cel_index in project.selected_cels:
 					if layer != cel_index[1]:  # Skip selected cels not on the same layer
@@ -260,7 +264,9 @@ func _drop_data(_pos: Vector2, data) -> void:
 	project.undo_redo.create_action("Move Cels")
 	if Input.is_action_pressed("ctrl") or layer != drop_layer:  # Swap cels
 		project.undo_redo.add_do_method(project.swap_cel.bind(frame, layer, drop_frame, drop_layer))
-		project.undo_redo.add_undo_method(project.swap_cel.bind(frame, layer, drop_frame, drop_layer))
+		project.undo_redo.add_undo_method(
+			project.swap_cel.bind(frame, layer, drop_frame, drop_layer)
+		)
 	else:  # Move cels
 		var to_frame: int
 		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left

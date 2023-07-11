@@ -3,14 +3,17 @@ class_name Project
 extends RefCounted
 ## A class for project properties.
 
-var name := "": set = _name_changed
-var size: Vector2: set = _size_changed
+var name := "":
+	set = _name_changed
+var size: Vector2:
+	set = _size_changed
 var undo_redo := UndoRedo.new()
 var tiles: Tiles
 var undos := 0  ## The number of times we added undo properties
 var can_undo := true
 var fill_color := Color(0)
-var has_changed := false: set = _has_changed_changed
+var has_changed := false:
+	set = _has_changed_changed
 # frames and layers Arrays should generally only be modified directly when
 # opening/creating a project. When modifying the current project, use
 # the add/remove/move/swap_frames/layers methods
@@ -20,7 +23,8 @@ var current_frame := 0
 var current_layer := 0
 var selected_cels := [[0, 0]]  # Array of Arrays of 2 integers (frame & layer)
 
-var animation_tags: Array[AnimationTag] = []: set = _animation_tags_changed
+var animation_tags: Array[AnimationTag] = []:
+	set = _animation_tags_changed
 var guides: Array[Guide] = []
 var brushes: Array[Image] = []
 var reference_images: Array[ReferenceImage] = []
@@ -35,12 +39,15 @@ var y_symmetry_axis := SymmetryGuide.new()
 var selection_map := SelectionMap.new()
 # This is useful for when the selection is outside of the canvas boundaries,
 # on the left and/or above (negative coords)
-var selection_offset := Vector2.ZERO: set = _selection_offset_changed
+var selection_offset := Vector2.ZERO:
+	set = _selection_offset_changed
 var has_selection := false
 
 # For every camera (currently there are 3)
 var cameras_rotation: PackedFloat32Array = [0.0, 0.0, 0.0]
-var cameras_zoom: PackedVector2Array = [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)]
+var cameras_zoom: PackedVector2Array = [
+	Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)
+]
 var cameras_offset: PackedVector2Array = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
 var cameras_zoom_max: PackedVector2Array = [Vector2.ONE, Vector2.ONE, Vector2.ONE]
 
@@ -255,13 +262,16 @@ func serialize() -> Dictionary:
 
 	var tag_data := []
 	for tag in animation_tags:
-		tag_data.append(
-			{
-				"name": tag.name,
-				"color": tag.color.to_html(),
-				"from": tag.from,
-				"to": tag.to,
-			}
+		(
+			tag_data
+			. append(
+				{
+					"name": tag.name,
+					"color": tag.color.to_html(),
+					"from": tag.from,
+					"to": tag.to,
+				}
+			)
 		)
 
 	var guide_data := []

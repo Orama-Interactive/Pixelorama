@@ -55,9 +55,7 @@ func initialize_recording() -> void:
 
 	# Create a new directory based on time
 	var time_dict := Time.get_time_dict_from_system()
-	var folder := str(
-		project.name, time_dict.hour, "_", time_dict.minute, "_", time_dict.second
-	)
+	var folder := str(project.name, time_dict.hour, "_", time_dict.minute, "_", time_dict.second)
 	save_dir = save_dir.path_join(folder)
 	var dir := DirAccess.open(save_dir)
 	dir.make_dir_recursive(save_dir)
@@ -82,7 +80,11 @@ func capture_frame() -> void:
 
 	if mode == Mode.CANVAS:
 		if resize != 100:
-			image.resize(image.get_size().x * resize / 100, image.get_size().y * resize / 100, Image.INTERPOLATE_NEAREST)
+			image.resize(
+				image.get_size().x * resize / 100,
+				image.get_size().y * resize / 100,
+				Image.INTERPOLATE_NEAREST
+			)
 
 	cache.append(image)
 

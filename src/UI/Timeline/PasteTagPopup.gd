@@ -25,6 +25,8 @@ func _on_TagContainer_gui_input(event: InputEvent) -> void:
 			add_icon_item(tex, tag_name)
 		var frame_idx := Global.current_project.current_frame + 2
 		add_separator(str("The pasted frames will start at (Frame ", frame_idx, ")"))
+
+
 #		popup(Rect2(get_global_mouse_position(), Vector2.ONE))
 
 

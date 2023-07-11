@@ -6,7 +6,8 @@ extends RefCounted
 signal texture_changed
 
 var opacity := 1.0
-var image_texture: Texture2D: get = _get_image_texture
+var image_texture: Texture2D:
+	get = _get_image_texture
 # If the cel is linked a ref to the link set Dictionary this cel is in, or null if not linked:
 var link_set = null  # { "cels": Array, "hue": float } or null
 var transformed_content: Image  # Used in transformations (moving, scaling etc with selections)

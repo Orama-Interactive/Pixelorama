@@ -10,7 +10,8 @@ var flag_tilemode = false
 var is_moving_content := false
 var arrow_key_move := false
 var is_pasting := false
-var big_bounding_rectangle := Rect2(): set = _big_bounding_rectangle_changed
+var big_bounding_rectangle := Rect2():
+	set = _big_bounding_rectangle_changed
 var image_current_pixel := Vector2.ZERO  # The ACTUAL pixel coordinate of image
 
 var temp_rect := Rect2()
@@ -148,8 +149,7 @@ func _input(event: InputEvent) -> void:
 				rect_aspect_ratio = abs(temp_rect.size.y / temp_rect.size.x)
 				temp_rect_size = temp_rect.size
 				temp_rect_pivot = (
-					temp_rect.position
-					+ ((temp_rect.end - temp_rect.position) / 2).floor()
+					temp_rect.position + ((temp_rect.end - temp_rect.position) / 2).floor()
 				)
 
 		elif dragged_gizmo:  # Mouse released, deselect gizmo
@@ -410,7 +410,9 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 	preview_image.copy_from(original_preview_image)
 	if original_big_bounding_rectangle.position != big_bounding_rectangle.position:
 		preview_image.fill(Color(0, 0, 0, 0))
-		var pos_diff := (original_big_bounding_rectangle.position - big_bounding_rectangle.position).abs()
+		var pos_diff := (
+			(original_big_bounding_rectangle.position - big_bounding_rectangle.position).abs()
+		)
 #		pos_diff.y = 0
 		preview_image.blit_rect(
 			original_preview_image, Rect2(Vector2.ZERO, preview_image.get_size()), pos_diff

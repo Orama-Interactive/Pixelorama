@@ -87,11 +87,7 @@ func _draw() -> void:
 	if hierarchy_spacer.size.x > 0.1:
 		var color := Color(1, 1, 1, 0.33)
 		color.v = round(Global.control.theme.get_color("font_color", "Button").v)
-		var x = (
-			hierarchy_spacer.global_position.x
-			- global_position.x
-			+ hierarchy_spacer.size.x
-		)
+		var x = hierarchy_spacer.global_position.x - global_position.x + hierarchy_spacer.size.x
 		draw_line(Vector2(x, 0), Vector2(x, size.y), color)
 
 
@@ -296,9 +292,10 @@ func _drop_data(_pos: Vector2, data) -> void:
 		b.to_parents[-1] = a_from_parents[-1]
 
 		project.undo_redo.add_do_method(project.swap_layers.bind(a, b))
-		project.undo_redo.add_undo_method(project.swap_layers.bind(
-			{"from": a.to, "to": a.from, "to_parents": a_from_parents},
-			{"from": b.to, "to": drop_from_indices, "to_parents": drop_from_parents}
+		project.undo_redo.add_undo_method(
+			project.swap_layers.bind(
+				{"from": a.to, "to": a.from, "to_parents": a_from_parents},
+				{"from": b.to, "to": drop_from_indices, "to_parents": drop_from_parents}
 			)
 		)
 

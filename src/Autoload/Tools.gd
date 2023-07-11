@@ -77,9 +77,7 @@ var tools := {
 		load("res://src/Tools/SelectionTools/PaintSelect.tscn")
 	),
 	"Move":
-	Tool.new(
-		"Move", "Move", "move", load("res://src/Tools/Move.tscn"), [Global.LayerTypes.PIXEL]
-	),
+	Tool.new("Move", "Move", "move", load("res://src/Tools/Move.tscn"), [Global.LayerTypes.PIXEL]),
 	"Zoom": Tool.new("Zoom", "Zoom", "zoom", load("res://src/Tools/Zoom.tscn")),
 	"Pan": Tool.new("Pan", "Pan", "pan", load("res://src/Tools/Pan.tscn")),
 	"ColorPicker":
@@ -117,11 +115,7 @@ var tools := {
 	),
 	"Bucket":
 	Tool.new(
-		"Bucket",
-		"Bucket",
-		"fill",
-		load("res://src/Tools/Bucket.tscn"),
-		[Global.LayerTypes.PIXEL]
+		"Bucket", "Bucket", "fill", load("res://src/Tools/Bucket.tscn"), [Global.LayerTypes.PIXEL]
 	),
 	"Shading":
 	Tool.new(
@@ -132,40 +126,49 @@ var tools := {
 		[Global.LayerTypes.PIXEL]
 	),
 	"LineTool":
-	Tool.new(
-		"LineTool",
-		"Line Tool",
-		"linetool",
-		load("res://src/Tools/LineTool.tscn"),
-		[Global.LayerTypes.PIXEL],
-		"""Hold %s to snap the angle of the line
+	(
+		Tool
+		. new(
+			"LineTool",
+			"Line Tool",
+			"linetool",
+			load("res://src/Tools/LineTool.tscn"),
+			[Global.LayerTypes.PIXEL],
+			"""Hold %s to snap the angle of the line
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
-		["shape_perfect", "shape_center", "shape_displace"]
+			["shape_perfect", "shape_center", "shape_displace"]
+		)
 	),
 	"RectangleTool":
-	Tool.new(
-		"RectangleTool",
-		"Rectangle Tool",
-		"rectangletool",
-		load("res://src/Tools/RectangleTool.tscn"),
-		[Global.LayerTypes.PIXEL],
-		"""Hold %s to create a 1:1 shape
+	(
+		Tool
+		. new(
+			"RectangleTool",
+			"Rectangle Tool",
+			"rectangletool",
+			load("res://src/Tools/RectangleTool.tscn"),
+			[Global.LayerTypes.PIXEL],
+			"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
-		["shape_perfect", "shape_center", "shape_displace"]
+			["shape_perfect", "shape_center", "shape_displace"]
+		)
 	),
 	"EllipseTool":
-	Tool.new(
-		"EllipseTool",
-		"Ellipse Tool",
-		"ellipsetool",
-		load("res://src/Tools/EllipseTool.tscn"),
-		[Global.LayerTypes.PIXEL],
-		"""Hold %s to create a 1:1 shape
+	(
+		Tool
+		. new(
+			"EllipseTool",
+			"Ellipse Tool",
+			"ellipsetool",
+			load("res://src/Tools/EllipseTool.tscn"),
+			[Global.LayerTypes.PIXEL],
+			"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
 Hold %s to displace the shape's origin""",
-		["shape_perfect", "shape_center", "shape_displace"]
+			["shape_perfect", "shape_center", "shape_displace"]
+		)
 	),
 	"3DShapeEdit":
 	Tool.new(
@@ -320,7 +323,9 @@ func _ready() -> void:
 		_slots[MOUSE_BUTTON_LEFT].kname, "color", Color.BLACK
 	)
 	assign_color(color_value, MOUSE_BUTTON_LEFT, false)
-	color_value = Global.config_cache.get_value(_slots[MOUSE_BUTTON_RIGHT].kname, "color", Color.WHITE)
+	color_value = Global.config_cache.get_value(
+		_slots[MOUSE_BUTTON_RIGHT].kname, "color", Color.WHITE
+	)
 	assign_color(color_value, MOUSE_BUTTON_RIGHT, false)
 	update_tool_cursors()
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]

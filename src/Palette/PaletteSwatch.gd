@@ -10,7 +10,8 @@ const DEFAULT_COLOR := Color(0.0, 0.0, 0.0, 0.0)
 var index := -1
 var show_left_highlight := false
 var show_right_highlight := false
-var empty := true: set = set_empty
+var empty := true:
+	set = set_empty
 
 
 func set_swatch_size(swatch_size: Vector2) -> void:
@@ -33,10 +34,7 @@ func _draw() -> void:
 		var margin := size / 4
 		draw_rect(Rect2(margin, size - margin * 2), Color.BLACK, false, 1)
 		draw_rect(
-			Rect2(margin - Vector2.ONE, size - margin * 2 + Vector2(2, 2)),
-			Color.WHITE,
-			false,
-			1
+			Rect2(margin - Vector2.ONE, size - margin * 2 + Vector2(2, 2)), Color.WHITE, false, 1
 		)
 
 
