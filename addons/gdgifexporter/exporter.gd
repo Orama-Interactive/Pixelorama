@@ -86,7 +86,9 @@ func find_transparency_color_index(color_table: Dictionary) -> int:
 	return -1
 
 
-func colors_to_codes(img: Image, col_palette: Dictionary, transp_color_index: int) -> PackedByteArray:
+func colors_to_codes(
+	img: Image, col_palette: Dictionary, transp_color_index: int
+) -> PackedByteArray:
 	var image_data: PackedByteArray = img.get_data()
 	var result: PackedByteArray = PackedByteArray([])
 

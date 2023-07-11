@@ -148,7 +148,9 @@ func compress_lzw(image: PackedByteArray, colors: PackedByteArray) -> Array:
 
 
 # gdlint: ignore=max-line-length
-func decompress_lzw(code_stream_data: PackedByteArray, min_code_size: int, colors: PackedByteArray) -> PackedByteArray:
+func decompress_lzw(
+	code_stream_data: PackedByteArray, min_code_size: int, colors: PackedByteArray
+) -> PackedByteArray:
 	var code_table: CodeTable = initialize_color_code_table(colors)
 	var index_stream := PackedByteArray([])
 	var binary_code_stream = lsbbitunpacker.LSBLZWBitUnpacker.new(code_stream_data)
