@@ -276,102 +276,54 @@ func set_integer_zoom(enabled: bool):
 func _initialize_keychain() -> void:
 	Keychain.config_file = config_cache
 	Keychain.actions = {
-		"new_file": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.NEW),
-		"open_file": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.OPEN),
-		"open_last_project":
-		Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.OPEN_LAST_PROJECT),
-		"save_file": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.SAVE),
-		"save_file_as":
-		Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.SAVE_AS),
-		"export_file":
-		Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.EXPORT),
-		"export_file_as":
-		Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.EXPORT_AS),
-		"quit": Keychain.MenuInputAction.new("", "File menu", true, "FileMenu", FileMenu.QUIT),
-		"redo":
-		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.REDO, true),
-		"undo":
-		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.UNDO, true),
-		"cut": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.CUT),
-		"copy": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.COPY),
-		"paste": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.PASTE),
-		"paste_in_place":
-		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.PASTE_IN_PLACE),
-		"delete": Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.DELETE),
-		"new_brush":
-		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.NEW_BRUSH),
-		"preferences":
-		Keychain.MenuInputAction.new("", "Edit menu", true, "EditMenu", EditMenu.PREFERENCES),
-		"scale_image":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.SCALE_IMAGE),
-		"crop_image":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.CROP_IMAGE),
-		"resize_canvas":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.RESIZE_CANVAS),
-		"offset_image":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.OFFSET_IMAGE),
-		"mirror_image":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.FLIP),
-		"rotate_image":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.ROTATE),
-		"invert_colors":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.INVERT_COLORS),
-		"desaturation":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.DESATURATION),
-		"outline":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.OUTLINE),
-		"drop_shadow":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.DROP_SHADOW),
-		"adjust_hsv":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.HSV),
-		"gradient":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.GRADIENT),
-		"gradient_map":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.GRADIENT_MAP),
-		"posterize":
-		Keychain.MenuInputAction.new("", "Image menu", true, "ImageMenu", ImageMenu.POSTERIZE),
-		"mirror_view":
-		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.MIRROR_VIEW),
-		"show_grid":
-		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.SHOW_GRID),
-		"show_pixel_grid":
-		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.SHOW_PIXEL_GRID),
-		"show_guides":
-		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.SHOW_GUIDES),
-		"show_rulers":
-		Keychain.MenuInputAction.new("", "View menu", true, "ViewMenu", ViewMenu.SHOW_RULERS),
-		"moveable_panels":
-		Keychain.MenuInputAction.new(
-			"", "Window menu", true, "WindowMenu", WindowMenu.MOVABLE_PANELS
-		),
-		"zen_mode":
-		Keychain.MenuInputAction.new("", "Window menu", true, "WindowMenu", WindowMenu.ZEN_MODE),
-		"toggle_fullscreen":
-		Keychain.MenuInputAction.new(
-			"", "Window menu", true, "WindowMenu", WindowMenu.FULLSCREEN_MODE
-		),
-		"clear_selection":
-		Keychain.MenuInputAction.new(
-			"", "Select menu", true, "SelectMenu", SelectMenu.CLEAR_SELECTION
-		),
-		"select_all":
-		Keychain.MenuInputAction.new("", "Select menu", true, "SelectMenu", SelectMenu.SELECT_ALL),
-		"invert_selection":
-		Keychain.MenuInputAction.new("", "Select menu", true, "SelectMenu", SelectMenu.INVERT),
-		"view_splash_screen":
-		Keychain.MenuInputAction.new(
-			"", "Help menu", true, "HelpMenu", HelpMenu.VIEW_SPLASH_SCREEN
-		),
-		"open_docs":
-		Keychain.MenuInputAction.new("", "Help menu", true, "HelpMenu", HelpMenu.ONLINE_DOCS),
-		"issue_tracker":
-		Keychain.MenuInputAction.new("", "Help menu", true, "HelpMenu", HelpMenu.ISSUE_TRACKER),
-		"open_logs_folder":
-		Keychain.MenuInputAction.new("", "Help menu", true, "HelpMenu", HelpMenu.OPEN_LOGS_FOLDER),
-		"changelog":
-		Keychain.MenuInputAction.new("", "Help menu", true, "HelpMenu", HelpMenu.CHANGELOG),
-		"about_pixelorama":
-		Keychain.MenuInputAction.new("", "Help menu", true, "HelpMenu", HelpMenu.ABOUT_PIXELORAMA),
+		"new_file": Keychain.InputAction.new("", "File menu", true),
+		"open_file": Keychain.InputAction.new("", "File menu", true),
+		"open_last_project": Keychain.InputAction.new("", "File menu", true),
+		"save_file": Keychain.InputAction.new("", "File menu", true),
+		"save_file_as": Keychain.InputAction.new("", "File menu", true),
+		"export_file": Keychain.InputAction.new("", "File menu", true),
+		"export_file_as": Keychain.InputAction.new("", "File menu", true),
+		"quit": Keychain.InputAction.new("", "File menu", true),
+		"redo": Keychain.InputAction.new("", "Edit menu", true),
+		"undo": Keychain.InputAction.new("", "Edit menu", true),
+		"cut": Keychain.InputAction.new("", "Edit menu", true),
+		"copy": Keychain.InputAction.new("", "Edit menu", true),
+		"paste": Keychain.InputAction.new("", "Edit menu", true),
+		"paste_in_place": Keychain.InputAction.new("", "Edit menu", true),
+		"delete": Keychain.InputAction.new("", "Edit menu", true),
+		"new_brush": Keychain.InputAction.new("", "Edit menu", true),
+		"preferences": Keychain.InputAction.new("", "Edit menu", true),
+		"scale_image": Keychain.InputAction.new("", "Image menu", true),
+		"crop_image": Keychain.InputAction.new("", "Image menu", true),
+		"resize_canvas": Keychain.InputAction.new("", "Image menu", true),
+		"offset_image": Keychain.InputAction.new("", "Image menu", true),
+		"mirror_image": Keychain.InputAction.new("", "Image menu", true),
+		"rotate_image": Keychain.InputAction.new("", "Image menu", true),
+		"invert_colors": Keychain.InputAction.new("", "Image menu", true),
+		"desaturation": Keychain.InputAction.new("", "Image menu", true),
+		"outline": Keychain.InputAction.new("", "Image menu", true),
+		"drop_shadow": Keychain.InputAction.new("", "Image menu", true),
+		"adjust_hsv": Keychain.InputAction.new("", "Image menu", true),
+		"gradient": Keychain.InputAction.new("", "Image menu", true),
+		"gradient_map": Keychain.InputAction.new("", "Image menu", true),
+		"posterize": Keychain.InputAction.new("", "Image menu", true),
+		"mirror_view": Keychain.InputAction.new("", "View menu", true),
+		"show_grid": Keychain.InputAction.new("", "View menu", true),
+		"show_pixel_grid": Keychain.InputAction.new("", "View menu", true),
+		"show_guides": Keychain.InputAction.new("", "View menu", true),
+		"show_rulers": Keychain.InputAction.new("", "View menu", true),
+		"moveable_panels": Keychain.InputAction.new("", "Window menu", true),
+		"zen_mode": Keychain.InputAction.new("", "Window menu", true),
+		"toggle_fullscreen": Keychain.InputAction.new("", "Window menu", true),
+		"clear_selection": Keychain.InputAction.new("", "Select menu", true),
+		"select_all": Keychain.InputAction.new("", "Select menu", true),
+		"invert_selection": Keychain.InputAction.new("", "Select menu", true),
+		"view_splash_screen": Keychain.InputAction.new("", "Help menu", true),
+		"open_docs": Keychain.InputAction.new("", "Help menu", true),
+		"issue_tracker": Keychain.InputAction.new("", "Help menu", true),
+		"open_logs_folder": Keychain.InputAction.new("", "Help menu", true),
+		"changelog": Keychain.InputAction.new("", "Help menu", true),
+		"about_pixelorama": Keychain.InputAction.new("", "Help menu", true),
 		"zoom_in": Keychain.InputAction.new("", "Canvas"),
 		"zoom_out": Keychain.InputAction.new("", "Canvas"),
 		"camera_left": Keychain.InputAction.new("", "Canvas"),
@@ -396,9 +348,9 @@ func _initialize_keychain() -> void:
 		"draw_create_line": Keychain.InputAction.new("", "Draw tools", false),
 		"draw_snap_angle": Keychain.InputAction.new("", "Draw tools", false),
 		"draw_color_picker": Keychain.InputAction.new("Quick color picker", "Draw tools", false),
-		"shape_perfect": Keychain.InputAction.new("", "Shape3D tools", false),
-		"shape_center": Keychain.InputAction.new("", "Shape3D tools", false),
-		"shape_displace": Keychain.InputAction.new("", "Shape3D tools", false),
+		"shape_perfect": Keychain.InputAction.new("", "Shape tools", false),
+		"shape_center": Keychain.InputAction.new("", "Shape tools", false),
+		"shape_displace": Keychain.InputAction.new("", "Shape tools", false),
 		"selection_add": Keychain.InputAction.new("", "Selection tools", false),
 		"selection_subtract": Keychain.InputAction.new("", "Selection tools", false),
 		"selection_intersect": Keychain.InputAction.new("", "Selection tools", false),
@@ -429,12 +381,11 @@ func _initialize_keychain() -> void:
 		"Help menu": Keychain.InputGroup.new("Menu"),
 		"Tool modifiers": Keychain.InputGroup.new(),
 		"Draw tools": Keychain.InputGroup.new("Tool modifiers"),
-		"Shape3D tools": Keychain.InputGroup.new("Tool modifiers"),
+		"Shape tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Selection tools": Keychain.InputGroup.new("Tool modifiers"),
 		"Transformation tools": Keychain.InputGroup.new("Tool modifiers"),
 	}
 	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
-	Keychain.multiple_menu_accelerators = true
 
 
 func notification_label(text: String) -> void:
@@ -471,7 +422,7 @@ func undo_or_redo(
 		action_name
 		in [
 			"Draw",
-			"Draw Shape3D",
+			"Draw Shape",
 			"Select",
 			"Move Selection",
 			"Scale",
