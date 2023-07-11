@@ -710,17 +710,17 @@ size_flags_horizontal = 3
 [node name="AnimationTimer" type="Timer" parent="."]
 
 [node name="OnionSkinningSettings" type="Window" parent="."]
+position = Vector2i(0, 36)
+size = Vector2i(315, 299)
 visible = false
+wrap_controls = true
 
 [node name="OnionSkinningButtons" type="VBoxContainer" parent="OnionSkinningSettings"]
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = -113.0
-offset_right = -4.0
-offset_bottom = 86.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="OnionSkinningPast" type="Label" parent="OnionSkinningSettings/OnionSkinningButtons"]
 layout_mode = 2
@@ -793,6 +793,7 @@ popup/item_1/id = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.333333, 0.901961, 0.462745, 1)
 text = "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
+autowrap_mode = 3
 
 [node name="FrameTagDialog" parent="." instance=ExtResource("42")]
 
@@ -833,6 +834,8 @@ script = ExtResource("12")
 [connection signal="gui_input" from="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit" to="." method="_on_LayerFrameSplitContainer_gui_input"]
 [connection signal="resized" from="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit/VBoxContainer/LayerVBox" to="." method="_on_LayerVBox_resized"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
+[connection signal="close_requested" from="OnionSkinningSettings" to="." method="_on_onion_skinning_settings_close_requested"]
+[connection signal="visibility_changed" from="OnionSkinningSettings" to="." method="_on_onion_skinning_settings_visibility_changed"]
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/PastOnionSkinning" to="." method="_on_PastOnionSkinning_value_changed"]
 [connection signal="value_changed" from="OnionSkinningSettings/OnionSkinningButtons/FutureOnionSkinning" to="." method="_on_FutureOnionSkinning_value_changed"]
 [connection signal="toggled" from="OnionSkinningSettings/OnionSkinningButtons/BlueRedMode" to="." method="_on_BlueRedMode_toggled"]

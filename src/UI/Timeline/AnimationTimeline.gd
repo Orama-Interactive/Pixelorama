@@ -415,7 +415,7 @@ func _on_OnionSkinningSettings_pressed() -> void:
 	$OnionSkinningSettings.popup(
 		Rect2(
 			onion_skinning_button.global_position.x - $OnionSkinningSettings.size.x - 16,
-			onion_skinning_button.global_position.y - 106,
+			onion_skinning_button.global_position.y - $OnionSkinningSettings.size.y + 32,
 			136,
 			126
 		)
@@ -896,8 +896,12 @@ func _on_OpacitySlider_value_changed(value: float) -> void:
 	Global.canvas.queue_redraw()
 
 
-func _on_OnionSkinningSettings_popup_hide() -> void:
-	Global.can_draw = true
+func _on_onion_skinning_settings_close_requested() -> void:
+	$OnionSkinningSettings.hide()
+
+
+func _on_onion_skinning_settings_visibility_changed() -> void:
+	Global.can_draw = not $OnionSkinningSettings.visible
 
 
 # Methods to update the UI in response to changes in the current project
