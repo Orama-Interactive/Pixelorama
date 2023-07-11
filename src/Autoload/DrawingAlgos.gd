@@ -18,8 +18,8 @@ func get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
 	var x1 := pos.x + int(size.x - 1)
 	var y0 := int(pos.y)
 	var y1 := int(pos.y) + int(size.y - 1)
-	var a := int(abs(x1 - x0))
-	var b := int(abs(y1 - x0))
+	var a := absi(x1 - x0)
+	var b := absi(y1 - x0)
 	var b1 := b & 1
 	var dx := 4 * (1 - a) * b * b
 	var dy := 4 * (b1 + 1) * a * a
@@ -81,10 +81,10 @@ func get_ellipse_points_filled(pos: Vector2, size: Vector2, thickness := 1) -> P
 	var border := get_ellipse_points(pos, offsetted_size)
 	var filling := []
 
-	for x in range(1, ceil(offsetted_size.x / 2)):
+	for x in range(1, ceili(offsetted_size.x / 2)):
 		var fill := false
 		var prev_is_true := false
-		for y in range(0, ceil(offsetted_size.y / 2)):
+		for y in range(0, ceili(offsetted_size.y / 2)):
 			var top_l_p := Vector2(x, y)
 			var bit := border.has(pos + top_l_p)
 
@@ -123,23 +123,23 @@ func scale_3x(sprite: Image, tol: float = 50) -> Image:
 
 	for x in range(0, sprite.get_width()):
 		for y in range(0, sprite.get_height()):
-			var xs: float = 3 * x
-			var ys: float = 3 * y
+			var xs: int = 3 * x
+			var ys: int = 3 * y
 
-			a = sprite.get_pixel(max(x - 1, 0), max(y - 1, 0))
-			b = sprite.get_pixel(min(x, sprite.get_width() - 1), max(y - 1, 0))
-			c = sprite.get_pixel(min(x + 1, sprite.get_width() - 1), max(y - 1, 0))
-			d = sprite.get_pixel(max(x - 1, 0), min(y, sprite.get_height() - 1))
-			e = sprite.get_pixel(min(x, sprite.get_width() - 1), min(y, sprite.get_height() - 1))
+			a = sprite.get_pixel(maxi(x - 1, 0), maxi(y - 1, 0))
+			b = sprite.get_pixel(mini(x, sprite.get_width() - 1), maxi(y - 1, 0))
+			c = sprite.get_pixel(mini(x + 1, sprite.get_width() - 1), maxi(y - 1, 0))
+			d = sprite.get_pixel(maxi(x - 1, 0), mini(y, sprite.get_height() - 1))
+			e = sprite.get_pixel(mini(x, sprite.get_width() - 1), mini(y, sprite.get_height() - 1))
 			f = sprite.get_pixel(
-				min(x + 1, sprite.get_width() - 1), min(y, sprite.get_height() - 1)
+				mini(x + 1, sprite.get_width() - 1), mini(y, sprite.get_height() - 1)
 			)
-			g = sprite.get_pixel(max(x - 1, 0), min(y + 1, sprite.get_height() - 1))
+			g = sprite.get_pixel(maxi(x - 1, 0), mini(y + 1, sprite.get_height() - 1))
 			h = sprite.get_pixel(
-				min(x, sprite.get_width() - 1), min(y + 1, sprite.get_height() - 1)
+				mini(x, sprite.get_width() - 1), mini(y + 1, sprite.get_height() - 1)
 			)
 			i = sprite.get_pixel(
-				min(x + 1, sprite.get_width() - 1), min(y + 1, sprite.get_height() - 1)
+				mini(x + 1, sprite.get_width() - 1), mini(y + 1, sprite.get_height() - 1)
 			)
 
 			var db: bool = similar_colors(d, b, tol)
@@ -151,15 +151,15 @@ func scale_3x(sprite: Image, tol: float = 50) -> Image:
 			var eg: bool = similar_colors(e, g, tol)
 			var ei: bool = similar_colors(e, i, tol)
 
-			scaled.set_pixel(max(xs - 1, 0), max(ys - 1, 0), d if (db and !dh and !bf) else e)
+			scaled.set_pixel(maxi(xs - 1, 0), maxi(ys - 1, 0), d if (db and !dh and !bf) else e)
 			scaled.set_pixel(
 				xs,
-				max(ys - 1, 0),
+				maxi(ys - 1, 0),
 				b if (db and !dh and !bf and !ec) or (bf and !db and !fh and !ea) else e
 			)
-			scaled.set_pixel(xs + 1, max(ys - 1, 0), f if (bf and !db and !fh) else e)
+			scaled.set_pixel(xs + 1, maxi(ys - 1, 0), f if (bf and !db and !fh) else e)
 			scaled.set_pixel(
-				max(xs - 1, 0),
+				maxi(xs - 1, 0),
 				ys,
 				d if (dh and !fh and !db and !ea) or (db and !dh and !bf and !eg) else e
 			)
@@ -167,7 +167,7 @@ func scale_3x(sprite: Image, tol: float = 50) -> Image:
 			scaled.set_pixel(
 				xs + 1, ys, f if (bf and !db and !fh and !ei) or (fh and !bf and !dh and !ec) else e
 			)
-			scaled.set_pixel(max(xs - 1, 0), ys + 1, d if (dh and !fh and !db) else e)
+			scaled.set_pixel(maxi(xs - 1, 0), ys + 1, d if (dh and !fh and !db) else e)
 			scaled.set_pixel(
 				xs, ys + 1, h if (fh and !bf and !dh and !eg) or (dh and !fh and !db and !ei) else e
 			)
@@ -395,7 +395,7 @@ func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
 
 
 func similar_colors(c1: Color, c2: Color, tol: float = 100) -> bool:
-	var dist = color_distance(c1, c2)
+	var dist := color_distance(c1, c2)
 	return dist <= tol
 
 
@@ -421,15 +421,15 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 			if not f.cels[i] is PixelCel:
 				continue
 			var sprite := Image.new()
-			sprite.copy_from(f.cels[i].image)
+			sprite.copy_from(f.cels[i].get_image())
 			if interpolation == Interpolation.SCALE3X:
-				var times: Vector2 = Vector2(
-					ceil(width / (3.0 * sprite.get_width())),
-					ceil(height / (3.0 * sprite.get_height()))
+				var times := Vector2i(
+					ceili(width / (3.0 * sprite.get_width())),
+					ceili(height / (3.0 * sprite.get_height()))
 				)
-				for _j in range(max(times.x, times.y)):
+				for _j in range(maxi(times.x, times.y)):
 					sprite.copy_from(scale_3x(sprite))
-				sprite.resize(width, height, 0)
+				sprite.resize(width, height, Image.INTERPOLATE_NEAREST)
 			elif interpolation == Interpolation.CLEANEDGE:
 				var params := {"angle": 0, "slope": true, "cleanup": true, "preview": false}
 				var gen := ShaderImageEffect.new()
@@ -459,14 +459,14 @@ func center(indices: Array) -> void:
 		for cel in project.frames[frame].cels:
 			if not cel is PixelCel:
 				continue
-			var cel_rect: Rect2 = cel.image.get_used_rect()
+			var cel_rect := cel.get_image().get_used_rect()
 			if cel_rect.has_area():
 				used_rect = used_rect.merge(cel_rect) if used_rect.has_area() else cel_rect
 		if not used_rect.has_area():
 			continue
 
 		# Now apply centering
-		var offset: Vector2 = (0.5 * (project.size - used_rect.size)).floor()
+		var offset: Vector2i = (0.5 * (project.size - used_rect.size)).floor()
 		for cel in project.frames[frame].cels:
 			if not cel is PixelCel:
 				continue
@@ -481,22 +481,22 @@ func center(indices: Array) -> void:
 
 func crop_image() -> void:
 	Global.canvas.selection.transform_content_confirm()
-	var used_rect := Rect2()
+	var used_rect := Rect2i()
 	for f in Global.current_project.frames:
 		for cel in f.cels:
 			if not cel is PixelCel:
 				continue
-			var cel_used_rect: Rect2 = cel.image.get_used_rect()
-			if cel_used_rect == Rect2(0, 0, 0, 0):  # If the cel has no content
+			var cel_used_rect := cel.get_image().get_used_rect()
+			if cel_used_rect == Rect2i(0, 0, 0, 0):  # If the cel has no content
 				continue
 
-			if used_rect == Rect2(0, 0, 0, 0):  # If we still haven't found the first cel with content
+			if used_rect == Rect2i(0, 0, 0, 0):  # If we still haven't found the first cel with content
 				used_rect = cel_used_rect
 			else:
 				used_rect = used_rect.merge(cel_used_rect)
 
 	# If no layer has any content, just return
-	if used_rect == Rect2(0, 0, 0, 0):
+	if used_rect == Rect2i(0, 0, 0, 0):
 		return
 
 	var width := used_rect.size.x
@@ -524,7 +524,7 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 			sprite.blend_rect(
 				c.image,
 				Rect2(Vector2.ZERO, Global.current_project.size),
-				Vector2(offset_x, offset_y)
+				Vector2i(offset_x, offset_y)
 			)
 			Global.current_project.undo_redo.add_do_property(c.image, "data", sprite.data)
 			Global.current_project.undo_redo.add_undo_property(c.image, "data", c.image.data)
@@ -534,9 +534,9 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 
 func general_do_scale(width: int, height: int) -> void:
 	var project: Project = Global.current_project
-	var size := Vector2(width, height).floor()
-	var x_ratio = project.size.x / width
-	var y_ratio = project.size.y / height
+	var size := Vector2i(width, height)
+	var x_ratio := project.size.x / width
+	var y_ratio := project.size.y / height
 
 	var selection_map_copy := SelectionMap.new()
 	selection_map_copy.copy_from(project.selection_map)
