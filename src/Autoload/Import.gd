@@ -202,6 +202,8 @@ func import_patterns(priority_ordered_search_path: Array) -> void:
 	for path in priority_ordered_search_path:
 		var pattern_list := []
 		var dir := DirAccess.open(path)
+		if not is_instance_valid(dir):
+			continue
 		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var curr_file := dir.get_next()
 		while curr_file != "":
