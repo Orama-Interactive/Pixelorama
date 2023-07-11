@@ -102,13 +102,13 @@ stretch_mode = 5
 [node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource("1")]
 show_behind_parent = true
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
 
 [connection signal="about_to_popup" from="." to="." method="_on_ResizeCanvas_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_ResizeCanvas_confirmed"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/WidthValue" to="." method="_on_WidthValue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/HeightValue" to="." method="_on_HeightValue_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/OptionsContainer/XSpinBox" to="." method="_on_XSpinBox_value_changed"]

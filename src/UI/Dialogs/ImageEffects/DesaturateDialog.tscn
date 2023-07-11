@@ -1,73 +1,49 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://5gqka7tkg17k"]
 
-[ext_resource path="res://src/UI/Dialogs/ImageEffects/DesaturateDialog.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" type="PackedScene" id=2]
+[ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/DesaturateDialog.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="2"]
 
-[node name="DesaturateDialog" instance=ExtResource( 2 )]
-window_title = "Desaturation"
-script = ExtResource( 1 )
+[node name="DesaturateDialog" instance=ExtResource("2")]
+script = ExtResource("1")
 
 [node name="ShowAnimate" parent="VBoxContainer" index="0"]
 visible = false
 
-[node name="AspectRatioContainer" parent="VBoxContainer" index="1"]
-offset_bottom = 238.0
-
-[node name="Preview" parent="VBoxContainer/AspectRatioContainer" index="0"]
-offset_left = 73.0
-offset_right = 287.0
-offset_bottom = 214.0
-
 [node name="RGBAContainer" type="HBoxContainer" parent="VBoxContainer" index="2"]
-offset_top = 242.0
-offset_right = 360.0
-offset_bottom = 262.0
+layout_mode = 2
 alignment = 1
 
 [node name="RButton" type="Button" parent="VBoxContainer/RGBAContainer" index="0"]
-offset_right = 87.0
-offset_bottom = 20.0
+layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Modify Red Channel"
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
 toggle_mode = true
-pressed = true
 text = "R"
 
 [node name="GButton" type="Button" parent="VBoxContainer/RGBAContainer" index="1"]
-offset_left = 91.0
-offset_right = 178.0
-offset_bottom = 20.0
+layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Modify Green Channel"
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
 toggle_mode = true
-pressed = true
 text = "G"
 
 [node name="BButton" type="Button" parent="VBoxContainer/RGBAContainer" index="2"]
-offset_left = 182.0
-offset_right = 269.0
-offset_bottom = 20.0
+layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Modify Blue Channel"
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
 toggle_mode = true
-pressed = true
 text = "B"
 
 [node name="AButton" type="Button" parent="VBoxContainer/RGBAContainer" index="3"]
-offset_left = 273.0
-offset_right = 360.0
-offset_bottom = 20.0
+layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Modify Alpha Channel"
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
 toggle_mode = true
 text = "A"
-
-[node name="AffectOptionButton" parent="VBoxContainer/OptionsContainer" index="1"]
-items = [ "Selected cels", null, false, 0, null, "Current frame", null, false, 1, null, "All frames", null, false, 2, null, "All projects", null, false, 3, null ]
 
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/RButton" to="." method="_on_RButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/RGBAContainer/GButton" to="." method="_on_GButton_toggled"]
