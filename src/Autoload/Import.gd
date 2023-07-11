@@ -34,7 +34,6 @@ func get_brush_files_from_directory(directory: String):  # -> Array
 
 	# Build first the list of base png files and all subdirectories to
 	# scan later (skip navigational . and ..)
-	main_directory.include_navigational = true
 	main_directory.list_dir_begin()
 	var fname: String = main_directory.get_next()
 	while fname != "":
