@@ -4,10 +4,10 @@ var scroll := Vector2.ZERO
 var drag_started := false
 var drag_start_position := Vector2.ZERO
 
-@onready var h_slider := $"%HScrollBar"
-@onready var v_slider := $"%VScrollBar"
-@onready var palette_grid := $"%PaletteGrid"
-@onready var scroll_container := $"%ScrollContainer"
+@onready var h_slider := %HScrollBar
+@onready var v_slider := %VScrollBar
+@onready var palette_grid := %PaletteGrid
+@onready var scroll_container := %ScrollContainer
 
 
 func _ready() -> void:
@@ -75,6 +75,8 @@ func _on_PaletteGrid_gui_input(event) -> void:
 
 
 func _on_PaletteScroll_resized() -> void:
+	if not is_instance_valid(palette_grid):
+		return
 	resize_grid()
 	reset_sliders()
 

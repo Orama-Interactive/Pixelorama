@@ -1,17 +1,5 @@
-[gd_scene format=2]
+[gd_scene format=3 uid="uid://d4euwo633u33b"]
 
 [node name="SaveSprite" type="FileDialog"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -512.0
-offset_top = -300.0
-offset_right = 3.0
-offset_bottom = 48.0
-resizable = true
 access = 2
-filters = PackedStringArray( "*.pxo ; Pixelorama Project" )
-current_dir = "/Users"
-current_file = "untitled"
-current_path = "/Users/untitled"
+filters = PackedStringArray("*.pxo ; Pixelorama Project")

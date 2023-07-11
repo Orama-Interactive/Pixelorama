@@ -101,10 +101,9 @@ script = ExtResource("2")
 [node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource("1")]
 show_behind_parent = true
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
 
 [connection signal="about_to_popup" from="." to="." method="_on_TileModeOffsetsDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_TileModeOffsetsDialog_confirmed"]

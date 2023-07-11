@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://src/Shaders/TransparentChecker.gdshader" id="2"]
 [ext_resource type="Script" path="res://src/UI/Canvas/CameraMovement.gd" id="3"]
 [ext_resource type="Script" path="res://src/UI/CanvasPreviewContainer/CanvasPreviewContainer.gd" id="4"]
-[ext_resource type="PackedScene" path="res://src/UI/Canvas/CanvasPreview.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://c546tskdu53j1" path="res://src/UI/Canvas/CanvasPreview.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://c7smxwfa8826j" path="res://assets/graphics/timeline/play.png" id="6"]
 [ext_resource type="PackedScene" uid="uid://cii2hpylme60s" path="res://src/UI/Nodes/CollapsibleContainer.tscn" id="7"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="8"]

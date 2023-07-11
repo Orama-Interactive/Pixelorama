@@ -1,10 +1,5 @@
-[gd_scene format=2]
+[gd_scene format=3 uid="uid://b3aeqj2k58wdk"]
 
 [node name="OpenSprite" type="FileDialog"]
-offset_right = 515.0
-offset_bottom = 348.0
-window_title = "Open a File"
-resizable = true
-mode = 0
 access = 2
 filters = PackedStringArray( "*.pxo ; Pixelorama Project", "*.png ; PNG Image", "*.bmp ; BMP Image", "*.hdr ; Radiance HDR Image", "*.jpg,*.jpeg ; JPEG Image", "*.svg ; SVG Image", "*.tga ; TGA Image", "*.webp ; WebP Image", "*.tres; Pixelorama palette", "*.gpl; GIMP palette", "*pal; Palette" )

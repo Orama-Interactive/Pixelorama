@@ -1,142 +1,85 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://c0p84w7umxwt1"]
 
-[ext_resource path="res://src/Palette/EditPaletteDialog.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://src/Palette/EditPaletteDialog.gd" id="1"]
 
 [node name="EditPaletteDialog" type="ConfirmationDialog"]
-offset_right = 409.0
-offset_bottom = 535.0
-window_title = "Edit Palette"
-resizable = true
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
 offset_bottom = -36.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PaletteMetadata" type="GridContainer" parent="VBoxContainer"]
-offset_right = 393.0
-offset_bottom = 188.0
+layout_mode = 2
 columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="NameLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
-offset_top = 5.0
-offset_right = 67.0
-offset_bottom = 19.0
-custom_minimum_size = Vector2( 50, 0 )
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 text = "Name:"
 
 [node name="Name" type="LineEdit" parent="VBoxContainer/PaletteMetadata"]
-offset_left = 71.0
-offset_right = 393.0
-offset_bottom = 24.0
-custom_minimum_size = Vector2( 0, 24 )
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="CommentLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
-offset_top = 46.0
-offset_right = 67.0
-offset_bottom = 60.0
-custom_minimum_size = Vector2( 50, 0 )
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 text = "Comment:"
 
 [node name="Comment" type="TextEdit" parent="VBoxContainer/PaletteMetadata"]
-offset_left = 71.0
-offset_top = 28.0
-offset_right = 393.0
-offset_bottom = 78.0
-custom_minimum_size = Vector2( 0, 75 )
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="WidthLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
-offset_top = 87.0
-offset_right = 67.0
-offset_bottom = 101.0
+layout_mode = 2
 text = "Width:"
 
 [node name="Width" type="SpinBox" parent="VBoxContainer/PaletteMetadata"]
-offset_left = 71.0
-offset_top = 82.0
-offset_right = 393.0
-offset_bottom = 106.0
-custom_minimum_size = Vector2( 0, 24 )
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
 size_flags_horizontal = 3
 min_value = 1.0
 max_value = 64.0
 value = 1.0
-align = 2
 
 [node name="HeightLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
-offset_top = 115.0
-offset_right = 67.0
-offset_bottom = 129.0
+layout_mode = 2
 text = "Height:"
 
 [node name="Height" type="SpinBox" parent="VBoxContainer/PaletteMetadata"]
-offset_left = 71.0
-offset_top = 110.0
-offset_right = 393.0
-offset_bottom = 134.0
-custom_minimum_size = Vector2( 0, 24 )
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
 size_flags_horizontal = 3
 min_value = 1.0
 max_value = 64.0
 value = 1.0
-align = 2
 
 [node name="PathLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
-offset_top = 156.0
-offset_right = 67.0
-offset_bottom = 170.0
+layout_mode = 2
 text = "Path3D:"
 
 [node name="Path3D" type="TextEdit" parent="VBoxContainer/PaletteMetadata"]
-offset_left = 71.0
-offset_top = 138.0
-offset_right = 393.0
-offset_bottom = 188.0
-custom_minimum_size = Vector2( 0, 50 )
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
 size_flags_horizontal = 3
-readonly = true
-wrap_enabled = true
 
 [node name="SizeReducedWarning" type="Label" parent="VBoxContainer"]
-offset_top = 192.0
-offset_right = 393.0
-offset_bottom = 223.0
-theme_override_colors/font_color = Color( 1, 0.603922, 0.603922, 1 )
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.603922, 0.603922, 1)
 text = "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
-align = 1
-valign = 2
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AlreadyExistsWarning" type="Label" parent="VBoxContainer"]
-offset_top = 227.0
-offset_right = 393.0
-offset_bottom = 241.0
-theme_override_colors/font_color = Color( 1, 0.603922, 0.603922, 1 )
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.603922, 0.603922, 1)
 text = "Palette with the same name and path already exists!"
-align = 1
-valign = 1
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="confirmed" from="." to="." method="_on_EditPaletteDialog_confirmed"]
 [connection signal="custom_action" from="." to="." method="_on_EditPaletteDialog_custom_action"]
