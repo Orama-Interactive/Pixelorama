@@ -1,7 +1,7 @@
 [gd_scene load_steps=54 format=3 uid="uid://c8dsi6ggkqa7a"]
 
-[ext_resource type="PackedScene" path="res://src/UI/Tools/Tools.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://src/UI/Canvas/CanvasPreview.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://byu3rtoipuvoc" path="res://src/UI/Tools/Tools.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://c546tskdu53j1" path="res://src/UI/Canvas/CanvasPreview.tscn" id="2"]
 [ext_resource type="Script" path="res://src/UI/Tabs.gd" id="3"]
 [ext_resource type="Script" path="res://src/UI/Canvas/Rulers/VerticalRuler.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="5"]
@@ -10,8 +10,8 @@
 [ext_resource type="Shader" path="res://src/Shaders/Greyscale.gdshader" id="8"]
 [ext_resource type="Shader" path="res://src/Shaders/TransparentChecker.gdshader" id="9"]
 [ext_resource type="PackedScene" path="res://src/UI/GlobalToolOptions/GlobalToolOptions.tscn" id="10"]
-[ext_resource type="PackedScene" path="res://src/UI/ReferenceImages/ReferencesPanel.tscn" id="11"]
-[ext_resource type="PackedScene" path="res://src/UI/PerspectiveEditor/PerspectiveEditor.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://b75xk2ix8xxml" path="res://src/UI/ReferenceImages/ReferencesPanel.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://cap1bhavhi33g" path="res://src/UI/PerspectiveEditor/PerspectiveEditor.tscn" id="12"]
 [ext_resource type="PackedScene" uid="uid://dl6ook010q86o" path="res://src/UI/Recorder/Recorder.tscn" id="13"]
 [ext_resource type="Script" path="res://addons/dockable_container/layout.gd" id="14"]
 [ext_resource type="PackedScene" uid="uid://ccsihk3yxwei5" path="res://src/UI/CanvasPreviewContainer/CanvasPreviewContainer.tscn" id="16"]
@@ -90,7 +90,7 @@ second = SubResource("9")
 [sub_resource type="Resource" id="11"]
 resource_name = "Tabs"
 script = ExtResource("36")
-names = PackedStringArray("Canvas Preview", "RefCounted Images")
+names = PackedStringArray("Canvas Preview", "Reference Images")
 current_tab = 0
 
 [sub_resource type="Resource" id="20"]
@@ -391,7 +391,7 @@ size_flags_vertical = 3
 [node name="Palettes" parent="DockableContainer" instance=ExtResource("20")]
 layout_mode = 2
 
-[node name="RefCounted Images" parent="DockableContainer" instance=ExtResource("11")]
+[node name="Reference Images" parent="DockableContainer" instance=ExtResource("11")]
 visible = false
 layout_mode = 2
 
