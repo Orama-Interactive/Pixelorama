@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://b3hkjj3s6pe4x"]
 
 [ext_resource path="res://src/Preferences/PreferencesDialog.gd" type="Script" id=1]
 [ext_resource path="res://src/Preferences/HandleExtensions.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://src/UI/Nodes/ValueSlider.gd" type="Script" id=8]
 
 [sub_resource type="ButtonGroup" id=1]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_8vsfb"]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
 margin_right = 620.0
@@ -145,8 +147,7 @@ margin_right = 506.0
 margin_bottom = 24.0
 hint_tooltip = "System Language"
 mouse_default_cursor_shape = 2
-pressed = true
-group = SubResource( 1 )
+button_group = SubResource("ButtonGroup_8vsfb")
 text = "System Language"
 
 [node name="Interface" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide"]

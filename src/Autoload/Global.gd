@@ -592,12 +592,10 @@ func update_hint_tooltips() -> void:
 
 	for tip in ui_tooltips:
 		var hint := "None"
-		var event_type: InputEvent = tip.shortcut.shortcut
-		if event_type is InputEventKey:
+		var events: Array = tip.shortcut.events
+		if events.size() > 0:
+			var event_type: InputEvent = events[0]
 			hint = event_type.as_text()
-		elif event_type is InputEventAction:
-			var first_key: InputEventKey = Keychain.action_get_first_key(event_type.action)
-			hint = first_key.as_text() if first_key else "None"
 		tip.tooltip_text = tr(ui_tooltips[tip]) % hint
 
 
