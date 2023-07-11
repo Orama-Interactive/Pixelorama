@@ -2,8 +2,10 @@
 class_name CollapsibleContainer
 extends VBoxContainer
 
-@export var text := "": set = _set_text
-@export var visible_content := false: set = _set_visible_content
+@export var text := "":
+	set = _set_text
+@export var visible_content := false:
+	set = _set_visible_content
 
 var _button := Button.new()
 var _texture_rect := TextureRect.new()

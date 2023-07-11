@@ -188,8 +188,10 @@ func import_brushes(priority_ordered_search_path: Array) -> void:
 				for relative_path in relpaths_of_nonrandom_brushes:
 					if not (relative_path in processed_subdir_paths[nonrandomised_subdir]):
 						# We are not yet processed
-						var full_path: String = current_main_directory.path_join(nonrandomised_subdir).path_join(
-							relative_path
+						var full_path: String = (
+							current_main_directory
+							. path_join(nonrandomised_subdir)
+							. path_join(relative_path)
 						)
 						# Add the path with the tooltip including the directory
 						add_plain_brush(

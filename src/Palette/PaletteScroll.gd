@@ -65,8 +65,7 @@ func _on_PaletteGrid_gui_input(event) -> void:
 			drag_started = true
 			# Keeps position where the dragging started
 			drag_start_position = (
-				event.position
-				+ Vector2(h_slider.value, v_slider.value) * palette_grid.swatch_size
+				event.position + Vector2(h_slider.value, v_slider.value) * palette_grid.swatch_size
 			)
 
 	if event is InputEventMouseMotion and drag_started:

@@ -35,7 +35,6 @@ class GradientCursor:
 		size = Vector2(WIDTH, 15)
 
 	func _draw() -> void:
-		@warning_ignore("integer_division")
 		var polygon := PackedVector2Array(
 			[
 				Vector2(0, 5),
@@ -61,14 +60,14 @@ class GradientCursor:
 				else:
 					sliding = false
 					label.visible = false
-		elif ev is InputEventMouseMotion and (ev.button_mask & MOUSE_BUTTON_MASK_LEFT) != 0 and sliding:
+		elif (
+			ev is InputEventMouseMotion
+			and (ev.button_mask & MOUSE_BUTTON_MASK_LEFT) != 0
+			and sliding
+		):
 			position.x += get_local_mouse_position().x
 			if ev.ctrl_pressed:
-				position.x = (
-					round(get_caret_column() * 20.0)
-					* 0.05
-					* (parent.size.x - WIDTH)
-				)
+				position.x = (round(get_caret_column() * 20.0) * 0.05 * (parent.size.x - WIDTH))
 			position.x = min(max(0, position.x), parent.size.x - size.x)
 			grand_parent.update_from_value()
 			label.text = "%.03f" % get_caret_column()

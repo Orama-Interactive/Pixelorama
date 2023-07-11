@@ -88,8 +88,7 @@ func _on_AnimationTimer_timeout() -> void:
 				frame_index = first_frame
 
 			animation_timer.wait_time = (
-				current_project.frames[frame_index].duration
-				* (1.0 / current_project.fps)
+				current_project.frames[frame_index].duration * (1.0 / current_project.fps)
 			)
 
 		Mode.SPRITESHEET:

@@ -160,10 +160,7 @@ func draw_start(pos: Vector2) -> void:
 		or !Rect2(Vector2.ZERO, Global.current_project.size).has_point(pos)
 	):
 		return
-	if (
-		Global.current_project.has_selection
-		and not Global.current_project.can_pixel_get_drawn(pos)
-	):
+	if Global.current_project.has_selection and not Global.current_project.can_pixel_get_drawn(pos):
 		return
 	var undo_data := _get_undo_data()
 	match _fill_area:
@@ -226,7 +223,9 @@ func fill_in_color(pos: Vector2) -> void:
 		if is_instance_valid(pattern_tex):
 			params["pattern_size"] = pattern_tex.get_size()
 			# pixel offset converted to pattern uv offset
-			params["pattern_uv_offset"] = Vector2.ONE / pattern_tex.get_size() * Vector2(_offset_x, _offset_y)
+			params["pattern_uv_offset"] = (
+				Vector2.ONE / pattern_tex.get_size() * Vector2(_offset_x, _offset_y)
+			)
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(image, COLOR_REPLACE_SHADER, params, project.size)
 
@@ -323,13 +322,11 @@ func _flood_line_around_point(
 	var east: Vector2 = pos
 	if project.has_selection:
 		while (
-			project.can_pixel_get_drawn(west)
-			&& image.get_pixelv(west).is_equal_approx(src_color)
+			project.can_pixel_get_drawn(west) && image.get_pixelv(west).is_equal_approx(src_color)
 		):
 			west += Vector2.LEFT
 		while (
-			project.can_pixel_get_drawn(east)
-			&& image.get_pixelv(east).is_equal_approx(src_color)
+			project.can_pixel_get_drawn(east) && image.get_pixelv(east).is_equal_approx(src_color)
 		):
 			east += Vector2.RIGHT
 	else:
@@ -516,5 +513,9 @@ func _pick_color(pos: Vector2) -> void:
 		return
 
 	var color := image.get_pixelv(pos)
-	var button := MOUSE_BUTTON_LEFT if Tools._slots[MOUSE_BUTTON_LEFT].tool_node == self else MOUSE_BUTTON_RIGHT
+	var button := (
+		MOUSE_BUTTON_LEFT
+		if Tools._slots[MOUSE_BUTTON_LEFT].tool_node == self
+		else MOUSE_BUTTON_RIGHT
+	)
 	Tools.assign_color(color, button, false)

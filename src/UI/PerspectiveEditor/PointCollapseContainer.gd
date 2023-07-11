@@ -2,8 +2,10 @@ extends Button
 
 # This is NOT related to the CollapsibleContainer class (though it behaves similarly)
 # i did it like this because the "Content" is part of a different node
-@export var point_text := "": set = _set_text
-@export var visible_content := false: set = _set_visible_content
+@export var point_text := "":
+	set = _set_text
+@export var visible_content := false:
+	set = _set_visible_content
 @onready var content = $"%Content"
 
 

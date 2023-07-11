@@ -1,5 +1,7 @@
 extends Panel
 
+const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v011---2023-06-13"
+
 var file_menu: PopupMenu
 var view_menu: PopupMenu
 var window_menu: PopupMenu
@@ -595,8 +597,7 @@ func _toggle_mirror_view() -> void:
 	marching_ants_outline.scale.x = -marching_ants_outline.scale.x
 	if Global.mirror_view:
 		marching_ants_outline.position.x = (
-			marching_ants_outline.position.x
-			+ Global.current_project.size.x
+			marching_ants_outline.position.x + Global.current_project.size.x
 		)
 	else:
 		Global.canvas.selection.marching_ants_outline.position.x = 0
@@ -658,9 +659,25 @@ func _toggle_zen_mode() -> void:
 
 
 func _toggle_fullscreen() -> void:
-	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (!((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))) else Window.MODE_WINDOWED
-	window_menu.set_item_checked(Global.WindowMenu.FULLSCREEN_MODE, ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)))
-	if ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)):  # If window is fullscreen then reset transparency
+	get_window().mode = (
+		Window.MODE_EXCLUSIVE_FULLSCREEN
+		if (!(
+			(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
+			or (get_window().mode == Window.MODE_FULLSCREEN)
+		))
+		else Window.MODE_WINDOWED
+	)
+	window_menu.set_item_checked(
+		Global.WindowMenu.FULLSCREEN_MODE,
+		(
+			(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
+			or (get_window().mode == Window.MODE_FULLSCREEN)
+		)
+	)
+	if (
+		(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
+		or (get_window().mode == Window.MODE_FULLSCREEN)
+	):  # If window is fullscreen then reset transparency
 		window_opacity_dialog.set_window_opacity(100.0)
 
 
@@ -750,9 +767,7 @@ func help_menu_id_pressed(id: int) -> void:
 			dir.make_dir_recursive("user://logs")  # In case someone deleted it
 			OS.shell_open(ProjectSettings.globalize_path("user://logs"))
 		Global.HelpMenu.CHANGELOG:
-			OS.shell_open(
-				"https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v0111---2023-08-12"
-			)
+			OS.shell_open(CHANGELOG_URL)
 		Global.HelpMenu.ABOUT_PIXELORAMA:
 			_popup_dialog(Global.control.get_node("Dialogs/AboutDialog"))
 		_:

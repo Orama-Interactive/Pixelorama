@@ -67,8 +67,7 @@ func _on_Horizontal_toggled(button_pressed: bool) -> void:
 	Global.config_cache.set_value("preferences", "horizontal_mirror", button_pressed)
 	Global.show_y_symmetry_axis = button_pressed
 	Global.current_project.y_symmetry_axis.visible = (
-		Global.show_y_symmetry_axis
-		and Global.show_guides
+		Global.show_y_symmetry_axis and Global.show_guides
 	)
 
 	var texture_button: TextureRect = horizontal_mirror.get_node("TextureRect")
@@ -84,8 +83,7 @@ func _on_Vertical_toggled(button_pressed: bool) -> void:
 	Global.show_x_symmetry_axis = button_pressed
 	# If the button is not pressed but another button is, keep the symmetry guide visible
 	Global.current_project.x_symmetry_axis.visible = (
-		Global.show_x_symmetry_axis
-		and Global.show_guides
+		Global.show_x_symmetry_axis and Global.show_guides
 	)
 
 	var texture_button: TextureRect = vertical_mirror.get_node("TextureRect")

@@ -9,8 +9,7 @@ var _brush_image := Image.new()
 var _orignal_brush_image := Image.new()  # contains the original _brush_image, without resizing
 var _brush_texture := ImageTexture.new()
 var _strength := 1.0
-@warning_ignore("unused_private_class_variable")
-var _picking_color := false
+@warning_ignore("unused_private_class_variable") var _picking_color := false
 
 var _undo_data := {}
 var _drawer := Drawer.new()
@@ -129,13 +128,19 @@ func update_brush() -> void:
 	$Brush/BrushSize.suffix = "px"  # Assume we are using default brushes
 	match _brush.type:
 		Brushes.PIXEL:
-			_brush_texture = ImageTexture.create_from_image(load("res://assets/graphics/pixel_image.png"))
+			_brush_texture = ImageTexture.create_from_image(
+				load("res://assets/graphics/pixel_image.png")
+			)
 			_stroke_dimensions = Vector2.ONE * _brush_size
 		Brushes.CIRCLE:
-			_brush_texture = ImageTexture.create_from_image(load("res://assets/graphics/circle_9x9.png"))
+			_brush_texture = ImageTexture.create_from_image(
+				load("res://assets/graphics/circle_9x9.png")
+			)
 			_stroke_dimensions = Vector2.ONE * _brush_size
 		Brushes.FILLED_CIRCLE:
-			_brush_texture = ImageTexture.create_from_image(load("res://assets/graphics/circle_filled_9x9.png"))
+			_brush_texture = ImageTexture.create_from_image(
+				load("res://assets/graphics/circle_filled_9x9.png")
+			)
 			_stroke_dimensions = Vector2.ONE * _brush_size
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			$Brush/BrushSize.suffix = "00 %"  # Use a different size convention on images
@@ -277,7 +282,7 @@ func _prepare_tool() -> void:
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			# save _brush_image for safe keeping
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
-			_brush_texture =ImageTexture.create_from_image(_brush_image)
+			_brush_texture = ImageTexture.create_from_image(_brush_image)
 			update_mirror_brush()
 			_stroke_dimensions = _brush_image.get_size()
 
@@ -414,7 +419,9 @@ func draw_tool_brush(brush_position: Vector2) -> void:
 			if Tools.vertical_mirror:
 				var xy_dst := Vector2(mirror_x, mirror_y)
 				var mirror_brush_xy := remove_unselected_parts_of_brush(_mirror_brushes.xy, xy_dst)
-				_draw_brush_image(mirror_brush_xy, _flip_rect(src_rect, brush_size, true, true), xy_dst)
+				_draw_brush_image(
+					mirror_brush_xy, _flip_rect(src_rect, brush_size, true, true), xy_dst
+				)
 		if Tools.vertical_mirror:
 			var y_dst := Vector2(dst.x, mirror_y)
 			var mirror_brush_y: Image = remove_unselected_parts_of_brush(_mirror_brushes.y, y_dst)
@@ -697,5 +704,9 @@ func _pick_color(pos: Vector2) -> void:
 			color = image.get_pixelv(pos)
 			if color != Color(0, 0, 0, 0):
 				break
-	var button := MOUSE_BUTTON_LEFT if Tools._slots[MOUSE_BUTTON_LEFT].tool_node == self else MOUSE_BUTTON_RIGHT
+	var button := (
+		MOUSE_BUTTON_LEFT
+		if Tools._slots[MOUSE_BUTTON_LEFT].tool_node == self
+		else MOUSE_BUTTON_RIGHT
+	)
 	Tools.assign_color(color, button, false)

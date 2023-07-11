@@ -3,10 +3,7 @@ extends Node
 
 # Presets for creating a new palette
 enum NewPalettePresetType {
-	EMPTY = 0,
-	FROM_CURRENT_PALETTE = 1,
-	FROM_CURRENT_SPRITE = 2,
-	FROM_CURRENT_SELECTION = 3
+	EMPTY = 0, FROM_CURRENT_PALETTE = 1, FROM_CURRENT_SPRITE = 2, FROM_CURRENT_SELECTION = 3
 }
 
 # Color options when user creates a new palette from current sprite or selection
@@ -111,7 +108,9 @@ func create_new_palette(
 			)
 
 
-func _create_new_empty_palette(palette_name: String, comment: String, width: int, height: int) -> void:
+func _create_new_empty_palette(
+	palette_name: String, comment: String, width: int, height: int
+) -> void:
 	var new_palette: Palette = Palette.new(palette_name, width, height, comment)
 	var palette_path := _save_palette(new_palette)
 	palettes[palette_path] = new_palette
@@ -448,7 +447,7 @@ func import_palette_from_path(path: String) -> void:
 				palette = _import_image_palette(path, image)
 		"json":
 			if FileAccess.file_exists(path):
-				var text: = FileAccess.open(path, FileAccess.READ).get_as_text()
+				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
 				palette = _import_json_palette(text)
 
 	import_palette(palette, path.get_file())

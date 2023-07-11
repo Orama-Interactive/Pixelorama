@@ -86,7 +86,9 @@ func _get_auto_display_scale() -> float:
 		return DisplayServer.screen_get_max_scale()
 
 	var dpi := DisplayServer.screen_get_dpi()
-	var smallest_dimension := mini(DisplayServer.screen_get_size().x, DisplayServer.screen_get_size().y)
+	var smallest_dimension := mini(
+		DisplayServer.screen_get_size().x, DisplayServer.screen_get_size().y
+	)
 	if dpi >= 192 && smallest_dimension >= 1400:
 		return 2.0  # hiDPI display.
 	elif smallest_dimension >= 1700:
@@ -111,7 +113,11 @@ func _setup_application_window_size() -> void:
 	if Global.config_cache.has_section_key("window", "screen"):
 		get_window().current_screen = Global.config_cache.get_value("window", "screen")
 	if Global.config_cache.has_section_key("window", "maximized"):
-		get_window().mode = Window.MODE_MAXIMIZED if (Global.config_cache.get_value("window", "maximized")) else Window.MODE_WINDOWED
+		get_window().mode = (
+			Window.MODE_MAXIMIZED
+			if (Global.config_cache.get_value("window", "maximized"))
+			else Window.MODE_WINDOWED
+		)
 
 	if !(get_window().mode == Window.MODE_MAXIMIZED):
 		if Global.config_cache.has_section_key("window", "position"):
@@ -277,7 +283,9 @@ func _on_SaveSprite_file_selected(path: String) -> void:
 
 
 func save_project(path: String) -> void:
-	var zstd: bool = Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").button_pressed
+	var zstd: bool = (
+		Global.save_sprites_dialog.get_vbox().get_node("ZSTDCompression").button_pressed
+	)
 	OpenSave.save_pxo_file(path, false, zstd)
 	Global.open_sprites_dialog.current_dir = path.get_base_dir()
 	Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
@@ -287,9 +295,9 @@ func save_project(path: String) -> void:
 
 
 func _on_SaveSpriteHTML5_confirmed() -> void:
-	var file_name: String = Global.save_sprites_html5_dialog.get_node(
-		"FileNameContainer/FileNameLineEdit"
-	).text
+	var file_name: String = (
+		Global.save_sprites_html5_dialog.get_node("FileNameContainer/FileNameLineEdit").text
+	)
 	file_name += ".pxo"
 	var path := "user://".path_join(file_name)
 	OpenSave.save_pxo_file(path, false, false)
@@ -389,6 +397,7 @@ func _use_osx_shortcuts() -> void:
 		if event.is_action("show_pixel_grid"):
 			event.shift_pressed = true
 
+
 #		if event.control_pressed:
 #			event.control = false
 #			event.command = true
@@ -398,7 +407,15 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value("window", "layout", Global.top_menu_container.selected_layout)
 	Global.config_cache.set_value("window", "screen", get_window().current_screen)
 	Global.config_cache.set_value(
-		"window", "maximized", (get_window().mode == Window.MODE_MAXIMIZED) || ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))
+		"window",
+		"maximized",
+		(
+			(get_window().mode == Window.MODE_MAXIMIZED)
+			|| (
+				(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
+				or (get_window().mode == Window.MODE_FULLSCREEN)
+			)
+		)
 	)
 	Global.config_cache.set_value("window", "position", get_window().position)
 	Global.config_cache.set_value("window", "size", get_window().size)

@@ -113,7 +113,9 @@ func _on_AddColor_gui_input(event: InputEvent) -> void:
 		if (
 			event is InputEventMouseButton
 			and event.pressed
-			and (event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT)
+			and (
+				event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT
+			)
 		):
 			# Gets the grid index that corresponds to the top left of current grid window
 			# Color will be added at the start of the currently scrolled part of palette
@@ -146,12 +148,16 @@ func _on_CreatePaletteDialog_saved(
 	add_alpha_colors: bool,
 	colors_from: int
 ) -> void:
-	Palettes.create_new_palette(preset, palette_name, comment, width, height, add_alpha_colors, colors_from)
+	Palettes.create_new_palette(
+		preset, palette_name, comment, width, height, add_alpha_colors, colors_from
+	)
 	setup_palettes_selector()
 	redraw_current_palette()
 
 
-func _on_EditPaletteDialog_saved(palette_name: String, comment: String, width: int, height: int) -> void:
+func _on_EditPaletteDialog_saved(
+	palette_name: String, comment: String, width: int, height: int
+) -> void:
 	Palettes.current_palette_edit(palette_name, comment, width, height)
 	setup_palettes_selector()
 	redraw_current_palette()
@@ -192,9 +198,15 @@ func _on_ColorPicker_color_changed(color: Color) -> void:
 		edited_swatch_color = color
 		palette_grid.set_swatch_color(edited_swatch_index, color)
 
-		if edited_swatch_index == Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_LEFT):
+		if (
+			edited_swatch_index
+			== Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_LEFT)
+		):
 			Tools.assign_color(color, MOUSE_BUTTON_LEFT)
-		if edited_swatch_index == Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_RIGHT):
+		if (
+			edited_swatch_index
+			== Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_RIGHT)
+		):
 			Tools.assign_color(color, MOUSE_BUTTON_RIGHT)
 
 

@@ -42,25 +42,22 @@ enum ImageMenu {
 }
 enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, TILE_MODE }
 enum HelpMenu {
-	VIEW_SPLASH_SCREEN,
-	ONLINE_DOCS,
-	ISSUE_TRACKER,
-	OPEN_LOGS_FOLDER,
-	CHANGELOG,
-	ABOUT_PIXELORAMA
+	VIEW_SPLASH_SCREEN, ONLINE_DOCS, ISSUE_TRACKER, OPEN_LOGS_FOLDER, CHANGELOG, ABOUT_PIXELORAMA
 }
 
 const OVERRIDE_FILE := "override.cfg"
 
 var root_directory := "."
-var window_title := "": set = _title_changed
+var window_title := "":
+	set = _title_changed
 var config_cache := ConfigFile.new()
 var XDGDataPaths := preload("res://src/XDGDataPaths.gd")
 var directory_module: RefCounted
 
 var projects: Array[Project] = []
 var current_project: Project
-var current_project_index := 0: set = _project_changed
+var current_project_index := 0:
+	set = _project_changed
 
 var ui_tooltips := {}
 
@@ -123,8 +120,10 @@ var fps_limit := 0
 
 var autosave_interval := 1.0
 var enable_autosave := true
-var renderer := 0: set = _renderer_changed
-var tablet_driver := 0: set = _tablet_driver_changed
+var renderer := 0:
+	set = _renderer_changed
+var tablet_driver := 0:
+	set = _tablet_driver_changed
 
 # Tools & options
 var show_left_tool_icon := true
@@ -447,7 +446,9 @@ func undo_or_redo(
 					if current_cel is Cel3D:
 						current_cel.size_changed(project.size)
 					else:
-						current_cel.image_texture = ImageTexture.create_from_image(current_cel.get_image())
+						current_cel.image_texture = ImageTexture.create_from_image(
+							current_cel.get_image()
+						)
 			canvas.camera_zoom()
 			canvas.grid.queue_redraw()
 			canvas.pixel_grid.queue_redraw()
@@ -482,6 +483,8 @@ func _project_changed(value: int) -> void:
 
 func _renderer_changed(value: int) -> void:
 	renderer = value
+
+
 #	if OS.has_feature("editor"):
 #		return
 #

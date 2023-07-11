@@ -6,7 +6,8 @@ var animation_forward := true
 var first_frame := 0
 var last_frame := 0
 var is_mouse_hover := false
-var cel_size := 36: set = cel_size_changed
+var cel_size := 36:
+	set = cel_size_changed
 var min_cel_size := 36
 var max_cel_size := 144
 var past_above_canvas := true
@@ -75,10 +76,7 @@ func _input(event: InputEvent) -> void:
 	var timeline_rect := Rect2(global_position, size)
 	if timeline_rect.has_point(mouse_pos):
 		if Input.is_key_pressed(KEY_CTRL):
-			cel_size += (
-				2 * int(event.is_action("zoom_in"))
-				- 2 * int(event.is_action("zoom_out"))
-			)
+			cel_size += (2 * int(event.is_action("zoom_in")) - 2 * int(event.is_action("zoom_out")))
 
 
 func _get_minimum_size() -> Vector2:
@@ -101,8 +99,7 @@ func _on_LayerVBox_resized() -> void:
 
 func adjust_scroll_container():
 	tag_spacer.custom_minimum_size.x = (
-		frame_scroll_container.global_position.x
-		- tag_scroll_container.global_position.x
+		frame_scroll_container.global_position.x - tag_scroll_container.global_position.x
 	)
 	tag_scroll_container.get_child(0).custom_minimum_size.x = Global.frame_hbox.size.x
 	Global.tag_container.custom_minimum_size = Global.frame_hbox.size
@@ -111,7 +108,11 @@ func adjust_scroll_container():
 
 func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
 	Global.config_cache.set_value("timeline", "layer_size", layer_frame_h_split.split_offset)
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+	if (
+		event is InputEventMouseButton
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and not event.pressed
+	):
 		update_minimum_size()  # After you're done resizing the layers, update min size
 
 
@@ -327,7 +328,9 @@ func copy_frames(indices := [], destination := -1) -> void:
 					project.undo_redo.add_do_method(
 						project.layers[l].link_cel.bind(src_cel, src_cel.link_set)
 					)
-					project.undo_redo.add_undo_method(project.layers[l].link_cel.bind(src_cel, null))
+					project.undo_redo.add_undo_method(
+						project.layers[l].link_cel.bind(src_cel, null)
+					)
 				new_cel.set_content(src_cel.get_content(), src_cel.image_texture)
 				new_cel.link_set = src_cel.link_set
 			else:
@@ -471,8 +474,7 @@ func _on_AnimationTimer_timeout() -> void:
 			project.selected_cels.clear()
 			project.change_cel(project.current_frame + 1, -1)
 			Global.animation_timer.wait_time = (
-				project.frames[project.current_frame].duration
-				* (1 / fps)
+				project.frames[project.current_frame].duration * (1 / fps)
 			)
 			Global.animation_timer.start()  # Change the frame, change the wait time and start a cycle
 		else:
@@ -486,8 +488,7 @@ func _on_AnimationTimer_timeout() -> void:
 					project.selected_cels.clear()
 					project.change_cel(first_frame, -1)
 					Global.animation_timer.wait_time = (
-						project.frames[project.current_frame].duration
-						* (1 / fps)
+						project.frames[project.current_frame].duration * (1 / fps)
 					)
 					Global.animation_timer.start()
 				2:  # Ping pong loop
@@ -499,8 +500,7 @@ func _on_AnimationTimer_timeout() -> void:
 			project.selected_cels.clear()
 			project.change_cel(project.current_frame - 1, -1)
 			Global.animation_timer.wait_time = (
-				project.frames[project.current_frame].duration
-				* (1 / fps)
+				project.frames[project.current_frame].duration * (1 / fps)
 			)
 			Global.animation_timer.start()
 		else:
@@ -514,8 +514,7 @@ func _on_AnimationTimer_timeout() -> void:
 					project.selected_cels.clear()
 					project.change_cel(last_frame, -1)
 					Global.animation_timer.wait_time = (
-						project.frames[project.current_frame].duration
-						* (1 / fps)
+						project.frames[project.current_frame].duration * (1 / fps)
 					)
 					Global.animation_timer.start()
 				2:  # Ping pong loop
@@ -558,7 +557,9 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 	if play:
 		Global.animation_timer.set_one_shot(true)  # wait_time can't change correctly if it's playing
-		var duration: float = Global.current_project.frames[Global.current_project.current_frame].duration
+		var duration: float = (
+			Global.current_project.frames[Global.current_project.current_frame].duration
+		)
 		var fps = Global.current_project.fps
 		Global.animation_timer.wait_time = duration * (1 / fps)
 		Global.animation_timer.start()
@@ -950,7 +951,8 @@ func project_frame_added(frame: int) -> void:
 	button.frame = frame
 	Global.frame_hbox.add_child(button)
 	Global.frame_hbox.move_child(button, frame)
-	frame_scroll_container.call_deferred(  # Make it visible, yes 3 call_deferreds are required
+	# Make it visible, yes 3 call_deferreds are required
+	frame_scroll_container.call_deferred(
 		"call_deferred", "call_deferred", "ensure_control_visible", button
 	)
 	var layer := Global.cel_vbox.get_child_count() - 1

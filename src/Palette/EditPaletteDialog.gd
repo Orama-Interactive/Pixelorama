@@ -85,8 +85,7 @@ func _on_EditPaletteDialog_custom_action(action: String) -> void:
 func _on_size_value_changed(_value):
 	# Toggle resize warning label if palette size was reduced
 	var size_decreased: bool = (
-		height_input.value < origin_height
-		or width_input.value < origin_width
+		height_input.value < origin_height or width_input.value < origin_width
 	)
 	toggle_size_reduced_warning(size_decreased)
 

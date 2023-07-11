@@ -5,24 +5,42 @@ extends HBoxContainer
 signal value_changed(value)
 signal ratio_toggled(button_pressed)
 
-@export var editable := true: set = _set_editable
-@export var value := Vector3.ZERO: set = _set_value
-@export var min_value := Vector3.ZERO: set = _set_min_value
-@export var max_value := Vector3(100.0, 100.0, 100.0): set = _set_max_value
-@export var step := 1.0: set = _set_step
-@export var allow_greater := false: set = _set_allow_greater
-@export var allow_lesser := false: set = _set_allow_lesser
-@export var show_ratio := false: set = _set_show_ratio
-@export var grid_columns := 1: set = _set_grid_columns
-@export var slider_min_size := Vector2(32, 24): set = _set_slider_min_size
-@export var snap_step := 1.0: set = _set_snap_step
-@export var snap_by_default := false: set = _set_snap_by_default
-@export var prefix_x := "X:": set = _set_prefix_x
-@export var prefix_y := "Y:": set = _set_prefix_y
-@export var prefix_z := "Z:": set = _set_prefix_z
-@export var suffix_x := "": set = _set_suffix_x
-@export var suffix_y := "": set = _set_suffix_y
-@export var suffix_z := "": set = _set_suffix_z
+@export var editable := true:
+	set = _set_editable
+@export var value := Vector3.ZERO:
+	set = _set_value
+@export var min_value := Vector3.ZERO:
+	set = _set_min_value
+@export var max_value := Vector3(100.0, 100.0, 100.0):
+	set = _set_max_value
+@export var step := 1.0:
+	set = _set_step
+@export var allow_greater := false:
+	set = _set_allow_greater
+@export var allow_lesser := false:
+	set = _set_allow_lesser
+@export var show_ratio := false:
+	set = _set_show_ratio
+@export var grid_columns := 1:
+	set = _set_grid_columns
+@export var slider_min_size := Vector2(32, 24):
+	set = _set_slider_min_size
+@export var snap_step := 1.0:
+	set = _set_snap_step
+@export var snap_by_default := false:
+	set = _set_snap_by_default
+@export var prefix_x := "X:":
+	set = _set_prefix_x
+@export var prefix_y := "Y:":
+	set = _set_prefix_y
+@export var prefix_z := "Z:":
+	set = _set_prefix_z
+@export var suffix_x := "":
+	set = _set_suffix_x
+@export var suffix_y := "":
+	set = _set_suffix_y
+@export var suffix_z := "":
+	set = _set_suffix_z
 
 var ratio := Vector3.ONE
 var _locked_ratio := false

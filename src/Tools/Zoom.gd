@@ -50,9 +50,7 @@ func update_config() -> void:
 func draw_start(pos: Vector2) -> void:
 	super.draw_start(pos)
 	var mouse_pos := get_global_mouse_position()
-	var viewport_rect := Rect2(
-		Global.main_viewport.global_position, Global.main_viewport.size
-	)
+	var viewport_rect := Rect2(Global.main_viewport.global_position, Global.main_viewport.size)
 	var viewport_rect_2 := Rect2(
 		Global.second_viewport.global_position, Global.second_viewport.size
 	)

@@ -21,12 +21,14 @@ enum Gizmos { NONE, X_POS, Y_POS, Z_POS, X_ROT, Y_ROT, Z_ROT, X_SCALE, Y_SCALE, 
 
 var cel
 var id := -1
-var type: int = Type.BOX: set = _set_type
+var type: int = Type.BOX:
+	set = _set_type
 var selected := false
 var hovered := false
 var box_shape: BoxShape3D
 var camera: Camera3D
-var file_path := "": set = _set_file_path
+var file_path := "":
+	set = _set_file_path
 var applying_gizmos: int = Gizmos.NONE
 var node3d_type: VisualInstance3D
 

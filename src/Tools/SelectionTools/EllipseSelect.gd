@@ -85,27 +85,21 @@ func apply_selection(_position: Vector2) -> void:
 		if Tools.horizontal_mirror:
 			var mirror_x_rect := _rect
 			mirror_x_rect.position.x = (
-				Global.current_project.x_symmetry_point
-				- _rect.position.x
-				+ 1
+				Global.current_project.x_symmetry_point - _rect.position.x + 1
 			)
 			mirror_x_rect.end.x = Global.current_project.x_symmetry_point - _rect.end.x + 1
 			set_ellipse(selection_map_copy, mirror_x_rect.abs().position)
 			if Tools.vertical_mirror:
 				var mirror_xy_rect := mirror_x_rect
 				mirror_xy_rect.position.y = (
-					Global.current_project.y_symmetry_point
-					- _rect.position.y
-					+ 1
+					Global.current_project.y_symmetry_point - _rect.position.y + 1
 				)
 				mirror_xy_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 				set_ellipse(selection_map_copy, mirror_xy_rect.abs().position)
 		if Tools.vertical_mirror:
 			var mirror_y_rect := _rect
 			mirror_y_rect.position.y = (
-				Global.current_project.y_symmetry_point
-				- _rect.position.y
-				+ 1
+				Global.current_project.y_symmetry_point - _rect.position.y + 1
 			)
 			mirror_y_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 			set_ellipse(selection_map_copy, mirror_y_rect.abs().position)
@@ -217,7 +211,6 @@ func _get_ellipse_points(pos: Vector2, ellipse_size: Vector2) -> Array:
 	if y0 > y1:
 		y0 = y1
 
-	@warning_ignore("integer_division")
 	y0 += (b + 1) / 2
 	y1 = y0 - b1
 	a *= 8 * a

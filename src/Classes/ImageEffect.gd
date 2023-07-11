@@ -193,7 +193,6 @@ func _on_SelectionCheckBox_toggled(_button_pressed: bool) -> void:
 
 
 func _on_AffectOptionButton_item_selected(index: int) -> void:
-	@warning_ignore("int_as_enum_without_cast")
 	affect = index
 	$"%ShowAnimate".visible = bool(affect != FRAME and animate_panel.properties.size() != 0)
 	prepare_animator(Global.current_project)  # for use in preview

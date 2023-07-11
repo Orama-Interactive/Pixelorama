@@ -306,11 +306,17 @@ func update_brush() -> void:
 	$Brush/BrushSize.suffix = "px"  # Assume we are using default brushes
 	match _brush.type:
 		Brushes.PIXEL:
-			_brush_texture = ImageTexture.create_from_image(load("res://assets/graphics/pixel_image.png"))
+			_brush_texture = ImageTexture.create_from_image(
+				load("res://assets/graphics/pixel_image.png")
+			)
 		Brushes.CIRCLE:
-			_brush_texture = ImageTexture.create_from_image(load("res://assets/graphics/circle_9x9.png"))
+			_brush_texture = ImageTexture.create_from_image(
+				load("res://assets/graphics/circle_9x9.png")
+			)
 		Brushes.FILLED_CIRCLE:
-			_brush_texture = ImageTexture.create_from_image(load("res://assets/graphics/circle_filled_9x9.png"))
+			_brush_texture = ImageTexture.create_from_image(
+				load("res://assets/graphics/circle_filled_9x9.png")
+			)
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			$Brush/BrushSize.suffix = "00 %"  # Use a different size convention on images
 			if _brush.random.size() <= 1:

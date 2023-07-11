@@ -84,14 +84,10 @@ func process_spritesheet(project := Global.current_project) -> void:
 
 	# If rows mode selected calculate columns count and vice versa
 	var spritesheet_columns := (
-		lines_count
-		if orientation == Orientation.ROWS
-		else frames_divided_by_spritesheet_lines()
+		lines_count if orientation == Orientation.ROWS else frames_divided_by_spritesheet_lines()
 	)
 	var spritesheet_rows := (
-		lines_count
-		if orientation == Orientation.COLUMNS
-		else frames_divided_by_spritesheet_lines()
+		lines_count if orientation == Orientation.COLUMNS else frames_divided_by_spritesheet_lines()
 	)
 
 	var width := project.size.x * spritesheet_columns
@@ -227,7 +223,9 @@ func export_processed_images(
 			if OS.get_name() != "HTML5" and is_single_file_format(project):
 				if gif_export_thread.is_started():
 					gif_export_thread.wait_to_finish()
-				var error = gif_export_thread.start(Callable(custom_exporter, "override_export").bind(details))
+				var error = gif_export_thread.start(
+					Callable(custom_exporter, "override_export").bind(details)
+				)
 				if error == OK:
 					result = gif_export_thread.wait_to_finish()
 			else:
@@ -400,10 +398,7 @@ func create_export_path(multifile: bool, project: Project, frame: int = 0) -> St
 				# (frame - start_id + 1) makes frames id to start from 1
 				var tag_frame_number := str(frame - start_id + 1).pad_zeros(number_of_digits)
 				path_extras = (
-					separator_character
-					+ frame_tag_dir
-					+ separator_character
-					+ tag_frame_number
+					separator_character + frame_tag_dir + separator_character + tag_frame_number
 				)
 			if new_dir_for_each_frame_tag:
 				path += path_extras

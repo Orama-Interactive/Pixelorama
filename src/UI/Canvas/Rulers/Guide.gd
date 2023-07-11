@@ -99,8 +99,7 @@ func _draw() -> void:
 		)
 
 	var string := (
-		"%spx"
-		% str(snapped(mouse_pos.y if type == Types.HORIZONTAL else mouse_pos.x, 0.5))
+		"%spx" % str(snapped(mouse_pos.y if type == Types.HORIZONTAL else mouse_pos.x, 0.5))
 	)
 	var color: Color = Global.control.theme.get_color("font_color", "Label")
 	# X and Y offsets for nicer looking spacing
@@ -121,9 +120,25 @@ func _draw() -> void:
 			intersection.distance_squared_to(viewport_poly[0])
 			< intersection.distance_squared_to(viewport_poly[1])
 		):
-			draw_string(font, Vector2(x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
+			draw_string(
+				font,
+				Vector2(x_offset, font_height),
+				string,
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				16,
+				color
+			)
 		else:
-			draw_string(font, Vector2(-font_string_size.x - x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
+			draw_string(
+				font,
+				Vector2(-font_string_size.x - x_offset, font_height),
+				string,
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				16,
+				color
+			)
 		return
 
 	intersection = Geometry2D.segment_intersects_segment(
@@ -135,9 +150,19 @@ func _draw() -> void:
 			intersection.distance_squared_to(viewport_poly[3])
 			< intersection.distance_squared_to(viewport_poly[0])
 		):
-			draw_string(font, Vector2(x_offset, y_offset), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
+			draw_string(
+				font, Vector2(x_offset, y_offset), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color
+			)
 		else:
-			draw_string(font, Vector2(x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
+			draw_string(
+				font,
+				Vector2(x_offset, font_height),
+				string,
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				16,
+				color
+			)
 		return
 
 	intersection = Geometry2D.segment_intersects_segment(
@@ -150,15 +175,32 @@ func _draw() -> void:
 			intersection.distance_squared_to(viewport_poly[1])
 			< intersection.distance_squared_to(viewport_poly[2])
 		):
-			draw_string(font, Vector2(-font_string_size.x - x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
+			draw_string(
+				font,
+				Vector2(-font_string_size.x - x_offset, font_height),
+				string,
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				16,
+				color
+			)
 		else:
-			draw_string(font, Vector2(-font_string_size.x - x_offset, y_offset), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
+			draw_string(
+				font,
+				Vector2(-font_string_size.x - x_offset, y_offset),
+				string,
+				HORIZONTAL_ALIGNMENT_LEFT,
+				-1,
+				16,
+				color
+			)
 		return
 
 	# If there's no intersection with a viewport edge, show string in top left corner
 	draw_set_transform(viewport_poly[0], Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
-	draw_string(font, Vector2(x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
-
+	draw_string(
+		font, Vector2(x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color
+	)
 
 
 func force_input(event: InputEvent) -> void:

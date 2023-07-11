@@ -62,27 +62,21 @@ func draw_preview() -> void:
 		if Tools.horizontal_mirror:
 			var mirror_x_rect := _rect
 			mirror_x_rect.position.x = (
-				Global.current_project.x_symmetry_point
-				- _rect.position.x
-				+ 1
+				Global.current_project.x_symmetry_point - _rect.position.x + 1
 			)
 			mirror_x_rect.end.x = Global.current_project.x_symmetry_point - _rect.end.x + 1
 			canvas.draw_rect(mirror_x_rect, Color.BLACK, false)
 			if Tools.vertical_mirror:
 				var mirror_xy_rect := mirror_x_rect
 				mirror_xy_rect.position.y = (
-					Global.current_project.y_symmetry_point
-					- _rect.position.y
-					+ 1
+					Global.current_project.y_symmetry_point - _rect.position.y + 1
 				)
 				mirror_xy_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 				canvas.draw_rect(mirror_xy_rect, Color.BLACK, false)
 		if Tools.vertical_mirror:
 			var mirror_y_rect := _rect
 			mirror_y_rect.position.y = (
-				Global.current_project.y_symmetry_point
-				- _rect.position.y
-				+ 1
+				Global.current_project.y_symmetry_point - _rect.position.y + 1
 			)
 			mirror_y_rect.end.y = Global.current_project.y_symmetry_point - _rect.end.y + 1
 			canvas.draw_rect(mirror_y_rect, Color.BLACK, false)
