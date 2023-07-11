@@ -171,7 +171,7 @@ func draw_preview() -> void:
 func _draw_shape() -> void:
 #	var rect := _get_result_rect(origin, dest)
 	var points := _get_points()
-	prepare_undo("Draw Shape3D")
+	prepare_undo("Draw Shape")
 	for point in points:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
@@ -183,8 +183,8 @@ func _draw_shape() -> void:
 
 func _get_points() -> PackedVector2Array:
 	var array := []
-	var dx := int(abs(_dest.x - _start.x))
-	var dy := int(-abs(_dest.y - _start.y))
+	var dx := absi(_dest.x - _start.x)
+	var dy := -absi(_dest.y - _start.y)
 	var err := dx + dy
 	var e2 := err << 1
 	var sx = 1 if _start.x < _dest.x else -1

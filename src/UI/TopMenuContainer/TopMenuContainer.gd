@@ -46,17 +46,17 @@ func _ready() -> void:
 
 func _setup_file_menu() -> void:
 	# Order as in FileMenu enum
-	var file_menu_items := [
-		"New...",
-		"Open...",
-		"Open last project...",
-		"Recent projects",
-		"Save...",
-		"Save as...",
-		"Export...",
-		"Export as...",
-		"Quit",
-	]
+	var file_menu_items := {
+		"New...": "new_file",
+		"Open...": "open_file",
+		"Open last project...": "open_last_project",
+		"Recent projects": "",
+		"Save...": "save_file",
+		"Save as...": "save_file_as",
+		"Export...": "export_file",
+		"Export as...": "export_file_as",
+		"Quit": "quit",
+	}
 	file_menu = file_menu_button.get_popup()
 	var i := 0
 	for item in file_menu_items:
@@ -64,6 +64,11 @@ func _setup_file_menu() -> void:
 			_setup_recent_projects_submenu(item)
 		else:
 			file_menu.add_item(item, i)
+			var shortcut := Shortcut.new()
+			var event := InputEventAction.new()
+			event.action = file_menu_items[item]
+			shortcut.events.append(event)
+			file_menu.set_item_shortcut(i, shortcut)
 		i += 1
 
 	file_menu.id_pressed.connect(file_menu_id_pressed)
@@ -91,21 +96,26 @@ func update_recent_projects_submenu() -> void:
 
 func _setup_edit_menu() -> void:
 	# Order as in Global.EditMenu enum
-	var edit_menu_items := [
-		"Undo",
-		"Redo",
-		"Copy",
-		"Cut",
-		"Paste",
-		"Paste in Place",
-		"Delete",
-		"New Brush",
-		"Preferences"
-	]
+	var edit_menu_items := {
+		"Undo": "undo",
+		"Redo": "redo",
+		"Copy": "copy",
+		"Cut": "cut",
+		"Paste": "paste",
+		"Paste in Place": "paste_in_place",
+		"Delete": "delete",
+		"New Brush": "new_brush",
+		"Preferences": "preferences"
+	}
 	var edit_menu: PopupMenu = edit_menu_button.get_popup()
 	var i := 0
 	for item in edit_menu_items:
 		edit_menu.add_item(item, i)
+		var shortcut := Shortcut.new()
+		var event := InputEventAction.new()
+		event.action = edit_menu_items[item]
+		shortcut.events.append(event)
+		edit_menu.set_item_shortcut(i, shortcut)
 		i += 1
 
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, true)
@@ -114,21 +124,21 @@ func _setup_edit_menu() -> void:
 
 func _setup_view_menu() -> void:
 	# Order as in Global.ViewMenu enum
-	var view_menu_items := [
-		"Tile Mode",
-		"Tile Mode Offsets",
-		"Grayscale View",
-		"Mirror View",
-		"Show Grid",
-		"Show Pixel Grid",
-		"Show Rulers",
-		"Show Guides",
-		"Show Mouse Guides",
-		"Snap To",
-	]
+	var view_menu_items := {
+		"Tile Mode": "",
+		"Tile Mode Offsets": "",
+		"Grayscale View": "",
+		"Mirror View": "mirror_view",
+		"Show Grid": "show_grid",
+		"Show Pixel Grid": "show_pixel_grid",
+		"Show Rulers": "show_rulers",
+		"Show Guides": "show_guides",
+		"Show Mouse Guides": "",
+		"Snap To": "",
+	}
 	view_menu = view_menu_button.get_popup()
 	for i in view_menu_items.size():
-		var item: String = view_menu_items[i]
+		var item: String = view_menu_items.keys()[i]
 		if item == "Tile Mode":
 			_setup_tile_mode_submenu(item)
 		elif item == "Snap To":
@@ -137,6 +147,11 @@ func _setup_view_menu() -> void:
 			view_menu.add_item(item, i)
 		else:
 			view_menu.add_check_item(item, i)
+			var shortcut := Shortcut.new()
+			var event := InputEventAction.new()
+			event.action = view_menu_items[item]
+			shortcut.events.append(event)
+			view_menu.set_item_shortcut(i, shortcut)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GUIDES, true)
 	view_menu.hide_on_checkable_item_selection = false
@@ -196,14 +211,14 @@ func _setup_snap_to_submenu(item: String) -> void:
 
 func _setup_window_menu() -> void:
 	# Order as in Global.WindowMenu enum
-	var window_menu_items := [
-		"Window Opacity",
-		"Panels",
-		"Layouts",
-		"Moveable Panels",
-		"Zen Mode",
-		"Fullscreen Mode",
-	]
+	var window_menu_items := {
+		"Window Opacity": "",
+		"Panels": "",
+		"Layouts": "",
+		"Moveable Panels": "moveable_panels",
+		"Zen Mode": "zen_mode",
+		"Fullscreen Mode": "toggle_fullscreen",
+	}
 	window_menu = window_menu_button.get_popup()
 	var i := 0
 	for item in window_menu_items:
@@ -215,6 +230,11 @@ func _setup_window_menu() -> void:
 			window_menu.add_item(item, i)
 		else:
 			window_menu.add_check_item(item, i)
+			var shortcut := Shortcut.new()
+			var event := InputEventAction.new()
+			event.action = window_menu_items[item]
+			shortcut.events.append(event)
+			window_menu.set_item_shortcut(i, shortcut)
 		i += 1
 	window_menu.hide_on_checkable_item_selection = false
 	window_menu.id_pressed.connect(window_menu_id_pressed)
@@ -272,27 +292,32 @@ func populate_layouts_submenu() -> void:
 
 func _setup_image_menu() -> void:
 	# Order as in Global.ImageMenu enum
-	var image_menu_items := [
-		"Resize Canvas",
-		"Offset Image",
-		"Scale Image",
-		"Crop Image",
-		"Mirror Image",
-		"Rotate Image",
-		"Outline",
-		"Drop Shadow",
-		"Invert Colors",
-		"Desaturation",
-		"Adjust Hue/Saturation/Value",
-		"Posterize",
-		"Gradient",
-		"Gradient Map",
-		# "Shader"
-	]
+	var image_menu_items := {
+		"Resize Canvas": "resize_canvas",
+		"Offset Image": "offset_image",
+		"Scale Image": "scale_image",
+		"Crop Image": "crop_image",
+		"Mirror Image": "mirror_image",
+		"Rotate Image": "rotate_image",
+		"Outline": "outline",
+		"Drop Shadow": "drop_shadow",
+		"Invert Colors": "invert_colors",
+		"Desaturation": "desaturation",
+		"Adjust Hue/Saturation/Value": "adjust_hsv",
+		"Posterize": "posterize",
+		"Gradient": "gradient",
+		"Gradient Map": "gradient_map",
+		# "Shader": ""
+	}
 	var image_menu: PopupMenu = image_menu_button.get_popup()
 	var i := 0
 	for item in image_menu_items:
 		image_menu.add_item(item, i)
+		var shortcut := Shortcut.new()
+		var event := InputEventAction.new()
+		event.action = image_menu_items[item]
+		shortcut.events.append(event)
+		image_menu.set_item_shortcut(i, shortcut)
 		i += 1
 
 	image_menu.id_pressed.connect(image_menu_id_pressed)
@@ -300,31 +325,46 @@ func _setup_image_menu() -> void:
 
 func _setup_select_menu() -> void:
 	# Order as in Global.SelectMenu enum
-	var select_menu_items := ["All", "Clear", "Invert", "Tile Mode"]
+	var select_menu_items := {
+		"All": "select_all",
+		"Clear": "clear_selection",
+		"Invert": "invert_selection",
+		"Tile Mode": ""
+	}
 	var select_menu: PopupMenu = select_menu_button.get_popup()
 	for i in select_menu_items.size():
-		var item: String = select_menu_items[i]
+		var item: String = select_menu_items.keys()[i]
 		if item == "Tile Mode":
 			select_menu.add_check_item(item, i)
 		else:
 			select_menu.add_item(item, i)
+			var shortcut := Shortcut.new()
+			var event := InputEventAction.new()
+			event.action = select_menu_items[item]
+			shortcut.events.append(event)
+			select_menu.set_item_shortcut(i, shortcut)
 	select_menu.id_pressed.connect(select_menu_id_pressed)
 
 
 func _setup_help_menu() -> void:
 	# Order as in Global.HelpMenu enum
-	var help_menu_items := [
-		"View Splash Screen",
-		"Online Docs",
-		"Issue Tracker",
-		"Open Logs Folder",
-		"Changelog",
-		"About Pixelorama",
-	]
+	var help_menu_items := {
+		"View Splash Screen": "view_splash_screen",
+		"Online Docs": "open_docs",
+		"Issue Tracker": "issue_tracker",
+		"Open Logs Folder": "open_logs_folder",
+		"Changelog": "changelog",
+		"About Pixelorama": "about_pixelorama",
+	}
 	var help_menu: PopupMenu = help_menu_button.get_popup()
 	var i := 0
 	for item in help_menu_items:
 		help_menu.add_item(item, i)
+		var shortcut := Shortcut.new()
+		var event := InputEventAction.new()
+		event.action = help_menu_items[item]
+		shortcut.events.append(event)
+		help_menu.set_item_shortcut(i, shortcut)
 		i += 1
 
 	help_menu.id_pressed.connect(help_menu_id_pressed)
