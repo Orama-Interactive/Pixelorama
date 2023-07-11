@@ -199,7 +199,7 @@ func _notification(what: int) -> void:
 			show_quit_dialog()
 		# If the mouse exits the window and another application has the focus,
 		# pause the application
-		MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT:
+		NOTIFICATION_APPLICATION_FOCUS_OUT:
 			Global.has_focus = false
 			if Global.pause_when_unfocused:
 				get_tree().paused = true
@@ -209,7 +209,7 @@ func _notification(what: int) -> void:
 		# Unpause it when the mouse enters the window or when it gains focus
 		NOTIFICATION_WM_MOUSE_ENTER:
 			get_tree().paused = false
-		MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
+		NOTIFICATION_APPLICATION_FOCUS_IN:
 			get_tree().paused = false
 			var mouse_pos := get_global_mouse_position()
 			var viewport_rect := Rect2(
@@ -371,9 +371,12 @@ func _on_BackupConfirmation_custom_action(
 		load_last_project()
 
 
-func _on_BackupConfirmation_popup_hide() -> void:
+func _on_backup_confirmation_visibility_changed() -> void:
+	if backup_confirmation.visible:
+		return
 	if Global.enable_autosave:
 		OpenSave.autosave_timer.start()
+	Global.dialog_open(false)
 
 
 func _use_osx_shortcuts() -> void:
