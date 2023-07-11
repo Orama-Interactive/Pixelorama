@@ -180,7 +180,7 @@ Hold %s to displace the shape's origin""",
 var _tool_button_scene: PackedScene = preload("res://src/Tools/ToolButton.tscn")
 var _slots := {}
 var _panels := {}
-var _curr_layer_type: int = Global.LayerTypes.PIXEL
+var _curr_layer_type := Global.LayerTypes.PIXEL
 var _left_tools_per_layer_type := {
 	Global.LayerTypes.PIXEL: "Pencil",
 	Global.LayerTypes.THREE_D: "3DShapeEdit",
@@ -202,7 +202,7 @@ class Tool:
 	var cursor_icon: Texture2D
 	var shortcut := ""
 	var extra_hint := ""
-	var extra_shortcuts := []  # Array of String(s)
+	var extra_shortcuts: PackedStringArray = []
 	var layer_types: PackedInt32Array = []
 	var button_node: BaseButton
 
@@ -213,7 +213,7 @@ class Tool:
 		_scene: PackedScene,
 		_layer_types: PackedInt32Array = [],
 		_extra_hint := "",
-		_extra_shortucts := []
+		_extra_shortucts: PackedStringArray = []
 	) -> void:
 		name = _name
 		display_name = _display_name
@@ -531,7 +531,7 @@ func _cel_changed() -> void:
 	_show_relevant_tools(layer_type)
 
 
-func _show_relevant_tools(layer_type: int) -> void:
+func _show_relevant_tools(layer_type: Global.LayerTypes) -> void:
 	# Hide tools that are not available in the current layer type
 	for button in _tool_buttons.get_children():
 		var tool_name: String = button.name

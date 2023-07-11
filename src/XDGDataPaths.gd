@@ -25,7 +25,7 @@ func use_xdg_standard() -> bool:
 	# see: https://docs.godotengine.org/en/latest/getting_started/workflow/export/feature_tags.html
 	# return OS.has_feature("Linux") or OS.has_feature("BSD")
 	# Previous was unreliable and buggy >.< nyaa
-	return OS.get_name() == "X11"
+	return OS.get_name() == "Linux"
 
 
 func _init() -> void:
