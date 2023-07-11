@@ -4,7 +4,6 @@
 
 [node name="PatternsPopup" type="PopupPanel"]
 canvas_item_default_texture_filter = 0
-visible = true
 script = ExtResource("1")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
