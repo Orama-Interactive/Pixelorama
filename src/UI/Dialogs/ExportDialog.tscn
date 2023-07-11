@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="4"]
 
 [node name="ExportDialog" type="ConfirmationDialog"]
+canvas_item_default_texture_filter = 0
 dialog_hide_on_ok = false
 script = ExtResource("1")
 

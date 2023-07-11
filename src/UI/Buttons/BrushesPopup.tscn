@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://src/UI/Buttons/BrushesPopup.gd" id="1"]
 
 [node name="BrushesPopup" type="Popup"]
+canvas_item_default_texture_filter = 0
 script = ExtResource("1")
 
 [node name="Background" type="PanelContainer" parent="."]
