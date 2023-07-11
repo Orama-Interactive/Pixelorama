@@ -89,11 +89,11 @@ func _draw() -> void:
 			+ Vector2(
 				(
 					Global.camera.offset.x
-					- (viewport_size.rotated(Global.camera.rotation).x / 2) * zoom.x
+					- (viewport_size.rotated(Global.camera.rotation).x / 2) / zoom.x
 				),
 				(
 					Global.camera.offset.y
-					- (viewport_size.rotated(Global.camera.rotation).y / 2) * zoom.y
+					- (viewport_size.rotated(Global.camera.rotation).y / 2) / zoom.y
 				)
 			)
 		)
@@ -116,7 +116,7 @@ func _draw() -> void:
 	)
 
 	if intersection:
-		draw_set_transform(intersection, Global.camera.rotation, zoom * 2)
+		draw_set_transform(intersection, Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
 		if (
 			intersection.distance_squared_to(viewport_poly[0])
 			< intersection.distance_squared_to(viewport_poly[1])
@@ -130,7 +130,7 @@ func _draw() -> void:
 		points[0], points[1], viewport_poly[3], viewport_poly[0]
 	)
 	if intersection:
-		draw_set_transform(intersection, Global.camera.rotation, zoom * 2)
+		draw_set_transform(intersection, Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
 		if (
 			intersection.distance_squared_to(viewport_poly[3])
 			< intersection.distance_squared_to(viewport_poly[0])
@@ -145,7 +145,7 @@ func _draw() -> void:
 	)
 
 	if intersection:
-		draw_set_transform(intersection, Global.camera.rotation, zoom * 2)
+		draw_set_transform(intersection, Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
 		if (
 			intersection.distance_squared_to(viewport_poly[1])
 			< intersection.distance_squared_to(viewport_poly[2])
@@ -156,7 +156,7 @@ func _draw() -> void:
 		return
 
 	# If there's no intersection with a viewport edge, show string in top left corner
-	draw_set_transform(viewport_poly[0], Global.camera.rotation, zoom * 2)
+	draw_set_transform(viewport_poly[0], Global.camera.rotation, Vector2(2.0, 2.0) / zoom)
 	draw_string(font, Vector2(x_offset, font_height), string, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
 
 
