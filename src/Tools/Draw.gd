@@ -638,7 +638,7 @@ func _blit_indicator(dst: BitMap, indicator: BitMap, pos: Vector2i) -> void:
 
 func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 	var result := {}
-	var angle := rad_to_deg(end.angle_to_point(start))
+	var angle := rad_to_deg(start.angle_to_point(end))
 	var distance := start.distance_to(end)
 	if Input.is_action_pressed("draw_snap_angle"):
 		if Tools.pixel_perfect:
