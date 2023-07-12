@@ -258,7 +258,7 @@ func _draw_tool_circle_from_map(pos: Vector2i) -> Array[Vector2i]:
 
 
 func _compute_draw_tool_brush(pos: Vector2i) -> Array[Vector2i]:
-	var result:Array[Vector2i] = []
+	var result: Array[Vector2i] = []
 	var brush_mask := BitMap.new()
 	pos = pos - (_indicator.get_size() / 2)
 	brush_mask.create_from_image_alpha(_brush_image, 0.0)

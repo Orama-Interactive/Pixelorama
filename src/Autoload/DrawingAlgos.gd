@@ -13,7 +13,7 @@ func _ready() -> void:
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
 func get_ellipse_points(pos: Vector2i, size: Vector2i) -> Array[Vector2i]:
-	var array: Array[Vector2i]= []
+	var array: Array[Vector2i] = []
 	var x0 := pos.x
 	var x1 := pos.x + (size.x - 1)
 	var y0 := pos.y
