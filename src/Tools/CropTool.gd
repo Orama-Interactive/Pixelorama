@@ -1,7 +1,7 @@
 extends BaseTool
 # Crop Tool, allows you to resize the canvas interactively
 
-var _offset := Vector2.ZERO
+var _offset := Vector2i.ZERO
 var _crop: CropRect
 var _start_pos: Vector2
 var _syncing := false
@@ -23,14 +23,14 @@ func _exit_tree() -> void:
 
 func draw_start(pos: Vector2) -> void:
 	super.draw_start(pos)
-	_offset = pos - _crop.rect.position
+	_offset = Vector2i(pos) - _crop.rect.position
 	_start_pos = pos
 
 
 func draw_move(pos: Vector2) -> void:
 	super.draw_move(pos)
 	if _crop.locked_size:
-		_crop.rect.position = pos - _offset
+		_crop.rect.position = Vector2i(pos) - _offset
 	else:
 		if _crop.mode == CropRect.Mode.POSITION_SIZE and _locked_ratio:
 			var ratio: Vector2 = $"%Size".ratio
@@ -46,13 +46,13 @@ func draw_move(pos: Vector2) -> void:
 			else:
 				_crop.rect.position.y = _start_pos.y - _crop.rect.size.y
 		else:
-			_crop.rect.position.x = min(_start_pos.x, pos.x)
-			_crop.rect.position.y = min(_start_pos.y, pos.y)
-			_crop.rect.end.x = max(_start_pos.x, pos.x)
-			_crop.rect.end.y = max(_start_pos.y, pos.y)
+			_crop.rect.position.x = mini(_start_pos.x, pos.x)
+			_crop.rect.position.y = mini(_start_pos.y, pos.y)
+			_crop.rect.end.x = maxi(_start_pos.x, pos.x)
+			_crop.rect.end.y = maxi(_start_pos.y, pos.y)
 		# Ensure that the size is at least 1:
-		_crop.rect.size.x = max(1, _crop.rect.size.x)
-		_crop.rect.size.y = max(1, _crop.rect.size.y)
+		_crop.rect.size.x = maxi(1, _crop.rect.size.x)
+		_crop.rect.size.y = maxi(1, _crop.rect.size.y)
 	_crop.updated.emit()
 
 
@@ -80,7 +80,7 @@ func _sync_ui() -> void:
 	$"%Left".value = _crop.rect.position.x
 	$"%Right".value = _crop.rect.end.x
 
-	$"%Position".max_value = Global.current_project.size - Vector2.ONE
+	$"%Position".max_value = Global.current_project.size - Vector2i.ONE
 	$"%Size".max_value = Global.current_project.size
 	$"%Position".value = _crop.rect.position
 	$"%Size".value = _crop.rect.size
@@ -162,14 +162,14 @@ func _on_RatioY_value_changed(value: float) -> void:
 	_crop.updated.emit()
 
 
-func _on_Position_value_changed(value: Vector2) -> void:
+func _on_Position_value_changed(value: Vector2i) -> void:
 	if _syncing:
 		return
 	_crop.rect.position = value
 	_crop.updated.emit()
 
 
-func _on_Size_value_changed(value: Vector2) -> void:
+func _on_Size_value_changed(value: Vector2i) -> void:
 	if _syncing:
 		return
 	_crop.rect.size = value

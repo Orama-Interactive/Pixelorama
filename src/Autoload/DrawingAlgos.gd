@@ -433,11 +433,11 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 			elif interpolation == Interpolation.CLEANEDGE:
 				var params := {"angle": 0, "slope": true, "cleanup": true, "preview": false}
 				var gen := ShaderImageEffect.new()
-				gen.generate_image(sprite, clean_edge_shader, params, Vector2(width, height))
+				gen.generate_image(sprite, clean_edge_shader, params, Vector2i(width, height))
 			elif interpolation == Interpolation.OMNISCALE and omniscale_shader:
 				var params := {"angle": 0, "preview": false}
 				var gen := ShaderImageEffect.new()
-				gen.generate_image(sprite, omniscale_shader, params, Vector2(width, height))
+				gen.generate_image(sprite, omniscale_shader, params, Vector2i(width, height))
 			else:
 				sprite.resize(width, height, interpolation)
 			Global.current_project.undo_redo.add_do_property(f.cels[i].image, "data", sprite.data)
@@ -455,7 +455,7 @@ func center(indices: Array) -> void:
 	project.undo_redo.create_action("Center Frames")
 	for frame in indices:
 		# Find used rect of the current frame (across all of the layers)
-		var used_rect := Rect2()
+		var used_rect := Rect2i()
 		for cel in project.frames[frame].cels:
 			if not cel is PixelCel:
 				continue

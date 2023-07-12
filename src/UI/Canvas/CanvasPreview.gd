@@ -105,8 +105,8 @@ func _cel_changed() -> void:
 
 func _split_spritesheet(image: Image, horiz: int, vert: int) -> Array:
 	var result := []
-	horiz = min(horiz, image.get_size().x)
-	vert = min(vert, image.get_size().y)
+	horiz = mini(horiz, image.get_size().x)
+	vert = mini(vert, image.get_size().y)
 	var frame_width := image.get_size().x / horiz
 	var frame_height := image.get_size().y / vert
 	for yy in range(vert):

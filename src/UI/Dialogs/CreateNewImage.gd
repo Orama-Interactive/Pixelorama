@@ -129,7 +129,7 @@ func _on_CreateNewImage_confirmed() -> void:
 	if !proj_name.is_valid_filename():
 		proj_name = tr("untitled")
 
-	var new_project := Project.new([], proj_name, Vector2(width, height).floor())
+	var new_project := Project.new([], proj_name, image_size)
 	new_project.layers.append(PixelLayer.new(new_project))
 	new_project.fill_color = fill_color
 	new_project.frames.append(new_project.new_empty_frame())

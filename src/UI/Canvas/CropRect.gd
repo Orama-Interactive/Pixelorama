@@ -14,7 +14,7 @@ const LINE_COLOR = Color.WHITE
 var mode: int = Mode.MARGINS:
 	set = _set_mode
 var locked_size := false
-var rect := Rect2(0, 0, 1, 1)
+var rect := Rect2i(0, 0, 1, 1)
 
 # How many crop tools are active (0-2), setter makes this visible if not 0
 var tool_count := 0:
