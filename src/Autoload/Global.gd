@@ -191,7 +191,7 @@ var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.ts
 @onready var patterns_popup: Popup = control.find_child("PatternsPopup")
 @onready var palette_panel: PalettePanel = control.find_child("Palettes")
 
-@onready var references_panel: ReferencesPanel = control.find_child("RefCounted Images")
+@onready var references_panel: ReferencesPanel = control.find_child("Reference Images")
 @onready var perspective_editor := control.find_child("Perspective Editor")
 
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")

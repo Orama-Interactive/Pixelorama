@@ -4,7 +4,7 @@ extends RefCounted
 signal done
 
 
-func generate_image(img: Image, shader: Shader, params: Dictionary, size: Vector2) -> void:
+func generate_image(img: Image, shader: Shader, params: Dictionary, size: Vector2i) -> void:
 	# duplicate shader before modifying code to avoid affecting original resource
 	shader = shader.duplicate()
 	shader.code = shader.code.replace("unshaded", "unshaded, blend_premul_alpha")

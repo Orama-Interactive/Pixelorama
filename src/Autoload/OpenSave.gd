@@ -599,7 +599,7 @@ func open_image_as_spritesheet_layer(
 	var project: Project = Global.current_project
 	var project_width := maxi(frame_width, project.size.x)
 	var project_height := maxi(frame_height, project.size.y)
-	if project.size < Vector2(project_width, project_height):
+	if project.size < Vector2i(project_width, project_height):
 		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 
 	# Initialize undo mechanism
@@ -674,7 +674,7 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	var project: Project = Global.current_project
 	var project_width := maxi(image.get_width(), project.size.x)
 	var project_height := maxi(image.get_height(), project.size.y)
-	if project.size < Vector2(project_width, project_height):
+	if project.size < Vector2i(project_width, project_height):
 		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 	project.undos += 1
 	project.undo_redo.create_action("Replaced Cel")
@@ -706,7 +706,7 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 	var project: Project = Global.current_project
 	var project_width := maxi(image.get_width(), project.size.x)
 	var project_height := maxi(image.get_height(), project.size.y)
-	if project.size < Vector2(project_width, project_height):
+	if project.size < Vector2i(project_width, project_height):
 		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 
 	var frame := Frame.new()
@@ -738,7 +738,7 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	var project: Project = Global.current_project
 	var project_width := maxi(image.get_width(), project.size.x)
 	var project_height := maxi(image.get_height(), project.size.y)
-	if project.size < Vector2(project_width, project_height):
+	if project.size < Vector2i(project_width, project_height):
 		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 	var layer := PixelLayer.new(project, file_name)
 	var cels := []

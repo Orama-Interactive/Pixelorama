@@ -10,7 +10,7 @@ var flag_tilemode = false
 var is_moving_content := false
 var arrow_key_move := false
 var is_pasting := false
-var big_bounding_rectangle := Rect2():
+var big_bounding_rectangle := Rect2i():
 	set = _big_bounding_rectangle_changed
 var image_current_pixel := Vector2.ZERO  # The ACTUAL pixel coordinate of image
 
@@ -19,7 +19,7 @@ var rect_aspect_ratio := 0.0
 var temp_rect_size := Vector2.ZERO
 var temp_rect_pivot := Vector2.ZERO
 
-var original_big_bounding_rectangle := Rect2()
+var original_big_bounding_rectangle := Rect2i()
 var original_preview_image := Image.new()
 var original_bitmap := SelectionMap.new()
 var original_offset := Vector2.ZERO
@@ -105,7 +105,7 @@ func _input(event: InputEvent) -> void:
 	if not event is InputEventMouse:
 		return
 	var gizmo_hover: Gizmo
-	if big_bounding_rectangle.size != Vector2.ZERO:
+	if big_bounding_rectangle.size != Vector2i.ZERO:
 		for g in gizmos:
 			if g.rect.has_point(image_current_pixel):
 				gizmo_hover = Gizmo.new(g.type, g.direction)
@@ -149,7 +149,7 @@ func _input(event: InputEvent) -> void:
 				rect_aspect_ratio = abs(temp_rect.size.y / temp_rect.size.x)
 				temp_rect_size = temp_rect.size
 				temp_rect_pivot = (
-					temp_rect.position + ((temp_rect.end - temp_rect.position) / 2).floor()
+					temp_rect.position + ((temp_rect.end - temp_rect.position) / 2)
 				)
 
 		elif dragged_gizmo:  # Mouse released, deselect gizmo
@@ -241,7 +241,7 @@ func _is_action_direction_released(event: InputEvent) -> bool:
 
 
 func _draw() -> void:
-	if big_bounding_rectangle.size == Vector2.ZERO:
+	if big_bounding_rectangle.size == Vector2i.ZERO:
 		return
 	var position_tmp := position
 	var scale_tmp := scale
@@ -262,7 +262,7 @@ func _draw() -> void:
 	draw_set_transform(position, rotation, scale)
 
 
-func _big_bounding_rectangle_changed(value: Rect2) -> void:
+func _big_bounding_rectangle_changed(value: Rect2i) -> void:
 	big_bounding_rectangle = value
 	for slot in Tools._slots.values():
 		if slot.tool_node is SelectionTool:
@@ -344,8 +344,8 @@ func _gizmo_resize() -> void:
 			temp_rect.position.y = end_y - temp_rect.size.y
 
 	big_bounding_rectangle = temp_rect.abs()
-	big_bounding_rectangle.position = big_bounding_rectangle.position.ceil()
-	big_bounding_rectangle.size = big_bounding_rectangle.size.floor()
+#	big_bounding_rectangle.position = Vector2(big_bounding_rectangle.position).ceil()
+#	big_bounding_rectangle.size = big_bounding_rectangle.size.floor()
 	if big_bounding_rectangle.size.x == 0:
 		big_bounding_rectangle.size.x = 1
 	if big_bounding_rectangle.size.y == 0:
@@ -438,7 +438,7 @@ func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
 	selection_map_copy.copy_from(project.selection_map)
 	# Used only if the selection is outside of the canvas boundaries,
 	# on the left and/or above (negative coords)
-	var offset_position := Vector2.ZERO
+	var offset_position := Vector2i.ZERO
 	if big_bounding_rectangle.position.x < 0:
 		rect.position.x -= big_bounding_rectangle.position.x
 		offset_position.x = big_bounding_rectangle.position.x
@@ -446,7 +446,7 @@ func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
 		rect.position.y -= big_bounding_rectangle.position.y
 		offset_position.y = big_bounding_rectangle.position.y
 
-	if offset_position != Vector2.ZERO:
+	if offset_position != Vector2i.ZERO:
 		big_bounding_rectangle.position -= offset_position
 		selection_map_copy.move_bitmap_values(project)
 
@@ -464,7 +464,7 @@ func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
 				selection_map_copy.select_pixel(pos, project.selection_map.is_pixel_selected(pos))
 	big_bounding_rectangle = selection_map_copy.get_used_rect()
 
-	if offset_position != Vector2.ZERO:
+	if offset_position != Vector2i.ZERO:
 		big_bounding_rectangle.position += offset_position
 		selection_map_copy.move_bitmap_values(project)
 
@@ -476,10 +476,10 @@ func move_borders_start() -> void:
 	undo_data = get_undo_data(false)
 
 
-func move_borders(move: Vector2) -> void:
-	if move == Vector2.ZERO:
+func move_borders(move: Vector2i) -> void:
+	if move == Vector2i.ZERO:
 		return
-	marching_ants_outline.offset += move
+	marching_ants_outline.offset += Vector2(move)
 	big_bounding_rectangle.position += move
 	queue_redraw()
 
@@ -702,7 +702,7 @@ func copy() -> void:
 			var offset_pos := big_bounding_rectangle.position
 			for x in to_copy.get_size().x:
 				for y in to_copy.get_size().y:
-					var pos := Vector2(x, y)
+					var pos := Vector2i(x, y)
 					if offset_pos.x < 0:
 						offset_pos.x = 0
 					if offset_pos.y < 0:
@@ -767,14 +767,14 @@ func paste(in_place := false) -> void:
 	big_bounding_rectangle = clipboard.big_bounding_rectangle
 	if not in_place:  # If "Paste" is selected, and not "Paste in Place"
 		var camera_center := Global.camera.get_screen_center_position()
-		camera_center -= big_bounding_rectangle.size / 2
+		camera_center -= Vector2(big_bounding_rectangle.size) / 2.0
 		var max_pos := project.size - big_bounding_rectangle.size
 		if max_pos.x >= 0:
-			camera_center.x = clamp(camera_center.x, 0, max_pos.x)
+			camera_center.x = clampf(camera_center.x, 0, max_pos.x)
 		else:
 			camera_center.x = 0
 		if max_pos.y >= 0:
-			camera_center.y = clamp(camera_center.y, 0, max_pos.y)
+			camera_center.y = clampf(camera_center.y, 0, max_pos.y)
 		else:
 			camera_center.y = 0
 		big_bounding_rectangle.position = camera_center.floor()
@@ -854,7 +854,7 @@ func new_brush() -> void:
 		# Remove unincluded pixels if the selection is not a single rectangle
 		for x in brush.get_size().x:
 			for y in brush.get_size().y:
-				var pos := Vector2(x, y)
+				var pos := Vector2i(x, y)
 				var offset_pos := big_bounding_rectangle.position
 				if offset_pos.x < 0:
 					offset_pos.x = 0
@@ -920,7 +920,7 @@ func _get_preview_image() -> void:
 		# For non-rectangular selections
 		for x in range(0, big_bounding_rectangle.size.x):
 			for y in range(0, big_bounding_rectangle.size.y):
-				var pos := Vector2(x, y)
+				var pos := Vector2i(x, y)
 				if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
 					original_preview_image.set_pixelv(pos, Color(0, 0, 0, 0))
 
@@ -956,7 +956,7 @@ func _get_selected_image(cel_image: Image) -> Image:
 	# For non-rectangular selections
 	for x in range(0, big_bounding_rectangle.size.x):
 		for y in range(0, big_bounding_rectangle.size.y):
-			var pos := Vector2(x, y)
+			var pos := Vector2i(x, y)
 			if !project.can_pixel_get_drawn(pos + big_bounding_rectangle.position):
 				image.set_pixelv(pos, Color(0, 0, 0, 0))
 	return image

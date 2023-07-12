@@ -5,7 +5,7 @@ extends RefCounted
 
 var name := "":
 	set = _name_changed
-var size: Vector2:
+var size: Vector2i:
 	set = _size_changed
 var undo_redo := UndoRedo.new()
 var tiles: Tiles
@@ -31,15 +31,15 @@ var reference_images: Array[ReferenceImage] = []
 var vanishing_points := []  # Array of Vanishing Points
 var fps := 6.0
 
-var x_symmetry_point
-var y_symmetry_point
+var x_symmetry_point: float
+var y_symmetry_point: float
 var x_symmetry_axis := SymmetryGuide.new()
 var y_symmetry_axis := SymmetryGuide.new()
 
 var selection_map := SelectionMap.new()
 # This is useful for when the selection is outside of the canvas boundaries,
 # on the left and/or above (negative coords)
-var selection_offset := Vector2.ZERO:
+var selection_offset := Vector2i.ZERO:
 	set = _selection_offset_changed
 var has_selection := false
 
@@ -61,7 +61,7 @@ var export_overwrite := false
 var animation_tag_node := preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
 
-func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
+func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2i(64, 64)) -> void:
 	frames = _frames
 	name = _name
 	size = _size
@@ -159,7 +159,7 @@ func selection_map_changed() -> void:
 	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
 
 
-func _selection_offset_changed(value: Vector2) -> void:
+func _selection_offset_changed(value: Vector2i) -> void:
 	selection_offset = value
 	Global.canvas.selection.marching_ants_outline.offset = selection_offset
 
@@ -455,7 +455,7 @@ func _name_changed(value: String) -> void:
 		Global.tabs.set_tab_title(Global.tabs.current_tab, name)
 
 
-func _size_changed(value: Vector2) -> void:
+func _size_changed(value: Vector2i) -> void:
 	if not is_instance_valid(tiles):
 		size = value
 		return
