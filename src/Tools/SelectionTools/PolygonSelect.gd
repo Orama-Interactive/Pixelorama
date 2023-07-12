@@ -1,7 +1,7 @@
 extends SelectionTool
 
-var _last_position := Vector2.INF
-var _draw_points := []
+var _last_position := Vector2i(Vector2.INF)
+var _draw_points: Array[Vector2i] = []
 var _ready_to_apply := false
 
 
@@ -17,7 +17,7 @@ func _input(event: InputEvent) -> void:
 			$DoubleClickTimer.start()
 			append_gap(_draw_points[-1], _draw_points[0], _draw_points)
 			_ready_to_apply = true
-			apply_selection(Vector2.ZERO)  # Argument doesn't matter
+			apply_selection(Vector2i.ZERO)  # Argument doesn't matter
 	else:
 		if event.is_action_pressed("transformation_cancel") and _ongoing_selection:
 			_ongoing_selection = false
@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 			Global.canvas.previews.queue_redraw()
 
 
-func draw_start(pos: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	if !$DoubleClickTimer.is_stopped():
 		return
 	pos = snap_position(pos)
@@ -37,14 +37,14 @@ func draw_start(pos: Vector2) -> void:
 		_last_position = pos
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
 	pos = snap_position(pos)
 	super.draw_move(pos)
 
 
-func draw_end(pos: Vector2) -> void:
+func draw_end(pos: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
 	pos = snap_position(pos)
@@ -75,12 +75,12 @@ func draw_preview() -> void:
 			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
 		var circle_radius: Vector2 = Global.camera.zoom * 10
-		circle_radius.x = clamp(circle_radius.x, 2, circle_radius.x)
-		circle_radius.y = clamp(circle_radius.y, 2, circle_radius.y)
+		circle_radius.x = clampf(circle_radius.x, 2, circle_radius.x)
+		circle_radius.y = clampf(circle_radius.y, 2, circle_radius.y)
 
 		if _last_position == _draw_points[0] and _draw_points.size() > 1:
 			draw_empty_circle(
-				canvas, _draw_points[0] + Vector2.ONE * 0.5, circle_radius, Color.BLACK
+				canvas, Vector2(_draw_points[0]) + Vector2.ONE * 0.5, circle_radius, Color.BLACK
 			)
 
 		# Handle mirroring
@@ -109,7 +109,7 @@ func draw_preview() -> void:
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
-func apply_selection(pos: Vector2) -> void:
+func apply_selection(pos: Vector2i) -> void:
 	super.apply_selection(pos)
 	if !_ready_to_apply:
 		return
@@ -146,7 +146,7 @@ func apply_selection(pos: Vector2) -> void:
 	Global.canvas.previews.queue_redraw()
 
 
-func lasso_selection(selection_map: SelectionMap, points: PackedVector2Array) -> void:
+func lasso_selection(selection_map: SelectionMap, points: Array[Vector2i]) -> void:
 	var project: Project = Global.current_project
 	var selection_size := selection_map.get_size()
 	for point in points:
@@ -158,8 +158,8 @@ func lasso_selection(selection_map: SelectionMap, points: PackedVector2Array) ->
 		else:
 			selection_map.select_pixel(point, !_subtract)
 
-	var v := Vector2()
-	var image_size: Vector2 = project.size
+	var v := Vector2i()
+	var image_size := project.size
 	for x in image_size.x:
 		v.x = x
 		for y in image_size.y:
@@ -174,15 +174,15 @@ func lasso_selection(selection_map: SelectionMap, points: PackedVector2Array) ->
 
 # Bresenham's Algorithm
 # Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
-func append_gap(start: Vector2, end: Vector2, array: Array) -> void:
-	var dx := int(abs(end.x - start.x))
-	var dy := int(-abs(end.y - start.y))
+func append_gap(start: Vector2i, end: Vector2i, array: Array[Vector2i]) -> void:
+	var dx := absi(end.x - start.x)
+	var dy := -absi(end.y - start.y)
 	var err := dx + dy
 	var e2 := err << 1
-	var sx = 1 if start.x < end.x else -1
-	var sy = 1 if start.y < end.y else -1
-	var x = start.x
-	var y = start.y
+	var sx := 1 if start.x < end.x else -1
+	var sy := 1 if start.y < end.y else -1
+	var x := start.x
+	var y := start.y
 	while !(x == end.x && y == end.y):
 		e2 = err << 1
 		if e2 >= dy:
@@ -191,21 +191,21 @@ func append_gap(start: Vector2, end: Vector2, array: Array) -> void:
 		if e2 <= dx:
 			err += dx
 			y += sy
-		array.append(Vector2(x, y))
+		array.append(Vector2i(x, y))
 
 
-func mirror_array(array: Array, h: bool, v: bool) -> Array:
-	var new_array := []
+func mirror_array(array: Array[Vector2i], h: bool, v: bool) -> Array[Vector2i]:
+	var new_array: Array[Vector2i] = []
 	var project: Project = Global.current_project
 	for point in array:
 		if h and v:
 			new_array.append(
-				Vector2(project.x_symmetry_point - point.x, project.y_symmetry_point - point.y)
+				Vector2i(project.x_symmetry_point - point.x, project.y_symmetry_point - point.y)
 			)
 		elif h:
-			new_array.append(Vector2(project.x_symmetry_point - point.x, point.y))
+			new_array.append(Vector2i(project.x_symmetry_point - point.x, point.y))
 		elif v:
-			new_array.append(Vector2(point.x, project.y_symmetry_point - point.y))
+			new_array.append(Vector2i(point.x, project.y_symmetry_point - point.y))
 
 	return new_array
 

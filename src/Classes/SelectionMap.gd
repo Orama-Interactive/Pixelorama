@@ -4,22 +4,22 @@ extends Image
 var invert_shader: Shader = preload("res://src/Shaders/Invert.gdshader")
 
 
-func is_pixel_selected(pixel: Vector2) -> bool:
+func is_pixel_selected(pixel: Vector2i) -> bool:
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= get_width() or pixel.y >= get_height():
 		return false
 	var selected: bool = get_pixelv(pixel).a > 0
 	return selected
 
 
-func get_nearest_position(pixel: Vector2) -> Vector2:
+func get_nearest_position(pixel: Vector2i) -> Vector2i:
 	if Global.canvas.selection.flag_tilemode:
 		# functions more or less the same way as the tilemode
 		var size := Global.current_project.size
 		var selection_rect := get_used_rect()
-		var start_x = selection_rect.position.x - selection_rect.size.x
-		var end_x = selection_rect.position.x + 2 * selection_rect.size.x
-		var start_y = selection_rect.position.y - selection_rect.size.y
-		var end_y = selection_rect.position.y + 2 * selection_rect.size.y
+		var start_x := selection_rect.position.x - selection_rect.size.x
+		var end_x := selection_rect.position.x + 2 * selection_rect.size.x
+		var start_y := selection_rect.position.y - selection_rect.size.y
+		var end_y := selection_rect.position.y + 2 * selection_rect.size.y
 		for x in range(start_x, end_x, selection_rect.size.x):
 			for y in range(start_y, end_y, selection_rect.size.y):
 				var test_image := Image.create(size.x, size.y, false, Image.FORMAT_LA8)
@@ -35,9 +35,9 @@ func get_nearest_position(pixel: Vector2) -> Vector2:
 				if selected:
 					var offset := Vector2i(x, y) - selection_rect.position
 					return offset
-		return Vector2.ZERO
+		return Vector2i.ZERO
 	else:
-		return Vector2.ZERO
+		return Vector2i.ZERO
 
 
 func get_point_in_tile_mode(pixel: Vector2) -> Array:

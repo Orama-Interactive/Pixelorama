@@ -46,21 +46,21 @@ func update_config() -> void:
 	$ColorPicker/ExtractFrom.selected = _mode
 
 
-func draw_start(pos: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	super.draw_start(pos)
 	_pick_color(pos)
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	super.draw_move(pos)
 	_pick_color(pos)
 
 
-func draw_end(pos: Vector2) -> void:
+func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
 
 
-func _pick_color(pos: Vector2) -> void:
+func _pick_color(pos: Vector2i) -> void:
 	var project: Project = Global.current_project
 	pos = project.tiles.get_canon_position(pos)
 

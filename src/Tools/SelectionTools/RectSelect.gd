@@ -1,6 +1,6 @@
 extends SelectionTool
 
-var _rect := Rect2(0, 0, 0, 0)
+var _rect := Rect2i(0, 0, 0, 0)
 
 var _square := false  # Mouse Click + Shift
 var _expand_from_center := false  # Mouse Click + Ctrl
@@ -23,7 +23,7 @@ func _input(event: InputEvent) -> void:
 			_displace_origin = false
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
 	pos = snap_position(pos)
@@ -36,7 +36,7 @@ func draw_move(pos: Vector2) -> void:
 		_offset = pos
 
 
-func draw_end(pos: Vector2) -> void:
+func draw_end(pos: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
 	pos = snap_position(pos)
@@ -83,14 +83,14 @@ func draw_preview() -> void:
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
-func apply_selection(pos: Vector2) -> void:
+func apply_selection(pos: Vector2i) -> void:
 	super.apply_selection(pos)
 	var project: Project = Global.current_project
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()
-		if _rect.size == Vector2.ZERO and project.has_selection:
+		if _rect.size == Vector2i.ZERO and project.has_selection:
 			Global.canvas.selection.commit_undo("Select", undo_data)
-	if _rect.size == Vector2.ZERO:
+	if _rect.size == Vector2i.ZERO:
 		return
 	var operation := 0
 	if _subtract:

@@ -52,7 +52,7 @@ class LightenDarkenOp:
 				hue_shift = hue_limit_lighten(dst.h, hue_shift)
 				dst.h = fposmod(dst.h + hue_shift, 1)
 				if dst.s > sat_lighten_limit:
-					dst.s = max(dst.s - min(sat_shift, dst.s), sat_lighten_limit)
+					dst.s = maxf(dst.s - minf(sat_shift, dst.s), sat_lighten_limit)
 				dst.v += value_shift
 
 			else:
@@ -60,7 +60,7 @@ class LightenDarkenOp:
 				dst.h = fposmod(dst.h - hue_shift, 1)
 				dst.s += sat_shift
 				if dst.v > value_darken_limit:
-					dst.v = max(dst.v - min(value_shift, dst.v), value_darken_limit)
+					dst.v = maxf(dst.v - minf(value_shift, dst.v), value_darken_limit)
 
 		return dst
 
@@ -205,7 +205,7 @@ func update_strength() -> void:
 	_drawer.color_op.value_amount = _value_amount
 
 
-func draw_start(pos: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
 	if Input.is_action_pressed("draw_color_picker"):
@@ -237,7 +237,7 @@ func draw_start(pos: Vector2) -> void:
 	cursor_text = ""
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
@@ -260,7 +260,7 @@ func draw_move(pos: Vector2) -> void:
 		Global.canvas.sprite_changed_this_frame = true
 
 
-func draw_end(pos: Vector2) -> void:
+func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_end(pos)
 	if _picking_color:
@@ -280,12 +280,12 @@ func draw_end(pos: Vector2) -> void:
 	update_random_image()
 
 
-func _draw_brush_image(image: Image, src_rect: Rect2, dst: Vector2) -> void:
+func _draw_brush_image(image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
 	_changed = true
 	for xx in image.get_size().x:
 		for yy in image.get_size().y:
 			if image.get_pixel(xx, yy).a > 0:
-				var pos := Vector2(xx, yy) + dst - src_rect.position
+				var pos := Vector2i(xx, yy) + dst - src_rect.position
 				_set_pixel(pos, true)
 
 

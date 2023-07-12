@@ -1,8 +1,8 @@
 extends "res://src/Tools/Draw.gd"
 
-var _start := Vector2.ZERO
-var _offset := Vector2.ZERO
-var _dest := Vector2.ZERO
+var _start := Vector2i.ZERO
+var _offset := Vector2i.ZERO
+var _dest := Vector2i.ZERO
 var _fill := false
 var _drawing := false
 var _displace_origin := false
@@ -31,7 +31,7 @@ func update_indicator() -> void:
 	var rect := _get_result_rect(_start, _dest)
 	var points := _get_points(rect.size)
 	var t_offset := _thickness - 1
-	var t_offsetv := Vector2(t_offset, t_offset)
+	var t_offsetv := Vector2i(t_offset, t_offset)
 	indicator.create(rect.size + t_offsetv)
 	for point in points:
 		indicator.set_bitv(point, 1)
@@ -65,12 +65,12 @@ func update_config() -> void:
 	$ThicknessSlider.value = _thickness
 
 
-func _get_shape_points(_size: Vector2) -> PackedVector2Array:
-	return PackedVector2Array()
+func _get_shape_points(_size: Vector2i) -> Array[Vector2i]:
+	return []
 
 
-func _get_shape_points_filled(_size: Vector2) -> PackedVector2Array:
-	return PackedVector2Array()
+func _get_shape_points_filled(_size: Vector2i) -> Array[Vector2i]:
+	return []
 
 
 func _input(event: InputEvent) -> void:
@@ -81,7 +81,7 @@ func _input(event: InputEvent) -> void:
 			_displace_origin = false
 
 
-func draw_start(pos: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
 	if Input.is_action_pressed("draw_color_picker"):
@@ -102,7 +102,7 @@ func draw_start(pos: Vector2) -> void:
 	_drawing = true
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released draw_color_picker (Alt)
@@ -121,7 +121,7 @@ func draw_move(pos: Vector2) -> void:
 		_set_cursor_text(_get_result_rect(_start, pos))
 
 
-func draw_end(pos: Vector2) -> void:
+func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_end(pos)
 	if _picking_color:
@@ -140,8 +140,8 @@ func draw_end(pos: Vector2) -> void:
 				pos.x += 1
 		_draw_shape(_start, pos)
 
-		_start = Vector2.ZERO
-		_dest = Vector2.ZERO
+		_start = Vector2i.ZERO
+		_dest = Vector2i.ZERO
 		_drawing = false
 		_displace_origin = false
 		cursor_text = ""
@@ -154,13 +154,13 @@ func draw_preview() -> void:
 		var rect := _get_result_rect(_start, _dest)
 		var points := _get_points(rect.size)
 		var t_offset := _thickness - 1
-		var t_offsetv := Vector2(t_offset, t_offset)
+		var t_offsetv := Vector2i(t_offset, t_offset)
 		indicator.create(rect.size + t_offsetv)
 		for point in points:
 			indicator.set_bitv(point, 1)
 
-		var transform_pos: Vector2 = rect.position - t_offsetv + Vector2(0.5, 0.5) * (t_offset - 1)
-		canvas.draw_set_transform(transform_pos.ceil(), canvas.rotation, canvas.scale)
+		var transform_pos := rect.position - t_offsetv + Vector2i((Vector2(0.5, 0.5) * (t_offset - 1)).ceil())
+		canvas.draw_set_transform(transform_pos, canvas.rotation, canvas.scale)
 
 		for line in _create_polylines(indicator):
 			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
@@ -168,7 +168,7 @@ func draw_preview() -> void:
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
-func _draw_shape(origin: Vector2, dest: Vector2) -> void:
+func _draw_shape(origin: Vector2i, dest: Vector2i) -> void:
 	var rect := _get_result_rect(origin, dest)
 	var points := _get_points(rect.size)
 	prepare_undo("Draw Shape")
@@ -176,48 +176,48 @@ func _draw_shape(origin: Vector2, dest: Vector2) -> void:
 		# Reset drawer every time because pixel perfect sometimes breaks the tool
 		_drawer.reset()
 		# Draw each point offsetted based on the shape's thickness
-		draw_tool(rect.position + point - Vector2(0.5, 0.5) * (_thickness - 1))
+		draw_tool(rect.position + point - Vector2i((Vector2(0.5, 0.5) * (_thickness - 1)).ceil()))
 
 	commit_undo()
 
 
 # Given an origin point and destination point, returns a rect representing
 # where the shape will be drawn and what is its size
-func _get_result_rect(origin: Vector2, dest: Vector2) -> Rect2:
-	var rect := Rect2()
+func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
+	var rect := Rect2i()
 
 	# Center the rect on the mouse
 	if Input.is_action_pressed("shape_center"):
-		var new_size := (dest - origin).floor()
+		var new_size := dest - origin
 		# Make rect 1:1 while centering it on the mouse
 		if Input.is_action_pressed("shape_perfect"):
-			var square_size := maxf(absf(new_size.x), absf(new_size.y))
-			new_size = Vector2(square_size, square_size)
+			var square_size := maxi(absi(new_size.x), absi(new_size.y))
+			new_size = Vector2i(square_size, square_size)
 
 		origin -= new_size
 		dest = origin + 2 * new_size
 
 	# Make rect 1:1 while not trying to center it
 	if Input.is_action_pressed("shape_perfect"):
-		var square_size := minf(absf(origin.x - dest.x), absf(origin.y - dest.y))
+		var square_size := mini(absi(origin.x - dest.x), absi(origin.y - dest.y))
 		rect.position.x = origin.x if origin.x < dest.x else origin.x - square_size
 		rect.position.y = origin.y if origin.y < dest.y else origin.y - square_size
-		rect.size = Vector2(square_size, square_size)
+		rect.size = Vector2i(square_size, square_size)
 	# Get the rect without any modifications
 	else:
-		rect.position = Vector2(min(origin.x, dest.x), min(origin.y, dest.y))
+		rect.position = Vector2i(mini(origin.x, dest.x), mini(origin.y, dest.y))
 		rect.size = (origin - dest).abs()
 
-	rect.size += Vector2.ONE
+	rect.size += Vector2i.ONE
 
 	return rect
 
 
-func _get_points(shape_size: Vector2) -> PackedVector2Array:
+func _get_points(shape_size: Vector2i) -> Array[Vector2i]:
 	return _get_shape_points_filled(shape_size) if _fill else _get_shape_points(shape_size)
 
 
-func _set_cursor_text(rect: Rect2) -> void:
+func _set_cursor_text(rect: Rect2i) -> void:
 	cursor_text = "%s, %s" % [rect.position.x, rect.position.y]
 	cursor_text += " -> %s, %s" % [rect.end.x - 1, rect.end.y - 1]
 	cursor_text += " (%s, %s)" % [rect.size.x, rect.size.y]

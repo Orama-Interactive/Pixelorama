@@ -1,11 +1,11 @@
 extends "res://src/Tools/Draw.gd"
 
 var _prev_mode := false
-var _last_position := Vector2.INF
+var _last_position := Vector2i(Vector2.INF)
 var _changed := false
 var _overwrite := false
 var _fill_inside := false
-var _draw_points := Array()
+var _draw_points := PackedVector2Array()
 var _old_spacing_mode := false  # needed to reset spacing mode in case we change it
 
 
@@ -90,7 +90,7 @@ func update_config() -> void:
 	$Spacing.value = _spacing
 
 
-func draw_start(pos: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	_old_spacing_mode = _spacing_mode
 	pos = snap_position(pos)
 	super.draw_start(pos)
@@ -108,7 +108,7 @@ func draw_start(pos: Vector2) -> void:
 	_changed = false
 	_drawer.color_op.changed = false
 	_drawer.color_op.overwrite = _overwrite
-	_draw_points = Array()
+	_draw_points = []
 
 	prepare_undo("Draw")
 	_drawer.reset()
@@ -131,7 +131,7 @@ func draw_start(pos: Vector2) -> void:
 	cursor_text = ""
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
@@ -157,7 +157,7 @@ func draw_move(pos: Vector2) -> void:
 			_draw_points.append(pos)
 
 
-func draw_end(pos: Vector2) -> void:
+func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_end(pos)
 	if _picking_color:
@@ -176,8 +176,8 @@ func draw_end(pos: Vector2) -> void:
 		if _fill_inside:
 			_draw_points.append(pos)
 			if _draw_points.size() > 3:
-				var v = Vector2()
-				var image_size = Global.current_project.size
+				var v := Vector2i()
+				var image_size := Global.current_project.size
 				for x in image_size.x:
 					v.x = x
 					for y in image_size.y:
@@ -195,7 +195,7 @@ func draw_end(pos: Vector2) -> void:
 	_spacing_mode = _old_spacing_mode
 
 
-func _draw_brush_image(image: Image, src_rect: Rect2, dst: Vector2) -> void:
+func _draw_brush_image(image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
 	_changed = true
 	var images := _get_selected_draw_images()
 	if _overwrite:

@@ -21,16 +21,16 @@ func _exit_tree() -> void:
 	_crop.tool_count -= 1
 
 
-func draw_start(pos: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	super.draw_start(pos)
-	_offset = Vector2i(pos) - _crop.rect.position
+	_offset = pos - _crop.rect.position
 	_start_pos = pos
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	super.draw_move(pos)
 	if _crop.locked_size:
-		_crop.rect.position = Vector2i(pos) - _offset
+		_crop.rect.position = pos - _offset
 	else:
 		if _crop.mode == CropRect.Mode.POSITION_SIZE and _locked_ratio:
 			var ratio: Vector2 = $"%Size".ratio
@@ -122,7 +122,7 @@ func _on_Top_value_changed(value: float) -> void:
 func _on_Bottom_value_changed(value: float) -> void:
 	if _syncing:
 		return
-	_crop.rect.position.y = min(value - 1, _crop.rect.position.y)
+	_crop.rect.position.y = mini(value - 1, _crop.rect.position.y)
 	_crop.rect.end.y = value
 	_crop.updated.emit()
 
@@ -131,7 +131,7 @@ func _on_Left_value_changed(value: float) -> void:
 	if _syncing:
 		return
 	var difference := value - _crop.rect.position.x
-	_crop.rect.size.x = max(1, _crop.rect.size.x - difference)
+	_crop.rect.size.x = maxi(1, _crop.rect.size.x - difference)
 	_crop.rect.position.x = value
 	_crop.updated.emit()
 
@@ -139,7 +139,7 @@ func _on_Left_value_changed(value: float) -> void:
 func _on_Right_value_changed(value: float) -> void:
 	if _syncing:
 		return
-	_crop.rect.position.x = min(value - 1, _crop.rect.position.x)
+	_crop.rect.position.x = mini(value - 1, _crop.rect.position.x)
 	_crop.rect.end.x = value
 	_crop.updated.emit()
 
@@ -149,7 +149,7 @@ func _on_RatioX_value_changed(value: float) -> void:
 		return
 	var prev_ratio: Vector2 = $"%Size".ratio
 	$"%Size".ratio.x = value
-	_crop.rect.size.x = round(max(1, _crop.rect.size.y / prev_ratio.y * value))
+	_crop.rect.size.x = roundi(maxf(1, _crop.rect.size.y / prev_ratio.y * value))
 	_crop.updated.emit()
 
 
@@ -158,7 +158,7 @@ func _on_RatioY_value_changed(value: float) -> void:
 		return
 	var prev_ratio: Vector2 = $"%Size".ratio
 	$"%Size".ratio.y = value
-	_crop.rect.size.y = round(max(1, _crop.rect.size.x / prev_ratio.x * value))
+	_crop.rect.size.y = roundi(maxf(1, _crop.rect.size.x / prev_ratio.x * value))
 	_crop.updated.emit()
 
 

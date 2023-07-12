@@ -5,17 +5,17 @@ var is_moving = false
 var kname: String
 var tool_slot: Tools.Slot = null
 var cursor_text := ""
-var _cursor := Vector2.INF
+var _cursor := Vector2i(Vector2.INF)
 
-var _draw_cache: PackedVector2Array = []  # for storing already drawn pixels
+var _draw_cache: Array[Vector2i] = []  # for storing already drawn pixels
 @warning_ignore("unused_private_class_variable") var _for_frame := 0  # cache for which frame?
 
 # Only use "_spacing_mode" and "_spacing" variables (the others are set automatically)
 # The _spacing_mode and _spacing values are to be CHANGED only in the tool scripts (e.g Pencil.gd)
 var _spacing_mode := false  # Enables spacing (continuous gaps between two strokes)
-var _spacing := Vector2.ZERO  # Spacing between two strokes
-var _stroke_dimensions := Vector2.ONE  # 2d vector containing _brush_size from Draw.gd
-var _spacing_offset := Vector2.ZERO  # The "INITIAL" error between position and position.snapped()
+var _spacing := Vector2i.ZERO  # Spacing between two strokes
+var _stroke_dimensions := Vector2i.ONE  # 2d vector containing _brush_size from Draw.gd
+var _spacing_offset := Vector2i.ZERO  # The "INITIAL" error between position and position.snapped()
 @onready var color_rect: ColorRect = $ColorRect
 
 
@@ -53,37 +53,37 @@ func update_config() -> void:
 	pass
 
 
-func draw_start(pos: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	_draw_cache = []
 	is_moving = true
 	Global.current_project.can_undo = false
 	_spacing_offset = _get_spacing_offset(pos)
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	# This can happen if the user switches between tools with a shortcut
 	# while using another tool
 	if !is_moving:
 		draw_start(pos)
 
 
-func draw_end(_pos: Vector2) -> void:
+func draw_end(_pos: Vector2i) -> void:
 	is_moving = false
 	_draw_cache = []
 	Global.current_project.can_undo = true
 
 
-func cursor_move(pos: Vector2) -> void:
+func cursor_move(pos: Vector2i) -> void:
 	_cursor = pos
 	if _spacing_mode and is_moving:
 		_cursor = get_spacing_position(pos)
 
 
-func get_spacing_position(pos: Vector2) -> Vector2:
+func get_spacing_position(pos: Vector2i) -> Vector2i:
 	# spacing_factor is the distance the mouse needs to get snapped by in order
 	# to keep a space "_spacing" between two strokes of dimensions "_stroke_dimensions"
 	var spacing_factor := _stroke_dimensions + _spacing
-	var snap_pos := pos.snapped(spacing_factor) + _spacing_offset
+	var snap_pos := Vector2(pos.snapped(spacing_factor) + _spacing_offset)
 
 	# keeping snap_pos as is would have been fine but this adds extra accuracy as to
 	# which snap point (from the list below) is closest to mouse and occupy THAT point
@@ -101,11 +101,11 @@ func get_spacing_position(pos: Vector2) -> Vector2:
 		if vec.distance_to(pos) < snap_pos.distance_to(pos):
 			snap_pos = vec
 
-	return snap_pos
+	return Vector2i(snap_pos)
 
 
-func _get_spacing_offset(pos: Vector2) -> Vector2:
-	var spacing_factor = _stroke_dimensions + _spacing  # spacing_factor is explained above
+func _get_spacing_offset(pos: Vector2i) -> Vector2i:
+	var spacing_factor := _stroke_dimensions + _spacing  # spacing_factor is explained above
 	# since we just started drawing, the "position" is our intended location so the error
 	# (_spacing_offset) is measured by subtracting both quantities
 	return pos - pos.snapped(spacing_factor)
@@ -125,7 +125,7 @@ func snap_position(pos: Vector2) -> Vector2:
 	var snapping_distance := Global.snapping_distance / Global.camera.zoom.x
 	if Global.snap_to_rectangular_grid:
 		var grid_pos := pos.snapped(Global.grid_size)
-		grid_pos += Global.grid_offset
+		grid_pos += Vector2(Global.grid_offset)
 		# keeping grid_pos as is would have been fine but this adds extra accuracy as to
 		# which snap point (from the list below) is closest to mouse and occupy THAT point
 		var t_l := grid_pos + Vector2(-Global.grid_size.x, -Global.grid_size.y)
@@ -136,7 +136,7 @@ func snap_position(pos: Vector2) -> Vector2:
 		var m_r := grid_pos + Vector2(Global.grid_size.x, 0)
 		var b_l := grid_pos + Vector2(-Global.grid_size.x, Global.grid_size.y)
 		var b_c := grid_pos + Vector2(0, Global.grid_size.y)
-		var b_r := grid_pos + Global.grid_size
+		var b_r := grid_pos + Vector2(Global.grid_size)
 		var vec_arr: PackedVector2Array = [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
 		for vec in vec_arr:
 			if vec.distance_to(pos) < grid_pos.distance_to(pos):
@@ -292,7 +292,7 @@ func _create_polylines(bitmap: BitMap) -> Array:
 	return lines
 
 
-func _fill_bitmap_with_points(points: Array, bitmap_size: Vector2i) -> BitMap:
+func _fill_bitmap_with_points(points: Array[Vector2i], bitmap_size: Vector2i) -> BitMap:
 	var bitmap := BitMap.new()
 	bitmap.create(bitmap_size)
 
