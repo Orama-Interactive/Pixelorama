@@ -159,7 +159,9 @@ func draw_preview() -> void:
 		for point in points:
 			indicator.set_bitv(point, 1)
 
-		var transform_pos := rect.position - t_offsetv + Vector2i((Vector2(0.5, 0.5) * (t_offset - 1)).ceil())
+		var transform_pos := (
+			rect.position - t_offsetv + Vector2i((Vector2(0.5, 0.5) * (t_offset - 1)).ceil())
+		)
 		canvas.draw_set_transform(transform_pos, canvas.rotation, canvas.scale)
 
 		for line in _create_polylines(indicator):

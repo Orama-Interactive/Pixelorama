@@ -148,9 +148,7 @@ func _input(event: InputEvent) -> void:
 						temp_rect.end.y = pos
 				rect_aspect_ratio = abs(temp_rect.size.y / temp_rect.size.x)
 				temp_rect_size = temp_rect.size
-				temp_rect_pivot = (
-					temp_rect.position + ((temp_rect.end - temp_rect.position) / 2)
-				)
+				temp_rect_pivot = (temp_rect.position + ((temp_rect.end - temp_rect.position) / 2))
 
 		elif dragged_gizmo:  # Mouse released, deselect gizmo
 			Global.has_focus = true
