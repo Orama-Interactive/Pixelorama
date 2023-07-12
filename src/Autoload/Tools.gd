@@ -194,7 +194,7 @@ var _right_tools_per_layer_type := {
 }
 var _tool_buttons: Node
 var _active_button := -1
-var _last_position := Vector2.INF
+var _last_position := Vector2i(Vector2.INF)
 
 
 class Tool:
@@ -457,7 +457,7 @@ func draw_preview() -> void:
 	_slots[MOUSE_BUTTON_RIGHT].tool_node.draw_preview()
 
 
-func handle_draw(position: Vector2, event: InputEvent) -> void:
+func handle_draw(position: Vector2i, event: InputEvent) -> void:
 	if not (Global.can_draw and Global.has_focus):
 		return
 
@@ -501,7 +501,7 @@ func handle_draw(position: Vector2, event: InputEvent) -> void:
 			pen_pressure = 1.0
 		if dynamics_alpha != Dynamics.VELOCITY and dynamics_size != Dynamics.VELOCITY:
 			mouse_velocity = 1.0
-		if not position.is_equal_approx(_last_position):
+		if not position == _last_position:
 			_last_position = position
 			_slots[MOUSE_BUTTON_LEFT].tool_node.cursor_move(position)
 			_slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_move(position)

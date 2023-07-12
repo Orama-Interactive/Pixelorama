@@ -5,7 +5,7 @@ var _can_start_timer := true
 var _hovering: Cel3DObject = null
 var _dragging := false
 var _has_been_dragged := false
-var _prev_mouse_pos := Vector2.ZERO
+var _prev_mouse_pos := Vector2i.ZERO
 var _old_cel_image = null
 var _checker_update_qued := false
 var _object_names := {
@@ -122,7 +122,7 @@ func _ready() -> void:
 			node.text_changed.connect(_object_property_text_changed.bind(prop))
 
 
-func draw_start(pos: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	var project: Project = Global.current_project
 	if not project.get_current_cel() is Cel3D:
 		return
@@ -154,7 +154,7 @@ func draw_start(pos: Vector2) -> void:
 				_prev_mouse_pos = pos
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
 	var camera: Camera3D = _cel.camera
@@ -167,7 +167,7 @@ func draw_move(pos: Vector2) -> void:
 	sprite_changed_this_frame()
 
 
-func draw_end(_position: Vector2) -> void:
+func draw_end(_position: Vector2i) -> void:
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return
 	_dragging = false
@@ -178,7 +178,7 @@ func draw_end(_position: Vector2) -> void:
 	sprite_changed_this_frame()
 
 
-func cursor_move(pos: Vector2) -> void:
+func cursor_move(pos: Vector2i) -> void:
 	super.cursor_move(pos)
 	if not Global.current_project.get_current_cel() is Cel3D:
 		return

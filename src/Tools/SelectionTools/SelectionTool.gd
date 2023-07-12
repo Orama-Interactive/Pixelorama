@@ -6,8 +6,8 @@ enum Mode { DEFAULT, ADD, SUBTRACT, INTERSECT }
 var undo_data: Dictionary
 var _move := false
 var _move_content := true
-var _start_pos := Vector2.ZERO
-var _offset := Vector2.ZERO
+var _start_pos := Vector2i.ZERO
+var _offset := Vector2i.ZERO
 # For tools such as the Polygon selection tool where you have to
 # click multiple times to create a selection
 var _ongoing_selection := false
@@ -61,7 +61,7 @@ func update_config() -> void:
 
 func set_spinbox_values() -> void:
 	_skip_slider_logic = true
-	var select_rect: Rect2 = selection_node.big_bounding_rectangle
+	var select_rect: Rect2i = selection_node.big_bounding_rectangle
 	var has_selection := select_rect.has_area()
 	if not has_selection:
 		size_sliders.press_ratio_button(false)
@@ -72,7 +72,7 @@ func set_spinbox_values() -> void:
 	_skip_slider_logic = false
 
 
-func draw_start(pos: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
 	if selection_node.arrow_key_move:
@@ -152,7 +152,7 @@ func draw_start(pos: Vector2) -> void:
 	_content_transformation_check = selection_node.is_moving_content
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if selection_node.arrow_key_move:
@@ -165,21 +165,21 @@ func draw_move(pos: Vector2) -> void:
 		return
 
 	if Input.is_action_pressed("transform_snap_axis"):  # Snap to axis
-		var angle := pos.angle_to_point(_start_pos)
+		var angle := Vector2(pos).angle_to_point(_start_pos)
 		if abs(angle) <= PI / 4 or abs(angle) >= 3 * PI / 4:
 			pos.y = _start_pos.y
 		else:
 			pos.x = _start_pos.x
 	if Input.is_action_pressed("transform_snap_grid"):
 		_offset = _offset.snapped(Global.grid_size)
-		var prev_pos: Vector2 = selection_node.big_bounding_rectangle.position
+		var prev_pos: Vector2i = selection_node.big_bounding_rectangle.position
 		selection_node.big_bounding_rectangle.position = prev_pos.snapped(Global.grid_size)
-		selection_node.marching_ants_outline.offset += (
+		selection_node.marching_ants_outline.offset += Vector2(
 			selection_node.big_bounding_rectangle.position - prev_pos
 		)
 		pos = pos.snapped(Global.grid_size)
 		var grid_offset := Global.grid_offset
-		grid_offset = Vector2(
+		grid_offset = Vector2i(
 			fmod(grid_offset.x, Global.grid_size.x), fmod(grid_offset.y, Global.grid_size.y)
 		)
 		pos += grid_offset
@@ -193,7 +193,7 @@ func draw_move(pos: Vector2) -> void:
 	_set_cursor_text(selection_node.big_bounding_rectangle)
 
 
-func draw_end(pos: Vector2) -> void:
+func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_end(pos)
 	if selection_node.arrow_key_move:
@@ -208,7 +208,7 @@ func draw_end(pos: Vector2) -> void:
 	cursor_text = ""
 
 
-func apply_selection(_position: Vector2) -> void:
+func apply_selection(_position: Vector2i) -> void:
 	# if a shortcut is activated then that will be obeyed instead
 	match _mode_selected:
 		Mode.ADD:
@@ -227,7 +227,7 @@ func _on_Modes_item_selected(index: int) -> void:
 	save_config()
 
 
-func _set_cursor_text(rect: Rect2) -> void:
+func _set_cursor_text(rect: Rect2i) -> void:
 	cursor_text = "%s, %s" % [rect.position.x, rect.position.y]
 	cursor_text += " -> %s, %s" % [rect.end.x - 1, rect.end.y - 1]
 	cursor_text += " (%s, %s)" % [rect.size.x, rect.size.y]

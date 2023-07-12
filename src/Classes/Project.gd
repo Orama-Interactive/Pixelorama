@@ -621,7 +621,7 @@ func is_empty() -> bool:
 
 
 func can_pixel_get_drawn(
-	pixel: Vector2,
+	pixel: Vector2i,
 	image: SelectionMap = selection_map,
 	selection_position: Vector2 = Global.canvas.selection.big_bounding_rectangle.position
 ) -> bool:

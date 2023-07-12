@@ -78,7 +78,7 @@ func _on_PatternType_pressed() -> void:
 	var popup: Popup = Global.patterns_popup
 	if !popup.pattern_selected.is_connected(_on_Pattern_selected):
 		popup.pattern_selected.connect(_on_Pattern_selected.bind(), CONNECT_ONE_SHOT)
-	popup.popup(Rect2($FillPattern/Type.global_position, Vector2(226, 72)))
+	popup.popup(Rect2i($FillPattern/Type.global_position, Vector2i(226, 72)))
 
 
 func _on_Pattern_selected(pattern: Patterns.Pattern) -> void:
@@ -148,7 +148,7 @@ func update_pattern() -> void:
 	$FillPattern/OffsetY.max_value = pattern_size.y - 1
 
 
-func draw_start(pos: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	super.draw_start(pos)
 	if Input.is_action_pressed("draw_color_picker"):
 		_pick_color(pos)
@@ -157,7 +157,7 @@ func draw_start(pos: Vector2) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	if (
 		!Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn()
-		or !Rect2(Vector2.ZERO, Global.current_project.size).has_point(pos)
+		or !Rect2i(Vector2i.ZERO, Global.current_project.size).has_point(pos)
 	):
 		return
 	if Global.current_project.has_selection and not Global.current_project.can_pixel_get_drawn(pos):
@@ -173,15 +173,15 @@ func draw_start(pos: Vector2) -> void:
 	commit_undo("Draw", undo_data)
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	super.draw_move(pos)
 
 
-func draw_end(pos: Vector2) -> void:
+func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
 
 
-func fill_in_color(pos: Vector2) -> void:
+func fill_in_color(pos: Vector2i) -> void:
 	var project: Project = Global.current_project
 	var images := _get_selected_draw_images()
 	for image in images:
@@ -221,34 +221,35 @@ func fill_in_color(pos: Vector2) -> void:
 			"has_pattern": true if _fill_with == FillWith.PATTERN else false
 		}
 		if is_instance_valid(pattern_tex):
-			params["pattern_size"] = pattern_tex.get_size()
+			var pattern_size := Vector2i(pattern_tex.get_size())
+			params["pattern_size"] = pattern_size
 			# pixel offset converted to pattern uv offset
 			params["pattern_uv_offset"] = (
-				Vector2.ONE / pattern_tex.get_size() * Vector2(_offset_x, _offset_y)
+				Vector2i.ONE / pattern_size * Vector2i(_offset_x, _offset_y)
 			)
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(image, COLOR_REPLACE_SHADER, params, project.size)
 
 
-func fill_in_area(pos: Vector2) -> void:
+func fill_in_area(pos: Vector2i) -> void:
 	var project: Project = Global.current_project
 	_flood_fill(pos)
 
 	# Handle Mirroring
-	var mirror_x = project.x_symmetry_point - pos.x
-	var mirror_y = project.y_symmetry_point - pos.y
+	var mirror_x := project.x_symmetry_point - pos.x
+	var mirror_y := project.y_symmetry_point - pos.y
 	var mirror_x_inside: bool
 	var mirror_y_inside: bool
 
-	mirror_x_inside = project.can_pixel_get_drawn(Vector2(mirror_x, pos.y))
-	mirror_y_inside = project.can_pixel_get_drawn(Vector2(pos.x, mirror_y))
+	mirror_x_inside = project.can_pixel_get_drawn(Vector2i(mirror_x, pos.y))
+	mirror_y_inside = project.can_pixel_get_drawn(Vector2i(pos.x, mirror_y))
 
 	if Tools.horizontal_mirror and mirror_x_inside:
-		_flood_fill(Vector2(mirror_x, pos.y))
+		_flood_fill(Vector2i(mirror_x, pos.y))
 		if Tools.vertical_mirror and mirror_y_inside:
-			_flood_fill(Vector2(mirror_x, mirror_y))
+			_flood_fill(Vector2i(mirror_x, mirror_y))
 	if Tools.vertical_mirror and mirror_y_inside:
-		_flood_fill(Vector2(pos.x, mirror_y))
+		_flood_fill(Vector2i(pos.x, mirror_y))
 
 
 func fill_in_selection() -> void:
@@ -258,7 +259,7 @@ func fill_in_selection() -> void:
 		if project.has_selection:
 			var filler := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 			filler.fill(tool_slot.color)
-			var rect: Rect2 = Global.canvas.selection.big_bounding_rectangle
+			var rect: Rect2i = Global.canvas.selection.big_bounding_rectangle
 			var selection_map_copy := SelectionMap.new()
 			selection_map_copy.copy_from(project.selection_map)
 			# In case the selection map is bigger than the canvas
@@ -293,11 +294,13 @@ func fill_in_selection() -> void:
 			"selection": selection_tex,
 			"size": project.size,
 			"pattern": pattern_tex,
-			"pattern_size": pattern_tex.get_size(),
-			# pixel offset converted to pattern uv offset
-			"pattern_uv_offset":
-			Vector2.ONE / pattern_tex.get_size() * Vector2(_offset_x, _offset_y),
 		}
+		if is_instance_valid(pattern_tex):
+			params["pattern_size"] = pattern_size
+			# pixel offset converted to pattern uv offset
+			params["pattern_uv_offset"] = (
+				Vector2i.ONE / pattern_size * Vector2i(_offset_x, _offset_y)
+			)
 		for image in images:
 			var gen := ShaderImageEffect.new()
 			gen.generate_image(image, PATTERN_FILL_SHADER, params, project.size)
@@ -312,30 +315,30 @@ func _add_new_segment(y := 0) -> void:
 ## list of segments filled. Returns the first x coordinate after the part of the
 ## line that has been filled.
 func _flood_line_around_point(
-	pos: Vector2, project: Project, image: Image, src_color: Color
+	pos: Vector2i, project: Project, image: Image, src_color: Color
 ) -> int:
 	# this method is called by `_flood_fill` after the required data structures
 	# have been initialized
 	if not image.get_pixelv(pos).is_equal_approx(src_color):
-		return int(pos.x) + 1
-	var west: Vector2 = pos
-	var east: Vector2 = pos
+		return pos.x + 1
+	var west := pos
+	var east := pos
 	if project.has_selection:
 		while (
 			project.can_pixel_get_drawn(west) && image.get_pixelv(west).is_equal_approx(src_color)
 		):
-			west += Vector2.LEFT
+			west += Vector2i.LEFT
 		while (
 			project.can_pixel_get_drawn(east) && image.get_pixelv(east).is_equal_approx(src_color)
 		):
-			east += Vector2.RIGHT
+			east += Vector2i.RIGHT
 	else:
 		while west.x >= 0 && image.get_pixelv(west).is_equal_approx(src_color):
-			west += Vector2.LEFT
+			west += Vector2i.LEFT
 		while east.x < project.size.x && image.get_pixelv(east).is_equal_approx(src_color):
-			east += Vector2.RIGHT
+			east += Vector2i.RIGHT
 	# Make a note of the stuff we processed
-	var c := int(pos.y)
+	var c := pos.y
 	var segment := _allegro_flood_segments[c]
 	# we may have already processed some segments on this y coordinate
 	if segment.flooding:
@@ -368,7 +371,7 @@ func _flood_line_around_point(
 		_allegro_image_segments.append(segment)
 	# we know the point just east of the segment is not part of a segment that should be
 	# processed, else it would be part of this segment
-	return int(east.x) + 1
+	return east.x + 1
 
 
 func _check_flooded_segment(
@@ -385,13 +388,13 @@ func _check_flooded_segment(
 				break
 			c = segment.next
 			if c == 0:  # couldn't find a valid segment, so we draw a new one
-				left = _flood_line_around_point(Vector2(left, y), project, image, src_color)
+				left = _flood_line_around_point(Vector2i(left, y), project, image, src_color)
 				ret = true
 				break
 	return ret
 
 
-func _flood_fill(pos: Vector2) -> void:
+func _flood_fill(pos: Vector2i) -> void:
 	# implements the floodfill routine by Shawn Hargreaves
 	# from https://www1.udel.edu/CIS/software/dist/allegro-4.2.1/src/flood.c
 	var project: Project = Global.current_project
@@ -417,7 +420,7 @@ func _flood_fill(pos: Vector2) -> void:
 
 
 func _compute_segments_for_image(
-	pos: Vector2, project: Project, image: Image, src_color: Color
+	pos: Vector2i, project: Project, image: Image, src_color: Color
 ) -> void:
 	# initially allocate at least 1 segment per line of image
 	for j in image.get_height():
@@ -465,9 +468,9 @@ func _color_segments(image: Image) -> void:
 				_set_pixel_pattern(image, px, p.y, pattern_size)
 
 
-func _set_pixel_pattern(image: Image, x: int, y: int, pattern_size: Vector2) -> void:
-	var px := int(x + _offset_x) % int(pattern_size.x)
-	var py := int(y + _offset_y) % int(pattern_size.y)
+func _set_pixel_pattern(image: Image, x: int, y: int, pattern_size: Vector2i) -> void:
+	var px := (x + _offset_x) % pattern_size.x
+	var py := (y + _offset_y) % pattern_size.y
 	var pc := _pattern.image.get_pixel(px, py)
 	image.set_pixel(x, y, pc)
 
@@ -500,7 +503,7 @@ func _get_undo_data() -> Dictionary:
 	return data
 
 
-func _pick_color(pos: Vector2) -> void:
+func _pick_color(pos: Vector2i) -> void:
 	var project: Project = Global.current_project
 	pos = project.tiles.get_canon_position(pos)
 

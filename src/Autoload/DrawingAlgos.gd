@@ -12,12 +12,12 @@ func _ready() -> void:
 
 
 # Algorithm based on http://members.chello.at/easyfilter/bresenham.html
-func get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
-	var array := []
-	var x0 := int(pos.x)
-	var x1 := pos.x + int(size.x - 1)
-	var y0 := int(pos.y)
-	var y1 := int(pos.y) + int(size.y - 1)
+func get_ellipse_points(pos: Vector2i, size: Vector2i) -> Array[Vector2i]:
+	var array: Array[Vector2i]= []
+	var x0 := pos.x
+	var x1 := pos.x + (size.x - 1)
+	var y0 := pos.y
+	var y1 := pos.y + (size.y - 1)
 	var a := absi(x1 - x0)
 	var b := absi(y1 - x0)
 	var b1 := b & 1
@@ -39,10 +39,10 @@ func get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
 	b1 = 8 * b * b
 
 	while x0 <= x1:
-		var v1 := Vector2(x1, y0)
-		var v2 := Vector2(x0, y0)
-		var v3 := Vector2(x0, y1)
-		var v4 := Vector2(x1, y1)
+		var v1 := Vector2i(x1, y0)
+		var v2 := Vector2i(x0, y0)
+		var v3 := Vector2i(x0, y1)
+		var v4 := Vector2i(x1, y1)
 		array.append(v1)
 		array.append(v2)
 		array.append(v3)
@@ -62,10 +62,10 @@ func get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
 			err += dx
 
 	while y0 - y1 < b:
-		var v1 := Vector2(x0 - 1, y0)
-		var v2 := Vector2(x1 + 1, y0)
-		var v3 := Vector2(x0 - 1, y1)
-		var v4 := Vector2(x1 + 1, y1)
+		var v1 := Vector2i(x0 - 1, y0)
+		var v2 := Vector2i(x1 + 1, y0)
+		var v3 := Vector2i(x0 - 1, y1)
+		var v4 := Vector2i(x1 + 1, y1)
 		array.append(v1)
 		array.append(v2)
 		array.append(v3)
@@ -76,16 +76,16 @@ func get_ellipse_points(pos: Vector2, size: Vector2) -> Array:
 	return array
 
 
-func get_ellipse_points_filled(pos: Vector2, size: Vector2, thickness := 1) -> PackedVector2Array:
-	var offsetted_size := size + Vector2.ONE * (thickness - 1)
+func get_ellipse_points_filled(pos: Vector2i, size: Vector2i, thickness := 1) -> Array[Vector2i]:
+	var offsetted_size := size + Vector2i.ONE * (thickness - 1)
 	var border := get_ellipse_points(pos, offsetted_size)
-	var filling := []
+	var filling: Array[Vector2i] = []
 
-	for x in range(1, ceili(offsetted_size.x / 2)):
+	for x in range(1, ceili(offsetted_size.x / 2.0)):
 		var fill := false
 		var prev_is_true := false
-		for y in range(0, ceili(offsetted_size.y / 2)):
-			var top_l_p := Vector2(x, y)
+		for y in range(0, ceili(offsetted_size.y / 2.0)):
+			var top_l_p := Vector2i(x, y)
 			var bit := border.has(pos + top_l_p)
 
 			if bit and not fill:
@@ -94,9 +94,9 @@ func get_ellipse_points_filled(pos: Vector2, size: Vector2, thickness := 1) -> P
 
 			if not bit and (fill or prev_is_true):
 				filling.append(pos + top_l_p)
-				filling.append(pos + Vector2(x, offsetted_size.y - y - 1))
-				filling.append(pos + Vector2(offsetted_size.x - x - 1, y))
-				filling.append(pos + Vector2(offsetted_size.x - x - 1, offsetted_size.y - y - 1))
+				filling.append(pos + Vector2i(x, offsetted_size.y - y - 1))
+				filling.append(pos + Vector2i(offsetted_size.x - x - 1, y))
+				filling.append(pos + Vector2i(offsetted_size.x - x - 1, offsetted_size.y - y - 1))
 
 				if prev_is_true:
 					fill = true
@@ -104,7 +104,7 @@ func get_ellipse_points_filled(pos: Vector2, size: Vector2, thickness := 1) -> P
 			elif bit and fill:
 				break
 
-	return PackedVector2Array(border + filling)
+	return border + filling
 
 
 func scale_3x(sprite: Image, tol: float = 50) -> Image:

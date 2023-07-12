@@ -6,10 +6,10 @@ var _indicator := BitMap.new()
 var _polylines := []
 var _brush_image := Image.new()
 var _brush_texture: ImageTexture
-var _circle_tool_shortcut: PackedVector2Array
+var _circle_tool_shortcut: Array[Vector2i]
 
 var _last_position := Vector2.INF
-var _draw_points := []
+var _draw_points: Array[Vector2i] = []
 
 
 func get_config() -> Dictionary:
@@ -32,7 +32,7 @@ func update_config() -> void:
 	update_brush()
 
 
-func draw_start(pos: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
 	if !_move:
@@ -40,7 +40,7 @@ func draw_start(pos: Vector2) -> void:
 		_last_position = pos
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
 	pos = snap_position(pos)
@@ -52,7 +52,7 @@ func draw_move(pos: Vector2) -> void:
 		_offset = pos
 
 
-func draw_end(pos: Vector2) -> void:
+func draw_end(pos: Vector2i) -> void:
 	if selection_node.arrow_key_move:
 		return
 	pos = snap_position(pos)
@@ -135,7 +135,7 @@ func apply_selection(pos) -> void:
 	_last_position = Vector2.INF
 
 
-func paint_selection(selection_map: SelectionMap, points: PackedVector2Array) -> void:
+func paint_selection(selection_map: SelectionMap, points: Array[Vector2i]) -> void:
 	var project: Project = Global.current_project
 	var selection_size := selection_map.get_size()
 	for point in points:
@@ -150,7 +150,7 @@ func paint_selection(selection_map: SelectionMap, points: PackedVector2Array) ->
 
 # Bresenham's Algorithm
 # Thanks to https://godotengine.org/qa/35276/tile-based-line-drawing-algorithm-efficiency
-func append_gap(start: Vector2, end: Vector2) -> void:
+func append_gap(start: Vector2i, end: Vector2i) -> void:
 	var dx := absi(end.x - start.x)
 	var dy := -absi(end.y - start.y)
 	var err := dx + dy
@@ -167,26 +167,26 @@ func append_gap(start: Vector2, end: Vector2) -> void:
 		if e2 <= dx:
 			err += dx
 			y += sy
-		_draw_points.append_array(draw_tool(Vector2(x, y)))
+		_draw_points.append_array(draw_tool(Vector2i(x, y)))
 
 
-func mirror_array(array: Array, h: bool, v: bool) -> Array:
-	var new_array := []
+func mirror_array(array: Array[Vector2i], h: bool, v: bool) -> Array[Vector2i]:
+	var new_array: Array[Vector2i] = []
 	var project: Project = Global.current_project
 	for point in array:
 		if h and v:
 			new_array.append(
-				Vector2(project.x_symmetry_point - point.x, project.y_symmetry_point - point.y)
+				Vector2i(project.x_symmetry_point - point.x, project.y_symmetry_point - point.y)
 			)
 		elif h:
-			new_array.append(Vector2(project.x_symmetry_point - point.x, point.y))
+			new_array.append(Vector2i(project.x_symmetry_point - point.x, point.y))
 		elif v:
-			new_array.append(Vector2(point.x, project.y_symmetry_point - point.y))
+			new_array.append(Vector2i(point.x, project.y_symmetry_point - point.y))
 
 	return new_array
 
 
-func draw_tool(pos: Vector2) -> PackedVector2Array:
+func draw_tool(pos: Vector2i) -> Array[Vector2i]:
 	_prepare_tool()
 	return _draw_tool(pos)
 
@@ -206,13 +206,13 @@ func _prepare_circle_tool(fill: bool) -> void:
 	var diameter := _brush_size * 2 + 1
 	for n in range(0, diameter):
 		for m in range(0, diameter):
-			if circle_tool_map.get_bitv(Vector2(m, n)):
-				_circle_tool_shortcut.append(Vector2(m - _brush_size, n - _brush_size))
+			if circle_tool_map.get_bitv(Vector2i(m, n)):
+				_circle_tool_shortcut.append(Vector2i(m - _brush_size, n - _brush_size))
 
 
 # Make sure to always have invoked _prepare_tool() before this. This computes the coordinates to be
 # drawn if it can (except for the generic brush, when it's actually drawing them)
-func _draw_tool(pos: Vector2) -> PackedVector2Array:
+func _draw_tool(pos: Vector2i) -> Array[Vector2i]:
 	match _brush.type:
 		Brushes.PIXEL:
 			return _compute_draw_tool_pixel(pos)
@@ -224,25 +224,25 @@ func _draw_tool(pos: Vector2) -> PackedVector2Array:
 			return _compute_draw_tool_brush(pos)
 
 
-func _compute_draw_tool_pixel(pos: Vector2) -> PackedVector2Array:
-	var result := PackedVector2Array()
-	var start := pos - Vector2.ONE * (_brush_size >> 1)
-	var end := start + Vector2.ONE * _brush_size
+func _compute_draw_tool_pixel(pos: Vector2i) -> Array[Vector2i]:
+	var result: Array[Vector2i] = []
+	var start := pos - Vector2i.ONE * (_brush_size >> 1)
+	var end := start + Vector2i.ONE * _brush_size
 	for y in range(start.y, end.y):
 		for x in range(start.x, end.x):
-			if !_draw_points.has(Vector2(x, y)):
-				result.append(Vector2(x, y))
+			if !_draw_points.has(Vector2i(x, y)):
+				result.append(Vector2i(x, y))
 	return result
 
 
 # Compute the array of coordinates that should be drawn
-func _compute_draw_tool_circle(pos: Vector2, fill := false) -> PackedVector2Array:
-	var brush_size := Vector2(_brush_size, _brush_size)
-	var offset_pos := pos - (brush_size / 2).floor()
+func _compute_draw_tool_circle(pos: Vector2i, fill := false) -> Array[Vector2i]:
+	var brush_size := Vector2i(_brush_size, _brush_size)
+	var offset_pos := pos - (brush_size / 2)
 	if _circle_tool_shortcut:
 		return _draw_tool_circle_from_map(pos)
 
-	var result := PackedVector2Array()
+	var result: Array[Vector2i] = []
 	if fill:
 		result = DrawingAlgos.get_ellipse_points_filled(offset_pos, brush_size)
 	else:
@@ -250,21 +250,21 @@ func _compute_draw_tool_circle(pos: Vector2, fill := false) -> PackedVector2Arra
 	return result
 
 
-func _draw_tool_circle_from_map(pos: Vector2) -> PackedVector2Array:
-	var result := PackedVector2Array()
+func _draw_tool_circle_from_map(pos: Vector2i) -> Array[Vector2i]:
+	var result: Array[Vector2i] = []
 	for displacement in _circle_tool_shortcut:
 		result.append(pos + displacement)
 	return result
 
 
-func _compute_draw_tool_brush(pos: Vector2i) -> PackedVector2Array:
-	var result := PackedVector2Array()
+func _compute_draw_tool_brush(pos: Vector2i) -> Array[Vector2i]:
+	var result:Array[Vector2i] = []
 	var brush_mask := BitMap.new()
 	pos = pos - (_indicator.get_size() / 2)
 	brush_mask.create_from_image_alpha(_brush_image, 0.0)
 	for x in brush_mask.get_size().x:
 		for y in brush_mask.get_size().y:
-			if !_draw_points.has(Vector2(x, y)):
+			if !_draw_points.has(Vector2i(x, y)):
 				if brush_mask.get_bitv(Vector2i(x, y)):
 					result.append(pos + Vector2i(x, y))
 
@@ -275,11 +275,11 @@ func _on_BrushType_pressed() -> void:
 	if not Global.brushes_popup.brush_selected.is_connected(_on_Brush_selected):
 		Global.brushes_popup.brush_selected.connect(_on_Brush_selected, CONNECT_ONE_SHOT)
 	# Now we set position and columns
-	var tool_option_container = get_node("../../")
-	var brush_button = $Brush/Type
-	var pop_position = brush_button.global_position + Vector2(0, brush_button.size.y)
-	var size_x = tool_option_container.size.x
-	var size_y = tool_option_container.size.y - $Brush.position.y - $Brush.size.y
+	var tool_option_container := get_node("../../") as Control
+	var brush_button := $Brush/Type as Button
+	var pop_position := Vector2i(brush_button.global_position) + Vector2i(0, brush_button.size.y)
+	var size_x := tool_option_container.size.x
+	var size_y: float = tool_option_container.size.y - $Brush.position.y - $Brush.size.y
 	var columns = int(size_x / 36) - 1  # 36 is the size of BrushButton.tscn
 	var categories = Global.brushes_popup.get_node("Background/Brushes/Categories")
 	for child in categories.get_children():
@@ -353,15 +353,15 @@ func _create_brush_indicator() -> BitMap:
 
 func _create_pixel_indicator(brush_size: int) -> BitMap:
 	var bitmap := BitMap.new()
-	bitmap.create(Vector2.ONE * brush_size)
-	bitmap.set_bit_rect(Rect2(Vector2.ZERO, Vector2.ONE * size), true)
+	bitmap.create(Vector2i.ONE * brush_size)
+	bitmap.set_bit_rect(Rect2i(Vector2i.ZERO, Vector2i.ONE * brush_size), true)
 	return bitmap
 
 
 func _create_circle_indicator(brush_size: int, fill := false) -> BitMap:
-	_circle_tool_shortcut = PackedVector2Array()
-	var brush_size_v2 := Vector2(brush_size, brush_size)
-	var diameter := brush_size_v2 * 2 + Vector2.ONE
+	_circle_tool_shortcut = []
+	var brush_size_v2 := Vector2i(brush_size, brush_size)
+	var diameter := brush_size_v2 * 2 + Vector2i.ONE
 	return _fill_bitmap_with_points(_compute_draw_tool_circle(brush_size_v2, fill), diameter)
 
 
@@ -373,7 +373,7 @@ func _create_image_indicator(image: Image) -> BitMap:
 
 func draw_indicator(left: bool) -> void:
 	var color := Global.left_tool_color if left else Global.right_tool_color
-	draw_indicator_at(_cursor, Vector2.ZERO, color)
+	draw_indicator_at(_cursor, Vector2i.ZERO, color)
 
 
 func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:

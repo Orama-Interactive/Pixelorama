@@ -1,8 +1,8 @@
 extends BaseTool
 
 var _undo_data := {}
-var _start_pos: Vector2
-var _offset: Vector2
+var _start_pos: Vector2i
+var _offset: Vector2i
 
 # Used to check if the state of content transformation has been changed
 # while draw_move() is being called. For example, pressing Enter while still moving content
@@ -13,7 +13,7 @@ var _snap_to_grid := false  # Mouse Click + Ctrl
 
 
 func _input(event: InputEvent) -> void:
-	if _start_pos == Vector2.INF:
+	if _start_pos == Vector2i(Vector2.INF):
 		return
 	if event.is_action_pressed("transform_snap_grid"):
 		_snap_to_grid = true
@@ -35,7 +35,7 @@ func _input(event: InputEvent) -> void:
 		_snap_to_grid = false
 
 
-func draw_start(pos: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	super.draw_start(pos)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
@@ -47,7 +47,7 @@ func draw_start(pos: Vector2) -> void:
 	_content_transformation_check = selection_node.is_moving_content
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	super.draw_move(pos)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
@@ -64,12 +64,12 @@ func draw_move(pos: Vector2) -> void:
 	_offset = pos
 
 
-func draw_end(pos: Vector2) -> void:
+func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	if (
-		_start_pos != Vector2.INF
+		_start_pos != Vector2i(Vector2.INF)
 		and _content_transformation_check == selection_node.is_moving_content
 	):
 		pos = _snap_position(pos)
@@ -78,8 +78,8 @@ func draw_end(pos: Vector2) -> void:
 		if project.has_selection:
 			selection_node.move_borders_end()
 		else:
-			var pixel_diff: Vector2 = pos - _start_pos
-			Global.canvas.move_preview_location = Vector2.ZERO
+			var pixel_diff := pos - _start_pos
+			Global.canvas.move_preview_location = Vector2i.ZERO
 			var images := _get_selected_draw_images()
 			for image in images:
 				var image_copy := Image.new()

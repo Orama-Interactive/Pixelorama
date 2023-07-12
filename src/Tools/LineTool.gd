@@ -1,9 +1,9 @@
 extends "res://src/Tools/Draw.gd"
 
-var _original_pos := Vector2.ZERO
-var _start := Vector2.ZERO
-var _offset := Vector2.ZERO
-var _dest := Vector2.ZERO
+var _original_pos := Vector2i.ZERO
+var _start := Vector2i.ZERO
+var _offset := Vector2i.ZERO
+var _dest := Vector2i.ZERO
 var _drawing := false
 var _displace_origin := false
 var _thickness := 1
@@ -28,8 +28,8 @@ func _on_Thickness_value_changed(value: int) -> void:
 
 func update_indicator() -> void:
 	var bitmap := BitMap.new()
-	bitmap.create(Vector2.ONE * _thickness)
-	bitmap.set_bit_rect(Rect2(Vector2.ZERO, Vector2.ONE * _thickness), true)
+	bitmap.create(Vector2i.ONE * _thickness)
+	bitmap.set_bit_rect(Rect2i(Vector2i.ZERO, Vector2i.ONE * _thickness), true)
 	_indicator = bitmap
 	_polylines = _create_polylines(_indicator)
 
@@ -50,12 +50,12 @@ func update_config() -> void:
 	$ThicknessSlider.value = _thickness
 
 
-func _get_shape_points(_size: Vector2) -> PackedVector2Array:
-	return PackedVector2Array()
+func _get_shape_points(_size: Vector2i) -> Array[Vector2i]:
+	return []
 
 
-func _get_shape_points_filled(_size: Vector2) -> PackedVector2Array:
-	return PackedVector2Array()
+func _get_shape_points_filled(_size: Vector2i) -> Array[Vector2i]:
+	return []
 
 
 func _input(event: InputEvent) -> void:
@@ -66,7 +66,7 @@ func _input(event: InputEvent) -> void:
 			_displace_origin = false
 
 
-func draw_start(pos: Vector2) -> void:
+func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
 	if Input.is_action_pressed("shape_displace"):
@@ -88,7 +88,7 @@ func draw_start(pos: Vector2) -> void:
 	_drawing = true
 
 
-func draw_move(pos: Vector2) -> void:
+func draw_move(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
@@ -113,7 +113,7 @@ func draw_move(pos: Vector2) -> void:
 		_offset = pos
 
 
-func draw_end(pos: Vector2) -> void:
+func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_end(pos)
 	if _picking_color:
@@ -153,11 +153,11 @@ func draw_preview() -> void:
 
 		var points := _get_points()
 		var t_offset := _thickness - 1
-		var t_offsetv := Vector2(t_offset, t_offset)
-		indicator.create((_dest - _start).abs() + t_offsetv * 2 + Vector2.ONE)
+		var t_offsetv := Vector2i(t_offset, t_offset)
+		indicator.create((_dest - _start).abs() + t_offsetv * 2 + Vector2i.ONE)
 
 		for point in points:
-			var p: Vector2 = point - start + t_offsetv
+			var p := point - start + t_offsetv
 			indicator.set_bitv(p, 1)
 
 		canvas.draw_set_transform(start - t_offsetv, canvas.rotation, canvas.scale)
@@ -181,8 +181,8 @@ func _draw_shape() -> void:
 	commit_undo()
 
 
-func _get_points() -> PackedVector2Array:
-	var array := []
+func _get_points() -> Array[Vector2i]:
+	var array: Array[Vector2i] = []
 	var dx := absi(_dest.x - _start.x)
 	var dy := -absi(_dest.y - _start.y)
 	var err := dx + dy
@@ -192,11 +192,11 @@ func _get_points() -> PackedVector2Array:
 	var x = _start.x
 	var y = _start.y
 
-	var start := _start - Vector2.ONE * (_thickness >> 1)
-	var end := start + Vector2.ONE * _thickness
+	var start := _start - Vector2i.ONE * (_thickness >> 1)
+	var end := start + Vector2i.ONE * _thickness
 	for yy in range(start.y, end.y):
 		for xx in range(start.x, end.x):
-			array.append(Vector2(xx, yy))
+			array.append(Vector2i(xx, yy))
 
 	while !(x == _dest.x && y == _dest.y):
 		e2 = err << 1
@@ -207,14 +207,14 @@ func _get_points() -> PackedVector2Array:
 			err += dx
 			y += sy
 
-		var pos := Vector2(x, y)
-		start = pos - Vector2.ONE * (_thickness >> 1)
-		end = start + Vector2.ONE * _thickness
+		var pos := Vector2i(x, y)
+		start = pos - Vector2i.ONE * (_thickness >> 1)
+		end = start + Vector2i.ONE * _thickness
 		for yy in range(start.y, end.y):
 			for xx in range(start.x, end.x):
-				array.append(Vector2(xx, yy))
+				array.append(Vector2i(xx, yy))
 
-	return PackedVector2Array(array)
+	return array
 
 
 func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:

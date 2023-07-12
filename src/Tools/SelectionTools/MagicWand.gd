@@ -1,12 +1,25 @@
 extends SelectionTool
 
-# working array used as buffer for segments while flooding
-var _allegro_flood_segments: Array
-# results array per image while flooding
-var _allegro_image_segments: Array
+## Working array used as buffer for segments while flooding
+var _allegro_flood_segments: Array[Segment]
+## Results array per image while flooding
+var _allegro_image_segments: Array[Segment]
 
 
-func apply_selection(pos: Vector2) -> void:
+class Segment:
+	var flooding := false
+	var todo_above := false
+	var todo_below := false
+	var left_position := -5
+	var right_position := -5
+	var y := 0
+	var next := 0
+
+	func _init(_y: int) -> void:
+		y = _y
+
+
+func apply_selection(pos: Vector2i) -> void:
 	super.apply_selection(pos)
 	var project: Project = Global.current_project
 	if pos.x < 0 or pos.y < 0 or pos.x >= project.size.x or pos.y >= project.size.y:
@@ -42,37 +55,29 @@ func apply_selection(pos: Vector2) -> void:
 
 
 # Add a new segment to the array
-func _add_new_segment(y: int = 0) -> void:
-	var segment = {}
-	segment.flooding = false
-	segment.todo_above = false
-	segment.todo_below = false
-	segment.left_position = -5  # anything less than -1 is ok
-	segment.right_position = -5
-	segment.y = y
-	segment.next = 0
-	_allegro_flood_segments.append(segment)
+func _add_new_segment(y := 0) -> void:
+	_allegro_flood_segments.append(Segment.new(y))
 
 
 # fill an horizontal segment around the specified position, and adds it to the
 # list of segments filled. Returns the first x coordinate after the part of the
 # line that has been filled.
 func _flood_line_around_point(
-	pos: Vector2, project: Project, image: Image, src_color: Color
+	pos: Vector2i, project: Project, image: Image, src_color: Color
 ) -> int:
 	# this method is called by `_flood_fill` after the required data structures
 	# have been initialized
 	if not image.get_pixelv(pos).is_equal_approx(src_color):
-		return int(pos.x) + 1
-	var west: Vector2 = pos
-	var east: Vector2 = pos
+		return pos.x + 1
+	var west := pos
+	var east := pos
 	while west.x >= 0 && image.get_pixelv(west).is_equal_approx(src_color):
-		west += Vector2.LEFT
+		west += Vector2i.LEFT
 	while east.x < project.size.x && image.get_pixelv(east).is_equal_approx(src_color):
-		east += Vector2.RIGHT
+		east += Vector2i.RIGHT
 	# Make a note of the stuff we processed
-	var c = int(pos.y)
-	var segment = _allegro_flood_segments[c]
+	var c := pos.y
+	var segment := _allegro_flood_segments[c]
 	# we may have already processed some segments on this y coordinate
 	if segment.flooding:
 		while segment.next > 0:
@@ -104,34 +109,34 @@ func _flood_line_around_point(
 		_allegro_image_segments.append(segment)
 	# we know the point just east of the segment is not part of a segment that should be
 	# processed, else it would be part of this segment
-	return int(east.x) + 1
+	return east.x + 1
 
 
 func _check_flooded_segment(
 	y: int, left: int, right: int, project: Project, image: Image, src_color: Color
 ) -> bool:
-	var ret = false
-	var c: int = 0
+	var ret := false
+	var c := 0
 	while left <= right:
 		c = y
 		while true:
-			var segment = _allegro_flood_segments[c]
+			var segment := _allegro_flood_segments[c]
 			if left >= segment.left_position and left <= segment.right_position:
 				left = segment.right_position + 2
 				break
 			c = segment.next
 			if c == 0:  # couldn't find a valid segment, so we draw a new one
-				left = _flood_line_around_point(Vector2(left, y), project, image, src_color)
+				left = _flood_line_around_point(Vector2i(left, y), project, image, src_color)
 				ret = true
 				break
 	return ret
 
 
-func _flood_fill(pos: Vector2, image: Image, selection_map: SelectionMap) -> void:
+func _flood_fill(pos: Vector2i, image: Image, selection_map: SelectionMap) -> void:
 	# implements the floodfill routine by Shawn Hargreaves
 	# from https://www1.udel.edu/CIS/software/dist/allegro-4.2.1/src/flood.c
 	var project: Project = Global.current_project
-	var color: Color = image.get_pixelv(pos)
+	var color := image.get_pixelv(pos)
 	# init flood data structures
 	_allegro_flood_segments = []
 	_allegro_image_segments = []
@@ -142,7 +147,7 @@ func _flood_fill(pos: Vector2, image: Image, selection_map: SelectionMap) -> voi
 
 
 func _compute_segments_for_image(
-	pos: Vector2, project: Project, image: Image, src_color: Color
+	pos: Vector2i, project: Project, image: Image, src_color: Color
 ) -> void:
 	# initially allocate at least 1 segment per line of image
 	for j in image.get_height():
@@ -153,9 +158,9 @@ func _compute_segments_for_image(
 	var done := false
 	while not done:
 		done = true
-		var max_index = _allegro_flood_segments.size()
+		var max_index := _allegro_flood_segments.size()
 		for c in max_index:
-			var p = _allegro_flood_segments[c]
+			var p := _allegro_flood_segments[c]
 			if p.todo_below:  # check below the segment?
 				p.todo_below = false
 				if _check_flooded_segment(
@@ -173,13 +178,13 @@ func _compute_segments_for_image(
 func _select_segments(selection_map: SelectionMap) -> void:
 	# short circuit for flat colors
 	for c in _allegro_image_segments.size():
-		var p = _allegro_image_segments[c]
+		var p := _allegro_image_segments[c]
 		for px in range(p.left_position, p.right_position + 1):
 			# We don't have to check again whether the point being processed is within the bounds
-			_set_bit(Vector2(px, p.y), selection_map)
+			_set_bit(Vector2i(px, p.y), selection_map)
 
 
-func _set_bit(p: Vector2, selection_map: SelectionMap) -> void:
+func _set_bit(p: Vector2i, selection_map: SelectionMap) -> void:
 	var project: Project = Global.current_project
 	if _intersect:
 		selection_map.select_pixel(p, project.selection_map.is_pixel_selected(p))
