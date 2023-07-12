@@ -219,7 +219,7 @@ func _get_points() -> Array[Vector2i]:
 
 func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 	var result := {}
-	var angle := rad_to_deg(end.angle_to_point(start))
+	var angle := rad_to_deg(start.angle_to_point(end))
 	var distance := start.distance_to(end)
 	if Input.is_action_pressed("shape_perfect"):
 		angle = snapped(angle, 22.5)
