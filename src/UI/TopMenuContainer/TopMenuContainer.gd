@@ -66,7 +66,7 @@ func _setup_file_menu() -> void:
 			_setup_recent_projects_submenu(item)
 		else:
 			file_menu.add_item(item, i)
-			file_menu.set_item_shortcut(i, _get_menu_shortcut(file_menu_items[item]))
+			_set_menu_shortcut(file_menu_items[item], file_menu, i)
 		i += 1
 
 	file_menu.id_pressed.connect(file_menu_id_pressed)
@@ -109,7 +109,7 @@ func _setup_edit_menu() -> void:
 	var i := 0
 	for item in edit_menu_items:
 		edit_menu.add_item(item, i)
-		edit_menu.set_item_shortcut(i, _get_menu_shortcut(edit_menu_items[item]))
+		_set_menu_shortcut(edit_menu_items[item], edit_menu, i)
 		i += 1
 
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, true)
@@ -141,7 +141,7 @@ func _setup_view_menu() -> void:
 			view_menu.add_item(item, i)
 		else:
 			view_menu.add_check_item(item, i)
-			view_menu.set_item_shortcut(i, _get_menu_shortcut(view_menu_items[item]))
+			_set_menu_shortcut(view_menu_items[item], view_menu, i)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GUIDES, true)
 	view_menu.hide_on_checkable_item_selection = false
@@ -220,7 +220,7 @@ func _setup_window_menu() -> void:
 			window_menu.add_item(item, i)
 		else:
 			window_menu.add_check_item(item, i)
-			window_menu.set_item_shortcut(i, _get_menu_shortcut(window_menu_items[item]))
+			_set_menu_shortcut(window_menu_items[item], window_menu, i)
 		i += 1
 	window_menu.hide_on_checkable_item_selection = false
 	window_menu.id_pressed.connect(window_menu_id_pressed)
@@ -299,7 +299,7 @@ func _setup_image_menu() -> void:
 	var i := 0
 	for item in image_menu_items:
 		image_menu.add_item(item, i)
-		image_menu.set_item_shortcut(i, _get_menu_shortcut(image_menu_items[item]))
+		_set_menu_shortcut(image_menu_items[item], image_menu, i)
 		i += 1
 
 	image_menu.id_pressed.connect(image_menu_id_pressed)
@@ -320,7 +320,7 @@ func _setup_select_menu() -> void:
 			select_menu.add_check_item(item, i)
 		else:
 			select_menu.add_item(item, i)
-			select_menu.set_item_shortcut(i, _get_menu_shortcut(select_menu_items[item]))
+			_set_menu_shortcut(select_menu_items[item], select_menu, i)
 	select_menu.id_pressed.connect(select_menu_id_pressed)
 
 
@@ -338,18 +338,20 @@ func _setup_help_menu() -> void:
 	var i := 0
 	for item in help_menu_items:
 		help_menu.add_item(item, i)
-		help_menu.set_item_shortcut(i, _get_menu_shortcut(help_menu_items[item]))
+		_set_menu_shortcut(help_menu_items[item], help_menu, i)
 		i += 1
 
 	help_menu.id_pressed.connect(help_menu_id_pressed)
 
 
-func _get_menu_shortcut(action: String) -> Shortcut:
+func _set_menu_shortcut(action: String, menu: PopupMenu, index: int) -> void:
+	if action.is_empty():
+		return
 	var shortcut := Shortcut.new()
 	var event := InputEventAction.new()
 	event.action = action
 	shortcut.events.append(event)
-	return shortcut
+	menu.set_item_shortcut(index, shortcut)
 
 
 func _handle_metadata(id: int, menu_button: MenuButton) -> void:
