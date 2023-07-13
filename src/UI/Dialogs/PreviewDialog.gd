@@ -1,3 +1,4 @@
+class_name PreviewDialog
 extends ConfirmationDialog
 
 enum ImageImportOptions {
@@ -16,16 +17,16 @@ enum BrushTypes { FILE, PROJECT, RANDOM }
 
 var path: String
 var image: Image
-var current_import_option: int = ImageImportOptions.NEW_TAB
+var current_import_option := ImageImportOptions.NEW_TAB
 var smart_slice := false
 var recycle_last_slice_result := false  # Should we recycle the current sliced_rects
 var sliced_rects: Dictionary
 var spritesheet_horizontal := 1
 var spritesheet_vertical := 1
-var brush_type: int = BrushTypes.FILE
-var opened_once = false
-var is_master: bool = false
-var hiding: bool = false
+var brush_type := BrushTypes.FILE
+var opened_once := false
+var is_main := false
+var hiding := false
 var _content_offset = rect_size - get_child(0).rect_size  # A workaround for a pixelorama bug
 
 @onready var texture_rect: TextureRect = $VBoxContainer/CenterContainer/TextureRect
@@ -89,11 +90,11 @@ func _on_PreviewDialog_about_to_show() -> void:
 func _on_visibility_changed() -> void:
 	if visible:
 		return
-	if hiding:  # if the popup is hiding because of master
+	if hiding:  # if the popup is hiding because of main
 		return
-	elif is_master:  # if the master is closed then close others too
+	elif is_main:  # if the main dialog is closed then close others too
 		for child in Global.control.get_children():
-			if "PreviewDialog" in child.name:
+			if child is PreviewDialog:
 				OpenSave.preview_dialogs.erase(child)
 				child.queue_free()
 	else:  # dialogs being closed separately
@@ -106,11 +107,11 @@ func _on_visibility_changed() -> void:
 
 
 func _on_PreviewDialog_confirmed() -> void:
-	if is_master:  # if the master is confirmed then confirm others too
-		is_master = false
+	if is_main:  # if the main dialog is confirmed then confirm others too
+		is_main = false
 		synchronize()
 		for child in Global.control.get_children():
-			if "PreviewDialog" in child.name:
+			if child is PreviewDialog:
 				child.confirmed.emit()
 	else:
 		if current_import_option == ImageImportOptions.NEW_TAB:
@@ -189,32 +190,30 @@ func _on_PreviewDialog_confirmed() -> void:
 			dir.copy(path, Global.directory_module.xdg_data_home.path_join(location))
 
 
-func _on_ApplyAll_toggled(pressed) -> void:
-	is_master = pressed
+func _on_ApplyAll_toggled(pressed: bool) -> void:
+	is_main = pressed
 	# below 4 (and the last) line is needed for correct popup placement
-#	var old_rect = get_rect()
+	var old_rect := Rect2i(position, size)
 	visibility_changed.disconnect(_on_visibility_changed)
 	hide()
 	visibility_changed.connect(_on_visibility_changed)
 	for child in Global.control.get_children():
-		if child != self and "PreviewDialog" in child.name:
+		if child != self and child is PreviewDialog:
 			child.hiding = pressed
 			if pressed:
 				child.hide()
 				synchronize()
 			else:
 				child.popup_centered()
-
-
-#	popup(old_rect)  # needed for correct popup_order
+	popup(old_rect)  # needed for correct popup_order
 
 
 func synchronize() -> void:
 	for child in Global.control.get_children():
-		if child != self and "PreviewDialog" in child.name:
+		if child != self and child is PreviewDialog:
 			var dialog = child
 			#sync modes
-			var id = current_import_option
+			var id := current_import_option
 			dialog.import_options.select(id)
 			dialog.import_options.item_selected.emit(id)
 
@@ -260,7 +259,7 @@ func synchronize() -> void:
 				dialog.new_brush_options.get_node("BrushTypeOption").item_selected.emit(type)
 
 
-func _on_ImportOption_item_selected(id: int) -> void:
+func _on_ImportOption_item_selected(id: ImageImportOptions) -> void:
 	current_import_option = id
 	OpenSave.last_dialog_option = current_import_option
 	smart_slice_checkbox.pressed = false
@@ -397,7 +396,7 @@ func spritesheet_frame_value_changed() -> void:
 	update()
 
 
-func _on_BrushTypeOption_item_selected(index: int) -> void:
+func _on_BrushTypeOption_item_selected(index: BrushTypes) -> void:
 	brush_type = index
 	new_brush_name.visible = false
 	if brush_type == BrushTypes.RANDOM:
