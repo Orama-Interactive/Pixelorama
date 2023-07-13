@@ -173,18 +173,18 @@ func _get_undo_data(project: Project) -> Dictionary:
 	return data
 
 
-func _get_selected_draw_images(project: Project) -> Array:  # Array of Images
-	var images := []
+func _get_selected_draw_images(project: Project) -> Array[Image]:
+	var images: Array[Image] = []
 	if affect == SELECTED_CELS:
 		for cel_index in project.selected_cels:
 			var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 			if cel is PixelCel:
-				images.append(cel.image)
+				images.append(cel.get_image())
 	else:
 		for frame in project.frames:
 			for cel in frame.cels:
 				if cel is PixelCel:
-					images.append(cel.image)
+					images.append(cel.get_image())
 	return images
 
 

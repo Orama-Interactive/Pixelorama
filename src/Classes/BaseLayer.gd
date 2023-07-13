@@ -9,7 +9,7 @@ var parent: BaseLayer
 var visible := true
 var locked := false
 var new_cels_linked := false
-var cel_link_sets := []  # Array of Dictionaries (Each Dictionary represents a cel's "link set")
+var cel_link_sets: Array[Dictionary] = []  # Each Dictionary represents a cel's "link set"
 
 
 # Returns true if this is a direct or indirect parent of layer

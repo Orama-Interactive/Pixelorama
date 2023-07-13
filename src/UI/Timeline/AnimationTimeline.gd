@@ -680,7 +680,7 @@ func _on_CloneLayer_pressed() -> void:
 	var source_layers: Array = project.layers[project.current_layer].get_children(true)
 	source_layers.append(project.layers[project.current_layer])
 
-	var clones := []  # Array of Layers
+	var clones: Array[BaseLayer] = []
 	var cels := []  # 2D Array of Cels
 	for src_layer in source_layers:
 		var cl_layer: BaseLayer = src_layer.get_script().new(project)

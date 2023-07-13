@@ -27,7 +27,7 @@ var original_offset := Vector2.ZERO
 var preview_image := Image.new()
 var preview_image_texture := ImageTexture.new()
 var undo_data: Dictionary
-var gizmos := []  # Array of Gizmos
+var gizmos: Array[Gizmo] = []
 var dragged_gizmo: Gizmo = null
 var prev_angle := 0
 var mouse_pos_on_gizmo_drag := Vector2.ZERO
