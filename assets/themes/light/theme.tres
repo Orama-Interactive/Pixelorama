@@ -1301,8 +1301,9 @@ shadow_color = Color(0, 0, 0, 0.1)
 shadow_size = 4
 
 [resource]
-resource_name = "Light3D"
+resource_name = "Light"
 default_font = ExtResource("3_avskt")
+default_font_size = 16
 BoxContainer/constants/separation = 4
 Button/colors/font_color = Color(0.25, 0.25, 0.25, 1)
 Button/colors/font_color_disabled = Color(0.9, 0.95, 1, 0.3)
