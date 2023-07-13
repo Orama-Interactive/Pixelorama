@@ -70,7 +70,7 @@ func handle_loading_file(file: String) -> void:
 
 
 func handle_loading_image(file: String, image: Image) -> void:
-	var preview_dialog: ConfirmationDialog = preview_dialog_tscn.instantiate()
+	var preview_dialog := preview_dialog_tscn.instantiate() as PreviewDialog
 	preview_dialogs.append(preview_dialog)
 	preview_dialog.path = file
 	preview_dialog.image = image
