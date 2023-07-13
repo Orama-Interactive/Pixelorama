@@ -107,7 +107,7 @@ func get_ellipse_points_filled(pos: Vector2i, size: Vector2i, thickness := 1) ->
 	return border + filling
 
 
-func scale_3x(sprite: Image, tol: float = 50) -> Image:
+func scale_3x(sprite: Image, tol := 50.0) -> Image:
 	var scaled := Image.create(
 		sprite.get_width() * 3, sprite.get_height() * 3, false, Image.FORMAT_RGBA8
 	)
@@ -380,7 +380,7 @@ func fake_rotsprite(sprite: Image, angle: float, pivot: Vector2) -> void:
 
 
 func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
-	var aux: Image = Image.new()
+	var aux := Image.new()
 	aux.copy_from(sprite)
 	var ox: int
 	var oy: int
@@ -394,7 +394,7 @@ func nn_rotate(sprite: Image, angle: float, pivot: Vector2) -> void:
 				sprite.set_pixel(x, y, Color(0, 0, 0, 0))
 
 
-func similar_colors(c1: Color, c2: Color, tol: float = 100) -> bool:
+func similar_colors(c1: Color, c2: Color, tol := 100.0) -> bool:
 	var dist := color_distance(c1, c2)
 	return dist <= tol
 
@@ -522,7 +522,7 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 				continue
 			var sprite := Image.create(width, height, false, Image.FORMAT_RGBA8)
 			sprite.blend_rect(
-				c.image,
+				c.get_image(),
 				Rect2(Vector2.ZERO, Global.current_project.size),
 				Vector2i(offset_x, offset_y)
 			)
@@ -542,10 +542,10 @@ func general_do_scale(width: int, height: int) -> void:
 	selection_map_copy.copy_from(project.selection_map)
 	selection_map_copy.crop(size.x, size.y)
 
-	var new_x_symmetry_point = project.x_symmetry_point / x_ratio
-	var new_y_symmetry_point = project.y_symmetry_point / y_ratio
-	var new_x_symmetry_axis_points = project.x_symmetry_axis.points
-	var new_y_symmetry_axis_points = project.y_symmetry_axis.points
+	var new_x_symmetry_point := project.x_symmetry_point / x_ratio
+	var new_y_symmetry_point := project.y_symmetry_point / y_ratio
+	var new_x_symmetry_axis_points := project.x_symmetry_axis.points
+	var new_y_symmetry_axis_points := project.y_symmetry_axis.points
 	new_x_symmetry_axis_points[0].y /= y_ratio
 	new_x_symmetry_axis_points[1].y /= y_ratio
 	new_y_symmetry_axis_points[0].x /= x_ratio
