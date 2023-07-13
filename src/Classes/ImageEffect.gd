@@ -146,8 +146,8 @@ func set_nodes() -> void:
 
 func display_animate_dialog():
 	var animate_dialog: Popup = animate_panel.get_parent()
-#	var pos = Vector2(global_position.x + size.x, global_position.y)
-	var animate_dialog_rect := Rect2(Vector2.ZERO, Vector2(animate_dialog.size.x, size.y))
+	var pos = Vector2(position.x + size.x, position.y)
+	var animate_dialog_rect := Rect2(pos, Vector2(animate_dialog.size.x, size.y))
 	animate_dialog.popup(animate_dialog_rect)
 	animate_panel.re_calibrate_preview_slider()
 

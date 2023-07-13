@@ -155,6 +155,7 @@ func _populate_transition_type():
 	$"%TransitionType".add_item("Wiggling around the edges", Tween.TRANS_ELASTIC)
 	$"%TransitionType".add_item("Bouncing at the end", Tween.TRANS_BOUNCE)
 	$"%TransitionType".add_item("Backing out at ends", Tween.TRANS_BACK)
+	$"%TransitionType".add_item("Spring towards the end", Tween.TRANS_SPRING)
 
 
 func _on_EaseType_item_selected(index: int) -> void:
