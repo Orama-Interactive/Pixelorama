@@ -3,7 +3,7 @@ render_mode unshaded;
 
 uniform sampler2D selection;
 uniform sampler2D gradient_texture;
-uniform sampler2D dither_texture;
+uniform sampler2D dither_texture : repeat_enable;
 uniform sampler2D offset_texture;
 uniform float position : hint_range(-0.5, 0.5) = 0.0;
 uniform float size : hint_range(0.01, 2.0) = 1.0;
