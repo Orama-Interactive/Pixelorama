@@ -1,152 +1,110 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://dmlgx1jgau8a5"]
 
-[ext_resource path="res://src/UI/Nodes/AnimatePanel.gd" type="Script" id=1]
-[ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=2]
+[ext_resource type="Script" path="res://src/UI/Nodes/AnimatePanel.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="2"]
 
 [node name="AnimatePanel" type="PanelContainer"]
 offset_right = 360.0
 offset_bottom = 226.0
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 353.0
-offset_bottom = 219.0
+layout_mode = 2
 
 [node name="TopOptions" type="HBoxContainer" parent="VBoxContainer"]
-offset_right = 346.0
-offset_bottom = 24.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/TopOptions"]
-offset_top = 5.0
-offset_right = 143.0
-offset_bottom = 19.0
-theme_type_variation = "Header"
+layout_mode = 2
+theme_type_variation = &"Header"
 text = "Animatable Properties"
 
-[node name="PreviewSlider" parent="VBoxContainer/TopOptions" instance=ExtResource( 2 )]
+[node name="PreviewSlider" parent="VBoxContainer/TopOptions" instance=ExtResource("2")]
 unique_name_in_owner = true
-offset_left = 147.0
-offset_right = 346.0
+layout_mode = 2
 min_value = 1.0
 max_value = 1.0
 value = 1.0
 prefix = "Preview frame:"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-offset_top = 28.0
-offset_right = 346.0
-offset_bottom = 212.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="PropertyList" type="ItemList" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-offset_right = 100.0
-offset_bottom = 184.0
-custom_minimum_size = Vector2( 100, 0 )
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 
 [node name="Options" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 visible = false
-offset_left = 104.0
-offset_right = 346.0
-offset_bottom = 184.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Options"]
-offset_right = 242.0
-offset_bottom = 14.0
+layout_mode = 2
 
 [node name="Name" type="Label" parent="VBoxContainer/HBoxContainer/Options/HBoxContainer"]
 unique_name_in_owner = true
-offset_bottom = 14.0
-theme_type_variation = "Header"
+layout_mode = 2
+theme_type_variation = &"Header"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer/Options/HBoxContainer"]
-offset_left = 4.0
-offset_right = 242.0
-offset_bottom = 14.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="CanAnimate" type="CheckBox" parent="VBoxContainer/HBoxContainer/Options"]
 unique_name_in_owner = true
-offset_left = 160.0
-offset_top = 18.0
-offset_right = 242.0
-offset_bottom = 42.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_horizontal = 8
+mouse_default_cursor_shape = 2
 text = "Animate"
 
 [node name="Values" type="GridContainer" parent="VBoxContainer/HBoxContainer/Options"]
-offset_top = 46.0
-offset_right = 242.0
-offset_bottom = 146.0
+layout_mode = 2
 columns = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values"]
-offset_top = 5.0
-offset_right = 87.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Initial value:"
-align = 2
 
-[node name="Initial" parent="VBoxContainer/HBoxContainer/Options/Values" instance=ExtResource( 2 )]
+[node name="Initial" parent="VBoxContainer/HBoxContainer/Options/Values" instance=ExtResource("2")]
 unique_name_in_owner = true
-offset_left = 91.0
-offset_right = 242.0
+layout_mode = 2
 editable = false
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values"]
-offset_top = 33.0
-offset_right = 87.0
-offset_bottom = 47.0
+layout_mode = 2
 text = "Final value:"
-align = 2
 
-[node name="Final" parent="VBoxContainer/HBoxContainer/Options/Values" instance=ExtResource( 2 )]
+[node name="Final" parent="VBoxContainer/HBoxContainer/Options/Values" instance=ExtResource("2")]
 unique_name_in_owner = true
-offset_left = 91.0
-offset_top = 28.0
-offset_right = 242.0
-offset_bottom = 52.0
+layout_mode = 2
 editable = false
 
 [node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values"]
-offset_top = 59.0
-offset_right = 87.0
-offset_bottom = 73.0
+layout_mode = 2
 text = "Ease type:"
-align = 2
 
 [node name="EaseType" type="OptionButton" parent="VBoxContainer/HBoxContainer/Options/Values"]
 unique_name_in_owner = true
-offset_left = 91.0
-offset_top = 56.0
-offset_right = 242.0
-offset_bottom = 76.0
-mouse_default_cursor_shape = 2
+layout_mode = 2
 size_flags_vertical = 4
+mouse_default_cursor_shape = 2
 disabled = true
 clip_text = true
 
 [node name="Label5" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values"]
-offset_top = 83.0
-offset_right = 87.0
-offset_bottom = 97.0
+layout_mode = 2
 text = "Interpolation:"
-align = 2
 
 [node name="TransitionType" type="OptionButton" parent="VBoxContainer/HBoxContainer/Options/Values"]
 unique_name_in_owner = true
-offset_left = 91.0
-offset_top = 80.0
-offset_right = 242.0
-offset_bottom = 100.0
+layout_mode = 2
+size_flags_vertical = 4
 tooltip_text = "How the value changes while moving from initial to final value"
 mouse_default_cursor_shape = 2
-size_flags_vertical = 4
 disabled = true
 clip_text = true
 
