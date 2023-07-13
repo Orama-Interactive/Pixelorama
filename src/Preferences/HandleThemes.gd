@@ -39,7 +39,7 @@ func _on_Theme_pressed(index: int) -> void:
 
 func add_theme(theme: Theme) -> void:
 	var button := CheckBox.new()
-	var theme_name: String = theme.resource_name
+	var theme_name := theme.resource_name
 	button.name = theme_name
 	button.text = theme_name
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND

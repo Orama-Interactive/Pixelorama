@@ -79,11 +79,11 @@ var integer_zoom := false setget set_integer_zoom
 var shrink := 1.0
 var dim_on_popup := true
 var modulate_icon_color := Color.GRAY
-var icon_color_from: int = ColorFrom.THEME
+var icon_color_from := ColorFrom.THEME
 var modulate_clear_color := Color.GRAY
-var clear_color_from: int = ColorFrom.THEME
+var clear_color_from := ColorFrom.THEME
 var custom_icon_color := Color.GRAY
-var tool_button_size: int = ButtonSize.SMALL
+var tool_button_size := ButtonSize.SMALL
 var left_tool_color := Color("0086cf")
 var right_tool_color := Color("fd6d14")
 
