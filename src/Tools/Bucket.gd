@@ -238,11 +238,8 @@ func fill_in_area(pos: Vector2i) -> void:
 	# Handle Mirroring
 	var mirror_x := project.x_symmetry_point - pos.x
 	var mirror_y := project.y_symmetry_point - pos.y
-	var mirror_x_inside: bool
-	var mirror_y_inside: bool
-
-	mirror_x_inside = project.can_pixel_get_drawn(Vector2i(mirror_x, pos.y))
-	mirror_y_inside = project.can_pixel_get_drawn(Vector2i(pos.x, mirror_y))
+	var mirror_x_inside := project.can_pixel_get_drawn(Vector2i(mirror_x, pos.y))
+	var mirror_y_inside := project.can_pixel_get_drawn(Vector2i(pos.x, mirror_y))
 
 	if Tools.horizontal_mirror and mirror_x_inside:
 		_flood_fill(Vector2i(mirror_x, pos.y))
@@ -377,7 +374,7 @@ func _flood_line_around_point(
 func _check_flooded_segment(
 	y: int, left: int, right: int, project: Project, image: Image, src_color: Color
 ) -> bool:
-	var ret = false
+	var ret := false
 	var c: int = 0
 	while left <= right:
 		c = y
