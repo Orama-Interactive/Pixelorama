@@ -23,13 +23,13 @@ func _draw() -> void:
 	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
 
 
-func get_tile_positions() -> Array:
+func get_tile_positions() -> Array[Vector2i]:
 	var defaulted_tiles := tiles
 	if defaulted_tiles == null:
 		defaulted_tiles = Global.current_project.tiles
 
-	var x_basis: Vector2 = defaulted_tiles.x_basis
-	var y_basis: Vector2 = defaulted_tiles.y_basis
+	var x_basis := defaulted_tiles.x_basis
+	var y_basis := defaulted_tiles.y_basis
 	var tile_mode: int = defaulted_tiles.mode
 
 	var x_range := (
@@ -38,11 +38,11 @@ func get_tile_positions() -> Array:
 	var y_range := (
 		range(-1, 2) if tile_mode in [Tiles.MODE.Y_AXIS, Tiles.MODE.BOTH] else range(0, 1)
 	)
-	var positions := []
+	var positions: Array[Vector2i] = []
 	for r in y_range:
 		for c in x_range:
 			if not draw_center and r == 0 and c == 0:
 				continue
-			var pos: Vector2 = r * y_basis + c * x_basis
+			var pos: Vector2i = r * y_basis + c * x_basis
 			positions.append(pos)
 	return positions
