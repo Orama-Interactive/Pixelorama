@@ -1,11 +1,14 @@
 extends AcceptDialog
 
-# Array of Preference(s)
-var preferences := [
-	Preference.new("open_last_project", "Startup/StartupContainer/OpenLastProject", "pressed"),
-	Preference.new("quit_confirmation", "Startup/StartupContainer/QuitConfirmation", "pressed"),
+var preferences: Array[Preference] = [
+	Preference.new(
+		"open_last_project", "Startup/StartupContainer/OpenLastProject", "button_pressed"
+	),
+	Preference.new(
+		"quit_confirmation", "Startup/StartupContainer/QuitConfirmation", "button_pressed"
+	),
 	Preference.new("shrink", "%ShrinkSlider", "value"),
-	Preference.new("dim_on_popup", "Interface/InterfaceOptions/DimCheckBox", "pressed"),
+	Preference.new("dim_on_popup", "Interface/InterfaceOptions/DimCheckBox", "button_pressed"),
 	Preference.new("icon_color_from", "Interface/ButtonOptions/IconColorOptionButton", "selected"),
 	Preference.new("custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color"),
 	Preference.new("left_tool_color", "Interface/ButtonOptions/LeftToolColorButton", "color"),
@@ -14,35 +17,41 @@ var preferences := [
 		"tool_button_size", "Interface/ButtonOptions/ToolButtonSizeOptionButton", "selected"
 	),
 	Preference.new(
-		"show_left_tool_icon", "Cursors/CursorsContainer/LeftToolIconCheckbox", "pressed"
+		"show_left_tool_icon", "Cursors/CursorsContainer/LeftToolIconCheckbox", "button_pressed"
 	),
 	Preference.new(
-		"show_right_tool_icon", "Cursors/CursorsContainer/RightToolIconCheckbox", "pressed"
+		"show_right_tool_icon", "Cursors/CursorsContainer/RightToolIconCheckbox", "button_pressed"
 	),
 	Preference.new(
-		"left_square_indicator_visible", "Cursors/CursorsContainer/LeftIndicatorCheckbox", "pressed"
+		"left_square_indicator_visible",
+		"Cursors/CursorsContainer/LeftIndicatorCheckbox",
+		"button_pressed"
 	),
 	Preference.new(
 		"right_square_indicator_visible",
 		"Cursors/CursorsContainer/RightIndicatorCheckbox",
-		"pressed"
+		"button_pressed"
 	),
-	Preference.new("native_cursors", "Cursors/CursorsContainer/NativeCursorsCheckbox", "pressed"),
-	Preference.new("cross_cursor", "Cursors/CursorsContainer/CrossCursorCheckbox", "pressed"),
+	Preference.new(
+		"native_cursors", "Cursors/CursorsContainer/NativeCursorsCheckbox", "button_pressed"
+	),
+	Preference.new(
+		"cross_cursor", "Cursors/CursorsContainer/CrossCursorCheckbox", "button_pressed"
+	),
 	Preference.new("autosave_interval", "Backup/AutosaveContainer/AutosaveInterval", "value"),
-	Preference.new("enable_autosave", "Backup/AutosaveContainer/EnableAutosave", "pressed"),
+	Preference.new("enable_autosave", "Backup/AutosaveContainer/EnableAutosave", "button_pressed"),
 	Preference.new("default_width", "Image/ImageOptions/ImageDefaultWidth", "value"),
 	Preference.new("default_height", "Image/ImageOptions/ImageDefaultHeight", "value"),
 	Preference.new("default_fill_color", "Image/ImageOptions/DefaultFillColor", "color"),
-	Preference.new("smooth_zoom", "Canvas/ZoomOptions/SmoothZoom", "pressed"),
-	Preference.new("integer_zoom", "Canvas/ZoomOptions/IntegerZoom", "pressed"),
+	Preference.new("smooth_zoom", "Canvas/ZoomOptions/SmoothZoom", "button_pressed"),
+	Preference.new("integer_zoom", "Canvas/ZoomOptions/IntegerZoom", "button_pressed"),
 	Preference.new("snapping_distance", "Canvas/SnappingOptions/DistanceValue", "value"),
 	Preference.new("grid_type", "Canvas/GridOptions/GridType", "selected"),
 	Preference.new("grid_size", "Canvas/GridOptions/GridSizeValue", "value"),
 	Preference.new("isometric_grid_size", "Canvas/GridOptions/IsometricGridSizeValue", "value"),
 	Preference.new("grid_offset", "Canvas/GridOptions/GridOffsetValue", "value"),
 	Preference.new(
-		"grid_draw_over_tile_mode", "Canvas/GridOptions/GridDrawOverTileMode", "pressed"
+		"grid_draw_over_tile_mode", "Canvas/GridOptions/GridDrawOverTileMode", "button_pressed"
 	),
 	Preference.new("grid_color", "Canvas/GridOptions/GridColor", "color"),
 	Preference.new("pixel_grid_show_at_zoom", "Canvas/PixelGridOptions/ShowAtZoom", "value"),
@@ -52,14 +61,18 @@ var preferences := [
 	Preference.new("checker_color_1", "Canvas/CheckerOptions/CheckerColor1", "color"),
 	Preference.new("checker_color_2", "Canvas/CheckerOptions/CheckerColor2", "color"),
 	Preference.new(
-		"checker_follow_movement", "Canvas/CheckerOptions/CheckerFollowMovement", "pressed"
+		"checker_follow_movement", "Canvas/CheckerOptions/CheckerFollowMovement", "button_pressed"
 	),
-	Preference.new("checker_follow_scale", "Canvas/CheckerOptions/CheckerFollowScale", "pressed"),
+	Preference.new(
+		"checker_follow_scale", "Canvas/CheckerOptions/CheckerFollowScale", "button_pressed"
+	),
 	Preference.new("tilemode_opacity", "Canvas/CheckerOptions/TileModeOpacity", "value"),
 	Preference.new("clear_color_from", "Canvas/BackgroundOptions/ColorOptionButton", "selected"),
 	Preference.new("modulate_clear_color", "Canvas/BackgroundOptions/BackgroundColor", "color"),
 	Preference.new(
-		"select_layer_on_button_click", "Timeline/TimelineOptions/SelectLayerOnButton", "pressed"
+		"select_layer_on_button_click",
+		"Timeline/TimelineOptions/SelectLayerOnButton",
+		"button_pressed"
 	),
 	Preference.new(
 		"onion_skinning_past_color", "Timeline/TimelineOptions/OnionSkinningPastColor", "color"
@@ -67,12 +80,14 @@ var preferences := [
 	Preference.new(
 		"onion_skinning_future_color", "Timeline/TimelineOptions/OnionSkinningFutureColor", "color"
 	),
-	Preference.new("selection_animated_borders", "Selection/SelectionOptions/Animate", "pressed"),
+	Preference.new(
+		"selection_animated_borders", "Selection/SelectionOptions/Animate", "button_pressed"
+	),
 	Preference.new("selection_border_color_1", "Selection/SelectionOptions/BorderColor1", "color"),
 	Preference.new("selection_border_color_2", "Selection/SelectionOptions/BorderColor2", "color"),
 	Preference.new("fps_limit", "Performance/PerformanceContainer/SetFPSLimit", "value"),
 	Preference.new(
-		"pause_when_unfocused", "Performance/PerformanceContainer/PauseAppFocus", "pressed"
+		"pause_when_unfocused", "Performance/PerformanceContainer/PauseAppFocus", "button_pressed"
 	),
 	#	Preference.new(
 	#		"renderer", "Drivers/DriversContainer/Renderer", "selected", true, OS.VIDEO_DRIVER_GLES2
@@ -148,7 +163,7 @@ func _ready() -> void:
 			tablet_driver.add_item(driver_name, driver)
 
 	for pref in preferences:
-		var node: Node = right_side.get_node(pref.node_path)
+		var node := right_side.get_node(pref.node_path)
 		var restore_default_button: BaseButton = restore_default_button_tcsn.instantiate()
 		restore_default_button.setting_name = pref.prop_name
 		restore_default_button.value_type = pref.value_type
@@ -166,7 +181,7 @@ func _ready() -> void:
 			node.get_parent().move_child(restore_default_button, node_position)
 
 		match pref.value_type:
-			"pressed":
+			"button_pressed":
 				node.toggled.connect(
 					_on_Preference_value_changed.bind(pref, restore_default_button)
 				)
