@@ -46,14 +46,14 @@ func _on_SavedLayouts_empty_clicked() -> void:
 func _on_AddLayout_pressed() -> void:
 	is_editing = false
 	layout_name.text = "New Layout"
-	layout_settings.window_title = "Add Layout"
+	layout_settings.title = "Add Layout"
 	layout_settings.popup_centered()
 
 
 func _on_EditLayout_pressed() -> void:
 	is_editing = true
 	layout_name.text = layout_list.get_item_text(layout_selected)
-	layout_settings.window_title = "Edit Layout"
+	layout_settings.title = "Edit Layout"
 	layout_settings.popup_centered()
 
 
@@ -64,7 +64,7 @@ func _on_DeleteLayout_pressed() -> void:
 func _on_LayoutSettings_confirmed() -> void:
 	var file_name := layout_name.text + ".tres"
 	var path := "user://layouts/".path_join(file_name)
-	var layout = Global.control.ui.get_layout()
+	var layout: DockableLayout = Global.control.ui.layout
 	var err := ResourceSaver.save(layout, path)
 	if err != OK:
 		print(err)
@@ -89,6 +89,8 @@ func _on_LayoutSettings_confirmed() -> void:
 
 func delete_layout_file(file_name: String) -> void:
 	var dir := DirAccess.open("user://layouts/".path_join(file_name))
+	if not is_instance_valid(dir):
+		return
 	dir.remove("user://layouts/".path_join(file_name))
 
 

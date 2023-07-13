@@ -133,7 +133,7 @@ func _add_extension(file_name: String) -> void:
 	var success := ProjectSettings.load_resource_pack(file_path)
 	if !success:
 		print("Failed loading resource pack.")
-		var dir := DirAccess.open(file_path)
+		var dir := DirAccess.open(EXTENSIONS_PATH)
 		dir.remove(file_path)
 		return
 

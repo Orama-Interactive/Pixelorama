@@ -194,9 +194,14 @@ func _ready() -> void:
 			# This is needed because color_changed doesn't fire if the color changes in code
 			if typeof(value) == TYPE_VECTOR2 or typeof(value) == TYPE_COLOR:
 				preference_update(pref.prop_name, pref.require_restart)
-				disable_restore_default_button(
-					restore_default_button, global_value.is_equal_approx(pref.default_value)
-				)
+				if typeof(global_value) == TYPE_VECTOR2I:
+					disable_restore_default_button(
+						restore_default_button, global_value == pref.default_value
+					)
+				else:
+					disable_restore_default_button(
+						restore_default_button, global_value.is_equal_approx(pref.default_value)
+					)
 			elif pref.value_type == "selected":
 				preference_update(pref.prop_name, pref.require_restart)
 				disable_restore_default_button(

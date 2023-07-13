@@ -5,7 +5,7 @@ var redone := false
 var is_quitting_on_save := false
 var cursor_image: Texture2D = preload("res://assets/graphics/cursor.png")
 
-@onready var ui := $MenuAndUI/UI/DockableContainer
+@onready var ui := $MenuAndUI/UI/DockableContainer as DockableContainer
 @onready var backup_confirmation: ConfirmationDialog = $Dialogs/BackupConfirmation
 @onready var quit_dialog: ConfirmationDialog = $Dialogs/QuitDialog
 @onready var quit_and_save_dialog: ConfirmationDialog = $Dialogs/QuitAndSaveDialog

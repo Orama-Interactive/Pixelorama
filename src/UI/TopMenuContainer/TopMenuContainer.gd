@@ -14,7 +14,7 @@ var default_layout_size := layouts.size()
 var selected_layout := 0
 var zen_mode := false
 
-@onready var ui: Container = Global.control.find_child("DockableContainer")
+@onready var ui := Global.control.find_child("DockableContainer") as DockableContainer
 @onready var ui_elements := ui.get_children()
 @onready var file_menu_button := $MenuItems/FileMenu
 @onready var edit_menu_button := $MenuItems/EditMenu
@@ -568,11 +568,11 @@ func set_layout(id: int) -> void:
 	selected_layout = id
 	ui.layout = layouts[id][1].clone()  # Clone is needed to avoid modifying premade layouts
 	for i in layouts.size():
-		var offset: int = i + 1
+		var offset := i + 1
 		layouts_submenu.set_item_checked(offset, offset == (id + 1))
 
 	for i in ui_elements.size():
-		var is_hidden: bool = ui.is_control_hidden(ui_elements[i])
+		var is_hidden := ui.is_control_hidden(ui_elements[i])
 		panels_submenu.set_item_checked(i, !is_hidden)
 
 	if zen_mode:  # Turn zen mode off
