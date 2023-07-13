@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=64 format=3 uid="uid://w1q3piojx08s"]
+[gd_resource type="Theme" load_steps=63 format=3 uid="uid://w1q3piojx08s"]
 
 [ext_resource type="Texture2D" uid="uid://c7u0yofrpm50a" path="res://assets/graphics/misc/value_slider.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://bq8h66v4ie8xl" path="res://assets/graphics/misc/value_arrow_hover.svg" id="4"]
@@ -23,9 +23,6 @@ content_margin_bottom = 4.0
 bg_color = Color(0.0906248, 0.0906248, 0.0906248, 1)
 draw_center = false
 border_color = Color(0.0792967, 0.0792967, 0.0792967, 1)
-
-[sub_resource type="StyleBoxFlat" id="16"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="24"]
 bg_color = Color(0.2, 0.2, 0.2, 0)
@@ -577,7 +574,6 @@ Button/colors/font_color_hover = Color(0.866992, 0.866992, 0.866992, 1)
 Button/colors/font_color_pressed = Color(0.184314, 0.396078, 0.533333, 1)
 Button/colors/icon_color_hover = Color(1.15, 1.15, 1.15, 1)
 Button/colors/icon_color_pressed = Color(0.211961, 0.45549, 0.613333, 1)
-Button/constants/hseparation = 2
 Button/styles/disabled = SubResource("23")
 Button/styles/focus = SubResource("23")
 Button/styles/hover = SubResource("23")
@@ -589,12 +585,8 @@ CheckBox/colors/font_color_hover = Color(0.866992, 0.866992, 0.866992, 1)
 CheckBox/colors/font_color_hover_pressed = Color(1, 1, 1, 1)
 CheckBox/colors/font_color_pressed = Color(0.184314, 0.396078, 0.533333, 1)
 CheckBox/colors/icon_color_hover = Color(1.15, 1.15, 1.15, 1)
-CheckBox/constants/check_vadjust = 0
-CheckBox/constants/hseparation = 4
 CheckBox/styles/disabled = SubResource("15")
-CheckBox/styles/focus = null
 CheckBox/styles/hover = SubResource("15")
-CheckBox/styles/hover_pressed = SubResource("16")
 CheckBox/styles/normal = SubResource("15")
 CheckBox/styles/pressed = SubResource("15")
 CheckButton/colors/font_color = Color(0.77832, 0.77832, 0.77832, 1)
@@ -608,7 +600,6 @@ CheckButton/constants/hseparation = 4
 CheckButton/styles/disabled = SubResource("23")
 CheckButton/styles/focus = SubResource("24")
 CheckButton/styles/hover = SubResource("23")
-CheckButton/styles/hover_pressed = SubResource("24")
 CheckButton/styles/normal = SubResource("23")
 CheckButton/styles/pressed = SubResource("23")
 CollapsibleContainer/icons/arrow_normal = ExtResource("6")
@@ -666,8 +657,6 @@ HSlider/styles/grabber_area_highlight = SubResource("87")
 HSlider/styles/slider = SubResource("88")
 HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 8
-Header/base_type = &"Label"
-Header/colors/font_color = Color(0.85, 0.85, 0.85, 1)
 Icons/colors/modulate_color = Color(0.74902, 0.74902, 0.74902, 1)
 ItemList/colors/font_color = Color(0.77832, 0.77832, 0.77832, 1)
 ItemList/colors/font_color_selected = Color(1, 1, 1, 1)
