@@ -128,7 +128,7 @@ func change_mask():
 	Export.blend_all_layers(image, current_frame)
 	if (
 		image.get_used_rect().size == Vector2i.ZERO
-		or not $VBoxContainer/HBoxContainer/Masking.pressed
+		or not $VBoxContainer/HBoxContainer/Masking.button_pressed
 	):
 		tiles.reset_mask()
 	else:
