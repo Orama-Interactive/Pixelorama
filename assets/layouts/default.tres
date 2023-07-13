@@ -1,173 +1,173 @@
 [gd_resource type="Resource" script_class="DockableLayout" load_steps=27 format=3 uid="uid://cmssfxor8u6ph"]
 
-[ext_resource type="Script" path="res://addons/dockable_container/layout_panel.gd" id="1"]
-[ext_resource type="Script" path="res://addons/dockable_container/layout_split.gd" id="2"]
-[ext_resource type="Script" path="res://addons/dockable_container/layout.gd" id="3"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout_panel.gd" id="1_5ntxi"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout_split.gd" id="2_ky8yd"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout.gd" id="3_7wdyb"]
 
-[sub_resource type="Resource" id="1"]
+[sub_resource type="Resource" id="Resource_xnnnd"]
 resource_name = "Tabs"
-script = ExtResource("1")
-names = PackedStringArray("Tools")
+script = ExtResource("1_5ntxi")
+names = PackedStringArray("Tools", "Reference Images")
 current_tab = 0
 
-[sub_resource type="Resource" id="2"]
+[sub_resource type="Resource" id="Resource_34hle"]
 resource_name = "Tabs"
-script = ExtResource("1")
+script = ExtResource("1_5ntxi")
 names = PackedStringArray("Main Canvas")
 current_tab = 0
 
-[sub_resource type="Resource" id="3"]
+[sub_resource type="Resource" id="Resource_l6i6g"]
 resource_name = "Tabs"
-script = ExtResource("1")
+script = ExtResource("1_5ntxi")
 names = PackedStringArray("Perspective Editor")
 current_tab = 0
 
-[sub_resource type="Resource" id="4"]
+[sub_resource type="Resource" id="Resource_r2r5t"]
 resource_name = "Split"
-script = ExtResource("2")
+script = ExtResource("2_ky8yd")
 direction = 0
 percent = 0.5
-first = SubResource("2")
-second = SubResource("3")
+first = SubResource("Resource_34hle")
+second = SubResource("Resource_l6i6g")
 
-[sub_resource type="Resource" id="5"]
+[sub_resource type="Resource" id="Resource_k7omi"]
 resource_name = "Tabs"
-script = ExtResource("1")
+script = ExtResource("1_5ntxi")
 names = PackedStringArray("Second Canvas")
 current_tab = 0
 
-[sub_resource type="Resource" id="6"]
+[sub_resource type="Resource" id="Resource_l142s"]
 resource_name = "Split"
-script = ExtResource("2")
+script = ExtResource("2_ky8yd")
 direction = 0
 percent = 0.980952
-first = SubResource("4")
-second = SubResource("5")
+first = SubResource("Resource_r2r5t")
+second = SubResource("Resource_k7omi")
 
-[sub_resource type="Resource" id="7"]
+[sub_resource type="Resource" id="Resource_wobi1"]
 resource_name = "Tabs"
-script = ExtResource("1")
+script = ExtResource("1_5ntxi")
 names = PackedStringArray("Animation Timeline")
 current_tab = 0
 
-[sub_resource type="Resource" id="8"]
+[sub_resource type="Resource" id="Resource_85y6p"]
 resource_name = "Split"
-script = ExtResource("2")
+script = ExtResource("2_ky8yd")
 direction = 1
-percent = 0.90625
-first = SubResource("6")
-second = SubResource("7")
+percent = 0.74711
+first = SubResource("Resource_l142s")
+second = SubResource("Resource_wobi1")
 
-[sub_resource type="Resource" id="9"]
+[sub_resource type="Resource" id="Resource_4egp5"]
 resource_name = "Tabs"
-script = ExtResource("1")
-names = PackedStringArray("Canvas Preview", "RefCounted Images")
+script = ExtResource("1_5ntxi")
+names = PackedStringArray("Canvas Preview")
 current_tab = 0
 
-[sub_resource type="Resource" id="10"]
+[sub_resource type="Resource" id="Resource_fcw5v"]
 resource_name = "Tabs"
-script = ExtResource("1")
+script = ExtResource("1_5ntxi")
 names = PackedStringArray("Color Pickers")
 current_tab = 0
 
-[sub_resource type="Resource" id="11"]
+[sub_resource type="Resource" id="Resource_c7hpy"]
 resource_name = "Tabs"
-script = ExtResource("1")
+script = ExtResource("1_5ntxi")
 names = PackedStringArray("Global Tool Options")
 current_tab = 0
 
-[sub_resource type="Resource" id="12"]
+[sub_resource type="Resource" id="Resource_56tpw"]
 resource_name = "Tabs"
-script = ExtResource("1")
+script = ExtResource("1_5ntxi")
 names = PackedStringArray("Recorder")
 current_tab = 0
 
-[sub_resource type="Resource" id="13"]
+[sub_resource type="Resource" id="Resource_fhmn0"]
 resource_name = "Split"
-script = ExtResource("2")
+script = ExtResource("2_ky8yd")
 direction = 1
 percent = 0.5
-first = SubResource("11")
-second = SubResource("12")
+first = SubResource("Resource_c7hpy")
+second = SubResource("Resource_56tpw")
 
-[sub_resource type="Resource" id="14"]
+[sub_resource type="Resource" id="Resource_u1u2a"]
 resource_name = "Split"
-script = ExtResource("2")
+script = ExtResource("2_ky8yd")
 direction = 1
 percent = 0.5
-first = SubResource("10")
-second = SubResource("13")
+first = SubResource("Resource_fcw5v")
+second = SubResource("Resource_fhmn0")
 
-[sub_resource type="Resource" id="15"]
+[sub_resource type="Resource" id="Resource_6eonw"]
 resource_name = "Split"
-script = ExtResource("2")
+script = ExtResource("2_ky8yd")
 direction = 1
 percent = 0.911765
-first = SubResource("9")
-second = SubResource("14")
+first = SubResource("Resource_4egp5")
+second = SubResource("Resource_u1u2a")
 
-[sub_resource type="Resource" id="16"]
+[sub_resource type="Resource" id="Resource_6pwxm"]
 resource_name = "Tabs"
-script = ExtResource("1")
+script = ExtResource("1_5ntxi")
 names = PackedStringArray("Left Tool Options")
 current_tab = 0
 
-[sub_resource type="Resource" id="17"]
+[sub_resource type="Resource" id="Resource_24rfh"]
 resource_name = "Tabs"
-script = ExtResource("1")
+script = ExtResource("1_5ntxi")
 names = PackedStringArray("Right Tool Options")
 current_tab = 0
 
-[sub_resource type="Resource" id="18"]
+[sub_resource type="Resource" id="Resource_tcb26"]
 resource_name = "Split"
-script = ExtResource("2")
+script = ExtResource("2_ky8yd")
 direction = 0
 percent = 0.5
-first = SubResource("16")
-second = SubResource("17")
+first = SubResource("Resource_6pwxm")
+second = SubResource("Resource_24rfh")
 
-[sub_resource type="Resource" id="19"]
+[sub_resource type="Resource" id="Resource_ugja0"]
 resource_name = "Tabs"
-script = ExtResource("1")
+script = ExtResource("1_5ntxi")
 names = PackedStringArray("Palettes")
 current_tab = 0
 
-[sub_resource type="Resource" id="20"]
+[sub_resource type="Resource" id="Resource_hr77s"]
 resource_name = "Split"
-script = ExtResource("2")
+script = ExtResource("2_ky8yd")
 direction = 1
 percent = 0.692661
-first = SubResource("18")
-second = SubResource("19")
+first = SubResource("Resource_tcb26")
+second = SubResource("Resource_ugja0")
 
-[sub_resource type="Resource" id="21"]
+[sub_resource type="Resource" id="Resource_l8roh"]
 resource_name = "Split"
-script = ExtResource("2")
+script = ExtResource("2_ky8yd")
 direction = 1
-percent = 0.332031
-first = SubResource("15")
-second = SubResource("20")
+percent = 0.339595
+first = SubResource("Resource_6eonw")
+second = SubResource("Resource_hr77s")
 
-[sub_resource type="Resource" id="22"]
+[sub_resource type="Resource" id="Resource_s2xu6"]
 resource_name = "Split"
-script = ExtResource("2")
+script = ExtResource("2_ky8yd")
 direction = 0
 percent = 0.727569
-first = SubResource("8")
-second = SubResource("21")
+first = SubResource("Resource_85y6p")
+second = SubResource("Resource_l8roh")
 
-[sub_resource type="Resource" id="23"]
+[sub_resource type="Resource" id="Resource_cwe4h"]
 resource_name = "Split"
-script = ExtResource("2")
+script = ExtResource("2_ky8yd")
 direction = 0
-percent = 0.0
-first = SubResource("1")
-second = SubResource("22")
+percent = 0.0398437
+first = SubResource("Resource_xnnnd")
+second = SubResource("Resource_s2xu6")
 
 [resource]
 resource_name = "Layout"
-script = ExtResource("3")
-root = SubResource("23")
+script = ExtResource("3_7wdyb")
+root = SubResource("Resource_cwe4h")
 hidden_tabs = {
 "Perspective Editor": true,
 "Recorder": true,
