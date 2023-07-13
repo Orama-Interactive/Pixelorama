@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-07-04 13:08\n"
+"PO-Revision-Date: 2023-07-10 15:28\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,8 +169,9 @@ msgstr "Decalaj:"
 msgid "Wrap around:"
 msgstr "Încapsulare:"
 
-msgid "Centralize Image"
-msgstr "Centralizare imagine"
+#. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
+msgid "Center Frames"
+msgstr "Centrare cadre"
 
 msgid "Rotate Image"
 msgstr "Rotire imagine"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-07-04 11:08\n"
+"PO-Revision-Date: 2023-07-08 19:07\n"
 
 msgid "OK"
 msgstr "确定"
@@ -169,8 +169,9 @@ msgstr "偏移："
 msgid "Wrap around:"
 msgstr "环绕："
 
-msgid "Centralize Image"
-msgstr "集成图像"
+#. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
+msgid "Center Frames"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "旋转图像"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-07-04 12:07\n"
+"PO-Revision-Date: 2023-07-13 03:35\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,8 +169,9 @@ msgstr "Deslocamento:"
 msgid "Wrap around:"
 msgstr "Envolver em torno:"
 
-msgid "Centralize Image"
-msgstr "Centralizar Imagem"
+#. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
+msgid "Center Frames"
+msgstr "Centralizar Quadros"
 
 msgid "Rotate Image"
 msgstr "Girar imagem"
@@ -1298,7 +1299,7 @@ msgstr "Distância do snap:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Essa é a distância em píxeis na qual a ativação do ajuste automático aos guias e à grade ocorre."
 
 msgid "Grid"
 msgstr "Grade"
@@ -1332,7 +1333,7 @@ msgstr "Deslocamento da grade:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Define o deslocamento da grade em relação à origem da tela(canto superior esquerdo da imagem)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Desenhar sobre o Modo de Ladrilho:"
@@ -1536,11 +1537,11 @@ msgstr "Espaçamento"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
-msgstr ""
+msgstr "Espaçamento X:"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
-msgstr ""
+msgstr "Espaçamento Y:"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"

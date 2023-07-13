@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-07-04 13:08\n"
+"PO-Revision-Date: 2023-07-08 19:06\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -169,8 +169,9 @@ msgstr "Μετατόπιση:"
 msgid "Wrap around:"
 msgstr "Αναδίπλωση:"
 
-msgid "Centralize Image"
-msgstr "Μετακίνηση εικόνας στο κέντρο"
+#. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
+msgid "Center Frames"
+msgstr "Κεντράρισμα Καρέ"
 
 msgid "Rotate Image"
 msgstr "Περιστροφή εικόνας"
@@ -1817,7 +1818,7 @@ msgstr "Ιδιότητες καρέ"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
-msgstr "Αντιστροφή καρέ"
+msgstr "Αντιστροφή Καρέ"
 
 msgid "Layer"
 msgstr "Στρώση"

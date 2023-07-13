@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2023-07-04 11:08\n"
+"PO-Revision-Date: 2023-07-08 19:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -169,8 +169,9 @@ msgstr ""
 msgid "Wrap around:"
 msgstr ""
 
-msgid "Centralize Image"
-msgstr "Vycentrovat obrázek"
+#. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
+msgid "Center Frames"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "Otočit obrázek"
