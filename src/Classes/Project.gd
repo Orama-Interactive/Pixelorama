@@ -460,13 +460,13 @@ func _size_changed(value: Vector2i) -> void:
 		size = value
 		return
 	if size.x != 0:
-		tiles.x_basis = (tiles.x_basis * value.x / size.x).round()
+		tiles.x_basis = tiles.x_basis * value.x / size.x
 	else:
-		tiles.x_basis = Vector2(value.x, 0)
+		tiles.x_basis = Vector2i(value.x, 0)
 	if size.y != 0:
-		tiles.y_basis = (tiles.y_basis * value.y / size.y).round()
+		tiles.y_basis = tiles.y_basis * value.y / size.y
 	else:
-		tiles.y_basis = Vector2(0, value.y)
+		tiles.y_basis = Vector2i(0, value.y)
 	tiles.tile_size = value
 	Global.tile_mode_offset_dialog.change_mask()
 	size = value

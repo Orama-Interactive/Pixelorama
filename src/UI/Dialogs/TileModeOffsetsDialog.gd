@@ -108,8 +108,8 @@ func _on_TileModeOffsetsDialog_size_changed():
 
 
 func _on_Reset_pressed():
-	tile_mode.tiles.x_basis = Vector2(Global.current_project.size.x, 0)
-	tile_mode.tiles.y_basis = Vector2(0, Global.current_project.size.y)
+	tile_mode.tiles.x_basis = Vector2i(Global.current_project.size.x, 0)
+	tile_mode.tiles.y_basis = Vector2i(0, Global.current_project.size.y)
 	x_basis_x_spinbox.value = Global.current_project.size.x
 	x_basis_y_spinbox.value = 0
 	y_basis_x_spinbox.value = 0

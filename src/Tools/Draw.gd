@@ -461,7 +461,7 @@ func draw_indicator(left: bool) -> void:
 	if Global.current_project.tiles.mode and Global.current_project.tiles.has_point(_cursor):
 		var pos := _line_start if _draw_line else _cursor
 		var nearest_tile := Global.current_project.tiles.get_nearest_tile(pos)
-		if nearest_tile.position != Vector2.ZERO:
+		if nearest_tile.position != Vector2i.ZERO:
 			var offset := nearest_tile.position
 			draw_indicator_at(snap_position(_cursor), offset, Color.GREEN)
 
