@@ -142,7 +142,7 @@ func commit_undo(action: String) -> void:
 func _get_undo_data() -> Dictionary:
 	var data := {}
 	var project: Project = Global.current_project
-	var cels := []  # Array of Cels
+	var cels: Array[BaseCel] = []
 	if Global.animation_timer.is_stopped():
 		for cel_index in project.selected_cels:
 			cels.append(project.frames[cel_index[0]].cels[cel_index[1]])

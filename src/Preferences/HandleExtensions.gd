@@ -44,7 +44,7 @@ func _ready() -> void:
 		$HBoxContainer/AddExtensionButton.disabled = true
 		$HBoxContainer/OpenFolderButton.visible = false
 
-	var file_names := []  # Array of String(s)
+	var file_names: PackedStringArray = []
 	var dir := DirAccess.open(EXTENSIONS_PATH)
 	dir.make_dir(EXTENSIONS_PATH)
 	if DirAccess.get_open_error() == OK:

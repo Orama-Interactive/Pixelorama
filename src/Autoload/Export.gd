@@ -15,7 +15,7 @@ var custom_exporter_generators := {}
 var current_tab := ExportTab.IMAGE
 # All frames and their layers processed/blended into images
 var processed_images: Array[Image] = []
-var durations: PackedFloat32Array = []  # Array of floats
+var durations: PackedFloat32Array = []
 
 # Spritesheet options
 var orientation := Orientation.ROWS

@@ -26,7 +26,7 @@ var _line_polylines := []
 
 # Memorize some stuff when doing brush strokes
 var _stroke_project: Project
-var _stroke_images := []  # Array of Images
+var _stroke_images: Array[Image] = []
 var _is_mask_size_zero := true
 var _circle_tool_shortcut: Array[Vector2i]
 
@@ -665,7 +665,7 @@ func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 func _get_undo_data() -> Dictionary:
 	var data := {}
 	var project: Project = Global.current_project
-	var cels := []  # Array of Cels
+	var cels: Array[BaseCel] = []
 	if Global.animation_timer.is_stopped():
 		for cel_index in project.selected_cels:
 			cels.append(project.frames[cel_index[0]].cels[cel_index[1]])
