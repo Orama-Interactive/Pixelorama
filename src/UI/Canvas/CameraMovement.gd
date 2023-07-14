@@ -10,7 +10,7 @@ const CAMERA_SPEED_RATE := 15.0
 @export var index := 0
 
 var zoom_in_max := Vector2(500, 500)
-var zoom_out_max := Vector2.ONE
+var zoom_out_max := Vector2(0.01, 0.01)
 var viewport_container: SubViewportContainer
 var transparent_checker: ColorRect
 var mouse_pos := Vector2.ZERO
@@ -246,4 +246,3 @@ func save_values_to_project() -> void:
 	Global.current_project.cameras_rotation[index] = rotation
 	Global.current_project.cameras_zoom[index] = zoom
 	Global.current_project.cameras_offset[index] = offset
-	Global.current_project.cameras_zoom_max[index] = zoom_out_max

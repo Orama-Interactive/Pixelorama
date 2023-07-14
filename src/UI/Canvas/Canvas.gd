@@ -108,15 +108,7 @@ func _input(event: InputEvent) -> void:
 
 
 func camera_zoom() -> void:
-	# Set camera zoom based on the sprite size
-	var bigger_canvas_axis := maxi(Global.current_project.size.x, Global.current_project.size.y)
-	var zoom_out_max := Vector2(bigger_canvas_axis, bigger_canvas_axis) * 0.01
-
 	for camera in Global.cameras:
-		if zoom_out_max > Vector2.ONE:
-			camera.zoom_out_max = zoom_out_max
-		else:
-			camera.zoom_out_max = Vector2.ONE
 		camera.fit_to_frame(Global.current_project.size)
 		camera.save_values_to_project()
 
