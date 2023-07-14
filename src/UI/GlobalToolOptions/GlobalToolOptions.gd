@@ -4,9 +4,6 @@ signal dynamics_changed
 
 enum { ALPHA, SIZE }
 
-var alpha_last_pressed: BaseButton = null
-var size_last_pressed: BaseButton = null
-
 @onready var grid_container: GridContainer = find_child("GridContainer")
 @onready var horizontal_mirror: BaseButton = grid_container.get_node("Horizontal")
 @onready var vertical_mirror: BaseButton = grid_container.get_node("Vertical")
@@ -111,25 +108,6 @@ func _on_Dynamics_pressed() -> void:
 func _on_Dynamics_toggled(
 	button_pressed: bool, button: BaseButton, property: int, dynamic: int
 ) -> void:
-	if button_pressed:
-		var last_pressed: BaseButton
-		# The button calling this method is the one that was just selected
-#		var pressed_button: BaseButton
-		match property:
-			ALPHA:
-				last_pressed = alpha_last_pressed
-#				pressed_button = alpha_group.get_pressed_button()
-			SIZE:
-				last_pressed = size_last_pressed
-#				pressed_button = size_group.get_pressed_button()
-		if last_pressed == button:
-			# The button calling the method was the last one that was selected (we clicked it twice in a row)
-			# Toggle it off and set last_pressed to null so we can click it a third time to toggle it back on
-			button.button_pressed = false
-			_set_last_pressed_button(property, null)
-		# Update the last button pressed if we clicked something different
-		else:
-			_set_last_pressed_button(property, button)
 	var final_dynamic := dynamic
 	if not button.button_pressed:
 		final_dynamic = Tools.Dynamics.NONE
@@ -145,14 +123,6 @@ func _on_Dynamics_toggled(
 		file_name = "uncheck.png"
 	Global.change_button_texturerect(texture_button, file_name)
 	dynamics_changed.emit()
-
-
-func _set_last_pressed_button(prop: int, value: BaseButton) -> void:
-	match prop:
-		ALPHA:
-			alpha_last_pressed = value
-		SIZE:
-			size_last_pressed = value
 
 
 func _on_ThresholdPressure_updated(value_1, value_2) -> void:
