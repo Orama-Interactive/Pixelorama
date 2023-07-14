@@ -49,7 +49,6 @@ var cameras_zoom: PackedVector2Array = [
 	Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)
 ]
 var cameras_offset: PackedVector2Array = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
-var cameras_zoom_max: PackedVector2Array = [Vector2.ONE, Vector2.ONE, Vector2.ONE]
 
 # Export directory path and export file name
 var directory_path := ""
@@ -243,7 +242,6 @@ func change_project() -> void:
 
 	var i := 0
 	for camera in Global.cameras:
-		camera.zoom_out_max = cameras_zoom_max[i]
 		if camera == Global.camera:
 			camera.set_zoom_max_value()
 		camera.rotation = cameras_rotation[i]
