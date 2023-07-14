@@ -63,7 +63,7 @@ static func get_mtl_tex_paths(mtl_path: String) -> Array:
 		var lines := file.get_as_text().split("\n", false)
 		file.close()
 		for line in lines:
-			var parts = line.split(" ", false, 1)
+			var parts := line.split(" ", false, 1)
 			if parts[0] in ["map_Kd", "map_Ks", "map_Ka"]:
 				if !parts[1] in paths:
 					paths.push_back(parts[1])
@@ -75,10 +75,9 @@ static func search_mtl_path(obj_path: String) -> String:
 	var mtl_path := obj_path.get_base_dir().path_join(
 		obj_path.get_file().rsplit(".", false, 1)[0] + ".mtl"
 	)
-	var dir := DirAccess.open(mtl_path)
-	if !dir.file_exists(mtl_path):
+	if !FileAccess.file_exists(mtl_path):
 		mtl_path = obj_path.get_base_dir().path_join(obj_path.get_file() + ".mtl")
-	if !dir.file_exists(mtl_path):
+	if !FileAccess.file_exists(mtl_path):
 		return ""
 	return mtl_path
 
@@ -92,7 +91,7 @@ static func _create_mtl(obj: String, textures: Dictionary) -> Dictionary:
 
 	var lines := obj.split("\n", false)
 	for line in lines:
-		var parts = line.split(" ", false)
+		var parts := line.split(" ", false)
 		match parts[0]:
 			"#":
 				# Comment
@@ -115,7 +114,7 @@ static func _create_mtl(obj: String, textures: Dictionary) -> Dictionary:
 					print("Setting material color " + str(current_mat.albedo_color))
 			_:
 				if parts[0] in ["map_Kd", "map_Ks", "map_Ka"]:
-					var path = line.split(" ", false, 1)[1]
+					var path := line.split(" ", false, 1)[1]
 					if textures.has(path):
 						current_mat.albedo_texture = _create_texture(textures[path])
 	return mats
@@ -131,16 +130,15 @@ static func _get_image(mtl_filepath: String, tex_filename: String) -> Image:
 	if DEBUG:
 		print("    Debug: texture file path: " + texfilepath + " of type " + filetype)
 
-	var img: Image = Image.new()
+	var img := Image.new()
 	img.load(texfilepath)
 	return img
 
 
 static func _create_texture(data: PackedByteArray) -> ImageTexture:
-	var img: Image = Image.new()
+	var img := Image.new()
 	img.load_png_from_buffer(data)
-	var tex: ImageTexture = ImageTexture.create_from_image(img)
-	return tex
+	return ImageTexture.create_from_image(img)
 
 
 static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
@@ -157,7 +155,7 @@ static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 	# Parse
 	var lines := obj.split("\n", false)
 	for line in lines:
-		var parts = line.split(" ", false)
+		var parts := line.split(" ", false)
 		match parts[0]:
 			"#":
 				# Comment
@@ -165,15 +163,15 @@ static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 				pass
 			"v":
 				# Vertex
-				var n_v = Vector3(float(parts[1]), float(parts[2]), float(parts[3]))
+				var n_v := Vector3(float(parts[1]), float(parts[2]), float(parts[3]))
 				vertices.append(n_v)
 			"vn":
 				# Normal
-				var n_vn = Vector3(float(parts[1]), float(parts[2]), float(parts[3]))
+				var n_vn := Vector3(float(parts[1]), float(parts[2]), float(parts[3]))
 				normals.append(n_vn)
 			"vt":
 				# UV
-				var n_uv = Vector2(float(parts[1]), 1 - float(parts[2]))
+				var n_uv := Vector2(float(parts[1]), 1 - float(parts[2]))
 				uvs.append(n_uv)
 			"usemtl":
 				# Material group
@@ -194,9 +192,9 @@ static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 				# Face
 				if parts.size() == 4:
 					# Tri
-					var face = {"v": [], "vt": [], "vn": []}
+					var face := {"v": [], "vt": [], "vn": []}
 					for map in parts:
-						var vertices_index = map.split("/")
+						var vertices_index := map.split("/")
 						if str(vertices_index[0]) != "f":
 							face["v"].append(int(vertices_index[0]) - 1)
 							face["vt"].append(int(vertices_index[1]) - 1)
@@ -206,11 +204,11 @@ static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 						faces[mat_name].append(face)
 				elif parts.size() > 4:
 					# Triangulate
-					var points = []
+					var points: Array[PackedInt64Array] = []
 					for map in parts:
 						var vertices_index = map.split("/")
 						if str(vertices_index[0]) != "f":
-							var point = []
+							var point: PackedInt64Array = []
 							point.append(int(vertices_index[0]) - 1)
 							point.append(int(vertices_index[1]) - 1)
 							if vertices_index.size() > 2:
@@ -219,9 +217,9 @@ static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 					for i in points.size():
 						if i != 0:
 							var face = {"v": [], "vt": [], "vn": []}
-							var point0 = points[0]
-							var point1 = points[i]
-							var point2 = points[i - 1]
+							var point0 := points[0]
+							var point1 := points[i]
+							var point2 := points[i - 1]
 							face["v"].append(point0[0])
 							face["v"].append(point2[0])
 							face["v"].append(point1[0])
@@ -250,7 +248,7 @@ static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 			)
 
 		# Mesh Assembler
-		var st = SurfaceTool.new()
+		var st := SurfaceTool.new()
 		st.begin(Mesh.PRIMITIVE_TRIANGLES)
 		if !mats.has(matgroup):
 			mats[matgroup] = StandardMaterial3D.new()
@@ -258,20 +256,20 @@ static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 		for face in faces[matgroup]:
 			if face["v"].size() == 3:
 				# Vertices
-				var fan_v = PackedVector3Array()
+				var fan_v := PackedVector3Array()
 				fan_v.append(vertices[face["v"][0]])
 				fan_v.append(vertices[face["v"][2]])
 				fan_v.append(vertices[face["v"][1]])
 
 				# Normals
-				var fan_vn = PackedVector3Array()
+				var fan_vn := PackedVector3Array()
 				if face["vn"].size() > 0:
 					fan_vn.append(normals[face["vn"][0]])
 					fan_vn.append(normals[face["vn"][2]])
 					fan_vn.append(normals[face["vn"][1]])
 
 				# Textures
-				var fan_vt = PackedVector2Array()
+				var fan_vt := PackedVector2Array()
 				if face["vt"].size() > 0:
 					for k in [0, 2, 1]:
 						var f = face["vt"][k]
@@ -284,7 +282,7 @@ static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 				)
 		mesh = st.commit(mesh)
 	for k in mesh.get_surface_count():
-		var mat = mesh.surface_get_material(k)
+		var mat := mesh.surface_get_material(k)
 		mat_name = ""
 		for m in mats:
 			if mats[m] == mat:
