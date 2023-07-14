@@ -16,5 +16,5 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 text = "Tool Name"
