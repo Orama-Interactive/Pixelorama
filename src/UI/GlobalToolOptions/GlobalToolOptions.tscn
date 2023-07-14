@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://wo0hqxkst808"]
+[gd_scene load_steps=14 format=3 uid="uid://wo0hqxkst808"]
 
 [ext_resource type="Texture2D" uid="uid://cjrokejjsp5dm" path="res://assets/graphics/misc/horizontal_mirror_off.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://hiduvaa73fr6" path="res://assets/graphics/misc/vertical_mirror_off.png" id="2"]
@@ -8,6 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://dg3dumyfj1682" path="res://assets/graphics/misc/dynamics.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://di8au2u87jgv5" path="res://assets/graphics/misc/uncheck.png" id="7"]
 [ext_resource type="PackedScene" uid="uid://bmsc0s03pwji4" path="res://src/UI/Nodes/MaxMinEdit.tscn" id="8"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ahrcw"]
+allow_unpress = true
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_t01h7"]
+allow_unpress = true
 
 [sub_resource type="Gradient" id="3"]
 interpolation_mode = 1
@@ -154,6 +160,7 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
+button_group = SubResource("ButtonGroup_ahrcw")
 icon_alignment = 1
 expand_icon = true
 
@@ -169,6 +176,7 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
+button_group = SubResource("ButtonGroup_ahrcw")
 
 [node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/AlphaVelocityButton"]
 layout_mode = 0
@@ -186,6 +194,7 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
+button_group = SubResource("ButtonGroup_t01h7")
 
 [node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/SizePressureButton"]
 layout_mode = 0
@@ -199,6 +208,7 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
+button_group = SubResource("ButtonGroup_t01h7")
 
 [node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/SizeVelocityButton"]
 layout_mode = 0
