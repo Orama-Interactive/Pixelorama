@@ -958,10 +958,6 @@ scale_image={
 "deadzone": 0.5,
 "events": [  ]
 }
-centralize_image={
-"deadzone": 0.5,
-"events": [  ]
-}
 crop_image={
 "deadzone": 0.5,
 "events": [  ]
