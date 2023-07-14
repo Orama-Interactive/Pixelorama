@@ -18,7 +18,7 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="Header"]
 layout_mode = 2
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 text = "Reference Images"
 
 [node name="HSeparator" type="HSeparator" parent="Header"]

@@ -125,7 +125,7 @@ theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/IntervalHeader"]
 layout_mode = 2
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 text = "Interval"
 
 [node name="HSeparator" type="HSeparator" parent="Dialogs/Options/PanelContainer/VBoxContainer/IntervalHeader"]
@@ -171,7 +171,7 @@ theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeHeader"]
 layout_mode = 2
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 text = "Mode"
 
 [node name="HSeparator" type="HSeparator" parent="Dialogs/Options/PanelContainer/VBoxContainer/ModeHeader"]
@@ -221,7 +221,7 @@ theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathHeader"]
 layout_mode = 2
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 text = "Path3D"
 
 [node name="HSeparator" type="HSeparator" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathHeader"]

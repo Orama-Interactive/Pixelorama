@@ -29,7 +29,7 @@ theme_override_constants/separation = 0
 [node name="Label" type="Label" parent="VBoxContainer/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 text = "Perspective Editor"
 
 [node name="AddPoint" type="Button" parent="VBoxContainer/Header"]

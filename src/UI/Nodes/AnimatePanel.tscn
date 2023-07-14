@@ -16,7 +16,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/TopOptions"]
 layout_mode = 2
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 text = "Animatable Properties"
 
 [node name="PreviewSlider" parent="VBoxContainer/TopOptions" instance=ExtResource("2")]
@@ -48,7 +48,7 @@ layout_mode = 2
 [node name="Name" type="Label" parent="VBoxContainer/HBoxContainer/Options/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer/Options/HBoxContainer"]
 layout_mode = 2

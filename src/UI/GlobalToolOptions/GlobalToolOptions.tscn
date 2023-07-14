@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://dg3dumyfj1682" path="res://assets/graphics/misc/dynamics.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://di8au2u87jgv5" path="res://assets/graphics/misc/uncheck.png" id="7"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/MaxMinEdit.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://bmsc0s03pwji4" path="res://src/UI/Nodes/MaxMinEdit.tscn" id="8"]
 
 [sub_resource type="Gradient" id="3"]
 interpolation_mode = 1
@@ -124,7 +124,7 @@ texture = ExtResource("6")
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 186.0
-offset_bottom = 278.0
+offset_bottom = 288.0
 
 [node name="DynamicsOptions" type="GridContainer" parent="DynamicsPanel/VBoxContainer"]
 layout_mode = 2
@@ -212,7 +212,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="DynamicsPanel/VBoxContainer/LimitsHeader"]
 layout_mode = 2
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 text = "Value limits"
 
 [node name="HSeparator" type="HSeparator" parent="DynamicsPanel/VBoxContainer/LimitsHeader"]
@@ -308,7 +308,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="DynamicsPanel/VBoxContainer/ThresholdsHeader"]
 layout_mode = 2
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 text = "Thresholds"
 
 [node name="HSeparator" type="HSeparator" parent="DynamicsPanel/VBoxContainer/ThresholdsHeader"]
@@ -330,9 +330,7 @@ start = 0.2
 end = 0.8
 
 [node name="TextureRect" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure" index="0"]
-layout_mode = 2
 texture = SubResource("4")
-expand_mode = 1
 
 [node name="PressurePreview" type="ProgressBar" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure/TextureRect" index="0"]
 unique_name_in_owner = true
@@ -345,7 +343,10 @@ step = 0.001
 value = 0.497
 
 [node name="Value" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure/TextureRect" index="1"]
-layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1.0
+offset_bottom = 23.0
 
 [node name="ThresholdVelocityLabel" type="Label" parent="DynamicsPanel/VBoxContainer/ThresholdContainer"]
 layout_mode = 2
@@ -357,9 +358,7 @@ start = 0.2
 end = 0.8
 
 [node name="TextureRect" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" index="0"]
-layout_mode = 2
 texture = SubResource("5")
-expand_mode = 1
 
 [node name="VelocityPreview" type="ProgressBar" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity/TextureRect" index="0"]
 unique_name_in_owner = true
@@ -371,7 +370,10 @@ max_value = 1.0
 step = 0.001
 
 [node name="Value" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity/TextureRect" index="1"]
-layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1.0
+offset_bottom = 23.0
 
 [connection signal="resized" from="." to="." method="_on_resized"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Horizontal" to="." method="_on_Horizontal_toggled"]

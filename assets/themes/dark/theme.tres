@@ -657,6 +657,7 @@ HSlider/styles/grabber_area_highlight = SubResource("87")
 HSlider/styles/slider = SubResource("88")
 HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 8
+HeaderSmall/font_sizes/font_size = 18
 Icons/colors/modulate_color = Color(0.74902, 0.74902, 0.74902, 1)
 ItemList/colors/font_color = Color(0.77832, 0.77832, 0.77832, 1)
 ItemList/colors/font_color_selected = Color(1, 1, 1, 1)

@@ -40,7 +40,7 @@ texture = ExtResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 14.0
-theme_type_variation = "Header"
+theme_type_variation = &"HeaderSmall"
 valign = 1
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="TitleContainer"]

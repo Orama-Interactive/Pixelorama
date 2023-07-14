@@ -35,7 +35,7 @@ theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="VBoxContainer/PreviewHeader"]
 layout_mode = 2
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 text = "Preview"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/PreviewHeader"]
@@ -64,7 +64,7 @@ theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="VBoxContainer/LayoutsHeader"]
 layout_mode = 2
-theme_type_variation = &"Header"
+theme_type_variation = &"HeaderSmall"
 text = "Layouts"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/LayoutsHeader"]
