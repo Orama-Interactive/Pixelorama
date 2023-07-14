@@ -49,6 +49,7 @@ func _add_nodes() -> void:
 	viewport.transparent_bg = true
 	var world := World3D.new()
 	world.environment = Environment.new()
+	world.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	viewport.world_3d = world
 	parent_node = Node3D.new()
 	camera = Camera3D.new()
