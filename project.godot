@@ -14,6 +14,7 @@ config/name="Pixelorama"
 config/description="A free & open-source 2D sprite editor"
 run/main_scene="res://src/Main.tscn"
 config/use_custom_user_dir=true
+config/custom_user_dir_name="pixelorama"
 config/features=PackedStringArray("4.1")
 run/low_processor_mode=true
 boot_splash/bg_color=Color(0.145098, 0.145098, 0.164706, 1)
@@ -21,9 +22,8 @@ boot_splash/image="res://assets/graphics/splash.png"
 config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
-config/custom_user_dir_name.X11="pixelorama"
-config/Version="v0.11.1-rc2"
-config/ExtensionsAPI_Version=3
+config/Version="v1.0-dev"
+config/ExtensionsAPI_Version=4
 config/Pxo_Version=2
 
 [audio]
