@@ -551,21 +551,3 @@ func update_hint_tooltips() -> void:
 			var event_type: InputEvent = events[0]
 			hint = event_type.as_text()
 		tip.tooltip_text = tr(ui_tooltips[tip]) % hint
-
-
-# Used in case some of the values in a dictionary are Strings, when they should be something else
-func convert_dictionary_values(dict: Dictionary) -> void:
-	for key in dict:
-		if key == "id" or key == "type":
-			dict[key] = int(dict[key])
-		if typeof(dict[key]) != TYPE_STRING:
-			continue
-		if "transform" in key:  # Convert a String to a Transform3D
-			var transform_string: String = dict[key].replace(" - ", ", ")
-			dict[key] = str_to_var("Transform3D(" + transform_string + ")")
-		elif "color" in key:  # Convert a String to a Color
-			dict[key] = str_to_var("Color(" + dict[key] + ")")
-		elif "v2" in key:  # Convert a String to a Vector2
-			dict[key] = str_to_var("Vector2" + dict[key])
-		elif "size" in key or "center_offset" in key:  # Convert a String to a Vector3
-			dict[key] = str_to_var("Vector3" + dict[key])

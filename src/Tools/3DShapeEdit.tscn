@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Tools/3DShapeEdit.gd" id="2"]
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSlider.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="4"]
 [ext_resource type="Script" path="res://src/UI/Nodes/ValueSlider.gd" id="5"]
 [ext_resource type="Script" path="res://src/UI/Nodes/CollapsibleContainer.gd" id="6"]
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV3.tscn" id="7"]
@@ -176,8 +176,6 @@ text = "Ambient color energy:"
 [node name="AmbientEnergy" parent="CelOptions/EnvironmentOptions/GridContainer" index="3" instance=ExtResource("4")]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 max_value = 16.0
 step = 0.01
 value = 1.0
@@ -596,8 +594,6 @@ text = "Energy:"
 [node name="LightEnergy" parent="ObjectOptions/LightOptions/GridContainer" index="3" instance=ExtResource("4")]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 max_value = 16.0
 step = 0.01
 value = 1.0
@@ -699,6 +695,10 @@ one_shot = true
 
 [node name="LoadModelDialog" type="FileDialog" parent="." index="6"]
 mode = 1
+title = "Open File(s)"
+size = Vector2i(558, 300)
+ok_button_text = "Open"
+file_mode = 1
 access = 2
 filters = PackedStringArray("*.obj")
 show_hidden_files = true
