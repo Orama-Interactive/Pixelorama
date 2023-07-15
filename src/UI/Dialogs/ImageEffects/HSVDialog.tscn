@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/HSVDialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/ValueSlider.tscn" id="3"]
 
 [node name="HSVDialog" instance=ExtResource("2")]
+title = "Adjust Hue/Saturation/Value"
 script = ExtResource("1")
 
 [node name="VBoxContainer" parent="." index="3"]
@@ -12,23 +13,17 @@ offset_bottom = 344.0
 
 [node name="HueSlider" parent="VBoxContainer" index="2" instance=ExtResource("3")]
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 min_value = -180.0
 max_value = 180.0
 prefix = "Hue:"
 
 [node name="SaturationSlider" parent="VBoxContainer" index="3" instance=ExtResource("3")]
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 min_value = -100.0
 prefix = "Saturation:"
 
 [node name="ValueSlider" parent="VBoxContainer" index="4" instance=ExtResource("3")]
 layout_mode = 2
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
 min_value = -100.0
 prefix = "Value:"
 

@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/GradientMapDialog.gd" id="3"]
 
 [node name="GradientMapDialog" instance=ExtResource("1")]
+title = "Gradient Map"
 script = ExtResource("3")
 
 [node name="VBoxContainer" parent="." index="3"]

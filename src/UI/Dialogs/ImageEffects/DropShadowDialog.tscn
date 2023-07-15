@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="3"]
 
 [node name="DropShadowDialog" instance=ExtResource("1")]
+title = "Drop Shadow"
 script = ExtResource("2")
 
 [node name="VBoxContainer" parent="." index="3"]
