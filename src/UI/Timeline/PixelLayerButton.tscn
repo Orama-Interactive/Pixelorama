@@ -5,11 +5,8 @@
 
 [node name="PixelLayerButton" instance=ExtResource("1")]
 
-[node name="HBoxContainer" parent="." index="0"]
-layout_mode = 1
-anchors_preset = 15
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ExpandButton" parent="HBoxContainer/LayerButtons" index="0"]
+visible = false
 
 [node name="TextureRect" parent="HBoxContainer/LayerButtons/ExpandButton" index="0"]
 anchor_left = 0.0

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=63 format=3 uid="uid://w1q3piojx08s"]
+[gd_resource type="Theme" load_steps=64 format=3 uid="uid://w1q3piojx08s"]
 
 [ext_resource type="Texture2D" uid="uid://c7u0yofrpm50a" path="res://assets/graphics/misc/value_slider.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://bq8h66v4ie8xl" path="res://assets/graphics/misc/value_arrow_hover.svg" id="4"]
@@ -11,9 +11,20 @@ content_margin_left = 6.0
 content_margin_top = 4.0
 content_margin_right = 6.0
 content_margin_bottom = 4.0
-bg_color = Color(0.0906248, 0.0906248, 0.0906248, 1)
-draw_center = false
+bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
 border_color = Color(0.0792967, 0.0792967, 0.0792967, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0f5f"]
+content_margin_left = 6.0
+content_margin_top = 4.0
+content_margin_right = 6.0
+content_margin_bottom = 4.0
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.184314, 0.396078, 0.533333, 1)
 
 [sub_resource type="StyleBoxFlat" id="15"]
 content_margin_left = 4.0
@@ -569,16 +580,14 @@ default_font = ExtResource("7_q8bkb")
 default_font_size = 16
 BoxContainer/constants/separation = 4
 Button/colors/font_color = Color(0.77832, 0.77832, 0.77832, 1)
-Button/colors/font_color_disabled = Color(1, 1, 1, 0.3)
-Button/colors/font_color_hover = Color(0.866992, 0.866992, 0.866992, 1)
-Button/colors/font_color_pressed = Color(0.184314, 0.396078, 0.533333, 1)
+Button/colors/font_pressed_color = Color(0.184314, 0.396078, 0.533333, 1)
 Button/colors/icon_color_hover = Color(1.15, 1.15, 1.15, 1)
 Button/colors/icon_color_pressed = Color(0.211961, 0.45549, 0.613333, 1)
 Button/styles/disabled = SubResource("23")
 Button/styles/focus = SubResource("23")
 Button/styles/hover = SubResource("23")
 Button/styles/normal = SubResource("23")
-Button/styles/pressed = SubResource("23")
+Button/styles/pressed = SubResource("StyleBoxFlat_t0f5f")
 CheckBox/colors/font_color = Color(0.77832, 0.77832, 0.77832, 1)
 CheckBox/colors/font_color_disabled = Color(1, 1, 1, 0.3)
 CheckBox/colors/font_color_hover = Color(0.866992, 0.866992, 0.866992, 1)
