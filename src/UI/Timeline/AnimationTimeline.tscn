@@ -83,12 +83,13 @@ layout_mode = 2
 
 [node name="LayerButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_vertical = 3
 theme_override_constants/separation = 9
 
 [node name="AddLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(44, 22)
 layout_mode = 2
+size_flags_vertical = 4
 tooltip_text = "Create a new layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -139,6 +140,7 @@ texture = ExtResource("10")
 [node name="RemoveLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+size_flags_vertical = 4
 tooltip_text = "Remove current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
@@ -161,6 +163,7 @@ texture = ExtResource("6")
 [node name="MoveUpLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+size_flags_vertical = 4
 tooltip_text = "Move up the current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
@@ -183,6 +186,7 @@ texture = ExtResource("4")
 [node name="MoveDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+size_flags_vertical = 4
 tooltip_text = "Move down the current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
@@ -205,6 +209,7 @@ texture = ExtResource("3")
 [node name="CloneLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+size_flags_vertical = 4
 tooltip_text = "Clone current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -226,6 +231,7 @@ texture = ExtResource("7")
 [node name="MergeDownLayer" type="Button" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
+size_flags_vertical = 4
 tooltip_text = "Merge current layer with the one below"
 focus_mode = 0
 mouse_default_cursor_shape = 8
@@ -284,7 +290,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
 tooltip_text = "Add a new frame"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -305,7 +310,6 @@ texture = ExtResource("19")
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
 tooltip_text = "Remove Frame"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -328,7 +332,6 @@ texture = ExtResource("20")
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
 tooltip_text = "Clone Frame"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -349,7 +352,6 @@ texture = ExtResource("27")
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
 tooltip_text = "Manage frame tags"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -370,7 +372,6 @@ texture = ExtResource("28")
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
 tooltip_text = "Move the selected frame to the left."
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -392,7 +393,6 @@ flip_h = true
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
 tooltip_text = "Move the selected frame to the right."
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -415,7 +415,6 @@ layout_mode = 2
 [node name="FirstFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-size_flags_vertical = 4
 tooltip_text = "Jump to the first frame
 (%s)"
 focus_mode = 0
@@ -438,7 +437,6 @@ texture = ExtResource("21")
 [node name="PreviousFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-size_flags_vertical = 4
 tooltip_text = "Go to the previous frame
 (%s)"
 focus_mode = 0
@@ -461,7 +459,6 @@ texture = ExtResource("23")
 [node name="PlayBackwards" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-size_flags_vertical = 4
 tooltip_text = "Play the animation backwards (from end to beginning)
 (%s)"
 focus_mode = 0
@@ -486,7 +483,6 @@ texture = ExtResource("24")
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
 tooltip_text = "Play the animation forward (from beginning to end)
 (%s)"
 focus_mode = 0
@@ -510,7 +506,6 @@ texture = ExtResource("22")
 [node name="NextFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-size_flags_vertical = 4
 tooltip_text = "Go to the next frame
 (%s)"
 focus_mode = 0
@@ -533,7 +528,6 @@ texture = ExtResource("26")
 [node name="LastFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-size_flags_vertical = 4
 tooltip_text = "Jump to the last frame
 (%s)"
 focus_mode = 0
@@ -560,7 +554,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
 tooltip_text = "Onion Skinning settings"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -582,7 +575,6 @@ texture = ExtResource("30")
 [node name="OnionSkinning" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-size_flags_vertical = 4
 tooltip_text = "Enable/disable Onion Skinning"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -604,7 +596,6 @@ texture = ExtResource("29")
 [node name="LoopAnim" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-size_flags_vertical = 4
 tooltip_text = "Cycle loop"
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -625,7 +616,6 @@ texture = ExtResource("31")
 custom_minimum_size = Vector2(72, 24)
 layout_mode = 2
 size_flags_horizontal = 1
-size_flags_vertical = 4
 tooltip_text = "How many frames per second should the animation preview be?
 The more FPS, the faster the animation plays."
 min_value = 0.1
