@@ -171,25 +171,32 @@ func get_image() -> Image:
 
 func serialize() -> Dictionary:
 	var dict := super.serialize()
-	dict["scene_properties"] = scene_properties
-	dict["object_properties"] = object_properties
+	var scene_properties_str := {}
+	for prop in scene_properties:
+		scene_properties_str[prop] = var_to_str(scene_properties[prop])
+	var object_properties_str := {}
+	for prop in object_properties:
+		object_properties_str[prop] = var_to_str(object_properties[prop])
+	dict["scene_properties"] = scene_properties_str
+	dict["object_properties"] = object_properties_str
 	return dict
 
 
 func deserialize(dict: Dictionary) -> void:
 	super.deserialize(dict)
-	scene_properties = dict["scene_properties"]
-	var objects_copy = dict["object_properties"]
-	for object in objects_copy:
+	scene_properties = {}
+	var scene_properties_str: Dictionary = dict["scene_properties"]
+	for prop in scene_properties_str:
+		scene_properties[prop] = str_to_var(scene_properties_str[prop])
+	var objects_copy_str: Dictionary = dict["object_properties"]
+	for object in objects_copy_str:
 		if typeof(object) != TYPE_STRING:
 			return
-		Global.convert_dictionary_values(objects_copy[object])
 		var id := int(object)
 		if current_object_id < id:
 			current_object_id = id
-		object_properties[id] = objects_copy[object]
+		object_properties[id] = str_to_var(objects_copy_str[object])
 	current_object_id += 1
-	Global.convert_dictionary_values(scene_properties)
 	deserialize_scene_properties()
 	for object in object_properties:
 		_add_object_node(object)

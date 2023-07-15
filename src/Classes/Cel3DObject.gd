@@ -136,7 +136,7 @@ func deserialize(dict: Dictionary) -> void:
 				mesh.is_hemisphere = dict["mesh_is_hemisphere"]
 			Type.CAPSULE:
 				mesh.radius = dict["mesh_radius"]
-				mesh.height = dict["mesh_mid_height"]
+				mesh.height = dict["mesh_height"]
 				mesh.radial_segments = dict["mesh_radial_segments"]
 				mesh.rings = dict["mesh_rings"]
 			Type.CYLINDER:
