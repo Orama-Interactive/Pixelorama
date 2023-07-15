@@ -30,6 +30,7 @@ Built using Godot 3.5.2
 - The "OK" button of the save and export dialogs are now named "Save" and "Export" respectively. [#876](https://github.com/Orama-Interactive/Pixelorama/pull/876)
 
 ### Fixed
+- Generating palettes from the current project no longer crashes when group and 3D layers exist.
 - Fixed wrong saturation and value values. They were divided by 360, while they should have been divided by 100. [#879](https://github.com/Orama-Interactive/Pixelorama/pull/879)
 - Fixed image effect animations appearing when changing the affected option, even if that image effect had no animatable properties. [#879](https://github.com/Orama-Interactive/Pixelorama/pull/879)
 
