@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://src/UI/Dialogs/ImageEffects/OffsetImage.gd" id="3"]
 
 [node name="OffsetImage" instance=ExtResource("1")]
+title = "Offset Image"
 script = ExtResource("3")
 
 [node name="VBoxContainer" parent="." index="3"]

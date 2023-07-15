@@ -13,16 +13,8 @@
 [sub_resource type="ButtonGroup" id="ButtonGroup_8vsfb"]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
-margin_right = 620.0
-margin_bottom = 450.0
-window_title = "Preferences"
-resizable = true
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_horizontal_guides_": [  ],
-"_edit_use_anchors_": false,
-"_edit_vertical_guides_": [  ]
-}
+title = "Preferences"
+script = ExtResource("1")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 anchor_right = 1.0

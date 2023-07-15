@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d1urikaf1lxwl" path="res://assets/graphics/timeline/new_frame.png" id="2"]
 
 [node name="FrameTagDialog" type="AcceptDialog"]
+title = "Frame Tag Properties"
 size = Vector2i(413, 300)
 script = ExtResource("1")
 

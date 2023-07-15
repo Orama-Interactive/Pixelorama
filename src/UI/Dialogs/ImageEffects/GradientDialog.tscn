@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://src/UI/Nodes/ValueSliderV2.tscn" id="5"]
 
 [node name="GradientDialog" instance=ExtResource("2")]
+title = "Gradient"
 size = Vector2i(700, 603)
 script = ExtResource("1")
 
@@ -102,9 +103,9 @@ layout_mode = 2
 focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
-min_value = 0.01
+min_value = 1.0
 max_value = 200.0
-value = 100.01
+value = 100.0
 allow_greater = true
 nine_patch_stretch = true
 stretch_margin_left = 3

@@ -664,7 +664,6 @@ size_flags_vertical = 3
 layout_mode = 2
 
 [node name="LayerLabel" type="Label" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit/VBoxContainer"]
-custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 text = "Layers"
 
@@ -681,7 +680,7 @@ h_scroll_bar_node_path = NodePath("../../../BreakFreeFromContainer/FrameScrollBa
 layout_mode = 2
 
 [node name="FrameHBox" type="HBoxContainer" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit/FrameScrollContainer/FrameAndCelBox"]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="CelVBox" type="VBoxContainer" parent="TimelineContainer/PanelContainer/VBoxContainer/TimelineScroll/LayerFrameHSplit/FrameScrollContainer/FrameAndCelBox"]

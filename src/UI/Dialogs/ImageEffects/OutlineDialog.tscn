@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="3"]
 
 [node name="OutlineDialog" instance=ExtResource("3")]
+title = "Outline"
 script = ExtResource("1")
 
 [node name="VBoxContainer" parent="." index="3"]

@@ -7,6 +7,7 @@
 
 [node name="ExportDialog" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0
+title = "Export..."
 dialog_hide_on_ok = false
 script = ExtResource("1")
 
