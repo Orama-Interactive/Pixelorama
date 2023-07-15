@@ -242,8 +242,6 @@ func change_project() -> void:
 
 	var i := 0
 	for camera in Global.cameras:
-		if camera == Global.camera:
-			camera.set_zoom_max_value()
 		camera.rotation = cameras_rotation[i]
 		camera.zoom = cameras_zoom[i]
 		camera.offset = cameras_offset[i]
