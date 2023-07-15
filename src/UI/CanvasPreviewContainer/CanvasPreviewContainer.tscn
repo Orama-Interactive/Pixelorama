@@ -48,6 +48,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 min_value = 1.0
+max_value = 5.0
 step = 0.01
 value = 1.0
 

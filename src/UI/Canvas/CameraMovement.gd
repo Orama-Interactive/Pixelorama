@@ -27,17 +27,12 @@ func _ready() -> void:
 		rotation_slider.value_changed.connect(_rotation_value_changed)
 		zoom_slider = Global.top_menu_container.get_node("%ZoomSlider")
 		zoom_slider.value_changed.connect(_zoom_value_changed)
-		set_zoom_max_value()
 	zoom_changed.connect(_zoom_changed)
 	rotation_changed.connect(_rotation_changed)
 	ignore_rotation = false
 	viewport_container = get_parent().get_parent()
 	transparent_checker = get_parent().get_node("TransparentChecker")
 	update_transparent_checker_offset()
-
-
-func set_zoom_max_value() -> void:
-	zoom_slider.max_value = 100.0 * zoom_in_max.x
 
 
 func _rotation_value_changed(value: float) -> void:

@@ -9,14 +9,7 @@ extends PanelContainer
 
 
 func _ready() -> void:
-	Global.project_changed.connect(_project_changed)
 	camera.zoom_changed.connect(_zoom_changed)
-
-
-func _project_changed() -> void:
-	preview_zoom_slider.value_changed.disconnect(_on_PreviewZoomSlider_value_changed)
-	preview_zoom_slider.max_value = camera.zoom_in_max.x / 100.0
-	preview_zoom_slider.value_changed.connect(_on_PreviewZoomSlider_value_changed)
 
 
 func _zoom_changed() -> void:
