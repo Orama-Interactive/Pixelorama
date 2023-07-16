@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://src/UI/Canvas/Selection.gd" id="8"]
 [ext_resource type="Shader" path="res://src/Shaders/MarchingAntsOutline.gdshader" id="9"]
 [ext_resource type="Shader" path="res://src/Shaders/AutoInvertColors.gdshader" id="10"]
-[ext_resource type="PackedScene" path="res://src/UI/Canvas/MouseGuideContainer.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://no3w7e2264u4" path="res://src/UI/Canvas/MouseGuideContainer.tscn" id="11"]
 [ext_resource type="Script" path="res://src/UI/Canvas/OnionSkinning.gd" id="12"]
 [ext_resource type="Script" path="res://src/UI/Canvas/CropRect.gd" id="13"]
 [ext_resource type="Script" path="res://src/UI/Canvas/Gizmos3D.gd" id="14"]

@@ -1,6 +1,6 @@
 class_name ReferenceImage
 extends Sprite2D
-# A class describing a reference image
+## A class describing a reference image
 
 signal properties_changed
 
@@ -21,19 +21,19 @@ func change_properties() -> void:
 	properties_changed.emit()
 
 
-# Resets the position and scale of the reference image.
+## Resets the position and scale of the reference image.
 func position_reset() -> void:
 	position = project.size / 2.0
 	if texture != null:
 		scale = (
 			Vector2.ONE
-			* min(project.size.x / texture.get_width(), project.size.y / texture.get_height())
+			* minf(float(project.size.x) / texture.get_width(), float(project.size.y) / texture.get_height())
 		)
 	else:
 		scale = Vector2.ONE
 
 
-# Serialize details of the reference image.
+## Serialize details of the reference image.
 func serialize() -> Dictionary:
 	return {
 		"x": position.x,
@@ -50,15 +50,14 @@ func serialize() -> Dictionary:
 	}
 
 
-# Load details of the reference image from a dictionary.
-# Be aware that new ReferenceImages are created via deserialization.
-# This is because deserialization sets up some nice defaults.
+## Load details of the reference image from a dictionary.
+## Be aware that new ReferenceImages are created via deserialization.
+## This is because deserialization sets up some nice defaults.
 func deserialize(d: Dictionary) -> void:
 	modulate = Color(1, 1, 1, 0.5)
 	if d.has("image_path"):
 		# Note that reference images are referred to by path.
 		# These images may be rather big.
-		# Also
 		image_path = d["image_path"]
 		var img := Image.new()
 		if img.load(image_path) == OK:
@@ -97,7 +96,7 @@ func deserialize(d: Dictionary) -> void:
 	change_properties()
 
 
-# Useful for HTML5
+## Useful for HTML5
 func create_from_image(image: Image) -> void:
 	var itex := ImageTexture.create_from_image(image)
 	texture = itex
