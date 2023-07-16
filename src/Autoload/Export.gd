@@ -187,8 +187,7 @@ func export_processed_images(
 				frame_tag_directory.make_dir(export_path.get_base_dir().get_file())
 
 		if not ignore_overwrites:  # Check if the files already exist
-			var file_check := DirAccess.open(export_path)
-			if file_check.file_exists(export_path):
+			if FileAccess.file_exists(export_path):
 				if not paths_of_existing_files.is_empty():
 					paths_of_existing_files += "\n"
 				paths_of_existing_files += export_path
