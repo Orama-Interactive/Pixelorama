@@ -30,7 +30,7 @@ func deserialize(data: Dictionary):
 
 func initiate(data: Dictionary, vanishing_point: Node):
 	_vanishing_point = vanishing_point
-	width = Global.camera.zoom.x * LINE_WIDTH
+	width = LINE_WIDTH / Global.camera.zoom.x
 	Global.canvas.add_child(self)
 	deserialize(data)
 	refresh()
@@ -42,7 +42,7 @@ func refresh():
 
 
 func draw_perspective_line():
-	var start = Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
+	var start := Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
 	points[0] = start
 	if is_hidden:
 		points[1] = start
@@ -53,15 +53,15 @@ func draw_perspective_line():
 
 
 func hide_perspective_line():
-	var start = Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
+	var start := Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
 	points[1] = start
 	is_hidden = true
 
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
-		var mouse_point = Global.canvas.current_pixel
-		var project_size = Global.current_project.size
+		var mouse_point := Global.canvas.current_pixel
+		var project_size := Global.current_project.size
 
 		if track_mouse:
 			if !Global.can_draw or !Global.has_focus or Global.perspective_editor.tracker_disabled:
@@ -72,7 +72,7 @@ func _input(event: InputEvent) -> void:
 				var start = Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
 				is_hidden = false
 				draw_perspective_line()
-				angle = rad_to_deg(mouse_point.angle_to_point(points[0]))
+				angle = rad_to_deg(points[0].angle_to_point(mouse_point))
 				if angle < 0:
 					angle += 360
 
@@ -88,21 +88,21 @@ func _input(event: InputEvent) -> void:
 
 
 func try_rotate_scale():
-	var mouse_point = Global.canvas.current_pixel
-	var project_size = Global.current_project.size
+	var mouse_point := Global.canvas.current_pixel
+	var project_size := Global.current_project.size
 	var test_line := (points[1] - points[0]).rotated(deg_to_rad(90)).normalized()
-	var from_a = mouse_point - test_line * Global.camera.zoom.x * LINE_WIDTH * 2
-	var from_b = mouse_point + test_line * Global.camera.zoom.x * LINE_WIDTH * 2
+	var from_a := mouse_point - test_line * CIRCLE_RAD * 2 / Global.camera.zoom.x
+	var from_b := mouse_point + test_line * CIRCLE_RAD * 2 / Global.camera.zoom.x
 	if Input.is_action_just_pressed("left_mouse") and Global.can_draw and Global.has_focus:
 		if (
 			Geometry2D.segment_intersects_segment(from_a, from_b, points[0], points[1])
-			or mouse_point.distance_to(points[1]) < Global.camera.zoom.x * CIRCLE_RAD * 2
+			or mouse_point.distance_to(points[1]) < CIRCLE_RAD * 2 / Global.camera.zoom.x
 		):
 			if (
 				!Rect2(Vector2.ZERO, project_size).has_point(mouse_point)
 				or Global.move_guides_on_canvas
 			):
-				if mouse_point.distance_to(points[1]) < Global.camera.zoom.x * CIRCLE_RAD * 2:
+				if mouse_point.distance_to(points[1]) < CIRCLE_RAD * 2 / Global.camera.zoom.x:
 					change_length = true
 				has_focus = true
 				Global.has_focus = false
@@ -111,12 +111,12 @@ func try_rotate_scale():
 		if Input.is_action_pressed("left_mouse"):
 			# rotation code here
 			if line_button:
-				var new_angle = rad_to_deg(mouse_point.angle_to_point(points[0]))
+				var new_angle = rad_to_deg(points[0].angle_to_point(mouse_point))
 				if new_angle < 0:
 					new_angle += 360
 				_vanishing_point.angle_changed(new_angle, line_button)
 				if change_length:
-					var new_length = mouse_point.distance_to(points[0])
+					var new_length := mouse_point.distance_to(points[0])
 					_vanishing_point.length_changed(new_length, line_button)
 
 		elif Input.is_action_just_released("left_mouse"):
@@ -127,10 +127,10 @@ func try_rotate_scale():
 
 
 func _draw() -> void:
-	var mouse_point = Global.canvas.current_pixel
-	var arc_points = []
-	draw_circle(points[0], Global.camera.zoom.x * CIRCLE_RAD, default_color)  # Starting circle
-	if !track_mouse and mouse_point.distance_to(points[0]) < Global.camera.zoom.x * CIRCLE_RAD * 2:
+	var mouse_point := Global.canvas.current_pixel
+	var arc_points := PackedVector2Array()
+	draw_circle(points[0], CIRCLE_RAD / Global.camera.zoom.x, default_color)  # Starting circle
+	if !track_mouse and mouse_point.distance_to(points[0]) < CIRCLE_RAD * 2 / Global.camera.zoom.x:
 		if (
 			!Rect2(Vector2.ZERO, Global.current_project.size).has_point(mouse_point)
 			or Global.move_guides_on_canvas
@@ -138,7 +138,7 @@ func _draw() -> void:
 		):
 			arc_points.append(points[0])
 	if (
-		mouse_point.distance_to(points[1]) < Global.camera.zoom.x * CIRCLE_RAD * 2
+		mouse_point.distance_to(points[1]) < CIRCLE_RAD * 2 / Global.camera.zoom.x
 		or (has_focus and Input.is_action_pressed("left_mouse"))
 	):
 		if (
@@ -151,8 +151,8 @@ func _draw() -> void:
 			arc_points.append(points[1])
 
 	for point in arc_points:
-		draw_arc(point, Global.camera.zoom.x * CIRCLE_RAD * 2, 0, 360, 360, default_color, 0.5)
+		draw_arc(point, CIRCLE_RAD * 2 / Global.camera.zoom.x, 0, 360, 360, default_color, 0.5)
 
-	width = Global.camera.zoom.x * LINE_WIDTH
+	width = LINE_WIDTH / Global.camera.zoom.x
 	if is_hidden:  # Hidden line
 		return
