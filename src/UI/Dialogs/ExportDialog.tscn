@@ -326,6 +326,7 @@ offset_right = -5.0
 offset_bottom = -5.0
 
 [node name="ProgressBar" type="ProgressBar" parent="Popups/ExportProgressBar/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 

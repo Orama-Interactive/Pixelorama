@@ -27,7 +27,10 @@ func position_reset() -> void:
 	if texture != null:
 		scale = (
 			Vector2.ONE
-			* minf(float(project.size.x) / texture.get_width(), float(project.size.y) / texture.get_height())
+			* minf(
+				float(project.size.x) / texture.get_width(),
+				float(project.size.y) / texture.get_height()
+			)
 		)
 	else:
 		scale = Vector2.ONE

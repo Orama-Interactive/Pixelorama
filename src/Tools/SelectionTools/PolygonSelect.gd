@@ -60,15 +60,15 @@ func draw_preview() -> void:
 	if _ongoing_selection and !_move:
 		var canvas: Node2D = Global.canvas.previews
 		var pos := canvas.position
-		var _scale := canvas.scale
+		var canvas_scale := canvas.scale
 		if Global.mirror_view:
 			pos.x = pos.x + Global.current_project.size.x
-			_scale.x = -1
+			canvas_scale.x = -1
 
 		var preview_draw_points := _draw_points.duplicate()
 		append_gap(_draw_points[-1], _last_position, preview_draw_points)
 
-		canvas.draw_set_transform(pos, canvas.rotation, _scale)
+		canvas.draw_set_transform(pos, canvas.rotation, canvas_scale)
 		var indicator := _fill_bitmap_with_points(preview_draw_points, Global.current_project.size)
 
 		for line in _create_polylines(indicator):

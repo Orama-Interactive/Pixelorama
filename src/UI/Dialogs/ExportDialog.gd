@@ -33,7 +33,7 @@ var spritesheet_exports := [Export.FileFormat.PNG]
 @onready var path_validation_alert_popup: AcceptDialog = $Popups/PathValidationAlert
 @onready var path_dialog_popup: FileDialog = $Popups/PathDialog
 @onready var export_progress_popup: Window = $Popups/ExportProgressBar
-@onready var export_progress_bar: ProgressBar = $Popups/ExportProgressBar/MarginContainer/ProgressBar
+@onready var export_progress_bar := %ProgressBar as ProgressBar
 @onready var frame_timer: Timer = $FrameTimer
 
 

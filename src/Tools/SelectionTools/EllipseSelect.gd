@@ -51,17 +51,17 @@ func draw_preview() -> void:
 	if !_move && _rect.has_area():
 		var canvas: Node2D = Global.canvas.previews
 		var pos := canvas.position
-		var _scale := canvas.scale
+		var canvas_scale := canvas.scale
 		var temp_rect := _rect
 		if Global.mirror_view:
 			pos.x = pos.x + Global.current_project.size.x
 			temp_rect.position.x = Global.current_project.size.x - temp_rect.position.x
-			_scale.x = -1
+			canvas_scale.x = -1
 
 		var border := DrawingAlgos.get_ellipse_points_filled(Vector2.ZERO, temp_rect.size)
 		var indicator := _fill_bitmap_with_points(border, temp_rect.size)
 
-		canvas.draw_set_transform(temp_rect.position, canvas.rotation, _scale)
+		canvas.draw_set_transform(temp_rect.position, canvas.rotation, canvas_scale)
 		for line in _create_polylines(indicator):
 			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
@@ -116,14 +116,14 @@ func set_ellipse(selection_map: SelectionMap, pos: Vector2i) -> void:
 		selection_map.clear()
 	var points := DrawingAlgos.get_ellipse_points_filled(Vector2.ZERO, _rect.size)
 	for p in points:
-		var _pos := pos + Vector2i(p)
-		if _pos.x < 0 or _pos.y < 0 or _pos.x >= bitmap_size.x or _pos.y >= bitmap_size.y:
+		var fill_p := pos + Vector2i(p)
+		if fill_p.x < 0 or fill_p.y < 0 or fill_p.x >= bitmap_size.x or fill_p.y >= bitmap_size.y:
 			continue
 		if _intersect:
-			if project.selection_map.is_pixel_selected(_pos):
-				selection_map.select_pixel(_pos, true)
+			if project.selection_map.is_pixel_selected(fill_p):
+				selection_map.select_pixel(fill_p, true)
 		else:
-			selection_map.select_pixel(_pos, !_subtract)
+			selection_map.select_pixel(fill_p, !_subtract)
 
 
 # Given an origin point and destination point, returns a rect representing

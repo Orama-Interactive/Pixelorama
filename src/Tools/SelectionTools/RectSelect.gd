@@ -51,11 +51,11 @@ func draw_preview() -> void:
 	if !_move:
 		var canvas: Node2D = Global.canvas.previews
 		var pos := canvas.position
-		var _scale := canvas.scale
+		var canvas_scale := canvas.scale
 		if Global.mirror_view:
 			pos.x = pos.x + Global.current_project.size.x
-			_scale.x = -1
-		canvas.draw_set_transform(pos, canvas.rotation, _scale)
+			canvas_scale.x = -1
+		canvas.draw_set_transform(pos, canvas.rotation, canvas_scale)
 		canvas.draw_rect(_rect, Color.BLACK, false)
 
 		# Handle mirroring

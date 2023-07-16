@@ -113,8 +113,8 @@ func handle_loading_aimg(path: String, frames: Array) -> void:
 func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: bool = true) -> void:
 	var file := FileAccess.open_compressed(path, FileAccess.READ, FileAccess.COMPRESSION_ZSTD)
 	if FileAccess.get_open_error() == ERR_FILE_UNRECOGNIZED:
-		file = FileAccess.open(path, FileAccess.READ)  # If the file is not compressed open it raw (pre-v0.7)
-
+		# If the file is not compressed open it raw (pre-v0.7)
+		file = FileAccess.open(path, FileAccess.READ)
 	var err := FileAccess.get_open_error()
 	if err != OK:
 		Global.error_dialog.set_text(

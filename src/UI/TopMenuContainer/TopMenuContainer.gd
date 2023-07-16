@@ -1,5 +1,5 @@
 extends Panel
-
+# gdlint: ignore=max-line-length
 const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v011---2023-06-13"
 
 var file_menu: PopupMenu
