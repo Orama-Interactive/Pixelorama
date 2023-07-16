@@ -363,7 +363,7 @@ func _handle_metadata(id: int, menu_button: MenuButton) -> void:
 				metadata.call("menu_item_clicked")
 
 
-func _popup_dialog(dialog: Window, dialog_size := Vector2.ZERO) -> void:
+func _popup_dialog(dialog: Window, dialog_size := Vector2i.ZERO) -> void:
 	dialog.popup_centered(dialog_size)
 	Global.dialog_open(true)
 
@@ -470,7 +470,7 @@ func edit_menu_id_pressed(id: int) -> void:
 		Global.EditMenu.NEW_BRUSH:
 			Global.canvas.selection.new_brush()
 		Global.EditMenu.PREFERENCES:
-			_popup_dialog(Global.preferences_dialog, Vector2(600, 400))
+			_popup_dialog(Global.preferences_dialog)
 		_:
 			_handle_metadata(id, edit_menu_button)
 
