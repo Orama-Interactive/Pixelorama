@@ -226,6 +226,8 @@ func _set_type(value: int) -> void:
 
 
 func _set_file_path(value: String) -> void:
+	if file_path == value:
+		return
 	file_path = value
 	if file_path.is_empty():
 		return
