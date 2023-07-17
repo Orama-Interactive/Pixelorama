@@ -23,6 +23,7 @@ func _ready() -> void:
 		get_cancel_button().focus_neighbor_top = option_button.get_path()
 		option_button.focus_neighbor_bottom = get_ok_button().get_path()
 
+
 #	get_close_button().focus_mode = Control.FOCUS_NONE
 
 
