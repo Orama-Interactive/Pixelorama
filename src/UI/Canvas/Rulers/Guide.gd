@@ -49,7 +49,7 @@ func _input(_event: InputEvent) -> void:
 			or Global.move_guides_on_canvas
 		):
 			has_focus = true
-			Global.has_focus = false
+			Global.can_draw = false
 			queue_redraw()
 	if has_focus:
 		if Input.is_action_pressed("left_mouse"):
@@ -63,7 +63,7 @@ func _input(_event: InputEvent) -> void:
 				points[1].x = xx
 			modulate.a = 0.5 if _outside_canvas() else 1.0
 		elif Input.is_action_just_released("left_mouse"):
-			Global.has_focus = true
+			Global.can_draw = true
 			has_focus = false
 			if _outside_canvas():
 				project.guides.erase(self)

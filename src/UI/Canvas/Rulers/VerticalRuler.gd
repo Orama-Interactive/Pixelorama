@@ -111,5 +111,4 @@ func create_guide() -> void:
 		guide.add_point(Vector2(-19999, Global.canvas.current_pixel.y))
 		guide.add_point(Vector2(19999, Global.canvas.current_pixel.y))
 	Global.canvas.add_child(guide)
-	Global.has_focus = false
 	queue_redraw()

@@ -88,8 +88,6 @@ func _input(event: InputEvent) -> void:
 	image_current_pixel = canvas.current_pixel
 	if Global.mirror_view:
 		image_current_pixel.x = Global.current_project.size.x - image_current_pixel.x
-	if not Global.can_draw:
-		return
 	if is_moving_content:
 		if Input.is_action_just_pressed("transformation_confirm"):
 			transform_content_confirm()
@@ -114,7 +112,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			if gizmo_hover and not dragged_gizmo:  # Select a gizmo
-				Global.has_focus = false
+				Global.can_draw = false
 				mouse_pos_on_gizmo_drag = image_current_pixel
 				dragged_gizmo = gizmo_hover
 				if Input.is_action_pressed("transform_move_selection_only"):
@@ -151,7 +149,7 @@ func _input(event: InputEvent) -> void:
 				temp_rect_pivot = (temp_rect.position + ((temp_rect.end - temp_rect.position) / 2))
 
 		elif dragged_gizmo:  # Mouse released, deselect gizmo
-			Global.has_focus = true
+			Global.can_draw = true
 			dragged_gizmo = null
 			if not is_moving_content:
 				commit_undo("Select", undo_data)

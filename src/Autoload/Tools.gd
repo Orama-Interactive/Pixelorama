@@ -458,7 +458,7 @@ func draw_preview() -> void:
 
 
 func handle_draw(position: Vector2i, event: InputEvent) -> void:
-	if not (Global.can_draw and Global.has_focus):
+	if not Global.can_draw:
 		return
 
 	var draw_pos := position
