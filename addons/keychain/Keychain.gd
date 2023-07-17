@@ -3,14 +3,14 @@ extends Node
 const TRANSLATIONS_PATH := "res://addons/keychain/translations"
 const PROFILES_PATH := "user://shortcut_profiles"
 
-# Change these settings
-var profiles := [preload("profiles/default.tres")]
-var selected_profile: ShortcutProfile = profiles[0]
+## Change these settings
+var profiles: Array[ShortcutProfile] = [preload("profiles/default.tres")]
+var selected_profile := profiles[0]
 var profile_index := 0
-# Syntax: "action_name": InputAction.new("Action Display Name", "Group", true)
-# Note that "action_name" must already exist in the Project's Input Map.
+## Syntax: "action_name": InputAction.new("Action Display Name", "Group", true)
+## Note that "action_name" must already exist in the Project's Input Map.
 var actions := {}
-# Syntax: "Group Name": InputGroup.new("Parent Group Name")
+## Syntax: "Group Name": InputGroup.new("Parent Group Name")
 var groups := {}
 var ignore_actions := []
 var ignore_ui_actions := true
@@ -25,7 +25,7 @@ class InputAction:
 	var group := ""
 	var global := true
 
-	func _init(_display_name := "",_group := "",_global := true):
+	func _init(_display_name := "", _group := "", _global := true):
 		display_name = _display_name
 		group = _group
 		global = _global
@@ -120,7 +120,7 @@ func _ready() -> void:
 	# Load shortcut profiles
 	DirAccess.make_dir_recursive_absolute(PROFILES_PATH)
 	var profile_dir := DirAccess.open(PROFILES_PATH)
-	profile_dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+	profile_dir.list_dir_begin()
 	var file_name = profile_dir.get_next()
 	while file_name != "":
 		if !profile_dir.current_is_dir():
@@ -143,7 +143,7 @@ func _ready() -> void:
 		profile.fill_bindings()
 
 	var l18n_dir := DirAccess.open(TRANSLATIONS_PATH)
-	l18n_dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+	l18n_dir.list_dir_begin()
 	file_name = l18n_dir.get_next()
 	while file_name != "":
 		if !l18n_dir.current_is_dir():
