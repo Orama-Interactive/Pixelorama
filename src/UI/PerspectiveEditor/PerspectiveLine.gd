@@ -105,7 +105,7 @@ func try_rotate_scale():
 				if mouse_point.distance_to(points[1]) < CIRCLE_RAD * 2 / Global.camera.zoom.x:
 					change_length = true
 				has_focus = true
-				Global.has_focus = false
+				Global.can_draw = false
 				queue_redraw()
 	if has_focus:
 		if Input.is_action_pressed("left_mouse"):
@@ -120,7 +120,7 @@ func try_rotate_scale():
 					_vanishing_point.length_changed(new_length, line_button)
 
 		elif Input.is_action_just_released("left_mouse"):
-			Global.has_focus = true
+			Global.can_draw = true
 			has_focus = false
 			change_length = false
 			queue_redraw()

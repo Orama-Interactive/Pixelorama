@@ -83,7 +83,7 @@ func _input(_event):
 			or Global.move_guides_on_canvas
 		):
 			has_focus = true
-			Global.has_focus = false
+			Global.can_draw = false
 	if has_focus:
 		if Input.is_action_pressed("left_mouse"):
 			# rotation code here
@@ -91,7 +91,7 @@ func _input(_event):
 			pos_y.value = mouse_point.y
 
 		elif Input.is_action_just_released("left_mouse"):
-			Global.has_focus = true
+			Global.can_draw = true
 			has_focus = false
 
 
