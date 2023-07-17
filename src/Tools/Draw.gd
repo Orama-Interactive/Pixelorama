@@ -212,13 +212,17 @@ func commit_undo() -> void:
 		var compressed_data = redo_data[image]
 		var buffer_size = compressed_data["data"].size()
 		compressed_data["data"] = compressed_data["data"].compress()
-		project.undo_redo.add_do_method(self, "undo_redo_draw_op", image, compressed_data, buffer_size)
+		project.undo_redo.add_do_method(
+			self, "undo_redo_draw_op", image, compressed_data, buffer_size
+		)
 		image.unlock()
 	for image in _undo_data:
 		var compressed_data = _undo_data[image]
 		var buffer_size = compressed_data["data"].size()
 		compressed_data["data"] = compressed_data["data"].compress()
-		project.undo_redo.add_undo_method(self, "undo_redo_draw_op", image, compressed_data, buffer_size)
+		project.undo_redo.add_undo_method(
+			self, "undo_redo_draw_op", image, compressed_data, buffer_size
+		)
 	project.undo_redo.add_do_method(Global, "undo_or_redo", false, frame, layer)
 	project.undo_redo.add_undo_method(Global, "undo_or_redo", true, frame, layer)
 	project.undo_redo.commit_action()
