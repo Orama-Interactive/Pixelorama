@@ -213,14 +213,36 @@ func commit_undo() -> void:
 
 	project.undos += 1
 	for image in redo_data:
-		project.undo_redo.add_do_property(image, "data", redo_data[image])
+		var compressed_data: Dictionary = redo_data[image]
+		var buffer_size: int = compressed_data["data"].size()
+		compressed_data["data"] = compressed_data["data"].compress()
+		project.undo_redo.add_do_method(
+			undo_redo_draw_op.bind(image, compressed_data["data"], buffer_size)
+		)
 	for image in _undo_data:
-		project.undo_redo.add_undo_property(image, "data", _undo_data[image])
+		var compressed_data: Dictionary = _undo_data[image]
+		var buffer_size: int = compressed_data["data"].size()
+		compressed_data["data"] = compressed_data["data"].compress()
+		project.undo_redo.add_undo_method(
+			undo_redo_draw_op.bind(image, compressed_data["data"], buffer_size)
+		)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
 
 	_undo_data.clear()
+
+
+func undo_redo_draw_op(
+	image: Image, compressed_image_data: PackedByteArray, buffer_size: int
+) -> void:
+	image.set_data(
+		image.get_width(),
+		image.get_height(),
+		image.has_mipmaps(),
+		image.get_format(),
+		compressed_image_data.decompress(buffer_size)
+	)
 
 
 func draw_tool(pos: Vector2i) -> void:
@@ -255,12 +277,12 @@ func _prepare_tool() -> void:
 	_brush_size_dynamics = _brush_size
 	var strength: float = Tools.get_alpha_dynamic(_strength)
 	if Tools.dynamics_size == Tools.Dynamics.PRESSURE:
-		_brush_size_dynamics = round(
-			lerp(Tools.brush_size_min, Tools.brush_size_max, Tools.pen_pressure)
+		_brush_size_dynamics = roundi(
+			lerpf(Tools.brush_size_min, Tools.brush_size_max, Tools.pen_pressure)
 		)
 	elif Tools.dynamics_size == Tools.Dynamics.VELOCITY:
-		_brush_size_dynamics = round(
-			lerp(Tools.brush_size_min, Tools.brush_size_max, Tools.mouse_velocity)
+		_brush_size_dynamics = roundi(
+			lerpf(Tools.brush_size_min, Tools.brush_size_max, Tools.mouse_velocity)
 		)
 	_drawer.pixel_perfect = Tools.pixel_perfect if _brush_size == 1 else false
 	_drawer.horizontal_mirror = Tools.horizontal_mirror
@@ -325,8 +347,8 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 		if int(_stroke_dimensions.x) % 2 == 0:
 			start.x += 1
 			end.x += 1
-	var dx := int(abs(end.x - start.x))
-	var dy := int(-abs(end.y - start.y))
+	var dx := absi(end.x - start.x)
+	var dy := -absi(end.y - start.y)
 	var err := dx + dy
 	var e2 := err << 1
 	var sx := 1 if start.x < end.x else -1
@@ -353,7 +375,7 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 		_set_pixel_no_cache(c)
 
 
-# Compute the array of coordinates that should be drawn
+## Compute the array of coordinates that should be drawn
 func _compute_draw_tool_pixel(pos: Vector2) -> PackedVector2Array:
 	var result := PackedVector2Array()
 	var start := pos - Vector2.ONE * (_brush_size_dynamics >> 1)
