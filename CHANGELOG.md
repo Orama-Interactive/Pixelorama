@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v0.11.1] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@20kdc](https://github.com/20kdc)
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@20kdc](https://github.com/20kdc), Matteo Piovanelli ([@MatteoPiovanelli-Laser](https://github.com/MatteoPiovanelli-Laser))
 
 Built using Godot 3.5.2
 
@@ -16,9 +16,11 @@ Built using Godot 3.5.2
 - Added a reverse frames option on the right click menu of the frame buttons, to easily reverse the order of the selected frames.
 - A new Timeline category in the Preferences with options such as the colors of onion skinning's color mode, and whether a layer should be selected when a layer button (such as lock, visibility etc) gets pressed.
 - It is now possible to disable saving frames that have a tag to a different folder, as well as specifying a separator character in the file names.
+- Palette file types now exist as filters in the Open file dialog.
 
 ### Changed
 - The image effect animation system introduced in v0.11 has been overhauled with a better user interface, and with tweening options. [#879](https://github.com/Orama-Interactive/Pixelorama/pull/879)
+- Images stored in RAM for the undo/redo system when draw tools are used are now compressed. This reduces RAM usage. [#890](https://github.com/Orama-Interactive/Pixelorama/pull/890)
 - The cel opacity slider now affects all of the selected cels. [#865](https://github.com/Orama-Interactive/Pixelorama/pull/865)
 - The right click menu of the frame buttons now works for all selected frames, besides "move left" and "move right".
 - The canvas is automatically enlarged when importing an image of a larger size to the project.
