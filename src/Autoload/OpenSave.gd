@@ -64,9 +64,10 @@ func handle_loading_file(file: String) -> void:
 		if err != OK:  # An error occurred
 			var file_name: String = file.get_file()
 			Global.error_dialog.set_text(
-				tr(
-					"Can't load file '%s'.\nError code: %s"
-				) % [file_name, str(err, ErrorManager.parse(err, " (", ")"))]
+				(
+					tr("Can't load file '%s'.\nError code: %s")
+					% [file_name, str(err, ErrorManager.parse(err, " (", ")"))]
+				)
 			)
 			Global.error_dialog.popup_centered()
 			Global.dialog_open(true)
@@ -399,7 +400,7 @@ func save_pxo_file(
 			return true
 		Global.error_dialog.set_text(
 			tr("File failed to save. Error code %s") % str(err, ErrorManager.parse(err, " (", ")"))
-			)
+		)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
 		file.close()
