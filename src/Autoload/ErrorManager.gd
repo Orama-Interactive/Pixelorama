@@ -105,4 +105,3 @@ func parse(error: int, start := "", end := ""):
 		_:
 			message = "Unknown error"
 	return str(start, message, end)
-
