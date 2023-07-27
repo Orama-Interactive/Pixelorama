@@ -64,7 +64,6 @@ __meta__ = {
 [node name="CreateNewImage" parent="Dialogs" instance=ExtResource( 28 )]
 
 [node name="OpenSprite" parent="Dialogs" instance=ExtResource( 12 )]
-rect_min_size = Vector2( 170, 59.5 )
 window_title = "Open File(s)"
 mode = 1
 
@@ -73,10 +72,8 @@ margin_left = 108.0
 margin_top = 40.0
 margin_right = 623.0
 margin_bottom = 388.0
-rect_min_size = Vector2( 170, 59.5 )
 
 [node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource( 8 )]
-rect_min_size = Vector2( 170, 59.5 )
 
 [node name="ExportDialog" parent="Dialogs" instance=ExtResource( 39 )]
 
@@ -96,14 +93,12 @@ dialog_text = "You have unsaved changes. If you proceed, the progress you have m
 [node name="QuitDialog" type="ConfirmationDialog" parent="Dialogs"]
 margin_right = 243.0
 margin_bottom = 70.0
-rect_min_size = Vector2( 170, 59.5 )
 resizable = true
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
 [node name="QuitAndSaveDialog" type="ConfirmationDialog" parent="Dialogs"]
 margin_right = 330.0
 margin_bottom = 70.0
-rect_min_size = Vector2( 170, 59.5 )
 window_title = "Save before exiting?"
 resizable = true
 dialog_text = "You have unsaved progress. How do you wish to proceed?"
@@ -120,7 +115,6 @@ dialog_text = "This is an error message!"
 [node name="BackupConfirmation" type="ConfirmationDialog" parent="Dialogs"]
 margin_right = 200.0
 margin_bottom = 88.0
-rect_min_size = Vector2( 170, 59.5 )
 popup_exclusive = true
 resizable = true
 dialog_text = "Autosaved project(s) from a crashed session were found.
