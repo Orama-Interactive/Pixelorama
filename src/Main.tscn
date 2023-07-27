@@ -122,7 +122,6 @@ Do you want to recover the data?"
 dialog_autowrap = true
 
 [node name="FrameProperties" parent="Dialogs" instance=ExtResource( 9 )]
-rect_min_size = Vector2( 170, 59.5 )
 
 [node name="WindowOpacityDialog" parent="Dialogs" instance=ExtResource( 10 )]
 
