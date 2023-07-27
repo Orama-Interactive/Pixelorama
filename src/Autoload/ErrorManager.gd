@@ -101,6 +101,7 @@ func parse(error: int, start := "", end := ""):
 		ERR_BUG:
 			message = "Bug error."
 		ERR_PRINTER_ON_FIRE:
+# gdlint: ignore=max-line-length
 			message = "Printer on fire error. (This is an easter egg, no engine methods return this error code.)"
 		_:
 			message = "Unknown error"
