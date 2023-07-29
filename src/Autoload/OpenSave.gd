@@ -64,7 +64,10 @@ func handle_loading_file(file: String) -> void:
 		if err != OK:  # An error occurred
 			var file_name: String = file.get_file()
 			Global.error_dialog.set_text(
-				tr("Can't load file '%s'.\nError code: %s") % [file_name, str(err)]
+				(
+					tr("Can't load file '%s'.\nError code: %s")
+					% [file_name, str(err, ErrorManager.parse(err, " (", ")"))]
+				)
 			)
 			Global.error_dialog.popup_centered()
 			Global.dialog_open(true)
@@ -120,7 +123,9 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 		err = file.open(path, File.READ)  # If the file is not compressed open it raw (pre-v0.7)
 
 	if err != OK:
-		Global.error_dialog.set_text(tr("File failed to open. Error code %s") % err)
+		Global.error_dialog.set_text(
+			tr("File failed to open. Error code %s") % str(err, ErrorManager.parse(err, " (", ")"))
+		)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
 		file.close()
@@ -391,7 +396,11 @@ func save_pxo_file(
 		err = file.open(temp_path, File.WRITE)
 
 	if err != OK:
-		Global.error_dialog.set_text(tr("File failed to save. Error code %s") % err)
+		if temp_path.is_valid_filename():
+			return true
+		Global.error_dialog.set_text(
+			tr("File failed to save. Error code %s") % str(err, ErrorManager.parse(err, " (", ")"))
+		)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
 		file.close()
