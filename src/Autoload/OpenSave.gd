@@ -397,7 +397,7 @@ func save_pxo_file(
 
 	if err != OK:
 		if temp_path.is_valid_filename():
-			return true
+			return
 		Global.error_dialog.set_text(
 			tr("File failed to save. Error code %s") % str(err, ErrorManager.parse(err, " (", ")"))
 		)
