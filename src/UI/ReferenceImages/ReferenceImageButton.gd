@@ -6,7 +6,7 @@ var _ignore_spinbox_changes := false
 
 
 func _ready():
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		$Interior/PathHeader/Path3D.visible = false
 		$Interior/PathHeader/PathHTML.text = element.image_path
 	else:

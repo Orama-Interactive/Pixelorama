@@ -71,7 +71,7 @@ func _setup_file_menu() -> void:
 
 	file_menu.id_pressed.connect(file_menu_id_pressed)
 
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		file_menu.set_item_disabled(Global.FileMenu.OPEN_LAST_PROJECT, true)
 		file_menu.set_item_disabled(Global.FileMenu.RECENT, true)
 
@@ -398,7 +398,7 @@ func _on_new_project_file_menu_option_pressed() -> void:
 
 
 func _open_project_file() -> void:
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		Html5FileExchange.load_image()
 	else:
 		_popup_dialog(Global.open_sprites_dialog)
@@ -423,7 +423,7 @@ func _save_project_file() -> void:
 
 func _save_project_file_as() -> void:
 	Global.dialog_open(true)
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		var save_dialog: ConfirmationDialog = Global.save_sprites_html5_dialog
 		var save_filename = save_dialog.get_node("FileNameContainer/FileNameLineEdit")
 		save_dialog.popup_centered()

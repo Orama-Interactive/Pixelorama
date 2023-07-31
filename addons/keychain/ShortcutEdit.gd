@@ -107,7 +107,7 @@ func _ready() -> void:
 
 	profile_option_button.select(Keychain.profile_index)
 	_on_ProfileOptionButton_item_selected(Keychain.profile_index)
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		$VBoxContainer/HBoxContainer/OpenProfileFolder.queue_free()
 
 
