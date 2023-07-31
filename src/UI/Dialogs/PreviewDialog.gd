@@ -166,7 +166,7 @@ func _on_PreviewDialog_confirmed() -> void:
 			OpenSave.open_image_as_new_layer(image, path.get_basename().get_file(), frame_index)
 
 		elif current_import_option == ImageImportOptions.NEW_REFERENCE_IMAGE:
-			if OS.get_name() == "HTML5":
+			if OS.get_name() == "Web":
 				OpenSave.import_reference_image_from_image(image)
 			else:
 				OpenSave.import_reference_image_from_path(path)

@@ -104,7 +104,7 @@ func _setup_application_window_size() -> void:
 	root.content_scale_factor = Global.shrink
 	set_custom_cursor()
 
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		return
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	get_window().min_size = Vector2(1024, 576)
@@ -234,7 +234,7 @@ func _on_files_dropped(files: PackedStringArray) -> void:
 
 
 func load_last_project() -> void:
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		return
 	# Check if any project was saved or opened last time
 	if Global.config_cache.has_section_key("preferences", "last_project_path"):
@@ -254,7 +254,7 @@ func load_last_project() -> void:
 
 
 func load_recent_project_file(path: String) -> void:
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		return
 
 	# Check if file still exists on disk

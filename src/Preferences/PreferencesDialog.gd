@@ -150,7 +150,7 @@ func _ready() -> void:
 	for child in right_side.get_children():
 		content_list.append(child.name)
 
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		content_list.erase("Startup")
 		right_side.get_node("Startup").queue_free()
 		right_side.get_node("Language").visible = true

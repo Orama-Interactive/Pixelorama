@@ -33,7 +33,7 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 
 
 func _on_ChooseShader_pressed() -> void:
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		Html5FileExchange.load_shader()
 	else:
 		$FileDialog.popup_centered(Vector2(300, 340))

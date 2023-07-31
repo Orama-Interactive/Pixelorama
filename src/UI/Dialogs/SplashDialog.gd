@@ -48,7 +48,7 @@ func _on_SplashDialog_about_to_show() -> void:
 	chosen_artwork = randi() % artworks.size()
 	change_artwork(0)
 
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		$Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn.visible = false
 
 

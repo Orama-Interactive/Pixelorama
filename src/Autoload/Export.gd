@@ -219,7 +219,7 @@ func export_processed_images(
 				"export_paths": export_paths,
 				"project": project
 			}
-			if OS.get_name() != "HTML5" and is_single_file_format(project):
+			if OS.get_name() != "Web" and is_single_file_format(project):
 				if gif_export_thread.is_started():
 					gif_export_thread.wait_to_finish()
 				var error = gif_export_thread.start(
@@ -243,7 +243,7 @@ func export_processed_images(
 			"export_paths": export_paths,
 			"project": project
 		}
-		if OS.get_name() == "HTML5":
+		if OS.get_name() == "Web":
 			export_animated(details)
 		else:
 			if gif_export_thread.is_started():
@@ -252,7 +252,7 @@ func export_processed_images(
 	else:
 		var succeeded := true
 		for i in range(processed_images.size()):
-			if OS.get_name() == "HTML5":
+			if OS.get_name() == "Web":
 				JavaScriptBridge.download_buffer(
 					processed_images[i].save_png_to_buffer(),
 					export_paths[i].get_file(),
@@ -313,7 +313,7 @@ func export_animated(args: Dictionary) -> void:
 		frames, project.fps, self, "increase_export_progress", [export_dialog]
 	)
 
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		JavaScriptBridge.download_buffer(file_data, args["export_paths"][0], exporter.mime_type)
 	else:
 		var file := FileAccess.open(args["export_paths"][0], FileAccess.WRITE)

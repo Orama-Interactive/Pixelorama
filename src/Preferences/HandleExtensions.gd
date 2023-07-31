@@ -40,7 +40,7 @@ class Extension:
 
 
 func _ready() -> void:
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		$HBoxContainer/AddExtensionButton.disabled = true
 		$HBoxContainer/OpenFolderButton.visible = false
 

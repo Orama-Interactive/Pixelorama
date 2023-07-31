@@ -7,7 +7,7 @@ signal image_loaded  # emits a signal for returning loaded image info
 
 
 func _ready() -> void:
-	if OS.get_name() == "HTML5" and OS.has_feature("JavaScript"):
+	if OS.get_name() == "Web" and OS.has_feature("JavaScript"):
 		_define_js()
 
 
@@ -77,7 +77,7 @@ func _define_js() -> void:
 # If (load_directly = false) then image info (image and its name)
 # will not be directly farwarded it to OpenSave
 func load_image(load_directly := true):
-	if OS.get_name() != "HTML5" or !OS.has_feature("JavaScript"):
+	if OS.get_name() != "Web" or !OS.has_feature("JavaScript"):
 		return
 
 	# Execute JS function
@@ -138,7 +138,7 @@ func load_image(load_directly := true):
 
 
 func load_shader() -> void:
-	if OS.get_name() != "HTML5" or !OS.has_feature("JavaScript"):
+	if OS.get_name() != "Web" or !OS.has_feature("JavaScript"):
 		return
 
 	# Execute JS function

@@ -86,7 +86,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	y_symmetry_axis.add_point(Vector2(x_symmetry_point / 2 + 0.5, 19999))
 	Global.canvas.add_child(y_symmetry_axis)
 
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		directory_path = "user://"
 	else:
 		directory_path = Global.config_cache.get_value(

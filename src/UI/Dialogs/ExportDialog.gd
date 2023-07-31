@@ -258,7 +258,7 @@ func _on_ExportDialog_about_to_show() -> void:
 	Global.canvas.selection.transform_content_confirm()
 	var project: Project = Global.current_project
 	# If we're on HTML5, don't let the user change the directory path
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		get_tree().call_group("NotHTML5", "hide")
 		project.directory_path = "user://"
 
