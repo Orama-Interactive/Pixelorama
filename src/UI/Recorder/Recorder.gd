@@ -4,7 +4,7 @@ signal frame_saved
 
 enum Mode { CANVAS, PIXELORAMA }
 
-var mode: int = Mode.CANVAS
+var mode := Mode.CANVAS
 var chosen_dir := ""
 var save_dir := ""
 var project: Project
@@ -19,7 +19,7 @@ var resize := 100
 @onready var folder_button := $"%Folder" as Button
 @onready var start_button := $"%Start" as Button
 @onready var size_label := $"%Size" as Label
-@onready var path_field := $"%Path3D" as LineEdit
+@onready var path_field := $"%Path" as LineEdit
 
 
 func _ready() -> void:
@@ -56,8 +56,8 @@ func initialize_recording() -> void:
 	# Create a new directory based on time
 	var time_dict := Time.get_time_dict_from_system()
 	var folder := str(project.name, time_dict.hour, "_", time_dict.minute, "_", time_dict.second)
-	save_dir = save_dir.path_join(folder)
 	var dir := DirAccess.open(save_dir)
+	save_dir = save_dir.path_join(folder)
 	dir.make_dir_recursive(save_dir)
 
 	capture_frame()  # capture first frame
@@ -71,10 +71,9 @@ func capture_frame() -> void:
 	current_frame_no = 0
 	var image: Image
 	if mode == Mode.PIXELORAMA:
-		image = get_tree().root.get_viewport().get_texture().get_data()
-		image.flip_y()
+		image = get_tree().root.get_viewport().get_texture().get_image()
 	else:
-		var frame = project.frames[project.current_frame]
+		var frame := project.frames[project.current_frame]
 		image = Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 		Export.blend_all_layers(image, frame, Vector2(0, 0), project)
 
@@ -179,8 +178,8 @@ func _on_SpinBox_value_changed(value: float) -> void:
 
 
 func _on_Choose_pressed() -> void:
-	$Dialogs/Path3D.popup_centered()
-	$Dialogs/Path3D.current_dir = chosen_dir
+	$Dialogs/Path.popup_centered()
+	$Dialogs/Path.current_dir = chosen_dir
 
 
 func _on_Open_pressed() -> void:
@@ -197,3 +196,7 @@ func _on_Fps_value_changed(value: float) -> void:
 	var dur_label := $Dialogs/Options/PanelContainer/VBoxContainer/Fps/Duration as Label
 	var duration := snappedf(1.0 / value, 0.0001)
 	dur_label.text = str("= ", duration, " sec")
+
+
+func _on_options_close_requested() -> void:
+	$Dialogs/Options.hide()

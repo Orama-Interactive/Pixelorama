@@ -105,6 +105,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Options" type="Window" parent="Dialogs"]
+size = Vector2i(400, 300)
 visible = false
 
 [node name="PanelContainer" type="PanelContainer" parent="Dialogs/Options"]
@@ -193,25 +194,25 @@ layout_mode = 2
 layout_mode = 2
 text = "Pixelorama"
 
-[node name="ExportDimentions" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
+[node name="OutputScale" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ExportDimentions"]
+[node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/OutputScale"]
 layout_mode = 2
-text = "Optput Scale:"
+text = "Output Scale:"
 
-[node name="Size" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/ExportDimentions"]
+[node name="Size" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/OutputScale"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Resize" type="SpinBox" parent="Dialogs/Options/PanelContainer/VBoxContainer/ExportDimentions"]
+[node name="Resize" type="SpinBox" parent="Dialogs/Options/PanelContainer/VBoxContainer/OutputScale"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 min_value = 50.0
 max_value = 1000.0
-step = 100.0
-value = 150.0
+step = 50.0
+value = 100.0
 allow_greater = true
 suffix = "%"
 
@@ -222,7 +223,7 @@ theme_override_constants/separation = 0
 [node name="Label" type="Label" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathHeader"]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
-text = "Path3D"
+text = "Path"
 
 [node name="HSeparator" type="HSeparator" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathHeader"]
 layout_mode = 2
@@ -231,7 +232,7 @@ size_flags_horizontal = 3
 [node name="PathContainer" type="HBoxContainer" parent="Dialogs/Options/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Path3D" type="LineEdit" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer"]
+[node name="Path" type="LineEdit" parent="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -257,7 +258,7 @@ stretch_mode = 6
 layout_mode = 2
 text = "Choose"
 
-[node name="Path3D" type="FileDialog" parent="Dialogs"]
+[node name="Path" type="FileDialog" parent="Dialogs"]
 mode = 2
 access = 2
 
@@ -268,11 +269,12 @@ access = 2
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Start" to="." method="_on_Start_toggled"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Folder" to="." method="_on_Open_pressed"]
+[connection signal="close_requested" from="Dialogs/Options" to="." method="_on_options_close_requested"]
 [connection signal="value_changed" from="Dialogs/Options/PanelContainer/VBoxContainer/ActionGap/SkipAmount" to="." method="_on_SkipAmount_value_changed"]
 [connection signal="value_changed" from="Dialogs/Options/PanelContainer/VBoxContainer/Fps/Fps" to="." method="_on_Fps_value_changed"]
 [connection signal="toggled" from="Dialogs/Options/PanelContainer/VBoxContainer/ModeType/Mode" to="." method="_on_Mode_toggled"]
-[connection signal="value_changed" from="Dialogs/Options/PanelContainer/VBoxContainer/ExportDimentions/Resize" to="." method="_on_SpinBox_value_changed"]
+[connection signal="value_changed" from="Dialogs/Options/PanelContainer/VBoxContainer/OutputScale/Resize" to="." method="_on_SpinBox_value_changed"]
 [connection signal="pressed" from="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer/Open" to="." method="_on_Open_pressed"]
 [connection signal="pressed" from="Dialogs/Options/PanelContainer/VBoxContainer/PathContainer/Choose" to="." method="_on_Choose_pressed"]
-[connection signal="dir_selected" from="Dialogs/Path3D" to="." method="_on_Path_dir_selected"]
+[connection signal="dir_selected" from="Dialogs/Path" to="." method="_on_Path_dir_selected"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
