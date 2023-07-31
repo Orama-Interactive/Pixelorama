@@ -38,7 +38,7 @@ func _on_SavedLayouts_item_selected(index: int) -> void:
 	refresh_preview()
 
 
-func _on_SavedLayouts_empty_clicked() -> void:
+func _on_SavedLayouts_empty_clicked(_position: Vector2, _button_index: int) -> void:
 	edit_layout.disabled = true
 	delete_layout.disabled = true
 
@@ -88,7 +88,7 @@ func _on_LayoutSettings_confirmed() -> void:
 
 
 func delete_layout_file(file_name: String) -> void:
-	var dir := DirAccess.open("user://layouts/".path_join(file_name))
+	var dir := DirAccess.open("user://layouts/")
 	if not is_instance_valid(dir):
 		return
 	dir.remove("user://layouts/".path_join(file_name))
