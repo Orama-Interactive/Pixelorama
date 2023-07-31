@@ -495,4 +495,4 @@ func blend_selected_cels(
 
 
 func frames_divided_by_spritesheet_lines() -> int:
-	return int(ceil(number_of_frames / float(lines_count)))
+	return ceili(number_of_frames / float(lines_count))
