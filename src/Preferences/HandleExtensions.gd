@@ -45,7 +45,7 @@ func _ready() -> void:
 		$HBoxContainer/OpenFolderButton.visible = false
 
 	var file_names: PackedStringArray = []
-	var dir := DirAccess.open(EXTENSIONS_PATH)
+	var dir := DirAccess.open("user://")
 	dir.make_dir(EXTENSIONS_PATH)
 	if DirAccess.get_open_error() == OK:
 		dir.list_dir_begin()

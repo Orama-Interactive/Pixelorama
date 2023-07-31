@@ -35,7 +35,7 @@ var zen_mode := false
 
 
 func _ready() -> void:
-	var dir := DirAccess.open("user://layouts")
+	var dir := DirAccess.open("user://")
 	dir.make_dir("user://layouts")
 	_setup_file_menu()
 	_setup_edit_menu()
