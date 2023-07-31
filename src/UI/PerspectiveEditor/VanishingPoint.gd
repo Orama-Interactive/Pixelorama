@@ -61,14 +61,14 @@ func initiate(start_data: Dictionary = {}, idx = -1) -> void:
 
 
 func update_boundary_color():
-	var luminance = (0.2126 * color.r) + (0.7152 * color.g) + (0.0722 * color.b)
+	var luminance := (0.2126 * color.r) + (0.7152 * color.g) + (0.0722 * color.b)
 	color.a = 0.9 - luminance * 0.4  # Interpolates between 0.5 to 0.9
 	boundary_l.color = color
 	boundary_r.color = color
 	boundary_b.color = color
 
 
-func _input(_event):
+func _input(_event: InputEvent):
 	var mouse_point = Global.canvas.current_pixel
 	var project_size = Global.current_project.size
 	var start = Vector2(pos_x.value, pos_y.value)
@@ -161,10 +161,10 @@ func generate_line_data(initial_data: Dictionary = {}) -> Dictionary:
 
 
 func add_line(loaded_line_data := {}, is_tracker := false):
-	var p_size = Global.current_project.size  # for use later in function
+	var p_size := Global.current_project.size  # for use later in function
 
 	# Note: line_data will automatically get default values if loaded_line_data = {}
-	var line_data = generate_line_data(loaded_line_data)
+	var line_data := generate_line_data(loaded_line_data)
 
 	# This code in if block is purely for beautification
 	if pos_x.value > p_size.x / 2 and !loaded_line_data:
@@ -180,7 +180,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 			line_data.length = p_size.x
 
 	# Create the visual line
-	var line = preload("res://src/UI/PerspectiveEditor/PerspectiveLine.tscn").instantiate()
+	var line := preload("res://src/UI/PerspectiveEditor/PerspectiveLine.tscn").instantiate()
 	line.initiate(line_data, self)
 
 	# Set its mode accordingly
@@ -189,19 +189,19 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 		tracker_line = line
 		tracker_line.hide_perspective_line()
 	else:  # Settings for Normal mode
-		var line_button = preload("res://src/UI/PerspectiveEditor/LineButton.tscn").instantiate()
+		var line_button := preload("res://src/UI/PerspectiveEditor/LineButton.tscn").instantiate()
 		line_buttons_container.add_child(line_button)
 		var index = line_button.get_parent().get_child_count() - 2
 		line_button.get_parent().move_child(line_button, index)
 
-		var line_name = str(
-			"Line", line_button.get_index() + 1, " (", int(abs(line_data.angle)), "°)"
+		var line_name := str(
+			"Line", line_button.get_index() + 1, " (", absi(line_data.angle), "°)"
 		)
 		line_button.text = line_name
 
-		var remove_button = line_button.find_child("Delete")
-		var angle_slider = line_button.find_child("AngleSlider")
-		var length_slider = line_button.find_child("LengthSlider")
+		var remove_button := line_button.find_child("Delete")
+		var angle_slider := line_button.find_child("AngleSlider")
+		var length_slider := line_button.find_child("LengthSlider")
 
 		angle_slider.value = abs(line_data.angle)
 		length_slider.value = line_data.length
@@ -227,7 +227,7 @@ func update_data_to_project(removal := false):
 		project.vanishing_points.remove_at(idx)
 		return
 	# If project knows about this vanishing point then update it
-	var data = serialize()
+	var data := serialize()
 	if idx < project.vanishing_points.size():
 		project.vanishing_points[idx] = data
 	# If project doesn't know about this vanishing point then NOW it knows
