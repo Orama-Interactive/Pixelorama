@@ -118,11 +118,10 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 	var err := FileAccess.get_open_error()
 	if err != OK:
 		Global.error_dialog.set_text(
-			tr("File failed to open. Error code %s") % str(err, ErrorManager.parse(err, " (", ")"))
+			tr("File failed to open. Error code %s (%s)") % [err, error_string(err)]
 		)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)
-		file.close()
 		return
 
 	var empty_project: bool = Global.current_project.is_empty() and replace_empty
@@ -395,7 +394,7 @@ func save_pxo_file(
 		if temp_path.is_valid_filename():
 			return
 		Global.error_dialog.set_text(
-			tr("File failed to save. Error code %s") % str(err, ErrorManager.parse(err, " (", ")"))
+			tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
 		)
 		Global.error_dialog.popup_centered()
 		Global.dialog_open(true)

@@ -262,10 +262,7 @@ func export_processed_images(
 				var err := processed_images[i].save_png(export_paths[i])
 				if err != OK:
 					Global.error_dialog.set_text(
-						(
-							tr("File failed to save. Error code %s")
-							% str(err, ErrorManager.parse(err, " (", ")"))
-						)
+						tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
 					)
 					Global.error_dialog.popup_centered()
 					Global.dialog_open(true)
