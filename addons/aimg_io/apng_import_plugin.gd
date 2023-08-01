@@ -32,14 +32,16 @@ func _get_preset_name(_i):
 
 
 func _get_import_options(_path: String, _i: int) -> Array[Dictionary]:
-	return [
-	]
+	return []
+
 
 func _get_import_order():
 	return 0
 
+
 func _get_option_visibility(_path: String, _option, _options):
 	return true
+
 
 func _import(load_path: String, save_path: String, options, _platform_variants, _gen_files):
 	var res := AImgIOAPNGImporter.load_from_file(load_path)
