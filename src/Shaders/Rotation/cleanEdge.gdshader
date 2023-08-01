@@ -47,8 +47,8 @@ uniform float lineWidth = 1.0;
 // Edited for Pixelorama
 uniform float angle;
 uniform sampler2D selection_tex;
-uniform vec2 selection_pivot;
-uniform bool preview;
+uniform vec2 pivot_pixel;
+uniform bool preview = false;
 
 bool similar(vec4 col1, vec4 col2){
 	return (col1.a == 0. && col2.a == 0.) || distance(col1, col2) <= similarThreshold;
@@ -296,7 +296,7 @@ void fragment() {
 	// Pixelorama edit
 	vec4 original = texture(TEXTURE, UV);
 	float selection = texture(selection_tex, UV).a;
-	vec2 pivot = selection_pivot / size; // Normalize pivot position
+	vec2 pivot = pivot_pixel / size; // Normalize pivot position
 	float ratio = size.x / size.y; // Resolution ratio
 	vec2 pixelated_uv = floor(UV * size) / (size - 1.0); // Pixelate UV to fit resolutio
 	vec2 rotated_uv;

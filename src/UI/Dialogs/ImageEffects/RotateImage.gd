@@ -3,9 +3,9 @@ extends ImageEffect
 enum { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, URD }
 enum Animate { ANGLE, INITIAL_ANGLE }
 
-var live_preview: bool = true
-var rotxel_shader: Shader
-var nn_shader: Shader = preload("res://src/Shaders/Rotation/NearestNeighbour.gdshader")
+var live_preview := true
+var rotxel_shader := preload("res://src/Shaders/Rotation/SmearRotxel.gdshader")
+var nn_shader := preload("res://src/Shaders/Rotation/NearestNeighbour.gdshader")
 var pivot := Vector2.INF
 var drag_pivot := false
 
@@ -22,14 +22,12 @@ var drag_pivot := false
 
 func _ready() -> void:
 	super._ready()
-	# set as in enum
+	# Set as in the Animate enum
 	animate_panel.add_float_property("Angle", angle_slider)
 	animate_panel.add_float_property("Initial Angle", init_angle_slider)
 	type_option_button.add_item("Rotxel with Smear", ROTXEL_SMEAR)
-	rotxel_shader = load("res://src/Shaders/Rotation/SmearRotxel.gdshader")
 	type_option_button.add_item("cleanEdge", CLEANEDGE)
 	type_option_button.add_item("OmniScale", OMNISCALE)
-	type_option_button.set_item_disabled(OMNISCALE, not DrawingAlgos.omniscale_shader)
 	type_option_button.add_item("Nearest neighbour (Shader)", NNS)
 	type_option_button.add_item("Nearest neighbour", NN)
 	type_option_button.add_item("Rotxel", ROTXEL)
@@ -85,11 +83,10 @@ func _calculate_pivot() -> void:
 
 
 func commit_action(cel: Image, _project: Project = Global.current_project) -> void:
-	var angle: float = deg_to_rad(animate_panel.get_animated_value(commit_idx, Animate.ANGLE))
+	var angle := deg_to_rad(animate_panel.get_animated_value(commit_idx, Animate.ANGLE))
 	var init_angle: float = animate_panel.get_animated_value(commit_idx, Animate.INITIAL_ANGLE)
 
 	var selection_tex: ImageTexture
-
 	var image := Image.new()
 	image.copy_from(cel)
 	if _project.has_selection and selection_checkbox.button_pressed:
@@ -104,74 +101,42 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 						image.set_pixelv(pos, Color(0, 0, 0, 0))
 					else:
 						cel.set_pixelv(pos, Color(0, 0, 0, 0))
-	match type_option_button.get_selected_id():
-		ROTXEL_SMEAR:
-			var params := {
-				"initial_angle": init_angle,
-				"ending_angle": rad_to_deg(angle),
-				"tolerance": tolerance_slider.value,
-				"selection_tex": selection_tex,
-				"origin": pivot / Vector2(cel.get_size()),
-			}
-			if !has_been_confirmed:
-				for param in params:
-					preview.material.set_shader_parameter(param, params[param])
-			else:
-				var gen := ShaderImageEffect.new()
-				gen.generate_image(cel, rotxel_shader, params, _project.size)
-				await gen.done
-
-		CLEANEDGE:
-			var params := {
-				"angle": angle,
-				"selection_tex": selection_tex,
-				"selection_pivot": pivot,
-				"slope": true,
-				"cleanup": false,
-				"preview": true
-			}
-			if !has_been_confirmed:
-				for param in params:
-					preview.material.set_shader_parameter(param, params[param])
-			else:
-				params["preview"] = false
-				var gen := ShaderImageEffect.new()
-				gen.generate_image(cel, DrawingAlgos.clean_edge_shader, params, _project.size)
-				await gen.done
-		OMNISCALE:
-			var params := {
-				"angle": angle,
-				"selection_tex": selection_tex,
-				"selection_pivot": pivot,
-				"preview": true
-			}
-			if !has_been_confirmed:
-				for param in params:
-					preview.material.set_shader_parameter(param, params[param])
-			else:
-				params["preview"] = false
-				var gen := ShaderImageEffect.new()
-				gen.generate_image(cel, DrawingAlgos.omniscale_shader, params, _project.size)
-				await gen.done
-		NNS:
-			var params := {
-				"angle": angle,
-				"selection_tex": selection_tex,
-				"selection_pivot": pivot,
-			}
-			if !has_been_confirmed:
-				for param in params:
-					preview.material.set_shader_parameter(param, params[param])
-			else:
-				var gen := ShaderImageEffect.new()
-				gen.generate_image(cel, nn_shader, params, _project.size)
-				await gen.done
-		ROTXEL:
-			DrawingAlgos.rotxel(image, angle, pivot)
-		NN:
-			DrawingAlgos.nn_rotate(image, angle, pivot)
-		URD:
-			DrawingAlgos.fake_rotsprite(image, angle, pivot)
+	if _type_is_shader():
+		var shader := rotxel_shader
+		var params := {
+			"angle": angle, "selection_tex": selection_tex, "pivot_pixel": pivot, "preview": true
+		}
+		match type_option_button.get_selected_id():
+			ROTXEL_SMEAR:
+				params = {
+					"initial_angle": init_angle,
+					"ending_angle": rad_to_deg(angle),
+					"tolerance": tolerance_slider.value,
+					"selection_tex": selection_tex,
+					"origin": pivot / Vector2(cel.get_size()),
+				}
+			CLEANEDGE:
+				shader = DrawingAlgos.clean_edge_shader
+			OMNISCALE:
+				shader = DrawingAlgos.omniscale_shader
+			NNS:
+				shader = nn_shader
+		if !has_been_confirmed:
+			for param in params:
+				preview.material.set_shader_parameter(param, params[param])
+		else:
+			params["preview"] = false
+			var gen := ShaderImageEffect.new()
+			gen.generate_image(cel, shader, params, _project.size)
+			await gen.done
+	else:
+		match type_option_button.get_selected_id():
+			ROTXEL:
+				DrawingAlgos.rotxel(image, angle, pivot)
+			NN:
+				DrawingAlgos.nn_rotate(image, angle, pivot)
+			URD:
+				DrawingAlgos.fake_rotsprite(image, angle, pivot)
 
 	if _project.has_selection and selection_checkbox.button_pressed and !_type_is_shader():
 		cel.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)

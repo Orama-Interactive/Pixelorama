@@ -3,7 +3,7 @@ render_mode unshaded;
 
 uniform float angle;
 uniform sampler2D selection_tex;
-uniform vec2 selection_pivot;
+uniform vec2 pivot_pixel;
 
 
 vec2 rotate(vec2 uv, vec2 pivot, float ratio) {
@@ -29,7 +29,7 @@ void fragment() {
 
 	vec2 tex_size = 1.0 / TEXTURE_PIXEL_SIZE; // Texture size in real pixel coordinates
 	vec2 pixelated_uv = floor(UV * tex_size) / (tex_size - 1.0); // Pixelate UV to fit resolution
-	vec2 pivot = selection_pivot / tex_size; // Normalize pivot position
+	vec2 pivot = pivot_pixel / tex_size; // Normalize pivot position
 	float ratio = tex_size.x / tex_size.y; // Resolution ratio
 
 	// Make a border to prevent stretching pixels on the edge
