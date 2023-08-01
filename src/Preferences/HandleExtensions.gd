@@ -142,7 +142,7 @@ func _add_extension(file_name: String) -> void:
 	var extension_config_file := FileAccess.open(extension_config_file_path, FileAccess.READ)
 	var err := FileAccess.get_open_error()
 	if err != OK:
-		print("Error loading config file: ", err, ErrorManager.parse(err, " (", ")"))
+		print("Error loading config file: ", err, " (", error_string(err), ")")
 		extension_config_file.close()
 		return
 
