@@ -17,6 +17,7 @@ Built using Godot 3.5.2
 - A new Timeline category in the Preferences with options such as the colors of onion skinning's color mode, and whether a layer should be selected when a layer button (such as lock, visibility etc) gets pressed.
 - It is now possible to disable saving frames that have a tag to a different folder, as well as specifying a separator character in the file names.
 - Palette file types now exist as filters in the Open file dialog.
+- .bmp and .tga file types now exist in the Open dialog of the Web version.
 
 ### Changed
 - The image effect animation system introduced in v0.11 has been overhauled with a better user interface, and with tweening options. [#879](https://github.com/Orama-Interactive/Pixelorama/pull/879)
@@ -24,6 +25,7 @@ Built using Godot 3.5.2
 - The cel opacity slider now affects all of the selected cels. [#865](https://github.com/Orama-Interactive/Pixelorama/pull/865)
 - The right click menu of the frame buttons now works for all selected frames, besides "move left" and "move right".
 - The canvas is automatically enlarged when importing an image of a larger size to the project.
+- Error codes are now being explained in the error messages. [#891](https://github.com/Orama-Interactive/Pixelorama/pull/891)
 - Newly cloned frames are now automatically selected. [#861](https://github.com/Orama-Interactive/Pixelorama/pull/861)
 - "Centralize Image" has been moved from the Image menu to the frame button right click menu. [#884](https://github.com/Orama-Interactive/Pixelorama/pull/884)
 - The project's name is no longer saved inside .pxo files. Loaded projects now get their name directly from the file name.
