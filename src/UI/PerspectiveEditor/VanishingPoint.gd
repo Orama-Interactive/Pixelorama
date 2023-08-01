@@ -194,9 +194,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 		var index = line_button.get_parent().get_child_count() - 2
 		line_button.get_parent().move_child(line_button, index)
 
-		var line_name := str(
-			"Line", line_button.get_index() + 1, " (", absi(line_data.angle), "°)"
-		)
+		var line_name := str("Line", line_button.get_index() + 1, " (", absi(line_data.angle), "°)")
 		line_button.text = line_name
 
 		var remove_button := line_button.find_child("Delete")
