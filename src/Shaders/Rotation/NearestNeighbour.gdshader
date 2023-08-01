@@ -4,7 +4,6 @@ render_mode unshaded;
 uniform float angle;
 uniform sampler2D selection_tex;
 uniform vec2 selection_pivot;
-uniform vec2 selection_size;
 
 
 vec2 rotate(vec2 uv, vec2 pivot, float ratio) {

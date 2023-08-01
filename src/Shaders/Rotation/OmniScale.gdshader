@@ -43,7 +43,6 @@ uniform int ScaleMultiplier : hint_range(0, 100) = 4;
 uniform float angle;
 uniform sampler2D selection_tex;
 uniform vec2 selection_pivot;
-uniform vec2 selection_size;
 uniform bool preview;
 
 

@@ -29,7 +29,7 @@ shader_type canvas_item;
 //enables 2:1 slopes. otherwise only uses 45 degree slopes
 #define SLOPE
 //cleans up small detail slope transitions (if SLOPE is enabled)
-//if only using for rotation, CLEANUP has negligable effect and should be disabled for speed
+//if only using for rotation, CLEANUP has negligible effect and should be disabled for speed
 #define CLEANUP
 
 //the color with the highest priority.
@@ -44,19 +44,11 @@ uniform float similarThreshold = 0.0;
 
 uniform float lineWidth = 1.0;
 
-const float scale = 4.0;
-const mat3 yuv_matrix = mat3(vec3(0.299, 0.587, 0.114), vec3(-0.169, -0.331, 0.5), vec3(0.5, -0.419, -0.081));
 // Edited for Pixelorama
 uniform float angle;
 uniform sampler2D selection_tex;
 uniform vec2 selection_pivot;
-uniform vec2 selection_size;
 uniform bool preview;
-
-vec3 yuv(vec3 col){
-	mat3 yuv = transpose(yuv_matrix);
-	return yuv * col;
-}
 
 bool similar(vec4 col1, vec4 col2){
 	return (col1.a == 0. && col2.a == 0.) || distance(col1, col2) <= similarThreshold;
@@ -73,10 +65,6 @@ bool similar4(vec4 col1, vec4 col2, vec4 col3, vec4 col4){
 	return similar(col1, col2) && similar(col2, col3) && similar(col3, col4);
 }
 
-bool similar5(vec4 col1, vec4 col2, vec4 col3, vec4 col4, vec4 col5){
-	return similar(col1, col2) && similar(col2, col3) && similar(col3, col4) && similar(col4, col5);
-}
-
 bool higher(vec4 thisCol, vec4 otherCol){
 	if(similar(thisCol, otherCol)) return false;
 	if(thisCol.a == otherCol.a){
@@ -86,10 +74,6 @@ bool higher(vec4 thisCol, vec4 otherCol){
 	} else {
 		return thisCol.a > otherCol.a;
 	}
-}
-
-vec4 higherCol(vec4 thisCol, vec4 otherCol){
-	return higher(thisCol, otherCol) ? thisCol : otherCol;
 }
 
 //color distance

@@ -88,16 +88,12 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 	var angle: float = deg_to_rad(animate_panel.get_animated_value(commit_idx, Animate.ANGLE))
 	var init_angle: float = animate_panel.get_animated_value(commit_idx, Animate.INITIAL_ANGLE)
 
-	var selection_size := cel.get_size()
 	var selection_tex: ImageTexture
 
 	var image := Image.new()
 	image.copy_from(cel)
 	if _project.has_selection and selection_checkbox.button_pressed:
-		var selection_rectangle: Rect2 = _project.selection_map.get_used_rect()
-		selection_size = selection_rectangle.size
-
-		var selection: Image = _project.selection_map
+		var selection := _project.selection_map
 		selection_tex = ImageTexture.create_from_image(selection)
 
 		if !_type_is_shader():
@@ -116,7 +112,6 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				"tolerance": tolerance_slider.value,
 				"selection_tex": selection_tex,
 				"origin": pivot / Vector2(cel.get_size()),
-				"selection_size": selection_size
 			}
 			if !has_been_confirmed:
 				for param in params:
@@ -131,7 +126,6 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				"angle": angle,
 				"selection_tex": selection_tex,
 				"selection_pivot": pivot,
-				"selection_size": selection_size,
 				"slope": true,
 				"cleanup": false,
 				"preview": true
@@ -149,7 +143,6 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				"angle": angle,
 				"selection_tex": selection_tex,
 				"selection_pivot": pivot,
-				"selection_size": selection_size,
 				"preview": true
 			}
 			if !has_been_confirmed:
@@ -165,7 +158,6 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				"angle": angle,
 				"selection_tex": selection_tex,
 				"selection_pivot": pivot,
-				"selection_size": selection_size
 			}
 			if !has_been_confirmed:
 				for param in params:
