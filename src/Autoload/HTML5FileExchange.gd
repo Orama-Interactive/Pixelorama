@@ -28,7 +28,7 @@ func _define_js() -> void:
 		canceled = true;
 		var input = document.createElement('INPUT');
 		input.setAttribute("type", "file");
-		input.setAttribute("accept", "image/png, image/jpeg, image/webp");
+		input.setAttribute("accept", "image/png, image/jpeg, image/webp, image/bmp, image/x-tga");
 		input.click();
 		input.addEventListener('change', event => {
 			if (event.target.files.length > 0){
@@ -98,7 +98,7 @@ func load_image(load_directly := true):
 	var image_type = JavaScript.eval("fileType;", true)
 	var image_name = JavaScript.eval("fileName;", true)
 
-	var image = Image.new()
+	var image := Image.new()
 	var image_error
 	var image_info: Dictionary = {}
 	match image_type:
@@ -117,6 +117,10 @@ func load_image(load_directly := true):
 			image_error = image.load_jpg_from_buffer(image_data)
 		"image/webp":
 			image_error = image.load_webp_from_buffer(image_data)
+		"image/bmp":
+			image_error = image.load_bmp_from_buffer(image_data)
+		"image/x-tga":
+			image_error = image.load_tga_from_buffer(image_data)
 		var invalid_type:
 			print("Invalid type: " + invalid_type)
 			return
@@ -155,7 +159,7 @@ func load_shader() -> void:
 #	var file_type = JavaScript.eval("fileType;", true)
 	var file_name = JavaScript.eval("fileName;", true)
 
-	var shader = Shader.new()
+	var shader := Shader.new()
 	shader.code = file_data
 
 	var shader_effect_dialog = Global.control.get_node("Dialogs/ImageEffects/ShaderEffect")
