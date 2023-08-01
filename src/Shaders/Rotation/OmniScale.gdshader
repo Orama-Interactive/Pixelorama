@@ -42,8 +42,8 @@ uniform int ScaleMultiplier : hint_range(0, 100) = 4;
 // Pixelorama-specific uniforms
 uniform float angle;
 uniform sampler2D selection_tex;
-uniform vec2 selection_pivot;
-uniform bool preview;
+uniform vec2 pivot_pixel;
+uniform bool preview = false;
 
 
 bool is_different(vec4 a, vec4 b)
@@ -311,7 +311,7 @@ void fragment()
 	vec4 original = texture(TEXTURE, UV);
 	float selection = texture(selection_tex, UV).a;
 	vec2 size = 1.0 / TEXTURE_PIXEL_SIZE;
-	vec2 pivot = selection_pivot / size; // Normalize pivot position
+	vec2 pivot = pivot_pixel / size; // Normalize pivot position
 	float ratio = size.x / size.y; // Resolution ratio
 	vec2 pixelated_uv = floor(UV * size) / (size - 1.0); // Pixelate UV to fit resolution
 	vec2 rotated_uv;

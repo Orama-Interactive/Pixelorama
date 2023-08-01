@@ -1,17 +1,13 @@
 extends Node
 
 enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
-# Continuation from Image.Interpolation
+## Continuation from Image.Interpolation
 enum Interpolation { SCALE3X = 5, CLEANEDGE = 6, OMNISCALE = 7 }
 var clean_edge_shader: Shader
-var omniscale_shader: Shader
+var omniscale_shader := preload("res://src/Shaders/Rotation/OmniScale.gdshader")
 
 
-func _ready() -> void:
-	omniscale_shader = load("res://src/Shaders/Rotation/OmniScale.gdshader")
-
-
-# Algorithm based on http://members.chello.at/easyfilter/bresenham.html
+## Algorithm based on http://members.chello.at/easyfilter/bresenham.html
 func get_ellipse_points(pos: Vector2i, size: Vector2i) -> Array[Vector2i]:
 	var array: Array[Vector2i] = []
 	var x0 := pos.x
@@ -123,8 +119,8 @@ func scale_3x(sprite: Image, tol := 50.0) -> Image:
 
 	for x in range(0, sprite.get_width()):
 		for y in range(0, sprite.get_height()):
-			var xs: int = 3 * x
-			var ys: int = 3 * y
+			var xs := 3 * x
+			var ys := 3 * y
 
 			a = sprite.get_pixel(maxi(x - 1, 0), maxi(y - 1, 0))
 			b = sprite.get_pixel(mini(x, sprite.get_width() - 1), maxi(y - 1, 0))
@@ -431,13 +427,11 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 					sprite.copy_from(scale_3x(sprite))
 				sprite.resize(width, height, Image.INTERPOLATE_NEAREST)
 			elif interpolation == Interpolation.CLEANEDGE:
-				var params := {"angle": 0, "slope": true, "cleanup": true, "preview": false}
 				var gen := ShaderImageEffect.new()
-				gen.generate_image(sprite, clean_edge_shader, params, Vector2i(width, height))
+				gen.generate_image(sprite, clean_edge_shader, {}, Vector2i(width, height))
 			elif interpolation == Interpolation.OMNISCALE and omniscale_shader:
-				var params := {"angle": 0, "preview": false}
 				var gen := ShaderImageEffect.new()
-				gen.generate_image(sprite, omniscale_shader, params, Vector2i(width, height))
+				gen.generate_image(sprite, omniscale_shader, {}, Vector2i(width, height))
 			else:
 				sprite.resize(width, height, interpolation)
 			Global.current_project.undo_redo.add_do_property(f.cels[i].image, "data", sprite.data)
