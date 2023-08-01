@@ -43,7 +43,7 @@ func _get_option_visibility(_path: String, _option, _options):
 	return true
 
 
-func _import(load_path: String, save_path: String, options, _platform_variants, _gen_files):
+func _import(load_path: String, save_path: String, _options, _platform_variants, _gen_files):
 	var res := AImgIOAPNGImporter.load_from_file(load_path)
 	if res[0] != null:
 		push_error("AImgIOPNGImporter: " + res[0])
