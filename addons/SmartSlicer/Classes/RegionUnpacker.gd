@@ -1,0 +1,233 @@
+class_name RegionUnpacker
+extends Reference
+
+# THIS CLASS TAKES INSPIRATION FROM PIXELORAMA'S FLOOD FILL
+# AND HAS BEEN MODIFIED FOR OPTIMIZATION
+
+var include_boundary_threshold: int  # the size of rect below which merging accounts for boundaty
+
+# working array used as buffer for segments while flooding
+var _allegro_flood_segments: Array
+# results array per image while flooding
+var _allegro_image_segments: Array
+var slice_thread := Thread.new()
+
+
+
+func _init(var threshold: int) -> void:
+	include_boundary_threshold = threshold
+
+
+func get_used_rects(image: Image) -> Dictionary:
+	if OS.get_name() == "HTML5":
+		return get_rects({"image": image})
+	else:
+		if slice_thread.is_active():
+			slice_thread.wait_to_finish()
+		var error = slice_thread.start(self, "get_rects", {"image": image})
+		if error == OK:
+			return slice_thread.wait_to_finish()
+		else:
+			return get_rects({"image": image})
+
+
+func get_rects(details: Dictionary) -> Dictionary:
+	var image = details["image"]
+	var rects = []
+	var frame_size = Vector2.ZERO
+	image.lock()
+	for y in image.get_size().y:
+		for x in image.get_size().x:
+			var position = Vector2(x, y)
+			if image.get_pixelv(position).a > 0:  # portion of image detected
+				var visited = false
+				for rect in rects:
+					if rect.has_point(position):
+						visited = true
+						break
+				if !visited:
+					var rect := _estimate_rect(image, position)
+					rects.append(rect)
+	image.unlock()
+	rects = clean_rects(rects)
+
+	# one final loop
+	for rect in rects:
+		if rect.size.x > frame_size.x:
+			frame_size.x = rect.size.x
+		if rect.size.y > frame_size.y:
+			frame_size.y = rect.size.y
+	return {"rects": clean_rects(rects), "frame_size": frame_size}
+
+
+func clean_rects(rects: Array) -> Array:
+	for i in rects.size():
+		var target: Rect2 = rects.pop_front()
+		var include_boundary = false
+		if (
+			target.size.x < include_boundary_threshold
+			or target.size.y < include_boundary_threshold
+		):
+			include_boundary = true
+		var merged = false
+		for rect_i in rects.size():
+			if target.intersects(rects[rect_i], include_boundary):
+				rects[rect_i] = target.merge(rects[rect_i])
+				merged = true
+				break
+		if !merged:
+			rects.append(target)
+	return rects
+
+
+func _estimate_rect(image: Image, position: Vector2) -> Rect2:
+	var cel_image := Image.new()
+	cel_image.copy_from(image)
+	cel_image.lock()
+	var small_rect: Rect2 = _flood_fill(position, cel_image)
+	cel_image.unlock()
+	return small_rect
+
+
+# Add a new segment to the array
+func _add_new_segment(y: int = 0) -> void:
+	var segment = {}
+	segment.flooding = false
+	segment.todo_above = false
+	segment.todo_below = false
+	segment.left_position = -5  # anything less than -1 is ok
+	segment.right_position = -5
+	segment.y = y
+	segment.next = 0
+	_allegro_flood_segments.append(segment)
+
+
+# fill an horizontal segment around the specified position, and adds it to the
+# list of segments filled. Returns the first x coordinate after the part of the
+# line that has been filled.
+func _flood_line_around_point(position: Vector2, image: Image) -> int:
+	# this method is called by `_flood_fill` after the required data structures
+	# have been initialized
+	if not image.get_pixelv(position).a > 0:
+		return int(position.x) + 1
+	var west: Vector2 = position
+	var east: Vector2 = position
+	while west.x >= 0 && image.get_pixelv(west).a > 0:
+		west += Vector2.LEFT
+	while east.x < image.get_width() && image.get_pixelv(east).a > 0:
+		east += Vector2.RIGHT
+	# Make a note of the stuff we processed
+	var c = int(position.y)
+	var segment = _allegro_flood_segments[c]
+	# we may have already processed some segments on this y coordinate
+	if segment.flooding:
+		while segment.next > 0:
+			c = segment.next  # index of next segment in this line of image
+			segment = _allegro_flood_segments[c]
+		# found last current segment on this line
+		c = _allegro_flood_segments.size()
+		segment.next = c
+		_add_new_segment(int(position.y))
+		segment = _allegro_flood_segments[c]
+	# set the values for the current segment
+	segment.flooding = true
+	segment.left_position = west.x + 1
+	segment.right_position = east.x - 1
+	segment.y = position.y
+	segment.next = 0
+	# Should we process segments above or below this one?
+	# when there is a selected area, the pixels above and below the one we started creating this
+	# segment from may be outside it. It's easier to assume we should be checking for segments
+	# above and below this one than to specifically check every single pixel in it, because that
+	# test will be performed later anyway.
+	# On the other hand, this test we described is the same `project.can_pixel_get_drawn` does if
+	# there is no selection, so we don't need branching here.
+	segment.todo_above = position.y > 0
+	segment.todo_below = position.y < image.get_height() - 1
+	# this is an actual segment we should be coloring, so we add it to the results for the
+	# current image
+	if segment.right_position >= segment.left_position:
+		_allegro_image_segments.append(segment)
+	# we know the point just east of the segment is not part of a segment that should be
+	# processed, else it would be part of this segment
+	return int(east.x) + 1
+
+
+func _check_flooded_segment(y: int, left: int, right: int, image: Image) -> bool:
+	var ret = false
+	var c: int = 0
+	while left <= right:
+		c = y
+		while true:
+			var segment = _allegro_flood_segments[c]
+			if left >= segment.left_position and left <= segment.right_position:
+				left = segment.right_position + 2
+				break
+			c = segment.next
+			if c == 0:  # couldn't find a valid segment, so we draw a new one
+				left = _flood_line_around_point(Vector2(left, y), image)
+				ret = true
+				break
+	return ret
+
+
+func _flood_fill(position: Vector2, image: Image) -> Rect2:
+	# implements the floodfill routine by Shawn Hargreaves
+	# from https://www1.udel.edu/CIS/software/dist/allegro-4.2.1/src/flood.c
+	# init flood data structures
+	_allegro_flood_segments = []
+	_allegro_image_segments = []
+	_compute_segments_for_image(position, image)
+	# now actually color the image: since we have already checked a few things for the points
+	# we'll process here, we're going to skip a bunch of safety checks to speed things up.
+
+#	var temp_image = Image.new()
+#	temp_image.copy_from(image)
+#	temp_image.fill(Color.transparent)
+	var temp_bitmap = BitMap.new()
+	temp_bitmap.create(image.get_size())
+	_select_segments(temp_bitmap)
+
+	var shader = preload("res://addons/SmartSlicer/Shader/black_to_transparent.gdshader")
+	var effect = ShaderImageEffect.new()
+	var final_image = temp_bitmap.convert_to_image()
+	effect.generate_image(final_image, shader, {}, final_image.get_size())
+
+	return final_image.get_used_rect()
+
+
+func _compute_segments_for_image(position: Vector2, image: Image) -> void:
+	# initially allocate at least 1 segment per line of image
+	for j in image.get_height():
+		_add_new_segment(j)
+	# start flood algorithm
+	_flood_line_around_point(position, image)
+	# test all segments while also discovering more
+	var done := false
+	while not done:
+		done = true
+		var max_index = _allegro_flood_segments.size()
+		for c in max_index:
+			var p = _allegro_flood_segments[c]
+			if p.todo_below:  # check below the segment?
+				p.todo_below = false
+				if _check_flooded_segment(p.y + 1, p.left_position, p.right_position, image):
+					done = false
+			if p.todo_above:  # check above the segment?
+				p.todo_above = false
+				if _check_flooded_segment(p.y - 1, p.left_position, p.right_position, image):
+					done = false
+
+
+func _select_segments(bitmap: BitMap) -> void:
+	# short circuit for flat colors
+	for c in _allegro_image_segments.size():
+		var p = _allegro_image_segments[c]
+
+#		for px in range(p.left_position, p.right_position + 1):
+			# We don't have to check again whether the point being processed is within the bounds
+#			bitmap.set_bit(Vector2(px, p.y), true)
+		var rect = Rect2()
+		rect.position = Vector2(p.left_position, p.y)
+		rect.end = Vector2(p.right_position + 1, p.y + 1)
+		bitmap.set_bit_rect(rect, true)
