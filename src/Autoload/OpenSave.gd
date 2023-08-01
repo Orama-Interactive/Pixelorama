@@ -420,7 +420,7 @@ func save_pxo_file(
 		# Rename the new file to its proper name and remove the old file, if it exists.
 		dir.rename(temp_path, path)
 
-	if OS.get_name() == "Web" and OS.has_feature("JavaScript") and !autosave:
+	if OS.has_feature("web") and !autosave:
 		file = FileAccess.open(path, FileAccess.READ)
 		if FileAccess.get_open_error() == OK:
 			var file_data := Array(file.get_buffer(file.get_length()))
