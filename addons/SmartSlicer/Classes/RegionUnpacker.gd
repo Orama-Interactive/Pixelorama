@@ -5,6 +5,7 @@ extends Reference
 # AND HAS BEEN MODIFIED FOR OPTIMIZATION
 
 var include_boundary_threshold: int  # the size of rect below which merging accounts for boundaty
+var _merge_dist
 
 # working array used as buffer for segments while flooding
 var _allegro_flood_segments: Array
@@ -12,23 +13,26 @@ var _allegro_flood_segments: Array
 var _allegro_image_segments: Array
 var slice_thread := Thread.new()
 
+var test: Array
 
 
-func _init(var threshold: int) -> void:
+func _init(var threshold: int, var merge_dist: int) -> void:
 	include_boundary_threshold = threshold
+	_merge_dist = merge_dist
 
 
 func get_used_rects(image: Image) -> Dictionary:
 	if OS.get_name() == "HTML5":
 		return get_rects({"image": image})
 	else:
-		if slice_thread.is_active():
-			slice_thread.wait_to_finish()
-		var error = slice_thread.start(self, "get_rects", {"image": image})
-		if error == OK:
-			return slice_thread.wait_to_finish()
-		else:
-			return get_rects({"image": image})
+#		if slice_thread.is_active():
+#			slice_thread.wait_to_finish()
+#		var error = slice_thread.start(self, "get_rects", {"image": image})
+#		if error == OK:
+#			return slice_thread.wait_to_finish()
+#		else:
+#			return get_rects({"image": image})
+		return get_rects({"image": image})
 
 
 func get_rects(details: Dictionary) -> Dictionary:
@@ -50,34 +54,48 @@ func get_rects(details: Dictionary) -> Dictionary:
 					rects.append(rect)
 	image.unlock()
 	rects = clean_rects(rects)
-
+	rects.sort_custom(self, "sort_rects")
 	# one final loop
 	for rect in rects:
 		if rect.size.x > frame_size.x:
 			frame_size.x = rect.size.x
 		if rect.size.y > frame_size.y:
 			frame_size.y = rect.size.y
-	return {"rects": clean_rects(rects), "frame_size": frame_size}
+	return {"rects": rects, "frame_size": frame_size}
 
 
 func clean_rects(rects: Array) -> Array:
 	for i in rects.size():
 		var target: Rect2 = rects.pop_front()
-		var include_boundary = false
+		var test_rect = target
 		if (
 			target.size.x < include_boundary_threshold
 			or target.size.y < include_boundary_threshold
 		):
-			include_boundary = true
+			test_rect.size += Vector2(_merge_dist, _merge_dist)
+			test_rect.position -= Vector2(_merge_dist, _merge_dist) / 2
 		var merged = false
 		for rect_i in rects.size():
-			if target.intersects(rects[rect_i], include_boundary):
+			if test_rect.intersects(rects[rect_i]):
 				rects[rect_i] = target.merge(rects[rect_i])
 				merged = true
 				break
 		if !merged:
 			rects.append(target)
 	return rects
+
+
+func sort_rects(rect_a: Rect2, rect_b: Rect2) -> bool:
+	# After many failed attempts, this version works for some reason (it's best not to disturb it)
+	if (rect_a.end.y < rect_b.position.y):
+		return true
+	if rect_a.position.x < rect_b.position.x:
+		# if both lie in the same row
+		var start = rect_a.position
+		var size = Vector2(rect_b.end.x, rect_a.end.y)
+		if Rect2(start, size).intersects(rect_b):
+			return true
+	return false
 
 
 func _estimate_rect(image: Image, position: Vector2) -> Rect2:
@@ -223,10 +241,6 @@ func _select_segments(bitmap: BitMap) -> void:
 	# short circuit for flat colors
 	for c in _allegro_image_segments.size():
 		var p = _allegro_image_segments[c]
-
-#		for px in range(p.left_position, p.right_position + 1):
-			# We don't have to check again whether the point being processed is within the bounds
-#			bitmap.set_bit(Vector2(px, p.y), true)
 		var rect = Rect2()
 		rect.position = Vector2(p.left_position, p.y)
 		rect.end = Vector2(p.right_position + 1, p.y + 1)

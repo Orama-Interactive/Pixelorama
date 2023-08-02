@@ -1,23 +1,35 @@
 extends Control
 
 var _sliced_rects: Array
-var _stretch_ratio: Vector2
+var _stretch_amount: float
+var _offset: Vector2
 
-func show_preview(sliced_rects: Array, stretch_ratio: Vector2) -> void:
-	_sliced_rects = sliced_rects
-	_stretch_ratio = stretch_ratio
+func show_preview(sliced_rects: Array) -> void:
+#	print(sliced_rects)
+	var image = get_parent().texture.get_data()
+	var aspect_ratio = image.get_size().x / image.get_size().y
+
+	if image.get_size().x > image.get_size().y:
+		_stretch_amount = rect_size.x / image.get_size().x
+		# Simplification of the formula below
+	else:
+		_stretch_amount = rect_size.y / image.get_size().y
+	_sliced_rects = sliced_rects.duplicate()
+	_offset = (0.5 * (rect_size - (image.get_size() * _stretch_amount))).floor()
 	update()
 
 
 func _draw() -> void:
+	draw_set_transform(_offset, 0, Vector2.ONE)
 	for i in _sliced_rects.size():
 		var rect = _sliced_rects[i]
-		var updated_rect: Rect2 = rect
-		updated_rect.position = updated_rect.position * _stretch_ratio
-		updated_rect.size *= _stretch_ratio
-		draw_rect(updated_rect, Color("6680ff"), false)
-		draw_set_transform(updated_rect.position, 0, Vector2.ONE)
+		var scaled_rect: Rect2 = rect
+		scaled_rect.position = (scaled_rect.position * _stretch_amount)
+		scaled_rect.size *= _stretch_amount
+		draw_rect(scaled_rect, Color("6680ff"), false)
+		# show number
+		draw_set_transform(_offset + scaled_rect.position, 0, Vector2.ONE)
 		var font: Font = Global.control.theme.default_font
 		var font_height := font.get_height()
 		draw_string(font, Vector2(1, font_height), str(i))
-		draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
+		draw_set_transform(_offset, 0, Vector2.ONE)

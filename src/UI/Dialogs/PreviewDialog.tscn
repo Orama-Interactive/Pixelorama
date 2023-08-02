@@ -5,8 +5,8 @@
 [ext_resource path="res://addons/SmartSlicer/SmartSlicePreview.gd" type="Script" id=3]
 
 [node name="PreviewDialog" type="ConfirmationDialog"]
-margin_right = 550.0
-margin_bottom = 452.0
+margin_right = 629.0
+margin_bottom = 513.0
 rect_min_size = Vector2( 550, 70 )
 popup_exclusive = true
 window_title = "Import Options"
@@ -22,18 +22,15 @@ margin_right = -8.0
 margin_bottom = -36.0
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_right = 534.0
-margin_bottom = 366.0
+margin_right = 613.0
+margin_bottom = 395.0
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer"]
-margin_left = 117.0
-margin_top = 33.0
-margin_right = 417.0
-margin_bottom = 333.0
+margin_left = 156.0
+margin_top = 47.0
+margin_right = 456.0
+margin_bottom = 347.0
 rect_min_size = Vector2( 300, 300 )
 expand = true
 stretch_mode = 6
@@ -42,9 +39,6 @@ __meta__ = {
 }
 
 [node name="HorizLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VerticalLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
 
@@ -62,9 +56,9 @@ margin_bottom = 324.0
 text = "Apply to all"
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 370.0
-margin_right = 534.0
-margin_bottom = 384.0
+margin_top = 399.0
+margin_right = 613.0
+margin_bottom = 413.0
 custom_constants/separation = 32
 
 [node name="ImageSizeLabel" type="Label" parent="VBoxContainer/SizeContainer"]
@@ -80,9 +74,9 @@ margin_bottom = 14.0
 text = "Frame size: 64×64"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 388.0
-margin_right = 534.0
-margin_bottom = 408.0
+margin_top = 417.0
+margin_right = 613.0
+margin_bottom = 469.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_right = 66.0
@@ -98,11 +92,11 @@ mouse_default_cursor_shape = 2
 size_flags_vertical = 0
 text = "New tab"
 
-[node name="SpritesheetTabOptions" type="HFlowContainer" parent="VBoxContainer/HBoxContainer"]
-visible = false
+[node name="SpritesheetTabOptions" type="GridContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 155.0
-margin_right = 533.0
+margin_right = 613.0
 margin_bottom = 52.0
+rect_min_size = Vector2( 380, 0 )
 size_flags_horizontal = 3
 
 [node name="Manual" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions"]
@@ -141,25 +135,35 @@ value = 1.0
 [node name="Smart" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions"]
 visible = false
 margin_top = 28.0
-margin_right = 203.0
+margin_right = 458.0
 margin_bottom = 52.0
+size_flags_horizontal = 3
 
 [node name="Threshold" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart" instance=ExtResource( 2 )]
-margin_right = 100.0
-rect_min_size = Vector2( 100, 24 )
+margin_right = 195.0
+hint_tooltip = "Image having any one side smaller than this value will closs the threshold"
+min_value = 1.0
 value = 10.0
 allow_greater = true
 prefix = "Threshold:"
 
+[node name="MergeDist" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart" instance=ExtResource( 2 )]
+margin_left = 199.0
+margin_right = 394.0
+hint_tooltip = "image (that crossed the threshold), this distance apart to any other image
+will get merged with that image"
+value = 3.0
+prefix = "Merge distance:"
+
 [node name="Slice" type="Button" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart"]
-margin_left = 104.0
-margin_right = 203.0
+margin_left = 398.0
+margin_right = 458.0
 margin_bottom = 24.0
-text = "Refresh Preview"
+text = "Refresh"
 
 [node name="SmartSlice" type="CheckBox" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions"]
 margin_top = 28.0
-margin_right = 99.0
+margin_right = 378.0
 margin_bottom = 52.0
 text = "Smart Slice"
 
@@ -305,6 +309,7 @@ margin_bottom = 24.0
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/Threshold" to="." method="_on_Threshold_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/MergeDist" to="." method="_on_MergeDist_value_changed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/Slice" to="." method="_on_Slice_pressed"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartSlice" to="." method="_on_SmartSlice_toggled"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/NewBrushOptions/BrushTypeOption" to="." method="_on_BrushTypeOption_item_selected"]

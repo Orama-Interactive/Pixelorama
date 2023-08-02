@@ -30,11 +30,12 @@ var hiding: bool = false
 onready var texture_rect: TextureRect = $VBoxContainer/CenterContainer/TextureRect
 onready var image_size_label: Label = $VBoxContainer/SizeContainer/ImageSizeLabel
 onready var frame_size_label: Label = $VBoxContainer/SizeContainer/FrameSizeLabel
-onready var smart_slice_checkbox: CheckBox = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartSlice
-onready var merge_threshold: TextureProgress = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/Threshold
+onready var smart_slice_checkbox = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartSlice
+onready var merge_threshold = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/Threshold
+onready var merge_dist: TextureProgress = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/MergeDist
 onready var spritesheet_manual_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual
 onready var spritesheet_smart_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart
-onready var spritesheet_tab_options: HFlowContainer = spritesheet_smart_tab_options.get_parent()
+onready var spritesheet_tab_options = spritesheet_smart_tab_options.get_parent()
 onready var spritesheet_lay_opt = $VBoxContainer/HBoxContainer/SpritesheetLayerOptions
 onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
 onready var replace_cel_options = $VBoxContainer/HBoxContainer/ReplaceCelOptions
@@ -124,8 +125,7 @@ func _on_PreviewDialog_confirmed() -> void:
 		elif current_import_option == ImageImportOptions.SPRITESHEET_TAB:
 			if smart_slice:
 				if !recycle_last_slice_result:
-					var unpak := RegionUnpacker.new(merge_threshold.value)
-					sliced_rects = unpak.get_used_rects(texture_rect.texture.get_data())
+					obtain_sliced_data()
 				OpenSave.open_image_as_spritesheet_tab_smart(
 					path,
 					image,
@@ -141,8 +141,7 @@ func _on_PreviewDialog_confirmed() -> void:
 			var frame_index: int = spritesheet_lay_opt.get_node("AtFrameSpinbox").value - 1
 			if smart_slice:
 				if !recycle_last_slice_result:
-					var unpak := RegionUnpacker.new(merge_threshold.value)
-					sliced_rects = unpak.get_used_rects(texture_rect.texture.get_data())
+					obtain_sliced_data()
 				OpenSave.open_image_as_spritesheet_layer_smart(
 					path,
 					image,
@@ -269,12 +268,13 @@ func synchronize() -> void:
 
 
 func _on_ImportOption_item_selected(id: int) -> void:
-	update()
 	current_import_option = id
 	OpenSave.last_dialog_option = current_import_option
+	smart_slice_checkbox.pressed = false
 	apply_all.disabled = false
-	spritesheet_tab_options.visible = false
+	smart_slice = false
 	smart_slice_checkbox.visible = false
+	spritesheet_tab_options.visible = false
 	spritesheet_lay_opt.visible = false
 	new_frame_options.visible = false
 	replace_cel_options.visible = false
@@ -283,16 +283,14 @@ func _on_ImportOption_item_selected(id: int) -> void:
 	texture_rect.get_child(0).visible = false
 	texture_rect.get_child(1).visible = false
 	rect_size.x = 550
+	update()
 
 	if id == ImageImportOptions.SPRITESHEET_TAB:
 		frame_size_label.visible = true
 		smart_slice_checkbox.visible = true
 		spritesheet_tab_options.visible = true
-		if smart_slice:
-			setup_smart_slice(true)
-		else:
-			texture_rect.get_child(0).visible = true
-			texture_rect.get_child(1).visible = true
+		texture_rect.get_child(0).visible = true
+		texture_rect.get_child(1).visible = true
 		rect_size.x = spritesheet_manual_tab_options.get_parent().rect_size.x  # works either way
 
 	elif id == ImageImportOptions.SPRITESHEET_LAYER:
@@ -300,11 +298,8 @@ func _on_ImportOption_item_selected(id: int) -> void:
 		smart_slice_checkbox.visible = true
 		spritesheet_lay_opt.visible = true
 		spritesheet_tab_options.visible = true
-		if smart_slice:
-			setup_smart_slice(true)
-		else:
-			texture_rect.get_child(0).visible = true
-			texture_rect.get_child(1).visible = true
+		texture_rect.get_child(0).visible = true
+		texture_rect.get_child(1).visible = true
 		rect_size.x = spritesheet_lay_opt.rect_size.x
 
 	elif id == ImageImportOptions.NEW_FRAME:
@@ -353,40 +348,46 @@ func _on_SmartSlice_toggled(button_pressed: bool) -> void:
 
 
 func setup_smart_slice(enabled: bool) -> void:
+	for child in texture_rect.get_node("HorizLines").get_children():
+		child.visible = !enabled
+	for child in texture_rect.get_node("VerticalLines").get_children():
+		child.visible = !enabled
 	spritesheet_smart_tab_options.visible = enabled
 	spritesheet_manual_tab_options.visible = !enabled
-
 	if is_master:  # disable apply all (the algorithm is not fast enough for this)
 		apply_all.pressed = false
 	apply_all.disabled = enabled
 	smart_slice = enabled
-	if recycle_last_slice_result:
-		update()
-	else:
+	if !recycle_last_slice_result and enabled:
 		slice_preview()
+	update()
+
+
+func obtain_sliced_data() -> void:
+	var unpak := RegionUnpacker.new(merge_threshold.value, merge_dist.value)
+	sliced_rects = unpak.get_used_rects(texture_rect.texture.get_data())
 
 
 func slice_preview():
 	sliced_rects.clear()
-	for child in texture_rect.get_node("HorizLines").get_children():
-		child.queue_free()
-	for child in texture_rect.get_node("VerticalLines").get_children():
-		child.queue_free()
-	var unpak := RegionUnpacker.new(merge_threshold.value)
-	sliced_rects = unpak.get_used_rects(texture_rect.texture.get_data())
+	obtain_sliced_data()
 	recycle_last_slice_result = true
 	var size = sliced_rects["frame_size"]
 	frame_size_label.text = tr("Frame Size") + ": " + str(size.x) + "×" + str(size.y)
-	update()
 
 
 func _on_Threshold_value_changed(_value: float) -> void:
 	recycle_last_slice_result = false
 
 
+func _on_MergeDist_value_changed(_value: float) -> void:
+	recycle_last_slice_result = false
+
+
 func _on_Slice_pressed() -> void:
 	if !recycle_last_slice_result:
 		slice_preview()
+		update()
 
 
 func _on_HorizontalFrames_value_changed(value: int) -> void:
@@ -517,12 +518,12 @@ func _on_PreviewDialog_item_rect_changed() -> void:
 
 
 func _draw() -> void:
-	if (
+	if !smart_slice:
+		$"%SmartSlice".show_preview([])
+	elif (
 		current_import_option == ImageImportOptions.SPRITESHEET_TAB
 		or current_import_option == ImageImportOptions.SPRITESHEET_LAYER
 	):
-		if "rects" in sliced_rects.keys():
-			var stretch_ratio = texture_rect.rect_size / texture_rect.texture.get_data().get_size()
-			$"%SmartSlice".show_preview(sliced_rects["rects"], stretch_ratio)
-
-
+		if smart_slice:
+			if "rects" in sliced_rects.keys():
+				$"%SmartSlice".show_preview(sliced_rects["rects"])
