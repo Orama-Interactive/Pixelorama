@@ -5,7 +5,7 @@ const MOVE_ACTIONS := ["move_mouse_left", "move_mouse_right", "move_mouse_up", "
 const CURSOR_SPEED_RATE := 6.0
 
 var current_pixel := Vector2.ZERO
-var sprite_changed_this_frame := false  # For optimization purposes
+var sprite_changed_this_frame := false  ## For optimization purposes
 var move_preview_location := Vector2.ZERO
 
 @onready var currently_visible_frame: SubViewport = $CurrentlyVisibleFrame

@@ -1,12 +1,12 @@
 extends ConfirmationDialog
 
-# called when user resumes export after filename collision
+## Called when user resumes export after filename collision
 signal resume_export_function
 
 var preview_current_frame := 0
 var preview_frames := []
 
-# allow custom exporters to be added
+## Allow custom exporters to be added
 var image_exports := [Export.FileFormat.PNG, Export.FileFormat.GIF, Export.FileFormat.APNG]
 var spritesheet_exports := [Export.FileFormat.PNG]
 
@@ -172,8 +172,8 @@ func set_file_format_selector() -> void:
 			_set_file_format_selector_suitable_file_formats(spritesheet_exports)
 
 
-# Updates the suitable list of file formats. First is preferred.
-# Note that if the current format is in the list, it stays for consistency.
+## Updates the suitable list of file formats. First is preferred.
+## Note that if the current format is in the list, it stays for consistency.
 func _set_file_format_selector_suitable_file_formats(formats: Array) -> void:
 	var project: Project = Global.current_project
 	file_format_options.clear()

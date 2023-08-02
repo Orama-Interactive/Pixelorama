@@ -10,7 +10,7 @@ var viewport: SubViewport
 var parent_node: Node3D
 var camera: Camera3D
 var scene_properties := {}
-# Key = Cel3DObject's id, Value = Dictionary containing the properties of the Cel3DObject
+## Key = Cel3DObject's id, Value = Dictionary containing the properties of the Cel3DObject
 var object_properties := {}
 var selected: Cel3DObject = null:
 	set = _set_selected

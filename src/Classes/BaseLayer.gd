@@ -1,6 +1,6 @@
 class_name BaseLayer
 extends RefCounted
-# Base class for layer properties. Different layer types extend from this class.
+## Base class for layer properties. Different layer types extend from this class.
 
 var name := ""
 var project: Project
@@ -9,10 +9,10 @@ var parent: BaseLayer
 var visible := true
 var locked := false
 var new_cels_linked := false
-var cel_link_sets: Array[Dictionary] = []  # Each Dictionary represents a cel's "link set"
+var cel_link_sets: Array[Dictionary] = []  ## Each Dictionary represents a cel's "link set"
 
 
-# Returns true if this is a direct or indirect parent of layer
+## Returns true if this is a direct or indirect parent of layer
 func is_ancestor_of(layer: BaseLayer) -> bool:
 	if layer.parent == self:
 		return true
@@ -83,8 +83,8 @@ func get_layer_path() -> String:
 	return name
 
 
-# Links a cel to link_set if its a Dictionary, or unlinks if null.
-# Content/image_texture are handled separately for undo related reasons
+## Links a cel to link_set if its a Dictionary, or unlinks if null.
+## Content/image_texture are handled separately for undo related reasons
 func link_cel(cel: BaseCel, link_set = null) -> void:
 	# Erase from the cel's current link_set
 	if cel.link_set != null:

@@ -9,8 +9,8 @@ const SCALE_CIRCLE_LENGTH := 8
 const SCALE_CIRCLE_RADIUS := 1
 const CHAR_SCALE := 0.16
 
-var always_visible := {}  # Key = Cel3DObject, Value = Texture2D
-var points_per_object := {}  # Key = Cel3DObject, Value = PackedVector2Array
+var always_visible := {}  ## Key = Cel3DObject, Value = Texture2D
+var points_per_object := {}  ## Key = Cel3DObject, Value = PackedVector2Array
 var selected_color := Color.WHITE
 var hovered_color := Color.GRAY
 
@@ -18,7 +18,7 @@ var gizmos_origin: Vector2
 var proj_right_local: Vector2
 var proj_up_local: Vector2
 var proj_back_local: Vector2
-# Same vectors as `proj_x_local`, but with a smaller length, for the rotation & scale gizmos
+## Same vectors as `proj_x_local`, but with a smaller length, for the rotation & scale gizmos
 var proj_right_local_scale: Vector2
 var proj_up_local_scale: Vector2
 var proj_back_local_scale: Vector2

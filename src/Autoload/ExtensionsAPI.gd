@@ -1,6 +1,6 @@
 extends Node
 
-# use these variables in your extension to access the api
+# Use these variables in your extension to access the api
 var general := GeneralAPI.new()
 var menu := MenuAPI.new()
 var dialog := DialogAPI.new()
@@ -12,7 +12,7 @@ var project := ProjectAPI.new()
 var exports := ExportAPI.new()
 var signals := SignalsAPI.new()
 
-# This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
+## This fail-safe below is designed to work ONLY if Pixelorama is launched in Godot Editor
 var _action_history: Dictionary = {}
 
 

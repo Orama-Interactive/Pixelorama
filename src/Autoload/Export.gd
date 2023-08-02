@@ -3,37 +3,37 @@ extends Node
 enum ExportTab { IMAGE = 0, SPRITESHEET = 1 }
 enum Orientation { ROWS = 0, COLUMNS = 1 }
 enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
-# See file_format_string, file_format_description, and ExportDialog.gd
+## See file_format_string, file_format_description, and ExportDialog.gd
 enum FileFormat { PNG = 0, GIF = 1, APNG = 2 }
 
-# list of animated formats
+## List of animated formats
 var animated_formats := [FileFormat.GIF, FileFormat.APNG]
 
-# A dictionary of custom exporter generators (received from extensions)
+## A dictionary of custom exporter generators (received from extensions)
 var custom_exporter_generators := {}
 
 var current_tab := ExportTab.IMAGE
-# All frames and their layers processed/blended into images
+## All frames and their layers processed/blended into images
 var processed_images: Array[Image] = []
 var durations: PackedFloat32Array = []
 
 # Spritesheet options
 var orientation := Orientation.ROWS
-var lines_count := 1  # How many rows/columns before new line is added
+var lines_count := 1  # #How many rows/columns before new line is added
 
 # General options
-var frame_current_tag := 0  # Export only current frame tag
+var frame_current_tag := 0  ## Export only current frame tag
 var export_layers := 0
 var number_of_frames := 1
 var direction := AnimationDirection.FORWARD
 var resize := 100
-var interpolation := 0  # Image.Interpolation
+var interpolation := Image.INTERPOLATE_NEAREST
 var include_tag_in_filename := false
-var new_dir_for_each_frame_tag := false  # we don't need to store this after export
+var new_dir_for_each_frame_tag := false  ## We don't need to store this after export
 var number_of_digits := 4
 var separator_character := "_"
 
-# Export coroutine signal
+## Export coroutine signal
 var stop_export := false
 
 var file_exists_alert := "The following files already exist. Do you wish to overwrite them?\n%s"
@@ -439,7 +439,7 @@ func blend_layers(
 		image.blend_rect(layer_image, Rect2(Vector2.ZERO, project.size), origin)
 
 
-# Blends canvas layers into passed image starting from the origin position
+## Blends canvas layers into passed image starting from the origin position
 func blend_all_layers(
 	image: Image, frame: Frame, origin := Vector2.ZERO, project := Global.current_project
 ) -> void:
@@ -465,7 +465,7 @@ func blend_all_layers(
 		layer_i += 1
 
 
-# Blends selected cels of the given frame into passed image starting from the origin position
+## Blends selected cels of the given frame into passed image starting from the origin position
 func blend_selected_cels(
 	image: Image, frame: Frame, origin := Vector2(0, 0), project := Global.current_project
 ) -> void:

@@ -12,7 +12,7 @@ var arrow_key_move := false
 var is_pasting := false
 var big_bounding_rectangle := Rect2i():
 	set = _big_bounding_rectangle_changed
-var image_current_pixel := Vector2.ZERO  # The ACTUAL pixel coordinate of image
+var image_current_pixel := Vector2.ZERO  ## The ACTUAL pixel coordinate of image
 
 var temp_rect := Rect2()
 var rect_aspect_ratio := 0.0
