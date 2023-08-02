@@ -16,7 +16,7 @@ var slice_thread := Thread.new()
 var test: Array
 
 
-func _init(var threshold: int, var merge_dist: int) -> void:
+func _init(threshold: int, merge_dist: int) -> void:
 	include_boundary_threshold = threshold
 	_merge_dist = merge_dist
 
@@ -67,10 +67,7 @@ func clean_rects(rects: Array) -> Array:
 	for i in rects.size():
 		var target: Rect2 = rects.pop_front()
 		var test_rect = target
-		if (
-			target.size.x < include_boundary_threshold
-			or target.size.y < include_boundary_threshold
-		):
+		if target.size.x < include_boundary_threshold or target.size.y < include_boundary_threshold:
 			test_rect.size += Vector2(_merge_dist, _merge_dist)
 			test_rect.position -= Vector2(_merge_dist, _merge_dist) / 2
 		var merged = false
@@ -86,7 +83,7 @@ func clean_rects(rects: Array) -> Array:
 
 func sort_rects(rect_a: Rect2, rect_b: Rect2) -> bool:
 	# After many failed attempts, this version works for some reason (it's best not to disturb it)
-	if (rect_a.end.y < rect_b.position.y):
+	if rect_a.end.y < rect_b.position.y:
 		return true
 	if rect_a.position.x < rect_b.position.x:
 		# if both lie in the same row

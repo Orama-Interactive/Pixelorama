@@ -127,10 +127,7 @@ func _on_PreviewDialog_confirmed() -> void:
 				if !recycle_last_slice_result:
 					obtain_sliced_data()
 				OpenSave.open_image_as_spritesheet_tab_smart(
-					path,
-					image,
-					sliced_rects["rects"],
-					sliced_rects["frame_size"]
+					path, image, sliced_rects["rects"], sliced_rects["frame_size"]
 				)
 			else:
 				OpenSave.open_image_as_spritesheet_tab(
@@ -231,10 +228,12 @@ func synchronize() -> void:
 				or id == ImageImportOptions.SPRITESHEET_LAYER
 			):
 				dialog.spritesheet_manual_tab_options.get_node("HorizontalFrames").value = min(
-					spritesheet_manual_tab_options.get_node("HorizontalFrames").value, image.get_size().x
+					spritesheet_manual_tab_options.get_node("HorizontalFrames").value,
+					image.get_size().x
 				)
 				dialog.spritesheet_manual_tab_options.get_node("VerticalFrames").value = min(
-					spritesheet_manual_tab_options.get_node("VerticalFrames").value, image.get_size().y
+					spritesheet_manual_tab_options.get_node("VerticalFrames").value,
+					image.get_size().y
 				)
 				if id == ImageImportOptions.SPRITESHEET_LAYER:
 					dialog.spritesheet_lay_opt.get_node("AtFrameSpinbox").value = (spritesheet_lay_opt.get_node(

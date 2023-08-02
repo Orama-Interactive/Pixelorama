@@ -470,7 +470,9 @@ func open_image_as_new_tab(path: String, image: Image) -> void:
 	set_new_imported_tab(project, path)
 
 
-func open_image_as_spritesheet_tab_smart(path: String, image: Image, sliced_rects: Array, frame_size: Vector2) -> void:
+func open_image_as_spritesheet_tab_smart(
+	path: String, image: Image, sliced_rects: Array, frame_size: Vector2
+) -> void:
 	var project := Project.new([], path.get_file())
 	project.layers.append(PixelLayer.new(project))
 	Global.projects.append(project)
@@ -510,8 +512,13 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 
 
 func open_image_as_spritesheet_layer_smart(
-	_path: String, image: Image, file_name: String, sliced_rects: Array, start_frame: int, frame_size: Vector2
-) -> void:
+	_path: String,
+	image: Image,
+	file_name: String,
+	sliced_rects: Array,
+	start_frame: int,
+	frame_size: Vector2
+ ) -> void:
 	# Resize canvas to if "frame_size.x" or "frame_size.y" is too large
 	var project: Project = Global.current_project
 	var project_width: int = max(frame_size.x, project.size.x)
@@ -559,9 +566,7 @@ func open_image_as_spritesheet_layer_smart(
 			var offset: Vector2 = (0.5 * (frame_size - sliced_rects[f - start_frame].size)).floor()
 			var cropped_image := Image.new()
 			cropped_image.create(frame_size.x, frame_size.y, false, Image.FORMAT_RGBA8)
-			cropped_image.blend_rect(
-				image, sliced_rects[f - start_frame], offset
-			)
+			cropped_image.blend_rect(image, sliced_rects[f - start_frame], offset)
 			cropped_image.crop(project.size.x, project.size.y)
 			cropped_image.convert(Image.FORMAT_RGBA8)
 			cels.append(PixelCel.new(cropped_image))

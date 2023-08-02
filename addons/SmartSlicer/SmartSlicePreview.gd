@@ -1,11 +1,12 @@
 extends Control
 
+# add this as a child of the texturerect that contains the main spritesheet
 var _sliced_rects: Array
 var _stretch_amount: float
 var _offset: Vector2
 
+
 func show_preview(sliced_rects: Array) -> void:
-#	print(sliced_rects)
 	var image = get_parent().texture.get_data()
 	var aspect_ratio = image.get_size().x / image.get_size().y
 
