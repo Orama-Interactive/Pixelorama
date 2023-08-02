@@ -350,7 +350,7 @@ class SelectionAPI:
 	func select_all() -> void:
 		Global.canvas.selection.select_all()
 
-	func select_rect(rect: Rect2, operation := 0) -> void:
+	func select_rect(rect: Rect2i, operation := 0) -> void:
 		# 0 for adding, 1 for subtracting, 2 for intersection
 		Global.canvas.selection.transform_content_confirm()
 		var undo_data_tmp = Global.canvas.selection.get_undo_data(false)

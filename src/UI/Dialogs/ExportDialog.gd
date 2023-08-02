@@ -316,7 +316,7 @@ func _on_Resize_value_changed(value: float) -> void:
 	update_dimensions_label()
 
 
-func _on_Interpolation_item_selected(id: int) -> void:
+func _on_Interpolation_item_selected(id: Image.Interpolation) -> void:
 	Export.interpolation = id
 
 

@@ -40,30 +40,30 @@ func get_nearest_position(pixel: Vector2i) -> Vector2i:
 		return Vector2i.ZERO
 
 
-func get_point_in_tile_mode(pixel: Vector2) -> Array:
-	var result := []
+func get_point_in_tile_mode(pixel: Vector2i) -> Array[Vector2i]:
+	var result: Array[Vector2i] = []
 	if Global.canvas.selection.flag_tilemode:
-		var selection_rect = get_used_rect()
-		var start_x = selection_rect.position.x - selection_rect.size.x
-		var end_x = selection_rect.position.x + 2 * selection_rect.size.x
-		var start_y = selection_rect.position.y - selection_rect.size.y
-		var end_y = selection_rect.position.y + 2 * selection_rect.size.y
+		var selection_rect := get_used_rect()
+		var start_x := selection_rect.position.x - selection_rect.size.x
+		var end_x := selection_rect.position.x + 2 * selection_rect.size.x
+		var start_y := selection_rect.position.y - selection_rect.size.y
+		var end_y := selection_rect.position.y + 2 * selection_rect.size.y
 		for x in range(start_x, end_x, selection_rect.size.x):
 			for y in range(start_y, end_y, selection_rect.size.y):
-				result.append(Vector2(x, y) + pixel - selection_rect.position)
+				result.append(Vector2i(x, y) + pixel - selection_rect.position)
 	else:
 		result.append(pixel)
 	return result
 
 
-func get_canon_position(position) -> Vector2:
+func get_canon_position(position: Vector2i) -> Vector2i:
 	if Global.canvas.selection.flag_tilemode:
 		return position - get_nearest_position(position)
 	else:
 		return position
 
 
-func select_pixel(pixel: Vector2, select := true) -> void:
+func select_pixel(pixel: Vector2i, select := true) -> void:
 	if select:
 		set_pixelv(pixel, Color(1, 1, 1, 1))
 	else:
@@ -88,15 +88,15 @@ func invert() -> void:
 func move_bitmap_values(project: Project, move_offset := true) -> void:
 	var size := project.size
 	var selection_node = Global.canvas.selection
-	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position
-	var selection_end: Vector2 = selection_node.big_bounding_rectangle.end
+	var selection_position: Vector2i = selection_node.big_bounding_rectangle.position
+	var selection_end: Vector2i = selection_node.big_bounding_rectangle.end
 
 	var selection_rect := get_used_rect()
 	var smaller_image := get_region(selection_rect)
 	clear()
 	var dst := selection_position
-	var x_diff = selection_end.x - size.x
-	var y_diff = selection_end.y - size.y
+	var x_diff := selection_end.x - size.x
+	var y_diff := selection_end.y - size.y
 	var nw := maxi(size.x, size.x + x_diff)
 	var nh := maxi(size.y, size.y + y_diff)
 
@@ -123,19 +123,19 @@ func move_bitmap_values(project: Project, move_offset := true) -> void:
 		nh = size.y
 
 	crop(nw, nh)
-	blit_rect(smaller_image, Rect2(Vector2.ZERO, Vector2(nw, nh)), dst)
+	blit_rect(smaller_image, Rect2i(Vector2i.ZERO, Vector2i(nw, nh)), dst)
 
 
 func resize_bitmap_values(
-	project: Project, new_size: Vector2, flip_hor: bool, flip_ver: bool
+	project: Project, new_size: Vector2i, flip_hor: bool, flip_ver: bool
 ) -> void:
 	var size := project.size
 	var selection_node: Node2D = Global.canvas.selection
-	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position
+	var selection_position: Vector2i = selection_node.big_bounding_rectangle.position
 	var dst := selection_position
 	var new_bitmap_size := size
-	new_bitmap_size.x = maxi(size.x, abs(selection_position.x) + new_size.x)
-	new_bitmap_size.y = maxi(size.y, abs(selection_position.y) + new_size.y)
+	new_bitmap_size.x = maxi(size.x, absi(selection_position.x) + new_size.x)
+	new_bitmap_size.y = maxi(size.y, absi(selection_position.y) + new_size.y)
 	var selection_rect := get_used_rect()
 	var smaller_image := get_region(selection_rect)
 	if selection_position.x <= 0:
@@ -156,4 +156,4 @@ func resize_bitmap_values(
 		smaller_image.flip_y()
 	if new_bitmap_size != size:
 		crop(new_bitmap_size.x, new_bitmap_size.y)
-	blit_rect(smaller_image, Rect2(Vector2.ZERO, new_bitmap_size), dst)
+	blit_rect(smaller_image, Rect2i(Vector2i.ZERO, new_bitmap_size), dst)
