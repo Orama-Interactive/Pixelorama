@@ -35,7 +35,7 @@ func get_used_rects(image: Image) -> Dictionary:
 			return get_rects(image)
 		# If Thread model is set to "Single-Safe" in project settings>threads>thread model then
 		# comment the above code and uncomment below
-#		return get_rects({"image": image})
+		#return get_rects({"image": image})
 
 
 func get_rects(image: Image) -> Dictionary:
