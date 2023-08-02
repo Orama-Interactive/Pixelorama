@@ -12,7 +12,6 @@ func show_preview(sliced_rects: Array) -> void:
 
 	if image.get_size().x > image.get_size().y:
 		_stretch_amount = rect_size.x / image.get_size().x
-		# Simplification of the formula below
 	else:
 		_stretch_amount = rect_size.y / image.get_size().y
 	_sliced_rects = sliced_rects.duplicate()
@@ -30,6 +29,8 @@ func _draw() -> void:
 		draw_rect(scaled_rect, Color("6680ff"), false)
 		# show number
 		draw_set_transform(_offset + scaled_rect.position, 0, Vector2.ONE)
+#		var font: Font = Control.new().get_font("font")
+		# replace with font used by pixelorama
 		var font: Font = Global.control.theme.default_font
 		var font_height := font.get_height()
 		draw_string(font, Vector2(1, font_height), str(i))
