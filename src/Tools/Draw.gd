@@ -155,7 +155,7 @@ func update_brush() -> void:
 			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
-	$Brush/Type/Texture2D.texture = _brush_texture
+	$Brush/Type/Texture.texture = _brush_texture
 	$ColorInterpolation.visible = _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
 
 

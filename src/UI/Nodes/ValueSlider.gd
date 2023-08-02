@@ -34,10 +34,8 @@ enum { NORMAL, HELD, SLIDING, TYPING }
 		_value_up_button.visible = v
 		_value_down_button.visible = v
 @export var echo_arrow_time := 0.075
-## This will be replaced with input action strings in Godot 4.x
-## Right now this is only used for changing the brush size with Control + Wheel
-## In Godot 4.x, the shortcut will be editable
-@export var is_global := false
+@export var global_increment_action := ""  ## Global shortcut to increment
+@export var global_decrement_action := ""  ## Global shortcut to decrement
 
 var state := NORMAL
 var arrow_is_held := 0  ## Used for arrow button echo behavior. Is 1 for ValueUp, -1 for ValueDown.
@@ -59,7 +57,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	value_changed.connect(_on_value_changed)
-	set_process_input(is_global)
+	set_process_input(!global_increment_action.is_empty() and !global_decrement_action.is_empty())
 	_reset_display(true)
 	if not Engine.is_editor_hint():  # Pixelorama specific code
 		_value_up_button.modulate = Global.modulate_icon_color
@@ -77,20 +75,12 @@ func _notification(what: int) -> void:
 func _input(event: InputEvent) -> void:
 	if not editable or not is_visible_in_tree():
 		return
-	# Hardcode Control + Wheel as a global shortcut, if is_global is true
-	# In Godot 4.x this will change into two is_action() checks for incrementing and decrementing
-	if not event is InputEventMouseButton:
-		return
-	if not event.pressed:
-		return
-	if not event.ctrl_pressed:
-		return
-	if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+	if event.is_action_pressed(global_increment_action, true):
 		if snap_by_default:
 			value += step if event.ctrl_pressed else snap_step
 		else:
 			value += snap_step if event.ctrl_pressed else step
-	elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+	elif event.is_action_pressed(global_decrement_action, true):
 		if snap_by_default:
 			value -= step if event.ctrl_pressed else snap_step
 		else:
