@@ -1,6 +1,8 @@
 @tool
 class_name ValueSliderV3
 extends HBoxContainer
+## A class that combines three ValueSlider nodes, for easy usage with Vector3 values.
+## Also supports aspect ratio locking.
 
 signal value_changed(value)
 signal ratio_toggled(button_pressed)
@@ -60,7 +62,7 @@ func press_ratio_button(pressed: bool) -> void:
 	$"%RatioButton".button_pressed = pressed
 
 
-# Greatest common divisor
+## Greatest common divisor
 func _gcd(a: int, b: int) -> int:
 	return a if b == 0 else _gcd(b, a % b)
 

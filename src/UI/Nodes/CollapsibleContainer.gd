@@ -1,6 +1,7 @@
 @tool
 class_name CollapsibleContainer
 extends VBoxContainer
+## A button that, when clicked, expands into a VBoxContainer.
 
 @export var text := "":
 	set = _set_text
@@ -71,8 +72,8 @@ func _set_visible(pressed: bool) -> void:
 		child.visible = pressed
 
 
-# Checks if a child becomes visible from another sure and ensures
-# it remains invisible if the button is not pressed
+## Checks if a child becomes visible from another sure and ensures
+## it remains invisible if the button is not pressed
 func _child_visibility_changed(child: CanvasItem) -> void:
 	if not _button.pressed:
 		child.visible = false

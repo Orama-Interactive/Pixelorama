@@ -1,6 +1,6 @@
 class_name GroupLayer
 extends BaseLayer
-# A class for group layer properties
+## A class for group layer properties
 
 var expanded := true
 
@@ -10,6 +10,7 @@ func _init(_project, _name := "") -> void:
 	name = _name
 
 
+## Blends all of the images of children layer of the group layer into a single image.
 func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 	var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	var children := get_children(false)

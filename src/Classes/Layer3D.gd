@@ -1,5 +1,6 @@
 class_name Layer3D
 extends BaseLayer
+## A class for 3D layer properties.
 
 
 func _init(_project, _name := "") -> void:
