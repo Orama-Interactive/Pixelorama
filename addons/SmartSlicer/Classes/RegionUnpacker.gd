@@ -4,6 +4,7 @@ extends Reference
 # THIS CLASS TAKES INSPIRATION FROM PIXELORAMA'S FLOOD FILL
 # AND HAS BEEN MODIFIED FOR OPTIMIZATION
 
+var shader: Shader = preload("res://addons/SmartSlicer/Shader/black_to_transparent.gdshader")
 var slice_thread := Thread.new()
 
 var _include_boundary_threshold: int  # the size of rect below which merging accounts for boundaty
@@ -208,10 +209,9 @@ func _flood_fill(position: Vector2, image: Image) -> Rect2:
 	temp_bitmap.create(image.get_size())
 	_select_segments(temp_bitmap)
 
-	var bt_shader = preload("res://addons/SmartSlicer/Shader/black_to_transparent.gdshader")
 	var effect = ShaderImageEffect.new()
 	var final_image = temp_bitmap.convert_to_image()
-	effect.generate_image(final_image, bt_shader, {}, final_image.get_size())
+	effect.generate_image(final_image, shader, {}, final_image.get_size())
 
 	return final_image.get_used_rect()
 
