@@ -518,7 +518,7 @@ func open_image_as_spritesheet_layer_smart(
 	sliced_rects: Array,
 	start_frame: int,
 	frame_size: Vector2
- ) -> void:
+) -> void:
 	# Resize canvas to if "frame_size.x" or "frame_size.y" is too large
 	var project: Project = Global.current_project
 	var project_width: int = max(frame_size.x, project.size.x)
