@@ -4,38 +4,41 @@ extends Reference
 # THIS CLASS TAKES INSPIRATION FROM PIXELORAMA'S FLOOD FILL
 # AND HAS BEEN MODIFIED FOR OPTIMIZATION
 
-var include_boundary_threshold: int  # the size of rect below which merging accounts for boundaty
-var _merge_dist
+var slice_thread := Thread.new()
+
+var _include_boundary_threshold: int  # the size of rect below which merging accounts for boundaty
+var _merge_dist: int  #  after crossing threshold the smaller image will merge with larger image
+# if it is within the _merge_dist
 
 # working array used as buffer for segments while flooding
 var _allegro_flood_segments: Array
 # results array per image while flooding
 var _allegro_image_segments: Array
-var slice_thread := Thread.new()
-
-var test: Array
 
 
 func _init(threshold: int, merge_dist: int) -> void:
-	include_boundary_threshold = threshold
+	_include_boundary_threshold = threshold
 	_merge_dist = merge_dist
 
 
 func get_used_rects(image: Image) -> Dictionary:
 	if OS.get_name() == "HTML5":
-		return get_rects({"image": image})
+		return get_rects(image)
 	else:
+		# If Thread model is set to "Multi-Threaded" in project settings>threads>thread model
 		if slice_thread.is_active():
 			slice_thread.wait_to_finish()
-		var error = slice_thread.start(self, "get_rects", {"image": image})
+		var error = slice_thread.start(self, "get_rects", image)
 		if error == OK:
 			return slice_thread.wait_to_finish()
 		else:
-			return get_rects({"image": image})
+			return get_rects(image)
+		# If Thread model is set to "Single-Safe" in project settings>threads>thread model then
+		# comment the above code and uncomment below
+#		return get_rects({"image": image})
 
 
-func get_rects(details: Dictionary) -> Dictionary:
-	var image = details["image"]
+func get_rects(image: Image) -> Dictionary:
 	var rects = []
 	var frame_size = Vector2.ZERO
 	image.lock()
@@ -67,7 +70,10 @@ func clean_rects(rects: Array) -> Array:
 	for i in rects.size():
 		var target: Rect2 = rects.pop_front()
 		var test_rect = target
-		if target.size.x < include_boundary_threshold or target.size.y < include_boundary_threshold:
+		if (
+			target.size.x < _include_boundary_threshold
+			or target.size.y < _include_boundary_threshold
+		):
 			test_rect.size += Vector2(_merge_dist, _merge_dist)
 			test_rect.position -= Vector2(_merge_dist, _merge_dist) / 2
 		var merged = false
