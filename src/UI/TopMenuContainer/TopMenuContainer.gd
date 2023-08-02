@@ -518,7 +518,7 @@ func window_menu_id_pressed(id: int) -> void:
 			_handle_metadata(id, window_menu_button)
 
 
-func _tile_mode_submenu_id_pressed(id: int) -> void:
+func _tile_mode_submenu_id_pressed(id: Tiles.MODE) -> void:
 	Global.current_project.tiles.mode = id
 	Global.transparent_checker.fit_rect(Global.current_project.tiles.get_bounding_rect())
 	for i in Tiles.MODE.values():

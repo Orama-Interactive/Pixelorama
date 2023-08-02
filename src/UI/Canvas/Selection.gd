@@ -1,11 +1,11 @@
 extends Node2D
 
 enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
-const KEY_MOVE_ACTION_NAMES := ["ui_up", "ui_down", "ui_left", "ui_right"]
+const KEY_MOVE_ACTION_NAMES: PackedStringArray = ["ui_up", "ui_down", "ui_left", "ui_right"]
 const CLIPBOARD_FILE_PATH := "user://clipboard.txt"
 
 # flags (additional properties of selection that can be toggled)
-var flag_tilemode = false
+var flag_tilemode := false
 
 var is_moving_content := false
 var arrow_key_move := false
@@ -41,44 +41,44 @@ class Gizmo:
 	enum Type { SCALE, ROTATE }
 
 	var rect: Rect2
-	var direction := Vector2.ZERO
+	var direction := Vector2i.ZERO
 	var type: int
 
-	func _init(_type: int = Type.SCALE, _direction := Vector2.ZERO) -> void:
+	func _init(_type: int = Type.SCALE, _direction := Vector2i.ZERO) -> void:
 		type = _type
 		direction = _direction
 
 	func get_cursor() -> Control.CursorShape:
 		var cursor := Control.CURSOR_MOVE
-		if direction == Vector2.ZERO:
+		if direction == Vector2i.ZERO:
 			return Control.CURSOR_POINTING_HAND
-		elif direction == Vector2(-1, -1) or direction == Vector2(1, 1):  # Top left or bottom right
+		elif direction == Vector2i(-1, -1) or direction == Vector2i(1, 1):  # Top left or bottom right
 			if Global.mirror_view:
 				cursor = Control.CURSOR_BDIAGSIZE
 			else:
 				cursor = Control.CURSOR_FDIAGSIZE
-		elif direction == Vector2(1, -1) or direction == Vector2(-1, 1):  # Top right or bottom left
+		elif direction == Vector2i(1, -1) or direction == Vector2i(-1, 1):  # Top right or bottom left
 			if Global.mirror_view:
 				cursor = Control.CURSOR_FDIAGSIZE
 			else:
 				cursor = Control.CURSOR_BDIAGSIZE
-		elif direction == Vector2(0, -1) or direction == Vector2(0, 1):  # Center top or center bottom
+		elif direction == Vector2i(0, -1) or direction == Vector2i(0, 1):  # Center top or center bottom
 			cursor = Control.CURSOR_VSIZE
-		elif direction == Vector2(-1, 0) or direction == Vector2(1, 0):  # Center left or center right
+		elif direction == Vector2i(-1, 0) or direction == Vector2i(1, 0):  # Center left or center right
 			cursor = Control.CURSOR_HSIZE
 		return cursor
 
 
 func _ready() -> void:
 	Global.camera.zoom_changed.connect(_update_on_zoom)
-	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, -1)))  # Top left
-	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(0, -1)))  # Center top
-	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(1, -1)))  # Top right
-	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(1, 0)))  # Center right
-	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(1, 1)))  # Bottom right
-	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(0, 1)))  # Center bottom
-	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, 1)))  # Bottom left
-	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2(-1, 0)))  # Center left
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(-1, -1)))  # Top left
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(0, -1)))  # Center top
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(1, -1)))  # Top right
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(1, 0)))  # Center right
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(1, 1)))  # Bottom right
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(0, 1)))  # Center bottom
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(-1, 1)))  # Bottom left
+	gizmos.append(Gizmo.new(Gizmo.Type.SCALE, Vector2i(-1, 0)))  # Center left
 
 
 #	gizmos.append(Gizmo.new(Gizmo.Type.ROTATE)) # Rotation gizmo (temp)
@@ -131,8 +131,8 @@ func _input(event: InputEvent) -> void:
 						original_preview_image.crop(img_size, img_size)
 				else:
 					var prev_temp_rect := temp_rect
-					dragged_gizmo.direction.x *= sign(temp_rect.size.x)
-					dragged_gizmo.direction.y *= sign(temp_rect.size.y)
+					dragged_gizmo.direction.x *= signi(temp_rect.size.x)
+					dragged_gizmo.direction.y *= signi(temp_rect.size.y)
 					temp_rect = big_bounding_rectangle
 					# If prev_temp_rect, which used to be the previous temp_rect, has negative size,
 					# switch the position and end point in temp_rect
@@ -144,7 +144,7 @@ func _input(event: InputEvent) -> void:
 						var pos := temp_rect.position.y
 						temp_rect.position.y = temp_rect.end.y
 						temp_rect.end.y = pos
-				rect_aspect_ratio = abs(temp_rect.size.y / temp_rect.size.x)
+				rect_aspect_ratio = absf(temp_rect.size.y / temp_rect.size.x)
 				temp_rect_size = temp_rect.size
 				temp_rect_pivot = (temp_rect.position + ((temp_rect.end - temp_rect.position) / 2))
 
@@ -202,12 +202,12 @@ func _move_with_arrow_keys(event: InputEvent) -> void:
 		if Input.is_key_pressed(KEY_CTRL):
 			step = Global.grid_size
 		var input := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-		var move := input.rotated(snapped(Global.camera.rotation, PI / 2))
+		var move := input.rotated(snappedf(Global.camera.rotation, PI / 2))
 		# These checks are needed to fix a bug where the selection got stuck
 		# to the canvas boundaries when they were 1px away from them
-		if is_equal_approx(abs(move.x), 0):
+		if is_equal_approx(absf(move.x), 0.0):
 			move.x = 0
-		if is_equal_approx(abs(move.y), 0):
+		if is_equal_approx(absf(move.y), 0.0):
 			move.y = 0
 		move_content(move * step)
 
@@ -310,7 +310,7 @@ func _gizmo_resize() -> void:
 	if Input.is_action_pressed("shape_center"):
 		# Code inspired from https://github.com/GDQuest/godot-open-rpg
 		if dir.x != 0 and dir.y != 0:  # Border gizmos
-			temp_rect.size = ((image_current_pixel - temp_rect_pivot) * 2.0 * dir)
+			temp_rect.size = ((image_current_pixel - temp_rect_pivot) * 2.0 * Vector2(dir))
 		elif dir.y == 0:  # Center left and right gizmos
 			temp_rect.size.x = (image_current_pixel.x - temp_rect_pivot.x) * 2.0 * dir.x
 		elif dir.x == 0:  # Center top and bottom gizmos
@@ -321,22 +321,22 @@ func _gizmo_resize() -> void:
 
 	if Input.is_action_pressed("shape_perfect") or resize_keep_ratio:  # Maintain aspect ratio
 		var end_y := temp_rect.end.y
-		if dir == Vector2(1, -1) or dir.x == 0:  # Top right corner, center top and center bottom
+		if dir == Vector2i(1, -1) or dir.x == 0:  # Top right corner, center top and center bottom
 			var size := temp_rect.size.y
 			# Needed in order for resizing to work properly in negative sizes
-			if sign(size) != sign(temp_rect.size.x):
-				size = abs(size) if temp_rect.size.x > 0 else -abs(size)
+			if signf(size) != signf(temp_rect.size.x):
+				size = absf(size) if temp_rect.size.x > 0 else -absf(size)
 			temp_rect.size.x = size / rect_aspect_ratio
 
 		else:  # The rest of the corners
 			var size := temp_rect.size.x
 			# Needed in order for resizing to work properly in negative sizes
-			if sign(size) != sign(temp_rect.size.y):
-				size = abs(size) if temp_rect.size.y > 0 else -abs(size)
+			if signf(size) != signf(temp_rect.size.y):
+				size = absf(size) if temp_rect.size.y > 0 else -absf(size)
 			temp_rect.size.y = size * rect_aspect_ratio
 
 		# Inspired by the solution answered in https://stackoverflow.com/a/50271547
-		if dir == Vector2(-1, -1):  # Top left corner
+		if dir == Vector2i(-1, -1):  # Top left corner
 			temp_rect.position.y = end_y - temp_rect.size.y
 
 	big_bounding_rectangle = temp_rect.abs()
@@ -428,7 +428,7 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 	queue_redraw()
 
 
-func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
+func select_rect(rect: Rect2i, operation: int = SelectionOperation.ADD) -> void:
 	var project: Project = Global.current_project
 	var selection_map_copy := SelectionMap.new()
 	selection_map_copy.copy_from(project.selection_map)
@@ -454,8 +454,8 @@ func select_rect(rect: Rect2, operation: int = SelectionOperation.ADD) -> void:
 		selection_map_copy.clear()
 		for x in range(rect.position.x, rect.end.x):
 			for y in range(rect.position.y, rect.end.y):
-				var pos := Vector2(x, y)
-				if !Rect2(Vector2.ZERO, selection_map_copy.get_size()).has_point(pos):
+				var pos := Vector2i(x, y)
+				if !Rect2i(Vector2i.ZERO, selection_map_copy.get_size()).has_point(pos):
 					continue
 				selection_map_copy.select_pixel(pos, project.selection_map.is_pixel_selected(pos))
 	big_bounding_rectangle = selection_map_copy.get_used_rect()
@@ -804,7 +804,7 @@ func delete(selected_cels := true) -> void:
 		return
 
 	var undo_data_tmp := get_undo_data(true)
-	var images: Array
+	var images: Array[Image]
 	if selected_cels:
 		images = _get_selected_draw_images()
 	else:
@@ -868,7 +868,7 @@ func new_brush() -> void:
 func select_all() -> void:
 	var undo_data_tmp := get_undo_data(false)
 	clear_selection()
-	var full_rect := Rect2(Vector2.ZERO, Global.current_project.size)
+	var full_rect := Rect2i(Vector2.ZERO, Global.current_project.size)
 	select_rect(full_rect)
 	commit_undo("Select", undo_data_tmp)
 

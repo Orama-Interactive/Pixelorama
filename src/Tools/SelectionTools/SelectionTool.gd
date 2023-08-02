@@ -233,7 +233,7 @@ func _set_cursor_text(rect: Rect2i) -> void:
 	cursor_text += " (%s, %s)" % [rect.size.x, rect.size.y]
 
 
-func _on_Position_value_changed(value: Vector2) -> void:
+func _on_Position_value_changed(value: Vector2i) -> void:
 	if _skip_slider_logic:
 		return
 	var project: Project = Global.current_project
@@ -252,7 +252,7 @@ func _on_Position_value_changed(value: Vector2) -> void:
 	project.selection_map_changed()
 
 
-func _on_Size_value_changed(value: Vector2) -> void:
+func _on_Size_value_changed(value: Vector2i) -> void:
 	if _skip_slider_logic:
 		return
 	if !Global.current_project.has_selection:

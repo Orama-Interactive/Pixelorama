@@ -3,10 +3,10 @@ extends RefCounted
 
 enum MODE { NONE, BOTH, X_AXIS, Y_AXIS }
 
-var mode: int = MODE.NONE
+var mode := MODE.NONE
 var x_basis: Vector2i
 var y_basis: Vector2i
-var tile_size: Vector2
+var tile_size: Vector2i
 var tile_mask := Image.new()
 var has_mask := false
 
