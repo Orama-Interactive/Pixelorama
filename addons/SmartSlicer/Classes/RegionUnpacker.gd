@@ -25,14 +25,13 @@ func get_used_rects(image: Image) -> Dictionary:
 	if OS.get_name() == "HTML5":
 		return get_rects({"image": image})
 	else:
-#		if slice_thread.is_active():
-#			slice_thread.wait_to_finish()
-#		var error = slice_thread.start(self, "get_rects", {"image": image})
-#		if error == OK:
-#			return slice_thread.wait_to_finish()
-#		else:
-#			return get_rects({"image": image})
-		return get_rects({"image": image})
+		if slice_thread.is_active():
+			slice_thread.wait_to_finish()
+		var error = slice_thread.start(self, "get_rects", {"image": image})
+		if error == OK:
+			return slice_thread.wait_to_finish()
+		else:
+			return get_rects({"image": image})
 
 
 func get_rects(details: Dictionary) -> Dictionary:
