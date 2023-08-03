@@ -1,11 +1,10 @@
 extends Control
 
 # add this as a child of the texturerect that contains the main spritesheet
+var color: Color = Color("6680ff")  # Set this to a theme color later
 var _sliced_rects: Array
 var _stretch_amount: float
 var _offset: Vector2
-
-var color: Color = Color("6680ff")  # Set this to a theme color later
 
 
 func show_preview(sliced_rects: Array) -> void:

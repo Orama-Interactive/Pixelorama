@@ -1,8 +1,8 @@
 extends Control
 
+var color: Color = Color("6680ff")  # Set this to a theme color later
 var _spritesheet_vertical
 var _spritesheet_horizontal
-var color: Color = Color("6680ff")  # Set this to a theme color later
 
 
 func show_preview(spritesheet_vertical, spritesheet_horizontal) -> void:
