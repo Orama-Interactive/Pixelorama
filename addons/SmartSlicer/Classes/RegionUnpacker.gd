@@ -4,7 +4,6 @@ extends Reference
 # THIS CLASS TAKES INSPIRATION FROM PIXELORAMA'S FLOOD FILL
 # AND HAS BEEN MODIFIED FOR OPTIMIZATION
 
-var shader: Shader = preload("res://addons/SmartSlicer/Shader/black_to_transparent.gdshader")
 var slice_thread := Thread.new()
 
 var _include_boundary_threshold: int  # the size of rect below which merging accounts for boundaty
