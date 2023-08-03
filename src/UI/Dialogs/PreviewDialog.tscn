@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/Dialogs/PreviewDialog.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Nodes/ValueSlider.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/SmartSlicer/SmartSlicePreview.gd" type="Script" id=3]
+[ext_resource path="res://src/UI/Dialogs/HelperScripts/SmartSlicePreview.gd" type="Script" id=3]
+[ext_resource path="res://src/UI/Dialogs/HelperScripts/RowColumnLines.gd" type="Script" id=4]
 
 [node name="PreviewDialog" type="ConfirmationDialog"]
 margin_right = 629.0
@@ -21,16 +22,15 @@ margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -36.0
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+[node name="CenterContainer" type="AspectRatioContainer" parent="VBoxContainer"]
 margin_right = 613.0
 margin_bottom = 395.0
 size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer"]
-margin_left = 156.0
-margin_top = 47.0
-margin_right = 456.0
-margin_bottom = 347.0
+margin_left = 109.0
+margin_right = 504.0
+margin_bottom = 395.0
 rect_min_size = Vector2( 300, 300 )
 expand = true
 stretch_mode = 6
@@ -38,9 +38,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HorizLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
-
-[node name="VerticalLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
+[node name="RowColumnLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
+unique_name_in_owner = true
+script = ExtResource( 4 )
 
 [node name="SmartSlice" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
 unique_name_in_owner = true

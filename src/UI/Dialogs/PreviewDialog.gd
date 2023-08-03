@@ -26,6 +26,7 @@ var brush_type: int = BrushTypes.FILE
 var opened_once = false
 var is_master: bool = false
 var hiding: bool = false
+var _content_offset = rect_size - get_child(0).rect_size  # A workaround for a pixelorama bug
 
 onready var texture_rect: TextureRect = $VBoxContainer/CenterContainer/TextureRect
 onready var image_size_label: Label = $VBoxContainer/SizeContainer/ImageSizeLabel
@@ -283,8 +284,6 @@ func _on_ImportOption_item_selected(id: int) -> void:
 	new_brush_options.visible = false
 	texture_rect.get_child(0).visible = false
 	texture_rect.get_child(1).visible = false
-	rect_size.x = 550
-	update()
 
 	if id == ImageImportOptions.SPRITESHEET_TAB:
 		frame_size_label.visible = true
@@ -292,7 +291,6 @@ func _on_ImportOption_item_selected(id: int) -> void:
 		spritesheet_tab_options.visible = true
 		texture_rect.get_child(0).visible = true
 		texture_rect.get_child(1).visible = true
-		rect_size.x = spritesheet_manual_tab_options.get_parent().rect_size.x  # works either way
 
 	elif id == ImageImportOptions.SPRITESHEET_LAYER:
 		frame_size_label.visible = true
@@ -301,7 +299,6 @@ func _on_ImportOption_item_selected(id: int) -> void:
 		spritesheet_tab_options.visible = true
 		texture_rect.get_child(0).visible = true
 		texture_rect.get_child(1).visible = true
-		rect_size.x = spritesheet_lay_opt.rect_size.x
 
 	elif id == ImageImportOptions.NEW_FRAME:
 		new_frame_options.visible = true
@@ -343,16 +340,15 @@ func _on_ImportOption_item_selected(id: int) -> void:
 	elif id == ImageImportOptions.BRUSH:
 		new_brush_options.visible = true
 
+	rect_size = get_child(0).rect_size + _content_offset
+	update()
+
 
 func _on_SmartSlice_toggled(button_pressed: bool) -> void:
 	setup_smart_slice(button_pressed)
 
 
 func setup_smart_slice(enabled: bool) -> void:
-	for child in texture_rect.get_node("HorizLines").get_children():
-		child.visible = !enabled
-	for child in texture_rect.get_node("VerticalLines").get_children():
-		child.visible = !enabled
 	spritesheet_smart_tab_options.visible = enabled
 	spritesheet_manual_tab_options.visible = !enabled
 	if is_master:  # disable apply all (the algorithm is not fast enough for this)
@@ -388,61 +384,24 @@ func _on_MergeDist_value_changed(_value: float) -> void:
 func _on_Slice_pressed() -> void:
 	if !recycle_last_slice_result:
 		slice_preview()
-		update()
+	update()
 
 
 func _on_HorizontalFrames_value_changed(value: int) -> void:
 	spritesheet_horizontal = value
-	for child in texture_rect.get_node("HorizLines").get_children():
-		child.queue_free()
-
-	spritesheet_frame_value_changed(value, false)
+	spritesheet_frame_value_changed()
 
 
 func _on_VerticalFrames_value_changed(value: int) -> void:
 	spritesheet_vertical = value
-	for child in texture_rect.get_node("VerticalLines").get_children():
-		child.queue_free()
-
-	spritesheet_frame_value_changed(value, true)
+	spritesheet_frame_value_changed()
 
 
-func spritesheet_frame_value_changed(value: int, vertical: bool) -> void:
-	var image_size_y = texture_rect.rect_size.y
-	var image_size_x = texture_rect.rect_size.x
-	if image.get_size().x > image.get_size().y:
-		var scale_ratio = image.get_size().x / image_size_x
-		image_size_y = image.get_size().y / scale_ratio
-	else:
-		var scale_ratio = image.get_size().y / image_size_y
-		image_size_x = image.get_size().x / scale_ratio
-
-	var offset_x = (texture_rect.rect_size.x - image_size_x) / 2
-	var offset_y = (texture_rect.rect_size.y - image_size_y) / 2
-
-	if value > 1:
-		var line_distance
-		if vertical:
-			line_distance = image_size_y / value
-		else:
-			line_distance = image_size_x / value
-
-		for i in range(1, value):
-			var line_2d := Line2D.new()
-			line_2d.width = 1
-			line_2d.position = Vector2.ZERO
-			if vertical:
-				line_2d.add_point(Vector2(offset_x, i * line_distance + offset_y))
-				line_2d.add_point(Vector2(image_size_x + offset_x, i * line_distance + offset_y))
-				texture_rect.get_node("VerticalLines").add_child(line_2d)
-			else:
-				line_2d.add_point(Vector2(i * line_distance + offset_x, offset_y))
-				line_2d.add_point(Vector2(i * line_distance + offset_x, image_size_y + offset_y))
-				texture_rect.get_node("HorizLines").add_child(line_2d)
-
+func spritesheet_frame_value_changed() -> void:
 	var frame_width = floor(image.get_size().x / spritesheet_horizontal)
 	var frame_height = floor(image.get_size().y / spritesheet_vertical)
 	frame_size_label.text = tr("Frame Size") + ": " + str(frame_width) + "×" + str(frame_height)
+	update()
 
 
 func _on_BrushTypeOption_item_selected(index: int) -> void:
@@ -519,12 +478,14 @@ func _on_PreviewDialog_item_rect_changed() -> void:
 
 
 func _draw() -> void:
-	if !smart_slice:
-		$"%SmartSlice".show_preview([])
-	elif (
+	$"%SmartSlice".show_preview([])
+	$"%RowColumnLines".show_preview(1, 1)
+	if (
 		current_import_option == ImageImportOptions.SPRITESHEET_TAB
 		or current_import_option == ImageImportOptions.SPRITESHEET_LAYER
 	):
 		if smart_slice:
 			if "rects" in sliced_rects.keys():
 				$"%SmartSlice".show_preview(sliced_rects["rects"])
+		else:
+			$"%RowColumnLines".show_preview(spritesheet_vertical, spritesheet_horizontal)
