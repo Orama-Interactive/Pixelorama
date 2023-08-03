@@ -247,4 +247,3 @@ func _select_segments(map: Image) -> void:
 		rect.position = Vector2(p.left_position, p.y)
 		rect.end = Vector2(p.right_position + 1, p.y + 1)
 		map.fill_rect(rect, Color.white)
-
