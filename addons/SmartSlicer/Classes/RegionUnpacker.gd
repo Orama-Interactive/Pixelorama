@@ -40,34 +40,33 @@ func get_used_rects(image: Image) -> Dictionary:
 
 
 func get_rects(image: Image) -> Dictionary:
+	# make a smaller image to make the loop shorter
+	var used_rect = image.get_used_rect()
+	var test_image = image.get_rect(used_rect)
+	# prepare a bitmap to keep track of previous places
+	var scanned_area := BitMap.new()
+	scanned_area.create(test_image.get_size())
+	test_image.lock()
+	# Scan the image
 	var rects = []
 	var frame_size = Vector2.ZERO
-	image.lock()
-	for y in image.get_size().y:
-		for x in image.get_size().x:
+	for y in test_image.get_size().y:
+		for x in test_image.get_size().x:
 			var position = Vector2(x, y)
-			if image.get_pixelv(position).a > 0:  # portion of image detected
-				var visited = false
-				for rect in rects:
-					if rect.has_point(position):
-						visited = true
-						break
-				if !visited:
-					var rect := _estimate_rect(image, position)
+			if test_image.get_pixelv(position).a > 0:  # used portion of image detected
+				if !scanned_area.get_bit(position):
+					var rect := _estimate_rect(test_image, position)
+					scanned_area.set_bit_rect(rect, true)
+					rect.position += used_rect.position
 					rects.append(rect)
-	image.unlock()
-	rects = clean_rects(rects)
-	rects.sort_custom(self, "sort_rects")
-	# one final loop
-	for rect in rects:
-		if rect.size.x > frame_size.x:
-			frame_size.x = rect.size.x
-		if rect.size.y > frame_size.y:
-			frame_size.y = rect.size.y
-	return {"rects": rects, "frame_size": frame_size}
+	test_image.unlock()
+	var rects_info = clean_rects(rects)
+	rects_info["rects"].sort_custom(self, "sort_rects")
+	return rects_info
 
 
-func clean_rects(rects: Array) -> Array:
+func clean_rects(rects: Array) -> Dictionary:
+	var frame_size = Vector2.ZERO
 	for i in rects.size():
 		var target: Rect2 = rects.pop_front()
 		var test_rect = target
@@ -85,7 +84,13 @@ func clean_rects(rects: Array) -> Array:
 				break
 		if !merged:
 			rects.append(target)
-	return rects
+
+		# calculation for a suitable frame size
+		if target.size.x > frame_size.x:
+			frame_size.x = target.size.x
+		if target.size.y > frame_size.y:
+			frame_size.y = target.size.y
+	return {"rects": rects, "frame_size": frame_size}
 
 
 func sort_rects(rect_a: Rect2, rect_b: Rect2) -> bool:
@@ -103,6 +108,7 @@ func sort_rects(rect_a: Rect2, rect_b: Rect2) -> bool:
 
 func _estimate_rect(image: Image, position: Vector2) -> Rect2:
 	var cel_image := Image.new()
+	var bitmap = BitMap.new()
 	cel_image.copy_from(image)
 	cel_image.lock()
 	var small_rect: Rect2 = _flood_fill(position, cel_image)
@@ -202,16 +208,12 @@ func _flood_fill(position: Vector2, image: Image) -> Rect2:
 	# now actually color the image: since we have already checked a few things for the points
 	# we'll process here, we're going to skip a bunch of safety checks to speed things up.
 
-#	var temp_image = Image.new()
-#	temp_image.copy_from(image)
-#	temp_image.fill(Color.transparent)
-	var temp_bitmap = BitMap.new()
-	temp_bitmap.create(image.get_size())
-	_select_segments(temp_bitmap)
-
-	var effect = ShaderImageEffect.new()
-	var final_image = temp_bitmap.convert_to_image()
-	effect.generate_image(final_image, shader, {}, final_image.get_size())
+	var final_image = Image.new()
+	final_image.copy_from(image)
+	final_image.fill(Color.transparent)
+	final_image.lock()
+	_select_segments(final_image)
+	final_image.unlock()
 
 	return final_image.get_used_rect()
 
@@ -239,11 +241,12 @@ func _compute_segments_for_image(position: Vector2, image: Image) -> void:
 					done = false
 
 
-func _select_segments(bitmap: BitMap) -> void:
+func _select_segments(map: Image) -> void:
 	# short circuit for flat colors
 	for c in _allegro_image_segments.size():
 		var p = _allegro_image_segments[c]
 		var rect = Rect2()
 		rect.position = Vector2(p.left_position, p.y)
 		rect.end = Vector2(p.right_position + 1, p.y + 1)
-		bitmap.set_bit_rect(rect, true)
+		map.fill_rect(rect, Color.white)
+
