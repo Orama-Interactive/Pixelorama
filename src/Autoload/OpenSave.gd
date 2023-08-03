@@ -473,7 +473,7 @@ func open_image_as_new_tab(path: String, image: Image) -> void:
 func open_image_as_spritesheet_tab_smart(
 	path: String, image: Image, sliced_rects: Array, frame_size: Vector2
 ) -> void:
-	var project := Project.new([], path.get_file())
+	var project := Project.new([], path.get_file(), frame_size)
 	project.layers.append(PixelLayer.new(project))
 	Global.projects.append(project)
 	for rect in sliced_rects:
@@ -481,8 +481,7 @@ func open_image_as_spritesheet_tab_smart(
 		var frame := Frame.new()
 		var cropped_image := Image.new()
 		cropped_image.create(frame_size.x, frame_size.y, false, Image.FORMAT_RGBA8)
-		cropped_image.blend_rect(image, rect, offset)
-		project.size = cropped_image.get_size()
+		cropped_image.blit_rect(image, rect, offset)
 		cropped_image.convert(Image.FORMAT_RGBA8)
 		frame.cels.append(PixelCel.new(cropped_image, 1))
 		project.frames.append(frame)
@@ -490,13 +489,13 @@ func open_image_as_spritesheet_tab_smart(
 
 
 func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert: int) -> void:
-	var project := Project.new([], path.get_file())
-	project.layers.append(PixelLayer.new(project))
-	Global.projects.append(project)
 	horiz = min(horiz, image.get_size().x)
 	vert = min(vert, image.get_size().y)
 	var frame_width := image.get_size().x / horiz
 	var frame_height := image.get_size().y / vert
+	var project := Project.new([], path.get_file(), Vector2(frame_width, frame_height))
+	project.layers.append(PixelLayer.new(project))
+	Global.projects.append(project)
 	for yy in range(vert):
 		for xx in range(horiz):
 			var frame := Frame.new()
@@ -564,11 +563,10 @@ func open_image_as_spritesheet_layer_smart(
 		if f >= start_frame and f < (start_frame + sliced_rects.size()):
 			# Slice spritesheet
 			var offset: Vector2 = (0.5 * (frame_size - sliced_rects[f - start_frame].size)).floor()
+			image.convert(Image.FORMAT_RGBA8)
 			var cropped_image := Image.new()
-			cropped_image.create(frame_size.x, frame_size.y, false, Image.FORMAT_RGBA8)
-			cropped_image.blend_rect(image, sliced_rects[f - start_frame], offset)
-			cropped_image.crop(project.size.x, project.size.y)
-			cropped_image.convert(Image.FORMAT_RGBA8)
+			cropped_image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+			cropped_image.blit_rect(image, sliced_rects[f - start_frame], offset)
 			cels.append(PixelCel.new(cropped_image))
 		else:
 			cels.append(layer.new_empty_cel())
@@ -644,12 +642,14 @@ func open_image_as_spritesheet_layer(
 			# Slice spritesheet
 			var xx: int = (f - start_frame) % horizontal
 			var yy: int = (f - start_frame) / horizontal
+			image.convert(Image.FORMAT_RGBA8)
 			var cropped_image := Image.new()
-			cropped_image = image.get_rect(
-				Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height)
+			cropped_image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+			cropped_image.blit_rect(
+				image,
+				Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height),
+				Vector2.ZERO
 			)
-			cropped_image.crop(project.size.x, project.size.y)
-			cropped_image.convert(Image.FORMAT_RGBA8)
 			cels.append(PixelCel.new(cropped_image))
 		else:
 			cels.append(layer.new_empty_cel())
@@ -682,8 +682,11 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	for i in project.frames.size():
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
+			var cel_image = Image.new()
+			cel_image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+			cel_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 			var cel: PixelCel = project.frames[i].cels[layer_index]
-			project.undo_redo.add_do_property(cel, "image", image)
+			project.undo_redo.add_do_property(cel, "image", cel_image)
 			project.undo_redo.add_undo_property(cel, "image", cel.image)
 
 	project.undo_redo.add_do_property(project, "selected_cels", [])
@@ -709,7 +712,10 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 	for i in project.layers.size():
 		if i == layer_index:
 			image.convert(Image.FORMAT_RGBA8)
-			frame.cels.append(PixelCel.new(image, 1))
+			var cel_image = Image.new()
+			cel_image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+			cel_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
+			frame.cels.append(PixelCel.new(cel_image, 1))
 		else:
 			frame.cels.append(project.layers[i].new_empty_cel())
 
@@ -741,7 +747,10 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	for i in project.frames.size():
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
-			cels.append(PixelCel.new(image, 1))
+			var cel_image = Image.new()
+			cel_image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+			cel_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
+			cels.append(PixelCel.new(cel_image, 1))
 		else:
 			cels.append(layer.new_empty_cel())
 
