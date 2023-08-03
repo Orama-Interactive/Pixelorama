@@ -30,6 +30,6 @@ Files extracted from source:
 ## SmartSlicer
 
 - Upstream: https://github.com/Variable-Interactive/SmartSlicer
-- Version: Based on git commit f01526e50db98eea6d4d69db3c241d360887af7f with a modification on SmartSlicePreview.gd (lines 32-34). Only the contents of addons folder are used.
+- Version: Based on git commit 5745b26a6e0b7e10bc4a46d07b5f9f0dd8f26c96 with a modification on SmartSlicePreview.gd (lines 32-34). Only the contents of addons folder are used.
 - License: [MIT](https://github.com/Variable-Interactive/SmartSlicer/blob/main/LICENSE)
 

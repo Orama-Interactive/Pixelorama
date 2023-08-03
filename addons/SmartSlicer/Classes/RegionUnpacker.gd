@@ -108,7 +108,6 @@ func sort_rects(rect_a: Rect2, rect_b: Rect2) -> bool:
 
 func _estimate_rect(image: Image, position: Vector2) -> Rect2:
 	var cel_image := Image.new()
-	var bitmap = BitMap.new()
 	cel_image.copy_from(image)
 	cel_image.lock()
 	var small_rect: Rect2 = _flood_fill(position, cel_image)
