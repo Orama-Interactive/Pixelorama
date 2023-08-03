@@ -7,6 +7,7 @@ var _offset: Vector2
 
 var color: Color = Color("6680ff")  # Set this to a theme color later
 
+
 func show_preview(sliced_rects: Array) -> void:
 	var image = get_parent().texture.get_data()
 	if image.get_size().x > image.get_size().y:
