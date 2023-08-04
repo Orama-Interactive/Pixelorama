@@ -77,6 +77,7 @@ var show_y_symmetry_axis := false
 var open_last_project := false
 var quit_confirmation := false
 var smooth_zoom := true
+var integer_zoom := false  setget set_integer_zoom
 
 var shrink := 1.0
 var dim_on_popup := true
@@ -259,6 +260,18 @@ func _ready() -> void:
 			ui_tooltips[node] = tooltip
 	yield(get_tree(), "idle_frame")
 	emit_signal("project_changed")
+
+
+func set_integer_zoom(enabled: bool):
+	integer_zoom = enabled
+	var zoom_slider: ValueSlider = top_menu_container.get_node("%ZoomSlider")
+	if enabled:
+		zoom_slider.snap_step = 100
+		zoom_slider.step = 100
+	else:
+		zoom_slider.snap_step = 1
+		zoom_slider.step = 1
+	zoom_slider.value = zoom_slider.value  # to trigger signal emmission
 
 
 func _initialize_keychain() -> void:

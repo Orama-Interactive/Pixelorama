@@ -114,7 +114,6 @@ min_value = 50.0
 max_value = 2000.0
 value = 50.0
 allow_greater = true
-allow_lesser = true
 nine_patch_stretch = true
 stretch_margin_left = 3
 stretch_margin_top = 3
