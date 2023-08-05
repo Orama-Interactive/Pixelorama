@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-08-05 16:27\n"
+"PO-Revision-Date: 2023-08-05 17:27\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -871,7 +871,7 @@ msgid "Diagonal"
 msgstr "Diagonal"
 
 msgid "Place inside image"
-msgstr "Letakkan di dalam gambar"
+msgstr "Taruh dalam gambar"
 
 msgid "Thickness:"
 msgstr "Ketebalan:"
@@ -913,7 +913,7 @@ msgid "About Pixelorama"
 msgstr "Tentang Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr "Pixelorama - Pikselasikan mimpimu!"
+msgstr "Pixelorama - Pikselisasikan mimpimu!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Dikembangkan oleh Orama Interactive"
@@ -937,7 +937,7 @@ msgid "Contributors"
 msgstr "Penyumbangsih"
 
 msgid "Donors"
-msgstr "Penderma"
+msgstr "Penyumbang"
 
 msgid "Translators"
 msgstr "Penerjemah"
@@ -1003,7 +1003,7 @@ msgid "Turkish"
 msgstr "Bhs. Turki"
 
 msgid "Norwegian Bokmål"
-msgstr "Bhs. Bokmål Norwegia"
+msgstr "Bhs. Norwegia Baku"
 
 msgid "Korean"
 msgstr "Bhs. Korea"
@@ -1033,7 +1033,7 @@ msgid "Dutch"
 msgstr "Bhs. Belanda"
 
 msgid "Belarusian"
-msgstr "Bahasa Belarus"
+msgstr "Bhs. Belarus"
 
 msgid "Development Team"
 msgstr "Regu Pengembangan"
@@ -1045,7 +1045,7 @@ msgid "UI Designer"
 msgstr "Perancang UI"
 
 msgid "GitHub Contributors"
-msgstr "Kontributor Github"
+msgstr "Penyumbangsih Github"
 
 msgid "Art by: %s"
 msgstr "Gambar oleh %s"
@@ -1054,7 +1054,7 @@ msgid "untitled"
 msgstr "tanpa judul"
 
 msgid "imported"
-msgstr "telah diimpor"
+msgstr "diimpor"
 
 msgid "copy"
 msgstr "salinan"
@@ -1355,7 +1355,7 @@ msgid "Show at zoom:"
 msgstr "Muncul saat dikeker:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr "Menetapkan minimal keker agar kisi piksel muncul sendiri"
+msgstr "Menetapkan minimal keker untuk memunculkan kisi piksel"
 
 msgid "Pixel grid color:"
 msgstr "Warna kisi piksel:"
@@ -1424,13 +1424,13 @@ msgid "Set application FPS limit:"
 msgstr "Batas FPS aplikasi:"
 
 msgid "Pause application when it loses focus"
-msgstr "Jedakan aplikasi ketika hilang fokus"
+msgstr "Jedakan aplikasi saat hilang fokus"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 msgstr "Menetapkan batas laju bingkai tiap detik pada aplikasi. Semakin rendah angkanya, penggunaan CPU juga berkurang; tapi aplikasi akan lambat, patah-patah dan kurang tanggap. 0 berarti tidak ada batas."
 
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr "Jika dinyalakan, ketika jendela aplikasi hilang fokus nanti akan dijedakan. Ini membantu mengurangi penggunaan CPU saat terbiar. Aplikasi akan tidak dijeda ketika tetikus ada pada jendela aplikasi."
+msgstr "Jika dinyalakan, saat jendela aplikasi hilang fokus, nanti akan dijeda. Ini membantu mengurangi penggunaan CPU saat terbiar. Aplikasi akan tidak dijeda saat tetikus ada pada jendela aplikasi."
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
@@ -1473,7 +1473,7 @@ msgstr "Tekanan"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
-msgstr "Kelajuan"
+msgstr "Kecepatan"
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
@@ -1718,13 +1718,13 @@ msgstr "Berapa bingkai yang harus diputar setiap detik di pratayang?\n"
 "Semakin banyak FPS, semakin cepat animasinya."
 
 msgid "No loop"
-msgstr "Tanpa perulangan"
+msgstr "Tidak berulang"
 
 msgid "Cycle loop"
-msgstr "Perulangan Daur"
+msgstr "Berulang terus"
 
 msgid "Ping-pong loop"
-msgstr "Perulangan \"Ping Pong\""
+msgstr "Berulang bolak-balik"
 
 msgid "Onion Skinning:"
 msgstr "\"Onion Skinning\":"
@@ -1739,7 +1739,7 @@ msgid "Manage frame tags"
 msgstr "Atur tag bingkai"
 
 msgid "Frame Tag Properties"
-msgstr "Rincian Sifat Tag Bingkai"
+msgstr "Perincian Tag Bingkai"
 
 msgid "Add a new frame tag"
 msgstr "Tambah tag bingkai baru"
@@ -1811,10 +1811,10 @@ msgid "Unlink Cels"
 msgstr "Putuskan Cel"
 
 msgid "Frame Properties"
-msgstr "Rincian Sifat Bingkai"
+msgstr "Perincian Bingkai"
 
 msgid "Frame properties"
-msgstr "Rincian sifat bingkai"
+msgstr "Perincian bingkai"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -1877,7 +1877,7 @@ msgstr "Bingkai: %s, Lapisan: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr "Aktif/nonaktifkan penautan otomatis cel baru ketika membuat bingkai baru\n\n"
+msgstr "Aktif/nonaktifkan penautan otomatis cel baru saat membuat bingkai baru\n\n"
 "Cel tertaut akan membagi isinya di seluruh bingkai"
 
 msgid "Expand/collapse group"
@@ -2393,8 +2393,8 @@ msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
 msgstr "Ukuran terkunci\n\n"
-"Ketika diaktifkan dengan alat hanya akan memindahkan persegi pangkas di kanvas.\n\n"
-"Ketika dinonaktifkan dengan alat hanya akan membuat persegi di kanvas."
+"Saat diaktifkan dengan alat di kanvas hanya akan memindahkan persegi pangkas.\n\n"
+"Saat dinonaktifkan dengan alat di kanvas hanya akan membuat persegi."
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
@@ -2570,7 +2570,7 @@ msgstr "Rentang:"
 
 #. Found under certain image effects that support properties that can be animated.
 msgid "Animatable Properties"
-msgstr ""
+msgstr "Perincian Bisa Dianimasi"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
 msgid "Preview frame:"
@@ -2594,11 +2594,11 @@ msgstr "Tipe \"ease\":"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
-msgstr "Mulai lambat lalu mencepat ketika di ujung"
+msgstr "Awalnya lambat lalu mencepat ketika di ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts quickly and slows down towards the end"
-msgstr "Mulai cepat lalu melambat ketika di ujung"
+msgstr "Awalnya cepat lalu melambat ketika di ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
