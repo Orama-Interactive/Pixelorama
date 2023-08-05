@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-08-05 15:26\n"
+"PO-Revision-Date: 2023-08-05 16:27\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -142,7 +142,7 @@ msgid "Delete"
 msgstr "Hapus"
 
 msgid "New Brush"
-msgstr "Kuas baru"
+msgstr "Kuas Baru"
 
 msgid "Scale Image"
 msgstr "Besar/kecilkan gambar"
@@ -198,16 +198,16 @@ msgid "Invert"
 msgstr "Terbalikkan"
 
 msgid "Grayscale View"
-msgstr "Tampilan Skala Abu-abu"
+msgstr "Tampilan Skala Kelabu"
 
 msgid "Mirror Image"
 msgstr "Cerminkan Gambar"
 
 msgid "Flip Horizontal"
-msgstr "Balikkan Horizontal"
+msgstr "Dibalik Mendatar"
 
 msgid "Flip Vertical"
-msgstr "Balikkan Vertikal"
+msgstr "Dibalik Menegak"
 
 msgid "Preferences"
 msgstr "Preferensi"
@@ -265,11 +265,11 @@ msgstr "Atur Tata Letak"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr "Pratinjau"
+msgstr "Pratayang"
 
 #. Found in the manage layouts dialog
 msgid "This is a preview, changing this won't change the layout"
-msgstr "Ini pratinjau, mengubah ini tidak akan mengubah tata letak"
+msgstr "Ini pratayang, mengubah ini tidak akan mengubah tata letak"
 
 #. Found in the manage layouts dialog
 msgid "Double click to set as new startup layout"
@@ -285,7 +285,7 @@ msgid "Edit Layout"
 msgstr "Sunting Tata Letak"
 
 msgid "Are you sure you want to delete this layout?"
-msgstr "Apakah anda yakin ingin menghapus tata letak ini?"
+msgstr "Apakah yakin ingin menghapus tata letak ini?"
 
 msgid "Auto"
 msgstr "Otomatis"
@@ -353,7 +353,7 @@ msgid "Import Options"
 msgstr "Pengaturan Impor"
 
 msgid "Import as:"
-msgstr "Impor Sebagai:"
+msgstr "Impor sebagai:"
 
 msgid "Apply to all"
 msgstr "Terapkan ke semua"
@@ -667,7 +667,7 @@ msgid "None"
 msgstr "Tak ada"
 
 msgid "Affect Brush's Alpha"
-msgstr "Efek alfa pada kuas"
+msgstr "Efek Kelegapan Kuas"
 
 msgid "Color:"
 msgstr "Warna:"
@@ -809,7 +809,7 @@ msgstr "Tambah titik di akhir"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr "Jika dinyalakan, titik yang terakhir akan ditambah ke ujung gradien.\n"
+msgstr "Jika diaktifkan, titik yang terakhir akan ditambah ke ujung gradien.\n"
 "Matikan ini jika ingin mengubah interpolasi gradien tetap konstan, sehingga warna yang terakhir juga akan disertakan."
 
 msgid "Shape:"
@@ -1340,7 +1340,7 @@ msgid "Draw over Tile Mode:"
 msgstr "Gambar di atas Mode Ubin:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr "Jika dilumpuhkan, kisi hanya akan ditaruh di atas gambar aslinya"
+msgstr "Jika dinonaktifkan, kisi hanya akan ditaruh di atas gambar aslinya"
 
 msgid "Grid color:"
 msgstr "Warna Kisi:"
@@ -1355,7 +1355,7 @@ msgid "Show at zoom:"
 msgstr "Muncul saat dikeker:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr "Menetapkan minimal keker, agar kisi piksel dimunculkan"
+msgstr "Menetapkan minimal keker agar kisi piksel muncul sendiri"
 
 msgid "Pixel grid color:"
 msgstr "Warna kisi piksel:"
@@ -1398,7 +1398,7 @@ msgstr "Pola catur transparan mengikuti tingkat kekeran kanvas"
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
-msgstr ""
+msgstr "Pilih lapisan saat memencet salah satu tombolnya:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
@@ -1418,7 +1418,7 @@ msgid "Border color 2:"
 msgstr "Warna tepian 2:"
 
 msgid "Only custom preset can be modified"
-msgstr "Hanya praatur khusus yang bisa disunting"
+msgstr "Hanya praatur kustom yang bisa disunting"
 
 msgid "Set application FPS limit:"
 msgstr "Batas FPS aplikasi:"
@@ -1452,10 +1452,10 @@ msgid "Add Extension"
 msgstr "Tambah Ekstensi"
 
 msgid "Enable"
-msgstr "Mampukan"
+msgstr "Aktifkan"
 
 msgid "Disable"
-msgstr "Lumpuhkan"
+msgstr "Nonaktifkan"
 
 msgid "Uninstall"
 msgstr "Copot"
@@ -1473,7 +1473,7 @@ msgstr "Tekanan"
 
 #. Found in the Dynamics options menu. Velocity refers to mouse or tablet pen velocity, meaning how fast it moves.
 msgid "Velocity"
-msgstr "Kecepatan"
+msgstr "Kelajuan"
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
@@ -1515,7 +1515,7 @@ msgid "Filled circle brush"
 msgstr "Kuas lingkaran berisi"
 
 msgid "Custom brush"
-msgstr "Kuas khusus"
+msgstr "Kuas kustom"
 
 msgid "Brush size:"
 msgstr "Ukuran kuas:"
@@ -1710,7 +1710,7 @@ msgid "Onion Skinning settings"
 msgstr "Pengaturan Onion Skinning"
 
 msgid "Enable/disable Onion Skinning"
-msgstr "Mampukan/lumpuhkan Onion Skinning"
+msgstr "Aktif/nonaktifkan Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -1877,7 +1877,7 @@ msgstr "Bingkai: %s, Lapisan: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr "Mampukan/lumpuhkan penautan otomatis cel baru ketika membuat bingkai baru\n\n"
+msgstr "Aktif/nonaktifkan penautan otomatis cel baru ketika membuat bingkai baru\n\n"
 "Cel tertaut akan membagi isinya di seluruh bingkai"
 
 msgid "Expand/collapse group"
@@ -1959,10 +1959,10 @@ msgid "Redo: Change Frame Order"
 msgstr "Ulangi: Ubah Urutan Bingkai"
 
 msgid "Undo: Delete Custom Brush"
-msgstr "Urungkan: Hapus kuas khusus"
+msgstr "Urungkan: Hapus kuas kustom"
 
 msgid "Redo: Delete Custom Brush"
-msgstr "Ulangi: Hapus kuas khusus"
+msgstr "Ulangi: Hapus kuas kustom"
 
 msgid "Undo: Modify Frame Tag"
 msgstr "Urungkan: Ubah Tag Bingkai"
@@ -2251,7 +2251,7 @@ msgid "Remove currently selected palette"
 msgstr "Hapus palet yang sedang dipilih"
 
 msgid "Are you sure you want to remove this palette? (Cannot be undone)"
-msgstr "Apakah yakin ingin menghapus palet ini? (Tidak bisa di urung)"
+msgstr "Apakah yakin ingin menghapus palet ini? (Tidak bisa diurung)"
 
 msgid "You can't remove more palettes!"
 msgstr "Tidak bisa menghapus palet lagi!"
@@ -2499,7 +2499,7 @@ msgstr "Terlihat:"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr "Ubah"
+msgstr "Ubah bentuk"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
@@ -2590,15 +2590,15 @@ msgstr "Nilai akhir:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
 msgid "Ease type:"
-msgstr "Jenis \"ease\":"
+msgstr "Tipe \"ease\":"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
-msgstr "Mulai lambat lalu cepat ketika di ujung"
+msgstr "Mulai lambat lalu mencepat ketika di ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts quickly and slows down towards the end"
-msgstr "Mulai cepat lalu lambat ketika di ujung"
+msgstr "Mulai cepat lalu melambat ketika di ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
@@ -2630,7 +2630,7 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Square root"
-msgstr ""
+msgstr "Akar persegi"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Sine"
@@ -2638,11 +2638,11 @@ msgstr "Sinus"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Wiggling around the edges"
-msgstr ""
+msgstr "Goyang-goyang di tepiannya"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
-msgstr ""
+msgstr "Lompat-lompat di ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
