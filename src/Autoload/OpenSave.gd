@@ -569,7 +569,6 @@ func open_image_as_spritesheet_layer_smart(
 			image.convert(Image.FORMAT_RGBA8)
 			var cropped_image := Image.new()
 			cropped_image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
-			print("aaa")
 			cropped_image.blit_rect(image, sliced_rects[f - start_frame], offset)
 			cels.append(PixelCel.new(cropped_image))
 		else:
