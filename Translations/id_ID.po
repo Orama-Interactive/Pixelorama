@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-07-08 19:06\n"
+"PO-Revision-Date: 2023-08-05 15:26\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -94,7 +94,7 @@ msgid "Save as..."
 msgstr "Simpan sebagai..."
 
 msgid "Use ZSTD Compression"
-msgstr "Gunakan kompresi ZSTD"
+msgstr "Gunakan pampatan ZSTD"
 
 msgid "Import"
 msgstr "Impor"
@@ -160,18 +160,18 @@ msgid "Resize Canvas"
 msgstr "Ubah Ukuran Kanvas"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Offset Gambar"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Offset:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Balut sekitar:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "Tengahkan Bingkai"
 
 msgid "Rotate Image"
 msgstr "Putar Gambar"
@@ -617,7 +617,7 @@ msgstr "Kanvas"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Garis waktu"
 
 msgid "Selection"
 msgstr "Seleksi"
@@ -1769,7 +1769,7 @@ msgstr "Jika dipilih, animasi akan diputar hanya pada bingkai dengan tag sama.\n
 
 #. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "Mode warna"
 
 msgid "Show past frames:"
 msgstr "Muncul bingkai sebelum:"
@@ -1818,7 +1818,7 @@ msgstr "Rincian sifat bingkai"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
-msgstr ""
+msgstr "Urut Terbalik"
 
 msgid "Layer"
 msgstr "Lapisan"
@@ -2227,11 +2227,11 @@ msgstr "Membuat banyak berkas, tapi setiap berkas ditampung di folder berbeda se
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr ""
+msgstr "Huruf pemisah:"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
-msgstr ""
+msgstr "Huruf-huruf untuk memisahkan nama berkas dan nomor bingkai"
 
 msgid "Close"
 msgstr "Tutup"
@@ -2574,39 +2574,39 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
 msgid "Preview frame:"
-msgstr ""
+msgstr "Pratayang bingkai:"
 
 #. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
 msgid "Animate"
-msgstr ""
+msgstr "Animasikan"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
 msgid "Initial value:"
-msgstr ""
+msgstr "Nilai awal:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the final value of the property.
 msgid "Final value:"
-msgstr ""
+msgstr "Nilai akhir:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
 msgid "Ease type:"
-msgstr ""
+msgstr "Jenis \"ease\":"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
-msgstr ""
+msgstr "Mulai lambat lalu cepat ketika di ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts quickly and slows down towards the end"
-msgstr ""
+msgstr "Mulai cepat lalu lambat ketika di ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
-msgstr ""
+msgstr "Lambat di tiap ujung, cepat di tengah"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Fast at both ends, slow at middle"
-msgstr ""
+msgstr "Cepat di tiap ujung, lambat di tengah"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
@@ -2634,7 +2634,7 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Sine"
-msgstr ""
+msgstr "Sinus"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Wiggling around the edges"
