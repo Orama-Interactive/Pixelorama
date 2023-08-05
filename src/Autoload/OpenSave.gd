@@ -473,6 +473,9 @@ func open_image_as_new_tab(path: String, image: Image) -> void:
 func open_image_as_spritesheet_tab_smart(
 	path: String, image: Image, sliced_rects: Array, frame_size: Vector2
 ) -> void:
+	if sliced_rects.size() == 0:  # Image is empty sprite (manually set data to be consistent)
+		frame_size = image.get_size()
+		sliced_rects.append(Rect2(Vector2.ZERO, frame_size))
 	var project := Project.new([], path.get_file(), frame_size)
 	project.layers.append(PixelLayer.new(project))
 	Global.projects.append(project)
@@ -566,6 +569,7 @@ func open_image_as_spritesheet_layer_smart(
 			image.convert(Image.FORMAT_RGBA8)
 			var cropped_image := Image.new()
 			cropped_image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+			print("aaa")
 			cropped_image.blit_rect(image, sliced_rects[f - start_frame], offset)
 			cels.append(PixelCel.new(cropped_image))
 		else:
