@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-08-05 17:27\n"
+"PO-Revision-Date: 2023-08-05 18:50\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -1402,11 +1402,11 @@ msgstr "Pilih lapisan saat memencet salah satu tombolnya:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr ""
+msgstr "Warna onion skinning sebelum:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr ""
+msgstr "Warna onion skinning setelah:"
 
 msgid "Animated selection borders"
 msgstr "Tepian seleksi dianimasikan"
@@ -1634,7 +1634,7 @@ msgid "Fit to frame"
 msgstr "Paskan sebingkai"
 
 msgid "100% Zoom"
-msgstr "Perbesar 100%"
+msgstr "Keker 100%"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
@@ -1739,7 +1739,7 @@ msgid "Manage frame tags"
 msgstr "Atur tag bingkai"
 
 msgid "Frame Tag Properties"
-msgstr "Perincian Tag Bingkai"
+msgstr "Properti Tag Bingkai"
 
 msgid "Add a new frame tag"
 msgstr "Tambah tag bingkai baru"
@@ -1811,10 +1811,10 @@ msgid "Unlink Cels"
 msgstr "Putuskan Cel"
 
 msgid "Frame Properties"
-msgstr "Perincian Bingkai"
+msgstr "Properti Bingkai"
 
 msgid "Frame properties"
-msgstr "Perincian bingkai"
+msgstr "Properti bingkai"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
@@ -2049,7 +2049,7 @@ msgid "Want your name or your company to be shown on the splash screen?"
 msgstr "Apakah ingin ada nama diri atau perusahaan pada layar splash?"
 
 msgid "Become a Platinum Sponsor"
-msgstr "Jadi Sponsor Platinum"
+msgstr "Jadi Sponsor Platina"
 
 msgid "Become a Gold Sponsor"
 msgstr "Jadi Sponsor Emas"
@@ -2215,7 +2215,7 @@ msgstr "menit"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
-msgstr ""
+msgstr "Sertakan tag bingkai di nama berkas"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
@@ -2332,7 +2332,7 @@ msgid "Animation Timeline"
 msgstr "Garis Waktu Animasi"
 
 msgid "Canvas Preview"
-msgstr "Pratinjau Kanvas"
+msgstr "Pratayang Kanvas"
 
 msgid "Color Pickers"
 msgstr "Pengambil Warna"
@@ -2570,7 +2570,7 @@ msgstr "Rentang:"
 
 #. Found under certain image effects that support properties that can be animated.
 msgid "Animatable Properties"
-msgstr "Perincian Bisa Dianimasi"
+msgstr "Properti Bisa Dianimasi"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
 msgid "Preview frame:"
@@ -2594,11 +2594,11 @@ msgstr "Tipe \"ease\":"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
-msgstr "Awalnya lambat lalu mencepat ketika di ujung"
+msgstr "Awalnya lambat lalu cepat saat ke ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts quickly and slows down towards the end"
-msgstr "Awalnya cepat lalu melambat ketika di ujung"
+msgstr "Awalnya cepat lalu lambat saat ke ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
@@ -2610,23 +2610,23 @@ msgstr "Cepat di tiap ujung, lambat di tengah"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
-msgstr ""
+msgstr "Kuadrat (pangkat 2)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Cubic (power of 3)"
-msgstr ""
+msgstr "Kubik (pangkat 3)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quartic (power of 4)"
-msgstr ""
+msgstr "Kuartik (pangkat 4)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quintic (power of 5)"
-msgstr ""
+msgstr "Kuintik (pangkat 5)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Exponential (power of x)"
-msgstr ""
+msgstr "Eksponen (pangkat x)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Square root"
@@ -2646,5 +2646,5 @@ msgstr "Lompat-lompat di ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
-msgstr ""
+msgstr "\"Back out\" di akhir"
 
