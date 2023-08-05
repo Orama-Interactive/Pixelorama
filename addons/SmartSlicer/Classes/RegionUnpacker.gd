@@ -41,6 +41,8 @@ func get_used_rects(image: Image) -> Dictionary:
 func get_rects(image: Image) -> Dictionary:
 	# make a smaller image to make the loop shorter
 	var used_rect = image.get_used_rect()
+	if used_rect.size == Vector2.ZERO:
+		return clean_rects([])
 	var test_image = image.get_rect(used_rect)
 	# prepare a bitmap to keep track of previous places
 	var scanned_area := BitMap.new()
