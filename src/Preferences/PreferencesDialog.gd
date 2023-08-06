@@ -35,6 +35,7 @@ var preferences := [
 	Preference.new("default_height", "Image/ImageOptions/ImageDefaultHeight", "value"),
 	Preference.new("default_fill_color", "Image/ImageOptions/DefaultFillColor", "color"),
 	Preference.new("smooth_zoom", "Canvas/ZoomOptions/SmoothZoom", "pressed"),
+	Preference.new("integer_zoom", "Canvas/ZoomOptions/IntegerZoom", "pressed"),
 	Preference.new("snapping_distance", "Canvas/SnappingOptions/DistanceValue", "value"),
 	Preference.new("grid_type", "Canvas/GridOptions/GridType", "selected"),
 	Preference.new("grid_size", "Canvas/GridOptions/GridSizeValue", "value"),

@@ -380,9 +380,8 @@ color = Color( 0.992157, 0.427451, 0.0784314, 1 )
 
 [node name="Canvas" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide"]
 visible = false
-margin_top = 74.0
 margin_right = 486.0
-margin_bottom = 602.0
+margin_bottom = 572.0
 
 [node name="ZoomHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
 margin_right = 486.0
@@ -401,22 +400,23 @@ margin_right = 486.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
-[node name="ZoomOptions" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
+[node name="ZoomOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
 margin_top = 18.0
 margin_right = 486.0
-margin_bottom = 42.0
+margin_bottom = 70.0
+columns = 3
 
 [node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/ZoomOptions"]
 margin_top = 5.0
-margin_right = 241.0
+margin_right = 149.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 110, 0 )
 size_flags_horizontal = 3
 text = "Smooth Zoom"
 
 [node name="SmoothZoom" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/ZoomOptions"]
-margin_left = 245.0
-margin_right = 486.0
+margin_left = 153.0
+margin_right = 302.0
 margin_bottom = 24.0
 hint_tooltip = "Adds a smoother transition when zooming in or out"
 mouse_default_cursor_shape = 2
@@ -424,10 +424,28 @@ size_flags_horizontal = 3
 pressed = true
 text = "On"
 
-[node name="GuideHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
-margin_top = 46.0
+[node name="Label2" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/ZoomOptions"]
+margin_left = 306.0
+margin_top = 5.0
 margin_right = 486.0
-margin_bottom = 60.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 110, 0 )
+size_flags_horizontal = 3
+text = "Integer Zoom"
+
+[node name="IntegerZoom" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/ZoomOptions"]
+margin_top = 28.0
+margin_right = 149.0
+margin_bottom = 52.0
+hint_tooltip = "Restricts the value to be an integral multiple of 100%"
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "On"
+
+[node name="GuideHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
+margin_top = 74.0
+margin_right = 486.0
+margin_bottom = 88.0
 custom_constants/separation = 0
 
 [node name="GuideLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GuideHeader"]
@@ -443,9 +461,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="GuideOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
-margin_top = 64.0
+margin_top = 92.0
 margin_right = 486.0
-margin_bottom = 84.0
+margin_bottom = 112.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
@@ -471,35 +489,34 @@ size_flags_horizontal = 3
 color = Color( 0.63, 0.13, 0.94, 1 )
 
 [node name="SnappingHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
-margin_top = 88.0
+margin_top = 116.0
 margin_right = 486.0
-margin_bottom = 102.0
+margin_bottom = 130.0
 custom_constants/separation = 0
 
 [node name="SnappingLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/SnappingHeader"]
-margin_right = 27.0
+margin_right = 57.0
 margin_bottom = 14.0
 theme_type_variation = "Header"
 text = "Snapping"
 
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/SnappingHeader"]
-margin_left = 27.0
+margin_left = 57.0
 margin_right = 486.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="SnappingOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
-margin_top = 64.0
+margin_top = 134.0
 margin_right = 486.0
-margin_bottom = 84.0
+margin_bottom = 148.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
 [node name="DistanceLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/SnappingOptions"]
-margin_top = 3.0
 margin_right = 161.0
-margin_bottom = 17.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 110, 0 )
 hint_tooltip = "This is the distance in pixels where guide and grid snapping gets activated."
 mouse_filter = 0
@@ -507,9 +524,9 @@ size_flags_horizontal = 3
 text = "Snapping distance:"
 
 [node name="DistanceValue" type="TextureProgress" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/SnappingOptions"]
-margin_top = 294.0
-margin_right = 6.0
-margin_bottom = 300.0
+margin_left = 165.0
+margin_right = 326.0
+margin_bottom = 14.0
 hint_tooltip = "This is the distance in pixels where guide and grid snapping gets activated."
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -528,9 +545,9 @@ suffix = "px"
 snap_step = 10.0
 
 [node name="GridHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
-margin_top = 88.0
+margin_top = 152.0
 margin_right = 486.0
-margin_bottom = 102.0
+margin_bottom = 166.0
 custom_constants/separation = 0
 
 [node name="GridLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridHeader"]
@@ -546,16 +563,16 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="GridOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
-margin_top = 106.0
+margin_top = 170.0
 margin_right = 486.0
-margin_bottom = 266.0
+margin_bottom = 330.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
 [node name="GridTypeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
 margin_top = 3.0
-margin_right = 171.0
+margin_right = 160.0
 margin_bottom = 17.0
 hint_tooltip = "Sets the type of the grid between rectangular, isometric or both"
 mouse_filter = 0
@@ -566,8 +583,8 @@ __meta__ = {
 }
 
 [node name="GridType" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
-margin_left = 175.0
-margin_right = 346.0
+margin_left = 164.0
+margin_right = 323.0
 margin_bottom = 20.0
 hint_tooltip = "Sets the type of the grid between rectangular, isometric or both"
 mouse_default_cursor_shape = 2
@@ -577,7 +594,7 @@ items = [ "Rectangular", null, false, 0, null, "Isometric", null, false, 1, null
 selected = 0
 
 [node name="GridSizeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
-margin_left = 350.0
+margin_left = 327.0
 margin_right = 486.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 110, 0 )
@@ -587,7 +604,7 @@ text = "Rectangular grid size:"
 
 [node name="GridSizeValue" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions" instance=ExtResource( 7 )]
 margin_top = 24.0
-margin_right = 171.0
+margin_right = 160.0
 margin_bottom = 76.0
 size_flags_horizontal = 3
 value = Vector2( 2, 2 )
@@ -600,16 +617,16 @@ suffix_x = "px"
 suffix_y = "px"
 
 [node name="IsometricGridSizeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
-margin_left = 175.0
+margin_left = 164.0
 margin_top = 24.0
-margin_right = 346.0
+margin_right = 323.0
 margin_bottom = 76.0
 mouse_filter = 0
 size_flags_vertical = 1
 text = "Isometric grid size:"
 
 [node name="IsometricGridSizeValue" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions" instance=ExtResource( 7 )]
-margin_left = 350.0
+margin_left = 327.0
 margin_top = 24.0
 margin_right = 486.0
 margin_bottom = 76.0
@@ -624,18 +641,18 @@ suffix_x = "px"
 suffix_y = "px"
 
 [node name="GridOffsetLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
-margin_top = 99.0
-margin_right = 171.0
-margin_bottom = 113.0
+margin_top = 80.0
+margin_right = 160.0
+margin_bottom = 132.0
 hint_tooltip = "Sets grid's offset from the canvas origin (top left corner of the image)"
 mouse_filter = 0
 size_flags_vertical = 1
 text = "Grid offset:"
 
 [node name="GridOffsetValue" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions" instance=ExtResource( 7 )]
-margin_left = 175.0
+margin_left = 164.0
 margin_top = 80.0
-margin_right = 346.0
+margin_right = 323.0
 margin_bottom = 132.0
 hint_tooltip = "Sets grid's offset from the canvas origin (top left corner of the image)"
 size_flags_horizontal = 3
@@ -645,7 +662,7 @@ suffix_x = "px"
 suffix_y = "px"
 
 [node name="GridDrawOverTileModeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
-margin_left = 350.0
+margin_left = 327.0
 margin_top = 99.0
 margin_right = 486.0
 margin_bottom = 113.0
@@ -656,23 +673,23 @@ text = "Draw over Tile Mode:"
 
 [node name="GridDrawOverTileMode" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
 margin_top = 136.0
-margin_right = 171.0
+margin_right = 160.0
 margin_bottom = 160.0
 hint_tooltip = "If disabled, the grid will be drawn only over the original image"
 mouse_default_cursor_shape = 2
 text = "On"
 
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
-margin_left = 175.0
+margin_left = 164.0
 margin_top = 141.0
-margin_right = 346.0
+margin_right = 323.0
 margin_bottom = 155.0
 hint_tooltip = "A color of the grid"
 mouse_filter = 0
 text = "Grid color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions"]
-margin_left = 350.0
+margin_left = 327.0
 margin_top = 136.0
 margin_right = 486.0
 margin_bottom = 160.0
@@ -681,9 +698,9 @@ hint_tooltip = "A color of the grid"
 mouse_default_cursor_shape = 2
 
 [node name="PixelGridHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
-margin_top = 270.0
+margin_top = 334.0
 margin_right = 486.0
-margin_bottom = 284.0
+margin_bottom = 348.0
 custom_constants/separation = 0
 
 [node name="PixelGridLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/PixelGridHeader"]
@@ -699,17 +716,16 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="PixelGridOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
-margin_top = 288.0
+margin_top = 352.0
 margin_right = 486.0
-margin_bottom = 336.0
+margin_bottom = 390.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
 [node name="ShowAtZoomLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/PixelGridOptions"]
-margin_top = 5.0
 margin_right = 190.0
-margin_bottom = 19.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 110, 0 )
 hint_tooltip = "Sets the minimal zoom at which pixel grid will be shown"
 mouse_filter = 0
@@ -717,8 +733,9 @@ size_flags_horizontal = 3
 text = "Show at zoom:"
 
 [node name="ShowAtZoom" type="TextureProgress" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/PixelGridOptions"]
-margin_right = 6.0
-margin_bottom = 6.0
+margin_left = 194.0
+margin_right = 383.0
+margin_bottom = 14.0
 hint_tooltip = "Sets the minimal zoom at which pixel grid will be shown"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -739,26 +756,25 @@ snap_step = 100.0
 
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/PixelGridOptions"]
 margin_left = 387.0
-margin_top = 5.0
 margin_right = 486.0
-margin_bottom = 19.0
+margin_bottom = 14.0
 hint_tooltip = "A color of the pixel grid"
 mouse_filter = 0
 text = "Pixel grid color:"
 
 [node name="GridColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/PixelGridOptions"]
-margin_top = 28.0
+margin_top = 18.0
 margin_right = 190.0
-margin_bottom = 48.0
+margin_bottom = 38.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "A color of the pixel grid"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 
 [node name="TransparencyHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
-margin_top = 340.0
+margin_top = 394.0
 margin_right = 486.0
-margin_bottom = 354.0
+margin_bottom = 408.0
 custom_constants/separation = 0
 
 [node name="TransparencyLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/TransparencyHeader"]
@@ -774,17 +790,16 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="CheckerOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
-margin_top = 358.0
+margin_top = 412.0
 margin_right = 486.0
-margin_bottom = 462.0
+margin_bottom = 506.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
 [node name="SizeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
-margin_top = 5.0
 margin_right = 162.0
-margin_bottom = 19.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 110, 0 )
 hint_tooltip = "Size of the transparent checker background"
 mouse_filter = 0
@@ -792,8 +807,9 @@ size_flags_horizontal = 3
 text = "Checker size:"
 
 [node name="CheckerSizeValue" type="TextureProgress" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
-margin_right = 6.0
-margin_bottom = 6.0
+margin_left = 166.0
+margin_right = 314.0
+margin_bottom = 14.0
 hint_tooltip = "Size of the transparent checker background"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -812,17 +828,16 @@ snap_step = 10.0
 
 [node name="CheckerColor1Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
 margin_left = 318.0
-margin_top = 5.0
 margin_right = 486.0
-margin_bottom = 19.0
+margin_bottom = 14.0
 hint_tooltip = "First color of the transparent checker background"
 mouse_filter = 0
 text = "Checker color 1:"
 
 [node name="CheckerColor1" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
-margin_top = 28.0
+margin_top = 18.0
 margin_right = 162.0
-margin_bottom = 48.0
+margin_bottom = 38.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "First color of the transparent checker background"
 mouse_default_cursor_shape = 2
@@ -830,67 +845,69 @@ color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="CheckerColor2Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
 margin_left = 166.0
-margin_top = 31.0
+margin_top = 21.0
 margin_right = 314.0
-margin_bottom = 45.0
+margin_bottom = 35.0
 hint_tooltip = "Second color of the transparent checker background"
 mouse_filter = 0
 text = "Checker color 2:"
 
 [node name="CheckerColor2" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
 margin_left = 318.0
-margin_top = 28.0
+margin_top = 18.0
 margin_right = 486.0
-margin_bottom = 48.0
+margin_bottom = 38.0
 rect_min_size = Vector2( 64, 20 )
 hint_tooltip = "Second color of the transparent checker background"
 mouse_default_cursor_shape = 2
 color = Color( 0.341176, 0.34902, 0.341176, 1 )
 
 [node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
-margin_top = 57.0
+margin_top = 47.0
 margin_right = 162.0
-margin_bottom = 71.0
+margin_bottom = 61.0
 rect_min_size = Vector2( 110, 0 )
 text = "Follow Canvas Movement"
 
 [node name="CheckerFollowMovement" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
 margin_left = 166.0
-margin_top = 52.0
+margin_top = 42.0
 margin_right = 314.0
-margin_bottom = 76.0
+margin_bottom = 66.0
 hint_tooltip = "The transparent checker follow the movement of canvas"
 mouse_default_cursor_shape = 2
 text = "On"
 
 [node name="Label2" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
 margin_left = 318.0
-margin_top = 57.0
+margin_top = 47.0
 margin_right = 486.0
-margin_bottom = 71.0
+margin_bottom = 61.0
 rect_min_size = Vector2( 110, 0 )
 text = "Follow Canvas Zoom Level"
 
 [node name="CheckerFollowScale" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
-margin_top = 80.0
+margin_top = 70.0
 margin_right = 162.0
-margin_bottom = 104.0
+margin_bottom = 94.0
 hint_tooltip = "The transparent checker follow the zoom level of canvas"
 mouse_default_cursor_shape = 2
 text = "On"
 
 [node name="Label3" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
 margin_left = 166.0
-margin_top = 85.0
+margin_top = 75.0
 margin_right = 314.0
-margin_bottom = 99.0
+margin_bottom = 89.0
 rect_min_size = Vector2( 110, 0 )
 mouse_filter = 0
 text = "Tile mode opacity:"
 
 [node name="TileModeOpacity" type="TextureProgress" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions"]
-margin_right = 6.0
-margin_bottom = 6.0
+margin_left = 318.0
+margin_top = 70.0
+margin_right = 486.0
+margin_bottom = 94.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -906,9 +923,9 @@ script = ExtResource( 8 )
 snap_step = 0.1
 
 [node name="BackgroundHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
-margin_top = 466.0
+margin_top = 510.0
 margin_right = 486.0
-margin_bottom = 480.0
+margin_bottom = 524.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/BackgroundHeader"]
@@ -924,9 +941,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="BackgroundOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
-margin_top = 484.0
+margin_top = 528.0
 margin_right = 486.0
-margin_bottom = 528.0
+margin_bottom = 572.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
