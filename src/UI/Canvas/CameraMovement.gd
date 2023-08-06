@@ -139,6 +139,8 @@ func zoom_camera(dir: int) -> void:
 		var new_zoom := zoom + zoom_margin
 		if Global.integer_zoom:
 			new_zoom = zoom / (Vector2.ONE - dir * zoom)
+			if new_zoom == Vector2.INF:
+				return
 		if new_zoom > zoom_min && new_zoom <= zoom_max:
 			var new_offset := (
 				offset
@@ -154,6 +156,8 @@ func zoom_camera(dir: int) -> void:
 		var zoom_margin := zoom * dir / 10
 		if Global.integer_zoom:
 			zoom_margin = (zoom / (Vector2.ONE - dir * zoom)) - zoom
+			if zoom_margin == Vector2.INF:
+				return
 		if zoom + zoom_margin > zoom_min:
 			zoom += zoom_margin
 		if zoom > zoom_max:
@@ -192,6 +196,11 @@ func zoom_100() -> void:
 
 
 func fit_to_frame(size: Vector2) -> void:
+	# temporarily disable integer zoom
+	var reset_integer_zoom
+	if Global.integer_zoom:
+		reset_integer_zoom = Global.integer_zoom
+		Global.integer_zoom = !Global.integer_zoom
 	offset = size / 2
 
 	# Adjust to the rotated size:
@@ -225,6 +234,8 @@ func fit_to_frame(size: Vector2) -> void:
 
 	ratio = clamp(ratio, 0.1, ratio)
 	zoom = Vector2(1 / ratio, 1 / ratio)
+	if reset_integer_zoom:
+		Global.integer_zoom = !Global.integer_zoom
 	emit_signal("zoom_changed")
 
 
