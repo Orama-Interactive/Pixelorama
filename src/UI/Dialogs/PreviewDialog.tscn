@@ -141,7 +141,7 @@ size_flags_horizontal = 3
 
 [node name="Threshold" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart" instance=ExtResource( 2 )]
 margin_right = 195.0
-hint_tooltip = "Image having any one side smaller than this value will closs the threshold"
+hint_tooltip = "Images that have any one side smaller than this value will cross the threshold"
 min_value = 1.0
 value = 10.0
 allow_greater = true
@@ -150,8 +150,7 @@ prefix = "Threshold:"
 [node name="MergeDist" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart" instance=ExtResource( 2 )]
 margin_left = 199.0
 margin_right = 394.0
-hint_tooltip = "image (that crossed the threshold), this distance apart to any other image
-will get merged with that image"
+hint_tooltip = "Images will get merged to the larger image that has crossed the threshold, if they are within this distance"
 value = 3.0
 prefix = "Merge distance:"
 
@@ -159,12 +158,14 @@ prefix = "Merge distance:"
 margin_left = 398.0
 margin_right = 458.0
 margin_bottom = 24.0
+mouse_default_cursor_shape = 2
 text = "Refresh"
 
 [node name="SmartSlice" type="CheckBox" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions"]
 margin_top = 28.0
 margin_right = 378.0
 margin_bottom = 52.0
+mouse_default_cursor_shape = 2
 text = "Smart Slice"
 
 [node name="SpritesheetLayerOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
