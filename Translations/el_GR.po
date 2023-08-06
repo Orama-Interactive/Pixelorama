@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-08-06 17:30\n"
+"PO-Revision-Date: 2023-08-06 18:35\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -692,7 +692,7 @@ msgstr "Ακέραιη μεγέθυνση"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr ""
+msgstr "Περιορίζει την τιμή ως ακέραιο πολλαπλάσιο του 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Ευαισθησία πίεσης tablet:"
