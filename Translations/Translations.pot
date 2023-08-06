@@ -677,7 +677,7 @@ msgid "Integer Zoom"
 msgstr ""
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
-msgid "Restricts the value to be an integral multiple of 100%"
+msgid "Restricts the value to be an integer multiple of 100%"
 msgstr ""
 
 msgid "Tablet pressure sensitivity:"
