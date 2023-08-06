@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-07-08 19:06\n"
+"PO-Revision-Date: 2023-08-06 16:00\n"
 
 msgid "OK"
 msgstr "OK"
@@ -355,6 +355,7 @@ msgstr "インポートオプション"
 msgid "Import as:"
 msgstr "形式を指定してインポート"
 
+#. Found in the preview image dialog, which appears when importing an image file.
 msgid "Apply to all"
 msgstr "すべてに適用"
 
@@ -364,15 +365,18 @@ msgstr "最近のプロジェクト"
 msgid "New project"
 msgstr "新規プロジェクト"
 
+#. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new project)"
 msgstr "スプライトシート(新規プロジェクト)"
 
+#. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new layer)"
 msgstr "スプライトシート (新規レイヤー)"
 
 msgid "New frame"
 msgstr "新しいフレーム"
 
+#. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
 msgstr "セルを置換"
 
@@ -396,6 +400,26 @@ msgstr "水平フレーム:"
 
 msgid "Vertical frames:"
 msgstr "垂直フレーム"
+
+#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
+msgid "Smart Slice"
+msgstr ""
+
+#. A value that is a threshold
+msgid "Threshold:"
+msgstr ""
+
+#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
+msgid "Images that have any one side smaller than this value will cross the threshold"
+msgstr ""
+
+#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
+msgid "Merge distance:"
+msgstr ""
+
+#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
+msgid "Images will get merged to the larger image that has crossed the threshold, if they are within this distance"
+msgstr ""
 
 msgid "Start frame:"
 msgstr "開始フレーム:"
@@ -654,11 +678,21 @@ msgstr "オン"
 msgid "Restore default value"
 msgstr "既定値へ戻す"
 
+#. Found in the preferences, under Canvas.
 msgid "Smooth Zoom"
 msgstr "スムーズズーム"
 
+#. Found in the preferences, under Canvas. Hint tooltip of "Smooth Zoom".
 msgid "Adds a smoother transition when zooming in or out"
 msgstr "ズームインまたはズームアウト時にスムーズなトランジションを追加します"
+
+#. Found in the preferences, under Canvas.
+msgid "Integer Zoom"
+msgstr ""
+
+#. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
+msgid "Restricts the value to be an integral multiple of 100%"
+msgstr ""
 
 msgid "Tablet pressure sensitivity:"
 msgstr "タブレットの圧力感度:"
