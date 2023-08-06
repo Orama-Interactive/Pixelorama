@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-08-06 17:30\n"
+"PO-Revision-Date: 2023-08-06 18:35\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -160,18 +160,18 @@ msgid "Resize Canvas"
 msgstr "Tuvali Yeniden Boyutlandır"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Görüntü Uzaklığı"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Uzaklık:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Çevresini sar:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "Kareleri Ortala"
 
 msgid "Rotate Image"
 msgstr "Resmi Döndür"
@@ -216,7 +216,7 @@ msgid "Tile Mode"
 msgstr "Döşeme Kipi"
 
 msgid "Tile Mode Offsets"
-msgstr "Döşeme Kipi Ofsetleri"
+msgstr "Döşeme Kipi Uzaklıkları"
 
 msgid "X-basis x:"
 msgstr "X-tabanlı x:"
@@ -403,29 +403,29 @@ msgstr "Dikey kareler:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr ""
+msgstr "Akıllı Dilimleme"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "Eşik:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
-msgstr ""
+msgstr "Herhangi bir kenarı bu değerden küçük olan resimler eşiği geçer"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Merge distance:"
-msgstr ""
+msgstr "Birleştirme mesafesi:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images will get merged to the larger image that has crossed the threshold, if they are within this distance"
-msgstr ""
+msgstr "Görüntüler, bu mesafe içindeyse eşiği geçen daha büyük görüntüyle birleştirilir"
 
 msgid "Start frame:"
 msgstr "Başlangıç karesi:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Bitiş karesi:"
 
 msgid "At frame:"
 msgstr "Karede:"
@@ -641,7 +641,7 @@ msgstr "Tuval"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr ""
+msgstr "Zaman çizelgesi"
 
 msgid "Selection"
 msgstr "Seçim"
@@ -688,11 +688,11 @@ msgstr "Yakınlaştırırken veya uzaklaştırırken daha yumuşak geçiş ekler
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "Tam Sayı Yakınlaştırma"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr ""
+msgstr "Değeri %100'ün tamsayı katı olacak şekilde kısıtlar"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Tablet basınç hassasiyeti:"
@@ -815,10 +815,10 @@ msgid "Drop Shadow"
 msgstr "Gölge"
 
 msgid "Offset X:"
-msgstr "Konum X:"
+msgstr "Uzaklık X:"
 
 msgid "Offset Y:"
-msgstr "Konum Y:"
+msgstr "Uzaklık Y:"
 
 msgid "Shadow color:"
 msgstr "Gölge rengi:"
@@ -918,15 +918,15 @@ msgstr "Adımlar:"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "Posterleştir"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "Posterleştirme düzeyleri:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "Titreme yoğunluğu:"
 
 msgid "View Splash Screen"
 msgstr "Açılış Ekranını Göster"
@@ -1229,7 +1229,7 @@ msgid "Line Tool\n\n"
 msgstr "Çizgi Aracı\n\n"
 "Sol fare düğmesi için %s\n"
 "Sağ fare düğmesi için %s\n\n"
-"Çizginin açısını yakalamak için %s tuşunu basılı tutun\n"
+"Çizginin açısına yapışmak için %s tuşunu basılı tutun\n"
 "Şekli tıklama orijininde ortalamak için %s tuşunu basılı tutun\n"
 "Şeklin orijinini değiştirmek için %s tuşunu basılı tutun"
 
@@ -1326,15 +1326,15 @@ msgstr "Tuvalde görüntülenen cetvel kılavuzlarının rengi"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "Yapışma"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "Yapışma mesafesi:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Bu, kılavuzun ve ızgaraya yapışmanın etkinleştirildiği piksel cinsinden mesafedir."
 
 msgid "Grid"
 msgstr "Izgara"
@@ -1356,19 +1356,19 @@ msgstr "Tümü"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Rectangular grid size:"
-msgstr ""
+msgstr "Dikdörtgen ızgara boyutu:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Isometric grid size:"
-msgstr ""
+msgstr "Izometrik ızgara boyutu:"
 
 #. Found in the Preferences, in the Canvas tab.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Kılavuz uzaklığı:"
 
 #. Found in the Preferences, in the Canvas tab. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Izgaranın tuval kaynağından (görüntünün sol üst köşesi) uzaklığını ayarlar"
 
 msgid "Draw over Tile Mode:"
 msgstr "Döşeme Kipinde Çizim:"
@@ -1432,15 +1432,15 @@ msgstr "Saydam dama deseni tuval yakınlaştırma düzeyini takip eder"
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
-msgstr ""
+msgstr "Düğmelerinden birine tıkladığınızda katmanı seç:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr ""
+msgstr "Soğan kabuğunun geçmiş rengi:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr ""
+msgstr "Soğan kabuğunun gelecek rengi:"
 
 msgid "Animated selection borders"
 msgstr "Animasyonlu seçim kenarlıkları"
@@ -1665,7 +1665,7 @@ msgid "Options:"
 msgstr "Seçenekler:"
 
 msgid "Fit to frame"
-msgstr "Çerçeveye Sığdır"
+msgstr "Kareye Sığdır"
 
 msgid "100% Zoom"
 msgstr "100% Yakınlaştırma"
@@ -1708,7 +1708,7 @@ msgid "Animation mode:"
 msgstr "Animasyon kipi:"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Model sayfası olarak geçerli kare"
 
 msgid "Jump to the first frame\n"
 "(%s)"
@@ -1803,7 +1803,7 @@ msgstr "Eğer seçili ise animasyon sadece aynı etikete sahip karelerde oynatı
 
 #. Found in the timeline, inside the onion skinning settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
-msgstr ""
+msgstr "Renk kipi"
 
 msgid "Show past frames:"
 msgstr "Önceki kareleri göster:"
@@ -1852,7 +1852,7 @@ msgstr "Kare özellikleri"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
-msgstr ""
+msgstr "Kareleri Ters Çevir"
 
 msgid "Layer"
 msgstr "Katman"
@@ -2014,7 +2014,7 @@ msgid "Undo: Change frame duration"
 msgstr "Geri Al: Kare Süresini Değiştir"
 
 msgid "Redo: Change frame duration"
-msgstr "Yinele: Kare süresini değiştir"
+msgstr "Yinele: Kare Süresini Değiştir"
 
 msgid "Move Guide"
 msgstr "Kılavuzu Taşı"
@@ -2249,7 +2249,7 @@ msgstr "dakika"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
-msgstr ""
+msgstr "Dosya adınki kare etiketlerini dahil et"
 
 #. Found in the export dialog.
 msgid "Create new folder for each frame tag"
@@ -2261,11 +2261,11 @@ msgstr "Birden çok dosya oluşturur ancak her dosya, kare etiketine karşılık
 
 #. Found in the export dialog. Refers to text characters that acts as separators between text. For example, the "_" in "name_0001".
 msgid "Separator character(s):"
-msgstr ""
+msgstr "Ayırcı karakter(ler):"
 
 #. Found in the export dialog, as a hint tooltip of the separator character(s) text field.
 msgid "The character(s) that separate the file name and the frame number"
-msgstr ""
+msgstr "Dosya adını ve kare numarasını ayıran karakter(ler)"
 
 msgid "Close"
 msgstr "Kapat"
@@ -2604,11 +2604,11 @@ msgstr "Erim:"
 
 #. Found under certain image effects that support properties that can be animated.
 msgid "Animatable Properties"
-msgstr ""
+msgstr "Animasyonlu Özellikler"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
 msgid "Preview frame:"
-msgstr ""
+msgstr "Kareyi ön izle:"
 
 #. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
 msgid "Animate"
@@ -2616,7 +2616,7 @@ msgstr "Canlandır"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
 msgid "Initial value:"
-msgstr ""
+msgstr "Başlangıç değeri:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the final value of the property.
 msgid "Final value:"
@@ -2624,61 +2624,61 @@ msgstr "Son değer:"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
 msgid "Ease type:"
-msgstr ""
+msgstr "Azalma türü:"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
-msgstr ""
+msgstr "Yavaş başlar ve sona doğru hızlanır"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts quickly and slows down towards the end"
-msgstr ""
+msgstr "Hızlı başlar ve sona doğru yavaşlar"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
-msgstr ""
+msgstr "Her iki uçta da en yavaş, ortada hızlı"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Fast at both ends, slow at middle"
-msgstr ""
+msgstr "Her iki uçta hızlı, ortada yavaş"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
-msgstr ""
+msgstr "İkinci dereceden (2'nin kuvveti)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Cubic (power of 3)"
-msgstr ""
+msgstr "Kübik (3'ün kuvveti)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quartic (power of 4)"
-msgstr ""
+msgstr "Kuartik (4'ün kuvveti)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quintic (power of 5)"
-msgstr ""
+msgstr "Kuintik (5'in kuvveti)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Exponential (power of x)"
-msgstr ""
+msgstr "Üstel (x'in kuvveti)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Square root"
-msgstr ""
+msgstr "Kare kök"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Sine"
-msgstr ""
+msgstr "Sinüs"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Wiggling around the edges"
-msgstr ""
+msgstr "Kenarlarda kıvrılma"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
-msgstr ""
+msgstr "Sonunda zıplama"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
-msgstr ""
+msgstr "Sonunda geri çekilme"
 
