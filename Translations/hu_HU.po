@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2023-08-06 16:00\n"
+"PO-Revision-Date: 2023-08-06 17:30\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -689,7 +689,7 @@ msgid "Integer Zoom"
 msgstr ""
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
-msgid "Restricts the value to be an integral multiple of 100%"
+msgid "Restricts the value to be an integer multiple of 100%"
 msgstr ""
 
 msgid "Tablet pressure sensitivity:"
