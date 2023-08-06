@@ -431,7 +431,7 @@ margin_right = 486.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 110, 0 )
 size_flags_horizontal = 3
-text = "Integer Zoom (1x, 2x, 3x, ...)"
+text = "Integer Zoom"
 
 [node name="IntegerZoom" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/ZoomOptions"]
 margin_top = 28.0
