@@ -197,9 +197,8 @@ func zoom_100() -> void:
 
 func fit_to_frame(size: Vector2) -> void:
 	# temporarily disable integer zoom
-	var reset_integer_zoom
-	if Global.integer_zoom:
-		reset_integer_zoom = Global.integer_zoom
+	var reset_integer_zoom := Global.integer_zoom
+	if reset_integer_zoom:
 		Global.integer_zoom = !Global.integer_zoom
 	offset = size / 2
 
@@ -234,9 +233,9 @@ func fit_to_frame(size: Vector2) -> void:
 
 	ratio = clamp(ratio, 0.1, ratio)
 	zoom = Vector2(1 / ratio, 1 / ratio)
+	emit_signal("zoom_changed")
 	if reset_integer_zoom:
 		Global.integer_zoom = !Global.integer_zoom
-	emit_signal("zoom_changed")
 
 
 func save_values_to_project() -> void:
