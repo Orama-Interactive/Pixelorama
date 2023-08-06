@@ -27,3 +27,10 @@ Files extracted from source:
 - Version: Based on git commit e5df60ed1d53246e03dba36053ff009846ba5174 with a modification on dockable_container.gd (lines 187-191).
 - License: [CC0-1.0](https://github.com/gilzoide/godot-dockable-container/blob/main/LICENSE)
 
+## SmartSlicer
+
+- Upstream: https://github.com/Variable-Interactive/SmartSlicer
+- Version: Based on git commit 2804e6109f9667022c66522ce88a99a56fd67ca8 with a modification on SmartSlicePreview.gd (lines 31-32). Only the contents of addons folder are used and the script SmartSlicePreview.gd is moved to res://src/UI/Dialogs/HelperScripts/ for better organization
+- License: [MIT](https://github.com/Variable-Interactive/SmartSlicer/blob/main/LICENSE)
+
+
