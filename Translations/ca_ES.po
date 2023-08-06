@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2023-07-08 19:06\n"
+"PO-Revision-Date: 2023-08-06 16:00\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -355,6 +355,7 @@ msgstr "Opcions d'importació"
 msgid "Import as:"
 msgstr "Importar com a:"
 
+#. Found in the preview image dialog, which appears when importing an image file.
 msgid "Apply to all"
 msgstr "Aplica a tots"
 
@@ -364,15 +365,18 @@ msgstr "Darrers projectes"
 msgid "New project"
 msgstr ""
 
+#. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new project)"
 msgstr ""
 
+#. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new layer)"
 msgstr "Full de sprites (nova capa)"
 
 msgid "New frame"
 msgstr "Nou fotograma"
 
+#. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
 msgstr ""
 
@@ -396,6 +400,26 @@ msgstr "Fotogrames horitzontals:"
 
 msgid "Vertical frames:"
 msgstr "Fotogrames verticales:"
+
+#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
+msgid "Smart Slice"
+msgstr ""
+
+#. A value that is a threshold
+msgid "Threshold:"
+msgstr ""
+
+#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
+msgid "Images that have any one side smaller than this value will cross the threshold"
+msgstr ""
+
+#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
+msgid "Merge distance:"
+msgstr ""
+
+#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
+msgid "Images will get merged to the larger image that has crossed the threshold, if they are within this distance"
+msgstr ""
 
 msgid "Start frame:"
 msgstr "Fotograma d'inici:"
@@ -653,11 +677,21 @@ msgstr "Encès"
 msgid "Restore default value"
 msgstr "Restaura els valors per defecte"
 
+#. Found in the preferences, under Canvas.
 msgid "Smooth Zoom"
 msgstr "Zoom suavitzat"
 
+#. Found in the preferences, under Canvas. Hint tooltip of "Smooth Zoom".
 msgid "Adds a smoother transition when zooming in or out"
 msgstr "Afegeix una transició suau quan es fa zoom"
+
+#. Found in the preferences, under Canvas.
+msgid "Integer Zoom"
+msgstr ""
+
+#. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
+msgid "Restricts the value to be an integral multiple of 100%"
+msgstr ""
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilitat de la pressió de la tableta:"
