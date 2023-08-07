@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malayalam\n"
 "Language: ml_IN\n"
-"PO-Revision-Date: 2023-08-06 17:31\n"
+"PO-Revision-Date: 2023-08-07 12:19\n"
 
 msgid "OK"
 msgstr "ഓക്കേ"
@@ -413,12 +413,12 @@ msgstr ""
 msgid "Images that have any one side smaller than this value will cross the threshold"
 msgstr ""
 
-#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
+#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
 msgstr ""
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
-msgid "Images will get merged to the larger image that has crossed the threshold, if they are within this distance"
+msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
 msgstr ""
 
 msgid "Start frame:"
