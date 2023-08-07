@@ -150,7 +150,7 @@ prefix = "Threshold:"
 [node name="MergeDist" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart" instance=ExtResource( 2 )]
 margin_left = 199.0
 margin_right = 394.0
-hint_tooltip = "Images will get merged to the larger image that has crossed the threshold, if they are within this distance"
+hint_tooltip = "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
 value = 3.0
 prefix = "Merge distance:"
 
