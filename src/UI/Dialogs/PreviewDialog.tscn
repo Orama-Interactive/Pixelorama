@@ -146,6 +146,7 @@ min_value = 1.0
 value = 10.0
 allow_greater = true
 prefix = "Threshold:"
+suffix = "px"
 
 [node name="MergeDist" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart" instance=ExtResource( 2 )]
 margin_left = 199.0
@@ -153,6 +154,7 @@ margin_right = 394.0
 hint_tooltip = "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
 value = 3.0
 prefix = "Merge distance:"
+suffix = "px"
 
 [node name="Slice" type="Button" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart"]
 margin_left = 398.0
