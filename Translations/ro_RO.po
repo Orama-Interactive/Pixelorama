@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-08-06 17:30\n"
+"PO-Revision-Date: 2023-08-07 08:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -403,15 +403,15 @@ msgstr "Cadre verticale:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr ""
+msgstr "Secționare inteligentă"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "Prag:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
-msgstr ""
+msgstr "Imaginile care au oricare dintre laturi mai mici decât această valoare vor depăși pragul"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Merge distance:"
@@ -419,7 +419,7 @@ msgstr ""
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images will get merged to the larger image that has crossed the threshold, if they are within this distance"
-msgstr ""
+msgstr "Imaginile vor fi îmbinate cu imaginea mai mare care a depășit pragul, dacă se află la această distanță"
 
 msgid "Start frame:"
 msgstr "Cadru de pornire:"
@@ -688,11 +688,11 @@ msgstr "Adaugă o tranziție mai lentă la apropiere sau depărtare"
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "Număr întreg transfocare"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr ""
+msgstr "Restricționează valoarea la un multiplu întreg de 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilitatea de apăsare a tabletei:"
