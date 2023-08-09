@@ -12,6 +12,8 @@ Built using Godot 3.5.2
 
 ### Added
 - A new offset image effect to easily move the image around, with animation support.
+- Implemented a "smart slicer" system that lets the software automatically slice a spritesheet in separate frames on image import, without the user having to specify horizontal and vertical frames. [#893](https://github.com/Orama-Interactive/Pixelorama/pull/893)
+- Added optional integer zooming for the canvas, which can be enabled from the Preferences. Disabled by default. [#894](https://github.com/Orama-Interactive/Pixelorama/pull/894)
 - Fast way to clone frames of a tag. [#861](https://github.com/Orama-Interactive/Pixelorama/pull/861)
 - Added a reverse frames option on the right click menu of the frame buttons, to easily reverse the order of the selected frames.
 - A new Timeline category in the Preferences with options such as the colors of onion skinning's color mode, and whether a layer should be selected when a layer button (such as lock, visibility etc) gets pressed.
