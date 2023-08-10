@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-07-08 19:06\n"
+"PO-Revision-Date: 2023-08-09 12:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -171,7 +171,7 @@ msgstr "Umwickeln:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "Frames zentrieren"
 
 msgid "Rotate Image"
 msgstr "Bild drehen"
@@ -355,6 +355,7 @@ msgstr "Importoptionen"
 msgid "Import as:"
 msgstr "Importiere als:"
 
+#. Found in the preview image dialog, which appears when importing an image file.
 msgid "Apply to all"
 msgstr "Auf alle anwenden"
 
@@ -364,15 +365,18 @@ msgstr "Letzte Projekte"
 msgid "New project"
 msgstr "Neues Projekt"
 
+#. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new project)"
 msgstr "Spritesheet (neues Projekt)"
 
+#. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new layer)"
 msgstr "Spritesheet (neue Ebene)"
 
 msgid "New frame"
 msgstr "Neuer Frame"
 
+#. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
 msgstr "Cel ersetzen"
 
@@ -396,6 +400,30 @@ msgstr "Horizontale Frames:"
 
 msgid "Vertical frames:"
 msgstr "Vertikale Frames:"
+
+#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
+msgid "Smart Slice"
+msgstr "Smart Slice"
+
+#. A value that is a threshold
+msgid "Threshold:"
+msgstr "Schwellwert:"
+
+#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
+msgid "Images that have any one side smaller than this value will cross the threshold"
+msgstr "Bilder, die eine Seite kleiner als dieser Wert haben, werden den Schwellwert überschreiten"
+
+#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
+msgid "Merge distance:"
+msgstr "Distanz zusammenführen:"
+
+#. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
+msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
+msgstr "Bilder, die den Schwellwert überschreiten, werden zu einem größeren Bild zusammengeführt, wenn sie sich innerhalb dieser Distanz befinden"
+
+#. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
+msgid "Refresh"
+msgstr "Aktualisieren"
 
 msgid "Start frame:"
 msgstr "Startframe:"
@@ -653,11 +681,21 @@ msgstr "An"
 msgid "Restore default value"
 msgstr "Standardeinstellungen wiederherstellen"
 
+#. Found in the preferences, under Canvas.
 msgid "Smooth Zoom"
 msgstr "Smoother Zoom"
 
+#. Found in the preferences, under Canvas. Hint tooltip of "Smooth Zoom".
 msgid "Adds a smoother transition when zooming in or out"
 msgstr "Fügt einen glatteren Übergang beim Zoomen hinzu"
+
+#. Found in the preferences, under Canvas.
+msgid "Integer Zoom"
+msgstr "Ganzzahliger Zoom"
+
+#. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
+msgid "Restricts the value to be an integer multiple of 100%"
+msgstr "Beschränkt den Wert auf eine ganzzahliges Vielfaches von 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Tabletdrucksensitivität:"
