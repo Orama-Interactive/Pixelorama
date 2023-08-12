@@ -102,12 +102,13 @@ mouse_default_cursor_shape = 2
 min_value = 1.0
 value = 1.0
 
-[node name="Smart" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions"]
+[node name="SmartOptions" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Threshold" type="TextureProgressBar" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart"]
+[node name="Threshold" type="TextureProgressBar" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartOptions"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Images that have any one side smaller than this value will cross the threshold"
@@ -124,7 +125,7 @@ script = ExtResource("4_e0gk1")
 prefix = "Threshold:"
 suffix = "px"
 
-[node name="MergeDist" type="TextureProgressBar" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart"]
+[node name="MergeDist" type="TextureProgressBar" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartOptions"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
@@ -140,12 +141,13 @@ script = ExtResource("4_e0gk1")
 prefix = "Merge distance:"
 suffix = "px"
 
-[node name="Slice" type="Button" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart"]
+[node name="Slice" type="Button" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartOptions"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Refresh"
 
-[node name="SmartSlice" type="CheckBox" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions"]
+[node name="SmartSliceButton" type="CheckBox" parent="VBoxContainer/HBoxContainer/SpritesheetTabOptions"]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Smart Slice"
@@ -251,8 +253,8 @@ layout_mode = 2
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/ImportOption" to="." method="_on_ImportOption_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/Threshold" to="." method="_on_threshold_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/MergeDist" to="." method="_on_merge_dist_value_changed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/Slice" to="." method="_on_slice_pressed"]
-[connection signal="toggled" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartSlice" to="." method="_on_smart_slice_toggled"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartOptions/Threshold" to="." method="_on_threshold_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartOptions/MergeDist" to="." method="_on_merge_dist_value_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartOptions/Slice" to="." method="_on_slice_pressed"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartSliceButton" to="." method="_on_smart_slice_toggled"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/NewBrushOptions/BrushTypeOption" to="." method="_on_BrushTypeOption_item_selected"]

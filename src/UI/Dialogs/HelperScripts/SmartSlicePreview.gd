@@ -8,6 +8,8 @@ var _offset: Vector2
 
 
 func show_preview(sliced_rects: Array[Rect2i]) -> void:
+	if not is_instance_valid(get_parent().texture):
+		return
 	var image: Image = get_parent().texture.get_image()
 	if image.get_size().x > image.get_size().y:
 		_stretch_amount = size.x / image.get_size().x
