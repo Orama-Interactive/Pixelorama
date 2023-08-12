@@ -561,14 +561,18 @@ func open_image_as_spritesheet_layer_smart(
 			# Slice spritesheet
 			var offset: Vector2 = (0.5 * (frame_size - sliced_rects[f - start_frame].size)).floor()
 			image.convert(Image.FORMAT_RGBA8)
-			var cropped_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+			var cropped_image := Image.create(
+				project_width, project_height, false, Image.FORMAT_RGBA8
+			)
 			cropped_image.blit_rect(image, sliced_rects[f - start_frame], offset)
 			cels.append(PixelCel.new(cropped_image))
 		else:
 			cels.append(layer.new_empty_cel())
 
 	project.undo_redo.add_do_method(project.add_frames.bind(frames, frame_indices))
-	project.undo_redo.add_do_method(project.add_layers.bind([layer], [project.layers.size()], [cels]))
+	project.undo_redo.add_do_method(
+		project.add_layers.bind([layer], [project.layers.size()], [cels])
+	)
 	project.undo_redo.add_do_method(
 		project.change_cel.bind(new_frames_size - 1, project.layers.size())
 	)
@@ -639,7 +643,9 @@ func open_image_as_spritesheet_layer(
 			var xx: int = (f - start_frame) % horizontal
 			var yy: int = (f - start_frame) / horizontal
 			image.convert(Image.FORMAT_RGBA8)
-			var cropped_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+			var cropped_image := Image.create(
+				project_width, project_height, false, Image.FORMAT_RGBA8
+			)
 			cropped_image.blit_rect(
 				image,
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height),

@@ -31,11 +31,12 @@ var hiding := false
 @onready var texture_rect: TextureRect = $VBoxContainer/CenterContainer/TextureRect
 @onready var image_size_label: Label = $VBoxContainer/SizeContainer/ImageSizeLabel
 @onready var frame_size_label: Label = $VBoxContainer/SizeContainer/FrameSizeLabel
-@onready var smart_slice_checkbox = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartSlice
-@onready var merge_threshold := $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/Threshold as ValueSlider
-@onready var merge_dist := $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/MergeDist as ValueSlider
-@onready var spritesheet_manual_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual
-@onready var spritesheet_smart_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart
+@onready var smart_slice_checkbox := %SmartSliceButton as CheckBox
+@onready var merge_threshold := %SmartOptions/Threshold as ValueSlider
+@onready var merge_dist := %SmartOptions/MergeDist as ValueSlider
+@onready
+var spritesheet_manual_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual
+@onready var spritesheet_smart_tab_options := %SmartOptions as HBoxContainer
 @onready var spritesheet_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions
 @onready var spritesheet_lay_opt = $VBoxContainer/HBoxContainer/SpritesheetLayerOptions
 @onready var new_frame_options = $VBoxContainer/HBoxContainer/NewFrameOptions
@@ -330,7 +331,7 @@ func _on_ImportOption_item_selected(id: ImageImportOptions) -> void:
 
 	elif id == ImageImportOptions.BRUSH:
 		new_brush_options.visible = true
-#	queue_redraw()
+	_call_queue_redraw()
 
 
 func _on_smart_slice_toggled(button_pressed: bool) -> void:
