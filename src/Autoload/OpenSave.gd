@@ -466,7 +466,7 @@ func open_image_as_new_tab(path: String, image: Image) -> void:
 
 
 func open_image_as_spritesheet_tab_smart(
-	path: String, image: Image, sliced_rects: Array, frame_size: Vector2
+	path: String, image: Image, sliced_rects: Array[Rect2i], frame_size: Vector2i
 ) -> void:
 	if sliced_rects.size() == 0:  # Image is empty sprite (manually set data to be consistent)
 		frame_size = image.get_size()
@@ -477,8 +477,7 @@ func open_image_as_spritesheet_tab_smart(
 	for rect in sliced_rects:
 		var offset: Vector2 = (0.5 * (frame_size - rect.size)).floor()
 		var frame := Frame.new()
-		var cropped_image := Image.new()
-		cropped_image.create(frame_size.x, frame_size.y, false, Image.FORMAT_RGBA8)
+		var cropped_image := Image.create(frame_size.x, frame_size.y, false, Image.FORMAT_RGBA8)
 		cropped_image.blit_rect(image, rect, offset)
 		cropped_image.convert(Image.FORMAT_RGBA8)
 		frame.cels.append(PixelCel.new(cropped_image, 1))
@@ -512,15 +511,15 @@ func open_image_as_spritesheet_layer_smart(
 	_path: String,
 	image: Image,
 	file_name: String,
-	sliced_rects: Array,
+	sliced_rects: Array[Rect2i],
 	start_frame: int,
-	frame_size: Vector2
+	frame_size: Vector2i
 ) -> void:
 	# Resize canvas to if "frame_size.x" or "frame_size.y" is too large
 	var project: Project = Global.current_project
-	var project_width: int = max(frame_size.x, project.size.x)
-	var project_height: int = max(frame_size.y, project.size.y)
-	if project.size < Vector2(project_width, project_height):
+	var project_width := maxi(frame_size.x, project.size.x)
+	var project_height := maxi(frame_size.y, project.size.y)
+	if project.size < Vector2i(project_width, project_height):
 		DrawingAlgos.resize_canvas(project_width, project_height, 0, 0)
 
 	# Initialize undo mechanism
@@ -528,11 +527,11 @@ func open_image_as_spritesheet_layer_smart(
 	project.undo_redo.create_action("Add Spritesheet Layer")
 
 	# Create new frames (if needed)
-	var new_frames_size = max(project.frames.size(), start_frame + sliced_rects.size())
+	var new_frames_size := maxi(project.frames.size(), start_frame + sliced_rects.size())
 	var frames := []
 	var frame_indices := []
 	if new_frames_size > project.frames.size():
-		var required_frames = new_frames_size - project.frames.size()
+		var required_frames := new_frames_size - project.frames.size()
 		frame_indices = range(
 			project.current_frame + 1, project.current_frame + required_frames + 1
 		)
@@ -545,10 +544,10 @@ func open_image_as_spritesheet_layer_smart(
 					if prev_cel.link_set == null:
 						prev_cel.link_set = {}
 						project.undo_redo.add_do_method(
-							project.layers[l], "link_cel", prev_cel, prev_cel.link_set
+							project.layers[l].link_cel.bind(prev_cel, prev_cel.link_set)
 						)
 						project.undo_redo.add_undo_method(
-							project.layers[l], "link_cel", prev_cel, null
+							project.layers[l].link_cel.bind(prev_cel, null)
 						)
 					new_frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
 					new_frame.cels[l].link_set = prev_cel.link_set
@@ -556,32 +555,31 @@ func open_image_as_spritesheet_layer_smart(
 
 	# Create new layer for spritesheet
 	var layer := PixelLayer.new(project, file_name)
-	var cels := []
+	var cels: Array[PixelCel] = []
 	for f in new_frames_size:
 		if f >= start_frame and f < (start_frame + sliced_rects.size()):
 			# Slice spritesheet
 			var offset: Vector2 = (0.5 * (frame_size - sliced_rects[f - start_frame].size)).floor()
 			image.convert(Image.FORMAT_RGBA8)
-			var cropped_image := Image.new()
-			cropped_image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+			var cropped_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
 			cropped_image.blit_rect(image, sliced_rects[f - start_frame], offset)
 			cels.append(PixelCel.new(cropped_image))
 		else:
 			cels.append(layer.new_empty_cel())
 
-	project.undo_redo.add_do_method(project, "add_frames", frames, frame_indices)
-	project.undo_redo.add_do_method(project, "add_layers", [layer], [project.layers.size()], [cels])
+	project.undo_redo.add_do_method(project.add_frames.bind(frames, frame_indices))
+	project.undo_redo.add_do_method(project.add_layers.bind([layer], [project.layers.size()], [cels]))
 	project.undo_redo.add_do_method(
-		project, "change_cel", new_frames_size - 1, project.layers.size()
+		project.change_cel.bind(new_frames_size - 1, project.layers.size())
 	)
-	project.undo_redo.add_do_method(Global, "undo_or_redo", false)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 
-	project.undo_redo.add_undo_method(project, "remove_layers", [project.layers.size()])
-	project.undo_redo.add_undo_method(project, "remove_frames", frame_indices)
+	project.undo_redo.add_undo_method(project.remove_layers.bind([project.layers.size()]))
+	project.undo_redo.add_undo_method(project.remove_frames.bind(frame_indices))
 	project.undo_redo.add_undo_method(
-		project, "change_cel", project.current_frame, project.current_layer
+		project.change_cel.bind(project.current_frame, project.current_layer)
 	)
-	project.undo_redo.add_undo_method(Global, "undo_or_redo", true)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
 
 
@@ -712,8 +710,7 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 	for i in project.layers.size():
 		if i == layer_index:
 			image.convert(Image.FORMAT_RGBA8)
-			var cel_image = Image.new()
-			cel_image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+			var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
 			cel_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 			frame.cels.append(PixelCel.new(cel_image, 1))
 		else:
@@ -747,8 +744,7 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	for i in project.frames.size():
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
-			var cel_image = Image.new()
-			cel_image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
+			var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
 			cel_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
 			cels.append(PixelCel.new(cel_image, 1))
 		else:

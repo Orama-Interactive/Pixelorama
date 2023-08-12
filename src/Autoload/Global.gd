@@ -74,7 +74,8 @@ var show_y_symmetry_axis := false
 var open_last_project := false
 var quit_confirmation := false
 var smooth_zoom := true
-var integer_zoom := false setget set_integer_zoom
+var integer_zoom := false:
+	set = set_integer_zoom
 
 var shrink := 1.0
 var dim_on_popup := true

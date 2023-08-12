@@ -20,21 +20,20 @@ var image: Image
 var current_import_option := ImageImportOptions.NEW_TAB
 var smart_slice := false
 var recycle_last_slice_result := false  # Should we recycle the current sliced_rects
-var sliced_rects: Dictionary
+var sliced_rects: RegionUnpacker.RectData
 var spritesheet_horizontal := 1
 var spritesheet_vertical := 1
 var brush_type := BrushTypes.FILE
 var opened_once := false
 var is_main := false
 var hiding := false
-var _content_offset = rect_size - get_child(0).rect_size  # A workaround for a pixelorama bug
 
 @onready var texture_rect: TextureRect = $VBoxContainer/CenterContainer/TextureRect
 @onready var image_size_label: Label = $VBoxContainer/SizeContainer/ImageSizeLabel
 @onready var frame_size_label: Label = $VBoxContainer/SizeContainer/FrameSizeLabel
 @onready var smart_slice_checkbox = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/SmartSlice
-@onready var merge_threshold = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/Threshold
-@onready var merge_dist: TextureProgress = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/MergeDist
+@onready var merge_threshold := $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/Threshold as ValueSlider
+@onready var merge_dist := $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart/MergeDist as ValueSlider
 @onready var spritesheet_manual_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Manual
 @onready var spritesheet_smart_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions/Smart
 @onready var spritesheet_tab_options = $VBoxContainer/HBoxContainer/SpritesheetTabOptions
@@ -122,7 +121,7 @@ func _on_PreviewDialog_confirmed() -> void:
 				if !recycle_last_slice_result:
 					obtain_sliced_data()
 				OpenSave.open_image_as_spritesheet_tab_smart(
-					path, image, sliced_rects["rects"], sliced_rects["frame_size"]
+					path, image, sliced_rects.rects, sliced_rects.frame_size
 				)
 			else:
 				OpenSave.open_image_as_spritesheet_tab(
@@ -262,7 +261,7 @@ func synchronize() -> void:
 func _on_ImportOption_item_selected(id: ImageImportOptions) -> void:
 	current_import_option = id
 	OpenSave.last_dialog_option = current_import_option
-	smart_slice_checkbox.pressed = false
+	smart_slice_checkbox.button_pressed = false
 	apply_all.disabled = false
 	smart_slice = false
 	smart_slice_checkbox.visible = false
@@ -331,52 +330,50 @@ func _on_ImportOption_item_selected(id: ImageImportOptions) -> void:
 
 	elif id == ImageImportOptions.BRUSH:
 		new_brush_options.visible = true
-
-	rect_size = get_child(0).rect_size + _content_offset
-	update()
+#	queue_redraw()
 
 
-func _on_SmartSlice_toggled(button_pressed: bool) -> void:
+func _on_smart_slice_toggled(button_pressed: bool) -> void:
 	setup_smart_slice(button_pressed)
 
 
 func setup_smart_slice(enabled: bool) -> void:
 	spritesheet_smart_tab_options.visible = enabled
 	spritesheet_manual_tab_options.visible = !enabled
-	if is_master:  # disable apply all (the algorithm is not fast enough for this)
-		apply_all.pressed = false
+	if is_main:  # Disable apply all (the algorithm is not fast enough for this)
+		apply_all.button_pressed = false
 	apply_all.disabled = enabled
 	smart_slice = enabled
 	if !recycle_last_slice_result and enabled:
 		slice_preview()
-	update()
+	_call_queue_redraw()
 
 
 func obtain_sliced_data() -> void:
 	var unpak := RegionUnpacker.new(merge_threshold.value, merge_dist.value)
-	sliced_rects = unpak.get_used_rects(texture_rect.texture.get_data())
+	sliced_rects = unpak.get_used_rects(texture_rect.texture.get_image())
 
 
 func slice_preview():
-	sliced_rects.clear()
+	sliced_rects = null
 	obtain_sliced_data()
 	recycle_last_slice_result = true
-	var size = sliced_rects["frame_size"]
-	frame_size_label.text = tr("Frame Size") + ": " + str(size.x) + "×" + str(size.y)
+	var frame_size := sliced_rects.frame_size
+	frame_size_label.text = tr("Frame Size") + ": " + str(frame_size.x) + "×" + str(frame_size.y)
 
 
-func _on_Threshold_value_changed(_value: float) -> void:
+func _on_threshold_value_changed(_value: float) -> void:
 	recycle_last_slice_result = false
 
 
-func _on_MergeDist_value_changed(_value: float) -> void:
+func _on_merge_dist_value_changed(_value: float) -> void:
 	recycle_last_slice_result = false
 
 
-func _on_Slice_pressed() -> void:
+func _on_slice_pressed() -> void:
 	if !recycle_last_slice_result:
 		slice_preview()
-	update()
+	_call_queue_redraw()
 
 
 func _on_HorizontalFrames_value_changed(value: int) -> void:
@@ -390,10 +387,10 @@ func _on_VerticalFrames_value_changed(value: int) -> void:
 
 
 func spritesheet_frame_value_changed() -> void:
-	var frame_width = floor(image.get_size().x / spritesheet_horizontal)
-	var frame_height = floor(image.get_size().y / spritesheet_vertical)
+	var frame_width := floori(image.get_size().x / spritesheet_horizontal)
+	var frame_height := floori(image.get_size().y / spritesheet_vertical)
 	frame_size_label.text = tr("Frame Size") + ": " + str(frame_width) + "×" + str(frame_height)
-	update()
+	_call_queue_redraw()
 
 
 func _on_BrushTypeOption_item_selected(index: BrushTypes) -> void:
@@ -443,15 +440,15 @@ func add_brush() -> void:
 		dir.list_dir_end()
 
 		var file_ext: String = path.get_file().get_extension()
-		var index: int = random_brushes.size() + 1
+		var index := random_brushes.size() + 1
 		var file_name = "~" + brush_name + str(index) + "." + file_ext
 		var location := "Brushes".path_join(brush_name).path_join(file_name)
 		dir.copy(path, Global.directory_module.xdg_data_home.path_join(location))
 
 
-# Checks if the file already exists
-# If it does, add a number to its name, for example
-# "Brush_Name" will become "Brush_Name (2)", "Brush_Name (3)", etc.
+## Checks if the file already exists
+## If it does, add a number to its name, for example
+## "Brush_Name" will become "Brush_Name (2)", "Brush_Name (3)", etc.
 func file_name_replace(file_name: String, folder: String) -> String:
 	var i := 1
 	var file_ext := file_name.get_extension()
@@ -465,19 +462,16 @@ func file_name_replace(file_name: String, folder: String) -> String:
 	return file_name
 
 
-func _on_PreviewDialog_item_rect_changed() -> void:
-	update()
-
-
-func _draw() -> void:
-	$"%SmartSlice".show_preview([])
+func _call_queue_redraw() -> void:
+	var empty_array: Array[Rect2i] = []
+	$"%SmartSlice".show_preview(empty_array)
 	$"%RowColumnLines".show_preview(1, 1)
 	if (
 		current_import_option == ImageImportOptions.SPRITESHEET_TAB
 		or current_import_option == ImageImportOptions.SPRITESHEET_LAYER
 	):
 		if smart_slice:
-			if "rects" in sliced_rects.keys():
-				$"%SmartSlice".show_preview(sliced_rects["rects"])
+			if is_instance_valid(sliced_rects) and not sliced_rects.rects.is_empty():
+				$"%SmartSlice".show_preview(sliced_rects.rects)
 		else:
 			$"%RowColumnLines".show_preview(spritesheet_vertical, spritesheet_horizontal)
