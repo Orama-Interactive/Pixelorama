@@ -131,9 +131,7 @@ func zoom_camera(dir: int) -> void:
 		var zoom_margin := zoom * dir / 5
 		var new_zoom := zoom + zoom_margin
 		if Global.integer_zoom:
-			new_zoom = zoom / (Vector2.ONE - dir * zoom)
-			if new_zoom == Vector2.INF:
-				return
+			new_zoom = (zoom + Vector2.ONE * dir).floor()
 		if new_zoom < zoom_in_max && new_zoom > zoom_out_max:
 			var new_offset := (
 				offset
@@ -151,9 +149,7 @@ func zoom_camera(dir: int) -> void:
 		var prev_zoom := zoom
 		var zoom_margin := zoom * dir / 10
 		if Global.integer_zoom:
-			zoom_margin = (zoom / (Vector2.ONE - dir * zoom)) - zoom
-			if zoom_margin == Vector2.INF:
-				return
+			zoom_margin = (Vector2.ONE * dir).floor()
 		if zoom + zoom_margin < zoom_in_max:
 			zoom += zoom_margin
 		if zoom < zoom_out_max:

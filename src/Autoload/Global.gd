@@ -265,9 +265,11 @@ func set_integer_zoom(enabled: bool):
 	integer_zoom = enabled
 	var zoom_slider: ValueSlider = top_menu_container.get_node("%ZoomSlider")
 	if enabled:
+		zoom_slider.min_value = 100
 		zoom_slider.snap_step = 100
 		zoom_slider.step = 100
 	else:
+		zoom_slider.min_value = 1
 		zoom_slider.snap_step = 1
 		zoom_slider.step = 1
 	zoom_slider.value = zoom_slider.value  # to trigger signal emmission
