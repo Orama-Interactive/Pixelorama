@@ -90,3 +90,9 @@ func _on_ApplyFilter_toggled(button_pressed: bool) -> void:
 		else:
 			element.texture.flags = Texture.FLAG_MIPMAPS
 	element.change_properties()
+
+
+func _on_Silhouette_toggled(button_pressed: bool) -> void:
+	element.silhouette = button_pressed
+	element.get_material().set_shader_param("show_silhouette", button_pressed)
+	element.change_properties()

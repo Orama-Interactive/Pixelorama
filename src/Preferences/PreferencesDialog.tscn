@@ -11,6 +11,7 @@
 [sub_resource type="ButtonGroup" id=1]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
+visible = true
 margin_right = 620.0
 margin_bottom = 450.0
 window_title = "Preferences"
@@ -153,7 +154,7 @@ text = "System Language"
 visible = false
 margin_top = 74.0
 margin_right = 498.0
-margin_bottom = 284.0
+margin_bottom = 280.0
 
 [node name="InterfaceHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface"]
 margin_right = 498.0
@@ -173,26 +174,27 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="InterfaceOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_top = 18.0
+margin_right = 498.0
+margin_bottom = 66.0
 columns = 3
 
 [node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
-margin_top = 23.0
-margin_right = 88.0
-margin_bottom = 37.0
+margin_top = 3.0
+margin_right = 216.0
+margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "Display scale:"
 
 [node name="ShrinkContainer" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
-margin_top = 18.0
-margin_right = 498.0
-margin_bottom = 42.0
+margin_left = 220.0
+margin_right = 278.0
+margin_bottom = 20.0
 
 [node name="ShrinkSlider" type="TextureProgress" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/ShrinkContainer"]
 unique_name_in_owner = true
 margin_right = 6.0
-margin_bottom = 6.0
+margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme_type_variation = "ValueSlider"
@@ -208,33 +210,33 @@ stretch_margin_bottom = 3
 script = ExtResource( 8 )
 
 [node name="ShrinkApplyButton" type="Button" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions/ShrinkContainer"]
-margin_left = 297.0
-margin_right = 498.0
-margin_bottom = 24.0
+margin_left = 10.0
+margin_right = 58.0
+margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "Apply"
 
 [node name="DimLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
-margin_top = 51.0
-margin_right = 247.0
-margin_bottom = 65.0
+margin_left = 282.0
+margin_top = 3.0
+margin_right = 498.0
+margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "Dim interface on dialog popup"
 
 [node name="DimCheckBox" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
-margin_left = 251.0
-margin_top = 46.0
-margin_right = 498.0
-margin_bottom = 70.0
+margin_top = 24.0
+margin_right = 216.0
+margin_bottom = 48.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 pressed = true
 text = "On"
 
 [node name="ThemesHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface"]
-margin_top = 74.0
+margin_top = 70.0
 margin_right = 498.0
-margin_bottom = 88.0
+margin_bottom = 84.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ThemesHeader"]
@@ -250,9 +252,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="Themes" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface"]
-margin_top = 92.0
+margin_top = 88.0
 margin_right = 498.0
-margin_bottom = 96.0
+margin_bottom = 92.0
 script = ExtResource( 5 )
 
 [node name="ThemeButtons" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/Themes"]
@@ -276,9 +278,9 @@ margin_bottom = 4.0
 custom_constants/separation = 12
 
 [node name="ButtonHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface"]
-margin_top = 100.0
+margin_top = 96.0
 margin_right = 498.0
-margin_bottom = 114.0
+margin_bottom = 110.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonHeader"]
@@ -294,9 +296,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="ButtonOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface"]
-margin_top = 118.0
+margin_top = 114.0
 margin_right = 498.0
-margin_bottom = 210.0
+margin_bottom = 206.0
 columns = 3
 
 [node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonOptions"]
@@ -380,8 +382,9 @@ color = Color( 0.992157, 0.427451, 0.0784314, 1 )
 
 [node name="Canvas" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide"]
 visible = false
+margin_top = 74.0
 margin_right = 486.0
-margin_bottom = 572.0
+margin_bottom = 646.0
 
 [node name="ZoomHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas"]
 margin_right = 486.0
@@ -408,15 +411,15 @@ columns = 3
 
 [node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/ZoomOptions"]
 margin_top = 5.0
-margin_right = 149.0
+margin_right = 160.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 110, 0 )
 size_flags_horizontal = 3
 text = "Smooth Zoom"
 
 [node name="SmoothZoom" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/ZoomOptions"]
-margin_left = 153.0
-margin_right = 302.0
+margin_left = 164.0
+margin_right = 323.0
 margin_bottom = 24.0
 hint_tooltip = "Adds a smoother transition when zooming in or out"
 mouse_default_cursor_shape = 2
@@ -425,7 +428,7 @@ pressed = true
 text = "On"
 
 [node name="Label2" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/ZoomOptions"]
-margin_left = 306.0
+margin_left = 327.0
 margin_top = 5.0
 margin_right = 486.0
 margin_bottom = 19.0
@@ -435,7 +438,7 @@ text = "Integer Zoom"
 
 [node name="IntegerZoom" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/ZoomOptions"]
 margin_top = 28.0
-margin_right = 149.0
+margin_right = 160.0
 margin_bottom = 52.0
 hint_tooltip = "Restricts the value to be an integer multiple of 100%"
 mouse_default_cursor_shape = 2

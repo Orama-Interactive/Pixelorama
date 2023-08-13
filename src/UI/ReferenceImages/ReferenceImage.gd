@@ -9,6 +9,7 @@ var project = Global.current_project
 var image_path: String = ""
 
 var filter = false
+var silhouette := false
 
 
 func _ready() -> void:
@@ -43,6 +44,7 @@ func serialize() -> Dictionary:
 		"modulate_b": modulate.b,
 		"modulate_a": modulate.a,
 		"filter": filter,
+		"silhouette": silhouette,
 		"image_path": image_path
 	}
 
@@ -63,6 +65,13 @@ func deserialize(d: Dictionary) -> void:
 			# don't do FLAG_REPEAT - it could cause visual issues
 			itex.create_from_image(img, Texture.FLAG_MIPMAPS)
 			texture = itex
+		# Apply the silhouette shader
+		var mat = ShaderMaterial.new()
+		mat.shader = preload("res://src/Shaders/SilhouetteShader.tres")
+		# TODO: Lsbt - Add a option in prefrences to customize the color
+		mat.set_shader_param("silhouette_color", Color(0.069, 0.069326, 0.074219)) # A almost black
+		set_material(mat)
+		
 	# Now that the image may have been established...
 	position_reset()
 	if d.has("x"):
@@ -83,6 +92,8 @@ func deserialize(d: Dictionary) -> void:
 		modulate.a = d["modulate_a"]
 	if d.has("filter"):
 		filter = d["filter"]
+	if d.has("silhouette"):
+		get_material().set_shader_param("show_silhouette", d["silhouette"])
 	change_properties()
 
 

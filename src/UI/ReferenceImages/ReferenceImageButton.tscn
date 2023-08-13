@@ -14,41 +14,41 @@ script = ExtResource( 2 )
 [node name="Interior" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 304.0
+margin_right = 325.0
 margin_bottom = 133.0
 
 [node name="PathHeader" type="HBoxContainer" parent="Interior"]
-margin_right = 297.0
+margin_right = 318.0
 margin_bottom = 14.0
 custom_constants/separation = 0
 
 [node name="Path" type="LinkButton" parent="Interior/PathHeader"]
 modulate = Color( 0.552941, 1, 0.298039, 1 )
-margin_right = 99.0
+margin_right = 106.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 underline = 1
 
 [node name="PathHTML" type="Label" parent="Interior/PathHeader"]
 self_modulate = Color( 0.552941, 1, 0.298039, 1 )
-margin_left = 99.0
-margin_right = 198.0
+margin_left = 106.0
+margin_right = 212.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="HSeparator" type="HSeparator" parent="Interior/PathHeader"]
-margin_left = 198.0
-margin_right = 297.0
+margin_left = 212.0
+margin_right = 318.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="PreviewAndOptions" type="HBoxContainer" parent="Interior"]
 margin_top = 18.0
-margin_right = 297.0
+margin_right = 318.0
 margin_bottom = 98.0
 
 [node name="Options" type="GridContainer" parent="Interior/PreviewAndOptions"]
-margin_right = 213.0
+margin_right = 234.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 columns = 2
@@ -62,18 +62,18 @@ align = 2
 
 [node name="Position" type="HBoxContainer" parent="Interior/PreviewAndOptions/Options"]
 margin_left = 60.0
-margin_right = 213.0
+margin_right = 234.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="X" parent="Interior/PreviewAndOptions/Options/Position" instance=ExtResource( 1 )]
-margin_right = 74.0
+margin_right = 85.0
 allow_greater = true
 allow_lesser = true
 
 [node name="Y" parent="Interior/PreviewAndOptions/Options/Position" instance=ExtResource( 1 )]
-margin_left = 78.0
-margin_right = 153.0
+margin_left = 89.0
+margin_right = 174.0
 allow_greater = true
 allow_lesser = true
 
@@ -87,7 +87,7 @@ align = 2
 [node name="Scale" parent="Interior/PreviewAndOptions/Options" instance=ExtResource( 1 )]
 margin_left = 60.0
 margin_top = 28.0
-margin_right = 213.0
+margin_right = 234.0
 margin_bottom = 52.0
 allow_greater = true
 allow_lesser = true
@@ -102,12 +102,12 @@ align = 2
 [node name="Opacity" parent="Interior/PreviewAndOptions/Options" instance=ExtResource( 1 )]
 margin_left = 60.0
 margin_top = 56.0
-margin_right = 213.0
+margin_right = 234.0
 margin_bottom = 80.0
 
 [node name="PreviewPanel" type="Panel" parent="Interior/PreviewAndOptions"]
-margin_left = 217.0
-margin_right = 297.0
+margin_left = 238.0
+margin_right = 318.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 80 )
 
@@ -129,27 +129,33 @@ expand = true
 
 [node name="OtherOptions" type="HBoxContainer" parent="Interior"]
 margin_top = 102.0
-margin_right = 297.0
+margin_right = 318.0
 margin_bottom = 126.0
 alignment = 2
 
 [node name="ApplyFilter" type="CheckBox" parent="Interior/OtherOptions"]
-margin_left = 76.0
-margin_right = 177.0
+margin_right = 101.0
 margin_bottom = 24.0
 hint_tooltip = "Uses a magnifying filter, to enable smooth zooming in of the texture."
 text = "Apply Filter"
 align = 1
 
+[node name="Silhouette" type="CheckBox" parent="Interior/OtherOptions"]
+margin_left = 105.0
+margin_right = 198.0
+margin_bottom = 24.0
+text = "Silhouette"
+
 [node name="Reset" type="Button" parent="Interior/OtherOptions"]
-margin_left = 181.0
-margin_right = 229.0
+margin_left = 202.0
+margin_right = 250.0
 margin_bottom = 24.0
 text = "Reset"
+icon_align = 1
 
 [node name="Remove" type="Button" parent="Interior/OtherOptions"]
-margin_left = 233.0
-margin_right = 297.0
+margin_left = 254.0
+margin_right = 318.0
 margin_bottom = 24.0
 custom_colors/font_color = Color( 1, 0.266667, 0.266667, 1 )
 text = "Remove"
@@ -160,5 +166,6 @@ text = "Remove"
 [connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Scale" to="." method="_on_Scale_value_changed"]
 [connection signal="value_changed" from="Interior/PreviewAndOptions/Options/Opacity" to="." method="_on_Opacity_value_changed"]
 [connection signal="toggled" from="Interior/OtherOptions/ApplyFilter" to="." method="_on_ApplyFilter_toggled"]
+[connection signal="toggled" from="Interior/OtherOptions/Silhouette" to="." method="_on_Silhouette_toggled"]
 [connection signal="pressed" from="Interior/OtherOptions/Reset" to="." method="_on_Reset_pressed"]
 [connection signal="pressed" from="Interior/OtherOptions/Remove" to="." method="_on_Remove_pressed"]
