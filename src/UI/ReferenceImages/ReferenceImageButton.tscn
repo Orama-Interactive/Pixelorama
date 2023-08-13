@@ -144,6 +144,7 @@ align = 1
 margin_left = 105.0
 margin_right = 198.0
 margin_bottom = 24.0
+hint_tooltip = "Blacks out the image and makes all opaque pixels a dark color."
 text = "Silhouette"
 
 [node name="Reset" type="Button" parent="Interior/OtherOptions"]

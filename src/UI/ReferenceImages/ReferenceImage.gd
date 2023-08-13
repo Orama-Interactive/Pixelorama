@@ -71,7 +71,7 @@ func deserialize(d: Dictionary) -> void:
 		# TODO: Lsbt - Add a option in prefrences to customize the color
 		mat.set_shader_param("silhouette_color", Color(0.069, 0.069326, 0.074219)) # A almost black
 		set_material(mat)
-		
+
 	# Now that the image may have been established...
 	position_reset()
 	if d.has("x"):
