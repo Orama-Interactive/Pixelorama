@@ -69,7 +69,8 @@ func deserialize(d: Dictionary) -> void:
 		var mat = ShaderMaterial.new()
 		mat.shader = preload("res://src/Shaders/SilhouetteShader.gdshader")
 		# TODO: Lsbt - Add a option in prefrences to customize the color
-		mat.set_shader_param("silhouette_color", Color(0.069, 0.069326, 0.074219)) # A almost black
+		# This color is almost black because it is less harsh
+		mat.set_shader_param("silhouette_color", Color(0.069, 0.069326, 0.074219))
 		set_material(mat)
 
 	# Now that the image may have been established...
