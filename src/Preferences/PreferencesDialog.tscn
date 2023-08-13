@@ -11,7 +11,6 @@
 [sub_resource type="ButtonGroup" id=1]
 
 [node name="PreferencesDialog" type="AcceptDialog"]
-visible = true
 margin_right = 620.0
 margin_bottom = 450.0
 window_title = "Preferences"
