@@ -67,7 +67,7 @@ func deserialize(d: Dictionary) -> void:
 			texture = itex
 		# Apply the silhouette shader
 		var mat = ShaderMaterial.new()
-		mat.shader = preload("res://src/Shaders/SilhouetteShader.tres")
+		mat.shader = preload("res://src/Shaders/SilhouetteShader.gdshader")
 		# TODO: Lsbt - Add a option in prefrences to customize the color
 		mat.set_shader_param("silhouette_color", Color(0.069, 0.069326, 0.074219)) # A almost black
 		set_material(mat)

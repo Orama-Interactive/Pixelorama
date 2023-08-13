@@ -1,7 +1,4 @@
-[gd_resource type="Shader" format=2]
-
-[resource]
-code = "shader_type canvas_item;
+shader_type canvas_item;
 
 uniform vec4 silhouette_color: hint_color;
 uniform bool show_silhouette;
@@ -14,4 +11,4 @@ void fragment() {
 	} else {
 		COLOR = color
 	}
-}"
+}
