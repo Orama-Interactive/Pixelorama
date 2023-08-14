@@ -2609,3 +2609,9 @@ msgstr ""
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
 msgstr ""
+
+msgid "Silhouette"
+msgstr ""
+
+msgid "Blacks out the image and makes all opaque pixels a dark color."
+msgstr ""
