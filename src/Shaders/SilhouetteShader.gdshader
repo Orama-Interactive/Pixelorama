@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform vec4 silhouette_color: hint_color;
+uniform vec4 silhouette_color;
 uniform bool show_silhouette;
 
 void fragment() {
@@ -9,6 +9,6 @@ void fragment() {
 		color.rgb = silhouette_color.rgb;
 		COLOR.rgb = color.rgb;
 	} else {
-		COLOR = color
+		COLOR = color;
 	}
 }

@@ -67,11 +67,11 @@ func deserialize(d: Dictionary) -> void:
 			var itex := ImageTexture.create_from_image(img)
 			texture = itex
 		# Apply the silhouette shader
-		var mat = ShaderMaterial.new()
+		var mat := ShaderMaterial.new()
 		mat.shader = shader
 		# TODO: Lsbt - Add a option in prefrences to customize the color
 		# This color is almost black because it is less harsh
-		mat.set_shader_param("silhouette_color", Color(0.069, 0.069326, 0.074219))
+		mat.set_shader_parameter("silhouette_color", Color(0.069, 0.069326, 0.074219))
 		set_material(mat)
 
 	# Now that the image may have been established...
@@ -95,7 +95,7 @@ func deserialize(d: Dictionary) -> void:
 	if d.has("filter"):
 		filter = d["filter"]
 	if d.has("silhouette"):
-		get_material().set_shader_param("show_silhouette", d["silhouette"])
+		get_material().set_shader_parameter("show_silhouette", d["silhouette"])
 	change_properties()
 
 
