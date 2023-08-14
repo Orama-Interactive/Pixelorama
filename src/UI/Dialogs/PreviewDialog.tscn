@@ -18,24 +18,24 @@ offset_top = 8.0
 offset_right = -8.0
 offset_bottom = -49.0
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
-[node name="RowColumnLines" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
+[node name="RowColumnLines" type="Control" parent="VBoxContainer/AspectRatioContainer/TextureRect"]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_fni44")
 
-[node name="SmartSlice" type="Control" parent="VBoxContainer/CenterContainer/TextureRect"]
+[node name="SmartSlice" type="Control" parent="VBoxContainer/AspectRatioContainer/TextureRect"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -68,10 +68,12 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 text = "Import as:"
 
 [node name="ImportOption" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 mouse_default_cursor_shape = 2
 
 [node name="SpritesheetTabOptions" type="GridContainer" parent="VBoxContainer/HBoxContainer"]
@@ -158,10 +160,12 @@ layout_mode = 2
 
 [node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/SpritesheetLayerOptions"]
 layout_mode = 2
+size_flags_vertical = 0
 text = "Start frame:"
 
 [node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/HBoxContainer/SpritesheetLayerOptions"]
 layout_mode = 2
+size_flags_vertical = 0
 min_value = 1.0
 value = 1.0
 
@@ -248,6 +252,7 @@ layout_mode = 2
 
 [connection signal="about_to_popup" from="." to="." method="_on_PreviewDialog_about_to_show"]
 [connection signal="confirmed" from="." to="." method="_on_PreviewDialog_confirmed"]
+[connection signal="size_changed" from="." to="." method="_on_size_changed"]
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="toggled" from="VBoxContainer/ApplyAll" to="." method="_on_ApplyAll_toggled"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/ImportOption" to="." method="_on_ImportOption_item_selected"]
