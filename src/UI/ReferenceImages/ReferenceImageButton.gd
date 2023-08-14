@@ -84,7 +84,7 @@ func _on_Path_pressed() -> void:
 
 func _on_Silhouette_toggled(button_pressed: bool) -> void:
 	element.silhouette = button_pressed
-	element.get_material().set_shader_param("show_silhouette", button_pressed)
+	element.get_material().set_shader_parameter("show_silhouette", button_pressed)
 	element.change_properties()
 
 
