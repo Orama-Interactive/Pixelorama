@@ -6,6 +6,8 @@ signal properties_changed
 
 var project = Global.current_project
 
+var shader: Shader = preload("res://src/Shaders/SilhouetteShader.gdshader")
+
 var image_path: String = ""
 
 var filter = false
@@ -67,7 +69,7 @@ func deserialize(d: Dictionary) -> void:
 			texture = itex
 		# Apply the silhouette shader
 		var mat = ShaderMaterial.new()
-		mat.shader = preload("res://src/Shaders/SilhouetteShader.gdshader")
+		mat.shader = shader
 		# TODO: Lsbt - Add a option in prefrences to customize the color
 		# This color is almost black because it is less harsh
 		mat.set_shader_param("silhouette_color", Color(0.069, 0.069326, 0.074219))
