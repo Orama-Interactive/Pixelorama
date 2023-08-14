@@ -28,7 +28,7 @@ var opened_once := false
 var is_main := false
 var hiding := false
 
-@onready var texture_rect: TextureRect = $VBoxContainer/CenterContainer/TextureRect
+@onready var texture_rect: TextureRect = $VBoxContainer/AspectRatioContainer/TextureRect
 @onready var image_size_label: Label = $VBoxContainer/SizeContainer/ImageSizeLabel
 @onready var frame_size_label: Label = $VBoxContainer/SizeContainer/FrameSizeLabel
 @onready var smart_slice_checkbox := %SmartSliceButton as CheckBox
@@ -476,3 +476,7 @@ func _call_queue_redraw() -> void:
 				$"%SmartSlice".show_preview(sliced_rects.rects)
 		else:
 			$"%RowColumnLines".show_preview(spritesheet_vertical, spritesheet_horizontal)
+
+
+func _on_size_changed() -> void:
+	_call_queue_redraw()
