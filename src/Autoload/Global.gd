@@ -46,13 +46,15 @@ enum HelpMenu {
 }
 
 const OVERRIDE_FILE := "override.cfg"
+const HOME_SUBDIR_NAME := "pixelorama"
+const CONFIG_SUBDIR_NAME := "pixelorama_data"
 
 var root_directory := "."
+var home_data_directory := OS.get_data_dir().path_join(HOME_SUBDIR_NAME)
+var data_directories: PackedStringArray = [home_data_directory]  ## Only read from these directories
 var window_title := "":
 	set = _title_changed
 var config_cache := ConfigFile.new()
-var XDGDataPaths := preload("res://src/XDGDataPaths.gd")
-var directory_module: RefCounted
 
 var projects: Array[Project] = []
 var current_project: Project
@@ -228,18 +230,26 @@ var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.ts
 
 
 func _init() -> void:
+	if OS.has_feature("standalone"):
+		root_directory = OS.get_executable_path().get_base_dir()
+	data_directories.append(root_directory.path_join(CONFIG_SUBDIR_NAME))
+	if OS.get_name() in ["Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD"]:
+		# Checks the list of files var, and processes them.
+		if OS.has_environment("XDG_DATA_DIRS"):
+			var raw_env_var := OS.get_environment("XDG_DATA_DIRS")  # includes empties.
+			var unappended_subdirs := raw_env_var.split(":", true)
+			for unapp_subdir in unappended_subdirs:
+				data_directories.append(unapp_subdir.path_join(HOME_SUBDIR_NAME))
+		else:
+			# Create defaults
+			for default_loc in ["/usr/local/share", "/usr/share"]:
+				data_directories.append(default_loc.path_join(HOME_SUBDIR_NAME))
 	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
 		tablet_driver = 1
 
 
 func _ready() -> void:
 	_initialize_keychain()
-
-	if OS.has_feature("standalone"):
-		root_directory = OS.get_executable_path().get_base_dir()
-	# root_directory must be set earlier than this is because XDGDataDirs depends on it
-	directory_module = XDGDataPaths.new()
-
 	# Load settings from the config file
 	config_cache.load("user://cache.ini")
 
@@ -554,3 +564,10 @@ func update_hint_tooltips() -> void:
 			var event_type: InputEvent = events[0]
 			hint = event_type.as_text()
 		tip.tooltip_text = tr(ui_tooltips[tip]) % hint
+
+
+func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStringArray:
+	var res := PackedStringArray()
+	for _path in basepaths:
+		res.append(_path.path_join(subpath))
+	return res

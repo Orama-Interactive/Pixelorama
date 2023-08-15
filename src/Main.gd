@@ -28,8 +28,8 @@ func _ready() -> void:
 	Global.animation_timeline.project_changed()
 	Global.current_project.toggle_frame_buttons()
 
-	Import.import_brushes(Global.directory_module.get_brushes_search_path_in_order())
-	Import.import_patterns(Global.directory_module.get_patterns_search_path_in_order())
+	Import.import_brushes(Global.path_join_array(Global.data_directories, "Brushes"))
+	Import.import_patterns(Global.path_join_array(Global.data_directories, "Patterns"))
 
 	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
 	quit_and_save_dialog.get_ok_button().text = "Save & Exit"

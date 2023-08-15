@@ -187,7 +187,7 @@ func _on_PreviewDialog_confirmed() -> void:
 			# Copy the image file into the "pixelorama/Patterns" directory
 			var location := "Patterns".path_join(file_name_ext)
 			var dir := DirAccess.open(path)
-			dir.copy(path, Global.directory_module.xdg_data_home.path_join(location))
+			dir.copy(path, Global.home_data_directory.path_join(location))
 
 
 func _on_ApplyAll_toggled(pressed: bool) -> void:
@@ -413,7 +413,7 @@ func add_brush() -> void:
 		# Copy the image file into the "pixelorama/Brushes" directory
 		var location := "Brushes".path_join(file_name_ext)
 		var dir := DirAccess.open(path)
-		dir.copy(path, Global.directory_module.xdg_data_home.path_join(location))
+		dir.copy(path, Global.home_data_directory.path_join(location))
 
 	elif brush_type == BrushTypes.PROJECT:
 		var file_name: String = path.get_file().get_basename()
@@ -424,13 +424,11 @@ func add_brush() -> void:
 		var brush_name = new_brush_name.get_node("BrushNameLineEdit").text.to_lower()
 		if !brush_name.is_valid_filename():
 			return
-		var dir := DirAccess.open(Global.directory_module.xdg_data_home.path_join("Brushes"))
+		var dir := DirAccess.open(Global.home_data_directory.path_join("Brushes"))
 		if !dir.dir_exists(brush_name):
 			dir.make_dir(brush_name)
 
-		dir = DirAccess.open(
-			Global.directory_module.xdg_data_home.path_join("Brushes").path_join(brush_name)
-		)
+		dir = DirAccess.open(Global.home_data_directory.path_join("Brushes").path_join(brush_name))
 		var random_brushes := []
 		dir.list_dir_begin()
 		var curr_file := dir.get_next()
@@ -444,7 +442,7 @@ func add_brush() -> void:
 		var index := random_brushes.size() + 1
 		var file_name = "~" + brush_name + str(index) + "." + file_ext
 		var location := "Brushes".path_join(brush_name).path_join(file_name)
-		dir.copy(path, Global.directory_module.xdg_data_home.path_join(location))
+		dir.copy(path, Global.home_data_directory.path_join(location))
 
 
 ## Checks if the file already exists
@@ -454,7 +452,7 @@ func file_name_replace(file_name: String, folder: String) -> String:
 	var i := 1
 	var file_ext := file_name.get_extension()
 	var temp_name := file_name
-	var dir := DirAccess.open(Global.directory_module.xdg_data_home.path_join(folder))
+	var dir := DirAccess.open(Global.home_data_directory.path_join(folder))
 	while dir.file_exists(temp_name):
 		i += 1
 		temp_name = file_name.get_basename() + " (%s)" % i

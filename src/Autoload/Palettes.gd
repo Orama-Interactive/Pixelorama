@@ -10,6 +10,7 @@ enum NewPalettePresetType {
 enum GetColorsFrom { CURRENT_FRAME = 0, CURRENT_CEL = 1, ALL_FRAMES = 2 }
 
 const DEFAULT_PALETTE_NAME = "Default"
+var palettes_write_path: String = Global.home_data_directory.path_join("Palettes")
 # All available palettes
 var palettes := {}
 # Currently displayed palette
@@ -61,10 +62,14 @@ func _current_palette_save() -> String:
 	return save_path
 
 
-func _save_palette(palette: Palette) -> String:
-	Global.directory_module.ensure_xdg_user_dirs_exist()
-	var palettes_write_path: String = Global.directory_module.get_palette_write_path()
+func _ensure_palette_directory_exists() -> void:
+	var dir := DirAccess.open(Global.home_data_directory)
+	if not dir.dir_exists(palettes_write_path):
+		dir.make_dir(palettes_write_path)
 
+
+func _save_palette(palette: Palette) -> String:
+	_ensure_palette_directory_exists()
 	# Save old resource name and set new resource name
 	var old_resource_name = palette.resource_name
 	palette.set_resource_name(palette.name)
@@ -319,10 +324,9 @@ func _check_palette_settings_values(palette_name: String, width: int, height: in
 
 
 func _load_palettes() -> void:
-	Global.directory_module.ensure_xdg_user_dirs_exist()
-	var search_locations = Global.directory_module.get_palette_search_path_in_order()
+	_ensure_palette_directory_exists()
+	var search_locations = Global.path_join_array(Global.data_directories, "Palettes")
 	var priority_ordered_files := _get_palette_priority_file_map(search_locations)
-	var palettes_write_path: String = Global.directory_module.get_palette_write_path()
 
 	# Iterate backwards, so any palettes defined in default files
 	# get overwritten by those of the same name in user files
