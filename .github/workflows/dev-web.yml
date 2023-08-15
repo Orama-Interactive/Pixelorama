@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  GODOT_VERSION: 3.5.2
+  GODOT_VERSION: 4.1.1
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
     name: Web Export 🌐
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.5.2
+      image: docker://barichello/godot-ci:4.1.1
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -25,10 +25,10 @@ jobs:
           submodules: true
       - name: Setup 💻
         run: |
-          mkdir -v -p build/web ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          mkdir -v -p build/web ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Web Build 🔧
-        run: godot -v --export "HTML5" ./build/web/index.html
+        run: godot -v --export-release "Web" ./build/web/index.html
       - name: Install rsync 📚
         run: |
           apt-get update && apt-get install -y rsync
