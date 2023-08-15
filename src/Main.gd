@@ -15,8 +15,6 @@ var cursor_image: Texture2D = preload("res://assets/graphics/cursor.png")
 
 func _init() -> void:
 	Global.shrink = _get_auto_display_scale()
-	if OS.get_name() == "OSX":
-		_use_osx_shortcuts()
 
 
 func _ready() -> void:
@@ -385,22 +383,6 @@ func _on_backup_confirmation_visibility_changed() -> void:
 	if Global.enable_autosave:
 		OpenSave.autosave_timer.start()
 	Global.dialog_open(false)
-
-
-func _use_osx_shortcuts() -> void:
-	for action in InputMap.get_actions():
-		var action_list: Array = InputMap.action_get_events(action)
-		if action_list.size() == 0:
-			continue
-		var event: InputEvent = action_list[0]
-
-		if event.is_action("show_pixel_grid"):
-			event.shift_pressed = true
-
-
-#		if event.control_pressed:
-#			event.control = false
-#			event.command = true
 
 
 func _exit_tree() -> void:
