@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-08-15 00:21\n"
+"PO-Revision-Date: 2023-08-15 17:55\n"
 
 msgid "OK"
 msgstr "确定"
@@ -407,7 +407,7 @@ msgstr ""
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "阈值："
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
@@ -1330,11 +1330,11 @@ msgstr "显示在画布上标尺参考线的颜色"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "吸附"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "吸附距离："
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in pixels where guide and grid snapping gets activated."
@@ -2486,28 +2486,28 @@ msgid "Custom model"
 msgstr ""
 
 msgid "Selected object:"
-msgstr ""
+msgstr "已选对象"
 
 msgid "Add new object"
-msgstr ""
+msgstr "添加新对象"
 
 msgid "Remove object"
-msgstr ""
+msgstr "删除对象"
 
 msgid "Camera"
-msgstr ""
+msgstr "相机"
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
-msgstr ""
+msgstr "投影："
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
-msgstr ""
+msgstr "透视"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Orthogonal"
-msgstr ""
+msgstr "正交"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
@@ -2517,7 +2517,7 @@ msgid "Rotation:"
 msgstr ""
 
 msgid "Scale:"
-msgstr ""
+msgstr "缩放："
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
@@ -2533,7 +2533,7 @@ msgstr ""
 
 #. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
-msgstr ""
+msgstr "可见："
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
@@ -2572,7 +2572,7 @@ msgid "Bottom radius:"
 msgstr ""
 
 msgid "Text:"
-msgstr ""
+msgstr "文本:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
@@ -2586,10 +2586,10 @@ msgid "Horizontal alignment:"
 msgstr ""
 
 msgid "Left"
-msgstr ""
+msgstr "左"
 
 msgid "Right"
-msgstr ""
+msgstr "右"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
