@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-08-07 12:25\n"
+"PO-Revision-Date: 2023-08-15 00:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2684,4 +2684,10 @@ msgstr "Odbijanie na końcach"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
 msgstr "Wycofująca się na końcach"
+
+msgid "Silhouette"
+msgstr ""
+
+msgid "Blacks out the image and makes all opaque pixels a dark color."
+msgstr ""
 
