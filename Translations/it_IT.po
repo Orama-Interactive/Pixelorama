@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-08-07 13:45\n"
+"PO-Revision-Date: 2023-08-15 00:21\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2685,4 +2685,10 @@ msgstr "Rimbalzo alla fine"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
 msgstr "Rimozione alle estremità"
+
+msgid "Silhouette"
+msgstr ""
+
+msgid "Blacks out the image and makes all opaque pixels a dark color."
+msgstr ""
 
