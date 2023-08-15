@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2023-08-15 00:21\n"
+"PO-Revision-Date: 2023-08-15 16:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -403,27 +403,27 @@ msgstr "Klatki pionowe:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr ""
+msgstr "Inteligentne wycinki"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "Próg:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
-msgstr ""
+msgstr "Obrazy, które mają jedną stronę mniejszą niż ta wartość, przekroczą próg"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
-msgstr ""
+msgstr "Odległość połączenia:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr ""
+msgstr "Obrazy, które przekroczyły próg, zostaną połączone w większy obraz, jeśli są w tej odległości"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr ""
+msgstr "Odśwież"
 
 msgid "Start frame:"
 msgstr "Klatka początkowa:"
@@ -691,11 +691,11 @@ msgstr "Dodaje płynniejsze przejścia, kiedy się przybliża lub oddala"
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "Powiększenie stopniowe"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr ""
+msgstr "Ogranicza przybliżenie do wielokrotności 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Czułość nacisku na tablecie:"
@@ -2686,8 +2686,8 @@ msgid "Backing out at ends"
 msgstr "Wycofująca się na końcach"
 
 msgid "Silhouette"
-msgstr ""
+msgstr "Sylwetka"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
-msgstr ""
+msgstr "Zaciemnia obraz i zamienia nieprzezroczyste piksele na ciemny kolor."
 
