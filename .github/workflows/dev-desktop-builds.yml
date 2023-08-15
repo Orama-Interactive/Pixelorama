@@ -10,15 +10,13 @@ on:
     - "installer/*.pot"
     - "installer/po/*"
 
-
 concurrency:
   group: ci-${{github.actor}}-${{github.head_ref || github.run_number}}-${{github.ref}}-devdesktop
   cancel-in-progress: true
 
 env:
-  GODOT_VERSION: 3.5.2
-  GODOT_VERSION_MAC: 3.5.2
-  RASPBERRY_PI_BUILDS_VERSION: 1.15.0
+  GODOT_VERSION: 4.1.1
+  GODOT_VERSION_MAC: 4.1.1
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -26,7 +24,7 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.5.2
+      image: docker://barichello/godot-ci:4.1.1
     steps:
       - name: Setup WINE and rcedit 🍷
         run: |
@@ -44,10 +42,10 @@ jobs:
           submodules: true
       - name: Setup 💻
         run: |
-          mkdir -v -p build/windows-64bit  ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          mkdir -v -p build/windows-64bit  ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Windows Build 🔧
-        run: godot -v --export "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
+        run: godot -v --export-release "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
       - name: Copy pixelorama_data folder 📁
         run: |
           cp -R ./pixelorama_data ./build/windows-64bit
@@ -63,7 +61,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:3.5.2
+      image: docker://barichello/godot-ci:4.1.1
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -71,41 +69,27 @@ jobs:
           submodules: true
       - name: Setup 💻
         run: |
-          mkdir -v -p build/linux-64bit build/linux-rpi4 ~/.local/share/godot/templates
+          mkdir -v -p build/linux-64bit ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Download Unofficial Godot Raspberry Pi 4 Builds 🍇
-        run: |
-          wget https://github.com/hiulit/Unofficial-Godot-Engine-Raspberry-Pi/releases/download/v${RASPBERRY_PI_BUILDS_VERSION}/godot_${GODOT_VERSION}-stable_rpi4.zip
-          unzip -a godot_${GODOT_VERSION}-stable_rpi4.zip
       - name: Linux Build 🔧
         run: |
-          godot -v --export "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
-          godot -v --export "Raspberry Pi 4" ./build/linux-rpi4/$EXPORT_NAME.rpi4
+          godot -v --export-release "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
       - name: Give execute permission ☑️
         run: |
           chmod +x ./build/linux-64bit/$EXPORT_NAME.x86_64
-          chmod +x ./build/linux-rpi4/$EXPORT_NAME.rpi4
       - name: Copy pixelorama_data folder 📁
         run: |
           rm ./pixelorama_data/.gdignore
           cp -R ./pixelorama_data ./build/linux-64bit
-          cp -R ./pixelorama_data ./build/linux-rpi4
       - name: Create tar.gz archive 🗜️
         run: |
           cd build
           tar zcvf linux-64bit.tar.gz linux-64bit
-          tar zcvf linux-rpi4.tar.gz linux-rpi4
       - name: Upload Artifact 🚀
         uses: actions/upload-artifact@v3
         with:
           name: Linux-64bit
           path: ./build/linux-64bit.tar.gz
-          retention-days: 14
-      - name: Upload Raspberry Pi 4 Artifact 🚀
-        uses: actions/upload-artifact@v3
-        with:
-          name: Linux-rpi4
-          path: ./build/linux-rpi4.tar.gz
           retention-days: 14
 
   export-mac:
@@ -128,15 +112,15 @@ jobs:
           mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION_MAC}.stable
       - name: Download Godot headless binary 🤖
         run: |
-          wget https://github.com/huskeee/godot-headless-mac/releases/download/${GODOT_VERSION_MAC}-stable/Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip
-          unzip -a Godot_v${GODOT_VERSION_MAC}-stable_mac_headless.64.zip  
+          wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION_MAC}-stable/Godot_v${GODOT_VERSION_MAC}-stable_macos_universal.zip
+          unzip -a Godot_v${GODOT_VERSION_MAC}-stable_macos_universal.zip
       - name: Setup 💻
         run: mkdir -v -p ./build/mac
       - name: Mac Build 🔧
         run: |
           chown runner ./bin/Godot
           chmod +x ./bin/Godot
-          ./bin/Godot -v --export "Mac OSX" ./build/mac/Pixelorama.zip
+          ./bin/Godot --headless -v --export-release "macOS" ./build/mac/Pixelorama.zip
       - name: Make application executable 🔧
         run: |
           unzip -a ./build/mac/Pixelorama.zip -d ./build/mac
