@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-08-15 00:21\n"
+"PO-Revision-Date: 2023-08-15 04:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2687,8 +2687,8 @@ msgid "Backing out at ends"
 msgstr "終了時にバックアウト"
 
 msgid "Silhouette"
-msgstr ""
+msgstr "シルエット"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
-msgstr ""
+msgstr "画像をブラックアウトし、すべての不透明なピクセルを暗い色にします。"
 
