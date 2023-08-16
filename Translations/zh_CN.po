@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-08-15 18:59\n"
+"PO-Revision-Date: 2023-08-16 10:54\n"
 
 msgid "OK"
 msgstr "确定"
@@ -411,7 +411,7 @@ msgstr "阈值："
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
-msgstr ""
+msgstr "任何一侧小于该值的图像将超过阈值"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
@@ -419,11 +419,11 @@ msgstr "合并距离："
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr ""
+msgstr "如果超过阈值的图像在此距离内，则会合并为更大的图像"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr ""
+msgstr "刷新"
 
 msgid "Start frame:"
 msgstr "开始帧："
@@ -692,11 +692,11 @@ msgstr "放大或缩小时添加一个更平滑的过渡"
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "整数缩放"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr ""
+msgstr "将值限制为 100% 的整数倍"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "绘图板压力灵敏度："
@@ -2687,8 +2687,8 @@ msgid "Backing out at ends"
 msgstr ""
 
 msgid "Silhouette"
-msgstr ""
+msgstr "轮廓"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
-msgstr ""
+msgstr "使图像变黑，并使所有不透明像素变成深色。"
 
