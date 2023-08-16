@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-08-15 00:21\n"
+"PO-Revision-Date: 2023-08-16 00:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2686,8 +2686,8 @@ msgid "Backing out at ends"
 msgstr "Recuando nos finais"
 
 msgid "Silhouette"
-msgstr ""
+msgstr "Silhueta"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
-msgstr ""
+msgstr "Apaga a imagem e torna todos os pixels opacos em uma cor escura."
 
