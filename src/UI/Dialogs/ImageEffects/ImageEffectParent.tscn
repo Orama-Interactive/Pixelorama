@@ -8,6 +8,7 @@
 [node name="ImageEffectParent" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0
 size = Vector2i(360, 316)
+exclusive = false
 script = ExtResource("3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

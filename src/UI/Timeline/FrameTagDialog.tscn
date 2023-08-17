@@ -6,6 +6,7 @@
 [node name="FrameTagDialog" type="AcceptDialog"]
 title = "Frame Tag Properties"
 size = Vector2i(413, 300)
+exclusive = false
 script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -61,6 +62,7 @@ text = "Animation plays only on frames of the same tag"
 
 [node name="TagOptions" type="ConfirmationDialog" parent="."]
 size = Vector2i(303, 127)
+exclusive = false
 
 [node name="GridContainer" type="GridContainer" parent="TagOptions"]
 offset_left = 8.0

@@ -13,6 +13,7 @@
 [node name="PreferencesDialog" type="AcceptDialog"]
 title = "Preferences"
 size = Vector2i(800, 500)
+exclusive = false
 script = ExtResource("1")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]

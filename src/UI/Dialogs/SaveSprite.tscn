@@ -2,5 +2,6 @@
 
 [node name="SaveSprite" type="FileDialog"]
 size = Vector2i(675, 400)
+exclusive = false
 access = 2
 filters = PackedStringArray("*.pxo ; Pixelorama Project")
