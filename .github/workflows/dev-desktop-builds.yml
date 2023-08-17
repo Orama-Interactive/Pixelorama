@@ -33,7 +33,7 @@ jobs:
           wget https://github.com/electron/rcedit/releases/download/v1.1.1/rcedit-x64.exe
           mkdir -v -p ~/.local/share/rcedit
           mv rcedit-x64.exe ~/.local/share/rcedit
-          godot -q
+          godot --headless -q
           echo 'export/windows/wine = "/usr/bin/wine"' >> ~/.config/godot/editor_settings-3.tres
           echo 'export/windows/rcedit = "/github/home/.local/share/rcedit/rcedit-x64.exe"' >> ~/.config/godot/editor_settings-3.tres
       - name: Checkout 🛎️
@@ -45,7 +45,7 @@ jobs:
           mkdir -v -p build/windows-64bit  ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Windows Build 🔧
-        run: godot -v --export-release "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
+        run: godot --headless -v --export-release "Windows Desktop 64-bit" ./build/windows-64bit/$EXPORT_NAME.exe
       - name: Copy pixelorama_data folder 📁
         run: |
           cp -R ./pixelorama_data ./build/windows-64bit
@@ -73,7 +73,7 @@ jobs:
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Linux Build 🔧
         run: |
-          godot -v --export-release "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
+          godot --headless -v --export-release "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
       - name: Give execute permission ☑️
         run: |
           chmod +x ./build/linux-64bit/$EXPORT_NAME.x86_64
@@ -118,9 +118,9 @@ jobs:
         run: mkdir -v -p ./build/mac
       - name: Mac Build 🔧
         run: |
-          chown runner ./bin/Godot
-          chmod +x ./bin/Godot
-          ./bin/Godot --headless -v --export-release "macOS" ./build/mac/Pixelorama.zip
+          chown runner ./Godot
+          chmod +x ./Godot
+          ./Godot --headless -v --export-release "macOS" ./build/mac/Pixelorama.zip
       - name: Make application executable 🔧
         run: |
           unzip -a ./build/mac/Pixelorama.zip -d ./build/mac
