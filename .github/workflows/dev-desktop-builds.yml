@@ -69,8 +69,8 @@ jobs:
           submodules: true
       - name: Setup 💻
         run: |
-          mkdir -v -p build/linux-64bit ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          mkdir -v -p build/linux-64bit ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Linux Build 🔧
         run: |
           godot --headless -v --export-release "Linux/X11 64-bit" ./build/linux-64bit/$EXPORT_NAME.x86_64
@@ -106,10 +106,10 @@ jobs:
           export EXPORT_NAME=Pixelorama
       - name: Download and extract export templates 💾
         run: |
-          mkdir -v -p ~/.local/share/godot/templates/${GODOT_VERSION_MAC}.stable
+          mkdir -v -p ~/.local/share/godot/export_templates/${GODOT_VERSION_MAC}.stable
           curl -O https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION_MAC}/Godot_v${GODOT_VERSION_MAC}-stable_export_templates.tpz
           unzip -a Godot_v${GODOT_VERSION_MAC}-stable_export_templates.tpz
-          mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION_MAC}.stable
+          mv ./export_templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION_MAC}.stable
       - name: Download Godot headless binary 🤖
         run: |
           wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION_MAC}-stable/Godot_v${GODOT_VERSION_MAC}-stable_macos.universal.zip
