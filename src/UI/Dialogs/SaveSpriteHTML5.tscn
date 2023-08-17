@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cltlo2whtiejd"]
 
 [node name="SaveSpriteHTML5" type="ConfirmationDialog"]
+exclusive = false
 
 [node name="FileNameContainer" type="HBoxContainer" parent="."]
 anchors_preset = 10
