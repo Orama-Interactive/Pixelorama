@@ -33,9 +33,9 @@ jobs:
           wget https://github.com/electron/rcedit/releases/download/v1.1.1/rcedit-x64.exe
           mkdir -v -p ~/.local/share/rcedit
           mv rcedit-x64.exe ~/.local/share/rcedit
-          godot --headless -q
-          echo 'export/windows/wine = "/usr/bin/wine"' >> ~/.config/godot/editor_settings-3.tres
-          echo 'export/windows/rcedit = "/github/home/.local/share/rcedit/rcedit-x64.exe"' >> ~/.config/godot/editor_settings-3.tres
+          godot --headless --quit
+          echo 'export/windows/wine = "/usr/bin/wine"' >> ~/.config/godot/editor_settings-4.tres
+          echo 'export/windows/rcedit = "/github/home/.local/share/rcedit/rcedit-x64.exe"' >> ~/.config/godot/editor_settings-4.tres
       - name: Checkout 🛎️
         uses: actions/checkout@v3
         with:
@@ -106,10 +106,10 @@ jobs:
           export EXPORT_NAME=Pixelorama
       - name: Download and extract export templates 💾
         run: |
-          mkdir -v -p /Users/runner/Library/Application Support/Godot/export_templates/${GODOT_VERSION_MAC}.stable
+          mkdir -v -p "/Users/runner/Library/Application Support/Godot/export_templates/${GODOT_VERSION_MAC}.stable"
           curl -O https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION_MAC}/Godot_v${GODOT_VERSION_MAC}-stable_export_templates.tpz
           unzip -a Godot_v${GODOT_VERSION_MAC}-stable_export_templates.tpz
-          mv ./templates/* /Users/runner/Library/Application Support/Godot/export_templates/${GODOT_VERSION_MAC}.stable
+          mv ./templates/* "/Users/runner/Library/Application Support/Godot/export_templates/${GODOT_VERSION_MAC}.stable"
       - name: Download Godot headless binary 🤖
         run: |
           wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION_MAC}-stable/Godot_v${GODOT_VERSION_MAC}-stable_macos.universal.zip
