@@ -106,10 +106,10 @@ jobs:
           export EXPORT_NAME=Pixelorama
       - name: Download and extract export templates 💾
         run: |
-          mkdir -v -p ~/.local/share/godot/export_templates/${GODOT_VERSION_MAC}.stable
+          mkdir -v -p /Users/runner/Library/Application Support/Godot/export_templates/${GODOT_VERSION_MAC}.stable
           curl -O https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION_MAC}/Godot_v${GODOT_VERSION_MAC}-stable_export_templates.tpz
           unzip -a Godot_v${GODOT_VERSION_MAC}-stable_export_templates.tpz
-          mv ./templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION_MAC}.stable
+          mv ./templates/* /Users/runner/Library/Application Support/Godot/export_templates/${GODOT_VERSION_MAC}.stable
       - name: Download Godot headless binary 🤖
         run: |
           wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION_MAC}-stable/Godot_v${GODOT_VERSION_MAC}-stable_macos.universal.zip
