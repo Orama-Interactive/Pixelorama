@@ -5,7 +5,7 @@ extends ConfirmationDialog
 
 enum { SELECTED_CELS, FRAME, ALL_FRAMES, ALL_PROJECTS }
 
-var affect := SELECTED_CELS
+var affect: int = SELECTED_CELS
 var selected_cels: Image
 var current_frame: Image
 var preview_image := Image.new()
