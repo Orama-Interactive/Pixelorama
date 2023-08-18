@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-08-18 21:48\n"
+"PO-Revision-Date: 2023-08-18 22:45\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -2640,11 +2640,11 @@ msgstr "Awalnya cepat lalu lambat saat ke ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
-msgstr "Lambat di tiap ujung, cepat di tengah"
+msgstr "Lambat di kedua ujung, cepat di tengah"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Fast at both ends, slow at middle"
-msgstr "Cepat di tiap ujung, lambat di tengah"
+msgstr "Cepat di kedua ujung, lambat di tengah"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
@@ -2676,7 +2676,7 @@ msgstr "Sinus"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Wiggling around the edges"
-msgstr "Goyang-goyang di tepiannya"
+msgstr "Goyang-goyang di pinggirnya"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
@@ -2690,5 +2690,5 @@ msgid "Silhouette"
 msgstr "Siluet"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
-msgstr ""
+msgstr "Menggelapkan gambar dan membuat semua piksel legap menjadi hitam."
 
