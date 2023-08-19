@@ -27,8 +27,9 @@ func _ready() -> void:
 	project = Global.current_project
 	frame_saved.connect(_on_frame_saved)
 	# Make a recordings folder if there isn't one
-	var dir := DirAccess.open(chosen_dir)
 	chosen_dir = Global.home_data_directory.path_join("Recordings")
+	var mkret := DirAccess.make_dir_recursive_absolute(chosen_dir)
+	var dir := DirAccess.open(chosen_dir)
 	dir.make_dir_recursive(chosen_dir)
 	path_field.text = chosen_dir
 	size_label.text = str("(", project.size.x, "×", project.size.y, ")")
