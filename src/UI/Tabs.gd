@@ -49,11 +49,11 @@ func _on_Tabs_reposition_active_tab_request(idx_to: int) -> void:
 
 	# Change save paths
 	var temp_save_path = OpenSave.current_save_paths[Global.current_project_index]
-	OpenSave.current_save_paths[Global.current_project_index] = OpenSave.current_save_paths[idx_to]
-	OpenSave.current_save_paths[idx_to] = temp_save_path
+	OpenSave.current_save_paths.remove(Global.current_project_index)
+	OpenSave.current_save_paths.insert(idx_to, temp_save_path)
 	var temp_backup_path = OpenSave.backup_save_paths[Global.current_project_index]
-	OpenSave.backup_save_paths[Global.current_project_index] = OpenSave.backup_save_paths[idx_to]
-	OpenSave.backup_save_paths[idx_to] = temp_backup_path
+	OpenSave.backup_save_paths.remove(Global.current_project_index)
+	OpenSave.backup_save_paths.insert(idx_to, temp_save_path)
 
 
 func delete_tab(tab: int) -> void:
