@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
-"PO-Revision-Date: 2023-08-15 00:21\n"
+"PO-Revision-Date: 2023-08-24 11:41\n"
 
 msgid "OK"
 msgstr "OK"
@@ -136,7 +136,7 @@ msgid "Paste"
 msgstr "Indsæt"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Indsæt på plads"
 
 msgid "Delete"
 msgstr "Slet"
@@ -160,36 +160,36 @@ msgid "Resize Canvas"
 msgstr "Ændr størrelse på Lærred"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Offset billede"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Offset:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Vikle om:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "Centerrammer"
 
 msgid "Rotate Image"
 msgstr "Rotér Billede"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Pivot x:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Pivot y:"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Muligheder for smøring:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Tolerance:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Indledende vinkel:"
 
 msgid "Clear"
 msgstr "Ryd"
@@ -198,7 +198,7 @@ msgid "Invert"
 msgstr "Invertér"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Gråtonevisning"
 
 msgid "Mirror Image"
 msgstr "Spejlbillede"
@@ -216,31 +216,31 @@ msgid "Tile Mode"
 msgstr "Felt-tilstand"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Tile Mode Offsets"
 
 msgid "X-basis x:"
-msgstr ""
+msgstr "X-grundlag x:"
 
 msgid "X-basis y:"
-msgstr ""
+msgstr "X-grundlag y:"
 
 msgid "Y-basis x:"
-msgstr ""
+msgstr "Y-grundlag x:"
 
 msgid "Y-basis y:"
-msgstr ""
+msgstr "Y-grundlag y:"
 
 msgid "Tile Mask"
-msgstr ""
+msgstr "Flise maske"
 
 msgid "Reset"
 msgstr "Nulstil"
 
 msgid "Use Current Frame"
-msgstr ""
+msgstr "Brug aktuel ramme"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Nulstil maske"
 
 msgid "Window Opacity"
 msgstr "Vindue Opacitet"
