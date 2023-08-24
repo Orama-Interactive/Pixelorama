@@ -145,7 +145,9 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 	var first_line := file.get_line()
 	var dict := JSON.parse(first_line)
 	if dict.error != OK:
-		open_old_pxo_file(file, new_project, first_line)
+		print("Error, corrupt pxo file")
+		file.close()
+		return
 	else:
 		if typeof(dict.result) != TYPE_DICTIONARY:
 			print("Error, json parsed result is: %s" % typeof(dict.result))
@@ -205,155 +207,6 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
 
 	save_project_to_recent_list(path)
-
-
-# For pxo files older than v0.8
-func open_old_pxo_file(file: File, new_project: Project, first_line: String) -> void:
-#	var file_version := file.get_line() # Example, "v0.7.10-beta"
-	var file_version := first_line
-	var file_ver_splitted := file_version.split("-")
-	var file_ver_splitted_numbers := file_ver_splitted[0].split(".")
-
-	# In the above example, the major version would return "0",
-	# the minor version would return "7", the patch "10"
-	# and the status would return "beta"
-	var file_major_version := int(file_ver_splitted_numbers[0].replace("v", ""))
-	var file_minor_version := int(file_ver_splitted_numbers[1])
-	var file_patch_version := 0
-
-	if file_ver_splitted_numbers.size() > 2:
-		file_patch_version = int(file_ver_splitted_numbers[2])
-
-	if file_major_version == 0 and file_minor_version < 5:
-		Global.notification_label(
-			"File is from an older version of Pixelorama, as such it might not work properly"
-		)
-
-	var new_guides := true
-	if file_major_version == 0:
-		if file_minor_version < 7 or (file_minor_version == 7 and file_patch_version == 0):
-			new_guides = false
-
-	var frame := 0
-
-	var layer_dicts := []
-	if file_major_version >= 0 and file_minor_version > 6:
-		var global_layer_line := file.get_line()
-		while global_layer_line == ".":
-			layer_dicts.append(
-				{
-					"name": file.get_line(),
-					"visible": file.get_8(),
-					"locked": file.get_8(),
-					"new_cels_linked": file.get_8(),
-					"linked_cels": file.get_var()
-				}
-			)
-			var l := PixelLayer.new(new_project)
-			l.index = new_project.layers.size()
-			new_project.layers.append(l)
-			global_layer_line = file.get_line()
-
-	var frame_line := file.get_line()
-	while frame_line == "--":  # Load frames
-		var frame_class := Frame.new()
-		var width := file.get_16()
-		var height := file.get_16()
-
-		var layer_i := 0
-		var layer_line := file.get_line()
-		while layer_line == "-":  # Load layers
-			var buffer := file.get_buffer(width * height * 4)
-			if file_major_version == 0 and file_minor_version < 7:
-				var layer_name_old_version = file.get_line()
-				if frame == 0:
-					var l := PixelLayer.new(new_project, layer_name_old_version)
-					l.index = layer_i
-					new_project.layers.append(l)
-			var cel_opacity := 1.0
-			if file_major_version >= 0 and file_minor_version > 5:
-				cel_opacity = file.get_float()
-			var image := Image.new()
-			image.create_from_data(width, height, false, Image.FORMAT_RGBA8, buffer)
-			frame_class.cels.append(PixelCel.new(image, cel_opacity))
-			layer_i += 1
-			layer_line = file.get_line()
-
-		if !new_guides:
-			var guide_line := file.get_line()  # "guideline" no pun intended
-			while guide_line == "|":  # Load guides
-				var guide := Guide.new()
-				guide.type = file.get_8()
-				if guide.type == guide.Types.HORIZONTAL:
-					guide.add_point(Vector2(-99999, file.get_16()))
-					guide.add_point(Vector2(99999, file.get_16()))
-				else:
-					guide.add_point(Vector2(file.get_16(), -99999))
-					guide.add_point(Vector2(file.get_16(), 99999))
-				guide.has_focus = false
-				Global.canvas.add_child(guide)
-				new_project.guides.append(guide)
-				guide_line = file.get_line()
-
-		new_project.size = Vector2(width, height)
-		new_project.frames.append(frame_class)
-		frame_line = file.get_line()
-		frame += 1
-
-	if layer_dicts:
-		for layer_i in new_project.layers.size():
-			# Now that we have the layers, frames, and cels, deserialize layer data
-			new_project.layers[layer_i].deserialize(layer_dicts[layer_i])
-
-	if new_guides:
-		var guide_line := file.get_line()  # "guideline" no pun intended
-		while guide_line == "|":  # Load guides
-			var guide := Guide.new()
-			guide.type = file.get_8()
-			if guide.type == guide.Types.HORIZONTAL:
-				guide.add_point(Vector2(-99999, file.get_16()))
-				guide.add_point(Vector2(99999, file.get_16()))
-			else:
-				guide.add_point(Vector2(file.get_16(), -99999))
-				guide.add_point(Vector2(file.get_16(), 99999))
-			guide.has_focus = false
-			Global.canvas.add_child(guide)
-			new_project.guides.append(guide)
-			guide_line = file.get_line()
-
-	# Load tool options
-	file.get_var()
-	file.get_var()
-	file.get_8()
-	file.get_8()
-	if file_major_version == 0 and file_minor_version < 7:
-		file.get_var()
-		file.get_var()
-
-	# Load custom brushes
-	var brush_line := file.get_line()
-	while brush_line == "/":
-		var b_width := file.get_16()
-		var b_height := file.get_16()
-		var buffer := file.get_buffer(b_width * b_height * 4)
-		var image := Image.new()
-		image.create_from_data(b_width, b_height, false, Image.FORMAT_RGBA8, buffer)
-		new_project.brushes.append(image)
-		Brushes.add_project_brush(image)
-		brush_line = file.get_line()
-
-	if file_major_version >= 0 and file_minor_version > 6:
-		var tag_line := file.get_line()
-		while tag_line == ".T/":
-			var tag_name := file.get_line()
-			var tag_color: Color = file.get_var()
-			var tag_from := file.get_8()
-			var tag_to := file.get_8()
-			new_project.animation_tags.append(
-				AnimationTag.new(tag_name, tag_color, tag_from, tag_to)
-			)
-			new_project.animation_tags = new_project.animation_tags  # To execute animation_tags_changed()
-			tag_line = file.get_line()
 
 
 func save_pxo_file(
