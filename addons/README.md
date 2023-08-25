@@ -9,7 +9,7 @@
 ## Keychain
 
 - Upstream: https://github.com/Orama-Interactive/Keychain
-- Version: aa25301f4dc20bf485050869115191daddca3b07
+- Version: 3b2d14cab5fa826ba83d88aec6e17f65c1872260
 - License: [MIT](https://github.com/Orama-Interactive/Keychain/blob/main/LICENSE)
 
 ## gdgifexporter

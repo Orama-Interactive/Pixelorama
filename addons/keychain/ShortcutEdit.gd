@@ -2,7 +2,7 @@ extends Control
 
 enum { KEYBOARD, MOUSE, JOY_BUTTON, JOY_AXIS }
 
-const MOUSE_BUTTON_NAMES := [
+const MOUSE_BUTTON_NAMES: PackedStringArray = [
 	"Left Button",
 	"Right Button",
 	"Middle Button",
@@ -14,7 +14,7 @@ const MOUSE_BUTTON_NAMES := [
 	"X Button 2",
 ]
 
-const JOY_BUTTON_NAMES := [
+const JOY_BUTTON_NAMES: PackedStringArray = [
 	"DualShock Cross, Xbox A, Nintendo B",
 	"DualShock Circle, Xbox B, Nintendo A",
 	"DualShock Square, Xbox X, Nintendo Y",
@@ -40,7 +40,7 @@ const JOY_BUTTON_NAMES := [
 	"PS4/5 Touchpad",
 ]
 
-const JOY_AXIS_NAMES := [
+const JOY_AXIS_NAMES: PackedStringArray = [
 	"(Left Stick Left)",
 	"(Left Stick Right)",
 	"(Left Stick Up)",
@@ -151,8 +151,6 @@ func _construct_tree() -> void:
 
 
 func _fill_selector_options() -> void:
-	keyboard_shortcut_selector.entered_shortcut.visible = true
-	keyboard_shortcut_selector.option_button.visible = false
 	mouse_shortcut_selector.input_type_l.text = "Mouse Button Index:"
 	joy_key_shortcut_selector.input_type_l.text = "Joypad Button Index:"
 	joy_axis_shortcut_selector.input_type_l.text = "Joypad Axis Index:"
@@ -171,8 +169,8 @@ func _fill_selector_options() -> void:
 	var joy_axis_option_button: OptionButton = joy_axis_shortcut_selector.option_button
 	var i := 0.0
 	for option in JOY_AXIS_NAMES:
-		var sign_symbol = "+" if floor(i) != i else "-"
-		var text: String = tr("Axis") + " %s %s %s" % [floor(i), sign_symbol, tr(option)]
+		var sign_symbol := "+" if floori(i) != i else "-"
+		var text: String = tr("Axis") + " %s %s %s" % [floori(i), sign_symbol, tr(option)]
 		joy_axis_option_button.add_item(text)
 		i += 0.5
 
@@ -252,21 +250,10 @@ func add_event_tree_item(event: InputEvent, action_tree_item: TreeItem) -> void:
 
 
 func event_to_str(event: InputEvent) -> String:
-	var output := ""
-	if event is InputEventKey:
-		var scancode := 0
-		if event.keycode != 0:
-			scancode = event.get_keycode_with_modifiers()
-		var physical_str := ""
-		if scancode == 0:
-			scancode = event.get_physical_keycode_with_modifiers()
-			physical_str = " " + tr("(Physical)")
-		output = OS.get_keycode_string(scancode) + physical_str
-
-	elif event is InputEventMouseButton:
-		output = tr(MOUSE_BUTTON_NAMES[event.button_index - 1])
-
-	elif event is InputEventJoypadButton:
+	var output := event.as_text()
+	# event.as_text() could be used for these event types as well, but this gives more control
+	# to the developer as to what strings will be printed
+	if event is InputEventJoypadButton:
 		var button_index: int = event.button_index
 		output = tr("Button")
 		if button_index >= JOY_BUTTON_NAMES.size():

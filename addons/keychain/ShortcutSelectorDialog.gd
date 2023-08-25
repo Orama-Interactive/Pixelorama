@@ -2,23 +2,33 @@ extends ConfirmationDialog
 
 enum InputTypes { KEYBOARD, MOUSE, JOY_BUTTON, JOY_AXIS }
 
-@export var input_type: InputTypes = InputTypes.KEYBOARD
+@export var input_type := InputTypes.KEYBOARD
 var listened_input: InputEvent
 
-@onready var root: Node = get_parent()
-@onready var input_type_l: Label = $VBoxContainer/InputTypeLabel
-@onready var entered_shortcut: LineEdit = $VBoxContainer/EnteredShortcut
-@onready var option_button: OptionButton = $VBoxContainer/OptionButton
-@onready var already_exists: Label = $VBoxContainer/AlreadyExistsLabel
+@onready var root := get_parent()
+@onready var input_type_l := $VBoxContainer/InputTypeLabel as Label
+@onready var entered_shortcut := $VBoxContainer/EnteredShortcut as LineEdit
+@onready var option_button := $VBoxContainer/OptionButton as OptionButton
+@onready var modifier_buttons := $VBoxContainer/ModifierButtons as HBoxContainer
+@onready var alt_button := $VBoxContainer/ModifierButtons/Alt as CheckBox
+@onready var shift_button := $VBoxContainer/ModifierButtons/Shift as CheckBox
+@onready var control_button := $VBoxContainer/ModifierButtons/Control as CheckBox
+@onready var meta_button := $VBoxContainer/ModifierButtons/Meta as CheckBox
+@onready var command_control_button := $VBoxContainer/ModifierButtons/CommandOrControl as CheckBox
+@onready var already_exists := $VBoxContainer/AlreadyExistsLabel as Label
 
 
 func _ready() -> void:
 	set_process_input(false)
 	if input_type == InputTypes.KEYBOARD:
+		entered_shortcut.visible = true
+		option_button.visible = false
 		get_ok_button().focus_neighbor_top = entered_shortcut.get_path()
 		get_cancel_button().focus_neighbor_top = entered_shortcut.get_path()
 		entered_shortcut.focus_neighbor_bottom = get_ok_button().get_path()
 	else:
+		if input_type != InputTypes.MOUSE:
+			modifier_buttons.visible = false
 		get_ok_button().focus_neighbor_top = option_button.get_path()
 		get_cancel_button().focus_neighbor_top = option_button.get_path()
 		option_button.focus_neighbor_bottom = get_ok_button().get_path()
@@ -32,7 +42,8 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.pressed:
 		listened_input = event
-		entered_shortcut.text = OS.get_keycode_string(event.get_keycode_with_modifiers())
+		_set_modifier_buttons_state(listened_input)
+		entered_shortcut.text = event.as_text()
 		_show_assigned_state(event)
 
 
@@ -102,25 +113,11 @@ func _set_shortcut(action: StringName, old_event: InputEvent, new_event: InputEv
 						tree_item.free()
 						break
 
-			tree_item = _get_next_tree_item(tree_item)
+			tree_item = tree_item.get_next_in_tree()
 
 	Keychain.action_add_event(action, new_event)
 	Keychain.selected_profile.change_action(action)
 	return true
-
-
-# Based on https://github.com/godotengine/godot/blob/master/scene/gui/tree.cpp#L685
-func _get_next_tree_item(current: TreeItem) -> TreeItem:
-	if current.get_first_child():
-		current = current.get_first_child()
-	elif current.get_next():
-		current = current.get_next()
-	else:
-		while current and !current.get_next():
-			current = current.get_parent()
-		if current:
-			current = current.get_next()
-	return current
 
 
 func _find_matching_event_in_map(action: StringName, event: InputEvent) -> Array:
@@ -149,23 +146,26 @@ func _find_matching_event_in_map(action: StringName, event: InputEvent) -> Array
 
 
 func _on_ShortcutSelectorDialog_about_to_show() -> void:
+	var metadata = root.currently_editing_tree_item.get_metadata(0)
 	if input_type == InputTypes.KEYBOARD:
 		listened_input = null
 		already_exists.text = ""
 		entered_shortcut.text = ""
+		if metadata is InputEvent:
+			_set_modifier_buttons_state(metadata)
 		await get_tree().process_frame
 		entered_shortcut.grab_focus()
 	else:
-		var metadata = root.currently_editing_tree_item.get_metadata(0)
 		if metadata is InputEvent:  # Editing an input event
 			var index := 0
 			if metadata is InputEventMouseButton:
 				index = metadata.button_index - 1
+				_set_modifier_buttons_state(metadata)
 			elif metadata is InputEventJoypadButton:
 				index = metadata.button_index
 			elif metadata is InputEventJoypadMotion:
 				index = metadata.axis * 2
-				index += round(metadata.axis_value) / 2.0 + 0.5
+				index += signi(metadata.axis_value) / 2.0 + 0.5
 			option_button.select(index)
 			_on_OptionButton_item_selected(index)
 
@@ -182,6 +182,11 @@ func _on_OptionButton_item_selected(index: int) -> void:
 	if input_type == InputTypes.MOUSE:
 		listened_input = InputEventMouseButton.new()
 		listened_input.button_index = index + 1
+		listened_input.alt_pressed = alt_button.button_pressed
+		listened_input.shift_pressed = shift_button.button_pressed
+		listened_input.ctrl_pressed = control_button.button_pressed
+		listened_input.meta_pressed = meta_button.button_pressed
+		listened_input.command_or_control_autoremap = command_control_button.button_pressed
 	elif input_type == InputTypes.JOY_BUTTON:
 		listened_input = InputEventJoypadButton.new()
 		listened_input.button_index = index
@@ -198,3 +203,50 @@ func _on_EnteredShortcut_focus_entered() -> void:
 
 func _on_EnteredShortcut_focus_exited() -> void:
 	set_process_input(false)
+
+
+func _on_alt_toggled(button_pressed: bool) -> void:
+	if not is_instance_valid(listened_input):
+		return
+	listened_input.alt_pressed = button_pressed
+	entered_shortcut.text = listened_input.as_text()
+
+
+func _set_modifier_buttons_state(event: InputEventWithModifiers) -> void:
+	alt_button.button_pressed = event.alt_pressed
+	shift_button.button_pressed = event.shift_pressed
+	control_button.button_pressed = event.ctrl_pressed
+	meta_button.button_pressed = event.meta_pressed
+	command_control_button.button_pressed = event.command_or_control_autoremap
+
+
+func _on_shift_toggled(button_pressed: bool) -> void:
+	if not is_instance_valid(listened_input):
+		return
+	listened_input.shift_pressed = button_pressed
+	entered_shortcut.text = listened_input.as_text()
+
+
+func _on_control_toggled(button_pressed: bool) -> void:
+	if not is_instance_valid(listened_input):
+		return
+	listened_input.ctrl_pressed = button_pressed
+	entered_shortcut.text = listened_input.as_text()
+
+
+func _on_meta_toggled(button_pressed: bool) -> void:
+	if not is_instance_valid(listened_input):
+		return
+	listened_input.meta_pressed = button_pressed
+	entered_shortcut.text = listened_input.as_text()
+
+
+func _on_command_or_control_toggled(button_pressed: bool) -> void:
+	control_button.button_pressed = false
+	meta_button.button_pressed = false
+	control_button.visible = not button_pressed
+	meta_button.visible = not button_pressed
+	if not is_instance_valid(listened_input):
+		return
+	listened_input.command_or_control_autoremap = button_pressed
+	entered_shortcut.text = listened_input.as_text()

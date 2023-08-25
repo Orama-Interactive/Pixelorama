@@ -356,6 +356,8 @@ func _initialize_keychain() -> void:
 		"go_to_next_frame": Keychain.InputAction.new("", "Buttons"),
 		"play_backwards": Keychain.InputAction.new("", "Buttons"),
 		"play_forward": Keychain.InputAction.new("", "Buttons"),
+		"brush_size_increment": Keychain.InputAction.new("", "Buttons"),
+		"brush_size_decrement": Keychain.InputAction.new("", "Buttons"),
 		"change_tool_mode": Keychain.InputAction.new("", "Tool modifiers", false),
 		"draw_create_line": Keychain.InputAction.new("", "Draw tools", false),
 		"draw_snap_angle": Keychain.InputAction.new("", "Draw tools", false),
