@@ -80,7 +80,7 @@ func _input(event: InputEvent) -> void:
 
 # Taken from https://github.com/godotengine/godot/blob/3.x/editor/editor_settings.cpp#L1474
 func _get_auto_display_scale() -> float:
-	if OS.get_name() == "OSX":
+	if OS.get_name() == "macOS":
 		return DisplayServer.screen_get_max_scale()
 
 	var dpi := DisplayServer.screen_get_dpi()
