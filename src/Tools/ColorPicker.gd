@@ -74,13 +74,13 @@ func _pick_color(pos: Vector2i) -> void:
 		return
 	match _mode:
 		TOP_COLOR:
-			var curr_frame: Frame = project.frames[project.current_frame]
+			var curr_frame := project.frames[project.current_frame]
 			for layer in project.layers.size():
-				var idx = (project.layers.size() - 1) - layer
+				var idx := (project.layers.size() - 1) - layer
 				if project.layers[idx].is_visible_in_hierarchy():
 					image = curr_frame.cels[idx].get_image()
-					color = image.get_pixelv(position)
-					if color != Color(0, 0, 0, 0):
+					color = image.get_pixelv(pos)
+					if not color.is_equal_approx(Color(0, 0, 0, 0)):
 						break
 		CURRENT_LAYER:
 			color = image.get_pixelv(pos)
