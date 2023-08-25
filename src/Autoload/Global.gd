@@ -52,8 +52,6 @@ const CONFIG_SUBDIR_NAME := "pixelorama_data"
 var root_directory := "."
 var home_data_directory := OS.get_data_dir().path_join(HOME_SUBDIR_NAME)
 var data_directories: PackedStringArray = [home_data_directory]  ## Only read from these directories
-var window_title := "":
-	set = _title_changed
 var config_cache := ConfigFile.new()
 
 var projects: Array[Project] = []
@@ -171,6 +169,7 @@ var pixel_cel_button_node: PackedScene = load("res://src/UI/Timeline/PixelCelBut
 var group_cel_button_node: PackedScene = load("res://src/UI/Timeline/GroupCelButton.tscn")
 var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.tscn")
 
+@onready var main_window := get_window()
 @onready var control: Node = get_tree().current_scene
 
 @onready var canvas: Canvas = control.find_child("Canvas")
@@ -476,12 +475,7 @@ func undo_or_redo(
 	if !project.has_changed:
 		project.has_changed = true
 		if project == current_project:
-			window_title = window_title + "(*)"
-
-
-func _title_changed(value: String) -> void:
-	window_title = value
-	get_window().set_title(value)
+			main_window.title = main_window.title + "(*)"
 
 
 func _project_changed(value: int) -> void:

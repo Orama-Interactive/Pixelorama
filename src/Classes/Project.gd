@@ -200,9 +200,9 @@ func change_project() -> void:
 	Global.perspective_editor.update_points()
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 
-	Global.window_title = "%s - Pixelorama %s" % [name, Global.current_version]
+	Global.main_window.title = "%s - Pixelorama %s" % [name, Global.current_version]
 	if has_changed:
-		Global.window_title = Global.window_title + "(*)"
+		Global.main_window.title = Global.main_window.title + "(*)"
 
 	var save_path = OpenSave.current_save_paths[Global.current_project_index]
 	if save_path != "":

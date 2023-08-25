@@ -190,7 +190,7 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 	if not untitled_backup:
 		# Untitled backup should not change window title and save path
 		current_save_paths[Global.current_project_index] = path
-		Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
+		Global.main_window.title = path.get_file() + " - Pixelorama " + Global.current_version
 		Global.save_sprites_dialog.current_path = path
 		# Set last opened project path and save
 		Global.config_cache.set_value("preferences", "last_project_path", path)
@@ -292,7 +292,7 @@ func save_pxo_file(
 			project.has_changed = false
 		remove_backup(Global.current_project_index)
 		Global.notification_label("File saved")
-		Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
+		Global.main_window.title = path.get_file() + " - Pixelorama " + Global.current_version
 
 		# Set last opened project path and save
 		Global.config_cache.set_value("preferences", "last_project_path", path)
@@ -649,11 +649,11 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 	var prev_project_empty: bool = Global.current_project.is_empty()
 	var prev_project_pos: int = Global.current_project_index
 
-	Global.window_title = (
+	Global.main_window.title = (
 		path.get_file() + " (" + tr("imported") + ") - Pixelorama " + Global.current_version
 	)
 	if project.has_changed:
-		Global.window_title = Global.window_title + "(*)"
+		Global.main_window.title = Global.main_window.title + "(*)"
 	var file_name := path.get_basename().get_file()
 	var directory_path := path.get_base_dir()
 	project.directory_path = directory_path
@@ -750,7 +750,7 @@ func reload_backup_file(project_paths: Array, backup_paths: Array) -> void:
 		# If project path is the same as backup save path -> the backup was untitled
 		if project_paths[i] != backup_paths[i]:  # If the user has saved
 			current_save_paths[i] = project_paths[i]
-			Global.window_title = (
+			Global.main_window.title = (
 				project_paths[i].get_file() + " - Pixelorama(*) " + Global.current_version
 			)
 			Global.current_project.has_changed = true
