@@ -49,7 +49,7 @@ func _exit_tree() -> void:
 		gif_export_thread.wait_to_finish()
 
 
-func multithreading_enabled() -> bool:
+func _multithreading_enabled() -> bool:
 	return ProjectSettings.get_setting("rendering/driver/threads/thread_model") == 2
 
 
@@ -82,7 +82,7 @@ func process_data(project := Global.current_project) -> void:
 func process_spritesheet(project := Global.current_project) -> void:
 	processed_images.clear()
 	# Range of frames determined by tags
-	var frames := calculate_frames(project)
+	var frames := _calculate_frames(project)
 	# Then store the size of frames for other functions
 	number_of_frames = frames.size()
 
@@ -121,7 +121,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 				origin.y = 0
 				hh = 1
 				origin.x = project.size.x * vv
-		blend_layers(whole_image, frame, origin)
+		_blend_layers(whole_image, frame, origin)
 
 	processed_images.append(whole_image)
 
@@ -129,15 +129,15 @@ func process_spritesheet(project := Global.current_project) -> void:
 func process_animation(project := Global.current_project) -> void:
 	processed_images.clear()
 	durations.clear()
-	var frames := calculate_frames(project)
+	var frames := _calculate_frames(project)
 	for frame in frames:
 		var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		blend_layers(image, frame)
+		_blend_layers(image, frame)
 		processed_images.append(image)
 		durations.append(frame.duration * (1.0 / project.fps))
 
 
-func calculate_frames(project := Global.current_project) -> Array[Frame]:
+func _calculate_frames(project := Global.current_project) -> Array[Frame]:
 	var frames: Array[Frame] = []
 	if frame_current_tag > 1:  # Specific tag
 		var frame_start: int = project.animation_tags[frame_current_tag - 2].from
@@ -181,7 +181,7 @@ func export_processed_images(
 	var paths_of_existing_files := ""
 	for i in range(processed_images.size()):
 		stop_export = false
-		var export_path := create_export_path(multiple_files, project, i + 1)
+		var export_path := _create_export_path(multiple_files, project, i + 1)
 		# If the user wants to create a new directory for each animation tag then check
 		# if directories exist, and create them if not
 		if multiple_files and new_dir_for_each_frame_tag:
@@ -208,7 +208,7 @@ func export_processed_images(
 		if stop_export:  # User decided to stop export
 			return false
 
-	scale_processed_images()
+	_scale_processed_images()
 
 	# override if a custom export is chosen
 	if project.file_format in custom_exporter_generators.keys():
@@ -223,7 +223,7 @@ func export_processed_images(
 				"export_paths": export_paths,
 				"project": project
 			}
-			if multithreading_enabled() and is_single_file_format(project):
+			if _multithreading_enabled() and is_single_file_format(project):
 				if gif_export_thread.is_started():
 					gif_export_thread.wait_to_finish()
 				var error = gif_export_thread.start(
@@ -247,7 +247,7 @@ func export_processed_images(
 			"export_paths": export_paths,
 			"project": project
 		}
-		if not multithreading_enabled():
+		if not _multithreading_enabled():
 			export_animated(details)
 		else:
 			if gif_export_thread.is_started():
@@ -296,14 +296,14 @@ func export_animated(args: Dictionary) -> void:
 
 	# Export progress popup
 	# One fraction per each frame, one fraction for write to disk
-	export_progress_fraction = 100.0 / len(processed_images)
+	export_progress_fraction = 100.0 / processed_images.size()
 	export_progress = 0.0
 	export_dialog.set_export_progress_bar(export_progress)
 	export_dialog.toggle_export_progress_popup(true)
 
 	# Transform into AImgIO form
 	var frames := []
-	for i in range(len(processed_images)):
+	for i in range(processed_images.size()):
 		var frame: AImgIOFrame = AImgIOFrame.new()
 		frame.content = processed_images[i]
 		frame.duration = durations[i]
@@ -311,7 +311,7 @@ func export_animated(args: Dictionary) -> void:
 
 	# Export and save GIF/APNG
 	var file_data := exporter.export_animation(
-		frames, project.fps, self, "increase_export_progress", [export_dialog]
+		frames, project.fps, self, "_increase_export_progress", [export_dialog]
 	)
 
 	if OS.has_feature("web"):
@@ -324,12 +324,12 @@ func export_animated(args: Dictionary) -> void:
 	Global.notification_label("File(s) exported")
 
 
-func increase_export_progress(export_dialog: Node) -> void:
+func _increase_export_progress(export_dialog: Node) -> void:
 	export_progress += export_progress_fraction
 	export_dialog.set_export_progress_bar(export_progress)
 
 
-func scale_processed_images() -> void:
+func _scale_processed_images() -> void:
 	for processed_image in processed_images:
 		if resize != 100:
 			processed_image.resize(
@@ -378,12 +378,12 @@ func is_single_file_format(project := Global.current_project) -> bool:
 	return animated_formats.has(project.file_format)
 
 
-func create_export_path(multifile: bool, project: Project, frame: int = 0) -> String:
+func _create_export_path(multifile: bool, project: Project, frame: int = 0) -> String:
 	var path := project.file_name
 	# Only append frame number when there are multiple files exported
 	if multifile:
 		var path_extras := separator_character + str(frame).pad_zeros(number_of_digits)
-		var frame_tag_and_start_id := get_proccessed_image_animation_tag_and_start_id(
+		var frame_tag_and_start_id := _get_proccessed_image_animation_tag_and_start_id(
 			project, frame - 1
 		)
 		# Check if exported frame is in frame tag
@@ -410,7 +410,7 @@ func create_export_path(multifile: bool, project: Project, frame: int = 0) -> St
 	return project.directory_path.path_join(path + file_format_string(project.file_format))
 
 
-func get_proccessed_image_animation_tag_and_start_id(
+func _get_proccessed_image_animation_tag_and_start_id(
 	project: Project, processed_image_id: int
 ) -> Array:
 	var result_animation_tag_and_start_id = null
@@ -426,7 +426,7 @@ func get_proccessed_image_animation_tag_and_start_id(
 	return result_animation_tag_and_start_id
 
 
-func blend_layers(
+func _blend_layers(
 	image: Image, frame: Frame, origin := Vector2.ZERO, project := Global.current_project
 ) -> void:
 	if export_layers == 0:
@@ -434,7 +434,7 @@ func blend_layers(
 	elif export_layers == 1:
 		blend_selected_cels(image, frame, origin, project)
 	else:
-		var layer: BaseLayer = project.layers[export_layers - 2]
+		var layer := project.layers[export_layers - 2]
 		var layer_image := Image.new()
 		if layer is GroupLayer:
 			layer_image.copy_from(layer.blend_children(frame, Vector2.ZERO))
