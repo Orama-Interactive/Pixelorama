@@ -49,6 +49,10 @@ func _exit_tree() -> void:
 		gif_export_thread.wait_to_finish()
 
 
+func multithreading_enabled() -> bool:
+	return ProjectSettings.get_setting("rendering/driver/threads/thread_model") == 2
+
+
 func add_file_format(_format: String) -> int:
 	var id := FileFormat.size()
 #	FileFormat.merge({format: id})
@@ -219,7 +223,7 @@ func export_processed_images(
 				"export_paths": export_paths,
 				"project": project
 			}
-			if OS.get_name() != "Web" and is_single_file_format(project):
+			if multithreading_enabled() and is_single_file_format(project):
 				if gif_export_thread.is_started():
 					gif_export_thread.wait_to_finish()
 				var error = gif_export_thread.start(
@@ -243,7 +247,7 @@ func export_processed_images(
 			"export_paths": export_paths,
 			"project": project
 		}
-		if OS.get_name() == "Web":
+		if not multithreading_enabled():
 			export_animated(details)
 		else:
 			if gif_export_thread.is_started():
