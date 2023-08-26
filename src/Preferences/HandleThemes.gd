@@ -72,6 +72,7 @@ func remove_theme(theme: Theme) -> void:
 func change_theme(id: int) -> void:
 	theme_index = id
 	var theme: Theme = themes[id]
+	theme.default_font_size = Global.font_size
 	var icon_color: Color = theme.get_color("modulate_color", "Icons")
 
 	if Global.icon_color_from == Global.ColorFrom.THEME:

@@ -89,6 +89,10 @@ var integer_zoom := false:
 		zoom_slider.value = zoom_slider.value  # to trigger signal emission
 
 var shrink := 1.0
+var font_size := 16:
+	set(value):
+		font_size = value
+		control.theme.default_font_size = value
 var dim_on_popup := true
 var modulate_icon_color := Color.GRAY
 var icon_color_from := ColorFrom.THEME:
@@ -304,7 +308,7 @@ var group_cel_button_node: PackedScene = load("res://src/UI/Timeline/GroupCelBut
 var cel_3d_button_node: PackedScene = load("res://src/UI/Timeline/Cel3DButton.tscn")
 
 @onready var main_window := get_window()
-@onready var control: Node = get_tree().current_scene
+@onready var control := get_tree().current_scene
 
 @onready var canvas: Canvas = control.find_child("Canvas")
 @onready var tabs: TabBar = control.find_child("TabBar")

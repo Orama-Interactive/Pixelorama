@@ -8,6 +8,7 @@ var preferences: Array[Preference] = [
 		"quit_confirmation", "Startup/StartupContainer/QuitConfirmation", "button_pressed"
 	),
 	Preference.new("shrink", "%ShrinkSlider", "value"),
+	Preference.new("font_size", "Interface/InterfaceOptions/FontSizeSlider", "value"),
 	Preference.new("dim_on_popup", "Interface/InterfaceOptions/DimCheckBox", "button_pressed"),
 	Preference.new("icon_color_from", "Interface/ButtonOptions/IconColorOptionButton", "selected"),
 	Preference.new("custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color"),

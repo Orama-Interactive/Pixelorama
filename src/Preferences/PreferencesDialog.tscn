@@ -135,7 +135,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 columns = 3
 
-[node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+[node name="ShrinkLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Display scale:"
@@ -165,6 +165,27 @@ script = ExtResource("8")
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Apply"
+
+[node name="FontSizeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Font size:"
+
+[node name="FontSizeSlider" type="TextureProgressBar" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = 4.0
+max_value = 32.0
+value = 6.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("8")
 
 [node name="DimLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
 layout_mode = 2
