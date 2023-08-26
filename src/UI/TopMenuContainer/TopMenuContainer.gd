@@ -186,7 +186,7 @@ func _setup_tile_mode_submenu(item: String) -> void:
 
 func _setup_snap_to_submenu(item: String) -> void:
 	snap_to_submenu.set_name("snap_to_submenu")
-	snap_to_submenu.add_check_item("Snap to Rectangular Grid Boundaries")
+	snap_to_submenu.add_check_item("Snap to Rectangular Grid Boundary")
 	snap_to_submenu.add_check_item("Snap to Rectangular Grid Center")
 	snap_to_submenu.add_check_item("Snap to Guides")
 	snap_to_submenu.add_check_item("Snap to Perspective Guides")
