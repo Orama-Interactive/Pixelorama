@@ -93,6 +93,7 @@ var font_size := 16:
 	set(value):
 		font_size = value
 		control.theme.default_font_size = value
+		control.theme.set_font_size("font_size", "HeaderSmall", value + 2)
 var dim_on_popup := true
 var modulate_icon_color := Color.GRAY
 var icon_color_from := ColorFrom.THEME:
