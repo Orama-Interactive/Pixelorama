@@ -75,52 +75,174 @@ var open_last_project := false
 var quit_confirmation := false
 var smooth_zoom := true
 var integer_zoom := false:
-	set = set_integer_zoom
+	set(value):
+		integer_zoom = value
+		var zoom_slider: ValueSlider = top_menu_container.get_node("%ZoomSlider")
+		if value:
+			zoom_slider.min_value = 100
+			zoom_slider.snap_step = 100
+			zoom_slider.step = 100
+		else:
+			zoom_slider.min_value = 1
+			zoom_slider.snap_step = 1
+			zoom_slider.step = 1
+		zoom_slider.value = zoom_slider.value  # to trigger signal emission
 
 var shrink := 1.0
 var dim_on_popup := true
 var modulate_icon_color := Color.GRAY
-var icon_color_from := ColorFrom.THEME
-var modulate_clear_color := Color.GRAY
-var clear_color_from := ColorFrom.THEME
-var custom_icon_color := Color.GRAY
-var tool_button_size := ButtonSize.SMALL
-var left_tool_color := Color("0086cf")
-var right_tool_color := Color("fd6d14")
+var icon_color_from := ColorFrom.THEME:
+	set(value):
+		icon_color_from = value
+		var themes = preferences_dialog.themes
+		if icon_color_from == ColorFrom.THEME:
+			var current_theme: Theme = themes.themes[themes.theme_index]
+			modulate_icon_color = current_theme.get_color("modulate_color", "Icons")
+		else:
+			modulate_icon_color = custom_icon_color
+		themes.change_icon_colors()
+var custom_icon_color := Color.GRAY:
+	set(value):
+		custom_icon_color = value
+		if icon_color_from == ColorFrom.CUSTOM:
+			modulate_icon_color = custom_icon_color
+			preferences_dialog.themes.change_icon_colors()
+var modulate_clear_color := Color.GRAY:
+	set(value):
+		modulate_clear_color = value
+		preferences_dialog.themes.change_clear_color()
+var clear_color_from := ColorFrom.THEME:
+	set(value):
+		clear_color_from = value
+		preferences_dialog.themes.change_clear_color()
+var tool_button_size := ButtonSize.SMALL:
+	set(value):
+		tool_button_size = value
+		Tools.set_button_size(tool_button_size)
+var left_tool_color := Color("0086cf"):
+	set(value):
+		left_tool_color = value
+		for child in Tools._tool_buttons.get_children():
+			var background: NinePatchRect = child.get_node("BackgroundLeft")
+			background.modulate = value
+		Tools._slots[MOUSE_BUTTON_LEFT].tool_node.color_rect.color = value
+var right_tool_color := Color("fd6d14"):
+	set(value):
+		right_tool_color = value
+		for child in Tools._tool_buttons.get_children():
+			var background: NinePatchRect = child.get_node("BackgroundRight")
+			background.modulate = value
+		Tools._slots[MOUSE_BUTTON_RIGHT].tool_node.color_rect.color = value
 
 var default_width := 64
 var default_height := 64
 var default_fill_color := Color(0, 0, 0, 0)
 var snapping_distance := 32.0
-var grid_type := GridTypes.CARTESIAN
-var grid_size := Vector2i(2, 2)
-var isometric_grid_size := Vector2i(16, 8)
-var grid_offset := Vector2i.ZERO
-var grid_draw_over_tile_mode := false
-var grid_color := Color.BLACK
-var pixel_grid_show_at_zoom := 1500.0  # percentage
-var pixel_grid_color := Color("21212191")
-var guide_color := Color.PURPLE
-var checker_size := 10
-var checker_color_1 := Color(0.47, 0.47, 0.47, 1)
-var checker_color_2 := Color(0.34, 0.35, 0.34, 1)
-var checker_follow_movement := false
-var checker_follow_scale := false
+var grid_type := GridTypes.CARTESIAN:
+	set(value):
+		grid_type = value
+		canvas.grid.queue_redraw()
+var grid_size := Vector2i(2, 2):
+	set(value):
+		grid_size = value
+		canvas.grid.queue_redraw()
+var isometric_grid_size := Vector2i(16, 8):
+	set(value):
+		isometric_grid_size = value
+		canvas.grid.queue_redraw()
+var grid_offset := Vector2i.ZERO:
+	set(value):
+		grid_offset = value
+		canvas.grid.queue_redraw()
+var grid_draw_over_tile_mode := false:
+	set(value):
+		grid_draw_over_tile_mode = value
+		canvas.grid.queue_redraw()
+var grid_color := Color.BLACK:
+	set(value):
+		grid_color = value
+		canvas.grid.queue_redraw()
+var pixel_grid_show_at_zoom := 1500.0:  # percentage
+	set(value):
+		pixel_grid_show_at_zoom = value
+		canvas.pixel_grid.queue_redraw()
+var pixel_grid_color := Color("21212191"):
+	set(value):
+		pixel_grid_color = value
+		canvas.pixel_grid.queue_redraw()
+var guide_color := Color.PURPLE:
+	set(value):
+		guide_color = value
+		for guide in canvas.get_children():
+			if guide is Guide:
+				guide.set_color(guide_color)
+var checker_size := 10:
+	set(value):
+		checker_size = value
+		transparent_checker.update_rect()
+var checker_color_1 := Color(0.47, 0.47, 0.47, 1):
+	set(value):
+		checker_color_1 = value
+		transparent_checker.update_rect()
+var checker_color_2 := Color(0.34, 0.35, 0.34, 1):
+	set(value):
+		checker_color_2 = value
+		transparent_checker.update_rect()
+var checker_follow_movement := false:
+	set(value):
+		checker_follow_movement = value
+		transparent_checker.update_rect()
+var checker_follow_scale := false:
+	set(value):
+		checker_follow_scale = value
+		transparent_checker.update_rect()
 var tilemode_opacity := 1.0
 
 var select_layer_on_button_click := false
-var onion_skinning_past_color := Color.RED
-var onion_skinning_future_color := Color.BLUE
+var onion_skinning_past_color := Color.RED:
+	set(value):
+		onion_skinning_past_color = value
+		canvas.onion_past.blue_red_color = value
+		canvas.onion_past.queue_redraw()
+var onion_skinning_future_color := Color.BLUE:
+	set(value):
+		onion_skinning_future_color = value
+		canvas.onion_future.blue_red_color = value
+		canvas.onion_future.queue_redraw()
 
-var selection_animated_borders := true
-var selection_border_color_1 := Color.WHITE
-var selection_border_color_2 := Color.BLACK
+var selection_animated_borders := true:
+	set(value):
+		selection_animated_borders = value
+		var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
+		marching_ants.material.set_shader_parameter("animated", selection_animated_borders)
+var selection_border_color_1 := Color.WHITE:
+	set(value):
+		selection_border_color_1 = value
+		var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
+		marching_ants.material.set_shader_parameter("first_color", selection_border_color_1)
+		canvas.selection.queue_redraw()
+var selection_border_color_2 := Color.BLACK:
+	set(value):
+		selection_border_color_2 = value
+		var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
+		marching_ants.material.set_shader_parameter("second_color", selection_border_color_2)
+		canvas.selection.queue_redraw()
 
 var pause_when_unfocused := true
-var fps_limit := 0
+var fps_limit := 0:
+	set(value):
+		fps_limit = value
+		Engine.max_fps = fps_limit
 
-var autosave_interval := 1.0
-var enable_autosave := true
+var autosave_interval := 1.0:
+	set(value):
+		autosave_interval = value
+		OpenSave.update_autosave()
+var enable_autosave := true:
+	set(value):
+		enable_autosave = value
+		OpenSave.update_autosave()
+		preferences_dialog.autosave_interval.editable = enable_autosave
 var renderer := 0:
 	set = _renderer_changed
 var tablet_driver := 0:
@@ -131,8 +253,20 @@ var show_left_tool_icon := true
 var show_right_tool_icon := true
 var left_square_indicator_visible := true
 var right_square_indicator_visible := true
-var native_cursors := false
-var cross_cursor := true
+var native_cursors := false:
+	set(value):
+		native_cursors = value
+		if native_cursors:
+			Input.set_custom_mouse_cursor(null, Input.CURSOR_CROSS, Vector2(15, 15))
+		else:
+			control.set_custom_cursor()
+var cross_cursor := true:
+	set(value):
+		cross_cursor = value
+		if cross_cursor:
+			main_viewport.mouse_default_cursor_shape = Control.CURSOR_CROSS
+		else:
+			main_viewport.mouse_default_cursor_shape = Control.CURSOR_ARROW
 
 # View menu options
 var greyscale_view := false
@@ -268,20 +402,6 @@ func _ready() -> void:
 			ui_tooltips[node] = tooltip
 	await get_tree().process_frame
 	project_changed.emit()
-
-
-func set_integer_zoom(enabled: bool):
-	integer_zoom = enabled
-	var zoom_slider: ValueSlider = top_menu_container.get_node("%ZoomSlider")
-	if enabled:
-		zoom_slider.min_value = 100
-		zoom_slider.snap_step = 100
-		zoom_slider.step = 100
-	else:
-		zoom_slider.min_value = 1
-		zoom_slider.snap_step = 1
-		zoom_slider.step = 1
-	zoom_slider.value = zoom_slider.value  # to trigger signal emmission
 
 
 func _initialize_keychain() -> void:

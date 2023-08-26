@@ -208,7 +208,7 @@ func _ready() -> void:
 
 			# This is needed because color_changed doesn't fire if the color changes in code
 			if typeof(value) == TYPE_VECTOR2 or typeof(value) == TYPE_COLOR:
-				preference_update(pref.prop_name, pref.require_restart)
+				preference_update(pref.require_restart)
 				if typeof(global_value) == TYPE_VECTOR2I:
 					disable_restore_default_button(
 						restore_default_button, global_value == pref.default_value
@@ -218,7 +218,7 @@ func _ready() -> void:
 						restore_default_button, global_value.is_equal_approx(pref.default_value)
 					)
 			elif pref.value_type == "selected":
-				preference_update(pref.prop_name, pref.require_restart)
+				preference_update(pref.require_restart)
 				disable_restore_default_button(
 					restore_default_button, global_value == pref.default_value
 				)
@@ -235,98 +235,17 @@ func _on_Preference_value_changed(value, pref: Preference, restore_default: Base
 	Global.set(prop, value)
 	if not pref.require_restart:
 		Global.config_cache.set_value("preferences", prop, value)
-	preference_update(prop, pref.require_restart)
+	preference_update(pref.require_restart)
 	var disable: bool = Global.get(prop) == default_value
 	if typeof(value) == TYPE_COLOR:
 		disable = Global.get(prop).is_equal_approx(default_value)
 	disable_restore_default_button(restore_default, disable)
 
 
-func preference_update(prop: String, require_restart := false) -> void:
+func preference_update(require_restart := false) -> void:
 	if require_restart:
 		must_restart.visible = true
 		return
-	if prop in ["autosave_interval", "enable_autosave"]:
-		OpenSave.update_autosave()
-		autosave_interval.editable = Global.enable_autosave
-		if autosave_interval.editable:
-			autosave_interval.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		else:
-			autosave_interval.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-
-	elif "grid" in prop:
-		Global.canvas.grid.queue_redraw()
-
-	elif prop in ["pixel_grid_show_at_zoom", "pixel_grid_color"]:
-		Global.canvas.pixel_grid.queue_redraw()
-
-	elif "checker" in prop:
-		Global.transparent_checker.update_rect()
-
-	elif prop in ["guide_color"]:
-		for guide in Global.canvas.get_children():
-			if guide is SymmetryGuide:
-				# Add a subtle difference to the normal guide color by mixing in some blue
-				guide.default_color = Global.guide_color.lerp(Color(.2, .2, .65), .6)
-			elif guide is Guide:
-				guide.default_color = Global.guide_color
-
-	elif prop in ["fps_limit"]:
-		Engine.max_fps = Global.fps_limit
-
-	elif "selection" in prop:
-		var marching_ants: Sprite2D = Global.canvas.selection.marching_ants_outline
-		marching_ants.material.set_shader_parameter("animated", Global.selection_animated_borders)
-		marching_ants.material.set_shader_parameter("first_color", Global.selection_border_color_1)
-		marching_ants.material.set_shader_parameter("second_color", Global.selection_border_color_2)
-		Global.canvas.selection.queue_redraw()
-
-	elif prop in ["icon_color_from", "custom_icon_color"]:
-		if Global.icon_color_from == Global.ColorFrom.THEME:
-			var current_theme: Theme = themes.themes[themes.theme_index]
-			Global.modulate_icon_color = current_theme.get_color("modulate_color", "Icons")
-		else:
-			Global.modulate_icon_color = Global.custom_icon_color
-		themes.change_icon_colors()
-
-	elif prop in ["modulate_clear_color", "clear_color_from"]:
-		themes.change_clear_color()
-
-	elif prop == "left_tool_color":
-		for child in Tools._tool_buttons.get_children():
-			var left_background: NinePatchRect = child.get_node("BackgroundLeft")
-			left_background.modulate = Global.left_tool_color
-		Tools._slots[MOUSE_BUTTON_LEFT].tool_node.color_rect.color = Global.left_tool_color
-
-	elif prop == "right_tool_color":
-		for child in Tools._tool_buttons.get_children():
-			var left_background: NinePatchRect = child.get_node("BackgroundRight")
-			left_background.modulate = Global.right_tool_color
-		Tools._slots[MOUSE_BUTTON_RIGHT].tool_node.color_rect.color = Global.right_tool_color
-
-	elif prop == "tool_button_size":
-		Tools.set_button_size(Global.tool_button_size)
-
-	elif prop == "native_cursors":
-		if Global.native_cursors:
-			Input.set_custom_mouse_cursor(null, Input.CURSOR_CROSS, Vector2(15, 15))
-		else:
-			Global.control.set_custom_cursor()
-
-	elif prop == "cross_cursor":
-		if Global.cross_cursor:
-			Global.main_viewport.mouse_default_cursor_shape = Control.CURSOR_CROSS
-		else:
-			Global.main_viewport.mouse_default_cursor_shape = Control.CURSOR_ARROW
-
-	elif prop == "onion_skinning_past_color":
-		Global.canvas.onion_past.blue_red_color = Global.onion_skinning_past_color
-		Global.canvas.refresh_onion()
-	elif prop == "onion_skinning_future_color":
-		Global.canvas.onion_future.blue_red_color = Global.onion_skinning_future_color
-		Global.canvas.refresh_onion()
-
-	Global.config_cache.save("user://cache.ini")
 
 
 func disable_restore_default_button(button: BaseButton, disable: bool) -> void:
@@ -356,6 +275,7 @@ func _on_PreferencesDialog_visibility_changed() -> void:
 	if not visible:
 		list.clear()
 		Global.dialog_open(false)
+		Global.config_cache.save("user://cache.ini")
 
 
 func _on_List_item_selected(index: int) -> void:

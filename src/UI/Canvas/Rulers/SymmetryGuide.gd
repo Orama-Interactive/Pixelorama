@@ -12,8 +12,7 @@ func _ready() -> void:
 	texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	texture_mode = Line2D.LINE_TEXTURE_TILE
 	width = 4.0 / Global.camera.zoom.x
-	# Add a subtle difference to the normal guide color by mixing in some blue
-	default_color = Global.guide_color.lerp(Color(0.2, 0.2, .65), .6)
+	set_color(Global.guide_color)
 
 
 func _input(_event: InputEvent) -> void:
@@ -22,12 +21,17 @@ func _input(_event: InputEvent) -> void:
 	super._input(_event)
 	if type == Types.HORIZONTAL:
 		project.y_symmetry_point = points[0].y * 2 - 1
-		points[0].y = clamp(points[0].y, 0, Global.current_project.size.y)
-		points[1].y = clamp(points[1].y, 0, Global.current_project.size.y)
+		points[0].y = clampi(points[0].y, 0, Global.current_project.size.y)
+		points[1].y = clampi(points[1].y, 0, Global.current_project.size.y)
 	elif type == Types.VERTICAL:
-		points[0].x = clamp(points[0].x, 0, Global.current_project.size.x)
-		points[1].x = clamp(points[1].x, 0, Global.current_project.size.x)
+		points[0].x = clampi(points[0].x, 0, Global.current_project.size.x)
+		points[1].x = clampi(points[1].x, 0, Global.current_project.size.x)
 		project.x_symmetry_point = points[0].x * 2 - 1
+
+
+## Add a subtle difference to the normal guide color by mixing in some blue
+func set_color(color: Color) -> void:
+	default_color = color.lerp(Color(.2, .2, .65), .6)
 
 
 func _outside_canvas() -> bool:

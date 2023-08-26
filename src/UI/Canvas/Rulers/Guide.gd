@@ -99,7 +99,7 @@ func _draw() -> void:
 		)
 
 	var string := (
-		"%spx" % str(snapped(mouse_pos.y if type == Types.HORIZONTAL else mouse_pos.x, 0.5))
+		"%spx" % str(snappedf(mouse_pos.y if type == Types.HORIZONTAL else mouse_pos.x, 0.5))
 	)
 	var color: Color = Global.control.theme.get_color("font_color", "Label")
 	# X and Y offsets for nicer looking spacing
@@ -205,6 +205,10 @@ func _draw() -> void:
 
 func force_input(event: InputEvent) -> void:
 	_input(event)
+
+
+func set_color(color: Color) -> void:
+	default_color = color
 
 
 func _outside_canvas() -> bool:
