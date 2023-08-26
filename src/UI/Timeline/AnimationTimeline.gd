@@ -155,12 +155,12 @@ func cel_size_changed(value: int) -> void:
 func add_frame() -> void:
 	var project: Project = Global.current_project
 	var frame_add_index := project.current_frame + 1
-	var frame: Frame = project.new_empty_frame()
+	var frame := project.new_empty_frame()
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	for l in range(project.layers.size()):
 		if project.layers[l].new_cels_linked:  # If the link button is pressed
-			var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
+			var prev_cel := project.frames[project.current_frame].cels[l]
 			if prev_cel.link_set == null:
 				prev_cel.link_set = {}
 				project.undo_redo.add_do_method(
@@ -223,8 +223,8 @@ func delete_frames(indices := []) -> void:
 	if indices.size() == project.frames.size():
 		indices.remove_at(indices.size() - 1)  # Ensure the project has at least 1 frame
 
-	var current_frame: int = min(project.current_frame, project.frames.size() - indices.size() - 1)
-	var frames := []
+	var current_frame := mini(project.current_frame, project.frames.size() - indices.size() - 1)
+	var frames: Array[Frame] = []
 	var frame_correction := 0  # Only needed for tag adjustment
 
 	var new_animation_tags := project.animation_tags.duplicate()
@@ -288,8 +288,8 @@ func copy_frames(indices := [], destination := -1) -> void:
 				indices.append(f)
 		indices.sort()
 
-	var copied_frames := []
-	var copied_indices := []  # the indices of newly copied frames
+	var copied_frames: Array[Frame] = []
+	var copied_indices := PackedInt32Array()  # the indices of newly copied frames
 
 	if destination != -1:
 		copied_indices = range(destination + 1, (destination + 1) + indices.size())
@@ -308,17 +308,17 @@ func copy_frames(indices := [], destination := -1) -> void:
 	project.undos += 1
 	project.undo_redo.create_action("Add Frame")
 	for f in indices:
-		var src_frame: Frame = project.frames[f]
+		var src_frame := project.frames[f]
 		var new_frame := Frame.new()
 		copied_frames.append(new_frame)
 
 		new_frame.duration = src_frame.duration
 		for l in range(project.layers.size()):
-			var src_cel: BaseCel = project.frames[f].cels[l]  # Cel we're copying from, the source
+			var src_cel := project.frames[f].cels[l]  # Cel we're copying from, the source
 			var new_cel: BaseCel
 			var selected_id := -1
 			if src_cel is Cel3D:
-				new_cel = src_cel.get_script().new(
+				new_cel = Cel3D.new(
 					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
 				)
 				if src_cel.selected != null:
@@ -364,9 +364,9 @@ func copy_frames(indices := [], destination := -1) -> void:
 	project.undo_redo.commit_action()
 	# Select all the new frames so that it is easier to move/offset collectively if user wants
 	# To ease animation workflow, new current frame is the first copied frame instead of the last
-	var range_start: int = copied_indices[-1]
-	var range_end = copied_indices[0]
-	var frame_diff_sign = sign(range_end - range_start)
+	var range_start := copied_indices[-1]
+	var range_end := copied_indices[0]
+	var frame_diff_sign := signi(range_end - range_start)
 	if frame_diff_sign == 0:
 		frame_diff_sign = 1
 	for i in range(range_start, range_end + frame_diff_sign, frame_diff_sign):
@@ -385,17 +385,15 @@ func _on_FrameTagButton_pressed() -> void:
 
 
 func _on_MoveLeft_pressed() -> void:
-	var frame: int = Global.current_project.current_frame
-	if frame == 0:
+	if Global.current_project.current_frame == 0:
 		return
-	Global.frame_hbox.get_child(frame).change_frame_order(-1)
+	Global.frame_hbox.get_child(Global.current_project.current_frame).change_frame_order(-1)
 
 
 func _on_MoveRight_pressed() -> void:
-	var frame: int = Global.current_project.current_frame
-	if frame == Global.current_project.frames.size() - 1:  # using last_frame caused problems
+	if Global.current_project.current_frame == Global.current_project.frames.size() - 1:
 		return
-	Global.frame_hbox.get_child(frame).change_frame_order(1)
+	Global.frame_hbox.get_child(Global.current_project.current_frame).change_frame_order(1)
 
 
 func reverse_frames(indices := []) -> void:
@@ -539,7 +537,7 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 				&& Global.current_project.current_frame + 1 <= tag.to
 			):
 				first_frame = tag.from - 1
-				last_frame = min(Global.current_project.frames.size() - 1, tag.to - 1)
+				last_frame = mini(Global.current_project.frames.size() - 1, tag.to - 1)
 
 	if first_frame == last_frame:
 		if forward_dir:
@@ -564,8 +562,7 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 		var duration: float = (
 			Global.current_project.frames[Global.current_project.current_frame].duration
 		)
-		var fps = Global.current_project.fps
-		Global.animation_timer.wait_time = duration * (1 / fps)
+		Global.animation_timer.wait_time = duration * (1 / Global.current_project.fps)
 		Global.animation_timer.start()
 		animation_forward = forward_dir
 	else:
@@ -599,7 +596,7 @@ func _on_FirstFrame_pressed() -> void:
 
 
 func _on_FPSValue_value_changed(value: float) -> void:
-	Global.current_project.fps = float(value)
+	Global.current_project.fps = value
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 
 
@@ -638,7 +635,7 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 
 func add_layer(type: int) -> void:
 	var project: Project = Global.current_project
-	var current_layer = project.layers[project.current_layer]
+	var current_layer := project.layers[project.current_layer]
 	var l: BaseLayer
 	match type:
 		Global.LayerTypes.PIXEL:
@@ -681,7 +678,7 @@ func add_layer(type: int) -> void:
 
 func _on_CloneLayer_pressed() -> void:
 	var project: Project = Global.current_project
-	var source_layers: Array = project.layers[project.current_layer].get_children(true)
+	var source_layers := project.layers[project.current_layer].get_children(true)
 	source_layers.append(project.layers[project.current_layer])
 
 	var clones: Array[BaseLayer] = []
@@ -702,7 +699,7 @@ func _on_CloneLayer_pressed() -> void:
 			var src_cel: BaseCel = frame.cels[src_layer.index]
 			var new_cel: BaseCel
 			if src_cel is Cel3D:
-				new_cel = src_cel.get_script().new(
+				new_cel = Cel3D.new(
 					src_cel.size, false, src_cel.object_properties, src_cel.scene_properties
 				)
 			else:
@@ -725,7 +722,7 @@ func _on_CloneLayer_pressed() -> void:
 			cels[-1].append(new_cel)
 
 	for cl_layer in clones:
-		var p = source_layers.find(cl_layer.parent)
+		var p := source_layers.find(cl_layer.parent)
 		if p > -1:  # Swap parent with clone if the parent is one of the source layers
 			cl_layer.parent = clones[p]
 		else:  # Add (Copy) to the name if its not a child of another copied layer
@@ -751,9 +748,9 @@ func _on_RemoveLayer_pressed() -> void:
 	if project.layers.size() == 1:
 		return
 
-	var layers: Array = project.layers[project.current_layer].get_children(true)
+	var layers := project.layers[project.current_layer].get_children(true)
 	layers.append(project.layers[project.current_layer])
-	var indices := []
+	var indices := PackedInt32Array()
 	for l in layers:
 		indices.append(l.index)
 
@@ -767,19 +764,19 @@ func _on_RemoveLayer_pressed() -> void:
 	project.undo_redo.create_action("Remove Layer")
 	project.undo_redo.add_do_method(project.remove_layers.bind(indices))
 	project.undo_redo.add_undo_method(project.add_layers.bind(layers, indices, cels))
-	project.undo_redo.add_do_method(project.change_cel.bind(-1, max(indices[0] - 1, 0)))
+	project.undo_redo.add_do_method(project.change_cel.bind(-1, maxi(indices[0] - 1, 0)))
 	project.undo_redo.add_undo_method(project.change_cel.bind(-1, project.current_layer))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
 
 
-# Move the layer up or down in layer order and/or reparent to be deeper/shallower in the
-# layer hierarchy depending on its current index and parent
+## Move the layer up or down in layer order and/or reparent to be deeper/shallower in the
+## layer hierarchy depending on its current index and parent
 func change_layer_order(up: bool) -> void:
 	var project: Project = Global.current_project
-	var layer: BaseLayer = project.layers[project.current_layer]
-	var child_count = layer.get_child_count(true)
+	var layer := project.layers[project.current_layer]
+	var child_count := layer.get_child_count(true)
 	var from_indices := range(layer.index - child_count, layer.index + 1)
 	var from_parents := []
 	for l in from_indices:
@@ -788,7 +785,7 @@ func change_layer_order(up: bool) -> void:
 	var to_index = layer.index - child_count  # the index where the LOWEST shifted layer should end up
 
 	if up:
-		var above_layer: BaseLayer = project.layers[project.current_layer + 1]
+		var above_layer := project.layers[project.current_layer + 1]
 		if layer.parent == above_layer:  # Above is the parent, leave the parent and go up
 			to_parents[-1] = above_layer.parent
 			to_index = to_index + 1
@@ -808,7 +805,7 @@ func change_layer_order(up: bool) -> void:
 				return
 			to_parents[-1] = layer.parent.parent  # Drop a level in the hierarchy
 		else:
-			var below_layer: BaseLayer = project.layers[project.current_layer - 1 - child_count]
+			var below_layer := project.layers[project.current_layer - 1 - child_count]
 			if layer.parent != below_layer.parent:  # If there is a hierarchy change
 				to_parents[-1] = layer.parent.parent  # Drop a level in the hierarchy
 			elif below_layer.accepts_child(layer):
@@ -833,8 +830,10 @@ func change_layer_order(up: bool) -> void:
 
 func _on_MergeDownLayer_pressed() -> void:
 	var project: Project = Global.current_project
-	var top_layer: BaseLayer = project.layers[project.current_layer]
-	var bottom_layer: PixelLayer = project.layers[project.current_layer - 1]
+	var top_layer := project.layers[project.current_layer]
+	var bottom_layer := project.layers[project.current_layer - 1]
+	if not bottom_layer is PixelLayer:
+		return
 	var top_cels := []
 
 	project.undos += 1
@@ -849,15 +848,15 @@ func _on_MergeDownLayer_pressed() -> void:
 		if frame.cels[top_layer.index].opacity < 1:  # If we have layer transparency
 			for xx in top_image.get_size().x:
 				for yy in top_image.get_size().y:
-					var pixel_color: Color = top_image.get_pixel(xx, yy)
-					var alpha: float = pixel_color.a * frame.cels[top_layer.index].opacity
+					var pixel_color := top_image.get_pixel(xx, yy)
+					var alpha := pixel_color.a * frame.cels[top_layer.index].opacity
 					top_image.set_pixel(
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
-		var bottom_cel: BaseCel = frame.cels[bottom_layer.index]
+		var bottom_cel := frame.cels[bottom_layer.index]
 		var bottom_image := Image.new()
-		bottom_image.copy_from(bottom_cel.image)
-		bottom_image.blend_rect(top_image, Rect2(Vector2.ZERO, project.size), Vector2.ZERO)
+		bottom_image.copy_from(bottom_cel.get_image())
+		bottom_image.blend_rect(top_image, Rect2i(Vector2i.ZERO, project.size), Vector2i.ZERO)
 		if (
 			bottom_cel.link_set != null
 			and bottom_cel.link_set.size() > 1
@@ -890,13 +889,13 @@ func _on_MergeDownLayer_pressed() -> void:
 
 
 func _on_OpacitySlider_value_changed(value: float) -> void:
-	var new_opacity := value / 100
+	var new_opacity := value / 100.0
 	var current_layer_idx := Global.current_project.current_layer
 	# Also update all selected frames.
 	for idx_pair in Global.current_project.selected_cels:
 		if idx_pair[1] == current_layer_idx:
-			var frame: Frame = Global.current_project.frames[idx_pair[0]]
-			var cel: BaseCel = frame.cels[current_layer_idx]
+			var frame := Global.current_project.frames[idx_pair[0]]
+			var cel := frame.cels[current_layer_idx]
 			cel.opacity = new_opacity
 	Global.canvas.queue_redraw()
 
@@ -926,7 +925,7 @@ func project_changed() -> void:
 	for i in project.layers.size():
 		project_layer_added(i)
 	for f in project.frames.size():
-		var button: Button = frame_button_node.instantiate()
+		var button := frame_button_node.instantiate() as Button
 		button.frame = f
 		Global.frame_hbox.add_child(button)
 
@@ -961,7 +960,7 @@ func project_frame_added(frame: int) -> void:
 	)
 	var layer := Global.cel_vbox.get_child_count() - 1
 	for cel_hbox in Global.cel_vbox.get_children():
-		var cel_button = project.frames[frame].cels[layer].instantiate_cel_button()
+		var cel_button := project.frames[frame].cels[layer].instantiate_cel_button()
 		cel_button.frame = frame
 		cel_button.layer = layer
 		cel_hbox.add_child(cel_button)
@@ -979,14 +978,14 @@ func project_frame_removed(frame: int) -> void:
 func project_layer_added(layer: int) -> void:
 	var project: Project = Global.current_project
 
-	var layer_button: LayerButton = project.layers[layer].instantiate_layer_button()
+	var layer_button := project.layers[layer].instantiate_layer_button() as LayerButton
 	layer_button.layer = layer
 	if project.layers[layer].name == "":
 		project.layers[layer].set_name_to_default(Global.current_project.layers.size())
 
 	var cel_hbox := HBoxContainer.new()
 	for f in project.frames.size():
-		var cel_button = project.frames[f].cels[layer].instantiate_cel_button()
+		var cel_button := project.frames[f].cels[layer].instantiate_cel_button()
 		cel_button.frame = f
 		cel_button.layer = layer
 		cel_hbox.add_child(cel_button)
@@ -1009,7 +1008,7 @@ func project_layer_removed(layer: int) -> void:
 
 func project_cel_added(frame: int, layer: int) -> void:
 	var cel_hbox := Global.cel_vbox.get_child(Global.cel_vbox.get_child_count() - 1 - layer)
-	var cel_button = Global.current_project.frames[frame].cels[layer].instantiate_cel_button()
+	var cel_button := Global.current_project.frames[frame].cels[layer].instantiate_cel_button()
 	cel_button.frame = frame
 	cel_button.layer = layer
 	cel_hbox.add_child(cel_button)

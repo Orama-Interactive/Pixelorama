@@ -21,8 +21,8 @@ func is_ancestor_of(layer: BaseLayer) -> bool:
 	return false
 
 
-func get_children(recursive: bool) -> Array:
-	var children := []
+func get_children(recursive: bool) -> Array[BaseLayer]:
+	var children: Array[BaseLayer] = []
 	if recursive:
 		for i in index:
 			if is_ancestor_of(project.layers[i]):
