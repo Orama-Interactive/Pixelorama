@@ -51,8 +51,8 @@ func _on_active_tab_rearranged(idx_to: int) -> void:
 	OpenSave.current_save_paths.remove_at(Global.current_project_index)
 	OpenSave.current_save_paths.insert(idx_to, temp_save_path)
 	var temp_backup_path := OpenSave.backup_save_paths[Global.current_project_index]
-	OpenSave.backup_save_paths.remove_at(Global.current_project_index)
-	OpenSave.backup_save_paths.insert(idx_to, temp_save_path)
+	OpenSave.backup_save_paths.remove(Global.current_project_index)
+	OpenSave.backup_save_paths.insert(idx_to, temp_backup_path)
 
 
 func delete_tab(tab: int) -> void:
