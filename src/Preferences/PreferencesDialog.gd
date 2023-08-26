@@ -97,7 +97,6 @@ var preferences: Array[Preference] = [
 
 var content_list := []
 var selected_item := 0
-var restore_default_button_tcsn := preload("res://src/Preferences/RestoreDefaultButton.tscn")
 
 @onready var list: ItemList = $HSplitContainer/List
 @onready var right_side: VBoxContainer = $"%RightSide"
@@ -164,7 +163,7 @@ func _ready() -> void:
 
 	for pref in preferences:
 		var node := right_side.get_node(pref.node_path)
-		var restore_default_button: BaseButton = restore_default_button_tcsn.instantiate()
+		var restore_default_button := RestoreDefaultButton.new()
 		restore_default_button.setting_name = pref.prop_name
 		restore_default_button.value_type = pref.value_type
 		restore_default_button.default_value = pref.default_value
@@ -229,7 +228,7 @@ func _ready() -> void:
 			)
 
 
-func _on_Preference_value_changed(value, pref: Preference, restore_default: BaseButton) -> void:
+func _on_Preference_value_changed(value, pref: Preference, button: RestoreDefaultButton) -> void:
 	var prop := pref.prop_name
 	var default_value = pref.default_value
 	Global.set(prop, value)
@@ -239,7 +238,7 @@ func _on_Preference_value_changed(value, pref: Preference, restore_default: Base
 	var disable: bool = Global.get(prop) == default_value
 	if typeof(value) == TYPE_COLOR:
 		disable = Global.get(prop).is_equal_approx(default_value)
-	disable_restore_default_button(restore_default, disable)
+	disable_restore_default_button(button, disable)
 
 
 func preference_update(require_restart := false) -> void:
@@ -248,7 +247,7 @@ func preference_update(require_restart := false) -> void:
 		return
 
 
-func disable_restore_default_button(button: BaseButton, disable: bool) -> void:
+func disable_restore_default_button(button: RestoreDefaultButton, disable: bool) -> void:
 	button.disabled = disable
 	if disable:
 		button.mouse_default_cursor_shape = Control.CURSOR_ARROW
