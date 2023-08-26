@@ -17,7 +17,7 @@ func _draw() -> void:
 	if not target_rect.has_area():
 		return
 
-	var grid_type: int = Global.grid_type
+	var grid_type := Global.grid_type
 	if grid_type == Global.GridTypes.CARTESIAN || grid_type == Global.GridTypes.ALL:
 		_draw_cartesian_grid(target_rect)
 
@@ -26,11 +26,7 @@ func _draw() -> void:
 
 
 func _draw_cartesian_grid(target_rect: Rect2i) -> void:
-	# Using Array instead of PoolVector2Array to avoid kinda
-	# random "resize: Can't resize PoolVector if locked" errors.
-	#  See: https://github.com/Orama-Interactive/Pixelorama/issues/331
-	# It will be converted to PoolVector2Array before being sent to be rendered.
-	var grid_multiline_points := []
+	var grid_multiline_points := PackedVector2Array()
 
 	var x: float = (
 		target_rect.position.x
@@ -55,11 +51,7 @@ func _draw_cartesian_grid(target_rect: Rect2i) -> void:
 
 
 func _draw_isometric_grid(target_rect: Rect2i) -> void:
-	# Using Array instead of PoolVector2Array to avoid kinda
-	# random "resize: Can't resize PoolVector if locked" errors.
-	#  See: https://github.com/Orama-Interactive/Pixelorama/issues/331
-	# It will be converted to PoolVector2Array before being sent to be rendered.
-	var grid_multiline_points := []
+	var grid_multiline_points := PackedVector2Array()
 
 	var cell_size := Global.isometric_grid_size
 	var max_cell_count := target_rect.size / cell_size
