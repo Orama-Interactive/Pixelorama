@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func _notification(what: int) -> void:
-	if what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_IN:
 		in_focus.emit()
 
 
@@ -78,15 +78,12 @@ func _define_js() -> void:
 func load_image(load_directly := true):
 	if !OS.has_feature("web"):
 		return
-
 	# Execute JS function
 	JavaScriptBridge.eval("upload_image();", true)  # Opens prompt for choosing file
-
-	await self.in_focus  # Wait until JS prompt is closed
-
+	await in_focus  # Wait until JS prompt is closed
 	await get_tree().create_timer(0.5).timeout  # Give some time for async JS data load
 
-	if JavaScriptBridge.eval("canceled;", true):  # If File Dialog closed w/o file
+	if JavaScriptBridge.eval("canceled;", true) == 1:  # If File Dialog closed w/o file
 		return
 
 	# Use data from png data
