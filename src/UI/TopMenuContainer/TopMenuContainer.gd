@@ -186,7 +186,8 @@ func _setup_tile_mode_submenu(item: String) -> void:
 
 func _setup_snap_to_submenu(item: String) -> void:
 	snap_to_submenu.set_name("snap_to_submenu")
-	snap_to_submenu.add_check_item("Snap to Rectangular Grid")
+	snap_to_submenu.add_check_item("Snap to Rectangular Grid Boundaries")
+	snap_to_submenu.add_check_item("Snap to Rectangular Grid Center")
 	snap_to_submenu.add_check_item("Snap to Guides")
 	snap_to_submenu.add_check_item("Snap to Perspective Guides")
 	snap_to_submenu.connect("id_pressed", self, "_snap_to_submenu_id_pressed")
@@ -506,12 +507,15 @@ func _tile_mode_submenu_id_pressed(id: int) -> void:
 
 func _snap_to_submenu_id_pressed(id: int) -> void:
 	if id == 0:
-		Global.snap_to_rectangular_grid = !Global.snap_to_rectangular_grid
-		snap_to_submenu.set_item_checked(id, Global.snap_to_rectangular_grid)
-	elif id == 1:
+		Global.snap_to_rectangular_grid_boundary = !Global.snap_to_rectangular_grid_boundary
+		snap_to_submenu.set_item_checked(id, Global.snap_to_rectangular_grid_boundary)
+	if id == 1:
+		Global.snap_to_rectangular_grid_center = !Global.snap_to_rectangular_grid_center
+		snap_to_submenu.set_item_checked(id, Global.snap_to_rectangular_grid_center)
+	elif id == 2:
 		Global.snap_to_guides = !Global.snap_to_guides
 		snap_to_submenu.set_item_checked(id, Global.snap_to_guides)
-	elif id == 2:
+	elif id == 3:
 		Global.snap_to_perspective_guides = !Global.snap_to_perspective_guides
 		snap_to_submenu.set_item_checked(id, Global.snap_to_perspective_guides)
 
