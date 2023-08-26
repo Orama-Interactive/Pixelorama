@@ -9,7 +9,7 @@ func _draw() -> void:
 	if not Global.draw_pixel_grid:
 		return
 
-	var zoom_percentage := 100.0 / Global.camera.zoom.x
+	var zoom_percentage := 100.0 * Global.camera.zoom.x
 	if zoom_percentage < Global.pixel_grid_show_at_zoom:
 		return
 
