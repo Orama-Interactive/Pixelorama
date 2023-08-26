@@ -723,6 +723,94 @@ brush_size_decrement={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"command_or_control_autoremap":true,"alt_pressed":false,"shift_pressed":false,"button_mask":16,"position":Vector2(83, 19),"global_position":Vector2(87, 62),"factor":1.0,"button_index":5,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+new_layer={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194311,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+remove_layer={
+"deadzone": 0.5,
+"events": []
+}
+move_layer_up={
+"deadzone": 0.5,
+"events": []
+}
+move_layer_down={
+"deadzone": 0.5,
+"events": []
+}
+clone_layer={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"command_or_control_autoremap":true,"alt_pressed":false,"shift_pressed":false,"pressed":false,"keycode":4194311,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+merge_down_layer={
+"deadzone": 0.5,
+"events": []
+}
+add_frame={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194311,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+remove_frame={
+"deadzone": 0.5,
+"events": []
+}
+clone_frame={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"command_or_control_autoremap":true,"alt_pressed":false,"shift_pressed":true,"pressed":false,"keycode":4194311,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+manage_frame_tags={
+"deadzone": 0.5,
+"events": []
+}
+move_frame_left={
+"deadzone": 0.5,
+"events": []
+}
+move_frame_right={
+"deadzone": 0.5,
+"events": []
+}
+reset_colors_default={
+"deadzone": 0.5,
+"events": []
+}
+horizontal_mirror={
+"deadzone": 0.5,
+"events": []
+}
+vertical_mirror={
+"deadzone": 0.5,
+"events": []
+}
+pixel_perfect={
+"deadzone": 0.5,
+"events": []
+}
+new_palette={
+"deadzone": 0.5,
+"events": []
+}
+edit_palette={
+"deadzone": 0.5,
+"events": []
+}
+onion_skinning_toggle={
+"deadzone": 0.5,
+"events": []
+}
+loop_toggle={
+"deadzone": 0.5,
+"events": []
+}
+onion_skinning_settings={
+"deadzone": 0.5,
+"events": []
+}
 
 [internationalization]
 

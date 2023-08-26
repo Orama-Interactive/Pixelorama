@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://wplk62pbgih4"]
+[gd_scene load_steps=12 format=3 uid="uid://wplk62pbgih4"]
 
 [ext_resource type="PackedScene" uid="uid://c0p84w7umxwt1" path="res://src/Palette/EditPaletteDialog.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://biyn51upnlxle" path="res://assets/graphics/palette/edit.png" id="2"]
@@ -7,6 +7,18 @@
 [ext_resource type="Script" path="res://src/Palette/PaletteGrid.gd" id="5"]
 [ext_resource type="Script" path="res://src/Palette/PaletteScroll.gd" id="6"]
 [ext_resource type="Script" path="res://src/Palette/PalettePanel.gd" id="8"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_4n3yg"]
+action = &"edit_palette"
+
+[sub_resource type="Shortcut" id="Shortcut_jl8vt"]
+events = [SubResource("InputEventAction_4n3yg")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_mdfjt"]
+action = &"new_palette"
+
+[sub_resource type="Shortcut" id="Shortcut_6f4gc"]
+events = [SubResource("InputEventAction_mdfjt")]
 
 [node name="PalettePanel" type="PanelContainer"]
 size_flags_horizontal = 3
@@ -34,6 +46,7 @@ custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 tooltip_text = "Edit currently selected palette"
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_jl8vt")
 
 [node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/EditPalette"]
 layout_mode = 0
@@ -54,6 +67,7 @@ custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 tooltip_text = "Create a new palette"
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_6f4gc")
 
 [node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/AddPalette"]
 layout_mode = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3vcvhh4d8hd7"]
+[gd_scene load_steps=11 format=3 uid="uid://c3vcvhh4d8hd7"]
 
 [ext_resource type="Texture2D" uid="uid://dkpxkdk1xf0ea" path="res://assets/graphics/misc/color_defaults.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://d0v821l01w7go" path="res://assets/graphics/misc/color_switch.png" id="2"]
@@ -20,6 +20,12 @@ shader_parameter/scale = Vector2(0, 0)
 shader_parameter/rect_size = Vector2(0, 0)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
+
+[sub_resource type="InputEventAction" id="InputEventAction_nptxe"]
+action = &"reset_colors_default"
+
+[sub_resource type="Shortcut" id="Shortcut_uay2n"]
+events = [SubResource("InputEventAction_nptxe")]
 
 [node name="ColorPickers" type="PanelContainer"]
 offset_left = 958.0
@@ -139,6 +145,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 tooltip_text = "Reset the colors to their default state (black for left, white for right)"
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_uay2n")
 texture_normal = ExtResource("1")
 
 [node name="RightColorPickerButton" type="ColorPickerButton" parent="ColorPickersHorizontal"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dbr6mulku2qju"]
+[gd_scene load_steps=69 format=3 uid="uid://dbr6mulku2qju"]
 
 [ext_resource type="Script" path="res://src/UI/Timeline/AnimationTimeline.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d36mlbmq06q4e" path="res://assets/graphics/layers/new.png" id="2"]
@@ -27,6 +27,78 @@
 [ext_resource type="Texture2D" uid="uid://fbwld5ofmocm" path="res://assets/graphics/timeline/loop.png" id="31"]
 [ext_resource type="PackedScene" uid="uid://c6je8lgr850wf" path="res://src/UI/Timeline/FrameTagDialog.tscn" id="42"]
 
+[sub_resource type="InputEventAction" id="InputEventAction_r3l7p"]
+action = &"new_layer"
+
+[sub_resource type="Shortcut" id="Shortcut_tpvn2"]
+events = [SubResource("InputEventAction_r3l7p")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_n6pnq"]
+action = &"remove_layer"
+
+[sub_resource type="Shortcut" id="Shortcut_xar00"]
+events = [SubResource("InputEventAction_n6pnq")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_xm3sl"]
+action = &"move_layer_up"
+
+[sub_resource type="Shortcut" id="Shortcut_r300c"]
+events = [SubResource("InputEventAction_xm3sl")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_wqdok"]
+action = &"move_layer_down"
+
+[sub_resource type="Shortcut" id="Shortcut_763li"]
+events = [SubResource("InputEventAction_wqdok")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_4vegv"]
+action = &"clone_layer"
+
+[sub_resource type="Shortcut" id="Shortcut_0o4ap"]
+events = [SubResource("InputEventAction_4vegv")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_ihf65"]
+action = &"merge_down_layer"
+
+[sub_resource type="Shortcut" id="Shortcut_wbf7k"]
+events = [SubResource("InputEventAction_ihf65")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_sduor"]
+action = &"add_frame"
+
+[sub_resource type="Shortcut" id="Shortcut_mvoxm"]
+events = [SubResource("InputEventAction_sduor")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_ajjsq"]
+action = &"remove_frame"
+
+[sub_resource type="Shortcut" id="Shortcut_o40ql"]
+events = [SubResource("InputEventAction_ajjsq")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_yptjb"]
+action = &"clone_frame"
+
+[sub_resource type="Shortcut" id="Shortcut_5g7t7"]
+events = [SubResource("InputEventAction_yptjb")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_jp76a"]
+action = &"manage_frame_tags"
+
+[sub_resource type="Shortcut" id="Shortcut_renbb"]
+events = [SubResource("InputEventAction_jp76a")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_ar42u"]
+action = &"move_frame_left"
+
+[sub_resource type="Shortcut" id="Shortcut_kwn1u"]
+events = [SubResource("InputEventAction_ar42u")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_unp5j"]
+action = &"move_frame_right"
+
+[sub_resource type="Shortcut" id="Shortcut_m2mvi"]
+events = [SubResource("InputEventAction_unp5j")]
+
 [sub_resource type="Shortcut" id="4"]
 
 [sub_resource type="Shortcut" id="6"]
@@ -38,6 +110,24 @@
 [sub_resource type="Shortcut" id="12"]
 
 [sub_resource type="Shortcut" id="14"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_1xym1"]
+action = &"onion_skinning_settings"
+
+[sub_resource type="Shortcut" id="Shortcut_tke6v"]
+events = [SubResource("InputEventAction_1xym1")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_iu7kc"]
+action = &"onion_skinning_toggle"
+
+[sub_resource type="Shortcut" id="Shortcut_pouu1"]
+events = [SubResource("InputEventAction_iu7kc")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_dmtwd"]
+action = &"loop_toggle"
+
+[sub_resource type="Shortcut" id="Shortcut_1onr8"]
+events = [SubResource("InputEventAction_dmtwd")]
 
 [sub_resource type="StyleBoxEmpty" id="15"]
 
@@ -93,6 +183,7 @@ size_flags_vertical = 4
 tooltip_text = "Create a new layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_tpvn2")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/AddLayer"]
 layout_mode = 0
@@ -145,6 +236,7 @@ tooltip_text = "Remove current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
+shortcut = SubResource("Shortcut_xar00")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/RemoveLayer"]
 layout_mode = 0
@@ -168,6 +260,7 @@ tooltip_text = "Move up the current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
+shortcut = SubResource("Shortcut_r300c")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MoveUpLayer"]
 layout_mode = 0
@@ -191,6 +284,7 @@ tooltip_text = "Move down the current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
+shortcut = SubResource("Shortcut_763li")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MoveDownLayer"]
 layout_mode = 0
@@ -213,6 +307,7 @@ size_flags_vertical = 4
 tooltip_text = "Clone current layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_0o4ap")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/CloneLayer"]
 layout_mode = 0
@@ -236,6 +331,7 @@ tooltip_text = "Merge current layer with the one below"
 focus_mode = 0
 mouse_default_cursor_shape = 8
 disabled = true
+shortcut = SubResource("Shortcut_wbf7k")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/VBoxContainer/LayerButtons/MergeDownLayer"]
 layout_mode = 0
@@ -293,6 +389,7 @@ size_flags_horizontal = 0
 tooltip_text = "Add a new frame"
 focus_mode = 0
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_mvoxm")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/AddFrame"]
 layout_mode = 0
@@ -313,6 +410,7 @@ size_flags_horizontal = 0
 tooltip_text = "Remove Frame"
 focus_mode = 0
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_o40ql")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/DeleteFrame"]
 layout_mode = 0
@@ -335,6 +433,7 @@ size_flags_horizontal = 0
 tooltip_text = "Clone Frame"
 focus_mode = 0
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_5g7t7")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/CopyFrame"]
 layout_mode = 0
@@ -355,6 +454,7 @@ size_flags_horizontal = 0
 tooltip_text = "Manage frame tags"
 focus_mode = 0
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_renbb")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/FrameTagButton"]
 layout_mode = 0
@@ -375,6 +475,7 @@ size_flags_horizontal = 0
 tooltip_text = "Move the selected frame to the left."
 focus_mode = 0
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_kwn1u")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveLeft"]
 layout_mode = 0
@@ -396,6 +497,7 @@ size_flags_horizontal = 0
 tooltip_text = "Move the selected frame to the right."
 focus_mode = 0
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_m2mvi")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/FrameButtons/MoveRight"]
 layout_mode = 0
@@ -557,6 +659,7 @@ size_flags_horizontal = 0
 tooltip_text = "Onion Skinning settings"
 focus_mode = 0
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_tke6v")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/OnionSkinningSettings"]
 layout_mode = 0
@@ -578,6 +681,7 @@ layout_mode = 2
 tooltip_text = "Enable/disable Onion Skinning"
 focus_mode = 0
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_pouu1")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/OnionSkinning"]
 layout_mode = 0
@@ -599,6 +703,7 @@ layout_mode = 2
 tooltip_text = "Cycle loop"
 focus_mode = 0
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_1onr8")
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/LoopButtons/LoopAnim"]
 layout_mode = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://wo0hqxkst808"]
+[gd_scene load_steps=20 format=3 uid="uid://wo0hqxkst808"]
 
 [ext_resource type="Texture2D" uid="uid://cjrokejjsp5dm" path="res://assets/graphics/misc/horizontal_mirror_off.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://hiduvaa73fr6" path="res://assets/graphics/misc/vertical_mirror_off.png" id="2"]
@@ -8,6 +8,24 @@
 [ext_resource type="Texture2D" uid="uid://dg3dumyfj1682" path="res://assets/graphics/misc/dynamics.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://di8au2u87jgv5" path="res://assets/graphics/misc/uncheck.png" id="7"]
 [ext_resource type="PackedScene" uid="uid://bmsc0s03pwji4" path="res://src/UI/Nodes/MaxMinEdit.tscn" id="8"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_4k08w"]
+action = &"horizontal_mirror"
+
+[sub_resource type="Shortcut" id="Shortcut_eld87"]
+events = [SubResource("InputEventAction_4k08w")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_24etr"]
+action = &"vertical_mirror"
+
+[sub_resource type="Shortcut" id="Shortcut_ai7qc"]
+events = [SubResource("InputEventAction_24etr")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_ebgk6"]
+action = &"pixel_perfect"
+
+[sub_resource type="Shortcut" id="Shortcut_vcyug"]
+events = [SubResource("InputEventAction_ebgk6")]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_ahrcw"]
 allow_unpress = true
@@ -53,6 +71,7 @@ layout_mode = 2
 tooltip_text = "Enable horizontal mirrored drawing"
 mouse_default_cursor_shape = 2
 toggle_mode = true
+shortcut = SubResource("Shortcut_eld87")
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Horizontal"]
 layout_mode = 0
@@ -72,6 +91,7 @@ layout_mode = 2
 tooltip_text = "Enable vertical mirrored drawing"
 mouse_default_cursor_shape = 2
 toggle_mode = true
+shortcut = SubResource("Shortcut_ai7qc")
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Vertical"]
 layout_mode = 0
@@ -92,6 +112,7 @@ tooltip_text = "Pixel Perfect
 Makes lines smooth by removing the extra pixels on the edges"
 mouse_default_cursor_shape = 2
 toggle_mode = true
+shortcut = SubResource("Shortcut_vcyug")
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/PixelPerfect"]
 layout_mode = 0
