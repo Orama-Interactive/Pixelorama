@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v0.11.2] - Unreleased
 This update has been brought to you by the contributions of:
-[@Lsbt1](https://github.com/Lsbt1)
+[@Lsbt1](https://github.com/Lsbt1), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
 Built using Godot 3.5.2
 
@@ -15,6 +15,10 @@ Built using Godot 3.5.2
 
 ### Fixed
 - Fixed a critical bug causing data loss when moving around the tabs of opened projects and then saving them. [#901](https://github.com/Orama-Interactive/Pixelorama/pull/901)
+- Loading corrupt pxo files no longer crashes the program. [#904](https://github.com/Orama-Interactive/Pixelorama/pull/904)
+
+### Removed
+- Pxo files saved with versions prior to v0.8 can no longer get loaded starting version 0.11.2. If you have old files that you need to load, load them in an earlier version first (from v0.8 to v0.11.1) and save them again. [#904](https://github.com/Orama-Interactive/Pixelorama/pull/904)
 
 ## [v0.11.1] - 2023-08-12
 This update has been brought to you by the contributions of:
