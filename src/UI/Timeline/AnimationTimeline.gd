@@ -32,6 +32,8 @@ var frame_button_node := preload("res://src/UI/Timeline/FrameButton.tscn")
 
 
 func _ready() -> void:
+	min_cel_size = get_tree().current_scene.theme.default_font_size + 24
+	cel_size = min_cel_size
 	add_layer_list.get_popup().id_pressed.connect(add_layer)
 	frame_scroll_bar.value_changed.connect(_frame_scroll_changed)
 	Global.animation_timer.wait_time = 1 / Global.current_project.fps
@@ -81,7 +83,7 @@ func _input(event: InputEvent) -> void:
 
 func _get_minimum_size() -> Vector2:
 	# X targets enough to see layers, 1 frame, vertical scrollbar, and padding
-	# Y targets engough to see 1 layer
+	# Y targets enough to see 1 layer
 	if not is_instance_valid(Global.layer_vbox):
 		return Vector2.ZERO
 	return Vector2(Global.layer_vbox.size.x + cel_size + 26, cel_size + 105)
@@ -117,6 +119,8 @@ func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
 
 
 func cel_size_changed(value: int) -> void:
+	if cel_size == value:
+		return
 	cel_size = clampi(value, min_cel_size, max_cel_size)
 	update_minimum_size()
 	Global.config_cache.set_value("timeline", "cel_size", cel_size)
