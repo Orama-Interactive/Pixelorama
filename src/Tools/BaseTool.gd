@@ -147,24 +147,25 @@ func snap_position(position: Vector2) -> Vector2:
 			position = grid_point.floor()
 
 	if Global.snap_to_rectangular_grid_center:
-		var grid_pos := position.snapped(Global.grid_size) + (Global.grid_size / 2)
-		grid_pos += Global.grid_offset
-		# keeping grid_pos as is would have been fine but this adds extra accuracy as to
+		var grid_center := position.snapped(Global.grid_size) + (Global.grid_size / 2)
+		grid_center += Global.grid_offset
+		# keeping grid_center as is would have been fine but this adds extra accuracy as to
 		# which snap point (from the list below) is closest to mouse and occupy THAT point
-		var t_l := grid_pos + Vector2(-Global.grid_size.x, -Global.grid_size.y)
-		var t_c := grid_pos + Vector2(0, -Global.grid_size.y)  # t_c is for "top centre" and so on
-		var t_r := grid_pos + Vector2(Global.grid_size.x, -Global.grid_size.y)
-		var m_l := grid_pos + Vector2(-Global.grid_size.x, 0)
-		var m_c := grid_pos
-		var m_r := grid_pos + Vector2(Global.grid_size.x, 0)
-		var b_l := grid_pos + Vector2(-Global.grid_size.x, Global.grid_size.y)
-		var b_c := grid_pos + Vector2(0, Global.grid_size.y)
-		var b_r := grid_pos + Global.grid_size
+		var t_l := grid_center + Vector2(-Global.grid_size.x, -Global.grid_size.y)
+		var t_c := grid_center + Vector2(0, -Global.grid_size.y)  # t_c is for "top centre" and so on
+		var t_r := grid_center + Vector2(Global.grid_size.x, -Global.grid_size.y)
+		var m_l := grid_center + Vector2(-Global.grid_size.x, 0)
+		var m_c := grid_center
+		var m_r := grid_center + Vector2(Global.grid_size.x, 0)
+		var b_l := grid_center + Vector2(-Global.grid_size.x, Global.grid_size.y)
+		var b_c := grid_center + Vector2(0, Global.grid_size.y)
+		var b_r := grid_center + Global.grid_size
 		var vec_arr := [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
 		for vec in vec_arr:
-			if vec.distance_to(position) < grid_pos.distance_to(position):
-				grid_pos = vec
-		position = grid_pos.floor()
+			if vec.distance_to(position) < grid_center.distance_to(position):
+				grid_center = vec
+		if grid_center.distance_to(position) <= snapping_distance:
+			position = grid_center.floor()
 
 	var snap_to := Vector2.INF
 	if Global.snap_to_guides:
