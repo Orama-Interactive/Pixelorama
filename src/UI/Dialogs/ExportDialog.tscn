@@ -232,6 +232,7 @@ layout_mode = 2
 [node name="GifWarning" type="RichTextLabel" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 bbcode_enabled = true
 text = "If exported GIF is distorted, it is recommended to convert to APNG and then use any online tool like https://ezgif.com/apng-to-gif to turn it to GIF"
