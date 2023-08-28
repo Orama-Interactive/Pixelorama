@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-08-16 00:09\n"
+"PO-Revision-Date: 2023-08-28 12:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -320,8 +320,12 @@ msgid "Snap To"
 msgstr "Delimitar em"
 
 #. Found under the View menu.
-msgid "Snap to Rectangular Grid"
-msgstr "Delimitar à grade retangular"
+msgid "Snap to Rectangular Grid Boundary"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid Center"
+msgstr ""
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -1336,8 +1340,8 @@ msgid "Snapping distance:"
 msgstr "Distância do snap:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
-msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr "Essa é a distância em píxeis na qual a ativação do ajuste automático aos guias e à grade ocorre."
+msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
+msgstr ""
 
 msgid "Grid"
 msgstr "Grade"
