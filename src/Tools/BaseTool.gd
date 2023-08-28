@@ -159,7 +159,7 @@ func snap_position(pos: Vector2) -> Vector2:
 		var m_r := grid_center + Vector2(Global.grid_size.x, 0)
 		var b_l := grid_center + Vector2(-Global.grid_size.x, Global.grid_size.y)
 		var b_c := grid_center + Vector2(0, Global.grid_size.y)
-		var b_r := grid_center + Vector2(Global.grid_offset)
+		var b_r := grid_center + Vector2(Global.grid_size)
 		var vec_arr := [t_l, t_c, t_r, m_l, m_c, m_r, b_l, b_c, b_r]
 		for vec in vec_arr:
 			if vec.distance_to(pos) < grid_center.distance_to(pos):
