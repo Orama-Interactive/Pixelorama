@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-08-18 22:45\n"
+"PO-Revision-Date: 2023-08-28 12:14\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -320,8 +320,12 @@ msgid "Snap To"
 msgstr "Cantol Ke"
 
 #. Found under the View menu.
-msgid "Snap to Rectangular Grid"
-msgstr "Cantol ke Kisi Persegi Panjang"
+msgid "Snap to Rectangular Grid Boundary"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid Center"
+msgstr ""
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -1337,8 +1341,8 @@ msgid "Snapping distance:"
 msgstr "Jarak pencantolan:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
-msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr "Ini adalah jarak berukuran piksel saat pencatolan kisi dan panduan diaktifkan."
+msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
+msgstr ""
 
 msgid "Grid"
 msgstr "Kisi"
