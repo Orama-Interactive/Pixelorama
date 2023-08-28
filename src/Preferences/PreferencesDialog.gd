@@ -143,6 +143,9 @@ func _ready() -> void:
 	shrink_slider.value = Global.shrink  # In case shrink is not equal to 1
 
 	shortcuts.profile_option_button.item_selected.connect(func(_i): Tools.update_hint_tooltips())
+	if shortcuts.profile_option_button.selected != 0:
+		# Manually update tooltips if the shortcut profile is not the default
+		Tools.update_hint_tooltips()
 	for child in shortcuts.get_children():
 		if not child is AcceptDialog:
 			continue
