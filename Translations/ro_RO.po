@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2023-08-15 18:59\n"
+"PO-Revision-Date: 2023-08-28 12:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -320,8 +320,12 @@ msgid "Snap To"
 msgstr "Fixare la"
 
 #. Found under the View menu.
-msgid "Snap to Rectangular Grid"
-msgstr "Fixare la grilă dreptunghiulară"
+msgid "Snap to Rectangular Grid Boundary"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid Center"
+msgstr ""
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -1337,8 +1341,8 @@ msgid "Snapping distance:"
 msgstr "Distanța de ancorare:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
-msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr "Aceasta este distanța în pixeli unde ghidul și fixarea la grilă sunt activate."
+msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
+msgstr ""
 
 msgid "Grid"
 msgstr "Grilă"
