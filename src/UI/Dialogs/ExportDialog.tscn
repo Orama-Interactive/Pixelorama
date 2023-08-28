@@ -8,6 +8,7 @@
 [node name="ExportDialog" type="ConfirmationDialog"]
 canvas_item_default_texture_filter = 0
 title = "Export..."
+size = Vector2i(700, 600)
 exclusive = false
 dialog_hide_on_ok = false
 script = ExtResource("1")
@@ -304,6 +305,10 @@ mouse_filter = 2
 
 [node name="PathDialog" type="FileDialog" parent="Popups"]
 mode = 2
+title = "Open a Directory"
+size = Vector2i(675, 500)
+ok_button_text = "Select Current Folder"
+file_mode = 2
 access = 2
 show_hidden_files = true
 
