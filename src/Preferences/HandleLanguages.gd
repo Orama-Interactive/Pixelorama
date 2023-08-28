@@ -27,7 +27,7 @@ const LANGUAGES_DICT := {
 	"uk_UA": ["Українська", "Ukrainian"],
 }
 
-var loaded_locales := LANGUAGES_DICT.keys()
+var loaded_locales: PackedStringArray = LANGUAGES_DICT.keys()
 
 
 func _ready() -> void:
@@ -38,7 +38,8 @@ func _ready() -> void:
 	if Global.config_cache.has_section_key("preferences", "locale"):
 		saved_locale = Global.config_cache.get_value("preferences", "locale")
 		locale_index = loaded_locales.find(saved_locale)
-	TranslationServer.set_locale(saved_locale)  # If no language is saved, OS' locale is used
+	if TranslationServer.get_locale() != saved_locale:
+		TranslationServer.set_locale(saved_locale)  # If no language is saved, OS' locale is used
 
 	var button_group: ButtonGroup = $"System Language".button_group
 	for locale in loaded_locales:  # Create radiobuttons for each language
@@ -54,10 +55,11 @@ func _ready() -> void:
 
 
 func _on_Language_pressed(index: int) -> void:
-	if index == 1:
-		TranslationServer.set_locale(OS.get_locale())
-	else:
-		TranslationServer.set_locale(loaded_locales[index - 2])
+	var locale := OS.get_locale()
+	if index > 1:
+		locale = loaded_locales[index - 2]
+	if TranslationServer.get_locale() != locale:
+		TranslationServer.set_locale(locale)
 	Global.config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
 	Global.config_cache.save("user://cache.ini")
 

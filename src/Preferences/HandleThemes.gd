@@ -25,7 +25,8 @@ func _ready() -> void:
 	var theme_id: int = Global.config_cache.get_value("preferences", "theme", 0)
 	if theme_id >= themes.size():
 		theme_id = 0
-	change_theme(theme_id)
+	if theme_id != 0:
+		change_theme(theme_id)
 	buttons_container.get_child(theme_id).button_pressed = true
 
 
