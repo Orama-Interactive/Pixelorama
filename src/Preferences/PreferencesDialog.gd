@@ -142,6 +142,7 @@ func _ready() -> void:
 	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	shrink_slider.value = Global.shrink  # In case shrink is not equal to 1
 
+	shortcuts.profile_option_button.item_selected.connect(func(_i): Tools.update_hint_tooltips())
 	for child in shortcuts.get_children():
 		if not child is AcceptDialog:
 			continue
