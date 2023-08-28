@@ -279,7 +279,8 @@ var draw_pixel_grid := false
 var show_rulers := true
 var show_guides := true
 var show_mouse_guides := false
-var snap_to_rectangular_grid := false
+var snap_to_rectangular_grid_boundary := false
+var snap_to_rectangular_grid_center := false
 var snap_to_guides := false
 var snap_to_perspective_guides := false
 

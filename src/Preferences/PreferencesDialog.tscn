@@ -415,7 +415,7 @@ columns = 3
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "This is the distance in pixels where guide and grid snapping gets activated."
+tooltip_text = "This is the distance in screen pixels where guide and grid snapping gets activated."
 mouse_filter = 0
 text = "Snapping distance:"
 
