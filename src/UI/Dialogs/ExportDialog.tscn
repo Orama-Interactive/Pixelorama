@@ -235,7 +235,7 @@ visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 bbcode_enabled = true
-text = "If exported GIF is distorted, it is recommended to convert to APNG and then use any online tool like https://ezgif.com/apng-to-gif to turn it to GIF"
+text = "[center]If exported GIF is distorted, it is recommended to convert to APNG and then use any online tool like [color=blue][url]https://ezgif.com/apng-to-gif[/url][/color] to turn it to GIF[/center]"
 
 [node name="CollapsibleContainer" type="VBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
