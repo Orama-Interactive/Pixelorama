@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-08-15 20:33\n"
+"PO-Revision-Date: 2023-08-28 12:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -320,8 +320,12 @@ msgid "Snap To"
 msgstr "Aimanter à"
 
 #. Found under the View menu.
-msgid "Snap to Rectangular Grid"
-msgstr "Aimanter à la Grille Rectangulaire"
+msgid "Snap to Rectangular Grid Boundary"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid Center"
+msgstr ""
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -1337,8 +1341,8 @@ msgid "Snapping distance:"
 msgstr "Distance d'Aimantation:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
-msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr "C'est la distance en pixels de l'effet d'aimantation des guides et des grilles."
+msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
+msgstr ""
 
 msgid "Grid"
 msgstr "Grille"
