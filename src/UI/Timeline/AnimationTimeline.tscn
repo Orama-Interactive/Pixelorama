@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://dbr6mulku2qju"]
+[gd_scene load_steps=75 format=3 uid="uid://dbr6mulku2qju"]
 
 [ext_resource type="Script" path="res://src/UI/Timeline/AnimationTimeline.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d36mlbmq06q4e" path="res://assets/graphics/layers/new.png" id="2"]
@@ -99,17 +99,41 @@ action = &"move_frame_right"
 [sub_resource type="Shortcut" id="Shortcut_m2mvi"]
 events = [SubResource("InputEventAction_unp5j")]
 
+[sub_resource type="InputEventAction" id="InputEventAction_078hg"]
+action = &"go_to_first_frame"
+
 [sub_resource type="Shortcut" id="4"]
+events = [SubResource("InputEventAction_078hg")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_xpmmg"]
+action = &"go_to_previous_frame"
 
 [sub_resource type="Shortcut" id="6"]
+events = [SubResource("InputEventAction_xpmmg")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_vyfqb"]
+action = &"play_backwards"
 
 [sub_resource type="Shortcut" id="8"]
+events = [SubResource("InputEventAction_vyfqb")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_twfg8"]
+action = &"play_forward"
 
 [sub_resource type="Shortcut" id="10"]
+events = [SubResource("InputEventAction_twfg8")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_xvqer"]
+action = &"go_to_next_frame"
 
 [sub_resource type="Shortcut" id="12"]
+events = [SubResource("InputEventAction_xvqer")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_fcr04"]
+action = &"go_to_last_frame"
 
 [sub_resource type="Shortcut" id="14"]
+events = [SubResource("InputEventAction_fcr04")]
 
 [sub_resource type="InputEventAction" id="InputEventAction_1xym1"]
 action = &"onion_skinning_settings"
@@ -517,12 +541,10 @@ layout_mode = 2
 [node name="FirstFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-tooltip_text = "Jump to the first frame
-(%s)"
+tooltip_text = "Jump to the first frame"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("4")
-shortcut_in_tooltip = false
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons/FirstFrame"]
 layout_mode = 0
@@ -539,12 +561,10 @@ texture = ExtResource("21")
 [node name="PreviousFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-tooltip_text = "Go to the previous frame
-(%s)"
+tooltip_text = "Go to the previous frame"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("6")
-shortcut_in_tooltip = false
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons/PreviousFrame"]
 layout_mode = 0
@@ -561,13 +581,11 @@ texture = ExtResource("23")
 [node name="PlayBackwards" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-tooltip_text = "Play the animation backwards (from end to beginning)
-(%s)"
+tooltip_text = "Play the animation backwards (from end to beginning)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut = SubResource("8")
-shortcut_in_tooltip = false
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons/PlayBackwards"]
 layout_mode = 0
@@ -585,13 +603,11 @@ texture = ExtResource("24")
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-tooltip_text = "Play the animation forward (from beginning to end)
-(%s)"
+tooltip_text = "Play the animation forward (from beginning to end)"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut = SubResource("10")
-shortcut_in_tooltip = false
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons/PlayForward"]
 layout_mode = 0
@@ -608,12 +624,10 @@ texture = ExtResource("22")
 [node name="NextFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-tooltip_text = "Go to the next frame
-(%s)"
+tooltip_text = "Go to the next frame"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("12")
-shortcut_in_tooltip = false
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons/NextFrame"]
 layout_mode = 0
@@ -630,12 +644,10 @@ texture = ExtResource("26")
 [node name="LastFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons" groups=["UIButtons"]]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-tooltip_text = "Jump to the last frame
-(%s)"
+tooltip_text = "Jump to the last frame"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("14")
-shortcut_in_tooltip = false
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/AnimationButtons/PlaybackButtons/LastFrame"]
 layout_mode = 0

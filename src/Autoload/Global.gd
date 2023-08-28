@@ -59,8 +59,6 @@ var current_project: Project
 var current_project_index := 0:
 	set = _project_changed
 
-var ui_tooltips := {}
-
 # Canvas related stuff
 var can_draw := false
 var move_guides_on_canvas := false
@@ -401,10 +399,6 @@ func _ready() -> void:
 	current_project = projects[0]
 	current_project.fill_color = default_fill_color
 
-	for node in get_tree().get_nodes_in_group("UIButtons"):
-		var tooltip: String = node.tooltip_text
-		if !tooltip.is_empty() and node.shortcut:
-			ui_tooltips[node] = tooltip
 	await get_tree().process_frame
 	project_changed.emit()
 
@@ -693,19 +687,6 @@ func change_button_texturerect(texture_button: TextureRect, new_file_name: Strin
 	var file_name := texture_button.texture.resource_path.get_basename().get_file()
 	var directory_path := texture_button.texture.resource_path.get_basename().replace(file_name, "")
 	texture_button.texture = load(directory_path.path_join(new_file_name))
-
-
-func update_hint_tooltips() -> void:
-	await get_tree().process_frame
-	Tools.update_hint_tooltips()
-
-	for tip in ui_tooltips:
-		var hint := "None"
-		var events: Array = tip.shortcut.events
-		if events.size() > 0:
-			var event_type: InputEvent = events[0]
-			hint = event_type.as_text()
-		tip.tooltip_text = tr(ui_tooltips[tip]) % hint
 
 
 func path_join_array(basepaths: PackedStringArray, subpath: String) -> PackedStringArray:

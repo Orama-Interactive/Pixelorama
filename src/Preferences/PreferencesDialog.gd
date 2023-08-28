@@ -145,7 +145,7 @@ func _ready() -> void:
 	for child in shortcuts.get_children():
 		if not child is AcceptDialog:
 			continue
-		child.confirmed.connect(Global.update_hint_tooltips)
+		child.confirmed.connect(Tools.update_hint_tooltips)
 
 	for child in right_side.get_children():
 		content_list.append(child.name)

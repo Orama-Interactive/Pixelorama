@@ -433,6 +433,7 @@ func update_tool_buttons() -> void:
 
 
 func update_hint_tooltips() -> void:
+	await get_tree().process_frame
 	for tool_name in tools:
 		var t: Tool = tools[tool_name]
 		t.button_node.tooltip_text = t.generate_hint_tooltip()

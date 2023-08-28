@@ -64,6 +64,6 @@ func _on_Language_pressed(index: int) -> void:
 	Global.config_cache.save("user://cache.ini")
 
 	# Update some UI elements with the new translations
-	Global.update_hint_tooltips()
+	Tools.update_hint_tooltips()
 	Global.preferences_dialog.list.clear()
 	Global.preferences_dialog.add_tabs(true)
