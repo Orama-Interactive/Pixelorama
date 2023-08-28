@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-08-28 12:14\n"
+"PO-Revision-Date: 2023-08-28 19:53\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -321,11 +321,11 @@ msgstr "Yapış"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr ""
+msgstr "Dikdörtgen Izgara Sınırlarına Yapış"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
-msgstr ""
+msgstr "Dikdörtgen Izgara Merkezine Yapış"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -1342,7 +1342,7 @@ msgstr "Yapışma mesafesi:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Bu, kılavuzun ve ızgaraya yapışmanın etkinleştirildiği ekran pikselleri cinsinden mesafedir."
 
 msgid "Grid"
 msgstr "Izgara"
@@ -2691,8 +2691,8 @@ msgid "Backing out at ends"
 msgstr "Sonunda geri çekilme"
 
 msgid "Silhouette"
-msgstr ""
+msgstr "Silüet"
 
 msgid "Blacks out the image and makes all opaque pixels a dark color."
-msgstr ""
+msgstr "Görüntüyü karartır ve tüm mat pikselleri koyu renge dönüştürür."
 
