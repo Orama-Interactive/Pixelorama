@@ -106,11 +106,13 @@ func _snap_position(pos: Vector2) -> Vector2:
 		# Offsets when there is selection is controlled in _input() function
 		if !Global.current_project.has_selection:
 			var move_offset := Vector2.ZERO
+			@warning_ignore("integer_division")
 			move_offset.x = (
-				_start_pos.x - int(_start_pos.x / Global.grid_size.x) * Global.grid_size.x
+				_start_pos.x - _start_pos.x / Global.grid_size.x * Global.grid_size.x
 			)
+			@warning_ignore("integer_division")
 			move_offset.y = (
-				_start_pos.y - int(_start_pos.y / Global.grid_size.y) * Global.grid_size.y
+				_start_pos.y - _start_pos.y / Global.grid_size.y * Global.grid_size.y
 			)
 			pos += move_offset
 

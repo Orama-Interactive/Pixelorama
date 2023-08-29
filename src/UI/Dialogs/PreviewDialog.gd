@@ -388,8 +388,10 @@ func _on_VerticalFrames_value_changed(value: int) -> void:
 
 
 func spritesheet_frame_value_changed() -> void:
-	var frame_width := floori(image.get_size().x / spritesheet_horizontal)
-	var frame_height := floori(image.get_size().y / spritesheet_vertical)
+	@warning_ignore("integer_division")
+	var frame_width := image.get_size().x / spritesheet_horizontal
+	@warning_ignore("integer_division")
+	var frame_height := image.get_size().y / spritesheet_vertical
 	frame_size_label.text = tr("Frame Size") + ": " + str(frame_width) + "×" + str(frame_height)
 	_call_queue_redraw()
 

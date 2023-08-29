@@ -332,6 +332,7 @@ func _increase_export_progress(export_dialog: Node) -> void:
 func _scale_processed_images() -> void:
 	for processed_image in processed_images:
 		if resize != 100:
+			@warning_ignore("integer_division")
 			processed_image.resize(
 				processed_image.get_size().x * resize / 100,
 				processed_image.get_size().y * resize / 100,

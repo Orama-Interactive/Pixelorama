@@ -35,6 +35,7 @@ class GradientCursor:
 		size = Vector2(WIDTH, 15)
 
 	func _draw() -> void:
+		@warning_ignore("integer_division")
 		var polygon := PackedVector2Array(
 			[
 				Vector2(0, 5),

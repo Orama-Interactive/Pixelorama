@@ -1,5 +1,7 @@
 extends AcceptDialog
 
+var RestoreDefaultButton = preload("res://src/Preferences/RestoreDefaultButton.gd")
+
 var preferences: Array[Preference] = [
 	Preference.new(
 		"open_last_project", "Startup/StartupContainer/OpenLastProject", "button_pressed"

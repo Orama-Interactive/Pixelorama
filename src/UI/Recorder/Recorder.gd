@@ -78,6 +78,7 @@ func capture_frame() -> void:
 
 	if mode == Mode.CANVAS:
 		if resize != 100:
+			@warning_ignore("integer_division")
 			image.resize(
 				image.get_size().x * resize / 100,
 				image.get_size().y * resize / 100,

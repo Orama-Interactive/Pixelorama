@@ -167,6 +167,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 	var line_data := generate_line_data(loaded_line_data)
 
 	# This code in if block is purely for beautification
+	@warning_ignore("integer_division")
 	if pos_x.value > p_size.x / 2 and !loaded_line_data:
 		# If new line is created ahead of half project distance then
 		# reverse its angle

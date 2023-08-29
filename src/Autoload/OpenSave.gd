@@ -343,7 +343,9 @@ func open_image_as_spritesheet_tab_smart(
 func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert: int) -> void:
 	horiz = mini(horiz, image.get_size().x)
 	vert = mini(vert, image.get_size().y)
+	@warning_ignore("integer_division")
 	var frame_width := image.get_size().x / horiz
+	@warning_ignore("integer_division")
 	var frame_height := image.get_size().y / vert
 	var project := Project.new([], path.get_file(), Vector2(frame_width, frame_height))
 	project.layers.append(PixelLayer.new(project))
@@ -448,7 +450,9 @@ func open_image_as_spritesheet_layer(
 	# Data needed to slice images
 	horizontal = mini(horizontal, image.get_size().x)
 	vertical = mini(vertical, image.get_size().y)
+	@warning_ignore("integer_division")
 	var frame_width := image.get_size().x / horizontal
+	@warning_ignore("integer_division")
 	var frame_height := image.get_size().y / vertical
 
 	# Resize canvas to if "frame_width" or "frame_height" is too large
@@ -496,6 +500,7 @@ func open_image_as_spritesheet_layer(
 		if f >= start_frame and f < (start_frame + (vertical * horizontal)):
 			# Slice spritesheet
 			var xx: int = (f - start_frame) % horizontal
+			@warning_ignore("integer_division")
 			var yy: int = (f - start_frame) / horizontal
 			image.convert(Image.FORMAT_RGBA8)
 			var cropped_image := Image.create(

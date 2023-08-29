@@ -41,8 +41,8 @@ func _get_minimum_size() -> Vector2:
 
 
 func _reposition_reference() -> void:
-	_reference_to.global_position = global_position
-	_reference_to.size = size
+	_reference_to.set_deferred("global_position", global_position)
+	_reference_to.set_deferred("size", size)
 
 
 func _on_reference_to_renamed() -> void:

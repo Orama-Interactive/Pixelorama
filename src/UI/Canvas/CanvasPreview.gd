@@ -107,7 +107,9 @@ func _split_spritesheet(image: Image, horiz: int, vert: int) -> Array:
 	var result := []
 	horiz = mini(horiz, image.get_size().x)
 	vert = mini(vert, image.get_size().y)
+	@warning_ignore("integer_division")
 	var frame_width := image.get_size().x / horiz
+	@warning_ignore("integer_division")
 	var frame_height := image.get_size().y / vert
 	for yy in range(vert):
 		for xx in range(horiz):
