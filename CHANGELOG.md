@@ -12,6 +12,7 @@ Built using Godot 3.5.2
 
 ### Added
 - An option for reference images to only appear as silhouettes. [#898](https://github.com/Orama-Interactive/Pixelorama/pull/898)
+- Snapping to the center of the rectangular grid is now possible. [#905](https://github.com/Orama-Interactive/Pixelorama/pull/905)
 
 ### Fixed
 - Fixed a critical bug causing data loss when moving around the tabs of opened projects and then saving them. [#901](https://github.com/Orama-Interactive/Pixelorama/pull/901)
