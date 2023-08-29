@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2023-08-28 12:14\n"
+"PO-Revision-Date: 2023-08-29 18:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -321,11 +321,11 @@ msgstr "Delimitar em"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr ""
+msgstr "Encaixar no Limite de Grade Retangular"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
-msgstr ""
+msgstr "Encaixar no Centro da Grade Retangular"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
