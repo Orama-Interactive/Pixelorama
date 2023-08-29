@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-08-28 12:14\n"
+"PO-Revision-Date: 2023-08-29 04:07\n"
 
 msgid "OK"
 msgstr "确定"
@@ -321,11 +321,11 @@ msgstr "吸附到"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr ""
+msgstr "吸附到方形网格"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
-msgstr ""
+msgstr "吸附到方形网格"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -1342,7 +1342,7 @@ msgstr "吸附距离："
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "这是以屏幕像素为单位的距离，引导线和网格捕捉被激活。"
 
 msgid "Grid"
 msgstr "网格"
