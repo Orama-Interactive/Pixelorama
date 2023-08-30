@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2023-08-28 12:14\n"
+"PO-Revision-Date: 2023-08-30 10:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -321,11 +321,11 @@ msgstr "Einrasten an"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr ""
+msgstr "Einrasten an die rechteckige Rastergrenze"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
-msgstr ""
+msgstr "An rechteckige Rastermitte einrasten"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -1341,7 +1341,7 @@ msgstr "Einrastungs-Distanz:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Dies ist die Distanz in den Bildschirm-Pixel, in denen Guide- und Rastereinrastung aktiviert werden."
 
 msgid "Grid"
 msgstr "Raster"
