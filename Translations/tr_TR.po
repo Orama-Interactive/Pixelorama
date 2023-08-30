@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2023-08-07 19:03\n"
+"PO-Revision-Date: 2023-08-28 19:53\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -320,8 +320,12 @@ msgid "Snap To"
 msgstr "Yapış"
 
 #. Found under the View menu.
-msgid "Snap to Rectangular Grid"
-msgstr "Dikdörtgen Izgaraya Yapış"
+msgid "Snap to Rectangular Grid Boundary"
+msgstr "Dikdörtgen Izgara Sınırlarına Yapış"
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid Center"
+msgstr "Dikdörtgen Izgara Merkezine Yapış"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -1337,8 +1341,8 @@ msgid "Snapping distance:"
 msgstr "Yapışma mesafesi:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
-msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr "Bu, kılavuzun ve ızgaraya yapışmanın etkinleştirildiği piksel cinsinden mesafedir."
+msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
+msgstr "Bu, kılavuzun ve ızgaraya yapışmanın etkinleştirildiği ekran pikselleri cinsinden mesafedir."
 
 msgid "Grid"
 msgstr "Izgara"
@@ -2685,4 +2689,10 @@ msgstr "Sonunda zıplama"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
 msgstr "Sonunda geri çekilme"
+
+msgid "Silhouette"
+msgstr "Silüet"
+
+msgid "Blacks out the image and makes all opaque pixels a dark color."
+msgstr "Görüntüyü karartır ve tüm mat pikselleri koyu renge dönüştürür."
 

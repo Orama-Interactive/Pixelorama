@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-08-07 13:45\n"
+"PO-Revision-Date: 2023-08-28 14:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -320,8 +320,12 @@ msgid "Snap To"
 msgstr "Aggancia A"
 
 #. Found under the View menu.
-msgid "Snap to Rectangular Grid"
+msgid "Snap to Rectangular Grid Boundary"
 msgstr "Aggancia alla griglia rettangolare"
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid Center"
+msgstr "Aggancia al Centro Griglia Rettangolare"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -1337,8 +1341,8 @@ msgid "Snapping distance:"
 msgstr "Distanza di aggancio:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
-msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr "Questa è la distanza in pixel in cui vengono attivate la guida e l'aggancio alla griglia."
+msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
+msgstr "Questa è la distanza in pixel dello schermo in cui viene attivata la guida e il snapping della griglia."
 
 msgid "Grid"
 msgstr "Griglia"
@@ -2685,4 +2689,10 @@ msgstr "Rimbalzo alla fine"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
 msgstr "Rimozione alle estremità"
+
+msgid "Silhouette"
+msgstr "Sagoma"
+
+msgid "Blacks out the image and makes all opaque pixels a dark color."
+msgstr "Cancella l'immagine e rende tutti i pixel opachi un colore scuro."
 
