@@ -309,7 +309,11 @@ msgid "Snap To"
 msgstr ""
 
 #. Found under the View menu.
-msgid "Snap to Rectangular Grid"
+msgid "Snap to Rectangular Grid Boundary"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid Center"
 msgstr ""
 
 #. Found under the View menu.

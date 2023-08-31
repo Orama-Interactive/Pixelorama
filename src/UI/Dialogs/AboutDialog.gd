@@ -48,6 +48,7 @@ const CONTRIBUTORS: PackedStringArray = [
 	"sapient_cogbag",
 	"Silent Orb (silentorb)",
 	"Subhang Nanduri (SbNanduri)",
+	"TheLsbt",
 	"THWLF",
 	"Vriska Weaver (henlo-birb)",
 ]
@@ -77,6 +78,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Igor Santarek (jegor377)": ["Polish"],
 	"RainbowP": ["Polish"],
 	"Michał (molters.tv)": ["Polish"],
+	"Dandailo": ["Polish"],
 	"Tmpod": ["Portuguese"],
 	"Michael Alexsander (YeldhamDev)": ["Brazilian Portuguese"],
 	"Cedulio Cezar (ceduliocezar)": ["Brazilian Portuguese"],
@@ -107,6 +109,7 @@ const TRANSLATORS_DICTIONARY := {
 	"王晨旭 (wcxu21)": ["Chinese Simplified"],
 	"Haruka Kasugano (Kasugano_0)": ["Chinese Simplified"],
 	"Peerin (Mrsjh)": ["Chinese Simplified"],
+	"ppphp": ["Chinese Simplified"],
 	"Marco Galli (Gaarco)": ["Italian"],
 	"StarFang208": ["Italian"],
 	"Damiano Guida (damiano.guida22)": ["Italian"],
@@ -158,6 +161,7 @@ const TRANSLATORS_DICTIONARY := {
 	"libre ajans (libreajans)": ["Turkish"],
 	"Sabri Ünal (sabriunal)": ["Turkish"],
 	"CaelusV": ["Danish"],
+	"Jonas Vejlin (jonas.vejlin)": ["Danish"],
 	"GGIEnrike":
 	[
 		"Romanian",
@@ -186,7 +190,8 @@ const DONORS: PackedStringArray = [
 	"Ryan C. Gordon (icculus)",
 	"Sean Allen",
 	"ShikadiGum",
-	"Tassos Kyriakopoulos"
+	"Tassos Kyriakopoulos",
+	"Πολιτισμός Τύπου 1",
 ]
 
 @export_multiline var licenses: PackedStringArray

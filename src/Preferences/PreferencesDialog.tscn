@@ -422,7 +422,7 @@ text = "Snapping distance:"
 [node name="DistanceValue" type="TextureProgressBar" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/SnappingOptions"]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "This is the distance in pixels where guide and grid snapping gets activated."
+tooltip_text = "This is the distance in screen pixels where guide and grid snapping gets activated."
 focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"

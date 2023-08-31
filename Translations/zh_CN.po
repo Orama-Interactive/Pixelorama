@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2023-08-07 12:26\n"
+"PO-Revision-Date: 2023-08-29 04:07\n"
 
 msgid "OK"
 msgstr "确定"
@@ -171,7 +171,7 @@ msgstr "环绕："
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "置中帧"
 
 msgid "Rotate Image"
 msgstr "旋转图像"
@@ -320,7 +320,11 @@ msgid "Snap To"
 msgstr "吸附到"
 
 #. Found under the View menu.
-msgid "Snap to Rectangular Grid"
+msgid "Snap to Rectangular Grid Boundary"
+msgstr "吸附到方形网格"
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid Center"
 msgstr "吸附到方形网格"
 
 #. Found under the View menu.
@@ -403,27 +407,27 @@ msgstr "垂直帧："
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr ""
+msgstr "智能切片"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "阈值："
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
-msgstr ""
+msgstr "任何一侧小于该值的图像将超过阈值"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
-msgstr ""
+msgstr "合并距离："
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr ""
+msgstr "如果超过阈值的图像在此距离内，则会合并为更大的图像"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr ""
+msgstr "刷新"
 
 msgid "Start frame:"
 msgstr "开始帧："
@@ -692,11 +696,11 @@ msgstr "放大或缩小时添加一个更平滑的过渡"
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "整数缩放"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr ""
+msgstr "将值限制为 100% 的整数倍"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "绘图板压力灵敏度："
@@ -922,15 +926,15 @@ msgstr "步骤："
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "色调分离"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "色调分离级别："
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "抖动强度："
 
 msgid "View Splash Screen"
 msgstr "查看启动画面"
@@ -1330,15 +1334,15 @@ msgstr "显示在画布上标尺参考线的颜色"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "吸附"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "吸附距离："
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
-msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr "这是参考线和网格产生吸附作用的像素距离。"
+msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
+msgstr "这是以屏幕像素为单位的距离，引导线和网格捕捉被激活。"
 
 msgid "Grid"
 msgstr "网格"
@@ -1515,19 +1519,19 @@ msgstr ""
 
 #. Refers to the alpha channel of the colors, in the RGBA color model. The alpha channel is responsible for the transparency of the color.
 msgid "Alpha"
-msgstr ""
+msgstr "透明度"
 
 #. Refers to the size of a value, for example the size of a brush.
 msgid "Size"
-msgstr ""
+msgstr "大小"
 
 #. Found in the Dynamics options menu. Sets the limits of the brush property values, such as the minimum and maximum values of alpha and size.
 msgid "Value limits"
-msgstr ""
+msgstr "数值限制"
 
 #. Found in the Dynamics options menu. Sets the thresholds of the dynamic properties, such as the minimum and maximum values of pressure and velocity.
 msgid "Thresholds"
-msgstr ""
+msgstr "阈值"
 
 #. Noun, the start of something.
 msgid "Start"
@@ -2444,27 +2448,27 @@ msgstr ""
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Sphere"
-msgstr ""
+msgstr "球体"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Capsule"
-msgstr ""
+msgstr "胶囊"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Cylinder"
-msgstr ""
+msgstr "圆柱体"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
-msgstr ""
+msgstr "棱柱"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
-msgstr ""
+msgstr "圆环体"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "平面"
 
 msgid "Text"
 msgstr "文本"
@@ -2486,28 +2490,28 @@ msgid "Custom model"
 msgstr ""
 
 msgid "Selected object:"
-msgstr ""
+msgstr "已选对象"
 
 msgid "Add new object"
-msgstr ""
+msgstr "添加新对象"
 
 msgid "Remove object"
-msgstr ""
+msgstr "删除对象"
 
 msgid "Camera"
-msgstr ""
+msgstr "相机"
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
-msgstr ""
+msgstr "投影："
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
-msgstr ""
+msgstr "透视"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Orthogonal"
-msgstr ""
+msgstr "正交"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
@@ -2517,7 +2521,7 @@ msgid "Rotation:"
 msgstr ""
 
 msgid "Scale:"
-msgstr ""
+msgstr "缩放："
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
@@ -2533,7 +2537,7 @@ msgstr ""
 
 #. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
-msgstr ""
+msgstr "可见："
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
@@ -2541,7 +2545,7 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
-msgstr ""
+msgstr "网格"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
@@ -2565,18 +2569,18 @@ msgstr ""
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
-msgstr ""
+msgstr "上半径："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Bottom radius:"
-msgstr ""
+msgstr "下半径："
 
 msgid "Text:"
-msgstr ""
+msgstr "文本:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
-msgstr ""
+msgstr "像素大小："
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
@@ -2586,10 +2590,10 @@ msgid "Horizontal alignment:"
 msgstr ""
 
 msgid "Left"
-msgstr ""
+msgstr "左"
 
 msgid "Right"
-msgstr ""
+msgstr "右"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
@@ -2685,4 +2689,10 @@ msgstr "结束时的反弹"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
 msgstr ""
+
+msgid "Silhouette"
+msgstr "轮廓"
+
+msgid "Blacks out the image and makes all opaque pixels a dark color."
+msgstr "使图像变黑，并使所有不透明像素变成深色。"
 

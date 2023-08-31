@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2023-08-07 12:25\n"
+"PO-Revision-Date: 2023-08-28 12:14\n"
 
 msgid "OK"
 msgstr "Oke"
@@ -320,8 +320,12 @@ msgid "Snap To"
 msgstr "Cantol Ke"
 
 #. Found under the View menu.
-msgid "Snap to Rectangular Grid"
-msgstr "Cantol ke Kisi Persegi Panjang"
+msgid "Snap to Rectangular Grid Boundary"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid Center"
+msgstr ""
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -403,27 +407,27 @@ msgstr "Bingkai menegak:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr ""
+msgstr "Iris Rapi"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "Ambang batas:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
-msgstr ""
+msgstr "Gambar yang satu sisinya lebih kecil dari nilai di sini akan melewati ambang batas"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
-msgstr ""
+msgstr "Jarak peleburan:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr ""
+msgstr "Gambar yang melewati ambang batas akan dileburkan menjadi gambar lebih besar, jika masih dalam jarak ini"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr ""
+msgstr "Segarkan"
 
 msgid "Start frame:"
 msgstr "Bingkai awal:"
@@ -692,11 +696,11 @@ msgstr "Memperhalus gerakan saat mengeker dekat atau jauh"
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "Keker Integer"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr ""
+msgstr "Membatasi nilai menjadi kelipatan bilangan bulat 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Kepekaan tekanan tablet:"
@@ -1337,8 +1341,8 @@ msgid "Snapping distance:"
 msgstr "Jarak pencantolan:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
-msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr "Ini adalah jarak berukuran piksel saat pencatolan kisi dan panduan diaktifkan."
+msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
+msgstr ""
 
 msgid "Grid"
 msgstr "Kisi"
@@ -2640,11 +2644,11 @@ msgstr "Awalnya cepat lalu lambat saat ke ujung"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Slowest at both ends, fast at middle"
-msgstr "Lambat di tiap ujung, cepat di tengah"
+msgstr "Lambat di kedua ujung, cepat di tengah"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Fast at both ends, slow at middle"
-msgstr "Cepat di tiap ujung, lambat di tengah"
+msgstr "Cepat di kedua ujung, lambat di tengah"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
@@ -2676,7 +2680,7 @@ msgstr "Sinus"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Wiggling around the edges"
-msgstr "Goyang-goyang di tepiannya"
+msgstr "Goyang-goyang di pinggirnya"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
@@ -2685,4 +2689,10 @@ msgstr "Lompat-lompat di ujung"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
 msgstr "\"Back out\" di akhir"
+
+msgid "Silhouette"
+msgstr "Siluet"
+
+msgid "Blacks out the image and makes all opaque pixels a dark color."
+msgstr "Menggelapkan gambar dan membuat semua piksel legap menjadi hitam."
 

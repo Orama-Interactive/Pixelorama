@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2023-08-07 12:26\n"
+"PO-Revision-Date: 2023-08-28 12:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -320,8 +320,12 @@ msgid "Snap To"
 msgstr "Прыцяжвацца да"
 
 #. Found under the View menu.
-msgid "Snap to Rectangular Grid"
-msgstr "Прыцяжэнне да прамакутнай сеткі"
+msgid "Snap to Rectangular Grid Boundary"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Snap to Rectangular Grid Center"
+msgstr ""
 
 #. Found under the View menu.
 msgid "Snap to Guides"
@@ -1296,8 +1300,8 @@ msgid "Snapping distance:"
 msgstr "Адлегласць прыцяжэння:"
 
 #. Found in the Preferences, in the Canvas tab. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
-msgid "This is the distance in pixels where guide and grid snapping gets activated."
-msgstr "Гэта адлегласць у пікселях, на якой уключаецца прыцяжэнне да кіроўнай."
+msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
+msgstr ""
 
 msgid "Grid"
 msgstr "Сетка"
@@ -2630,5 +2634,11 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
+msgstr ""
+
+msgid "Silhouette"
+msgstr ""
+
+msgid "Blacks out the image and makes all opaque pixels a dark color."
 msgstr ""
 
