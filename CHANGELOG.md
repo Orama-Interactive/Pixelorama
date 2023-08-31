@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v0.11.2] - Unreleased
+## [v0.11.2] - 2023-08-31
 This update has been brought to you by the contributions of:
 [@Lsbt1](https://github.com/Lsbt1), Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
