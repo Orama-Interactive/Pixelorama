@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-var has_focus := false
+var is_focused := false
 var perspective_lines := []
 var color := Color(randf(), randf(), randf(), 1)
 
@@ -82,9 +82,9 @@ func _input(_event: InputEvent):
 			!Rect2(Vector2.ZERO, project_size).has_point(Global.canvas.current_pixel)
 			or Global.move_guides_on_canvas
 		):
-			has_focus = true
+			is_focused = true
 			Global.can_draw = false
-	if has_focus:
+	if is_focused:
 		if Input.is_action_pressed("left_mouse"):
 			# rotation code here
 			pos_x.value = mouse_point.x
@@ -92,7 +92,7 @@ func _input(_event: InputEvent):
 
 		elif Input.is_action_just_released("left_mouse"):
 			Global.can_draw = true
-			has_focus = false
+			is_focused = false
 
 
 # Signals

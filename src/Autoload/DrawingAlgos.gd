@@ -189,10 +189,10 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 			var dy := 3 * (y - pivot.y)
 			var found_pixel: bool = false
 			for k in range(9):
-				var i := -1 + k % 3
-				var j := -1 + int(k / 3)
-				var dir := atan2(dy + j, dx + i)
-				var mag := sqrt(pow(dx + i, 2) + pow(dy + j, 2))
+				var modk := -1 + k % 3
+				var divk := -1 + int(k / 3)
+				var dir := atan2(dy + divk, dx + modk)
+				var mag := sqrt(pow(dx + modk, 2) + pow(dy + divk, 2))
 				dir -= angle
 				ox = roundi(pivot.x * 3 + 1 + mag * cos(dir))
 				oy = roundi(pivot.y * 3 + 1 + mag * sin(dir))
