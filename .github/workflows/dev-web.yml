@@ -28,7 +28,7 @@ jobs:
           mkdir -v -p build/web ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Web Build 🔧
-        run: godot -v --export-release "Web" ./build/web/index.html
+        run: godot --headless -v --export-release "Web" ./build/web/index.html
       - name: Install rsync 📚
         run: |
           apt-get update && apt-get install -y rsync
