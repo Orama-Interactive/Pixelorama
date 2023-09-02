@@ -69,7 +69,7 @@ func save_image_data_to_pxo(_file: FileAccess) -> void:
 	return
 
 
-func load_image_data_from_pxo(_file: FileAccess, _project_size: Vector2) -> void:
+func load_image_data_from_pxo(_file: FileAccess, _project_size: Vector2i) -> void:
 	return
 
 

@@ -142,7 +142,7 @@ func remove_brush(brush_button: Node) -> void:
 
 func undo_custom_brush(brush_button: BaseButton = null) -> void:
 	Global.general_undo()
-	var action_name: String = Global.current_project.undo_redo.get_current_action_name()
+	var action_name := Global.current_project.undo_redo.get_current_action_name()
 	if action_name == "Delete Custom Brush":
 		$Background/Brushes/Categories/ProjectBrushContainer.add_child(brush_button)
 		$Background/Brushes/Categories/ProjectBrushContainer.move_child(
@@ -153,6 +153,6 @@ func undo_custom_brush(brush_button: BaseButton = null) -> void:
 
 func redo_custom_brush(brush_button: BaseButton = null) -> void:
 	Global.general_redo()
-	var action_name: String = Global.current_project.undo_redo.get_current_action_name()
+	var action_name := Global.current_project.undo_redo.get_current_action_name()
 	if action_name == "Delete Custom Brush":
 		$Background/Brushes/Categories/ProjectBrushContainer.remove_child(brush_button)

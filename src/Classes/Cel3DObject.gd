@@ -21,7 +21,7 @@ enum Gizmos { NONE, X_POS, Y_POS, Z_POS, X_ROT, Y_ROT, Z_ROT, X_SCALE, Y_SCALE, 
 
 var cel
 var id := -1
-var type: int = Type.BOX:
+var type := Type.BOX:
 	set = _set_type
 var selected := false
 var hovered := false
@@ -173,7 +173,7 @@ func _is_mesh() -> bool:
 	return node3d_type is MeshInstance3D
 
 
-func _set_type(value: int) -> void:
+func _set_type(value: Type) -> void:
 	if type == value and is_instance_valid(node3d_type):  # No reason to set the same type twice
 		return
 	type = value
@@ -299,8 +299,8 @@ func move(pos: Vector3) -> void:
 	change_property()
 
 
+## Move the object in the direction it is facing, and restrict mouse movement in that axis
 func move_axis(diff: Vector3, axis: Vector3) -> void:
-	# Move the object in the direction it is facing, and restrict mouse movement in that axis
 	var axis_v2 := Vector2(axis.x, axis.y).normalized()
 	if axis_v2 == Vector2.ZERO:
 		axis_v2 = Vector2(axis.y, axis.z).normalized()
@@ -324,8 +324,8 @@ func change_rotation(a: Vector3, b: Vector3, axis: Vector3) -> void:
 	change_property()
 
 
+## Scale the object in the direction it is facing, and restrict mouse movement in that axis
 func change_scale(diff: Vector3, axis: Vector3, dir: Vector3) -> void:
-	# Scale the object in the direction it is facing, and restrict mouse movement in that axis
 	var axis_v2 := Vector2(axis.x, axis.y).normalized()
 	if axis_v2 == Vector2.ZERO:
 		axis_v2 = Vector2(axis.y, axis.z).normalized()

@@ -11,7 +11,13 @@ var index := -1
 var show_left_highlight := false
 var show_right_highlight := false
 var empty := true:
-	set = set_empty
+	set(value):
+		empty = value
+		if empty:
+			mouse_default_cursor_shape = Control.CURSOR_ARROW
+			color = Global.control.theme.get_stylebox("disabled", "Button").bg_color
+		else:
+			mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
 func set_swatch_size(swatch_size: Vector2) -> void:
@@ -49,17 +55,7 @@ func show_selected_highlight(new_value: bool, mouse_button: int) -> void:
 		queue_redraw()
 
 
-# Empties the swatch and displays disabled color from theme
-func set_empty(new_value: bool) -> void:
-	empty = new_value
-	if empty:
-		mouse_default_cursor_shape = Control.CURSOR_ARROW
-		color = Global.control.theme.get_stylebox("disabled", "Button").bg_color
-	else:
-		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-
-
-func _get_drag_data(_position):
+func _get_drag_data(_position: Vector2):
 	var data = null
 	if not empty:
 		var drag_icon: PaletteSwatch = self.duplicate()
@@ -71,7 +67,7 @@ func _get_drag_data(_position):
 	return data
 
 
-func _can_drop_data(_position, _data) -> bool:
+func _can_drop_data(_position: Vector2, _data) -> bool:
 	return true
 
 

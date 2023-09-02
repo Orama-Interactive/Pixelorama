@@ -1,13 +1,13 @@
 extends Panel
 
 var is_animation_running := false
-var animation_loop := 1  # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
+var animation_loop := 1  ## 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
 var first_frame := 0
 var last_frame := 0
 var is_mouse_hover := false
 var cel_size := 36:
-	set = cel_size_changed
+	set = _cel_size_changed
 var min_cel_size := 36
 var max_cel_size := 144
 var past_above_canvas := true
@@ -118,7 +118,7 @@ func _on_LayerFrameSplitContainer_gui_input(event: InputEvent) -> void:
 		update_minimum_size()  # After you're done resizing the layers, update min size
 
 
-func cel_size_changed(value: int) -> void:
+func _cel_size_changed(value: int) -> void:
 	if cel_size == value:
 		return
 	cel_size = clampi(value, min_cel_size, max_cel_size)

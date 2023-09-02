@@ -146,13 +146,13 @@ func _gui_input(event: InputEvent) -> void:
 			# Snap when snap_by_default is true, do the opposite when Control is pressed
 			if snap_by_default:
 				if not event.ctrl_pressed:
-					value = round(value / snap_step) * snap_step
+					value = roundf(value / snap_step) * snap_step
 			else:
 				if event.ctrl_pressed:
-					value = round(value / snap_step) * snap_step
+					value = roundf(value / snap_step) * snap_step
 
 
-func _setup_nodes() -> void:  # Only called once on _ready()
+func _setup_nodes() -> void:  ## Only called once on _ready()
 	focus_mode = Control.FOCUS_ALL
 	_line_edit.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_line_edit.anchor_right = 1
@@ -213,8 +213,8 @@ func _on_value_changed(_value: float) -> void:
 	_reset_display()
 
 
+## When pressing enter, release focus, which will call _confirm_text on focus_exited signal
 func _on_LineEdit_text_entered(_new_text: String) -> void:
-	# When pressing enter, release focus, which will call _confirm_text on focus_exited signal
 	_line_edit.release_focus()
 
 

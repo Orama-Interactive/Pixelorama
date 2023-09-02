@@ -92,7 +92,7 @@ func _sync_ui() -> void:
 # UI Signals:
 
 
-func _on_CropMode_item_selected(index: int) -> void:
+func _on_CropMode_item_selected(index: CropRect.Mode) -> void:
 	if _syncing:
 		return
 	_crop.mode = index

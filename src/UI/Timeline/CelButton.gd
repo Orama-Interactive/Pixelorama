@@ -52,10 +52,10 @@ func _on_CelButton_pressed() -> void:
 		var prev_curr_layer: int = project.current_layer
 
 		if Input.is_action_pressed("shift"):
-			var frame_diff_sign = sign(frame - prev_curr_frame)
+			var frame_diff_sign := signi(frame - prev_curr_frame)
 			if frame_diff_sign == 0:
 				frame_diff_sign = 1
-			var layer_diff_sign = sign(layer - prev_curr_layer)
+			var layer_diff_sign := signi(layer - prev_curr_layer)
 			if layer_diff_sign == 0:
 				layer_diff_sign = 1
 			for i in range(prev_curr_frame, frame + frame_diff_sign, frame_diff_sign):
@@ -103,13 +103,13 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			var project: Project = Global.current_project
 			if id == MenuOptions.UNLINK:
 				project.undo_redo.create_action("Unlink Cel")
-				var selected_cels = project.selected_cels.duplicate()
+				var selected_cels := project.selected_cels.duplicate()
 				if not selected_cels.has([frame, layer]):
 					selected_cels.append([frame, layer])  # Include this cel with the selected ones
 				for cel_index in selected_cels:
 					if layer != cel_index[1]:  # Skip selected cels not on the same layer
 						continue
-					var s_cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+					var s_cel := project.frames[cel_index[0]].cels[cel_index[1]]
 					if s_cel.link_set == null:  # Skip cels that aren't linked
 						continue
 					project.undo_redo.add_do_method(
@@ -140,7 +140,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				for cel_index in project.selected_cels:
 					if layer != cel_index[1]:  # Skip selected cels not on the same layer
 						continue
-					var s_cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
+					var s_cel := project.frames[cel_index[0]].cels[cel_index[1]]
 					if cel == s_cel:  # Don't need to link cel to itself
 						continue
 					if s_cel.link_set == link_set:  # Skip cels that were already linked
@@ -181,7 +181,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 
 
 func _delete_cel_content() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var empty_content = cel.create_empty_content()
 	var old_content = cel.get_content()
 	project.undos += 1
@@ -224,7 +224,7 @@ func _get_drag_data(_position: Vector2) -> Variant:
 
 
 func _can_drop_data(_pos: Vector2, data) -> bool:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if typeof(data) == TYPE_ARRAY and data[0] == "Cel":
 		var drag_frame = data[1]
 		var drag_layer = data[2]
@@ -257,8 +257,8 @@ func _can_drop_data(_pos: Vector2, data) -> bool:
 
 
 func _drop_data(_pos: Vector2, data) -> void:
-	var drop_frame = data[1]
-	var drop_layer = data[2]
+	var drop_frame: int = data[1]
+	var drop_layer: int = data[2]
 	var project := Global.current_project
 
 	project.undo_redo.create_action("Move Cels")

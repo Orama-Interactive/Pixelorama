@@ -5,7 +5,7 @@ signal selected_object(object)
 signal scene_property_changed
 signal objects_changed
 
-var size: Vector2
+var size: Vector2i
 var viewport: SubViewport
 var parent_node: Node3D
 var camera: Camera3D
@@ -13,11 +13,19 @@ var scene_properties := {}
 ## Key = Cel3DObject's id, Value = Dictionary containing the properties of the Cel3DObject
 var object_properties := {}
 var selected: Cel3DObject = null:
-	set = _set_selected
-var current_object_id := 0  # Its value never decreases
+	set(value):
+		if value == selected:
+			return
+		if is_instance_valid(selected):  # Unselect previous object if we selected something else
+			selected.deselect()
+		selected = value
+		if is_instance_valid(selected):  # Select new object
+			selected.select()
+		selected_object.emit(value)
+var current_object_id := 0  ## Its value never decreases
 
 
-func _init(_size: Vector2, from_pxo := false, _object_prop := {}, _scene_prop := {}) -> void:
+func _init(_size: Vector2i, from_pxo := false, _object_prop := {}, _scene_prop := {}) -> void:
 	size = _size
 	object_properties = _object_prop
 	scene_properties = _scene_prop
@@ -110,7 +118,7 @@ func get_object_from_id(id: int) -> Cel3DObject:
 	return null
 
 
-func size_changed(new_size: Vector2) -> void:
+func size_changed(new_size: Vector2i) -> void:
 	size = new_size
 	viewport.size = size
 	image_texture = viewport.get_texture()
@@ -142,24 +150,13 @@ func _add_object_node(id: int) -> void:
 	objects_changed.emit()
 
 
-func _remove_object_node(id: int) -> void:  # Called by undo/redo
+func _remove_object_node(id: int) -> void:  ## Called by undo/redo
 	var object := get_object_from_id(id)
 	if is_instance_valid(object):
 		if selected == object:
 			selected = null
 		object.queue_free()
 	objects_changed.emit()
-
-
-func _set_selected(value: Cel3DObject) -> void:
-	if value == selected:
-		return
-	if is_instance_valid(selected):  # Unselect previous object if we selected something else
-		selected.deselect()
-	selected = value
-	if is_instance_valid(selected):  # Select new object
-		selected.select()
-	selected_object.emit(value)
 
 
 # Overridden methods
@@ -211,8 +208,8 @@ func save_image_data_to_pxo(file: FileAccess) -> void:
 	file.store_buffer(get_image().get_data())
 
 
-func load_image_data_from_pxo(file: FileAccess, project_size: Vector2) -> void:
-	# Don't do anything with it, just read it so that the file can move on
+## Don't do anything with it, just read it so that the file can move on
+func load_image_data_from_pxo(file: FileAccess, project_size: Vector2i) -> void:
 	file.get_buffer(project_size.x * project_size.y * 4)
 
 

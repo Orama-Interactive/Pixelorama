@@ -201,7 +201,7 @@ func add_line(loaded_line_data := {}, is_tracker := false):
 		var angle_slider := line_button.find_child("AngleSlider")
 		var length_slider := line_button.find_child("LengthSlider")
 
-		angle_slider.value = abs(line_data.angle)
+		angle_slider.value = absf(line_data.angle)
 		length_slider.value = line_data.length
 
 		line.line_button = line_button  # In case we need to change properties from line
@@ -246,7 +246,7 @@ func refresh(index: int):
 func refresh_line(index: int):
 	var line_button = line_buttons_container.get_child(index)
 	var line_data = perspective_lines[index].serialize()
-	var line_name = str("Line", line_button.get_index() + 1, " (", int(abs(line_data.angle)), "°)")
+	var line_name := str("Line", line_button.get_index() + 1, " (", absi(line_data.angle), "°)")
 	line_button.text = line_name
 	perspective_lines[index].refresh()
 
