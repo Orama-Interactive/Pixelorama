@@ -814,7 +814,7 @@ onion_skinning_settings={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Translations/en_US.po", "res://Translations/el_GR.po")
+locale/translations=PackedStringArray("res://Translations/en_US.po")
 
 [rendering]
 

@@ -38,7 +38,7 @@ func _ready() -> void:
 	if Global.config_cache.has_section_key("preferences", "locale"):
 		saved_locale = Global.config_cache.get_value("preferences", "locale")
 		locale_index = loaded_locales.find(saved_locale)
-	_set_locale(saved_locale) # If no language is saved, OS' locale is used
+	_set_locale(saved_locale)  # If no language is saved, OS' locale is used
 
 	var button_group: ButtonGroup = $"System Language".button_group
 	for locale in loaded_locales:  # Create radiobuttons for each language
@@ -74,4 +74,5 @@ func _set_locale(locale: String) -> void:
 		var translation := load("res://Translations/%s.po" % locale)
 		if is_instance_valid(translation) and translation is Translation:
 			TranslationServer.add_translation(translation)
+		Keychain.load_translation(locale)
 	TranslationServer.set_locale(locale)

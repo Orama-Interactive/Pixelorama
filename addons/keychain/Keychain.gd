@@ -1,6 +1,5 @@
 extends Node
 
-const TRANSLATIONS_PATH := "res://addons/keychain/translations"
 const PROFILES_PATH := "user://shortcut_profiles"
 
 ## Change these settings
@@ -71,16 +70,6 @@ func _ready() -> void:
 	for profile in profiles:
 		profile.fill_bindings()
 
-	var l18n_dir := DirAccess.open(TRANSLATIONS_PATH)
-	l18n_dir.list_dir_begin()
-	file_name = l18n_dir.get_next()
-	while file_name != "":
-		if !l18n_dir.current_is_dir():
-			if file_name.get_extension() == "po":
-				var t: Translation = load(TRANSLATIONS_PATH.path_join(file_name))
-				TranslationServer.add_translation(t)
-		file_name = l18n_dir.get_next()
-
 	profile_index = config_file.get_value("shortcuts", "shortcuts_profile", 0)
 	change_profile(profile_index)
 
@@ -106,3 +95,9 @@ func action_erase_event(action: String, event: InputEvent) -> void:
 
 func action_erase_events(action: String) -> void:
 	InputMap.action_erase_events(action)
+
+
+func load_translation(locale: String) -> void:
+	var translation = load("res://addons/keychain/translations".path_join(locale + ".po"))
+	if is_instance_valid(translation) and translation is Translation:
+		TranslationServer.add_translation(translation)
