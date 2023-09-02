@@ -153,7 +153,9 @@ func get_sorted_cursors() -> Array:
 	for c in texture_rect.get_children():
 		if c is GradientCursor:
 			array.append(c)
-	array.sort_custom(func(a: GradientCursor, b: GradientCursor): return a.get_position() < b.get_position())
+	array.sort_custom(
+		func(a: GradientCursor, b: GradientCursor): return a.get_position() < b.get_position()
+	)
 	return array
 
 

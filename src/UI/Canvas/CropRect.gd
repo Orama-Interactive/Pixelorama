@@ -12,7 +12,8 @@ const DARKEN_COLOR := Color(0, 0, 0, 0.5)
 const LINE_COLOR := Color.WHITE
 
 var mode := Mode.MARGINS:
-	set(value): mode = value
+	set(value):
+		mode = value
 var locked_size := false
 var rect := Rect2i(0, 0, 1, 1)
 
