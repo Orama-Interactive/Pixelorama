@@ -259,11 +259,11 @@ func _snap_to_guide(
 	return snap_to
 
 
-func _get_draw_rect() -> Rect2:
+func _get_draw_rect() -> Rect2i:
 	if Global.current_project.has_selection:
 		return Global.current_project.selection_map.get_used_rect()
 	else:
-		return Rect2(Vector2.ZERO, Global.current_project.size)
+		return Rect2i(Vector2i.ZERO, Global.current_project.size)
 
 
 func _get_draw_image() -> Image:

@@ -19,7 +19,7 @@ var durations: PackedFloat32Array = []
 
 # Spritesheet options
 var orientation := Orientation.ROWS
-var lines_count := 1  # #How many rows/columns before new line is added
+var lines_count := 1  ## How many rows/columns before new line is added
 
 # General options
 var frame_current_tag := 0  ## Export only current frame tag
@@ -32,9 +32,7 @@ var include_tag_in_filename := false
 var new_dir_for_each_frame_tag := false  ## We don't need to store this after export
 var number_of_digits := 4
 var separator_character := "_"
-
-## Export coroutine signal
-var stop_export := false
+var stop_export := false  ## Export coroutine signal
 
 var file_exists_alert := "The following files already exist. Do you wish to overwrite them?\n%s"
 

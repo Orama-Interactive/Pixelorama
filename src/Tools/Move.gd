@@ -85,7 +85,7 @@ func draw_end(pos: Vector2i) -> void:
 				var image_copy := Image.new()
 				image_copy.copy_from(image)
 				image.fill(Color(0, 0, 0, 0))
-				image.blit_rect(image_copy, Rect2(Vector2.ZERO, project.size), pixel_diff)
+				image.blit_rect(image_copy, Rect2i(Vector2i.ZERO, project.size), pixel_diff)
 
 			commit_undo("Draw")
 

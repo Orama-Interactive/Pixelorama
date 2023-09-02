@@ -1,6 +1,6 @@
 extends SelectionTool
 
-var _rect := Rect2i(0, 0, 0, 0)
+var _rect := Rect2i()
 
 var _square := false  ## Mouse Click + Shift
 var _expand_from_center := false  ## Mouse Click + Ctrl
@@ -41,7 +41,7 @@ func draw_end(pos: Vector2i) -> void:
 		return
 	pos = snap_position(pos)
 	super.draw_end(pos)
-	_rect = Rect2(0, 0, 0, 0)
+	_rect = Rect2i()
 	_square = false
 	_expand_from_center = false
 	_displace_origin = false

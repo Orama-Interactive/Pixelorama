@@ -517,7 +517,7 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 			var sprite := Image.create(width, height, false, Image.FORMAT_RGBA8)
 			sprite.blend_rect(
 				c.get_image(),
-				Rect2(Vector2.ZERO, Global.current_project.size),
+				Rect2i(Vector2i.ZERO, Global.current_project.size),
 				Vector2i(offset_x, offset_y)
 			)
 			Global.current_project.undo_redo.add_do_property(c.image, "data", sprite.data)
