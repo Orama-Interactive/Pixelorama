@@ -22,7 +22,7 @@ func _on_FrameProperties_visibility_changed() -> void:
 
 
 func _on_FrameProperties_confirmed() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var new_duration: float = frame_dur.get_value()
 	project.undos += 1
 	project.undo_redo.create_action("Change frame duration")

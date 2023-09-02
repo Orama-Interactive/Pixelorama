@@ -210,8 +210,8 @@ func _prepare_circle_tool(fill: bool) -> void:
 				_circle_tool_shortcut.append(Vector2i(m - _brush_size, n - _brush_size))
 
 
-# Make sure to always have invoked _prepare_tool() before this. This computes the coordinates to be
-# drawn if it can (except for the generic brush, when it's actually drawing them)
+## Make sure to always have invoked _prepare_tool() before this. This computes the coordinates to be
+## drawn if it can (except for the generic brush, when it's actually drawing them)
 func _draw_tool(pos: Vector2i) -> Array[Vector2i]:
 	match _brush.type:
 		Brushes.PIXEL:

@@ -509,7 +509,7 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 			if _active_button != -1:
 				_slots[_active_button].tool_node.draw_move(draw_pos)
 
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var text := "[%s×%s]" % [project.size.x, project.size.y]
 	if Global.has_focus:
 		text += "    %s, %s" % [position.x, position.y]

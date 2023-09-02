@@ -119,7 +119,7 @@ func apply_selection(pos: Vector2i) -> void:
 ## Given an origin point and destination point, returns a rect representing
 ## where the shape will be drawn and what is its size
 func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
-	var rect := Rect2i(Vector2i.ZERO, Vector2i.ZERO)
+	var rect := Rect2i()
 
 	# Center the rect on the mouse
 	if _expand_from_center:

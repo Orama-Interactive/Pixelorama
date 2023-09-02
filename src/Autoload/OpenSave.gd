@@ -560,7 +560,7 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 
 
 func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var project_width := maxi(image.get_width(), project.size.x)
 	var project_height := maxi(image.get_height(), project.size.y)
 	if project.size < Vector2i(project_width, project_height):
@@ -591,7 +591,7 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 
 
 func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var project_width := maxi(image.get_width(), project.size.x)
 	var project_height := maxi(image.get_height(), project.size.y)
 	if project.size < Vector2i(project_width, project_height):
@@ -626,7 +626,7 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 
 
 func import_reference_image_from_path(path: String) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var ri := ReferenceImage.new()
 	ri.project = project
 	ri.deserialize({"image_path": path})
@@ -636,7 +636,7 @@ func import_reference_image_from_path(path: String) -> void:
 
 ## Useful for Web
 func import_reference_image_from_image(image: Image) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var ri := ReferenceImage.new()
 	ri.project = project
 	ri.create_from_image(image)

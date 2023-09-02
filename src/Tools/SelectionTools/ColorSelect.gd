@@ -26,7 +26,7 @@ func _on_Similarity_value_changed(value: float) -> void:
 
 func apply_selection(pos: Vector2i) -> void:
 	super.apply_selection(pos)
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if pos.x < 0 or pos.y < 0:
 		return
 	if pos.x > project.size.x - 1 or pos.y > project.size.y - 1:

@@ -443,7 +443,7 @@ func scale_image(width: int, height: int, interpolation: int) -> void:
 
 
 func center(indices: Array) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	Global.canvas.selection.transform_content_confirm()
 	project.undos += 1
 	project.undo_redo.create_action("Center Frames")
@@ -527,7 +527,7 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 
 
 func general_do_scale(width: int, height: int) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var size := Vector2i(width, height)
 	var x_ratio := project.size.x / width
 	var y_ratio := project.size.y / height
@@ -556,7 +556,7 @@ func general_do_scale(width: int, height: int) -> void:
 
 
 func general_undo_scale() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	project.undo_redo.add_undo_property(project, "size", project.size)
 	project.undo_redo.add_undo_property(project, "selection_map", project.selection_map)
 	project.undo_redo.add_undo_property(project, "x_symmetry_point", project.x_symmetry_point)

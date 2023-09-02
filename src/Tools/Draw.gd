@@ -197,14 +197,14 @@ func update_line_polylines(start: Vector2, end: Vector2) -> void:
 
 
 func prepare_undo(action: String) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	_undo_data = _get_undo_data()
 	project.undo_redo.create_action(action)
 
 
 func commit_undo() -> void:
 	var redo_data := _get_undo_data()
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var frame := -1
 	var layer := -1
 	if Global.animation_timer.is_stopped() and project.selected_cels.size() == 1:
@@ -275,7 +275,7 @@ func _prepare_tool() -> void:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	_brush_size_dynamics = _brush_size
-	var strength: float = Tools.get_alpha_dynamic(_strength)
+	var strength := Tools.get_alpha_dynamic(_strength)
 	if Tools.dynamics_size == Tools.Dynamics.PRESSURE:
 		_brush_size_dynamics = roundi(
 			lerpf(Tools.brush_size_min, Tools.brush_size_max, Tools.pen_pressure)
@@ -347,6 +347,7 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 		if int(_stroke_dimensions.x) % 2 == 0:
 			start.x += 1
 			end.x += 1
+	_prepare_tool()
 	var dx := absi(end.x - start.x)
 	var dy := -absi(end.y - start.y)
 	var err := dx + dy
@@ -355,7 +356,6 @@ func draw_fill_gap(start: Vector2, end: Vector2) -> void:
 	var sy := 1 if start.y < end.y else -1
 	var x := start.x
 	var y := start.y
-	_prepare_tool()
 	# This needs to be a dictionary to ensure duplicate coordinates are not being added
 	var coords_to_draw := {}
 	while !(x == end.x && y == end.y):
@@ -409,7 +409,7 @@ func _draw_tool_circle_from_map(pos: Vector2i) -> Array[Vector2i]:
 
 
 func draw_tool_brush(brush_position: Vector2i) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	# image brushes work differently, (we have to consider all 8 surrounding points)
 	var central_point := project.tiles.get_canon_position(brush_position)
 	var positions := project.tiles.get_point_in_tiles(central_point)
@@ -451,7 +451,7 @@ func draw_tool_brush(brush_position: Vector2i) -> void:
 
 
 func remove_unselected_parts_of_brush(brush: Image, dst: Vector2i) -> Image:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if !project.has_selection:
 		return brush
 	var brush_size := brush.get_size()
@@ -686,7 +686,7 @@ func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 
 func _get_undo_data() -> Dictionary:
 	var data := {}
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var cels: Array[BaseCel] = []
 	if Global.animation_timer.is_stopped():
 		for cel_index in project.selected_cels:

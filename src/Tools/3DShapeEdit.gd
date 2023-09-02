@@ -123,7 +123,7 @@ func _ready() -> void:
 
 
 func draw_start(pos: Vector2i) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if not project.get_current_cel() is Cel3D:
 		return
 	if not project.layers[project.current_layer].can_layer_get_drawn():

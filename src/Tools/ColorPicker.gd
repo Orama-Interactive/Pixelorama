@@ -61,7 +61,7 @@ func draw_end(pos: Vector2i) -> void:
 
 
 func _pick_color(pos: Vector2i) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	pos = project.tiles.get_canon_position(pos)
 
 	if pos.x < 0 or pos.y < 0:

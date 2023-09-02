@@ -272,7 +272,7 @@ func _get_draw_image() -> Image:
 
 func _get_selected_draw_images() -> Array[Image]:
 	var images: Array[Image] = []
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 		if not cel is PixelCel:

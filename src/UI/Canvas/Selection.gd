@@ -426,7 +426,7 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 
 
 func select_rect(rect: Rect2i, operation: int = SelectionOperation.ADD) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var selection_map_copy := SelectionMap.new()
 	selection_map_copy.copy_from(project.selection_map)
 	# Used only if the selection is outside of the canvas boundaries,
@@ -512,7 +512,7 @@ func move_content(move: Vector2) -> void:
 func transform_content_confirm() -> void:
 	if not is_moving_content:
 		return
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	for cel in _get_selected_draw_cels():
 		var cel_image: Image = cel.get_image()
 		var src: Image = preview_image
@@ -552,7 +552,7 @@ func transform_content_confirm() -> void:
 func transform_content_cancel() -> void:
 	if preview_image.is_empty():
 		return
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	project.selection_offset = original_offset
 
 	is_moving_content = false
@@ -584,7 +584,7 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 		print("No undo data found!")
 		return
 	var redo_data := get_undo_data(undo_data_tmp["undo_image"])
-	var project: Project = Global.current_project
+	var project := Global.current_project
 
 	project.undos += 1
 	project.undo_redo.create_action(action)
@@ -622,7 +622,7 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 
 func get_undo_data(undo_image: bool) -> Dictionary:
 	var data := {}
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	data["selection_map"] = project.selection_map
 	data["big_bounding_rectangle"] = big_bounding_rectangle
 	data["outline_offset"] = Global.current_project.selection_offset
@@ -638,7 +638,7 @@ func get_undo_data(undo_image: bool) -> Dictionary:
 
 func _get_selected_draw_cels() -> Array[BaseCel]:
 	var cels: Array[BaseCel] = []
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 		if not cel is PixelCel:
@@ -650,7 +650,7 @@ func _get_selected_draw_cels() -> Array[BaseCel]:
 
 func _get_selected_draw_images() -> Array[Image]:
 	var images: Array[Image] = []
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 		if not cel is PixelCel:
@@ -661,7 +661,7 @@ func _get_selected_draw_images() -> Array[Image]:
 
 
 func cut() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if !project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	copy()
@@ -669,7 +669,7 @@ func cut() -> void:
 
 
 func copy() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var cl_image := Image.new()
 	var cl_selection_map := SelectionMap.new()
 	var cl_big_bounding_rectangle := Rect2()
@@ -745,7 +745,7 @@ func paste(in_place := false) -> void:
 		transform_content_confirm()
 	undo_data = get_undo_data(true)
 	clear_selection()
-	var project: Project = Global.current_project
+	var project := Global.current_project
 
 	var clip_map := SelectionMap.new()
 	clip_map.data = clipboard.selection_map
@@ -787,7 +787,7 @@ func paste(in_place := false) -> void:
 
 
 func delete(selected_cels := true) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if !project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	if is_moving_content:
@@ -824,7 +824,7 @@ func delete(selected_cels := true) -> void:
 
 
 func new_brush() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if !project.has_selection:
 		return
 
@@ -872,7 +872,7 @@ func select_all() -> void:
 
 func invert() -> void:
 	transform_content_confirm()
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var undo_data_tmp := get_undo_data(false)
 	var selection_map_copy := SelectionMap.new()
 	selection_map_copy.copy_from(project.selection_map)
@@ -886,7 +886,7 @@ func invert() -> void:
 
 
 func clear_selection(use_undo := false) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if !project.has_selection:
 		return
 	transform_content_confirm()
@@ -905,7 +905,7 @@ func clear_selection(use_undo := false) -> void:
 
 
 func _get_preview_image() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var blended_image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	Export.blend_selected_cels(blended_image, project.frames[project.current_frame])
 	if original_preview_image.is_empty():
@@ -943,7 +943,7 @@ func _get_preview_image() -> void:
 
 
 func _get_selected_image(cel_image: Image) -> Image:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var image := Image.new()
 	image = cel_image.get_region(big_bounding_rectangle)
 	# For non-rectangular selections

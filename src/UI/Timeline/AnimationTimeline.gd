@@ -279,7 +279,7 @@ func _on_CopyFrame_pressed() -> void:
 
 
 func copy_frames(indices := [], destination := -1) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 
 	if indices.size() == 0:
 		for cel in Global.current_project.selected_cels:
@@ -469,7 +469,7 @@ func _on_AnimationTimer_timeout() -> void:
 		return
 
 	Global.canvas.selection.transform_content_confirm()
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var fps := project.fps
 	if animation_forward:
 		if project.current_frame < last_frame:

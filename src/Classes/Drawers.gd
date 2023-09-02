@@ -68,7 +68,7 @@ func reset() -> void:
 
 
 func set_pixel(image: Image, position: Vector2i, color: Color, ignore_mirroring := false) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	drawers[0].set_pixel(image, position, color, color_op)
 	if ignore_mirroring:
 		return

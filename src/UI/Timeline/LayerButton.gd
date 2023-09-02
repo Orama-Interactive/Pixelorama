@@ -255,7 +255,7 @@ func _can_drop_data(_pos: Vector2, data) -> bool:
 
 func _drop_data(_pos: Vector2, data) -> void:
 	var drop_layer: int = data[1]
-	var project: Project = Global.current_project
+	var project := Global.current_project
 
 	project.undo_redo.create_action("Change Layer Order")
 	var layers: Array = project.layers  # This shouldn't be modified directly

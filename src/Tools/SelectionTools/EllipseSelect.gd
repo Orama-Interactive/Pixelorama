@@ -70,7 +70,7 @@ func draw_preview() -> void:
 
 func apply_selection(_position: Vector2i) -> void:
 	super.apply_selection(_position)
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if !_add and !_subtract and !_intersect:
 		Global.canvas.selection.clear_selection()
 		if _rect.size == Vector2i.ZERO and Global.current_project.has_selection:
@@ -110,7 +110,7 @@ func apply_selection(_position: Vector2i) -> void:
 
 
 func set_ellipse(selection_map: SelectionMap, pos: Vector2i) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var bitmap_size := selection_map.get_size()
 	if _intersect:
 		selection_map.clear()
@@ -129,7 +129,7 @@ func set_ellipse(selection_map: SelectionMap, pos: Vector2i) -> void:
 # Given an origin point and destination point, returns a rect representing
 # where the shape will be drawn and what is its size
 func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
-	var rect := Rect2i(Vector2i.ZERO, Vector2i.ZERO)
+	var rect := Rect2i()
 
 	# Center the rect on the mouse
 	if _expand_from_center:

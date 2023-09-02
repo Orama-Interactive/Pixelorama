@@ -182,7 +182,7 @@ func draw_end(pos: Vector2i) -> void:
 
 
 func fill_in_color(pos: Vector2i) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var images := _get_selected_draw_images()
 	for image in images:
 		var color: Color = image.get_pixelv(pos)
@@ -232,7 +232,7 @@ func fill_in_color(pos: Vector2i) -> void:
 
 
 func fill_in_area(pos: Vector2i) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	_flood_fill(pos)
 
 	# Handle Mirroring
@@ -250,7 +250,7 @@ func fill_in_area(pos: Vector2i) -> void:
 
 
 func fill_in_selection() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var images := _get_selected_draw_images()
 	if _fill_with == FillWith.COLOR or _pattern == null:
 		if project.has_selection:
@@ -394,7 +394,7 @@ func _check_flooded_segment(
 func _flood_fill(pos: Vector2i) -> void:
 	# implements the floodfill routine by Shawn Hargreaves
 	# from https://www1.udel.edu/CIS/software/dist/allegro-4.2.1/src/flood.c
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var images := _get_selected_draw_images()
 	for image in images:
 		var color: Color = image.get_pixelv(pos)
@@ -474,7 +474,7 @@ func _set_pixel_pattern(image: Image, x: int, y: int, pattern_size: Vector2i) ->
 
 func commit_undo(action: String, undo_data: Dictionary) -> void:
 	var redo_data := _get_undo_data()
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var frame := -1
 	var layer := -1
 	if Global.animation_timer.is_stopped() and project.selected_cels.size() == 1:
@@ -501,7 +501,7 @@ func _get_undo_data() -> Dictionary:
 
 
 func _pick_color(pos: Vector2i) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	pos = project.tiles.get_canon_position(pos)
 
 	if pos.x < 0 or pos.y < 0:

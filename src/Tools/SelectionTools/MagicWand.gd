@@ -21,7 +21,7 @@ class Segment:
 
 func apply_selection(pos: Vector2i) -> void:
 	super.apply_selection(pos)
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if pos.x < 0 or pos.y < 0 or pos.x >= project.size.x or pos.y >= project.size.y:
 		return
 	if !_add and !_subtract and !_intersect:
@@ -135,7 +135,7 @@ func _check_flooded_segment(
 func _flood_fill(pos: Vector2i, image: Image, selection_map: SelectionMap) -> void:
 	# implements the floodfill routine by Shawn Hargreaves
 	# from https://www1.udel.edu/CIS/software/dist/allegro-4.2.1/src/flood.c
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var color := image.get_pixelv(pos)
 	# init flood data structures
 	_allegro_flood_segments = []
@@ -185,7 +185,7 @@ func _select_segments(selection_map: SelectionMap) -> void:
 
 
 func _set_bit(p: Vector2i, selection_map: SelectionMap) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if _intersect:
 		selection_map.select_pixel(p, project.selection_map.is_pixel_selected(p))
 	else:

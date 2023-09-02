@@ -100,7 +100,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			_delete_cel_content()
 
 		MenuOptions.LINK, MenuOptions.UNLINK:
-			var project: Project = Global.current_project
+			var project := Global.current_project
 			if id == MenuOptions.UNLINK:
 				project.undo_redo.create_action("Unlink Cel")
 				var selected_cels := project.selected_cels.duplicate()

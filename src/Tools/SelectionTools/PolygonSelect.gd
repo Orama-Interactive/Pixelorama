@@ -196,7 +196,7 @@ func append_gap(start: Vector2i, end: Vector2i, array: Array[Vector2i]) -> void:
 
 func mirror_array(array: Array[Vector2i], h: bool, v: bool) -> Array[Vector2i]:
 	var new_array: Array[Vector2i] = []
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	for point in array:
 		if h and v:
 			new_array.append(

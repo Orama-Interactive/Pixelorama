@@ -75,7 +75,7 @@ func draw_preview() -> void:
 
 func apply_selection(_position) -> void:
 	super.apply_selection(_position)
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var cleared := false
 	if !_add and !_subtract and !_intersect:
 		cleared = true
@@ -156,7 +156,7 @@ func append_gap(start: Vector2i, end: Vector2i) -> void:
 
 func mirror_array(array: Array[Vector2i], h: bool, v: bool) -> Array[Vector2i]:
 	var new_array: Array[Vector2i] = []
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	for point in array:
 		if h and v:
 			new_array.append(

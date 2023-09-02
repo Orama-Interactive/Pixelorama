@@ -73,7 +73,7 @@ func draw_end(pos: Vector2i) -> void:
 		and _content_transformation_check == selection_node.is_moving_content
 	):
 		pos = _snap_position(pos)
-		var project: Project = Global.current_project
+		var project := Global.current_project
 
 		if project.has_selection:
 			selection_node.move_borders_end()
@@ -119,7 +119,7 @@ func _snap_position(pos: Vector2) -> Vector2:
 
 func commit_undo(action: String) -> void:
 	var redo_data := _get_undo_data()
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var frame := -1
 	var layer := -1
 	if Global.animation_timer.is_stopped() and project.selected_cels.size() == 1:
@@ -141,7 +141,7 @@ func commit_undo(action: String) -> void:
 
 func _get_undo_data() -> Dictionary:
 	var data := {}
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var cels: Array[BaseCel] = []
 	if Global.animation_timer.is_stopped():
 		for cel_index in project.selected_cels:
