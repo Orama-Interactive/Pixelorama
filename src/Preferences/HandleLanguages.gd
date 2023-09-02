@@ -6,7 +6,7 @@ const LANGUAGES_DICT := {
 	"da_DK": ["Dansk", "Danish"],
 	"de_DE": ["Deutsch", "German"],
 	"el_GR": ["Ελληνικά", "Greek"],
-	"eo": ["Esperanto", "Esperanto"],
+	"eo_UY": ["Esperanto", "Esperanto"],
 	"es_ES": ["Español", "Spanish"],
 	"fr_FR": ["Français", "French"],
 	"id_ID": ["Indonesian", "Indonesian"],
@@ -38,8 +38,7 @@ func _ready() -> void:
 	if Global.config_cache.has_section_key("preferences", "locale"):
 		saved_locale = Global.config_cache.get_value("preferences", "locale")
 		locale_index = loaded_locales.find(saved_locale)
-	if TranslationServer.get_locale() != saved_locale:
-		TranslationServer.set_locale(saved_locale)  # If no language is saved, OS' locale is used
+	_set_locale(saved_locale) # If no language is saved, OS' locale is used
 
 	var button_group: ButtonGroup = $"System Language".button_group
 	for locale in loaded_locales:  # Create radiobuttons for each language
@@ -58,8 +57,7 @@ func _on_Language_pressed(index: int) -> void:
 	var locale := OS.get_locale()
 	if index > 1:
 		locale = loaded_locales[index - 2]
-	if TranslationServer.get_locale() != locale:
-		TranslationServer.set_locale(locale)
+	_set_locale(locale)
 	Global.config_cache.set_value("preferences", "locale", TranslationServer.get_locale())
 	Global.config_cache.save("user://cache.ini")
 
@@ -67,3 +65,13 @@ func _on_Language_pressed(index: int) -> void:
 	Tools.update_hint_tooltips()
 	Global.preferences_dialog.list.clear()
 	Global.preferences_dialog.add_tabs(true)
+
+
+func _set_locale(locale: String) -> void:
+	if TranslationServer.get_locale() == locale:
+		return
+	if not locale in TranslationServer.get_loaded_locales():
+		var translation := load("res://Translations/%s.po" % locale)
+		if is_instance_valid(translation) and translation is Translation:
+			TranslationServer.add_translation(translation)
+	TranslationServer.set_locale(locale)
