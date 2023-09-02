@@ -57,17 +57,11 @@ var tools := {
 	),
 	"MagicWand":
 	Tool.new(
-		"MagicWand",
-		"Magic Wand",
-		"magic_wand",
-		"res://src/Tools/SelectionTools/MagicWand.tscn"
+		"MagicWand", "Magic Wand", "magic_wand", "res://src/Tools/SelectionTools/MagicWand.tscn"
 	),
 	"Lasso":
 	Tool.new(
-		"Lasso",
-		"Lasso / Free Select Tool",
-		"lasso",
-		"res://src/Tools/SelectionTools/Lasso.tscn"
+		"Lasso", "Lasso / Free Select Tool", "lasso", "res://src/Tools/SelectionTools/Lasso.tscn"
 	),
 	"PaintSelect":
 	Tool.new(
@@ -90,9 +84,7 @@ var tools := {
 		"Select a color from a pixel of the sprite"
 	),
 	"Crop":
-	Tool.new(
-		"Crop", "Crop", "crop", "res://src/Tools/CropTool.tscn", [], "Resize the canvas"
-	),
+	Tool.new("Crop", "Crop", "crop", "res://src/Tools/CropTool.tscn", [], "Resize the canvas"),
 	"Pencil":
 	Tool.new(
 		"Pencil",
@@ -114,9 +106,7 @@ var tools := {
 		["draw_create_line"]
 	),
 	"Bucket":
-	Tool.new(
-		"Bucket", "Bucket", "fill", "res://src/Tools/Bucket.tscn", [Global.LayerTypes.PIXEL]
-	),
+	Tool.new("Bucket", "Bucket", "fill", "res://src/Tools/Bucket.tscn", [Global.LayerTypes.PIXEL]),
 	"Shading":
 	Tool.new(
 		"Shading",
