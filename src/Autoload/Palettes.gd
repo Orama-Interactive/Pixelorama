@@ -9,7 +9,7 @@ enum NewPalettePresetType {
 # Color options when user creates a new palette from current sprite or selection
 enum GetColorsFrom { CURRENT_FRAME = 0, CURRENT_CEL = 1, ALL_FRAMES = 2 }
 
-const DEFAULT_PALETTE_NAME = "Default"
+const DEFAULT_PALETTE_NAME := "Default"
 var palettes_write_path: String = Global.home_data_directory.path_join("Palettes")
 # All available palettes
 var palettes := {}

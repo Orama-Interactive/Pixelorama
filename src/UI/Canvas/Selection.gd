@@ -11,7 +11,12 @@ var is_moving_content := false
 var arrow_key_move := false
 var is_pasting := false
 var big_bounding_rectangle := Rect2i():
-	set = _big_bounding_rectangle_changed
+	set(value):
+		big_bounding_rectangle = value
+		for slot in Tools._slots.values():
+			if slot.tool_node is SelectionTool:
+				slot.tool_node.set_spinbox_values()
+		_update_gizmos()
 var image_current_pixel := Vector2.ZERO  ## The ACTUAL pixel coordinate of image
 
 var temp_rect := Rect2()
@@ -256,14 +261,6 @@ func _draw() -> void:
 	if is_moving_content and !preview_image.is_empty():
 		draw_texture(preview_image_texture, big_bounding_rectangle.position, Color(1, 1, 1, 0.5))
 	draw_set_transform(position, rotation, scale)
-
-
-func _big_bounding_rectangle_changed(value: Rect2i) -> void:
-	big_bounding_rectangle = value
-	for slot in Tools._slots.values():
-		if slot.tool_node is SelectionTool:
-			slot.tool_node.set_spinbox_values()
-	_update_gizmos()
 
 
 func _update_gizmos() -> void:

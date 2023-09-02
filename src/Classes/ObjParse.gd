@@ -1,20 +1,19 @@
 class_name ObjParse
 
+## Obj parser made by Ezcha, updated by Deakcor
+## Created on 7/11/2018
+## https://ezcha.net
+## https://github.com/Ezcha/gd-obj
+## MIT License
+## https://github.com/Ezcha/gd-obj/blob/master/LICENSE
+## Returns an array of materials from a MTL file
+
 const DEBUG := false
-
-# Obj parser made by Ezcha, updated by Deakcor
-# Created on 7/11/2018
-# https://ezcha.net
-# https://github.com/Ezcha/gd-obj
-# MIT License
-# https://github.com/Ezcha/gd-obj/blob/master/LICENSE
-
-# Returns an array of materials from a MTL file
 
 # Public methods
 
 
-# Create mesh from obj and mtl paths
+## Create mesh from obj and mtl paths
 static func load_obj(obj_path: String, mtl_path: String = "") -> Mesh:
 	if mtl_path == "":
 		mtl_path = search_mtl_path(obj_path)
@@ -25,17 +24,17 @@ static func load_obj(obj_path: String, mtl_path: String = "") -> Mesh:
 	return _create_obj(obj, mats) if obj and mats else null
 
 
-# Create mesh from obj, materials. Materials should be {"matname":data}
+## Create mesh from obj, materials. Materials should be {"matname":data}
 static func load_obj_from_buffer(obj_data: String, materials: Dictionary) -> Mesh:
 	return _create_obj(obj_data, materials)
 
 
-# Create materials
+## Create materials
 static func load_mtl_from_buffer(mtl_data: String, textures: Dictionary) -> Dictionary:
 	return _create_mtl(mtl_data, textures)
 
 
-# Get data from file path
+## Get data from file path
 static func get_data(path: String) -> String:
 	if path != "":
 		var file := FileAccess.open(path, FileAccess.READ)
@@ -46,7 +45,7 @@ static func get_data(path: String) -> String:
 	return ""
 
 
-# Get textures from mtl path (return {"tex_path":data})
+## Get textures from mtl path (return {"tex_path":data})
 static func get_mtl_tex(mtl_path: String) -> Dictionary:
 	var file_paths := get_mtl_tex_paths(mtl_path)
 	var textures := {}
@@ -55,7 +54,7 @@ static func get_mtl_tex(mtl_path: String) -> Dictionary:
 	return textures
 
 
-# Get textures paths from mtl path
+## Get textures paths from mtl path
 static func get_mtl_tex_paths(mtl_path: String) -> Array:
 	var file := FileAccess.open(mtl_path, FileAccess.READ)
 	var paths := []
@@ -70,7 +69,7 @@ static func get_mtl_tex_paths(mtl_path: String) -> Array:
 	return paths
 
 
-# Try to find mtl path from obj path
+## Try to find mtl path from obj path
 static func search_mtl_path(obj_path: String) -> String:
 	var mtl_path := obj_path.get_base_dir().path_join(
 		obj_path.get_file().rsplit(".", false, 1)[0] + ".mtl"

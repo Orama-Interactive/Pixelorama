@@ -178,7 +178,7 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 		nn_rotate(sprite, angle, pivot)
 		return
 
-	var aux: Image = Image.new()
+	var aux := Image.new()
 	aux.copy_from(sprite)
 	var ox: int
 	var oy: int
@@ -187,7 +187,7 @@ func rotxel(sprite: Image, angle: float, pivot: Vector2) -> void:
 		for y in sprite.get_size().y:
 			var dx := 3 * (x - pivot.x)
 			var dy := 3 * (y - pivot.y)
-			var found_pixel: bool = false
+			var found_pixel := false
 			for k in range(9):
 				var modk := -1 + k % 3
 				var divk := -1 + int(k / 3)

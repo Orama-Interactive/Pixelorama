@@ -25,13 +25,13 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 	else:
 		# Create a temporary image that only has the selected pixels in it
 		var selected := Image.new()
-		var rectangle: Rect2 = Global.canvas.selection.big_bounding_rectangle
+		var rectangle: Rect2i = Global.canvas.selection.big_bounding_rectangle
 		if project != Global.current_project:
 			rectangle = project.selection_map.get_used_rect()
 		selected = cel.get_region(rectangle)
 		for x in selected.get_width():
 			for y in selected.get_height():
-				var pos := Vector2(x, y)
+				var pos := Vector2i(x, y)
 				var cel_pos := pos + rectangle.position
 				if project.can_pixel_get_drawn(cel_pos):
 					cel.set_pixelv(cel_pos, Color(0, 0, 0, 0))
@@ -42,7 +42,7 @@ func _flip_image(cel: Image, affect_selection: bool, project: Project) -> void:
 			selected.flip_x()
 		if flip_v.button_pressed:
 			selected.flip_y()
-		cel.blend_rect(selected, Rect2(Vector2.ZERO, selected.get_size()), rectangle.position)
+		cel.blend_rect(selected, Rect2i(Vector2i.ZERO, selected.get_size()), rectangle.position)
 
 
 func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> void:
@@ -102,7 +102,7 @@ func _flip_selection(project: Project = Global.current_project) -> void:
 	bitmap_image.fill(Color(0, 0, 0, 0))
 	bitmap_image.blend_rect(
 		smaller_bitmap_image,
-		Rect2(Vector2.ZERO, smaller_bitmap_image.get_size()),
+		Rect2i(Vector2.ZERO, smaller_bitmap_image.get_size()),
 		selection_rect.position
 	)
 	project.selection_map = bitmap_image

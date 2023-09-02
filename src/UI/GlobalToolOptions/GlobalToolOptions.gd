@@ -125,12 +125,12 @@ func _on_Dynamics_toggled(
 	dynamics_changed.emit()
 
 
-func _on_ThresholdPressure_updated(value_1, value_2) -> void:
+func _on_ThresholdPressure_updated(value_1: float, value_2: float) -> void:
 	Tools.pen_pressure_min = minf(value_1, value_2)
 	Tools.pen_pressure_max = maxf(value_1, value_2)
 
 
-func _on_ThresholdVelocity_updated(value_1, value_2) -> void:
+func _on_ThresholdVelocity_updated(value_1: float, value_2: float) -> void:
 	Tools.mouse_velocity_min_thres = minf(value_1, value_2)
 	Tools.mouse_velocity_max_thres = maxf(value_1, value_2)
 

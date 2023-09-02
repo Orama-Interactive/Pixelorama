@@ -1,24 +1,28 @@
 class_name CropRect
 extends Node2D
-# Draws the rectangle overlay for the crop tool
-# Stores the shared settings between left and right crop tools
+## Draws the rectangle overlay for the crop tool
+## Stores the shared settings between left and right crop tools
 
 signal updated
 
 enum Mode { MARGINS, POSITION_SIZE }
 
-const BIG = 100000  # Size of big rectangles used to darken background.
-const DARKEN_COLOR = Color(0, 0, 0, 0.5)
-const LINE_COLOR = Color.WHITE
+const BIG := 100000  ## Size of big rectangles used to darken background.
+const DARKEN_COLOR := Color(0, 0, 0, 0.5)
+const LINE_COLOR := Color.WHITE
 
-var mode: int = Mode.MARGINS:
-	set = _set_mode
+var mode := Mode.MARGINS:
+	set(value): mode = value
 var locked_size := false
 var rect := Rect2i(0, 0, 1, 1)
 
-# How many crop tools are active (0-2), setter makes this visible if not 0
+## How many crop tools are active (0-2), setter makes this visible if not 0
 var tool_count := 0:
-	set = _set_tool_count
+	set(value):
+		if tool_count == 0 and value > 0:
+			reset()  # Reset once 1 tool becomes the crop tool
+		tool_count = value
+		visible = tool_count
 
 
 func _ready() -> void:
@@ -68,17 +72,3 @@ func reset() -> void:
 	rect.position = Vector2.ZERO
 	rect.size = Global.current_project.size
 	updated.emit()
-
-
-# Setters
-
-
-func _set_mode(value: int) -> void:
-	mode = value
-
-
-func _set_tool_count(value: int) -> void:
-	if tool_count == 0 and value > 0:
-		reset()  # Reset once 1 tool becomes the crop tool
-	tool_count = value
-	visible = tool_count

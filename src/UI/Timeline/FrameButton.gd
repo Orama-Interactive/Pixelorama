@@ -16,7 +16,7 @@ func _ready() -> void:
 
 
 func _update_tooltip() -> void:
-	var duration: float = Global.current_project.frames[frame].duration
+	var duration := Global.current_project.frames[frame].duration
 	var duration_sec := duration * (1.0 / Global.current_project.fps)
 	var duration_str := str(duration_sec)
 	if "." in duration_str:  # If its a decimal value

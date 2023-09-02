@@ -5,7 +5,7 @@ var green := true
 var blue := true
 var alpha := false
 
-var shader: Shader = preload("res://src/Shaders/Desaturate.gdshader")
+var shader := preload("res://src/Shaders/Desaturate.gdshader")
 
 
 func _ready() -> void:

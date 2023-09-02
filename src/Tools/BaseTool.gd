@@ -7,16 +7,16 @@ var tool_slot: Tools.Slot = null
 var cursor_text := ""
 var _cursor := Vector2i(Vector2.INF)
 
-var _draw_cache: Array[Vector2i] = []  # for storing already drawn pixels
-@warning_ignore("unused_private_class_variable") var _for_frame := 0  # cache for which frame?
+var _draw_cache: Array[Vector2i] = []  ## For storing already drawn pixels
+@warning_ignore("unused_private_class_variable") var _for_frame := 0  ## Cache for which frame
 
-# Only use "_spacing_mode" and "_spacing" variables (the others are set automatically)
+# Only use _spacing_mode and _spacing variables (the others are set automatically)
 # The _spacing_mode and _spacing values are to be CHANGED only in the tool scripts (e.g Pencil.gd)
-var _spacing_mode := false  # Enables spacing (continuous gaps between two strokes)
-var _spacing := Vector2i.ZERO  # Spacing between two strokes
-var _stroke_dimensions := Vector2i.ONE  # 2d vector containing _brush_size from Draw.gd
-var _spacing_offset := Vector2i.ZERO  # The "INITIAL" error between position and position.snapped()
-@onready var color_rect: ColorRect = $ColorRect
+var _spacing_mode := false  ## Enables spacing (continuous gaps between two strokes)
+var _spacing := Vector2i.ZERO  ## Spacing between two strokes
+var _stroke_dimensions := Vector2i.ONE  ## 2D vector containing _brush_size from Draw.gd
+var _spacing_offset := Vector2i.ZERO  ## The initial error between position and position.snapped()
+@onready var color_rect := $ColorRect as ColorRect
 
 
 func _ready() -> void:
@@ -26,7 +26,6 @@ func _ready() -> void:
 	else:
 		color_rect.color = Global.right_tool_color
 	$Label.text = Tools.tools[name].display_name
-
 	load_config()
 
 
@@ -185,7 +184,7 @@ func snap_position(pos: Vector2) -> Vector2:
 				continue
 			for i in point.lines.size():
 				if point.lines[i].has("angle") and point.lines[i].has("length"):  # Sanity check
-					var angle: float = deg_to_rad(point.lines[i].angle)
+					var angle := deg_to_rad(point.lines[i].angle)
 					var length: float = point.lines[i].length
 					var start := Vector2(point.pos_x, point.pos_y)
 					var s1 := start

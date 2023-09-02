@@ -98,7 +98,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 	var height := project.size.y * spritesheet_rows
 
 	var whole_image := Image.create(width, height, false, Image.FORMAT_RGBA8)
-	var origin := Vector2.ZERO
+	var origin := Vector2i.ZERO
 	var hh := 0
 	var vv := 0
 
@@ -356,8 +356,8 @@ func file_format_string(format_enum: int) -> String:
 
 func file_format_description(format_enum: int) -> String:
 	match format_enum:
-		#  these are overrides
-		#  (if they are not given, they will generate themselves based on the enum key name)
+		# these are overrides
+		# (if they are not given, they will generate themselves based on the enum key name)
 		FileFormat.PNG:
 			return "PNG Image"
 		FileFormat.GIF:
@@ -372,13 +372,13 @@ func file_format_description(format_enum: int) -> String:
 			return ""
 
 
+## True when exporting to .gif and .apng (and potentially video formats in the future)
+## False when exporting to .png, and other non-animated formats in the future
 func is_single_file_format(project := Global.current_project) -> bool:
-	# True when exporting to .gif and .apng (and potentially video formats in the future)
-	# False when exporting to .png, and other non-animated formats in the future
 	return animated_formats.has(project.file_format)
 
 
-func _create_export_path(multifile: bool, project: Project, frame: int = 0) -> String:
+func _create_export_path(multifile: bool, project: Project, frame := 0) -> String:
 	var path := project.file_name
 	# Only append frame number when there are multiple files exported
 	if multifile:
@@ -427,7 +427,7 @@ func _get_proccessed_image_animation_tag_and_start_id(
 
 
 func _blend_layers(
-	image: Image, frame: Frame, origin := Vector2.ZERO, project := Global.current_project
+	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
 ) -> void:
 	if export_layers == 0:
 		blend_all_layers(image, frame, origin, project)
@@ -437,15 +437,15 @@ func _blend_layers(
 		var layer := project.layers[export_layers - 2]
 		var layer_image := Image.new()
 		if layer is GroupLayer:
-			layer_image.copy_from(layer.blend_children(frame, Vector2.ZERO))
+			layer_image.copy_from(layer.blend_children(frame, Vector2i.ZERO))
 		else:
 			layer_image.copy_from(frame.cels[export_layers - 2].get_image())
-		image.blend_rect(layer_image, Rect2(Vector2.ZERO, project.size), origin)
+		image.blend_rect(layer_image, Rect2i(Vector2i.ZERO, project.size), origin)
 
 
 ## Blends canvas layers into passed image starting from the origin position
 func blend_all_layers(
-	image: Image, frame: Frame, origin := Vector2.ZERO, project := Global.current_project
+	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
 ) -> void:
 	var layer_i := 0
 	for cel in frame.cels:
@@ -465,13 +465,13 @@ func blend_all_layers(
 					cel_image.set_pixel(
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
-		image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
+		image.blend_rect(cel_image, Rect2i(Vector2i.ZERO, project.size), origin)
 		layer_i += 1
 
 
 ## Blends selected cels of the given frame into passed image starting from the origin position
 func blend_selected_cels(
-	image: Image, frame: Frame, origin := Vector2(0, 0), project := Global.current_project
+	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
 ) -> void:
 	for cel_ind in frame.cels.size():
 		var test_array := [project.current_frame, cel_ind]
@@ -492,7 +492,7 @@ func blend_selected_cels(
 					cel_image.set_pixel(
 						xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
 					)
-		image.blend_rect(cel_image, Rect2(Vector2.ZERO, project.size), origin)
+		image.blend_rect(cel_image, Rect2i(Vector2i.ZERO, project.size), origin)
 
 
 func frames_divided_by_spritesheet_lines() -> int:

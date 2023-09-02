@@ -7,16 +7,16 @@ extends Control
 signal updated(gradient, cc)
 
 var continuous_change := true
-var active_cursor: GradientCursor  # Showing a color picker popup to change a cursor's color
+var active_cursor: GradientCursor  ## Showing a color picker popup to change a cursor's color
 
 @onready var x_offset: float = size.x - GradientCursor.WIDTH
-@onready var texture_rect: TextureRect = $TextureRect
-@onready var texture: Texture2D = $TextureRect.texture
-@onready var gradient: Gradient = texture.gradient
-@onready var color_picker: ColorPicker = $Popup.get_node("ColorPicker")
-@onready var divide_dialog: ConfirmationDialog = $DivideConfirmationDialog
-@onready var number_of_parts_spin_box: SpinBox = $"%NumberOfPartsSpinBox"
-@onready var add_point_end_check_box: CheckBox = $"%AddPointEndCheckBox"
+@onready var texture_rect: TextureRect = $TextureRect as TextureRect
+@onready var texture := texture_rect.texture as GradientTexture2D
+@onready var gradient := texture.gradient
+@onready var color_picker := $Popup.get_node("ColorPicker") as ColorPicker
+@onready var divide_dialog := $DivideConfirmationDialog as ConfirmationDialog
+@onready var number_of_parts_spin_box := $"%NumberOfPartsSpinBox" as SpinBox
+@onready var add_point_end_check_box := $"%AddPointEndCheckBox" as CheckBox
 
 
 class GradientCursor:
@@ -78,8 +78,8 @@ class GradientCursor:
 		):
 			position.x += get_local_mouse_position().x
 			if ev.ctrl_pressed:
-				position.x = (round(get_caret_column() * 20.0) * 0.05 * (parent.size.x - WIDTH))
-			position.x = min(max(0, position.x), parent.size.x - size.x)
+				position.x = (roundi(get_caret_column() * 20.0) * 0.05 * (parent.size.x - WIDTH))
+			position.x = mini(maxi(0, position.x), parent.size.x - size.x)
 			grand_parent.update_from_value()
 			label.text = "%.03f" % get_caret_column()
 
@@ -90,9 +90,6 @@ class GradientCursor:
 		color = c
 		grand_parent.update_from_value()
 		queue_redraw()
-
-	static func sort(a, b) -> bool:
-		return a.get_position() < b.get_position()
 
 	func _can_drop_data(_position, data) -> bool:
 		return typeof(data) == TYPE_COLOR
@@ -117,7 +114,7 @@ func _create_cursors() -> void:
 
 func _gui_input(ev: InputEvent) -> void:
 	if ev.is_action_pressed("left_mouse"):
-		var p = clamp(ev.position.x, 0, x_offset)
+		var p := clampf(ev.position.x, 0, x_offset)
 		add_cursor(p, get_gradient_color(p))
 		continuous_change = false
 		update_from_value()
@@ -152,11 +149,11 @@ func select_color(cursor: GradientCursor, pos: Vector2) -> void:
 
 
 func get_sorted_cursors() -> Array:
-	var array := []
+	var array: Array[GradientCursor] = []
 	for c in texture_rect.get_children():
 		if c is GradientCursor:
 			array.append(c)
-	array.sort_custom(GradientCursor.sort)
+	array.sort_custom(func(a: GradientCursor, b: GradientCursor): return a.get_position() < b.get_position())
 	return array
 
 
@@ -186,8 +183,8 @@ func _on_DivideButton_pressed() -> void:
 func _on_DivideConfirmationDialog_confirmed() -> void:
 	var add_point_to_end := add_point_end_check_box.button_pressed
 	var parts := number_of_parts_spin_box.value
-	var colors := []
-	var end_point = 1 if add_point_to_end else 0
+	var colors: PackedColorArray = []
+	var end_point := 1 if add_point_to_end else 0
 	parts -= end_point
 
 	if not add_point_to_end:

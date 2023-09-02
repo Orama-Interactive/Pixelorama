@@ -74,7 +74,7 @@ func capture_frame() -> void:
 	else:
 		var frame := project.frames[project.current_frame]
 		image = Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
-		Export.blend_all_layers(image, frame, Vector2(0, 0), project)
+		Export.blend_all_layers(image, frame, Vector2i.ZERO, project)
 
 	if mode == Mode.CANVAS:
 		if resize != 100:

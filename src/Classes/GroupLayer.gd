@@ -11,10 +11,10 @@ func _init(_project, _name := "") -> void:
 
 
 ## Blends all of the images of children layer of the group layer into a single image.
-func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
+func blend_children(frame: Frame, origin := Vector2i.ZERO) -> Image:
 	var image := Image.create(project.size.x, project.size.y, false, Image.FORMAT_RGBA8)
 	var children := get_children(false)
-	var blend_rect := Rect2(Vector2.ZERO, project.size)
+	var blend_rect := Rect2i(Vector2i.ZERO, project.size)
 	for layer in children:
 		if not layer.is_visible_in_hierarchy():
 			continue
@@ -28,10 +28,8 @@ func blend_children(frame: Frame, origin := Vector2.ZERO) -> Image:
 				for xx in cel_image.get_size().x:
 					for yy in cel_image.get_size().y:
 						var pixel_color := cel_image.get_pixel(xx, yy)
-						var alpha: float = pixel_color.a * cel.opacity
-						cel_image.set_pixel(
-							xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha)
-						)
+						pixel_color.a *= cel.opacity
+						cel_image.set_pixel(xx, yy, pixel_color)
 			image.blend_rect(cel_image, blend_rect, origin)
 	return image
 

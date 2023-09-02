@@ -1,6 +1,6 @@
 extends Container
 
-const PADDING = 1
+const PADDING := 1
 
 @export var h_scroll_bar_node_path: NodePath
 @onready var h_scroll_bar: HScrollBar = get_node_or_null(h_scroll_bar_node_path)
@@ -42,8 +42,8 @@ func ensure_control_visible(control: Control):
 	# Based on Godot's implementation in ScrollContainer
 	var global_rect := get_global_rect()
 	var other_rect := control.get_global_rect()
-	var diff: float = max(
-		min(other_rect.position.x, global_rect.position.x),
+	var diff := maxf(
+		minf(other_rect.position.x, global_rect.position.x),
 		other_rect.position.x + other_rect.size.x - global_rect.size.x
 	)
 	h_scroll_bar.value += diff - global_rect.position.x

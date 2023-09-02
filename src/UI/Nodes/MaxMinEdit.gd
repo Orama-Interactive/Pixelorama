@@ -6,17 +6,17 @@ extends Control
 
 signal updated(zone)
 
-@export var start: float = 0.0
-@export var end: float = 1.0
-@export var zone_col: Color = Color.BLACK
-@export var background_col: Color = Color.GRAY
+@export var start := 0.0
+@export var end := 1.0
+@export var zone_col := Color.BLACK
+@export var background_col := Color.GRAY
 
 var active_cursor: GradientCursor  # Showing a color picker popup to change a cursor's color
 
 @onready var x_offset: float = size.x - GradientCursor.WIDTH
-@onready var texture_rect: TextureRect = $TextureRect
-@onready var texture: Texture2D = $TextureRect.texture
-@onready var gradient: Gradient = texture.gradient
+@onready var texture_rect := $TextureRect as TextureRect
+@onready var texture := texture_rect.texture as GradientTexture2D
+@onready var gradient := texture.gradient as Gradient
 
 
 class GradientCursor:
@@ -67,8 +67,8 @@ class GradientCursor:
 		):
 			position.x += get_local_mouse_position().x
 			if ev.ctrl_pressed:
-				position.x = (round(get_caret_column() * 20.0) * 0.05 * (parent.size.x - WIDTH))
-			position.x = min(max(0, position.x), parent.size.x - size.x)
+				position.x = (roundi(get_caret_column() * 20.0) * 0.05 * (parent.size.x - WIDTH))
+			position.x = mini(maxi(0, position.x), parent.size.x - size.x)
 			grand_parent.update_from_value()
 			label.text = "%.03f" % get_caret_column()
 
@@ -103,7 +103,7 @@ func _create_cursors() -> void:
 
 func update_from_value() -> void:
 	gradient.offsets = [0.0]
-	var cursors = []
+	var cursors: Array[GradientCursor] = []
 	for c in texture_rect.get_children():
 		if c is GradientCursor:
 			cursors.append(c)

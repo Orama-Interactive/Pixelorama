@@ -136,7 +136,7 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 		new_project = Project.new([], path.get_file())
 
 	var first_line := file.get_line()
-	var test_json_conv = JSON.new()
+	var test_json_conv := JSON.new()
 	var error := test_json_conv.parse(first_line)
 	if error != OK:
 		print("Error, corrupt pxo file")

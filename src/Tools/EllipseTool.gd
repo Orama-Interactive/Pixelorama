@@ -30,7 +30,7 @@ func _get_shape_points(shape_size: Vector2i) -> Array[Vector2i]:
 	var largest_side := maxi(new_size.x, new_size.y)
 	var scan_dir := Vector2i(0, 1) if smallest_side == new_size.x else Vector2i(1, 0)
 	var iscan_dir := Vector2i(1, 0) if smallest_side == new_size.x else Vector2i(0, 1)
-	var ie_relevant_offset_side = size_offset.x if smallest_side == new_size.x else size_offset.y
+	var ie_relevant_offset_side := size_offset.x if smallest_side == new_size.x else size_offset.y
 	var h_ls_c := ceili(largest_side / 2)
 
 	for s in range(ceili(smallest_side / 2)):

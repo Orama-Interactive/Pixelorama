@@ -4,10 +4,10 @@ var _undo_data := {}
 var _start_pos: Vector2i
 var _offset: Vector2i
 
-# Used to check if the state of content transformation has been changed
-# while draw_move() is being called. For example, pressing Enter while still moving content
+## Used to check if the state of content transformation has been changed
+## while draw_move() is being called. For example, pressing Enter while still moving content
 var _content_transformation_check := false
-var _snap_to_grid := false  # Mouse Click + Ctrl
+var _snap_to_grid := false  ## Mouse Click + Ctrl
 
 @onready var selection_node: Node2D = Global.canvas.selection
 

@@ -1,5 +1,5 @@
 extends BaseTool
-# Crop Tool, allows you to resize the canvas interactively
+## Crop Tool, allows you to resize the canvas interactively
 
 var _offset := Vector2i.ZERO
 var _crop: CropRect
@@ -35,8 +35,8 @@ func draw_move(pos: Vector2i) -> void:
 		if _crop.mode == CropRect.Mode.POSITION_SIZE and _locked_ratio:
 			var ratio: Vector2 = $"%Size".ratio
 			var distance := absf(_start_pos.x - pos.x) + absf(_start_pos.y - pos.y)
-			_crop.rect.size.x = round(distance * ratio.x / (ratio.x + ratio.y))
-			_crop.rect.size.y = round(distance * ratio.y / (ratio.x + ratio.y))
+			_crop.rect.size.x = roundi(distance * ratio.x / (ratio.x + ratio.y))
+			_crop.rect.size.y = roundi(distance * ratio.y / (ratio.x + ratio.y))
 			if _start_pos.x < pos.x:
 				_crop.rect.position.x = _start_pos.x
 			else:

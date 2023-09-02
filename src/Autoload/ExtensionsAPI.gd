@@ -59,7 +59,7 @@ func wait_frame():  # as yield is not available to classes below, so this is the
 
 
 func _get_caller_extension_name() -> String:
-	var stack = get_stack()
+	var stack := get_stack()
 	for trace in stack:
 		# Get extension name that called the action
 		var arr: Array = trace["source"].split("/")

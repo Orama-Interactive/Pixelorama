@@ -6,7 +6,7 @@ var _brush_size_dynamics := 1
 var _cache_limit := 3
 var _brush_interpolate := 0
 var _brush_image := Image.new()
-var _orignal_brush_image := Image.new()  # contains the original _brush_image, without resizing
+var _orignal_brush_image := Image.new()  ## Contains the original _brush_image, without resizing
 var _brush_texture := ImageTexture.new()
 var _strength := 1.0
 @warning_ignore("unused_private_class_variable") var _picking_color := false
@@ -47,7 +47,7 @@ func _on_BrushType_pressed() -> void:
 	var pop_position = brush_button.global_position + Vector2(0, brush_button.size.y)
 	var size_x = tool_option_container.size.x
 	var size_y = tool_option_container.size.y - $Brush.position.y - $Brush.size.y
-	var columns = int(size_x / 36) - 1  # 36 is the size of BrushButton.tscn
+	var columns := int(size_x / 36) - 1  # 36 is the size of BrushButton.tscn
 	var categories = Global.brushes_popup.get_node("Background/Brushes/Categories")
 	for child in categories.get_children():
 		if child is GridContainer:
@@ -162,7 +162,7 @@ func update_brush() -> void:
 func update_random_image() -> void:
 	if _brush.type != Brushes.RANDOM_FILE:
 		return
-	var random = randi() % _brush.random.size()
+	var random := randi() % _brush.random.size()
 	_brush_image = _create_blended_brush_image(_brush.random[random])
 	_brush_texture = ImageTexture.create_from_image(_brush_image)
 	_indicator = _create_brush_indicator()
@@ -184,7 +184,7 @@ func update_mask(can_skip := true) -> void:
 			_mask = PackedFloat32Array()
 		return
 	_is_mask_size_zero = false
-	# Faster than zeroing PoolByteArray directly.
+	# Faster than zeroing PackedFloat32Array directly.
 	# See: https://github.com/Orama-Interactive/Pixelorama/pull/439
 	var nulled_array := []
 	nulled_array.resize(Global.current_project.size.x * Global.current_project.size.y)
@@ -418,8 +418,8 @@ func draw_tool_brush(brush_position: Vector2i) -> void:
 
 	var brush_size := _brush_image.get_size()
 	for i in positions.size():
-		var pos: Vector2i = positions[i]
-		var dst: Vector2i = pos - (brush_size / 2)
+		var pos := positions[i]
+		var dst := pos - (brush_size / 2)
 		var dst_rect := Rect2i(dst, brush_size)
 		var draw_rectangle := _get_draw_rect()
 		dst_rect = dst_rect.intersection(draw_rectangle)
@@ -436,7 +436,7 @@ func draw_tool_brush(brush_position: Vector2i) -> void:
 
 		if Tools.horizontal_mirror:
 			var x_dst := Vector2i(mirror_x, dst.y)
-			var mirror_brush_x: Image = remove_unselected_parts_of_brush(_mirror_brushes.x, x_dst)
+			var mirror_brush_x := remove_unselected_parts_of_brush(_mirror_brushes.x, x_dst)
 			_draw_brush_image(mirror_brush_x, _flip_rect(src_rect, brush_size, true, false), x_dst)
 			if Tools.vertical_mirror:
 				var xy_dst := Vector2i(mirror_x, mirror_y)
@@ -446,7 +446,7 @@ func draw_tool_brush(brush_position: Vector2i) -> void:
 				)
 		if Tools.vertical_mirror:
 			var y_dst := Vector2i(dst.x, mirror_y)
-			var mirror_brush_y: Image = remove_unselected_parts_of_brush(_mirror_brushes.y, y_dst)
+			var mirror_brush_y := remove_unselected_parts_of_brush(_mirror_brushes.y, y_dst)
 			_draw_brush_image(mirror_brush_y, _flip_rect(src_rect, brush_size, false, true), y_dst)
 
 
@@ -491,14 +491,14 @@ func draw_indicator(left: bool) -> void:
 func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
 	var canvas: Node2D = Global.canvas.indicators
 	if _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM] and not _draw_line:
-		pos -= (_brush_image.get_size() / 2)
+		pos -= _brush_image.get_size() / 2
 		pos -= offset
 		canvas.draw_texture(_brush_texture, pos)
 	else:
 		if _draw_line:
 			pos.x = _line_end.x if _line_end.x < _line_start.x else _line_start.x
 			pos.y = _line_end.y if _line_end.y < _line_start.y else _line_start.y
-		pos -= (_indicator.get_size() / 2)
+		pos -= _indicator.get_size() / 2
 		pos -= offset
 		canvas.draw_set_transform(pos, canvas.rotation, canvas.scale)
 		var polylines := _line_polylines if _draw_line else _polylines
@@ -664,22 +664,22 @@ func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 	var distance := start.distance_to(end)
 	if Input.is_action_pressed("draw_snap_angle"):
 		if Tools.pixel_perfect:
-			angle = snapped(angle, 22.5)
+			angle = snappedf(angle, 22.5)
 			if step_decimals(angle) != 0:
 				var diff := end - start
-				var v := Vector2(2, 1) if abs(diff.x) > abs(diff.y) else Vector2(1, 2)
+				var v := Vector2(2, 1) if absf(diff.x) > absf(diff.y) else Vector2(1, 2)
 				var p := diff.project(diff.sign() * v).abs().round()
-				var f := p.y if abs(diff.x) > abs(diff.y) else p.x
+				var f := p.y if absf(diff.x) > absf(diff.y) else p.x
 				end = start + diff.sign() * v * f - diff.sign()
-				angle = rad_to_deg(atan2(sign(diff.y) * v.y, sign(diff.x) * v.x))
+				angle = rad_to_deg(atan2(signi(diff.y) * v.y, signi(diff.x) * v.x))
 			else:
 				end = start + Vector2.RIGHT.rotated(deg_to_rad(angle)) * distance
 		else:
-			angle = snapped(angle, 15)
+			angle = snappedf(angle, 15)
 			end = start + Vector2.RIGHT.rotated(deg_to_rad(angle)) * distance
 	angle *= -1
 	angle += 360 if angle < 0 else 0
-	result.text = str(snapped(angle, 0.01)) + "°"
+	result.text = str(snappedf(angle, 0.01)) + "°"
 	result.position = Vector2i(end.round())
 	return result
 
@@ -700,13 +700,13 @@ func _get_undo_data() -> Dictionary:
 	for cel in cels:
 		if not cel is PixelCel:
 			continue
-		var image: Image = cel.image
+		var image := cel.get_image()
 		data[image] = image.data
 	return data
 
 
 func _pick_color(pos: Vector2i) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	pos = project.tiles.get_canon_position(pos)
 
 	if pos.x < 0 or pos.y < 0:

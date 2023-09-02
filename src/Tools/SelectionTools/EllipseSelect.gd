@@ -2,9 +2,9 @@ extends SelectionTool
 
 var _rect := Rect2i(0, 0, 0, 0)
 
-var _square := false  # Mouse Click + Shift
-var _expand_from_center := false  # Mouse Click + Ctrl
-var _displace_origin = false  # Mouse Click + Alt
+var _square := false  ## Mouse Click + Shift
+var _expand_from_center := false  ## Mouse Click + Ctrl
+var _displace_origin = false  ## Mouse Click + Alt
 
 
 func _input(event: InputEvent) -> void:

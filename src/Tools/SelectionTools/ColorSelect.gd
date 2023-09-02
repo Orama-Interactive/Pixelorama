@@ -1,6 +1,6 @@
 extends SelectionTool
 
-var shader: Shader = preload("res://src/Shaders/ColorSelect.gdshader")
+var shader := preload("res://src/Shaders/ColorSelect.gdshader")
 var _similarity := 100
 
 

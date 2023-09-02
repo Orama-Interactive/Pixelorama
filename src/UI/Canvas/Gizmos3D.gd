@@ -18,7 +18,7 @@ var gizmos_origin: Vector2
 var proj_right_local: Vector2
 var proj_up_local: Vector2
 var proj_back_local: Vector2
-## Same vectors as `proj_x_local`, but with a smaller length, for the rotation & scale gizmos
+# Same vectors as `proj_x_local`, but with a smaller length, for the rotation & scale gizmos
 var proj_right_local_scale: Vector2
 var proj_up_local_scale: Vector2
 var proj_back_local_scale: Vector2

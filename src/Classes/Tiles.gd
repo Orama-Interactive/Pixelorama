@@ -64,15 +64,8 @@ func get_nearest_tile(point: Vector2i) -> Rect2i:
 
 	if final.is_empty():
 		return Rect2i(Vector2i.ZERO, tile_size)
-	final.sort_custom(sort_by_height)
+	final.sort_custom(func(a: Rect2i, b: Rect2i): return a.position.y < b.position.y)
 	return final[0]
-
-
-func sort_by_height(a: Rect2, b: Rect2):
-	if a.position.y > b.position.y:
-		return false
-	else:
-		return true
 
 
 func get_canon_position(position: Vector2i) -> Vector2i:

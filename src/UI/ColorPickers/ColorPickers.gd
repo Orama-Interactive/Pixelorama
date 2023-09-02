@@ -1,8 +1,8 @@
 extends Container
 
-@onready var left_picker := $ColorPickersHorizontal/LeftColorPickerButton
-@onready var right_picker := $ColorPickersHorizontal/RightColorPickerButton
-@onready var average_color = $"%AverageColor"
+@onready var left_picker := $ColorPickersHorizontal/LeftColorPickerButton as ColorPickerButton
+@onready var right_picker := $ColorPickersHorizontal/RightColorPickerButton as ColorPickerButton
+@onready var average_color := $"%AverageColor" as ColorRect
 
 
 func _ready() -> void:

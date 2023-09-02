@@ -1,8 +1,8 @@
 extends Control
 
 var axes: Node2D
-var do_pool = []  # A pool that stores data of points removed by undo
-var delete_pool = []  # A pool that containing deleted data and their index
+var do_pool := []  ## A pool that stores data of points removed by undo
+var delete_pool := []  ## A pool that containing deleted data and their index
 var vanishing_point_res := preload("res://src/UI/PerspectiveEditor/VanishingPoint.tscn")
 var tracker_disabled := false
 @onready var vanishing_point_container = $"%VanishingPointContainer"
@@ -18,7 +18,7 @@ func _on_AddPoint_pressed() -> void:
 	project.undo_redo.commit_action()
 
 
-func _on_TrackerLines_toggled(button_pressed):
+func _on_TrackerLines_toggled(button_pressed: bool):
 	for point in vanishing_point_container.get_children():
 		tracker_disabled = !button_pressed
 
@@ -41,7 +41,7 @@ func undo_add_vanishing_point():
 	point.update_data_to_project(true)
 
 
-func delete_point(idx):
+func delete_point(idx: int):
 	var project := Global.current_project
 	project.undos += 1
 	project.undo_redo.create_action("Delete Vanishing Point")
@@ -50,14 +50,14 @@ func delete_point(idx):
 	project.undo_redo.commit_action()
 
 
-func do_delete_point(idx):
+func do_delete_point(idx: int):
 	var point = vanishing_point_container.get_child(idx)
 	delete_pool.append(point.serialize())
 	point.queue_free()
 	point.update_data_to_project(true)
 
 
-func undo_delete_point(idx):
+func undo_delete_point(idx: int):
 	var point = delete_pool.pop_back()
 	Global.current_project.vanishing_points.insert(idx, point)
 	update_points()

@@ -1,6 +1,6 @@
 extends ImageEffect
 
-var shader: Shader = preload("res://src/Shaders/GradientMap.gdshader")
+var shader := preload("res://src/Shaders/GradientMap.gdshader")
 
 
 func _ready() -> void:
@@ -26,5 +26,5 @@ func commit_action(cel: Image, project: Project = Global.current_project) -> voi
 		await gen.done
 
 
-func _on_GradientEdit_updated(_gradient, _cc) -> void:
+func _on_GradientEdit_updated(_gradient: Gradient, _cc: bool) -> void:
 	update_preview()

@@ -57,7 +57,16 @@ var config_cache := ConfigFile.new()
 var projects: Array[Project] = []
 var current_project: Project
 var current_project_index := 0:
-	set = _project_changed
+	set(value):
+		if value >= projects.size():
+			return
+		canvas.selection.transform_content_confirm()
+		current_project_index = value
+		current_project = projects[value]
+		project_changed.connect(current_project.change_project)
+		project_changed.emit()
+		project_changed.disconnect(current_project.change_project)
+		cel_changed.emit()
 
 # Canvas related stuff
 var can_draw := false
@@ -249,7 +258,13 @@ var enable_autosave := true:
 var renderer := 0:
 	set = _renderer_changed
 var tablet_driver := 0:
-	set = _tablet_driver_changed
+	set(value):
+		tablet_driver = value
+		if OS.has_feature("editor"):
+			return
+		var tablet_driver_name := DisplayServer.tablet_get_current_driver()
+		ProjectSettings.set_setting("display/window/tablet_driver", tablet_driver_name)
+		ProjectSettings.save_custom(OVERRIDE_FILE)
 
 # Tools & options
 var show_left_tool_icon := true
@@ -619,18 +634,6 @@ func undo_or_redo(
 			main_window.title = main_window.title + "(*)"
 
 
-func _project_changed(value: int) -> void:
-	if value >= projects.size():
-		return
-	canvas.selection.transform_content_confirm()
-	current_project_index = value
-	current_project = projects[value]
-	project_changed.connect(current_project.change_project)
-	project_changed.emit()
-	project_changed.disconnect(current_project.change_project)
-	cel_changed.emit()
-
-
 func _renderer_changed(value: int) -> void:
 	renderer = value
 
@@ -644,15 +647,6 @@ func _renderer_changed(value: int) -> void:
 #	var renderer_name := OS.get_video_driver_name(renderer)
 #	ProjectSettings.set_setting("rendering/quality/driver/driver_name", renderer_name)
 #	ProjectSettings.save_custom(OVERRIDE_FILE)
-
-
-func _tablet_driver_changed(value: int) -> void:
-	tablet_driver = value
-	if OS.has_feature("editor"):
-		return
-	var tablet_driver_name := DisplayServer.tablet_get_current_driver()
-	ProjectSettings.set_setting("display/window/tablet_driver", tablet_driver_name)
-	ProjectSettings.save_custom(OVERRIDE_FILE)
 
 
 func dialog_open(open: bool) -> void:
