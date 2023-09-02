@@ -344,7 +344,7 @@ func _on_FileDialog_dir_selected(dir: String) -> void:
 
 
 func _on_FileFormat_item_selected(idx: int) -> void:
-	var id := file_format_options.get_item_id(idx)
+	var id := file_format_options.get_item_id(idx) as Export.FileFormat
 	Global.current_project.file_format = id
 	if not Export.is_single_file_format():
 		get_tree().set_group("ExportMultipleFilesOptions", "disabled", false)
