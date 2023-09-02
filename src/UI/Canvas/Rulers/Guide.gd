@@ -8,7 +8,7 @@ const INPUT_WIDTH := 4
 var font: Font = Global.control.theme.default_font
 var has_focus := true
 var mouse_pos := Vector2.ZERO
-var type: int = Types.HORIZONTAL
+var type := Types.HORIZONTAL
 var project := Global.current_project
 
 

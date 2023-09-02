@@ -5,7 +5,7 @@ extends BaseLayer
 var expanded := true
 
 
-func _init(_project, _name := "") -> void:
+func _init(_project: Project, _name := "") -> void:
 	project = _project
 	name = _name
 

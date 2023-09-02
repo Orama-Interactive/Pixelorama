@@ -60,7 +60,7 @@ func add_theme(theme: Theme) -> void:
 
 
 func remove_theme(theme: Theme) -> void:
-	var index: int = themes.find(theme)
+	var index := themes.find(theme)
 	var theme_button = buttons_container.get_child(index)
 	var color_previews = colors_container.get_child(index)
 	buttons_container.remove_child(theme_button)

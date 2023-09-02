@@ -2,7 +2,7 @@ extends Control
 
 const EXTENSIONS_PATH := "user://extensions"
 
-var extensions := {}  # Extension name: Extension class
+var extensions := {}  ## Extension name: Extension class
 var extension_selected := -1
 var damaged_extension: String
 
