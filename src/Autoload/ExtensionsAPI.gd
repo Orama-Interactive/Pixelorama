@@ -321,7 +321,7 @@ class ToolAPI:
 		tool_name: String,
 		display_name: String,
 		shortcut: String,
-		scene: PackedScene,
+		scene: String,
 		extra_hint := "",
 		extra_shortucts := [],
 		layer_types: PackedInt32Array = []

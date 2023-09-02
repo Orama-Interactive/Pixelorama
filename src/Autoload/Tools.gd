@@ -30,21 +30,21 @@ var tools := {
 		"RectSelect",
 		"Rectangular Selection",
 		"rectangle_select",
-		load("res://src/Tools/SelectionTools/RectSelect.tscn")
+		"res://src/Tools/SelectionTools/RectSelect.tscn"
 	),
 	"EllipseSelect":
 	Tool.new(
 		"EllipseSelect",
 		"Elliptical Selection",
 		"ellipse_select",
-		load("res://src/Tools/SelectionTools/EllipseSelect.tscn")
+		"res://src/Tools/SelectionTools/EllipseSelect.tscn"
 	),
 	"PolygonSelect":
 	Tool.new(
 		"PolygonSelect",
 		"Polygonal Selection",
 		"polygon_select",
-		load("res://src/Tools/SelectionTools/PolygonSelect.tscn"),
+		"res://src/Tools/SelectionTools/PolygonSelect.tscn",
 		[],
 		"Double-click to connect the last point to the starting point"
 	),
@@ -53,52 +53,52 @@ var tools := {
 		"ColorSelect",
 		"Select By Color",
 		"color_select",
-		load("res://src/Tools/SelectionTools/ColorSelect.tscn")
+		"res://src/Tools/SelectionTools/ColorSelect.tscn"
 	),
 	"MagicWand":
 	Tool.new(
 		"MagicWand",
 		"Magic Wand",
 		"magic_wand",
-		load("res://src/Tools/SelectionTools/MagicWand.tscn")
+		"res://src/Tools/SelectionTools/MagicWand.tscn"
 	),
 	"Lasso":
 	Tool.new(
 		"Lasso",
 		"Lasso / Free Select Tool",
 		"lasso",
-		load("res://src/Tools/SelectionTools/Lasso.tscn")
+		"res://src/Tools/SelectionTools/Lasso.tscn"
 	),
 	"PaintSelect":
 	Tool.new(
 		"PaintSelect",
 		"Select by Drawing",
 		"paint_selection",
-		load("res://src/Tools/SelectionTools/PaintSelect.tscn")
+		"res://src/Tools/SelectionTools/PaintSelect.tscn"
 	),
 	"Move":
-	Tool.new("Move", "Move", "move", load("res://src/Tools/Move.tscn"), [Global.LayerTypes.PIXEL]),
-	"Zoom": Tool.new("Zoom", "Zoom", "zoom", load("res://src/Tools/Zoom.tscn")),
-	"Pan": Tool.new("Pan", "Pan", "pan", load("res://src/Tools/Pan.tscn")),
+	Tool.new("Move", "Move", "move", "res://src/Tools/Move.tscn", [Global.LayerTypes.PIXEL]),
+	"Zoom": Tool.new("Zoom", "Zoom", "zoom", "res://src/Tools/Zoom.tscn"),
+	"Pan": Tool.new("Pan", "Pan", "pan", "res://src/Tools/Pan.tscn"),
 	"ColorPicker":
 	Tool.new(
 		"ColorPicker",
 		"Color Picker",
 		"colorpicker",
-		load("res://src/Tools/ColorPicker.tscn"),
+		"res://src/Tools/ColorPicker.tscn",
 		[],
 		"Select a color from a pixel of the sprite"
 	),
 	"Crop":
 	Tool.new(
-		"Crop", "Crop", "crop", load("res://src/Tools/CropTool.tscn"), [], "Resize the canvas"
+		"Crop", "Crop", "crop", "res://src/Tools/CropTool.tscn", [], "Resize the canvas"
 	),
 	"Pencil":
 	Tool.new(
 		"Pencil",
 		"Pencil",
 		"pencil",
-		load("res://src/Tools/Pencil.tscn"),
+		"res://src/Tools/Pencil.tscn",
 		[Global.LayerTypes.PIXEL],
 		"Hold %s to make a line",
 		["draw_create_line"]
@@ -108,21 +108,21 @@ var tools := {
 		"Eraser",
 		"Eraser",
 		"eraser",
-		load("res://src/Tools/Eraser.tscn"),
+		"res://src/Tools/Eraser.tscn",
 		[Global.LayerTypes.PIXEL],
 		"Hold %s to make a line",
 		["draw_create_line"]
 	),
 	"Bucket":
 	Tool.new(
-		"Bucket", "Bucket", "fill", load("res://src/Tools/Bucket.tscn"), [Global.LayerTypes.PIXEL]
+		"Bucket", "Bucket", "fill", "res://src/Tools/Bucket.tscn", [Global.LayerTypes.PIXEL]
 	),
 	"Shading":
 	Tool.new(
 		"Shading",
 		"Shading Tool",
 		"shading",
-		load("res://src/Tools/Shading.tscn"),
+		"res://src/Tools/Shading.tscn",
 		[Global.LayerTypes.PIXEL]
 	),
 	"LineTool":
@@ -132,7 +132,7 @@ var tools := {
 			"LineTool",
 			"Line Tool",
 			"linetool",
-			load("res://src/Tools/LineTool.tscn"),
+			"res://src/Tools/LineTool.tscn",
 			[Global.LayerTypes.PIXEL],
 			"""Hold %s to snap the angle of the line
 Hold %s to center the shape on the click origin
@@ -147,7 +147,7 @@ Hold %s to displace the shape's origin""",
 			"RectangleTool",
 			"Rectangle Tool",
 			"rectangletool",
-			load("res://src/Tools/RectangleTool.tscn"),
+			"res://src/Tools/RectangleTool.tscn",
 			[Global.LayerTypes.PIXEL],
 			"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
@@ -162,7 +162,7 @@ Hold %s to displace the shape's origin""",
 			"EllipseTool",
 			"Ellipse Tool",
 			"ellipsetool",
-			load("res://src/Tools/EllipseTool.tscn"),
+			"res://src/Tools/EllipseTool.tscn",
 			[Global.LayerTypes.PIXEL],
 			"""Hold %s to create a 1:1 shape
 Hold %s to center the shape on the click origin
@@ -175,7 +175,7 @@ Hold %s to displace the shape's origin""",
 		"3DShapeEdit",
 		"3D Shape Edit",
 		"3dshapeedit",
-		load("res://src/Tools/3DShapeEdit.tscn"),
+		"res://src/Tools/3DShapeEdit.tscn",
 		[Global.LayerTypes.THREE_D]
 	),
 }
@@ -200,6 +200,7 @@ var _last_position := Vector2i(Vector2.INF)
 class Tool:
 	var name := ""
 	var display_name := ""
+	var scene_path: String
 	var scene: PackedScene
 	var icon: Texture2D
 	var cursor_icon: Texture2D
@@ -213,7 +214,7 @@ class Tool:
 		_name: String,
 		_display_name: String,
 		_shortcut: String,
-		_scene: PackedScene,
+		_scene_path: String,
 		_layer_types: PackedInt32Array = [],
 		_extra_hint := "",
 		_extra_shortucts: PackedStringArray = []
@@ -221,12 +222,17 @@ class Tool:
 		name = _name
 		display_name = _display_name
 		shortcut = _shortcut
-		scene = _scene
+		scene_path = _scene_path
 		layer_types = _layer_types
 		extra_hint = _extra_hint
 		extra_shortcuts = _extra_shortucts
 		icon = load("res://assets/graphics/tools/%s.png" % name.to_lower())
 		cursor_icon = load("res://assets/graphics/tools/cursors/%s.png" % name.to_lower())
+
+	func instantiate_scene() -> Node:
+		if not is_instance_valid(scene):
+			scene = load(scene_path)
+		return scene.instantiate()
 
 	func generate_hint_tooltip() -> String:
 		var hint := display_name
@@ -353,7 +359,7 @@ func remove_tool(t: Tool) -> void:
 func set_tool(tool_name: String, button: int) -> void:
 	var slot: Slot = _slots[button]
 	var panel: Node = _panels[button]
-	var node: Node = tools[tool_name].scene.instantiate()
+	var node: Node = tools[tool_name].instantiate_scene()
 	if button == MOUSE_BUTTON_LEFT:  # As guides are only moved with left mouse
 		if tool_name == "Pan":  # tool you want to give more access at guides
 			Global.move_guides_on_canvas = true

@@ -20,8 +20,6 @@ var theme_button_group := ButtonGroup.new()
 func _ready() -> void:
 	for theme in themes:
 		add_theme(theme)
-	await get_tree().process_frame
-
 	var theme_id: int = Global.config_cache.get_value("preferences", "theme", 0)
 	if theme_id >= themes.size():
 		theme_id = 0
@@ -72,7 +70,7 @@ func remove_theme(theme: Theme) -> void:
 
 func change_theme(id: int) -> void:
 	theme_index = id
-	var theme: Theme = themes[id]
+	var theme := themes[id]
 	theme.default_font_size = Global.font_size
 	theme.set_font_size("font_size", "HeaderSmall", Global.font_size + 2)
 	var icon_color: Color = theme.get_color("modulate_color", "Icons")
