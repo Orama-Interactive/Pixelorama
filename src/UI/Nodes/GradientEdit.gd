@@ -38,7 +38,7 @@ class GradientCursor:
 		var polygon := PackedVector2Array(
 			[
 				Vector2(0, 5),
-				Vector2(WIDTH / 2, 0),
+				Vector2(WIDTH / 2.0, 0),
 				Vector2(WIDTH, 5),
 				Vector2(WIDTH, 15),
 				Vector2(0, 15),

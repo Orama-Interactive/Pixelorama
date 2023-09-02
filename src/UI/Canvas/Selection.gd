@@ -399,7 +399,7 @@ func _gizmo_rotate() -> void:  # Does not work properly yet
 	prev_angle = angle
 #	var img_size := max(original_preview_image.get_width(), original_preview_image.get_height())
 #	var pivot = Vector2(original_preview_image.get_width()/2, original_preview_image.get_height()/2)
-	var pivot := Vector2(big_bounding_rectangle.size.x / 2, big_bounding_rectangle.size.y / 2)
+	var pivot := Vector2(big_bounding_rectangle.size.x / 2.0, big_bounding_rectangle.size.y / 2.0)
 	preview_image.copy_from(original_preview_image)
 	if original_big_bounding_rectangle.position != big_bounding_rectangle.position:
 		preview_image.fill(Color(0, 0, 0, 0))

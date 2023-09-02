@@ -529,8 +529,8 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 func general_do_scale(width: int, height: int) -> void:
 	var project := Global.current_project
 	var size := Vector2i(width, height)
-	var x_ratio := project.size.x / width
-	var y_ratio := project.size.y / height
+	var x_ratio := float(project.size.x) / width
+	var y_ratio := float(project.size.y) / height
 
 	var selection_map_copy := SelectionMap.new()
 	selection_map_copy.copy_from(project.selection_map)
