@@ -2,7 +2,6 @@ extends ImageEffect
 
 var shader: Shader
 var param_names: PackedStringArray = []
-var value_slider_tscn := preload("res://src/UI/Nodes/ValueSlider.tscn")
 
 @onready var shader_loaded_label: Label = $VBoxContainer/ShaderLoadedLabel
 @onready var shader_params: BoxContainer = $VBoxContainer/ShaderParams
@@ -10,7 +9,7 @@ var value_slider_tscn := preload("res://src/UI/Nodes/ValueSlider.tscn")
 
 func _about_to_popup() -> void:
 	Global.canvas.selection.transform_content_confirm()
-	var frame: Frame = Global.current_project.frames[Global.current_project.current_frame]
+	var frame := Global.current_project.frames[Global.current_project.current_frame]
 	Export.blend_selected_cels(selected_cels, frame)
 
 	preview_image.copy_from(selected_cels)
@@ -19,7 +18,7 @@ func _about_to_popup() -> void:
 	super._about_to_popup()
 
 
-func commit_action(cel: Image, project: Project = Global.current_project) -> void:
+func commit_action(cel: Image, project := Global.current_project) -> void:
 	if !shader:
 		return
 
@@ -89,7 +88,7 @@ func change_shader(shader_tmp: Shader, shader_name: String) -> void:
 			var label := Label.new()
 			label.text = u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var slider: ValueSlider = value_slider_tscn.instantiate()
+			var slider := ValueSlider.new()
 			var min_value := 0.0
 			var max_value := 255.0
 			var step := 1.0
@@ -140,10 +139,10 @@ func change_shader(shader_tmp: Shader, shader_name: String) -> void:
 			label.text = u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var vector2 := _vec2str_to_vector2(u_value)
-			var slider1: ValueSlider = value_slider_tscn.instantiate()
+			var slider1 := ValueSlider.new()
 			slider1.value = vector2.x
 			slider1.value_changed.connect(_set_vector2_shader_param.bind(u_name, true))
-			var slider2: ValueSlider = value_slider_tscn.instantiate()
+			var slider2 := ValueSlider.new()
 			slider2.value = vector2.y
 			slider2.value_changed.connect(_set_vector2_shader_param.bind(u_name, false))
 			var hbox := HBoxContainer.new()
