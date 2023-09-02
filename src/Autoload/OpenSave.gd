@@ -110,7 +110,7 @@ func handle_loading_aimg(path: String, frames: Array) -> void:
 	set_new_imported_tab(project, path)
 
 
-func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: bool = true) -> void:
+func open_pxo_file(path: String, untitled_backup := false, replace_empty := true) -> void:
 	var file := FileAccess.open_compressed(path, FileAccess.READ, FileAccess.COMPRESSION_ZSTD)
 	if FileAccess.get_open_error() == ERR_FILE_UNRECOGNIZED:
 		# If the file is not compressed open it raw (pre-v0.7)
@@ -207,10 +207,7 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 
 
 func save_pxo_file(
-	path: String,
-	autosave: bool,
-	use_zstd_compression := true,
-	project: Project = Global.current_project
+	path: String, autosave: bool, use_zstd := true, project := Global.current_project
 ) -> void:
 	if !autosave:
 		project.name = path.get_file()
@@ -239,7 +236,7 @@ func save_pxo_file(
 		temp_path = path + "1"
 
 	var file: FileAccess
-	if use_zstd_compression:
+	if use_zstd:
 		file = FileAccess.open_compressed(temp_path, FileAccess.WRITE, FileAccess.COMPRESSION_ZSTD)
 	else:
 		file = FileAccess.open(temp_path, FileAccess.WRITE)

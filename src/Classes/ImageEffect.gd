@@ -131,7 +131,7 @@ func _confirmed() -> void:
 			_commit_undo("Draw", undo_data, _project)
 
 
-func commit_action(_cel: Image, _project: Project = Global.current_project) -> void:
+func commit_action(_cel: Image, _project := Global.current_project) -> void:
 	pass
 
 

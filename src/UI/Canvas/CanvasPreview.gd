@@ -19,7 +19,7 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	var current_project: Project = Global.current_project
+	var current_project := Global.current_project
 	match mode:
 		Mode.TIMELINE:
 			var modulate_color := Color.WHITE
@@ -27,13 +27,13 @@ func _draw() -> void:
 				frame_index = current_project.current_frame
 			if animation_timer.is_stopped():
 				frame_index = current_project.current_frame
-			var frame: Frame = current_project.frames[frame_index]
+			var frame := current_project.frames[frame_index]
 			animation_timer.wait_time = frame.duration * (1.0 / current_project.fps)
-			var current_cels: Array = frame.cels
+			var current_cels := frame.cels
 
 			# Draw current frame layers
 			for i in range(current_cels.size()):
-				var cel: BaseCel = current_cels[i]
+				var cel := current_cels[i]
 				if cel is GroupCel:
 					continue
 				modulate_color = Color(1, 1, 1, cel.opacity)
@@ -69,9 +69,9 @@ func _draw() -> void:
 func _on_AnimationTimer_timeout() -> void:
 	match mode:
 		Mode.TIMELINE:
-			var current_project: Project = Global.current_project
+			var current_project := Global.current_project
 			var first_frame := 0
-			var last_frame: int = current_project.frames.size() - 1
+			var last_frame := current_project.frames.size() - 1
 
 			if Global.play_only_tags:
 				for tag in current_project.animation_tags:

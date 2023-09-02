@@ -24,7 +24,7 @@ func _about_to_popup() -> void:
 	super._about_to_popup()
 
 
-func commit_action(cel: Image, project: Project = Global.current_project) -> void:
+func commit_action(cel: Image, project := Global.current_project) -> void:
 	var hue = animate_panel.get_animated_value(commit_idx, Animate.HUE) / 360
 	var sat = animate_panel.get_animated_value(commit_idx, Animate.SATURATION) / 100
 	var val = animate_panel.get_animated_value(commit_idx, Animate.VALUE) / 100

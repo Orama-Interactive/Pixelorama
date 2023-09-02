@@ -55,7 +55,7 @@ func _ready() -> void:
 	animate_panel.add_float_property("Radius Y", radius_slider.get_sliders()[1])
 
 
-func commit_action(cel: Image, project: Project = Global.current_project) -> void:
+func commit_action(cel: Image, project := Global.current_project) -> void:
 	var selection_tex: ImageTexture
 	if selection_checkbox.button_pressed and project.has_selection:
 		selection_tex = ImageTexture.create_from_image(project.selection_map)

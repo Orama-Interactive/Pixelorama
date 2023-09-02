@@ -82,7 +82,7 @@ func _calculate_pivot() -> void:
 	_on_Pivot_value_changed(pivot)
 
 
-func commit_action(cel: Image, _project: Project = Global.current_project) -> void:
+func commit_action(cel: Image, _project := Global.current_project) -> void:
 	var angle := deg_to_rad(animate_panel.get_animated_value(commit_idx, Animate.ANGLE))
 	var init_angle := animate_panel.get_animated_value(commit_idx, Animate.INITIAL_ANGLE)
 

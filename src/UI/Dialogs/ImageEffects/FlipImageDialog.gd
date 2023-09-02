@@ -4,7 +4,7 @@ extends ImageEffect
 @onready var flip_v := $VBoxContainer/FlipOptions/FlipVertical as CheckBox
 
 
-func commit_action(cel: Image, project: Project = Global.current_project) -> void:
+func commit_action(cel: Image, project := Global.current_project) -> void:
 	_flip_image(cel, selection_checkbox.button_pressed, project)
 
 
@@ -85,7 +85,7 @@ func _get_undo_data(project: Project) -> Dictionary:
 	return data
 
 
-func _flip_selection(project: Project = Global.current_project) -> void:
+func _flip_selection(project := Global.current_project) -> void:
 	if !(selection_checkbox.button_pressed and project.has_selection):
 		return
 

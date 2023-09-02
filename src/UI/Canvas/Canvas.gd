@@ -115,7 +115,7 @@ func camera_zoom() -> void:
 	Global.transparent_checker.update_rect()
 
 
-func update_texture(layer_i: int, frame_i := -1, project: Project = Global.current_project) -> void:
+func update_texture(layer_i: int, frame_i := -1, project := Global.current_project) -> void:
 	if frame_i == -1:
 		frame_i = project.current_frame
 
@@ -124,7 +124,7 @@ func update_texture(layer_i: int, frame_i := -1, project: Project = Global.curre
 		current_cel.update_texture()
 
 
-func update_selected_cels_textures(project: Project = Global.current_project) -> void:
+func update_selected_cels_textures(project := Global.current_project) -> void:
 	for cel_index in project.selected_cels:
 		var frame_index: int = cel_index[0]
 		var layer_index: int = cel_index[1]

@@ -24,7 +24,7 @@ func _ready() -> void:
 	)
 
 
-func commit_action(cel: Image, project: Project = Global.current_project) -> void:
+func commit_action(cel: Image, project := Global.current_project) -> void:
 	var offset_x := animate_panel.get_animated_value(commit_idx, Animate.OFFSET_X)
 	var offset_y := animate_panel.get_animated_value(commit_idx, Animate.OFFSET_Y)
 	var selection_tex: ImageTexture

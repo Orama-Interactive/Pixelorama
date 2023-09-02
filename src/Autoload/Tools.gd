@@ -170,7 +170,7 @@ Hold %s to displace the shape's origin""",
 	),
 }
 
-var _tool_button_scene: PackedScene = preload("res://src/Tools/ToolButton.tscn")
+var _tool_button_scene := preload("res://src/Tools/ToolButton.tscn")
 var _slots := {}
 var _panels := {}
 var _curr_layer_type := Global.LayerTypes.PIXEL
