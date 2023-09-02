@@ -61,7 +61,7 @@ You can find Online Documentation for Pixelorama here: https://orama-interactive
 It's still work in progress so there are some pages missing. If you want to contribute, you can do so in [Pixelorama-Docs' GitHub Repository](https://github.com/Orama-Interactive/Pixelorama-Docs).
 
 ## Cloning Instructions
-Pixelorama uses Godot 3.5, so you will need to have it in order to run the project. Older versions may not work.
+Pixelorama uses Godot 4.1, so you will need to have it in order to run the project. Older versions will not work.
 As of right now, most of the code is written using GDScript, so the mono version of Godot is not required, but Pixelorama should also work with it.
 
 ## Current features:

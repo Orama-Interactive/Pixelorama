@@ -1655,27 +1655,21 @@ msgid "Current frame as spritesheet"
 msgstr ""
 
 msgid "Jump to the first frame\n"
-"(%s)"
 msgstr ""
 
 msgid "Go to the previous frame\n"
-"(%s)"
 msgstr ""
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
 msgstr ""
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
 msgstr ""
 
 msgid "Go to the next frame\n"
-"(%s)"
 msgstr ""
 
 msgid "Jump to the last frame\n"
-"(%s)"
 msgstr ""
 
 msgid "Onion Skinning settings"
@@ -2612,6 +2606,10 @@ msgstr ""
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
+msgstr ""
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
 msgstr ""
 
 msgid "Silhouette"
