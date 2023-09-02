@@ -99,7 +99,7 @@ func _input(event: InputEvent) -> void:
 		elif Input.is_action_just_pressed("transformation_cancel"):
 			transform_content_cancel()
 
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if not project.layers[project.current_layer].can_layer_get_drawn():
 		return
 	if event is InputEventKey:

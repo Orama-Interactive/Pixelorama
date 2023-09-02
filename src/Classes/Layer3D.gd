@@ -3,7 +3,7 @@ extends BaseLayer
 ## A class for 3D layer properties.
 
 
-func _init(_project, _name := "") -> void:
+func _init(_project: Project, _name := "") -> void:
 	project = _project
 	name = _name
 

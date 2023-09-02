@@ -1,7 +1,7 @@
 extends ImageEffect
 
 var shader: Shader
-var param_names := []  # String[]
+var param_names: PackedStringArray = []
 var value_slider_tscn := preload("res://src/UI/Nodes/ValueSlider.tscn")
 
 @onready var shader_loaded_label: Label = $VBoxContainer/ShaderLoadedLabel
@@ -59,7 +59,7 @@ func change_shader(shader_tmp: Shader, shader_name: String) -> void:
 		child.queue_free()
 
 	var code := shader.code.split("\n")
-	var uniforms := []
+	var uniforms: PackedStringArray = []
 	for line in code:
 		if line.begins_with("uniform"):
 			uniforms.append(line)
@@ -67,22 +67,22 @@ func change_shader(shader_tmp: Shader, shader_name: String) -> void:
 	for uniform in uniforms:
 		# Example uniform:
 		# uniform float parameter_name : hint_range(0, 255) = 100.0;
-		var uniform_split: PackedStringArray = uniform.split("=")
+		var uniform_split := uniform.split("=")
 		var u_value := ""
 		if uniform_split.size() > 1:
 			u_value = uniform_split[1].replace(";", "").strip_edges()
 		else:
 			uniform_split[0] = uniform_split[0].replace(";", "").strip_edges()
 
-		var u_left_side: PackedStringArray = uniform_split[0].split(":")
+		var u_left_side := uniform_split[0].split(":")
 		var u_hint := ""
 		if u_left_side.size() > 1:
 			u_hint = u_left_side[1].strip_edges()
 			u_hint = u_hint.replace(";", "")
 
-		var u_init: PackedStringArray = u_left_side[0].split(" ")
-		var u_type: String = u_init[1]
-		var u_name: String = u_init[2]
+		var u_init := u_left_side[0].split(" ")
+		var u_type := u_init[1]
+		var u_name := u_init[2]
 		param_names.append(u_name)
 
 		if u_type == "float" or u_type == "int":

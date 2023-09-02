@@ -187,10 +187,10 @@ func _get_points() -> Array[Vector2i]:
 	var dy := -absi(_dest.y - _start.y)
 	var err := dx + dy
 	var e2 := err << 1
-	var sx = 1 if _start.x < _dest.x else -1
-	var sy = 1 if _start.y < _dest.y else -1
-	var x = _start.x
-	var y = _start.y
+	var sx := 1 if _start.x < _dest.x else -1
+	var sy := 1 if _start.y < _dest.y else -1
+	var x := _start.x
+	var y := _start.y
 
 	var start := _start - Vector2i.ONE * (_thickness >> 1)
 	var end := start + Vector2i.ONE * _thickness
@@ -222,18 +222,18 @@ func _line_angle_constraint(start: Vector2, end: Vector2) -> Dictionary:
 	var angle := rad_to_deg(start.angle_to_point(end))
 	var distance := start.distance_to(end)
 	if Input.is_action_pressed("shape_perfect"):
-		angle = snapped(angle, 22.5)
+		angle = snappedf(angle, 22.5)
 		if step_decimals(angle) != 0:
 			var diff := end - start
-			var v := Vector2(2, 1) if abs(diff.x) > abs(diff.y) else Vector2(1, 2)
+			var v := Vector2(2, 1) if absf(diff.x) > absf(diff.y) else Vector2(1, 2)
 			var p := diff.project(diff.sign() * v).abs().round()
-			var f := p.y if abs(diff.x) > abs(diff.y) else p.x
+			var f := p.y if absf(diff.x) > absf(diff.y) else p.x
 			end = start + diff.sign() * v * f - diff.sign()
-			angle = rad_to_deg(atan2(sign(diff.y) * v.y, sign(diff.x) * v.x))
+			angle = rad_to_deg(atan2(signi(diff.y) * v.y, signi(diff.x) * v.x))
 		else:
 			end = start + Vector2.RIGHT.rotated(deg_to_rad(angle)) * distance
 	angle *= -1
 	angle += 360 if angle < 0 else 0
-	result.text = str(snapped(angle, 0.01)) + "°"
+	result.text = str(snappedf(angle, 0.01)) + "°"
 	result.position = end.round()
 	return result

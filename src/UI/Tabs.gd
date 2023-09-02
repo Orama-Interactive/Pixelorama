@@ -4,7 +4,8 @@ extends TabBar
 var unsaved_changes_dialog: ConfirmationDialog = Global.control.find_child("UnsavedCanvasDialog")
 
 
-# Thanks to https://github.com/godotengine/godot/issues/64498#issuecomment-1217992089
+## Handles closing tab with middle-click
+## Thanks to https://github.com/godotengine/godot/issues/64498#issuecomment-1217992089
 func _gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton:
 		return
@@ -42,7 +43,7 @@ func _on_tab_close_pressed(tab: int) -> void:
 
 
 func _on_active_tab_rearranged(idx_to: int) -> void:
-	var temp: Project = Global.projects[Global.current_project_index]
+	var temp := Global.projects[Global.current_project_index]
 	Global.projects.erase(temp)
 	Global.projects.insert(idx_to, temp)
 

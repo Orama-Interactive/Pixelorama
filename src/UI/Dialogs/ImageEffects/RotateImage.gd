@@ -48,7 +48,7 @@ func _about_to_popup() -> void:
 
 func _calculate_pivot() -> void:
 	var project_size := Global.current_project.size
-	pivot = project_size / 2
+	pivot = project_size / 2.0
 
 	# Pivot correction in case of even size
 	if (
@@ -56,13 +56,13 @@ func _calculate_pivot() -> void:
 		and type_option_button.get_selected_id() != CLEANEDGE
 		and type_option_button.get_selected_id() != OMNISCALE
 	):
-		if int(project_size.x) % 2 == 0:
+		if project_size.x % 2 == 0:
 			pivot.x -= 0.5
-		if int(project_size.y) % 2 == 0:
+		if project_size.y % 2 == 0:
 			pivot.y -= 0.5
 
 	if Global.current_project.has_selection and selection_checkbox.button_pressed:
-		var selection_rectangle: Rect2 = Global.current_project.selection_map.get_used_rect()
+		var selection_rectangle := Global.current_project.selection_map.get_used_rect()
 		pivot = (
 			selection_rectangle.position
 			+ ((selection_rectangle.end - selection_rectangle.position) / 2)
@@ -73,9 +73,9 @@ func _calculate_pivot() -> void:
 			and type_option_button.get_selected_id() != OMNISCALE
 		):
 			# Pivot correction in case of even size
-			if int(selection_rectangle.end.x - selection_rectangle.position.x) % 2 == 0:
+			if (selection_rectangle.end.x - selection_rectangle.position.x) % 2 == 0:
 				pivot.x -= 0.5
-			if int(selection_rectangle.end.y - selection_rectangle.position.y) % 2 == 0:
+			if (selection_rectangle.end.y - selection_rectangle.position.y) % 2 == 0:
 				pivot.y -= 0.5
 
 	pivot_sliders.value = pivot
@@ -84,7 +84,7 @@ func _calculate_pivot() -> void:
 
 func commit_action(cel: Image, _project: Project = Global.current_project) -> void:
 	var angle := deg_to_rad(animate_panel.get_animated_value(commit_idx, Animate.ANGLE))
-	var init_angle: float = animate_panel.get_animated_value(commit_idx, Animate.INITIAL_ANGLE)
+	var init_angle := animate_panel.get_animated_value(commit_idx, Animate.INITIAL_ANGLE)
 
 	var selection_tex: ImageTexture
 	var image := Image.new()
@@ -96,7 +96,7 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 		if !_type_is_shader():
 			for x in _project.size.x:
 				for y in _project.size.y:
-					var pos := Vector2(x, y)
+					var pos := Vector2i(x, y)
 					if !_project.can_pixel_get_drawn(pos):
 						image.set_pixelv(pos, Color(0, 0, 0, 0))
 					else:
@@ -139,9 +139,9 @@ func commit_action(cel: Image, _project: Project = Global.current_project) -> vo
 				DrawingAlgos.fake_rotsprite(image, angle, pivot)
 
 	if _project.has_selection and selection_checkbox.button_pressed and !_type_is_shader():
-		cel.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
+		cel.blend_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 	else:
-		cel.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
+		cel.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 
 
 func _type_is_shader() -> bool:

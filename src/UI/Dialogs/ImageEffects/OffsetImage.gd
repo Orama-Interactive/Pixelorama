@@ -13,7 +13,7 @@ func _ready() -> void:
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
 	preview.set_material(sm)
-	# Set as in the Animate enum
+	# Set in the order of the Animate enum
 	animate_panel.add_float_property(
 		"Offset X", $VBoxContainer/OffsetOptions/OffsetSliders.get_sliders()[0]
 	)

@@ -4,7 +4,10 @@ extends RefCounted
 ## A class for project properties.
 
 var name := "":
-	set = _name_changed
+	set(value):
+		name = value
+		if Global.tabs.tab_count < Global.tabs.current_tab:
+			Global.tabs.set_tab_title(Global.tabs.current_tab, name)
 var size: Vector2i:
 	set = _size_changed
 var undo_redo := UndoRedo.new()
@@ -13,7 +16,12 @@ var undos := 0  ## The number of times we added undo properties
 var can_undo := true
 var fill_color := Color(0)
 var has_changed := false:
-	set = _has_changed_changed
+	set(value):
+		has_changed = value
+		if value:
+			Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
+		else:
+			Global.tabs.set_tab_title(Global.tabs.current_tab, name)
 # frames and layers Arrays should generally only be modified directly when
 # opening/creating a project. When modifying the current project, use
 # the add/remove/move/swap_frames/layers methods
@@ -40,7 +48,9 @@ var selection_map := SelectionMap.new()
 # This is useful for when the selection is outside of the canvas boundaries,
 # on the left and/or above (negative coords)
 var selection_offset := Vector2i.ZERO:
-	set = _selection_offset_changed
+	set(value):
+		selection_offset = value
+		Global.canvas.selection.marching_ants_outline.offset = selection_offset
 var has_selection := false
 
 # For every camera (currently there are 3)
@@ -53,7 +63,7 @@ var cameras_offset: PackedVector2Array = [Vector2.ZERO, Vector2.ZERO, Vector2.ZE
 # Export directory path and export file name
 var directory_path := ""
 var file_name := "untitled"
-var file_format: int = Export.FileFormat.PNG
+var file_format := Export.FileFormat.PNG
 var was_exported := false
 var export_overwrite := false
 
@@ -136,7 +146,7 @@ func new_empty_frame() -> Frame:
 	var frame := Frame.new()
 	var bottom_layer := true
 	for l in layers:  # Create as many cels as there are layers
-		var cel: BaseCel = l.new_empty_cel()
+		var cel := l.new_empty_cel()
 		if cel is PixelCel and bottom_layer and fill_color.a > 0:
 			cel.image.fill(fill_color)
 		frame.cels.append(cel)
@@ -156,11 +166,6 @@ func selection_map_changed() -> void:
 	Global.canvas.selection.marching_ants_outline.texture = image_texture
 	var edit_menu_popup: PopupMenu = Global.top_menu_container.edit_menu_button.get_popup()
 	edit_menu_popup.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
-
-
-func _selection_offset_changed(value: Vector2i) -> void:
-	selection_offset = value
-	Global.canvas.selection.marching_ants_outline.offset = selection_offset
 
 
 func change_project() -> void:
@@ -204,7 +209,7 @@ func change_project() -> void:
 	if has_changed:
 		Global.main_window.title = Global.main_window.title + "(*)"
 
-	var save_path = OpenSave.current_save_paths[Global.current_project_index]
+	var save_path := OpenSave.current_save_paths[Global.current_project_index]
 	if save_path != "":
 		Global.open_sprites_dialog.current_path = save_path
 		Global.save_sprites_dialog.current_path = save_path
@@ -445,12 +450,6 @@ func _deserialize_metadata(object: Object, dict: Dictionary) -> void:
 		object.set_meta(meta, metadata[meta])
 
 
-func _name_changed(value: String) -> void:
-	name = value
-	if Global.tabs.tab_count < Global.tabs.current_tab:
-		Global.tabs.set_tab_title(Global.tabs.current_tab, name)
-
-
 func _size_changed(value: Vector2i) -> void:
 	if not is_instance_valid(tiles):
 		size = value
@@ -557,7 +556,7 @@ func toggle_layer_buttons() -> void:
 	)
 
 
-func _animation_tags_changed(value: Array) -> void:
+func _animation_tags_changed(value: Array[AnimationTag]) -> void:
 	animation_tags = value
 	for child in Global.tag_container.get_children():
 		child.queue_free()
@@ -567,7 +566,7 @@ func _animation_tags_changed(value: Array) -> void:
 		var tag_c: Container = animation_tag_node.instantiate()
 		Global.tag_container.add_child(tag_c)
 		tag_c.tag = tag
-		var tag_position: int = Global.tag_container.get_child_count() - 1
+		var tag_position := Global.tag_container.get_child_count() - 1
 		Global.tag_container.move_child(tag_c, tag_position)
 		tag_c.get_node("Label").text = tag.name
 		tag_c.get_node("Label").modulate = tag.color
@@ -575,7 +574,7 @@ func _animation_tags_changed(value: Array) -> void:
 
 		# Added 1 to answer to get starting position of next cel
 		tag_c.position.x = (tag.from - 1) * tag_base_size + 1
-		var tag_size: int = tag.to - tag.from
+		var tag_size := tag.to - tag.from
 		# We dont need the 4 pixels at the end of last cel
 		tag_c.custom_minimum_size.x = (tag_size + 1) * tag_base_size - 8
 		tag_c.position.y = 1  # To make top line of tag visible
@@ -598,14 +597,6 @@ func _set_timeline_first_and_last_frames() -> void:
 				Global.animation_timeline.last_frame = min(frames.size() - 1, tag.to - 1)
 
 
-func _has_changed_changed(value: bool) -> void:
-	has_changed = value
-	if value:
-		Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
-	else:
-		Global.tabs.set_tab_title(Global.tabs.current_tab, name)
-
-
 func is_empty() -> bool:
 	return (
 		frames.size() == 1
@@ -619,7 +610,7 @@ func is_empty() -> bool:
 func can_pixel_get_drawn(
 	pixel: Vector2i,
 	image: SelectionMap = selection_map,
-	selection_position: Vector2 = Global.canvas.selection.big_bounding_rectangle.position
+	selection_position: Vector2i = Global.canvas.selection.big_bounding_rectangle.position
 ) -> bool:
 	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
 		return false
@@ -684,7 +675,7 @@ func remove_frames(indices: Array) -> void:  # indices should be in ascending or
 func move_frame(from_index: int, to_index: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
-	var frame = frames[from_index]
+	var frame := frames[from_index]
 	frames.remove_at(from_index)
 	Global.animation_timeline.project_frame_removed(from_index)
 	frames.insert(to_index, frame)
@@ -695,7 +686,7 @@ func move_frame(from_index: int, to_index: int) -> void:
 func swap_frame(a_index: int, b_index: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
-	var temp: Frame = frames[a_index]
+	var temp := frames[a_index]
 	frames[a_index] = frames[b_index]
 	frames[b_index] = temp
 	Global.animation_timeline.project_frame_removed(a_index)
@@ -710,7 +701,7 @@ func reverse_frames(frame_indices: Array) -> void:
 	for i in frame_indices.size() / 2:
 		var index: int = frame_indices[i]
 		var reverse_index: int = frame_indices[-i - 1]
-		var temp: Frame = frames[index]
+		var temp := frames[index]
 		frames[index] = frames[reverse_index]
 		frames[reverse_index] = temp
 		Global.animation_timeline.project_frame_removed(index)
@@ -832,7 +823,7 @@ func move_cel(from_frame: int, to_frame: int, layer: int) -> void:
 func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:
 	Global.canvas.selection.transform_content_confirm()
 	selected_cels.clear()
-	var temp: BaseCel = frames[a_frame].cels[a_layer]
+	var temp := frames[a_frame].cels[a_layer]
 	frames[a_frame].cels[a_layer] = frames[b_frame].cels[b_layer]
 	frames[b_frame].cels[b_layer] = temp
 	Global.animation_timeline.project_cel_removed(a_frame, a_layer)

@@ -49,7 +49,7 @@ func _on_Remove_pressed():
 		Global.current_project.change_project()
 
 
-func _on_Scale_value_changed(value):
+func _on_Scale_value_changed(value: float):
 	if _ignore_spinbox_changes:
 		return
 	element.scale.x = value / 100
@@ -57,21 +57,21 @@ func _on_Scale_value_changed(value):
 	element.change_properties()
 
 
-func _on_X_value_changed(value):
+func _on_X_value_changed(value: float):
 	if _ignore_spinbox_changes:
 		return
 	element.position.x = value
 	element.change_properties()
 
 
-func _on_Y_value_changed(value):
+func _on_Y_value_changed(value: float):
 	if _ignore_spinbox_changes:
 		return
 	element.position.y = value
 	element.change_properties()
 
 
-func _on_Opacity_value_changed(value):
+func _on_Opacity_value_changed(value: float):
 	if _ignore_spinbox_changes:
 		return
 	element.modulate.a = value / 100

@@ -8,41 +8,93 @@ signal value_changed(value)
 signal ratio_toggled(button_pressed)
 
 @export var editable := true:
-	set = _set_editable
+	set(val):
+		editable = val
+		for slider in get_sliders():
+			slider.editable = val
+		$"%RatioButton".disabled = not val
 @export var value := Vector3.ZERO:
-	set = _set_value
+	set(val):
+		value = val
+		_can_emit_signal = false
+		$GridContainer/X.value = value.x
+		$GridContainer/Y.value = value.y
+		$GridContainer/Z.value = value.z
+		_can_emit_signal = true
 @export var min_value := Vector3.ZERO:
-	set = _set_min_value
+	set(val):
+		min_value = val
+		$GridContainer/X.min_value = val.x
+		$GridContainer/Y.min_value = val.y
+		$GridContainer/Z.min_value = val.z
 @export var max_value := Vector3(100.0, 100.0, 100.0):
-	set = _set_max_value
+	set(val):
+		max_value = val
+		$GridContainer/X.max_value = val.x
+		$GridContainer/Y.max_value = val.y
+		$GridContainer/Z.max_value = val.z
 @export var step := 1.0:
-	set = _set_step
+	set(val):
+		step = val
+		for slider in get_sliders():
+			slider.step = val
 @export var allow_greater := false:
-	set = _set_allow_greater
+	set(val):
+		allow_greater = val
+		for slider in get_sliders():
+			slider.allow_greater = val
 @export var allow_lesser := false:
-	set = _set_allow_lesser
+	set(val):
+		allow_lesser = val
+		for slider in get_sliders():
+			slider.allow_lesser = val
 @export var show_ratio := false:
-	set = _set_show_ratio
+	set(val):
+		show_ratio = val
+		$Ratio.visible = val
 @export var grid_columns := 1:
-	set = _set_grid_columns
+	set(val):
+		show_ratio = val
+		$Ratio.visible = val
 @export var slider_min_size := Vector2(32, 24):
-	set = _set_slider_min_size
+	set(val):
+		slider_min_size = val
+		for slider in get_sliders():
+			slider.custom_minimum_size = val
 @export var snap_step := 1.0:
-	set = _set_snap_step
+	set(val):
+		snap_step = val
+		for slider in get_sliders():
+			slider.snap_step = val
 @export var snap_by_default := false:
-	set = _set_snap_by_default
+	set(val):
+		snap_by_default = val
+		for slider in get_sliders():
+			slider.snap_by_default = val
 @export var prefix_x := "X:":
-	set = _set_prefix_x
+	set(val):
+		prefix_x = val
+		$GridContainer/X.prefix = val
 @export var prefix_y := "Y:":
-	set = _set_prefix_y
+	set(val):
+		prefix_y = val
+		$GridContainer/Y.prefix = val
 @export var prefix_z := "Z:":
-	set = _set_prefix_z
+	set(val):
+		prefix_z = val
+		$GridContainer/Z.prefix = val
 @export var suffix_x := "":
-	set = _set_suffix_x
+	set(val):
+		suffix_x = val
+		$GridContainer/X.suffix = val
 @export var suffix_y := "":
-	set = _set_suffix_y
+	set(val):
+		suffix_y = val
+		$GridContainer/Y.suffix = val
 @export var suffix_z := "":
-	set = _set_suffix_z
+	set(val):
+		suffix_z = val
+		$GridContainer/Z.suffix = val
 
 var ratio := Vector3.ONE
 var _locked_ratio := false
@@ -54,7 +106,7 @@ func _ready() -> void:
 		$Ratio.modulate = Global.modulate_icon_color
 
 
-func get_sliders() -> Array:
+func get_sliders() -> Array[ValueSlider]:
 	return [$GridContainer/X, $GridContainer/Y, $GridContainer/Z]
 
 
@@ -102,112 +154,3 @@ func _on_RatioButton_toggled(button_pressed: bool) -> void:
 	else:
 		ratio = value / divisor
 	ratio_toggled.emit(button_pressed)
-
-
-# Setters
-
-
-func _set_editable(val: bool) -> void:
-	editable = val
-	for slider in get_sliders():
-		slider.editable = val
-	$"%RatioButton".disabled = not val
-
-
-func _set_value(val: Vector3) -> void:
-	value = val
-	_can_emit_signal = false
-	$GridContainer/X.value = value.x
-	$GridContainer/Y.value = value.y
-	$GridContainer/Z.value = value.z
-	_can_emit_signal = true
-
-
-func _set_min_value(val: Vector3) -> void:
-	min_value = val
-	$GridContainer/X.min_value = val.x
-	$GridContainer/Y.min_value = val.y
-	$GridContainer/Z.min_value = val.z
-
-
-func _set_max_value(val: Vector3) -> void:
-	max_value = val
-	$GridContainer/X.max_value = val.x
-	$GridContainer/Y.max_value = val.y
-	$GridContainer/Z.max_value = val.z
-
-
-func _set_step(val: float) -> void:
-	step = val
-	for slider in get_sliders():
-		slider.step = val
-
-
-func _set_allow_greater(val: bool) -> void:
-	allow_greater = val
-	for slider in get_sliders():
-		slider.allow_greater = val
-
-
-func _set_allow_lesser(val: bool) -> void:
-	allow_lesser = val
-	for slider in get_sliders():
-		slider.allow_lesser = val
-
-
-func _set_show_ratio(val: bool) -> void:
-	show_ratio = val
-	$Ratio.visible = val
-
-
-func _set_grid_columns(val: int) -> void:
-	grid_columns = val
-	$GridContainer.columns = val
-
-
-func _set_slider_min_size(val: Vector2) -> void:
-	slider_min_size = val
-	for slider in get_sliders():
-		slider.custom_minimum_size = val
-
-
-func _set_snap_step(val: float) -> void:
-	snap_step = val
-	for slider in get_sliders():
-		slider.snap_step = val
-
-
-func _set_snap_by_default(val: bool) -> void:
-	snap_by_default = val
-	for slider in get_sliders():
-		slider.snap_by_default = val
-
-
-func _set_prefix_x(val: String) -> void:
-	prefix_x = val
-	$GridContainer/X.prefix = val
-
-
-func _set_prefix_y(val: String) -> void:
-	prefix_y = val
-	$GridContainer/Y.prefix = val
-
-
-func _set_prefix_z(val: String) -> void:
-	prefix_z = val
-	$GridContainer/Z.prefix = val
-
-
-func _set_suffix_x(val: String) -> void:
-	suffix_x = val
-	$GridContainer/X.suffix = val
-
-
-func _set_suffix_y(val: String) -> void:
-	suffix_y = val
-	$GridContainer/Y.suffix = val
-
-
-func _set_suffix_z(val: String) -> void:
-	suffix_z = val
-	$GridContainer/Z.suffix = val

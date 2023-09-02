@@ -8,17 +8,17 @@ var _move := false
 var _move_content := true
 var _start_pos := Vector2i.ZERO
 var _offset := Vector2i.ZERO
-# For tools such as the Polygon selection tool where you have to
-# click multiple times to create a selection
+## For tools such as the Polygon selection tool where you have to
+## click multiple times to create a selection
 var _ongoing_selection := false
 
 var _mode_selected := 0
-var _add := false  # Shift + Mouse Click
-var _subtract := false  # Ctrl + Mouse Click
-var _intersect := false  # Shift + Ctrl + Mouse Click
+var _add := false  ## Shift + Mouse Click
+var _subtract := false  ## Ctrl + Mouse Click
+var _intersect := false  ## Shift + Ctrl + Mouse Click
 
-# Used to check if the state of content transformation has been changed
-# while draw_move() is being called. For example, pressing Enter while still moving content
+## Used to check if the state of content transformation has been changed
+## while draw_move() is being called. For example, pressing Enter while still moving content
 var _content_transformation_check := false
 var _skip_slider_logic := false
 
@@ -34,9 +34,8 @@ func _ready() -> void:
 	refresh_options()
 
 
+## Ensure all items are added when we are selecting an option (bad things will happen otherwise)
 func refresh_options() -> void:
-	# The existence of this function is to ensure all items
-	# are added when we are selecting an option (bad things will happen otherwise)
 	$Modes.clear()
 	$Modes.add_item("Replace selection")
 	$Modes.add_item("Add to selection")
@@ -77,7 +76,7 @@ func draw_start(pos: Vector2i) -> void:
 	super.draw_start(pos)
 	if selection_node.arrow_key_move:
 		return
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	undo_data = selection_node.get_undo_data(false)
 	_intersect = Input.is_action_pressed("selection_intersect", true)
 	_add = Input.is_action_pressed("selection_add", true)
@@ -85,14 +84,14 @@ func draw_start(pos: Vector2i) -> void:
 	_start_pos = pos
 	_offset = pos
 
-	var selection_position: Vector2 = selection_node.big_bounding_rectangle.position
+	var selection_position: Vector2i = selection_node.big_bounding_rectangle.position
 	var offsetted_pos := pos
 	if selection_position.x < 0:
 		offsetted_pos.x -= selection_position.x
 	if selection_position.y < 0:
 		offsetted_pos.y -= selection_position.y
 
-	var quick_copy: bool = Input.is_action_pressed("transform_copy_selection_content", true)
+	var quick_copy := Input.is_action_pressed("transform_copy_selection_content", true)
 	if (
 		offsetted_pos.x >= 0
 		and offsetted_pos.y >= 0
@@ -116,7 +115,7 @@ func draw_start(pos: Vector2i) -> void:
 					image.blit_rect_mask(
 						selection_node.preview_image,
 						selection_node.preview_image,
-						Rect2(Vector2.ZERO, project.selection_map.get_size()),
+						Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
 						selection_node.big_bounding_rectangle.position
 					)
 
@@ -166,7 +165,7 @@ func draw_move(pos: Vector2i) -> void:
 
 	if Input.is_action_pressed("transform_snap_axis"):  # Snap to axis
 		var angle := Vector2(pos).angle_to_point(_start_pos)
-		if abs(angle) <= PI / 4 or abs(angle) >= 3 * PI / 4:
+		if absf(angle) <= PI / 4 or absf(angle) >= 3 * PI / 4:
 			pos.y = _start_pos.y
 		else:
 			pos.x = _start_pos.x
@@ -236,7 +235,7 @@ func _set_cursor_text(rect: Rect2i) -> void:
 func _on_Position_value_changed(value: Vector2i) -> void:
 	if _skip_slider_logic:
 		return
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if !project.has_selection:
 		return
 

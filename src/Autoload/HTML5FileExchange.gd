@@ -140,8 +140,7 @@ func load_shader() -> void:
 	# Execute JS function
 	JavaScriptBridge.eval("upload_shader();", true)  # Opens prompt for choosing file
 
-	await self.in_focus  # Wait until JS prompt is closed
-
+	await in_focus  # Wait until JS prompt is closed
 	await get_tree().create_timer(0.5).timeout  # Give some time for async JS data load
 
 	if JavaScriptBridge.eval("canceled;", true):  # If File Dialog closed w/o file

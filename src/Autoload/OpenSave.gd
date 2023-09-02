@@ -2,10 +2,10 @@
 extends Node
 
 var current_save_paths: PackedStringArray = []
-# Stores a filename of a backup file in user:// until user saves manually
+## Stores a filename of a backup file in user:// until user saves manually
 var backup_save_paths: PackedStringArray = []
 var preview_dialog_tscn := preload("res://src/UI/Dialogs/PreviewDialog.tscn")
-var preview_dialogs := []  # Array of preview dialogs
+var preview_dialogs := []  ## Array of preview dialogs
 var last_dialog_option := 0
 var autosave_timer: Timer
 
@@ -20,12 +20,12 @@ func _ready() -> void:
 
 func handle_loading_file(file: String) -> void:
 	file = file.replace("\\", "/")
-	var file_ext: String = file.get_extension().to_lower()
+	var file_ext := file.get_extension().to_lower()
 	if file_ext == "pxo":  # Pixelorama project file
 		open_pxo_file(file)
 
 	elif file_ext == "tres":  # Godot resource file
-		var resource = load(file)
+		var resource := load(file)
 		if resource is Palette:
 			Palettes.import_palette(resource, file.get_file())
 		else:
@@ -43,8 +43,8 @@ func handle_loading_file(file: String) -> void:
 		Global.preferences_dialog.extensions.install_extension(file)
 
 	elif file_ext == "shader" or file_ext == "gdshader":  # Godot shader file
-		var shader = load(file)
-		if !shader is Shader:
+		var shader := load(file)
+		if not shader is Shader:
 			return
 		var file_name: String = file.get_file().get_basename()
 		Global.control.find_child("ShaderEffect").change_shader(shader, file_name)
@@ -79,7 +79,7 @@ func handle_loading_image(file: String, image: Image) -> void:
 	Global.dialog_open(true)
 
 
-# For loading the output of AImgIO as a project
+## For loading the output of AImgIO as a project
 func handle_loading_aimg(path: String, frames: Array) -> void:
 	var project := Project.new([], path.get_file(), frames[0].content.get_size())
 	project.layers.append(PixelLayer.new(project))
@@ -87,8 +87,8 @@ func handle_loading_aimg(path: String, frames: Array) -> void:
 
 	# Determine FPS as 1, unless all frames agree.
 	project.fps = 1
-	var first_duration = frames[0].duration
-	var frames_agree = true
+	var first_duration: float = frames[0].duration
+	var frames_agree := true
 	for v in frames:
 		var aimg_frame: AImgIOFrame = v
 		if aimg_frame.duration != first_duration:
@@ -124,7 +124,7 @@ func open_pxo_file(path: String, untitled_backup: bool = false, replace_empty: b
 		Global.dialog_open(true)
 		return
 
-	var empty_project: bool = Global.current_project.is_empty() and replace_empty
+	var empty_project := Global.current_project.is_empty() and replace_empty
 	var new_project: Project
 	if empty_project:
 		new_project = Global.current_project
@@ -325,7 +325,7 @@ func open_image_as_spritesheet_tab_smart(
 ) -> void:
 	if sliced_rects.size() == 0:  # Image is empty sprite (manually set data to be consistent)
 		frame_size = image.get_size()
-		sliced_rects.append(Rect2(Vector2.ZERO, frame_size))
+		sliced_rects.append(Rect2i(Vector2i.ZERO, frame_size))
 	var project := Project.new([], path.get_file(), frame_size)
 	project.layers.append(PixelLayer.new(project))
 	Global.projects.append(project)
@@ -351,9 +351,8 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 	for yy in range(vert):
 		for xx in range(horiz):
 			var frame := Frame.new()
-			var cropped_image: Image
-			cropped_image = image.get_region(
-				Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height)
+			var cropped_image := image.get_region(
+				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
 			project.size = cropped_image.get_size()
 			cropped_image.convert(Image.FORMAT_RGBA8)
@@ -371,7 +370,7 @@ func open_image_as_spritesheet_layer_smart(
 	frame_size: Vector2i
 ) -> void:
 	# Resize canvas to if "frame_size.x" or "frame_size.y" is too large
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var project_width := maxi(frame_size.x, project.size.x)
 	var project_height := maxi(frame_size.y, project.size.y)
 	if project.size < Vector2i(project_width, project_height):
@@ -395,7 +394,7 @@ func open_image_as_spritesheet_layer_smart(
 			for l in range(project.layers.size()):  # Create as many cels as there are layers
 				new_frame.cels.append(project.layers[l].new_empty_cel())
 				if project.layers[l].new_cels_linked:
-					var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
+					var prev_cel := project.frames[project.current_frame].cels[l]
 					if prev_cel.link_set == null:
 						prev_cel.link_set = {}
 						project.undo_redo.add_do_method(
@@ -452,7 +451,7 @@ func open_image_as_spritesheet_layer(
 	var frame_height := image.get_size().y / vertical
 
 	# Resize canvas to if "frame_width" or "frame_height" is too large
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var project_width := maxi(frame_width, project.size.x)
 	var project_height := maxi(frame_height, project.size.y)
 	if project.size < Vector2i(project_width, project_height):
@@ -476,7 +475,7 @@ func open_image_as_spritesheet_layer(
 			for l in range(project.layers.size()):  # Create as many cels as there are layers
 				new_frame.cels.append(project.layers[l].new_empty_cel())
 				if project.layers[l].new_cels_linked:
-					var prev_cel: BaseCel = project.frames[project.current_frame].cels[l]
+					var prev_cel := project.frames[project.current_frame].cels[l]
 					if prev_cel.link_set == null:
 						prev_cel.link_set = {}
 						project.undo_redo.add_do_method(
@@ -495,8 +494,8 @@ func open_image_as_spritesheet_layer(
 	for f in new_frames_size:
 		if f >= start_frame and f < (start_frame + (vertical * horizontal)):
 			# Slice spritesheet
-			var xx: int = (f - start_frame) % horizontal
-			var yy: int = (f - start_frame) / horizontal
+			var xx := (f - start_frame) % horizontal
+			var yy := (f - start_frame) / horizontal
 			image.convert(Image.FORMAT_RGBA8)
 			var cropped_image := Image.create(
 				project_width, project_height, false, Image.FORMAT_RGBA8
@@ -504,7 +503,7 @@ func open_image_as_spritesheet_layer(
 			cropped_image.blit_rect(
 				image,
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height),
-				Vector2.ZERO
+				Vector2i.ZERO
 			)
 			cels.append(PixelCel.new(cropped_image))
 		else:
@@ -529,7 +528,7 @@ func open_image_as_spritesheet_layer(
 
 
 func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var project_width := maxi(image.get_width(), project.size.x)
 	var project_height := maxi(image.get_height(), project.size.y)
 	if project.size < Vector2i(project_width, project_height):
@@ -544,7 +543,7 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 			if not cel is PixelCel:
 				continue
 			var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
-			cel_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
+			cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 			project.undo_redo.add_do_property(cel, "image", cel_image)
 			project.undo_redo.add_undo_property(cel, "image", cel.get_image())
 
@@ -572,7 +571,7 @@ func open_image_as_new_frame(image: Image, layer_index := 0) -> void:
 		if i == layer_index:
 			image.convert(Image.FORMAT_RGBA8)
 			var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
-			cel_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
+			cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 			frame.cels.append(PixelCel.new(cel_image, 1))
 		else:
 			frame.cels.append(project.layers[i].new_empty_cel())
@@ -606,7 +605,7 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 		if i == frame_index:
 			image.convert(Image.FORMAT_RGBA8)
 			var cel_image := Image.create(project_width, project_height, false, Image.FORMAT_RGBA8)
-			cel_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2.ZERO)
+			cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 			cels.append(PixelCel.new(cel_image, 1))
 		else:
 			cels.append(layer.new_empty_cel())
@@ -635,7 +634,7 @@ func import_reference_image_from_path(path: String) -> void:
 	project.change_project()
 
 
-# Useful for HTML5
+## Useful for Web
 func import_reference_image_from_image(image: Image) -> void:
 	var project: Project = Global.current_project
 	var ri := ReferenceImage.new()
@@ -646,8 +645,8 @@ func import_reference_image_from_image(image: Image) -> void:
 
 
 func set_new_imported_tab(project: Project, path: String) -> void:
-	var prev_project_empty: bool = Global.current_project.is_empty()
-	var prev_project_pos: int = Global.current_project_index
+	var prev_project_empty := Global.current_project.is_empty()
+	var prev_project_pos := Global.current_project_index
 
 	Global.main_window.title = (
 		path.get_file() + " (" + tr("imported") + ") - Pixelorama " + Global.current_version
@@ -689,9 +688,9 @@ func _on_Autosave_timeout() -> void:
 		save_pxo_file(backup_save_paths[i], true, true, Global.projects[i])
 
 
-# Backup paths are stored in two ways:
-# 1) User already manually saved and defined a save path -> {current_save_path, backup_save_path}
-# 2) User didn't manually saved, "untitled" backup is stored -> {backup_save_path, backup_save_path}
+## Backup paths are stored in two ways:
+## 1) User already manually saved and defined a save path -> {current_save_path, backup_save_path}
+## 2) User didn't manually save, "untitled" backup is stored -> {backup_save_path, backup_save_path}
 func store_backup_path(i: int) -> void:
 	if current_save_paths[i] != "":
 		# Remove "untitled" backup if it existed on this project instance
@@ -759,7 +758,7 @@ func reload_backup_file(project_paths: Array, backup_paths: Array) -> void:
 
 
 func save_project_to_recent_list(path: String) -> void:
-	var top_menu_container: Panel = Global.top_menu_container
+	var top_menu_container := Global.top_menu_container
 	if path.get_file().substr(0, 7) == "backup-" or path == "":
 		return
 

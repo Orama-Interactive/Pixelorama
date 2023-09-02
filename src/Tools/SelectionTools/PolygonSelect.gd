@@ -74,7 +74,7 @@ func draw_preview() -> void:
 		for line in _create_polylines(indicator):
 			canvas.draw_polyline(PackedVector2Array(line), Color.BLACK)
 
-		var circle_radius: Vector2 = Global.camera.zoom * 10
+		var circle_radius := Global.camera.zoom * 10
 		circle_radius.x = clampf(circle_radius.x, 2, circle_radius.x)
 		circle_radius.y = clampf(circle_radius.y, 2, circle_radius.y)
 
@@ -113,7 +113,7 @@ func apply_selection(pos: Vector2i) -> void:
 	super.apply_selection(pos)
 	if !_ready_to_apply:
 		return
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var cleared := false
 	if !_add and !_subtract and !_intersect:
 		cleared = true
@@ -147,7 +147,7 @@ func apply_selection(pos: Vector2i) -> void:
 
 
 func lasso_selection(selection_map: SelectionMap, points: Array[Vector2i]) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var selection_size := selection_map.get_size()
 	for point in points:
 		if point.x < 0 or point.y < 0 or point.x >= selection_size.x or point.y >= selection_size.y:

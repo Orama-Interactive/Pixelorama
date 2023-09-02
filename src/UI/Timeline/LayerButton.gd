@@ -28,7 +28,7 @@ func _ready() -> void:
 		texture.modulate = Global.modulate_icon_color
 
 	# Visualize how deep into the hierarchy the layer is
-	var hierarchy_depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
+	var hierarchy_depth := Global.current_project.layers[layer].get_hierarchy_depth()
 	hierarchy_spacer.custom_minimum_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
 
 	if Global.control.theme.get_color("font_color", "Button").v > 0.5:  # Light3D text is dark theme
@@ -74,11 +74,11 @@ func update_buttons() -> void:
 			lock_button.modulate.a = 0.33
 
 
-# When pressing a button, change the appearance of other layers (ie: expand or visible)
+## When pressing a button, change the appearance of other layers (ie: expand or visible)
 func _update_buttons_all_layers() -> void:
 	for layer_button in Global.layer_vbox.get_children():
 		layer_button.update_buttons()
-		var expanded = Global.current_project.layers[layer_button.layer].is_expanded_in_hierarchy()
+		var expanded := Global.current_project.layers[layer_button.layer].is_expanded_in_hierarchy()
 		layer_button.visible = expanded
 		Global.cel_vbox.get_child(layer_button.get_index()).visible = expanded
 
@@ -86,8 +86,8 @@ func _update_buttons_all_layers() -> void:
 func _draw() -> void:
 	if hierarchy_spacer.size.x > 0.1:
 		var color := Color(1, 1, 1, 0.33)
-		color.v = round(Global.control.theme.get_color("font_color", "Button").v)
-		var x = hierarchy_spacer.global_position.x - global_position.x + hierarchy_spacer.size.x
+		color.v = roundf(Global.control.theme.get_color("font_color", "Button").v)
+		var x := hierarchy_spacer.global_position.x - global_position.x + hierarchy_spacer.size.x
 		draw_line(Vector2(x, 0), Vector2(x, size.y), color)
 
 
@@ -105,9 +105,9 @@ func _on_LayerContainer_gui_input(event: InputEvent) -> void:
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		Global.canvas.selection.transform_content_confirm()
-		var prev_curr_layer: int = project.current_layer
+		var prev_curr_layer := project.current_layer
 		if Input.is_action_pressed("shift"):
-			var layer_diff_sign = sign(layer - prev_curr_layer)
+			var layer_diff_sign := signi(layer - prev_curr_layer)
 			if layer_diff_sign == 0:
 				layer_diff_sign = 1
 			for i in range(0, project.frames.size()):
@@ -168,7 +168,9 @@ func _on_LockButton_pressed() -> void:
 
 func _on_LinkButton_pressed() -> void:
 	Global.canvas.selection.transform_content_confirm()
-	var layer_class: PixelLayer = Global.current_project.layers[layer]
+	var layer_class := Global.current_project.layers[layer]
+	if not layer_class is PixelLayer:
+		return
 	layer_class.new_cels_linked = !layer_class.new_cels_linked
 	update_buttons()
 	if Global.select_layer_on_button_click:
@@ -216,7 +218,7 @@ func _can_drop_data(_pos: Vector2, data) -> bool:
 		return false
 
 	var region: Rect2
-	var depth: int = Global.current_project.layers[layer].get_hierarchy_depth()
+	var depth := Global.current_project.layers[layer].get_hierarchy_depth()
 
 	if Input.is_action_pressed("ctrl"):  # Swap layers
 		if drag_layer.is_ancestor_of(curr_layer) or curr_layer.is_ancestor_of(drag_layer):

@@ -1,6 +1,6 @@
 extends Control
 
-var color: Color = Color("6680ff")  # Set this to a theme color later
+var color := Color("6680ff")  # Set this to a theme color later
 var _spritesheet_vertical: int
 var _spritesheet_horizontal: int
 

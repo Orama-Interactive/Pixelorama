@@ -17,8 +17,7 @@ var _vanishing_point: Node
 
 
 func serialize() -> Dictionary:
-	var data = {"angle": angle, "length": length}
-	return data
+	return {"angle": angle, "length": length}
 
 
 func deserialize(data: Dictionary):
@@ -69,7 +68,7 @@ func _input(event: InputEvent) -> void:
 				return
 			default_color.a = 0.5
 			if Rect2(Vector2.ZERO, project_size).has_point(mouse_point):
-				var start = Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
+				var start := Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
 				is_hidden = false
 				draw_perspective_line()
 				angle = rad_to_deg(points[0].angle_to_point(mouse_point))
@@ -111,7 +110,7 @@ func try_rotate_scale():
 		if Input.is_action_pressed("left_mouse"):
 			# rotation code here
 			if line_button:
-				var new_angle = rad_to_deg(points[0].angle_to_point(mouse_point))
+				var new_angle := rad_to_deg(points[0].angle_to_point(mouse_point))
 				if new_angle < 0:
 					new_angle += 360
 				_vanishing_point.angle_changed(new_angle, line_button)

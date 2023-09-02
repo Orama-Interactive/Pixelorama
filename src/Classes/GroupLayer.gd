@@ -21,7 +21,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO) -> Image:
 		if layer is GroupLayer:
 			image.blend_rect(layer.blend_children(frame, origin), blend_rect, origin)
 		else:
-			var cel: BaseCel = frame.cels[layer.index]
+			var cel := frame.cels[layer.index]
 			var cel_image := Image.new()
 			cel_image.copy_from(cel.get_image())
 			if cel.opacity < 1.0:  # If we have cel transparency

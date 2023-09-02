@@ -19,8 +19,6 @@ func _ready() -> void:
 	interpolation_type.add_item("Scale3X", DrawingAlgos.Interpolation.SCALE3X)
 	interpolation_type.add_item("cleanEdge", DrawingAlgos.Interpolation.CLEANEDGE)
 	interpolation_type.add_item("OmniScale", DrawingAlgos.Interpolation.OMNISCALE)
-	if not DrawingAlgos.omniscale_shader:
-		interpolation_type.set_item_disabled(DrawingAlgos.Interpolation.OMNISCALE, true)
 
 
 func _on_ScaleImage_about_to_show() -> void:

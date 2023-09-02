@@ -3,7 +3,7 @@ extends Node
 var theme_index := 0
 var theme_button_group := ButtonGroup.new()
 
-@onready var themes := [
+@onready var themes: Array[Theme] = [
 	preload("res://assets/themes/dark/theme.tres"),
 	preload("res://assets/themes/gray/theme.tres"),
 	preload("res://assets/themes/blue/theme.tres"),

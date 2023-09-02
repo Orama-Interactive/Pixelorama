@@ -1,7 +1,8 @@
 class_name ReferencesPanel
 extends VBoxContainer
-# Panel for reference image management
+## Panel for reference image management
 
+var reference_image_button_tscn := preload("res://src/UI/ReferenceImages/ReferenceImageButton.tscn")
 @onready var list = $"Scroll/List"
 
 
@@ -16,6 +17,6 @@ func project_changed():
 	# And update.
 	for ref in Global.current_project.reference_images:
 		ref.visible = true
-		var l = preload("res://src/UI/ReferenceImages/ReferenceImageButton.tscn").instantiate()
+		var l = reference_image_button_tscn.instantiate()
 		l.element = ref
 		list.add_child(l)

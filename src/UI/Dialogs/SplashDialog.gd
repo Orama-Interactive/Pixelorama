@@ -45,7 +45,7 @@ func _on_SplashDialog_about_to_show() -> void:
 		)
 	title = "Pixelorama" + " " + Global.current_version
 
-	chosen_artwork = randi() % artworks.size()
+	chosen_artwork = artworks.pick_random()
 	change_artwork(0)
 
 	if OS.get_name() == "Web":

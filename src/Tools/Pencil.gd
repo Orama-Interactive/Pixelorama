@@ -6,7 +6,7 @@ var _changed := false
 var _overwrite := false
 var _fill_inside := false
 var _draw_points := PackedVector2Array()
-var _old_spacing_mode := false  # needed to reset spacing mode in case we change it
+var _old_spacing_mode := false  ## Needed to reset spacing mode in case we change it
 
 
 class PencilOp:

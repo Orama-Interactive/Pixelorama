@@ -211,7 +211,7 @@ func _on_ApplyAll_toggled(pressed: bool) -> void:
 func synchronize() -> void:
 	for child in Global.control.get_children():
 		if child != self and child is PreviewDialog:
-			var dialog = child
+			var dialog := child as PreviewDialog
 			#sync modes
 			var id := current_import_option
 			dialog.import_options.select(id)
@@ -438,7 +438,7 @@ func add_brush() -> void:
 			curr_file = dir.get_next()
 		dir.list_dir_end()
 
-		var file_ext: String = path.get_file().get_extension()
+		var file_ext := path.get_file().get_extension()
 		var index := random_brushes.size() + 1
 		var file_name = "~" + brush_name + str(index) + "." + file_ext
 		var location := "Brushes".path_join(brush_name).path_join(file_name)

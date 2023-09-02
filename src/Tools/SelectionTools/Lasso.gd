@@ -107,7 +107,7 @@ func apply_selection(_position) -> void:
 
 
 func lasso_selection(selection_map: SelectionMap, points: Array[Vector2i]) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var selection_size := selection_map.get_size()
 	for point in points:
 		if point.x < 0 or point.y < 0 or point.x >= selection_size.x or point.y >= selection_size.y:

@@ -183,8 +183,8 @@ func _draw_shape(origin: Vector2i, dest: Vector2i) -> void:
 	commit_undo()
 
 
-# Given an origin point and destination point, returns a rect representing
-# where the shape will be drawn and what is its size
+## Given an origin point and destination point, returns a rect representing
+## where the shape will be drawn and what is its size
 func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
 	var rect := Rect2i()
 

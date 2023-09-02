@@ -2,10 +2,10 @@ class_name AnimatePanel
 extends PanelContainer
 
 var image_effect_node: ConfirmationDialog
-var frames := []  # Set this value before calling "get_animated_value"
-var properties := []  # Contains dictionary of properties
-var resetter_values := []  # Contains the Original properties without any change
-var _current_id := 0  # The property currently selected in "property_list"
+var frames := []  ## Set this value before calling "get_animated_value"
+var properties := []  ## Contains dictionary of properties
+var resetter_values := []  ## Contains the Original properties without any change
+var _current_id := 0  ## The property currently selected in "property_list"
 
 @onready var can_animate_button: CheckBox = $"%CanAnimate"
 @onready var property_list: ItemList = $"%PropertyList"

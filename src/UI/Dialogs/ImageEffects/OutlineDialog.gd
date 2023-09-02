@@ -5,25 +5,24 @@ var color := Color.BLACK
 var thickness := 1
 var pattern := 0
 var inside_image := false
-var shader: Shader
+var shader := preload("res://src/Shaders/OutlineInline.gdshader")
 
 @onready var outline_color := $VBoxContainer/OutlineOptions/OutlineColor as ColorPickerButton
 
 
 func _ready() -> void:
 	super._ready()
-	shader = load("res://src/Shaders/OutlineInline.gdshader")
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
 	preview.set_material(sm)
 	outline_color.get_picker().presets_visible = false
 	color = outline_color.color
-	# set as in enum
+	# Set in the order of the Animate enum
 	animate_panel.add_float_property("Thickness", $VBoxContainer/OutlineOptions/ThickValue)
 
 
-func commit_action(cel: Image, project: Project = Global.current_project) -> void:
-	var anim_thickness = animate_panel.get_animated_value(commit_idx, Animate.THICKNESS)
+func commit_action(cel: Image, project := Global.current_project) -> void:
+	var anim_thickness := animate_panel.get_animated_value(commit_idx, Animate.THICKNESS)
 	var selection_tex: ImageTexture
 	if selection_checkbox.button_pressed and project.has_selection:
 		selection_tex = ImageTexture.create_from_image(project.selection_map)

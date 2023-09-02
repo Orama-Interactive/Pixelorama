@@ -92,7 +92,7 @@ func set_preview() -> void:
 			previews.columns = 1
 			add_animated_preview()
 		else:
-			previews.columns = ceil(sqrt(Export.processed_images.size()))
+			previews.columns = ceili(sqrt(Export.processed_images.size()))
 			for i in range(Export.processed_images.size()):
 				add_image_preview(Export.processed_images[i], i + 1)
 
@@ -257,7 +257,7 @@ func _on_ExportDialog_about_to_show() -> void:
 	get_ok_button().text = "Export"
 	Global.canvas.selection.transform_content_confirm()
 	var project: Project = Global.current_project
-	# If we're on HTML5, don't let the user change the directory path
+	# If we're on Web, don't let the user change the directory path
 	if OS.get_name() == "Web":
 		get_tree().call_group("NotHTML5", "hide")
 		project.directory_path = "user://"

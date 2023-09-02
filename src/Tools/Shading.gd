@@ -17,8 +17,8 @@ var _value_amount := 10
 class LightenDarkenOp:
 	extends Drawer.ColorOp
 	var changed := false
-	var shading_mode: int = ShadingMode.SIMPLE
-	var lighten_or_darken: int = LightenDarken.LIGHTEN
+	var shading_mode := ShadingMode.SIMPLE
+	var lighten_or_darken := LightenDarken.LIGHTEN
 	var hue_amount := 10.0
 	var sat_amount := 10.0
 	var value_amount := 10.0

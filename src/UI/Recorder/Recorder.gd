@@ -8,10 +8,10 @@ var mode := Mode.CANVAS
 var chosen_dir := ""
 var save_dir := ""
 var project: Project
-var cache: Array[Image] = []  # Images stored during recording
-var frame_captured := 0  # A variable used to visualize frames captured
-var skip_amount := 1  # No of "do" actions after which a frame can be captured
-var current_frame_no := 0  # used to compare with skip_amount to see if it can be captured
+var cache: Array[Image] = []  ## Images stored during recording
+var frame_captured := 0  ## Used to visualize frames captured
+var skip_amount := 1  ## Number of "do" actions after which a frame can be captured
+var current_frame_no := 0  ## Used to compare with skip_amount to see if it can be captured
 
 var resize := 100
 

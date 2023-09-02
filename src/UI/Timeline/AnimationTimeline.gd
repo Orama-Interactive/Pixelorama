@@ -143,7 +143,7 @@ func cel_size_changed(value: int) -> void:
 		var tag: AnimationTag = tag_c.tag
 		# Added 1 to answer to get starting position of next cel
 		tag_c.position.x = (tag.from - 1) * tag_base_size + 1
-		var tag_size: int = tag.to - tag.from
+		var tag_size := tag.to - tag.from
 		# We dont need the 4 pixels at the end of last cel
 		tag_c.custom_minimum_size.x = (tag_size + 1) * tag_base_size - 4
 		# We dont need the 4 pixels at the end of last cel
@@ -153,7 +153,7 @@ func cel_size_changed(value: int) -> void:
 
 
 func add_frame() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var frame_add_index := project.current_frame + 1
 	var frame := project.new_empty_frame()
 	project.undos += 1
@@ -209,7 +209,7 @@ func _on_DeleteFrame_pressed() -> void:
 
 
 func delete_frames(indices := []) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if project.frames.size() == 1:
 		return
 
@@ -634,7 +634,7 @@ func _on_FuturePlacement_item_selected(index: int) -> void:
 
 
 func add_layer(type: int) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var current_layer := project.layers[project.current_layer]
 	var l: BaseLayer
 	match type:
@@ -677,7 +677,7 @@ func add_layer(type: int) -> void:
 
 
 func _on_CloneLayer_pressed() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var source_layers := project.layers[project.current_layer].get_children(true)
 	source_layers.append(project.layers[project.current_layer])
 
@@ -696,7 +696,7 @@ func _on_CloneLayer_pressed() -> void:
 		cels.append([])
 
 		for frame in project.frames:
-			var src_cel: BaseCel = frame.cels[src_layer.index]
+			var src_cel := frame.cels[src_layer.index]
 			var new_cel: BaseCel
 			if src_cel is Cel3D:
 				new_cel = Cel3D.new(
@@ -744,7 +744,7 @@ func _on_CloneLayer_pressed() -> void:
 
 
 func _on_RemoveLayer_pressed() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if project.layers.size() == 1:
 		return
 
@@ -774,7 +774,7 @@ func _on_RemoveLayer_pressed() -> void:
 ## Move the layer up or down in layer order and/or reparent to be deeper/shallower in the
 ## layer hierarchy depending on its current index and parent
 func change_layer_order(up: bool) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var layer := project.layers[project.current_layer]
 	var child_count := layer.get_child_count(true)
 	var from_indices := range(layer.index - child_count, layer.index + 1)
@@ -829,7 +829,7 @@ func change_layer_order(up: bool) -> void:
 
 
 func _on_MergeDownLayer_pressed() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var top_layer := project.layers[project.current_layer]
 	var bottom_layer := project.layers[project.current_layer - 1]
 	if not bottom_layer is PixelLayer:
@@ -912,7 +912,7 @@ func _on_onion_skinning_settings_visibility_changed() -> void:
 
 
 func project_changed() -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	# These must be removed from tree immediately to not mess up the indices of
 	# the new buttons, so use either free or queue_free + parent.remove_child
 	for layer_button in Global.layer_vbox.get_children():
@@ -949,8 +949,8 @@ func project_changed() -> void:
 
 
 func project_frame_added(frame: int) -> void:
-	var project: Project = Global.current_project
-	var button: Button = frame_button_node.instantiate()
+	var project := Global.current_project
+	var button := frame_button_node.instantiate() as Button
 	button.frame = frame
 	Global.frame_hbox.add_child(button)
 	Global.frame_hbox.move_child(button, frame)
@@ -976,7 +976,7 @@ func project_frame_removed(frame: int) -> void:
 
 
 func project_layer_added(layer: int) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 
 	var layer_button := project.layers[layer].instantiate_layer_button() as LayerButton
 	layer_button.layer = layer

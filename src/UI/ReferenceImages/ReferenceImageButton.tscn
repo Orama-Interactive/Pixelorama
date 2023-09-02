@@ -105,16 +105,12 @@ tooltip_text = "Uses a magnifying filter, to enable smooth zooming in of the tex
 text = "Apply Filter"
 
 [node name="Silhouette" type="CheckBox" parent="Interior/OtherOptions"]
-margin_left = 105.0
-margin_right = 198.0
-margin_bottom = 24.0
-hint_tooltip = "Blacks out the image and makes all opaque pixels a dark color."
+layout_mode = 2
 text = "Silhouette"
 
 [node name="Reset" type="Button" parent="Interior/OtherOptions"]
 layout_mode = 2
 text = "Reset"
-icon_align = 1
 
 [node name="Remove" type="Button" parent="Interior/OtherOptions"]
 layout_mode = 2

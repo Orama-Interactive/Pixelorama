@@ -2,7 +2,7 @@ extends Control
 
 const EXTENSIONS_PATH := "user://extensions"
 
-var extensions := {}  # Extension name : Extension class
+var extensions := {}  # Extension name: Extension class
 var extension_selected := -1
 var damaged_extension: String
 
@@ -49,9 +49,9 @@ func _ready() -> void:
 	dir.make_dir(EXTENSIONS_PATH)
 	if DirAccess.get_open_error() == OK:
 		dir.list_dir_begin()
-		var file_name = dir.get_next()
+		var file_name := dir.get_next()
 		while file_name != "":
-			var ext: String = file_name.to_lower().get_extension()
+			var ext := file_name.to_lower().get_extension()
 			if !dir.current_is_dir() and ext in ["pck", "zip"]:
 				file_names.append(file_name)
 			file_name = dir.get_next()
@@ -159,11 +159,11 @@ func _add_extension(file_name: String) -> void:
 		var supported_api_versions = extension_json["supported_api_versions"]
 		if typeof(supported_api_versions) == TYPE_ARRAY:
 			if !ExtensionsApi.get_api_version() in supported_api_versions:
-				var err_text = (
+				var err_text := (
 					"The extension %s will not work on this version of Pixelorama \n"
 					% file_name_no_ext
 				)
-				var required_text = "Requires Api : %s" % str(supported_api_versions)
+				var required_text := "Requires Api : %s" % str(supported_api_versions)
 				Global.error_dialog.set_text(str(err_text, required_text))
 				Global.error_dialog.popup_centered()
 				Global.dialog_open(true)
@@ -176,7 +176,7 @@ func _add_extension(file_name: String) -> void:
 	extension.serialize(extension_json)
 	extensions[file_name] = extension
 	extension_list.add_item(extension.display_name)
-	var item_count: int = extension_list.get_item_count() - 1
+	var item_count := extension_list.get_item_count() - 1
 	extension_list.set_item_tooltip(item_count, extension.description)
 	extension_list.set_item_metadata(item_count, file_name)
 	extension.enabled = Global.config_cache.get_value("extensions", extension.file_name, false)

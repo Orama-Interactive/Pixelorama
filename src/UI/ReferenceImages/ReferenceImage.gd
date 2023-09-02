@@ -6,7 +6,7 @@ signal properties_changed
 
 var project := Global.current_project
 
-var shader: Shader = preload("res://src/Shaders/SilhouetteShader.gdshader")
+var shader := preload("res://src/Shaders/SilhouetteShader.gdshader")
 
 var image_path := ""
 var filter := false
@@ -99,7 +99,7 @@ func deserialize(d: Dictionary) -> void:
 	change_properties()
 
 
-## Useful for HTML5
+## Useful for Web
 func create_from_image(image: Image) -> void:
 	var itex := ImageTexture.create_from_image(image)
 	texture = itex

@@ -8,19 +8,19 @@ var current_pixel := Vector2.ZERO
 var sprite_changed_this_frame := false  ## For optimization purposes
 var move_preview_location := Vector2.ZERO
 
-@onready var currently_visible_frame: SubViewport = $CurrentlyVisibleFrame
-@onready var current_frame_drawer = $CurrentlyVisibleFrame/CurrentFrameDrawer
-@onready var tile_mode = $TileMode
-@onready var pixel_grid = $PixelGrid
-@onready var grid = $Grid
-@onready var selection = $Selection
+@onready var currently_visible_frame := $CurrentlyVisibleFrame as SubViewport
+@onready var current_frame_drawer := $CurrentlyVisibleFrame/CurrentFrameDrawer as Node2D
+@onready var tile_mode := $TileMode as Node2D
+@onready var pixel_grid := $PixelGrid as Node2D
+@onready var grid := $Grid as Node2D
+@onready var selection := $Selection as Node2D
 @onready var onion_past := $OnionPast as Node2D
 @onready var onion_future := $OnionFuture as Node2D
 @onready var crop_rect := $CropRect as CropRect
-@onready var indicators = $Indicators
-@onready var previews = $Previews
-@onready var mouse_guide_container = $MouseGuideContainer
-@onready var gizmos_3d: Node2D = $Gizmos3D
+@onready var indicators := $Indicators as Node2D
+@onready var previews := $Previews as Node2D
+@onready var mouse_guide_container := $MouseGuideContainer as Node2D
+@onready var gizmos_3d := $Gizmos3D as Node2D
 
 
 func _ready() -> void:

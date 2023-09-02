@@ -1,7 +1,7 @@
 class_name SelectionMap
 extends Image
 
-var invert_shader: Shader = preload("res://src/Shaders/Invert.gdshader")
+var invert_shader := preload("res://src/Shaders/Invert.gdshader")
 
 
 func is_pixel_selected(pixel: Vector2i) -> bool:

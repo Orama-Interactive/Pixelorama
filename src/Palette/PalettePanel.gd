@@ -58,22 +58,22 @@ func select_palette(palette_path: String) -> void:
 		palette_scroll.resize_grid()
 		palette_scroll.set_sliders(Palettes.get_current_palette(), palette_grid.grid_window_origin)
 
-		var left_selected = Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_LEFT)
-		var right_selected = Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_RIGHT)
+		var left_selected := Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_LEFT)
+		var right_selected := Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_RIGHT)
 		palette_grid.select_swatch(MOUSE_BUTTON_LEFT, left_selected, left_selected)
 		palette_grid.select_swatch(MOUSE_BUTTON_RIGHT, right_selected, right_selected)
 
 		toggle_add_delete_buttons()
 
 
-# Has to be called on every Pixelorama theme change
+## Has to be called on every Pixelorama theme change
 func reset_empty_palette_swatches_color() -> void:
 	palette_grid.reset_empty_swatches_color()
 
 
 func redraw_current_palette() -> void:
 	# Select and display current palette
-	var current_palette = Palettes.get_current_palette()
+	var current_palette := Palettes.get_current_palette()
 	if current_palette:
 		select_palette(current_palette.resource_path)
 		add_color_button.show()
@@ -188,7 +188,7 @@ func _on_PaletteGrid_swatch_dropped(source_index: int, target_index: int) -> voi
 
 func _on_PaletteGrid_swatch_pressed(mouse_button: int, index: int) -> void:
 	# Gets previously selected color index
-	var old_index = Palettes.current_palette_get_selected_color_index(mouse_button)
+	var old_index := Palettes.current_palette_get_selected_color_index(mouse_button)
 	Palettes.current_palette_select_color(mouse_button, index)
 	palette_grid.select_swatch(mouse_button, index, old_index)
 
@@ -224,7 +224,7 @@ func _on_EditPaletteDialog_deleted() -> void:
 func _color_changed(_color: Color, button: int) -> void:
 	if hidden_color_picker.get_popup().visible == false and Palettes.get_current_palette():
 		# Unselect swatches when tools color is changed
-		var swatch_to_unselect = -1
+		var swatch_to_unselect := -1
 
 		if button == MOUSE_BUTTON_LEFT:
 			swatch_to_unselect = Palettes.left_selected_color

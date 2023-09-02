@@ -101,9 +101,9 @@ func draw_preview() -> void:
 		canvas.draw_set_transform(canvas.position, canvas.rotation, canvas.scale)
 
 
-func apply_selection(pos) -> void:
+func apply_selection(pos: Vector2i) -> void:
 	super.apply_selection(pos)
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var cleared := false
 	if !_add and !_subtract and !_intersect:
 		cleared = true
@@ -136,7 +136,7 @@ func apply_selection(pos) -> void:
 
 
 func paint_selection(selection_map: SelectionMap, points: Array[Vector2i]) -> void:
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	var selection_size := selection_map.get_size()
 	for point in points:
 		if point.x < 0 or point.y < 0 or point.x >= selection_size.x or point.y >= selection_size.y:
@@ -155,10 +155,10 @@ func append_gap(start: Vector2i, end: Vector2i) -> void:
 	var dy := -absi(end.y - start.y)
 	var err := dx + dy
 	var e2 := err << 1
-	var sx = 1 if start.x < end.x else -1
-	var sy = 1 if start.y < end.y else -1
-	var x = start.x
-	var y = start.y
+	var sx := 1 if start.x < end.x else -1
+	var sy := 1 if start.y < end.y else -1
+	var x := start.x
+	var y := start.y
 	while !(x == end.x && y == end.y):
 		e2 = err << 1
 		if e2 >= dy:
@@ -172,7 +172,7 @@ func append_gap(start: Vector2i, end: Vector2i) -> void:
 
 func mirror_array(array: Array[Vector2i], h: bool, v: bool) -> Array[Vector2i]:
 	var new_array: Array[Vector2i] = []
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	for point in array:
 		if h and v:
 			new_array.append(

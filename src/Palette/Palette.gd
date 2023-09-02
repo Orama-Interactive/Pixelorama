@@ -1,19 +1,19 @@
 class_name Palette
 extends Resource
 
-const DEFAULT_WIDTH = 8
-const DEFAULT_HEIGHT = 8
+const DEFAULT_WIDTH := 8
+const DEFAULT_HEIGHT := 8
 
 # Metadata
-@export var name: String = "Custom Palette"
-@export var comment: String = ""
+@export var name := "Custom Palette"
+@export var comment := ""
 
 # Grid size
 @export var width := DEFAULT_WIDTH
 @export var height := DEFAULT_HEIGHT
 
 # Sparse colors dictionary - actual color position in the palette is determined by its index
-@export var colors: Dictionary = {}
+@export var colors := {}
 
 # How many colors fit in palette grid
 @export var colors_max := 0
