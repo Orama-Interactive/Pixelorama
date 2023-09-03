@@ -31,7 +31,7 @@ func _ready() -> void:
 	hidden_color_picker.get_picker().presets_visible = false
 
 
-# Setup palettes selector with available palettes
+## Setup palettes selector with available palettes
 func setup_palettes_selector() -> void:
 	# Clear selector
 	palettes_path_id.clear()

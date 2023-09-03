@@ -44,7 +44,7 @@ func _draw() -> void:
 		)
 
 
-# Enables drawing of highlights which indicate selected swatches
+## Enables drawing of highlights which indicate selected swatches
 func show_selected_highlight(new_value: bool, mouse_button: int) -> void:
 	if not empty:
 		match mouse_button:
@@ -71,7 +71,7 @@ func _can_drop_data(_position: Vector2, _data) -> bool:
 	return true
 
 
-func _drop_data(_position, data) -> void:
+func _drop_data(_position: Vector2, data) -> void:
 	dropped.emit(data.source_index, index)
 
 
