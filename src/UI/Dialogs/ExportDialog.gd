@@ -4,11 +4,17 @@ extends ConfirmationDialog
 signal resume_export_function
 
 var preview_current_frame := 0
-var preview_frames := []
+var preview_frames: Array[Texture2D] = []
 
-## Allow custom exporters to be added
-var image_exports := [Export.FileFormat.PNG, Export.FileFormat.GIF, Export.FileFormat.APNG]
-var spritesheet_exports := [Export.FileFormat.PNG]
+# Allow custom exporters to be added
+var image_exports: Array[Export.FileFormat] = [
+	Export.FileFormat.PNG,
+	Export.FileFormat.WEBP,
+	Export.FileFormat.JPEG,
+	Export.FileFormat.GIF,
+	Export.FileFormat.APNG
+]
+var spritesheet_exports := [Export.FileFormat.PNG, Export.FileFormat.WEBP, Export.FileFormat.JPEG]
 
 @onready var tabs: TabBar = $VBoxContainer/TabBar
 @onready var checker: ColorRect = $"%TransparentChecker"

@@ -4,7 +4,7 @@ enum ExportTab { IMAGE = 0, SPRITESHEET = 1 }
 enum Orientation { ROWS = 0, COLUMNS = 1 }
 enum AnimationDirection { FORWARD = 0, BACKWARDS = 1, PING_PONG = 2 }
 ## See file_format_string, file_format_description, and ExportDialog.gd
-enum FileFormat { PNG = 0, GIF = 1, APNG = 2 }
+enum FileFormat { PNG, WEBP, JPEG, GIF, APNG }
 
 ## List of animated formats
 var animated_formats := [FileFormat.GIF, FileFormat.APNG]
@@ -255,13 +255,33 @@ func export_processed_images(
 		var succeeded := true
 		for i in range(processed_images.size()):
 			if OS.has_feature("web"):
-				JavaScriptBridge.download_buffer(
-					processed_images[i].save_png_to_buffer(),
-					export_paths[i].get_file(),
-					"image/png"
-				)
+				if project.file_format == FileFormat.PNG:
+					JavaScriptBridge.download_buffer(
+						processed_images[i].save_png_to_buffer(),
+						export_paths[i].get_file(),
+						"image/png"
+					)
+				elif project.file_format == FileFormat.WEBP:
+					JavaScriptBridge.download_buffer(
+						processed_images[i].save_webp_to_buffer(),
+						export_paths[i].get_file(),
+						"image/webp"
+					)
+				elif project.file_format == FileFormat.JPEG:
+					JavaScriptBridge.download_buffer(
+						processed_images[i].save_jpg_to_buffer(),
+						export_paths[i].get_file(),
+						"image/jpeg"
+					)
+
 			else:
-				var err := processed_images[i].save_png(export_paths[i])
+				var err: Error
+				if project.file_format == FileFormat.PNG:
+					err = processed_images[i].save_png(export_paths[i])
+				elif project.file_format == FileFormat.WEBP:
+					err = processed_images[i].save_webp(export_paths[i])
+				elif project.file_format == FileFormat.JPEG:
+					err = processed_images[i].save_jpg(export_paths[i])
 				if err != OK:
 					Global.error_dialog.set_text(
 						tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
@@ -341,6 +361,10 @@ func file_format_string(format_enum: int) -> String:
 	match format_enum:
 		FileFormat.PNG:
 			return ".png"
+		FileFormat.WEBP:
+			return ".webp"
+		FileFormat.JPEG:
+			return ".jpg"
 		FileFormat.GIF:
 			return ".gif"
 		FileFormat.APNG:
@@ -358,6 +382,10 @@ func file_format_description(format_enum: int) -> String:
 		# (if they are not given, they will generate themselves based on the enum key name)
 		FileFormat.PNG:
 			return "PNG Image"
+		FileFormat.WEBP:
+			return "WEBP Image"
+		FileFormat.JPEG:
+			return "JPEG Image"
 		FileFormat.GIF:
 			return "GIF Image"
 		FileFormat.APNG:
@@ -385,7 +413,7 @@ func _create_export_path(multifile: bool, project: Project, frame := 0) -> Strin
 			project, frame - 1
 		)
 		# Check if exported frame is in frame tag
-		if frame_tag_and_start_id != null:
+		if not frame_tag_and_start_id.is_empty():
 			var frame_tag: String = frame_tag_and_start_id[0]
 			var start_id: int = frame_tag_and_start_id[1]
 			# Remove unallowed characters in frame tag directory
@@ -411,7 +439,7 @@ func _create_export_path(multifile: bool, project: Project, frame := 0) -> Strin
 func _get_proccessed_image_animation_tag_and_start_id(
 	project: Project, processed_image_id: int
 ) -> Array:
-	var result_animation_tag_and_start_id = null
+	var result_animation_tag_and_start_id := []
 	for animation_tag in project.animation_tags:
 		# Check if processed image is in frame tag and assign frame tag and start id if yes
 		# Then stop
