@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2023-08-29 12:29\n"
+"PO-Revision-Date: 2023-09-04 13:31\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1719,34 +1719,22 @@ msgid "Current frame as spritesheet"
 msgstr "Τρέχον πλαίσιο ως φύλλο καρέ"
 
 msgid "Jump to the first frame\n"
-"(%s)"
-msgstr "Μετάβαση στο πρώτο καρέ\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the previous frame\n"
-"(%s)"
-msgstr "Μετάβαση στο προηγούμενο καρέ\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
-msgstr "Αναπαραγωγή της κίνησης ανάποδα (από το τέλος προς την αρχή)\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
-msgstr "Αναπαραγωγή της κίνησης κανονικά (από την αρχή προς το τέλος)\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the next frame\n"
-"(%s)"
-msgstr "Μετάβαση στο επόμενο καρέ\n"
-"(%s)"
+msgstr ""
 
 msgid "Jump to the last frame\n"
-"(%s)"
-msgstr "Μετάβαση στο τελευταίο καρέ\n"
-"(%s)"
+msgstr ""
 
 msgid "Onion Skinning settings"
 msgstr "Ρυθμίσεις Onion Skinning"
@@ -2689,6 +2677,10 @@ msgstr "Αναπήδηση στο τέλος"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
 msgstr "Υποχώρηση στα άκρα"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
+msgstr ""
 
 msgid "Silhouette"
 msgstr "Σιλουέτα"
