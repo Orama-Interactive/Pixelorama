@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2023-09-04 13:31\n"
+"PO-Revision-Date: 2023-09-04 15:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1719,22 +1719,22 @@ msgid "Current frame as spritesheet"
 msgstr "Frame actuelle en spritesheet"
 
 msgid "Jump to the first frame\n"
-msgstr ""
+msgstr "Aller à la première frame\n"
 
 msgid "Go to the previous frame\n"
-msgstr ""
+msgstr "Aller à la frame précédente\n"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-msgstr ""
+msgstr "Jouer l'animation à l'envers (de la fin vers le début)\n"
 
 msgid "Play the animation forward (from beginning to end)\n"
-msgstr ""
+msgstr "Jouer l'animation (du début vers la fin)\n"
 
 msgid "Go to the next frame\n"
-msgstr ""
+msgstr "Aller à la frame suivante\n"
 
 msgid "Jump to the last frame\n"
-msgstr ""
+msgstr "Aller à la dernière frame\n"
 
 msgid "Onion Skinning settings"
 msgstr "Paramètres de la peau d'oignon"
