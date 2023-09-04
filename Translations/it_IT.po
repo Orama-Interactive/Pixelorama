@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2023-09-04 13:31\n"
+"PO-Revision-Date: 2023-09-04 16:49\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1719,22 +1719,22 @@ msgid "Current frame as spritesheet"
 msgstr "Telaio corrente come foglio sprite"
 
 msgid "Jump to the first frame\n"
-msgstr ""
+msgstr "Vai al primo fotogramma\n"
 
 msgid "Go to the previous frame\n"
-msgstr ""
+msgstr "Vai al fotogramma precedente\n"
 
 msgid "Play the animation backwards (from end to beginning)\n"
-msgstr ""
+msgstr "Riproduci l'animazione al contrario (da fine a inizio)\n"
 
 msgid "Play the animation forward (from beginning to end)\n"
-msgstr ""
+msgstr "Riproduce l'animazione in avanti (dall'inizio alla fine)\n"
 
 msgid "Go to the next frame\n"
-msgstr ""
+msgstr "Vai al prossimo fotogramma\n"
 
 msgid "Jump to the last frame\n"
-msgstr ""
+msgstr "Vai all'ultimo fotogramma\n"
 
 msgid "Onion Skinning settings"
 msgstr "Impostazioni Onion Skinning"
@@ -2680,7 +2680,7 @@ msgstr "Rimozione alle estremità"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
-msgstr ""
+msgstr "Vai alla fine"
 
 msgid "Silhouette"
 msgstr "Sagoma"
