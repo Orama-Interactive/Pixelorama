@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2023-08-28 14:06\n"
+"PO-Revision-Date: 2023-09-04 13:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1719,34 +1719,22 @@ msgid "Current frame as spritesheet"
 msgstr "スプライトシートとしての現在のフレーム"
 
 msgid "Jump to the first frame\n"
-"(%s)"
-msgstr "最初のフレームにジャンプ\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the previous frame\n"
-"(%s)"
-msgstr "前のフレームに移動\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation backwards (from end to beginning)\n"
-"(%s)"
-msgstr "アニメーションを逆方向に再生する (終了から始めまで)\n"
-"(%s)"
+msgstr ""
 
 msgid "Play the animation forward (from beginning to end)\n"
-"(%s)"
-msgstr "アニメーションを前方に再生する(開始から終了まで)\n"
-"(%s)"
+msgstr ""
 
 msgid "Go to the next frame\n"
-"(%s)"
-msgstr "次のフレームに移動\n"
-"(%s)"
+msgstr ""
 
 msgid "Jump to the last frame\n"
-"(%s)"
-msgstr "最後のフレームにジャンプ\n"
-"(%s)"
+msgstr ""
 
 msgid "Onion Skinning settings"
 msgstr "オニオンスキン設定"
@@ -2689,6 +2677,10 @@ msgstr "終了時にバウンス"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
 msgstr "終了時にバックアウト"
+
+#. Found under certain image effects that support properties that can be animated. A type of interpolation.
+msgid "Spring towards the end"
+msgstr ""
 
 msgid "Silhouette"
 msgstr "シルエット"
